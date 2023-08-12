@@ -1,0 +1,19 @@
+<!-- department-Cargo = Cargo
+department-Civilian = Civilian
+department-Command = Command
+department-Engineering = Engineering
+department-Medical = Medical
+department-Security = Security
+department-Science = Science
+department-Specific = Station specific -->
+
+command = Command
+military-police = Military Police
+requisitions = Requisitions
+medical = Medical
+engineering = Engineering
+alpha-squad = Alpha Squad
+bravo-squad = Bravo Squad
+charlie-squad = Charlie Squad
+delta-squad = Delta Squad
+echo-squad = Echo Squad
