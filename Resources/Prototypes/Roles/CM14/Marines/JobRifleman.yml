@@ -1,15 +1,15 @@
 - type: job
-  id: SecurityOfficer
-  name: job-name-security
-  description: job-description-security
-  playTimeTracker: JobSecurityOfficer
+  id: Rifleman
+  name: job-name-rifleman
+  description: job-description-rifleman
+  playTimeTracker: jobrifleman
   requirements:
     - !type:DepartmentTimeRequirement
-      department: Security
+      department: Marine
       time: 36000 #10 hrs
-  startingGear: SecurityOfficerGear
+  startingGear: SecurityOfficerGear2
   icon: "JobIconSecurityOfficer"
-  supervisors: job-supervisors-hos
+  supervisors: job-supervisors-squadleader
   canBeAntag: false
   access:
   - Security
@@ -19,7 +19,7 @@
   - External
 
 - type: startingGear
-  id: SecurityOfficerGear
+  id: SecurityOfficerGear2
   equipment:
     jumpsuit: ClothingUniformJumpsuitSec
     back: ClothingBackpackSecurityFilled
