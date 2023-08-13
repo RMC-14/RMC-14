@@ -15,3 +15,4 @@
 # job-supervisors-everyone = absolutely everyone
 
 job-supervisors-squadleader = the Squad Leader
+job-supervisors-command = command staff
