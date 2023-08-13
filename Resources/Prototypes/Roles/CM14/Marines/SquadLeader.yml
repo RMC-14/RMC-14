@@ -1,11 +1,18 @@
 - type: job
-  id: rifleman
-  name: job-name-rifleman
-  description: job-description-rifleman
-  playTimeTracker: jobrifleman
-  startingGear: SecurityOfficerGear2
+  id: squadleader
+  name: job-name-squadleader
+  description: job-description-squadleader
+  playTimeTracker: jobsquadleader
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 36000 #10 hrs
+    - !type:RoleTimeRequirement
+      role: JobAtmosphericTechnician # replace this with fireteam leader
+      time: 10800 #3 hrs
+  startingGear: SecurityOfficerGear3
   icon: "JobIconSecurityOfficer"
-  supervisors: job-supervisors-squadleader
+  supervisors: job-supervisors-command
   canBeAntag: false
   access:
   - Security
@@ -15,7 +22,7 @@
   - External
 
 - type: startingGear
-  id: SecurityOfficerGear2
+  id: SecurityOfficerGear3
   equipment:
     jumpsuit: ClothingUniformJumpsuitSec
     back: ClothingBackpackSecurityFilled

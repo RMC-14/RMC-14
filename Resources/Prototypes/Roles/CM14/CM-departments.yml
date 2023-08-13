@@ -104,4 +104,5 @@
   description: department-marine-description
   color: "#DE3A3A"
   roles:
-  - Rifleman
+  - rifleman
+  - squadleader

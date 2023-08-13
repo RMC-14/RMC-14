@@ -7,4 +7,4 @@
 # department-Science-description = Research new technologies and dangerous artifacts.
 # department-Specific-description = Jobs that not all stations have.
 
-department-marine-description = Combat the Xeno hordes!
+department-marine-description = They form the main fighting body of the Almayer and are sent planetside to fight all kinds of dangers throughout the Neroid Sector.
