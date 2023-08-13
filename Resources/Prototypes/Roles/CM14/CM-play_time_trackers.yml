@@ -1,8 +1,11 @@
 # Overall play time, across all roles.
 # This tracker must exist, it is used directly by PlayTimeTrackingManager
-- type: playTimeTracker
-  id: Overall
+# - type: playTimeTracker
+  # id: Overall
 
 # Jobs
 - type: playTimeTracker
-  id: JobRifleman
+  id: jobrifleman
+  
+- type: playTimeTracker
+  id: jobsquadleader
