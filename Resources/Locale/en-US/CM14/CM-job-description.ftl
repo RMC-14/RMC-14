@@ -48,4 +48,5 @@
 # job-description-senior-physician = Teach new medics the basics of tending to the wounded, chemistry, diagnosing the diseased and disposing of the dead.
 # job-description-senior-officer = Teach new officers the basics of searches, preforming arrests, prison times and how to properly shoot a firearm.
 
-job-description-rifleman = Become a standard unit in your squad.
+job-description-rifleman = Follow orders from those above you. Do your job and shoot when you're needed to shoot. Don't die in the process.
+job-description-squadleader = Leader of one of the four marine squads. Give your squad and fireteams objectives and follow orders from Command. Keep your squad in one piece.
