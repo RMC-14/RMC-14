@@ -9,3 +9,6 @@
   
 - type: playTimeTracker
   id: jobsquadleader
+
+- type: playTimeTracker
+  id: jobfireteamleader

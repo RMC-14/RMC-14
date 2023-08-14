@@ -50,3 +50,4 @@
 
 job-description-rifleman = Follow orders from those above you. Do your job and shoot when you're needed to shoot. Don't die in the process.
 job-description-squadleader = Leader of one of the four marine squads. Give your squad and fireteams objectives and follow orders from Command. Keep your squad in one piece.
+job-description-fireteamleader = Follow the squad leader's orders and command your fireteam. Co-ordinate with CAS and fire support elements.
