@@ -1,6 +1,29 @@
+# - type: job
+  # id: hospitalcorpsman
+  # name: job-name-hospitalcorpsman
+  # description: job-description-hospitalcorpsman
+  # playTimeTracker: hospitalcorpsman
+  # requirements:
+    # - !type:DepartmentTimeRequirement
+      # department: Marine
+      # time: 3600 #1 hrs
+    # - !type:DepartmentTimeRequirement
+      # department: Medical
+      # time: 3600 #1 hrs
+  # startingGear: hospitalcorpsmangear
+  # icon: "JobIconBrigmedic"
+  # supervisors: job-supervisors-squadleader
+  # canBeAntag: false
+  # access:
+  # - Security
+  # - Brig
+  # - Maintenance
+  # - Service
+  # - External
+  
 - type: job
-  id: hospitalcorpsman
-  name: job-name-hospitalcorpsman
+  id: alphahospitalcorpsman
+  name: job-name-alpha-hospitalcorpsman
   description: job-description-hospitalcorpsman
   playTimeTracker: hospitalcorpsman
   requirements:
@@ -10,7 +33,76 @@
     - !type:DepartmentTimeRequirement
       department: Medical
       time: 3600 #1 hrs
-  startingGear: BrigmedicGear
+  startingGear: hospitalcorpsmangear
+  icon: "JobIconBrigmedic"
+  supervisors: job-supervisors-squadleader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+  
+- type: job
+  id: bravohospitalcorpsman
+  name: job-name-bravo-hospitalcorpsman
+  description: job-description-hospitalcorpsman
+  playTimeTracker: hospitalcorpsman
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 3600 #1 hrs
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 3600 #1 hrs
+  startingGear: hospitalcorpsmangear
+  icon: "JobIconBrigmedic"
+  supervisors: job-supervisors-squadleader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+  
+- type: job
+  id: charliehospitalcorpsman
+  name: job-name-charlie-hospitalcorpsman
+  description: job-description-hospitalcorpsman
+  playTimeTracker: hospitalcorpsman
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 3600 #1 hrs
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 3600 #1 hrs
+  startingGear: hospitalcorpsmangear
+  icon: "JobIconBrigmedic"
+  supervisors: job-supervisors-squadleader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+  
+- type: job
+  id: deltahospitalcorpsman
+  name: job-name-delta-hospitalcorpsman
+  description: job-description-hospitalcorpsman
+  playTimeTracker: hospitalcorpsman
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 3600 #1 hrs
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 3600 #1 hrs
+  startingGear: hospitalcorpsmangear
   icon: "JobIconBrigmedic"
   supervisors: job-supervisors-squadleader
   canBeAntag: false
@@ -31,20 +123,19 @@
       - id: BoxSurvivalBrigmedic
       - id: Flash
 
-# - type: startingGear
-  # id: BrigmedicGear
-  # equipment:
-    # jumpsuit: ClothingUniformJumpsuitBrigmedic
-    # outerClothing: ClothingOuterCoatAMG
-    # back: ClothingBackpackBrigmedicFilled
-    # shoes: ClothingShoesColorRed
-    # gloves: ClothingHandsGlovesNitrile
-    # eyes: ClothingEyesHudMedical
-    # head: ClothingHeadHatBeretBrigmedic
-    # id: BrigmedicPDA
-    # ears: ClothingHeadsetBrigmedic
-    # mask: ClothingMaskBreathMedicalSecurity
-    # belt: ClothingBeltMedicalFilled
-  # innerclothingskirt: ClothingUniformJumpskirtBrigmedic
-  # satchel: ClothingBackpackSatchelBrigmedicFilled
-  # duffelbag: ClothingBackpackDuffelBrigmedicFilled
+- type: startingGear
+  id: hospitalcorpsmangear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBrigmedic
+    outerClothing: ClothingOuterCoatAMG
+    back: ClothingBackpackBrigmedicFilled
+    shoes: ClothingShoesColorRed
+    gloves: ClothingHandsGlovesNitrile
+    eyes: ClothingEyesHudMedical
+    head: ClothingHeadHatBeretBrigmedic
+    id: BrigmedicPDA
+    ears: ClothingHeadsetBrigmedic
+    belt: ClothingBeltMedicalFilled
+  innerclothingskirt: ClothingUniformJumpskirtBrigmedic
+  satchel: ClothingBackpackSatchelBrigmedicFilled
+  duffelbag: ClothingBackpackDuffelBrigmedicFilled

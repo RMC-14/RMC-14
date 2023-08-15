@@ -1,13 +1,93 @@
+# - type: job
+  # id: weaponsspecialist
+  # name: job-name-weaponsspecialist
+  # description: job-description-weaponsspecialist
+  # playTimeTracker: jobweaponspecialist
+  # requirements:
+    # - !type:DepartmentTimeRequirement
+      # department: Marine
+      # time: 18000 #5 hrs
+  # startingGear: weaponsspecialistgear
+  # icon: "JobIconSecurityOfficer"
+  # supervisors: job-supervisors-squadleader
+  # canBeAntag: false
+  # access:
+  # - Security
+  # - Brig
+  # - Maintenance
+  # - Service
+  # - External
+  
 - type: job
-  id: weaponsspecialist
-  name: job-name-weaponsspecialist
+  id: alphaweaponsspecialist
+  name: job-name-alpha-weaponsspecialist
   description: job-description-weaponsspecialist
   playTimeTracker: jobweaponspecialist
   requirements:
     - !type:DepartmentTimeRequirement
       department: Marine
       time: 18000 #5 hrs
-  startingGear: SecurityOfficerGear5
+  startingGear: weaponsspecialistgear
+  icon: "JobIconSecurityOfficer"
+  supervisors: job-supervisors-squadleader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+  
+- type: job
+  id: bravoweaponsspecialist
+  name: job-name-bravo-weaponsspecialist
+  description: job-description-weaponsspecialist
+  playTimeTracker: jobweaponspecialist
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 18000 #5 hrs
+  startingGear: weaponsspecialistgear
+  icon: "JobIconSecurityOfficer"
+  supervisors: job-supervisors-squadleader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+  
+- type: job
+  id: charlieweaponsspecialist
+  name: job-name-charlie-weaponsspecialist
+  description: job-description-weaponsspecialist
+  playTimeTracker: jobweaponspecialist
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 18000 #5 hrs
+  startingGear: weaponsspecialistgear
+  icon: "JobIconSecurityOfficer"
+  supervisors: job-supervisors-squadleader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+  
+- type: job
+  id: deltaweaponsspecialist
+  name: job-name-delta-weaponsspecialist
+  description: job-description-weaponsspecialist
+  playTimeTracker: jobweaponspecialist
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 18000 #5 hrs
+  startingGear: weaponsspecialistgear
   icon: "JobIconSecurityOfficer"
   supervisors: job-supervisors-squadleader
   canBeAntag: false
@@ -19,7 +99,7 @@
   - External
 
 - type: startingGear
-  id: SecurityOfficerGear5
+  id: weaponsspecialistgear
   equipment:
     jumpsuit: ClothingUniformJumpsuitSec
     back: ClothingBackpackSecurityFilled

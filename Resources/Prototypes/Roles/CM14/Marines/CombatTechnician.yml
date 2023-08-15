@@ -1,13 +1,93 @@
+# - type: job
+  # id: combattech
+  # name: job-name-combattech
+  # description: job-description-combattech
+  # playTimeTracker: combattech
+  # requirements:
+    # - !type:DepartmentTimeRequirement
+      # department: Marine
+      # time: 3600 #1 hrs
+  # startingGear: combattechgear
+  # icon: "JobIconStationEngineer"
+  # supervisors: job-supervisors-squadleader
+  # canBeAntag: false
+  # access:
+  # - Security
+  # - Brig
+  # - Maintenance
+  # - Service
+  # - External
+  
 - type: job
-  id: combattech
-  name: job-name-combattech
+  id: alphacombattech
+  name: job-name-alpha-combattech
   description: job-description-combattech
   playTimeTracker: combattech
   requirements:
     - !type:DepartmentTimeRequirement
       department: Marine
       time: 3600 #1 hrs
-  startingGear: SecurityOfficerGear7
+  startingGear: combattechgear
+  icon: "JobIconStationEngineer"
+  supervisors: job-supervisors-squadleader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+  
+- type: job
+  id: bravocombattech
+  name: job-name-bravo-combattech
+  description: job-description-combattech
+  playTimeTracker: combattech
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 3600 #1 hrs
+  startingGear: combattechgear
+  icon: "JobIconStationEngineer"
+  supervisors: job-supervisors-squadleader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+  
+- type: job
+  id: charliecombattech
+  name: job-name-charlie-combattech
+  description: job-description-combattech
+  playTimeTracker: combattech
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 3600 #1 hrs
+  startingGear: combattechgear
+  icon: "JobIconStationEngineer"
+  supervisors: job-supervisors-squadleader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+  
+- type: job
+  id: deltacombattech
+  name: job-name-delta-combattech
+  description: job-description-combattech
+  playTimeTracker: combattech
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 3600 #1 hrs
+  startingGear: combattechgear
   icon: "JobIconStationEngineer"
   supervisors: job-supervisors-squadleader
   canBeAntag: false
@@ -19,7 +99,7 @@
   - External
  
 - type: startingGear
-  id: SecurityOfficerGear7
+  id: combattechgear
   equipment:
     jumpsuit: ClothingUniformJumpsuitSec
     back: ClothingBackpackSecurityFilled
