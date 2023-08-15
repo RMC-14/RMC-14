@@ -18,3 +18,8 @@
   
 - type: playTimeTracker
   id: jobsmartgunner
+
+- type: playTimeTracker
+  id: hospitalcorpsman
+  
+
