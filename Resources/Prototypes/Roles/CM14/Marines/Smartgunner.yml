@@ -1,13 +1,93 @@
+# - type: job
+  # id: smartgunner
+  # name: job-name-smartgunner
+  # description: job-description-smartgunner
+  # playTimeTracker: jobsmartgunner
+  # requirements:
+    # - !type:DepartmentTimeRequirement
+      # department: Marine
+      # time: 18000 #5 hrs
+  # startingGear: smartgunnergear
+  # icon: "JobIconSecurityOfficer"
+  # supervisors: job-supervisors-squadleader
+  # canBeAntag: false
+  # access:
+  # - Security
+  # - Brig
+  # - Maintenance
+  # - Service
+  # - External
+  
 - type: job
-  id: smartgunner
-  name: job-name-smartgunner
+  id: alphasmartgunner
+  name: job-name-alpha-smartgunner
   description: job-description-smartgunner
   playTimeTracker: jobsmartgunner
   requirements:
     - !type:DepartmentTimeRequirement
       department: Marine
       time: 18000 #5 hrs
-  startingGear: SecurityOfficerGear6
+  startingGear: smartgunnergear
+  icon: "JobIconSecurityOfficer"
+  supervisors: job-supervisors-squadleader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+  
+- type: job
+  id: bravosmartgunner
+  name: job-name-bravo-smartgunner
+  description: job-description-smartgunner
+  playTimeTracker: jobsmartgunner
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 18000 #5 hrs
+  startingGear: smartgunnergear
+  icon: "JobIconSecurityOfficer"
+  supervisors: job-supervisors-squadleader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+  
+- type: job
+  id: charliesmartgunner
+  name: job-name-charlie-smartgunner
+  description: job-description-smartgunner
+  playTimeTracker: jobsmartgunner
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 18000 #5 hrs
+  startingGear: smartgunnergear
+  icon: "JobIconSecurityOfficer"
+  supervisors: job-supervisors-squadleader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+  
+- type: job
+  id: deltasmartgunner
+  name: job-name-delta-smartgunner
+  description: job-description-smartgunner
+  playTimeTracker: jobsmartgunner
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 18000 #5 hrs
+  startingGear: smartgunnergear
   icon: "JobIconSecurityOfficer"
   supervisors: job-supervisors-squadleader
   canBeAntag: false
@@ -19,7 +99,7 @@
   - External
 
 - type: startingGear
-  id: SecurityOfficerGear6
+  id: smartgunnergear
   equipment:
     jumpsuit: ClothingUniformJumpsuitSec
     back: ClothingBackpackSecurityFilled

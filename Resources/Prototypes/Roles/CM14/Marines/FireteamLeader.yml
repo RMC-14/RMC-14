@@ -1,13 +1,93 @@
+# - type: job
+  # id: fireteamleader
+  # name: job-name-fireteamleader
+  # description: job-description-fireteamleader
+  # playTimeTracker: jobfireteamleader
+  # requirements:
+    # - !type:DepartmentTimeRequirement
+      # department: Marine
+      # time: 28800 #8 hrs
+  # startingGear: fireteamleadergear
+  # icon: "JobIconSecurityOfficer"
+  # supervisors: job-supervisors-squadleader
+  # canBeAntag: false
+  # access:
+  # - Security
+  # - Brig
+  # - Maintenance
+  # - Service
+  # - External
+  
 - type: job
-  id: fireteamleader
-  name: job-name-fireteamleader
+  id: alphafireteamleader
+  name: job-name-alpha-fireteamleader
   description: job-description-fireteamleader
   playTimeTracker: jobfireteamleader
   requirements:
     - !type:DepartmentTimeRequirement
       department: Marine
       time: 28800 #8 hrs
-  startingGear: SecurityOfficerGear4
+  startingGear: fireteamleadergear
+  icon: "JobIconSecurityOfficer"
+  supervisors: job-supervisors-squadleader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+  
+- type: job
+  id: bravofireteamleader
+  name: job-name-bravo-fireteamleader
+  description: job-description-fireteamleader
+  playTimeTracker: jobfireteamleader
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 28800 #8 hrs
+  startingGear: fireteamleadergear
+  icon: "JobIconSecurityOfficer"
+  supervisors: job-supervisors-squadleader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+  
+- type: job
+  id: charliefireteamleader
+  name: job-name-charlie-fireteamleader
+  description: job-description-fireteamleader
+  playTimeTracker: jobfireteamleader
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 28800 #8 hrs
+  startingGear: fireteamleadergear
+  icon: "JobIconSecurityOfficer"
+  supervisors: job-supervisors-squadleader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+  
+- type: job
+  id: deltafireteamleader
+  name: job-name-delta-fireteamleader
+  description: job-description-fireteamleader
+  playTimeTracker: jobfireteamleader
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 28800 #8 hrs
+  startingGear: fireteamleadergear
   icon: "JobIconSecurityOfficer"
   supervisors: job-supervisors-squadleader
   canBeAntag: false
@@ -19,7 +99,7 @@
   - External
 
 - type: startingGear
-  id: SecurityOfficerGear4
+  id: fireteamleadergear
   equipment:
     jumpsuit: ClothingUniformJumpsuitSec
     back: ClothingBackpackSecurityFilled

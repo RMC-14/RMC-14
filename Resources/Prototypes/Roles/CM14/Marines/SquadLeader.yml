@@ -1,6 +1,29 @@
+# - type: job
+  # id: squadleader
+  # name: job-name-squadleader
+  # description: job-description-squadleader
+  # playTimeTracker: jobsquadleader
+  # requirements:
+    # - !type:DepartmentTimeRequirement
+      # department: Marine
+      # time: 36000 #10 hrs
+    # - !type:RoleTimeRequirement
+      # role: JobAtmosphericTechnician # replace this with fireteam leader
+      # time: 10800 #3 hrs
+  # startingGear: squadleadergear
+  # icon: "JobIconCaptain"
+  # supervisors: job-supervisors-command
+  # canBeAntag: false
+  # access:
+  # - Security
+  # - Brig
+  # - Maintenance
+  # - Service
+  # - External
+  
 - type: job
-  id: squadleader
-  name: job-name-squadleader
+  id: alphasquadleader
+  name: job-name-alpha-squadleader
   description: job-description-squadleader
   playTimeTracker: jobsquadleader
   requirements:
@@ -8,10 +31,79 @@
       department: Marine
       time: 36000 #10 hrs
     - !type:RoleTimeRequirement
-      role: JobAtmosphericTechnician # replace this with fireteam leader
+      role: fireteamleader
       time: 10800 #3 hrs
-  startingGear: SecurityOfficerGear3
-  icon: "JobIconSecurityOfficer"
+  startingGear: squadleadergear
+  icon: "JobIconCaptain"
+  supervisors: job-supervisors-command
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+
+- type: job
+  id: bravosquadleader
+  name: job-name-bravo-squadleader
+  description: job-description-squadleader
+  playTimeTracker: jobsquadleader
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 36000 #10 hrs
+    - !type:RoleTimeRequirement
+      role: fireteamleader
+      time: 10800 #3 hrs
+  startingGear: squadleadergear
+  icon: "JobIconCaptain"
+  supervisors: job-supervisors-command
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+  
+- type: job
+  id: charliesquadleader
+  name: job-name-charlie-squadleader
+  description: job-description-squadleader
+  playTimeTracker: jobsquadleader
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 36000 #10 hrs
+    - !type:RoleTimeRequirement
+      role: fireteamleader
+      time: 10800 #3 hrs
+  startingGear: squadleadergear
+  icon: "JobIconCaptain"
+  supervisors: job-supervisors-command
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+  
+- type: job
+  id: deltasquadleader
+  name: job-name-delta-squadleader
+  description: job-description-squadleader
+  playTimeTracker: jobsquadleader
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 36000 #10 hrs
+    - !type:RoleTimeRequirement
+      role: fireteamleader
+      time: 10800 #3 hrs
+  startingGear: squadleadergear
+  icon: "JobIconCaptain"
   supervisors: job-supervisors-command
   canBeAntag: false
   access:
@@ -22,7 +114,7 @@
   - External
 
 - type: startingGear
-  id: SecurityOfficerGear3
+  id: squadleadergear
   equipment:
     jumpsuit: ClothingUniformJumpsuitSec
     back: ClothingBackpackSecurityFilled
