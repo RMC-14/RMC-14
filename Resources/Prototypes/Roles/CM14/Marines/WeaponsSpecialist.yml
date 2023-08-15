@@ -1,0 +1,36 @@
+- type: job
+  id: weaponsspecialist
+  name: job-name-weaponsspecialist
+  description: job-description-weaponsspecialist
+  playTimeTracker: jobweaponspecialist
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 18000 #5 hrs
+  startingGear: SecurityOfficerGear5
+  icon: "JobIconSecurityOfficer"
+  supervisors: job-supervisors-squadleader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+
+- type: startingGear
+  id: SecurityOfficerGear5
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSec
+    back: ClothingBackpackSecurityFilled
+    shoes: ClothingShoesBootsCombatFilled
+    eyes: ClothingEyesGlassesSecurity
+    head: ClothingHeadHelmetBasic
+    outerClothing: ClothingOuterArmorBasic
+    id: SecurityPDA
+    ears: ClothingHeadsetSecurity
+    belt: ClothingBeltSecurityFilled
+    pocket1: WeaponPistolMk58Nonlethal
+  innerclothingskirt: ClothingUniformJumpskirtSec
+  satchel: ClothingBackpackSatchelSecurityFilled
+  duffelbag: ClothingBackpackDuffelSecurityFilled

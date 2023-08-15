@@ -12,3 +12,6 @@
 
 - type: playTimeTracker
   id: jobfireteamleader
+  
+- type: playTimeTracker
+  id: jobweaponsspecialist
