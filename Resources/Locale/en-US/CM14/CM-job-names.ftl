@@ -4,6 +4,7 @@ job-name-fireteamleader = Fireteam Leader
 job-name-weaponsspecialist = Weapons Specialist
 job-name-smartgunner = Smartgunner
 job-name-hospitalcorpsman = Hospital Corpsman
+job-name-combattech = Combat Technician
 
 # # Role timers
 jobrifleman = Rifleman
@@ -12,3 +13,4 @@ jobfireteamleader = Fireteam Leader
 jobweaponsspecialist = Weapons Specialist
 jobsmartgunner = Smartgunner
 jobhospitalcorpsman = Hospital Corpsman
+jobcombattech = Combat Technician
