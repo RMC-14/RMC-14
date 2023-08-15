@@ -22,4 +22,6 @@
 - type: playTimeTracker
   id: hospitalcorpsman
   
+- type: playTimeTracker
+  id: combattech
 
