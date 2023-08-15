@@ -17,4 +17,11 @@
 # department-charlie-squad = Charlie Squad
 # department-delta-squad = Delta Squad
 # department-echo-squad = Echo Squad
+
+#marines
 department-marine = Marine
+department-marine-alpha = Alpha Squad
+department-marine-bravo = Bravo Squad
+department-marine-charlie = Charlie Squad
+department-marine-delta  = Delta Squad
+

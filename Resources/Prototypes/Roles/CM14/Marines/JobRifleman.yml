@@ -1,9 +1,41 @@
+# - type: job
+  # id: rifleman
+  # name: job-name-rifleman
+  # description: job-description-rifleman
+  # playTimeTracker: jobrifleman
+  # startingGear: riflemangear
+  # icon: "JobIconSecurityOfficer"
+  # supervisors: job-supervisors-squadleader
+  # canBeAntag: false
+  # access:
+  # - Security
+  # - Brig
+  # - Maintenance
+  # - Service
+  # - External
+  
 - type: job
-  id: rifleman
-  name: job-name-rifleman
+  id: alpharifleman
+  name: job-name-alpha-rifleman
   description: job-description-rifleman
   playTimeTracker: jobrifleman
-  startingGear: SecurityOfficerGear2
+  startingGear: riflemangear
+  icon: "JobIconSecurityOfficer"
+  supervisors: job-supervisors-squadleader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+  
+- type: job
+  id: bravorifleman
+  name: job-name-bravo-rifleman
+  description: job-description-rifleman
+  playTimeTracker: jobrifleman
+  startingGear: riflemangear
   icon: "JobIconSecurityOfficer"
   supervisors: job-supervisors-squadleader
   canBeAntag: false
@@ -14,8 +46,40 @@
   - Service
   - External
 
+- type: job
+  id: charlierifleman
+  name: job-name-charlie-rifleman
+  description: job-description-rifleman
+  playTimeTracker: jobrifleman
+  startingGear: riflemangear
+  icon: "JobIconSecurityOfficer"
+  supervisors: job-supervisors-squadleader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+  
+- type: job
+  id: deltarifleman
+  name: job-name-delta-rifleman
+  description: job-description-rifleman
+  playTimeTracker: jobrifleman
+  startingGear: riflemangear
+  icon: "JobIconSecurityOfficer"
+  supervisors: job-supervisors-squadleader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+  
 - type: startingGear
-  id: SecurityOfficerGear2
+  id: riflemangear
   equipment:
     jumpsuit: ClothingUniformJumpsuitSec
     back: ClothingBackpackSecurityFilled
