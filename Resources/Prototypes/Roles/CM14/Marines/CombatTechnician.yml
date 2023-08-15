@@ -1,0 +1,36 @@
+- type: job
+  id: combattech
+  name: job-name-combattech
+  description: job-description-combattech
+  playTimeTracker: combattech
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 3600 #1 hrs
+  startingGear: SecurityOfficerGear7
+  icon: "JobIconStationEngineer"
+  supervisors: job-supervisors-squadleader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+ 
+- type: startingGear
+  id: SecurityOfficerGear7
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSec
+    back: ClothingBackpackSecurityFilled
+    shoes: ClothingShoesBootsCombatFilled
+    eyes: ClothingEyesGlassesSecurity
+    head: ClothingHeadHelmetBasic
+    outerClothing: ClothingOuterArmorBasic
+    id: SecurityPDA
+    ears: ClothingHeadsetSecurity
+    belt: ClothingBeltSecurityFilled
+    pocket1: WeaponPistolMk58Nonlethal
+  innerclothingskirt: ClothingUniformJumpskirtSec
+  satchel: ClothingBackpackSatchelSecurityFilled
+  duffelbag: ClothingBackpackDuffelSecurityFilled
