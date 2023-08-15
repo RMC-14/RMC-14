@@ -50,12 +50,92 @@
   description: department-marine-description
   color: "#DE3A3A"
   roles:
-  - rifleman
-  - squadleader
-  - fireteamleader
-  - weaponsspecialist
-  - smartgunner
-  - hospitalcorpsman
-  - combattech
+  # - rifleman
+  # - squadleader
+  # - fireteamleader
+  # - weaponsspecialist
+  # - smartgunner
+  # - hospitalcorpsman
+  # - combattech
+  - alpharifleman
+  - alphasquadleader
+  - alphafireteamleader
+  - alphaweaponsspecialist
+  - alphasmartgunner
+  - alphahospitalcorpsman
+  - alphacombattech
+  - bravorifleman
+  - bravosquadleader
+  - bravofireteamleader
+  - bravoweaponsspecialist
+  - bravosmartgunner
+  - bravohospitalcorpsman
+  - bravocombattech
+  - charlierifleman
+  - charliesquadleader
+  - charliefireteamleader
+  - charlieweaponsspecialist
+  - charliesmartgunner
+  - charliehospitalcorpsman
+  - charliecombattech
+  - deltarifleman
+  - deltasquadleader
+  - deltafireteamleader
+  - deltaweaponsspecialist
+  - deltasmartgunner
+  - deltahospitalcorpsman
+  - deltacombattech
+  
+- type: department
+  id: marine-alpha
+  description: department-marine-description
+  color: "#DE3A3A"
+  roles:
+  - alpharifleman
+  - alphasquadleader
+  - alphafireteamleader
+  - alphaweaponsspecialist
+  - alphasmartgunner
+  - alphahospitalcorpsman
+  - alphacombattech
+  
+- type: department
+  id: marine-bravo
+  description: department-marine-description
+  color: "#A46106"
+  roles:
+  - bravorifleman
+  - bravosquadleader
+  - bravofireteamleader
+  - bravoweaponsspecialist
+  - bravosmartgunner
+  - bravohospitalcorpsman
+  - bravocombattech
+  
+- type: department
+  id: marine-charlie
+  description: department-marine-description
+  color: "#D381C9"
+  roles:
+  - charlierifleman
+  - charliesquadleader
+  - charliefireteamleader
+  - charlieweaponsspecialist
+  - charliesmartgunner
+  - charliehospitalcorpsman
+  - charliecombattech
+  
+- type: department
+  id: marine-delta
+  description: department-marine-description
+  color: "#334E6D"
+  roles:
+  - deltarifleman
+  - deltasquadleader
+  - deltafireteamleader
+  - deltaweaponsspecialist
+  - deltasmartgunner
+  - deltahospitalcorpsman
+  - deltacombattech
   
 
