@@ -53,3 +53,4 @@ job-description-squadleader = Leader of one of the four marine squads. Give your
 job-description-fireteamleader = Follow the squad leader's orders and command your fireteam. Co-ordinate with CAS and fire support elements.
 job-description-weaponsspecialist = Gain access to heavier, more powerful weaponry and equipment. Combat professional, lead the squad if needed.
 job-description-smartgunner = Support your Squad with heavy weaponry and give the enemy suppressing fire.
+job-description-hospitalcorpsman = Keep Marines in fighting condition, or as close as you can get them. Medevac those who need to be sent back to Medbay for treatment.
