@@ -4,17 +4,22 @@
   # color: "#A46106"
 
 
-# - type: department
-  # id: Civilian
-  # description: department-Civilian-description
-  # color: "#9FED58"
+# fallback
+- type: department
+  id: Civilian
+  description: department-Civilian-description
+  color: "#9FED58"
+  roles:
+  - Passenger
+  - Captain
 
 
-# - type: department
-  # id: Command
-  # description: department-Command-description
-  # color: "#334E6D"
-
+- type: department
+  id: command
+  description: department-command-description
+  color: "#334E6D"
+  roles:
+  - seniorenlistedadvisor
 
 # - type: department
   # id: Engineering

@@ -16,3 +16,5 @@
 
 job-supervisors-squadleader = the Squad Leader
 job-supervisors-command = command staff
+job-supervisors-executiveofficer = the Executive Officer
+job-supervisors-commandingofficer = the Commanding Officer

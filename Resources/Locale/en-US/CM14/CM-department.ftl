@@ -1,27 +1,24 @@
-# department-Cargo = Cargo
-# department-Civilian = Civilian
-# department-Command = Command
-# department-Engineering = Engineering
-# department-Medical = Medical
-# department-Security = Security
-# department-Science = Science
-# department-Specific = Station specific
+# name #
 
 # department-command = Command
-# department-military-police = Military Police
+# department-militarypolice = Military Police
 # department-requisitions = Requisitions
 # department-medical = Medical
 # department-engineering = Engineering
-# department-alpha-squad = Alpha Squad
-# department-bravo-squad = Bravo Squad
-# department-charlie-squad = Charlie Squad
-# department-delta-squad = Delta Squad
-# department-echo-squad = Echo Squad
+
+department-command = Command
 
 #marines
-department-marine = Marine
+department-marine = Marine [ALL]
 department-marine-alpha = Alpha Squad
 department-marine-bravo = Bravo Squad
 department-marine-charlie = Charlie Squad
 department-marine-delta  = Delta Squad
 
+# description #
+
+#command
+department-command-description = The Command Department is the brains of the USS Almayer, leading and coordinating the squads and the other support staff of the ship to fight and win against the Aliens.
+
+#marines
+department-marine-description = They form the main fighting body of the Almayer and are sent planetside to fight all kinds of dangers throughout the Neroid Sector.

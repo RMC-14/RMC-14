@@ -1,9 +1,10 @@
-# Overall play time, across all roles.
-# This tracker must exist, it is used directly by PlayTimeTrackingManager
-# - type: playTimeTracker
-  # id: Overall
+# Overall play time tracker is in the original file.
 
-# Jobs
+# command
+- type: playTimeTracker
+  id: jobseniorenlistedadvisor
+
+# marine
 - type: playTimeTracker
   id: jobrifleman
   
