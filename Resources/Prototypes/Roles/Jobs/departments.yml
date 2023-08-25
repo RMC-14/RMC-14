@@ -7,11 +7,11 @@
   # - Quartermaster
   # - SalvageSpecialist
 
-- type: department
-  id: Civilian
-  description: department-Civilian-description
-  color: "#9FED58"
-  roles:
+# - type: department
+  # id: Civilian
+  # description: department-Civilian-description
+  # color: "#9FED58"
+  # roles:
   # - Bartender
   # - Botanist
   # - Borg
@@ -25,24 +25,24 @@
   # - Librarian
   # - Mime
   # - Musician
-  - Passenger
+  # - Passenger
   # - Reporter
   # - Zookeeper
   # - ServiceWorker
 
-- type: department
-  id: Command
-  description: department-Command-description
-  color: "#334E6D"
-  roles:
-  - Captain
-  - CentralCommandOfficial
-  - ChiefEngineer
-  - ChiefMedicalOfficer
-  - HeadOfPersonnel
-  - HeadOfSecurity
-  - ResearchDirector
-  - Quartermaster
+# - type: department
+  # id: Command
+  # description: department-Command-description
+  # color: "#334E6D"
+  # roles:
+  # - Captain
+  # - CentralCommandOfficial
+  # - ChiefEngineer
+  # - ChiefMedicalOfficer
+  # - HeadOfPersonnel
+  # - HeadOfSecurity
+  # - ResearchDirector
+  # - Quartermaster
 
 # - type: department
   # id: Engineering

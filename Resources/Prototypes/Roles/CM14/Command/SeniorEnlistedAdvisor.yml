@@ -1,0 +1,46 @@
+- type: job
+  id: seniorenlistedadvisor
+  name: job-name-seniorenlistedadvisor
+  description: job-description-seniorenlistedadvisor
+  playTimeTracker: jobseniorenlistedadvisor
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: marine
+      time: 54000 # 15 hours
+    - !type:DepartmentTimeRequirement
+      department: engineering
+      time: 36000 # 10 hours
+    - !type:DepartmentTimeRequirement
+      department: militarypolice
+      time: 36000 # 10 hours
+    - !type:DepartmentTimeRequirement
+      department: medical
+      time: 36000 # 10 hours
+    - !type:DepartmentTimeRequirement
+      department: command
+      time: 18000 # 5 hours
+  weight: 5
+  startingGear: seniorenlistedadvisorgear
+  icon: "JobIconCaptain"
+  requireAdminNotify: true
+  joinNotifyCrew: true
+  supervisors: job-supervisors-command
+  canBeAntag: false
+  accessGroups:
+  - AllAccess
+
+- type: startingGear
+  id: seniorenlistedadvisorgear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitCaptain
+    back: ClothingBackpackCaptainFilled
+    shoes: ClothingShoesColorBlack
+    head: ClothingHeadHatCaptain
+    eyes: ClothingEyesGlassesSunglasses
+    gloves: ClothingHandsGlovesCaptain
+    outerClothing: ClothingOuterArmorCaptainCarapace
+    id: CaptainPDA
+    ears: ClothingHeadsetAltCommand
+  innerclothingskirt: ClothingUniformJumpskirtCaptain
+  satchel: ClothingBackpackSatchelCaptainFilled
+  duffelbag: ClothingBackpackDuffelCaptainFilled
