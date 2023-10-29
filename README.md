@@ -1,7 +1,7 @@
 <p align="center"> <img alt="Space Station 14" width="400" height="400" src="https://github.com/QuietlyWhisper/CM14/assets/121047731/29ae9ad7-c36e-4716-98a0-46a58d5118e0" /></p>
 
 
-CM14 is a remake of CM13, Space Station 13, that runs on [Robust Toolbox](https://github.com/space-wizards/RobustToolbox), our homegrown engine written in C#.
+CM14 is a remake of CM13, Space Station 13, that runs on [Robust Toolbox](https://github.com/space-wizards/RobustToolbox).
 
 The design goal of this fork is to attempt to replicate the feel and experience of CM13, while using SS14 as a foundation.
 
