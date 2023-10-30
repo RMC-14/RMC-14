@@ -5,27 +5,24 @@
   description: Standard Issue Armor used by USCM. Provides modest protection from bullet and melee attacks. It also has a shoulder-mounted directional flashlight for night time combat and a HUD to see their Marine roles. An all rounder in terms of protection with an additional 3 slots in the armor.
   components:
     - type: Sprite
-      sprite: Clothing/OuterClothing/Armor/M3armor.rsi
+      sprite: CM14/Clothing/OuterClothing/Armor/M3armor.rsi
       layers:
         - state: icon
         - state: light
           visible: false
     - type: Clothing
-      sprite: Clothing/OuterClothing/Armor/M3armor.rsi
+      sprite: CM14/Clothing/OuterClothing/Armor/M3armor.rsi
     - type: Armor
       modifiers:
         coefficients:
-          Blunt: 0.9
-          Slash: 0.9
+          Blunt: 0.8
+          Slash: 0.8
           Piercing: 0.4
           Heat: 0.9
     - type: ExplosionResistance
       damageCoefficient: 0.80
     - type: ToggleableLightVisuals
-      clothingVisuals:
-        body:
-          - state: equipped-OUTERCLOTHING
-      spriteLayer : light
+      spriteLayer: light
     - type: PointLight
       enabled: false
       radius: 3
@@ -64,3 +61,13 @@
     - type: BatterySelfRecharger
       autoRecharge: true
       autoRechargeRate: 2 #recharge of 2 makes total drain 1w / s so max charge is 1:1 with time. Time to fully charge should be 5 minutes. Having recharge gives light an extended flicker period which gives you some warning to return to light area.
+    - type: Storage
+      capacity: 10
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          ents: []
+    - type: UserInterface
+      interfaces:
+        - key: enum.StorageUiKey.Key
+          type: StorageBoundUserInterface

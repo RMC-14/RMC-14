@@ -1,13 +1,13 @@
 ﻿- type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitMarine
-  name: marine jumpsuit
+  name: marine uniform
   description: A standard-issue Marine uniform.
   components:
     - type: Sprite
-      sprite: Clothing/Uniforms/Jumpsuit/marine.rsi
+      sprite: CM14/Clothing/Uniforms/Jumpsuit/marine.rsi
     - type: Clothing
-      sprite: Clothing/Uniforms/Jumpsuit/marine.rsi
+      sprite: CM14/Clothing/Uniforms/Jumpsuit/marine.rsi
     - type: SuitSensor
       controlsLocked: true
       randomMode: false
