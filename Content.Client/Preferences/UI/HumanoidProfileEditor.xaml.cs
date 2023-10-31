@@ -537,7 +537,9 @@ namespace Content.Client.Preferences.UI
                             ("departmentName", departmentName))
                     };
 
-                    if (firstCategory)
+                    category.Visible = department.IsCM;
+
+                    if (firstCategory && category.Visible)
                     {
                         firstCategory = false;
                     }
@@ -1256,6 +1258,7 @@ namespace Content.Client.Preferences.UI
             public JobPrioritySelector(JobPrototype proto, IPrototypeManager protoMan)
                 : base(proto)
             {
+                Visible = proto.IsCM;
                 Options.OnItemSelected += args => PriorityChanged?.Invoke(Priority);
 
                 var items = new[]

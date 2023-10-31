@@ -1,5 +1,6 @@
 - type: job
   id: SeniorEnlistedAdvisor
+  parent: JobBaseCM
   name: job-name-senior-enlisted-advisor
   description: job-description-senior-enlisted-advisor
   playTimeTracker: JobSeniorEnlistedAdvisor

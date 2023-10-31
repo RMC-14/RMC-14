@@ -1,28 +1,8 @@
 - type: department
-  id: MarineCommand
-  description: department-MarineCommand-description
-  color: "#334E6D"
-  roles:
-  - SeniorEnlistedAdvisor
-
-- type: department
   id: MilitaryPolice
   description: department-MilitaryPolice-description
   color: "#DE3A3A"
 #  roles: TODO CM14
-
-- type: department
-  id: Marine
-  description: department-Marine-description
-  color: "#DE3A3A"
-  roles:
-  - Rifleman
-  - SquadLeader
-  - FireteamLeader
-  - WeaponsSpecialist
-  - Smartgunner
-  - HospitalCorpsman
-  - CombatTech
 
 
 #- type: department
