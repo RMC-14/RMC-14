@@ -2,27 +2,27 @@
 
 # command
 - type: playTimeTracker
-  id: jobseniorenlistedadvisor
+  id: JobSeniorEnlistedAdvisor
 
 # marine
 - type: playTimeTracker
-  id: jobrifleman
-  
-- type: playTimeTracker
-  id: jobsquadleader
+  id: JobRifleman
 
 - type: playTimeTracker
-  id: jobfireteamleader
-  
-- type: playTimeTracker
-  id: jobweaponsspecialist
-  
-- type: playTimeTracker
-  id: jobsmartgunner
+  id: JobSquadLeader
 
 - type: playTimeTracker
-  id: hospitalcorpsman
-  
+  id: JobFireteamLeader
+
 - type: playTimeTracker
-  id: combattech
+  id: JobWeaponsSpecialist
+
+- type: playTimeTracker
+  id: JobSmartgunner
+
+- type: playTimeTracker
+  id: JobHospitalCorpsman
+
+- type: playTimeTracker
+  id: JobCombatTech
 
