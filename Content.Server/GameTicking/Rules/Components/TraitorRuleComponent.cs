@@ -1,8 +1,7 @@
-﻿using Content.Server.Roles;
-using Content.Shared.Preferences;
+﻿using Content.Shared.Preferences;
 using Content.Shared.Roles;
-using Robust.Server.Player;
 using Robust.Shared.Audio;
+using Robust.Shared.Player;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Server.GameTicking.Rules.Components;
@@ -10,12 +9,12 @@ namespace Content.Server.GameTicking.Rules.Components;
 [RegisterComponent, Access(typeof(TraitorRuleSystem))]
 public sealed partial class TraitorRuleComponent : Component
 {
-    public List<TraitorRole> Traitors = new();
+    public readonly List<EntityUid> TraitorMinds = new();
 
     [DataField("traitorPrototypeId", customTypeSerializer: typeof(PrototypeIdSerializer<AntagPrototype>))]
     public string TraitorPrototypeId = "Traitor";
 
-    public int TotalTraitors => Traitors.Count;
+    public int TotalTraitors => TraitorMinds.Count;
     public string[] Codewords = new string[3];
 
     public enum SelectionState
@@ -27,7 +26,7 @@ public sealed partial class TraitorRuleComponent : Component
 
     public SelectionState SelectionStatus = SelectionState.WaitingForSpawn;
     public TimeSpan AnnounceAt = TimeSpan.Zero;
-    public Dictionary<IPlayerSession, HumanoidCharacterProfile> StartCandidates = new();
+    public Dictionary<ICommonSession, HumanoidCharacterProfile> StartCandidates = new();
 
     /// <summary>
     ///     Path to antagonist alert sound.
