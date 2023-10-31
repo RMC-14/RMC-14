@@ -6,6 +6,7 @@ using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Implants.Components;
 using Content.Shared.Popups;
+using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Serialization;
 
@@ -85,9 +86,21 @@ public abstract class SharedImplanterSystem : EntitySystem
         if (!TryComp(implant, out implantComp))
             return false;
 
+        if (!CheckTarget(target, component.Whitelist, component.Blacklist) ||
+            !CheckTarget(target, implantComp.Whitelist, implantComp.Blacklist))
+        {
+            return false;
+        }
+
         var ev = new AddImplantAttemptEvent(user, target, implant.Value, implanter);
         RaiseLocalEvent(target, ev);
         return !ev.Cancelled;
+    }
+
+    protected bool CheckTarget(EntityUid target, EntityWhitelist? whitelist, EntityWhitelist? blacklist)
+    {
+        return whitelist?.IsValid(target, EntityManager) != false &&
+            blacklist?.IsValid(target, EntityManager) != true;
     }
 
     //Draw the implant out of the target
@@ -111,7 +124,7 @@ public abstract class SharedImplanterSystem : EntitySystem
                     continue;
 
                 //Don't remove a permanent implant and look for the next that can be drawn
-                if (!implantContainer.CanRemove(implant))
+                if (!_container.CanRemove(implant, implantContainer))
                 {
                     var implantName = Identity.Entity(implant, EntityManager);
                     var targetName = Identity.Entity(target, EntityManager);

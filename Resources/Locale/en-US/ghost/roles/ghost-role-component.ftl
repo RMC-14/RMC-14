@@ -76,6 +76,9 @@ ghost-role-information-mimebot-description = A Mimebot, act like a mime but dont
 ghost-role-information-taxibot-name = TaxiBot
 ghost-role-information-taxibot-description = Drive the station crew to their destination.
 
+ghost-role-information-supplybot-name = SupplyBot
+ghost-role-information-supplybot-description = Deliver goods around the station.
+
 ghost-role-information-space-bear-name = Space bear
 ghost-role-information-space-bear-description = You're a bear! Do bear things.
 
@@ -119,6 +122,9 @@ ghost-role-information-skeleton-pirate-description = Cause chaos and loot the st
 ghost-role-information-skeleton-biker-name = Skeleton Biker
 ghost-role-information-skeleton-biker-description = Ride around on your sweet ride.
 
+ghost-role-information-closet-skeleton-name = Closet Skeleton
+ghost-role-information-closet-skeleton-description = Wreak havoc! You are a primordial force with no allegiance. Live happily with the crew or wage sweet skeletal war.
+
 ghost-role-information-onestar-mecha-name = Onestar Mecha
 ghost-role-information-onestar-mecha-description = You are an experimental mecha created by who-knows-what, all you know is that you have weapons and you detect fleshy moving targets nearby...
 ghost-role-information-onestar-mecha-rules = Use your weapons to cause havoc. You are an antagonist.
@@ -144,13 +150,13 @@ ghost-role-information-ert-security-name = ERT Security
 ghost-role-information-ert-security-description = Assist with security efforts to resolve the stations issues.
 
 ghost-role-information-ert-medical-name = ERT Medical
-ghost-role-information-ert-medical-description = Assist with medicaling efforts to resolve the stations issues.
+ghost-role-information-ert-medical-description = Assist with medical efforts to resolve the stations issues.
 
 ghost-role-information-cburn-agent-name = CBURN Agent
 ghost-role-information-cburn-agent-description = A highly trained CentCom agent, capable of dealing with various threats.
 
-ghost-role-information-centcom-official-name = CentCom official
-ghost-role-information-centcom-official-description = Inspect the station, jot down performance reviews for heads of staff, bug the Captain.
+ghost-role-information-centcom-official-name = CentComm official
+ghost-role-information-centcom-official-description = Perform CentComm related duties such as inspect the station, jotting down performance reviews for heads of staff, and managing the fax machine.
 
 ghost-role-information-nukeop-rules = You are a syndicate operative tasked with the destruction of the station. As an antagonist, do whatever is required to complete this task.
 
@@ -160,3 +166,6 @@ ghost-role-information-loneop-rules = You are a syndicate operative tasked with 
 
 ghost-role-information-behonker-name = Behonker
 ghost-role-information-behonker-description = You are an antagonist, bring death and honks to those who do not follow the honkmother.
+
+ghost-role-information-Death-Squad-name = Death Squad Operative
+ghost-role-information-Death-Squad-description = Prepare for an all-out offensive on the station. As a heavily armed operative, your mission is to obliterate all life in your path. No witnesses.

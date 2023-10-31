@@ -8,15 +8,16 @@ using System.Threading.Tasks;
 using Content.Server.Administration.Managers;
 using Content.Server.Discord;
 using Content.Server.GameTicking;
-using Content.Server.Players;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
+using Content.Shared.Mind;
 using JetBrains.Annotations;
 using Robust.Server.Player;
 using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -31,6 +32,7 @@ namespace Content.Server.Administration.Systems
         [Dependency] private readonly IGameTiming _timing = default!;
         [Dependency] private readonly IPlayerLocator _playerLocator = default!;
         [Dependency] private readonly GameTicker _gameTicker = default!;
+        [Dependency] private readonly SharedMindSystem _minds = default!;
 
         private ISawmill _sawmill = default!;
         private readonly HttpClient _httpClient = new();
@@ -118,7 +120,7 @@ namespace Content.Server.Administration.Systems
             _typingUpdateTimestamps[args.SenderSession.UserId] = (_timing.RealTime, msg.Typing);
 
             // Non-admins can only ever type on their own ahelp, guard against fake messages
-            var isAdmin = _adminManager.GetAdminData((IPlayerSession) args.SenderSession)?.HasFlag(AdminFlags.Adminhelp) ?? false;
+            var isAdmin = _adminManager.GetAdminData(args.SenderSession)?.HasFlag(AdminFlags.Adminhelp) ?? false;
             var channel = isAdmin ? msg.Channel : args.SenderSession.UserId;
             var update = new BwoinkPlayerTypingUpdated(channel, args.SenderSession.Name, msg.Typing);
 
@@ -221,8 +223,6 @@ namespace Content.Server.Administration.Systems
                     return;
                 }
 
-                var characterName = _playerManager.GetPlayerData(userId).ContentData()?.Mind?.CharacterName;
-
                 var linkToPrevious = string.Empty;
 
                 // If we have all the data required, we can link to the embed of the previous round or embed that was too long
@@ -238,6 +238,7 @@ namespace Content.Server.Administration.Systems
                     }
                 }
 
+                var characterName = _minds.GetCharacterName(userId);
                 existingEmbed = (null, lookup.Username, linkToPrevious, characterName, _gameTicker.RunLevel);
             }
 
@@ -376,7 +377,7 @@ namespace Content.Server.Administration.Systems
         protected override void OnBwoinkTextMessage(BwoinkTextMessage message, EntitySessionEventArgs eventArgs)
         {
             base.OnBwoinkTextMessage(message, eventArgs);
-            var senderSession = (IPlayerSession) eventArgs.SenderSession;
+            var senderSession = eventArgs.SenderSession;
 
             // TODO: Sanitize text?
             // Confirm that this person is actually allowed to send a message here.
