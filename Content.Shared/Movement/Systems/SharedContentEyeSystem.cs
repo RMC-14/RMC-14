@@ -5,7 +5,7 @@ using Content.Shared.Ghost;
 using Content.Shared.Input;
 using Content.Shared.Movement.Components;
 using Robust.Shared.Input.Binding;
-using Robust.Shared.Players;
+using Robust.Shared.Player;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Movement.Systems;
@@ -20,6 +20,8 @@ public abstract class SharedContentEyeSystem : EntitySystem
     public const float ZoomMod = 1.5f;
     public static readonly Vector2 DefaultZoom = Vector2.One;
     public static readonly Vector2 MinZoom = DefaultZoom * (float)Math.Pow(ZoomMod, -3);
+
+    [Dependency] private readonly SharedEyeSystem _eye = default!;
 
     public override void Initialize()
     {
@@ -82,7 +84,7 @@ public abstract class SharedContentEyeSystem : EntitySystem
     private void OnContentZoomRequest(RequestTargetZoomEvent msg, EntitySessionEventArgs args)
     {
         var ignoreLimit = msg.IgnoreLimit && _admin.HasAdminFlag(args.SenderSession, AdminFlags.Debug);
-        
+
         if (TryComp<ContentEyeComponent>(args.SenderSession.AttachedEntity, out var content))
             SetZoom(args.SenderSession.AttachedEntity.Value, msg.TargetZoom, ignoreLimit, eye: content);
     }
@@ -92,19 +94,18 @@ public abstract class SharedContentEyeSystem : EntitySystem
         if (args.SenderSession.AttachedEntity is not { } player)
             return;
 
-        if (!HasComp<SharedGhostComponent>(player) && !_admin.IsAdmin(player))
+        if (!HasComp<GhostComponent>(player) && !_admin.IsAdmin(player))
             return;
 
-        if (TryComp<SharedEyeComponent>(player, out var eyeComp))
+        if (TryComp<EyeComponent>(player, out var eyeComp))
         {
-            eyeComp.DrawFov = msg.Fov;
-            Dirty(player, eyeComp);
+            _eye.SetDrawFov(player, msg.Fov, eyeComp);
         }
     }
 
     private void OnContentEyeStartup(EntityUid uid, ContentEyeComponent component, ComponentStartup args)
     {
-        if (!TryComp<SharedEyeComponent>(uid, out var eyeComp))
+        if (!TryComp<EyeComponent>(uid, out var eyeComp))
             return;
 
         component.TargetZoom = eyeComp.Zoom;
