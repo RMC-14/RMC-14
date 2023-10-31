@@ -1,0 +1,50 @@
+- type: job
+  id: HospitalCorpsman
+  name: job-name-hospital-corpsman
+  description: job-description-hospital-corpsman
+  playTimeTracker: JobHospitalCorpsman
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 3600 #1 hrs
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 3600 #1 hrs
+  startingGear: HospitalCorpsmanGear
+  icon: "JobIconBrigmedic"
+  supervisors: job-supervisors-squad-leader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+
+# Remove this later
+- type: entity
+  noSpawn: true
+  parent: ClothingBackpackBrigmedic
+  id: ClothingBackpackBrigmedicFilled
+  components:
+  - type: StorageFill
+    contents:
+      - id: BoxSurvivalBrigmedic
+      - id: Flash
+
+- type: startingGear
+  id: HospitalCorpsmanGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBrigmedic
+    outerClothing: ClothingOuterCoatAMG
+    back: ClothingBackpackBrigmedicFilled
+    shoes: ClothingShoesColorRed
+    gloves: ClothingHandsGlovesNitrile
+    eyes: ClothingEyesHudMedical
+    head: ClothingHeadHatBeretBrigmedic
+    id: BrigmedicPDA
+    ears: ClothingHeadsetBrigmedic
+    belt: ClothingBeltMedicalFilled
+  innerClothingSkirt: ClothingUniformJumpskirtBrigmedic
+  satchel: ClothingBackpackSatchelBrigmedicFilled
+  duffelbag: ClothingBackpackDuffelBrigmedicFilled
