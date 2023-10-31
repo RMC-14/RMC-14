@@ -3,14 +3,13 @@
   description: department-MarineCommand-description
   color: "#334E6D"
   roles:
-  - JobSeniorEnlistedAdvisor
+  - SeniorEnlistedAdvisor
 
 - type: department
   id: MilitaryPolice
   description: department-MilitaryPolice-description
   color: "#DE3A3A"
-  roles:
-  - JobSeniorEnlistedAdvisor
+#  roles: TODO CM14
 
 - type: department
   id: Marine

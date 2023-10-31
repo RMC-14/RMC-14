@@ -1,18 +1,18 @@
-- type: job
-  id: Lawyer
-  name: job-name-lawyer
-  description: job-description-lawyer
-  playTimeTracker: JobLawyer
-  requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 36000 # 10 hrs
-  startingGear: LawyerGear
-  icon: "JobIconLawyer"
-  supervisors: job-supervisors-hop
-  access:
-  - Service
-  - Brig
-  - Maintenance
+#- type: job
+#  id: Lawyer
+#  name: job-name-lawyer
+#  description: job-description-lawyer
+#  playTimeTracker: JobLawyer
+#  requirements:
+#    - !type:OverallPlaytimeRequirement
+#      time: 36000 # 10 hrs
+#  startingGear: LawyerGear
+#  icon: "JobIconLawyer"
+#  supervisors: job-supervisors-hop
+#  access:
+#  - Service
+#  - Brig
+#  - Maintenance
 
 - type: startingGear
   id: LawyerGear

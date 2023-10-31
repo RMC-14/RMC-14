@@ -42,7 +42,7 @@
     gloves: ClothingHandsGlovesNitrile
     eyes: ClothingEyesHudMedical
     head: ClothingHeadHatBeretBrigmedic
-    id: BrigmedicPDA
+#    id: BrigmedicPDA TODO CM14
     ears: ClothingHeadsetBrigmedic
     belt: ClothingBeltMedicalFilled
   innerClothingSkirt: ClothingUniformJumpskirtBrigmedic
