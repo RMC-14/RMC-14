@@ -12,22 +12,13 @@ using Content.IntegrationTests.Tests;
 using Content.IntegrationTests.Tests.Destructible;
 using Content.IntegrationTests.Tests.DeviceNetwork;
 using Content.IntegrationTests.Tests.Interaction.Click;
-using Content.Server.GameTicking;
-using Content.Server.Mind.Components;
-using Content.Shared.CCVar;
-using Content.Shared.GameTicking;
 using Robust.Client;
-using Robust.Client.State;
 using Robust.Server;
-using Robust.Server.Player;
-using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
 using Robust.Shared.GameObjects;
 using Robust.Shared.IoC;
 using Robust.Shared.Log;
-using Robust.Shared.Map;
-using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.UnitTesting;
@@ -437,7 +428,7 @@ we are just going to end this here to save a lot of time. This is the exception 
     /// <summary>
     ///     Helper method that retrieves all entity prototypes that have some component.
     /// </summary>
-    public static List<EntityPrototype> GetPrototypesWithComponent<T>(RobustIntegrationTest.IntegrationInstance instance) where T : Component
+    public static List<EntityPrototype> GetPrototypesWithComponent<T>(RobustIntegrationTest.IntegrationInstance instance) where T : IComponent
     {
         var protoMan = instance.ResolveDependency<IPrototypeManager>();
         var compFact = instance.ResolveDependency<IComponentFactory>();
