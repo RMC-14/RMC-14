@@ -39,7 +39,7 @@
     eyes: ClothingEyesGlassesSunglasses
     gloves: ClothingHandsGlovesCaptain
     outerClothing: ClothingOuterArmorCaptainCarapace
-#    id: CaptainPDA TODO CM14
+    id: CaptainPDA
     ears: ClothingHeadsetAltCommand
   innerClothingSkirt: ClothingUniformJumpskirtCaptain
   satchel: ClothingBackpackSatchelCaptainFilled
@@ -56,22 +56,3 @@
     layers:
     - state: green
     - state: captain # TODO CM14
-
-- type: entity
-  parent: IDCardStandard
-  id: SeniorEnlistedAdvisorIDCard
-  name: senior enlisted advisor ID card
-  components:
-  - type: Sprite
-    layers:
-    - state: gold
-    - state: idcaptain # TODO CM14
-  - type: Item
-    heldPrefix: gold
-  - type: PresetIdCard
-    job: SeniorEnlistedAdvisor
-  - type: Tag
-    tags:
-    - DoorBumpOpener
-    - WhitelistChameleon
-    - HighRiskItem

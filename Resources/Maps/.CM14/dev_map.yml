@@ -2315,7 +2315,7 @@ entities:
     - pos: -3.2804112,8.786524
       parent: 179
       type: Transform
-- proto: SeniorEnlistedAdvisorIDCard
+- proto: CaptainIDCard
   entities:
   - uid: 726
     components:
@@ -2879,6 +2879,28 @@ entities:
   - uid: 424
     components:
     - pos: -0.6474335,-10.27245
+      parent: 179
+      type: Transform
+- proto: ClownPDA
+  entities:
+  - uid: 91
+    components:
+    - pos: -15.5,2.5
+      parent: 179
+      type: Transform
+  - uid: 762
+    components:
+    - pos: -14.5,1.5
+      parent: 179
+      type: Transform
+  - uid: 864
+    components:
+    - pos: -14.5,2.5
+      parent: 179
+      type: Transform
+  - uid: 912
+    components:
+    - pos: -15.5,1.5
       parent: 179
       type: Transform
 - proto: ComputerAnalysisConsole
@@ -3791,6 +3813,31 @@ entities:
   - uid: 297
     components:
     - pos: 7.5,9.5
+      parent: 179
+      type: Transform
+    - air:
+        volume: 200
+        immutable: False
+        temperature: 293.14957
+        moles:
+        - 2.9923203
+        - 11.2568245
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+      type: EntityStorage
+- proto: LockerChiefEngineerFilled
+  entities:
+  - uid: 447
+    components:
+    - pos: 7.5,2.5
       parent: 179
       type: Transform
     - air:
