@@ -1,18 +1,18 @@
-#- type: job
-#  id: Janitor
-#  name: job-name-janitor
-#  description: job-description-janitor
-#  playTimeTracker: JobJanitor
-#  startingGear: JanitorGear
-#  icon: "JobIconJanitor"
-#  supervisors: job-supervisors-hop
-#  access:
-#  - Janitor
-#  - Maintenance
-#  special:
-#  - !type:GiveItemOnHolidaySpecial
-#    holiday: GarbageDay
-#    prototype: WeaponRevolverInspector
+- type: job
+  id: Janitor
+  name: job-name-janitor
+  description: job-description-janitor
+  playTimeTracker: JobJanitor
+  startingGear: JanitorGear
+  icon: "JobIconJanitor"
+  supervisors: job-supervisors-hop
+  access:
+  - Janitor
+  - Maintenance
+  special:
+  - !type:GiveItemOnHolidaySpecial
+    holiday: GarbageDay
+    prototype: WeaponRevolverInspector
 
 - type: startingGear
   id: JanitorGear

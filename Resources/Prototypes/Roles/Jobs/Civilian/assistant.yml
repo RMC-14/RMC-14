@@ -1,13 +1,13 @@
-#- type: job
-#  id: Passenger
-#  name: job-name-passenger
-#  description: job-description-passenger
-#  playTimeTracker: JobPassenger
-#  startingGear: PassengerGear
-#  icon: "JobIconPassenger"
-#  supervisors: job-supervisors-everyone
-#  access:
-#  - Maintenance
+- type: job
+  id: Passenger
+  name: job-name-passenger
+  description: job-description-passenger
+  playTimeTracker: JobPassenger
+  startingGear: PassengerGear
+  icon: "JobIconPassenger"
+  supervisors: job-supervisors-everyone
+  access:
+  - Maintenance
 
 - type: startingGear
   id: PassengerGear

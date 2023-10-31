@@ -1,14 +1,14 @@
-#- type: job
-#  id: Librarian
-#  name: job-name-librarian
-#  description: job-description-librarian
-#  playTimeTracker: JobLibrarian
-#  startingGear: LibrarianGear
-#  icon: "JobIconLibrarian"
-#  supervisors: job-supervisors-hop
-#  access:
-#  - Service
-#  - Maintenance
+- type: job
+  id: Librarian
+  name: job-name-librarian
+  description: job-description-librarian
+  playTimeTracker: JobLibrarian
+  startingGear: LibrarianGear
+  icon: "JobIconLibrarian"
+  supervisors: job-supervisors-hop
+  access:
+  - Service
+  - Maintenance
 
 - type: startingGear
   id: LibrarianGear

@@ -44,8 +44,8 @@ public sealed partial class BorgSystem : SharedBorgSystem
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
-    // [ValidatePrototypeId<JobPrototype>]
-    // public const string BorgJobId = "Borg";
+    [ValidatePrototypeId<JobPrototype>]
+    public const string BorgJobId = "Borg";
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -304,10 +304,9 @@ public sealed partial class BorgSystem : SharedBorgSystem
     /// </summary>
     public bool CanPlayerBeBorgged(ICommonSession session)
     {
-        return false;
-        // if (_banManager.GetJobBans(session.UserId)?.Contains(BorgJobId) == true)
-        //     return false;
-        //
-        // return true;
+        if (_banManager.GetJobBans(session.UserId)?.Contains(BorgJobId) == true)
+            return false;
+
+        return true;
     }
 }

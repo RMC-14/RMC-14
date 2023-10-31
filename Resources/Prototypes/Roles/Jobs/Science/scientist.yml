@@ -1,18 +1,18 @@
-#- type: job
-#  id: Scientist
-#  name: job-name-scientist
-#  description: job-description-scientist
-#  playTimeTracker: JobScientist
-#  requirements:
-#    - !type:DepartmentTimeRequirement
-#      department: Science
-#      time: 14400 #4 hrs
-#  startingGear: ScientistGear
-#  icon: "JobIconScientist"
-#  supervisors: job-supervisors-rd
-#  access:
-#  - Research
-#  - Maintenance
+- type: job
+  id: Scientist
+  name: job-name-scientist
+  description: job-description-scientist
+  playTimeTracker: JobScientist
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Science
+      time: 14400 #4 hrs
+  startingGear: ScientistGear
+  icon: "JobIconScientist"
+  supervisors: job-supervisors-rd
+  access:
+  - Research
+  - Maintenance
 
 - type: startingGear
   id: ScientistGear

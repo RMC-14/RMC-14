@@ -1,19 +1,19 @@
-﻿#- type: job
-#  id: ServiceWorker
-#  name: job-name-serviceworker
-#  description: job-description-serviceworker
-#  playTimeTracker: JobServiceWorker
-#  startingGear: ServiceWorkerGear
-#  icon: "JobIconServiceWorker"
-#  supervisors: job-supervisors-service
-#  canBeAntag: false
-#  access:
-#  - Service
-#  - Maintenance
-#  - Bar
-#  - Kitchen
-#  extendedAccess:
-#  - Hydroponics
+﻿- type: job
+  id: ServiceWorker
+  name: job-name-serviceworker
+  description: job-description-serviceworker
+  playTimeTracker: JobServiceWorker
+  startingGear: ServiceWorkerGear
+  icon: "JobIconServiceWorker"
+  supervisors: job-supervisors-service
+  canBeAntag: false
+  access:
+  - Service
+  - Maintenance
+  - Bar
+  - Kitchen
+  extendedAccess:
+  - Hydroponics
 
 - type: startingGear
   id: ServiceWorkerGear
