@@ -1,5 +1,6 @@
 - type: job
   id: Smartgunner
+  parent: JobBaseCM
   name: job-name-smartgunner
   description: job-description-smartgunner
   playTimeTracker: JobSmartgunner

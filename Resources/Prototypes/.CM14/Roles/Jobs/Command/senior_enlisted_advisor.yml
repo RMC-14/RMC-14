@@ -1,5 +1,6 @@
 - type: job
-  id: JobSeniorEnlistedAdvisor
+  id: SeniorEnlistedAdvisor
+  parent: JobBaseCM
   name: job-name-senior-enlisted-advisor
   description: job-description-senior-enlisted-advisor
   playTimeTracker: JobSeniorEnlistedAdvisor
@@ -44,3 +45,15 @@
   innerClothingSkirt: ClothingUniformJumpskirtCaptain
   satchel: ClothingBackpackSatchelCaptainFilled
   duffelbag: ClothingBackpackDuffelCaptainFilled
+
+- type: entity
+  id: SpawnPointSeniorEnlistedAdvisor
+  parent: SpawnPointJobBase
+  name: senior enlisted advisor
+  components:
+  - type: SpawnPoint
+    job_id: SeniorEnlistedAdvisor
+  - type: Sprite
+    layers:
+    - state: green
+    - state: captain # TODO CM14
