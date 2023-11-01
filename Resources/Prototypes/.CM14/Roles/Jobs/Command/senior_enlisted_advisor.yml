@@ -22,7 +22,7 @@
       time: 18000 # 5 hours
   weight: 5
   startingGear: SeniorEnlistedAdvisorGear
-  icon: "JobIconCaptain"
+  icon: "JobIconCaptain" #todo cm14
   requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: job-supervisors-command
@@ -30,7 +30,7 @@
   accessGroups:
   - AllAccess
 
-- type: startingGear
+- type: startingGear #todo cm14
   id: SeniorEnlistedAdvisorGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitCaptain
