@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "https://cm-ss13.com/wiki/Marines",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "MilitaryPolice"
+    },
+    {
+      "name": "Nurse"
+    },
+    {
+      "name": "OrdnanceTech"
+    },
+    {
+      "name": "Pilot"
+    },
+    {
+      "name": "PMC"
+    },
+    {
+      "name": "Quartermaster"
+    },
+    {
+      "name": "Researcher"
+    },
+    {
+      "name": "Rifleman"
+    },
+    {
+      "name": "SeniorEnlistedAdvisor"
+    },
+    {
+      "name": "Smartgunner"
+    },
+    {
+      "name": "SquadLeader"
+    },
+    {
+      "name": "StaffOfficer"
+    },
+    {
+      "name": "Survivor"
+    },
+    {
+      "name": "Synth"
+    },
+    {
+      "name": "Warden"
+    },
+    {
+      "name": "WeaponsSpecialist"
+    },
+    {
+      "name": "WorkingJoe"
+    },
+    {
+      "name": "AuxiliarySupportOfficer"
+    },
+    {
+      "name": "CargoTech"
+    },
+    {
+      "name": "ChiefEngineer"
+    },
+    {
+      "name": "ChiefMedicalOfficer"
+    },
+    {
+      "name": "ChiefMilitaryPolice"
+    },
+    {
+      "name": "CombatCorrespondent"
+    },
+    {
+      "name": "CombatTech"
+    },
+    {
+      "name": "CommandingOfficer"
+    },
+    {
+      "name": "CorpLiason"
+    },
+    {
+      "name": "Cultist"
+    },
+    {
+      "name": "Doctor"
+    },
+    {
+      "name": "DropshipCrewChief"
+    },
+    {
+      "name": "ExecutiveOfficer"
+    },
+    {
+      "name": "FireteamLeader"
+    },
+    {
+      "name": "HospitalCorpsman"
+    },
+    {
+      "name": "IntelOfficer"
+    },
+    {
+      "name": "MaintenanceTech"
+    },
+    {
+      "name": "MessTech"
+    }
+  ]
+}
