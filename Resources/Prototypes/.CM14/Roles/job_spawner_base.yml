@@ -1,11 +1,12 @@
 ﻿# Per job spawns can be found within their roles/jobs/department/role.yml
 - type: entity
-  id: SpawnPointJobBase
+  id: CMSpawnPointJobBase
   parent: MarkerBase
   abstract: true
   suffix: Job Spawn
+  description: A CM14 job spawner. Used for roundstart and late joins.
   components:
   - type: SpawnPoint
     spawn_type: Job
-#  - type: Sprite
-#    sprite: Markers/jobs.rsi #todo cm14 change to cm14 rsi
+  - type: Sprite
+    sprite: .CM14/Markers/cm_jobs.rsi
