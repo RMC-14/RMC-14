@@ -1,0 +1,11 @@
+﻿# Per job spawns can be found within their roles/jobs/department/role.yml
+- type: entity
+  id: SpawnPointJobBase
+  parent: MarkerBase
+  abstract: true
+  suffix: Job Spawn
+  components:
+  - type: SpawnPoint
+    spawn_type: Job
+#  - type: Sprite
+#    sprite: Markers/jobs.rsi #todo cm14 change to cm14 rsi
