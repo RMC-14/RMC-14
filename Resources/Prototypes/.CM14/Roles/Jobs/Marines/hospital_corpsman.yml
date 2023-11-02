@@ -30,7 +30,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: BoxSurvivalBrigmedic
+      - id: BoxSurvivalHospitalCorpsman
       - id: Flash
 
 - type: startingGear
@@ -49,3 +49,23 @@
   innerClothingSkirt: ClothingUniformJumpskirtBrigmedic
   satchel: ClothingBackpackSatchelBrigmedicFilled
   duffelbag: ClothingBackpackDuffelBrigmedicFilled
+
+- type: entity
+  name: survival box
+  parent: BoxCardboard
+  id: BoxSurvivalHospitalCorpsman
+  description: It's a box with basic internals inside.
+  suffix: MedSec
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingMaskBreathMedicalSecurity
+    - id: EmergencyOxygenTankFilled
+    - id: SpaceMedipen
+    - id: EmergencyMedipen
+    - id: EmergencyMedipen
+    - id: FoodTinMRE
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: emergencytank
