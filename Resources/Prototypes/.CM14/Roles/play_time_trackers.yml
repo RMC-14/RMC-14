@@ -1,5 +1,5 @@
 # Overall play time tracker is in the original file.
-
+#todo cm14 move all these to their proper roles
 # command
 - type: playTimeTracker
   id: JobSeniorEnlistedAdvisor

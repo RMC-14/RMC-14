@@ -1,0 +1,49 @@
+﻿- type: job # todo cm14 finish this role's ftl
+  id: StaffOfficer
+  parent: JobBaseCM
+  name: job-name-Staff-Officer
+  description: job-description-Staff-Officer
+  playTimeTracker: JobStaffOfficer
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 54000 # 15 hours
+  - !type:DepartmentTimeRequirement
+    department: MilitaryPolice
+    time: 3600 # 1 hours
+  weight: 5
+  startingGear: StaffOfficerGear
+  icon: "JobIconStaffOfficer"
+  requireAdminNotify: true
+  joinNotifyCrew: true
+  supervisors: job-supervisors-command
+  canBeAntag: false
+  accessGroups:
+  - AllAccess
+
+- type: startingGear #todo cm14
+  id: StaffOfficerGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitCaptain
+    back: ClothingBackpackCaptainFilled
+    shoes: ClothingShoesColorBlack
+    head: ClothingHeadHatCaptain
+    eyes: ClothingEyesGlassesSunglasses
+    gloves: ClothingHandsGlovesCaptain
+    outerClothing: ClothingOuterArmorCaptainCarapace
+    id: StaffOfficerIDCard
+    ears: ClothingHeadsetAltCommand
+  innerClothingSkirt: ClothingUniformJumpskirtCaptain
+  satchel: ClothingBackpackSatchelCaptainFilled
+  duffelbag: ClothingBackpackDuffelCaptainFilled
+
+- type: entity
+  id: SpawnPointStaffOfficer
+  parent: CMSpawnPointJobBase
+  name: staff officer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: StaffOfficer
+  - type: Sprite
+    layers:
+    - state: green
+    - state: staff_officer

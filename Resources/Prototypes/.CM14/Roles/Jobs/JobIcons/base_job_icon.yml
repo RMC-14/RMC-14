@@ -1,0 +1,6 @@
+﻿- type: statusIcon
+  parent: JobIcon
+  id: CMJobIconBase
+  abstract: true
+  icon:
+    sprite: .CM14/Interface/cm_job_icons.rsi
