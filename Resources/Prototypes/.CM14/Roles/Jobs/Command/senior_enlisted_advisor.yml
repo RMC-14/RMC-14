@@ -48,12 +48,12 @@
 
 - type: entity
   id: SpawnPointSeniorEnlistedAdvisor
-  parent: SpawnPointJobBase
-  name: senior enlisted advisor
+  parent: CMSpawnPointJobBase
+  name: senior enlisted advisor spawn point
   components:
   - type: SpawnPoint
     job_id: SeniorEnlistedAdvisor
   - type: Sprite
     layers:
     - state: green
-    - state: captain # TODO CM14
+    - state: senior_enlisted_advisor

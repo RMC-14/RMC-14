@@ -1,116 +1,119 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-4.0",
-  "copyright": "https://cm-ss13.com/wiki/Marines",
+  "license": "CC-BY-SA-4.0, green.png CC-BY-SA-3.0",
+  "copyright": "https://cm-ss13.com/wiki/Marines, green.png Taken from https://github.com/vgstation-coders/vgstation13/blob/e71d6c4fba5a51f99b81c295dcaec4fc2f58fb19/icons/mob/screen1.dmi",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-      "name": "MilitaryPolice"
+      "name": "chief_engineer"
     },
     {
-      "name": "Nurse"
+      "name": "chief_medical_officer"
     },
     {
-      "name": "OrdnanceTech"
+      "name": "chief_military_police"
     },
     {
-      "name": "Pilot"
+      "name": "combat_correspondent"
+    },
+    {
+      "name": "combat_tech"
+    },
+    {
+      "name": "commanding_officer"
+    },
+    {
+      "name": "corp_liason"
+    },
+    {
+      "name": "cultist"
+    },
+    {
+      "name": "doctor"
+    },
+    {
+      "name": "dropship_crew_chief"
+    },
+    {
+      "name": "executive_officer"
+    },
+    {
+      "name": "fireteam_leader"
+    },
+    {
+      "name": "green"
+    },
+    {
+      "name": "hospital_corpsman"
+    },
+    {
+      "name": "intel_officer"
+    },
+    {
+      "name": "maintenance_tech"
+    },
+    {
+      "name": "mess_tech"
+    },
+    {
+      "name": "military_police"
+    },
+    {
+      "name": "nurse"
+    },
+    {
+      "name": "ordnance_tech"
+    },
+    {
+      "name": "pilot"
     },
     {
       "name": "PMC"
     },
     {
-      "name": "Quartermaster"
+      "name": "quartermaster"
     },
     {
-      "name": "Researcher"
+      "name": "researcher"
     },
     {
-      "name": "Rifleman"
+      "name": "rifleman"
     },
     {
-      "name": "SeniorEnlistedAdvisor"
+      "name": "senior_enlisted_advisor"
     },
     {
-      "name": "Smartgunner"
+      "name": "smartgunner"
     },
     {
-      "name": "SquadLeader"
+      "name": "squad_leader"
     },
     {
-      "name": "StaffOfficer"
+      "name": "staff_officer"
     },
     {
-      "name": "Survivor"
+      "name": "survivor"
     },
     {
-      "name": "Synth"
+      "name": "synth"
     },
     {
-      "name": "Warden"
+      "name": "warden"
     },
     {
-      "name": "WeaponsSpecialist"
+      "name": "weapons_specialist"
     },
     {
-      "name": "WorkingJoe"
+      "name": "working_joe"
     },
     {
-      "name": "AuxiliarySupportOfficer"
+      "name": "auxiliary_support_officer"
     },
     {
-      "name": "CargoTech"
-    },
-    {
-      "name": "ChiefEngineer"
-    },
-    {
-      "name": "ChiefMedicalOfficer"
-    },
-    {
-      "name": "ChiefMilitaryPolice"
-    },
-    {
-      "name": "CombatCorrespondent"
-    },
-    {
-      "name": "CombatTech"
-    },
-    {
-      "name": "CommandingOfficer"
-    },
-    {
-      "name": "CorpLiason"
-    },
-    {
-      "name": "Cultist"
-    },
-    {
-      "name": "Doctor"
-    },
-    {
-      "name": "DropshipCrewChief"
-    },
-    {
-      "name": "ExecutiveOfficer"
-    },
-    {
-      "name": "FireteamLeader"
-    },
-    {
-      "name": "HospitalCorpsman"
-    },
-    {
-      "name": "IntelOfficer"
-    },
-    {
-      "name": "MaintenanceTech"
-    },
-    {
-      "name": "MessTech"
+      "name": "cargo_tech"
     }
   ]
 }
