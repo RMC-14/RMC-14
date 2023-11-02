@@ -1,0 +1,7 @@
+﻿- type: entity
+  parent: MobHuman
+  id: godhelpme
+  name: test dummy
+  components:
+  - type: Loadout
+    prototypes: [ StaffOfficerGear ]
