@@ -1,28 +1,18 @@
-﻿- type: job
-  id: SeniorEnlistedAdvisor
+﻿- type: job # todo cm14 finish this role's ftl
+  id: StaffOfficer
   parent: JobBaseCM
-  name: job-name-senior-enlisted-advisor
-  description: job-description-senior-enlisted-advisor
-  playTimeTracker: JobSeniorEnlistedAdvisor
+  name: job-name-Staff-Officer
+  description: job-description-Staff-Officer
+  playTimeTracker: JobStaffOfficer
   requirements:
-  - !type:DepartmentTimeRequirement
-    department: Marine
+  - !type:OverallPlaytimeRequirement
     time: 54000 # 15 hours
   - !type:DepartmentTimeRequirement
-    department: Engineering
-    time: 36000 # 10 hours
-  - !type:DepartmentTimeRequirement
     department: MilitaryPolice
-    time: 36000 # 10 hours
-  - !type:DepartmentTimeRequirement
-    department: Medical
-    time: 36000 # 10 hours
-  - !type:DepartmentTimeRequirement
-    department: MarineCommand
-    time: 18000 # 5 hours
+    time: 3600 # 1 hours
   weight: 5
-  startingGear: SeniorEnlistedAdvisorGear
-  icon: "JobIconCaptain" #todo cm14
+  startingGear: StaffOfficerGear
+  icon: "JobIconStaffOfficer"
   requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: job-supervisors-command
@@ -31,7 +21,7 @@
   - AllAccess
 
 - type: startingGear #todo cm14
-  id: SeniorEnlistedAdvisorGear
+  id: StaffOfficerGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitCaptain
     back: ClothingBackpackCaptainFilled
@@ -40,20 +30,20 @@
     eyes: ClothingEyesGlassesSunglasses
     gloves: ClothingHandsGlovesCaptain
     outerClothing: ClothingOuterArmorCaptainCarapace
-    id: CaptainPDA
+    id: StaffOfficerIDCard
     ears: ClothingHeadsetAltCommand
   innerClothingSkirt: ClothingUniformJumpskirtCaptain
   satchel: ClothingBackpackSatchelCaptainFilled
   duffelbag: ClothingBackpackDuffelCaptainFilled
 
 - type: entity
-  id: SpawnPointSeniorEnlistedAdvisor
+  id: SpawnPointStaffOfficer
   parent: CMSpawnPointJobBase
-  name: senior enlisted advisor
+  name: staff officer spawn point
   components:
   - type: SpawnPoint
-    job_id: SeniorEnlistedAdvisor
+    job_id: StaffOfficer
   - type: Sprite
     layers:
     - state: green
-    - state: senior_enlisted_advisor
+    - state: staff_officer

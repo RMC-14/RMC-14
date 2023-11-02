@@ -1,0 +1,11 @@
+﻿- type: entity
+  parent: CMIDCardStandard
+  id: StaffOfficerIDCard
+  name: passenger ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idpassenger
+  - type: PresetIdCard
+    job: StaffOfficer

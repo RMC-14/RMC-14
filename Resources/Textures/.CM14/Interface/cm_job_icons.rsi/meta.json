@@ -50,13 +50,13 @@
       "name": "hudsquad_xo"
     },
     {
-      "name": "hudsquad_aso"
+      "name": "auxiliary_support_officer"
     },
     {
       "name": "hudsquad_syn"
     },
     {
-      "name": "hudsquad_so"
+      "name": "staff_officer"
     },
     {
       "name": "hudsquad_po"
@@ -95,7 +95,7 @@
       "name": "hudsquad_ct"
     },
     {
-      "name": "hudsquad_sea"
+      "name": "senior_enlisted_advisor"
     },
     {
       "name": "hudsquad_leader_a"
