@@ -1,11 +1,9 @@
 ﻿- type: entity
   parent: CMIDCardStandard
   id: StaffOfficerIDCard
-  name: passenger ID card
   components:
   - type: Sprite
-    layers:
-    - state: default
-    - state: idpassenger
+    sprite: .CM14/Objects/CMIDs/cm_id_cards.rsi
+    state: dogtag # todo cm14 command staff probably don't use dogtags.
   - type: PresetIdCard
     job: StaffOfficer

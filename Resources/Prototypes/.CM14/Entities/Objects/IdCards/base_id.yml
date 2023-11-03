@@ -1,18 +1,20 @@
 ﻿- type: entity
   parent: Clothing
   id: CMIDCardStandard
-  name: identification card
-  description: A card necessary to access various areas aboard the station.
-  #noSpawn: true todo cm14 make this not spawn and use proper sprites
+  name: dogtags
+  description: contains information related to it's carrier, and grants access to the ship. # todo cm14 description
+  noSpawn: true
   components:
   - type: Sprite
-    sprite: Objects/Misc/id_cards.rsi
+    sprite: .CM14/Objects/CMIDs/cm_id_cards.rsi
+    state: dogtag
   - type: Clothing
     slots:
+    - neck
     - idcard
-    sprite: Objects/Misc/id_cards.rsi
+    sprite: Objects/Misc/id_cards.rsi # todo cm14 need clothing sprite.
   - type: Item
-    size: Small
+    size: Tiny
     heldPrefix: default
   - type: Access
   - type: IdCard
