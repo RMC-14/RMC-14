@@ -30,7 +30,7 @@
     <Folder Include="Tools\Systems\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".CM14\**" />
+    <Compile Include=".CM14\**" />
   </ItemGroup>
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
 </Project>
