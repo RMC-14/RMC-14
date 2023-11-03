@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: CMIDCardStandard
+  parent: CMIDCardStandardDogtag
   id: StaffOfficerIDCard
   components:
   - type: Sprite
