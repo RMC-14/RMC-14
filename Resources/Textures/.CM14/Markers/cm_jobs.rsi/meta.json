@@ -50,9 +50,6 @@
       "name": "hospital_corpsman"
     },
     {
-      "name": "intel_officer"
-    },
-    {
       "name": "maintenance_tech"
     },
     {
@@ -71,7 +68,7 @@
       "name": "pilot"
     },
     {
-      "name": "PMC"
+      "name": "pmc"
     },
     {
       "name": "quartermaster"

@@ -26,3 +26,5 @@
 - type: playTimeTracker
   id: JobCombatTech
 
+- type: playTimeTracker
+  id: JobStaffOfficer
