@@ -77,13 +77,11 @@ public sealed class MarineOverlay : Overlay
             Matrix3.Multiply(rotationMatrix, scaledWorld, out var matty);
             handle.SetTransform(matty);
 
-            _icons.Sort();
-
             foreach (var proto in _icons)
             {
                 var texture = _sprite.Frame0(proto);
 
-                var yOffset = (bounds.Height + sprite.Offset.Y) / 2f;
+                var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float) texture.Height / EyeManager.PixelsPerMeter;
                 var xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float) texture.Width / EyeManager.PixelsPerMeter;
 
                 var position = new Vector2(xOffset, yOffset);
