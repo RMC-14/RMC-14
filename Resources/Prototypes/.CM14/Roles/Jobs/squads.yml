@@ -13,7 +13,7 @@
   - type: SquadTeam
     background:
       sprite: .CM14/Interface/cm_job_icons.rsi
-      state: background
+      state: hudsquad
 
 - type: entity
   id: SquadAlpha
