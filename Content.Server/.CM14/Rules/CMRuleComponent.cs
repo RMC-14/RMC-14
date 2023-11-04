@@ -10,7 +10,7 @@ public sealed partial class CMRuleComponent : Component
     public int PlayersPerXeno = 2; // TODO CM14
 
     [DataField]
-    public List<EntProtoId> SquadIds = new() { "SquadAlpha", "SquadBeta", "SquadCharlie", "SquadDelta" };
+    public List<EntProtoId> SquadIds = new() { "SquadAlpha", "SquadBravo", "SquadCharlie", "SquadDelta" };
 
     [DataField]
     public Dictionary<EntProtoId, EntityUid> Squads = new();
