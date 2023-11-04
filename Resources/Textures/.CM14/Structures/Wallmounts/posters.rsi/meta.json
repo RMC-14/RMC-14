@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "license": "CC-BY-3.0",
-  "copyright": "https://github.com/cmss13-devs/cmss13/blob/HEAD/icons/obj/structures/props/posters.dmi",
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/1ea078e04c49e1004b0bb715f252260cdf39b602/icons/obj/structures/props/posters.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -14,7 +14,7 @@
       "name": "poster_ripped"
     },
     {
-      "name": "random_anything"
+      "name": ""
     },
     {
       "name": "poster1"
