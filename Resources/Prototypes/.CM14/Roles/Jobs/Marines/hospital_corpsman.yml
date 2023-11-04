@@ -69,3 +69,15 @@
     layers:
     - state: internals
     - state: emergencytank
+
+- type: entity
+  id: SpawnPointHospitalCorpsman
+  parent: CMSpawnPointJobBase
+  name: hospital corpsman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: HospitalCorpsman
+  - type: Sprite
+    layers:
+    - state: green
+    - state: hospital_corpsman
