@@ -1,17 +1,22 @@
 ﻿using System.Runtime.InteropServices;
 using Content.Server.Antag;
+using Content.Server.CM14.Marines;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Mind;
 using Content.Server.Roles;
+using Content.Server.Roles.Jobs;
 using Content.Server.Spawners.Components;
 using Content.Shared.CM14.Marines;
 using Content.Shared.CM14.Marines.Squads;
 using Content.Shared.Coordinates;
+using Content.Shared.StatusIcon;
 using Robust.Shared.Console;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Utility;
 using XenoComponent = Content.Shared.CM14.Xenos.XenoComponent;
 
 namespace Content.Server.CM14.Rules;
@@ -20,8 +25,11 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
 {
     [Dependency] private readonly AntagSelectionSystem _antagSelection = default!;
     [Dependency] private readonly IConsoleHost _console = default!;
+    [Dependency] private readonly JobSystem _jobs = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly MarineSystem _marines = default!;
     [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RoleSystem _roles = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
@@ -81,17 +89,17 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
     private void OnPlayerJobAssigned(RulePlayerJobsAssignedEvent ev)
     {
         var query = QueryActiveRules();
-        while (query.MoveNext(out var uid, out _, out var comp, out _))
+        while (query.MoveNext(out _, out _, out var comp, out _))
         {
             if (comp.SquadIds.Count == 0)
                 continue;
 
             foreach (var player in ev.Players)
             {
-                if (player.AttachedEntity is not { } entity ||
-                    HasComp<XenoComponent>(entity) ||
-                    HasComp<MarineComponent>(entity) ||
-                    HasComp<SquadMemberComponent>(entity))
+                if (player.AttachedEntity is not { } playerId ||
+                    HasComp<XenoComponent>(playerId) ||
+                    HasComp<MarineComponent>(playerId) ||
+                    HasComp<SquadMemberComponent>(playerId))
                 {
                     continue;
                 }
@@ -106,8 +114,16 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
                 if (!exists)
                     squad = Spawn(nextSquad);
 
-                AddComp<MarineComponent>(entity);
-                _squad.SetSquad(entity, squad);
+                SpriteSpecifier? icon = null;
+                if (_mind.TryGetMind(playerId, out var mindId, out _) &&
+                    _jobs.MindTryGetJob(mindId, out _, out var job) &&
+                    _prototypes.TryIndex(job.Icon, out StatusIconPrototype? jobIcon))
+                {
+                    icon = jobIcon.Icon;
+                }
+
+                _marines.MakeMarine(playerId, icon);
+                _squad.SetSquad(playerId, squad);
             }
         }
     }

@@ -12,10 +12,7 @@ public sealed class SquadSystem : EntitySystem
 
     private void OnSquadRoleGetIcon(Entity<SquadMemberComponent> ent, ref GetMarineIconEvent args)
     {
-        if (!TryComp(ent.Comp.Squad, out SquadTeamComponent? team))
-            return;
-
-        args.Icons.Add(team.Background);
+        args.Icons.Add(ent.Comp.Background);
     }
 
     public void SetSquad(EntityUid marine, Entity<SquadTeamComponent?> team)
@@ -25,6 +22,8 @@ public sealed class SquadSystem : EntitySystem
 
         var member = EnsureComp<SquadMemberComponent>(marine);
         member.Squad = team;
+        member.Background = team.Comp.Background;
+
         Dirty(marine, member);
     }
 }
