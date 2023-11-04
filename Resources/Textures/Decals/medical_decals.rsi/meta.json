@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "cryomid"
+    },
+    {
+      "name": "cryotop"
+    },
+    {
+      "name": "cryocell1decal"
+    },
+    {
+      "name": "cryocell2deval"
+    },
+    {
+      "name": "cryocell3decal"
+    },
+    {
+      "name": "cryocell4decal"
+    },
+    {
+      "name": "docdecal1"
+    },
+    {
+      "name": "docdecal4"
+    },
+    {
+      "name": "docdecal2"
+    },
+    {
+      "name": "docdecal3"
+    },
+    {
+      "name": "docstriping"
+    },
+    {
+      "name": "docstripingdir",
+      "directions": 4
+    },
+    {
+      "name": "triagedecal"
+    },
+    {
+      "name": "triagedecalbottom"
+    },
+    {
+      "name": "triagedecalleft"
+    },
+    {
+      "name": "triagedecaldir",
+      "directions": 4
+    },
+    {
+      "name": "triagedecaltop"
+    },
+    {
+      "name": "triagedecalleftdown"
+    },
+    {
+      "name": "triagedecaltopleft"
+    },
+    {
+      "name": "triagedecalbottomright"
+    },
+    {
+      "name": "triagedecalrightup"
+    },
+    {
+      "name": "triagedecalleftup"
+    },
+    {
+      "name": "triagedecalrightdown"
+    },
+    {
+      "name": "triagedecaltopright"
+    },
+    {
+      "name": "triagedecalbottomleft"
+    }
+  ]
+}

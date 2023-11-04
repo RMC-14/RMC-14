@@ -1,0 +1,199 @@
+- type: decal
+  id: cryomid
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: cryomid
+
+- type: decal
+  id: cryotop
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: cryotop
+
+- type: decal
+  id: cryocell1decal
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: cryocell1decal
+
+- type: decal
+  id: cryocell2deval
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: cryocell2deval
+
+- type: decal
+  id: cryocell3decal
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: cryocell3decal
+
+- type: decal
+  id: cryocell4decal
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: cryocell4decal
+
+- type: decal
+  id: docdecal1
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: docdecal1
+
+- type: decal
+  id: docdecal4
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: docdecal4
+
+- type: decal
+  id: docdecal2
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: docdecal2
+
+- type: decal
+  id: docstriping
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: docstriping
+
+- type: decal
+  id: docstripingdir
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: docstripingdir
+
+- type: decal
+  id: triagedecal
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: triagedecal
+
+- type: decal
+  id: triagedecalbottom
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: triagedecalbottom
+
+- type: decal
+  id: triagedecalleft
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: triagedecalleft
+
+- type: decal
+  id: triagedecaldir
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: triagedecaldir
+
+- type: decal
+  id: triagedecaltop
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: triagedecaltop
+
+- type: decal
+  id: triagedecalleftdown
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: triagedecalleftdown
+
+- type: decal
+  id: triagedecaltopleft
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: triagedecaltopleft
+
+- type: decal
+  id: triagedecalbottomright
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: triagedecalbottomright
+
+- type: decal
+  id: triagedecalrightup
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: triagedecalrightup
+
+- type: decal
+  id: triagedecalleftup
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: triagedecalleftup
+
+- type: decal
+  id: triagedecalleftup
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: triagedecalleftup
+
+- type: decal
+  id: triagedecalrightdown
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: triagedecalrightdown
+
+- type: decal
+  id: triagedecaltopright
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: triagedecaltopright
+
+- type: decal
+  id: triagedecalbottomleft
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: Decals/medical_decals.rsi
+    state: triagedecalbottomleft
