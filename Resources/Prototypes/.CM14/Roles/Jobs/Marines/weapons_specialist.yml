@@ -35,3 +35,15 @@
   innerClothingSkirt: ClothingUniformJumpskirtSec
   satchel: ClothingBackpackSatchelSecurityFilled
   duffelbag: ClothingBackpackDuffelSecurityFilled
+
+- type: entity
+  id: SpawnPointWeaponsSpecialist
+  parent: CMSpawnPointJobBase
+  name: weapons specialist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: WeaponsSpecialist
+  - type: Sprite
+    layers:
+    - state: green
+    - state: weapons_specialist

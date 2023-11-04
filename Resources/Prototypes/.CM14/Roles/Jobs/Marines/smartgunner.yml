@@ -35,3 +35,15 @@
   innerClothingSkirt: ClothingUniformJumpskirtSec
   satchel: ClothingBackpackSatchelSecurityFilled
   duffelbag: ClothingBackpackDuffelSecurityFilled
+
+- type: entity
+  id: SpawnPointSmartGunner
+  parent: CMSpawnPointJobBase
+  name: smartgunner spawn point
+  components:
+  - type: SpawnPoint
+    job_id: Smartgunner
+  - type: Sprite
+    layers:
+    - state: green
+    - state: smartgunner
