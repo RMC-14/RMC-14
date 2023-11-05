@@ -5,13 +5,11 @@
   description: Standard Issue Armor used by USCM. Provides modest protection from bullet and melee attacks. It also has a shoulder-mounted directional flashlight for night time combat and a HUD to see their Marine roles. An all rounder in terms of protection with an additional 3 slots in the armor.
   components:
     - type: Sprite
-      sprite: .CM14/Objects/Clothing/OuterClothing/Armor/M3armor.rsi
+      sprite: .CM14/Objects/Clothing/OuterClothing/Armor/m3_armor.rsi
       layers:
-        - state: icon
-        - state: light
-          visible: false
+      - state: icon
     - type: Clothing
-      sprite: .CM14/Objects/Clothing/OuterClothing/Armor/M3armor.rsi
+      sprite: .CM14/Objects/Clothing/OuterClothing/Armor/m3_armor.rsi
     - type: Armor
       modifiers:
         coefficients:
@@ -29,7 +27,6 @@
       energy: 2
       mask: /Textures/Effects/LightMasks/cone.png
       autoRot: true
-      netsync: false
     - type: HandheldLight
       addPrefix: true
       blinkingBehaviourId: blinking
