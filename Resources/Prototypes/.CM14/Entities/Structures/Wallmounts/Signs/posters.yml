@@ -7,7 +7,7 @@
     arc: 360
   - type: Sprite
     drawdepth: WallTops
-    sprite: Structures/Wallmounts/posters.rsi
+    sprite: .CM14\Structures\Wallmounts\posters.rsi
     snapCardinals: true
   - type: Destructible
     thresholds:
@@ -35,7 +35,7 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: Structures/Wallmounts/posters.rsi
+    sprite: .CM14/Structures/Wallmounts/posters.rsi
     state: poster_ripped
   - type: Destructible
     thresholds:
