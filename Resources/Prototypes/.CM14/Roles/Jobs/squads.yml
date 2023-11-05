@@ -1,10 +1,4 @@
-﻿- type: department
-  id: MilitaryPolice
-  description: department-MilitaryPolice-description
-  color: "#DE3A3A"
-#  roles: TODO CM14
-
-- type: entity
+﻿- type: entity
   id: SquadBase
   abstract: true
   categories:
