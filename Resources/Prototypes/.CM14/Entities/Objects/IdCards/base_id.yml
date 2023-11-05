@@ -18,6 +18,8 @@
     heldPrefix: default
   - type: Access # TODO CM14 make neck slot work
   - type: IdCard
+    nameLocId: cm-access-id-card-component-owner-name-job-title-text
+    fullNameLocId: cm-access-id-card-component-owner-full-name-job-title-text
   - type: StationRecordKeyStorage
   - type: Tag
     tags:
