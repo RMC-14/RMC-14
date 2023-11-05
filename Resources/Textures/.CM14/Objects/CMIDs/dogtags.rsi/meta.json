@@ -14,10 +14,12 @@
       "name": "dogtag_taken"
     },
     {
-      "name": "inhand-left"
+      "name": "default-inhand-left",
+      "directions": 4
     },
     {
-      "name": "inhand-right"
+      "name": "default-inhand-right",
+      "directions": 4
     }
   ]
 }
