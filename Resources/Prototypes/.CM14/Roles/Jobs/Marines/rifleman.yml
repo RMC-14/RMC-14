@@ -31,3 +31,15 @@
   innerClothingSkirt: ClothingUniformJumpskirtSec
   satchel: ClothingBackpackSatchelSecurityFilled
   duffelbag: ClothingBackpackDuffelSecurityFilled
+
+- type: entity
+  id: SpawnPointRifleman
+  parent: CMSpawnPointJobBase
+  name: rifleman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: Rifleman
+  - type: Sprite
+    layers:
+    - state: green
+    - state: rifleman

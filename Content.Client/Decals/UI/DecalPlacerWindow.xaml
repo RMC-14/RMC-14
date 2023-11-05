@@ -25,5 +25,6 @@
             <Label Text="{Loc 'decal-placer-window-zindex'}" Margin="0 0 0 1" />
             <SpinBox Name="ZIndexSpinBox" HorizontalExpand ="True" />
         </BoxContainer>
+        <CheckBox Name="ShowNonCMCheckbox" Text="{Loc 'show-non-cm-decals'}" />
     </BoxContainer>
 </DefaultWindow>

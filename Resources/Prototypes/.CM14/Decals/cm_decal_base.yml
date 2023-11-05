@@ -1,0 +1,4 @@
+﻿- type: decal
+  id: CMDecalBase
+  abstract: true
+  isCM: true
