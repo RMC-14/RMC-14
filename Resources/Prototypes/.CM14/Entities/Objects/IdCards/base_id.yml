@@ -16,7 +16,7 @@
   - type: Item
     size: Tiny
     heldPrefix: default
-  - type: Access
+  - type: Access # TODO CM14 make neck slot work
   - type: IdCard
   - type: StationRecordKeyStorage
   - type: Tag
