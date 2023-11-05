@@ -11,6 +11,11 @@
       layers:
       - map: [ "enum.DamageStateVisualLayers.Base" ]
         state: alive
+    - type: MobState
+      allowedStates:
+      - Alive
+      - Critical
+      - Dead
     - type: MobThresholds
       thresholds:
         0: Alive
