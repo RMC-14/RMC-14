@@ -1,0 +1,5 @@
+﻿- type: department
+  id: MilitaryPolice
+  description: department-MilitaryPolice-description
+  color: "#DE3A3A"
+#  roles: TODO CM14

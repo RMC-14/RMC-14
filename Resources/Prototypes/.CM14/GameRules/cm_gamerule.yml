@@ -1,0 +1,8 @@
+﻿- type: entity
+  id: CMXeno
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+  - type: GameRule
+    minPlayers: 1 # TODO CM14
+  - type: CMRule
