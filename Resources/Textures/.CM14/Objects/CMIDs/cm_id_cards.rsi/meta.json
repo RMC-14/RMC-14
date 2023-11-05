@@ -8,12 +8,6 @@
   },
   "states": [
     {
-      "name": "dogtag"
-    },
-    {
-      "name": "dogtag_taken"
-    },
-    {
       "name": "data"
     },
     {
