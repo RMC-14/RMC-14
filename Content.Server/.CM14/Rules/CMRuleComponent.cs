@@ -16,7 +16,7 @@ public sealed partial class CMRuleComponent : Component
     public Dictionary<EntProtoId, EntityUid> Squads = new();
 
     [DataField]
-    public int NextSquad = 0;
+    public int NextSquad;
 
     [DataField]
     public EntityUid XenoMap;
