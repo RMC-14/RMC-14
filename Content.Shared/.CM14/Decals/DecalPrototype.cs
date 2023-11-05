@@ -8,7 +8,7 @@ namespace Content.Shared.Decals;
 
 public sealed partial class DecalPrototype : IInheritingPrototype
 {
-    [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<DepartmentPrototype>))]
+    [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<DecalPrototype>))]
     public string[]? Parents { get; }
 
     [NeverPushInheritance]
