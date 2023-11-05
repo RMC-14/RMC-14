@@ -1,0 +1,29 @@
+- type: department
+  id: MilitaryPolice
+  description: department-MilitaryPolice-description
+  color: "#DE3A3A"
+#  roles: TODO CM14 add roles
+
+
+#- type: department
+#  id: marine-alpha
+#  description: department-marine-description
+#  color: "#FF747E"
+#
+#- type: department
+#  id: marine-bravo
+#  description: department-marine-description
+#  color: "#A46106"
+#
+#- type: department
+#  id: marine-charlie
+#  description: department-marine-description
+#  color: "#D381C9"
+#
+#- type: department
+#  id: marine-delta
+#  description: department-marine-description
+#  color: "#334E6D"
+
+## todo CM14 This file is depreciated.
+## move departments to the departments folder.

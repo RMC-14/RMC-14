@@ -1,0 +1,49 @@
+- type: job
+  id: Smartgunner
+  parent: JobBaseCM
+  name: job-name-smartgunner
+  description: job-description-smartgunner
+  playTimeTracker: JobSmartgunner
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 18000 #5 hrs
+  startingGear: SmartgunnerGear
+  icon: "JobIconSecurityOfficer"
+  supervisors: job-supervisors-squad-leader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+
+- type: startingGear
+  id: SmartgunnerGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSec
+    back: ClothingBackpackSecurityFilled
+    shoes: ClothingShoesBootsCombatFilled
+    eyes: ClothingEyesGlassesSecurity
+    head: ClothingHeadHelmetBasic
+    outerClothing: ClothingOuterArmorBasic
+    id: SecurityPDA
+    ears: ClothingHeadsetSecurity
+    belt: ClothingBeltSecurityFilled
+    pocket1: WeaponPistolMk58Nonlethal
+  innerClothingSkirt: ClothingUniformJumpskirtSec
+  satchel: ClothingBackpackSatchelSecurityFilled
+  duffelbag: ClothingBackpackDuffelSecurityFilled
+
+- type: entity
+  id: SpawnPointSmartGunner
+  parent: CMSpawnPointJobBase
+  name: smartgunner spawn point
+  components:
+  - type: SpawnPoint
+    job_id: Smartgunner
+  - type: Sprite
+    layers:
+    - state: green
+    - state: smartgunner

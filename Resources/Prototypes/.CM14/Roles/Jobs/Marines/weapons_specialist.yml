@@ -1,0 +1,49 @@
+- type: job
+  id: WeaponsSpecialist
+  parent: JobBaseCM
+  name: job-name-weapons-specialist
+  description: job-description-weapons-specialist
+  playTimeTracker: JobWeaponsSpecialist
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 18000 #5 hrs
+  startingGear: WeaponsSpecialistGear
+  icon: "JobIconSecurityOfficer"
+  supervisors: job-supervisors-squad-leader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+
+- type: startingGear
+  id: WeaponsSpecialistGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSec
+    back: ClothingBackpackSecurityFilled
+    shoes: ClothingShoesBootsCombatFilled
+    eyes: ClothingEyesGlassesSecurity
+    head: ClothingHeadHelmetBasic
+    outerClothing: ClothingOuterArmorBasic
+    id: SecurityPDA
+    ears: ClothingHeadsetSecurity
+    belt: ClothingBeltSecurityFilled
+    pocket1: WeaponPistolMk58Nonlethal
+  innerClothingSkirt: ClothingUniformJumpskirtSec
+  satchel: ClothingBackpackSatchelSecurityFilled
+  duffelbag: ClothingBackpackDuffelSecurityFilled
+
+- type: entity
+  id: SpawnPointWeaponsSpecialist
+  parent: CMSpawnPointJobBase
+  name: weapons specialist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: WeaponsSpecialist
+  - type: Sprite
+    layers:
+    - state: green
+    - state: weapons_specialist

@@ -1,0 +1,22 @@
+﻿- type: entity
+  parent: [Clothing, CMEntityBase]
+  id: CMIDCardStandard
+  name: identification card
+  description: A card necessary to access various areas aboard the station.
+  #noSpawn: true todo cm14 make this not spawn and use proper sprites
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/id_cards.rsi
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: Objects/Misc/id_cards.rsi
+  - type: Item
+    size: Small
+    heldPrefix: default
+  - type: Access
+  - type: IdCard
+  - type: StationRecordKeyStorage
+  - type: Tag
+    tags:
+    - DoorBumpOpener

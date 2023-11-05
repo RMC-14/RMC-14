@@ -1,0 +1,30 @@
+# Overall play time tracker is in the original file.
+#todo cm14 move all these to their proper roles
+# command
+- type: playTimeTracker
+  id: JobSeniorEnlistedAdvisor
+
+# marine
+- type: playTimeTracker
+  id: JobRifleman
+
+- type: playTimeTracker
+  id: JobSquadLeader
+
+- type: playTimeTracker
+  id: JobFireteamLeader
+
+- type: playTimeTracker
+  id: JobWeaponsSpecialist
+
+- type: playTimeTracker
+  id: JobSmartgunner
+
+- type: playTimeTracker
+  id: JobHospitalCorpsman
+
+- type: playTimeTracker
+  id: JobCombatTech
+
+- type: playTimeTracker
+  id: JobStaffOfficer

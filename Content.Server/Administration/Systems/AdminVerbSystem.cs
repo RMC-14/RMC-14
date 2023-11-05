@@ -2,33 +2,32 @@ using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.UI;
-using Content.Server.Chemistry.Components.SolutionManager;
-using Content.Server.Chemistry.EntitySystems;
 using Content.Server.Disposal.Tube;
 using Content.Server.Disposal.Tube.Components;
 using Content.Server.EUI;
 using Content.Server.Ghost.Roles;
 using Content.Server.Mind;
 using Content.Server.Mind.Commands;
-using Content.Server.Mind.Components;
-using Content.Server.Players;
 using Content.Server.Prayer;
 using Content.Server.Xenoarchaeology.XenoArtifacts;
 using Content.Server.Xenoarchaeology.XenoArtifacts.Triggers.Components;
 using Content.Shared.Administration;
+using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Configurable;
 using Content.Shared.Database;
+using Content.Shared.Examine;
 using Content.Shared.GameTicking;
-using Content.Shared.Interaction.Helpers;
 using Content.Shared.Inventory;
+using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Server.Console;
 using Robust.Server.GameObjects;
-using Robust.Server.Player;
 using Robust.Shared.Console;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Toolshed;
@@ -48,6 +47,7 @@ namespace Content.Server.Administration.Systems
         [Dependency] private readonly IGameTiming _gameTiming = default!;
         [Dependency] private readonly IMapManager _mapManager = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+        [Dependency] private readonly AdminSystem _adminSystem = default!;
         [Dependency] private readonly DisposalTubeSystem _disposalTubes = default!;
         [Dependency] private readonly EuiManager _euiManager = default!;
         [Dependency] private readonly GhostRoleSystem _ghostRoleSystem = default!;
@@ -58,8 +58,9 @@ namespace Content.Server.Administration.Systems
         [Dependency] private readonly MindSystem _mindSystem = default!;
         [Dependency] private readonly ToolshedManager _toolshed = default!;
         [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
+        [Dependency] private readonly SharedPopupSystem _popup = default!;
 
-        private readonly Dictionary<IPlayerSession, EditSolutionsEui> _openSolutionUis = new();
+        private readonly Dictionary<ICommonSession, EditSolutionsEui> _openSolutionUis = new();
 
         public override void Initialize()
         {
@@ -139,6 +140,21 @@ namespace Content.Server.Administration.Systems
                                 EnsureComp<AdminFrozenComponent>(args.Target);
                         },
                         Impact = LogImpact.Medium,
+                    });
+
+                    // Erase
+                    args.Verbs.Add(new Verb
+                    {
+                        Text = Loc.GetString("admin-verbs-erase"),
+                        Message = Loc.GetString("admin-verbs-erase-description"),
+                        Category = VerbCategory.Admin,
+                        Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/delete_transparent.svg.192dpi.png")),
+                        Act = () =>
+                        {
+                            _adminSystem.Erase(targetActor.PlayerSession);
+                        },
+                        Impact = LogImpact.Extreme,
+                        ConfirmationPopup = true
                     });
                 }
 
@@ -260,13 +276,7 @@ namespace Content.Server.Administration.Systems
                     // TODO VERB ICON control mob icon
                     Act = () =>
                     {
-                        MakeSentientCommand.MakeSentient(args.Target, EntityManager);
-
-                        var mind = player.ContentData()?.Mind;
-                        if (mind == null)
-                            return;
-
-                        _mindSystem.TransferTo(mind, args.Target, ghostCheckOverride: true);
+                        _mindSystem.ControlMob(args.User, args.Target);
                     },
                     Impact = LogImpact.High,
                     ConfirmationPopup = true
@@ -338,10 +348,12 @@ namespace Content.Server.Administration.Systems
                     Icon = new SpriteSpecifier.Texture(new ("/Textures/Interface/VerbIcons/information.svg.192dpi.png")),
                     Act = () =>
                     {
-                        var message = args.User.InRangeUnOccluded(args.Target)
+
+                        var message = ExamineSystemShared.InRangeUnOccluded(args.User, args.Target)
                             ? Loc.GetString("in-range-unoccluded-verb-on-activate-not-occluded")
                             : Loc.GetString("in-range-unoccluded-verb-on-activate-occluded");
-                        args.Target.PopupMessage(args.User, message);
+
+                        _popup.PopupEntity(message, args.Target, args.User);
                     }
                 };
                 args.Verbs.Add(verb);
@@ -414,7 +426,7 @@ namespace Content.Server.Administration.Systems
             }
         }
 
-        public void OpenEditSolutionsEui(IPlayerSession session, EntityUid uid)
+        public void OpenEditSolutionsEui(ICommonSession session, EntityUid uid)
         {
             if (session.AttachedEntity == null)
                 return;
@@ -427,7 +439,7 @@ namespace Content.Server.Administration.Systems
             eui.StateDirty();
         }
 
-        public void OnEditSolutionsEuiClosed(IPlayerSession session)
+        public void OnEditSolutionsEuiClosed(ICommonSession session)
         {
             _openSolutionUis.Remove(session, out var eui);
         }

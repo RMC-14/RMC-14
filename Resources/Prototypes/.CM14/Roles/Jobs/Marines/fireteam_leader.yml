@@ -1,0 +1,49 @@
+- type: job
+  id: FireteamLeader
+  parent: JobBaseCM
+  name: job-name-fireteam-leader
+  description: job-description-fireteam-leader
+  playTimeTracker: JobFireteamLeader
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 28800 #8 hrs
+  startingGear: FireteamLeaderGear
+  icon: "JobIconSecurityOfficer"
+  supervisors: job-supervisors-squad-leader
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+
+- type: startingGear
+  id: FireteamLeaderGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSec
+    back: ClothingBackpackSecurityFilled
+    shoes: ClothingShoesBootsCombatFilled
+    eyes: ClothingEyesGlassesSecurity
+    head: ClothingHeadHelmetBasic
+    outerClothing: ClothingOuterArmorBasic
+    id: SecurityPDA
+    ears: ClothingHeadsetSecurity
+    belt: ClothingBeltSecurityFilled
+    pocket1: WeaponPistolMk58Nonlethal
+  innerClothingSkirt: ClothingUniformJumpskirtSec
+  satchel: ClothingBackpackSatchelSecurityFilled
+  duffelbag: ClothingBackpackDuffelSecurityFilled
+
+- type: entity
+  id: SpawnPointFireteamLeader
+  parent: CMSpawnPointJobBase
+  name: fireteam leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: FireteamLeader
+  - type: Sprite
+    layers:
+    - state: green
+    - state: fireteam_leader

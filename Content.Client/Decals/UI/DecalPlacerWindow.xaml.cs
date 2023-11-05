@@ -7,6 +7,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Client.Utility;
+using Robust.Shared.Prototypes;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 
 namespace Content.Client.Decals.UI;
@@ -14,6 +15,8 @@ namespace Content.Client.Decals.UI;
 [GenerateTypedNameReferences]
 public sealed partial class DecalPlacerWindow : DefaultWindow
 {
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+
     private readonly DecalPlacementSystem _decalPlacementSystem;
 
     public FloatSpinBox RotationSpinBox;
@@ -29,9 +32,12 @@ public sealed partial class DecalPlacerWindow : DefaultWindow
     private bool _cleanable;
     private int _zIndex;
 
+    private bool _auto;
+
     public DecalPlacerWindow()
     {
         RobustXamlLoader.Load(this);
+        IoCManager.InjectDependencies(this);
 
         _decalPlacementSystem = EntitySystem.Get<DecalPlacementSystem>();
 
@@ -77,6 +83,12 @@ public sealed partial class DecalPlacerWindow : DefaultWindow
             _rotation = args.Value;
             UpdateDecalPlacementInfo();
         };
+        EnableAuto.OnToggled += args =>
+        {
+            _auto = args.Pressed;
+            if (_selected != null)
+                SelectDecal(_selected);
+        };
         EnableColor.OnToggled += args =>
         {
             _useColor = args.Pressed;
@@ -98,6 +110,8 @@ public sealed partial class DecalPlacerWindow : DefaultWindow
             _zIndex = args.Value;
             UpdateDecalPlacementInfo();
         };
+
+        ShowNonCMCheckbox.OnPressed += _ => Populate(_prototype.EnumeratePrototypes<DecalPrototype>());
     }
 
     private void OnColorPicked(Color color)
@@ -159,9 +173,28 @@ public sealed partial class DecalPlacerWindow : DefaultWindow
 
     private void ButtonOnPressed(ButtonEventArgs obj)
     {
-        if (obj.Button.Name == null) return;
+        if (obj.Button.Name == null)
+            return;
 
-        _selected = obj.Button.Name;
+        SelectDecal(obj.Button.Name);
+    }
+
+    private void SelectDecal(string decalId)
+    {
+        if (!_prototype.TryIndex<DecalPrototype>(decalId, out var decal))
+            return;
+
+        _selected = decalId;
+
+        if (_auto)
+        {
+            EnableCleanable.Pressed = decal.DefaultCleanable;
+            EnableColor.Pressed = decal.DefaultCustomColor;
+            EnableSnap.Pressed = decal.DefaultSnap;
+            _cleanable = decal.DefaultCleanable;
+            _useColor = decal.DefaultCustomColor;
+            _snap = decal.DefaultSnap;
+        }
         UpdateDecalPlacementInfo();
         RefreshList();
     }
@@ -169,8 +202,13 @@ public sealed partial class DecalPlacerWindow : DefaultWindow
     public void Populate(IEnumerable<DecalPrototype> prototypes)
     {
         _decals = new SortedDictionary<string, Texture>();
+
+        var showNonCM = ShowNonCMCheckbox.Pressed;
         foreach (var decalPrototype in prototypes)
         {
+            if (!showNonCM && !decalPrototype.IsCM)
+                continue;
+
             if (decalPrototype.ShowMenu)
                 _decals.Add(decalPrototype.ID, decalPrototype.Sprite.Frame0());
         }

@@ -14,9 +14,9 @@ namespace Content.Shared.GameTicking
         // But this is easier, and at least it isn't hardcoded.
         //TODO: Move these, they really belong in StationJobsSystem or a cvar.
         [ValidatePrototypeId<JobPrototype>]
-        public const string FallbackOverflowJob = "Passenger";
+        public const string FallbackOverflowJob = "Rifleman";
 
-        public const string FallbackOverflowJobName = "job-name-passenger";
+        public const string FallbackOverflowJobName = "job-name-rifleman";
 
         // TODO network.
         // Probably most useful for replays, round end info, and probably things like lobby menus.
@@ -124,10 +124,10 @@ namespace Content.Shared.GameTicking
         /// <summary>
         /// The Status of the Player in the lobby (ready, observer, ...)
         /// </summary>
-        public Dictionary<EntityUid, Dictionary<string, uint?>> JobsAvailableByStation { get; }
-        public Dictionary<EntityUid, string> StationNames { get; }
+        public Dictionary<NetEntity, Dictionary<string, uint?>> JobsAvailableByStation { get; }
+        public Dictionary<NetEntity, string> StationNames { get; }
 
-        public TickerJobsAvailableEvent(Dictionary<EntityUid, string> stationNames, Dictionary<EntityUid, Dictionary<string, uint?>> jobsAvailableByStation)
+        public TickerJobsAvailableEvent(Dictionary<NetEntity, string> stationNames, Dictionary<NetEntity, Dictionary<string, uint?>> jobsAvailableByStation)
         {
             StationNames = stationNames;
             JobsAvailableByStation = jobsAvailableByStation;
@@ -143,7 +143,7 @@ namespace Content.Shared.GameTicking
             public string PlayerOOCName;
             public string? PlayerICName;
             public string Role;
-            public EntityUid? PlayerEntityUid;
+            public NetEntity? PlayerNetEntity;
             public bool Antag;
             public bool Observer;
             public bool Connected;

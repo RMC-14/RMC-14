@@ -1,0 +1,7 @@
+﻿- type: entity
+  parent: [MobHuman, CMEntityBase]
+  id: godhelpme
+  name: test dummy
+  components:
+  - type: Loadout
+    prototypes: [ StaffOfficerGear ]
