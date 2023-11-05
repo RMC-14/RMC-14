@@ -8,10 +8,10 @@
   },
   "states": [
     {
-      "name": "Tier 1"
+      "name": "tier_1"
     },
     {
-      "name": "Defender Icons"
+      "name": "defender_icons"
     },
     {
       "name": "defender_walk_3",
@@ -86,7 +86,7 @@
       "directions": 4
     },
     {
-      "name": "Drone Icons"
+      "name": "drone_icons"
     },
     {
       "name": "drone_walk_3",
@@ -129,7 +129,7 @@
       "name": "drone_downed_0"
     },
     {
-      "name": "Runner Icons"
+      "name": "runner_icons"
     },
     {
       "name": "runner_walk_3",
@@ -172,7 +172,7 @@
       "name": "runner_downed_0"
     },
     {
-      "name": "Sentinel Icons"
+      "name": "sentinel_icons"
     },
     {
       "name": "sentinel_walk_3",
@@ -215,10 +215,10 @@
       "name": "sentinel_downed_0"
     },
     {
-      "name": "Tier 2"
+      "name": "tier_2"
     },
     {
-      "name": "Burrower Icons"
+      "name": "burrower_icons"
     },
     {
       "name": "burrower_walk_3",
@@ -261,7 +261,7 @@
       "name": "burrower_downed_0"
     },
     {
-      "name": "Carrier Icons"
+      "name": "carrier_icons"
     },
     {
       "name": "carrier_walk_3",
@@ -304,7 +304,7 @@
       "name": "carrier_downed_0"
     },
     {
-      "name": "Hivelord Icons"
+      "name": "hivelord_icons"
     },
     {
       "name": "hivelord_walk_3",
@@ -347,7 +347,7 @@
       "name": "hivelord_downed_0"
     },
     {
-      "name": "Lurker Icons"
+      "name": "lurker_icons"
     },
     {
       "name": "lurker_walk_3",
@@ -390,7 +390,7 @@
       "name": "lurker_downed_0"
     },
     {
-      "name": "Spitter Icons"
+      "name": "spitter_icons"
     },
     {
       "name": "spitter_walk_3",
@@ -433,7 +433,7 @@
       "name": "spitter_downed_0"
     },
     {
-      "name": "Warrior Icons"
+      "name": "warrior_icons"
     },
     {
       "name": "warrior_walk_3",
@@ -476,10 +476,10 @@
       "name": "warrior_downed_0"
     },
     {
-      "name": "Tier 3"
+      "name": "tier_3"
     },
     {
-      "name": "Boiler Icons"
+      "name": "boiler_icons"
     },
     {
       "name": "boiler_walk_3",
@@ -522,7 +522,7 @@
       "name": "boiler_downed_0"
     },
     {
-      "name": "Crusher Icons"
+      "name": "crusher_icons"
     },
     {
       "name": "crusher_walk_3",
@@ -565,7 +565,7 @@
       "name": "crusher_downed_0"
     },
     {
-      "name": "Praetorian Icons"
+      "name": "praetorian_icons"
     },
     {
       "name": "praetorian_walk_3",
@@ -608,7 +608,7 @@
       "name": "praetorian_downed_0"
     },
     {
-      "name": "Ravager Icons"
+      "name": "ravager_icons"
     },
     {
       "name": "ravager_walk_3",
@@ -651,10 +651,10 @@
       "name": "ravager_downed_0"
     },
     {
-      "name": "Tier 4"
+      "name": "tier_4"
     },
     {
-      "name": "Queen Icons"
+      "name": "queen_icons"
     },
     {
       "name": "queen_walk_3",
