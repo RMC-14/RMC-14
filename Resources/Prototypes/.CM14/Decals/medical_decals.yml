@@ -167,14 +167,6 @@
     state: triagedecalleftup
 
 - type: decal
-  id: triagedecalleftup
-  tags: ["station", "markings"]
-  defaultCustomColor: true
-  sprite:
-    sprite: Decals/medical_decals.rsi
-    state: triagedecalleftup
-
-- type: decal
   id: triagedecalrightdown
   tags: ["station", "markings"]
   defaultCustomColor: true
