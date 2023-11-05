@@ -1,0 +1,26 @@
+﻿- type: entity # todo cm14 make base cm14 xeno, this is just a test mob
+  parent: MobXenoQueen
+  id: CMXenoQueen
+  name: Queen
+  description: The most vital member of the hive.
+  components:
+    - type: Sprite
+      drawdepth: Mobs
+      sprite: .CM14/Mobs/Xenos/queen.rsi
+      offset: 0,0.4
+      layers:
+      - map: [ "enum.DamageStateVisualLayers.Base" ]
+        state: alive
+    - type: MobThresholds
+      thresholds:
+        0: Alive
+        200: Critical
+        300: Dead
+    - type: DamageStateVisuals
+      states:
+        Alive:
+          Base: alive
+        Critical:
+          Base: crit
+        Dead:
+          Base: dead
