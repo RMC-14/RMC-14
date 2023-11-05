@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: Clothing
+  parent: [Clothing, CMEntityBase]
   id: CMIDCardStandard
   name: identification card
   description: A card necessary to access various areas aboard the station.
