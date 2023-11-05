@@ -1,6 +1,6 @@
 - type: entity
   parent: MarkerBase
-  id: RandomPosterAny
+  id: CMRandomPosterAny
   name: random poster spawner
   components:
   - type: Sprite
@@ -11,45 +11,48 @@
   - type: RandomSpawner
     offset: 0
     prototypes:
-      - poster1
-      - poster2
-      - poster3
-      - poster4
-      - poster5
-      - poster6
-      - poster7
-      - poster8
-      - poster9
-      - poster10
-      - poster11
-      - poster12
-      - poster13
-      - poster14
-      - poster15
-      - poster16
-      - poster17
-      - poster18
-      - poster19
-      - poster20
-      - poster21
-      - poster23
-      - poster24
-      - poster25
-      - poster26
-      - poster27
-      - poster28
-      - poster29
-      - poster30
-      - poster31
-      - poster32
-      - poster33
-      - poster34
-      - poster35
-      - poster36
-      - poster37
-      - poster38
-      - poster39
-      - poster41
+      - CMPosterBroken
+      - CMPosterTheFuture
+      - CMPosterUnicorn
+      - CMPosterRocker1
+      - CMPosterPresident
+      - CMPosterBeth
+      - CMPosterArt1
+      - CMPostEat
+      - CMPosterArious
+      - CMPosterSeegson
+      - CMPosterKoorlander
+      - CMPosterWorkingJoe
+      - CMPosterMissJanuary
+      - CMPosterF100
+      - CMPosterRememberIo
+      - CMPosterPulseRifle
+      - CMPosterMissJuly
+      - CMPosterMissApril
+      - CMPosterWY
+      - CMPosterSuspicious
+      - CMPosterTheo
+      - CMPosterGroves
+      - CMPosterSouto
+      - CMPosterArt2
+      - CMPosterArt3
+      - CMPosterRocker2
+      - CMPosterJoan
+      - CMPosterSafetyGuidance
+      - CMPosterSafetyGoggles1
+      - CMPosterMissFebruary
+      - CMPosterProperLifting
+      - CMPosterSafetyGoggles2
+      - CMPosterMrUniverse1
+      - CMPosterMrUniverse2
+      - CMPosterMrUniverse3
+      - CMPosterWalkman
+      - CMPosterTAB
+      - CMPosterPepsi
+      - CMPosterMTV
+      - CMPosterJimmy
+      - CMPosterVoteNo
+      - CMPosterFallingFalcons
     chance: 0.95
     rarePrototypes:
       - PosterBroken
