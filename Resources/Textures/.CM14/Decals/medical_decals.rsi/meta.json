@@ -8,81 +8,81 @@
   },
   "states": [
     {
-      "name": "cryomid"
+      "name": "cryo_mid"
     },
     {
-      "name": "cryotop"
+      "name": "cryo_top"
     },
     {
-      "name": "cryocell1decal"
+      "name": "cryo_cell_1"
     },
     {
-      "name": "cryocell2deval"
+      "name": "cryo_cell_2"
     },
     {
-      "name": "cryocell3decal"
+      "name": "cryo_cell_3"
     },
     {
-      "name": "cryocell4decal"
+      "name": "cryo_cell_4"
     },
     {
-      "name": "docdecal1"
+      "name": "doc_1"
     },
     {
-      "name": "docdecal4"
+      "name": "doc_2"
     },
     {
-      "name": "docdecal2"
+      "name": "doc_3"
     },
     {
-      "name": "docdecal3"
+      "name": "doc_4"
     },
     {
-      "name": "docstriping"
+      "name": "doc_striping"
     },
     {
-      "name": "docstripingdir",
+      "name": "doc_striping_dir",
       "directions": 4
     },
     {
-      "name": "triagedecal"
+      "name": "triage"
     },
     {
-      "name": "triagedecalbottom"
+      "name": "triage_bottom"
     },
     {
-      "name": "triagedecalleft"
+      "name": "triage_left"
     },
     {
-      "name": "triagedecaldir",
+      "name": "triage_dir",
       "directions": 4
     },
     {
-      "name": "triagedecaltop"
+      "name": "triage_top"
     },
     {
-      "name": "triagedecalleftdown"
+      "name": "triage_left_down"
     },
     {
-      "name": "triagedecaltopleft"
+      "name": "triage_top_left"
     },
     {
-      "name": "triagedecalbottomright"
+      "name": "triage_bottom_right"
     },
     {
-      "name": "triagedecalrightup"
+      "name": "triage_right_up"
     },
     {
-      "name": "triagedecalleftup"
+      "name": "triage_left_up"
     },
     {
-      "name": "triagedecalrightdown"
+      "name": "triage_right_down"
     },
     {
-      "name": "triagedecaltopright"
+      "name": "triage_top_right"
     },
     {
-      "name": "triagedecalbottomleft"
+      "name": "triage_bottom_left"
     }
   ]
 }
