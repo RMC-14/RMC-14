@@ -10,4 +10,5 @@
   - type: Clothing
     slots:
     - idcard
+    - neck
     sprite: .CM14/ClothingWorn/worn_id.rsi # todo cm14 need clothing sprite.
