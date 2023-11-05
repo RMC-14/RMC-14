@@ -23,10 +23,12 @@
       "directions": 4
     },
     {
-      "name": "equipped-NECK"
+      "name": "equipped-NECK",
+      "directions": 4
     },
     {
-      "name": "equipped-IDCARD"
+      "name": "equipped-IDCARD",
+      "directions": 4
     }
   ]
 }
