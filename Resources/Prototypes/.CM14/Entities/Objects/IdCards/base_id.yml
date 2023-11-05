@@ -2,7 +2,7 @@
   parent: [Clothing, CMEntityBase]
   id: CMIDCardStandardDogtag
   name: dogtags
-  description: contains information related to it's carrier, and grants access to the ship. # todo cm14 description
+  description: contains information related to it's carrier, and grants access to the ship.
   noSpawn: true
   components:
   - type: Sprite
