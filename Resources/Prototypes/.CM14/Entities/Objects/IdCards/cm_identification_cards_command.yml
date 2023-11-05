@@ -7,3 +7,7 @@
     state: dogtag # todo cm14 command staff probably don't use dogtags.
   - type: PresetIdCard
     job: StaffOfficer
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: .CM14/ClothingWorn/worn_id.rsi # todo cm14 need clothing sprite.

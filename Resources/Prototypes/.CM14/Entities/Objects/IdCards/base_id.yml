@@ -12,7 +12,7 @@
     slots:
     - neck
     - idcard
-    sprite: Objects/Misc/id_cards.rsi # todo cm14 need clothing sprite.
+    sprite: .CM14/ClothingWorn/worn_id.rsi # todo cm14 need clothing sprite.
   - type: Item
     size: Tiny
     heldPrefix: default
