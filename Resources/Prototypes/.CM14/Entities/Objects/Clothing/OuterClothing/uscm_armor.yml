@@ -1,17 +1,17 @@
 ﻿- type: entity
   parent: ClothingOuterArmorBasic
-  id: ClothingOuterArmorMarineM3
+  id: ArmorMarineM3
   name: M3 Pattern Personal Armor
   description: Standard Issue Armor used by USCM. Provides modest protection from bullet and melee attacks. It also has a shoulder-mounted directional flashlight for night time combat and a HUD to see their Marine roles. An all rounder in terms of protection with an additional 3 slots in the armor.
   components:
     - type: Sprite
-      sprite: CM14/Clothing/OuterClothing/Armor/M3armor.rsi
+      sprite: .CM14/Objects/Clothing/OuterClothing/Armor/M3armor.rsi
       layers:
         - state: icon
         - state: light
           visible: false
     - type: Clothing
-      sprite: CM14/Clothing/OuterClothing/Armor/M3armor.rsi
+      sprite: .CM14/Objects/Clothing/OuterClothing/Armor/M3armor.rsi
     - type: Armor
       modifiers:
         coefficients:
@@ -62,7 +62,8 @@
       autoRecharge: true
       autoRechargeRate: 2 #recharge of 2 makes total drain 1w / s so max charge is 1:1 with time. Time to fully charge should be 5 minutes. Having recharge gives light an extended flicker period which gives you some warning to return to light area.
     - type: Storage
-      capacity: 10
+      maxItemSize: Small
+      maxTotalWeight: 10
     - type: ContainerContainer
       containers:
         storagebase: !type:Container
