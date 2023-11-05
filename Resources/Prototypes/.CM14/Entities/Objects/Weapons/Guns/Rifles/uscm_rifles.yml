@@ -1,0 +1,63 @@
+﻿- type: entity
+  name: M41A pulse rifle
+  parent: BaseWeaponRifle
+  id: WeaponRifleM41A
+  description: This is the standard issue pulse rifle used by the Colonial Marines. A reliable, robust, and overall effective standard issue weapon, the M41A must be held in two hands to accurately fire.
+  components:
+    - type: Sprite
+      sprite: .CM14/Objects/Weapons/Guns/Rifles/m41a.rsi
+      layers:
+        - state: base
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-0
+          map: ["enum.GunVisualLayers.Mag"]
+    - type: Clothing
+      sprite: .CM14/Objects/Weapons/Guns/Rifles/m41a.rsi
+      quickEquip: false
+      slots:
+        - Back
+        - suitStorage
+    - type: Wieldable
+    - type: Gun
+      minAngle: 30
+      maxAngle: 60
+      angleIncrease: 10
+      angleDecay: 16
+      fireRate: 16
+      selectedMode: Burst
+      availableModes:
+        - Burst
+      soundGunshot:
+        path: /Audio/Weapons/Guns/Gunshots/m41.ogg
+    - type: GunWieldBonus
+      minAngle: -25
+      maxAngle: -50
+    - type: ItemSlots
+      slots:
+        gun_magazine:
+          name: Magazine
+          startingItem: MagazineRifle
+          insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+          ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+          priority: 2
+          whitelist:
+            tags:
+              - MagazineRifle
+        gun_chamber:
+          name: Chamber
+          startingItem: CartridgeRifle
+          priority: 1
+          whitelist:
+            tags:
+              - CartridgeRifle
+    - type: ContainerContainer
+      containers:
+        gun_magazine: !type:ContainerSlot
+        gun_chamber: !type:ContainerSlot
+    - type: MagazineVisuals
+      magState: mag
+      steps: 1
+      zeroVisible: true
+    - type: Appearance
+    - type: ChamberMagazineAmmoProvider
+      autoEject: true
