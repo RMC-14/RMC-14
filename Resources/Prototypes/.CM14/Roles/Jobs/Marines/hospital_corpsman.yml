@@ -25,7 +25,7 @@
 # Remove this later
 - type: entity
   noSpawn: true
-  parent: ClothingBackpackBrigmedic
+  parent: [ClothingBackpackBrigmedic, CMEntityBase]
   id: ClothingBackpackBrigmedicFilled
   components:
   - type: StorageFill
@@ -52,7 +52,7 @@
 
 - type: entity
   name: survival box
-  parent: BoxCardboard
+  parent: [BoxCardboard, CMEntityBase]
   id: BoxSurvivalHospitalCorpsman
   description: It's a box with basic internals inside.
   suffix: MedSec

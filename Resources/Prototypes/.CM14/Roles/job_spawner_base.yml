@@ -1,7 +1,7 @@
 ﻿# Per job spawns can be found within their roles/jobs/department/role.yml
 - type: entity
   id: CMSpawnPointJobBase
-  parent: MarkerBase
+  parent: [MarkerBase, CMEntityBase]
   abstract: true
   suffix: Job Spawn
   description: A CM14 job spawner. Used for roundstart and late joins.
