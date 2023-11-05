@@ -6,7 +6,7 @@
   noSpawn: true
   components:
   - type: Sprite
-    sprite: .CM14/Objects/CMIDs/cm_id_cards.rsi
+    sprite: .CM14/Objects/CMIDs/dogtags.rsi
     state: dogtag
   - type: Clothing
     slots:
