@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: MobHuman
+  parent: [MobHuman, CMEntityBase]
   id: godhelpme
   name: test dummy
   components:

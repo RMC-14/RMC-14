@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3930ec0698c7acdda76e24cd226ed5a4e1e24d0d/icons/effects/medical_decals.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "cryo_mid"
+    },
+    {
+      "name": "cryo_top"
+    },
+    {
+      "name": "cryo_cell_1"
+    },
+    {
+      "name": "cryo_cell_2"
+    },
+    {
+      "name": "cryo_cell_3"
+    },
+    {
+      "name": "cryo_cell_4"
+    },
+    {
+      "name": "doc_1"
+    },
+    {
+      "name": "doc_2"
+    },
+    {
+      "name": "doc_3"
+    },
+    {
+      "name": "doc_4"
+    },
+    {
+      "name": "doc_striping"
+    },
+    {
+      "name": "doc_striping_dir",
+      "directions": 4
+    },
+    {
+      "name": "triage"
+    },
+    {
+      "name": "triage_bottom"
+    },
+    {
+      "name": "triage_left"
+    },
+    {
+      "name": "triage_dir",
+      "directions": 4
+    },
+    {
+      "name": "triage_top"
+    },
+    {
+      "name": "triage_left_down"
+    },
+    {
+      "name": "triage_top_left"
+    },
+    {
+      "name": "triage_bottom_right"
+    },
+    {
+      "name": "triage_right_up"
+    },
+    {
+      "name": "triage_left_up"
+    },
+    {
+      "name": "triage_right_down"
+    },
+    {
+      "name": "triage_top_right"
+    },
+    {
+      "name": "triage_bottom_left"
+    }
+  ]
+}

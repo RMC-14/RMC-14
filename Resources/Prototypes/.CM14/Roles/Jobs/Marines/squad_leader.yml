@@ -38,3 +38,15 @@
   innerClothingSkirt: ClothingUniformJumpskirtSec
   satchel: ClothingBackpackSatchelSecurityFilled
   duffelbag: ClothingBackpackDuffelSecurityFilled
+
+- type: entity
+  id: SpawnPointSquadLeader
+  parent: CMSpawnPointJobBase
+  name: squad leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: SquadLeader
+  - type: Sprite
+    layers:
+    - state: green
+    - state: squad_leader

@@ -35,3 +35,15 @@
   innerClothingSkirt: ClothingUniformJumpskirtSec
   satchel: ClothingBackpackSatchelSecurityFilled
   duffelbag: ClothingBackpackDuffelSecurityFilled
+
+- type: entity
+  id: SpawnPointCombatTech
+  parent: CMSpawnPointJobBase
+  name: combat tech spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CombatTech
+  - type: Sprite
+    layers:
+    - state: green
+    - state: combat_tech
