@@ -6,7 +6,7 @@
   noSpawn: true
   components:
   - type: Sprite
-    sprite: .CM14/Objects/CMIDs/cm_id_cards.rsi
+    sprite: .CM14/Objects/CMIDs/dogtags.rsi
     state: dogtag
   - type: Clothing
     slots:
@@ -18,6 +18,8 @@
     heldPrefix: default
   - type: Access # TODO CM14 make neck slot work
   - type: IdCard
+    nameLocId: cm-access-id-card-component-owner-name-job-title-text
+    fullNameLocId: cm-access-id-card-component-owner-full-name-job-title-text
   - type: StationRecordKeyStorage
   - type: Tag
     tags:
