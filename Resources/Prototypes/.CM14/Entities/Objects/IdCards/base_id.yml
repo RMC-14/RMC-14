@@ -1,4 +1,5 @@
-﻿- type: entity
+﻿# dogtag base
+- type: entity
   parent: [Clothing, CMEntityBase]
   id: CMIDCardStandardDogtag
   name: dogtags
@@ -20,6 +21,33 @@
   - type: IdCard
     nameLocId: cm-access-id-card-component-owner-name-job-title-text
     fullNameLocId: cm-access-id-card-component-owner-full-name-job-title-text
+  - type: StationRecordKeyStorage
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+
+# general id bases
+- type: entity
+  parent: [Clothing, CMEntityBase]
+  id: CMIDCardBase
+  name: identification holo-badge
+  description: A slice of encoded compressed fiber glass. Used for identification and access control.
+  noSpawn: false # todo
+  components:
+  - type: Sprite
+    sprite: .CM14/Objects/CMIDs/id.rsi
+    state: plain
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: .CM14/Objects/CMIDs/id.rsi
+  - type: Item
+    size: Tiny
+    heldPrefix: default
+  - type: Access
+  - type: IdCard
+    nameLocId: "ID" #todo cm14 translation files
+    fullNameLocId: "ID"
   - type: StationRecordKeyStorage
   - type: Tag
     tags:
