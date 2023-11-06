@@ -40,7 +40,7 @@
     eyes: ClothingEyesGlassesSunglasses
     gloves: ClothingHandsGlovesCaptain
     outerClothing: ClothingOuterArmorCaptainCarapace
-    id: CaptainPDA
+    id: SeniorEnlistedAdvisorIDCard
     ears: ClothingHeadsetAltCommand
   innerClothingSkirt: ClothingUniformJumpskirtCaptain
   satchel: ClothingBackpackSatchelCaptainFilled
