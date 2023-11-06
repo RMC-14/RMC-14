@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/02ee6571eb4a9eef93237bf4725b59331d2fc226/icons/mob/xenos/drone_strain_overlays.dmi",
+  "size": {
+    "x": 48,
+    "y": 48
+  },
+  "states": [
+    {
+      "name": "gardener_drone_walking",
+      "directions": 4
+    },
+    {
+      "name": "gardener_drone_running",
+      "directions": 4
+    },
+    {
+      "name": "gardener_drone_sleeping"
+    },
+    {
+      "name": "gardener_drone_knocked_down"
+    },
+    {
+      "name": "gardener_drone_dead"
+    },
+    {
+      "name": "gardener_drone_walking_spent",
+      "directions": 4
+    },
+    {
+      "name": "gardener_drone_running_spent",
+      "directions": 4
+    },
+    {
+      "name": "gardener_drone_sleeping_spent"
+    },
+    {
+      "name": "gardener_drone_knocked_down_spent"
+    },
+    {
+      "name": "gardener_drone_dead_spent"
+    },
+    {
+      "name": "healer_drone_walking",
+      "directions": 4
+    },
+    {
+      "name": "healer_drone_running",
+      "directions": 4
+    },
+    {
+      "name": "healer_drone_sleeping"
+    },
+    {
+      "name": "healer_drone_knocked_down",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "healer_drone_dead"
+    }
+  ]
+}
