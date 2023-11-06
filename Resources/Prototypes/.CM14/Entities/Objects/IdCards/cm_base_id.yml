@@ -13,7 +13,8 @@
     slots:
     - neck
     - idcard
-    sprite: .CM14/ClothingWorn/worn_id.rsi
+    sprite: .CM14/Objects/CMIDs/dogtags.rsi
+  - type: IdCard
     nameLocId: cm-access-dogtags-component-owner-name-job-title-text
     fullNameLocId: cm-access-dogtags-component-owner-full-name-job-title-text
 
