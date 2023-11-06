@@ -31,7 +31,7 @@
     eyes: ClothingEyesGlassesSecurity
     head: ClothingHeadHelmetBasic
     outerClothing: ClothingOuterArmorBasic
-    id: SecurityPDA
+    id: CMIDCardStandardDogtag
     ears: ClothingHeadsetSecurity
     belt: ClothingBeltSecurityFilled
     pocket1: WeaponPistolMk58Nonlethal
