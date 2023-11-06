@@ -8,7 +8,7 @@
   },
   "states": [
     {
-      "name": "data"
+      "name": "plain"
     },
     {
       "name": "id"
@@ -29,16 +29,16 @@
       "name": "provost"
     },
     {
-      "name": "clearance"
+      "name": "corporate_clearance"
     },
     {
-      "name": "cl"
+      "name": "corporate_liaison"
     },
     {
       "name": "pmc"
     },
     {
-      "name": "ds"
+      "name": "death_squad"
     },
     {
       "name": "lanyard"
@@ -47,34 +47,13 @@
       "name": "pizza"
     },
     {
-      "name": "centcom_old"
-    },
-    {
-      "name": "fingerprint0"
-    },
-    {
-      "name": "fingerprint1"
-    },
-    {
-      "name": "emag"
-    },
-    {
-      "name": "centcom"
-    },
-    {
-      "name": "guest"
-    },
-    {
-      "name": "guest_invalid"
-    },
-    {
       "name": "visa"
     },
     {
-      "name": "cmbdep"
+      "name": "cmb_deputy"
     },
     {
-      "name": "cmbmar"
+      "name": "cmb_marshal"
     }
   ]
 }
