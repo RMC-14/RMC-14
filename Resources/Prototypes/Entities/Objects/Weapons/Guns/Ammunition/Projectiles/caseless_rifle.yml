@@ -30,3 +30,14 @@
     damage:
       types:
         Blunt: 3
+
+- type: entity
+  id: BulletCaseless10x20mm
+  name: bullet (10x20mm)
+  parent: BaseBullet
+  noSpawn: true
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 34

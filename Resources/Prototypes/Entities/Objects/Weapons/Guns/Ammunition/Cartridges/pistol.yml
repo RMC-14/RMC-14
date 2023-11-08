@@ -51,3 +51,11 @@
   components:
   - type: CartridgeAmmo
     proto: BulletPistolIncendiary
+
+- type: entity
+  id: CartridgePistol9mm
+  name: cartridge (9mm)
+  parent: BaseCartridgePistol
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPistol9mm

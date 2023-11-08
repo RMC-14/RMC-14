@@ -42,3 +42,14 @@
       types:
         Blunt: 2
         Heat: 14
+
+- type: entity
+  id: BulletPistol9mm
+  name: bullet (9mm)
+  parent: BaseBullet
+  noSpawn: true
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 41
