@@ -1,5 +1,5 @@
 ﻿using Robust.Shared.GameStates;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Roles.Jobs;
 
@@ -9,6 +9,6 @@ namespace Content.Shared.Roles.Jobs;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class JobComponent : Component
 {
-    [DataField("prototype", required: true, customTypeSerializer: typeof(PrototypeIdSerializer<JobPrototype>)), AutoNetworkedField]
-    public string? PrototypeId;
+    [DataField(required: true), AutoNetworkedField]
+    public ProtoId<JobPrototype>? Prototype;
 }
