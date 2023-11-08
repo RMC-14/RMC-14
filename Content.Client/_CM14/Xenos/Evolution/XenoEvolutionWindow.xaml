@@ -1,0 +1,9 @@
+﻿<cc:XenoEvolutionWindow
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client._CM14.Xenos.Evolution"
+    Title="{Loc cm-xeno-available-evolutions}"
+    MinSize="300 300">
+    <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
+        <BoxContainer Orientation="Vertical" Name="EvolutionsContainer" Access="Public" />
+    </ScrollContainer>
+</cc:XenoEvolutionWindow>
