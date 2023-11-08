@@ -8,7 +8,7 @@ using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
-namespace Content.Client.CM14.Marines;
+namespace Content.Client._CM14.Marines;
 
 public sealed class MarineOverlay : Overlay
 {
