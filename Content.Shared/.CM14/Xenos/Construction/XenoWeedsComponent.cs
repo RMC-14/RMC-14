@@ -1,4 +1,5 @@
 ﻿using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.CM14.Xenos.Construction;
 
@@ -14,4 +15,7 @@ public sealed partial class XenoWeedsComponent : Component
 
     [DataField]
     public EntityUid? Source;
+
+    [DataField]
+    public EntProtoId Spawns = "XenoWeedsEntity";
 }

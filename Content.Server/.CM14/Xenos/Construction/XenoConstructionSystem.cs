@@ -24,7 +24,7 @@ public sealed class XenoConstructionSystem : SharedXenoConstructionSystem
         if (args.NeighborFreeTiles.Count <= 0 ||
             !Exists(source) ||
             !TryComp(source, out TransformComponent? transform) ||
-            MetaData(ent).EntityPrototype?.ID is not { } prototype)
+            ent.Comp.Spawns.Id is not { } prototype)
         {
             RemCompDeferred<ActiveEdgeSpreaderComponent>(ent);
             return;
