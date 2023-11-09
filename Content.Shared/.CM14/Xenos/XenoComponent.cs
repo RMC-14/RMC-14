@@ -44,6 +44,10 @@ public sealed partial class XenoComponent : Component
 
     [DataField, AutoNetworkedField]
     [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan AcidDelay = TimeSpan.FromSeconds(5);
+
+    [DataField, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
     public string DevourContainerId = "cm_xeno_devour";
 
     [DataField, AutoNetworkedField]
