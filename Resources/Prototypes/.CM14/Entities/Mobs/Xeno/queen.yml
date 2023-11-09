@@ -1,0 +1,26 @@
+﻿- type: entity # TODO CM14 description
+  parent: CMXenoDeveloped
+  id: CMXenoQueen
+  name: Queen
+  description: The most vital member of the hive.
+  components:
+  - type: Sprite
+    sprite: .CM14/Mobs/Xenos/Queen/queen.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: Critical
+      300: Dead
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoPlantWeeds
+    - ActionXenoAcid
+    - ActionXenoRegurgitate
+    maxPlasma: 500 # TODO CM14
+    plasmaRegen: 25

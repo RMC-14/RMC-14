@@ -1,0 +1,68 @@
+﻿- type: entity # TODO CM14 description and sound
+  id: XenoWeedsEntity
+  name: alien weeds
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: XenoWeeds
+  - type: Clickable
+  - type: EdgeSpreader
+    id: XenoWeeds
+  - type: ActiveEdgeSpreader
+  - type: Sprite
+    sprite: .CM14/Structures/Xenos/xeno_weeds.rsi
+    drawdepth: FloorTiles
+    layers:
+    - state: weed0 # TODO smoothing
+  - type: RandomSprite
+    available:
+    - 0:
+        weed0: ""
+    - 0:
+        weed1: ""
+    - 0:
+        weed2: ""
+    - 0:
+        weed3: ""
+    - 0:
+        weed4: ""
+    - 0:
+        weed5: ""
+    - 0:
+        weed6: ""
+    - 0:
+        weed7: ""
+    - 0:
+        weed8: ""
+    - 0:
+        weed9: ""
+    - 0:
+        weed10: ""
+    - 0:
+        weed11: ""
+    - 0:
+        weed12: ""
+    - 0:
+        weed13: ""
+    - 0:
+        weed14: ""
+    - 0:
+        weed15: ""
+#  - type: SlowContacts # TODO CM14 slow down
+#    walkSpeedModifier: 0.5
+#    sprintSpeedModifier: 0.5
+#  - type: Physics
+#    bodyType: Static
+#  - type: FootstepModifier
+#    footstepSoundCollection:
+#      collection: FootstepWater
+#      params:
+#        volume: 8
+
+- type: edgeSpreader
+  id: XenoWeeds
+  updatesPerSecond: 3

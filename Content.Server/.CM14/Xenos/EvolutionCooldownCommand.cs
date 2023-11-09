@@ -2,6 +2,7 @@
 using Content.Server.Administration;
 using Content.Shared.Administration;
 using Content.Shared.CM14.Xenos;
+using Content.Shared.CM14.Xenos.Evolution;
 using Robust.Shared.Console;
 using Robust.Shared.Timing;
 
@@ -42,19 +43,29 @@ public sealed class EvolutionCooldownCommand : LocalizedCommands
             return;
         }
 
-        if (!_entities.EntityExists(xeno.EvolveAction))
+        var actions = _entities.System<ActionsSystem>();
+        var any = false;
+        foreach (var action in xeno.Actions.Values)
         {
-            shell.WriteError(Loc.GetString("cmd-evolutioncooldown-no-evolve-action", ("entity", entity)));
+            if (!_entities.HasComponent<XenoEvolveActionComponent>(action))
+                continue;
+
+            if (seconds == 0)
+            {
+                actions.ClearCooldown(action);
+            }
+            else
+            {
+                actions.SetCooldown(action, _timing.CurTime, _timing.CurTime + TimeSpan.FromSeconds(seconds));
+            }
+
+            any = true;
         }
 
-        var actions = _entities.System<ActionsSystem>();
-        if (seconds == 0)
+        if (!any)
         {
-            actions.ClearCooldown(xeno.EvolveAction);
-        }
-        else
-        {
-            actions.SetCooldown(xeno.EvolveAction, _timing.CurTime, _timing.CurTime + TimeSpan.FromSeconds(seconds));
+            shell.WriteError(Loc.GetString("cmd-evolutioncooldown-no-evolve-action", ("entity", entity)));
+            return;
         }
 
         shell.WriteLine(Loc.GetString("cmd-evolutioncooldown-set-cooldown", ("seconds", seconds)));
