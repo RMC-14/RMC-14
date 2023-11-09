@@ -8,13 +8,13 @@ namespace Content.Shared.CM14.Xenos.Acid;
 public sealed partial class XenoCorrosiveAcidDoAfterEvent : DoAfterEvent
 {
     [DataField]
-    public EntProtoId AcidId;
+    public EntProtoId AcidId = "XenoAcid";
 
     [DataField]
-    public int PlasmaCost;
+    public int PlasmaCost = 75;
 
     [DataField]
-    public TimeSpan Time;
+    public TimeSpan Time = TimeSpan.FromSeconds(30);
 
     public XenoCorrosiveAcidDoAfterEvent(XenoCorrosiveAcidEvent ev)
     {
