@@ -21,6 +21,11 @@ public sealed class XenoConstructionSystem : SharedXenoConstructionSystem
         var source = ent.Comp.IsSource ? ent.Owner : ent.Comp.Source;
 
         // TODO CM14 wall texture
+        // TODO CM14
+        // There is an edge case right now where existing weeds can block new weeds
+        // from expanding further. If this is the case then the weeds should reassign
+        // their source to this one if it is closer to them than their original source
+        // and only if it is still within range
         if (args.NeighborFreeTiles.Count <= 0 ||
             !Exists(source) ||
             !TryComp(source, out TransformComponent? transform) ||
