@@ -1,0 +1,23 @@
+﻿- type: entity # TODO CM14 description
+  parent: CMXenoDeveloped
+  id: CMXenoLesserDrone
+  name: Lesser Drone
+  components:
+  - type: Sprite
+    sprite: _CM14/Mobs/Xenos/Drone/drone.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      160: Dead
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoPlantWeeds # TODO CM14 only near other weeds for lesser drones
+    - ActionXenoAcid
+    - ActionXenoRegurgitate
+    maxPlasma: 300
+    plasmaRegen: 12

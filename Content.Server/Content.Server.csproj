@@ -29,8 +29,5 @@
     <Folder Include="Objectives\Interfaces\" />
     <Folder Include="Tools\Systems\" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include=".CM14\**" />
-  </ItemGroup>
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
 </Project>
