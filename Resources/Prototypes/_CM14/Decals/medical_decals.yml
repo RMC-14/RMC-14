@@ -4,7 +4,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: cryo_mid
 
 - type: decal
@@ -13,7 +13,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: cryo_top
 
 - type: decal
@@ -22,7 +22,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: cryo_cell_1
 
 - type: decal
@@ -31,7 +31,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: cryo_cell_2
 
 - type: decal
@@ -40,7 +40,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: cryo_cell_3
 
 - type: decal
@@ -49,7 +49,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: cryo_cell_4
 
 - type: decal
@@ -58,7 +58,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: doc_1
 
 - type: decal
@@ -67,7 +67,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: doc_2
 
 - type: decal
@@ -76,7 +76,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: doc_3
 
 - type: decal
@@ -85,7 +85,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: doc_4
 
 - type: decal
@@ -94,7 +94,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: doc_striping
 
 - type: decal
@@ -103,7 +103,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: doc_striping_dir
 
 - type: decal
@@ -112,7 +112,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: triage
 
 - type: decal
@@ -121,7 +121,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: triage_bottom
 
 - type: decal
@@ -130,7 +130,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: triage_dir
 
 - type: decal
@@ -139,7 +139,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: triage_dir
 
 - type: decal
@@ -148,7 +148,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: triage_top
 
 - type: decal
@@ -157,7 +157,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: triage_left_down
 
 - type: decal
@@ -166,7 +166,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: triage_top_left
 
 - type: decal
@@ -175,7 +175,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: triage_bottom_right
 
 - type: decal
@@ -184,7 +184,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: triage_right_up
 
 - type: decal
@@ -193,7 +193,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: triage_left_up
 
 - type: decal
@@ -202,7 +202,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: triage_right_down
 
 - type: decal
@@ -211,7 +211,7 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: triage_top_right
 
 - type: decal
@@ -220,5 +220,5 @@
   tags: ["station", "markings"]
   defaultCustomColor: true
   sprite:
-    sprite: .CM14/Decals/medical_decals.rsi
+    sprite: _CM14/Decals/medical_decals.rsi
     state: triage_bottom_left

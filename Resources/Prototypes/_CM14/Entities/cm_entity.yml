@@ -3,3 +3,10 @@
   abstract: true
   categories:
   - CMEntity
+
+- type: entity
+  id: CMCorrodable
+  parent: CMEntityBase
+  abstract: true
+  components:
+  - type: Corrodable

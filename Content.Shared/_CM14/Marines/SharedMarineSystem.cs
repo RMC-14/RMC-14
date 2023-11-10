@@ -1,7 +1,7 @@
-﻿using Content.Shared.CM14.Marines.Squads;
+﻿using Content.Shared._CM14.Marines.Squads;
 using Robust.Shared.Utility;
 
-namespace Content.Shared.CM14.Marines;
+namespace Content.Shared._CM14.Marines;
 
 public abstract class SharedMarineSystem : EntitySystem
 {

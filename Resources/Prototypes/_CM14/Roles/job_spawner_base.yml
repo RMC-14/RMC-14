@@ -9,4 +9,4 @@
   - type: SpawnPoint
     spawn_type: Job
   - type: Sprite
-    sprite: .CM14/Markers/cm_jobs.rsi
+    sprite: _CM14/Markers/cm_jobs.rsi

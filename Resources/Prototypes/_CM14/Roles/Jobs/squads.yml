@@ -6,7 +6,7 @@
   components:
   - type: SquadTeam
     background:
-      sprite: .CM14/Interface/cm_job_icons.rsi
+      sprite: _CM14/Interface/cm_job_icons.rsi
       state: hudsquad
 
 - type: entity

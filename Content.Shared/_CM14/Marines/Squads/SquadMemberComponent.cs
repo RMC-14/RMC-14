@@ -1,7 +1,7 @@
 ﻿using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
 
-namespace Content.Shared.CM14.Marines.Squads;
+namespace Content.Shared._CM14.Marines.Squads;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SquadSystem))]

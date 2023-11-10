@@ -1,0 +1,11 @@
+﻿- type: entity
+  id: ActionXenoRest
+  parent: ActionXenoBase
+  name: Rest # TODO CM14 description
+  components:
+  - type: InstantAction # TODO CM14 cooldown
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: resting
+    event: !type:XenoRestEvent

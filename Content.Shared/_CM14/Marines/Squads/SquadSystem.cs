@@ -1,4 +1,4 @@
-﻿namespace Content.Shared.CM14.Marines.Squads;
+﻿namespace Content.Shared._CM14.Marines.Squads;
 
 public sealed class SquadSystem : EntitySystem
 {

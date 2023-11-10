@@ -1,5 +1,4 @@
 ﻿using System.Numerics;
-using Content.Shared.CM14.Marines;
 using Content.Shared.StatusIcon.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -7,8 +6,9 @@ using Robust.Client.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using MarineComponent = Content.Shared._CM14.Marines.MarineComponent;
 
-namespace Content.Client.CM14.Marines;
+namespace Content.Client._CM14.Marines;
 
 public sealed class MarineOverlay : Overlay
 {

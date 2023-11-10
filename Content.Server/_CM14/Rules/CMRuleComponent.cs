@@ -1,6 +1,6 @@
 ﻿using Robust.Shared.Prototypes;
 
-namespace Content.Server.CM14.Rules;
+namespace Content.Server._CM14.Rules;
 
 [RegisterComponent]
 [Access(typeof(CMRuleSystem))]

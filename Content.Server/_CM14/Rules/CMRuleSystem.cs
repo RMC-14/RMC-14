@@ -1,15 +1,13 @@
 ﻿using System.Runtime.InteropServices;
+using Content.Server._CM14.Marines;
 using Content.Server.Antag;
-using Content.Server.CM14.Marines;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Mind;
 using Content.Server.Roles;
 using Content.Server.Roles.Jobs;
-using Content.Server.Spawners.Components;
-using Content.Shared.CM14.Marines;
-using Content.Shared.CM14.Marines.Squads;
+using Content.Shared._CM14.Marines.Squads;
 using Content.Shared.Coordinates;
 using Content.Shared.StatusIcon;
 using Robust.Shared.Console;
@@ -17,9 +15,11 @@ using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
-using XenoComponent = Content.Shared.CM14.Xenos.XenoComponent;
+using MarineComponent = Content.Shared._CM14.Marines.MarineComponent;
+using SquadMemberComponent = Content.Shared._CM14.Marines.Squads.SquadMemberComponent;
+using XenoComponent = Content.Shared._CM14.Xenos.XenoComponent;
 
-namespace Content.Server.CM14.Rules;
+namespace Content.Server._CM14.Rules;
 
 public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
 {
