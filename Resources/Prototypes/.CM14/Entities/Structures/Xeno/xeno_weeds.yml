@@ -17,8 +17,16 @@
     sprite: .CM14/Structures/Xenos/xeno_weeds.rsi
     drawdepth: FloorTiles
     layers:
-    - state: weed0 # TODO smoothing
+    - state: weed0
     - state: constructionnode
+  - type: IconSmooth
+    key: cm_xeno_weeds
+    base: weed_dir
+    mode: CardinalFlags
+  - type: IconSmoothRandom
+    overrides:
+    - weed_dir0
+    - weed_dir15
   - type: RandomSprite
     available:
     - 0:
@@ -83,7 +91,15 @@
     sprite: .CM14/Structures/Xenos/xeno_weeds.rsi
     drawdepth: FloorTiles
     layers:
-    - state: weed0 # TODO smoothing
+    - state: weed0
+  - type: IconSmooth
+    key: cm_xeno_weeds
+    base: weed_dir
+    mode: CardinalFlags
+  - type: IconSmoothRandom
+    overrides:
+    - weed_dir0
+    - weed_dir15
   - type: RandomSprite
     available:
     - 0:
