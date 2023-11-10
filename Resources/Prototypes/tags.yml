@@ -725,10 +725,10 @@
   id: MagazineRifle
 
 - type: Tag
-  id: MagazineRifleM41AE2
+  id: MagazineRifleM41
 
 - type: Tag
-  id: MagazineRifleM41AMK2
+  id: MagazineRifleM41AE2
 
 - type: Tag
   id: MagazineRifleM4RA
