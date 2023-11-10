@@ -1,0 +1,60 @@
+- type: job
+  id: SeniorEnlistedAdvisor
+  parent: JobBaseCM
+  name: job-name-senior-enlisted-advisor
+  description: job-description-senior-enlisted-advisor
+  playTimeTracker: JobSeniorEnlistedAdvisor
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 54000 # 15 hours
+    - !type:DepartmentTimeRequirement
+      department: Engineering
+      time: 36000 # 10 hours
+    - !type:DepartmentTimeRequirement
+      department: MilitaryPolice
+      time: 36000 # 10 hours
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 36000 # 10 hours
+    - !type:DepartmentTimeRequirement
+      department: MarineCommand
+      time: 18000 # 5 hours
+  weight: 5
+  startingGear: SeniorEnlistedAdvisorGear
+  icon: "JobIconCaptain" #todo cm14
+  requireAdminNotify: true
+  joinNotifyCrew: true
+  supervisors: job-supervisors-command
+  canBeAntag: false
+  accessGroups:
+  - AllAccess
+
+- type: startingGear #todo cm14
+  id: SeniorEnlistedAdvisorGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitCaptain
+    back: ClothingBackpackCaptainFilled
+    shoes: ClothingShoesColorBlack
+    head: ClothingHeadHatCaptain
+    eyes: ClothingEyesGlassesSunglasses
+    gloves: ClothingHandsGlovesCaptain
+    outerClothing: ClothingOuterArmorCaptainCarapace
+    id: SeniorEnlistedAdvisorIDCard
+    ears: ClothingHeadsetAltCommand
+  innerClothingSkirt: ClothingUniformJumpskirtCaptain
+  satchel: ClothingBackpackSatchelCaptainFilled
+  duffelbag: ClothingBackpackDuffelCaptainFilled
+
+- type: entity
+  id: SpawnPointSeniorEnlistedAdvisor
+  parent: CMSpawnPointJobBase
+  name: senior enlisted advisor spawn point
+  components:
+  - type: SpawnPoint
+    job_id: SeniorEnlistedAdvisor
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: senior_enlisted_advisor

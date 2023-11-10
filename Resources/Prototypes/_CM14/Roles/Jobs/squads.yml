@@ -1,0 +1,38 @@
+﻿- type: entity
+  id: SquadBase
+  abstract: true
+  categories:
+  - "hideSpawnMenu"
+  components:
+  - type: SquadTeam
+    background:
+      sprite: _CM14/Interface/cm_job_icons.rsi
+      state: hudsquad
+
+- type: entity
+  id: SquadAlpha
+  parent: SquadBase
+  components:
+  - type: SquadTeam
+    color: "#FF747E"
+
+- type: entity
+  id: SquadBravo
+  parent: SquadBase
+  components:
+  - type: SquadTeam
+    color: "#A46106"
+
+- type: entity
+  id: SquadCharlie
+  parent: SquadBase
+  components:
+  - type: SquadTeam
+    color: "#D381C9"
+
+- type: entity
+  id: SquadDelta
+  parent: SquadBase
+  components:
+  - type: SquadTeam
+    color: "#334E6D"

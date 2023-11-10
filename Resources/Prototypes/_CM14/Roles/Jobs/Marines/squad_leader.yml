@@ -1,0 +1,53 @@
+- type: job
+  id: SquadLeader
+  parent: JobBaseCM
+  name: job-name-squad-leader
+  description: job-description-squad-leader
+  playTimeTracker: JobSquadLeader
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 36000 #10 hrs
+    - !type:RoleTimeRequirement
+      role: JobFireteamLeader
+      time: 10800 #3 hrs
+  startingGear: SquadLeaderGear
+  icon: "JobIconCaptain"
+  supervisors: job-supervisors-command
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+
+- type: startingGear
+  id: SquadLeaderGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSec
+    back: ClothingBackpackSecurityFilled
+    shoes: ClothingShoesBootsCombatFilled
+    eyes: ClothingEyesGlassesSecurity
+    head: ClothingHeadHelmetBasic
+    outerClothing: ClothingOuterArmorBasic
+    id: DogtagSquadLeader
+    ears: ClothingHeadsetSecurity
+    belt: ClothingBeltSecurityFilled
+    pocket1: WeaponPistolMk58Nonlethal
+  innerClothingSkirt: ClothingUniformJumpskirtSec
+  satchel: ClothingBackpackSatchelSecurityFilled
+  duffelbag: ClothingBackpackDuffelSecurityFilled
+
+- type: entity
+  id: SpawnPointSquadLeader
+  parent: CMSpawnPointJobBase
+  name: squad leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: SquadLeader
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: squad_leader

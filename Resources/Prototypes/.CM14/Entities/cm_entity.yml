@@ -1,5 +1,0 @@
-﻿- type: entity
-  id: CMEntityBase
-  abstract: true
-  categories:
-  - CMEntity

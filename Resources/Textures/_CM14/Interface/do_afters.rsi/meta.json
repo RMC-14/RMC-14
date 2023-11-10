@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/96af5f3aaa14175d176450b34e92b7e3f68e8567/icons/mob/mob.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "busy_hostile"
+    },
+    {
+      "name": "busy_build"
+    },
+    {
+      "name": "busy_friendly"
+    },
+    {
+      "name": "busy_generic"
+    }
+  ]
+}

@@ -41,22 +41,34 @@ public sealed class IdExaminableSystem : EntitySystem
         args.Verbs.Add(verb);
     }
 
+    private string? GetPdaOrIdInfo(EntityUid uid)
+    {
+        // PDA
+        if (EntityManager.TryGetComponent(uid, out PdaComponent? pda) &&
+            TryComp<IdCardComponent>(pda.ContainedId, out var id))
+        {
+            return GetNameAndJob(id);
+        }
+
+        // ID Card
+        if (EntityManager.TryGetComponent(uid, out id))
+        {
+            return GetNameAndJob(id);
+        }
+
+        return null;
+    }
+
     private string? GetInfo(EntityUid uid)
     {
-        if (_inventorySystem.TryGetSlotEntity(uid, "id", out var idUid))
-        {
-            // PDA
-            if (EntityManager.TryGetComponent(idUid, out PdaComponent? pda) &&
-                TryComp<IdCardComponent>(pda.ContainedId, out var id))
-            {
-                return GetNameAndJob(id);
-            }
-            // ID Card
-            if (EntityManager.TryGetComponent(idUid, out id))
-            {
-                return GetNameAndJob(id);
-            }
-        }
+        if (_inventorySystem.TryGetSlotEntity(uid, "id", out var idUid) &&
+            GetPdaOrIdInfo(idUid.Value) is { } idInfo)
+            return idInfo;
+
+        if (_inventorySystem.TryGetSlotEntity(uid, "neck", out var neckUid) &&
+            GetPdaOrIdInfo(neckUid.Value) is { } neckInfo)
+            return neckInfo;
+
         return null;
     }
 
@@ -65,9 +77,9 @@ public sealed class IdExaminableSystem : EntitySystem
         var jobSuffix = string.IsNullOrWhiteSpace(id.JobTitle) ? string.Empty : $" ({id.JobTitle})";
 
         var val = string.IsNullOrWhiteSpace(id.FullName)
-            ? Loc.GetString("access-id-card-component-owner-name-job-title-text",
+            ? Loc.GetString(id.NameLocId,
                 ("jobSuffix", jobSuffix))
-            : Loc.GetString("access-id-card-component-owner-full-name-job-title-text",
+            : Loc.GetString(id.FullNameLocId,
                 ("fullName", id.FullName),
                 ("jobSuffix", jobSuffix));
 
