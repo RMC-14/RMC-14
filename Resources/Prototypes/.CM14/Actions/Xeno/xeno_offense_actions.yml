@@ -1,0 +1,23 @@
+﻿- type: entity
+  id: ActionXenoAcid
+  parent: ActionXenoBase
+  name: Corrosive Acid # TODO CM14 description
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: .CM14/Actions/xeno_actions.rsi
+      state: corrosive_acid
+    event: !type:XenoCorrosiveAcidEvent
+
+- type: entity
+  id: ActionXenoRegurgitate
+  parent: ActionXenoBase
+  name: Regurgitate # TODO CM14 description
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: .CM14/Actions/xeno_actions.rsi
+      state: regurgitate
+    event: !type:XenoRegurgitateEvent

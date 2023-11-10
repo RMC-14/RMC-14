@@ -1,0 +1,12 @@
+﻿- type: entity
+  id: XenoAcid
+  name: corrosive acid
+  parent: CMEntityBase
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    layers:
+    - sprite: .CM14/Effects/xeno_acid.rsi
+      state: acid_normal
+    drawdepth: Effects

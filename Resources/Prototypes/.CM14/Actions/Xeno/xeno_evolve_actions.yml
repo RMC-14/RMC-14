@@ -1,8 +1,7 @@
 ﻿- type: entity
-  id: ActionXenoEvolve
+  id: ActionXenoEvolve60
+  parent: ActionXenoBase
   name: Evolve # TODO CM14 description
-  categories:
-  - hideSpawnMenu
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -10,3 +9,5 @@
       sprite: .CM14/Actions/xeno_actions.rsi
       state: evolve
     event: !type:XenoOpenEvolutionsEvent
+  - type: XenoEvolveAction
+    cooldown: 60

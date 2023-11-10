@@ -1,0 +1,5 @@
+﻿- type: entity
+  id: ActionXenoBase
+  parent: CMEntityBase
+  categories:
+  - hideSpawnMenu
