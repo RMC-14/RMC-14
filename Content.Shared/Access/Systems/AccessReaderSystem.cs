@@ -285,6 +285,11 @@ public sealed class AccessReaderSystem : EntitySystem
             items.Add(idUid.Value);
         }
 
+        if (_inventorySystem.TryGetSlotEntity(uid, "neck", out var handUid))
+        {
+            items.Add(handUid.Value);
+        }
+
         return items.Any();
     }
 

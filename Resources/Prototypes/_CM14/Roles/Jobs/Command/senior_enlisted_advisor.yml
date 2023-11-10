@@ -40,7 +40,7 @@
     eyes: ClothingEyesGlassesSunglasses
     gloves: ClothingHandsGlovesCaptain
     outerClothing: ClothingOuterArmorCaptainCarapace
-    id: CaptainPDA
+    id: SeniorEnlistedAdvisorIDCard
     ears: ClothingHeadsetAltCommand
   innerClothingSkirt: ClothingUniformJumpskirtCaptain
   satchel: ClothingBackpackSatchelCaptainFilled
@@ -55,5 +55,6 @@
     job_id: SeniorEnlistedAdvisor
   - type: Sprite
     layers:
-    - state: green
+    - sprite: Markers/jobs.rsi
+      state: green
     - state: senior_enlisted_advisor

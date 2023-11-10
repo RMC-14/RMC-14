@@ -1,0 +1,15 @@
+﻿- type: entity
+  parent: CMIDCardSilver
+  id: StaffOfficerIDCard
+  name: staff officer ID card
+  components:
+  - type: PresetIdCard
+    job: StaffOfficer
+
+- type: entity
+  parent: CMIDCardSilver
+  id: SeniorEnlistedAdvisorIDCard
+  name: senior enlisted advisor ID card
+  components:
+  - type: PresetIdCard
+    job: SeniorEnlistedAdvisor

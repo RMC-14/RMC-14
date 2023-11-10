@@ -22,7 +22,7 @@
   - Service
   - External
 
-# Remove this later
+# TODO cm14 Remove this later
 - type: entity
   noSpawn: true
   parent: [ClothingBackpackBrigmedic, CMEntityBase]
@@ -43,7 +43,7 @@
     gloves: ClothingHandsGlovesNitrile
     eyes: ClothingEyesHudMedical
     head: ClothingHeadHatBeretBrigmedic
-    id: BrigmedicPDA
+    id: DogtagHospitalCorpsman
     ears: ClothingHeadsetBrigmedic
     belt: ClothingBeltMedicalFilled
   innerClothingSkirt: ClothingUniformJumpskirtBrigmedic
@@ -79,5 +79,6 @@
     job_id: HospitalCorpsman
   - type: Sprite
     layers:
-    - state: green
+    - sprite: Markers/jobs.rsi
+      state: green
     - state: hospital_corpsman

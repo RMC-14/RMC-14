@@ -1,7 +1,7 @@
-﻿- type: job # todo cm14 finish this role's ftl
+﻿- type: job
   id: StaffOfficer
   parent: JobBaseCM
-  name: job-name-Staff-Officer
+  name: job-name-staff-officer
   description: job-description-Staff-Officer
   playTimeTracker: JobStaffOfficer
   requirements:
@@ -45,5 +45,6 @@
     job_id: StaffOfficer
   - type: Sprite
     layers:
-    - state: green
+    - sprite: Markers/jobs.rsi
+      state: green
     - state: staff_officer
