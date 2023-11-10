@@ -1,6 +1,0 @@
-﻿- type: statusIcon
-  parent: CMJobIconBase
-  id: JobIconStaffOfficer
-  icon:
-    sprite: .CM14/Interface/cm_job_icons.rsi
-    state: staff_officer

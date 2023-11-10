@@ -1,9 +1,10 @@
-﻿using Content.Shared.CM14.Xenos;
-using Content.Shared.CM14.Xenos.Rest;
+﻿using Content.Shared._CM14.Xenos;
+using Content.Shared._CM14.Xenos.Rest;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Robust.Client.GameObjects;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
+using XenoComponent = Content.Shared._CM14.Xenos.XenoComponent;
 
 namespace Content.Client._CM14.Xenos;
 

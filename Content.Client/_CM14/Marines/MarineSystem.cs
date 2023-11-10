@@ -1,4 +1,4 @@
-﻿using Content.Shared.CM14.Marines;
+﻿using Content.Shared._CM14.Marines;
 using Robust.Client.Graphics;
 
 namespace Content.Client._CM14.Marines;

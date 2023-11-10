@@ -1,4 +1,4 @@
-﻿using Content.Shared.CM14.Xenos.Construction;
+﻿using Content.Shared._CM14.Xenos.Construction;
 
 namespace Content.Client._CM14.Xenos.Construction;
 
