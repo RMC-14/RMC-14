@@ -22,7 +22,7 @@ public sealed partial class CMRuleComponent : Component
     public EntityUid XenoMap;
 
     [DataField]
-    public EntProtoId HiveId;
+    public EntProtoId HiveId = "CMXenoHive";
 
     [DataField]
     public EntityUid Hive;
