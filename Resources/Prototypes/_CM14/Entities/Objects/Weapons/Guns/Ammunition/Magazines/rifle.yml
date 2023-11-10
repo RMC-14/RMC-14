@@ -4,6 +4,7 @@
   parent: BaseMagazineRifle
   components:
   - type: BallisticAmmoProvider
+    mayTransfer: True
     whitelist:
       tags:
         - CartridgeRifle10x24mm
@@ -22,6 +23,7 @@
   parent: BaseMagazineRifle
   components:
   - type: BallisticAmmoProvider
+    mayTransfer: True
     whitelist:
       tags:
         - CartridgeRifle10x24mm
@@ -40,6 +42,7 @@
   parent: BaseMagazineRifle
   components:
   - type: BallisticAmmoProvider
+    mayTransfer: True
     whitelist:
       tags:
         - CartridgeRifle10x24mm

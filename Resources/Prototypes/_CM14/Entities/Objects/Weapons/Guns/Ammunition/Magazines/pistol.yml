@@ -4,6 +4,7 @@
   parent: BaseMagazinePistol
   components:
   - type: BallisticAmmoProvider
+    mayTransfer: True
     whitelist:
       tags:
         - CartridgePistol9mm

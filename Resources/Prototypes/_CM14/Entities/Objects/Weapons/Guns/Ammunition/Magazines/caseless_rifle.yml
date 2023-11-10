@@ -4,6 +4,7 @@
   parent: BaseMagazineCaselessRifle
   components:
   - type: BallisticAmmoProvider
+    mayTransfer: True
     whitelist:
       tags:
         - CartridgeCaseless10x20mm
