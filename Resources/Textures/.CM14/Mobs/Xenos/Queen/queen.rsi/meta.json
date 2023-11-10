@@ -12,7 +12,7 @@
       "directions": 4
     },
     {
-      "name": "rest"
+      "name": "sleeping"
     },
     {
       "name": "crit"
@@ -21,7 +21,7 @@
       "name": "dead"
     },
     {
-      "name": "charge",
+      "name": "charging",
       "directions": 4
     }
   ]
