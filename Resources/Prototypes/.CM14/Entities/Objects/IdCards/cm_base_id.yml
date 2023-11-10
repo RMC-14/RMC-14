@@ -75,3 +75,19 @@
     - idcard
     sprite: .CM14/Objects/CMIDs/silver_id.rsi
 
+- type: entity
+  parent: CMIDCardBase
+  id: CMIDCardLanyard
+  name: identification holo-lanyard
+  description: A crude holo-lanyard. As cheap as they come.
+  noSpawn: true
+  components:
+  - type: Sprite
+    sprite: .CM14/Objects/CMIDs/lanyard.rsi
+    state: lanyard
+  - type: Clothing
+    slots:
+    - idcard
+    - neck # it's a lanyard, we could also use a sprite for this if someone makes one
+    sprite: .CM14/Objects/CMIDs/lanyard.rsi
+
