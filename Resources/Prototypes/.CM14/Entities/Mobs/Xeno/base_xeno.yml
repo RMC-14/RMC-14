@@ -1,5 +1,6 @@
 ﻿- type: entity
   id: CMXenoBase
+  parent: CMEntityBase
   abstract: true
   save: false
   components:
@@ -90,16 +91,8 @@
     noRot: true
     drawdepth: Mobs
     layers:
-    - map: [ "enum.DamageStateVisualLayers.Base" ]
+    - map: [ "enum.XenoVisualLayers.Base" ]
       state: alive
-  - type: DamageStateVisuals
-    states:
-      Alive:
-        Base: alive
-      Critical:
-        Base: crit
-      Dead:
-        Base: dead
   - type: Physics
     bodyType: KinematicController
   - type: Fixtures
@@ -127,8 +120,6 @@
       types:
         Bloodloss: -1
   - type: Xeno
-    evolveIn: 60
-    evolveActionId: ActionXenoEvolve
   - type: UserInterface
     interfaces:
     - key: enum.XenoEvolutionUIKey.Key

@@ -4,12 +4,7 @@
   name: Drone
   components:
   - type: Sprite
-    drawdepth: Mobs
     sprite: .CM14/Mobs/Xenos/Drone/drone.rsi
-    offset: 0,0.4
-    layers:
-    - map: [ "enum.DamageStateVisualLayers.Base" ]
-      state: alive
   - type: MobState
     allowedStates:
     - Alive
@@ -20,11 +15,11 @@
       0: Alive
       200: Critical
       300: Dead
-  - type: DamageStateVisuals
-    states:
-      Alive:
-        Base: alive
-      Critical:
-        Base: crit
-      Dead:
-        Base: dead
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoPlantWeeds
+    - ActionXenoAcid
+    - ActionXenoRegurgitate
+    maxPlasma: 300 # TODO CM14
+    plasmaRegen: 12

@@ -261,6 +261,9 @@ namespace Content.Client.IconSmoothing
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
+            var ev = new IconSmoothingUpdatedEvent();
+            RaiseLocalEvent(uid, ref ev);
         }
 
         private void CalculateNewSpriteDiagonal(MapGridComponent? grid, IconSmoothComponent smooth,

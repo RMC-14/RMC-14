@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/af7813ee8c36f9195a88f3b3d018af2b8833cbea/icons/mob/xenos/effects.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "acid2-weak",
+      "delays": [
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.5,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "acidblob"
+    },
+    {
+      "name": "acid2",
+      "delays": [
+        [
+          0.4,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.4,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "acid_weak",
+      "delays": [
+        [
+          1,
+          0.2,
+          0.2,
+          0.2,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "acid_weak_wall",
+      "delays": [
+        [
+          1,
+          0.2,
+          0.2,
+          0.2,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "acid_normal",
+      "delays": [
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.2,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "acid_normal_wall",
+      "delays": [
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.2,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "acid_strong",
+      "delays": [
+        [
+          0.3,
+          0.2,
+          0.2,
+          0.2,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "acid_strong_wall",
+      "delays": [
+        [
+          0.3,
+          0.2,
+          0.2,
+          0.2,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "acid2-strong",
+      "delays": [
+        [
+          0.4,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    }
+  ]
+}
