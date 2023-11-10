@@ -20,6 +20,14 @@
     {
       "name": "default-inhand-right",
       "directions": 4
+    },
+    {
+      "name": "equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "equipped-id",
+      "directions": 4
     }
   ]
 }
