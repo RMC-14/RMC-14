@@ -1,0 +1,7 @@
+﻿- type: entity
+  parent: CMEntityBase
+  id: CMXenoHive
+  categories:
+  - hideSpawnMenu
+  components:
+  - type: Hive

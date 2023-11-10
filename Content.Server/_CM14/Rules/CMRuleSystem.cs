@@ -5,9 +5,10 @@ using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Mind;
-using Content.Server.Roles;
 using Content.Server.Roles.Jobs;
 using Content.Shared._CM14.Marines.Squads;
+using Content.Shared._CM14.Xenos;
+using Content.Shared._CM14.Xenos.Hive;
 using Content.Shared.Coordinates;
 using Content.Shared.StatusIcon;
 using Robust.Shared.Console;
@@ -25,14 +26,15 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
 {
     [Dependency] private readonly AntagSelectionSystem _antagSelection = default!;
     [Dependency] private readonly IConsoleHost _console = default!;
+    [Dependency] private readonly XenoHiveSystem _hive = default!;
     [Dependency] private readonly JobSystem _jobs = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly MarineSystem _marines = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly RoleSystem _roles = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     public override void Initialize()
     {
@@ -46,7 +48,7 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
     private void OnStartAttempt(RoundStartAttemptEvent ev)
     {
         var query = AllEntityQuery<CMRuleComponent, GameRuleComponent>();
-        while (query.MoveNext(out var uid, out var comp, out var gameRule))
+        while (query.MoveNext(out var uid, out _, out var gameRule))
         {
             _antagSelection.AttemptStartGameRule(ev, uid, gameRule.MinPlayers, gameRule);
         }
@@ -60,6 +62,7 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
             if (!GameTicker.IsGameRuleAdded(uid, gameRule))
                 continue;
 
+            comp.Hive = Spawn(comp.HiveId);
             if (!SpawnXenoMap((uid, comp)))
             {
                 Log.Error("Failed to load xeno map");
@@ -75,13 +78,14 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
                 GameTicker.PlayerJoinGame(player);
 
                 // TODO CM14 xeno spawn points
-                var xeno = Spawn("MobXeno", comp.XenoMap.ToCoordinates());
+                var xenoEnt = Spawn("CMXenoDrone", comp.XenoMap.ToCoordinates());
+
+                _xeno.MakeXeno(xenoEnt);
+                _hive.SetHive(xenoEnt, comp.Hive);
 
                 // TODO CM14 mind name
                 var mind = _mind.GetOrCreateMind(player.UserId);
-                _roles.MindAddRole(mind, new XenoComponent(), mind);
-                _mind.TransferTo(mind, xeno);
-                break;
+                _mind.TransferTo(mind, xenoEnt);
             }
         }
     }

@@ -20,4 +20,10 @@ public sealed partial class CMRuleComponent : Component
 
     [DataField]
     public EntityUid XenoMap;
+
+    [DataField]
+    public EntProtoId HiveId;
+
+    [DataField]
+    public EntityUid Hive;
 }

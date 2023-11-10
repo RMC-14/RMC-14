@@ -1,0 +1,9 @@
+﻿<cc:XenoWatchWindow
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client._CM14.Xenos.Watch"
+    Title="{Loc cm-xeno-watch}"
+    MinSize="300 300">
+    <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
+        <BoxContainer Orientation="Vertical" Name="XenoContainer" Access="Public" />
+    </ScrollContainer>
+</cc:XenoWatchWindow>
