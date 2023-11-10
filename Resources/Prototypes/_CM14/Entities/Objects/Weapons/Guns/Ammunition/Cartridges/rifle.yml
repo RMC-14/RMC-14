@@ -1,0 +1,7 @@
+- type: entity
+  id: CartridgeRifle10x24mm
+  name: cartridge (10x24mm)
+  parent: BaseCartridgeRifle
+  components:
+  - type: CartridgeAmmo
+    proto: BulletRifle10x24mm

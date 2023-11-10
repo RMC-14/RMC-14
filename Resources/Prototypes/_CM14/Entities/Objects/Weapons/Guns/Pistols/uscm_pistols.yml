@@ -5,14 +5,14 @@
   description: An M4A3 Service Pistol, once the standard issue sidearm of the Colonial Marines but has recently been replaced with the 88 Mod 4 combat pistol.
   components:
     - type: Sprite
-      sprite: .CM14/Objects/Weapons/Guns/Pistols/m4a3.rsi
+      sprite: _CM14/Objects/Weapons/Guns/Pistols/m4a3.rsi
       layers:
         - state: base
           map: ["enum.GunVisualLayers.Base"]
         - state: mag-0
           map: ["enum.GunVisualLayers.Mag"]
     - type: Clothing
-      sprite: .CM14/Objects/Weapons/Guns/Pistols/m4a3.rsi
+      sprite: _CM14/Objects/Weapons/Guns/Pistols/m4a3.rsi
       quickEquip: false
       slots:
         - suitStorage
@@ -27,7 +27,7 @@
       availableModes:
         - SemiAuto
       soundGunshot:
-        path: /Audio/Weapons/Guns/Gunshots/m41.ogg
+        path: /Audio/Weapons/Guns/Gunshots/m4a3.ogg
     - type: GunWieldBonus
       minAngle: -5
       maxAngle: -25

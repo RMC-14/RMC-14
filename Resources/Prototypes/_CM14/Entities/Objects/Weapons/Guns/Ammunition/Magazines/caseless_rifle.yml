@@ -1,0 +1,17 @@
+- type: entity
+  id: MagazineCaselessM39
+  name: "M39 magazine (10x20mm)"
+  parent: BaseMagazineCaselessRifle
+  components:
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+        - CartridgeCaseless10x20mm
+    proto: CartridgeCaseless10x20mm
+    capacity: 48
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
