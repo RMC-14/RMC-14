@@ -31,7 +31,7 @@
     eyes: ClothingEyesGlassesSecurity
     head: ClothingHeadHelmetBasic
     outerClothing: ClothingOuterArmorBasic
-    id: SecurityPDA
+    id: DogtagSquadLeader
     ears: ClothingHeadsetSecurity
     belt: ClothingBeltSecurityFilled
     pocket1: WeaponPistolMk58Nonlethal
@@ -48,5 +48,6 @@
     job_id: SquadLeader
   - type: Sprite
     layers:
-    - state: green
+    - sprite: Markers/jobs.rsi
+      state: green
     - state: squad_leader

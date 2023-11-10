@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-4.0, green.png CC-BY-SA-3.0",
-  "copyright": "https://cm-ss13.com/wiki/Marines, green.png Taken from https://github.com/vgstation-coders/vgstation13/blob/e71d6c4fba5a51f99b81c295dcaec4fc2f58fb19/icons/mob/screen1.dmi",
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Taken from https://cm-ss13.com/wiki/Marines",
   "size": {
     "x": 32,
     "y": 32
@@ -42,9 +42,6 @@
     },
     {
       "name": "fireteam_leader"
-    },
-    {
-      "name": "green"
     },
     {
       "name": "hospital_corpsman"
