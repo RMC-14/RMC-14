@@ -45,5 +45,6 @@
     job_id: FireteamLeader
   - type: Sprite
     layers:
-    - state: green
+    - sprite: Markers/jobs.rsi
+      state: green
     - state: fireteam_leader

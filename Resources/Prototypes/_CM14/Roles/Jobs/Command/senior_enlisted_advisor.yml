@@ -55,5 +55,6 @@
     job_id: SeniorEnlistedAdvisor
   - type: Sprite
     layers:
-    - state: green
+    - sprite: Markers/jobs.rsi
+      state: green
     - state: senior_enlisted_advisor

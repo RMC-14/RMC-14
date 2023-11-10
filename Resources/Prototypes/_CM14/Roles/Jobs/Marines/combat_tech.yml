@@ -45,5 +45,6 @@
     job_id: CombatTech
   - type: Sprite
     layers:
-    - state: green
+    - sprite: Markers/jobs.rsi
+      state: green
     - state: combat_tech

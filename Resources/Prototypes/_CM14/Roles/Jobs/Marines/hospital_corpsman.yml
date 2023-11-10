@@ -79,5 +79,6 @@
     job_id: HospitalCorpsman
   - type: Sprite
     layers:
-    - state: green
+    - sprite: Markers/jobs.rsi
+      state: green
     - state: hospital_corpsman

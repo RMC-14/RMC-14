@@ -48,5 +48,6 @@
     job_id: SquadLeader
   - type: Sprite
     layers:
-    - state: green
+    - sprite: Markers/jobs.rsi
+      state: green
     - state: squad_leader
