@@ -7,13 +7,13 @@
   noSpawn: true
   components:
   - type: Sprite
-    sprite: .CM14/Objects/CMIDs/dogtags.rsi
+    sprite: _CM14/Objects/CMIDs/dogtags.rsi
     state: dogtag
   - type: Clothing
     slots:
     - neck
     - idcard
-    sprite: .CM14/Objects/CMIDs/dogtags.rsi
+    sprite: _CM14/Objects/CMIDs/dogtags.rsi
   - type: IdCard
     nameLocId: cm-access-dogtags-component-owner-name-job-title-text
     fullNameLocId: cm-access-dogtags-component-owner-full-name-job-title-text
@@ -27,12 +27,12 @@
   noSpawn: true
   components:
   - type: Sprite
-    sprite: .CM14/Objects/CMIDs/id.rsi
+    sprite: _CM14/Objects/CMIDs/id.rsi
     state: plain
   - type: Clothing
     slots:
     - idcard
-    sprite: .CM14/Objects/CMIDs/id.rsi
+    sprite: _CM14/Objects/CMIDs/id.rsi
   - type: Item
     size: Tiny
     heldPrefix: default
@@ -53,12 +53,12 @@
   noSpawn: true
   components:
   - type: Sprite
-    sprite: .CM14/Objects/CMIDs/gold_id.rsi
+    sprite: _CM14/Objects/CMIDs/gold_id.rsi
     state: gold
   - type: Clothing
     slots:
     - idcard
-    sprite: .CM14/Objects/CMIDs/gold_id.rsi
+    sprite: _CM14/Objects/CMIDs/gold_id.rsi
 
 - type: entity
   parent: CMIDCardBase
@@ -68,12 +68,12 @@
   noSpawn: true
   components:
   - type: Sprite
-    sprite: .CM14/Objects/CMIDs/silver_id.rsi
+    sprite: _CM14/Objects/CMIDs/silver_id.rsi
     state: silver
   - type: Clothing
     slots:
     - idcard
-    sprite: .CM14/Objects/CMIDs/silver_id.rsi
+    sprite: _CM14/Objects/CMIDs/silver_id.rsi
 
 - type: entity
   parent: CMIDCardBase
@@ -83,11 +83,11 @@
   noSpawn: true
   components:
   - type: Sprite
-    sprite: .CM14/Objects/CMIDs/lanyard.rsi
+    sprite: _CM14/Objects/CMIDs/lanyard.rsi
     state: lanyard
   - type: Clothing
     slots:
     - idcard
     - neck # it's a lanyard, we could also use a sprite for this if someone makes one
-    sprite: .CM14/Objects/CMIDs/lanyard.rsi
+    sprite: _CM14/Objects/CMIDs/lanyard.rsi
 
