@@ -1,6 +1,9 @@
 ﻿# Plasma
 cm-xeno-not-enough-plasma = You don't have enough plasma!
 
+# Evolve
+cm-xeno-available-evolutions = Available Evolutions
+
 # Plant weeds
 cm-xeno-weeds-already-here = There are already weeds here!
 
@@ -13,3 +16,6 @@ cm-xeno-cant-devour = You can't devour {THE($target)}!
 
 # Regurgitate
 cm-xeno-none-devoured = You haven't devoured anyone!
+
+# Watch
+cm-xeno-watch = Watch Xeno

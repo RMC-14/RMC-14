@@ -1,3 +1,4 @@
+using Content.Shared._CM14.Admin;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
@@ -162,6 +163,13 @@ namespace Content.Shared.Verbs
                 var access = canAccess || _interactionSystem.CanAccessEquipment(user, target);
                 var verbEvent = new GetVerbsEvent<EquipmentVerb>(user, target, @using, hands, canInteract, access);
                 RaiseLocalEvent(target, verbEvent);
+                verbs.UnionWith(verbEvent.Verbs);
+            }
+
+            if (types.Contains(typeof(CMAdminVerb)))
+            {
+                var verbEvent = new GetVerbsEvent<CMAdminVerb>(user, target, @using, hands, canInteract, canAccess);
+                RaiseLocalEvent(target, verbEvent, true);
                 verbs.UnionWith(verbEvent.Verbs);
             }
 

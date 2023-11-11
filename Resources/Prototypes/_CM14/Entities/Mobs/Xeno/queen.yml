@@ -22,5 +22,6 @@
     - ActionXenoPlantWeeds
     - ActionXenoAcid
     - ActionXenoRegurgitate
+    - ActionXenoWatch
     maxPlasma: 500 # TODO CM14
     plasmaRegen: 25
