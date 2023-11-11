@@ -1,3 +1,4 @@
+using Content.Shared._CM14.Admin;
 using Content.Shared.Database;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
@@ -223,7 +224,8 @@ namespace Content.Shared.Verbs
             typeof(AlternativeVerb),
             typeof(ActivationVerb),
             typeof(ExamineVerb),
-            typeof(EquipmentVerb)
+            typeof(EquipmentVerb),
+            typeof(CMAdminVerb)
         };
     }
 

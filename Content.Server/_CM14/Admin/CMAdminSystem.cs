@@ -1,5 +1,6 @@
 ﻿using Content.Server.Administration.Managers;
 using Content.Server.EUI;
+using Content.Shared._CM14.Admin;
 using Content.Shared.Verbs;
 using Robust.Shared.Player;
 
@@ -14,10 +15,10 @@ public sealed class CMAdminSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<GetVerbsEvent<Verb>>(OnXenoGetVerbs);
+        SubscribeLocalEvent<GetVerbsEvent<CMAdminVerb>>(OnXenoGetVerbs);
     }
 
-    private void OnXenoGetVerbs(GetVerbsEvent<Verb> args)
+    private void OnXenoGetVerbs(GetVerbsEvent<CMAdminVerb> args)
     {
         if (!TryComp(args.User, out ActorComponent? actor))
             return;
@@ -26,10 +27,9 @@ public sealed class CMAdminSystem : EntitySystem
         if (!CMAdminEui.CanUse(_admin, player))
             return;
 
-        args.Verbs.Add(new Verb
+        args.Verbs.Add(new CMAdminVerb
         {
             Text = Loc.GetString("cm-ui-open-cm-actions"),
-            Category = VerbCategory.Admin,
             Act = () =>
             {
                 OpenBui(player, args.Target);
