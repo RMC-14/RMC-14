@@ -57,4 +57,8 @@ public sealed partial class XenoComponent : Component
     [DataField, AutoNetworkedField]
     [ViewVariables(VVAccess.ReadWrite)]
     public SoundSpecifier RegurgitateSound = new SoundPathSpecifier("/Audio/_CM14/Xeno/alien_drool2.ogg");
+
+    [DataField, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public EntityUid Hive;
 }

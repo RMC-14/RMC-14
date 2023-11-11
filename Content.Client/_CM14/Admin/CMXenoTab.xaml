@@ -1,0 +1,12 @@
+﻿<controls:CMXenoTab
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._CM14.Admin">
+    <BoxContainer Orientation="Vertical">
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc cm-ui-xeno-hive}" MinWidth="50" />
+            <ItemList Name="HiveList" Access="Public" MinWidth="150" />
+            <Button Text="{Loc cm-ui-create-new-hive}" Name="CreateHiveButton" Access="Public"
+                    StyleClasses="ButtonSquare" />
+        </BoxContainer>
+    </BoxContainer>
+</controls:CMXenoTab>

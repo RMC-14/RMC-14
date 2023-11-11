@@ -1,4 +1,5 @@
-﻿using Content.Shared.Actions;
+﻿using Content.Shared._CM14.Xenos.Hive;
+using Content.Shared.Actions;
 using Content.Shared.Popups;
 using Robust.Shared.Timing;
 
@@ -49,6 +50,11 @@ public sealed class XenoSystem : EntitySystem
             xeno.NextPlasmaRegenTime = time + xeno.PlasmaRegenCooldown;
             Dirty(uid, xeno);
         }
+    }
+
+    public void MakeXeno(Entity<XenoComponent?> uid)
+    {
+        EnsureComp<XenoComponent>(uid);
     }
 
     public bool HasPlasma(Entity<XenoComponent> xeno, int plasma)

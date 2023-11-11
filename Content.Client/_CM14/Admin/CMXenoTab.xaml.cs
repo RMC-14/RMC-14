@@ -2,13 +2,14 @@
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.XAML;
 
-namespace Content.Client._CM14.Xenos.Evolution;
+namespace Content.Client._CM14.Admin;
 
 [GenerateTypedNameReferences]
-public sealed partial class XenoEvolutionChoiceControl : Control
+public sealed partial class CMXenoTab : Control
 {
-    public XenoEvolutionChoiceControl()
+    public CMXenoTab()
     {
         RobustXamlLoader.Load(this);
     }
 }
+
