@@ -1,4 +1,5 @@
-﻿using Content.Shared._CM14.Xenos.Evolution;
+﻿using Content.Client._CM14.Xenos.UI;
+using Content.Shared._CM14.Xenos.Evolution;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Shared.Prototypes;
@@ -7,7 +8,7 @@ using XenoComponent = Content.Shared._CM14.Xenos.XenoComponent;
 namespace Content.Client._CM14.Xenos.Evolution;
 
 [UsedImplicitly]
-public sealed class XenoEvolutionBoundUserInterface : BoundUserInterface
+public sealed class XenoEvolutionBui : BoundUserInterface
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
@@ -16,16 +17,15 @@ public sealed class XenoEvolutionBoundUserInterface : BoundUserInterface
     [ViewVariables]
     private XenoEvolutionWindow? _window;
 
-    public XenoEvolutionBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    public XenoEvolutionBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _sprite = EntMan.System<SpriteSystem>();
     }
 
     protected override void Open()
     {
-        base.Open();
-
         _window = new XenoEvolutionWindow();
+        _window.OnClose += Close;
 
         if (EntMan.TryGetComponent(Owner, out XenoComponent? xeno))
         {
@@ -35,14 +35,13 @@ public sealed class XenoEvolutionBoundUserInterface : BoundUserInterface
                 if (!_prototype.TryIndex(evolutionId, out var evolution))
                     continue;
 
-                var control = new XenoEvolutionChoiceControl();
-                control.Texture.Texture = _sprite.Frame0(evolution);
-                control.NameLabel.SetMessage(evolution.Name);
+                var control = new XenoChoiceControl();
+                control.Set(evolution.Name, _sprite.Frame0(evolution));
 
                 var index = i;
                 control.Button.OnPressed += _ =>
                 {
-                    SendMessage(new EvolveBuiMessage(index));
+                    SendMessage(new XenoEvolveBuiMessage(index));
                     Close();
                 };
 
@@ -55,8 +54,6 @@ public sealed class XenoEvolutionBoundUserInterface : BoundUserInterface
 
     protected override void Dispose(bool disposing)
     {
-        base.Dispose(disposing);
-
         if (disposing)
             _window?.Dispose();
     }

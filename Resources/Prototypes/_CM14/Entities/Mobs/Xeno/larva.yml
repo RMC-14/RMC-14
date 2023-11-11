@@ -19,6 +19,7 @@
     actionIds:
     - ActionXenoRest
     - ActionXenoEvolve60
+    - ActionXenoWatch
     evolvesTo:
     - CMXenoDrone
     maxPlasma: 10 # TODO CM14

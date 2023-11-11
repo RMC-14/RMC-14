@@ -9,11 +9,11 @@ public enum XenoEvolutionUIKey : byte
 }
 
 [Serializable, NetSerializable]
-public sealed class EvolveBuiMessage : BoundUserInterfaceMessage
+public sealed class XenoEvolveBuiMessage : BoundUserInterfaceMessage
 {
     public readonly int Choice;
 
-    public EvolveBuiMessage(int choice)
+    public XenoEvolveBuiMessage(int choice)
     {
         Choice = choice;
     }
