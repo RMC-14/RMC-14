@@ -1,6 +1,6 @@
-﻿<cc:XenoEvolutionChoiceControl
+﻿<ui:XenoChoiceControl
     xmlns="https://spacestation14.io"
-    xmlns:cc="clr-namespace:Content.Client._CM14.Xenos.Evolution">
+    xmlns:ui="clr-namespace:Content.Client._CM14.Xenos.UI">
     <BoxContainer Orientation="Horizontal">
         <Button Name="Button" Access="Public"
                 HorizontalExpand="True" VerticalExpand="False"
@@ -14,4 +14,4 @@
             </BoxContainer>
         </Button>
     </BoxContainer>
-</cc:XenoEvolutionChoiceControl>
+</ui:XenoChoiceControl>

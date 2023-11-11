@@ -9,3 +9,15 @@
       sprite: _CM14/Actions/xeno_actions.rsi
       state: resting
     event: !type:XenoRestEvent
+
+- type: entity
+  id: ActionXenoWatch
+  parent: ActionXenoBase
+  name: Watch # TODO CM14 description
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: watch_xeno
+    event: !type:XenoWatchEvent

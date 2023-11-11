@@ -21,7 +21,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         SubscribeLocalEvent<XenoEvolveActionComponent, MapInitEvent>(OnXenoEvolveActionMapInit);
         SubscribeLocalEvent<XenoComponent, XenoOpenEvolutionsEvent>(OnXenoEvolve);
-        SubscribeLocalEvent<XenoComponent, EvolveBuiMessage>(OnXenoEvolveBui);
+        SubscribeLocalEvent<XenoComponent, XenoEvolveBuiMessage>(OnXenoEvolveBui);
     }
 
     private void OnXenoEvolveActionMapInit(Entity<XenoEvolveActionComponent> ent, ref MapInitEvent args)
@@ -38,7 +38,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         _ui.TryOpen(ent.Owner, XenoEvolutionUIKey.Key, actor.PlayerSession);
     }
 
-    private void OnXenoEvolveBui(Entity<XenoComponent> ent, ref EvolveBuiMessage args)
+    private void OnXenoEvolveBui(Entity<XenoComponent> ent, ref XenoEvolveBuiMessage args)
     {
         if (!_mind.TryGetMind(ent, out var mindId, out _))
             return;

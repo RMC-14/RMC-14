@@ -19,5 +19,6 @@
     - ActionXenoPlantWeeds # TODO CM14 only near other weeds for lesser drones
     - ActionXenoAcid
     - ActionXenoRegurgitate
+    - ActionXenoWatch
     maxPlasma: 300
     plasmaRegen: 12
