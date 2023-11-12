@@ -20,5 +20,6 @@
     - ActionXenoAcid
     - ActionXenoRegurgitate
     - ActionXenoWatch
+    - ActionXenoTailStab
     maxPlasma: 300
     plasmaRegen: 12
