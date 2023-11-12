@@ -1,0 +1,6 @@
+﻿- type: soundCollection
+  id: XenoTailSwipe
+  files:
+  - /Audio/_CM14/Xeno/alien_tail_swipe1.ogg
+  - /Audio/_CM14/Xeno/alien_tail_swipe2.ogg
+  - /Audio/_CM14/Xeno/alien_tail_swipe3.ogg

@@ -120,6 +120,9 @@
       types:
         Bloodloss: -1
   - type: Xeno
+    tailDamage:
+      groups:
+        Brute: 15
   - type: UserInterface
     interfaces:
     - key: enum.XenoEvolutionUIKey.Key
