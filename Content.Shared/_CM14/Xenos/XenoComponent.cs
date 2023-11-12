@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Audio;
+﻿using Content.Shared.Damage;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -61,4 +62,20 @@ public sealed partial class XenoComponent : Component
     [DataField, AutoNetworkedField]
     [ViewVariables(VVAccess.ReadWrite)]
     public EntityUid Hive;
+
+    [DataField, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public EntProtoId TailAnimationId = "WeaponArcThrust";
+
+    [DataField, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float TailRange = 3;
+
+    [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public DamageSpecifier TailDamage;
+
+    [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public SoundSpecifier TailHitSound = new SoundCollectionSpecifier("XenoTailSwipe");
 }

@@ -23,5 +23,6 @@
     - ActionXenoAcid
     - ActionXenoRegurgitate
     - ActionXenoWatch
+    - ActionXenoTailStab
     maxPlasma: 500 # TODO CM14
     plasmaRegen: 25
