@@ -26,9 +26,9 @@
       fireRate: 16
       selectedMode: FullAuto
       availableModes:
-	- SemiAuto
+        - SemiAuto
         - Burst
-	- FullAuto
+        - FullAuto
       soundGunshot:
         path: /Audio/Weapons/Guns/Gunshots/m41.ogg
     - type: GunWieldBonus
