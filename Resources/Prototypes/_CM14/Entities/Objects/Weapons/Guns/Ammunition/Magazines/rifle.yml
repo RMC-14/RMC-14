@@ -14,11 +14,17 @@
     proto: CartridgeRifle10x24mm
     capacity: 40
   - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m41.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
 
 - type: entity
   id: MagazineRifleM41AE2
