@@ -24,9 +24,11 @@
       angleIncrease: 10
       angleDecay: 16
       fireRate: 16
-      selectedMode: Burst
+      selectedMode: FullAuto
       availableModes:
+	- SemiAuto
         - Burst
+	- FullAuto
       soundGunshot:
         path: /Audio/Weapons/Guns/Gunshots/m41.ogg
     - type: GunWieldBonus
