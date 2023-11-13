@@ -3,6 +3,9 @@
   name: "M39 magazine (10x20mm)"
   parent: BaseMagazineCaselessRifle
   components:
+  - type: Tag
+    tags:
+      - MagazineCaselessM39
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:

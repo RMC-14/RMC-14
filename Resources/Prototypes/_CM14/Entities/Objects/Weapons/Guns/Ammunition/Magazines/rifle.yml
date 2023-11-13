@@ -3,6 +3,9 @@
   name: "M41 magazine (10x24mm)"
   parent: BaseMagazineRifle
   components:
+  - type: Tag
+    tags:
+      - MagazineRifleM41
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -22,6 +25,9 @@
   name: "M41AE2 magazine (10x24mm)"
   parent: BaseMagazineRifle
   components:
+  - type: Tag
+    tags:
+      - MagazineRifleM41AE2
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -41,6 +47,9 @@
   name: "M4RA magazine (10x24mm)"
   parent: BaseMagazineRifle
   components:
+  - type: Tag
+    tags:
+      - MagazineRifleM4RA
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:

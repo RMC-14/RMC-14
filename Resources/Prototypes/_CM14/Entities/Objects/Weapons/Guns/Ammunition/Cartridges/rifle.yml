@@ -3,5 +3,9 @@
   name: cartridge (10x24mm)
   parent: BaseCartridgeRifle
   components:
+  - type: Tag
+    tags:
+      - Cartridge
+      - CartridgeRifle10x24mm
   - type: CartridgeAmmo
     proto: BulletRifle10x24mm

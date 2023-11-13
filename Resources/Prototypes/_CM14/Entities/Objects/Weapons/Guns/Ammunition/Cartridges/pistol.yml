@@ -3,5 +3,9 @@
   name: cartridge (9mm)
   parent: BaseCartridgePistol
   components:
+  - type: Tag
+    tags:
+      - Cartridge
+      - CartridgePistol9mm
   - type: CartridgeAmmo
     proto: BulletPistol9mm

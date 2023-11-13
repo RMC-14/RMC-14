@@ -3,6 +3,9 @@
   name: M4A3 magazine (9mm)
   parent: BaseMagazinePistol
   components:
+  - type: Tag
+    tags:
+      - MagazinePistolM4A3
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
