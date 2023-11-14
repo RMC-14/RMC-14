@@ -260,9 +260,6 @@
   id: CartridgeCaselessRifle
 
 - type: Tag
-  id: CartridgeCaseless10x20mm
-
-- type: Tag
   id: CartridgeCHIMP
 
 - type: Tag
@@ -278,13 +275,7 @@
   id: CartridgePistol
 
 - type: Tag
-  id: CartridgePistol9mm
-
-- type: Tag
   id: CartridgeRifle
-
-- type: Tag
-  id: CartridgeRifle10x24mm
 
 - type: Tag
   id: CartridgeRocket
@@ -683,9 +674,6 @@
   id: MagazineCaselessRifle
 
 - type: Tag
-  id: MagazineCaselessM39
-
-- type: Tag
   id: MagazineHeavyRifle
 
 - type: Tag
@@ -707,13 +695,7 @@
   id: MagazinePistol
 
 - type: Tag
-  id: MagazinePistolM4A3
-
-- type: Tag
   id: MagazinePistolCaselessRifle
-
-- type: Tag
-  id: MagazinePistolCaselessM39
 
 - type: Tag
   id: MagazinePistolHighCapacity
@@ -725,6 +707,7 @@
   id: MagazineRifle
 
 - type: Tag
+<<<<<<< HEAD
   id: MagazineRifleM41
 
 - type: Tag
@@ -734,6 +717,8 @@
   id: MagazineRifleM4RA
 
 - type: Tag
+=======
+>>>>>>> parent of fc2271fa1c (jesus that's a lot of yaml that i forgot to commit the first time)
   id: MagazineShotgun
 
 - type: Tag
