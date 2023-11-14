@@ -707,18 +707,6 @@
   id: MagazineRifle
 
 - type: Tag
-<<<<<<< HEAD
-  id: MagazineRifleM41
-
-- type: Tag
-  id: MagazineRifleM41AE2
-
-- type: Tag
-  id: MagazineRifleM4RA
-
-- type: Tag
-=======
->>>>>>> parent of fc2271fa1c (jesus that's a lot of yaml that i forgot to commit the first time)
   id: MagazineShotgun
 
 - type: Tag
@@ -768,7 +756,6 @@
 
 - type: Tag
   id: Multitool
-
 
 - type: Tag
   id: NoBlockAnchoring
