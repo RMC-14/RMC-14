@@ -13,7 +13,7 @@
       time: 18000 # 5 hours
   weight: 5
   startingGear: ChiefMPGear
-  icon: "hudsquad_cmp" #todo cm14
+  icon: "JobIconChiefMP"
   requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: job-supervisors-command

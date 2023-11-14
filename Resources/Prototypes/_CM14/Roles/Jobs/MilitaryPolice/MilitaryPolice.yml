@@ -10,7 +10,7 @@
       time: 36000 # 10 hours
   weight: 5
   startingGear: MilitaryPoliceGear
-  icon: "hudsquad_mp"
+  icon: "JobIconMilitaryPolice"
   requireAdminNotify: false
   joinNotifyCrew: true
   supervisors: job-supervisors-militarywarden

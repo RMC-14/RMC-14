@@ -10,7 +10,7 @@
       time: 18000 # 5 hours
   weight: 5
   startingGear: MilitaryWardenGear
-  icon: "hudsquad_warden"
+  icon: "JobIconMilitaryWarden"
   requireAdminNotify: false
   joinNotifyCrew: true
   supervisors: job-supervisors-chiefmp
