@@ -91,12 +91,23 @@
     damageCoefficient: 0.60
 
 - type: entity
-  parent: CMArmorM2MP
-  id: CMArmorM2Warden
-  name: M2 pattern warden armor
-  description: M2 Armor offers higher protection against melee attacks but less protection against projectile attacks
+  parent: ArmorMarineM3
+  id: CMArmorM3Warden
+  name: M3 pattern warden armor
+  description: A well-crafted suit of M3 Pattern Armor typically distributed to Wardens. 
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m2_mp.rsi
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3_warden.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m2_mp.rsi
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3_warden.rsi
+
+- type: entity
+  parent: ArmorMarineM3
+  id: CMArmorM3WO
+  name: M3 pattern chief mp armor
+  description: A well-crafted suit of M3 Pattern Armor typically distributed to Chief MPs. Useful for letting your men know who is in charge. 
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3_wo.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3_wo.rsi

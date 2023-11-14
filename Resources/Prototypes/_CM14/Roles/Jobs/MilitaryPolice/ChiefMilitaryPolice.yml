@@ -31,7 +31,7 @@
     eyes: ClothingEyesGlassesSecurity
     gloves: CMHandsBlack
     id: ChiefMPIDCard
-    outerClothing: CMCoatChiefMP
+    outerClothing: CMArmorM3WO
     ears: ClothingHeadsetAltSecurity
     belt: ClothingBeltSecurityFilled
   innerClothingSkirt: CMJumpsuitWO

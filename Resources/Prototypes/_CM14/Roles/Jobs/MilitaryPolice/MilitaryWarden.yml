@@ -28,7 +28,7 @@
     eyes: ClothingEyesGlassesSecurity
     gloves: CMHandsBlack
     id: WardenIDCard
-    outerClothing: CMArmorM2Warden
+    outerClothing: CMArmorM3Warden
     ears: ClothingHeadsetAltSecurity
     belt: ClothingBeltSecurityFilled
   innerClothingSkirt: CMJumpsuitWarden
