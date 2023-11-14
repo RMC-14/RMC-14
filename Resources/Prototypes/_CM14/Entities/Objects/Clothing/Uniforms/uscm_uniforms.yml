@@ -33,7 +33,7 @@
 - type: entity
   parent: CMJumpsuitMP
   id: CMJumpsuitMPBlack
-  name: tan warden uniform
+  name: black mp uniform
   description: A standard-issue MP uniform.
   components:
     - type: Sprite

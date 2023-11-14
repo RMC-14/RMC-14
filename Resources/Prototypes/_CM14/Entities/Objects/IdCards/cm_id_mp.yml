@@ -8,11 +8,11 @@
 
 - type: entity
   parent: CMIDCardSilver
-  id: WardenIDCard
+  id: MilitaryWardenIDCard
   name: warden ID card
   components:
   - type: PresetIdCard
-    job: Warden
+    job: MilitaryWarden
 
 - type: entity
   parent: CMIDCardSilver

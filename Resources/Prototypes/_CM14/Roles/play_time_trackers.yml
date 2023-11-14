@@ -34,7 +34,7 @@
   id: JobChiefMP
 
 - type: playTimeTracker
-  id: JobWarden
+  id: JobMilitaryWarden
 
 - type: playTimeTracker
   id: JobMilitaryPolice

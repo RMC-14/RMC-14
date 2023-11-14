@@ -37,7 +37,7 @@
     head: CMHeadCapWarden
     eyes: ClothingEyesGlassesSecurity
     gloves: CMHandsBlack
-    id: WardenIDCard
+    id: MilitaryWardenIDCard
     outerClothing: CMArmorM3Warden
     ears: ClothingHeadsetAltSecurity
     belt: ClothingBeltSecurityFilled
