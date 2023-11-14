@@ -23,7 +23,7 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<MarineComponent, CanDropDraggedEvent>(OnMarineCanDropDragged);
         SubscribeLocalEvent<MarineComponent, DragDropDraggedEvent>(OnMarineDragDropDragged);
         SubscribeLocalEvent<XenoComponent, XenoDevourDoAfterEvent>(OnXenoDevourDoAfter);
-        SubscribeLocalEvent<XenoComponent, XenoRegurgitateEvent>(OnXenoRegurgitate);
+        SubscribeLocalEvent<XenoComponent, XenoRegurgitateActionEvent>(OnXenoRegurgitate);
     }
 
     private void OnXenoCanDropTarget(Entity<XenoComponent> ent, ref CanDropTargetEvent args)
@@ -73,7 +73,7 @@ public sealed class XenoDevourSystem : EntitySystem
         }
     }
 
-    private void OnXenoRegurgitate(Entity<XenoComponent> ent, ref XenoRegurgitateEvent args)
+    private void OnXenoRegurgitate(Entity<XenoComponent> ent, ref XenoRegurgitateActionEvent args)
     {
         if (!_container.TryGetContainer(ent, ent.Comp.DevourContainerId, out var container) ||
             container.ContainedEntities.Count == 0)

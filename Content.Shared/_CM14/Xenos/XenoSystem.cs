@@ -1,4 +1,5 @@
 ﻿using Content.Shared._CM14.Xenos.Hive;
+using Content.Shared.Access.Components;
 using Content.Shared.Actions;
 using Content.Shared.Popups;
 using Robust.Shared.Timing;
@@ -17,6 +18,7 @@ public sealed class XenoSystem : EntitySystem
 
         SubscribeLocalEvent<XenoComponent, MapInitEvent>(OnXenoMapInit);
         SubscribeLocalEvent<XenoComponent, EntityUnpausedEvent>(OnXenoUnpaused);
+        SubscribeLocalEvent<XenoComponent, GetAccessTagsEvent>(OnXenoGetAdditionalAccess);
     }
 
     private void OnXenoMapInit(Entity<XenoComponent> ent, ref MapInitEvent args)
@@ -34,6 +36,11 @@ public sealed class XenoSystem : EntitySystem
     private void OnXenoUnpaused(Entity<XenoComponent> ent, ref EntityUnpausedEvent args)
     {
         ent.Comp.NextPlasmaRegenTime += args.PausedTime;
+    }
+
+    private void OnXenoGetAdditionalAccess(Entity<XenoComponent> ent, ref GetAccessTagsEvent args)
+    {
+        args.Tags.UnionWith(ent.Comp.AccessLevels);
     }
 
     public override void Update(float frameTime)

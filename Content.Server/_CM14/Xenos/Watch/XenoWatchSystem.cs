@@ -11,7 +11,7 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
 
-    protected override void OnXenoWatch(Entity<XenoComponent> ent, ref XenoWatchEvent args)
+    protected override void OnXenoWatch(Entity<XenoComponent> ent, ref XenoWatchActionEvent args)
     {
         if (!TryComp(ent, out ActorComponent? actor))
             return;

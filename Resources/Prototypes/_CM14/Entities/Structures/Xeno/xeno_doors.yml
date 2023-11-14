@@ -1,0 +1,77 @@
+﻿- type: entity
+  id: DoorXenoResin # TODO CM14 make them only buildable next to other resin walls
+  parent: BaseStructure
+  name: resin door
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/smash.ogg" # TODO CM14
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _CM14/Structures/Xenos/xeno_resin_door.rsi
+    layers:
+    - state: resin
+      map: ["enum.DoorVisualLayers.Base"]
+    - state: closed_unlit
+      map: ["enum.DoorVisualLayers.BaseUnlit"]
+    - state: closed_unlit
+      map: ["enum.DoorVisualLayers.BaseBolted"]
+  - type: AnimationPlayer
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49" # don't want this colliding with walls or they won't close
+        density: 100
+        mask:
+        - FullTileMask
+        layer:
+        - AirlockLayer
+  - type: Door
+    crushDamage:
+      types:
+        Blunt: 15
+    openSpriteState: resinopen
+    closedSpriteState: resin
+    openingSpriteState: resinopening
+    closingSpriteState: resinclosing
+    openSound:
+      path: /Audio/_CM14/Xeno/alien_resin_move1.ogg
+    closeSound:
+      path: /Audio/_CM14/Xeno/alien_resin_move2.ogg
+  - type: Appearance
+  - type: Airtight
+    fixVacuum: true
+    noAirWhenFullyAirBlocked: false
+  - type: RadiationBlocker
+    resistance: 3
+  - type: Occluder
+  - type: Damageable
+    damageContainer: Resin
+    damageModifierSet: Resin
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400 # TODO CM14 rebalance
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: PlacementReplacement
+    key: walls
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+  - type: AccessReader
+    access: [["Xeno"]]
+  - type: Airlock
+    emergencyAccessLayer: false
+    animatePanel: false
+  - type: ApcPowerReceiver
+    powerLoad: 0

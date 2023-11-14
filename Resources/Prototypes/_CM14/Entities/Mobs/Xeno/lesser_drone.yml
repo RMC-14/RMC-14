@@ -21,5 +21,11 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
+    - ActionXenoChooseStructure
+    - ActionXenoSecreteStructure
     maxPlasma: 300
     plasmaRegen: 12
+    canBuild:
+    - WallXenoResin
+    - WallXenoMembrane
+    - DoorXenoResin

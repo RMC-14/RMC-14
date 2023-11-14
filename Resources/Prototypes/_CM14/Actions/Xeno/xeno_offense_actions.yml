@@ -20,7 +20,7 @@
     icon:
       sprite: _CM14/Actions/xeno_actions.rsi
       state: regurgitate
-    event: !type:XenoRegurgitateEvent
+    event: !type:XenoRegurgitateActionEvent
 
 - type: entity
   id: ActionXenoTailStab

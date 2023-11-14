@@ -8,4 +8,29 @@
     icon:
       sprite: _CM14/Actions/xeno_actions.rsi
       state: plant_weeds
-    event: !type:XenoPlantWeedsEvent
+    event: !type:XenoPlantWeedsActionEvent
+
+- type: entity
+  id: ActionXenoChooseStructure
+  parent: ActionXenoBase
+  name: Choose Resin Structure # TODO CM14 description
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: retrieve_egg
+    event: !type:XenoChooseStructureActionEvent
+  - type: XenoChooseConstructionAction
+
+- type: entity
+  id: ActionXenoSecreteStructure
+  parent: ActionXenoBase
+  name: Secrete Resin # TODO CM14 description
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: secrete_resin
+    event: !type:XenoSecreteStructureEvent
