@@ -30,7 +30,7 @@
         - Burst
         - FullAuto
       soundGunshot:
-        path: /_CM14/Audio/Weapons/Guns/Gunshots/m41.ogg
+        path: /Audio/_CM14/Weapons/Guns/Gunshots/m41.ogg
     - type: GunWieldBonus
       minAngle: -25
       maxAngle: -50
@@ -95,7 +95,7 @@
         - Burst
         - FullAuto
       soundGunshot:
-        path: /_CM14/Audio/Weapons/Guns/Gunshots/m41.ogg
+        path: /Audio/_CM14/Weapons/Guns/Gunshots/m41.ogg
     - type: GunWieldBonus
       minAngle: -25
       maxAngle: -30
@@ -148,7 +148,7 @@
       availableModes:
         - SemiAuto
       soundGunshot:
-        path: /_CM14/Audio/Weapons/Guns/Gunshots/m4ra.ogg
+        path: /Audio/_CM14/Weapons/Guns/Gunshots/m4ra.ogg
     - type: GunWieldBonus
       minAngle: -30
       maxAngle: -40
