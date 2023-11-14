@@ -1,4 +1,5 @@
-﻿using Content.Shared.Actions;
+﻿using Content.Shared._CM14.Xenos.Construction.Events;
+using Content.Shared.Actions;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
 using Content.Shared.Maps;
@@ -31,16 +32,16 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<XenoComponent, XenoPlantWeedsEvent>(OnXenoPlantWeeds);
-        SubscribeLocalEvent<XenoComponent, XenoChooseStructureEvent>(OnXenoChooseStructure);
+        SubscribeLocalEvent<XenoComponent, Events.XenoPlantWeedsActionEvent>(OnXenoPlantWeeds);
+        SubscribeLocalEvent<XenoComponent, Events.XenoChooseStructureActionEvent>(OnXenoChooseStructure);
         SubscribeLocalEvent<XenoComponent, XenoChooseStructureBuiMessage>(OnXenoChooseStructureBui);
-        SubscribeLocalEvent<XenoComponent, XenoSecreteStructureEvent>(OnXenoSecreteStructure);
-        SubscribeLocalEvent<XenoComponent, XenoSecreteStructureDoAfterEvent>(OnXenoSecreteStructureDoAfter);
+        SubscribeLocalEvent<XenoComponent, Events.XenoSecreteStructureEvent>(OnXenoSecreteStructure);
+        SubscribeLocalEvent<XenoComponent, Events.XenoSecreteStructureDoAfterEvent>(OnXenoSecreteStructureDoAfter);
         SubscribeLocalEvent<XenoWeedsComponent, AnchorStateChangedEvent>(OnWeedsAnchorChanged);
         SubscribeLocalEvent<XenoChooseConstructionActionComponent, XenoConstructionChosenEvent>(OnActionConstructionChosen);
     }
 
-    private void OnXenoPlantWeeds(Entity<XenoComponent> ent, ref XenoPlantWeedsEvent args)
+    private void OnXenoPlantWeeds(Entity<XenoComponent> ent, ref Events.XenoPlantWeedsActionEvent args)
     {
         var coordinates = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager, _map);
 
@@ -69,7 +70,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
             Spawn(args.Prototype, coordinates);
     }
 
-    private void OnXenoChooseStructure(Entity<XenoComponent> xeno, ref XenoChooseStructureEvent args)
+    private void OnXenoChooseStructure(Entity<XenoComponent> xeno, ref Events.XenoChooseStructureActionEvent args)
     {
         if (_net.IsClient || !TryComp(xeno, out ActorComponent? actor))
             return;
@@ -96,12 +97,12 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         }
     }
 
-    private void OnXenoSecreteStructure(Entity<XenoComponent> xeno, ref XenoSecreteStructureEvent args)
+    private void OnXenoSecreteStructure(Entity<XenoComponent> xeno, ref Events.XenoSecreteStructureEvent args)
     {
         if (xeno.Comp.BuildChoice == null || !CanBuildOnTilePopup(xeno, args.Target))
             return;
 
-        var ev = new XenoSecreteStructureDoAfterEvent(GetNetCoordinates(args.Target), xeno.Comp.BuildChoice.Value);
+        var ev = new Events.XenoSecreteStructureDoAfterEvent(GetNetCoordinates(args.Target), xeno.Comp.BuildChoice.Value);
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.BuildDelay, ev, xeno)
         {
             BreakOnUserMove = true
@@ -110,7 +111,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfter);
     }
 
-    private void OnXenoSecreteStructureDoAfter(Entity<XenoComponent> xeno, ref XenoSecreteStructureDoAfterEvent args)
+    private void OnXenoSecreteStructureDoAfter(Entity<XenoComponent> xeno, ref Events.XenoSecreteStructureDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled)
             return;
