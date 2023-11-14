@@ -30,7 +30,7 @@
         - Burst
         - FullAuto
       soundGunshot:
-        path: _CM14/Audio/Weapons/Guns/Gunshots/m39.ogg
+        path: /_CM14/Audio/Weapons/Guns/Gunshots/m39.ogg
     - type: GunWieldBonus
       minAngle: -5
       maxAngle: -5
