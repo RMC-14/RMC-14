@@ -25,11 +25,11 @@
     back: ClothingBackpackCaptainFilled
     shoes: CMShoesCombatBoots
     head: CMHeadCapWarden
-    eyes: ClothingEyesGlassesSunglasses
-    gloves: ClothingHandsGlovesCaptain
-    outerClothing: ClothingOuterArmorCaptainCarapace
+    eyes: ClothingEyesGlassesSecurity
+    gloves: CMHandsBlack
     id: WardenIDCard
     ears: ClothingHeadsetAltCommand
+    belt: ClothingBeltSecurityFilled
   innerClothingSkirt: CMJumpsuitWarden
   satchel: ClothingBackpackSatchelCaptainFilled
   duffelbag: ClothingBackpackDuffelCaptainFilled
