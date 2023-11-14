@@ -129,6 +129,8 @@
       type: XenoEvolutionBui
     - key: enum.XenoWatchUIKey.Key
       type: XenoWatchBui
+    - key: enum.XenoChooseStructureUI.Key
+      type: XenoChooseStructureBui
   - type: TypingIndicator
     proto: alien
   - type: AtmosExposed

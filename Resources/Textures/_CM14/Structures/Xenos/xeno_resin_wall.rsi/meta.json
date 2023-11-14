@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a0fcc13da4bf066a297541571a4a0f064681002f/icons/turf/walls/xeno.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "resin"
+    },
+    {
+      "name": "resin0",
+      "directions": 4
+    },
+    {
+      "name": "resin1",
+      "directions": 4
+    },
+    {
+      "name": "resin2",
+      "directions": 4
+    },
+    {
+      "name": "resin3",
+      "directions": 4
+    },
+    {
+      "name": "resin4",
+      "directions": 4
+    },
+    {
+      "name": "resin5",
+      "directions": 4
+    },
+    {
+      "name": "resin6",
+      "directions": 4
+    },
+    {
+      "name": "resin7",
+      "directions": 4
+    },
+    {
+      "name": "membrane"
+    },
+    {
+      "name": "membrane0",
+      "directions": 4
+    },
+    {
+      "name": "membrane1",
+      "directions": 4
+    },
+    {
+      "name": "membrane2",
+      "directions": 4
+    },
+    {
+      "name": "membrane3",
+      "directions": 4
+    },
+    {
+      "name": "membrane4",
+      "directions": 4
+    },
+    {
+      "name": "membrane5",
+      "directions": 4
+    },
+    {
+      "name": "membrane6",
+      "directions": 4
+    },
+    {
+      "name": "membrane7",
+      "directions": 4
+    },
+    {
+      "name": "thickresin"
+    },
+    {
+      "name": "thickresin0",
+      "directions": 4
+    },
+    {
+      "name": "thickresin1",
+      "directions": 4
+    },
+    {
+      "name": "thickresin2",
+      "directions": 4
+    },
+    {
+      "name": "thickresin3",
+      "directions": 4
+    },
+    {
+      "name": "thickresin4",
+      "directions": 4
+    },
+    {
+      "name": "thickresin5",
+      "directions": 4
+    },
+    {
+      "name": "thickresin6",
+      "directions": 4
+    },
+    {
+      "name": "thickresin7",
+      "directions": 4
+    },
+    {
+      "name": "thickmembrane"
+    },
+    {
+      "name": "thickmembrane0",
+      "directions": 4
+    },
+    {
+      "name": "thickmembrane1",
+      "directions": 4
+    },
+    {
+      "name": "thickmembrane2",
+      "directions": 4
+    },
+    {
+      "name": "thickmembrane3",
+      "directions": 4
+    },
+    {
+      "name": "thickmembrane4",
+      "directions": 4
+    },
+    {
+      "name": "thickmembrane5",
+      "directions": 4
+    },
+    {
+      "name": "thickmembrane6",
+      "directions": 4
+    },
+    {
+      "name": "thickmembrane7",
+      "directions": 4
+    }
+  ]
+}

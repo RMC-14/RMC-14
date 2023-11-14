@@ -79,7 +79,7 @@ public sealed class DoorBoltSystem : SharedDoorBoltSystem
 
     public bool IsBolted(EntityUid uid, DoorBoltComponent? component = null)
     {
-        if (!Resolve(uid, ref component))
+        if (!Resolve(uid, ref component, false))
         {
             return false;
         }

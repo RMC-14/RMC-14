@@ -50,6 +50,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return;
         }
 
+        if (_net.IsClient)
+            return;
+
         var evolution = Spawn(ent.Comp.EvolvesTo[args.Choice], _transform.GetMoverCoordinates(ent.Owner));
         _mind.TransferTo(mindId, evolution);
         _mind.UnVisit(mindId);
