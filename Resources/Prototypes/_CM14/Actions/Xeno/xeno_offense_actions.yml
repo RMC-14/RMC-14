@@ -20,4 +20,19 @@
     icon:
       sprite: _CM14/Actions/xeno_actions.rsi
       state: regurgitate
-    event: !type:XenoRegurgitateEvent
+    event: !type:XenoRegurgitateActionEvent
+
+- type: entity
+  id: ActionXenoTailStab
+  parent: ActionXenoBase
+  name: Tail Stab # TODO CM14 description
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: tail_attack
+    event: !type:XenoTailStabEvent
+    range: 15
+    useDelay: 10
+    checkCanAccess: false

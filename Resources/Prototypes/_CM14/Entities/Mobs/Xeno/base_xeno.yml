@@ -120,12 +120,17 @@
       types:
         Bloodloss: -1
   - type: Xeno
+    tailDamage:
+      groups:
+        Brute: 15
   - type: UserInterface
     interfaces:
     - key: enum.XenoEvolutionUIKey.Key
       type: XenoEvolutionBui
     - key: enum.XenoWatchUIKey.Key
       type: XenoWatchBui
+    - key: enum.XenoChooseStructureUI.Key
+      type: XenoChooseStructureBui
   - type: TypingIndicator
     proto: alien
   - type: AtmosExposed

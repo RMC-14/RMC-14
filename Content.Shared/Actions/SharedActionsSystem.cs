@@ -291,7 +291,7 @@ public abstract class SharedActionsSystem : EntitySystem
                 }
 
                 var entityCoordinatesTarget = GetCoordinates(netCoordinatesTarget);
-                _rotateToFaceSystem.TryFaceCoordinates(user, entityCoordinatesTarget.Position);
+                _rotateToFaceSystem.TryFaceCoordinates(user, entityCoordinatesTarget.ToMapPos(EntityManager, _transformSystem));
 
                 if (!ValidateWorldTarget(user, entityCoordinatesTarget, worldAction))
                     return;
@@ -649,7 +649,9 @@ public abstract class SharedActionsSystem : EntitySystem
 
         if (action.AttachedEntity != performer)
         {
-            DebugTools.Assert(!Resolve(performer, ref comp, false) || !comp.Actions.Contains(actionId.Value));
+            DebugTools.Assert(!Resolve(performer, ref comp, false)
+                              || comp.LifeStage >= ComponentLifeStage.Stopping
+                              || !comp.Actions.Contains(actionId.Value));
 
             if (!GameTiming.ApplyingState)
                 Log.Error($"Attempted to remove an action {ToPrettyString(actionId)} from an entity that it was never attached to: {ToPrettyString(performer)}");

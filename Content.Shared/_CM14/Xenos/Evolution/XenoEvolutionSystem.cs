@@ -20,7 +20,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<XenoEvolveActionComponent, MapInitEvent>(OnXenoEvolveActionMapInit);
-        SubscribeLocalEvent<XenoComponent, XenoOpenEvolutionsEvent>(OnXenoEvolve);
+        SubscribeLocalEvent<XenoComponent, XenoOpenEvolutionsActionEvent>(OnXenoEvolve);
         SubscribeLocalEvent<XenoComponent, XenoEvolveBuiMessage>(OnXenoEvolveBui);
     }
 
@@ -30,7 +30,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             _action.SetCooldown(ent, _timing.CurTime, _timing.CurTime + ent.Comp.Cooldown);
     }
 
-    private void OnXenoEvolve(Entity<XenoComponent> ent, ref XenoOpenEvolutionsEvent args)
+    private void OnXenoEvolve(Entity<XenoComponent> ent, ref XenoOpenEvolutionsActionEvent args)
     {
         if (_net.IsClient || !TryComp(ent, out ActorComponent? actor))
             return;
@@ -49,6 +49,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
             Log.Warning($"User {args.Session.Name} sent an out of bounds evolution choice: {args.Choice}. Choices: {choices}");
             return;
         }
+
+        if (_net.IsClient)
+            return;
 
         var evolution = Spawn(ent.Comp.EvolvesTo[args.Choice], _transform.GetMoverCoordinates(ent.Owner));
         _mind.TransferTo(mindId, evolution);

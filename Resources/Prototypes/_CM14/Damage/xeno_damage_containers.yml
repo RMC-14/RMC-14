@@ -1,0 +1,9 @@
+﻿- type: damageContainer
+  id: Resin
+  supportedGroups:
+  - Brute
+  - Burn
+  - Toxin
+  - Genetic
+  supportedTypes:
+  - Structural

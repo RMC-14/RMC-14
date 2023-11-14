@@ -2,3 +2,28 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/8cad63ffa63108258510a649a07a045274771fb1/sound/voice/alien_drool2.ogg"
+
+- files: ["alien_tail_swipe1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/0991f38801d9fc5c7b7e073cb5788ef42822ad08/sound/effects/alien_tail_swipe1.ogg"
+
+- files: ["alien_tail_swipe2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/0991f38801d9fc5c7b7e073cb5788ef42822ad08/sound/effects/alien_tail_swipe2.ogg"
+
+- files: ["alien_tail_swipe3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/0991f38801d9fc5c7b7e073cb5788ef42822ad08/sound/effects/alien_tail_swipe3.ogg"
+
+- files: ["alien_resin_move1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/485afd96d16f4df22dbbb46f214df931d24a2eb8/sound/effects/alien_resin_move1.ogg"
+
+- files: ["alien_resin_move2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/485afd96d16f4df22dbbb46f214df931d24a2eb8/sound/effects/alien_resin_move2.ogg"

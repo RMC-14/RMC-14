@@ -23,5 +23,12 @@
     - ActionXenoAcid
     - ActionXenoRegurgitate
     - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoChooseStructure
+    - ActionXenoSecreteStructure
     maxPlasma: 500 # TODO CM14
     plasmaRegen: 25
+    canBuild:
+    - WallXenoResin
+    - WallXenoMembrane
+    - DoorXenoResin

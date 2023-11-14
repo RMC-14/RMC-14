@@ -8,7 +8,7 @@
     icon:
       sprite: _CM14/Actions/xeno_actions.rsi
       state: resting
-    event: !type:XenoRestEvent
+    event: !type:XenoRestActionEvent
 
 - type: entity
   id: ActionXenoWatch
@@ -20,4 +20,4 @@
     icon:
       sprite: _CM14/Actions/xeno_actions.rsi
       state: watch_xeno
-    event: !type:XenoWatchEvent
+    event: !type:XenoWatchActionEvent

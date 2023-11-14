@@ -1,30 +1,4 @@
 Entries:
-- author: Verslebas
-  changes:
-  - {message: Changed admin ghost's hands order, type: Tweak}
-  id: 4648
-  time: '2023-08-21T18:35:30.0000000+00:00'
-- author: Potato1234_x
-  changes:
-  - {message: Vending machines have been polished. Again., type: Tweak}
-  id: 4649
-  time: '2023-08-21T18:45:54.0000000+00:00'
-- author: Alekshhh
-  changes:
-  - {message: Changed medical locker contents, type: Tweak}
-  id: 4650
-  time: '2023-08-21T18:49:22.0000000+00:00'
-- author: deltanedas
-  changes:
-  - {message: Air alarms now have output signal ports for each state., type: Tweak}
-  id: 4651
-  time: '2023-08-21T21:18:30.0000000+00:00'
-- author: EmoGarbage404
-  changes:
-  - {message: Freshly spawned diona are no longer gray., type: Fix}
-  - {message: Skeletons are no longer extremely saturated in color., type: Fix}
-  id: 4652
-  time: '2023-08-22T02:05:24.0000000+00:00'
 - author: func_kenobi
   changes:
   - {message: "CentComm allowed the station architectors to place Schr\xF6dinger's\
@@ -2906,3 +2880,34 @@ Entries:
       cyborg modules.', type: Tweak}
   id: 5147
   time: '2023-11-10T01:31:04.0000000+00:00'
+- author: Vasilis
+  changes:
+  - {message: 'Made stasis beds actually buildable now. They require 2 steel, 3 wires,
+      a capacitor and manipulator (and of course the board).', type: Tweak}
+  - {message: Fixed a bug where the stasis bed getting deconstructed would delete
+      the player laying on it., type: Fix}
+  - {message: Microwave contents will be ejected on deconstruct., type: Fix}
+  id: 5148
+  time: '2023-11-11T06:42:59.0000000+00:00'
+- author: Doru991
+  changes:
+  - {message: Entry-level cyborg modules for each chassis are now craftable by default.,
+    type: Tweak}
+  id: 5149
+  time: '2023-11-11T06:43:13.0000000+00:00'
+- author: ElectroJr
+  changes:
+  - {message: Fixed spectating a player in a replay not following the spectated player
+      when they become a ghost., type: Fix}
+  id: 5150
+  time: '2023-11-11T06:45:47.0000000+00:00'
+- author: Brandon_H
+  changes:
+  - {message: Plants can no longer grow without sufficient water and nutrients., type: Fix}
+  id: 5151
+  time: '2023-11-11T19:12:13.0000000+00:00'
+- author: Vasilis
+  changes:
+  - {message: Bees can no longer turn into zombies., type: Fix}
+  id: 5152
+  time: '2023-11-11T19:15:59.0000000+00:00'

@@ -1,0 +1,6 @@
+﻿- type: damageModifierSet
+  id: Resin # TODO CM14 rebalance
+  coefficients:
+    Heat: 1.5
+  flatReductions:
+    Blunt: 5

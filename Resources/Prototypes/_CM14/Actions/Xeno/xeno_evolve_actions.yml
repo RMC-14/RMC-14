@@ -8,6 +8,6 @@
     icon:
       sprite: _CM14/Actions/xeno_actions.rsi
       state: evolve
-    event: !type:XenoOpenEvolutionsEvent
+    event: !type:XenoOpenEvolutionsActionEvent
   - type: XenoEvolveAction
     cooldown: 60
