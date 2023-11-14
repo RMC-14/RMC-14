@@ -32,16 +32,16 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<XenoComponent, Events.XenoPlantWeedsActionEvent>(OnXenoPlantWeeds);
-        SubscribeLocalEvent<XenoComponent, Events.XenoChooseStructureActionEvent>(OnXenoChooseStructure);
+        SubscribeLocalEvent<XenoComponent, XenoPlantWeedsActionEvent>(OnXenoPlantWeeds);
+        SubscribeLocalEvent<XenoComponent, XenoChooseStructureActionEvent>(OnXenoChooseStructure);
         SubscribeLocalEvent<XenoComponent, XenoChooseStructureBuiMessage>(OnXenoChooseStructureBui);
-        SubscribeLocalEvent<XenoComponent, Events.XenoSecreteStructureEvent>(OnXenoSecreteStructure);
-        SubscribeLocalEvent<XenoComponent, Events.XenoSecreteStructureDoAfterEvent>(OnXenoSecreteStructureDoAfter);
+        SubscribeLocalEvent<XenoComponent, XenoSecreteStructureEvent>(OnXenoSecreteStructure);
+        SubscribeLocalEvent<XenoComponent, XenoSecreteStructureDoAfterEvent>(OnXenoSecreteStructureDoAfter);
         SubscribeLocalEvent<XenoWeedsComponent, AnchorStateChangedEvent>(OnWeedsAnchorChanged);
         SubscribeLocalEvent<XenoChooseConstructionActionComponent, XenoConstructionChosenEvent>(OnActionConstructionChosen);
     }
 
-    private void OnXenoPlantWeeds(Entity<XenoComponent> ent, ref Events.XenoPlantWeedsActionEvent args)
+    private void OnXenoPlantWeeds(Entity<XenoComponent> ent, ref XenoPlantWeedsActionEvent args)
     {
         var coordinates = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager, _map);
 
@@ -70,7 +70,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
             Spawn(args.Prototype, coordinates);
     }
 
-    private void OnXenoChooseStructure(Entity<XenoComponent> xeno, ref Events.XenoChooseStructureActionEvent args)
+    private void OnXenoChooseStructure(Entity<XenoComponent> xeno, ref XenoChooseStructureActionEvent args)
     {
         if (_net.IsClient || !TryComp(xeno, out ActorComponent? actor))
             return;
@@ -97,21 +97,22 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         }
     }
 
-    private void OnXenoSecreteStructure(Entity<XenoComponent> xeno, ref Events.XenoSecreteStructureEvent args)
+    private void OnXenoSecreteStructure(Entity<XenoComponent> xeno, ref XenoSecreteStructureEvent args)
     {
         if (xeno.Comp.BuildChoice == null || !CanBuildOnTilePopup(xeno, args.Target))
             return;
 
-        var ev = new Events.XenoSecreteStructureDoAfterEvent(GetNetCoordinates(args.Target), xeno.Comp.BuildChoice.Value);
+        var ev = new XenoSecreteStructureDoAfterEvent(GetNetCoordinates(args.Target), xeno.Comp.BuildChoice.Value);
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.BuildDelay, ev, xeno)
         {
             BreakOnUserMove = true
         };
 
+        // TODO CM14 building animation
         _doAfter.TryStartDoAfter(doAfter);
     }
 
-    private void OnXenoSecreteStructureDoAfter(Entity<XenoComponent> xeno, ref Events.XenoSecreteStructureDoAfterEvent args)
+    private void OnXenoSecreteStructureDoAfter(Entity<XenoComponent> xeno, ref XenoSecreteStructureDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled)
             return;
