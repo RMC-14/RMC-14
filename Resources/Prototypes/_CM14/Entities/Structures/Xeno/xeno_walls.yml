@@ -1,0 +1,68 @@
+﻿- type: entity
+  parent: BaseWall
+  id: BaseWallXeno
+  abstract: true
+  components:
+  - type: Damageable
+    damageContainer: Resin
+    damageModifierSet: Resin
+  - type: Appearance
+  - type: RadiationBlocker
+    resistance: 5
+
+- type: entity
+  parent: BaseWallXeno
+  id: WallXenoResin
+  name: resin wall
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Xenos/xeno_resin_wall.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Xenos/xeno_resin_wall.rsi
+    state: resin
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 500 # TODO CM14 rebalance
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: IconSmooth
+    key: walls
+    base: resin
+
+- type: entity
+  parent: BaseWallXeno
+  id: WallXenoMembrane
+  name: resin membrane
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Xenos/xeno_resin_wall.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Xenos/xeno_resin_wall.rsi
+    state: membrane
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400 # TODO CM14 rebalance
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: IconSmooth
+    key: walls
+    base: membrane
+  - type: Occluder
+    enabled: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+        density: 1000

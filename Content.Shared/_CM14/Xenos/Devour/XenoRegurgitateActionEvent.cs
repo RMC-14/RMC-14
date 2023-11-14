@@ -2,6 +2,6 @@
 
 namespace Content.Shared._CM14.Xenos.Devour;
 
-public sealed partial class XenoRegurgitateEvent : InstantActionEvent
+public sealed partial class XenoRegurgitateActionEvent : InstantActionEvent
 {
 }

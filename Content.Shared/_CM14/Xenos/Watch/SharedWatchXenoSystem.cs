@@ -14,7 +14,7 @@ public abstract class SharedWatchXenoSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<XenoComponent, XenoWatchEvent>(OnXenoWatch);
+        SubscribeLocalEvent<XenoComponent, XenoWatchActionEvent>(OnXenoWatch);
         SubscribeLocalEvent<XenoComponent, XenoWatchBuiMessage>(OnXenoWatchBui);
         SubscribeLocalEvent<XenoComponent, MoveInputEvent>(OnXenoMoveInput);
     }
@@ -36,7 +36,7 @@ public abstract class SharedWatchXenoSystem : EntitySystem
     }
 
 
-    protected virtual void OnXenoWatch(Entity<XenoComponent> ent, ref XenoWatchEvent args)
+    protected virtual void OnXenoWatch(Entity<XenoComponent> ent, ref XenoWatchActionEvent args)
     {
     }
 
