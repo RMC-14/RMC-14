@@ -1,0 +1,67 @@
+- type: entity
+  parent: ClothingHeadBase
+  id: CMHeadBeret
+  name: beret
+  description: Does not protect a head from bullet.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Hats/beret.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Hats/beret.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+
+- type: entity
+  parent: CMHeadBeret
+  id: CMHeadBeretRed
+  name: MP beret
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Hats/beret_red.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Hats/beret_red.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: CMHeadBeretTan
+  name: tan beret
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Hats/beret_tan.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Hats/beret_tan.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: CMHeadBeretWO
+  name: WO`s beret
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Hats/beret_wo.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Hats/beret_wo.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: CMHeadCapMP
+  name: MP Cap
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Hats/mpcap.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Hats/mpcap.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+
+
+- type: entity
+  parent: CMHeadCapMP
+  id: CMHeadCapWarden
+  name: Warden Cap
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Hats/warden.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Hats/warden.rsi

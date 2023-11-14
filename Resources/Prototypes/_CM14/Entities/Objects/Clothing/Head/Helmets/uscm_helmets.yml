@@ -15,3 +15,14 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
+
+- type: entity
+  parent: ArmorHelmetM10
+  id: CMArmorHelmetM10MP
+  name: M10 Helmet MP
+  description: A special variant of the M10 Pattern Helmet worn by the Military Police of the USCM.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10_mp.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10_mp.rsi
