@@ -1,0 +1,17 @@
+﻿- type: entity
+  parent: ClothingHeadBase
+  id: ArmorHelmetM10
+  name: M10 Marine Helmet
+  description: A standard M10 Pattern Helmet. The inside label, along with washing information, reads, 'The difference between an open-casket and closed-casket funeral. Wear on head for best results.'. There is a built-in camera on the right side.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10.rsi
+  - type: Armor 
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
