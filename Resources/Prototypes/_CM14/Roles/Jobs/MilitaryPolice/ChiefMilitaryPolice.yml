@@ -18,8 +18,16 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-command
   canBeAntag: false
-  accessGroups:
-  - AllAccess
+  access:
+  - HeadOfSecurity #CMP
+  - Command
+  - Brig
+  - Security
+  - Armory
+  - Maintenance
+  - External
+  - Engineering
+  - Medical
 
 - type: startingGear #todo cm14
   id: ChiefMPGear

@@ -15,8 +15,18 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-chiefmp
   canBeAntag: false
-  accessGroups: #TODO
-  - AllAccess
+  access:
+  - Brig
+  - Command
+  - External # probably dropship
+  # database
+  # prep
+  - Armory
+  - Medical
+  # morgue
+  # alpha bravo charlie delta
+  - Engineering
+  - Maintenance
 
 - type: startingGear
   id: MilitaryWardenGear

@@ -15,8 +15,17 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-militarywarden
   canBeAntag: false
-  accessGroups: #TODO
-  - AllAccess
+  access:
+  - Brig
+  - Command
+  - External # dropship?
+  #database
+  #prep
+  - Medical
+  # morgue
+  # alpha bravo charlie delta
+  - Engineering
+  - Maintenance
 
 - type: startingGear
   id: MilitaryPoliceGear
