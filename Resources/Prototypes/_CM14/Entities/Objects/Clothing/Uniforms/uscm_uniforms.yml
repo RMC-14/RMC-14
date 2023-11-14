@@ -42,7 +42,7 @@
 - type: entity
   parent: CMJumpsuitWarden
   id: CMJumpsuitWardenBlue
-  name: warden uniform
+  name: blue warden uniform
   description: A standard-issue warden uniform.
   components:
     - type: Sprite
@@ -53,7 +53,7 @@
 - type: entity
   parent: CMJumpsuitWarden
   id: CMJumpsuitWardenRed
-  name: warden uniform
+  name: red warden uniform
   description: A standard-issue warden uniform.
   components:
     - type: Sprite
@@ -64,7 +64,7 @@
 - type: entity
   parent: CMJumpsuitWarden
   id: CMJumpsuitWardenCorporate
-  name: warden uniform
+  name: corporate warden uniform
   description: A standard-issue warden uniform.
   components:
     - type: Sprite
@@ -86,7 +86,7 @@
 - type: entity
   parent: CMJumpsuitWarden
   id: CMJumpsuitWardenTan
-  name: warden uniform
+  name: tan warden uniform
   description: A standard-issue warden uniform.
   components:
     - type: Sprite

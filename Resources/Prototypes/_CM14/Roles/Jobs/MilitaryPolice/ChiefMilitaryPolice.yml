@@ -1,0 +1,51 @@
+- type: job
+  id: ChiefMP
+  parent: JobBaseCM
+  name: job-name-chief-mp
+  description: job-description-chief-mp
+  playTimeTracker: JobChiefMP
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: MilitaryPolice
+      time: 36000 # 10 hours
+    - !type:DepartmentTimeRequirement
+      department: Command
+      time: 18000 # 5 hours
+  weight: 5
+  startingGear: ChiefMPGear
+  icon: "hudsquad_cmp" #todo cm14
+  requireAdminNotify: true
+  joinNotifyCrew: true
+  supervisors: job-supervisors-command
+  canBeAntag: false
+  accessGroups:
+  - AllAccess
+
+- type: startingGear #todo cm14
+  id: ChiefMPGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitCaptain
+    back: ClothingBackpackCaptainFilled
+    shoes: CMShoesCombatBoots
+    head: CMHeadBeretWO
+    eyes: ClothingEyesGlassesSunglasses
+    gloves: ClothingHandsGlovesCaptain
+    outerClothing: ClothingOuterArmorCaptainCarapace
+    id: ChiefMPIDCard
+    ears: ClothingHeadsetAltCommand
+  innerClothingSkirt: ClothingUniformJumpskirtCaptain
+  satchel: ClothingBackpackSatchelCaptainFilled
+  duffelbag: ClothingBackpackDuffelCaptainFilled
+
+- type: entity
+  id: SpawnPointChiefMP
+  parent: CMSpawnPointJobBase
+  name: chief mp spawn point
+  components:
+  - type: SpawnPoint
+    job_id: ChiefMP
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: chief_military_police

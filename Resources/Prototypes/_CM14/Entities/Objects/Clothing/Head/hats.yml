@@ -46,6 +46,7 @@
   parent: ClothingHeadBase
   id: CMHeadCapMP
   name: MP Cap
+  description: A ball-cap worn by the more casual of the USCM's Military Police.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Head/Hats/mpcap.rsi
@@ -55,13 +56,16 @@
     tags:
     - ClothMade
 
-
 - type: entity
   parent: CMHeadCapMP
   id: CMHeadCapWarden
   name: Warden Cap
+  description: Smells like donuts.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Head/Hats/warden.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Head/Hats/warden.rsi
+  - type: Tag
+    tags:
+    - ClothMade

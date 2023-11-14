@@ -1,0 +1,48 @@
+- type: job
+  id: MilitaryPolice
+  parent: JobBaseCM
+  name: job-name-militarypolice
+  description: job-description-militarypolice
+  playTimeTracker: JobMilitaryPolice
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 36000 # 10 hours
+  weight: 5
+  startingGear: MilitaryPoliceGear
+  icon: "hudsquad_mp"
+  requireAdminNotify: false
+  joinNotifyCrew: true
+  supervisors: job-supervisors-warden
+  canBeAntag: false
+  accessGroups: #TODO
+  - AllAccess
+
+- type: startingGear
+  id: MilitaryPoliceGear
+  equipment:
+    jumpsuit: CMJumpsuitMP
+    back: ClothingBackpackCaptainFilled
+    shoes: CMShoesCombatBootsBrown
+    head: CMHeadBeretRed
+    eyes: ClothingEyesGlassesSunglasses
+    gloves: ClothingHandsGlovesCaptain
+    outerClothing: ClothingOuterArmorCaptainCarapace
+    id: MilitaryPoliceIDCard
+    ears: ClothingHeadsetAltCommand
+  innerClothingSkirt: CMJumpsuitMP
+  satchel: ClothingBackpackSatchelCaptainFilled
+  duffelbag: ClothingBackpackDuffelCaptainFilled
+
+- type: entity
+  id: SpawnPointMilitaryPolice
+  parent: CMSpawnPointJobBase
+  name: military police spawn point
+  components:
+  - type: SpawnPoint
+    job_id: MilitaryPolice
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: military_police

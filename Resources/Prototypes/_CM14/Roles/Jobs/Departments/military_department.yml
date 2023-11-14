@@ -1,5 +1,9 @@
 ﻿- type: department
   id: MilitaryPolice
+  parent: DepartmentBaseCM
   description: department-MilitaryPolice-description
   color: "#DE3A3A"
-#  roles: TODO CM14
+  roles:
+  - ChiefMilitaryPolice
+  - Warden
+  - MilitaryPolice
