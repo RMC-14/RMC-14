@@ -69,3 +69,34 @@
       interfaces:
         - key: enum.StorageUiKey.Key
           type: StorageBoundUserInterface
+
+- type: entity
+  parent: ArmorMarineM3
+  id: CMArmorM2MP
+  name: M2 pattern mp armor
+  description: M2 Armor offers higher protection against melee attacks but less protection against projectile attacks
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m2_mp.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m2_mp.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.2
+        Heat: 0.7
+  - type: ExplosionResistance
+    damageCoefficient: 0.60
+
+- type: entity
+  parent: CMArmorM2MP
+  id: CMArmorM2Warden
+  name: M2 pattern warden armor
+  description: M2 Armor offers higher protection against melee attacks but less protection against projectile attacks
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m2_mp.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m2_mp.rsi

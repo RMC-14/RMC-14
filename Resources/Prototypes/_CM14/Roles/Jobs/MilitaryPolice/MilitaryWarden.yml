@@ -1,15 +1,15 @@
 - type: job
-  id: Warden
+  id: MilitaryWarden
   parent: JobBaseCM
-  name: job-name-warden
-  description: job-description-warden
-  playTimeTracker: JobWarden
+  name: job-name-militarywarden
+  description: job-description-militarywarden
+  playTimeTracker: JobMilitaryWarden
   requirements:
     - !type:DepartmentTimeRequirement
       department: MilitaryPolice
       time: 18000 # 5 hours
   weight: 5
-  startingGear: WardenGear
+  startingGear: MilitaryWardenGear
   icon: "hudsquad_warden"
   requireAdminNotify: false
   joinNotifyCrew: true
@@ -19,28 +19,29 @@
   - AllAccess
 
 - type: startingGear
-  id: WardenGear
+  id: MilitaryWardenGear
   equipment:
     jumpsuit: CMJumpsuitWarden
-    back: ClothingBackpackCaptainFilled
+    back: ClothingBackpackSecurityFilled
     shoes: CMShoesCombatBoots
     head: CMHeadCapWarden
     eyes: ClothingEyesGlassesSecurity
     gloves: CMHandsBlack
     id: WardenIDCard
-    ears: ClothingHeadsetAltCommand
+    outerClothing: CMArmorM2Warden
+    ears: ClothingHeadsetAltSecurity
     belt: ClothingBeltSecurityFilled
   innerClothingSkirt: CMJumpsuitWarden
-  satchel: ClothingBackpackSatchelCaptainFilled
-  duffelbag: ClothingBackpackDuffelCaptainFilled
+  satchel: ClothingBackpackSatchelSecurityFilled
+  duffelbag: ClothingBackpackDuffelSecurityFilled
 
 - type: entity
-  id: SpawnPointWarden
+  id: SpawnPointMilitaryWarden
   parent: CMSpawnPointJobBase
-  name: warden spawn point
+  name: military warden spawn point
   components:
   - type: SpawnPoint
-    job_id: Warden
+    job_id: MilitaryWarden
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi

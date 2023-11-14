@@ -24,18 +24,19 @@
 - type: startingGear #todo cm14
   id: ChiefMPGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitCaptain
-    back: ClothingBackpackCaptainFilled
+    jumpsuit: CMJumpsuitWO
+    back: ClothingBackpackHOSFilled
     shoes: CMShoesCombatBoots
     head: CMHeadBeretWO
     eyes: ClothingEyesGlassesSecurity
     gloves: CMHandsBlack
     id: ChiefMPIDCard
-    ears: ClothingHeadsetAltCommand
+    outerClothing: CMCoatChiefMP
+    ears: ClothingHeadsetAltSecurity
     belt: ClothingBeltSecurityFilled
-  innerClothingSkirt: ClothingUniformJumpskirtCaptain
-  satchel: ClothingBackpackSatchelCaptainFilled
-  duffelbag: ClothingBackpackDuffelCaptainFilled
+  innerClothingSkirt: CMJumpsuitWO
+  satchel: ClothingBackpackSatchelHOSFilled
+  duffelbag: ClothingBackpackDuffelHOSFilled
 
 - type: entity
   id: SpawnPointChiefMP

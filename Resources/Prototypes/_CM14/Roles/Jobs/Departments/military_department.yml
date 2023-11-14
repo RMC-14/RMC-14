@@ -5,5 +5,5 @@
   color: "#DE3A3A"
   roles:
   - ChiefMilitaryPolice
-  - Warden
+  - MilitaryWarden
   - MilitaryPolice

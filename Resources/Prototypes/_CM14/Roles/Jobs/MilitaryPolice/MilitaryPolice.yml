@@ -13,7 +13,7 @@
   icon: "hudsquad_mp"
   requireAdminNotify: false
   joinNotifyCrew: true
-  supervisors: job-supervisors-warden
+  supervisors: job-supervisors-militarywarden
   canBeAntag: false
   accessGroups: #TODO
   - AllAccess
@@ -21,18 +21,19 @@
 - type: startingGear
   id: MilitaryPoliceGear
   equipment:
-    jumpsuit: CMJumpsuitMP
-    back: ClothingBackpackCaptainFilled
-    shoes: CMShoesCombatBootsBrown
+    jumpsuit: CMJumpsuitMPBlack
+    back: ClothingBackpackSecurityFilled
+    shoes: CMShoesCombatBoots
     head: CMHeadBeretRed
     eyes: ClothingEyesGlassesSecurity
     gloves: CMHandsBlack
     id: MilitaryPoliceIDCard
-    ears: ClothingHeadsetAltCommand
+    outerClothing: CMArmorM2MP
+    ears: ClothingHeadsetSecurity
     belt: ClothingBeltSecurityFilled
-  innerClothingSkirt: CMJumpsuitMP
-  satchel: ClothingBackpackSatchelCaptainFilled
-  duffelbag: ClothingBackpackDuffelCaptainFilled
+  innerClothingSkirt: CMJumpsuitMPBlack
+  satchel: ClothingBackpackSatchelSecurityFilled
+  duffelbag: ClothingBackpackDuffelSecurityFilled
 
 - type: entity
   id: SpawnPointMilitaryPolice
