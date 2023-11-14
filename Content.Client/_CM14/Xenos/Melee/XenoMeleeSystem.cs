@@ -30,23 +30,34 @@ public sealed class XenoMeleeSystem : SharedXenoMeleeSystem
         base.Initialize();
 
 #if DEBUG
-        _console.RegisterCommand("toggleshowtailattack", (shell, _, _) =>
-        {
-            _showTailAttack = !_showTailAttack;
-
-            if (_showTailAttack)
-            {
-                var overlay = new TailStabOverlay();
-                _overlays.AddOverlay(overlay);
-                shell.WriteLine("Enabled showing tail attack hitboxes");
-            }
-            else
-            {
-                _overlays.RemoveOverlay<TailStabOverlay>();
-                shell.WriteLine("Disabled showing tail attack hitboxes");
-            }
-        });
+        _console.RegisterCommand("toggleshowtailattack", ToggleShowTailAttack);
 #endif
+    }
+
+    public override void Shutdown()
+    {
+        base.Shutdown();
+
+#if DEBUG
+        _console.UnregisterCommand("toggleshowtailattack");
+#endif
+    }
+
+    private void ToggleShowTailAttack(IConsoleShell shell, string s, string[] strings)
+    {
+        _showTailAttack = !_showTailAttack;
+
+        if (_showTailAttack)
+        {
+            var overlay = new TailStabOverlay();
+            _overlays.AddOverlay(overlay);
+            shell.WriteLine("Enabled showing tail attack hitboxes");
+        }
+        else
+        {
+            _overlays.RemoveOverlay<TailStabOverlay>();
+            shell.WriteLine("Disabled showing tail attack hitboxes");
+        }
     }
 
     protected override void DoLunge(Entity<XenoComponent, TransformComponent> user, Vector2 localPos, EntProtoId animationId)
