@@ -117,3 +117,67 @@
           whitelist:
             tags:
               - CartridgeRifle10x24mm
+
+- type: entity
+  name: M4RA battle rifle
+  parent: BaseWeaponRifle
+  id: WeaponRifleM4RA
+  description: The M4RA battle rifle is a designated marksman rifle in service with the USCM. Sporting a bullpup configuration, the M4RA battle rifle is perfect for reconnaissance and fire support teams.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Weapons/Guns/Rifles/m4ra.rsi
+      layers:
+        - state: base
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-0
+          map: ["enum.GunVisualLayers.Mag"]
+    - type: Clothing
+      sprite: _CM14/Objects/Weapons/Guns/Rifles/m4ra.rsi
+      quickEquip: false
+      slots:
+        - Back
+        - suitStorage
+    - type: Wieldable
+    - type: Gun
+      minAngle: 30
+      maxAngle: 50
+      angleIncrease: 5
+      angleDecay: 10
+      fireRate: 5
+      selectedMode: SemiAuto
+      availableModes:
+        - SemiAuto
+      soundGunshot:
+        path: /Audio/Weapons/Guns/Gunshots/m4ra.ogg
+    - type: GunWieldBonus
+      minAngle: -30
+      maxAngle: -40
+    - type: ItemSlots
+      slots:
+        gun_magazine:
+          name: Magazine
+          startingItem: MagazineRifleM4RA
+          insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+          ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+          priority: 2
+          whitelist:
+            tags:
+              - MagazineRifleM4RA
+        gun_chamber:
+          name: Chamber
+          startingItem: CartridgeRifle10x24mm
+          priority: 1
+          whitelist:
+            tags:
+              - CartridgeRifle10x24mm
+    - type: ContainerContainer
+      containers:
+        gun_magazine: !type:ContainerSlot
+        gun_chamber: !type:ContainerSlot
+    - type: MagazineVisuals
+      magState: mag
+      steps: 1
+      zeroVisible: true
+    - type: Appearance
+    - type: ChamberMagazineAmmoProvider
+      autoEject: true
