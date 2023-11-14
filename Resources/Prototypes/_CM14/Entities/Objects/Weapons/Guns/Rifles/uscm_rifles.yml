@@ -63,3 +63,57 @@
     - type: Appearance
     - type: ChamberMagazineAmmoProvider
       autoEject: true
+
+- type: entity
+  name: M41AE2 heavy pulse rifle
+  parent: WeaponRifleM41A
+  id: WeaponRifleM41AE2
+  description: A large squad support weapon capable of laying down sustained suppressing fire from a mounted position. While unstable and less accurate, it can be lugged and shot with two hands.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Weapons/Guns/Rifles/m41ae2.rsi
+      layers:
+        - state: base
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-0
+          map: ["enum.GunVisualLayers.Mag"]
+    - type: Clothing
+      sprite: _CM14/Objects/Weapons/Guns/Rifles/m41ae2.rsi
+      quickEquip: false
+      slots:
+        - Back
+        - suitStorage
+    - type: Gun
+      minAngle: 30
+      maxAngle: 60
+      angleIncrease: 2
+      angleDecay: 20
+      fireRate: 5
+      selectedMode: FullAuto
+      availableModes:
+        - SemiAuto
+        - Burst
+        - FullAuto
+      soundGunshot:
+        path: /Audio/Weapons/Guns/Gunshots/m41ae2.ogg
+    - type: GunWieldBonus
+      minAngle: -25
+      maxAngle: -30
+    - type: ItemSlots
+      slots:
+        gun_magazine:
+          name: Magazine
+          startingItem: MagazineRifleM41AE2
+          insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+          ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+          priority: 2
+          whitelist:
+            tags:
+              - MagazineRifleM41AE2
+        gun_chamber:
+          name: Chamber
+          startingItem: CartridgeRifle10x24mm
+          priority: 1
+          whitelist:
+            tags:
+              - CartridgeRifle10x24mm

@@ -29,7 +29,7 @@
 - type: entity
   id: MagazineRifleM41AE2
   name: "M41AE2 magazine (10x24mm)"
-  parent: BaseMagazineRifle
+  parent: MagazineRifleM41
   components:
   - type: Tag
     tags:
@@ -42,11 +42,17 @@
     proto: CartridgeRifle10x24mm
     capacity: 300
   - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m41ae2.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
 
 - type: entity
   id: MagazineRifleM4RA
