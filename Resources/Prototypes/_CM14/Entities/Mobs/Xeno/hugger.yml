@@ -1,0 +1,37 @@
+﻿- type: entity # TODO CM14 description
+  parent: CMXenoUndeveloped
+  id: CMXenoHugger
+  name: Facehugger
+  components:
+  - type: Sprite
+    sprite: _CM14/Mobs/Xenos/Hugger/hugger.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      50: Dead # TODO CM14
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoWatch
+    - ActionXenoHide
+    evolvesTo:
+    - CMXenoDrone
+    maxPlasma: 10
+    plasmaRegenOnWeeds: 1
+  - type: XenoHide
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 100
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: XenoAnimateMovement
