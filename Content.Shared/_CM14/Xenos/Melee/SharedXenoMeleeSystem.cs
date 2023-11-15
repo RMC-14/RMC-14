@@ -64,7 +64,8 @@ public abstract class SharedXenoMeleeSystem : EntitySystem
         if (userCoords.MapId != targetCoords.MapId)
             return;
 
-        var box = new Box2(userCoords.Position.X - 0.10f, userCoords.Position.Y, userCoords.Position.X + 0.10f, userCoords.Position.Y + xeno.Comp.TailRange);
+        var tailRange = xeno.Comp.TailRange.Float();
+        var box = new Box2(userCoords.Position.X - 0.10f, userCoords.Position.Y, userCoords.Position.X + 0.10f, userCoords.Position.Y + tailRange);
 
         var matrix = _transform.GetInvWorldMatrix(transform).Transform(targetCoords.Position);
         var rotation = _transform.GetWorldRotation(xeno).RotateVec(-matrix).ToWorldAngle();
@@ -82,8 +83,8 @@ public abstract class SharedXenoMeleeSystem : EntitySystem
         // so we do one ray cast on each side instead since its narrow enough
         // im sure you could calculate the ray bounds more efficiently
         // but have you seen these allocations either way
-        var intersect = _physics.IntersectRayWithPredicate(transform.MapID, leftRay, xeno.Comp.TailRange, uid => uid == xeno.Owner || !HasComp<MobStateComponent>(uid), false);
-        intersect = intersect.Concat(_physics.IntersectRayWithPredicate(transform.MapID, rightRay, xeno.Comp.TailRange, uid => uid == xeno.Owner ||!HasComp<MobStateComponent>(uid), false));
+        var intersect = _physics.IntersectRayWithPredicate(transform.MapID, leftRay, tailRange, uid => uid == xeno.Owner || !HasComp<MobStateComponent>(uid), false);
+        intersect = intersect.Concat(_physics.IntersectRayWithPredicate(transform.MapID, rightRay, tailRange, uid => uid == xeno.Owner ||!HasComp<MobStateComponent>(uid), false));
         var results = intersect.Select(r => r.HitEntity).ToList();
 
         // TODO CM14 sounds
@@ -128,7 +129,7 @@ public abstract class SharedXenoMeleeSystem : EntitySystem
         var localPos = transform.LocalRotation.RotateVec(matrix);
 
         var length = localPos.Length();
-        localPos *= xeno.Comp.TailRange / length;
+        localPos *= tailRange / length;
 
         DoLunge((xeno, xeno, transform), localPos, "WeaponArcThrust");
 

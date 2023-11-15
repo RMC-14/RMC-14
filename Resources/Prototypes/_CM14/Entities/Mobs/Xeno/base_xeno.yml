@@ -131,6 +131,8 @@
       type: XenoWatchBui
     - key: enum.XenoChooseStructureUI.Key
       type: XenoChooseStructureBui
+    - key: enum.XenoPheromonesUI.Key
+      type: XenoPheromonesBui
   - type: TypingIndicator
     proto: alien
   - type: AtmosExposed
@@ -197,7 +199,7 @@
     animation: WeaponArcBite
     damage:
       groups:
-        Brute: 6
+        Brute: 12
 
 - type: entity
   id: CMXenoLarge

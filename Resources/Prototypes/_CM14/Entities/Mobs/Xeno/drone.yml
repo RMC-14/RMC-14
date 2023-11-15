@@ -18,15 +18,17 @@
   - type: Xeno
     actionIds:
     - ActionXenoRest
-    - ActionXenoPlantWeeds
-    - ActionXenoAcid
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
+    - ActionXenoAcid
+    - ActionXenoPheromones
+    - ActionXenoPlantWeeds
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
+    plasma: 300
     maxPlasma: 300 # TODO CM14
-    plasmaRegen: 12
+    plasmaRegenOnWeeds: 6
     canBuild:
     - WallXenoResin
     - WallXenoMembrane

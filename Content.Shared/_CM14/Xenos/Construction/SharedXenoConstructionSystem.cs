@@ -28,9 +28,13 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
 
+    private EntityQuery<XenoWeedsComponent> _weedsQuery;
+
     public override void Initialize()
     {
         base.Initialize();
+
+        _weedsQuery = GetEntityQuery<XenoWeedsComponent>();
 
         SubscribeLocalEvent<XenoComponent, XenoPlantWeedsActionEvent>(OnXenoPlantWeeds);
         SubscribeLocalEvent<XenoComponent, XenoChooseStructureActionEvent>(OnXenoChooseStructure);
@@ -51,16 +55,10 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        var position = _mapSystem.LocalToTile(gridUid, grid, coordinates);
-        var enumerator = _mapSystem.GetAnchoredEntitiesEnumerator(gridUid, grid, position);
-
-        while (enumerator.MoveNext(out var anchored))
+        if (IsOnWeeds((gridUid, grid), coordinates))
         {
-            if (HasComp<XenoWeedsComponent>(anchored))
-            {
-                _popup.PopupClient(Loc.GetString("cm-xeno-weeds-already-here"), ent.Owner, ent.Owner);
-                return;
-            }
+            _popup.PopupClient(Loc.GetString("cm-xeno-weeds-already-here"), ent.Owner, ent.Owner);
+            return;
         }
 
         if (!_xeno.TryRemovePlasmaPopup(ent, args.PlasmaCost))
@@ -132,7 +130,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
 
     private void OnWeedsAnchorChanged(Entity<XenoWeedsComponent> weeds, ref AnchorStateChangedEvent args)
     {
-        if (!args.Anchored)
+        if (_net.IsServer && !args.Anchored)
             QueueDel(weeds);
     }
 
@@ -149,7 +147,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
     private bool CanBuildOnTilePopup(Entity<XenoComponent> xeno, EntityCoordinates target)
     {
         var origin = _transform.GetMoverCoordinates(xeno);
-        if (!origin.InRange(EntityManager, _transform, target, xeno.Comp.BuildRange) ||
+        if (!origin.InRange(EntityManager, _transform, target, xeno.Comp.BuildRange.Float()) ||
             target.GetTileRef(EntityManager, _map) is not { } tile ||
             tile.IsSpace() ||
             !tile.GetContentTileDefinition().Sturdy ||
@@ -160,5 +158,38 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         }
 
         return true;
+    }
+
+    public bool IsOnWeeds(Entity<TransformComponent?> entity)
+    {
+        if (!Resolve(entity, ref entity.Comp))
+            return false;
+
+        var coordinates = _transform.GetMoverCoordinates(entity, entity.Comp).SnapToGrid(EntityManager, _map);
+
+        if (coordinates.GetGridUid(EntityManager) is not { } gridUid ||
+            !TryComp(gridUid, out MapGridComponent? grid))
+        {
+            return false;
+        }
+
+        return IsOnWeeds((gridUid, grid), coordinates);
+    }
+
+    private bool IsOnWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates)
+    {
+        // TODO CM14 use collision enter and exit to calculate xenos being on weeds
+        var position = _mapSystem.LocalToTile(grid, grid, coordinates);
+        var enumerator = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, position);
+
+        while (enumerator.MoveNext(out var anchored))
+        {
+            if (_weedsQuery.HasComponent(anchored))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
