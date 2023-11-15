@@ -8,5 +8,5 @@ job-description-militarywarden = Maintain the brig, do bookkeeping, and crack do
 JobMilitaryWarden = Military Warden
 
 job-name-militarypolice = Military Police
-job-description-warden = Enforce Marine Law. Detain Criminals. Keep Shipside Personnel Safe.
-JobWarden = Military Police
+job-description-militarypolice = Enforce Marine Law. Detain Criminals. Keep Shipside Personnel Safe.
+JobMilitaryPolice = Military Police
