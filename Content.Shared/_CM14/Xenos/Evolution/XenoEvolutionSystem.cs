@@ -20,7 +20,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<XenoEvolveActionComponent, MapInitEvent>(OnXenoEvolveActionMapInit);
-        SubscribeLocalEvent<XenoComponent, XenoOpenEvolutionsActionEvent>(OnXenoEvolve);
+        SubscribeLocalEvent<XenoComponent, XenoOpenEvolutionsActionEvent>(OnXenoEvolveAction);
         SubscribeLocalEvent<XenoComponent, XenoEvolveBuiMessage>(OnXenoEvolveBui);
     }
 
@@ -30,7 +30,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             _action.SetCooldown(ent, _timing.CurTime, _timing.CurTime + ent.Comp.Cooldown);
     }
 
-    private void OnXenoEvolve(Entity<XenoComponent> ent, ref XenoOpenEvolutionsActionEvent args)
+    private void OnXenoEvolveAction(Entity<XenoComponent> ent, ref XenoOpenEvolutionsActionEvent args)
     {
         if (_net.IsClient || !TryComp(ent, out ActorComponent? actor))
             return;

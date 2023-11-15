@@ -36,8 +36,8 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
 
         _weedsQuery = GetEntityQuery<XenoWeedsComponent>();
 
-        SubscribeLocalEvent<XenoComponent, XenoPlantWeedsActionEvent>(OnXenoPlantWeeds);
-        SubscribeLocalEvent<XenoComponent, XenoChooseStructureActionEvent>(OnXenoChooseStructure);
+        SubscribeLocalEvent<XenoComponent, XenoPlantWeedsActionEvent>(OnXenoPlantWeedsAction);
+        SubscribeLocalEvent<XenoComponent, XenoChooseStructureActionEvent>(OnXenoChooseStructureAction);
         SubscribeLocalEvent<XenoComponent, XenoChooseStructureBuiMessage>(OnXenoChooseStructureBui);
         SubscribeLocalEvent<XenoComponent, XenoSecreteStructureEvent>(OnXenoSecreteStructure);
         SubscribeLocalEvent<XenoComponent, XenoSecreteStructureDoAfterEvent>(OnXenoSecreteStructureDoAfter);
@@ -45,7 +45,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<XenoChooseConstructionActionComponent, XenoConstructionChosenEvent>(OnActionConstructionChosen);
     }
 
-    private void OnXenoPlantWeeds(Entity<XenoComponent> ent, ref XenoPlantWeedsActionEvent args)
+    private void OnXenoPlantWeedsAction(Entity<XenoComponent> ent, ref XenoPlantWeedsActionEvent args)
     {
         var coordinates = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager, _map);
 
@@ -68,7 +68,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
             Spawn(args.Prototype, coordinates);
     }
 
-    private void OnXenoChooseStructure(Entity<XenoComponent> xeno, ref XenoChooseStructureActionEvent args)
+    private void OnXenoChooseStructureAction(Entity<XenoComponent> xeno, ref XenoChooseStructureActionEvent args)
     {
         if (_net.IsClient || !TryComp(xeno, out ActorComponent? actor))
             return;
