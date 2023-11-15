@@ -33,3 +33,15 @@
       sprite: _CM14/Actions/xeno_actions.rsi
       state: emit_pheromones
     event: !type:XenoPheromonesActionEvent
+
+- type: entity
+  id: ActionXenoHide
+  parent: ActionXenoBase
+  name: Hide
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: xenohide
+    event: !type:XenoHideActionEvent
