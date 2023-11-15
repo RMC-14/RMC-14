@@ -21,3 +21,15 @@
       sprite: _CM14/Actions/xeno_actions.rsi
       state: watch_xeno
     event: !type:XenoWatchActionEvent
+
+- type: entity
+  id: ActionXenoPheromones
+  parent: ActionXenoBase
+  name: Emit Pheromones
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: emit_pheromones
+    event: !type:XenoPheromonesActionEvent

@@ -18,6 +18,14 @@ cm-xeno-acid-already-corroding = {THE($target)} already has corrosive acid on it
 # Devour
 cm-xeno-cant-devour = You can't devour {THE($target)}!
 
+# Pheromones
+cm-xeno-choose-pheromones = Choose Pheromones
+cm-pheromones-recovery = Recovery
+cm-pheromones-warding = Warding
+cm-pheromones-frenzy = Frenzy
+cm-xeno-pheromones-start = You start emitting {$pheromones} pheromones
+cm-xeno-pheromones-stop = You stop emitting pheromones
+
 # Regurgitate
 cm-xeno-none-devoured = You haven't devoured anyone!
 

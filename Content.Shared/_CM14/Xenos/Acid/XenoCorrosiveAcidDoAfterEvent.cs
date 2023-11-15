@@ -1,4 +1,5 @@
 ﻿using Content.Shared.DoAfter;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -11,7 +12,7 @@ public sealed partial class XenoCorrosiveAcidDoAfterEvent : DoAfterEvent
     public EntProtoId AcidId = "XenoAcid";
 
     [DataField]
-    public int PlasmaCost = 75;
+    public FixedPoint2 PlasmaCost = 75;
 
     [DataField]
     public TimeSpan Time = TimeSpan.FromSeconds(30);

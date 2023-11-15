@@ -40,9 +40,7 @@ public sealed class MarineOverlay : Overlay
     protected override void Draw(in OverlayDrawArgs args)
     {
         if (!_entity.HasComponent<MarineComponent>(_players.LocalEntity))
-        {
             return;
-        }
 
         var handle = args.WorldHandle;
 
@@ -74,8 +72,8 @@ public sealed class MarineOverlay : Overlay
 
             var worldMatrix = Matrix3.CreateTranslation(worldPos);
             Matrix3.Multiply(scaleMatrix, worldMatrix, out var scaledWorld);
-            Matrix3.Multiply(rotationMatrix, scaledWorld, out var matty);
-            handle.SetTransform(matty);
+            Matrix3.Multiply(rotationMatrix, scaledWorld, out var matrix);
+            handle.SetTransform(matrix);
 
             foreach (var proto in _icons)
             {
