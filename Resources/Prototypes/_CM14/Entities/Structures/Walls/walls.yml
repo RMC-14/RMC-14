@@ -1,0 +1,88 @@
+# Standart
+- type: entity
+  parent: BaseWall
+  id: CMWallMetal
+  name: wall
+  description: A huge chunk of metal used to separate rooms.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Walls/metal.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Walls/metal.rsi
+  - type: Tag
+    tags:
+      - Wall
+      - RCDDeconstructWhitelist
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviours:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMGirder:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: IconSmooth
+    key: walls
+    base: metal
+  - type: Construction
+    graph: CMGirder
+    node: wall
+
+# Reinforced
+- type: entity
+  parent: BaseWall
+  id: CMWallReinforced
+  name: reinforced wall
+  description: A huge chunk of reinforced metal used to separate rooms.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Walls/rwall.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Walls/rwall.rsi
+  - type: Tag
+    tags:
+      - Wall
+      - RCDDeconstructWhitelist
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviours:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMGirder:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: IconSmooth
+    key: walls
+    base: rwall
+  - type: Construction
+    graph: CMGirder
+    node: reinforcedWall
+
+# Indestructible
+- type: entity
+  parent: BaseWall
+  id: CMWallReinforcedHeavy
+  name: heavy reinforced wall
+  description: A huge chunk of ultra-reinforced metal used to separate rooms. Looks virtually indestructible.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Walls/rwall.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Walls/rwall.rsi
+  - type: Tag
+    tags:
+      - Wall
+  - type: IconSmooth
+    key: walls
+    base: rwall
+

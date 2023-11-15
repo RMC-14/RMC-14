@@ -1,0 +1,53 @@
+- type: construction
+  id: CMGirder
+  name: girder
+  graph: CMGirder
+  startNode: start
+  targetNode: girder
+  category: cm-construction-category-structures
+  description: A large structural assembly made out of metal.
+  icon:
+    sprite: /Textures/_CM14/Structures/Walls/girder.rsi
+    state: girder
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: CMWallMetal
+  name: wall
+  graph: CMGirder
+  startNode: start
+  targetNode: wall
+  category: cm-construction-category-structures
+  description: A large structural assembly made out of metal.
+  icon:
+    sprite: /Textures/_CM14/Structures/Walls/metal.rsi
+    state: full
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: CMWallReinforced
+  name: reinforced wall
+  graph: CMGirder
+  startNode: start
+  targetNode: reinforcedWall
+  category: cm-construction-category-structures
+  description: A large structural assembly made out of metal.
+  icon:
+    sprite: /Textures/_CM14/Structures/Walls/rwall.rsi
+    state: full
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked

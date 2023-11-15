@@ -1,0 +1,14 @@
+- type: entity
+  parent: Girder
+  id: CMGirder
+  name: girder
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Walls/girder.rsi
+    state: girder
+  - type: Icon
+    sprite: _CM14/Structures/Walls/girder.rsi
+    state: girder
+  - type: Construction
+    graph: CMGirder
+    node: girder
