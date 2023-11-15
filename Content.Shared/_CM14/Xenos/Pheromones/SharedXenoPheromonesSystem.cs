@@ -4,6 +4,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
@@ -141,7 +142,8 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
     private void OnWardingRemove(Entity<XenoWardingPheromonesComponent> ent, ref ComponentRemove args)
     {
-        _mobThreshold.VerifyThresholds(ent);
+        if (TryComp(ent, out MobThresholdsComponent? thresholds))
+            _mobThreshold.VerifyThresholds(ent, thresholds);
     }
 
     private void OnWardingDamageModify(Entity<XenoWardingPheromonesComponent> warding, ref DamageModifyEvent args)
