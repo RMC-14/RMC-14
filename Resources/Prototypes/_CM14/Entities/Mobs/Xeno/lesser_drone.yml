@@ -16,15 +16,17 @@
   - type: Xeno
     actionIds:
     - ActionXenoRest
-    - ActionXenoPlantWeeds # TODO CM14 only near other weeds for lesser drones
-    - ActionXenoAcid
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
+    - ActionXenoAcid
+    - ActionXenoPheromones
+    - ActionXenoPlantWeeds # TODO CM14 only near other weeds for lesser drones
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
+    plasma: 300
     maxPlasma: 300
-    plasmaRegen: 12
+    plasmaRegenOnWeeds: 6
     canBuild:
     - WallXenoResin
     - WallXenoMembrane

@@ -23,4 +23,4 @@
     evolvesTo:
     - CMXenoDrone
     maxPlasma: 10 # TODO CM14
-    plasmaRegen: 1
+    plasmaRegenOnWeeds: 1
