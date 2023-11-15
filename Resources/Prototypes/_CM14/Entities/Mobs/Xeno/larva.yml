@@ -18,9 +18,22 @@
   - type: Xeno
     actionIds:
     - ActionXenoRest
-    - ActionXenoEvolve60
     - ActionXenoWatch
+    - ActionXenoHide
+    - ActionXenoEvolve60
     evolvesTo:
     - CMXenoDrone
     maxPlasma: 10 # TODO CM14
     plasmaRegenOnWeeds: 1
+  - type: XenoHide
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 100
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer

@@ -2,6 +2,7 @@
 using Content.Shared._CM14.Xenos.Rest;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Robust.Client.GameObjects;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 using XenoComponent = Content.Shared._CM14.Xenos.XenoComponent;
@@ -10,6 +11,26 @@ namespace Content.Client._CM14.Xenos;
 
 public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
 {
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<XenoComponent, GetDrawDepthEvent>(OnXenoGetDrawDepth);
+    }
+
+    private void OnXenoGetDrawDepth(Entity<XenoComponent> ent, ref GetDrawDepthEvent args)
+    {
+        if (_mobState.IsDead(ent))
+        {
+            if (args.DrawDepth > DrawDepth.DeadMobs)
+            {
+                args.DrawDepth = DrawDepth.DeadMobs;
+            }
+        }
+    }
+
     protected override void OnAppearanceChange(EntityUid uid, XenoComponent component, ref AppearanceChangeEvent args)
     {
         var sprite = args.Sprite;
@@ -25,20 +46,14 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
         switch (state)
         {
             case MobState.Critical:
-                ClearDrawDepth((uid, component, sprite));
-
                 if (rsi.TryGetState("crit", out _))
                     sprite.LayerSetState(layer, "crit");
                 break;
             case MobState.Dead:
-                SetDrawDepth((uid, component, sprite));
-
                 if (rsi.TryGetState("dead", out _))
                     sprite.LayerSetState(layer, "dead");
                 break;
             default:
-                ClearDrawDepth((uid, component, sprite));
-
                 if (args.AppearanceData.TryGetValue(XenoVisualLayers.Base, out var resting) &&
                     resting is XenoRestState.Resting)
                 {
@@ -51,25 +66,18 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
                     sprite.LayerSetState(layer, "alive");
                 break;
         }
+
+        UpdateDrawDepth((uid, sprite));
     }
 
-    private void SetDrawDepth(Entity<XenoComponent, SpriteComponent> ent)
+    public void UpdateDrawDepth(Entity<SpriteComponent?> xeno)
     {
-        var (_, xeno, sprite) = ent;
-        if (sprite.DrawDepth > (int) DrawDepth.DeadMobs)
-        {
-            xeno.OriginalDrawDepth = sprite.DrawDepth;
-            sprite.DrawDepth = (int) DrawDepth.DeadMobs;
-        }
-    }
+        if (!Resolve(xeno, ref xeno.Comp))
+            return;
 
-    private void ClearDrawDepth(Entity<XenoComponent, SpriteComponent> ent)
-    {
-        var (_, xeno, sprite) = ent;
-        if (xeno.OriginalDrawDepth != null)
-        {
-            sprite.DrawDepth = xeno.OriginalDrawDepth.Value;
-            xeno.OriginalDrawDepth = null;
-        }
+        var ev = new GetDrawDepthEvent(DrawDepth.Mobs);
+        RaiseLocalEvent(xeno, ref ev);
+
+        xeno.Comp.DrawDepth = (int) ev.DrawDepth;
     }
 }
