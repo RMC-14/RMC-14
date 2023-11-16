@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingHandsBase
+  parent: [ClothingHandsBase, CMEntityBase]
   id: CMHandsBlack
   name: black gloves
   description: A pair of black gloves.
@@ -14,7 +14,7 @@
   - type: FingerprintMask
 
 - type: entity
-  parent: ClothingHandsBase
+  parent: [ClothingHandsBase, CMEntityBase]
   id: CMHandsBrown
   name: brown gloves
   description: A pair of brown gloves.

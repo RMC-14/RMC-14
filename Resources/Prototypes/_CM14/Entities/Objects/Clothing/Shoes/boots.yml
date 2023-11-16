@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingShoesStorageBase
+  parent: [ClothingShoesStorageBase, CMEntityBase]
   id: CMShoesCombatBoots
   name: combat boots
   description: Standard issue combat boots used by the USCM for combat situations.
