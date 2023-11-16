@@ -1,0 +1,27 @@
+- type: entity
+  id: MagazinePistolM4A3
+  name: M4A3 magazine (9mm)
+  parent: BaseMagazinePistol
+  components:
+  - type: Tag
+    tags:
+      - MagazinePistolM4A3
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+        - CartridgePistol9mm
+    proto: CartridgePistol9mm
+    capacity: 9
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m4a3.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance

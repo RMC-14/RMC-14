@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken/modified from cmss13 at https://github.com/cmss13-devs/cmss13/pull/4029/commits/0d5274d407a165bc605b6a80686be22f6782cf06",
+  "size": {
+      "x": 32,
+      "y": 32
+  },
+  "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "inhand-right",
+            "directions": 4
+        }
+  ]
+}

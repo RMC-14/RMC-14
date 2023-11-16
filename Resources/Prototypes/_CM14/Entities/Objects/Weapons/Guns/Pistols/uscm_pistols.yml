@@ -1,0 +1,62 @@
+﻿- type: entity
+  name: M4A3 service pistol
+  parent: BaseWeaponPistol
+  id: WeaponPistolM4A3
+  description: An M4A3 Service Pistol, once the standard issue sidearm of the Colonial Marines but has recently been replaced with the 88 Mod 4 combat pistol.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Weapons/Guns/Pistols/m4a3.rsi
+      layers:
+        - state: base
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-0
+          map: ["enum.GunVisualLayers.Mag"]
+    - type: Clothing
+      sprite: _CM14/Objects/Weapons/Guns/Pistols/m4a3.rsi
+      quickEquip: false
+      slots:
+        - suitStorage
+    - type: Wieldable
+    - type: Gun
+      minAngle: 10
+      maxAngle: 30
+      angleIncrease: 10
+      angleDecay: 10
+      fireRate: 10
+      selectedMode: SemiAuto
+      availableModes:
+        - SemiAuto
+      soundGunshot:
+        path: /Audio/_CM14/Weapons/Guns/Gunshots/m4a3.ogg
+    - type: GunWieldBonus
+      minAngle: -5
+      maxAngle: -25
+    - type: ItemSlots
+      slots:
+        gun_magazine:
+          name: Magazine
+          startingItem: MagazinePistolM4A3
+          insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+          ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+          priority: 2
+          whitelist:
+            tags:
+              - MagazinePistolM4A3
+        gun_chamber:
+          name: Chamber
+          startingItem: CartridgePistol9mm
+          priority: 1
+          whitelist:
+            tags:
+              - CartridgePistol9mm
+    - type: ContainerContainer
+      containers:
+        gun_magazine: !type:ContainerSlot
+        gun_chamber: !type:ContainerSlot
+    - type: MagazineVisuals
+      magState: mag
+      steps: 1
+      zeroVisible: true
+    - type: Appearance
+    - type: ChamberMagazineAmmoProvider
+      autoEject: true

@@ -1,0 +1,10 @@
+- type: entity
+  id: BulletRifle10x24mm
+  name: bullet (10x24mm)
+  parent: BaseBullet
+  noSpawn: true
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 44
