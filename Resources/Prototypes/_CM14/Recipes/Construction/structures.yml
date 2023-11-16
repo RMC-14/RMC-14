@@ -17,13 +17,31 @@
     - !type:TileNotBlocked
 
 - type: construction
+  id: CMGirderReinforced
+  name: reinforced girder
+  graph: CMGirder
+  startNode: start
+  targetNode: reinforcedGirder
+  category: cm-construction-category-structures
+  description: A large structural assembly made out of metal and plasteel.
+  icon:
+    sprite: /Textures/_CM14/Structures/Walls/girder.rsi
+    state: reinforced
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
   id: CMWallMetal
   name: wall
   graph: CMGirder
   startNode: start
   targetNode: wall
   category: cm-construction-category-structures
-  description: A large structural assembly made out of metal.
+  description: A huge chunk of metal used to separate rooms.
   icon:
     sprite: /Textures/_CM14/Structures/Walls/metal.rsi
     state: full
@@ -41,7 +59,7 @@
   startNode: start
   targetNode: reinforcedWall
   category: cm-construction-category-structures
-  description: A large structural assembly made out of metal.
+  description: A huge chunk of reinforced metal used to separate rooms.
   icon:
     sprite: /Textures/_CM14/Structures/Walls/rwall.rsi
     state: full

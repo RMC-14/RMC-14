@@ -40,7 +40,7 @@
               amount: 2
               doAfter: 2
 
-        - to: reinforcedWall
+        - to: reinforcedGirder
           completed:
             - !type:SnapToGrid
               southRotation: true
@@ -63,10 +63,37 @@
             - tool: Welding
               doAfter: 10
 
+    - node: reinforcedGirder
+      entity: CMGirderReinforced
+      edges:
+        - to: reinforcedWall
+          completed:
+            - !type:SnapToGrid
+            southRotation: true
+          conditions:
+            - !type:EntityAnchored { }
+          steps:
+            - material: Plasteel
+              amount: 2
+              doAfter: 1
+
+        - to: girder
+          completed:
+            - !type:SnapToGrid
+            southRotation: true
+            - !type:SpawnPrototype
+              prototype: SheetPlasteel1
+              amount: 2
+          conditions:
+            - !type:EntityAnchored { }
+          steps:
+            - tool: Cutting
+              doAfter: 2
+
     - node: reinforcedWall
       entity: CMWallReinforced
       edges:
-        - to: girder
+        - to: reinforcedGirder
           completed:
             - !type:SpawnPrototype
               prototype: SheetPlasteel1

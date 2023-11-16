@@ -1,6 +1,46 @@
+# BaseWall
+- type: entity
+  abstract: true
+  parent: [BaseStructure, CMEntityBase]
+  id: CMBaseWall
+  description: A huge chunk of metal used to separate rooms.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Sprite
+    drawdepth: Walls
+  - type: Icon
+    state: full
+  - type: PlacementReplacement
+    key: walls
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Occluder
+  - type: Airtight
+  - type: RadiationBlocker
+    resistance: 2
+  - type: StaticPrice
+    price: 75
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+        density: 1000
+
 # Standart
 - type: entity
-  parent: BaseWall
+  parent: CMBaseWall
   id: CMWallMetal
   name: wall
   description: A huge chunk of metal used to separate rooms.
@@ -35,7 +75,7 @@
 
 # Reinforced
 - type: entity
-  parent: BaseWall
+  parent: CMBaseWall
   id: CMWallReinforced
   name: reinforced wall
   description: A huge chunk of reinforced metal used to separate rooms.
@@ -70,7 +110,7 @@
 
 # Indestructible
 - type: entity
-  parent: BaseWall
+  parent: CMBaseWall
   id: CMWallReinforcedHeavy
   name: heavy reinforced wall
   description: A huge chunk of ultra-reinforced metal used to separate rooms. Looks virtually indestructible.
