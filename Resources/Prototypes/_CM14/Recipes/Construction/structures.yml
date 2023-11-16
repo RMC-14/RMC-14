@@ -4,7 +4,7 @@
   graph: CMGirder
   startNode: start
   targetNode: girder
-  category: cm-construction-category-structures
+  category: construction-category-cm-structures
   description: A large structural assembly made out of metal.
   icon:
     sprite: /Textures/_CM14/Structures/Walls/girder.rsi
@@ -22,7 +22,7 @@
   graph: CMGirder
   startNode: start
   targetNode: reinforcedGirder
-  category: cm-construction-category-structures
+  category: construction-category-cm-structures
   description: A large structural assembly made out of metal and plasteel.
   icon:
     sprite: /Textures/_CM14/Structures/Walls/girder.rsi
@@ -40,7 +40,7 @@
   graph: CMGirder
   startNode: start
   targetNode: wall
-  category: cm-construction-category-structures
+  category: construction-category-cm-structures
   description: A huge chunk of metal used to separate rooms.
   icon:
     sprite: /Textures/_CM14/Structures/Walls/metal.rsi
@@ -58,7 +58,7 @@
   graph: CMGirder
   startNode: start
   targetNode: reinforcedWall
-  category: cm-construction-category-structures
+  category: construction-category-cm-structures
   description: A huge chunk of reinforced metal used to separate rooms.
   icon:
     sprite: /Textures/_CM14/Structures/Walls/rwall.rsi

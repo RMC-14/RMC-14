@@ -1,2 +1,2 @@
-cm-construction-category-all = CM All
-cm-construction-category-structures = CM Structures
+construction-category-cm-all = CM All
+construction-category-cm-structures = CM Structures
