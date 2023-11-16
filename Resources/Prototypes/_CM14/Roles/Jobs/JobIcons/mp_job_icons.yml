@@ -11,11 +11,11 @@
   id: JobIconMilitaryWarden
   icon:
     sprite: _CM14/Interface/cm_job_icons.rsi
-    state: hudsquad_cmp
+    state: hudsquad_warden
 
 - type: statusIcon
   parent: JobIcon
   id: JobIconMilitaryPolice
   icon:
     sprite: _CM14/Interface/cm_job_icons.rsi
-    state: hudsquad_cmp
+    state: hudsquad_mp
