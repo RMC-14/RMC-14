@@ -107,6 +107,8 @@
   - type: Construction
     graph: CMGirder
     node: reinforcedWall
+  - type: StaticPrice
+    price: 150
 
 # Indestructible
 - type: entity
