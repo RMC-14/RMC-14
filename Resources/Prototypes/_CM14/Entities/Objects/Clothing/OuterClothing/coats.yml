@@ -1,6 +1,6 @@
 # ChiefMP
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: [ClothingOuterStorageBase, CMEntityBase]
   id: CMCoatChiefMP
   name: chief mp coat
   description: To enforce the law with style.
@@ -12,7 +12,7 @@
 
 # Military Warden
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: [ClothingOuterStorageBase, CMEntityBase]
   id: CMCoatWarden
   name: warden coat
   description: To enforce the law with style.
@@ -24,7 +24,7 @@
 
 # Military Police
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: [ClothingOuterStorageBase, CMEntityBase]
   id: CMCoatMP
   name: military police coat
   description: To enforce the law with style.

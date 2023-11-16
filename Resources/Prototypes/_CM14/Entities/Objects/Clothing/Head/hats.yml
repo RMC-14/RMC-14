@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingHeadBase
+  parent: [ClothingHeadBase, CMEntityBase]
   id: CMHeadBeret
   name: beret
   description: Does not protect a head from bullet.
@@ -43,7 +43,7 @@
     sprite: _CM14/Objects/Clothing/Head/Hats/beret_wo.rsi
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: [ClothingHeadBase, CMEntityBase]
   id: CMHeadCapMP
   name: MP Cap
   description: A ball-cap worn by the more casual of the USCM's Military Police.
