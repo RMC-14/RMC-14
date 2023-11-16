@@ -69,3 +69,45 @@
       interfaces:
         - key: enum.StorageUiKey.Key
           type: StorageBoundUserInterface
+
+- type: entity
+  parent: ArmorMarineM3
+  id: CMArmorM2MP
+  name: M2 pattern mp armor
+  description: M2 Armor offers higher protection against melee attacks but less protection against projectile attacks
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m2_mp.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m2_mp.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.2
+        Heat: 0.7
+  - type: ExplosionResistance
+    damageCoefficient: 0.60
+
+- type: entity
+  parent: ArmorMarineM3
+  id: CMArmorM3Warden
+  name: M3 pattern warden armor
+  description: A well-crafted suit of M3 Pattern Armor typically distributed to Wardens. 
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3_warden.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3_warden.rsi
+
+- type: entity
+  parent: ArmorMarineM3
+  id: CMArmorM3WO
+  name: M3 pattern chief mp armor
+  description: A well-crafted suit of M3 Pattern Armor typically distributed to Chief MPs. Useful for letting your men know who is in charge. 
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3_wo.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3_wo.rsi

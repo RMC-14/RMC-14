@@ -28,3 +28,13 @@
 
 - type: playTimeTracker
   id: JobStaffOfficer
+
+# military police
+- type: playTimeTracker
+  id: JobChiefMP
+
+- type: playTimeTracker
+  id: JobMilitaryWarden
+
+- type: playTimeTracker
+  id: JobMilitaryPolice
