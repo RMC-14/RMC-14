@@ -1,0 +1,23 @@
+﻿- type: entity
+  parent: CMIDCardSilver
+  id: CMQuartermasterIDCard
+  name: quartermaster ID card
+  components:
+  - type: PresetIdCard
+    job: CMQuartermaster
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: DogtagCargoTech
+  name: cargo tech`s dogtags
+  components:
+  - type: PresetIdCard
+    job: CMCargoTech
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: DogtagMessTech
+  name: mess tech`s dogtags
+  components:
+  - type: PresetIdCard
+    job: MessTech

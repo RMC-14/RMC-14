@@ -1,0 +1,42 @@
+- type: job
+  id: CMCargoTech
+  parent: JobBaseCM
+  name: job-name-cm-cargotech
+  description: job-description-cm-cargotech
+  playTimeTracker: JobCMCargoTech
+  startingGear: CMCargoTechGear
+  icon: "JobIconCMCargoTech"
+  requireAdminNotify: false
+  joinNotifyCrew: true
+  supervisors: job-supervisors-cm-quartermaster
+  canBeAntag: true
+  access:
+  - Cargo
+  # prep
+
+- type: startingGear
+  id: CMCargoTechGear
+  equipment:
+    jumpsuit: CMJumpsuitCargoTech
+    back: ClothingBackpackCargoFilled
+    shoes: CMShoesCombatBootsBrown
+    head: CMHeadCapCargo
+    gloves: CMHandsBrown
+    id: DogtagCargoTech
+    ears: ClothingHeadsetCargo
+  innerClothingSkirt: CMJumpsuitCargoTech
+  satchel: ClothingBackpackSatchelCargoFilled
+  duffelbag: ClothingBackpackDuffelCargoFilled
+
+- type: entity
+  id: CMSpawnPointCargoTech
+  parent: CMSpawnPointJobBase
+  name: cargo tech spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMCargoTech
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: cargo_tech

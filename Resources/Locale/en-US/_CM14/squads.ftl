@@ -6,6 +6,10 @@ department-MarineCommand-description = The Command Department is the brains of t
 department-MilitaryPolice = Military Police
 department-MilitaryPolice-description = Enforce Marine Law. Detain Criminals. Keep Shipside Personnel Safe.
 
+# requisitions
+department-Requisitions = Requisitions
+department-Requisitions-description = Dispense supplies to the marines.
+
 # marines
 department-Marine = Marine [ALL]
 department-Marine-description = They form the main fighting body of the Almayer and are sent planetside to fight all kinds of dangers throughout the Neroid Sector.

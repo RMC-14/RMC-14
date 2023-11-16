@@ -45,7 +45,7 @@
 - type: entity
   parent: [ClothingHeadBase, CMEntityBase]
   id: CMHeadCapMP
-  name: MP Cap
+  name: MP cap
   description: A ball-cap worn by the more casual of the USCM's Military Police.
   components:
   - type: Sprite
@@ -59,13 +59,21 @@
 - type: entity
   parent: CMHeadCapMP
   id: CMHeadCapWarden
-  name: Warden Cap
+  name: warden cap
   description: Smells like donuts.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Head/Hats/warden.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Head/Hats/warden.rsi
-  - type: Tag
-    tags:
-    - ClothMade
+
+- type: entity
+  parent: CMHeadCapMP
+  id: CMHeadCapCargo
+  name: cargo cap
+  description: It's a baseball hat in a tasteless yellow color.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Hats/cargocap.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Hats/cargocap.rsi
