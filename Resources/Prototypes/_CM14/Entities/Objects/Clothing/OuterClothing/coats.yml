@@ -1,0 +1,35 @@
+# ChiefMP
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: CMCoatChiefMP
+  name: chief mp coat
+  description: To enforce the law with style.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/cmp.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/cmp.rsi
+
+# Military Warden
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: CMCoatWarden
+  name: warden coat
+  description: To enforce the law with style.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/warden.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/warden.rsi
+
+# Military Police
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: CMCoatMP
+  name: military police coat
+  description: To enforce the law with style.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/mp.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/mp.rsi

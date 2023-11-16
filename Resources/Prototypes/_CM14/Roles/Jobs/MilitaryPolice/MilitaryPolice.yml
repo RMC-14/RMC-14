@@ -1,0 +1,58 @@
+- type: job
+  id: MilitaryPolice
+  parent: JobBaseCM
+  name: job-name-militarypolice
+  description: job-description-militarypolice
+  playTimeTracker: JobMilitaryPolice
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Marine
+      time: 36000 # 10 hours
+  weight: 5
+  startingGear: MilitaryPoliceGear
+  icon: "JobIconMilitaryPolice"
+  requireAdminNotify: false
+  joinNotifyCrew: true
+  supervisors: job-supervisors-militarywarden
+  canBeAntag: false
+  access:
+  - Brig
+  - Command
+  - External # dropship?
+  #database
+  #prep
+  - Medical
+  # morgue
+  # alpha bravo charlie delta
+  - Engineering
+  - Maintenance
+
+- type: startingGear
+  id: MilitaryPoliceGear
+  equipment:
+    jumpsuit: CMJumpsuitMPBlack
+    back: ClothingBackpackSecurityFilled
+    shoes: CMShoesCombatBoots
+    head: CMHeadBeretRed
+    eyes: ClothingEyesGlassesSecurity
+    gloves: CMHandsBlack
+    id: MilitaryPoliceIDCard
+    outerClothing: CMArmorM2MP
+    ears: ClothingHeadsetSecurity
+    belt: ClothingBeltSecurityFilled
+  innerClothingSkirt: CMJumpsuitMPBlack
+  satchel: ClothingBackpackSatchelSecurityFilled
+  duffelbag: ClothingBackpackDuffelSecurityFilled
+
+- type: entity
+  id: SpawnPointMilitaryPolice
+  parent: CMSpawnPointJobBase
+  name: military police spawn point
+  components:
+  - type: SpawnPoint
+    job_id: MilitaryPolice
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: military_police

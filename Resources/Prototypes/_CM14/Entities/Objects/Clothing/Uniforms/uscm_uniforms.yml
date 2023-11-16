@@ -1,4 +1,5 @@
-﻿- type: entity
+﻿# Marines
+- type: entity
   parent: ClothingUniformBase
   id: JumpsuitMarine
   name: marine uniform
@@ -16,4 +17,106 @@
       tags:
         - ClothMade
         - WhitelistChameleon
+
+# Military Police
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitMP
+  name: MP uniform
+  description: A standard-issue MP uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/mp.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/mp.rsi
+
+- type: entity
+  parent: CMJumpsuitMP
+  id: CMJumpsuitMPBlack
+  name: black mp uniform
+  description: A standard-issue MP uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/mp_black.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/mp_black.rsi
+
+# Military Warden
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitWarden
+  name: warden uniform
+  description: A standard-issue warden uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/warden.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/warden.rsi
+
+- type: entity
+  parent: CMJumpsuitWarden
+  id: CMJumpsuitWardenBlue
+  name: blue warden uniform
+  description: A standard-issue warden uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/warden_blue.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/warden_blue.rsi
+
+- type: entity
+  parent: CMJumpsuitWarden
+  id: CMJumpsuitWardenRed
+  name: red warden uniform
+  description: A standard-issue warden uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/warden_red.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/warden_red.rsi
+
+- type: entity
+  parent: CMJumpsuitWarden
+  id: CMJumpsuitWardenCorporate
+  name: corporate warden uniform
+  description: A standard-issue warden uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/warden_corporate.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/warden_corporate.rsi
+
+- type: entity
+  parent: CMJumpsuitWarden
+  id: CMJumpsuitWardenNavy
+  name: navy warden uniform
+  description: A navy variant of warden uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/warden_navy.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/warden_navy.rsi
+
+- type: entity
+  parent: CMJumpsuitWarden
+  id: CMJumpsuitWardenTan
+  name: tan warden uniform
+  description: A standard-issue warden uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/warden_tan.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/warden_tan.rsi
+
+# Warrent Officer
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitWO
+  name: wo uniform
+  description: A standard-issue wo uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/wo.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/wo.rsi
 
