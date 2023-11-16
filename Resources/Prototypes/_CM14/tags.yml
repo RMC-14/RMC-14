@@ -1,0 +1,23 @@
+- type: Tag
+  id: CartridgeCaseless10x20mm
+
+- type: Tag
+  id: CartridgePistol9mm
+
+- type: Tag
+  id: CartridgeRifle10x24mm
+
+- type: Tag
+  id: MagazineCaselessM39
+
+- type: Tag
+  id: MagazinePistolM4A3
+
+- type: Tag
+  id: MagazineRifleM41
+
+- type: Tag
+  id: MagazineRifleM41AE2
+
+- type: Tag
+  id: MagazineRifleM4RA

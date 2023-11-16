@@ -1,0 +1,11 @@
+- type: entity
+  id: CartridgeCaseless10x20mm
+  name: cartridge (10x20mm)
+  parent: BaseCartridgeCaselessRifle
+  components:
+  - type: Tag
+    tags:
+      - Cartridge
+      - CartridgeCaseless10x20mm
+  - type: CartridgeAmmo
+    proto: BulletCaseless10x20mm

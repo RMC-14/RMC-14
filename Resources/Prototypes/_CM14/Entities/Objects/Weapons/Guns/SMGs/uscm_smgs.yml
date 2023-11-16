@@ -1,0 +1,65 @@
+﻿- type: entity
+  name: M39 submachine gun
+  parent: BaseWeaponSubMachineGun
+  id: WeaponRifleM39
+  description: The Armat Battlefield Systems M-39 submachinegun. Occasionally carried by light-infantry, scouts, engineers and medics.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Weapons/Guns/SMGs/m39.rsi
+      layers:
+        - state: base
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-0
+          map: ["enum.GunVisualLayers.Mag"]
+    - type: Clothing
+      sprite: _CM14/Objects/Weapons/Guns/SMGs/m39.rsi
+      quickEquip: false
+      slots:
+        - Back
+        - suitStorage
+    - type: Wieldable
+    - type: Gun
+      minAngle: 15
+      maxAngle: 35
+      angleIncrease: 10
+      angleDecay: 16
+      fireRate: 8
+      selectedMode: FullAuto
+      availableModes:
+        - SemiAuto
+        - Burst
+        - FullAuto
+      soundGunshot:
+        path: /Audio/_CM14/Weapons/Guns/Gunshots/m39.ogg
+    - type: GunWieldBonus
+      minAngle: -5
+      maxAngle: -5
+    - type: ItemSlots
+      slots:
+        gun_magazine:
+          name: Magazine
+          startingItem: MagazineCaselessM39
+          insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+          ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+          priority: 2
+          whitelist:
+            tags:
+              - MagazineCaselessM39
+        gun_chamber:
+          name: Chamber
+          startingItem: CartridgeCaseless10x20mm
+          priority: 1
+          whitelist:
+            tags:
+              - CartridgeCaseless10x20mm
+    - type: ContainerContainer
+      containers:
+        gun_magazine: !type:ContainerSlot
+        gun_chamber: !type:ContainerSlot
+    - type: MagazineVisuals
+      magState: mag
+      steps: 1
+      zeroVisible: true
+    - type: Appearance
+    - type: ChamberMagazineAmmoProvider
+      autoEject: true
