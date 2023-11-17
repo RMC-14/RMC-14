@@ -1,0 +1,50 @@
+- type: job
+  id: CMQuartermaster
+  parent: JobBaseCM
+  name: job-name-cm-quartermaster
+  description: job-description-cm-quartermaster
+  playTimeTracker: JobCMQuartermaster
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Requisitions
+      time: 36000 # 10 hours
+  weight: 5
+  startingGear: CMQuartermasterGear
+  icon: "JobIconCMQuartermaster"
+  requireAdminNotify: false
+  joinNotifyCrew: true
+  supervisors: job-supervisors-command #TODO CM14
+  canBeAntag: true
+  access:
+  - Command
+  - Quartermaster
+  - Cargo
+  # prep
+  # alpha bravo charlie delta
+
+- type: startingGear
+  id: CMQuartermasterGear
+  equipment:
+    jumpsuit: CMJumpsuitQM
+    back: ClothingBackpackQuartermasterFilled
+    shoes: CMShoesCombatBootsBrown
+    head: CMHeadCapCargo
+    gloves: CMHandsBrown
+    id: CMQuartermasterIDCard
+    ears: ClothingHeadsetAltCargo
+  innerClothingSkirt: CMJumpsuitQM
+  satchel: ClothingBackpackSatchelQuartermasterFilled
+  duffelbag: ClothingBackpackDuffelQuartermasterFilled
+
+- type: entity
+  id: CMSpawnPointQuartermaster
+  parent: CMSpawnPointJobBase
+  name: quartermaster spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMQuartermaster
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: quartermaster

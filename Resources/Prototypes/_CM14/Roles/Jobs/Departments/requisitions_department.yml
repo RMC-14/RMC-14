@@ -1,0 +1,9 @@
+﻿- type: department
+  id: Requisitions
+  parent: DepartmentBaseCM
+  description: department-Requisitions-description
+  color: "#5F4519"
+  roles:
+  - CMQuartermaster
+  - CMCargoTech
+  - MessTech

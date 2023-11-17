@@ -57,7 +57,7 @@
   parent: CMJumpsuitWarden
   id: CMJumpsuitWardenBlue
   name: blue warden uniform
-  description: A standard-issue warden uniform.
+  description: The insignia on this uniform tells you that this uniform belongs to the Warden..
   components:
     - type: Sprite
       sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/warden_blue.rsi
@@ -108,15 +108,50 @@
     - type: Clothing
       sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/warden_tan.rsi
 
-# Warrent Officer
+# Warrent Officer / CMP
 - type: entity
   parent: JumpsuitMarine
   id: CMJumpsuitWO
-  name: wo uniform
-  description: A standard-issue wo uniform.
+  name: chief mp uniform
+  description: A standard-issue chief mp uniform.
   components:
     - type: Sprite
       sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/wo.rsi
     - type: Clothing
       sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/wo.rsi
 
+# Quartermaster / RO
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitQM
+  name: quartermaster uniform
+  description: Standard-issue quartermaster uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/ro.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/ro.rsi
+
+# Cargotech
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitCargoTech
+  name: cargo technician uniform
+  description: A standard-issue cargo tech uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/cargotech.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/cargotech.rsi
+
+# MessTech / Chef
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitMessTech
+  name: mess technician uniform
+  description: Standard-issue Mess Technician uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/chef.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/chef.rsi
