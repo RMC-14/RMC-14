@@ -155,3 +155,40 @@
       sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/chef.rsi
     - type: Clothing
       sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/chef.rsi
+
+# Chief Engineer / EC
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitChiefEngineer
+  name: chief engineer uniform
+  description: Standard-issue Chief Engineer uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/ec.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/ec.rsi
+
+# Ordnance Technician / OT
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitOrdnanceTech
+  name: ordnance technician uniform
+  description: Standard-issue Ordnance Technician uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/ot.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/ot.rsi
+
+# Maintenance Technician / MT
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitMaintTech
+  name: maintenance technician uniform
+  description: Standard-issue Maintenance Technician uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/mt.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/mt.rsi
+

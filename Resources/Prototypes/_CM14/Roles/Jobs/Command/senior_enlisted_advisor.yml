@@ -9,7 +9,7 @@
       department: Marine
       time: 54000 # 15 hours
     - !type:DepartmentTimeRequirement
-      department: Engineering
+      department: MarineEngineering
       time: 36000 # 10 hours
     - !type:DepartmentTimeRequirement
       department: MilitaryPolice
