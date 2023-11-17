@@ -1,3 +1,4 @@
+# standart
 - type: entity
   parent: [ClothingHandsBase, CMEntityBase]
   id: CMHandsBlack
@@ -14,7 +15,7 @@
   - type: FingerprintMask
 
 - type: entity
-  parent: [ClothingHandsBase, CMEntityBase]
+  parent: CMHandsBlack
   id: CMHandsBrown
   name: brown gloves
   description: A pair of brown gloves.
@@ -24,6 +25,76 @@
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Hands/Gloves/brown.rsi
   - type: Fiber
-    fiberMaterial: fibers-leather
     fiberColor: fibers-brown
-  - type: FingerprintMask
+
+- type: entity
+  parent: CMHandsBlack
+  id: CMHandsLightBrown
+  name: light brown gloves
+  description: A pair of light brown gloves.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Hands/Gloves/lightbrown.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Hands/Gloves/lightbrown.rsi
+  - type: Fiber
+    fiberColor: fibers-brown
+
+- type: entity
+  parent: CMHandsBlack
+  id: CMHandsWhite
+  name: white gloves
+  description: A pair of white gloves.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Hands/Gloves/white.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Hands/Gloves/white.rsi
+  - type: Fiber
+    fiberColor: fibers-white
+
+- type: entity
+  parent: CMHandsBlack
+  id: CMHandsLatex
+  name: latex gloves
+  description: A pair of latex gloves.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Hands/Gloves/latex.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Hands/Gloves/latex.rsi
+  - type: Fiber
+    fiberMaterial: fibers-latex
+    fiberColor: fibers-white
+
+#insulated
+- type: entity
+  parent: CMHandsBlack
+  id: CMHandsInsulated
+  name: insulated gloves
+  description: These gloves will protect the wearer from electric shocks.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Hands/Gloves/insulated.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Hands/Gloves/insulated.rsi
+  - type: Insulated
+  - type: GloveHeatResistance
+    heatResistance: 1400
+  - type: Fiber
+    fiberMaterial: fibers-insulative
+    fiberColor: fibers-brown
+
+- type: entity
+  parent: CMHandsInsulated
+  id: CMHandsCaptain
+  name: captain`s gloves
+  description: A pair of captain`s gloves.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Hands/Gloves/captain.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Hands/Gloves/captain.rsi
+  - type: Fiber
+    fiberMaterial: fibers-durathread
+    fiberColor: fibers-brown

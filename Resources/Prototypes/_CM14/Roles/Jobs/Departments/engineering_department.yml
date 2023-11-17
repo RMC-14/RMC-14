@@ -1,0 +1,9 @@
+﻿- type: department
+  id: MarineEngineering
+  parent: DepartmentBaseCM
+  description: department-MarineEngineering-description
+  color: "#A66300"
+  roles:
+  - CMChiefEngineer
+  - OrdnanceTech
+  - MaintTech
