@@ -74,6 +74,14 @@
     {
       "name": "ointment-inhand-right",
       "directions": 4
+    },
+    {
+      "name": "antitoxin-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "antitox-inhand-right",
+      "directions": 4
     }
   ]
 }

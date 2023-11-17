@@ -1,6 +1,6 @@
 - type: entity
-  name: first aid kit
-  description: It's an emergency medical kit for those serious boo-boos.
+  name: first-aid kit
+  description: It's an emergency medical kit for those serious boo-boos. With medical training you can fit this in a backpack.
   parent: BaseStorageItem
   id: CMFirstAidKit
   components:
@@ -16,4 +16,38 @@
     heldPrefix: firstaid
   - type: Tag
     tags:
-    - Medkit
+    - CMFirstAidKit
+
+- type: entity
+  name: fire first-aid kit
+  description: It's an emergency medical kit for when the dropship ammo storage <spontaneously burns down. With medical training you can fit this in a backpack.
+  parent: BaseStorageItem
+  id: CMFBurnAidKit
+  components:
+  - type: Sprite
+    state: ointment
+  - type: Item
+    heldPrefix: ointment
+
+
+- type: entity
+  name: oxygen deprivation first-aid kit
+  description: A box full of reoxygenating goodies. With medical training you can fit this in a backpack.
+  parent: BaseStorageItem
+  id: CMFirstAidO2Kit
+  components:
+  - type: Sprite
+    state: o2
+  - type: Item
+    heldPrefix: o2
+
+- type: entity
+  name: advanced first-aid kit
+  description: Contains more effective methods of medical treatment than a basic first-aid kit, such as burn and trauma kits. With medical training you can fit this in a backpack.
+  parent: BaseStorageItem
+  id: CMFirstAidO2Kit
+  components:
+  - type: Sprite
+    state: advfirstaid
+  - type: Item
+    heldPrefix: advfirstaid
