@@ -4,7 +4,7 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _CM14/Objects//Medical/medical.rsi
+    sprite: _CM14/Objects/Medical/medical.rsi
   - type: Item
     size: Small
     sprite: _CM14/Objects//Medical/medical.rsi
@@ -65,7 +65,7 @@
       groups:
         Brute: -15
         Slash: -5
-        Piercing: 10
+        Piercing: -10
     bloodlossModifier: -10
     healingBeginSound:
       path: "/Audio/Items/Medical/brutepack_begin.ogg"
