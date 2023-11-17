@@ -1,0 +1,11 @@
+- type: entity
+  name: hypospray
+  parent: Hypospray
+  description:
+  id: CMHypospray
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Medical/Hypospray.rsi
+    state: hypospray
+  - type: Item
+    sprite: _CM14/Objects/Medical/Hypospray.rsi

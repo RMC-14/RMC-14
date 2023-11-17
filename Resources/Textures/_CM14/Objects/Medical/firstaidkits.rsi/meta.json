@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/b0bca8ef7dedf94a30f456544bec6ef3aaa7ec8a/icons/obj/items/storage.dmi,https://github.com/cmss13-devs/cmss13/blob/60ca3cddb69147cb17fcaef3b0514586292a4c55/icons/mob/humans/onmob/items_lefthand_0.dmi, https://github.com/cmss13-devs/cmss13/blob/60ca3cddb69147cb17fcaef3b0514586292a4c55/icons/mob/humans/onmob/items_righthand_0.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "firstaid"
+    },
+    {
+      "name": "advfirstaid"
+    },
+    {
+      "name": "antitox"
+    },
+    {
+      "name": "antitox2"
+    },
+    {
+      "name": "antitox3"
+    },
+    {
+      "name": "rad"
+    },
+    {
+      "name": "rad2"
+    },
+    {
+      "name": "rad3"
+    },
+    {
+      "name": "o2"
+    },
+    {
+      "name": "kit_empty"
+    },
+    {
+      "name": "burn"
+    },
+    {
+      "name": "ointment"
+    },
+    {
+      "name": "advfirstaid-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "advfirstaid-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "firstaid-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "firstaid-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "o2-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "o2-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "ointment-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "ointment-inhand-right",
+      "directions": 4
+    }
+  ]
+}

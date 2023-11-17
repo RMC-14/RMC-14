@@ -1,0 +1,19 @@
+- type: entity
+  name: first aid kit
+  description: It's an emergency medical kit for those serious boo-boos.
+  parent: BaseStorageItem
+  id: CMFirstAidKit
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Medical/firstaidkits.rsi
+    state: firstaid
+  - type: Storage
+    maxTotalWeight: 8
+    maxItemSize: Small
+  - type: Item
+    size: Large
+    sprite: Objects/Specific/Medical/firstaidkits.rsi
+    heldPrefix: firstaid
+  - type: Tag
+    tags:
+    - Medkit

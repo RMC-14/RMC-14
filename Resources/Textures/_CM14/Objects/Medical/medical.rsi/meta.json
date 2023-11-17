@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "brutepack"
+    },
+    {
+      "name": "brutepack-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "brutepack-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "ointment"
+    },
+    {
+      "name": "ointment-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "ointment-inhand-right",
+      "directions": 4
+    }
+  ]
+}
