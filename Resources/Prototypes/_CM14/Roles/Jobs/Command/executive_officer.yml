@@ -18,7 +18,7 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-command
   canBeAntag: false
-  accessGroup:
+  accessGroups:
   - AllAccess
 
 - type: startingGear
