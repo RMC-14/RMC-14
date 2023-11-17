@@ -27,3 +27,6 @@
 
 - type: Tag
   id: CMOintment
+
+- type: Tag
+  id: CMFirstAidKit

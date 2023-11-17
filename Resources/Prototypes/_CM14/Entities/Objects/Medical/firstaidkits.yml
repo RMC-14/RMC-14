@@ -12,7 +12,7 @@
     maxItemSize: Small
   - type: Item
     size: Large
-    sprite: Objects/Specific/Medical/firstaidkits.rsi
+    sprite: _CM14/Objects/Medical/firstaidkits.rsi
     heldPrefix: firstaid
   - type: Tag
     tags:
@@ -21,19 +21,18 @@
 - type: entity
   name: fire first-aid kit
   description: It's an emergency medical kit for when the dropship ammo storage <spontaneously burns down. With medical training you can fit this in a backpack.
-  parent: BaseStorageItem
-  id: CMFBurnAidKit
+  parent: CMFirstAidKit
+  id: CMBurnAidKit
   components:
   - type: Sprite
     state: ointment
   - type: Item
     heldPrefix: ointment
 
-
 - type: entity
   name: oxygen deprivation first-aid kit
   description: A box full of reoxygenating goodies. With medical training you can fit this in a backpack.
-  parent: BaseStorageItem
+  parent: CMFirstAidKit
   id: CMFirstAidO2Kit
   components:
   - type: Sprite
@@ -44,8 +43,8 @@
 - type: entity
   name: advanced first-aid kit
   description: Contains more effective methods of medical treatment than a basic first-aid kit, such as burn and trauma kits. With medical training you can fit this in a backpack.
-  parent: BaseStorageItem
-  id: CMFirstAidO2Kit
+  parent: CMFirstAidKit
+  id: CMAdvFirstAidKit
   components:
   - type: Sprite
     state: advfirstaid
