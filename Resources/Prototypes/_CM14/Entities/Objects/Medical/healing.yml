@@ -79,66 +79,20 @@
 
 - type: entity
   name: heavy ointment
-  description: Used to treat those nasty burns. Less effective on caustic burns.
-  parent: CMBaseHealingItem
+  description: Used to treat those nasty burns. Less effective on caustic burns. It appears to be never ending.
+  parent: CMOintment
   id: CMHeavyOintment  
-  suffix: Full
   components:
-  - type: Tag
-    tags:
-    - Ointment
-  - type: Sprite
-    state: ointment
-  - type: Item
-    heldPrefix: ointment
-  - type: Healing
-    damageContainers:
-      - Biological
-    damage:
-      types:
-        Heat: -5
-        Cold: -5
-        Shock: -5
-        Caustic: -1.5
-    healingBeginSound:
-      path: "/Audio/Items/Medical/ointment_begin.ogg"
-    healingEndSound:
-      path: "/Audio/Items/Medical/ointment_end.ogg"
   - type: Stack
-    stackType: CMOintment
     count: 1
     unlimited: true
-  - type: StackPrice
-    price: 10
 
 - type: entity
   name: heavy medical gauze
-  description: Some sterile gauze to wrap around bloody stumps and lacerations.
-  parent: CMBaseHealingItem
+  description: Some sterile gauze to wrap around bloody stumps and lacerations. It appears to be never ending.
+  parent: CMBrutepack
   id: CMHeavyBrutepack
-  suffix: Full
   components:
-  - type: Tag
-    tags:
-    - CMBrutepack
-  - type: Sprite
-    state: brutepack
-  - type: Healing
-    damageContainers:
-      - Biological
-    damage:
-      groups:
-        Brute: -15
-        Slash: -5
-        Piercing: 10
-    bloodlossModifier: -10
-    healingBeginSound:
-      path: "/Audio/Items/Medical/brutepack_begin.ogg"
-    healingEndSound:
-      path: "/Audio/Items/Medical/brutepack_end.ogg"
   - type: Stack
-    stackType: CMBrutepack
     count: 1
     unlimited: true
-  - type: StackPrice
-    price: 10

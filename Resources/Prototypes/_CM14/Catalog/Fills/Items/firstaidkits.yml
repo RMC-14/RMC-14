@@ -1,0 +1,32 @@
+- type: entity
+  id: CMFirstAidKitFilled
+  suffix: Filled
+  parent: CMFirstAidKit
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMBrutepack
+      - id: CMOintment
+
+- type: entity
+  id: CMBurnAidKitFilled
+  suffix: Filled
+  parent: CMBurnAidKit
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMOintment
+        amount: 2
+
+- type: entity
+  name: heavy first-aid kit
+  id: CMHeavyFirstAidKitFilled
+  suffix: Filled
+  parent: CMAdvFirstAidKit
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMHeavyOintment
+      - id: CMHeavyBrutepack
+      - id: Bloodpack
+        amount: 2
