@@ -1,4 +1,4 @@
-# standart
+# standard
 - type: entity
   parent: [ClothingHandsBase, CMEntityBase]
   id: CMHandsBlack
