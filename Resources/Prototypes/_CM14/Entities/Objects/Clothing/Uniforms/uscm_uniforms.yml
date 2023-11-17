@@ -192,3 +192,60 @@
     - type: Clothing
       sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/mt.rsi
 
+# Commanding Officer / CO
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitCO
+  name: commanding officer uniform
+  description: Standard-issue Commanding Officer uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/co.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/co.rsi
+
+- type: entity
+  parent: CMJumpsuitCO
+  id: CMJumpsuitCOFormalBlack
+  name: formal commanding officer uniform
+  description: Standard-issue commanding officer uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/co_formal_black.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/co_formal_black.rsi
+
+- type: entity
+  parent: CMJumpsuitCO
+  id: CMJumpsuitCOFormalWhite
+  name: formal commanding officer uniform
+  description: Standard-issue commanding officer uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/co_formal_white.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/co_formal_white.rsi
+
+- type: entity
+  parent: CMJumpsuitCO
+  id: CMJumpsuitCOService
+  name: commanding officer uniform
+  description: Standard-issue commanding officer uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/co_service.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/co_service.rsi
+
+# Officer
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitBO
+  name: officer uniform
+  description: Standard-issue officer uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/bo.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/bo.rsi
+

@@ -37,3 +37,14 @@
     sprite: _CM14/Objects/Clothing/Head/Helmets/m10_cmp.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Head/Helmets/m10_cmp.rsi
+
+- type: entity
+  parent: ArmorHelmetM10
+  id: CMArmorHelmetM10CO
+  name: M10 Helmet CO
+  description: A special variant of the M10 Pattern Helmet worn by the Commanding Officer of the USCM.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10_co.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10_co.rsi

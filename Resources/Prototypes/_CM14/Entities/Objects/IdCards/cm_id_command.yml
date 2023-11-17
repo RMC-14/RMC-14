@@ -13,3 +13,19 @@
   components:
   - type: PresetIdCard
     job: SeniorEnlistedAdvisor
+
+- type: entity
+  parent: CMIDCardGold
+  id: CommandingOfficerIDCard
+  name: commanding officer ID card
+  components:
+  - type: PresetIdCard
+    job: CommandingOfficer
+
+- type: entity
+  parent: CMIDCardSilver
+  id: ExecutiveOfficerIDCard
+  name: executive officer ID card
+  components:
+  - type: PresetIdCard
+    job: ExecutiveOfficer
