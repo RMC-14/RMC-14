@@ -38,3 +38,13 @@
 
 - type: playTimeTracker
   id: JobMilitaryPolice
+
+# requisition
+- type: playTimeTracker
+  id: JobCMQuartermaster
+
+- type: playTimeTracker
+  id: JobCMCargoTech
+
+- type: playTimeTracker
+  id: JobMessTech

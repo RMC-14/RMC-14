@@ -1,0 +1,41 @@
+- type: job
+  id: MessTech
+  parent: JobBaseCM
+  name: job-name-messtech
+  description: job-description-messtech
+  playTimeTracker: JobMessTech
+  startingGear: MessTechGear
+  icon: "JobIconMessTech"
+  requireAdminNotify: false
+  joinNotifyCrew: true
+  supervisors: job-supervisors-cm-quartermaster
+  canBeAntag: true
+  access:
+  - Kitchen
+
+- type: startingGear
+  id: MessTechGear
+  equipment:
+    head: ClothingHeadHatChef
+    jumpsuit: CMJumpsuitMessTech
+    outerClothing: CMCoatMessTech
+    back: ClothingBackpackFilled
+    shoes: CMShoesCombatBootsBrown
+    id: DogtagMessTech
+    ears: ClothingHeadsetCargo
+  innerClothingSkirt: CMJumpsuitMessTech
+  satchel: ClothingBackpackSatchelFilled
+  duffelbag: ClothingBackpackDuffelFilled
+
+- type: entity
+  id: SpawnPointMessTech
+  parent: CMSpawnPointJobBase
+  name: mess tech spawn point
+  components:
+  - type: SpawnPoint
+    job_id: MessTech
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: mess_tech
