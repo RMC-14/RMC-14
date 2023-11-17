@@ -5,7 +5,7 @@
   id: CMHypospray
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Medical/Hypospray.rsi
+    sprite: _CM14/Objects/Medical/hypospray.rsi
     state: hypospray
   - type: Item
-    sprite: _CM14/Objects/Medical/Hypospray.rsi
+    sprite: _CM14/Objects/Medical/hypospray.rsi
