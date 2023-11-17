@@ -48,3 +48,14 @@
 
 - type: playTimeTracker
   id: JobMessTech
+
+#engineering
+- type: playTimeTracker
+  id: JobCMChiefEngineer
+
+- type: playTimeTracker
+  id: JobOrdnanceTech
+
+- type: playTimeTracker
+  id: JobMaintTech
+

@@ -1,0 +1,23 @@
+﻿- type: entity
+  parent: CMIDCardSilver
+  id: CMChiefEngineerIDCard
+  name: chief engineer ID card
+  components:
+  - type: PresetIdCard
+    job: CMChiefEngineer
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: DogtagOrdnanceTech
+  name: ordnance tech`s dogtags
+  components:
+  - type: PresetIdCard
+    job: OrdnanceTech
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: DogtagMaintTech
+  name: maintenance tech`s dogtags
+  components:
+  - type: PresetIdCard
+    job: MaintTech

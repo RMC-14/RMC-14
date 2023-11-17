@@ -1,0 +1,47 @@
+﻿- type: job
+  id: MaintTech
+  parent: JobBaseCM
+  name: job-name-maint-tech
+  description: job-description-maint-tech
+  playTimeTracker: JobMaintTech
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: Marine
+    time: 3600 # 1 hours
+  startingGear: MaintTechGear
+  icon: "JobIconMaintTech"
+  requireAdminNotify: false
+  joinNotifyCrew: true
+  supervisors: job-supervisors-cm-chief-engineer
+  canBeAntag: true
+  access:
+  - Engineering
+  # civ engi
+  - Maintenance
+
+- type: startingGear
+  id: MaintTechGear
+  equipment:
+    jumpsuit: CMJumpsuitMaintTech
+    back: ClothingBackpackEngineeringFilled
+    shoes: CMShoesCombatBootsBrown
+    gloves: CMHandsInsulated
+    id: DogtagMaintTech
+    ears: ClothingHeadsetEngineering
+    belt: ClothingBeltUtilityEngineering
+  innerClothingSkirt: CMJumpsuitMaintTech
+  satchel: ClothingBackpackSatchelEngineeringFilled
+  duffelbag: ClothingBackpackDuffelEngineeringFilled
+
+- type: entity
+  id: SpawnPointMaintTech
+  parent: CMSpawnPointJobBase
+  name: maint tech spawn point
+  components:
+  - type: SpawnPoint
+    job_id: MaintTech
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: maintenance_tech

@@ -14,6 +14,10 @@ department-Requisitions-description = Dispense supplies to the marines.
 department-Marine = Marine [ALL]
 department-Marine-description = They form the main fighting body of the Almayer and are sent planetside to fight all kinds of dangers throughout the Neroid Sector.
 
+# engineering
+department-MarineEngineering = Engineering
+department-MarineEngineering-description = Your job is to maintain the ship's engine and keep everything running.
+
 squad-alpha = Alpha Squad
 squad-bravo = Bravo Squad
 squad-charlie = Charlie Squad
