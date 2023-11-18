@@ -138,3 +138,80 @@
   - type: StackPrice
     price: 10
 
+- type: entity
+  name: burn kit
+  description: A treatment kit for severe burns.
+  id: CMBurnKit  
+  components:
+  - type: Tag
+    tags:
+    - CMBurnKit
+  - type: Sprite
+    state: burnkit
+  - type: Healing
+    damageContainers:
+      - Biological
+    damage:
+      types:
+        Heat: -10
+        Cold: -10
+        Shock: -10
+        Caustic: -5
+    healingBeginSound:
+      path: "/Audio/Items/Medical/brutepack_begin.ogg"
+    healingEndSound:
+      path: "/Audio/Items/Medical/brutepack_end.ogg"
+
+- type: entity
+  name: trauma kit
+  description: A trauma kit for severe injuries.
+  parent: CMBaseHealingItem
+  id: CMTraumaKit  
+  components:
+  - type: Tag
+    tags:
+    - CMTraumaKit
+  - type: Sprite
+    state: traumakit
+  - type: Healing
+    damageContainers:
+      - Biological
+    damage:
+      groups:
+        Brute: -25
+    bloodlossModifier: -20
+    healingBeginSound:
+      path: "/Audio/Items/Medical/brutepack_begin.ogg"
+    healingEndSound:
+      path: "/Audio/Items/Medical/brutepack_end.ogg"
+
+- type: entity
+  parent: CMPillCanister
+  id: CMPillCanisterDexalin
+  suffix: Dexalin, 7
+  components:
+  - type: StorageFill
+    contents:
+    - id: PillDexalin
+      amount: 7
+
+- type: entity
+  parent: CMPillCanister
+  id: CMPillCanisterTricordrazine
+  suffix: Tricordrazine, 5
+  components:
+  - type: StorageFill
+    contents:
+    - id: PillTricordrazine
+      amount: 5
+
+- type: entity
+  parent: CMPillCanister
+  id: CMPillCanisterBicaridine
+  suffix: Bicaridine, 5
+  components:
+  - type: StorageFill
+    contents:
+    - id: PillBicaridine
+      amount: 5
+
