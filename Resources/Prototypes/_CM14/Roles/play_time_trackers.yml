@@ -4,6 +4,12 @@
 - type: playTimeTracker
   id: JobSeniorEnlistedAdvisor
 
+- type: playTimeTracker
+  id: JobCommandingOfficer
+
+- type: playTimeTracker
+  id: JobExecutiveOfficer
+
 # marine
 - type: playTimeTracker
   id: JobRifleman

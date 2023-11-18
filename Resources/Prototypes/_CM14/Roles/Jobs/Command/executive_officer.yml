@@ -1,50 +1,49 @@
 ﻿- type: job
-  id: StaffOfficer
+  id: ExecutiveOfficer
   parent: JobBaseCM
-  name: job-name-staff-officer
-  description: job-description-Staff-Officer
-  playTimeTracker: JobStaffOfficer
+  name: job-name-executive-officer
+  description: job-description-executive-officer
+  playTimeTracker: JobExecutiveOfficer
   requirements:
-  - !type:OverallPlaytimeRequirement
-    time: 54000 # 15 hours
+  - !type:RoleTimeRequirement
+    role: JobStaffOfficer 
+    time: 18000 # 5 hours
   - !type:DepartmentTimeRequirement
     department: MilitaryPolice
-    time: 3600 # 1 hours
+    time: 10800 # 3 hours
   weight: 5
   startingGear: StaffOfficerGear
-  icon: "JobIconStaffOfficer"
+  icon: "JobIconExecutiveOfficer"
   requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: job-supervisors-command
   canBeAntag: false
-  access:
-  - Command
-  # dropship
-  # database
-  - Medical
+  accessGroups:
+  - AllAccess
 
 - type: startingGear
-  id: StaffOfficerGear
+  id: ExecutiveOfficerGear
   equipment:
     jumpsuit: CMJumpsuitBO
     back: ClothingBackpackCaptainFilled
     shoes: CMShoesCombatBoots
     head: CMHeadCap
-    id: StaffOfficerIDCard
+    outerClothing: CMCoatOfficer
+    id: ExecutiveOfficerIDCard
     ears: ClothingHeadsetAltCommand
   innerClothingSkirt: CMJumpsuitBO
   satchel: ClothingBackpackSatchelCaptainFilled
   duffelbag: ClothingBackpackDuffelCaptainFilled
 
 - type: entity
-  id: SpawnPointStaffOfficer
+  id: SpawnPointExecutiveOfficer
   parent: CMSpawnPointJobBase
-  name: staff officer spawn point
+  name: executive officer spawn point
   components:
   - type: SpawnPoint
-    job_id: StaffOfficer
+    job_id: ExecutiveOfficer
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
-    - state: staff_officer
+    - state: executive_officer

@@ -1,0 +1,58 @@
+﻿- type: job
+  id: CommandingOfficer
+  parent: JobBaseCM
+  name: job-name-commanding-officer
+  description: job-description-commanding-officer
+  playTimeTracker: JobCommandingOfficer
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: Marine
+    time: 54000 # 15 hours
+  - !type:DepartmentTimeRequirement
+    department: MarineEngineering
+    time: 36000 # 10 hours
+  - !type:DepartmentTimeRequirement
+    department: MilitaryPolice
+    time: 36000 # 10 hours
+  - !type:DepartmentTimeRequirement
+    department: Medical
+    time: 36000 # 10 hours
+  - !type:DepartmentTimeRequirement
+    department: MarineCommand
+    time: 18000 # 5 hours
+  weight: 10
+  startingGear: CommandingOfficerGear
+  icon: "JobIconCommandingOfficer"
+  requireAdminNotify: true
+  joinNotifyCrew: true
+  supervisors: job-supervisors-highcommand
+  canBeAntag: false
+  accessGroups:
+  - AllAccess
+
+- type: startingGear
+  id: CommandingOfficerGear
+  equipment:
+    jumpsuit: CMJumpsuitCO
+    back: ClothingBackpackCaptainFilled
+    shoes: CMShoesCombatBoots
+    head: CMHeadBeretCO
+    outerClothing: CMCoatOfficer
+    id: CommandingOfficerIDCard
+    ears: ClothingHeadsetAltCommand
+  innerClothingSkirt: CMJumpsuitCO
+  satchel: ClothingBackpackSatchelCaptainFilled
+  duffelbag: ClothingBackpackDuffelCaptainFilled
+
+- type: entity
+  id: SpawnPointCommandingOfficer
+  parent: CMSpawnPointJobBase
+  name: commanding officer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CommandingOfficer
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: commanding_officer
