@@ -1,0 +1,54 @@
+﻿- type: job
+  id: MarineCMO
+  parent: JobBaseCM
+  name: job-name-cm-cmo
+  description: job-description-cm-cmo
+  playTimeTracker: JobMarineCMO
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: Medical
+    time: 36000 # 10 hours
+  weight: 5
+  startingGear: MarineCMOGear
+  icon: "JobIconMarineCMO"
+  requireAdminNotify: true
+  joinNotifyCrew: true
+  supervisors: job-supervisors-command
+  canBeAntag: false
+  access:
+  - ChiefMedicalOfficer
+  # Database
+  - Medical
+  # Research
+  # Senior
+  - Command
+  - Chemistry
+  # Morgue
+
+- type: startingGear
+  id: MarineCMOGear
+  equipment:
+    jumpsuit: CMJumpsuitCMO
+    outerClothing: CMCoatLong
+    back: ClothingBackpackCMOFilled
+    gloves: CMHandsLatex
+    shoes: CMShoesCombatBoots
+    head: CMHeadCapCMO
+    id: MarineCMOIDCard
+    ears: ClothingHeadsetCMO
+  innerClothingSkirt: CMJumpsuitCMO
+  satchel: ClothingBackpackSatchelCMOFilled
+  duffelbag: ClothingBackpackDuffelCMOFilled
+
+- type: entity
+  id: CMSpawnPointCMO
+  parent: CMSpawnPointJobBase
+  name: chief medical officer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: MarineCMO
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: chief_medical_officer

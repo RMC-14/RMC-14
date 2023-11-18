@@ -18,6 +18,10 @@ department-Marine-description = They form the main fighting body of the Almayer 
 department-MarineEngineering = Engineering
 department-MarineEngineering-description = Your job is to maintain the ship's engine and keep everything running.
 
+# medical
+department-MarineMedical = Medical
+department-MarineMedical-description = Treat all patients that come into medbay. Transfer injured marines from the hanger to medbay.
+
 squad-alpha = Alpha Squad
 squad-bravo = Bravo Squad
 squad-charlie = Charlie Squad

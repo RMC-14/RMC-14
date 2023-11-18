@@ -1,0 +1,48 @@
+﻿- type: job
+  id: MarineDoctor
+  parent: JobBaseCM
+  name: job-name-cm-doctor
+  description: job-description-cm-doctor
+  playTimeTracker: JobMarineDoctor
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: Medical
+    time: 3600 # 1 hours
+  startingGear: MarineDoctorGear
+  icon: "JobIconMarineDoctor"
+  requireAdminNotify: false
+  joinNotifyCrew: true
+  supervisors: job-supervisors-cm-cmo
+  canBeAntag: true
+  access:
+  - Medical
+  - Chemistry
+  # Morgue
+
+- type: startingGear
+  id: MarineDoctorGear
+  equipment:
+    jumpsuit: CMScrubsBlue
+    outerClothing: CMCoatLong
+    back: ClothingBackpackMedicalFilled
+    gloves: CMHandsLatex
+    shoes: CMShoesCombatBoots
+    head: CMHeadCapSurgBlue
+    id: DogtagDoctor
+    ears: ClothingHeadsetMedical
+  innerClothingSkirt: CMScrubsBlue
+  satchel: ClothingBackpackSatchelMedicalFilled
+  duffelbag: ClothingBackpackDuffelMedicalFilled
+
+- type: entity
+  id: CMSpawnPointDoctor
+  parent: CMSpawnPointJobBase
+  name: doctor spawn point
+  components:
+  - type: SpawnPoint
+    job_id: MarineDoctor
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: doctor

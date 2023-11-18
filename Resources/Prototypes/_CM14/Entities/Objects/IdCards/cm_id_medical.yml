@@ -1,0 +1,31 @@
+﻿- type: entity
+  parent: CMIDCardSilver
+  id: MarineCMOIDCard
+  name: chief medical officer ID card
+  components:
+  - type: PresetIdCard
+    job: MarineCMO
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: DogtagDoctor
+  name: doctor`s dogtags
+  components:
+  - type: PresetIdCard
+    job: MarineDoctor
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: DogtagNurse
+  name: nurse`s dogtags
+  components:
+  - type: PresetIdCard
+    job: Nurse
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: DogtagResearcher
+  name: researcher`s dogtags
+  components:
+  - type: PresetIdCard
+    job: Researcher

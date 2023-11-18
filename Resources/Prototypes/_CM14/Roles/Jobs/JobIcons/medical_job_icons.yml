@@ -1,0 +1,27 @@
+- type: statusIcon
+  parent: CMJobIconBase
+  id: JobIconMarineCMO
+  icon:
+    sprite: _CM14/Interface/cm_job_icons.rsi
+    state: hudsquad_cmo
+
+- type: statusIcon
+  parent: CMJobIconBase
+  id: JobIconMarineDoctor
+  icon:
+    sprite: _CM14/Interface/cm_job_icons.rsi
+    state: hudsquad_doctor
+
+- type: statusIcon
+  parent: CMJobIconBase
+  id: JobIconNurse
+  icon:
+    sprite: _CM14/Interface/cm_job_icons.rsi
+    state: hudsquad_nurse
+
+- type: statusIcon
+  parent: CMJobIconBase
+  id: JobIconResearcher
+  icon:
+    sprite: _CM14/Interface/cm_job_icons.rsi
+    state: hudsquad_researcher
