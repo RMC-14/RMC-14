@@ -7,17 +7,17 @@
     job: CMQuartermaster
 
 - type: entity
-  parent: CMIDCardStandardDogtag
-  id: DogtagCargoTech
-  name: cargo tech`s dogtags
+  parent: CMIDCardBase
+  id: CMCargoTechIDCard
+  name: cargo tech`s ID card
   components:
   - type: PresetIdCard
     job: CMCargoTech
 
 - type: entity
-  parent: CMIDCardStandardDogtag
-  id: DogtagMessTech
-  name: mess tech`s dogtags
+  parent: CMIDCardBase
+  id: MessTechIDCard
+  name: mess tech`s ID card
   components:
   - type: PresetIdCard
     job: MessTech

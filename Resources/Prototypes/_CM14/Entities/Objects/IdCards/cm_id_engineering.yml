@@ -7,17 +7,17 @@
     job: CMChiefEngineer
 
 - type: entity
-  parent: CMIDCardStandardDogtag
-  id: DogtagOrdnanceTech
-  name: ordnance tech`s dogtags
+  parent: CMIDCardBase
+  id: OrdnanceTechIDCard
+  name: ordnance tech`s ID card
   components:
   - type: PresetIdCard
     job: OrdnanceTech
 
 - type: entity
-  parent: CMIDCardStandardDogtag
-  id: DogtagMaintTech
-  name: maintenance tech`s dogtags
+  parent: CMIDCardBase
+  id: MaintTechIDCard
+  name: maintenance tech`s ID card
   components:
   - type: PresetIdCard
     job: MaintTech

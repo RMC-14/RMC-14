@@ -55,7 +55,7 @@
 - type: playTimeTracker
   id: JobMessTech
 
-#engineering
+# engineering
 - type: playTimeTracker
   id: JobCMChiefEngineer
 
@@ -65,3 +65,15 @@
 - type: playTimeTracker
   id: JobMaintTech
 
+# medical
+- type: playTimeTracker
+  id: JobMarineCMO
+
+- type: playTimeTracker
+  id: JobMarineDoctor
+
+- type: playTimeTracker
+  id: JobNurse
+
+- type: playTimeTracker
+  id: JobResearcher
