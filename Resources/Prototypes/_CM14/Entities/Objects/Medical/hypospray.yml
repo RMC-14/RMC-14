@@ -1,7 +1,7 @@
 - type: entity
   name: hypospray
   parent: Hypospray
-  description:
+  description: The DeForest Medical Corporation hypospray is a sterile, air-needle autoinjector for rapid administration of drugs to patients.
   id: CMHypospray
   components:
   - type: Sprite
@@ -9,3 +9,31 @@
     state: hypospray
   - type: Item
     sprite: _CM14/Objects/Medical/hypospray.rsi
+
+- type: entity
+  name: tricordrazine autoinjector
+  parent: ChemicalMedipen
+  description: An autoinjector loaded with 3 uses of Tricordrazine, a weak general use medicine for treating damage.
+  id: CMTricordAutoInjector
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Medical/autoinjectors.rsi
+    layers:
+      - state: tricord
+      - state: tricord1
+        map: ["enum.SolutionContainerLayers.Fill"]
+        visible: false
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 30
+        reagents:
+          - ReagentId: Tricordrazine
+            Quantity: 30
+  - type: Hypospray
+    solutionName: pen
+    transferAmount: 10
+  - type: SolutionContainerVisuals
+    maxFillLevels: 3
+    fillBaseName: tricord
+    emptySpriteName: tricord
