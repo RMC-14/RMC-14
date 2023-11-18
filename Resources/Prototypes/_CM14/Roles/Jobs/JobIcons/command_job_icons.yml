@@ -4,3 +4,24 @@
   icon:
     sprite: _CM14/Interface/cm_job_icons.rsi
     state: staff_officer
+
+- type: statusIcon
+  parent: CMJobIconBase
+  id: JobIconSEA
+  icon:
+    sprite: _CM14/Interface/cm_job_icons.rsi
+    state: senior_enlisted_advisor
+
+- type: statusIcon
+  parent: CMJobIconBase
+  id: JobIconCommandingOfficer
+  icon:
+    sprite: _CM14/Interface/cm_job_icons.rsi
+    state: hudsquad_co
+
+- type: statusIcon
+  parent: CMJobIconBase
+  id: JobIconExecutiveOfficer
+  icon:
+    sprite: _CM14/Interface/cm_job_icons.rsi
+    state: hudsquad_xo

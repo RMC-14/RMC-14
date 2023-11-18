@@ -22,27 +22,24 @@
       time: 18000 # 5 hours
   weight: 5
   startingGear: SeniorEnlistedAdvisorGear
-  icon: "JobIconCaptain" #todo cm14
+  icon: "JobIconSEA"
   requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: job-supervisors-command
   canBeAntag: false
   accessGroups:
-  - AllAccess
+  - AllAccess #todo cm14
 
-- type: startingGear #todo cm14
+- type: startingGear
   id: SeniorEnlistedAdvisorGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitCaptain
+    jumpsuit: CMJumpsuitBO
     back: ClothingBackpackCaptainFilled
-    shoes: ClothingShoesColorBlack
-    head: ClothingHeadHatCaptain
-    eyes: ClothingEyesGlassesSunglasses
-    gloves: ClothingHandsGlovesCaptain
-    outerClothing: ClothingOuterArmorCaptainCarapace
+    shoes: CMShoesCombatBootsBrown
+    head: CMHeadCapDrill
     id: SeniorEnlistedAdvisorIDCard
     ears: ClothingHeadsetAltCommand
-  innerClothingSkirt: ClothingUniformJumpskirtCaptain
+  innerClothingSkirt: CMJumpsuitBO
   satchel: ClothingBackpackSatchelCaptainFilled
   duffelbag: ClothingBackpackDuffelCaptainFilled
 

@@ -43,6 +43,27 @@
     sprite: _CM14/Objects/Clothing/Head/Hats/beret_wo.rsi
 
 - type: entity
+  parent: CMHeadBeret
+  id: CMHeadBeretCO
+  name: CO`s beret
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Hats/coberet.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Hats/coberet.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: CMHeadBeretCOBlack
+  name: CO`s beret
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Hats/coberet_black.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Hats/coberet_black.rsi
+
+# Caps
+- type: entity
   parent: [ClothingHeadBase, CMEntityBase]
   id: CMHeadCapMP
   name: MP cap
@@ -77,3 +98,55 @@
     sprite: _CM14/Objects/Clothing/Head/Hats/cargocap.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Head/Hats/cargocap.rsi
+
+- type: entity
+  parent: CMHeadCapMP
+  id: CMHeadCap
+  name: cap
+  description: Standart baseball cap.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Hats/cap.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Hats/cap.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: CMHeadCapCO
+  name: CO`s cap
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Hats/cocap.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Hats/cocap.rsi
+
+- type: entity
+  parent: CMHeadCapCO
+  id: CMHeadCapCOFormalBlack
+  name: CO`s formal cap
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Hats/co_formal_black.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Hats/co_formal_black.rsi
+
+- type: entity
+  parent: CMHeadCapCO
+  id: CMHeadCapCOFormalWhite
+  name: CO`s formal cap
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Hats/co_formal_white.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Hats/co_formal_white.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: CMHeadCapDrill
+  name: drill hat
+  description: From now on you will speak only when spoken to, and the first and last words out of your filthy sewers will be 'Sir.'
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Hats/drillhat.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Hats/drillhat.rsi

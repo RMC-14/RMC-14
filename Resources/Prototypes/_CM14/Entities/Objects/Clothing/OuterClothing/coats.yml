@@ -45,3 +45,73 @@
     sprite: _CM14/Objects/Clothing/OuterClothing/Coats/chef.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/OuterClothing/Coats/chef.rsi
+
+# Auxiliary Supply Officer
+- type: entity
+  parent: [ClothingOuterStorageBase, CMEntityBase]
+  id: CMCoatASO
+  name: aso jacket
+  description: Standart-issue officer jacket.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/aso.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/aso.rsi
+
+# Commanding Officer
+- type: entity
+  parent: [ClothingOuterStorageBase, CMEntityBase]
+  id: CMCoatCO
+  name: commanding officer jacket
+  description: Standart-issue commanding officer jacket.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co_jacket.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co_jacket.rsi
+
+- type: entity
+  parent: CMCoatCO
+  id: CMCoatCOBomber
+  name: commanding officer bomber
+  description: Standart-issue commanding officer bomber.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co_bomber.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co_bomber.rsi
+
+- type: entity
+  parent: CMCoatCO
+  id: CMCoatCOFormalBlack
+  name: formal commanding officer jacket
+  description: Standart-issue commanding officer jacket.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co_formal_black.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co_formal_black.rsi
+
+- type: entity
+  parent: CMCoatCO
+  id: CMCoatCOFormalWhite
+  name: formal commanding officer jacket
+  description: Standart-issue commanding officer jacket.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co_formal_white.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co_formal_white.rsi
+
+# Officer
+- type: entity
+  parent: [ClothingOuterStorageBase, CMEntityBase]
+  id: CMCoatOfficer
+  name: officer jacket
+  description: Standart-issue officer jacket.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/officer.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/officer.rsi
+
