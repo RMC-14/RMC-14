@@ -48,9 +48,9 @@
   name: CO`s beret
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/Head/Hats/coberet.rsi
+    sprite: _CM14/Objects/Clothing/Head/Hats/co/beret.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/Head/Hats/coberet.rsi
+    sprite: _CM14/Objects/Clothing/Head/Hats/co/beret.rsi
 
 - type: entity
   parent: CMHeadBeret
@@ -58,9 +58,9 @@
   name: CO`s beret
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/Head/Hats/coberet_black.rsi
+    sprite: _CM14/Objects/Clothing/Head/Hats/co/beret_black.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/Head/Hats/coberet_black.rsi
+    sprite: _CM14/Objects/Clothing/Head/Hats/co/beret_black.rsi
 
 # Caps
 - type: entity
@@ -116,9 +116,9 @@
   name: CO`s cap
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/Head/Hats/cocap.rsi
+    sprite: _CM14/Objects/Clothing/Head/Hats/co/cap.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/Head/Hats/cocap.rsi
+    sprite: _CM14/Objects/Clothing/Head/Hats/co/cap.rsi
 
 - type: entity
   parent: CMHeadCapCO
@@ -126,9 +126,9 @@
   name: CO`s formal cap
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/Head/Hats/co_formal_black.rsi
+    sprite: _CM14/Objects/Clothing/Head/Hats/co/formal_black.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/Head/Hats/co_formal_black.rsi
+    sprite: _CM14/Objects/Clothing/Head/Hats/co/formal_black.rsi
 
 - type: entity
   parent: CMHeadCapCO
@@ -136,9 +136,9 @@
   name: CO`s formal cap
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/Head/Hats/co_formal_white.rsi
+    sprite: _CM14/Objects/Clothing/Head/Hats/co/formal_white.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/Head/Hats/co_formal_white.rsi
+    sprite: _CM14/Objects/Clothing/Head/Hats/co/formal_white.rsi
 
 - type: entity
   parent: CMHeadCap
@@ -150,3 +150,55 @@
     sprite: _CM14/Objects/Clothing/Head/Hats/drillhat.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Head/Hats/drillhat.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: CMHeadCapCMO
+  name: CMO`s cap
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Hats/cmocap.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Hats/cmocap.rsi
+
+# surgical caps
+- type: entity
+  parent: CMHeadCap
+  id: CMHeadCapSurgBlue
+  name: blue surgical cap
+  description: Standard-issue surgical cap.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Hats/surgcap/blue.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Hats/surgcap/blue.rsi
+
+- type: entity
+  parent: CMHeadCapSurgBlue
+  id: CMHeadCapSurgGreen
+  name: green surgical cap
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Hats/surgcap/green.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Hats/surgcap/green.rsi
+
+- type: entity
+  parent: CMHeadCapSurgBlue
+  id: CMHeadCapSurgPurple
+  name: purple surgical cap
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Hats/surgcap/purple.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Hats/surgcap/purple.rsi
+
+- type: entity
+  parent: CMHeadCapSurgBlue
+  id: CMHeadCapSurgOrange
+  name: orange surgical cap
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Hats/surgcap/orange.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Hats/surgcap/orange.rsi

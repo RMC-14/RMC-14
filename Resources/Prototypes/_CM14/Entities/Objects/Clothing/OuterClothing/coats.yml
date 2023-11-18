@@ -66,9 +66,9 @@
   description: Standart-issue commanding officer jacket.
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co_jacket.rsi
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co/jacket.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co_jacket.rsi
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co/jacket.rsi
 
 - type: entity
   parent: CMCoatCO
@@ -77,9 +77,9 @@
   description: Standart-issue commanding officer bomber.
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co_bomber.rsi
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co/bomber.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co_bomber.rsi
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co/bomber.rsi
 
 - type: entity
   parent: CMCoatCO
@@ -88,9 +88,9 @@
   description: Standart-issue commanding officer jacket.
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co_formal_black.rsi
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co/formal_black.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co_formal_black.rsi
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co/formal_black.rsi
 
 - type: entity
   parent: CMCoatCO
@@ -99,9 +99,9 @@
   description: Standart-issue commanding officer jacket.
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co_formal_white.rsi
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co/formal_white.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co_formal_white.rsi
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co/formal_white.rsi
 
 # Officer
 - type: entity
@@ -114,4 +114,16 @@
     sprite: _CM14/Objects/Clothing/OuterClothing/Coats/officer.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/OuterClothing/Coats/officer.rsi
+
+# Longcoat
+- type: entity
+  parent: [ClothingOuterStorageBase, CMEntityBase]
+  id: CMCoatLong
+  name: long coat
+  description: Standart-issue coat.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/longcoat.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/longcoat.rsi
 

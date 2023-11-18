@@ -22,7 +22,7 @@
     shoes: CMShoesCombatBootsBrown
     head: CMHeadCapCargo
     gloves: CMHandsBrown
-    id: DogtagCargoTech
+    id: CMCargoTechIDCard
     ears: ClothingHeadsetCargo
   innerClothingSkirt: CMJumpsuitCargoTech
   satchel: ClothingBackpackSatchelCargoFilled
