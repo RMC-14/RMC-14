@@ -63,9 +63,10 @@
       - Biological
     damage:
       groups:
-        Brute: -15
+        Brute: -5
+      types:
         Slash: -5
-        Piercing: -10
+        Piercing: -5
     bloodlossModifier: -10
     healingBeginSound:
       path: "/Audio/Items/Medical/brutepack_begin.ogg"
@@ -78,21 +79,62 @@
     price: 10
 
 - type: entity
-  name: heavy ointment
-  description: Used to treat those nasty burns. Less effective on caustic burns. It appears to be never ending.
-  parent: CMOintment
-  id: CMHeavyOintment  
+  name: surgical line
+  description: A roll of military-grade surgical line, able to seamlessly sew up any wound. Also works as a robust fishing line for maritime deployments.
+  parent: CMBaseHealingItem
+  id: CMSurgicalLine  
   components:
+  - type: Tag
+    tags:
+    - CMSurgicalLine
+  - type: Sprite
+    state: surgical_line
+  - type: Healing
+    damageContainers:
+      - Biological
+    damage:
+      groups:
+        Brute: -25
+    bloodlossModifier: -20
+    healingBeginSound:
+      path: "/Audio/Items/Medical/brutepack_begin.ogg"
+    healingEndSound:
+      path: "/Audio/Items/Medical/brutepack_end.ogg"
   - type: Stack
+    stackType: CMSurgicalLine
     count: 1
     unlimited: true
+  - type: StackPrice
+    price: 10
 
 - type: entity
-  name: heavy medical gauze
-  description: Some sterile gauze to wrap around bloody stumps and lacerations. It appears to be never ending.
-  parent: CMBrutepack
-  id: CMHeavyBrutepack
+  name: synth graft
+  description: An applicator for synthetic skin field grafts. The stuff reeks, itches like the dickens, hurts going on, and the color is a perfectly averaged multiethnic tone that doesn't blend with anyone's complexion. But at least you don't have to stay in sickbay.
+  parent: CMBaseHealingItem
+  id: CMSynthGraft  
   components:
+  - type: Tag
+    tags:
+    - CMSynthGraft
+  - type: Sprite
+    state: skingraft
+  - type: Healing
+    damageContainers:
+      - Biological
+    damage:
+      types:
+        Heat: -10
+        Cold: -10
+        Shock: -10
+        Caustic: -5
+    healingBeginSound:
+      path: "/Audio/Items/Medical/brutepack_begin.ogg"
+    healingEndSound:
+      path: "/Audio/Items/Medical/brutepack_end.ogg"
   - type: Stack
+    stackType: CMSynthGraft
     count: 1
     unlimited: true
+  - type: StackPrice
+    price: 10
+

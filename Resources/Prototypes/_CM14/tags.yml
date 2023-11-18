@@ -30,3 +30,10 @@
 
 - type: Tag
   id: CMFirstAidKit
+
+- type: Tag
+  id: CMSynthGraft
+
+- type: Tag
+  id: CMSurgicalLine
+
