@@ -37,3 +37,5 @@
 - type: Tag
   id: CMSurgicalLine
 
+- type: Tag
+  id: CMPillCanister

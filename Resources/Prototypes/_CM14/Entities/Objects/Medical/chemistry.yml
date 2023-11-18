@@ -1,0 +1,38 @@
+- type: entity
+  name: pill bottle
+  id: CMPillCanister
+  parent: BaseStorageItem
+  description: It's an airtight container for storing medication.
+  components:
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.SharedBagOpenVisuals.BagState:
+        openLayer:
+          Open: { visible: true }
+          Closed: { visible: false }
+        closedLayer:
+          Open: { visible: false }
+          Closed: { visible: true }
+  - type: Sprite
+    sprite: _CM14/Objects/Chemistry/pillcanister.rsi
+    layers: 
+      - state: pill_canister
+      - state: closed
+        map: ["closedLayer"]
+      - state: open
+        map: ["openLayer"]
+  - type: Item
+    sprite: _CM14/Objects/Chemistry/pillcanister.rsi
+    size: Small
+  - type: Tag
+    tags:
+      - CMPillCanister
+  - type: Storage
+    maxTotalWeight: 10
+    quickInsert: true
+    areaInsert: true
+    areaInsertRadius: 1
+    storageInsertSound: /Audio/Effects/pill_insert.ogg
+    storageRemoveSound: /Audio/Effects/pill_remove.ogg
+  - type: Dumpable
