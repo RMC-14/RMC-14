@@ -27,7 +27,7 @@
     back: ClothingBackpackEngineeringFilled
     shoes: CMShoesCombatBootsBrown
     gloves: CMHandsInsulated
-    id: DogtagOrdnanceTech
+    id: OrdnanceTechIDCard
     ears: ClothingHeadsetEngineering
     belt: ClothingBeltUtilityEngineering
   innerClothingSkirt: CMJumpsuitOrdnanceTech

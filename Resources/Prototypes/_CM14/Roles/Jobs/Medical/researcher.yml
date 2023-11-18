@@ -27,7 +27,7 @@
     back: ClothingBackpackMedicalFilled
     gloves: CMHandsLatex
     shoes: CMShoesCombatBoots
-    id: DogtagResearcher
+    id: ResearcherIDCard
     ears: ClothingHeadsetMedical
   innerClothingSkirt: CMJumpsuitResearch
   satchel: ClothingBackpackSatchelMedicalFilled

@@ -21,7 +21,7 @@
     gloves: CMHandsLatex
     shoes: CMShoesCombatBoots
     head: CMHeadCapSurgOrange
-    id: DogtagNurse
+    id: NurseIDCard
     ears: ClothingHeadsetMedical
   innerClothingSkirt: CMScrubsNurse
   satchel: ClothingBackpackSatchelMedicalFilled

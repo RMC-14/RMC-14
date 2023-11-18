@@ -26,7 +26,7 @@
     back: ClothingBackpackEngineeringFilled
     shoes: CMShoesCombatBootsBrown
     gloves: CMHandsInsulated
-    id: DogtagMaintTech
+    id: MaintTechIDCard
     ears: ClothingHeadsetEngineering
     belt: ClothingBeltUtilityEngineering
   innerClothingSkirt: CMJumpsuitMaintTech

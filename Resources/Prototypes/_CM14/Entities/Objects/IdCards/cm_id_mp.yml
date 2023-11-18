@@ -7,7 +7,7 @@
     job: ChiefMP
 
 - type: entity
-  parent: CMIDCardSilver
+  parent: CMIDCardBase
   id: MilitaryWardenIDCard
   name: warden ID card
   components:
@@ -15,7 +15,7 @@
     job: MilitaryWarden
 
 - type: entity
-  parent: CMIDCardSilver
+  parent: CMIDCardBase
   id: MilitaryPoliceIDCard
   name: military police ID card
   components:

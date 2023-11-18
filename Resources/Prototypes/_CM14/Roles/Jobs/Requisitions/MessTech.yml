@@ -21,7 +21,7 @@
     outerClothing: CMCoatMessTech
     back: ClothingBackpackFilled
     shoes: CMShoesCombatBootsBrown
-    id: DogtagMessTech
+    id: MessTechIDCard
     ears: ClothingHeadsetCargo
   innerClothingSkirt: CMJumpsuitMessTech
   satchel: ClothingBackpackSatchelFilled

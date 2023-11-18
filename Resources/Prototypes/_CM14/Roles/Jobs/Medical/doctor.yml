@@ -28,7 +28,7 @@
     gloves: CMHandsLatex
     shoes: CMShoesCombatBoots
     head: CMHeadCapSurgBlue
-    id: DogtagDoctor
+    id: MarineDoctorIDCard
     ears: ClothingHeadsetMedical
   innerClothingSkirt: CMScrubsBlue
   satchel: ClothingBackpackSatchelMedicalFilled

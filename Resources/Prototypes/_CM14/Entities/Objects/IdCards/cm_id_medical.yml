@@ -7,25 +7,25 @@
     job: MarineCMO
 
 - type: entity
-  parent: CMIDCardStandardDogtag
-  id: DogtagDoctor
-  name: doctor's dogtags
+  parent: CMIDCardBase
+  id: MarineDoctorIDCard
+  name: doctor's ID card
   components:
   - type: PresetIdCard
     job: MarineDoctor
 
 - type: entity
-  parent: CMIDCardStandardDogtag
-  id: DogtagNurse
-  name: nurse's dogtags
+  parent: CMIDCardBase
+  id: NurseIDCard
+  name: nurse's ID card
   components:
   - type: PresetIdCard
     job: Nurse
 
 - type: entity
-  parent: CMIDCardStandardDogtag
-  id: DogtagResearcher
-  name: researcher's dogtags
+  parent: CMIDCardBase
+  id: ResearcherIDCard
+  name: researcher's ID card
   components:
   - type: PresetIdCard
     job: Researcher
