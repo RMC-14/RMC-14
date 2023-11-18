@@ -317,3 +317,27 @@
       sprite: _CM14/Objects/Clothing/Uniforms/research.rsi
     - type: Clothing
       sprite: _CM14/Objects/Clothing/Uniforms/research.rsi
+        
+# Pilot
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitPilot
+  name: pilot uniform
+  description: Standard-issue pilot uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/pilot.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/pilot.rsi
+
+# IO
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitIO
+  name: intelligence officer uniform
+  description: Standard-issue intelligence officer`s uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/io.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/io.rsi

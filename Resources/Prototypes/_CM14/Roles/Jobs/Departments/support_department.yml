@@ -1,0 +1,10 @@
+﻿- type: department
+  id: AuxiliarySupport
+  parent: DepartmentBaseCM
+  description: department-AuxiliarySupport-description
+  color: "#C38312"
+  roles:
+  - AuxiliarySupportOfficer
+  - PilotOfficer
+  - DropshipCrewChief
+  - IntelOfficer

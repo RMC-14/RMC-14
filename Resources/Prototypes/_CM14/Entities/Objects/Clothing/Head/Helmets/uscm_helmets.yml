@@ -5,9 +5,9 @@
   description: A standard M10 Pattern Helmet. The inside label, along with washing information, reads, 'The difference between an open-casket and closed-casket funeral. Wear on head for best results.'. There is a built-in camera on the right side.
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/Head/Helmets/m10.rsi
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/standard.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/Head/Helmets/m10.rsi
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/standard.rsi
   - type: Armor 
     modifiers:
       coefficients:
@@ -23,9 +23,9 @@
   description: A special variant of the M10 Pattern Helmet worn by the Military Police of the USCM.
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/Head/Helmets/m10_mp.rsi
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/mp.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/Head/Helmets/m10_mp.rsi
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/mp.rsi
 
 - type: entity
   parent: ArmorHelmetM10
@@ -34,9 +34,9 @@
   description: A special variant of the M10 Pattern Helmet worn by the Chief MP of the USCM.
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/Head/Helmets/m10_cmp.rsi
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/cmp.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/Head/Helmets/m10_cmp.rsi
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/cmp.rsi
 
 - type: entity
   parent: ArmorHelmetM10
@@ -45,6 +45,28 @@
   description: A special variant of the M10 Pattern Helmet worn by the Commanding Officer of the USCM.
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/Head/Helmets/m10_co.rsi
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/co.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/Head/Helmets/m10_co.rsi
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/co.rsi
+
+- type: entity
+  parent: ArmorHelmetM10
+  id: CMArmorHelmetM10IO
+  name: M10 Helmet IO
+  description: A special variant of the M10 Pattern Helmet worn by the Intelligence Officer of the USCM.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/io.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/io.rsi
+
+- type: entity
+  parent: ArmorHelmetM10
+  id: CMArmorHelmetM10Pilot
+  name: M10 Pilot Helmet
+  description: A special variant of the M10 Pattern Helmet worn by pilots of the USCM.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/pilot.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/pilot.rsi
