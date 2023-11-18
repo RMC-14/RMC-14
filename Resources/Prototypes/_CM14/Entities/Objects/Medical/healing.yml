@@ -141,6 +141,7 @@
 - type: entity
   name: burn kit
   description: A treatment kit for severe burns.
+  parent: CMBaseHealingItem
   id: CMBurnKit  
   components:
   - type: Tag
