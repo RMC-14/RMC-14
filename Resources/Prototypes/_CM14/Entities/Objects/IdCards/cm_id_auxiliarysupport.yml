@@ -4,7 +4,7 @@
   name: auxiliary support officer ID card
   components:
   - type: PresetIdCard
-    job: AuxiliaryServiceOfficer
+    job: AuxiliarySupportOfficer
 
 - type: entity
   parent: CMIDCardBase
