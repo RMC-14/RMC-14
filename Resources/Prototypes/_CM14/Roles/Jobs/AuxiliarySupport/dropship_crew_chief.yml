@@ -41,4 +41,4 @@
     layers:
     - sprite: Markers/jobs.rsi
       state: green
-    - state: dcc
+    - state: dropship_crew_chief
