@@ -4,6 +4,16 @@
   name: job-name-survivor
   description: job-description-survivor
   playTimeTracker: JobSurvivor
+  requirements:
+  - !type:RoleTimeRequirement
+    role: Rifleman
+    time: 18000 #5 hours
+  - !type:RoleTimeRequirement
+    role: HospitalCorpsman
+    time: 18000 #5 hours
+  - !type:RoleTimeRequirement
+    role: CombatTech
+    time: 18000 #5 hours
   startingGear: SurvivorGear
   icon: "JobIconSurvivor"
   requireAdminNotify: false
