@@ -90,3 +90,10 @@
 
 - type: playTimeTracker
   id: JobIntelOfficer
+
+# non uscm
+- type: playTimeTracker
+  id: JobCorrespondent
+
+- type: playTimeTracker
+  id: JobSurvivor

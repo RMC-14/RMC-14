@@ -18,7 +18,7 @@
 - type: startingGear
   id: DCCGear
   equipment:
-    jumpsuit: CMJumpsuitPilot
+    jumpsuit: CMJumpsuitDCC
     outerClothing: CMArmorPlatePilot
     back: ClothingBackpackFilled
     gloves: CMHandsBrown
@@ -26,7 +26,7 @@
     head: CMHeadCap
     id: DCCIDCard
     ears: ClothingHeadsetSecurity
-  innerClothingSkirt: CMJumpsuitPilot
+  innerClothingSkirt: CMJumpsuitDCC
   satchel: ClothingBackpackSatchelFilled
   duffelbag: ClothingBackpackDuffelFilled
 

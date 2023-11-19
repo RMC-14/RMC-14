@@ -25,3 +25,7 @@ department-MarineMedical-description = Treat all patients that come into medbay.
 # auxiliary support
 department-AuxiliarySupport = Auxiliary Support
 department-AuxiliarySupport-description = The Auxiliary support personnel are tasked with supporting the marines either by providing support through firepower or other means.
+
+# non uscm
+department-Civilians = Civilian
+department-Civilians-description = Jobs not a part of US Colonial Marine forces.

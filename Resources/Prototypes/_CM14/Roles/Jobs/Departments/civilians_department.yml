@@ -1,0 +1,8 @@
+﻿- type: department
+  id: Civilians
+  parent: DepartmentBaseCM
+  description: department-Civilians-description
+  color: "#C38312"
+  roles:
+  - Correspondent
+  - Survivor

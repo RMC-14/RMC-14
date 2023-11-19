@@ -1,0 +1,8 @@
+﻿- type: entity
+  parent: CMIDCardBase
+  id: CorrespondentIDCard
+  name: correspondent ID card
+  components:
+  - type: PresetIdCard
+    job: Correspondent
+
