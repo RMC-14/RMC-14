@@ -49,6 +49,5 @@
       state: pounce
     event: !type:XenoLeapActionEvent
     range: 15
-    cooldown: 3
-    useDelay: 2
+    useDelay: 3
     checkCanAccess: false
