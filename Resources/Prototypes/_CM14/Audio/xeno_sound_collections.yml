@@ -10,3 +10,9 @@
   files:
   - /Audio/_CM14/Xeno/alien_chestburst.ogg
   - /Audio/_CM14/Xeno/alien_chestburst2.ogg
+
+- type: soundCollection
+  id: XenoDrool
+  files:
+  - /Audio/_CM14/Xeno/alien_drool1.ogg
+  - /Audio/_CM14/Xeno/alien_drool2.ogg

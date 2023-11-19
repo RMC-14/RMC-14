@@ -26,6 +26,7 @@
     - ActionXenoPlantWeeds
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
+    - ActionXenoTransferPlasma
     plasma: 300
     maxPlasma: 300 # TODO CM14
     plasmaRegenOnWeeds: 6
