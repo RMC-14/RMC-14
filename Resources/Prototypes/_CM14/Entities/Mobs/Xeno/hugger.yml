@@ -1,7 +1,7 @@
 ﻿- type: entity # TODO CM14 description
   parent: CMXenoUndeveloped
-  id: CMXenoHugger
-  name: Facehugger
+  id: CMXenoHugger # TODO CM14 slowly die off weeds
+  name: facehugger
   components:
   - type: Sprite
     sprite: _CM14/Mobs/Xenos/Hugger/hugger.rsi
@@ -12,12 +12,13 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      50: Dead # TODO CM14
+      35: Dead
   - type: Xeno
     actionIds:
     - ActionXenoRest
     - ActionXenoWatch
     - ActionXenoHide
+    - ActionXenoLeap
     evolvesTo:
     - CMXenoDrone
     maxPlasma: 10
@@ -35,3 +36,5 @@
         layer:
         - SmallMobLayer
   - type: XenoAnimateMovement
+  - type: XenoLeap
+  - type: XenoHugger

@@ -6,6 +6,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Throwing;
 using Robust.Client.GameObjects;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 using XenoComponent = Content.Shared._CM14.Xenos.XenoComponent;
@@ -73,9 +74,9 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
         UpdateDrawDepth((uid, sprite));
     }
 
-    private void UpdateSprite(Entity<SpriteComponent?, MobStateComponent?, AppearanceComponent?, InputMoverComponent> entity)
+    public void UpdateSprite(Entity<SpriteComponent?, MobStateComponent?, AppearanceComponent?, InputMoverComponent?, ThrownItemComponent?> entity)
     {
-        var (_, sprite, mobState, appearance, input) = entity;
+        var (_, sprite, mobState, appearance, input, thrown) = entity;
         if (!Resolve(entity, ref sprite, ref appearance))
             return;
 
@@ -85,7 +86,7 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
             state = mobState.CurrentState;
         }
 
-        Resolve(entity, ref input, false);
+        Resolve(entity, ref input, ref thrown, false);
 
         if (sprite is not { BaseRSI: { } rsi } ||
             !sprite.LayerMapTryGet(XenoVisualLayers.Base, out var layer))
@@ -93,6 +94,7 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
             return;
         }
 
+        // TODO CM14 split this up into multiple systems with ordered event subscription
         switch (state)
         {
             case MobState.Critical:
@@ -109,6 +111,13 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
                 {
                     if (rsi.TryGetState("sleeping", out _))
                         sprite.LayerSetState(layer, "sleeping");
+                    break;
+                }
+
+                if (thrown != null &&
+                    rsi.TryGetState("thrown", out _))
+                {
+                    sprite.LayerSetState(layer, "thrown");
                     break;
                 }
 
@@ -143,7 +152,7 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
         {
             if (mobState.CurrentState == MobState.Alive)
             {
-                UpdateSprite((uid, sprite, mobState, null, input));
+                UpdateSprite((uid, sprite, mobState, null, input, null));
             }
         }
     }

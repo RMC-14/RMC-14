@@ -34,3 +34,6 @@
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
+  - type: Tag
+    tags:
+    - DoorBumpOpener # TODO CM14 big loud steps
