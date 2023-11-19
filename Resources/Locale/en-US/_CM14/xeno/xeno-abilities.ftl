@@ -8,6 +8,9 @@ cm-xeno-cant-reach-there = You can't reach there!
 # Evolve
 cm-xeno-available-evolutions = Available Evolutions
 
+# Leap
+cm-xeno-leap-cancelled = You cancel your leap!
+
 # Plant weeds
 cm-xeno-weeds-already-here = There are already weeds here!
 
