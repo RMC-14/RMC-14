@@ -1,0 +1,30 @@
+# there should be cm base encr. keys
+
+- type: entity
+  parent: [EncryptionKey, CMEntityBase]
+  id: CMEncryptionKeyTEST
+  name: test encryption key
+  description: You should not have this
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommon
+    - MarineHighCommand
+    - MarineCommand
+    - MarineMedical
+    - MarineEngineer
+    - MarineMilitaryPolice
+    - MarineRequisition
+    - MarineIntel
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - Colony
+    defaultChannel: MarineCommon
+  - type: Sprite
+    layers:
+    - state: crypt_gray
+    - state: common_label
