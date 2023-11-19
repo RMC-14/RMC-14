@@ -44,8 +44,6 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
     public override void Initialize()
     {
-        base.Initialize();
-
         _marineQuery = GetEntityQuery<MarineComponent>();
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
         _thrownItemQuery = GetEntityQuery<ThrownItemComponent>();

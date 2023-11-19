@@ -1,4 +1,5 @@
-﻿using Content.Shared.Coordinates;
+﻿using Content.Shared._CM14.Xenos.Plasma;
+using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
@@ -12,7 +13,7 @@ public sealed class XenoAcidSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     public override void Initialize()
     {
@@ -25,8 +26,11 @@ public sealed class XenoAcidSystem : EntitySystem
 
     private void OnXenoCorrosiveAcid(Entity<XenoComponent> xeno, ref XenoCorrosiveAcidEvent args)
     {
-        if (!CheckCorrodablePopups(xeno, args.Target))
+        if (xeno.Owner == args.Performer ||
+            !CheckCorrodablePopups(xeno, args.Target))
+        {
             return;
+        }
 
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.AcidDelay, new XenoCorrosiveAcidDoAfterEvent(args), xeno, args.Target)
         {
@@ -44,7 +48,7 @@ public sealed class XenoAcidSystem : EntitySystem
         if (!CheckCorrodablePopups(xeno, target))
             return;
 
-        if (!_xeno.TryRemovePlasmaPopup(xeno, args.PlasmaCost))
+        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno, args.PlasmaCost))
             return;
 
         if (_net.IsClient)
