@@ -2,6 +2,7 @@
 using Content.Shared.ActionBlocker;
 using Content.Shared.DoAfter;
 using Content.Shared.Eye.Blinding.Systems;
+using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -78,7 +79,9 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         var ev = new XenoLeapDoAfterEvent(GetNetCoordinates(args.Target));
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.Delay, ev, xeno)
         {
-            BreakOnUserMove = true
+            BreakOnUserMove = true,
+            BreakOnDamage = true,
+            DamageThreshold = FixedPoint2.New(10)
         };
 
         _doAfter.TryStartDoAfter(doAfter);
