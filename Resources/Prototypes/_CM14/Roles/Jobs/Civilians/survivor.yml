@@ -18,7 +18,7 @@
   icon: "JobIconSurvivor"
   requireAdminNotify: false
   joinNotifyCrew: false
-  supervisors: job-supervisors-command # no one probably?
+  supervisors: job-supervisors-nobody
   canBeAntag: false
 
 - type: startingGear
