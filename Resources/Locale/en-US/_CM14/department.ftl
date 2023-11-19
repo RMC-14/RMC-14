@@ -21,3 +21,7 @@ department-MarineEngineering-description = Your job is to maintain the ship's en
 # medical
 department-MarineMedical = Medical
 department-MarineMedical-description = Treat all patients that come into medbay. Transfer injured marines from the hanger to medbay.
+
+# auxiliary support
+department-AuxiliarySupport = Auxiliary Support
+department-AuxiliarySupport-description = The Auxiliary support personnel are tasked with supporting the marines either by providing support through firepower or other means.
