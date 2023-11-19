@@ -1,0 +1,36 @@
+﻿- type: job
+  id: survivor
+  parent: JobBaseCM
+  name: job-name-survivor
+  description: job-description-survivor
+  playTimeTracker: JobSurvivor
+  startingGear: SurvivorGear
+  icon: "JobIconSurvivor"
+  requireAdminNotify: false
+  joinNotifyCrew: false
+  supervisors: job-supervisors-command # no one probably?
+  canBeAntag: false
+
+- type: startingGear
+  id: SurvivorGear
+  equipment:
+    jumpsuit: CMJumpsuitColonist
+    back: ClothingBackpackFilled
+    shoes: CMShoesCombatBootsBrown
+    ears: ClothingHeadsetGrey
+  innerClothingSkirt: CMJumpsuitColonist
+  satchel: ClothingBackpackSatchelFilled
+  duffelbag: ClothingBackpackDuffelFilled
+
+- type: entity
+  id: CMSpawnPointSurvivor
+  parent: CMSpawnPointJobBase
+  name: survivor spawn point
+  components:
+  - type: SpawnPoint
+    job_id: Survivor
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: survivor

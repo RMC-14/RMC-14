@@ -127,3 +127,14 @@
   - type: Clothing
     sprite: _CM14/Objects/Clothing/OuterClothing/Coats/longcoat.rsi
 
+# Correspondent
+- type: entity
+  parent: [ClothingOuterStorageBase, CMEntityBase]
+  id: CMCoatCorrespondent
+  name: correspondent coat
+  description: Standart-issue correspondent coat.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/correspondent.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Coats/correspondent.rsi
