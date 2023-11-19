@@ -1,5 +1,5 @@
 ﻿- type: job
-  id: survivor
+  id: Survivor
   parent: JobBaseCM
   name: job-name-survivor
   description: job-description-survivor
