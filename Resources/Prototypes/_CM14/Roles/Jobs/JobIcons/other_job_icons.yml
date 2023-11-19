@@ -3,11 +3,11 @@
   id: JobIconCorrespondent
   icon:
     sprite: _CM14/Interface/cm_job_icons.rsi
-    state: hudsquad_ass #idk whose this icon
+    state: hudsquad #todo cm14 correspondent icon
 
 - type: statusIcon
   parent: CMJobIconBase
   id: JobIconSurvivor
   icon:
     sprite: _CM14/Interface/cm_job_icons.rsi
-    state: hudsquad_ass #todo cm14 survivor icon
+    state: hudsquad #todo cm14 survivor icon

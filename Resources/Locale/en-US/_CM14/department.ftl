@@ -27,5 +27,5 @@ department-AuxiliarySupport = Auxiliary Support
 department-AuxiliarySupport-description = The Auxiliary support personnel are tasked with supporting the marines either by providing support through firepower or other means.
 
 # non uscm
-department-Civilians = Non USCM Personnel
-department-Civilians-description = Jobs with is not a part of US Colonial Marine forces.
+department-Civilians = Civilian
+department-Civilians-description = Jobs not a part of US Colonial Marine forces.

@@ -51,7 +51,7 @@
   parent: [ClothingOuterStorageBase, CMEntityBase]
   id: CMCoatASO
   name: aso jacket
-  description: Standart-issue officer jacket.
+  description: Standard-issue officer jacket.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Coats/aso.rsi
@@ -63,7 +63,7 @@
   parent: [ClothingOuterStorageBase, CMEntityBase]
   id: CMCoatCO
   name: commanding officer jacket
-  description: Standart-issue commanding officer jacket.
+  description: Standard-issue commanding officer jacket.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co/jacket.rsi
@@ -74,7 +74,7 @@
   parent: CMCoatCO
   id: CMCoatCOBomber
   name: commanding officer bomber
-  description: Standart-issue commanding officer bomber.
+  description: Standard-issue commanding officer bomber.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co/bomber.rsi
@@ -85,7 +85,7 @@
   parent: CMCoatCO
   id: CMCoatCOFormalBlack
   name: formal commanding officer jacket
-  description: Standart-issue commanding officer jacket.
+  description: Standard-issue commanding officer jacket.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co/formal_black.rsi
@@ -96,7 +96,7 @@
   parent: CMCoatCO
   id: CMCoatCOFormalWhite
   name: formal commanding officer jacket
-  description: Standart-issue commanding officer jacket.
+  description: Standard-issue commanding officer jacket.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Coats/co/formal_white.rsi
@@ -108,7 +108,7 @@
   parent: [ClothingOuterStorageBase, CMEntityBase]
   id: CMCoatOfficer
   name: officer jacket
-  description: Standart-issue officer jacket.
+  description: Standard-issue officer jacket.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Coats/officer.rsi
@@ -120,7 +120,7 @@
   parent: [ClothingOuterStorageBase, CMEntityBase]
   id: CMCoatLong
   name: long coat
-  description: Standart-issue coat.
+  description: Standard-issue coat.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Coats/longcoat.rsi
@@ -132,7 +132,7 @@
   parent: [ClothingOuterStorageBase, CMEntityBase]
   id: CMCoatCorrespondent
   name: correspondent coat
-  description: Standart-issue correspondent coat.
+  description: Standard-issue correspondent coat.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Coats/correspondent.rsi
