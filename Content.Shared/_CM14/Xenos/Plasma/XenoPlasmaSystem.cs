@@ -2,6 +2,7 @@
 using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
+using Robust.Shared.Network;
 
 namespace Content.Shared._CM14.Xenos.Plasma;
 
@@ -9,6 +10,7 @@ public sealed class XenoPlasmaSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private EntityQuery<XenoComponent> _xenoQuery;
@@ -62,7 +64,11 @@ public sealed class XenoPlasmaSystem : EntitySystem
 
         RegenPlasma(target, args.Amount);
 
-        _popup.PopupClient(Loc.GetString("cm-xeno-plasma-transferred-to-other", ("plasma", args.Amount), ("target", target), ("total", self.Comp.Plasma)), self, self);
+        // for some reason the popup will sometimes not show for the predicting client here
+        if (_net.IsClient)
+            return;
+
+        _popup.PopupEntity(Loc.GetString("cm-xeno-plasma-transferred-to-other", ("plasma", args.Amount), ("target", target), ("total", self.Comp.Plasma)), self, self);
         _popup.PopupEntity(Loc.GetString("cm-xeno-plasma-transferred-to-self", ("plasma", args.Amount), ("target", self.Owner), ("total", otherXeno.Plasma)), target, target);
 
         _audio.PlayPredicted(self.Comp.PlasmaTransferSound, self, self);
