@@ -6,13 +6,13 @@
   playTimeTracker: JobSurvivor
   requirements:
   - !type:RoleTimeRequirement
-    role: Rifleman
+    role: JobRifleman
     time: 18000 #5 hours
   - !type:RoleTimeRequirement
-    role: HospitalCorpsman
+    role: JobHospitalCorpsman
     time: 18000 #5 hours
   - !type:RoleTimeRequirement
-    role: CombatTech
+    role: JobCombatTech
     time: 18000 #5 hours
   startingGear: SurvivorGear
   icon: "JobIconSurvivor"
