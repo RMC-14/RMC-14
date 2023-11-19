@@ -10,10 +10,11 @@
   - type: Item
     sprite: _CM14/Objects/Medical/hypospray.rsi
 
+
 - type: entity
   name: tricordrazine autoinjector
   parent: ChemicalMedipen
-  description: An autoinjector loaded with 3 uses of Tricordrazine, a weak general use medicine for treating damage.
+  description: An autoinjector loaded with 3 uses of Tricordrazine, a weak general use medicine for treating damage. Each use is 10 units.
   id: CMTricordAutoInjector
   components:
   - type: Sprite
@@ -23,6 +24,10 @@
       - state: tricord1
         map: ["enum.SolutionContainerLayers.Fill"]
         visible: false
+  - type: Item
+  - type: Hypospray
+    solutionName: pen
+    transferAmount: 10
   - type: SolutionContainerManager
     solutions:
       pen:
@@ -30,10 +35,66 @@
         reagents:
           - ReagentId: Tricordrazine
             Quantity: 30
-  - type: Hypospray
-    solutionName: pen
-    transferAmount: 10
   - type: SolutionContainerVisuals
     maxFillLevels: 3
     fillBaseName: tricord
     emptySpriteName: tricord
+
+
+- type: entity
+  name: inaprovaline autoinjector
+  parent: ChemicalMedipen
+  description: An autoinjector containing Inaprovaline.  Useful for saving lives. Each use is 10 units.
+  id: CMInaprovAutoInjector
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Medical/autoinjectors.rsi
+    layers:
+      - state: empty
+      - state: inaprovaline1
+        map: ["enum.SolutionContainerLayers.Fill"]
+        visible: false
+  - type: Item
+  - type: Hypospray
+    solutionName: pen
+    transferAmount: 10
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 30
+        reagents:
+          - ReagentId: Inaprovaline
+            Quantity: 30
+  - type: SolutionContainerVisuals
+    maxFillLevels: 3
+    fillBaseName: inaprovaline
+    emptySpriteName: empty
+
+- type: entity
+  name: kelotane autoinjector
+  parent: ChemicalMedipen
+  description: An auto-injector loaded with 3 uses of Kelotane, a common burn medicine. Each use is 10 units.
+  id: CMKelotaneAutoInjector
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Medical/autoinjectors.rsi
+    layers:
+      - state: empty
+      - state: kelotane1
+        map: ["enum.SolutionContainerLayers.Fill"]
+        visible: false
+  - type: Item
+  - type: Hypospray
+    solutionName: pen
+    transferAmount: 10
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 30
+        reagents:
+          - ReagentId: Kelotane
+            Quantity: 30
+  - type: SolutionContainerVisuals
+    maxFillLevels: 3
+    fillBaseName: kelotane
+    emptySpriteName: empty
