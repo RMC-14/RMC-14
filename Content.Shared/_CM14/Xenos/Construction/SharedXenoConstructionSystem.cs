@@ -1,4 +1,5 @@
 ﻿using Content.Shared._CM14.Xenos.Construction.Events;
+using Content.Shared._CM14.Xenos.Plasma;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
@@ -26,7 +27,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     private EntityQuery<XenoWeedsComponent> _weedsQuery;
 
@@ -61,7 +62,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        if (!_xeno.TryRemovePlasmaPopup(ent, args.PlasmaCost))
+        if (!_xenoPlasma.TryRemovePlasmaPopup(ent, args.PlasmaCost))
             return;
 
         if (_net.IsServer)

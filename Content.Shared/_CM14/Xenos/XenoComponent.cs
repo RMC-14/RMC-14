@@ -31,6 +31,14 @@ public sealed partial class XenoComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public int MaxPlasma = 300;
 
+    [DataField, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan PlasmaTransferDelay = TimeSpan.FromSeconds(3);
+
+    [DataField, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public SoundSpecifier PlasmaTransferSound = new SoundCollectionSpecifier("XenoDrool");
+
     [DataField(required: true)]
     [ViewVariables(VVAccess.ReadWrite)]
     public FixedPoint2 PlasmaRegenOnWeeds;
@@ -61,7 +69,7 @@ public sealed partial class XenoComponent : Component
 
     [DataField]
     [ViewVariables(VVAccess.ReadWrite)]
-    public SoundSpecifier RegurgitateSound = new SoundPathSpecifier("/Audio/_CM14/Xeno/alien_drool2.ogg");
+    public SoundSpecifier RegurgitateSound = new SoundCollectionSpecifier("XenoDrool");
 
     [DataField, AutoNetworkedField]
     [ViewVariables(VVAccess.ReadWrite)]

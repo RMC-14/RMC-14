@@ -32,5 +32,9 @@ cm-xeno-pheromones-stop = You stop emitting pheromones
 # Regurgitate
 cm-xeno-none-devoured = You haven't devoured anyone!
 
+# Transfer Plasma
+cm-xeno-plasma-transferred-to-other = You have transferred {$plasma} plasma to {$target}. You now have {$total}
+cm-xeno-plasma-transferred-to-self = {$target} has transferred {$plasma} plasma to you. You now have {$total}
+
 # Watch
 cm-xeno-watch = Watch Xeno
