@@ -1,0 +1,52 @@
+﻿- type: job
+  id: IntelOfficer
+  parent: JobBaseCM
+  name: job-name-intel
+  description: job-description-intel
+  playTimeTracker: JobIntelOfficer
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: Marine
+    time: 18000 # 5 hours
+  startingGear: IntelOfficerGear
+  icon: "JobIconIntelOfficer"
+  requireAdminNotify: false
+  joinNotifyCrew: true
+  supervisors: job-supervisors-command
+  canBeAntag: false
+  access:
+  - Command
+  # Dropship
+  # Prep
+  # Alpha
+  # Bravo
+  # Charlie
+  # Delta
+
+- type: startingGear
+  id: IntelOfficerGear
+  equipment:
+    jumpsuit: CMJumpsuitIO
+    outerClothing: CMArmorM3IO
+    back: ClothingBackpackFilled
+    gloves: CMHandsBlack
+    shoes: CMShoesCombatBoots
+    head: CMArmorHelmetM10IO
+    id: IntelOfficerIDCard
+    ears: ClothingHeadsetSecurity
+  innerClothingSkirt: CMJumpsuitIO
+  satchel: ClothingBackpackSatchelFilled
+  duffelbag: ClothingBackpackDuffelFilled
+
+- type: entity
+  id: CMSpawnPointIntelOfficer
+  parent: CMSpawnPointJobBase
+  name: intel officer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: IntelOfficer
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: intel_officer

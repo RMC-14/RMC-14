@@ -1,15 +1,16 @@
-﻿- type: entity
+﻿# m3
+- type: entity
   parent: [ClothingOuterArmorBasic, CMEntityBase]
   id: ArmorMarineM3
   name: M3 Pattern Personal Armor
   description: Standard Issue Armor used by USCM. Provides modest protection from bullet and melee attacks. It also has a shoulder-mounted directional flashlight for night time combat and a HUD to see their Marine roles. An all rounder in terms of protection with an additional 3 slots in the armor.
   components:
     - type: Sprite
-      sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3_armor.rsi
+      sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/standard.rsi
       layers:
       - state: icon
     - type: Clothing
-      sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3_armor.rsi
+      sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/standard.rsi
     - type: Armor
       modifiers:
         coefficients:
@@ -72,14 +73,48 @@
 
 - type: entity
   parent: ArmorMarineM3
+  id: CMArmorM3Warden
+  name: M3 pattern warden armor
+  description: A well-crafted suit of M3 Pattern Armor typically distributed to Wardens. 
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/warden.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/warden.rsi
+
+- type: entity
+  parent: ArmorMarineM3
+  id: CMArmorM3WO
+  name: M3 pattern chief mp armor
+  description: A well-crafted suit of M3 Pattern Armor typically distributed to Chief MPs. Useful for letting your men know who is in charge. 
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/wo.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/wo.rsi
+
+- type: entity
+  parent: ArmorMarineM3
+  id: CMArmorM3IO
+  name: M3 pattern io
+  description: A well-crafted suit of M3 Pattern Armor typically distributed to Intelligence Officers.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/io.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/io.rsi
+
+# M2
+- type: entity
+  parent: ArmorMarineM3
   id: CMArmorM2MP
   name: M2 pattern mp armor
   description: M2 Armor offers higher protection against melee attacks but less protection against projectile attacks
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m2_mp.rsi
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m2/mp.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m2_mp.rsi
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m2/mp.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -91,23 +126,32 @@
     damageCoefficient: 0.60
 
 - type: entity
-  parent: ArmorMarineM3
-  id: CMArmorM3Warden
-  name: M3 pattern warden armor
-  description: A well-crafted suit of M3 Pattern Armor typically distributed to Wardens. 
+  parent: CMArmorM2MP
+  id: CMArmorM2Officer
+  name: M2 pattern officer
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3_warden.rsi
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m2/officer.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3_warden.rsi
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m2/officer.rsi
 
+# plate carriers
 - type: entity
   parent: ArmorMarineM3
-  id: CMArmorM3WO
-  name: M3 pattern chief mp armor
-  description: A well-crafted suit of M3 Pattern Armor typically distributed to Chief MPs. Useful for letting your men know who is in charge. 
+  id: CMArmorPlatePilot
+  name: pilot plate carrier
+  description: Special plate carrier distributed to the pilots of USCM.
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3_wo.rsi
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/pilot.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3_wo.rsi
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/pilot.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.4
+        Slash: 0.4
+        Piercing: 0.3
+        Heat: 0.2
+  - type: ExplosionResistance
+    damageCoefficient: 0.40

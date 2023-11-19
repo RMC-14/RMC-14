@@ -1,0 +1,44 @@
+﻿- type: job
+  id: DropshipCrewChief
+  parent: JobBaseCM
+  name: job-name-dcc
+  description: job-description-dcc
+  playTimeTracker: JobDropshipCrewChief
+  startingGear: DCCGear
+  icon: "JobIconDCC"
+  requireAdminNotify: false
+  joinNotifyCrew: true
+  supervisors: job-supervisors-command
+  canBeAntag: false
+  access:
+  - Command
+  # Dropship
+  # Pilot
+
+- type: startingGear
+  id: DCCGear
+  equipment:
+    jumpsuit: CMJumpsuitPilot
+    outerClothing: CMArmorPlatePilot
+    back: ClothingBackpackFilled
+    gloves: CMHandsBrown
+    shoes: CMShoesCombatBoots
+    head: CMHeadCap
+    id: DCCIDCard
+    ears: ClothingHeadsetSecurity
+  innerClothingSkirt: CMJumpsuitPilot
+  satchel: ClothingBackpackSatchelFilled
+  duffelbag: ClothingBackpackDuffelFilled
+
+- type: entity
+  id: CMSpawnPointDCC
+  parent: CMSpawnPointJobBase
+  name: dropship crew chief spawn point
+  components:
+  - type: SpawnPoint
+    job_id: DropshipCrewChief
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: dropship_crew_chief

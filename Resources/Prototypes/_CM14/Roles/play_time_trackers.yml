@@ -77,3 +77,16 @@
 
 - type: playTimeTracker
   id: JobResearcher
+
+# auxiliary support
+- type: playTimeTracker
+  id: JobAuxiliarySupportOfficer
+
+- type: playTimeTracker
+  id: JobPilotOfficer
+
+- type: playTimeTracker
+  id: JobDropshipCrewChief
+
+- type: playTimeTracker
+  id: JobIntelOfficer
