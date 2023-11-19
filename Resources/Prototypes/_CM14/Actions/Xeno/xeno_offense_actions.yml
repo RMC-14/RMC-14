@@ -36,3 +36,18 @@
     range: 15
     useDelay: 10
     checkCanAccess: false
+
+- type: entity
+  id: ActionXenoLeap
+  parent: ActionXenoBase
+  name: Leap # TODO CM14 description
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: pounce
+    event: !type:XenoLeapActionEvent
+    range: 15
+    useDelay: 3
+    checkCanAccess: false

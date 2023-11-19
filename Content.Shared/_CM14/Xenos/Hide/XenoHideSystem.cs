@@ -10,10 +10,10 @@ public sealed class XenoHideSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<XenoHideComponent, XenoHideActionEvent>(OnXenoHide);
+        SubscribeLocalEvent<XenoHideComponent, XenoHideActionEvent>(OnXenoHideAction);
     }
 
-    private void OnXenoHide(Entity<XenoHideComponent> ent, ref XenoHideActionEvent args)
+    private void OnXenoHideAction(Entity<XenoHideComponent> ent, ref XenoHideActionEvent args)
     {
         ent.Comp.Hiding = !ent.Comp.Hiding;
         _appearance.SetData(ent, XenoVisualLayers.Hide, ent.Comp.Hiding);

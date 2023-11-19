@@ -12,7 +12,7 @@ public sealed class XenoRestSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<XenoComponent, XenoRestActionEvent>(OnXenoRest);
+        SubscribeLocalEvent<XenoComponent, XenoRestActionEvent>(OnXenoRestAction);
         SubscribeLocalEvent<XenoRestingComponent, UpdateCanMoveEvent>(OnXenoRestingCanMove);
     }
 
@@ -21,7 +21,7 @@ public sealed class XenoRestSystem : EntitySystem
         args.Cancel();
     }
 
-    private void OnXenoRest(Entity<XenoComponent> ent, ref XenoRestActionEvent args)
+    private void OnXenoRestAction(Entity<XenoComponent> ent, ref XenoRestActionEvent args)
     {
         if (HasComp<XenoRestingComponent>(ent))
         {

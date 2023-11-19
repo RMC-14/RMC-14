@@ -38,12 +38,6 @@
     - Piercing
     - Heat
     - Shock
-  - type: DamageOnHighSpeedImpact
-    damage:
-      types:
-        Blunt: 5
-    soundHit:
-      path: /Audio/Effects/hit_kick.ogg
   - type: MovementSpeedModifier
     baseWalkSpeed : 4
     baseSprintSpeed : 4
@@ -159,10 +153,11 @@
   - type: Tag
     tags:
     - DoorBumpOpener
-    - FootstepSound
   - type: NoSlip
   - type: Pullable # TODO CM14 xeno pullable
-  - type: Speech
+  - type: Speech # TODO CM14 alien language
+  - type: GhostOnMove
+    mustBeDead: true
 
 - type: entity
   id: CMXenoPrying
@@ -222,3 +217,10 @@
   - CMXenoPuller
   - CMXenoMelee
   abstract: true
+  components:
+  - type: DamageOnHighSpeedImpact
+    soundHit:
+      path: /Audio/Effects/hit_kick.ogg
+    damage:
+      types:
+        Blunt: 5

@@ -19,8 +19,8 @@ public sealed class XenoHideVisualizerSystem : VisualizerSystem<XenoHideComponen
 
     private void OnXenoHideGetDrawDepth(Entity<XenoHideComponent> ent, ref GetDrawDepthEvent args)
     {
-        if (AppearanceSystem.TryGetData(ent, XenoVisualLayers.Hide, out var hidingObj) &&
-            hidingObj is true)
+        if (AppearanceSystem.TryGetData(ent, XenoVisualLayers.Hide, out bool hiding) &&
+            hiding)
         {
             args.DrawDepth = DrawDepth.SmallMobs;
         }
