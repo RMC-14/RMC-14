@@ -108,7 +108,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         _throwing.TryThrow(xeno, gomen, 30, user: xeno, pushbackRatio: 0);
     }
 
-    protected virtual void OnXenoLeapDoHit(Entity<XenoLeapComponent> leap, ref ThrowDoHitEvent args)
+    private void OnXenoLeapDoHit(Entity<XenoLeapComponent> leap, ref ThrowDoHitEvent args)
     {
         var marineId = args.Target;
         if (!_marineQuery.TryGetComponent(marineId, out var marine))
