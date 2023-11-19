@@ -155,3 +155,14 @@
         Heat: 0.2
   - type: ExplosionResistance
     damageCoefficient: 0.40
+
+- type: entity
+  parent: CMArmorPlatePilot
+  id: CMArmorPlatePress
+  name: press plate carrier
+  description: Special plate carrier distributed to the press of USCM.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/press.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/press.rsi

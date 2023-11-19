@@ -341,3 +341,71 @@
       sprite: _CM14/Objects/Clothing/Uniforms/io.rsi
     - type: Clothing
       sprite: _CM14/Objects/Clothing/Uniforms/io.rsi
+
+# Dropship Crew Chief
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitDCC
+  name: dropship crew chief uniform
+  description: Standard-issue dropship crew chief uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/crewchief.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/crewchief.rsi
+
+# Tshirts
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitTShirtWhite
+  name: white tshirt
+  description: Simple pair of tshirt and pants.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/tshirt/white.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/tshirt/white.rsi
+
+- type: entity
+  parent: CMJumpsuitTShirtWhite
+  id: CMJumpsuitTShirtRed
+  name: red tshirt
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/tshirt/red.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/tshirt/red.rsi
+
+- type: entity
+  parent: CMJumpsuitTShirtWhite
+  id: CMJumpsuitTShirtGray
+  name: gray tshirt
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/tshirt/gray.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/tshirt/gray.rsi
+
+# Colonist
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitColonist
+  name: colonist uniform
+  description: Uniform typically distibuted to the colonists.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/colonist.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/colonist.rsi
+
+# Correspondent
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitCorrespondent
+  name: correspodent uniform
+  description: Standard-issue correspodents`s uniform.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/correspondent.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/correspondent.rsi

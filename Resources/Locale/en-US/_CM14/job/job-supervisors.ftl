@@ -7,3 +7,4 @@ job-supervisors-cm-quartermaster = the Quartermaster
 job-supervisors-cm-chief-engineer = the Chief Engineer
 job-supervisors-high-command = USCM High Command
 job-supervisors-cm-cmo = the Chief Medical Officer
+job-supervisors-nobody = nobody, you are on your own.

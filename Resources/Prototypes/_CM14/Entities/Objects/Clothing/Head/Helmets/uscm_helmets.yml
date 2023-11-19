@@ -70,3 +70,14 @@
     sprite: _CM14/Objects/Clothing/Head/Helmets/m10/pilot.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Head/Helmets/m10/pilot.rsi
+
+- type: entity
+  parent: ArmorHelmetM10
+  id: CMArmorHelmetPress
+  name: press helmet
+  description: A special helmet variant worn by the press.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Helmets/press.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Helmets/press.rsi

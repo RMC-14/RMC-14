@@ -1,0 +1,42 @@
+﻿- type: job
+  id: Correspondent
+  parent: JobBaseCM
+  name: job-name-correspondent
+  description: job-description-correspondent
+  playTimeTracker: JobCorrespondent
+  startingGear: CorrespondentGear
+  icon: "JobIconCorrespondent"
+  requireAdminNotify: false
+  joinNotifyCrew: true
+  supervisors: job-supervisors-command
+  canBeAntag: true
+  access:
+  - Command
+  # Press
+  # Prep
+
+- type: startingGear
+  id: CorrespondentGear
+  equipment:
+    jumpsuit: CMJumpsuitCorrespondent
+    outerClothing: CMCoatCorrespondent
+    back: ClothingBackpackFilled
+    shoes: CMShoesCombatBootsBrown
+    id: CorrespondentIDCard
+    ears: ClothingHeadsetGrey
+  innerClothingSkirt: CMJumpsuitCorrespondent
+  satchel: ClothingBackpackSatchelFilled
+  duffelbag: ClothingBackpackDuffelFilled
+
+- type: entity
+  id: CMSpawnPointCorrespondent
+  parent: CMSpawnPointJobBase
+  name: correspondent spawn point
+  components:
+  - type: SpawnPoint
+    job_id: Correspondent
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: combat_correspondent
