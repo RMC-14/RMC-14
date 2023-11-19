@@ -27,11 +27,11 @@
   id: IntelOfficerGear
   equipment:
     jumpsuit: CMJumpsuitIO
-    outerClothing: CMArmorM3IO
+    outerClothing: CMArmorM4
     back: ClothingBackpackFilled
     gloves: CMHandsBlack
     shoes: CMShoesCombatBoots
-    head: CMArmorHelmetM10IO
+    head: CMArmorHelmetM12
     id: IntelOfficerIDCard
     ears: ClothingHeadsetSecurity
   innerClothingSkirt: CMJumpsuitIO

@@ -9,30 +9,25 @@
       department: Marine
       time: 28800 #8 hrs
   startingGear: FireteamLeaderGear
-  icon: "JobIconSecurityOfficer"
+  icon: "JobIconFireteamLeader"
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
-  access:
-  - Security
-  - Brig
-  - Maintenance
-  - Service
-  - External
+  #access:
+  # Prep
+  # Team Leader Prep
 
 - type: startingGear
   id: FireteamLeaderGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSec
+    jumpsuit: CMJumpsuitMarineRTO
     back: ClothingBackpackSecurityFilled
-    shoes: ClothingShoesBootsCombatFilled
-    eyes: ClothingEyesGlassesSecurity
-    head: ClothingHeadHelmetBasic
-    outerClothing: ClothingOuterArmorBasic
+    shoes: CMShoesCombatBoots
+    head: CMArmorHelmetM12
+    outerClothing: CMArmorM4
+    gloves: CMHandsBlack
     id: DogtagFireteamLeader
     ears: ClothingHeadsetSecurity
-    belt: ClothingBeltSecurityFilled
-    pocket1: WeaponPistolMk58Nonlethal
-  innerClothingSkirt: ClothingUniformJumpskirtSec
+  innerClothingSkirt: CMJumpsuitMarineRTO
   satchel: ClothingBackpackSatchelSecurityFilled
   duffelbag: ClothingBackpackDuffelSecurityFilled
 
