@@ -1,4 +1,4 @@
-##
+# High Command
 - type: radioChannel #USMC High Command, for events and such, basically CentComm channel
   id: MarineHighCommand
   name: chat-radio-marine-highcommand
@@ -7,35 +7,35 @@
   color: "#318779"
   longRange: true
 
-## Alamayer channels
-#- type: radioChannel
-#  id: MarineCommon
-#  name: chat-radio-marine-common
-#  keycode: ";" #; and g in cm13
-#  frequency: 1480
-#  color: "#C38312"
-#
+# Alamayer channels
+- type: radioChannel
+  id: MarineCommon
+  name: chat-radio-marine-common
+  keycode: "g" #; and g in cm13
+  frequency: 1480
+  color: "#C38312"
+
 - type: radioChannel
   id: MarineCommand
   name: chat-radio-marine-command
-  keycode: "o" #v in cm13
+  keycode: "v" #v in cm13
   frequency: 1481
   color: "#004080"
 
-#- type: radioChannel
-#  id: MarineMedical
-#  name: chat-radio-marine-medical
-#  keycode: "m" #m in cm13
-#  frequency: 1482
-#  color: "#008160"
-#
-#- type: radioChannel
-#  id: MarineEngineer
-#  name: chat-radio-marine-engineer
-#  keycode: "n" #n in cm13
-#  frequency: 1483
-#  color: "#A66300"
-#
+- type: radioChannel
+  id: MarineMedical
+  name: chat-radio-marine-medical
+  keycode: "m" #m in cm13
+  frequency: 1482
+  color: "#008160"
+
+- type: radioChannel
+  id: MarineEngineer
+  name: chat-radio-marine-engineer
+  keycode: "n" #n in cm13
+  frequency: 1483
+  color: "#A66300"
+
 - type: radioChannel
   id: MarineMilitaryPolice
   name: chat-radio-marine-military-police
@@ -46,18 +46,18 @@
 - type: radioChannel
   id: MarineRequisition
   name: chat-radio-marine-requisition
-  keycode: "r" #u in cm13
+  keycode: "u" #u in cm13
   frequency: 1485
   color: "#5F4519"
 
 - type: radioChannel
   id: MarineIntel
   name: chat-radio-marine-intel
-  keycode: "i" #t in cm13
+  keycode: "t" #t in cm13
   frequency: 1486
   color: "#FFFFFF" #todo cm14
 
-## Squad channels
+# Squad channels
 - type: radioChannel
   id: MarineAlpha
   name: chat-radio-marine-alpha
@@ -65,20 +65,20 @@
   frequency: 1491
   color: "#EA0000"
 
-#- type: radioChannel
-#  id: MarineBravo
-#  name: chat-radio-marine-bravo
-#  keycode: "b" #b in cm13
-#  frequency: 1492
-#  color: "#C68610"
-#
-#- type: radioChannel
-#  id: MarineCharlie
-#  name: chat-radio-marine-charlie
-#  keycode: "c" #c in cm13
-#  frequency: 1493
-#  color: "#AA55AA"
-#
+- type: radioChannel
+  id: MarineBravo
+  name: chat-radio-marine-bravo
+  keycode: "b" #b in cm13
+  frequency: 1492
+  color: "#C68610"
+
+- type: radioChannel
+  id: MarineCharlie
+  name: chat-radio-marine-charlie
+  keycode: "c" #c in cm13
+  frequency: 1493
+  color: "#AA55AA"
+
 - type: radioChannel
   id: MarineDelta
   name: chat-radio-marine-delta
@@ -86,25 +86,25 @@
   frequency: 1494
   color: "#007FCF"
 
-#- type: radioChannel
-#  id: MarineEcho
-#  name: chat-radio-marine-echo
-#  keycode: "e" #e in cm13
-#  frequency: 1495
-#  color: "#027D02"
-#
-#- type: radioChannel
-#  id: MarineFoxtrot
-#  name: chat-radio-marine-foxtrot
-#  keycode: "f" #f in cm13
-#  frequency: 1496
-#  color: "#4A4740"
-#
-## Non USCM
-#- type: radioChannel
-#  id: Colony
-#  name: chat-radio-colony
-#  keycode: "y" #o in cm13
-#  frequency: 1381
-#  color: "#FFFFFF" #todo cm14
-#  longRange: true
+- type: radioChannel
+  id: MarineEcho
+  name: chat-radio-marine-echo
+  keycode: "e" #e in cm13
+  frequency: 1495
+  color: "#027D02"
+
+- type: radioChannel
+  id: MarineFoxtrot
+  name: chat-radio-marine-foxtrot
+  keycode: "f" #f in cm13
+  frequency: 1496
+  color: "#4A4740"
+
+# Non USCM
+- type: radioChannel
+  id: Colony
+  name: chat-radio-colony
+  keycode: "o" #o in cm13
+  frequency: 1381
+  color: "#FFFFFF" #todo cm14
+  longRange: true

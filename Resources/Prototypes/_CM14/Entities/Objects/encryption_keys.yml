@@ -1,3 +1,4 @@
+# Base item
 - type: entity
   abstract: true
   parent: [BaseItem, CMEntityBase]
@@ -12,31 +13,35 @@
     sprite: _CM14/Objects/Devices/encryption_keys.rsi
     state: cypherkey
 
-#- type: entity
-#  parent: CMEncryptionKey
-#  id: CMEncryptionKeyCommon
-#  name: common encryption Key
-#  components:
-#  - type: EncryptionKey
-#    channels:
-#    - MarineCommon
-#    defaultChannel: MarineCommon
-#  - type: Sprite
-#    state: stripped_key
+# DEPARTMENT ENCRYPTION KEYS
 
-#- type: entity
-#  parent: CMEncryptionKey
-#  id: CMEncryptionKeyColony
-#  name: colony encryption Key
-#  components:
-#  - type: EncryptionKey
-#    channels:
-#    - Colony
-#    defaultChannel: Colony
-#  - type: Sprite
-#    state: stripped_key
+# Common
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyCommon
+  name: common encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommon
+    defaultChannel: MarineCommon
+  - type: Sprite
+    state: stripped_key
 
-## Command
+# Colony
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyColony
+  name: colony encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - Colony
+    defaultChannel: Colony
+  - type: Sprite
+    state: stripped_key
+
+# Command
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeyCommand
@@ -49,7 +54,7 @@
   - type: Sprite
     state: cap_key
 
-## Intel
+# Intel
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeyIntel
@@ -62,163 +67,35 @@
   - type: Sprite
     state: jtac_key
 
-## Senior Officer
+# Engineering
 - type: entity
   parent: CMEncryptionKey
-  id: CMEncryptionKeyCDRCom
-  name: marine senior command encryption key
+  id: CMEncryptionKeyEngineer
+  name: engineering encryption Key
   components:
   - type: EncryptionKey
     channels:
-    - MarineCommon
-    - MarineMilitaryPolice
-    - MarineAlpha
-    # - MarineBravo
-    # - MarineCharlie
-    - MarineDelta
-    # - MarineEcho
-    # - MarineFoxtrot
-    # - MarineEngineer
-    # - MarineMedical
-    - MarineRequisition
-    - MarineIntel
-    defaultChannel: MarineCommon
-
-## Leader
-- type: entity
-  parent: CMEncryptionKey
-  id: CMEncryptionKeyMCom
-  name: marine command encryption Key
-  components:
-  - type: EncryptionKey
-    channels:
-    - MarineCommand
-    - MarineAlpha
-    #- MarineBravo
-    #- MarineCharlie
-    - MarineDelta
-    #- MarineEcho
-    #- MarineFoxtrot
-    #- MarineEngineer
-    #- MarineMedical
-    - MarineRequisition
-    - MarineIntel
-    defaultChannel: MarineCommand
+    - MarineEngineer
+    defaultChannel: MarineEngineer
   - type: Sprite
-    state: cap_key
+    state: eng_key
 
-## CE
+# Medical
 - type: entity
   parent: CMEncryptionKey
-  id: CMEncryptionKeyCE
-  name: chief engineer`s encryption Key
+  id: CMEncryptionKeyMedical
+  name: medical encryption Key
   components:
   - type: EncryptionKey
     channels:
-    #- MarineEngineer
-    - MarineCommand
-    #- MarineMedical
-    - MarineRequisition
-    defaultChannel: MarineCommand #Engineer
-  - type: Sprite
-    state: ce_key
-
-## Engineering
-#- type: entity
-#  parent: CMEncryptionKey
-#  id: CMEncryptionKeyEngineer
-#  name: engineering encryption Key
-#  components:
-#  - type: EncryptionKey
-#    channels:
-#    - MarineEngineer
-#    defaultChannel: MarineEngineer
-#  - type: Sprite
-#    state: eng_key
-
-## CMO
-- type: entity
-  parent: CMEncryptionKey
-  id: CMEncryptionKeyCMO
-  name: chief medical officer`s encryption Key
-  components:
-  - type: EncryptionKey
-    channels:
-    #- MarineMedical
-    - MarineCommand
-    - MarineIntel
-    defaultChannel: MarineCommand #Medical
-  - type: Sprite
-    state: cmo_key
-
-## Medical
-#- type: entity
-#  parent: CMEncryptionKey
-#  id: CMEncryptionKeyMedical
-#  name: medical encryption Key
-#  components:
-#  - type: EncryptionKey
-#    channels:
-#    - MarineMedical
-#    defaultChannel: MarineMedical
-#  - type: Sprite
-#    state: med_key
-
-## Research
-- type: entity
-  parent: CMEncryptionKey
-  id: CMEncryptionKeyResearch
-  name: research encryption Key
-  components:
-  - type: EncryptionKey
-    channels:
-    #- MarineMedical
-    - MarineIntel
-    defaultChannel: MarineIntel #Medical
+    - MarineMedical
+    defaultChannel: MarineMedical
   - type: Sprite
     state: med_key
 
-## CMP
+# Military Police
 - type: entity
   parent: CMEncryptionKey
-  id: CMEncryptionKeyCMP
-  name: chief military police encryption Key
-  components:
-  - type: EncryptionKey
-    channels:
-    - MarineCommand
-    - MarineMilitaryPolice
-    #- MarineMedical
-    - MarineRequisition
-    defaultChannel: MarineMilitaryPolice
-  - type: Sprite
-    state: cmp_key
-
-## MilPol officer
-- type: entity
-  parent: CMEncryptionKey
-  id: CMEncryptionKeyMPO
-  name: military police officer`s encryption Key
-  components:
-  - type: EncryptionKey
-    channels:
-    - MarineCommand
-    - MarineMilitaryPolice
-    - MarineAlpha
-    #- MarineBravo
-    #- MarineCharlie
-    - MarineDelta
-    #- MarineEcho
-    #- MarineFoxtrot
-    #- MarineEngineer
-    #- MarineMedical
-    defaultChannel: MarineMilitaryPolice
-  - type: Sprite
-    state: sec_key
-
-## Military Police
-- type: entity
-  parent: CMEncryptionKeyy
   id: CMEncryptionKeyMilitaryPolice
   name: military police encryption Key
   components:
@@ -229,7 +106,228 @@
   - type: Sprite
     state: sec_key
 
-## QM
+# Requisition
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyRequisition
+  name: requisition encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineRequisition
+    defaultChannel: MarineRequisition
+  - type: Sprite
+    state: req_key
+
+# Alpha
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyAlpha
+  name: alpha encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineAlpha
+    defaultChannel: MarineAlpha
+  - type: Sprite
+    state: alpha_key
+
+# Bravo
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyBravo
+  name: bravo encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineBravo
+    defaultChannel: MarineBravo
+  - type: Sprite
+    state: bravo_key
+
+# Charlie
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyCharlie
+  name: charlie encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCharlie
+    defaultChannel: MarineCharlie
+  - type: Sprite
+    state: charlie_key
+
+# Delta
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyDelta
+  name: delta encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineDelta
+    defaultChannel: MarineDelta
+  - type: Sprite
+    state: delta_key
+
+# Echo
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyEcho
+  name: echo encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineEcho
+    defaultChannel: MarineEcho
+  - type: Sprite
+    state: echo_key
+
+# Foxtrot
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyFoxtrot
+  name: foxtrot encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineFoxtrot
+    defaultChannel: MarineFoxtrot
+  - type: Sprite
+    state: cryo_key
+
+# ROLES ENCRYPTION KEYS
+ 
+# Senior Officer
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyCDRCom
+  name: marine senior command encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommon
+    - MarineMilitaryPolice
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineEngineer
+    - MarineMedical
+    - MarineRequisition
+    - MarineIntel
+    defaultChannel: MarineCommon
+
+# Leader
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyMCom
+  name: marine command encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommand
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineEngineer
+    - MarineMedical
+    - MarineRequisition
+    - MarineIntel
+    defaultChannel: MarineCommand
+  - type: Sprite
+    state: cap_key
+
+# CE
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyCE
+  name: chief engineer`s encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineEngineer
+    - MarineCommand
+    - MarineMedical
+    - MarineRequisition
+    defaultChannel: MarineEngineer
+  - type: Sprite
+    state: ce_key
+
+# CMO
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyCMO
+  name: chief medical officer`s encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineMedical
+    - MarineCommand
+    - MarineIntel
+    defaultChannel: MarineMedical
+  - type: Sprite
+    state: cmo_key
+
+# Research
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyResearch
+  name: research encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineMedical
+    - MarineIntel
+    defaultChannel: MarineMedical
+  - type: Sprite
+    state: med_key
+
+# CMP
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyCMP
+  name: chief military police encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommand
+    - MarineMilitaryPolice
+    - MarineMedical
+    - MarineRequisition
+    defaultChannel: MarineMilitaryPolice
+  - type: Sprite
+    state: cmp_key
+
+# MilPol officer
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyMPO
+  name: military police officer`s encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommand
+    - MarineMilitaryPolice
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineEngineer
+    - MarineMedical
+    defaultChannel: MarineMilitaryPolice
+  - type: Sprite
+    state: sec_key
+
+# QM
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeyQuartermaster
@@ -243,20 +341,7 @@
   - type: Sprite
     state: ce_key
 
-## Requi
-- type: entity
-  parent: CMEncryptionKey
-  id: CMEncryptionKeyRequisition
-  name: requisition encryption Key
-  components:
-  - type: EncryptionKey
-    channels:
-    - MarineRequisition
-    defaultChannel: MarineRequisition
-  - type: Sprite
-    state: req_key
-
-## Representative
+# Representative
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeyRepresentative
@@ -265,12 +350,12 @@
   - type: EncryptionKey
     channels:
     - MarineCommand
-    #- MarineCommon
+    - MarineCommon
     defaultChannel: MarineCommand
   - type: Sprite
     state: cap_key
 
-## Pilot Officer
+# Pilot Officer
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeyPilot
@@ -279,9 +364,60 @@
   - type: EncryptionKey
     channels:
     - MarineCommand
-    #- MarineEngineering
-    #- MarineMedical
+    - MarineEngineering
+    - MarineMedical
     - MarineIntel
     defaultChannel: MarineCommand
   - type: Sprite
     state: cap_key
+
+# Intel Officer
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyIntelOfficer
+  name: intel officer`s encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommand
+    - MarineCommon
+    - MarineEngineer
+    - MarineMedical
+    - MarineIntel
+    defaultChannel: MarineIntel
+  - type: Sprite
+    state: cap_key
+
+# Vehicle Crewman
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyCrewman
+  name: vehicle crewman`s encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommand
+    - MarineEngineer
+    - MarineMedical
+    - MarineRequisition
+    defaultChannel: MarineCommand
+  - type: Sprite
+    state: cap_key
+
+# SOF forgor who is that
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeySOF
+  name: sof`s encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommand
+    - MarineRequisition
+    - MarineMedical
+    - MarineEngineer
+    - MarineIntel
+    defaultChannel: MarineCommand
+  - type: Sprite
+    state: binary_key
+
