@@ -8,7 +8,7 @@
   components:
   - type: EncryptionKey
   - type: Item
-    sprite: _CM14Objects/Devices/encryption_keys.rsi
+    sprite: _CM14/Objects/Devices/encryption_keys.rsi
   - type: Sprite
     sprite: _CM14/Objects/Devices/encryption_keys.rsi
     state: cypherkey
@@ -283,7 +283,7 @@
 # Research
 - type: entity
   parent: CMEncryptionKey
-  id: CMEncryptionKeyMedicalResearch
+  id: CMEncryptionKeyResearcher
   name: researcher`s encryption Key
   components:
   - type: EncryptionKey

@@ -58,7 +58,7 @@
 - type: radioChannel
   id: Supply
   name: chat-radio-supply
-  keycode: 'u'
+  keycode: 'п'
   frequency: 1347
   color: "#b88646"
 
@@ -81,7 +81,7 @@
 - type: radioChannel
   id: Binary
   name: chat-radio-binary
-  keycode: 'н'
+  keycode: 'р'
   frequency: 1001
   color: "#2ed2fd"
   # long range since otherwise it'd defeat the point of a handheld radio independent of telecomms

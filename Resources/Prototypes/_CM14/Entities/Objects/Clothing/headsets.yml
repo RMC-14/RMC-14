@@ -40,22 +40,6 @@
       - CMEncryptionKeyCommon
       - CMEncryptionKeyCE
 
-# DELETE LATER
-- type: entity
-  parent: CMHeadset
-  id: CMHeadset
-  name:
-  description:
-  components:
-  - type: Sprite
-    state: _headset
-  - type: ContainerFill
-    containers:
-      key_slots:
-      - CMEncryptionKeyCommon
-      - CMEncryptionKey
-# DELETE LATER
-
 - type: entity
   parent: CMHeadset
   id: CMHeadsetCMO
@@ -159,8 +143,8 @@
     containers:
       key_slots:
       - CMEncryptionKeyCommon
-      - CMEncryptionMPO
-      - CMEncryptionMasterSquad
+      - CMEncryptionKeyMPO
+      - CMEncryptionKeyMasterSquad
 
 - type: entity
   parent: CMHeadset
@@ -189,7 +173,7 @@
       key_slots:
       - CMEncryptionKeyCommon
       - CMEncryptionKeyLeader
-      - CMEncryptionMasterSquad
+      - CMEncryptionKeyMasterSquad
 
 - type: entity
   parent: CMHeadset
@@ -205,7 +189,7 @@
 
 - type: entity
   parent: CMHeadset
-  id: CMHeadset
+  id: CMHeadsetIntel
   name: marine intel radio headset
   description: Used by Intelligence Officers.
   components:
@@ -280,7 +264,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyAlpha
-      - CMEncrpytionKeyCommon
+      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetAlpha
@@ -345,7 +329,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyBravo
-      - CMEncrpytionKeyCommon
+      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetBravo
@@ -410,7 +394,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyCharlie
-      - CMEncrpytionKeyCommon
+      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetCharlie
@@ -475,7 +459,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyDelta
-      - CMEncrpytionKeyCommon
+      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetDelta
@@ -540,7 +524,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyEcho
-      - CMEncrpytionKeyCommon
+      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetEcho
@@ -605,7 +589,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyFoxtrot
-      - CMEncrpytionKeyCommon
+      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetFoxtrot
