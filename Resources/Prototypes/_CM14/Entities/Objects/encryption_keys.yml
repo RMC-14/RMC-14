@@ -218,7 +218,7 @@
 # All Almayer
 - type: entity
   parent: CMEncryptionKey
-  id: CMEncryptionKeyMasterAlmayer
+  id: CMEncryptionKeyMasterShip
   name: master ship encryption Key
   components:
   - type: EncryptionKey
@@ -268,7 +268,7 @@
 # CMO
 - type: entity
   parent: CMEncryptionKey
-  id: CMEncryptionKeyMedicalCommand
+  id: CMEncryptionKeyCMO
   name: chief medical officer`s encryption Key
   components:
   - type: EncryptionKey
