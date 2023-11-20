@@ -336,7 +336,7 @@
   - type: EncryptionKey
     channels:
     - MarineCommand
-    - MarineEngineering
+    - MarineEngineer
     - MarineMedical
     - MarineIntel
     defaultChannel: MarineCommand
