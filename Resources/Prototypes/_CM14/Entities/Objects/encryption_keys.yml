@@ -198,44 +198,49 @@
     state: cryo_key
 
 # ROLES ENCRYPTION KEYS
- 
-# Senior Officer
+
+# All Squads
 - type: entity
   parent: CMEncryptionKey
-  id: CMEncryptionKeyCDRCom
-  name: marine senior command encryption key
+  id: CMEncryptionKeyMasterSquad
+  name: master squad encryption key
   components:
   - type: EncryptionKey
     channels:
-    - MarineCommon
-    - MarineMilitaryPolice
     - MarineAlpha
     - MarineBravo
     - MarineCharlie
     - MarineDelta
     - MarineEcho
     - MarineFoxtrot
-    - MarineEngineer
-    - MarineMedical
-    - MarineRequisition
-    - MarineIntel
-    defaultChannel: MarineCommon
+    defaultChannel: MarineAlpha
 
-# Leader
+# All Almayer
 - type: entity
   parent: CMEncryptionKey
-  id: CMEncryptionKeyMCom
-  name: marine command encryption Key
+  id: CMEncryptionKeyMasterAlmayer
+  name: master ship encryption Key
   components:
   - type: EncryptionKey
     channels:
     - MarineCommand
-    - MarineAlpha
-    - MarineBravo
-    - MarineCharlie
-    - MarineDelta
-    - MarineEcho
-    - MarineFoxtrot
+    - MarineCommon
+    - MarineMilitaryPolice
+    - MarineMedical
+    - MarineEngineer
+    - MarineRequisition
+    - MarineIntel
+    defaultChannel: MarineCommand
+
+# Leader
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyLeader
+  name: leader`s encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommand
     - MarineEngineer
     - MarineMedical
     - MarineRequisition
@@ -263,7 +268,7 @@
 # CMO
 - type: entity
   parent: CMEncryptionKey
-  id: CMEncryptionKeyCMO
+  id: CMEncryptionKeyMedicalCommand
   name: chief medical officer`s encryption Key
   components:
   - type: EncryptionKey
@@ -278,8 +283,8 @@
 # Research
 - type: entity
   parent: CMEncryptionKey
-  id: CMEncryptionKeyResearch
-  name: research encryption Key
+  id: CMEncryptionKeyMedicalResearch
+  name: researcher`s encryption Key
   components:
   - type: EncryptionKey
     channels:
@@ -299,6 +304,7 @@
     channels:
     - MarineCommand
     - MarineMilitaryPolice
+    - MarineEngineer
     - MarineMedical
     - MarineRequisition
     defaultChannel: MarineMilitaryPolice
@@ -315,45 +321,11 @@
     channels:
     - MarineCommand
     - MarineMilitaryPolice
-    - MarineAlpha
-    - MarineBravo
-    - MarineCharlie
-    - MarineDelta
-    - MarineEcho
-    - MarineFoxtrot
     - MarineEngineer
     - MarineMedical
     defaultChannel: MarineMilitaryPolice
   - type: Sprite
     state: sec_key
-
-# QM
-- type: entity
-  parent: CMEncryptionKey
-  id: CMEncryptionKeyQuartermaster
-  name: quartermaster encryption Key
-  components:
-  - type: EncryptionKey
-    channels:
-    - MarineCommand
-    - MarineRequisition
-    defaultChannel: MarineRequisition
-  - type: Sprite
-    state: ce_key
-
-# Representative
-- type: entity
-  parent: CMEncryptionKey
-  id: CMEncryptionKeyRepresentative
-  name: representative encryption Key
-  components:
-  - type: EncryptionKey
-    channels:
-    - MarineCommand
-    - MarineCommon
-    defaultChannel: MarineCommand
-  - type: Sprite
-    state: cap_key
 
 # Pilot Officer
 - type: entity

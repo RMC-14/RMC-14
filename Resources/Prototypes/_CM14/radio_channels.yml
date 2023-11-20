@@ -7,11 +7,11 @@
   color: "#318779"
   longRange: true
 
-# Alamayer channels
+# Almayer channels
 - type: radioChannel
   id: MarineCommon
   name: chat-radio-marine-common
-  keycode: "g" #; and g in cm13
+  keycode: ";" #; and g in cm13
   frequency: 1480
   color: "#C38312"
 
