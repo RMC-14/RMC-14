@@ -174,6 +174,15 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
+        if (!_prototype.TryIndex(args.StructureId, out var prototype))
+            return;
+
+        if (prototype.TryGetComponent(out HiveConstructionNodeComponent? node) &&
+            !_xenoPlasma.HasPlasmaPopup(xeno, node.InitialPlasmaCost, false))
+        {
+            return;
+        }
+
         var ev = new XenoOrderConstructionDoAfterEvent(args.StructureId, GetNetCoordinates(target));
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.OrderConstructionDelay, ev, xeno)
         {
@@ -200,8 +209,10 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        if (_prototype.TryIndex(args.StructureId, out var prototype) &&
-            prototype.TryGetComponent(out HiveConstructionNodeComponent? node) &&
+        if (!_prototype.TryIndex(args.StructureId, out var prototype))
+            return;
+
+        if (prototype.TryGetComponent(out HiveConstructionNodeComponent? node) &&
             !_xenoPlasma.TryRemovePlasmaPopup(xeno, node.InitialPlasmaCost))
         {
             return;
@@ -243,15 +254,15 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
+        if (!InRangePopup(args.User, nodeTransform.Coordinates, xeno.OrderConstructionRange.Float()))
+            return;
+
         var subtract = FixedPoint2.Min(xeno.Plasma, plasmaLeft);
         if (xeno.Plasma < 1 ||
-            !_xenoPlasma.HasPlasma((args.User, xeno), subtract))
+            !_xenoPlasma.HasPlasmaPopup((args.User, xeno), subtract))
         {
             return;
         }
-
-        if (!InRangePopup(args.User, nodeTransform.Coordinates, xeno.OrderConstructionRange.Float()))
-            return;
 
         var ev = new XenoConstructionAddPlasmaDoAfterEvent();
         var delay = xeno.OrderConstructionAddPlasmaDelay;

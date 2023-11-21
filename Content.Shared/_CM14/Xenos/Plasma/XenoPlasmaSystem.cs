@@ -79,6 +79,22 @@ public sealed class XenoPlasmaSystem : EntitySystem
         return xeno.Comp.Plasma >= plasma;
     }
 
+    public bool HasPlasmaPopup(Entity<XenoComponent> xeno, FixedPoint2 plasma, bool predicted = true)
+    {
+        if (!HasPlasma(xeno, plasma))
+        {
+            var popup = Loc.GetString("cm-xeno-not-enough-plasma");
+            if (predicted)
+                _popup.PopupClient(popup, xeno, xeno);
+            else
+                _popup.PopupEntity(popup, xeno, xeno);
+
+            return false;
+        }
+
+        return true;
+    }
+
     public void RegenPlasma(Entity<XenoComponent?> xeno, FixedPoint2 amount)
     {
         if (!_xenoQuery.Resolve(xeno, ref xeno.Comp))
