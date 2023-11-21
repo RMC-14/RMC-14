@@ -9,7 +9,9 @@
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Shoes/Boots/marine.rsi
   - type: Matchbox
-  - type: Storage
+  - type: StorageFill
+    contents:
+    - id: M5Bayonet
     whitelist:
       tags:
         - Knife
