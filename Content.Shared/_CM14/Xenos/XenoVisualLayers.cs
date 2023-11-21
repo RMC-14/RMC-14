@@ -6,5 +6,6 @@ namespace Content.Shared._CM14.Xenos;
 public enum XenoVisualLayers : byte
 {
     Base,
-    Hide
+    Hide,
+    Crest
 }
