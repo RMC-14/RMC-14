@@ -48,7 +48,7 @@ public sealed class XenoAcidSystem : EntitySystem
         if (!CheckCorrodablePopups(xeno, target))
             return;
 
-        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno, args.PlasmaCost))
+        if (!_xenoPlasma.TryRemovePlasmaPopup((xeno, xeno), args.PlasmaCost))
             return;
 
         if (_net.IsClient)

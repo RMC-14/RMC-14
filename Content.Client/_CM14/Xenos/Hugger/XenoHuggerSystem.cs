@@ -1,4 +1,6 @@
-﻿using Content.Shared._CM14.Xenos.Hugger;
+﻿using Content.Shared._CM14.Xenos;
+using Content.Shared._CM14.Xenos.Headbutt;
+using Content.Shared._CM14.Xenos.Hugger;
 using Content.Shared.Throwing;
 using Robust.Client.GameObjects;
 using static Robust.Shared.Utility.SpriteSpecifier;
@@ -67,7 +69,7 @@ public sealed class XenoHuggerSystem : SharedXenoHuggerSystem
     {
         base.FrameUpdate(frameTime);
 
-        var query = EntityQueryEnumerator<XenoLeapComponent, ThrownItemComponent, SpriteComponent, AppearanceComponent>();
+        var query = EntityQueryEnumerator<XenoComponent, ThrownItemComponent, SpriteComponent, AppearanceComponent>();
         while (query.MoveNext(out var uid, out _, out var thrown, out var sprite, out var appearance))
         {
             _xenoVisualizer.UpdateSprite((uid, sprite, null, appearance, null, thrown));

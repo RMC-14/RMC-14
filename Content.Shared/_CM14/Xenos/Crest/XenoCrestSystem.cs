@@ -21,47 +21,47 @@ public sealed class XenoCrestSystem : EntitySystem
         SubscribeLocalEvent<XenoCrestActionComponent, XenoCrestToggledEvent>(OnXenoCrestActionToggled);
     }
 
-    private void OnXenoCrestAction(Entity<XenoCrestComponent> ent, ref XenoToggleCrestActionEvent args)
+    private void OnXenoCrestAction(Entity<XenoCrestComponent> xeno, ref XenoToggleCrestActionEvent args)
     {
         if (args.Handled)
             return;
 
         args.Handled = true;
 
-        ent.Comp.Lowered = !ent.Comp.Lowered;
-        Dirty(ent);
+        xeno.Comp.Lowered = !xeno.Comp.Lowered;
+        Dirty(xeno);
 
-        _movementSpeed.RefreshMovementSpeedModifiers(ent);
+        _movementSpeed.RefreshMovementSpeedModifiers(xeno);
 
-        var ev = new XenoCrestToggledEvent(ent.Comp.Lowered);
-        foreach (var (id, _) in _actions.GetActions(ent))
+        var ev = new XenoCrestToggledEvent(xeno.Comp.Lowered);
+        foreach (var (id, _) in _actions.GetActions(xeno))
         {
             RaiseLocalEvent(id, ref ev);
         }
 
-        _appearance.SetData(ent, XenoVisualLayers.Crest, ent.Comp.Lowered);
+        _appearance.SetData(xeno, XenoVisualLayers.Crest, xeno.Comp.Lowered);
     }
 
-    private void OnXenoCrestRefreshMovementSpeed(Entity<XenoCrestComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
+    private void OnXenoCrestRefreshMovementSpeed(Entity<XenoCrestComponent> xeno, ref RefreshMovementSpeedModifiersEvent args)
     {
-        if (ent.Comp.Lowered)
-            args.ModifySpeed(ent.Comp.SpeedMultiplier, ent.Comp.SpeedMultiplier);
+        if (xeno.Comp.Lowered)
+            args.ModifySpeed(xeno.Comp.SpeedMultiplier, xeno.Comp.SpeedMultiplier);
     }
 
-    private void OnXenoCrestGetArmor(Entity<XenoCrestComponent> ent, ref XenoGetArmorEvent args)
+    private void OnXenoCrestGetArmor(Entity<XenoCrestComponent> xeno, ref XenoGetArmorEvent args)
     {
-        if (ent.Comp.Lowered)
-            args.Armor += ent.Comp.Armor;
+        if (xeno.Comp.Lowered)
+            args.Armor += xeno.Comp.Armor;
     }
 
-    private void OnXenoCrestBeforeStatusAdded(Entity<XenoCrestComponent> ent, ref BeforeStatusEffectAddedEvent args)
+    private void OnXenoCrestBeforeStatusAdded(Entity<XenoCrestComponent> xeno, ref BeforeStatusEffectAddedEvent args)
     {
-        if (ent.Comp.Lowered && args.Key == "Stun")
+        if (xeno.Comp.Lowered && args.Key == "Stun")
             args.Cancelled = true;
     }
 
-    private void OnXenoCrestActionToggled(Entity<XenoCrestActionComponent> ent, ref XenoCrestToggledEvent args)
+    private void OnXenoCrestActionToggled(Entity<XenoCrestActionComponent> action, ref XenoCrestToggledEvent args)
     {
-        _actions.SetToggled(ent, args.Lowered);
+        _actions.SetToggled(action, args.Lowered);
     }
 }
