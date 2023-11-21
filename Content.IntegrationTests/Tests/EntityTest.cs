@@ -234,7 +234,7 @@ namespace Content.IntegrationTests.Tests
                 "TimedSpawner",
 
                 // Spreads weeds
-                "HiveCoreXeno"
+                "HiveCore"
             };
 
             Assert.That(server.CfgMan.GetCVar(CVars.NetPVS), Is.False);
