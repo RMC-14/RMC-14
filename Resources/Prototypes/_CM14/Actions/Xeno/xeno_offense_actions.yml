@@ -51,3 +51,18 @@
     range: 15
     useDelay: 3
     checkCanAccess: false
+
+- type: entity
+  id: ActionXenoHeadbutt
+  parent: ActionXenoBase
+  name: Headbutt # TODO CM14 description
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: headbutt
+    event: !type:XenoHeadbuttActionEvent
+    range: 15
+    useDelay: 6
+    checkCanAccess: false

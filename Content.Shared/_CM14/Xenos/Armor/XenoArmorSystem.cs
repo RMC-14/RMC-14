@@ -11,10 +11,10 @@ public sealed class XenoArmorSystem : EntitySystem
         SubscribeLocalEvent<XenoArmorComponent, XenoGetArmorEvent>(OnXenoGetArmor);
     }
 
-    private void OnXenoDamageModify(Entity<XenoComponent> ent, ref DamageModifyEvent args)
+    private void OnXenoDamageModify(Entity<XenoComponent> xeno, ref DamageModifyEvent args)
     {
         var ev = new XenoGetArmorEvent();
-        RaiseLocalEvent(ent, ref ev);
+        RaiseLocalEvent(xeno, ref ev);
 
         var resist = Math.Pow(1.1, ev.Armor / 5.0);
         args.Damage /= resist;
@@ -27,8 +27,8 @@ public sealed class XenoArmorSystem : EntitySystem
         }
     }
 
-    private void OnXenoGetArmor(Entity<XenoArmorComponent> ent, ref XenoGetArmorEvent args)
+    private void OnXenoGetArmor(Entity<XenoArmorComponent> xeno, ref XenoGetArmorEvent args)
     {
-        args.Armor += ent.Comp.Armor;
+        args.Armor += xeno.Comp.Armor;
     }
 }

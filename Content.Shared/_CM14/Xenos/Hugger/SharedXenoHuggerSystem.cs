@@ -113,9 +113,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
     {
         var marineId = args.Target;
         if (!_marineQuery.TryGetComponent(marineId, out var marine))
-        {
             return;
-        }
 
         if (_physicsQuery.TryGetComponent(leap, out var physics) &&
             _thrownItemQuery.TryGetComponent(leap, out var thrown))

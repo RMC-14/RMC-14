@@ -113,9 +113,12 @@ public sealed class XenoPlasmaSystem : EntitySystem
         return true;
     }
 
-    public bool TryRemovePlasmaPopup(Entity<XenoComponent> xeno, FixedPoint2 plasma)
+    public bool TryRemovePlasmaPopup(Entity<XenoComponent?> xeno, FixedPoint2 plasma)
     {
-        if (TryRemovePlasma(xeno, plasma))
+        if (!Resolve(xeno, ref xeno.Comp))
+            return false;
+
+        if (TryRemovePlasma((xeno, xeno.Comp), plasma))
             return true;
 
         _popup.PopupClient(Loc.GetString("cm-xeno-not-enough-plasma"), xeno, xeno);

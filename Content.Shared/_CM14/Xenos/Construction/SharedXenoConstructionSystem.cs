@@ -69,9 +69,9 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<HiveConstructionNodeComponent, InteractedNoHandEvent>(OnHiveConstructionNodeInteractedNoHand);
     }
 
-    private void OnXenoPlantWeedsAction(Entity<XenoComponent> ent, ref XenoPlantWeedsActionEvent args)
+    private void OnXenoPlantWeedsAction(Entity<XenoComponent> xeno, ref XenoPlantWeedsActionEvent args)
     {
-        var coordinates = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager, _map);
+        var coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager, _map);
 
         if (coordinates.GetGridUid(EntityManager) is not { } gridUid ||
             !TryComp(gridUid, out MapGridComponent? grid))
@@ -81,11 +81,11 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
 
         if (IsOnWeeds((gridUid, grid), coordinates))
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-weeds-already-here"), ent.Owner, ent.Owner);
+            _popup.PopupClient(Loc.GetString("cm-xeno-weeds-already-here"), xeno.Owner, xeno.Owner);
             return;
         }
 
-        if (!_xenoPlasma.TryRemovePlasmaPopup(ent, args.PlasmaCost))
+        if (!_xenoPlasma.TryRemovePlasmaPopup((xeno, xeno), args.PlasmaCost))
             return;
 
         if (_net.IsServer)
@@ -213,7 +213,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
             return;
 
         if (prototype.TryGetComponent(out HiveConstructionNodeComponent? node) &&
-            !_xenoPlasma.TryRemovePlasmaPopup(xeno, node.InitialPlasmaCost))
+            !_xenoPlasma.TryRemovePlasmaPopup((xeno, xeno), node.InitialPlasmaCost))
         {
             return;
         }
