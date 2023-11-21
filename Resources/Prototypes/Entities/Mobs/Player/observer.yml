@@ -51,6 +51,21 @@
     - Service
     - Supply
     - Syndicate
+    - MarineHighCommand
+    - MarineCommon
+    - MarineCommand
+    - MarineMedical
+    - MarineEngineer
+    - MarineMilitaryPolice
+    - MarineRequisition
+    - MarineIntel
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - Colony
     globalReceive: true
   - type: Physics
     bodyType: KinematicController
