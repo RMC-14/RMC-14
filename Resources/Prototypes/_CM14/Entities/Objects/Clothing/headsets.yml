@@ -627,4 +627,4 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionColony
+      - CMEncryptionKeyColony
