@@ -1,0 +1,10 @@
+﻿- type: accessGroup
+  id: Colony
+  tags:
+  - CMAccessColonyPublic
+  - CMAccessColonyLogistics
+  - CMAccessColonyEngineering
+  - CMAccessColonyResearch
+  - CMAccessColonyBrig
+  - CMAccessColonyMedbay
+  - CMAccessColonyCommand

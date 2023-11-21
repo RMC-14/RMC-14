@@ -1,0 +1,56 @@
+﻿- type: accessGroup
+  id: ShipMasterAccess
+  tags:
+  - CMAccessAlpha
+  - CMAccessArmory
+  - CMAccessBravo
+  - CMAccessBrig
+  - CMAccessCE
+  - CMAccessChaplain
+  - CMAccessCharlie
+  - CMAccessCMO
+  - CMAccessCMP
+  - CMAccessCO
+  - CMAccessCommand
+  - CMAccessCrewmanplay
+  - CmaccessChemistry
+  - CMAccessDelta
+  - CMAccessDropship
+  - CMAccessEngineering
+  - CMAccessEngPrep
+  - CMAccessFTLPrep
+  - CMAccessKitchen
+  - CMAccessMaint
+  - CMAccessMarinePrep
+  - CMAccessMedical
+  - CMAccessMedPrep
+  - CMAccessOT
+  - CMAccessPilot
+  - CMAccessPress
+  - CMAccessQM
+  - CMAccessRequisitions
+  - CMAccessResearch
+  - CMAccessSEA
+  - CMAccessSmartPrep
+  - CMAccessSpecPrep
+  - CMAccessSquadLeaderPrep
+
+- type: accessGroup
+  id: CMP
+  tags:
+  - CMAccessBrig
+  - CMAccessArmory
+  - CMAccessCommand
+  - CMAccessDropship
+  - CMAccessMarinePrep
+  - CMAccessCMP
+  - CMAccessMedical
+  - CMAccessSEA
+  - CMAccessAlpha
+  - CMAccessBravo
+  - CMAccessCharlie
+  - CMAccessDelta
+  - CMAccessEngineering
+  - CMAccessMaint
+  - CMAccessOT
+

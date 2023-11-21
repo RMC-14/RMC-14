@@ -29,5 +29,3 @@
 - type: accessLevel
   id: CMAccessASO
   name: job-name-aso
-
-  #todo cm14 access groups
