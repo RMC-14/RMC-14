@@ -5,30 +5,24 @@
   description: job-description-rifleman
   playTimeTracker: JobRifleman
   startingGear: RiflemanGear
-  icon: "JobIconSecurityOfficer"
+  icon: "JobIconRifleman"
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
-  access:
-  - Security
-  - Brig
-  - Maintenance
-  - Service
-  - External
+  #access:
+  #Prep
 
 - type: startingGear
   id: RiflemanGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSec
+    jumpsuit: JumpsuitMarine
     back: ClothingBackpackSecurityFilled
-    shoes: ClothingShoesBootsCombatFilled
-    eyes: ClothingEyesGlassesSecurity
-    head: ClothingHeadHelmetBasic
-    outerClothing: ClothingOuterArmorBasic
+    shoes: CMShoesCombatBoots
+    head: ArmorHelmetM10
+    outerClothing: ArmorMarineM3
+    gloves: CMHandsBlack
     id: DogtagRifleman
     ears: ClothingHeadsetSecurity
-    belt: ClothingBeltSecurityFilled
-    pocket1: WeaponPistolMk58Nonlethal
-  innerClothingSkirt: ClothingUniformJumpskirtSec
+  innerClothingSkirt: JumpsuitMarine
   satchel: ClothingBackpackSatchelSecurityFilled
   duffelbag: ClothingBackpackDuffelSecurityFilled
 

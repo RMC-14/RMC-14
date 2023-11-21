@@ -12,15 +12,13 @@
       department: Medical
       time: 3600 #1 hrs
   startingGear: HospitalCorpsmanGear
-  icon: "JobIconBrigmedic"
+  icon: "JobIconHospitalCorpsman"
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
   access:
-  - Security
-  - Brig
-  - Maintenance
-  - Service
-  - External
+  - Medical
+  # Prep
+  # Medical Prep
 
 # TODO cm14 Remove this later
 - type: entity
@@ -36,17 +34,17 @@
 - type: startingGear
   id: HospitalCorpsmanGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitBrigmedic
-    outerClothing: ClothingOuterCoatAMG
+    jumpsuit: CMJumpsuitMarineMedic
     back: ClothingBackpackBrigmedicFilled
-    shoes: ClothingShoesColorRed
-    gloves: ClothingHandsGlovesNitrile
+    shoes: CMShoesCombatBoots
+    gloves: CMHandsBlack
     eyes: ClothingEyesHudMedical
-    head: ClothingHeadHatBeretBrigmedic
+    head: CMArmorHelmetM10Medic
+    outerClothing: ArmorMarineM3
     id: DogtagHospitalCorpsman
     ears: ClothingHeadsetBrigmedic
     belt: ClothingBeltMedicalFilled
-  innerClothingSkirt: ClothingUniformJumpskirtBrigmedic
+  innerClothingSkirt: CMJumpsuitMarineMedic
   satchel: ClothingBackpackSatchelBrigmedicFilled
   duffelbag: ClothingBackpackDuffelBrigmedicFilled
 
