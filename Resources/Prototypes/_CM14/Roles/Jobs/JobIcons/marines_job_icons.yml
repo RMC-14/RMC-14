@@ -1,0 +1,48 @@
+- type: statusIcon
+  parent: CMJobIconBase
+  id: JobIconCombatTech
+  icon:
+    sprite: _CM14/Interface/cm_job_icons.rsi
+    state: hudsquad_engi
+
+- type: statusIcon
+  parent: CMJobIconBase
+  id: JobIconFireteamLeader
+  icon:
+    sprite: _CM14/Interface/cm_job_icons.rsi
+    state: hudsquad_tl
+
+- type: statusIcon
+  parent: CMJobIconBase
+  id: JobIconHospitalCorpsman
+  icon:
+    sprite: _CM14/Interface/cm_job_icons.rsi
+    state: hudsquad_med
+
+- type: statusIcon
+  parent: CMJobIconBase
+  id: JobIconRifleman
+  icon:
+    sprite: _CM14/Interface/cm_job_icons.rsi
+    state: hudsquad #todo cm14
+
+- type: statusIcon
+  parent: CMJobIconBase
+  id: JobIconSmartgunner
+  icon:
+    sprite: _CM14/Interface/cm_job_icons.rsi
+    state: hudsquad_gun
+
+- type: statusIcon
+  parent: CMJobIconBase
+  id: JobIconSquadLeader
+  icon:
+    sprite: _CM14/Interface/cm_job_icons.rsi
+    state: hudsquad_leader
+
+- type: statusIcon
+  parent: CMJobIconBase
+  id: JobIconWeaponsSpecialist
+  icon:
+    sprite: _CM14/Interface/cm_job_icons.rsi
+    state: hudsquad_spec

@@ -27,7 +27,7 @@
     back: ClothingBackpackFilled
     gloves: CMHandsBrown
     shoes: CMShoesCombatBoots
-    head: CMArmorHelmetM10Pilot
+    head: CMArmorHelmetM30
     id: PilotOfficerIDCard
     ears: ClothingHeadsetSecurity
   innerClothingSkirt: CMJumpsuitPilot

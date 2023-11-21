@@ -95,14 +95,90 @@
 
 - type: entity
   parent: ArmorMarineM3
-  id: CMArmorM3IO
-  name: M3 pattern io
-  description: A well-crafted suit of M3 Pattern Armor typically distributed to Intelligence Officers.
+  id: CMArmorM3G4
+  name: M3-G4 Grenadier Armor
+  description: A custom set of M3 armour packed to the brim with padding, plating, and every other form of ballistic protection under the sun. Being much heavier than the other armour types, it's able to allow the wearer to stand and counter against alien pounce attempts from the front.
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/io.rsi
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/g4.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/io.rsi
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/g4.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.6
+        Heat: 0.9
+  - type: ExplosionResistance
+    damageCoefficient: 0.8
+
+- type: entity
+  parent: ArmorMarineM3
+  id: CMArmorM3Light
+  name: M3-L Pattern Light Armor
+  description: A lighter, cut down version of the standard M3 pattern armor. It sacrifices protection for more speed. Protects more against acid.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/light.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/light.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.8
+        Slash: 0.8
+        Piercing: 0.4
+        Heat: 0.8
+  - type: ExplosionResistance
+    damageCoefficient: 0.60
+
+- type: entity
+  parent: ArmorMarineM3
+  id: CMArmorM3Scout
+  name: M3-S Light Armor
+  description: A custom modified set of M3 Armor designed for recon missions. Allows more mobility for the wearer.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/scout.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/scout.rsi
+
+# m4
+- type: entity
+  parent: ArmorMarineM3
+  id: CMArmorM4
+  name: M4 Pattern Radio Operator Armor
+  description: A well tinkered and crafted hybrid of Smart-Gunner mesh and M3 pattern plates. Robust, yet nimble, with room for all your pouches.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m4.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m4.rsi
+
+# m35
+- type: entity
+  parent: ArmorMarineM3
+  id: CMArmorM35
+  name: M35 Armor
+  description: A custom piece of M3 armor designed to be highly flame retardant.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m35.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m35.rsi
+
+# m45
+- type: entity
+  parent: ArmorMarineM3
+  id: CMArmorM45
+  name: M45 Pattern Ghillie Armor
+  description: A lightweight ghillie camouflage suit, used by USCM snipers on recon missions. Very lightweight and surprisingly very protective. 
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/ghille.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/ghille.rsi
 
 # M2
 - type: entity

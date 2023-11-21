@@ -6,9 +6,9 @@
   description: A standard-issue Marine uniform.
   components:
     - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/marine.rsi
+      sprite: _CM14/Objects/Clothing/Uniforms/marine/standard.rsi
     - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/marine.rsi
+      sprite: _CM14/Objects/Clothing/Uniforms/marine/standard.rsi
     - type: SuitSensor
       controlsLocked: true
       randomMode: false
@@ -17,6 +17,56 @@
       tags:
         - ClothMade
         - WhitelistChameleon
+
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitMarineEngineer
+  name: engineer marine uniform
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/marine/engineer.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/marine/engineer.rsi
+
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitMarineFormal
+  name: formal marine uniform
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/marine/formal.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/marine/formal.rsi
+
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitMarineMedic
+  name: medic marine uniform
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/marine/medic.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/marine/medic.rsi
+
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitMarineRTO
+  name: rto marine uniform
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/marine/rto.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/marine/rto.rsi
+
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitMarineTanker
+  name: tanker marine uniform
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Clothing/Uniforms/marine/tanker.rsi
+    - type: Clothing
+      sprite: _CM14/Objects/Clothing/Uniforms/marine/tanker.rsi
 
 # Military Police
 - type: entity
