@@ -23,14 +23,17 @@
     - ActionXenoTailStab
     - ActionXenoAcid
     - ActionXenoPheromones
+    - ActionXenoOrderConstruction
     - ActionXenoPlantWeeds
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
     - ActionXenoTransferPlasma
-    plasma: 300
-    maxPlasma: 300 # TODO CM14
+    plasma: 1000 # TODO CM14
+    maxPlasma: 1000
     plasmaRegenOnWeeds: 6
     canBuild:
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
+    canOrderConstruction:
+    - HiveCoreXenoConstructionNode

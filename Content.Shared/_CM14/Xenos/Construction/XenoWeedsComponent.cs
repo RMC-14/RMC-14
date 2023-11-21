@@ -17,5 +17,5 @@ public sealed partial class XenoWeedsComponent : Component
     public EntityUid? Source;
 
     [DataField]
-    public EntProtoId Spawns = "XenoWeedsEntity";
+    public EntProtoId Spawns = "XenoWeeds";
 }

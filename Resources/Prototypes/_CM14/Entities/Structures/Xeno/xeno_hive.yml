@@ -1,0 +1,54 @@
+﻿- type: entity
+  parent: CMEntityBase
+  id: HiveCoreXeno # TODO CM14 spread weeds
+  name: hive core # TODO CM14 allow other structures to be built
+  components: # TODO CM14 block ob, mortar and air strikes
+  - type: Transform # TODO CM14 second lava for every chestburst
+    anchored: true # TODO CM14 cooldown if destroyed
+  - type: Sprite # TODO CM14 spread hive weeds instead of normal weeds
+    sprite: _CM14/Structures/Xenos/hive_core.rsi
+    state: core
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Damageable
+    damageContainer: Resin
+    damageModifierSet: Resin
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: HiveCore
+
+- type: entity
+  parent: CMEntityBase
+  id: HiveCoreXenoConstructionNode
+  name: hive core
+  description: A strange wriggling lump. Looks like a marker for something.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _CM14/Structures/Xenos/hive_core.rsi
+    state: core
+    color: '#FFFFFFAA'
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Damageable
+    damageContainer: Resin
+    damageModifierSet: Resin
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300 # TODO CM14
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: HiveConstructionNode
+    initialPlasmaCost: 400
+    plasmaCost: 1000
+    spawn: HiveCoreXeno

@@ -234,6 +234,9 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
                 _standing.Stand(uid);
             }
 
+            if (_net.IsClient)
+                continue;
+
             if (hugged.BurstAt > time)
                 continue;
 
