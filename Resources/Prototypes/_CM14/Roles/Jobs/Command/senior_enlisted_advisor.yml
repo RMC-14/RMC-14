@@ -27,7 +27,7 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-command
   canBeAntag: false
-  accessGroups:
+  #accessGroups:
   #- MarineMain
 
 - type: startingGear
