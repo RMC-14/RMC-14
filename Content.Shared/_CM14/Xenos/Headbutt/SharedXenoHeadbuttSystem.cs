@@ -1,4 +1,5 @@
-﻿using Content.Shared._CM14.Marines;
+﻿using System.Numerics;
+using Content.Shared._CM14.Marines;
 using Content.Shared._CM14.Xenos.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -7,18 +8,19 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Throwing;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Xenos.Headbutt;
 
-public sealed class XenoHeadbuttSystem : EntitySystem
+public abstract class SharedXenoHeadbuttSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
@@ -52,6 +54,9 @@ public sealed class XenoHeadbuttSystem : EntitySystem
         var diff = target.Position - origin.Position;
         var length = diff.Length();
         diff *= xeno.Comp.Range / length;
+
+        xeno.Comp.Charge = diff;
+        Dirty(xeno);
 
         _throwing.TryThrow(xeno, diff, 10);
     }
@@ -87,10 +92,20 @@ public sealed class XenoHeadbuttSystem : EntitySystem
 
         _throwing.TryThrow(marineId, diff, 10);
 
+        if (_timing.IsFirstTimePredicted && xeno.Comp.Charge is { } charge)
+        {
+            xeno.Comp.Charge = null;
+            DoLunge(xeno, charge.Normalized());
+        }
+
         if (_net.IsClient)
             return;
 
         _audio.PlayPvs(xeno.Comp.Sound, xeno);
         SpawnAttachedTo(xeno.Comp.Effect, marineId.ToCoordinates());
+    }
+
+    protected virtual void DoLunge(EntityUid xeno, Vector2 direction)
+    {
     }
 }

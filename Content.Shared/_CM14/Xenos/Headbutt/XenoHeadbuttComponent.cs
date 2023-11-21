@@ -1,4 +1,5 @@
-﻿using Content.Shared.Damage;
+﻿using System.Numerics;
+using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -7,7 +8,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._CM14.Xenos.Headbutt;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(XenoHeadbuttSystem))]
+[Access(typeof(SharedXenoHeadbuttSystem))]
 public sealed partial class XenoHeadbuttComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -28,4 +29,8 @@ public sealed partial class XenoHeadbuttComponent : Component
     [DataField, AutoNetworkedField]
     [ViewVariables(VVAccess.ReadWrite)]
     public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_CM14/Xeno/alien_claw_block.ogg");
+
+    [DataField, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public Vector2? Charge;
 }
