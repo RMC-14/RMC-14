@@ -18,16 +18,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-command
   canBeAntag: false
-  access:
-  - ChiefEngineer
-  - Engineering
-  - Command
-  # civ engi
-  # Database
-  - Maintenance
-  # OrdiTech
-  # Synth
-  # AI
+  #accessGroups:
+  #- CMCE
 
 - type: startingGear
   id: CMChiefEngineerGear
@@ -37,11 +29,9 @@
     shoes: CMShoesCombatBootsBrown
     gloves: CMHandsInsulated
     id: CMChiefEngineerIDCard
-    ears: ClothingHeadsetCE
+    ears: CMHeadsetCE
     belt: ClothingBeltUtilityEngineering
-  innerClothingSkirt: CMJumpsuitChiefEngineer
   satchel: ClothingBackpackSatchelChiefEngineerFilled
-  duffelbag: ClothingBackpackDuffelChiefEngineerFilled
 
 - type: entity
   id: CMSpawnPointChiefEngineer

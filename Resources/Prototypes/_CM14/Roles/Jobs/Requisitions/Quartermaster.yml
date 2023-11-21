@@ -14,13 +14,9 @@
   requireAdminNotify: false
   joinNotifyCrew: true
   supervisors: job-supervisors-command #TODO CM14
-  canBeAntag: true
-  access:
-  - Command
-  - Quartermaster
-  - Cargo
-  # prep
-  # alpha bravo charlie delta
+  canBeAntag: false
+  #accessGroups:
+  #- CEQM
 
 - type: startingGear
   id: CMQuartermasterGear
@@ -31,10 +27,8 @@
     head: CMHeadCapCargo
     gloves: CMHandsBrown
     id: CMQuartermasterIDCard
-    ears: ClothingHeadsetAltCargo
-  innerClothingSkirt: CMJumpsuitQM
+    ears: CMHeadsetQM
   satchel: ClothingBackpackSatchelQuartermasterFilled
-  duffelbag: ClothingBackpackDuffelQuartermasterFilled
 
 - type: entity
   id: CMSpawnPointQuartermaster

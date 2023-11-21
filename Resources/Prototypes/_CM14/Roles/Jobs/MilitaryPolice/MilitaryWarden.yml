@@ -15,18 +15,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-chiefmp
   canBeAntag: false
-  access:
-  - Brig
-  - Command
-  - External # probably dropship
-  # database
-  # prep
-  - Armory
-  - Medical
-  # morgue
-  # alpha bravo charlie delta
-  - Engineering
-  - Maintenance
+  #accessGroups:
+  #- CMWarden
 
 - type: startingGear
   id: MilitaryWardenGear
@@ -39,11 +29,9 @@
     gloves: CMHandsBlack
     id: MilitaryWardenIDCard
     outerClothing: CMArmorM3Warden
-    ears: ClothingHeadsetAltSecurity
+    ears: CMHeadsetCMP
     belt: ClothingBeltSecurityFilled
-  innerClothingSkirt: CMJumpsuitWarden
   satchel: ClothingBackpackSatchelSecurityFilled
-  duffelbag: ClothingBackpackDuffelSecurityFilled
 
 - type: entity
   id: SpawnPointMilitaryWarden

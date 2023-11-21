@@ -8,8 +8,8 @@
   icon: "JobIconRifleman"
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
-  #access:
-  #Prep
+  #accessGroups:
+  #-
 
 - type: startingGear
   id: RiflemanGear
@@ -21,10 +21,8 @@
     outerClothing: ArmorMarineM3
     gloves: CMHandsBlack
     id: DogtagRifleman
-    ears: ClothingHeadsetSecurity
-  innerClothingSkirt: JumpsuitMarine
+    ears: CMHeadsetAlpha
   satchel: ClothingBackpackSatchelSecurityFilled
-  duffelbag: ClothingBackpackDuffelSecurityFilled
 
 - type: entity
   id: SpawnPointRifleman

@@ -12,9 +12,8 @@
   icon: "JobIconFireteamLeader"
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
-  #access:
-  # Prep
-  # Team Leader Prep
+  #accessGroups:
+  #-
 
 - type: startingGear
   id: FireteamLeaderGear
@@ -26,10 +25,8 @@
     outerClothing: CMArmorM4
     gloves: CMHandsBlack
     id: DogtagFireteamLeader
-    ears: ClothingHeadsetSecurity
-  innerClothingSkirt: CMJumpsuitMarineRTO
+    ears: CMHeadsetAlphaTeamLeader
   satchel: ClothingBackpackSatchelSecurityFilled
-  duffelbag: ClothingBackpackDuffelSecurityFilled
 
 - type: entity
   id: SpawnPointFireteamLeader

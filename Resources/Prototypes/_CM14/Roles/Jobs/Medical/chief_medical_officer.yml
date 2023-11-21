@@ -15,15 +15,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-command
   canBeAntag: false
-  access:
-  - ChiefMedicalOfficer
-  # Database
-  - Medical
-  # Research
-  # Senior
-  - Command
-  - Chemistry
-  # Morgue
+  #accessGroups:
+  #- CMCMO
 
 - type: startingGear
   id: MarineCMOGear
@@ -35,10 +28,8 @@
     shoes: CMShoesCombatBoots
     head: CMHeadCapCMO
     id: MarineCMOIDCard
-    ears: ClothingHeadsetCMO
-  innerClothingSkirt: CMJumpsuitCMO
+    ears: CMHeadsetCMO
   satchel: ClothingBackpackSatchelCMOFilled
-  duffelbag: ClothingBackpackDuffelCMOFilled
 
 - type: entity
   id: CMSpawnPointCMO

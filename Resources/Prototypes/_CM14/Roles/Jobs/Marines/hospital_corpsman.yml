@@ -15,10 +15,8 @@
   icon: "JobIconHospitalCorpsman"
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
-  access:
-  - Medical
-  # Prep
-  # Medical Prep
+  #accessGroups:
+  #-
 
 # TODO cm14 Remove this later
 - type: entity
@@ -42,11 +40,9 @@
     head: CMArmorHelmetM10Medic
     outerClothing: ArmorMarineM3
     id: DogtagHospitalCorpsman
-    ears: ClothingHeadsetBrigmedic
+    ears: CMHeadsetAlphaMedic
     belt: ClothingBeltMedicalFilled
-  innerClothingSkirt: CMJumpsuitMarineMedic
   satchel: ClothingBackpackSatchelBrigmedicFilled
-  duffelbag: ClothingBackpackDuffelBrigmedicFilled
 
 - type: entity
   name: survival box
