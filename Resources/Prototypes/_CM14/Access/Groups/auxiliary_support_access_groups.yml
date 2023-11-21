@@ -1,0 +1,17 @@
+﻿- type: accessGroup
+  id: ASO
+  tags:
+
+- type: accessGroup
+  id: PilotOfficer
+  tags:
+
+- type: accessGroup
+  id: DropshipCrewChief
+  tags:
+
+- type: accessGroup
+  id: IntelOfficer
+  tags:
+
+#todo cm14, marines, civilians,
