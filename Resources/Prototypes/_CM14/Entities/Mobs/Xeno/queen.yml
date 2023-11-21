@@ -24,6 +24,7 @@
     - ActionXenoTailStab
     - ActionXenoAcid
     - ActionXenoPheromones
+    - ActionXenoOrderConstruction
     - ActionXenoPlantWeeds
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
@@ -34,6 +35,8 @@
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
+    canOrderConstruction:
+    - HiveCoreXenoConstructionNode
   - type: Tag
     tags:
     - DoorBumpOpener # TODO CM14 big loud steps

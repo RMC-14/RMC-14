@@ -10,5 +10,5 @@ public sealed partial class XenoPlantWeedsActionEvent : InstantActionEvent
     public FixedPoint2 PlasmaCost = 75;
 
     [DataField]
-    public EntProtoId Prototype = "XenoWeedsSourceEntity";
+    public EntProtoId Prototype = "XenoWeedsSource";
 }
