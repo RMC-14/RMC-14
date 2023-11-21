@@ -9,6 +9,7 @@ public sealed class XenoCrestSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
 
     public override void Initialize()
     {
@@ -29,6 +30,8 @@ public sealed class XenoCrestSystem : EntitySystem
 
         ent.Comp.Lowered = !ent.Comp.Lowered;
         Dirty(ent);
+
+        _movementSpeed.RefreshMovementSpeedModifiers(ent);
 
         var ev = new XenoCrestToggledEvent(ent.Comp.Lowered);
         foreach (var (id, _) in _actions.GetActions(ent))
