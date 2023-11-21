@@ -5,7 +5,9 @@ using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Throwing;
+using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 
 namespace Content.Shared._CM14.Xenos.Headbutt;
@@ -15,6 +17,7 @@ public sealed class XenoHeadbuttSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -55,6 +58,7 @@ public sealed class XenoHeadbuttSystem : EntitySystem
 
     private void OnXenoHeadbuttHit(Entity<XenoHeadbuttComponent> xeno, ref ThrowDoHitEvent args)
     {
+        // TODO CM14 lag compensation
         var marineId = args.Target;
         if (!_marineQuery.HasComponent(marineId))
         {
@@ -69,7 +73,6 @@ public sealed class XenoHeadbuttSystem : EntitySystem
         }
 
         var damage = _damageable.TryChangeDamage(marineId, xeno.Comp.Damage);
-
         if (damage?.GetTotal() > FixedPoint2.Zero)
         {
             var filter = Filter.Pvs(marineId, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
@@ -83,9 +86,11 @@ public sealed class XenoHeadbuttSystem : EntitySystem
         diff *= xeno.Comp.Range / 3 / length;
 
         _throwing.TryThrow(marineId, diff, 10);
-        Dirty(xeno);
 
-        _audio.PlayPredicted(xeno.Comp.Sound, xeno, xeno);
+        if (_net.IsClient)
+            return;
+
+        _audio.PlayPvs(xeno.Comp.Sound, xeno);
         SpawnAttachedTo(xeno.Comp.Effect, marineId.ToCoordinates());
     }
 }
