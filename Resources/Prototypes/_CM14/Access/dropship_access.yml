@@ -1,0 +1,16 @@
+﻿# basic access to the doors
+- type: accessLevel
+  id: CMAccessDropship
+  name: cm-access-dropship
+
+# pilot seat access
+- type: accessLevel
+  id: CMAccessPilot
+  name: job-name-pilot
+
+# engines, etc
+- type: accessLevel
+  id: CMAccessCrewman
+  name: job-name-dcc
+
+#todo cm14 access groups

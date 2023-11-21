@@ -3,6 +3,6 @@
   name: cm-access-xeno
 
 - type: accessGroup
-  id: Xeno
+  id: CMAccessXeno
   tags:
   - Xeno

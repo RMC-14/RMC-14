@@ -1,0 +1,53 @@
+﻿# Squads
+- type: accessLevel
+  id: CMAccessAlpha
+  name: squad-alpha
+
+- type: accessLevel
+  id: CMAccessBravo
+  name: squad-bravo
+
+- type: accessLevel
+  id: CMAccessCharlie
+  name: squad-charlie
+
+- type: accessLevel
+  id: CMAccessDelta
+  name: squad-delta
+
+# Almayer
+- type: accessLevel
+  id: CMAccessMarinePrep
+  name: job-name-rifleman
+
+- type: accessLevel
+  id: CMAccessMedPrep
+  name: job-name-hospital-corpsman
+
+- type: accessLevel
+  id: CMAccessEngPrep
+  name: job-name-combat-tech
+
+- type: accessLevel
+  id: CMAccessSquadLeaderPrep
+  name: job-name-fireteam-leader
+
+- type: accessLevel
+  id: CMAccessSpecPrep
+  name: job-name-weapons-specialist
+
+- type: accessLevel
+  id: CMAccessSmartPrep
+  name: job-name-smartgunner
+
+- type: accessLevel
+  id: CMAccessFTLPrep
+  name: job-name-fireteam-leader
+
+#todo cm14 access groups
+
+#- type: accessGroup
+#  id: Xeno
+#  tags:
+#  - Xeno
+
