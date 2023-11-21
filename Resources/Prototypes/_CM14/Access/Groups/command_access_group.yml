@@ -39,6 +39,7 @@
 
 # all ship-side access that is not CO
 # SEA uses this.
+# XO/EO Uses this.
 - type: accessGroup
   id: MarineMain
   tags:
