@@ -1,5 +1,5 @@
 ﻿- type: accessGroup
-  id: CMO
+  id: CMCECMO
   tags:
   - CMAccessCMO
   - CMAccessMedical
@@ -8,7 +8,7 @@
   - CMAccessChemistry
 
 - type: accessGroup
-  id: Medical
+  id: CMMedical
   tags:
   - CMAccessMedical
   - CMAccessChemistry
