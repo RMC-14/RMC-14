@@ -12,8 +12,11 @@
   - type: Storage
     whitelist:
       tags:
-        - Knife
-        - Sidearm
+      - Knife
+      - Sidearm
+  - type: StorageFill
+    contents:
+    - id: M5Bayonet
 
 - type: entity
   parent: CMShoesCombatBoots
