@@ -101,7 +101,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     private void OnXenoPheromonesChosenBui(Entity<XenoComponent> xeno, ref XenoPheromonesChosenBuiMessage args)
     {
         if (!Enum.IsDefined(typeof(XenoPheromones), args.Pheromones) ||
-            !_xenoPlasma.TryRemovePlasmaPopup(xeno, xeno.Comp.PheromonesPlasmaCost))
+            !_xenoPlasma.TryRemovePlasmaPopup((xeno, xeno), xeno.Comp.PheromonesPlasmaCost))
         {
             return;
         }

@@ -22,9 +22,15 @@
     - ActionXenoWatch
     - ActionXenoTailStab # TODO CM14 name it "tail slam"
     - ActionXenoToggleCrest
+    - ActionXenoHeadbutt
     plasma: 100 # TODO CM14
     maxPlasma: 100
     plasmaRegenOnWeeds: 6
   - type: XenoArmor
     armor: 35
   - type: XenoCrest
+  - type: XenoHeadbutt
+    damage:
+      types:
+        Blunt: 30 # TODO CM14 penetrating damage
+  - type: XenoAnimateMovement
