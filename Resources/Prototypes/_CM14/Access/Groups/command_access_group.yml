@@ -1,4 +1,6 @@
-﻿- type: accessGroup
+﻿# all shipside access
+# CO uses this.
+- type: accessGroup
   id: ShipMasterAccess
   tags:
   - CMAccessAlpha
@@ -12,7 +14,7 @@
   - CMAccessCMP
   - CMAccessCO
   - CMAccessCommand
-  - CMAccessCrewmanplay
+  - CMAccessCrewman
   - CmaccessChemistry
   - CMAccessDelta
   - CMAccessDropship
@@ -35,3 +37,40 @@
   - CMAccessSpecPrep
   - CMAccessSquadLeaderPrep
 
+# all ship-side access that is not CO
+# SEA uses this.
+- type: accessGroup
+  id: MarineMain
+  tags:
+  - CMAccessAlpha
+  - CMAccessArmory
+  - CMAccessBravo
+  - CMAccessBrig
+  - CMAccessCE
+  - CMAccessChaplain
+  - CMAccessCharlie
+  - CMAccessCMO
+  - CMAccessCMP
+  - CMAccessCommand
+  - CMAccessCrewman
+  - CmaccessChemistry
+  - CMAccessDelta
+  - CMAccessDropship
+  - CMAccessEngineering
+  - CMAccessEngPrep
+  - CMAccessFTLPrep
+  - CMAccessKitchen
+  - CMAccessMaint
+  - CMAccessMarinePrep
+  - CMAccessMedical
+  - CMAccessMedPrep
+  - CMAccessOT
+  - CMAccessPilot
+  - CMAccessPress
+  - CMAccessQM
+  - CMAccessRequisitions
+  - CMAccessResearch
+  - CMAccessSEA
+  - CMAccessSmartPrep
+  - CMAccessSpecPrep
+  - CMAccessSquadLeaderPrep
