@@ -1,7 +1,7 @@
 ﻿- type: entity # TODO CM14 description
   parent: CMXenoUndeveloped
   id: CMXenoHugger # TODO CM14 slowly die off weeds
-  name: facehugger
+  name: Facehugger
   components:
   - type: Sprite
     sprite: _CM14/Mobs/Xenos/Hugger/hugger.rsi

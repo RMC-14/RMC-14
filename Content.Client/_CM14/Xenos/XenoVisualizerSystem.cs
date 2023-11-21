@@ -38,39 +38,7 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
     protected override void OnAppearanceChange(EntityUid uid, XenoComponent component, ref AppearanceChangeEvent args)
     {
         var sprite = args.Sprite;
-
-        if (sprite is not { BaseRSI: { } rsi } ||
-            !sprite.LayerMapTryGet(XenoVisualLayers.Base, out var layer))
-        {
-            return;
-        }
-
-        var state = CompOrNull<MobStateComponent>(uid)?.CurrentState;
-
-        switch (state)
-        {
-            case MobState.Critical:
-                if (rsi.TryGetState("crit", out _))
-                    sprite.LayerSetState(layer, "crit");
-                break;
-            case MobState.Dead:
-                if (rsi.TryGetState("dead", out _))
-                    sprite.LayerSetState(layer, "dead");
-                break;
-            default:
-                if (args.AppearanceData.TryGetValue(XenoVisualLayers.Base, out var resting) &&
-                    resting is XenoRestState.Resting)
-                {
-                    if (rsi.TryGetState("sleeping", out _))
-                        sprite.LayerSetState(layer, "sleeping");
-                    break;
-                }
-
-                if (rsi.TryGetState("alive", out _))
-                    sprite.LayerSetState(layer, "alive");
-                break;
-        }
-
+        UpdateSprite((uid, sprite, null, args.Component, null, null));
         UpdateDrawDepth((uid, sprite));
     }
 
@@ -107,10 +75,10 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
                 break;
             default:
                 if (AppearanceSystem.TryGetData(entity, XenoVisualLayers.Base, out XenoRestState resting, appearance) &&
-                    resting == XenoRestState.Resting)
+                    resting == XenoRestState.Resting &&
+                    rsi.TryGetState("sleeping", out _))
                 {
-                    if (rsi.TryGetState("sleeping", out _))
-                        sprite.LayerSetState(layer, "sleeping");
+                    sprite.LayerSetState(layer, "sleeping");
                     break;
                 }
 
@@ -118,6 +86,14 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
                     rsi.TryGetState("thrown", out _))
                 {
                     sprite.LayerSetState(layer, "thrown");
+                    break;
+                }
+
+                if (AppearanceSystem.TryGetData(entity, XenoVisualLayers.Crest, out bool crest, appearance) &&
+                    crest &&
+                    rsi.TryGetState("crest", out _))
+                {
+                    sprite.LayerSetState(layer, "crest");
                     break;
                 }
 
@@ -130,6 +106,7 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
 
                 if (rsi.TryGetState("alive", out _))
                     sprite.LayerSetState(layer, "alive");
+
                 break;
         }
     }
