@@ -45,3 +45,17 @@
       sprite: _CM14/Actions/xeno_actions.rsi
       state: xenohide
     event: !type:XenoHideActionEvent
+
+- type: entity
+  id: ActionXenoToggleCrest
+  parent: ActionXenoBase
+  name: Toggle Crest Defense
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: crest_defense
+    event: !type:XenoToggleCrestActionEvent
+    useDelay: 2
+  - type: XenoCrestAction
