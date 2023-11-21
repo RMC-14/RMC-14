@@ -33,4 +33,16 @@
     icon:
       sprite: _CM14/Actions/xeno_actions.rsi
       state: secrete_resin
-    event: !type:XenoSecreteStructureEvent
+    event: !type:XenoSecreteStructureActionEvent
+
+- type: entity
+  id: ActionXenoOrderConstruction
+  parent: ActionXenoBase
+  name: Order Construction # TODO CM14 description
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: morph_resin
+    event: !type:XenoOrderConstructionActionEvent

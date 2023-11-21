@@ -127,6 +127,8 @@
       type: XenoChooseStructureBui
     - key: enum.XenoPheromonesUI.Key
       type: XenoPheromonesBui
+    - key: enum.XenoOrderConstructionUI.Key
+      type: XenoOrderConstructionBui
   - type: TypingIndicator
     proto: alien
   - type: AtmosExposed

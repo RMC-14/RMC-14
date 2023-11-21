@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: BaseWall
+  parent: [BaseWall, CMEntityBase]
   id: BaseWallXeno
   abstract: true
   components:

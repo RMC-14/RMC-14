@@ -232,6 +232,9 @@ namespace Content.IntegrationTests.Tests
                 "GhostRoleMobSpawner",
                 "NukeOperativeSpawner",
                 "TimedSpawner",
+
+                // Spreads weeds
+                "HiveCore"
             };
 
             Assert.That(server.CfgMan.GetCVar(CVars.NetPVS), Is.False);
