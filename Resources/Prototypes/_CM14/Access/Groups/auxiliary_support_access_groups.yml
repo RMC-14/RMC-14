@@ -1,17 +1,48 @@
 ﻿- type: accessGroup
   id: ASO
   tags:
+  - CMAccessASO
+  - CMAccessCommand
+  - CMAccessBrig
+  - CMAccessArmory
+  - CMAccessMedical
+  - CMAccessCE
+  - CMAccessEngineering
+  - CMAccessMaint
+  - CMAccessOT
+  - CMAccessQM
+  - CMAccessRequisitions
+  - CMAccessMarinePrep
+  - CMAccessAlpha
+  - CMAccessBravo
+  - CMAccessCharlie
+  - CMAccessDelta
+  - CMAccessPilot
+  - CMAccessDropship
+  - CMAccessKitchen
+  - CMAccessPress
+  - CMAccessCrewman
 
 - type: accessGroup
   id: PilotOfficer
   tags:
+  - CMAccessCommand
+  - CMAccessDropship
+  - CMAccessPilot
+  - CMAccessCrewman
 
 - type: accessGroup
   id: DropshipCrewChief
   tags:
+  - CMAccessCrewman
+  - CMAccessDropship
+  - CMAccessPilot
 
 - type: accessGroup
   id: IntelOfficer
   tags:
+  - CMAccessCommand
+  - CMAccessDropship
+  - CMAccessMarinePrep
 
-#todo cm14, marines, civilians,
+#todo cm14 marines, civilians
