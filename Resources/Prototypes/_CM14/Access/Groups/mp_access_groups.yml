@@ -1,4 +1,23 @@
 ﻿- type: accessGroup
+  id: CMP
+  tags:
+  - CMAccessBrig
+  - CMAccessArmory
+  - CMAccessCommand
+  - CMAccessDropship
+  - CMAccessMarinePrep
+  - CMAccessCMP
+  - CMAccessMedical
+  - CMAccessSEA
+  - CMAccessAlpha
+  - CMAccessBravo
+  - CMAccessCharlie
+  - CMAccessDelta
+  - CMAccessEngineering
+  - CMAccessMaint
+  - CMAccessOT
+
+- type: accessGroup
   id: MP
   tags:
   - CMAccessBrig
