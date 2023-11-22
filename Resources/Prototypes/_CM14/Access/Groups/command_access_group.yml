@@ -9,7 +9,6 @@
   - CMAccessBravo # Squad prep access
   - CMAccessBrig # MP Access
   - CMAccessCE # chief engineer
-# - CMAccessChaplain # might not need this one.
   - CMAccessCharlie # Squad prep access
   - CMAccessCMO # chief medical officer
   - CMAccessCMP # chief MP
@@ -51,7 +50,6 @@
   - CMAccessBravo
   - CMAccessBrig
   - CMAccessCE
-#  - CMAccessChaplain
   - CMAccessCharlie
   - CMAccessCMO
   - CMAccessCMP
