@@ -13,9 +13,16 @@ public sealed class XenoHideSystem : EntitySystem
         SubscribeLocalEvent<XenoHideComponent, XenoHideActionEvent>(OnXenoHideAction);
     }
 
-    private void OnXenoHideAction(Entity<XenoHideComponent> ent, ref XenoHideActionEvent args)
+    private void OnXenoHideAction(Entity<XenoHideComponent> xeno, ref XenoHideActionEvent args)
     {
-        ent.Comp.Hiding = !ent.Comp.Hiding;
-        _appearance.SetData(ent, XenoVisualLayers.Hide, ent.Comp.Hiding);
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+
+        xeno.Comp.Hiding = !xeno.Comp.Hiding;
+        Dirty(xeno);
+
+        _appearance.SetData(xeno, XenoVisualLayers.Hide, xeno.Comp.Hiding);
     }
 }

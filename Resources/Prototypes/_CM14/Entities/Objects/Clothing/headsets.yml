@@ -616,3 +616,15 @@
       - CMEncryptionKeyFoxtrot
       - CMEncryptionKeyMedical
       - CMEncryptionKeyCommon
+
+# Other
+- type: entity
+  parent: CMHeadset
+  id: CMHeadsetColony
+  name: colony headset
+  description: A standard headset used by colonists.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony

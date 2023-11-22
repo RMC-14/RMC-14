@@ -14,6 +14,8 @@ using Content.Shared.Popups;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Events;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -28,6 +30,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
@@ -38,15 +41,19 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         .Where(d => d != Direction.Invalid)
         .ToImmutableArray();
 
-    private EntityQuery<XenoWeedsComponent> _weedsQuery;
+    private readonly HashSet<EntityUid> _toUpdate = new();
+
     private EntityQuery<HiveConstructionNodeComponent> _hiveConstructionNodeQuery;
+    private EntityQuery<XenoWeedsComponent> _weedsQuery;
+    private EntityQuery<XenoComponent> _xenoQuery;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        _weedsQuery = GetEntityQuery<XenoWeedsComponent>();
         _hiveConstructionNodeQuery = GetEntityQuery<HiveConstructionNodeComponent>();
+        _weedsQuery = GetEntityQuery<XenoWeedsComponent>();
+        _xenoQuery = GetEntityQuery<XenoComponent>();
 
         SubscribeLocalEvent<XenoComponent, XenoPlantWeedsActionEvent>(OnXenoPlantWeedsAction);
 
@@ -62,11 +69,15 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, XenoConstructionAddPlasmaDoAfterEvent>(OnHiveConstructionNodeAddPlasmaDoAfter);
 
         SubscribeLocalEvent<XenoWeedsComponent, AnchorStateChangedEvent>(OnWeedsAnchorChanged);
+        SubscribeLocalEvent<XenoWeedsComponent, StartCollideEvent>(OnWeedsStartCollide);
+        SubscribeLocalEvent<XenoWeedsComponent, EndCollideEvent>(OnWeedsEndCollide);
 
         SubscribeLocalEvent<XenoChooseConstructionActionComponent, XenoConstructionChosenEvent>(OnActionConstructionChosen);
 
         SubscribeLocalEvent<HiveConstructionNodeComponent, ExaminedEvent>(OnHiveConstructionNodeExamined);
         SubscribeLocalEvent<HiveConstructionNodeComponent, InteractedNoHandEvent>(OnHiveConstructionNodeInteractedNoHand);
+
+        UpdatesAfter.Add(typeof(SharedPhysicsSystem));
     }
 
     private void OnXenoPlantWeedsAction(Entity<XenoComponent> xeno, ref XenoPlantWeedsActionEvent args)
@@ -228,13 +239,27 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
             QueueDel(weeds);
     }
 
-    private void OnActionConstructionChosen(Entity<XenoChooseConstructionActionComponent> ent, ref XenoConstructionChosenEvent args)
+    private void OnWeedsStartCollide(Entity<XenoWeedsComponent> ent, ref StartCollideEvent args)
     {
-        if (_actions.TryGetActionData(ent, out var action) &&
+        var other = args.OtherEntity;
+        if (_xenoQuery.TryGetComponent(other, out var xeno) && !xeno.OnWeeds)
+            _toUpdate.Add(other);
+    }
+
+    private void OnWeedsEndCollide(Entity<XenoWeedsComponent> ent, ref EndCollideEvent args)
+    {
+        var other = args.OtherEntity;
+        if (_xenoQuery.TryGetComponent(other, out var xeno) && xeno.OnWeeds)
+            _toUpdate.Add(other);
+    }
+
+    private void OnActionConstructionChosen(Entity<XenoChooseConstructionActionComponent> xeno, ref XenoConstructionChosenEvent args)
+    {
+        if (_actions.TryGetActionData(xeno, out var action) &&
             _prototype.HasIndex(args.Choice))
         {
             action.Icon = new SpriteSpecifier.EntityPrototype(args.Choice);
-            Dirty(ent, action);
+            Dirty(xeno, action);
         }
     }
 
@@ -399,7 +424,6 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
 
     private bool IsOnWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates)
     {
-        // TODO CM14 use collision enter and exit to calculate xenos being on weeds
         var position = _mapSystem.LocalToTile(grid, grid, coordinates);
         var enumerator = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, position);
 
@@ -412,5 +436,37 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         }
 
         return false;
+    }
+
+    public override void Update(float frameTime)
+    {
+        foreach (var xenoId in _toUpdate)
+        {
+            if (!_xenoQuery.TryGetComponent(xenoId, out var xeno))
+            {
+                continue;
+            }
+
+            var any = false;
+            foreach (var contact in _physics.GetContactingEntities(xenoId))
+            {
+                if (HasComp<XenoWeedsComponent>(contact))
+                {
+                    any = true;
+                    break;
+                }
+            }
+
+            if (xeno.OnWeeds == any)
+                continue;
+
+            xeno.OnWeeds = any;
+            Dirty(xenoId, xeno);
+
+            var ev = new XenoOnWeedsChangedEvent(xeno.OnWeeds);
+            RaiseLocalEvent(xenoId, ref ev);
+        }
+
+        _toUpdate.Clear();
     }
 }
