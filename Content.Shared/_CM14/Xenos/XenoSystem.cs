@@ -29,29 +29,29 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, GetAccessTagsEvent>(OnXenoGetAdditionalAccess);
     }
 
-    private void OnXenoMapInit(Entity<XenoComponent> ent, ref MapInitEvent args)
+    private void OnXenoMapInit(Entity<XenoComponent> xeno, ref MapInitEvent args)
     {
-        ent.Comp.NextRegenTime = _timing.CurTime + ent.Comp.PlasmaRegenCooldown;
+        xeno.Comp.NextRegenTime = _timing.CurTime + xeno.Comp.PlasmaRegenCooldown;
 
-        foreach (var actionId in ent.Comp.ActionIds)
+        foreach (var actionId in xeno.Comp.ActionIds)
         {
-            if (!ent.Comp.Actions.ContainsKey(actionId) &&
-                _action.AddAction(ent, actionId) is { } newAction)
+            if (!xeno.Comp.Actions.ContainsKey(actionId) &&
+                _action.AddAction(xeno, actionId) is { } newAction)
             {
-                ent.Comp.Actions[actionId] = newAction;
+                xeno.Comp.Actions[actionId] = newAction;
             }
         }
     }
 
-    private void OnXenoUnpaused(Entity<XenoComponent> ent, ref EntityUnpausedEvent args)
+    private void OnXenoUnpaused(Entity<XenoComponent> xeno, ref EntityUnpausedEvent args)
     {
-        ent.Comp.NextRegenTime += args.PausedTime;
-        ent.Comp.NextPheromonesPlasmaUse += args.PausedTime;
+        xeno.Comp.NextRegenTime += args.PausedTime;
+        xeno.Comp.NextPheromonesPlasmaUse += args.PausedTime;
     }
 
-    private void OnXenoGetAdditionalAccess(Entity<XenoComponent> ent, ref GetAccessTagsEvent args)
+    private void OnXenoGetAdditionalAccess(Entity<XenoComponent> xeno, ref GetAccessTagsEvent args)
     {
-        args.Tags.UnionWith(ent.Comp.AccessLevels);
+        args.Tags.UnionWith(xeno.Comp.AccessLevels);
     }
 
     public override void Update(float frameTime)

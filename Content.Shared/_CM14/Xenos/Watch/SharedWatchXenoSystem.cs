@@ -19,20 +19,20 @@ public abstract class SharedWatchXenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, MoveInputEvent>(OnXenoMoveInput);
     }
 
-    private void OnXenoMoveInput(Entity<XenoComponent> ent, ref MoveInputEvent args)
+    private void OnXenoMoveInput(Entity<XenoComponent> xeno, ref MoveInputEvent args)
     {
-        if (_net.IsClient && _player.LocalEntity == ent.Owner && _player.LocalSession != null)
-            Unwatch(ent.Owner, _player.LocalSession);
-        else if (TryComp(ent, out ActorComponent? actor))
-            Unwatch(ent.Owner, actor.PlayerSession);
+        if (_net.IsClient && _player.LocalEntity == xeno.Owner && _player.LocalSession != null)
+            Unwatch(xeno.Owner, _player.LocalSession);
+        else if (TryComp(xeno, out ActorComponent? actor))
+            Unwatch(xeno.Owner, actor.PlayerSession);
     }
 
-    private void OnXenoWatchBui(Entity<XenoComponent> ent, ref XenoWatchBuiMessage args)
+    private void OnXenoWatchBui(Entity<XenoComponent> xeno, ref XenoWatchBuiMessage args)
     {
         if (!TryGetEntity(args.Target, out var target))
             return;
 
-        Watch(ent.Owner, target.Value);
+        Watch(xeno.Owner, target.Value);
     }
 
 
