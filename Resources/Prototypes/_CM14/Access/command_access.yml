@@ -1,0 +1,35 @@
+﻿- type: accessLevel
+  id: CMAccessCommand
+  name: id-card-access-level-command
+
+- type: accessLevel
+  id: CMAccessCMP
+  name: job-name-chief-mp
+
+- type: accessLevel
+  id: CMAccessQM
+  name: id-card-access-level-quartermaster
+
+- type: accessLevel
+  id: CMAccessSEA
+  name: job-name-senior-enlisted-advisor
+
+- type: accessLevel
+  id: CMAccessCO
+  name: job-name-commanding-officer
+
+- type: accessLevel
+  id: CMAccessCMO
+  name: job-name-cm-cmo
+
+- type: accessLevel
+  id: CMAccessCE
+  name: job-name-ce
+
+- type: accessLevel
+  id: CMAccessASO
+  name: job-name-aso
+
+- type: accessLevel
+  id: CMAccessCorp
+  name: job-name-corp # this won't exist until test 2

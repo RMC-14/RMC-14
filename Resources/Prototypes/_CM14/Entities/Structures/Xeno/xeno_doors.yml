@@ -69,7 +69,7 @@
     key: walls
     mode: NoSprite
   - type: AccessReader
-    access: [["Xeno"]]
+    access: [["CMAccessXeno"]]
   - type: Airlock
     emergencyAccessLayer: false
     animatePanel: false

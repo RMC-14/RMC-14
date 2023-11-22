@@ -1,0 +1,41 @@
+﻿- type: entity # TODO CM14 description
+  parent: CMXenoDeveloped
+  id: CMXenoHivelord
+  name: Hivelord
+  components:
+  - type: Sprite
+    sprite: _CM14/Mobs/Xenos/Hivelord/hivelord.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      550: Critical
+      650: Dead
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoAcid
+    - ActionXenoPheromones
+    - ActionXenoOrderConstruction
+    - ActionXenoPlantWeeds
+    - ActionXenoChooseStructure
+    - ActionXenoSecreteStructure
+    - ActionXenoTransferPlasma
+    - ActionXenoResinWalker
+    plasma: 1000 # TODO CM14
+    maxPlasma: 1000
+    plasmaRegenOnWeeds: 27.5
+    canBuild:
+    - WallXenoResin
+    - WallXenoMembrane
+    - DoorXenoResin
+    canOrderConstruction:
+    - HiveCoreXenoConstructionNode
+  - type: XenoResinWalker

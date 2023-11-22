@@ -13,9 +13,9 @@ public abstract class SharedMarineSystem : EntitySystem
             after: new[] { typeof(SquadSystem) });
     }
 
-    private void OnMarineGetIcon(Entity<MarineComponent> ent, ref GetMarineIconEvent args)
+    private void OnMarineGetIcon(Entity<MarineComponent> marine, ref GetMarineIconEvent args)
     {
-        if (ent.Comp.Icon is { } icon)
+        if (marine.Comp.Icon is { } icon)
             args.Icons.Add(icon);
     }
 

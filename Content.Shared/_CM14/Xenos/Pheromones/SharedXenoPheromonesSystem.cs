@@ -27,7 +27,6 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruction = default!;
 
     // TODO CM14 move all of this to a component
     [ValidatePrototypeId<DamageTypePrototype>]
@@ -194,12 +193,12 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         var oldRecovery = _oldReceivers[(int) XenoPheromones.Recovery];
         oldRecovery.Clear();
 
-        var recoveryQuery = EntityQueryEnumerator<XenoRecoveryPheromonesComponent>();
-        while (recoveryQuery.MoveNext(out var uid, out var recovery))
+        var recoveryQuery = EntityQueryEnumerator<XenoRecoveryPheromonesComponent, XenoComponent>();
+        while (recoveryQuery.MoveNext(out var uid, out var recovery, out var xeno))
         {
             if (_timing.CurTime > recovery.NextRegenTime)
             {
-                if (_xenoConstruction.IsOnWeeds(uid))
+                if (xeno.OnWeeds)
                 {
                     _xeno.HealDamage(uid, RecoveryHealthRegen * recovery.Multiplier);
                     _xenoPlasma.RegenPlasma(uid, RecoveryPlasmaRegen * recovery.Multiplier);

@@ -1,8 +1,8 @@
 ﻿- type: accessLevel
-  id: Xeno
+  id: CMAccessXeno
   name: cm-access-xeno
 
 - type: accessGroup
-  id: Xeno
+  id: CMAccessXeno
   tags:
-  - Xeno
+  - CMAccessXeno

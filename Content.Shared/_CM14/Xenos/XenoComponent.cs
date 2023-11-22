@@ -130,7 +130,7 @@ public sealed partial class XenoComponent : Component
 
     [DataField(customTypeSerializer: typeof(PrototypeIdHashSetSerializer<AccessLevelPrototype>))]
     [ViewVariables(VVAccess.ReadWrite)]
-    public HashSet<string> AccessLevels = new() { "Xeno" };
+    public HashSet<string> AccessLevels = new() { "CMAccessXeno" };
 
     [DataField]
     [ViewVariables(VVAccess.ReadWrite)]
@@ -151,4 +151,8 @@ public sealed partial class XenoComponent : Component
     [DataField]
     [ViewVariables(VVAccess.ReadWrite)]
     public FixedPoint2 PheromonesMultiplier = 1;
+
+    [DataField, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool OnWeeds;
 }

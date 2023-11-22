@@ -1,4 +1,4 @@
 ﻿namespace Content.Shared._CM14.Xenos.Armor;
 
 [ByRefEvent]
-public record struct XenoGetArmorEvent(int Armor);
+public record struct XenoGetArmorEvent(int Armor, int FrontalArmor);
