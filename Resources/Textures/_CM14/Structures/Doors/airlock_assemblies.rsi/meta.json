@@ -8,36 +8,28 @@
   },
   "states": [
     {
-      "name": "door_as_0",
-      "directions": 4
+      "name": "door_as_0"
     },
     {
-      "name": "door_as_1",
-      "directions": 4
+      "name": "door_as_1"
     },
     {
-      "name": "door_as_2",
-      "directions": 4
+      "name": "door_as_2"
     },
     {
-      "name": "door_as_3",
-      "directions": 4
+      "name": "door_as_3"
     },
     {
-      "name": "door_as_g0",
-      "directions": 4
+      "name": "door_as_g0"
     },
     {
-      "name": "door_as_g1",
-      "directions": 4
+      "name": "door_as_g1"
     },
     {
-      "name": "door_as_g2",
-      "directions": 4
+      "name": "door_as_g2"
     },
     {
-      "name": "door_as_g3",
-      "directions": 4
+      "name": "door_as_g3"
     }
   ]
 }
