@@ -1,4 +1,4 @@
-# Civilians
+# Almayer personnel
 - type: entity
   parent: [ ClothingBackpack, CMEntityBase]
   id: CMBackpack
@@ -67,6 +67,17 @@
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Back/Backpacks/Civilians/security.rsi
+
+- type: entity
+  parent: CMBackpack
+  id: CMBackpackCommand
+  name: marine commanding officer backpack
+  description: The contents of this backpack are top secret.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Back/Backpacks/Marines/standard.rsi
+  - type: Storage
+    maxTotalWeight: 32
 
 # Marine
 - type: entity
