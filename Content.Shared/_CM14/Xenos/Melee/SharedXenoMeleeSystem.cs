@@ -89,6 +89,7 @@ public abstract class SharedXenoMeleeSystem : EntitySystem
             uid => uid == xeno.Owner || !HasComp<MobStateComponent>(uid), false));
         var results = intersect.Select(r => r.HitEntity).ToList();
 
+        // TODO CM14 no friendly fire
         // TODO CM14 sounds
         // TODO CM14 lag compensation
         var damage = new DamageSpecifier(xeno.Comp.TailDamage);

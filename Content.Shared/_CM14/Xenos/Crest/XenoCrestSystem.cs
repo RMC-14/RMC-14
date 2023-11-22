@@ -1,6 +1,8 @@
 ﻿using Content.Shared._CM14.Xenos.Armor;
+using Content.Shared._CM14.Xenos.Sweep;
 using Content.Shared.Actions;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 
 namespace Content.Shared._CM14.Xenos.Crest;
@@ -10,6 +12,7 @@ public sealed class XenoCrestSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -17,6 +20,7 @@ public sealed class XenoCrestSystem : EntitySystem
         SubscribeLocalEvent<XenoCrestComponent, RefreshMovementSpeedModifiersEvent>(OnXenoCrestRefreshMovementSpeed);
         SubscribeLocalEvent<XenoCrestComponent, XenoGetArmorEvent>(OnXenoCrestGetArmor);
         SubscribeLocalEvent<XenoCrestComponent, BeforeStatusEffectAddedEvent>(OnXenoCrestBeforeStatusAdded);
+        SubscribeLocalEvent<XenoCrestComponent, XenoTailSweepAttemptEvent>(OnXenoCrestTailSweepAttempt);
 
         SubscribeLocalEvent<XenoCrestActionComponent, XenoCrestToggledEvent>(OnXenoCrestActionToggled);
     }
@@ -58,6 +62,15 @@ public sealed class XenoCrestSystem : EntitySystem
     {
         if (xeno.Comp.Lowered && args.Key == "Stun")
             args.Cancelled = true;
+    }
+
+    private void OnXenoCrestTailSweepAttempt(Entity<XenoCrestComponent> ent, ref XenoTailSweepAttemptEvent args)
+    {
+        if (ent.Comp.Lowered)
+        {
+            args.Cancelled = true;
+            _popup.PopupClient(Loc.GetString("cm-xeno-tail-sweep-crest"), ent, ent);
+        }
     }
 
     private void OnXenoCrestActionToggled(Entity<XenoCrestActionComponent> action, ref XenoCrestToggledEvent args)

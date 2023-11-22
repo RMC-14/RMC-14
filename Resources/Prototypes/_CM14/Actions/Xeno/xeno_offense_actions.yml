@@ -66,3 +66,17 @@
     range: 15
     useDelay: 6
     checkCanAccess: false
+
+- type: entity
+  id: ActionXenoTailSweep
+  parent: ActionXenoBase
+  name: Tail Sweep # TODO CM14 description
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: tail_sweep
+    event: !type:XenoTailSweepActionEvent
+    useDelay: 15
+    checkCanAccess: false
