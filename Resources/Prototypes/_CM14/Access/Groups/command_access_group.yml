@@ -3,41 +3,41 @@
 - type: accessGroup
   id: ShipMasterAccess
   tags:
-  - CMAccessAlpha
-  - CMAccessArmory
-  - CMAccessASO
-  - CMAccessBravo
-  - CMAccessBrig
-  - CMAccessCE
-  - CMAccessChaplain
-  - CMAccessCharlie
-  - CMAccessCMO
-  - CMAccessCMP
-  - CMAccessCO
-  - CMAccessCommand
-  - CMAccessCrewman
-  - CMAccessChemistry
-  - CMAccessDelta
-  - CMAccessDropship
-  - CMAccessEngineering
-  - CMAccessEngPrep
-  - CMAccessFTLPrep
-  - CMAccessKitchen
-  - CMAccessMaint
-  - CMAccessMarinePrep
-  - CMAccessMedical
-  - CMAccessMedPrep
-  - CMAccessOT
-  - CMAccessPilot
-  - CMAccessPress
-  - CMAccessQM
-  - CMAccessRequisitions
-  - CMAccessResearch
-  - CMAccessSEA
-  - CMAccessSmartPrep
-  - CMAccessSpecPrep
-  - CMAccessSquadLeaderPrep
-  - CMAccessMarineRifleman
+  - CMAccessAlpha # Squad prep access
+  - CMAccessArmory # MP weapon vault
+  - CMAccessASO # auxiliary support officer
+  - CMAccessBravo # Squad prep access
+  - CMAccessBrig # MP Access
+  - CMAccessCE # chief engineer
+# - CMAccessChaplain # might not need this one.
+  - CMAccessCharlie # Squad prep access
+  - CMAccessCMO # chief medical officer
+  - CMAccessCMP # chief MP
+  - CMAccessCO # commanding officer
+  - CMAccessCommand # all command level doors, including bridge. May need to be split.
+  - CMAccessCrewman # access for dropship maintenance doors
+  - CMAccessChemistry # access for chem doors and chem machines
+  - CMAccessDelta # Squad prep access
+  - CMAccessDropship # access to open dropship doors
+  - CMAccessEngineering # ship-side engineering
+  - CMAccessCombatTechPrep # combat technician
+  - CMAccessFTLPrep # fireteam leader
+  - CMAccessKitchen # chef access
+  - CMAccessMaint # maints
+  - CMAccessMarinePrep # access to the basic areas of marine prep, where marines exit cryo and get food.
+  - CMAccessMedical # the medical department locked doors, like surgery rooms and the supply closet
+  - CMAccessMedPrep # hospital corpsman
+  - CMAccessOT # ordnance tech
+  - CMAccessPilot # dropship pilot door access
+  - CMAccessPress # reporter access
+  - CMAccessQM # quartermaster
+  - CMAccessRequisitions # (cargo)
+  - CMAccessResearch # research access
+  - CMAccessSEA # senior enlisted
+  - CMAccessSmartPrep # smartgunner
+  - CMAccessSpecPrep # weapons specialist
+  - CMAccessSquadLeaderPrep # squad leader access
+  - CMAccessMarineRifleman # this access is used for the basic vendor, which only the rifleman can use.
 
 # all ship-side access that is not CO
 # SEA uses this.
@@ -61,7 +61,7 @@
   - CMAccessDelta
   - CMAccessDropship
   - CMAccessEngineering
-  - CMAccessEngPrep
+  - CMAccessCombatTechPrep
   - CMAccessFTLPrep
   - CMAccessKitchen
   - CMAccessMaint
