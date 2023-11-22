@@ -9,7 +9,7 @@
 - type: entity
   parent: CMIDCardBase
   id: OrdnanceTechIDCard
-  name: ordnance tech`s ID card
+  name: ordnance tech's ID card
   components:
   - type: PresetIdCard
     job: OrdnanceTech
@@ -17,7 +17,7 @@
 - type: entity
   parent: CMIDCardBase
   id: MaintTechIDCard
-  name: maintenance tech`s ID card
+  name: maintenance tech's ID card
   components:
   - type: PresetIdCard
     job: MaintTech

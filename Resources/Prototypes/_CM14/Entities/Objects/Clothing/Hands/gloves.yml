@@ -88,8 +88,8 @@
 - type: entity
   parent: CMHandsInsulated
   id: CMHandsCaptain
-  name: captain`s gloves
-  description: A pair of captain`s gloves.
+  name: captain's gloves
+  description: A pair of captain's gloves.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Hands/Gloves/captain.rsi
