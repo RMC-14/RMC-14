@@ -25,7 +25,7 @@
   name: job-name-hospital-corpsman
 
 - type: accessLevel
-  id: CMAccessEngPrep
+  id: CMAccessCombatTechPrep
   name: job-name-combat-tech
 
 - type: accessLevel

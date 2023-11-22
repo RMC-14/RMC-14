@@ -36,6 +36,14 @@
   - CMAccessDropship
 
 - type: accessGroup
+  id: CombatTech
+  tags:
+  - CMAccessMarinePrep
+  - CMAccessCombatTechPrep
+  - CMAccessDropship
+
+# this exists because other squad members will have their own equipment vendors.
+- type: accessGroup
   id: Rifleman
   tags:
   - CMAccessMarineRifleman
