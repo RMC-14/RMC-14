@@ -1,4 +1,4 @@
-﻿# all shipside access
+﻿# all ship-side access
 # CO uses this.
 - type: accessGroup
   id: ShipMasterAccess
@@ -37,6 +37,7 @@
   - CMAccessSmartPrep
   - CMAccessSpecPrep
   - CMAccessSquadLeaderPrep
+  - CMAccessMarineRifleman
 
 # all ship-side access that is not CO
 # SEA uses this.
@@ -77,6 +78,7 @@
   - CMAccessSmartPrep
   - CMAccessSpecPrep
   - CMAccessSquadLeaderPrep
+  - CMAccessMarineRifleman
 
 # Corp access, probably not needed
 - type: accessGroup

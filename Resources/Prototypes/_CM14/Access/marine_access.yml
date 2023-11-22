@@ -44,5 +44,6 @@
   id: CMAccessFTLPrep
   name: job-name-fireteam-leader
 
-#todo cm14 access groups
-
+- type: accessLevel
+  id: CMAccessMarineRifleman
+  name: job-name-rifleman
