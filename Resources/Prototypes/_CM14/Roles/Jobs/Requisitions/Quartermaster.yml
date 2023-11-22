@@ -16,7 +16,7 @@
   supervisors: job-supervisors-command
   canBeAntag: false
   accessGroups:
-  - CEQM
+  - CMQM
 
 - type: startingGear
   id: CMQuartermasterGear
