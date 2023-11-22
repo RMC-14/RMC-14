@@ -11,7 +11,7 @@
   supervisors: job-supervisors-command
   canBeAntag: true
   accessGroups:
-  - Correspondent
+  - CMCorrespondent
 
 - type: startingGear
   id: CorrespondentGear
