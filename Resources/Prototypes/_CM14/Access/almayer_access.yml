@@ -1,0 +1,42 @@
+﻿# Marine Almayer access in marine_access.yml
+
+#Req
+- type: accessLevel
+  id: CMAccessRequisitions
+  name: department-Requisitions
+
+- type: accessLevel
+  id: CMAccessKitchen
+  name: job-name-messtech
+
+#engineering
+- type: accessLevel
+  id: CMAccessEngineering
+  name: id-card-access-level-engineering
+
+- type: accessLevel
+  id: CMAccessMaint
+  name: id-card-access-level-maintenance
+
+- type: accessLevel
+  id: CMAccessOT
+  name: job-name-ordnance-tech
+
+#medical
+- type: accessLevel
+  id: CMAccessMedical
+  name: id-card-access-level-medical
+
+- type: accessLevel
+  id: CMAccessChemistry
+  name: id-card-access-level-chemistry
+
+- type: accessLevel
+  id: CMAccessResearch
+  name: job-name-researcher
+
+#civilian
+- type: accessLevel
+  id: CMAccessPress
+  name: cm-access-press
+

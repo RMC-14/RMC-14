@@ -1,0 +1,60 @@
+﻿- type: accessGroup
+  id: Colony
+  tags:
+  - CMAccessColonyPublic # any public doors that would be locked for outsiders but not your common civilian
+  - CMAccessColonyLogistics # colony cargo
+  - CMAccessColonyEngineering # colony engineering
+  - CMAccessColonyResearch # colony research
+  - CMAccessColonyBrig # colony general security
+  - CMAccessColonyMedbay # colony medical
+  - CMAccessColonyCommand # colony command
+  - CMAccessColonyChem # Access for chemistry in colony buildings.
+
+- type: accessGroup
+  id: Colonist
+  tags:
+  - CMAccessColonyPublic
+
+- type: accessGroup
+  id: ColonyCorrespondent
+  tags:
+  - CMAccessCommand
+  - CMAccessResearch
+  - CMAccessMedical
+  - CMAccessColonyPublic
+  - CMAccessColonyResearch
+  - CMAccessColonyEngineering
+  - CMAccessColonyLogistics
+  - CMAccessColonyBrig
+  - CMAccessColonyMedbay
+  - CMAccessColonyCommand
+  - CMAccessPress
+
+- type: accessGroup
+  id: CMCorrespondent
+  tags:
+  - CMAccessCommand
+  - CMAccessPress
+  - CMAccessMarinePrep
+
+- type: accessGroup
+  id: ColonistEngi
+  tags:
+  - CMAccessColonyPublic
+  - CMAccessColonyEngineering
+
+- type: accessGroup
+  id: ColonistSec
+  tags:
+  - CMAccessColonyPublic
+  - CMAccessColonyEngineering
+  - CMAccessColonyLogistics
+  - CMAccessColonyResearch
+
+- type: accessGroup
+  id: ColonistMedical
+  tags:
+  - CMAccessColonyPublic
+  - CMAccessColonyResearch
+  - CMAccessColonyMedbay
+  - CMAccessColonyChem
