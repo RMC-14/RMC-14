@@ -2,7 +2,7 @@
 
 namespace Content.Shared._CM14.Xenos.Hide;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(XenoHideSystem))]
 public sealed partial class XenoHideComponent : Component
 {
