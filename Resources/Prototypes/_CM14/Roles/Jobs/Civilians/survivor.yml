@@ -21,7 +21,7 @@
   supervisors: job-supervisors-nobody
   canBeAntag: false
   accessGroups:
-  - Colony #for playtest 1-2 only
+  - Colonist
 
 - type: startingGear
   id: SurvivorGear
