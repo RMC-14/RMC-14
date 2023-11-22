@@ -31,7 +31,7 @@
     - ActionXenoResinWalker
     plasma: 1000 # TODO CM14
     maxPlasma: 1000
-    plasmaRegenOnWeeds: 6
+    plasmaRegenOnWeeds: 27.5
     canBuild:
     - WallXenoResin
     - WallXenoMembrane

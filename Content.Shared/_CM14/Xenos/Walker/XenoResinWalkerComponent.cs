@@ -17,7 +17,15 @@ public sealed partial class XenoResinWalkerComponent : Component
 
     [DataField, AutoNetworkedField]
     [ViewVariables(VVAccess.ReadWrite)]
-    public FixedPoint2 PlasmaPerSecond = 30;
+    public FixedPoint2 PlasmaUpkeep = 15;
+
+    [DataField, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan NextPlasmaUse;
+
+    [DataField, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan PlasmaUseDelay = TimeSpan.FromSeconds(0.5);
 
     [DataField, AutoNetworkedField]
     [ViewVariables(VVAccess.ReadWrite)]
