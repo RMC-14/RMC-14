@@ -16,7 +16,7 @@
   supervisors: job-supervisors-command
   canBeAntag: false
   accessGroups:
-  -
+  - SquadLeader
 
 - type: startingGear
   id: SquadLeaderGear

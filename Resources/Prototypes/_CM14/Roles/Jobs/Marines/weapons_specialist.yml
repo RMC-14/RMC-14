@@ -13,7 +13,7 @@
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
   accessGroups:
-  -
+  - WeaponSpec
 
 - type: startingGear
   id: WeaponsSpecialistGear

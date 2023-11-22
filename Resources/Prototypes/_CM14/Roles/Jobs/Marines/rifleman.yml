@@ -9,7 +9,7 @@
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
   accessGroups:
-  -
+  - Rifleman
 
 - type: startingGear
   id: RiflemanGear

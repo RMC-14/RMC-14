@@ -16,7 +16,7 @@
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
   accessGroups:
-  -
+  - HospitalCorpsman
 
 # TODO cm14 Remove this later
 - type: entity
