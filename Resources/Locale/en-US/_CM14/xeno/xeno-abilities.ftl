@@ -12,6 +12,12 @@ cm-xeno-cant-reach-there = You can't reach there!
 # Evolve
 cm-xeno-available-evolutions = Available Evolutions
 
+# Fortify
+cm-xeno-fortify-cant-headbutt = You can't headbutt while fortifying!
+cm-xeno-fortify-cant-rest = You can't rest while fortifying!
+cm-xeno-fortify-cant-tail-sweep = You can't tail sweep while fortifying!
+cm-xeno-fortify-cant-toggle-crest = You can't lower your crest while fortifying!
+
 # Leap
 cm-xeno-leap-cancelled = You cancel your leap!
 
@@ -36,8 +42,16 @@ cm-xeno-pheromones-stop = You stop emitting pheromones
 # Regurgitate
 cm-xeno-none-devoured = You haven't devoured anyone!
 
-# Tail Sweep
-cm-xeno-tail-sweep-crest = You can't tail swipe with your crest lowered!
+# Rest
+cm-xeno-rest-cant-headbutt = You can't headbutt while resting!
+cm-xeno-rest-cant-fortify = You can't fortify while resting!
+cm-xeno-rest-cant-tail-sweep = You can't tail sweep while resting!
+cm-xeno-rest-cant-toggle-crest = You can't lower your crest while resting!
+
+# Toggle Crest Defense
+cm-xeno-toggle-crest-cant-fortify = You can't fortify while your crest is lowered!
+cm-xeno-toggle-crest-cant-rest = You can't rest while your crest is lowered!
+cm-xeno-toggle-crest-cant-tail-sweep = You can't tail sweep while your crest is lowered!
 
 # Transfer Plasma
 cm-xeno-plasma-transferred-to-other = You have transferred {$plasma} plasma to {$target}. You now have {$total}

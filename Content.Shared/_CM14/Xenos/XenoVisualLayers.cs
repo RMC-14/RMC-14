@@ -7,5 +7,6 @@ public enum XenoVisualLayers : byte
 {
     Base,
     Hide,
-    Crest
+    Crest,
+    Fortify
 }

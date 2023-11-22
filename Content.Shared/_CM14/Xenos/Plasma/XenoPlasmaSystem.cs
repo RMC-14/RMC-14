@@ -24,16 +24,16 @@ public sealed class XenoPlasmaSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, XenoTransferPlasmaDoAfterEvent>(OnXenoTransferDoAfter);
     }
 
-    private void OnXenoRejuvenate(Entity<XenoComponent> ent, ref RejuvenateEvent args)
+    private void OnXenoRejuvenate(Entity<XenoComponent> xeno, ref RejuvenateEvent args)
     {
-        RegenPlasma((ent, ent), ent.Comp.MaxPlasma);
+        RegenPlasma((xeno, xeno), xeno.Comp.MaxPlasma);
     }
 
-    private void OnXenoTransferPlasmaAction(Entity<XenoComponent> ent, ref XenoTransferPlasmaActionEvent args)
+    private void OnXenoTransferPlasmaAction(Entity<XenoComponent> xeno, ref XenoTransferPlasmaActionEvent args)
     {
-        if (ent.Owner == args.Target ||
+        if (xeno.Owner == args.Target ||
             !HasComp<XenoComponent>(args.Target) ||
-            !HasPlasma(ent, args.Amount))
+            !HasPlasma(xeno, args.Amount))
         {
             return;
         }
@@ -41,7 +41,7 @@ public sealed class XenoPlasmaSystem : EntitySystem
         args.Handled = true;
 
         var ev = new XenoTransferPlasmaDoAfterEvent(args.Amount);
-        var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.PlasmaTransferDelay, ev, ent, args.Target)
+        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.PlasmaTransferDelay, ev, xeno, args.Target)
         {
             BreakOnUserMove = true,
             DistanceThreshold = args.Range
