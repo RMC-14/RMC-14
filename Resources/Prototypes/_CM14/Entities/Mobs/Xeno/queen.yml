@@ -14,8 +14,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      200: Critical
-      300: Dead
+      1000: Critical
+      1100: Dead
   - type: Xeno
     actionIds:
     - ActionXenoRest
@@ -28,8 +28,8 @@
     - ActionXenoPlantWeeds
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
-    plasma: 500
-    maxPlasma: 500 # TODO CM14
+    plasma: 1000
+    maxPlasma: 1000 # TODO CM14
     plasmaRegenOnWeeds: 12
     canBuild:
     - WallXenoResin
@@ -37,6 +37,8 @@
     - DoorXenoResin
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
+  - type: XenoArmor
+    armor: 25
   - type: Tag
     tags:
     - DoorBumpOpener # TODO CM14 big loud steps
