@@ -1,7 +1,7 @@
 ﻿# marines will be given squad access when they spawn, based on assignment.
 
 - type: accessGroup
-  id: SquadLead
+  id: SquadLeader
   tags:
   - CMAccessMarinePrep
   - CMAccessSquadLeaderPrep
