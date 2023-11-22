@@ -15,29 +15,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-command
   canBeAntag: false
-  access:
-  # Senior
-  # Database
-  # ASO
-  - Command
-  - Brig
-  - Armory
-  - Medical
-  - ChiefEngineer
-  - Engineering
-  - Maintenance
-  # Ordnance
-  - Quartermaster
-  - Cargo
-  # Prep
-  # Alpha
-  # Bravo
-  # Charlie
-  # Delta
-  # Pilot
-  # Dropship
-  - Kitchen
-  # Press
+  accessGroups:
+  - ASO
 
 - type: startingGear
   id: ASOGear
@@ -47,10 +26,8 @@
     back: ClothingBackpackCaptainFilled
     shoes: CMShoesCombatBootsBrown
     id: ASOIDCard
-    ears: ClothingHeadsetAltCommand
-  innerClothingSkirt: CMJumpsuitBO
+    ears: CMHeadsetLeader
   satchel: ClothingBackpackSatchelCMOFilled
-  duffelbag: ClothingBackpackDuffelCaptainFilled
 
 - type: entity
   id: CMSpawnPointASO

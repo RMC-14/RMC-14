@@ -14,10 +14,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-command
   canBeAntag: false
-  access:
-  - Command
-  # Dropship
-  # Pilot
+  accessGroups:
+  - PilotOfficer
 
 - type: startingGear
   id: PilotOfficerGear
@@ -29,10 +27,8 @@
     shoes: CMShoesCombatBoots
     head: CMArmorHelmetM30
     id: PilotOfficerIDCard
-    ears: ClothingHeadsetSecurity
-  innerClothingSkirt: CMJumpsuitPilot
+    ears: CMHeadsetPilot
   satchel: ClothingBackpackSatchelFilled
-  duffelbag: ClothingBackpackDuffelFilled
 
 - type: entity
   id: CMSpawnPointPilot

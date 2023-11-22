@@ -20,6 +20,8 @@
   joinNotifyCrew: false
   supervisors: job-supervisors-nobody
   canBeAntag: false
+  accessGroups:
+  - Colonist
 
 - type: startingGear
   id: SurvivorGear
@@ -27,10 +29,9 @@
     jumpsuit: CMJumpsuitColonist
     back: ClothingBackpackFilled
     shoes: CMShoesCombatBootsBrown
-    ears: ClothingHeadsetGrey
-  innerClothingSkirt: CMJumpsuitColonist
+    id: ColonistIDCard
+    ears: CMHeadsetColony
   satchel: ClothingBackpackSatchelFilled
-  duffelbag: ClothingBackpackDuffelFilled
 
 - type: entity
   id: CMSpawnPointSurvivor

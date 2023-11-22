@@ -10,10 +10,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-command
   canBeAntag: true
-  access:
-  - Command
-  # Press
-  # Prep
+  accessGroups:
+  - CMCorrespondent
 
 - type: startingGear
   id: CorrespondentGear
@@ -23,10 +21,8 @@
     back: ClothingBackpackFilled
     shoes: CMShoesCombatBootsBrown
     id: CorrespondentIDCard
-    ears: ClothingHeadsetGrey
-  innerClothingSkirt: CMJumpsuitCorrespondent
+    ears: CMHeadsetReporter
   satchel: ClothingBackpackSatchelFilled
-  duffelbag: ClothingBackpackDuffelFilled
 
 - type: entity
   id: CMSpawnPointCorrespondent

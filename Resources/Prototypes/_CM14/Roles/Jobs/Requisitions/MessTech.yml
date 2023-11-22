@@ -10,8 +10,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-cm-quartermaster
   canBeAntag: true
-  access:
-  - Kitchen
+  accessGroups:
+  - MessTech
 
 - type: startingGear
   id: MessTechGear
@@ -22,10 +22,8 @@
     back: ClothingBackpackFilled
     shoes: CMShoesCombatBootsBrown
     id: MessTechIDCard
-    ears: ClothingHeadsetCargo
-  innerClothingSkirt: CMJumpsuitMessTech
+    ears: CMHeadsetChef
   satchel: ClothingBackpackSatchelFilled
-  duffelbag: ClothingBackpackDuffelFilled
 
 - type: entity
   id: SpawnPointMessTech

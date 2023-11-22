@@ -12,10 +12,8 @@
   icon: "JobIconCombatTech"
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
-  access:
-  # Prep
-  # Engi Prep
-  - Engineering
+  accessGroups:
+  - CombatTech
 
 - type: startingGear
   id: CombatTechGear
@@ -28,11 +26,9 @@
     outerClothing: ArmorMarineM3
     gloves: CMHandsInsulated
     id: DogtagCombatTech
-    ears: ClothingHeadsetSecurity
+    ears: CMHeadsetAlphaEngineer
     belt: ClothingBeltUtilityEngineering
-  innerClothingSkirt: CMJumpsuitMarineEngineer
   satchel: ClothingBackpackSatchelSecurityFilled
-  duffelbag: ClothingBackpackDuffelSecurityFilled
 
 - type: entity
   id: SpawnPointCombatTech
