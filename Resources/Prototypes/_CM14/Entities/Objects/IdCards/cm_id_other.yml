@@ -6,3 +6,10 @@
   - type: PresetIdCard
     job: Correspondent
 
+- type: entity
+  parent: CMIDCardLanyard
+  id: ColonistIDCard
+  name: colonist ID card
+  components:
+  - type: PresetIdCard
+    job: Survivor
