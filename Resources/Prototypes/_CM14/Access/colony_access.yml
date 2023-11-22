@@ -26,3 +26,7 @@
 - type: accessLevel
   id: CMAccessColonyCommand
   name: cm-access-colony-command
+
+# this is used to allow colony doctors into their chem but not marine chem
+- type: accessLevel
+  id: CMAccessColonyChem
