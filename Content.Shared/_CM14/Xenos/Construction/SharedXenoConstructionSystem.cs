@@ -228,13 +228,13 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
             QueueDel(weeds);
     }
 
-    private void OnActionConstructionChosen(Entity<XenoChooseConstructionActionComponent> ent, ref XenoConstructionChosenEvent args)
+    private void OnActionConstructionChosen(Entity<XenoChooseConstructionActionComponent> xeno, ref XenoConstructionChosenEvent args)
     {
-        if (_actions.TryGetActionData(ent, out var action) &&
+        if (_actions.TryGetActionData(xeno, out var action) &&
             _prototype.HasIndex(args.Choice))
         {
             action.Icon = new SpriteSpecifier.EntityPrototype(args.Choice);
-            Dirty(ent, action);
+            Dirty(xeno, action);
         }
     }
 

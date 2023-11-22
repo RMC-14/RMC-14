@@ -24,6 +24,7 @@
     - ActionXenoToggleCrest
     - ActionXenoHeadbutt
     - ActionXenoTailSweep
+    - ActionXenoFortify
     plasma: 100 # TODO CM14
     maxPlasma: 100
     plasmaRegenOnWeeds: 6
@@ -39,3 +40,4 @@
     damage:
       types:
         Slash: 30
+  - type: XenoFortify

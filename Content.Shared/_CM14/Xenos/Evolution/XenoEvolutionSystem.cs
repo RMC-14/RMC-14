@@ -30,20 +30,20 @@ public sealed class XenoEvolutionSystem : EntitySystem
             _action.SetCooldown(ent, _timing.CurTime, _timing.CurTime + ent.Comp.Cooldown);
     }
 
-    private void OnXenoEvolveAction(Entity<XenoComponent> ent, ref XenoOpenEvolutionsActionEvent args)
+    private void OnXenoEvolveAction(Entity<XenoComponent> xeno, ref XenoOpenEvolutionsActionEvent args)
     {
-        if (_net.IsClient || !TryComp(ent, out ActorComponent? actor))
+        if (_net.IsClient || !TryComp(xeno, out ActorComponent? actor))
             return;
 
-        _ui.TryOpen(ent.Owner, XenoEvolutionUIKey.Key, actor.PlayerSession);
+        _ui.TryOpen(xeno.Owner, XenoEvolutionUIKey.Key, actor.PlayerSession);
     }
 
-    private void OnXenoEvolveBui(Entity<XenoComponent> ent, ref XenoEvolveBuiMessage args)
+    private void OnXenoEvolveBui(Entity<XenoComponent> xeno, ref XenoEvolveBuiMessage args)
     {
-        if (!_mind.TryGetMind(ent, out var mindId, out _))
+        if (!_mind.TryGetMind(xeno, out var mindId, out _))
             return;
 
-        var choices = ent.Comp.EvolvesTo.Count;
+        var choices = xeno.Comp.EvolvesTo.Count;
         if (args.Choice >= choices || args.Choice < 0)
         {
             Log.Warning($"User {args.Session.Name} sent an out of bounds evolution choice: {args.Choice}. Choices: {choices}");
@@ -53,12 +53,12 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var evolution = Spawn(ent.Comp.EvolvesTo[args.Choice], _transform.GetMoverCoordinates(ent.Owner));
+        var evolution = Spawn(xeno.Comp.EvolvesTo[args.Choice], _transform.GetMoverCoordinates(xeno.Owner));
         _mind.TransferTo(mindId, evolution);
         _mind.UnVisit(mindId);
-        Del(ent.Owner);
+        Del(xeno.Owner);
 
-        if (TryComp(ent, out ActorComponent? actor))
-            _ui.TryClose(ent.Owner, XenoEvolutionUIKey.Key, actor.PlayerSession);
+        if (TryComp(xeno, out ActorComponent? actor))
+            _ui.TryClose(xeno.Owner, XenoEvolutionUIKey.Key, actor.PlayerSession);
     }
 }

@@ -44,6 +44,12 @@ public abstract class SharedXenoHeadbuttSystem : EntitySystem
         if (args.Handled)
             return;
 
+        var attempt = new XenoHeadbuttAttemptEvent();
+        RaiseLocalEvent(xeno, ref attempt);
+
+        if (attempt.Cancelled)
+            return;
+
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
             return;
 

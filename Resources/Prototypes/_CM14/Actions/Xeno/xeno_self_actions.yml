@@ -59,3 +59,16 @@
     event: !type:XenoToggleCrestActionEvent
     useDelay: 2
   - type: XenoCrestAction
+
+- type: entity
+  id: ActionXenoFortify
+  parent: ActionXenoBase
+  name: Fortify
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: fortify
+    event: !type:XenoFortifyActionEvent
+    useDelay: 5
