@@ -151,4 +151,8 @@ public sealed partial class XenoComponent : Component
     [DataField]
     [ViewVariables(VVAccess.ReadWrite)]
     public FixedPoint2 PheromonesMultiplier = 1;
+
+    [DataField, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool OnWeeds;
 }

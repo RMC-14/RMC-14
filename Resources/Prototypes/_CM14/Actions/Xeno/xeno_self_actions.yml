@@ -72,3 +72,16 @@
       state: fortify
     event: !type:XenoFortifyActionEvent
     useDelay: 5
+
+- type: entity
+  id: ActionXenoResinWalker
+  parent: ActionXenoBase
+  name: Resin Walker
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: toggle_speed
+    event: !type:XenoResinWalkerActionEvent
+    useDelay: 0.25

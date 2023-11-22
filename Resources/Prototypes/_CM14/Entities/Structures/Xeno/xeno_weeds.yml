@@ -1,79 +1,4 @@
 ﻿- type: entity # TODO CM14 description and sound
-  parent: CMEntityBase
-  id: XenoWeedsSource
-  name: alien weeds
-  placement:
-    mode: SnapgridCenter
-    snap:
-    - Wall
-  components:
-  - type: Transform
-    anchored: true
-  - type: XenoWeeds
-  - type: Clickable
-  - type: EdgeSpreader
-    id: XenoWeeds
-  - type: ActiveEdgeSpreader
-  - type: Sprite
-    sprite: _CM14/Structures/Xenos/xeno_weeds.rsi
-    drawdepth: FloorTiles
-    layers:
-    - state: weed0
-    - state: constructionnode
-  - type: IconSmooth
-    key: cm_xeno_weeds
-    base: weed_dir
-    mode: CardinalFlags
-  - type: IconSmoothRandom
-    overrides:
-    - weed_dir0
-    - weed_dir15
-  - type: RandomSprite
-    available:
-    - 0:
-        weed0: ""
-    - 0:
-        weed1: ""
-    - 0:
-        weed2: ""
-    - 0:
-        weed3: ""
-    - 0:
-        weed4: ""
-    - 0:
-        weed5: ""
-    - 0:
-        weed6: ""
-    - 0:
-        weed7: ""
-    - 0:
-        weed8: ""
-    - 0:
-        weed9: ""
-    - 0:
-        weed10: ""
-    - 0:
-        weed11: ""
-    - 0:
-        weed12: ""
-    - 0:
-        weed13: ""
-    - 0:
-        weed14: ""
-    - 0:
-        weed15: ""
-#  - type: SlowContacts # TODO CM14 slow down
-#    walkSpeedModifier: 0.5
-#    sprintSpeedModifier: 0.5
-#  - type: Physics
-#    bodyType: Static
-#  - type: FootstepModifier
-#    footstepSoundCollection:
-#      collection: FootstepWater
-#      params:
-#        volume: 8
-
-- type: entity # TODO CM14 description and sound
   id: XenoWeeds
   name: weeds
   placement:
@@ -83,6 +8,20 @@
   components:
   - type: Transform
     anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        layer:
+        - SlipLayer
+        mask:
+        - ItemMask
+        density: 1000
+        hard: false
   - type: XenoWeeds
   - type: Clickable
   - type: EdgeSpreader
@@ -147,21 +86,30 @@
 #        volume: 8
 
 - type: entity # TODO CM14 description and sound
+  parent: XenoWeeds
+  id: XenoWeedsSource
+  name: resin node
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Xenos/xeno_weeds.rsi
+    drawdepth: FloorTiles
+    layers:
+    - state: weed0
+    - state: constructionnode
+
+- type: entity # TODO CM14 description and sound
   id: XenoHiveWeeds
+  parent: XenoWeeds
   name: hive weeds
   placement:
     mode: SnapgridCenter
     snap:
     - Wall
   components:
-  - type: Transform
-    anchored: true
   - type: XenoWeeds
     spawns: XenoHiveWeeds
-  - type: Clickable
   - type: EdgeSpreader
-    id: XenoWeeds
-  - type: ActiveEdgeSpreader
+    id: XenoHiveWeeds
   - type: Sprite
     sprite: _CM14/Structures/Xenos/xeno_weeds.rsi
     drawdepth: FloorTiles
@@ -209,16 +157,18 @@
         hive_weed14: ""
     - 0:
         hive_weed15: ""
-#  - type: SlowContacts # TODO CM14 slow down
-#    walkSpeedModifier: 0.5
-#    sprintSpeedModifier: 0.5
-#  - type: Physics
-#    bodyType: Static
-#  - type: FootstepModifier
-#    footstepSoundCollection:
-#      collection: FootstepWater
-#      params:
-#        volume: 8
+
+- type: entity # TODO CM14 description and sound
+  parent: XenoHiveWeeds
+  id: XenoHiveWeedsSource
+  name: hive resin node
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Xenos/xeno_weeds.rsi
+    drawdepth: FloorTiles
+    layers:
+    - state: hive_weed0
+    - state: constructionnode
 
 - type: edgeSpreader
   id: XenoWeeds
