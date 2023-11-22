@@ -13,10 +13,10 @@
   icon: "JobIconCMQuartermaster"
   requireAdminNotify: false
   joinNotifyCrew: true
-  supervisors: job-supervisors-command #TODO CM14
+  supervisors: job-supervisors-command
   canBeAntag: false
   #accessGroups:
-  #- CEQM
+  - CEQM
 
 - type: startingGear
   id: CMQuartermasterGear

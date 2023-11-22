@@ -15,8 +15,8 @@
   icon: "JobIconHospitalCorpsman"
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
-  #accessGroups:
-  #-
+  accessGroups:
+  -
 
 # TODO cm14 Remove this later
 - type: entity

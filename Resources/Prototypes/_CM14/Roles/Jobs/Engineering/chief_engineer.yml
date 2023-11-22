@@ -18,8 +18,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-command
   canBeAntag: false
-  #accessGroups:
-  #- CMCE
+  accessGroups:
+  - CMCE
 
 - type: startingGear
   id: CMChiefEngineerGear

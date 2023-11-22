@@ -27,8 +27,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-highcommand
   canBeAntag: false
-  #accessGroups:
-  #- ShipMasterAccess
+  accessGroups:
+  - ShipMasterAccess
 
 - type: startingGear
   id: CommandingOfficerGear

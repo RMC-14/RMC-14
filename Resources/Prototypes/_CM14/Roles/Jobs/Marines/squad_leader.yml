@@ -15,8 +15,8 @@
   icon: "JobIconSquadLeader"
   supervisors: job-supervisors-command
   canBeAntag: false
-  #accessGroups:
-  #-
+  accessGroups:
+  -
 
 - type: startingGear
   id: SquadLeaderGear

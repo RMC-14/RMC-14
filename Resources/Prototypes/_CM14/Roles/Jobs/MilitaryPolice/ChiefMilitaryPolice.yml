@@ -18,8 +18,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-command
   canBeAntag: false
-  #accessGroups:
-  #- CMP
+  accessGroups:
+  - CMP
 
 - type: startingGear #todo cm14
   id: ChiefMPGear

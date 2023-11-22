@@ -14,8 +14,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-command
   canBeAntag: false
-  #accessGroups:
-  #- IntelOfficer
+  accessGroups:
+  - IntelOfficer
 
 - type: startingGear
   id: IntelOfficerGear

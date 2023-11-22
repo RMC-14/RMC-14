@@ -15,8 +15,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-chiefmp
   canBeAntag: false
-  #accessGroups:
-  #- CMWarden
+  accessGroups:
+  - CMWarden
 
 - type: startingGear
   id: MilitaryWardenGear

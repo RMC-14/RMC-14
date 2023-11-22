@@ -14,8 +14,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-command
   canBeAntag: false
-  #accessGroups:
-  #- PilotOfficer
+  accessGroups:
+  - PilotOfficer
 
 - type: startingGear
   id: PilotOfficerGear

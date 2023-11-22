@@ -12,8 +12,8 @@
   icon: "JobIconSmartgunner"
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
-  #accessGroups:
-  #-
+  accessGroups:
+  -
 
 - type: startingGear
   id: SmartgunnerGear

@@ -14,8 +14,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-cm-chief-engineer
   canBeAntag: true
-  #accessGroups:
-  #- OT
+  accessGroups:
+  - OT
 
 - type: startingGear
   id: OrdnanceTechGear

@@ -10,8 +10,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-command
   canBeAntag: true
-  #accessGroups:
-  #- Correspondent
+  accessGroups:
+  - Correspondent
 
 - type: startingGear
   id: CorrespondentGear

@@ -10,8 +10,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-cm-cmo
   canBeAntag: true
-  #accessGroups:
-  #- CMMedical
+  accessGroups:
+  - CMMedical
 
 - type: startingGear
   id: NurseGear

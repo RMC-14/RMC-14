@@ -8,8 +8,8 @@
   icon: "JobIconRifleman"
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
-  #accessGroups:
-  #-
+  accessGroups:
+  -
 
 - type: startingGear
   id: RiflemanGear

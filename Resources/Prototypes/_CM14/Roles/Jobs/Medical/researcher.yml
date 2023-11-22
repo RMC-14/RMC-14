@@ -14,8 +14,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-cm-cmo
   canBeAntag: true
-  #accessGroups:
-  #- Researcher
+  accessGroups:
+  - Researcher
 
 - type: startingGear
   id: ResearcherGear

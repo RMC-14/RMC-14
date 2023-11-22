@@ -14,8 +14,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-cm-chief-engineer
   canBeAntag: true
-  #accessGroups:
-  #- MaintTech
+  accessGroups:
+  - MaintTech
 
 - type: startingGear
   id: MaintTechGear

@@ -10,8 +10,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-cm-quartermaster
   canBeAntag: true
-  #accessGroups:
-  # - CMCargoTech
+  accessGroups:
+  - CMCargoTech
 
 - type: startingGear
   id: CMCargoTechGear

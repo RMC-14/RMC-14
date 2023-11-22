@@ -12,8 +12,8 @@
   icon: "JobIconWeaponsSpecialist"
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
-  #accessGroups:
-  # Prep
+  accessGroups:
+  -
 
 - type: startingGear
   id: WeaponsSpecialistGear

@@ -18,8 +18,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-command
   canBeAntag: false
-  #accessGroups:
-  #- MarineMain
+  accessGroups:
+  - MarineMain
 
 - type: startingGear
   id: ExecutiveOfficerGear

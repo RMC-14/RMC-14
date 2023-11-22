@@ -20,8 +20,8 @@
   joinNotifyCrew: false
   supervisors: job-supervisors-nobody
   canBeAntag: false
-  #accessGroups:
-  #- Colony
+  accessGroups:
+  - Colony
 
 - type: startingGear
   id: SurvivorGear

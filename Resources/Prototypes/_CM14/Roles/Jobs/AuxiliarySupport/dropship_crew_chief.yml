@@ -10,8 +10,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-command
   canBeAntag: true
-  #accessGroups:
-  #- DropshipCrewChief
+  accessGroups:
+  - DropshipCrewChief
 
 - type: startingGear
   id: DCCGear

@@ -15,8 +15,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-command
   canBeAntag: false
-  #accessGroups:
-  #- ASO
+  accessGroups:
+  - ASO
 
 - type: startingGear
   id: ASOGear

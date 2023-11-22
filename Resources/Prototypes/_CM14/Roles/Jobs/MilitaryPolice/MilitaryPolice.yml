@@ -15,8 +15,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-militarywarden
   canBeAntag: false
-  #accessGroups:
-  #- MP
+  accessGroups:
+  - MP
 
 - type: startingGear
   id: MilitaryPoliceGear
