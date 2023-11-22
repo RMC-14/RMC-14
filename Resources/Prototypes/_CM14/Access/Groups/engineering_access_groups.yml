@@ -1,0 +1,25 @@
+﻿- type: accessGroup
+  id: CMCE
+  tags:
+  - CMAccessCE
+  - CMAccessEngineering
+  - CMAccessCommand
+  - CMAccessCommand
+  - CMAccessColonyEngineering
+  - CMAccessMaint
+  - CMAccessOT
+
+- type: accessGroup
+  id: OT
+  tags:
+  - CMAccessEngineering
+  - CMAccessColonyEngineering
+  - CMAccessMaint
+  - CMAccessOT
+
+- type: accessGroup
+  id: MaintTech
+  tags:
+  - CMAccessEngineering
+  - CMAccessColonyEngineering
+  - CMAccessMaint

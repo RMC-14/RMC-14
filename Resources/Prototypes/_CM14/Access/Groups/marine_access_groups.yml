@@ -1,0 +1,51 @@
+﻿# marines will be given squad access when they spawn, based on assignment.
+
+- type: accessGroup
+  id: SquadLeader
+  tags:
+  - CMAccessMarinePrep
+  - CMAccessSquadLeaderPrep
+  - CMAccessDropship
+
+- type: accessGroup
+  id: FTL
+  tags:
+  - CMAccessMarinePrep
+  - CMAccessFTLPrep
+  - CMAccessDropship
+
+- type: accessGroup
+  id: WeaponSpec
+  tags:
+  - CMAccessMarinePrep
+  - CMAccessSpecPrep
+  - CMAccessDropship
+
+- type: accessGroup
+  id: Smartgunner
+  tags:
+  - CMAccessMarinePrep
+  - CMAccessSmartPrep
+  - CMAccessDropship
+
+- type: accessGroup
+  id: HospitalCorpsman
+  tags:
+  - CMAccessMarinePrep
+  - CMAccessMedPrep
+  - CMAccessDropship
+
+- type: accessGroup
+  id: CombatTech
+  tags:
+  - CMAccessMarinePrep
+  - CMAccessCombatTechPrep
+  - CMAccessDropship
+
+# this exists because other squad members will have their own equipment vendors.
+- type: accessGroup
+  id: Rifleman
+  tags:
+  - CMAccessMarineRifleman
+  - CMAccessMarinePrep
+  - CMAccessDropship

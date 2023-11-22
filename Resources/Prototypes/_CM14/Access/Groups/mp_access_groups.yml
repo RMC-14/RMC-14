@@ -1,0 +1,50 @@
+﻿- type: accessGroup
+  id: CMP
+  tags:
+  - CMAccessBrig
+  - CMAccessArmory
+  - CMAccessCommand
+  - CMAccessDropship
+  - CMAccessMarinePrep
+  - CMAccessCMP
+  - CMAccessMedical
+  - CMAccessAlpha
+  - CMAccessBravo
+  - CMAccessCharlie
+  - CMAccessDelta
+  - CMAccessEngineering
+  - CMAccessMaint
+  - CMAccessOT
+
+- type: accessGroup
+  id: MP
+  tags:
+  - CMAccessBrig
+  - CMAccessCommand
+  - CMAccessDropship
+  - CMAccessMarinePrep
+  - CMAccessMedical
+  - CMAccessAlpha
+  - CMAccessBravo
+  - CMAccessCharlie
+  - CMAccessDelta
+  - CMAccessEngineering
+  - CMAccessMaint
+  - CMAccessOT
+
+- type: accessGroup
+  id: CMWarden
+  tags:
+  - CMAccessBrig
+  - CMAccessCommand
+  - CMAccessDropship
+  - CMAccessMarinePrep
+  - CMAccessArmory
+  - CMAccessMedical
+  - CMAccessAlpha
+  - CMAccessBravo
+  - CMAccessCharlie
+  - CMAccessDelta
+  - CMAccessEngineering
+  - CMAccessMaint
+  - CMAccessOT
