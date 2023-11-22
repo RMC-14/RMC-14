@@ -10,6 +10,9 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
+using Robust.Shared.Physics.Systems;
+using static Content.Shared._CM14.Xenos.Fortify.XenoFortifyComponent;
+using static Content.Shared.Physics.CollisionGroup;
 
 namespace Content.Shared._CM14.Xenos.Fortify;
 
@@ -18,7 +21,9 @@ public sealed class XenoFortifySystem : EntitySystem
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly FixtureSystem _fixtures = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -43,7 +48,7 @@ public sealed class XenoFortifySystem : EntitySystem
 
     private void OnXenoFortifyAction(Entity<XenoFortifyComponent> xeno, ref XenoFortifyActionEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || !TryComp(xeno, out TransformComponent? transform))
             return;
 
         var attempt = new XenoFortifyAttemptEvent();
@@ -56,6 +61,17 @@ public sealed class XenoFortifySystem : EntitySystem
 
         xeno.Comp.Fortified = !xeno.Comp.Fortified;
         Dirty(xeno);
+
+        if (xeno.Comp.Fortified)
+        {
+            _fixtures.TryCreateFixture(xeno, xeno.Comp.Shape, FixtureId, hard: true, collisionLayer: (int) WallLayer);
+            _transform.AnchorEntity((xeno, transform));
+        }
+        else
+        {
+            _fixtures.DestroyFixture(xeno, FixtureId);
+            _transform.Unanchor(xeno, transform);
+        }
 
         _actionBlocker.UpdateCanMove(xeno);
         _appearance.SetData(xeno, XenoVisualLayers.Fortify, xeno.Comp.Fortified);
