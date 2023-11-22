@@ -77,3 +77,9 @@
   - CMAccessSmartPrep
   - CMAccessSpecPrep
   - CMAccessSquadLeaderPrep
+
+# Corp access, probably not needed
+- type: accessGroup
+  id: Corp
+  tags:
+  - CMAccessCorp

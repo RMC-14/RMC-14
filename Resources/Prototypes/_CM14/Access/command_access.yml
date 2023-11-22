@@ -29,3 +29,7 @@
 - type: accessLevel
   id: CMAccessASO
   name: job-name-aso
+
+- type: accessLevel
+  id: CMAccessCorp
+  name: job-name-corp # this won't exist until test 2
