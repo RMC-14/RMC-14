@@ -15,17 +15,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-militarywarden
   canBeAntag: false
-  access:
-  - Brig
-  - Command
-  - External # dropship?
-  #database
-  #prep
-  - Medical
-  # morgue
-  # alpha bravo charlie delta
-  - Engineering
-  - Maintenance
+  accessGroups:
+  - MP
 
 - type: startingGear
   id: MilitaryPoliceGear
@@ -38,11 +29,9 @@
     gloves: CMHandsBlack
     id: MilitaryPoliceIDCard
     outerClothing: CMArmorM2MP
-    ears: ClothingHeadsetSecurity
+    ears: CMHeadsetMPO
     belt: ClothingBeltSecurityFilled
-  innerClothingSkirt: CMJumpsuitMPBlack
   satchel: ClothingBackpackSatchelSecurityFilled
-  duffelbag: ClothingBackpackDuffelSecurityFilled
 
 - type: entity
   id: SpawnPointMilitaryPolice

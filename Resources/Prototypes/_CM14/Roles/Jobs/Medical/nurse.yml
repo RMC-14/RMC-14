@@ -10,8 +10,8 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-cm-cmo
   canBeAntag: true
-  access:
-  - Medical
+  accessGroups:
+  - CMMedical
 
 - type: startingGear
   id: NurseGear
@@ -22,10 +22,8 @@
     shoes: CMShoesCombatBoots
     head: CMHeadCapSurgOrange
     id: NurseIDCard
-    ears: ClothingHeadsetMedical
-  innerClothingSkirt: CMScrubsNurse
+    ears: CMHeadsetMedical
   satchel: ClothingBackpackSatchelMedicalFilled
-  duffelbag: ClothingBackpackDuffelMedicalFilled
 
 - type: entity
   id: CMSpawnPointNurse

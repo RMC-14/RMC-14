@@ -15,10 +15,8 @@
   icon: "JobIconSquadLeader"
   supervisors: job-supervisors-command
   canBeAntag: false
-  #access:
-  # Prep
-  # Leader
-  # Dropship
+  accessGroups:
+  - SquadLeader
 
 - type: startingGear
   id: SquadLeaderGear
@@ -30,10 +28,8 @@
     outerClothing: ArmorMarineM3
     gloves: CMHandsBlack
     id: DogtagSquadLeader
-    ears: ClothingHeadsetSecurity
-  innerClothingSkirt: CMJumpsuitMarineRTO
+    ears: CMHeadsetAlphaLeader
   satchel: ClothingBackpackSatchelSecurityFilled
-  duffelbag: ClothingBackpackDuffelSecurityFilled
 
 - type: entity
   id: SpawnPointSquadLeader
