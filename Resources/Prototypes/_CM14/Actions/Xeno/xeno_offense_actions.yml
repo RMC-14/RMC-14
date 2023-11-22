@@ -79,4 +79,3 @@
       state: tail_sweep
     event: !type:XenoTailSweepActionEvent
     useDelay: 15
-    checkCanAccess: false
