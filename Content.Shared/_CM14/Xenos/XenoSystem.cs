@@ -41,6 +41,9 @@ public sealed class XenoSystem : EntitySystem
                 xeno.Comp.Actions[actionId] = newAction;
             }
         }
+
+        xeno.Comp.OnWeeds = _xenoConstruction.IsOnWeeds(xeno.Owner);
+        Dirty(xeno);
     }
 
     private void OnXenoUnpaused(Entity<XenoComponent> xeno, ref EntityUnpausedEvent args)
@@ -66,7 +69,7 @@ public sealed class XenoSystem : EntitySystem
 
             xeno.NextRegenTime = time + xeno.PlasmaRegenCooldown;
 
-            if (_xenoConstruction.IsOnWeeds(uid))
+            if (xeno.OnWeeds)
             {
                 HealDamage(uid, xeno.HealthRegenOnWeeds);
                 _xenoPlasma.RegenPlasma((uid, xeno), xeno.PlasmaRegenOnWeeds);
