@@ -23,6 +23,7 @@
     - ActionXenoTailStab # TODO CM14 name it "tail slam"
     - ActionXenoToggleCrest
     - ActionXenoHeadbutt
+    - ActionXenoTailSweep
     plasma: 100 # TODO CM14
     maxPlasma: 100
     plasmaRegenOnWeeds: 6
@@ -34,3 +35,7 @@
       types:
         Blunt: 30 # TODO CM14 penetrating damage
   - type: XenoAnimateMovement
+  - type: XenoTailSweep
+    damage:
+      types:
+        Slash: 30
