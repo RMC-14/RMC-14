@@ -40,8 +40,8 @@
   id: CMAccessPress
   name: cm-access-press
 
-#chapel
-- type: accessLevel
-  id: CMAccessChaplain
-  name: id-card-access-level-chapel
+#chapel probably not needed
+#- type: accessLevel
+#  id: CMAccessChaplain
+#  name: id-card-access-level-chapel
 
