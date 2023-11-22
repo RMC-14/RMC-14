@@ -15,7 +15,7 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-command
   canBeAntag: false
-  #accessGroups:
+  accessGroups:
   - CEQM
 
 - type: startingGear
