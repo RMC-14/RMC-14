@@ -109,7 +109,7 @@
   - type: XenoWeeds
     spawns: XenoHiveWeeds
   - type: EdgeSpreader
-    id: XenoHiveWeeds
+    id: XenoWeeds
   - type: Sprite
     sprite: _CM14/Structures/Xenos/xeno_weeds.rsi
     drawdepth: FloorTiles
