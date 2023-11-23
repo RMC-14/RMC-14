@@ -45,3 +45,43 @@
       sprite: _CM14/Actions/xeno_actions.rsi
       state: xenohide
     event: !type:XenoHideActionEvent
+
+- type: entity
+  id: ActionXenoToggleCrest
+  parent: ActionXenoBase
+  name: Toggle Crest Defense
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: crest_defense
+    event: !type:XenoToggleCrestActionEvent
+    useDelay: 2
+  - type: XenoCrestAction
+
+- type: entity
+  id: ActionXenoFortify
+  parent: ActionXenoBase
+  name: Fortify
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: fortify
+    event: !type:XenoFortifyActionEvent
+    useDelay: 5
+
+- type: entity
+  id: ActionXenoResinWalker
+  parent: ActionXenoBase
+  name: Resin Walker
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: toggle_speed
+    event: !type:XenoResinWalkerActionEvent
+    useDelay: 0.25

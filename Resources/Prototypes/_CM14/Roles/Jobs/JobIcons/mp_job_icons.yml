@@ -1,20 +1,20 @@
 # Military Police
 - type: statusIcon
-  parent: JobIcon
+  parent: CMJobIconBase
   id: JobIconChiefMP
   icon:
     sprite: _CM14/Interface/cm_job_icons.rsi
     state: hudsquad_cmp
 
 - type: statusIcon
-  parent: JobIcon
+  parent: CMJobIconBase
   id: JobIconMilitaryWarden
   icon:
     sprite: _CM14/Interface/cm_job_icons.rsi
     state: hudsquad_warden
 
 - type: statusIcon
-  parent: JobIcon
+  parent: CMJobIconBase
   id: JobIconMilitaryPolice
   icon:
     sprite: _CM14/Interface/cm_job_icons.rsi

@@ -12,32 +12,24 @@
       role: JobFireteamLeader
       time: 10800 #3 hrs
   startingGear: SquadLeaderGear
-  icon: "JobIconCaptain"
+  icon: "JobIconSquadLeader"
   supervisors: job-supervisors-command
   canBeAntag: false
-  access:
-  - Security
-  - Brig
-  - Maintenance
-  - Service
-  - External
+  accessGroups:
+  - SquadLeader
 
 - type: startingGear
   id: SquadLeaderGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSec
+    jumpsuit: CMJumpsuitMarineRTO
     back: ClothingBackpackSecurityFilled
-    shoes: ClothingShoesBootsCombatFilled
-    eyes: ClothingEyesGlassesSecurity
-    head: ClothingHeadHelmetBasic
-    outerClothing: ClothingOuterArmorBasic
+    shoes: CMShoesCombatBoots
+    head: CMArmorHelmetM11
+    outerClothing: ArmorMarineM3
+    gloves: CMHandsBlack
     id: DogtagSquadLeader
-    ears: ClothingHeadsetSecurity
-    belt: ClothingBeltSecurityFilled
-    pocket1: WeaponPistolMk58Nonlethal
-  innerClothingSkirt: ClothingUniformJumpskirtSec
+    ears: CMHeadsetAlphaLeader
   satchel: ClothingBackpackSatchelSecurityFilled
-  duffelbag: ClothingBackpackDuffelSecurityFilled
 
 - type: entity
   id: SpawnPointSquadLeader

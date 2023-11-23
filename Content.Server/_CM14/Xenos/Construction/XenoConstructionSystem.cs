@@ -1,20 +1,34 @@
 ﻿using System.Numerics;
 using Content.Server.Spreader;
 using Content.Shared._CM14.Xenos.Construction;
+using Content.Shared.Coordinates.Helpers;
 using Robust.Server.GameObjects;
+using Robust.Shared.Map;
 using XenoWeedsComponent = Content.Shared._CM14.Xenos.Construction.XenoWeedsComponent;
 
 namespace Content.Server._CM14.Xenos.Construction;
 
 public sealed class XenoConstructionSystem : SharedXenoConstructionSystem
 {
+    [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
+    [Dependency] private readonly TransformSystem _transform = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
+        SubscribeLocalEvent<HiveCoreComponent, MapInitEvent>(OnHiveCoreMapInit);
         SubscribeLocalEvent<XenoWeedsComponent, SpreadNeighborsEvent>(OnWeedsSpreadNeighbors);
+    }
+
+    private void OnHiveCoreMapInit(Entity<HiveCoreComponent> ent, ref MapInitEvent args)
+    {
+        if (TryComp(ent, out TransformComponent? transform))
+        {
+            var coordinates = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager, _map);
+            Spawn(ent.Comp.Spawns, coordinates);
+        }
     }
 
     private void OnWeedsSpreadNeighbors(Entity<XenoWeedsComponent> ent, ref SpreadNeighborsEvent args)

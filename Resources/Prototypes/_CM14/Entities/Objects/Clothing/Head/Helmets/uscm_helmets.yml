@@ -1,13 +1,14 @@
-﻿- type: entity
+﻿# m10
+- type: entity
   parent: [ClothingHeadBase, CMEntityBase]
   id: ArmorHelmetM10
   name: M10 Marine Helmet
   description: A standard M10 Pattern Helmet. The inside label, along with washing information, reads, 'The difference between an open-casket and closed-casket funeral. Wear on head for best results.'. There is a built-in camera on the right side.
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/Head/Helmets/m10.rsi
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/standard.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/Head/Helmets/m10.rsi
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/standard.rsi
   - type: Armor 
     modifiers:
       coefficients:
@@ -23,9 +24,9 @@
   description: A special variant of the M10 Pattern Helmet worn by the Military Police of the USCM.
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/Head/Helmets/m10_mp.rsi
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/mp.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/Head/Helmets/m10_mp.rsi
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/mp.rsi
 
 - type: entity
   parent: ArmorHelmetM10
@@ -34,6 +35,123 @@
   description: A special variant of the M10 Pattern Helmet worn by the Chief MP of the USCM.
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/Head/Helmets/m10_cmp.rsi
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/cmp.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/Head/Helmets/m10_cmp.rsi
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/cmp.rsi
+
+- type: entity
+  parent: ArmorHelmetM10
+  id: CMArmorHelmetM10CO
+  name: M10 Helmet CO
+  description: A special variant of the M10 Pattern Helmet worn by the Commanding Officer of the USCM.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/co.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/co.rsi
+
+- type: entity
+  parent: ArmorHelmetM10
+  id: CMArmorHelmetM10Medic
+  name: M10 Medic Helmet
+  description: A special variant of the M10 Pattern Helmet worn by the medic marines of the USCM.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/med.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/med.rsi
+
+# M11
+- type: entity
+  parent: ArmorHelmetM10
+  id: CMArmorHelmetM11
+  name: M11 Pattern Leader Helmet
+  description: A slightly fancier helmet for marine leaders. This one contains a small built-in camera and has cushioning to project your fragile brain. 
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m11.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m11.rsi
+
+# M12
+- type: entity
+  parent: ArmorHelmetM10
+  id: CMArmorHelmetM12
+  name: M12 Pattern Helmet
+  description: An experimental brain-bucket. A dust ruffle hangs from back. Moderately better at deflecting blunt objects at the cost of humiliation. But who will be laughing at the memorial? Not you, you'll be busy getting medals for your intel work or for your fantastic leadership. 
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m12.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m12.rsi
+
+# M30
+- type: entity
+  parent: ArmorHelmetM10
+  id: CMArmorHelmetM30
+  name: M30 Tactical Helmet
+  description: The M30 tactical helmet has an left eyepiece filter used to filter tactical data.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m30.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m30.rsi
+
+# Press
+- type: entity
+  parent: ArmorHelmetM10
+  id: CMArmorHelmetPress
+  name: press helmet
+  description: A special helmet variant worn by the press.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Helmets/press.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Helmets/press.rsi
+
+# m3
+- type: entity
+  parent: ArmorHelmetM10
+  id: CMArmorHelmetM3Scout
+  name: M3-S Helmet
+  description: A custom helmet from the M3 series designed to be lightweight and used for recon missions. 
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m3/scout.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m3/scout.rsi
+
+- type: entity
+  parent: CMArmorHelmetM3Scout
+  id: CMArmorHelmetM3G4
+  name: M3-G4 Helmet
+  description: Pairs with the M3-G4 heavy grenadier plating. A distant cousin of the experimental B18 defensive helmet. As such, it also resists some facehugger latching attempts.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m3/g4.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m3/g4.rsi
+
+# m35
+- type: entity
+  parent: ArmorHelmetM10
+  id: CMArmorHelmetM35
+  name: M35 Helmet
+  description: A custom helmet from the M3 series designed to be highly flame retardant. 
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m35.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m35.rsi
+
+# m45
+- type: entity
+  parent: ArmorHelmetM10
+  id: CMArmorHelmetM45
+  name: M45 Ghillie Helmet
+  description: A lightweight M45 helmet with ghillie coif used by USCM snipers on recon missions. 
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m45.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m45.rsi

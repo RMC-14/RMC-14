@@ -8,8 +8,11 @@ namespace Content.Shared._CM14.Xenos.Construction.Events;
 [Serializable, NetSerializable]
 public sealed partial class XenoSecreteStructureDoAfterEvent : DoAfterEvent
 {
+    [DataField]
     public NetCoordinates Coordinates;
-    public EntProtoId StructureId;
+
+    [DataField]
+    public EntProtoId StructureId = "WallXenoResin";
 
     public XenoSecreteStructureDoAfterEvent(NetCoordinates coordinates, EntProtoId structureId)
     {

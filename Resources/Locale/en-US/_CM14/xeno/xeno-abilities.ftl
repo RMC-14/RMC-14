@@ -3,10 +3,23 @@ cm-xeno-not-enough-plasma = You don't have enough plasma!
 
 # Costruction
 cm-xeno-choose-resin-structure = Choose Resin Structure
+cm-xeno-order-construction = Build Structure
+cm-xeno-too-close-to-other-node = This is too close to {THE($target)}!
+cm-xeno-requires-more-plasma = {THE($construction)} requires {$plasma} more plasma.
+cm-xeno-construction-plasma-left = A {$construction} construction is designated here. It requires [color=cyan]{$plasma}[/color] more plasma.
 cm-xeno-cant-reach-there = You can't reach there!
 
 # Evolve
 cm-xeno-available-evolutions = Available Evolutions
+
+# Fortify
+cm-xeno-fortify-cant-headbutt = You can't headbutt while fortifying!
+cm-xeno-fortify-cant-rest = You can't rest while fortifying!
+cm-xeno-fortify-cant-tail-sweep = You can't tail sweep while fortifying!
+cm-xeno-fortify-cant-toggle-crest = You can't lower your crest while fortifying!
+
+# Leap
+cm-xeno-leap-cancelled = You cancel your leap!
 
 # Plant weeds
 cm-xeno-weeds-already-here = There are already weeds here!
@@ -28,6 +41,21 @@ cm-xeno-pheromones-stop = You stop emitting pheromones
 
 # Regurgitate
 cm-xeno-none-devoured = You haven't devoured anyone!
+
+# Rest
+cm-xeno-rest-cant-headbutt = You can't headbutt while resting!
+cm-xeno-rest-cant-fortify = You can't fortify while resting!
+cm-xeno-rest-cant-tail-sweep = You can't tail sweep while resting!
+cm-xeno-rest-cant-toggle-crest = You can't lower your crest while resting!
+
+# Toggle Crest Defense
+cm-xeno-toggle-crest-cant-fortify = You can't fortify while your crest is lowered!
+cm-xeno-toggle-crest-cant-rest = You can't rest while your crest is lowered!
+cm-xeno-toggle-crest-cant-tail-sweep = You can't tail sweep while your crest is lowered!
+
+# Transfer Plasma
+cm-xeno-plasma-transferred-to-other = You have transferred {$plasma} plasma to {$target}. You now have {$total}
+cm-xeno-plasma-transferred-to-self = {$target} has transferred {$plasma} plasma to you. You now have {$total}
 
 # Watch
 cm-xeno-watch = Watch Xeno

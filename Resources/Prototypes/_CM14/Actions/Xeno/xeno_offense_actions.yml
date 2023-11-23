@@ -36,3 +36,46 @@
     range: 15
     useDelay: 10
     checkCanAccess: false
+
+- type: entity
+  id: ActionXenoLeap
+  parent: ActionXenoBase
+  name: Leap # TODO CM14 description
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: pounce
+    event: !type:XenoLeapActionEvent
+    range: 15
+    useDelay: 3
+    checkCanAccess: false
+
+- type: entity
+  id: ActionXenoHeadbutt
+  parent: ActionXenoBase
+  name: Headbutt # TODO CM14 description
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: headbutt
+    event: !type:XenoHeadbuttActionEvent
+    range: 15
+    useDelay: 6
+    checkCanAccess: false
+
+- type: entity
+  id: ActionXenoTailSweep
+  parent: ActionXenoBase
+  name: Tail Sweep # TODO CM14 description
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: tail_sweep
+    event: !type:XenoTailSweepActionEvent
+    useDelay: 15

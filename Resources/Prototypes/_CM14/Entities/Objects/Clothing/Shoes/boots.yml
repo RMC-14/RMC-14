@@ -2,7 +2,7 @@
   parent: [ClothingShoesStorageBase, CMEntityBase]
   id: CMShoesCombatBoots
   name: combat boots
-  description: Standard issue combat boots used by the USCM for combat situations.
+  description: Standard issue combat boots used by the USCM for combat situations.  All combat, all the time.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Shoes/Boots/marine.rsi
@@ -12,14 +12,17 @@
   - type: Storage
     whitelist:
       tags:
-        - Knife
-        - Sidearm
+      - Knife
+      - Sidearm
+  - type: StorageFill
+    contents:
+    - id: M5Bayonet
 
 - type: entity
   parent: CMShoesCombatBoots
   id: CMShoesCombatBootsBrown
   name: combat boots brown
-  description: Standard issue combat boots used by the USCM for combat situations.
+  description: Standard issue combat boots used by the USCM for combat situations. All combat, all the time. These are brown.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Shoes/Boots/marine_brown.rsi
@@ -30,7 +33,6 @@
   parent: CMShoesCombatBoots
   id: CMShoesCombatBootsJungle
   name: combat boots jungle
-  description: Standard issue combat boots used by the USCM for combat situations.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Shoes/Boots/marine_jungle.rsi

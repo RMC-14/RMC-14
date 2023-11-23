@@ -10,9 +10,9 @@ public sealed class SquadSystem : EntitySystem
             before: new[] { typeof(SharedMarineSystem) });
     }
 
-    private void OnSquadRoleGetIcon(Entity<SquadMemberComponent> ent, ref GetMarineIconEvent args)
+    private void OnSquadRoleGetIcon(Entity<SquadMemberComponent> member, ref GetMarineIconEvent args)
     {
-        args.Icons.Add(ent.Comp.Background);
+        args.Icons.Add(member.Comp.Background);
     }
 
     public void SetSquad(EntityUid marine, Entity<SquadTeamComponent?> team)

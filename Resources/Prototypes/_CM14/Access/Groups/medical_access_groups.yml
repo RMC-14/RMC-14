@@ -1,0 +1,21 @@
+﻿- type: accessGroup
+  id: CMCMO
+  tags:
+  - CMAccessCMO
+  - CMAccessMedical
+  - CMAccessResearch
+  - CMAccessCommand
+  - CMAccessChemistry
+
+- type: accessGroup
+  id: CMMedical
+  tags:
+  - CMAccessMedical
+  - CMAccessChemistry
+
+- type: accessGroup
+  id: Researcher
+  tags:
+  - CMAccessMedical
+  - CMAccessResearch
+  - CMAccessChemistry

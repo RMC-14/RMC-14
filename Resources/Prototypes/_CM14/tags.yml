@@ -23,6 +23,9 @@
   id: MagazineRifleM4RA
 
 - type: Tag
+  id: CMMortarShell
+  
+- type: Tag
   id: CMBrutepack
 
 - type: Tag

@@ -1,0 +1,44 @@
+﻿- type: job
+  id: PilotOfficer
+  parent: JobBaseCM
+  name: job-name-pilot
+  description: job-description-pilot
+  playTimeTracker: JobPilotOfficer
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: Marine
+    time: 21600 # 6 hours
+  startingGear: PilotOfficerGear
+  icon: "JobIconPilotOfficer"
+  requireAdminNotify: false
+  joinNotifyCrew: true
+  supervisors: job-supervisors-command
+  canBeAntag: false
+  accessGroups:
+  - PilotOfficer
+
+- type: startingGear
+  id: PilotOfficerGear
+  equipment:
+    jumpsuit: CMJumpsuitPilot
+    outerClothing: CMArmorPlatePilot
+    back: ClothingBackpackFilled
+    gloves: CMHandsBrown
+    shoes: CMShoesCombatBoots
+    head: CMArmorHelmetM30
+    id: PilotOfficerIDCard
+    ears: CMHeadsetPilot
+  satchel: ClothingBackpackSatchelFilled
+
+- type: entity
+  id: CMSpawnPointPilot
+  parent: CMSpawnPointJobBase
+  name: pilot officer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: PilotOfficer
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: pilot

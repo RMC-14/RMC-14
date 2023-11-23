@@ -1,0 +1,47 @@
+- type: job
+  id: CMChiefEngineer
+  parent: JobBaseCM
+  name: job-name-cm-chief-engineer
+  description: job-description-cm-chief-engineer
+  playTimeTracker: JobCMChiefEngineer
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: MarineEngineering
+      time: 36000 # 10 hours
+    - !type:DepartmentTimeRequirement
+      department: MilitaryPolice
+      time: 3600 # 1 hour
+  weight: 5
+  startingGear: CMChiefEngineerGear
+  icon: "JobIconCMChiefEngineer"
+  requireAdminNotify: true
+  joinNotifyCrew: true
+  supervisors: job-supervisors-command
+  canBeAntag: false
+  accessGroups:
+  - CMCE
+
+- type: startingGear
+  id: CMChiefEngineerGear
+  equipment:
+    jumpsuit: CMJumpsuitChiefEngineer
+    back: ClothingBackpackChiefEngineerFilled
+    shoes: CMShoesCombatBootsBrown
+    gloves: CMHandsInsulated
+    id: CMChiefEngineerIDCard
+    ears: CMHeadsetCE
+    belt: ClothingBeltUtilityEngineering
+  satchel: ClothingBackpackSatchelChiefEngineerFilled
+
+- type: entity
+  id: CMSpawnPointChiefEngineer
+  parent: CMSpawnPointJobBase
+  name: chief engineer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMChiefEngineer
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: chief_engineer

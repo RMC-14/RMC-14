@@ -1,0 +1,32 @@
+﻿#These should be used for planet-side buildings that marines wouldn't have access to but survivors will.
+- type: accessLevel
+  id: CMAccessColonyPublic # anything on planet side that is locked and doesn't require the below accesses
+  name: cm-access-colony-public
+
+- type: accessLevel
+  id: CMAccessColonyLogistics
+  name: cm-access-colony-logistics
+
+- type: accessLevel
+  id: CMAccessColonyEngineering
+  name: cm-access-colony-engineering
+
+- type: accessLevel
+  id: CMAccessColonyResearch
+  name: cm-access-colony-research
+
+- type: accessLevel
+  id: CMAccessColonyBrig
+  name: cm-access-colony-brig
+
+- type: accessLevel
+  id: CMAccessColonyMedbay
+  name: cm-access-colony-medbay
+
+- type: accessLevel
+  id: CMAccessColonyCommand
+  name: cm-access-colony-command
+
+# this is used to allow colony doctors into their chem but not marine chem
+- type: accessLevel
+  id: CMAccessColonyChem

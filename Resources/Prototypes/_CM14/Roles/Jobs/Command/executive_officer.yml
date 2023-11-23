@@ -1,0 +1,47 @@
+﻿- type: job
+  id: ExecutiveOfficer
+  parent: JobBaseCM
+  name: job-name-executive-officer
+  description: job-description-executive-officer
+  playTimeTracker: JobExecutiveOfficer
+  requirements:
+  - !type:RoleTimeRequirement
+    role: JobStaffOfficer 
+    time: 18000 # 5 hours
+  - !type:DepartmentTimeRequirement
+    department: MilitaryPolice
+    time: 10800 # 3 hours
+  weight: 5
+  startingGear: StaffOfficerGear
+  icon: "JobIconExecutiveOfficer"
+  requireAdminNotify: true
+  joinNotifyCrew: true
+  supervisors: job-supervisors-command
+  canBeAntag: false
+  accessGroups:
+  - MarineMain
+
+- type: startingGear
+  id: ExecutiveOfficerGear
+  equipment:
+    jumpsuit: CMJumpsuitBO
+    back: ClothingBackpackCaptainFilled
+    shoes: CMShoesCombatBoots
+    head: CMHeadCap
+    outerClothing: CMCoatOfficer
+    id: ExecutiveOfficerIDCard
+    ears: CMHeadsetLeader
+  satchel: ClothingBackpackSatchelCaptainFilled
+
+- type: entity
+  id: SpawnPointExecutiveOfficer
+  parent: CMSpawnPointJobBase
+  name: executive officer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: ExecutiveOfficer
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: executive_officer

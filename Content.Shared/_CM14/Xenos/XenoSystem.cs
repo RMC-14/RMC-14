@@ -1,10 +1,9 @@
 ﻿using Content.Shared._CM14.Xenos.Construction;
+using Content.Shared._CM14.Xenos.Plasma;
 using Content.Shared.Access.Components;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
-using Content.Shared.Popups;
-using Content.Shared.Rejuvenate;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Xenos;
@@ -14,53 +13,48 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruction = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     private EntityQuery<DamageableComponent> _damageableQuery;
-    private EntityQuery<XenoComponent> _xenoQuery;
 
     public override void Initialize()
     {
         base.Initialize();
 
         _damageableQuery = GetEntityQuery<DamageableComponent>();
-        _xenoQuery = GetEntityQuery<XenoComponent>();
 
         SubscribeLocalEvent<XenoComponent, MapInitEvent>(OnXenoMapInit);
         SubscribeLocalEvent<XenoComponent, EntityUnpausedEvent>(OnXenoUnpaused);
         SubscribeLocalEvent<XenoComponent, GetAccessTagsEvent>(OnXenoGetAdditionalAccess);
-        SubscribeLocalEvent<XenoComponent, RejuvenateEvent>(OnXenoRejuvenate);
     }
 
-    private void OnXenoMapInit(Entity<XenoComponent> ent, ref MapInitEvent args)
+    private void OnXenoMapInit(Entity<XenoComponent> xeno, ref MapInitEvent args)
     {
-        ent.Comp.NextRegenTime = _timing.CurTime + ent.Comp.PlasmaRegenCooldown;
+        xeno.Comp.NextRegenTime = _timing.CurTime + xeno.Comp.PlasmaRegenCooldown;
 
-        foreach (var actionId in ent.Comp.ActionIds)
+        foreach (var actionId in xeno.Comp.ActionIds)
         {
-            if (!ent.Comp.Actions.ContainsKey(actionId) &&
-                _action.AddAction(ent, actionId) is { } newAction)
+            if (!xeno.Comp.Actions.ContainsKey(actionId) &&
+                _action.AddAction(xeno, actionId) is { } newAction)
             {
-                ent.Comp.Actions[actionId] = newAction;
+                xeno.Comp.Actions[actionId] = newAction;
             }
         }
+
+        xeno.Comp.OnWeeds = _xenoConstruction.IsOnWeeds(xeno.Owner);
+        Dirty(xeno);
     }
 
-    private void OnXenoUnpaused(Entity<XenoComponent> ent, ref EntityUnpausedEvent args)
+    private void OnXenoUnpaused(Entity<XenoComponent> xeno, ref EntityUnpausedEvent args)
     {
-        ent.Comp.NextRegenTime += args.PausedTime;
-        ent.Comp.NextPheromonesPlasmaUse += args.PausedTime;
+        xeno.Comp.NextRegenTime += args.PausedTime;
+        xeno.Comp.NextPheromonesPlasmaUse += args.PausedTime;
     }
 
-    private void OnXenoGetAdditionalAccess(Entity<XenoComponent> ent, ref GetAccessTagsEvent args)
+    private void OnXenoGetAdditionalAccess(Entity<XenoComponent> xeno, ref GetAccessTagsEvent args)
     {
-        args.Tags.UnionWith(ent.Comp.AccessLevels);
-    }
-
-    private void OnXenoRejuvenate(Entity<XenoComponent> ent, ref RejuvenateEvent args)
-    {
-        RegenPlasma((ent, ent), ent.Comp.MaxPlasma);
+        args.Tags.UnionWith(xeno.Comp.AccessLevels);
     }
 
     public override void Update(float frameTime)
@@ -75,10 +69,10 @@ public sealed class XenoSystem : EntitySystem
 
             xeno.NextRegenTime = time + xeno.PlasmaRegenCooldown;
 
-            if (_xenoConstruction.IsOnWeeds(uid))
+            if (xeno.OnWeeds)
             {
                 HealDamage(uid, xeno.HealthRegenOnWeeds);
-                RegenPlasma((uid, xeno), xeno.PlasmaRegenOnWeeds);
+                _xenoPlasma.RegenPlasma((uid, xeno), xeno.PlasmaRegenOnWeeds);
             }
 
             Dirty(uid, xeno);
@@ -88,44 +82,6 @@ public sealed class XenoSystem : EntitySystem
     public void MakeXeno(Entity<XenoComponent?> uid)
     {
         EnsureComp<XenoComponent>(uid);
-    }
-
-    public bool HasPlasma(Entity<XenoComponent> xeno, FixedPoint2 plasma)
-    {
-        return xeno.Comp.Plasma >= plasma;
-    }
-
-    public void RegenPlasma(Entity<XenoComponent?> xeno, FixedPoint2 amount)
-    {
-        if (!_xenoQuery.Resolve(xeno, ref xeno.Comp))
-            return;
-
-        xeno.Comp.Plasma = FixedPoint2.Min(xeno.Comp.Plasma + amount, xeno.Comp.MaxPlasma);
-        Dirty(xeno, xeno.Comp);
-    }
-
-    public bool TryRemovePlasma(Entity<XenoComponent> xeno, FixedPoint2 plasma)
-    {
-        if (!HasPlasma(xeno, plasma))
-            return false;
-
-        RemovePlasma(xeno, plasma);
-        return true;
-    }
-
-    public bool TryRemovePlasmaPopup(Entity<XenoComponent> xeno, FixedPoint2 plasma)
-    {
-        if (TryRemovePlasma(xeno, plasma))
-            return true;
-
-        _popup.PopupClient(Loc.GetString("cm-xeno-not-enough-plasma"), xeno, xeno);
-        return false;
-    }
-
-    public void RemovePlasma(Entity<XenoComponent> xeno, FixedPoint2 plasma)
-    {
-        xeno.Comp.Plasma = FixedPoint2.Max(xeno.Comp.Plasma - plasma, FixedPoint2.Zero);
-        Dirty(xeno);
     }
 
     public void HealDamage(Entity<DamageableComponent?> xeno, FixedPoint2 amount)

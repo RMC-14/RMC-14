@@ -1,6 +1,6 @@
 ﻿- type: entity
   id: DoorXenoResin # TODO CM14 make them only buildable next to other resin walls
-  parent: BaseStructure
+  parent: [BaseStructure, CMEntityBase]
   name: resin door
   placement:
     mode: SnapgridCenter
@@ -69,7 +69,7 @@
     key: walls
     mode: NoSprite
   - type: AccessReader
-    access: [["Xeno"]]
+    access: [["CMAccessXeno"]]
   - type: Airlock
     emergencyAccessLayer: false
     animatePanel: false

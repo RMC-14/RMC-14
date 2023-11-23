@@ -1,0 +1,12 @@
+﻿- type: entity
+  id: ActionXenoTransferPlasma
+  parent: ActionXenoBase
+  name: Transfer plasma # TODO CM14 description
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: transfer_plasma
+    event: !type:XenoTransferPlasmaActionEvent
+    range: 2

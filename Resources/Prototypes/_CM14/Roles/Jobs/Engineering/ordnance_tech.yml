@@ -1,0 +1,43 @@
+﻿- type: job
+  id: OrdnanceTech
+  parent: JobBaseCM
+  name: job-name-ordnance-tech
+  description: job-description-ordnance-Tech
+  playTimeTracker: JobOrdnanceTech
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: MarineEngineering
+    time: 3600 # 1 hours
+  startingGear: OrdnanceTechGear
+  icon: "JobIconOrdnanceTech"
+  requireAdminNotify: false
+  joinNotifyCrew: true
+  supervisors: job-supervisors-cm-chief-engineer
+  canBeAntag: true
+  accessGroups:
+  - OT
+
+- type: startingGear
+  id: OrdnanceTechGear
+  equipment:
+    jumpsuit: CMJumpsuitOrdnanceTech
+    back: ClothingBackpackEngineeringFilled
+    shoes: CMShoesCombatBootsBrown
+    gloves: CMHandsInsulated
+    id: OrdnanceTechIDCard
+    ears: CMHeadsetEngineer
+    belt: ClothingBeltUtilityEngineering
+  satchel: ClothingBackpackSatchelEngineeringFilled
+
+- type: entity
+  id: SpawnPointOrdnanceTech
+  parent: CMSpawnPointJobBase
+  name: ordnance tech spawn point
+  components:
+  - type: SpawnPoint
+    job_id: OrdnanceTech
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: ordnance_tech

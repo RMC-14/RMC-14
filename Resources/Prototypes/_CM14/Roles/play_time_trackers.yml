@@ -4,6 +4,12 @@
 - type: playTimeTracker
   id: JobSeniorEnlistedAdvisor
 
+- type: playTimeTracker
+  id: JobCommandingOfficer
+
+- type: playTimeTracker
+  id: JobExecutiveOfficer
+
 # marine
 - type: playTimeTracker
   id: JobRifleman
@@ -38,3 +44,56 @@
 
 - type: playTimeTracker
   id: JobMilitaryPolice
+
+# requisition
+- type: playTimeTracker
+  id: JobCMQuartermaster
+
+- type: playTimeTracker
+  id: JobCMCargoTech
+
+- type: playTimeTracker
+  id: JobMessTech
+
+# engineering
+- type: playTimeTracker
+  id: JobCMChiefEngineer
+
+- type: playTimeTracker
+  id: JobOrdnanceTech
+
+- type: playTimeTracker
+  id: JobMaintTech
+
+# medical
+- type: playTimeTracker
+  id: JobMarineCMO
+
+- type: playTimeTracker
+  id: JobMarineDoctor
+
+- type: playTimeTracker
+  id: JobNurse
+
+- type: playTimeTracker
+  id: JobResearcher
+
+# auxiliary support
+- type: playTimeTracker
+  id: JobAuxiliarySupportOfficer
+
+- type: playTimeTracker
+  id: JobPilotOfficer
+
+- type: playTimeTracker
+  id: JobDropshipCrewChief
+
+- type: playTimeTracker
+  id: JobIntelOfficer
+
+# non uscm
+- type: playTimeTracker
+  id: JobCorrespondent
+
+- type: playTimeTracker
+  id: JobSurvivor

@@ -1,3 +1,23 @@
+- files: ["alien_chestburst.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/voice/alien_chestburst.ogg"
+
+- files: ["alien_resin_move2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/voice/alien_chestburst2.ogg"
+
+- files: ["alien_claw_block.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/ef6587e938058c360d4a685015a4f0ba3aa5473a/sound/weapons/alien_claw_block.ogg"
+
+- files: ["alien_drool1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/8cad63ffa63108258510a649a07a045274771fb1/sound/voice/alien_drool1.ogg"
+
 - files: ["alien_drool2.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"

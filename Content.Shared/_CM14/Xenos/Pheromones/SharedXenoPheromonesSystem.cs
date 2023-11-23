@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Content.Shared._CM14.Xenos.Construction;
+using Content.Shared._CM14.Xenos.Plasma;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
@@ -25,7 +26,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruction = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     // TODO CM14 move all of this to a component
     [ValidatePrototypeId<DamageTypePrototype>]
@@ -99,7 +100,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     private void OnXenoPheromonesChosenBui(Entity<XenoComponent> xeno, ref XenoPheromonesChosenBuiMessage args)
     {
         if (!Enum.IsDefined(typeof(XenoPheromones), args.Pheromones) ||
-            !_xeno.TryRemovePlasmaPopup(xeno, xeno.Comp.PheromonesPlasmaCost))
+            !_xenoPlasma.TryRemovePlasmaPopup((xeno, xeno), xeno.Comp.PheromonesPlasmaCost))
         {
             return;
         }
@@ -192,15 +193,15 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         var oldRecovery = _oldReceivers[(int) XenoPheromones.Recovery];
         oldRecovery.Clear();
 
-        var recoveryQuery = EntityQueryEnumerator<XenoRecoveryPheromonesComponent>();
-        while (recoveryQuery.MoveNext(out var uid, out var recovery))
+        var recoveryQuery = EntityQueryEnumerator<XenoRecoveryPheromonesComponent, XenoComponent>();
+        while (recoveryQuery.MoveNext(out var uid, out var recovery, out var xeno))
         {
             if (_timing.CurTime > recovery.NextRegenTime)
             {
-                if (_xenoConstruction.IsOnWeeds(uid))
+                if (xeno.OnWeeds)
                 {
                     _xeno.HealDamage(uid, RecoveryHealthRegen * recovery.Multiplier);
-                    _xeno.RegenPlasma(uid, RecoveryPlasmaRegen * recovery.Multiplier);
+                    _xenoPlasma.RegenPlasma(uid, RecoveryPlasmaRegen * recovery.Multiplier);
                 }
 
                 recovery.NextRegenTime = _timing.CurTime + RecoveryDelay;
@@ -236,7 +237,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
             if (_timing.CurTime >= xeno.NextPheromonesPlasmaUse)
             {
                 xeno.NextPheromonesPlasmaUse += _pheromonePlasmaUseDelay;
-                if (!_xeno.TryRemovePlasma((uid, xeno), xeno.PheromonesPlasmaUpkeep / 10))
+                if (!_xenoPlasma.TryRemovePlasma((uid, xeno), xeno.PheromonesPlasmaUpkeep / 10))
                 {
                     RemCompDeferred<XenoPheromonesComponent>(uid);
                     continue;

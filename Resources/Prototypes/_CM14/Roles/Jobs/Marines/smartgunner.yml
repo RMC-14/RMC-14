@@ -9,32 +9,24 @@
       department: Marine
       time: 18000 #5 hrs
   startingGear: SmartgunnerGear
-  icon: "JobIconSecurityOfficer"
+  icon: "JobIconSmartgunner"
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
-  access:
-  - Security
-  - Brig
-  - Maintenance
-  - Service
-  - External
+  accessGroups:
+  - Smartgunner
 
 - type: startingGear
   id: SmartgunnerGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSec
+    jumpsuit: JumpsuitMarine
     back: ClothingBackpackSecurityFilled
-    shoes: ClothingShoesBootsCombatFilled
-    eyes: ClothingEyesGlassesSecurity
-    head: ClothingHeadHelmetBasic
-    outerClothing: ClothingOuterArmorBasic
+    shoes: CMShoesCombatBoots
+    head: ArmorHelmetM10
+    outerClothing: ArmorMarineM3
+    gloves: CMHandsBlack
     id: DogtagSmartgunner
-    ears: ClothingHeadsetSecurity
-    belt: ClothingBeltSecurityFilled
-    pocket1: WeaponPistolMk58Nonlethal
-  innerClothingSkirt: ClothingUniformJumpskirtSec
+    ears: CMHeadsetAlpha
   satchel: ClothingBackpackSatchelSecurityFilled
-  duffelbag: ClothingBackpackDuffelSecurityFilled
 
 - type: entity
   id: SpawnPointSmartGunner

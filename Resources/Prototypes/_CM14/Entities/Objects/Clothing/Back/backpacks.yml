@@ -1,0 +1,157 @@
+# Almayer personnel
+- type: entity
+  parent: [ ClothingBackpack, CMEntityBase]
+  id: CMBackpack
+  name: backpack
+  description: You wear this on your back and put items into it.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Back/Backpacks/Civilians/standard.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.SharedBagOpenVisuals.BagState:
+        openLayer:
+          Open: { visible: true }
+          Closed: { visible: false }
+        closedLayer:
+          Open: { visible: false }
+          Closed: { visible: true}
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - back
+  - type: Item
+    size: Huge
+  - type: Storage
+    maxItemSize: Huge
+    maxTotalWeight: 28
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+  - type: UserInterface
+    interfaces:
+    - key: enum.StorageUiKey.Key
+      type: StorageBoundUserInterface
+
+- type: entity
+  parent: CMBackpack
+  id: CMBackpackEngineer
+  name: industrial backpack
+  description: It's a tough backpack lookin' backpack used by engineers and the like.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Back/Backpacks/Civilians/engineer.rsi
+
+- type: entity
+  parent: CMBackpack
+  id: CMBackpackMedical
+  name: medical backpack
+  description: It's a backpack especially designed for use in a sterile environment.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Back/Backpacks/Civilians/medical.rsi
+
+- type: entity
+  parent: CMBackpack
+  id: CMBackpackSecurity
+  name: security backpack
+  description: It's a very robust backpack.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Back/Backpacks/Civilians/security.rsi
+
+- type: entity
+  parent: CMBackpack
+  id: CMBackpackCommand
+  name: marine commanding officer backpack
+  description: The contents of this backpack are top secret.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Back/Backpacks/Marines/standard.rsi
+  - type: Storage
+    maxTotalWeight: 32
+
+# Marine
+- type: entity
+  parent: CMBackpack
+  id: CMBackpackMarine
+  name: lightweight IMP backpack
+  description: The standard-issue pack of the USCM forces. Designed to lug gear into the battlefield.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Back/Backpacks/Marines/standard.rsi
+
+- type: entity
+  parent: CMBackpackMarine
+  id: CMBackpackMarineMedic
+  name: USCM corpsman backpack
+  description: A standard-issue backpack worn by USCM medics.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Back/Backpacks/Marines/medic.rsi
+
+- type: entity
+  parent: CMBackpackMarine
+  id: CMBackpackMarineTech
+  name: USCM technician backpack
+  description: A standard-issue backpack worn by USCM technicians.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Back/Backpacks/Marines/techi.rsi
+
+# Specific
+- type: entity
+  parent: CMBackpack
+  id: CMBackpackMortar
+  name: USCM mortar shell backpack
+  description: A backpack specifically designed to hold ammunition for the M402 mortar.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Back/Backpacks/Marines/mortar.rsi
+  - type: Storage
+    maxTotalWeight: 20
+    whitelist:
+      tags:
+      - CMMortarShell
+
+- type: entity
+  parent: CMBackpack
+  id: CMBackpackWelder
+  name: USCM technician welderpack
+  description: A specialized backpack worn by USCM technicians. It carries a fueltank for quick welder refueling and use.
+  suffix: BROKEN, DONT SPAWN #todo cm14 backpack w solution holder support
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Back/Backpacks/Marines/welder.rsi
+  - type: Storage
+    maxTotalWeight: 18
+  - type: ExaminableSolution
+    solution: tank
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 500
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 500
+  - type: ReagentTank
+    tankType: Fuel
+  - type: DrainableSolution
+    solution: tank
+  - type: SolutionTransfer
+    transferAmount: 50
+    maxTransferAmount: 100
+    minTransferAmount: 10
+    canChangeTransferAmount: true
+  - type: RefillableSolution
+    solution: tank
+  - type: DrawableSolution
+    solution: tank

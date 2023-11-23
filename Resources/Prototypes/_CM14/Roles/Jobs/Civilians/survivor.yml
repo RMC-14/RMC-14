@@ -1,0 +1,47 @@
+﻿- type: job
+  id: Survivor
+  parent: JobBaseCM
+  name: job-name-survivor
+  description: job-description-survivor
+  playTimeTracker: JobSurvivor
+  requirements:
+  - !type:RoleTimeRequirement
+    role: JobRifleman
+    time: 18000 #5 hours
+  - !type:RoleTimeRequirement
+    role: JobHospitalCorpsman
+    time: 18000 #5 hours
+  - !type:RoleTimeRequirement
+    role: JobCombatTech
+    time: 18000 #5 hours
+  startingGear: SurvivorGear
+  icon: "JobIconSurvivor"
+  requireAdminNotify: false
+  joinNotifyCrew: false
+  supervisors: job-supervisors-nobody
+  canBeAntag: false
+  accessGroups:
+  - Colonist
+
+- type: startingGear
+  id: SurvivorGear
+  equipment:
+    jumpsuit: CMJumpsuitColonist
+    back: ClothingBackpackFilled
+    shoes: CMShoesCombatBootsBrown
+    id: ColonistIDCard
+    ears: CMHeadsetColony
+  satchel: ClothingBackpackSatchelFilled
+
+- type: entity
+  id: CMSpawnPointSurvivor
+  parent: CMSpawnPointJobBase
+  name: survivor spawn point
+  components:
+  - type: SpawnPoint
+    job_id: Survivor
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: survivor

@@ -9,32 +9,26 @@
       department: Marine
       time: 3600 #1 hrs
   startingGear: CombatTechGear
-  icon: "JobIconStationEngineer"
+  icon: "JobIconCombatTech"
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
-  access:
-  - Security
-  - Brig
-  - Maintenance
-  - Service
-  - External
+  accessGroups:
+  - CombatTech
 
 - type: startingGear
   id: CombatTechGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSec
+    jumpsuit: CMJumpsuitMarineEngineer
     back: ClothingBackpackSecurityFilled
-    shoes: ClothingShoesBootsCombatFilled
-    eyes: ClothingEyesGlassesSecurity
-    head: ClothingHeadHelmetBasic
-    outerClothing: ClothingOuterArmorBasic
+    shoes: CMShoesCombatBoots
+    eyes: ClothingEyesGlassesMeson
+    head: ArmorHelmetM10
+    outerClothing: ArmorMarineM3
+    gloves: CMHandsInsulated
     id: DogtagCombatTech
-    ears: ClothingHeadsetSecurity
-    belt: ClothingBeltSecurityFilled
-    pocket1: WeaponPistolMk58Nonlethal
-  innerClothingSkirt: ClothingUniformJumpskirtSec
+    ears: CMHeadsetAlphaEngineer
+    belt: ClothingBeltUtilityEngineering
   satchel: ClothingBackpackSatchelSecurityFilled
-  duffelbag: ClothingBackpackDuffelSecurityFilled
 
 - type: entity
   id: SpawnPointCombatTech

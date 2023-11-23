@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/b72ddc0cd02747fac1689a85ba72056daa63de45/icons/turf/walls/almayer_white.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "wall"
+    },
+    {
+      "name": "reinforced"
+    },
+    {
+      "name": "hull"
+    },
+    {
+      "name": "wall0",
+      "directions": 4
+    },
+    {
+      "name": "wall1",
+      "directions": 4
+    },
+    {
+      "name": "wall2",
+      "directions": 4
+    },
+    {
+      "name": "wall3",
+      "directions": 4
+    },
+    {
+      "name": "wall4",
+      "directions": 4
+    },
+    {
+      "name": "wall5",
+      "directions": 4
+    },
+    {
+      "name": "wall6",
+      "directions": 4
+    },
+    {
+      "name": "wall7",
+      "directions": 4
+    }
+  ]
+}

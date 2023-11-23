@@ -1,0 +1,43 @@
+﻿- type: entity # TODO CM14 description
+  parent: CMXenoDeveloped
+  id: CMXenoDefender
+  name: Defender
+  components:
+  - type: Sprite
+    sprite: _CM14/Mobs/Xenos/Defender/defender.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      500: Critical
+      600: Dead
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab # TODO CM14 name it "tail slam"
+    - ActionXenoToggleCrest
+    - ActionXenoHeadbutt
+    - ActionXenoTailSweep
+    - ActionXenoFortify
+    plasma: 100 # TODO CM14
+    maxPlasma: 100
+    plasmaRegenOnWeeds: 6
+  - type: XenoArmor
+    armor: 35
+  - type: XenoCrest
+  - type: XenoHeadbutt
+    damage:
+      types:
+        Blunt: 30 # TODO CM14 penetrating damage
+  - type: XenoAnimateMovement
+  - type: XenoTailSweep
+    damage:
+      types:
+        Slash: 30
+  - type: XenoFortify
