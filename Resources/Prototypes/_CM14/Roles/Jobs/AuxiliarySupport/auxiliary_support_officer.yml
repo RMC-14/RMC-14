@@ -23,11 +23,11 @@
   equipment:
     jumpsuit: CMJumpsuitBO
     outerClothing: CMCoatASO
-    back: ClothingBackpackCaptainFilled
+    back: CMBackpack
     shoes: CMShoesCombatBootsBrown
     id: ASOIDCard
     ears: CMHeadsetLeader
-  satchel: ClothingBackpackSatchelCMOFilled
+  satchel: CMSatchel
 
 - type: entity
   id: CMSpawnPointASO

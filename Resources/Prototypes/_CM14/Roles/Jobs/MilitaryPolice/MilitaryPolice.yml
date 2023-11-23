@@ -22,7 +22,7 @@
   id: MilitaryPoliceGear
   equipment:
     jumpsuit: CMJumpsuitMPBlack
-    back: ClothingBackpackSecurityFilled
+    back: CMBackpackSecurity
     shoes: CMShoesCombatBoots
     head: CMHeadBeretRed
     eyes: ClothingEyesGlassesSecurity
@@ -31,7 +31,7 @@
     outerClothing: CMArmorM2MP
     ears: CMHeadsetMPO
     belt: ClothingBeltSecurityFilled
-  satchel: ClothingBackpackSatchelSecurityFilled
+  satchel: CMSatchelSecurity
 
 - type: entity
   id: SpawnPointMilitaryPolice

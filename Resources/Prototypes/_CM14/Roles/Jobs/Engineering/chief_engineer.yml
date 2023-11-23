@@ -25,13 +25,13 @@
   id: CMChiefEngineerGear
   equipment:
     jumpsuit: CMJumpsuitChiefEngineer
-    back: ClothingBackpackChiefEngineerFilled
+    back: CMBackpackEngineer
     shoes: CMShoesCombatBootsBrown
     gloves: CMHandsInsulated
     id: CMChiefEngineerIDCard
     ears: CMHeadsetCE
     belt: ClothingBeltUtilityEngineering
-  satchel: ClothingBackpackSatchelChiefEngineerFilled
+  satchel: CMSatchelEngineer
 
 - type: entity
   id: CMSpawnPointChiefEngineer

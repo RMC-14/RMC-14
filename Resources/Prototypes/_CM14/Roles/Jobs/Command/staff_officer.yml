@@ -24,12 +24,12 @@
   id: StaffOfficerGear
   equipment:
     jumpsuit: CMJumpsuitBO
-    back: ClothingBackpackCaptainFilled
+    back: CMBackpackCommand
     shoes: CMShoesCombatBoots
     head: CMHeadCap
     id: StaffOfficerIDCard
     ears: CMHeadsetLeader
-  satchel: ClothingBackpackSatchelCaptainFilled
+  satchel: CMSatchelMarine
 
 - type: entity
   id: SpawnPointStaffOfficer

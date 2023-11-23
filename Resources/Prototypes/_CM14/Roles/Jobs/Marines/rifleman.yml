@@ -15,14 +15,14 @@
   id: RiflemanGear
   equipment:
     jumpsuit: JumpsuitMarine
-    back: ClothingBackpackSecurityFilled
+    back: CMBackpackMarine
     shoes: CMShoesCombatBoots
     head: ArmorHelmetM10
     outerClothing: ArmorMarineM3
     gloves: CMHandsBlack
     id: DogtagRifleman
     ears: CMHeadsetAlpha
-  satchel: ClothingBackpackSatchelSecurityFilled
+  satchel: CMSatchelMarine
 
 - type: entity
   id: SpawnPointRifleman

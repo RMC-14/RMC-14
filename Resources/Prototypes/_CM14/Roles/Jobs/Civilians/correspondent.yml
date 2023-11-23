@@ -18,11 +18,11 @@
   equipment:
     jumpsuit: CMJumpsuitCorrespondent
     outerClothing: CMCoatCorrespondent
-    back: ClothingBackpackFilled
+    back: CMBackpack
     shoes: CMShoesCombatBootsBrown
     id: CorrespondentIDCard
     ears: CMHeadsetReporter
-  satchel: ClothingBackpackSatchelFilled
+  satchel: CMSatchel
 
 - type: entity
   id: CMSpawnPointCorrespondent

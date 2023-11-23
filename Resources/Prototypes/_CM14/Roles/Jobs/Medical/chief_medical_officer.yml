@@ -23,13 +23,13 @@
   equipment:
     jumpsuit: CMJumpsuitCMO
     outerClothing: CMCoatLong
-    back: ClothingBackpackCMOFilled
+    back: CMBackpackMedical
     gloves: CMHandsLatex
     shoes: CMShoesCombatBoots
     head: CMHeadCapCMO
     id: MarineCMOIDCard
     ears: CMHeadsetCMO
-  satchel: ClothingBackpackSatchelCMOFilled
+  satchel: CMSatchelMedical
 
 - type: entity
   id: CMSpawnPointCMO

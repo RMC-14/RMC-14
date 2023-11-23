@@ -21,12 +21,12 @@
   id: ResearcherGear
   equipment:
     jumpsuit: CMJumpsuitResearch
-    back: ClothingBackpackMedicalFilled
+    back: CMBackpackMedical
     gloves: CMHandsLatex
     shoes: CMShoesCombatBoots
     id: ResearcherIDCard
     ears: CMHeadsetResearcher
-  satchel: ClothingBackpackSatchelMedicalFilled
+  satchel: CMSatchelMedical
 
 - type: entity
   id: CMSpawnPointResearcher
