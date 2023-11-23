@@ -13,8 +13,8 @@
 - type: entity
   parent: ChemicalMedipen
   id: CMTAutoInjector
-  name: autoinjector
-  description: An autoinjector. Each use is 10 units.
+  name: auto-injector
+  description: An auto-injector. Each use is 10 units.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Medical/autoinjectors.rsi
@@ -40,8 +40,8 @@
 - type: entity
   parent: CMTAutoInjector
   id: CMTTricordrazineInjector
-  name: tricordrazine autoinjector
-  description: An autoinjector loaded with 3 uses of Tricordrazine, a weak general use medicine for treating damage. Each use is 10 units.
+  name: tricordrazine auto-injector
+  description: An auto-injector loaded with 3 uses of Tricordrazine, a weak general use medicine for treating damage. Each use is 10 units.
   components:
   - type: SolutionContainerManager
     solutions:
@@ -54,8 +54,8 @@
 - type: entity
   id: CMInaprovAutoInjector
   parent: CMTAutoInjector
-  name: inaprovaline autoinjector
-  description: An autoinjector containing Inaprovaline.  Useful for saving lives. Each use is 10 units.
+  name: inaprovaline auto-injector
+  description: An auto-injector containing Inaprovaline.  Useful for saving lives. Each use is 10 units.
   components:
   - type: SolutionContainerManager
     solutions:
@@ -68,7 +68,7 @@
 - type: entity
   id: CMKelotaneAutoInjector
   parent: CMTAutoInjector
-  name: kelotane autoinjector
+  name: kelotane auto-injector
   description: An auto-injector loaded with 3 uses of Kelotane, a common burn medicine. Each use is 10 units.
   components:
   - type: SolutionContainerManager
