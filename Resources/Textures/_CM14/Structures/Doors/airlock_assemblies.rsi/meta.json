@@ -8,28 +8,28 @@
   },
   "states": [
     {
-      "name": "door_as_0"
+      "name": "as_0"
     },
     {
-      "name": "door_as_1"
+      "name": "as_1"
     },
     {
-      "name": "door_as_2"
+      "name": "as_2"
     },
     {
-      "name": "door_as_3"
+      "name": "as_3"
     },
     {
-      "name": "door_as_g0"
+      "name": "as_g0"
     },
     {
-      "name": "door_as_g1"
+      "name": "as_g1"
     },
     {
-      "name": "door_as_g2"
+      "name": "as_g2"
     },
     {
-      "name": "door_as_g3"
+      "name": "as_g3"
     }
   ]
 }

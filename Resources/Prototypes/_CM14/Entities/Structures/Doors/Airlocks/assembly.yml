@@ -1,0 +1,12 @@
+- type: entity
+  parent: [ AirlockAssembly, CMEntityBase ]
+  id: CMAirlockAssembly
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/airlock_assemblies.rsi
+    state: as_0
+  - type: Transform
+    noRot: false
+  - type: Construction
+    graph: CMAirlock
+    node: assembly

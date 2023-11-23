@@ -24,6 +24,11 @@
       map: ["enum.DoorVisualLayers.BaseEmergencyAccess"]
     - state: panel_open
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Construction
+    graph: CMAirlock
+    node: airlock
+    containers:
+    - board
 
 - type: entity
   parent: CMAirlock
@@ -97,6 +102,14 @@
         - FullTileMask
         layer:
         - GlassAirlockLayer
+  - type: Construction
+    graph: CMAirlock
+    node: glassAirlock
+  - type: PaintableAirlock
+    group: Glass
+  - type: Tag
+    tags:
+    - GlassAirlock
 
 - type: entity
   parent: CMAirlockGlass
