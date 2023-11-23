@@ -1,7 +1,7 @@
-﻿- type: entity # TODO CM14 description
+﻿- type: entity
   parent: CMXenoDeveloped
   id: CMXenoQueen
-  name: Queen
+  name: Queen # TODO CM14 use consoles
   description: The most vital member of the hive.
   components:
   - type: Sprite
@@ -28,17 +28,23 @@
     - ActionXenoPlantWeeds
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
+    # TODO CM14 the rest of the owl
     plasma: 1000
     maxPlasma: 1000 # TODO CM14
-    plasmaRegenOnWeeds: 12
+    plasmaRegenOnWeeds: 40
     canBuild:
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
+    # explosionResistance: 100 # TODO CM14 fire immunity
   - type: XenoArmor
     armor: 25
   - type: Tag
     tags:
     - DoorBumpOpener # TODO CM14 big loud steps
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 40

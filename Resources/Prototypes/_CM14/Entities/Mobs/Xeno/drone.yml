@@ -1,4 +1,4 @@
-﻿- type: entity # TODO CM14 description
+﻿- type: entity
   parent: CMXenoDeveloped
   id: CMXenoDrone
   name: Drone
