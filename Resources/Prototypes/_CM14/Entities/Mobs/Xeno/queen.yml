@@ -2,7 +2,7 @@
   parent: CMXenoDeveloped
   id: CMXenoQueen
   name: Queen # TODO CM14 use consoles
-  description: The most vital member of the hive.
+  description: A huge, looming alien creature. The biggest and the baddest.
   components:
   - type: Sprite
     sprite: _CM14/Mobs/Xenos/Queen/queen.rsi
