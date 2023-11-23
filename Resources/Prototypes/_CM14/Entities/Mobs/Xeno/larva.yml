@@ -1,4 +1,4 @@
-﻿- type: entity # TODO CM14 description
+﻿- type: entity
   parent: CMXenoUndeveloped
   id: CMXenoLarva
   name: Larva
@@ -13,8 +13,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      200: Critical
-      300: Dead
+      35: Critical
+      70: Dead
   - type: Xeno
     actionIds:
     - ActionXenoRest
@@ -23,6 +23,9 @@
     - ActionXenoEvolve60
     evolvesTo:
     - CMXenoDrone
+    - CMXenoRunner
+    - CMXenoSentinel
+    - CMXenoDefender
     maxPlasma: 10 # TODO CM14
     plasmaRegenOnWeeds: 1
   - type: XenoHide
