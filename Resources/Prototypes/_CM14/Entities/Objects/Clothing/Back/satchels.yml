@@ -1,0 +1,82 @@
+# Almayer personnel
+- type: entity
+  parent: CMBackpack
+  id: CMSatchel
+  name: leather satchel
+  description: A very fancy satchel made of fine leather. Looks pretty pricey.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Back/Satchels/Civilians/classic.rsi
+  - type: Storage
+    maxTotalWeight: 18
+
+- type: entity
+  parent: CMSatchel
+  id: CMSatchelEngineer
+  name: industrial satchel
+  description: A tough satchel with extra pockets.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Back/Satchels/Civilians/engineer.rsi
+
+- type: entity
+  parent: CMSatchel
+  id: CMSatchelMedical
+  name: medical satchel
+  description: A sterile satchel used in medical departments.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Back/Satchels/Civilians/medical.rsi
+
+- type: entity
+  parent: CMSatchel
+  id: CMSatchelSecurity
+  name: security satchel
+  description: A robust satchel composed of two drop pouches and a large internal pocket. Made of a stiff fabric, it isn't very comfy to wear.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Back/Satchels/Civilians/security.rsi
+
+- type: entity
+  parent: CMSatchel
+  id: CMSatchelMarine
+  name: USCM satchel
+  description: A heavy-duty satchel carried by some USCM soldiers and support personnel.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Back/Satchels/Marines/standard.rsi
+
+- type: entity
+  parent: CMSatchelMarine
+  id: CMSatchelMarineIntel
+  name: USCM lightweight expedition pack
+  description: A heavy-duty IMP based backpack that can be slung around the front or to the side, and can quickly be accessed with only one hand. Usually issued to USCM intelligence officers.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Back/Satchels/Marines/big.rsi
+  - type: Storage
+    maxTotalWeight: 24
+
+- type: entity
+  parent: CMSatchelMarineIntel
+  id: CMSatchelMarineLogistics
+  name: USCM logistics IMP backpack
+  description: A standard-issue backpack worn by logistics personnel. It is occasionally issued to combat personnel for longer term expeditions and deep space incursions.
+
+- type: entity
+  parent: CMSatchelMarine
+  id: CMSatchelMarineMedic
+  name: USCM corpsman satchel
+  description: A heavy-duty satchel used by USCM medics. It sacrifices capacity for usability. A small patch is sewn to the top flap.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Back/Satchels/Marines/medic.rsi
+
+- type: entity
+  parent: CMSatchelMarine
+  id: CMSatchelMarineTech
+  name: USCM technician chestrig
+  description: A heavy-duty chestrig used by some USCM technicians.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Back/Satchels/Marines/techi.rsi
