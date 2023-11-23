@@ -1,14 +1,14 @@
+#
 - type: entity
   parent: [ Airlock, CMEntityBase ]
   id: CMAirlock
-  name: door
-  description: door
+  name: airlock
   placement:
     mode: SnapgridCenter
   components:
   - type: Sprite
     sprite: _CM14/Structures/Doors/Airlocks/personaldoor.rsi
-    snapCardinals: true
+    snapCardinals: false
     layers:
     - state: closed
       map: [ "enum.DoorVisualLayers.Base" ]
@@ -25,3 +25,99 @@
     - state: panel_open
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
 
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockCommand
+  name: command airlock
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/comdoor.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockEngineer
+  name: engineer airlock
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/engidoor.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockMedical
+  name: medical airlock
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/medidoor.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockSecurity
+  name: security airlock
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/secdoor.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockMaint
+  name: maintenance airlock
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/maintdoor.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockSecure
+  name: secure airlock
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/securedoor.rsi
+
+# Glass
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockGlass
+  name: glass airlock
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/personaldoor_glass.rsi
+  - type: Door
+    occludes: false
+  - type: Occluder
+    enabled: false
+  - type: AnimationPlayer
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 100
+        mask:
+        - FullTileMask
+        layer:
+        - GlassAirlockLayer
+
+- type: entity
+  parent: CMAirlockGlass
+  id: CMAirlockGlassEngineer
+  name: engineer glass airlock
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/engidoor_glass.rsi
+
+- type: entity
+  parent: CMAirlockGlass
+  id: CMAirlockGlassMedical
+  name: medical glass airlock
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/medidoor_glass.rsi
+
+- type: entity
+  parent: CMAirlockGlass
+  id: CMAirlockGlassSecurity
+  name: security glass airlock
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/secdoor_glass.rsi
