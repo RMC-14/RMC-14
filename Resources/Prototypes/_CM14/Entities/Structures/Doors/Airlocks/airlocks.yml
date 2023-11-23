@@ -1,0 +1,27 @@
+- type: entity
+  parent: [ Airlock, CMEntityBase ]
+  id: CMAirlock
+  name: door
+  description: door
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/personaldoor.rsi
+    snapCardinals: true
+    layers:
+    - state: closed
+      map: [ "enum.DoorVisualLayers.Base" ]
+    - state: unlit
+      map: ["enum.DoorVisualLayers.BaseUnlit"]
+    - state: welded
+      map: [ "enum.WeldableLayers.BaseWelded" ]
+    - state: locked
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseBolted"]
+    - state: spark
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseEmergencyAccess"]
+    - state: panel_open
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+
