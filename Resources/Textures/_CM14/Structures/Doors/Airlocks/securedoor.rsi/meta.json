@@ -8,13 +8,13 @@
   },
   "states": [
     {
-      "name": "door_closed"
+      "name": "closed"
     },
     {
-      "name": "door_locked"
+      "name": "locked"
     },
     {
-      "name": "door_opening",
+      "name": "opening",
       "delays": [
         [
           0.1,
@@ -26,7 +26,7 @@
       ]
     },
     {
-      "name": "door_deny",
+      "name": "deny",
       "delays": [
         [
           0.1,
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "name": "door_closing",
+      "name": "closing",
       "delays": [
         [
           0.1,
@@ -48,10 +48,10 @@
       ]
     },
     {
-      "name": "door_open"
+      "name": "open"
     },
     {
-      "name": "door_spark",
+      "name": "spark",
       "delays": [
         [
           0.1,
