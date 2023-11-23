@@ -19,6 +19,7 @@
   parent: BaseWallXeno
   id: WallXenoResin
   name: resin wall
+  description: Weird slime solidified into a wall.
   components:
   - type: Sprite
     sprite: _CM14/Structures/Xenos/xeno_resin_wall.rsi
@@ -94,6 +95,7 @@
   parent: BaseMembraneXeno
   id: WallXenoMembrane
   name: resin membrane
+  description: Weird slime translucent enough to let light pass through.
   components:
   - type: Sprite
     sprite: _CM14/Structures/Xenos/xeno_resin_wall.rsi
@@ -116,6 +118,7 @@
   parent: BaseMembraneXeno
   id: WallXenoMembraneThick
   name: thick resin membrane
+  description: Weird thick slime just translucent enough to let light pass through.
   components:
   - type: Sprite
     sprite: _CM14/Structures/Xenos/xeno_resin_wall.rsi
