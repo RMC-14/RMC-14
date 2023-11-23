@@ -33,9 +33,9 @@
     maxPlasma: 1000
     plasmaRegenOnWeeds: 27.5
     canBuild:
-    - WallXenoResin
-    - WallXenoMembrane
-    - DoorXenoResin
+    - WallXenoResinThick
+    - WallXenoMembraneThick
+    - DoorXenoResinThick
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
   - type: XenoResinWalker
