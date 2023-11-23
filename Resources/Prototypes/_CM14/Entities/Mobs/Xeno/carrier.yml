@@ -1,0 +1,41 @@
+﻿- type: entity
+  parent: CMXenoDeveloped
+  id: CMXenoCarrier
+  name: Carrier
+  description: A strange-looking alien creature. It carries a number of scuttling jointed crablike creatures.
+  components:
+  - type: Sprite
+    sprite: _CM14/Mobs/Xenos/Carrier/carrier.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      650: Critical
+      750: Dead
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoOrderConstruction
+    - ActionXenoPheromones
+    - ActionXenoPlantWeeds
+    #    - ActionXenoResinHole
+    #    - ActionXenoThrowFacehugger
+    #    - ActionXenoRetrieveEgg
+    #    - ActionXenoHuggerReserve
+    plasma: 500
+    maxPlasma: 500
+    plasmaRegenOnWeeds: 17.5
+    canOrderConstruction:
+    - HiveCoreXenoConstructionNode
+    # explosionResistance: 20
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 27.5

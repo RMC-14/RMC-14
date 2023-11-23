@@ -1,0 +1,40 @@
+﻿- type: entity
+  parent: CMXenoDeveloped
+  id: CMXenoBoiler
+  name: Boiler
+  description: A huge, grotesque xenomorph covered in glowing, oozing acid slime.
+  components:
+  - type: Sprite
+    sprite: _CM14/Mobs/Xenos/Boiler/boiler.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      650: Critical
+      750: Dead
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoAcid
+    #    - ActionXenoBombard
+    #    - ActionXenoToggleGasType
+    #    - ActionXenoSprayAcid
+    #    - ActionXenoLongSight
+    #    - ActionXenoAcidShroud
+    plasma: 400
+    maxPlasma: 400
+    plasmaRegenOnWeeds: 16
+    # explosionResistance: 20
+  - type: XenoArmor
+    armor: 20
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 22.5

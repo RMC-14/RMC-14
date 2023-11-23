@@ -189,7 +189,7 @@
   components:
   - type: CombatMode
   - type: MeleeWeapon
-    altDisarm: false
+    altDisarm: true
     angle: 0
     soundHit:
       collection: AlienClaw

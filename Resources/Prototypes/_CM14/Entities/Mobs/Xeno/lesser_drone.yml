@@ -1,7 +1,8 @@
-﻿- type: entity # TODO CM14 description
+﻿- type: entity
   parent: CMXenoDeveloped
   id: CMXenoLesserDrone
   name: Lesser Drone
+  description: An alien drone. Looks... smaller.
   components:
   - type: Sprite
     sprite: _CM14/Mobs/Xenos/Drone/drone.rsi
@@ -12,7 +13,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      160: Dead
+      160: Dead # TODO CM14 gib on death
   - type: Xeno
     actionIds:
     - ActionXenoRest
@@ -32,3 +33,8 @@
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
+    # evasion: 10
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 20
