@@ -32,6 +32,7 @@
     plasma: 1000 # TODO CM14
     maxPlasma: 1000
     plasmaRegenOnWeeds: 27.5
+    buildDelay: 1
     canBuild:
     - WallXenoResinThick
     - WallXenoMembraneThick

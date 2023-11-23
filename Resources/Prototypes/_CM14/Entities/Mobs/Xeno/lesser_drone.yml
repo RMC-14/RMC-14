@@ -27,6 +27,7 @@
     plasma: 300
     maxPlasma: 300
     plasmaRegenOnWeeds: 6
+    buildDelay: 4
     canBuild:
     - WallXenoResin
     - WallXenoMembrane
