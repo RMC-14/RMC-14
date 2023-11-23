@@ -19,7 +19,7 @@
   id: CombatTechGear
   equipment:
     jumpsuit: CMJumpsuitMarineEngineer
-    back: CMBackpackTech
+    back: CMBackpackMarineTech
     shoes: CMShoesCombatBoots
     eyes: ClothingEyesGlassesMeson
     head: ArmorHelmetM10
