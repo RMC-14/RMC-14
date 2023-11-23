@@ -8,18 +8,6 @@
   },
   "states": [
     {
-      "name": "tricord"
-    },
-    {
-      "name": "tricord1"
-    },
-    {
-      "name": "tricord2"
-    },
-    {
-      "name": "tricord3"
-    },
-    {
       "name": "inhand-left",
       "directions": 4
     },
@@ -28,34 +16,16 @@
       "directions": 4
     },
     {
-      "name": "inaprovaline1"
+      "name": "autoinjector"
     },
     {
-      "name": "inaprovaline2"
+      "name": "autoinjector3"
     },
     {
-      "name": "inaprovaline3"
+      "name": "autoinjector1"
     },
     {
-      "name": "empty"
-    },
-    {
-      "name": "kelotane1"
-    },
-    {
-      "name": "kelotane2"
-    },
-    {
-      "name": "kelotane3"
-    },
-    {
-      "name": "bicar1"
-    },
-    {
-      "name": "bicar2"
-    },
-    {
-      "name": "bicar3"
+      "name": "autoinjector2"
     }
   ]
 }
