@@ -1,7 +1,10 @@
 ﻿- type: entity
   parent: [BaseWall, CMEntityBase]
   id: BaseWallXeno
+  name: resin wall
   abstract: true
+  placement:
+    mode: SnapgridCenter
   components:
   - type: Damageable
     damageContainer: Resin
@@ -9,6 +12,8 @@
   - type: Appearance
   - type: RadiationBlocker
     resistance: 5
+  - type: PlacementReplacement
+    key: walls
 
 - type: entity
   parent: BaseWallXeno
@@ -20,39 +25,57 @@
   - type: Icon
     sprite: _CM14/Structures/Xenos/xeno_resin_wall.rsi
     state: resin
+  - type: IconSmooth
+    key: walls
+    base: resin
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 500 # TODO CM14 rebalance
+        damage: 900
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: IconSmooth
-    key: walls
-    base: resin
 
 - type: entity
   parent: BaseWallXeno
-  id: WallXenoMembrane
-  name: resin membrane
+  id: WallXenoResinThick
+  name: thick resin wall
+  description: Weird slime solidified into a thick wall.
   components:
   - type: Sprite
     sprite: _CM14/Structures/Xenos/xeno_resin_wall.rsi
   - type: Icon
     sprite: _CM14/Structures/Xenos/xeno_resin_wall.rsi
-    state: membrane
+    state: thickresin
+  - type: IconSmooth
+    key: walls
+    base: thickresin
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 400 # TODO CM14 rebalance
+        damage: 1350
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  parent: BaseWallXeno
+  id: BaseMembraneXeno
+  name: resin membrane
+  abstract: true
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: IconSmooth
     key: walls
-    base: membrane
   - type: Occluder
     enabled: false
   - type: Fixtures
@@ -66,3 +89,47 @@
         layer:
         - GlassLayer
         density: 1000
+
+- type: entity
+  parent: BaseMembraneXeno
+  id: WallXenoMembrane
+  name: resin membrane
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Xenos/xeno_resin_wall.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Xenos/xeno_resin_wall.rsi
+    state: membrane
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: IconSmooth
+    key: walls
+    base: membrane
+
+- type: entity
+  parent: BaseMembraneXeno
+  id: WallXenoMembraneThick
+  name: thick resin membrane
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Xenos/xeno_resin_wall.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Xenos/xeno_resin_wall.rsi
+    state: thickmembrane
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: IconSmooth
+    key: walls
+    base: thickmembrane
