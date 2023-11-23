@@ -2,6 +2,7 @@
   parent: CMXenoDeveloped
   id: CMXenoDrone
   name: Drone
+  description: An alien drone.
   components:
   - type: Sprite
     sprite: _CM14/Mobs/Xenos/Drone/drone.rsi
