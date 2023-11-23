@@ -62,6 +62,7 @@ namespace Content.IntegrationTests.Tests
             "Marathon",
             "Kettle",
             "MeteorArena",
+            "Atlas",
             "CMDev"
         };
 
