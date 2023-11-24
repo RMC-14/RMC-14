@@ -8,14 +8,6 @@
   },
   "states": [
     {
-      "name": "inhand-left",
-      "directions": 4
-    },
-    {
-      "name": "inhand-right",
-      "directions": 4
-    },
-    {
       "name": "autoinjector"
     },
     {
@@ -26,6 +18,14 @@
     },
     {
       "name": "autoinjector2"
+    },
+    {
+      "name": "default-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "default-inhand-right",
+      "directions": 4
     }
   ]
 }
