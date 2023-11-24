@@ -1,0 +1,65 @@
+- type: entity
+  parent: BaseItem
+  id: CMBaseDefibrillator
+  name: defibrillator
+  description: CLEAR! Zzzzat!
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Medical/defib.rsi
+    layers:
+    - state: defib
+    - state: defib_on
+      map: [ "enum.ToggleVisuals.Layer" ]
+      visible: false
+      shader: unshaded
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
+          True: { visible: true }
+          False: { visible: false }
+#      enum.DefibrillatorVisuals.Ready:
+#        enum.PowerDeviceVisualLayers.Powered:
+#          True: { visible: true }
+#          False: { visible: false }
+  - type: Item
+    size: Normal
+  - type: ItemCooldown
+  - type: Speech
+    speechVerb: Robotic
+  - type: Defibrillator
+    zapHeal:
+      types:
+        Asphyxiation: -40
+  - type: DoAfter
+  - type: UseDelay
+  - type: StaticPrice
+    price: 100
+  - type: GuideHelp
+    guides:
+    - Medical Doctor
+
+- type: entity
+  id: CMDefibrillator
+  parent: [ CMBaseDefibrillator, PowerCellSlotMediumItem ]
+  components:
+  - type: MultiHandedItem
+  - type: PowerCellDraw
+    useRate: 100
+
+- type: entity
+  id: CMDefibrillatorEmpty
+  parent: Defibrillator
+  suffix: Empty
+  components:
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+
+- type: entity
+  parent: CMBaseDefibrillator
+  id: DefibrillatorOneHandedUnpowered
+  suffix: One-Handed, Unpowered
