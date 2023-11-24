@@ -1,0 +1,9 @@
+- type: entity
+  parent: HandheldHealthAnalyzer
+  id: CMHealthAnalyzer
+  description:
+  - type: Sprite
+    sprite: _CM14/Objects/Medical/health_analyzer.rsi
+    state: health
+  - type: Item
+    sprite: null
