@@ -7,6 +7,9 @@
     contents:
       - id: CMBrutepack
       - id: CMOintment
+      - id: CMHealthAnalyzer
+      - id: CMTTricordrazineInjector
+      - id: CMTAutoInjector
 
 - type: entity
   id: CMBurnAidKitFilled
@@ -15,18 +18,24 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMOintment
+      - id: CMHealthAnalyzer
+      - id: CMTTricordrazineInjector
+      - id: Ointment
         amount: 2
+      - id: CMKelotaneAutoInjector
+        amount: 3
+
 
 - type: entity
-  name: heavy first-aid kit
-  id: CMHeavyFirstAidKitFilled
+  id: CMFirstAidO2KitFilled
   suffix: Filled
-  parent: CMAdvFirstAidKit
+  parent: CMFirstAidO2Kit
   components:
   - type: StorageFill
     contents:
-      - id: CMHeavyOintment
-      - id: CMHeavyBrutepack
-      - id: Bloodpack
+      - id: CMHealthAnalyzer
+      - id: CMPillCanisterDexalin
         amount: 2
+      - id: CMDexalinPlusAutoInjector
+        amount: 3
+      - id: CMInaprovAutoInjector

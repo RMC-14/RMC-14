@@ -1,28 +1,28 @@
 - type: entity
-  name: first-aid kit
-  description: It's an emergency medical kit for those serious boo-boos. With medical training you can fit this in a backpack.
   parent: BaseStorageItem
   id: CMFirstAidKit
+  name: first-aid kit
+  description: It's an emergency medical kit for those serious boo-boos. With medical training you can fit this in a backpack.
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Medical/firstaidkits.rsi
+    sprite: _CM14/Objects/Medical/first_aid_kits.rsi
     state: firstaid
   - type: Storage
     maxTotalWeight: 8
     maxItemSize: Small
   - type: Item
     size: Large
-    sprite: _CM14/Objects/Medical/firstaidkits.rsi
+    sprite: _CM14/Objects/Medical/first_aid_kits.rsi
     heldPrefix: firstaid
   - type: Tag
     tags:
     - CMFirstAidKit
 
 - type: entity
-  name: fire first-aid kit
-  description: It's an emergency medical kit for when the dropship ammo storage <spontaneously burns down. With medical training you can fit this in a backpack.
   parent: CMFirstAidKit
   id: CMBurnAidKit
+  name: fire first-aid kit
+  description: It's an emergency medical kit for when the dropship ammo storage <spontaneously burns down. With medical training you can fit this in a backpack.
   components:
   - type: Sprite
     state: ointment
@@ -30,10 +30,10 @@
     heldPrefix: ointment
 
 - type: entity
-  name: oxygen deprivation first-aid kit
-  description: A box full of reoxygenating goodies. With medical training you can fit this in a backpack.
   parent: CMFirstAidKit
   id: CMFirstAidO2Kit
+  name: oxygen deprivation first-aid kit
+  description: A box full of reoxygenating goodies. With medical training you can fit this in a backpack.
   components:
   - type: Sprite
     state: o2
@@ -41,10 +41,10 @@
     heldPrefix: o2
 
 - type: entity
-  name: advanced first-aid kit
-  description: Contains more effective methods of medical treatment than a basic first-aid kit, such as burn and trauma kits. With medical training you can fit this in a backpack.
   parent: CMFirstAidKit
   id: CMAdvFirstAidKit
+  name: advanced first-aid kit
+  description: Contains more effective methods of medical treatment than a basic first-aid kit, such as burn and trauma kits. With medical training you can fit this in a backpack.
   components:
   - type: Sprite
     state: advfirstaid

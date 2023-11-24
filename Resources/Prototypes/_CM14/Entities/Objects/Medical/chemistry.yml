@@ -15,7 +15,7 @@
           Open: { visible: false }
           Closed: { visible: true }
   - type: Sprite
-    sprite: _CM14/Objects/Chemistry/pillcanister.rsi
+    sprite: _CM14/Objects/Chemistry/pill_canister.rsi
     layers: 
       - state: pill_canister
       - state: closed
@@ -23,7 +23,7 @@
       - state: open
         map: ["openLayer"]
   - type: Item
-    sprite: _CM14/Objects/Chemistry/pillcanister.rsi
+    sprite: _CM14/Objects/Chemistry/pill_canister.rsi
     size: Small
   - type: Tag
     tags:

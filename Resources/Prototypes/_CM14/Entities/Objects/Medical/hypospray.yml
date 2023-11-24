@@ -17,7 +17,7 @@
   description: An auto-injector. Each use is 10 units.
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Medical/autoinjectors.rsi
+    sprite: _CM14/Objects/Medical/auto_injectors.rsi
     layers:
       - state: autoinjector
       - state: autoinjector1
@@ -53,8 +53,8 @@
             Quantity: 30
 
 - type: entity
-  id: CMInaprovAutoInjector
   parent: CMTAutoInjector
+  id: CMInaprovAutoInjector
   name: inaprovaline auto-injector
   description: An auto-injector containing Inaprovaline.  Useful for saving lives. Each use is 10 units.
   components:
@@ -67,8 +67,8 @@
             Quantity: 30
 
 - type: entity
-  id: CMKelotaneAutoInjector
   parent: CMTAutoInjector
+  id: CMKelotaneAutoInjector
   name: kelotane auto-injector
   description: An auto-injector loaded with 3 uses of Kelotane, a common burn medicine. Each use is 10 units.
   components:
@@ -78,4 +78,19 @@
         maxVol: 30
         reagents:
           - ReagentId: Kelotane
+            Quantity: 30
+
+
+- type: entity
+  parent: CMTAutoInjector
+  id: CMDexalinPlusAutoInjector
+  name: dexalin plus auto-injector
+  description: An auto-injector loaded with 3 uses of Dexalin Plus, a common airloss medicine. Each use is 10 units.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 30
+        reagents:
+          - ReagentId: DexalinPlus
             Quantity: 30
