@@ -9,6 +9,7 @@
     sprite: _CM14/Structures/Furniture/Tables/standard.rsi
   - type: Icon
     sprite: _CM14/Structures/Furniture/Tables/standard.rsi
+    state: full
 
 # Reinforced
 - type: entity
