@@ -1,0 +1,95 @@
+# Basic
+- type: entity
+  parent: [ TableBase, CMEntityBase ]
+  id: CMTable
+  name: table
+  description: A square metal surface resting on four legs. Useful to put stuff on.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Furniture/Tables/standard.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Furniture/Tables/standard.rsi
+
+# Reinforced
+- type: entity
+  parent: CMTable
+  id: CMTableReinforced
+  name: reinforced table
+  description: A square metal surface resting on four legs. This one has side panels, making it useful as a desk.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Furniture/Tables/reinforced.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Furniture/Tables/reinforced.rsi
+
+# Reinforced Requisition
+- type: entity
+  parent: CMTableReinforced
+  id: CMTableReinforcedRequisition
+  description: A square metal surface resting on its fat metal bottom.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Furniture/Tables/requisition.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Furniture/Tables/requisition.rsi
+
+# Reinforced Black
+- type: entity
+  parent: CMTableReinforced
+  id: CMTableReinforcedBlack
+  name: black table
+  description: A sleek black metal table. Its legs are securely bolted to the floor.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Furniture/Tables/black.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Furniture/Tables/black.rsi
+
+# Wooden Basic
+- type: entity
+  parent: CMTable
+  id: CMTableWooden
+  name: wooden table
+  description: A square wood surface resting on four legs. Useful to put stuff on.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Furniture/Tables/wood.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Furniture/Tables/wood.rsi
+
+# Wooden Poor
+- type: entity
+  parent: CMTableWooden
+  id: CMTableWoodenPoor
+  name: poor wooden table
+  description: A semi-poorly constructed wood surface resting on four legs. Useful to put stuff on.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Furniture/Tables/poor_wood.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Furniture/Tables/poor_wood.rsi
+
+# Wooden Fancy
+- type: entity
+  parent: CMTableWooden
+  id: CMTableWoodenFancy
+  name: fancy wooden table
+  description: A nicely crafted mahogany wood surface resting on four legs. Useful to put stuff on.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Furniture/Tables/fancy_wood.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Furniture/Tables/fancy_wood.rsi
+
+# Wooden Gambling
+- type: entity
+  parent: CMTableWooden
+  id: CMTableWoodenGambling
+  name: gambling table
+  description: A curved wood and carpet surface resting on four legs. Used for gambling games.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Furniture/Tables/gambling.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Furniture/Tables/gambling.rsi
+
