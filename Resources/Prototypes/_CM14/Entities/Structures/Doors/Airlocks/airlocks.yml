@@ -1,0 +1,136 @@
+#
+- type: entity
+  parent: [ Airlock, CMEntityBase ]
+  id: CMAirlock
+  name: airlock
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/personaldoor.rsi
+    snapCardinals: false
+    layers:
+    - state: closed
+      map: [ "enum.DoorVisualLayers.Base" ]
+    - state: unlit
+      map: ["enum.DoorVisualLayers.BaseUnlit"]
+    - state: welded
+      map: [ "enum.WeldableLayers.BaseWelded" ]
+    - state: locked
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseBolted"]
+    - state: spark
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseEmergencyAccess"]
+    - state: panel_open
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Construction
+    graph: CMAirlock
+    node: airlock
+    containers:
+    - board
+
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockCommand
+  suffix: Command
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/comdoor.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockEngineer
+  suffix: Engineering
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/engidoor.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockMedical
+  suffix: Medical
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/medidoor.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockSecurity
+  suffix: Security
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/secdoor.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockMaint
+  name: maintenance airlock
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/maintdoor.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockSecure
+  name: secure airlock
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/securedoor.rsi
+
+# Glass
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockGlass
+  name: glass airlock
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/personaldoor_glass.rsi
+  - type: Door
+    occludes: false
+  - type: Occluder
+    enabled: false
+  - type: AnimationPlayer
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 100
+        mask:
+        - FullTileMask
+        layer:
+        - GlassAirlockLayer
+  - type: Construction
+    graph: CMAirlock
+    node: glassAirlock
+  - type: PaintableAirlock
+    group: Glass
+  - type: Tag
+    tags:
+    - GlassAirlock
+
+- type: entity
+  parent: CMAirlockGlass
+  id: CMAirlockGlassEngineer
+  suffix: Engineer
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/engidoor_glass.rsi
+
+- type: entity
+  parent: CMAirlockGlass
+  id: CMAirlockGlassMedical
+  suffix: Medical
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/medidoor_glass.rsi
+
+- type: entity
+  parent: CMAirlockGlass
+  id: CMAirlockGlassSecurity
+  suffix: Security
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/secdoor_glass.rsi

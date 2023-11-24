@@ -1,3 +1,4 @@
+# Walls
 - type: construction
   id: CMGirder
   name: girder
@@ -66,6 +67,41 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+# Airlocks
+- type: construction
+  name: airlock
+  id: CMAirlock
+  graph: CMAirlock
+  startNode: start
+  targetNode: airlock
+  category: construction-category-cm-structures
+  description: It opens, it closes, and maybe crushes you.
+  icon:
+    sprite: _CM14/Structures/Doors/airlock_assemblies.rsi
+    state: as_3
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  name: glass airlock
+  id: CMAirlockGlass
+  graph: CMAirlock
+  startNode: start
+  targetNode: glassAirlock
+  category: construction-category-cm-structures
+  description: It opens, it closes, and maybe crushes you.
+  icon:
+    sprite: _CM14/Structures/Doors/airlock_assemblies.rsi
+    state: as_g3
+  objectType: Structure
+  placementMode: SnapgridCenter
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
