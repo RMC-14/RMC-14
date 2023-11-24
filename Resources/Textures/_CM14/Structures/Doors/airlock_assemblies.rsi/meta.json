@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9527153697f28c131dc93f47c83c9a93cac8de69/icons/obj/structures/doors/airlock_assembly.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "as_0"
+    },
+    {
+      "name": "as_1"
+    },
+    {
+      "name": "as_2"
+    },
+    {
+      "name": "as_3"
+    },
+    {
+      "name": "as_g0"
+    },
+    {
+      "name": "as_g1"
+    },
+    {
+      "name": "as_g2"
+    },
+    {
+      "name": "as_g3"
+    }
+  ]
+}
