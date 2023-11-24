@@ -26,7 +26,7 @@ public sealed class XenoAcidSystem : EntitySystem
 
     private void OnXenoCorrosiveAcid(Entity<XenoComponent> xeno, ref XenoCorrosiveAcidEvent args)
     {
-        if (xeno.Owner == args.Performer ||
+        if (xeno.Owner != args.Performer ||
             !CheckCorrodablePopups(xeno, args.Target))
         {
             return;
