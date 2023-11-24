@@ -23,7 +23,7 @@
   equipment:
     jumpsuit: CMJumpsuitMPBlack
     back: CMBackpackSecurity
-    shoes: CMBootsFilled
+    shoes: CMBootsBlackFilled
     head: CMHeadBeretRed
     eyes: ClothingEyesGlassesSecurity
     gloves: CMHandsBlack
