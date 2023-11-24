@@ -17,13 +17,13 @@
   id: CMCargoTechGear
   equipment:
     jumpsuit: CMJumpsuitCargoTech
-    back: ClothingBackpackCargoFilled
+    back: CMBackpackEngineer
     shoes: CMShoesCombatBootsBrown
     head: CMHeadCapCargo
     gloves: CMHandsBrown
     id: CMCargoTechIDCard
     ears: CMHeadsetRequisition
-  satchel: ClothingBackpackSatchelCargoFilled
+  satchel: CMSatchelEngineer
 
 - type: entity
   id: CMSpawnPointCargoTech

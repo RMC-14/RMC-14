@@ -17,13 +17,13 @@
   id: NurseGear
   equipment:
     jumpsuit: CMScrubsNurse
-    back: ClothingBackpackMedicalFilled
+    back: CMBackpackMedical
     gloves: CMHandsLatex
     shoes: CMShoesCombatBoots
     head: CMHeadCapSurgOrange
     id: NurseIDCard
     ears: CMHeadsetMedical
-  satchel: ClothingBackpackSatchelMedicalFilled
+  satchel: CMSatchelMedical
 
 - type: entity
   id: CMSpawnPointNurse
