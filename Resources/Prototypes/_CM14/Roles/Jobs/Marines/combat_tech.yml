@@ -20,7 +20,7 @@
   equipment:
     jumpsuit: CMJumpsuitMarineEngineer
     back: CMBackpackMarineTech
-    shoes: CMShoesCombatBoots
+    shoes: CMBootsBlackFilled
     eyes: ClothingEyesGlassesMeson
     head: ArmorHelmetM10
     outerClothing: ArmorMarineM3

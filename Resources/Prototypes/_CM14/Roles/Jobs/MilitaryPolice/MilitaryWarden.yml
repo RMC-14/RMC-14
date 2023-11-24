@@ -23,7 +23,7 @@
   equipment:
     jumpsuit: CMJumpsuitWarden
     back: CMBackpackSecurity
-    shoes: CMShoesCombatBoots
+    shoes: CMBootsBlackFilled
     head: CMHeadCapWarden
     eyes: ClothingEyesGlassesSecurity
     gloves: CMHandsBlack

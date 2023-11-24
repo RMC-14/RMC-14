@@ -20,7 +20,7 @@
     jumpsuit: CMJumpsuitMessTech
     outerClothing: CMCoatMessTech
     back: CMBackpack
-    shoes: CMShoesCombatBootsBrown
+    shoes: CMBootsBrown
     id: MessTechIDCard
     ears: CMHeadsetChef
   satchel: CMSatchel

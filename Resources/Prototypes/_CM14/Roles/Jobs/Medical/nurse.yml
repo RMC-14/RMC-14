@@ -19,7 +19,7 @@
     jumpsuit: CMScrubsNurse
     back: CMBackpackMedical
     gloves: CMHandsLatex
-    shoes: CMShoesCombatBoots
+    shoes: ClothingShoesColorWhite
     head: CMHeadCapSurgOrange
     id: NurseIDCard
     ears: CMHeadsetMedical

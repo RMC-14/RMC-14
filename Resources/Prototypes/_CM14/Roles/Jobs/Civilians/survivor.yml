@@ -28,7 +28,7 @@
   equipment:
     jumpsuit: CMJumpsuitColonist
     back: CMBackpack
-    shoes: CMShoesCombatBootsBrown
+    shoes: CMBootsBrown
     id: ColonistIDCard
     ears: CMHeadsetColony
   satchel: CMSatchel
