@@ -23,7 +23,7 @@
   equipment:
     jumpsuit: CMJumpsuitMarineMedic
     back: CMBackpackMarineMedic
-    shoes: CMShoesCombatBoots
+    shoes: CMBootsBlackFilled
     gloves: CMHandsBlack
     eyes: ClothingEyesHudMedical
     head: CMArmorHelmetM10Medic
