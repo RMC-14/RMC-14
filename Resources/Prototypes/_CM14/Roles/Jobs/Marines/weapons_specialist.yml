@@ -20,7 +20,7 @@
   equipment:
     jumpsuit: JumpsuitMarine
     back: CMBackpackMarine
-    shoes: CMShoesCombatBoots
+    shoes: CMBootsBlackFilled
     head: ArmorHelmetM10
     outerClothing: ArmorMarineM3
     gloves: CMHandsBlack

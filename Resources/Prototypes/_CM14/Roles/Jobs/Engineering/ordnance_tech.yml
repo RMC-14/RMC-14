@@ -22,7 +22,7 @@
   equipment:
     jumpsuit: CMJumpsuitOrdnanceTech
     back: CMBackpackEngineer
-    shoes: CMShoesCombatBootsBrown
+    shoes: CMBootsBrown
     gloves: CMHandsInsulated
     id: OrdnanceTechIDCard
     ears: CMHeadsetEngineer

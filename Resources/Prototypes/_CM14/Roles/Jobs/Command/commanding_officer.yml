@@ -35,7 +35,7 @@
   equipment:
     jumpsuit: CMJumpsuitCO
     back: CMBackpackCommand
-    shoes: CMShoesCombatBoots
+    shoes: CMShoesDressCommander
     head: CMHeadBeretCO
     outerClothing: CMCoatOfficer
     id: CommandingOfficerIDCard

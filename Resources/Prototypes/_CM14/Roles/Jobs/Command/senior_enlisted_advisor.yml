@@ -35,7 +35,7 @@
   equipment:
     jumpsuit: CMJumpsuitBO
     back: CMBackpackCommand
-    shoes: CMShoesCombatBootsBrown
+    shoes: CMBootsBrownFilled
     head: CMHeadCapDrill
     id: SeniorEnlistedAdvisorIDCard
     ears: CMHeadsetLeader

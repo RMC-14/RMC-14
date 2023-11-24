@@ -19,7 +19,7 @@
     jumpsuit: CMJumpsuitCorrespondent
     outerClothing: CMCoatCorrespondent
     back: CMBackpack
-    shoes: CMShoesCombatBootsBrown
+    shoes: CMBootsBrown
     id: CorrespondentIDCard
     ears: CMHeadsetReporter
   satchel: CMSatchel

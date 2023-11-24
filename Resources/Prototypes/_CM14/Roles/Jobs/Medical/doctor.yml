@@ -24,7 +24,7 @@
     outerClothing: CMCoatLong
     back: CMBackpackMedical
     gloves: CMHandsLatex
-    shoes: CMShoesCombatBoots
+    shoes: ClothingShoesColorWhite
     head: CMHeadCapSurgBlue
     id: MarineDoctorIDCard
     ears: CMHeadsetMedical

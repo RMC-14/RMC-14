@@ -24,7 +24,7 @@
     jumpsuit: CMJumpsuitBO
     outerClothing: CMCoatASO
     back: CMBackpack
-    shoes: CMShoesCombatBootsBrown
+    shoes: CMBootsBrown
     id: ASOIDCard
     ears: CMHeadsetLeader
   satchel: CMSatchel

@@ -23,7 +23,7 @@
     jumpsuit: CMJumpsuitResearch
     back: CMBackpackMedical
     gloves: CMHandsLatex
-    shoes: CMShoesCombatBoots
+    shoes: CMShoesDress
     id: ResearcherIDCard
     ears: CMHeadsetResearcher
   satchel: CMSatchelMedical

@@ -23,7 +23,7 @@
   equipment:
     jumpsuit: CMJumpsuitQM
     back: CMBackpackEngineer
-    shoes: CMShoesCombatBootsBrown
+    shoes: CMBootsBrown
     head: CMHeadCapCargo
     gloves: CMHandsBrown
     id: CMQuartermasterIDCard
