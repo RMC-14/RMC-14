@@ -16,8 +16,9 @@
     - key: enum.HealthAnalyzerUiKey.Key
       type: HealthAnalyzerBoundUserInterface
   - type: HealthAnalyzer
+    scanDelay: 0
     scanningEndSound:
-      path: "/Audio/Items/Medical/healthscanner.ogg" #todo cm14 health scanner sound
+      path: "/Audio/_CM14/Medical/healthanalyzer.ogg"
   - type: Appearance
   - type: GuideHelp
     guides:
