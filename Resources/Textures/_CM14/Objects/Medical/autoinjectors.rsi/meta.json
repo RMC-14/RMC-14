@@ -20,11 +20,11 @@
       "name": "autoinjector2"
     },
     {
-      "name": "default-inhand-left",
+      "name": "inhand-left",
       "directions": 4
     },
     {
-      "name": "default-inhand-right",
+      "name": "inhand-right",
       "directions": 4
     }
   ]
