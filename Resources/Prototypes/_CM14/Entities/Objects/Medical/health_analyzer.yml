@@ -3,7 +3,7 @@
   id: CMHealthAnalyzer
   name: health analyzer
   description: A hand-held body scanner capable of distinguishing vital signs of the subject.
-  suffix: cm14
+  suffix: CM14
   components:
   - type: Sprite
     sprite: _CM14/Objects/Medical/health_analyzer.rsi

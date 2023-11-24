@@ -20,11 +20,8 @@
         enum.ToggleVisuals.Layer:
           True: { visible: true }
           False: { visible: false }
-#      enum.DefibrillatorVisuals.Ready:
-#        enum.PowerDeviceVisualLayers.Powered:
-#          True: { visible: true }
-#          False: { visible: false }
   - type: Item
+    sprite: Objects/Specific/Medical/defib.rsi
     size: Normal
   - type: ItemCooldown
   - type: Speech
@@ -44,15 +41,15 @@
 - type: entity
   id: CMDefibrillator
   parent: [ CMBaseDefibrillator, PowerCellSlotMediumItem ]
+  suffix: CM14
   components:
-  - type: MultiHandedItem
   - type: PowerCellDraw
     useRate: 100
 
 - type: entity
   id: CMDefibrillatorEmpty
-  parent: Defibrillator
-  suffix: Empty
+  parent: CMDefibrillator
+  suffix: CM14, Empty
   components:
   - type: ItemSlots
     slots:
@@ -61,5 +58,5 @@
 
 - type: entity
   parent: CMBaseDefibrillator
-  id: DefibrillatorOneHandedUnpowered
-  suffix: One-Handed, Unpowered
+  id: CMDefibrillatorInfinite
+  suffix: CM14, Infinite
