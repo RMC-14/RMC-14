@@ -27,11 +27,11 @@
   id: SurvivorGear
   equipment:
     jumpsuit: CMJumpsuitColonist
-    back: ClothingBackpackFilled
+    back: CMBackpack
     shoes: CMShoesCombatBootsBrown
     id: ColonistIDCard
     ears: CMHeadsetColony
-  satchel: ClothingBackpackSatchelFilled
+  satchel: CMSatchel
 
 - type: entity
   id: CMSpawnPointSurvivor

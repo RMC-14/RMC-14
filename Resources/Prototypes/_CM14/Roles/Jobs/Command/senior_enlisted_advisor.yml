@@ -34,12 +34,12 @@
   id: SeniorEnlistedAdvisorGear
   equipment:
     jumpsuit: CMJumpsuitBO
-    back: ClothingBackpackCaptainFilled
+    back: CMBackpackCommand
     shoes: CMShoesCombatBootsBrown
     head: CMHeadCapDrill
     id: SeniorEnlistedAdvisorIDCard
     ears: CMHeadsetLeader
-  satchel: ClothingBackpackSatchelCaptainFilled
+  satchel: CMSatchelMarine
 
 - type: entity
   id: SpawnPointSeniorEnlistedAdvisor
