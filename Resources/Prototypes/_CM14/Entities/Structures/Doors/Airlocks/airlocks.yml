@@ -7,7 +7,7 @@
     mode: SnapgridCenter
   components:
   - type: Sprite
-    sprite: _CM14/Structures/Doors/Airlocks/personaldoor.rsi
+    sprite: _CM14/Structures/Doors/Airlocks/personal_door.rsi
     snapCardinals: false
     layers:
     - state: closed
@@ -36,7 +36,7 @@
   suffix: Command
   components:
   - type: Sprite
-    sprite: _CM14/Structures/Doors/Airlocks/comdoor.rsi
+    sprite: _CM14/Structures/Doors/Airlocks/com_door.rsi
 
 - type: entity
   parent: CMAirlock
@@ -44,7 +44,7 @@
   suffix: Engineering
   components:
   - type: Sprite
-    sprite: _CM14/Structures/Doors/Airlocks/engidoor.rsi
+    sprite: _CM14/Structures/Doors/Airlocks/engi_door.rsi
 
 - type: entity
   parent: CMAirlock
@@ -52,7 +52,7 @@
   suffix: Medical
   components:
   - type: Sprite
-    sprite: _CM14/Structures/Doors/Airlocks/medidoor.rsi
+    sprite: _CM14/Structures/Doors/Airlocks/medi_door.rsi
 
 - type: entity
   parent: CMAirlock
@@ -60,7 +60,7 @@
   suffix: Security
   components:
   - type: Sprite
-    sprite: _CM14/Structures/Doors/Airlocks/secdoor.rsi
+    sprite: _CM14/Structures/Doors/Airlocks/sec_door.rsi
 
 - type: entity
   parent: CMAirlock
@@ -68,7 +68,7 @@
   name: maintenance airlock
   components:
   - type: Sprite
-    sprite: _CM14/Structures/Doors/Airlocks/maintdoor.rsi
+    sprite: _CM14/Structures/Doors/Airlocks/maint_door.rsi
 
 - type: entity
   parent: CMAirlock
@@ -76,7 +76,7 @@
   name: secure airlock
   components:
   - type: Sprite
-    sprite: _CM14/Structures/Doors/Airlocks/securedoor.rsi
+    sprite: _CM14/Structures/Doors/Airlocks/secure_door.rsi
 
 # Glass
 - type: entity
@@ -85,7 +85,7 @@
   name: glass airlock
   components:
   - type: Sprite
-    sprite: _CM14/Structures/Doors/Airlocks/personaldoor_glass.rsi
+    sprite: _CM14/Structures/Doors/Airlocks/personal_door_glass.rsi
   - type: Door
     occludes: false
   - type: Occluder
@@ -117,7 +117,7 @@
   suffix: Engineer
   components:
   - type: Sprite
-    sprite: _CM14/Structures/Doors/Airlocks/engidoor_glass.rsi
+    sprite: _CM14/Structures/Doors/Airlocks/engi_door_glass.rsi
 
 - type: entity
   parent: CMAirlockGlass
@@ -125,7 +125,7 @@
   suffix: Medical
   components:
   - type: Sprite
-    sprite: _CM14/Structures/Doors/Airlocks/medidoor_glass.rsi
+    sprite: _CM14/Structures/Doors/Airlocks/medi_door_glass.rsi
 
 - type: entity
   parent: CMAirlockGlass
@@ -133,4 +133,4 @@
   suffix: Security
   components:
   - type: Sprite
-    sprite: _CM14/Structures/Doors/Airlocks/secdoor_glass.rsi
+    sprite: _CM14/Structures/Doors/Airlocks/sec_door_glass.rsi
