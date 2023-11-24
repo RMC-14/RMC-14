@@ -34,9 +34,9 @@
   description: A pair of light brown gloves.
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/Hands/Gloves/lightbrown.rsi
+    sprite: _CM14/Objects/Clothing/Hands/Gloves/light_brown.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/Hands/Gloves/lightbrown.rsi
+    sprite: _CM14/Objects/Clothing/Hands/Gloves/light_brown.rsi
   - type: Fiber
     fiberColor: fibers-brown
 
