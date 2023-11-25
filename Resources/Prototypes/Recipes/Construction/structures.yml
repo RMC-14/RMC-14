@@ -1293,7 +1293,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/metal_barricades.rsi/barricade.rsi
+    sprite: Structures/metal_barricades/barricade.rsi
     state: metal
   conditions:
     - !type:TileNotBlocked
@@ -1310,7 +1310,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/metal_barricades.rsi/barricade.rsi
+    sprite: Structures/metal_barricades/barricade.rsi
     state: sandbag
   conditions:
     - !type:TileNotBlocked
@@ -1327,7 +1327,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/metal_barricades.rsi/barricade.rsi
+    sprite: Structures/metal_barricades/barricade.rsi
     state: turnstile
   conditions:
     - !type:TileNotBlocked
@@ -1344,7 +1344,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/metal_barricades.rsi/barricade.rsi
+    sprite: Structures/metal_barricades/barricade.rsi
     state: turnstile_med
   conditions:
     - !type:TileNotBlocked
@@ -1361,7 +1361,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/metal_barricades.rsi/barricade.rsi
+    sprite: Structures/metal_barricades/barricade.rsi
     state: folding_metal
   conditions:
     - !type:TileNotBlocked
@@ -1378,7 +1378,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/metal_barricades.rsi/barricade.rsi
+    sprite: Structures/metal_barricades/barricade.rsi
     state: plasteel
   conditions:
     - !type:TileNotBlocked

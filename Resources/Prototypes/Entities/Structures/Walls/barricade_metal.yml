@@ -5,7 +5,7 @@
   description: The most basic, generic barricade you have ever seen. This probably shouldn't even be here.
   components:
   - type: Sprite
-    sprite: Structures/metal_barricades.rsi/barricade.rsi
+    sprite: Structures/metal_barricades/barricade.rsi
     layers:
     - state: metal
     drawdepth: WallTops
@@ -40,7 +40,7 @@
         path:
           "/Audio/Weapons/grille_hit.ogg"
   - type: Sprite
-    sprite: Structures/metal_barricades.rsi/barricade.rsi
+    sprite: Structures/metal_barricades/barricade.rsi
     layers:
     - state: metal
     drawdepth: WallTops
@@ -75,7 +75,7 @@
     damageDivisor: 2
     trackAllDamage: true
     damageOverlay:
-      sprite: Structures/metal_barricades.rsi/metal_barricade_cracks.rsi
+      sprite: Structures/metal_barricades/metal_barricade_cracks.rsi
   - type: Construction
     graph: BarricadeMetalGraph
     node: node_metal
@@ -89,7 +89,7 @@
   description: A barricade incredibly resistant to corrosive and fire damage but breaks easier. Repair with a welder.
   components:
     - type: Sprite
-      sprite: Structures/metal_barricades.rsi/barricade.rsi
+      sprite: Structures/metal_barricades/barricade.rsi
       layers:
       - state: burn_upgrade
     - type: Damageable
@@ -100,7 +100,7 @@
       damageDivisor: 2
       trackAllDamage: true
       damageOverlay:
-        sprite: Structures/metal_barricades.rsi/burn_barricade_cracks.rsi
+        sprite: Structures/metal_barricades/burn_barricade_cracks.rsi
     - type: Construction
       graph: BarricadeMetalGraph
       node: node_burn_upgrade
@@ -112,7 +112,7 @@
   description: A heavy-duty barricade reinforced with steel and resistant against thrashing. Repair with a welder.
   components:
     - type: Sprite
-      sprite: Structures/metal_barricades.rsi/barricade.rsi
+      sprite: Structures/metal_barricades/barricade.rsi
       layers:
       - state: brute_upgrade
     - type: Damageable
@@ -123,7 +123,7 @@
       damageDivisor: 2
       trackAllDamage: true
       damageOverlay:
-        sprite: Structures/metal_barricades.rsi/brute_barricade_cracks.rsi
+        sprite: Structures/metal_barricades/brute_barricade_cracks.rsi
     - type: Construction
       graph: BarricadeMetalGraph
       node: node_brute_upgrade
@@ -135,7 +135,7 @@
   description: An blast-resistant barricade made out of the same stuff in EODs. Repair with a welder.
   components:
     - type: Sprite
-      sprite: Structures/metal_barricades.rsi/barricade.rsi
+      sprite: Structures/metal_barricades/barricade.rsi
       layers:
       - state: explosive_upgrade
     - type: ExplosionResistance
@@ -145,7 +145,7 @@
       damageDivisor: 2
       trackAllDamage: true
       damageOverlay:
-        sprite: Structures/metal_barricades.rsi/explosive_barricade_cracks.rsi
+        sprite: Structures/metal_barricades/explosive_barricade_cracks.rsi
     - type: Construction
       graph: BarricadeMetalGraph
       node: node_explosive_upgrade
@@ -164,7 +164,7 @@
         path:
           "/Audio/Weapons/grille_hit.ogg"
   - type: Sprite
-    sprite: Structures/metal_barricades.rsi/barricade.rsi
+    sprite: Structures/metal_barricades/barricade.rsi
     layers:
     - state: sandbag
     drawdepth: WallTops
@@ -205,7 +205,7 @@
     damageDivisor: 2
     trackAllDamage: true
     damageOverlay:
-      sprite: Structures/metal_barricades.rsi/sandbag_cracks.rsi
+      sprite: Structures/metal_barricades/sandbag_cracks.rsi
   - type: Construction
     graph: BarricadeSandbagGraph
     node: node_sandbag
@@ -219,9 +219,12 @@
   description: A railing to prevent marines from stepping out of line.
   components:
     - type: Sprite
-      sprite: Structures/metal_barricades.rsi/barricade.rsi
+      sprite: Structures/metal_barricades/barricade.rsi
       layers:
       - state: turnstile
+    - type: Damageable
+      damageContainer: Inorganic
+      damageModifierSet: Metallic
     - type: Destructible
       thresholds:
       - trigger:
@@ -250,7 +253,7 @@
   description: A railing to prevent marines from stepping out of line. This one is designed specifically for medical.
   components:
     - type: Sprite
-      sprite: Structures/metal_barricades.rsi/barricade.rsi
+      sprite: Structures/metal_barricades/barricade.rsi
       layers:
       - state: turnstile_med
     - type: Construction
@@ -272,7 +275,7 @@
         path:
           "/Audio/Weapons/grille_hit.ogg"
   - type: Sprite
-    sprite: Structures/metal_barricades.rsi/barricade.rsi
+    sprite: Structures/metal_barricades/barricade.rsi
     layers:
     - state: folding_metal
       map: ["enum.DoorVisualLayers.Base"]
@@ -330,7 +333,7 @@
   description: A tough folding plasteel barricade stronger than its metal counterpart. Can be closed and opened at a moment's notice. Repair with a welder.
   components:
   - type: Sprite
-    sprite: Structures/metal_barricades.rsi/barricade.rsi
+    sprite: Structures/metal_barricades/barricade.rsi
     layers:
     - state: plasteel
       map: ["enum.DoorVisualLayers.Base"]
@@ -407,7 +410,7 @@
         layer:
         - TableLayer
   - type: Sprite # Turns out... the Foldable do not go along well with the DamageVisuals component
-    sprite: Structures/metal_barricades.rsi/barricade.rsi
+    sprite: Structures/metal_barricades/barricade.rsi
     layers:
     - state: folding
       map: ["unfoldedLayer"]
@@ -439,7 +442,7 @@
     damageDivisor: 2
     trackAllDamage: true
     damageOverlay:
-      sprite: Structures/metal_barricades.rsi/folding_cracks.rsi
+      sprite: Structures/metal_barricades/folding_cracks.rsi
   - type: Item
     size: Huge
   - type: Appearance
