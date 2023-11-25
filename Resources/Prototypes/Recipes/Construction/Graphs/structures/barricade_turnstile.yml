@@ -1,0 +1,32 @@
+- type: constructionGraph
+  id: BarricadeTurnstileGraph
+  start: start
+  graph:
+  - node: start
+    actions:
+    - !type:DeleteEntity
+    edges:
+    - to: node_turnstile
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      steps:
+      - material: Steel
+        amount: 4
+        doAfter: 3
+
+  - node: node_turnstile
+    entity: barricade_turnstile
+    edges:
+    - to: start
+      completed:
+        - !type:SpawnPrototype
+          prototype: SheetSteel1
+          amount: 3
+        - !type:DeleteEntity
+      conditions:
+        - !type:EntityAnchored
+          anchored: false
+      steps:
+        - tool: Screwing
+          doAfter: 2

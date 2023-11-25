@@ -1,0 +1,32 @@
+- type: constructionGraph
+  id: BarricadePlasteelDoorGraph
+  start: start
+  graph:
+  - node: start
+    actions:
+    - !type:DeleteEntity
+    edges:
+    - to: node_barricade_plasteel_door
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      steps:
+      - material: Plasteel
+        amount: 5
+        doAfter: 3
+
+  - node: node_barricade_plasteel_door
+    entity: barricade_plasteel_door
+    edges:
+    - to: start
+      completed:
+        - !type:SpawnPrototype
+          prototype: Plasteel
+          amount: 4
+        - !type:DeleteEntity
+      conditions:
+        - !type:EntityAnchored
+          anchored: false
+      steps:
+        - tool: Screwing
+          doAfter: 2

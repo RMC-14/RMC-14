@@ -1,0 +1,455 @@
+- type: entity
+  parent: BaseStructureDynamic
+  id: barricade_base
+  name: Generic Barricade
+  description: The most basic, generic barricade you have ever sen. This probably shouldn't even be here.
+  components:
+  - type: Sprite
+    sprite: Structures/metal_barricades.rsi/barricade.rsi
+    layers:
+    - state: metal
+    drawdepth: WallTops
+  - type: Physics
+    bodyType: Static
+  - type: Transform
+    anchored: true
+  - type: Appearance
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.45"
+        density: 500
+        mask:
+        - FullTileMask
+        layer:
+        - TableLayer
+
+# Metal Barricade Tree
+
+- type: entity
+  parent: barricade_base
+  id: barricade_metal
+  name: Metal Barricade
+  description: A generic barricade. Upgradable with steel, plasma glass, or steel rods. Repair with a welder. Keeps unwanted visitors out.
+  components:
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/grille_hit.ogg"
+  - type: Sprite
+    sprite: Structures/metal_barricades.rsi/barricade.rsi
+    layers:
+    - state: metal
+    drawdepth: WallTops
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: InteractionPopup
+    interactSuccessString: fence-rattle-success
+    messagePerceivedByOthers: fence-rattle-success
+    interactSuccessSound:
+      collection: FenceRattle
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/metalbreak.ogg
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 2
+    trackAllDamage: true
+    damageOverlay:
+      sprite: Structures/metal_barricades.rsi/metal_barricade_cracks.rsi
+  - type: Construction
+    graph: BarricadeMetalGraph
+    node: node_metal
+
+# Metal Barricade Upgrades
+
+- type: entity
+  parent: barricade_metal
+  id: barricade_burn
+  name: anti-Biohazard Barricade
+  description: A barricade strongly resistant to corrosive and fire damage but breaks a tad easier. Repair with a welder.
+  components:
+    - type: Sprite
+      sprite: Structures/metal_barricades.rsi/barricade.rsi
+      layers:
+      - state: burn_upgrade
+    - type: Damageable
+      damageContainer: Inorganic
+      damageModifierSet: antiBioMetallic
+    - type: DamageVisuals
+      thresholds: [4, 8, 12]
+      damageDivisor: 2
+      trackAllDamage: true
+      damageOverlay:
+        sprite: Structures/metal_barricades.rsi/burn_barricade_cracks.rsi
+    - type: Construction
+      graph: BarricadeMetalGraph
+      node: node_burn_upgrade
+
+- type: entity
+  parent: barricade_metal
+  id: barricade_brute
+  name: Reinforced Barricade
+  description: A heavy-duty barricade reinforced with steel and resistant against thrashing. Repair with a welder.
+  components:
+    - type: Sprite
+      sprite: Structures/metal_barricades.rsi/barricade.rsi
+      layers:
+      - state: brute_upgrade
+    - type: Damageable
+      damageContainer: Inorganic
+      damageModifierSet: bruteMetallic
+    - type: DamageVisuals
+      thresholds: [4, 8, 12]
+      damageDivisor: 2
+      trackAllDamage: true
+      damageOverlay:
+        sprite: Structures/metal_barricades.rsi/brute_barricade_cracks.rsi
+    - type: Construction
+      graph: BarricadeMetalGraph
+      node: node_brute_upgrade
+
+- type: entity
+  parent: barricade_metal
+  id: barricade_explosive
+  name: Blast-Resistant Barricade
+  description: An blast-resistant barricade made out of the same stuff in EODs. Repair with a welder.
+  components:
+    - type: Sprite
+      sprite: Structures/metal_barricades.rsi/barricade.rsi
+      layers:
+      - state: explosive_upgrade
+    - type: ExplosionResistance
+      damageCoefficient: 0.15
+    - type: DamageVisuals
+      thresholds: [4, 8, 12]
+      damageDivisor: 2
+      trackAllDamage: true
+      damageOverlay:
+        sprite: Structures/metal_barricades.rsi/explosive_barricade_cracks.rsi
+    - type: Construction
+      graph: BarricadeMetalGraph
+      node: node_explosive_upgrade
+
+# Sandbag
+
+- type: entity
+  parent: barricade_base
+  id: barricade_sandbag
+  name: Sandbag Barricade
+  description: A barricade made out of the sand from the ground. Tough to beat but easy to pierce.
+  components:
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/grille_hit.ogg"
+  - type: Sprite
+    sprite: Structures/metal_barricades.rsi/barricade.rsi
+    layers:
+    - state: sandbag
+    drawdepth: WallTops
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: sandbag
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.40,0.49,-0.28"
+        density: 2000
+        mask:
+        - FullTileMask
+        layer:
+        - TableLayer
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/metalbreak.ogg
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 2
+    trackAllDamage: true
+    damageOverlay:
+      sprite: Structures/metal_barricades.rsi/sandbag_cracks.rsi
+  - type: Construction
+    graph: BarricadeSandbagGraph
+    node: node_sandbag
+
+# Turnstile (not sure how to make a one-way door so for now it is a glorified fence)
+
+- type: entity
+  parent: barricade_base
+  id: barricade_turnstile
+  name: Turnstile
+  description: A railing to prevent folks from stepping out of line.
+  components:
+    - type: Sprite
+      sprite: Structures/metal_barricades.rsi/barricade.rsi
+      layers:
+      - state: turnstile
+    - type: Destructible
+      thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+      - trigger:
+          !type:DamageTrigger
+          damage: 25
+        behaviors:
+        - !type:PlaySoundBehavior
+          sound:
+            path: /Audio/Effects/metalbreak.ogg
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - type: Construction
+      graph: BarricadeMetalGraph
+      node: node_turnstile
+
+- type: entity
+  parent: barricade_turnstile
+  id: barricade_turnstile_med
+  name: Turnstile
+  description: A railing to prevent folks from stepping out of line specifically in medical.
+  components:
+    - type: Sprite
+      sprite: Structures/metal_barricades.rsi/barricade.rsi
+      layers:
+      - state: turnstile_med
+    - type: Construction
+      graph: BarricadeMetalGraph
+      node: node_turnstile
+
+
+# Metal Barricade Doors
+
+- type: entity
+  parent: barricade_base
+  id: barricade_metal_door
+  name: Folding Metal Barricade
+  description: A folding metal barricade weaker than the non-folding counterpart. Able to be opened and closed at a moment's notice.
+  components:
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/grille_hit.ogg"
+  - type: Sprite
+    sprite: Structures/metal_barricades.rsi/barricade.rsi
+    layers:
+    - state: folding_metal
+      map: ["enum.DoorVisualLayers.Base"]
+    drawdepth: WallTops
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/metalbreak.ogg
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: AnimationPlayer
+  - type: InteractionOutline
+  - type: Door
+    openSpriteState: folding_metal_closed
+    closedSpriteState: folding_metal
+    canPry: false
+    occludes: false
+    changeAirtight: false
+    bumpOpen: false
+    clickOpen: true
+    canCrush: false
+    closeTimeOne: 0
+    closeTimeTwo: 0
+    openTimeOne: 0
+    openTimeTwo: 0
+    openingAnimationTime: 0
+    closingAnimationTime: 0
+    openSound:
+      path: /Audio/Effects/door_open.ogg
+    closeSound:
+      path: /Audio/Effects/door_close.ogg
+  - type: Construction
+    graph: BarricadeMetalDoorGraph
+    node: node_barricade_metal_door
+
+- type: entity
+  parent: barricade_metal_door
+  id: barricade_plasteel_door
+  name: Folding Plasteel Barricade
+  description: A tough folding plasteel barricade stronger than its metal counterpart. Can be closed and opened at a moment's notice.
+  components:
+  - type: Sprite
+    sprite: Structures/metal_barricades.rsi/barricade.rsi
+    layers:
+    - state: plasteel
+      map: ["enum.DoorVisualLayers.Base"]
+    drawdepth: WallTops
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/metalbreak.ogg
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Door
+    openSpriteState: plasteel_closed
+    closedSpriteState: plasteel
+    canPry: false
+    occludes: false
+    changeAirtight: false
+    bumpOpen: false
+    clickOpen: true
+    canCrush: false
+    closeTimeOne: 0
+    closeTimeTwo: 0
+    openTimeOne: 0
+    openTimeTwo: 0
+    openingAnimationTime: 0
+    closingAnimationTime: 0
+    openSound:
+      path: /Audio/Effects/door_open.ogg
+    closeSound:
+      path: /Audio/Effects/door_close.ogg
+  - type: Construction
+    graph: BarricadePlasteelDoorGraph
+    node: node_barricade_plasteel_door
+
+# Folding Portable Barricades
+
+- type: entity
+  parent: [BaseStructureDynamic, BaseFoldable]
+  id: barricade_foldable
+  name: Foldable Barricade
+  description: A portable and foldable barricade that can be put up almost instantly.
+  components:
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/grille_hit.ogg"
+  - type: Clickable # Lets... just mush together the foldable chair and the wall prototype...
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Dynamic
+  - type: Pullable
+  - type: Rotatable
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.45"
+        density: 500
+        mask:
+        - FullTileMask
+        layer:
+        - TableLayer
+  - type: Sprite # Turns out... the Foldable do not go along well with the DamageVisuals component
+    sprite: Structures/metal_barricades.rsi/barricade.rsi
+    layers:
+    - state: folding
+      map: ["unfoldedLayer"]
+    - state: folding_folded
+      map: ["foldedLayer"]
+      visible: false
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/metalbreak.ogg
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 2
+    trackAllDamage: true
+    damageOverlay:
+      sprite: Structures/metal_barricades.rsi/folding_cracks.rsi
+  - type: Item
+    size: Huge
+  - type: Appearance
+
+- type: entity
+  parent: barricade_foldable
+  id: barricade_foldable_folded
+  suffix: folded
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Foldable
+    folded: true

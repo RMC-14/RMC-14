@@ -1,0 +1,33 @@
+- type: constructionGraph
+  id: BarricadeSandbagGraph
+  start: start
+  graph:
+  - node: start
+    actions:
+    - !type:DeleteEntity
+    edges:
+    - to: node_sandbag
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      steps:
+      - material: Steel
+        amount: 5
+        doAfter: 4
+
+  - node: node_sandbag
+    entity: barricade_sandbag
+    edges:
+    - to: start
+      completed:
+        - !type:SpawnPrototype
+          prototype: SheetSteel1
+          amount: 4
+        - !type:DeleteEntity
+      conditions:
+        - !type:EntityAnchored
+          anchored: false
+      steps:
+        - tool: Screwing
+          doAfter: 2
+

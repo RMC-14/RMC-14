@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "cmss13 at 236a44319009607869c05698d3215a3a1ebe9d40",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "DamageOverlay_4",
+      "directions": 4
+    },
+    {
+      "name": "DamageOverlay_8",
+      "directions": 4
+    },
+    {
+      "name": "DamageOverlay_12",
+      "directions": 4
+    }
+  ]
+}

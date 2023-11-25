@@ -225,3 +225,42 @@
     Cellular: 0.0
     Heat: 2.5
     Caustic: 0.0
+
+# CM-14 Barricade Modifers
+
+# Base Barricade uses Metallic.
+
+# Used in anti-Biohazard Barricade
+- type: damageModifierSet
+  id: antiBioMetallic
+  coefficients:
+    Blunt: 0.9
+    Slash: 0.9
+    Piercing: 0.9
+    Radiation: 0.3
+    Cellular: 0.3
+    Heat: 0.3
+    Caustic: 0.3
+  flatReductions:
+    Heat: 10
+
+# Used in Reinforced Barricade
+- type: damageModifierSet
+  id: bruteMetallic
+  coefficients:
+    Blunt: 0.4
+    Slash: 0.4
+    Piercing: 0.4
+    Shock: 1.2
+  flatReductions:
+    Blunt: 2
+
+# Used in sandbags
+- type: damageModifierSet
+  id: sandbag
+  coefficients:
+    Blunt: 0.6
+    Slash: 0.8
+    Piercing: 0.8
+  flatReductions:
+    Blunt: 2

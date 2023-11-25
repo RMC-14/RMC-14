@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "license": "CC-BY-SA-3.0",
+  "copyright": "cmss13 at 236a44319009607869c05698d3215a3a1ebe9d40",
+  "states": [
+    {"name": "metal", "directions": 4},
+    {"name": "brute_upgrade", "directions": 4},
+    {"name": "burn_upgrade", "directions": 4},
+    {"name": "explosive_upgrade", "directions": 4},
+    {"name": "plasteel_closed", "directions": 4},
+    {"name": "plasteel", "directions": 4},
+    {"name": "folding_metal", "directions": 4},
+    {"name": "folding_metal_closed", "directions": 4},
+    {"name": "sandbag", "directions": 4},
+    {"name": "folding", "directions": 4},
+    {"name": "turnstile", "directions": 4},
+    {"name": "folding_folded"},
+    {"name": "turnstile_med", "directions": 4}
+  ]
+}
