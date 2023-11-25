@@ -2,7 +2,7 @@
   parent: BaseStructureDynamic
   id: barricade_base
   name: Generic Barricade
-  description: The most basic, generic barricade you have ever sen. This probably shouldn't even be here.
+  description: The most basic, generic barricade you have ever seen. This probably shouldn't even be here.
   components:
   - type: Sprite
     sprite: Structures/metal_barricades.rsi/barricade.rsi
@@ -32,7 +32,7 @@
   parent: barricade_base
   id: barricade_metal
   name: Metal Barricade
-  description: A generic barricade. Upgradable with steel, plasma glass, or steel rods. Repair with a welder. Keeps unwanted visitors out.
+  description: A metal barricade that keeps the unwanted out. Upgradable with steel, plasteel, or steel rods for different attributes. Repair with a welder. 
   components:
   - type: MeleeSound
     soundGroups:
@@ -86,7 +86,7 @@
   parent: barricade_metal
   id: barricade_burn
   name: anti-Biohazard Barricade
-  description: A barricade strongly resistant to corrosive and fire damage but breaks a tad easier. Repair with a welder.
+  description: A barricade incredibly resistant to corrosive and fire damage but breaks easier. Repair with a welder.
   components:
     - type: Sprite
       sprite: Structures/metal_barricades.rsi/barricade.rsi
@@ -156,7 +156,7 @@
   parent: barricade_base
   id: barricade_sandbag
   name: Sandbag Barricade
-  description: A barricade made out of the sand from the ground. Tough to beat but easy to pierce.
+  description: A makeshift barricade made out of the sand from the ground. Tough to beat but easy to pierce.
   components:
   - type: MeleeSound
     soundGroups:
@@ -216,7 +216,7 @@
   parent: barricade_base
   id: barricade_turnstile
   name: Turnstile
-  description: A railing to prevent folks from stepping out of line.
+  description: A railing to prevent marines from stepping out of line.
   components:
     - type: Sprite
       sprite: Structures/metal_barricades.rsi/barricade.rsi
@@ -247,7 +247,7 @@
   parent: barricade_turnstile
   id: barricade_turnstile_med
   name: Turnstile
-  description: A railing to prevent folks from stepping out of line specifically in medical.
+  description: A railing to prevent marines from stepping out of line. This one is designed specifically for medical.
   components:
     - type: Sprite
       sprite: Structures/metal_barricades.rsi/barricade.rsi
@@ -264,7 +264,7 @@
   parent: barricade_base
   id: barricade_metal_door
   name: Folding Metal Barricade
-  description: A folding metal barricade weaker than the non-folding counterpart. Able to be opened and closed at a moment's notice.
+  description: A folding metal barricade weaker than the non-folding counterpart. Able to be opened and closed at a moment's notice. Repair with a welder.
   components:
   - type: MeleeSound
     soundGroups:
@@ -327,7 +327,7 @@
   parent: barricade_metal_door
   id: barricade_plasteel_door
   name: Folding Plasteel Barricade
-  description: A tough folding plasteel barricade stronger than its metal counterpart. Can be closed and opened at a moment's notice.
+  description: A tough folding plasteel barricade stronger than its metal counterpart. Can be closed and opened at a moment's notice. Repair with a welder.
   components:
   - type: Sprite
     sprite: Structures/metal_barricades.rsi/barricade.rsi
@@ -376,13 +376,13 @@
     graph: BarricadePlasteelDoorGraph
     node: node_barricade_plasteel_door
 
-# Folding Portable Barricades
+# Folding Portable Barricades. They work but are incredibly buggy.
 
 - type: entity
   parent: [BaseStructureDynamic, BaseFoldable]
   id: barricade_foldable
   name: Foldable Barricade
-  description: A portable and foldable barricade that can be put up almost instantly.
+  description: A portable and foldable barricade that can be put up almost instantaneously.
   components:
   - type: MeleeSound
     soundGroups:
