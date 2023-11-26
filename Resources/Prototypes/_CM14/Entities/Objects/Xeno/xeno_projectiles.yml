@@ -25,7 +25,7 @@
     impactEffect: XenoProjectileImpactEffect
     damage: {}
   - type: TimedDespawn
-    lifetime: 10
+    lifetime: 0.3
 
 - type: entity
   id: XenoSlowingSpitProjectile
@@ -34,14 +34,11 @@
   categories:
   - hideSpawnMenu
   components:
-  - type: Clickable
   - type: Sprite
     sprite: _CM14/Objects/Xeno/xeno_projectiles.rsi
     layers:
     - state: neurotoxin
       shader: unshaded
-  - type: TimedDespawn
-    lifetime: 10
   - type: XenoSlowingSpitProjectile
     armorResistsKnockdown: true
 
@@ -52,14 +49,11 @@
   categories:
   - hideSpawnMenu
   components:
-  - type: Clickable
   - type: Sprite
     sprite: _CM14/Objects/Xeno/xeno_projectiles.rsi
     layers:
     - state: neurotoxin
       shader: unshaded
-  - type: TimedDespawn
-    lifetime: 10
   - type: XenoSlowingSpitProjectile
     slow: 0
     knockdown: 1
