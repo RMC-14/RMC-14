@@ -2,7 +2,7 @@
   parent: CMClosetBase
   id: CMWardrobeBase
   abstract: true
-  description: a
+  description: It's a storage unit for standard-issue attire.
 
 - type: entity
   parent: CMWardrobeBase
