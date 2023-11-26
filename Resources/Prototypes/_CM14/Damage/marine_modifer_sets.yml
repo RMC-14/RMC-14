@@ -1,0 +1,50 @@
+﻿# CM-14 Barricade Modifers
+
+# Base Barricade 
+- type: damageModifierSet
+  id: CM_Barricade
+  coefficients:
+    Blunt: 0.7
+    Slash: 0.5
+    Piercing: 0.7
+    Shock: 1.2
+  flatReductions:
+    Blunt: 5
+    Heat: 5
+
+# Used in anti-Biohazard Barricade
+- type: damageModifierSet
+  id: CM_burnBarricade
+  coefficients:
+    Blunt: 0.9
+    Slash: 0.9
+    Piercing: 0.9
+    Radiation: 0.3
+    Cellular: 0.3
+    Heat: 0.3
+    Caustic: 0.3
+  flatReductions:
+    Heat: 10
+    Blunt: 5
+
+# Used in Reinforced Barricade
+- type: damageModifierSet
+  id: CM_bruteBarricade
+  coefficients:
+    Blunt: 0.4
+    Slash: 0.3
+    Piercing: 0.4
+    Shock: 1.2
+  flatReductions:
+    Blunt: 5
+    Heat: 5
+
+# Used in sandbags
+- type: damageModifierSet
+  id: CM_sandbag
+  coefficients:
+    Blunt: 0.6
+    Slash: 0.8
+    Piercing: 0.8
+  flatReductions:
+    Blunt: 2

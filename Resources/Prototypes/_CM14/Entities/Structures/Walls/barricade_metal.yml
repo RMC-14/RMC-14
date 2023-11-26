@@ -46,7 +46,7 @@
     drawdepth: WallTops
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Metallic
+    damageModifierSet: CM_Barricade
   - type: InteractionPopup
     interactSuccessString: fence-rattle-success
     messagePerceivedByOthers: fence-rattle-success
@@ -94,7 +94,7 @@
       - state: burn_upgrade
     - type: Damageable
       damageContainer: Inorganic
-      damageModifierSet: antiBioMetallic
+      damageModifierSet: CM_burnBarricade
     - type: DamageVisuals
       thresholds: [4, 8, 12]
       damageDivisor: 2
@@ -117,7 +117,7 @@
       - state: brute_upgrade
     - type: Damageable
       damageContainer: Inorganic
-      damageModifierSet: bruteMetallic
+      damageModifierSet: CM_bruteBarricade
     - type: DamageVisuals
       thresholds: [4, 8, 12]
       damageDivisor: 2
@@ -170,7 +170,7 @@
     drawdepth: WallTops
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: sandbag
+    damageModifierSet: CM_sandbag
   - type: Fixtures
     fixtures:
       fix1:
