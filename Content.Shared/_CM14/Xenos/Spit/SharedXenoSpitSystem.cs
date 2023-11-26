@@ -3,10 +3,12 @@ using Content.Shared._CM14.Xenos.Spit.Scattered;
 using Content.Shared._CM14.Xenos.Spit.Slowing;
 using Content.Shared.Armor;
 using Content.Shared.Effects;
+using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Projectiles;
 using Content.Shared.Stunnable;
+using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
@@ -43,28 +45,21 @@ public abstract class SharedXenoSpitSystem : EntitySystem
         SubscribeLocalEvent<ArmorComponent, InventoryRelayedEvent<HitBySlowingSpitEvent>>(OnArmorHitBySlowingSpit);
     }
 
-    // TODO CM14 merge this and scattered spit and add a range limit of 6 tiles
     private void OnXenoSlowingSpitAction(Entity<XenoSlowingSpitComponent> xeno, ref XenoSlowingSpitActionEvent args)
     {
         if (args.Handled)
             return;
 
-        var origin = _transform.GetMapCoordinates(xeno);
-        var target = args.Target.ToMap(EntityManager, _transform);
-
-        if (origin.MapId != target.MapId ||
-            origin.Position == target.Position)
-        {
-            return;
-        }
-
-        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
-            return;
-
-        args.Handled = true;
-
-        _audio.PlayPredicted(xeno.Comp.Sound, xeno, xeno);
-        Shoot(xeno, xeno.Comp.ProjectileId, xeno.Comp.Speed, origin, target);
+        args.Handled = TrySpit(
+            xeno,
+            args.Target,
+            xeno.Comp.PlasmaCost,
+            xeno.Comp.ProjectileId,
+            xeno.Comp.Sound,
+            1,
+            Angle.Zero,
+            xeno.Comp.Speed
+        );
     }
 
     private void OnXenoScatteredSpitAction(Entity<XenoScatteredSpitComponent> xeno, ref XenoScatteredSpitActionEvent args)
@@ -72,30 +67,16 @@ public abstract class SharedXenoSpitSystem : EntitySystem
         if (args.Handled)
             return;
 
-        var origin = _transform.GetMapCoordinates(xeno);
-        var target = args.Target.ToMap(EntityManager, _transform);
-
-        if (origin.MapId != target.MapId ||
-            origin.Position == target.Position)
-        {
-            return;
-        }
-
-        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
-            return;
-
-        args.Handled = true;
-
-        _audio.PlayPredicted(xeno.Comp.Sound, xeno, xeno);
-
-        var diff = target.Position - origin.Position;
-
-        for (var i = 0; i < xeno.Comp.MaxProjectiles; i++)
-        {
-            var angle = _random.NextAngle(-xeno.Comp.MaxDeviation / 2, xeno.Comp.MaxDeviation / 2);
-            target = new MapCoordinates(origin.Position + angle.RotateVec(diff), target.MapId);
-            Shoot(xeno, xeno.Comp.ProjectileId, xeno.Comp.Speed, origin, target);
-        }
+        args.Handled = TrySpit(
+            xeno,
+            args.Target,
+            xeno.Comp.PlasmaCost,
+            xeno.Comp.ProjectileId,
+            xeno.Comp.Sound,
+            xeno.Comp.MaxProjectiles,
+            xeno.Comp.MaxDeviation,
+            xeno.Comp.Speed
+        );
     }
 
     private void OnXenoSlowingSpitPreventCollide(Entity<XenoSlowingSpitProjectileComponent> spit, ref PreventCollideEvent args)
@@ -148,6 +129,46 @@ public abstract class SharedXenoSpitSystem : EntitySystem
     private void OnArmorHitBySlowingSpit(Entity<ArmorComponent> ent, ref InventoryRelayedEvent<HitBySlowingSpitEvent> args)
     {
         args.Args.Cancelled = true;
+    }
+
+    private bool TrySpit(
+        EntityUid xeno,
+        EntityCoordinates targetCoords,
+        FixedPoint2 plasma,
+        EntProtoId projectileId,
+        SoundSpecifier sound,
+        int shots,
+        Angle deviation,
+        float speed)
+    {
+        var origin = _transform.GetMapCoordinates(xeno);
+        var target = targetCoords.ToMap(EntityManager, _transform);
+
+        if (origin.MapId != target.MapId ||
+            origin.Position == target.Position)
+        {
+            return false;
+        }
+
+        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno, plasma))
+            return false;
+
+        _audio.PlayPredicted(sound, xeno, xeno);
+
+        var diff = target.Position - origin.Position;
+
+        for (var i = 0; i < shots; i++)
+        {
+            if (deviation != Angle.Zero)
+            {
+                var angle = _random.NextAngle(-deviation / 2, deviation / 2);
+                target = new MapCoordinates(origin.Position + angle.RotateVec(diff), target.MapId);
+            }
+
+            Shoot(xeno, projectileId, speed, origin, target);
+        }
+
+        return true;
     }
 
     protected virtual void Shoot(EntityUid xeno, EntProtoId projectileId, float speed, MapCoordinates origin, MapCoordinates target)
