@@ -79,3 +79,31 @@
       state: tail_sweep
     event: !type:XenoTailSweepActionEvent
     useDelay: 15
+
+- type: entity
+  id: ActionXenoSlowingSpit
+  parent: ActionXenoBase
+  name: Slowing Spit # TODO CM14 description
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: xeno_spit
+    event: !type:XenoSlowingSpitActionEvent
+    useDelay: 1.5
+    range: 15
+
+- type: entity
+  id: ActionXenoScatteredSpit
+  parent: ActionXenoBase
+  name: Scattered Spit # TODO CM14 description
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: acid_shotgun
+    event: !type:XenoScatteredSpitActionEvent
+    useDelay: 8
+    range: 15

@@ -1,11 +1,4 @@
 ﻿- type: soundCollection
-  id: XenoTailSwipe
-  files:
-  - /Audio/_CM14/Xeno/alien_tail_swipe1.ogg
-  - /Audio/_CM14/Xeno/alien_tail_swipe2.ogg
-  - /Audio/_CM14/Xeno/alien_tail_swipe3.ogg
-
-- type: soundCollection
   id: XenoChestBurst
   files:
   - /Audio/_CM14/Xeno/alien_chestburst.ogg
@@ -16,3 +9,16 @@
   files:
   - /Audio/_CM14/Xeno/alien_drool1.ogg
   - /Audio/_CM14/Xeno/alien_drool2.ogg
+
+- type: soundCollection
+  id: XenoSpitAcid
+  files:
+  - /Audio/_CM14/Xeno/alien_spitacid.ogg
+  - /Audio/_CM14/Xeno/alien_spitacid2.ogg
+
+- type: soundCollection
+  id: XenoTailSwipe
+  files:
+  - /Audio/_CM14/Xeno/alien_tail_swipe1.ogg
+  - /Audio/_CM14/Xeno/alien_tail_swipe2.ogg
+  - /Audio/_CM14/Xeno/alien_tail_swipe3.ogg
