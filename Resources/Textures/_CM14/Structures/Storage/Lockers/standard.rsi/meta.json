@@ -18,6 +18,12 @@
     },
     {
       "name": "welded"
+    },
+    {
+      "name": "locked"
+    },
+    {
+      "name": "unlocked"
     }
   ]
 }
