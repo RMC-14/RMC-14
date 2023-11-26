@@ -43,6 +43,7 @@ public abstract class SharedXenoSpitSystem : EntitySystem
         SubscribeLocalEvent<ArmorComponent, InventoryRelayedEvent<HitBySlowingSpitEvent>>(OnArmorHitBySlowingSpit);
     }
 
+    // TODO CM14 merge this and scattered spit and add a range limit of 6 tiles
     private void OnXenoSlowingSpitAction(Entity<XenoSlowingSpitComponent> xeno, ref XenoSlowingSpitActionEvent args)
     {
         if (args.Handled)
