@@ -1,0 +1,21 @@
+- type: entity
+  parent: [ ClosetBase, CMEntityBase ]
+  id: CMClosetBase
+  name: closet
+  description: a
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Closets/standard.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: base
+    stateDoorOpen: open
+    stateDoorClosed: closed
