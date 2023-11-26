@@ -144,7 +144,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Storage/Lockers/researcher.rsi
   - type: AccessReader
-    access: [["CMAccessResearcher"]]
+    access: [["CMAccessResearch"]]
 
 - type: entity
   parent: CMLockerBase
