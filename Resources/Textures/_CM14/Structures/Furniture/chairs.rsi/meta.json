@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9dd2c0d0a1c21e3c9bddbad1321c63fd886f61cf/icons/obj/objects.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "chair",
+      "directions": 4
+    },
+    {
+      "name": "chair_alt",
+      "directions": 4
+    },
+    {
+      "name": "comfychair",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_alpha",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_ares",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_beige",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_black",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_blue",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_bravo",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_charlie",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_delta",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_lime",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_teal",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_orange",
+      "directions": 4
+    },
+    {
+      "name": "officechair_dark",
+      "directions": 4
+    },
+    {
+      "name": "officechair_white",
+      "directions": 4
+    },
+    {
+      "name": "wooden_chair",
+      "directions": 4
+    },
+    {
+      "name": "wooden_chair_wings",
+      "directions": 4
+    }
+  ]
+}
