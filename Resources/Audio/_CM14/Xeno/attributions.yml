@@ -23,6 +23,16 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/8cad63ffa63108258510a649a07a045274771fb1/sound/voice/alien_drool2.ogg"
 
+- files: ["alien_spitacid.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/voice/alien_spitacid.ogg"
+
+- files: ["alien_spitacid2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/voice/alien_spitacid2.ogg"
+
 - files: ["alien_tail_swipe1.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"

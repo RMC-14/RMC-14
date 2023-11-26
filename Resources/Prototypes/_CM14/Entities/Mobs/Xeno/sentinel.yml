@@ -22,8 +22,8 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
-    #    - ActionXenoSlowingSpit
-    #    - ActionXenoScatteredSpit
+    - ActionXenoSlowingSpit
+    - ActionXenoScatteredSpit
     #    - ActionXenoParalyzingSlash
     - ActionXenoEvolve60 # TODO CM14 300
     evolvesTo:
@@ -32,6 +32,8 @@
     maxPlasma: 400
     plasmaRegenOnWeeds: 12
     # explosionResistance: 10
+  - type: XenoSlowingSpit
+  - type: XenoScatteredSpit
   - type: MeleeWeapon
     damage:
       groups:
