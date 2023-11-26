@@ -1,0 +1,185 @@
+# Basic chair
+- type: entity
+  parent: [ SeatBase, CMEntityBase ]
+  id: CMSeatBase
+  name: chair
+  description: A rectangular metallic frame sitting on four legs with a back panel. Designed to fit the sitting position, more or less comfortably.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Furniture/chairs.rsi
+    state: chair
+
+- type: entity
+  parent: CMSeatBase
+  id: CMChair
+  name: chair
+  description: A rectangular metallic frame sitting on four legs with a back panel. Designed to fit the sitting position, more or less comfortably.
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+  - type: Anchorable
+  - type: Rotatable
+
+- type: entity
+  parent: CMChair
+  id: CMChairAlt
+  components:
+  - type: Sprite
+    state: chair_alt
+
+# Comfy chair
+- type: entity
+  parent: CMSeatBase
+  id: CMChairComfy
+  name: comfy chair
+  description: A chair with leather padding and adjustable headrest. You could probably sit in one of these for ages.
+  components:
+  - type: Sprite
+    state: comfychair
+  - type: Transform
+    anchored: true
+  - type: Rotatable
+    rotateWhileAnchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Anchorable
+
+- type: entity
+  parent: CMChairComfy
+  id: CMChairComfyARES
+  description: A functional chair designed for comfortably sitting a single person with intent to facilitate interactions with the ship AI.
+  suffix: ARES
+  components:
+  - type: Sprite
+    state: comfychair_ares
+
+- type: entity
+  parent: CMChairComfy
+  id: CMChairComfyBeige
+  suffix: Beige
+  components:
+  - type: Sprite
+    state: comfychair_beige
+
+- type: entity
+  parent: CMChairComfy
+  id: CMChairComfyBlack
+  suffix: Black
+  components:
+  - type: Sprite
+    state: comfychair_black
+
+- type: entity
+  parent: CMChairComfy
+  id: CMChairComfyBlue
+  suffix: Blue
+  components:
+  - type: Sprite
+    state: comfychair_blue
+
+- type: entity
+  parent: CMChairComfy
+  id: CMChairComfyLime
+  suffix: Lime
+  components:
+  - type: Sprite
+    state: comfychair_lime
+
+- type: entity
+  parent: CMChairComfy
+  id: CMChairComfyOrange
+  suffix: Orange
+  components:
+  - type: Sprite
+    state: comfychair_orange
+
+- type: entity
+  parent: CMChairComfy
+  id: CMChairComfyTeal
+  suffix: Teal
+  components:
+  - type: Sprite
+    state: comfychair_teal
+
+- type: entity
+  parent: CMChairComfy
+  id: CMChairComfyAlpha
+  description: A simple chair permanently attached to the floor. Covered with a squeaky and way too hard faux-leather, unevenly painted in Alpha squad red. Only for the bravest and freshest USCM recruits.
+  suffix: Alpha
+  components:
+  - type: Sprite
+    state: comfychair_alpha
+
+- type: entity
+  parent: CMChairComfy
+  id: CMChairComfyBravo
+  description: A simple chair permanently attached to the floor. Covered with a squeaky and way too hard faux-leather, unevenly painted in Bravo squad brown. Certified fortified on all sides from enemy incursion.
+  suffix: Bravo
+  components:
+  - type: Sprite
+    state: comfychair_bravo
+
+- type: entity
+  parent: CMChairComfy
+  id: CMChairComfyCharlie
+  description: A simple chair permanently attached to the floor. Covered with a squeaky and way too hard faux-leather, unevenly painted in Charlie squad purple. Feels out of place without a full breakfast to accompany it.
+  suffix: Charlie
+  components:
+  - type: Sprite
+    state: comfychair_charlie
+
+- type: entity
+  parent: CMChairComfy
+  id: CMChairComfyDelta
+  description: A simple chair permanently attached to the floor. Covered with a squeaky and way too hard faux-leather, unevenly painted in Delta squad blue. This chair is most likely to be the first to fight and first to die.
+  suffix: Delta
+  components:
+  - type: Sprite
+    state: comfychair_delta
+
+# Office chair
+- type: entity
+  parent: CMSeatBase
+  id: CMChairOfficeDark
+  name: dark office chair
+  components:
+  - type: Sprite
+    state: officechair_dark
+  - type: Rotatable
+    rotateWhileAnchored: true
+
+- type: entity
+  parent: CMChairOfficeDark
+  id: CMChairOfficeWhite
+  name: white office chair
+  components:
+  - type: Sprite
+    state: officechair_white
+
+# Wooden chair
+- type: entity
+  parent: CMSeatBase
+  id: CMChairWood
+  name: wooden chair
+  description: Old is never too old to not be in fashion.
+  components:
+  - type: Sprite
+    state: wooden_chair
+  - type: Rotatable
+  - type: Damageable
+    damageModifierSet: Wood
+  - type: Tag
+    tags:
+    - Wooden
+  - type: StaticPrice
+    price: 75
+
+- type: entity
+  parent: CMChairWood
+  id: CMChairWoodWings
+  description: Old is never too old to not be in fashion.
+  components:
+  - type: Sprite
+    state: wooden_chair_wings
