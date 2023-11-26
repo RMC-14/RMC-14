@@ -1,0 +1,66 @@
+﻿- type: entity
+  id: XenoBaseProjectile
+  name: projectile
+  abstract: true
+  components:
+  - type: Clickable
+  - type: Sprite
+    noRot: false
+    sprite: _CM14/Objects/Xeno/xeno_projectiles.rsi
+  - type: Physics
+    bodyType: Dynamic
+    linearDamping: 0
+    angularDamping: 0
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+  - type: Projectile
+    impactEffect: XenoProjectileImpactEffect
+    damage: {}
+  - type: TimedDespawn
+    lifetime: 10
+
+- type: entity
+  id: XenoSlowingSpitProjectile
+  parent: XenoBaseProjectile
+  name: slowing spit
+  categories:
+  - hideSpawnMenu
+  components:
+  - type: Clickable
+  - type: Sprite
+    sprite: _CM14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: neurotoxin
+      shader: unshaded
+  - type: TimedDespawn
+    lifetime: 10
+  - type: XenoSlowingSpitProjectile
+    armorResistsKnockdown: true
+
+- type: entity
+  id: XenoScatteredSpitProjectile
+  parent: XenoBaseProjectile
+  name: scattered spit
+  categories:
+  - hideSpawnMenu
+  components:
+  - type: Clickable
+  - type: Sprite
+    sprite: _CM14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: neurotoxin
+      shader: unshaded
+  - type: TimedDespawn
+    lifetime: 10
+  - type: XenoSlowingSpitProjectile
+    slow: 0
+    knockdown: 1
+    armorResistsKnockdown: false

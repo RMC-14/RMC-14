@@ -1,3 +1,5 @@
+using Content.Shared._CM14.Xenos.Spit;
+using Content.Shared._CM14.Xenos.Spit.Slowing;
 using Content.Shared.Chemistry;
 using Content.Shared.Damage;
 using Content.Shared.Electrocution;
@@ -31,6 +33,7 @@ public partial class InventorySystem
 
         // by-ref events
         SubscribeLocalEvent<InventoryComponent, GetExplosionResistanceEvent>(RefRelayInventoryEvent);
+        SubscribeLocalEvent<InventoryComponent, HitBySlowingSpitEvent>(RefRelayInventoryEvent);
 
         // Eye/vision events
         SubscribeLocalEvent<InventoryComponent, CanSeeAttemptEvent>(RelayInventoryEvent);
