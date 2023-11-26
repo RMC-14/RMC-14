@@ -12,8 +12,8 @@
         southRotation: true
       steps:
       - material: Steel
-        amount: 5
-        doAfter: 4
+        amount: 2
+        doAfter: 3
 
   - node: node_sandbag
     entity: barricade_sandbag
@@ -22,7 +22,7 @@
       completed:
         - !type:SpawnPrototype
           prototype: SheetSteel1
-          amount: 4
+          amount: 1
         - !type:DeleteEntity
       conditions:
         - !type:EntityAnchored

@@ -13,7 +13,7 @@
       steps:
       - material: Steel
         amount: 5
-        doAfter: 3
+        doAfter: 5
 
   - node: node_barricade_metal_door
     entity: barricade_metal_door
@@ -29,4 +29,4 @@
           anchored: false
       steps:
         - tool: Screwing
-          doAfter: 2
+          doAfter: 5

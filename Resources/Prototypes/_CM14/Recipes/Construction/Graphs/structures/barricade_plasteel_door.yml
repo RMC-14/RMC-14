@@ -13,7 +13,7 @@
       steps:
       - material: Plasteel
         amount: 5
-        doAfter: 3
+        doAfter: 6
 
   - node: node_barricade_plasteel_door
     entity: barricade_plasteel_door
@@ -29,4 +29,4 @@
           anchored: false
       steps:
         - tool: Screwing
-          doAfter: 2
+          doAfter: 6

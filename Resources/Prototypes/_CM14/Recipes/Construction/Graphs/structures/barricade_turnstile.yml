@@ -12,7 +12,7 @@
         southRotation: true
       steps:
       - material: Steel
-        amount: 4
+        amount: 2
         doAfter: 3
 
   - node: node_turnstile
@@ -22,11 +22,11 @@
       completed:
         - !type:SpawnPrototype
           prototype: SheetSteel1
-          amount: 3
+          amount: 1
         - !type:DeleteEntity
       conditions:
         - !type:EntityAnchored
           anchored: false
       steps:
         - tool: Screwing
-          doAfter: 2
+          doAfter: 3

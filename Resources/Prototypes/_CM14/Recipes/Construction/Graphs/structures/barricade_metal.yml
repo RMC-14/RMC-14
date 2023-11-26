@@ -12,8 +12,8 @@
         southRotation: true
       steps:
       - material: Steel
-        amount: 10
-        doAfter: 4
+        amount: 3
+        doAfter: 6
 
   - node: node_metal
     entity: barricade_metal
@@ -29,28 +29,28 @@
           anchored: false
       steps:
         - tool: Screwing
-          doAfter: 2
+          doAfter: 6
     - to: node_burn_upgrade
       completed:
       - !type:SnapToGrid
       steps:
       - material: MetalRod
-        amount: 20
-        doAfter: 4
+        amount: 6
+        doAfter: 6
     - to: node_brute_upgrade
       completed:
       - !type:SnapToGrid
       steps:
       - material: Steel
-        amount: 5
-        doAfter: 4
+        amount: 3
+        doAfter: 6
     - to: node_explosive_upgrade
       completed:
       - !type:SnapToGrid
       steps:
       - material: Plasteel
-        amount: 4
-        doAfter: 4
+        amount: 3
+        doAfter: 6
 
   - node: node_burn_upgrade
     entity: barricade_burn
@@ -66,7 +66,7 @@
           anchored: false
       steps:
         - tool: Screwing
-          doAfter: 2
+          doAfter: 6
 
   - node: node_brute_upgrade
     entity: barricade_brute
@@ -82,7 +82,7 @@
           anchored: false
       steps:
         - tool: Screwing
-          doAfter: 2
+          doAfter: 6
 
   - node: node_explosive_upgrade
     entity: barricade_explosive
@@ -98,4 +98,4 @@
           anchored: false
       steps:
         - tool: Screwing
-          doAfter: 2
+          doAfter: 6
