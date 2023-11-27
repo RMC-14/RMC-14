@@ -1,5 +1,7 @@
 ﻿- type: entity
-  parent: CMXenoDeveloped
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
   id: CMXenoRavager
   name: Ravager
   description: A huge, nasty red alien with enormous scythed claws.
@@ -25,10 +27,12 @@
     #    - ActionXenoCharge
     #    - ActionXenoEmpower
     #    - ActionXenoScissorCut
+    # explosionResistance: 80
+  - type: XenoDevour
+  - type: XenoPlasma
     plasma: 300
     maxPlasma: 300
     plasmaRegenOnWeeds: 15
-    # explosionResistance: 80
   - type: XenoArmor
     armor: 25
   - type: MeleeWeapon

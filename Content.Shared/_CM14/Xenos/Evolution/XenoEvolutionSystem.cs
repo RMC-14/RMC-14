@@ -20,16 +20,15 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<XenoEvolveActionComponent, MapInitEvent>(OnXenoEvolveActionMapInit);
-        SubscribeLocalEvent<XenoComponent, XenoOpenEvolutionsActionEvent>(OnXenoEvolveAction);
-        SubscribeLocalEvent<XenoComponent, XenoEvolveBuiMessage>(OnXenoEvolveBui);
-        SubscribeLocalEvent<XenoComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
+        SubscribeLocalEvent<XenoEvolutionComponent, XenoOpenEvolutionsActionEvent>(OnXenoEvolveAction);
+        SubscribeLocalEvent<XenoEvolutionComponent, XenoEvolveBuiMessage>(OnXenoEvolveBui);
+        SubscribeLocalEvent<XenoEvolutionComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
     }
 
     private void OnXenoEvolveActionMapInit(Entity<XenoEvolveActionComponent> ent, ref MapInitEvent args)
@@ -38,7 +37,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             _action.SetCooldown(ent, _timing.CurTime, _timing.CurTime + ent.Comp.Cooldown);
     }
 
-    private void OnXenoEvolveAction(Entity<XenoComponent> xeno, ref XenoOpenEvolutionsActionEvent args)
+    private void OnXenoEvolveAction(Entity<XenoEvolutionComponent> xeno, ref XenoOpenEvolutionsActionEvent args)
     {
         if (_net.IsClient || !TryComp(xeno, out ActorComponent? actor))
             return;
@@ -46,7 +45,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         _ui.TryOpen(xeno.Owner, XenoEvolutionUIKey.Key, actor.PlayerSession);
     }
 
-    private void OnXenoEvolveBui(Entity<XenoComponent> xeno, ref XenoEvolveBuiMessage args)
+    private void OnXenoEvolveBui(Entity<XenoEvolutionComponent> xeno, ref XenoEvolveBuiMessage args)
     {
         if (!xeno.Comp.EvolvesTo.Contains(args.Choice))
         {
@@ -71,7 +70,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             _ui.TryClose(xeno.Owner, XenoEvolutionUIKey.Key, actor.PlayerSession);
     }
 
-    private void OnXenoEvolveDoAfter(Entity<XenoComponent> xeno, ref XenoEvolutionDoAfterEvent args)
+    private void OnXenoEvolveDoAfter(Entity<XenoEvolutionComponent> xeno, ref XenoEvolutionDoAfterEvent args)
     {
         if (_net.IsClient ||
             args.Handled ||
@@ -84,21 +83,16 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         args.Handled = true;
 
-        var oldRotation = _transform.GetWorldRotation(xeno);
-        var oldPlasma = xeno.Comp.Plasma;
         var coordinates = _transform.GetMoverCoordinates(xeno.Owner);
         var newXeno = Spawn(args.Choice, coordinates);
         _mind.TransferTo(mindId, newXeno);
         _mind.UnVisit(mindId);
+
+        var ev = new NewXenoEvolvedComponent(xeno);
+        RaiseLocalEvent(newXeno, ref ev);
+
         Del(xeno.Owner);
 
-        if (TryComp(newXeno, out XenoComponent? newXenoComp))
-        {
-            var newPlasma = FixedPoint2.Min(oldPlasma, newXenoComp.MaxPlasma);
-            _xenoPlasma.SetPlasma((newXeno, newXenoComp), newPlasma);
-        }
-
-        _transform.SetWorldRotation(newXeno, oldRotation);
         _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-end"), newXeno, newXeno);
     }
 }

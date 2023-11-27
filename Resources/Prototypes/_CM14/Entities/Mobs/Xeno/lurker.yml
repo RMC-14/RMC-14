@@ -1,5 +1,7 @@
 ﻿- type: entity
-  parent: CMXenoDeveloped
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
   id: CMXenoLurker
   name: Lurker
   description: A beefy, fast alien with sharp claws.
@@ -27,12 +29,15 @@
     #    - ActionXenoInvisibility
     #    - ActionXenoCripplingStrike
     - ActionXenoEvolve60 # TODO CM14 540
-    evolvesTo:
-    - CMXenoRavager
+    # explosionResistance: 20
+  - type: XenoDevour
+  - type: XenoPlasma
     plasma: 400
     maxPlasma: 400
     plasmaRegenOnWeeds: 18
-    # explosionResistance: 20
+  - type: XenoEvolution
+    evolvesTo:
+    - CMXenoRavager
   - type: MeleeWeapon
     damage:
       groups:

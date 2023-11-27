@@ -1,5 +1,7 @@
 ﻿- type: entity
-  parent: CMXenoDeveloped
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
   id: CMXenoLesserDrone
   name: Lesser Drone
   description: An alien drone. Looks... smaller.
@@ -25,15 +27,20 @@
     - ActionXenoPlantWeeds # TODO CM14 only near other weeds for lesser drones
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
-    plasma: 300
-    maxPlasma: 300
-    plasmaRegenOnWeeds: 6
+    # evasion: 10
+  - type: XenoAcid
+  - type: XenoConstruction
     buildDelay: 4
     canBuild:
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
-    # evasion: 10
+  - type: XenoDevour
+  - type: XenoPlasma
+    plasma: 300
+    maxPlasma: 300
+    plasmaRegenOnWeeds: 6
+  - type: XenoPheromones
   - type: MeleeWeapon
     damage:
       groups:

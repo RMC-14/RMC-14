@@ -1,5 +1,7 @@
 ﻿- type: entity
-  parent: CMXenoDeveloped
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
   id: CMXenoQueen
   name: Queen # TODO CM14 use consoles
   description: A huge, looming alien creature. The biggest and the baddest.
@@ -29,16 +31,21 @@
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
     # TODO CM14 the rest of the owl
-    plasma: 1000
-    maxPlasma: 1000 # TODO CM14
-    plasmaRegenOnWeeds: 40
+    # explosionResistance: 100 # TODO CM14 fire immunity
+  - type: XenoAcid
+  - type: XenoConstruction
     canBuild:
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
-    # explosionResistance: 100 # TODO CM14 fire immunity
+  - type: XenoDevour
+  - type: XenoPlasma
+    plasma: 1000
+    maxPlasma: 1000
+    plasmaRegenOnWeeds: 40
+  - type: XenoPheromones
   - type: XenoArmor
     armor: 25
   - type: Tag

@@ -1,5 +1,7 @@
 ﻿- type: entity
-  parent: CMXenoDeveloped
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
   id: CMXenoDrone
   name: Drone
   description: An alien drone.
@@ -29,9 +31,8 @@
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
     - ActionXenoTransferPlasma
-    plasma: 1000 # TODO CM14
-    maxPlasma: 1000
-    plasmaRegenOnWeeds: 6
+  - type: XenoAcid
+  - type: XenoConstruction
     buildDelay: 2
     canBuild:
     - WallXenoResin
@@ -39,3 +40,9 @@
     - DoorXenoResin
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
+  - type: XenoDevour
+  - type: XenoPlasma
+    plasma: 1000
+    maxPlasma: 1000
+    plasmaRegenOnWeeds: 6
+  - type: XenoPheromones

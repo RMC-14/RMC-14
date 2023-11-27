@@ -63,15 +63,15 @@ public sealed class XenoResinWalkerSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        var query = EntityQueryEnumerator<XenoResinWalkerComponent, XenoComponent>();
-        while (query.MoveNext(out var uid, out var walker, out var xeno))
+        var query = EntityQueryEnumerator<XenoResinWalkerComponent>();
+        while (query.MoveNext(out var uid, out var walker))
         {
             if (!walker.Active || _timing.CurTime < walker.NextPlasmaUse)
                 continue;
 
             walker.NextPlasmaUse = _timing.CurTime + walker.PlasmaUseDelay;
 
-            if (!_xenoPlasma.TryRemovePlasma((uid, xeno), walker.PlasmaUpkeep))
+            if (!_xenoPlasma.TryRemovePlasma(uid, walker.PlasmaUpkeep))
             {
                 walker.Active = false;
                 Dirty(uid, walker);

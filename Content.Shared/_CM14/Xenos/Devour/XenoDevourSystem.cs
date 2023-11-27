@@ -19,14 +19,14 @@ public sealed class XenoDevourSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<XenoComponent, CanDropTargetEvent>(OnXenoCanDropTarget);
+        SubscribeLocalEvent<XenoDevourComponent, CanDropTargetEvent>(OnXenoCanDropTarget);
         SubscribeLocalEvent<MarineComponent, CanDropDraggedEvent>(OnMarineCanDropDragged);
         SubscribeLocalEvent<MarineComponent, DragDropDraggedEvent>(OnMarineDragDropDragged);
-        SubscribeLocalEvent<XenoComponent, XenoDevourDoAfterEvent>(OnXenoDevourDoAfter);
-        SubscribeLocalEvent<XenoComponent, XenoRegurgitateActionEvent>(OnXenoRegurgitateAction);
+        SubscribeLocalEvent<XenoDevourComponent, XenoDevourDoAfterEvent>(OnXenoDevourDoAfter);
+        SubscribeLocalEvent<XenoDevourComponent, XenoRegurgitateActionEvent>(OnXenoRegurgitateAction);
     }
 
-    private void OnXenoCanDropTarget(Entity<XenoComponent> xeno, ref CanDropTargetEvent args)
+    private void OnXenoCanDropTarget(Entity<XenoDevourComponent> xeno, ref CanDropTargetEvent args)
     {
         args.CanDrop |= args.User == xeno.Owner &&
                         HasComp<MarineComponent>(args.Dragged);
@@ -50,7 +50,7 @@ public sealed class XenoDevourSystem : EntitySystem
         if (args.Handled || args.Target != args.User)
             return;
 
-        if (!TryComp(args.User, out XenoComponent? xeno))
+        if (!TryComp(args.User, out XenoDevourComponent? xeno))
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-cant-devour", ("target", args.Target)), marine, marine);
             return;
@@ -60,7 +60,7 @@ public sealed class XenoDevourSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void OnXenoDevourDoAfter(Entity<XenoComponent> xeno, ref XenoDevourDoAfterEvent args)
+    private void OnXenoDevourDoAfter(Entity<XenoDevourComponent> xeno, ref XenoDevourDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled || args.Target is not { } target)
             return;
@@ -75,7 +75,7 @@ public sealed class XenoDevourSystem : EntitySystem
         }
     }
 
-    private void OnXenoRegurgitateAction(Entity<XenoComponent> xeno, ref XenoRegurgitateActionEvent args)
+    private void OnXenoRegurgitateAction(Entity<XenoDevourComponent> xeno, ref XenoRegurgitateActionEvent args)
     {
         if (!_container.TryGetContainer(xeno, xeno.Comp.DevourContainerId, out var container) ||
             container.ContainedEntities.Count == 0)
@@ -88,7 +88,7 @@ public sealed class XenoDevourSystem : EntitySystem
         _audio.PlayPredicted(xeno.Comp.RegurgitateSound, xeno, xeno);
     }
 
-    private void StartDevour(Entity<XenoComponent> xeno, Entity<MarineComponent> target, TimeSpan delay)
+    private void StartDevour(Entity<XenoDevourComponent> xeno, Entity<MarineComponent> target, TimeSpan delay)
     {
         var doAfter = new DoAfterArgs(EntityManager, xeno, delay, new XenoDevourDoAfterEvent(), xeno, target)
         {

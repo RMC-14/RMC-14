@@ -1,5 +1,7 @@
 ﻿- type: entity
-  parent: CMXenoDeveloped
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
   id: CMXenoCrusher
   name: Crusher
   description: A huge alien with an enormous armored crest.
@@ -25,10 +27,12 @@
     #    - ActionXenoCharge
     #    - ActionXenoStomp
     #    - ActionXenoDefensiveShield
+    # explosionResistance: 100
+  - type: XenoDevour
+  - type: XenoPlasma
     plasma: 400
     maxPlasma: 400
     plasmaRegenOnWeeds: 16
-    # explosionResistance: 100
   - type: XenoArmor
     armor: 30
   - type: MeleeWeapon
