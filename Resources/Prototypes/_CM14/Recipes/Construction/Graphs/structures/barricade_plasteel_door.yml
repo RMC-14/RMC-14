@@ -11,7 +11,7 @@
       - !type:SnapToGrid
         southRotation: true
       steps:
-      - material: Plasteel
+      - material: SheetPlasteel
         amount: 5
         doAfter: 6
 
