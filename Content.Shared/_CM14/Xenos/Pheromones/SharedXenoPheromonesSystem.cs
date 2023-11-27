@@ -91,7 +91,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
     private void OnXenoPheromonesAction(Entity<XenoPheromonesComponent> xeno, ref XenoPheromonesActionEvent args)
     {
-        if (RemComp<ActiveXenoPheromonesComponent>(xeno))
+        if (RemComp<XenoActivePheromonesComponent>(xeno))
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-pheromones-stop"), xeno, xeno);
             return;
@@ -111,7 +111,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
             return;
         }
 
-        EnsureComp<ActiveXenoPheromonesComponent>(xeno).Pheromones = args.Pheromones;
+        EnsureComp<XenoActivePheromonesComponent>(xeno).Pheromones = args.Pheromones;
         xeno.Comp.NextPheromonesPlasmaUse = _timing.CurTime + _pheromonePlasmaUseDelay;
 
         var popup = Loc.GetString("cm-xeno-pheromones-start", ("pheromones", args.Pheromones.ToString()));
@@ -237,7 +237,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
             frenzy.Multiplier = 0;
         }
 
-        var query = EntityQueryEnumerator<ActiveXenoPheromonesComponent, XenoPheromonesComponent, TransformComponent>();
+        var query = EntityQueryEnumerator<XenoActivePheromonesComponent, XenoPheromonesComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var active, out var pheromones, out var xform))
         {
             if (_timing.CurTime >= pheromones.NextPheromonesPlasmaUse)
@@ -245,7 +245,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                 pheromones.NextPheromonesPlasmaUse += _pheromonePlasmaUseDelay;
                 if (!_xenoPlasma.TryRemovePlasma(uid, pheromones.PheromonesPlasmaUpkeep / 10))
                 {
-                    RemCompDeferred<ActiveXenoPheromonesComponent>(uid);
+                    RemCompDeferred<XenoActivePheromonesComponent>(uid);
                     continue;
                 }
 
