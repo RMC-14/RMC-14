@@ -62,6 +62,7 @@ public sealed class XenoPlasmaSystem : EntitySystem
             return;
         }
 
+        args.Handled = true;
         RegenPlasma(target, args.Amount);
 
         // for some reason the popup will sometimes not show for the predicting client here
