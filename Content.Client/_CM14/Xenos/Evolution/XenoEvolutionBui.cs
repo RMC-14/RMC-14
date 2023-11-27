@@ -29,19 +29,18 @@ public sealed class XenoEvolutionBui : BoundUserInterface
 
         if (EntMan.TryGetComponent(Owner, out XenoComponent? xeno))
         {
-            for (var i = 0; i < xeno.EvolvesTo.Count; i++)
+            foreach (var evolutionId in xeno.EvolvesTo)
             {
-                var evolutionId = xeno.EvolvesTo[i];
                 if (!_prototype.TryIndex(evolutionId, out var evolution))
                     continue;
 
                 var control = new XenoChoiceControl();
                 control.Set(evolution.Name, _sprite.Frame0(evolution));
 
-                var index = i;
+                var id = evolutionId;
                 control.Button.OnPressed += _ =>
                 {
-                    SendMessage(new XenoEvolveBuiMessage(index));
+                    SendMessage(new XenoEvolveBuiMessage(id));
                     Close();
                 };
 

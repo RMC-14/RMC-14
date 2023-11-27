@@ -11,6 +11,8 @@ cm-xeno-cant-reach-there = You can't reach there!
 
 # Evolve
 cm-xeno-available-evolutions = Available Evolutions
+cm-xeno-evolution-start = You begin to twist and contort.
+cm-xeno-evolution-end = You emerge in a greater form from the husk of your old body. For the hive!
 
 # Fortify
 cm-xeno-fortify-cant-headbutt = You can't headbutt while fortifying!
