@@ -41,6 +41,11 @@
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
   - type: XenoDevour
+  - type: XenoEvolution
+    evolvesTo: # TODO CM14 Queen
+    - CMXenoCarrier
+    - CMXenoBurrower
+    - CMXenoHivelord
   - type: XenoPlasma
     plasma: 1000
     maxPlasma: 1000

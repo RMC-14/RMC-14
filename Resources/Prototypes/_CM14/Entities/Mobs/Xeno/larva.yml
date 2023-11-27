@@ -27,9 +27,9 @@
   - type: XenoEvolution
     evolvesTo:
     - CMXenoDrone
-    - CMXenoRunner
-    - CMXenoSentinel
     - CMXenoDefender
+    - CMXenoSentinel
+    - CMXenoRunner
   - type: XenoHide
   - type: Fixtures
     fixtures:
