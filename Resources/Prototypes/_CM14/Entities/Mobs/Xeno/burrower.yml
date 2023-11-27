@@ -1,5 +1,7 @@
 ﻿- type: entity
-  parent: CMXenoDeveloped
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
   id: CMXenoBurrower
   name: Burrower
   description: A beefy alien with sharp claws.
@@ -28,12 +30,15 @@
     - ActionXenoPlantWeeds
     #    - ActionXenoBurrow
     #    - ActionXenoTremor
+    # explosionResistance: 40
+  - type: XenoPlasma
     plasma: 600
     maxPlasma: 600
     plasmaRegenOnWeeds: 27
-    # explosionResistance: 40
+  - type: XenoAcid
   - type: XenoArmor
     armor: 25
+  - type: XenoDevour
   - type: MeleeWeapon
     damage:
       groups:

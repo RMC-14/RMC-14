@@ -1,5 +1,7 @@
 ﻿- type: entity
-  parent: CMXenoDeveloped
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
   id: CMXenoSentinel
   name: Sentinel
   description: A slithery, spitting kind of alien.
@@ -26,12 +28,15 @@
     - ActionXenoScatteredSpit
     #    - ActionXenoParalyzingSlash
     - ActionXenoEvolve60 # TODO CM14 300
-    evolvesTo:
-    - CMXenoSpitter
+    # explosionResistance: 10
+  - type: XenoDevour
+  - type: XenoPlasma
     plasma: 400
     maxPlasma: 400
     plasmaRegenOnWeeds: 12
-    # explosionResistance: 10
+  - type: XenoEvolution
+    evolvesTo:
+    - CMXenoSpitter
   - type: XenoSlowingSpit
   - type: XenoScatteredSpit
   - type: MeleeWeapon

@@ -1,6 +1,5 @@
 ﻿using System.Numerics;
-using Content.Shared._CM14.Xenos;
-using Content.Shared._CM14.Xenos.Melee;
+using Content.Shared._CM14.Xenos.Stab;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -10,9 +9,9 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using static Robust.Client.Animations.AnimationTrackProperty;
 
-namespace Content.Client._CM14.Xenos.Melee;
+namespace Content.Client._CM14.Xenos.Stab;
 
-public sealed class XenoMeleeSystem : SharedXenoMeleeSystem
+public sealed class XenoTailStabSystem : SharedXenoTailStabSystem
 {
     [Dependency] private readonly AnimationPlayerSystem _animation = default!;
     [Dependency] private readonly IConsoleHost _console = default!;
@@ -60,7 +59,7 @@ public sealed class XenoMeleeSystem : SharedXenoMeleeSystem
         }
     }
 
-    protected override void DoLunge(Entity<XenoComponent, TransformComponent> user, Vector2 localPos, EntProtoId animationId)
+    protected override void DoLunge(Entity<XenoTailStabComponent, TransformComponent> user, Vector2 localPos, EntProtoId animationId)
     {
         if (!_timing.IsFirstTimePredicted)
             return;

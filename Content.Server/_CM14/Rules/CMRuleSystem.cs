@@ -81,7 +81,7 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
                 var xenoEnt = Spawn("CMXenoDrone", comp.XenoMap.ToCoordinates());
 
                 _xeno.MakeXeno(xenoEnt);
-                _hive.SetHive(xenoEnt, comp.Hive);
+                _xeno.SetHive(xenoEnt, comp.Hive);
 
                 // TODO CM14 mind name
                 var mind = _mind.GetOrCreateMind(player.UserId);

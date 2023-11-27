@@ -19,10 +19,12 @@
     - ActionXenoWatch
     - ActionXenoHide
     - ActionXenoLeap
-    evolvesTo:
-    - CMXenoDrone
+  - type: XenoPlasma
     maxPlasma: 10
     plasmaRegenOnWeeds: 1
+  - type: XenoEvolution
+    evolvesTo:
+    - CMXenoDrone
   - type: XenoHide
   - type: Fixtures
     fixtures:

@@ -70,7 +70,7 @@ public sealed class CMAdminEui : BaseEui
                     _entities.TryGetEntity(changeHive.Hive.Id, out var hive))
                 {
                     _xeno.MakeXeno(target.Value);
-                    _hive.SetHive(target.Value, hive.Value);
+                    _xeno.SetHive(target.Value, hive.Value);
                 }
 
                 break;
