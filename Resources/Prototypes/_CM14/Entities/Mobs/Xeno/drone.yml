@@ -46,8 +46,9 @@
     - CMXenoCarrier
     - CMXenoBurrower
     - CMXenoHivelord
+  - type: XenoPheromones
+    pheromonesMultiplier: 2
   - type: XenoPlasma
     plasma: 1000
     maxPlasma: 1000
     plasmaRegenOnWeeds: 6
-  - type: XenoPheromones

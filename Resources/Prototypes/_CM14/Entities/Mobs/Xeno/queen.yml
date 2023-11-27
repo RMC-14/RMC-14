@@ -41,11 +41,12 @@
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
   - type: XenoDevour
+  - type: XenoPheromones
+    pheromonesMultiplier: 4
   - type: XenoPlasma
     plasma: 1000
     maxPlasma: 1000
     plasmaRegenOnWeeds: 40
-  - type: XenoPheromones
   - type: XenoArmor
     armor: 25
   - type: Tag
