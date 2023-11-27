@@ -1,4 +1,5 @@
-﻿using Content.Shared._CM14.Xenos.Construction;
+﻿using Content.Shared._CM14.Marines;
+using Content.Shared._CM14.Xenos.Construction;
 using Content.Shared._CM14.Xenos.Evolution;
 using Content.Shared._CM14.Xenos.Hive;
 using Content.Shared.Access.Components;
@@ -23,6 +24,7 @@ public sealed class XenoSystem : EntitySystem
     private readonly HashSet<EntityUid> _toUpdate = new();
 
     private EntityQuery<DamageableComponent> _damageableQuery;
+    private EntityQuery<MarineComponent> _marineQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
 
     public override void Initialize()
@@ -30,6 +32,7 @@ public sealed class XenoSystem : EntitySystem
         base.Initialize();
 
         _damageableQuery = GetEntityQuery<DamageableComponent>();
+        _marineQuery = GetEntityQuery<MarineComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
 
         SubscribeLocalEvent<XenoComponent, MapInitEvent>(OnXenoMapInit);
@@ -86,6 +89,61 @@ public sealed class XenoSystem : EntitySystem
             _toUpdate.Add(other);
     }
 
+    public void MakeXeno(Entity<XenoComponent?> xeno)
+    {
+        EnsureComp<XenoComponent>(xeno);
+    }
+
+    public void SetHive(Entity<XenoComponent?> xeno, Entity<HiveComponent?> hive)
+    {
+        if (!Resolve(xeno, ref xeno.Comp) ||
+            !Resolve(hive, ref hive.Comp))
+        {
+            return;
+        }
+
+        xeno.Comp.Hive = hive;
+        Dirty(xeno, xeno.Comp);
+    }
+
+    public void HealDamage(Entity<DamageableComponent?> xeno, FixedPoint2 amount)
+    {
+        if (!_damageableQuery.Resolve(xeno, ref xeno.Comp, false))
+            return;
+
+        var heal = new DamageSpecifier();
+        foreach (var (type, typeAmount) in xeno.Comp.Damage.DamageDict)
+        {
+            var total = heal.GetTotal();
+            if (typeAmount + total >= amount)
+            {
+                var change = -FixedPoint2.Min(typeAmount, amount - total);
+                if (!heal.DamageDict.TryAdd(type, change))
+                {
+                    heal.DamageDict[type] += change;
+                }
+
+                break;
+            }
+            else
+            {
+                if (!heal.DamageDict.TryAdd(type, -typeAmount))
+                {
+                    heal.DamageDict[type] += -typeAmount;
+                }
+            }
+        }
+
+        if (heal.GetTotal() < FixedPoint2.Zero)
+            _damageable.TryChangeDamage(xeno, heal);
+    }
+
+    // TODO CM14 generalize this for survivors, synthetics, enemy hives, etc
+    public bool CanHitLiving(EntityUid xeno, EntityUid defender)
+    {
+        return _marineQuery.HasComponent(defender);
+    }
+
     public override void Update(float frameTime)
     {
         var query = EntityQueryEnumerator<XenoComponent>();
@@ -136,52 +194,4 @@ public sealed class XenoSystem : EntitySystem
         _toUpdate.Clear();
     }
 
-    public void MakeXeno(Entity<XenoComponent?> xeno)
-    {
-        EnsureComp<XenoComponent>(xeno);
-    }
-
-    public void SetHive(Entity<XenoComponent?> xeno, Entity<HiveComponent?> hive)
-    {
-        if (!Resolve(xeno, ref xeno.Comp) ||
-            !Resolve(hive, ref hive.Comp))
-        {
-            return;
-        }
-
-        xeno.Comp.Hive = hive;
-        Dirty(xeno, xeno.Comp);
-    }
-
-    public void HealDamage(Entity<DamageableComponent?> xeno, FixedPoint2 amount)
-    {
-        if (!_damageableQuery.Resolve(xeno, ref xeno.Comp, false))
-            return;
-
-        var heal = new DamageSpecifier();
-        foreach (var (type, typeAmount) in xeno.Comp.Damage.DamageDict)
-        {
-            var total = heal.GetTotal();
-            if (typeAmount + total >= amount)
-            {
-                var change = -FixedPoint2.Min(typeAmount, amount - total);
-                if (!heal.DamageDict.TryAdd(type, change))
-                {
-                    heal.DamageDict[type] += change;
-                }
-
-                break;
-            }
-            else
-            {
-                if (!heal.DamageDict.TryAdd(type, -typeAmount))
-                {
-                    heal.DamageDict[type] += -typeAmount;
-                }
-            }
-        }
-
-        if (heal.GetTotal() < FixedPoint2.Zero)
-            _damageable.TryChangeDamage(xeno, heal);
-    }
 }

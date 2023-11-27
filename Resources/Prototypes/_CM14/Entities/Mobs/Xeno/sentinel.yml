@@ -26,7 +26,7 @@
     - ActionXenoTailStab
     - ActionXenoSlowingSpit
     - ActionXenoScatteredSpit
-    #    - ActionXenoParalyzingSlash
+    - ActionXenoParalyzingSlash
     - ActionXenoEvolve60 # TODO CM14 300
     # explosionResistance: 10
   - type: XenoDevour
@@ -37,6 +37,7 @@
   - type: XenoEvolution
     evolvesTo:
     - CMXenoSpitter
+  - type: XenoParalyzingSlash
   - type: XenoSlowingSpit
   - type: XenoScatteredSpit
   - type: MeleeWeapon

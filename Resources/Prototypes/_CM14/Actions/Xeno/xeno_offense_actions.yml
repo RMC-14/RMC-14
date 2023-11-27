@@ -107,3 +107,16 @@
     event: !type:XenoScatteredSpitActionEvent
     useDelay: 8
     range: 15
+
+- type: entity
+  id: ActionXenoParalyzingSlash
+  parent: ActionXenoBase
+  name: Paralyzing Slash # TODO CM14 description
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: lurker_inject_neuro
+    event: !type:XenoParalyzingSlashActionEvent
+    useDelay: 12
