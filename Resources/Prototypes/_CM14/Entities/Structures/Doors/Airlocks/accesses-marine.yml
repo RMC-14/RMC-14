@@ -1,0 +1,215 @@
+#Alpha
+- type: entity
+  parent: CMAirlockPrepAlpha
+  id: CMAirlockPrepAlphaLocked
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessMarinePrep"]]
+
+- type: entity
+  parent: CMAirlockPrepAlpha
+  id: CMAirlockPrepAlphaSL
+  name: alpha squad leader preparations airlock
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessSquadLeaderPrep"]]
+
+- type: entity
+  parent: CMAirlockPrepAlpha
+  id: CMAirlockPrepAlphaSpec
+  name: alpha squad specialist preparations airlock
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessSpecPrep"]]
+
+- type: entity
+  parent: CMAirlockPrepAlpha
+  id: CMAirlockPrepAlphaEngineer
+  name: alpha squad comtech preparations airlock
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessCombatTechPrep"]]
+
+- type: entity
+  parent: CMAirlockPrepAlpha
+  id: CMAirlockPrepAlphaMedical
+  name: alpha squad medical preparations airlock
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessMedPrep"]]
+
+- type: entity
+  parent: CMAirlockPrepAlpha
+  id: CMAirlockPrepAlphaSmart
+  name: alpha squad smartgunner preparations airlock
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessSmartPrep"]]
+
+# Bravo
+- type: entity
+  parent: CMAirlockPrepBravo
+  id: CMAirlockPrepBravoLocked
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessMarinePrep"]]
+
+- type: entity
+  parent: CMAirlockPrepBravo
+  id: CMAirlockPrepBravoSL
+  name: bravo squad leader preparations airlock
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessSquadLeaderPrep"]]
+
+- type: entity
+  parent: CMAirlockPrepBravo
+  id: CMAirlockPrepBravoSpec
+  name: bravo squad specialist preparations airlock
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessSpecPrep"]]
+
+- type: entity
+  parent: CMAirlockPrepBravo
+  id: CMAirlockPrepBravoEngineer
+  name: bravo squad comtech preparations airlock
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessCombatTechPrep"]]
+
+- type: entity
+  parent: CMAirlockPrepBravo
+  id: CMAirlockPrepBravoMedical
+  name: bravo squad medical preparations airlock
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessMedPrep"]]
+
+- type: entity
+  parent: CMAirlockPrepBravo
+  id: CMAirlockPrepBravoSmart
+  name: bravo squad smartgunner preparations airlock
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessSmartPrep"]]
+
+# Charlie
+- type: entity
+  parent: CMAirlockPrepCharlie
+  id: CMAirlockPrepCharlieLocked
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessMarinePrep"]]
+
+- type: entity
+  parent: CMAirlockPrepCharlie
+  id: CMAirlockPrepCharlieSL
+  name: charlie squad leader preparations airlock
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessSquadLeaderPrep"]]
+
+- type: entity
+  parent: CMAirlockPrepCharlie
+  id: CMAirlockPrepCharlieSpec
+  name: charlie squad specialist preparations airlock
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessSpecPrep"]]
+
+- type: entity
+  parent: CMAirlockPrepCharlie
+  id: CMAirlockPrepCharlieEngineer
+  name: charlie squad comtech preparations airlock
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessCombatTechPrep"]]
+
+- type: entity
+  parent: CMAirlockPrepCharlie
+  id: CMAirlockPrepCharlieMedical
+  name: charlie squad medical preparations airlock
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessMedPrep"]]
+
+- type: entity
+  parent: CMAirlockPrepCharlie
+  id: CMAirlockPrepCharlieSmart
+  name: charlie squad smartgunner preparations airlock
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessSmartPrep"]]
+
+# Delta
+- type: entity
+  parent: CMAirlockPrepDelta
+  id: CMAirlockPrepDeltaLocked
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessMarinePrep"]]
+
+- type: entity
+  parent: CMAirlockPrepDelta
+  id: CMAirlockPrepDeltaSL
+  name: delta squad leader preparations airlock
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessSquadLeaderPrep"]]
+
+- type: entity
+  parent: CMAirlockPrepDelta
+  id: CMAirlockPrepDeltaSpec
+  name: delta squad specialist preparations airlock
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessSpecPrep"]]
+
+- type: entity
+  parent: CMAirlockPrepDelta
+  id: CMAirlockPrepDeltaEngineer
+  name: delta squad comtech preparations airlock
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessCombatTechPrep"]]
+
+- type: entity
+  parent: CMAirlockPrepDelta
+  id: CMAirlockPrepDeltaMedical
+  name: delta squad medical preparations airlock
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessMedPrep"]]
+
+- type: entity
+  parent: CMAirlockPrepDelta
+  id: CMAirlockPrepDeltaSmart
+  name: delta squad smartgunner preparations airlock
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessSmartPrep"]]
