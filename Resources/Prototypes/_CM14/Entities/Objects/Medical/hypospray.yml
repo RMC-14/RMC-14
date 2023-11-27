@@ -9,12 +9,15 @@
     state: hypospray
   - type: Item
     sprite: _CM14/Objects/Medical/hypospray.rsi
+  - type: Hypospray
+    injectSound: /Audio/_CM14/Medical/hypospray.ogg
 
-- type: entity
+- type: entity # todo cm14 these should be refillable through the chem vendor
   parent: ChemicalMedipen
   id: CMTAutoInjector
   name: auto-injector
   description: An auto-injector. Each use is 10 units.
+  noSpawn: true
   components:
   - type: Sprite
     sprite: _CM14/Objects/Medical/auto_injectors.rsi
@@ -27,6 +30,7 @@
     sprite: null
   - type: Hypospray
     solutionName: pen
+    injectSound: /Audio/_CM14/Medical/hypospray.ogg
     transferAmount: 10
   - type: SolutionContainerManager
     solutions:
@@ -54,7 +58,7 @@
 
 - type: entity
   parent: CMTAutoInjector
-  id: CMInaprovAutoInjector
+  id: CMInaprovalineAutoInjector
   name: inaprovaline auto-injector
   description: An auto-injector containing Inaprovaline.  Useful for saving lives. Each use is 10 units.
   components:
