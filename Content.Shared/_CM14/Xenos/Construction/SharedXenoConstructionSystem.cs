@@ -158,6 +158,8 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
+        args.Handled = true;
+
         // TODO CM14 construction plasma cost
         // TODO CM14 stop collision for mobs until they move off
         if (_net.IsServer)
@@ -228,6 +230,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         {
             return;
         }
+        args.Handled = true;
 
         if (_net.IsServer)
             Spawn(args.StructureId, target.SnapToGrid(EntityManager, _map));
@@ -321,10 +324,10 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
+        args.Handled = true;
+
         node.PlasmaStored += subtract;
         plasmaLeft = node.PlasmaCost - node.PlasmaStored;
-
-        args.Handled = true;
 
         if (node.PlasmaStored < node.PlasmaCost)
         {

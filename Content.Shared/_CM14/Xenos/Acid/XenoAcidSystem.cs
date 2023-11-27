@@ -54,6 +54,8 @@ public sealed class XenoAcidSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        args.Handled = true;
+
         var acid = SpawnAttachedTo(args.AcidId, target.ToCoordinates());
         AddComp(target, new CorrodingComponent
         {

@@ -96,6 +96,8 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
             return;
         }
 
+        args.Handled = true;
+
         var origin = _transform.GetMapCoordinates(xeno);
         var target = GetCoordinates(args.Coordinates).ToMap(EntityManager, _transform);
         var gomen = target.Position - origin.Position;

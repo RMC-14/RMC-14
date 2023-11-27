@@ -65,6 +65,8 @@ public sealed class XenoDevourSystem : EntitySystem
         if (args.Handled || args.Cancelled || args.Target is not { } target)
             return;
 
+        args.Handled = true;
+
         // TODO CM14 breaking out
         var container = _container.EnsureContainer<ContainerSlot>(xeno, xeno.Comp.DevourContainerId);
         if (!_container.Insert(target, container))
