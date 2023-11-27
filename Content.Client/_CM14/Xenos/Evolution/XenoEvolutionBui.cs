@@ -37,10 +37,9 @@ public sealed class XenoEvolutionBui : BoundUserInterface
                 var control = new XenoChoiceControl();
                 control.Set(evolution.Name, _sprite.Frame0(evolution));
 
-                var id = evolutionId;
                 control.Button.OnPressed += _ =>
                 {
-                    SendMessage(new XenoEvolveBuiMessage(id));
+                    SendMessage(new XenoEvolveBuiMessage(evolutionId));
                     Close();
                 };
 
