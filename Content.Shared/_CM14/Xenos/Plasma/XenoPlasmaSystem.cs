@@ -104,6 +104,18 @@ public sealed class XenoPlasmaSystem : EntitySystem
         Dirty(xeno, xeno.Comp);
     }
 
+    public void RemovePlasma(Entity<XenoComponent> xeno, FixedPoint2 plasma)
+    {
+        xeno.Comp.Plasma = FixedPoint2.Max(xeno.Comp.Plasma - plasma, FixedPoint2.Zero);
+        Dirty(xeno);
+    }
+
+    public void SetPlasma(Entity<XenoComponent> xeno, FixedPoint2 plasma)
+    {
+        xeno.Comp.Plasma = plasma;
+        Dirty(xeno);
+    }
+
     public bool TryRemovePlasma(Entity<XenoComponent> xeno, FixedPoint2 plasma)
     {
         if (!HasPlasma(xeno, plasma))
@@ -123,11 +135,5 @@ public sealed class XenoPlasmaSystem : EntitySystem
 
         _popup.PopupClient(Loc.GetString("cm-xeno-not-enough-plasma"), xeno, xeno);
         return false;
-    }
-
-    public void RemovePlasma(Entity<XenoComponent> xeno, FixedPoint2 plasma)
-    {
-        xeno.Comp.Plasma = FixedPoint2.Max(xeno.Comp.Plasma - plasma, FixedPoint2.Zero);
-        Dirty(xeno);
     }
 }
