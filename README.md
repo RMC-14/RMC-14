@@ -3,7 +3,7 @@ CM14 is a remake of CM13, Space Station 13, that runs on Robust Toolbox.
 
 The design goal of this fork is to attempt to replicate the feel and experience of CM13, while using SS14 as a foundation.
 
-This is the primary repo for CM14. To prevent people forking RobustToolbox, a "content" pack is loaded by the client and server. This content pack contains everything needed to play the game on one specific server.
+This is the primary repo for CM14. To prevent people forking [Robust Toolbox](https://github.com/space-wizards/RobustToolbox), a "content" pack is loaded by the client and server. This content pack contains everything needed to play the game on one specific server.
 
 If you want to host or create content for CM14, this is the repo you need. It contains both RobustToolbox and the content pack for development of new content packs.
 
