@@ -9,7 +9,7 @@ If you want to host or create content for CM14, this is the repo you need. It co
 
 ## Links
 
-[Website](https://spacestation14.io/) | [Discord](https://discord.ss14.io/) | [Steam](https://store.steampowered.com/app/1255460/Space_Station_14/) | [Standalone Download](https://spacestation14.io/about/nightlies/)
+[Website](https://spacestation14.io/) | [Discord](https://discord.gg/mjpJk2ueDY) | [Steam](https://store.steampowered.com/app/1255460/Space_Station_14/) | [Standalone Download](https://spacestation14.io/about/nightlies/)
 
 ## Contributing
 
