@@ -4,7 +4,7 @@ namespace Content.Shared._CM14.Xenos.Pheromones;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedXenoPheromonesSystem))]
-public sealed partial class ActiveXenoPheromonesComponent : Component
+public sealed partial class XenoActivePheromonesComponent : Component
 {
     [DataField, AutoNetworkedField]
     public XenoPheromones Pheromones;
