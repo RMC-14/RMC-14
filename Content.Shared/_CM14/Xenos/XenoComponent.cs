@@ -19,6 +19,10 @@ public sealed partial class XenoComponent : Component
     public List<EntProtoId> EvolvesTo = new();
 
     [DataField, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan EvolutionDelay = TimeSpan.FromSeconds(3);
+
+    [DataField, AutoNetworkedField]
     public List<EntProtoId> ActionIds = new();
 
     [DataField]
