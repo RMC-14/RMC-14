@@ -42,11 +42,12 @@
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
   - type: XenoDevour
+  - type: XenoPheromones
+    pheromonesMultiplier: 2.5
   - type: XenoPlasma
     plasma: 1000
     maxPlasma: 1000
     plasmaRegenOnWeeds: 55
-  - type: XenoPheromones
   - type: XenoResinWalker
   - type: MeleeWeapon
     damage:

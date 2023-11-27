@@ -36,11 +36,11 @@
     - WallXenoMembrane
     - DoorXenoResin
   - type: XenoDevour
+  - type: XenoPheromones
   - type: XenoPlasma
     plasma: 300
     maxPlasma: 300
     plasmaRegenOnWeeds: 6
-  - type: XenoPheromones
   - type: MeleeWeapon
     damage:
       groups:
