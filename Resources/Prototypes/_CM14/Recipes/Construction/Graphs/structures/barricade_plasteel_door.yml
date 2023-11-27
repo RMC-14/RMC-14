@@ -21,7 +21,7 @@
     - to: start
       completed:
         - !type:SpawnPrototype
-          prototype: Plasteel
+          prototype: SheetPlasteel1
           amount: 4
         - !type:DeleteEntity
       conditions:
