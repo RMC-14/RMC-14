@@ -37,8 +37,8 @@
     plasmaRegenOnWeeds: 0
   - type: XenoEvolution
     evolvesTo:
-    - CMXenoPraetorian
     - CMXenoCrusher
+    - CMXenoPraetorian
   - type: XenoArmor
     armor: 20
   - type: MeleeWeapon
