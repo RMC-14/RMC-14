@@ -1,5 +1,7 @@
 ﻿- type: entity
-  parent: CMXenoDeveloped
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
   id: CMXenoPraetorian
   name: Praetorian
   description: A huge, looming beast of an alien.
@@ -27,10 +29,13 @@
     #    - ActionXenoDash
     #    - ActionXenoAcidBall
     #    - ActionXenoSprayAcid
+    # explosionResistance: 40
+  - type: XenoAcid
+  - type: XenoDevour
+  - type: XenoPlasma
     plasma: 800
     maxPlasma: 800
     plasmaRegenOnWeeds: 24
-    # explosionResistance: 40
   - type: XenoArmor
     armor: 25
   - type: MeleeWeapon

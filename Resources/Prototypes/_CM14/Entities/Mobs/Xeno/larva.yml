@@ -21,13 +21,15 @@
     - ActionXenoWatch
     - ActionXenoHide
     - ActionXenoEvolve60
+  - type: XenoPlasma
+    maxPlasma: 10
+    plasmaRegenOnWeeds: 1
+  - type: XenoEvolution
     evolvesTo:
     - CMXenoDrone
     - CMXenoRunner
     - CMXenoSentinel
     - CMXenoDefender
-    maxPlasma: 10 # TODO CM14
-    plasmaRegenOnWeeds: 1
   - type: XenoHide
   - type: Fixtures
     fixtures:

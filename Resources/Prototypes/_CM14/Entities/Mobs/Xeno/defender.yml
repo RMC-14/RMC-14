@@ -1,5 +1,7 @@
 ﻿- type: entity
-  parent: CMXenoDeveloped
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
   id: CMXenoDefender
   name: Defender
   description: A alien with an armored crest.
@@ -27,14 +29,17 @@
     - ActionXenoTailSweep
     - ActionXenoFortify
     - ActionXenoEvolve60 # TODO CM14 300
+  - type: XenoEvolution
     evolvesTo:
     - CMXenoWarrior
-    plasma: 100 # TODO CM14
+  - type: XenoPlasma
+    plasma: 100
     maxPlasma: 100
     plasmaRegenOnWeeds: 5
   - type: XenoArmor
     armor: 35
   - type: XenoCrest
+  - type: XenoDevour
   - type: XenoHeadbutt
     damage:
       types:

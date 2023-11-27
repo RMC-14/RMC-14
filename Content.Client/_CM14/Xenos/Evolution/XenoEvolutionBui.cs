@@ -27,7 +27,7 @@ public sealed class XenoEvolutionBui : BoundUserInterface
         _window = new XenoEvolutionWindow();
         _window.OnClose += Close;
 
-        if (EntMan.TryGetComponent(Owner, out XenoComponent? xeno))
+        if (EntMan.TryGetComponent(Owner, out XenoEvolutionComponent? xeno))
         {
             foreach (var evolutionId in xeno.EvolvesTo)
             {

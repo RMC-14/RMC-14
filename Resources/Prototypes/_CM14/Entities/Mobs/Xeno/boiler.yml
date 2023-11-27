@@ -1,5 +1,7 @@
 ﻿- type: entity
-  parent: CMXenoDeveloped
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
   id: CMXenoBoiler
   name: Boiler
   description: A huge, grotesque xenomorph covered in glowing, oozing acid slime.
@@ -28,12 +30,15 @@
     #    - ActionXenoSprayAcid
     #    - ActionXenoLongSight
     #    - ActionXenoAcidShroud
+    # explosionResistance: 20
+  - type: XenoPlasma
     plasma: 400
     maxPlasma: 400
     plasmaRegenOnWeeds: 16
-    # explosionResistance: 20
+  - type: XenoAcid
   - type: XenoArmor
     armor: 20
+  - type: XenoDevour
   - type: MeleeWeapon
     damage:
       groups:

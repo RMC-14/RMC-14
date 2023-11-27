@@ -1,5 +1,7 @@
 ﻿- type: entity
-  parent: CMXenoDeveloped
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
   id: CMXenoCarrier
   name: Carrier
   description: A strange-looking alien creature. It carries a number of scuttling jointed crablike creatures.
@@ -29,12 +31,16 @@
     #    - ActionXenoThrowFacehugger
     #    - ActionXenoRetrieveEgg
     #    - ActionXenoHuggerReserve
+    # explosionResistance: 20
+  - type: XenoConstruction
+    canOrderConstruction:
+    - HiveCoreXenoConstructionNode
+  - type: XenoPlasma
     plasma: 500
     maxPlasma: 500
     plasmaRegenOnWeeds: 17.5
-    canOrderConstruction:
-    - HiveCoreXenoConstructionNode
-    # explosionResistance: 20
+  - type: XenoDevour
+  - type: XenoPheromones
   - type: MeleeWeapon
     damage:
       groups:

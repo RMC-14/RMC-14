@@ -16,9 +16,9 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._CM14.Xenos.Melee;
+namespace Content.Shared._CM14.Xenos.Stab;
 
-public abstract class SharedXenoMeleeSystem : EntitySystem
+public abstract class SharedXenoTailStabSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -37,10 +37,10 @@ public abstract class SharedXenoMeleeSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<XenoComponent, XenoTailStabEvent>(OnXenoTailStab);
+        SubscribeLocalEvent<XenoTailStabComponent, XenoTailStabEvent>(OnXenoTailStab);
     }
 
-    private void OnXenoTailStab(Entity<XenoComponent> xeno, ref XenoTailStabEvent args)
+    private void OnXenoTailStab(Entity<XenoTailStabComponent> xeno, ref XenoTailStabEvent args)
     {
         if (!_actionBlocker.CanAttack(xeno) ||
             !TryComp(xeno, out TransformComponent? transform))
@@ -144,7 +144,7 @@ public abstract class SharedXenoMeleeSystem : EntitySystem
         args.Handled = true;
     }
 
-    protected virtual void DoLunge(Entity<XenoComponent, TransformComponent> user, Vector2 localPos, EntProtoId animationId)
+    protected virtual void DoLunge(Entity<XenoTailStabComponent, TransformComponent> user, Vector2 localPos, EntProtoId animationId)
     {
     }
 }
