@@ -10,7 +10,7 @@
 - type: entity
   parent: CMAirlockPrepAlpha
   id: CMAirlockPrepAlphaSL
-  name: alpha squad leader preparations airlock
+  name: alpha squad leader preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -19,7 +19,7 @@
 - type: entity
   parent: CMAirlockPrepAlpha
   id: CMAirlockPrepAlphaSpec
-  name: alpha squad specialist preparations airlock
+  name: alpha squad specialist preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -28,7 +28,7 @@
 - type: entity
   parent: CMAirlockPrepAlpha
   id: CMAirlockPrepAlphaEngineer
-  name: alpha squad comtech preparations airlock
+  name: alpha squad comtech preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -37,7 +37,7 @@
 - type: entity
   parent: CMAirlockPrepAlpha
   id: CMAirlockPrepAlphaMedical
-  name: alpha squad medical preparations airlock
+  name: alpha squad medical preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -46,7 +46,7 @@
 - type: entity
   parent: CMAirlockPrepAlpha
   id: CMAirlockPrepAlphaSmart
-  name: alpha squad smartgunner preparations airlock
+  name: alpha squad smartgunner preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -64,7 +64,7 @@
 - type: entity
   parent: CMAirlockPrepBravo
   id: CMAirlockPrepBravoSL
-  name: bravo squad leader preparations airlock
+  name: bravo squad leader preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -73,7 +73,7 @@
 - type: entity
   parent: CMAirlockPrepBravo
   id: CMAirlockPrepBravoSpec
-  name: bravo squad specialist preparations airlock
+  name: bravo squad specialist preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -82,7 +82,7 @@
 - type: entity
   parent: CMAirlockPrepBravo
   id: CMAirlockPrepBravoEngineer
-  name: bravo squad comtech preparations airlock
+  name: bravo squad comtech preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -91,7 +91,7 @@
 - type: entity
   parent: CMAirlockPrepBravo
   id: CMAirlockPrepBravoMedical
-  name: bravo squad medical preparations airlock
+  name: bravo squad medical preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -100,7 +100,7 @@
 - type: entity
   parent: CMAirlockPrepBravo
   id: CMAirlockPrepBravoSmart
-  name: bravo squad smartgunner preparations airlock
+  name: bravo squad smartgunner preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -118,7 +118,7 @@
 - type: entity
   parent: CMAirlockPrepCharlie
   id: CMAirlockPrepCharlieSL
-  name: charlie squad leader preparations airlock
+  name: charlie squad leader preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -127,7 +127,7 @@
 - type: entity
   parent: CMAirlockPrepCharlie
   id: CMAirlockPrepCharlieSpec
-  name: charlie squad specialist preparations airlock
+  name: charlie squad specialist preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -136,7 +136,7 @@
 - type: entity
   parent: CMAirlockPrepCharlie
   id: CMAirlockPrepCharlieEngineer
-  name: charlie squad comtech preparations airlock
+  name: charlie squad comtech preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -145,7 +145,7 @@
 - type: entity
   parent: CMAirlockPrepCharlie
   id: CMAirlockPrepCharlieMedical
-  name: charlie squad medical preparations airlock
+  name: charlie squad medical preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -154,7 +154,7 @@
 - type: entity
   parent: CMAirlockPrepCharlie
   id: CMAirlockPrepCharlieSmart
-  name: charlie squad smartgunner preparations airlock
+  name: charlie squad smartgunner preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -172,7 +172,7 @@
 - type: entity
   parent: CMAirlockPrepDelta
   id: CMAirlockPrepDeltaSL
-  name: delta squad leader preparations airlock
+  name: delta squad leader preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -181,7 +181,7 @@
 - type: entity
   parent: CMAirlockPrepDelta
   id: CMAirlockPrepDeltaSpec
-  name: delta squad specialist preparations airlock
+  name: delta squad specialist preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -190,7 +190,7 @@
 - type: entity
   parent: CMAirlockPrepDelta
   id: CMAirlockPrepDeltaEngineer
-  name: delta squad comtech preparations airlock
+  name: delta squad comtech preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -199,7 +199,7 @@
 - type: entity
   parent: CMAirlockPrepDelta
   id: CMAirlockPrepDeltaMedical
-  name: delta squad medical preparations airlock
+  name: delta squad medical preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -208,7 +208,7 @@
 - type: entity
   parent: CMAirlockPrepDelta
   id: CMAirlockPrepDeltaSmart
-  name: delta squad smartgunner preparations airlock
+  name: delta squad smartgunner preparations
   suffix: Locked
   components:
   - type: AccessReader

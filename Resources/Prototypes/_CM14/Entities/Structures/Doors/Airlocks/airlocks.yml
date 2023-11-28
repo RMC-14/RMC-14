@@ -65,7 +65,7 @@
 - type: entity
   parent: CMAirlock
   id: CMAirlockMaint
-  name: maintenance airlock
+  name: maintenance
   components:
   - type: Sprite
     sprite: _CM14/Structures/Doors/Airlocks/maint_door.rsi
@@ -147,7 +147,7 @@
 - type: entity
   parent: CMAirlockPrep
   id: CMAirlockPrepAlpha
-  name: alpha squad preparations airlock
+  name: alpha squad preparations
   components:
   - type: Sprite
     sprite: _CM14/Structures/Doors/Airlocks/prep_door_alpha.rsi
@@ -155,7 +155,7 @@
 - type: entity
   parent: CMAirlockPrep
   id: CMAirlockPrepBravo
-  name: bravo squad preparations airlock
+  name: bravo squad preparations
   components:
   - type: Sprite
     sprite: _CM14/Structures/Doors/Airlocks/prep_door_bravo.rsi
@@ -163,7 +163,7 @@
 - type: entity
   parent: CMAirlockPrep
   id: CMAirlockPrepCharlie
-  name: charlie squad preparations airlock
+  name: charlie squad preparations
   components:
   - type: Sprite
     sprite: _CM14/Structures/Doors/Airlocks/prep_door_charlie.rsi
@@ -171,7 +171,7 @@
 - type: entity
   parent: CMAirlockPrep
   id: CMAirlockPrepDelta
-  name: delta squad preparations airlock
+  name: delta squad preparations
   components:
   - type: Sprite
     sprite: _CM14/Structures/Doors/Airlocks/prep_door_delta.rsi
