@@ -32,7 +32,7 @@
   parent: barricade_base
   id: barricade_metal
   name: Metal Barricade
-  description: A metal barricade that keeps the unwanted out. Upgradable with steel, plasteel, or steel rods for different attributes. Repair with a welder. 
+  description: A metal barricade that keeps the unwanted out. Upgradable with steel, plasteel, or steel rods for different attributes. Repair with a welder.
   components:
   - type: MeleeSound
     soundGroups:
@@ -243,7 +243,7 @@
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
     - type: Construction
-      graph: BarricadeMetalGraph
+      graph: BarricadeTurnstileGraph
       node: node_turnstile
 
 - type: entity
@@ -257,7 +257,7 @@
       layers:
       - state: turnstile_med
     - type: Construction
-      graph: BarricadeMetalGraph
+      graph: BarricadeTurnstileGraph
       node: node_turnstile
 
 
