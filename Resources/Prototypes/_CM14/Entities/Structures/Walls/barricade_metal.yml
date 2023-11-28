@@ -91,6 +91,7 @@
     - type: Sprite
       sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
       layers:
+      - state: metal
       - state: burn_upgrade
     - type: Damageable
       damageContainer: Inorganic
@@ -114,6 +115,7 @@
     - type: Sprite
       sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
       layers:
+      - state: metal
       - state: brute_upgrade
     - type: Damageable
       damageContainer: Inorganic
@@ -137,6 +139,7 @@
     - type: Sprite
       sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
       layers:
+      - state: metal
       - state: explosive_upgrade
     - type: ExplosionResistance
       damageCoefficient: 0.10
