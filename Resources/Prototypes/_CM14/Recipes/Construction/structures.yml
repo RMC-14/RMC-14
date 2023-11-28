@@ -8,7 +8,7 @@
   category: construction-category-cm-structures
   description: A large structural assembly made out of metal.
   icon:
-    sprite: /Textures/_CM14/Structures/Walls/girder.rsi
+    sprite: _CM14/Structures/Walls/girder.rsi
     state: girder
   objectType: Structure
   placementMode: SnapgridCenter
@@ -26,7 +26,7 @@
   category: construction-category-cm-structures
   description: A large structural assembly made out of metal and plasteel.
   icon:
-    sprite: /Textures/_CM14/Structures/Walls/girder.rsi
+    sprite: _CM14/Structures/Walls/girder.rsi
     state: reinforced
   objectType: Structure
   placementMode: SnapgridCenter
@@ -44,7 +44,7 @@
   category: construction-category-cm-structures
   description: A huge chunk of metal used to separate rooms.
   icon:
-    sprite: /Textures/_CM14/Structures/Walls/metal.rsi
+    sprite: _CM14/Structures/Walls/metal.rsi
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -62,7 +62,7 @@
   category: construction-category-cm-structures
   description: A huge chunk of reinforced metal used to separate rooms.
   icon:
-    sprite: /Textures/_CM14/Structures/Walls/rwall.rsi
+    sprite: _CM14/Structures/Walls/rwall.rsi
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -103,5 +103,109 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+# Barricades
+
+- type: construction
+  name: Metal Barricade
+  id: CMBarricadeMetal
+  graph: BarricadeMetalGraph
+  startNode: start
+  targetNode: nodeMetal
+  category: construction-category-cm-structures
+  description: A military-grade metal barricade.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
+    state: metal
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  name: Sandbag Barricade
+  id: CMBarricadeSandbag
+  graph: BarricadeSandbagGraph
+  startNode: start
+  targetNode: nodeSandbag
+  category: construction-category-cm-structures
+  description: A military grade pile of sand.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
+    state: sandbag
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  name: Turnstile
+  id: CMBarricadeTurnstile
+  graph: BarricadeTurnstileGraph
+  startNode: start
+  targetNode: nodeTurnstile
+  category: construction-category-cm-structures
+  description: A fence to ensure marines stay in line.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
+    state: turnstile
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  name: Medical Turnstile
+  id: CMBarricadeTurnstileMed
+  graph: BarricadeTurnstileMedGraph
+  startNode: start
+  targetNode: nodeTurnstileMed
+  category: construction-category-cm-structures
+  description: A fence to ensure marines stay in line in medical.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
+    state: turnstile_med
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  name: Folding Metal Barricade
+  id: CMBarricadeMetalDoor
+  graph: BarricadeMetalDoorGraph
+  startNode: start
+  targetNode: nodeBarricadeMetalDoor
+  category: construction-category-cm-structures
+  description: A fence to ensure marines stay in line in medical.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
+    state: folding_metal
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  name: Folding Plasteel Barricade
+  id: CMBarricadePlasteelDoor
+  graph: BarricadePlasteelDoorGraph
+  startNode: start
+  targetNode: nodeBarricadePlasteelDoor
+  category: construction-category-cm-structures
+  description: A fence to ensure marines stay in line in medical.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
+    state: plasteel
   conditions:
     - !type:TileNotBlocked
