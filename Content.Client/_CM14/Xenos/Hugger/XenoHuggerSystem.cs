@@ -4,7 +4,7 @@ using Content.Shared._CM14.Xenos.Hugger;
 using Content.Shared.Throwing;
 using Robust.Client.GameObjects;
 using static Robust.Shared.Utility.SpriteSpecifier;
-using XenoLeapComponent = Content.Shared._CM14.Xenos.Hugger.XenoLeapComponent;
+using XenoLeapComponent = Content.Shared._CM14.Xenos.Leap.XenoLeapComponent;
 
 namespace Content.Client._CM14.Xenos.Hugger;
 

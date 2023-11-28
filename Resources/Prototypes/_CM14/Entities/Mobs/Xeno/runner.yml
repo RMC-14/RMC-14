@@ -25,12 +25,18 @@
     - ActionXenoWatch
     - ActionXenoTailStab
     - ActionXenoHide
-#    - ActionXenoPounce
-#    - ActionXenoBoneSpurs
-#    - ActionXenoLongSight
+    - ActionXenoLeap # TODO CM14 call this pounce, not leap
+    - ActionXenoBoneChips
+    - ActionXenoZoom
     - ActionXenoEvolve60 # TODO CM14 300
     # explosionResistance: 10
+  - type: XenoBoneChips
   - type: XenoDevour
+  - type: XenoHide
+  - type: XenoLeap
+    delay: 0
+    knockdownTime: 2
+    hitSound: /Audio/_CM14/Xeno/alien_pounce.ogg
   - type: XenoPlasma
     plasma: 0
     maxPlasma: 0
@@ -38,6 +44,7 @@
   - type: XenoEvolution
     evolvesTo:
     - CMXenoLurker
+  - type: XenoZoom
   - type: MeleeWeapon
     damage:
       groups:

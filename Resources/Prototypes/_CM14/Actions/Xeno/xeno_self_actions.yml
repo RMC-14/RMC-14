@@ -85,3 +85,16 @@
       state: toggle_speed
     event: !type:XenoResinWalkerActionEvent
     useDelay: 0.25
+
+- type: entity
+  id: ActionXenoZoom
+  parent: ActionXenoBase
+  name: Toggle Long-Range Sight
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: toggle_long_range
+    event: !type:XenoZoomActionEvent
+    useDelay: 0.2

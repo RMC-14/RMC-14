@@ -1,12 +1,12 @@
 using Content.Server.Weapons.Ranged.Systems;
-using Content.Shared._CM14.Xenos.Spit;
+using Content.Shared._CM14.Xenos.Projectile;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._CM14.Xenos.Spit;
+namespace Content.Server._CM14.Xenos.Projectile;
 
-public sealed class XenoSpitSystem : SharedXenoSpitSystem
+public sealed class XenoProjectileSystem : SharedXenoProjectileSystem
 {
     [Dependency] private readonly GunSystem _gun = default!;
     [Dependency] private readonly PhysicsSystem _physics = default!;
