@@ -2,7 +2,7 @@
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._CM14.Xenos.Hugger;
+namespace Content.Shared._CM14.Xenos.Leap;
 
 [Serializable, NetSerializable]
 public sealed partial class XenoLeapDoAfterEvent : DoAfterEvent

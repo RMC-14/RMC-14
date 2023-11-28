@@ -1,17 +1,17 @@
-﻿using Content.Shared.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._CM14.Xenos.Spit.Scattered;
+namespace Content.Shared._CM14.Xenos.Projectile.Spit.Slowing;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedXenoSpitSystem))]
-public sealed partial class XenoScatteredSpitComponent : Component
+[Access(typeof(XenoSpitSystem))]
+public sealed partial class XenoSlowingSpitComponent : Component
 {
     [DataField, AutoNetworkedField]
     [ViewVariables(VVAccess.ReadWrite)]
-    public FixedPoint2 PlasmaCost = 30;
+    public FixedPoint2 PlasmaCost = 20;
 
     [DataField, AutoNetworkedField]
     [ViewVariables(VVAccess.ReadWrite)]
@@ -19,17 +19,9 @@ public sealed partial class XenoScatteredSpitComponent : Component
 
     [DataField, AutoNetworkedField]
     [ViewVariables(VVAccess.ReadWrite)]
-    public EntProtoId ProjectileId = "XenoScatteredSpitProjectile";
+    public EntProtoId ProjectileId = "XenoSlowingSpitProjectile";
 
     [DataField, AutoNetworkedField]
     [ViewVariables(VVAccess.ReadWrite)]
     public SoundSpecifier Sound = new SoundCollectionSpecifier("XenoSpitAcid");
-
-    [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public int MaxProjectiles = 5;
-
-    [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public Angle MaxDeviation = Angle.FromDegrees(60);
 }

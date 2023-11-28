@@ -58,3 +58,26 @@
     slow: 0
     knockdown: 1
     armorResistsKnockdown: false
+
+- type: entity
+  id: XenoBoneChipsProjectile
+  parent: XenoBaseProjectile
+  name: bone chips
+  categories:
+  - hideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/shards.rsi
+    layers:
+    - state: bonechips
+      shader: unshaded
+  - type: XenoSlowingSpitProjectile
+    slow: 5
+    knockdown: 0
+  - type: TimedDespawn
+    lifetime: 0.2
+  - type: Projectile
+    impactEffect: null
+    damage:
+      types:
+        Slash: 10
