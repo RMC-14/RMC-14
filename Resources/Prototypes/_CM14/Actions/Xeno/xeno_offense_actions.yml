@@ -120,3 +120,17 @@
       state: lurker_inject_neuro
     event: !type:XenoParalyzingSlashActionEvent
     useDelay: 12
+
+- type: entity
+  id: ActionXenoBoneChips
+  parent: ActionXenoBase
+  name: Bone Chips # TODO CM14 description
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: runner_bonespur
+    event: !type:XenoBoneChipsActionEvent
+    useDelay: 12
+    range: 15

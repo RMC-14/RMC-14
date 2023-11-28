@@ -1,13 +1,12 @@
-﻿using Content.Shared.Damage;
-using Content.Shared.Damage.Prototypes;
+﻿using Content.Shared._CM14.Xenos.Hugger;
 using Content.Shared.FixedPoint;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
-namespace Content.Shared._CM14.Xenos.Hugger;
+namespace Content.Shared._CM14.Xenos.Leap;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedXenoHuggerSystem))]
+[Access(typeof(SharedXenoLeapSystem))]
 public sealed partial class XenoLeapComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -21,4 +20,8 @@ public sealed partial class XenoLeapComponent : Component
     [DataField, AutoNetworkedField]
     [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan KnockdownTime = TimeSpan.FromSeconds(1);
+
+    [DataField, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public SoundSpecifier? HitSound;
 }

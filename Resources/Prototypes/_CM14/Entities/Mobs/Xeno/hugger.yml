@@ -39,4 +39,5 @@
         - SmallMobLayer
   - type: XenoAnimateMovement
   - type: XenoLeap
+    knockdownTime: 90
   - type: XenoHugger
