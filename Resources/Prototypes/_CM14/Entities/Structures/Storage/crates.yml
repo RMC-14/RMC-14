@@ -21,6 +21,65 @@
     sprite: _CM14/Structures/Storage/Crates/basic.rsi
     state: icon
 
+- type: entity
+  parent: [ BaseStructureDynamic, CMEntityBase ]
+  id: CMCrateLarge
+  name: large crate
+  description: A hefty wooden crate.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/densecrate.rsi
+    noRot: true
+    state: base
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/densecrate.rsi
+    state: base
+  - type: Transform
+    noRot: true
+  - type: InteractionOutline
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.29"
+        density: 50
+        mask:
+        - SmallMobMask
+        layer:
+        - MachineLayer
+  - type: EntityStorage
+  - type: PlaceableSurface
+    isPlaceable: false
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Wooden
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Appearance
+  - type: PaperLabel
+    labelSlot:
+      insertVerbText: Attach Label
+      ejectVerbText: Remove Label
+      whitelist:
+        components:
+        - Paper
+  - type: ContainerContainer
+    containers:
+      entity_storage: !type:Container
+      paper_label: !type:ContainerSlot
+  - type: ItemSlots
+  - type: StaticPrice
+    price: 50
+
+
 # Weldable
 - type: entity
   parent: CMCrateBase
