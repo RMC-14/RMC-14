@@ -6,7 +6,7 @@
     actions:
     - !type:DeleteEntity
     edges:
-    - to: node_sandbag
+    - to: nodeSandbag
       completed:
       - !type:SnapToGrid
         southRotation: true
@@ -15,8 +15,8 @@
         amount: 2
         doAfter: 3
 
-  - node: node_sandbag
-    entity: barricade_sandbag
+  - node: nodeSandbag
+    entity: CMBarricadeSandbag
     edges:
     - to: start
       completed:

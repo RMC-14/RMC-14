@@ -6,7 +6,7 @@
     actions:
     - !type:DeleteEntity
     edges:
-    - to: node_barricade_metal_door
+    - to: nodeBarricadeMetalDoor
       completed:
       - !type:SnapToGrid
         southRotation: true
@@ -15,8 +15,8 @@
         amount: 5
         doAfter: 5
 
-  - node: node_barricade_metal_door
-    entity: barricade_metal_door
+  - node: nodeBarricadeMetalDoor
+    entity: CMBarricadeMetalDoor
     edges:
     - to: start
       completed:

@@ -1,8 +1,8 @@
 ﻿# CM-14 Barricade Modifers
 
-# Base Barricade 
+# Base Barricade
 - type: damageModifierSet
-  id: CM_Barricade
+  id: CMBarricade
   coefficients:
     Blunt: 0.7
     Slash: 0.5
@@ -14,7 +14,7 @@
 
 # Used in anti-Biohazard Barricade
 - type: damageModifierSet
-  id: CM_burnBarricade
+  id: CMBurnBarricade
   coefficients:
     Blunt: 0.9
     Slash: 0.9
@@ -29,7 +29,7 @@
 
 # Used in Reinforced Barricade
 - type: damageModifierSet
-  id: CM_bruteBarricade
+  id: CMBruteBarricade
   coefficients:
     Blunt: 0.4
     Slash: 0.3
@@ -41,7 +41,7 @@
 
 # Used in sandbags
 - type: damageModifierSet
-  id: CM_sandbag
+  id: CMSandbag
   coefficients:
     Blunt: 0.6
     Slash: 0.8

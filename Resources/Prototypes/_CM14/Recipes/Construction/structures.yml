@@ -110,10 +110,10 @@
 
 - type: construction
   name: Metal Barricade
-  id: barricade_metal
+  id: CMBarricadeMetal
   graph: BarricadeMetalGraph
   startNode: start
-  targetNode: node_metal
+  targetNode: nodeMetal
   category: construction-category-cm-structures
   description: A military-grade metal barricade.
   objectType: Structure
@@ -127,10 +127,10 @@
 
 - type: construction
   name: Sandbag Barricade
-  id: barricade_sandbag
+  id: CMBarricadeSandbag
   graph: BarricadeSandbagGraph
   startNode: start
-  targetNode: node_sandbag
+  targetNode: nodeSandbag
   category: construction-category-cm-structures
   description: A military grade pile of sand.
   objectType: Structure
@@ -144,10 +144,10 @@
 
 - type: construction
   name: Turnstile
-  id: barricade_turnstile
+  id: CMBarricadeTurnstile
   graph: BarricadeTurnstileGraph
   startNode: start
-  targetNode: node_turnstile
+  targetNode: nodeTurnstile
   category: construction-category-cm-structures
   description: A fence to ensure marines stay in line.
   objectType: Structure
@@ -161,10 +161,10 @@
 
 - type: construction
   name: Medical Turnstile
-  id: barricade_turnstile_med
+  id: CMBarricadeTurnstileMed
   graph: BarricadeTurnstileMedGraph
   startNode: start
-  targetNode: node_turnstile_med
+  targetNode: nodeTurnstileMed
   category: construction-category-cm-structures
   description: A fence to ensure marines stay in line in medical.
   objectType: Structure
@@ -178,10 +178,10 @@
 
 - type: construction
   name: Folding Metal Barricade
-  id: barricade_metal_door
+  id: CMBarricadeMetalDoor
   graph: BarricadeMetalDoorGraph
   startNode: start
-  targetNode: node_barricade_metal_door
+  targetNode: nodeBarricadeMetalDoor
   category: construction-category-cm-structures
   description: A fence to ensure marines stay in line in medical.
   objectType: Structure
@@ -195,10 +195,10 @@
 
 - type: construction
   name: Folding Plasteel Barricade
-  id: barricade_plasteel_door
+  id: CMBarricadePlasteelDoor
   graph: BarricadePlasteelDoorGraph
   startNode: start
-  targetNode: node_barricade_plasteel_door
+  targetNode: nodeBarricadePlasteelDoor
   category: construction-category-cm-structures
   description: A fence to ensure marines stay in line in medical.
   objectType: Structure

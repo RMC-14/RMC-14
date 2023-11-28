@@ -6,7 +6,7 @@
     actions:
     - !type:DeleteEntity
     edges:
-    - to: node_turnstile
+    - to: nodeTurnstile
       completed:
       - !type:SnapToGrid
         southRotation: true
@@ -15,8 +15,8 @@
         amount: 2
         doAfter: 3
 
-  - node: node_turnstile
-    entity: barricade_turnstile
+  - node: nodeTurnstile
+    entity: CMBarricadeTurnstile
     edges:
     - to: start
       completed:

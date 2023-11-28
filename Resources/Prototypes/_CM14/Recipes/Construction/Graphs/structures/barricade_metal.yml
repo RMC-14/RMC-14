@@ -6,7 +6,7 @@
     actions:
     - !type:DeleteEntity
     edges:
-    - to: node_metal
+    - to: nodeMetal
       completed:
       - !type:SnapToGrid
         southRotation: true
@@ -15,8 +15,8 @@
         amount: 3
         doAfter: 6
 
-  - node: node_metal
-    entity: barricade_metal
+  - node: nodeMetal
+    entity: CMBarricadeMetal
     edges:
     - to: start
       completed:
@@ -30,21 +30,21 @@
       steps:
         - tool: Screwing
           doAfter: 6
-    - to: node_burn_upgrade
+    - to: nodeBurnUpgrade
       completed:
       - !type:SnapToGrid
       steps:
       - material: MetalRod
         amount: 6
         doAfter: 6
-    - to: node_brute_upgrade
+    - to: nodeBruteUpgrade
       completed:
       - !type:SnapToGrid
       steps:
       - material: Steel
         amount: 3
         doAfter: 6
-    - to: node_explosive_upgrade
+    - to: nodeExplosiveUpgrade
       completed:
       - !type:SnapToGrid
       steps:
@@ -52,8 +52,8 @@
         amount: 3
         doAfter: 6
 
-  - node: node_burn_upgrade
-    entity: barricade_burn
+  - node: nodeBurnUpgrade
+    entity: CMBarricadeBurn
     edges:
     - to: start
       completed:
@@ -68,8 +68,8 @@
         - tool: Screwing
           doAfter: 6
 
-  - node: node_brute_upgrade
-    entity: barricade_brute
+  - node: nodeBruteUpgrade
+    entity: CMBarricadeBrute
     edges:
     - to: start
       completed:
@@ -84,8 +84,8 @@
         - tool: Screwing
           doAfter: 6
 
-  - node: node_explosive_upgrade
-    entity: barricade_explosive
+  - node: nodeExplosiveUpgrade
+    entity: CMBarricadeExplosive
     edges:
     - to: start
       completed:

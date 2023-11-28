@@ -1,6 +1,6 @@
 - type: entity
   parent: BaseStructureDynamic
-  id: barricade_base
+  id: CMBarricadeBase
   name: Generic Barricade
   description: The most basic, generic barricade you have ever seen. This probably shouldn't even be here.
   components:
@@ -29,8 +29,8 @@
 # Metal Barricade Tree
 
 - type: entity
-  parent: barricade_base
-  id: barricade_metal
+  parent: CMBarricadeBase
+  id: CMBarricadeMetal
   name: Metal Barricade
   description: A metal barricade that keeps the unwanted out. Upgradable with steel, plasteel, or steel rods for different attributes. Repair with a welder.
   components:
@@ -46,7 +46,7 @@
     drawdepth: WallTops
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: CM_Barricade
+    damageModifierSet: CMBarricade
   - type: InteractionPopup
     interactSuccessString: fence-rattle-success
     messagePerceivedByOthers: fence-rattle-success
@@ -78,13 +78,13 @@
       sprite: /Textures/_CM14/Structures/Walls/metal_barricades/metal_barricade_cracks.rsi
   - type: Construction
     graph: BarricadeMetalGraph
-    node: node_metal
+    node: nodeMetal
 
 # Metal Barricade Upgrades
 
 - type: entity
-  parent: barricade_metal
-  id: barricade_burn
+  parent: CMBarricadeMetal
+  id: CMBarricadeBurn
   name: anti-Biohazard Barricade
   description: A barricade incredibly resistant to corrosive and fire damage but breaks easier. Repair with a welder.
   components:
@@ -94,7 +94,7 @@
       - state: burn_upgrade
     - type: Damageable
       damageContainer: Inorganic
-      damageModifierSet: CM_burnBarricade
+      damageModifierSet: CMBurnBarricade
     - type: DamageVisuals
       thresholds: [4, 8, 12]
       damageDivisor: 2
@@ -103,11 +103,11 @@
         sprite: /Textures/_CM14/Structures/Walls/metal_barricades/burn_barricade_cracks.rsi
     - type: Construction
       graph: BarricadeMetalGraph
-      node: node_burn_upgrade
+      node: nodeBurnUpgrade
 
 - type: entity
-  parent: barricade_metal
-  id: barricade_brute
+  parent: CMBarricadeMetal
+  id: CMBarricadeBrute
   name: Reinforced Barricade
   description: A heavy-duty barricade reinforced with steel and resistant against thrashing. Repair with a welder.
   components:
@@ -117,7 +117,7 @@
       - state: brute_upgrade
     - type: Damageable
       damageContainer: Inorganic
-      damageModifierSet: CM_bruteBarricade
+      damageModifierSet: CMBruteBarricade
     - type: DamageVisuals
       thresholds: [4, 8, 12]
       damageDivisor: 2
@@ -126,11 +126,11 @@
         sprite: /Textures/_CM14/Structures/Walls/metal_barricades/brute_barricade_cracks.rsi
     - type: Construction
       graph: BarricadeMetalGraph
-      node: node_brute_upgrade
+      node: nodeBruteUpgrade
 
 - type: entity
-  parent: barricade_metal
-  id: barricade_explosive
+  parent: CMBarricadeMetal
+  id: CMBarricadeExplosive
   name: Blast-Resistant Barricade
   description: An blast-resistant barricade made out of the same stuff in EODs. Repair with a welder.
   components:
@@ -148,13 +148,13 @@
         sprite: /Textures/_CM14/Structures/Walls/metal_barricades/explosive_barricade_cracks.rsi
     - type: Construction
       graph: BarricadeMetalGraph
-      node: node_explosive_upgrade
+      node: nodeExplosiveUpgrade
 
 # Sandbag
 
 - type: entity
-  parent: barricade_base
-  id: barricade_sandbag
+  parent: CMBarricadeBase
+  id: CMBarricadeSandbag
   name: Sandbag Barricade
   description: A makeshift barricade made out of the sand from the ground. Tough to beat but easy to pierce.
   components:
@@ -170,7 +170,7 @@
     drawdepth: WallTops
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: CM_sandbag
+    damageModifierSet: CMSandbag
   - type: Fixtures
     fixtures:
       fix1:
@@ -208,13 +208,13 @@
       sprite: /Textures/_CM14/Structures/Walls/metal_barricades/sandbag_cracks.rsi
   - type: Construction
     graph: BarricadeSandbagGraph
-    node: node_sandbag
+    node: nodeSandbag
 
 # Turnstile (not sure how to make a one-way door so for now it is a glorified fence)
 
 - type: entity
-  parent: barricade_base
-  id: barricade_turnstile
+  parent: CMBarricadeBase
+  id: CMBarricadeTurnstile
   name: Turnstile
   description: A railing to prevent marines from stepping out of line.
   components:
@@ -244,11 +244,11 @@
           acts: [ "Destruction" ]
     - type: Construction
       graph: BarricadeTurnstileGraph
-      node: node_turnstile
+      node: nodeTurnstile
 
 - type: entity
-  parent: barricade_turnstile
-  id: barricade_turnstile_med
+  parent: CMBarricadeTurnstile
+  id: CMBarricadeTurnstileMed
   name: Turnstile
   description: A railing to prevent marines from stepping out of line. This one is designed specifically for medical.
   components:
@@ -258,14 +258,14 @@
       - state: turnstile_med
     - type: Construction
       graph: BarricadeTurnstileGraph
-      node: node_turnstile
+      node: nodeTurnstile
 
 
 # Metal Barricade Doors
 
 - type: entity
-  parent: barricade_base
-  id: barricade_metal_door
+  parent: CMBarricadeBase
+  id: CMBarricadeMetalDoor
   name: Folding Metal Barricade
   description: A folding metal barricade weaker than the non-folding counterpart. Able to be opened and closed at a moment's notice. Repair with a welder.
   components:
@@ -324,11 +324,11 @@
       path: /Audio/Effects/door_close.ogg
   - type: Construction
     graph: BarricadeMetalDoorGraph
-    node: node_barricade_metal_door
+    node: nodeBarricadeMetalDoor
 
 - type: entity
-  parent: barricade_metal_door
-  id: barricade_plasteel_door
+  parent: CMBarricadeMetalDoor
+  id: CMBarricadePlasteelDoor
   name: Folding Plasteel Barricade
   description: A tough folding plasteel barricade stronger than its metal counterpart. Can be closed and opened at a moment's notice. Repair with a welder.
   components:
@@ -377,4 +377,4 @@
       path: /Audio/Effects/door_close.ogg
   - type: Construction
     graph: BarricadePlasteelDoorGraph
-    node: node_barricade_plasteel_door
+    node: nodeBarricadePlasteelDoor
