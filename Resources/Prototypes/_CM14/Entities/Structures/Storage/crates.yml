@@ -1,0 +1,54 @@
+# Base
+- type: entity
+  parent: [ CrateGeneric, CMEntityBase]
+  id: CMCrateBase
+  name: crate
+  description: A large container for items.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/basic.rsi
+    noRot: true
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/basic.rsi
+    state: icon
+
+# Weldable
+- type: entity
+  parent: CMCrateBase
+  id: CMCrateWeldable
+  components:
+  - type: Weldable
+  - type: ResistLocker
+
+# Secure
+- type: entity
+  parent: CMCrateWeldable
+  id: CMCrateSecure
+  name: secure crate
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/secure_basic.rsi
+    layers:
+    - state: base
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      map: ["enum.WeldableLayers.BaseWelded"]
+      visible: false
+    - state: locked
+      map: ["enum.StorageVisualLayers.Lock"]
+      shader: unshaded
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/secure_basic.rsi
+    state: icon
+  - type: Lock
+  - type: AccessReader
