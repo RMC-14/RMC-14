@@ -8,7 +8,7 @@
   category: construction-category-cm-structures
   description: A large structural assembly made out of metal.
   icon:
-    sprite: /Textures/_CM14/Structures/Walls/girder.rsi
+    sprite: _CM14/Structures/Walls/girder.rsi
     state: girder
   objectType: Structure
   placementMode: SnapgridCenter
@@ -26,7 +26,7 @@
   category: construction-category-cm-structures
   description: A large structural assembly made out of metal and plasteel.
   icon:
-    sprite: /Textures/_CM14/Structures/Walls/girder.rsi
+    sprite: _CM14/Structures/Walls/girder.rsi
     state: reinforced
   objectType: Structure
   placementMode: SnapgridCenter
@@ -44,7 +44,7 @@
   category: construction-category-cm-structures
   description: A huge chunk of metal used to separate rooms.
   icon:
-    sprite: /Textures/_CM14/Structures/Walls/metal.rsi
+    sprite: _CM14/Structures/Walls/metal.rsi
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -62,7 +62,7 @@
   category: construction-category-cm-structures
   description: A huge chunk of reinforced metal used to separate rooms.
   icon:
-    sprite: /Textures/_CM14/Structures/Walls/rwall.rsi
+    sprite: _CM14/Structures/Walls/rwall.rsi
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -120,7 +120,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: /Textures/_CM14/Structures/Walls/metal_barricades/barricade.rsi
+    sprite: _CM14/Structures/Walls/metal_barricades/barricade.rsi
     state: metal
   conditions:
     - !type:TileNotBlocked
@@ -137,7 +137,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: /Textures/_CM14/Structures/Walls/metal_barricades/barricade.rsi
+    sprite: _CM14/Structures/Walls/metal_barricades/barricade.rsi
     state: sandbag
   conditions:
     - !type:TileNotBlocked
@@ -154,7 +154,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: /Textures/_CM14/Structures/Walls/metal_barricades/barricade.rsi
+    sprite: _CM14/Structures/Walls/metal_barricades/barricade.rsi
     state: turnstile
   conditions:
     - !type:TileNotBlocked
@@ -171,7 +171,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: /Textures/_CM14/Structures/Walls/metal_barricades/barricade.rsi
+    sprite: _CM14/Structures/Walls/metal_barricades/barricade.rsi
     state: turnstile_med
   conditions:
     - !type:TileNotBlocked
@@ -188,7 +188,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: /Textures/_CM14/Structures/Walls/metal_barricades/barricade.rsi
+    sprite: _CM14/Structures/Walls/metal_barricades/barricade.rsi
     state: folding_metal
   conditions:
     - !type:TileNotBlocked
@@ -205,7 +205,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: /Textures/_CM14/Structures/Walls/metal_barricades/barricade.rsi
+    sprite: _CM14/Structures/Walls/metal_barricades/barricade.rsi
     state: plasteel
   conditions:
     - !type:TileNotBlocked
