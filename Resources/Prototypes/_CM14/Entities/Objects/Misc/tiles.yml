@@ -17,7 +17,7 @@
   - type: Sprite
     state: steel
   - type: Item
-    state: steel
+    heldPrefix: steel
   - type: FloorTile
     outputs:
       - Plating
@@ -33,7 +33,7 @@
   - type: Sprite
     state: wood
   - type: Item
-    state: wood
+    heldPrefix: wood
   - type: FloorTile
     outputs:
       - Plating
