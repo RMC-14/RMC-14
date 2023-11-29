@@ -40,4 +40,8 @@ public sealed partial class XenoComponent : Component
     [DataField, AutoNetworkedField]
     [ViewVariables(VVAccess.ReadWrite)]
     public bool OnWeeds;
+
+    [DataField, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public int Tier;
 }

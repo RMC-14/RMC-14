@@ -28,6 +28,7 @@
     #    - ActionXenoStomp
     #    - ActionXenoDefensiveShield
     # explosionResistance: 100
+    tier: 3
   - type: XenoDevour
   - type: XenoPlasma
     plasma: 400

@@ -1,0 +1,5 @@
+﻿<controls:CMTransformTab
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._CM14.Admin">
+    <BoxContainer Orientation="Vertical" Name="Container" Access="Public" Margin="0 0 0 20" />
+</controls:CMTransformTab>
