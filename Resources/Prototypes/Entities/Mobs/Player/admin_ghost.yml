@@ -27,6 +27,9 @@
   - type: Access
     groups:
     - AllAccess
+    - ShipMasterAccess
+    - Corp
+    - Colony
     tags:
     - NuclearOperative
     - SyndicateAgent
