@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/718b6531ec71e34f671ab37c269469e1638cc2ec/icons/turf/ground_map.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "desert"
+    },
+    {
+      "name": "dirt"
+    },
+    {
+      "name": "grass1"
+    },
+    {
+      "name": "grass2"
+    },
+    {
+      "name": "grass3"
+    },
+    {
+      "name": "sand"
+    }
+  ]
+}
