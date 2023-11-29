@@ -119,16 +119,3 @@
     collection: FootstepFloor
   itemDrop: CMTileItemSteel
   heatCapacity: 10000
-
-- type: tile
-  id: CMFloorCatwalk
-  name: tiles-cm-catwalk
-  sprite: /Textures/_CM14/Tiles/almayer/catwalk.png
-  baseTurf: Plating
-  isSubfloor: false
-  canCrowbar: true
-  footstepSounds:
-    collection: FootstepFloor
-  itemDrop: CMTileItemSteel
-  heatCapacity: 10000
-
