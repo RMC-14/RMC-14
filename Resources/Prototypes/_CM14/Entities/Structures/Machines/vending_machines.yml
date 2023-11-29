@@ -10,8 +10,6 @@
     dispenseOnHitThreshold: 2
     offState: off
     brokenState: broken
-    normalState: normal-unshaded
-    ejectState: eject-unshaded
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/colmartechweapons.rsi
     layers:
@@ -30,8 +28,6 @@
     dispenseOnHitThreshold: 2
     offState: off
     brokenState: broken
-    normalState: normal-unshaded
-    ejectState: eject-unshaded
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/colmartechequipment.rsi
     layers:
