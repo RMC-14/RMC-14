@@ -19,21 +19,19 @@
   supervisors: job-supervisors-command
   canBeAntag: false
   accessGroups:
-  - AllAccess
+  - MarineMain
 
 - type: startingGear
   id: ExecutiveOfficerGear
   equipment:
     jumpsuit: CMJumpsuitBO
-    back: ClothingBackpackCaptainFilled
-    shoes: CMShoesCombatBoots
+    back: CMBackpackCommand
+    shoes: CMShoesDress
     head: CMHeadCap
     outerClothing: CMCoatOfficer
     id: ExecutiveOfficerIDCard
-    ears: ClothingHeadsetAltCommand
-  innerClothingSkirt: CMJumpsuitBO
-  satchel: ClothingBackpackSatchelCaptainFilled
-  duffelbag: ClothingBackpackDuffelCaptainFilled
+    ears: CMHeadsetLeader
+  satchel: CMSatchel
 
 - type: entity
   id: SpawnPointExecutiveOfficer

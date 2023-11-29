@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Serialization;
+﻿using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._CM14.Xenos.Evolution;
 
@@ -11,9 +12,9 @@ public enum XenoEvolutionUIKey : byte
 [Serializable, NetSerializable]
 public sealed class XenoEvolveBuiMessage : BoundUserInterfaceMessage
 {
-    public readonly int Choice;
+    public readonly EntProtoId Choice;
 
-    public XenoEvolveBuiMessage(int choice)
+    public XenoEvolveBuiMessage(EntProtoId choice)
     {
         Choice = choice;
     }

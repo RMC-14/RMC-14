@@ -13,28 +13,22 @@
   icon: "JobIconCMQuartermaster"
   requireAdminNotify: false
   joinNotifyCrew: true
-  supervisors: job-supervisors-command #TODO CM14
-  canBeAntag: true
-  access:
-  - Command
-  - Quartermaster
-  - Cargo
-  # prep
-  # alpha bravo charlie delta
+  supervisors: job-supervisors-command
+  canBeAntag: false
+  accessGroups:
+  - CMQM
 
 - type: startingGear
   id: CMQuartermasterGear
   equipment:
     jumpsuit: CMJumpsuitQM
-    back: ClothingBackpackQuartermasterFilled
-    shoes: CMShoesCombatBootsBrown
+    back: CMBackpackEngineer
+    shoes: CMBootsBrown
     head: CMHeadCapCargo
     gloves: CMHandsBrown
     id: CMQuartermasterIDCard
-    ears: ClothingHeadsetAltCargo
-  innerClothingSkirt: CMJumpsuitQM
-  satchel: ClothingBackpackSatchelQuartermasterFilled
-  duffelbag: ClothingBackpackDuffelQuartermasterFilled
+    ears: CMHeadsetQM
+  satchel: CMSatchelEngineer
 
 - type: entity
   id: CMSpawnPointQuartermaster

@@ -236,7 +236,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeyLeader
-  name: leader`s encryption Key
+  name: leader's encryption Key
   components:
   - type: EncryptionKey
     channels:
@@ -253,7 +253,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeyCE
-  name: chief engineer`s encryption Key
+  name: chief engineer's encryption Key
   components:
   - type: EncryptionKey
     channels:
@@ -269,7 +269,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeyCMO
-  name: chief medical officer`s encryption Key
+  name: chief medical officer's encryption Key
   components:
   - type: EncryptionKey
     channels:
@@ -284,7 +284,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeyResearcher
-  name: researcher`s encryption Key
+  name: researcher's encryption Key
   components:
   - type: EncryptionKey
     channels:
@@ -315,7 +315,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeyMPO
-  name: military police officer`s encryption Key
+  name: military police officer's encryption Key
   components:
   - type: EncryptionKey
     channels:
@@ -331,7 +331,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeyPilot
-  name: pilot officer`s encryption Key
+  name: pilot officer's encryption Key
   components:
   - type: EncryptionKey
     channels:
@@ -347,7 +347,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeyIntelOfficer
-  name: intel officer`s encryption Key
+  name: intel officer's encryption Key
   components:
   - type: EncryptionKey
     channels:
@@ -364,7 +364,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeyCrewman
-  name: vehicle crewman`s encryption Key
+  name: vehicle crewman's encryption Key
   components:
   - type: EncryptionKey
     channels:
@@ -380,7 +380,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeySOF
-  name: sof`s encryption Key
+  name: sof's encryption Key
   components:
   - type: EncryptionKey
     channels:

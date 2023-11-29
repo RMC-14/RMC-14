@@ -17,24 +17,19 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-command
   canBeAntag: false
-  access:
-  - Command
-  # dropship
-  # database
-  - Medical
+  accessGroups:
+  - MarineMain
 
 - type: startingGear
   id: StaffOfficerGear
   equipment:
     jumpsuit: CMJumpsuitBO
-    back: ClothingBackpackCaptainFilled
-    shoes: CMShoesCombatBoots
+    back: CMBackpackCommand
+    shoes: CMShoesDress
     head: CMHeadCap
     id: StaffOfficerIDCard
-    ears: ClothingHeadsetAltCommand
-  innerClothingSkirt: CMJumpsuitBO
-  satchel: ClothingBackpackSatchelCaptainFilled
-  duffelbag: ClothingBackpackDuffelCaptainFilled
+    ears: CMHeadsetLeader
+  satchel: CMSatchelMarine
 
 - type: entity
   id: SpawnPointStaffOfficer

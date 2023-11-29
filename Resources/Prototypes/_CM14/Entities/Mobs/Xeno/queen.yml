@@ -1,8 +1,10 @@
-﻿- type: entity # TODO CM14 description
-  parent: CMXenoDeveloped
+﻿- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
   id: CMXenoQueen
-  name: Queen
-  description: The most vital member of the hive.
+  name: Queen # TODO CM14 use consoles
+  description: A huge, looming alien creature. The biggest and the baddest.
   components:
   - type: Sprite
     sprite: _CM14/Mobs/Xenos/Queen/queen.rsi
@@ -28,17 +30,29 @@
     - ActionXenoPlantWeeds
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
-    plasma: 1000
-    maxPlasma: 1000 # TODO CM14
-    plasmaRegenOnWeeds: 12
+    # TODO CM14 the rest of the owl
+    # explosionResistance: 100 # TODO CM14 fire immunity
+  - type: XenoAcid
+  - type: XenoConstruction
     canBuild:
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
+  - type: XenoDevour
+  - type: XenoPheromones
+    pheromonesMultiplier: 4
+  - type: XenoPlasma
+    plasma: 1000
+    maxPlasma: 1000
+    plasmaRegenOnWeeds: 40
   - type: XenoArmor
     armor: 25
   - type: Tag
     tags:
     - DoorBumpOpener # TODO CM14 big loud steps
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 40

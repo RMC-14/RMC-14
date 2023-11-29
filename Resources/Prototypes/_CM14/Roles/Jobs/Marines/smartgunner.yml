@@ -12,24 +12,21 @@
   icon: "JobIconSmartgunner"
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
-  #access:
-  # Prep
-  # Smart Prep
+  accessGroups:
+  - Smartgunner
 
 - type: startingGear
   id: SmartgunnerGear
   equipment:
     jumpsuit: JumpsuitMarine
-    back: ClothingBackpackSecurityFilled
-    shoes: CMShoesCombatBoots
+    back: CMBackpackMarine
+    shoes: CMBootsBlackFilled
     head: ArmorHelmetM10
     outerClothing: ArmorMarineM3
     gloves: CMHandsBlack
     id: DogtagSmartgunner
-    ears: ClothingHeadsetSecurity
-  innerClothingSkirt: JumpsuitMarine
-  satchel: ClothingBackpackSatchelSecurityFilled
-  duffelbag: ClothingBackpackDuffelSecurityFilled
+    ears: CMHeadsetAlpha
+  satchel: CMSatchelMarine
 
 - type: entity
   id: SpawnPointSmartGunner

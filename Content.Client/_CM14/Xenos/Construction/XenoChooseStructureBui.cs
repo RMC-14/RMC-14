@@ -27,7 +27,7 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
         _window = new XenoChooseStructureWindow();
         _window.OnClose += Close;
 
-        if (EntMan.TryGetComponent(Owner, out XenoComponent? xeno))
+        if (EntMan.TryGetComponent(Owner, out XenoConstructionComponent? xeno))
         {
             foreach (var structureId in xeno.CanBuild)
             {

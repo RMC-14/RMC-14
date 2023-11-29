@@ -18,33 +18,23 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-command
   canBeAntag: false
-  access:
-  - HeadOfSecurity #CMP
-  - Command
-  - Brig
-  - Security
-  - Armory
-  - Maintenance
-  - External
-  - Engineering
-  - Medical
+  accessGroups:
+  - CMP
 
 - type: startingGear #todo cm14
   id: ChiefMPGear
   equipment:
     jumpsuit: CMJumpsuitWO
-    back: ClothingBackpackHOSFilled
-    shoes: CMShoesCombatBoots
+    back: CMBackpackSecurity
+    shoes: CMBootsBlackFilled
     head: CMHeadBeretWO
     eyes: ClothingEyesGlassesSecurity
     gloves: CMHandsBlack
     id: ChiefMPIDCard
     outerClothing: CMArmorM3WO
-    ears: ClothingHeadsetAltSecurity
+    ears: CMHeadsetCMP
     belt: ClothingBeltSecurityFilled
-  innerClothingSkirt: CMJumpsuitWO
-  satchel: ClothingBackpackSatchelHOSFilled
-  duffelbag: ClothingBackpackDuffelHOSFilled
+  satchel: CMSatchelSecurity
 
 - type: entity
   id: SpawnPointChiefMP

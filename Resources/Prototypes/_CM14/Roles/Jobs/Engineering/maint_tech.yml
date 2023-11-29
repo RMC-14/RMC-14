@@ -14,24 +14,20 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-cm-chief-engineer
   canBeAntag: true
-  access:
-  - Engineering
-  # civ engi
-  - Maintenance
+  accessGroups:
+  - MaintTech
 
 - type: startingGear
   id: MaintTechGear
   equipment:
     jumpsuit: CMJumpsuitMaintTech
-    back: ClothingBackpackEngineeringFilled
-    shoes: CMShoesCombatBootsBrown
+    back: CMBackpackEngineer
+    shoes: CMBootsBrown
     gloves: CMHandsInsulated
     id: MaintTechIDCard
-    ears: ClothingHeadsetEngineering
+    ears: CMHeadsetEngineer
     belt: ClothingBeltUtilityEngineering
-  innerClothingSkirt: CMJumpsuitMaintTech
-  satchel: ClothingBackpackSatchelEngineeringFilled
-  duffelbag: ClothingBackpackDuffelEngineeringFilled
+  satchel: CMSatchelEngineer
 
 - type: entity
   id: SpawnPointMaintTech

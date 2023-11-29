@@ -9,26 +9,22 @@
   requireAdminNotify: false
   joinNotifyCrew: true
   supervisors: job-supervisors-command
-  canBeAntag: false
-  access:
-  - Command
-  # Dropship
-  # Pilot
+  canBeAntag: true
+  accessGroups:
+  - DropshipCrewChief
 
 - type: startingGear
   id: DCCGear
   equipment:
     jumpsuit: CMJumpsuitDCC
     outerClothing: CMArmorPlatePilot
-    back: ClothingBackpackFilled
+    back: CMBackpackMarine
     gloves: CMHandsBrown
-    shoes: CMShoesCombatBoots
+    shoes: CMBootsBlackFilled
     head: CMHeadCap
     id: DCCIDCard
-    ears: ClothingHeadsetSecurity
-  innerClothingSkirt: CMJumpsuitDCC
-  satchel: ClothingBackpackSatchelFilled
-  duffelbag: ClothingBackpackDuffelFilled
+    ears: CMHeadsetPilot
+  satchel: CMSatchelMarine
 
 - type: entity
   id: CMSpawnPointDCC

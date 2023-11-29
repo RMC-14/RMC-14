@@ -1,7 +1,10 @@
-﻿- type: entity # TODO CM14 description
-  parent: CMXenoDeveloped
+﻿- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
   id: CMXenoHivelord
   name: Hivelord
+  description: A builder of really big hives.
   components:
   - type: Sprite
     sprite: _CM14/Mobs/Xenos/Hivelord/hivelord.rsi
@@ -29,13 +32,24 @@
     - ActionXenoSecreteStructure
     - ActionXenoTransferPlasma
     - ActionXenoResinWalker
-    plasma: 1000 # TODO CM14
-    maxPlasma: 1000
-    plasmaRegenOnWeeds: 27.5
+  - type: XenoAcid
+  - type: XenoConstruction
+    buildDelay: 1
     canBuild:
-    - WallXenoResin
-    - WallXenoMembrane
-    - DoorXenoResin
+    - WallXenoResinThick
+    - WallXenoMembraneThick
+    - DoorXenoResinThick
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
+  - type: XenoDevour
+  - type: XenoPheromones
+    pheromonesMultiplier: 2.5
+  - type: XenoPlasma
+    plasma: 1000
+    maxPlasma: 1000
+    plasmaRegenOnWeeds: 55
   - type: XenoResinWalker
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 22.5

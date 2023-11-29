@@ -28,21 +28,19 @@
   supervisors: job-supervisors-highcommand
   canBeAntag: false
   accessGroups:
-  - AllAccess
+  - ShipMasterAccess
 
 - type: startingGear
   id: CommandingOfficerGear
   equipment:
     jumpsuit: CMJumpsuitCO
-    back: ClothingBackpackCaptainFilled
-    shoes: CMShoesCombatBoots
+    back: CMBackpackCommand
+    shoes: CMShoesDressCommander
     head: CMHeadBeretCO
     outerClothing: CMCoatOfficer
     id: CommandingOfficerIDCard
-    ears: ClothingHeadsetAltCommand
-  innerClothingSkirt: CMJumpsuitCO
-  satchel: ClothingBackpackSatchelCaptainFilled
-  duffelbag: ClothingBackpackDuffelCaptainFilled
+    ears: CMHeadsetSeniorCommand
+  satchel: CMSatchel
 
 - type: entity
   id: SpawnPointCommandingOfficer

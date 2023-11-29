@@ -1,0 +1,147 @@
+# Req
+- type: entity
+  parent: CMAirlockEngineer
+  id: CMAirlockRequisitionsLocked
+  suffix: Requisitions, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessRequisitions"]]
+
+- type: entity
+  parent: CMAirlockGlassEngineer
+  id: CMAirlockGlassRequisitionsLocked
+  suffix: Requisitions, Locked, Glass
+  components:
+  - type: AccessReader
+    access: [["CMAccessRequisitions"]]
+
+- type: entity
+  parent: CMAirlockMaint
+  id: CMAirlockMaintRequisitionsLocked
+  suffix: Requisitions, Locked, Maint
+  components:
+  - type: AccessReader
+    access: [["CMAccessRequisitions"]]
+
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockKitchenLocked
+  suffix: Kitchen, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessKitchen"]]
+
+- type: entity
+  parent: CMAirlockGlass
+  id: CMAirlockGlassKitchenLocked
+  suffix: Kitchen, Locked, Glass
+  components:
+  - type: AccessReader
+    access: [["CMAccessKitchen"]]
+
+- type: entity
+  parent: CMAirlockMaint
+  id: CMAirlockMaintKitchenLocked
+  suffix: Kitchen, Locked, Maint
+  components:
+  - type: AccessReader
+    access: [["CMAccessKitchen"]]
+
+# Engi
+- type: entity
+  parent: CMAirlockEngineer
+  id: CMAirlockEngineerLocked
+  suffix: Engineering, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessEngineering"]]
+
+- type: entity
+  parent: CMAirlockGlassEngineer
+  id: CMAirlockGlassEngineerLocked
+  suffix: Engineering, Locked, Glass
+  components:
+  - type: AccessReader
+    access: [["CMAccessEngineering"]]
+
+- type: entity
+  parent: CMAirlockMaint
+  id: CMAirlockMaintEngineerLocked
+  suffix: Engineering, Locked, Maint
+  components:
+  - type: AccessReader
+    access: [["CMAccessEngineering"]]
+
+- type: entity
+  parent: CMAirlockEngineer
+  id: CMAirlockOrdnanceLocked
+  suffix: Ordnance, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessOT"]]
+
+# Medical
+- type: entity
+  parent: CMAirlockMedical
+  id: CMAirlockMedicalLocked
+  suffix: Medical, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessMedical"]]
+
+- type: entity
+  parent: CMAirlockGlassMedical
+  id: CMAirlockGlassMedicalLocked
+  suffix: Medical, Locked, Glass
+  components:
+  - type: AccessReader
+    access: [["CMAccessMedical"]]
+
+- type: entity
+  parent: CMAirlockMaint
+  id: CMAirlockMaintMedicalLocked
+  suffix: Medical, Locked, Maint
+  components:
+  - type: AccessReader
+    access: [["CMAccessMedical"]]
+
+- type: entity
+  parent: CMAirlockMedical
+  id: CMAirlockChemistryLocked
+  suffix: Chemistry, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessChemistry"]]
+
+- type: entity
+  parent: CMAirlockMedical
+  id: CMAirlockResearchLocked
+  suffix: Research, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessResearch"]]
+
+# Civilian
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockPressLocked
+  suffix: Press, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessPress"]]
+
+- type: entity
+  parent: CMAirlockGlass
+  id: CMAirlockGlassPressLocked
+  suffix: Press, Locked, Glass
+  components:
+  - type: AccessReader
+    access: [["CMAccessPress"]]
+
+- type: entity
+  parent: CMAirlockMaint
+  id: CMAirlockMaintPressLocked
+  suffix: Press, Locked, Maint
+  components:
+  - type: AccessReader
+    access: [["CMAccessPress"]]

@@ -14,29 +14,21 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-command
   canBeAntag: false
-  access:
-  - Command
-  # Dropship
-  # Prep
-  # Alpha
-  # Bravo
-  # Charlie
-  # Delta
+  accessGroups:
+  - IntelOfficer
 
 - type: startingGear
   id: IntelOfficerGear
   equipment:
     jumpsuit: CMJumpsuitIO
     outerClothing: CMArmorM4
-    back: ClothingBackpackFilled
+    back: CMBackpackMarine
     gloves: CMHandsBlack
-    shoes: CMShoesCombatBoots
+    shoes: CMBootsBlackFilled
     head: CMArmorHelmetM12
     id: IntelOfficerIDCard
-    ears: ClothingHeadsetSecurity
-  innerClothingSkirt: CMJumpsuitIO
-  satchel: ClothingBackpackSatchelFilled
-  duffelbag: ClothingBackpackDuffelFilled
+    ears: CMHeadsetIntel
+  satchel: CMSatchelMarineIntel
 
 - type: entity
   id: CMSpawnPointIntelOfficer

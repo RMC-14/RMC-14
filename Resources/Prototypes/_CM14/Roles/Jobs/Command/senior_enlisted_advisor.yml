@@ -28,20 +28,18 @@
   supervisors: job-supervisors-command
   canBeAntag: false
   accessGroups:
-  - AllAccess #todo cm14
+  - MarineMain
 
 - type: startingGear
   id: SeniorEnlistedAdvisorGear
   equipment:
     jumpsuit: CMJumpsuitBO
-    back: ClothingBackpackCaptainFilled
-    shoes: CMShoesCombatBootsBrown
+    back: CMBackpackCommand
+    shoes: CMBootsBrownFilled
     head: CMHeadCapDrill
     id: SeniorEnlistedAdvisorIDCard
-    ears: ClothingHeadsetAltCommand
-  innerClothingSkirt: CMJumpsuitBO
-  satchel: ClothingBackpackSatchelCaptainFilled
-  duffelbag: ClothingBackpackDuffelCaptainFilled
+    ears: CMHeadsetLeader
+  satchel: CMSatchelMarine
 
 - type: entity
   id: SpawnPointSeniorEnlistedAdvisor

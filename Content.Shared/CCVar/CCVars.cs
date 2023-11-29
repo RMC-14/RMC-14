@@ -464,7 +464,7 @@ namespace Content.Shared.CCVar
         ///     The dataset prototype to use when selecting a random tip.
         /// </summary>
         public static readonly CVarDef<string> TipsDataset =
-            CVarDef.Create("tips.dataset", "Tips");
+            CVarDef.Create("tips.dataset", "CM_Tips");
 
         /// <summary>
         ///     The number of seconds between each tip being displayed when the round is not actively going
@@ -1526,7 +1526,7 @@ namespace Content.Shared.CCVar
         /// Duration for missions
         /// </summary>
         public static readonly CVarDef<float>
-            SalvageExpeditionDuration = CVarDef.Create("salvage.expedition_duration", 420f, CVar.REPLICATED);
+            SalvageExpeditionDuration = CVarDef.Create("salvage.expedition_duration", 660f, CVar.REPLICATED);
 
         /// <summary>
         /// Cooldown for missions.
@@ -1812,5 +1812,12 @@ namespace Content.Shared.CCVar
         /// </summary>
         public static readonly CVarDef<string> ReplayAutoRecordTempDir =
             CVarDef.Create("replay.auto_record_temp_dir", "", CVar.SERVERONLY);
+
+        /*
+         * Miscellaneous
+         */
+
+        public static readonly CVarDef<bool> GatewayGeneratorEnabled =
+            CVarDef.Create("gateway.generator_enabled", true);
     }
 }

@@ -12,24 +12,21 @@
   icon: "JobIconWeaponsSpecialist"
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
-  #access:
-  # Prep
-  # Spec Prep
+  accessGroups:
+  - WeaponSpec
 
 - type: startingGear
   id: WeaponsSpecialistGear
   equipment:
     jumpsuit: JumpsuitMarine
-    back: ClothingBackpackSecurityFilled
-    shoes: CMShoesCombatBoots
+    back: CMBackpackMarine
+    shoes: CMBootsBlackFilled
     head: ArmorHelmetM10
     outerClothing: ArmorMarineM3
     gloves: CMHandsBlack
     id: DogtagWeaponsSpecialist
-    ears: ClothingHeadsetSecurity
-  innerClothingSkirt: JumpsuitMarine
-  satchel: ClothingBackpackSatchelSecurityFilled
-  duffelbag: ClothingBackpackDuffelSecurityFilled
+    ears: CMHeadsetAlpha
+  satchel: CMSatchelMarine
 
 - type: entity
   id: SpawnPointWeaponsSpecialist

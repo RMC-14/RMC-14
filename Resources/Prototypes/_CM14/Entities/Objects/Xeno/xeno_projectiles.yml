@@ -1,0 +1,83 @@
+﻿- type: entity
+  id: XenoBaseProjectile
+  name: projectile
+  abstract: true
+  components:
+  - type: Clickable
+  - type: Sprite
+    noRot: false
+    sprite: _CM14/Objects/Xeno/xeno_projectiles.rsi
+  - type: Physics
+    bodyType: Dynamic
+    linearDamping: 0
+    angularDamping: 0
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+  - type: Projectile
+    impactEffect: XenoProjectileImpactEffect
+    damage: {}
+  - type: TimedDespawn
+    lifetime: 0.3
+
+- type: entity
+  id: XenoSlowingSpitProjectile
+  parent: XenoBaseProjectile
+  name: slowing spit
+  categories:
+  - hideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: neurotoxin
+      shader: unshaded
+  - type: XenoSlowingSpitProjectile
+    armorResistsKnockdown: true
+
+- type: entity
+  id: XenoScatteredSpitProjectile
+  parent: XenoBaseProjectile
+  name: scattered spit
+  categories:
+  - hideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: neurotoxin
+      shader: unshaded
+  - type: XenoSlowingSpitProjectile
+    slow: 0
+    knockdown: 1
+    armorResistsKnockdown: false
+
+- type: entity
+  id: XenoBoneChipsProjectile
+  parent: XenoBaseProjectile
+  name: bone chips
+  categories:
+  - hideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/shards.rsi
+    layers:
+    - state: bonechips
+      shader: unshaded
+  - type: XenoSlowingSpitProjectile
+    slow: 5
+    knockdown: 0
+  - type: TimedDespawn
+    lifetime: 0.2
+  - type: Projectile
+    impactEffect: null
+    damage:
+      types:
+        Slash: 10

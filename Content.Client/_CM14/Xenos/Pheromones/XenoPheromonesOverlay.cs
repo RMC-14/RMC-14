@@ -71,7 +71,7 @@ public sealed class XenoPheromonesOverlay : Overlay
             DrawIcon((uid, sprite, xform), in args, frenzy.Icon, scaleMatrix, rotationMatrix);
         }
 
-        var sources = _entity.AllEntityQueryEnumerator<XenoPheromonesComponent, SpriteComponent, TransformComponent>();
+        var sources = _entity.AllEntityQueryEnumerator<XenoActivePheromonesComponent, SpriteComponent, TransformComponent>();
         while (sources.MoveNext(out var uid, out var pheromones, out var sprite, out var xform))
         {
             var emitting = pheromones.Pheromones;

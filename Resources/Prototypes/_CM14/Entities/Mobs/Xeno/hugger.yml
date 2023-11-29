@@ -1,5 +1,5 @@
-﻿- type: entity # TODO CM14 description
-  parent: CMXenoUndeveloped
+﻿- type: entity
+  parent: [CMXenoUndeveloped, CMXenoMelee]
   id: CMXenoHugger # TODO CM14 slowly die off weeds
   name: Facehugger
   components:
@@ -12,17 +12,19 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      35: Dead
+      35: Dead # TODO CM14 gib on death
   - type: Xeno
     actionIds:
     - ActionXenoRest
     - ActionXenoWatch
     - ActionXenoHide
     - ActionXenoLeap
-    evolvesTo:
-    - CMXenoDrone
+  - type: XenoPlasma
     maxPlasma: 10
     plasmaRegenOnWeeds: 1
+  - type: XenoEvolution
+    evolvesTo:
+    - CMXenoDrone
   - type: XenoHide
   - type: Fixtures
     fixtures:
@@ -37,4 +39,5 @@
         - SmallMobLayer
   - type: XenoAnimateMovement
   - type: XenoLeap
+    knockdownTime: 90
   - type: XenoHugger

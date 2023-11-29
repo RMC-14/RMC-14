@@ -10,23 +10,20 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-cm-quartermaster
   canBeAntag: true
-  access:
-  - Cargo
-  # prep
+  accessGroups:
+  - CMCargoTech
 
 - type: startingGear
   id: CMCargoTechGear
   equipment:
     jumpsuit: CMJumpsuitCargoTech
-    back: ClothingBackpackCargoFilled
-    shoes: CMShoesCombatBootsBrown
+    back: CMBackpackEngineer
+    shoes: CMBootsBrown
     head: CMHeadCapCargo
     gloves: CMHandsBrown
     id: CMCargoTechIDCard
-    ears: ClothingHeadsetCargo
-  innerClothingSkirt: CMJumpsuitCargoTech
-  satchel: ClothingBackpackSatchelCargoFilled
-  duffelbag: ClothingBackpackDuffelCargoFilled
+    ears: CMHeadsetRequisition
+  satchel: CMSatchelEngineer
 
 - type: entity
   id: CMSpawnPointCargoTech

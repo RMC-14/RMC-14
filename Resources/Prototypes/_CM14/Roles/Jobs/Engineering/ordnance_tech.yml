@@ -14,25 +14,20 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-cm-chief-engineer
   canBeAntag: true
-  access:
-  - Engineering
-  # civ engi
-  - Maintenance
-  # OrdiTech
+  accessGroups:
+  - OT
 
 - type: startingGear
   id: OrdnanceTechGear
   equipment:
     jumpsuit: CMJumpsuitOrdnanceTech
-    back: ClothingBackpackEngineeringFilled
-    shoes: CMShoesCombatBootsBrown
+    back: CMBackpackEngineer
+    shoes: CMBootsBrown
     gloves: CMHandsInsulated
     id: OrdnanceTechIDCard
-    ears: ClothingHeadsetEngineering
+    ears: CMHeadsetEngineer
     belt: ClothingBeltUtilityEngineering
-  innerClothingSkirt: CMJumpsuitOrdnanceTech
-  satchel: ClothingBackpackSatchelEngineeringFilled
-  duffelbag: ClothingBackpackDuffelEngineeringFilled
+  satchel: CMSatchelEngineer
 
 - type: entity
   id: SpawnPointOrdnanceTech

@@ -14,25 +14,21 @@
   joinNotifyCrew: true
   supervisors: job-supervisors-cm-cmo
   canBeAntag: true
-  access:
-  - Medical
-  - Chemistry
-  # Morgue
+  accessGroups:
+  - CMMedical
 
 - type: startingGear
   id: MarineDoctorGear
   equipment:
     jumpsuit: CMScrubsBlue
     outerClothing: CMCoatLong
-    back: ClothingBackpackMedicalFilled
+    back: CMBackpackMedical
     gloves: CMHandsLatex
-    shoes: CMShoesCombatBoots
+    shoes: ClothingShoesColorWhite
     head: CMHeadCapSurgBlue
     id: MarineDoctorIDCard
-    ears: ClothingHeadsetMedical
-  innerClothingSkirt: CMScrubsBlue
-  satchel: ClothingBackpackSatchelMedicalFilled
-  duffelbag: ClothingBackpackDuffelMedicalFilled
+    ears: CMHeadsetMedical
+  satchel: CMSatchelMedical
 
 - type: entity
   id: CMSpawnPointDoctor

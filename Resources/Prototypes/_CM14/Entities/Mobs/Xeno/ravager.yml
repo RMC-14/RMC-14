@@ -1,0 +1,41 @@
+﻿- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  id: CMXenoRavager
+  name: Ravager
+  description: A huge, nasty red alien with enormous scythed claws.
+  components:
+  - type: Sprite
+    sprite: _CM14/Mobs/Xenos/Ravager/ravager.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      650: Critical
+      750: Dead
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    #    - ActionXenoCharge
+    #    - ActionXenoEmpower
+    #    - ActionXenoScissorCut
+    # explosionResistance: 80
+  - type: XenoDevour
+  - type: XenoPlasma
+    plasma: 300
+    maxPlasma: 300
+    plasmaRegenOnWeeds: 15
+  - type: XenoArmor
+    armor: 25
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 45

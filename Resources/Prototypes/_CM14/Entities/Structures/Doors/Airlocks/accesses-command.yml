@@ -1,0 +1,71 @@
+- type: entity
+  parent: CMAirlockCommand
+  id: CMAirlockCommandLocked
+  suffix: Command, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessCommand"]]
+
+- type: entity
+  parent: CMAirlockMaint
+  id: CMAirlockMaintCommandLocked
+  suffix: Command, Locked, Maint
+  components:
+  - type: AccessReader
+    access: [["CMAccessCommand"]]
+
+- type: entity
+  parent: CMAirlockCommand
+  id: CMAirlockCMPLocked
+  suffix: CMP, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessCMP"]]
+
+- type: entity
+  parent: CMAirlockCommand
+  id: CMAirlockQuartermasterLocked
+  suffix: Quartermaster, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessQM"]]
+
+- type: entity
+  parent: CMAirlockCommand
+  id: CMAirlockSEALocked
+  suffix: SEA, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessSEA"]]
+
+- type: entity
+  parent: CMAirlockCommand
+  id: CMAirlockCOLocked
+  suffix: CO, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessCO"]]
+
+- type: entity
+  parent: CMAirlockCommand
+  id: CMAirlockCMOLocked
+  suffix: CMO, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessCMO"]]
+
+- type: entity
+  parent: CMAirlockCommand
+  id: CMAirlockCELocked
+  suffix: CE, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessCE"]]
+
+- type: entity
+  parent: CMAirlockCommand
+  id: CMAirlockASOLocked
+  suffix: ASO, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessASO"]]

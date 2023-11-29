@@ -19,14 +19,14 @@ public sealed class XenoAcidSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<XenoComponent, XenoCorrosiveAcidEvent>(OnXenoCorrosiveAcid);
-        SubscribeLocalEvent<XenoComponent, XenoCorrosiveAcidDoAfterEvent>(OnXenoCorrosiveAcidDoAfter);
+        SubscribeLocalEvent<XenoAcidComponent, XenoCorrosiveAcidEvent>(OnXenoCorrosiveAcid);
+        SubscribeLocalEvent<XenoAcidComponent, XenoCorrosiveAcidDoAfterEvent>(OnXenoCorrosiveAcidDoAfter);
         SubscribeLocalEvent<CorrodingComponent, EntityUnpausedEvent>(OnCorrodingUnpaused);
     }
 
-    private void OnXenoCorrosiveAcid(Entity<XenoComponent> xeno, ref XenoCorrosiveAcidEvent args)
+    private void OnXenoCorrosiveAcid(Entity<XenoAcidComponent> xeno, ref XenoCorrosiveAcidEvent args)
     {
-        if (xeno.Owner == args.Performer ||
+        if (xeno.Owner != args.Performer ||
             !CheckCorrodablePopups(xeno, args.Target))
         {
             return;
@@ -40,7 +40,7 @@ public sealed class XenoAcidSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfter);
     }
 
-    private void OnXenoCorrosiveAcidDoAfter(Entity<XenoComponent> xeno, ref XenoCorrosiveAcidDoAfterEvent args)
+    private void OnXenoCorrosiveAcidDoAfter(Entity<XenoAcidComponent> xeno, ref XenoCorrosiveAcidDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled || args.Target is not { } target)
             return;
@@ -48,11 +48,13 @@ public sealed class XenoAcidSystem : EntitySystem
         if (!CheckCorrodablePopups(xeno, target))
             return;
 
-        if (!_xenoPlasma.TryRemovePlasmaPopup((xeno, xeno), args.PlasmaCost))
+        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
             return;
 
         if (_net.IsClient)
             return;
+
+        args.Handled = true;
 
         var acid = SpawnAttachedTo(args.AcidId, target.ToCoordinates());
         AddComp(target, new CorrodingComponent
@@ -67,7 +69,7 @@ public sealed class XenoAcidSystem : EntitySystem
         ent.Comp.CorrodesAt += args.PausedTime;
     }
 
-    private bool CheckCorrodablePopups(Entity<XenoComponent> xeno, EntityUid target)
+    private bool CheckCorrodablePopups(Entity<XenoAcidComponent> xeno, EntityUid target)
     {
         if (!HasComp<CorrodableComponent>(target))
         {
