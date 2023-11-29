@@ -32,6 +32,7 @@
     - ActionXenoSecreteStructure
     # TODO CM14 the rest of the owl
     # explosionResistance: 100 # TODO CM14 fire immunity
+    tier: 4
   - type: XenoAcid
   - type: XenoConstruction
     canBuild:

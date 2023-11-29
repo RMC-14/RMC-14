@@ -28,6 +28,7 @@
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
     # evasion: 10
+    tier: 0
   - type: XenoAcid
   - type: XenoConstruction
     buildDelay: 4

@@ -29,6 +29,7 @@
     - ActionXenoParalyzingSlash
     - ActionXenoEvolve60 # TODO CM14 300
     # explosionResistance: 10
+    tier: 1
   - type: XenoDevour
   - type: XenoPlasma
     plasma: 400
