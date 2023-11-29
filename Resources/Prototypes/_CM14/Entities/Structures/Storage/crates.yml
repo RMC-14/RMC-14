@@ -1,0 +1,364 @@
+# Base
+- type: entity
+  parent: [ CrateGeneric, CMEntityBase]
+  id: CMCrateBase
+  name: crate
+  description: A rectangular steel crate.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/basic.rsi
+    noRot: true
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/basic.rsi
+    state: icon
+
+- type: entity
+  parent: [ BaseStructureDynamic, CMEntityBase ]
+  id: CMCrateLarge
+  name: large crate
+  description: A hefty wooden crate.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/densecrate.rsi
+    noRot: true
+    state: base
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/densecrate.rsi
+    state: base
+  - type: Transform
+    noRot: true
+  - type: InteractionOutline
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.29"
+        density: 50
+        mask:
+        - SmallMobMask
+        layer:
+        - MachineLayer
+  - type: EntityStorage
+  - type: PlaceableSurface
+    isPlaceable: false
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Appearance
+  - type: PaperLabel
+    labelSlot:
+      insertVerbText: Attach Label
+      ejectVerbText: Remove Label
+      whitelist:
+        components:
+        - Paper
+  - type: ContainerContainer
+    containers:
+      entity_storage: !type:Container
+      paper_label: !type:ContainerSlot
+  - type: ItemSlots
+  - type: StaticPrice
+    price: 50
+
+
+# Weldable
+- type: entity
+  parent: CMCrateBase
+  id: CMCrateWeldable
+  components:
+  - type: Weldable
+  - type: ResistLocker
+
+- type: entity
+  parent: CMCrateWeldable
+  id: CMCrateAlpha
+  name: alpha squad crate
+  description: A crate with alpha squad's symbol on it.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/alpha.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/alpha.rsi
+
+- type: entity
+  parent: CMCrateWeldable
+  id: CMCrateBravo
+  name: bravo squad crate
+  description: A crate with bravo squad's symbol on it.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/bravo.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/bravo.rsi
+
+- type: entity
+  parent: CMCrateWeldable
+  id: CMCrateCharlie
+  name: charlie squad crate
+  description: A crate with charlie squad's symbol on it.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/charlie.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/charlie.rsi
+
+- type: entity
+  parent: CMCrateWeldable
+  id: CMCrateDelta
+  name: delta squad crate
+  description: A crate with delta squad's symbol on it.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/delta.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/delta.rsi
+
+- type: entity
+  parent: CMCrateWeldable
+  id: CMCrateAmmo
+  name: ammunitions crate
+  description: An ammunitions crate.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/ammo.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/ammo.rsi
+
+- type: entity
+  parent: CMCrateWeldable
+  id: CMCrateGreen
+  name: green crate
+  description: A standard green storage crate employed by the USCM. These things are so common, just about anything could be inside.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/green.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/green.rsi
+
+- type: entity
+  parent: CMCrateWeldable
+  id: CMCrateConstruction
+  name: construction crate
+  description: A construction crate.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/construction.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/construction.rsi
+
+- type: entity
+  parent: CMCrateWeldable
+  id: CMCrateExplosives
+  name: explosives crate
+  description: An explosives crate.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/explosives.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/explosives.rsi
+
+- type: entity
+  parent: CMCrateWeldable
+  id: CMCrateFreezer
+  name: freezer crate
+  description: A freezer crate.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/freezer.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/freezer.rsi
+
+- type: entity
+  parent: CMCrateWeldable
+  id: CMCrateHydro
+  name: hydroponics crate
+  description: All you need to destroy those pesky weeds and pests.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/hydro.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/hydro.rsi
+
+- type: entity
+  parent: CMCrateWeldable
+  id: CMCrateInternals
+  name: internals crate
+  description: An internals crate.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/oxygen.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/oxygen.rsi
+
+- type: entity
+  parent: CMCrateWeldable
+  id: CMCratePlastic
+  name: plastic crate
+  description: A rectangular plastic crate.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/plastic.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/plastic.rsi
+
+- type: entity
+  parent: CMCrateWeldable
+  id: CMCrateRadiation
+  name: radioactive gear crate
+  description: A crate with a radiation sign on it.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/radioactive.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/radioactive.rsi
+
+- type: entity
+  parent: CMCrateWeldable
+  id: CMCrateScience
+  name: science crate
+  description: A science crate.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/science.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/science.rsi
+
+- type: entity
+  parent: CMCrateWeldable
+  id: CMCrateSupply
+  name: supply crate
+  description: A supply crate.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/supply.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/supply.rsi
+
+- type: entity
+  parent: CMCrateWeldable
+  id: CMCrateWeapons
+  name: weapons crate
+  description: A weapons crate.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/weapons.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/weapons.rsi
+
+# Secure
+- type: entity
+  parent: CMCrateWeldable
+  id: CMCrateSecure
+  name: secure crate
+  description: A secure crate.
+  suffix: Secure
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/secure_basic.rsi
+    layers:
+    - state: base
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      map: ["enum.WeldableLayers.BaseWelded"]
+      visible: false
+    - state: locked
+      map: ["enum.StorageVisualLayers.Lock"]
+      shader: unshaded
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/secure_basic.rsi
+    state: icon
+  - type: Lock
+  - type: AccessReader
+    access: [["CMAccessRequisitions"]]
+
+- type: entity
+  parent: CMCrateSecure
+  id: CMCrateSecureAmmo
+  name: secure ammunitions crate
+  description: A secure ammunitions crate.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/secure_ammo.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/secure_ammo.rsi
+
+- type: entity
+  parent: CMCrateSecure
+  id: CMCrateSecureExplosives
+  name: explosives crate
+  description: An explosives crate.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/secure_explosives.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/secure_explosives.rsi
+
+- type: entity
+  parent: CMCrateSecureAmmo
+  id: CMCrateSecureGear
+  name: gear crate
+  description: A secure gear crate.
+
+- type: entity
+  parent: CMCrateSecure
+  id: CMCrateSecureHydro
+  name: secure hydroponics crate
+  description: A crate with a lock on it, painted in the scheme of the station's botanists.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/secure_hydro.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/secure_hydro.rsi
+
+- type: entity
+  parent: CMCrateSecure
+  id: CMCrateSecureSurgery
+  name: surgery crate
+  description: A surgery crate.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/secure_medical.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/secure_medical.rsi
+
+- type: entity
+  parent: CMCrateSecure
+  id: CMCrateSecureWeapons
+  name: weapons crate
+  description: A secure weapons crate.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/secure_weapons.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/secure_weapons.rsi
+
+- type: entity
+  parent: CMCrateSecure
+  id: CMCrateSecureWeyland
+  name: secure W-Y crate
+  description: A secure crate with a W-Y insignia on it.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/secure_weyland.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/secure_weyland.rsi
