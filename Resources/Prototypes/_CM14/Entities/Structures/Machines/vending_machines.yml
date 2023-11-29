@@ -1,0 +1,39 @@
+- type: entity
+  parent: [ VendingMachine, CMEntityBase]
+  id: ColMarTechWeapons
+  name: ColMarTech brand gun storage rack
+  description: It costs four hundred thousand dollars to dispense weapons for 12 seconds.
+  components:
+  - type: VendingMachine
+    pack: ColMarTechWeapons
+    dispenseOnHitChance: 0.25
+    dispenseOnHitThreshold: 2
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    ejectState: eject-unshaded
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/colmartechweapons.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+
+- type: entity
+  parent: [ VendingMachine, CMEntityBase]
+  id: ColMarTechEquipment
+  name: ColMarTech brand equipment rack
+  description: Armor Class Non-Zero
+  components:
+  - type: VendingMachine
+    pack: ColMarTechEquipment
+    dispenseOnHitChance: 0.25
+    dispenseOnHitThreshold: 2
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    ejectState: eject-unshaded
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/colmartechequipment.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]

@@ -1,0 +1,9 @@
+- type: vendingMachineInventory
+  id: ColMarTechEquipment
+  startingInventory:
+    ArmorMarineM3: 30
+    CMArmorM3Light: 30
+
+
+
+    
