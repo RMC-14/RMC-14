@@ -209,3 +209,23 @@
     state: plasteel
   conditions:
     - !type:TileNotBlocked
+
+# Other
+- type: construction
+  id: CMCatwalk
+  name: catwalk
+  graph: CMCatwalk
+  startNode: start
+  targetNode: Catwalk
+  category: construction-category-cm-structures
+  description: Just like a lattice. Except it looks better.
+  icon:
+    sprite: _CM14/Structures/catwalk.rsi
+    state: catwalk
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
