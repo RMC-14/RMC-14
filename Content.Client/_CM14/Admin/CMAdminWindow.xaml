@@ -2,8 +2,9 @@
     xmlns="https://spacestation14.io"
     xmlns:cc="clr-namespace:Content.Client._CM14.Admin"
     Title="{Loc cm-ui-cm-actions}"
-    MinSize="450 300">
+    MinSize="500 500">
     <TabContainer Name="Tabs">
+        <cc:CMTransformTab Name="TransformTab" Access="Public" />
         <cc:CMXenoTab Name="XenoTab" Access="Public" />
     </TabContainer>
 </cc:CMAdminWindow>

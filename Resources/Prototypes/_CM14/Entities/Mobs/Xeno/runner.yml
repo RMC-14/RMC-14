@@ -30,6 +30,7 @@
     - ActionXenoZoom
     - ActionXenoEvolve60 # TODO CM14 300
     # explosionResistance: 10
+    tier: 1
   - type: XenoBoneChips
   - type: XenoDevour
   - type: XenoHide

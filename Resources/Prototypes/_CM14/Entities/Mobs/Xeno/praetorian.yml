@@ -30,6 +30,7 @@
     #    - ActionXenoAcidBall
     #    - ActionXenoSprayAcid
     # explosionResistance: 40
+    tier: 3
   - type: XenoAcid
   - type: XenoDevour
   - type: XenoPlasma
