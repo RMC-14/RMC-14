@@ -1,0 +1,71 @@
+- type: tile
+  id: CMPlanetDirt
+  name: tiles-cm-dirt
+  sprite: /Textures/_CM14/Tiles/planet/dirt.png
+  isSubfloor: true
+  canCrowbar: false
+  footstepSounds:
+    collection: FootstepAsteroid
+  heatCapacity: 10000
+  weather: true
+  indestructible: true
+
+- type: tile
+  id: CMPlanetDesert
+  name: tiles-cm-desert
+  sprite: /Textures/_CM14/Tiles/planet/desert.png
+  isSubfloor: true
+  canCrowbar: false
+  footstepSounds:
+    collection: FootstepAsteroid
+  heatCapacity: 10000
+  weather: true
+  indestructible: true
+
+- type: tile
+  id: CMPlanetSand
+  name: tiles-cm-sand
+  sprite: /Textures/_CM14/Tiles/planet/sand.png
+  isSubfloor: true
+  canCrowbar: false
+  footstepSounds:
+    collection: FootstepAsteroid
+  heatCapacity: 10000
+  weather: true
+  indestructible: true
+
+- type: tile
+  id: CMPlanetGrass1
+  name: tiles-cm-grass
+  sprite: /Textures/_CM14/Tiles/planet/grass1.png
+  isSubfloor: true
+  canCrowbar: false
+  footstepSounds:
+    collection: FootstepAsteroid
+  heatCapacity: 10000
+  weather: true
+  indestructible: true
+
+- type: tile
+  id: CMPlanetGrass2
+  name: tiles-cm-grass
+  sprite: /Textures/_CM14/Tiles/planet/grass2.png
+  isSubfloor: true
+  canCrowbar: false
+  footstepSounds:
+    collection: FootstepAsteroid
+  heatCapacity: 10000
+  weather: true
+  indestructible: true
+
+- type: tile
+  id: CMPlanetGrass3
+  name: tiles-cm-grass
+  sprite: /Textures/_CM14/Tiles/planet/grass3.png
+  isSubfloor: true
+  canCrowbar: false
+  footstepSounds:
+    collection: FootstepAsteroid
+  heatCapacity: 10000
+  weather: true
+  indestructible: true
