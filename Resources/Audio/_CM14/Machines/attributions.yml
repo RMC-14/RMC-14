@@ -1,0 +1,9 @@
+- files: ["airlock.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "https://github.com/cmss13-devs/cmss13/commit/7853d79df1827a2a4907fb3162b6319662dbc1ba"
+  source: "https://github.com/cmss13-devs/cmss13/blob/dbc71b6b0b29fbfa0ec29c34352fd3b0ee05bfff/sound/machines/airlock.ogg"
+
+- files: ["buzz_two.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "https://github.com/cmss13-devs/cmss13/commit/21e6447cc08aea502f671c819fdbcecbb85e6028"
+  source: "https://github.com/cmss13-devs/cmss13/blob/dbc71b6b0b29fbfa0ec29c34352fd3b0ee05bfff/sound/machines/buzz-two.ogg"
