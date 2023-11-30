@@ -9,7 +9,7 @@
       department: MilitaryPolice
       time: 36000 # 10 hours
     - !type:DepartmentTimeRequirement
-      department: Command
+      department: MarineCommand
       time: 18000 # 5 hours
   weight: 5
   startingGear: ChiefMPGear
