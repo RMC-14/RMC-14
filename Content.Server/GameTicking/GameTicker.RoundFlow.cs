@@ -389,7 +389,7 @@ namespace Content.Server.GameTicking
 
             RaiseNetworkEvent(new RoundEndMessageEvent(gamemodeTitle, roundEndText, roundDuration, RoundId,
                 listOfPlayerInfoFinal.Length, listOfPlayerInfoFinal, LobbySong,
-                new SoundCollectionSpecifier("RoundEnd").GetSound()));
+                new SoundCollectionSpecifier("CMRoundEnd").GetSound()));
         }
 
         private async void SendRoundEndDiscordMessage()
