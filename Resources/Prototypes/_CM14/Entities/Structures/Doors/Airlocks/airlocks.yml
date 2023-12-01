@@ -24,6 +24,16 @@
       map: ["enum.DoorVisualLayers.BaseEmergencyAccess"]
     - state: panel_open
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Door
+    crushDamage:
+      types:
+        Blunt: 15
+    openSound:
+      path: /Audio/_CM14/Machines/airlock.ogg
+    closeSound:
+      path: /Audio/_CM14/Machines/airlock.ogg
+    denySound:
+      path: /Audio/_CM14/Machines/buzz_two.ogg
   - type: Construction
     graph: CMAirlock
     node: airlock
