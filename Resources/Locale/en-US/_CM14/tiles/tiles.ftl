@@ -8,7 +8,6 @@ tiles-cm-white-sterile = white steel sterile tile
 tiles-cm-black = black steel tile
 tiles-cm-ai = ai-room tile
 tiles-cm-tcomms = tcommunications tile
-tiles-cm-catwalk = steel catwalk
 
 tiles-cm-dirt = dirt tile
 tiles-cm-desert = desert tile
