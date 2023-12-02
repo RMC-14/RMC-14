@@ -1,8 +1,8 @@
-using Content.Server._CM14.Comtech;
+using Content.Shared._CM14.Comtech.Barbed;
 using Content.Shared.Damage;
 using Content.Shared.Weapons.Melee.Events;
 
-namespace Content.Server._CM14.Barbed;
+namespace Content.Shared._CM14.Barbed;
 
 public sealed class BarbedSystem : EntitySystem
 {
