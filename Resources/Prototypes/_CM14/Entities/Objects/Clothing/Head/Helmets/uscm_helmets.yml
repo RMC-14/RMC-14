@@ -65,7 +65,7 @@
   parent: ArmorHelmetM10
   id: CMArmorHelmetM10Tech
   name: M10 Tech Helmet
-  description: A special variant of the M10 Pattern Helmet worn by the engineers marines of the USCM.
+  description: A special variant of the M10 Pattern Helmet worn by the engineer marines of the USCM.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Head/Helmets/m10/tech.rsi
