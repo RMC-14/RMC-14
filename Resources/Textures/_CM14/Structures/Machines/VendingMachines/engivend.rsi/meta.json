@@ -14,8 +14,8 @@
       "name": "deny-unshaded",
       "delays": [
         [
-          0.5, 
-          0.5
+          0.1,
+          0.1
         ]
       ]
     },
@@ -23,8 +23,8 @@
       "name": "eject-unshaded",
       "delays": [
         [
-          0.5, 
-          0.5
+          0.1, 
+          0.1
         ]
       ]
     },
