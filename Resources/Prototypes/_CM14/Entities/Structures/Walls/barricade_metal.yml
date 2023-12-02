@@ -26,6 +26,58 @@
         layer:
         - TableLayer
 
+- type: entity
+  parent: CMBarricadeBase
+  id: CMBarricadeMetalBarbed
+  name: Barbed Barricade
+  components:
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/_CM14/Structures/metalhit.ogg"
+  - type: 
+    thornsDamage:
+      types:
+        Radiation: 10
+  - type: Sprite
+    sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
+    layers:
+    - state: metal
+    drawdepth: WallTops
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: CMBarricade
+  - type: InteractionPopup
+    interactSuccessString: fence-rattle-success
+    messagePerceivedByOthers: fence-rattle-success
+    interactSuccessSound:
+      collection: FenceRattle
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/metalbreak.ogg
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 2
+    trackAllDamage: true
+    damageOverlay:
+      sprite: _CM14/Structures/Walls/Barricades/metal_barricade_cracks.rsi
+
 # Metal Barricade Tree
 
 - type: entity
