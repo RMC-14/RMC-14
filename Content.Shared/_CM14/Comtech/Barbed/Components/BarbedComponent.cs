@@ -1,6 +1,7 @@
 using Content.Shared.Damage;
+using Robust.Shared.Containers;
 
-namespace Content.Shared._CM14.Comtech.Barbed
+namespace Content.Shared._CM14.Comtech.Barbed.Components
 {
     [RegisterComponent]
     public sealed partial class BarbedComponent : Component
@@ -8,7 +9,7 @@ namespace Content.Shared._CM14.Comtech.Barbed
         [DataField(required: true)]
         public DamageSpecifier thornsDamage = default!;
 
-        [DataField(required: true)]
-        public bool IsBarbed;
+        [ViewVariables]
+        public ContainerSlot BarbedSlot = default!;
     }
 }

@@ -80,7 +80,6 @@
     thornsDamage:
       types:
         Slash: 6
-    IsBarbed: true
   - type: Construction
     graph: BarricadeMetalGraph
     node: nodeMetal

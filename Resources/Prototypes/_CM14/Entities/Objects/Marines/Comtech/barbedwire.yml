@@ -1,0 +1,13 @@
+- type: entity
+  id: BarbedWire
+  parent: BaseItem
+  name: Barbed Wire
+  description: Spikey!
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/barbed_wire
+    layers:
+      - state: icon
+  - type: Item
+    size: Small
+  - type: Barbedwire
