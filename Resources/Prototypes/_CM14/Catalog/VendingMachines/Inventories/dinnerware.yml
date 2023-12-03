@@ -1,7 +1,7 @@
 - type: vendingMachineInventory
   id: CMVendorDinnerware
   startingInventory:
-    # Tray: 8
+    # todo cm14 Tray: 8
     Fork: 6
     KitchenKnife: 3
     DrinkGlass: 8

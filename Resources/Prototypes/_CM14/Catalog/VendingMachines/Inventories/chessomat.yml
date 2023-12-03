@@ -2,4 +2,4 @@
   id: CMVendorChess
   startingInventory:
     ChessBoard: 3
-    # There should be vodka chess pieces
+    # todo cm14 vodka chess pieces

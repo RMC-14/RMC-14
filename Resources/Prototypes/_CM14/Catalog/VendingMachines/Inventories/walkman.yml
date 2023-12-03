@@ -1,7 +1,7 @@
 - type: vendingMachineInventory
   id: CMVendorWalkman
   startingInventory:
-    #Walkman
+    #todo cm14 Walkman and music
     Paper: 15
     d20Dice: 10
     Pen: 10

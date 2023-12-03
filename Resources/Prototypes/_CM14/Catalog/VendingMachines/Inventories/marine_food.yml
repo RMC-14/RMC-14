@@ -1,6 +1,6 @@
 - type: vendingMachineInventory
   id: CMVendorMarineFood
   startingInventory:
-    # Prepared meal
+    # todo cm14 Prepared meal
     FoodSnackMREBrownie: 50 # Protein bar
     DrinkMREFlask: 10

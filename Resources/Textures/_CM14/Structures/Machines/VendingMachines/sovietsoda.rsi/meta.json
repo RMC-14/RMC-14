@@ -8,7 +8,18 @@
   },
   "states": [
     {
-      "name": "normal-unshaded"
+      "name": "normal-unshaded",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          12,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
     },
     {
       "name": "panel"

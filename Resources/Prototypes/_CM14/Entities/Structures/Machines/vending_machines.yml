@@ -68,11 +68,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/coffee.rsi
   - type: VendingMachine
     pack: CMVendorCoffee
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
     ejectState: eject-unshaded
 
 - type: entity
@@ -85,11 +80,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/snack.rsi
   - type: VendingMachine
     pack: CMVendorSnack
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
 
 - type: entity
   parent: CMVendor
@@ -101,11 +91,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/cola.rsi
   - type: VendingMachine
     pack: CMVendorCola
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
 
 - type: entity
   parent: CMVendor
@@ -117,11 +102,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/cigs.rsi
   - type: VendingMachine
     pack: CMVendorCigs
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
 
 - type: entity
   parent: CMVendor
@@ -134,11 +114,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/sec.rsi
   - type: VendingMachine
     pack: CMVendorSec
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
     denyState: deny-unshaded
     ejectState: eject-unshaded
   - type: AccessReader
@@ -155,11 +130,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/sec.rsi
   - type: VendingMachine
     pack: CMVendorSEA
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
     denyState: deny-unshaded
     ejectState: eject-unshaded
   - type: AccessReader
@@ -175,11 +145,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/nutri.rsi
   - type: VendingMachine
     pack: CMVendorNutri
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
     denyState: deny-unshaded
     ejectState: eject-unshaded
 
@@ -193,11 +158,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/seeds.rsi
   - type: VendingMachine
     pack: CMVendorSeeds
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
     denyState: deny-unshaded
     ejectState: eject-unshaded
 
@@ -211,11 +171,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/dinnerware.rsi
   - type: VendingMachine
     pack: CMVendorDinnerware
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
 
 - type: entity
   parent: CMVendor
@@ -227,11 +182,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/sovietsoda.rsi
   - type: VendingMachine
     pack: CMVendorSodaSoviet
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
 
 - type: entity
   parent: CMVendor
@@ -243,11 +193,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/walkman.rsi
   - type: VendingMachine
     pack: CMVendorWalkman
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
     denyState: deny-unshaded
     ejectState: eject-unshaded
 
@@ -261,11 +206,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/snack.rsi
   - type: VendingMachine
     pack: CMVendorIngridient
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
 
 - type: entity
   parent: CMVendor
@@ -277,11 +217,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/med.rsi
   - type: VendingMachine
     pack: CMVendorMedical
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
     denyState: deny-unshaded
     ejectState: eject-unshaded
   - type: AccessReader
@@ -297,13 +232,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/chem.rsi
   - type: VendingMachine
     pack: CMVendorChemistry
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
   - type: AccessReader
     access: [["CMAccessChemistry"]]
 
@@ -317,13 +245,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/marine_med.rsi
   - type: VendingMachine
     pack: CMVendorMarineMedical
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
 
 - type: entity
   parent: CMVendorMedical
@@ -335,13 +256,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/blood.rsi
   - type: VendingMachine
     pack: CMVendorBlood
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
 
 - type: entity
   parent: CMVendor
@@ -353,11 +267,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/marine_food.rsi
   - type: VendingMachine
     pack: CMVendorMarineFood
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
     denyState: deny-unshaded
     ejectState: eject-unshaded
 
@@ -371,11 +280,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/boozeomat.rsi
   - type: VendingMachine
     pack: CMVendorBooze
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
     denyState: deny-unshaded
     ejectState: eject-unshaded
 
@@ -389,11 +293,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/chessomat.rsi
   - type: VendingMachine
     pack: CMVendorChess
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
     denyState: deny-unshaded
     ejectState: eject-unshaded
 
@@ -407,11 +306,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/tool.rsi
   - type: VendingMachine
     pack: CMVendorTool
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
     denyState: deny-unshaded
     ejectState: eject-unshaded
   - type: AccessReader
@@ -425,13 +319,6 @@
   components:
   - type: VendingMachine
     pack: CMVendorToolComTech
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
   - type: AccessReader
     access: [["CMAccessCombatTechPrep"]]
 
@@ -445,13 +332,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/robotics.rsi
   - type: VendingMachine
     pack: CMVendorCircuits
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
 
 - type: entity
   parent: CMVendorTool
@@ -463,13 +343,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/engivend.rsi
   - type: VendingMachine
     pack: CMVendorElectronics
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
 
 - type: entity
   parent: CMVendorTool
@@ -481,13 +354,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/engi.rsi
   - type: VendingMachine
     pack: CMVendorComponent
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
 
 - type: entity
   parent: CMVendor
@@ -499,11 +365,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/robotics.rsi
   - type: VendingMachine
     pack: CMVendorScience
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
     denyState: deny-unshaded
     ejectState: eject-unshaded
   - type: AccessReader
@@ -517,10 +378,3 @@
   components:
   - type: VendingMachine
     pack: CMVendorRobotics
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-    denyState: deny-unshaded
-    ejectState: eject-unshaded

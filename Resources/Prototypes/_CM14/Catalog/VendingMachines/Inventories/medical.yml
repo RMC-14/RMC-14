@@ -1,6 +1,6 @@
 - type: vendingMachineInventory
   id: CMVendorMedical
-  #startingInventory:
+  #startingInventory: todo cm14
     # Injectors
     # reagent bottles
     # other med stuff

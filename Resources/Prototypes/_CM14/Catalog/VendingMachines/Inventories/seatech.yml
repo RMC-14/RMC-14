@@ -1,6 +1,6 @@
 - type: vendingMachineInventory
   id: CMVendorSEA
-  startingInventory:
+  startingInventory: # todo cm14
     #m39 rubber ammo 20
     #pistol rubber ammo 20
     #mod88 rubber ammo 20
