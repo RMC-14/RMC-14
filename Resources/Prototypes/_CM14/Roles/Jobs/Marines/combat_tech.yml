@@ -22,7 +22,7 @@
     back: CMBackpackMarineTech
     shoes: CMBootsBlackFilled
     eyes: ClothingEyesGlassesMeson
-    head: ArmorHelmetM10
+    head: CMArmorHelmetM10Tech
     outerClothing: ArmorMarineM3
     gloves: CMHandsInsulated
     id: DogtagCombatTech

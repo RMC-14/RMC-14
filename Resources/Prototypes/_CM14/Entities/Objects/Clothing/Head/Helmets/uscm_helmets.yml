@@ -9,7 +9,7 @@
     sprite: _CM14/Objects/Clothing/Head/Helmets/m10/standard.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Head/Helmets/m10/standard.rsi
-  - type: Armor 
+  - type: Armor
     modifiers:
       coefficients:
         Blunt: 0.9
@@ -61,12 +61,23 @@
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Head/Helmets/m10/med.rsi
 
+- type: entity
+  parent: ArmorHelmetM10
+  id: CMArmorHelmetM10Tech
+  name: M10 Tech Helmet
+  description: A special variant of the M10 Pattern Helmet worn by the engineer marines of the USCM.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/tech.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Head/Helmets/m10/tech.rsi
+
 # M11
 - type: entity
   parent: ArmorHelmetM10
   id: CMArmorHelmetM11
   name: M11 Pattern Leader Helmet
-  description: A slightly fancier helmet for marine leaders. This one contains a small built-in camera and has cushioning to project your fragile brain. 
+  description: A slightly fancier helmet for marine leaders. This one contains a small built-in camera and has cushioning to project your fragile brain.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Head/Helmets/m11.rsi
@@ -78,7 +89,7 @@
   parent: ArmorHelmetM10
   id: CMArmorHelmetM12
   name: M12 Pattern Helmet
-  description: An experimental brain-bucket. A dust ruffle hangs from back. Moderately better at deflecting blunt objects at the cost of humiliation. But who will be laughing at the memorial? Not you, you'll be busy getting medals for your intel work or for your fantastic leadership. 
+  description: An experimental brain-bucket. A dust ruffle hangs from back. Moderately better at deflecting blunt objects at the cost of humiliation. But who will be laughing at the memorial? Not you, you'll be busy getting medals for your intel work or for your fantastic leadership.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Head/Helmets/m12.rsi
@@ -114,7 +125,7 @@
   parent: ArmorHelmetM10
   id: CMArmorHelmetM3Scout
   name: M3-S Helmet
-  description: A custom helmet from the M3 series designed to be lightweight and used for recon missions. 
+  description: A custom helmet from the M3 series designed to be lightweight and used for recon missions.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Head/Helmets/m3/scout.rsi
@@ -137,7 +148,7 @@
   parent: ArmorHelmetM10
   id: CMArmorHelmetM35
   name: M35 Helmet
-  description: A custom helmet from the M3 series designed to be highly flame retardant. 
+  description: A custom helmet from the M3 series designed to be highly flame retardant.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Head/Helmets/m35.rsi
@@ -149,7 +160,7 @@
   parent: ArmorHelmetM10
   id: CMArmorHelmetM45
   name: M45 Ghillie Helmet
-  description: A lightweight M45 helmet with ghillie coif used by USCM snipers on recon missions. 
+  description: A lightweight M45 helmet with ghillie coif used by USCM snipers on recon missions.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Head/Helmets/m45.rsi
