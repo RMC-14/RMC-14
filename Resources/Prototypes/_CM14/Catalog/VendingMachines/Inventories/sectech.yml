@@ -1,0 +1,4 @@
+- type: vendingMachineInventory
+  id: CMVendorSec
+  startingInventory:
+    BikeHorn: 1

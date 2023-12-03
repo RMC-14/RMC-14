@@ -1,0 +1,4 @@
+- type: vendingMachineInventory
+  id: CMVendorBooze
+  startingInventory:
+    BikeHorn: 1
