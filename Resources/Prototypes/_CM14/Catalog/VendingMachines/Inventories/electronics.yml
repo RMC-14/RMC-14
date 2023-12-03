@@ -1,5 +1,5 @@
 - type: vendingMachineInventory
-  id: CMVendorElectronic
+  id: CMVendorElectronics
   startingInventory:
     CableApcStack: 6
     Multitool: 6

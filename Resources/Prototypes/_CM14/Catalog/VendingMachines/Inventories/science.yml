@@ -1,7 +1,7 @@
 - type: vendingMachineInventory
   id: CMVendorScience
   startingInventory:
-    ClothingHeadHatHoodBioScience: 2
+    ClothingHeadHatHoodBioScientist: 2
     ClothingOuterBioScientist: 2
     CMJumpsuitResearch: 2
     Igniter: 8
