@@ -322,9 +322,9 @@
     openingAnimationTime: 0
     closingAnimationTime: 0
     openSound:
-      path: /Audio/Effects/door_open.ogg
+      path: /Audio/Items/ratchet.ogg
     closeSound:
-      path: /Audio/Effects/door_close.ogg
+      path: /Audio/Items/ratchet.ogg
   - type: Construction
     graph: BarricadeMetalDoorGraph
     node: nodeBarricadeMetalDoor
@@ -375,9 +375,9 @@
     openingAnimationTime: 0
     closingAnimationTime: 0
     openSound:
-      path: /Audio/Effects/door_open.ogg
+      path: /Audio/Items/ratchet.ogg
     closeSound:
-      path: /Audio/Effects/door_close.ogg
+      path: /Audio/Items/ratchet.ogg
   - type: Construction
     graph: BarricadePlasteelDoorGraph
     node: nodeBarricadePlasteelDoor
