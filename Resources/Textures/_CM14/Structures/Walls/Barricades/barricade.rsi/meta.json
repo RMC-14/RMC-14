@@ -57,6 +57,10 @@
     {
       "name": "turnstile_med",
       "directions": 4
+    },
+    {
+      "name": "metal_wire",
+      "directions": 4
     }
   ]
 }

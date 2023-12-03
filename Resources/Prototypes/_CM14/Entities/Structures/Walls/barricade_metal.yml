@@ -43,6 +43,12 @@
     sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
     layers:
     - state: metal
+  - type: GenericVisualizer
+    visuals:
+      enum.BarbedWireVisuals.Wired:
+        barbWired:
+          False: { state: metal_wire, visible: false }
+          True: { state: metal_wire, visible: true }
     drawdepth: WallTops
   - type: Damageable
     damageContainer: Inorganic

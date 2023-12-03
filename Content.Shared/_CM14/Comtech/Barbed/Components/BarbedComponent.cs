@@ -1,5 +1,6 @@
 using Content.Shared.Damage;
 using Robust.Shared.Containers;
+﻿using Robust.Shared.Serialization;
 
 namespace Content.Shared._CM14.Comtech.Barbed.Components
 {
@@ -11,5 +12,11 @@ namespace Content.Shared._CM14.Comtech.Barbed.Components
 
         [ViewVariables]
         public ContainerSlot BarbedSlot = default!;
+    }
+
+    [NetSerializable, Serializable]
+    public enum BarbedWireVisuals : byte
+    {
+        Wired,
     }
 }
