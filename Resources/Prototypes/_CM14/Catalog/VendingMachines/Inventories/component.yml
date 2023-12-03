@@ -1,4 +1,11 @@
 - type: vendingMachineInventory
   id: CMVendorComponent
   startingInventory:
-    BikeHorn: 1
+    Igniter: 8
+    TimerTrigger: 4
+    ProximitySensor: 4
+    RemoteSignaller: 4
+    Bucket: 6
+    MatterBinStockPart: 8
+    MicroManipulatorStockPart: 8
+    CapacitorStockPart: 8

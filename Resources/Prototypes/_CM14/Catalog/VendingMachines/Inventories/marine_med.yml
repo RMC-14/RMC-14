@@ -1,4 +1,5 @@
 - type: vendingMachineInventory
   id: CMVendorMarineMed
-  startingInventory:
-    BikeHorn: 1
+  #startingInventory:
+    # injectors basic and tramadol
+    # ointment, bruise pack, splint

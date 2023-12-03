@@ -1,4 +1,7 @@
 - type: vendingMachineInventory
   id: CMVendorWalkman
   startingInventory:
-    BikeHorn: 1
+    #Walkman
+    Paper: 15
+    d20Dice: 10
+    Pen: 10

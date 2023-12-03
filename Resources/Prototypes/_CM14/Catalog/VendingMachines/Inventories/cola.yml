@@ -1,4 +1,5 @@
 - type: vendingMachineInventory
   id: CMVendorCola
   startingInventory:
-    BikeHorn: 1
+    DrinkColaCan: 10
+    # Souto drinks, All souto drinks, like all all. 10

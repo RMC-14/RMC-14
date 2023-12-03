@@ -1,4 +1,12 @@
 - type: vendingMachineInventory
   id: CMVendorToolComTech
   startingInventory:
-    BikeHorn: 1
+    ClothingBeltUtility: 4
+    CableAPCStack: 4
+    ClothinEyesGlassesMeson: 2
+    Crowbar: 8
+    Screwdriver: 8
+    Wirecutters: 8
+    Wrench: 8
+    Multitool: 8
+    Welder: 8

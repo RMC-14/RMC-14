@@ -1,4 +1,6 @@
 - type: vendingMachineInventory
   id: CMVendorCoffee
   startingInventory:
-    BikeHorn: 1
+    DrinkHotCoffee: 25
+    DrinkTeacup: 25
+    DrinkHotCoco: 25

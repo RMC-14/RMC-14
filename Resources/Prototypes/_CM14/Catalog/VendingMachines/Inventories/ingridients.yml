@@ -1,4 +1,29 @@
 - type: vendingMachineInventory
   id: CMVendorIngridient
   startingInventory:
-    BikeHorn: 1
+    FoodContainerEgg: 12
+    FoodMeatFish: 12
+    FoodMeat: 12
+    ReagentContainerMilk: 12
+    ReagentContainerMilkSoy: 12
+    FoodCondimentBottleEnzyme: 12
+    ReagentContainerFloor: 12
+    ReagentContainerSugar: 12
+    FoodShakerSalt: 12
+    FoodShakerPepper: 12
+    # Mint 12
+    FoodApple: 12
+    FoodBanana: 12
+    FoodMushroom: 12
+    # Cherry 12
+    FoodChili: 12
+    FoodCabbage: 12
+    FoodCarrot: 12
+    FoodCorn: 12
+    FoodEggplant: 12
+    FoodLemon: 12
+    FoodLime: 12
+    FoodOrange: 12
+    FoodPotato: 12
+    FoodTomato: 12
+    # Whitebeet 12

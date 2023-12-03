@@ -1,4 +1,4 @@
 - type: vendingMachineInventory
   id: CMVendorSodaSoviet
   startingInventory:
-    BikeHorn: 1
+    DrinkSodaWaterCan: 30

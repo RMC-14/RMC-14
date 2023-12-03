@@ -1,4 +1,11 @@
 - type: vendingMachineInventory
   id: CMVendorDinnerware
   startingInventory:
-    BikeHorn: 1
+    # Tray: 8
+    Fork: 6
+    KitchenKnife: 3
+    DrinkGlass: 8
+    CMJumpsuitMessTech: 2
+    FoodShakerSalt: 4
+    FoodShakerPepper: 4
+    FoodCondimentBottleEnzyme: 1

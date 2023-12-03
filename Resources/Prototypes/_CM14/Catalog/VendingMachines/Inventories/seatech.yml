@@ -1,4 +1,13 @@
 - type: vendingMachineInventory
   id: CMVendorSEA
   startingInventory:
-    BikeHorn: 1
+    #m39 rubber ammo 20
+    #pistol rubber ammo 20
+    #mod88 rubber ammo 20
+    #rifle rubber ammo 20
+    #m4ra rubber ammo 20
+    #shotgun beanbag 20
+    MedkitFilled: 2 #firstaid regular 2
+    MedkitBurnFilled: 2 #firstaid fire 2
+    MedkitRadiationFilled: 1 #firstaid rad 1
+    CMHeadsetAlpha: 6

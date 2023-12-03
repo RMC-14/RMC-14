@@ -1,4 +1,6 @@
 - type: vendingMachineInventory
   id: CMVendorMedical
-  startingInventory:
-    BikeHorn: 1
+  #startingInventory:
+    # Injectors
+    # reagent bottles
+    # other med stuff

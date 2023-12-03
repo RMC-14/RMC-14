@@ -1,4 +1,5 @@
 - type: vendingMachineInventory
   id: CMVendorChess
   startingInventory:
-    BikeHorn: 1
+    ChessBoard: 3
+    # There should be vodka chess pieces

@@ -1,4 +1,9 @@
 - type: vendingMachineInventory
   id: CMVendorElectronic
   startingInventory:
-    BikeHorn: 1
+    CableApcStack: 6
+    Multitool: 6
+    DoorElectronics: 8
+    APCElectronics: 8
+    PowerCellHigh: 6
+    PowerCellSmall: 14

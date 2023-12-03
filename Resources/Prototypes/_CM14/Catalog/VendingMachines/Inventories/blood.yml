@@ -1,4 +1,4 @@
 - type: vendingMachineInventory
   id: CMVendorBlood
   startingInventory:
-    BikeHorn: 1
+    Bloodpack: 30

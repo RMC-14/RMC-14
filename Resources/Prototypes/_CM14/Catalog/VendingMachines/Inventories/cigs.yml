@@ -1,0 +1,8 @@
+- type: vendingMachineInventory
+  id: CMVendorCigs
+  startingInventory:
+    CigPackBlack: 50 #lucky strikes
+    CigarCase: 20 #tarbacktube 20
+    Matchbox: 15
+    Lighter: 25
+    #Zippo 10

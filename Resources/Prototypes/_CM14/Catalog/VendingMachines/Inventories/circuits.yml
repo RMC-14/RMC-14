@@ -1,4 +1,12 @@
 - type: vendingMachineInventory
   id: CMVendorCircuits
   startingInventory:
-    BikeHorn: 1
+    FireAlarmElectronics: 5
+    APCElectronics: 6
+    AutolatheMachineCircuitboard: 2
+    TelecomServerCicuitboard: 1
+    CrewMonitoringComputerCircuitboard: 2
+    IDComputerCircuitboard: 2
+    StationRecordsComputerCircuitboard: 2
+    PortableGeneratorPacmanMachineCircuitboard: 5
+    SMESMachineCircuitboard: 2

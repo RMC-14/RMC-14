@@ -1,4 +1,4 @@
 - type: vendingMachineInventory
   id: CMVendorChemistry
-  startingInventory:
-    BikeHorn: 1
+  #startingInventory:
+    # reagent bottles

@@ -1,4 +1,9 @@
 - type: vendingMachineInventory
   id: CMVendorNutri
   startingInventory:
-    BikeHorn: 1
+    EZNutrientChemistryBottle: 35
+    # L4Z fertilizer 25
+    # rh fertilizer 15
+    PestSpray: 20
+    Syringe: 5
+    PlantBag: 5
