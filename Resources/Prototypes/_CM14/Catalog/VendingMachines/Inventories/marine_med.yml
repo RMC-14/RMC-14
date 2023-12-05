@@ -1,0 +1,5 @@
+- type: vendingMachineInventory
+  id: CMVendorMarineMedical
+  #startingInventory: todo cm14
+    # injectors basic and tramadol
+    # ointment, bruise pack, splint

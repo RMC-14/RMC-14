@@ -1,0 +1,6 @@
+- type: vendingMachineInventory
+  id: CMVendorMarineFood
+  startingInventory:
+    # todo cm14 Prepared meal
+    FoodSnackMREBrownie: 50 # Protein bar
+    DrinkMREFlask: 10

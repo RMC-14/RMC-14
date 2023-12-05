@@ -1,0 +1,13 @@
+- type: vendingMachineInventory
+  id: CMVendorSnack
+  startingInventory: # todo cm14
+    FoodBurgerPlain: 12
+    #Burrito 12
+    #Hot Dog 12
+    FoodSnackRaisins: 12 #kepler crisps 12
+    FoodSnackCnDs: 12 #kepler crisps flameshot 12
+    FoodSnackPistachios: 12 #wy chips pepper 12
+    FoodSnackChocolate: 12 #eat bar 12
+    #booniebas 6
+    #chunk 6
+    #barcardine 6

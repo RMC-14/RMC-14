@@ -1,0 +1,12 @@
+- type: vendingMachineInventory
+  id: CMVendorToolComTech
+  startingInventory:
+    ClothingBeltUtility: 4
+    CableApcStack: 4
+    ClothingEyesGlassesMeson: 2
+    Crowbar: 8
+    Screwdriver: 8
+    Wirecutter: 8
+    Wrench: 8
+    Multitool: 8
+    Welder: 8
