@@ -1,0 +1,12 @@
+- type: vendingMachineInventory
+  id: CMVendorCircuits
+  startingInventory:
+    FireAlarmElectronics: 5
+    APCElectronics: 6
+    AutolatheMachineCircuitboard: 2
+    TelecomServerCircuitboard: 1
+    CrewMonitoringComputerCircuitboard: 2
+    IDComputerCircuitboard: 2
+    StationRecordsComputerCircuitboard: 2
+    PortableGeneratorPacmanMachineCircuitboard: 5
+    SMESMachineCircuitboard: 2

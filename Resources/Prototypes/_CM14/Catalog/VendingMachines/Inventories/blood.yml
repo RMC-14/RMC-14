@@ -1,0 +1,4 @@
+- type: vendingMachineInventory
+  id: CMVendorBlood
+  startingInventory:
+    Bloodpack: 30 #todo cm14 different blood groups

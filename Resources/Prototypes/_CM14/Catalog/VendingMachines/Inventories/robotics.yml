@@ -1,0 +1,14 @@
+- type: vendingMachineInventory
+  id: CMVendorRobotics
+  startingInventory:
+    CableApcStack: 4
+    SawElectric: 2
+    Crowbar: 2
+    Scalpel: 2
+    Screwdriver: 2
+    Flash: 4
+    PowerCellHigh: 4
+    ProximitySensor: 4
+    RemoteSignaller: 4
+    HandheldHealthAnalyzer: 2
+    NitrousOxideTankFilled: 2
