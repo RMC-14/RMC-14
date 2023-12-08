@@ -30,7 +30,7 @@
     gloves: CMHandsInsulated
     id: CMChiefEngineerIDCard
     ears: CMHeadsetCE
-    belt: ClothingBeltUtilityEngineering
+    belt: CMBeltUtilityFilled
   satchel: CMSatchelEngineer
 
 - type: entity

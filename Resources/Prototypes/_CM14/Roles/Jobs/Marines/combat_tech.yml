@@ -27,7 +27,7 @@
     gloves: CMHandsInsulated
     id: DogtagCombatTech
     ears: CMHeadsetAlphaEngineer
-    belt: ClothingBeltUtilityEngineering
+    belt: CMBeltUtilityCombatFilled
   satchel: CMSatchelMarineTech
 
 - type: entity

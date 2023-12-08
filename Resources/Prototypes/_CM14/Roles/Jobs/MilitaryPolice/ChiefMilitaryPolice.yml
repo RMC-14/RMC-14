@@ -33,7 +33,7 @@
     id: ChiefMPIDCard
     outerClothing: CMArmorM3WO
     ears: CMHeadsetCMP
-    belt: ClothingBeltSecurityFilled
+    belt: CMBeltSecurityFilled
   satchel: CMSatchelSecurity
 
 - type: entity
