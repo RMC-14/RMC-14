@@ -1,0 +1,52 @@
+- type: gameMap
+  id: Savannah
+  mapName: Savannah
+  mapPath: /Maps/_CM14/savannah.yml
+  minPlayers: 0
+  stations:
+    Savannah:
+      stationProto: StandardNanotrasenStation
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'USS LCS-14 Savannah'
+        - type: StationJobs
+          overflowJobs:
+          - Rifleman
+          availableJobs:
+            #Command
+            CommandingOfficer: [1, 1]
+            ExecutiveOfficer: [1, 1]
+            StaffOfficer: [2, 2]
+            SeniorEnlistedAdvisor: [1, 1]
+            #Military Police
+            ChiefMP: [1, 1]
+            MilitaryWarden: [1, 1]
+            MilitaryPolice: [4, 4]
+            #Auxiliary
+            AuxiliarySupportOfficer: [1, 1]
+            IntelOfficer: [4, 4]
+            PilotOfficer: [2, 2]
+            DropshipCrewChief: [2, 2]           
+            #Engineering
+            CMChiefEngineer: [1, 1]
+            OrdnanceTech: [3, 3]
+            MaintTech: [1, 1]
+            #Medical
+            MarineCMO: [1, 1]
+            MarineDoctor: [4, 4]
+            Nurse: [3, 3]
+            Researcher: [2, 2]
+            #Requisition
+            CMQuartermaster: [1, 1]
+            CMCargoTech: [4, 4]
+            MessTech: [1, 1]
+            #Marines
+            SquadLeader: [4, 4]
+            FireteamLeader: [8, 16]
+            Smartgunner: [8, 16]
+            WeaponSpecialist: [8, 16]
+            CombatTech: [16, 16]
+            HospitalCorpsman: [8, 16]
+            Rifleman: [ -1, -1 ]
+            #Civilians
+            Correspondent: [2, 2]
