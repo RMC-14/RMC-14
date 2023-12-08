@@ -17,6 +17,36 @@
       "name": "full"
     },
     {
+      "name": "bean"
+    },
+    {
+      "name": "full_bean"
+    },
+    {
+      "name": "flec"
+    },
+    {
+      "name": "flec_full"
+    },
+    {
+      "name": "ince"
+    },
+    {
+      "name": "full_ince"
+    },
+    {
+      "name": "buck"
+    },
+    {
+      "name": "full_buck"
+    },
+    {
+      "name": "slug_half"
+    },
+    {
+      "name": "slug_full"
+    },
+    {
       "name": "equipped-BELT",
       "directions": 4
     },
