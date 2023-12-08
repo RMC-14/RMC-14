@@ -176,7 +176,7 @@
     maxItemSize: Normal
     whitelist:
       tags:
-      - MortarShell
+      - CMMortarShell
 
 - type: entity
   parent: CMBeltBaseStorage
