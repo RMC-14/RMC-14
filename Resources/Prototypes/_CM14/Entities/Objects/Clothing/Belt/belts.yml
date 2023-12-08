@@ -66,10 +66,10 @@
   - type: Storage
     maxItemSize: Normal
     whitelist:
-    tags:
-    - Cartridge
-    - SecBeltEquip
-    - Flashlight
+      tags:
+      - Cartridge
+      - SecBeltEquip
+      - Flashlight
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -84,19 +84,19 @@
   - type: Storage
     maxItemSize: Normal
     whitelist:
-    tags: #todo cm14 port tools
-    - Crowbar
-    - Screwdriver
-    - Wirecutter
-    - Wrench
-    - CableCoil
-    - Multitool
-    - Flashlight
-    components:
-    - Welder
-    - PowerCell
-    - TrayScanner
-    - GasAnalyzer
+      tags: #todo cm14 port tools
+      - Crowbar
+      - Screwdriver
+      - Wirecutter
+      - Wrench
+      - CableCoil
+      - Multitool
+      - Flashlight
+      components:
+      - Welder
+      - PowerCell
+      - TrayScanner
+      - GasAnalyzer
 
 - type: entity
   parent: CMBeltUtility
@@ -122,8 +122,8 @@
   - type: Storage
     maxItemSize: Small
     whitelist:
-    tags:
-    - SecBeltEquip
+      tags:
+      - SecBeltEquip
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -138,18 +138,18 @@
   - type: Storage
     maxItemSize: Normal
     whitelist:
-    tags: #todo cm14 port med things
-    - DiscreteHealthAnalyzer
-    # dropper
-    - GlassBeaker
-    - Bottle
-    - PillCanister
-    - Syringe
-    # surgical line
-    - Bloodpack
-    components:
-    - Hypospray
-    - Defibrillator
+      tags: #todo cm14 port med things
+      - DiscreteHealthAnalyzer
+      # dropper
+      - GlassBeaker
+      - Bottle
+      - PillCanister
+      - Syringe
+      # surgical line
+      - Bloodpack
+      components:
+      - Hypospray
+      - Defibrillator
 
 - type: entity
   parent: CMBeltMedical
@@ -175,8 +175,8 @@
   - type: Storage
     maxItemSize: Normal
     whitelist:
-    tags:
-    - MortarShell
+      tags:
+      - MortarShell
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -191,15 +191,15 @@
   - type: Storage
     maxItemSize: Normal
     whitelist:
-    tags:
-    - SecBeltEquip
-    - Taser
-    - Flashlight
-    components:
-    - Handcuff
-    - Flash
-    - FlashOnTrigger
-    - Stunbaton
+      tags:
+      - SecBeltEquip
+      - Taser
+      - Flashlight
+      components:
+      - Handcuff
+      - Flash
+      - FlashOnTrigger
+      - Stunbaton
 
 - type: entity
   parent: CMBeltMarine
