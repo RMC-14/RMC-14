@@ -30,7 +30,7 @@
     id: MilitaryWardenIDCard
     outerClothing: CMArmorM3Warden
     ears: CMHeadsetCMP
-    belt: ClothingBeltSecurityFilled
+    belt: CMBeltSecurityFilled
   satchel: CMSatchelSecurity
 
 - type: entity

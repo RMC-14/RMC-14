@@ -1,0 +1,216 @@
+# Base
+- type: entity
+  parent: [ClothingBeltBase, CMEntityBase]
+  id: CMBeltBase
+  abstract: true
+
+- type: entity
+  parent: CMBeltBase
+  id: CMBeltBaseStorage
+  abstract: true
+  components:
+  - type: Appearance
+  - type: Sprite
+    layers:
+    - state: icon
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.SharedBagOpenVisuals.BagState:
+        openLayer:
+          Open: { visible: true }
+          Closed: { visible: false }
+        closedLayer:
+          Open: { visible: false }
+          Closed: { visible: true}
+  - type: Storage
+    maxSlots: 7
+    maxItemSize: Normal
+  - type: Item
+    size: Ginormous
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+  - type: UserInterface
+    interfaces:
+    - key: enum.StorageUiKey.Key
+      type: StorageBoundUserInterface
+
+# Simple
+- type: entity
+  parent: CMBeltBase
+  id: CMBeltInflatable
+  name: Mr. Quackers
+  description: What are we going to do today, Mr. Quackers?
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Belt/inflatable.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Belt/inflatable.rsi
+
+# Storage
+- type: entity
+  parent: CMBeltBaseStorage
+  id: CMBeltMarine
+  name: M276 pattern ammo load rig
+  description: The M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This is the standard variant, designed for bulk ammunition-carrying operations.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Belt/marine.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Belt/marine.rsi
+  - type: Storage
+    maxItemSize: Normal
+    whitelist:
+    tags:
+    - Cartridge
+    - SecBeltEquip
+    - Flashlight
+
+- type: entity
+  parent: CMBeltBaseStorage
+  id: CMBeltUtility
+  name: M276 pattern toolbelt rig
+  description: The M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This version lacks any combat functionality, and is commonly used by engineers to transport important tools.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Belt/utility.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Belt/utility.rsi
+  - type: Storage
+    maxItemSize: Normal
+    whitelist:
+    tags: #todo cm14 port tools
+    - Crowbar
+    - Screwdriver
+    - Wirecutter
+    - Wrench
+    - CableCoil
+    - Multitool
+    - Flashlight
+    components:
+    - Welder
+    - PowerCell
+    - TrayScanner
+    - GasAnalyzer
+
+- type: entity
+  parent: CMBeltUtility
+  id: CMBeltUtilityCombat
+  name: M276 pattern combat toolbelt rig
+  description: The M276 pattern combat toolbelt rig is an alternative load-bearing equipment of the USCM for engineers conducting repairs within combat zones. It consists of a modular belt with various clips and pouches for tools along with a holster for a sidearm. Due to the bulk of the sidearm, it is unable to hold as many tools as its standard counterpart.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Belt/combat_utility.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Belt/combat_utility.rsi
+
+- type: entity
+  parent: CMBeltBaseStorage
+  id: CMBeltKnife
+  name: M276 pattern knife rig
+  description: The M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This version is specially designed to store knives. Not commonly issued, but kept in service.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Belt/knife.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Belt/knife.rsi
+  - type: Storage
+    maxItemSize: Small
+    whitelist:
+    tags:
+    - SecBeltEquip
+
+- type: entity
+  parent: CMBeltBaseStorage
+  id: CMBeltMedical
+  name: M276 pattern medical storage rig
+  description: The M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This version is a less common configuration, designed to transport medical supplies and pistol ammunition.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Belt/medical.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Belt/medical.rsi
+  - type: Storage
+    maxItemSize: Normal
+    whitelist:
+    tags: #todo cm14 port med things
+    - DiscreteHealthAnalyzer
+    # dropper
+    - GlassBeaker
+    - Bottle
+    - PillCanister
+    - Syringe
+    # surgical line
+    - Bloodpack
+    components:
+    - Hypospray
+    - Defibrillator
+
+- type: entity
+  parent: CMBeltMedical
+  id: CMBeltMedicBag
+  name: M276 pattern lifesaver bag
+  description: The M276 is the standard load-bearing equipment of the USCM. This configuration mounts a duffel bag filled with a range of injectors and light medical supplies, and is common among medics.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Belt/medicbag.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Belt/medicbag.rsi
+
+- type: entity
+  parent: CMBeltBaseStorage
+  id: CMBeltMortar
+  name: M276 pattern mortar operator belt
+  description: An M276 load-bearing rig configured to carry ammunition for the M402 mortar, along with a sidearm.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Belt/mortar.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Belt/mortar.rsi
+  - type: Storage
+    maxItemSize: Normal
+    whitelist:
+    tags:
+    - MortarShell
+
+- type: entity
+  parent: CMBeltBaseStorage
+  id: CMBeltSecurity
+  name: M276 pattern security rig
+  description: The M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This configuration is commonly seen among USCM Military Police and peacekeepers, though it can hold some light munitions.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Belt/security.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Belt/security.rsi
+  - type: Storage
+    maxItemSize: Normal
+    whitelist:
+    tags:
+    - SecBeltEquip
+    - Taser
+    - Flashlight
+    components:
+    - Handcuff
+    - Flash
+    - FlashOnTrigger
+    - Stunbaton
+
+- type: entity
+  parent: CMBeltMarine
+  id: CMBeltSmartGunner
+  name: M280 pattern smartgunner drum belt
+  description: Despite the fact that 1. drum magazines are incredibly non-ergonomical, and 2. require incredibly precise machining in order to fit universally (spoiler, they don't, adding further to the myth of 'Smartgun Personalities'), the USCM decided to issue a modified marine belt (more formally known by the designation M280) with hooks and dust covers (overly complex for the average jarhead) for the M56B system's drum munitions. When the carry catch on the drum isn't getting stuck in the oiled up velcro, the rig actually does do a decent job at holding a plentiful amount of drums. But at the end of the day, compared to standard rigs... it sucks, but isn't that what being a Marine is all about?
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Belt/smartgunner.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Belt/smartgunner.rsi
+  - type: Storage
+    maxItemSize: Huge
+
