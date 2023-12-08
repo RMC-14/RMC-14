@@ -30,7 +30,7 @@
     outerClothing: ArmorMarineM3
     id: DogtagHospitalCorpsman
     ears: CMHeadsetAlphaMedic
-    belt: ClothingBeltMedicalFilled # todo cm14 replace with cm medical belt thingy
+    belt: CMBeltMedicBagFilled
   satchel: CMSatchelMarineMedic
 
 - type: entity

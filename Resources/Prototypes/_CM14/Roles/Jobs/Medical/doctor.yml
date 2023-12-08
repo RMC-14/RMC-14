@@ -28,6 +28,7 @@
     head: CMHeadCapSurgBlue
     id: MarineDoctorIDCard
     ears: CMHeadsetMedical
+    belt: CMBeltMedicalFilled
   satchel: CMSatchelMedical
 
 - type: entity

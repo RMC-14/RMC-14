@@ -30,7 +30,7 @@
     id: MilitaryPoliceIDCard
     outerClothing: CMArmorM2MP
     ears: CMHeadsetMPO
-    belt: ClothingBeltSecurityFilled
+    belt: CMBeltSecurityFilled
   satchel: CMSatchelSecurity
 
 - type: entity

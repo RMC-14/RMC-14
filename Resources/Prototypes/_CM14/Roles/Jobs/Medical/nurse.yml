@@ -23,6 +23,7 @@
     head: CMHeadCapSurgOrange
     id: NurseIDCard
     ears: CMHeadsetMedical
+    belt: CMBeltMedicalFilled
   satchel: CMSatchelMedical
 
 - type: entity
