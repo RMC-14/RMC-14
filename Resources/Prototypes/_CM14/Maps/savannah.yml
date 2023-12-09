@@ -44,7 +44,7 @@
             SquadLeader: [4, 4]
             FireteamLeader: [8, 16]
             Smartgunner: [8, 16]
-            WeaponSpecialist: [8, 16]
+            WeaponsSpecialist: [8, 16]
             CombatTech: [16, 16]
             HospitalCorpsman: [8, 16]
             Rifleman: [ -1, -1 ]
