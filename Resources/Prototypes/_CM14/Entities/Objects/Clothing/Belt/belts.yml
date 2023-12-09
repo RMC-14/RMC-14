@@ -147,6 +147,9 @@
       - Syringe
       # surgical line
       - Bloodpack
+      - Brutepack
+      - Gauze
+      - Ointment
       components:
       - Hypospray
       - Defibrillator
