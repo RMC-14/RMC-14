@@ -5,11 +5,11 @@
   components:
   - type: StorageFill
     contents: #todo cm14 port tools
-      - id: Crowbar
-      - id: Wrench
-      - id: Screwdriver
-      - id: Wirecutter
-      - id: Welder
+      - id: CMCrowbar
+      - id: CMWrench
+      - id: CMScrewdriver
+      - id: CMWirecutter
+      - id: CMWelder
       - id: Multitool
 
 - type: entity
@@ -19,11 +19,11 @@
   components:
   - type: StorageFill
     contents: #todo cm14 look up
-      - id: Crowbar
-      - id: Wrench
-      - id: Screwdriver
-      - id: Wirecutter
-      - id: Welder
+      - id: CMCrowbar
+      - id: CMWrench
+      - id: CMScrewdriver
+      - id: CMWirecutter
+      - id: CMWelder
       - id: Multitool
 
 - type: entity
