@@ -5300,7 +5300,7 @@ entities:
     - pos: 9.5,25.5
       parent: 179
       type: Transform
-- proto: Crowbar
+- proto: CMCrowbar
   entities:
   - uid: 147
     components:
@@ -6786,7 +6786,7 @@ entities:
     - pos: 12.436131,12.550082
       parent: 179
       type: Transform
-- proto: Screwdriver
+- proto: CMScrewdriver
   entities:
   - uid: 431
     components:
@@ -7588,14 +7588,14 @@ entities:
     - pos: 2.5,-14.5
       parent: 179
       type: Transform
-- proto: Wirecutter
+- proto: CMWirecutter
   entities:
   - uid: 359
     components:
     - pos: -1.6207478,4.3951616
       parent: 179
       type: Transform
-- proto: Wrench
+- proto: CMWrench
   entities:
   - uid: 327
     components:
