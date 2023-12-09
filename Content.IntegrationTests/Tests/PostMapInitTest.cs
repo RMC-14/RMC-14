@@ -63,7 +63,8 @@ namespace Content.IntegrationTests.Tests
             "Kettle",
             "MeteorArena",
             "Atlas",
-            "CMDev"
+            "CMDev",
+            "Savannah"
         };
 
         /// <summary>
