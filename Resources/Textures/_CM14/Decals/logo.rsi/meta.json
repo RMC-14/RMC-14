@@ -8,31 +8,31 @@
   },
   "states": [
     {
-      "name": "logo0"
+      "name": "logo_0"
     },
     {
-      "name": "logo1"
+      "name": "logo_1"
     },
     {
-      "name": "logo2"
+      "name": "logo_2"
     },
     {
-      "name": "logo3"
+      "name": "logo_3"
     },
     {
-      "name": "logo4"
+      "name": "logo_4"
     },
     {
-      "name": "logo5"
+      "name": "logo_5"
     },
     {
-      "name": "logo6"
+      "name": "logo_6"
     },
     {
-      "name": "logo7"
+      "name": "logo_7"
     },
     {
-      "name": "logo8"
+      "name": "logo_8"
     }
   ]
 }

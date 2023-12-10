@@ -77,7 +77,7 @@
   defaultCustomColor: true
   sprite:
     sprite: _CM14/Decals/markings.rsi
-    state: striped_corner2
+    state: striped_corner_2
 
 - type: decal
   id: CMDecalStripedCorner3
