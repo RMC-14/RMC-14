@@ -55,7 +55,7 @@
   name: chat-radio-marine-intel
   keycode: "t" #t in cm13
   frequency: 1486
-  color: "#FFFFFF" #todo cm14
+  color: "#027D02"
 
 # Squad channels
 - type: radioChannel
@@ -91,7 +91,7 @@
   name: chat-radio-marine-echo
   keycode: "e" #e in cm13
   frequency: 1495
-  color: "#027D02"
+  color: "#3EB489"
 
 - type: radioChannel
   id: MarineFoxtrot
