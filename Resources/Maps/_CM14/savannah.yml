@@ -5349,6 +5349,11 @@ entities:
     - pos: 131.5,14.5
       parent: 2
       type: Transform
+  - uid: 2830
+    components:
+    - pos: 165.5,-16.5
+      parent: 2
+      type: Transform
   - uid: 2853
     components:
     - pos: 132.5,14.5
@@ -11294,6 +11299,176 @@ entities:
     - pos: 1.5,-4.5
       parent: 2
       type: Transform
+  - uid: 8457
+    components:
+    - pos: 172.5,-16.5
+      parent: 2
+      type: Transform
+  - uid: 8458
+    components:
+    - pos: 172.5,-13.5
+      parent: 2
+      type: Transform
+  - uid: 8459
+    components:
+    - pos: 173.5,-13.5
+      parent: 2
+      type: Transform
+  - uid: 8460
+    components:
+    - pos: 172.5,-12.5
+      parent: 2
+      type: Transform
+  - uid: 8462
+    components:
+    - pos: 165.5,-17.5
+      parent: 2
+      type: Transform
+  - uid: 8463
+    components:
+    - pos: 157.5,-16.5
+      parent: 2
+      type: Transform
+  - uid: 8464
+    components:
+    - pos: 157.5,-17.5
+      parent: 2
+      type: Transform
+  - uid: 8465
+    components:
+    - pos: 169.5,11.5
+      parent: 2
+      type: Transform
+  - uid: 8466
+    components:
+    - pos: 169.5,12.5
+      parent: 2
+      type: Transform
+  - uid: 8467
+    components:
+    - pos: 170.5,12.5
+      parent: 2
+      type: Transform
+  - uid: 8468
+    components:
+    - pos: 171.5,12.5
+      parent: 2
+      type: Transform
+  - uid: 8469
+    components:
+    - pos: 172.5,12.5
+      parent: 2
+      type: Transform
+  - uid: 8470
+    components:
+    - pos: 172.5,13.5
+      parent: 2
+      type: Transform
+  - uid: 8471
+    components:
+    - pos: 169.5,17.5
+      parent: 2
+      type: Transform
+  - uid: 8472
+    components:
+    - pos: 171.5,17.5
+      parent: 2
+      type: Transform
+  - uid: 8473
+    components:
+    - pos: 170.5,17.5
+      parent: 2
+      type: Transform
+  - uid: 8474
+    components:
+    - pos: 171.5,17.5
+      parent: 2
+      type: Transform
+  - uid: 8475
+    components:
+    - pos: 165.5,17.5
+      parent: 2
+      type: Transform
+  - uid: 8476
+    components:
+    - pos: 165.5,18.5
+      parent: 2
+      type: Transform
+  - uid: 8477
+    components:
+    - pos: 157.5,17.5
+      parent: 2
+      type: Transform
+  - uid: 8478
+    components:
+    - pos: 157.5,18.5
+      parent: 2
+      type: Transform
+  - uid: 8479
+    components:
+    - pos: 172.5,17.5
+      parent: 2
+      type: Transform
+  - uid: 8480
+    components:
+    - pos: 169.5,0.5
+      parent: 2
+      type: Transform
+  - uid: 8481
+    components:
+    - pos: 170.5,0.5
+      parent: 2
+      type: Transform
+  - uid: 8482
+    components:
+    - pos: 171.5,0.5
+      parent: 2
+      type: Transform
+  - uid: 8483
+    components:
+    - pos: 172.5,0.5
+      parent: 2
+      type: Transform
+  - uid: 8484
+    components:
+    - pos: 172.5,-2.5
+      parent: 2
+      type: Transform
+  - uid: 8485
+    components:
+    - pos: 171.5,-2.5
+      parent: 2
+      type: Transform
+  - uid: 8486
+    components:
+    - pos: 170.5,-2.5
+      parent: 2
+      type: Transform
+  - uid: 8487
+    components:
+    - pos: 169.5,-2.5
+      parent: 2
+      type: Transform
+  - uid: 8488
+    components:
+    - pos: 172.5,-5.5
+      parent: 2
+      type: Transform
+  - uid: 8489
+    components:
+    - pos: 171.5,-5.5
+      parent: 2
+      type: Transform
+  - uid: 8490
+    components:
+    - pos: 170.5,-5.5
+      parent: 2
+      type: Transform
+  - uid: 8491
+    components:
+    - pos: 169.5,-5.5
+      parent: 2
+      type: Transform
 - proto: CableHV
   entities:
   - uid: 469
@@ -16075,7 +16250,7 @@ entities:
     - pos: 123.5,18.5
       parent: 2
       type: Transform
-    - secondsUntilStateChange: -20939.357
+    - secondsUntilStateChange: -21111.469
       state: Opening
       type: Door
   - uid: 2717
@@ -16085,7 +16260,7 @@ entities:
     - pos: 123.5,-17.5
       parent: 2
       type: Transform
-    - secondsUntilStateChange: -28454.486
+    - secondsUntilStateChange: -28626.598
       state: Opening
       type: Door
   - uid: 2741
@@ -16377,7 +16552,7 @@ entities:
       pos: 121.5,-8.5
       parent: 2
       type: Transform
-    - secondsUntilStateChange: -28095.764
+    - secondsUntilStateChange: -28267.875
       state: Opening
       type: Door
 - proto: CMAirlockMaint
@@ -16551,7 +16726,7 @@ entities:
       pos: 165.5,-6.5
       parent: 2
       type: Transform
-    - secondsUntilStateChange: -22263.268
+    - secondsUntilStateChange: -22435.379
       state: Opening
       type: Door
 - proto: CMAirlockPrepAlpha
@@ -50364,11 +50539,6 @@ entities:
     - pos: 171.5,-15.5
       parent: 2
       type: Transform
-  - uid: 2830
-    components:
-    - pos: 172.5,-11.5
-      parent: 2
-      type: Transform
   - uid: 2831
     components:
     - rot: -1.5707963267948966 rad
@@ -50585,6 +50755,11 @@ entities:
     components:
     - rot: 1.5707963267948966 rad
       pos: 4.5,-3.5
+      parent: 2
+      type: Transform
+  - uid: 8461
+    components:
+    - pos: 172.5,-10.5
       parent: 2
       type: Transform
 - proto: RandomDrinkBottle
