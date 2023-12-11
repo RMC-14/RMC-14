@@ -11469,6 +11469,106 @@ entities:
     - pos: 169.5,-5.5
       parent: 2
       type: Transform
+  - uid: 8492
+    components:
+    - pos: 75.5,-14.5
+      parent: 2
+      type: Transform
+  - uid: 8493
+    components:
+    - pos: 75.5,-15.5
+      parent: 2
+      type: Transform
+  - uid: 8494
+    components:
+    - pos: 75.5,-16.5
+      parent: 2
+      type: Transform
+  - uid: 8495
+    components:
+    - pos: 75.5,15.5
+      parent: 2
+      type: Transform
+  - uid: 8496
+    components:
+    - pos: 75.5,16.5
+      parent: 2
+      type: Transform
+  - uid: 8497
+    components:
+    - pos: 75.5,17.5
+      parent: 2
+      type: Transform
+  - uid: 8498
+    components:
+    - pos: 76.5,14.5
+      parent: 2
+      type: Transform
+  - uid: 8499
+    components:
+    - pos: 77.5,14.5
+      parent: 2
+      type: Transform
+  - uid: 8500
+    components:
+    - pos: 78.5,14.5
+      parent: 2
+      type: Transform
+  - uid: 8501
+    components:
+    - pos: 91.5,14.5
+      parent: 2
+      type: Transform
+  - uid: 8502
+    components:
+    - pos: 90.5,14.5
+      parent: 2
+      type: Transform
+  - uid: 8503
+    components:
+    - pos: 89.5,14.5
+      parent: 2
+      type: Transform
+  - uid: 8504
+    components:
+    - pos: 88.5,14.5
+      parent: 2
+      type: Transform
+  - uid: 8505
+    components:
+    - pos: 87.5,14.5
+      parent: 2
+      type: Transform
+  - uid: 8506
+    components:
+    - pos: 86.5,14.5
+      parent: 2
+      type: Transform
+  - uid: 8507
+    components:
+    - pos: 85.5,14.5
+      parent: 2
+      type: Transform
+  - uid: 8508
+    components:
+    - pos: 84.5,14.5
+      parent: 2
+      type: Transform
+  - uid: 8509
+    components:
+    - pos: 83.5,14.5
+      parent: 2
+      type: Transform
+  - uid: 8510
+    components:
+    - pos: 82.5,14.5
+      parent: 2
+      type: Transform
+  - uid: 8511
+    components:
+    - pos: 81.5,14.5
+      parent: 2
+      type: Transform
 - proto: CableHV
   entities:
   - uid: 469
@@ -16250,7 +16350,7 @@ entities:
     - pos: 123.5,18.5
       parent: 2
       type: Transform
-    - secondsUntilStateChange: -21111.469
+    - secondsUntilStateChange: -21391.18
       state: Opening
       type: Door
   - uid: 2717
@@ -16260,7 +16360,7 @@ entities:
     - pos: 123.5,-17.5
       parent: 2
       type: Transform
-    - secondsUntilStateChange: -28626.598
+    - secondsUntilStateChange: -28906.309
       state: Opening
       type: Door
   - uid: 2741
@@ -16552,7 +16652,7 @@ entities:
       pos: 121.5,-8.5
       parent: 2
       type: Transform
-    - secondsUntilStateChange: -28267.875
+    - secondsUntilStateChange: -28547.586
       state: Opening
       type: Door
 - proto: CMAirlockMaint
@@ -16726,7 +16826,7 @@ entities:
       pos: 165.5,-6.5
       parent: 2
       type: Transform
-    - secondsUntilStateChange: -22435.379
+    - secondsUntilStateChange: -22715.09
       state: Opening
       type: Door
 - proto: CMAirlockPrepAlpha
@@ -51686,30 +51786,45 @@ entities:
       pos: 96.5,-4.5
       parent: 2
       type: Transform
+    - links:
+      - 7784
+      type: DeviceLinkSink
   - uid: 7782
     components:
     - rot: 3.141592653589793 rad
       pos: 96.5,-8.5
       parent: 2
       type: Transform
+    - links:
+      - 7784
+      type: DeviceLinkSink
   - uid: 7785
     components:
     - rot: 3.141592653589793 rad
       pos: 96.5,-7.5
       parent: 2
       type: Transform
+    - links:
+      - 7784
+      type: DeviceLinkSink
   - uid: 7786
     components:
     - rot: 3.141592653589793 rad
       pos: 96.5,-6.5
       parent: 2
       type: Transform
+    - links:
+      - 7784
+      type: DeviceLinkSink
   - uid: 7787
     components:
     - rot: 3.141592653589793 rad
       pos: 96.5,-5.5
       parent: 2
       type: Transform
+    - links:
+      - 7784
+      type: DeviceLinkSink
 - proto: SignalButtonDirectional
   entities:
   - uid: 7784
@@ -51718,6 +51833,21 @@ entities:
       pos: 96.5,-3.5
       parent: 2
       type: Transform
+    - state: True
+      type: SignalSwitch
+    - linkedPorts:
+        7781:
+        - Pressed: Toggle
+        7787:
+        - Pressed: Toggle
+        7786:
+        - Pressed: Toggle
+        7785:
+        - Pressed: Toggle
+        7782:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+    - type: ItemCooldown
 - proto: SignalSwitchDirectional
   entities:
   - uid: 7254
