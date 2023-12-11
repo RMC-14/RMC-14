@@ -1,0 +1,23 @@
+﻿<mapping:MappingScreen
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    xmlns:mapping="clr-namespace:Content.Client._CM14.Mapping"
+    xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.Chat.Widgets"
+    xmlns:hotbar="clr-namespace:Content.Client.UserInterface.Systems.Hotbar.Widgets"
+    VerticalExpand="False"
+    VerticalAlignment="Bottom"
+    HorizontalAlignment="Center">
+    <controls:RecordedSplitContainer Name="ScreenContainer" HorizontalExpand="True"
+                                     VerticalExpand="True" SplitWidth="0"
+                                     StretchDirection="TopLeft">
+        <BoxContainer Orientation="Vertical" VerticalExpand="True" Name="SpawnContainer" MinWidth="600">
+            <mapping:MappingPrototypeList Name="Prototypes" Access="Public" VerticalExpand="True" />
+            <widgets:ChatBox Visible="False" />
+        </BoxContainer>
+        <LayoutContainer Name="ViewportContainer" HorizontalExpand="True" VerticalExpand="True">
+            <controls:MainViewport Name="MainViewport"/>
+            <hotbar:HotbarGui Name="Hotbar" />
+            <mapping:MappingActionsWidget Name="Actions" Access="Public" />
+        </LayoutContainer>
+    </controls:RecordedSplitContainer>
+</mapping:MappingScreen>

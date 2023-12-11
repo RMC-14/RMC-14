@@ -510,3 +510,7 @@ binds:
 - function: Hotbar9
   type: State
   key: Num9
+- function: SaveMap # CM14
+  type: State
+  key: S
+  mod1: Control
