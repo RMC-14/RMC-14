@@ -1,11 +1,9 @@
-﻿using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using Content.Client.Administration.Managers;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Shared._CM14.Input;
-using Content.Shared._CM14.Mapping;
 using Content.Shared.Administration;
 using Content.Shared.Maps;
 using Robust.Client.GameObjects;
@@ -13,10 +11,8 @@ using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Placement;
 using Robust.Client.ResourceManagement;
-using Robust.Client.UserInterface;
 using Robust.Shared.Enums;
 using Robust.Shared.Input.Binding;
-using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Markdown.Value;
 using Robust.Shared.Timing;
@@ -30,10 +26,9 @@ namespace Content.Client._CM14.Mapping;
 public sealed class MappingState : GameplayStateBase
 {
     [Dependency] private readonly IClientAdminManager _admin = default!;
-    [Dependency] private readonly IFileDialogManager _file = default!;
     [Dependency] private readonly IInputManager _input = default!;
     [Dependency] private readonly ILogManager _log = default!;
-    [Dependency] private readonly IClientNetManager _net = default!;
+    [Dependency] private readonly MappingManager _mapping = default!;
     [Dependency] private readonly IPlacementManager _placement = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IResourceCache _resources = default!;
@@ -58,6 +53,7 @@ public sealed class MappingState : GameplayStateBase
         _sawmill = _log.GetSawmill("mapping");
         _loadController = UserInterfaceManager.GetUIController<GameplayStateLoadController>();
     }
+
     protected override void Startup()
     {
         EnsureSetup();
@@ -65,6 +61,7 @@ public sealed class MappingState : GameplayStateBase
 
         UserInterfaceManager.LoadScreen<MappingScreen>();
         _loadController.LoadScreen();
+        _input.Contexts.GetContext("common").AddFunction(CMKeyFunctions.SaveMap);
 
         Screen.Prototypes.SearchBar.OnTextChanged += OnSearch;
         Screen.Prototypes.ClearSearchButton.OnPressed += OnClearSearch;
@@ -93,13 +90,15 @@ public sealed class MappingState : GameplayStateBase
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.SaveMap, new PointerInputCmdHandler(HandleSaveMap, outsidePrediction: true))
-            .Register<GameplayStateBase>();
+            .Register<MappingState>();
 
         Screen.Prototypes.UpdateVisible(_prototypes);
     }
 
     protected override void Shutdown()
     {
+        CommandBinds.Unregister<MappingState>();
+
         Screen.Prototypes.SearchBar.OnTextChanged -= OnSearch;
         Screen.Prototypes.GetPrototypeData -= OnGetData;
         Screen.Prototypes.SelectionChanged -= OnSelected;
@@ -117,6 +116,7 @@ public sealed class MappingState : GameplayStateBase
         UserInterfaceManager.ClearWindows();
         _loadController.UnloadScreen();
         UserInterfaceManager.UnloadScreen();
+        _input.Contexts.GetContext("common").RemoveFunction(CMKeyFunctions.SaveMap);
 
         base.Shutdown();
     }
@@ -125,11 +125,6 @@ public sealed class MappingState : GameplayStateBase
     {
         if (_setup)
             return;
-
-        #if !FULL_RELEASE
-        _net.RegisterNetMessage<MappingSaveMapMessage>();
-        _input.Contexts.GetContext("common").AddFunction(CMKeyFunctions.SaveMap);
-        #endif
 
         _setup = true;
 
@@ -399,12 +394,7 @@ public sealed class MappingState : GameplayStateBase
 
     private async void SaveMap()
     {
-        var path = await _file.GetSaveFileName();
-        if (path == null)
-            return;
-
-        var request = new MappingSaveMapMessage() { Path = path };
-        _net.ClientSendMessage(request);
+        await _mapping.SaveMap();
     }
 
     private void ToggleCollapse(MappingSpawnButton button)

@@ -7,16 +7,13 @@ namespace Content.Shared._CM14.Mapping;
 public sealed class MappingSaveMapMessage : NetMessage
 {
     public override MsgGroups MsgGroup => MsgGroups.Command;
-
-    public string Path = default!;
+    public override NetDeliveryMethod DeliveryMethod => NetDeliveryMethod.ReliableUnordered;
 
     public override void ReadFromBuffer(NetIncomingMessage buffer, IRobustSerializer serializer)
     {
-        Path = buffer.ReadString();
     }
 
     public override void WriteToBuffer(NetOutgoingMessage buffer, IRobustSerializer serializer)
     {
-        buffer.Write(Path);
     }
 }
