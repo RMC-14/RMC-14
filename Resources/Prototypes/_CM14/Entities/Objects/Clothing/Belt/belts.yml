@@ -27,8 +27,9 @@
           Open: { visible: false }
           Closed: { visible: true}
   - type: Storage
-    maxSlots: 7
     maxItemSize: Normal
+    grid:
+    - 0,0,6,1
   - type: Item
     size: Ginormous
   - type: ContainerContainer

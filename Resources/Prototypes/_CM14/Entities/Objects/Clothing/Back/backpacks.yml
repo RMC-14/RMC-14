@@ -31,7 +31,8 @@
     size: Huge
   - type: Storage
     maxItemSize: Huge
-    maxTotalWeight: 28
+    grid:
+    - 0,0,9,1
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
