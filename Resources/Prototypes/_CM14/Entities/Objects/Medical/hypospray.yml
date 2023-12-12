@@ -56,10 +56,10 @@
   parent: CMTAutoInjector
   id: CMTEmergencyInjector
   name: emergency auto-injector
-  description: An auto-injector loaded with a special cocktail of chemicals, to be used in a life-threatening situations. Contains 29 units of bicaridine, 29 units of kelotane and 19 units of oxycodone.
+  description: An auto-injector loaded with a special cocktail of chemicals, to be used in a life-threatening situations. Contains 30 units of bicaridine, 30 units of kelotane and 20 units of epinephrine.
   components:
-  - type: Sprite  # todo cm14 this needs it's own sprite
-    sprite: _CM14/Objects/Medical/auto_injectors.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Medical/emergency_auto_injector.rsi
     layers:
     - state: autoinjector
     - state: autoinjector1
