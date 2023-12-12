@@ -8,7 +8,8 @@
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Back/Satchels/Civilians/classic.rsi
   - type: Storage
-    maxTotalWeight: 18
+    grid:
+    - 0,0,7,1
 
 - type: entity
   parent: CMSatchel
@@ -54,8 +55,6 @@
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Back/Satchels/Marines/big.rsi
-  - type: Storage
-    maxTotalWeight: 24
 
 - type: entity
   parent: CMSatchelMarineIntel
