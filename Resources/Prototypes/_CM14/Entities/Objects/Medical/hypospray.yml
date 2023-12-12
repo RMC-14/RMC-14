@@ -54,6 +54,37 @@
 
 - type: entity
   parent: CMTAutoInjector
+  id: CMTEmergencyInjector
+  name: emergency auto-injector
+  description: An auto-injector loaded with a special cocktail of chemicals, to be used in a life-threatening situations. Contains 29 units of bicaridine, 29 units of kelotane and 19 units of oxycodone.
+  components:
+  - type: Sprite  # todo cm14 this needs it's own sprite
+    sprite: _CM14/Objects/Medical/auto_injectors.rsi
+    layers:
+    - state: autoinjector
+    - state: autoinjector1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: Item
+    sprite: null
+  - type: Hypospray
+    transferAmount: 80
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 80
+        reagents:
+        - ReagentId: Bicaridine
+          Quantity: 30
+        - ReagentId: Kelotane
+          Quantity: 30
+        - ReagentId: Epinephrine # todo cm14 oxycodone
+          Quantity: 20
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+
+- type: entity
+  parent: CMTAutoInjector
   id: CMTTricordrazineInjector
   name: tricordrazine auto-injector
   description: An auto-injector loaded with 3 uses of Tricordrazine, a weak general use medicine for treating damage. Each use is 10 units.
