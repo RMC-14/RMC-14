@@ -77,8 +77,6 @@
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Back/Backpacks/Marines/standard.rsi
-  - type: Storage
-    maxTotalWeight: 32
 
 # Marine
 - type: entity
@@ -118,7 +116,6 @@
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Back/Backpacks/Marines/mortar.rsi
   - type: Storage
-    maxTotalWeight: 20
     whitelist:
       tags:
       - CMMortarShell
@@ -132,8 +129,6 @@
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Back/Backpacks/Marines/welder.rsi
-  - type: Storage
-    maxTotalWeight: 18
   - type: ExaminableSolution
     solution: tank
   - type: SolutionContainerManager
