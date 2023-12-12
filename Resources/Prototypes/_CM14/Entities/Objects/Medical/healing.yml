@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, CMEntityBase]
   id: CMBaseHealingItem
   abstract: true
   components:
@@ -14,11 +14,11 @@
     price: 0
 
 - type: entity
+  parent: CMBaseHealingItem
+  id: CMOintment
   name: ointment
   description: Used to treat those nasty burns. Less effective on caustic burns.
-  parent: CMBaseHealingItem
-  id: CMOintment  
-  suffix: Full
+  suffix: Ten
   components:
   - type: Tag
     tags:
@@ -46,18 +46,36 @@
   - type: StackPrice
     price: 10
 
+- type: stack
+  id: CMOintment
+  name: ointment
+  icon: { sprite: "/Textures/_CM14/Objects//Medical/medical.rsi", state: ointment }
+  spawn: CMOintment
+  maxCount: 10
+  itemSize: 1
+
 - type: entity
+  id: CMOintment1
+  parent: CMOintment
+  suffix: One
+  components:
+  - type: Stack
+    stackType: CMOintment
+    count: 1
+
+
+- type: entity
+  parent: CMBaseHealingItem
+  id: CMGauze
   name: medical gauze
   description: Some sterile gauze to wrap around bloody stumps and lacerations.
-  parent: CMBaseHealingItem
-  id: CMBrutepack
-  suffix: Full
+  suffix: Ten
   components:
   - type: Tag
     tags:
     - Brutepack
   - type: Sprite
-    state: brutepack
+    state: gauze
   - type: Healing
     damageContainers:
       - Biological
@@ -73,16 +91,32 @@
     healingEndSound:
       path: "/Audio/Items/Medical/brutepack_end.ogg"
   - type: Stack
-    stackType: CMBrutepack
+    stackType: CMGauze
     count: 10
   - type: StackPrice
     price: 10
 
+- type: stack
+  id: CMGauze
+  name: gauze
+  icon: { sprite: "/Textures/_CM14/Objects//Medical/medical.rsi", state: gauze }
+  spawn: CMGauze
+  maxCount: 10
+  itemSize: 1
+
 - type: entity
+  id: CMGauze1
+  parent: CMGauze
+  suffix: One
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: CMBaseHealingItem
+  id: CMSurgicalLine
   name: surgical line
   description: A roll of military-grade surgical line, able to seamlessly sew up any wound. Also works as a robust fishing line for maritime deployments.
-  parent: CMBaseHealingItem
-  id: CMSurgicalLine  
   components:
   - type: Tag
     tags:
@@ -107,11 +141,28 @@
   - type: StackPrice
     price: 10
 
+- type: stack
+  id: CMSurgicalLine
+  name: surgical line
+  icon: { sprite: "/Textures/_CM14/Objects/Medical/medical.rsi", state: surgical_line }
+  spawn: CMSurgicalLine
+  maxCount: 1
+  itemSize: 1
+
 - type: entity
+  id: CMGauze1
+  parent: CMGauze
+  suffix: One
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: CMBaseHealingItem
+  id: CMSynthGraft
   name: synth graft
   description: An applicator for synthetic skin field grafts. The stuff reeks, itches like the dickens, hurts going on, and the color is a perfectly averaged multiethnic tone that doesn't blend with anyone's complexion. But at least you don't have to stay in sickbay.
-  parent: CMBaseHealingItem
-  id: CMSynthGraft  
+  suffix: Ten
   components:
   - type: Tag
     tags:
@@ -138,12 +189,26 @@
   - type: StackPrice
     price: 10
 
+- type: stack
+  id: CMSynthGraft
+  name: CMSynthGraft
+  icon: { sprite: "/Textures/_CM14/Objects/Medical/medical.rsi", state: skingraft }
+  spawn: CMSynthGraft
+  maxCount: 1
+  itemSize: 1
+
 - type: entity
+  parent: CMBaseHealingItem
+  id: CMBurnKit
   name: burn kit
   description: A treatment kit for severe burns.
-  parent: CMBaseHealingItem
-  id: CMBurnKit  
+  suffix: Ten
   components:
+  - type: Stack
+    stackType: CMBurnKit
+    count: 10
+  - type: StackPrice
+    price: 10
   - type: Tag
     tags:
     - CMBurnKit
@@ -164,11 +229,33 @@
       path: "/Audio/Items/Medical/brutepack_end.ogg"
 
 - type: entity
+  id: CMBurnKit1
+  parent: CMBurnKit
+  suffix: One
+  components:
+  - type: Stack
+    count: 1
+
+- type: stack
+  id: CMBurnKit
+  name: advanced burn kit
+  icon: { sprite: "/Textures/_CM14/Objects/Medical/medical.rsi", state: burnkit }
+  spawn: CMBurnKit
+  maxCount: 10
+  itemSize: 1
+
+- type: entity
+  parent: CMBaseHealingItem
+  id: CMTraumaKit
   name: trauma kit
   description: A trauma kit for severe injuries.
-  parent: CMBaseHealingItem
-  id: CMTraumaKit  
+  suffix: Ten
   components:
+  - type: Stack
+    stackType: CMTraumaKit
+    count: 10
+  - type: StackPrice
+    price: 10
   - type: Tag
     tags:
     - CMTraumaKit
@@ -185,6 +272,22 @@
       path: "/Audio/Items/Medical/brutepack_begin.ogg"
     healingEndSound:
       path: "/Audio/Items/Medical/brutepack_end.ogg"
+
+- type: entity
+  id: CMTraumaKit1
+  parent: CMTraumaKit
+  suffix: One
+  components:
+  - type: Stack
+    count: 1
+
+- type: stack
+  id: CMTraumaKit
+  name: advanced trauma kit
+  icon: { sprite: "/Textures/_CM14/Objects/Medical/medical.rsi", state: traumakit }
+  spawn: CMTraumaKit
+  maxCount: 10
+  itemSize: 1
 
 - type: entity
   parent: CMPillCanister

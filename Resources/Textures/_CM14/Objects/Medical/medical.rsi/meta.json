@@ -8,14 +8,14 @@
   },
   "states": [
     {
-      "name": "brutepack"
+      "name": "gauze"
     },
     {
-      "name": "brutepack-inhand-left",
+      "name": "gauze-inhand-left",
       "directions": 4
     },
     {
-      "name": "brutepack-inhand-right",
+      "name": "gauze-inhand-right",
       "directions": 4
     },
     {

@@ -87,7 +87,7 @@
   parent: CMTAutoInjector
   id: CMTTricordrazineInjector
   name: tricordrazine auto-injector
-  description: An auto-injector loaded with 3 uses of Tricordrazine, a weak general use medicine for treating damage. Each use is 10 units.
+  description: An auto-injector loaded with 3 uses of tricordrazine, a weak general use medicine for treating damage. Each use is 10 units.
   components:
   - type: SolutionContainerManager
     solutions:
@@ -99,9 +99,16 @@
 
 - type: entity
   parent: CMTAutoInjector
+  id: CMTFirstAidrazineInjector
+  name: First-Aid auto-injector
+  description: A version of the tricordrazine auto-injector that can be used by everyone. Each use is 10 units.
+  noSpawn: true # todo cm14 remove this line when skills are added
+
+- type: entity
+  parent: CMTAutoInjector
   id: CMInaprovalineAutoInjector
   name: inaprovaline auto-injector
-  description: An auto-injector containing Inaprovaline.  Useful for saving lives. Each use is 10 units.
+  description: An auto-injector containing inaprovaline.  Useful for saving lives. Each use is 10 units.
   components:
   - type: SolutionContainerManager
     solutions:
@@ -115,7 +122,7 @@
   parent: CMTAutoInjector
   id: CMKelotaneAutoInjector
   name: kelotane auto-injector
-  description: An auto-injector loaded with 3 uses of Kelotane, a common burn medicine. Each use is 10 units.
+  description: An auto-injector loaded with 3 uses of kelotane, a common burn medicine. Each use is 10 units.
   components:
   - type: SolutionContainerManager
     solutions:
@@ -130,7 +137,7 @@
   parent: CMTAutoInjector
   id: CMDexalinPlusAutoInjector
   name: dexalin plus auto-injector
-  description: An auto-injector loaded with 3 uses of Dexalin Plus, a common airloss medicine. Each use is 10 units.
+  description: An auto-injector loaded with 3 uses of dexalin plus, a common airloss medicine. Each use is 10 units.
   components:
   - type: SolutionContainerManager
     solutions:
@@ -139,3 +146,82 @@
         reagents:
           - ReagentId: DexalinPlus
             Quantity: 30
+
+- type: entity
+  parent: CMTAutoInjector
+  id: CMDTramadolAutoInjector
+  name: tramadol auto-injector
+  description: An auto-injector loaded with 3 uses of tramadol, Standard issue painkiller. Each use is 10 units.
+  noSpawn: true # remove this when tramadol is added
+#  components:
+#  - type: SolutionContainerManager
+#    solutions:
+#      pen:
+#        maxVol: 30
+#        reagents:
+#        - ReagentId: Tramadol todo cm14
+#          Quantity: 30
+
+- type: entity
+  parent: CMDTramadolAutoInjector
+  id: CMPainStopAutoInjector
+  name: Pain-Stop auto-injector
+  description: A version of the Tramadol auto-injector that can be used by everyone. Each use is 10 units.
+  noSpawn: true # todo cm14 when skills are added, this item is available to be used instantly by anyone
+
+- type: entity
+  parent: CMTAutoInjector
+  id: CMDyloveneAutoInjector
+  name: dylovene auto-injector
+  description: An auto-injector loaded with 3 uses of dylovene, a common anti-toxin medicine. Each use is 10 units.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 30
+        reagents:
+        - ReagentId: Dylovene
+          Quantity: 30
+
+- type: entity
+  parent: CMTAutoInjector
+  id: CMBicaridineAutoInjector
+  name: Bicaridine auto-injector
+  description: An auto-injector loaded with 3 uses of bicaridine, a medicine for brute damage. Each use is 10 units.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 30
+        reagents:
+        - ReagentId: Bicaridine
+          Quantity: 30
+
+- type: entity
+  parent: CMTAutoInjector
+  id: CMInaprovalinePlusAutoInjector
+  name: inaprovaline auto-injector
+  description: An auto-injector loaded with 3 uses of inaprovaline, a medicine for people in critical condition. Each use is 10 units.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 30
+        reagents:
+        - ReagentId: Inaprovaline
+          Quantity: 30
+
+- type: entity
+  parent: CMTAutoInjector
+  id: CMOxycodonePlusAutoInjector
+  name: Oxycodone auto-injector
+  description: An auto-injector loaded with 3 uses of oxycodone, a very strong painkiller. Each use is 10 units.
+  noSpawn: true # todo cm14 remove this when oxydone is added
+#  components:
+#  - type: SolutionContainerManager
+#    solutions:
+#      pen:
+#        maxVol: 30
+#        reagents:
+#        - ReagentId: Oxycodone
+#          Quantity: 30

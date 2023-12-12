@@ -5,7 +5,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMBrutepack
+      - id: CMGauze
       - id: CMOintment
       - id: CMHealthAnalyzer
       - id: CMTTricordrazineInjector
@@ -38,4 +38,4 @@
         amount: 2
       - id: CMDexalinPlusAutoInjector
         amount: 3
-      - id: CMInaprovAutoInjector
+      - id: CMInaprovalineAutoInjector
