@@ -144,7 +144,7 @@ public sealed class CPRSystem : EntitySystem
         {
             if (!TryComp(ent, out DamageableComponent? damageable) ||
                 !damageable.Damage.DamageDict.TryGetValue(HealType, out var damage) ||
-                damage < HealAmount)
+                damage <= 0)
             {
                 args.Cancelled = true;
                 return;
