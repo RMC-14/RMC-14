@@ -233,10 +233,10 @@ public sealed class StorageUIController : UIController, IOnSystemChanged<Storage
 
         if (args.Function == ContentKeyFunctions.MoveStoredItem)
         {
-            _menuDragHelper.MouseDown(control);
-            _menuDragHelper.Update(0f);
+            // _menuDragHelper.MouseDown(control);
+            // _menuDragHelper.Update(0f);
 
-            args.Handle();
+            // args.Handle();
         }
         else if (args.Function == ContentKeyFunctions.ExamineEntity)
         {
@@ -277,7 +277,7 @@ public sealed class StorageUIController : UIController, IOnSystemChanged<Storage
                     new ItemStorageLocation(DraggingRotation, position)));
                 _container?.BuildItemPieces();
             }
-            else //if we just clicked, then take it out of the bag.
+            else if (control.Has((args.PointerLocation.Position - control.GlobalPixelPosition) / control.UIScale)) //if we just clicked, then take it out of the bag.
             {
                 _entity.RaisePredictiveEvent(new StorageInteractWithItemEvent(
                     _entity.GetNetEntity(control.Entity),

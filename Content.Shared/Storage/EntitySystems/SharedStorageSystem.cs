@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Shared._CM14.Inventory;
 using Content.Shared.ActionBlocker;
 using Content.Shared.CombatMode;
 using Content.Shared.Containers.ItemSlots;
@@ -350,6 +351,7 @@ public abstract class SharedStorageSystem : EntitySystem
                 && storageComp.StorageRemoveSound != null)
                 Audio.PlayPredicted(storageComp.StorageRemoveSound, uid, player);
             {
+                UpdateUI((uid, storageComp));
                 return;
             }
         }
@@ -460,6 +462,23 @@ public abstract class SharedStorageSystem : EntitySystem
 
         UpdateAppearance((entity, entity.Comp, null));
         UpdateUI((entity, entity.Comp));
+
+        var items = new List<(EntityUid Id, ItemStorageLocation Location)>();
+        foreach (var (item, location) in entity.Comp.StoredItems)
+        {
+            items.Add((GetEntity(item), location));
+        }
+
+        items.Sort(static (a, b) => a.Location.Position.X.CompareTo(b.Location.Position.X));
+
+        foreach (var (item, location) in items)
+        {
+            if (CMInventoryExtensions.TryGetFirst(entity, item, out var newLocation) &&
+                location != newLocation)
+            {
+                TrySetItemStorageLocation(item, (entity, entity), newLocation);
+            }
+        }
     }
 
     private void OnInsertAttempt(EntityUid uid, StorageComponent component, ContainerIsInsertingAttemptEvent args)

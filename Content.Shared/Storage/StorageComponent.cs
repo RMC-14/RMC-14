@@ -14,7 +14,7 @@ namespace Content.Shared.Storage
     /// <summary>
     /// Handles generic storage with window, such as backpacks.
     /// </summary>
-    [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+    [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
     public sealed partial class StorageComponent : Component
     {
         public static string ContainerId = "storagebase";
