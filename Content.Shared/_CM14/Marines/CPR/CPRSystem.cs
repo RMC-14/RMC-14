@@ -42,7 +42,7 @@ public sealed class CPRSystem : EntitySystem
         SubscribeLocalEvent<CPRReceivedComponent, ReceiveCPRAttemptEvent>(OnReceivedCPRAttempt);
         SubscribeLocalEvent<MobStateComponent, ReceiveCPRAttemptEvent>(OnMobStateCPRAttempt);
 
-        // TODO CM14 pending PR upstream
+        // TODO CM14 pending PR upstream https://github.com/space-wizards/space-station-14/pull/22395
         // SubscribeLocalEvent<MaskComponent, ReceiveCPRAttemptEvent(OnMaskCPRAttempt);
     }
 
