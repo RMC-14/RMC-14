@@ -1,6 +1,7 @@
 ﻿using Content.Shared._CM14.Xenos.Plasma;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
