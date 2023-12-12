@@ -4,6 +4,7 @@ using System.Numerics;
 using Content.Client.Hands.Systems;
 using Content.Client.Items.Systems;
 using Content.Client.Storage.Systems;
+using Content.Shared._CM14.Inventory;
 using Content.Shared.Input;
 using Content.Shared.Item;
 using Content.Shared.Storage;
@@ -29,11 +30,11 @@ public sealed class StorageContainer : BaseWindow
     public event Action<GUIBoundKeyEventArgs, ItemGridPiece>? OnPiecePressed;
     public event Action<GUIBoundKeyEventArgs, ItemGridPiece>? OnPieceUnpressed;
 
-    private readonly string _emptyTexturePath = "Storage/tile_empty";
+    private readonly string _emptyTexturePath = "Storage/cm_tile_empty";
     private Texture? _emptyTexture;
     private readonly string _blockedTexturePath = "Storage/tile_blocked";
     private Texture? _blockedTexture;
-    private readonly string _emptyOpaqueTexturePath = "Storage/tile_empty_opaque";
+    private readonly string _emptyOpaqueTexturePath = "Storage/cm_tile_empty_opaque";
     private Texture? _emptyOpaqueTexture;
     private readonly string _blockedOpaqueTexturePath = "Storage/tile_blocked_opaque";
     private Texture? _blockedOpaqueTexture;
@@ -79,6 +80,13 @@ public sealed class StorageContainer : BaseWindow
             VSeparationOverride = 0
         };
 
+        var panel = new PanelContainer();
+        panel.PanelOverride = new StyleBoxFlat()
+        {
+            BorderColor = Color.Black,
+            BorderThickness = new Thickness(2)
+        };
+
         var container = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,
@@ -95,7 +103,8 @@ public sealed class StorageContainer : BaseWindow
                             Children =
                             {
                                 _backgroundGrid,
-                                _pieceGrid
+                                _pieceGrid,
+                                panel
                             }
                         }
                     }
@@ -306,7 +315,7 @@ public sealed class StorageContainer : BaseWindow
 
         foreach (var child in _backgroundGrid.Children)
         {
-            child.ModulateSelfOverride = Color.FromHex("#222222");
+            child.ModulateSelfOverride = null;
         }
 
         if (UserInterfaceManager.CurrentlyHovered is StorageContainer con && con != this)
@@ -360,7 +369,7 @@ public sealed class StorageContainer : BaseWindow
             {
                 if (TryGetBackgroundCell(x, y, out var cell) && itemShape.Contains(x, y))
                 {
-                    cell.ModulateSelfOverride = validLocation ? validColor : Color.FromHex("#B40046");
+                    // cell.ModulateSelfOverride = validLocation ? validColor : Color.FromHex("#B40046");
                 }
             }
         }
@@ -432,10 +441,12 @@ public sealed class StorageContainer : BaseWindow
             if (handsSystem.GetActiveHandEntity() is { } handEntity &&
                 storageSystem.CanInsert(StorageEntity.Value, handEntity, out _))
             {
-                var pos = GetMouseGridPieceLocation((handEntity, null),
-                    new ItemStorageLocation(_storageController.DraggingRotation, Vector2i.Zero));
-
-                var insertLocation = new ItemStorageLocation(_storageController.DraggingRotation, pos);
+                if (!CMInventoryExtensions.TryGetFirst(StorageEntity.Value, handEntity, out var insertLocation))
+                    return;
+                // var pos = GetMouseGridPieceLocation((handEntity, null),
+                //     new ItemStorageLocation(_storageController.DraggingRotation, Vector2i.Zero));
+                //
+                // var insertLocation = new ItemStorageLocation(_storageController.DraggingRotation, pos);
                 if (storageSystem.ItemFitsInGridLocation(
                         (handEntity, null),
                         (StorageEntity.Value, null),

@@ -209,6 +209,11 @@ public sealed class ItemGridPiece : Control
         return false;
     }
 
+    public bool Has(Vector2 point)
+    {
+        return HasPoint(point);
+    }
+
     protected override void KeyBindDown(GUIBoundKeyEventArgs args)
     {
         base.KeyBindDown(args);
