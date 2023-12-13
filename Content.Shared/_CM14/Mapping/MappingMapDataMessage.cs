@@ -21,7 +21,8 @@ public sealed class MappingMapDataMessage : NetMessage
 
         var uncompressedLength = buffer.ReadVariableInt32();
         var compressedLength = buffer.ReadVariableInt32();
-        var stream = buffer.ReadAlignedMemory(compressedLength);
+        var stream = new MemoryStream(compressedLength);
+        buffer.ReadAlignedMemory(stream, compressedLength);
         using var decompress = new ZStdDecompressStream(stream);
         using var decompressed = new MemoryStream(uncompressedLength);
 
