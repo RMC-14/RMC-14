@@ -1,0 +1,380 @@
+- type: entity
+  parent: [ VendingMachine, CMEntityBase]
+  id: ColMarTechWeapons
+  name: ColMarTech brand gun storage rack
+  description: It costs four hundred thousand dollars to dispense weapons for 12 seconds.
+  components:
+  - type: VendingMachine
+    pack: ColMarTechWeapons
+    dispenseOnHitChance: 0.25
+    dispenseOnHitThreshold: 2
+    offState: off
+    brokenState: broken
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/colmartechweapons.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+
+- type: entity
+  parent: [ VendingMachine, CMEntityBase]
+  id: ColMarTechEquipment
+  name: ColMarTech brand equipment rack
+  description: Armor Class Non-Zero
+  components:
+  - type: VendingMachine
+    pack: ColMarTechEquipment
+    dispenseOnHitChance: 0.25
+    dispenseOnHitThreshold: 2
+    offState: off
+    brokenState: broken
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/colmartechequipment.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+
+- type: entity
+  parent: [ VendingMachine, CMEntityBase]
+  id: CMVendor
+  name: Vendomat
+  description: A generic vending machine.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/generic.rsi
+    layers:
+    - state: off
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: off
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: VendingMachine
+    pack: CMVendomat
+    dispenseOnHitChance: 0.25
+    dispenseOnHitThreshold: 2
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+
+- type: entity
+  parent: CMVendor
+  id: CMVendorCoffee
+  name: Hot Drinks machine
+  description: A vending machine which dispenses hot drinks.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/coffee.rsi
+  - type: VendingMachine
+    pack: CMVendorCoffee
+    ejectState: eject-unshaded
+
+- type: entity
+  parent: CMVendor
+  id: CMVendorSnack
+  name: Hot Foods Machine
+  description: A vending machine full of ready to cook meals, mhmmmm taste the nutritional goodness!
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/snack.rsi
+  - type: VendingMachine
+    pack: CMVendorSnack
+
+- type: entity
+  parent: CMVendor
+  id: CMVendorCola
+  name: Souto Softdrinks
+  description: A softdrink vendor provided by Souto Soda Company, Havana.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/cola.rsi
+  - type: VendingMachine
+    pack: CMVendorCola
+
+- type: entity
+  parent: CMVendor
+  id: CMVendorCigs
+  name: Cigarette Machine
+  description: If you want to get cancer, might as well do it in style!
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/cigs.rsi
+  - type: VendingMachine
+    pack: CMVendorCigs
+
+- type: entity
+  parent: CMVendor
+  id: CMVendorSec
+  name: SecTech
+  description: A security equipment vendor.
+  suffix: Military Police
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/sec.rsi
+  - type: VendingMachine
+    pack: CMVendorSec
+    denyState: deny-unshaded
+    ejectState: eject-unshaded
+  - type: AccessReader
+    access: [["CMAccessBrig"]]
+
+- type: entity
+  parent: CMVendor
+  id: CMVendorSEA
+  name: SEATech
+  description: An equipment vendor designed to save lives
+  suffix: SEA
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/sec.rsi
+  - type: VendingMachine
+    pack: CMVendorSEA
+    denyState: deny-unshaded
+    ejectState: eject-unshaded
+  - type: AccessReader
+    access: [["CMAccessSEA"]]
+
+- type: entity
+  parent: CMVendor
+  id: CMVendorNutri
+  name: NutriMax
+  description: A plant nutrient vendor.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/nutri.rsi
+  - type: VendingMachine
+    pack: CMVendorNutri
+    denyState: deny-unshaded
+    ejectState: eject-unshaded
+
+- type: entity
+  parent: CMVendor
+  id: CMVendorSeeds
+  name: MegaSeed Servitor
+  description: When you need seeds fast!
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/seeds.rsi
+  - type: VendingMachine
+    pack: CMVendorSeeds
+    denyState: deny-unshaded
+    ejectState: eject-unshaded
+
+- type: entity
+  parent: CMVendor
+  id: CMVendorDinnerware
+  name: Dinnerware
+  description: A kitchen and restaraunt equipment vendor.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/dinnerware.rsi
+  - type: VendingMachine
+    pack: CMVendorDinnerware
+
+- type: entity
+  parent: CMVendor
+  id: CMVendorSodaSoviet
+  name: BODA
+  description: An old sweet water vending machine, how did this end up here?
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/sovietsoda.rsi
+  - type: VendingMachine
+    pack: CMVendorSodaSoviet
+
+- type: entity
+  parent: CMVendor
+  id: CMVendorWalkman
+  name: Rec-Vend
+  description: Contains Weyland-Yutani approved recreational items, like Walkmans and Cards.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/walkman.rsi
+  - type: VendingMachine
+    pack: CMVendorWalkman
+    denyState: deny-unshaded
+    ejectState: eject-unshaded
+
+- type: entity
+  parent: CMVendor
+  id: CMVendorIngridients
+  name: Galley Auxiliary Storage Requisition System
+  description: A vending machine meant to be use for cooks.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/snack.rsi
+  - type: VendingMachine
+    pack: CMVendorIngridient
+
+- type: entity
+  parent: CMVendor
+  id: CMVendorMedical
+  name: Wey-Med Plus
+  description:
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/med.rsi
+  - type: VendingMachine
+    pack: CMVendorMedical
+    denyState: deny-unshaded
+    ejectState: eject-unshaded
+  - type: AccessReader
+    access: [["CMAccessMedical"]]
+
+- type: entity
+  parent: CMVendorMedical
+  id: CMVendorChemistry
+  name: Wey-Chem Plus
+  description: Medical chemistry dispenser. Provided by Wey-Yu Pharmaceuticals Division(TM).
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/chem.rsi
+  - type: VendingMachine
+    pack: CMVendorChemistry
+  - type: AccessReader
+    access: [["CMAccessChemistry"]]
+
+- type: entity
+  parent: CMVendorMedical
+  id: CMVendorMarineMedical
+  name: ColMarTech MarineMed
+  description: Medical Pharmaceutical dispenser with basic medical supplies for marines.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/marine_med.rsi
+  - type: VendingMachine
+    pack: CMVendorMarineMedical
+
+- type: entity
+  parent: CMVendorMedical
+  id: CMVendorBlood
+  name: MM Blood Dispenser
+  description: The Marine Med Brand Blood Pack Dispensary is the premier, top-of-the-line blood dispenser of 2105! Get yours today! #dont update year, that`s a joke from cm13
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/blood.rsi
+  - type: VendingMachine
+    pack: CMVendorBlood
+
+- type: entity
+  parent: CMVendor
+  id: CMVendorMarineFood
+  name: ColMarTech Food Vendor
+  description: USCM Food Vendor, containing standard military Prepared Meals.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/marine_food.rsi
+  - type: VendingMachine
+    pack: CMVendorMarineFood
+    denyState: deny-unshaded
+    ejectState: eject-unshaded
+
+- type: entity
+  parent: CMVendor
+  id: CMVendorBooze
+  name: Booze-O-Mat
+  description: A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/boozeomat.rsi
+  - type: VendingMachine
+    pack: CMVendorBooze
+    denyState: deny-unshaded
+    ejectState: eject-unshaded
+
+- type: entity
+  parent: CMVendor
+  id: CMVendorChess
+  name: Chess-o-mat
+  description: In 2143 Red Star Drinks, a UPP-CA (Colonial Administration) affiliated corporation ran a promotional sweepstakes for drinkers who had found special codes on the inside of the caps of a limited run of Red Star Vodka, shipping them a Chess-O-Mat with unlimited refills.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/chessomat.rsi
+  - type: VendingMachine
+    pack: CMVendorChess
+    denyState: deny-unshaded
+    ejectState: eject-unshaded
+
+- type: entity
+  parent: CMVendor
+  id: CMVendorTool
+  name: Engineering Vendor
+  description: You shouldn't be spawning this one.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/tool.rsi
+  - type: VendingMachine
+    pack: CMVendorTool
+    denyState: deny-unshaded
+    ejectState: eject-unshaded
+  - type: AccessReader
+    access: [["CMAccessEngineering"], ["CMAccessColonyEngineering"]]
+
+- type: entity
+  parent: CMVendorTool
+  id: CMVendorToolComTech
+  name: ColMarTech Squad ComTech Tools Vendor
+  description: A vending machine that stores various extra tools that are useful on the field.
+  components:
+  - type: VendingMachine
+    pack: CMVendorToolComTech
+  - type: AccessReader
+    access: [["CMAccessCombatTechPrep"]]
+
+- type: entity
+  parent: CMVendorTool
+  id: CMVendorCircuits
+  name: circuit board vendor
+  description: A safe storage for pre-programmed circuit boards, it has an internal gyroscope to keep any external force from moving the boards, thick insulation and a custom 2.1mm UPS port for charging various W-Y exclusive devices (sold separately).
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/robotics.rsi
+  - type: VendingMachine
+    pack: CMVendorCircuits
+
+- type: entity
+  parent: CMVendorTool
+  id: CMVendorElectronics
+  name: Electronics Vendor
+  description: Spare tool vendor. What? Did you expect some witty description?
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/engivend.rsi
+  - type: VendingMachine
+    pack: CMVendorElectronics
+
+- type: entity
+  parent: CMVendorTool
+  id: CMVendorComponent
+  name: Component Storage Machine
+  description: A large storage machine containing various components.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/engi.rsi
+  - type: VendingMachine
+    pack: CMVendorComponent
+
+- type: entity
+  parent: CMVendor
+  id: CMVendorScience
+  name: Wey-Yu SciVend
+  description: Vendor containing basic equipment for your experiments.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/robotics.rsi
+  - type: VendingMachine
+    pack: CMVendorScience
+    denyState: deny-unshaded
+    ejectState: eject-unshaded
+  - type: AccessReader
+    access: [["CMAccessResearch"]]
+
+- type: entity
+  parent: CMVendorScience
+  id: CMVendorRobotics
+  name: Robotech Deluxe
+  description: All the tools you need to create your own robot army.
+  components:
+  - type: VendingMachine
+    pack: CMVendorRobotics

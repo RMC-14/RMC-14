@@ -1,0 +1,12 @@
+- type: vendingMachineInventory
+  id: ColMarTechWeapons
+  startingInventory:
+    WeaponRifleM41A: 20
+    WeaponRifleM4RA: 20
+    WeaponSMGM39: 20
+    WeaponPistolM4A3: 40
+    MagazineRifleM41: 100
+    MagazineRifleM4RA: 100
+    MagazineCaselessM39: 100
+    MagazinePistolM4A3: 200
+    M5Bayonet: 50

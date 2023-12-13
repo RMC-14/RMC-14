@@ -1,9 +1,11 @@
 - type: entity
   name: M5 night raider bayonet
-  parent: BaseKnife
+  parent: [BaseKnife, CMEntityBase]
   id: M5Bayonet
   description: The standard issue bayonet knife issued to Colonial Marines.
   components:
+  - type: Clothing
+    slots: [mask]
   - type: Tag
     tags:
     - Knife

@@ -29,6 +29,7 @@
     head: CMHeadCapCMO
     id: MarineCMOIDCard
     ears: CMHeadsetCMO
+    belt: CMBeltMedicalFilled
   satchel: CMSatchelMedical
 
 - type: entity

@@ -362,7 +362,10 @@ namespace Content.Server.GameTicking
                     playerIcName = icName;
 
                 if (TryGetEntity(mind.OriginalOwnedEntity, out var entity))
-                    _pvsOverride.AddGlobalOverride(entity.Value, recursive: true);
+                {
+                    // Temporarily disabled to test if this causes issues on live servers
+                    // _pvsOverride.AddGlobalOverride(GetNetEntity(entity.Value), recursive: true);
+                }
 
                 var roles = _roles.MindGetAllRoles(mindId);
 
@@ -389,7 +392,7 @@ namespace Content.Server.GameTicking
 
             RaiseNetworkEvent(new RoundEndMessageEvent(gamemodeTitle, roundEndText, roundDuration, RoundId,
                 listOfPlayerInfoFinal.Length, listOfPlayerInfoFinal, LobbySong,
-                new SoundCollectionSpecifier("RoundEnd").GetSound()));
+                new SoundCollectionSpecifier("CMRoundEnd").GetSound()));
         }
 
         private async void SendRoundEndDiscordMessage()
@@ -611,7 +614,7 @@ namespace Content.Server.GameTicking
                 _chatSystem.DispatchGlobalAnnouncement(Loc.GetString(proto.Message), playSound: true);
 
             if (proto.Sound != null)
-                SoundSystem.Play(proto.Sound.GetSound(), Filter.Broadcast());
+                _audio.PlayGlobal(proto.Sound, Filter.Broadcast(), true);
         }
 
         private async void SendRoundStartedDiscordMessage()

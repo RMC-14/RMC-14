@@ -6,6 +6,7 @@ using Content.Shared.Effects;
 using Content.Shared.Interaction;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;

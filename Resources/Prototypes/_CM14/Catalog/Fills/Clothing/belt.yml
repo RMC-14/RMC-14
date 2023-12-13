@@ -1,0 +1,72 @@
+- type: entity
+  parent: CMBeltUtility
+  id: CMBeltUtilityFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents: #todo cm14 port tools
+      - id: Crowbar
+      - id: Wrench
+      - id: Screwdriver
+      - id: Wirecutter
+      - id: Welder
+      - id: Multitool
+
+- type: entity
+  parent: CMBeltUtilityCombat
+  id: CMBeltUtilityCombatFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents: #todo cm14 look up
+      - id: Crowbar
+      - id: Wrench
+      - id: Screwdriver
+      - id: Wirecutter
+      - id: Welder
+      - id: Multitool
+
+- type: entity
+  parent: CMBeltSecurity
+  id: CMBeltSecurityFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: GrenadeFlashBang
+      - id: GrenadeFlashBang
+      - id: Stunbaton
+      - id: Handcuffs
+      - id: Handcuffs
+
+- type: entity
+  parent: CMBeltMedical
+  id: CMBeltMedicalFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents: #todo cm14 port med stuff
+      - id: Brutepack
+        amount: 2
+      - id: Ointment
+        amount: 1
+      - id: Bloodpack
+        amount: 1
+      - id: Gauze
+      - id: EmergencyMedipen
+
+- type: entity
+  parent: CMBeltMedicBag
+  id: CMBeltMedicBagFilled
+  suffix: Filled
+  components: #todo cm14 look up but not too far
+  - type: StorageFill
+    contents:
+      - id: Brutepack
+        amount: 2
+      - id: Ointment
+        amount: 1
+      - id: Bloodpack
+        amount: 1
+      - id: Gauze
+      - id: EmergencyMedipen

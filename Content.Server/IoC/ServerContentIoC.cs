@@ -58,6 +58,7 @@ namespace Content.Server.IoC
             IoCManager.Register<ServerInfoManager>();
             IoCManager.Register<PoissonDiskSampler>();
             IoCManager.Register<DiscordWebhook>();
+            IoCManager.Register<ServerDbEntryManager>();
 
             // CM14
             IoCManager.Register<MappingManager>();
