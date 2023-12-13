@@ -1,0 +1,54 @@
+﻿- type: entity
+  parent: [WindoorAssembly, CMEntityBase]
+  id: CMWindoorAssembly
+  name: windoor assembly
+  description: It opens, it closes, and you can see through it!
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/windoor_assemblies.rsi/
+    layer:
+    - state: windoor_assembly01
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1: #todo cm14 add our own materials
+            min: 1
+            max: 3
+  - type: Construction
+    graph: CMWindoor
+    node: assembly
+
+- type: entity
+  parent: CMWindoorAssembly
+  id: CMWindoorAssemblySecure
+  name: secure windoor assembly
+  description: It opens, it closes, and you can see through it! This one looks tough.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/windoor_assemblies.rsi
+    layer:
+    - state: secure_assembly01
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetPlasteel1: #todo cm14 look up
+            min: 1
+            max: 2
+  - type: Construction
+    graph: CMWindoor
+    node: assemblySecure
+
