@@ -6,7 +6,8 @@
             <LineEdit Name="SearchBar" HorizontalExpand="True" Access="Public" />
             <Button Name="ClearSearchButton" Access="Public" Text="X" StyleClasses="ButtonSquare" />
         </BoxContainer>
-        <ScrollContainer Name="ScrollContainer" Access="Public" VerticalExpand="True">
+        <ScrollContainer Name="ScrollContainer" Access="Public" VerticalExpand="True"
+                         ReserveScrollbarSpace="True">
             <BoxContainer Name="PrototypeList" Access="Public" Orientation="Vertical" />
             <PrototypeListContainer Name="SearchList" Access="Public" Visible="False" />
         </ScrollContainer>
