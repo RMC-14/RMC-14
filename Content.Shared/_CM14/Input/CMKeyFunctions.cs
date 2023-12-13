@@ -6,4 +6,6 @@ namespace Content.Shared._CM14.Input;
 public sealed class CMKeyFunctions
 {
     public static readonly BoundKeyFunction SaveMap = "SaveMap";
+    public static readonly BoundKeyFunction MappingEnablePick = "MappingEnablePick";
+    public static readonly BoundKeyFunction MappingPick = "MappingPick";
 }

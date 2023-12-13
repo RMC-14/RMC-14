@@ -17,22 +17,18 @@
         <LayoutContainer Name="ViewportContainer" HorizontalExpand="True" VerticalExpand="True">
             <controls:MainViewport Name="MainViewport"/>
             <hotbar:HotbarGui Name="Hotbar" />
-            <BoxContainer Orientation="Horizontal">
+            <BoxContainer Orientation="Horizontal" Margin="20">
                 <mapping:MappingActionsButton
                     Name="Add" Access="Public" Disabled="True"
-                    TexturePath=""
                     ToolTip="" Visible="False" />
                 <mapping:MappingActionsButton
                     Name="Fill" Access="Public" Disabled="True"
-                    TexturePath=""
                     ToolTip="" Visible="False" />
                 <mapping:MappingActionsButton
                     Name="Grab" Access="Public" Disabled="True"
-                    TexturePath=""
                     ToolTip="" Visible="False" />
                 <mapping:MappingActionsButton
                     Name="Move" Access="Public" Disabled="True"
-                    TexturePath=""
                     ToolTip="" Visible="False" />
                 <mapping:MappingActionsButton
                     Name="Pick" Access="Public" Disabled="True"
