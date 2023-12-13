@@ -17,7 +17,28 @@
         <LayoutContainer Name="ViewportContainer" HorizontalExpand="True" VerticalExpand="True">
             <controls:MainViewport Name="MainViewport"/>
             <hotbar:HotbarGui Name="Hotbar" />
-            <mapping:MappingActionsWidget Name="Actions" Access="Public" />
+            <BoxContainer Orientation="Horizontal">
+                <mapping:MappingActionsButton
+                    Name="Add" Access="Public" Disabled="True"
+                    TexturePath=""
+                    ToolTip="" Visible="False" />
+                <mapping:MappingActionsButton
+                    Name="Fill" Access="Public" Disabled="True"
+                    TexturePath=""
+                    ToolTip="" Visible="False" />
+                <mapping:MappingActionsButton
+                    Name="Grab" Access="Public" Disabled="True"
+                    TexturePath=""
+                    ToolTip="" Visible="False" />
+                <mapping:MappingActionsButton
+                    Name="Move" Access="Public" Disabled="True"
+                    TexturePath=""
+                    ToolTip="" Visible="False" />
+                <mapping:MappingActionsButton
+                    Name="Pick" Access="Public" Disabled="True"
+                    TexturePath="/Textures/_CM14/Interface/eyedropper.svg.png"
+                    ToolTip="Pick (Hold 5)" />
+            </BoxContainer>
         </LayoutContainer>
     </controls:RecordedSplitContainer>
 </mapping:MappingScreen>

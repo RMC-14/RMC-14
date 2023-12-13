@@ -68,25 +68,8 @@ public sealed class MappingState : GameplayStateBase
         Screen.Prototypes.GetPrototypeData += OnGetData;
         Screen.Prototypes.SelectionChanged += OnSelected;
         Screen.Prototypes.CollapseToggled += OnCollapseToggled;
+        Screen.Pick.OnPressed += OnPickPressed;
         _placement.PlacementChanged += OnPlacementChanged;
-
-        var add = new MappingActionsButton() { Disabled = true };
-        Screen.Actions.AddChild(add);
-
-        var fill = new MappingActionsButton() { Disabled = true };
-        Screen.Actions.AddChild(fill);
-
-        var grab = new MappingActionsButton() { Disabled = true };
-        Screen.Actions.AddChild(grab);
-
-        var move = new MappingActionsButton() { Disabled = true };
-        Screen.Actions.AddChild(move);
-
-        var pick = new MappingActionsButton();
-        pick.TexturePath = "/Textures/_CM14/Interface/eyedropper.svg.png";
-        pick.OnPressed += OnPickPressed;
-        pick.ToolTip = "Pick (Hold 5)";
-        Screen.Actions.AddChild(pick);
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.SaveMap, new PointerInputCmdHandler(HandleSaveMap, outsidePrediction: true))
@@ -103,15 +86,8 @@ public sealed class MappingState : GameplayStateBase
         Screen.Prototypes.GetPrototypeData -= OnGetData;
         Screen.Prototypes.SelectionChanged -= OnSelected;
         Screen.Prototypes.CollapseToggled -= OnCollapseToggled;
+        Screen.Pick.OnPressed -= OnPickPressed;
         _placement.PlacementChanged -= OnPlacementChanged;
-
-        foreach (var action in Screen.Actions.Children)
-        {
-            if (action is not MappingActionsButton button)
-                continue;
-
-            button.OnPressed -= OnPickPressed;
-        }
 
         UserInterfaceManager.ClearWindows();
         _loadController.UnloadScreen();
