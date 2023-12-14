@@ -18,7 +18,14 @@ public sealed class MappingManager : IPostInjectInit
     public void PostInject()
     {
         _net.RegisterNetMessage<MappingSaveMapMessage>();
+        _net.RegisterNetMessage<MappingSaveMapErrorMessage>(OnSaveError);
         _net.RegisterNetMessage<MappingMapDataMessage>(OnMapData);
+    }
+
+    private void OnSaveError(MappingSaveMapErrorMessage message)
+    {
+        _saveStream?.DisposeAsync();
+        _saveStream = null;
     }
 
     private async void OnMapData(MappingMapDataMessage message)
@@ -38,6 +45,9 @@ public sealed class MappingManager : IPostInjectInit
 
     public async Task SaveMap()
     {
+        if (_saveStream != null)
+            await _saveStream.DisposeAsync();
+
         var request = new MappingSaveMapMessage();
         _net.ClientSendMessage(request);
 
