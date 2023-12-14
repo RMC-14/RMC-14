@@ -429,7 +429,7 @@ public sealed class MappingState : GameplayStateBase
             ToggleCollapse(button);
             button.Button.Pressed = true;
             Screen.Prototypes.Selected = button;
-            _lastClicked = (time, button);
+            _lastClicked = null;
             return;
         }
 
