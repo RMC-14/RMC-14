@@ -491,7 +491,10 @@ public sealed class MappingState : GameplayStateBase
             Screen.Prototypes.Selected = null;
 
             if (selected.Prototype?.Prototype is DecalPrototype)
+            {
                 _decal.SetActive(false);
+                Screen.DecalContainer.Visible = false;
+            }
         }
     }
 
