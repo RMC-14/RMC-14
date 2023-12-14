@@ -528,6 +528,10 @@ binds:
 
 
 # CM14
+- function: MappingUnselect
+  type: State
+  key: MouseRight
+  canFocus: true
 - function: SaveMap
   type: State
   key: S

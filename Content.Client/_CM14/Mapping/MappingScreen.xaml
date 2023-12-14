@@ -12,6 +12,30 @@
                                      StretchDirection="TopLeft">
         <BoxContainer Orientation="Vertical" VerticalExpand="True" Name="SpawnContainer" MinWidth="600">
             <mapping:MappingPrototypeList Name="Prototypes" Access="Public" VerticalExpand="True" />
+            <BoxContainer Name="DecalContainer" Access="Public" Orientation="Horizontal"
+                          Visible="False">
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                    <ColorSelectorSliders Name="DecalColorPicker" IsAlphaVisible="True" />
+                    <Button Name="DecalPickerOpen" Text="{Loc decal-placer-window-palette}"
+                            StyleClasses="ButtonSquare" />
+                </BoxContainer>
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                    <CheckBox Name="DecalEnableAuto" Margin="0 0 0 10"
+                              Text="{Loc decal-placer-window-enable-auto}" />
+                    <CheckBox Name="DecalEnableSnap"
+                              Text="{Loc decal-placer-window-enable-snap}" />
+                    <CheckBox Name="DecalEnableCleanable"
+                              Text="{Loc decal-placer-window-enable-cleanable}" />
+                    <BoxContainer Name="DecalSpinBoxContainer" Orientation="Horizontal">
+                        <Label Text="{Loc decal-placer-window-rotation}" Margin="0 0 0 1" />
+                    </BoxContainer>
+                    <BoxContainer Orientation="Horizontal">
+                        <Label Text="{Loc decal-placer-window-zindex}" Margin="0 0 0 1" />
+                        <SpinBox Name="DecalZIndexSpinBox" HorizontalExpand="True" />
+                    </BoxContainer>
+                    <CheckBox Name="DecalShowNonCMCheckbox" Text="{Loc show-non-cm-decals}" />
+                </BoxContainer>
+            </BoxContainer>
             <widgets:ChatBox Visible="False" />
         </BoxContainer>
         <LayoutContainer Name="ViewportContainer" HorizontalExpand="True" VerticalExpand="True">

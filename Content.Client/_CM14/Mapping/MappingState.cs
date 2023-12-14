@@ -77,10 +77,12 @@ public sealed class MappingState : GameplayStateBase
 
         UserInterfaceManager.LoadScreen<MappingScreen>();
         _loadController.LoadScreen();
+        _input.Contexts.GetContext("common").AddFunction(CMKeyFunctions.MappingUnselect);
         _input.Contexts.GetContext("common").AddFunction(CMKeyFunctions.SaveMap);
         _input.Contexts.GetContext("common").AddFunction(CMKeyFunctions.MappingEnablePick);
         _input.Contexts.GetContext("common").AddFunction(CMKeyFunctions.MappingPick);
 
+        Screen.DecalSystem = _decal;
         Screen.Prototypes.SearchBar.OnTextChanged += OnSearch;
         Screen.Prototypes.ClearSearchButton.OnPressed += OnClearSearch;
         Screen.Prototypes.GetPrototypeData += OnGetData;
@@ -90,6 +92,7 @@ public sealed class MappingState : GameplayStateBase
         _placement.PlacementChanged += OnPlacementChanged;
 
         CommandBinds.Builder
+            .Bind(CMKeyFunctions.MappingUnselect, new PointerInputCmdHandler(HandleMappingUnselect, outsidePrediction: true))
             .Bind(CMKeyFunctions.SaveMap, new PointerInputCmdHandler(HandleSaveMap, outsidePrediction: true))
             .Bind(CMKeyFunctions.MappingEnablePick, new PointerStateInputCmdHandler(HandleEnablePick, HandleDisablePick, outsidePrediction: true))
             .Bind(CMKeyFunctions.MappingPick, new PointerInputCmdHandler(HandlePick, outsidePrediction: true))
@@ -154,16 +157,16 @@ public sealed class MappingState : GameplayStateBase
         Sort(mappings, tiles);
         mappings.Clear();
 
-        // var decals = new MappingPrototype(null, "Decals") { Children = new List<MappingPrototype>() };
-        // _prototypes.Add(decals);
-        //
-        // foreach (var decal in _prototypeManager.EnumeratePrototypes<DecalPrototype>())
-        // {
-        //     Register(decal, decal.ID, decals);
-        // }
-        //
-        // Sort(mappings, decals);
-        // mappings.Clear();
+        var decals = new MappingPrototype(null, "Decals") { Children = new List<MappingPrototype>() };
+        _prototypes.Add(decals);
+
+        foreach (var decal in _prototypeManager.EnumeratePrototypes<DecalPrototype>())
+        {
+            Register(decal, decal.ID, decals);
+        }
+
+        Sort(mappings, decals);
+        mappings.Clear();
     }
 
     private void Sort(Dictionary<string, MappingPrototype> prototypes, MappingPrototype topLevel)
@@ -414,6 +417,9 @@ public sealed class MappingState : GameplayStateBase
     private void OnSelected(MappingSpawnButton button, IPrototype? prototype)
     {
         var time = _timing.CurTime;
+        if (prototype is DecalPrototype)
+            Screen.SelectDecal(prototype.ID);
+
         if (_lastClicked is { } lastClicked &&
             lastClicked.Button == button &&
             lastClicked.At > time - TimeSpan.FromSeconds(0.333) &&
@@ -449,13 +455,25 @@ public sealed class MappingState : GameplayStateBase
                 placement.PlacementOption = entity.PlacementMode;
                 placement.EntityType = entity.ID;
                 placement.IsTile = false;
+                Screen.DecalContainer.Visible = false;
+                _decal.SetActive(false);
                 break;
-            case DecalPrototype:
-                break;
+            case DecalPrototype decal:
+                _placement.Clear();
+
+                _decal.SetActive(true);
+                _decal.UpdateDecalInfo(decal.ID, Color.White, 0, true, 0, false);
+
+                Screen.Prototypes.Selected = button;
+                button.Button.Pressed = true;
+                Screen.DecalContainer.Visible = true;
+                return;
             case ContentTileDefinition tile:
                 placement.PlacementOption = "AlignTileAny";
                 placement.TileType = tile.TileId;
                 placement.IsTile = true;
+                Screen.DecalContainer.Visible = false;
+                _decal.SetActive(false);
                 break;
         }
 
@@ -471,6 +489,9 @@ public sealed class MappingState : GameplayStateBase
         {
             selected.Button.Pressed = false;
             Screen.Prototypes.Selected = null;
+
+            if (selected.Prototype?.Prototype is DecalPrototype)
+                _decal.SetActive(false);
         }
     }
 
@@ -494,6 +515,15 @@ public sealed class MappingState : GameplayStateBase
     {
         Screen.Pick.Pressed = false;
         State = CursorState.None;
+    }
+
+    private bool HandleMappingUnselect(in PointerInputCmdArgs args)
+    {
+        if (Screen.Prototypes.Selected is not { Prototype.Prototype: DecalPrototype })
+            return false;
+
+        Deselect();
+        return true;
     }
 
     private bool HandleSaveMap(in PointerInputCmdArgs args)
