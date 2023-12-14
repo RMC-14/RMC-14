@@ -444,40 +444,47 @@ public sealed class MappingState : GameplayStateBase
             Deselect();
         }
 
-        if (prototype == null)
-            return;
-
-        var placement = new PlacementInformation();
-
         switch (prototype)
         {
             case EntityPrototype entity:
-                placement.PlacementOption = entity.PlacementMode;
-                placement.EntityType = entity.ID;
-                placement.IsTile = false;
+            {
+                var placement = new PlacementInformation
+                {
+                    PlacementOption = entity.PlacementMode,
+                    EntityType = entity.ID,
+                    IsTile = false
+                };
+
                 Screen.DecalContainer.Visible = false;
                 _decal.SetActive(false);
+                _placement.BeginPlacing(placement);
                 break;
+            }
             case DecalPrototype decal:
                 _placement.Clear();
 
                 _decal.SetActive(true);
                 _decal.UpdateDecalInfo(decal.ID, Color.White, 0, true, 0, false);
-
-                Screen.Prototypes.Selected = button;
-                button.Button.Pressed = true;
                 Screen.DecalContainer.Visible = true;
-                return;
+                break;
             case ContentTileDefinition tile:
-                placement.PlacementOption = "AlignTileAny";
-                placement.TileType = tile.TileId;
-                placement.IsTile = true;
+            {
+                var placement = new PlacementInformation
+                {
+                    PlacementOption = "AlignTileAny",
+                    TileType = tile.TileId,
+                    IsTile = true
+                };
+
                 Screen.DecalContainer.Visible = false;
                 _decal.SetActive(false);
+                _placement.BeginPlacing(placement);
+                break;
+            }
+            default:
+                _placement.Clear();
                 break;
         }
-
-        _placement.BeginPlacing(placement);
 
         Screen.Prototypes.Selected = button;
         button.Button.Pressed = true;
