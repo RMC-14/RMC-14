@@ -84,6 +84,7 @@ public sealed class MappingState : GameplayStateBase
 
         Screen.DecalSystem = _decal;
         Screen.Prototypes.SearchBar.OnTextChanged += OnSearch;
+        Screen.Prototypes.CollapseAllButton.OnPressed += OnCollapseAll;
         Screen.Prototypes.ClearSearchButton.OnPressed += OnClearSearch;
         Screen.Prototypes.GetPrototypeData += OnGetData;
         Screen.Prototypes.SelectionChanged += OnSelected;
@@ -352,6 +353,19 @@ public sealed class MappingState : GameplayStateBase
         Screen.Prototypes.Search(matches);
     }
 
+    private void OnCollapseAll(ButtonEventArgs args)
+    {
+        foreach (var child in Screen.Prototypes.PrototypeList.Children)
+        {
+            if (child is not MappingSpawnButton button)
+                continue;
+
+            Collapse(button);
+        }
+
+        Screen.Prototypes.ScrollContainer.SetScrollValue(new Vector2(0, 0));
+    }
+
     private void OnClearSearch(ButtonEventArgs obj)
     {
         Screen.Prototypes.SearchBar.Text = string.Empty;
@@ -604,6 +618,16 @@ public sealed class MappingState : GameplayStateBase
             button.CollapseButton.Label.Text = "▶";
         }
     }
+
+    private void Collapse(MappingSpawnButton button)
+    {
+        if (!button.CollapseButton.Pressed)
+            return;
+
+        button.CollapseButton.Pressed = false;
+        ToggleCollapse(button);
+    }
+
 
     private void UnCollapse(MappingSpawnButton button)
     {
