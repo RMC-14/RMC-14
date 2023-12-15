@@ -1,5 +1,7 @@
 ﻿<controls:MappingActionsButton
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._CM14.Mapping"
-    StyleClasses="ButtonSquare" ToggleMode="True" SetSize="32 32">
+    StyleClasses="ButtonSquare" ToggleMode="True" SetSize="48 48">
+    <TextureRect Name="Texture" Access="Public" Stretch="Scale" SetSize="32 32"
+                 HorizontalAlignment="Center" VerticalAlignment="Center" />
 </controls:MappingActionsButton>

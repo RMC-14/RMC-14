@@ -9,4 +9,6 @@ public sealed class CMKeyFunctions
     public static readonly BoundKeyFunction SaveMap = "SaveMap";
     public static readonly BoundKeyFunction MappingEnablePick = "MappingEnablePick";
     public static readonly BoundKeyFunction MappingPick = "MappingPick";
+    public static readonly BoundKeyFunction MappingRemoveDecal = "MappingRemoveDecal";
+    public static readonly BoundKeyFunction MappingCancelEraseDecal = "MappingCancelEraseDecal";
 }

@@ -5,7 +5,7 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._CM14.Mapping;
 
 [GenerateTypedNameReferences]
-public sealed partial class MappingActionsButton : TextureButton
+public sealed partial class MappingActionsButton : Button
 {
     public MappingActionsButton()
     {

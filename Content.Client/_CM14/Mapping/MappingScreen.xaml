@@ -4,6 +4,7 @@
     xmlns:mapping="clr-namespace:Content.Client._CM14.Mapping"
     xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.Chat.Widgets"
     xmlns:hotbar="clr-namespace:Content.Client.UserInterface.Systems.Hotbar.Widgets"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     VerticalExpand="False"
     VerticalAlignment="Bottom"
     HorizontalAlignment="Center">
@@ -36,29 +37,48 @@
                     <CheckBox Name="DecalShowNonCMCheckbox" Text="{Loc show-non-cm-decals}" />
                 </BoxContainer>
             </BoxContainer>
+            <BoxContainer Name="EntityContainer" Access="Public" Orientation="Horizontal"
+                          Visible="False">
+                <Button Name="EntityReplaceButton" Access="Public" ToggleMode="True"
+                        StyleClasses="ButtonSquare" Text="Replace" HorizontalExpand="True" />
+                <OptionButton Name="EntityPlacementMode" Access="Public"
+                              StyleClasses="ButtonSquare" TooltipDelay="0"
+                              ToolTip="{Loc entity-spawn-window-override-menu-tooltip}"
+                              HorizontalExpand="True" />
+            </BoxContainer>
+            <BoxContainer Orientation="Horizontal">
+                <Button Name="EraseEntityButton" Access="Public" HorizontalExpand="True"
+                        ToggleMode="True" Text="Erase Entity" StyleClasses="ButtonSquare" />
+                <Button Name="EraseDecalButton" Access="Public" HorizontalExpand="True"
+                        ToggleMode="True" Text="Erase Decal" StyleClasses="ButtonSquare" />
+            </BoxContainer>
             <widgets:ChatBox Visible="False" />
         </BoxContainer>
         <LayoutContainer Name="ViewportContainer" HorizontalExpand="True" VerticalExpand="True">
             <controls:MainViewport Name="MainViewport"/>
             <hotbar:HotbarGui Name="Hotbar" />
-            <BoxContainer Orientation="Horizontal" Margin="20">
-                <mapping:MappingActionsButton
-                    Name="Add" Access="Public" Disabled="True"
-                    ToolTip="" Visible="False" />
-                <mapping:MappingActionsButton
-                    Name="Fill" Access="Public" Disabled="True"
-                    ToolTip="" Visible="False" />
-                <mapping:MappingActionsButton
-                    Name="Grab" Access="Public" Disabled="True"
-                    ToolTip="" Visible="False" />
-                <mapping:MappingActionsButton
-                    Name="Move" Access="Public" Disabled="True"
-                    ToolTip="" Visible="False" />
-                <mapping:MappingActionsButton
-                    Name="Pick" Access="Public" Disabled="True"
-                    TexturePath="/Textures/_CM14/Interface/eyedropper.svg.png"
-                    ToolTip="Pick (Hold 5)" />
-            </BoxContainer>
+            <PanelContainer Name="Actions" VerticalExpand="True" HorizontalExpand="True"
+                            MaxHeight="64">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BackgroundColor="#222222AA" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Horizontal" Margin="15 10">
+                    <mapping:MappingActionsButton
+                        Name="Add" Access="Public" Disabled="True"
+                        ToolTip="" Visible="False" />
+                    <mapping:MappingActionsButton
+                        Name="Fill" Access="Public" Disabled="True"
+                        ToolTip="" Visible="False" />
+                    <mapping:MappingActionsButton
+                        Name="Grab" Access="Public" Disabled="True"
+                        ToolTip="" Visible="False" />
+                    <mapping:MappingActionsButton
+                        Name="Move" Access="Public" Disabled="True"
+                        ToolTip="" Visible="False" />
+                    <mapping:MappingActionsButton
+                        Name="Pick" Access="Public" ToolTip="Pick (Hold 5)" TooltipDelay="0" />
+                </BoxContainer>
+            </PanelContainer>
         </LayoutContainer>
     </controls:RecordedSplitContainer>
 </mapping:MappingScreen>

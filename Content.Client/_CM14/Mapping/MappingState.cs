@@ -15,7 +15,9 @@ using Robust.Client.Input;
 using Robust.Client.Placement;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
+using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Enums;
+using Robust.Shared.Input;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
@@ -27,6 +29,7 @@ using Robust.Shared.Utility;
 using static System.StringComparison;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 using static Robust.Client.UserInterface.Controls.LineEdit;
+using static Robust.Client.UserInterface.Controls.OptionButton;
 using static Robust.Shared.Input.Binding.PointerInputCmdHandler;
 
 namespace Content.Client._CM14.Mapping;
@@ -35,6 +38,7 @@ public sealed class MappingState : GameplayStateBase
 {
     [Dependency] private readonly IClientAdminManager _admin = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly IEntityNetworkManager _entityNetwork = default!;
     [Dependency] private readonly IInputManager _input = default!;
     [Dependency] private readonly ILogManager _log = default!;
     [Dependency] private readonly MappingManager _mapping = default!;
@@ -56,6 +60,8 @@ public sealed class MappingState : GameplayStateBase
     private readonly List<MappingPrototype> _prototypes = new();
     private (TimeSpan At, MappingSpawnButton Button)? _lastClicked;
     private Control? _scrollTo;
+    private bool _updatePlacement;
+    private bool _updateEraseDecal;
 
     private MappingScreen Screen => (MappingScreen) UserInterfaceManager.ActiveScreen!;
     private MainViewport Viewport => UserInterfaceManager.ActiveScreen!.GetWidget<MainViewport>()!;
@@ -81,6 +87,8 @@ public sealed class MappingState : GameplayStateBase
         _input.Contexts.GetContext("common").AddFunction(CMKeyFunctions.SaveMap);
         _input.Contexts.GetContext("common").AddFunction(CMKeyFunctions.MappingEnablePick);
         _input.Contexts.GetContext("common").AddFunction(CMKeyFunctions.MappingPick);
+        _input.Contexts.GetContext("common").AddFunction(CMKeyFunctions.MappingRemoveDecal);
+        _input.Contexts.GetContext("common").AddFunction(CMKeyFunctions.MappingCancelEraseDecal);
 
         Screen.DecalSystem = _decal;
         Screen.Prototypes.SearchBar.OnTextChanged += OnSearch;
@@ -90,6 +98,10 @@ public sealed class MappingState : GameplayStateBase
         Screen.Prototypes.SelectionChanged += OnSelected;
         Screen.Prototypes.CollapseToggled += OnCollapseToggled;
         Screen.Pick.OnPressed += OnPickPressed;
+        Screen.EntityReplaceButton.OnToggled += OnEntityReplacePressed;
+        Screen.EntityPlacementMode.OnItemSelected += OnEntityPlacementSelected;
+        Screen.EraseEntityButton.OnToggled += OnEraseEntityPressed;
+        Screen.EraseDecalButton.OnToggled += OnEraseDecalPressed;
         _placement.PlacementChanged += OnPlacementChanged;
 
         CommandBinds.Builder
@@ -97,6 +109,8 @@ public sealed class MappingState : GameplayStateBase
             .Bind(CMKeyFunctions.SaveMap, new PointerInputCmdHandler(HandleSaveMap, outsidePrediction: true))
             .Bind(CMKeyFunctions.MappingEnablePick, new PointerStateInputCmdHandler(HandleEnablePick, HandleDisablePick, outsidePrediction: true))
             .Bind(CMKeyFunctions.MappingPick, new PointerInputCmdHandler(HandlePick, outsidePrediction: true))
+            .Bind(CMKeyFunctions.MappingRemoveDecal, new PointerInputCmdHandler(HandleEditorCancelPlace, outsidePrediction: true))
+            .Bind(CMKeyFunctions.MappingCancelEraseDecal, new PointerInputCmdHandler(HandleCancelEraseDecal, outsidePrediction: true))
             .Register<MappingState>();
 
         _overlays.AddOverlay(new MappingOverlay(this));
@@ -109,16 +123,28 @@ public sealed class MappingState : GameplayStateBase
         CommandBinds.Unregister<MappingState>();
 
         Screen.Prototypes.SearchBar.OnTextChanged -= OnSearch;
+        Screen.Prototypes.CollapseAllButton.OnPressed -= OnCollapseAll;
+        Screen.Prototypes.ClearSearchButton.OnPressed -= OnClearSearch;
         Screen.Prototypes.GetPrototypeData -= OnGetData;
         Screen.Prototypes.SelectionChanged -= OnSelected;
         Screen.Prototypes.CollapseToggled -= OnCollapseToggled;
         Screen.Pick.OnPressed -= OnPickPressed;
+        Screen.EntityReplaceButton.OnToggled -= OnEntityReplacePressed;
+        Screen.EntityPlacementMode.OnItemSelected -= OnEntityPlacementSelected;
+        Screen.EraseEntityButton.OnToggled -= OnEraseEntityPressed;
+        Screen.EraseDecalButton.OnToggled -= OnEraseDecalPressed;
         _placement.PlacementChanged -= OnPlacementChanged;
 
         UserInterfaceManager.ClearWindows();
         _loadController.UnloadScreen();
         UserInterfaceManager.UnloadScreen();
+        _input.Contexts.GetContext("common").RemoveFunction(CMKeyFunctions.MappingUnselect);
         _input.Contexts.GetContext("common").RemoveFunction(CMKeyFunctions.SaveMap);
+        _input.Contexts.GetContext("common").RemoveFunction(CMKeyFunctions.MappingEnablePick);
+        _input.Contexts.GetContext("common").RemoveFunction(CMKeyFunctions.MappingPick);
+        _input.Contexts.GetContext("common").RemoveFunction(CMKeyFunctions.MappingRemoveDecal);
+        _input.Contexts.GetContext("common").RemoveFunction(CMKeyFunctions.MappingCancelEraseDecal);
+        _input.Contexts.GetContext("common").RemoveFunction(CMKeyFunctions.MappingCancelEraseDecal);
 
         _overlays.RemoveOverlay<MappingOverlay>();
 
@@ -319,7 +345,7 @@ public sealed class MappingState : GameplayStateBase
 
     private void OnPlacementChanged(object? sender, EventArgs e)
     {
-        Deselect();
+        _updatePlacement = true;
     }
 
     protected override void OnKeyBindStateChanged(ViewportBoundKeyEventArgs args)
@@ -458,6 +484,9 @@ public sealed class MappingState : GameplayStateBase
             Deselect();
         }
 
+        Screen.EntityContainer.Visible = false;
+        Screen.DecalContainer.Visible = false;
+
         switch (prototype)
         {
             case EntityPrototype entity:
@@ -469,7 +498,7 @@ public sealed class MappingState : GameplayStateBase
                     IsTile = false
                 };
 
-                Screen.DecalContainer.Visible = false;
+                Screen.EntityContainer.Visible = true;
                 _decal.SetActive(false);
                 _placement.BeginPlacing(placement);
                 break;
@@ -490,7 +519,6 @@ public sealed class MappingState : GameplayStateBase
                     IsTile = true
                 };
 
-                Screen.DecalContainer.Visible = false;
                 _decal.SetActive(false);
                 _placement.BeginPlacing(placement);
                 break;
@@ -526,7 +554,52 @@ public sealed class MappingState : GameplayStateBase
 
     private void OnPickPressed(ButtonEventArgs args)
     {
-        EnablePick();
+        if (args.Button.Pressed)
+            EnablePick();
+        else
+            DisablePick();
+    }
+
+    private void OnEntityReplacePressed(ButtonToggledEventArgs args)
+    {
+        _placement.Replacement = args.Pressed;
+    }
+
+    private void OnEntityPlacementSelected(ItemSelectedEventArgs args)
+    {
+        Screen.EntityPlacementMode.SelectId(args.Id);
+
+        if (_placement.CurrentMode != null)
+        {
+            var placement = new PlacementInformation
+            {
+                PlacementOption = EntitySpawnWindow.InitOpts[args.Id],
+                EntityType = _placement.CurrentPermission!.EntityType,
+                TileType = _placement.CurrentPermission.TileType,
+                Range = 2,
+                IsTile = _placement.CurrentPermission.IsTile,
+            };
+
+            _placement.BeginPlacing(placement);
+        }
+    }
+
+    private void OnEraseEntityPressed(ButtonEventArgs args)
+    {
+        if (args.Button.Pressed != _placement.Eraser)
+            _placement.ToggleEraser();
+
+        Screen.EntityPlacementMode.Disabled = _placement.Eraser;
+        Screen.EraseDecalButton.Pressed = false;
+        Deselect();
+    }
+
+    private void OnEraseDecalPressed(ButtonToggledEventArgs args)
+    {
+        _placement.Clear();
+        Deselect();
+        Screen.EraseEntityButton.Pressed = false;
+        _updateEraseDecal = true;
     }
 
     private void EnablePick()
@@ -593,6 +666,24 @@ public sealed class MappingState : GameplayStateBase
         return true;
     }
 
+    private bool HandleEditorCancelPlace(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
+    {
+        if (!Screen.EraseDecalButton.Pressed)
+            return false;
+
+        _entityNetwork.SendSystemNetworkMessage(new RequestDecalRemovalEvent(_entityManager.GetNetCoordinates(coords)));
+        return true;
+    }
+
+    private bool HandleCancelEraseDecal(in PointerInputCmdArgs args)
+    {
+        if (!Screen.EraseDecalButton.Pressed)
+            return false;
+
+        Screen.EraseDecalButton.Pressed = false;
+        return true;
+    }
+
     private async void SaveMap()
     {
         await _mapping.SaveMap();
@@ -640,6 +731,20 @@ public sealed class MappingState : GameplayStateBase
 
     public override void FrameUpdate(FrameEventArgs e)
     {
+        if (_updatePlacement)
+        {
+            _updatePlacement = false;
+
+            if (!_placement.IsActive && _decal.GetActiveDecal().Decal == null)
+                Deselect();
+
+            Screen.EraseEntityButton.Pressed = _placement.Eraser;
+            Screen.EraseDecalButton.Pressed = _updateEraseDecal;
+            Screen.EntityPlacementMode.Disabled = _placement.Eraser;
+
+            _updateEraseDecal = false;
+        }
+
         if (_scrollTo is not { } scrollTo)
             return;
 
