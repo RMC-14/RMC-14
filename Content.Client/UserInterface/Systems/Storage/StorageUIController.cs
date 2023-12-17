@@ -304,8 +304,9 @@ public sealed class StorageUIController : UIController, IOnSystemChanged<Storage
 
             _container?.BuildItemPieces();
         }
-        else //if we just clicked, then take it out of the bag.
+        else if (control.Has((args.PointerLocation.Position - control.GlobalPixelPosition) / control.UIScale))
         {
+            //if we just clicked, then take it out of the bag.
             _entity.RaisePredictiveEvent(new StorageInteractWithItemEvent(
                 _entity.GetNetEntity(control.Entity),
                 _entity.GetNetEntity(storageEnt)));
