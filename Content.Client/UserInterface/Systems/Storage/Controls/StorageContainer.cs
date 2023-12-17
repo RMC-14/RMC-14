@@ -456,6 +456,7 @@ public sealed class StorageContainer : BaseWindow
                         _entity.GetNetEntity(handEntity),
                         _entity.GetNetEntity(StorageEntity.Value),
                         insertLocation));
+                    _storageController.DraggingRotation = Angle.Zero;
                     args.Handle();
                 }
             }
