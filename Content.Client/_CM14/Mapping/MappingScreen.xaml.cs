@@ -97,6 +97,7 @@ public sealed partial class MappingScreen : InGameScreen
         }
 
         Pick.Texture.TexturePath = "/Textures/_CM14/Interface/eyedropper.svg.png";
+        Delete.Texture.TexturePath = "/Textures/_CM14/Interface/eraser.svg.png";
     }
 
     private void OnDecalColorPicked(Color color)
@@ -187,15 +188,6 @@ public sealed partial class MappingScreen : InGameScreen
         ScreenContainer.ResizeMode = SplitContainer.SplitResizeMode.RespectChildrenMinSize;
     }
 
-    public IEnumerable<Control> GetActions()
-    {
-        yield return Add;
-        yield return Fill;
-        yield return Grab;
-        yield return Move;
-        yield return Pick;
-    }
-
     public void UnPressActionsExcept(Control except)
     {
         Add.Pressed = Add == except;
@@ -203,5 +195,6 @@ public sealed partial class MappingScreen : InGameScreen
         Grab.Pressed = Grab == except;
         Move.Pressed = Move == except;
         Pick.Pressed = Pick == except;
+        Delete.Pressed = Delete == except;
     }
 }

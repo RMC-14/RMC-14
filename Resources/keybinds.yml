@@ -539,6 +539,9 @@ binds:
 - function: MappingEnablePick
   type: State
   key: Num5
+- function: MappingEnableDelete
+  type: State
+  key: Num6
 - function: MappingPick
   type: State
   key: MouseLeft
@@ -548,6 +551,10 @@ binds:
   key: MouseLeft
   canFocus: true
 - function: MappingCancelEraseDecal
+  type: State
+  key: MouseRight
+  canFocus: true
+- function: MappingOpenContextMenu
   type: State
   key: MouseRight
   canFocus: true

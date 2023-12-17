@@ -58,25 +58,23 @@
             <controls:MainViewport Name="MainViewport"/>
             <hotbar:HotbarGui Name="Hotbar" />
             <PanelContainer Name="Actions" VerticalExpand="True" HorizontalExpand="True"
-                            MaxHeight="64">
+                            MaxHeight="48">
                 <PanelContainer.PanelOverride>
                     <graphics:StyleBoxFlat BackgroundColor="#222222AA" />
                 </PanelContainer.PanelOverride>
                 <BoxContainer Orientation="Horizontal" Margin="15 10">
                     <mapping:MappingActionsButton
-                        Name="Add" Access="Public" Disabled="True"
-                        ToolTip="" Visible="False" />
-                    <mapping:MappingActionsButton
-                        Name="Fill" Access="Public" Disabled="True"
-                        ToolTip="" Visible="False" />
-                    <mapping:MappingActionsButton
-                        Name="Grab" Access="Public" Disabled="True"
-                        ToolTip="" Visible="False" />
-                    <mapping:MappingActionsButton
-                        Name="Move" Access="Public" Disabled="True"
-                        ToolTip="" Visible="False" />
-                    <mapping:MappingActionsButton
-                        Name="Pick" Access="Public" ToolTip="Pick (Hold 5)" TooltipDelay="0" />
+                        Name="Add" Access="Public" Disabled="True" ToolTip="" Visible="False" />
+                    <mapping:MappingActionsButton Name="Fill" Access="Public"
+                                                  ToolTip="" Visible="False" />
+                    <mapping:MappingActionsButton Name="Grab" Access="Public"
+                                                  ToolTip="" Visible="False" />
+                    <mapping:MappingActionsButton Name="Move" Access="Public"
+                                                  ToolTip="" Visible="False" />
+                    <mapping:MappingActionsButton Name="Pick" Access="Public"
+                                                  ToolTip="Pick (Hold 5)" />
+                    <mapping:MappingActionsButton Name="Delete" Access="Public"
+                                                  ToolTip="Delete (Hold 6)" />
                 </BoxContainer>
             </PanelContainer>
         </LayoutContainer>
