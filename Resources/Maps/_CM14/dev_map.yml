@@ -6200,7 +6200,7 @@ entities:
             ReagentId: Water
             Quantity: 25
       type: SolutionContainerManager
-- proto: Multitool
+- proto: CMMultitool
   entities:
   - uid: 307
     components:

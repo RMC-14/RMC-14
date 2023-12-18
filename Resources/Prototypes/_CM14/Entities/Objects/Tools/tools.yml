@@ -1,15 +1,11 @@
 ﻿- type: entity
-  name: screwdriver
-  parent: [BaseItem, CMEntityBase]
+  parent: [Screwdriver, CMEntityBase]
   id: CMScrewdriver
-  description: Industrial grade torque in a small screwdriving package.
   components:
-  - type: EmitSoundOnLand
-    sound:
-      path: /Audio/Items/screwdriver_drop.ogg
-  - type: Tag
-    tags:
-    - Screwdriver
+  - type: RandomSprite
+    available:
+    - enum.DamageStateVisualLayers.Base:
+        screwdriver: Rainbow
   - type: Sprite
     sprite: _CM14/Objects/Tools/screwdriver.rsi
     layers:
@@ -18,148 +14,57 @@
     - state: screwdriver-screwybits
   - type: Item
     sprite: _CM14/Objects/Tools/screwdriver.rsi
-  - type: ItemCooldown
-  - type: MeleeWeapon
-    wideAnimationRotation: -135
-    attackRate: 1
-    damage:
-      types:
-        Piercing: 6
-    soundHit:
-      path: "/Audio/Weapons/bladeslice.ogg"
-  - type: Tool
-    qualities:
-    - Screwing
-    useSound:
-      collection: Screwdriver
-  - type: RandomSprite
-    available:
-    - enum.DamageStateVisualLayers.Base:
-        screwdriver: Rainbow
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 100
-  - type: StaticPrice
-    price: 30
 
 - type: entity
-  name: wirecutter
-  parent: [BaseItem, CMEntityBase]
+  parent: [Wirecutter, CMEntityBase]
   id: CMWirecutter
-  description: This kills the wire.
   components:
-  - type: EmitSoundOnLand
-    sound:
-      path: /Audio/Items/wirecutter_drop.ogg
-  - type: Tag
-    tags:
-    - PlantSampleTaker
-    - Wirecutter
   - type: Sprite
     sprite: _CM14/Objects/Tools/wirecutters.rsi
     layers:
     - state: cutters
       map: [ "enum.DamageStateVisualLayers.Base" ]
     - state: cutters-cutty-thingy
-  - type: ItemCooldown
-  - type: MeleeWeapon
-    wideAnimationRotation: -90
-    damage:
-      types:
-        Piercing: 2
-    attackRate: 2 #open and close that shit on their arm like hell! because you sure aren't doing any damage with this
-    soundHit:
-      path: "/Audio/Items/wirecutter.ogg"
-  - type: Tool
-    qualities:
-    - Cutting
-    useSound:
-      path: /Audio/Items/wirecutter.ogg
   - type: RandomSprite
     available:
     - enum.DamageStateVisualLayers.Base:
         cutters: Rainbow
   - type: Item
     sprite: _CM14/Objects/Tools/wirecutters.rsi
-  - type: LatticeCutting
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 100
-  - type: StaticPrice
-    price: 30
 
 - type: entity
-  name: wrench
-  parent: [BaseItem, CMEntityBase]
+  parent: [Wrench, CMEntityBase]
   id: CMWrench
-  description: 'A common tool for assembly and disassembly. Remember: righty tighty, lefty loosey.'
   components:
-  - type: EmitSoundOnLand
-    sound:
-      path: /Audio/Items/wrench_drop.ogg
-  - type: Tag
-    tags:
-    - Wrench
   - type: Sprite
     sprite: _CM14/Objects/Tools/wrench.rsi
     state: icon
   - type: Item
     sprite: _CM14/Objects/Tools/wrench.rsi
-  - type: ItemCooldown
-  - type: MeleeWeapon
-    wideAnimationRotation: 90
-    attackRate: 1.5
-    damage:
-      types:
-        Blunt: 4.5
-  - type: Tool
-    qualities:
-    - Anchoring
-    useSound:
-      path: /Audio/Items/ratchet.ogg
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 100
-  - type: StaticPrice
-    price: 22
 
 - type: entity
-  name: crowbar
-  parent: [BaseItem, CMEntityBase]
-  id: CMCrowbar
-  description: A multipurpose tool to pry open doors and fight interdimensional invaders.
+  parent: [Multitool, CMEntityBase]
+  id: CMMultitool
+  name: Security Access Tuner
+  description: A small handheld tool used to override various machine functions.
+  suffix: Multitool
   components:
-  - type: EmitSoundOnLand
-    sound:
-      path: /Audio/Items/crowbar_drop.ogg
-  - type: Tag
-    tags:
-    - Crowbar
+  - type: Sprite
+    sprite: _CM14/Objects/Tools/multitool.rsi
+    layers: []
+    state: multitool
+  - type: Item
+    sprite: _CM14/Objects/Tools/multitool.rsi
+
+- type: entity
+  parent: [Crowbar, CMEntityBase]
+  id: CMCrowbar
+  components:
   - type: Sprite
     sprite: _CM14/Objects/Tools/crowbar.rsi
     state: icon
   - type: Item
     sprite: _CM14/Objects/Tools/crowbar.rsi
-    size: Small
-  - type: ItemCooldown
-  - type: MeleeWeapon
-    wideAnimationRotation: -135
-    damage:
-      types:
-        Blunt: 8
-        Structural: 3
-  - type: Tool
-    qualities:
-    - Prying
-    useSound:
-      path: /Audio/Items/crowbar.ogg
-  - type: TilePrying
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 100
-  - type: StaticPrice
-    price: 22
-  - type: Prying
 
 - type: entity
   parent: CMCrowbar
