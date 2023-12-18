@@ -7527,7 +7527,7 @@ entities:
     - pos: -3.540575,0.22128543
       parent: 179
       type: Transform
-- proto: WelderExperimental
+- proto: CMWelder
   entities:
   - uid: 343
     components:
