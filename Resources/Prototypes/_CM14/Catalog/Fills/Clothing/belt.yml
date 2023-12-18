@@ -10,7 +10,7 @@
       - id: CMScrewdriver
       - id: CMWirecutter
       - id: CMWelder
-      - id: Multitool
+      - id: CMMultitool
 
 - type: entity
   parent: CMBeltUtilityCombat
@@ -24,7 +24,7 @@
       - id: CMScrewdriver
       - id: CMWirecutter
       - id: CMWelder
-      - id: Multitool
+      - id: CMMultitool
 
 - type: entity
   parent: CMBeltSecurity
