@@ -20,10 +20,12 @@ public sealed class BarbedSystem : EntitySystem
         SubscribeLocalEvent<BarbedComponent, AttackedEvent>(OnAttacked);
         SubscribeLocalEvent<BarbedComponent, InteractUsingEvent>(OnInteractUsing);
     }
+    
     private void OnInit(EntityUid uid, BarbedComponent component, ComponentStartup args)
     {
         component.BarbedSlot = _containerSystem.EnsureContainer<ContainerSlot>(uid, "barbed_slot");
     }
+
     private void OnInteractUsing(EntityUid uid, BarbedComponent component, InteractUsingEvent args)
     {
         if (!HasComp<BarbedwireComponent>(args.Used))
@@ -33,13 +35,12 @@ public sealed class BarbedSystem : EntitySystem
 
         if (Exists(component.BarbedSlot.ContainedEntity))
         {
-            _popupSystem.PopupEntity(Loc.GetString("barbed-wire-slot-insert-full"), uid, args.User, PopupType.Small);
+            _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-insert-full"), uid, args.User, PopupType.Small);
             return;
-        }
-
+        }  
         component.BarbedSlot.Insert(args.Used);
         _appearance.SetData(uid, BarbedWireVisuals.Wired, true);
-        _popupSystem.PopupEntity(Loc.GetString("barbed-wire-slot-insert-success"), uid, args.User, PopupType.Small);
+        _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-insert-success"), uid, args.User, PopupType.Small);
         return;
     }
     
@@ -48,9 +49,8 @@ public sealed class BarbedSystem : EntitySystem
         if (Exists(component.BarbedSlot.ContainedEntity))
         {
             _damageableSystem.TryChangeDamage(args.User, component.thornsDamage); //not sure how to add prediction here
-            _popupSystem.PopupEntity(Loc.GetString("barbed-wire-damage"), uid, args.User, PopupType.SmallCaution);
+            _popupSystem.PopupClient(Loc.GetString("barbed-wire-damage"), uid, args.User, PopupType.SmallCaution);
             return;
         }
-        return;
     }
 }
