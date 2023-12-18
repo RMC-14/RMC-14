@@ -171,7 +171,7 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
 
         // Is the action currently valid?
         if (!action.Enabled
-            || action.Charges is 0
+            || action is { Charges: 0, RenewCharges: false }
             || action.Cooldown.HasValue && action.Cooldown.Value.End > _timing.CurTime)
         {
             // The user is targeting with this action, but it is not valid. Maybe mark this click as
@@ -730,7 +730,7 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
 
     private void LoadGui()
     {
-        DebugTools.Assert(_window == null);
+        UnloadGui();
         _window = UIManager.CreateWindow<ActionsWindow>();
         LayoutContainer.SetAnchorPreset(_window, LayoutContainer.LayoutPreset.CenterTop);
 

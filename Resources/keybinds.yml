@@ -163,6 +163,13 @@ binds:
 - function: SwapHands
   type: State
   key: X
+- function: MoveStoredItem
+  type: State
+  key: MouseLeft
+  canFocus: true
+- function: RotateStoredItem
+  type: State
+  key: MouseRight
 - function: Drop
   type: State
   key: Q
@@ -236,6 +243,13 @@ binds:
 - function: SmartEquipBelt
   type: State
   key: E
+  mod1: Shift
+- function: OpenBackpack
+  type: State
+  key: V
+- function: OpenBelt
+  type: State
+  key: V
   mod1: Shift
 - function: ShowDebugConsole
   type: State
@@ -510,3 +524,37 @@ binds:
 - function: Hotbar9
   type: State
   key: Num9
+
+
+
+# CM14
+- function: MappingUnselect
+  type: State
+  key: MouseRight
+  canFocus: true
+- function: SaveMap
+  type: State
+  key: S
+  mod1: Control
+- function: MappingEnablePick
+  type: State
+  key: Num5
+- function: MappingEnableDelete
+  type: State
+  key: Num6
+- function: MappingPick
+  type: State
+  key: MouseLeft
+  canFocus: true
+- function: MappingRemoveDecal
+  type: State
+  key: MouseLeft
+  canFocus: true
+- function: MappingCancelEraseDecal
+  type: State
+  key: MouseRight
+  canFocus: true
+- function: MappingOpenContextMenu
+  type: State
+  key: MouseRight
+  canFocus: true

@@ -1,3 +1,4 @@
+using Content.Server._CM14.Mapping;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
@@ -57,6 +58,10 @@ namespace Content.Server.IoC
             IoCManager.Register<ServerInfoManager>();
             IoCManager.Register<PoissonDiskSampler>();
             IoCManager.Register<DiscordWebhook>();
+            IoCManager.Register<ServerDbEntryManager>();
+
+            // CM14
+            IoCManager.Register<MappingManager>();
         }
     }
 }

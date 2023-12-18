@@ -18,7 +18,7 @@
 
 # Black Boots
 - type: entity
-  parent: [ClothingShoesStorageBase, CMEntityBase]
+  parent: [ClothingShoesMilitaryBase, CMEntityBase]
   id: CMBootsBlack
   name: black boots
   description: Standard issue combat boots used by the USCM for combat situations.  All combat, all the time.
@@ -28,19 +28,23 @@
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Shoes/Marines/black.rsi
   - type: Matchbox
-  - type: Storage
-    whitelist:
-      tags:
-      - Knife
-      - Sidearm
+  - type: ItemSlots
+    slots:
+      item:
+        name: cm-knife
+        whitelist:
+          tags:
+          - Knife
 
 - type: entity
   parent: CMBootsBlack
   id: CMBootsBlackFilled
+  suffix: Filled
   components:
-  - type: StorageFill
-    contents:
-    - id: M5Bayonet
+  - type: ContainerFill
+    containers:
+      item:
+      - M5Bayonet
 
 # Brown Boots
 - type: entity
@@ -57,10 +61,12 @@
 - type: entity
   parent: CMBootsBrown
   id: CMBootsBrownFilled
+  suffix: Filled
   components:
-  - type: StorageFill
-    contents:
-    - id: M5Bayonet
+  - type: ContainerFill
+    containers:
+      item:
+      - M5Bayonet
 
 # Jungle Boots
 - type: entity
@@ -76,8 +82,10 @@
 - type: entity
   parent: CMBootsJungle
   id: CMBootsJungleFilled
+  suffix: Filled
   components:
-  - type: StorageFill
-    contents:
-    - id: M5Bayonet
+  - type: ContainerFill
+    containers:
+      item:
+      - M5Bayonet
 

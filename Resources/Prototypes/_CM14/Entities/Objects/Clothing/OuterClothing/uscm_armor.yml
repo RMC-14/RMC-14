@@ -61,7 +61,8 @@
       autoRechargeRate: 2 #recharge of 2 makes total drain 1w / s so max charge is 1:1 with time. Time to fully charge should be 5 minutes. Having recharge gives light an extended flicker period which gives you some warning to return to light area.
     - type: Storage
       maxItemSize: Small
-      maxTotalWeight: 10
+      grid:
+      - 0,0,3,1
     - type: ContainerContainer
       containers:
         storagebase: !type:Container
@@ -75,7 +76,7 @@
   parent: ArmorMarineM3
   id: CMArmorM3Warden
   name: M3 pattern warden armor
-  description: A well-crafted suit of M3 Pattern Armor typically distributed to Wardens. 
+  description: A well-crafted suit of M3 Pattern Armor typically distributed to Wardens.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/warden.rsi
@@ -86,7 +87,7 @@
   parent: ArmorMarineM3
   id: CMArmorM3WO
   name: M3 pattern chief mp armor
-  description: A well-crafted suit of M3 Pattern Armor typically distributed to Chief MPs. Useful for letting your men know who is in charge. 
+  description: A well-crafted suit of M3 Pattern Armor typically distributed to Chief MPs. Useful for letting your men know who is in charge.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/wo.rsi
@@ -173,7 +174,7 @@
   parent: ArmorMarineM3
   id: CMArmorM45
   name: M45 Pattern Ghillie Armor
-  description: A lightweight ghillie camouflage suit, used by USCM snipers on recon missions. Very lightweight and surprisingly very protective. 
+  description: A lightweight ghillie camouflage suit, used by USCM snipers on recon missions. Very lightweight and surprisingly very protective.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/ghille.rsi
