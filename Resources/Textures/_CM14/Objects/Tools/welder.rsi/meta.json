@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "equipped-BELT, welder_flame Taken from tgstation at https://github.com/tgstation/tgstation/blob/eea0599511b088fdab9d43e562210cdbd51c6a98/icons/obj/tools.dmi. inhand-left-flame, inhand-right-flame by https://github.com/Aexxie. Everything else Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/c8c7cb927b013398cb4af9794783e964107513f5/icons/obj/items/items.dmi.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "welder_flame",
+      "delays": [
+        [
+          0.2,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left-flame",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "inhand-right-flame",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "equipped-BELT",
+      "directions": 4
+    }
+  ]
+}
