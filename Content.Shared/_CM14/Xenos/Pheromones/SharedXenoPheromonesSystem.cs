@@ -48,7 +48,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     private static readonly FixedPoint2 RecoveryPlasmaRegen = 1.5;
     private static readonly TimeSpan RecoveryDelay = TimeSpan.FromSeconds(1);
     private static readonly float FrenzyAttackDamageModifier = 1.1f;
-    private static readonly FixedPoint2 FrenzyMovementSpeedModifier = 1.1;
+    private static readonly FixedPoint2 FrenzyMovementSpeedModifier = 0.1;
 
     private readonly TimeSpan _pheromonePlasmaUseDelay = TimeSpan.FromSeconds(0.5);
     private readonly HashSet<Entity<XenoComponent>> _receivers = new();
@@ -183,7 +183,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
     private void OnFrenzyMovementSpeedModifiers(Entity<XenoFrenzyPheromonesComponent> frenzy, ref RefreshMovementSpeedModifiersEvent args)
     {
-        var speed = (FrenzyMovementSpeedModifier * frenzy.Comp.Multiplier).Float();
+        var speed = 1 + (FrenzyMovementSpeedModifier * frenzy.Comp.Multiplier).Float();
         args.ModifySpeed(speed, speed);
     }
 
