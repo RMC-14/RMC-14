@@ -1,0 +1,35 @@
+﻿- type: entity
+  parent: [BaseStructure, CMEntityBase]
+  id: CMIV
+  name: iv
+  components:
+  - type: Transform
+    anchored: false
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/Medical/iv_drip.rsi
+    layers:
+    - state: unhooked
+      map: [ "enum.IVDripVisualLayers.Base" ]
+    - state: reagent0
+      map: [ "enum.IVDripVisualLayers.Reagent" ]
+  - type: IVDrip
+    reagentStates:
+    - 0: reagent0
+    - 10: reagent10
+    - 25: reagent25
+    - 50: reagent50
+    - 75: reagent75
+    - 80: reagent80
+    - 100: reagent100
+  - type: ItemSlots
+    slots:
+      bag:
+        name: Bag
+        whitelist:
+          tags:
+          - GlassBeaker
+  - type: ContainerContainer
+    containers:
+      bag: !type:ContainerSlot {}

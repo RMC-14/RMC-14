@@ -26,6 +26,9 @@
   id: CMMortarShell
 
 - type: Tag
+  id: CMBloodBag
+
+- type: Tag
   id: CMGauze
 
 - type: Tag
