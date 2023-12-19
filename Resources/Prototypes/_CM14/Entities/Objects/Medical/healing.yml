@@ -150,14 +150,6 @@
   itemSize: 1
 
 - type: entity
-  id: CMGauze1
-  parent: CMGauze
-  suffix: One
-  components:
-  - type: Stack
-    count: 1
-
-- type: entity
   parent: CMBaseHealingItem
   id: CMSynthGraft
   name: synth graft
