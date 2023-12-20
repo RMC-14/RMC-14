@@ -19,14 +19,14 @@
   id: FireteamLeaderGear
   equipment:
     jumpsuit: CMJumpsuitMarineRTO
-    back: ClothingBackpackSecurityFilled
-    shoes: CMShoesCombatBoots
+    back: CMBackpackMarine
+    shoes: CMBootsBlackFilled
     head: CMArmorHelmetM12
     outerClothing: CMArmorM4
     gloves: CMHandsBlack
     id: DogtagFireteamLeader
     ears: CMHeadsetAlphaTeamLeader
-  satchel: ClothingBackpackSatchelSecurityFilled
+  satchel: CMSatchelMarine
 
 - type: entity
   id: SpawnPointFireteamLeader

@@ -22,13 +22,13 @@
   id: CMQuartermasterGear
   equipment:
     jumpsuit: CMJumpsuitQM
-    back: ClothingBackpackQuartermasterFilled
-    shoes: CMShoesCombatBootsBrown
+    back: CMBackpackEngineer
+    shoes: CMBootsBrown
     head: CMHeadCapCargo
     gloves: CMHandsBrown
     id: CMQuartermasterIDCard
     ears: CMHeadsetQM
-  satchel: ClothingBackpackSatchelQuartermasterFilled
+  satchel: CMSatchelEngineer
 
 - type: entity
   id: CMSpawnPointQuartermaster

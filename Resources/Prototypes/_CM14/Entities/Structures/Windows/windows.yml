@@ -1,0 +1,84 @@
+﻿- type: entity
+  abstract: true
+  parent: [BaseStructure, CMEntityBase]
+  id: CMBaseWindow # TODO CM14 this needs to be 2 separate entities eventually
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    drawdepth: Walls
+  - type: PlacementReplacement
+    key: walls
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Airtight
+  - type: RadiationBlocker
+    resistance: 2
+  - type: StaticPrice
+    price: 75
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+        density: 1000
+
+- type: entity
+  parent: CMBaseWindow
+  id: CMWindowReinforcedAlmayerHull
+  name: hull window
+  description: A glass window with a special rod matrix inside a wall frame. This one was made out of exotic materials to prevent hull breaches. No way to get through here.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Windows/almayer_window.rsi
+    state: alm_rwindow0
+  - type: Icon
+    sprite: _CM14/Structures/Windows/almayer_window.rsi
+    state: alm_rwindow0
+  - type: IconSmooth
+    key: walls
+    base: alm_rwindow
+    mode: CardinalFlags
+
+# TODO destructible
+- type: entity
+  parent: CMWindowReinforcedAlmayerHull
+  id: CMWindowReinforcedAlmayer
+  name: reinforced window
+  description: A glass window with a special rod matrix inside a wall frame. It looks rather strong. Might take a few good hits to shatter it.
+
+- type: entity
+  parent: CMBaseWindow
+  id: CMWindowReinforcedWhiteHull
+  name: reinforced window
+  description: An ultra-reinforced window designed to keep research a secure area. This one was made out of exotic materials to prevent hull breaches. No way to get through here.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Windows/white_reinforced_window.rsi
+    state: white_rwindow0
+  - type: Icon
+    sprite: _CM14/Structures/Windows/white_reinforced_window.rsi
+    state: white_rwindow0
+  - type: IconSmooth
+    key: walls
+    base: white_rwindow
+    mode: CardinalFlags
+
+# TODO destructible
+- type: entity
+  parent: CMWindowReinforcedWhiteHull
+  id: CMWindowReinforcedWhite
+  name: hull window
+  description: A glass window with a special rod matrix inside a wall frame. It looks rather strong. Might take a few good hits to shatter it.

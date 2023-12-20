@@ -1,0 +1,7 @@
+﻿<controls:CMTransformButton
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._CM14.Admin"
+    StyleClasses="ButtonSquare"
+    HorizontalExpand="True">
+    <Label Name="TransformName" Access="Public" />
+</controls:CMTransformButton>

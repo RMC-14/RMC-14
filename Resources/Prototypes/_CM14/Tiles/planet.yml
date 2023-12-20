@@ -1,0 +1,110 @@
+- type: tile
+  id: CMPlanetDirt
+  name: tiles-cm-dirt
+  sprite: /Textures/_CM14/Tiles/planet/dirt.png
+  isSubfloor: true
+  canCrowbar: false
+  footstepSounds:
+    collection: FootstepAsteroid
+  heatCapacity: 10000
+  weather: true
+  indestructible: true
+
+- type: tile
+  id: CMPlanetDesert
+  name: tiles-cm-desert
+  sprite: /Textures/_CM14/Tiles/planet/desert.png
+  variants: 6
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  isSubfloor: true
+  canCrowbar: false
+  footstepSounds:
+    collection: FootstepAsteroid
+  heatCapacity: 10000
+  weather: true
+  indestructible: true
+
+- type: tile
+  id: CMPlanetSand
+  name: tiles-cm-sand
+  sprite: /Textures/_CM14/Tiles/planet/sand.png
+  isSubfloor: true
+  canCrowbar: false
+  footstepSounds:
+    collection: FootstepAsteroid
+  heatCapacity: 10000
+  weather: true
+  indestructible: true
+
+- type: tile
+  id: CMPlanetGrass1
+  name: tiles-cm-grass
+  sprite: /Textures/_CM14/Tiles/planet/grass1/grass.png
+  edgeSpritePriority: 1
+  edgeSprites:
+    SouthEast: /Textures/_CM14/Tiles/planet/grass1/single_edge.png
+    NorthEast: /Textures/_CM14/Tiles/planet/grass1/single_edge.png
+    NorthWest: /Textures/_CM14/Tiles/planet/grass1/single_edge.png
+    SouthWest: /Textures/_CM14/Tiles/planet/grass1/single_edge.png
+    South: /Textures/_CM14/Tiles/planet/grass1/double_edge.png
+    East: /Textures/_CM14/Tiles/planet/grass1/double_edge.png
+    North: /Textures/_CM14/Tiles/planet/grass1/double_edge.png
+    West: /Textures/_CM14/Tiles/planet/grass1/double_edge.png
+  baseTurf: CMPlanetDirt
+  isSubfloor: true
+  canCrowbar: false
+  footstepSounds:
+    collection: FootstepAsteroid
+  heatCapacity: 10000
+  weather: true
+  indestructible: true
+
+- type: tile
+  id: CMPlanetGrass2
+  name: tiles-cm-grass
+  sprite: /Textures/_CM14/Tiles/planet/grass2/grass.png
+  edgeSpritePriority: 1
+  edgeSprites:
+    SouthEast: /Textures/_CM14/Tiles/planet/grass2/single_edge.png
+    NorthEast: /Textures/_CM14/Tiles/planet/grass2/single_edge.png
+    NorthWest: /Textures/_CM14/Tiles/planet/grass2/single_edge.png
+    SouthWest: /Textures/_CM14/Tiles/planet/grass2/single_edge.png
+    South: /Textures/_CM14/Tiles/planet/grass2/double_edge.png
+    East: /Textures/_CM14/Tiles/planet/grass2/double_edge.png
+    North: /Textures/_CM14/Tiles/planet/grass2/double_edge.png
+    West: /Textures/_CM14/Tiles/planet/grass2/double_edge.png
+  isSubfloor: true
+  canCrowbar: false
+  footstepSounds:
+    collection: FootstepAsteroid
+  heatCapacity: 10000
+  weather: true
+  indestructible: true
+
+- type: tile
+  id: CMPlanetGrass3
+  name: tiles-cm-grass
+  sprite: /Textures/_CM14/Tiles/planet/grass3/grass.png
+  edgeSpritePriority: 1
+  edgeSprites:
+    SouthEast: /Textures/_CM14/Tiles/planet/grass3/single_edge.png
+    NorthEast: /Textures/_CM14/Tiles/planet/grass3/single_edge.png
+    NorthWest: /Textures/_CM14/Tiles/planet/grass3/single_edge.png
+    SouthWest: /Textures/_CM14/Tiles/planet/grass3/single_edge.png
+    South: /Textures/_CM14/Tiles/planet/grass3/double_edge.png
+    East: /Textures/_CM14/Tiles/planet/grass3/double_edge.png
+    North: /Textures/_CM14/Tiles/planet/grass3/double_edge.png
+    West: /Textures/_CM14/Tiles/planet/grass3/double_edge.png
+  isSubfloor: true
+  canCrowbar: false
+  footstepSounds:
+    collection: FootstepAsteroid
+  heatCapacity: 10000
+  weather: true
+  indestructible: true

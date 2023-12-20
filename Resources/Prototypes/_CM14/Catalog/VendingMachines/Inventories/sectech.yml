@@ -1,0 +1,20 @@
+- type: vendingMachineInventory
+  id: CMVendorSec
+  startingInventory: # todo cm14
+    Handcuffs: 8
+    Zipties: 10
+    GrenadeFlashBang: 4
+    WeaponDisabler: 4 # Taser 4
+    # Pepper spray 4
+    Stunbaton: 4
+    FlashlightSeclite: 4
+    ClothingBeltSecurityFilled: 4 # MP belt 4
+    Flash: 5
+    FoodBoxDonut: 12
+    # Evidence box 6
+    CMArmorHelmetM10MP: 6
+    CMHeadCapMP: 6
+    CMJumpsuitMP: 2
+    CMHeadBeretRed: 6
+    ClothingEyesHudSecurity: 3
+    CMHeadsetMPO: 6

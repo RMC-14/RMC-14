@@ -12,6 +12,7 @@ public sealed partial class CMAdminWindow : DefaultWindow
     {
         RobustXamlLoader.Load(this);
 
+        TabContainer.SetTabTitle(TransformTab, Loc.GetString("cm-ui-transform-tab"));
         TabContainer.SetTabTitle(XenoTab, Loc.GetString("cm-ui-xeno-tab"));
     }
 }

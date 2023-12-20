@@ -1,0 +1,9 @@
+- type: vendingMachineInventory
+  id: CMVendorScience
+  startingInventory:
+    ClothingHeadHatHoodBioScientist: 2
+    ClothingOuterBioScientist: 2
+    CMJumpsuitResearch: 2
+    Igniter: 8
+    ProximitySensor: 4
+    RemoteSignaller: 4

@@ -1,0 +1,9 @@
+﻿<controls:CMTransformRow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._CM14.Admin"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    Orientation="Vertical">
+    <Label Name="Label" Access="Public" />
+    <cc:VSeparator />
+    <BoxContainer Orientation="Horizontal" Name="Container" Access="Public" Margin="0 0 0 20" />
+</controls:CMTransformRow>

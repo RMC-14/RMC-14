@@ -18,51 +18,20 @@
   accessGroups:
   - HospitalCorpsman
 
-# TODO cm14 Remove this later
-- type: entity
-  noSpawn: true
-  parent: [ClothingBackpackBrigmedic, CMEntityBase]
-  id: ClothingBackpackBrigmedicFilled
-  components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvivalHospitalCorpsman
-      - id: Flash
-
 - type: startingGear
   id: HospitalCorpsmanGear
   equipment:
     jumpsuit: CMJumpsuitMarineMedic
-    back: ClothingBackpackBrigmedicFilled
-    shoes: CMShoesCombatBoots
+    back: CMBackpackMarineMedic
+    shoes: CMBootsBlackFilled
     gloves: CMHandsBlack
     eyes: ClothingEyesHudMedical
     head: CMArmorHelmetM10Medic
     outerClothing: ArmorMarineM3
     id: DogtagHospitalCorpsman
     ears: CMHeadsetAlphaMedic
-    belt: ClothingBeltMedicalFilled # todo cm14 replace with cm medical belt thingy
-  satchel: ClothingBackpackSatchelBrigmedicFilled
-
-- type: entity
-  name: survival box
-  parent: [BoxCardboard, CMEntityBase]
-  id: BoxSurvivalHospitalCorpsman
-  description: It's a box with basic internals inside.
-  suffix: MedSec
-  components:
-  - type: StorageFill
-    contents:
-    - id: ClothingMaskBreathMedicalSecurity
-    - id: EmergencyOxygenTankFilled
-    - id: SpaceMedipen
-    - id: EmergencyMedipen
-    - id: EmergencyMedipen
-    - id: FoodTinMRE
-  - type: Sprite
-    layers:
-    - state: internals
-    - state: emergencytank
+    belt: CMBeltMedicBagFilled
+  satchel: CMSatchelMarineMedic
 
 - type: entity
   id: SpawnPointHospitalCorpsman

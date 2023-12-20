@@ -1,4 +1,5 @@
 ﻿using Content.Shared.Eui;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._CM14.Admin;
@@ -38,5 +39,27 @@ public sealed class CMAdminCreateHiveMessage : EuiMessageBase
     public CMAdminCreateHiveMessage(string name)
     {
         Name = name;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class CMAdminTransformHumanoidMessage : EuiMessageBase
+{
+    public readonly string SpeciesId;
+
+    public CMAdminTransformHumanoidMessage(string speciesId)
+    {
+        SpeciesId = speciesId;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class CMAdminTransformXenoMessage : EuiMessageBase
+{
+    public readonly EntProtoId XenoId;
+
+    public CMAdminTransformXenoMessage(EntProtoId xenoId)
+    {
+        XenoId = xenoId;
     }
 }

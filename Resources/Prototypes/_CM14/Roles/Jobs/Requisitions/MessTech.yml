@@ -19,11 +19,11 @@
     head: ClothingHeadHatChef
     jumpsuit: CMJumpsuitMessTech
     outerClothing: CMCoatMessTech
-    back: ClothingBackpackFilled
-    shoes: CMShoesCombatBootsBrown
+    back: CMBackpack
+    shoes: CMBootsBrown
     id: MessTechIDCard
     ears: CMHeadsetChef
-  satchel: ClothingBackpackSatchelFilled
+  satchel: CMSatchel
 
 - type: entity
   id: SpawnPointMessTech

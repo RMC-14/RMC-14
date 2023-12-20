@@ -1,0 +1,383 @@
+- type: entity
+  parent: BaseStructureDynamic
+  id: CMBarricadeBase
+  name: Generic Barricade
+  description: The most basic, generic barricade you have ever seen. This probably shouldn't even be here.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
+    layers:
+    - state: metal
+    drawdepth: WallTops
+  - type: Physics
+    bodyType: Static
+  - type: Transform
+    anchored: true
+  - type: Appearance
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.45"
+        density: 500
+        mask:
+        - FullTileMask
+        layer:
+        - TableLayer
+
+# Metal Barricade Tree
+
+- type: entity
+  parent: CMBarricadeBase
+  id: CMBarricadeMetal
+  name: Metal Barricade
+  description: A metal barricade that keeps the unwanted out. Upgradable with steel, plasteel, or steel rods for different attributes. Repair with a welder.
+  components:
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/_CM14/Structures/metalhit.ogg"
+  - type: Sprite
+    sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
+    layers:
+    - state: metal
+    drawdepth: WallTops
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: CMBarricade
+  - type: InteractionPopup
+    interactSuccessString: fence-rattle-success
+    messagePerceivedByOthers: fence-rattle-success
+    interactSuccessSound:
+      collection: FenceRattle
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/metalbreak.ogg
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 2
+    trackAllDamage: true
+    damageOverlay:
+      sprite: _CM14/Structures/Walls/Barricades/metal_barricade_cracks.rsi
+  - type: Construction
+    graph: BarricadeMetalGraph
+    node: nodeMetal
+
+# Metal Barricade Upgrades
+
+- type: entity
+  parent: CMBarricadeMetal
+  id: CMBarricadeBurn
+  name: anti-Biohazard Barricade
+  description: A barricade incredibly resistant to corrosive and fire damage but breaks easier. Repair with a welder.
+  components:
+    - type: Sprite
+      sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
+      layers:
+      - state: metal
+      - state: burn_upgrade
+    - type: Damageable
+      damageContainer: Inorganic
+      damageModifierSet: CMBurnBarricade
+    - type: DamageVisuals
+      thresholds: [4, 8, 12]
+      damageDivisor: 2
+      trackAllDamage: true
+      damageOverlay:
+        sprite: _CM14/Structures/Walls/Barricades/burn_barricade_cracks.rsi
+    - type: Construction
+      graph: BarricadeMetalGraph
+      node: nodeBurnUpgrade
+
+- type: entity
+  parent: CMBarricadeMetal
+  id: CMBarricadeBrute
+  name: Reinforced Barricade
+  description: A heavy-duty barricade reinforced with steel and resistant against thrashing. Repair with a welder.
+  components:
+    - type: Sprite
+      sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
+      layers:
+      - state: metal
+      - state: brute_upgrade
+    - type: Damageable
+      damageContainer: Inorganic
+      damageModifierSet: CMBruteBarricade
+    - type: DamageVisuals
+      thresholds: [4, 8, 12]
+      damageDivisor: 2
+      trackAllDamage: true
+      damageOverlay:
+        sprite: _CM14/Structures/Walls/Barricades/brute_barricade_cracks.rsi
+    - type: Construction
+      graph: BarricadeMetalGraph
+      node: nodeBruteUpgrade
+
+- type: entity
+  parent: CMBarricadeMetal
+  id: CMBarricadeExplosive
+  name: Blast-Resistant Barricade
+  description: An blast-resistant barricade made out of the same stuff in EODs. Repair with a welder.
+  components:
+    - type: Sprite
+      sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
+      layers:
+      - state: metal
+      - state: explosive_upgrade
+    - type: ExplosionResistance
+      damageCoefficient: 0.10
+    - type: DamageVisuals
+      thresholds: [4, 8, 12]
+      damageDivisor: 2
+      trackAllDamage: true
+      damageOverlay:
+        sprite: _CM14/Structures/Walls/Barricades/explosive_barricade_cracks.rsi
+    - type: Construction
+      graph: BarricadeMetalGraph
+      node: nodeExplosiveUpgrade
+
+# Sandbag
+
+- type: entity
+  parent: CMBarricadeBase
+  id: CMBarricadeSandbag
+  name: Sandbag Barricade
+  description: A makeshift barricade made out of the sand from the ground. Tough to beat but easy to pierce.
+  components:
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Effects/Footsteps/snowstep1.ogg"
+  - type: Sprite
+    sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
+    layers:
+    - state: sandbag
+    drawdepth: WallTops
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: CMSandbag
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.40,0.49,-0.28"
+        density: 2000
+        mask:
+        - FullTileMask
+        layer:
+        - TableLayer
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/metalbreak.ogg
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 2
+    trackAllDamage: true
+    damageOverlay:
+      sprite: _CM14/Structures/Walls/Barricades/sandbag_cracks.rsi
+  - type: Construction
+    graph: BarricadeSandbagGraph
+    node: nodeSandbag
+
+# Turnstile (not sure how to make a one-way door so for now it is a glorified fence)
+
+- type: entity
+  parent: CMBarricadeBase
+  id: CMBarricadeTurnstile
+  name: Turnstile
+  description: A railing to prevent marines from stepping out of line.
+  components:
+    - type: Sprite
+      sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
+      layers:
+      - state: turnstile
+    - type: Damageable
+      damageContainer: Inorganic
+      damageModifierSet: Metallic
+    - type: Destructible
+      thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+      - trigger:
+          !type:DamageTrigger
+          damage: 25
+        behaviors:
+        - !type:PlaySoundBehavior
+          sound:
+            path: /Audio/Effects/metalbreak.ogg
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - type: Construction
+      graph: BarricadeTurnstileGraph
+      node: nodeTurnstile
+
+- type: entity
+  parent: CMBarricadeTurnstile
+  id: CMBarricadeTurnstileMed
+  name: Turnstile
+  description: A railing to prevent marines from stepping out of line. This one is designed specifically for medical.
+  components:
+    - type: Sprite
+      sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
+      layers:
+      - state: turnstile_med
+    - type: Construction
+      graph: BarricadeTurnstileGraph
+      node: nodeTurnstile
+
+
+# Metal Barricade Doors
+
+- type: entity
+  parent: CMBarricadeBase
+  id: CMBarricadeMetalDoor
+  name: Folding Metal Barricade
+  description: A folding metal barricade weaker than the non-folding counterpart. Able to be opened and closed at a moment's notice. Repair with a welder.
+  components:
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/_CM14/Structures/metalhit.ogg"
+  - type: Sprite
+    sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
+    layers:
+    - state: folding_metal
+      map: ["enum.DoorVisualLayers.Base"]
+    drawdepth: WallTops
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/metalbreak.ogg
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: AnimationPlayer
+  - type: InteractionOutline
+  - type: Door
+    openSpriteState: folding_metal_closed
+    closedSpriteState: folding_metal
+    canPry: false
+    occludes: false
+    changeAirtight: false
+    bumpOpen: false
+    clickOpen: true
+    canCrush: false
+    closeTimeOne: 0
+    closeTimeTwo: 0
+    openTimeOne: 0
+    openTimeTwo: 0
+    openingAnimationTime: 0
+    closingAnimationTime: 0
+    openSound:
+      path: /Audio/Items/ratchet.ogg
+    closeSound:
+      path: /Audio/Items/ratchet.ogg
+  - type: Construction
+    graph: BarricadeMetalDoorGraph
+    node: nodeBarricadeMetalDoor
+
+- type: entity
+  parent: CMBarricadeMetalDoor
+  id: CMBarricadePlasteelDoor
+  name: Folding Plasteel Barricade
+  description: A tough folding plasteel barricade stronger than its metal counterpart. Can be closed and opened at a moment's notice. Repair with a welder.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
+    layers:
+    - state: plasteel
+      map: ["enum.DoorVisualLayers.Base"]
+    drawdepth: WallTops
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/metalbreak.ogg
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Door
+    openSpriteState: plasteel_closed
+    closedSpriteState: plasteel
+    canPry: false
+    occludes: false
+    changeAirtight: false
+    bumpOpen: false
+    clickOpen: true
+    canCrush: false
+    closeTimeOne: 0
+    closeTimeTwo: 0
+    openTimeOne: 0
+    openTimeTwo: 0
+    openingAnimationTime: 0
+    closingAnimationTime: 0
+    openSound:
+      path: /Audio/Items/ratchet.ogg
+    closeSound:
+      path: /Audio/Items/ratchet.ogg
+  - type: Construction
+    graph: BarricadePlasteelDoorGraph
+    node: nodeBarricadePlasteelDoor

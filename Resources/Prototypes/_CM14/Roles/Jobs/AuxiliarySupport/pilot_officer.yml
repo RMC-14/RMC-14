@@ -22,13 +22,13 @@
   equipment:
     jumpsuit: CMJumpsuitPilot
     outerClothing: CMArmorPlatePilot
-    back: ClothingBackpackFilled
+    back: CMBackpackMarine
     gloves: CMHandsBrown
-    shoes: CMShoesCombatBoots
+    shoes: CMBootsBlackFilled
     head: CMArmorHelmetM30
     id: PilotOfficerIDCard
     ears: CMHeadsetPilot
-  satchel: ClothingBackpackSatchelFilled
+  satchel: CMSatchelMarine
 
 - type: entity
   id: CMSpawnPointPilot

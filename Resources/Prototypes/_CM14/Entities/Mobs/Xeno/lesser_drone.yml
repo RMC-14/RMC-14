@@ -1,7 +1,10 @@
-﻿- type: entity # TODO CM14 description
-  parent: CMXenoDeveloped
+﻿- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
   id: CMXenoLesserDrone
   name: Lesser Drone
+  description: An alien drone. Looks... smaller.
   components:
   - type: Sprite
     sprite: _CM14/Mobs/Xenos/Drone/drone.rsi
@@ -12,7 +15,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      160: Dead
+      160: Dead # TODO CM14 gib on death
   - type: Xeno
     actionIds:
     - ActionXenoRest
@@ -24,10 +27,22 @@
     - ActionXenoPlantWeeds # TODO CM14 only near other weeds for lesser drones
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
-    plasma: 300
-    maxPlasma: 300
-    plasmaRegenOnWeeds: 6
+    # evasion: 10
+    tier: 0
+  - type: XenoAcid
+  - type: XenoConstruction
+    buildDelay: 4
     canBuild:
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
+  - type: XenoDevour
+  - type: XenoPheromones
+  - type: XenoPlasma
+    plasma: 300
+    maxPlasma: 300
+    plasmaRegenOnWeeds: 6
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 20

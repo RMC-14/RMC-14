@@ -1,0 +1,9 @@
+- type: vendingMachineInventory
+  id: CMVendorElectronics
+  startingInventory:
+    CableApcStack: 6
+    Multitool: 6
+    DoorElectronics: 8
+    APCElectronics: 8
+    PowerCellHigh: 6
+    PowerCellSmall: 14

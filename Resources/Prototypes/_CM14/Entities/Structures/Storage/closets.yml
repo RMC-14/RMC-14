@@ -1,0 +1,121 @@
+# Base
+- type: entity
+  parent: [ ClosetBase, CMEntityBase ]
+  id: CMClosetBase
+  name: closet
+  description: It's a basic storage unit.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Closets/standard.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: base
+    stateDoorOpen: open
+    stateDoorClosed: closed
+
+# Utilities
+- type: entity
+  parent: CMClosetBase
+  id: CMClosetEmergency
+  name: emergency closet
+  description: It's a storage unit for emergency breathmasks and o2 tanks.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Closets/emergency.rsi
+
+- type: entity
+  parent: CMClosetBase
+  id: CMClosetFire
+  name: fire-safety closet
+  description: It's a storage unit for fire-fighting supplies.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Closets/firecloset.rsi
+
+- type: entity
+  parent: CMClosetBase
+  id: CMClosetTool
+  name: tool closet
+  description: It's a storage unit for tools.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Closets/toolcloset.rsi
+
+- type: entity
+  parent: CMClosetBase
+  id: CMClosetRadiation
+  name: radiation suit closet
+  description: It's a storage unit for rad-protective suits.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Closets/radsuit.rsi
+
+- type: entity
+  parent: CMClosetBase
+  id: CMClosetBomb
+  name: EOD closet
+  description: It's a storage unit for explosion-protective suits.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Closets/bombsuit.rsi
+
+# Bio suits
+- type: entity
+  parent: CMClosetBase
+  id: CMClosetBio
+  name: level-3 biohazard suit closet
+  description: It's a storage unit for level-3 biohazard gear.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Closets/bio.rsi
+
+- type: entity
+  parent: CMClosetBio
+  id: CMClosetBioVirology
+  suffix: Virology
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Closets/bio_virology.rsi
+
+- type: entity
+  parent: CMClosetBio
+  id: CMClosetBioSecurity
+  suffix: Security
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Closets/bio_security.rsi
+
+- type: entity
+  parent: CMClosetBio
+  id: CMClosetBioJanitor
+  suffix: Janitor
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Closets/bio_janitor.rsi
+
+- type: entity
+  parent: CMClosetBio
+  id: CMClosetBioScientist
+  suffix: Scientist
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Closets/bio_scientist.rsi
+
+# Gimmics
+- type: entity
+  parent: CMClosetBase
+  id: CMClosetAlien
+  name: strange closet
+  description: It looks alien!
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Closets/acloset.rsi
+

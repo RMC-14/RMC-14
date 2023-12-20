@@ -21,13 +21,13 @@
   id: MaintTechGear
   equipment:
     jumpsuit: CMJumpsuitMaintTech
-    back: ClothingBackpackEngineeringFilled
-    shoes: CMShoesCombatBootsBrown
+    back: CMBackpackEngineer
+    shoes: CMBootsBrown
     gloves: CMHandsInsulated
     id: MaintTechIDCard
     ears: CMHeadsetEngineer
-    belt: ClothingBeltUtilityEngineering
-  satchel: ClothingBackpackSatchelEngineeringFilled
+    belt: CMBeltUtilityFilled
+  satchel: CMSatchelEngineer
 
 - type: entity
   id: SpawnPointMaintTech

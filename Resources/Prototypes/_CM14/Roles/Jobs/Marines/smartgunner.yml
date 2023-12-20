@@ -19,14 +19,14 @@
   id: SmartgunnerGear
   equipment:
     jumpsuit: JumpsuitMarine
-    back: ClothingBackpackSecurityFilled
-    shoes: CMShoesCombatBoots
+    back: CMBackpackMarine
+    shoes: CMBootsBlackFilled
     head: ArmorHelmetM10
     outerClothing: ArmorMarineM3
     gloves: CMHandsBlack
     id: DogtagSmartgunner
     ears: CMHeadsetAlpha
-  satchel: ClothingBackpackSatchelSecurityFilled
+  satchel: CMSatchelMarine
 
 - type: entity
   id: SpawnPointSmartGunner

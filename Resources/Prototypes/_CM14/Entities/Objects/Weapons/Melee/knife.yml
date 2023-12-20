@@ -1,14 +1,16 @@
 - type: entity
   name: M5 night raider bayonet
-  parent: BaseKnife
+  parent: [BaseKnife, CMEntityBase]
   id: M5Bayonet
   description: The standard issue bayonet knife issued to Colonial Marines.
   components:
+  - type: Clothing
+    slots: [mask]
   - type: Tag
     tags:
     - Knife
   - type: Sprite
-    sprite: _CM14/Objects/Weapons/Melee/M5Bayonet.rsi
+    sprite: _CM14/Objects/Weapons/Melee/m5_bayonet.rsi
     state: icon
   - type: MeleeWeapon
     wideAnimationRotation: -135
@@ -17,6 +19,6 @@
       types:
         Slash: 25
   - type: Item
-    sprite: _CM14/Objects/Weapons/Melee/M5Bayonet.rsi
+    sprite: _CM14/Objects/Weapons/Melee/m5_bayonet.rsi
   - type: DisarmMalus
     malus: 0.225

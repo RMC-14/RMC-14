@@ -1,0 +1,4 @@
+- type: vendingMachineInventory
+  id: CMVendorChemistry
+  #startingInventory: todo cm14
+    # reagent bottles

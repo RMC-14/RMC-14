@@ -1,0 +1,39 @@
+﻿- type: entity
+  parent: Poweredlight
+  id: CMLightFixture
+  name: light fixture
+  description: A lighting fixture that is fitted with a bright fluorescent light tube. Looking at it for too long makes your eyes go watery.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Wallmounts/Lighting/light_tube.rsi
+    state: tube1
+    layers:
+    - state: tube1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: tube-empty
+      Off: tube0
+      On: tube1
+      Broken: tube-broken
+      Burned: tube-burned
+
+- type: entity
+  parent: Poweredlight
+  id: CMLightBulb
+  name: light fixture
+  description: A small lighting fixture that is fitted with a bright fluorescent light bulb. Looking at it for too long makes your eyes go watery.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Wallmounts/Lighting/light_bulb.rsi
+    state: bulb1
+    layers:
+    - state: bulb1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: bulb-empty
+      Off: bulb0
+      On: bulb1
+      Broken: bulb-broken
+      Burned: bulb-burned

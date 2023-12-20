@@ -1,40 +1,91 @@
+# Dress Shoes
 - type: entity
-  parent: [ClothingShoesStorageBase, CMEntityBase]
-  id: CMShoesCombatBoots
-  name: combat boots
+  parent: [ClothingShoesBaseButcherable, CMEntityBase]
+  id: CMShoesDress
+  name: dress shoes
+  description: Pre-polished fancy dress shoes. You can see your reflection in them.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Shoes/laceup.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Shoes/laceup.rsi
+
+- type: entity
+  parent: CMShoesDress
+  id: CMShoesDressCommander
+  name: commanding officer dress shoes
+  description: Has special soles for better trampling those underneath.
+
+# Black Boots
+- type: entity
+  parent: [ClothingShoesMilitaryBase, CMEntityBase]
+  id: CMBootsBlack
+  name: black boots
   description: Standard issue combat boots used by the USCM for combat situations.  All combat, all the time.
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/Shoes/Boots/marine.rsi
+    sprite: _CM14/Objects/Clothing/Shoes/Marines/black.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/Shoes/Boots/marine.rsi
+    sprite: _CM14/Objects/Clothing/Shoes/Marines/black.rsi
   - type: Matchbox
-  - type: Storage
-    whitelist:
-      tags:
-      - Knife
-      - Sidearm
-  - type: StorageFill
-    contents:
-    - id: M5Bayonet
+  - type: ItemSlots
+    slots:
+      item:
+        name: cm-knife
+        whitelist:
+          tags:
+          - Knife
 
 - type: entity
-  parent: CMShoesCombatBoots
-  id: CMShoesCombatBootsBrown
-  name: combat boots brown
+  parent: CMBootsBlack
+  id: CMBootsBlackFilled
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - M5Bayonet
+
+# Brown Boots
+- type: entity
+  parent: CMBootsBlack
+  id: CMBootsBrown
+  name: brown boots
   description: Standard issue combat boots used by the USCM for combat situations. All combat, all the time. These are brown.
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/Shoes/Boots/marine_brown.rsi
+    sprite: _CM14/Objects/Clothing/Shoes/Marines/brown.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/Shoes/Boots/marine_brown.rsi
+    sprite: _CM14/Objects/Clothing/Shoes/Marines/brown.rsi
 
 - type: entity
-  parent: CMShoesCombatBoots
-  id: CMShoesCombatBootsJungle
-  name: combat boots jungle
+  parent: CMBootsBrown
+  id: CMBootsBrownFilled
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - M5Bayonet
+
+# Jungle Boots
+- type: entity
+  parent: CMBootsBlack
+  id: CMBootsJungle
+  name: jungle boots
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/Shoes/Boots/marine_jungle.rsi
+    sprite: _CM14/Objects/Clothing/Shoes/Marines/jungle.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/Shoes/Boots/marine_jungle.rsi
+    sprite: _CM14/Objects/Clothing/Shoes/Marines/jungle.rsi
+
+- type: entity
+  parent: CMBootsJungle
+  id: CMBootsJungleFilled
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - M5Bayonet
+

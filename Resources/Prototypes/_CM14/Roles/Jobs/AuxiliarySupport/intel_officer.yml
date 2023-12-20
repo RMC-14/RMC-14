@@ -22,13 +22,13 @@
   equipment:
     jumpsuit: CMJumpsuitIO
     outerClothing: CMArmorM4
-    back: ClothingBackpackFilled
+    back: CMBackpackMarine
     gloves: CMHandsBlack
-    shoes: CMShoesCombatBoots
+    shoes: CMBootsBlackFilled
     head: CMArmorHelmetM12
     id: IntelOfficerIDCard
     ears: CMHeadsetIntel
-  satchel: ClothingBackpackSatchelFilled
+  satchel: CMSatchelMarineIntel
 
 - type: entity
   id: CMSpawnPointIntelOfficer

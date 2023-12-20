@@ -1,0 +1,17 @@
+﻿- type: entity
+  id: XenoProjectileImpactEffect
+  noSpawn: true
+  components:
+  - type: TimedDespawn
+    lifetime: 0.25
+  - type: Sprite
+    drawdepth: Effects
+    layers:
+    - shader: unshaded
+      map: ["enum.EffectLayers.Unshaded"]
+      sprite: _CM14/Objects/Xeno/xeno_projectiles.rsi
+      state: ping_x
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu

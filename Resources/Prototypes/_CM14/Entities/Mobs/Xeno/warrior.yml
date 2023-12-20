@@ -1,0 +1,48 @@
+﻿- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  id: CMXenoWarrior
+  name: Warrior
+  description: A beefy alien with an armored carapace.
+  components:
+  - type: Sprite
+    sprite: _CM14/Mobs/Xenos/Warrior/warrior.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      500: Critical
+      600: Dead
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoHide
+    #    - ActionXenoPunch
+    #    - ActionXenoLunge
+    #    - ActionXenoFling
+    - ActionXenoEvolve60 # TODO CM14 540
+    # explosionResistance: 40
+    tier: 2
+  - type: XenoDevour
+  - type: XenoPlasma
+    plasma: 0
+    maxPlasma: 0
+    plasmaRegenOnWeeds: 0
+  - type: XenoEvolution
+    evolvesTo:
+    - CMXenoCrusher
+    - CMXenoPraetorian
+  - type: XenoArmor
+    armor: 20
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 35

@@ -11,6 +11,8 @@ cm-xeno-cant-reach-there = You can't reach there!
 
 # Evolve
 cm-xeno-available-evolutions = Available Evolutions
+cm-xeno-evolution-start = You begin to twist and contort.
+cm-xeno-evolution-end = You emerge in a greater form from the husk of your old body. For the hive!
 
 # Fortify
 cm-xeno-fortify-cant-headbutt = You can't headbutt while fortifying!
@@ -30,6 +32,11 @@ cm-xeno-acid-already-corroding = {THE($target)} already has corrosive acid on it
 
 # Devour
 cm-xeno-cant-devour = You can't devour {THE($target)}!
+
+# Paralyzing Slash
+cm-xeno-paralyzing-slash-activate = Your next slash will apply neurotoxin!
+cm-xeno-paralyzing-slash-expire = You have waited too long, your slash will no longer apply neurotoxin!
+cm-xeno-paralyzing-slash-hit = You add neurotoxin into your attack, {$target} is about to fall over paralyzed!
 
 # Pheromones
 cm-xeno-choose-pheromones = Choose Pheromones

@@ -9,7 +9,7 @@
       department: MilitaryPolice
       time: 36000 # 10 hours
     - !type:DepartmentTimeRequirement
-      department: Command
+      department: MarineCommand
       time: 18000 # 5 hours
   weight: 5
   startingGear: ChiefMPGear
@@ -25,16 +25,16 @@
   id: ChiefMPGear
   equipment:
     jumpsuit: CMJumpsuitWO
-    back: ClothingBackpackHOSFilled
-    shoes: CMShoesCombatBoots
+    back: CMBackpackSecurity
+    shoes: CMBootsBlackFilled
     head: CMHeadBeretWO
     eyes: ClothingEyesGlassesSecurity
     gloves: CMHandsBlack
     id: ChiefMPIDCard
     outerClothing: CMArmorM3WO
     ears: CMHeadsetCMP
-    belt: ClothingBeltSecurityFilled
-  satchel: ClothingBackpackSatchelHOSFilled
+    belt: CMBeltSecurityFilled
+  satchel: CMSatchelSecurity
 
 - type: entity
   id: SpawnPointChiefMP

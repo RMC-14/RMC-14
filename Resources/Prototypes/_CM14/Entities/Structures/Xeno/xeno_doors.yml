@@ -59,7 +59,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 400 # TODO CM14 rebalance
+        damage: 600
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
@@ -75,3 +75,41 @@
     animatePanel: false
   - type: ApcPowerReceiver
     powerLoad: 0
+
+- type: entity
+  id: DoorXenoResinThick
+  parent: DoorXenoResin
+  name: thick resin door
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Xenos/xeno_resin_door.rsi
+    layers:
+    - state: thick_resin
+      map: ["enum.DoorVisualLayers.Base"]
+    - state: closed_unlit
+      map: ["enum.DoorVisualLayers.BaseUnlit"]
+    - state: closed_unlit
+      map: ["enum.DoorVisualLayers.BaseBolted"]
+  - type: Door
+    crushDamage:
+      types:
+        Blunt: 15
+    openSpriteState: thick_resinopen
+    closedSpriteState: thick_resin
+    openingSpriteState: thick_resinopening
+    closingSpriteState: thick_resinclosing
+    openSound:
+      path: /Audio/_CM14/Xeno/alien_resin_move1.ogg
+    closeSound:
+      path: /Audio/_CM14/Xeno/alien_resin_move2.ogg
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 900
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite

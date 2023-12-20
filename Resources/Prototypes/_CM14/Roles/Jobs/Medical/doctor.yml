@@ -22,13 +22,14 @@
   equipment:
     jumpsuit: CMScrubsBlue
     outerClothing: CMCoatLong
-    back: ClothingBackpackMedicalFilled
+    back: CMBackpackMedical
     gloves: CMHandsLatex
-    shoes: CMShoesCombatBoots
+    shoes: ClothingShoesColorWhite
     head: CMHeadCapSurgBlue
     id: MarineDoctorIDCard
     ears: CMHeadsetMedical
-  satchel: ClothingBackpackSatchelMedicalFilled
+    belt: CMBeltMedicalFilled
+  satchel: CMSatchelMedical
 
 - type: entity
   id: CMSpawnPointDoctor

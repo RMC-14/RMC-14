@@ -17,16 +17,4 @@ public sealed class XenoHiveSystem : EntitySystem
         EnsureComp<HiveComponent>(ent);
         _metaData.SetEntityName(ent, name);
     }
-
-    public void SetHive(Entity<XenoComponent?> xeno, Entity<HiveComponent?> hive)
-    {
-        if (!Resolve(xeno, ref xeno.Comp) ||
-            !Resolve(hive, ref hive.Comp))
-        {
-            return;
-        }
-
-        xeno.Comp.Hive = hive;
-        Dirty(xeno, xeno.Comp);
-    }
 }

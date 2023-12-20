@@ -1,0 +1,187 @@
+#
+- type: entity
+  parent: [ Airlock, CMEntityBase ]
+  id: CMAirlock
+  name: airlock
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/personal_door.rsi
+    snapCardinals: false
+    layers:
+    - state: closed
+      map: [ "enum.DoorVisualLayers.Base" ]
+    - state: unlit
+      map: ["enum.DoorVisualLayers.BaseUnlit"]
+    - state: welded
+      map: [ "enum.WeldableLayers.BaseWelded" ]
+    - state: locked
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseBolted"]
+    - state: spark
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseEmergencyAccess"]
+    - state: panel_open
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Door
+    crushDamage:
+      types:
+        Blunt: 15
+    openSound:
+      path: /Audio/_CM14/Machines/airlock.ogg
+    closeSound:
+      path: /Audio/_CM14/Machines/airlock.ogg
+    denySound:
+      path: /Audio/_CM14/Machines/buzz_two.ogg
+  - type: Construction
+    graph: CMAirlock
+    node: airlock
+    containers:
+    - board
+
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockCommand
+  suffix: Command
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/com_door.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockEngineer
+  suffix: Engineering
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/engi_door.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockMedical
+  suffix: Medical
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/medi_door.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockSecurity
+  suffix: Security
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/sec_door.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockMaint
+  name: maintenance
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/maint_door.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockSecure
+  name: secure airlock
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/secure_door.rsi
+
+# Glass
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockGlass
+  name: glass airlock
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/personal_door_glass.rsi
+  - type: Door
+    occludes: false
+  - type: Occluder
+    enabled: false
+  - type: AnimationPlayer
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 100
+        mask:
+        - FullTileMask
+        layer:
+        - GlassAirlockLayer
+  - type: Construction
+    graph: CMAirlock
+    node: glassAirlock
+  - type: PaintableAirlock
+    group: Glass
+  - type: Tag
+    tags:
+    - GlassAirlock
+
+- type: entity
+  parent: CMAirlockGlass
+  id: CMAirlockGlassEngineer
+  suffix: Engineer
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/engi_door_glass.rsi
+
+- type: entity
+  parent: CMAirlockGlass
+  id: CMAirlockGlassMedical
+  suffix: Medical
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/medi_door_glass.rsi
+
+- type: entity
+  parent: CMAirlockGlass
+  id: CMAirlockGlassSecurity
+  suffix: Security
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/sec_door_glass.rsi
+
+# Prep
+- type: entity
+  parent: CMAirlockGlass
+  id: CMAirlockPrep
+  name: preparations airlock
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/prep_door.rsi
+
+- type: entity
+  parent: CMAirlockPrep
+  id: CMAirlockPrepAlpha
+  name: alpha squad preparations
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/prep_door_alpha.rsi
+
+- type: entity
+  parent: CMAirlockPrep
+  id: CMAirlockPrepBravo
+  name: bravo squad preparations
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/prep_door_bravo.rsi
+
+- type: entity
+  parent: CMAirlockPrep
+  id: CMAirlockPrepCharlie
+  name: charlie squad preparations
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/prep_door_charlie.rsi
+
+- type: entity
+  parent: CMAirlockPrep
+  id: CMAirlockPrepDelta
+  name: delta squad preparations
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/prep_door_delta.rsi

@@ -1,0 +1,46 @@
+﻿- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  id: CMXenoBurrower
+  name: Burrower
+  description: A beefy alien with sharp claws.
+  components:
+  - type: Sprite
+    sprite: _CM14/Mobs/Xenos/Burrower/burrower.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      500: Critical
+      600: Dead
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoAcid
+    - ActionXenoOrderConstruction
+    #    - ActionXenoDigTunnel
+    - ActionXenoPlantWeeds
+    #    - ActionXenoBurrow
+    #    - ActionXenoTremor
+    # explosionResistance: 40
+    tier: 2
+  - type: XenoPlasma
+    plasma: 600
+    maxPlasma: 600
+    plasmaRegenOnWeeds: 27
+  - type: XenoAcid
+  - type: XenoArmor
+    armor: 25
+  - type: XenoDevour
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 27.5

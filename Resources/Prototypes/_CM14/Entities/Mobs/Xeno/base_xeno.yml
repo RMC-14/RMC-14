@@ -114,9 +114,6 @@
       types:
         Bloodloss: -1
   - type: Xeno
-    tailDamage:
-      groups:
-        Brute: 15
   - type: UserInterface
     interfaces:
     - key: enum.XenoEvolutionUIKey.Key
@@ -189,7 +186,7 @@
   components:
   - type: CombatMode
   - type: MeleeWeapon
-    altDisarm: false
+    altDisarm: true
     angle: 0
     soundHit:
       collection: AlienClaw
@@ -226,3 +223,12 @@
     damage:
       types:
         Blunt: 5
+
+- type: entity
+  id: CMXenoTail
+  abstract: true
+  components:
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 15
