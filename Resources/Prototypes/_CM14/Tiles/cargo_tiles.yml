@@ -6,24 +6,24 @@
 - type: tile
   parent: CMFloorCargoBase
   id: CMFloorCargo
-  sprite: /Textures/_CM14/Tiles/almayer/squads/cargo.png
+  sprite: /Textures/_CM14/Tiles/almayer/cargo.png
 
 - type: tile
   parent: CMFloorCargoBase
   id: CMFloorCargoArrowDown
-  sprite: /Textures/_CM14/Tiles/almayer/squads/cargo_arrow_0.png
+  sprite: /Textures/_CM14/Tiles/almayer/cargo_arrow_0.png
 
 - type: tile
   parent: CMFloorCargoBase
   id: CMFloorCargoArrowUp
-  sprite: /Textures/_CM14/Tiles/almayer/squads/cargo_arrow_1.png
+  sprite: /Textures/_CM14/Tiles/almayer/cargo_arrow_1.png
 
 - type: tile
   parent: CMFloorCargoBase
   id: CMFloorCargoArrowRight
-  sprite: /Textures/_CM14/Tiles/almayer/squads/cargo_arrow_2.png
+  sprite: /Textures/_CM14/Tiles/almayer/cargo_arrow_2.png
 
 - type: tile
   parent: CMFloorCargoBase
   id: CMFloorCargoArrowLeft
-  sprite: /Textures/_CM14/Tiles/almayer/squads/cargo_arrow_3.png
+  sprite: /Textures/_CM14/Tiles/almayer/cargo_arrow_3.png

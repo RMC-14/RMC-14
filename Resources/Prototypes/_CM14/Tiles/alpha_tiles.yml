@@ -8,64 +8,64 @@
 - type: tile
   parent: CMFloorSteelAlphaBase
   id: CMFloorSteelAlpha0
-  sprite: /Textures/_CM14/Tiles/almayer/squads/red_0.png
+  sprite: /Textures/_CM14/Tiles/almayer/red_0.png
 
 - type: tile
   parent: CMFloorSteelAlphaBase
   id: CMFloorSteelAlpha1
-  sprite: /Textures/_CM14/Tiles/almayer/squads/red_1.png
+  sprite: /Textures/_CM14/Tiles/almayer/red_1.png
 
 - type: tile
   parent: CMFloorSteelAlphaBase
   id: CMFloorSteelAlpha2
-  sprite: /Textures/_CM14/Tiles/almayer/squads/red_2.png
+  sprite: /Textures/_CM14/Tiles/almayer/red_2.png
 
 - type: tile
   parent: CMFloorSteelAlphaBase
   id: CMFloorSteelAlpha3
-  sprite: /Textures/_CM14/Tiles/almayer/squads/red_3.png
+  sprite: /Textures/_CM14/Tiles/almayer/red_3.png
 
 - type: tile
   parent: CMFloorSteelAlphaBase
   id: CMFloorSteelAlpha4
-  sprite: /Textures/_CM14/Tiles/almayer/squads/red_4.png
+  sprite: /Textures/_CM14/Tiles/almayer/red_4.png
 
 - type: tile
   parent: CMFloorSteelAlphaBase
   id: CMFloorSteelAlpha5
-  sprite: /Textures/_CM14/Tiles/almayer/squads/red_5.png
+  sprite: /Textures/_CM14/Tiles/almayer/red_5.png
 
 - type: tile
   parent: CMFloorSteelAlphaBase
   id: CMFloorSteelAlpha6
-  sprite: /Textures/_CM14/Tiles/almayer/squads/red_6.png
+  sprite: /Textures/_CM14/Tiles/almayer/red_6.png
 
 - type: tile
   parent: CMFloorSteelAlphaBase
   id: CMFloorSteelAlpha7
-  sprite: /Textures/_CM14/Tiles/almayer/squads/red_7.png
+  sprite: /Textures/_CM14/Tiles/almayer/red_7.png
 
 - type: tile
   parent: CMFloorSteelAlphaBase
   id: CMFloorSteelAlphaCorner0
-  sprite: /Textures/_CM14/Tiles/almayer/squads/redcorner_0.png
+  sprite: /Textures/_CM14/Tiles/almayer/redcorner_0.png
 
 - type: tile
   parent: CMFloorSteelAlphaBase
   id: CMFloorSteelAlphaCorner1
-  sprite: /Textures/_CM14/Tiles/almayer/squads/redcorner_1.png
+  sprite: /Textures/_CM14/Tiles/almayer/redcorner_1.png
 
 - type: tile
   parent: CMFloorSteelAlphaBase
   id: CMFloorSteelAlphaCorner2
-  sprite: /Textures/_CM14/Tiles/almayer/squads/redcorner_2.png
+  sprite: /Textures/_CM14/Tiles/almayer/redcorner_2.png
 
 - type: tile
   parent: CMFloorSteelAlphaBase
   id: CMFloorSteelAlphaCorner3
-  sprite: /Textures/_CM14/Tiles/almayer/squads/redcorner_3.png
+  sprite: /Textures/_CM14/Tiles/almayer/redcorner_3.png
 
 - type: tile
   parent: CMFloorSteelAlphaBase
   id: CMFloorSteelAlphaFull
-  sprite: /Textures/_CM14/Tiles/almayer/squads/redfull.png
+  sprite: /Textures/_CM14/Tiles/almayer/redfull.png
