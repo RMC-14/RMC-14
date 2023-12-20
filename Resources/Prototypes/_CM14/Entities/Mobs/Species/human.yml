@@ -1,0 +1,11 @@
+- type: entity
+  parent: BaseMobHuman
+  id: CMMobHumanBase
+  name: Urist McCMHands
+  abstract: true
+  components:
+  - type: Vocal
+    sounds:
+      Male: CMHumanMale
+      Unsexed: CMHumanMale #sorry fem-leaning enbies
+      Female: CMHumanFemale
