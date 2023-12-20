@@ -1,0 +1,2 @@
+To split these up into different images, install ImageMagick and run
+magick convert -crop 32x32 blue.png blue_%d.png
