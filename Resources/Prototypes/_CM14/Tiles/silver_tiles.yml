@@ -1,0 +1,71 @@
+﻿# TODO CM14 make these decals (that look correct)
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelSilverBase
+  name: tiles-cm-silver
+
+- type: tile
+  parent: CMFloorSteelSilverBase
+  id: CMFloorSteelSilver0
+  sprite: /Textures/_CM14/Tiles/almayer/squads/silver_0.png
+
+- type: tile
+  parent: CMFloorSteelSilverBase
+  id: CMFloorSteelSilver1
+  sprite: /Textures/_CM14/Tiles/almayer/squads/silver_1.png
+
+- type: tile
+  parent: CMFloorSteelSilverBase
+  id: CMFloorSteelSilver2
+  sprite: /Textures/_CM14/Tiles/almayer/squads/silver_2.png
+
+- type: tile
+  parent: CMFloorSteelSilverBase
+  id: CMFloorSteelSilver3
+  sprite: /Textures/_CM14/Tiles/almayer/squads/silver_3.png
+
+- type: tile
+  parent: CMFloorSteelSilverBase
+  id: CMFloorSteelSilver4
+  sprite: /Textures/_CM14/Tiles/almayer/squads/silver_4.png
+
+- type: tile
+  parent: CMFloorSteelSilverBase
+  id: CMFloorSteelSilver5
+  sprite: /Textures/_CM14/Tiles/almayer/squads/silver_5.png
+
+- type: tile
+  parent: CMFloorSteelSilverBase
+  id: CMFloorSteelSilver6
+  sprite: /Textures/_CM14/Tiles/almayer/squads/silver_6.png
+
+- type: tile
+  parent: CMFloorSteelSilverBase
+  id: CMFloorSteelSilver7
+  sprite: /Textures/_CM14/Tiles/almayer/squads/silver_7.png
+
+- type: tile
+  parent: CMFloorSteelSilverBase
+  id: CMFloorSteelSilverCorner0
+  sprite: /Textures/_CM14/Tiles/almayer/squads/silvercorner_0.png
+
+- type: tile
+  parent: CMFloorSteelSilverBase
+  id: CMFloorSteelSilverCorner1
+  sprite: /Textures/_CM14/Tiles/almayer/squads/silvercorner_1.png
+
+- type: tile
+  parent: CMFloorSteelSilverBase
+  id: CMFloorSteelSilverCorner2
+  sprite: /Textures/_CM14/Tiles/almayer/squads/silvercorner_2.png
+
+- type: tile
+  parent: CMFloorSteelSilverBase
+  id: CMFloorSteelSilverCorner3
+  sprite: /Textures/_CM14/Tiles/almayer/squads/silvercorner_3.png
+
+- type: tile
+  parent: CMFloorSteelSilverBase
+  id: CMFloorSteelSilverFull
+  sprite: /Textures/_CM14/Tiles/almayer/squads/silverfull.png

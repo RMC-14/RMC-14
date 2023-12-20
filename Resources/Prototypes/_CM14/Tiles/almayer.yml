@@ -1,121 +1,64 @@
 - type: tile
+  abstract: true
+  id: CMTileBase
+  baseTurf: Plating
+  isSubfloor: false
+  canCrowbar: true
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: CMTileItemSteel
+  heatCapacity: 10000
+
+- type: tile
+  parent: CMTileBase
   id: CMFloorSteel
   name: tiles-cm-default
   sprite: /Textures/_CM14/Tiles/almayer/default.png
-  baseTurf: Plating
-  isSubfloor: false
-  canCrowbar: true
-  footstepSounds:
-    collection: FootstepFloor
-  itemDrop: CMTileItemSteel
-  heatCapacity: 10000
 
 - type: tile
+  parent: CMTileBase
   id: CMFloorPlate
   name: tiles-cm-plate
   sprite: /Textures/_CM14/Tiles/almayer/plate.png
-  baseTurf: Plating
-  isSubfloor: false
-  canCrowbar: true
-  footstepSounds:
-    collection: FootstepFloor
-  itemDrop: CMTileItemSteel
-  heatCapacity: 10000
 
 - type: tile
+  parent: CMTileBase
   id: CMFloorOffice
   name: tiles-cm-office
   sprite: /Textures/_CM14/Tiles/almayer/office.png
-  baseTurf: Plating
-  isSubfloor: false
-  canCrowbar: true
-  footstepSounds:
-    collection: FootstepFloor
-  itemDrop: CMTileItemSteel
-  heatCapacity: 10000
 
 - type: tile
+  parent: CMTileBase
   id: CMFloorSterile
   name: tiles-cm-sterile
   sprite: /Textures/_CM14/Tiles/almayer/sterile.png
-  baseTurf: Plating
-  isSubfloor: false
-  canCrowbar: true
-  footstepSounds:
-    collection: FootstepFloor
-  itemDrop: CMTileItemSteel
-  heatCapacity: 10000
 
 - type: tile
-  id: CMFloorWood
-  name: tiles-cm-wood
-  sprite: /Textures/_CM14/Tiles/almayer/wood.png
-  baseTurf: Plating
-  isSubfloor: false
-  canCrowbar: true
-  footstepSounds:
-    collection: FootstepWood
-  barestepSounds:
-    collection: BarestepWood
-  itemDrop: CMTileItemWood
-  heatCapacity: 10000
-
-- type: tile
+  parent: CMTileBase
   id: CMFloorWhite
   name: tiles-cm-white
   sprite: /Textures/_CM14/Tiles/almayer/white.png
-  baseTurf: Plating
-  isSubfloor: false
-  canCrowbar: true
-  footstepSounds:
-    collection: FootstepFloor
-  itemDrop: CMTileItemSteel
-  heatCapacity: 10000
 
 - type: tile
+  parent: CMTileBase
   id: CMFloorWhiteSterile
   name: tiles-cm-white-sterile
   sprite: /Textures/_CM14/Tiles/almayer/white_sterile.png
-  baseTurf: Plating
-  isSubfloor: false
-  canCrowbar: true
-  footstepSounds:
-    collection: FootstepFloor
-  itemDrop: CMTileItemSteel
-  heatCapacity: 10000
 
 - type: tile
-  id: CMFloorBlakc
+  parent: CMTileBase
+  id: CMFloorBlack
   name: tiles-cm-black
   sprite: /Textures/_CM14/Tiles/almayer/black.png
-  baseTurf: Plating
-  isSubfloor: false
-  canCrowbar: true
-  footstepSounds:
-    collection: FootstepFloor
-  itemDrop: CMTileItemSteel
-  heatCapacity: 10000
 
 - type: tile
+  parent: CMTileBase
   id: CMFloorAI
   name: tiles-cm-ai
   sprite: /Textures/_CM14/Tiles/almayer/ai.png
-  baseTurf: Plating
-  isSubfloor: false
-  canCrowbar: true
-  footstepSounds:
-    collection: FootstepFloor
-  itemDrop: CMTileItemSteel
-  heatCapacity: 10000
 
 - type: tile
+  parent: CMTileBase
   id: CMFloorTComms
   name: tiles-cm-tcomms
   sprite: /Textures/_CM14/Tiles/almayer/tcomms.png
-  baseTurf: Plating
-  isSubfloor: false
-  canCrowbar: true
-  footstepSounds:
-    collection: FootstepFloor
-  itemDrop: CMTileItemSteel
-  heatCapacity: 10000
