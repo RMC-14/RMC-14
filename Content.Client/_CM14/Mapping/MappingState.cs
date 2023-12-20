@@ -220,6 +220,11 @@ public sealed class MappingState : GameplayStateBase
 
         Sort(mappings, decals);
         mappings.Clear();
+
+        foreach (var prototype in _allPrototypes)
+        {
+            prototype.Children?.Sort((a, b) => string.Compare(a.Name, b.Name, OrdinalIgnoreCase));
+        }
     }
 
     private void Sort(Dictionary<string, MappingPrototype> prototypes, MappingPrototype topLevel)
