@@ -1,0 +1,10 @@
+﻿- type: entity
+  parent: [Rack, CMEntityBase]
+  id: CMRack
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/rack.rsi
+    state: rack
+  - type: Icon
+    sprite: _CM14/Structures/Storage/rack.rsi
+    state: rack
