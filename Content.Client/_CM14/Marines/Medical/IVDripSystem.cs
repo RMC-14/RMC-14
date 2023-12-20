@@ -9,10 +9,21 @@ namespace Content.Client._CM14.Marines.Medical;
 public sealed class IVDripSystem : SharedIVDripSystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private readonly SolutionContainerSystem _solutionContainer = default!;
 
     protected override void UpdateAppearance(Entity<IVDripComponent> iv)
     {
         if (!TryComp(iv, out SpriteComponent? sprite))
+            return;
+
+        if (_itemSlots.GetItemOrNull(iv, iv.Comp.Slot) is not { } bag)
+            return;
+
+        if (!TryComp(bag, out BloodBagComponent? bagComponent))
+            return;
+
+        if (!_solutionContainer.TryGetSolution(bag, bagComponent.Solution, out var bagSolution))
             return;
 
         var hookedState = iv.Comp.AttachedTo == default
@@ -24,7 +35,7 @@ public sealed class IVDripSystem : SharedIVDripSystem
         for (var i = iv.Comp.ReagentStates.Count - 1; i >= 0; i--)
         {
             var (amount, state) = iv.Comp.ReagentStates[i];
-            if (amount <= iv.Comp.FillPercentage)
+            if (amount <= bagComponent.FillPercentage)
             {
                 reagentState = state;
                 break;
@@ -39,6 +50,6 @@ public sealed class IVDripSystem : SharedIVDripSystem
 
         sprite.LayerSetVisible(IVDripVisualLayers.Reagent, true);
         sprite.LayerSetState(IVDripVisualLayers.Reagent, reagentState);
-        sprite.LayerSetColor(IVDripVisualLayers.Reagent, iv.Comp.FillColor);
+        sprite.LayerSetColor(IVDripVisualLayers.Reagent, bagComponent.FillColor);
     }
 }

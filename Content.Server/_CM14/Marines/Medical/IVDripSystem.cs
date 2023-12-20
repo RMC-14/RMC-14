@@ -2,6 +2,7 @@ using Content.Server.Body.Components;
 using Content.Shared._CM14.Marines.Medical;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Server._CM14.Marines.Medical;
@@ -11,11 +12,31 @@ public sealed class IVDripSystem : SharedIVDripSystem
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
-    protected override void UpdateAppearance(Entity<IVDripComponent> iv)
+    public override void Initialize()
     {
-        UpdateFill(iv);
+        base.Initialize();
+        SubscribeLocalEvent<BloodBagComponent, SolutionChangedEvent>(OnSolutionChanged);
+        SubscribeLocalEvent<BloodBagComponent, MapInitEvent>(OnMapInitEvent);
     }
+
+    private void OnMapInitEvent(Entity<BloodBagComponent> ent, ref MapInitEvent args)
+    {
+        if (!_solutionContainer.TryGetSolution(ent, ent.Comp.Solution, out var bagSolution))
+            return;
+        ent.Comp.FillColor = bagSolution.GetColor(_prototypeManager);
+        ent.Comp.FillPercentage = (int) (bagSolution.Volume / bagSolution.MaxVolume * 100);
+        Dirty(ent);
+    }
+
+    private void OnSolutionChanged(Entity<BloodBagComponent> ent, ref SolutionChangedEvent args)
+    {
+        ent.Comp.FillColor = args.Solution.GetColor(_prototypeManager);
+        ent.Comp.FillPercentage = (int) (args.Solution.Volume / args.Solution.MaxVolume * 100);
+        Dirty(ent);
+    }
+
 
     public override void Update(float frameTime)
     {
@@ -29,7 +50,10 @@ public sealed class IVDripSystem : SharedIVDripSystem
             if (_itemSlots.GetItemOrNull(ivId, ivComp.Slot) is not { } bag)
                 continue;
 
-            if (!_solutionContainer.TryGetSolution(bag, ivComp.Solution, out var bagSolution))
+            if (!TryComp(bag, out BloodBagComponent? bagComponent))
+                continue;
+
+            if (!_solutionContainer.TryGetSolution(bag, bagComponent.Solution, out var bagSolution))
                 continue;
 
             if (!TryComp(ivComp.AttachedTo, out BloodstreamComponent? targetBloodstream))
@@ -44,7 +68,6 @@ public sealed class IVDripSystem : SharedIVDripSystem
             }
 
             ivComp.TransferAt = time + ivComp.TransferDelay;
-            UpdateFill((ivId, ivComp));
             Dirty(ivId, ivComp);
         }
     }

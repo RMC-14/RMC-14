@@ -14,9 +14,6 @@ public sealed partial class IVDripComponent : Component
     public string Slot = "bag";
 
     [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadWrite)]
-    public string Solution = "IVBagContents";
-
-    [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadWrite)]
     public FixedPoint2 TransferAmount = FixedPoint2.New(5);
 
     [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadWrite)]
@@ -33,15 +30,6 @@ public sealed partial class IVDripComponent : Component
 
     [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadWrite)]
     public List<(int, string)> ReagentStates = new();
-
-    /// <summary>
-    ///     From 0 to 100
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public int FillPercentage;
-
-    [DataField, AutoNetworkedField]
-    public Color FillColor;
 }
 
 [Serializable, NetSerializable]

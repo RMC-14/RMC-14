@@ -2,6 +2,8 @@
   parent: [BaseStructure, CMEntityBase]
   id: CMIV
   name: iv
+  description: Allows you to inject blood into a patient or extract blood from them to do a blood transfusion.
+  suffix: IV, empty
   components:
   - type: Transform
     anchored: false
@@ -29,7 +31,101 @@
         name: Bag
         whitelist:
           tags:
-          - GlassBeaker
+          - GlassBeaker # todo
   - type: ContainerContainer
     containers:
       bag: !type:ContainerSlot {}
+
+- type: entity
+  parent: BaseItem
+  id: BloodBag
+  name: blood bag
+  components:
+  - type: BloodBag
+  - type: Tag
+    tags:
+    - GlassBeaker
+  - type: Sprite
+    sprite: Objects/Specific/Chemistry/beaker.rsi
+    layers:
+    - state: beaker
+    - state: beaker1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: Item
+    sprite: Objects/Specific/Chemistry/beaker.rsi
+  - type: MeleeWeapon
+    soundNoDamage:
+      path: "/Audio/Effects/Fluids/splat.ogg"
+    damage:
+      types:
+        Blunt: 0
+  - type: SolutionContainerManager
+    solutions:
+      bag:
+        maxVol: 150
+        canMix: false
+        reagents:
+        - ReagentId: Blood
+          Quantity: 150
+  - type: FitsInDispenser
+    solution: bag
+  - type: RefillableSolution
+    solution: bag
+  - type: DrainableSolution
+    solution: bag
+  - type: ExaminableSolution
+    solution: bag
+  - type: DrawableSolution
+    solution: bag
+  - type: InjectableSolution
+    solution: bag
+  - type: SolutionTransfer
+    canChangeTransferAmount: true
+  - type: UserInterface
+    interfaces:
+    - key: enum.TransferAmountUiKey.Key
+      type: TransferAmountBoundUserInterface
+  - type: Drink
+    solution: bag
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    maxFillLevels: 6
+    fillBaseName: bag
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Glass
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:SpillBehavior
+        solution: bag
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlass:
+            min: 1
+            max: 1
+        transferForensics: true
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 10 # glass resistance set reduces damage. Need to land twice (w/o hitting wall)
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5
+  - type: DamageOnHighSpeedImpact
+    minimumSpeed: 2
+    damage:
+      types:
+        Blunt: 5
+  - type: StaticPrice
+    price: 30

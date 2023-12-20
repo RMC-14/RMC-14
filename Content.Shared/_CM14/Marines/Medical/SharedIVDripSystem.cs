@@ -82,20 +82,4 @@ public abstract class SharedIVDripSystem : EntitySystem
     protected virtual void UpdateAppearance(Entity<IVDripComponent> iv)
     {
     }
-
-    protected void UpdateFill(Entity<IVDripComponent> iv)
-    {
-        if (_itemSlots.GetItemOrNull(iv, iv.Comp.Slot) is not { } bag ||
-            !_solutionContainer.TryGetSolution(bag, iv.Comp.Solution, out var solution))
-        {
-            iv.Comp.FillPercentage = 0;
-            iv.Comp.FillColor = Color.White;
-            Dirty(iv);
-            return;
-        }
-
-        iv.Comp.FillPercentage = (int) (solution.Volume / solution.MaxVolume * 100);
-        iv.Comp.FillColor = solution.GetColor(_prototype);
-        Dirty(iv);
-    }
 }
