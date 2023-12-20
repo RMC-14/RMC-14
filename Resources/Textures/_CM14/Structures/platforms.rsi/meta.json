@@ -1,0 +1,126 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/c67c5213507a19e10e252ef2898d94354c0709bf/icons/obj/structures/props/platforms.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "platform",
+      "directions": 4
+    },
+    {
+      "name": "platform_stair",
+      "directions": 4
+    },
+    {
+      "name": "platform_stair_alt",
+      "directions": 4
+    },
+    {
+      "name": "platform_deco",
+      "directions": 8
+    },
+    {
+      "name": "platform_deco-alt",
+      "directions": 8
+    },
+    {
+      "name": "platform_overlay",
+      "directions": 4
+    },
+    {
+      "name": "strata_platform",
+      "directions": 4
+    },
+    {
+      "name": "strata_platform_deco",
+      "directions": 4
+    },
+    {
+      "name": "strata_platform_overlay",
+      "directions": 4
+    },
+    {
+      "name": "strata_metalplatform",
+      "directions": 4
+    },
+    {
+      "name": "strata_metalplatform_deco",
+      "directions": 4
+    },
+    {
+      "name": "strata_metalplatform_overlay",
+      "directions": 4
+    },
+    {
+      "name": "kutjevo_platform",
+      "directions": 4
+    },
+    {
+      "name": "kutjevo_platform_deco",
+      "directions": 4
+    },
+    {
+      "name": "kutjevo_platform_overlay",
+      "directions": 4
+    },
+    {
+      "name": "kutjevo_rock",
+      "directions": 4
+    },
+    {
+      "name": "kutjevo_rock_deco",
+      "directions": 4
+    },
+    {
+      "name": "kutjevo_rock_overlay",
+      "directions": 4
+    },
+    {
+      "name": "kutjevo_platform_sm",
+      "directions": 4
+    },
+    {
+      "name": "kutjevo_platform_sm_deco",
+      "directions": 4
+    },
+    {
+      "name": "kutjevo_platform_sm_stair",
+      "directions": 4
+    },
+    {
+      "name": "kutjevo_platform_sm_stair_alt",
+      "directions": 4
+    },
+    {
+      "name": "kutjevo_stair_plate"
+    },
+    {
+      "name": "stone",
+      "directions": 4
+    },
+    {
+      "name": "stone_deco",
+      "directions": 4
+    },
+    {
+      "name": "sandstone",
+      "directions": 4
+    },
+    {
+      "name": "sandstone_deco",
+      "directions": 4
+    },
+    {
+      "name": "shiva",
+      "directions": 4
+    },
+    {
+      "name": "shiva_deco",
+      "directions": 8
+    }
+  ]
+}
