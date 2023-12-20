@@ -1,0 +1,12 @@
+﻿- type: entity
+  parent: [Rack, CMEntityBase]
+  id: CMRack
+  name: rack
+  description: A bunch of metal shelves stacked on top of eachother. Excellent for storage purposes, less so as cover.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/rack.rsi
+    state: rack
+  - type: Icon
+    sprite: _CM14/Structures/Storage/rack.rsi
+    state: rack

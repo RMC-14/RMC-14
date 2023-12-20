@@ -1,0 +1,120 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/884db783073c035b756c175b1bc75fb43279803e/icons/obj/items/lighting.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bulb0",
+      "directions": 4
+    },
+    {
+      "name": "bulb1",
+      "directions": 4
+    },
+    {
+      "name": "bulb-broken",
+      "directions": 4
+    },
+    {
+      "name": "bulb-empty",
+      "directions": 4
+    },
+    {
+      "name": "bulb-burned",
+      "directions": 4
+    },
+    {
+      "name": "bbulb0",
+      "directions": 4
+    },
+    {
+      "name": "bbulb1",
+      "directions": 4
+    },
+    {
+      "name": "bbulb-broken",
+      "directions": 4
+    },
+    {
+      "name": "bbulb-empty",
+      "directions": 4
+    },
+    {
+      "name": "bbulb-burned",
+      "directions": 4
+    },
+    {
+      "name": "lbulb"
+    },
+    {
+      "name": "lbulb-burned"
+    },
+    {
+      "name": "lbulb-broken"
+    },
+    {
+      "name": "firelight1",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "firelight0",
+      "directions": 4
+    },
+    {
+      "name": "firelight-broken",
+      "directions": 4
+    },
+    {
+      "name": "fbulb"
+    },
+    {
+      "name": "fbulb-broken"
+    }
+  ]
+}

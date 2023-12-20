@@ -1,0 +1,20 @@
+﻿- type: entity
+  parent: CMEntityBase
+  id: CMOverheadPipe
+  name: overhead pipe segment
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _CM14/Structures/overhead_pipes.rsi
+    state: intact-scrubbers
+    drawdepth: Overdoors
+  - type: Icon
+    sprite: _CM14/Structures/overhead_pipes.rsi
+    state: intact-scrubbers
+  - type: Anchorable
+  - type: Clickable
