@@ -274,7 +274,7 @@ public sealed class MappingState : GameplayStateBase
             else
             {
                 var name = node.TryGet("name", out ValueDataNode? nameNode)
-                    ? nameNode.Value
+                    ? Loc.GetString(nameNode.Value)
                     : id;
 
                 if (node.TryGet("suffix", out ValueDataNode? suffix))
@@ -332,7 +332,7 @@ public sealed class MappingState : GameplayStateBase
             else
             {
                 var entity = prototype as EntityPrototype;
-                var name = entity?.Name ?? prototype.ID;
+                var name = entity == null ? prototype.ID : Loc.GetString(entity.Name);
 
                 if (!string.IsNullOrWhiteSpace(entity?.EditorSuffix))
                     name = $"{name} [{entity.EditorSuffix}]";
