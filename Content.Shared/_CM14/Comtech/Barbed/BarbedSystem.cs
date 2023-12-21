@@ -41,20 +41,19 @@ public sealed class BarbedSystem : EntitySystem
             return;
         }
 
-        var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.WireTime, new BarbedDoAfterEvent(), uid, used: uid)
+        var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.WireTime, new BarbedDoAfterEvent(), uid, used: args.Used)
         {
             BreakOnUserMove = true,
             BreakOnDamage = true,
             NeedHand = true,
         };
-
-        if (args.Used == null)
-            return;
-
         _doAfterSystem.TryStartDoAfter(doAfterEventArgs);
     }
     private void OnDoAfter(EntityUid uid, BarbedComponent component, BarbedDoAfterEvent args)
     {
+        if (args.Used == null)
+            return;
+
         component.BarbedSlot.Insert(args.Used.Value);
         _appearance.SetData(uid, BarbedWireVisuals.Wired, true);
         _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-insert-success"), uid, args.User, PopupType.Small);
