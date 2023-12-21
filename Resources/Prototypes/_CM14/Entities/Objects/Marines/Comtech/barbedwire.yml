@@ -1,13 +1,62 @@
 - type: entity
-  id: BarbedWire
+  abstract: true
+  id: BarbedWireBase
   parent: BaseItem
   name: Barbed Wire
+  suffix: Full
   description: Spikey!
   components:
+  - type: Tag
+    tags:
+    - Metal
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Stack
+    stackType: BarbedWire
+    baseLayer: base
+    layerStates:
+    - barbed_wire
+    - barbed_wire_2
+    - barbed_wire_3
   - type: Sprite
-    sprite: _CM14/Objects/barbed_wire
+    sprite: _CM14/Objects/barbed_wire.rsi
+    state: barbed_wire_3
     layers:
-      - state: icon
+    - state: barbed_wire_3
+      map: ["base"]
   - type: Item
-    size: Small
+  - type: Appearance
   - type: Barbedwire
+
+- type: entity
+  parent: BarbedWireBase
+  id: BarbedWire10
+  name: Barbed Wire
+  suffix: 10
+  components:
+  - type: Sprite
+    state: barbed_wire
+  - type: Stack
+    stackType: BarbedWire
+    count: 10
+
+- type: entity
+  parent: BarbedWireBase
+  id: BarbedWire1
+  name: Barbed Wire
+  suffix: Single
+  components:
+  - type: Sprite
+    state: barbed_wire
+  - type: Stack
+    stackType: BarbedWire
+    count: 1

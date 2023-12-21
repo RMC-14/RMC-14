@@ -1,5 +1,4 @@
 using Content.Shared.Damage;
-using Robust.Shared.Containers;
 ﻿using Robust.Shared.Serialization;
 using Content.Shared.DoAfter;
 
@@ -11,8 +10,8 @@ namespace Content.Shared._CM14.Comtech.Barbed.Components
         [DataField(required: true)]
         public DamageSpecifier ThornsDamage = default!;
 
-        [ViewVariables]
-        public ContainerSlot BarbedSlot = default!;
+        [DataField("isBarbed")]
+        public bool IsBarbed = false;
 
         [DataField("wireTime")]
         public float WireTime = 3.0f;
