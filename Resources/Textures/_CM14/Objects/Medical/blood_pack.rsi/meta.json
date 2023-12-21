@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/1d28964d37f9b95773580cca3471a2a4f5c03eb0/icons/obj/items/bloodpack.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bloodpack"
+    },
+    {
+      "name": "blank"
+    },
+    {
+      "name": "x"
+    },
+    {
+      "name": "o\u002B"
+    },
+    {
+      "name": "o-"
+    },
+    {
+      "name": "ab\u002B"
+    },
+    {
+      "name": "ab-"
+    },
+    {
+      "name": "b\u002B"
+    },
+    {
+      "name": "b-"
+    },
+    {
+      "name": "a\u002B"
+    },
+    {
+      "name": "a-"
+    },
+    {
+      "name": "bloodpack1"
+    },
+    {
+      "name": "bloodpack2"
+    },
+    {
+      "name": "bloodpack3"
+    },
+    {
+      "name": "bloodpack4"
+    },
+    {
+      "name": "bloodpack5"
+    },
+    {
+      "name": "bloodpack6"
+    },
+    {
+      "name": "bloodpack7"
+    }
+  ]
+}

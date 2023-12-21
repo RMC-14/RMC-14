@@ -11,7 +11,7 @@ public sealed partial class IVDripComponent : Component
     public EntityUid AttachedTo;
 
     [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadWrite)]
-    public string Slot = "bag";
+    public string Slot = "pack";
 
     [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadWrite)]
     public FixedPoint2 TransferAmount = FixedPoint2.New(5);
@@ -28,8 +28,20 @@ public sealed partial class IVDripComponent : Component
     [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadWrite)]
     public string UnattachedState = "unhooked";
 
+    /// <summary>
+    ///     Percentages are from 0 to 100
+    /// </summary>
     [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadWrite)]
-    public List<(int, string)> ReagentStates = new();
+    public List<(int Percentage, string State)> ReagentStates = new();
+
+    [DataField, AutoNetworkedField]
+    public Color FillColor;
+
+    /// <summary>
+    ///     From 0 to 100
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int FillPercentage;
 }
 
 [Serializable, NetSerializable]

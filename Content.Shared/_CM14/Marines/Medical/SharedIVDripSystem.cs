@@ -1,5 +1,5 @@
+using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DragDrop;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
@@ -8,7 +8,7 @@ namespace Content.Shared._CM14.Marines.Medical;
 
 public abstract class SharedIVDripSystem : EntitySystem
 {
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private readonly SharedContainerSystem _containers = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SolutionContainerSystem _solutionContainer = default!;
 
@@ -17,27 +17,32 @@ public abstract class SharedIVDripSystem : EntitySystem
         SubscribeLocalEvent<IVDripComponent, EntInsertedIntoContainerMessage>(OnIVDripEntInserted);
         SubscribeLocalEvent<IVDripComponent, EntRemovedFromContainerMessage>(OnIVDripEntRemoved);
         SubscribeLocalEvent<IVDripComponent, AfterAutoHandleStateEvent>(OnIVDripAfterHandleState);
+
         SubscribeLocalEvent<IVDripComponent, EntityUnpausedEvent>(OnIVDripUnPaused);
         SubscribeLocalEvent<IVDripComponent, CanDragEvent>(OnIVDripCanDrag);
         SubscribeLocalEvent<IVDripComponent, CanDropDraggedEvent>(OnIVDripCanDropDragged);
+        SubscribeLocalEvent<IVDripComponent, DragDropDraggedEvent>(OnIVDripDragDropDragged);
+
         // TODO CM14 check for BloodstreamComponent instead of MarineComponent
         SubscribeLocalEvent<MarineComponent, CanDropTargetEvent>(OnMarineCanDropTarget);
-        SubscribeLocalEvent<IVDripComponent, DragDropDraggedEvent>(OnIVDripDragDropDragged);
+
+        SubscribeLocalEvent<BloodPackComponent, MapInitEvent>(OnBloodPackMapInitEvent);
+        SubscribeLocalEvent<BloodPackComponent, SolutionChangedEvent>(OnBloodPackSolutionChanged);
     }
 
     private void OnIVDripEntInserted(Entity<IVDripComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        UpdateAppearance(ent);
+        UpdateIVVisuals(ent);
     }
 
     private void OnIVDripEntRemoved(Entity<IVDripComponent> ent, ref EntRemovedFromContainerMessage args)
     {
-        UpdateAppearance(ent);
+        UpdateIVVisuals(ent);
     }
 
     private void OnIVDripAfterHandleState(Entity<IVDripComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        UpdateAppearance(ent);
+        UpdateIVVisuals(ent);
     }
 
     private void OnIVDripUnPaused(Entity<IVDripComponent> ent, ref EntityUnpausedEvent args)
@@ -79,7 +84,61 @@ public abstract class SharedIVDripSystem : EntitySystem
         Dirty(ent);
     }
 
-    protected virtual void UpdateAppearance(Entity<IVDripComponent> iv)
+    private void OnBloodPackMapInitEvent(Entity<BloodPackComponent> ent, ref MapInitEvent args)
+    {
+        if (!_solutionContainer.TryGetSolution(ent, ent.Comp.Solution, out var bagSolution))
+            return;
+
+        UpdateBagVisuals(ent, bagSolution);
+    }
+
+    private void OnBloodPackSolutionChanged(Entity<BloodPackComponent> ent, ref SolutionChangedEvent args)
+    {
+        UpdateBagVisuals(ent, args.Solution);
+    }
+
+    private void UpdateBagVisuals(Entity<BloodPackComponent> bag, Solution solution)
+    {
+        if (_containers.TryGetContainingContainer(bag, out var container) &&
+            TryComp(container.Owner, out IVDripComponent? iv))
+        {
+            iv.FillColor = solution.GetColor(_prototype);
+            iv.FillPercentage = (int) (solution.Volume / solution.MaxVolume * 100);
+            Dirty(container.Owner, iv);
+            UpdateIVAppearance((container.Owner, iv));
+        }
+
+        UpdatePackAppearance(bag);
+    }
+
+    private void UpdateIVVisuals(Entity<IVDripComponent> iv)
+    {
+        if (_containers.TryGetContainer(iv, iv.Comp.Slot, out var container))
+        {
+            foreach (var entity in container.ContainedEntities)
+            {
+                if (TryComp(entity, out BloodPackComponent? pack) &&
+                    _solutionContainer.TryGetSolution(entity, pack.Solution, out var solution))
+                {
+                    iv.Comp.FillColor = solution.GetColor(_prototype);
+                    iv.Comp.FillPercentage = (int) (solution.Volume / solution.MaxVolume * 100);
+                    Dirty(iv);
+                    UpdateIVAppearance(iv);
+                    return;
+                }
+            }
+
+            iv.Comp.FillColor = Color.White;
+            iv.Comp.FillPercentage = 0;
+            UpdateIVAppearance(iv);
+        }
+    }
+
+    protected virtual void UpdateIVAppearance(Entity<IVDripComponent> iv)
+    {
+    }
+
+    protected virtual void UpdatePackAppearance(Entity<BloodPackComponent> pack)
     {
     }
 }

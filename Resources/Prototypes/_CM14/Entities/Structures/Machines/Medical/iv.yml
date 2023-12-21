@@ -27,71 +27,61 @@
     - 100: reagent100
   - type: ItemSlots
     slots:
-      bag:
-        name: Bag
+      pack:
+        name: pack
         whitelist:
-          tags:
-          - GlassBeaker # todo
+          components:
+          - BloodPack
   - type: ContainerContainer
     containers:
-      bag: !type:ContainerSlot {}
+      pack: !type:ContainerSlot {}
 
 - type: entity
   parent: BaseItem
-  id: BloodBag
-  name: blood bag
+  id: CMBloodPack # TODO CM14 blood types
+  name: blood pack
   components:
-  - type: BloodBag
-  - type: Tag
-    tags:
-    - GlassBeaker
+  - type: BloodPack
   - type: Sprite
-    sprite: Objects/Specific/Chemistry/beaker.rsi
+    sprite: _CM14/Objects/Medical/blood_pack.rsi
     layers:
-    - state: beaker
-    - state: beaker1
+    - state: bloodpack1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
+    - state: bloodpack
+    - state: blank
+      map: ["enum.BloodPackVisuals.Label"]
   - type: Item
-    sprite: Objects/Specific/Chemistry/beaker.rsi
-  - type: MeleeWeapon
-    soundNoDamage:
-      path: "/Audio/Effects/Fluids/splat.ogg"
-    damage:
-      types:
-        Blunt: 0
+    sprite: _CM14/Objects/Medical/blood_pack.rsi
+    state: bloodpack
   - type: SolutionContainerManager
     solutions:
-      bag:
-        maxVol: 150
+      pack:
+        maxVol: 300
         canMix: false
         reagents:
         - ReagentId: Blood
-          Quantity: 150
+          Quantity: 300
   - type: FitsInDispenser
-    solution: bag
+    solution: pack
   - type: RefillableSolution
-    solution: bag
+    solution: pack
   - type: DrainableSolution
-    solution: bag
+    solution: pack
   - type: ExaminableSolution
-    solution: bag
+    solution: pack
   - type: DrawableSolution
-    solution: bag
+    solution: pack
   - type: InjectableSolution
-    solution: bag
+    solution: pack
   - type: SolutionTransfer
     canChangeTransferAmount: true
-  - type: UserInterface
-    interfaces:
-    - key: enum.TransferAmountUiKey.Key
-      type: TransferAmountBoundUserInterface
   - type: Drink
-    solution: bag
+    solution: pack
   - type: Appearance
   - type: SolutionContainerVisuals
-    maxFillLevels: 6
-    fillBaseName: bag
+    maxFillLevels: 7
+    fillBaseName: bloodpack
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Glass
@@ -101,27 +91,10 @@
         !type:DamageTrigger
         damage: 5
       behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
       - !type:SpillBehavior
-        solution: bag
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          ShardGlass:
-            min: 1
-            max: 1
-        transferForensics: true
+        solution: pack
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: DamageOnLand
-    damage:
-      types:
-        Blunt: 10 # glass resistance set reduces damage. Need to land twice (w/o hitting wall)
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Blunt: 5
   - type: DamageOnHighSpeedImpact
     minimumSpeed: 2
     damage:
