@@ -2,7 +2,6 @@ using Content.Server.Body.Components;
 using Content.Shared._CM14.Marines.Medical;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
-using Robust.Server.GameObjects;
 using Robust.Shared.Timing;
 
 namespace Content.Server._CM14.Marines.Medical;
@@ -12,7 +11,6 @@ public sealed class IVDripSystem : SharedIVDripSystem
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
 
     public override void Update(float frameTime)
     {
@@ -23,12 +21,8 @@ public sealed class IVDripSystem : SharedIVDripSystem
             if (ivComp.AttachedTo == default)
                 continue;
 
-            var ivPos = _transform.GetMapCoordinates(ivId);
-            var attachedPos = _transform.GetMapCoordinates(ivComp.AttachedTo);
-            if (!ivPos.InRange(attachedPos, 2))
-            {
+            if (!InRange((ivId, ivComp), ivComp.AttachedTo))
                 Detach((ivId, ivComp), true, false);
-            }
 
             if (_itemSlots.GetItemOrNull(ivId, ivComp.Slot) is not { } pack)
                 continue;

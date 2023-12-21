@@ -18,14 +18,15 @@ public abstract class SharedIVDripSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<IVDripComponent, EntInsertedIntoContainerMessage>(OnIVDripEntInserted);
         SubscribeLocalEvent<IVDripComponent, EntRemovedFromContainerMessage>(OnIVDripEntRemoved);
         SubscribeLocalEvent<IVDripComponent, AfterAutoHandleStateEvent>(OnIVDripAfterHandleState);
-
         SubscribeLocalEvent<IVDripComponent, EntityUnpausedEvent>(OnIVDripUnPaused);
+
         SubscribeLocalEvent<IVDripComponent, CanDragEvent>(OnIVDripCanDrag);
         SubscribeLocalEvent<IVDripComponent, CanDropDraggedEvent>(OnIVDripCanDropDragged);
         SubscribeLocalEvent<IVDripComponent, DragDropDraggedEvent>(OnIVDripDragDropDragged);
@@ -65,7 +66,7 @@ public abstract class SharedIVDripSystem : EntitySystem
     private void OnIVDripCanDropDragged(Entity<IVDripComponent> iv, ref CanDropDraggedEvent args)
     {
         // TODO CM14 check for BloodstreamComponent instead of MarineComponent
-        if (HasComp<MarineComponent>(args.Target))
+        if (HasComp<MarineComponent>(args.Target) && InRange(iv, args.Target))
         {
             args.Handled = true;
             args.CanDrop = true;
@@ -75,7 +76,8 @@ public abstract class SharedIVDripSystem : EntitySystem
     // TODO CM14 check for BloodstreamComponent instead of MarineComponent
     private void OnMarineCanDropTarget(Entity<MarineComponent> marine, ref CanDropTargetEvent args)
     {
-        if (HasComp<IVDripComponent>(args.Dragged))
+        var iv = args.Dragged;
+        if (TryComp(iv, out IVDripComponent? ivComp) && InRange((iv, ivComp), marine))
         {
             args.Handled = true;
             args.CanDrop = true;
@@ -106,8 +108,18 @@ public abstract class SharedIVDripSystem : EntitySystem
         UpdatePackVisuals(pack, args.Solution);
     }
 
+    protected bool InRange(Entity<IVDripComponent> iv, EntityUid to)
+    {
+        var ivPos = _transform.GetMapCoordinates(iv);
+        var toPos = _transform.GetMapCoordinates(to);
+        return ivPos.InRange(toPos, iv.Comp.Range);
+    }
+
     protected void Attach(Entity<IVDripComponent> iv, EntityUid user, EntityUid to)
     {
+        if (!InRange(iv, to))
+            return;
+
         iv.Comp.AttachedTo = to;
         Dirty(iv);
 

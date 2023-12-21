@@ -42,6 +42,9 @@ public sealed partial class IVDripComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public int FillPercentage;
+
+    [DataField, AutoNetworkedField]
+    public int Range = 2;
 }
 
 [Serializable, NetSerializable]
