@@ -1,16 +1,23 @@
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.DragDrop;
+using Content.Shared.Popups;
 using Robust.Shared.Containers;
+using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Marines.Medical;
 
 public abstract class SharedIVDripSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _containers = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -30,32 +37,32 @@ public abstract class SharedIVDripSystem : EntitySystem
         SubscribeLocalEvent<BloodPackComponent, SolutionChangedEvent>(OnBloodPackSolutionChanged);
     }
 
-    private void OnIVDripEntInserted(Entity<IVDripComponent> ent, ref EntInsertedIntoContainerMessage args)
+    private void OnIVDripEntInserted(Entity<IVDripComponent> iv, ref EntInsertedIntoContainerMessage args)
     {
-        UpdateIVVisuals(ent);
+        UpdateIVVisuals(iv);
     }
 
-    private void OnIVDripEntRemoved(Entity<IVDripComponent> ent, ref EntRemovedFromContainerMessage args)
+    private void OnIVDripEntRemoved(Entity<IVDripComponent> iv, ref EntRemovedFromContainerMessage args)
     {
-        UpdateIVVisuals(ent);
+        UpdateIVVisuals(iv);
     }
 
-    private void OnIVDripAfterHandleState(Entity<IVDripComponent> ent, ref AfterAutoHandleStateEvent args)
+    private void OnIVDripAfterHandleState(Entity<IVDripComponent> iv, ref AfterAutoHandleStateEvent args)
     {
-        UpdateIVVisuals(ent);
+        UpdateIVAppearance(iv);
     }
 
-    private void OnIVDripUnPaused(Entity<IVDripComponent> ent, ref EntityUnpausedEvent args)
+    private void OnIVDripUnPaused(Entity<IVDripComponent> iv, ref EntityUnpausedEvent args)
     {
-        ent.Comp.TransferAt += args.PausedTime;
+        iv.Comp.TransferAt += args.PausedTime;
     }
 
-    private void OnIVDripCanDrag(Entity<IVDripComponent> ent, ref CanDragEvent args)
+    private void OnIVDripCanDrag(Entity<IVDripComponent> iv, ref CanDragEvent args)
     {
         args.Handled = true;
     }
 
-    private void OnIVDripCanDropDragged(Entity<IVDripComponent> ent, ref CanDropDraggedEvent args)
+    private void OnIVDripCanDropDragged(Entity<IVDripComponent> iv, ref CanDropDraggedEvent args)
     {
         // TODO CM14 check for BloodstreamComponent instead of MarineComponent
         if (HasComp<MarineComponent>(args.Target))
@@ -66,7 +73,7 @@ public abstract class SharedIVDripSystem : EntitySystem
     }
 
     // TODO CM14 check for BloodstreamComponent instead of MarineComponent
-    private void OnMarineCanDropTarget(Entity<MarineComponent> ent, ref CanDropTargetEvent args)
+    private void OnMarineCanDropTarget(Entity<MarineComponent> marine, ref CanDropTargetEvent args)
     {
         if (HasComp<IVDripComponent>(args.Dragged))
         {
@@ -75,31 +82,87 @@ public abstract class SharedIVDripSystem : EntitySystem
         }
     }
 
-    private void OnIVDripDragDropDragged(Entity<IVDripComponent> ent, ref DragDropDraggedEvent args)
+    private void OnIVDripDragDropDragged(Entity<IVDripComponent> iv, ref DragDropDraggedEvent args)
     {
         if (args.Handled)
             return;
 
-        ent.Comp.AttachedTo = args.Target;
-        Dirty(ent);
+        if (iv.Comp.AttachedTo == default)
+            Attach(iv, args.User, args.Target);
+        else
+            Detach(iv, false, true);
     }
 
-    private void OnBloodPackMapInitEvent(Entity<BloodPackComponent> ent, ref MapInitEvent args)
+    private void OnBloodPackMapInitEvent(Entity<BloodPackComponent> pack, ref MapInitEvent args)
     {
-        if (!_solutionContainer.TryGetSolution(ent, ent.Comp.Solution, out var bagSolution))
+        if (!_solutionContainer.TryGetSolution(pack, pack.Comp.Solution, out var packSolution))
             return;
 
-        UpdateBagVisuals(ent, bagSolution);
+        UpdatePackVisuals(pack, packSolution);
     }
 
-    private void OnBloodPackSolutionChanged(Entity<BloodPackComponent> ent, ref SolutionChangedEvent args)
+    private void OnBloodPackSolutionChanged(Entity<BloodPackComponent> pack, ref SolutionChangedEvent args)
     {
-        UpdateBagVisuals(ent, args.Solution);
+        UpdatePackVisuals(pack, args.Solution);
     }
 
-    private void UpdateBagVisuals(Entity<BloodPackComponent> bag, Solution solution)
+    protected void Attach(Entity<IVDripComponent> iv, EntityUid user, EntityUid to)
     {
-        if (_containers.TryGetContainingContainer(bag, out var container) &&
+        iv.Comp.AttachedTo = to;
+        Dirty(iv);
+
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
+        _popup.PopupClient(Loc.GetString("cm-iv-attach-self", ("target", to)), to, user);
+
+        var others = Filter.PvsExcept(user);
+        _popup.PopupEntity(Loc.GetString("cm-iv-attach-self", ("target", others)), to, others, true);
+    }
+
+    protected void Detach(Entity<IVDripComponent> iv, bool rip, bool predict)
+    {
+        if (iv.Comp.AttachedTo == default)
+            return;
+
+        var target = iv.Comp.AttachedTo;
+        iv.Comp.AttachedTo = default;
+        Dirty(iv);
+
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
+        if (rip)
+        {
+            var message = Loc.GetString("cm-iv-rip", ("target", target));
+            if (predict)
+            {
+                _popup.PopupClient(message, target, target);
+
+                var others = Filter.PvsExcept(target);
+                _popup.PopupEntity(message, target, others, true);
+            }
+            else
+            {
+                _popup.PopupEntity(message, target);
+            }
+        }
+        else
+        {
+            var selfMessage = Loc.GetString("cm-iv-detach-self", ("target", target));
+            if (predict)
+                _popup.PopupClient(selfMessage, target, target);
+            else
+                _popup.PopupEntity(selfMessage, target);
+
+            var others = Filter.PvsExcept(target);
+            _popup.PopupEntity(Loc.GetString("cm-iv-detach-self", ("target", others)), target, others, true);
+        }
+    }
+
+    private void UpdatePackVisuals(Entity<BloodPackComponent> pack, Solution solution)
+    {
+        if (_containers.TryGetContainingContainer(pack, out var container) &&
             TryComp(container.Owner, out IVDripComponent? iv))
         {
             iv.FillColor = solution.GetColor(_prototype);
@@ -108,11 +171,18 @@ public abstract class SharedIVDripSystem : EntitySystem
             UpdateIVAppearance((container.Owner, iv));
         }
 
-        UpdatePackAppearance(bag);
+        UpdatePackAppearance(pack);
     }
 
     private void UpdateIVVisuals(Entity<IVDripComponent> iv)
     {
+        // the client doesn't always know about solutions
+        if (_net.IsClient)
+        {
+            UpdateIVAppearance(iv);
+            return;
+        }
+
         if (_containers.TryGetContainer(iv, iv.Comp.Slot, out var container))
         {
             foreach (var entity in container.ContainedEntities)
@@ -130,6 +200,7 @@ public abstract class SharedIVDripSystem : EntitySystem
 
             iv.Comp.FillColor = Color.White;
             iv.Comp.FillPercentage = 0;
+            Dirty(iv);
             UpdateIVAppearance(iv);
         }
     }
