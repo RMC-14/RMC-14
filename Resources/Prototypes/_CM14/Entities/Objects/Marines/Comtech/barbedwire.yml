@@ -60,3 +60,6 @@
   - type: Stack
     stackType: BarbedWire
     count: 1
+  - type: Construction
+    graph: BarbedWireGraph
+    node: nodeBarbedWire

@@ -61,6 +61,10 @@
     {
       "name": "metal_wire",
       "directions": 4
+    },
+    {
+      "name": "sandbag_wire",
+      "directions": 4
     }
   ]
 }

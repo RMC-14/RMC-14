@@ -86,6 +86,7 @@
     thornsDamage:
       types:
         Slash: 6
+    spawn: BarbedWire1
   - type: Construction
     graph: BarricadeMetalGraph
     node: nodeMetal
@@ -181,6 +182,12 @@
     layers:
     - state: sandbag
     drawdepth: WallTops
+  - type: GenericVisualizer
+    visuals:
+      enum.BarbedWireVisuals.Wired:
+        barbWired:
+          False: { state: sandbag_wire, visible: false }
+          True: { state: sandbag_wire, visible: true }
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: CMSandbag
@@ -222,7 +229,12 @@
   - type: Construction
     graph: BarricadeSandbagGraph
     node: nodeSandbag
-
+  - type: Barbed
+    thornsDamage:
+      types:
+        Slash: 6
+    spawn: BarbedWire1
+        
 # Turnstile (not sure how to make a one-way door so for now it is a glorified fence)
 
 - type: entity

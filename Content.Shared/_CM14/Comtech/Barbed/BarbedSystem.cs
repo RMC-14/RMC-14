@@ -5,6 +5,8 @@ using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.DoAfter;
+using SharedToolSystem = Content.Shared.Tools.Systems.SharedToolSystem;
+using Content.Shared.Tools.Components;
 
 namespace Content.Shared._CM14.Barbed;
 
@@ -15,34 +17,52 @@ public sealed class BarbedSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedStackSystem _stacks = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedToolSystem _toolSystem = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<BarbedComponent, AttackedEvent>(OnAttacked);
         SubscribeLocalEvent<BarbedComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<BarbedComponent, BarbedDoAfterEvent>(OnDoAfter);
+        SubscribeLocalEvent<BarbedComponent, CutBarbedDoAfterEvent>(WireCutterOnDoAfter);
     }
     public void OnInteractUsing(EntityUid uid, BarbedComponent component, InteractUsingEvent args)
     {
-        if (!HasComp<BarbedwireComponent>(args.Used))
+        if (component.IsBarbed == false && HasComp<BarbedwireComponent>(args.Used))
         {
+            var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.WireTime, new BarbedDoAfterEvent(), uid, used: args.Used)
+            {
+                BreakOnUserMove = true,
+                BreakOnDamage = true,
+                NeedHand = true,
+            };
+            _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-wiring"), uid, args.User, PopupType.Small);
+            _doAfterSystem.TryStartDoAfter(doAfterEventArgs);
             return;
         }
 
-        if (component.IsBarbed == true)
+        if (component.IsBarbed == true && HasComp<BarbedwireComponent>(args.Used))
         {
             _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-insert-full"), uid, args.User, PopupType.Small);
             return;
         }
 
-        var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.WireTime, new BarbedDoAfterEvent(), uid, used: args.Used)
+        if (component.IsBarbed == true && TryComp<ToolComponent>(args.Used, out var tool))
         {
-            BreakOnUserMove = true,
-            BreakOnDamage = true,
-            NeedHand = true,
-        };
-        _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-wiring"), uid, args.User, PopupType.Small);
-        _doAfterSystem.TryStartDoAfter(doAfterEventArgs);
+            if (_toolSystem.HasQuality(args.Used, "Cutting", tool))
+            {
+                _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-begin"), uid, args.User, PopupType.Small);
+                var wirecutterDoAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.CutTime, new CutBarbedDoAfterEvent(), uid, used: args.Used)
+                {
+                    BreakOnUserMove = true,
+                    BreakOnDamage = true,
+                    NeedHand = true,
+                };
+                _doAfterSystem.TryStartDoAfter(wirecutterDoAfterEventArgs);
+                return;
+            }
+        }
+        return;
     }
     private void OnDoAfter(EntityUid uid, BarbedComponent component, BarbedDoAfterEvent args)
     {
@@ -57,6 +77,14 @@ public sealed class BarbedSystem : EntitySystem
         component.IsBarbed = true;
         _appearance.SetData(uid, BarbedWireVisuals.Wired, true);
         _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-insert-success"), uid, args.User, PopupType.Small);
+        return;
+    }
+    private void WireCutterOnDoAfter(EntityUid uid, BarbedComponent component, CutBarbedDoAfterEvent args)
+    {
+        //EntityManager.SpawnEntity(component.Spawn, Transform(uid).Coordinates); Not sure how to make it so when wirecut spawns a metal rod
+        component.IsBarbed = false;
+        _appearance.SetData(uid, BarbedWireVisuals.Wired, false);
+        _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-finish"), uid, args.User, PopupType.Small);
         return;
     }
     private void OnAttacked(EntityUid uid, BarbedComponent component, AttackedEvent args)
