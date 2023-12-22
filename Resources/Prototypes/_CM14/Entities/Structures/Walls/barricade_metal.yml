@@ -86,7 +86,6 @@
     thornsDamage:
       types:
         Slash: 6
-    spawn: BarbedWire1
   - type: Construction
     graph: BarricadeMetalGraph
     node: nodeMetal
@@ -233,7 +232,6 @@
     thornsDamage:
       types:
         Slash: 6
-    spawn: BarbedWire1
         
 # Turnstile (not sure how to make a one-way door so for now it is a glorified fence)
 
