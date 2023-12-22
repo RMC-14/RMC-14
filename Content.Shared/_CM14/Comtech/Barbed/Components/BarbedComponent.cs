@@ -1,8 +1,6 @@
 using Content.Shared.Damage;
 ﻿using Robust.Shared.Serialization;
 using Content.Shared.DoAfter;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared._CM14.Comtech.Barbed.Components
 {
@@ -19,7 +17,7 @@ namespace Content.Shared._CM14.Comtech.Barbed.Components
         // public EntProtoId? Spawn; todo spawn a metal rod when wirecut
 
         [DataField("wireTime")]
-        public float WireTime = 3.0f;
+        public float WireTime = 2.0f;
 
         [DataField("cutTime")]
         public float CutTime = 1.0f;
