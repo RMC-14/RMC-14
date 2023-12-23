@@ -158,7 +158,6 @@
       - Flashlight
       - Crowbar
       - CableCoil
-      - Metal
       - Radio
       - Knife
       components:
@@ -202,7 +201,7 @@
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Pouches/pistol.rsi
   - type: Storage
-    maxItemSize: Medium
+    maxItemSize: Normal
     whitelist:
       tags:
       - Sidearm
@@ -232,7 +231,7 @@
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Pouches/medium_ammo_mag.rsi
   - type: Storage
-    maxItemSize: Medium
+    maxItemSize: Normal
     grid:
     - 0,0,3,1 #3 slots
     whitelist:
@@ -316,7 +315,7 @@
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Pouches/large_explosive.rsi
   - type: Storage
-    maxItemSize: Medium
+    maxItemSize: Normal
     grid:
     - 0,0,6,1 #6 slots
     #whitelist: #todo cm14 make explosives
@@ -335,6 +334,9 @@
     whitelist:
       tags:
       - DiscreteHealthAnalyzer
+      - Brutepack
+      - Ointment
+      - Bloodpack
       - PillCanister
       - Pill
       - Bottle
@@ -382,6 +384,9 @@
     whitelist:
       tags:
       - DiscreteHealthAnalyzer
+      - Brutepack
+      - Ointment
+      - Bloodpack
       - PillCanister
       - Pill
       - Bottle
@@ -402,9 +407,12 @@
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Pouches/vial.rsi
   - type: Storage
+    maxItemSize: Tiny
     grid:
     - 0,0,6,1 #6 slots
-    #whitelist: #smug merge vials please
+    whitelist:
+      components:
+      - FitsInDispenser
 
 - type: entity
   parent: CMPouchOpenClosed
@@ -415,6 +423,7 @@
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Pouches/chemist.rsi
   - type: Storage
+    maxItemSize: Normal
     grid:
     - 0,0,2,1 #2 slots
     whitelist:
@@ -463,7 +472,7 @@
     - 0,0,7,1 #7 slots
     whitelist:
       tags:
-      - DescreteHealtAnalyzer
+      - DiscreteHealthAnalyzer
       - PillCanister
       - Pill
       - Bottle
@@ -484,7 +493,7 @@
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Pouches/document.rsi
   - type: Storage
-    maxItemSize: Medium
+    maxItemSize: Normal
     grid:
     - 0,0,21,1 #21 slots
     whitelist:
@@ -561,7 +570,7 @@
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Pouches/construction.rsi
   - type: Storage
-    maxItemSize: Medium
+    maxItemSize: Normal
     grid:
     - 0,0,3,1 #3 slots
     whitelist:
@@ -583,7 +592,7 @@
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Pouches/tools.rsi
   - type: Storage
-    maxItemSize: Medium
+    maxItemSize: Normal
     grid:
     - 0,0,4,1 #4 slots
     whitelist:
@@ -591,6 +600,7 @@
       - Crowbar
       - Screwdriver
       - Wrench
+      - Wirecutter
       # etool
       - CableCoil
       - PowerCell
@@ -624,7 +634,7 @@
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Pouches/sling.rsi
   - type: Storage
-    maxItemSize: Medium
+    maxItemSize: Normal
 
 - type: entity
   parent: CMPouchOpenClosed

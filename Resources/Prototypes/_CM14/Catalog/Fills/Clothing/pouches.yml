@@ -1,0 +1,214 @@
+- type: entity
+  parent: CMPouchSurvival
+  id: CMPouchSurvivalFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: FlashlightLantern
+    - id: CMCrowbarRed
+      # todo cm14 tricordrazine pill canister
+    - id: Brutepack
+    - id: RadioHandheld
+      # bayonet
+      # splint
+      
+- type: entity
+  parent: CMPouchSurvivalSynth
+  id: CMPouchSurvivalSynthFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: FlashlightLantern
+    - id: CMCrowbarRed
+    - id: CMWelder
+    - id: CableApcStack
+    - id: RadioHandheld
+      # bayonet
+
+- type: entity
+  parent: CMPouchFirstAid
+  id: CMPouchFirstAidInjectors
+  descriptin: Contains a painkiller autoinjector, first-aid autoinjector, some ointment, and some bandages.
+  suffix: Injectors
+  components:
+  - type: StorageFill
+    contents:
+    - id: Brutepack # todo cm14 autoinjectors bicard, kelotane, tramadol, emerg
+
+- type: entity
+  parent: CMPouchFirstAidInjectors
+  id: CMPouchFirstAidFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    # todo cm14 autoinjector tricord
+    - id: Brutepack
+    - id: Ointment
+    # splint
+
+- type: entity
+  parent: CMPouchFirstAidInjectors
+  id: CMPouchFirstAidPills
+  suffix: Pils
+  components:
+  - type: StorageFill
+    contents:
+    - id: Brutepack # todo cm14 pill canisters bicard, kelotane, tramadol x2
+
+- type: entity
+  parent: CMPouchFirstAidERT
+  id: CMPouchFirstAidERTFill
+  suffix: ERT, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: Brutepack # todo cm14 autoinjectors like in Injectors First Aid
+
+- type: entity
+  parent: CMPouchMedical
+  id: CMPouchMedicalFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: HandheldHealthAnalyzer
+      # splint
+    - id: Ointment
+    - id: Brutepack
+
+- type: entity
+  parent: CMPouchMedical
+  id: CMPouchMedicalPills
+  suffix: Pills
+  components:
+  - type: StorageFill
+    contents:
+    - id: Brutepack # todo cm14 pill cans tramadol, bicard, kelotane, dexalin
+
+- type: entity
+  parent: CMPouchMedicalSoc
+  id: CMPouchMedicalSocFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: HandheldHealthAnalyzer
+      # splint
+    - id: Brutepack
+    - id: Ointment
+    # todo cm14 autoinjectors bicard, kelotane, oxycodone, emergency x2
+
+- type: entity
+  parent: CMPouchMedicalSocDutch
+  id: CMPouchMedicalSocDutchFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: HandheldHealthAnalyzer
+      # splint x2
+    - id: Brutepack
+      amount: 2
+    - id: Ointment
+      amount: 2
+    # todo cm14 autoinjectors oxycodone x2, emergency
+  
+- type: entity
+  parent: CMPouchFirstResponder
+  id: CMPouchFirstResponderFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: HandheldHealthAnalyzer
+    # todo cm14 roller cryobag
+
+- type: entity
+  parent: CMPouchVial
+  id: CMPouchVialFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: BaseChemistryEmptyVial
+      amount: 3
+
+- type: entity
+  parent: CMPouchChem
+  id: CMPouchChemFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: LargeBeaker
+    - id: Beaker
+
+- type: entity
+  parent: CMPouchAutoinjector
+  id: CMPouchAutoinjectorlFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: Brutepack # todo cm14 autoinjectors bicard x2, kelo x2, tramad x2, emerg
+
+- type: entity
+  parent: CMPouchSyringe
+  id: CMPouchSyrinheFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: Syringe
+      amount: 3
+
+- type: entity
+  parent: CMPouchMedkit
+  id: CMPouchMedkitFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: Brutepack
+    - id: Ointment
+    # splint
+    # autoinjectors
+  
+- type: entity
+  parent: CMPouchFlare
+  id: CMPouchFlareFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: Flare
+      amount: 8
+
+- type: entity
+  parent: CMPouchTools
+  id: CMPouchToolsFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWirecutter
+    - id: CMMultitool
+    - id: CMWrench
+
+- type: entity
+  parent: CMPouchToolsSoc
+  id: CMPouchToolsSocFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWirecutter
+    - id: CMCrowbar
+    - id: CableApcStack
+    - id: CMMultitool
+    - id: CMWrench
