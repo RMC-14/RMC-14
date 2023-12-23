@@ -296,6 +296,18 @@
     #whitelist: # todo cm14 make shotshells
 
 - type: entity
+  parent: CMPouchShotgun
+  id: CMPouchShotgunLarge
+  name: large shotgun shell pouch
+  description: It can contain more handfuls of shells, or bullets if you choose to for some reason.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/large_shotshells.rsi
+  - type: Storage
+    grid:
+    - 0,0,7,1 #7 slots
+
+- type: entity
   parent: CMPouchOpenClosed
   id: CMPouchExplosive
   name: explosive pouch
