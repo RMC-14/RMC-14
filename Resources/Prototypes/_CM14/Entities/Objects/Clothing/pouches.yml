@@ -131,6 +131,7 @@
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Pouches/tools.rsi
   - type: Storage
+    maxItemSize: Normal
     grid:
     - 0,0,7,1 #7 slots
     whitelist:
@@ -472,6 +473,8 @@
     whitelist:
       tags:
       - DiscreteHealthAnalyzer
+      - Brutepack
+      - Ointment
       - PillCanister
       - Pill
       - Bottle
