@@ -19,13 +19,12 @@
     blacklist:
       tags:
       - Pouch
-        
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
         ents: []
   - type: UserInterface
-    interface:
+    interfaces:
     - key: enum.StorageUiKey.Key
       type: StorageBoundUserInterface
   - type: Tag
