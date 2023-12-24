@@ -1,4 +1,5 @@
-﻿using Content.Shared.FixedPoint;
+﻿using Content.Shared.Damage.Prototypes;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
 using static Robust.Shared.Utility.SpriteSpecifier;
@@ -14,4 +15,12 @@ public sealed partial class XenoWardingPheromonesComponent : Component
 
     [DataField]
     public FixedPoint2 Multiplier;
+
+    [DataField]
+    public string DamageTypeOne = "Bloodloss";
+
+    [DataField, ValidatePrototypeId<DamageTypePrototype>]
+    public string DamageTypeTwo = "Asphyxiation";
+
+    public override bool SessionSpecific => true;
 }
