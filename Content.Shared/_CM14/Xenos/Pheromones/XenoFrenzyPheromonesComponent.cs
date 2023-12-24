@@ -16,20 +16,15 @@ public sealed partial class XenoFrenzyPheromonesComponent : Component
     [DataField]
     public FixedPoint2 Multiplier;
 
-    [DataField, ValidatePrototypeId<DamageTypePrototype>]
-    public string DamageTypeOne = "Blunt";
-
-    [DataField, ValidatePrototypeId<DamageTypePrototype>]
-    public string DamageTypeTwo = "Slash";
-
-    [DataField, ValidatePrototypeId<DamageTypePrototype>]
-    public string DamageTypeThree = "Piercing";
-
     [DataField]
     public float AttackDamageModifier = 1.1f;
 
     [DataField]
     public FixedPoint2 MovementSpeedModifier = 0.1;
+
+    [DataField, ValidatePrototypeId<DamageGroupPrototype>]
+    public string[] DamageTypes = { "Blunt", "Slash", "Piercing" };
+
 
     public override bool SessionSpecific => true;
 }

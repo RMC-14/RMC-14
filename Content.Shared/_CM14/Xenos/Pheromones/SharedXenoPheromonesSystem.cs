@@ -157,12 +157,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     {
         args.Modifiers.Add(new DamageModifierSet
         {
-            Coefficients = new Dictionary<string, float>
-            {
-                [frenzy.Comp.DamageTypeOne] = frenzy.Comp.AttackDamageModifier,
-                [frenzy.Comp.DamageTypeTwo] = frenzy.Comp.AttackDamageModifier,
-                [frenzy.Comp.DamageTypeThree] = frenzy.Comp.AttackDamageModifier
-            }
+            Coefficients = frenzy.Comp.DamageTypes.ToDictionary(key => key, _ => frenzy.Comp.AttackDamageModifier)
         });
     }
 
