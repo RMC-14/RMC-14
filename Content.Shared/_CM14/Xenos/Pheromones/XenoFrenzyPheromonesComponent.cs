@@ -23,7 +23,7 @@ public sealed partial class XenoFrenzyPheromonesComponent : Component
     public FixedPoint2 MovementSpeedModifier = 0.1;
 
     [DataField, ValidatePrototypeId<DamageGroupPrototype>]
-    public string[] DamageTypes = { "Blunt", "Slash", "Piercing" };
+    public List<string> DamageTypes = new () { "Blunt", "Slash", "Piercing" };
 
 
     public override bool SessionSpecific => true;
