@@ -11,7 +11,11 @@
     - state: icon
   - type: Appearance
   - type: Item
-    size: Small
+    size: Huge
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - pocket
   - type: Storage
     maxItemSize: Small
     grid:
