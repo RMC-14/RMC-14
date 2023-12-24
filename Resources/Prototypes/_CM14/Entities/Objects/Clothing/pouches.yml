@@ -1,0 +1,670 @@
+- type: entity
+  parent: [CMEntityBase, BaseStorageItem]
+  id: CMPouch #i know that there are no pouches in upstream, but having "CM" helps finding that item in entity spawner
+  name: abstract pouch
+  description: The physical manifestation of a concept of a pouch. Woah.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/small_drop.rsi
+    layers:
+    - state: icon
+  - type: Appearance
+  - type: Item
+    size: Huge
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - pocket
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,1,1 #1 slot
+    blacklist:
+      tags:
+      - Pouch
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+  - type: UserInterface
+    interfaces:
+    - key: enum.StorageUiKey.Key
+      type: StorageBoundUserInterface
+  - type: Tag
+    tags:
+    - Pouch
+
+- type: entity
+  parent: CMPouch
+  id: CMPouchClosed
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.SharedBagOpenVisuals.BagState:
+        closedLayer:
+          Open: { visible: false }
+          Closed: { visible: true}
+
+- type: entity
+  parent: CMPouchClosed
+  id: CMPouchOpenClosed
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+    - state: closed
+      map: [ "closedLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.SharedBagOpenVisuals.BagState:
+        openLayer:
+          Open: { visible: true }
+          Closed: { visible: false}
+        closedLayer:
+          Open: { visible: false }
+          Closed: { visible: true}
+
+- type: entity
+  parent: CMPouchOpenClosed
+  id: CMPouchGeneral
+  name: light general pouch
+  description: A general-purpose pouch used to carry a small item, or two tiny ones.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,2,1 #2 slots
+
+- type: entity
+  parent: CMPouchOpenClosed
+  id: CMPouchGeneralMedium
+  name: medium general pouch
+  description: A general-purpose pouch used to carry a variety of differently sized items.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/medium_drop.rsi
+  - type: Storage
+    grid:
+    - 0,0,4,1 #4 slots
+
+- type: entity
+  parent: CMPouchOpenClosed
+  id: CMPouchGeneralLarge
+  name: large general pouch
+  description: A general-purpose pouch used to carry more differently sized items.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/large_drop.rsi
+  - type: Storage
+    grid:
+    - 0,0,6,1 #6 slot
+
+# flamertank / fueltank.rsi
+# m39ap pouch
+
+- type: entity
+  parent: CMPouchOpenClosed
+  id: CMPouchBayonet
+  name: bayonet sheath
+  description: Knife to meet you!
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/bayonet.rsi
+  - type: Storage
+    grid:
+    - 0,0,5,1 #5 slots
+    whitelist:
+      tags:
+      - Knife
+
+- type: entity
+  parent: CMPouchOpenClosed
+  id: CMPouchSurvival
+  name: survival pouch
+  description: A pouch given to colonists in the event of an emergency.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/tools.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,7,1 #7 slots
+    whitelist:
+      tags:
+      - Flashlight
+      - Crowbar
+      - PillCanister
+      - Brutepack
+      # todo cm14 splint
+      - Radio
+      - Knife
+
+- type: entity
+  parent: CMPouchSurvival
+  id: CMPouchSurvivalSynth
+  name: synth survival pouch
+  description: An emergency pouch given to synthetics in the event of an emergency.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,6,1 #6 slots
+    whitelist:
+      tags:
+      - Flashlight
+      - Crowbar
+      - CableCoil
+      - Radio
+      - Knife
+      components:
+      - Welder
+
+- type: entity
+  parent: CMPouchOpenClosed
+  id: CMPouchFirstAid
+  name: first-aid pouch
+  description: It contains, by default, autoinjectors. But it may also hold ointments, bandages, and pill packets.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/firstaid.rsi
+  - type: Storage
+    grid:
+    - 0,0,4,1 #4 slots
+    whitelist:
+      tags:
+      - Ointment
+      # todo cm14 autoinjector
+      - PillCanister
+      - Brutepack
+      # todo cm14 splint
+
+- type: entity
+  parent: CMPouchFirstAid
+  id: CMPouchFirstAidERT
+  description: It can contain autoinjectors, ointments, and bandages. This one has some extra stuff.
+  suffix: ERT
+  components:
+  - type: Storage
+    grid:
+    - 0,0,5,1 #5 slots
+
+- type: entity
+  parent: CMPouchClosed
+  id: CMPouchPistol
+  name: sidearm pouch
+  description: You could carry a pistol in this; more importantly, you could draw it quickly. Useful for emergencies.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/pistol.rsi
+  - type: Storage
+    maxItemSize: Normal
+    whitelist:
+      tags:
+      - Sidearm
+
+- type: entity
+  parent: CMPouchClosed
+  id: CMPouchCommand
+  name: command pouch
+  description: A specialized, sturdy pouch issued to Commanding Officers. Can hold their sidearm, the command tablet and a set of binoculars.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/command.rsi
+  - type: Storage
+    grid:
+    - 0,0,3,1 #3 slots
+    whitelist:
+      tags:
+      - Sidearm
+      # todo cm14 binoculars and CO tablet
+
+- type: entity
+  parent: CMPouchOpenClosed
+  id: CMPouchMagazine
+  name: magazine pouch
+  description: It can carry magazines.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/medium_ammo_mag.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,3,1 #3 slots
+    whitelist:
+      tags: #this gonna be hell
+      - MagazineCaselessM39
+      - MagazineRifleM41
+      - MagazineRifleM41AE2
+      - MagazineRifleM4RA
+
+- type: entity
+  parent: CMPouchMagazine
+  id: CMPouchMagazineLarge
+  name: large magazine pouch
+  description: It can carry many magazines.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/large_ammo_mag.rsi
+  - type: Storage
+    grid:
+    - 0,0,4,1 #4 slots
+
+- type: entity
+  parent: CMPouchMagazine
+  id: CMPouchMagazinePistol
+  name: pistol magazine pouch
+  description: It can carry pistol magazines and revolver speedloaders.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/pistol_mag.rsi
+  - type: Storage
+    grid:
+    - 0,0,3,1 #3 slots
+    whitelist:
+      tags:
+      - MagazinePistolM4A3
+      - SpeedLoaderMagnum
+
+- type: entity
+  parent: CMPouchMagazinePistol
+  id: CMPouchMagazinePistolLarge
+  name: large pistol magazine pouch
+  description: It can carry many pistol magazines or revolver speedloaders.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/large_pistol_mag.rsi
+  - type: Storage
+    grid:
+    - 0,0,6,1 #6 slots
+
+- type: entity
+  parent: CMPouch
+  id: CMPouchShotgun
+  name: shotgun shell pouch
+  description: It can contain handfuls of shells, or bullets if you choose to for some reason.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/medium_shotshells.rsi
+  - type: Storage
+    grid:
+    - 0,0,5,1 #5 slots
+    #whitelist: # todo cm14 make shotshells
+
+- type: entity
+  parent: CMPouchShotgun
+  id: CMPouchShotgunLarge
+  name: large shotgun shell pouch
+  description: It can contain more handfuls of shells, or bullets if you choose to for some reason.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/large_shotshells.rsi
+  - type: Storage
+    grid:
+    - 0,0,7,1 #7 slots
+
+- type: entity
+  parent: CMPouchOpenClosed
+  id: CMPouchExplosive
+  name: explosive pouch
+  description: It can carry grenades, plastic explosives, mine boxes, and other explosives.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/large_explosive.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,6,1 #6 slots
+    #whitelist: #todo cm14 make explosives
+
+- type: entity
+  parent: CMPouchOpenClosed
+  id: CMPouchMedical
+  name: medical pouch
+  description: It can carry small medical supplies.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/medical.rsi
+  - type: Storage
+    grid:
+    - 0,0,4,1 #4 slots
+    whitelist:
+      tags:
+      - DiscreteHealthAnalyzer
+      - Brutepack
+      - Ointment
+      - Bloodpack
+      - PillCanister
+      - Pill
+      - Bottle
+      - Syringe
+      - Flashlight
+      # Surgical line
+      components:
+      - Hypospray
+
+- type: entity
+  parent: CMPouchMedical
+  id: CMPouchMedicalSoc
+  name: tactical medical pouch
+  description: A heavy pouch containing everything one needs to get themselves back on their feet. Quite the selection.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/socmed.rsi
+  - type: Storage
+    grid:
+    - 0,0,13,1 #13 slots
+
+- type: entity
+  parent: CMPouchMedicalSoc
+  id: CMPouchMedicalSocDutch
+  name: Dutch's Medical Pouch
+  description: A pouch bought from a black market trader by Dutch quite a few years ago. Rumoured to be stolen from secret USCM assets. Its contents have been slowly used up and replaced over the years.
+
+- type: entity
+  parent: CMPouchMedicalSocDutch
+  id: CMPouchMedicalSocDutchUnmarked #god
+  name: tactical medical pouch
+  description: A heavy pouch containing everything one needs to get themselves back on their feet. Quite the selection. Somehow, the whole pouch manages to look classified, you feel like you're going to get court-marshalled for even looking at it.
+
+- type: entity
+  parent: CMPouchOpenClosed
+  id: CMPouchFirstResponder
+  name: first responder pouch
+  description: A pouch designed for carrying supplies to assist medical personnel and quickly respond to injuries on the battlefield without immediately treating them. Can hold supplies such as roller beds, stasis bags, and health analysers.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/frt_med.rsi
+  - type: Storage
+    grid:
+    - 0,0,4,1 #4 slots
+    whitelist:
+      tags:
+      - DiscreteHealthAnalyzer
+      - Brutepack
+      - Ointment
+      - Bloodpack
+      - PillCanister
+      - Pill
+      - Bottle
+      - Syringe
+      - Flashlight
+      # Surgical line
+      # Roller
+      - BodyBag
+      components:
+      - Hypospray
+
+- type: entity
+  parent: CMPouchOpenClosed
+  id: CMPouchVial
+  name: vial pouch
+  description: A pouch for carrying glass vials.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/vial.rsi
+  - type: Storage
+    maxItemSize: Tiny
+    grid:
+    - 0,0,6,1 #6 slots
+    whitelist:
+      components:
+      - FitsInDispenser
+
+- type: entity
+  parent: CMPouchOpenClosed
+  id: CMPouchChem
+  name: chemist pouch
+  description: A pouch for carrying glass beakers.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/chemist.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,2,1 #2 slots
+    whitelist:
+      tags:
+      - GlassBeaker
+      - Bottle
+
+- type: entity
+  parent: CMPouchOpenClosed
+  id: CMPouchAutoinjector
+  name: auto-injector pouch
+  description: A pouch specifically for auto-injectors.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/injectors.rsi
+  - type: Storage
+    grid:
+    - 0,0,7,1 #7 slots
+    #whitelist: # todo cm14 autoinjectors
+
+- type: entity
+  parent: CMPouchOpenClosed
+  id: CMPouchSyringe
+  name: syringe pouch
+  description: It can carry syringes.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/syringe.rsi
+  - type: Storage
+    grid:
+    - 0,0,6,1 #6 slots
+    whitelist:
+      tags:
+      - Syringe
+
+- type: entity
+  parent: CMPouchOpenClosed
+  id: CMPouchMedkit
+  name: medical kit pouch
+  description: It's specifically made to hold medical items.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/medkit.rsi
+  - type: Storage
+    grid:
+    - 0,0,7,1 #7 slots
+    whitelist:
+      tags:
+      - DiscreteHealthAnalyzer
+      - Brutepack
+      - Ointment
+      - PillCanister
+      - Pill
+      - Bottle
+      - Syringe
+      # Surgical Line
+      # Roller
+      - BodyBag
+      - Bloodpack
+      components:
+      - Hypospray
+
+- type: entity
+  parent: CMPouchOpenClosed
+  id: CMPouchDocument
+  name: large document pouch
+  description: It can contain papers, folders, disks, technical manuals, and clipboards.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/document.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,21,1 #21 slots
+    whitelist:
+      tags:
+      - Document
+      - Folder
+      - Write
+
+- type: entity
+  parent: CMPouchDocument
+  id: CMPouchDocumentSmall
+  name: small document pouch
+  description: A smaller version of the document pouch. It can contain papers, folders, disks, technical manuals, and clipboards.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,7,1 #7 slots
+
+- type: entity
+  parent: CMPouchOpenClosed
+  id: CMPouchFlare
+  name: flare pouch
+  description: A pouch designed to hold flares. Refillable with an M94 flare pack.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/flare.rsi
+  - type: Storage
+    grid:
+    - 0,0,8,1 #8 slots
+    whitelist:
+      tags:
+      - Flare
+
+- type: entity
+  parent: CMPouchOpenClosed
+  id: CMPouchRadio
+  name: radio pouch
+  description: It can contain two handheld radios.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/radio.rsi
+  - type: Storage
+    grid:
+    - 0,0,2,1 #2 slots
+    whitelist:
+      tags:
+      - Radio
+
+- type: entity
+  parent: CMPouchOpenClosed
+  id: CMPouchElectronics
+  name: electronics pouch
+  description: It is designed to hold most electronics, power cells and circuit boards.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/electronics.rsi
+  - type: Storage
+    grid:
+    - 0,0,6,1 #6 slots
+    whitelist:
+      tags:
+      - PowerCell
+      components:
+      - ComputerBoard
+      - MachineBoard
+      - MachinePart
+
+- type: entity
+  parent: CMPouchOpenClosed
+  id: CMPouchConstruction
+  name: construction pouch
+  description: It's designed to hold construction materials - glass/metal sheets, metal rods, barbed wire, cable coil, and empty sandbags. It also has two hooks for an entrenching tool and light replacer.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/construction.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,3,1 #3 slots
+    whitelist:
+      tags:
+      # todo cm14 Barbed wire
+      - Sheet
+      - CableCoil
+      # Tile
+      # etool
+      # sandbags
+      - LightReplacer
+
+- type: entity
+  parent: CMPouchOpenClosed
+  id: CMPouchTools
+  name: tools pouch
+  description: It's designed to hold maintenance tools - screwdriver, wrench, cable coil, etc. It also has a hook for an entrenching tool or light replacer.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/tools.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,4,1 #4 slots
+    whitelist:
+      tags:
+      - Crowbar
+      - Screwdriver
+      - Wrench
+      - Wirecutter
+      # etool
+      - CableCoil
+      - PowerCell
+      - Multitool
+      - Flashlight
+      - LightReplacer
+      components:
+      - Welder
+      - ComputerBoard
+      - MachineBoard
+      - MachinePart
+
+- type: entity
+  parent: CMPouchTools
+  id: CMPouchToolsSoc
+  name: tactical tools pouch
+  description: This particular toolkit full of sharp, heavy objects was designed for breaking into things rather than fixing them. Still does the latter pretty well, though.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/soctools.rsi
+  - type: Storage
+    grid:
+    - 0,0,8,1 #8 slots
+
+- type: entity
+  parent: CMPouchClosed
+  id: CMPouchSling
+  name: sling strap
+  description: Keeps a single item attached to a strap.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/sling.rsi
+  - type: Storage
+    maxItemSize: Normal
+
+- type: entity
+  parent: CMPouchOpenClosed
+  id: CMPouchCassette
+  name: cassette pouch
+  description: A finely crafted pouch, made specifically to keep cassettes safe during wartime.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/cassette.rsi
+  - type: Storage
+    grid:
+    - 0,0,3,1 #3 slots
+    #whitelist: # todo cm14 add cassettes
+
+- type: entity
+  parent: CMPouch
+  id: CMPouchMachete
+  name: H6B pattern M2132 machete scabbard
+  description: A large leather scabbard used to carry a M2132 machete. It can be strapped to the pouch slot.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Pouches/machete.rsi
+  - type: Storage
+    maxItemSize: Large
+    whitelist:
+      tags:
+      - Machete
