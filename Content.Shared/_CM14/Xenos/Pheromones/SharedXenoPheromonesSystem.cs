@@ -51,6 +51,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         SubscribeLocalEvent<XenoRecoveryPheromonesComponent, ComponentGetStateAttemptEvent>(OnComponentGetStateAttempt);
         SubscribeLocalEvent<XenoPheromonesComponent, ComponentGetStateAttemptEvent>(OnComponentGetStateAttempt);
         SubscribeLocalEvent<XenoActivePheromonesComponent, ComponentGetStateAttemptEvent>(OnComponentGetStateAttempt);
+        SubscribeLocalEvent<XenoComponent, ComponentStartup>(OnXenoStartup);
 
         SubscribeLocalEvent<XenoRecoveryPheromonesComponent, MapInitEvent>(OnRecoveryMapInit);
         SubscribeLocalEvent<XenoRecoveryPheromonesComponent, EntityUnpausedEvent>(OnRecoveryUnpaused);
@@ -72,6 +73,23 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
             return;
 
         ev.Cancelled = !HasComp<XenoComponent>(ev.Player.AttachedEntity);
+    }
+
+    private void OnXenoStartup(EntityUid uid, XenoComponent comp, ref ComponentStartup ev)
+    {
+        DirtyPheromones<XenoPheromonesComponent>();
+        DirtyPheromones<XenoWardingPheromonesComponent>();
+        DirtyPheromones<XenoFrenzyPheromonesComponent>();
+        DirtyPheromones<XenoRecoveryPheromonesComponent>();
+    }
+
+    private void DirtyPheromones<T>() where T: IComponent
+    {
+        var pheromoneQuery = EntityQueryEnumerator<T>();
+        while (pheromoneQuery.MoveNext(out var uid, out var comp))
+        {
+            Dirty(uid, comp);
+        }
     }
 
     private void OnXenoPheromonesUnpaused(Entity<XenoPheromonesComponent> ent, ref EntityUnpausedEvent args)
