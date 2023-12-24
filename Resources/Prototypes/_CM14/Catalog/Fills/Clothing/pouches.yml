@@ -23,6 +23,7 @@
     - id: FlashlightLantern
     - id: CMCrowbarRed
     - id: CMWelder
+    - id: CableApcStack
     - id: RadioHandheld
       # bayonet
 
@@ -142,8 +143,8 @@
   components:
   - type: StorageFill
     contents:
+    - id: LargeBeaker
     - id: Beaker
-      amount: 2
 
 - type: entity
   parent: CMPouchAutoinjector
@@ -208,5 +209,6 @@
     - id: CMScrewdriver
     - id: CMWirecutter
     - id: CMCrowbar
+    - id: CableApcStack
     - id: CMMultitool
     - id: CMWrench
