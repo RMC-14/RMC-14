@@ -50,6 +50,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         SubscribeLocalEvent<XenoWardingPheromonesComponent, ComponentGetStateAttemptEvent>(OnComponentGetStateAttempt);
         SubscribeLocalEvent<XenoRecoveryPheromonesComponent, ComponentGetStateAttemptEvent>(OnComponentGetStateAttempt);
         SubscribeLocalEvent<XenoPheromonesComponent, ComponentGetStateAttemptEvent>(OnComponentGetStateAttempt);
+        SubscribeLocalEvent<XenoActivePheromonesComponent, ComponentGetStateAttemptEvent>(OnComponentGetStateAttempt);
 
         SubscribeLocalEvent<XenoRecoveryPheromonesComponent, MapInitEvent>(OnRecoveryMapInit);
         SubscribeLocalEvent<XenoRecoveryPheromonesComponent, EntityUnpausedEvent>(OnRecoveryUnpaused);
@@ -66,7 +67,11 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     }
     private void OnComponentGetStateAttempt<T>(EntityUid uid, T comp, ref ComponentGetStateAttemptEvent ev)
     {
-        ev.Cancelled = !HasComp<XenoComponent>(uid);
+        // Apparently this happens in replays
+        if (ev.Player is null)
+            return;
+
+        ev.Cancelled = !HasComp<XenoComponent>(ev.Player.AttachedEntity);
     }
 
     private void OnXenoPheromonesUnpaused(Entity<XenoPheromonesComponent> ent, ref EntityUnpausedEvent args)
