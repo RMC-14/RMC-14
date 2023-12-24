@@ -33,6 +33,9 @@
     maxItemSize: Huge
     grid:
     - 0,0,9,1
+    blacklist:
+      tags:
+      - Pouch
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
