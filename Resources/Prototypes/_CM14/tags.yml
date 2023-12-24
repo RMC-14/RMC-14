@@ -51,3 +51,6 @@
 
 - type: Tag
   id: CMTraumaKit
+  
+- type: Tag
+  id: Pouch

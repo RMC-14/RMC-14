@@ -4,6 +4,7 @@ using Content.Server.EUI;
 using Content.Server.Mind;
 using Content.Server.Station.Systems;
 using Content.Shared._CM14.Admin;
+using Content.Shared._CM14.Marines;
 using Content.Shared._CM14.Xenos;
 using Content.Shared._CM14.Xenos.Hive;
 using Content.Shared.Administration;
@@ -114,6 +115,7 @@ public sealed class CMAdminEui : BaseEui
                 }
 
                 _entities.DeleteEntity(player);
+                _entities.EnsureComponent<MarineComponent>(humanoid);
                 break;
             }
             case CMAdminTransformXenoMessage transformXeno:
