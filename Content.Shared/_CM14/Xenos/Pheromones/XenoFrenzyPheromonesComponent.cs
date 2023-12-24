@@ -1,7 +1,7 @@
 ﻿using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using static Robust.Shared.Utility.SpriteSpecifier;
 
@@ -23,8 +23,8 @@ public sealed partial class XenoFrenzyPheromonesComponent : Component
     [DataField]
     public FixedPoint2 MovementSpeedModifier = 0.1;
 
-    [DataField(customTypeSerializer: typeof(PrototypeIdListSerializer<DamageGroupPrototype>))]
-    public List<string> DamageTypes = new () { "Blunt", "Slash", "Piercing" };
+    [DataField]
+    public List<ProtoId<DamageTypePrototype>> DamageTypes = new () { "Blunt", "Slash", "Piercing" };
 
 
     public override bool SessionSpecific => true;

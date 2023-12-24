@@ -142,14 +142,15 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     {
         var damage = args.Damage.DamageDict;
         var multiplier = FixedPoint2.Max(1 - 0.25 * warding.Comp.Multiplier, 0);
-        if (args.Damage.DamageDict.TryGetValue(warding.Comp.DamageTypeOne, out var amountOne))
-        {
-            damage[warding.Comp.DamageTypeOne] = amountOne * multiplier;
-        }
 
-        if (args.Damage.DamageDict.TryGetValue(warding.Comp.DamageTypeTwo, out var amountTwo))
+        var damageTypes = warding.Comp.DamageTypes.GetEnumerator();
+
+        while (damageTypes.MoveNext())
         {
-            damage[warding.Comp.DamageTypeOne] = amountTwo * multiplier;
+            if (args.Damage.DamageDict.TryGetValue(damageTypes.Current, out var amount))
+            {
+                damage[damageTypes.Current] = amount * multiplier;
+            }
         }
     }
 
@@ -157,7 +158,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     {
         args.Modifiers.Add(new DamageModifierSet
         {
-            Coefficients = frenzy.Comp.DamageTypes.ToDictionary(key => key, _ => frenzy.Comp.AttackDamageModifier)
+            Coefficients = frenzy.Comp.DamageTypes.ToDictionary(key => key.ToString(), _ => frenzy.Comp.AttackDamageModifier)
         });
     }
 
