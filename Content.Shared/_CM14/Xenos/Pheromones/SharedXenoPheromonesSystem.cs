@@ -1,8 +1,6 @@
 ﻿using System.Linq;
-using Content.Shared._CM14.Xenos.Construction;
 using Content.Shared._CM14.Xenos.Plasma;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -10,6 +8,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.GameStates;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -27,28 +26,6 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-
-    // TODO CM14 move all of this to a component
-    [ValidatePrototypeId<DamageTypePrototype>]
-    private const string FrenzyDamageTypeOne = "Blunt";
-
-    [ValidatePrototypeId<DamageTypePrototype>]
-    private const string FrenzyDamageTypeTwo = "Slash";
-
-    [ValidatePrototypeId<DamageTypePrototype>]
-    private const string FrenzyDamageTypeThree = "Piercing";
-
-    [ValidatePrototypeId<DamageTypePrototype>]
-    private const string WardingDamageTypeOne = "Bloodloss";
-
-    [ValidatePrototypeId<DamageTypePrototype>]
-    private const string WardingDamageTypeTwo = "Asphyxiation";
-
-    private static readonly FixedPoint2 RecoveryHealthRegen = 0.5;
-    private static readonly FixedPoint2 RecoveryPlasmaRegen = 1.5;
-    private static readonly TimeSpan RecoveryDelay = TimeSpan.FromSeconds(1);
-    private static readonly float FrenzyAttackDamageModifier = 1.1f;
-    private static readonly FixedPoint2 FrenzyMovementSpeedModifier = 0.1;
 
     private readonly TimeSpan _pheromonePlasmaUseDelay = TimeSpan.FromSeconds(0.5);
     private readonly HashSet<Entity<XenoComponent>> _receivers = new();
@@ -69,7 +46,13 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         SubscribeLocalEvent<XenoPheromonesComponent, XenoPheromonesActionEvent>(OnXenoPheromonesAction);
         SubscribeLocalEvent<XenoPheromonesComponent, XenoPheromonesChosenBuiMessage>(OnXenoPheromonesChosenBui);
 
-        // TODO CM14 make pheromone components session specific, xeno only
+        SubscribeLocalEvent<XenoFrenzyPheromonesComponent, ComponentGetStateAttemptEvent>(OnComponentGetStateAttempt);
+        SubscribeLocalEvent<XenoWardingPheromonesComponent, ComponentGetStateAttemptEvent>(OnComponentGetStateAttempt);
+        SubscribeLocalEvent<XenoRecoveryPheromonesComponent, ComponentGetStateAttemptEvent>(OnComponentGetStateAttempt);
+        SubscribeLocalEvent<XenoPheromonesComponent, ComponentGetStateAttemptEvent>(OnComponentGetStateAttempt);
+        SubscribeLocalEvent<XenoActivePheromonesComponent, ComponentGetStateAttemptEvent>(OnComponentGetStateAttempt);
+        SubscribeLocalEvent<XenoComponent, ComponentStartup>(OnXenoStartup);
+
         SubscribeLocalEvent<XenoRecoveryPheromonesComponent, MapInitEvent>(OnRecoveryMapInit);
         SubscribeLocalEvent<XenoRecoveryPheromonesComponent, EntityUnpausedEvent>(OnRecoveryUnpaused);
 
@@ -82,6 +65,31 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         // TODO CM14 stack slash damage
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, GetMeleeDamageEvent>(OnFrenzyGetMeleeDamage);
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, RefreshMovementSpeedModifiersEvent>(OnFrenzyMovementSpeedModifiers);
+    }
+    private void OnComponentGetStateAttempt<T>(EntityUid uid, T comp, ref ComponentGetStateAttemptEvent ev)
+    {
+        // Apparently this happens in replays
+        if (ev.Player is null)
+            return;
+
+        ev.Cancelled = !HasComp<XenoComponent>(ev.Player.AttachedEntity);
+    }
+
+    private void OnXenoStartup(EntityUid uid, XenoComponent comp, ref ComponentStartup ev)
+    {
+        DirtyPheromones<XenoPheromonesComponent>();
+        DirtyPheromones<XenoWardingPheromonesComponent>();
+        DirtyPheromones<XenoFrenzyPheromonesComponent>();
+        DirtyPheromones<XenoRecoveryPheromonesComponent>();
+    }
+
+    private void DirtyPheromones<T>() where T: IComponent
+    {
+        var pheromoneQuery = EntityQueryEnumerator<T>();
+        while (pheromoneQuery.MoveNext(out var uid, out var comp))
+        {
+            Dirty(uid, comp);
+        }
     }
 
     private void OnXenoPheromonesUnpaused(Entity<XenoPheromonesComponent> ent, ref EntityUnpausedEvent args)
@@ -123,7 +131,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
     private void OnRecoveryMapInit(Entity<XenoRecoveryPheromonesComponent> recovery, ref MapInitEvent args)
     {
-        recovery.Comp.NextRegenTime = _timing.CurTime + RecoveryDelay;
+        recovery.Comp.NextRegenTime = _timing.CurTime + recovery.Comp.Delay;
     }
 
     private void OnRecoveryUnpaused(Entity<XenoRecoveryPheromonesComponent> recovery, ref EntityUnpausedEvent args)
@@ -157,14 +165,15 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     {
         var damage = args.Damage.DamageDict;
         var multiplier = FixedPoint2.Max(1 - 0.25 * warding.Comp.Multiplier, 0);
-        if (args.Damage.DamageDict.TryGetValue(WardingDamageTypeOne, out var amountOne))
-        {
-            damage[WardingDamageTypeOne] = amountOne * multiplier;
-        }
 
-        if (args.Damage.DamageDict.TryGetValue(WardingDamageTypeTwo, out var amountTwo))
+        var damageTypes = warding.Comp.DamageTypes.GetEnumerator();
+
+        while (damageTypes.MoveNext())
         {
-            damage[WardingDamageTypeOne] = amountTwo * multiplier;
+            if (args.Damage.DamageDict.TryGetValue(damageTypes.Current, out var amount))
+            {
+                damage[damageTypes.Current] = amount * multiplier;
+            }
         }
     }
 
@@ -172,18 +181,13 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     {
         args.Modifiers.Add(new DamageModifierSet
         {
-            Coefficients = new Dictionary<string, float>
-            {
-                [FrenzyDamageTypeOne] = FrenzyAttackDamageModifier,
-                [FrenzyDamageTypeTwo] = FrenzyAttackDamageModifier,
-                [FrenzyDamageTypeThree] = FrenzyAttackDamageModifier
-            }
+            Coefficients = frenzy.Comp.DamageTypes.ToDictionary(key => key.ToString(), _ => frenzy.Comp.AttackDamageModifier)
         });
     }
 
     private void OnFrenzyMovementSpeedModifiers(Entity<XenoFrenzyPheromonesComponent> frenzy, ref RefreshMovementSpeedModifiersEvent args)
     {
-        var speed = 1 + (FrenzyMovementSpeedModifier * frenzy.Comp.Multiplier).Float();
+        var speed = 1 + (frenzy.Comp.MovementSpeedModifier * frenzy.Comp.Multiplier).Float();
         args.ModifySpeed(speed, speed);
     }
 
@@ -206,11 +210,11 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
             {
                 if (xeno.OnWeeds)
                 {
-                    _xeno.HealDamage(uid, RecoveryHealthRegen * recovery.Multiplier);
-                    _xenoPlasma.RegenPlasma(uid, RecoveryPlasmaRegen * recovery.Multiplier);
+                    _xeno.HealDamage(uid, recovery.HealthRegen * recovery.Multiplier);
+                    _xenoPlasma.RegenPlasma(uid, recovery.PlasmaRegen * recovery.Multiplier);
                 }
 
-                recovery.NextRegenTime = _timing.CurTime + RecoveryDelay;
+                recovery.NextRegenTime = _timing.CurTime + recovery.Delay;
             }
 
             oldRecovery.Add(uid);
