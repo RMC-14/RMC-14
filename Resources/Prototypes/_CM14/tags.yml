@@ -24,3 +24,6 @@
 
 - type: Tag
   id: CMMortarShell
+
+- type: Tag
+  id: Pouch
