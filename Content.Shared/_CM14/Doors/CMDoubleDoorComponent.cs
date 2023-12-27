@@ -1,9 +1,9 @@
 ﻿using Robust.Shared.GameStates;
-using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Doors;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(CMDoorSystem))]
 public sealed partial class CMDoubleDoorComponent : Component
 {
     [DataField, AutoNetworkedField]

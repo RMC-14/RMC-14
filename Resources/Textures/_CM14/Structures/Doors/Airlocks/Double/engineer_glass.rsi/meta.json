@@ -1,22 +1,22 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f7b9367cb5c083a8c052a40dece9417031e28ffe/icons/obj/structures/doors/2x1generic.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/78b741a92f09a787c9daf94bb750f98ffaa421cd/icons/obj/structures/doors/2x1engidoor_glass.dmi",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-      "name": "closed",
+      "name": "door_closed",
       "directions": 4
     },
     {
-      "name": "locked",
+      "name": "door_locked",
       "directions": 4
     },
     {
-      "name": "opening",
+      "name": "door_opening",
       "directions": 4,
       "delays": [
         [
@@ -50,7 +50,7 @@
       ]
     },
     {
-      "name": "deny",
+      "name": "door_deny",
       "directions": 4,
       "delays": [
         [
@@ -76,7 +76,7 @@
       ]
     },
     {
-      "name": "closing",
+      "name": "door_closing",
       "directions": 4,
       "delays": [
         [
@@ -110,11 +110,11 @@
       ]
     },
     {
-      "name": "open",
+      "name": "door_open",
       "directions": 4
     },
     {
-      "name": "spark",
+      "name": "door_spark",
       "directions": 4,
       "delays": [
         [
