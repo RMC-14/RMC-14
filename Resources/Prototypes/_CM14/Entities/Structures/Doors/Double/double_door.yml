@@ -1,0 +1,8 @@
+﻿- type: entity
+  parent: CMAirlock
+  id: CMDoubleDoorOne
+  name: airlock
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/Double/Generic/generic.rsi
+  - type: CMDoubleDoor
