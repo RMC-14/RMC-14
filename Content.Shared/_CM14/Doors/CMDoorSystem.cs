@@ -22,6 +22,7 @@ public sealed class CMDoorSystem : EntitySystem
         _doorQuery = GetEntityQuery<DoorComponent>();
         _doubleQuery = GetEntityQuery<CMDoubleDoorComponent>();
 
+        // TODO CM14 there is an edge case where one door can close but the other can't, to fix this CanClose should be checked on the adjacent door when a double door tries to close
         SubscribeLocalEvent<CMDoubleDoorComponent, DoorStateChangedEvent>(OnDoorStateChanged);
     }
 

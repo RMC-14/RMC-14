@@ -1,8 +1,187 @@
 ﻿- type: entity
-  parent: CMAirlock
-  id: CMDoubleDoorOne
-  name: airlock
+  abstract: true
+  parent: CMBaseDoor
+  id: CMDoubleDoorBase
+  components:
+  - type: CMDoubleDoor
+  - type: Door
+    openSpriteState: door_open
+    closedSpriteState: door_closed
+    openingSpriteState: door_opening
+    closingSpriteState: door_closing
+    emaggingSpriteState: unlit
+  - type: Sprite
+    layers:
+    - state: door_closed
+      map: [ "enum.DoorVisualLayers.Base" ]
+    - state: unlit
+      map: ["enum.DoorVisualLayers.BaseUnlit"]
+    - state: welded
+      map: [ "enum.WeldableLayers.BaseWelded" ]
+    - state: door_locked
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseBolted"]
+    - state: door_spark
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseEmergencyAccess"]
+    - state: panel_open
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: CMDoubleDoorAlmayerGlass
+  suffix: Almayer, Glass
   components:
   - type: Sprite
-    sprite: _CM14/Structures/Doors/Airlocks/Double/Generic/generic.rsi
-  - type: CMDoubleDoor
+    sprite: _CM14/Structures/Doors/Airlocks/Double/almayer_glass.rsi
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: CMDoubleDoorAlmayerSolid
+  suffix: Almayer, Solid
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/Double/almayer_solid.rsi
+  - type: Occluder
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: CMDoubleDoorCommandGlass
+  suffix: Command, Glass
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/Double/command_glass.rsi
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: CMDoubleDoorCommandSolid
+  suffix: Command, Solid
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/Double/command_solid.rsi
+  - type: Occluder
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: CMDoubleDoorEngineerGlass
+  suffix: Engineer, Glass
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/Double/engineer_glass.rsi
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: CMDoubleDoorEngineerSolid
+  suffix: Engineer, Solid
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/Double/engineer_solid.rsi
+  - type: Occluder
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: CMDoubleDoorGenericGlass
+  suffix: Generic, Glass
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/Double/generic_glass.rsi
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: CMDoubleDoorGenericSolid
+  suffix: Generic, Solid
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/Double/generic_solid.rsi
+  - type: Occluder
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: CMDoubleDoorMedicalGlass
+  suffix: Medical, Glass
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/Double/medical_glass.rsi
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: CMDoubleDoorMedicalSolid
+  suffix: Medical, Solid
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/Double/medical_solid.rsi
+  - type: Occluder
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: CMDoubleDoorPersonalGlass
+  suffix: Personal, Glass
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/Double/personal_glass.rsi
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: CMDoubleDoorPersonalSolid
+  suffix: Personal, Solid
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/Double/personal_solid.rsi
+  - type: Occluder
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: CMDoubleDoorPreparations
+  suffix: Preparations
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/Double/preparations.rsi
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: CMDoubleDoorPreparationsAlpha
+  suffix: Preparations, Alpha
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/Double/preparations_alpha.rsi
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: CMDoubleDoorPreparationsBravo
+  suffix: Preparations, Bravo
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/Double/preparations_bravo.rsi
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: CMDoubleDoorPreparationsCharlie
+  suffix: Preparations, Charlie
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/Double/preparations_charlie.rsi
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: CMDoubleDoorPreparationsDelta
+  suffix: Preparations, Delta
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/Double/preparations_delta.rsi
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: CMDoubleDoorSecurityGlass
+  suffix: Security, Glass
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/Double/security_glass.rsi
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: CMDoubleDoorSecuritySolid
+  suffix: Security, Solid
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Airlocks/Double/security_solid.rsi
+  - type: Occluder

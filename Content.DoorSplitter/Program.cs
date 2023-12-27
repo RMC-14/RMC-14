@@ -11,60 +11,70 @@ if (!Directory.Exists(path))
     return;
 }
 
-var firstPath = $"{path}/one.rsi";
-var secondPath = $"{path}/two.rsi";
-Directory.CreateDirectory(firstPath);
-Directory.CreateDirectory(secondPath);
-
-var rsi = Rsi.FromFolder(path);
-rsi.TryLoadFolderImages(path);
-
-var firstStates = new List<RsiState>();
-var secondStates = new List<RsiState>();
-foreach (var state in rsi.States)
+var directories = Directory.EnumerateDirectories(path, "*.rsi", SearchOption.AllDirectories).ToArray();
+if (directories.Length == 0)
 {
-    var firstState = new RsiState(state.Name, state.Directions, state.Delays, state.Flags, null);
-    var secondState = new RsiState(state.Name, state.Directions, state.Delays, state.Flags, null);
-
-    firstStates.Add(firstState);
-    secondStates.Add(secondState);
-
-    var frames = state.DelayLength;
-    foreach (var direction in DirectionExtensions.GetCardinals())
-    {
-        for (var i = 0; i < frames; i++)
-        {
-            var frame = state.Frames[(int) direction, i];
-            if (frame == null)
-                continue;
-
-            var size = frame.Size();
-            var (x1, y1, x2, y2) = direction switch
-            {
-                Direction.South => (0, 0, 0, size.Height / 2),
-                Direction.North => (0, size.Height / 2, 0, 0),
-                Direction.East => (0, size.Height / 2, size.Width / 2, size.Height / 2),
-                Direction.West => (size.Width / 2, size.Height / 2, 0, size.Height / 2),
-                _ => throw new ArgumentOutOfRangeException()
-            };
-
-            var first = frame.Clone();
-            first.Mutate(c => c.Crop(new Rectangle(x1, y1, size.Width / 2, size.Height / 2)));
-
-            var second = frame.Clone();
-            second.Mutate(c => c.Crop(new Rectangle(x2, y2, size.Width / 2, size.Height / 2)));
-
-            firstState.Frames[(int) direction, i] = first;
-            secondState.Frames[(int) direction, i] = second;
-        }
-    }
+    Console.WriteLine($"No RSIs found in path {path}");
+    return;
 }
 
-var x = rsi.Size.X / 2;
-var y = rsi.Size.Y / 2;
-var firstRsi = new Rsi(rsi.Version, rsi.License, rsi.Copyright, x, y, firstStates);
-var secondRsi = new Rsi(rsi.Version, rsi.License, rsi.Copyright, x, y, secondStates);
+Console.WriteLine($"Found:\n{string.Join('\n', directories)}");
+Console.WriteLine($"{directories.Length} total");
+Console.WriteLine("Is this correct? [Y/N]");
+var response = Console.ReadLine()?.Trim().ToUpper();
+if (response != "Y")
+{
+    Console.WriteLine("Cancelling operation");
+    return;
+}
 
-firstRsi.SaveToFolder($"{firstPath}");
-secondRsi.SaveToFolder($"{secondPath}");
-Console.WriteLine($"Converted {firstStates.Count} states");
+foreach (var directory in directories)
+{
+    Console.WriteLine($"Splitting {directory}");
+
+    var rsi = Rsi.FromFolder(directory);
+    rsi.TryLoadFolderImages(directory);
+
+    var states = new List<RsiState>();
+    foreach (var state in rsi.States)
+    {
+        var splitState = new RsiState(state.Name, state.Directions, state.Delays, state.Flags, null);
+
+        states.Add(splitState);
+
+        var frames = state.DelayLength;
+        foreach (var direction in DirectionExtensions.GetCardinals())
+        {
+            for (var i = 0; i < frames; i++)
+            {
+                var frame = state.Frames[(int) direction, i];
+                if (frame == null)
+                    continue;
+
+                var size = frame.Size();
+                var (x1, y1) = direction switch
+                {
+                    Direction.South => (0, 0),
+                    Direction.North => (0, size.Height / 2),
+                    Direction.East => (0, size.Height / 2),
+                    Direction.West => (size.Width / 2, size.Height / 2),
+                    _ => throw new ArgumentOutOfRangeException()
+                };
+
+                var first = frame.Clone();
+                first.Mutate(c => c.Crop(new Rectangle(x1, y1, size.Width / 2, size.Height / 2)));
+
+                splitState.Frames[(int) direction, i] = first;
+            }
+        }
+    }
+
+    var x = rsi.Size.X / 2;
+    var y = rsi.Size.Y / 2;
+    var splitRsi = new Rsi(rsi.Version, rsi.License, rsi.Copyright, x, y, states);
+
+    splitRsi.SaveToFolder(directory);
+    Console.WriteLine($"Split {states.Count} states");
+}
+
+Console.WriteLine($"Finished splitting {directories.Length} RSIs");
