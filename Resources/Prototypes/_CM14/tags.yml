@@ -26,7 +26,7 @@
   id: CMMortarShell
 
 - type: Tag
-  id: CMBloodBag
+  id: CMBloodPack
 
 - type: Tag
   id: CMGauze
@@ -51,6 +51,6 @@
 
 - type: Tag
   id: CMTraumaKit
-  
+
 - type: Tag
   id: Pouch

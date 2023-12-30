@@ -51,8 +51,8 @@
 
 - type: entity
   parent: BaseItem
-  id: CMBloodBag # TODO CM14 blood types
-  name: blood bag
+  id: CMBloodPack # TODO CM14 blood types
+  name: blood pack
   suffix: Full
   components:
   - type: BloodPack

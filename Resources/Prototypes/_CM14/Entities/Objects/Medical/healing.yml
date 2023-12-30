@@ -39,7 +39,7 @@
     healingBeginSound:
       path: "/Audio/Items/Medical/ointment_begin.ogg"
     healingEndSound:
-      path: "/Audio/Items/Medical/ointment_end.ogg"
+      path: "/Audio/_CM14/Medical/ointment.ogg"
   - type: Stack
     stackType: CMOintment
     count: 10
@@ -87,7 +87,7 @@
         Piercing: -5
     bloodlossModifier: -10
     healingBeginSound:
-      path: "/Audio/Items/Medical/brutepack_begin.ogg"
+      path: "/Audio/_CM14/Medical/bandage.ogg"
     healingEndSound:
       path: "/Audio/Items/Medical/brutepack_end.ogg"
   - type: Stack
@@ -131,7 +131,7 @@
         Brute: -25
     bloodlossModifier: -20
     healingBeginSound:
-      path: "/Audio/Items/Medical/brutepack_begin.ogg"
+      path: "/Audio/_CM14/Medical/bandage.ogg"
     healingEndSound:
       path: "/Audio/Items/Medical/brutepack_end.ogg"
   - type: Stack
@@ -170,7 +170,7 @@
         Shock: -10
         Caustic: -5
     healingBeginSound:
-      path: "/Audio/Items/Medical/brutepack_begin.ogg"
+      path: "/Audio/_CM14/Medical/bandage.ogg"
     healingEndSound:
       path: "/Audio/Items/Medical/brutepack_end.ogg"
   - type: Stack
@@ -215,7 +215,7 @@
         Shock: -10
         Caustic: -5
     healingBeginSound:
-      path: "/Audio/Items/Medical/brutepack_begin.ogg"
+      path: "/Audio/_CM14/Medical/bandage.ogg"
     healingEndSound:
       path: "/Audio/Items/Medical/brutepack_end.ogg"
 
@@ -260,7 +260,7 @@
         Brute: -25
     bloodlossModifier: -20
     healingBeginSound:
-      path: "/Audio/Items/Medical/brutepack_begin.ogg"
+      path: "/Audio/_CM14/Medical/bandage.ogg"
     healingEndSound:
       path: "/Audio/Items/Medical/brutepack_end.ogg"
 
