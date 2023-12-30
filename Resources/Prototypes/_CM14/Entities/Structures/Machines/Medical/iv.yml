@@ -5,11 +5,24 @@
   description: Allows you to inject blood into a patient or extract blood from them to do a blood transfusion.
   suffix: IV, empty
   components:
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 60
+        mask:
+        - MobMask
   - type: Transform
     anchored: false
+    noRot: true
   - type: InteractionOutline
   - type: Clickable
   - type: Sprite
+    noRot: true
     sprite: _CM14/Structures/Machines/Medical/iv_drip.rsi
     layers:
     - state: unhooked
@@ -38,8 +51,9 @@
 
 - type: entity
   parent: BaseItem
-  id: CMBloodPack # TODO CM14 blood types
-  name: blood pack
+  id: CMBloodBag # TODO CM14 blood types
+  name: blood bag
+  suffix: Full
   components:
   - type: BloodPack
   - type: Sprite

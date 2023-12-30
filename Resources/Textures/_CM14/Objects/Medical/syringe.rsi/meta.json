@@ -29,6 +29,12 @@
     {
       "name": "inhand-right",
       "directions": 4
+    },
+    {
+      "name": "draw"
+    },
+    {
+      "name": "inject"
     }
   ]
 }
