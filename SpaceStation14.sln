@@ -127,7 +127,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robust.Serialization.Genera
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Content.PatreonParser", "Content.PatreonParser\Content.PatreonParser.csproj", "{D97D8258-D915-4D1D-B1E3-1A8D00CF9EB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Content.DoorSplitter", "Content.DoorSplitter\Content.DoorSplitter.csproj", "{CC050BFE-AF9B-4016-A295-A9D7DC688BB5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Content.Scripts", "Content.Scripts\Content.Scripts.csproj", "{CC050BFE-AF9B-4016-A295-A9D7DC688BB5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RSI.NET", "RSI.NET", "{DC3BF1D8-A196-4F8C-A18F-1B0F7046600E}"
 EndProject
