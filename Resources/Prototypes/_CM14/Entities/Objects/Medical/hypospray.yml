@@ -106,20 +106,6 @@
 
 - type: entity
   parent: CMTAutoInjector
-  id: CMInaprovalineAutoInjector
-  name: inaprovaline auto-injector
-  description: An auto-injector containing inaprovaline.  Useful for saving lives. Each use is 10 units.
-  components:
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 30
-        reagents:
-          - ReagentId: Inaprovaline
-            Quantity: 30
-
-- type: entity
-  parent: CMTAutoInjector
   id: CMKelotaneAutoInjector
   name: kelotane auto-injector
   description: An auto-injector loaded with 3 uses of kelotane, a common burn medicine. Each use is 10 units.
@@ -199,7 +185,7 @@
 
 - type: entity
   parent: CMTAutoInjector
-  id: CMInaprovalinePlusAutoInjector
+  id: CMInaprovalineAutoInjector
   name: inaprovaline auto-injector
   description: An auto-injector loaded with 3 uses of inaprovaline, a medicine for people in critical condition. Each use is 10 units.
   components:
@@ -213,7 +199,7 @@
 
 - type: entity
   parent: CMTAutoInjector
-  id: CMOxycodonePlusAutoInjector
+  id: CMOxycodoneAutoInjector
   name: Oxycodone auto-injector
   description: An auto-injector loaded with 3 uses of oxycodone, a very strong painkiller. Each use is 10 units.
   noSpawn: true # todo cm14 remove this when oxydone is added
