@@ -1,7 +1,8 @@
 using Content.Shared.Actions;
 using Content.Shared.Movement.Systems;
 using Robust.Shared.GameStates;
-using Robust.Shared.Utility; using Robust.Shared.Timing;
+using Robust.Shared.Utility;
+using Robust.Shared.Timing;
 namespace Content.Shared._CM14.Marines.Orders;
 
 public abstract class SharedMarineOrdersSystem : EntitySystem
@@ -20,9 +21,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         SubscribeLocalEvent<FocusOrderComponent, ComponentGetStateAttemptEvent>(OnComponentGetState);
         SubscribeLocalEvent<HoldOrderComponent, ComponentGetStateAttemptEvent>(OnComponentGetState);
         SubscribeLocalEvent<MoveOrderComponent, ComponentGetStateAttemptEvent>(OnComponentGetState);
-        SubscribeLocalEvent<ActiveOrderComponent, ComponentGetStateAttemptEvent>(OnComponentGetState);
 
-        SubscribeLocalEvent<ActiveOrderComponent, EntityUnpausedEvent>(OnUnpause);
         SubscribeLocalEvent<MarineOrdersComponent, EntityUnpausedEvent>(OnUnpause);
 
         SubscribeLocalEvent<MoveOrderComponent, ComponentShutdown>(OnMoveShutdown);
@@ -30,11 +29,6 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         SubscribeLocalEvent<MarineOrdersComponent, FocusActionEvent>(OnAction);
         SubscribeLocalEvent<MarineOrdersComponent, HoldActionEvent>(OnAction);
         SubscribeLocalEvent<MarineOrdersComponent, MoveActionEvent>(OnAction);
-    }
-
-    private void OnUnpause(EntityUid uid, ActiveOrderComponent comp, EntityUnpausedEvent args)
-    {
-        comp.Duration += args.PausedTime;
     }
 
     private void OnUnpause(EntityUid uid, MarineOrdersComponent comp, EntityUnpausedEvent args)
@@ -87,9 +81,6 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         if (orderComp.Delay is not null && _timing.CurTime < orderComp.Delay)
             return;
 
-        var active = EnsureComp<ActiveOrderComponent>(uid);
-        active.Order = order;
-        active.Duration = _timing.CurTime + orderComp.Duration;
         orderComp.Delay = orderComp.DefaultDelay + orderComp.Duration;
 
         _receivers.Clear();
@@ -144,7 +135,6 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        RemoveExpired<ActiveOrderComponent>();
         RemoveExpired<MoveOrderComponent>();
         RemoveExpired<FocusOrderComponent>();
         RemoveExpired<HoldOrderComponent>();
