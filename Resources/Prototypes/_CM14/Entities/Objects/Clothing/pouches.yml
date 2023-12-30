@@ -241,7 +241,7 @@
     whitelist:
       tags: #this gonna be hell
       - MagazineCaselessM39
-      - MagazineRifleM41
+      - MagazineRifleM41A
       - MagazineRifleM41AE2
       - MagazineRifleM4RA
 

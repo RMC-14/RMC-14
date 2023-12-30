@@ -14,7 +14,7 @@
   id: MagazinePistolM4A3
 
 - type: Tag
-  id: MagazineRifleM41
+  id: MagazineRifleM41A
 
 - type: Tag
   id: MagazineRifleM41AE2
@@ -27,3 +27,6 @@
 
 - type: Tag
   id: Pouch
+
+- type: Tag
+  id: CMShellShotgun

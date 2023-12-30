@@ -20,6 +20,11 @@
     soundGunshot:
       path: /Audio/_CM14/Weapons/Guns/Gunshots/m37a2.ogg
   - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CMShellShotgun
+    capacity: 9
+    proto: null
     soundInsert:
       path: /Audio/_CM14/Weapons/Guns/Reload/m37a2.ogg
 #  - type: GunWieldBonus # TODO CM14

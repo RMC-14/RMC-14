@@ -1,11 +1,11 @@
 - type: entity
-  id: MagazineRifleM41
-  name: "M41 magazine (10x24mm)"
+  id: MagazineRifleM41A
+  name: "M41A magazine (10x24mm)"
   parent: BaseMagazineRifle
   components:
   - type: Tag
     tags:
-      - MagazineRifleM41
+      - MagazineRifleM41A
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -29,7 +29,7 @@
 - type: entity
   id: MagazineRifleM41AE2
   name: "M41AE2 magazine (10x24mm)"
-  parent: MagazineRifleM41
+  parent: MagazineRifleM41A
   components:
   - type: Tag
     tags:

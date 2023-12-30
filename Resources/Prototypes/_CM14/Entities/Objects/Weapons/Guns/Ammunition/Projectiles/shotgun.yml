@@ -1,0 +1,88 @@
+﻿- type: entity
+  abstract: true
+  parent: BaseBullet
+  id: CMPelletShotgunBase
+  categories:
+  - hideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    layers:
+    - state: bullet
+      shader: unshaded
+  - type: Projectile
+
+- type: entity
+  parent: CMPelletShotgunBase
+  id: CMPelletShotgunBuckshot
+  name: buckshot
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
+    layers:
+    - state: buckshot
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 75
+
+- type: entity
+  parent: CMPelletShotgunBase
+  id: CMPelletShotgunSlug
+  name: slug
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
+    layers:
+    - state: beanbag
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 70
+
+- type: entity
+  parent: CMPelletShotgunBase
+  id: CMPelletShotgunIncendiary
+  name: incendiary slug
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 55
+
+- type: entity
+  parent: CMPelletShotgunBase
+  id: CMPelletShotgunBeanbag
+  name: beanbag slug
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
+    layers:
+    - state: beanbag
+      shader: unshaded
+  - type: Projectile
+    damage: {}
+  - type: StaminaDamageOnCollide
+    damage: 45
+
+- type: entity
+  parent: CMPelletShotgunBase
+  id: CMPelletShotgunFlechette
+  name: flechette shell
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
+    layers:
+    - state: flechette
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 30
+
+- type: entity
+  parent: CMPelletShotgunBuckshot
+  id: CMPelletShotgunIncendiaryBuckshot
+  name: incendiary buckshot shell
