@@ -180,7 +180,7 @@ public sealed class HealingSystem : EntitySystem
         }
 
         _audio.PlayPvs(component.HealingBeginSound, uid,
-                AudioHelpers.WithVariation(0.125f, _random).WithVolume(-5f));
+                AudioHelpers.WithVariation(0.125f, _random).WithVolume(1f));
 
         var isNotSelf = user != target;
 
