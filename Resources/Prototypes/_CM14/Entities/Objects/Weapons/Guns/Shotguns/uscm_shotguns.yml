@@ -16,6 +16,12 @@
     - Back
     - SuitStorage
   - type: Wieldable
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_CM14/Weapons/Guns/Gunshots/m37a2.ogg
+  - type: BallisticAmmoProvider
+    soundInsert:
+      path: /Audio/_CM14/Weapons/Guns/Reload/m37a2.ogg
 #  - type: GunWieldBonus # TODO CM14
 #    minAngle: -25
 #    maxAngle: -50
