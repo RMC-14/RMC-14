@@ -67,7 +67,6 @@
       map: ["enum.BloodPackVisuals.Label"]
   - type: Item
     sprite: _CM14/Objects/Medical/blood_pack.rsi
-    state: bloodpack
   - type: SolutionContainerManager
     solutions:
       pack:
