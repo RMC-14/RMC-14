@@ -81,7 +81,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         if (orderComp.Delay is not null && _timing.CurTime < orderComp.Delay)
             return;
 
-        orderComp.Delay = orderComp.DefaultDelay + orderComp.Duration;
+        orderComp.Delay = _timing.CurTime + orderComp.DefaultDelay + orderComp.Duration;
 
         _receivers.Clear();
 
