@@ -122,13 +122,13 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         }
     }
 
-    private void OnComponentGetState<T>(EntityUid uid, T comp, ComponentGetStateAttemptEvent args)
+    private void OnComponentGetState<T>(EntityUid uid, T comp, ref ComponentGetStateAttemptEvent args)
     {
         // It's null on replays apparently
         if (args.Player is null)
             return;
 
-        args.Cancelled = HasComp<MarineComponent>(args.Player.AttachedEntity);
+        args.Cancelled = !HasComp<MarineComponent>(args.Player.AttachedEntity);
     }
 
     public override void Update(float frameTime)
