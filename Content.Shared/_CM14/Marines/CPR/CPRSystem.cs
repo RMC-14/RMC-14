@@ -1,4 +1,4 @@
-﻿using Content.Shared.Damage;
+using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
@@ -162,7 +162,7 @@ public sealed class CPRSystem : EntitySystem
     {
         damage = default;
 
-        if (!HasComp<MarineComponent>(target))
+        if (!HasComp<MarineComponent>(target) || !HasComp<MarineComponent>(performer))
             return false;
 
         var performAttempt = new PerformCPRAttemptEvent(target);
