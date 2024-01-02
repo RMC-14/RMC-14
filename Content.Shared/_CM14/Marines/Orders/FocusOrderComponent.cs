@@ -17,23 +17,17 @@ public sealed partial class FocusOrderComponent : Component, IOrderComponent
     [DataField, AutoNetworkedField]
     public FixedPoint2 AccuracyModifier = 0.1;
 
-    [DataField]
-    public FixedPoint2 DefaultAccuracyModifier = 0.1;
-
     //CM14 TODO Make this do something when/if weapons ever get range.
     [DataField, AutoNetworkedField]
     public FixedPoint2 RangeModifier = 0.1;
-
-    [DataField, AutoNetworkedField]
-    public FixedPoint2 DefaultRangeModifier = 0.1;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
     public TimeSpan Duration { get; set; }
 
     public void AssignMultiplier(FixedPoint2 multiplier)
     {
-        AccuracyModifier = DefaultAccuracyModifier * multiplier;
-        RangeModifier = DefaultRangeModifier * multiplier;
+        AccuracyModifier *= multiplier;
+        RangeModifier *= multiplier;
     }
     public override bool SessionSpecific => true;
 }

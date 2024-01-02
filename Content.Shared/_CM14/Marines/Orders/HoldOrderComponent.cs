@@ -24,9 +24,6 @@ public sealed partial class HoldOrderComponent : Component, IOrderComponent
     public FixedPoint2 DamageModifier;
 
     [DataField]
-    public FixedPoint2 DefaultDamageModifier= 0.05;
-
-    [DataField]
     public List<ProtoId<DamageTypePrototype>> DamageTypes = new() {"Slash", "Blunt"};
 
     /// <summary>
@@ -39,16 +36,13 @@ public sealed partial class HoldOrderComponent : Component, IOrderComponent
     [DataField, AutoNetworkedField]
     public FixedPoint2 PainModifier;
 
-    [DataField]
-    public FixedPoint2 DefaultPainModifier= 0.1;
-
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
     public TimeSpan Duration { get; set; }
 
     public void AssignMultiplier(FixedPoint2 multiplier)
     {
-        DamageModifier = DefaultDamageModifier * multiplier;
-        PainModifier= DefaultPainModifier * multiplier;
+        DamageModifier *= multiplier;
+        PainModifier *= multiplier;
     }
     public override bool SessionSpecific => true;
 }

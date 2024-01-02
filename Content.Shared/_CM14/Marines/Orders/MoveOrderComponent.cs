@@ -15,23 +15,17 @@ public sealed partial class MoveOrderComponent : Component, IOrderComponent
     [DataField, AutoNetworkedField]
     public FixedPoint2 MoveSpeedModifier = 0.1;
 
-    [DataField]
-    public FixedPoint2 DefaultMoveSpeedModifier = 0.1;
-
     // CM14 TODO Actually make this do something once we got melee dodging
     [DataField, AutoNetworkedField]
     public FixedPoint2 DodgeModifier = 0.1;
-
-    [DataField]
-    public FixedPoint2 DefaultDodgeModifier = 0.1;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
     public TimeSpan Duration { get; set; }
 
     public void AssignMultiplier(FixedPoint2 multiplier)
     {
-        MoveSpeedModifier = DefaultMoveSpeedModifier * multiplier;
-        DodgeModifier = DefaultDodgeModifier * multiplier;
+        MoveSpeedModifier *= multiplier;
+        DodgeModifier *= multiplier;
     }
 
     public override bool SessionSpecific => true;
