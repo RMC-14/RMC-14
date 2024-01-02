@@ -25,16 +25,23 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
 
         SubscribeLocalEvent<MarineOrdersComponent, EntityUnpausedEvent>(OnUnpause);
 
-        SubscribeLocalEvent<MoveOrderComponent, ComponentShutdown>(OnMoveShutdown);
-
         SubscribeLocalEvent<MarineOrdersComponent, FocusActionEvent>(OnAction);
         SubscribeLocalEvent<MarineOrdersComponent, HoldActionEvent>(OnAction);
         SubscribeLocalEvent<MarineOrdersComponent, MoveActionEvent>(OnAction);
+
+        SubscribeLocalEvent<MoveOrderComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovement);
+
+        SubscribeLocalEvent<MoveOrderComponent, ComponentShutdown>(OnMoveShutdown);
+    }
+
+    private void OnRefreshMovement(EntityUid uid, MoveOrderComponent comp, RefreshMovementSpeedModifiersEvent args)
+    {
+        var speed = (1 + comp.MoveSpeedModifier).Float();
+        args.ModifySpeed(speed, speed);
     }
 
     private void OnUnpause(EntityUid uid, MarineOrdersComponent comp, EntityUnpausedEvent args)
     {
-
         comp.Duration += args.PausedTime;
     }
 

@@ -18,6 +18,7 @@ public sealed partial class MoveOrderComponent : Component, IOrderComponent
     [DataField]
     public FixedPoint2 DefaultMoveSpeedModifier = 0.1;
 
+    // CM14 TODO Actually make this do something once we got melee dodging
     [DataField, AutoNetworkedField]
     public FixedPoint2 DodgeModifier = 0.1;
 
