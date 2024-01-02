@@ -18,6 +18,9 @@ public sealed class MarineOrdersSystem : SharedMarineOrdersSystem
 
     private void OnOrdersMapInit(EntityUid uid, MarineOrdersComponent comp, MapInitEvent ev)
     {
+        // All the SetUseDelay calls are required because even tho we set the cooldown on all of them once an order
+        // is issued for some reason the order that was pressed uses its delays and does not care about its cooldown
+        // being set.
         _actions.AddAction(uid, ref comp.FocusActionEntity, comp.FocusAction);
         _actions.SetUseDelay(comp.FocusActionEntity, comp.Cooldown);
         _actions.AddAction(uid, ref comp.HoldActionEntity, comp.HoldAction);
