@@ -24,7 +24,9 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         SubscribeLocalEvent<HoldOrderComponent, ComponentGetStateAttemptEvent>(OnComponentGetState);
         SubscribeLocalEvent<MoveOrderComponent, ComponentGetStateAttemptEvent>(OnComponentGetState);
 
-        SubscribeLocalEvent<MarineOrdersComponent, EntityUnpausedEvent>(OnUnpause);
+        SubscribeLocalEvent<MoveOrderComponent, EntityUnpausedEvent>(OnUnpause);
+        SubscribeLocalEvent<FocusOrderComponent, EntityUnpausedEvent>(OnUnpause);
+        SubscribeLocalEvent<HoldOrderComponent, EntityUnpausedEvent>(OnUnpause);
 
         SubscribeLocalEvent<MarineOrdersComponent, FocusActionEvent>(OnAction);
         SubscribeLocalEvent<MarineOrdersComponent, HoldActionEvent>(OnAction);
@@ -57,7 +59,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         args.ModifySpeed(speed, speed);
     }
 
-    private void OnUnpause(EntityUid uid, MarineOrdersComponent comp, EntityUnpausedEvent args)
+    private void OnUnpause<T>(EntityUid uid, T comp, EntityUnpausedEvent args) where T : IComponent, IOrderComponent
     {
         comp.Duration += args.PausedTime;
     }
