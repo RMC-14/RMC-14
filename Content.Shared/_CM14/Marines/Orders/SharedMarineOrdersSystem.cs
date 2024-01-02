@@ -1,4 +1,5 @@
 using Content.Shared.Actions;
+using Content.Shared.Damage;
 using Content.Shared.Movement.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
@@ -30,10 +31,26 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         SubscribeLocalEvent<MarineOrdersComponent, MoveActionEvent>(OnAction);
 
         SubscribeLocalEvent<MoveOrderComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovement);
+        SubscribeLocalEvent<HoldOrderComponent, DamageModifyEvent>(OnDamageModify);
 
         SubscribeLocalEvent<MoveOrderComponent, ComponentShutdown>(OnMoveShutdown);
     }
 
+
+    private void OnDamageModify(EntityUid uid, HoldOrderComponent comp, DamageModifyEvent args)
+    {
+        var damage = args.Damage.DamageDict;
+        var multiplier = 1 + comp.DamageModifier;
+
+        var damageTypes = comp.DamageTypes.GetEnumerator();
+
+        while (damageTypes.MoveNext())
+        {
+            if (damage.TryGetValue(damageTypes.Current, out var amount))
+                damage[damageTypes.Current] = amount * multiplier;
+        }
+
+    }
     private void OnRefreshMovement(EntityUid uid, MoveOrderComponent comp, RefreshMovementSpeedModifiersEvent args)
     {
         var speed = (1 + comp.MoveSpeedModifier).Float();

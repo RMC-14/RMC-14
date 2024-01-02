@@ -1,5 +1,7 @@
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Utility;
 using static Robust.Shared.Utility.SpriteSpecifier;
@@ -23,6 +25,9 @@ public sealed partial class HoldOrderComponent : Component, IOrderComponent
 
     [DataField]
     public FixedPoint2 DefaultDamageModifier= 0.05;
+
+    [DataField]
+    public List<ProtoId<DamageTypePrototype>> DamageTypes = new() {"Slash", "Blunt"};
 
     /// <summary>
     /// Resistance to pain.
