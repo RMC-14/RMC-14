@@ -68,6 +68,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
     {
         _movementSpeed.RefreshMovementSpeedModifiers(uid);
     }
+
     protected virtual void OnAction(EntityUid uid, MarineOrdersComponent orders, FocusActionEvent args)
     {
         OnAction(uid, Orders.Focus, orders, args);
@@ -104,9 +105,9 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
             return;
         }
 
-        _actions.SetCooldown(orderComp.FocusActionEntity,  orderComp.Delay + orderComp.Duration);
-        _actions.SetCooldown(orderComp.MoveActionEntity,  orderComp.Delay + orderComp.Duration);
-        _actions.SetCooldown(orderComp.HoldActionEntity,  orderComp.Delay + orderComp.Duration);
+        _actions.SetCooldown(orderComp.FocusActionEntity, orderComp.Cooldown);
+        _actions.SetCooldown(orderComp.MoveActionEntity, orderComp.Cooldown);
+        _actions.SetCooldown(orderComp.HoldActionEntity, orderComp.Cooldown);
 
         _receivers.Clear();
 
