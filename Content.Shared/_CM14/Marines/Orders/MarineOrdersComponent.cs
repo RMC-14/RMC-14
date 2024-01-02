@@ -19,6 +19,8 @@ public sealed partial class MarineOrdersComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan Duration = TimeSpan.FromSeconds(20);
 
+    public TimeSpan Cooldown => Duration + Delay;
+
     /// <summary>
     /// The range of the order's effect.
     /// </summary>
@@ -31,14 +33,7 @@ public sealed partial class MarineOrdersComponent : Component
     /// </summary>
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
     [ViewVariables(VVAccess.ReadWrite)]
-    public TimeSpan DefaultDelay = TimeSpan.FromMinutes(1);
-
-    /// <summary>
-    /// Delay between orders
-    /// </summary>
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public TimeSpan?  Delay;
+    public TimeSpan Delay = TimeSpan.FromMinutes(1);
 
     /// <summary>
     /// The intensity of the order.
@@ -54,7 +49,6 @@ public sealed partial class MarineOrdersComponent : Component
     [DataField]
     public EntityUid? FocusActionEntity;
 
-
     [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
     public string HoldAction = "ActionMarineHold";
 
@@ -67,6 +61,14 @@ public sealed partial class MarineOrdersComponent : Component
     [DataField]
     public EntityUid? MoveActionEntity;
 
+    [DataField, AutoNetworkedField]
+    public List<string> MoveCallouts = new() {"move-order-callout-1","move-order-callout-2","move-order-callout-3"};
+
+    [DataField, AutoNetworkedField]
+    public List<string> FocusCallouts = new() {"focus-order-callout-1","focus-order-callout-2","focus-order-callout-3"};
+
+    [DataField, AutoNetworkedField]
+    public List<string> HoldCallouts = new() {"hold-order-callout-1","hold-order-callout-2","hold-order-callout-3"};
 
     public override bool SessionSpecific => true;
 }

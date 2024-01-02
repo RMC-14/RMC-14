@@ -10,6 +10,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _receivers = new();
 
@@ -41,19 +42,19 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
     {
         _movementSpeed.RefreshMovementSpeedModifiers(uid);
     }
-    private void OnAction(EntityUid uid, MarineOrdersComponent orders, FocusActionEvent args)
+    protected virtual void OnAction(EntityUid uid, MarineOrdersComponent orders, FocusActionEvent args)
     {
         OnAction(uid, Orders.Focus, orders, args);
 
     }
 
-    private void OnAction(EntityUid uid, MarineOrdersComponent orders, HoldActionEvent args)
+    protected virtual void OnAction(EntityUid uid, MarineOrdersComponent orders, HoldActionEvent args)
     {
         OnAction(uid, Orders.Hold, orders, args);
 
     }
 
-    private void OnAction(EntityUid uid, MarineOrdersComponent orders, MoveActionEvent args)
+    protected virtual void OnAction(EntityUid uid, MarineOrdersComponent orders, MoveActionEvent args)
     {
         OnAction(uid, Orders.Move, orders, args);
     }
@@ -77,11 +78,9 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
             return;
         }
 
-        // CM14 TODO Add some message for this.
-        if (orderComp.Delay is not null && _timing.CurTime < orderComp.Delay)
-            return;
-
-        orderComp.Delay = _timing.CurTime + orderComp.DefaultDelay + orderComp.Duration;
+        _actions.SetCooldown(orderComp.FocusActionEntity,  orderComp.Delay + orderComp.Duration);
+        _actions.SetCooldown(orderComp.MoveActionEntity,  orderComp.Delay + orderComp.Duration);
+        _actions.SetCooldown(orderComp.HoldActionEntity,  orderComp.Delay + orderComp.Duration);
 
         _receivers.Clear();
 
