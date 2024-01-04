@@ -1,4 +1,4 @@
 - type: gameMapPool
   id: DefaultMapPool
   maps:
-  - CMDev # TODO CM14
+  - Savannah
