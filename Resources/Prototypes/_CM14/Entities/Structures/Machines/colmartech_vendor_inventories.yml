@@ -1,0 +1,102 @@
+﻿# TODO CM14 all of these starting inventories
+- type: vendingMachineInventory
+  id: ColMarTechFood
+  startingInventory:
+    # todo cm14 Prepared meal
+    FoodSnackMREBrownie: 50 # Protein bar
+    DrinkMREFlask: 10
+
+- type: vendingMachineInventory
+  id: ArmatAttachments
+  startingInventory: {}
+
+- type: vendingMachineInventory
+  id: ColMarTechUtilities
+  startingInventory: {}
+
+- type: vendingMachineInventory
+  id: ColMarTechMunitions
+  startingInventory: {}
+
+- type: vendingMachineInventory
+  id: ColMarTechGuns
+  startingInventory:
+    WeaponRifleM41A: 20
+    WeaponRifleM4RA: 20
+    WeaponSMGM39: 20
+    WeaponPistolM4A3: 40
+    MagazineRifleM41A: 100
+    MagazineRifleM4RA: 100
+    MagazineCaselessM39: 100
+    MagazinePistolM4A3: 200
+    M5Bayonet: 50
+
+- type: vendingMachineInventory
+  id: ColMarTechEquipment
+  startingInventory:
+    ArmorMarineM3: 30
+    CMArmorM3Light: 30
+    ArmorHelmetM10: 50
+
+- type: vendingMachineInventory
+  id: ColMarTechSLEquipment
+  startingInventory: {}
+
+- type: vendingMachineInventory
+  id: ColMarTechSLGear
+  startingInventory: {}
+
+- type: vendingMachineInventory
+  id: ColMarTechSWSEquipment
+  startingInventory: {}
+
+- type: vendingMachineInventory
+  id: ColMarTechSWSGear
+  startingInventory: {}
+
+- type: vendingMachineInventory
+  id: ColMarTechSCTGear
+  startingInventory: {}
+
+- type: vendingMachineInventory
+  id: ColMarTechSCTEquipment
+  startingInventory:
+    ClothingBeltUtility: 4
+    CableApcStack: 4
+    ClothingEyesGlassesMeson: 2
+    Crowbar: 8
+    Screwdriver: 8
+    Wirecutter: 8
+    Wrench: 8
+    Multitool: 8
+    Welder: 8
+
+- type: vendingMachineInventory
+  id: ColMarTechMedicalGear
+  startingInventory: {}
+
+- type: vendingMachineInventory
+  id: ColMarTechMedicalEquipment
+  startingInventory: {}
+
+- type: vendingMachineInventory
+  id: ColMarTechMarineMedical
+  startingInventory: {} # TODO CM14
+    # injectors basic and tramadol
+    # ointment, bruise pack, splint
+
+- type: vendingMachineInventory
+  id: ColMarTechSGGear
+  startingInventory: {}
+
+- type: vendingMachineInventory
+  id: ColMarTechSGEquipment
+  startingInventory: {}
+
+- type: vendingMachineInventory
+  id: ColMarTechFLGear
+  startingInventory: {}
+
+- type: vendingMachineInventory
+  id: ColMarTechFLEquipment
+  startingInventory: {}
