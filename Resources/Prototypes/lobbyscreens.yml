@@ -1,19 +1,22 @@
-﻿- type: lobbyBackground
-  id: Robotics
-  background: /Textures/LobbyScreens/robotics.png
+﻿# these were removed as they're not relevant to cm14. Merge conflicts with this file can be ignored, or merged with everything commented out
+# this file is replaced by Prototypes/_Cm14/Lobby/lobbyscreens.yml
 
-- type: lobbyBackground
-  id: Supermatter
-  background: /Textures/LobbyScreens/supermatter.png
-
-- type: lobbyBackground
-  id: Warden
-  background: /Textures/LobbyScreens/warden.png
-
-- type: lobbyBackground
-  id: Pharmacy
-  background: /Textures/LobbyScreens/pharmacy.png
-
-- type: lobbyBackground
-  id: SSXIV
-  background: /Textures/LobbyScreens/ssxiv.png
+#- type: lobbyBackground
+#  id: Robotics
+#  background: /Textures/LobbyScreens/robotics.png
+#
+#- type: lobbyBackground
+#  id: Supermatter
+#  background: /Textures/LobbyScreens/supermatter.png
+#
+#- type: lobbyBackground
+#  id: Warden
+#  background: /Textures/LobbyScreens/warden.png
+#
+#- type: lobbyBackground
+#  id: Pharmacy
+#  background: /Textures/LobbyScreens/pharmacy.png
+#
+#- type: lobbyBackground
+#  id: SSXIV
+#  background: /Textures/LobbyScreens/ssxiv.png

@@ -1,0 +1,31 @@
+﻿- type: entity
+  parent: [BaseStructure, CMEntityBase]
+  id: CMHypersleepChamber # TODO CM14 spawn squads and other marines here
+  name: hypersleep chamber
+  description: A large automated capsule with LED displays intended to put anyone inside into 'hypersleep', a form of non-cryogenic statis used on most ships, linked to a long-term hypersleep bay on a lower level.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/hypersleep.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - sprite: _CM14/Structures/Machines/hypersleep.rsi
+      state: open
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.90"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: ContainerContainer
+    containers:
+      scanner-body:
+        !type:ContainerSlot

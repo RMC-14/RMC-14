@@ -2,7 +2,7 @@
   id: Human
   name: species-name-human
   roundStart: true
-  prototype: MobHuman
+  prototype: CMMobHuman
   sprites: MobHumanSprites
   markingLimits: MobHumanMarkingLimits
   dollPrototype: MobHumanDummy

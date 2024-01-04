@@ -1,11 +1,19 @@
 #Alpha
 - type: entity
   parent: CMAirlockPrepAlpha
+  id: CMAirlockPrepAlphaCommon
+  suffix: Locked, Common
+  components:
+  - type: AccessReader
+    access: [["CMAccessMarinePrep"]]
+
+- type: entity
+  parent: CMAirlockPrepAlpha
   id: CMAirlockPrepAlphaLocked
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessMarinePrep"]]
+    access: [["CMAccessAlpha", "CMAccessMarinePrep"]]
 
 - type: entity
   parent: CMAirlockPrepAlpha
@@ -14,7 +22,7 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessSquadLeaderPrep"]]
+    access: [["CMAccessAlpha", "CMAccessSquadLeaderPrep"]]
 
 - type: entity
   parent: CMAirlockPrepAlpha
@@ -23,7 +31,7 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessSpecPrep"]]
+    access: [["CMAccessAlpha", "CMAccessSpecPrep"]]
 
 - type: entity
   parent: CMAirlockPrepAlpha
@@ -32,7 +40,7 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessCombatTechPrep"]]
+    access: [["CMAccessAlpha", "CMAccessCombatTechPrep"]]
 
 - type: entity
   parent: CMAirlockPrepAlpha
@@ -41,7 +49,7 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessMedPrep"]]
+    access: [["CMAccessAlpha", "CMAccessMedPrep"]]
 
 - type: entity
   parent: CMAirlockPrepAlpha
@@ -50,16 +58,24 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessSmartPrep"]]
+    access: [["CMAccessAlpha", "CMAccessSmartPrep"]]
 
 # Bravo
+- type: entity
+  parent: CMAirlockPrepBravo
+  id: CMAirlockPrepBravoCommon
+  suffix: Locked, Common
+  components:
+  - type: AccessReader
+    access: [["CMAccessMarinePrep"]]
+
 - type: entity
   parent: CMAirlockPrepBravo
   id: CMAirlockPrepBravoLocked
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessMarinePrep"]]
+    access: [["CMAccessBravo", "CMAccessMarinePrep"]]
 
 - type: entity
   parent: CMAirlockPrepBravo
@@ -68,7 +84,7 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessSquadLeaderPrep"]]
+    access: [["CMAccessBravo", "CMAccessSquadLeaderPrep"]]
 
 - type: entity
   parent: CMAirlockPrepBravo
@@ -77,7 +93,7 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessSpecPrep"]]
+    access: [["CMAccessBravo", "CMAccessSpecPrep"]]
 
 - type: entity
   parent: CMAirlockPrepBravo
@@ -86,7 +102,7 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessCombatTechPrep"]]
+    access: [["CMAccessBravo", "CMAccessCombatTechPrep"]]
 
 - type: entity
   parent: CMAirlockPrepBravo
@@ -95,7 +111,7 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessMedPrep"]]
+    access: [["CMAccessBravo", "CMAccessMedPrep"]]
 
 - type: entity
   parent: CMAirlockPrepBravo
@@ -104,16 +120,24 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessSmartPrep"]]
+    access: [["CMAccessBravo", "CMAccessSmartPrep"]]
 
 # Charlie
+- type: entity
+  parent: CMAirlockPrepCharlie
+  id: CMAirlockPrepCharlieCommon
+  suffix: Locked, Common
+  components:
+  - type: AccessReader
+    access: [["CMAccessMarinePrep"]]
+
 - type: entity
   parent: CMAirlockPrepCharlie
   id: CMAirlockPrepCharlieLocked
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessMarinePrep"]]
+    access: [["CMAccessCharlie", "CMAccessMarinePrep"]]
 
 - type: entity
   parent: CMAirlockPrepCharlie
@@ -122,7 +146,7 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessSquadLeaderPrep"]]
+    access: [["CMAccessCharlie", "CMAccessSquadLeaderPrep"]]
 
 - type: entity
   parent: CMAirlockPrepCharlie
@@ -131,7 +155,7 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessSpecPrep"]]
+    access: [["CMAccessCharlie", "CMAccessSpecPrep"]]
 
 - type: entity
   parent: CMAirlockPrepCharlie
@@ -140,7 +164,7 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessCombatTechPrep"]]
+    access: [["CMAccessCharlie", "CMAccessCombatTechPrep"]]
 
 - type: entity
   parent: CMAirlockPrepCharlie
@@ -149,7 +173,7 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessMedPrep"]]
+    access: [["CMAccessCharlie", "CMAccessMedPrep"]]
 
 - type: entity
   parent: CMAirlockPrepCharlie
@@ -158,16 +182,24 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessSmartPrep"]]
+    access: [["CMAccessCharlie", "CMAccessSmartPrep"]]
 
 # Delta
+- type: entity
+  parent: CMAirlockPrepDelta
+  id: CMAirlockPrepDeltaCommon
+  suffix: Common, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessMarinePrep"]]
+
 - type: entity
   parent: CMAirlockPrepDelta
   id: CMAirlockPrepDeltaLocked
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessMarinePrep"]]
+    access: [["CMAccessDelta", "CMAccessMarinePrep"]]
 
 - type: entity
   parent: CMAirlockPrepDelta
@@ -176,7 +208,7 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessSquadLeaderPrep"]]
+    access: [["CMAccessDelta", "CMAccessSquadLeaderPrep"]]
 
 - type: entity
   parent: CMAirlockPrepDelta
@@ -185,7 +217,7 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessSpecPrep"]]
+    access: [["CMAccessDelta", "CMAccessSpecPrep"]]
 
 - type: entity
   parent: CMAirlockPrepDelta
@@ -194,7 +226,7 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessCombatTechPrep"]]
+    access: [["CMAccessDelta", "CMAccessCombatTechPrep"]]
 
 - type: entity
   parent: CMAirlockPrepDelta
@@ -203,7 +235,7 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessMedPrep"]]
+    access: [["CMAccessDelta", "CMAccessMedPrep"]]
 
 - type: entity
   parent: CMAirlockPrepDelta
@@ -212,4 +244,4 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessSmartPrep"]]
+    access: [["CMAccessDelta", "CMAccessSmartPrep"]]

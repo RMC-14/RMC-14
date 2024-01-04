@@ -1,0 +1,238 @@
+﻿- type: entity
+  abstract: true
+  parent: [ VendingMachine, CMEntityBase ]
+  id: ColMarTechBase
+  name: ColMarTech vendor
+  components:
+  - type: VendingMachine
+    dispenseOnHitChance: null
+    dispenseOnHitThreshold: null
+    offState: off
+    brokenState: broken
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/colmartechweapons.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "base"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechFood
+  name: ColMarTech food vendor
+  description: USCM Food Vendor, containing standard military Prepared Meals.
+  components:
+  - type: VendingMachine
+    pack: ColMarTechFood
+    denyState: deny
+    ejectState: vend
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/food.rsi
+
+- type: entity
+  parent: ColMarTechBase
+  id: ArmatAttachments
+  name: Armat Systems squad attachments vendor
+  description: An automated supply rack hooked up to a small storage of weapons attachments. Can be accessed by any Marine Rifleman.
+  components:
+  - type: VendingMachine
+    pack: ArmatAttachments
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechUtilities
+  name: ColMarTech automated utilities Squad Vendor
+  description: An automated supply rack hooked up to a small storage of various utilities and tools. Can be accessed by any Marine Rifleman.
+  components:
+  - type: VendingMachine
+    pack: ColMarTechUtilities
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechMunitions
+  name: ColMarTech automated munition squad vendor
+  description: An automated supply rack hooked up to a small storage of various ammunition types. Can be accessed by any Marine Rifleman.
+  components:
+  - type: VendingMachine
+    pack: ColMarTechMunitions
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/requisitions_ammo.rsi
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechGuns
+  name: ColMarTech automated weapons rack
+  description: An automated weapon rack hooked up to a big storage of standard-issue weapons.
+  components:
+  - type: VendingMachine
+    pack: ColMarTechGuns
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechEquipment
+  name: ColMarTech automated marine equipment rack
+  description: An automated rack hooked up to a colossal storage of Marine Rifleman standard-issue equipment.
+  components:
+  - type: VendingMachine
+    pack: ColMarTechEquipment
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechSLGear
+  name: ColMarTech squad leader gear rack
+  description: An automated gear rack for Squad Leaders.
+  components:
+  - type: VendingMachine
+    pack: ColMarTechSLEquipment
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/gear.rsi
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechSLEquipment
+  name: ColMarTech squad leader equipment rack
+  description: An automated rack hooked up to a colossal storage of Squad Leader standard-issue equipment.
+  components:
+  - type: VendingMachine
+    pack: ColMarTechSLEquipment
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechSWSGear
+  name: ColMarTech squad weapons specialist gear rack
+  description: An automated gear rack for Squad Weapons Specialists.
+  components:
+  - type: VendingMachine
+    pack: ColMarTechSWSGear
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/specialist_gear.rsi
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechSWSEquipment
+  name: ColMarTech squad weapons specialist equipment rack
+  description: An automated rack hooked up to a colossal storage of Squad Weapons Specialist standard-issue equipment.
+  components:
+  - type: VendingMachine
+    pack: ColMarTechSWSEquipment
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechSCTGear
+  name: ColMarTech squad comtech gear rack
+  description: An automated gear rack for combat technicians.
+  components:
+  - type: VendingMachine
+    pack: ColMarTechSCTGear
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/combat_technician_gear.rsi
+  - type: AccessReader
+    access: [["CMAccessCombatTechPrep"]]
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechSCTEquipment
+  name: ColMarTech squad comtech equipment rack
+  description: An automated rack hooked up to a colossal storage of combat technician standard-issue equipment.
+  components:
+  - type: VendingMachine
+    pack: ColMarTechSCTEquipment
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: AccessReader
+    access: [["CMAccessCombatTechPrep"]]
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechMedicalGear
+  name: ColMarTech squad medical gear rack
+  description: An automated gear rack for hospital corpsmen.
+  components:
+  - type: VendingMachine
+    pack: ColMarTechMedicalGear
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/medical_gear.rsi
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechMedicalEquipment
+  name: ColMarTech squad medical equipment rack
+  description: An automated rack hooked up to a colossal storage of hospital corpsman standard-issue equipment.
+  components:
+  - type: VendingMachine
+    pack: ColMarTechMedicalEquipment
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechMarineMedical
+  name: ColMarTech MarineMed
+  description: Medical Pharmaceutical dispenser with basic medical supplies for marines.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/marine_medical.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "normal"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+  - type: VendingMachine
+    pack: ColMarTechMarineMedical
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechSGGear
+  name: ColMarTech squad smartgunner gear rack
+  description: An automated gear rack for Squad Smartgunners.
+  components:
+  - type: VendingMachine
+    pack: ColMarTechSGGear
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/smartgunner_gear.rsi
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechSGEquipment
+  name: ColMarTech squad smartgun equipment rack
+  description: An automated rack hooked up to a colossal storage of Squad Smartgun standard-issue equipment.
+  components:
+  - type: VendingMachine
+    pack: ColMarTechSGEquipment
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechFLGear
+  name: ColMarTech fireteam leader gear rack
+  description: An automated gear rack for fireteam leaders.
+  components:
+  - type: VendingMachine
+    pack: ColMarTechFLGear
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/fireteam_leader_gear.rsi
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechFLEquipment
+  name: ColMarTech fireteam leader equipment rack
+  description: An automated rack hooked up to a colossal storage of fireteam leader standard-issue equipment.
+  components:
+  - type: VendingMachine
+    pack: ColMarTechFLEquipment
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi

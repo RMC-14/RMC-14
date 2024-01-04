@@ -1,0 +1,52 @@
+﻿- type: entity
+  abstract: true
+  parent: CMEntityBase
+  id: CMPlatformBase
+  name: platform
+  description: A square metal surface resting on four legs.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _CM14/Structures/platforms.rsi
+  - type: InteractionOutline
+  - type: Clickable
+
+- type: entity
+  parent: CMPlatformBase
+  id: CMPlatform
+  name: platform
+  description: A square metal surface resting on four legs.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.36"
+        density: 1500
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+  - type: Sprite
+    state: platform
+  - type: Climbable
+
+- type: entity
+  parent: CMPlatformBase
+  id: CMPlatformCorner
+  name: platform
+  description: A square metal surface resting on four legs.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Sprite
+    state: platform_deco

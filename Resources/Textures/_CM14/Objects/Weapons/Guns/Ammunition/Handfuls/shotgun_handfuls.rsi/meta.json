@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7cb618c69b75873f3ce893022fe08d1233b3152d/icons/obj/items/weapons/guns/handful.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "buckshot_shell_1"
+    },
+    {
+      "name": "buckshot_shell_2"
+    },
+    {
+      "name": "buckshot_shell_3"
+    },
+    {
+      "name": "buckshot_shell_4"
+    },
+    {
+      "name": "buckshot_shell_5"
+    },
+    {
+      "name": "slug_shell_1"
+    },
+    {
+      "name": "slug_shell_2"
+    },
+    {
+      "name": "slug_shell_3"
+    },
+    {
+      "name": "slug_shell_4"
+    },
+    {
+      "name": "slug_shell_5"
+    },
+    {
+      "name": "incendiary_slug_1"
+    },
+    {
+      "name": "incendiary_slug_2"
+    },
+    {
+      "name": "incendiary_slug_3"
+    },
+    {
+      "name": "incendiary_slug_4"
+    },
+    {
+      "name": "incendiary_slug_5"
+    },
+    {
+      "name": "incen_buckshot_1"
+    },
+    {
+      "name": "incen_buckshot_2"
+    },
+    {
+      "name": "incen_buckshot_3"
+    },
+    {
+      "name": "incen_buckshot_4"
+    },
+    {
+      "name": "incen_buckshot_5"
+    },
+    {
+      "name": "beanbag_slug_1"
+    },
+    {
+      "name": "beanbag_slug_2"
+    },
+    {
+      "name": "beanbag_slug_3"
+    },
+    {
+      "name": "beanbag_slug_4"
+    },
+    {
+      "name": "beanbag_slug_5"
+    },
+    {
+      "name": "flechette_shell_1"
+    },
+    {
+      "name": "flechette_shell_2"
+    },
+    {
+      "name": "flechette_shell_3"
+    },
+    {
+      "name": "flechette_shell_4"
+    },
+    {
+      "name": "flechette_shell_5"
+    }
+  ]
+}
