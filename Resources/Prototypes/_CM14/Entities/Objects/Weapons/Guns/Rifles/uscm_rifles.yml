@@ -38,13 +38,13 @@
       slots:
         gun_magazine:
           name: Magazine
-          startingItem: MagazineRifleM41
+          startingItem: MagazineRifleM41A
           insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
           priority: 2
           whitelist:
             tags:
-              - MagazineRifleM41
+              - MagazineRifleM41A
         gun_chamber:
           name: Chamber
           startingItem: CartridgeRifle10x24mm
