@@ -16610,7 +16610,7 @@ entities:
     - pos: 123.5,18.5
       parent: 2
       type: Transform
-    - secondsUntilStateChange: -48533.754
+    - secondsUntilStateChange: -48594.254
       state: Opening
       type: Door
   - uid: 2717
@@ -16620,7 +16620,7 @@ entities:
     - pos: 123.5,-17.5
       parent: 2
       type: Transform
-    - secondsUntilStateChange: -56048.883
+    - secondsUntilStateChange: -56109.383
       state: Opening
       type: Door
   - uid: 2741
@@ -16946,7 +16946,7 @@ entities:
       pos: 121.5,-8.5
       parent: 2
       type: Transform
-    - secondsUntilStateChange: -55690.16
+    - secondsUntilStateChange: -55750.66
       state: Opening
       type: Door
 - proto: CMAirlockMaint
@@ -52879,16 +52879,6 @@ entities:
     - pos: 129.5,-9.5
       parent: 2
       type: Transform
-  - uid: 2690
-    components:
-    - pos: 129.5,-5.5
-      parent: 2
-      type: Transform
-  - uid: 2691
-    components:
-    - pos: 129.5,-4.5
-      parent: 2
-      type: Transform
 - proto: SpawnPointSeniorEnlistedAdvisor
   entities:
   - uid: 5729
@@ -52925,6 +52915,18 @@ entities:
   - uid: 3943
     components:
     - pos: 52.5,-4.5
+      parent: 2
+      type: Transform
+- proto: SpawnPointWeaponsSpecialist
+  entities:
+  - uid: 2690
+    components:
+    - pos: 129.5,-4.5
+      parent: 2
+      type: Transform
+  - uid: 2691
+    components:
+    - pos: 129.5,-5.5
       parent: 2
       type: Transform
 - proto: Stairs
