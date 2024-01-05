@@ -190,7 +190,8 @@
       "directions": 4
     },
     {
-      "name": "welded"
+      "name": "welded",
+      "directions": 4
     },
     {
       "name": "closed_unlit"
