@@ -1,0 +1,72 @@
+﻿- type: entity
+  abstract: true
+  parent: CMFoodBase
+  id: CMUSCMPreparedMealBase
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Consumable/Food/prepared.rsi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 20
+        - ReagentId: Vitamin
+          Quantity: 5
+  - type: Item
+    sprite: _CM14/Objects/Consumable/Food/prepared.rsi
+
+- type: entity
+  parent: CMUSCMPreparedMealBase
+  id: CMUSCMPreparedMealCornbread
+  name: USCM prepared meal (cornbread)
+  description: A tray of standard USCM food. Stale cornbread, tomato paste and some green goop fill this tray.
+  components:
+  - type: Sprite
+    state: cornbread
+
+- type: entity
+  parent: CMUSCMPreparedMealBase
+  id: CMUSCMPreparedMealChicken
+  name: USCM prepared meal (chicken)
+  description: A tray of standard USCM food. Partially raw pork, goopy corn and some watery mashed potatoes fill this tray.
+  components:
+  - type: Sprite
+    state: chicken
+
+- type: entity
+  parent: CMUSCMPreparedMealBase
+  id: CMUSCMPreparedMealPasta
+  name: USCM prepared meal (pasta)
+  description: A tray of standard USCM food. Overcooked spaghetti, waterlogged carrots and two french fries fill this tray.
+  components:
+  - type: Sprite
+    state: pasta
+
+- type: entity
+  parent: CMUSCMPreparedMealBase
+  id: CMUSCMPreparedMealPizza
+  name: USCM prepared meal (pizza)
+  description: A tray of standard USCM food. Cold pizza, wet green beans and a shitty egg fill this tray. Get something other than pizza, lardass.
+  components:
+  - type: Sprite
+    state: pizza
+
+- type: entity
+  parent: CMUSCMPreparedMealBase
+  id: CMUSCMPreparedMealPork
+  name: USCM prepared meal (pork)
+  description: A tray of standard USCM food. Partially raw pork, goopy corn and some watery mashed potatoes fill this tray.
+  components:
+  - type: Sprite
+    state: pork
+
+- type: entity
+  parent: CMUSCMPreparedMealBase
+  id: CMUSCMPreparedMealTofu
+  name: USCM prepared meal (tofu)
+  description: The USCM doesn't serve tofu you grass sucking hippie. The flag signifies your defeat.
+  components:
+  - type: Sprite
+    state: tofu

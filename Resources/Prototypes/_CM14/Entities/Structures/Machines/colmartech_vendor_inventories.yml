@@ -2,20 +2,17 @@
 - type: vendingMachineInventory
   id: ColMarTechFood
   startingInventory:
-    # todo cm14 Prepared meal
-    FoodSnackMREBrownie: 50 # Protein bar
-    DrinkMREFlask: 10
-#    CMUSCMPreparedMealChicken: 15
-#    CMUSCMPreparedMealCornbread: 15
-#    CMUSCMPreparedMealPasta: 15
-#    CMUSCMPreparedMealPizza: 15
-#    CMUSCMPreparedMealPork: 15
-#    CMUSCMPreparedMealTofu: 15
-#    CMUSCMProteinBar: 50
-#    CMCanteen: 10
-#    CMMetalFlask: 10
-#    CMUSCMFlask: 5
-#    CMWYFlask: 5
+    CMUSCMPreparedMealChicken: 15
+    CMUSCMPreparedMealCornbread: 15
+    CMUSCMPreparedMealPasta: 15
+    CMUSCMPreparedMealPizza: 15
+    CMUSCMPreparedMealPork: 15
+    CMUSCMPreparedMealTofu: 15
+    CMUSCMProteinBar: 50
+    CMCanteen: 10
+    CMMetalFlask: 10
+    CMUSCMFlask: 5
+    CMWYFlask: 5
 
 - type: vendingMachineInventory
   id: ArmatAttachments
