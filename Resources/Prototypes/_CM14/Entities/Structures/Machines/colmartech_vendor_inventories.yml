@@ -16,31 +16,31 @@
 
 - type: vendingMachineInventory
   id: ArmatAttachments
-  startingInventory: {}
-#    CMAttachmentExtendedBarrel: 2
-#    CMAttachmentRecoilCompensator: 2
-#    CMAttachmentSuppressor: 2
-#    CMAttachmentB8SmartScope: 1
-#    CMAttachmentMagneticHarness: 4
-#    CMAttachmentS42xTelescopicMiniScope: 2
-#    CMAttachmentS5RedDotSight: 3
-#    CMAttachmentS6ReflexSight: 3
-#    CMAttachments84xTelescopicScope: 2
-#    CMAttachmentAngledGrip: 2
-#    CMAttachmentBipod: 2
-#    CMAttachmentBurstFireAssembly: 1
-#    CMAttachmentGyroscopicStabilizer: 1
-#    CMAttachmentLaserSight: 3
-#    CMAttachmentMiniFlamethrower: 1
-#    CMAttachmentXMVESG1FlamerNozzle: 1
-#    CMAttachmentU7UnderbarrelShotgun: 1
-#    CMAttachmentUnderbarrelExtinguisher: 1
-#    CMAttachmentVerticalGrip: 3
-#    CMAttachmentM37WoodenStock: 1
-#    CMAttachmentM39ArmBrace: 1
-#    CMAttachmentM39Stock: 1
-#    CMAttachmentM41ASolidStock: 1
-#    CMAttachmentM44MagnumSharpshooterStock: 1
+  startingInventory:
+    CMAttachmentExtendedBarrel: 2
+    CMAttachmentRecoilCompensator: 2
+    CMAttachmentSuppressor: 2
+    CMAttachmentB8SmartScope: 1
+    CMAttachmentMagneticHarness: 4
+    CMAttachmentS42xTelescopicMiniScope: 2
+    CMAttachmentS5RedDotSight: 3
+    CMAttachmentS6ReflexSight: 3
+    CMAttachments84xTelescopicScope: 2
+    CMAttachmentAngledGrip: 2
+    CMAttachmentBipod: 2
+    CMAttachmentBurstFireAssembly: 1
+    CMAttachmentGyroscopicStabilizer: 1
+    CMAttachmentLaserSight: 3
+    CMAttachmentMiniFlamethrower: 1
+    CMAttachmentXMVESG1FlamerNozzle: 1
+    CMAttachmentU7UnderbarrelShotgun: 1
+    CMAttachmentUnderbarrelExtinguisher: 1
+    CMAttachmentVerticalGrip: 3
+    CMAttachmentM37WoodenStock: 1
+    CMAttachmentM39ArmBrace: 1
+    CMAttachmentM39Stock: 1
+    CMAttachmentM41ASolidStock: 1
+    CMAttachmentM44MagnumSharpshooterStock: 1
 
 - type: vendingMachineInventory
   id: ColMarTechUtilities
