@@ -16540,6 +16540,9 @@ entities:
     - pos: 52.5,3.5
       parent: 2
       type: Transform
+    - secondsUntilStateChange: -287.61627
+      state: Opening
+      type: Door
   - uid: 2756
     components:
     - name: SO office airlock
@@ -16610,7 +16613,7 @@ entities:
     - pos: 123.5,18.5
       parent: 2
       type: Transform
-    - secondsUntilStateChange: -48594.254
+    - secondsUntilStateChange: -48907.984
       state: Opening
       type: Door
   - uid: 2717
@@ -16620,7 +16623,7 @@ entities:
     - pos: 123.5,-17.5
       parent: 2
       type: Transform
-    - secondsUntilStateChange: -56109.383
+    - secondsUntilStateChange: -56423.113
       state: Opening
       type: Door
   - uid: 2741
@@ -16946,7 +16949,7 @@ entities:
       pos: 121.5,-8.5
       parent: 2
       type: Transform
-    - secondsUntilStateChange: -55750.66
+    - secondsUntilStateChange: -56064.39
       state: Opening
       type: Door
 - proto: CMAirlockMaint
@@ -23506,6 +23509,12 @@ entities:
     components:
     - rot: 1.5707963267948966 rad
       pos: 166.5,10.5
+      parent: 2
+      type: Transform
+  - uid: 6543
+    components:
+    - rot: 3.141592653589793 rad
+      pos: 20.5,4.5
       parent: 2
       type: Transform
 - proto: CMLockerCargo
@@ -32514,6 +32523,95 @@ entities:
     components:
     - rot: 3.141592653589793 rad
       pos: 142.5,19.5
+      parent: 2
+      type: Transform
+- proto: CMWindoorSecureBrig
+  entities:
+  - uid: 6528
+    components:
+    - rot: 3.141592653589793 rad
+      pos: 25.5,5.5
+      parent: 2
+      type: Transform
+  - uid: 6529
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: 12.5,10.5
+      parent: 2
+      type: Transform
+  - uid: 6531
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: 12.5,9.5
+      parent: 2
+      type: Transform
+  - uid: 6532
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: 12.5,8.5
+      parent: 2
+      type: Transform
+  - uid: 6536
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: 12.5,7.5
+      parent: 2
+      type: Transform
+  - uid: 6537
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: 12.5,6.5
+      parent: 2
+      type: Transform
+  - uid: 6538
+    components:
+    - rot: -1.5707963267948966 rad
+      pos: 14.5,10.5
+      parent: 2
+      type: Transform
+  - uid: 6539
+    components:
+    - rot: -1.5707963267948966 rad
+      pos: 14.5,9.5
+      parent: 2
+      type: Transform
+  - uid: 6540
+    components:
+    - rot: -1.5707963267948966 rad
+      pos: 14.5,8.5
+      parent: 2
+      type: Transform
+  - uid: 6541
+    components:
+    - rot: -1.5707963267948966 rad
+      pos: 14.5,7.5
+      parent: 2
+      type: Transform
+  - uid: 6542
+    components:
+    - rot: -1.5707963267948966 rad
+      pos: 14.5,6.5
+      parent: 2
+      type: Transform
+- proto: CMWindoorSecureMedical
+  entities:
+  - uid: 6525
+    components:
+    - rot: 3.141592653589793 rad
+      pos: 113.5,2.5
+      parent: 2
+      type: Transform
+  - uid: 6526
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: 111.5,4.5
+      parent: 2
+      type: Transform
+- proto: CMWindoorSecurerRequisitions
+  entities:
+  - uid: 6522
+    components:
+    - pos: 110.5,-3.5
       parent: 2
       type: Transform
 - proto: CMWindowDirectional
