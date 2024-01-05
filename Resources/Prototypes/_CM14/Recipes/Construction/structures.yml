@@ -106,6 +106,42 @@
   conditions:
     - !type:TileNotBlocked
 
+
+# Windoors
+- type: construction
+  name: windoor
+  id: CMWindoor
+  graph: CMWindoor
+  startNode: start
+  targetNode: windoor
+  category: construction-category-cm-structures
+  description: It opens, it closes, and you can see through it!
+  icon:
+    sprite: _CM14/Structures/Doors/windoor_assemblies.rsi
+    state: windoor_assembly01
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  name: secure windoor
+  id: CMWindoorSecure
+  graph: CMWindoor
+  startNode: start
+  targetNode: windoorSecure
+  category: construction-category-cm-structures
+  description: It opens, it closes, and you can see through it! This one looks tough.
+  icon:
+    sprite: _CM14/Structures/Doors/windoor_assemblies.rsi
+    state: secure_assembly01
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+  conditions:
+    - !type:TileNotBlocked
+
 # Barricades
 
 - type: construction
