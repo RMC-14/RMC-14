@@ -108,11 +108,11 @@
     MagazineRifleM41A: 25
 #    CMWeaponPistol88M4: 25
 #    CMWeaponRevolverM44: 25
-    WeaponPistolM4A3: 25
+    CMWeaponPistolM4A3: 25
 #    WeaponFlareM82F: 10
 #    CMMagazinePistol88M4: 25
 #    CMSpeedloaderM44: 20
-    MagazinePistolM4A3: 25
+    CMMagazinePistolM4A3: 25
 #    CMAttachmentFoldingStockM39: 10
 #    CMAttachmentFoldingStockM41A: 10
 #    CMAttachmentRailFlashlight: 25
