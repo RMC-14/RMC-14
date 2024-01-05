@@ -1,0 +1,36 @@
+﻿- type: entity
+  abstract: true
+  parent: CMAttachmentBase
+  id: CMBarrelAttachmentBase
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Attachments/barrel.rsi
+
+- type: entity
+  parent: CMBarrelAttachmentBase
+  id: CMAttachmentExtendedBarrel
+  name: extended barrel
+  description: The lengthened barrel speeds up and stabilizes the bullet, increasing velocity and accuracy.
+  components:
+  - type: Sprite
+    state: ebarrel
+
+- type: entity
+  parent: CMBarrelAttachmentBase
+  id: CMAttachmentRecoilCompensator
+  name: recoil compensator
+  description: "A muzzle attachment that reduces recoil by diverting expelled gasses upwards.
+    Increases accuracy and reduces recoil, at the cost of a small amount of weapon damage."
+  components:
+  - type: Sprite
+    state: comp
+
+- type: entity
+  parent: CMBarrelAttachmentBase
+  id: CMAttachmentSuppressor
+  name: suppressor
+  description: "A small tube with exhaust ports to expel noise and gas.
+    Does not completely silence a weapon, but does make it much quieter and a little more accurate and stable at the cost of slightly reduced damage."
+  components:
+  - type: Sprite
+    state: suppressor

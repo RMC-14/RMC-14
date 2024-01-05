@@ -1,0 +1,4 @@
+﻿- type: entity
+  abstract: true
+  parent: BaseItem
+  id: CMAttachmentBase
