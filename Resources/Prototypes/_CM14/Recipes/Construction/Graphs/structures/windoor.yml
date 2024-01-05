@@ -211,7 +211,7 @@
       - !type:DoorBolted
         value: false
       - !type:WirePanel {}
-      - !type:ContainerNotEmpty # TODO ShadowCommander: Remove when map gets updated
+      - !type:ContainerNotEmpty
         container: board
       - !type:AllWiresCut
       completed:

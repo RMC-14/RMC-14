@@ -1,7 +1,0 @@
-- type: entity
-  parent: Windoor
-  id: WindoorMP
-  suffix: Bar, Locked
-  components:
-  - type: AccessReader
-    access: [["Bar"]]

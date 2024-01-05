@@ -1,7 +1,0 @@
-- type: entity
-  parent: CMWindoor
-  id: WindoorAlmayer
-  suffix: Bar, Locked
-  components:
-  - type: AccessReader
-    access: [["Bar"]]
