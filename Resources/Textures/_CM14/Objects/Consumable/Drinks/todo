@@ -1,0 +1,179 @@
+Classic Cola
+A classic cola with a taste that's been around for centuries. Nobody can beat it.
+cola
+
+Mountain Wind
+Blows right through you like a space wind.
+space_mountain_wind
+
+Thirteen Loko
+Consumption of Thirteen Loko may result in seizures, blindness, drunkenness, or even death. Please Drink Responsibly.
+thirteen_loko
+
+Dr. Gibb
+A delicious mixture of 42 different flavors of chemicals that you can't pronounce.
+dr_gibb
+
+Star-kist
+The taste of a star in liquid form. And, a bit of tuna...?
+starkist
+starkist
+
+Space-Up
+Tastes like a hull breach in your mouth.
+space-up
+space_up
+
+lemon-lime
+You wanted ORANGE. It gave you Lemon Lime.
+lemon-lime
+lemon_lime
+
+iced tea can
+Just like the squad redneck's grandmother used to buy.
+ice_tea_can
+icetea
+
+grape juice
+A can of probably not grape juice.
+purple_can
+grapejuice
+
+tonic water
+Step One: Tonic. Check. Step Two: Gin.
+tonic
+tonic
+
+soda water
+A can of soda water. Tap water's more refreshing cousin...according to those Europe-folk.
+sodawater
+sodawater
+
+Boda
+State regulated soda beverage. Enjoy comrades.
+boda
+sodawater
+
+Boda-Plyus
+State regulated soda beverage, now with added surplus flavoring. Enjoy comrades.
+blank_can
+cola
+
+Fruit-Beer
+In theory, Mango flavored root beer sounds like a pretty good idea. Weyland-Yutani has disproved yet another theory with its latest line of cola. Canned by the Weyland-Yutani Corporation.
+fruit_beer
+fruit_beer
+
+Weyland-Yutani Bottled Spring Water
+Overpriced 'Spring' water. Bottled by the Weyland-Yutani Corporation.
+wy_water
+water
+
+Weyland-Yutani Lite
+Beer. You've dialed in your target. Time to fire for effect.
+beer
+beer
+
+Weyland-Yutani IPA
+Beer's misunderstood cousin.
+ale beer
+ale
+
+Souto Can
+Canned in Havana.
+souto_classic
+
+Diet Souto
+Now with 0% fruit juice! Canned in Havana
+souto_diet_classic
+water 25
+
+Souto Classic
+The can boldly proclaims it to be tangerine flavored. You can't help but think that's a lie. Canned in Havana.
+souto_classic
+souto_classic 50
+
+Diet Souto
+Now with 0% fruit juice! Canned in Havana
+souto_diet_classic
+souto_classic 25
+
+Cherry Souto
+Now with more artificial flavors! Canned in Havana
+souto_cherry
+souto_cherry 50
+
+Diet Cherry Souto
+It's neither diet nor cherry flavored. Canned in Havana.
+souto_diet_cherry
+souto_cherry 25
+
+Lime Souto
+It's not bad. It's not good either, but it's not bad. Canned in Havana.
+souto_lime
+souto_lime 50
+
+Diet Lime Souto
+Ten kinds of acid, two cups of fake sugar, almost a full tank of carbon dioxide, and about 210 kPa all crammed into an aluminum can. What's not to love? Canned in Havana.
+souto_lime 25
+
+Grape Souto
+An old standby for soda flavors. This, however, tastes like grape flavored cough syrup. Canned in Havana.
+souto_grape
+souto_grape 50
+
+Diet Grape Souto
+You're fairly certain that this is just grape cough syrup and carbonated water. Canned in Havana.
+souto_diet_grape
+souto_grape 25
+
+Blue Raspberry Souto
+It tastes like the color blue. Technology really is amazing. Canned in Havana.
+souto_blueraspberry
+souto_blueraspberry 50
+
+Diet Blue Raspberry Souto
+WHAT A SCAM! It doesn't even taste like blue! At best, it tastes like cyan. Canned in Havana.
+souto_diet_blueraspberry
+souto_blueraspberry 25
+
+Peach Souto
+On one hand, it tastes pretty good. On the other hand, you think you can hear a peach pit rattling on the inside. Canned in Havana.
+souto_peach
+souto_peach 50
+
+Diet Peach Souto
+On one hand, it tastes pretty good. On the other hand, you think you can hear half of a peach pit rattling on the inside. Canned in Havana.
+souto_diet_peach
+souto_peach 25
+
+Cranberry Souto
+On closer inspection, the can reads, 'CRAMberry Souto.' What the Hell is a Cramberry? Canned in Havana.
+souto_cranberry
+souto_cranberry 50
+
+Diet Cranberry Souto
+This tastes more like prunes than cranberries. It's not bad; it's just wrong. Canned in Havana.
+souto_diet_cranberry
+souto_cranberry 25, water 25
+
+Vanilla Souto
+When most soft drinks say 'vanilla,' they really mean their classic flavor with a bit of vanilla added. NOT THE SOUTO CORPORATION, BABY! This bad boy is filled to the brim with 100% pure carbonated vanilla extract! It tastes terrible. Canned in Havana.
+souto_vanilla
+souto_vanilla 50
+
+Diet Vanilla Souto
+This is a can of watery bitter vanilla extract. You can't possibly imagine who would greenlight such a concept. Canned in Havana.
+souto_diet_vanilla
+souto_vanilla 25 water 25
+
+Pineapple Souto
+This tastes like battery acid with a full cup of sugar mixed in. Canned in Havana.
+souto_pineapple
+souto_pineapple 50
+
+Diet Pineapple Souto
+This tastes like battery acid with a half cup of sugar mixed in. Canned in Havana.
+souto_diet_pineapple
+souto_pineapple 25, water 25
+
