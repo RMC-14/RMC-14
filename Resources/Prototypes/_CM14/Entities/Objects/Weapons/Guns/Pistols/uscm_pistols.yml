@@ -1,4 +1,5 @@
 ﻿- type: entity
+  abstract: true
   parent: [BaseWeaponPistol, CMEntityBase]
   id: CMWeaponPistolBase
   components:
