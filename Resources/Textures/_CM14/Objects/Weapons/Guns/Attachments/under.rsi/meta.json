@@ -1,0 +1,265 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7cb618c69b75873f3ce893022fe08d1233b3152d/icons/obj/items/weapons/guns/attachments/under.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "rapidfire"
+    },
+    {
+      "name": "bipod"
+    },
+    {
+      "name": "bipod-on"
+    },
+    {
+      "name": "bipod_m60"
+    },
+    {
+      "name": "bipod_m60-on"
+    },
+    {
+      "name": "lasersight"
+    },
+    {
+      "name": "vplaserlight"
+    },
+    {
+      "name": "gyro"
+    },
+    {
+      "name": "angledgrip"
+    },
+    {
+      "name": "verticalgrip"
+    },
+    {
+      "name": "flashgrip"
+    },
+    {
+      "name": "flashgrip-on"
+    },
+    {
+      "name": "rxfm5_eva_doodad"
+    },
+    {
+      "name": "r4t-sling"
+    },
+    {
+      "name": "d_r4t-sling"
+    },
+    {
+      "name": "s_r4t-sling"
+    },
+    {
+      "name": "u_r4t-sling"
+    },
+    {
+      "name": "c_r4t-sling"
+    },
+    {
+      "name": "extinguisher"
+    },
+    {
+      "name": "grenade-mk1"
+    },
+    {
+      "name": "grenade-mk1-open"
+    },
+    {
+      "name": "grenade"
+    },
+    {
+      "name": "grenade-open"
+    },
+    {
+      "name": "grenade-m203"
+    },
+    {
+      "name": "grenade-m203-open"
+    },
+    {
+      "name": "flamethrower",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "masterkey"
+    },
+    {
+      "name": "flamer_nozzle"
+    },
+    {
+      "name": "rapidfire_a"
+    },
+    {
+      "name": "bipod_a"
+    },
+    {
+      "name": "bipod_a-on"
+    },
+    {
+      "name": "bipod_m60_a"
+    },
+    {
+      "name": "bipod_m60_a-on"
+    },
+    {
+      "name": "lasersight_a"
+    },
+    {
+      "name": "vplaserlight_a"
+    },
+    {
+      "name": "vplaserlight_a-on"
+    },
+    {
+      "name": "gyro_a",
+      "delays": [
+        [
+          0.6,
+          0.6,
+          0.6,
+          0.6
+        ]
+      ]
+    },
+    {
+      "name": "angledgrip_a"
+    },
+    {
+      "name": "verticalgrip_a"
+    },
+    {
+      "name": "flashgrip_a"
+    },
+    {
+      "name": "flashgrip_a-on"
+    },
+    {
+      "name": "rxfm5_eva_doodad_a"
+    },
+    {
+      "name": "s_r4t-sling_a"
+    },
+    {
+      "name": "u_r4t-sling_a"
+    },
+    {
+      "name": "d_r4t-sling_a"
+    },
+    {
+      "name": "r4t-sling_a"
+    },
+    {
+      "name": "c_r4t-sling_a"
+    },
+    {
+      "name": "vulture_bipod"
+    },
+    {
+      "name": "vulture_bipod-on"
+    },
+    {
+      "name": "s_vulture_bipod"
+    },
+    {
+      "name": "s_vulture_bipod-on"
+    },
+    {
+      "name": "u_vulture_bipod"
+    },
+    {
+      "name": "u_vulture_bipod-on"
+    },
+    {
+      "name": "c_vulture_bipod"
+    },
+    {
+      "name": "c_vulture_bipod-on"
+    },
+    {
+      "name": "d_vulture_bipod"
+    },
+    {
+      "name": "d_vulture_bipod-on"
+    },
+    {
+      "name": "extinguisher_a"
+    },
+    {
+      "name": "grenade-mk1_a"
+    },
+    {
+      "name": "grenade_a"
+    },
+    {
+      "name": "grenade-mk1_a-open"
+    },
+    {
+      "name": "grenade_a-open"
+    },
+    {
+      "name": "grenade-m203_a"
+    },
+    {
+      "name": "grenade-m203_a-open"
+    },
+    {
+      "name": "flamethrower_a",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "masterkey_a"
+    },
+    {
+      "name": "flamer_nozzle_a_0"
+    },
+    {
+      "name": "flamer_nozzle_a_1"
+    },
+    {
+      "name": "flamethrower-on",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "extinguisher-on"
+    },
+    {
+      "name": "masterkey-on"
+    },
+    {
+      "name": "grenade-mk1-on"
+    },
+    {
+      "name": "grenade-on"
+    },
+    {
+      "name": "flamer_nozzle-on"
+    },
+    {
+      "name": "grenade-m203-on"
+    },
+    {
+      "name": "vplaserlight-on"
+    }
+  ]
+}

@@ -2,34 +2,121 @@
 - type: vendingMachineInventory
   id: ColMarTechFood
   startingInventory:
-    # todo cm14 Prepared meal
-    FoodSnackMREBrownie: 50 # Protein bar
-    DrinkMREFlask: 10
+    CMUSCMPreparedMealChicken: 15
+    CMUSCMPreparedMealCornbread: 15
+    CMUSCMPreparedMealPasta: 15
+    CMUSCMPreparedMealPizza: 15
+    CMUSCMPreparedMealPork: 15
+    CMUSCMPreparedMealTofu: 15
+    CMUSCMProteinBar: 50
+    CMCanteen: 10
+    CMMetalFlask: 10
+    CMUSCMFlask: 5
+    CMWYFlask: 5
 
 - type: vendingMachineInventory
   id: ArmatAttachments
-  startingInventory: {}
+  startingInventory:
+    CMAttachmentExtendedBarrel: 2
+    CMAttachmentRecoilCompensator: 2
+    CMAttachmentSuppressor: 2
+    CMAttachmentB8SmartScope: 1
+    CMAttachmentMagneticHarness: 4
+    CMAttachmentS42xTelescopicMiniScope: 2
+    CMAttachmentS5RedDotSight: 3
+    CMAttachmentS6ReflexSight: 3
+    CMAttachments84xTelescopicScope: 2
+    CMAttachmentAngledGrip: 2
+    CMAttachmentBipod: 2
+    CMAttachmentBurstFireAssembly: 1
+    CMAttachmentGyroscopicStabilizer: 1
+    CMAttachmentLaserSight: 3
+    CMAttachmentMiniFlamethrower: 1
+    CMAttachmentXMVESG1FlamerNozzle: 1
+    CMAttachmentU7UnderbarrelShotgun: 1
+    CMAttachmentUnderbarrelExtinguisher: 1
+    CMAttachmentVerticalGrip: 3
+    CMAttachmentM37WoodenStock: 1
+    CMAttachmentM39ArmBrace: 1
+    CMAttachmentM39Stock: 1
+    CMAttachmentM41ASolidStock: 1
+    CMAttachmentM44MagnumSharpshooterStock: 1
 
 - type: vendingMachineInventory
   id: ColMarTechUtilities
-  startingInventory: {}
+  startingInventory:
+#    CMMRE: 5
+#    CMMREBox: 1
+#    CMEntrenchingTool: 2
+#    CMEntrenchingTool: 2
+    CMScrewdriver: 5
+    CMWirecutter: 5
+    CMCrowbar: 5
+    CMMultitool: 1
+#    CMHandWelderME3: 1
+#    CMCombatFlashlight: 5
+#    CMBoxFlashlights: 1
+#    CMBoxFlares: 1
+#    CMMarkingFlarePackM94: 10
+#    CMSignalFlarePackM89S: 1
+#    CMEngineerKit: 1
+#    CMMap: 5
+#    CMFireExtinguisher: 5
+#    CMFireExtinguisherPortable: 1
+#    CMRollerBed: 1
+#    CMMacheteScabbardFull: 5
+#    CMBinoculars: 5
+#    CMFoldingBarricadesMB6x3: 2
+#    CMSparePDTLBattleBuddyKit: 3
+#    CMPowerCellWYRechargeableMini: 2
 
 - type: vendingMachineInventory
   id: ColMarTechMunitions
   startingInventory: {}
+#    CMMagazineM4RAAP: 3
+#    CMMagazineM39AP: 3
+#    CMMagazineM41AAP: 3
+#    CMMagazineExtendedM39: 1
+#    CMMagazineExtendedM41A: 1
+#    CMDrumSmartgunM56: 1
+#    CMHeavySpeedLoaderM44: 2
+#    CMMarksmanSpeedLoaderM44: 2
+#    CMMagazineVP78: 5
+#    CMMagazineSmartpistolSU6: 5
+#    CMIncineratorTankM240: 3
+#    CMMagazineDrumM56D: 2
+#    CMMagazineBoxM2C: 2
+#    CMBatonSlugsHIRR: 6
+#    CMStarShellN74AGMS: 4
+#    CMHornetShellM74AGMS: 4
 
 - type: vendingMachineInventory
   id: ColMarTechGuns
   startingInventory:
-    WeaponRifleM41A: 20
-    WeaponRifleM4RA: 20
-    WeaponSMGM39: 20
-    WeaponPistolM4A3: 40
-    MagazineRifleM41A: 100
-    MagazineRifleM4RA: 100
-    MagazineCaselessM39: 100
-    MagazinePistolM4A3: 200
-    M5Bayonet: 50
+    WeaponRifleM4RA: 10
+    WeaponShotgunM37A2: 15
+    WeaponSMGM39: 30
+    WeaponRifleM41A: 30
+    CMBoxShotgunFlechette: 4
+    CMBoxShotgunBuckshot: 10
+    CMBoxShotgunSlugs: 10
+    MagazineRifleM4RA: 15
+    MagazineCaselessM39: 25
+    MagazineRifleM41A: 25
+#    CMWeaponPistol88M4: 25
+#    CMWeaponRevolverM44: 25
+    CMWeaponPistolM4A3: 25
+#    WeaponFlareM82F: 10
+#    CMMagazinePistol88M4: 25
+#    CMSpeedloaderM44: 20
+    CMMagazinePistolM4A3: 25
+#    CMAttachmentFoldingStockM39: 10
+#    CMAttachmentFoldingStockM41A: 10
+#    CMAttachmentRailFlashlight: 25
+#    CMAttachmentUnderbarrelFlashlightGrip: 10
+#    CMAttachmentUnderslungGrenadeLauncher: 25
+    M5Bayonet: 25 # TODO CM14 not the night raider's bayonet
+#    CMMarkingFlarePackM94: 10
 
 - type: vendingMachineInventory
   id: ColMarTechEquipment
@@ -37,47 +124,517 @@
     ArmorMarineM3: 30
     CMArmorM3Light: 30
     ArmorHelmetM10: 50
+#    CMStandardMarineApparel
+#    CMMRE
+#    CMMap
+#    CMLightArmor
+#    CMMediumArmor
+#    CMHeavyArmor
+#    CMBackpack
+#    CMSatchel
+#    CMShotgunScabbard
+#    CMM276AmmoLoadRig
+#    CMM276GeneralPistolHolsterRig
+#    CMM276KnifeRigFull
+#    CMM276M39HolsterRig
+#    CMM276M44HolsterRig
+#    CMM276M82FHolsterRig
+#    CMM276ShotgunShellLoadingRig
+#    CMM276G8AGeneralUtilityPouch
+#    CMM276M40GrenadeRigEmpty
+#    CMBayonetSheathFull
+#    CMFirstAidPouchRefillableInjectors
+#    CMFirstAidPouchSplintsGauzeOintment
+#    CMFirstAidPouchPillPackets
+#    CMFlarePouchFull
+#    CMSmallDocumentPouch
+#    CMMagazinePouch
+#    CMShotgunShellPouch
+#    CMMediumGeneralPouch
+#    CMPistolMagazinePouch
+#    CMPistolPouch
+#    CMGasMask
+#    CMHeatAbsorbentCoif
+#    CMRebreather
+#    CMVP78Pistol: 15P
+#    CMSU6SmartPistol: 15P
+#    CMM79GrenadeLauncher: 30P
+#    CMM40HEDPHighExplosivePacket3: 20P
+#    CMM40HIDPIncendiaryPacket3: 20P
+#    CMM40HPDPPhosphorusPacket3: 20P
+#    CMM40HSDPSmokePacket3: 10P
+#    CMM74AGMFragAirburstPacket3: 15P
+#    CMM74AGMIncendiaryAirburstPacket3: 15P
+#    CMM74AGMSmokeAirburstPacket3: 10P
+#    CMM74AGMHornetAirburstPacket3: 15P
+#    CMM20MineBox4: 20P
+#    CMM4RAAPMagazine: 10P
+#    CMM39APMagazine: 10P
+#    CMM39ExtendedMagazine: 10P
+#    CMM41AAPMagazine: 10P
+#    CMM44HeavySpeedLoader: 10P
+#    CMM3B12PatternMarineArmor: 30P
+#    CMM4PatternArmor: 30P
+#    CMWebbing: 10P
+#    CMBrownWebbingVest: 15P
+#    CMBlackWebbingVest: 15P
+#    CMDropPouch: 15P
+#    CMShoulderHolster: 15P
+#    CMMacheteScabbardFull: 15P
+#    CMMachetePouchFull: 15P
+#    CMUSCMRadioTelephonePack: 15P
+#    CMFuelTankStrapPouch: 5P
+#    CMWeldingGoggles: 5P
+#    CMSlingPouch: 15P
+#    CMLargeGeneralPouch: 15P
+#    CMLargeGeneralPouch: 15P
+#    CMEntrenchingTool: 5P
+#    CMSandbags: 20P
+#    CMRollerBed: 5P
+#    CMFultonDeviceStack: 5P
+#    CMFireExtinguisherPortable: 5P
+#    CMMotionDetector: 15P
+#    CMDataDetector: 15P
+#    CMWhistle: 5P
+#    CMRangeFinder: 10P
+#    CMLaserDesignator: 15P
+#    CMMedicalHelmetOptic: 15P
+#    CMWelding isor: 5P
+#    CMJTACPamphlet: 15P
+#    CMEngineeringPamphlet: 15P
+#    CMEngineeringRadioEncryptionKey: 5P
+#    CMIntelRadioEncryptionKey: 5P
+#    CMJTACRadioEncryption Key: 5P
+#    CMSupplyRadioEncryption Key: 5P
 
 - type: vendingMachineInventory
   id: ColMarTechSLEquipment
   startingInventory: {}
+#    CMStandardMarineApparel
+#    CMB12PatternArmor
+#    CMMRE
+#    CMMap
+#    CMBackpack
+#    CMMacheteScabbardFull
+#    CMSatchel
+#    CMG8AGeneralUtilityPouch
+#    CMM276AmmoLoadRig
+#    CMM276GeneralPistolHolsterRig
+#    CMM276LifesaverBag
+#    CMM276MedicalStorageRig
+#    CMM276M39HolsterRig
+#    CMM276M44HolsterRig
+#    CMM276M82FHolsterRig
+#    CMM276ShotgunShellLoadingRig
+#    CMM276ToolbeltRigFull
+#    CMM276M40GrenadeRig
+#    CMAutoinjectorPouchFull
+#    CMFirstAidPouchRefillableInjectors
+#    CMFirstAidPouchSplintsGauzeOintment
+#    CMFirstAidPouchPillPackets
+#    CMFlarePouchFull
+#    CMFuelTankStrapPouch
+#    CMLargeGeneralPouch
+#    CMSlingPouch
+#    CMLargeMagazinePouch
+#    CMLargeShotgunShellPouch
+#    CMLargePistolMagazinePouch
+#    CMPistolPouch
+#    CMBlackWebbingVest
+#    CMBrownWebbingVest
+#    CMShoulderHolster
+#    CMWebbing
+#    CMDropPouch
+#    CMGasMask
+#    CMHeatAbsorbentCoif
 
 - type: vendingMachineInventory
   id: ColMarTechSLGear
   startingInventory: {}
+#    CMEssentialSLKit: 0P
+#    CMM4RASniperKit: 0P
+#    CMM41AStandardKit: 0P
+#    CMM240PyrotechnicianSupportKit: 0P
+#    CMM2CHeavyMachineGun: 0P
+#    CMM56DHeavyMachineGun: 0P
+#    CMM79GrenadeLauncher: 0P
+#    CMMOU-53Shotgun: 0P
+#    CMXM88HeavyRifle: 0P
+#    CMBasicEngineeringSupplies: 0P
+#    CMM4PatternArmor: 30P
+#    CMMacheteScabbardFull: 4P
+#    CMMachetePouchFull: 4P
+#    CMUSCMRadioTelephonePack: 5P
+#    CMM276PatternCombatToolbeltRig: 15P
+#    CMWhistle: 3P
+#    CMFireExtinguisherPortable: 3P
+#    CMMotionDetector: 5P
+#    CMFultonDeviceStack: 5P
+#    CMRangeFinder: 3P
+#    CMLaserDesignator: 5P
+#    CMWeldingVisor: 5P
+#    CMMedicalHelmetOptic: 4P
+#    CMNightVisionOptic: 20P
+#    CMInsulatedGloves: 3P
+#    CMMetalx10: 5P
+#    CMPlasteelx10: 7P
+#    CMPlasticexplosive: 5P
+#    CMBreachingCharge: 7P
+#    CMSandbagsx25: 10P
+#    CMSignalFlarePack: 7P
+#    CMToolsPouchFull: 5P
+#    CMWeldingGoggles: 5P
+#    CMM40HEDPHighExplosivePacketx3: 18P
+#    CMM40HIDPIncendiaryPacketx3: 18P
+#    CMM40HPDPWhitePhosphorusPacketx3: 18P
+#    CMM40HSDPSmokePacketx3: 9P
+#    CMM74AGM-FragAirburstPacketx3: 20P
+#    CMM74AGM-IncendiaryAirburstPacketx3: 20P
+#    CMM74AGM-SmokeAirburstPacketx3: 10P
+#    CMM74AGM-HornetAirburstPacketx3: 20P
+#    CMM20MineBoxx4mines: 20P
+#    CMM40MFHSMetalFoamGrenade: 5P
+#    CMBurnKit: 2P
+#    CMTraumaKit: 2P
+#    CMAdvancedFirstaidKit: 12P
+#    CMMedicalSplints: 1P
+#    CMInjectorBicaridine: 1P
+#    CMInjectorDexalin+: 1P
+#    CMInjectorInaprovaline: 1P
+#    CMInjectorKelotane: 1P
+#    CMInjectorOxycodone: 2P
+#    CMInjectorTramadol: 1P
+#    CMInjectorTricord: 1P
+#    CMHealthAnalyzer: 4P
+#    CMRollerBed: 2P
+#    CMM4RAAPMagazine10x24mm: 6P
+#    CMM39APMagazine10x20mm: 6P
+#    CMM39ExtendedMagazine10x20mm: 6P
+#    CMM41AAPMagazine10x24mm: 6P
+#    CMM41AExtendedMagazine10x24mm: 6P
+#    CMM240IncineratorTankNapthal: 3P
+#    CMM240IncineratorTankB-Gel: 3P
+#    CMM240IncineratorUnit: 18P
+#    CMVP78Pistol: 8P
+#    CMSU6SmartPistol: 12P
+#    CMM79GrenadeLauncher: 18P
+#    CMEngineeringRadioEncryptionKey: 3P
+#    CMIntelRadioEncryptionKey: 3P
+#    CMJTACRadioEncryptionKey: 3P
+#    CMSupplyRadioEncryptionKey: 3P
 
 - type: vendingMachineInventory
   id: ColMarTechSWSEquipment
   startingInventory: {}
+#    CMStandardMarineApparel
+#    CMMRE
+#    CMMap
+#    CMBackpack
+#    CMSatchel
+#    CMG8AGeneralUtilityPouch
+#    CMM276AmmoLoadRig
+#    CMM276GeneralPistolHolsterRig
+#    CMM276M39HolsterRig
+#    CMM276M44HolsterRig
+#    CMM276M82FHolsterRig
+#    CMM276ShotgunShellLoadingRig
+#    CMFirstAidPouchRefillableInjectors
+#    CMFirstAidPouchSplints, Gauze, Ointment
+#    CMFirstAidPouchPillPackets
+#    CMFlarePouchFull
+#    CMMagazinePouch
+#    CMShotgunShellPouch
+#    CMLargePistolMagazinePouch
+#    CMMediumGeneralPouch
+#    CMPistolPouch
+#    CMSlingPouch
+#    CMBrownWebbingVest
+#    CMBlackWebbingVest
+#    CMShoulderHolster
+#    CMWebbing
+#    CMDropPouch
+#    CMGasMask
+#    CMHeatAbsorbentCoif
+#    CMMacheteScabbardFull
+#    CMMachetePouchFull
+#    CMUSCMRadioTelephonePack
+#    CMFuelTankStrapPouch
+#    CMWeldingGoggles
+#    CMLargeGeneralPouch
+#    CMM276PatternCombatToolbeltRig
+#    CMAutoinjectorPouchFull
+#    CMFireExtinguisherPortable
+#    CMRollerBed
+#    CMFultonDeviceStack
+#    CMMotionDetector
+#    CMMedicalHelmetOptic
+#    CMWeldingVisor
+#    CMJTACPamphlet
+#    CMEngineeringPamphlet
+#    CMEngineeringRadioEncryptionKey
+#    CMIntelRadioEncryptionKey
+#    CMJTACRadioEncryptionKey
+#    CMSupplyRadioEncryptionKey
 
 - type: vendingMachineInventory
   id: ColMarTechSWSGear
   startingInventory: {}
+#    DemolitionistSet: 0P
+#    HeavyGrenadierSet: 0P
+#    PyroSet: 0P
+#    ScoutSet: 0P
+#    SniperSet: 0P
+#    A19HighVelocityImpactMagazine: 40P
+#    A19HighVelocityIncendiaryMagazine: 40P
+#    A19HighVelocityMagazine: 40P
+#    M42AFlakMagazine: 40P
+#    M42AIncendiaryMagazine: 40P
+#    M42AMarksmanMagazine: 40P
+#    84mmAntiArmorRocket: 40P
+#    84mmHighExplosiveRocket: 40P
+#    84mmWhitePhosphorusRocket: 40P
+#    M40HEDPGrenadesx6: 40P
+#    M40HIDPIncendiaryGrenadesx6: 40P
+#    M40HPDPWhitePhosphorusGrenadesx6: 40P
+#    M74AGMFFragmentationGrenadesx6: 40P
+#    M74AGMIIncendiaryGrenadesx6: 40P
+#    M74AGMSSmokeGrenadesx6: 20P
+#    LargeIncineratorTank: 40P
+#    LargeIncineratorTankB GreenFlame: 40P
+#    LargeIncineratorTankX BlueFlame: 40P
 
 - type: vendingMachineInventory
   id: ColMarTechSCTGear
   startingInventory: {}
+#    CMEssentialEngineerSet
+#    CM21STeslaCoil
+#    CMJIMAPlantedFlag
+#    CMUA42FSentryFlamer
+#    CMUA571CSentryGun
+#    CMSentryUpgradeKit: 15P
+#    CMAirlockCircuitBoard: 2P
+#    CMAPCCircuitBoard: 2P
+#    CMEntrenchingTool: 2P
+#    CMPowerCellHighCapacity: 3P
+#    CMMetal10: 5P
+#    CMPlasteel10: 7P
+#    CMPlasticExplosive: 3P
+#    CMBreachingCharge: 5P
+#    CMSangbags25: 10P
+#    CMPowerCellSuperCapacity: 10P
+#    CMES11MobileFuelCanister: 4P
+#    CMM40HEDPHighExplosivePacket3: 18P
+#    CMM40HIDPIncendiaryPacket3: 18P
+#    CMM40HPDPPhosphorusPacket3: 18P
+#    CMM40HSDPSmokePacket3: 9P
+#    CMM74AGMFragAirburstPacket3: 18P
+#    CMM74AGMIncendiaryAirburstPacket3: 18P
+#    CMM74AGMSmokeAirburstPacket3: 10P
+#    CMM74AGMHornetAirburstPacket3: 20P
+#    CMM20MineBox4: 18P
+#    CMM40MFHSMetalFoamGrenade: 5P
+#    CMMagazineM4RAAP: 6P
+#    CMMagazineM39AP: 6P
+#    CMMagazineExtendedM39: 6P
+#    CMMagazineM41AAP: 6P
+#    CMMagazineExtendedM41A: 6P
+#    CMArmorM3B12PatternMarine: 24P
+#    CMArmorM4Pattern: 30P
+#    CMVP78Pìstol: 8P
+#    CMSU6SmartPistol: 12P
+#    CMM240IncineratorUnit: 12P
+#    CMM79GrenadeLauncher: 24P
+#    CMM56DHeavyMachineGun: 24P
+#    CMMacheteScabbardFull: 6P
+#    CMMachetePouchFull: 8P
+#    CMUSCMRadioTelephonePack: 15P
+#    CMFuelTankStrapPouch: 4P
+#    CMSlingPouch: 6P
+#    CMLargeGeneralPouch: 6P
+#    CMM276PatternCombatToolbeltRig: 15P
+#    CMRollerBed: 5P
+#    CMFultonDeviceStack: 5P
+#    CMFireExtinguisherPortable: 3P
+#    CMMotionDetector: 8P
+#    CMWhistle: 3P
+#    CMBinoculars: 5P
+#    CMRangeFinder: 10P
+#    CMLaserDesignator: 15P
+#    CMMedicalHelmetOptic: 12P
+#    CMJTACPamphlet: 15P
+#    CMIntelRadioEncryptionKey: 3P
+#    CMJTACRadioEncryptionKey: 3P
+#    CMSupplyRadioEncryptionKey: 3P
 
 - type: vendingMachineInventory
   id: ColMarTechSCTEquipment
-  startingInventory:
-    ClothingBeltUtility: 4
-    CableApcStack: 4
-    ClothingEyesGlassesMeson: 2
-    Crowbar: 8
-    Screwdriver: 8
-    Wirecutter: 8
-    Wrench: 8
-    Multitool: 8
-    Welder: 8
+  startingInventory: {}
+#    CMStandardMarineApparel
+#    CMMRE
+#    CMMap
+#    CMLightArmor
+#    CMMediumArmor
+#    CMHeavyArmor
+#    CMMacheteScabbardFull
+#    CMTechnicianBackpack
+#    CMTechnicianSatchel
+#    CMTechnicianWelderpack
+#    CMTechnicianWelderSatchel
+#    CMTechnicianWelderChestrig
+#    CMG8AGeneralUtilityPouch
+#    CMM276AmmoLoadRig
+#    CMM276GeneralPistolHolsterRig
+#    CMM276M39HolsterRig
+#    CMM276M44HolsterRig
+#    CMM276M82FHolsterRig
+#    CMM276ShotgunShellLoadingRig
+#    CMM276MortarOperatorBelt
+#    CMM276ToolbeltRigFull
+#    CMM276M40GrenadeRig
+#    CMConstructionPouch
+#    CMFirstAidPouchRefillableInjectors
+#    CMFirstAidPouchSplintsGauzeOintment
+#    CMFirstAidPouchPillPackets
+#    CMElectronicsPouchFull
+#    CMExplosivePouch
+#    CMFlarePouchFull
+#    CMLargePistolMagazinePouch
+#    CMMagazinePouch
+#    CMShotgunShellPouch
+#    CMMediumGeneralPouch
+#    CMPistolPouch
+#    CMToolsPouchFull
+#    CMBlackWebbingVest
+#    CMBrownWebbingVest
+#    CMShoulderHolster
+#    CMWebbing
+#    CMDropPouch
+#    CMGasMask
+#    CMHeatAbsorbentCoif
 
 - type: vendingMachineInventory
   id: ColMarTechMedicalGear
   startingInventory: {}
+#    CMEssentialMedicalSet: 0P
+#    CMBurnKit: 2P
+#    CMTraumaKit: 2P
+#    CMMedicalSplints: 1P
+#    CMGauze: 1P
+#    CMOintment: 1P
+#    CMBloodBagO-: 4P
+#    CMAdvancedFirstaidKit: 12P
+#    CMFirstaidKit: 5P
+#    CMFireFirstaidKit: 6P
+#    CMToxinFirstaidKit: 6P
+#    CMOxygenFirstaidKit: 6P
+#    CMRadiationFirstaidKit: 6P
+#    CMAutoinjectorBicaridine: 1P
+#    CMAutoinjectorDexalin+: 1P
+#    CMAutoinjectorEpinephrine: 2P
+#    CMAutoinjectorInaprovaline: 1P
+#    CMAutoinjectorKelotane: 1P
+#    CMAutoinjectorOxycodone: 2P
+#    CMAutoinjectorTramadol: 1P
+#    CMAutoinjectorTricord: 1P
+#    CMPillBottleBicaridine: 5P
+#    CMPillBottleDexalin: 5P
+#    CMPillBottleDylovene: 5P
+#    CMPillBottleInaprovaline: 5P
+#    CMPillBottleKelotane: 5P
+#    CMPillBottlePeridaxon: 5P
+#    CMPillBottleTramadol: 5P
+#    CMHealthAnalyzer: 4P
+#    CMRollerBed: 4P
+#    CMStasisBag: 6P
+#    CMPressurizedReagentCanisterPouchEMPTY: 3P
+#    CMG8AGeneralUtilityPouch: 15P
+#    CMMS11SmartRefillTank: 6P
+#    CMM40HEDPHighExplosivePacketx3grenades: 18P
+#    CMM40HIDPIncendiaryPacketx3grenades: 18P
+#    CMM40HPDPWhitePhosphorusPacketx3grenades: 18P
+#    CMM40HSDPSmokePacketx3grenades: 9P
+#    CMM74AGMFragAirburstPacketx3airburstgrenades: 20P
+#    CMM74AGMIncendiaryAirburstPacketx3airburstgrenades: 20P
+#    CMM74AGMSmokeAirburstPacketx3airburstgrenades: 10P
+#    CMM74AGMHornetAirburstPacketx3airburstgrenades: 20P
+#    CMM20MineBoxx4mines: 20P
+#    CMM4RAAPMagazine: 6P
+#    CMM39APMagazine: 6P
+#    CMM39ExtendedMagazine: 6P
+#    CMM41AAPMagazine: 6P
+#    CMM41AExtendedMagazine: 6P
+#    CMM3B12PatternMarineArmor: 28P
+#    CMM4PatternArmor: 28P
+#    CMVP78Pistol: 8P
+#    CMSU6SmartPistol: 12P
+#    CMMacheteScabbardFull: 6P
+#    CMMachetePouchFull: 8P
+#    CMUSCMRadioTelephonePack: 15P
+#    CMFuelTankStrapPouch: 4P
+#    CMWeldingGoggles: 3P
+#    CMFireExtinguisherPortable: 3P
+#    CMMotionDetector: 8P
+#    CMWhistle: 3P
+#    CMBinoculars: 5P
+#    CMRangeFinder: 10P
+#    CMLaserDesignator: 15P
+#    CMWeldingVisor: 5P
+#    CMJTACPamphlet: 15P
+#    CMEngineeringPamphlet: 15P
+#    CMEngineeringRadioEncryptionKey: 3P
+#    CMIntelRadioEncryptionKey: 3P
+#    CMJTACRadioEncryptionKey: 3P
+#    CMSupplyRadioEncryptionKey: 3P
 
 - type: vendingMachineInventory
   id: ColMarTechMedicalEquipment
   startingInventory: {}
+#    CMStandardMarineApparel
+#    CMCombatSterileGloves
+#    CMMRE
+#    CMMap
+#    CMLightArmor
+#    CMMediumArmor
+#    CMHeavyArmor
+#    CMMedicalBackpack
+#    CMMedicalSatchel
+#    CMM276AmmoLoadRig
+#    CMM276GeneralPistolHolsterRig
+#    CMM276LifesaverBagFull
+#    CMM276MedicalStorageRigFull
+#    CMM276M39HolsterRig
+#    CMM276M44HolsterRig
+#    CMM276M82FHolsterRig
+#    CMM276ShotgunShellLoadingRig
+#    CMM276M40GrenadeRig
+#    CMAutoinjectorPouch
+#    CMFirst-AidPouchRefillableInjectors
+#    CMFirst-AidPouchSplintsGauzeOintment
+#    CMFirst-AidPouchPillPackets
+#    CMFirstResponderPouch
+#    CMFlarePouchFull
+#    CMLargeGeneralPouch
+#    CMSlingPouch
+#    CMLargePistolMagazinePouch
+#    CMMagazinePouch
+#    CMShotgunShellPouch
+#    CMMedicalPouch
+#    CMMedicalKitPouch
+#    CMPressurizedReagentCanisterPouchBicaridine
+#    CMPressurizedReagentCanisterPouchKelotane
+#    CMPressurizedReagentCanisterPouchRevivalMix
+#    CMPressurizedReagentCanisterPouchTricordrazine
+#    CMPressurizedReagentCanisterPouchEmpty
+#    CMPistolPouch
+#    CMVialPouchFull
+#    CMBrownWebbingVest
+#    CMBlackWebbingVest
+#    CMShoulderHolster
+#    CMWebbing
+#    CMDropPouch
+#    CMGasMask
+#    CMHeatAbsorbentCoif
+#    CMSterileMask
 
 - type: vendingMachineInventory
   id: ColMarTechMarineMedical
@@ -88,15 +645,149 @@
 - type: vendingMachineInventory
   id: ColMarTechSGGear
   startingInventory: {}
+#    CMEssentialSmartgunnerSet: 0P
+#    CMM56SmartgunDrum: 15P
+#    CMLaserSight: 0P
+#    CMRedDotSight: 0P
+#    CMReflexSight: 0P
+#    CMM40HEDPHighExplosivePacketx3: 30P
+#    CMM40HIDPIncendiaryPacketx3: 30P
+#    CMM40HPDPWhitePhosphorusPacketx3: 30P
+#    CMM40HSDPSmokePacketx3: 15P
+#    CMM74AGM-FragAirburstPacketx3: 20P
+#    CMM74AGM-IncendiaryAirburstPacketx3: 20P
+#    CMM74AGM-SmokeAirburstPacketx3: 10P
+#    CMM74AGM-HornetAirburstPacketx3: 20P
+#    CMM20MineBox4: 20P
+#    CMMacheteScabbardFull: 6P
+#    CMFuelTankStrapPouch: 5P
+#    CMLargeGeneralPouch: 6P
+#    CMFireExtinguisherPortable: 5P
+#    CMWhistle: 5P
+#    CMRollerBed: 5P
+#    CMFultonDeviceStack: 5P
+#    CMBinoculars: 5P
+#    CMRangeFinder: 10P
+#    CMLaserDesignator: 15P
+#    CMMedicalHelmetOptic: 15P
+#    CMWeldingVisor: 5P
+#    CMJTACPamphlet: 15P
+#    CMEngineeringPamphlet: 15P
+#    CMEngineeringRadioEncryptionKey: 5P
+#    CMIntelRadioEncryptionKey: 5P
+#    CMJTACRadioEncryptionKey: 5P
+#    CMSupplyRadioEncryptionKey: 5P
 
 - type: vendingMachineInventory
   id: ColMarTechSGEquipment
   startingInventory: {}
+#    CMStandardMarineApparel
+#    CMMRE
+#    CMMap
+#    CMM802SmartgunnerSidearmBelt
+#    CMM280SmartgunnerDrumBelt
+#    CMFlarePouchFull
+#    CMElectronicsPouch
+#    CMFirstAidPouchRefillableInjectors
+#    CMFirstAidPouchSplintsGauzeOintment
+#    CMFirstAidPouchPillPackets
+#    CMLargePistolMagazinePouch
+#    CMMagazinePouch
+#    CMShotgunShellPouch
+#    CMMediumGeneralPouch
+#    CMPistolPouch
+#    CMMachetePouchFull
+#    CMSlingPouch
+#    CMBrownWebbingVest
+#    CMBlackWebbingVest
+#    CMShoulderHolster
+#    CMWebbing
+#    CMDropPouch
+#    CMGasMask
+#    CMHeatAbsorbentCoif
 
 - type: vendingMachineInventory
   id: ColMarTechFLGear
   startingInventory: {}
+#    CMM4RAAPMagazine: 10
+#    CMM39APMagazine: 10
+#    CMM39ExtendedMagazine: 10
+#    CMM41AAPMagazine: 10
+#    CMM41AExtendedMagazine: 10
+#    CMM44HeavySpeedLoader: 10
+#    CMM4A3HPMagazine: 5
+#    CMM4A3APMagazine: 5
+#    CMM40HEDPHighExplosivePacketx3: 18
+#    CMM40HIDPIncendiaryPacketx3: 18
+#    CMM40HPDPWhitePhosphorusPacketx3: 18
+#    CMM40HSDPSmokePacketx3: 9
+#    CMM74AGMFragAirburstPacketx3: 20
+#    CMM74AGMIncendiaryAirburstPacketx3: 20
+#    CMM74AGMSmokeAirburstPacketx3: 10
+#    CMM74AGMHornetAirburstPacketx3: 20
+#    CMM20MineBoxx4: 20
+#    CMM40MFHSMetalFoamGrenade: 5
+#    CMVP78Pistol: 10
+#    CMSU6SmartPistol: 15
+#    CMM79GrenadeLauncher: 30
+#    CMM3B12PatternMarineArmor: 30
+#    CMMacheteScabbardFull: 5
+#    CMMachetePouchFull: 15
+#    CMUSCMRadioTelephonePack: 5
+#    CMWeldingGoggles: 3
+#    CMM276PatternCombatToolbeltRig: 15
+#    CMAutoinjectorPouchFull: 15
+#    CMInsulatedGloves: 3
+#    CMNightVisionOptic: 30
+#    CMMotionDetector: 15
+#    CMPlasticExplosive: 10
+#    CMBreachingCharge: 10
+#    CMRollerBed: 5
+#    CMFultonDeviceStack: 5
+#    CMFireExtinguisherPortable: 5
+#    CMWhistle: 5
+#    CMBinoculars: 5
+#    CMMedicalHelmetOptic: 15
+#    CMWeldingVisor: 5
+#    CMEngineeringRadioEncryptionKey: 5
+#    CMIntelRadioEncryptionKey: 5
+#    CMJTACRadioEncryptionKey: 5
+#    CMSupplyRadioEncryptionKey: 5
 
 - type: vendingMachineInventory
   id: ColMarTechFLEquipment
   startingInventory: {}
+#    CMStandardMarineApparel
+#    CMM4PatternArmor
+#    CMMRE
+#    CMMap
+#    CMEssentialFireteamLeaderUtilities
+#    CMG8AGeneralUtilityPouch
+#    CMM276AmmoLoadRig
+#    CMM276GeneralPistolHolsterRig
+#    CMM276M39HolsterRig
+#    CMM276M44HolsterRig
+#    CMM276M82FHolsterRig
+#    CMM276ShotgunShellLoadingRig
+#    CMM276ToolbeltRigFull
+#    CMM276M40GrenadeRig
+#    CMFirstAidPouchRefillableInjectors
+#    CMFirstAidPouchSplintsGauzeOintment
+#    CMFirstAidPouchPillPackets
+#    CMFirstResponderPouch
+#    CMFlarePouchFull
+#    CMFuelTankStrapPouch
+#    CMLargeGeneralPouch
+#    CMSlingPouch
+#    CMLargePistolMagazinePouch
+#    CMMagazinePouch
+#    CMShotgunShellPouch
+#    CMSidearmPouch
+#    CMToolsPouchFull
+#    CMBlackWebbingVest
+#    CMBrownWebbingVest
+#    CMShoulderHolster
+#    CMWebbing
+#    CMDropPouch
+#    CMGasMask
+#    CMHeatAbsorbentCoif
