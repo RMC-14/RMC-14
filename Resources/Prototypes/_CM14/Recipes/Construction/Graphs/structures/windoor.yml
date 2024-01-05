@@ -203,7 +203,7 @@
         doAfter: 4
 
   - node: windoorSecure
-    entity: WindoorSecure
+    entity: CMWindoorSecure
     edges:
     - to: wired
       conditions:

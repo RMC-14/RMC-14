@@ -128,7 +128,7 @@
 - type: construction
   name: secure windoor
   id: CMWindoorSecure
-  graph: CMAirlock
+  graph: CMWindoor
   startNode: start
   targetNode: windoorSecure
   category: construction-category-cm-structures
