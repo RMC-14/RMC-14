@@ -303,24 +303,6 @@
 
 - type: entity
   parent: CMDrinkCanBase
-  id: CMDrinkCanWater
-  name: weyland-yutani bottled spring water
-  description: Overpriced 'Spring' water. Bottled by the Weyland-Yutani Corporation.
-  components:
-  - type: Sprite
-    sprite: _CM14/Objects/Consumable/Drinks/wy_water.rsi
-  - type: Item
-    sprite: _CM14/Objects/Consumable/Drinks/wy_water.rsi
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        reagents:
-        - ReagentId: Water
-          Quantity: 30
-        maxVol: 50
-
-- type: entity
-  parent: CMDrinkCanBase
   id: CMDrinkCanBeerLite
   name: weyland-yutani lite
   description: Beer. You've dialed in your target. Time to fire for effect.
