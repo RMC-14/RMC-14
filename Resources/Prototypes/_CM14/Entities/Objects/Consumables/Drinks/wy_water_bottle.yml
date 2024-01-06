@@ -18,6 +18,8 @@
     size: Small
   - type: DamageOnLand
     damage: {}
+  - type: DamageOtherOnHit
+    damage: {}
   - type: Destructible
     thresholds:
     - trigger:
