@@ -1,0 +1,112 @@
+﻿- type: entity
+  parent: [BaseStorageItem, CMEntityBase]
+  id: CMMRE
+  name: USCM MRE
+  description: A Meal, Ready-to-Eat. A single-meal combat ration designed to provide a soldier with enough nutrients for a day of strenuous work. Its expiration date is at least 20 years ahead of your combat life expectancy.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Consumable/Food/mre.rsi
+    state: closed
+  - type: Item
+    sprite: _CM14/Objects/Consumable/Food/bar.rsi
+  - type: Storage
+    grid:
+    - 0,0,7,1
+    maxItemSize: Small
+    whitelist:
+      components:
+      - MREItem
+  - type: Openable
+    sound:
+      collection: CMFoodRip
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: { state: "open" }
+          False: { state: "closed" }
+  - type: StorageFill
+    contents:
+    - id: CMMREComponentBonelessPorkRibs
+      orGroup: main
+    - id: CMMREComponentGrilledChicken
+      orGroup: main
+    - id: CMMREComponentPizzaSquare
+      orGroup: main
+    - id: CMMREComponentSpaghettiChunks
+      orGroup: main
+    - id: CMMREComponentChickenTender
+      orGroup: main
+    - id: CMMREComponentCracker
+      orGroup: side
+    - id: CMMREComponentRiceOnigiri
+      orGroup: side
+    - id: CMMREComponentMashedPotatoes
+      orGroup: side
+    - id: CMMREComponentRisotto
+      orGroup: side
+    - id: CMMREComponentBiscuit
+      orGroup: snack
+    - id: CMMREComponentMeatballs
+      orGroup: snack
+    - id: CMMREComponentPretzels
+      orGroup: snack
+    - id: CMMREComponentPeanuts
+      orGroup: snack
+    - id: CMMREComponentSushi
+      orGroup: snack
+    - id: CMMREComponentBiscuit
+      orGroup: dessert
+    - id: CMMREComponentChocolateBrownie
+      orGroup: dessert
+    - id: CMMREComponentSugarCookie
+      orGroup: dessert
+    - id: CMMREComponentCocoBar
+      orGroup: dessert
+    - id: CMMREComponentFlan
+      orGroup: dessert
+    - id: CMMREComponentHoneyFlan
+      orGroup: dessert
+    - id: CMDrinkWYWaterBottle30
+    - id: CMFortuneCookie
+      prob: 0.333
+    - id: CMCigarettePackLuckyStrikes
+    - id: CMMatchBook
+      orGroup: matchbook
+    - id: CMBrownMatchBook
+      orGroup: matchbook
+    - id: CMExecutiveSelectMatchbook
+      orGroup: matchbook
+    - id: CMKoorlanderMatchbook
+      orGroup: matchbook
+    - id: CMKoorlanderMatchbook
+      orGroup: matchbook
+
+- type: entity
+  abstract: true
+  parent: [BaseItem, CMEntityBase]
+  id: CMMREComponentBase
+  name: MRE component
+  description: A package from a Meal Ready-to-Eat, property of the US Colonial Marines. Contains a part of a meal, prepared for field consumption.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Consumable/Food/mre_components.rsi
+  - type: Item
+    size: Small
+  - type: SpawnItemsOnUse
+    sound:
+      collection: CMFoodRip
+  - type: MREItem
+
+- type: entity
+  abstract: true
+  parent: [CMFoodBase, CMEntityBase]
+  id: CMMREFoodBase
+  description: The contents of a USCM Standard issue MRE.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Consumable/Food/mre_contents.rsi
+  - type: Item
+    size: Small
+  - type: MREItem
