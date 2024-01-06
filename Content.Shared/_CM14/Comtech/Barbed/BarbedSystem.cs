@@ -95,7 +95,7 @@ public sealed class BarbedSystem : EntitySystem
     }
     private void OnAttacked(EntityUid uid, BarbedComponent component, AttackedEvent args)
     {
-        if (component.IsBarbed == true)
+        if (component.IsBarbed)
         {
             _damageableSystem.TryChangeDamage(args.User, component.ThornsDamage); //not sure how to add prediction here
             _popupSystem.PopupClient(Loc.GetString("barbed-wire-damage"), uid, args.User, PopupType.SmallCaution);
