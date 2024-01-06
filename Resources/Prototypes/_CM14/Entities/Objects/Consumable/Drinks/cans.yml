@@ -1,0 +1,76 @@
+# When adding new drinks also add to random spawner located in Resources\Prototypes\Entities\Markers\Spawners\Random\Food_Drinks\drinks_soda.yml
+- type: entity
+  parent: [BaseItem, CMEntityBase]
+  id: CMDrinkCanBase
+  abstract: true
+  components:
+  - type: Sprite
+    state: icon
+  - type: Drink
+  - type: Openable
+  - type: PressurizedDrink
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: Cola
+          Quantity: 30
+        maxVol: 50
+  - type: SolutionTransfer
+    canChangeTransferAmount: true
+    transferAmount: 10
+    maxTransferAmount: 15
+  - type: UserInterface
+    interfaces:
+    - key: enum.TransferAmountUiKey.Key
+      type: TransferAmountBoundUserInterface
+  - type: FitsInDispenser
+    solution: drink
+  - type: DrawableSolution
+    solution: drink
+  - type: RefillableSolution
+    solution: drink
+  - type: DrainableSolution
+    solution: drink
+  - type: Appearance
+  - type: Spillable
+    solution: drink
+  - type: MeleeWeapon
+    soundNoDamage:
+      path: "/Audio/Effects/Fluids/splat.ogg"
+    damage:
+      types:
+        Blunt: 0
+  - type: ItemCooldown
+  - type: SpaceGarbage
+  - type: TrashOnSolutionEmpty
+    solution: drink
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 50
+  - type: Tag
+    tags:
+    - DrinkCan
+
+- type: entity
+  parent: CMDrinkCanBase
+  id: CMDrinkCanCola
+  name: classic cola
+  description: A classic cola with a taste that's been around for centuries. Nobody can beat it.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Consumable/Drinks/cola.rsi
+  - type: Item
+    sprite: _CM14/Objects/Consumable/Drinks/cola.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: Cola
+          Quantity: 30
+        maxVol: 50
+  - type: Tag
+    tags:
+    - Cola
+    - DrinkCan
+    - Recyclable

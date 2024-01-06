@@ -1,0 +1,4 @@
+- type: reagent
+  parent: BaseSoda
+  id: CMBaseSoda
+  abstract: true
