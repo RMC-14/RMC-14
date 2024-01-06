@@ -84,6 +84,10 @@ public sealed class BarbedSystem : EntitySystem
     private void WireCutterOnDoAfter(EntityUid uid, BarbedComponent component, CutBarbedDoAfterEvent args)
     {
         //EntityManager.SpawnEntity(component.Spawn, Transform(uid).Coordinates); Not sure how to make it so when wirecut spawns a metal rod
+        if (args.Cancelled || args.Handled)
+            return;
+
+        args.Handled = true;
         component.IsBarbed = false;
         _appearance.SetData(uid, BarbedWireVisuals.Wired, false);
         _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-finish"), uid, args.User, PopupType.Small);
