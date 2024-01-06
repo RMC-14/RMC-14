@@ -329,6 +329,7 @@
   id: CMDrinkCanSouto
   name: souto can
   description: Canned in Havana.
+  abstract: true
   components:
   - type: Sprite
     sprite: _CM14/Objects/Consumable/Drinks/Souto/classic.rsi
