@@ -41,7 +41,7 @@ public sealed class BarbedSystem : EntitySystem
             return;
         }
 
-        if (component.IsBarbed == true && HasComp<BarbedwireComponent>(args.Used))
+        if (component.IsBarbed && HasComp<BarbedwireComponent>(args.Used))
         {
             _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-insert-full"), uid, args.User, PopupType.Small);
             return;
