@@ -66,8 +66,10 @@ public sealed class BarbedSystem : EntitySystem
     }
     private void OnDoAfter(EntityUid uid, BarbedComponent component, BarbedDoAfterEvent args)
     {
-        if (args.Used == null || args.Cancelled)
+        if (args.Used == null || args.Cancelled || args.Handled)
             return;
+
+        args.Handled = true;
 
         if (TryComp<StackComponent>(args.Used.Value, out var stackComp))
         {
