@@ -216,6 +216,38 @@
   - type: Clothing
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/ghille.rsi
 
+# m56
+- type: entity
+  parent: ArmorMarineM3
+  id: CMArmorM56CombatHarness
+  name: M56 combat harness
+  description: A heavy protective vest designed to be worn with the M56 Smartgun System. \nIt has specially designed straps and reinforcement to carry the Smartgun and accessories.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m56.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m56.rsi
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,7,1
+    whitelist:
+      components:
+      - GasTank
+      - BallisticAmmoProvider
+      # Mines
+      # Bayonet
+      # Smartgun
+      # Belts
+      # Motion detectors
+      # Walkman
+      tags:
+      - Flashlight
+      - Knife
+  - type: ClothingSpeedModifier
+    walkModifier: 0.8
+    sprintModifier: 0.8
+
 # M2
 - type: entity
   parent: ArmorMarineM3
