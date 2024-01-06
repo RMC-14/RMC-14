@@ -28,7 +28,7 @@ public sealed class BarbedSystem : EntitySystem
     }
     public void OnInteractUsing(EntityUid uid, BarbedComponent component, InteractUsingEvent args)
     {
-        if (component.IsBarbed == false && HasComp<BarbedwireComponent>(args.Used))
+        if (!component.IsBarbed && HasComp<BarbedwireComponent>(args.Used))
         {
             var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.WireTime, new BarbedDoAfterEvent(), uid, used: args.Used)
             {
