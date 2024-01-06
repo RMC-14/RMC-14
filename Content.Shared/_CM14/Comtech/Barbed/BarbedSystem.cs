@@ -47,7 +47,7 @@ public sealed class BarbedSystem : EntitySystem
             return;
         }
 
-        if (component.IsBarbed == true && TryComp<ToolComponent>(args.Used, out var tool))
+        if (component.IsBarbed && TryComp<ToolComponent>(args.Used, out var tool))
         {
             if (_toolSystem.HasQuality(args.Used, "Cutting", tool))
             {
