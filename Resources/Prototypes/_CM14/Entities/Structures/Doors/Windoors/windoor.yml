@@ -1,0 +1,63 @@
+﻿- type: entity
+  parent: [BaseWindoor, CMEntityBase]
+  id: CMWindoor
+  name: glass door
+  description: A window, that is also a door. A windoor if you will.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Windoors/windoor.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+    - state: closed_unlit
+      shader: unshaded
+      map: [ "enum.DoorVisualLayers.BaseUnlit" ]
+    - state: welded
+      map: [ "enum.WeldableLayers.BaseWelded" ]
+      visible: false
+    - state: bolted
+      shader: unshaded
+      map: [ "enum.DoorVisualLayers.BaseBolted" ]
+    - state: emergency
+      shader: unshaded
+      map: [ "enum.DoorVisualLayers.BaseEmergencyAccess" ]
+    - state: panel_open
+      map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      visible: false
+  - type: Construction
+    graph: CMWindoor
+    node: windoor
+    containers:
+    - board
+
+- type: entity
+  parent: [BaseSecureWindoor, CMEntityBase]
+  id: CMWindoorSecure
+  name: secure glass door
+  description: A thick chunk of tempered glass on metal track. Probably more robust than you.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Doors/Windoors/secure.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+    - state: closed_unlit
+      shader: unshaded
+      map: [ "enum.DoorVisualLayers.BaseUnlit" ]
+    - state: welded
+      map: [ "enum.WeldableLayers.BaseWelded" ]
+      visible: false
+    - state: bolted
+      shader: unshaded
+      map: [ "enum.DoorVisualLayers.BaseBolted" ]
+    - state: emergency
+      shader: unshaded
+      map: [ "enum.DoorVisualLayers.BaseEmergencyAccess" ]
+    - state: panel_open
+      map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      visible: false
+  - type: Construction
+    graph: CMWindoor
+    node: windoorSecure
+    containers:
+    - board

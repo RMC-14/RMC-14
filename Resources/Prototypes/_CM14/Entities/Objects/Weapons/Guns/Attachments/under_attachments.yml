@@ -1,0 +1,100 @@
+﻿- type: entity
+  abstract: true
+  parent: CMAttachmentBase
+  id: CMUnderAttachmentBase
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Attachments/under.rsi
+
+- type: entity
+  parent: CMUnderAttachmentBase
+  id: CMAttachmentAngledGrip
+  name: angled grip
+  description: "An angled foregrip that improves weapon ergonomics resulting in faster wielding time.
+    However, it also increases weapon size."
+  components:
+  - type: Sprite
+    state: angledgrip
+
+- type: entity
+  parent: CMUnderAttachmentBase
+  id: CMAttachmentBipod
+  name: bipod
+  description: "A simple set of telescopic poles to keep a weapon stabilized during firing.
+    Greatly increases accuracy and reduces recoil when properly placed, but also increases weapon size and slows firing speed."
+  components:
+  - type: Sprite
+    state: bipod
+
+- type: entity
+  parent: CMUnderAttachmentBase
+  id: CMAttachmentBurstFireAssembly
+  name: burst fire assembly
+  description: "A small angled piece of fine machinery that increases the burst count on some weapons, and grants the ability to others.
+    Increases weapon scatter."
+  components:
+  - type: Sprite
+    state: rapidfire
+
+- type: entity
+  parent: CMUnderAttachmentBase
+  id: CMAttachmentGyroscopicStabilizer
+  name: gyroscopic stabilizer
+  description: A set of weights and balances to stabilize the weapon when fired with one hand. Slightly decreases firing speed.
+  components:
+  - type: Sprite
+    state: gyro
+
+- type: entity
+  parent: CMUnderAttachmentBase
+  id: CMAttachmentLaserSight
+  name: laser sight
+  description: A laser sight that attaches to the underside of most weapons. Increases accuracy and decreases scatter, especially while one-handed.
+  components:
+  - type: Sprite
+    state: lasersight
+
+- type: entity
+  parent: CMUnderAttachmentBase
+  id: CMAttachmentMiniFlamethrower
+  name: mini flamethrower
+  description: A weapon-mounted refillable flamethrower attachment. It has a secondary setting for a more intense flame with far less propulsion ability and heavy fuel usage.
+  components:
+  - type: Sprite
+    state: flamethrower
+
+- type: entity
+  parent: CMUnderAttachmentBase
+  id: CMAttachmentXMVESG1FlamerNozzle
+  name: XM-VESG-1 flamer nozzle
+  description: A special nozzle designed to alter flamethrowers to be used in a more offense orientated manner. As the inside of the nozzle is coated in a special gel and resin substance that takes the fuel that passes through and hardens it. Upon exiting the barrel, a cluster of burning gel is projected instead of a stream of burning naphtha.
+  components:
+  - type: Sprite
+    state: flamer_nozzle
+
+- type: entity
+  parent: CMUnderAttachmentBase
+  id: CMAttachmentU7UnderbarrelShotgun
+  name: U7 underbarrel shotgun
+  description: An ARMAT U7 tactical shotgun. Attaches to the underbarrel of most weapons. Only capable of loading up to five buckshot shells. Specialized for breaching into buildings.
+  components:
+  - type: Sprite
+    state: masterkey
+
+- type: entity
+  parent: CMUnderAttachmentBase
+  id: CMAttachmentUnderbarrelExtinguisher
+  name: HME-12 underbarrel extinguisher
+  description: A Taiho-Technologies HME-12 underbarrel extinguisher. Attaches to the underbarrel of most weapons. Point at flame before applying pressure.
+  components:
+  - type: Sprite
+    state: extinguisher
+
+- type: entity
+  parent: CMUnderAttachmentBase
+  id: CMAttachmentVerticalGrip
+  name: vertical grip
+  description: A vertical foregrip that offers better accuracy, less recoil, and less scatter, especially during burst fire. \nHowever, it also increases weapon size.
+  components:
+  - type: Sprite
+    state: verticalgrip

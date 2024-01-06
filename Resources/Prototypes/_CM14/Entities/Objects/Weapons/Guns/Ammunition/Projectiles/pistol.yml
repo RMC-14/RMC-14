@@ -1,10 +1,28 @@
 - type: entity
-  id: BulletPistol9mm
-  name: bullet (9mm)
-  parent: BaseBullet
-  noSpawn: true
+  abstract: true
+  parent: [BaseBullet, CMEntityBase]
+  id: CMBulletBase
+  categories:
+  - hideSpawnMenu
   components:
+  - type: Projectile
+
+- type: entity
+  parent: CMBulletBase
+  id: CMBulletPistol9mm
+  name: bullet (9mm)
+  components: # TODO CM14 armor piercing damage
   - type: Projectile
     damage:
       types:
-        Piercing: 41
+        Piercing: 40
+
+- type: entity
+  parent: CMBulletBase
+  id: CMBulletPistol88m4AP
+  name: bullet (88m4 AP)
+  components: # TODO CM14 armor piercing damage
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 25

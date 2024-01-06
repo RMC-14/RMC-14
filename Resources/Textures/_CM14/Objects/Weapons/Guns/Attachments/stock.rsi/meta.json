@@ -1,0 +1,215 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9e1cebb4c1a945dc757ff46aea44f3dbddf5b625/icons/obj/items/weapons/guns/attachments/stock.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "smg_brace_on"
+    },
+    {
+      "name": "smg_brace"
+    },
+    {
+      "name": "smgstockcc"
+    },
+    {
+      "name": "smgstockc"
+    },
+    {
+      "name": "smgstock"
+    },
+    {
+      "name": "ou_stock"
+    },
+    {
+      "name": "stock"
+    },
+    {
+      "name": "s_stock"
+    },
+    {
+      "name": "d_stock"
+    },
+    {
+      "name": "c_stock"
+    },
+    {
+      "name": "u_stock"
+    },
+    {
+      "name": "abr40stock"
+    },
+    {
+      "name": "abr40stock_tac"
+    },
+    {
+      "name": "l42stock"
+    },
+    {
+      "name": "nsg23_stock"
+    },
+    {
+      "name": "m41_folding_on"
+    },
+    {
+      "name": "m41_folding"
+    },
+    {
+      "name": "riflestock"
+    },
+    {
+      "name": "m79_stock"
+    },
+    {
+      "name": "r4t-stock"
+    },
+    {
+      "name": "s_r4t-stock"
+    },
+    {
+      "name": "u_r4t-stock"
+    },
+    {
+      "name": "d_r4t-stock"
+    },
+    {
+      "name": "c_r4t-stock"
+    },
+    {
+      "name": "smg_brace_a_on"
+    },
+    {
+      "name": "smg_brace_a"
+    },
+    {
+      "name": "smgstockcc_a"
+    },
+    {
+      "name": "smgstockc_a"
+    },
+    {
+      "name": "smgstock_a"
+    },
+    {
+      "name": "abr40stock_a"
+    },
+    {
+      "name": "abr40stock_tac_a"
+    },
+    {
+      "name": "l42stock_a"
+    },
+    {
+      "name": "m41_folding_a_on"
+    },
+    {
+      "name": "m41_folding_a"
+    },
+    {
+      "name": "riflestock_a"
+    },
+    {
+      "name": "m79_stock_a"
+    },
+    {
+      "name": "44stock"
+    },
+    {
+      "name": "44stock_folded"
+    },
+    {
+      "name": "ar10_stock"
+    },
+    {
+      "name": "m16_stock"
+    },
+    {
+      "name": "m16_folding_on"
+    },
+    {
+      "name": "m16_folding"
+    },
+    {
+      "name": "boomslang-stock"
+    },
+    {
+      "name": "d_boomslang-stock"
+    },
+    {
+      "name": "s_boomslang-stock"
+    },
+    {
+      "name": "c_boomslang-stock"
+    },
+    {
+      "name": "u_boomslang-stock"
+    },
+    {
+      "name": "m4markstock"
+    },
+    {
+      "name": "huntingstock"
+    },
+    {
+      "name": "slavicstock"
+    },
+    {
+      "name": "type23_stock"
+    },
+    {
+      "name": "twobore_stock"
+    },
+    {
+      "name": "hg3712_stock"
+    },
+    {
+      "name": "hg3717_stock"
+    },
+    {
+      "name": "db_stock"
+    },
+    {
+      "name": "44stock_old"
+    },
+    {
+      "name": "tactical_stock"
+    },
+    {
+      "name": "m44r_stock"
+    },
+    {
+      "name": "mod88_stock"
+    },
+    {
+      "name": "mod88_stock_a"
+    },
+    {
+      "name": "vulture_stock"
+    },
+    {
+      "name": "d_vulture_stock"
+    },
+    {
+      "name": "s_vulture_stock"
+    },
+    {
+      "name": "c_vulture_stock"
+    },
+    {
+      "name": "u_vulture_stock"
+    },
+    {
+      "name": "uppmg_stock"
+    },
+    {
+      "name": "hjra_breech"
+    },
+    {
+      "name": "type71_stock"
+    }
+  ]
+}
