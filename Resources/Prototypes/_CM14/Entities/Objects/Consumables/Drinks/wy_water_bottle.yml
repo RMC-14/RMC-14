@@ -1,0 +1,32 @@
+﻿- type: entity
+  parent: DrinkWaterBottleFull
+  id: CMDrinkWYWaterBottle30
+  name: Weyland-Yutani bottled spring water
+  description: Overpriced 'Spring' water. Bottled by the Weyland-Yutani Corporation.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 50
+        reagents:
+        - ReagentId: Water
+          Quantity: 30
+  - type: Sprite
+    sprite: _CM14/Objects/Consumable/Drinks/wy_water_bottle.rsi
+    state: base
+  - type: Item
+    size: Small
+  - type: DamageOnLand
+    damage: {}
+  - type: DamageOtherOnHit
+    damage: {}
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:SpillBehavior { }
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: MREItem

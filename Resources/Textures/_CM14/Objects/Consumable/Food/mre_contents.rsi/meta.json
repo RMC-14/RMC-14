@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/1cc75f29838f1dd7c6772bd5512716767a86a35f/icons/obj/items/food.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "boneless_pork_ribs"
+    },
+    {
+      "name": "grilled_chicken"
+    },
+    {
+      "name": "pizza_square"
+    },
+    {
+      "name": "spaghetti_chunks"
+    },
+    {
+      "name": "chicken_tender"
+    },
+    {
+      "name": "cracker"
+    },
+    {
+      "name": "cheese_spread"
+    },
+    {
+      "name": "rice_onigiri"
+    },
+    {
+      "name": "mashed_potatoes"
+    },
+    {
+      "name": "risotto"
+    },
+    {
+      "name": "biscuit"
+    },
+    {
+      "name": "meatballs"
+    },
+    {
+      "name": "pretzels"
+    },
+    {
+      "name": "peanuts"
+    },
+    {
+      "name": "sushi"
+    },
+    {
+      "name": "spiced_apples"
+    },
+    {
+      "name": "chocolate_brownie"
+    },
+    {
+      "name": "sugar_cookie"
+    },
+    {
+      "name": "coco_bar"
+    },
+    {
+      "name": "flan"
+    },
+    {
+      "name": "honey_flan"
+    }
+  ]
+}
