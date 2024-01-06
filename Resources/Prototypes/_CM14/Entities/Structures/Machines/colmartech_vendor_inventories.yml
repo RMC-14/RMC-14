@@ -45,7 +45,7 @@
 - type: vendingMachineInventory
   id: ColMarTechUtilities
   startingInventory:
-#    CMMRE: 5
+    CMMRE: 5
 #    CMMREBox: 1
 #    CMEntrenchingTool: 2
 #    CMEntrenchingTool: 2
@@ -125,7 +125,7 @@
     CMArmorM3Light: 30
     ArmorHelmetM10: 50
 #    CMStandardMarineApparel
-#    CMMRE
+    CMMRE: 50 # Infinite
 #    CMMap
 #    CMLightArmor
 #    CMMediumArmor
@@ -209,10 +209,10 @@
 
 - type: vendingMachineInventory
   id: ColMarTechSLEquipment
-  startingInventory: {}
+  startingInventory:
 #    CMStandardMarineApparel
 #    CMB12PatternArmor
-#    CMMRE
+    CMMRE: 50 # Infinite
 #    CMMap
 #    CMBackpack
 #    CMMacheteScabbardFull
@@ -325,9 +325,9 @@
 
 - type: vendingMachineInventory
   id: ColMarTechSWSEquipment
-  startingInventory: {}
+  startingInventory:
 #    CMStandardMarineApparel
-#    CMMRE
+    CMMRE: 50 # Infinite
 #    CMMap
 #    CMBackpack
 #    CMSatchel
@@ -468,9 +468,9 @@
 
 - type: vendingMachineInventory
   id: ColMarTechSCTEquipment
-  startingInventory: {}
+  startingInventory:
 #    CMStandardMarineApparel
-#    CMMRE
+    CMMRE: 50 # Infinite
 #    CMMap
 #    CMLightArmor
 #    CMMediumArmor
@@ -588,10 +588,10 @@
 
 - type: vendingMachineInventory
   id: ColMarTechMedicalEquipment
-  startingInventory: {}
+  startingInventory:
 #    CMStandardMarineApparel
 #    CMCombatSterileGloves
-#    CMMRE
+    CMMRE: 50 # Infinite
 #    CMMap
 #    CMLightArmor
 #    CMMediumArmor
@@ -680,9 +680,9 @@
 
 - type: vendingMachineInventory
   id: ColMarTechSGEquipment
-  startingInventory: {}
+  startingInventory:
 #    CMStandardMarineApparel
-#    CMMRE
+    CMMRE: 50 # Infinite
 #    CMMap
 #    CMM802SmartgunnerSidearmBelt
 #    CMM280SmartgunnerDrumBelt
@@ -756,10 +756,10 @@
 
 - type: vendingMachineInventory
   id: ColMarTechFLEquipment
-  startingInventory: {}
+  startingInventory:
 #    CMStandardMarineApparel
 #    CMM4PatternArmor
-#    CMMRE
+    CMMRE: 50 # Infinite
 #    CMMap
 #    CMEssentialFireteamLeaderUtilities
 #    CMG8AGeneralUtilityPouch
