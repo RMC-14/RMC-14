@@ -1,25 +1,28 @@
+using Content.Shared._CM14.Comtech.Barbed;
 using Content.Shared.Damage;
-﻿using Robust.Shared.Serialization;
 using Content.Shared.DoAfter;
+using Robust.Shared.GameStates;
+﻿using Robust.Shared.Serialization;
 
 namespace Content.Shared._CM14.Comtech.Barbed.Components
 {
-    [RegisterComponent]
+    [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+    [Access(typeof(BarbedSystem))]
     public sealed partial class BarbedComponent : Component
     {
         [DataField(required: true)]
         public DamageSpecifier ThornsDamage = default!;
 
-        [DataField("isBarbed")]
+        [DataField]
         public bool IsBarbed = false;
 
         // [DataField]
         // public EntProtoId? Spawn; todo spawn a metal rod when wirecut
 
-        [DataField("wireTime")]
+        [DataField]
         public float WireTime = 2.0f;
 
-        [DataField("cutTime")]
+        [DataField]
         public float CutTime = 1.0f;
     }
 
