@@ -59,6 +59,13 @@
     sprite: _CM14/Objects/Consumable/Drinks/cola.rsi
   - type: Item
     sprite: _CM14/Objects/Consumable/Drinks/cola.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: Cola
+          Quantity: 30
+        maxVol: 50
 
 - type: entity
   parent: CMDrinkCanBase
@@ -74,31 +81,10 @@
     solutions:
       drink:
         reagents:
-        - ReagentId: Cola
+        - ReagentId: SpaceMountainWind
           Quantity: 30
         maxVol: 50
 
-### DELETE ME ###
-
-- type: entity
-  parent: CMDrinkCanBase
-  id: CMDrinkCan
-  name: 
-  description: 
-  components:
-  - type: Sprite
-    sprite: _CM14/Objects/Consumable/Drinks/.rsi
-  - type: Item
-    sprite: _CM14/Objects/Consumable/Drinks/.rsi
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        reagents:
-        - ReagentId: Cola
-          Quantity: 30
-        maxVol: 50
-
-### DELETE ME ###
 - type: entity
   parent: CMDrinkCanBase
   id: CMDrinkCanThirteenLoko
@@ -113,7 +99,7 @@
     solutions:
       drink:
         reagents:
-        - ReagentId: Cola
+        - ReagentId: FourteenLoko
           Quantity: 30
         maxVol: 50
 
@@ -131,7 +117,7 @@
     solutions:
       drink:
         reagents:
-        - ReagentId: Cola
+        - ReagentId: DrGibb
           Quantity: 30
         maxVol: 50
 
@@ -149,7 +135,7 @@
     solutions:
       drink:
         reagents:
-        - ReagentId: Cola
+        - ReagentId: Starkist
           Quantity: 30
         maxVol: 50
 
@@ -167,7 +153,7 @@
     solutions:
       drink:
         reagents:
-        - ReagentId: Cola
+        - ReagentId: SpaceUp
           Quantity: 30
         maxVol: 50
 
@@ -185,7 +171,7 @@
     solutions:
       drink:
         reagents:
-        - ReagentId: Cola
+        - ReagentId: LemonLime
           Quantity: 30
         maxVol: 50
 
@@ -203,7 +189,7 @@
     solutions:
       drink:
         reagents:
-        - ReagentId: Cola
+        - ReagentId: IcedTea
           Quantity: 30
         maxVol: 50
 
@@ -221,7 +207,7 @@
     solutions:
       drink:
         reagents:
-        - ReagentId: Cola
+        - ReagentId: GrapeSoda
           Quantity: 30
         maxVol: 50
 
@@ -229,7 +215,7 @@
   parent: CMDrinkCanBase
   id: CMDrinkCanTonic
   name: tonic water
-  description: Step One: Tonic. Check. Step Two: Gin.
+  description: "Step One: Tonic. Check. Step Two: Gin."
   components:
   - type: Sprite
     sprite: _CM14/Objects/Consumable/Drinks/tonic.rsi
@@ -239,7 +225,7 @@
     solutions:
       drink:
         reagents:
-        - ReagentId: Cola
+        - ReagentId: TonicWater
           Quantity: 30
         maxVol: 50
 
@@ -257,7 +243,7 @@
     solutions:
       drink:
         reagents:
-        - ReagentId: Cola
+        - ReagentId: SodaWater
           Quantity: 30
         maxVol: 50
 
@@ -366,8 +352,8 @@
 - type: entity
   parent: CMDrinkCanSouto
   id: CMDrinkCanSoutoCherry
-  name: Now with more artificial flavors! Canned in Havana
-  description: 
+  name: cherry souto
+  description: Now with more artificial flavors! Canned in Havana
   components:
   - type: Sprite
     sprite: _CM14/Objects/Consumable/Drinks/Souto/cherry.rsi
