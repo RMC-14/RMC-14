@@ -1,0 +1,7 @@
+- type: stack
+  id: CMSteel
+  name: steel
+  icon: { sprite: /Textures/_CM14/Objects/Materials/Sheets/metal.rsi, state: steel }
+  spawn: SheetSteel1
+  maxCount: 50
+  itemSize: 1

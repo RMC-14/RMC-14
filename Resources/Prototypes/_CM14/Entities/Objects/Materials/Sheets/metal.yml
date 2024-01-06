@@ -1,0 +1,94 @@
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: CMSheetMetalBase
+  description: A sheet of metal, used often on the station in various applications.
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Materials/Sheets/metal.rsi
+    - type: Item
+      sprite: _CM14/Objects/Materials/Sheets/metal.rsi
+      size: Normal
+    - type: StaticPrice
+      price: 0
+    - type: Tag
+      tags:
+        - Sheet
+        - Metal
+        - DroneUsable
+    - type: Damageable
+      damageContainer: Inorganic
+      damageModifierSet: Metallic
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 100
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+
+- type: entity
+  parent: CMSheetMetalBase
+  id: CMSheetSteel
+  name: steel
+  description: Sheets made out of metal. They have been dubbed Metal Sheets.
+  suffix: Full
+  components:
+    - type: Material
+    - type: PhysicalComposition
+      materialComposition:
+        Steel: 100
+    - type: Stack
+      stackType: CMSteel
+      baseLayer: base
+      layerStates:
+        - steel
+        - steel_2
+        - steel_3
+        - steel_4
+    - type: Sprite
+      state: steel_4
+      layers:
+        - state: steel_4
+          map: ["base"]
+    - type: Item
+      heldPrefix: steel
+    - type: Appearance
+    - type: FloorTile
+      outputs:
+        - Plating
+    - type: Extractable
+      grindableSolutionName: steel
+    - type: SolutionContainerManager
+      solutions:
+        steel:
+          reagents:
+            - ReagentId: Iron
+              Quantity: 9
+            - ReagentId: Carbon
+              Quantity: 1
+
+- type: entity
+  parent: CMSheetSteel
+  id: CMSheetSteel10
+  name: steel
+  suffix: 10
+  components:
+    - type: Sprite
+      state: steel2
+    - type: Stack
+      stackType: CMSteel
+      count: 10
+
+- type: entity
+  parent: CMSheetSteel
+  id: CMSheetSteel1
+  name: steel
+  suffix: Single
+  components:
+    - type: Sprite
+      state: steel
+    - type: Stack
+      stackType: CMSteel
+      count: 1
