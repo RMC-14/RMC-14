@@ -16,4 +16,15 @@
     state: base
   - type: Item
     size: Small
+  - type: DamageOnLand
+    damage: {}
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:SpillBehavior { }
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
   - type: MREItem
