@@ -43,7 +43,7 @@
     solution: drink
   - type: PhysicalComposition
     materialComposition:
-      CMSteel: 50
+      CMSheetSteel: 50
   - type: Tag
     tags:
     - DrinkCan
