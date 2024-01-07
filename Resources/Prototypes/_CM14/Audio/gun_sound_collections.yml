@@ -1,0 +1,5 @@
+﻿- type: soundCollection
+  id: CMShotgunPump
+  files:
+  - /Audio/_CM14/Weapons/Guns/Pump/shotgunpump1.ogg
+  - /Audio/_CM14/Weapons/Guns/Pump/shotgunpump2.ogg
