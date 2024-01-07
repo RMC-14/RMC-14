@@ -1,6 +1,6 @@
 - type: entity
   name: welding tool
-  parent: BaseItem
+  parent: [BaseItem, CMEntityBase]
   id: CMWelder
   description: "Melts anything as long as it's fueled, don't forget your eye protection!"
   components:

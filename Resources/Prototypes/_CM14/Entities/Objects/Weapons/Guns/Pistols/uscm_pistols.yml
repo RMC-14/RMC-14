@@ -1,6 +1,6 @@
 ﻿- type: entity
-  abstract: true
   parent: [BaseWeaponPistol, CMEntityBase]
+  abstract: true
   id: CMWeaponPistolBase
   components:
   - type: Sprite
@@ -74,7 +74,7 @@
   id: CMWeaponPistol88m4
   name: 88 mod 4 combat pistol # TODO CM14 sounds
   description: Standard issue USCM firearm. Also found in the hands of Weyland-Yutani PMC teams. Fires 9mm armor shredding rounds and is capable of 3-round burst.
-  components: # TODO CM14 armor damagew
+  components:
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Pistols/88m4.rsi
     layers:
