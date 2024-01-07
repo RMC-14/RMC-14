@@ -11,18 +11,22 @@
   parent: CMBulletBase
   id: CMBulletPistol9mm
   name: bullet (9mm)
-  components: # TODO CM14 armor piercing damage
+  components:
   - type: Projectile
     damage:
       types:
         Piercing: 40
+  - type: CMArmorPiercing
+    amount: 10
 
 - type: entity
   parent: CMBulletBase
   id: CMBulletPistol88m4AP
   name: bullet (88m4 AP)
-  components: # TODO CM14 armor piercing damage
+  components:
   - type: Projectile
     damage:
       types:
         Piercing: 25
+  - type: CMArmorPiercing
+    amount: 40
