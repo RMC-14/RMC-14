@@ -1,8 +1,10 @@
-using Content.Shared._CM14.Comtech.Barbed;
 using Content.Shared.Damage;
+using Content.Shared._CM14.Barbed;
 using Content.Shared.DoAfter;
 using Robust.Shared.GameStates;
-﻿using Robust.Shared.Serialization;
+using Robust.Shared.Serialization;
+using Robust.Shared.Prototypes;
+using Content.Shared.Tools;
 
 namespace Content.Shared._CM14.Comtech.Barbed.Components
 {
@@ -14,10 +16,14 @@ namespace Content.Shared._CM14.Comtech.Barbed.Components
         public DamageSpecifier ThornsDamage = default!;
 
         [DataField]
+        [AutoNetworkedField]
         public bool IsBarbed = false;
 
-        // [DataField]
-        // public EntProtoId? Spawn; todo spawn a metal rod when wirecut
+        [DataField]
+        public EntProtoId Spawn;
+
+        [DataField]
+        public ProtoId<ToolQualityPrototype> RemoveQuality = "Cutting";
 
         [DataField]
         public float WireTime = 2.0f;
