@@ -98,10 +98,10 @@
         amount: 2
       - id: CMAttachmentRecoilCompensator
         amount: 2
-    - name: Rail
-      entries:
       - id: CMAttachmentSuppressor
         amount: 2
+    - name: Rail
+      entries:
       - id: CMAttachmentB8SmartScope
         amount: 1
       - id: CMAttachmentMagneticHarness
