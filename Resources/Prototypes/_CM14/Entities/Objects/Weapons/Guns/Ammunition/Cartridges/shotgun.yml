@@ -1,6 +1,6 @@
 ﻿- type: entity
   abstract: true
-  parent: [BaseShellShotgun, CMEntityBase]
+  parent: [BaseCartridge, CMEntityBase]
   id: CMShellShotgunBase
   name: handful of shotgun shell
   description: A handful of rounds to reload on the go.
@@ -10,8 +10,12 @@
     layers:
     - state: buckshot_shell_1
   - type: CartridgeAmmo
+    count: 6
+    spread: 15
     proto: CMPelletShotgunBuckshot
     deleteOnSpawn: true
+    soundEject:
+      collection: ShellEject
   - type: Tag
     tags:
     - Cartridge

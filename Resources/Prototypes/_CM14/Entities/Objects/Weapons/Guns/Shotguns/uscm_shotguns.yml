@@ -27,6 +27,10 @@
     proto: null
     soundInsert:
       path: /Audio/_CM14/Weapons/Guns/Reload/m37a2.ogg
+  - type: CMPumpAction
+  - type: UseDelay
+    delay: 2
+
 #  - type: GunWieldBonus # TODO CM14
 #    minAngle: -25
 #    maxAngle: -50
