@@ -4,10 +4,9 @@ using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.Camera;
 using Content.Shared.Damage;
 using Content.Shared.Database;
-using Content.Shared.Projectiles;
-using Robust.Server.GameObjects;
-using Robust.Shared.Physics.Events;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Projectiles;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 
 namespace Content.Server.Projectiles;
@@ -48,7 +47,7 @@ public sealed class ProjectileSystem : SharedProjectileSystem
 
         var otherName = ToPrettyString(target);
         var direction = args.OurBody.LinearVelocity.Normalized();
-        var modifiedDamage = _damageableSystem.TryChangeDamage(target, ev.Damage, component.IgnoreResistances, origin: component.Shooter);
+        var modifiedDamage = _damageableSystem.TryChangeDamage(target, ev.Damage, component.IgnoreResistances, origin: component.Shooter, tool: uid);
         var deleted = Deleted(target);
 
         if (modifiedDamage is not null && EntityManager.EntityExists(component.Shooter))
