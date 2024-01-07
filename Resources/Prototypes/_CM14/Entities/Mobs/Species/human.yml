@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseMobHuman
+  parent: [BaseMobHuman, CMEntityBase]
   id: CMMobHumanBase
   name: Urist McCMHands
   abstract: true

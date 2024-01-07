@@ -1,6 +1,6 @@
 ﻿- type: entity
-  abstract: true
   parent: [BaseWeaponPistol, CMEntityBase]
+  abstract: true
   id: CMWeaponPistolBase
   components:
   - type: Sprite

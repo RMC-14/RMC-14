@@ -1,7 +1,8 @@
 ﻿- type: entity
+  abstract: true
+  parent: CMEntityBase
   id: XenoBaseProjectile
   name: projectile
-  abstract: true
   components:
   - type: Clickable
   - type: Sprite
