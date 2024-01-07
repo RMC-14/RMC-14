@@ -1,4 +1,5 @@
 ﻿- type: entity
+  parent: CMEntityBase
   id: XenoProjectileImpactEffect
   noSpawn: true
   components:

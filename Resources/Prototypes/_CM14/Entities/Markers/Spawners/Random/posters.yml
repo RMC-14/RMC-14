@@ -1,5 +1,5 @@
 - type: entity
-  parent: MarkerBase
+  parent: [MarkerBase, CMEntityBase]
   id: CMRandomPosterAny
   name: random poster spawner
   components:

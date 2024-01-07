@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseStructureDynamic
+  parent: [BaseStructureDynamic, CMEntityBase]
   id: CMBarricadeBase
   name: Generic Barricade
   description: The most basic, generic barricade you have ever seen. This probably shouldn't even be here.

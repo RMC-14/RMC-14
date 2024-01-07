@@ -1,7 +1,7 @@
 - type: entity
+  parent: [BaseBullet, CMEntityBase]
   id: BulletRifle10x24mm
   name: bullet (10x24mm)
-  parent: BaseBullet
   noSpawn: true
   components:
   - type: Projectile
