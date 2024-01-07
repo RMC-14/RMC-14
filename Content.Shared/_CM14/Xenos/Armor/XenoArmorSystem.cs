@@ -11,6 +11,7 @@ public sealed class XenoArmorSystem : EntitySystem
     {
         SubscribeLocalEvent<XenoComponent, DamageModifyEvent>(OnXenoDamageModify);
         SubscribeLocalEvent<XenoArmorComponent, XenoGetArmorEvent>(OnXenoGetArmor);
+        SubscribeLocalEvent<CMArmorPiercingComponent, XenoGetArmorEvent>(OnPiercingXenoGetArmor);
     }
 
     private void OnXenoDamageModify(Entity<XenoComponent> xeno, ref DamageModifyEvent args)
@@ -18,7 +19,10 @@ public sealed class XenoArmorSystem : EntitySystem
         var ev = new XenoGetArmorEvent();
         RaiseLocalEvent(xeno, ref ev);
 
-        var armor = ev.Armor;
+        if (args.Tool != null)
+            RaiseLocalEvent(args.Tool.Value, ref ev);
+
+        var armor = Math.Max(ev.Armor, 0);
         if (args.Origin is { } origin)
         {
             var originCoords = _transform.GetMapCoordinates(origin);
@@ -34,6 +38,9 @@ public sealed class XenoArmorSystem : EntitySystem
             }
         }
 
+        if (armor <= 0)
+            return;
+
         var resist = Math.Pow(1.1, armor / 5.0);
         args.Damage /= resist;
 
@@ -48,5 +55,10 @@ public sealed class XenoArmorSystem : EntitySystem
     private void OnXenoGetArmor(Entity<XenoArmorComponent> xeno, ref XenoGetArmorEvent args)
     {
         args.Armor += xeno.Comp.Armor;
+    }
+
+    private void OnPiercingXenoGetArmor(Entity<CMArmorPiercingComponent> ent, ref XenoGetArmorEvent args)
+    {
+        args.Armor -= ent.Comp.Amount;
     }
 }
