@@ -10,7 +10,6 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Effects;
-using Content.Shared.FixedPoint;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Melee;
@@ -19,7 +18,6 @@ using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Weapons.Reflect;
-using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
@@ -253,7 +251,7 @@ public sealed partial class GunSystem : SharedGunSystem
 
                         var hitName = ToPrettyString(hitEntity);
                         if (dmg != null)
-                            dmg = Damageable.TryChangeDamage(hitEntity, dmg, origin: user);
+                            dmg = Damageable.TryChangeDamage(hitEntity, dmg, origin: user, tool: ent);
 
                         // check null again, as TryChangeDamage returns modified damage values
                         if (dmg != null)

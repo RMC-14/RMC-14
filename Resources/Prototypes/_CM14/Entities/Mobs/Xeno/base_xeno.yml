@@ -159,8 +159,9 @@
     mustBeDead: true
 
 - type: entity
-  id: CMXenoPrying
   abstract: true
+  parent: CMEntityBase
+  id: CMXenoPrying
   components:
   - type: Tool
     speed: 1.5
@@ -175,14 +176,16 @@
       path: /Audio/Items/crowbar.ogg
 
 - type: entity
-  id: CMXenoPuller
   abstract: true
+  parent: CMEntityBase
+  id: CMXenoPuller
   components:
   - type: Puller
 
 - type: entity
-  id: CMXenoMelee
   abstract: true
+  parent: CMEntityBase
+  id: CMXenoMelee
   components:
   - type: CombatMode
   - type: MeleeWeapon
@@ -196,16 +199,16 @@
         Brute: 12
 
 - type: entity
-  id: CMXenoLarge
   abstract: true
+  parent: CMEntityBase
+  id: CMXenoLarge
   components:
   - type: Speech
     speechVerb: LargeMob
 
 - type: entity
   id: CMXenoUndeveloped
-  parent:
-  - CMXenoBase
+  parent: CMXenoBase
   abstract: true
 
 - type: entity
@@ -225,8 +228,9 @@
         Blunt: 5
 
 - type: entity
-  id: CMXenoTail
   abstract: true
+  parent: CMEntityBase
+  id: CMXenoTail
   components:
   - type: XenoTailStab
     tailDamage:
