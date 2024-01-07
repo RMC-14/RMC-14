@@ -1,4 +1,5 @@
 ﻿# TODO CM14 all of these vendor inventories
+# TODO CM14 deny and vend states
 - type: entity
   abstract: true
   parent: [ BaseMachinePowered, CMEntityBase ]
