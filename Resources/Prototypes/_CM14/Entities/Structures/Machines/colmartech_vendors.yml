@@ -1,14 +1,11 @@
 ﻿- type: entity
   abstract: true
-  parent: [ VendingMachine, CMEntityBase ]
+  parent: [ BaseMachinePowered, CMEntityBase ]
   id: ColMarTechBase
   name: ColMarTech vendor
   components:
-  - type: VendingMachine
-    dispenseOnHitChance: null
-    dispenseOnHitThreshold: null
-    offState: off
-    brokenState: broken
+#    offState: off
+#    brokenState: broken
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/colmartechweapons.rsi
     layers:
@@ -16,6 +13,35 @@
       map: ["enum.VendingMachineVisualLayers.Base"]
     - state: "base"
       map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+  - type: UserInterface
+    interfaces:
+    - key: enum.CMAutomatedVendorUI.Key
+      type: CMAutomatedVendorBui
+  - type: AmbientOnPowered
+  - type: AmbientSound
+    volume: -9
+    range: 3
+    enabled: false
+    sound:
+      path: /Audio/Ambience/Objects/vending_machine_hum.ogg
+  - type: Physics
+    bodyType: Static
+  - type: Transform
+    noRot: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.45,0.25,0.45"
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        density: 200
+  - type: ActivatableUI
+    key: enum.CMAutomatedVendorUI.Key
+  - type: ActivatableUIRequiresPower
 
 - type: entity
   parent: ColMarTechBase
@@ -23,12 +49,36 @@
   name: ColMarTech food vendor
   description: USCM Food Vendor, containing standard military Prepared Meals.
   components:
-  - type: VendingMachine
-    pack: ColMarTechFood
-    denyState: deny
-    ejectState: vend
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/food.rsi
+  - type: CMAutomatedVendor
+    sections:
+    - name: Prepared Meals
+      entries:
+      - id: CMUSCMPreparedMealChicken
+        amount: 15
+      - id: CMUSCMPreparedMealCornbread
+        amount: 15
+      - id: CMUSCMPreparedMealPasta
+        amount: 15
+      - id: CMUSCMPreparedMealPizza
+        amount: 15
+      - id: CMUSCMPreparedMealPork
+        amount: 15
+      - id: CMUSCMPreparedMealTofu
+        amount: 15
+      - id: CMUSCMProteinBar
+        amount: 50
+    - name: Flasks
+      entries:
+      - id: CMCanteen
+        amount: 10
+      - id: CMMetalFlask
+        amount: 10
+      - id: CMUSCMFlask
+        amount: 5
+      - id: CMWYFlask
+        amount: 5
 
 - type: entity
   parent: ColMarTechBase
