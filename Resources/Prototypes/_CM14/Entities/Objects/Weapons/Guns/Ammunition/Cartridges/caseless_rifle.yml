@@ -1,7 +1,7 @@
 - type: entity
+  parent: [BaseCartridgeCaselessRifle, CMEntityBase]
   id: CartridgeCaseless10x20mm
   name: cartridge (10x20mm)
-  parent: BaseCartridgeCaselessRifle
   components:
   - type: Tag
     tags:
