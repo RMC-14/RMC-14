@@ -76,7 +76,6 @@
     thornsDamage:
       types:
         Slash: 6
-    spawn: BarbedWire1
   - type: Construction
     graph: BarricadeMetalGraph
     node: nodeMetal
@@ -218,7 +217,6 @@
     thornsDamage:
       types:
         Slash: 6
-    spawn: BarbedWire1
   - type: Construction
     graph: BarricadeSandbagGraph
     node: nodeSandbag
@@ -312,6 +310,12 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: AnimationPlayer
+  - type: GenericVisualizer
+    visuals:
+      enum.BarbedWireVisuals.Wired:
+        barbWired:
+          False: { state: folding_metal_wire, visible: false }
+          True: { state: folding_metal_wire, visible: true }
   - type: InteractionOutline
   - type: Door
     openSpriteState: folding_metal_closed
@@ -332,6 +336,10 @@
       path: /Audio/Items/ratchet.ogg
     closeSound:
       path: /Audio/Items/ratchet.ogg
+  - type: Barbed
+    thornsDamage:
+      types:
+        Slash: 6
   - type: Construction
     graph: BarricadeMetalDoorGraph
     node: nodeBarricadeMetalDoor
@@ -366,6 +374,12 @@
           path: /Audio/Effects/metalbreak.ogg
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.BarbedWireVisuals.Wired:
+        barbWired:
+          False: { state: plasteel_wire, visible: false }
+          True: { state: plasteel_wire, visible: true }
   - type: Door
     openSpriteState: plasteel_closed
     closedSpriteState: plasteel

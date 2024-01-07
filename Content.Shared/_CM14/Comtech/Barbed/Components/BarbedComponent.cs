@@ -20,7 +20,7 @@ namespace Content.Shared._CM14.Comtech.Barbed.Components
         public bool IsBarbed = false;
 
         [DataField]
-        public EntProtoId Spawn;
+        public EntProtoId Spawn = "BarbedWire1";
 
         [DataField]
         public ProtoId<ToolQualityPrototype> RemoveQuality = "Cutting";
