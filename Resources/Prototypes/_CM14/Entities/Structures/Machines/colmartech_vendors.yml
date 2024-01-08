@@ -177,9 +177,12 @@
         amount: 5
       - id: CMCrowbar
         amount: 5
+      - id: CMWrench
+        amount: 5
       - id: CMMultitool
         amount: 1
-      #- id: CMHandWelderME3
+      - id: CMWelder
+        amount: 1
 #    - name: Flare and light
 #      entries:
       #  amount: 1
