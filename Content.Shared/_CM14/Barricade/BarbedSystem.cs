@@ -1,15 +1,15 @@
-using Content.Shared._CM14.Comtech.Barbed.Components;
+using Content.Shared._CM14.Barricade.Components;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
-using Robust.Shared.Network;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Tools.Components;
 using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Network;
 using SharedToolSystem = Content.Shared.Tools.Systems.SharedToolSystem;
 
-namespace Content.Shared._CM14.Barbed;
+namespace Content.Shared._CM14.Barricade;
 
 public sealed class BarbedSystem : EntitySystem
 {
@@ -29,9 +29,10 @@ public sealed class BarbedSystem : EntitySystem
         SubscribeLocalEvent<BarbedComponent, BarbedDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<BarbedComponent, CutBarbedDoAfterEvent>(WireCutterOnDoAfter);
     }
+
     public void OnInteractUsing(EntityUid uid, BarbedComponent component, InteractUsingEvent args)
     {
-        if (!component.IsBarbed && HasComp<BarbedwireComponent>(args.Used))
+        if (!component.IsBarbed && HasComp<BarbedWireComponent>(args.Used))
         {
             var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.WireTime, new BarbedDoAfterEvent(), uid, used: args.Used)
             {
@@ -39,14 +40,14 @@ public sealed class BarbedSystem : EntitySystem
                 BreakOnDamage = true,
                 NeedHand = true,
             };
-            _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-wiring"), uid, args.User, PopupType.Small);
+            _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-wiring"), uid, args.User);
             _doAfterSystem.TryStartDoAfter(doAfterEventArgs);
             return;
         }
 
-        if (component.IsBarbed && HasComp<BarbedwireComponent>(args.Used))
+        if (component.IsBarbed && HasComp<BarbedWireComponent>(args.Used))
         {
-            _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-insert-full"), uid, args.User, PopupType.Small);
+            _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-insert-full"), uid, args.User);
             return;
         }
 
@@ -54,19 +55,18 @@ public sealed class BarbedSystem : EntitySystem
         {
             if (_toolSystem.HasQuality(args.Used, component.RemoveQuality, tool))
             {
-                _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-begin"), uid, args.User, PopupType.Small);
-                var wirecutterDoAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.CutTime, new CutBarbedDoAfterEvent(), uid, used: args.Used)
+                _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-begin"), uid, args.User);
+                var wirecutterDoAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.CutTime, new Components.CutBarbedDoAfterEvent(), uid, used: args.Used)
                 {
                     BreakOnUserMove = true,
                     BreakOnDamage = true,
                     NeedHand = true,
                 };
                 _doAfterSystem.TryStartDoAfter(wirecutterDoAfterEventArgs);
-                return;
             }
         }
-        return;
     }
+
     private void OnDoAfter(EntityUid uid, BarbedComponent component, BarbedDoAfterEvent args)
     {
         if (args.Used == null || args.Cancelled || args.Handled)
@@ -81,10 +81,10 @@ public sealed class BarbedSystem : EntitySystem
 
         component.IsBarbed = true;
         _appearance.SetData(uid, BarbedWireVisuals.Wired, true);
-        _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-insert-success"), uid, args.User, PopupType.Small);
-        return;
+        _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-insert-success"), uid, args.User);
     }
-    private void WireCutterOnDoAfter(EntityUid uid, BarbedComponent component, CutBarbedDoAfterEvent args)
+
+    private void WireCutterOnDoAfter(EntityUid uid, BarbedComponent component, Components.CutBarbedDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled)
             return;
@@ -97,22 +97,20 @@ public sealed class BarbedSystem : EntitySystem
         var coordinates = _transform.GetMoverCoordinates(uid);
         EntityManager.SpawnEntity(component.Spawn, coordinates);
 
-        _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-finish"), uid, args.User, PopupType.Small);
+        _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-finish"), uid, args.User);
 
         _appearance.SetData(uid, BarbedWireVisuals.Wired, false);
         component.IsBarbed = false;
 
         Dirty(uid, component);
-
-        return;
     }
+
     private void OnAttacked(EntityUid uid, BarbedComponent component, AttackedEvent args)
     {
         if (component.IsBarbed)
         {
             _damageableSystem.TryChangeDamage(args.User, component.ThornsDamage);
             _popupSystem.PopupClient(Loc.GetString("barbed-wire-damage"), uid, args.User, PopupType.SmallCaution);
-            return;
         }
     }
 }
