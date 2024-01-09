@@ -1,0 +1,10 @@
+- type: entity
+  name: toilet
+  id: CMToiletEmpty
+  suffix: Empty
+  parent: ToiletEmpty
+  description: The HT-451, a torque rotation-based, waste disposal unit for small matter. This one seems remarkably clean.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Furniture/toilet.rsi
+    state: closed_toilet_seat_up
