@@ -1,18 +1,9 @@
 - type: entity
-  parent: [BaseStructureDynamic, CMEntityBase]
+  parent: [BaseStructure, CMEntityBase]
+  abstract: true
   id: CMBarricadeBase
-  name: Generic Barricade
-  description: The most basic, generic barricade you have ever seen. This probably shouldn't even be here.
   components:
-  - type: Sprite
-    sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
-    layers:
-    - state: metal
-    drawdepth: WallTops
-  - type: Physics
-    bodyType: Static
-  - type: Transform
-    anchored: true
+  - type: Anchorable
   - type: Appearance
   - type: Fixtures
     fixtures:
@@ -27,7 +18,6 @@
         - TableLayer
 
 # Metal Barricade Tree
-
 - type: entity
   parent: CMBarricadeBase
   id: CMBarricadeMetal
@@ -43,6 +33,12 @@
     sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
     layers:
     - state: metal
+  - type: GenericVisualizer
+    visuals:
+      enum.BarbedWireVisualLayers.Wire:
+        barbWired:
+          UnWired: { state: metal_wire, visible: false }
+          WiredClosed: { state: metal_wire, visible: true }
     drawdepth: WallTops
   - type: Damageable
     damageContainer: Inorganic
@@ -76,12 +72,15 @@
     trackAllDamage: true
     damageOverlay:
       sprite: _CM14/Structures/Walls/Barricades/metal_barricade_cracks.rsi
+  - type: Barbed
+    thornsDamage:
+      types:
+        Slash: 6
   - type: Construction
     graph: BarricadeMetalGraph
     node: nodeMetal
 
 # Metal Barricade Upgrades
-
 - type: entity
   parent: CMBarricadeMetal
   id: CMBarricadeBurn
@@ -154,7 +153,6 @@
       node: nodeExplosiveUpgrade
 
 # Sandbag
-
 - type: entity
   parent: CMBarricadeBase
   id: CMBarricadeSandbag
@@ -171,6 +169,12 @@
     layers:
     - state: sandbag
     drawdepth: WallTops
+  - type: GenericVisualizer
+    visuals:
+      enum.BarbedWireVisualLayers.Wire:
+        barbWired:
+          UnWired: { state: sandbag_wire, visible: false }
+          WiredClosed: { state: sandbag_wire, visible: true }
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: CMSandbag
@@ -179,7 +183,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.49,-0.40,0.49,-0.28"
+          bounds: "-0.49,-0.49,0.49,-0.45"
         density: 2000
         mask:
         - FullTileMask
@@ -209,12 +213,15 @@
     trackAllDamage: true
     damageOverlay:
       sprite: _CM14/Structures/Walls/Barricades/sandbag_cracks.rsi
+  - type: Barbed
+    thornsDamage:
+      types:
+        Slash: 6
   - type: Construction
     graph: BarricadeSandbagGraph
     node: nodeSandbag
 
 # Turnstile (not sure how to make a one-way door so for now it is a glorified fence)
-
 - type: entity
   parent: CMBarricadeBase
   id: CMBarricadeTurnstile
@@ -263,9 +270,7 @@
       graph: BarricadeTurnstileGraph
       node: nodeTurnstile
 
-
 # Metal Barricade Doors
-
 - type: entity
   parent: CMBarricadeBase
   id: CMBarricadeMetalDoor
@@ -305,6 +310,13 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: AnimationPlayer
+  - type: GenericVisualizer
+    visuals:
+      enum.BarbedWireVisualLayers.Wire:
+        barbWired:
+          UnWired: { state: folding_metal_wire, visible: false }
+          WiredClosed: { state: folding_metal_closed_wire, visible: true }
+          WiredOpen: { state: folding_metal_wire, visible: true }
   - type: InteractionOutline
   - type: Door
     openSpriteState: folding_metal_closed
@@ -325,6 +337,10 @@
       path: /Audio/Items/ratchet.ogg
     closeSound:
       path: /Audio/Items/ratchet.ogg
+  - type: Barbed
+    thornsDamage:
+      types:
+        Slash: 6
   - type: Construction
     graph: BarricadeMetalDoorGraph
     node: nodeBarricadeMetalDoor
@@ -359,6 +375,13 @@
           path: /Audio/Effects/metalbreak.ogg
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.BarbedWireVisualLayers.Wire:
+        barbWired:
+          UnWired: { state: plasteel_wire, visible: false }
+          WiredClosed: { state: plasteel_closed_wire, visible: true }
+          WiredOpen: { state: plasteel_wire, visible: true }
   - type: Door
     openSpriteState: plasteel_closed
     closedSpriteState: plasteel
