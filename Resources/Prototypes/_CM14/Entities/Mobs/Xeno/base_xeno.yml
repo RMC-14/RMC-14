@@ -1,6 +1,5 @@
 ﻿- type: entity
   id: CMXenoBase
-  parent: CMEntityBase
   abstract: true
   save: false
   components:
@@ -160,7 +159,6 @@
 
 - type: entity
   abstract: true
-  parent: CMEntityBase
   id: CMXenoPrying
   components:
   - type: Tool
@@ -177,14 +175,12 @@
 
 - type: entity
   abstract: true
-  parent: CMEntityBase
   id: CMXenoPuller
   components:
   - type: Puller
 
 - type: entity
   abstract: true
-  parent: CMEntityBase
   id: CMXenoMelee
   components:
   - type: CombatMode
@@ -200,7 +196,6 @@
 
 - type: entity
   abstract: true
-  parent: CMEntityBase
   id: CMXenoLarge
   components:
   - type: Speech
@@ -229,7 +224,6 @@
 
 - type: entity
   abstract: true
-  parent: CMEntityBase
   id: CMXenoTail
   components:
   - type: XenoTailStab

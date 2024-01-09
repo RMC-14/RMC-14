@@ -1,7 +1,6 @@
 ﻿- type: entity
   id: XenoAcid
   name: corrosive acid
-  parent: CMEntityBase
   components:
   - type: Transform
     anchored: true

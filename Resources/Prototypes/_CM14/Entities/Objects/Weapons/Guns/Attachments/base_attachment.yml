@@ -1,4 +1,4 @@
 ﻿- type: entity
-  parent: [BaseItem, CMEntityBase]
+  parent: BaseItem
   abstract: true
   id: CMAttachmentBase

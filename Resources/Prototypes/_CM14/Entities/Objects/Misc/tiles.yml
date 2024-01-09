@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ FloorTileItemBase, CMEntityBase ]
+  parent: FloorTileItemBase
   id: CMTileItemBase
   abstract: true
   components:

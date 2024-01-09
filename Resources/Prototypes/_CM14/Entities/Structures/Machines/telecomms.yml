@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ TelecomServer, CMEntityBase ]
+  parent: TelecomServer
   id: CMTelecomServer
   name: telecommunication server
   description: When powered and filled with encryption keys it allows radio headset communication.

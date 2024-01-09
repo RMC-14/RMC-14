@@ -1,6 +1,6 @@
 ﻿- type: entity
   id: CMClipboard
-  parent: [BoxFolderClipboard, CMEntityBase]
+  parent: BoxFolderClipboard
   name: clipboard
   description: ""
   components:

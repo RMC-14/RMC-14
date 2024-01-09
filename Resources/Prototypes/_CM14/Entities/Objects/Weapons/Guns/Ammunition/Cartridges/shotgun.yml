@@ -1,6 +1,6 @@
 ﻿- type: entity
   abstract: true
-  parent: [BaseCartridge, CMEntityBase]
+  parent: BaseCartridge
   id: CMShellShotgunBase
   name: handful of shotgun shell
   description: A handful of rounds to reload on the go.

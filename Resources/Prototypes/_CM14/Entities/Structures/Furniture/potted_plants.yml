@@ -1,6 +1,6 @@
 ﻿# Random spawner
 - type: entity
-  parent: [PottedPlantRandom, CMEntityBase]
+  parent: PottedPlantRandom
   id: CMPottedPlantRandom
   name: random potted plant spawner
   components:
@@ -42,7 +42,7 @@
 
 # Plants
 - type: entity
-  parent: [BaseStructureDynamic, CMEntityBase]
+  parent: BaseStructureDynamic
   id: CMPottedPlantBase
   name: potted plant
   description: ""

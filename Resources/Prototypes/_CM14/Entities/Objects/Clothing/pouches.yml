@@ -1,5 +1,4 @@
 - type: entity
-  parent: [CMEntityBase, BaseStorageItem]
   id: CMPouch #i know that there are no pouches in upstream, but having "CM" helps finding that item in entity spawner
   name: abstract pouch
   description: The physical manifestation of a concept of a pouch. Woah.

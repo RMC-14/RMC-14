@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [BaseBullet, CMEntityBase]
+  parent: BaseBullet
   id: CMBulletBase
   categories:
   - hideSpawnMenu

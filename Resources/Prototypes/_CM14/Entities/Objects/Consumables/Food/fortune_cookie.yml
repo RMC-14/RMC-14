@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: [BaseItem, CMEntityBase]
+  parent: BaseItem
   id: CMFortuneCookie
   name: fortune cookie
   description: A golden brown fortune cookie. Some say the paper inside even has the ability to predict the future, whatever that means.
@@ -19,7 +19,7 @@
   - type: MREItem
 
 - type: entity
-  parent: [CMFoodBase, CMEntityBase]
+  parent: CMFoodBase
   id: CMFortuneCookieCracked
   name: broken fortune cookie
   description: A golden brown fortune cookie. Some say the paper inside even has the ability to predict the future, whatever that means.
@@ -41,7 +41,7 @@
           Quantity: 1
 
 - type: entity
-  parent: [FoodCookieFortune, CMEntityBase]
+  parent: FoodCookieFortune
   id: CMFortuneCookiePaper
   name: fortune
   components:

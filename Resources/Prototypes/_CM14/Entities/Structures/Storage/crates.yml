@@ -1,6 +1,6 @@
 # Base
 - type: entity
-  parent: [ CrateGeneric, CMEntityBase]
+  parent: CrateGeneric
   id: CMCrateBase
   name: crate
   description: A rectangular steel crate.
@@ -22,7 +22,7 @@
     state: icon
 
 - type: entity
-  parent: [ BaseStructureDynamic, CMEntityBase ]
+  parent: BaseStructureDynamic
   id: CMCrateLarge
   name: large crate
   description: A hefty wooden crate.

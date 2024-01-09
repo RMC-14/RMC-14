@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: [BaseWeaponSubMachineGun, CMEntityBase]
+  parent: BaseWeaponSubMachineGun
   name: M39 submachine gun
   id: WeaponSMGM39
   description: The Armat Battlefield Systems M-39 submachinegun. Occasionally carried by light-infantry, scouts, engineers and medics.

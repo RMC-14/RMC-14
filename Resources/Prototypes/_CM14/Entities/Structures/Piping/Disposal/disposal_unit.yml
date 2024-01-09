@@ -1,6 +1,6 @@
 ﻿- type: entity
   id: CMDisposalUnit
-  parent: [DisposalUnit, CMEntityBase]
+  parent: DisposalUnit
   name: disposal unit
   description: A pneumatic waste disposal unit.
   components:
