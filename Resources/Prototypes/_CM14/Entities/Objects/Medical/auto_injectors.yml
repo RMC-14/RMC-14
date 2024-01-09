@@ -14,7 +14,7 @@
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
   - type: Item
-    sprite: null
+    sprite: _CM14/Objects/Medical/auto_injectors.rsi
   - type: Hypospray
     solutionName: pen
     injectSound: /Audio/_CM14/Medical/hypospray.ogg
@@ -31,6 +31,8 @@
   - type: CMRefillableSolution
     solution: pen
     reagents: {}
+  - type: Tag
+    tags: []
 
 - type: entity
   parent: CMAutoInjector
@@ -80,12 +82,12 @@
     reagents:
       Tricordrazine: 30
 
-- type: entity
-  parent: CMAutoInjector
-  id: CMFirstAidrazineInjector
-  name: First-Aid auto-injector
-  description: A version of the tricordrazine auto-injector that can be used by everyone. Each use is 10 units.
-  noSpawn: true # todo cm14 remove this line when skills are added
+#- type: entity
+#  parent: CMAutoInjector
+#  id: CMFirstAidrazineInjector
+#  name: First-Aid auto-injector
+#  description: A version of the tricordrazine auto-injector that can be used by everyone. Each use is 10 units.
+#  noSpawn: true # todo cm14 remove this line when skills are added
 
 - type: entity
   parent: CMAutoInjector
@@ -121,12 +123,12 @@
     reagents:
       DexalinPlus: 30
 
-- type: entity
-  parent: CMAutoInjector
-  id: CMTramadolAutoInjector
-  name: tramadol auto-injector
-  description: An auto-injector loaded with 3 uses of tramadol, Standard issue painkiller. Each use is 10 units.
-  noSpawn: true # remove this when tramadol is added
+#- type: entity
+#  parent: CMAutoInjector
+#  id: CMTramadolAutoInjector
+#  name: tramadol auto-injector
+#  description: An auto-injector loaded with 3 uses of tramadol, Standard issue painkiller. Each use is 10 units.
+#  noSpawn: true # remove this when tramadol is added
 #  components:
 #  - type: SolutionContainerManager
 #    solutions:
@@ -139,12 +141,12 @@
 #    reagents:
 #      Tramadol: 30
 
-- type: entity
-  parent: CMTramadolAutoInjector
-  id: CMPainStopAutoInjector
-  name: Pain-Stop auto-injector
-  description: A version of the Tramadol auto-injector that can be used by everyone. Each use is 10 units.
-  noSpawn: true # todo cm14 when skills are added, this item is available to be used instantly by anyone
+#- type: entity
+#  parent: CMTramadolAutoInjector
+#  id: CMPainStopAutoInjector
+#  name: Pain-Stop auto-injector
+#  description: A version of the Tramadol auto-injector that can be used by everyone. Each use is 10 units.
+#  noSpawn: true # todo cm14 when skills are added, this item is available to be used instantly by anyone
 
 - type: entity
   parent: CMAutoInjector
@@ -197,12 +199,12 @@
     reagents:
       Inaprovaline: 30
 
-- type: entity
-  parent: CMAutoInjector
-  id: CMOxycodoneAutoInjector
-  name: Oxycodone auto-injector
-  description: An auto-injector loaded with 3 uses of oxycodone, a very strong painkiller. Each use is 10 units.
-  noSpawn: true # todo cm14 remove this when oxydone is added
+#- type: entity
+#  parent: CMAutoInjector
+#  id: CMOxycodoneAutoInjector
+#  name: Oxycodone auto-injector
+#  description: An auto-injector loaded with 3 uses of oxycodone, a very strong painkiller. Each use is 10 units.
+#  noSpawn: true # todo cm14 remove this when oxydone is added
 #  components:
 #  - type: SolutionContainerManager
 #    solutions:
