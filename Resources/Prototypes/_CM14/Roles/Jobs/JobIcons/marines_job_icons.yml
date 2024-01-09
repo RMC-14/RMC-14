@@ -24,7 +24,7 @@
   id: JobIconRifleman
   icon:
     sprite: _CM14/Interface/cm_job_icons.rsi
-    state: hudsquad #todo cm14
+    state: empty
 
 - type: statusIcon
   parent: CMJobIconBase

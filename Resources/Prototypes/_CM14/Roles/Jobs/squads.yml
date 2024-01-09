@@ -15,6 +15,7 @@
   components:
   - type: SquadTeam
     color: "#FF747E"
+    iconColor: "#E61919"
 
 - type: entity
   id: SquadBravo
@@ -22,6 +23,7 @@
   components:
   - type: SquadTeam
     color: "#A46106"
+    iconColor: "#FFC32D"
 
 - type: entity
   id: SquadCharlie
@@ -29,6 +31,7 @@
   components:
   - type: SquadTeam
     color: "#D381C9"
+    iconColor: "#C864C8"
 
 - type: entity
   id: SquadDelta
@@ -36,3 +39,4 @@
   components:
   - type: SquadTeam
     color: "#334E6D"
+    iconColor: "#828CFF"

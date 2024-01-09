@@ -12,4 +12,7 @@ public sealed partial class SquadMemberComponent : Component
 
     [DataField(required: true), AutoNetworkedField]
     public SpriteSpecifier Background;
+
+    [DataField(required: true), AutoNetworkedField]
+    public Color BackgroundColor;
 }
