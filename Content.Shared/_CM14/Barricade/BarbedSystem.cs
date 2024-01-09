@@ -1,6 +1,8 @@
 using Content.Shared._CM14.Barricade.Components;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
+using Content.Shared.Doors;
+using Content.Shared.Doors.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
@@ -28,6 +30,7 @@ public sealed class BarbedSystem : EntitySystem
         SubscribeLocalEvent<BarbedComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<BarbedComponent, BarbedDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<BarbedComponent, CutBarbedDoAfterEvent>(WireCutterOnDoAfter);
+        SubscribeLocalEvent<BarbedComponent, DoorStateChangedEvent>(OnDoorStateChanged);
     }
 
     public void OnInteractUsing(EntityUid uid, BarbedComponent component, InteractUsingEvent args)
@@ -56,7 +59,7 @@ public sealed class BarbedSystem : EntitySystem
             if (_toolSystem.HasQuality(args.Used, component.RemoveQuality, tool))
             {
                 _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-begin"), uid, args.User);
-                var wirecutterDoAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.CutTime, new Components.CutBarbedDoAfterEvent(), uid, used: args.Used)
+                var wirecutterDoAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.CutTime, new CutBarbedDoAfterEvent(), uid, used: args.Used)
                 {
                     BreakOnUserMove = true,
                     BreakOnDamage = true,
@@ -67,7 +70,7 @@ public sealed class BarbedSystem : EntitySystem
         }
     }
 
-    private void OnDoAfter(EntityUid uid, BarbedComponent component, BarbedDoAfterEvent args)
+    private void OnDoAfter(Entity<BarbedComponent> barbed, ref BarbedDoAfterEvent args)
     {
         if (args.Used == null || args.Cancelled || args.Handled)
             return;
@@ -79,12 +82,15 @@ public sealed class BarbedSystem : EntitySystem
             _stacks.Use(args.Used.Value, 1, stackComp);
         }
 
-        component.IsBarbed = true;
-        _appearance.SetData(uid, BarbedWireVisuals.Wired, true);
-        _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-insert-success"), uid, args.User);
+        barbed.Comp.IsBarbed = true;
+        Dirty(barbed);
+
+        UpdateAppearance(barbed);
+
+        _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-insert-success"), barbed.Owner, args.User);
     }
 
-    private void WireCutterOnDoAfter(EntityUid uid, BarbedComponent component, Components.CutBarbedDoAfterEvent args)
+    private void WireCutterOnDoAfter(Entity<BarbedComponent> barbed, ref CutBarbedDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled)
             return;
@@ -94,15 +100,15 @@ public sealed class BarbedSystem : EntitySystem
         if (_netManager.IsClient)
             return;
 
-        var coordinates = _transform.GetMoverCoordinates(uid);
-        EntityManager.SpawnEntity(component.Spawn, coordinates);
+        var coordinates = _transform.GetMoverCoordinates(barbed);
+        EntityManager.SpawnEntity(barbed.Comp.Spawn, coordinates);
 
-        _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-finish"), uid, args.User);
+        barbed.Comp.IsBarbed = false;
+        Dirty(barbed);
 
-        _appearance.SetData(uid, BarbedWireVisuals.Wired, false);
-        component.IsBarbed = false;
+        UpdateAppearance(barbed);
 
-        Dirty(uid, component);
+        _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-finish"), barbed.Owner, args.User);
     }
 
     private void OnAttacked(EntityUid uid, BarbedComponent component, AttackedEvent args)
@@ -112,5 +118,24 @@ public sealed class BarbedSystem : EntitySystem
             _damageableSystem.TryChangeDamage(args.User, component.ThornsDamage);
             _popupSystem.PopupClient(Loc.GetString("barbed-wire-damage"), uid, args.User, PopupType.SmallCaution);
         }
+    }
+
+    private void OnDoorStateChanged(Entity<BarbedComponent> barbed, ref DoorStateChangedEvent args)
+    {
+        UpdateAppearance(barbed);
+    }
+
+    private void UpdateAppearance(Entity<BarbedComponent> barbed)
+    {
+        var open = TryComp(barbed, out DoorComponent? door) && door.State == DoorState.Open;
+
+        var visual = (barbed.Comp.IsBarbed, open) switch
+        {
+            (true, true) => BarbedWireVisuals.WiredOpen,
+            (true, false) => BarbedWireVisuals.WiredClosed,
+            _ => BarbedWireVisuals.UnWired,
+        };
+
+        _appearance.SetData(barbed, BarbedWireVisualLayers.Wire, visual);
     }
 }

@@ -14,8 +14,7 @@ public sealed partial class BarbedComponent : Component
     [DataField(required: true)]
     public DamageSpecifier ThornsDamage = default!;
 
-    [DataField]
-    [AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public bool IsBarbed;
 
     [DataField]
@@ -25,16 +24,24 @@ public sealed partial class BarbedComponent : Component
     public ProtoId<ToolQualityPrototype> RemoveQuality = "Cutting";
 
     [DataField]
-    public float WireTime = 2.0f;
+    public TimeSpan WireTime = TimeSpan.FromSeconds(2);
 
     [DataField]
-    public float CutTime = 1.0f;
+    public TimeSpan CutTime = TimeSpan.FromSeconds(1);
+}
+
+[NetSerializable, Serializable]
+public enum BarbedWireVisualLayers : byte
+{
+    Wire,
 }
 
 [NetSerializable, Serializable]
 public enum BarbedWireVisuals : byte
 {
-    Wired,
+    UnWired,
+    WiredClosed,
+    WiredOpen,
 }
 
 [Serializable, NetSerializable]

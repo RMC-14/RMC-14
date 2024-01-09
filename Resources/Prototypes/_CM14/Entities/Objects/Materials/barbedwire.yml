@@ -35,7 +35,7 @@
       map: ["base"]
   - type: Item
   - type: Appearance
-  - type: Barbedwire
+  - type: BarbedWire
 
 - type: entity
   parent: BarbedWireBase

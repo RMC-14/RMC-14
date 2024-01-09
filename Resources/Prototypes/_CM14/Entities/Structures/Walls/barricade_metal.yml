@@ -35,10 +35,10 @@
     - state: metal
   - type: GenericVisualizer
     visuals:
-      enum.BarbedWireVisuals.Wired:
+      enum.BarbedWireVisualLayers.Wire:
         barbWired:
-          False: { state: metal_wire, visible: false }
-          True: { state: metal_wire, visible: true }
+          UnWired: { state: metal_wire, visible: false }
+          WiredClosed: { state: metal_wire, visible: true }
     drawdepth: WallTops
   - type: Damageable
     damageContainer: Inorganic
@@ -171,10 +171,10 @@
     drawdepth: WallTops
   - type: GenericVisualizer
     visuals:
-      enum.BarbedWireVisuals.Wired:
+      enum.BarbedWireVisualLayers.Wire:
         barbWired:
-          False: { state: sandbag_wire, visible: false }
-          True: { state: sandbag_wire, visible: true }
+          UnWired: { state: sandbag_wire, visible: false }
+          WiredClosed: { state: sandbag_wire, visible: true }
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: CMSandbag
@@ -220,7 +220,7 @@
   - type: Construction
     graph: BarricadeSandbagGraph
     node: nodeSandbag
-       
+
 # Turnstile (not sure how to make a one-way door so for now it is a glorified fence)
 - type: entity
   parent: CMBarricadeBase
@@ -312,10 +312,11 @@
   - type: AnimationPlayer
   - type: GenericVisualizer
     visuals:
-      enum.BarbedWireVisuals.Wired:
+      enum.BarbedWireVisualLayers.Wire:
         barbWired:
-          False: { state: folding_metal_wire, visible: false }
-          True: { state: folding_metal_wire, visible: true }
+          UnWired: { state: folding_metal_wire, visible: false }
+          WiredClosed: { state: folding_metal_closed_wire, visible: true }
+          WiredOpen: { state: folding_metal_wire, visible: true }
   - type: InteractionOutline
   - type: Door
     openSpriteState: folding_metal_closed
@@ -376,10 +377,11 @@
         acts: [ "Destruction" ]
   - type: GenericVisualizer
     visuals:
-      enum.BarbedWireVisuals.Wired:
+      enum.BarbedWireVisualLayers.Wire:
         barbWired:
-          False: { state: plasteel_wire, visible: false }
-          True: { state: plasteel_wire, visible: true }
+          UnWired: { state: plasteel_wire, visible: false }
+          WiredClosed: { state: plasteel_closed_wire, visible: true }
+          WiredOpen: { state: plasteel_wire, visible: true }
   - type: Door
     openSpriteState: plasteel_closed
     closedSpriteState: plasteel
