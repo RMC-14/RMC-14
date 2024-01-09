@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: [FireExtinguisher, CMEntityBase]
+  parent: FireExtinguisher
   id: CMFireExtinguisher
   name: fire extinguisher
   description: A traditional red fire extinguisher.

@@ -1,10 +1,4 @@
 ﻿- type: entity
-  id: CMEntityBase
-  abstract: true
-  categories:
-  - CMEntity
-
-- type: entity
   id: CMCorrodable
   abstract: true
   components:

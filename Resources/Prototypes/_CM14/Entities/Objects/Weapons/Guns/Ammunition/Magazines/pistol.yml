@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [BaseMagazinePistol, CMEntityBase]
+  parent: BaseMagazinePistol
   id: CMMagazinePistolBase
   components:
   - type: MagazineVisuals

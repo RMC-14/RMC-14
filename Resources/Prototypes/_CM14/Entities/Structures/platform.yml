@@ -1,6 +1,5 @@
 ﻿- type: entity
   abstract: true
-  parent: CMEntityBase
   id: CMPlatformBase
   name: platform
   description: A square metal surface resting on four legs.

@@ -1,6 +1,6 @@
 ﻿# TODO CM14 different light/burn chances per matchbook
 - type: entity
-  parent: [Matchbox, CMEntityBase]
+  parent: Matchbox
   id: CMMatchBook
   name: Lucky Strikes matchbook
   description: A small book of cheap paper matches. Good luck getting them to light. Made by Lucky Strikes, but you'll be anything but lucky when you burn your hand trying to light a match on this.

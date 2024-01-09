@@ -1,6 +1,5 @@
 ﻿- type: entity
   abstract: true
-  parent: CMEntityBase
   id: CMFilingCabinetBase
   description: A large cabinet with drawers.
   suffix: Empty

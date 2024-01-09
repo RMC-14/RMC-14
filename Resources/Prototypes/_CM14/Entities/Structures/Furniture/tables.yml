@@ -1,6 +1,6 @@
 # Basic
 - type: entity
-  parent: [ TableBase, CMEntityBase ]
+  parent: TableBase
   id: CMTable
   name: table
   description: A square metal surface resting on four legs. Useful to put stuff on.

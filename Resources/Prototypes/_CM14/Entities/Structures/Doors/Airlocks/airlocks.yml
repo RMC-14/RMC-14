@@ -1,6 +1,6 @@
 #
 - type: entity
-  parent: [ CMBaseDoor, CMEntityBase ]
+  parent: CMBaseDoor
   id: CMAirlock
   name: airlock
   placement:

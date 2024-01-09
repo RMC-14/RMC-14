@@ -2,7 +2,7 @@
 # TODO CM14 deny and vend states
 - type: entity
   abstract: true
-  parent: [ BaseMachinePowered, CMEntityBase ]
+  parent: BaseMachinePowered
   id: ColMarTechBase
   name: ColMarTech vendor
   components:

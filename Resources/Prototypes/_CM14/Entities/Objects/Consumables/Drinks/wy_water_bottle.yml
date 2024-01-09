@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: [DrinkWaterBottleFull, CMEntityBase]
+  parent: DrinkWaterBottleFull
   id: CMDrinkWYWaterBottle30
   name: Weyland-Yutani bottled spring water
   description: Overpriced 'Spring' water. Bottled by the Weyland-Yutani Corporation.

@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseCartridgeRifle, CMEntityBase]
+  parent: BaseCartridgeRifle
   id: CartridgeRifle10x24mm
   name: cartridge (10x24mm)
   components:

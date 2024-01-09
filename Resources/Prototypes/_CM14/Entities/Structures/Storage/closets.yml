@@ -1,6 +1,6 @@
 # Base
 - type: entity
-  parent: [ ClosetBase, CMEntityBase ]
+  parent: ClosetBase
   id: CMClosetBase
   name: closet
   description: It's a basic storage unit.
