@@ -79,3 +79,13 @@
     state: red-icon
   - type: Item
     heldPrefix: red
+
+- type: entity
+  parent: HandLabeler
+  id: CMHandLabeler
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Tools/hand_labeler.rsi
+      state: hand_labeler
+    - type: Item
+      sprite: _CM14/Objects/Tools/hand_labeler.rsi
