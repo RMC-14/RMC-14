@@ -4,7 +4,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
 using Robust.Shared.Timing;
 
-namespace Content.Server._CM14.Marines.Medical;
+namespace Content.Server._CM14.Marines.Medical.IV;
 
 public sealed class IVDripSystem : SharedIVDripSystem
 {
