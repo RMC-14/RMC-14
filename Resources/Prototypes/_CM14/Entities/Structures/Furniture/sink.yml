@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: [SinkEmpty, CMEntityBase]
+  parent: SinkEmpty
   id: CMSinkEmpty
   name: sink
   suffix: Empty

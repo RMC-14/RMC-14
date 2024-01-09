@@ -1,5 +1,4 @@
 - type: entity
-  parent: CMEntityBase
   id: CMCatwalk
   name: catwalk
   description: A catwalk for easier EVA maneuvering and cable placement.

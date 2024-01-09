@@ -1,6 +1,6 @@
 ﻿# Marines
 - type: entity
-  parent: [ClothingUniformBase, CMEntityBase]
+  parent: ClothingUniformBase
   id: JumpsuitMarine
   name: marine uniform
   description: A standard-issue Marine uniform.

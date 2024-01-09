@@ -1,7 +1,7 @@
 # Base item
 - type: entity
   abstract: true
-  parent: [BaseItem, CMEntityBase]
+  parent: BaseItem
   id: CMEncryptionKey
   name: Standard Encryption Key
   description: An encryption key for a radio headset.

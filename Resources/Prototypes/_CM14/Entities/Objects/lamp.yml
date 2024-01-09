@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: [Lamp, CMEntityBase]
+  parent: Lamp
   id: CMLamp
   name: desk lamp
   description: A desk lamp with an adjustable mount.

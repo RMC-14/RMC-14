@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseMagazineRifle, CMEntityBase]
+  parent: BaseMagazineRifle
   id: MagazineRifleM41A
   name: "M41A magazine (10x24mm)"
   components:
@@ -55,7 +55,7 @@
   - type: Appearance
 
 - type: entity
-  parent: [BaseMagazineRifle, CMEntityBase]
+  parent: BaseMagazineRifle
   id: MagazineRifleM4RA
   name: "M4RA magazine (10x24mm)"
   components:

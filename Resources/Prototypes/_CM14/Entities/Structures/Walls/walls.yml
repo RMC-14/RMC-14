@@ -1,7 +1,7 @@
 # BaseWall
 - type: entity
   abstract: true
-  parent: [BaseStructure, CMEntityBase]
+  parent: BaseStructure
   id: CMBaseWall
   description: A huge chunk of metal used to separate rooms.
   placement:

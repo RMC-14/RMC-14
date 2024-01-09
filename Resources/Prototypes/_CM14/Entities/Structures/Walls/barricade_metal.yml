@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseStructure, CMEntityBase]
+  parent: BaseStructureDynamic
   abstract: true
   id: CMBarricadeBase
   components:

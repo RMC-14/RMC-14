@@ -1,5 +1,5 @@
 - type: entity
   save: false
-  parent: [BaseMobHuman, CMEntityBase]
+  parent: BaseMobHuman
   id: CMMobHuman
   name: Urist McCMHands

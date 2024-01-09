@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [BaseItem, CMEntityBase]
+  parent: BaseItem
   id: CMSheetMetalBase
   description: A sheet of metal, used often on the station in various applications.
   components:

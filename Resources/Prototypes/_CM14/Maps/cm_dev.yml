@@ -11,6 +11,6 @@
         mapNameTemplate: "Dev"
       - type: StationJobs
         overflowJobs:
-        - SeniorEnlistedAdvisor
+        - CommandingOfficer
         availableJobs:
-          SeniorEnlistedAdvisor: [ -1, -1 ]
+          CommandingOfficer: [ -1, -1 ]

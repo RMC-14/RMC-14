@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: [BaseWindoor, CMEntityBase]
+  parent: BaseWindoor
   id: CMWindoor
   name: glass door
   description: A window, that is also a door. A windoor if you will.
@@ -31,7 +31,7 @@
     - board
 
 - type: entity
-  parent: [BaseSecureWindoor, CMEntityBase]
+  parent: BaseSecureWindoor
   id: CMWindoorSecure
   name: secure glass door
   description: A thick chunk of tempered glass on metal track. Probably more robust than you.

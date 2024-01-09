@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: [Poweredlight, CMEntityBase]
+  parent: Poweredlight
   id: CMLightFixture
   name: light fixture
   description: A lighting fixture that is fitted with a bright fluorescent light tube. Looking at it for too long makes your eyes go watery.
@@ -19,7 +19,7 @@
       Burned: tube-burned
 
 - type: entity
-  parent: [Poweredlight, CMEntityBase]
+  parent: Poweredlight
   id: CMLightBulb
   name: light fixture
   description: A small lighting fixture that is fitted with a bright fluorescent light bulb. Looking at it for too long makes your eyes go watery.
