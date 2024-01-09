@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/ece160ae415a0ffd2392584fce0a1c43f6b2cf10/icons/obj/structures/props/plants.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "applebush"
+    },
+    {
+      "name": "pottedplant_1"
+    },
+    {
+      "name": "pottedplant_2"
+    },
+    {
+      "name": "pottedplant_3"
+    },
+    {
+      "name": "pottedplant_4"
+    },
+    {
+      "name": "pottedplant_5"
+    },
+    {
+      "name": "pottedplant_6"
+    },
+    {
+      "name": "pottedplant_7"
+    },
+    {
+      "name": "pottedplant_8"
+    },
+    {
+      "name": "pottedplant_9"
+    },
+    {
+      "name": "pottedplant_10"
+    },
+    {
+      "name": "pottedplant_11"
+    },
+    {
+      "name": "pottedplant_12"
+    },
+    {
+      "name": "pottedplant_13"
+    },
+    {
+      "name": "pottedplant_14"
+    },
+    {
+      "name": "pottedplant_15"
+    },
+    {
+      "name": "pottedplant_16"
+    },
+    {
+      "name": "pottedplant_17"
+    },
+    {
+      "name": "pottedplant_18"
+    },
+    {
+      "name": "pottedplant_19"
+    },
+    {
+      "name": "pottedplant_20"
+    },
+    {
+      "name": "pottedplant_21"
+    },
+    {
+      "name": "pottedplant_22"
+    },
+    {
+      "name": "pottedplant_23"
+    },
+    {
+      "name": "pottedplant_24"
+    },
+    {
+      "name": "pottedplant_25"
+    },
+    {
+      "name": "pottedplant_26"
+    },
+    {
+      "name": "pottedplant_27"
+    },
+    {
+      "name": "pottedplant_28"
+    },
+    {
+      "name": "pottedplant_29"
+    },
+    {
+      "name": "pottedplant_30"
+    }
+  ]
+}
