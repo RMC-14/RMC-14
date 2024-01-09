@@ -1,4 +1,5 @@
 ﻿- type: entity
+  abstract: true
   parent: ChemicalMedipen
   id: CMAutoInjector
   name: auto-injector
@@ -27,6 +28,9 @@
     fillBaseName: autoinjector
     emptySpriteName: autoinjector
     changeColor: true
+  - type: CMRefillableSolution
+    solution: pen
+    reagents: {}
 
 - type: entity
   parent: CMAutoInjector
@@ -72,6 +76,9 @@
         reagents:
         - ReagentId: Tricordrazine
           Quantity: 30
+  - type: CMRefillableSolution
+    reagents:
+      Tricordrazine: 30
 
 - type: entity
   parent: CMAutoInjector
@@ -93,6 +100,9 @@
         reagents:
         - ReagentId: Kelotane
           Quantity: 30
+  - type: CMRefillableSolution
+    reagents:
+      Kelotane: 30
 
 - type: entity
   parent: CMAutoInjector
@@ -107,6 +117,9 @@
         reagents:
         - ReagentId: DexalinPlus
           Quantity: 30
+  - type: CMRefillableSolution
+    reagents:
+      DexalinPlus: 30
 
 - type: entity
   parent: CMAutoInjector
@@ -122,6 +135,9 @@
 #        reagents:
 #        - ReagentId: Tramadol todo cm14
 #          Quantity: 30
+#  - type: CMRefillableSolution
+#    reagents:
+#      Tramadol: 30
 
 - type: entity
   parent: CMTramadolAutoInjector
@@ -143,6 +159,9 @@
         reagents:
         - ReagentId: Dylovene
           Quantity: 30
+  - type: CMRefillableSolution
+    reagents:
+      Dylovene: 30
 
 - type: entity
   parent: CMAutoInjector
@@ -157,6 +176,9 @@
         reagents:
         - ReagentId: Bicaridine
           Quantity: 30
+  - type: CMRefillableSolution
+    reagents:
+      Bicaridine: 30
 
 - type: entity
   parent: CMAutoInjector
@@ -171,6 +193,9 @@
         reagents:
         - ReagentId: Inaprovaline
           Quantity: 30
+  - type: CMRefillableSolution
+    reagents:
+      Inaprovaline: 30
 
 - type: entity
   parent: CMAutoInjector
@@ -186,3 +211,6 @@
 #        reagents:
 #        - ReagentId: Oxycodone
 #          Quantity: 30
+#  - type: CMRefillableSolution
+#    reagents:
+#      Oxycodone: 30
