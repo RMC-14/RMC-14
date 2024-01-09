@@ -23,6 +23,7 @@ using Content.Shared.Speech.EntitySystems;
 using Robust.Server.Audio;
 using Robust.Shared.GameObjects;
 using Content.Server.Forensics;
+using Content.Shared._CM14.Marines.Medical.Stasis;
 
 namespace Content.Server.Body.Systems;
 
@@ -94,6 +95,11 @@ public sealed class BloodstreamSystem : EntitySystem
                 continue;
 
             bloodstream.AccumulatedFrametime -= bloodstream.UpdateInterval;
+
+            var ev = new BloodstreamMetabolizeAttemptEvent();
+            RaiseLocalEvent(uid, ref ev);
+            if (!ev.Cancelled)
+                continue;
 
             // Adds blood to their blood level if it is below the maximum; Blood regeneration. Must be alive.
             if (bloodstream.BloodSolution.Volume < bloodstream.BloodSolution.MaxVolume && !_mobStateSystem.IsDead(uid))

@@ -26,6 +26,33 @@
   id: CMMortarShell
 
 - type: Tag
+  id: CMBloodPack
+
+- type: Tag
+  id: CMGauze
+
+- type: Tag
+  id: CMOintment
+
+- type: Tag
+  id: CMFirstAidKit
+
+- type: Tag
+  id: CMSynthGraft
+
+- type: Tag
+  id: CMSurgicalLine
+
+- type: Tag
+  id: CMPillCanister
+
+- type: Tag
+  id: CMBurnKit
+
+- type: Tag
+  id: CMTraumaKit
+
+- type: Tag
   id: Pouch
 
 - type: Tag

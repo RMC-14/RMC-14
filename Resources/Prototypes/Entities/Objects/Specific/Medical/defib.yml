@@ -33,6 +33,13 @@
     - type: Speech
       speechVerb: Robotic
     - type: Defibrillator
+      zapSound: /Audio/_CM14/Medical/defib_release.ogg
+      powerOnSound: /Audio/_CM14/Medical/defib_SafetyOn.ogg
+      powerOffSound: /Audio/_CM14/Medical/defib_safetyOff.ogg
+      chargeSound: /Audio/_CM14/Medical/defib_charge.ogg
+      failureSound: /Audio/_CM14/Medical/defib_failed.ogg
+      successSound: /Audio/_CM14/Medical/defib_success.ogg
+      readySound: /Audio/_CM14/Medical/defib_ready.ogg
       zapHeal:
         types:
           Asphyxiation: -40

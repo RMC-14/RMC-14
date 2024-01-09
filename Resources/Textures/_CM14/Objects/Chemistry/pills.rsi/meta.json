@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/c268b16daf2e8da819958cdc7d02e7f906c370cd/icons/obj/items/chemistry.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "pill"
+    },
+    {
+      "name": "pill1"
+    },
+    {
+      "name": "pill2"
+    },
+    {
+      "name": "pill3"
+    },
+    {
+      "name": "pill4"
+    },
+    {
+      "name": "pill5"
+    },
+    {
+      "name": "pill6"
+    },
+    {
+      "name": "pill7"
+    },
+    {
+      "name": "pill8"
+    },
+    {
+      "name": "pill9"
+    },
+    {
+      "name": "pill10"
+    },
+    {
+      "name": "pill11"
+    },
+    {
+      "name": "pill12"
+    },
+    {
+      "name": "pill13"
+    },
+    {
+      "name": "pill14"
+    },
+    {
+      "name": "pill15"
+    },
+    {
+      "name": "pill16"
+    },
+    {
+      "name": "pill17"
+    },
+    {
+      "name": "pill18"
+    },
+    {
+      "name": "pill19"
+    },
+    {
+      "name": "pill20"
+    },
+    {
+      "name": "pill21"
+    }
+  ]
+}
