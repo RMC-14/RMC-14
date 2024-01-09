@@ -2,7 +2,7 @@
   id: Reptilian
   name: species-name-reptilian
   roundStart: true
-  prototype: MobReptilian
+  prototype: CMMobReptilian
   sprites: MobReptilianSprites
   defaultSkinTone: "#34a223"
   markingLimits: MobReptilianMarkingLimits

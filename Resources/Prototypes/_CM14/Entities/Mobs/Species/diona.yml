@@ -1,0 +1,11 @@
+# No base mob defined, nothing changed about basemob
+
+# Mob in the sandbox menu and used when a player spawns
+- type: entity
+  save: false
+  name: Urist C.M McPlants
+  parent: MobDiona
+  id: CMMobDiona
+  suffix: CM14
+  components:
+  - type: Marine

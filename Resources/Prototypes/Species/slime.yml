@@ -2,7 +2,7 @@
   id: SlimePerson
   name: species-name-slime
   roundStart: true
-  prototype: MobSlimePerson
+  prototype: CMMobSlimePerson
   sprites: MobSlimeSprites
   defaultSkinTone: "#b8b8b8"
   markingLimits: MobSlimeMarkingLimits
