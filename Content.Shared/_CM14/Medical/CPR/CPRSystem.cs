@@ -1,4 +1,5 @@
 using Content.Shared._CM14.Marines;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
@@ -45,8 +46,7 @@ public sealed class CPRSystem : EntitySystem
         SubscribeLocalEvent<MobStateComponent, ReceiveCPRAttemptEvent>(OnMobStateCPRAttempt);
 
         SubscribeLocalEvent<InventoryComponent, ReceiveCPRAttemptEvent>(_inventory.RelayEvent);
-        // TODO CM14 pending PR upstream https://github.com/space-wizards/space-station-14/pull/22395
-        // SubscribeLocalEvent<MaskComponent, ReceiveCPRAttemptEvent(OnMaskCPRAttempt);
+        SubscribeLocalEvent<MaskComponent, ReceiveCPRAttemptEvent>(OnMaskCPRAttempt);
     }
 
     private void OnMarineInteractHand(Entity<MarineComponent> ent, ref InteractHandEvent args)
@@ -159,6 +159,12 @@ public sealed class CPRSystem : EntitySystem
             // TODO CM14 extend revivable time after death, upstream this is rotting, downstream it needs to be different
             args.Cancelled = true;
         }
+    }
+
+    private void OnMaskCPRAttempt(Entity<MaskComponent> ent, ref ReceiveCPRAttemptEvent args)
+    {
+        if (ent.Comp.IsToggled)
+            args.Cancelled = true;
     }
 
     private bool CanCPRPopup(EntityUid performer, EntityUid target, bool start, out FixedPoint2 damage)
