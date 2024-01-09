@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/256d75e9420a19e4407318f81d9761c5ac3ac4cc/icons/obj/structures/props/misc.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "chestdrawer"
+    },
+    {
+      "name": "chestdrawer-open"
+    },
+    {
+      "name": "tallcabinet"
+    },
+    {
+      "name": "tallcabinet-open"
+    },
+    {
+      "name": "chestdrawerwood"
+    },
+    {
+      "name": "chestdrawerwood-open"
+    },
+    {
+      "name": "tallcabinetwood"
+    },
+    {
+      "name": "tallcabinetwood-open"
+    },
+    {
+      "name": "filingcabinet"
+    },
+    {
+      "name": "filingcabinet-open"
+    }
+  ]
+}

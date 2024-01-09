@@ -11,7 +11,7 @@
       - !type:SnapToGrid
         southRotation: true
       steps:
-      - material: Steel
+      - material: CMSteel
         amount: 5
         doAfter: 5
 
@@ -21,7 +21,7 @@
     - to: start
       completed:
         - !type:SpawnPrototype
-          prototype: SheetSteel1
+          prototype: CMSheetSteel1
           amount: 4
         - !type:DeleteEntity
       conditions:

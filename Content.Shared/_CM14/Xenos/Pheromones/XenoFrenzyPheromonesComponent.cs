@@ -1,5 +1,7 @@
-﻿using Content.Shared.FixedPoint;
+﻿using Content.Shared.Damage.Prototypes;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using static Robust.Shared.Utility.SpriteSpecifier;
 
@@ -14,4 +16,16 @@ public sealed partial class XenoFrenzyPheromonesComponent : Component
 
     [DataField]
     public FixedPoint2 Multiplier;
+
+    [DataField]
+    public float AttackDamageModifier = 1.1f;
+
+    [DataField]
+    public FixedPoint2 MovementSpeedModifier = 0.1;
+
+    [DataField]
+    public List<ProtoId<DamageTypePrototype>> DamageTypes = new () { "Blunt", "Slash", "Piercing" };
+
+
+    public override bool SessionSpecific => true;
 }

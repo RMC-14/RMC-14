@@ -1,0 +1,35 @@
+- type: entity
+  id: ActionMarineFocus
+  parent: ActionMarineBase
+  name: Focus!
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/marine_actions.rsi
+      state: focus
+    event: !type:FocusActionEvent
+
+- type: entity
+  id: ActionMarineHold
+  parent: ActionMarineBase
+  name: Hold!
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/marine_actions.rsi
+      state: hold
+    event: !type:HoldActionEvent
+
+- type: entity
+  id: ActionMarineMove
+  parent: ActionMarineBase
+  name: Move!
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/marine_actions.rsi
+      state: move
+    event: !type:MoveActionEvent

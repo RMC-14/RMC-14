@@ -6,7 +6,6 @@ using Content.Client.UserInterface.Systems.Hotbar.Widgets;
 using Content.Shared.Cooldown;
 using Content.Shared.Hands.Components;
 using Content.Shared.Input;
-using Robust.Client.GameObjects;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
@@ -399,7 +398,7 @@ public sealed class HandsUIController : UIController, IOnStateEntered<GameplaySt
                     cooldown is not { CooldownStart: { } start, CooldownEnd: { } end})
                 {
                     hand.CooldownDisplay.Visible = false;
-                    return;
+                    continue;
                 }
 
                 hand.CooldownDisplay.Visible = true;

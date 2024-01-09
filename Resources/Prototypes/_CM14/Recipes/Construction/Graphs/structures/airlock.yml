@@ -9,7 +9,7 @@
       - !type:SetAnchor
         value: false
       steps:
-      - material: Steel
+      - material: CMSteel
         amount: 4
         doAfter: 2
 
@@ -32,7 +32,7 @@
         anchored: false
       completed:
       - !type:SpawnPrototype
-        prototype: SheetSteel1
+        prototype: CMSheetSteel1
         amount: 4
       - !type:DeleteEntity {}
       steps:

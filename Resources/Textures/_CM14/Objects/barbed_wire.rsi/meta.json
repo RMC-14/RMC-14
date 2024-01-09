@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "cmss13 at facf5a7a8a334509e937bf70379ba834140d2bad/icons/obj/items/marine-items.dmi, stack sprites created by thymol-blue",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "barbed_wire"
+    },
+    {
+      "name": "barbed_wire_2"
+    },
+    {
+      "name": "barbed_wire_3"
+    }
+  ]
+}

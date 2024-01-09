@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7cb618c69b75873f3ce893022fe08d1233b3152d/icons/obj/items/weapons/guns/attachments/rail.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "flashlight"
+    },
+    {
+      "name": "flashlight-on"
+    },
+    {
+      "name": "reddot"
+    },
+    {
+      "name": "reflex"
+    },
+    {
+      "name": "magnetic"
+    },
+    {
+      "name": "iffbarrel"
+    },
+    {
+      "name": "miniscope"
+    },
+    {
+      "name": "sniperscope"
+    },
+    {
+      "name": "miniscope_nsg23"
+    },
+    {
+      "name": "rxfm5_eva_scope"
+    },
+    {
+      "name": "flashlight_a"
+    },
+    {
+      "name": "flashlight_a-on"
+    },
+    {
+      "name": "reddot_a"
+    },
+    {
+      "name": "reflex_a"
+    },
+    {
+      "name": "magnetic_a"
+    },
+    {
+      "name": "iffbarrel_a"
+    },
+    {
+      "name": "miniscope_a"
+    },
+    {
+      "name": "sniperscope_a"
+    },
+    {
+      "name": "miniscope_nsg23_a"
+    },
+    {
+      "name": "rxfm5_eva_scope_a"
+    },
+    {
+      "name": "slavicscope"
+    },
+    {
+      "name": "boomslang-scope"
+    },
+    {
+      "name": "s_boomslang-scope"
+    },
+    {
+      "name": "u_boomslang-scope"
+    },
+    {
+      "name": "c_boomslang-scope"
+    },
+    {
+      "name": "d_boomslang-scope"
+    },
+    {
+      "name": "huntingscope"
+    },
+    {
+      "name": "vulture_scope"
+    },
+    {
+      "name": "d_vulture_scope"
+    },
+    {
+      "name": "s_vulture_scope"
+    },
+    {
+      "name": "c_vulture_scope"
+    },
+    {
+      "name": "u_vulture_scope"
+    },
+    {
+      "name": "miniscope_fp9000"
+    },
+    {
+      "name": "miniscope_fp9000_a"
+    },
+    {
+      "name": "scope"
+    },
+    {
+      "name": "scope2"
+    },
+    {
+      "name": "pmcscope"
+    },
+    {
+      "name": "autoloader"
+    },
+    {
+      "name": "autoloader_a"
+    },
+    {
+      "name": "collisight"
+    },
+    {
+      "name": "collisight_a"
+    }
+  ]
+}

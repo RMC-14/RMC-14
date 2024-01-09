@@ -1,0 +1,12 @@
+﻿<cc:CMAutomatedVendorEntry
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client._CM14.Vendors"
+    HorizontalExpand="True">
+    <BoxContainer Orientation="Horizontal">
+        <TextureRect Name="Texture" Access="Public"
+                     HorizontalExpand="False" VerticalExpand="False" />
+        <Label Name="Amount" Access="Public" MinWidth="30" Align="Center" />
+        <cc:CMAutomatedVendorPanel Name="Panel" Access="Public" />
+        <Button Text="?" Name="TooltipLabel" Access="Public" ModulateSelfOverride="#00000000" />
+    </BoxContainer>
+</cc:CMAutomatedVendorEntry>

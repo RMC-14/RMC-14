@@ -1,0 +1,101 @@
+# BASE
+
+- type: reagent
+  parent: BaseSoda
+  id: CMSodaBase
+  abstract: true
+
+# SOUTO
+
+- type: reagent
+  parent: CMSodaBase
+  id: CMSodaSoutoClassic
+  name: reagent-name-souto-classic
+  desc: reagent-desc-souto-classic
+  physicalDesc: reagent-physical-desc-fizzy
+  flavor: soda
+  color: "#802b00"
+
+- type: reagent
+  parent: CMSodaBase
+  id: CMSodaSoutoCherry
+  name: reagent-name-souto-cherry
+  desc: reagent-desc-souto-cherry
+  physicalDesc: reagent-physical-desc-fizzy
+  flavor: soda
+  color: "#800000"
+
+- type: reagent
+  parent: CMSodaBase
+  id: CMSodaSoutoLime
+  name: reagent-name-souto-lime
+  desc: reagent-desc-souto-lime
+  physicalDesc: reagent-physical-desc-fizzy
+  flavor: soda
+  color: "#421C52"
+
+- type: reagent
+  parent: CMSodaBase
+  id: CMSodaSoutoGrape
+  name: reagent-name-souto-grape
+  desc: reagent-desc-souto-grape
+  physicalDesc: reagent-physical-desc-fizzy
+  flavor: soda
+  color: "#421C52"
+
+- type: reagent
+  parent: CMSodaBase
+  id: CMSodaSoutoBlue
+  name: reagent-name-souto-blue
+  desc: reagent-desc-souto-blue
+  physicalDesc: reagent-physical-desc-fizzy
+  flavor: soda
+  color: "#005B96"
+
+- type: reagent
+  parent: CMSodaBase
+  id: CMSodaSoutoPeach
+  name: reagent-name-souto-peach
+  desc: reagent-desc-souto-peach
+  physicalDesc: reagent-physical-desc-fizzy
+  flavor: soda
+  color: "#FFE5B4"
+
+- type: reagent
+  parent: CMSodaBase
+  id: CMSodaSoutoCranberry
+  name: reagent-name-souto-cranberry
+  desc: reagent-desc-souto-cranberry
+  physicalDesc: reagent-physical-desc-fizzy
+  flavor: soda
+  color: "#950714"
+
+- type: reagent
+  parent: CMSodaBase
+  id: CMSodaSoutoVanilla
+  name: reagent-name-souto-vanilla
+  desc: reagent-desc-souto-vanilla
+  physicalDesc: reagent-physical-desc-fizzy
+  flavor: soda
+  color: "#F9E5BC"
+
+- type: reagent
+  parent: CMSodaBase
+  id: CMSodaSoutoPineapple
+  name: reagent-name-souto-pineapple
+  desc: reagent-desc-souto-pineapple
+  physicalDesc: reagent-physical-desc-fizzy
+  flavor: soda
+  color: "#FEEB75"
+
+# OTHER
+
+- type: reagent
+  parent: CMSodaBase
+  id: CMSodaFruitBeer
+  name: reagent-name-fruit-beer
+  desc: reagent-desc-fruit-beer
+  physicalDesc: reagent-physical-desc-fizzy
+  flavor: soda
+  color: "#100800"
+

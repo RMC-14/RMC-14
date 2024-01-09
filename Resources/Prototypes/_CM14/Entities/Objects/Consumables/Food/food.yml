@@ -1,0 +1,12 @@
+﻿- type: entity
+  abstract: true
+  parent: [BaseItem, CMEntityBase]
+  id: CMFoodBase
+  components:
+  - type: Food
+    transferAmount: 5
+  - type: Item
+    size: Small
+  - type: FlavorProfile
+    flavors:
+    - nutriment

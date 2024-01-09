@@ -31,7 +31,7 @@ public sealed class CMAdminEui : BaseEui
     private readonly SharedTransformSystem _transform;
     private readonly XenoSystem _xeno;
 
-    private readonly NetEntity _target;
+    private NetEntity _target;
 
     public CMAdminEui(EntityUid target)
     {
@@ -99,40 +99,44 @@ public sealed class CMAdminEui : BaseEui
             }
             case CMAdminTransformHumanoidMessage transformHumanoid:
             {
-                if (Player.AttachedEntity is not { } player)
+                if (_entities.GetEntity(_target) is not { Valid: true } entity)
                     break;
 
                 var profile = HumanoidCharacterProfile.RandomWithSpecies(transformHumanoid.SpeciesId);
-                var coordinates = _transform.GetMoverCoordinates(player);
+                var coordinates = _transform.GetMoverCoordinates(entity);
                 var humanoid = _stationSpawning.SpawnPlayerMob(coordinates, null, profile, null);
                 var startingGear = _prototypes.Index<StartingGearPrototype>(DefaultHumanoidGear);
                 _stationSpawning.EquipStartingGear(humanoid, startingGear, profile);
 
-                if (_mind.TryGetMind(player, out var mindId, out var mind))
+                if (_mind.TryGetMind(entity, out var mindId, out var mind))
                 {
                     _mind.TransferTo(mindId, humanoid, mind: mind);
                     _mind.UnVisit(mindId, mind);
                 }
 
-                _entities.DeleteEntity(player);
+                _entities.DeleteEntity(entity);
                 _entities.EnsureComponent<MarineComponent>(humanoid);
+                _target = _entities.GetNetEntity(humanoid);
+                StateDirty();
                 break;
             }
             case CMAdminTransformXenoMessage transformXeno:
             {
-                if (Player.AttachedEntity is not { } player)
+                if (_entities.GetEntity(_target) is not { Valid: true } entity)
                     break;
 
-                var coordinates = _transform.GetMoverCoordinates(player);
+                var coordinates = _transform.GetMoverCoordinates(entity);
                 var newXeno = _entities.SpawnAttachedTo(transformXeno.XenoId, coordinates);
 
-                if (_mind.TryGetMind(player, out var mindId, out var mind))
+                if (_mind.TryGetMind(entity, out var mindId, out var mind))
                 {
                     _mind.TransferTo(mindId, newXeno, mind: mind);
                     _mind.UnVisit(mindId, mind);
                 }
 
-                _entities.DeleteEntity(player);
+                _entities.DeleteEntity(entity);
+                _target = _entities.GetNetEntity(newXeno);
+                StateDirty();
                 break;
             }
         }

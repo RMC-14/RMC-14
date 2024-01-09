@@ -11,10 +11,10 @@
   id: MagazineCaselessM39
 
 - type: Tag
-  id: MagazinePistolM4A3
+  id: CMMagazinePistolM4A3
 
 - type: Tag
-  id: MagazineRifleM41
+  id: MagazineRifleM41A
 
 - type: Tag
   id: MagazineRifleM41AE2
@@ -54,3 +54,9 @@
 
 - type: Tag
   id: Pouch
+
+- type: Tag
+  id: CMShellShotgun
+
+- type: Tag
+  id: CMMagazinePistol88m4AP

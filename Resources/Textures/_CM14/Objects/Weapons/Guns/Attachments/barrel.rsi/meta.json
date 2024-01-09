@@ -1,0 +1,210 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/4047c473d4d2f3e58e68efdec5aa95d0676bf4d1/icons/obj/items/weapons/guns/attachments/barrel.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bayonet"
+    },
+    {
+      "name": "upp_bayonet"
+    },
+    {
+      "name": "co2_knife"
+    },
+    {
+      "name": "co2_knife-f"
+    },
+    {
+      "name": "hbarrel",
+      "delays": [
+        [
+          0.2,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "comp"
+    },
+    {
+      "name": "ebarrel"
+    },
+    {
+      "name": "suppressor"
+    },
+    {
+      "name": "bayonet_a"
+    },
+    {
+      "name": "upp_bayonet_a"
+    },
+    {
+      "name": "co2_bayonet_a"
+    },
+    {
+      "name": "co2_bayonet-f_a"
+    },
+    {
+      "name": "hbarrel_a",
+      "delays": [
+        [
+          0.2,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "comp_a"
+    },
+    {
+      "name": "ebarrel_a"
+    },
+    {
+      "name": "suppressor_a"
+    },
+    {
+      "name": "suppressor2_a"
+    },
+    {
+      "name": "m56_barrel"
+    },
+    {
+      "name": "m56c_barrel"
+    },
+    {
+      "name": "smartbarrel"
+    },
+    {
+      "name": "slavicstock"
+    },
+    {
+      "name": "slavicbarrel"
+    },
+    {
+      "name": "sniperbarrel"
+    },
+    {
+      "name": "m60barrel"
+    },
+    {
+      "name": "mar50barrel"
+    },
+    {
+      "name": "mateba_short"
+    },
+    {
+      "name": "mateba_short_a"
+    },
+    {
+      "name": "mateba_medium"
+    },
+    {
+      "name": "mateba_medium_a"
+    },
+    {
+      "name": "mateba_long"
+    },
+    {
+      "name": "mateba_long_a"
+    },
+    {
+      "name": "m40sd_suppressor"
+    },
+    {
+      "name": "m40sd_suppressor_a"
+    },
+    {
+      "name": "m4ra_barrel"
+    },
+    {
+      "name": "d_m4ra_barrel"
+    },
+    {
+      "name": "c_m4ra_barrel"
+    },
+    {
+      "name": "s_m4ra_barrel"
+    },
+    {
+      "name": "u_m4ra_barrel"
+    },
+    {
+      "name": "m4ra_custom_barrel"
+    },
+    {
+      "name": "s_m4ra_custom_barrel"
+    },
+    {
+      "name": "d_m4ra_custom_barrel"
+    },
+    {
+      "name": "u_m4ra_custom_barrel"
+    },
+    {
+      "name": "c_m4ra_custom_barrel"
+    },
+    {
+      "name": "m4ra_barrel_a"
+    },
+    {
+      "name": "d_m4ra_barrel_a"
+    },
+    {
+      "name": "c_m4ra_barrel_a"
+    },
+    {
+      "name": "s_m4ra_barrel_a"
+    },
+    {
+      "name": "u_m4ra_barrel_a"
+    },
+    {
+      "name": "m4ra_custom_barrel_a"
+    },
+    {
+      "name": "s_m4ra_custom_barrel_a"
+    },
+    {
+      "name": "d_m4ra_custom_barrel_a"
+    },
+    {
+      "name": "u_m4ra_custom_barrel_a"
+    },
+    {
+      "name": "c_m4ra_custom_barrel_a"
+    },
+    {
+      "name": "uppmg_barrel"
+    },
+    {
+      "name": "type73_suppressor"
+    },
+    {
+      "name": "type88_barrel"
+    },
+    {
+      "name": "aug_mkey_barrel_a"
+    },
+    {
+      "name": "aug_dmr_barrel_a"
+    },
+    {
+      "name": "magsg_barrel_a"
+    },
+    {
+      "name": "vulture_barrel"
+    },
+    {
+      "name": "pmc_sniperbarrel"
+    }
+  ]
+}

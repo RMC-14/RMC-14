@@ -1,0 +1,5 @@
+- type: entity
+  id: ActionMarineBase
+  parent: CMEntityBase
+  categories:
+  - hideSpawnMenu

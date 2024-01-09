@@ -1,41 +1,5 @@
 - type: entity
   parent: [ VendingMachine, CMEntityBase]
-  id: ColMarTechWeapons
-  name: ColMarTech brand gun storage rack
-  description: It costs four hundred thousand dollars to dispense weapons for 12 seconds.
-  components:
-  - type: VendingMachine
-    pack: ColMarTechWeapons
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-  - type: Sprite
-    sprite: _CM14/Structures/Machines/VendingMachines/colmartechweapons.rsi
-    layers:
-    - state: "off"
-      map: ["enum.VendingMachineVisualLayers.Base"]
-
-- type: entity
-  parent: [ VendingMachine, CMEntityBase]
-  id: ColMarTechEquipment
-  name: ColMarTech brand equipment rack
-  description: Armor Class Non-Zero
-  components:
-  - type: VendingMachine
-    pack: ColMarTechEquipment
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-  - type: Sprite
-    sprite: _CM14/Structures/Machines/VendingMachines/colmartechequipment.rsi
-    layers:
-    - state: "off"
-      map: ["enum.VendingMachineVisualLayers.Base"]
-
-- type: entity
-  parent: [ VendingMachine, CMEntityBase]
   id: CMVendor
   name: Vendomat
   description: A generic vending machine.
@@ -237,17 +201,6 @@
 
 - type: entity
   parent: CMVendorMedical
-  id: CMVendorMarineMedical
-  name: ColMarTech MarineMed
-  description: Medical Pharmaceutical dispenser with basic medical supplies for marines.
-  components:
-  - type: Sprite
-    sprite: _CM14/Structures/Machines/VendingMachines/marine_med.rsi
-  - type: VendingMachine
-    pack: CMVendorMarineMedical
-
-- type: entity
-  parent: CMVendorMedical
   id: CMVendorBlood
   name: MM Blood Dispenser
   description: The Marine Med Brand Blood Pack Dispensary is the premier, top-of-the-line blood dispenser of 2105! Get yours today! #dont update year, that`s a joke from cm13
@@ -256,19 +209,6 @@
     sprite: _CM14/Structures/Machines/VendingMachines/blood.rsi
   - type: VendingMachine
     pack: CMVendorBlood
-
-- type: entity
-  parent: CMVendor
-  id: CMVendorMarineFood
-  name: ColMarTech Food Vendor
-  description: USCM Food Vendor, containing standard military Prepared Meals.
-  components:
-  - type: Sprite
-    sprite: _CM14/Structures/Machines/VendingMachines/marine_food.rsi
-  - type: VendingMachine
-    pack: CMVendorMarineFood
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
 
 - type: entity
   parent: CMVendor
@@ -310,17 +250,6 @@
     ejectState: eject-unshaded
   - type: AccessReader
     access: [["CMAccessEngineering"], ["CMAccessColonyEngineering"]]
-
-- type: entity
-  parent: CMVendorTool
-  id: CMVendorToolComTech
-  name: ColMarTech Squad ComTech Tools Vendor
-  description: A vending machine that stores various extra tools that are useful on the field.
-  components:
-  - type: VendingMachine
-    pack: CMVendorToolComTech
-  - type: AccessReader
-    access: [["CMAccessCombatTechPrep"]]
 
 - type: entity
   parent: CMVendorTool

@@ -241,7 +241,7 @@
     whitelist:
       tags: #this gonna be hell
       - MagazineCaselessM39
-      - MagazineRifleM41
+      - MagazineRifleM41A
       - MagazineRifleM41AE2
       - MagazineRifleM4RA
 
@@ -270,7 +270,7 @@
     - 0,0,3,1 #3 slots
     whitelist:
       tags:
-      - MagazinePistolM4A3
+      - CMMagazinePistolM4A3
       - SpeedLoaderMagnum
 
 - type: entity
