@@ -18,10 +18,10 @@ public sealed class IVDripSystem : SharedIVDripSystem
         var query = EntityQueryEnumerator<IVDripComponent>();
         while (query.MoveNext(out var ivId, out var ivComp))
         {
-            if (ivComp.AttachedTo == default)
+            if (ivComp.AttachedTo is not { } attachedTo)
                 continue;
 
-            if (!InRange((ivId, ivComp), ivComp.AttachedTo))
+            if (!InRange((ivId, ivComp), attachedTo))
                 Detach((ivId, ivComp), true, false);
 
             if (_itemSlots.GetItemOrNull(ivId, ivComp.Slot) is not { } pack)
@@ -33,7 +33,7 @@ public sealed class IVDripSystem : SharedIVDripSystem
             if (!_solutionContainer.TryGetSolution(pack, packComponent.Solution, out var packSolution))
                 continue;
 
-            if (!TryComp(ivComp.AttachedTo, out BloodstreamComponent? targetBloodstream))
+            if (!TryComp(attachedTo, out BloodstreamComponent? targetBloodstream))
                 continue;
 
             if (time < ivComp.TransferAt)
@@ -43,14 +43,14 @@ public sealed class IVDripSystem : SharedIVDripSystem
             {
                 if (targetBloodstream.BloodSolution.Volume < targetBloodstream.BloodSolution.MaxVolume)
                 {
-                    _solutionContainer.TryTransferSolution(pack, ivComp.AttachedTo, packSolution, targetBloodstream.BloodSolution, ivComp.TransferAmount);
+                    _solutionContainer.TryTransferSolution(pack, attachedTo, packSolution, targetBloodstream.BloodSolution, ivComp.TransferAmount);
                 }
             }
             else
             {
                 if (packSolution.Volume < packSolution.MaxVolume)
                 {
-                    _solutionContainer.TryTransferSolution(ivComp.AttachedTo, pack, targetBloodstream.BloodSolution, packSolution, ivComp.TransferAmount);
+                    _solutionContainer.TryTransferSolution(attachedTo, pack, targetBloodstream.BloodSolution, packSolution, ivComp.TransferAmount);
                 }
             }
 

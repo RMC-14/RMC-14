@@ -9,7 +9,7 @@ namespace Content.Shared._CM14.Medical.IV;
 public sealed partial class IVDripComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public EntityUid AttachedTo;
+    public EntityUid? AttachedTo;
 
     [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadWrite)]
     public string Slot = "pack";

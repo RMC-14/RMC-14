@@ -156,10 +156,9 @@ public abstract class SharedIVDripSystem : EntitySystem
 
     protected void Detach(Entity<IVDripComponent> iv, bool rip, bool predict)
     {
-        if (iv.Comp.AttachedTo == default)
+        if (iv.Comp.AttachedTo is not { } target)
             return;
 
-        var target = iv.Comp.AttachedTo;
         iv.Comp.AttachedTo = default;
         Dirty(iv);
 
