@@ -1,7 +1,7 @@
 - type: entity
   parent: BaseItem
   id: CMHealthAnalyzer
-  name: health analyzer
+  name: HF2 health analyzer
   description: A hand-held body scanner capable of distinguishing vital signs of the subject.
   suffix: CM14
   components:

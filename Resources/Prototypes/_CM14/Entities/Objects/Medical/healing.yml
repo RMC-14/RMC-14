@@ -63,6 +63,14 @@
     stackType: CMOintment
     count: 1
 
+- type: entity
+  id: CMOintment10
+  parent: CMOintment
+  suffix: Ten
+  components:
+  - type: Stack
+    stackType: CMOintment
+    count: 10
 
 - type: entity
   parent: CMBaseHealingItem
@@ -111,6 +119,14 @@
   components:
   - type: Stack
     count: 1
+
+- type: entity
+  id: CMGauze10
+  parent: CMGauze
+  suffix: Ten
+  components:
+  - type: Stack
+    count: 10
 
 - type: entity
   parent: CMBaseHealingItem
@@ -227,6 +243,14 @@
   - type: Stack
     count: 1
 
+- type: entity
+  id: CMBurnKit10
+  parent: CMBurnKit
+  suffix: Ten
+  components:
+  - type: Stack
+    count: 10
+
 - type: stack
   id: CMBurnKit
   name: advanced burn kit
@@ -271,6 +295,14 @@
   components:
   - type: Stack
     count: 1
+
+- type: entity
+  id: CMTraumaKit10
+  parent: CMTraumaKit
+  suffix: Ten
+  components:
+  - type: Stack
+    count: 10
 
 - type: stack
   id: CMTraumaKit

@@ -1015,17 +1015,17 @@
     #    CMAutoinjectorTricord: 1P
     - name: Prepared Meals
       entries:
-        - id: CMPillBottleBicaridine
+        - id: CMPillCanisterBicaridine
           amount: 5 #P
-        - id: CMPillBottleDylovene
+        - id: CMPillCanisterDylovene
           amount: 5 #P
-        - id: CMPillBottleInaprovaline
+        - id: CMPillCanisterInaprovaline
           amount: 5 #P
-        - id: CMPillBottleKelotane
+        - id: CMPillCanisterKelotane
           amount: 5 #P
-#        - id: CMPillBottlePeridaxon
+#        - id: CMPillCanisterPeridaxon
 #          amount: 5 #P
-#        - id: CMPillBottleTramadol
+#        - id: CMPillCanisterTramadol
 #          amount: 5 #P
     #    CMHealthAnalyzer: 4P
     #    CMRollerBed: 4P
