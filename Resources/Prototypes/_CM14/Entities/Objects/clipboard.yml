@@ -22,3 +22,9 @@
     slots: [belt]
     quickEquip: false
     sprite:  _CM14/Objects/paper.rsi
+  - type: ItemMapper
+    mapLayers:
+      clipboard_pen:
+        whitelist:
+          tags:
+          - Write

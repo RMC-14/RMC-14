@@ -9,3 +9,9 @@
     layers:
     - state: fire_extinguisher
       map: [ "enabled" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.FireExtinguisherVisuals.Safety:
+        enabled:
+          True: { state: fire_extinguisher } # TODO CM14
+          False: { state: fire_extinguisher }
