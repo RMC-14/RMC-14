@@ -23,7 +23,6 @@ using Content.Shared.Speech.EntitySystems;
 using Robust.Server.Audio;
 using Robust.Shared.GameObjects;
 using Content.Server.Forensics;
-using Content.Shared._CM14.Marines.Medical.Stasis;
 using Content.Shared._CM14.Medical.Stasis;
 
 namespace Content.Server.Body.Systems;
