@@ -1,0 +1,12 @@
+# No base mob defined, nothing changed about basemob
+
+# Mob in the sandbox menu and used when a player spawns
+- type: entity
+  save: false
+  parent: MobReptilian
+  id: CMMobReptilian
+  name: Urisst' C-M Mzhand
+  suffix: CM14
+  components:
+  - type: Marine
+#Weh but in CM14

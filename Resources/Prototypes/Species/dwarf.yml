@@ -2,7 +2,7 @@
   id: Dwarf
   name: species-name-dwarf
   roundStart: true
-  prototype: MobDwarf
+  prototype: CMMobDwarf
   sprites: MobHumanSprites
   markingLimits: MobHumanMarkingLimits
   dollPrototype: MobDwarfDummy

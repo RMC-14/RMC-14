@@ -2,7 +2,7 @@
   id: Diona
   name: species-name-diona
   roundStart: true
-  prototype: MobDiona
+  prototype: CMMobDiona
   sprites: MobDionaSprites
   defaultSkinTone: "#cdb369"
   markingLimits: MobDionaMarkingLimits

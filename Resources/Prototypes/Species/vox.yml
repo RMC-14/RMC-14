@@ -2,7 +2,7 @@
   id: Vox
   name: Vox
   roundStart: false # sad...
-  prototype: MobVox
+  prototype: CMMobVox
   sprites: MobVoxSprites
   markingLimits: MobVoxMarkingLimits
   dollPrototype: MobVoxDummy

@@ -2,6 +2,7 @@
   parent: MobHuman
   id: CMTestDummy
   name: test dummy
+  suffix: CM14
   components:
   - type: Marine
   - type: Loadout
