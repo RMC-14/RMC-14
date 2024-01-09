@@ -1,7 +1,7 @@
-﻿using Content.Shared._CM14.Marines.Medical;
+﻿using Content.Shared._CM14.Marines.Medical.IV;
 using Robust.Client.GameObjects;
 
-namespace Content.Client._CM14.Marines.Medical;
+namespace Content.Client._CM14.Marines.Medical.IV;
 
 public sealed class IVDripSystem : SharedIVDripSystem
 {

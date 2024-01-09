@@ -11,7 +11,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._CM14.Marines.Medical;
+namespace Content.Shared._CM14.Marines.Medical.IV;
 
 public abstract class SharedIVDripSystem : EntitySystem
 {

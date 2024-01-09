@@ -3,7 +3,7 @@ using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._CM14.Marines.Medical;
+namespace Content.Shared._CM14.Marines.Medical.IV;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class IVDripComponent : Component
