@@ -1,28 +1,32 @@
 ﻿- type: entity
-  parent: [ filingCabinet, CMEntityBase ]
-  id: CMFilingCabinet
-  name: filing cabinet
+  abstract: true
+  parent: CMEntityBase
+  id: CMFilingCabinetBase
   description: A large cabinet with drawers.
   suffix: Empty
   components:
   - type: Sprite
-    sprite: _CM14/Structures/Storage/cabinets.rsi
-    state: filingcabinet
+    sprite: _CM14/Structures/Storage/filing_cabinet.rsi
     noRot: true
+
+- type: entity
+  parent: [ CMFilingCabinetBase, filingCabinet ]
+  id: CMFilingCabinet
+  name: filing cabinet
+  components:
+  - type: Sprite
+    state: filingcabinet
     layers:
     - state: filingcabinet
     - state: filingcabinet-open
       map: ["openLayer"]
 
 - type: entity
-  parent: [ filingCabinetTall, CMEntityBase ]
+  parent: [ CMFilingCabinetBase, filingCabinetTall ]
   id: CMFilingCabinetTall
   name: tall filing cabinet
-  description: A large cabinet with drawers.
-  suffix: Empty
   components:
   - type: Sprite
-    sprite: _CM14/Structures/Storage/cabinets.rsi
     state: tallcabinet
     layers:
     - state: tallcabinet
@@ -30,14 +34,11 @@
       map: ["openLayer"]
 
 - type: entity
-  parent: [ filingCabinetTall, CMEntityBase ]
+  parent: CMFilingCabinetTall
   id: CMFilingCabinetTallWood
   name: tall wooden filing cabinet
-  description: A large cabinet with drawers.
-  suffix: Empty
   components:
   - type: Sprite
-    sprite: _CM14/Structures/Storage/cabinets.rsi
     state: tallcabinet
     layers:
     - state: tallcabinetwood
@@ -45,16 +46,12 @@
       map: ["openLayer"]
 
 - type: entity
-  parent: [ filingCabinetDrawer, CMEntityBase ]
+  parent: [ CMFilingCabinetBase, filingCabinetDrawer ]
   id: CMFilingCabinetChest
   name: chest drawer
-  description: A large cabinet with drawers.
-  suffix: Empty
   components:
   - type: Sprite
-    sprite: _CM14/Structures/Storage/cabinets.rsi
     state: chestdrawer
-    noRot: true
     layers:
     - state: chestdrawer
     - state: chestdrawer-open
@@ -64,12 +61,9 @@
   parent: CMFilingCabinetChest
   id: CMFilingCabinetChestWood
   name: wooden chest drawer
-  suffix: Empty
   components:
   - type: Sprite
-    sprite: _CM14/Structures/Storage/cabinets.rsi
     state: chestdrawer
-    noRot: true
     layers:
     - state: chestdrawerwood
     - state: chestdrawerwood-open

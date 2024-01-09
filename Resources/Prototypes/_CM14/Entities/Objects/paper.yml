@@ -11,7 +11,7 @@
     - state: paper_words
       map: ["enum.PaperVisualLayers.Writing"]
       visible: false
-    - state: Paper
+    - state: paper_stamped
       map: ["enum.PaperVisualLayers.Stamp"]
       visible: false
 
