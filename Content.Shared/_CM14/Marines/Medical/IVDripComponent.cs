@@ -49,6 +49,9 @@ public sealed partial class IVDripComponent : Component
 
     [DataField]
     public DamageSpecifier? RipDamage;
+
+    [DataField, AutoNetworkedField]
+    public bool Injecting = true;
 }
 
 [Serializable, NetSerializable]

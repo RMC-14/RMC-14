@@ -39,9 +39,19 @@ public sealed class IVDripSystem : SharedIVDripSystem
             if (time < ivComp.TransferAt)
                 continue;
 
-            if (targetBloodstream.BloodSolution.Volume < targetBloodstream.BloodSolution.MaxVolume)
+            if (ivComp.Injecting)
             {
-                _solutionContainer.TryTransferSolution(pack, ivComp.AttachedTo, packSolution, targetBloodstream.BloodSolution, ivComp.TransferAmount);
+                if (targetBloodstream.BloodSolution.Volume < targetBloodstream.BloodSolution.MaxVolume)
+                {
+                    _solutionContainer.TryTransferSolution(pack, ivComp.AttachedTo, packSolution, targetBloodstream.BloodSolution, ivComp.TransferAmount);
+                }
+            }
+            else
+            {
+                if (packSolution.Volume < packSolution.MaxVolume)
+                {
+                    _solutionContainer.TryTransferSolution(ivComp.AttachedTo, pack, targetBloodstream.BloodSolution, packSolution, ivComp.TransferAmount);
+                }
             }
 
             ivComp.TransferAt = time + ivComp.TransferDelay;

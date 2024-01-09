@@ -2,7 +2,9 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.DragDrop;
+using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared.Verbs;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -32,6 +34,8 @@ public abstract class SharedIVDripSystem : EntitySystem
         SubscribeLocalEvent<IVDripComponent, CanDragEvent>(OnIVDripCanDrag);
         SubscribeLocalEvent<IVDripComponent, CanDropDraggedEvent>(OnIVDripCanDropDragged);
         SubscribeLocalEvent<IVDripComponent, DragDropDraggedEvent>(OnIVDripDragDropDragged);
+        SubscribeLocalEvent<IVDripComponent, InteractHandEvent>(OnIVInteractHand);
+        SubscribeLocalEvent<IVDripComponent, GetVerbsEvent<InteractionVerb>>(OnIVVerbs);
 
         // TODO CM14 check for BloodstreamComponent instead of MarineComponent
         SubscribeLocalEvent<MarineComponent, CanDropTargetEvent>(OnMarineCanDropTarget);
@@ -95,6 +99,21 @@ public abstract class SharedIVDripSystem : EntitySystem
             Attach(iv, args.User, args.Target);
         else
             Detach(iv, false, true);
+    }
+
+    private void OnIVInteractHand(Entity<IVDripComponent> iv, ref InteractHandEvent args)
+    {
+        Detach(iv, false, true);
+    }
+
+    private void OnIVVerbs(Entity<IVDripComponent> iv, ref GetVerbsEvent<InteractionVerb> args)
+    {
+        var user = args.User;
+        args.Verbs.Add(new InteractionVerb
+        {
+            Act = () => ToggleInject(iv, user),
+            Text = Loc.GetString("cm-iv-verb-toggle-inject")
+        });
     }
 
     private void OnBloodPackMapInitEvent(Entity<BloodPackComponent> pack, ref MapInitEvent args)
@@ -173,8 +192,20 @@ public abstract class SharedIVDripSystem : EntitySystem
                 _popup.PopupEntity(selfMessage, target);
 
             var others = Filter.PvsExcept(target);
-            _popup.PopupEntity(Loc.GetString("cm-iv-detach-self", ("target", others)), target, others, true);
+            _popup.PopupEntity(Loc.GetString("cm-iv-detach-others", ("target", others)), target, others, true);
         }
+    }
+
+    private void ToggleInject(Entity<IVDripComponent> iv, EntityUid user)
+    {
+        iv.Comp.Injecting = !iv.Comp.Injecting;
+        Dirty(iv);
+
+        var msg = iv.Comp.Injecting
+            ? Loc.GetString("cm-iv-now-injecting")
+            : Loc.GetString("cm-iv-now-taking");
+
+        _popup.PopupClient(msg, iv, user);
     }
 
     private void UpdatePackVisuals(Entity<BloodPackComponent> pack, Solution solution)
