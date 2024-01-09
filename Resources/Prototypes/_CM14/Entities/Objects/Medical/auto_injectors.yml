@@ -1,6 +1,6 @@
-﻿- type: entity # todo cm14 these should be refillable through the chem vendor
+﻿- type: entity
   parent: ChemicalMedipen
-  id: CMTAutoInjector
+  id: CMAutoInjector
   name: auto-injector
   description: An auto-injector. Each use is 10 units.
   noSpawn: true
@@ -29,8 +29,8 @@
     changeColor: true
 
 - type: entity
-  parent: CMTAutoInjector
-  id: CMTEmergencyInjector
+  parent: CMAutoInjector
+  id: CMEmergencyInjector
   name: emergency auto-injector
   description: An auto-injector loaded with a special cocktail of chemicals, to be used in a life-threatening situations. Contains 30 units of bicaridine, 30 units of kelotane and 20 units of epinephrine.
   components:
@@ -60,7 +60,7 @@
     maxFillLevels: 1
 
 - type: entity
-  parent: CMTAutoInjector
+  parent: CMAutoInjector
   id: CMTricordrazineInjector
   name: tricordrazine auto-injector
   description: An auto-injector loaded with 3 uses of tricordrazine, a weak general use medicine for treating damage. Each use is 10 units.
@@ -74,14 +74,14 @@
           Quantity: 30
 
 - type: entity
-  parent: CMTAutoInjector
-  id: CMTFirstAidrazineInjector
+  parent: CMAutoInjector
+  id: CMFirstAidrazineInjector
   name: First-Aid auto-injector
   description: A version of the tricordrazine auto-injector that can be used by everyone. Each use is 10 units.
   noSpawn: true # todo cm14 remove this line when skills are added
 
 - type: entity
-  parent: CMTAutoInjector
+  parent: CMAutoInjector
   id: CMKelotaneAutoInjector
   name: kelotane auto-injector
   description: An auto-injector loaded with 3 uses of kelotane, a common burn medicine. Each use is 10 units.
@@ -95,7 +95,7 @@
           Quantity: 30
 
 - type: entity
-  parent: CMTAutoInjector
+  parent: CMAutoInjector
   id: CMDexalinPlusAutoInjector
   name: dexalin plus auto-injector
   description: An auto-injector loaded with 3 uses of dexalin plus, a common airloss medicine. Each use is 10 units.
@@ -109,8 +109,8 @@
           Quantity: 30
 
 - type: entity
-  parent: CMTAutoInjector
-  id: CMDTramadolAutoInjector
+  parent: CMAutoInjector
+  id: CMTramadolAutoInjector
   name: tramadol auto-injector
   description: An auto-injector loaded with 3 uses of tramadol, Standard issue painkiller. Each use is 10 units.
   noSpawn: true # remove this when tramadol is added
@@ -124,14 +124,14 @@
 #          Quantity: 30
 
 - type: entity
-  parent: CMDTramadolAutoInjector
+  parent: CMTramadolAutoInjector
   id: CMPainStopAutoInjector
   name: Pain-Stop auto-injector
   description: A version of the Tramadol auto-injector that can be used by everyone. Each use is 10 units.
   noSpawn: true # todo cm14 when skills are added, this item is available to be used instantly by anyone
 
 - type: entity
-  parent: CMTAutoInjector
+  parent: CMAutoInjector
   id: CMDyloveneAutoInjector
   name: dylovene auto-injector
   description: An auto-injector loaded with 3 uses of dylovene, a common anti-toxin medicine. Each use is 10 units.
@@ -145,7 +145,7 @@
           Quantity: 30
 
 - type: entity
-  parent: CMTAutoInjector
+  parent: CMAutoInjector
   id: CMBicaridineAutoInjector
   name: Bicaridine auto-injector
   description: An auto-injector loaded with 3 uses of bicaridine, a medicine for brute damage. Each use is 10 units.
@@ -159,7 +159,7 @@
           Quantity: 30
 
 - type: entity
-  parent: CMTAutoInjector
+  parent: CMAutoInjector
   id: CMInaprovalineAutoInjector
   name: inaprovaline auto-injector
   description: An auto-injector loaded with 3 uses of inaprovaline, a medicine for people in critical condition. Each use is 10 units.
@@ -173,7 +173,7 @@
           Quantity: 30
 
 - type: entity
-  parent: CMTAutoInjector
+  parent: CMAutoInjector
   id: CMOxycodoneAutoInjector
   name: Oxycodone auto-injector
   description: An auto-injector loaded with 3 uses of oxycodone, a very strong painkiller. Each use is 10 units.
