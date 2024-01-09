@@ -1,0 +1,4 @@
+﻿- type: soundCollection
+  id: CMPillBottleOpen
+  files:
+  - /Audio/_CM14/Medical/pillbottle.ogg

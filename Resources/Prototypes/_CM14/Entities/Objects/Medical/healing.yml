@@ -279,34 +279,3 @@
   spawn: CMTraumaKit
   maxCount: 10
   itemSize: 1
-
-- type: entity
-  parent: CMPillCanister
-  id: CMPillCanisterDexalin
-  suffix: Dexalin, 7
-  components:
-  - type: StorageFill
-    contents:
-    - id: PillDexalin
-      amount: 7
-
-- type: entity
-  parent: CMPillCanister
-  id: CMPillCanisterTricordrazine
-  suffix: Tricordrazine, 5
-  components:
-  - type: StorageFill
-    contents:
-    - id: PillTricordrazine
-      amount: 5
-
-- type: entity
-  parent: CMPillCanister
-  id: CMPillCanisterBicaridine
-  suffix: Bicaridine, 5
-  components:
-  - type: StorageFill
-    contents:
-    - id: PillBicaridine
-      amount: 5
-
