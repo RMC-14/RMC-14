@@ -30,10 +30,10 @@
       "directions": 4
     },
     {
-      "name": "surgical_line"
+      "name": "line_brute"
     },
     {
-      "name": "skingraft"
+      "name": "line_burn"
     },
     {
       "name": "traumakit"

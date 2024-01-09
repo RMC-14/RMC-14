@@ -122,7 +122,7 @@
     tags:
     - CMSurgicalLine
   - type: Sprite
-    state: surgical_line
+    state: line_brute
   - type: Healing
     damageContainers:
       - Biological
@@ -144,7 +144,7 @@
 - type: stack
   id: CMSurgicalLine
   name: surgical line
-  icon: { sprite: "/Textures/_CM14/Objects/Medical/medical.rsi", state: surgical_line }
+  icon: { sprite: "/Textures/_CM14/Objects/Medical/medical.rsi", state: line_brute }
   spawn: CMSurgicalLine
   maxCount: 1
   itemSize: 1
@@ -159,7 +159,7 @@
     tags:
     - CMSynthGraft
   - type: Sprite
-    state: skingraft
+    state: line_burn
   - type: Healing
     damageContainers:
       - Biological
@@ -183,7 +183,7 @@
 - type: stack
   id: CMSynthGraft
   name: CMSynthGraft
-  icon: { sprite: "/Textures/_CM14/Objects/Medical/medical.rsi", state: skingraft }
+  icon: { sprite: "/Textures/_CM14/Objects/Medical/medical.rsi", state: line_burn }
   spawn: CMSynthGraft
   maxCount: 1
   itemSize: 1
