@@ -2,7 +2,7 @@
   id: Moth
   name: species-name-moth
   roundStart: true
-  prototype: MobMoth
+  prototype: CMMobMoth
   sprites: MobMothSprites
   defaultSkinTone: "#ffda93"
   markingLimits: MobMothMarkingLimits

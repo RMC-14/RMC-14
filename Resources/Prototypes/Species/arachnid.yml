@@ -2,7 +2,7 @@
   id: Arachnid
   name: species-name-arachnid
   roundStart: true
-  prototype: MobArachnid
+  prototype: CMMobArachnid
   sprites: MobArachnidSprites
   defaultSkinTone: "#385878"
   markingLimits: MobArachnidMarkingLimits

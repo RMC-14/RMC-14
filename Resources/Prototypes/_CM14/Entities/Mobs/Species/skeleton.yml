@@ -1,0 +1,11 @@
+# No base mob defined, nothing changed about basemob
+
+# Mob in the sandbox menu and used when a player spawns
+- type: entity
+  save: false
+  parent: MobSkeletonPerson
+  id: CMMobSkeletonPerson
+  name: Urist C.M McSkelly
+  suffix: CM14
+  components:
+  - type: Marine
