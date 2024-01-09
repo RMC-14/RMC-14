@@ -1,0 +1,24 @@
+﻿- type: entity
+  parent: SinkEmpty
+  id: CMSinkEmpty
+  name: sink
+  suffix: Empty
+  description: A sink used for washing one's hands and face.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Furniture/sink.rsi
+
+- type: entity
+  parent: SinkEmpty
+  id: CMSink
+  name: sink
+  suffix: Water
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drainBuffer:
+        maxVol: 200
+      tank:
+        reagents:
+        - ReagentId: Water
+          Quantity: 500
