@@ -185,6 +185,7 @@
     ejectState: eject-unshaded
   - type: AccessReader
     access: [["CMAccessMedical"]]
+  - type: CMSolutionRefiller
 
 - type: entity
   parent: CMVendorMedical
