@@ -1,4 +1,3 @@
-using Content.Shared._CM14.Marines.CPR;
 using Content.Shared._CM14.Medical.CPR;
 using Content.Shared._CM14.Xenos.Projectile.Spit.Slowing;
 using Content.Shared.Chemistry;
@@ -33,8 +32,6 @@ public partial class InventorySystem
 
         // by-ref events
         SubscribeLocalEvent<InventoryComponent, GetExplosionResistanceEvent>(RefRelayInventoryEvent);
-        SubscribeLocalEvent<InventoryComponent, HitBySlowingSpitEvent>(RefRelayInventoryEvent);
-        SubscribeLocalEvent<InventoryComponent, ReceiveCPRAttemptEvent>(RefRelayInventoryEvent);
 
         // Eye/vision events
         SubscribeLocalEvent<InventoryComponent, CanSeeAttemptEvent>(RelayInventoryEvent);

@@ -5,6 +5,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Inventory;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -19,6 +20,7 @@ public sealed class CPRSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popups = default!;
@@ -42,6 +44,7 @@ public sealed class CPRSystem : EntitySystem
         SubscribeLocalEvent<CPRReceivedComponent, ReceiveCPRAttemptEvent>(OnReceivedCPRAttempt);
         SubscribeLocalEvent<MobStateComponent, ReceiveCPRAttemptEvent>(OnMobStateCPRAttempt);
 
+        SubscribeLocalEvent<InventoryComponent, ReceiveCPRAttemptEvent>(_inventory.RelayEvent);
         // TODO CM14 pending PR upstream https://github.com/space-wizards/space-station-14/pull/22395
         // SubscribeLocalEvent<MaskComponent, ReceiveCPRAttemptEvent(OnMaskCPRAttempt);
     }
