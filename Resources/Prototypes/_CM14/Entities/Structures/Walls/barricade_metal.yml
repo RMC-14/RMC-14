@@ -314,9 +314,9 @@
     visuals:
       enum.BarbedWireVisualLayers.Wire:
         barbWired:
-          UnWired: { state: folding_metal_wire, visible: false }
-          WiredClosed: { state: folding_metal_closed_wire, visible: true }
-          WiredOpen: { state: folding_metal_wire, visible: true }
+          UnWired: { state: folding_metal_closed_wire, visible: false }
+          WiredClosed: { state: folding_metal_wire, visible: true }
+          WiredOpen: { state: folding_metal_closed_wire, visible: true }
   - type: InteractionOutline
   - type: Door
     openSpriteState: folding_metal_closed
@@ -379,9 +379,9 @@
     visuals:
       enum.BarbedWireVisualLayers.Wire:
         barbWired:
-          UnWired: { state: plasteel_wire, visible: false }
-          WiredClosed: { state: plasteel_closed_wire, visible: true }
-          WiredOpen: { state: plasteel_wire, visible: true }
+          UnWired: { state: plasteel_closed_wire, visible: false }
+          WiredClosed: { state: plasteel_wire, visible: true }
+          WiredOpen: { state: plasteel_closed_wire, visible: true }
   - type: Door
     openSpriteState: plasteel_closed
     closedSpriteState: plasteel
