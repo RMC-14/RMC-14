@@ -46,7 +46,7 @@ public sealed class CPRSystem : EntitySystem
         SubscribeLocalEvent<MobStateComponent, ReceiveCPRAttemptEvent>(OnMobStateCPRAttempt);
 
         SubscribeLocalEvent<InventoryComponent, ReceiveCPRAttemptEvent>(_inventory.RelayEvent);
-        SubscribeLocalEvent<MaskComponent, ReceiveCPRAttemptEvent>(OnMaskCPRAttempt);
+        SubscribeLocalEvent<MaskComponent, InventoryRelayedEvent<ReceiveCPRAttemptEvent>>(OnMaskCPRAttempt);
     }
 
     private void OnMarineInteractHand(Entity<MarineComponent> ent, ref InteractHandEvent args)
@@ -161,10 +161,13 @@ public sealed class CPRSystem : EntitySystem
         }
     }
 
-    private void OnMaskCPRAttempt(Entity<MaskComponent> ent, ref ReceiveCPRAttemptEvent args)
+    private void OnMaskCPRAttempt(Entity<MaskComponent> ent, ref InventoryRelayedEvent<ReceiveCPRAttemptEvent> args)
     {
-        if (ent.Comp.IsToggled)
-            args.Cancelled = true;
+        if (!ent.Comp.IsToggled)
+        {
+            _popups.PopupClient("Take off their mask first!", ent, args.Args.Performer);
+            args.Args.Cancelled = true;
+        }
     }
 
     private bool CanCPRPopup(EntityUid performer, EntityUid target, bool start, out FixedPoint2 damage)
