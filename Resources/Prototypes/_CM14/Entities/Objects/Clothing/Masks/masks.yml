@@ -1,0 +1,18 @@
+- type: entity
+  parent: ClothingMaskPullableBase
+  id: CMClothingMaskGas
+  name: gas mask
+  description: A face-covering mask that can be connected to an air supply. Filters harmful gases from the air.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Mask/gas.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Mask/gas.rsi
+  - type: BreathMask
+  - type: IngestionBlocker
+  - type: IdentityBlocker
+  - type: Tag
+    tags:
+    - MonkeyWearable
+    - HamsterWearable
+    - WhitelistChameleon
