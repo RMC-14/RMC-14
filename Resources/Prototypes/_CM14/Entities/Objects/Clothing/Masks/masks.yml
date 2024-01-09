@@ -8,11 +8,3 @@
     sprite: _CM14/Objects/Clothing/Mask/gas.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Mask/gas.rsi
-  - type: BreathMask
-  - type: IngestionBlocker
-  - type: IdentityBlocker
-  - type: Tag
-    tags:
-    - MonkeyWearable
-    - HamsterWearable
-    - WhitelistChameleon
