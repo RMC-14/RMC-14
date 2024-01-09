@@ -1,0 +1,10 @@
+- type: construction
+  name: barbed wire
+  id: Barbedwire
+  graph: BarbedWireGraph
+  startNode: start
+  targetNode: nodeBarbedWire
+  category: construction-category-materials
+  description: Create barbed wire to decorate your barricades.
+  icon: { sprite: _CM14/Objects/barbed_wire.rsi, state: barbed_wire }
+  objectType: Item
