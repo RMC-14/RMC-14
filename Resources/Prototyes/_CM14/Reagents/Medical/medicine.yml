@@ -1,0 +1,193 @@
+- type: reagent
+  id: CMBicaridine
+  name: reagent-name-CM-bicaridine
+  group: Medicine
+  desc: reagent-desc-CM-bicaridine
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: bicaridine
+  color: "#E8756C"
+  metabolisms:
+    Poison:
+      metabolismRate: 0.2
+    Medicine:
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Brute: -1
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          types:
+            Caustic: 1
+
+- type: reagent
+  id: CMMeralyn
+  name: reagent-name-CM-meralyn
+  group: Medicine
+  desc: reagent-desc-CM-meralyn
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: meralyn
+  color: "#b40000"
+  metabolisms:
+    Poison:
+      metabolismRate: 0.2
+    Medicine:
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Brute: -1.5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 15
+        damage:
+          types:
+            Blunt: 1.5
+            Poison: 1.5
+
+- type: reagent
+  id: CMKelotane
+  name: reagent-name-CM-kelotane
+  group: Medicine
+  desc: reagent-desc-CM-kelotane
+  physicalDesc: reagent-physical-desc-strong-smelling
+  flavor: kelotane
+  color: "#D8C58C"
+  metabolisms:
+    Poison:
+      metabolismRate: 0.2
+    Medicine:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Caustic: -1
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          types:
+            Blunt: 1
+            Poison: 1
+
+- type: reagent
+  id: CMDermaline
+  name: reagent-name-CM-dermaline
+  group: Medicine
+  desc: reagent-desc-CM-dermaline
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: dermaline
+  color: "#F8C57C"
+  metabolisms:
+    Poison:
+      metabolismRate: 0.2
+    Medicine:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Caustic -1.5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 15
+        damage:
+          types:
+            Poison: 1.5
+        groups:
+            Brute: 1.5
+
+- type: reagent
+  id: CMTricordrazine
+  name: reagent-name-CM-tricordrazine
+  group: Medicine
+  desc: reagent-desc-CM-tricordrazine
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: tricordrazine
+  color: "#B865CC"
+  metabolisms:
+    Poison:
+      metabolismRate: 0.2
+    Medicine:
+      effects:
+      - !type:HealthChange
+        conditions:
+        damage:
+          groups:
+            Brute: -0.5
+            Airloss: -0.5
+          types:
+            Poison: -0.5
+            Caustic: -0.5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Brute: 0.5
+            Airloss: 0.5
+          types:
+            Poison: 0.5
+            Caustic: 0.5
+
+- type: reagent
+  id: CMDexalin
+  name: reagent-name-CM-dexalin
+  group: Medicine
+  desc: reagent-desc-CM-dexalin
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: dexalin
+  color: "#C865FC"
+  metabolisms:
+    Poison:
+      metabolismRate: 0.2
+    Medicine:
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Airloss: -4
+      - !type:HealthChange
+        conditions:
+          - !type:ReagentThreshold
+            min: 30
+        damage:
+          types:
+            Poison: 2
+
+- type: reagent
+  id: CMDexalinPlus
+  name: reagent-name-CM-dexalin-plus
+  group: Medicine
+  desc: reagent-desc-CM-dexalin-plus
+  physicalDesc: reagent-physical-desc-cloudy
+  flavor: dexalin plus
+  color: "#C865FC"
+  metabolisms:
+    Poison:
+      metabolismRate: 0.2
+    Medicine:
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Airloss: -200
+      - !type:HealthChange
+        conditions:
+          - !type:ReagentThreshold
+            min: 15
+        damage:
+          types:
+            Poison: 1.5
+      - !type:HealthChange
+        conditions:
+          - !type:ReagentThreshold
+            min: 25 #crit OD
+        damage:
+          types:
+            Blunt: 3
