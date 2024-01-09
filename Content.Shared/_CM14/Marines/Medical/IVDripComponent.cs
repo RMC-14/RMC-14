@@ -1,4 +1,5 @@
-﻿using Content.Shared.FixedPoint;
+﻿using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
@@ -45,6 +46,9 @@ public sealed partial class IVDripComponent : Component
 
     [DataField, AutoNetworkedField]
     public int Range = 2;
+
+    [DataField]
+    public DamageSpecifier? RipDamage;
 }
 
 [Serializable, NetSerializable]

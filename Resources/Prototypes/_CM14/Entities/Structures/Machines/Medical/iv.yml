@@ -38,6 +38,9 @@
     - 75: reagent75
     - 80: reagent80
     - 100: reagent100
+    ripDamage:
+      types:
+        Piercing: 3
   - type: ItemSlots
     slots:
       pack:

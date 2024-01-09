@@ -1,5 +1,6 @@
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Damage;
 using Content.Shared.DragDrop;
 using Content.Shared.Popups;
 using Robust.Shared.Containers;
@@ -13,6 +14,7 @@ namespace Content.Shared._CM14.Marines.Medical;
 public abstract class SharedIVDripSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _containers = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -146,6 +148,9 @@ public abstract class SharedIVDripSystem : EntitySystem
 
         if (rip)
         {
+            if (iv.Comp.RipDamage != null)
+                _damageable.TryChangeDamage(target, iv.Comp.RipDamage, true);
+
             var message = Loc.GetString("cm-iv-rip", ("target", target));
             if (predict)
             {
