@@ -42,7 +42,7 @@
 
 # Plants
 - type: entity
-  parent: BaseStructureDynamic
+  parent: [BaseStructureDynamic, CMEntityBase]
   id: CMPottedPlantBase
   name: potted plant
   description: ""
