@@ -1,3 +1,4 @@
+using Content.Shared._CM14.Marines;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
@@ -11,7 +12,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._CM14.Marines.Medical.IV;
+namespace Content.Shared._CM14.Medical.IV;
 
 public abstract class SharedIVDripSystem : EntitySystem
 {

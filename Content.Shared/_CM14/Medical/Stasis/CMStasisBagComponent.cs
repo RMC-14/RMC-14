@@ -1,6 +1,6 @@
 ﻿using Robust.Shared.GameStates;
 
-namespace Content.Shared._CM14.Marines.Medical.Stasis;
+namespace Content.Shared._CM14.Medical.Stasis;
 
 [RegisterComponent, NetworkedComponent]
 [Access(typeof(SharedCMStasisBagSystem))]

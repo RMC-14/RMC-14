@@ -1,4 +1,4 @@
-﻿namespace Content.Shared._CM14.Marines.Medical.Stasis;
+﻿namespace Content.Shared._CM14.Medical.Stasis;
 
 [ByRefEvent]
 public record struct BloodstreamMetabolizeAttemptEvent(bool Cancelled)
