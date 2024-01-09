@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bodybag_closed1"
+    },
+    {
+      "name": "bodybag_folded"
+    },
+    {
+      "name": "bodybag_closed"
+    },
+    {
+      "name": "bodybag_open"
+    },
+    {
+      "name": "bodybag_used"
+    }
+  ]
+}

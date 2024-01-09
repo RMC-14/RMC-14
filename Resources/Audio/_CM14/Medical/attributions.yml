@@ -1,0 +1,69 @@
+- files: ["healthanalyzer.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/items/healthanalyzer.ogg"
+
+- files: ["defib_ready.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/20829c1ee1c4718f6a3413555921b4f6c760d4bf/sound/items/defib_ready.ogg"
+
+- files: ["defib_charge.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/2ec47dfe9e186f5a29f0f280206c09c54f059be5/sound/items/defib_charge.ogg"
+
+- files: ["defib_failed.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/20829c1ee1c4718f6a3413555921b4f6c760d4bf/sound/items/defib_failed.ogg"
+
+- files: ["defib_release.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/2ec47dfe9e186f5a29f0f280206c09c54f059be5/sound/items/defib_release.ogg"
+
+- files: ["defib_success.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/20829c1ee1c4718f6a3413555921b4f6c760d4bf/sound/items/defib_success.ogg"
+
+- files: ["defib_SafetyOn.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/20829c1ee1c4718f6a3413555921b4f6c760d4bf/sound/items/defib_SafetyOn.ogg"
+
+- files: ["defib_safetyOff.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/20829c1ee1c4718f6a3413555921b4f6c760d4bf/sound/items/defib_safetyOff.ogg"
+
+- files: ["air_release.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/7853d79df1827a2a4907fb3162b6319662dbc1ba/sound/items/air_release.ogg"
+
+- files: ["hypospray.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/7853d79df1827a2a4907fb3162b6319662dbc1ba/sound/items/hypospray.ogg"
+
+- files: ["bandage.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/df78049c7a0490ba67af7112c8d7624049712b71/sound/handling/bandage.ogg"
+
+- files: ["ointment.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/df78049c7a0490ba67af7112c8d7624049712b71/sound/handling/ointment.ogg"
+
+- files: ["pillbottle.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/549694f850dc4ebf05b478b7e1f2138b37910d8f/sound/effects/pillbottle.ogg"
+
+- files: ["splint.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/df78049c7a0490ba67af7112c8d7624049712b71/sound/handling/splint.ogg"
