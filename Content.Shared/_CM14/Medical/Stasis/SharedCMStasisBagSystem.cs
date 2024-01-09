@@ -1,7 +1,7 @@
 ﻿using Content.Shared._CM14.Xenos.Hugger;
 using Robust.Shared.Containers;
 
-namespace Content.Shared._CM14.Marines.Medical.Stasis;
+namespace Content.Shared._CM14.Medical.Stasis;
 
 public abstract class SharedCMStasisBagSystem : EntitySystem
 {

@@ -1,7 +1,7 @@
 ﻿using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._CM14.Marines.Medical.IV;
+namespace Content.Shared._CM14.Medical.IV;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class BloodPackComponent : Component

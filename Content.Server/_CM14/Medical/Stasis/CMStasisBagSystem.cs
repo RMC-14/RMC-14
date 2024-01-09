@@ -1,7 +1,7 @@
 ﻿using Content.Server.Body.Systems;
-using Content.Shared._CM14.Marines.Medical.Stasis;
+using Content.Shared._CM14.Medical.Stasis;
 
-namespace Content.Server._CM14.Marines.Medical.Stasis;
+namespace Content.Server._CM14.Medical.Stasis;
 
 public sealed class CMStasisBagSystem : SharedCMStasisBagSystem
 {
