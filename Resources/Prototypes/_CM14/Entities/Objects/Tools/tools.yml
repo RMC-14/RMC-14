@@ -81,28 +81,11 @@
     heldPrefix: red
 
 - type: entity
-  parent: BaseItem
+  parent: HandLabeler
   id: CMHandLabeler
-  name: hand labeler
-  description: A hand labeler, used to label items and objects.
   components:
     - type: Sprite
       sprite: _CM14/Objects/Tools/hand_labeler.rsi
       state: hand_labeler
     - type: Item
       sprite: _CM14/Objects/Tools/hand_labeler.rsi
-    - type: UseDelay
-      delay: 2.0
-    - type: ActivatableUI
-      key: enum.HandLabelerUiKey.Key
-      inHandsOnly: true
-    - type: UserInterface
-      interfaces:
-        - key: enum.HandLabelerUiKey.Key
-          type: HandLabelerBoundUserInterface
-    - type: HandLabeler
-      whitelist:
-        components:
-          - Item
-        tags:
-          - Structure
