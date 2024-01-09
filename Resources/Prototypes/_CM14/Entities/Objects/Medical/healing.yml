@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseItem, CMEntityBase]
+  parent: BaseItem
   id: CMBaseHealingItem
   abstract: true
   components:
