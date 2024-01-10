@@ -1,11 +1,22 @@
+# Base mob
 - type: entity
-  parent: [BaseMobHuman, CMEntityBase]
+  parent: BaseMobHuman
   id: CMMobHumanBase
-  name: Urist McCMHands
+  name: Urist C.M. McHands
   abstract: true
+  suffix: CM14
   components:
+  - type: Marine
   - type: Vocal
     sounds:
-      Male: CMHumanMale
-      Unsexed: CMHumanMale #sorry fem-leaning enbies
-      Female: CMHumanFemale
+      Male: CMMaleHuman
+      Unsexed: CMMaleHuman #sorry fem-leaning enbies
+      Female: CMFemaleHuman
+
+# Mob in the sandbox menu and used when a player spawns
+- type: entity
+  save: false
+  parent: CMMobHumanBase
+  id: CMMobHuman
+  name: Urist C.M. McHands
+  suffix: CM14

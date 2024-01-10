@@ -1,5 +1,0 @@
-- type: entity
-  save: false
-  parent: [BaseMobHuman, CMEntityBase]
-  id: CMMobHuman
-  name: Urist McCMHands

@@ -1,0 +1,26 @@
+﻿- type: entity
+  parent: hydroponicsTray
+  name: hydroponics tray
+  id: CMHydroponicsTray
+  description: ""
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/hydroponics.rsi
+    layers:
+    - state: hydrotray3
+    - state: over_lowhealth3
+      map: [ "health_alert" ]
+      visible: false
+    - state: over_lowwater3
+      map: [ "water_alert" ]
+      visible: false
+    - state: over_lownutri3
+      map: [ "nutri_alert" ]
+      visible: false
+    - state: over_alert3
+      map: [ "undefined_alert" ]
+      visible: false
+    - state: over_harvest3
+      map: [ "harvest_alert" ]
+      visible: false
+

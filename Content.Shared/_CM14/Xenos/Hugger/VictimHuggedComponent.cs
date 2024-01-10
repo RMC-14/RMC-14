@@ -52,6 +52,9 @@ public sealed partial class VictimHuggedComponent : Component
     public TimeSpan BurstAt;
 
     [DataField, AutoNetworkedField]
+    public float IncubationMultiplier = 1;
+
+    [DataField, AutoNetworkedField]
     [ViewVariables(VVAccess.ReadWrite)]
     public EntProtoId BurstSpawn = "CMXenoLarva";
 

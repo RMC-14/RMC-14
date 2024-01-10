@@ -113,6 +113,17 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         args.State = MobState.Dead;
     }
 
+    public void RefreshIncubationMultipliers(Entity<VictimHuggedComponent?> ent)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
+            return;
+
+        var ev = new GetHuggedIncubationMultiplierEvent(1);
+        RaiseLocalEvent(ent, ref ev);
+
+        ent.Comp.IncubationMultiplier = ev.Multiplier;
+    }
+
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
@@ -140,7 +151,15 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
                 continue;
 
             if (hugged.BurstAt > time)
+            {
+                // TODO CM14 make this less effective against late-stage infections, also make this support faster incubation
+                if (hugged.IncubationMultiplier < 1)
+                {
+                    hugged.BurstAt += TimeSpan.FromSeconds(1 - hugged.IncubationMultiplier) * frameTime;
+                }
+
                 continue;
+            }
 
             RemCompDeferred<VictimHuggedComponent>(uid);
             Spawn(hugged.BurstSpawn, xform.Coordinates);

@@ -11,6 +11,24 @@
         mapNameTemplate: "Dev"
       - type: StationJobs
         overflowJobs:
-        - SeniorEnlistedAdvisor
+        - CommandingOfficer
         availableJobs:
+          AuxiliarySupportOfficer: [ -1, -1 ]
+          DropshipCrewChief: [ -1, -1 ]
+          IntelOfficer: [ -1, -1 ]
+          PilotOfficer: [ -1, -1 ]
+          Correspondent: [ -1, -1 ]
+          Survivor: [ -1, -1 ]
+          CommandingOfficer: [ -1, -1 ]
+          ExecutiveOfficer: [ -1, -1 ]
           SeniorEnlistedAdvisor: [ -1, -1 ]
+          StaffOfficer: [ -1, -1 ]
+          CMChiefEngineer: [ -1, -1 ]
+          MaintTech: [ -1, -1 ]
+          OrdnanceTech: [ -1, -1 ]
+          FireteamLeader: [ -1, -1 ]
+          HospitalCorpsman: [ -1, -1 ]
+          Rifleman: [ -1, -1 ]
+          Smartgunner: [ -1, -1 ]
+          SquadLeader: [ -1, -1 ]
+          WeaponsSpecialist: [ -1, -1 ]

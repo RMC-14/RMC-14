@@ -1,6 +1,6 @@
 ﻿- type: entity
   id: CMWindowDirectional
-  parent: [WindowDirectional, CMEntityBase]
+  parent: WindowDirectional
   name: window
   description: A glass window. It looks thin and flimsy. A few knocks with anything should shatter it.
   components:
@@ -27,7 +27,7 @@
 
 - type: entity
   id: CMWindowReinforcedDirectional
-  parent: [CMWindowDirectional, CMEntityBase]
+  parent: CMWindowDirectional
   name: reinforced window
   description: A glass window reinforced with bracing rods. It looks rather strong. Might take a few good hits to shatter it.
   components:
@@ -39,7 +39,7 @@
 
 - type: entity
   id: CMWindowTintedDirectional
-  parent: [CMWindowDirectional, CMEntityBase]
+  parent: CMWindowDirectional
   name: tinted window
   description: A tinted glass window. It looks rather strong and opaque. Might take a few good hits to shatter it.
   components:
@@ -51,7 +51,7 @@
 
 - type: entity
   id: CMWindowUltraDirectional
-  parent: [CMWindowDirectional, CMEntityBase]
+  parent: CMWindowDirectional
   name: ultra-reinforced window
   description: An ultra-reinforced window designed to keep the briefing podium a secure area.
   components:

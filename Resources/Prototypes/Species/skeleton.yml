@@ -2,7 +2,7 @@
   id: Skeleton
   name: Skeleton
   roundStart: false
-  prototype: MobSkeletonPerson
+  prototype: CMMobSkeletonPerson
   sprites: MobSkeletonSprites
   defaultSkinTone: "#fff9e2"
   markingLimits: MobHumanMarkingLimits

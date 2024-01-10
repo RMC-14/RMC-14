@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Shared._CM14.Marines.Squads;
 using Content.Shared.StatusIcon.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -23,8 +24,6 @@ public sealed class MarineOverlay : Overlay
     private readonly ShaderInstance _shader;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
-
-    private readonly List<SpriteSpecifier> _icons = new();
 
     public MarineOverlay()
     {
@@ -65,9 +64,8 @@ public sealed class MarineOverlay : Overlay
             if (!bounds.Translated(worldPos).Intersects(args.WorldAABB))
                 continue;
 
-            _icons.Clear();
-            _marine.GetMarineIcons(uid, _icons);
-            if (_icons.Count == 0)
+            var icon = _marine.GetMarineIcon(uid);
+            if (icon.Icon == null)
                 continue;
 
             var worldMatrix = Matrix3.CreateTranslation(worldPos);
@@ -75,16 +73,19 @@ public sealed class MarineOverlay : Overlay
             Matrix3.Multiply(rotationMatrix, scaledWorld, out var matrix);
             handle.SetTransform(matrix);
 
-            foreach (var proto in _icons)
+            var texture = _sprite.Frame0(icon.Icon);
+
+            var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float) texture.Height / EyeManager.PixelsPerMeter;
+            var xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float) texture.Width / EyeManager.PixelsPerMeter;
+
+            var position = new Vector2(xOffset, yOffset);
+            if (icon.Background != null)
             {
-                var texture = _sprite.Frame0(proto);
-
-                var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float) texture.Height / EyeManager.PixelsPerMeter;
-                var xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float) texture.Width / EyeManager.PixelsPerMeter;
-
-                var position = new Vector2(xOffset, yOffset);
-                handle.DrawTexture(texture, position);
+                var background = _sprite.Frame0(icon.Background);
+                handle.DrawTexture(background, position, icon.BackgroundColor);
             }
+
+            handle.DrawTexture(texture, position);
         }
 
         handle.UseShader(null);

@@ -1,6 +1,6 @@
 # standard
 - type: entity
-  parent: [ClothingHandsBase, CMEntityBase]
+  parent: ClothingHandsBase
   id: CMHandsBlack
   name: black gloves
   description: A pair of black gloves.

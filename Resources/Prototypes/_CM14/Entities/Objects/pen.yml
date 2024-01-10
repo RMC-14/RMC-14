@@ -1,0 +1,11 @@
+﻿- type: entity
+  parent: Pen
+  id: CMPen
+  name: pen
+  description: It's a normal black ink pen.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/paper.rsi
+    state: pen
+  - type: Item
+    sprite: _CM14/Objects/paper.rsi

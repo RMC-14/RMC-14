@@ -1,5 +1,4 @@
 ﻿- type: entity
-  parent: CMEntityBase
   id: CMOverheadPipe
   name: overhead pipe segment
   placement:

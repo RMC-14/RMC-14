@@ -1,6 +1,6 @@
 ﻿- type: entity
   abstract: true
-  parent: [BaseStructure, CMEntityBase]
+  parent: BaseStructure
   id: CMBaseDoor
   name: door
   components:

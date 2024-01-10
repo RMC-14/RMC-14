@@ -1,7 +1,24 @@
 ﻿- type: entity
-  parent: [MobHuman, CMEntityBase]
-  id: godhelpme
+  parent: MobHuman
+  id: CMTestDummy
   name: test dummy
+  suffix: CM14
   components:
+  - type: Marine
   - type: Loadout
     prototypes: [ StaffOfficerGear ]
+
+- type: entity
+  name: CM Test Dummy Spawner
+  id: SpawnCMTestDummy
+  parent: MarkerBase
+  suffix: DEBUG
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Mobs/Species/Human/parts.rsi
+      state: full
+  - type: ConditionalSpawner
+    prototypes:
+    - CMTestDummy

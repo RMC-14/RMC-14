@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ AirlockAssembly, CMEntityBase ]
+  parent: AirlockAssembly
   id: CMAirlockAssembly
   components:
   - type: Sprite

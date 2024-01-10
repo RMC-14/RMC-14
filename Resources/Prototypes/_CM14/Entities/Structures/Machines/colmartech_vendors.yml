@@ -2,7 +2,7 @@
 # TODO CM14 deny and vend states
 - type: entity
   abstract: true
-  parent: [ BaseMachinePowered, CMEntityBase ]
+  parent: BaseMachinePowered
   id: ColMarTechBase
   name: ColMarTech vendor
   components:
@@ -991,7 +991,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/medical_gear.rsi
   - type: CMAutomatedVendor
-    sections: []
+    sections:
     #    CMEssentialMedicalSet: 0P
     #    CMBurnKit: 2P
     #    CMTraumaKit: 2P
@@ -1013,13 +1013,20 @@
     #    CMAutoinjectorOxycodone: 2P
     #    CMAutoinjectorTramadol: 1P
     #    CMAutoinjectorTricord: 1P
-    #    CMPillBottleBicaridine: 5P
-    #    CMPillBottleDexalin: 5P
-    #    CMPillBottleDylovene: 5P
-    #    CMPillBottleInaprovaline: 5P
-    #    CMPillBottleKelotane: 5P
-    #    CMPillBottlePeridaxon: 5P
-    #    CMPillBottleTramadol: 5P
+    - name: Prepared Meals
+      entries:
+        - id: CMPillCanisterBicaridine
+          amount: 5 #P
+        - id: CMPillCanisterDylovene
+          amount: 5 #P
+        - id: CMPillCanisterInaprovaline
+          amount: 5 #P
+        - id: CMPillCanisterKelotane
+          amount: 5 #P
+#        - id: CMPillCanisterPeridaxon
+#          amount: 5 #P
+#        - id: CMPillCanisterTramadol
+#          amount: 5 #P
     #    CMHealthAnalyzer: 4P
     #    CMRollerBed: 4P
     #    CMStasisBag: 6P

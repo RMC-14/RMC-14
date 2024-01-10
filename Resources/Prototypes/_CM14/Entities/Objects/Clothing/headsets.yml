@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [Clothing, CMEntityBase]
+  parent: Clothing
   id: CMHeadset
   name: marine radio headset
   description: A standard military radio headset. Bulkier than combat models.

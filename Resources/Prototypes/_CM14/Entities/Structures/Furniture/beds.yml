@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: [Bed, CMEntityBase]
+  parent: Bed
   id: CMBed
   name: bed
   description: A mattress seated on a rectangular metallic frame. This is used to support a lying person in a comfortable manner, notably for regular sleep. Ancient technology, but still useful.

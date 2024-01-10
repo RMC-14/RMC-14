@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseBullet, CMEntityBase]
+  parent: BaseBullet
   id: BulletRifle10x24mm
   name: bullet (10x24mm)
   noSpawn: true

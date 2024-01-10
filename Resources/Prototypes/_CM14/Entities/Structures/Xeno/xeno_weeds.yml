@@ -1,5 +1,4 @@
 ﻿- type: entity # TODO CM14 description and sound
-  parent: CMEntityBase
   id: XenoWeeds
   name: weeds
   placement:

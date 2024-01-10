@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from CM-SS13 at commit https://github.com/cmss13-devs/cmss13/commit/cd8ab082e9c3de33652ce5cbf730026baefb6e96",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "closed_toilet_seat_down",
+      "directions": 4
+    },
+    {
+      "name": "open_toilet_seat_down",
+      "directions": 4
+    },
+    {
+      "name": "closed_toilet_seat_up",
+      "directions": 4
+    },
+    {
+      "name": "open_toilet_seat_up",
+      "directions": 4
+    }
+  ]
+}

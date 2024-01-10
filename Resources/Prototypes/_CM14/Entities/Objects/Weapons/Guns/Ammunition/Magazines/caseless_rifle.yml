@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseMagazineCaselessRifle, CMEntityBase]
+  parent: BaseMagazineCaselessRifle
   id: MagazineCaselessM39
   name: "M39 magazine (10x20mm)"
   components:

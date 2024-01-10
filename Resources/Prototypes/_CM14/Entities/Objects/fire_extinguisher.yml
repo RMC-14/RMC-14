@@ -1,0 +1,17 @@
+﻿- type: entity
+  parent: FireExtinguisher
+  id: CMFireExtinguisher
+  name: fire extinguisher
+  description: A traditional red fire extinguisher.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/fire_extinguisher.rsi
+    layers:
+    - state: fire_extinguisher
+      map: [ "enabled" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.FireExtinguisherVisuals.Safety:
+        enabled:
+          True: { state: fire_extinguisher } # TODO CM14
+          False: { state: fire_extinguisher }

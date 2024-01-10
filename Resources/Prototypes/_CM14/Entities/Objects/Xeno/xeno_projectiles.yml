@@ -1,6 +1,5 @@
 ﻿- type: entity
   abstract: true
-  parent: CMEntityBase
   id: XenoBaseProjectile
   name: projectile
   components:

@@ -1,0 +1,133 @@
+- type: entity
+  parent: BaseStorageItem
+  id: CMFirstAidKit
+  name: first-aid kit
+  description: It's an emergency medical kit for those serious boo-boos. With medical training you can fit this in a backpack.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Medical/first_aid_kits.rsi
+    layers:
+    - state: firstaid
+    - state: kit_empty
+      map: [ "openLayer" ]
+      visible: false
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,7,1
+  - type: Item
+    size: Large
+    sprite: _CM14/Objects/Medical/first_aid_kits.rsi
+    heldPrefix: firstaid
+  - type: Tag
+    tags:
+    - CMFirstAidKit
+  - type: GenericVisualizer
+    visuals:
+      enum.SharedBagOpenVisuals.BagState:
+        openLayer:
+          Open: { visible: true }
+          Closed: { visible: false }
+  - type: Appearance
+
+- type: entity
+  parent: CMFirstAidKit
+  id: CMFirstAidKitFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMHealthAnalyzer
+#    - id: CMFirstAidAutoInjector
+#    - id: CMPainStopAutoInjector
+    - id: CMInaprovalineAutoInjector
+    - id: CMGauze10
+    - id: CMOintment10
+#    - id: CMMedicalSplint5
+
+- type: entity
+  parent: CMFirstAidKit
+  id: CMBurnAidKit
+  name: fire first-aid kit
+  description: It's an emergency medical kit for when the dropship ammo storage spontaneously burns down. With medical training you can fit this in a backpack.
+  components:
+  - type: Sprite
+    layers:
+    - state: burn
+    - state: kit_empty
+      map: [ "openLayer" ]
+      visible: false
+  - type: Item
+    heldPrefix: ointment
+
+- type: entity
+  parent: CMBurnAidKit
+  id: CMBurnAidKitFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMHealthAnalyzer
+    - id: CMOintment10
+      amount: 2
+    - id: CMKelotaneAutoInjector
+      amount: 3
+#    - id: CMPainStopAutoInjector
+
+- type: entity
+  parent: CMFirstAidKit
+  id: CMFirstAidO2Kit
+  name: oxygen deprivation first-aid kit
+  description: A box full of reoxygenating goodies. With medical training you can fit this in a backpack.
+  components:
+  - type: Sprite
+    layers:
+    - state: o2
+    - state: kit_empty
+      map: [ "openLayer" ]
+      visible: false
+  - type: Item
+    heldPrefix: o2
+
+- type: entity
+  parent: CMFirstAidO2Kit
+  id: CMFirstAidO2KitFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMHealthAnalyzer
+    - id: CMPillDexalin
+      amount: 2
+    - id: CMDexalinPlusAutoInjector
+      amount: 3
+    - id: CMInaprovalineAutoInjector
+
+- type: entity
+  parent: CMFirstAidKit
+  id: CMAdvFirstAidKit
+  name: advanced first-aid kit
+  description: Contains more effective methods of medical treatment than a basic first-aid kit, such as burn and trauma kits. With medical training you can fit this in a backpack.
+  components:
+  - type: Sprite
+    layers:
+    - state: advfirstaid
+    - state: kit_empty
+      map: [ "openLayer" ]
+      visible: false
+  - type: Item
+    heldPrefix: advfirstaid
+
+- type: entity
+  parent: CMAdvFirstAidKit
+  id: CMAdvFirstAidKitFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMTricordrazineInjector
+    - id: CMTraumaKit10
+      amount: 3
+    - id: CMBurnKit10
+      amount: 2
+#    - id: CMMedicalSplints5
