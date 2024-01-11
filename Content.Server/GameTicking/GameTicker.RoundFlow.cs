@@ -526,7 +526,7 @@ namespace Content.Server.GameTicking
             }
 
             // Put a bangin' donk on it.
-            _audio.PlayGlobal(_audio.GetSound(new SoundCollectionSpecifier("RoundEnd")), Filter.Broadcast(), true);
+            _audio.PlayGlobal(_audio.GetSound(new SoundCollectionSpecifier("CMRoundEnd")), Filter.Broadcast(), true);
         }
 
         public bool DelayStart(TimeSpan time)

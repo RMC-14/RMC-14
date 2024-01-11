@@ -51,7 +51,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         var container = _container.EnsureContainer<ContainerSlot>(args.Hit, victim.ContainerId);
         _container.Insert(hugger.Owner, container);
 
-        _blindable.UpdateIsBlind(args.Hit);
+        _blindable.UpdateIsBlind(args.Hit.Owner);
         _appearance.SetData(hugger, victim.HuggedLayer, true);
 
         EnsureComp<HuggerSpentComponent>(hugger);
@@ -90,7 +90,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
     private void OnVictimHuggedRemoved(Entity<VictimHuggedComponent> victim, ref ComponentRemove args)
     {
-        _blindable.UpdateIsBlind(victim);
+        _blindable.UpdateIsBlind(victim.Owner);
         _standing.Stand(victim);
     }
 

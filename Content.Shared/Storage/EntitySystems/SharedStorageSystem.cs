@@ -132,6 +132,8 @@ public abstract class SharedStorageSystem : EntitySystem
             var ent = EnsureEntity<StorageComponent>(nent, uid);
             component.StoredItems[ent] = location;
         }
+
+        UpdateUI((uid, component));
     }
 
     public override void Shutdown()
@@ -574,7 +576,7 @@ public abstract class SharedStorageSystem : EntitySystem
         var items = new List<(EntityUid Id, ItemStorageLocation Location)>();
         foreach (var (item, location) in entity.Comp.StoredItems)
         {
-            items.Add((GetEntity(item), location));
+            items.Add((item, location));
         }
 
         items.Sort(static (a, b) => a.Location.Position.X.CompareTo(b.Location.Position.X));

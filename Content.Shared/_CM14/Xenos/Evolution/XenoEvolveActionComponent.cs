@@ -2,7 +2,7 @@
 
 namespace Content.Shared._CM14.Xenos.Evolution;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(XenoEvolutionSystem))]
 public sealed partial class XenoEvolveActionComponent : Component
 {

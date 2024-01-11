@@ -1,12 +1,11 @@
 ﻿using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 
 namespace Content.Shared._CM14.Medical.Injectors;
 
 public sealed class CMRefillableSolutionSystem : EntitySystem
 {
-    [Dependency] private readonly SolutionContainerSystem _solution = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
 
     public override void Initialize()
     {
@@ -25,7 +24,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
 
         foreach (var (reagent, amount) in refillable.Reagents)
         {
-            _solution.TryAddReagent(args.Used, solution, reagent, amount);
+            _solution.TryAddReagent(solution.Value, reagent, amount);
         }
 
         args.Handled = true;
