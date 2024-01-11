@@ -3,7 +3,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._CM14.Xenos.Construction;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedXenoConstructionSystem))]
 public sealed partial class HiveCoreComponent : Component
 {

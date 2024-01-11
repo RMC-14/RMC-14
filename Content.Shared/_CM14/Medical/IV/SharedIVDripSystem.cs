@@ -21,7 +21,7 @@ public abstract class SharedIVDripSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -119,15 +119,15 @@ public abstract class SharedIVDripSystem : EntitySystem
 
     private void OnBloodPackMapInitEvent(Entity<BloodPackComponent> pack, ref MapInitEvent args)
     {
-        if (!_solutionContainer.TryGetSolution(pack, pack.Comp.Solution, out var packSolution))
+        if (!_solutionContainer.TryGetSolution(pack.Owner, pack.Comp.Solution, out _, out var solution))
             return;
 
-        UpdatePackVisuals(pack, packSolution);
+        UpdatePackVisuals(pack, solution);
     }
 
     private void OnBloodPackSolutionChanged(Entity<BloodPackComponent> pack, ref SolutionChangedEvent args)
     {
-        UpdatePackVisuals(pack, args.Solution);
+        UpdatePackVisuals(pack, args.Solution.Comp.Solution);
     }
 
     protected bool InRange(Entity<IVDripComponent> iv, EntityUid to)
@@ -236,7 +236,7 @@ public abstract class SharedIVDripSystem : EntitySystem
             foreach (var entity in container.ContainedEntities)
             {
                 if (TryComp(entity, out BloodPackComponent? pack) &&
-                    _solutionContainer.TryGetSolution(entity, pack.Solution, out var solution))
+                    _solutionContainer.TryGetSolution(entity, pack.Solution, out _, out var solution))
                 {
                     iv.Comp.FillColor = solution.GetColor(_prototype);
                     iv.Comp.FillPercentage = (int) (solution.Volume / solution.MaxVolume * 100);

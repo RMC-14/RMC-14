@@ -23,7 +23,6 @@
   - type: Item
     sprite: Objects/Specific/Medical/defib.rsi
     size: Normal
-  - type: ItemCooldown
   - type: Speech
     speechVerb: Robotic
   - type: Defibrillator

@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._CM14.Xenos.Sweep;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(XenoTailSweepSystem))]
 public sealed partial class XenoTailSweepComponent : Component
 {

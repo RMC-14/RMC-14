@@ -1,6 +1,6 @@
 using Content.Server.Body.Components;
+using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Shared._CM14.Medical.IV;
-using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
 using Robust.Shared.Timing;
 
@@ -30,10 +30,13 @@ public sealed class IVDripSystem : SharedIVDripSystem
             if (!TryComp(pack, out BloodPackComponent? packComponent))
                 continue;
 
-            if (!_solutionContainer.TryGetSolution(pack, packComponent.Solution, out var packSolution))
+            if (!_solutionContainer.TryGetSolution(pack, packComponent.Solution, out var packSolEnt, out var packSol))
                 continue;
 
-            if (!TryComp(attachedTo, out BloodstreamComponent? targetBloodstream))
+            if (!TryComp(attachedTo, out BloodstreamComponent? attachedStream))
+                continue;
+
+            if (!_solutionContainer.TryGetSolution(attachedTo, attachedStream.BloodSolutionName, out var streamSolEnt, out var streamSol))
                 continue;
 
             if (time < ivComp.TransferAt)
@@ -41,16 +44,17 @@ public sealed class IVDripSystem : SharedIVDripSystem
 
             if (ivComp.Injecting)
             {
-                if (targetBloodstream.BloodSolution.Volume < targetBloodstream.BloodSolution.MaxVolume)
+                if (attachedStream.BloodSolution is { } bloodSolutionEnt &&
+                    bloodSolutionEnt.Comp.Solution.Volume < bloodSolutionEnt.Comp.Solution.MaxVolume)
                 {
-                    _solutionContainer.TryTransferSolution(pack, attachedTo, packSolution, targetBloodstream.BloodSolution, ivComp.TransferAmount);
+                    _solutionContainer.TryTransferSolution(bloodSolutionEnt, packSol, ivComp.TransferAmount);
                 }
             }
             else
             {
-                if (packSolution.Volume < packSolution.MaxVolume)
+                if (packSol.Volume < packSol.MaxVolume)
                 {
-                    _solutionContainer.TryTransferSolution(attachedTo, pack, targetBloodstream.BloodSolution, packSolution, ivComp.TransferAmount);
+                    _solutionContainer.TryTransferSolution(packSolEnt.Value, streamSol, ivComp.TransferAmount);
                 }
             }
 
