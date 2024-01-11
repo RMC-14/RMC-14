@@ -25,17 +25,19 @@ namespace Content.Client.Pinpointer.UI;
 public partial class NavMapControl : MapGridControl
 {
     [Dependency] private readonly IEntityManager _entManager = default!;
-    private readonly SharedTransformSystem _transformSystem = default!;
+    private readonly SharedTransformSystem _transformSystem;
 
+    public EntityUid? Owner;
     public EntityUid? MapUid;
 
     // Actions
     public event Action<NetEntity?>? TrackedEntitySelectedAction;
+    public event Action<DrawingHandleScreen>? PostWallDrawingAction;
 
     // Tracked data
     public Dictionary<EntityCoordinates, (bool Visible, Color Color)> TrackedCoordinates = new();
     public Dictionary<NetEntity, NavMapBlip> TrackedEntities = new();
-    public Dictionary<Vector2i, List<NavMapLine>> TileGrid = default!;
+    public Dictionary<Vector2i, List<NavMapLine>>? TileGrid = default!;
 
     // Default colors
     public Color WallColor = new(102, 217, 102);
@@ -45,10 +47,12 @@ public partial class NavMapControl : MapGridControl
     protected float UpdateTime = 1.0f;
     protected float MaxSelectableDistance = 10f;
     protected float RecenterMinimum = 0.05f;
+    protected float MinDragDistance = 5f;
 
     // Local variables
     private Vector2 _offset;
     private bool _draggin;
+    private Vector2 _startDragPosition = default!;
     private bool _recentering = false;
     private readonly Font _font;
     private float _updateTimer = 0.25f;
@@ -168,21 +172,29 @@ public partial class NavMapControl : MapGridControl
         base.KeyBindDown(args);
 
         if (args.Function == EngineKeyFunctions.Use)
+        {
+            _startDragPosition = args.PointerLocation.Position;
             _draggin = true;
+        }
     }
 
     protected override void KeyBindUp(GUIBoundKeyEventArgs args)
     {
         base.KeyBindUp(args);
 
+        if (args.Function == EngineKeyFunctions.Use)
+            _draggin = false;
+
         if (TrackedEntitySelectedAction == null)
             return;
 
         if (args.Function == EngineKeyFunctions.Use)
         {
-            _draggin = false;
-
             if (_xform == null || _physics == null || TrackedEntities.Count == 0)
+                return;
+
+            // If the cursor has moved a significant distance, exit
+            if ((_startDragPosition - args.PointerLocation.Position).Length() > MinDragDistance)
                 return;
 
             // Get the clicked position
@@ -195,7 +207,6 @@ public partial class NavMapControl : MapGridControl
 
             // Find closest tracked entity in range
             var closestEntity = NetEntity.Invalid;
-            var closestCoords = new EntityCoordinates();
             var closestDistance = float.PositiveInfinity;
 
             foreach ((var currentEntity, var blip) in TrackedEntities)
@@ -209,7 +220,6 @@ public partial class NavMapControl : MapGridControl
                     continue;
 
                 closestEntity = currentEntity;
-                closestCoords = blip.Coordinates;
                 closestDistance = currentDistance;
             }
 
@@ -222,8 +232,7 @@ public partial class NavMapControl : MapGridControl
         else if (args.Function == EngineKeyFunctions.UIRightClick)
         {
             // Clear current selection with right click
-            if (TrackedEntitySelectedAction != null)
-                TrackedEntitySelectedAction.Invoke(null);
+            TrackedEntitySelectedAction?.Invoke(null);
         }
     }
 
@@ -248,7 +257,7 @@ public partial class NavMapControl : MapGridControl
     {
         base.Draw(handle);
 
-        // Get the components necessary for drawing the navmap 
+        // Get the components necessary for drawing the navmap
         _entManager.TryGetComponent(MapUid, out _navMap);
         _entManager.TryGetComponent(MapUid, out _grid);
         _entManager.TryGetComponent(MapUid, out _xform);
@@ -306,7 +315,7 @@ public partial class NavMapControl : MapGridControl
 
         var area = new Box2(-WorldRange, -WorldRange, WorldRange + 1f, WorldRange + 1f).Translated(offset);
 
-        // Drawing lines can be rather expensive due to the number of neighbors that need to be checked in order  
+        // Drawing lines can be rather expensive due to the number of neighbors that need to be checked in order
         // to figure out where they should be drawn. However, we don't *need* to do check these every frame.
         // Instead, lets periodically update where to draw each line and then store these points in a list.
         // Then we can just run through the list each frame and draw the lines without any extra computation.
@@ -347,6 +356,44 @@ public partial class NavMapControl : MapGridControl
                 handle.DrawPrimitives(DrawPrimitiveTopology.LineList, walls.Span, sRGB);
             }
         }
+
+        var airlockBuffer = Vector2.One * (MinimapScale / 2.25f) * 0.75f;
+        var airlockLines = new ValueList<Vector2>();
+        var foobarVec = new Vector2(1, -1);
+
+        foreach (var airlock in _navMap.Airlocks)
+        {
+            var position = airlock.Position - offset;
+            position = Scale(position with { Y = -position.Y });
+            airlockLines.Add(position + airlockBuffer);
+            airlockLines.Add(position - airlockBuffer * foobarVec);
+
+            airlockLines.Add(position + airlockBuffer);
+            airlockLines.Add(position + airlockBuffer * foobarVec);
+
+            airlockLines.Add(position - airlockBuffer);
+            airlockLines.Add(position + airlockBuffer * foobarVec);
+
+            airlockLines.Add(position - airlockBuffer);
+            airlockLines.Add(position - airlockBuffer * foobarVec);
+
+            airlockLines.Add(position + airlockBuffer * -Vector2.UnitY);
+            airlockLines.Add(position - airlockBuffer * -Vector2.UnitY);
+        }
+
+        if (airlockLines.Count > 0)
+        {
+            if (!_sRGBLookUp.TryGetValue(WallColor, out var sRGB))
+            {
+                sRGB = Color.ToSrgb(WallColor);
+                _sRGBLookUp[WallColor] = sRGB;
+            }
+
+            handle.DrawPrimitives(DrawPrimitiveTopology.LineList, airlockLines.Span, sRGB);
+        }
+
+        if (PostWallDrawingAction != null)
+            PostWallDrawingAction.Invoke(handle);
 
         // Beacons
         if (_beacons.Pressed)
@@ -445,7 +492,7 @@ public partial class NavMapControl : MapGridControl
         }
     }
 
-    private void UpdateNavMap()
+    protected virtual void UpdateNavMap()
     {
         if (_navMap == null || _grid == null)
             return;
