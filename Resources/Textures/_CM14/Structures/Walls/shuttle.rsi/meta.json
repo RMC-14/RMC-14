@@ -1,0 +1,418 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/24f6af93a52fe4099f05b27ec77c59877ddc662d/icons/turf/shuttle.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "doorc0",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "door1"
+    },
+    {
+      "name": "doorc1",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "door0"
+    },
+    {
+      "name": "propulsion",
+      "directions": 4
+    },
+    {
+      "name": "burst_l",
+      "directions": 4
+    },
+    {
+      "name": "burst_r",
+      "directions": 4
+    },
+    {
+      "name": "router",
+      "directions": 4
+    },
+    {
+      "name": "platform",
+      "directions": 8
+    },
+    {
+      "name": "heater",
+      "directions": 4
+    },
+    {
+      "name": "floor"
+    },
+    {
+      "name": "floor2"
+    },
+    {
+      "name": "floor3"
+    },
+    {
+      "name": "floor4"
+    },
+    {
+      "name": "floor5"
+    },
+    {
+      "name": "floor6"
+    },
+    {
+      "name": "floor7"
+    },
+    {
+      "name": "diagonalwall",
+      "directions": 8
+    },
+    {
+      "name": "wall1"
+    },
+    {
+      "name": "wall2"
+    },
+    {
+      "name": "wall",
+      "directions": 8
+    },
+    {
+      "name": "diagonalwall2"
+    },
+    {
+      "name": "pwall",
+      "directions": 8
+    },
+    {
+      "name": "wall3",
+      "directions": 8
+    },
+    {
+      "name": "diagonalwall3",
+      "directions": 8
+    },
+    {
+      "name": "wall_floor",
+      "directions": 8
+    },
+    {
+      "name": "wall_space",
+      "directions": 8
+    },
+    {
+      "name": "propulsion_r",
+      "directions": 4
+    },
+    {
+      "name": "burst_s",
+      "directions": 4
+    },
+    {
+      "name": "propulsion_l",
+      "directions": 4
+    },
+    {
+      "name": "swall0"
+    },
+    {
+      "name": "swall1"
+    },
+    {
+      "name": "swall2"
+    },
+    {
+      "name": "swall3"
+    },
+    {
+      "name": "swall4"
+    },
+    {
+      "name": "swall7"
+    },
+    {
+      "name": "swall8"
+    },
+    {
+      "name": "swall11"
+    },
+    {
+      "name": "swall12"
+    },
+    {
+      "name": "swall13"
+    },
+    {
+      "name": "swall14"
+    },
+    {
+      "name": "swall15"
+    },
+    {
+      "name": "swall_f5"
+    },
+    {
+      "name": "swall_f6"
+    },
+    {
+      "name": "swall_f9"
+    },
+    {
+      "name": "swall_f10"
+    },
+    {
+      "name": "swall_s5"
+    },
+    {
+      "name": "swall_s6"
+    },
+    {
+      "name": "swall_s9"
+    },
+    {
+      "name": "swall_s10"
+    },
+    {
+      "name": "gwall_space",
+      "directions": 4
+    },
+    {
+      "name": "gwall_floor",
+      "directions": 4
+    },
+    {
+      "name": "swallc1"
+    },
+    {
+      "name": "swallc2"
+    },
+    {
+      "name": "swallc3"
+    },
+    {
+      "name": "swallc4"
+    },
+    {
+      "name": "vwall0"
+    },
+    {
+      "name": "vwall1"
+    },
+    {
+      "name": "vwall2"
+    },
+    {
+      "name": "vwall3"
+    },
+    {
+      "name": "vwall4"
+    },
+    {
+      "name": "vwall8"
+    },
+    {
+      "name": "vwall12"
+    },
+    {
+      "name": "vwallc1"
+    },
+    {
+      "name": "vwallc2"
+    },
+    {
+      "name": "vwallc3"
+    },
+    {
+      "name": "vwallc4"
+    },
+    {
+      "name": "vfloor"
+    },
+    {
+      "name": "vwall_f5"
+    },
+    {
+      "name": "vwall_f6"
+    },
+    {
+      "name": "vwall_f9"
+    },
+    {
+      "name": "vwall_f10"
+    },
+    {
+      "name": "vcorner1"
+    },
+    {
+      "name": "vcorner2"
+    },
+    {
+      "name": "vcorner3"
+    },
+    {
+      "name": "vcorner4"
+    },
+    {
+      "name": "swall_floor_f5"
+    },
+    {
+      "name": "swall_floor_f6"
+    },
+    {
+      "name": "swall_floor_f9"
+    },
+    {
+      "name": "swall_floor_f10"
+    },
+    {
+      "name": "cornerplate",
+      "directions": 4
+    },
+    {
+      "name": "re_corner",
+      "directions": 4
+    },
+    {
+      "name": "floor8"
+    },
+    {
+      "name": "dwall1"
+    },
+    {
+      "name": "dwall2"
+    },
+    {
+      "name": "dwall3"
+    },
+    {
+      "name": "dwall4"
+    },
+    {
+      "name": "dwall5"
+    },
+    {
+      "name": "dwall6"
+    },
+    {
+      "name": "dwall7"
+    },
+    {
+      "name": "dwall8"
+    },
+    {
+      "name": "dwall9"
+    },
+    {
+      "name": "dwall10"
+    },
+    {
+      "name": "dwall11"
+    },
+    {
+      "name": "dwall12"
+    },
+    {
+      "name": "dwall13"
+    },
+    {
+      "name": "dwall14"
+    },
+    {
+      "name": "dwall15"
+    },
+    {
+      "name": "dwall16"
+    },
+    {
+      "name": "dwall17"
+    },
+    {
+      "name": "dwall18"
+    },
+    {
+      "name": "dwall19"
+    },
+    {
+      "name": "dwall20"
+    },
+    {
+      "name": "dwall21"
+    },
+    {
+      "name": "dwall22"
+    },
+    {
+      "name": "dwall23"
+    },
+    {
+      "name": "rasputin1"
+    },
+    {
+      "name": "rasputin2"
+    },
+    {
+      "name": "rasputin3"
+    },
+    {
+      "name": "rasputin4"
+    },
+    {
+      "name": "rasputin5"
+    },
+    {
+      "name": "rasputin6"
+    },
+    {
+      "name": "rasputin7"
+    },
+    {
+      "name": "rasputin8"
+    },
+    {
+      "name": "rasputin9"
+    },
+    {
+      "name": "rasputin10"
+    },
+    {
+      "name": "rasputin11"
+    },
+    {
+      "name": "rasputin12"
+    },
+    {
+      "name": "rasputin13"
+    },
+    {
+      "name": "rasputin14"
+    },
+    {
+      "name": "rasputin15"
+    }
+  ]
+}
