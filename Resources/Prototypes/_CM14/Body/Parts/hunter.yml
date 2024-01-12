@@ -1,0 +1,95 @@
+- type: entity
+  id: PartHunter
+  parent: [BaseItem, BasePart]
+  name: "hunter body part"
+  abstract: true
+
+- type: entity
+  id: TorsoHunter
+  name: "hunter torso"
+  parent: [PartHunter, BaseTorso]
+  components:
+    - type: Sprite
+      sprite: _CM14/Mobs/Species/Hunter/parts.rsi
+      state: "torso_m"
+
+- type: entity
+  id: HeadHunter
+  name: "hunter head"
+  parent: [PartHunter, BaseHead]
+  components:
+    - type: Sprite
+      sprite: _CM14/Mobs/Species/Hunter/parts.rsi
+      state: "head_m"
+  
+- type: entity
+  id: LeftArmHunter
+  name: "left hunter arm"
+  parent: [PartHunter, BaseLeftArm]
+  components:
+    - type: Sprite
+      sprite: _CM14/Mobs/Species/Hunter/parts.rsi
+      state: "l_arm"
+
+- type: entity
+  id: RightArmHunter
+  name: "right hunter arm"
+  parent: [PartHunter, BaseRightArm]
+  components:
+    - type: Sprite
+      sprite: _CM14/Mobs/Species/Hunter/parts.rsi
+      state: "r_arm"
+
+- type: entity
+  id: LeftHandHunter
+  name: "left hunter hand"
+  parent: [PartHunter, BaseLeftHand]
+  components:
+    - type: Sprite
+      sprite: _CM14/Mobs/Species/Hunter/parts.rsi
+      state: "l_hand"
+
+- type: entity
+  id: RightHandHunter
+  name: "right hunter hand"
+  parent: [PartHunter, BaseRightHand]
+  components:
+    - type: Sprite
+      sprite: _CM14/Mobs/Species/Hunter/parts.rsi
+      state: "r_hand"
+
+- type: entity
+  id: LeftLegHunter
+  name: "left hunter leg"
+  parent: [PartHunter, BaseLeftLeg]
+  components:
+    - type: Sprite
+      sprite: _CM14/Mobs/Species/Hunter/parts.rsi
+      state: "l_leg"
+
+- type: entity
+  id: RightLegHunter
+  name: "right hunter leg"
+  parent: [PartHunter, BaseRightLeg]
+  components:
+    - type: Sprite
+      sprite: _CM14/Mobs/Species/Hunter/parts.rsi
+      state: "r_leg"
+
+- type: entity
+  id: LeftFootHunter
+  name: "left hunter foot"
+  parent: [PartHunter, BaseLeftFoot]
+  components:
+    - type: Sprite
+      sprite: _CM14/Mobs/Species/Hunter/parts.rsi
+      state: "l_foot"
+
+- type: entity
+  id: RightFootHunter
+  name: "right hunter foot"
+  parent: [PartHunter, BaseRightFoot]
+  components:
+    - type: Sprite
+      sprite: _CM14/Mobs/Species/Hunter/parts.rsi
+      state: "r_foot"
