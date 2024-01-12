@@ -103,7 +103,7 @@
   parent: CMHeadCapMP
   id: CMHeadCap
   name: cap
-  description: Standart baseball cap.
+  description: Standard baseball cap.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Head/Hats/cap.rsi
