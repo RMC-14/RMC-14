@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/185a0f510b502711291175be8ed5decb94ce83b3/icons/turf/walls/wood.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "wood"
+    },
+    {
+      "name": "wood0",
+      "directions": 4
+    },
+    {
+      "name": "wood1",
+      "directions": 4
+    },
+    {
+      "name": "wood2",
+      "directions": 4
+    },
+    {
+      "name": "wood3",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "wood4",
+      "directions": 4
+    },
+    {
+      "name": "wood5",
+      "directions": 4
+    },
+    {
+      "name": "wood6",
+      "directions": 4
+    },
+    {
+      "name": "wood7",
+      "directions": 4
+    },
+    {
+      "name": "wood_variant"
+    }
+  ]
+}
