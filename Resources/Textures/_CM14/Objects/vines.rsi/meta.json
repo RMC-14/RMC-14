@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/ece160ae415a0ffd2392584fce0a1c43f6b2cf10/icons/effects/spacevines.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "heavy_1"
+    },
+    {
+      "name": "heavy_2"
+    },
+    {
+      "name": "heavy_3"
+    },
+    {
+      "name": "heavy_4"
+    },
+    {
+      "name": "heavy_5"
+    },
+    {
+      "name": "heavy_6"
+    },
+    {
+      "name": "light_1"
+    },
+    {
+      "name": "light_2"
+    },
+    {
+      "name": "light_3"
+    }
+  ]
+}
