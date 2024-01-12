@@ -300,6 +300,7 @@
     color: "#3C3434"
   - type: Icon
     sprite: _CM14/Structures/Walls/cult.rsi
+    state: cult0
   - type: Tag
     tags:
     - Wall
@@ -326,6 +327,7 @@
     sprite: _CM14/Structures/Walls/wood.rsi
   - type: Icon
     sprite: _CM14/Structures/Walls/wood.rsi
+    state: wood0
   - type: Tag
     tags:
     - Wall
@@ -352,6 +354,7 @@
     sprite: _CM14/Structures/Walls/jungle.rsi
   - type: Icon
     sprite: _CM14/Structures/Walls/jungle.rsi
+    state: jungle_veg0
   - type: Tag
     tags:
     - Wall

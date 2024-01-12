@@ -1,14 +1,16 @@
 - type: vendingMachineInventory
-  id: CMVendorIngridient
+  id: CMVendorIngredient
   startingInventory:
     FoodContainerEgg: 12
     FoodMeatFish: 12
     FoodMeat: 12
-    ReagentContainerMilk: 12
-    ReagentContainerMilkSoy: 12
-    FoodCondimentBottleEnzyme: 12
+    ReagentContainerCornmeal: 12
+    ReagentContainerRice: 12
+    ReagentContainerMayo: 12
     ReagentContainerFlour: 12
     ReagentContainerSugar: 12
+    ReagentContainerOliveoil: 12
+    FoodCondimentBottleEnzyme: 12
     FoodShakerSalt: 12
     FoodShakerPepper: 12
     # todo cm14 Mint 12
