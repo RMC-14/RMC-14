@@ -20,6 +20,7 @@ tiles-cm-dirt = dirt tile
 tiles-cm-desert = desert tile
 tiles-cm-sand = sand tile
 tiles-cm-grass = grass tile
+tiles-cm-dirt-grass = dirt grass tile
 
 tiles-cm-default-alpha = alpha steel tile
 tiles-cm-default-bravo = bravo steel tile
