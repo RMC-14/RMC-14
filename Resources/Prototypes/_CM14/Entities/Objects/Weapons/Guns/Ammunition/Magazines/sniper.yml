@@ -1,0 +1,100 @@
+﻿- type: entity
+  parent: BaseMagazineRifle
+  id: CMMagazineSniperM42A
+  name: "M42A marksman magazine (10x28mm caseless)"
+  description: A magazine of sniper rifle ammo. An aimed shot with it will deal significant damage.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSniperM42A
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeSniper10x28mm
+    proto: CMCartridgeSniper10x28mm
+    capacity: 15
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m42c.rsi
+    layers:
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: CMMagazineSniperM42A
+  id: CMMagazineSniperM42AIncendiary
+  name: "M42A incendiary magazine (10x28mm)"
+  description: A magazine of sniper rifle ammo. An aimed shot with it will temporarily blind the targe and kindle the blaze further.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CMCartridgeSniper10x28mmIncendiary
+    capacity: 15
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m42c.rsi
+    layers:
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: band_e # TODO CM14 band non e
+      color: "#9C2219"
+
+- type: entity
+  parent: CMMagazineSniperM42A
+  id: CMMagazineSniperM42AFlak
+  name: "M42A flak magazine (10x28mm)"
+  description: A magazine of sniper rifle ammo. An aimed shot with it will temporarily slow the target and minimize the backlash.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CMCartridgeSniper10x28mmFlak
+    capacity: 15
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m42c.rsi
+    layers:
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: band_e # TODO CM14 band non e
+      color: "#7866FF"
+
+- type: entity
+  parent: CMMagazineSniperM42A
+  id: CMMagazineSniperM42AAntiMateriel
+  name: "XM43E1 marksman magazine (10x99mm)"
+  description: A magazine of caseless 10x99mm anti-materiel rounds.
+  components:
+  - type: Tag
+    tags: []
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeSniper10x99mm
+    proto: CMCartridgeSniper10x99mmAntiMateriel
+    capacity: 8
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m42c.rsi
+    layers:
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: band_e # TODO CM14 band non e
+      color: "#000000"
+
+- type: Tag
+  id: CMMagazineSniperM42A
+
+- type: Tag
+  id: CMCartridgeSniper10x28mm
+
+- type: Tag
+  id: CMCartridgeSniper10x99mm

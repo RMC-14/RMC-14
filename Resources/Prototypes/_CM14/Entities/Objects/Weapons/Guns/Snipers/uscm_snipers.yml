@@ -1,0 +1,57 @@
+﻿# TODO CM14 sniper barrel
+- type: entity
+  parent: BaseItem
+  id: CMM42ASniperRifle
+  name: M42A scoped rifle
+  description: "A heavy sniper rifle manufactured by Armat Systems. It has a scope system and fires armor penetrating rounds out of a 15-round magazine.
+    'Peace Through Superior Firepower'"
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Snipers/m42a.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+  - type: Item
+    size: Huge
+  - type: Clothing
+    sprite: _CM14/Objects/Weapons/Guns/Snipers/m42a.rsi
+    quickEquip: false
+    slots:
+    - Back
+  - type: AmmoCounter
+  - type: Gun
+    minAngle: 30
+    maxAngle: 50
+    fireRate: 0.5
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_CM14/Weapons/Guns/Gunshots/gun_sniper.ogg
+  - type: GunWieldBonus
+    minAngle: -30
+    maxAngle: -50
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineSniperM42A
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+          - CMCartridgeSniper10x28mm
+  - type: Wieldable
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: Appearance
+  - type: ChamberMagazineAmmoProvider
+    autoEject: true
