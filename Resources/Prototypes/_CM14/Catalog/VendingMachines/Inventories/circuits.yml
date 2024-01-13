@@ -2,7 +2,7 @@
   id: CMVendorCircuits
   startingInventory:
     FireAlarmElectronics: 5
-    APCElectronics: 6
+    CMAPCElectronics: 6
     CMAutolatheMachineCircuitboard: 2
     TelecomServerCircuitboard: 1
     CrewMonitoringComputerCircuitboard: 2
