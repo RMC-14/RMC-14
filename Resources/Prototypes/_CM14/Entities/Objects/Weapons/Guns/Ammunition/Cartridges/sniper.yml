@@ -41,4 +41,4 @@
     - Cartridge
     - CMCartridgeSniper10x99mm
   - type: CartridgeAmmo
-    proto: CMBulletSniper10x28mmAntiMateriel
+    proto: CMBulletSniper10x99mmAntiMateriel
