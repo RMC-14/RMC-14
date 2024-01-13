@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "license": "CC BY-SA 3.0",
+  "copyright": "Taken from CM-13 repo at https://github.com/cmss13-devs/cmss13/tree/cc1c951625868dfbb3a74b628d2b42b0f49d6559/icons/mob/humans/onmob/hunter",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+    "states": [
+        {
+            "name": "combistick-icon"
+        },
+        {
+            "name": "combistick-on"
+        },
+        {
+            "name": "combistick-inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "combistick-inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "inhand-left-combistick",
+            "directions": 4
+        },
+        {
+            "name": "inhand-right-combistick",
+            "directions": 4
+        },
+        {
+            "name": "wielded-inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "wielded-inhand-right",
+            "directions": 4
+        }
+    ]
+}
