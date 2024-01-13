@@ -10,7 +10,6 @@
   - type: Hunger
     starvationDamage:
       types:
-        Cold: 0.5
         Bloodloss: 0.5
   - type: Thirst
   - type: Icon
@@ -37,7 +36,7 @@
       Unsexed: UnisexReptilian
   - type: Damageable
     damageContainer: Biological
-    damageModifierSet: Scale
+    damageModifierSet: Quills
   - type: MeleeWeapon
     soundHit:
       path: /Audio/Weapons/pierce.ogg
@@ -45,18 +44,37 @@
     animation: WeaponArcPunch
     damage:
       types:
-        Piercing: 5
+        Blunt: 10
   - type: Temperature
     heatDamageThreshold: 400
-    coldDamageThreshold: 285
-    currentTemperature: 310.15
+    coldDamageThreshold: 100
+    currentTemperature: 200
     specificHeat: 42
     coldDamage:
       types:
         Cold : 0.1 #per second, scales with temperature & other constants
     heatDamage:
       types:
-        Heat : 1.5 #per second, scales with temperature & other constants
+        Heat : 0.1 #per second, scales with temperature & other constants
+  - type: Bloodstream
+    bloodReagent: GreenBlood
+  - type: Respirator
+    damage:
+      types:
+        Asphyxiation: 0.1
+    damageRecovery:
+      types:
+        Asphyxiation: -10
+  - type: Barotrauma
+    damage:
+      types:
+        Blunt: 0.20
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 3
+    baseSprintSpeed : 5
+    weightlessAcceleration: 1.5 # Move around more easily in space.
+    weightlessFriction: 1
+    weightlessModifier: 1
 
 - type: entity
   parent: BaseSpeciesDummy

@@ -1,0 +1,41 @@
+- type: reagent
+  id: GreenBlood
+  name: reagent-name-green-blood
+  group: Biological
+  desc: reagent-desc-green-blood
+  flavor: burning
+  color: "#013220"
+  recognizable: true
+  physicalDesc: reagent-physical-desc-viscous
+  slippery: false
+  viscosity: 0.70
+  tileReactions:
+    - !type:SpillTileReaction
+  metabolisms:
+    Food:
+      effects:
+      - !type:SatiateHunger
+        factor: 1.5
+    Medicine:
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Burn: -2
+            Brute: -2
+            Toxin: -2
+          types:
+            Bloodloss: -2
+    Narcotic:
+      effects:
+      - !type:MovespeedModifier
+        walkSpeedModifier: 1.35
+        sprintSpeedModifier: 1.35
+      - !type:GenericStatusEffect
+        key: Stun
+        time: 3
+        type: Remove
+      - !type:GenericStatusEffect
+        key: KnockedDown
+        time: 3
+        type: Remove
