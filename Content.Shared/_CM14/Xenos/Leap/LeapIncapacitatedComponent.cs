@@ -7,6 +7,5 @@ namespace Content.Shared._CM14.Xenos.Leap;
 public sealed partial class LeapIncapacitatedComponent : Component
 {
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan RecoverAt;
 }

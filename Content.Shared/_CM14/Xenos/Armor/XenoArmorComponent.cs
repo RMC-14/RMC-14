@@ -7,6 +7,5 @@ namespace Content.Shared._CM14.Xenos.Armor;
 public sealed partial class XenoArmorComponent : Component
 {
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public int Armor;
 }

@@ -9,10 +9,8 @@ namespace Content.Shared._CM14.Xenos.Projectile.Bone;
 public sealed partial class XenoBoneChipsComponent : Component
 {
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public float Speed = 6;
 
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public EntProtoId ProjectileId = "XenoBoneChipsProjectile";
 }

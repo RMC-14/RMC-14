@@ -18,30 +18,23 @@ public sealed partial class XenoComponent : Component
     public Dictionary<EntProtoId, EntityUid> Actions = new();
 
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public FixedPoint2 HealthRegenOnWeeds = 1.25;
 
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan RegenCooldown = TimeSpan.FromSeconds(1);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan NextRegenTime;
 
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public EntityUid Hive;
 
     [DataField(customTypeSerializer: typeof(PrototypeIdHashSetSerializer<AccessLevelPrototype>)), AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public HashSet<string> AccessLevels = new() { "CMAccessXeno" };
 
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public bool OnWeeds;
 
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public int Tier;
 }

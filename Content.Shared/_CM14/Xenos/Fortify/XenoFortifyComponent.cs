@@ -10,19 +10,15 @@ public sealed partial class XenoFortifyComponent : Component
     public const string FixtureId = "cm-xeno-fortify";
 
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public bool Fortified;
 
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public int Armor = 30;
 
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public int FrontalArmor = 5;
 
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public float ExplosionMultiplier = 0.4f;
 
     [DataField]

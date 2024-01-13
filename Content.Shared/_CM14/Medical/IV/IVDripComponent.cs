@@ -11,28 +11,28 @@ public sealed partial class IVDripComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid? AttachedTo;
 
-    [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField, AutoNetworkedField]
     public string Slot = "pack";
 
-    [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField, AutoNetworkedField]
     public FixedPoint2 TransferAmount = FixedPoint2.New(5);
 
-    [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField, AutoNetworkedField]
     public TimeSpan TransferDelay = TimeSpan.FromSeconds(3);
 
     [DataField, AutoNetworkedField]
     public TimeSpan TransferAt;
 
-    [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField, AutoNetworkedField]
     public string AttachedState = "hooked";
 
-    [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField, AutoNetworkedField]
     public string UnattachedState = "unhooked";
 
     /// <summary>
     ///     Percentages are from 0 to 100
     /// </summary>
-    [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField, AutoNetworkedField]
     public List<(int Percentage, string State)> ReagentStates = new();
 
     [DataField, AutoNetworkedField]

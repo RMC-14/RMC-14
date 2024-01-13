@@ -7,10 +7,8 @@ namespace Content.Shared._CM14.Xenos.Paralyzing;
 public sealed partial class VictimBeingParalyzedComponent : Component
 {
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan ParalyzeAt;
 
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan ParalyzeDuration = TimeSpan.FromSeconds(4);
 }

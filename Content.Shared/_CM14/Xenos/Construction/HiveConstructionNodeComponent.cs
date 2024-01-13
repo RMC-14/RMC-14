@@ -9,22 +9,17 @@ namespace Content.Shared._CM14.Xenos.Construction;
 public sealed partial class HiveConstructionNodeComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public FixedPoint2 InitialPlasmaCost;
 
     [DataField(required: true), AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public FixedPoint2 PlasmaCost;
 
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public FixedPoint2 PlasmaStored;
 
     [DataField(required: true), AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public EntProtoId Spawn;
 
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public bool BlockOtherNodes = true;
 }
