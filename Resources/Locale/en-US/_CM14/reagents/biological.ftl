@@ -1,0 +1,2 @@
+reagent-name-green-blood = green blood
+reagent-desc-green-blood = Contains an unnatural catecholamines. It pulses with regenerative and accelerative powers, perfected by a combination of natural selection and alien technology.
