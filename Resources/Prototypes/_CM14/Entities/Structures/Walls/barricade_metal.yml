@@ -10,12 +10,14 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.49,-0.49,0.49,-0.45"
+          bounds: "-0.49,-0.49,0.49,-0.3"
         density: 500
         mask:
         - FullTileMask
         layer:
         - TableLayer
+  - type: RotationDrawDepth
+    southDrawDepth: OverMobs
 
 # Metal Barricade Tree
 - type: entity
@@ -178,17 +180,6 @@
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: CMSandbag
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.49,-0.49,0.49,-0.45"
-        density: 2000
-        mask:
-        - FullTileMask
-        layer:
-        - TableLayer
   - type: Repairable
   - type: Destructible
     thresholds:

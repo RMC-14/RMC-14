@@ -143,7 +143,6 @@
     - !type:TileNotBlocked
 
 # Barricades
-
 - type: construction
   name: Metal Barricade
   id: CMBarricadeMetal
