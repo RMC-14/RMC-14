@@ -11,6 +11,5 @@ public sealed partial class CorrodingComponent : Component
     public EntityUid Acid;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan CorrodesAt;
 }

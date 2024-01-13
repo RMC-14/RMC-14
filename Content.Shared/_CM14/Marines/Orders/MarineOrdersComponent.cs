@@ -16,7 +16,6 @@ public sealed partial class MarineOrdersComponent : Component
     /// The default duration of an order.
     /// </summary>
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan Duration = TimeSpan.FromSeconds(20);
 
     public TimeSpan Cooldown => Duration + Delay;
@@ -32,7 +31,6 @@ public sealed partial class MarineOrdersComponent : Component
     /// Delay between orders
     /// </summary>
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan Delay = TimeSpan.FromMinutes(1);
 
     /// <summary>

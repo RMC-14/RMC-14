@@ -7,14 +7,11 @@ namespace Content.Shared._CM14.Xenos.Paralyzing;
 public sealed partial class XenoActiveParalyzingSlashComponent : Component
 {
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan ExpireAt;
 
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan StunDelay = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan StunDuration = TimeSpan.FromSeconds(4);
 }

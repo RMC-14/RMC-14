@@ -9,6 +9,5 @@ public sealed partial class HiveCoreComponent : Component
 {
     // TODO CM14 store lesser drones
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public EntProtoId Spawns = "XenoHiveWeeds";
 }
