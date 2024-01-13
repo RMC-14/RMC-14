@@ -20,6 +20,7 @@ namespace Content.Server.Entry
             "LightFade",
             "HolidayRsiSwap",
             "IconSmoothRandom",
+            "RotationDrawDepth"
         };
     }
 }
