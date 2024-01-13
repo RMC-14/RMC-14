@@ -24,7 +24,7 @@
     availableModes:
     - SemiAuto
     soundGunshot:
-      path: /Audio/_CM14/Weapons/Guns/Gunshots/m4a3.ogg
+      collection: CMM4A3Shoot
   - type: GunWieldBonus
     minAngle: -5
     maxAngle: -25
