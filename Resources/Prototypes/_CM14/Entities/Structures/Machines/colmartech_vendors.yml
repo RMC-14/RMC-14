@@ -1345,8 +1345,8 @@
         amount: 7
       - id: CMGauze10
         amount: 7
-      - id: CMMedicalSplints5
-        amount: 7
+#      - id: CMMedicalSplints5
+#        amount: 7
 
 - type: entity
   parent: ColMarTechBase
