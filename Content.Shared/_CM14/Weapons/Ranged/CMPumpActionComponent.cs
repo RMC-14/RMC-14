@@ -12,7 +12,4 @@ public sealed partial class CMPumpActionComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier Sound = new SoundCollectionSpecifier("CMShotgunPump");
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan Cooldown = TimeSpan.FromSeconds(2);
 }

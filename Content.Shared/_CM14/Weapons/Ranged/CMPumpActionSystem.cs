@@ -70,12 +70,9 @@ public sealed class CMPumpActionSystem : EntitySystem
         }
 
         if (TryComp(ent, out UseDelayComponent? delay) &&
-            _useDelay.IsDelayed((ent.Owner, delay)))
+            !_useDelay.TryResetDelay((ent, delay), true))
         {
-            if (_useDelay.IsDelayed((ent.Owner, delay)))
-                return;
-
-            _useDelay.SetDelay((ent.Owner, delay), ent.Comp.Cooldown);
+            return;
         }
 
         ent.Comp.Pumped = true;
