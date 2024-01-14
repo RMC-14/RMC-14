@@ -50,16 +50,3 @@
   innerClothingSkirt: ClothingUniformJumpskirtChiefEngineer
   satchel: ClothingBackpackSatchelChiefEngineerFilled
   duffelbag: ClothingBackpackDuffelChiefEngineerFilled
-
-- type: entity
-  id: SpawnPointChiefEngineer
-  parent: CMSpawnPointJobBase
-  name: chief engineer spawn point
-  components:
-  - type: SpawnPoint
-    job_id: ChiefEngineer
-  - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: chief_engineer
