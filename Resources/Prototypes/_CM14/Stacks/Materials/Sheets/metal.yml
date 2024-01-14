@@ -2,7 +2,7 @@
   id: CMSteel
   name: steel
   icon: { sprite: /Textures/_CM14/Objects/Materials/Sheets/metal.rsi, state: steel }
-  spawn: SheetSteel1
+  spawn: CMSheetSteel
   maxCount: 50
   itemSize: 1
 
@@ -10,6 +10,6 @@
   id: CMPlasteel
   name: plasteel
   icon: { sprite: /Textures/_CM14/Objects/Materials/Sheets/plasteel.rsi, state: plasteel }
-  spawn: CMSheetPlasteel1
-  maxCount: 50
+  spawn: CMSheetPlasteel
+  maxCount: 30
   itemSize: 1

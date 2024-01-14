@@ -141,9 +141,9 @@
   suffix: 10
   components:
     - type: Sprite
-      state: plasteel
+      state: plasteel_2
     - type: Stack
-      stackType: Plasteel
+      stackType: CMPlasteel
       count: 10
 
 - type: entity
@@ -155,5 +155,5 @@
     - type: Sprite
       state: plasteel
     - type: Stack
-      stackType: Plasteel
+      stackType: CMPlasteel
       count: 1

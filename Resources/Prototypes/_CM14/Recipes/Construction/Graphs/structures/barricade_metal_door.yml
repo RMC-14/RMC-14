@@ -13,7 +13,7 @@
       steps:
       - material: CMSteel
         amount: 5
-        doAfter: 5
+        doAfter: 4
 
   - node: nodeBarricadeMetalDoor
     entity: CMBarricadeMetalDoor
@@ -29,4 +29,4 @@
           anchored: false
       steps:
         - tool: Screwing
-          doAfter: 5
+          doAfter: 4
