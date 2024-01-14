@@ -75,6 +75,8 @@
 #  - type: Construction # TODO CM14 Plasteel rod crafting
 #    graph: PlasteelRod
 #    node: PlasteelRod
+  - type: StackPrice
+    price: 15
 
 - type: entity
   parent: CMPartRodPlasteel
