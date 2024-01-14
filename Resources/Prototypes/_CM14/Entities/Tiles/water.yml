@@ -1,0 +1,21 @@
+﻿- type: entity
+  parent: FloorWaterEntity
+  id: CMFloorShallowWaterEntity
+  name: shallow water
+  description: ""
+  components:
+  - type: Sprite
+    sprite: _CM14/Tiles/planet/water.rsi
+    layers:
+    - state: seashallow
+
+- type: entity
+  parent: FloorWaterEntity
+  id: CMFloorDeepWaterEntity
+  name: deep water
+  description: ""
+  components:
+  - type: Sprite
+    sprite: _CM14/Tiles/planet/water.rsi
+    layers:
+    - state: seadeep
