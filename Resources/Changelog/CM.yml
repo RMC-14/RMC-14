@@ -1,0 +1,119 @@
+﻿Name: CM
+Order: -1
+Entries:
+- author: QuietlyWhisper
+  changes:
+  - message: Added the basic rifleman role!
+    type: Add
+  id: 1
+  time: 2023-08-12T15:18:11.0000000+00:00
+- author: QuietlyWhisper
+  changes:
+  - message: Added SL
+    type: Add
+  id: 2
+  time: 2023-08-13T16:10:55.0000000+00:00
+- author: MaloTV
+  changes:
+  - message: Added Original CM Posters!
+    type: Add
+  id: 3
+  time: 2023-11-05T04:34:28.0000000+00:00
+- author: MaloTV
+  changes:
+  - message: Added Original CM Medical Decals
+    type: Add
+  id: 4
+  time: 2023-11-05T03:31:21.0000000+00:00
+- author: gusxyz
+  changes:
+  - message: The M10 Marine Helmet is now real.
+    type: Add
+  id: 5
+  time: 2023-11-14T04:08:07.0000000+00:00
+- author: Tunguso4ka
+  changes:
+  - message: Chief MP, Military Warden and Military Police and clothes for them has been added to the game.
+    type: Add
+  - message: Added black and brown marine gloves.
+    type: Add
+  - message: Added black, brown and jungle combat boots
+    type: Add
+  id: 6
+  time: 2023-11-16T12:02:17.0000000+00:00
+- author: Tunguso4ka
+  changes:
+  - message: Requisition department has been added to the game.
+    type: Add
+  id: 7
+  time: 2023-11-17T08:03:34.0000000+00:00
+- author: Tunguso4ka
+  changes:
+  - message: Engineering department has been added to the game.
+    type: Add
+  id: 8
+  time: 2023-11-17T15:40:05.0000000+00:00
+- author: gusxyz
+  changes:
+  - message: Ported some of the medical items from CMSS13.
+    type: Add
+  id: 9
+  time: 2024-01-09T12:46:58.0000000+00:00
+- author: Tunguso4ka
+  changes:
+  - message: Commanding and Executive officers has been added to the game.
+    type: Add
+  id: 10
+  time: 2023-11-18T01:27:33.0000000+00:00
+- author: Tunguso4ka
+  changes:
+  - message: Medical department has been added to the game.
+    type: Add
+  id: 11
+  time: 2023-11-18T15:20:25.0000000+00:00
+- author: Tunguso4ka
+  changes:
+  - message: Auxiliary Support Department has been added to the game.
+    type: Add
+  id: 12
+  time: 2023-11-19T00:44:36.0000000+00:00
+- author: Tunguso4ka
+  changes:
+  - message: Combat Correspondent and Survivors has been added to the game.
+    type: Add
+  id: 13
+  time: 2023-11-19T14:48:03.0000000+00:00
+- author: thymol-blue
+  changes:
+  - message: Added barricades, barricade upgrades, barricade doors, damaged sprites, and turnstiles. Also added ways to make them!
+    type: Add
+  id: 14
+  time: 2023-11-28T03:55:33.0000000+00:00
+- author: thymol-blue
+  changes:
+  - message: Added tips relevant to Colonial Marines 14. Be sure to keep an eye out for them!
+    type: Add
+  id: 15
+  time: 2023-11-27T05:48:08.0000000+00:00
+- author: thymol-blue
+  changes:
+  - message: Added barbed wire! Place them onto barricades to make sure the enemy can't just break through without a cost!
+    type: Add
+  id: 16
+  time: 2024-01-09T07:40:57.0000000+00:00
+- author: nikthechampiongr
+  changes:
+  - message: Added the Move Order.
+    type: Add
+  - message: Added the Focus Order.
+    type: Add
+  - message: Added the Hold Order.
+    type: Add
+  id: 17
+  time: 2024-01-03T07:03:14.0000000+00:00
+- author: irroZ, QuietlyWhisper
+  changes:
+  - message: Added lobby art.
+    type: Add
+  id: 18
+  time: 2024-01-03T19:07:20.0000000+00:00
