@@ -1,1 +1,1 @@
-﻿changelog-tab-title-CM = CM
+﻿changelog-tab-title-CM = ColoniaL Marines
