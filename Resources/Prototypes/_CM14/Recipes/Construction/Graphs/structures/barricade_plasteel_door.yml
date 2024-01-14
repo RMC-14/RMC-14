@@ -11,9 +11,9 @@
       - !type:SnapToGrid
         southRotation: true
       steps:
-      - material: Plasteel
+      - material: CMPlasteel
         amount: 5
-        doAfter: 6
+        doAfter: 4
 
   - node: nodeBarricadePlasteelDoor
     entity: CMBarricadePlasteelDoor
@@ -29,4 +29,4 @@
           anchored: false
       steps:
         - tool: Screwing
-          doAfter: 6
+          doAfter: 4

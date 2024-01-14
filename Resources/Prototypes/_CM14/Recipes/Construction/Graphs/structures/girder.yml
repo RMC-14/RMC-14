@@ -47,7 +47,7 @@
           conditions:
             - !type:EntityAnchored {}
           steps:
-            - material: Plasteel
+            - material: CMPlasteel
               amount: 2
               doAfter: 1
 
@@ -73,7 +73,7 @@
           conditions:
             - !type:EntityAnchored { }
           steps:
-            - material: Plasteel
+            - material: CMPlasteel
               amount: 2
               doAfter: 1
 
