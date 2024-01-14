@@ -84,7 +84,7 @@
 
 #- type: entity
 #  parent: CMAutoInjector
-#  id: CMFirstAidrazineInjector
+#  id: CMFirstAidInjector
 #  name: First-Aid auto-injector
 #  description: A version of the tricordrazine auto-injector that can be used by everyone. Each use is 10 units.
 #  noSpawn: true # todo cm14 remove this line when skills are added

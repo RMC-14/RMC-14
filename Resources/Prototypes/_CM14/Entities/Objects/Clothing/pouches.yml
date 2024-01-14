@@ -49,7 +49,7 @@
       enum.SharedBagOpenVisuals.BagState:
         closedLayer:
           Open: { visible: false }
-          Closed: { visible: true}
+          Closed: { visible: true }
 
 - type: entity
   parent: CMPouchClosed
@@ -68,10 +68,10 @@
       enum.SharedBagOpenVisuals.BagState:
         openLayer:
           Open: { visible: true }
-          Closed: { visible: false}
+          Closed: { visible: false }
         closedLayer:
           Open: { visible: false }
-          Closed: { visible: true}
+          Closed: { visible: true }
 
 - type: entity
   parent: CMPouchOpenClosed
