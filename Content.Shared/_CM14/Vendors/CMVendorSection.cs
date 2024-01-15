@@ -11,7 +11,7 @@ public sealed partial class CMVendorSection
     public string Name = string.Empty;
 
     [DataField]
-    public int? Choose;
+    public (string Id, int Amount)? Choices;
 
     [DataField(required: true)]
     public List<CMVendorEntry> Entries = new();
