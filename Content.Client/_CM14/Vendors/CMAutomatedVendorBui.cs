@@ -1,6 +1,7 @@
 ﻿using Content.Shared._CM14.Vendors;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
+using Robust.Client.Player;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -12,6 +13,7 @@ namespace Content.Client._CM14.Vendors;
 [UsedImplicitly]
 public sealed class CMAutomatedVendorBui : BoundUserInterface
 {
+    [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private readonly SpriteSystem _sprite;
@@ -27,7 +29,6 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
     {
         _window = new CMAutomatedVendorWindow();
         _window.OnClose += Close;
-
         _window.Title = EntMan.GetComponentOrNull<MetaDataComponent>(Owner)?.EntityName ?? "ColMarTech Vendor";
 
         if (EntMan.TryGetComponent(Owner, out CMAutomatedVendorComponent? vendor))
@@ -51,10 +52,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                     if (_prototype.TryIndex(entry.Id, out var entity))
                     {
                         uiEntry.Texture.Texture = _sprite.Frame0(entity);
-                        uiEntry.Amount.Text = entry.Amount.ToString();
-                        uiEntry.Amount.Modulate = entry.Amount > 0 ? Color.White : Color.Red;
                         uiEntry.Panel.Button.Label.Text = entity.Name;
-                        uiEntry.Panel.Button.Disabled = entry.Amount <= 0;
 
                         var msg = new FormattedMessage();
                         msg.AddText(entity.Description);
@@ -78,6 +76,8 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         }
 
         _window.Search.OnTextChanged += OnSearchChanged;
+
+        Refresh();
 
         _window.OpenCentered();
     }
@@ -125,6 +125,8 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         if (!EntMan.TryGetComponent(Owner, out CMAutomatedVendorComponent? vendor))
             return;
 
+        var anyEntryWithPoints = false;
+        var playerPoints = EntMan.GetComponentOrNull<CMMarinePointsComponent>(_player.LocalEntity)?.Points;
         for (var sectionIndex = 0; sectionIndex < vendor.Sections.Count; sectionIndex++)
         {
             var section = vendor.Sections[sectionIndex];
@@ -134,16 +136,44 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
             {
                 var entry = section.Entries[entryIndex];
                 var uiEntry = (CMAutomatedVendorEntry) uiSection.Entries.GetChild(entryIndex);
-                uiEntry.Amount.Text = entry.Amount.ToString();
-                uiEntry.Amount.Modulate = entry.Amount > 0 ? Color.White : Color.Red;
-                uiEntry.Panel.Button.Disabled = entry.Amount <= 0;
+                var disabled = entry.Amount <= 0;
+
+                if (entry.Points != null)
+                {
+                    anyEntryWithPoints = true;
+                    uiEntry.Amount.Text = $"{entry.Points}P";
+                    if (playerPoints == null || playerPoints < entry.Points)
+                    {
+                        disabled = true;
+                    }
+                }
+                else
+                {
+                    uiEntry.Amount.Text = entry.Amount.ToString();
+                }
+
+                uiEntry.Amount.Modulate = disabled ? Color.Red : Color.White;
+                uiEntry.Panel.Button.Disabled = disabled;
             }
         }
+
+        _window.PointsContainer.Visible = anyEntryWithPoints;
+        _window.PointsLabel.Text = $"{playerPoints ?? 0}";
     }
 
     protected override void Dispose(bool disposing)
     {
         if (disposing)
             _window?.Dispose();
+    }
+
+    protected override void ReceiveMessage(BoundUserInterfaceMessage message)
+    {
+        switch (message)
+        {
+            case CMVendorRefreshBuiMessage:
+                Refresh();
+                break;
+        }
     }
 }

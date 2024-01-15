@@ -11,7 +11,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         SubscribeLocalEvent<CMAutomatedVendorComponent, CMVendorVendBuiMessage>(OnVendBui);
     }
 
-    private void OnVendBui(Entity<CMAutomatedVendorComponent> vendor, ref CMVendorVendBuiMessage args)
+    protected virtual void OnVendBui(Entity<CMAutomatedVendorComponent> vendor, ref CMVendorVendBuiMessage args)
     {
         var sections = vendor.Comp.Sections.Count;
         if (args.Section < 0 || args.Section >= sections)
@@ -36,6 +36,24 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         {
             Log.Error($"Tried to vend non-existent entity: {entry.Id}");
             return;
+        }
+
+        if (entry.Points != null)
+        {
+            if (!TryComp(args.Session.AttachedEntity, out CMMarinePointsComponent? points))
+            {
+                Log.Error($"Player {args.Session.Name} tried to buy {entry.Id} for {entry.Points} points without having points.");
+                return;
+            }
+
+            if (points.Points < entry.Points)
+            {
+                Log.Error($"Player {args.Session.Name} with {points.Points} tried to buy {entry.Id} for {entry.Points} points without having enough points.");
+                return;
+            }
+
+            points.Points -= entry.Points.Value;
+            Dirty(args.Session.AttachedEntity.Value, points);
         }
 
         if (entry.Amount != null)
