@@ -25697,7 +25697,7 @@ entities:
     - pos: 160.5,-0.5
       parent: 2
       type: Transform
-- proto: CMVendorIngridients
+- proto: CMVendorIngredients
   entities:
   - uid: 6514
     components:
@@ -52904,7 +52904,6 @@ entities:
         7782:
         - Pressed: Toggle
       type: DeviceLinkSource
-    - type: ItemCooldown
   - uid: 8713
     components:
     - pos: 171.5,-9.5
