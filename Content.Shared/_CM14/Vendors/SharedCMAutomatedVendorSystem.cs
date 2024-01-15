@@ -14,9 +14,10 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     protected virtual void OnVendBui(Entity<CMAutomatedVendorComponent> vendor, ref CMVendorVendBuiMessage args)
     {
         var sections = vendor.Comp.Sections.Count;
+        var playerName = args.Session.Name;
         if (args.Section < 0 || args.Section >= sections)
         {
-            Log.Error($"Player {args.Session.Name} sent an invalid vend section: {args.Section}. Max: {sections}");
+            Log.Error($"Player {playerName} sent an invalid vend section: {args.Section}. Max: {sections}");
             return;
         }
 
@@ -24,7 +25,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         var entries = section.Entries.Count;
         if (args.Entry < 0 || args.Entry >= entries)
         {
-            Log.Error($"Player {args.Session.Name} sent an invalid vend entry: {args.Entry}. Max: {entries}");
+            Log.Error($"Player {playerName} sent an invalid vend entry: {args.Entry}. Max: {entries}");
             return;
         }
 
@@ -38,22 +39,48 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return;
         }
 
+        var playerEnt = args.Session.AttachedEntity;
+        var user = CompOrNull<CMVendorUserComponent>(playerEnt);
+        if (section.Choices is { } choices)
+        {
+            if (playerEnt == null)
+            {
+                Log.Error($"Player {playerName} tried to buy {entry.Id} without an attached entity.");
+                return;
+            }
+
+            user = EnsureComp<CMVendorUserComponent>(playerEnt.Value);
+            if (!user.Choices.TryGetValue(choices.Id, out var playerChoices))
+            {
+                playerChoices = 0;
+                user.Choices[choices.Id] = playerChoices;
+            }
+
+            if (playerChoices >= choices.Amount)
+            {
+                Log.Error($"Player {playerName} tried to buy too many choices.");
+                return;
+            }
+
+            user.Choices[choices.Id] = ++playerChoices;
+        }
+
         if (entry.Points != null)
         {
-            if (!TryComp(args.Session.AttachedEntity, out CMMarinePointsComponent? points))
+            if (playerEnt == null || user == null)
             {
-                Log.Error($"Player {args.Session.Name} tried to buy {entry.Id} for {entry.Points} points without having points.");
+                Log.Error($"Player {playerName} tried to buy {entry.Id} for {entry.Points} points without having points.");
                 return;
             }
 
-            if (points.Points < entry.Points)
+            if (user.Points < entry.Points)
             {
-                Log.Error($"Player {args.Session.Name} with {points.Points} tried to buy {entry.Id} for {entry.Points} points without having enough points.");
+                Log.Error($"Player {playerName} with {user.Points} tried to buy {entry.Id} for {entry.Points} points without having enough points.");
                 return;
             }
 
-            points.Points -= entry.Points.Value;
-            Dirty(args.Session.AttachedEntity.Value, points);
+            user.Points -= entry.Points.Value;
+            Dirty(playerEnt.Value, user);
         }
 
         if (entry.Amount != null)

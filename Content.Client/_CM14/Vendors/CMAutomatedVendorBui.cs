@@ -40,6 +40,8 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                 var message = new FormattedMessage();
                 message.PushTag(new MarkupNode("bold", new MarkupParameter(section.Name.ToUpperInvariant()), null));
                 message.AddText(section.Name.ToUpperInvariant());
+                if (section.Choices is { } choices)
+                    message.AddText($" (CHOOSE {choices.Amount})");
                 message.Pop();
 
                 uiSection.Label.SetMessage(message);
@@ -126,23 +128,32 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
             return;
 
         var anyEntryWithPoints = false;
-        var playerPoints = EntMan.GetComponentOrNull<CMMarinePointsComponent>(_player.LocalEntity)?.Points;
+        var user = EntMan.GetComponentOrNull<CMVendorUserComponent>(_player.LocalEntity);
         for (var sectionIndex = 0; sectionIndex < vendor.Sections.Count; sectionIndex++)
         {
             var section = vendor.Sections[sectionIndex];
             var uiSection = (CMAutomatedVendorSection) _window.Sections.GetChild(sectionIndex);
+            var sectionDisabled = false;
+            if (section.Choices is { } choices)
+            {
+                if (user?.Choices.GetValueOrDefault(choices.Id) >= choices.Amount ||
+                    user == null && choices.Amount <= 0)
+                {
+                    sectionDisabled = true;
+                }
+            }
 
             for (var entryIndex = 0; entryIndex < section.Entries.Count; entryIndex++)
             {
                 var entry = section.Entries[entryIndex];
                 var uiEntry = (CMAutomatedVendorEntry) uiSection.Entries.GetChild(entryIndex);
-                var disabled = entry.Amount <= 0;
+                var disabled = sectionDisabled || entry.Amount <= 0;
 
                 if (entry.Points != null)
                 {
                     anyEntryWithPoints = true;
                     uiEntry.Amount.Text = $"{entry.Points}P";
-                    if (playerPoints == null || playerPoints < entry.Points)
+                    if (user == null || user.Points < entry.Points)
                     {
                         disabled = true;
                     }
@@ -157,7 +168,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
             }
         }
 
-        _window.PointsLabel.Text = anyEntryWithPoints ? $"Points Remaining: {playerPoints ?? 0}" : string.Empty;
+        _window.PointsLabel.Text = anyEntryWithPoints ? $"Points Remaining: {user?.Points ?? 0}" : string.Empty;
     }
 
     protected override void Dispose(bool disposing)
