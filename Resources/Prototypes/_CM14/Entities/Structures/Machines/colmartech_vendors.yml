@@ -587,11 +587,11 @@
     #- id: CMNightVisionOptic
     #  amount: 20P
     - name: Engineering Supplies
-      entries: []
+      entries:
     #- id: CMInsulatedGloves
     #  amount: 3P
-    #- id: CMMetalx10
-    #  amount: 5P
+      - id: CMSheetSteel
+        points: 5
     #- id: CMPlasteelx10
     #  amount: 7P
     #- id: CMPlasticexplosive
