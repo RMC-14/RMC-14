@@ -1,0 +1,102 @@
+﻿- type: entity
+  name: pill
+  parent: Pill
+  id: CMPill
+  description: An unknown pill.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Chemistry/pills.rsi
+    layers:
+    - state: pill1
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: Item
+    size: Tiny
+    sprite: _CM14/Objects/Chemistry/pills.rsi
+
+# TODO CM14 these need to have a random state per round
+- type: entity
+  parent: CMPill
+  id: CMPillBicaridine
+  name: bicaridine pill (15u)
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Bicaridine
+          Quantity: 15
+  - type: Sprite
+    layers:
+    - state: pill3
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+
+- type: entity
+  parent: CMPill
+  id: CMPillDexalin
+  name: dexalin pill (15u)
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Dexalin
+          Quantity: 15
+  - type: Sprite
+    layers:
+    - state: pill16
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+
+- type: entity
+  parent: CMPill
+  id: CMPillDylovene
+  name: dylovene pill (15u)
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Dylovene
+          Quantity: 15
+  - type: Sprite
+    layers:
+    - state: pill13
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+
+- type: entity
+  parent: CMPill
+  id: CMPillInaprovaline
+  name: inaprovaline pill (15u)
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Inaprovaline
+          Quantity: 15
+  - type: Sprite
+    layers:
+    - state: pill1
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+
+- type: entity
+  parent: CMPill
+  id: CMPillKelotane
+  name: kelotane pill (15u)
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Kelotane
+          Quantity: 15
+  - type: Sprite
+    layers:
+    - state: pill5
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+
+# TODO CM14 peridaxon, tramadol

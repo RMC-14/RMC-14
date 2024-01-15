@@ -1,0 +1,54 @@
+﻿- type: entity
+  parent: BodyBag_Container
+  id: CMBodyBag
+  name: body bag
+  description: A folded bag designed for the storage and transportation of cadavers.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Medical/bodybags.rsi
+    layers:
+    - state: bodybag_closed
+      map: ["unfoldedLayer", "enum.StorageVisualLayers.Base"]
+    - state: bodybag_folded
+      map: ["foldedLayer"]
+      visible: false
+    - state: bodybag_open
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: bodybag_label
+      map: ["enum.BodyBagVisualLayers.Label"]
+  - type: Icon
+    sprite: _CM14/Objects/Medical/bodybags.rsi
+    state: bodybag_closed
+  - type: EntityStorageVisuals
+    stateDoorOpen: bodybag_open
+
+- type: entity
+  parent: CMBodyBag
+  id: CMStasisBag # TODO CM14 used
+  name: stasis bag
+  description: A folded, reusable bag designed to prevent additional damage to an occupant.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Medical/stasisbag.rsi
+    layers:
+    - state: bodybag_closed
+      map: ["unfoldedLayer", "enum.StorageVisualLayers.Base"]
+    - state: bodybag_folded
+      map: ["foldedLayer"]
+      visible: false
+    - state: bodybag_open
+      map: ["enum.StorageVisualLayers.Door"]
+  - type: Icon
+    sprite: _CM14/Objects/Medical/stasisbag.rsi
+  - type: EntityStorageVisuals
+    stateDoorOpen: bodybag_open
+  - type: GenericVisualizer
+    visuals:
+      enum.FoldedVisuals.State:
+        foldedLayer:
+          True: { visible: true }
+          False: { visible: false }
+        unfoldedLayer:
+          True: { visible: false }
+          False: { visible: true }
+  - type: CMStasisBag

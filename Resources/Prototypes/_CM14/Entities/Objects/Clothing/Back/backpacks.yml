@@ -1,6 +1,6 @@
 # Almayer personnel
 - type: entity
-  parent: [ ClothingBackpack, CMEntityBase]
+  parent: ClothingBackpack
   id: CMBackpack
   name: backpack
   description: You wear this on your back and put items into it.

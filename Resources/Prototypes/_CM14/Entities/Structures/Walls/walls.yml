@@ -1,7 +1,7 @@
 # BaseWall
 - type: entity
   abstract: true
-  parent: [BaseStructure, CMEntityBase]
+  parent: BaseStructure
   id: CMBaseWall
   description: A huge chunk of metal used to separate rooms.
   placement:
@@ -38,7 +38,7 @@
         - WallLayer
         density: 1000
 
-# Standart
+# Standard
 - type: entity
   parent: CMBaseWall
   id: CMWallMetal
@@ -141,6 +141,29 @@
     price: 150
 
 - type: entity
+  parent: CMBaseWall
+  id: CMWallSuperReinforced
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Walls/rwall.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Walls/rwall.rsi
+  - type: Tag
+    tags:
+    - Wall
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 9000
+      behaviours:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: IconSmooth
+    key: walls
+    base: rwall
+
+- type: entity
   parent: CMWallReinforced
   id: CMWallReinforcedAlmayer
   components:
@@ -210,3 +233,139 @@
     key: walls
     base: wall
 
+# Shuttle
+- type: entity
+  parent: CMBaseWall
+  id: CMWallShuttleBlack
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Walls/shuttle.rsi
+    state: wall3
+  - type: Icon
+    sprite: _CM14/Structures/Walls/shuttle.rsi
+    state: wall3
+
+- type: entity
+  parent: CMWallShuttleBlack
+  id: CMWallShuttleOrange
+  components:
+  - type: Sprite
+    state: pwall
+  - type: Icon
+    state: pwall
+
+- type: entity
+  parent: CMWallShuttleBlack
+  id: CMWallShuttleWhite
+  components:
+  - type: Sprite
+    state: wall1
+  - type: Icon
+    state: wall1
+
+# Cave
+- type: entity
+  parent: CMBaseWall
+  id: CMWallRock
+  name: rock wall
+  description: A rough wall of hardened rock.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Walls/cave.rsi
+    color: "#826161"
+  - type: Icon
+    sprite: _CM14/Structures/Walls/cave.rsi
+    state: cavewall
+  - type: IconSmooth
+    key: walls
+    base: cavewall
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 3000
+      behaviours:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+# Cult
+- type: entity
+  parent: CMBaseWall
+  id: CMWallCult
+  name: wall
+  description: The patterns engraved on the wall seem to shift as you try to focus on them. You feel sick.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Walls/cult.rsi
+    color: "#3C3434"
+  - type: Icon
+    sprite: _CM14/Structures/Walls/cult.rsi
+    state: cult0
+  - type: Tag
+    tags:
+    - Wall
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 3000
+      behaviours:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: IconSmooth
+    key: walls
+    base: cult
+
+# Wood
+- type: entity
+  parent: CMBaseWall
+  id: CMWallWood
+  name: wood wall
+  description: A huge chunk of metal used to separate rooms.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Walls/wood.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Walls/wood.rsi
+    state: wood0
+  - type: Tag
+    tags:
+    - Wall
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 3000
+      behaviours:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: IconSmooth
+    key: walls
+    base: wood
+
+# Jungle
+- type: entity
+  parent: CMBaseWall
+  id: CMWallJungle
+  name: jungle vegetation
+  description: Exceptionally dense vegetation that you can't see through.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Walls/jungle.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Walls/jungle.rsi
+    state: jungle_veg0
+  - type: Tag
+    tags:
+    - Wall
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 3000
+      behaviours:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: IconSmooth
+    key: walls
+    base: jungle_veg

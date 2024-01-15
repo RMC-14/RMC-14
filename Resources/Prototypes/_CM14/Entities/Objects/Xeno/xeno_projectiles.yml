@@ -1,7 +1,7 @@
 ﻿- type: entity
+  abstract: true
   id: XenoBaseProjectile
   name: projectile
-  abstract: true
   components:
   - type: Clickable
   - type: Sprite

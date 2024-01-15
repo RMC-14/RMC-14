@@ -98,8 +98,8 @@
     - state: constructionnode
 
 - type: entity # TODO CM14 description and sound
-  id: XenoHiveWeeds
   parent: XenoWeeds
+  id: XenoHiveWeeds
   name: hive weeds
   placement:
     mode: SnapgridCenter

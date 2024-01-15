@@ -12,25 +12,20 @@ namespace Content.Shared._CM14.Xenos.Headbutt;
 public sealed partial class XenoHeadbuttComponent : Component
 {
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public FixedPoint2 PlasmaCost = 10;
 
     [DataField]
     public DamageSpecifier Damage = new();
 
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public float Range = 3;
 
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public EntProtoId Effect = "CMEffectPunch";
 
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_CM14/Xeno/alien_claw_block.ogg");
 
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public Vector2? Charge;
 }

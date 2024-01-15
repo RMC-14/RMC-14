@@ -1,0 +1,55 @@
+﻿#- type: entity
+#  parent: CMBaseMachineCircuitboard
+#  id: CMAutolatheMachineCircuitboard
+#  name: autolathe machine board
+#  description: A machine printed circuit board for an autolathe
+#  components: # TODO CM14 autolathe
+#    - type: MachineBoard
+#      prototype: CMAutolathe
+#      requirements:
+#        MatterBin: 3
+#        Manipulator: 1
+#      materialRequirements:
+#        Glass: 1
+
+#- type: entity
+#  parent: CMBaseMachineCircuitboard
+#  id: CMPortableGeneratorPacmanMachineCircuitboard
+#  name: P.A.C.M.A.N.-type portable generator machine board
+#  components:
+#    - type: Sprite
+#      state: power_mod
+#    - type: MachineBoard
+#      prototype: PortableGeneratorPacman # TODO CM14 pacman
+#      requirements:
+#        Capacitor: 1
+#      materialRequirements:
+#        CableHV: 5
+#    - type: PhysicalComposition
+#      materialComposition:
+#        Glass: 200
+#      chemicalComposition:
+#        Silicon: 20
+#    - type: StaticPrice
+#      price: 40
+#
+#- type: entity
+#  parent: CMBaseMachineCircuitboard
+#  id: CMPortableGeneratorSuperPacmanMachineCircuitboard
+#  name: S.U.P.E.R.P.A.C.M.A.N.-type portable generator machine board
+#  components:
+#    - type: Sprite
+#      state: power_mod
+#    - type: MachineBoard
+#      prototype: PortableGeneratorSuperPacman # TODO CM14 super autolathe
+#      requirements:
+#        Capacitor: 2
+#      materialRequirements:
+#        CableHV: 10
+#    - type: PhysicalComposition
+#      materialComposition:
+#        Glass: 200
+#      chemicalComposition:
+#        Silicon: 20
+#    - type: StaticPrice
+#      price: 40

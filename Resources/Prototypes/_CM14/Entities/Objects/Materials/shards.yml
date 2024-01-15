@@ -1,0 +1,21 @@
+﻿- type: entity
+  parent: ShardCrystalBase
+  id: CMShardCrystalBase
+  name: glass shard
+  description: A shard of broken glass. Could probably be used as ... a throwing weapon?
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _CM14/Objects/shards.rsi
+      state: large
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: RandomSprite
+    available:
+    - enum.DamageStateVisualLayers.Base:
+        large: ""
+    - enum.DamageStateVisualLayers.Base:
+        medium: ""
+    - enum.DamageStateVisualLayers.Base:
+        small: ""
+    - enum.DamageStateVisualLayers.Base:
+        tiny: ""

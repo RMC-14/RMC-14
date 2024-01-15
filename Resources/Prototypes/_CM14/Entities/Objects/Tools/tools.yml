@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: [Screwdriver, CMEntityBase]
+  parent: Screwdriver
   id: CMScrewdriver
   components:
   - type: RandomSprite
@@ -16,7 +16,7 @@
     sprite: _CM14/Objects/Tools/screwdriver.rsi
 
 - type: entity
-  parent: [Wirecutter, CMEntityBase]
+  parent: Wirecutter
   id: CMWirecutter
   components:
   - type: Sprite
@@ -33,7 +33,7 @@
     sprite: _CM14/Objects/Tools/wirecutters.rsi
 
 - type: entity
-  parent: [Wrench, CMEntityBase]
+  parent: Wrench
   id: CMWrench
   components:
   - type: Sprite
@@ -43,7 +43,7 @@
     sprite: _CM14/Objects/Tools/wrench.rsi
 
 - type: entity
-  parent: [Multitool, CMEntityBase]
+  parent: Multitool
   id: CMMultitool
   name: Security Access Tuner
   description: A small handheld tool used to override various machine functions.
@@ -57,7 +57,7 @@
     sprite: _CM14/Objects/Tools/multitool.rsi
 
 - type: entity
-  parent: [Crowbar, CMEntityBase]
+  parent: Crowbar
   id: CMCrowbar
   components:
   - type: Sprite
@@ -79,3 +79,13 @@
     state: red-icon
   - type: Item
     heldPrefix: red
+
+- type: entity
+  parent: HandLabeler
+  id: CMHandLabeler
+  components:
+    - type: Sprite
+      sprite: _CM14/Objects/Tools/hand_labeler.rsi
+      state: hand_labeler
+    - type: Item
+      sprite: _CM14/Objects/Tools/hand_labeler.rsi

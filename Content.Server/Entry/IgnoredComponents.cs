@@ -18,7 +18,9 @@ namespace Content.Server.Entry
             "PdaBorderColor",
             "InventorySlots",
             "LightFade",
+            "HolidayRsiSwap",
             "IconSmoothRandom",
+            "RotationDrawDepth"
         };
     }
 }

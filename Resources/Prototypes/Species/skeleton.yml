@@ -1,8 +1,8 @@
 - type: species
   id: Skeleton
-  name: Skeleton
+  name: species-name-skeleton
   roundStart: false
-  prototype: MobSkeletonPerson
+  prototype: CMMobSkeletonPerson
   sprites: MobSkeletonSprites
   defaultSkinTone: "#fff9e2"
   markingLimits: MobHumanMarkingLimits

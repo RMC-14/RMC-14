@@ -16,13 +16,14 @@ public abstract class SharedMarineSystem : EntitySystem
     private void OnMarineGetIcon(Entity<MarineComponent> marine, ref GetMarineIconEvent args)
     {
         if (marine.Comp.Icon is { } icon)
-            args.Icons.Add(icon);
+            args.Icon = icon;
     }
 
-    public void GetMarineIcons(EntityUid uid, List<SpriteSpecifier> icons)
+    public GetMarineIconEvent GetMarineIcon(EntityUid uid)
     {
-        var ev = new GetMarineIconEvent(icons);
+        var ev = new GetMarineIconEvent();
         RaiseLocalEvent(uid, ref ev);
+        return ev;
     }
 
     public void MakeMarine(EntityUid uid, SpriteSpecifier? icon)

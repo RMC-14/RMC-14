@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/obj/bodybag.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bodybag_closed"
+    },
+    {
+      "name": "bodybag_open"
+    },
+    {
+      "name": "bodybag_closed1"
+    },
+    {
+      "name": "bodybag_folded"
+    },
+    {
+      "name": "bodybag_label"
+    },
+    {
+      "name": "jungletarp_folded"
+    },
+    {
+      "name": "jungletarp_open"
+    },
+    {
+      "name": "jungletarp_closed"
+    },
+    {
+      "name": "jungletarp_closed1"
+    },
+    {
+      "name": "snowtarp_folded"
+    },
+    {
+      "name": "snowtarp_open"
+    },
+    {
+      "name": "snowtarp_closed"
+    },
+    {
+      "name": "snowtarp_closed1"
+    },
+    {
+      "name": "reactivetarp_folded"
+    },
+    {
+      "name": "reactivetarp_open"
+    },
+    {
+      "name": "reactivetarp_closed"
+    },
+    {
+      "name": "reactivetarp_closed1"
+    },
+    {
+      "name": "reactivetarp_closed2",
+      "delays": [
+        [
+          1,
+          1,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.1,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "scouttarp_folded"
+    },
+    {
+      "name": "scouttarp_open"
+    },
+    {
+      "name": "scouttarp_closed"
+    },
+    {
+      "name": "scouttarp_closed1"
+    },
+    {
+      "name": "scouttarp_closed2",
+      "delays": [
+        [
+          1,
+          1,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.1,
+          0.5
+        ]
+      ]
+    }
+  ]
+}

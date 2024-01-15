@@ -35,6 +35,12 @@ public sealed partial class IdCardComponent : Component
     [AutoNetworkedField]
     public List<LocId> JobDepartments = new();
 
+    /// <summary>
+    /// Determines if accesses from this card should be logged by <see cref="AccessReaderComponent"/>
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public bool BypassLogging;
+
     // TODO CM14 move this out and reset the file to upstream once source gen is fixed
     [DataField]
     public LocId NameLocId = "access-id-card-component-owner-name-job-title-text";

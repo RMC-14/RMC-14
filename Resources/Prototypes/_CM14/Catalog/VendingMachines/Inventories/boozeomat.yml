@@ -16,13 +16,15 @@
     DrinkBlueCuracaoBottleFull: 2
     DrinkVodkaBottleFull: 5
     DrinkCoffeeLiqueurBottleFull: 5
-    DrinkColaBottleFull: 8
+    # NON ALCOHOL
+    CMDrinkCanFruitBeer: 8
     DrinkJuiceLimeCarton: 4
     DrinkCreamCarton: 4
     DrinkJuiceOrangeCarton: 4
-    DrinkSodaWaterCan: 15
+    CMDrinkCanSoda: 15
     DrinkJuiceTomatoCarton: 4
-    DrinkTonicWaterCan: 8
+    CMDrinkCanTonic: 8
+    # CONTAINERS
     DrinkFlaskBar: 5
     DrinkGlass: 30
     DrinkVacuumFlask: 5

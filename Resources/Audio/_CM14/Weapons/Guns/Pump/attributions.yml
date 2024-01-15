@@ -1,0 +1,9 @@
+- files: ["shotgunpump1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/weapons/shotgunpump1.ogg"
+
+- files: ["shotgunpump2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/weapons/shotgunpump2.ogg"

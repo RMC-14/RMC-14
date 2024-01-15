@@ -1,5 +1,4 @@
 ﻿- type: entity
-  parent: CMEntityBase
   id: HiveCoreXeno
   name: hive core # TODO CM14 allow other structures to be built
   components: # TODO CM14 block ob, mortar and air strikes
@@ -24,7 +23,6 @@
   - type: HiveCore
 
 - type: entity
-  parent: CMEntityBase
   id: HiveCoreXenoConstructionNode
   name: hive core
   description: A strange wriggling lump. Looks like a marker for something.

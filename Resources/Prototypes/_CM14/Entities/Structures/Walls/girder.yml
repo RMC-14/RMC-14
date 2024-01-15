@@ -1,5 +1,5 @@
 - type: entity
-  parent: [Girder, CMEntityBase]
+  parent: Girder
   id: CMGirder
   name: girder
   components:

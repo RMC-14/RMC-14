@@ -1,6 +1,6 @@
 # Dress Shoes
 - type: entity
-  parent: [ClothingShoesBaseButcherable, CMEntityBase]
+  parent: ClothingShoesBaseButcherable
   id: CMShoesDress
   name: dress shoes
   description: Pre-polished fancy dress shoes. You can see your reflection in them.
@@ -18,7 +18,7 @@
 
 # Black Boots
 - type: entity
-  parent: [ClothingShoesMilitaryBase, CMEntityBase]
+  parent: ClothingShoesMilitaryBase
   id: CMBootsBlack
   name: black boots
   description: Standard issue combat boots used by the USCM for combat situations.  All combat, all the time.

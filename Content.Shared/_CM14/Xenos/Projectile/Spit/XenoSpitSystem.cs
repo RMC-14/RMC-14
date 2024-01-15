@@ -16,6 +16,7 @@ namespace Content.Shared._CM14.Xenos.Projectile.Spit;
 public sealed class XenoSpitSystem : EntitySystem
 {
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
@@ -34,6 +35,8 @@ public sealed class XenoSpitSystem : EntitySystem
         SubscribeLocalEvent<SlowedBySpitComponent, EntityUnpausedEvent>(OnSlowedBySpitUnpaused);
 
         SubscribeLocalEvent<ArmorComponent, InventoryRelayedEvent<HitBySlowingSpitEvent>>(OnArmorHitBySlowingSpit);
+
+        SubscribeLocalEvent<InventoryComponent, HitBySlowingSpitEvent>(_inventory.RelayEvent);
     }
 
     private void OnXenoSlowingSpitAction(Entity<XenoSlowingSpitComponent> xeno, ref XenoSlowingSpitActionEvent args)

@@ -1,0 +1,34 @@
+﻿# TODO CM14 make these a storage, not a crate
+- type: entity
+  parent: CrateGeneric
+  id: CMSniperEquipmentCase
+  name: sniper equipment case
+  description: "A large case containing your very own long-range M42A sniper rifle, M45 ghillie armor and helmet, M42 scout sight, ammunition, spotter equipment, and additional pieces of equipment."
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _CM14/Objects/loadout_kits.rsi
+    layers:
+    - state: closed
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: open
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: sniper
+  - type: Icon
+    sprite: _CM14/Objects/loadout_kits.rsi
+    state: closed
+  - type: StorageFill
+    contents:
+    - id: CMArmorM45
+    - id: CMArmorHelmetM45
+#    - id: CMM42NightGoggles # TODO CM14
+    - id: CMMagazineSniperM42A
+    - id: CMMagazineSniperM42AIncendiary
+    - id: CMMagazineSniperM42AIncendiary
+    - id: CMMagazineSniperM42AFlak
+#    - id: CMBackpackSmock
+#    - id: CMVP78Pistol
+#    - id: CMMagazineVP78
+    - id: CMM42ASniperRifle
+#    - id: CMFacepaintSniper
+#    - id: CMSpotter

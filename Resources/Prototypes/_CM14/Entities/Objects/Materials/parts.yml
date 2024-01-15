@@ -1,0 +1,109 @@
+- type: entity
+  parent: PartRodMetal
+  id: CMPartRodMetal
+  name: metal rod
+  description: Some rods. Can be used for building, or something.
+  suffix: Full
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Materials/parts.rsi
+    state: rods
+  - type: Item
+    size: Normal
+    sprite: _CM14/Objects/Materials/parts.rsi
+  - type: Stack
+    stackType: CMMetalRod
+    baseLayer: base
+    layerStates:
+    - rods
+    - rods_5
+#  - type: Construction # TODO CM14 Rod crafting
+#    graph: MetalRod
+#    node: MetalRod
+
+- type: entity
+  parent: CMPartRodMetal
+  id: CMPartRodMetal10
+  name: metal rod
+  suffix: 10
+  components:
+  - type: Tag
+    tags:
+    - RodMetal1
+    - DroneUsable
+  - type: Sprite
+    state: rods
+  - type: Stack
+    count: 10
+
+- type: entity
+  parent: CMPartRodMetal
+  id: CMPartRodMetal1
+  name: metal rod
+  suffix: Single
+  components:
+  - type: Tag
+    tags:
+    - RodMetal1
+    - DroneUsable
+  - type: Sprite
+    state: rods
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: CMPartRodMetal
+  id: CMPartRodPlasteel
+  name: plasteel rod
+  description: Some plasteel rods. Can be used for building sturdier structures and objects.
+  suffix: Full
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Plasteel: 50 #Half of a regular plasteel sheet to reflect the crafting recipe
+  - type: Stack
+    stackType: CMPlasteelRod
+    baseLayer: base
+    layerStates:
+    - rods_plasteel
+    - rods_plasteel_5
+  - type: Sprite
+    state: rods_plasteel
+  - type: Item
+    size: Normal
+#    heldPrefix: rods
+#  - type: Construction # TODO CM14 Plasteel rod crafting
+#    graph: PlasteelRod
+#    node: PlasteelRod
+  - type: StackPrice
+    price: 15
+
+- type: entity
+  parent: CMPartRodPlasteel
+  id: CMPartRodPlasteel10
+  name: plasteel rod
+  suffix: 10
+  components:
+  - type: Tag
+    tags:
+    - RodMetal1
+    - DroneUsable
+  - type: Sprite
+    state: rods_plasteel
+  - type: Stack
+    count: 10
+
+- type: entity
+  parent: CMPartRodPlasteel
+  id: CMPartRodPlasteel1
+  name: plasteel rod
+  suffix: Single
+  components:
+  - type: Tag
+    tags:
+    - RodMetal1
+    - DroneUsable
+  - type: Sprite
+    state: rods_plasteel
+  - type: Stack
+    count: 1

@@ -1,0 +1,44 @@
+﻿- type: entity
+  parent: Paper
+  name: paper
+  id: CMPaper
+  description: ""
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/paper.rsi
+    layers:
+    - state: paper
+    - state: paper_words
+      map: ["enum.PaperVisualLayers.Writing"]
+      visible: false
+    - state: paper_stamped
+      map: ["enum.PaperVisualLayers.Stamp"]
+      visible: false
+
+- type: entity
+  abstract: true
+  parent: CMPaper
+  id: CMPaperWritten
+  components:
+  - type: PaperVisuals
+    backgroundImagePath: "/Textures/Interface/Paper/paper_background_default.svg.96dpi.png"
+    contentImagePath: "/Textures/Interface/Paper/paper_content_lined.svg.96dpi.png"
+    backgroundPatchMargin: 16.0, 16.0, 16.0, 16.0
+    contentMargin: 16.0, 16.0, 16.0, 16.0
+
+- type: entity
+  parent: CMPaperWritten
+  id: CMPaperJudgement
+  name: judgement
+  components:
+  - type: Paper
+    content: "For crimes against the station, the offender is sentenced to:"
+
+- type: entity
+  parent: CMPaperWritten
+  id: CMPaperAlmayerStorage
+  name: almayer emergency storage note
+  components:
+  - type: Paper
+    content: "Hey Garry, I got the boys to move most of the emergency supplies down into the ASRS hold just like ya' asked.
+      Next time you're around Chinook I'll buy you a beer ok?"

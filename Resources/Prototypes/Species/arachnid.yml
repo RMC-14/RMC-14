@@ -2,7 +2,7 @@
   id: Arachnid
   name: species-name-arachnid
   roundStart: true
-  prototype: MobArachnid
+  prototype: CMMobArachnid
   sprites: MobArachnidSprites
   defaultSkinTone: "#385878"
   markingLimits: MobArachnidMarkingLimits
@@ -62,6 +62,12 @@
       defaultMarkings: [ ArachnidCheliceraeDownwards ]
     Chest:
       points: 1
+      required: false
+    Legs:
+      points: 2
+      required: false
+    Arms:
+      points: 2
       required: false
 
 - type: humanoidBaseSprite

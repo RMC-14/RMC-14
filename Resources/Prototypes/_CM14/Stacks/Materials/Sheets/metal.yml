@@ -1,0 +1,15 @@
+- type: stack
+  id: CMSteel
+  name: steel
+  icon: { sprite: /Textures/_CM14/Objects/Materials/Sheets/metal.rsi, state: steel }
+  spawn: CMSheetSteel
+  maxCount: 50
+  itemSize: 1
+
+- type: stack
+  id: CMPlasteel
+  name: plasteel
+  icon: { sprite: /Textures/_CM14/Objects/Materials/Sheets/plasteel.rsi, state: plasteel }
+  spawn: CMSheetPlasteel
+  maxCount: 30
+  itemSize: 1

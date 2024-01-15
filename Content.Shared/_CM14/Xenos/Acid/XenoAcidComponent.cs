@@ -7,6 +7,5 @@ namespace Content.Shared._CM14.Xenos.Acid;
 public sealed partial class XenoAcidComponent : Component
 {
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan AcidDelay = TimeSpan.FromSeconds(5);
 }

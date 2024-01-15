@@ -1,7 +1,7 @@
 ﻿- type: entity
   abstract: true
   name: box of shotgun shells
-  parent: [AmmoProviderShotgunShell, CMEntityBase]
+  parent: AmmoProviderShotgunShell
   id: CMBoxShotgunBase
   components:
   - type: BallisticAmmoProvider

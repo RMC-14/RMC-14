@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseSign, CMEntityBase]
+  parent: BaseSign
   id: CMPosterBase
   abstract: true
   components:

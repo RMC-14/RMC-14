@@ -96,12 +96,12 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         var damage = new DamageSpecifier(xeno.Comp.TailDamage);
         if (results.Count == 0)
         {
-            var missEvent = new MeleeHitEvent(new List<EntityUid>(), xeno, xeno, damage);
+            var missEvent = new MeleeHitEvent(new List<EntityUid>(), xeno, xeno, damage, null);
             RaiseLocalEvent(xeno, missEvent);
         }
         else
         {
-            var hitEvent = new MeleeHitEvent(results, xeno, xeno, damage);
+            var hitEvent = new MeleeHitEvent(results, xeno, xeno, damage, null);
             RaiseLocalEvent(xeno, hitEvent);
 
             if (!hitEvent.Handled)

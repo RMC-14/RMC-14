@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0a8d59abad27ec6112ef59d7661ab2139e227d0a/icons/obj/structures/rollerbed.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "roller_down"
+    },
+    {
+      "name": "roller_up"
+    },
+    {
+      "name": "folded"
+    },
+    {
+      "name": "beacon_active_down",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "beacon_active_up",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "winched_stretcher",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "stretcher_up"
+    },
+    {
+      "name": "stretcher_down"
+    },
+    {
+      "name": "stretcher_box"
+    },
+    {
+      "name": "stretcher_folded"
+    },
+    {
+      "name": "surgical_down"
+    },
+    {
+      "name": "surgical_up"
+    },
+    {
+      "name": "surgical_folded"
+    }
+  ]
+}

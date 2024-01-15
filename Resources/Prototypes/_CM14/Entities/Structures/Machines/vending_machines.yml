@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ VendingMachine, CMEntityBase]
+  parent: VendingMachine
   id: CMVendor
   name: Vendomat
   description: A generic vending machine.
@@ -162,14 +162,14 @@
 
 - type: entity
   parent: CMVendor
-  id: CMVendorIngridients
+  id: CMVendorIngredients
   name: Galley Auxiliary Storage Requisition System
   description: A vending machine meant to be use for cooks.
   components:
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/snack.rsi
   - type: VendingMachine
-    pack: CMVendorIngridient
+    pack: CMVendorIngredient
 
 - type: entity
   parent: CMVendor
@@ -185,6 +185,7 @@
     ejectState: eject-unshaded
   - type: AccessReader
     access: [["CMAccessMedical"]]
+  - type: CMSolutionRefiller
 
 - type: entity
   parent: CMVendorMedical

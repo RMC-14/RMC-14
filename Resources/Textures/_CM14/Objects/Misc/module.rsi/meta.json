@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/31eabcb5240425983ca6b1cb1c2dfbde1312563a/icons/obj/items/circuitboards.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "std_mod"
+    },
+    {
+      "name": "blank_mod"
+    },
+    {
+      "name": "card_mod"
+    },
+    {
+      "name": "power_mod"
+    },
+    {
+      "name": "id_mod"
+    },
+    {
+      "name": "mainboard"
+    },
+    {
+      "name": "mcontroller"
+    },
+    {
+      "name": "cyborg_upgrade"
+    },
+    {
+      "name": "cyborg_upgrade1"
+    },
+    {
+      "name": "cyborg_upgrade2"
+    },
+    {
+      "name": "cyborg_upgrade3"
+    },
+    {
+      "name": "cyborg_upgrade4"
+    },
+    {
+      "name": "door_electronics"
+    },
+    {
+      "name": "door_electronics_smoked"
+    }
+  ]
+}

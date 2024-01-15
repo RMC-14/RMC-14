@@ -1,6 +1,6 @@
 ﻿- type: entity
   abstract: true
-  parent: [BaseStructure, CMEntityBase]
+  parent: BaseStructure
   id: CMBaseWindow # TODO CM14 this needs to be 2 separate entities eventually
   placement:
     mode: SnapgridCenter
@@ -76,9 +76,41 @@
     base: white_rwindow
     mode: CardinalFlags
 
-# TODO destructible
+# TODO CM14 break window
 - type: entity
   parent: CMWindowReinforcedWhiteHull
   id: CMWindowReinforcedWhite
   name: hull window
   description: A glass window with a special rod matrix inside a wall frame. It looks rather strong. Might take a few good hits to shatter it.
+
+- type: entity
+  parent: CMWindowReinforcedWhite
+  id: CMWindowWhiteColony
+  name: window
+  description: A glass window. It looks thin and flimsy. A few knocks with anything should shatter it.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Windows/colony_window.rsi
+    state: col_window0
+  - type: Icon
+    sprite: _CM14/Structures/Windows/colony_window.rsi
+    state: col_window0
+  - type: IconSmooth
+    key: walls
+    base: col_window
+    mode: CardinalFlags
+
+- type: entity
+  parent: CMWindowWhiteColony
+  id: CMWindowWhiteColonyReinforced
+  name: reinforced window
+  description: A glass window with a special rod matrix inside a wall frame. It looks rather strong. Might take a few good hits to shatter it.
+  components:
+  - type: Sprite
+    state: col_rwindow0
+  - type: Icon
+    state: col_rwindow0
+  - type: IconSmooth
+    key: walls
+    base: col_rwindow
+    mode: CardinalFlags

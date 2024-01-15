@@ -69,7 +69,7 @@
   canRotate: false
   canBuildInImpassable: false
   conditions:
-    - !type:TileNotBlocked
+  - !type:TileNotBlocked
 
 # Airlocks
 - type: construction
@@ -143,7 +143,6 @@
     - !type:TileNotBlocked
 
 # Barricades
-
 - type: construction
   name: Metal Barricade
   id: CMBarricadeMetal
@@ -219,7 +218,7 @@
   startNode: start
   targetNode: nodeBarricadeMetalDoor
   category: construction-category-cm-structures
-  description: A fence to ensure marines stay in line in medical.
+  description: A barricade that can be folded or opened to allow marines through.
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -236,7 +235,7 @@
   startNode: start
   targetNode: nodeBarricadePlasteelDoor
   category: construction-category-cm-structures
-  description: A fence to ensure marines stay in line in medical.
+  description: A barricade that can be folded or opened to allow marines through. Made from hardened plasteel.
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false

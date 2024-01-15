@@ -1,0 +1,24 @@
+﻿- type: soundCollection
+  id: CMShotgunPump
+  files:
+  - /Audio/_CM14/Weapons/Guns/Pump/shotgunpump1.ogg
+  - /Audio/_CM14/Weapons/Guns/Pump/shotgunpump2.ogg
+
+- type: soundCollection
+  id: CMM4A3Shoot
+  files:
+  - /Audio/_CM14/Weapons/Guns/Gunshots/gun_m4a3_1.ogg
+  - /Audio/_CM14/Weapons/Guns/Gunshots/gun_m4a3_2.ogg
+  - /Audio/_CM14/Weapons/Guns/Gunshots/gun_m4a3_3.ogg
+  - /Audio/_CM14/Weapons/Guns/Gunshots/gun_m4a3_4.ogg
+  - /Audio/_CM14/Weapons/Guns/Gunshots/gun_m4a3_5.ogg
+
+- type: soundCollection
+  id: CMM41AShoot
+  files:
+  - /Audio/_CM14/Weapons/Guns/Gunshots/gun_m41a_1.ogg
+  - /Audio/_CM14/Weapons/Guns/Gunshots/gun_m41a_2.ogg
+  - /Audio/_CM14/Weapons/Guns/Gunshots/gun_m41a_3.ogg
+  - /Audio/_CM14/Weapons/Guns/Gunshots/gun_m41a_4.ogg
+  - /Audio/_CM14/Weapons/Guns/Gunshots/gun_m41a_5.ogg
+  - /Audio/_CM14/Weapons/Guns/Gunshots/gun_m41a_6.ogg

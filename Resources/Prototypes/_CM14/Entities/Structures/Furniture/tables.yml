@@ -1,6 +1,6 @@
 # Basic
 - type: entity
-  parent: [ TableBase, CMEntityBase ]
+  parent: TableBase
   id: CMTable
   name: table
   description: A square metal surface resting on four legs. Useful to put stuff on.
@@ -94,3 +94,15 @@
   - type: Icon
     sprite: _CM14/Structures/Furniture/Tables/gambling.rsi
 
+# Almayer
+- type: entity
+  parent: CMTable
+  id: CMTableAlmayer
+  name: table
+  description: A square metal surface resting on four legs. Useful to put stuff on. Can be flipped in emergencies to act as cover.
+  suffix: Almayer
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Furniture/Tables/almayer.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Furniture/Tables/almayer.rsi

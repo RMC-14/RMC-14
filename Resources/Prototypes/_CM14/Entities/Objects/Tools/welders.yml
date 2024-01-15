@@ -11,9 +11,8 @@
     sprite: _CM14/Objects/Tools/welder.rsi
     layers:
     - state: icon
-      map: ["enum.WelderLayers.Base"]
     - state: welder_flame
-      map: ["enum.WelderLayers.Flame"]
+      map: ["enum.ToggleVisuals.Layer"]
       shader: unshaded
       visible: false
   - type: Item
@@ -28,7 +27,7 @@
       right:
       - state: inhand-right-flame
         shader: unshaded
-  - type: ItemCooldown
+  - type: UseDelay
   - type: MeleeWeapon
     wideAnimationRotation: -90
     damage:

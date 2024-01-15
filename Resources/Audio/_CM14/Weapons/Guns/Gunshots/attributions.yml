@@ -1,0 +1,74 @@
+- files: ["gun_m4a3_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/20829c1ee1c4718f6a3413555921b4f6c760d4bf/sound/weapons/gun_m4a3_1.ogg"
+
+- files: ["gun_m4a3_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/20829c1ee1c4718f6a3413555921b4f6c760d4bf/sound/weapons/gun_m4a3_2.ogg"
+
+- files: ["gun_m4a3_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/20829c1ee1c4718f6a3413555921b4f6c760d4bf/sound/weapons/gun_m4a3_3.ogg"
+
+- files: ["gun_m4a3_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/20829c1ee1c4718f6a3413555921b4f6c760d4bf/sound/weapons/gun_m4a3_4.ogg"
+
+- files: ["gun_m4a3_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/20829c1ee1c4718f6a3413555921b4f6c760d4bf/sound/weapons/gun_m4a3_5.ogg"
+
+- files: ["gun_m4ra.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/8086109b2dbf8d1d98aec106a07d86b65fe63e1b/sound/weapons/gun_m4ra.ogg"
+
+- files: ["gun_m39.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/553029b58d42439bef45e30a593bdcf370d99f9a/sound/weapons/gun_m39.ogg"
+
+- files: ["gun_m41a_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/8086109b2dbf8d1d98aec106a07d86b65fe63e1b/sound/weapons/gun_m41a_1.ogg"
+
+- files: ["gun_m41a_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/8086109b2dbf8d1d98aec106a07d86b65fe63e1b/sound/weapons/gun_m41a_2.ogg"
+
+- files: ["gun_m41a_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/8086109b2dbf8d1d98aec106a07d86b65fe63e1b/sound/weapons/gun_m41a_3.ogg"
+
+- files: ["gun_m41a_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/8086109b2dbf8d1d98aec106a07d86b65fe63e1b/sound/weapons/gun_m41a_4.ogg"
+
+- files: ["gun_m41a_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/8086109b2dbf8d1d98aec106a07d86b65fe63e1b/sound/weapons/gun_m41a_5.ogg"
+
+- files: ["gun_m41a_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/8086109b2dbf8d1d98aec106a07d86b65fe63e1b/sound/weapons/gun_m41a_6.ogg"
+
+- files: ["gun_shotgun.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/ab7f203df937ad1681f4869748865a07d4db715a/sound/weapons/gun_shotgun.ogg"
+
+- files: ["gun_sniper.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/8086109b2dbf8d1d98aec106a07d86b65fe63e1b/sound/weapons/gun_sniper.ogg"

@@ -1,0 +1,16 @@
+- type: constructionGraph
+  id: BarbedWireGraph
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: nodeBarbedWire
+          completed:
+            - !type:SetStackCount
+              amount: 1
+          steps:
+            - material: CMSteel
+              amount: 1
+
+    - node: nodeBarbedWire
+      entity: BarbedWire1

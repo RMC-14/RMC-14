@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [BaseCartridgePistol, CMEntityBase]
+  parent: BaseCartridgePistol
   id: CMCartridgePistolBase
 
 - type: entity

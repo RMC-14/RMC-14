@@ -1,6 +1,6 @@
 ﻿- type: entity
-  name: M41A pulse rifle
   parent: BaseWeaponRifle
+  name: M41A pulse rifle
   id: WeaponRifleM41A
   description: This is the standard issue pulse rifle used by the Colonial Marines. A reliable, robust, and overall effective standard issue weapon, the M41A must be held in two hands to accurately fire.
   components:
@@ -30,7 +30,7 @@
         - Burst
         - FullAuto
       soundGunshot:
-        path: /Audio/_CM14/Weapons/Guns/Gunshots/m41.ogg
+        collection: CMM4A3Shoot
     - type: GunWieldBonus
       minAngle: -25
       maxAngle: -50
@@ -95,7 +95,7 @@
         - Burst
         - FullAuto
       soundGunshot:
-        path: /Audio/_CM14/Weapons/Guns/Gunshots/m41.ogg
+        collection: CMM4A3Shoot
     - type: GunWieldBonus
       minAngle: -25
       maxAngle: -30
@@ -119,8 +119,8 @@
               - CartridgeRifle10x24mm
 
 - type: entity
-  name: M4RA battle rifle
   parent: BaseWeaponRifle
+  name: M4RA battle rifle
   id: WeaponRifleM4RA
   description: The M4RA battle rifle is a designated marksman rifle in service with the USCM. Sporting a bullpup configuration, the M4RA battle rifle is perfect for reconnaissance and fire support teams.
   components:
@@ -148,7 +148,7 @@
       availableModes:
         - SemiAuto
       soundGunshot:
-        path: /Audio/_CM14/Weapons/Guns/Gunshots/m4ra.ogg
+        path: /Audio/_CM14/Weapons/Guns/Gunshots/gun_m4ra.ogg
     - type: GunWieldBonus
       minAngle: -30
       maxAngle: -40

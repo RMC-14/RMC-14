@@ -1,6 +1,6 @@
 ﻿- type: entity
-  name: M37A2 Pump Shotgun
   parent: BaseWeaponShotgun
+  name: M37A2 Pump Shotgun
   id: WeaponShotgunM37A2
   description: An Armat Battlefield Systems classic design, the M37A2 combines close-range firepower with long term reliability. Requires a pump, which is a Unique Action.
   components:
@@ -18,7 +18,7 @@
   - type: Wieldable
   - type: Gun
     soundGunshot:
-      path: /Audio/_CM14/Weapons/Guns/Gunshots/m37a2.ogg
+      path: /Audio/_CM14/Weapons/Guns/Gunshots/gun_shotgun.ogg
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -27,6 +27,10 @@
     proto: null
     soundInsert:
       path: /Audio/_CM14/Weapons/Guns/Reload/m37a2.ogg
+  - type: CMPumpAction
+  - type: UseDelay
+    delay: 2
+
 #  - type: GunWieldBonus # TODO CM14
 #    minAngle: -25
 #    maxAngle: -50

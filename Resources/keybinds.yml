@@ -558,3 +558,6 @@ binds:
   type: State
   key: MouseRight
   canFocus: true
+- function: CMPumpShotgun
+  type: State
+  key: Space
