@@ -157,8 +157,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
             }
         }
 
-        _window.PointsContainer.Visible = anyEntryWithPoints;
-        _window.PointsLabel.Text = $"{playerPoints ?? 0}";
+        _window.PointsLabel.Text = anyEntryWithPoints ? $"Points Remaining: {playerPoints ?? 0}" : string.Empty;
     }
 
     protected override void Dispose(bool disposing)

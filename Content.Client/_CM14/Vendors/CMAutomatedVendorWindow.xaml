@@ -4,14 +4,11 @@
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
     MinSize="500 700">
     <BoxContainer Orientation="Vertical">
-        <BoxContainer Name="PointsContainer" Access="Public">
-            <Label Text="Points Remaining" Align="Left" HorizontalExpand="True" />
-            <Label Name="PointsLabel" Access="Public" Align="Right" HorizontalExpand="True" />
-        </BoxContainer>
-        <cc:HSeparator Margin="0 0 0 5" Color="#4972A1" />
         <BoxContainer Orientation="Horizontal">
-            <Label Text="Search" HorizontalExpand="True" Align="Left" />
-            <LineEdit Name="Search" Access="Public" HorizontalExpand="True" />
+            <Label Text="Search" Align="Left" />
+            <LineEdit Name="Search" Access="Public" HorizontalExpand="True" Margin="10 0 0 0" />
+            <Control HorizontalExpand="True" SizeFlagsStretchRatio="0.25" />
+            <Label Name="PointsLabel" Access="Public" HorizontalExpand="True" Align="Right" />
         </BoxContainer>
         <cc:HSeparator Color="#4972A1" />
         <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
