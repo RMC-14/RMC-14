@@ -7,6 +7,10 @@
   components:
     - type: Sprite
       sprite: _CM14/Objects/Clothing/Uniforms/Marine/standard.rsi
+      state: null
+      layers:
+        - state: icon
+        - map: [ "enum.WebbingVisualLayers.Base" ]
     - type: Clothing
       sprite: _CM14/Objects/Clothing/Uniforms/Marine/standard.rsi
     - type: SuitSensor
@@ -17,6 +21,11 @@
       tags:
         - ClothMade
         - WhitelistChameleon
+    - type: WebbingClothing
+    - type: UserInterface
+      interfaces:
+      - key: enum.StorageUiKey.Key
+        type: StorageBoundUserInterface
 
 - type: entity
   parent: JumpsuitMarine
