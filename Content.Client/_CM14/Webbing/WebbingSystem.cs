@@ -1,4 +1,5 @@
 ﻿using Content.Client.Clothing;
+using Content.Client.Items.Systems;
 using Content.Shared._CM14.Webbing;
 using Content.Shared.Clothing;
 using Content.Shared.Inventory.Events;
@@ -10,6 +11,7 @@ namespace Content.Client._CM14.Webbing;
 
 public sealed class WebbingSystem : SharedWebbingSystem
 {
+    [Dependency] private readonly ItemSystem _item = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
 
     public event Action? PlayerWebbingUpdated;
@@ -46,12 +48,12 @@ public sealed class WebbingSystem : SharedWebbingSystem
         }));
     }
 
-    private void OnClothingState(Entity<WebbingClothingComponent> ent, ref AfterAutoHandleStateEvent args)
+    private void OnClothingState(Entity<WebbingClothingComponent> clothing, ref AfterAutoHandleStateEvent args)
     {
-        if (TryComp(ent, out SpriteComponent? clothingSprite) &&
+        if (TryComp(clothing, out SpriteComponent? clothingSprite) &&
             clothingSprite.LayerMapTryGet(WebbingVisualLayers.Base, out var clothingLayer))
         {
-            if (TryComp(ent.Comp.Webbing, out WebbingComponent? webbing) &&
+            if (TryComp(clothing.Comp.Webbing, out WebbingComponent? webbing) &&
                 webbing.PlayerSprite is { } rsi)
             {
                 clothingSprite.LayerSetVisible(clothingLayer, true);
@@ -64,6 +66,7 @@ public sealed class WebbingSystem : SharedWebbingSystem
             }
         }
 
+        _item.VisualsChanged(clothing);
         PlayerWebbingUpdated?.Invoke();
     }
 

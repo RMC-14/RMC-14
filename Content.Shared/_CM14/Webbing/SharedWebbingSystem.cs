@@ -1,5 +1,6 @@
 ﻿using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Item;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Verbs;
@@ -10,6 +11,7 @@ namespace Content.Shared._CM14.Webbing;
 public abstract class SharedWebbingSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
 
@@ -98,6 +100,7 @@ public abstract class SharedWebbingSystem : EntitySystem
         {
             clothing.Comp.Webbing = args.Entity;
             Dirty(clothing);
+            _item.VisualsChanged(clothing);
         }
     }
 
@@ -107,6 +110,7 @@ public abstract class SharedWebbingSystem : EntitySystem
         {
             clothing.Comp.Webbing = null;
             Dirty(clothing);
+            _item.VisualsChanged(clothing);
         }
     }
 }
