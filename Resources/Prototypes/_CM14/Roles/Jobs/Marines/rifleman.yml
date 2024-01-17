@@ -6,6 +6,7 @@
   playTimeTracker: JobRifleman
   startingGear: RiflemanGear
   icon: "JobIconRifleman"
+  joinNotifyCrew: false
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
   accessGroups:

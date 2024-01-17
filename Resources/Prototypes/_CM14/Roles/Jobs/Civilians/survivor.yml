@@ -16,7 +16,6 @@
     time: 18000 #5 hours
   startingGear: SurvivorGear
   icon: "JobIconSurvivor"
-  requireAdminNotify: false
   joinNotifyCrew: false
   supervisors: job-supervisors-nobody
   canBeAntag: false

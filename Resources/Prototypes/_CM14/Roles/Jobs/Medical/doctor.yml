@@ -10,8 +10,7 @@
     time: 3600 # 1 hours
   startingGear: MarineDoctorGear
   icon: "JobIconMarineDoctor"
-  requireAdminNotify: false
-  joinNotifyCrew: true
+  joinNotifyCrew: false
   supervisors: job-supervisors-cm-cmo
   canBeAntag: true
   accessGroups:

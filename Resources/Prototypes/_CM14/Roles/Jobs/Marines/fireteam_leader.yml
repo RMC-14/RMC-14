@@ -10,6 +10,7 @@
       time: 28800 #8 hrs
   startingGear: FireteamLeaderGear
   icon: "JobIconFireteamLeader"
+  joinNotifyCrew: false
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
   accessGroups:

@@ -6,8 +6,7 @@
   playTimeTracker: JobCorrespondent
   startingGear: CorrespondentGear
   icon: "JobIconCorrespondent"
-  requireAdminNotify: false
-  joinNotifyCrew: true
+  joinNotifyCrew: false
   supervisors: job-supervisors-command
   canBeAntag: true
   accessGroups:

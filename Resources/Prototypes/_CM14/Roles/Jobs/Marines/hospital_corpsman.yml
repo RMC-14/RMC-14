@@ -13,6 +13,7 @@
       time: 3600 #1 hrs
   startingGear: HospitalCorpsmanGear
   icon: "JobIconHospitalCorpsman"
+  joinNotifyCrew: false
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
   accessGroups:

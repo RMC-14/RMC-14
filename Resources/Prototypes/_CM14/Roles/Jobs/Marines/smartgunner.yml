@@ -10,6 +10,7 @@
       time: 18000 #5 hrs
   startingGear: SmartgunnerGear
   icon: "JobIconSmartgunner"
+  joinNotifyCrew: false
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
   accessGroups:

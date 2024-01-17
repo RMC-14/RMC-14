@@ -10,8 +10,7 @@
     time: 3600 # 1 hours
   startingGear: OrdnanceTechGear
   icon: "JobIconOrdnanceTech"
-  requireAdminNotify: false
-  joinNotifyCrew: true
+  joinNotifyCrew: false
   supervisors: job-supervisors-cm-chief-engineer
   canBeAntag: true
   accessGroups:

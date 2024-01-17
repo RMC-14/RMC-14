@@ -10,6 +10,7 @@
       time: 3600 #1 hrs
   startingGear: CombatTechGear
   icon: "JobIconCombatTech"
+  joinNotifyCrew: false
   supervisors: job-supervisors-squad-leader
   canBeAntag: false
   accessGroups:
