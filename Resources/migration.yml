@@ -124,11 +124,16 @@ WarpPointBeaconService: null
 ClothingEyesGlassesCosmeticSunglasses: ClothingEyesGlassesSunglasses
 SpawnPointAssistant: SpawnPointPassenger
 
+# 2024-01-04
+WeaponPistolM4A3: CMWeaponPistolM4A3
+MagazinePistolM4A3: CMMagazinePistolM4A3
+
 # 2024-01-05
 DrinkGoldschlagerBottleFull: DrinkGildlagerBottleFull
 DrinkGoldschlagerGlass: DrinkGildlagerGlass
 
 # 2024-01-07
+ClosetBase: ClosetSteelBase
 MonkeyCubeBox: VariantCubeBox
 
 # 2024-01-08
@@ -156,6 +161,5 @@ TransmitterSubspaceStockPart: null
 # 2024-01-10
 ClothingHeadHatHoodRad: null
 
-# 2024-04-01
-WeaponPistolM4A3: CMWeaponPistolM4A3
-MagazinePistolM4A3: CMMagazinePistolM4A3
+# 2024-01-12
+SpaceMedipen: null
