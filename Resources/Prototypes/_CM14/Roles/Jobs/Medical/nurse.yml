@@ -6,9 +6,8 @@
   playTimeTracker: JobNurse
   startingGear: NurseGear
   icon: "JobIconNurse"
-  requireAdminNotify: false
-  joinNotifyCrew: true
-  supervisors: job-supervisors-cm-cmo
+  joinNotifyCrew: false
+  supervisors: job-supervisors-cm14-cmo
   canBeAntag: true
   accessGroups:
   - CMMedical

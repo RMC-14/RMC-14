@@ -10,9 +10,8 @@
     time: 3600 # 1 hours
   startingGear: MaintTechGear
   icon: "JobIconMaintTech"
-  requireAdminNotify: false
-  joinNotifyCrew: true
-  supervisors: job-supervisors-cm-chief-engineer
+  joinNotifyCrew: false
+  supervisors: job-supervisors-cm14-ce
   canBeAntag: true
   accessGroups:
   - MaintTech

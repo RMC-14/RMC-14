@@ -11,9 +11,8 @@
   weight: 5
   startingGear: MilitaryPoliceGear
   icon: "JobIconMilitaryPolice"
-  requireAdminNotify: false
-  joinNotifyCrew: true
-  supervisors: job-supervisors-militarywarden
+  joinNotifyCrew: false
+  supervisors: job-supervisors-cm14-cmp
   canBeAntag: false
   accessGroups:
   - MP
