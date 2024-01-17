@@ -30,7 +30,7 @@
         - Burst
         - FullAuto
       soundGunshot:
-        collection: CMM4A3Shoot
+        collection: CMM41AShoot
     - type: GunWieldBonus
       minAngle: -25
       maxAngle: -50
@@ -95,7 +95,7 @@
         - Burst
         - FullAuto
       soundGunshot:
-        collection: CMM4A3Shoot
+        collection: CMM41AShoot
     - type: GunWieldBonus
       minAngle: -25
       maxAngle: -30
