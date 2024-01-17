@@ -11,7 +11,7 @@
   startingGear: WeaponsSpecialistGear
   icon: "JobIconWeaponsSpecialist"
   joinNotifyCrew: false
-  supervisors: job-supervisors-squad-leader
+  supervisors: job-supervisors-cm14-sl
   canBeAntag: false
   accessGroups:
   - WeaponSpec

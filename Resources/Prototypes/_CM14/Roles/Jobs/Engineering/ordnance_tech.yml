@@ -11,7 +11,7 @@
   startingGear: OrdnanceTechGear
   icon: "JobIconOrdnanceTech"
   joinNotifyCrew: false
-  supervisors: job-supervisors-cm-chief-engineer
+  supervisors: job-supervisors-cm14-ce
   canBeAntag: true
   accessGroups:
   - OT

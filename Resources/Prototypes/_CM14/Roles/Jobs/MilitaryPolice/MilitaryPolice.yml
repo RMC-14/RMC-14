@@ -12,7 +12,7 @@
   startingGear: MilitaryPoliceGear
   icon: "JobIconMilitaryPolice"
   joinNotifyCrew: false
-  supervisors: job-supervisors-militarywarden
+  supervisors: job-supervisors-cm14-cmp
   canBeAntag: false
   accessGroups:
   - MP

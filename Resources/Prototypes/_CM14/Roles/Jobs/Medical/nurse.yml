@@ -7,7 +7,7 @@
   startingGear: NurseGear
   icon: "JobIconNurse"
   joinNotifyCrew: false
-  supervisors: job-supervisors-cm-cmo
+  supervisors: job-supervisors-cm14-cmo
   canBeAntag: true
   accessGroups:
   - CMMedical

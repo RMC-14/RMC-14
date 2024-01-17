@@ -13,7 +13,7 @@
   icon: "JobIconASO"
   requireAdminNotify: true
   joinNotifyCrew: true
-  supervisors: job-supervisors-command
+  supervisors: job-supervisors-cm14-co
   canBeAntag: false
   accessGroups:
   - ASO

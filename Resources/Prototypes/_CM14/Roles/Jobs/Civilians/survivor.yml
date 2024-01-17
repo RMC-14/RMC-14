@@ -17,7 +17,7 @@
   startingGear: SurvivorGear
   icon: "JobIconSurvivor"
   joinNotifyCrew: false
-  supervisors: job-supervisors-nobody
+  supervisors: job-supervisors-cm14-nobody
   canBeAntag: false
   accessGroups:
   - Colonist

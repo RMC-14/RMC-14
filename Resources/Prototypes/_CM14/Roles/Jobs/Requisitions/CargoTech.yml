@@ -7,7 +7,7 @@
   startingGear: CMCargoTechGear
   icon: "JobIconCMCargoTech"
   joinNotifyCrew: false
-  supervisors: job-supervisors-cm-quartermaster
+  supervisors: job-supervisors-cm14-qm
   canBeAntag: true
   accessGroups:
   - CMCargoTech

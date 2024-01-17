@@ -1,10 +1,13 @@
 ﻿# supervisors
-job-supervisors-command = command staff
-job-supervisors-squad-leader = the Squad Leader
-job-supervisors-warden = the Warden
-job-supervisors-chiefmp = the Chief Military Police
-job-supervisors-cm-quartermaster = the Quartermaster
-job-supervisors-cm-chief-engineer = the Chief Engineer
-job-supervisors-high-command = USCM High Command
-job-supervisors-cm-cmo = the Chief Medical Officer
-job-supervisors-nobody = nobody, you are on your own.
+job-supervisors-cm14-wy = the Wey-Yu corporate office
+job-supervisors-cm14-aso = the auxiliary support officer
+job-supervisors-cm14-co = the acting commanding officer
+job-supervisors-cm14-cmo = the chief medical officer
+job-supervisors-cm14-ares = ARES and APOLLO
+job-supervisors-cm14-po = the pilot officers
+job-supervisors-cm14-uscm = USCM high command
+job-supervisors-cm14-cmp = the Chief MP
+job-supervisors-cm14-qm = the quartermaster
+job-supervisors-cm14-ce = the chief engineer
+job-supervisors-cm14-sl = the acting squad leader
+job-supervisors-cm14-nobody = nobody, you are on your own.

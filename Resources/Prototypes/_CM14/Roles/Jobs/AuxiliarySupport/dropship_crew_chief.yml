@@ -7,7 +7,7 @@
   startingGear: DCCGear
   icon: "JobIconDCC"
   joinNotifyCrew: false
-  supervisors: job-supervisors-command
+  supervisors: job-supervisors-cm14-po
   canBeAntag: true
   accessGroups:
   - DropshipCrewChief

@@ -14,7 +14,7 @@
   startingGear: SquadLeaderGear
   icon: "JobIconSquadLeader"
   joinNotifyCrew: false
-  supervisors: job-supervisors-command
+  supervisors: job-supervisors-cm14-co
   canBeAntag: false
   accessGroups:
   - SquadLeader

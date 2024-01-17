@@ -11,7 +11,7 @@
   startingGear: MaintTechGear
   icon: "JobIconMaintTech"
   joinNotifyCrew: false
-  supervisors: job-supervisors-cm-chief-engineer
+  supervisors: job-supervisors-cm14-ce
   canBeAntag: true
   accessGroups:
   - MaintTech

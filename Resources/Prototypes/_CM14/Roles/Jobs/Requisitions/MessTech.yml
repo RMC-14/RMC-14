@@ -7,7 +7,7 @@
   startingGear: MessTechGear
   icon: "JobIconMessTech"
   joinNotifyCrew: false
-  supervisors: job-supervisors-cm-quartermaster
+  supervisors: job-supervisors-cm14-aso
   canBeAntag: true
   accessGroups:
   - MessTech

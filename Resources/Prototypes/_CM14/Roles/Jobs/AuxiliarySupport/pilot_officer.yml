@@ -11,7 +11,7 @@
   startingGear: PilotOfficerGear
   icon: "JobIconPilotOfficer"
   joinNotifyCrew: false
-  supervisors: job-supervisors-command
+  supervisors: job-supervisors-cm14-aso
   canBeAntag: false
   accessGroups:
   - PilotOfficer

@@ -14,7 +14,7 @@
   startingGear: HospitalCorpsmanGear
   icon: "JobIconHospitalCorpsman"
   joinNotifyCrew: false
-  supervisors: job-supervisors-squad-leader
+  supervisors: job-supervisors-cm14-sl
   canBeAntag: false
   accessGroups:
   - HospitalCorpsman
