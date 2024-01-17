@@ -6,9 +6,8 @@
   playTimeTracker: JobMessTech
   startingGear: MessTechGear
   icon: "JobIconMessTech"
-  requireAdminNotify: false
-  joinNotifyCrew: true
-  supervisors: job-supervisors-cm-quartermaster
+  joinNotifyCrew: false
+  supervisors: job-supervisors-cm14-aso
   canBeAntag: true
   accessGroups:
   - MessTech

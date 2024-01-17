@@ -16,7 +16,7 @@
   icon: "JobIconCMChiefEngineer"
   requireAdminNotify: true
   joinNotifyCrew: true
-  supervisors: job-supervisors-command
+  supervisors: job-supervisors-cm14-aso
   canBeAntag: false
   accessGroups:
   - CMCE

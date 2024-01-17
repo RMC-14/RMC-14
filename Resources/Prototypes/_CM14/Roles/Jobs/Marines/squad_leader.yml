@@ -13,7 +13,8 @@
       time: 10800 #3 hrs
   startingGear: SquadLeaderGear
   icon: "JobIconSquadLeader"
-  supervisors: job-supervisors-command
+  joinNotifyCrew: false
+  supervisors: job-supervisors-cm14-co
   canBeAntag: false
   accessGroups:
   - SquadLeader
