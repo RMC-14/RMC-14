@@ -1,21 +1,13 @@
 - type: entity
-  name: Entrenching Tool
   parent: BaseItem
   id: EntrenchingTool
+  name: entrenching tool
   description: A foldable shovel for quickly constructing entrenchments.
   components:
     - type: Tag
       tags:
       - Shovel
     - type: ItemToggle
-      soundActivate:
-        path: /Audio/Weapons/telescopicon.ogg
-        params:
-          volume: -5
-      soundDeactivate:
-        path: /Audio/Weapons/telescopicoff.ogg
-        params:
-          volume: -5
     - type: ItemToggleDisarmMalus
       activatedDisarmMalus: 0.6
     - type: ItemToggleSize
@@ -23,16 +15,18 @@
     - type: Sprite
       sprite: _CM14/Objects/Tools/etool.rsi
       layers:
-        - state: etool-on
-        - state: etool-icon
+        - state: etool
+          map: [ "enum.EntrenchingToolComponentVisualLayers.Base" ]
+        - state: etool_c
+          map: [ "enum.EntrenchingToolComponentVisualLayers.Folded" ]
+        - state: etool_overlay
+          map: [ "enum.EntrenchingToolComponentVisualLayers.Dirt" ]
           visible: false
-          map: [ "etool" ]
     - type: Item
       size: Small
       sprite: _CM14/Objects/Tools/etool.rsi
       heldPrefix: etool
     - type: UseDelay
-      delay: 0.5
+      delay: 0.25
     - type: Appearance
-    - type: ToggleableLightVisuals
-      spriteLayer: etool
+    - type: EntrenchingTool

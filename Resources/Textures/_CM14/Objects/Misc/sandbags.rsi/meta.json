@@ -8,13 +8,10 @@
   },
   "states": [
     {
-      "name": "etool"
+      "name": "sandbag_stack"
     },
     {
-      "name": "etool_c"
-    },
-    {
-      "name": "etool_overlay"
+      "name": "sandbag_pile"
     }
   ]
 }
