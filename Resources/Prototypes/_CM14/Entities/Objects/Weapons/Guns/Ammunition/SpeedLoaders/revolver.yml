@@ -27,7 +27,7 @@
   - type: BallisticAmmoProvider
     proto: CartridgeMagnum # Needs Updating: No .44 prototype yet
   - type: Sprite
-    sprite: _CM14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/m44.rsi
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/m44.rsi # Needs Updating: Only has 1 loaded sprite (full)
     layers:
       - state: base
         map: [ "enum.GunVisualLayers.Base" ]
