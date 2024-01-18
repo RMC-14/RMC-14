@@ -39,12 +39,12 @@
     bloodReagent: CopperBlood
   # Damage (Others)
   - type: MeleeWeapon
-    animation: WeaponArcClaw
+    animation: WeaponArcBite
     soundHit:
       collection: AlienClaw
     damage:
       types:
-        Slash: 5
+        Piercing: 5
   # Visual & Audio
   - type: DamageVisuals
     damageOverlayGroups:
@@ -90,6 +90,7 @@
       - map: [ "shoes" ]
       - map: [ "ears" ]
       - map: [ "outerClothing" ]
+      - map: [ "enum.WebbingVisualLayers.Base" ]
       - map: [ "eyes" ]
       - map: [ "belt" ]
       - map: [ "enum.HumanoidVisualLayers.Tail" ] # Mentioned in moth code: This needs renaming lol.

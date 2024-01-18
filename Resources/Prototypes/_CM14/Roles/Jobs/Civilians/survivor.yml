@@ -16,9 +16,8 @@
     time: 18000 #5 hours
   startingGear: SurvivorGear
   icon: "JobIconSurvivor"
-  requireAdminNotify: false
   joinNotifyCrew: false
-  supervisors: job-supervisors-nobody
+  supervisors: job-supervisors-cm14-nobody
   canBeAntag: false
   accessGroups:
   - Colonist

@@ -1,0 +1,36 @@
+﻿- type: entity
+  parent: BaseItem
+  abstract: true
+  id: CMWebbingBase
+  name: webbing
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/webbing.rsi
+  - type: Item
+    size: Huge
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,2,1
+    blacklist:
+      tags:
+      - Pouch
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+  - type: UserInterface
+    interfaces:
+    - key: enum.StorageUiKey.Key
+      type: StorageBoundUserInterface
+  - type: Webbing
+
+- type: entity
+  parent: CMWebbingBase
+  id: CMWebbing
+  name: webbing
+  description: A sturdy mess of synthcotton belts and buckles, ready to share your burden.
+  components:
+  - type: Sprite
+    layers:
+    - state: webbing

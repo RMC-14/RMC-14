@@ -10,9 +10,8 @@
     time: 18000 # 5 hours
   startingGear: ResearcherGear
   icon: "JobIconResearcher"
-  requireAdminNotify: false
-  joinNotifyCrew: true
-  supervisors: job-supervisors-cm-cmo
+  joinNotifyCrew: false
+  supervisors: job-supervisors-cm14-cmo
   canBeAntag: true
   accessGroups:
   - Researcher

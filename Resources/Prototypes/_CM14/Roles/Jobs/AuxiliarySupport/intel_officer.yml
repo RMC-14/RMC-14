@@ -10,9 +10,8 @@
     time: 18000 # 5 hours
   startingGear: IntelOfficerGear
   icon: "JobIconIntelOfficer"
-  requireAdminNotify: false
-  joinNotifyCrew: true
-  supervisors: job-supervisors-command
+  joinNotifyCrew: false
+  supervisors: job-supervisors-cm14-aso
   canBeAntag: false
   accessGroups:
   - IntelOfficer

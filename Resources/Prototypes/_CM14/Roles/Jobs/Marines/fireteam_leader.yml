@@ -10,7 +10,8 @@
       time: 28800 #8 hrs
   startingGear: FireteamLeaderGear
   icon: "JobIconFireteamLeader"
-  supervisors: job-supervisors-squad-leader
+  joinNotifyCrew: false
+  supervisors: job-supervisors-cm14-sl
   canBeAntag: false
   accessGroups:
   - FTL

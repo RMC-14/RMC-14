@@ -8,10 +8,10 @@ namespace Content.Shared._CM14.Vendors;
 public sealed partial class CMVendorSection
 {
     [DataField(required: true)]
-    public string Name;
+    public string Name = string.Empty;
 
     [DataField]
-    public int? Choose;
+    public (string Id, int Amount)? Choices;
 
     [DataField(required: true)]
     public List<CMVendorEntry> Entries = new();
@@ -26,4 +26,7 @@ public sealed partial class CMVendorEntry
 
     [DataField]
     public int? Amount;
+
+    [DataField]
+    public int? Points;
 }

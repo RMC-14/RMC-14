@@ -11,9 +11,8 @@
   weight: 5
   startingGear: MilitaryWardenGear
   icon: "JobIconMilitaryWarden"
-  requireAdminNotify: false
-  joinNotifyCrew: true
-  supervisors: job-supervisors-chiefmp
+  joinNotifyCrew: false
+  supervisors: job-supervisors-cm14-cmp
   canBeAntag: false
   accessGroups:
   - CMWarden

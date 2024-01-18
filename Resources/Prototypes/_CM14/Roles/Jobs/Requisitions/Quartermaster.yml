@@ -11,9 +11,9 @@
   weight: 5
   startingGear: CMQuartermasterGear
   icon: "JobIconCMQuartermaster"
-  requireAdminNotify: false
+  requireAdminNotify: true
   joinNotifyCrew: true
-  supervisors: job-supervisors-command
+  supervisors: job-supervisors-cm14-aso
   canBeAntag: false
   accessGroups:
   - CMQM

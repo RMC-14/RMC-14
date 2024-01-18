@@ -1,14 +1,16 @@
 ﻿<controls:CMAutomatedVendorWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._CM14.Vendors"
-    xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
     MinSize="500 700">
     <BoxContainer Orientation="Vertical">
         <BoxContainer Orientation="Horizontal">
-            <Label Text="Search" HorizontalExpand="True" Align="Left" />
-            <LineEdit Name="Search" Access="Public" HorizontalExpand="True" />
+            <Label Text="Search" Align="Left" />
+            <LineEdit Name="Search" Access="Public" HorizontalExpand="True" Margin="10 0 0 0" />
+            <Control HorizontalExpand="True" SizeFlagsStretchRatio="0.25" />
+            <Label Name="PointsLabel" Access="Public" HorizontalExpand="True" Align="Right" />
         </BoxContainer>
-        <customControls:HSeparator Color="#4972A1" />
+        <cc:HSeparator Color="#4972A1" />
         <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
             <BoxContainer Orientation="Vertical" Name="Sections" Access="Public" />
         </ScrollContainer>

@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using Content.Client._CM14.Webbing;
 using Content.Client.Gameplay;
 using Content.Client.Hands.Systems;
 using Content.Client.Inventory;
@@ -9,9 +10,11 @@ using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Client.UserInterface.Systems.Inventory.Controls;
 using Content.Client.UserInterface.Systems.Inventory.Widgets;
 using Content.Client.UserInterface.Systems.Inventory.Windows;
+using Content.Shared._CM14.Webbing;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Hands.Components;
 using Content.Shared.Input;
+using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Storage;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
@@ -26,7 +29,7 @@ using static Content.Client.Inventory.ClientInventorySystem;
 namespace Content.Client.UserInterface.Systems.Inventory;
 
 public sealed class InventoryUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>,
-    IOnSystemChanged<ClientInventorySystem>, IOnSystemChanged<HandsSystem>
+    IOnSystemChanged<ClientInventorySystem>, IOnSystemChanged<HandsSystem>, IOnSystemChanged<WebbingSystem>
 {
     [Dependency] private readonly IEntityManager _entities = default!;
 
@@ -145,7 +148,7 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
                 container.AddButton(button);
             }
 
-            var showStorage = _entities.HasComponent<StorageComponent>(data.HeldEntity);
+            var showStorage = _inventorySystem.HasInventory(data.HeldEntity, out _);
             var update = new SlotSpriteUpdate(data.HeldEntity, data.SlotGroup, data.SlotName, showStorage);
             SpriteUpdated(update);
         }
@@ -216,7 +219,7 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
                 _strippingWindow!.InventoryButtons.AddButton(button, data.ButtonOffset);
             }
 
-            var showStorage = _entities.HasComponent<StorageComponent>(data.HeldEntity);
+            var showStorage = _inventorySystem.HasInventory(data.HeldEntity, out _);
             var update = new SlotSpriteUpdate(data.HeldEntity, data.SlotGroup, data.SlotName, showStorage);
             SpriteUpdated(update);
         }
@@ -358,6 +361,12 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
                 break;
             }
         }
+        else if (_entities.TryGetComponent(container.ContainedEntity, out WebbingClothingComponent? webbingClothing) &&
+                 webbingClothing.Webbing == null &&
+                 _entities.HasComponent<WebbingComponent>(held))
+        {
+            fits = true;
+        }
 
         hoverSprite.CopyFrom(sprite);
         hoverSprite.Color = fits ? new Color(0, 255, 0, 127) : new Color(255, 0, 0, 127);
@@ -423,8 +432,17 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
         if (_slotGroups.GetValueOrDefault(group)?.GetButton(name) is not { } button)
             return;
 
-        button.SpriteView.SetEntity(entity);
-        button.StorageButton.Visible = showStorage;
+        if (_entities.TryGetComponent(entity, out VirtualItemComponent? virtb))
+        {
+            button.SpriteView.SetEntity(virtb.BlockingEntity);
+            button.Blocked = true;
+        }
+        else
+        {
+            button.SpriteView.SetEntity(entity);
+            button.Blocked = false;
+            button.StorageButton.Visible = showStorage;
+        }
     }
 
     public bool RegisterSlotGroupContainer(ItemSlotButtonContainer slotContainer)
@@ -474,5 +492,20 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
     {
         if (_lastHovered != null)
             UpdateHover(_lastHovered);
+    }
+
+    public void OnSystemLoaded(WebbingSystem system)
+    {
+        system.PlayerWebbingUpdated += OnWebbingUpdated;
+    }
+
+    public void OnSystemUnloaded(WebbingSystem system)
+    {
+        system.PlayerWebbingUpdated -= OnWebbingUpdated;
+    }
+
+    private void OnWebbingUpdated()
+    {
+        UpdateInventoryHotbar(_playerInventory);
     }
 }

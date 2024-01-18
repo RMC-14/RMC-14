@@ -7,5 +7,5 @@ namespace Content.Shared._CM14.Vendors;
 public sealed partial class CMAutomatedVendorComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public List<CMVendorSection> Sections;
+    public List<CMVendorSection> Sections = new();
 }

@@ -528,10 +528,10 @@
       entries: []
     #- id: CMEssentialSLKit
     #  amount: 0P
-    - name: Weapons Specialist Sets
-      entries:
-      - id: CMSniperEquipmentCase # TODO CM14 one per weapons specialist, choose 1
-        amount: 1 # 0P
+    - name: Squad Kit
+      entries: []
+    #- id: CMM4RASniperKit
+    #  amount: 0P
     #- id: CMM41AStandardKit
     #  amount: 0P
     #- id: CMM240PyrotechnicianSupportKit
@@ -587,11 +587,11 @@
     #- id: CMNightVisionOptic
     #  amount: 20P
     - name: Engineering Supplies
-      entries: []
+      entries:
     #- id: CMInsulatedGloves
     #  amount: 3P
-    #- id: CMMetalx10
-    #  amount: 5P
+      - id: CMSheetSteel
+        points: 5
     #- id: CMPlasteelx10
     #  amount: 7P
     #- id: CMPlasticexplosive
@@ -764,7 +764,8 @@
   - type: CMAutomatedVendor
     sections:
     - name: Weapons Specialist Sets
-      entries: []
+      choices: { SquadLeaderKit: 1 }
+      entries:
     #- id: DemolitionistSet
     #  amount: 0P
     #- id: HeavyGrenadierSet
@@ -772,9 +773,7 @@
     #- id: PyroSet
     #  amount: 0P
     #- id: ScoutSet
-    #  amount: 0P
-    #- id: SniperSet
-    #  amount: 0P
+      - id: CMSniperEquipmentCase
     - name: Extra Scout Ammunition
       entries: []
     #- id: A19HighVelocityImpactMagazine

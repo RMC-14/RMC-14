@@ -2,6 +2,7 @@ using Content.Shared._CM14.Admin;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
+using Content.Shared.Inventory.VirtualItem;
 using Robust.Shared.Containers;
 
 namespace Content.Shared.Verbs
@@ -98,7 +99,7 @@ namespace Content.Shared.Verbs
                     // This allows you to do things like buckle a dragged person onto a surgery table, without click-dragging
                     // their sprite.
 
-                    if (TryComp(@using, out HandVirtualItemComponent? pull))
+                    if (TryComp(@using, out VirtualItemComponent? pull))
                     {
                         @using = pull.BlockingEntity;
                     }
