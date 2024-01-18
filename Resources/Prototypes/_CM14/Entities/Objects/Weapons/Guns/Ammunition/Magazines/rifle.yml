@@ -27,6 +27,34 @@
   - type: Appearance
 
 - type: entity
+  parent: CMMagazineRifleM41A
+  id: CMMagazineExtendedRifleM41A
+  name: "M41A extended magazine (10x24mm)"
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifleM41A
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeRifle10x24mm
+    proto: CMCartridgeRifle10x24mm
+    capacity: 40 # Needs Updating: Idk the right capacity
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m41a.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
   id: CMMagazineRifleM41AE2
   name: "M41AE2 magazine (10x24mm)"
   parent: CMMagazineRifleM41A
