@@ -33,7 +33,7 @@
   components:
   - type: Tag
     tags:
-      - MagazineRifleM41AE2
+      - CMMagazineRifleM41AE2
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
