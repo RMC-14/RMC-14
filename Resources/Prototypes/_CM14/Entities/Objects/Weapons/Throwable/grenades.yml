@@ -1,0 +1,45 @@
+- type: entity
+  name: M40 HEDP
+  description: Grenade that creates a small but devastating explosion.
+  parent: GrenadeBase
+  id: M40HEDP
+  components:
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 10
+    intensitySlope: 3
+    totalIntensity: 135
+    canCreateVacuum: false
+  - type: OnUseTimerTrigger
+    beepSound:
+      path: "/Audio/Effects/beep1.ogg"
+      params:
+        volume: 5
+    initialBeepDelay: 0
+    beepInterval: 2 # 2 beeps total (at 0 and 2)
+  - type: Tag
+    tags:
+      - Grenade
+      - LauncherCompatibleGrenade
+  - type: CartridgeAmmo
+    proto: HEDPProjectile
+    deleteOnSpawn: true
+
+- type: entity
+  parent: GrenadeBase
+  id: SmokeGrenade
+  name: smoke grenade
+  description: A tactical grenade that releases a large, long-lasting cloud of smoke when used.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Grenades/smoke.rsi
+  - type: SmokeOnTrigger
+    duration: 30
+    spreadAmount: 50
+  - type: SoundOnTrigger
+    sound: /Audio/Effects/smoke.ogg
+  - type: DeleteOnTrigger
+  - type: TimerTriggerVisuals
+    primingSound:
+      path: /Audio/Effects/Smoke-grenade.ogg
