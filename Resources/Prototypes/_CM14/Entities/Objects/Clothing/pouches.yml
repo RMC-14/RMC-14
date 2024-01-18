@@ -240,8 +240,8 @@
     whitelist:
       tags: #this gonna be hell
       - MagazineCaselessM39
-      - MagazineRifleM41A
-      - MagazineRifleM41AE2
+      - CMMagazineRifleM41A
+      - CMMagazineRifleM41AE2
       - MagazineRifleM4RA
 
 - type: entity

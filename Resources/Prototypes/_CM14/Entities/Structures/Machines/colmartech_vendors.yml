@@ -300,7 +300,7 @@
         amount: 15
       - id: MagazineCaselessM39
         amount: 25
-      - id: MagazineRifleM41A
+      - id: CMMagazineRifleM41A
         amount: 25
     - name: Sidearms
       entries:

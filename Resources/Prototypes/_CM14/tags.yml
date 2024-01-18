@@ -14,13 +14,13 @@
   id: CMMagazinePistolM4A3
 
 - type: Tag
-  id: MagazineRifleM41A
+  id: CMMagazineRifleM41A
 
 - type: Tag
-  id: MagazineRifleM41AE2
+  id: CMMagazineRifleM41AE2
 
 - type: Tag
-  id: MagazineRifleM4RA
+  id: CMMagazineRifleM4RA
 
 - type: Tag
   id: CMMortarShell
