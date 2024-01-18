@@ -42,7 +42,7 @@
     proto: CMCartridgeRifle10x24mm
     capacity: 40 # Needs Updating: Idk the right capacity
   - type: Sprite
-    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m41a.rsi
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m41ae.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
