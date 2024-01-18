@@ -296,9 +296,9 @@
         amount: 10
       - id: CMBoxShotgunSlugs
         amount: 10
-      - id: MagazineRifleM4RA
+      - id: CMMagazineRifleM4RA
         amount: 15
-      - id: MagazineCaselessM39
+      - id: CMMagazineCaselessM39
         amount: 25
       - id: CMMagazineRifleM41A
         amount: 25

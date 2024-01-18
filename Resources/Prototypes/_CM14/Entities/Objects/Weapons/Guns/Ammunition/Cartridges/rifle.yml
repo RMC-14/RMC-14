@@ -1,11 +1,11 @@
 - type: entity
   parent: BaseCartridgeRifle
-  id: CartridgeRifle10x24mm
+  id: CMCartridgeRifle10x24mm
   name: cartridge (10x24mm)
   components:
   - type: Tag
     tags:
       - Cartridge
-      - CartridgeRifle10x24mm
+      - CMCartridgeRifle10x24mm
   - type: CartridgeAmmo
     proto: BulletRifle10x24mm
