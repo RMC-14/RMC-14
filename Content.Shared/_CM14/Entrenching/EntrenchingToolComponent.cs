@@ -12,7 +12,7 @@ public sealed partial class EntrenchingToolComponent : Component
     public TimeSpan DigDelay = TimeSpan.FromSeconds(5);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan FillDelay = TimeSpan.FromSeconds(1);
+    public TimeSpan FillDelay = TimeSpan.FromSeconds(3);
 
     [DataField, AutoNetworkedField]
     public int LayersPerDig = 5;
