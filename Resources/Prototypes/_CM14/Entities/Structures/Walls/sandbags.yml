@@ -1,0 +1,128 @@
+﻿- type: entity
+  parent: CMBarricadeBase
+  id: CMBarricadeSandbag
+  name: Sandbag Barricade
+  description: A makeshift barricade made out of the sand from the ground. Tough to beat but easy to pierce.
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.38"
+        density: 500
+        mask:
+        - FullTileMask
+        layer:
+        - TableLayer
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Effects/Footsteps/snowstep1.ogg"
+  - type: Sprite
+    sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
+    layers:
+    - state: sandbag
+    drawdepth: WallTops
+  - type: GenericVisualizer
+    visuals:
+      enum.BarbedWireVisualLayers.Wire:
+        barbWired:
+          UnWired: { state: sandbag_wire, visible: false }
+          WiredClosed: { state: sandbag_wire, visible: true }
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: CMSandbag
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/metalbreak.ogg
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 2
+    trackAllDamage: true
+    damageOverlay:
+      sprite: _CM14/Structures/Walls/Barricades/sandbag_cracks.rsi
+  - type: Barbed
+    thornsDamage:
+      types:
+        Slash: 6
+
+- type: entity
+  parent: BaseItem
+  id: CMSandbagEmpty
+  name: empty sandbags
+  description: Some empty sandbags, best to fill them up if you want to use them.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _CM14/Objects/Misc/sandbags.rsi
+    state: sandbag_stack
+  - type: EmptySandbag
+  - type: Stack
+    stackType: CMSandbagEmpty
+    count: 1
+
+- type: entity
+  parent: CMSandbagEmpty
+  id: CMSandbagEmpty50
+  suffix: "50"
+  components:
+  - type: Stack
+    stackType: CMSandbagEmpty
+    count: 50
+
+- type: entity
+  parent: BaseItem
+  id: CMSandbagFull
+  name: sandbags
+  description: Some bags filled with sand. For now, just cumbersome, but soon to be used for fortifications.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _CM14/Objects/Misc/sandbags.rsi
+    state: sandbag_pile
+  - type: FullSandbag
+  - type: Stack
+    stackType: CMSandbagFull
+    count: 1
+
+- type: entity
+  parent: CMSandbagFull
+  id: CMSandbagFull50
+  suffix: "50"
+  components:
+  - type: Stack
+    stackType: CMSandbagFull
+    count: 50
+
+- type: stack
+  id: CMSandbagEmpty
+  name: empty sandbags
+  spawn: CMSandbagEmpty
+  maxCount: 50
+  itemSize: 5
+
+- type: stack
+  id: CMSandbagFull
+  name: empty sandbags
+  spawn: CMSandbagFull
+  maxCount: 50
+  itemSize: 5

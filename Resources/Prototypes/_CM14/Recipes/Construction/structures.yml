@@ -161,23 +161,6 @@
     - !type:TileNotBlocked
 
 - type: construction
-  name: Sandbag Barricade
-  id: CMBarricadeSandbag
-  graph: BarricadeSandbagGraph
-  startNode: start
-  targetNode: nodeSandbag
-  category: construction-category-cm-structures
-  description: A military grade pile of sand.
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: false
-  icon:
-    sprite: _CM14/Structures/Walls/Barricades/barricade.rsi
-    state: sandbag
-  conditions:
-    - !type:TileNotBlocked
-
-- type: construction
   name: Turnstile
   id: CMBarricadeTurnstile
   graph: BarricadeTurnstileGraph
