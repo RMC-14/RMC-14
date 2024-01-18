@@ -11,7 +11,7 @@
   - type: BallisticAmmoProvider
     whitelist:
       tags:
-        - CartridgeMagnum # Needs Updating: No .44 prototype yet
+        - CMCartridgeRevolver44
     capacity: 6
   - type: Sprite
   - type: ContainerContainer
