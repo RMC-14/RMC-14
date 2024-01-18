@@ -22,7 +22,7 @@
     whitelist:
       tags:
         - CartridgePistol9mm
-    proto: CartridgePistol9mm
+    proto: CMCartridgePistol9mm
     capacity: 9
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m4a3.rsi

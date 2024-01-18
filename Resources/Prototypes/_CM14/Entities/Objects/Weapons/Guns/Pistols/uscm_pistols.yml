@@ -63,7 +63,7 @@
             - CMMagazinePistolM4A3
         gun_chamber:
           name: Chamber
-          startingItem: CartridgePistol9mm
+          startingItem: CMCartridgePistol9mm
           priority: 1
           whitelist:
             tags:
@@ -99,7 +99,7 @@
           - CMMagazinePistol88m4AP
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistol9mm
+        startingItem: CMCartridgePistol9mm
         priority: 1
         whitelist:
           tags:
