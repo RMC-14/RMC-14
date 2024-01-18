@@ -2,7 +2,7 @@
   id: CartridgeCaseless10x20mm
 
 - type: Tag
-  id: CartridgePistol9mm
+  id: CMCartridgePistol9mm
 
 - type: Tag
   id: CartridgeRifle10x24mm

@@ -67,7 +67,7 @@
           priority: 1
           whitelist:
             tags:
-            - CartridgePistol9mm
+            - CMCartridgePistol9mm
 
 - type: entity
   parent: CMWeaponPistolBase
@@ -103,4 +103,4 @@
         priority: 1
         whitelist:
           tags:
-          - CartridgePistol9mm
+          - CMCartridgePistol9mm

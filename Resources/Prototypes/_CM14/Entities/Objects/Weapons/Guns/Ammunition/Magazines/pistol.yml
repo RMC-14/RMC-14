@@ -21,7 +21,7 @@
     mayTransfer: True
     whitelist:
       tags:
-        - CartridgePistol9mm
+        - CMCartridgePistol9mm
     proto: CMCartridgePistol9mm
     capacity: 9
   - type: Sprite
@@ -44,7 +44,7 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CartridgePistol9mm
+      - CMCartridgePistol9mm
     proto: CMCartridgePistol88m4AP
     capacity: 19
   - type: Sprite

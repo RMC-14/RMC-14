@@ -11,7 +11,7 @@
   - type: Tag
     tags:
       - Cartridge
-      - CartridgePistol9mm
+      - CMCartridgePistol9mm
   - type: CartridgeAmmo
     proto: CMBulletPistol9mm
 
@@ -23,6 +23,6 @@
   - type: Tag
     tags:
     - Cartridge
-    - CartridgePistol9mm
+    - CMCartridgePistol9mm
   - type: CartridgeAmmo
     proto: CMBulletPistol88m4AP
