@@ -68,7 +68,7 @@
       tags:
         - CMCartridgeRifle10x24mm
     proto: CMCartridgeRifle10x24mm
-    capacity: 25 # Needs Updating
+    capacity: 25 # Needs Updating: ditto
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m4ra.rsi
     layers:
@@ -83,7 +83,7 @@
   name: "M4RA extended magazine (10x24mm)"
   components:
   - type: BallisticAmmoProvider
-    capacity: 25 # Needs Updating
+    capacity: 25 # Needs Updating: ditto
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m4rae.rsi
     layers:
