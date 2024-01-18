@@ -1,6 +1,6 @@
 - type: entity
   parent: BaseItem
-  id: EntrenchingTool
+  id: CMEntrenchingTool
   name: entrenching tool
   description: A foldable shovel for quickly constructing entrenchments.
   components:

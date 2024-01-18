@@ -4,6 +4,8 @@ using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
+using Content.Shared.Timing;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -13,6 +15,7 @@ namespace Content.Shared._CM14.Entrenching;
 
 public sealed class EntrenchingToolSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
@@ -24,6 +27,7 @@ public sealed class EntrenchingToolSystem : EntitySystem
     [Dependency] private readonly ITileDefinitionManager _tiles = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
     public override void Initialize()
     {
@@ -60,7 +64,7 @@ public sealed class EntrenchingToolSystem : EntitySystem
         }
 
         var coordinates = GetCoordinates(args.Coordinates);
-        if (!CanDig(tool, args.User, coordinates, out _, out _))
+        if (!CanDig(tool, args.User, coordinates, false, out _, out _))
             return;
 
         args.Handled = true;
@@ -106,7 +110,7 @@ public sealed class EntrenchingToolSystem : EntitySystem
             }
 
             filled = true;
-            Fill(tool, empty, tool.Comp.TotalLayers);
+            Fill(tool, empty, args.User, tool.Comp.TotalLayers);
             if (!TerminatingOrDeleted(empty))
             {
                 args.Repeat = true;
@@ -201,7 +205,7 @@ public sealed class EntrenchingToolSystem : EntitySystem
 
     private bool StartDigging(Entity<EntrenchingToolComponent> tool, EntityUid user, EntityCoordinates clicked)
     {
-        if (!CanDig(tool, user, clicked, out var grid, out var tile))
+        if (!CanDig(tool, user, clicked, true, out var grid, out var tile))
             return false;
 
         var coordinates = _mapSystem.GridTileToLocal(grid, grid, tile.GridIndices);
@@ -216,10 +220,15 @@ public sealed class EntrenchingToolSystem : EntitySystem
 
         _doAfter.TryStartDoAfter(doAfter);
         _popup.PopupClient("You start digging", user, user);
+        _audio.PlayPredicted(tool.Comp.DigSound, user, user);
+
+        if (TryComp(tool, out UseDelayComponent? useDelay))
+            _useDelay.TryResetDelay((tool, useDelay));
+
         return true;
     }
 
-    private bool Fill(Entity<EntrenchingToolComponent> tool, Entity<EmptySandbagComponent> empty, int amount)
+    private bool Fill(Entity<EntrenchingToolComponent> tool, Entity<EmptySandbagComponent> empty, EntityUid user, int amount)
     {
         if (tool.Comp.TotalLayers < amount)
             return false;
@@ -248,6 +257,7 @@ public sealed class EntrenchingToolSystem : EntitySystem
 
         tool.Comp.TotalLayers -= amount;
         Dirty(tool);
+        _audio.PlayPredicted(tool.Comp.FillSound, user, user);
 
         return true;
     }
@@ -275,11 +285,19 @@ public sealed class EntrenchingToolSystem : EntitySystem
         Entity<EntrenchingToolComponent> tool,
         EntityUid user,
         EntityCoordinates coordinates,
+        bool checkUseDelay,
         out Entity<MapGridComponent> grid,
         out TileRef tileRef)
     {
         grid = default;
         tileRef = default;
+
+        if (checkUseDelay &&
+            TryComp(tool, out UseDelayComponent? useDelay) &&
+            _useDelay.IsDelayed((tool, useDelay)))
+        {
+            return false;
+        }
 
         if (!_interaction.InRangeUnobstructed(user, coordinates, popup: false))
             return false;
