@@ -1,4 +1,5 @@
-﻿using Robust.Shared.GameStates;
+﻿using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 
@@ -22,6 +23,12 @@ public sealed partial class EntrenchingToolComponent : Component
 
     [AutoNetworkedField]
     public EntityCoordinates LastDigLocation;
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier DigSound = new SoundCollectionSpecifier("CMEntrenchingThud", AudioParams.Default.WithVolume(-3));
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier FillSound = new SoundCollectionSpecifier("CMEntrenchingRustle", AudioParams.Default.WithVolume(-6));
 }
 
 [Serializable, NetSerializable]
