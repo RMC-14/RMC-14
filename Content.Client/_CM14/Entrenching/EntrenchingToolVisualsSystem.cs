@@ -52,6 +52,11 @@ public sealed class EntrenchingToolVisualsSystem : EntitySystem
                     sprite.LayerSetVisible(dirtLayer, false);
                 }
             }
+            else
+            {
+                if (sprite.LayerMapTryGet(Dirt, out var dirtLayer))
+                    sprite.LayerSetVisible(dirtLayer, false);
+            }
         }
         else
         {
