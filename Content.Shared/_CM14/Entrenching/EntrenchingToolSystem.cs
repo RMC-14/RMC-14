@@ -60,10 +60,7 @@ public sealed class EntrenchingToolSystem : EntitySystem
         }
 
         var coordinates = GetCoordinates(args.Coordinates);
-        if (!CanDig(tool, coordinates, out _, out _))
-            return;
-
-        if (!_interaction.InRangeUnobstructed(args.User, coordinates, popup: false))
+        if (!CanDig(tool, args.User, coordinates, out _, out _))
             return;
 
         args.Handled = true;
@@ -129,8 +126,19 @@ public sealed class EntrenchingToolSystem : EntitySystem
         if (_net.IsClient || args.Handled)
             return;
 
-        if (Fill(args.Used, empty, 1))
-            args.Handled = true;
+        if (!TryComp(args.Used, out EntrenchingToolComponent? toolComp))
+            return;
+
+        args.Handled = true;
+
+        var tool = new Entity<EntrenchingToolComponent>(args.Used, toolComp);
+        var ev = new SandbagFillDoAfterEvent();
+        var doAfter = new DoAfterArgs(EntityManager, args.User, tool.Comp.FillDelay, ev, tool, empty, tool)
+        {
+            BreakOnUserMove = true,
+        };
+        _doAfter.TryStartDoAfter(doAfter);
+        _popup.PopupClient("You begin filling the sandbags", args.User, args.User);
     }
 
     private void OnFullActivateInWorld(Entity<FullSandbagComponent> full, ref ActivateInWorldEvent args)
@@ -193,7 +201,7 @@ public sealed class EntrenchingToolSystem : EntitySystem
 
     private bool StartDigging(Entity<EntrenchingToolComponent> tool, EntityUid user, EntityCoordinates clicked)
     {
-        if (!CanDig(tool, clicked, out var grid, out var tile))
+        if (!CanDig(tool, user, clicked, out var grid, out var tile))
             return false;
 
         var coordinates = _mapSystem.GridTileToLocal(grid, grid, tile.GridIndices);
@@ -211,13 +219,10 @@ public sealed class EntrenchingToolSystem : EntitySystem
         return true;
     }
 
-    private bool Fill(EntityUid toolId, Entity<EmptySandbagComponent> empty, int amount)
+    private bool Fill(Entity<EntrenchingToolComponent> tool, Entity<EmptySandbagComponent> empty, int amount)
     {
-        if (!TryComp(toolId, out EntrenchingToolComponent? tool) ||
-            tool.TotalLayers < amount)
-        {
+        if (tool.Comp.TotalLayers < amount)
             return false;
-        }
 
         var toRemove = amount;
         var coordinates = _transform.GetMoverCoordinates(empty);
@@ -241,8 +246,8 @@ public sealed class EntrenchingToolSystem : EntitySystem
                 Del(empty);
         }
 
-        tool.TotalLayers -= amount;
-        Dirty(toolId, tool);
+        tool.Comp.TotalLayers -= amount;
+        Dirty(tool);
 
         return true;
     }
@@ -266,10 +271,18 @@ public sealed class EntrenchingToolSystem : EntitySystem
         return true;
     }
 
-    private bool CanDig(Entity<EntrenchingToolComponent> tool, EntityCoordinates coordinates, out Entity<MapGridComponent> grid, out TileRef tileRef)
+    private bool CanDig(
+        Entity<EntrenchingToolComponent> tool,
+        EntityUid user,
+        EntityCoordinates coordinates,
+        out Entity<MapGridComponent> grid,
+        out TileRef tileRef)
     {
         grid = default;
         tileRef = default;
+
+        if (!_interaction.InRangeUnobstructed(user, coordinates, popup: false))
+            return false;
 
         if (TryComp(tool, out ItemToggleComponent? toggle) && !toggle.Activated)
             return false;
