@@ -2,6 +2,7 @@
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Maps;
+using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -14,9 +15,11 @@ public sealed class EntrenchingToolSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly ITileDefinitionManager _tiles = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -27,6 +30,7 @@ public sealed class EntrenchingToolSystem : EntitySystem
         SubscribeLocalEvent<EntrenchingToolComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<EntrenchingToolComponent, EntrenchingToolDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<EntrenchingToolComponent, ItemToggledEvent>(OnItemToggled);
+        SubscribeLocalEvent<EntrenchingToolComponent, SandbagFillDoAfterEvent>(OnSandbagFillDoAfter);
 
         SubscribeLocalEvent<EmptySandbagComponent, InteractUsingEvent>(OnEmptyInteractUsing);
 
@@ -40,24 +44,20 @@ public sealed class EntrenchingToolSystem : EntitySystem
         if (!args.CanReach)
             return;
 
-        if (!CanDig(tool, args.ClickLocation, out var grid, out var tile))
-            return;
-
-        var coordinates = _mapSystem.GridTileToLocal(grid, grid, tile.GridIndices);
-        var ev = new EntrenchingToolDoAfterEvent(GetNetCoordinates(coordinates));
-        var doAfter = new DoAfterArgs(EntityManager, args.User, tool.Comp.DigDelay, ev, tool, used: tool)
-        {
-            BreakOnUserMove = true
-        };
-
-        _doAfter.TryStartDoAfter(doAfter);
+        StartDigging(tool, args.User, args.ClickLocation);
         args.Handled = true;
     }
 
     private void OnDoAfter(Entity<EntrenchingToolComponent> tool, ref EntrenchingToolDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled)
+        if (args.Handled)
             return;
+
+        if (args.Cancelled)
+        {
+            _popup.PopupClient("You stop digging", args.User, args.User);
+            return;
+        }
 
         var coordinates = GetCoordinates(args.Coordinates);
         if (!CanDig(tool, coordinates, out _, out _))
@@ -66,9 +66,23 @@ public sealed class EntrenchingToolSystem : EntitySystem
         if (!_interaction.InRangeUnobstructed(args.User, coordinates, popup: false))
             return;
 
+        args.Handled = true;
         tool.Comp.TotalLayers = tool.Comp.LayersPerDig;
         Dirty(tool);
-        args.Handled = true;
+
+        var userCoordinates = _transform.GetMoverCoordinates(args.User);
+        var emptyNearby = _lookup.GetEntitiesInRange<EmptySandbagComponent>(userCoordinates, 1.5f);
+        foreach (var empty in emptyNearby)
+        {
+            var ev = new SandbagFillDoAfterEvent();
+            var doAfter = new DoAfterArgs(EntityManager, args.User, tool.Comp.FillDelay, ev, tool, empty, tool)
+            {
+                BreakOnUserMove = true,
+            };
+            _doAfter.TryStartDoAfter(doAfter);
+            _popup.PopupClient("You begin filling the sandbags", args.User, args.User);
+            break;
+        }
     }
 
     private void OnItemToggled(Entity<EntrenchingToolComponent> tool, ref ItemToggledEvent args)
@@ -77,40 +91,46 @@ public sealed class EntrenchingToolSystem : EntitySystem
         Dirty(tool);
     }
 
-    private void OnEmptyInteractUsing(Entity<EmptySandbagComponent> empty, ref InteractUsingEvent args)
+    private void OnSandbagFillDoAfter(Entity<EntrenchingToolComponent> tool, ref SandbagFillDoAfterEvent args)
     {
-        if (_net.IsClient)
+        if (args.Cancelled || args.Handled)
             return;
-
-        if (args.Handled)
-            return;
-
-        if (!TryComp(args.Used, out EntrenchingToolComponent? tool) ||
-            tool.TotalLayers <= 0)
-        {
-            return;
-        }
-
-        tool.TotalLayers--;
-        Dirty(args.Used, tool);
-
-        var coordinates = _transform.GetMoverCoordinates(empty);
-        var filled = Spawn(empty.Comp.Filled, coordinates);
-
-        if (TryComp(empty, out StackComponent? stack))
-        {
-            var stackCount = _stack.GetCount(empty, stack);
-            _stack.SetCount(empty, stackCount - 1, stack);
-
-            var filledStack = EnsureComp<StackComponent>(filled);
-            _stack.SetCount(filled, 1, filledStack);
-        }
-        else
-        {
-            Del(empty);
-        }
 
         args.Handled = true;
+        var userCoordinates = _transform.GetMoverCoordinates(args.User);
+        var emptyNearby = _lookup.GetEntitiesInRange<EmptySandbagComponent>(userCoordinates, 1.5f);
+        var filled = false;
+        foreach (var empty in emptyNearby)
+        {
+            if (filled)
+            {
+                args.Repeat = true;
+                break;
+            }
+
+            filled = true;
+            Fill(tool, empty, tool.Comp.TotalLayers);
+            if (!TerminatingOrDeleted(empty))
+            {
+                args.Repeat = true;
+                break;
+            }
+        }
+
+        if (tool.Comp.TotalLayers <= 0)
+        {
+            args.Repeat = false;
+            StartDigging(tool, args.User, tool.Comp.LastDigLocation);
+        }
+    }
+
+    private void OnEmptyInteractUsing(Entity<EmptySandbagComponent> empty, ref InteractUsingEvent args)
+    {
+        if (_net.IsClient || args.Handled)
+            return;
+
+        if (Fill(args.Used, empty, 1))
+            args.Handled = true;
     }
 
     private void OnFullActivateInWorld(Entity<FullSandbagComponent> full, ref ActivateInWorldEvent args)
@@ -169,6 +189,62 @@ public sealed class EntrenchingToolSystem : EntitySystem
         _transform.SetLocalRotation(built, args.Direction.ToAngle());
 
         args.Handled = true;
+    }
+
+    private bool StartDigging(Entity<EntrenchingToolComponent> tool, EntityUid user, EntityCoordinates clicked)
+    {
+        if (!CanDig(tool, clicked, out var grid, out var tile))
+            return false;
+
+        var coordinates = _mapSystem.GridTileToLocal(grid, grid, tile.GridIndices);
+        tool.Comp.LastDigLocation = coordinates;
+        Dirty(tool);
+
+        var ev = new EntrenchingToolDoAfterEvent(GetNetCoordinates(coordinates));
+        var doAfter = new DoAfterArgs(EntityManager, user, tool.Comp.DigDelay, ev, tool, used: tool)
+        {
+            BreakOnUserMove = true
+        };
+
+        _doAfter.TryStartDoAfter(doAfter);
+        _popup.PopupClient("You start digging", user, user);
+        return true;
+    }
+
+    private bool Fill(EntityUid toolId, Entity<EmptySandbagComponent> empty, int amount)
+    {
+        if (!TryComp(toolId, out EntrenchingToolComponent? tool) ||
+            tool.TotalLayers < amount)
+        {
+            return false;
+        }
+
+        var toRemove = amount;
+        var coordinates = _transform.GetMoverCoordinates(empty);
+
+        if (TryComp(empty, out StackComponent? stack))
+        {
+            var stackCount = _stack.GetCount(empty, stack);
+            toRemove = Math.Min(toRemove, stackCount);
+            _stack.SetCount(empty, stackCount - toRemove, stack);
+
+            if (_net.IsServer)
+            {
+                var filled = Spawn(empty.Comp.Filled, coordinates);
+                var filledStack = EnsureComp<StackComponent>(filled);
+                _stack.SetCount(filled, toRemove, filledStack);
+            }
+        }
+        else
+        {
+            if (_net.IsServer)
+                Del(empty);
+        }
+
+        tool.TotalLayers -= amount;
+        Dirty(toolId, tool);
+
+        return true;
     }
 
     private bool Build(Entity<FullSandbagComponent> full, EntityUid user, EntityCoordinates coordinates, Direction direction)
