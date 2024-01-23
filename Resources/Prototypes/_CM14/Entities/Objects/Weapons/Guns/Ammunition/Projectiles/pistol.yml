@@ -30,3 +30,15 @@
         Piercing: 25
   - type: CMArmorPiercing
     amount: 40
+
+- type: entity
+  parent: CMBulletBase
+  id: CMBulletRevolver44
+  name: bullet (.44)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 55
+  - type: CMArmorPiercing
+    amount: 5
