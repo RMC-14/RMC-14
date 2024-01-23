@@ -12,7 +12,7 @@
     whitelist:
       tags:
         - CMCartridgeRevolver44
-    capacity: 6
+    capacity: 7
   - type: Sprite
   - type: ContainerContainer
     containers:
