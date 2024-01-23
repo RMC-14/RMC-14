@@ -63,11 +63,11 @@
             - CMMagazinePistolM4A3
         gun_chamber:
           name: Chamber
-          startingItem: CartridgePistol9mm
+          startingItem: CMCartridgePistol9mm
           priority: 1
           whitelist:
             tags:
-            - CartridgePistol9mm
+            - CMCartridgePistol9mm
 
 - type: entity
   parent: CMWeaponPistolBase
@@ -99,8 +99,8 @@
           - CMMagazinePistol88m4AP
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistol9mm
+        startingItem: CMCartridgePistol9mm
         priority: 1
         whitelist:
           tags:
-          - CartridgePistol9mm
+          - CMCartridgePistol9mm

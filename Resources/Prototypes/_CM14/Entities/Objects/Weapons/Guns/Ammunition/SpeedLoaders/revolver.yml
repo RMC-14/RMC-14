@@ -1,0 +1,40 @@
+- type: entity
+  id: CMBaseSpeedLoaderM44
+  name: "speed loader (.44)"
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+      - CMSpeedLoaderM44
+  - type: SpeedLoader
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+        - CMCartridgeRevolver44
+    capacity: 6
+  - type: Sprite
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+
+- type: entity
+  id: CMSpeedLoaderM44
+  name: "speed loader (.44)"
+  parent: CMBaseSpeedLoaderM44
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeMagnum # Needs Updating: No .44 prototype yet
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/m44.rsi # Needs Updating: Only has 1 loaded sprite (full)
+    layers:
+      - state: base
+        map: [ "enum.GunVisualLayers.Base" ]
+      - state: base-1
+        map: [ "enum.GunVisualLayers.Mag" ]
+  - type: MagazineVisuals
+    magState: base
+    steps: 2
+    zeroVisible: false
+  - type: Appearance

@@ -38,20 +38,20 @@
       slots:
         gun_magazine:
           name: Magazine
-          startingItem: MagazineRifleM41A
+          startingItem: CMMagazineRifleM41A
           insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
           priority: 2
           whitelist:
             tags:
-              - MagazineRifleM41A
+              - CMMagazineRifleM41A
         gun_chamber:
           name: Chamber
-          startingItem: CartridgeRifle10x24mm
+          startingItem: CMCartridgeRifle10x24mm
           priority: 1
           whitelist:
             tags:
-              - CartridgeRifle10x24mm
+              - CMCartridgeRifle10x24mm
     - type: ContainerContainer
       containers:
         gun_magazine: !type:ContainerSlot
@@ -103,20 +103,20 @@
       slots:
         gun_magazine:
           name: Magazine
-          startingItem: MagazineRifleM41AE2
+          startingItem: CMMagazineRifleM41AE2
           insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
           priority: 2
           whitelist:
             tags:
-              - MagazineRifleM41AE2
+              - CMMagazineRifleM41AE2
         gun_chamber:
           name: Chamber
-          startingItem: CartridgeRifle10x24mm
+          startingItem: CMCartridgeRifle10x24mm
           priority: 1
           whitelist:
             tags:
-              - CartridgeRifle10x24mm
+              - CMCartridgeRifle10x24mm
 
 - type: entity
   parent: BaseWeaponRifle
@@ -156,20 +156,20 @@
       slots:
         gun_magazine:
           name: Magazine
-          startingItem: MagazineRifleM4RA
+          startingItem: CMMagazineRifleM4RA
           insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
           priority: 2
           whitelist:
             tags:
-              - MagazineRifleM4RA
+              - CMMagazineRifleM4RA
         gun_chamber:
           name: Chamber
-          startingItem: CartridgeRifle10x24mm
+          startingItem: CMCartridgeRifle10x24mm
           priority: 1
           whitelist:
             tags:
-              - CartridgeRifle10x24mm
+              - CMCartridgeRifle10x24mm
     - type: ContainerContainer
       containers:
         gun_magazine: !type:ContainerSlot
