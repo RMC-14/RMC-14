@@ -32,7 +32,7 @@
   name: "M39 extended magazine (10x20mm)"
   components:
   - type: BallisticAmmoProvider
-    capacity: 48 # Needs Updating: idk how much this is supposed to hold *shrug*
+    capacity: 72 
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m39e.rsi
     layers:
