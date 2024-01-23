@@ -228,7 +228,7 @@
   - type: CMAutomatedVendor
     sections:
     - name: Armor-Piercing Ammunition
-      entries: 
+      entries: []
     #- id: CMMagazineM4RAAP
     #  amount: 3
     #- id: CMMagazineM39AP
@@ -242,7 +242,7 @@
       - id: CMMagazineExtendedRifleM41A
         amount: 1
     - name: Special Ammunition
-      entries: 
+      entries:
     #- id: CMDrumSmartgunM56
     #  amount: 1
       - id: CMSpeedLoaderM44
