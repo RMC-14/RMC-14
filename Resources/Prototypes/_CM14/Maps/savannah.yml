@@ -34,7 +34,7 @@
             #Medical
             MarineCMO: [1, 1]
             MarineDoctor: [4, 4]
-            Nurse: [3, 3]
+            Nurse: [2, 2]
             Researcher: [2, 2]
             #Requisition
             CMQuartermaster: [1, 1]
