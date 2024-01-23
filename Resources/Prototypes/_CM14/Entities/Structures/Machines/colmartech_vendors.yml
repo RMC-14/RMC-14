@@ -236,17 +236,17 @@
     #- id: CMMagazineM41AAP
     #  amount: 3
     - name: Extended Ammunition
-      entries: []
-    - id: CMMagazineExtendedCaselessM39
-      amount: 1
-    - id: CMMagazineExtendedRifleM41A
-      amount: 1
+      entries:
+      - id: CMMagazineExtendedCaselessM39
+        amount: 1
+      - id: CMMagazineExtendedRifleM41A
+        amount: 1
     - name: Special Ammunition
-      entries: []
+      entries:
     #- id: CMDrumSmartgunM56
     #  amount: 1
-    - id: CMSpeedLoaderM44
-      amount: 2
+      - id: CMSpeedLoaderM44
+        amount: 2
     #- id: CMMarksmanSpeedLoaderM44
     #  amount: 2
     - name: Restricted Firearm Ammunition
