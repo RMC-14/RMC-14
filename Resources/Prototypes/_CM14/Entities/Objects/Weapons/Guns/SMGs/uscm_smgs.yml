@@ -38,20 +38,20 @@
       slots:
         gun_magazine:
           name: Magazine
-          startingItem: MagazineCaselessM39
+          startingItem: CMMagazineCaselessM39
           insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
           priority: 2
           whitelist:
             tags:
-              - MagazineCaselessM39
+              - CMMagazineCaselessM39
         gun_chamber:
           name: Chamber
-          startingItem: CartridgeCaseless10x20mm
+          startingItem: CMCartridgeCaseless10x20mm
           priority: 1
           whitelist:
             tags:
-              - CartridgeCaseless10x20mm
+              - CMCartridgeCaseless10x20mm
     - type: ContainerContainer
       containers:
         gun_magazine: !type:ContainerSlot
