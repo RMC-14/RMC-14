@@ -7,7 +7,9 @@
         - to: apcFrame
           steps:
             - material: CMSteel
-              amount: 3
+              amount: 2
+            - material: Cable
+              amount: 5
 
     - node: apcFrame
       entity: CMApcFrame
@@ -21,7 +23,7 @@
           completed:
             - !type:GivePrototype
               prototype: CMSheetSteel1
-              amount: 3
+              amount: 2
             - !type:DeleteEntity {}
           steps:
             - tool: Screwing
