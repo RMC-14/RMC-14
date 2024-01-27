@@ -3,7 +3,6 @@
   parent: BaseAPC
   id: CMApcBase
   name: area power controller
-  description: A control terminal for the area electrical systems.
   components:
   - type: AccessReader
     access: [["CMAccessEngineering"]]
@@ -33,22 +32,11 @@
     - state: apco2-2
       shader: unshaded
       map: ["enum.ApcVisualLayers.Environment"]
-  - type: Appearance
-  - type: ApcVisuals
   - type: PowerMonitoringDevice
-    group: APC
-    sourceNode: input
-    loadNode: output
-    collectionName: apc
     sprite: _CM14/Structures/Power/apc.rsi
     state: base
   - type: Construction
     graph: CMApc
-    node: apc
-  - type: Wires
-    boardName: wires-board-name-apc
-    layoutId: APC
-  - type: WiresVisuals
   - type: Destructible
     thresholds:
     - trigger:
@@ -85,15 +73,12 @@
   noSpawn: true
   parent: APCFrame
   id: CMApcFrame
-  name: APC frame
-  description: A control terminal for the area's electrical systems, lacking the electronics.
   components:
   - type: Sprite
     sprite: _CM14/Structures/Power/apc.rsi
     state: panel
   - type: Construction
     graph: CMApc
-    node: apcFrame
   - type: Destructible
     thresholds:
     - trigger:
@@ -119,9 +104,6 @@
   parent: CMApcBase
   id: CMApcConstructed
   suffix: Open
-  components:
-  - type: WiresPanel
-    open: true
 
 # APCs in use
 - type: entity
