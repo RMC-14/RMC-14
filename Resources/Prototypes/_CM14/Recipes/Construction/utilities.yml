@@ -1,0 +1,28 @@
+- type: construction
+  name: APC
+  id: CMApc
+  graph: CMApc
+  startNode: start
+  targetNode: apc
+  category: construction-category-cm-utilities
+  description: "Area Power Controller (APC). Controls power. In an area."
+  icon:
+    sprite: _CM14/Structures/Power/apc.rsi
+    state: base
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+
+- type: construction
+  name: machine frame
+  description: A machine under construction. Needs more parts.
+  id: CMMachineFrame
+  graph: CMMachineFrame
+  startNode: start
+  targetNode: machine
+  category: construction-category-machines
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: Structures/Machines/parts.rsi
+    state: "box_0"
