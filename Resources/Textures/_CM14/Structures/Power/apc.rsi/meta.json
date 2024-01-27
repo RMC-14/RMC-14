@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/machinery/power.dmi, https://github.com/cmss13-devs/cmss13/blob/6f8162a66bed3a5aa38587d30ae95242fcf038e7/icons/obj/structures/machinery/power.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base"
+    },
+    {
+      "name": "display-lack",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          5
+        ]
+      ]
+    },
+    {
+      "name": "display-charging",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "display-full",
+      "delays": [
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "apc-spark",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "apcewires"
+    },
+    {
+      "name": "apcemag",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "apc1"
+    },
+    {
+      "name": "apc1-b-nocover"
+    },
+    {
+      "name": "apc1-nocover"
+    },
+    {
+      "name": "apc2"
+    },
+    {
+      "name": "apc2-b-nocover"
+    },
+    {
+      "name": "apc2-nocover"
+    },
+    {
+      "name": "apc-b"
+    },
+    {
+      "name": "panel"
+    },
+    {
+      "name": "apcox-0"
+    },
+    {
+      "name": "apcox-1"
+    },
+    {
+      "name": "apco0-0"
+    },
+    {
+      "name": "apco0-1"
+    },
+    {
+      "name": "apco0-2"
+    },
+    {
+      "name": "apco0-3"
+    },
+    {
+      "name": "apco1-0"
+    },
+    {
+      "name": "apco1-1"
+    },
+    {
+      "name": "apco1-2"
+    },
+    {
+      "name": "apco1-3"
+    },
+    {
+      "name": "apco2-0"
+    },
+    {
+      "name": "apco2-1"
+    },
+    {
+      "name": "apco2-2"
+    },
+    {
+      "name": "apco2-3"
+    }
+  ]
+}
