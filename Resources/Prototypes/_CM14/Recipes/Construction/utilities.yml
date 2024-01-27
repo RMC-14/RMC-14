@@ -12,3 +12,17 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
+
+- type: construction
+  name: machine frame
+  description: A machine under construction. Needs more parts.
+  id: CMMachineFrame
+  graph: CMMachineFrame
+  startNode: start
+  targetNode: machine
+  category: construction-category-machines
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: Structures/Machines/parts.rsi
+    state: "box_0"
