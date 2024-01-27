@@ -1,0 +1,14 @@
+- type: construction
+  name: APC
+  id: CMApc
+  graph: CMApc
+  startNode: start
+  targetNode: apc
+  category: construction-category-cm-utilities
+  description: "Area Power Controller (APC). Controls power. In an area."
+  icon:
+    sprite: _CM14/Structures/Power/apc.rsi
+    state: base
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
