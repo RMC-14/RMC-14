@@ -18,46 +18,6 @@
   name: WY pen
   description: It's a WY brand extra clicky black ink pen.
 
-#- type: entity
-#  parent: CMPen
-#  id: CMPenBlue
-#  description: It's a normal blue ink pen.
-#  components:
-#  - type: Sprite
-#    layers:
-#    - state: pen
-#    - state: +blue_tip
-#
-#- type: entity
-#  parent: CMPen
-#  id: CMPenRed
-#  description: It's a normal red ink pen.
-#  components:
-#  - type: Sprite
-#    layers:
-#    - state: pen
-#    - state: +red_tip
-#
-#- type: entity
-#  parent: CMPen
-#  id: CMPenGreen
-#  description: It's a normal green ink pen.
-#  components:
-#  - type: Sprite
-#    layers:
-#    - state: pen
-#    - state: +green_tip
-#
-#- type: entity
-#  parent: CMPen
-#  id: CMPenInvisible
-#  description: It's an invisible pen marker.
-#  components:
-#  - type: Sprite
-#    layers:
-#    - state: pen
-#    - state: +white_tip
-
 - type: entity
   parent: CMPen
   id: CMPenFountain
