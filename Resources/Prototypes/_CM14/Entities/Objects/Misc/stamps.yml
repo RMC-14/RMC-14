@@ -149,5 +149,5 @@
     state: stamp-cmb
   - type: Stamp
     stampedName: stamp-component-stamped-name-cm-cmb
-    stampedColor: "b0901b"
+    stampedColor: "#b0901b"
     stampState: "paper_stamp-cmb"
