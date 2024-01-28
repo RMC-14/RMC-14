@@ -1,11 +1,10 @@
 ﻿- type: entity
   parent: Paper
-  name: paper
   id: CMPaper
-  description: ""
+  name: paper
   components:
   - type: Sprite
-    sprite: _CM14/Objects/paper.rsi
+    sprite: _CM14/Objects/Misc/paper.rsi
     layers:
     - state: paper
     - state: paper_words
@@ -16,9 +15,9 @@
       visible: false
 
 - type: entity
-  abstract: true
   parent: CMPaper
   id: CMPaperWritten
+  abstract: true
   components:
   - type: PaperVisuals
     backgroundImagePath: "/Textures/Interface/Paper/paper_background_default.svg.96dpi.png"
