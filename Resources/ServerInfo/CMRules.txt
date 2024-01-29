@@ -12,13 +12,15 @@ You can find clarifications of any ambiguity on our discord.
 
 [color=#ff0000]ZERO TOLERANCE RULES[/color]
 
-[color=#a4885c]02.[/color] Absolutely no hate speech, slurs, bigotry, racism, specism (demeaning other characters in-game due to their in-game race), sexism, disability-related or anything even remotely similar. (YOU WILL GET PERMABANNED)
+[color=#ff0000]You are liable to be permanently banned for breaking these rules with no warning.[/color]
+
+[color=#a4885c]02.[/color] Absolutely no hate speech, slurs, bigotry, racism, specism (demeaning other characters in-game due to their in-game race), sexism, disability-related or anything even remotely similar.
 (Note: In the lore of CM14, Nanotrasen workers (and their various humanoid species) have been contracted over to the USCM to build a larger force in exchange for protection of their stations, and have been working for the USCM for a long time. They should be treated as any regular human.)
 
 [color=#a4885c]03.[/color] Absolutely no sexual content or Erotic Roleplay (ERP), including direct or indirect mentions of sexual behavior or actions. The server is open to 16+, not 18+. (YOU WILL GET PERMABANNED)
 
-[color=#a4885c]04.[/color] Don't communicate in-game/in-character information through methods outside of the game (such as talking in Discord with other users actively playing or by talking to your sibling across the room while you are both playing). This is referred to as "Metacomming". Adminstrators cannot police metacommunications, we must assume it is being abused. (ALL INVOLVED WILL GET PERMABANNED)
-(Note: While we are generally okay with the concept of squads having metacomms, we came to the conclusion that it would alienate squad-mates not using the same method of communication.)
+[color=#a4885c]04.[/color] Don't communicate in-game/in-character information through methods outside of the game (such as talking in Discord with other users actively playing or by talking to your sibling across the room while you are both playing). This is referred to as "Metacomming". Adminstrators cannot police metacommunications, we must assume it is being abused. (All involved will be actioned on.)
+(Note: While we are generally okay with the concept of squads having metacomms, we came to the conclusion that it would alienate squad-mates not using the same method of communication and should not be permitted.)
 
 [color=#a4885c]05.[/color] Attempting to evade game bans will result in an automatic appeal-only permanent ban that is only appealable after six months and only with a voucher of good behavior from another SS13/SS14 server. Attempting to evade job bans will result in an appeal-only permanent ban.
 
@@ -26,9 +28,9 @@ You can find clarifications of any ambiguity on our discord.
 
 [color=#a4885c]06.[/color] These are English servers. Speak only English in IC and OOC. We cannot moderate other languages, nor do we want people to be left out of conversations.
 
-[color=#a4885c]07.[/color] Don't use exploits or external programs to play, gain an advantage, or disrupt/crash the round/server. This includes autoclickers and scripts to automate the game or evade AFK detection. Intentionally attempting to lag/crash the server will result in an immediate appeal-only ban.
+[color=#a4885c]07.[/color] Don't use exploits or external programs to play, gain an advantage, or disrupt the server in any way. This includes autoclickers and scripts to automate the game or evade AFK detection. Intentionally attempting to lag/crash the server will result in an immediate appeal-only ban.
 
-[color=#a4885c]08.[/color] Don't use multiple SS14 accounts to play (referred to as "multi-keying"). Users knowingly using multiple SS14 accounts will have all of their accounts banned. This is to prevent players from having respawns.
+[color=#a4885c]08.[/color] Don't use multiple SS14 accounts to play (referred to as "multi-keying"). Users knowingly using multiple SS14 accounts will have all of their accounts banned. This is to prevent players from having respawns and will be treated as such.
 
 [color=#a4885c]09.[/color] Do not ignore the admin help relay or abuse it with spam. Don't bother checking for admins before stating a problem (ex: "hello?", "any admins?"), just send your issue. Hostility to administators will likely result in your removal.
 
@@ -43,13 +45,13 @@ You can find clarifications of any ambiguity on our discord.
 [color=#a4885c]12.[/color] Don't be a dick. You are playing a multiplayer game with other people who also want to enjoy the game.
     - [color=#ff0000] Attacking newly spawned players in cryo is forbidden, let them have a chance to gear up before you attack them![/color]
     - Do not intentionally make other players' lives hell for your own amusement.
-    - [color=#ff0000]End of round grief of your own faction is not permitted.[/color]
+    - [color=#ff0000]End of round grief of your own faction is not permitted and may result in an instant 5 day ban.[/color]
 
 [color=#a4885c]13.[/color] Don't harass or target players across rounds for actions in prior rounds or for actions outside of the game (this is referred to as "Metagrudging".)
     - Annoying players for IC reasons in the current round is fine; doing it across rounds or as a ghost role after they have interacted with you is not.
 
-[color=#a4885c]14.[/color] Don't use information gained from outside your character's knowledge to gain an advantage (this is referred to as "Metagaming").
-    - Using information you gain from outside your own character (such as spectating while a ghost, metacomms, or other means) to your advantage is strictly forbidden. You remember all events up until you fall unconscious. If you take a ghost role, unless otherwise stated, you DO NOT REMEMBER ANYTHING from your past life.
+[color=#a4885c]14.[/color] Don't use information gained from outside your character's knowledge to gain an advantage ("Metagaming").
+    - Using information you gain from outside your own character (i.e spectating while a ghost, metacomms, or other means) to your advantage is strictly forbidden. You remember all events up until you fall unconscious. If you take a ghost role, unless otherwise stated, you DO NOT REMEMBER ANYTHING from your past life.
 
 [color=#a4885c]15.[/color] Follow escalation rules and don't murder someone for slipping you, use common sense. Do not start riots.
     - You can defend yourself to the extent of protecting your own life.
@@ -60,16 +62,16 @@ You can find clarifications of any ambiguity on our discord.
 
 [color=#a4885c]16.[/color] Don't immediately ghost or suicide from your role if you do not get the role you want, or from head roles without notifying your chain of command or administrators.
     - This is not fair to other players actually waiting patiently for a round of that role. Alternatively, if you do not want to play a role, do not opt-in for it.
-    - Head of Staff roles help drive rounds. If you need to leave, please admin-help your role and that you are leaving. There is no need to wait for a reply when admin-helping that you need to disconnect as a head role.
+    - Command roles help drive rounds. If you need to leave, please admin-help your role and that you are leaving. There is no need to wait for a reply when admin-helping that you need to disconnect as a head role.
 
 [color=#a4885c]17.[/color] Don't rush for or prepare equipment unrelated to your job for no purpose other then to have it "just in case" (referred to as "Powergaming").
-    - A medical doctor does not need a rifle. Have an actual reason for needing these things, for example if there is a confirmed threat of hostile forces on the ship.
+    - A doctor does not need a rifle. Have an actual reason for needing these things, for example if there is a confirmed threat of hostile forces on the ship.
     - Don't manufacture weapons, bombs, or death poisons before first contact.
 
 [color=#a4885c]18.[/color] Intentionally making yourself a major problem/annoyance/disruption for the crew or other players at large while not an hostile force is forbidden.
     - Don't openly try to cooperate with obvious or known hostile forces as a crew member.
 
-[color=#ff0000]SECURITY & COMMAND RULES[/color]
+[color=#ff0000]Military Police & COMMAND RULES[/color]
 These rules also apply to any individual who is promoted or is acting in the place of a MP/Command role (unless they are a member of a hostile force).
 
 [color=#a4885c]19.[/color] Command and MP are held to a higher standard of play.
@@ -86,11 +88,11 @@ These rules also apply to any individual who is promoted or is acting in the pla
     - The suspect is unable to be safely detained by less-lethal means. This includes suspects who continually resist efforts to be cuffed or continually manages to escape.
     - If no other reasonable options are readily available and allowing the suspect to continue would be an unreasonable danger to the ship/crew.
 
-MP/Command will be expected to answer for use of lethal force. Security/Command will be expected to effect arrests on criminals and prevent them from dying while in custody, even if lethal force is used. MP/Command is strongly encouraged, but not required, to revive hostiles and effect a permabrigging or other sentence as deemed appropriate.
+MP/Command will be expected to answer for use of lethal force. Military Police/Command will be expected to effect arrests on criminals and prevent them from dying while in custody, even if lethal force is used. MP/Command is strongly encouraged, but not required, to revive hostiles and effect a permabrigging or other sentence as deemed appropriate.
 
 [color=#a4885c]21.[/color] MP/Command are expected to protect detainees in their custody to the best of their ability so as long as it does not come to unreasonable risk to themselves, the crew, or the ship at large to do so.
     - Brig times should generally not exceed 10 minutes unless the crime is permabriggable. Repeat offenders or hostile forces may be permabrigged.
-    - Security may choose to confiscate dangerous items (weapons, firearms) as well as items used to commission crimes or items that prove problematic in possession of the detainee (tools, insulated gloves, etc.).
+    - Military Police may choose to confiscate dangerous items (weapons, firearms) as well as items used to commission crimes or items that prove problematic in possession of the detainee (tools, insulated gloves, etc.).
     - Detainees that die in your custody must be revived unless they have been (legally) executed, or have committed suicide.
-    - Executions must be for a permabriggable crime, and approved by the highest member in the chain of command, who will answer for approving it alongside Security's chain of command. Those who willingly attempt to damage/destroy or escape from the permabrig may be executed.
+    - Executions must be for a permabriggable crime, and approved by the highest member in the chain of command, who will answer for approving it alongside Military Police's chain of command. Those who willingly attempt to damage/destroy or escape from the permabrig may be executed.
     - Detainees in the brig have the right to know what they are being charged with, as well as basic medical aid, at least to the point they are no longer at risk of dying.
