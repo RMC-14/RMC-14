@@ -37,6 +37,12 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
         });
     }
 
+    private void OnComputerMapInit(Entity<RequisitionsComputerComponent> ent, ref MapInitEvent args)
+    {
+        ent.Comp.Account = GetAccount();
+        Dirty(ent);
+    }
+
     private void OnElevatorUnpaused(Entity<RequisitionsElevatorComponent> ent, ref EntityUnpausedEvent args)
     {
         if (ent.Comp.ToggledAt is { } at)
@@ -63,7 +69,6 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
             return;
         }
 
-        computer.Comp.Account ??= GetAccount();
         var order = category.Entries[args.Order];
         if (!TryComp(computer.Comp.Account, out RequisitionsAccountComponent? account) ||
             account.Balance < order.Cost)
@@ -179,7 +184,6 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
         var elevator = GetElevator(computer);
         var mode = elevator?.Comp.NextMode ?? elevator?.Comp.Mode;
         var busy = elevator?.Comp.Busy ?? false;
-        computer.Comp.Account ??= GetAccount();
         var balance = CompOrNull<RequisitionsAccountComponent>(computer.Comp.Account)?.Balance ?? 0;
         var full = elevator != null && IsFull(elevator.Value);
 
