@@ -3,14 +3,14 @@
 [color=#ff0000]DISCONNECTING FROM OR IGNORING/EVADING ADMIN-HELPS WILL RESULT IN AN APPEAL ONLY BAN.[/color]
 This is to prevent bad actors from avoiding issues. If you need to leave urgently, let us know and it will be considered in your appeal.
 
-You can find clarifications of any ambiguity on our discord.
+You can find clarifications of any ambiguity in the in game guidebook.
 
 These rules are neither exactly SS14 or CM13 and should be read in their entirety.
 
 [color=#ff0000]Recent Changes[/color]
     - This is the first creation of CM14 rules!
 
-[color=#a4885c]01.[/color] [color=#ff0000]Admin decisions are final.[/color] Rules are enforced as intended. Rules are enforced as intended. Every example of a rule break cannot be written, thus enforcement is subject to admin interpretation of the rule’s intention. Admins may handle rule breaks through in-character consequences at their discretion. This does not apply to zero tolerance rules. You may file a staff complaint with head staff if you find the decision to be incorrect.
+[color=#a4885c]01.[/color] [color=#ff0000]Admin decisions are final.[/color] Rules are enforced as intended. Rules are enforced as intended. Every example of a rule break cannot be written, thus enforcement is subject to admin interpretation of the rule’s intention. Admins may handle rule breaks through in-character consequences at their discretion. This does not apply to zero tolerance rules. You may file a staff complaint with head staff if you find the decision to be incorrect.`
 
 [color=#ff0000]ZERO TOLERANCE RULES[/color]
 
@@ -22,7 +22,7 @@ These rules are neither exactly SS14 or CM13 and should be read in their entiret
 [color=#a4885c]03.[/color] Absolutely no sexual content or Erotic Roleplay (ERP), including direct or indirect mentions of sexual behavior or actions. The server is open to 16+, not 18+.
 
 [color=#a4885c]04.[/color] Don't communicate in-game/in-character information through methods outside of the game (such as talking in Discord with other users actively playing or by talking to your sibling across the room while you are both playing). This is referred to as "Metacomming". Adminstrators cannot police metacommunications, we must assume it is being abused. (All involved will be actioned on.)
-[italic](note: While we are generally okay with the concept of squads having metacomms, we came to the conclusion that it would alienate squad-mates not using the same method of communication and should not be permitted.)[/italic]
+[italic](It would alienate squad-mates not using the same method of communication and is not permitted.)[/italic]
 
 [color=#a4885c]05.[/color] Attempting to evade game bans will result in an automatic appeal-only permanent ban that is only appealable after six months and only with a voucher of good behavior from another SS13/SS14 server. Attempting to evade job bans will result in an appeal-only permanent ban.
 
@@ -34,7 +34,7 @@ These rules are neither exactly SS14 or CM13 and should be read in their entiret
 
 [color=#a4885c]08.[/color] Don't use multiple SS14 accounts to play (referred to as "multi-keying"). Users knowingly using multiple SS14 accounts will have all of their accounts banned. This is to prevent players from having respawns and will be treated as such.
 
-[color=#a4885c]09.[/color] Do not ignore the admin help relay or abuse it with spam. Don't bother checking for admins before stating a problem (ex: "hello?", "any admins?"), just send your issue. Hostility to administators will likely result in your removal.
+[color=#a4885c]09.[/color] Do not ignore the admin help panel or abuse it with spam. Don't bother checking for admins before stating a problem (ex: "hello?", "any admins?"), just send your issue. Hostility to administators will likely result in your removal.
 
 [color=#ff0000]IN GAME & ROLEPLAY RULES[/color]
 
@@ -42,10 +42,10 @@ These rules are neither exactly SS14 or CM13 and should be read in their entiret
     - Names of famous or fictional persons or names that resemble/parody them are strictly forbidden. Terrible names open you up to being politely reminded to change it, smited, or instantly banned, depending on severity.
     - Names resulting in inappropriate phonetic play-on-words are forbidden (ex: "Mike Oxlong", "Ben Dover", "Dixie Normus").
 
-[color=#a4885c]11.[/color] Act like an actual human being. Do not use text speak or emoticons IC, and do not refer to OOC things like admins in-game. Do not threaten players that you are calling the admins on them. Do not use emotes to bypass speech filters or muteness. You are not required to write a backstory or follow strict procedure; however, you are expected to at least make an effort to act like your role.
+[color=#a4885c]11.[/color] Act like an actual human being. Do not use text speak or emoticons IC, and do not refer to OOC things like admins or rounds in-game. Do not threaten players that you are calling the admins on them. Do not use emotes to bypass speech filters or muteness. You are not required to write a backstory or follow strict procedure; however, you are expected to at least make an effort to act like your role.
 
 [color=#a4885c]12.[/color] Don't be a dick. You are playing a multiplayer game with other people who also want to enjoy the game.
-    - [color=#ff0000] Attacking newly spawned players in cryo is forbidden, let them have a chance to gear up before you attack them![/color]
+    - [color=#ff0000] Attacking newly spawned players in cryo is forbidden, let them have a chance to gear up before you attack them![/color] This does not apply post hijack.
     - Do not intentionally make other players' lives hell for your own amusement.
     - [color=#ff0000]End of round grief of your own faction is not permitted and may result in an instant 3 hour ban.[/color]
 
@@ -55,20 +55,36 @@ These rules are neither exactly SS14 or CM13 and should be read in their entiret
 [color=#a4885c]14.[/color] Don't use information gained from outside your character's knowledge to gain an advantage ("Metagaming").
     - Using information you gain from outside your own character (i.e spectating while a ghost, metacomms, or other means) to your advantage is strictly forbidden. You remember all events up until you fall unconscious. If you take a ghost role, unless otherwise stated, you DO NOT REMEMBER ANYTHING from your past life.
 
-[color=#a4885c]15.[/color] Follow escalation rules and don't murder someone for slipping you, use common sense. Do not start riots.
+[color=#a4885c]15.[/color] Follow escalation rules and don't murder someone for annoying you, use common sense.
     - You can defend yourself to the extent of protecting your own life.
     - Military Police may use less-lethal force to effect arrests of criminals.
     - Don't outright leave people to die if you get in a fight, make an effort to heal them or bring them to Medbay.
     - Adminhelp the situation if you think someone is over-escalating.
-    - Strikes, revolutions, riots, cults, and any other type of similar largely disruptive behavior are strictly forbidden without permission. All players, including hostile forces, must obtain admin permission before engaging in this behavior.
+
+
+Mutanies. All players, including hostile forces, must obtain admin permission before engaging riots, mutinies or similar activity.
+    - Strikes, revolutions, riots, cults, and any other type of similar largely disruptive behavior are strictly forbidden without permission.
+    - Staff reserve the right to grant or deny mutinies, and to decide if the reason given is sufficient.
+    - MPs are not able to mutiny and will always side with the acting CO.
+    - Mutiny cannot occur during hijack, and any ongoing mutiny must be ended upon hijack.
+    - Only the Acting Commander can be mutinied against. They must be given a chance to stand down peacefully.
+    - During the mutiny, attacking any uninvolved, medical, or surrendered personnel is forbidden, as is perma-killing anyone involved. If you have surrendered during a mutiny, you must remain as such. You may not change sides unless you are surrendering.
+    - Once concluded, all sides must be given medical treatment. CO or higher are able to deny treatment or battlefield execute mutineers.
+    - Mutinies must have 5 members minimum.
+    - Examples of mutiny reasons:
+        - Commander incompetence, where the next in line would lead better.
+        - Commander takes no actions in leading.
+        - Commander refuses to allow evacuation.
 
 [color=#a4885c]16.[/color] Don't immediately ghost or suicide from your role if you do not get the role you want, or from head roles without notifying your chain of command or administrators.
     - This is not fair to other players actually waiting patiently for a round of that role. Alternatively, if you do not want to play a role, do not opt-in for it.
     - Command roles help drive rounds. If you need to leave, please admin-help your role and that you are leaving. There is no need to wait for a reply when admin-helping that you need to disconnect as a head role.
 
-[color=#a4885c]17.[/color] Don't rush for or prepare equipment unrelated to your job for no purpose other then to have it "just in case" (referred to as "Powergaming").
-    - A doctor does not need a rifle. Have an actual reason for needing these things, for example if there is a confirmed threat of hostile forces on the ship.
-    - Don't manufacture weapons, bombs, or death poisons before first contact.
+[color=#a4885c]17.[/color] Don't prepare for threats you are not yet aware of. (referred to as "Powergaming").
+    - Deconstruction of the ship for materials should not be occuring before first drop & confirmed contact. The marines would not immediately resort to taking their warship to pieces for a random unconfirmed distress call.
+        - Includes salvaging of things like chairs in briefing, however does not include the barrels and crates in maintenance.
+        - Includes the removal of supplies from the ship where not explicitly necessary. You would not drag half the contents of the medical bay to the field immediately.
+    - Modifications to the ship should not be made with meta-purposes, do not build a maze or bunker on the ship intended to secure the ship for hijack before you even know hijack is a thing.
 
 [color=#a4885c]18.[/color] Intentionally making yourself a major problem/annoyance/disruption for the crew or other players at large while not an hostile force is forbidden.
     - Don't openly try to cooperate with obvious or known hostile forces as a crew member.
@@ -96,5 +112,5 @@ MP will be expected to answer for use of lethal force. Military Police will be e
     - Brig times should generally not exceed 10 minutes unless the crime is permabriggable. Repeat offenders or hostile forces may be permabrigged.
     - Military Police may choose to confiscate dangerous items (weapons, firearms) as well as items used to commission crimes or items that prove problematic in possession of the detainee (tools, insulated gloves, etc.).
     - Detainees that die in your custody must be revived unless they have been (legally) executed, or have committed suicide.
-    - Executions must be for a permabriggable crime, and approved by the highest member in the chain of command, who will answer for approving it alongside Military Police's chain of command. Those who willingly attempt to damage/destroy or escape from the permabrig may be executed.
+    - Executions must be for a executable crime, and approved by a (not acting) CO , who will answer for approving it. Those who willingly attempt to damage/destroy or escape from the permabrig may be executed.
     - Detainees in the brig have the right to know what they are being charged with, as well as basic medical aid, at least to the point they are no longer at risk of dying.
