@@ -81,16 +81,16 @@ These rules also apply to any individual who is promoted or is acting in the pla
     - Do not immediately abandon your position as a Command role and go do whatever you want instead of managing your department/the ship. Do not abuse your position or use it to make arbitrary choices to the detriment of the ship.
     - Do not abandon the ship during a raid. You are supposed to protect the ship and it's crew, not let hostile forces kill everyone on it without a fight.
 
-[color=#a4885c]20.[/color] MP/Command should try to remain non-lethal and effect arrests, except in the following special circumstances, where they may choose to use lethal force:
+[color=#a4885c]20.[/color] MP should try to remain non-lethal and effect arrests, except in the following special circumstances, where they may choose to use lethal force:
     - Lethal force is used against you (ex: firearms, disabling/stunning weapons, deadly melee weapons)
     - Suspect is wearing clothing or showing immediately dangerous equipment only used by enemy agents/hostile forces when applicable.
     - You determine that your life or the life of an innocent is in immediate danger.
     - The suspect is unable to be safely detained by less-lethal means. This includes suspects who continually resist efforts to be cuffed or continually manages to escape.
     - If no other reasonable options are readily available and allowing the suspect to continue would be an unreasonable danger to the ship/crew.
 
-MP/Command will be expected to answer for use of lethal force. Military Police/Command will be expected to effect arrests on criminals and prevent them from dying while in custody, even if lethal force is used. MP/Command is strongly encouraged, but not required, to revive hostiles and effect a permabrigging or other sentence as deemed appropriate.
+MP will be expected to answer for use of lethal force. Military Police will be expected to effect arrests on criminals and prevent them from dying while in custody, even if lethal force is used. MP is strongly encouraged, but not required, to revive hostiles and effect a permabrigging or other sentence as deemed appropriate.
 
-[color=#a4885c]21.[/color] MP/Command are expected to protect detainees in their custody to the best of their ability so as long as it does not come to unreasonable risk to themselves, the crew, or the ship at large to do so.
+[color=#a4885c]21.[/color] MP are expected to protect detainees in their custody to the best of their ability so as long as it does not come to unreasonable risk to themselves, the crew, or the ship at large to do so.
     - Brig times should generally not exceed 10 minutes unless the crime is permabriggable. Repeat offenders or hostile forces may be permabrigged.
     - Military Police may choose to confiscate dangerous items (weapons, firearms) as well as items used to commission crimes or items that prove problematic in possession of the detainee (tools, insulated gloves, etc.).
     - Detainees that die in your custody must be revived unless they have been (legally) executed, or have committed suicide.
