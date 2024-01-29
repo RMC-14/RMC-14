@@ -45,7 +45,7 @@ You can find clarifications of any ambiguity on our discord.
 [color=#a4885c]12.[/color] Don't be a dick. You are playing a multiplayer game with other people who also want to enjoy the game.
     - [color=#ff0000] Attacking newly spawned players in cryo is forbidden, let them have a chance to gear up before you attack them![/color]
     - Do not intentionally make other players' lives hell for your own amusement.
-    - [color=#ff0000]End of round grief of your own faction is not permitted and may result in an instant 5 day ban.[/color]
+    - [color=#ff0000]End of round grief of your own faction is not permitted and may result in an instant 3 hour ban.[/color]
 
 [color=#a4885c]13.[/color] Don't harass or target players across rounds for actions in prior rounds or for actions outside of the game (this is referred to as "Metagrudging".)
     - Annoying players for IC reasons in the current round is fine; doing it across rounds or as a ghost role after they have interacted with you is not.
