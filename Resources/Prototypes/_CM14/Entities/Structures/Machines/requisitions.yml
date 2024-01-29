@@ -113,7 +113,7 @@
   name: retractable railing
   description: That looks like it doesn't open easily.
   placement:
-    mode: PlaceFree
+    mode: AlignWallProper
     snap: []
   components:
   - type: Transform

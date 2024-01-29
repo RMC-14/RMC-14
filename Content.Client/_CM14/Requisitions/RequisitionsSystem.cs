@@ -87,7 +87,8 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
         var state = gear.Comp.Mode switch
         {
             RequisitionsGearMode.Static => gear.Comp.StaticState,
-            RequisitionsGearMode.Moving => gear.Comp.MovingState
+            RequisitionsGearMode.Moving => gear.Comp.MovingState,
+            _ => gear.Comp.StaticState
         };
 
         sprite.LayerSetState(layer, state);
