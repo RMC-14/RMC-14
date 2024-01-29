@@ -1,4 +1,20 @@
-﻿#- type: entity
+﻿- type: entity
+  parent: CMBaseMachineCircuitboard
+  id: CMSMESMachineCircuitboard
+  name: SMES machine board
+  description: A machine printed circuit board for a SMES.
+  components:
+  - type: Sprite
+    state: power_mod
+  - type: MachineBoard
+    prototype: CMSMESEmpty
+    requirements:
+      Capacitor: 1
+      PowerCell: 4
+    materialRequirements:
+      CableHV: 10
+
+#- type: entity
 #  parent: CMBaseMachineCircuitboard
 #  id: CMAutolatheMachineCircuitboard
 #  name: autolathe machine board
