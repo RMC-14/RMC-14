@@ -161,6 +161,8 @@
     layers:
     - state: lowered
       map: [ "enum.RequisitionsRailingLayers.Base" ]
+  - type: Physics
+    canCollide: false
   - type: Fixtures
     fixtures: {}
   - type: RequisitionsRailing
