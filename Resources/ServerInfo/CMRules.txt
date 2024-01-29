@@ -8,19 +8,19 @@ You can find clarifications of any ambiguity on our discord.
 [color=#ff0000]Recent Changes[/color]
     - This is the first creation of CM14 rules!
 
-[color=#a4885c]01.[/color] [color=#a4885c]The[/color] [color=#ffd700]Golden[/color] [color=#a4885c]Rule.[/color] Rules are enforced as intended. Every example of a rule break cannot be written, therefore, enforcement of the rules is subject to admin interpretation of the rule’s intention. Admins may choose to handle minor rule breaks by "In-Character" consequences. Admins have discretion on when a minor rule break can be handled via "In-Character" consequences. Admins will not use "In-Character" consequences for zero tolerance rules. Players cannot request an admin to handle things "In-Character" and the final decision rests solely on the Admin.
+[color=#a4885c]01.[/color] [color=#ff0000]Admin decisions are final.[/color] Rules are enforced as intended. Every example of a rule break cannot be written, therefore, enforcement of the rules is subject to admin interpretation of the rule’s intention. Admins may choose to handle minor rule breaks by "In-Character" consequences. Admins have discretion on when a minor rule break can be handled via "In-Character" consequences. Admins will not use "In-Character" consequences for zero tolerance rules. Players cannot request an admin to handle things "In-Character" and the final decision rests solely on the Admin. You may file a staff report with head staff if you believe the ruling to be incorrect. Do not argue with the game admins.
 
 [color=#ff0000]ZERO TOLERANCE RULES[/color]
 
 [color=#ff0000]You are liable to be permanently banned for breaking these rules with no warning.[/color]
 
 [color=#a4885c]02.[/color] Absolutely no hate speech, slurs, bigotry, racism, specism (demeaning other characters in-game due to their in-game race), sexism, disability-related or anything even remotely similar.
-(Note: In the lore of CM14, Nanotrasen workers (and their various humanoid species) have been contracted over to the USCM to build a larger force in exchange for protection of their stations, and have been working for the USCM for a long time. They should be treated as any regular human.)
+[italic](note: In the lore of CM14, Nanotrasen workers (and their various humanoid species) have been contracted over to the USCM to build a larger force in exchange for protection of their stations, and have been working for the USCM for a long time. They should be treated as any regular human.)[/italic]
 
 [color=#a4885c]03.[/color] Absolutely no sexual content or Erotic Roleplay (ERP), including direct or indirect mentions of sexual behavior or actions. The server is open to 16+, not 18+. (YOU WILL GET PERMABANNED)
 
-[color=#a4885c]04.[/color] Don't communicate in-game/in-character information through methods outside of the game (such as talking in Discord with other users actively playing or by talking to your sibling across the room while you are both playing). This is referred to as "Metacomming". Adminstrators cannot police metacommunications, we must assume it is being abused. (All involved will be actioned on.)
-(Note: While we are generally okay with the concept of squads having metacomms, we came to the conclusion that it would alienate squad-mates not using the same method of communication and should not be permitted.)
+[color=#a4885c]04.[/color] Don't communicate in-game/in-character information through methods outside of the game (such as talking in Discord with other users actively playing or by talking to your sibling across the room while you are both playing). This is referred to as "Metacomming". Adminstrators cannot police metacommunications, we must assume it is being abused. (All involved will be actioned on.)[/italic]
+[italic](note: While we are generally okay with the concept of squads having metacomms, we came to the conclusion that it would alienate squad-mates not using the same method of communication and should not be permitted.)[/italic]
 
 [color=#a4885c]05.[/color] Attempting to evade game bans will result in an automatic appeal-only permanent ban that is only appealable after six months and only with a voucher of good behavior from another SS13/SS14 server. Attempting to evade job bans will result in an appeal-only permanent ban.
 
