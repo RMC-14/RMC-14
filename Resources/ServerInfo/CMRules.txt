@@ -5,6 +5,8 @@ This is to prevent bad actors from avoiding issues. If you need to leave urgentl
 
 You can find clarifications of any ambiguity on our discord.
 
+These rules are neither exactly SS14 or CM13 and should be read in their entirety.
+
 [color=#ff0000]Recent Changes[/color]
     - This is the first creation of CM14 rules!
 
