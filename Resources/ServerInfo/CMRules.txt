@@ -10,7 +10,7 @@ These rules are neither exactly SS14 or CM13 and should be read in their entiret
 [color=#ff0000]Recent Changes[/color]
     - This is the first creation of CM14 rules!
 
-[color=#a4885c]01.[/color] [color=#ff0000]Admin decisions are final.[/color] Rules are enforced as intended. Every example of a rule break cannot be written, therefore, enforcement of the rules is subject to admin interpretation of the rule’s intention. Admins may choose to handle minor rule breaks by "In-Character" consequences. Admins have discretion on when a minor rule break can be handled via "In-Character" consequences. Admins will not use "In-Character" consequences for zero tolerance rules. Players cannot request an admin to handle things "In-Character" and the final decision rests solely on the Admin. You may file a staff report with head staff if you believe the ruling to be incorrect. Do not argue with the game admins.
+[color=#a4885c]01.[/color] [color=#ff0000]Admin decisions are final.[/color] Rules are enforced as intended. Rules are enforced as intended. Every example of a rule break cannot be written, thus enforcement is subject to admin interpretation of the rule’s intention. Admins may handle rule breaks through in-character consequences at their discretion. This does not apply to zero tolerance rules. You may file a staff complaint with head staff if you find the decision to be incorrect.
 
 [color=#ff0000]ZERO TOLERANCE RULES[/color]
 
