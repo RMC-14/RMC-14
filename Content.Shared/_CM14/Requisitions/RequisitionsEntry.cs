@@ -7,8 +7,8 @@ namespace Content.Shared._CM14.Requisitions;
 [Serializable, NetSerializable]
 public sealed partial class RequisitionsEntry
 {
-    [DataField(required: true)]
-    public string Name = string.Empty;
+    [DataField]
+    public string? Name;
 
     [DataField(required: true)]
     public int Cost;
@@ -16,6 +16,6 @@ public sealed partial class RequisitionsEntry
     [DataField(required: true)]
     public EntProtoId Crate;
 
-    [DataField(required: true)]
+    [DataField]
     public List<EntProtoId> Entities = new();
 }

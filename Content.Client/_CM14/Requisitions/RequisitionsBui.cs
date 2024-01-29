@@ -3,6 +3,7 @@ using Content.Shared._CM14.Requisitions.Components;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using static Content.Shared._CM14.Requisitions.Components.RequisitionsElevatorMode;
 
@@ -12,6 +13,7 @@ namespace Content.Client._CM14.Requisitions;
 public sealed class RequisitionsBui : BoundUserInterface
 {
     [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
     [ViewVariables]
     private RequisitionsWindow? _window;
@@ -158,7 +160,7 @@ public sealed class RequisitionsBui : BoundUserInterface
             var entry = category.Entries[i];
             var order = new RequisitionsOrderButton();
             var orderIndex = i;
-            order.Button.Text = $"{entry.Name}";
+            order.Button.Text = entry.Name ?? _prototypes.Index<EntityPrototype>(entry.Crate).Name;
             order.Button.OnPressed += _ => SendMessage(new RequisitionsBuyMsg(categoryIndex, orderIndex));
 
             order.SetCost(entry.Cost);
