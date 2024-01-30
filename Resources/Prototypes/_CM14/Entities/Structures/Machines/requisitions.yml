@@ -142,6 +142,27 @@
     layers:
     - state: supply_elevator_lowered
       map: [ "enum.RequisitionsElevatorLayers.Base" ]
+  - type: Physics
+    bodyType: static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-2.3,-2.3,2.3,2.3"
+        layer:
+        - WallLayer
+        mask:
+        - ItemMask
+        density: 1000
+        hard: false
+  - type: Chasm
+  - type: StepTrigger
+    requiredTriggeredSpeed: 0
+    intersectRatio: 1
+    blacklist:
+      tags:
+      - Catwalk
   - type: RequisitionsElevator
   - type: CargoSellBlacklist
 
@@ -150,21 +171,30 @@
   id: CMRailing
   name: retractable railing
   description: That looks like it doesn't open easily.
-  placement:
-    mode: AlignWallProper
-    snap: []
   components:
   - type: Transform
     anchored: false
+    noRot: false
   - type: Sprite
     sprite: _CM14/Structures/railing.rsi
+    offset: 0,0.5
     layers:
     - state: lowered
       map: [ "enum.RequisitionsRailingLayers.Base" ]
+    noRot: true
   - type: Physics
-    canCollide: false
   - type: Fixtures
-    fixtures: {}
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,-0.3"
+        layer:
+        - TableLayer
+        mask:
+        - TableMask
+        density: 1000
+  - type: Climbable
   - type: RequisitionsRailing
   - type: CargoSellBlacklist
 

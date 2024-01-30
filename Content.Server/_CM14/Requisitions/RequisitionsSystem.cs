@@ -28,6 +28,7 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
 
         SubscribeLocalEvent<RequisitionsComputerComponent, MapInitEvent>(OnComputerMapInit);
         SubscribeLocalEvent<RequisitionsComputerComponent, BeforeActivatableUIOpenEvent>(OnComputerBeforeActivatableUIOpen);
+
         SubscribeLocalEvent<RequisitionsElevatorComponent, EntityUnpausedEvent>(OnElevatorUnpaused);
 
         Subs.BuiEvents<RequisitionsComputerComponent>(RequisitionsUIKey.Key, subs =>
@@ -206,11 +207,7 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
         var railings = _lookup.GetEntitiesInRange<RequisitionsRailingComponent>(coordinates, elevator.Comp.Radius + 5);
         foreach (var railing in railings)
         {
-            if (railing.Comp.Mode == mode)
-                continue;
-
-            railing.Comp.Mode = mode;
-            Dirty(railing);
+            SetRailingMode(railing, mode);
         }
     }
 
