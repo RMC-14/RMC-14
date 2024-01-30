@@ -318,7 +318,7 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
     private bool Sell(Entity<RequisitionsElevatorComponent> elevator)
     {
         var account = GetAccount();
-        var entities = _lookup.GetEntitiesInRange(elevator, elevator.Comp.Radius - 0.5f, LookupFlags.Uncontained);
+        var entities = _lookup.GetEntitiesInRange(elevator, elevator.Comp.Radius - 0.25f, LookupFlags.Uncontained);
         var soldAny = false;
         foreach (var entity in entities)
         {
