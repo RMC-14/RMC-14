@@ -1,0 +1,188 @@
+﻿- type: entity
+  parent: ComputerCargoOrders
+  id: CMASRSConsole
+  name: ASRS console
+  description: A console for the Automated Storage Retrieval System.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: request
+    - map: ["computerLayerKeys"]
+      state: tech_key
+  - type: CargoOrderConsole
+  - type: ActivatableUI
+    key: enum.RequisitionsUIKey.Key
+  - type: UserInterface
+    interfaces:
+    - key: enum.RequisitionsUIKey.Key
+      type: RequisitionsBui
+  - type: Computer
+    board: CargoRequestComputerCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#b89f25"
+  - type: AccessReader
+    access: [["Cargo"]]
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSource
+    range: 200
+    ports:
+    - OrderSender
+  - type: GuideHelp
+    guides:
+    - Cargo
+  - type: RequisitionsComputer
+    categories:
+    - name: Ammo
+      entries: []
+    - name: Attachments
+      entries:
+      - cost: 3000
+        crate: CMCrateAttachmentRedDot
+      - cost: 3000
+        crate: CMCrateAttachmentTelescopicScope
+      - cost: 3000
+        crate: CMCrateAttachmentMiniScope
+      - cost: 3000
+        crate: CMCrateAttachmentMagneticHarness
+      - cost: 3000
+        crate: CMCrateAttachmentSuppressor
+      - cost: 3000
+        crate: CMCrateAttachmentExtendedBarrel
+      - cost: 3000
+        crate: CMCrateAttachmentCompensator
+      - cost: 3000
+        crate: CMCrateAttachmentForegrip
+      - cost: 3000
+        crate: CMCrateAttachmentGyro
+      - cost: 3000
+        crate: CMCrateAttachmentBipod
+      - cost: 3000
+        crate: CMCrateAttachmentUnderbarrelShotgun
+      - cost: 3000
+        crate: CMCrateAttachmentUnderbarrelExtinguisher
+      - cost: 3000
+        crate: CMCrateAttachmentUnderbarrelFlamer
+      - cost: 3000
+        crate: CMCrateAttachmentBurstfire
+      - cost: 6000
+        crate: CMCrateAttachmentAllStocks
+      - cost: 3000
+        crate: CMCrateAttachmentRevolverStock
+      - cost: 3000
+        crate: CMCrateAttachmentRifleStock
+      - cost: 3000
+        crate: CMCrateAttachmentShotgunStock
+      - cost: 3000
+        crate: CMCrateAttachmentSmgStock
+    - name: Clothing
+      entries: []
+    - name: Engineering
+      entries: []
+    - name: Explosives
+      entries: []
+    - name: Food
+      entries: []
+    - name: Gear
+      entries: []
+    - name: Medical
+      entries: []
+    - name: Mortar
+      entries: []
+    - name: Operations
+      entries: []
+    - name: Reagent tanks
+      entries: []
+    - name: Research
+      entries: []
+    - name: Restricted Equipment
+      entries: []
+    - name: Supplies
+      entries: []
+    - name: Vehicle Ammo
+      entries: []
+    - name: Weapons
+      entries:
+      - name: M41A MK1 Rifle Crate (x2 MK1, x2 magazines)
+        cost: 4000
+        crate: CMCrateWeapons
+        entities:
+        - WeaponRifleM41A
+        - WeaponRifleM41A
+        - CMMagazineRifleM41A
+        - CMMagazineRifleM41A
+    - name: Weapons Specialist Ammo
+      entries: []
+  - type: CargoSellBlacklist
+
+- type: entity
+  id: CMCargoElevator
+  name: cargo elevator
+  suffix: Lowered
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _CM14/Effects/elevator.rsi
+    drawdepth: LowFloors
+    layers:
+    - state: supply_elevator_lowered
+      map: [ "enum.RequisitionsElevatorLayers.Base" ]
+  - type: RequisitionsElevator
+  - type: CargoSellBlacklist
+
+- type: entity
+  parent: BaseStructure
+  id: CMRailing
+  name: retractable railing
+  description: That looks like it doesn't open easily.
+  placement:
+    mode: AlignWallProper
+    snap: []
+  components:
+  - type: Transform
+    anchored: false
+  - type: Sprite
+    sprite: _CM14/Structures/railing.rsi
+    layers:
+    - state: lowered
+      map: [ "enum.RequisitionsRailingLayers.Base" ]
+  - type: Physics
+    canCollide: false
+  - type: Fixtures
+    fixtures: {}
+  - type: RequisitionsRailing
+  - type: CargoSellBlacklist
+
+- type: entity
+  id: CMGear
+  name: gear
+  description: ""
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _CM14/Structures/gear.rsi
+    layers:
+    - state: base
+      map: [ "enum.RequisitionsGearLayers.Base" ]
+  - type: RequisitionsGear
+  - type: CargoSellBlacklist
