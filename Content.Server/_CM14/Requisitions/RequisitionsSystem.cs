@@ -301,13 +301,13 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
                 }
 
                 yOffset--;
-                if (yOffset + 1 < coordinates.Y - comp.Radius)
+                if (yOffset < -comp.Radius)
                 {
                     yOffset = comp.Radius;
                     xOffset--;
                 }
 
-                if (xOffset < coordinates.X - comp.Radius)
+                if (xOffset < -comp.Radius)
                     xOffset = comp.Radius;
             }
 
