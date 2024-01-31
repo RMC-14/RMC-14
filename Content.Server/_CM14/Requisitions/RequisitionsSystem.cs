@@ -5,6 +5,7 @@ using Content.Server.UserInterface;
 using Content.Shared._CM14.Marines;
 using Content.Shared._CM14.Requisitions;
 using Content.Shared._CM14.Requisitions.Components;
+using Content.Shared.Mobs.Components;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
@@ -20,6 +21,7 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly PhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
@@ -28,6 +30,7 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
 
         SubscribeLocalEvent<RequisitionsComputerComponent, MapInitEvent>(OnComputerMapInit);
         SubscribeLocalEvent<RequisitionsComputerComponent, BeforeActivatableUIOpenEvent>(OnComputerBeforeActivatableUIOpen);
+
         SubscribeLocalEvent<RequisitionsElevatorComponent, EntityUnpausedEvent>(OnElevatorUnpaused);
 
         Subs.BuiEvents<RequisitionsComputerComponent>(RequisitionsUIKey.Key, subs =>
@@ -114,6 +117,15 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
 
         if (nextMode == null)
             return;
+
+        if (nextMode == Lowering)
+        {
+            foreach (var entity in _physics.GetContactingEntities(elevator))
+            {
+                if (HasComp<MobStateComponent>(entity))
+                    return;
+            }
+        }
 
         comp.ToggledAt = _timing.CurTime;
         comp.Busy = true;
@@ -206,11 +218,7 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
         var railings = _lookup.GetEntitiesInRange<RequisitionsRailingComponent>(coordinates, elevator.Comp.Radius + 5);
         foreach (var railing in railings)
         {
-            if (railing.Comp.Mode == mode)
-                continue;
-
-            railing.Comp.Mode = mode;
-            Dirty(railing);
+            SetRailingMode(railing, mode);
         }
     }
 
@@ -304,13 +312,13 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
                 }
 
                 yOffset--;
-                if (yOffset + 1 < coordinates.Y - comp.Radius)
+                if (yOffset < -comp.Radius)
                 {
                     yOffset = comp.Radius;
                     xOffset--;
                 }
 
-                if (xOffset < coordinates.X - comp.Radius)
+                if (xOffset < -comp.Radius)
                     xOffset = comp.Radius;
             }
 
@@ -321,7 +329,7 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
     private bool Sell(Entity<RequisitionsElevatorComponent> elevator)
     {
         var account = GetAccount();
-        var entities = _lookup.GetEntitiesInRange(elevator, elevator.Comp.Radius - 0.5f, LookupFlags.Uncontained);
+        var entities = _physics.GetContactingEntities(elevator);
         var soldAny = false;
         foreach (var entity in entities)
         {

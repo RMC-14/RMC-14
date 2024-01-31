@@ -25,6 +25,9 @@ public sealed partial class RequisitionsRailingComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan RailingRaiseDelay = TimeSpan.FromSeconds(1);
 
+    [DataField, AutoNetworkedField]
+    public string Fixture = "fix1";
+
     public object LowerAnimation = default!;
 
     public object RaiseAnimation = default!;
