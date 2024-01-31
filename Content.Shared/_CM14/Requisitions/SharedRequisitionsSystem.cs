@@ -1,6 +1,7 @@
 ﻿using Content.Shared._CM14.Requisitions.Components;
 using Content.Shared.Climbing.Components;
 using Content.Shared.StepTrigger.Systems;
+using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using static Content.Shared._CM14.Requisitions.Components.RequisitionsRailingMode;
 
@@ -33,8 +34,11 @@ public abstract class SharedRequisitionsSystem : EntitySystem
 
     private void UpdateRailing(Entity<RequisitionsRailingComponent> railing)
     {
-        if (_fixtures.GetFixtureOrNull(railing, railing.Comp.Fixture) is not { } fixture)
+        if (!TryComp(railing, out FixturesComponent? fixtures) ||
+            _fixtures.GetFixtureOrNull(railing, railing.Comp.Fixture, fixtures) is not { } fixture)
+        {
             return;
+        }
 
         var hard = railing.Comp.Mode is Raising or Raised;
         _physics.SetHard(railing, fixture, hard);
