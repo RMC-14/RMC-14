@@ -171,6 +171,7 @@
   id: CMRailing
   name: retractable railing
   description: That looks like it doesn't open easily.
+  suffix: Raised
   components:
   - type: Transform
     anchored: false
@@ -179,7 +180,7 @@
     sprite: _CM14/Structures/railing.rsi
     offset: 0,0.5
     layers:
-    - state: lowered
+    - state: raised
       map: [ "enum.RequisitionsRailingLayers.Base" ]
     noRot: true
   - type: Physics
@@ -196,6 +197,7 @@
         density: 1000
   - type: Climbable
   - type: RequisitionsRailing
+    mode: Raised
   - type: CargoSellBlacklist
 
 - type: entity
