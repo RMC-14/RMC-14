@@ -4,6 +4,11 @@
   parent: GrenadeBase
   id: M40HEDP
   components:
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Throwables/m40hedp.rsi
+    layers:
+    - state: icon
+      map: ["enum.TriggerVisualLayers.Base"]
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
@@ -33,6 +38,11 @@
   description: A grenade that does exactly what it says on the tin.
   components:
   - type: Sprite
+    sprite: _CM14/Objects/Weapons/Throwables/m40smoke.rsi
+    layers:
+    - state: icon
+      map: ["enum.TriggerVisualLayers.Base"]
+  - type: Sprite
     sprite: Objects/Weapons/Grenades/smoke.rsi
   - type: SmokeOnTrigger
     duration: 30
@@ -57,6 +67,11 @@
   name: M40 HEFA grenade
   description: Shrapnel. Shrapnel! WATCH OUT IT'S SHRAP-
   components:
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Throwables/m40hefa.rsi
+    layers:
+    - state: icon
+      map: ["enum.TriggerVisualLayers.Base"]
   - type: ClusterGrenade
     fillPrototype: ShrapnelProjectile
     maxGrenadesCount: 30
@@ -70,7 +85,8 @@
   - type: Tag
     tags:
       - Grenade
-      - LauncherCompatibleGrenade
-  - type: CartridgeAmmo
-    proto: HEFAProjectile
-    deleteOnSpawn: true
+#      - LauncherCompatibleGrenade
+#  - type: CartridgeAmmo
+#    proto: HEFAProjectile
+#    deleteOnSpawn: true
+# Need to rework how cluster is handled

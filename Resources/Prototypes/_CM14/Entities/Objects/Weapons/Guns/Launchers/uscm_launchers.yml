@@ -22,7 +22,7 @@
   - type: BallisticAmmoProvider
     whitelist:
       tags:
-        - Grenade
+        - LauncherCompatibleGrenade
     capacity: 5
     proto: M40HEDP
     soundInsert:

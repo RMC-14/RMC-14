@@ -29,24 +29,24 @@
     duration: 30
     spreadAmount: 50
 
-- type: entity
-  id: HEFAProjectile
-  name: M40 HEFA
-  parent: BaseBulletTrigger
-  noSpawn: true
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    layers:
-      - state: grenade
-    canCreateVacuum: false
-  - type: ClusterGrenade
-    fillPrototype: ShrapnelProjectile
-    maxGrenadesCount: 30
-    grenadeType: enum.GrenadeType.Shoot
-  - type: ContainerContainer
-    containers:
-      cluster-payload: !type:Container
+#- type: entity
+#  id: HEFAProjectile
+#  name: M40 HEFA
+#  parent: BaseBulletTrigger
+#  noSpawn: true
+#  components:
+#  - type: Sprite
+#    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+#    layers:
+#      - state: grenade
+#    canCreateVacuum: false
+#  - type: ClusterGrenade
+#    fillPrototype: ShrapnelProjectile
+#    maxGrenadesCount: 30
+#    grenadeType: enum.GrenadeType.Shoot
+#  - type: ContainerContainer
+#    containers:
+#      cluster-payload: !type:Container
 
 - type: entity
   id: ShrapnelProjectile
