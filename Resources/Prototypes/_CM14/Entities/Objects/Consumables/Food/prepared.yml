@@ -30,7 +30,7 @@
   parent: CMUSCMPreparedMealBase
   id: CMUSCMPreparedMealChicken
   name: USCM prepared meal (chicken)
-  description: A tray of standard USCM food. Partially raw pork, goopy corn and some watery mashed potatoes fill this tray.
+  description: A tray of standard USCM food. Moist chicken, dry rice and a mildly depressed piece of broccoli fill this tray.
   components:
   - type: Sprite
     state: chicken
