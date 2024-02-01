@@ -87,7 +87,7 @@
 
 - type: entity
   parent: CMMatchBook
-  id: CMExecutiveWYMatchbookCMExecutiveWYMatchbook
+  id: CMExecutiveWYMatchbook
   name: Weyland-Yutani gold matchbook
   description: A small book of expensive paper matches. These ones light almost every time, or so the packaging claims.
   components:
