@@ -1,4 +1,4 @@
-﻿# TODO CM14 all of these vendor inventories
+# TODO CM14 all of these vendor inventories
 # TODO CM14 deny and vend states
 - type: entity
   abstract: true
@@ -236,17 +236,17 @@
     #- id: CMMagazineM41AAP
     #  amount: 3
     - name: Extended Ammunition
-      entries: []
-    #- id: CMMagazineExtendedM39
-    #  amount: 1
-    #- id: CMMagazineExtendedM41A
-    #  amount: 1
+      entries:
+      - id: CMMagazineExtendedCaselessM39
+        amount: 1
+      - id: CMMagazineExtendedRifleM41A
+        amount: 1
     - name: Special Ammunition
-      entries: []
+      entries:
     #- id: CMDrumSmartgunM56
     #  amount: 1
-    #- id: CMHeavySpeedLoaderM44
-    #  amount: 2
+      - id: CMSpeedLoaderM44
+        amount: 2
     #- id: CMMarksmanSpeedLoaderM44
     #  amount: 2
     - name: Restricted Firearm Ammunition
@@ -296,11 +296,11 @@
         amount: 10
       - id: CMBoxShotgunSlugs
         amount: 10
-      - id: MagazineRifleM4RA
+      - id: CMMagazineRifleM4RA
         amount: 15
-      - id: MagazineCaselessM39
+      - id: CMMagazineCaselessM39
         amount: 25
-      - id: MagazineRifleM41A
+      - id: CMMagazineRifleM41A
         amount: 25
     - name: Sidearms
       entries:

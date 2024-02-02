@@ -1,7 +1,4 @@
-﻿# these were removed as they're not relevant to cm14. Merge conflicts with this file can be ignored, or merged with everything commented out
-# this file is replaced by Prototypes/_Cm14/Lobby/lobbyscreens.yml
-
-- type: lobbyBackground
+﻿- type: lobbyBackground
   id: Robotics
   background: /Textures/LobbyScreens/robotics.png
 

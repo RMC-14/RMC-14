@@ -8,6 +8,7 @@
   heatCapacity: 10000
   weather: true
   indestructible: true
+  canDig: true
 
 - type: tile
   parent: CMPlanetBase
@@ -217,6 +218,7 @@
   sprite: /Textures/_CM14/Tiles/planet/wood/wood.png
   footstepSounds:
     collection: FootstepWood
+  canDig: false
 
 - type: tile
   parent: CMPlanetBase
@@ -243,6 +245,7 @@
   sprite: /Textures/_CM14/Tiles/planet/runed_sandstone/runedsandstone.png
   footstepSounds:
     collection: FootstepWood
+  canDig: false
 
 - type: tile
   parent: CMPlanetBase
@@ -251,6 +254,7 @@
   sprite: /Textures/_CM14/Tiles/planet/gcircuit/gcircuita.png
   footstepSounds:
     collection: FootstepHull
+  canDig: false
 
 - type: tile
   parent: CMPlanetBase
@@ -259,6 +263,7 @@
   sprite: /Textures/_CM14/Tiles/planet/shuttle/floor.png
   footstepSounds:
     collection: FootstepHull
+  canDig: false
 
 - type: tile
   parent: CMPlanetShuttleBlue
@@ -279,6 +284,7 @@
   sprite: /Textures/_CM14/Tiles/planet/corsat/squares.png
   footstepSounds:
     collection: FootstepHull
+  canDig: false
 
 - type: tile
   parent: CMPlanetBase
@@ -287,6 +293,7 @@
   sprite: /Textures/_CM14/Tiles/planet/corsat/squareswood.png
   footstepSounds:
     collection: FootstepWood
+  canDig: false
 
 - type: tile
   parent: CMPlanetBase
@@ -295,6 +302,7 @@
   sprite: /Textures/_CM14/Tiles/planet/strata/floor.png
   footstepSounds:
     collection: FootstepHull
+  canDig: false
 
 - type: tile
   parent: CMPlanetStrata

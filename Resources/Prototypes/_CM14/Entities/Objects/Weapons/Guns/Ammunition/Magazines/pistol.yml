@@ -1,7 +1,7 @@
 - type: entity
   abstract: true
   parent: BaseMagazinePistol
-  id: CMMagazinePistolBase
+  id: CMBaseMagazinePistol
   components:
   - type: MagazineVisuals
     magState: mag
@@ -10,7 +10,7 @@
   - type: Appearance
 
 - type: entity
-  parent: CMMagazinePistolBase
+  parent: CMBaseMagazinePistol
   id: CMMagazinePistolM4A3
   name: M4A3 magazine (9mm)
   components:
@@ -21,8 +21,8 @@
     mayTransfer: True
     whitelist:
       tags:
-        - CartridgePistol9mm
-    proto: CartridgePistol9mm
+        - CMCartridgePistol9mm
+    proto: CMCartridgePistol9mm
     capacity: 9
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m4a3.rsi
@@ -33,7 +33,7 @@
       map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
-  parent: CMMagazinePistolBase
+  parent: CMBaseMagazinePistol
   id: CMMagazinePistol88m4AP
   name: 88M4 AP magazine (9mm)
   components:
@@ -44,7 +44,7 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CartridgePistol9mm
+      - CMCartridgePistol9mm
     proto: CMCartridgePistol88m4AP
     capacity: 19
   - type: Sprite

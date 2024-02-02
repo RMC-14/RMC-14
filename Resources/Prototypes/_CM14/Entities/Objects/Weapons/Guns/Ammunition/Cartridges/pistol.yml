@@ -4,14 +4,14 @@
   id: CMCartridgePistolBase
 
 - type: entity
-  id: CartridgePistol9mm
+  id: CMCartridgePistol9mm
   name: cartridge (9mm)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
     tags:
       - Cartridge
-      - CartridgePistol9mm
+      - CMCartridgePistol9mm
   - type: CartridgeAmmo
     proto: CMBulletPistol9mm
 
@@ -23,6 +23,18 @@
   - type: Tag
     tags:
     - Cartridge
-    - CartridgePistol9mm
+    - CMCartridgePistol9mm
   - type: CartridgeAmmo
     proto: CMBulletPistol88m4AP
+
+- type: entity
+  id: CMCartridgeRevolver44
+  name: cartridge (.44)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridgeRevolver44
+  - type: CartridgeAmmo
+    proto: CMBulletRevolver44

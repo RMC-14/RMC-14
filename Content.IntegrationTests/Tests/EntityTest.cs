@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using Content.Server.Humanoid.Components;
 using Content.Shared.Coordinates;
-using Content.Shared.Prototypes;
 using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects;
@@ -238,7 +236,10 @@ namespace Content.IntegrationTests.Tests
                 "AnnounceOnSpawn",
 
                 // Spreads weeds
-                "HiveCore"
+                "HiveCore",
+
+                // Creates requisitions account
+                "RequisitionsComputer"
             };
 
             Assert.That(server.CfgMan.GetCVar(CVars.NetPVS), Is.False);

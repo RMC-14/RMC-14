@@ -1,26 +1,32 @@
 - type: Tag
-  id: CartridgeCaseless10x20mm
+  id: CMCartridgeCaseless10x20mm
 
 - type: Tag
-  id: CartridgePistol9mm
+  id: CMCartridgePistol9mm
 
 - type: Tag
-  id: CartridgeRifle10x24mm
+  id: CMCartridgeRevolver44
 
 - type: Tag
-  id: MagazineCaselessM39
+  id: CMCartridgeRifle10x24mm
+
+- type: Tag
+  id: CMMagazineCaselessM39
 
 - type: Tag
   id: CMMagazinePistolM4A3
 
 - type: Tag
-  id: MagazineRifleM41A
+  id: CMMagazineRifleM41A
 
 - type: Tag
-  id: MagazineRifleM41AE2
+  id: CMMagazineRifleM41AE2
 
 - type: Tag
-  id: MagazineRifleM4RA
+  id: CMMagazineRifleM4RA
+
+- type: Tag
+  id: CMSpeedLoaderM44
 
 - type: Tag
   id: CMMortarShell

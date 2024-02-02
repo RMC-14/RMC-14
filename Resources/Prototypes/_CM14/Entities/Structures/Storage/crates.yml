@@ -20,6 +20,7 @@
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/basic.rsi
     state: icon
+  - type: RequisitionsCrate
 
 - type: entity
   parent: BaseStructureDynamic
