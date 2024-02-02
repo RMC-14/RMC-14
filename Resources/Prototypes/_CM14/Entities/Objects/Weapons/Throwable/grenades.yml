@@ -5,10 +5,7 @@
   id: M40HEDP
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Weapons/Throwables/m40hedp.rsi
-    layers:
-    - state: icon
-      map: ["enum.TriggerVisualLayers.Base"]
+    sprite: _CM14/Objects/Weapons/Grenades/m40hedp.rsi
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
@@ -38,12 +35,7 @@
   description: A grenade that does exactly what it says on the tin.
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Weapons/Throwables/m40smoke.rsi
-    layers:
-    - state: icon
-      map: ["enum.TriggerVisualLayers.Base"]
-  - type: Sprite
-    sprite: Objects/Weapons/Grenades/smoke.rsi
+    sprite: _CM14/Objects/Weapons/Grenades/m40smoke.rsi
   - type: SmokeOnTrigger
     duration: 30
     spreadAmount: 50
@@ -68,10 +60,7 @@
   description: Shrapnel. Shrapnel! WATCH OUT IT'S SHRAP-
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Weapons/Throwables/m40hefa.rsi
-    layers:
-    - state: icon
-      map: ["enum.TriggerVisualLayers.Base"]
+    sprite: _CM14/Objects/Weapons/Grenades/m40hefa.rsi
   - type: ClusterGrenade
     fillPrototype: ShrapnelProjectile
     maxGrenadesCount: 30
