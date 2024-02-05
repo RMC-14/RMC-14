@@ -121,7 +121,7 @@
     sprite: _CM14/Objects/Clothing/Pouches/bayonet.rsi
   - type: Storage
     grid:
-    - 0,0,5,1 #5 slots
+    - 0,0,4,1 #5 slots
     whitelist:
       tags:
       - Knife
@@ -656,15 +656,36 @@
     #whitelist: # todo cm14 add cassettes
 
 - type: entity
-  parent: CMPouch
+  parent: Clothing
   id: CMPouchMachete
   name: H6B pattern M2132 machete scabbard
   description: A large leather scabbard used to carry a M2132 machete. It can be strapped to the pouch slot.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Pouches/machete.rsi
-  - type: Storage
-    maxItemSize: Large
-    whitelist:
-      tags:
-      - Machete
+    state: sheath
+  - type: Item
+    size: Huge
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - pocket
+  - type: ItemSlots
+    slots:
+      item:
+        name: Machete
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        whitelist:
+          tags:
+          - Machete
+  - type: ItemMapper
+    mapLayers:
+      sheath-sabre:
+        whitelist:
+          tags:
+          - Machete
+  - type: Appearance
+  - type: Tag
+    tags:
+    - Pouch
