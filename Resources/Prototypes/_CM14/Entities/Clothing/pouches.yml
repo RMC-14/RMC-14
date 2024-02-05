@@ -681,7 +681,7 @@
           - Machete
   - type: ItemMapper
     mapLayers:
-      sheath-sabre:
+      sheath-machete:
         whitelist:
           tags:
           - Machete
