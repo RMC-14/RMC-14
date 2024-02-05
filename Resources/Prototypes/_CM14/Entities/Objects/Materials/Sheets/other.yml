@@ -11,11 +11,8 @@
     state: phoron
   - type: Item
     sprite: _CM14/Objects/Materials/Sheets/phoron.rsi
-    helfPrefix: phoron
+    heldPrefix: phoron
   - type: Material
-  - type: PhysicalComposition
-    materialComposition:
-      CMPhoron: 100
   - type: Stack
     stackType: CMPhoron
     count: 50

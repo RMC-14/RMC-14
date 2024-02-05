@@ -19,9 +19,6 @@
   - type: Item
     sprite: _CM14/Objects/Materials/Sheets/glass.rsi
     heldPrefix: glass
-  - type: PhysicalComposition
-    materialComposition:
-      CMGlass: 100
   - type: Stack
     stackType: CMGlass
     count: 50
@@ -62,9 +59,6 @@
   - type: Item
     sprite: _CM14/Objects/Materials/Sheets/reinf_glass.rsi
     heldPrefix: rglass
-  - type: PhysicalComposition
-    materialComposition:
-      CMGlassReinforced: 100
   - type: Stack
     stackType: CMGlassReinforced
     count: 50
@@ -105,9 +99,6 @@
   - type: Item
     sprite: _CM14/Objects/Materials/Sheets/phoron_glass.rsi
     heldPrefix: phoronglass
-  - type: PhysicalComposition
-    materialComposition:
-      CMGlassPhoron: 100
   - type: Stack
     stackType: CMGlassPhoron
     count: 50
@@ -148,9 +139,6 @@
   - type: Item
     sprite: _CM14/Objects/Materials/Sheets/phoron_reinf_glass.rsi
     heldPrefix: phoronrglass
-  - type: PhysicalComposition
-    materialComposition:
-      CMGlassPhoronReinforced: 100
   - type: Stack
     stackType: CMGlassPhoronReinforced
     count: 50
