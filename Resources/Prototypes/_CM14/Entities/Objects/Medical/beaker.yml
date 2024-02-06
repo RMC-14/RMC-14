@@ -1,0 +1,21 @@
+- type: entity
+  parent: Beaker
+  id: CMBeaker
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Medical/beaker.rsi
+  - type: Item
+    sprite: _CM14/Objects/Medical/beaker.rsi
+  - type: SolutionContainerVisuals
+    maxFillLevels: 4
+
+- type: entity
+  parent: LargeBeaker
+  id: CMBeakerLarge
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Medical/large_beaker.rsi
+  - type: Item
+    sprite: _CM14/Objects/Medical/large_beaker.rsi
+  - type: SolutionContainerVisuals
+    maxFillLevels: 5
