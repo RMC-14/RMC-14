@@ -656,7 +656,7 @@
     #whitelist: # todo cm14 add cassettes
 
 - type: entity
-  parent: Clothing
+  parent: [Clothing, ClothingSlotBase]
   id: CMPouchMachete
   name: H6B pattern M2132 machete scabbard
   description: A large leather scabbard used to carry a M2132 machete. It can be strapped to the pouch slot.
