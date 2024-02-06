@@ -74,7 +74,7 @@
       conditions:
       - !type:EntityAnchored {}
       steps:
-      - material: ReinforcedGlass
+      - material: CMGlassReinforced
         amount: 1
         doAfter: 2
     - to: wired
@@ -93,7 +93,7 @@
       conditions:
       - !type:EntityAnchored {}
       steps:
-      - material: ReinforcedGlass
+      - material: CMGlassReinforced
         amount: 1
         doAfter: 2
       - tool: Screwing
@@ -104,7 +104,7 @@
       completed:
       - !type:EmptyAllContainers {}
       - !type:SpawnPrototype
-        prototype: SheetRGlass1
+        prototype: CMSheetGlassReinforced1
         amount: 1
       steps:
       - tool: Prying
@@ -152,7 +152,7 @@
       - !type:AllWiresCut
       completed:
       - !type:SpawnPrototype
-        prototype: SheetRGlass1
+        prototype: CMSheetGlassReinforced1
         amount: 1
       steps:
       - tool: Prying
