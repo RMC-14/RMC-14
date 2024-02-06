@@ -17,7 +17,7 @@
       - !type:SetAnchor
         value: false
       steps:
-      - material: Plasteel
+      - material: CMPlasteel
         amount: 4
         doAfter: 2
 
@@ -31,7 +31,7 @@
       conditions:
       - !type:EntityAnchored {}
       steps:
-      - material: Glass
+      - material: CMGlass
         amount: 5
         doAfter: 1
     - to: start
@@ -63,7 +63,7 @@
         anchored: false
       completed:
       - !type:SpawnPrototype
-        prototype: SheetGlass1
+        prototype: CMSheetGlass1
         amount: 5
       steps:
       - tool: Screwing
@@ -130,7 +130,7 @@
       conditions:
       - !type:EntityAnchored { }
       steps:
-      - material: ReinforcedGlass
+      - material: CMGlassReinforced
         amount: 5
         doAfter: 1
     - to: start
@@ -162,7 +162,7 @@
         anchored: false
       completed:
       - !type:SpawnPrototype
-        prototype: SheetRGlass1
+        prototype: CMSheetGlassReinforced1
         amount: 5
       steps:
       - tool: Screwing

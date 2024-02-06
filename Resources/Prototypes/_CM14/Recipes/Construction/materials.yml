@@ -4,7 +4,40 @@
   graph: BarbedWireGraph
   startNode: start
   targetNode: nodeBarbedWire
-  category: construction-category-materials
+  category: construction-category-cm-materials
   description: Create barbed wire to decorate your barricades.
   icon: { sprite: _CM14/Objects/barbed_wire.rsi, state: barbed_wire }
+  objectType: Item
+
+- type: construction
+  id: CMSheetGlassReinforced
+  name: reinforced glass
+  description: A reinforced sheet of glass.
+  graph: CMGlass
+  startNode: start
+  targetNode: SheetGlassReinforced
+  category: construction-category-cm-materials
+  icon: { sprite: _CM14/Objects/Materials/Sheets/reinf_glass.rsi, state: rglass }
+  objectType: Item
+
+- type: construction
+  id: CMSheetGlassPhoron
+  name: phoron glass
+  description: A sheet of translucent phoron.
+  graph: CMGlass
+  startNode: start
+  targetNode: SheetGlassPhoron
+  category: construction-category-cm-materials
+  icon: { sprite: _CM14/Objects/Materials/Sheets/phoron_glass.rsi, state: phoronglass }
+  objectType: Item
+
+- type: construction
+  id: CMSheetGlassPhoronReinforced
+  name: reinforced phoron glass
+  description: A reinforced sheet of translucent phoron.
+  graph: CMGlass
+  startNode: start
+  targetNode: SheetGlassPhoronReinforced
+  category: construction-category-cm-materials
+  icon: { sprite: _CM14/Objects/Materials/Sheets/phoron_reinf_glass.rsi, state: phoronrglass }
   objectType: Item
