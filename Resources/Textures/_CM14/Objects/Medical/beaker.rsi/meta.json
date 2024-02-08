@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/c268b16daf2e8da819958cdc7d02e7f906c370cd/icons/obj/items/chemistry.dmi, https://github.com/cmss13-devs/cmss13/blob/dc8046f4a14983d619164cfbac2644fddff9d11e/icons/mob/humans/onmob/items_righthand_0.dmi, https://github.com/cmss13-devs/cmss13/blob/dc8046f4a14983d619164cfbac2644fddff9d11e/icons/mob/humans/onmob/items_lefthand_0.dmi, beaker1-4 created by @tunguso4ka",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "beaker"
+    },
+    {
+      "name": "beaker1"
+    },
+    {
+      "name": "beaker2"
+    },
+    {
+      "name": "beaker3"
+    },
+    {
+      "name": "beaker4"
+    },
+    {
+      "name": "inhand-right"
+    },
+    {
+      "name": "inhand-left"
+    }
+  ]
+}
