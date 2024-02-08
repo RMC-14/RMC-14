@@ -2,6 +2,6 @@
   id: CMVendorWalkman
   startingInventory:
     #todo cm14 Walkman and music
-    Paper: 15
+    CMPaper: 15
     d20Dice: 10
-    Pen: 10
+    CMPen: 10
