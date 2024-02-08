@@ -148,5 +148,14 @@
   id: 22
   time: '2024-02-08T06:14:33.0000000+00:00'
   url: https://api.github.com/repos/CM-14/CM-14/pulls/969
+- author: MetalSage
+  changes:
+  - message: Added M2132 machete
+    type: Add
+  - message: Added M11 throwing knife
+    type: Add
+  id: 23
+  time: '2024-02-08T06:32:57.0000000+00:00'
+  url: https://api.github.com/repos/CM-14/CM-14/pulls/967
 Name: CM
 Order: -1
