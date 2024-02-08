@@ -1,4 +1,14 @@
 - type: entity
+  parent: CMPouchBayonet
+  id: CMPouchBayonetFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMM11Knife
+      amount: 5
+
+- type: entity
   parent: CMPouchSurvival
   id: CMPouchSurvivalFill
   suffix: Filled
@@ -212,3 +222,13 @@
     - id: CableApcStack
     - id: CMMultitool
     - id: CMWrench
+
+- type: entity
+  parent: CMPouchMachete
+  id: CMPouchMacheteFill
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - CMM2132Machete

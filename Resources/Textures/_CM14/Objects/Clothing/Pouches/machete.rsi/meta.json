@@ -8,10 +8,10 @@
   },
   "states": [
     {
-      "name": "icon"
+      "name": "sheath"
     },
     {
-      "name": "knife"
+      "name": "sheath-machete"
     }
   ]
 }
