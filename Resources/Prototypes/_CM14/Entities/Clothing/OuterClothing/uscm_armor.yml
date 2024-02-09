@@ -116,6 +116,27 @@
 
 - type: entity
   parent: ArmorMarineM3
+  id: CMArmorM3T
+  name: M3-T
+  description: A custom set of M3 armor designed for users of long ranged explosive weaponry.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/t.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/t.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.85
+        Slash: 0.85
+        Piercing: 0.5
+        Heat: 0.9
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+
+
+- type: entity
+  parent: ArmorMarineM3
   id: CMArmorM3Light
   name: M3-L Pattern Light Armor
   description: A lighter, cut down version of the standard M3 pattern armor. It sacrifices protection for more speed. Protects more against acid.
