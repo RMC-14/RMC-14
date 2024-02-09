@@ -117,7 +117,7 @@
 - type: entity
   parent: ArmorMarineM3
   id: CMArmorM3T
-  name: M3-T
+  name: M3-T Light Armor
   description: A custom set of M3 armor designed for users of long ranged explosive weaponry.
   components:
   - type: Sprite
@@ -132,7 +132,7 @@
         Piercing: 0.5
         Heat: 0.9
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.8
 
 
 - type: entity
