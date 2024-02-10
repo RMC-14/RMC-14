@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: ComputerCargoOrders
   id: CMASRSConsole
   name: ASRS console
@@ -86,7 +86,15 @@
       - cost: 3000
         crate: CMCrateAttachmentSmgStock
     - name: Clothing
-      entries: []
+      entries:
+      - cost: 2000
+        crate: CMCrateClothingLargePouches
+      - cost: 2000
+        crate: CMCrateClothingMedicalPouches
+      - cost: 2000
+        crate: CMCrateClothingWebbing
+      - cost: 3000
+        crate: CMCrateClothingOfficerOutfit
     - name: Engineering
       entries: []
     - name: Explosives
