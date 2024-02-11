@@ -144,10 +144,10 @@
     - id: CMBurnKit
       amount: 2
     # todo cm14 autoinjectors oxycodone x2
-    - id: CMEmergencyInjector
-      amount: 1
 #    - id: CMOxycodoneAutoInjector
 #      amount: 2
+    - id: CMEmergencyInjector
+      amount: 1
 
 - type: entity
   parent: CMPouchFirstResponder
