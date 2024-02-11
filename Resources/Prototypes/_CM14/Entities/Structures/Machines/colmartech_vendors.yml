@@ -334,7 +334,7 @@
       #  amount: 25
     - name: Utilities
       entries:
-      - id: CMM5Bayonet
+      - id: CMM5Bayonet # TODO CM14 not the night raider's bayonet
         amount: 25
       #- id: CMMarkingFlarePackM94
       #  amount: 10
