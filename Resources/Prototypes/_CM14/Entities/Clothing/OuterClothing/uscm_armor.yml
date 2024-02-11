@@ -82,15 +82,15 @@
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/b12.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/b12.rsi
-    - type: Armor
-      modifiers:
-        coefficients:
-          Blunt: 0.75
-          Slash: 0.75
-          Piercing: 0.4
-          Heat: 0.9
-    - type: ExplosionResistance
-      damageCoefficient: 0.8
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.75
+        Slash: 0.75
+        Piercing: 0.4
+        Heat: 0.9
+  - type: ExplosionResistance
+    damageCoefficient: 0.8
 
 - type: entity
   parent: ArmorMarineM3
@@ -102,15 +102,15 @@
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/eod.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/eod.rsi
-    - type: Armor
-      modifiers:
-        coefficients:
-          Blunt: 0.6
-          Slash: 0.6
-          Piercing: 0.35
-          Heat: 0.8
-    - type: ExplosionResistance
-      damageCoefficient: 0.75
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.35
+        Heat: 0.8
+  - type: ExplosionResistance
+    damageCoefficient: 0.75
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.75
