@@ -164,5 +164,12 @@
   id: 24
   time: '2024-02-08T10:44:46.0000000+00:00'
   url: https://api.github.com/repos/CM-14/CM-14/pulls/975
+- author: Verification31
+  changes:
+  - message: Clothing crates have been added to the game.
+    type: Add
+  id: 25
+  time: '2024-02-11T07:08:22.0000000+00:00'
+  url: https://api.github.com/repos/CM-14/CM-14/pulls/977
 Name: CM
 Order: -1
