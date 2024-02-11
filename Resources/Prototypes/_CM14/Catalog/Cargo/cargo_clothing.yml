@@ -31,7 +31,7 @@
 - type: cargoProduct
   id: CMCargoClothingOfficerOutfit
   icon:
-    sprite: _CM14/Objects/Clothing/Uniforms/Jumpsuit/ro.rsi
+    sprite: _CM14/Objects/Clothing/Uniforms/ro.rsi
     state: icon
   product: CMCrateClothingOfficerOutfit
   cost: 3000
