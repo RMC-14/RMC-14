@@ -99,4 +99,21 @@
     - state: pill5
       map: [ "enum.DamageStateVisualLayers.Base" ]
 
-# TODO CM14 peridaxon, tramadol
+- type: entity
+  parent: CMPill
+  id: CMPillTricordrazine
+  name: Tricordrazine pill (15u)
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Tricordrazine
+          Quantity: 15
+  - type: Sprite
+    layers:
+    - state: pill5
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+
+        # TODO CM14 peridaxon, tramadol

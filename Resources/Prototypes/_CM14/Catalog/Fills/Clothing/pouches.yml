@@ -17,12 +17,12 @@
     contents:
     - id: FlashlightLantern
     - id: CMCrowbarRed
-      # todo cm14 tricordrazine pill canister
-    - id: Brutepack
+    - id: CMPillCanisterTricordrazine
+    - id: CMTraumaKit
     - id: RadioHandheld
-      # bayonet
+    - id: CMM5Bayonet
       # splint
-      
+
 - type: entity
   parent: CMPouchSurvivalSynth
   id: CMPouchSurvivalSynthFill
@@ -35,17 +35,21 @@
     - id: CMWelder
     - id: CableApcStack
     - id: RadioHandheld
-      # bayonet
+    - id: CMM5Bayonet
 
 - type: entity
   parent: CMPouchFirstAid
   id: CMPouchFirstAidInjectors
-  description: Contains a painkiller autoinjector, first-aid autoinjector, some ointment, and some bandages.
+  description: Contains a painkiller autoinjector, first-aid autoinjector, some Burn kits, and some bandages.
   suffix: Injectors
   components:
   - type: StorageFill
     contents:
-    - id: Brutepack # todo cm14 autoinjectors bicard, kelotane, tramadol, emerg
+    - id: CMTraumaKit # todo cm14 tramadol
+    - id: CMBicaridineAutoInjector
+    - id: CMKelotaneAutoInjector
+    #- id: CMTramadolAutoInjector
+    - id: CMEmergencyInjector
 
 - type: entity
   parent: CMPouchFirstAidInjectors
@@ -54,19 +58,23 @@
   components:
   - type: StorageFill
     contents:
-    # todo cm14 autoinjector tricord
-    - id: Brutepack
-    - id: Ointment
+    - id: CMTricordrazineInjector
+    - id: CMTraumaKit
+    - id: CMBurnKit
     # splint
 
 - type: entity
   parent: CMPouchFirstAidInjectors
   id: CMPouchFirstAidPills
-  suffix: Pils
+  suffix: Pills
   components:
   - type: StorageFill
     contents:
-    - id: Brutepack # todo cm14 pill canisters bicard, kelotane, tramadol x2
+    - id: CMTraumaKit # todo cm14 pill canisters tramadol x2
+    - id: CMPillCanisterKelotane
+    - id: CMPillCanisterBicaridine
+    #- id: CMTramadolAutoInjector
+    #- id: CMTramadolAutoInjector
 
 - type: entity
   parent: CMPouchFirstAidERT
@@ -75,7 +83,11 @@
   components:
   - type: StorageFill
     contents:
-    - id: Brutepack # todo cm14 autoinjectors like in Injectors First Aid
+    - id: CMTraumaKit # todo cm14 tramadol
+    - id: CMBicaridineAutoInjector
+    - id: CMKelotaneAutoInjector
+    #- id: CMTramadolAutoInjector
+    - id: CMEmergencyInjector
 
 - type: entity
   parent: CMPouchMedical
@@ -84,10 +96,10 @@
   components:
   - type: StorageFill
     contents:
-    - id: HandheldHealthAnalyzer
+    - id: CMHealthAnalyzer
       # splint
-    - id: Ointment
-    - id: Brutepack
+    - id: CMBurnKit
+    - id: CMTraumaKit
 
 - type: entity
   parent: CMPouchMedical
@@ -96,20 +108,27 @@
   components:
   - type: StorageFill
     contents:
-    - id: Brutepack # todo cm14 pill cans tramadol, bicard, kelotane, dexalin
+    - id: CMTraumaKit # todo cm14 pill can tramadol
+    - id: CMPillCanisterKelotane
+    - id: CMPillCanisterBicaridine
+    - id: CMPillCanisterDexalin
 
 - type: entity
   parent: CMPouchMedicalSoc
   id: CMPouchMedicalSocFill
   suffix: Filled
   components:
-  - type: StorageFill
+  - type: StorageFill # todo cm14 autoinjectors oxycodone
     contents:
-    - id: HandheldHealthAnalyzer
+    - id: CMHealthAnalyzer
       # splint
-    - id: Brutepack
-    - id: Ointment
-    # todo cm14 autoinjectors bicard, kelotane, oxycodone, emergency x2
+    - id: CMTraumaKit
+    - id: CMBurnKit
+    - id: CMKelotaneAutoInjector
+    - id: CMBicaridineAutoInjector
+    #- id: CMOxycodoneAutoInjector
+    - id: CMEmergencyInjector
+    - id: CMEmergencyInjector
 
 - type: entity
   parent: CMPouchMedicalSocDutch
@@ -118,14 +137,18 @@
   components:
   - type: StorageFill
     contents:
-    - id: HandheldHealthAnalyzer
+    - id: CMHealthAnalyzer
       # splint x2
-    - id: Brutepack
+    - id: CMTraumaKit
       amount: 2
-    - id: Ointment
+    - id: CMBurnKit
       amount: 2
-    # todo cm14 autoinjectors oxycodone x2, emergency
-  
+    # todo cm14 autoinjectors oxycodone x2
+    - id: CMEmergencyInjector
+      amount: 1
+#    - id: CMOxycodoneAutoInjector
+#      amount: 2
+
 - type: entity
   parent: CMPouchFirstResponder
   id: CMPouchFirstResponderFill
@@ -133,7 +156,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: HandheldHealthAnalyzer
+    - id: CMHealthAnalyzer
     # todo cm14 roller cryobag
 
 - type: entity
@@ -162,12 +185,19 @@
   suffix: Filled
   components:
   - type: StorageFill
-    contents:
-    - id: Brutepack # todo cm14 autoinjectors bicard x2, kelo x2, tramad x2, emerg
+    contents: # todo cm14 autoinjectors kelo x2, tramad x2, emerg
+    - id: CMBicaridineAutoInjector
+      amount: 2
+    - id: CMKelotaneAutoInjector
+      amount: 2
+#    - id: CMTramadolAutoInjector
+#      amount: 2
+    - id: CMEmergencyInjector
+      amount: 1
 
 - type: entity
   parent: CMPouchSyringe
-  id: CMPouchSyrinheFill
+  id: CMPouchSyringeFill
   suffix: Filled
   components:
   - type: StorageFill
@@ -182,11 +212,12 @@
   components:
   - type: StorageFill
     contents:
-    - id: Brutepack
-    - id: Ointment
+    - id: CMTraumaKit
+    - id: CMBurnKit
     # splint
-    # autoinjectors
-  
+    - id: CMBicaridineAutoInjector
+    - id: CMKelotaneAutoInjector
+
 - type: entity
   parent: CMPouchFlare
   id: CMPouchFlareFill

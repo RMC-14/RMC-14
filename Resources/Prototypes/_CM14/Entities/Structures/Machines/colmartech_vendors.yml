@@ -167,8 +167,8 @@
       #  amount: 1
     - name: Tools
       entries:
-      #- id: CMEntrenchingTool
-      #  amount: 2
+      - id: CMEntrenchingTool
+        amount: 2
       - id: CMScrewdriver
         amount: 5
       - id: CMWirecutter
@@ -335,7 +335,7 @@
     - name: Utilities
       entries:
       - id: CMM5Bayonet
-        amount: 25 # TODO CM14 not the night raider's bayonet
+        amount: 25
       #- id: CMMarkingFlarePackM94
       #  amount: 10
 
