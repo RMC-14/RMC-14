@@ -12,7 +12,7 @@
   weight: 2
   name: item-component-size-Small
   defaultShape:
-  - 0,0,3,3
+  - 0,0,0,1
 
 # Items that can fit inside of a standard bag.
 - type: itemSize
