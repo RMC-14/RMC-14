@@ -7,16 +7,29 @@
   - type: Tag
     tags:
     - Flare
-    glowDuration: 545
-    fadeOutDuration: 15
+    glowDuration: 530 # lasts a lot longer, 10 minutes :godo:
+    fadeOutDuration: 30
   - type: Sprite
     sprite: _CM14/Objects/Misc/flares.rsi
     layers:
-      - map: [ enum.ExpendableLightVisualLayers.Glow ]
-        state: flare_burn
-        color: "#FFcccc"
-        visible: false
-        shader: unshaded
       - map: [ enum.ExpendableLightVisualLayers.Overlay ]
         state: flare_unlit
-        color: "#FF0000"
+        color: "#FFcccc"
+      - map: [ enum.ExpendableLightVisualLayers.Glow ]
+        state: flare_burn
+        color: "#FF5050"
+        visible: false
+        shader: unshaded
+  - type: Icon
+    sprite: _CM14/Objects/Misc/flares.rsi
+    behaviours:
+      - !type:FadeBehaviour # faster then base flares
+        id: turn_on
+        maxDuration: 15.0
+        startValue: 2.5
+        endValue: 15.0
+      - !type:FadeBehaviour # burns out slower
+        id: fade_out
+        maxDuration: 30.0
+        startValue: 15.0
+        endValue: 1.0
