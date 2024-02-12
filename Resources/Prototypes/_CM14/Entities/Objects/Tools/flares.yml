@@ -1,0 +1,22 @@
+- type: entity
+  name: m94 flare
+  parent: Flare
+  id: CMMarkerFlare
+  description: A red USCM issued flare. There are instructions on the side, it reads 'pull cord, make light'.
+  components:
+  - type: Tag
+    tags:
+    - Flare
+    glowDuration: 545
+    fadeOutDuration: 15
+  - type: Sprite
+    sprite: _CM14/Objects/Misc/flares.rsi
+    layers:
+      - map: [ enum.ExpendableLightVisualLayers.Glow ]
+        state: flare_burn
+        color: "#FFcccc"
+        visible: false
+        shader: unshaded
+      - map: [ enum.ExpendableLightVisualLayers.Overlay ]
+        state: flare_unlit
+        color: "#FF0000"
