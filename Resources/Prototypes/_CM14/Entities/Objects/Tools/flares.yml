@@ -55,9 +55,9 @@
         id: turn_on
         maxDuration: 5.0
         startValue: 2.5
-        endValue: 15.0
+        endValue: 12.0
       - !type:FadeBehaviour # burns out slower
         id: fade_out
         maxDuration: 30.0
-        startValue: 15.0
+        startValue: 12.0
         endValue: 1.0
