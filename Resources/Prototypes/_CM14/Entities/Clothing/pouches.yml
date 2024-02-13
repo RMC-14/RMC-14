@@ -543,7 +543,7 @@
     sprite: _CM14/Objects/Clothing/Pouches/radio.rsi
   - type: Storage
     grid:
-    - 0,0,1,1 #2 slots
+    - 0,0,1,1 #2x2 slot, holds 2 radio phones
     whitelist:
       tags:
       - Radio
