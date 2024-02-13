@@ -11,6 +11,9 @@
       "name": "icon"
     },
     {
+      "name": "flare_base"
+    },
+    {
       "name": "flare_spent"
     },
     {
