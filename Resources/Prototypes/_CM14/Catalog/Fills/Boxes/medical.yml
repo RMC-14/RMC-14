@@ -1,0 +1,67 @@
+- type: entity
+  name: sterile mask box
+  parent: CMBoxCardboard
+  id: CMBoxSterileMask
+  description: This box contains sterile medical masks.
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMClothingMaskSterile
+        amount: 7
+  - type: Sprite
+    state: sterile
+
+- type: entity
+  name: latex gloves box
+  parent: CMBoxCardboard
+  id: CMBoxLatexGloves
+  description: Contains sterile latex gloves.
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMHandsLatex
+        amount: 7
+  - type: Sprite
+    state: latex
+
+- type: entity
+  name: body bag box
+  parent: CMBoxCardboard
+  id: CMBoxBodyBag
+  description: Contains body bags.
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMBodyBagFolded
+        amount: 7
+  - type: Sprite
+    state: bodybags
+    whitelist:
+      tags:
+        - BodyBag
+
+- type: entity
+  name: box of pill bottles
+  parent: CMBoxCardboard
+  id: CMBoxPillCanister
+  description: It has pictures of pill bottles on its front.
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMPillCanister
+        amount: 7
+  - type: Sprite
+    state: pillbox
+
+- type: entity
+  name: box of syringes
+  parent: CMBoxCardboard
+  id: CMBoxSyringe
+  description: A biohazard alert warning is printed on the box
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMSyringe
+        amount: 7
+  - type: Sprite
+    state: syringe
