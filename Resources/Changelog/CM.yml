@@ -171,5 +171,12 @@
   id: 25
   time: '2024-02-11T07:08:22.0000000+00:00'
   url: https://api.github.com/repos/CM-14/CM-14/pulls/977
+- author: MetalSage
+  changes:
+  - message: Added Medical Requisitions
+    type: Add
+  id: 26
+  time: '2024-02-21T18:00:02.0000000+00:00'
+  url: https://api.github.com/repos/CM-14/CM-14/pulls/983
 Name: CM
 Order: -1
