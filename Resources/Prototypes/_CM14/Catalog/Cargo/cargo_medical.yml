@@ -34,7 +34,7 @@
     sprite: _CM14/Structures/Storage/Crates/medical.rsi
     state: icon
   product: CMCrateMedicalFirstAid
-  cost: 1600
+  cost: 3200 # cost should be 1600 but the items can be sold for more
   category: Medical
   group: market
 
