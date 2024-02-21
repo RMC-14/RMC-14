@@ -56,7 +56,7 @@
   name: medical crate
   components:
   - type: StorageFill
-    contents:
+    contents: # TODO CM14 missing bottles
       - id: CMBoxPillCanister
       - id: CMBoxSyringe
       - id: CMBottleInaprovaline
