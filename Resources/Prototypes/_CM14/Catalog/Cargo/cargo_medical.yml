@@ -22,7 +22,7 @@
   id: CMCargoMedicalStasisBag
   icon:
     sprite: _CM14/Structures/Storage/Crates/medical.rsi
-    state: webbing
+    state: icon
   product: CMCrateMedicalStasisBag
   cost: 1200
   category: Medical
