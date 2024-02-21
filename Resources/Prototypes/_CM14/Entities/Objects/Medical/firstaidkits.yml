@@ -131,3 +131,30 @@
     - id: CMBurnKit10
       amount: 2
 #    - id: CMMedicalSplints5
+
+- type: entity
+  parent: CMFirstAidKit
+  id: CMToxinAidKit
+  name: toxin first-aid kit
+  description: It's an emergency medical kit containing lifesaving anti-toxic medication. With medical training you can fit this in a backpack.
+  components:
+  - type: Sprite
+    layers:
+    - state: antitox
+    - state: kit_empty
+      map: [ "openLayer" ]
+      visible: false
+  - type: Item
+    heldPrefix: antitox
+
+- type: entity
+  parent: CMToxinAidKit
+  id: CMToxinAidKitFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMHealthAnalyzer
+    - id: CMPillCanisterDylovene
+    - id: CMPillDexalin
+      amount: 3

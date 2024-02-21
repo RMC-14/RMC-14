@@ -1,0 +1,26 @@
+- type: entity
+  id: CMAnestheticTankFilled
+  parent: CMAnestheticTank
+  suffix: Filled
+  components:
+  - type: GasTank
+    #      0.21  | % oxygen in normal atmosphere
+    #  /   0.7   | % oxygen in this mixture
+    #  * 101.325 | one atmosphere
+    # __________
+    #    30.3975   optimal output pressure
+    outputPressure: 30.4
+    air:
+      # only 22 minutes due to pressure
+      volume: 5
+      moles:
+        - 1.435965335 # 70% oxygen
+        - 0 # nitrogen
+        - 0 # CO2
+        - 0 # plasma
+        - 0 # tritium
+        - 0 # water vapor
+        - 0 # ammonia
+        - 0.615413715 # 30% N2O
+        # 2.051379050       total
+      temperature: 293.15
