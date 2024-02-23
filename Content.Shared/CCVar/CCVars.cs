@@ -1663,6 +1663,12 @@ namespace Content.Shared.CCVar
         public static readonly CVarDef<bool> ICShowSSDIndicator =
             CVarDef.Create("ic.show_ssd_indicator", true, CVar.CLIENTONLY);
 
+        /// <summary>
+        /// Controls whether or not suiciding is allowed. This does not control ghosting.
+        /// </summary>
+        public static readonly CVarDef<bool> ICEnableSuicide =
+            CVarDef.Create("ic.enable_suicide", false, CVar.SERVER);
+
         /*
          * Salvage
          */

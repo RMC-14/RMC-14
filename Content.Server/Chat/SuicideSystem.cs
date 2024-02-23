@@ -1,5 +1,6 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Popups;
+using Content.Shared.CCVar;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Database;
@@ -10,6 +11,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
+using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
@@ -24,9 +26,32 @@ namespace Content.Server.Chat
         [Dependency] private readonly TagSystem _tagSystem = default!;
         [Dependency] private readonly MobStateSystem _mobState = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
+        [Dependency] private readonly IConfigurationManager _configuration = default!;
+
+        private bool _canSuicide = false;
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            _configuration.OnValueChanged(CCVars.ICEnableSuicide, OnSuicideEnabledChanged, true);
+        }
+
+        private void OnSuicideEnabledChanged(bool enabled)
+        {
+            _canSuicide = enabled;
+        }
+
+        public override void Shutdown()
+        {
+            base.Shutdown();
+            _configuration.UnsubValueChanged(CCVars.ICEnableSuicide, OnSuicideEnabledChanged);
+        }
 
         public bool Suicide(EntityUid victim)
         {
+            if (!_canSuicide)
+                return false;
+
             // Checks to see if the CannotSuicide tag exits, ghosts instead.
             if (_tagSystem.HasTag(victim, "CannotSuicide"))
                 return false;
