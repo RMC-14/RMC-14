@@ -178,5 +178,12 @@
   id: 26
   time: '2024-02-21T18:00:02.0000000+00:00'
   url: https://api.github.com/repos/CM-14/CM-14/pulls/983
+- author: Simyon
+  changes:
+  - message: Suiciding will now result in ghosting, keeping your body alive.
+    type: Tweak
+  id: 27
+  time: '2024-02-24T22:26:31.0000000+00:00'
+  url: https://api.github.com/repos/CM-14/CM-14/pulls/990
 Name: CM
 Order: -1
