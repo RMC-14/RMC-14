@@ -110,6 +110,5 @@
       sprite: _CM14/Actions/xeno_actions.rsi
       state: queen_word
     event: !type:XenoWordQueenActionEvent
-    range: 2
     useDelay: 10
   - type: XenoWordQueenAction
