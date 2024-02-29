@@ -57,7 +57,7 @@ These rules are neither exactly SS14 or CM13 and should be read in their entiret
 
 [color=#a4885c]15.[/color] Follow escalation rules and don't murder someone for annoying you, use common sense.
     - You can defend yourself to the extent of protecting your own life.
-    - Military Police may use less-lethal force to effect arrests of criminals.
+    - Military Police may use less-than-lethal force to effect arrests of criminals.
     - Don't outright leave people to die if you get in a fight, make an effort to heal them or bring them to Medbay.
     - Adminhelp the situation if you think someone is over-escalating.
 
@@ -163,7 +163,9 @@ This section of the rules covers everything else not already stated above.
     - Xenos, due to the hivemind, learn everything and understand human equipment at a basic level. They can understand a marine's role.
     - Xenos can sense the marine ships and are aware they may be attacked shortly.
 
-
-
-
-
+[color=#ff0000]HOSTILE FACTIONS[/color]
+    - You do not have rules of engagement and may fire at USCM forces if:
+        - You have not surrendered.
+        - You have not accepted medical aid from the USCM.
+        - You have not changed your faction uniform.
+        - You have remained hostile to USCM forces.
