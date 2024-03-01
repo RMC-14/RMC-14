@@ -180,6 +180,7 @@
   id: CMXenoPuller
   components:
   - type: Puller
+    needsHands: false
 
 - type: entity
   abstract: true
