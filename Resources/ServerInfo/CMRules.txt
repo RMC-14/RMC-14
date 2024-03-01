@@ -57,7 +57,7 @@ These rules are neither exactly SS14 or CM13 and should be read in their entiret
 
 [color=#a4885c]15.[/color] Follow escalation rules and don't murder someone for annoying you, use common sense.
     - You can defend yourself to the extent of protecting your own life.
-    - Military Police may use less-than-lethal force to effect arrests of criminals.
+    - Military Police may use less-lethal force to effect arrests of criminals.
     - Don't outright leave people to die if you get in a fight, make an effort to heal them or bring them to Medbay.
     - Adminhelp the situation if you think someone is over-escalating.
 
