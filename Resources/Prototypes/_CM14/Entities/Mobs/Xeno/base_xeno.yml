@@ -125,6 +125,8 @@
       type: XenoPheromonesBui
     - key: enum.XenoOrderConstructionUI.Key
       type: XenoOrderConstructionBui
+    - key: enum.XenoWordQueenUI.Key
+      type: XenoWordQueenBui
   - type: TypingIndicator
     proto: alien
   - type: AtmosExposed
