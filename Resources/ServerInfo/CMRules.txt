@@ -3,8 +3,6 @@
 [color=#ff0000]DISCONNECTING FROM OR IGNORING/EVADING ADMIN-HELPS WILL RESULT IN AN APPEAL ONLY BAN.[/color]
 This is to prevent bad actors from avoiding issues. If you need to leave urgently, let us know and it will be considered in your appeal.
 
-You can find clarifications of any ambiguity in the in game guidebook.
-
 These rules are neither exactly SS14 or CM13 and should be read in their entirety.
 
 [color=#ff0000]Recent Changes[/color]
@@ -60,7 +58,6 @@ These rules are neither exactly SS14 or CM13 and should be read in their entiret
     - Military Police may use less-lethal force to effect arrests of criminals.
     - Don't outright leave people to die if you get in a fight, make an effort to heal them or bring them to Medbay.
     - Adminhelp the situation if you think someone is over-escalating.
-
 
     [color=#a4885c]Regarding Mutinies:[/color] All players, including hostile forces, must obtain admin permission before engaging riots, mutinies or similar activity.
         - Strikes, revolutions, riots, cults, and any other type of similar largely disruptive behavior are strictly forbidden without permission.
