@@ -58,7 +58,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
         // TODO CM14 reduce crit damage
         SubscribeLocalEvent<XenoWardingPheromonesComponent, UpdateMobStateEvent>(OnWardingUpdateMobState,
-            after: new[] { typeof(MobThresholdSystem) });
+            after: [typeof(MobThresholdSystem)]);
         SubscribeLocalEvent<XenoWardingPheromonesComponent, ComponentRemove>(OnWardingRemove);
         SubscribeLocalEvent<XenoWardingPheromonesComponent, DamageModifyEvent>(OnWardingDamageModify);
 

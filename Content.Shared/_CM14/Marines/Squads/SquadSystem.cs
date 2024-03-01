@@ -7,7 +7,7 @@ public sealed class SquadSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<SquadMemberComponent, GetMarineIconEvent>(OnSquadRoleGetIcon,
-            before: new[] { typeof(SharedMarineSystem) });
+            before: [typeof(SharedMarineSystem)]);
     }
 
     private void OnSquadRoleGetIcon(Entity<SquadMemberComponent> member, ref GetMarineIconEvent args)
