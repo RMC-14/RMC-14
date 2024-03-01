@@ -62,6 +62,8 @@
   - type: Weldable
     time: 3
   - type: Airlock
+    openingSpriteState: unlit
+    closingSpriteState: unlit
   - type: DoorBolt
   - type: Appearance
   - type: WiresVisuals
@@ -126,6 +128,7 @@
     mode: NoSprite
   - type: PaintableAirlock
     group: Standard
+    department: Marine
   - type: AccessReader
   - type: StaticPrice
     price: 150

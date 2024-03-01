@@ -587,6 +587,7 @@
       # Tile
       # etool
       # sandbags
+      components:
       - LightReplacer
 
 - type: entity
@@ -612,12 +613,12 @@
       - PowerCell
       - Multitool
       - Flashlight
-      - LightReplacer
       components:
       - Welder
       - ComputerBoard
       - MachineBoard
       - MachinePart
+      - LightReplacer
 
 - type: entity
   parent: CMPouchTools

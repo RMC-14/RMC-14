@@ -3,12 +3,10 @@ using Content.Server._CM14.Marines;
 using Content.Server.Antag;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
-using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Mind;
 using Content.Server.Roles.Jobs;
 using Content.Shared._CM14.Marines.Squads;
 using Content.Shared._CM14.Xenos;
-using Content.Shared._CM14.Xenos.Hive;
 using Content.Shared.Coordinates;
 using Content.Shared.StatusIcon;
 using Robust.Shared.Console;
@@ -26,7 +24,6 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
 {
     [Dependency] private readonly AntagSelectionSystem _antagSelection = default!;
     [Dependency] private readonly IConsoleHost _console = default!;
-    [Dependency] private readonly XenoHiveSystem _hive = default!;
     [Dependency] private readonly JobSystem _jobs = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly MarineSystem _marines = default!;
@@ -47,11 +44,7 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
 
     private void OnStartAttempt(RoundStartAttemptEvent ev)
     {
-        var query = AllEntityQuery<CMRuleComponent, GameRuleComponent>();
-        while (query.MoveNext(out var uid, out _, out var gameRule))
-        {
-            _antagSelection.AttemptStartGameRule(ev, uid, gameRule.MinPlayers, gameRule);
-        }
+        TryRoundStartAttempt(ev, "Distress Signal");
     }
 
     private void OnPlayerSpawning(RulePlayerSpawningEvent ev)

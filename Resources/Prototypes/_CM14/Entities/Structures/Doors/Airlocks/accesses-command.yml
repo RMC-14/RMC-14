@@ -13,6 +13,8 @@
   components:
   - type: AccessReader
     access: [["CMAccessCommand"]]
+  - type: PaintableAirlock
+    department: MarineCommand
 
 - type: entity
   parent: CMAirlockCommand
