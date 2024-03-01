@@ -2,8 +2,9 @@ using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.Movement.Systems;
 using Robust.Shared.GameStates;
-using Robust.Shared.Utility;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
+
 namespace Content.Shared._CM14.Marines.Orders;
 
 public abstract class SharedMarineOrdersSystem : EntitySystem
@@ -44,14 +45,11 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         var damage = args.Damage.DamageDict;
         var multiplier = 1 + comp.DamageModifier;
 
-        var damageTypes = comp.DamageTypes.GetEnumerator();
-
-        while (damageTypes.MoveNext())
+        foreach (var type in comp.DamageTypes)
         {
-            if (damage.TryGetValue(damageTypes.Current, out var amount))
-                damage[damageTypes.Current] = amount * multiplier;
+            if (damage.TryGetValue(type, out var amount))
+                damage[type] = amount * multiplier;
         }
-
     }
     private void OnRefreshMovement(EntityUid uid, MoveOrderComponent comp, RefreshMovementSpeedModifiersEvent args)
     {
