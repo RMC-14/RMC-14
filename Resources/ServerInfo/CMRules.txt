@@ -59,7 +59,6 @@ These rules are neither exactly SS14 or CM13 and should be read in their entiret
     - Don't outright leave people to die if you get in a fight, make an effort to heal them or bring them to Medbay.
     - Adminhelp the situation if you think someone is over-escalating.
 
-
     [color=#a4885c]Regarding Mutinies:[/color] All players, including hostile forces, must obtain admin permission before engaging riots, mutinies or similar activity.
         - Strikes, revolutions, riots, cults, and any other type of similar largely disruptive behavior are strictly forbidden without permission.
         - Staff reserve the right to grant or deny mutinies, and to decide if the reason given is sufficient.
