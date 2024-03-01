@@ -14,6 +14,7 @@
   - type: Sprite
     sprite: _CM14/Objects/Consumable/Drinks/wy_water_bottle.rsi
     state: base
+    layers: []
   - type: Item
     size: Small
   - type: DamageOnLand

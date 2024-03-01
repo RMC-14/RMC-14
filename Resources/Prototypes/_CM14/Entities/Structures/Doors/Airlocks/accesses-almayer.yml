@@ -6,6 +6,8 @@
   components:
   - type: AccessReader
     access: [["CMAccessRequisitions"]]
+  - type: PaintableAirlock
+    department: Requisitions
 
 - type: entity
   parent: CMAirlockGlassEngineer
@@ -22,6 +24,8 @@
   components:
   - type: AccessReader
     access: [["CMAccessRequisitions"]]
+  - type: PaintableAirlock
+    department: Requisitions
 
 - type: entity
   parent: CMAirlock
@@ -30,6 +34,8 @@
   components:
   - type: AccessReader
     access: [["CMAccessKitchen"]]
+  - type: PaintableAirlock
+    department: Requisitions
 
 - type: entity
   parent: CMAirlockGlass
@@ -38,6 +44,8 @@
   components:
   - type: AccessReader
     access: [["CMAccessKitchen"]]
+  - type: PaintableAirlock
+    department: Requisitions
 
 - type: entity
   parent: CMAirlockMaint
@@ -46,6 +54,8 @@
   components:
   - type: AccessReader
     access: [["CMAccessKitchen"]]
+  - type: PaintableAirlock
+    department: Requisitions
 
 # Engi
 - type: entity
@@ -71,6 +81,8 @@
   components:
   - type: AccessReader
     access: [["CMAccessEngineering"]]
+  - type: PaintableAirlock
+    department: MarineEngineering
 
 - type: entity
   parent: CMAirlockEngineer
@@ -104,6 +116,8 @@
   components:
   - type: AccessReader
     access: [["CMAccessMedical"]]
+  - type: PaintableAirlock
+    department: MarineMedical
 
 - type: entity
   parent: CMAirlockMedical
@@ -129,6 +143,8 @@
   components:
   - type: AccessReader
     access: [["CMAccessPress"]]
+  - type: PaintableAirlock
+    department: Civilians
 
 - type: entity
   parent: CMAirlockGlass
@@ -137,6 +153,8 @@
   components:
   - type: AccessReader
     access: [["CMAccessPress"]]
+  - type: PaintableAirlock
+    department: Civilians
 
 - type: entity
   parent: CMAirlockMaint
@@ -145,3 +163,5 @@
   components:
   - type: AccessReader
     access: [["CMAccessPress"]]
+  - type: PaintableAirlock
+    department: Civilians
