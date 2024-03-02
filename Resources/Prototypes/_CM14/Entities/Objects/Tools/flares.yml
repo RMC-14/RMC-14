@@ -44,8 +44,8 @@
   - type: PointLight
     enabled: false
     color: "#FF5E5E"
-    radius: 1.0
-    energy: 9.0
+    radius: 1
+    energy: 5.0
     netsync: false
   - type: IgnitionSource
     temperature: 1000
@@ -55,9 +55,9 @@
         id: turn_on
         maxDuration: 5.0
         startValue: 2.5
-        endValue: 12.0
+        endValue: 7.0
       - !type:FadeBehaviour # burns out slower
         id: fade_out
         maxDuration: 30.0
-        startValue: 12.0
+        startValue: 7.0
         endValue: 1.0
