@@ -20,6 +20,9 @@
       "name": "flare_unlit"
     },
     {
+      "name": "storage"
+    },
+    {
       "name": "flare_burn",
       "delays": [
         [

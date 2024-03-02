@@ -39,7 +39,10 @@
   - type: Item
     sprite: _CM14/Objects/Misc/flares.rsi
     heldPrefix: unlit
-    size: Tiny
+    size: Small
+    storedSprite:
+      sprite: _CM14/Objects/Misc/flares.rsi
+      state: storage
   - type: Appearance
   - type: PointLight
     enabled: false
