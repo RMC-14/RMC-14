@@ -1,8 +1,18 @@
 ﻿- type: entity
-  id: CMXeno
+  id: CMDistressSignal
   parent: BaseGameRule
   noSpawn: true
   components:
   - type: GameRule
-    minPlayers: 1 # TODO CM14
+    minPlayers: 10
   - type: CMRule
+
+- type: entity
+  id: CMTestDistressSignal
+  parent: CMDistressSignal
+  noSpawn: true
+  components:
+  - type: GameRule
+    minPlayers: 1
+  - type: CMRule
+    playersPerXeno: 2
