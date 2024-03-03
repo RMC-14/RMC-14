@@ -6,6 +6,6 @@
     ProximitySensor: 4
     RemoteSignaller: 4
     Bucket: 6
-    MatterBinStockPart: 8
-    MicroManipulatorStockPart: 8
-    CapacitorStockPart: 8
+    CMStockPartMatterBin: 8
+    CMStockPartManipulatorMicro: 8
+    CMStockPartCapacitor: 8

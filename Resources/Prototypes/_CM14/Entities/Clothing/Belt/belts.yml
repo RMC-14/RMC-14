@@ -121,10 +121,11 @@
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Belt/knife.rsi
   - type: Storage
-    maxItemSize: Small
+    grid:
+    - 0,0,11,1 #12 slots
     whitelist:
       tags:
-      - SecBeltEquip
+      - Knife
 
 - type: entity
   parent: CMBeltBaseStorage

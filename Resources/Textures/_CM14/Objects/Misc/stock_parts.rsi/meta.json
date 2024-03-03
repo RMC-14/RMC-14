@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/794d6668d4d1d1f767241c70b2171cbe92215421/icons/obj/items/stock_parts.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "screen"
+    },
+    {
+      "name": "capacitor"
+    },
+    {
+      "name": "scan_module",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "micro_mani"
+    },
+    {
+      "name": "nano_mani"
+    },
+    {
+      "name": "pico_mani"
+    },
+    {
+      "name": "micro_laser"
+    },
+    {
+      "name": "high_micro_laser"
+    },
+    {
+      "name": "ultra_high_micro_laser"
+    },
+    {
+      "name": "matter_bin"
+    },
+    {
+      "name": "advanced_matter_bin"
+    },
+    {
+      "name": "super_matter_bin"
+    },
+    {
+      "name": "subspace_ansible"
+    },
+    {
+      "name": "hyperwave_filter"
+    },
+    {
+      "name": "subspace_amplifier"
+    },
+    {
+      "name": "treatment_disk"
+    },
+    {
+      "name": "wavelength_analyzer",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "ansible_crystal",
+      "delays": [
+        [
+          1.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "subspace_transmitter"
+    },
+    {
+      "name": "smes_coil",
+      "delays": [
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    }
+  ]
+}

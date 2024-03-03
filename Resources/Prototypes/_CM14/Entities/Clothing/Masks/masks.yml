@@ -8,3 +8,28 @@
     sprite: _CM14/Objects/Clothing/Mask/gas.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Mask/gas.rsi
+
+- type: entity
+  parent: ClothingMaskPullableBase
+  id: CMClothingMaskSterile
+  name: sterile mask
+  description: A sterile mask designed to help prevent the spread of diseases.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Mask/sterile.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Mask/sterile.rsi
+  - type: IngestionBlocker
+  - type: Item
+    storedRotation: -90
+
+- type: entity
+  parent: ClothingMaskGas
+  id: CMClothingMaskMedical
+  name: gas mask
+  description: A close-fitting sterile mask that can be connected to an air supply.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Mask/medical.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Mask/medical.rsi

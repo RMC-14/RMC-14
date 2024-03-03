@@ -133,5 +133,64 @@
   id: 20
   time: '2024-01-31T02:07:36.0000000+00:00'
   url: https://api.github.com/repos/CM-14/CM-14/pulls/961
+- author: Tunguso4ka
+  changes:
+  - message: Glass, Reinforced glass, phoron and phoron glass was ported from the
+      CM13.
+    type: Add
+  id: 21
+  time: '2024-02-06T06:09:16.0000000+00:00'
+  url: https://api.github.com/repos/CM-14/CM-14/pulls/968
+- author: Tunguso4ka
+  changes:
+  - message: Beakers has been added to the game!
+    type: Add
+  id: 22
+  time: '2024-02-08T06:14:33.0000000+00:00'
+  url: https://api.github.com/repos/CM-14/CM-14/pulls/969
+- author: MetalSage
+  changes:
+  - message: Added M2132 machete
+    type: Add
+  - message: Added M11 throwing knife
+    type: Add
+  id: 23
+  time: '2024-02-08T06:32:57.0000000+00:00'
+  url: https://api.github.com/repos/CM-14/CM-14/pulls/967
+- author: Tunguso4ka
+  changes:
+  - message: Stock parts have been ported.
+    type: Add
+  id: 24
+  time: '2024-02-08T10:44:46.0000000+00:00'
+  url: https://api.github.com/repos/CM-14/CM-14/pulls/975
+- author: Verification31
+  changes:
+  - message: Clothing crates have been added to the game.
+    type: Add
+  id: 25
+  time: '2024-02-11T07:08:22.0000000+00:00'
+  url: https://api.github.com/repos/CM-14/CM-14/pulls/977
+- author: MetalSage
+  changes:
+  - message: Added Medical Requisitions
+    type: Add
+  id: 26
+  time: '2024-02-21T18:00:02.0000000+00:00'
+  url: https://api.github.com/repos/CM-14/CM-14/pulls/983
+- author: Simyon
+  changes:
+  - message: Suiciding will now result in ghosting, keeping your body alive.
+    type: Tweak
+  id: 27
+  time: '2024-02-24T22:26:31.0000000+00:00'
+  url: https://api.github.com/repos/CM-14/CM-14/pulls/990
+- author: DrSmugleaf
+  changes:
+  - message: Added Word of the Queen action.
+    type: Add
+  id: 28
+  time: '2024-03-01T01:34:08.0000000+00:00'
+  url: https://api.github.com/repos/CM-14/CM-14/pulls/991
 Name: CM
 Order: -1

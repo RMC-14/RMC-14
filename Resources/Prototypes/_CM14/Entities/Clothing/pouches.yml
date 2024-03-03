@@ -121,7 +121,7 @@
     sprite: _CM14/Objects/Clothing/Pouches/bayonet.rsi
   - type: Storage
     grid:
-    - 0,0,5,1 #5 slots
+    - 0,0,4,1 #5 slots
     whitelist:
       tags:
       - Knife
@@ -537,13 +537,13 @@
   parent: CMPouchOpenClosed
   id: CMPouchRadio
   name: radio pouch
-  description: It can contain two handheld radios.
+  description: It can contain two radiophones.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Pouches/radio.rsi
   - type: Storage
     grid:
-    - 0,0,2,1 #2 slots
+    - 0,0,1,1 #2x2 slot, holds 2 radio phones
     whitelist:
       tags:
       - Radio
@@ -587,6 +587,7 @@
       # Tile
       # etool
       # sandbags
+      components:
       - LightReplacer
 
 - type: entity
@@ -612,12 +613,12 @@
       - PowerCell
       - Multitool
       - Flashlight
-      - LightReplacer
       components:
       - Welder
       - ComputerBoard
       - MachineBoard
       - MachinePart
+      - LightReplacer
 
 - type: entity
   parent: CMPouchTools
@@ -656,15 +657,36 @@
     #whitelist: # todo cm14 add cassettes
 
 - type: entity
-  parent: CMPouch
+  parent: [Clothing, ClothingSlotBase]
   id: CMPouchMachete
   name: H6B pattern M2132 machete scabbard
   description: A large leather scabbard used to carry a M2132 machete. It can be strapped to the pouch slot.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Pouches/machete.rsi
-  - type: Storage
-    maxItemSize: Large
-    whitelist:
-      tags:
-      - Machete
+    state: sheath
+  - type: Item
+    size: Huge
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - pocket
+  - type: ItemSlots
+    slots:
+      item:
+        name: Machete
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        whitelist:
+          tags:
+          - Machete
+  - type: ItemMapper
+    mapLayers:
+      sheath-machete:
+        whitelist:
+          tags:
+          - Machete
+  - type: Appearance
+  - type: Tag
+    tags:
+    - Pouch

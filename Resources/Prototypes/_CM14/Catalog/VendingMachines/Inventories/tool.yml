@@ -8,8 +8,8 @@
     ClothingEyesGlassesMeson: 4
     ClothingHeadHatWelding: 4
     trayScanner: 4
-    Crowbar: 8
-    Welder: 8
-    Screwdriver: 8
-    Wirecutter: 8
-    Wrench: 8
+    CMCrowbar: 8
+    CMWelder: 8
+    CMScrewdriver: 8
+    CMWirecutter: 8
+    CMWrench: 8

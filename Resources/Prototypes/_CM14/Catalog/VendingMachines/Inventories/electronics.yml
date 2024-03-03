@@ -2,7 +2,7 @@
   id: CMVendorElectronics
   startingInventory:
     CableApcStack: 6
-    Multitool: 6
+    CMMultitool: 6
     DoorElectronics: 8
     CMAPCElectronics: 8
     PowerCellHigh: 6

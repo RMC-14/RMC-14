@@ -334,7 +334,7 @@
       #  amount: 25
     - name: Utilities
       entries:
-      - id: M5Bayonet
+      - id: CMM5Bayonet
         amount: 25 # TODO CM14 not the night raider's bayonet
       #- id: CMMarkingFlarePackM94
       #  amount: 10
@@ -1178,10 +1178,13 @@
 #        - id: CMPillCanisterTramadol
 #          amount: 5 #P
     - name: Medical Utilities
-      entries: []
-    #    CMHealthAnalyzer: 4P
-    #    CMRollerBed: 4P
-    #    CMStasisBag: 6P
+      entries:
+        - id: CMHealthAnalyzer
+          amount: 4 #P
+        - id: CMRollerBedSpawnFolded
+          amount: 4 #P
+        - id: CMStasisBagFolded
+          amount: 6 #P
     #    CMPressurizedReagentCanisterPouchEMPTY: 3P
     #    CMG8AGeneralUtilityPouch: 15P
     #    CMMS11SmartRefillTank: 6P

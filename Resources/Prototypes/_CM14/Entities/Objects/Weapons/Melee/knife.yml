@@ -1,11 +1,13 @@
 - type: entity
   name: M5 night raider bayonet
   parent: BaseKnife
-  id: M5Bayonet
+  id: CMM5Bayonet
   description: The standard issue bayonet knife issued to Colonial Marines.
   components:
   - type: Clothing
-    slots: [mask]
+    slots: 
+    - mask
+    - pocket
   - type: Tag
     tags:
     - Knife
@@ -18,7 +20,57 @@
     damage:
       types:
         Slash: 25
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 18
   - type: Item
     sprite: _CM14/Objects/Weapons/Melee/m5_bayonet.rsi
   - type: DisarmMalus
     malus: 0.225
+
+- type: entity
+  name: M11 throwing knife
+  parent: CMM5Bayonet
+  id: CMM11Knife
+  description: A military knife designed to be thrown at the enemy.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Melee/m11_knife.rsi
+    state: icon
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 5
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 50
+  - type: Item
+    sprite: _CM14/Objects/Weapons/Melee/m11_knife.rsi
+- type: entity
+  name: M2132 machete
+  parent: CMM5Bayonet
+  id: CMM2132Machete
+  description: Latest issue of the USCM Machete.
+  components:
+  - type: Clothing
+    slots: [belt]
+  - type: Tag
+    tags:
+    - Machete
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Melee/machete.rsi
+    state: icon
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 35
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 4
+  - type: Item
+    sprite: _CM14/Objects/Weapons/Melee/machete.rsi

@@ -27,6 +27,16 @@
       - id: CMMultitool
 
 - type: entity
+  parent: CMBeltKnife
+  id: CMBeltKnifeFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMM11Knife
+        amount: 12
+
+- type: entity
   parent: CMBeltSecurity
   id: CMBeltSecurityFilled
   suffix: Filled
