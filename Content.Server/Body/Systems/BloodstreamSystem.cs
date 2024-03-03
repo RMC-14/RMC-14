@@ -105,7 +105,7 @@ public sealed class BloodstreamSystem : EntitySystem
 
             var ev = new BloodstreamMetabolizeAttemptEvent();
             RaiseLocalEvent(uid, ref ev);
-            if (!ev.Cancelled)
+            if (ev.Cancelled)
                 continue;
 
             if (!_solutionContainerSystem.ResolveSolution(uid, bloodstream.BloodSolutionName, ref bloodstream.BloodSolution, out var bloodSolution))
