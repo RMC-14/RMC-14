@@ -73,6 +73,8 @@
   - type: Airlock
     emergencyAccessLayer: false
     animatePanel: false
+    openingSpriteState: closed_unlit
+    closingSpriteState: closed_unlit
   - type: ApcPowerReceiver
     powerLoad: 0
 

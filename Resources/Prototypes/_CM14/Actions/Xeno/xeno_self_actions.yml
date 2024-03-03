@@ -98,3 +98,17 @@
       state: toggle_long_range
     event: !type:XenoZoomActionEvent
     useDelay: 0.2
+
+- type: entity
+  id: ActionXenoWordQueen
+  parent: ActionXenoBase
+  name: Word of the Queen # TODO CM14 description
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: queen_word
+    event: !type:XenoWordQueenActionEvent
+    useDelay: 10
+  - type: XenoWordQueenAction

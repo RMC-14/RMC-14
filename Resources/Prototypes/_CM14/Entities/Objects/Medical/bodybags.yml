@@ -24,7 +24,15 @@
 
 - type: entity
   parent: CMBodyBag
-  id: CMStasisBag # TODO CM14 used
+  id: CMBodyBagFolded
+  suffix: folded
+  components:
+  - type: Foldable
+    folded: true
+
+- type: entity
+  parent: CMBodyBag
+  id: CMStasisBag # TODO CM14 This needs to halt hugged timers or something
   name: stasis bag
   description: A folded, reusable bag designed to prevent additional damage to an occupant.
   components:
@@ -52,3 +60,11 @@
           True: { visible: false }
           False: { visible: true }
   - type: CMStasisBag
+
+- type: entity
+  parent: CMStasisBag
+  id: CMStasisBagFolded
+  suffix: folded
+  components:
+  - type: Foldable
+    folded: true

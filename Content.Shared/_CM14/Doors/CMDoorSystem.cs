@@ -26,15 +26,15 @@ public sealed class CMDoorSystem : EntitySystem
         SubscribeLocalEvent<CMDoubleDoorComponent, DoorStateChangedEvent>(OnDoorStateChanged);
     }
 
-    private void OnDoorStateChanged(Entity<CMDoubleDoorComponent> ent, ref DoorStateChangedEvent args)
+    private void OnDoorStateChanged(Entity<CMDoubleDoorComponent> door, ref DoorStateChangedEvent args)
     {
         switch (args.State)
         {
             case DoorState.Opening:
-                Open(ent);
+                Open(door);
                 break;
             case DoorState.Closing:
-                Close(ent);
+                Close(door);
                 break;
         }
     }
@@ -76,9 +76,13 @@ public sealed class CMDoorSystem : EntitySystem
                 _doorQuery.TryGetComponent(anchored, out var door) &&
                 door.State != DoorState.Opening)
             {
-                doubleDoor.LastClosingAt = time;
+                doubleDoor.LastOpeningAt = time;
                 Dirty(anchored.Value, doubleDoor);
-                _doors.StartOpening(anchored.Value);
+
+                var sound = door.OpenSound;
+                door.OpenSound = null;
+                _doors.StartOpening(anchored.Value, door);
+                door.OpenSound = sound;
             }
         }
     }
@@ -101,7 +105,11 @@ public sealed class CMDoorSystem : EntitySystem
             {
                 doubleDoor.LastClosingAt = time;
                 Dirty(anchored.Value, doubleDoor);
-                _doors.StartClosing(anchored.Value);
+
+                var sound = door.CloseSound;
+                door.CloseSound = null;
+                _doors.StartClosing(anchored.Value, door);
+                door.CloseSound = sound;
             }
         }
     }

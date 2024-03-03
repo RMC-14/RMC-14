@@ -12,6 +12,12 @@
     },
     {
       "name": "base"
+    },
+    {
+      "name": "icon"
+    },
+    {
+      "name": "icon_open"
     }
   ]
 }

@@ -265,6 +265,17 @@
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/weapons.rsi
 
+- type: entity
+  parent: CMCrateWeldable
+  id: CMCrateMedical
+  name: medical crate
+  description: A medical crate.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Storage/Crates/medical.rsi
+  - type: Icon
+    sprite: _CM14/Structures/Storage/Crates/medical.rsi
+
 # Secure
 - type: entity
   parent: CMCrateWeldable
@@ -283,8 +294,9 @@
       map: ["enum.WeldableLayers.BaseWelded"]
       visible: false
     - state: locked
-      map: ["enum.StorageVisualLayers.Lock"]
+      map: ["enum.LockVisualLayers.Lock"]
       shader: unshaded
+  - type: LockVisuals
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/secure_basic.rsi
     state: icon

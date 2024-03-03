@@ -13,12 +13,13 @@
     - state: closed
       map: ["enum.StorageVisualLayers.Door"]
     - state: locked
-      map: ["enum.StorageVisualLayers.Lock"]
+      map: ["enum.LockVisualLayers.Lock"]
       shader: unshaded
     - state: welded
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
   - type: Appearance
+  - type: LockVisuals
   - type: EntityStorageVisuals
     stateBaseClosed: base
     stateDoorOpen: open
