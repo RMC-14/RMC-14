@@ -12,7 +12,7 @@
       map: [ "openLayer" ]
       visible: false
   - type: Storage
-    maxItemSize: Small
+    maxItemSize: Normal
     grid:
     - 0,0,7,1
   - type: Item
@@ -97,7 +97,7 @@
   - type: StorageFill
     contents:
     - id: CMHealthAnalyzer
-    - id: CMPillDexalin
+    - id: CMPillCanisterDexalin
       amount: 2
     - id: CMDexalinPlusAutoInjector
       amount: 3
@@ -156,5 +156,5 @@
     contents:
     - id: CMHealthAnalyzer
     - id: CMPillCanisterDylovene
-    - id: CMPillDexalin
+    - id: CMPillCanisterDexalin
       amount: 3

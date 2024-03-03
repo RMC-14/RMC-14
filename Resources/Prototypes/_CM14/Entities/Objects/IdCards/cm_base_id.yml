@@ -34,7 +34,7 @@
     - idcard
     sprite: _CM14/Objects/CMIDs/id.rsi
   - type: Item
-    size: Tiny
+    size: Small
     heldPrefix: default
   - type: Access
   - type: IdCard
