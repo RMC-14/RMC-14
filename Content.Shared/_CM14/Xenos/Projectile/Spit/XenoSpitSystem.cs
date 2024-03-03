@@ -106,7 +106,7 @@ public sealed class XenoSpitSystem : EntitySystem
             _stun.TryStun(target, spit.Comp.Knockdown, true);
         }
 
-        _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { target }, Filter.Pvs(target));
+        _colorFlash.RaiseEffect(Color.Red, [target], Filter.Pvs(target));
     }
 
     private void OnSlowedBySpitRefreshMovement(Entity<SlowedBySpitComponent> slowed, ref RefreshMovementSpeedModifiersEvent args)

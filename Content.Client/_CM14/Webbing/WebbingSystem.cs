@@ -20,7 +20,7 @@ public sealed class WebbingSystem : SharedWebbingSystem
     {
         SubscribeLocalEvent<WebbingClothingComponent, AfterAutoHandleStateEvent>(OnClothingState);
         SubscribeLocalEvent<WebbingClothingComponent, GetEquipmentVisualsEvent>(OnWebbingClothingEquipmentVisuals,
-            after: new[] { typeof(ClientClothingSystem) });
+            after: [typeof(ClientClothingSystem)]);
         SubscribeLocalEvent<WebbingClothingComponent, GotEquippedEvent>(OnClothingEquipped);
         SubscribeLocalEvent<WebbingClothingComponent, GotUnequippedEvent>(OnClothingUnequipped);
     }

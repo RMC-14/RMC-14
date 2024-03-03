@@ -24,7 +24,7 @@ public sealed partial class HoldOrderComponent : Component, IOrderComponent
     public FixedPoint2 DamageModifier;
 
     [DataField]
-    public List<ProtoId<DamageTypePrototype>> DamageTypes = new() {"Slash", "Blunt"};
+    public List<ProtoId<DamageTypePrototype>> DamageTypes = ["Slash", "Blunt"];
 
     /// <summary>
     /// Resistance to pain.
