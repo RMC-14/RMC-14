@@ -11,12 +11,15 @@
           map: ["enum.GunVisualLayers.Base"]
         - state: mag-0
           map: ["enum.GunVisualLayers.Mag"]
+    - type: Item
+      size: Large
     - type: Clothing
       sprite: _CM14/Objects/Weapons/Guns/SMGs/m39.rsi
       quickEquip: false
       slots:
         - Back
         - suitStorage
+    - type: AmmoCounter
     - type: Wieldable
     - type: Gun
       minAngle: 15
@@ -61,5 +64,5 @@
       steps: 1
       zeroVisible: true
     - type: Appearance
-    - type: ChamberMagazineAmmoProvider
+    - type: MagazineAmmoProvider
       autoEject: true
