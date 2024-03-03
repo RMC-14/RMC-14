@@ -192,5 +192,21 @@
   id: 28
   time: '2024-03-01T01:34:08.0000000+00:00'
   url: https://api.github.com/repos/CM-14/CM-14/pulls/991
+- author: KittenColony
+  changes:
+  - message: Marine Radiophones, a military grade walkie talkie.
+    type: Add
+  - message: Marker Flares, light up the night.
+    type: Add
+  id: 29
+  time: '2024-03-03T08:08:21.0000000+00:00'
+  url: https://api.github.com/repos/CM-14/CM-14/pulls/980
+- author: Whisper
+  changes:
+  - message: Add more fills to cm medical pouches
+    type: Add
+  id: 30
+  time: '2024-03-03T10:47:54.0000000+00:00'
+  url: https://api.github.com/repos/CM-14/CM-14/pulls/978
 Name: CM
 Order: -1
