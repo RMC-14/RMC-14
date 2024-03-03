@@ -24,7 +24,7 @@
     storageOpenSound:
       collection: CMPillBottleOpen
   - type: Item
-    size: Tiny
+    size: Small
     sprite: _CM14/Objects/Chemistry/pill_canister.rsi
   - type: GenericVisualizer
     visuals:
@@ -38,7 +38,7 @@
   - type: Appearance
   - type: Tag
     tags:
-    - CMPillCanister
+    - PillCanister
 
 - type: entity
   parent: CMPillCanister
@@ -128,6 +128,24 @@
   - type: StorageFill
     contents:
     - id: CMPillKelotane
+      amount: 16
+
+- type: entity
+  parent: CMPillCanister
+  id: CMPillCanisterTricordrazine
+  name: Tricordrazine pill bottle
+  suffix: Tricordrazine, 16
+  components:
+  - type: Sprite
+    layers:
+    - state: pill_canister7 # todo cm14 idk which canister this uses
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: CMPillTricordrazine
       amount: 16
 
 # TODO CM14 peridaxon, tramadol

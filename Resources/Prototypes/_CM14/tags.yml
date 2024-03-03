@@ -50,9 +50,6 @@
   id: CMSurgicalLine
 
 - type: Tag
-  id: CMPillCanister
-
-- type: Tag
   id: CMBurnKit
 
 - type: Tag

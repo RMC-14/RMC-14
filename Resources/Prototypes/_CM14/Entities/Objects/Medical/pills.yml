@@ -10,7 +10,7 @@
     - state: pill1
       map: [ "enum.DamageStateVisualLayers.Base" ]
   - type: Item
-    size: Tiny
+    size: Small
     sprite: _CM14/Objects/Chemistry/pills.rsi
 
 # TODO CM14 these need to have a random state per round
@@ -99,4 +99,21 @@
     - state: pill5
       map: [ "enum.DamageStateVisualLayers.Base" ]
 
-# TODO CM14 peridaxon, tramadol
+- type: entity
+  parent: CMPill
+  id: CMPillTricordrazine
+  name: Tricordrazine pill (15u)
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Tricordrazine
+          Quantity: 15
+  - type: Sprite
+    layers:
+    - state: pill5
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+
+        # TODO CM14 peridaxon, tramadol
