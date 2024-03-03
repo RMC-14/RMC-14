@@ -18,7 +18,7 @@ public sealed partial class XenoWardingPheromonesComponent : Component
     public FixedPoint2 Multiplier;
 
     [DataField]
-    public List<ProtoId<DamageTypePrototype>> DamageTypes = new () {  "Bloodloss", "Asphyxiation" };
+    public List<ProtoId<DamageTypePrototype>> DamageTypes = ["Bloodloss", "Asphyxiation"];
 
     public override bool SessionSpecific => true;
 }

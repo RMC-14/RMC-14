@@ -124,7 +124,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
 
                     if (change?.GetTotal() > FixedPoint2.Zero)
                     {
-                        _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { hit }, filter);
+                        _colorFlash.RaiseEffect(Color.Red, [hit], filter);
                     }
                 }
             }

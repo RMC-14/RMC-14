@@ -71,7 +71,7 @@ public sealed class XenoTailSweepSystem : EntitySystem
                 _damageable.TryChangeDamage(marine, damage);
 
             var filter = Filter.Pvs(marine, entityManager: EntityManager);
-            _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { marine }, filter);
+            _colorFlash.RaiseEffect(Color.Red, [marine], filter);
 
             _throwing.TryThrow(marine, diff, 5);
             _stun.TryKnockdown(marine, xeno.Comp.StunTime, true);

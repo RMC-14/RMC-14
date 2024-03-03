@@ -14,7 +14,7 @@ public sealed class XenoHideVisualizerSystem : VisualizerSystem<XenoHideComponen
         base.Initialize();
 
         SubscribeLocalEvent<XenoHideComponent, GetDrawDepthEvent>(OnXenoHideGetDrawDepth,
-            before: new[] { typeof(XenoVisualizerSystem) });
+            before: [typeof(XenoVisualizerSystem)]);
     }
 
     private void OnXenoHideGetDrawDepth(Entity<XenoHideComponent> ent, ref GetDrawDepthEvent args)
