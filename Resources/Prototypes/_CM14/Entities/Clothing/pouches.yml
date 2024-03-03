@@ -333,10 +333,13 @@
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Pouches/medical.rsi
   - type: Storage
+    maxItemSize: Large
     grid:
     - 0,0,4,1 #4 slots
     whitelist:
       tags:
+      - CMBurnKit
+      - CMTraumaKit
       - DiscreteHealthAnalyzer
       - Brutepack
       - Ointment

@@ -50,9 +50,6 @@
   id: CMSurgicalLine
 
 - type: Tag
-  id: CMPillCanister
-
-- type: Tag
   id: CMBurnKit
 
 - type: Tag
@@ -66,3 +63,7 @@
 
 - type: Tag
   id: CMMagazinePistol88m4AP
+
+
+- type: Tag
+  id: LauncherCompatibleGrenade
