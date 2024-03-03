@@ -373,7 +373,7 @@ namespace Content.Shared.CCVar
         /// The id of the sound collection to randomly choose a sound from and play when the round ends.
         /// </summary>
         public static readonly CVarDef<string> RoundEndSoundCollection =
-            CVarDef.Create("game.round_end_sound_collection", "RoundEnd", CVar.SERVERONLY);
+            CVarDef.Create("game.round_end_sound_collection", "CMRoundEnd", CVar.SERVERONLY);
 
         /*
          * Discord
