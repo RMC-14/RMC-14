@@ -58,7 +58,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
         // TODO CM14 reduce crit damage
         SubscribeLocalEvent<XenoWardingPheromonesComponent, UpdateMobStateEvent>(OnWardingUpdateMobState,
-            after: new[] { typeof(MobThresholdSystem) });
+            after: [typeof(MobThresholdSystem)]);
         SubscribeLocalEvent<XenoWardingPheromonesComponent, ComponentRemove>(OnWardingRemove);
         SubscribeLocalEvent<XenoWardingPheromonesComponent, DamageModifyEvent>(OnWardingDamageModify);
 
@@ -166,14 +166,10 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         var damage = args.Damage.DamageDict;
         var multiplier = FixedPoint2.Max(1 - 0.25 * warding.Comp.Multiplier, 0);
 
-        var damageTypes = warding.Comp.DamageTypes.GetEnumerator();
-
-        while (damageTypes.MoveNext())
+        foreach (var type in warding.Comp.DamageTypes)
         {
-            if (args.Damage.DamageDict.TryGetValue(damageTypes.Current, out var amount))
-            {
-                damage[damageTypes.Current] = amount * multiplier;
-            }
+            if (args.Damage.DamageDict.TryGetValue(type, out var amount))
+                damage[type] = amount * multiplier;
         }
     }
 

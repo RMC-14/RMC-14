@@ -194,7 +194,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: Flare
+    - id: CMMarkerFlare
       amount: 8
 
 - type: entity

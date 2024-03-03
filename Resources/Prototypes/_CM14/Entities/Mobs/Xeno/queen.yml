@@ -24,13 +24,25 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
+    - ActionXenoOrderConstruction
     - ActionXenoAcid
     - ActionXenoPheromones
-    - ActionXenoOrderConstruction
+    - ActionXenoWordQueen
+#    - ActionXenoPsychicWhisper
+#    - ActionXenoPsychicRadiance
+#    - ActionXenoGut
     - ActionXenoPlantWeeds
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
-    # TODO CM14 the rest of the owl
+#    - ActionXenoGrowOvipositor
+#    - ActionXenoBanishXenomorph
+#    - ActionXenoReadmitXenomorph
+#    - ActionXenoRoyalJelly
+#    - ActionXenoMarkResin
+    # Mature
+#    - ActionXenoScreech
+#    - ActionXenoSpit
+#    - ActionXenoToggleSpitType
     # explosionResistance: 100 # TODO CM14 fire immunity
     tier: 4
   - type: XenoAcid
@@ -50,6 +62,7 @@
     plasmaRegenOnWeeds: 40
   - type: XenoArmor
     armor: 25
+  - type: XenoWordQueen
   - type: Tag
     tags:
     - DoorBumpOpener # TODO CM14 big loud steps

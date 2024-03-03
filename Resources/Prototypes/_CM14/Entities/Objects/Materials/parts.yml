@@ -30,7 +30,6 @@
   - type: Tag
     tags:
     - RodMetal1
-    - DroneUsable
   - type: Sprite
     state: rods
   - type: Stack
@@ -45,7 +44,6 @@
   - type: Tag
     tags:
     - RodMetal1
-    - DroneUsable
   - type: Sprite
     state: rods
   - type: Stack
@@ -87,7 +85,6 @@
   - type: Tag
     tags:
     - RodMetal1
-    - DroneUsable
   - type: Sprite
     state: rods_plasteel
   - type: Stack
@@ -102,7 +99,6 @@
   - type: Tag
     tags:
     - RodMetal1
-    - DroneUsable
   - type: Sprite
     state: rods_plasteel
   - type: Stack

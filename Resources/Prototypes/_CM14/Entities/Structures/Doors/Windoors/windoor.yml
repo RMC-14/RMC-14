@@ -29,6 +29,9 @@
     node: windoor
     containers:
     - board
+  - type: Airlock
+    openingSpriteState: open_unlit
+    closingSpriteState: closed_unlit
 
 - type: entity
   parent: BaseSecureWindoor
@@ -61,3 +64,6 @@
     node: windoorSecure
     containers:
     - board
+  - type: Airlock
+    openingSpriteState: open_unlit
+    closingSpriteState: closed_unlit

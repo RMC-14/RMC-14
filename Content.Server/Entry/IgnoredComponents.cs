@@ -19,8 +19,9 @@ namespace Content.Server.Entry
             "InventorySlots",
             "LightFade",
             "HolidayRsiSwap",
+            "OptionsVisualizer",
             "IconSmoothRandom",
-            "RotationDrawDepth"
+            "RotationDrawDepth",
         };
     }
 }
