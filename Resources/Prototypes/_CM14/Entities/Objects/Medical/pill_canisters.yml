@@ -24,7 +24,7 @@
     storageOpenSound:
       collection: CMPillBottleOpen
   - type: Item
-    size: Tiny
+    size: Small
     sprite: _CM14/Objects/Chemistry/pill_canister.rsi
   - type: GenericVisualizer
     visuals:
@@ -38,7 +38,7 @@
   - type: Appearance
   - type: Tag
     tags:
-    - CMPillCanister
+    - PillCanister
 
 - type: entity
   parent: CMPillCanister

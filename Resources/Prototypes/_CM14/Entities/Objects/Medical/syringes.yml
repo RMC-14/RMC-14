@@ -18,5 +18,5 @@
     sprite: _CM14/Objects/Medical/syringe.rsi
     state: "syringe"
   - type: Item
-    size: Tiny
+    size: Small
     sprite: _CM14/Objects/Medical/syringe.rsi

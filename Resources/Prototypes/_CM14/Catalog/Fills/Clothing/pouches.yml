@@ -108,7 +108,8 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMTraumaKit # todo cm14 pill can tramadol
+    - id: CMTraumaKit
+    # todo cm14 pill can tramadol
     - id: CMPillCanisterKelotane
     - id: CMPillCanisterBicaridine
     - id: CMPillCanisterDexalin
