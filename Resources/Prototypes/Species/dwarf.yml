@@ -1,7 +1,7 @@
 - type: species
   id: Dwarf
   name: species-name-dwarf
-  roundStart: false
+  roundStart: true
   prototype: CMMobDwarf
   sprites: MobHumanSprites
   markingLimits: MobHumanMarkingLimits
