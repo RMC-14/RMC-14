@@ -62,7 +62,5 @@
     damage:
       types:
         Piercing: 45
-  - type: CanPenetrate
-    penetrationLayer: MobLayer
   - type: TimedDespawn
     lifetime: 0.25

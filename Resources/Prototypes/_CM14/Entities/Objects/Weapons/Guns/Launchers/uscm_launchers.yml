@@ -5,12 +5,12 @@
   description: Oops.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Launchers/china_lake.rsi
+    sprite: _CM14/Objects/Weapons/Guns/GrenadeLaunchers/m92.rsi
     layers:
       - state: icon
         map: ["enum.GunVisualLayers.Base"]
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Launchers/china_lake.rsi
+    sprite: _CM14/Objects/Weapons/Guns/GrenadeLaunchers/m92.rsi
   - type: AmmoCounter
   - type: Gun
     fireRate: 2
