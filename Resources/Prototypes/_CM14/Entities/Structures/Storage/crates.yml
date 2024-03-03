@@ -294,8 +294,9 @@
       map: ["enum.WeldableLayers.BaseWelded"]
       visible: false
     - state: locked
-      map: ["enum.StorageVisualLayers.Lock"]
+      map: ["enum.LockVisualLayers.Lock"]
       shader: unshaded
+  - type: LockVisuals
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/secure_basic.rsi
     state: icon

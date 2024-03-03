@@ -1,0 +1,66 @@
+- type: entity
+  name: m94 flare
+  parent: BaseItem
+  id: CMMarkerFlare
+  description: A red USCM issued flare. There are instructions on the side, it reads 'pull cord, make light'.
+  components:
+  - type: Tag
+    tags:
+    - Flare
+  - type: ExpendableLight
+    spentName: expendable-light-spent-flare-name
+    spentDesc: expendable-light-spent-flare-desc
+    glowDuration: 530 # lasts a lot longer, 10 minutes :godo:
+    fadeOutDuration: 30
+    iconStateOn: flare_unlit
+    iconStateSpent: flare_spent
+    turnOnBehaviourID: turn_on
+    fadeOutBehaviourID: fade_out
+    litSound:
+      path: /Audio/Items/Flare/flare_on.ogg
+    loopedSound: /Audio/Items/Flare/flare_burn.ogg
+  - type: Sprite
+    sprite: _CM14/Objects/Misc/flares.rsi
+    layers:
+      - map: [ enum.ExpendableLightVisualLayers.Base ]
+        state: flare_base
+        color: "#FFcccc"
+      - map: [ enum.ExpendableLightVisualLayers.Glow ]
+        state: flare_burn
+        color: "#FF5E5E"
+        visible: false
+        shader: unshaded
+      - map: [ enum.ExpendableLightVisualLayers.Overlay ]
+        state: flare_unlit
+        color: "#FFcccc"
+  - type: Icon
+    sprite: _CM14/Objects/Misc/flares.rsi
+    state: icon
+  - type: Item
+    sprite: _CM14/Objects/Misc/flares.rsi
+    heldPrefix: unlit
+    size: Small
+    storedSprite:
+      sprite: _CM14/Objects/Misc/flares.rsi
+      state: storage
+  - type: Appearance
+  - type: PointLight
+    enabled: false
+    color: "#FF5E5E"
+    radius: 1
+    energy: 5.0
+    netsync: false
+  - type: IgnitionSource
+    temperature: 1000
+  - type: LightBehaviour
+    behaviours:
+      - !type:FadeBehaviour # faster then base flares
+        id: turn_on
+        maxDuration: 5.0
+        startValue: 2.5
+        endValue: 7.0
+      - !type:FadeBehaviour # burns out slower
+        id: fade_out
+        maxDuration: 30.0
+        startValue: 7.0
+        endValue: 1.0

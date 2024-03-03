@@ -10,7 +10,7 @@ public abstract class SharedMarineSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<MarineComponent, GetMarineIconEvent>(OnMarineGetIcon,
-            after: new[] { typeof(SquadSystem) });
+            after: [typeof(SquadSystem)]);
     }
 
     private void OnMarineGetIcon(Entity<MarineComponent> marine, ref GetMarineIconEvent args)

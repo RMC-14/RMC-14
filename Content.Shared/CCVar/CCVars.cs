@@ -488,6 +488,13 @@ namespace Content.Shared.CCVar
             CVarDef.Create("pirates.players_per_pirate", 5);
 
         /*
+         * Nukeops
+         */
+
+        public static readonly CVarDef<bool> NukeopsSpawnGhostRoles =
+            CVarDef.Create("nukeops.spawn_ghost_roles", false);
+
+        /*
          * Tips
          */
 
@@ -794,7 +801,7 @@ namespace Content.Shared.CCVar
         /// Default severity for server bans
         /// </summary>
         public static readonly CVarDef<string> ServerBanDefaultSeverity =
-            CVarDef.Create("admin.server_ban_default_severity", "high", CVar.ARCHIVE | CVar.SERVER);
+            CVarDef.Create("admin.server_ban_default_severity", "High", CVar.ARCHIVE | CVar.SERVER);
 
         /// <summary>
         ///     Minimum explosion intensity to create an admin alert message. -1 to disable the alert.
@@ -832,6 +839,12 @@ namespace Content.Shared.CCVar
         /// </summary>
         public static readonly CVarDef<int> NewPlayerThreshold =
             CVarDef.Create("admin.new_player_threshold", 0, CVar.ARCHIVE | CVar.REPLICATED | CVar.SERVER);
+
+        /// <summary>
+        /// How long an admin client can go without any input before being considered AFK.
+        /// </summary>
+        public static readonly CVarDef<float> AdminAfkTime =
+            CVarDef.Create("admin.afk_time", 600f, CVar.SERVERONLY);
 
         /*
          * Explosions
@@ -1257,6 +1270,18 @@ namespace Content.Shared.CCVar
             CVarDef.Create("vote.restart_enabled", true, CVar.SERVERONLY);
 
         /// <summary>
+        ///     Config for when the restart vote should be allowed to be called regardless with less than this amount of players.
+        /// </summary>
+        public static readonly CVarDef<int> VoteRestartMaxPlayers =
+            CVarDef.Create("vote.restart_max_players", 20, CVar.SERVERONLY);
+
+        /// <summary>
+        ///     Config for when the restart vote should be allowed to be called based on percentage of ghosts.
+        ///
+        public static readonly CVarDef<int> VoteRestartGhostPercentage =
+            CVarDef.Create("vote.restart_ghost_percentage", 75, CVar.SERVERONLY);
+
+        /// <summary>
         ///     See vote.enabled, but specific to preset votes
         /// </summary>
         public static readonly CVarDef<bool> VotePresetEnabled =
@@ -1461,15 +1486,6 @@ namespace Content.Shared.CCVar
         public static readonly CVarDef<bool> CrewManifestUnsecure =
             CVarDef.Create("crewmanifest.unsecure", true, CVar.REPLICATED);
 
-        /// <summary>
-        ///     Dictates the order the crew manifest will appear in, in terms of its sections.
-        ///     Sections not in this list will appear at the end of the list, in no
-        ///     specific order.
-        /// </summary>
-        public static readonly CVarDef<string> CrewManifestOrdering =
-            CVarDef.Create("crewmanifest.ordering", "Command,Security,Science,Medical,Engineering,Cargo,Civilian,Unknown",
-                CVar.REPLICATED);
-
         /*
          * Biomass
          */
@@ -1546,6 +1562,16 @@ namespace Content.Shared.CCVar
         public static readonly CVarDef<bool> ReducedMotion =
             CVarDef.Create("accessibility.reduced_motion", false, CVar.CLIENTONLY | CVar.ARCHIVE);
 
+        public static readonly CVarDef<bool> ChatEnableColorName =
+            CVarDef.Create("accessibility.enable_color_name", true, CVar.CLIENTONLY | CVar.ARCHIVE, "Toggles displaying names with individual colors.");
+
+        /// <summary>
+        /// Screen shake intensity slider, controlling the intensity of the CameraRecoilSystem.
+        /// Goes from 0 (no recoil at all) to 1 (regular amounts of recoil)
+        /// </summary>
+        public static readonly CVarDef<float> ScreenShakeIntensity =
+            CVarDef.Create("accessibility.screen_shake_intensity", 1f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
         /*
          * CHAT
          */
@@ -1585,6 +1611,9 @@ namespace Content.Shared.CCVar
 
         public static readonly CVarDef<int> ChatMaxMessageLength =
             CVarDef.Create("chat.max_message_length", 1000, CVar.SERVER | CVar.REPLICATED);
+
+        public static readonly CVarDef<int> ChatMaxAnnouncementLength =
+            CVarDef.Create("chat.max_announcement_length", 256, CVar.SERVER | CVar.REPLICATED);
 
         public static readonly CVarDef<bool> ChatSanitizerEnabled =
             CVarDef.Create("chat.chat_sanitizer_enabled", true, CVar.SERVERONLY);
@@ -1811,7 +1840,7 @@ namespace Content.Shared.CCVar
         /// The time you must spend reading the rules, before the "Request" button is enabled
         /// </summary>
         public static readonly CVarDef<float> GhostRoleTime =
-            CVarDef.Create("ghost.role_time", 3f, CVar.REPLICATED);
+            CVarDef.Create("ghost.role_time", 3f, CVar.REPLICATED | CVar.SERVER);
 
         /*
          * Fire alarm
@@ -1986,5 +2015,15 @@ namespace Content.Shared.CCVar
 
         public static readonly CVarDef<bool> GatewayGeneratorEnabled =
             CVarDef.Create("gateway.generator_enabled", true);
+
+        /*
+         * DEBUG
+         */
+
+        /// <summary>
+        /// A simple toggle to test <c>OptionsVisualizerComponent</c>.
+        /// </summary>
+        public static readonly CVarDef<bool> DebugOptionVisualizerTest =
+            CVarDef.Create("debug.option_visualizer_test", false, CVar.CLIENTONLY);
     }
 }

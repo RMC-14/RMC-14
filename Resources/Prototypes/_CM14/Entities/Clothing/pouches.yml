@@ -537,13 +537,13 @@
   parent: CMPouchOpenClosed
   id: CMPouchRadio
   name: radio pouch
-  description: It can contain two handheld radios.
+  description: It can contain two radiophones.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Pouches/radio.rsi
   - type: Storage
     grid:
-    - 0,0,2,1 #2 slots
+    - 0,0,1,1 #2x2 slot, holds 2 radio phones
     whitelist:
       tags:
       - Radio
@@ -587,6 +587,7 @@
       # Tile
       # etool
       # sandbags
+      components:
       - LightReplacer
 
 - type: entity
@@ -612,12 +613,12 @@
       - PowerCell
       - Multitool
       - Flashlight
-      - LightReplacer
       components:
       - Welder
       - ComputerBoard
       - MachineBoard
       - MachinePart
+      - LightReplacer
 
 - type: entity
   parent: CMPouchTools
