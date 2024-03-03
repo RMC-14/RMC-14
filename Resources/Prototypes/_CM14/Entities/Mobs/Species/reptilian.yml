@@ -22,3 +22,7 @@
       Female: UnisexReptilian
       Unsexed: UnisexReptilian
   - type: Wagging
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Weapons/pierce.ogg
+    animation: WeaponArcClaw
