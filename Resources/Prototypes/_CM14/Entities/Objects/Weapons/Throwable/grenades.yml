@@ -1,0 +1,81 @@
+- type: entity
+  name: M40 HEDP grenade
+  description: Duck and cover.
+  parent: GrenadeBase
+  id: M40HEDP
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Grenades/m40hedp.rsi
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 10
+    intensitySlope: 3
+    totalIntensity: 135
+    canCreateVacuum: false
+  - type: OnUseTimerTrigger
+    beepSound:
+      path: "/Audio/Effects/beep1.ogg"
+      params:
+        volume: 5
+    initialBeepDelay: 0
+    beepInterval: 2 # 2 beeps total (at 0 and 2)
+  - type: Tag
+    tags:
+      - Grenade
+      - LauncherCompatibleGrenade
+  - type: CartridgeAmmo
+    proto: HEDPProjectile
+    deleteOnSpawn: true
+
+- type: entity
+  parent: GrenadeBase
+  id: M40Smoke
+  name: M40 smoke grenade
+  description: A grenade that does exactly what it says on the tin.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Grenades/m40smoke.rsi
+  - type: SmokeOnTrigger
+    duration: 30
+    spreadAmount: 50
+  - type: SoundOnTrigger
+    sound: /Audio/Effects/smoke.ogg
+  - type: DeleteOnTrigger
+  - type: TimerTriggerVisuals
+    primingSound:
+      path: /Audio/Effects/Smoke-grenade.ogg
+  - type: Tag
+    tags:
+      - Grenade
+      - LauncherCompatibleGrenade
+  - type: CartridgeAmmo
+    proto: SmokeProjectile
+    deleteOnSpawn: true
+
+- type: entity
+  parent: GrenadeBase
+  id: M40HEFA
+  name: M40 HEFA grenade
+  description: Shrapnel. Shrapnel! WATCH OUT IT'S SHRAP-
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Grenades/m40hefa.rsi
+  - type: ClusterGrenade
+    fillPrototype: ShrapnelProjectile
+    maxGrenadesCount: 30
+    grenadeType: enum.GrenadeType.Shoot
+  - type: TimerTriggerVisuals
+    primingSound:
+      path: /Audio/Effects/countdown.ogg
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: Tag
+    tags:
+      - Grenade
+#      - LauncherCompatibleGrenade
+#  - type: CartridgeAmmo
+#    proto: HEFAProjectile
+#    deleteOnSpawn: true
+# Need to rework how cluster is handled

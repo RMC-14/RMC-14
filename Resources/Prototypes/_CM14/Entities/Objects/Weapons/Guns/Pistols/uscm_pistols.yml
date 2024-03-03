@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: BaseWeaponPistol
+  parent: BaseItem
   abstract: true
   id: CMWeaponPistolBase
   components:
@@ -9,10 +9,18 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    size: Small
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
+  - type: Tag
+    tags:
+    - Sidearm
   - type: Clothing
     quickEquip: false
     slots:
-    - SuitStorage
+    - suitStorage
   - type: Wieldable
   - type: Gun
     minAngle: 10
@@ -28,6 +36,24 @@
   - type: GunWieldBonus
     minAngle: -5
     maxAngle: -25
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePistol
+        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazinePistol
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgePistol
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgePistol
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -37,7 +63,7 @@
     steps: 1
     zeroVisible: true
   - type: Appearance
-  - type: ChamberMagazineAmmoProvider
+  - type: MagazineAmmoProvider
     autoEject: true
 
 - type: entity
