@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Walkie-Talkie sprites by Github KittenColony / Discord kittencolony (297865728374210561)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "walkietalkie"
+    },
+    {
+      "name": "walkietalkie-on"
+    },
+    {
+      "name": "walkietalkie-off"
+    },
+    {
+      "name": "walkietalkie-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "walkietalkie-inhand-left",
+      "directions": 4
+    }
+  ]
+}
