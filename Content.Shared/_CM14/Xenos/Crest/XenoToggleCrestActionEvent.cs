@@ -2,6 +2,4 @@
 
 namespace Content.Shared._CM14.Xenos.Crest;
 
-public sealed partial class XenoToggleCrestActionEvent : InstantActionEvent
-{
-}
+public sealed partial class XenoToggleCrestActionEvent : InstantActionEvent;

@@ -2,6 +2,4 @@
 
 namespace Content.Shared._CM14.Xenos.Construction.Events;
 
-public sealed partial class XenoOrderConstructionActionEvent : WorldTargetActionEvent
-{
-}
+public sealed partial class XenoOrderConstructionActionEvent : WorldTargetActionEvent;

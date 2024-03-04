@@ -2,6 +2,4 @@
 
 namespace Content.Server._CM14.Webbing;
 
-public sealed class WebbingSystem : SharedWebbingSystem
-{
-}
+public sealed class WebbingSystem : SharedWebbingSystem;

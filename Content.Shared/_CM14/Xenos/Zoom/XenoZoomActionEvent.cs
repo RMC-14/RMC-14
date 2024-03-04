@@ -2,6 +2,4 @@
 
 namespace Content.Shared._CM14.Xenos.Zoom;
 
-public sealed partial class XenoZoomActionEvent : InstantActionEvent
-{
-}
+public sealed partial class XenoZoomActionEvent : InstantActionEvent;

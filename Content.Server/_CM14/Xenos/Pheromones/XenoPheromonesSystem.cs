@@ -2,6 +2,4 @@
 
 namespace Content.Server._CM14.Xenos.Pheromones;
 
-public sealed class XenoPheromonesSystem : SharedXenoPheromonesSystem
-{
-}
+public sealed class XenoPheromonesSystem : SharedXenoPheromonesSystem;

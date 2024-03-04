@@ -22,6 +22,4 @@ public sealed class CMVendorVendBuiMessage : BoundUserInterfaceMessage
 }
 
 [Serializable, NetSerializable]
-public sealed class CMVendorRefreshBuiMessage : BoundUserInterfaceMessage
-{
-}
+public sealed class CMVendorRefreshBuiMessage : BoundUserInterfaceMessage;

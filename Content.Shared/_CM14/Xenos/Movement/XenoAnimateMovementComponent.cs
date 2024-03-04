@@ -3,6 +3,4 @@
 namespace Content.Shared._CM14.Xenos.Movement;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class XenoAnimateMovementComponent : Component
-{
-}
+public sealed partial class XenoAnimateMovementComponent : Component;
