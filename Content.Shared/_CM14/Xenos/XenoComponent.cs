@@ -30,7 +30,7 @@ public sealed partial class XenoComponent : Component
     public EntityUid Hive;
 
     [DataField(customTypeSerializer: typeof(PrototypeIdHashSetSerializer<AccessLevelPrototype>)), AutoNetworkedField]
-    public HashSet<string> AccessLevels = ["CMAccessXeno"];
+    public HashSet<string> AccessLevels = new() { "CMAccessXeno" };
 
     [DataField, AutoNetworkedField]
     public bool OnWeeds;
