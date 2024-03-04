@@ -88,7 +88,7 @@ public abstract class SharedXenoHeadbuttSystem : EntitySystem
         if (damage?.GetTotal() > FixedPoint2.Zero)
         {
             var filter = Filter.Pvs(marineId, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
-            _colorFlash.RaiseEffect(Color.Red, [marineId], filter);
+            _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { marineId }, filter);
         }
 
         var origin = _transform.GetMapCoordinates(xeno);

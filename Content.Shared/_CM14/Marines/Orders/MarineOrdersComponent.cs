@@ -60,13 +60,13 @@ public sealed partial class MarineOrdersComponent : Component
     public EntityUid? MoveActionEntity;
 
     [DataField, AutoNetworkedField]
-    public List<string> MoveCallouts = ["move-order-callout-1", "move-order-callout-2", "move-order-callout-3"];
+    public List<string> MoveCallouts = new() { "move-order-callout-1", "move-order-callout-2", "move-order-callout-3" };
 
     [DataField, AutoNetworkedField]
-    public List<string> FocusCallouts = ["focus-order-callout-1", "focus-order-callout-2", "focus-order-callout-3"];
+    public List<string> FocusCallouts = new() { "focus-order-callout-1", "focus-order-callout-2", "focus-order-callout-3" };
 
     [DataField, AutoNetworkedField]
-    public List<string> HoldCallouts = ["hold-order-callout-1", "hold-order-callout-2", "hold-order-callout-3"];
+    public List<string> HoldCallouts = new() { "hold-order-callout-1", "hold-order-callout-2", "hold-order-callout-3" };
 
     public override bool SessionSpecific => true;
 }
