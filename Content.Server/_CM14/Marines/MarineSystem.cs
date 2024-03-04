@@ -2,6 +2,4 @@
 
 namespace Content.Server._CM14.Marines;
 
-public sealed class MarineSystem : SharedMarineSystem
-{
-}
+public sealed class MarineSystem : SharedMarineSystem;

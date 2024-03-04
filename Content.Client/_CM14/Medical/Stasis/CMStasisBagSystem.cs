@@ -2,6 +2,4 @@
 
 namespace Content.Client._CM14.Medical.Stasis;
 
-public sealed class CMStasisBagSystem : SharedCMStasisBagSystem
-{
-}
+public sealed class CMStasisBagSystem : SharedCMStasisBagSystem;

@@ -2,6 +2,4 @@
 
 namespace Content.Client._CM14.Xenos.Word;
 
-public sealed class XenoWordQueenSystem : SharedXenoWordQueenSystem
-{
-}
+public sealed class XenoWordQueenSystem : SharedXenoWordQueenSystem;

@@ -2,6 +2,4 @@
 
 namespace Content.Shared._CM14.Xenos.Sweep;
 
-public sealed partial class XenoTailSweepActionEvent : InstantActionEvent
-{
-}
+public sealed partial class XenoTailSweepActionEvent : InstantActionEvent;

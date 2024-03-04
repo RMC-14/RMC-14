@@ -2,6 +2,4 @@
 
 namespace Content.Client._CM14.Xenos.Construction;
 
-public sealed class XenoConstructionSystem : SharedXenoConstructionSystem
-{
-}
+public sealed class XenoConstructionSystem : SharedXenoConstructionSystem;

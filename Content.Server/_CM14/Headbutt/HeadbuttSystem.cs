@@ -2,6 +2,4 @@
 
 namespace Content.Server._CM14.Headbutt;
 
-public sealed class HeadbuttSystem : SharedXenoHeadbuttSystem
-{
-}
+public sealed class HeadbuttSystem : SharedXenoHeadbuttSystem;

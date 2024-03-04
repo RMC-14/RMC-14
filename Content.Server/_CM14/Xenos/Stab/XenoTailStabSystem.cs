@@ -2,6 +2,4 @@
 
 namespace Content.Server._CM14.Xenos.Stab;
 
-public sealed class XenoTailStabSystem : SharedXenoTailStabSystem
-{
-}
+public sealed class XenoTailStabSystem : SharedXenoTailStabSystem;

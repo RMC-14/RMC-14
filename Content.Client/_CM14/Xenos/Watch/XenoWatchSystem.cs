@@ -2,6 +2,4 @@
 
 namespace Content.Client._CM14.Xenos.Watch;
 
-public sealed class XenoWatchSystem : SharedWatchXenoSystem
-{
-}
+public sealed class XenoWatchSystem : SharedWatchXenoSystem;
