@@ -50,7 +50,7 @@ public sealed class SharedXenoLeapSystem : EntitySystem
         var ev = new XenoLeapDoAfterEvent(GetNetCoordinates(args.Target));
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.Delay, ev, xeno)
         {
-            BreakOnUserMove = true,
+            BreakOnMove = true,
             BreakOnDamage = true,
             DamageThreshold = FixedPoint2.New(10)
         };

@@ -130,7 +130,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         var ev = new XenoSecreteStructureDoAfterEvent(GetNetCoordinates(args.Target), xeno.Comp.BuildChoice.Value);
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.BuildDelay, ev, xeno)
         {
-            BreakOnUserMove = true
+            BreakOnMove = true
         };
 
         // TODO CM14 building animation
@@ -191,7 +191,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         var ev = new XenoOrderConstructionDoAfterEvent(args.StructureId, GetNetCoordinates(target));
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.OrderConstructionDelay, ev, xeno)
         {
-            BreakOnUserMove = true
+            BreakOnMove = true
         };
 
         _doAfter.TryStartDoAfter(doAfter);
@@ -276,7 +276,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         var delay = xeno.OrderConstructionAddPlasmaDelay;
         var doAfter = new DoAfterArgs(EntityManager, args.User, delay, ev, args.User, node)
         {
-            BreakOnUserMove = true
+            BreakOnMove = true
         };
 
         _doAfter.TryStartDoAfter(doAfter);

@@ -205,8 +205,7 @@ public sealed class CPRSystem : EntitySystem
         // TODO CM14 less time for skilled doctors
         var doAfter = new DoAfterArgs(EntityManager, performer, TimeSpan.FromSeconds(4), new CPRDoAfterEvent(), performer, target)
         {
-            BreakOnUserMove = true,
-            BreakOnTargetMove = true,
+            BreakOnMove = true,
             NeedHand = true
         };
         _doAfter.TryStartDoAfter(doAfter);

@@ -34,8 +34,7 @@ public sealed class XenoAcidSystem : EntitySystem
 
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.AcidDelay, new XenoCorrosiveAcidDoAfterEvent(args), xeno, args.Target)
         {
-            BreakOnTargetMove = true,
-            BreakOnUserMove = true
+            BreakOnMove = true
         };
         _doAfter.TryStartDoAfter(doAfter);
     }

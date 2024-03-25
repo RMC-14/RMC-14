@@ -54,10 +54,11 @@ public sealed class XenoConstructionSystem : SharedXenoConstructionSystem
         foreach (var neighbor in args.NeighborFreeTiles)
         {
             var gridOwner = neighbor.Grid.Owner;
-            var coords = _mapSystem.GridTileToLocal(gridOwner, neighbor.Grid, neighbor.Tile);
+            var tile = neighbor.Tile.GridIndices;
+            var coords = _mapSystem.GridTileToLocal(gridOwner, neighbor.Grid, tile);
 
             var sourceLocal = _mapSystem.CoordinatesToTile(gridOwner, neighbor.Grid, transform.Coordinates);
-            var diff = Vector2.Abs(neighbor.Tile - sourceLocal);
+            var diff = Vector2.Abs(tile - sourceLocal);
             if (diff.X >= ent.Comp.Range || diff.Y >= ent.Comp.Range)
                 break;
 
