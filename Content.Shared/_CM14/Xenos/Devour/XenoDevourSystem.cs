@@ -93,8 +93,7 @@ public sealed class XenoDevourSystem : EntitySystem
     {
         var doAfter = new DoAfterArgs(EntityManager, xeno, delay, new XenoDevourDoAfterEvent(), xeno, target)
         {
-            BreakOnTargetMove = true,
-            BreakOnUserMove = true
+            BreakOnMove = true
         };
 
         _doAfter.TryStartDoAfter(doAfter);

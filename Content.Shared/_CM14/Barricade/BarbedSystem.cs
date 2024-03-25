@@ -39,7 +39,7 @@ public sealed class BarbedSystem : EntitySystem
         {
             var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.WireTime, new BarbedDoAfterEvent(), uid, used: args.Used)
             {
-                BreakOnUserMove = true,
+                BreakOnMove = true,
                 BreakOnDamage = true,
                 NeedHand = true,
             };
@@ -61,7 +61,7 @@ public sealed class BarbedSystem : EntitySystem
                 _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-begin"), uid, args.User);
                 var wirecutterDoAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.CutTime, new CutBarbedDoAfterEvent(), uid, used: args.Used)
                 {
-                    BreakOnUserMove = true,
+                    BreakOnMove = true,
                     BreakOnDamage = true,
                     NeedHand = true,
                 };

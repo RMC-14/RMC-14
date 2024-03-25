@@ -77,7 +77,7 @@
           types:
             Heat: 10
   - type: AtmosExposed
-  - type: SlowContacts
+  - type: SpeedModifierContacts
     walkSpeedModifier: 0.8
     sprintSpeedModifier: 0.8
 

@@ -52,7 +52,7 @@ public sealed class XenoPlasmaSystem : EntitySystem
         var ev = new XenoTransferPlasmaDoAfterEvent(args.Amount);
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.PlasmaTransferDelay, ev, xeno, args.Target)
         {
-            BreakOnUserMove = true,
+            BreakOnMove = true,
             DistanceThreshold = args.Range
         };
 

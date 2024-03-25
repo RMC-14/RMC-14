@@ -78,7 +78,7 @@ public sealed class EntrenchingToolSystem : EntitySystem
             var ev = new SandbagFillDoAfterEvent();
             var doAfter = new DoAfterArgs(EntityManager, args.User, tool.Comp.FillDelay, ev, tool, empty, tool)
             {
-                BreakOnUserMove = true,
+                BreakOnMove = true,
             };
             _doAfter.TryStartDoAfter(doAfter);
             _popup.PopupClient("You begin filling the sandbags", args.User, args.User);
@@ -139,7 +139,7 @@ public sealed class EntrenchingToolSystem : EntitySystem
         var ev = new SandbagFillDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, args.User, tool.Comp.FillDelay, ev, tool, empty, tool)
         {
-            BreakOnUserMove = true,
+            BreakOnMove = true,
         };
         _doAfter.TryStartDoAfter(doAfter);
         _popup.PopupClient("You begin filling the sandbags", args.User, args.User);
@@ -215,7 +215,7 @@ public sealed class EntrenchingToolSystem : EntitySystem
         var ev = new EntrenchingToolDoAfterEvent(GetNetCoordinates(coordinates));
         var doAfter = new DoAfterArgs(EntityManager, user, tool.Comp.DigDelay, ev, tool, used: tool)
         {
-            BreakOnUserMove = true
+            BreakOnMove = true
         };
 
         _doAfter.TryStartDoAfter(doAfter);
@@ -274,7 +274,7 @@ public sealed class EntrenchingToolSystem : EntitySystem
         var ev = new SandbagBuildDoAfterEvent(GetNetCoordinates(coordinates), direction);
         var doAfter = new DoAfterArgs(EntityManager, user, full.Comp.BuildDelay, ev, full, full)
         {
-            BreakOnUserMove = true
+            BreakOnMove = true
         };
 
         _doAfter.TryStartDoAfter(doAfter);
