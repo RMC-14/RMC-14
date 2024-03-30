@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/c268b16daf2e8da819958cdc7d02e7f906c370cd/icons/obj/items/chemistry.dmi, https://github.com/cmss13-devs/cmss13/blob/60ca3cddb69147cb17fcaef3b0514586292a4c55/icons/mob/humans/onmob/items_lefthand_0.dmi, https://github.com/cmss13-devs/cmss13/blob/60ca3cddb69147cb17fcaef3b0514586292a4c55/icons/mob/humans/onmob/items_righthand_0.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/311e8f06c0eae7c6a0ab71ba04943c93c55850eb/icons/obj/items/chemistry.dmi, https://github.com/cmss13-devs/cmss13/blob/60ca3cddb69147cb17fcaef3b0514586292a4c55/icons/mob/humans/onmob/items_lefthand_0.dmi, https://github.com/cmss13-devs/cmss13/blob/81c7806eb705f3a6b43085056cef1be0055d8ed2/icons/mob/humans/onmob/items_righthand_0.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -57,7 +57,8 @@
       "directions": 4
     },
     {
-      "name": "inhand-right"
+      "name": "inhand-right",
+      "directions": 4
     }
   ]
 }
