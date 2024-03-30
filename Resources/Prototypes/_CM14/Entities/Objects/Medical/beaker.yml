@@ -1,21 +1,52 @@
 - type: entity
-  parent: Beaker
+  parent: BaseBeaker
   id: CMBeaker
+  name: beaker
+  description: A beaker. Can hold up to 60 units.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Medical/beaker.rsi
   - type: Item
     sprite: _CM14/Objects/Medical/beaker.rsi
-  - type: SolutionContainerVisuals
-    maxFillLevels: 4
-
-- type: entity
-  parent: LargeBeaker
-  id: CMBeakerLarge
-  components:
-  - type: Sprite
-    sprite: _CM14/Objects/Medical/large_beaker.rsi
-  - type: Item
-    sprite: _CM14/Objects/Medical/large_beaker.rsi
   - type: SolutionContainerVisuals
     maxFillLevels: 5
+    fillBaseName: beaker
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 60
+        canMix: true
+  - type: Spillable
+    solution: beaker
+  - type: StaticPrice
+    price: 10
+
+- type: entity
+  parent: BaseBeaker
+  id: CMBeakerLarge
+  name: large beaker
+  description: A large beaker. Can hold up to 120 units.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Medical/large_beaker.rsi
+    layers:
+    - state: beakerlarge
+    - state: beakerlarge1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: Item
+    sprite: _CM14/Objects/Medical/large_beaker.rsi
+    size: Normal
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 120
+        canMix: true
+  - type: SolutionContainerVisuals
+    maxFillLevels: 5
+    fillBaseName: beakerlarge
+  - type: Spillable
+    solution: beaker
+  - type: StaticPrice
+    price: 20
+      
