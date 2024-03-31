@@ -1,71 +1,95 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/c268b16daf2e8da819958cdc7d02e7f906c370cd/icons/obj/items/chemistry.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/311e8f06c0eae7c6a0ab71ba04943c93c55850eb/icons/obj/items/chemistry.dmi, https://github.com/cmss13-devs/cmss13/blob/ca94d2e8715b73103fa9f213be53d343359b4107/icons/obj/items/reagentfillings.dmi",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-      "name": "bottle1"
+      "name": "bottle-1"
     },
     {
-      "name": "bottle2"
+      "name": "bottle-2"
     },
     {
-      "name": "bottle3"
+      "name": "bottle-3"
     },
     {
-      "name": "bottle4"
+      "name": "bottle-4"
     },
     {
-      "name": "bottle5"
+      "name": "lid_bottle-1"
     },
     {
-      "name": "bottle6"
+      "name": "lid_bottle-2"
     },
     {
-      "name": "bottle7"
+      "name": "lid_bottle-3"
     },
     {
-      "name": "bottle8"
+      "name": "lid_bottle-4"
     },
     {
-      "name": "bottle9"
+      "name": "bottle-1-1"
     },
     {
-      "name": "bottle10"
+      "name": "bottle-1-2"
     },
     {
-      "name": "bottle11"
+      "name": "bottle-1-3"
     },
     {
-      "name": "bottle12"
+      "name": "bottle-1-4"
     },
     {
-      "name": "bottle13"
+      "name": "bottle-1-5"
     },
     {
-      "name": "bottle14"
+      "name": "bottle-2-1"
     },
     {
-      "name": "bottle15"
+      "name": "bottle-2-2"
     },
     {
-      "name": "bottle16"
+      "name": "bottle-2-3"
     },
     {
-      "name": "bottle17"
+      "name": "bottle-2-4"
     },
     {
-      "name": "bottle18"
+      "name": "bottle-2-5"
     },
     {
-      "name": "bottle19"
+      "name": "bottle-3-1"
     },
     {
-      "name": "bottle20"
+      "name": "bottle-3-2"
+    },
+    {
+      "name": "bottle-3-3"
+    },
+    {
+      "name": "bottle-3-4"
+    },
+    {
+      "name": "bottle-3-5"
+    },
+    {
+      "name": "bottle-4-1"
+    },
+    {
+      "name": "bottle-4-2"
+    },
+    {
+      "name": "bottle-4-3"
+    },
+    {
+      "name": "bottle-4-4"
+    },
+    {
+      "name": "bottle-4-5"
     }
   ]
 }

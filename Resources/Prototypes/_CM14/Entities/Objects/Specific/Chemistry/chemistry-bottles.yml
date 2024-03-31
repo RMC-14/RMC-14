@@ -1,17 +1,23 @@
 - type: entity
   parent: BaseChemistryEmptyBottle
-  id: CMChemistryEmptyBottle
+  id: CMBottleEmpty
   components:
   - type: Item
     sprite: _CM14/Objects/Chemistry/bottles.rsi
   - type: Sprite
     sprite: _CM14/Objects/Chemistry/bottles.rsi
     layers:
-    - state: bottle2
+    - state: bottle-1 #TODO CM14 make something like "bottle-[rand(1..4)]"
+    - state: bottle-1-1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: SolutionContainerVisuals
+    maxFillLevels: 5
+    fillBaseName: bottle-1-
 
 - type: entity
-  parent: CMChemistryEmptyBottle
-  id: CMBaseChemistryBottleFilled
+  parent: CMBottleEmpty
+  id: CMBottleFilled
   abstract: true
   components:
   - type: Tag
@@ -19,14 +25,11 @@
     - Bottle
 
 - type: entity
+  parent: CMBottleFilled
   id: CMBottleKelotane
   name: kelotane bottle
   description: A small bottle. Contains kelotane - used to treat burned areas.
-  parent: CMBaseChemistryBottleFilled
   components:
-  - type: Sprite
-    layers:
-    - state: bottle16
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -36,14 +39,11 @@
           Quantity: 60
 
 - type: entity
+  parent: CMBottleFilled
   id: CMBottleInaprovaline
   name: inaprovaline bottle
   description: A small bottle. Contains inaprovaline - used to stabilize patients.
-  parent: CMBaseChemistryBottleFilled
   components:
-  - type: Sprite
-    layers:
-    - state: bottle19
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -53,14 +53,11 @@
           Quantity: 60
 
 - type: entity
+  parent: CMBottleFilled
   id: CMBottleDylovene
   name: dylovene bottle
   description: A small bottle of dylovene. Counters poisons, and repairs toxin damage. A wonder drug.
-  parent: CMBaseChemistryBottleFilled
   components:
-  - type: Sprite
-    layers:
-    - state: bottle7
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -70,14 +67,11 @@
           Quantity: 60
 
 - type: entity
+  parent: CMBottleFilled
   id: CMBottleBicaridine
   name: bicaridine bottle
   description: A small bottle. Contains Bicaridine - Used to treat brute damage.
-  parent: CMBaseChemistryBottleFilled
   components:
-  - type: Sprite
-    layers:
-    - state: bottle17
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -87,14 +81,11 @@
           Quantity: 60
 
 - type: entity
+  parent: CMBottleFilled
   id: CMBottleDexalin
   name: dexalin bottle
   description: A small bottle. Contains kelotane - used to treat burned areas.
-  parent: CMBaseChemistryBottleFilled
   components:
-  - type: Sprite
-    layers:
-    - state: bottle10
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -104,14 +95,11 @@
           Quantity: 60
 
 #- type: entity
+#  parent: CMBottleFilled
 #  id: CMBottleTramadol
 #  name: tramadol bottle
 #  description: A small bottle. Contains Tramadol - Used as a basic painkiller.
-#  parent: CMBaseChemistryBottleFilled
 #  components:
-#  - type: Sprite
-#    layers:
-#    - state: bottle1
 #  - type: SolutionContainerManager
 #    solutions:
 #      drink:
