@@ -97,3 +97,6 @@
 
 - type: playTimeTracker
   id: JobSurvivor
+
+- type: playTimeTracker
+  id: CMJobLiaison
