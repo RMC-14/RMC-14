@@ -11,7 +11,7 @@
   - type: Storage
     maxItemSize: Small
     grid:
-    - 0,0,4,1
+    - 0,0,2,2
   - type: Sprite
     state: box
   - type: Tag
