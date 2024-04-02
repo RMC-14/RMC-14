@@ -10,7 +10,7 @@
     - state: pill1
       map: [ "enum.DamageStateVisualLayers.Base" ]
   - type: Item
-    size: Small
+    size: Tiny
     sprite: _CM14/Objects/Chemistry/pills.rsi
 
 # TODO CM14 these need to have a random state per round
