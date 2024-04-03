@@ -345,8 +345,8 @@
   components:
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/bone_gel.rsi
-    state: base
+    state: bone-gel
   - type: Item
     sprite: _CM14/Objects/Medical/Surgery/bone_gel.rsi
-    state: base
+    state: bone-gel
   - type: CMBoneGel
