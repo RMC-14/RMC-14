@@ -1,0 +1,130 @@
+﻿- type: entity
+  id: CMSurgeryStepOpenIncisionScalpel
+  name: Cut with a scalpel
+  components:
+  - type: CMSurgeryToolStep
+    tool:
+    - type: CMScalpel
+    add:
+    - type: CMIncisionOpen
+  - type: Sprite
+    sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+    state: scalpel
+
+- type: entity
+  id: CMSurgeryStepClampBleeders
+  name: Clamp the bleeders
+  components:
+  - type: CMSurgeryToolStep
+    tool:
+    - type: CMHemostat
+    add:
+    - type: CMBleedersClamped
+  - type: Sprite
+    sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+    state: hemostat
+
+- type: entity
+  id: CMSurgeryStepRetractSkin
+  name: Retract the skin
+  components:
+  - type: CMSurgeryToolStep
+    tool:
+    - type: CMRetractor
+    add:
+    - type: CMSkinRetracted
+  - type: Sprite
+    sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+    state: retractor
+
+- type: entity
+  id: CMSurgeryStepSawBones
+  name: Saw through bones
+  components:
+  - type: CMSurgeryToolStep
+    tool:
+    - type: CMSurgicalDrill
+    add:
+    - type: CMRibcageSawed
+  - type: Sprite
+    sprite: Objects/Specific/Medical/Surgery/saw.rsi
+    state: saw
+
+- type: entity
+  id: CMSurgeryStepPriseOpenBones
+  name: Prise the bones open
+  components:
+  - type: CMSurgeryToolStep
+    tool:
+    - type: CMRetractor
+    add:
+    - type: CMRibcageOpen
+  - type: Sprite
+    sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+    state: retractor
+
+- type: entity
+  id: CMSurgeryStepCutLarvaRoots
+  name: Cut larva roots
+  components:
+  - type: CMSurgeryToolStep
+    tool:
+    - type: CMScalpel
+  - type: CMSurgeryCutLarvaRootsStep
+  - type: Sprite
+    sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+    state: scalpel
+
+- type: entity
+  id: CMSurgeryStepRemoveLarva
+  name: Remove larva
+  components:
+  - type: CMSurgeryToolStep
+    tool:
+    - type: CMHemostat
+    remove:
+    - type: VictimHugged
+  - type: Sprite
+    sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+    state: hemostat
+
+- type: entity
+  id: CMSurgeryStepCloseBones
+  name: Close bones
+  components:
+  - type: CMSurgeryToolStep
+    tool:
+    - type: CMRetractor
+    remove:
+    - type: CMRibcageOpen
+  - type: Sprite
+    sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+    state: retractor
+
+- type: entity
+  id: CMSurgeryStepMendRibcage
+  name: Mend ribcage
+  components:
+  - type: CMSurgeryToolStep
+    tool:
+    - type: CMBoneGel
+    remove:
+    - type: CMRibcageSawedComponent
+  - type: Sprite
+    sprite: _CM14/Objects/Medical/Surgery/bone_gel.rsi
+    state: base
+
+- type: entity
+  id: CMSurgeryStepCloseIncision
+  name: Close incision
+  components:
+  - type: CMSurgeryToolStep
+    tool:
+    - type: CMCautery
+    remove:
+    - type: CMSkinRetracted
+    - type: CMBleedersClamped
+    - type: CMIncisionOpen
+  - type: Sprite
+    sprite: Objects/Specific/Medical/Surgery/cautery.rsi
+    state: cautery

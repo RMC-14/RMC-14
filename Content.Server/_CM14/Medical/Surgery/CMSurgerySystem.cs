@@ -1,0 +1,93 @@
+﻿using Content.Server.Body.Systems;
+using Content.Shared._CM14.Medical.Surgery;
+using Content.Shared._CM14.Medical.Surgery.Conditions;
+using Content.Shared._CM14.Medical.Surgery.Tools;
+using Content.Shared.Interaction;
+using Content.Shared.Prototypes;
+using Robust.Server.GameObjects;
+using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
+
+namespace Content.Server._CM14.Medical.Surgery;
+
+public sealed class CMSurgerySystem : SharedCMSurgerySystem
+{
+    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+
+    private readonly List<EntProtoId> _surgeries = new();
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<CMSurgeryToolComponent, AfterInteractEvent>(OnToolAfterInteract);
+        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+
+        LoadPrototypes();
+    }
+
+    protected override void RefreshUI(EntityUid body)
+    {
+        if (!HasComp<CMSurgeryTargetComponent>(body))
+        {
+            _ui.TryCloseAll(body, CMSurgeryUIKey.Key);
+            return;
+        }
+
+        var surgeries = new Dictionary<EntProtoId, List<NetEntity>>();
+        foreach (var surgery in _surgeries)
+        {
+            if (GetSingleton(surgery) is not { } surgeryEnt)
+                continue;
+
+            foreach (var part in _body.GetBodyChildren(body))
+            {
+                var ev = new CMSurgeryValidEvent(body, part.Id);
+                RaiseLocalEvent(surgeryEnt, ref ev);
+
+                if (ev.Cancelled)
+                    continue;
+
+                surgeries.GetOrNew(surgery).Add(GetNetEntity(part.Id));
+            }
+        }
+
+        _ui.TrySetUiState(body, CMSurgeryUIKey.Key, new CMSurgeryBuiState(surgeries));
+    }
+
+    private void OnToolAfterInteract(Entity<CMSurgeryToolComponent> ent, ref AfterInteractEvent args)
+    {
+        if (args.Handled ||
+            args.Target == null ||
+            !TryComp(args.User, out ActorComponent? actor) ||
+            !HasComp<CMSurgeryTargetComponent>(args.Target))
+        {
+            return;
+        }
+
+        args.Handled = true;
+        _ui.TryOpen(args.Target.Value, CMSurgeryUIKey.Key, actor.PlayerSession);
+
+        RefreshUI(args.Target.Value);
+    }
+
+    private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
+    {
+        if (args.WasModified<EntityPrototype>())
+            LoadPrototypes();
+    }
+
+    private void LoadPrototypes()
+    {
+        _surgeries.Clear();
+
+        foreach (var entity in _prototypes.EnumeratePrototypes<EntityPrototype>())
+        {
+            if (entity.HasComponent<CMSurgeryComponent>())
+                _surgeries.Add(new EntProtoId(entity.ID));
+        }
+    }
+}

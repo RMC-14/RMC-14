@@ -55,3 +55,10 @@
     damage:
       types:
         Blunt: 5
+  - type: CMSurgeryTarget
+  - type: UserInterface
+    interfaces:
+    - key: enum.HumanoidMarkingModifierKey.Key
+      type: HumanoidMarkingModifierBoundUserInterface
+    - key: enum.CMSurgeryUIKey.Key
+      type: CMSurgeryBui

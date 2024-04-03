@@ -1,0 +1,31 @@
+﻿<controls:CMSurgeryWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._CM14.Medical.Surgery"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    MinSize="900 480">
+    <BoxContainer Orientation="Horizontal">
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+            <RichTextLabel Name="SurgeriesLabel" Access="Public" />
+            <cc:HSeparator Color="#4972A1" />
+            <ScrollContainer VScrollEnabled="True" HorizontalExpand="True" VerticalExpand="True">
+                <BoxContainer Name="Surgeries" Access="Public" Orientation="Vertical" />
+            </ScrollContainer>
+        </BoxContainer>
+        <cc:VSeparator />
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+            <RichTextLabel Name="PartsLabel" Access="Public" />
+            <cc:HSeparator Color="#4972A1" />
+            <ScrollContainer VScrollEnabled="True" HorizontalExpand="True" VerticalExpand="True">
+                <BoxContainer Name="Parts" Access="Public" Orientation="Vertical" />
+            </ScrollContainer>
+        </BoxContainer>
+        <cc:VSeparator />
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True" SizeFlagsStretchRatio="2">
+            <RichTextLabel Name="StepsLabel" Access="Public" />
+            <cc:HSeparator Color="#4972A1" />
+            <ScrollContainer VScrollEnabled="True" HorizontalExpand="True" VerticalExpand="True">
+                <BoxContainer Name="Steps" Access="Public" Orientation="Vertical" />
+            </ScrollContainer>
+        </BoxContainer>
+    </BoxContainer>
+</controls:CMSurgeryWindow>
