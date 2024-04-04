@@ -9,6 +9,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
+using Content.Shared.Standing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -26,6 +27,7 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly Dictionary<EntProtoId, EntityUid> _surgeries = new();
@@ -109,6 +111,7 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
         step = default;
 
         if (!HasComp<CMSurgeryTargetComponent>(body) ||
+            !_standing.IsDown(body) ||
             GetEntity(netPart) is not { Valid: true } netPartEnt ||
             GetSingleton(surgery) is not { } surgeryEntId ||
             !TryComp(surgeryEntId, out CMSurgeryComponent? surgeryComp) ||

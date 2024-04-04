@@ -2,11 +2,13 @@
 using Content.Client.Administration.UI.CustomControls;
 using Content.Shared._CM14.Medical.Surgery;
 using Content.Shared.Body.Part;
+using Content.Shared.Standing;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using static Robust.Client.UserInterface.Control;
 
 namespace Content.Client._CM14.Medical.Surgery;
 
@@ -16,6 +18,7 @@ public sealed class CMSurgeryBui : BoundUserInterface
     [Dependency] private readonly IEntityManager _entities = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
 
+    private readonly StandingStateSystem _standing;
     private readonly CMSurgerySystem _system;
 
     [ViewVariables]
@@ -27,12 +30,17 @@ public sealed class CMSurgeryBui : BoundUserInterface
 
     public CMSurgeryBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
+        _standing = _entities.System<StandingStateSystem>();
         _system = _entities.System<CMSurgerySystem>();
     }
 
     protected override void Open()
     {
-        _system.OnRefresh += RefreshUI;
+        _system.OnRefresh += () =>
+        {
+            UpdateDisabledPanel();
+            RefreshUI();
+        };
 
         if (State is CMSurgeryBuiState s)
             Update(s);
@@ -177,6 +185,7 @@ public sealed class CMSurgeryBui : BoundUserInterface
         }
 
         RefreshUI();
+        UpdateDisabledPanel();
 
         if (!_window.IsOpen)
             _window.OpenCentered();
@@ -326,6 +335,28 @@ public sealed class CMSurgeryBui : BoundUserInterface
             stepButton.Set(stepName, texture);
             i++;
         }
+
+        UpdateDisabledPanel();
+    }
+
+    private void UpdateDisabledPanel()
+    {
+        if (_window == null)
+            return;
+
+        if (_standing.IsDown(Owner))
+        {
+            _window.DisabledPanel.Visible = false;
+            _window.DisabledPanel.MouseFilter = MouseFilterMode.Ignore;
+            return;
+        }
+
+        _window.DisabledPanel.Visible = true;
+
+        var text = new FormattedMessage();
+        text.AddMarkup("[color=red][font size=16]They need to be lying down![/font][/color]");
+        _window.DisabledLabel.SetMessage(text);
+        _window.DisabledPanel.MouseFilter = MouseFilterMode.Stop;
     }
 
     private void View(ViewType type)
