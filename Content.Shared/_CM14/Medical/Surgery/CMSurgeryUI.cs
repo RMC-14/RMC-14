@@ -10,9 +10,9 @@ public enum CMSurgeryUIKey
 }
 
 [Serializable, NetSerializable]
-public sealed class CMSurgeryBuiState(Dictionary<EntProtoId, List<NetEntity>> choices) : BoundUserInterfaceState
+public sealed class CMSurgeryBuiState(Dictionary<NetEntity, List<EntProtoId>> choices) : BoundUserInterfaceState
 {
-    public readonly Dictionary<EntProtoId, List<NetEntity>> Choices = choices;
+    public readonly Dictionary<NetEntity, List<EntProtoId>> Choices = choices;
 }
 
 [Serializable, NetSerializable]

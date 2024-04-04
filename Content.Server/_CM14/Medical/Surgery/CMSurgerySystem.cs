@@ -37,7 +37,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
             return;
         }
 
-        var surgeries = new Dictionary<EntProtoId, List<NetEntity>>();
+        var surgeries = new Dictionary<NetEntity, List<EntProtoId>>();
         foreach (var surgery in _surgeries)
         {
             if (GetSingleton(surgery) is not { } surgeryEnt)
@@ -51,7 +51,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
                 if (ev.Cancelled)
                     continue;
 
-                surgeries.GetOrNew(surgery).Add(GetNetEntity(part.Id));
+                surgeries.GetOrNew(GetNetEntity(part.Id)).Add(surgery);
             }
         }
 

@@ -4,10 +4,8 @@ using Content.Shared._CM14.Medical.Surgery;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using static Robust.Client.UserInterface.Controls.Label;
 
 namespace Content.Client._CM14.Medical.Surgery;
 
@@ -22,8 +20,9 @@ public sealed class CMSurgeryBui : BoundUserInterface
     [ViewVariables]
     private CMSurgeryWindow? _window;
 
-    private (EntityUid Ent, EntProtoId Proto)? _surgery;
     private EntityUid? _part;
+    private (EntityUid Ent, EntProtoId Proto)? _surgery;
+    private readonly List<EntProtoId> _previousSurgeries = new();
 
     public CMSurgeryBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -62,50 +61,86 @@ public sealed class CMSurgeryBui : BoundUserInterface
             _window.OnClose += Close;
             _window.Title = "Surgery";
 
-            var surgeries = new FormattedMessage();
-            surgeries.AddMarkup("[bold]Surgeries[/bold]");
-            _window.SurgeriesLabel.SetMessage(surgeries);
+            _window.PartsButton.OnPressed += _ =>
+            {
+                _part = null;
+                _surgery = null;
+                _previousSurgeries.Clear();
+                View(ViewType.Parts);
+            };
 
-            var parts = new FormattedMessage();
-            parts.AddMarkup("[bold]Parts[/bold]");
-            _window.PartsLabel.SetMessage(parts);
+            _window.SurgeriesButton.OnPressed += _ =>
+            {
+                _surgery = null;
+                _previousSurgeries.Clear();
 
-            var steps = new FormattedMessage();
-            steps.AddMarkup("[bold]Steps[/bold]");
-            _window.StepsLabel.SetMessage(steps);
+                if (!_entities.TryGetNetEntity(_part, out var netPart) ||
+                    State is not CMSurgeryBuiState s ||
+                    !s.Choices.TryGetValue(netPart.Value, out var surgeries))
+                {
+                    return;
+                }
+
+                OnPartPressed(netPart.Value, surgeries);
+            };
+
+            _window.StepsButton.OnPressed += _ =>
+            {
+                if (!_entities.TryGetNetEntity(_part, out var netPart) ||
+                    _previousSurgeries.Count == 0)
+                {
+                    return;
+                }
+
+                var last = _previousSurgeries[^1];
+                _previousSurgeries.RemoveAt(_previousSurgeries.Count - 1);
+
+                if (_system.GetSingleton(last) is not { } previousId ||
+                    !_entities.TryGetComponent(previousId, out CMSurgeryComponent? previous))
+                {
+                    return;
+                }
+
+                OnSurgeryPressed((previousId, previous), netPart.Value, last);
+            };
         }
 
         _window.Surgeries.DisposeAllChildren();
         _window.Steps.DisposeAllChildren();
         _window.Parts.DisposeAllChildren();
 
+        View(ViewType.Parts);
+
         var oldSurgery = _surgery;
         var oldPart = _part;
-        _surgery = null;
         _part = null;
+        _surgery = null;
 
-        foreach (var (surgeryId, parts) in state.Choices)
+        foreach (var (netPart, surgeries) in state.Choices)
         {
-            var surgeryEnt = _system.GetSingleton(surgeryId);
-            if (!_entities.TryGetComponent(surgeryEnt, out CMSurgeryComponent? surgery))
-                continue;
+            var part = _entities.GetEntity(netPart);
+            var partName = _entities.GetComponent<MetaDataComponent>(part).EntityName;
+            var partButton = new XenoChoiceControl();
 
-            var name = _entities.GetComponent<MetaDataComponent>(surgeryEnt.Value).EntityName;
-            var surgeryButton = new Button
+            partButton.Set(partName, null);
+            partButton.Button.OnPressed += _ => OnPartPressed(netPart, surgeries);
+
+            _window.Parts.AddChild(partButton);
+
+            foreach (var surgeryId in surgeries)
             {
-                Text = name,
-                StyleClasses = { "OpenBoth" },
-                TextAlign = AlignMode.Left
-            };
+                if (_system.GetSingleton(surgeryId) is not { } surgery ||
+                    !_entities.TryGetComponent(surgery, out CMSurgeryComponent? surgeryComp))
+                {
+                    continue;
+                }
 
-            surgeryButton.OnPressed += _ => OnSurgeryPressed((surgeryEnt.Value, surgery), parts, surgeryId);
-            _window.Surgeries.AddChild(surgeryButton);
-
-            if (oldSurgery?.Proto == surgeryId)
-            {
-                var select = oldPart == null ? null : _entities.GetNetEntity(oldPart);
-                OnSurgeryPressed((surgeryEnt.Value, surgery), parts, surgeryId, select);
+                if (oldPart == part && oldSurgery?.Proto == surgeryId)
+                    OnSurgeryPressed((surgery, surgeryComp), netPart, surgeryId);
             }
+
+            if (oldPart == part && oldSurgery == null)
+                OnPartPressed(netPart, surgeries);
         }
 
         RefreshUI();
@@ -125,52 +160,19 @@ public sealed class CMSurgeryBui : BoundUserInterface
         var stepName = new FormattedMessage();
         stepName.AddText(_entities.GetComponent<MetaDataComponent>(step).EntityName);
 
-        // TODO cm14 rename this control
         var stepButton = new CMSurgeryStepButton { Step = step };
         stepButton.Button.OnPressed += _ => SendMessage(new CMSurgeryStepChosenBuiMessage(netPart, surgeryId, stepId));
 
         _window.Steps.AddChild(stepButton);
     }
 
-    private void OnSurgeryPressed(Entity<CMSurgeryComponent> surgery, List<NetEntity> parts, EntProtoId surgeryId, NetEntity? select = null)
-    {
-        if (_window == null)
-            return;
-
-        _surgery = (surgery, surgeryId);
-        _part = select == null ? null : _entities.GetEntity(select);
-
-        _window.Steps.DisposeAllChildren();
-        _window.Parts.DisposeAllChildren();
-
-        foreach (var netPart in parts)
-        {
-            var part = _entities.GetEntity(netPart);
-            var partName = _entities.GetComponent<MetaDataComponent>(part).EntityName;
-            var partButton = new Button
-            {
-                Text = partName,
-                StyleClasses = { "OpenBoth" },
-                TextAlign = AlignMode.Left
-            };
-
-            partButton.OnPressed += _ => OnPartPressed(surgery, parts, surgeryId, netPart);
-
-            _window.Parts.AddChild(partButton);
-
-            if (select == netPart)
-                OnPartPressed(surgery, parts, surgeryId, netPart);
-        }
-
-        RefreshUI();
-    }
-
-    private void OnPartPressed(Entity<CMSurgeryComponent> surgery, List<NetEntity> parts, EntProtoId surgeryId, NetEntity netPart)
+    private void OnSurgeryPressed(Entity<CMSurgeryComponent> surgery, NetEntity netPart, EntProtoId surgeryId)
     {
         if (_window == null)
             return;
 
         _part = _entities.GetEntity(netPart);
+        _surgery = (surgery, surgeryId);
 
         _window.Steps.DisposeAllChildren();
 
@@ -179,8 +181,10 @@ public sealed class CMSurgeryBui : BoundUserInterface
             var label = new XenoChoiceControl();
             label.Button.OnPressed += _ =>
             {
+                _previousSurgeries.Add(surgeryId);
+
                 if (_entities.TryGetComponent(requirement, out CMSurgeryComponent? requirementComp))
-                    OnSurgeryPressed((requirement, requirementComp), parts, requirementId, netPart);
+                    OnSurgeryPressed((requirement, requirementComp), netPart, requirementId);
             };
 
             var msg = new FormattedMessage();
@@ -197,13 +201,43 @@ public sealed class CMSurgeryBui : BoundUserInterface
             AddStep(stepId, netPart, surgeryId);
         }
 
+        View(ViewType.Steps);
         RefreshUI();
+    }
+
+    private void OnPartPressed(NetEntity netPart, List<EntProtoId> surgeries)
+    {
+        if (_window == null)
+            return;
+
+        _part = _entities.GetEntity(netPart);
+
+        _window.Surgeries.DisposeAllChildren();
+
+        foreach (var surgeryId in surgeries)
+        {
+            if (_system.GetSingleton(surgeryId) is not { } surgery ||
+                !_entities.TryGetComponent(surgery, out CMSurgeryComponent? surgeryComp))
+            {
+                continue;
+            }
+
+            var name = _entities.GetComponent<MetaDataComponent>(surgery).EntityName;
+            var surgeryButton = new XenoChoiceControl();
+            surgeryButton.Set(name, null);
+
+            surgeryButton.Button.OnPressed += _ => OnSurgeryPressed((surgery, surgeryComp), netPart, surgeryId);
+            _window.Surgeries.AddChild(surgeryButton);
+        }
+
+        RefreshUI();
+        View(ViewType.Surgeries);
     }
 
     private void RefreshUI()
     {
         if (_window == null ||
-            !_entities.TryGetComponent(_surgery?.Ent, out CMSurgeryComponent? surgery) ||
+            !_entities.HasComponent<CMSurgeryComponent>(_surgery?.Ent) ||
             _part == null)
         {
             return;
@@ -259,6 +293,44 @@ public sealed class CMSurgeryBui : BoundUserInterface
             stepButton.Set(stepName, texture);
             i++;
         }
+    }
+
+    private void View(ViewType type)
+    {
+        if (_window == null)
+            return;
+
+        _window.PartsButton.Parent!.Margin = new Thickness(0, 0, 0, 10);
+
+        _window.Parts.Visible = type == ViewType.Parts;
+        _window.PartsButton.Disabled = type == ViewType.Parts;
+
+        _window.Surgeries.Visible = type == ViewType.Surgeries;
+        _window.SurgeriesButton.Disabled = type != ViewType.Steps;
+
+        _window.Steps.Visible = type == ViewType.Steps;
+        _window.StepsButton.Disabled = type != ViewType.Steps || _previousSurgeries.Count == 0;
+
+        if (_entities.TryGetComponent(_part, out MetaDataComponent? partMeta) &&
+            _entities.TryGetComponent(_surgery?.Ent, out MetaDataComponent? surgeryMeta))
+        {
+            _window.Title = $"Surgery - {partMeta.EntityName}, {surgeryMeta.EntityName}";
+        }
+        else if (partMeta != null)
+        {
+            _window.Title = $"Surgery - {partMeta.EntityName}";
+        }
+        else
+        {
+            _window.Title = $"Surgery";
+        }
+    }
+
+    private enum ViewType
+    {
+        Parts,
+        Surgeries,
+        Steps
     }
 
     private enum StepStatus
