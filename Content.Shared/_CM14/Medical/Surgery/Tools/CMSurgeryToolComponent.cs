@@ -1,4 +1,4 @@
-﻿using Content.Shared.Body.Part;
+﻿using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._CM14.Medical.Surgery.Tools;
@@ -8,5 +8,5 @@ namespace Content.Shared._CM14.Medical.Surgery.Tools;
 public sealed partial class CMSurgeryToolComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public BodyPartType? Target;
+    public SoundSpecifier? Sound;
 }

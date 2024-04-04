@@ -34,8 +34,15 @@ public abstract partial class SharedCMSurgerySystem
     {
         foreach (var reg in ent.Comp.Tool.Values)
         {
-            if (!AnyHaveComp(args.Tools, reg.Component))
+            if (!AnyHaveComp(args.Tools, reg.Component, out var tool))
                 return;
+
+            if (_net.IsServer &&
+                TryComp(tool, out CMSurgeryToolComponent? toolComp) &&
+                toolComp.Sound != null)
+            {
+                _audio.PlayEntity(toolComp.Sound, tool, args.User);
+            }
         }
 
         if (ent.Comp.Add != null)
@@ -110,7 +117,7 @@ public abstract partial class SharedCMSurgerySystem
     {
         foreach (var reg in ent.Comp.Tool.Values)
         {
-            if (!AnyHaveComp(args.Tools, reg.Component))
+            if (!AnyHaveComp(args.Tools, reg.Component, out _))
             {
                 args.Cancelled = true;
 
@@ -253,14 +260,18 @@ public abstract partial class SharedCMSurgerySystem
         return !ev.Cancelled;
     }
 
-    private bool AnyHaveComp(List<EntityUid> tools, IComponent component)
+    private bool AnyHaveComp(List<EntityUid> tools, IComponent component, out EntityUid withComp)
     {
         foreach (var tool in tools)
         {
             if (HasComp(tool, component.GetType()))
+            {
+                withComp = tool;
                 return true;
+            }
         }
 
+        withComp = default;
         return false;
     }
 }

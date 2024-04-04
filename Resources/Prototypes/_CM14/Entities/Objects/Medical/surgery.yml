@@ -17,6 +17,9 @@
   name: retractor
   description: Retracts stuff.
   components:
+  - type: CMSurgeryTool
+    sound:
+      collection: CMRetractor
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/retractor.rsi
     state: retractor
@@ -42,6 +45,9 @@
   name: hemostat
   description: You think you have seen this before.
   components:
+  - type: CMSurgeryTool
+    sound:
+      collection: CMHemostat
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
@@ -67,6 +73,9 @@
   name: cautery
   description: This stops bleeding.
   components:
+  - type: CMSurgeryTool
+    sound:
+      collection: CMCautery
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/cautery.rsi
     state: cautery
@@ -98,6 +107,9 @@
   name: surgical drill
   description: You can drill using this item. You dig?
   components:
+  - type: CMSurgeryTool
+    sound:
+      collection: CMSaw
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/drill.rsi
     state: drill
@@ -129,6 +141,9 @@
   name: scalpel
   description: Cut, cut, and once more cut.
   components:
+  - type: CMSurgeryTool
+    sound:
+      collection: CMScalpel
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/scalpel.rsi
     state: scalpel
@@ -255,6 +270,9 @@
   name: circular saw
   description: For heavy-duty cutting.
   components:
+  - type: CMSurgeryTool
+    sound:
+      collection: CMSaw
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/saw.rsi
     state: saw
