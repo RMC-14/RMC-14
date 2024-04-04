@@ -17,18 +17,23 @@ public sealed class CMSurgeryBui : BoundUserInterface
     [Dependency] private readonly IEntityManager _entities = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
 
-    private readonly SharedCMSurgerySystem _system;
+    private readonly CMSurgerySystem _system;
 
     [ViewVariables]
     private CMSurgeryWindow? _window;
 
+    private (EntityUid Ent, EntProtoId Proto)? _surgery;
+    private EntityUid? _part;
+
     public CMSurgeryBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
-        _system = _entities.System<SharedCMSurgerySystem>();
+        _system = _entities.System<CMSurgerySystem>();
     }
 
     protected override void Open()
     {
+        _system.OnRefresh += RefreshUI;
+
         if (State is CMSurgeryBuiState s)
             Update(s);
     }
@@ -45,6 +50,8 @@ public sealed class CMSurgeryBui : BoundUserInterface
 
         if (disposing)
             _window?.Dispose();
+
+        _system.OnRefresh -= RefreshUI;
     }
 
     private void Update(CMSurgeryBuiState state)
@@ -68,10 +75,14 @@ public sealed class CMSurgeryBui : BoundUserInterface
             _window.StepsLabel.SetMessage(steps);
         }
 
-        // TODO CM14 reuse the controls
         _window.Surgeries.DisposeAllChildren();
         _window.Steps.DisposeAllChildren();
         _window.Parts.DisposeAllChildren();
+
+        var oldSurgery = _surgery;
+        var oldPart = _part;
+        _surgery = null;
+        _part = null;
 
         foreach (var (surgeryId, parts) in state.Choices)
         {
@@ -89,13 +100,21 @@ public sealed class CMSurgeryBui : BoundUserInterface
 
             surgeryButton.OnPressed += _ => OnSurgeryPressed((surgeryEnt.Value, surgery), parts, surgeryId);
             _window.Surgeries.AddChild(surgeryButton);
+
+            if (oldSurgery?.Proto == surgeryId)
+            {
+                var select = oldPart == null ? null : _entities.GetNetEntity(oldPart);
+                OnSurgeryPressed((surgeryEnt.Value, surgery), parts, surgeryId, select);
+            }
         }
+
+        RefreshUI();
 
         if (!_window.IsOpen)
             _window.OpenCentered();
     }
 
-    private void AddStep(EntProtoId stepId, NetEntity netPart, EntProtoId surgeryId, StepStatus status)
+    private void AddStep(EntProtoId stepId, NetEntity netPart, EntProtoId surgeryId)
     {
         if (_window == null ||
             _system.GetSingleton(stepId) is not { } step)
@@ -107,29 +126,8 @@ public sealed class CMSurgeryBui : BoundUserInterface
         stepName.AddText(_entities.GetComponent<MetaDataComponent>(step).EntityName);
 
         // TODO cm14 rename this control
-        var stepButton = new XenoChoiceControl();
-        if (status != StepStatus.Next)
-            stepButton.Button.Disabled = true;
-
-        if (status == StepStatus.Complete)
-        {
-            stepButton.Button.Modulate = Color.Green;
-        }
-        else if (_player.LocalEntity is { } player &&
-                 !_system.CanPerformStep(player, step, false, out var popup))
-        {
-            stepButton.ToolTip = popup;
-            stepButton.Button.Disabled = true;
-            stepName.AddMarkup(" [color=red](Missing tool)[/color]");
-        }
-
-        var texture = _entities.GetComponentOrNull<SpriteComponent>(step)?.Icon?.Default;
-        stepButton.Set(stepName, texture);
-        stepButton.Button.OnPressed += _ =>
-        {
-            SendMessage(new CMSurgeryStepChosenBuiMessage(netPart, surgeryId, stepId));
-            Close();
-        };
+        var stepButton = new CMSurgeryStepButton { Step = step };
+        stepButton.Button.OnPressed += _ => SendMessage(new CMSurgeryStepChosenBuiMessage(netPart, surgeryId, stepId));
 
         _window.Steps.AddChild(stepButton);
     }
@@ -138,6 +136,9 @@ public sealed class CMSurgeryBui : BoundUserInterface
     {
         if (_window == null)
             return;
+
+        _surgery = (surgery, surgeryId);
+        _part = select == null ? null : _entities.GetEntity(select);
 
         _window.Steps.DisposeAllChildren();
         _window.Parts.DisposeAllChildren();
@@ -160,12 +161,16 @@ public sealed class CMSurgeryBui : BoundUserInterface
             if (select == netPart)
                 OnPartPressed(surgery, parts, surgeryId, netPart);
         }
+
+        RefreshUI();
     }
 
-    public void OnPartPressed(Entity<CMSurgeryComponent> surgery, List<NetEntity> parts, EntProtoId surgeryId, NetEntity netPart)
+    private void OnPartPressed(Entity<CMSurgeryComponent> surgery, List<NetEntity> parts, EntProtoId surgeryId, NetEntity netPart)
     {
         if (_window == null)
             return;
+
+        _part = _entities.GetEntity(netPart);
 
         _window.Steps.DisposeAllChildren();
 
@@ -187,16 +192,36 @@ public sealed class CMSurgeryBui : BoundUserInterface
             _window.Steps.AddChild(new HSeparator { Color = Color.FromHex("#4972A1"), Margin = new Thickness(0, 0, 0, 1) });
         }
 
-        var next = _system.GetNextStep(Owner, _entities.GetEntity(netPart), surgery);
-        for (var i = 0; i < surgery.Comp.Steps.Count; i++)
+        foreach (var stepId in surgery.Comp.Steps)
         {
-            var stepId = surgery.Comp.Steps[i];
+            AddStep(stepId, netPart, surgeryId);
+        }
+
+        RefreshUI();
+    }
+
+    private void RefreshUI()
+    {
+        if (_window == null ||
+            !_entities.TryGetComponent(_surgery?.Ent, out CMSurgeryComponent? surgery) ||
+            _part == null)
+        {
+            return;
+        }
+
+        var next = _system.GetNextStep(Owner, _part.Value, _surgery.Value.Ent);
+        var i = 0;
+        foreach (var child in _window.Steps.Children)
+        {
+            if (child is not CMSurgeryStepButton stepButton)
+                continue;
+
             var status = StepStatus.Incomplete;
             if (next == null)
             {
                 status = StepStatus.Complete;
             }
-            else if (next.Value.Surgery.Owner != surgery.Owner)
+            else if (next.Value.Surgery.Owner != _surgery.Value.Ent)
             {
                 status = StepStatus.Incomplete;
             }
@@ -209,7 +234,30 @@ public sealed class CMSurgeryBui : BoundUserInterface
                 status = StepStatus.Complete;
             }
 
-            AddStep(stepId, netPart, surgeryId, status);
+            stepButton.Button.Disabled = status != StepStatus.Next;
+
+            var stepName = new FormattedMessage();
+            stepName.AddText(_entities.GetComponent<MetaDataComponent>(stepButton.Step).EntityName);
+
+            if (status == StepStatus.Complete)
+            {
+                stepButton.Button.Modulate = Color.Green;
+            }
+            else
+            {
+                stepButton.Button.Modulate = Color.White;
+                if (_player.LocalEntity is { } player &&
+                    !_system.CanPerformStep(player, stepButton.Step, false, out var popup))
+                {
+                    stepButton.ToolTip = popup;
+                    stepButton.Button.Disabled = true;
+                    stepName.AddMarkup(" [color=red](Missing tool)[/color]");
+                }
+            }
+
+            var texture = _entities.GetComponentOrNull<SpriteComponent>(stepButton.Step)?.Icon?.Default;
+            stepButton.Set(stepName, texture);
+            i++;
         }
     }
 

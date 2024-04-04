@@ -7,7 +7,8 @@ using Robust.Shared.Utility;
 namespace Content.Client._CM14.Xenos.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class XenoChoiceControl : Control
+[Virtual]
+public partial class XenoChoiceControl : Control
 {
     public XenoChoiceControl()
     {

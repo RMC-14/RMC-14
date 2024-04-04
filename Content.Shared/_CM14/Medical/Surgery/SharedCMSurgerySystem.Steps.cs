@@ -156,7 +156,10 @@ public abstract partial class SharedCMSurgerySystem
             return;
 
         var ev = new CMSurgeryDoAfterEvent(GetNetEntity(part), args.Surgery, args.Step);
-        var doAfter = new DoAfterArgs(EntityManager, user, 2, ev, body, body);
+        var doAfter = new DoAfterArgs(EntityManager, user, 2, ev, body, body)
+        {
+            BreakOnMove = true
+        };
         _doAfter.TryStartDoAfter(doAfter);
     }
 

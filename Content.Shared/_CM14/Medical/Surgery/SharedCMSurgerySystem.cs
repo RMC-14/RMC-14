@@ -48,7 +48,8 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
 
     private void OnTargetDoAfter(Entity<CMSurgeryTargetComponent> ent, ref CMSurgeryDoAfterEvent args)
     {
-        if (args.Handled ||
+        if (args.Cancelled ||
+            args.Handled ||
             args.Target is not { } target ||
             !IsSurgeryValid(target, args.Part, args.Surgery, args.Step, out var surgery, out var part, out var step) ||
             !PreviousStepsComplete(target, part, surgery, args.Step))
@@ -63,6 +64,8 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
 
         var ev = new CMSurgeryStepEvent(target, part, GetTools(args.User));
         RaiseLocalEvent(step, ref ev);
+
+        RefreshUI(ent);
     }
 
     private void OnCloseIncisionValid(Entity<CMSurgeryCloseIncisionConditionComponent> ent, ref CMSurgeryValidEvent args)
