@@ -56,6 +56,7 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
             !IsSurgeryValid(target, args.Part, args.Surgery, args.Step, out var surgery, out var part, out var step) ||
             !PreviousStepsComplete(target, part, surgery, args.Step))
         {
+            Log.Warning($"{ToPrettyString(args.User)} tried to start invalid surgery.");
             return;
         }
 
@@ -115,6 +116,7 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
 
         var ev = new CMSurgeryValidEvent(body, netPartEnt);
         RaiseLocalEvent(stepEnt, ref ev);
+        RaiseLocalEvent(surgeryEntId, ref ev);
 
         if (ev.Cancelled)
             return false;

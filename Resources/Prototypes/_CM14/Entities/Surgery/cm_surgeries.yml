@@ -50,3 +50,5 @@
     - CMSurgeryStepCutLarvaRoots
     - CMSurgeryStepRemoveLarva
   - type: CMSurgeryLarvaCondition
+  - type: CMSurgeryPartCondition
+    part: Torso
