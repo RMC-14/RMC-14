@@ -21,6 +21,7 @@ public sealed class CMStorageSystem : EntitySystem
         {
             Log.Warning($"Storage {ToPrettyString(storage)} can't fit {ToPrettyString(args.Item)}");
 
+            var modified = false;
             foreach (var shape in _item.GetItemShape((args.Item, args.Item)))
             {
                 var grid = args.Storage.Grid;
@@ -37,7 +38,11 @@ public sealed class CMStorageSystem : EntitySystem
                     expanded.Top = shape.Top;
 
                 grid[^1] = expanded;
+                modified = true;
             }
+
+            if (modified)
+                Dirty(storage);
         }
     }
 }
