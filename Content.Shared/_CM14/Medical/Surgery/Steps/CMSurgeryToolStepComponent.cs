@@ -15,4 +15,7 @@ public sealed partial class CMSurgeryToolStepComponent : Component
 
     [DataField]
     public ComponentRegistry? Remove;
+
+    [DataField]
+    public ComponentRegistry? BodyRemove;
 }

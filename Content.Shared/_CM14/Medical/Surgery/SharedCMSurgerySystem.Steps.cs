@@ -57,6 +57,14 @@ public abstract partial class SharedCMSurgerySystem
                 RemComp(args.Part, reg.Component.GetType());
             }
         }
+
+        if (ent.Comp.BodyRemove != null)
+        {
+            foreach (var reg in ent.Comp.BodyRemove.Values)
+            {
+                RemComp(args.Body, reg.Component.GetType());
+            }
+        }
     }
 
     private void OnToolCheck(Entity<CMSurgeryToolStepComponent> ent, ref CMSurgeryStepCompleteCheckEvent args)
@@ -78,6 +86,18 @@ public abstract partial class SharedCMSurgerySystem
             foreach (var reg in ent.Comp.Remove.Values)
             {
                 if (HasComp(args.Part, reg.Component.GetType()))
+                {
+                    args.Cancelled = true;
+                    return;
+                }
+            }
+        }
+
+        if (ent.Comp.BodyRemove != null)
+        {
+            foreach (var reg in ent.Comp.BodyRemove.Values)
+            {
+                if (HasComp(args.Body, reg.Component.GetType()))
                 {
                     args.Cancelled = true;
                     return;

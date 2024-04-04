@@ -1,4 +1,10 @@
 ﻿- type: entity
+  id: CMSurgeryBase
+  categories:
+  - hideSpawnMenu
+
+- type: entity
+  parent: CMSurgeryBase
   id: CMSurgeryOpenIncision
   name: Open Incision
   components:
@@ -9,6 +15,7 @@
     - CMSurgeryStepRetractSkin
 
 - type: entity
+  parent: CMSurgeryBase
   id: CMSurgeryCloseIncision
   name: Close Incision
   components:
@@ -19,6 +26,7 @@
     - CMSurgeryStepCloseIncision
 
 - type: entity
+  parent: CMSurgeryBase
   id: CMSurgeryOpenRibcage
   name: Open Ribcage
   components:
@@ -29,6 +37,7 @@
     - CMSurgeryStepPriseOpenBones
 
 - type: entity
+  parent: CMSurgeryBase
   id: CMSurgeryAlienEmbryoRemoval
   name: Alien Embryo Removal
   description: Removal of an alien embryo from the body.

@@ -1,4 +1,10 @@
 ﻿- type: entity
+  id: CMSurgeryStepBase
+  categories:
+  - hideSpawnMenu
+
+- type: entity
+  parent: CMSurgeryStepBase
   id: CMSurgeryStepOpenIncisionScalpel
   name: Cut with a scalpel
   components:
@@ -12,6 +18,7 @@
     state: scalpel
 
 - type: entity
+  parent: CMSurgeryStepBase
   id: CMSurgeryStepClampBleeders
   name: Clamp the bleeders
   components:
@@ -25,6 +32,7 @@
     state: hemostat
 
 - type: entity
+  parent: CMSurgeryStepBase
   id: CMSurgeryStepRetractSkin
   name: Retract the skin
   components:
@@ -38,6 +46,7 @@
     state: retractor
 
 - type: entity
+  parent: CMSurgeryStepBase
   id: CMSurgeryStepSawBones
   name: Saw through bones
   components:
@@ -51,6 +60,7 @@
     state: saw
 
 - type: entity
+  parent: CMSurgeryStepBase
   id: CMSurgeryStepPriseOpenBones
   name: Prise the bones open
   components:
@@ -64,6 +74,7 @@
     state: retractor
 
 - type: entity
+  parent: CMSurgeryStepBase
   id: CMSurgeryStepCutLarvaRoots
   name: Cut larva roots
   components:
@@ -76,19 +87,21 @@
     state: scalpel
 
 - type: entity
+  parent: CMSurgeryStepBase
   id: CMSurgeryStepRemoveLarva
   name: Remove larva
   components:
   - type: CMSurgeryToolStep
     tool:
     - type: CMHemostat
-    remove:
+    bodyRemove:
     - type: VictimHugged
   - type: Sprite
     sprite: Objects/Specific/Medical/Surgery/scissors.rsi
     state: hemostat
 
 - type: entity
+  parent: CMSurgeryStepBase
   id: CMSurgeryStepCloseBones
   name: Close bones
   components:
@@ -102,6 +115,7 @@
     state: retractor
 
 - type: entity
+  parent: CMSurgeryStepBase
   id: CMSurgeryStepMendRibcage
   name: Mend ribcage
   components:
@@ -115,6 +129,7 @@
     state: bone-gel
 
 - type: entity
+  parent: CMSurgeryStepBase
   id: CMSurgeryStepCloseIncision
   name: Close incision
   components:
