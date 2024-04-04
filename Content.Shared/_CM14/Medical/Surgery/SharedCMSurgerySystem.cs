@@ -4,6 +4,7 @@ using Content.Shared._CM14.Medical.Surgery.Effects;
 using Content.Shared._CM14.Medical.Surgery.Steps;
 using Content.Shared._CM14.Medical.Surgery.Steps.Parts;
 using Content.Shared._CM14.Xenos.Hugger;
+using Content.Shared.Body.Part;
 using Content.Shared.DoAfter;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.EntitySystems;
@@ -35,6 +36,7 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
 
         SubscribeLocalEvent<CMSurgeryCloseIncisionConditionComponent, CMSurgeryValidEvent>(OnCloseIncisionValid);
         SubscribeLocalEvent<CMSurgeryLarvaConditionComponent, CMSurgeryValidEvent>(OnLarvaValid);
+        SubscribeLocalEvent<CMSurgeryPartConditionComponent, CMSurgeryValidEvent>(OnPartConditionValid);
 
         SubscribeLocalEvent<CMSurgeryRemoveLarvaComponent, CMSurgeryCompletedEvent>(OnRemoveLarva);
 
@@ -81,6 +83,12 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
     private void OnLarvaValid(Entity<CMSurgeryLarvaConditionComponent> ent, ref CMSurgeryValidEvent args)
     {
         if (!HasComp<VictimHuggedComponent>(args.Body))
+            args.Cancelled = true;
+    }
+
+    private void OnPartConditionValid(Entity<CMSurgeryPartConditionComponent> ent, ref CMSurgeryValidEvent args)
+    {
+        if (CompOrNull<BodyPartComponent>(args.Part)?.PartType != ent.Comp.Part)
             args.Cancelled = true;
     }
 

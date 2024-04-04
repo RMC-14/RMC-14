@@ -35,6 +35,8 @@
     steps:
     - CMSurgeryStepSawBones
     - CMSurgeryStepPriseOpenBones
+  - type: CMSurgeryPartCondition
+    part: Torso
 
 - type: entity
   parent: CMSurgeryBase
