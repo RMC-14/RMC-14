@@ -14,7 +14,7 @@
     add:
     - type: CMIncisionOpen
   - type: Sprite
-    sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+    sprite: _CM14/Objects/Medical/Surgery/scalpel.rsi
     state: scalpel
 
 - type: entity
@@ -28,7 +28,7 @@
     add:
     - type: CMBleedersClamped
   - type: Sprite
-    sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+    sprite: _CM14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
 
 - type: entity
@@ -42,7 +42,7 @@
     add:
     - type: CMSkinRetracted
   - type: Sprite
-    sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+    sprite: _CM14/Objects/Medical/Surgery/retractor.rsi
     state: retractor
 
 - type: entity
@@ -52,11 +52,11 @@
   components:
   - type: CMSurgeryToolStep
     tool:
-    - type: CMSurgicalDrill
+    - type: CMBoneSaw
     add:
     - type: CMRibcageSawed
   - type: Sprite
-    sprite: Objects/Specific/Medical/Surgery/saw.rsi
+    sprite: _CM14/Objects/Medical/Surgery/saw.rsi
     state: saw
 
 - type: entity
@@ -70,7 +70,7 @@
     add:
     - type: CMRibcageOpen
   - type: Sprite
-    sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+    sprite: _CM14/Objects/Medical/Surgery/retractor.rsi
     state: retractor
 
 - type: entity
@@ -83,7 +83,7 @@
     - type: CMScalpel
   - type: CMSurgeryCutLarvaRootsStep
   - type: Sprite
-    sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+    sprite: _CM14/Objects/Medical/Surgery/scalpel.rsi
     state: scalpel
 
 - type: entity
@@ -97,7 +97,7 @@
     bodyRemove:
     - type: VictimHugged
   - type: Sprite
-    sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+    sprite: _CM14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
 
 - type: entity
@@ -111,7 +111,7 @@
     remove:
     - type: CMRibcageOpen
   - type: Sprite
-    sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+    sprite: _CM14/Objects/Medical/Surgery/retractor.rsi
     state: retractor
 
 - type: entity
@@ -141,5 +141,5 @@
     - type: CMBleedersClamped
     - type: CMIncisionOpen
   - type: Sprite
-    sprite: Objects/Specific/Medical/Surgery/cautery.rsi
+    sprite: _CM14/Objects/Medical/Surgery/cautery.rsi
     state: cautery
