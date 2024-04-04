@@ -19,6 +19,7 @@ public sealed class CMStorageSystem : EntitySystem
         if (!_storage.CanInsert(storage, args.Item, out var reason) &&
             reason == "comp-storage-insufficient-capacity")
         {
+            // TODO CM14 make this error if this is a cm-specific storage
             Log.Warning($"Storage {ToPrettyString(storage)} can't fit {ToPrettyString(args.Item)}");
 
             var modified = false;
