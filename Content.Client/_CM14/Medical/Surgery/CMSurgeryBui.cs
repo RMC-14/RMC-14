@@ -1,6 +1,7 @@
 ﻿using Content.Client._CM14.Xenos.UI;
 using Content.Client.Administration.UI.CustomControls;
 using Content.Shared._CM14.Medical.Surgery;
+using Content.Shared.Body.Part;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
@@ -116,9 +117,41 @@ public sealed class CMSurgeryBui : BoundUserInterface
         _part = null;
         _surgery = null;
 
-        foreach (var (netPart, surgeries) in state.Choices)
+        var parts = new List<Entity<BodyPartComponent>>(state.Choices.Keys.Count);
+        foreach (var choice in state.Choices.Keys)
         {
-            var part = _entities.GetEntity(netPart);
+            if (_entities.TryGetEntity(choice, out var ent) &&
+                _entities.TryGetComponent(ent, out BodyPartComponent? part))
+            {
+                parts.Add((ent.Value, part));
+            }
+        }
+
+        parts.Sort((a, b) =>
+        {
+            int GetScore(Entity<BodyPartComponent> part)
+            {
+                return part.Comp.PartType switch
+                {
+                    BodyPartType.Other => 8,
+                    BodyPartType.Torso => 2,
+                    BodyPartType.Head => 1,
+                    BodyPartType.Arm => 3,
+                    BodyPartType.Hand => 4,
+                    BodyPartType.Leg => 5,
+                    BodyPartType.Foot => 6,
+                    BodyPartType.Tail => 7,
+                    _ => 0
+                };
+            }
+
+            return GetScore(a) - GetScore(b);
+        });
+
+        foreach (var part in parts)
+        {
+            var netPart = _entities.GetNetEntity(part.Owner);
+            var surgeries = state.Choices[netPart];
             var partName = _entities.GetComponent<MetaDataComponent>(part).EntityName;
             var partButton = new XenoChoiceControl();
 
