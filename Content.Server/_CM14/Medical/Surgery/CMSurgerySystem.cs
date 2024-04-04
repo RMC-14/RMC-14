@@ -1,4 +1,5 @@
 ﻿using Content.Server.Body.Systems;
+using Content.Server.Popups;
 using Content.Shared._CM14.Medical.Surgery;
 using Content.Shared._CM14.Medical.Surgery.Conditions;
 using Content.Shared._CM14.Medical.Surgery.Tools;
@@ -15,6 +16,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
 {
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
     private readonly List<EntProtoId> _surgeries = new();
@@ -65,6 +67,12 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
             !TryComp(args.User, out ActorComponent? actor) ||
             !HasComp<CMSurgeryTargetComponent>(args.Target))
         {
+            return;
+        }
+
+        if (args.User == args.Target)
+        {
+            _popup.PopupEntity("You can't perform surgery on yourself!", args.User, args.User);
             return;
         }
 
