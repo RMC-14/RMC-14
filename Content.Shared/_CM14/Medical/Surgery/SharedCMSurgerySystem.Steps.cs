@@ -122,7 +122,7 @@ public abstract partial class SharedCMSurgerySystem
                 args.Cancelled = true;
 
                 if (reg.Component is ICMSurgeryToolComponent tool)
-                    args.Popup = $"You need {tool} to perform this step!";
+                    args.Popup = $"You need {tool.ToolName} to perform this step!";
 
                 return;
             }
