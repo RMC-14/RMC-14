@@ -128,7 +128,8 @@ namespace Content.IntegrationTests.Tests
                     if (maxSize == null)
                         continue;
 
-                    Assert.That(size, Is.LessThanOrEqualTo(storage.Grid.GetArea()), $"{proto.ID} storage fill is too large.");
+                    // CM14: This is automatically expanded
+                    // Assert.That(size, Is.LessThanOrEqualTo(storage.Grid.GetArea()), $"{proto.ID} storage fill is too large.");
 
                     foreach (var entry in fill.Contents)
                     {

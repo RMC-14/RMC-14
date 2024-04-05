@@ -64,6 +64,8 @@
 - type: Tag
   id: CMMagazinePistol88m4AP
 
-
 - type: Tag
   id: LauncherCompatibleGrenade
+
+- type: Tag
+  id: CMAutoInjector
