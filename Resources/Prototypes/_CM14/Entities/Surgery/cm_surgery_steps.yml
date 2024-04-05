@@ -16,6 +16,9 @@
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/scalpel.rsi
     state: scalpel
+  - type: CMSurgeryStepBleedEffect
+    amount: 5
+  - type: CMSurgeryStepEmoteEffect
 
 - type: entity
   parent: CMSurgeryStepBase
@@ -30,6 +33,8 @@
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
+  - type: CMSurgeryStepBleedEffect
+    amount: -5
 
 - type: entity
   parent: CMSurgeryStepBase
@@ -58,6 +63,7 @@
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/saw.rsi
     state: saw
+  - type: CMSurgeryStepEmoteEffect
 
 - type: entity
   parent: CMSurgeryStepBase
@@ -143,3 +149,4 @@
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/cautery.rsi
     state: cautery
+  - type: CMSurgeryStepEmoteEffect

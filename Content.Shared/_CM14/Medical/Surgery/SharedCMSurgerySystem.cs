@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Content.Shared._CM14.Medical.Surgery.Conditions;
-using Content.Shared._CM14.Medical.Surgery.Effects;
+using Content.Shared._CM14.Medical.Surgery.Effects.Complete;
 using Content.Shared._CM14.Medical.Surgery.Steps;
 using Content.Shared._CM14.Medical.Surgery.Steps.Parts;
 using Content.Shared._CM14.Xenos.Hugger;

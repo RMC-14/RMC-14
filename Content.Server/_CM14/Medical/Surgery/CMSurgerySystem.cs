@@ -1,7 +1,9 @@
 ﻿using Content.Server.Body.Systems;
+using Content.Server.Chat.Systems;
 using Content.Server.Popups;
 using Content.Shared._CM14.Medical.Surgery;
 using Content.Shared._CM14.Medical.Surgery.Conditions;
+using Content.Shared._CM14.Medical.Surgery.Effects.Step;
 using Content.Shared._CM14.Medical.Surgery.Tools;
 using Content.Shared.Interaction;
 using Content.Shared.Prototypes;
@@ -14,7 +16,9 @@ namespace Content.Server._CM14.Medical.Surgery;
 
 public sealed class CMSurgerySystem : SharedCMSurgerySystem
 {
+    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
     [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
@@ -26,6 +30,9 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
         base.Initialize();
 
         SubscribeLocalEvent<CMSurgeryToolComponent, AfterInteractEvent>(OnToolAfterInteract);
+        SubscribeLocalEvent<CMSurgeryStepBleedEffectComponent, CMSurgeryStepEvent>(OnStepBleedComplete);
+        SubscribeLocalEvent<CMSurgeryStepEmoteEffectComponent, CMSurgeryStepEvent>(OnStepScreamComplete);
+
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         LoadPrototypes();
@@ -80,6 +87,16 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
         _ui.TryOpen(args.Target.Value, CMSurgeryUIKey.Key, actor.PlayerSession);
 
         RefreshUI(args.Target.Value);
+    }
+
+    private void OnStepBleedComplete(Entity<CMSurgeryStepBleedEffectComponent> ent, ref CMSurgeryStepEvent args)
+    {
+        _bloodstream.TryModifyBleedAmount(args.Body, ent.Comp.Amount);
+    }
+
+    private void OnStepScreamComplete(Entity<CMSurgeryStepEmoteEffectComponent> ent, ref CMSurgeryStepEvent args)
+    {
+        _chat.TryEmoteWithChat(args.Body, ent.Comp.Emote);
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)

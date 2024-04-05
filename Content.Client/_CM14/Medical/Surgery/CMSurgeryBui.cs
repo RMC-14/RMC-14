@@ -141,14 +141,14 @@ public sealed class CMSurgeryBui : BoundUserInterface
             {
                 return part.Comp.PartType switch
                 {
-                    BodyPartType.Other => 8,
-                    BodyPartType.Torso => 2,
                     BodyPartType.Head => 1,
+                    BodyPartType.Torso => 2,
                     BodyPartType.Arm => 3,
                     BodyPartType.Hand => 4,
                     BodyPartType.Leg => 5,
                     BodyPartType.Foot => 6,
                     BodyPartType.Tail => 7,
+                    BodyPartType.Other => 8,
                     _ => 0
                 };
             }
