@@ -4,7 +4,7 @@
   weight: 1
   name: item-component-size-Tiny
   defaultShape:
-  - 0,0,0,0
+  - 0,0,0,1
 
 # Items that can fit inside of a standard pocket.
 - type: itemSize
@@ -12,7 +12,7 @@
   weight: 2
   name: item-component-size-Small
   defaultShape:
-  - 0,0,0,1
+  - 0,0,1,1
 
 # Items that can fit inside of a standard bag.
 - type: itemSize
@@ -20,7 +20,7 @@
   weight: 4
   name: item-component-size-Normal
   defaultShape:
-  - 0,0,1,1
+  - 0,0,2,1
 
 # Items that are too large to fit inside of standard bags, but can worn in exterior slots or placed in custom containers.
 - type: itemSize
@@ -36,7 +36,7 @@
   weight: 16
   name: item-component-size-Huge
   defaultShape:
-  - 0,0,3,3
+  - 0,0,4,1
 
 # Picture furry gf
 - type: itemSize
@@ -44,4 +44,4 @@
   weight: 32
   name: item-component-size-Ginormous
   defaultShape:
-  - 0,0,5,5
+  - 0,0,5,1

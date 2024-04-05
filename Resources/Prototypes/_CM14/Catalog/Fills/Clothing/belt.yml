@@ -55,28 +55,46 @@
   suffix: Filled
   components:
   - type: StorageFill
-    contents: #todo cm14 port med stuff
-      - id: Brutepack
-        amount: 2
-      - id: Ointment
+    contents:
+      - id: CMPillCanisterBicaridine
         amount: 1
-      - id: Bloodpack
+      - id: CMPillCanisterDexalin
         amount: 1
-      - id: Gauze
-      - id: EmergencyMedipen
+      - id: CMPillCanisterDylovene
+        amount: 1
+      - id: CMPillCanisterKelotane
+        amount: 1
+      - id: CMPillCanisterInaprovaline
+        amount: 1
+      # TODO CM14 tramadol and perixadon pills, splint
+      - id: CMOintment
+        amount: 1
+      - id: CMTraumaKit
+        amount: 1
 
 - type: entity
   parent: CMBeltMedicBag
   id: CMBeltMedicBagFilled
   suffix: Filled
-  components: #todo cm14 look up but not too far
+  components:
   - type: StorageFill
     contents:
-      - id: Brutepack
+      - id: CMOintment
         amount: 2
-      - id: Ointment
+      - id: CMTraumaKit
+        amount: 2
+      # TODO CM14 adrenaline autoinjector
+      - id: CMDexalinPlusAutoInjector
         amount: 1
-      - id: Bloodpack
+      # TODO CM14 oxycodone autoinjector
+      - id: CMPillCanisterBicaridine
         amount: 1
-      - id: Gauze
-      - id: EmergencyMedipen
+      - id: CMPillCanisterDexalin
+        amount: 1
+      - id: CMPillCanisterDylovene
+        amount: 1
+      - id: CMPillCanisterKelotane
+        amount: 1
+      - id: CMPillCanisterInaprovaline
+        amount: 1
+      # TODO CM14 tramadol and perixadon pills, splint
