@@ -13,3 +13,11 @@
   components:
   - type: PresetIdCard
     job: Survivor
+
+- type: entity
+  parent: CMIDCardGold
+  id: CMIDCardLiaison
+  name: liaison ID card
+  components:
+  - type: PresetIdCard
+    job: CMLiaison

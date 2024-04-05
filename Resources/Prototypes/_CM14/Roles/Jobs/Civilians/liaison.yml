@@ -1,0 +1,39 @@
+﻿- type: job
+  id: CMLiaison
+  parent: JobBaseCM
+  name: cm-job-name-liaison
+  description: cm-job-description-liaison
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 36000 # 10 hours
+  playTimeTracker: CMJobLiaison
+  startingGear: CMGearLiaison
+  icon: "CMJobIconLiaison"
+  joinNotifyCrew: false
+  supervisors: job-supervisors-cm14-wy
+  canBeAntag: true
+  accessGroups:
+  - MarineMain
+
+- type: startingGear
+  id: CMGearLiaison
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonBlack
+    back: CMBackpack
+    shoes: CMShoesDress
+    id: CMIDCardLiaison
+    ears: CMHeadsetLeader
+  satchel: CMSatchel
+
+- type: entity
+  id: CMSpawnPointLiaison
+  parent: CMSpawnPointJobBase
+  name: liaison spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMLiaison
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: corp_liaison
