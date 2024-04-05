@@ -17,7 +17,7 @@
     slots:
     - pocket
   - type: Storage
-    maxItemSize: Small
+    maxItemSize: Normal
     grid:
     - 0,0,1,1 #1 slot
     blacklist:
@@ -147,6 +147,8 @@
       # todo cm14 splint
       - Radio
       - Knife
+      - CMTraumaKit
+      - CMBurnKit
 
 - type: entity
   parent: CMPouchSurvival
@@ -185,6 +187,9 @@
       - PillCanister
       - Brutepack
       # todo cm14 splint
+      - CMTraumaKit
+      - CMBurnKit
+      - CMAutoInjector
 
 - type: entity
   parent: CMPouchFirstAid
@@ -490,6 +495,8 @@
       # Roller
       - BodyBag
       - Bloodpack
+      - CMTraumaKit
+      - CMBurnKit
       components:
       - Hypospray
 
