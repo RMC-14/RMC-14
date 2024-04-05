@@ -34,7 +34,8 @@
     solution: pen
     reagents: {}
   - type: Tag
-    tags: []
+    tags:
+    - CMAutoInjector
 
 - type: entity
   parent: CMAutoInjector
