@@ -323,11 +323,20 @@ public sealed class CMSurgeryBui : BoundUserInterface
             {
                 stepButton.Button.Modulate = Color.White;
                 if (_player.LocalEntity is { } player &&
-                    !_system.CanPerformStep(player, stepButton.Step, false, out var popup))
+                    !_system.CanPerformStep(player, stepButton.Step, false, out var popup, out var reason))
                 {
                     stepButton.ToolTip = popup;
                     stepButton.Button.Disabled = true;
-                    stepName.AddMarkup(" [color=red](Missing tool)[/color]");
+
+                    switch (reason)
+                    {
+                        case StepInvalidReason.MissingTool:
+                            stepName.AddMarkup(" [color=red](Missing tool)[/color]");
+                            break;
+                        case StepInvalidReason.MissingSkills:
+                            stepName.AddMarkup(" [color=red](Missing medical skill)[/color]");
+                            break;
+                    }
                 }
             }
 
@@ -386,7 +395,7 @@ public sealed class CMSurgeryBui : BoundUserInterface
         }
         else
         {
-            _window.Title = $"Surgery";
+            _window.Title = "Surgery";
         }
     }
 

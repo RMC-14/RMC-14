@@ -1,6 +1,7 @@
 ﻿using Content.Server.Body.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Popups;
+using Content.Shared._CM14.Marines.Skills;
 using Content.Shared._CM14.Medical.Surgery;
 using Content.Shared._CM14.Medical.Surgery.Conditions;
 using Content.Shared._CM14.Medical.Surgery.Effects.Step;
@@ -41,10 +42,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
     protected override void RefreshUI(EntityUid body)
     {
         if (!HasComp<CMSurgeryTargetComponent>(body))
-        {
-            _ui.TryCloseAll(body, CMSurgeryUIKey.Key);
             return;
-        }
 
         var surgeries = new Dictionary<NetEntity, List<EntProtoId>>();
         foreach (var surgery in _surgeries)
@@ -74,6 +72,13 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
             !TryComp(args.User, out ActorComponent? actor) ||
             !HasComp<CMSurgeryTargetComponent>(args.Target))
         {
+            return;
+        }
+
+        if (!TryComp(args.User, out SkillsComponent? skills) ||
+            skills.Surgery < 1)
+        {
+            _popup.PopupEntity("You don't know how to perform surgery!", args.User, args.User);
             return;
         }
 

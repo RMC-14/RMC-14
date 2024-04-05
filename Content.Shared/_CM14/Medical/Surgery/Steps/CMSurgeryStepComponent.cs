@@ -3,12 +3,15 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._CM14.Medical.Surgery.Steps;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedCMSurgerySystem))]
-public sealed partial class CMSurgeryToolStepComponent : Component
+public sealed partial class CMSurgeryStepComponent : Component
 {
-    [DataField(required: true)]
-    public ComponentRegistry Tool = new();
+    [DataField, AutoNetworkedField]
+    public int Skill = 1;
+
+    [DataField]
+    public ComponentRegistry? Tool;
 
     [DataField]
     public ComponentRegistry? Add;

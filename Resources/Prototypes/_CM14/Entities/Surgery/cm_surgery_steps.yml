@@ -2,13 +2,15 @@
   id: CMSurgeryStepBase
   categories:
   - hideSpawnMenu
+  components:
+  - type: CMSurgeryStep
 
 - type: entity
   parent: CMSurgeryStepBase
   id: CMSurgeryStepOpenIncisionScalpel
   name: Cut with a scalpel
   components:
-  - type: CMSurgeryToolStep
+  - type: CMSurgeryStep
     tool:
     - type: CMScalpel
     add:
@@ -25,7 +27,7 @@
   id: CMSurgeryStepClampBleeders
   name: Clamp the bleeders
   components:
-  - type: CMSurgeryToolStep
+  - type: CMSurgeryStep
     tool:
     - type: CMHemostat
     add:
@@ -41,7 +43,7 @@
   id: CMSurgeryStepRetractSkin
   name: Retract the skin
   components:
-  - type: CMSurgeryToolStep
+  - type: CMSurgeryStep
     tool:
     - type: CMRetractor
     add:
@@ -55,7 +57,7 @@
   id: CMSurgeryStepSawBones
   name: Saw through bones
   components:
-  - type: CMSurgeryToolStep
+  - type: CMSurgeryStep
     tool:
     - type: CMBoneSaw
     add:
@@ -70,7 +72,7 @@
   id: CMSurgeryStepPriseOpenBones
   name: Prise the bones open
   components:
-  - type: CMSurgeryToolStep
+  - type: CMSurgeryStep
     tool:
     - type: CMRetractor
     add:
@@ -84,7 +86,8 @@
   id: CMSurgeryStepCutLarvaRoots
   name: Cut larva roots
   components:
-  - type: CMSurgeryToolStep
+  - type: CMSurgeryStep
+    skill: 2
     tool:
     - type: CMScalpel
   - type: CMSurgeryCutLarvaRootsStep
@@ -97,7 +100,8 @@
   id: CMSurgeryStepRemoveLarva
   name: Remove larva
   components:
-  - type: CMSurgeryToolStep
+  - type: CMSurgeryStep
+    skill: 2
     tool:
     - type: CMHemostat
     bodyRemove:
@@ -111,7 +115,7 @@
   id: CMSurgeryStepCloseBones
   name: Close bones
   components:
-  - type: CMSurgeryToolStep
+  - type: CMSurgeryStep
     tool:
     - type: CMRetractor
     remove:
@@ -125,7 +129,7 @@
   id: CMSurgeryStepMendRibcage
   name: Mend ribcage
   components:
-  - type: CMSurgeryToolStep
+  - type: CMSurgeryStep
     tool:
     - type: CMBoneGel
     remove:
@@ -139,7 +143,7 @@
   id: CMSurgeryStepCloseIncision
   name: Close incision
   components:
-  - type: CMSurgeryToolStep
+  - type: CMSurgeryStep
     tool:
     - type: CMCautery
     remove:

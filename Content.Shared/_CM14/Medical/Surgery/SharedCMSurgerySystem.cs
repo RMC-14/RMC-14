@@ -66,9 +66,9 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
             return;
         }
 
-        var check = new CMSurgeryCanPerformStepEvent(GetTools(args.User));
+        var check = new CMSurgeryCanPerformStepEvent(args.User, GetTools(args.User));
         RaiseLocalEvent(step, ref check);
-        if (check.Cancelled)
+        if (check.Invalid == StepInvalidReason.None)
             return;
 
         var ev = new CMSurgeryStepEvent(args.User, target, part, GetTools(args.User));
