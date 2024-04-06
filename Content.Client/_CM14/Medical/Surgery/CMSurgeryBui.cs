@@ -247,7 +247,7 @@ public sealed class CMSurgeryBui : BoundUserInterface
         RefreshUI();
     }
 
-    private void OnPartPressed(NetEntity netPart, List<EntProtoId> surgeries)
+    private void OnPartPressed(NetEntity netPart, List<EntProtoId> surgeryIds)
     {
         if (_window == null)
             return;
@@ -256,7 +256,8 @@ public sealed class CMSurgeryBui : BoundUserInterface
 
         _window.Surgeries.DisposeAllChildren();
 
-        foreach (var surgeryId in surgeries)
+        var surgeries = new List<(Entity<CMSurgeryComponent> Ent, EntProtoId Id, string Name)>();
+        foreach (var surgeryId in surgeryIds)
         {
             if (_system.GetSingleton(surgeryId) is not { } surgery ||
                 !_entities.TryGetComponent(surgery, out CMSurgeryComponent? surgeryComp))
@@ -265,10 +266,24 @@ public sealed class CMSurgeryBui : BoundUserInterface
             }
 
             var name = _entities.GetComponent<MetaDataComponent>(surgery).EntityName;
-            var surgeryButton = new XenoChoiceControl();
-            surgeryButton.Set(name, null);
+            surgeries.Add(((surgery, surgeryComp), surgeryId, name));
+        }
 
-            surgeryButton.Button.OnPressed += _ => OnSurgeryPressed((surgery, surgeryComp), netPart, surgeryId);
+        surgeries.Sort((a, b ) =>
+        {
+            var priority = a.Ent.Comp.Priority.CompareTo(b.Ent.Comp.Priority);
+            if (priority != 0)
+                return priority;
+
+            return string.Compare(a.Name, b.Name, StringComparison.Ordinal);
+        });
+
+        foreach (var surgery in surgeries)
+        {
+            var surgeryButton = new XenoChoiceControl();
+            surgeryButton.Set(surgery.Name, null);
+
+            surgeryButton.Button.OnPressed += _ => OnSurgeryPressed(surgery.Ent, netPart, surgery.Id);
             _window.Surgeries.AddChild(surgeryButton);
         }
 

@@ -7,6 +7,9 @@ namespace Content.Shared._CM14.Medical.Surgery;
 [Access(typeof(SharedCMSurgerySystem))]
 public sealed partial class CMSurgeryComponent : Component
 {
+    [DataField, AutoNetworkedField, Access(typeof(SharedCMSurgerySystem), Other = AccessPermissions.ReadWriteExecute)]
+    public int Priority;
+
     [DataField, AutoNetworkedField]
     public EntProtoId? Requirement;
 

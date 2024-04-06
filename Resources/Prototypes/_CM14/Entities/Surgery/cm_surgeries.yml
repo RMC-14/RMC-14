@@ -20,6 +20,7 @@
   name: Close Incision
   components:
   - type: CMSurgery
+    priority: 1
     steps:
     - CMSurgeryStepCloseBones
     - CMSurgeryStepMendRibcage
@@ -45,6 +46,7 @@
   description: Removal of an alien embryo from the body.
   components:
   - type: CMSurgery
+    priority: -1
     requirement: CMSurgeryOpenRibcage
     steps:
     - CMSurgeryStepCutLarvaRoots
