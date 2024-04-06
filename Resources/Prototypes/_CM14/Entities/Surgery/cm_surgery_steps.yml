@@ -94,6 +94,7 @@
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/scalpel.rsi
     state: scalpel
+  - type: CMSurgeryOperatingTableCondition
 
 - type: entity
   parent: CMSurgeryStepBase
@@ -109,6 +110,7 @@
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
+  - type: CMSurgeryOperatingTableCondition
 
 - type: entity
   parent: CMSurgeryStepBase

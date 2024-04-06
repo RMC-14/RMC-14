@@ -345,14 +345,17 @@ public sealed class CMSurgeryBui : BoundUserInterface
 
                     switch (reason)
                     {
-                        case StepInvalidReason.MissingTool:
-                            stepName.AddMarkup(" [color=red](Missing tool)[/color]");
-                            break;
                         case StepInvalidReason.MissingSkills:
                             stepName.AddMarkup(" [color=red](Missing surgery skill)[/color]");
                             break;
+                        case StepInvalidReason.NeedsOperatingTable:
+                            stepName.AddMarkup(" [color=red](Needs operating table)[/color]");
+                            break;
                         case StepInvalidReason.Armor:
                             stepName.AddMarkup(" [color=red](Remove their armor!)[/color]");
+                            break;
+                        case StepInvalidReason.MissingTool:
+                            stepName.AddMarkup(" [color=red](Missing tool)[/color]");
                             break;
                     }
                 }

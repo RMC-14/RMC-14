@@ -3,7 +3,8 @@
 public enum StepInvalidReason
 {
     None,
-    MissingTool,
     MissingSkills,
-    Armor
+    NeedsOperatingTable,
+    Armor,
+    MissingTool,
 }

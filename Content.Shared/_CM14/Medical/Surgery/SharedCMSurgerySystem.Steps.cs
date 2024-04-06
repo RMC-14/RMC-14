@@ -1,9 +1,11 @@
 ﻿using Content.Shared._CM14.Marines.Skills;
+using Content.Shared._CM14.Medical.Surgery.Conditions;
 using Content.Shared._CM14.Medical.Surgery.Steps;
 using Content.Shared._CM14.Medical.Surgery.Tools;
 using Content.Shared._CM14.Xenos.Hugger;
 using Content.Shared.Armor;
 using Content.Shared.Body.Part;
+using Content.Shared.Buckle.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
@@ -130,6 +132,16 @@ public abstract partial class SharedCMSurgerySystem
         {
             args.Invalid = StepInvalidReason.MissingSkills;
             return;
+        }
+
+        if (HasComp<CMSurgeryOperatingTableConditionComponent>(ent))
+        {
+            if (!TryComp(args.Body, out BuckleComponent? buckle) ||
+                !HasComp<CMOperatingTableComponent>(buckle.BuckledTo))
+            {
+                args.Invalid = StepInvalidReason.NeedsOperatingTable;
+                return;
+            }
         }
 
         RaiseLocalEvent(args.Body, ref args);
