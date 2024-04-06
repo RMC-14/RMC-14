@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Content.Shared._CM14.Medical.Surgery.Conditions;
 using Content.Shared._CM14.Medical.Surgery.Effects.Complete;
-using Content.Shared._CM14.Medical.Surgery.Steps;
 using Content.Shared._CM14.Medical.Surgery.Steps.Parts;
 using Content.Shared._CM14.Xenos.Hugger;
 using Content.Shared.Body.Part;
@@ -60,16 +59,12 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
             args.Handled ||
             args.Target is not { } target ||
             !IsSurgeryValid(target, args.Part, args.Surgery, args.Step, out var surgery, out var part, out var step) ||
-            !PreviousStepsComplete(target, part, surgery, args.Step))
+            !PreviousStepsComplete(target, part, surgery, args.Step) ||
+            !CanPerformStep(args.User, step, false))
         {
             Log.Warning($"{ToPrettyString(args.User)} tried to start invalid surgery.");
             return;
         }
-
-        var check = new CMSurgeryCanPerformStepEvent(args.User, GetTools(args.User));
-        RaiseLocalEvent(step, ref check);
-        if (check.Invalid != StepInvalidReason.None)
-            return;
 
         var ev = new CMSurgeryStepEvent(args.User, target, part, GetTools(args.User));
         RaiseLocalEvent(step, ref ev);

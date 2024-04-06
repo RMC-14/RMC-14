@@ -8,5 +8,8 @@ namespace Content.Shared._CM14.Medical.Surgery.Tools;
 public sealed partial class CMSurgeryToolComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? Sound;
+    public SoundSpecifier? StartSound;
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? EndSound;
 }

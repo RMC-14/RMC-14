@@ -18,8 +18,10 @@
   description: Retracts stuff.
   components:
   - type: CMSurgeryTool
-    sound:
-      collection: CMRetractor
+    startSound:
+      path: /Audio/_CM14/Medical/Surgery/retractor1.ogg
+    endSound:
+      path: /Audio/_CM14/Medical/Surgery/retractor2.ogg
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/retractor.rsi
     state: retractor
@@ -46,8 +48,8 @@
   description: You think you have seen this before.
   components:
   - type: CMSurgeryTool
-    sound:
-      collection: CMHemostat
+    endSound:
+      path: /Audio/_CM14/Medical/Surgery/hemostat1.ogg
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
@@ -74,8 +76,10 @@
   description: This stops bleeding.
   components:
   - type: CMSurgeryTool
-    sound:
-      collection: CMCautery
+    startSound:
+      path: /Audio/_CM14/Medical/Surgery/cautery1.ogg
+    endSound:
+      path: /Audio/_CM14/Medical/Surgery/cautery2.ogg
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/cautery.rsi
     state: cautery
@@ -108,8 +112,8 @@
   description: You can drill using this item. You dig?
   components:
   - type: CMSurgeryTool
-    sound:
-      collection: CMSaw
+    startSound:
+      path: /Audio/_CM14/Medical/Surgery/saw.ogg
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/drill.rsi
     state: drill
@@ -142,8 +146,10 @@
   description: Cut, cut, and once more cut.
   components:
   - type: CMSurgeryTool
-    sound:
-      collection: CMScalpel
+    startSound:
+      path: /Audio/_CM14/Medical/Surgery/scalpel1.ogg
+    endSound:
+      path: /Audio/_CM14/Medical/Surgery/scalpel2.ogg
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/scalpel.rsi
     state: scalpel
@@ -271,8 +277,8 @@
   description: For heavy-duty cutting.
   components:
   - type: CMSurgeryTool
-    sound:
-      collection: CMSaw
+    startSound:
+      path: /Audio/_CM14/Medical/Surgery/saw.ogg
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/saw.rsi
     state: saw

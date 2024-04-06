@@ -338,7 +338,7 @@ public sealed class CMSurgeryBui : BoundUserInterface
             {
                 stepButton.Button.Modulate = Color.White;
                 if (_player.LocalEntity is { } player &&
-                    !_system.CanPerformStep(player, stepButton.Step, false, out var popup, out var reason))
+                    !_system.CanPerformStep(player, stepButton.Step, false, out var popup, out var reason, out _))
                 {
                     stepButton.ToolTip = popup;
                     stepButton.Button.Disabled = true;

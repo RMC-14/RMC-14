@@ -42,9 +42,9 @@ public abstract partial class SharedCMSurgerySystem
 
                 if (_net.IsServer &&
                     TryComp(tool, out CMSurgeryToolComponent? toolComp) &&
-                    toolComp.Sound != null)
+                    toolComp.EndSound != null)
                 {
-                    _audio.PlayEntity(toolComp.Sound, args.User, tool);
+                    _audio.PlayEntity(toolComp.EndSound, args.User, tool);
                 }
             }
         }
@@ -128,9 +128,11 @@ public abstract partial class SharedCMSurgerySystem
 
         if (ent.Comp.Tool != null)
         {
+            args.ValidTools ??= new HashSet<EntityUid>();
+
             foreach (var reg in ent.Comp.Tool.Values)
             {
-                if (!AnyHaveComp(args.Tools, reg.Component, out _))
+                if (!AnyHaveComp(args.Tools, reg.Component, out var withComp))
                 {
                     args.Invalid = StepInvalidReason.MissingTool;
 
@@ -139,6 +141,8 @@ public abstract partial class SharedCMSurgerySystem
 
                     return;
                 }
+
+                args.ValidTools.Add(withComp);
             }
         }
     }
@@ -173,8 +177,20 @@ public abstract partial class SharedCMSurgerySystem
             return;
         }
 
-        if (!CanPerformStep(user, step, true))
+        if (!CanPerformStep(user, step, true, out _, out _, out var validTools))
             return;
+
+        if (_net.IsServer && validTools?.Count > 0)
+        {
+            foreach (var tool in validTools)
+            {
+                if (TryComp(tool, out CMSurgeryToolComponent? toolComp) &&
+                    toolComp.EndSound != null)
+                {
+                    _audio.PlayEntity(toolComp.StartSound, user, tool);
+                }
+            }
+        }
 
         var ev = new CMSurgeryDoAfterEvent(GetNetEntity(part), args.Surgery, args.Step);
         var doAfter = new DoAfterArgs(EntityManager, user, 2, ev, body, body)
@@ -241,11 +257,12 @@ public abstract partial class SharedCMSurgerySystem
         return true;
     }
 
-    public bool CanPerformStep(EntityUid user, EntityUid step, bool doPopup, out string? popup, out StepInvalidReason reason)
+    public bool CanPerformStep(EntityUid user, EntityUid step, bool doPopup, out string? popup, out StepInvalidReason reason, out HashSet<EntityUid>? validTools)
     {
         var check = new CMSurgeryCanPerformStepEvent(user, GetTools(user));
         RaiseLocalEvent(step, ref check);
         popup = check.Popup;
+        validTools = check.ValidTools;
 
         if (check.Invalid != StepInvalidReason.None)
         {
@@ -262,7 +279,7 @@ public abstract partial class SharedCMSurgerySystem
 
     public bool CanPerformStep(EntityUid user, EntityUid step, bool doPopup)
     {
-        return CanPerformStep(user, step, doPopup, out _, out _);
+        return CanPerformStep(user, step, doPopup, out _, out _, out _);
     }
 
     public bool IsStepComplete(EntityUid body, EntityUid part, EntProtoId step)

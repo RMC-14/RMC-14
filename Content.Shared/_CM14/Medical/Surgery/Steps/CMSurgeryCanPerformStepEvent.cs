@@ -5,5 +5,6 @@ public record struct CMSurgeryCanPerformStepEvent(
     EntityUid User,
     List<EntityUid> Tools,
     string? Popup = null,
-    StepInvalidReason Invalid = StepInvalidReason.None
+    StepInvalidReason Invalid = StepInvalidReason.None,
+    HashSet<EntityUid>? ValidTools = null
 );
