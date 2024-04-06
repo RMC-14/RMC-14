@@ -334,7 +334,7 @@ public sealed class CMSurgeryBui : BoundUserInterface
                             stepName.AddMarkup(" [color=red](Missing tool)[/color]");
                             break;
                         case StepInvalidReason.MissingSkills:
-                            stepName.AddMarkup(" [color=red](Missing medical skill)[/color]");
+                            stepName.AddMarkup(" [color=red](Missing surgery skill)[/color]");
                             break;
                     }
                 }
