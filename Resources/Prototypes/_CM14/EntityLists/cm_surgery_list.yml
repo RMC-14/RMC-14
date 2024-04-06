@@ -1,0 +1,11 @@
+﻿- type: entityList
+  id: CMSurgeryTools
+  entities:
+  - CMScalpel
+  - CMHemostat
+  - CMRetractor
+  - CMCautery
+  - CMSurgicalDrill
+  - CMCircularSaw
+  - CMBonesetter
+  - CMBoneGel

@@ -1,15 +1,33 @@
-# Retractor
+# Base
 - type: entity
   parent: BaseToolSurgery
+  id: CMBaseToolSurgery
+  abstract: true
+  name: retractor
+  description: Retracts stuff.
+  components:
+  - type: CMSurgeryTool
+
+
+
+# Retractor
+- type: entity
+  parent: CMBaseToolSurgery
   id: CMRetractor
   name: retractor
   description: Retracts stuff.
   components:
+  - type: CMSurgeryTool
+    startSound:
+      path: /Audio/_CM14/Medical/Surgery/retractor1.ogg
+    endSound:
+      path: /Audio/_CM14/Medical/Surgery/retractor2.ogg
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/retractor.rsi
     state: retractor
   - type: Item
     sprite: _CM14/Objects/Medical/Surgery/retractor.rsi
+  - type: CMRetractor
 
 # - Predator
 - type: entity
@@ -24,16 +42,20 @@
 
 # Hemostat
 - type: entity
-  parent: BaseToolSurgery
+  parent: CMBaseToolSurgery
   id: CMHemostat
   name: hemostat
   description: You think you have seen this before.
   components:
+  - type: CMSurgeryTool
+    endSound:
+      path: /Audio/_CM14/Medical/Surgery/hemostat1.ogg
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
   - type: Item
     sprite: _CM14/Objects/Medical/Surgery/hemostat.rsi
+  - type: CMHemostat
 
 # - Predator
 - type: entity
@@ -48,11 +70,16 @@
 
 # Cautery
 - type: entity
-  parent: BaseToolSurgery
+  parent: CMBaseToolSurgery
   id: CMCautery
   name: cautery
   description: This stops bleeding.
   components:
+  - type: CMSurgeryTool
+    startSound:
+      path: /Audio/_CM14/Medical/Surgery/cautery1.ogg
+    endSound:
+      path: /Audio/_CM14/Medical/Surgery/cautery2.ogg
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/cautery.rsi
     state: cautery
@@ -64,6 +91,7 @@
         Heat: 5
     soundHit:
       path: /Audio/Effects/lightburn.ogg
+  - type: CMCautery
 
 # - Predator
 - type: entity
@@ -78,11 +106,14 @@
 
 # Surgical drill
 - type: entity
-  parent: BaseToolSurgery
+  parent: CMBaseToolSurgery
   id: CMSurgicalDrill
   name: surgical drill
   description: You can drill using this item. You dig?
   components:
+  - type: CMSurgeryTool
+    startSound:
+      path: /Audio/_CM14/Medical/Surgery/saw.ogg
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/drill.rsi
     state: drill
@@ -94,6 +125,7 @@
         Piercing: 10
     soundHit:
       path: /Audio/Items/drill_hit.ogg
+  - type: CMSurgicalDrill
 
 # - Bonedrill
 - type: entity
@@ -108,11 +140,16 @@
 
 # Scalpel
 - type: entity
-  parent: BaseToolSurgery
+  parent: CMBaseToolSurgery
   id: CMScalpel
   name: scalpel
   description: Cut, cut, and once more cut.
   components:
+  - type: CMSurgeryTool
+    startSound:
+      path: /Audio/_CM14/Medical/Surgery/scalpel1.ogg
+    endSound:
+      path: /Audio/_CM14/Medical/Surgery/scalpel2.ogg
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/scalpel.rsi
     state: scalpel
@@ -132,6 +169,7 @@
         Slash: 8
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
+  - type: CMScalpel
 
 # - Predator
 - type: entity
@@ -233,11 +271,14 @@
 
 # Circular saw
 - type: entity
-  parent: BaseToolSurgery
+  parent: CMBaseToolSurgery
   id: CMCircularSaw
   name: circular saw
   description: For heavy-duty cutting.
   components:
+  - type: CMSurgeryTool
+    startSound:
+      path: /Audio/_CM14/Medical/Surgery/saw.ogg
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/saw.rsi
     state: saw
@@ -253,6 +294,7 @@
     qualities:
       - Sawing
     speed: 1.5
+  - type: CMBoneSaw
 
 # - Predator
 - type: entity
@@ -267,10 +309,10 @@
 
 # Bone setter
 - type: entity
-  parent: BaseToolSurgery
+  parent: CMBaseToolSurgery
   id: CMBonesetter
   name: bone setter
-  components:
+  components: # TODO CM14
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/bonesetter.rsi
     state: bonesetter
@@ -291,11 +333,11 @@
 # Pump
 # Wound clamp
 - type: entity
-  parent: BaseToolSurgery
+  parent: CMBaseToolSurgery
   id: CMWoundClamp
   name: wound clamp
   description: Used for clamping wounds after treatment.
-  components:
+  components: # TODO CM14
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/wound_clamp.rsi
     state: wound_clamp
@@ -306,14 +348,29 @@
 
 # Autopsy (actually just a laser scalpel)
 - type: entity
-  parent: BaseToolSurgery
+  parent: CMBaseToolSurgery
   id: CMAutopsy
   name: Weyland Brand Automatic Autopsy System(TM)
   description: Putting the FUN back in Autopsy.  This little gadget performs an entire autopsy of whatever strange life form you've found in about 30 seconds.
-  components:
+  components: # TODO CM14
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/scalpel.rsi
     state: scalpel_laser_2
   - type: Item
     sprite: _CM14/Objects/Medical/Surgery/scalpel.rsi
 
+
+
+# Bone Gel
+- type: entity
+  parent: CMBaseToolSurgery
+  id: CMBoneGel
+  name: bone gel
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Medical/Surgery/bone_gel.rsi
+    state: bone-gel
+  - type: Item
+    sprite: _CM14/Objects/Medical/Surgery/bone_gel.rsi
+    state: bone-gel
+  - type: CMBoneGel
