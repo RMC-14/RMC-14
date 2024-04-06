@@ -2,7 +2,10 @@
 using Content.Shared._CM14.Medical.Surgery.Steps;
 using Content.Shared._CM14.Medical.Surgery.Tools;
 using Content.Shared._CM14.Xenos.Hugger;
+using Content.Shared.Armor;
+using Content.Shared.Body.Part;
 using Content.Shared.DoAfter;
+using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Robust.Shared.Prototypes;
 
@@ -17,6 +20,9 @@ public abstract partial class SharedCMSurgerySystem
         SubscribeLocalEvent<CMSurgeryStepComponent, CMSurgeryCanPerformStepEvent>(OnToolCanPerform);
 
         SubSurgery<CMSurgeryCutLarvaRootsStepComponent>(OnCutLarvaRootsStep, OnCutLarvaRootsCheck);
+
+        SubscribeLocalEvent<InventoryComponent, CMSurgeryCanPerformStepEvent>(_inventory.RelayEvent);
+        SubscribeLocalEvent<ArmorComponent, InventoryRelayedEvent<CMSurgeryCanPerformStepEvent>>(OnArmorCanPerformStep);
 
         Subs.BuiEvents<CMSurgeryTargetComponent>(CMSurgeryUIKey.Key, sub =>
         {
@@ -126,6 +132,11 @@ public abstract partial class SharedCMSurgerySystem
             return;
         }
 
+        RaiseLocalEvent(args.Body, ref args);
+
+        if (args.Invalid != StepInvalidReason.None)
+            return;
+
         if (ent.Comp.Tool != null)
         {
             args.ValidTools ??= new HashSet<EntityUid>();
@@ -162,6 +173,12 @@ public abstract partial class SharedCMSurgerySystem
             args.Cancelled = true;
     }
 
+    private void OnArmorCanPerformStep(Entity<ArmorComponent> ent, ref InventoryRelayedEvent<CMSurgeryCanPerformStepEvent> args)
+    {
+        if (args.Args.Invalid == StepInvalidReason.None)
+            args.Args.Invalid = StepInvalidReason.Armor;
+    }
+
     private void OnSurgeryTargetStepChosen(Entity<CMSurgeryTargetComponent> ent, ref CMSurgeryStepChosenBuiMessage args)
     {
         if (args.Session.AttachedEntity is not { } user ||
@@ -177,7 +194,7 @@ public abstract partial class SharedCMSurgerySystem
             return;
         }
 
-        if (!CanPerformStep(user, step, true, out _, out _, out var validTools))
+        if (!CanPerformStep(user, body, part.Comp.PartType, step, true, out _, out _, out var validTools))
             return;
 
         if (_net.IsServer && validTools?.Count > 0)
@@ -257,9 +274,22 @@ public abstract partial class SharedCMSurgerySystem
         return true;
     }
 
-    public bool CanPerformStep(EntityUid user, EntityUid step, bool doPopup, out string? popup, out StepInvalidReason reason, out HashSet<EntityUid>? validTools)
+    public bool CanPerformStep(EntityUid user, EntityUid body, BodyPartType part, EntityUid step, bool doPopup, out string? popup, out StepInvalidReason reason, out HashSet<EntityUid>? validTools)
     {
-        var check = new CMSurgeryCanPerformStepEvent(user, GetTools(user));
+        var slot = part switch
+        {
+            BodyPartType.Head => SlotFlags.HEAD,
+            BodyPartType.Torso => SlotFlags.OUTERCLOTHING | SlotFlags.INNERCLOTHING,
+            BodyPartType.Arm => SlotFlags.OUTERCLOTHING | SlotFlags.INNERCLOTHING,
+            BodyPartType.Hand => SlotFlags.GLOVES,
+            BodyPartType.Leg => SlotFlags.OUTERCLOTHING | SlotFlags.LEGS,
+            BodyPartType.Foot => SlotFlags.FEET,
+            BodyPartType.Tail => SlotFlags.NONE,
+            BodyPartType.Other => SlotFlags.NONE,
+            _ => SlotFlags.NONE
+        };
+
+        var check = new CMSurgeryCanPerformStepEvent(user, body, GetTools(user), slot);
         RaiseLocalEvent(step, ref check);
         popup = check.Popup;
         validTools = check.ValidTools;
@@ -277,9 +307,9 @@ public abstract partial class SharedCMSurgerySystem
         return true;
     }
 
-    public bool CanPerformStep(EntityUid user, EntityUid step, bool doPopup)
+    public bool CanPerformStep(EntityUid user, EntityUid body, BodyPartType part, EntityUid step, bool doPopup)
     {
-        return CanPerformStep(user, step, doPopup, out _, out _, out _);
+        return CanPerformStep(user, body, part, step, doPopup, out _, out _, out _);
     }
 
     public bool IsStepComplete(EntityUid body, EntityUid part, EntProtoId step)

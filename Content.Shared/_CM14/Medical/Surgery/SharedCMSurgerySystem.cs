@@ -7,6 +7,7 @@ using Content.Shared.Body.Part;
 using Content.Shared.DoAfter;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Robust.Shared.Audio.Systems;
@@ -23,6 +24,7 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
@@ -60,7 +62,7 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
             args.Target is not { } target ||
             !IsSurgeryValid(target, args.Part, args.Surgery, args.Step, out var surgery, out var part, out var step) ||
             !PreviousStepsComplete(target, part, surgery, args.Step) ||
-            !CanPerformStep(args.User, step, false))
+            !CanPerformStep(args.User, ent, part.Comp.PartType, step, false))
         {
             Log.Warning($"{ToPrettyString(args.User)} tried to start invalid surgery.");
             return;
@@ -99,7 +101,7 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
         RemCompDeferred<VictimHuggedComponent>(ent);
     }
 
-    protected bool IsSurgeryValid(EntityUid body, NetEntity netPart, EntProtoId surgery, EntProtoId stepId, out Entity<CMSurgeryComponent> surgeryEnt, out EntityUid part, out EntityUid step)
+    protected bool IsSurgeryValid(EntityUid body, NetEntity netPart, EntProtoId surgery, EntProtoId stepId, out Entity<CMSurgeryComponent> surgeryEnt, out Entity<BodyPartComponent> part, out EntityUid step)
     {
         surgeryEnt = default;
         part = default;
@@ -108,6 +110,7 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
         if (!HasComp<CMSurgeryTargetComponent>(body) ||
             !_standing.IsDown(body) ||
             GetEntity(netPart) is not { Valid: true } netPartEnt ||
+            !TryComp(netPartEnt, out BodyPartComponent? partComp) ||
             GetSingleton(surgery) is not { } surgeryEntId ||
             !TryComp(surgeryEntId, out CMSurgeryComponent? surgeryComp) ||
             !surgeryComp.Steps.Contains(stepId) ||
@@ -124,7 +127,7 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
             return false;
 
         surgeryEnt = (surgeryEntId, surgeryComp);
-        part = netPartEnt;
+        part = (netPartEnt, partComp);
         step = stepEnt;
         return true;
     }

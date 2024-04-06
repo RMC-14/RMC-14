@@ -295,7 +295,7 @@ public sealed class CMSurgeryBui : BoundUserInterface
     {
         if (_window == null ||
             !_entities.HasComponent<CMSurgeryComponent>(_surgery?.Ent) ||
-            _part == null)
+            !_entities.TryGetComponent(_part, out BodyPartComponent? part))
         {
             return;
         }
@@ -338,7 +338,7 @@ public sealed class CMSurgeryBui : BoundUserInterface
             {
                 stepButton.Button.Modulate = Color.White;
                 if (_player.LocalEntity is { } player &&
-                    !_system.CanPerformStep(player, stepButton.Step, false, out var popup, out var reason, out _))
+                    !_system.CanPerformStep(player, Owner, part.PartType, stepButton.Step, false, out var popup, out var reason, out _))
                 {
                     stepButton.ToolTip = popup;
                     stepButton.Button.Disabled = true;
@@ -350,6 +350,9 @@ public sealed class CMSurgeryBui : BoundUserInterface
                             break;
                         case StepInvalidReason.MissingSkills:
                             stepName.AddMarkup(" [color=red](Missing surgery skill)[/color]");
+                            break;
+                        case StepInvalidReason.Armor:
+                            stepName.AddMarkup(" [color=red](Remove their armor!)[/color]");
                             break;
                     }
                 }

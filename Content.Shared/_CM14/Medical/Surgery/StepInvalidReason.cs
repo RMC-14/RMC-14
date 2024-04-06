@@ -4,5 +4,6 @@ public enum StepInvalidReason
 {
     None,
     MissingTool,
-    MissingSkills
+    MissingSkills,
+    Armor
 }
