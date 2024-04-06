@@ -2,11 +2,13 @@
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.XAML;
+using Robust.Shared.Utility;
 
 namespace Content.Client._CM14.Xenos.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class XenoChoiceControl : Control
+[Virtual]
+public partial class XenoChoiceControl : Control
 {
     public XenoChoiceControl()
     {
@@ -16,6 +18,12 @@ public sealed partial class XenoChoiceControl : Control
     public void Set(string name, Texture? texture)
     {
         NameLabel.SetMessage(name);
+        Texture.Texture = texture;
+    }
+
+    public void Set(FormattedMessage msg, Texture? texture)
+    {
+        NameLabel.SetMessage(msg);
         Texture.Texture = texture;
     }
 }

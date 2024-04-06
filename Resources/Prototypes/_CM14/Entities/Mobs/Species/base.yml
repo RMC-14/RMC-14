@@ -2,15 +2,13 @@
   save: false
   parent: BaseMobSpeciesOrganic
   id: CMBaseMobSpeciesOrganic
-  name: Urist C.M McFluff
+  abstract: true
+  name: Urist C.M. McHands
   suffix: CM14
   components:
   - type: Marine
   - type: Hunger
   - type: Thirst
-  - type: Icon
-    sprite: Mobs/Species/Moth/parts.rsi
-    state: full
   - type: Body
     prototype: Human
     requiredLegs: 2
@@ -55,3 +53,16 @@
     damage:
       types:
         Blunt: 5
+  - type: CMSurgeryTarget
+  - type: UserInterface
+    interfaces:
+    - key: enum.VoiceMaskUIKey.Key
+      type: VoiceMaskBoundUserInterface
+    - key: enum.HumanoidMarkingModifierKey.Key
+      type: HumanoidMarkingModifierBoundUserInterface
+    - key: enum.StrippingUiKey.Key
+      type: StrippableBoundUserInterface
+    - key: enum.HumanoidMarkingModifierKey.Key
+      type: HumanoidMarkingModifierBoundUserInterface
+    - key: enum.CMSurgeryUIKey.Key
+      type: CMSurgeryBui

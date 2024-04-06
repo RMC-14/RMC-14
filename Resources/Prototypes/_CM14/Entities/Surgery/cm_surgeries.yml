@@ -1,0 +1,56 @@
+﻿- type: entity
+  id: CMSurgeryBase
+  categories:
+  - hideSpawnMenu
+
+- type: entity
+  parent: CMSurgeryBase
+  id: CMSurgeryOpenIncision
+  name: Open Incision
+  components:
+  - type: CMSurgery
+    steps:
+    - CMSurgeryStepOpenIncisionScalpel
+    - CMSurgeryStepClampBleeders
+    - CMSurgeryStepRetractSkin
+
+- type: entity
+  parent: CMSurgeryBase
+  id: CMSurgeryCloseIncision
+  name: Close Incision
+  components:
+  - type: CMSurgery
+    priority: 1
+    steps:
+    - CMSurgeryStepCloseBones
+    - CMSurgeryStepMendRibcage
+    - CMSurgeryStepCloseIncision
+
+- type: entity
+  parent: CMSurgeryBase
+  id: CMSurgeryOpenRibcage
+  name: Open Ribcage
+  components:
+  - type: CMSurgery
+    requirement: CMSurgeryOpenIncision
+    steps:
+    - CMSurgeryStepSawBones
+    - CMSurgeryStepPriseOpenBones
+  - type: CMSurgeryPartCondition
+    part: Torso
+
+- type: entity
+  parent: CMSurgeryBase
+  id: CMSurgeryAlienEmbryoRemoval
+  name: Alien Embryo Removal
+  description: Removal of an alien embryo from the body.
+  components:
+  - type: CMSurgery
+    priority: -1
+    requirement: CMSurgeryOpenRibcage
+    steps:
+    - CMSurgeryStepCutLarvaRoots
+    - CMSurgeryStepRemoveLarva
+  - type: CMSurgeryLarvaCondition
+  - type: CMSurgeryPartCondition
+    part: Torso

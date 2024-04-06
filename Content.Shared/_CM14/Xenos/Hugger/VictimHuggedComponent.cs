@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Audio;
+﻿using Content.Shared._CM14.Medical.Surgery;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -49,4 +50,7 @@ public sealed partial class VictimHuggedComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier BurstSound = new SoundCollectionSpecifier("XenoChestBurst");
+
+    [DataField, AutoNetworkedField, Access(typeof(SharedCMSurgerySystem))]
+    public bool RootsCut;
 }
