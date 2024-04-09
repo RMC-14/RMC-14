@@ -1,12 +1,12 @@
-- type: cargoProduct
-  id: CMCargoFoodIngredients
-  icon:
-    sprite: _CM14/Structures/Storage/Crates/plastic.rsi
-    state: icon
-  product: CMCrateFoodIngredients
-  cost: 1000
-  category: Food
-  group: market
+#- type: cargoProduct # TODO CM14 add ingredients
+#  id: CMCargoFoodIngredients
+#  icon:
+#    sprite: _CM14/Structures/Storage/Crates/plastic.rsi
+#    state: icon
+#  product: CMCrateFoodIngredients
+#  cost: 1000
+#  category: Food
+#  group: market
 
 - type: cargoProduct
   id: CMCargoFoodDonuts
