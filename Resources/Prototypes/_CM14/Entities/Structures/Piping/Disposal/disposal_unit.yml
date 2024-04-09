@@ -12,7 +12,7 @@
     - state: disposal
       map: [ "enum.DisposalUnitVisualLayers.Base" ]
     - state: disposal-flush
-      map: [ "enum.DisposalUnitVisualLayers.BaseFlush" ]
+      map: [ "enum.DisposalUnitVisualLayers.OverlayFlush" ]
     - state: dispover-charge
       map: [ "enum.DisposalUnitVisualLayers.OverlayCharging" ]
     - state: dispover-ready

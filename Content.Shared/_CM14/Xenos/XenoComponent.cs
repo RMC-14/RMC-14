@@ -3,7 +3,6 @@ using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Set;
 
 namespace Content.Shared._CM14.Xenos;
 
@@ -29,8 +28,8 @@ public sealed partial class XenoComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid Hive;
 
-    [DataField(customTypeSerializer: typeof(PrototypeIdHashSetSerializer<AccessLevelPrototype>)), AutoNetworkedField]
-    public HashSet<string> AccessLevels = new() { "CMAccessXeno" };
+    [DataField, AutoNetworkedField]
+    public HashSet<ProtoId<AccessLevelPrototype>> AccessLevels = new() { "CMAccessXeno" };
 
     [DataField, AutoNetworkedField]
     public bool OnWeeds;

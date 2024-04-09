@@ -9,26 +9,16 @@ public sealed class CMStasisBagSystem : SharedCMStasisBagSystem
     {
         base.OnInsert(bag, target);
 
-        var ev = new ApplyMetabolicMultiplierEvent
-        {
-            Uid = target,
-            // what in gods name is this api upstream TODO CM14
-            Multiplier = bag.Comp.MetabolismMultiplier,
-            Apply = true
-        };
-        RaiseLocalEvent(target, ev);
+        // what in gods name is this api upstream TODO CM14
+        var ev = new ApplyMetabolicMultiplierEvent(target, bag.Comp.MetabolismMultiplier, true);
+        RaiseLocalEvent(target, ref ev);
     }
 
     protected override void OnRemove(Entity<CMStasisBagComponent> bag, EntityUid target)
     {
         base.OnRemove(bag, target);
 
-        var ev = new ApplyMetabolicMultiplierEvent
-        {
-            Uid = target,
-            Multiplier = bag.Comp.MetabolismMultiplier,
-            Apply = false
-        };
-        RaiseLocalEvent(target, ev);
+        var ev = new ApplyMetabolicMultiplierEvent(target, bag.Comp.MetabolismMultiplier, false);
+        RaiseLocalEvent(target, ref ev);
     }
 }

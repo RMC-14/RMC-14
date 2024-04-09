@@ -51,8 +51,7 @@
     sprite: _CM14/Structures/Walls/metal.rsi
   - type: Tag
     tags:
-      - Wall
-      - RCDDeconstructWhitelist
+    - Wall
   - type: Destructible
     thresholds:
     - trigger:
@@ -116,8 +115,7 @@
     sprite: _CM14/Structures/Walls/rwall.rsi
   - type: Tag
     tags:
-      - Wall
-      - RCDDeconstructWhitelist
+    - Wall
   - type: Destructible
     thresholds:
     - trigger:
