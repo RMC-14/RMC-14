@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: BodyBag_Container
+  parent: BodyBag
   id: CMBodyBag
   name: body bag
   description: A folded bag designed for the storage and transportation of cadavers.

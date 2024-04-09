@@ -8,19 +8,19 @@
   },
   "states": [
     {
-      "name": "closed_toilet_seat_down",
+      "name": "closed_seat_down",
       "directions": 4
     },
     {
-      "name": "open_toilet_seat_down",
+      "name": "open_seat_down",
       "directions": 4
     },
     {
-      "name": "closed_toilet_seat_up",
+      "name": "closed_seat_up",
       "directions": 4
     },
     {
-      "name": "open_toilet_seat_up",
+      "name": "open_seat_up",
       "directions": 4
     }
   ]
