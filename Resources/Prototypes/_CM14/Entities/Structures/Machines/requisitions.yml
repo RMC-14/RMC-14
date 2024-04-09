@@ -1,8 +1,9 @@
 - type: entity
-  parent: ComputerCargoOrders
+  parent: [ComputerCargoOrders, CMCargoCatalog]
   id: CMASRSConsole
   name: ASRS console
   description: A console for the Automated Storage Retrieval System.
+  suffix: Requisitions
   components:
   - type: Sprite
     layers:
@@ -41,122 +42,12 @@
   - type: GuideHelp
     guides:
     - Cargo
-  - type: RequisitionsComputer
-    categories:
-    - name: Ammo
-      entries: []
-    - name: Attachments
-      entries:
-      - cost: 3000
-        crate: CMCrateAttachmentRedDot
-      - cost: 3000
-        crate: CMCrateAttachmentTelescopicScope
-      - cost: 3000
-        crate: CMCrateAttachmentMiniScope
-      - cost: 3000
-        crate: CMCrateAttachmentMagneticHarness
-      - cost: 3000
-        crate: CMCrateAttachmentSuppressor
-      - cost: 3000
-        crate: CMCrateAttachmentExtendedBarrel
-      - cost: 3000
-        crate: CMCrateAttachmentCompensator
-      - cost: 3000
-        crate: CMCrateAttachmentForegrip
-      - cost: 3000
-        crate: CMCrateAttachmentGyro
-      - cost: 3000
-        crate: CMCrateAttachmentBipod
-      - cost: 3000
-        crate: CMCrateAttachmentUnderbarrelShotgun
-      - cost: 3000
-        crate: CMCrateAttachmentUnderbarrelExtinguisher
-      - cost: 3000
-        crate: CMCrateAttachmentUnderbarrelFlamer
-      - cost: 3000
-        crate: CMCrateAttachmentBurstfire
-      - cost: 6000
-        crate: CMCrateAttachmentAllStocks
-      - cost: 3000
-        crate: CMCrateAttachmentRevolverStock
-      - cost: 3000
-        crate: CMCrateAttachmentRifleStock
-      - cost: 3000
-        crate: CMCrateAttachmentShotgunStock
-      - cost: 3000
-        crate: CMCrateAttachmentSmgStock
-    - name: Clothing
-      entries:
-      - cost: 2000
-        crate: CMCrateClothingLargePouches
-      - cost: 2000
-        crate: CMCrateClothingMedicalPouches
-      - cost: 2000
-        crate: CMCrateClothingWebbing
-      - cost: 3000
-        crate: CMCrateClothingOfficerOutfit
-    - name: Engineering
-      entries: []
-    - name: Explosives
-      entries: []
-    - name: Food
-      entries:
-      - cost: 1000
-        crate: CMCrateFoodDonuts
-      - cost: 1000
-        crate: CMCrateFoodMRE
-      - cost: 3000
-        crate: CMCrateFoodPizza
-      - cost: 1000
-        crate: CMCrateFoodIngredients
-    - name: Gear
-      entries: []
-    - name: Medical
-      entries:
-      - cost: 3200
-        crate: CMCrateMedicalSurgery
-      - cost: 2000
-        crate: CMCrateMedicalBodyBag
-      - cost: 1200
-        crate: CMCrateMedicalStasisBag
-      - cost: 1600
-        crate: CMCrateMedicalFirstAid
-      - cost: 2100
-        crate: CMCrateMedicalFilled
-      - cost: 2100
-        crate: CMCrateMedicalPill
-    - name: Mortar
-      entries: []
-    - name: Operations
-      entries: []
-    - name: Reagent tanks
-      entries: []
-    - name: Research
-      entries: []
-    - name: Restricted Equipment
-      entries: []
-    - name: Supplies
-      entries: []
-    - name: Vehicle Ammo
-      entries: []
-    - name: Weapons
-      entries:
-      - name: M41A MK1 Rifle Crate (x2 MK1, x2 magazines)
-        cost: 4000
-        crate: CMCrateWeapons
-        entities:
-        - WeaponRifleM41A
-        - WeaponRifleM41A
-        - CMMagazineRifleM41A
-        - CMMagazineRifleM41A
-    - name: Weapons Specialist Ammo
-      entries: []
   - type: CargoSellBlacklist
 
 - type: entity
   id: CMCargoElevator
   name: cargo elevator
-  suffix: Lowered
+  suffix: Lowered, Requisitions
   placement:
     mode: SnapgridCenter
     snap:
