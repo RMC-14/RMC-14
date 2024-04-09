@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f7b9367cb5c083a8c052a40dece9417031e28ffe/icons/obj/structures/machinery/stock_parts.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "vbox_0"
+    },
+    {
+      "name": "vbox_1"
+    },
+    {
+      "name": "vbox_2"
+    },
+    {
+      "name": "vbox_3"
+    },
+    {
+      "name": "rom1"
+    },
+    {
+      "name": "rom2"
+    },
+    {
+      "name": "romos1"
+    },
+    {
+      "name": "romos2"
+    },
+    {
+      "name": "hdd1"
+    },
+    {
+      "name": "hdd2"
+    },
+    {
+      "name": "box_1"
+    },
+    {
+      "name": "box_0"
+    },
+    {
+      "name": "box_2"
+    },
+    {
+      "name": "0"
+    },
+    {
+      "name": "1"
+    },
+    {
+      "name": "2"
+    },
+    {
+      "name": "3"
+    },
+    {
+      "name": "4"
+    }
+  ]
+}

@@ -20,9 +20,9 @@
   graph: CMMachineFrame
   startNode: start
   targetNode: machine
-  category: construction-category-machines
+  category: construction-category-cm-utilities
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/Machines/parts.rsi
+    sprite: _CM14/Structures/Machines/parts.rsi
     state: "box_0"
