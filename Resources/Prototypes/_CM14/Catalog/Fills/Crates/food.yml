@@ -31,7 +31,7 @@
 - type: entity
   id: CMCrateFoodIngredients
   parent: CMCratePlastic
-  name: ingridients crate
+  name: ingredients crate
   components:
   - type: StorageFill
     contents:
