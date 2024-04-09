@@ -1,10 +1,12 @@
 ﻿- type: entity
   parent: UnfinishedMachineFrame
-  id: CMUnfinishedMachineFrame
+  id: CMMachineFrameUnfinished
   suffix: CM14, Unfinished
   placement:
     mode: SnapgridCenter
   components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/parts.rsi
   - type: Construction
     containers:
     - machine_board
@@ -29,6 +31,8 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/parts.rsi
   - type: Construction
     graph: CMMachineFrame
     node: machineFrame
@@ -54,6 +58,8 @@
   placement:
     mode: SnapgridCenter
   components:
+  #- type: Sprite # todo cm14 make (or find) destroyed box sprite
+  #  sprite: _CM14/Structures/Machines/parts.rsi
   - type: Construction
     graph: CMMachineFrame
     node: destroyedMachineFrame
