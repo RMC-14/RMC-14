@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: CMOperatingTable
+  parent: OperatingTable
   id: CMOperatingTable
   name: operating table
   description: Used for advanced medical procedures.
