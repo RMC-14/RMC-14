@@ -1,7 +1,7 @@
 - type: entity
   name: surplus box of ingredients
   parent: CMBoxCardboard
-  id: CMBoxIngridients
+  id: CMBoxIngredients
   description: This box contains ingredients.
   components:
   - type: StorageFill # TODO CM14 add ingredients 
