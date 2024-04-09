@@ -107,8 +107,8 @@
         crate: CMCrateFoodMRE
       - cost: 3000
         crate: CMCrateFoodPizza
-      - cost: 1000
-        crate: CMCrateFoodIngredients
+#      - cost: 1000
+#        crate: CMCrateFoodIngredients
     - name: Gear
       entries: []
     - name: Medical
