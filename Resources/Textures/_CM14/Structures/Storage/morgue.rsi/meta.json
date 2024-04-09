@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/c7b4d6bd868de669ad96f1d3e4dc3702a3404355/icons/obj/structures/props/stationobjs.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "morgue_open",
+      "directions": 4,
+      "delays": [
+        [
+          0.3,
+          1
+        ],
+        [
+          0.3,
+          1
+        ],
+        [
+          0.3,
+          1
+        ],
+        [
+          0.3,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "morgue_closed",
+      "directions": 4
+    },
+    {
+      "name": "morgue_contents",
+      "directions": 4
+    },
+    {
+      "name": "morgue_tray",
+      "directions": 4
+    },
+    {
+      "name": "morgue_tray_bloody",
+      "directions": 4
+    },
+    {
+      "name": "crema_closed"
+    },
+    {
+      "name": "crema_contents"
+    },
+    {
+      "name": "crema_open",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "crema_tray",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "crema_tray_bloody",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "crema_active",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    }
+  ]
+}
