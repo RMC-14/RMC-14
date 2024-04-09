@@ -23,7 +23,7 @@
         doAfter: 2.5
 
   - node: missingWires
-    entity: UnfinishedMachineFrame
+    entity: CMMachineFrameUnfinished
     actions:
     - !type:EmptyAllContainers
     edges:
@@ -43,7 +43,7 @@
         doAfter: 2
 
   - node: machineFrame
-    entity: MachineFrame
+    entity: CMMachineFrame
     actions:
     - !type:AddContainer
       container: machine_parts
@@ -56,10 +56,10 @@
       - !type:EntityAnchored
       - !type:MachineFrameComplete
         guideIconBoard:
-          sprite: Objects/Misc/module.rsi
+          sprite: _CM14/Objects/Misc/module.rsi
           state: id_mod
         guideIconParts:
-          sprite: Objects/Misc/stock_parts.rsi
+          sprite: _CM14/Objects/Misc/stock_parts.rsi
           state: scan_module
       steps:
       - tool: Screwing
@@ -106,7 +106,7 @@
         doAfter: 2
 
   - node: destroyedMachineFrame
-    entity: MachineFrameDestroyed
+    entity: CMMachineFrameDestroyed
     edges:
     - to: start
       steps:
