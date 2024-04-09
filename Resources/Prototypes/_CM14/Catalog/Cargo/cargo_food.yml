@@ -1,0 +1,40 @@
+- type: cargoProduct
+  id: CMCargoFoodIngredients
+  icon:
+    sprite: _CM14/Structures/Storage/Crates/plastic.rsi
+    state: icon
+  product: CMCrateFoodIngredients
+  cost: 1000
+  category: Food
+  group: market
+
+- type: cargoProduct
+  id: CMCargoFoodDonuts
+  icon:
+    sprite: _CM14/Structures/Storage/Crates/plastic.rsi
+    state: icon
+  product: CMCrateFoodDonuts
+  cost: 1000
+  category: Food
+  group: market
+
+- type: cargoProduct
+  id: CMCargoFoodPizza
+  icon:
+    sprite: _CM14/Structures/Storage/Crates/plastic.rsi
+    state: icon
+  product: CMCrateFoodPizza
+  cost: 3000
+  category: Food
+  group: market
+
+- type: cargoProduct
+  id: CMCargoFoodMRE
+  icon:
+    sprite: _CM14/Structures/Storage/Crates/plastic.rsi
+    state: icon
+  product: CMCrateFoodMRE
+  cost: 1000
+  category: Food
+  group: market
+  
