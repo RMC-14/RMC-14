@@ -8,15 +8,15 @@
 #  category: Food
 #  group: market
 
-- type: cargoProduct # TODO cm14 fix bounties on cm14 setting off cargo tests
-  id: CMCargoFoodDonuts
-  icon:
-    sprite: _CM14/Structures/Storage/Crates/plastic.rsi
-    state: icon
-  product: CMCrateFoodDonuts
-  cost: 1000
-  category: Food
-  group: market
+#- type: cargoProduct # TODO cm14 fix bounties on cm14 setting off cargo tests
+#  id: CMCargoFoodDonuts
+#  icon:
+#    sprite: _CM14/Structures/Storage/Crates/plastic.rsi
+#    state: icon
+#  product: CMCrateFoodDonuts
+#  cost: 1000
+#  category: Food
+#  group: market
 
 - type: cargoProduct
   id: CMCargoFoodPizza
