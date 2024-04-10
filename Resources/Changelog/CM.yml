@@ -208,5 +208,26 @@
   id: 30
   time: '2024-03-03T10:47:54.0000000+00:00'
   url: https://api.github.com/repos/CM-14/CM-14/pulls/978
+- author: Tunguso4ka
+  changes:
+  - message: Added Corporate Liaison role.
+    type: Add
+  id: 31
+  time: '2024-04-05T04:28:31.0000000+00:00'
+  url: https://api.github.com/repos/CM-14/CM-14/pulls/998
+- author: ike709
+  changes:
+  - message: Added cargo crates for boxes of crayons and empty boxes
+    type: Add
+  id: 32
+  time: '2024-04-10T06:10:15.0000000+00:00'
+  url: https://api.github.com/repos/CM-14/CM-14/pulls/1140
+- author: ike709
+  changes:
+  - message: Added a cargo crate for the M41AE2
+    type: Add
+  id: 33
+  time: '2024-04-10T06:59:53.0000000+00:00'
+  url: https://api.github.com/repos/CM-14/CM-14/pulls/1141
 Name: CM
 Order: -1
