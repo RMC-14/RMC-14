@@ -106,13 +106,9 @@
       entries: []
     - name: Weapons
       entries:
-      - name: M41A MK1 Rifle Crate (x2 MK1, x2 magazines)
-        cost: 4000
-        crate: CMCrateWeapons
-        entities:
-        - WeaponRifleM41A
-        - WeaponRifleM41A
-        - CMMagazineRifleM41A
-        - CMMagazineRifleM41A
+      - cost: 4000
+        crate: CMCrateM41A
+      - cost: 4000
+        crate: CMCrateM41AE2
     - name: Weapons Specialist Ammo
       entries: []
