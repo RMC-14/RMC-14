@@ -106,6 +106,7 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
                 }
 
                 if (input?.HeldMoveButtons > MoveButtons.None &&
+                    input.HeldMoveButtons != MoveButtons.Walk &&
                     rsi.TryGetState("running", out _))
                 {
                     sprite.LayerSetState(layer, "running");
