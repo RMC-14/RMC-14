@@ -1,0 +1,178 @@
+- type: entity
+  id: CMCrateEmptySandbags
+  parent: CMCrateConstruction
+  name: empty sandbags crate    
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMSandbagEmpty50
+
+- type: entity
+  id: CMCrateSandbagsConsturctionKit
+  parent: CMCrateConstruction
+  name: sandbags construction lit   
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMSandbagFull50
+   #  - id: Etool
+   #    amount: 2
+   
+- type: entity
+  id: CMCrateMetalSheets
+  parent: CMCrateConstruction
+  name: metal sheets crate  
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMSheetSteel
+        amount: 2 #it has to be 50,but it would require either 50 single metal sheets or 1 full and 2 tens
+
+- type: entity
+  id: CMCratePlasteelSheets
+  parent: CMCrateConstruction
+  name: plasteel sheets crate
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMSheetPlasteel #the same thing as with steel, but now 40
+
+- type: entity
+  id: CMCrateGlassSheets
+  parent: CMCrateConstruction
+  name: glass sheets crate
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMSheetGlass 
+      
+- type: entity
+  id: CMCrateWoodenPlanks
+  parent: CMCrateConstruction
+  name: wooden planks crate
+  components:
+  - type: StorageFill
+    contents:
+      - id: MaterialWoodPlank #max stack is 30, so its impossbile to make 50
+        amount: 2
+  #   - id: CMMaterialWoodPlank
+
+- type: entity
+  id: CMCrateFoldingBarricades
+  parent: CMCrateConstruction
+  name: folding metal barricades crate
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMBarricadeMetalDoor #works like emitter crates 
+        amount: 3
+ 
+- type: entity
+  id: CMCrateSuperconductingMagneticCoil
+  parent: CMCrateConstruction
+  name: superconducting magnetic coil crate
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMStockPartSMESCoil
+
+- type: entity
+  id: CMCrateElectricalMaintenance
+  parent: CMCrateConstruction
+  name: electrical maintenance cratee
+  components:
+  - type: StorageFill
+    contents:
+      - id: ToolboxElectricalFilled
+        amount: 2
+      - id: CMHandsInsulated
+        amount: 2
+      - id: PowerCellMedium
+        amount: 2
+      - id: PowerCellHigh
+        amount: 2
+
+- type: entity
+  id: CMCrateMechanicalMaintenance
+  parent: CMCrateConstruction
+  name: mechanical maintenance crate
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMBeltUtilityFilled
+        amount: 3
+      - id: ClothingOuterVestHazard
+        amount: 3
+      - id: ClothingHeadHatWelding
+        amount: 2
+      - id: ClothingHeadHatHardhatYellow
+        amount: 1
+      
+- type: entity
+  id: CMCrateInflatableBarriers
+  parent: CMCrateConstruction
+  name: inflatable barriers crate
+  components:
+  - type: StorageFill
+    contents:
+      - id: InflatableDoorStack 
+      #max stack - 4. making 2 stacks would be easier and good
+        amount: 2
+      - id: InflatableWallStack 
+      #max stack - 10. Making 1 stack would be easier and good
+
+- type: entity
+  id: CMCrateReplacmentLights
+  parent: CMCrateConstruction
+  name: replacement lights crate
+  components:
+  - type: StorageFill
+    contents:
+      - id: BoxLighttube # 12 tubes in 1 box, so making 42 tubes is hard and makes no sense
+        amount: 4
+      - id: BoxLightbulb
+        amount: 2 #12 bulbs in 1 box, so making 21 bulbs is hard and makes no sense
+      
+- type: entity
+  id: CMCratePacmanParts
+  parent: CMCrateConstruction
+  name: pacman portable generator parts
+  components:
+  - type: StorageFill
+    contents:
+      - id: PortableGeneratorPacmanMachineCircuitboard
+        amount: 2
+      - id: CapacitorStockPart
+        amount: 2
+      
+- type: entity
+  id: CMCrateSuperPacmanParts
+  parent: CMCrateConstruction
+  name: super pacman portable generator parts
+  components:
+  - type: StorageFill
+    contents:
+      - id: PortableGeneratorSuperPacmanMachineCircuitboard
+        amount: 2
+      - id: CapacitorStockPart
+        amount: 4
+      
+- type: entity
+  id: CMCrateFlashlights
+  parent: CMCrateConstruction
+  name: flashlights crate
+  components:
+  - type: StorageFill
+    contents:
+      - id: FlashlightLantern
+        amount: 8
+
+- type: entity
+  id: CMCrateHighCapacityPowerCell
+  parent: CMCrateConstruction
+  name: high-capacity power cell crate
+  components:
+  - type: StorageFill
+    contents:
+      - id: PowerCellHigh
+        amount: 8

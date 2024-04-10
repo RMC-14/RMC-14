@@ -57,7 +57,39 @@
       - cost: 3000
         crate: CMCrateClothingOfficerOutfit
     - name: Engineering
-      entries: []
+      entries:
+      - cost: 2000
+        crate: CMCrateEmptySandbags
+      - cost: 3000
+        crate: CMCrateSandbagsConsturctionKit
+      - cost: 2000
+        crate: CMCrateMetalSheets
+      - cost: 3000
+        crate: CMCratePlasteelSheets
+      - cost: 2000
+        crate: CMCrateGlassSheets
+      - cost: 2000
+        crate: CMCrateWoodenPlanks   
+      - cost: 2000
+        crate: CMCrateFoldingBarricades
+      - cost: 3000
+        crate: CMCrateSuperconductingMagneticCoil
+      - cost: 2000
+        crate: CMCrateElectricalMaintenance
+      - cost: 2000
+        crate: CMCrateMechanicalMaintenance
+      - cost: 2000
+        crate: CMCrateInflatableBarriers
+      - cost: 2000
+        crate: CMCrateReplacmentLights     
+      - cost: 3000
+        crate: CMCratePacmanParts
+      - cost: 4000
+        crate: CMCrateSuperPacmanParts
+      - cost: 1000
+        crate: CMCrateFlashlights   
+      - cost: 1000
+        crate: CMCrateHighCapacityPowerCell       
     - name: Explosives
       entries: []
     - name: Food
