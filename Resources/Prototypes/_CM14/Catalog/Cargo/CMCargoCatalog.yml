@@ -97,7 +97,11 @@
     - name: Restricted Equipment
       entries: []
     - name: Supplies
-      entries: []
+      entries:
+      - cost: 2000
+        crate: CMCrateSuppliesCrayons
+      - cost: 1000
+        crate: CMCrateSuppliesBoxes
     - name: Vehicle Ammo
       entries: []
     - name: Weapons
