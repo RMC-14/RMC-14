@@ -1661,3 +1661,97 @@
       entries: []
     #- id: CMGasMask
     #- id: CMHeatAbsorbentCoif
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechSurplus
+  name: ColMarTech Surplus Uniform Vendor
+  description: An automated rack hooked up to a small storage of standard marine uniforms.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    sections:
+    - name: Standard Equipment
+      entries: []
+      #Marine Combat Boots
+      #Marine Brown Combat Boots
+      #USCM Uniform
+      #Marine Combat Gloves
+      #Marine Brown Combat Gloves
+      #Marine Black Combat Gloves
+      #Marine Radio Headset (Squad Specific?)
+      #M10 Pattern Marine Helmet
+    - name: Webbings
+      entries: []
+      #Brown Webbing Vest
+      #Black Webbing Vest
+      #Webbing
+      #Drop Pouch
+      #Shoulder Holster
+    - name: Armor
+      entries: []
+      #M3 Pattern Carrier Marine Armor
+      #M3 Pattern Padded Marine Armor
+      #M3 Pattern Padless Marine Armor
+      #M3 Pattern Ridged Marine Armor
+      #M3 Pattern Skull Marine Armor
+      #M3-EOD Pattern Heavy Armor
+      #M3-L Pattern Light Armor
+    - name: Backpacks
+      entries: []
+      #Lightweight IMP Backpack
+      #Technician Backpack
+      #Medical Backpack
+      #USCM Satchel
+      #USCM Chestrig
+      #USCM Technical Satchel
+      #USCM Technical Chestrig
+      #Medical Satchel
+      #Shotgun Scabbard
+    - name: Restricted Backpacks
+      entries: []
+      #USCM Technician Welderpack
+      #Technician Welder-Satchel
+      #Radio Telephone Backpack
+    - name: Belts
+      entries: []
+      #M276 Pattern Ammo Load Rig
+      #M276 Pattern M40 Grenade Rig
+      #M276 Pattern Shotgun Shell Loading Rig
+      #M276 Pattern General Pistol Holster Rig
+      #M276 Pattern M39 Holster Rig
+      #M276 Pattern M39 Holster Rig and Pouch
+      #M276 Pattern M44 Holster Rig
+      #M276 Pattern M82F Holster Rig
+      #M276 Knife Rig (Full)
+      #M276 G8-A General Utility Pouch
+    - name: Pouches
+      entries: []
+      #Bayonet Sheath (Full)
+      #First-Aid Pouch (Splints, Gauze, Ointment)
+      #First-Aid Pouch (Pill Packets)
+      #Flare Pouch (Full)
+      #Small Document Pouch
+      #Magazine Pouch
+      #Shotgun Shell Pouch
+      #Medium General Pouch
+      #Pistol Magazine Pouch
+      #Pistol Pouch
+    - name: Miscellaneous
+      entries: []
+      #Ballistic Goggles
+      #M1A1 Ballistic Goggles
+      #Prescription Ballistic Goggles
+      #M5 Integrated Gas Mask
+      #M10 Helmet Netting
+      #M10 Helmet Rain Cover
+      #Firearm Lubricant
+      #USCM Flair
+      #Falling Falcons Shoulder Patch
+      #USCM Shoulder Patch
+      #Bedroll
+    - name: Optics
+      entries: []
+      #Advanced Medical Optic
+      #Squad Optic
