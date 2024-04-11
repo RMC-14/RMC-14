@@ -25,5 +25,3 @@
   components:
   - type: Sprite
     state: protein_bar
-  - type: Item
-    size: Tiny
