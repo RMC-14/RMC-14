@@ -25,7 +25,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMSteel
+      - id: CMSheetSteel
 
 - type: entity
   id: CMCratePlasteelSheets
@@ -34,7 +34,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMPlasteel
+      - id: CMSheetPlasteel
 
 - type: entity
   id: CMCrateGlassSheets
