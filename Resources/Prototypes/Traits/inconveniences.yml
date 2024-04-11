@@ -1,4 +1,4 @@
-﻿- type: trait
+- type: trait
   id: LightweightDrunk
   name: trait-lightweight-name
   description: trait-lightweight-desc
@@ -16,3 +16,10 @@
       fourRandomProb: 0
       threeRandomProb: 0
       cutRandomProb: 0
+
+- type: trait
+  id: Snoring
+  name: trait-snoring-name
+  description: trait-snoring-desc
+  components:
+    - type: Snoring
