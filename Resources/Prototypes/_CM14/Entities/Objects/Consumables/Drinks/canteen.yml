@@ -6,7 +6,7 @@
   - type: Sprite
     sprite: _CM14/Objects/Consumable/Drinks/canteen.rsi
   - type: Item
-    size: Tiny
+    size: Small
   - type: Drink
   - type: SolutionContainerManager
     solutions:
