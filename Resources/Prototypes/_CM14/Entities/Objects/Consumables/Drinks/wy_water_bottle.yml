@@ -17,7 +17,7 @@
     state: base
     layers: []
   - type: Item
-    size: Tiny
+    size: Small
   - type: DamageOnLand
     damage: {}
   - type: DamageOtherOnHit
