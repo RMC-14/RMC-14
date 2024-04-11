@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: BaseItem
   abstract: true
   id: CMWeaponPistolBase
@@ -10,10 +10,7 @@
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
   - type: Item
-    size: Small
-    shape:
-    - 0,0,1,0
-    - 0,1,0,1
+    size: Normal
   - type: Tag
     tags:
     - Sidearm
