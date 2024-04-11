@@ -1,32 +1,31 @@
 - type: entity
   id: CMCrateEmptySandbags
   parent: CMCrateConstruction
-  name: empty sandbags crate    
+  name: empty sandbags crate
   components:
   - type: StorageFill
     contents:
       - id: CMSandbagEmpty50
 
 - type: entity
-  id: CMCrateSandbagsConsturctionKit
+  id: CMCrateSandbagsConstructionKit
   parent: CMCrateConstruction
-  name: sandbags construction lit   
+  name: sandbags construction lit
   components:
   - type: StorageFill
     contents:
       - id: CMSandbagFull50
-   #  - id: Etool
-   #    amount: 2
-   
+      - id: CMEntrenchingTool
+        amount: 2
+
 - type: entity
   id: CMCrateMetalSheets
   parent: CMCrateConstruction
-  name: metal sheets crate  
+  name: metal sheets crate
   components:
   - type: StorageFill
     contents:
-      - id: CMSheetSteel
-        amount: 2 #it has to be 50,but it would require either 50 single metal sheets or 1 full and 2 tens
+      - id: CMSteel
 
 - type: entity
   id: CMCratePlasteelSheets
@@ -35,7 +34,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMSheetPlasteel #the same thing as with steel, but now 40
+      - id: CMPlasteel
 
 - type: entity
   id: CMCrateGlassSheets
@@ -44,29 +43,27 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMSheetGlass 
-      
-- type: entity
-  id: CMCrateWoodenPlanks
-  parent: CMCrateConstruction
-  name: wooden planks crate
-  components:
-  - type: StorageFill
-    contents:
-      - id: MaterialWoodPlank #max stack is 30, so its impossbile to make 50
-        amount: 2
-  #   - id: CMMaterialWoodPlank
+      - id: CMSheetGlass
 
-- type: entity
-  id: CMCrateFoldingBarricades
-  parent: CMCrateConstruction
-  name: folding metal barricades crate
-  components:
-  - type: StorageFill
-    contents:
-      - id: CMBarricadeMetalDoor #works like emitter crates 
-        amount: 3
- 
+#- type: entity
+#  id: CMCrateWoodenPlanks
+#  parent: CMCrateConstruction
+#  name: wooden planks crate
+#  components:
+#  - type: StorageFill
+#    contents:
+  #   - id: CMMaterialWoodPlank # todo cm14 add wood material
+
+#- type: entity # todo cm14 add folding barricades
+#  id: CMCrateFoldingBarricades
+#  parent: CMCrateConstruction
+#  name: folding metal barricades crate
+#  components:
+#  - type: StorageFill
+#    contents:
+#      - id: CMFoldingBarricade
+#        amount: 3
+
 - type: entity
   id: CMCrateSuperconductingMagneticCoil
   parent: CMCrateConstruction
@@ -79,17 +76,17 @@
 - type: entity
   id: CMCrateElectricalMaintenance
   parent: CMCrateConstruction
-  name: electrical maintenance cratee
+  name: electrical maintenance crate
   components:
   - type: StorageFill
     contents:
-      - id: ToolboxElectricalFilled
+      - id: ToolboxElectricalFilled # todo cm14 use cm prototype
         amount: 2
       - id: CMHandsInsulated
         amount: 2
-      - id: PowerCellMedium
+      - id: PowerCellMedium # todo cm14 use cm prototype
         amount: 2
-      - id: PowerCellHigh
+      - id: PowerCellHigh # todo cm14 use cm prototype
         amount: 2
 
 - type: entity
@@ -101,38 +98,38 @@
     contents:
       - id: CMBeltUtilityFilled
         amount: 3
-      - id: ClothingOuterVestHazard
+      - id: ClothingOuterVestHazard # todo cm14 use cm prototype
         amount: 3
-      - id: ClothingHeadHatWelding
+      - id: ClothingHeadHatWelding # todo cm14 use cm prototype
         amount: 2
-      - id: ClothingHeadHatHardhatYellow
+      - id: ClothingHeadHatHardhatYellow # todo cm14 use cm prototype
         amount: 1
-      
-- type: entity
-  id: CMCrateInflatableBarriers
-  parent: CMCrateConstruction
-  name: inflatable barriers crate
-  components:
-  - type: StorageFill
-    contents:
-      - id: InflatableDoorStack 
-      #max stack - 4. making 2 stacks would be easier and good
-        amount: 2
-      - id: InflatableWallStack 
-      #max stack - 10. Making 1 stack would be easier and good
+
+#- type: entity # todo cm14 probably not relevant to cm14 but will leave it here in case we want it
+#  id: CMCrateInflatableBarriers
+#  parent: CMCrateConstruction
+#  name: inflatable barriers crate
+#  components:
+#  - type: StorageFill
+#    contents:
+#      - id: InflatableDoorStack
+#      #max stack - 4. making 2 stacks would be easier and good
+#        amount: 2
+#      - id: InflatableWallStack
+#      #max stack - 10. Making 1 stack would be easier and good
 
 - type: entity
-  id: CMCrateReplacmentLights
+  id: CMCrateReplacementLights
   parent: CMCrateConstruction
   name: replacement lights crate
   components:
-  - type: StorageFill
+  - type: StorageFill # todo cm14 this could probably be replaced with cm entities but it's fine for now
     contents:
       - id: BoxLighttube # 12 tubes in 1 box, so making 42 tubes is hard and makes no sense
         amount: 4
       - id: BoxLightbulb
         amount: 2 #12 bulbs in 1 box, so making 21 bulbs is hard and makes no sense
-      
+
 - type: entity
   id: CMCratePacmanParts
   parent: CMCrateConstruction
@@ -140,11 +137,11 @@
   components:
   - type: StorageFill
     contents:
-      - id: PortableGeneratorPacmanMachineCircuitboard
+      - id: PortableGeneratorPacmanMachineCircuitboard # todo cm14 use cm prototype
         amount: 2
-      - id: CapacitorStockPart
+      - id: CapacitorStockPart # todo cm14 use cm prototype
         amount: 2
-      
+
 - type: entity
   id: CMCrateSuperPacmanParts
   parent: CMCrateConstruction
@@ -152,11 +149,11 @@
   components:
   - type: StorageFill
     contents:
-      - id: PortableGeneratorSuperPacmanMachineCircuitboard
+      - id: PortableGeneratorSuperPacmanMachineCircuitboard # todo cm14 use cm prototype
         amount: 2
-      - id: CapacitorStockPart
+      - id: CapacitorStockPart # todo cm14 use cm prototype
         amount: 4
-      
+
 - type: entity
   id: CMCrateFlashlights
   parent: CMCrateConstruction
@@ -164,7 +161,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: FlashlightLantern
+      - id: FlashlightLantern # todo cm14 use cm prototype
         amount: 8
 
 - type: entity
@@ -174,5 +171,5 @@
   components:
   - type: StorageFill
     contents:
-      - id: PowerCellHigh
+      - id: PowerCellHigh # todo cm14 use cm prototype
         amount: 8

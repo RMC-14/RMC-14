@@ -4,6 +4,8 @@
   id: CMSheetMetalBase
   description: A sheet of metal, used often in various applications.
   components:
+    - type: Stack
+      count: 50
     - type: Sprite
       sprite: _CM14/Objects/Materials/Sheets/metal.rsi
     - type: Item
@@ -62,6 +64,7 @@
       materialComposition:
         Plasteel: 100
     - type: Stack
+      count: 40
       stackType: CMPlasteel
       baseLayer: base
       layerStates:
