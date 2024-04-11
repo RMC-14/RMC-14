@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: CMFoodBase
   id: CMBarFoodBase
@@ -25,3 +25,5 @@
   components:
   - type: Sprite
     state: protein_bar
+  - type: Item
+    size: Tiny

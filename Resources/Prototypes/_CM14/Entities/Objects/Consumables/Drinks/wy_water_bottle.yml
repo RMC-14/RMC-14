@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: DrinkBottlePlasticBaseFull
   id: CMDrinkWYWaterBottle30
   name: Weyland-Yutani bottled spring water
@@ -17,7 +17,7 @@
     state: base
     layers: []
   - type: Item
-    size: Small
+    size: Tiny
   - type: DamageOnLand
     damage: {}
   - type: DamageOtherOnHit

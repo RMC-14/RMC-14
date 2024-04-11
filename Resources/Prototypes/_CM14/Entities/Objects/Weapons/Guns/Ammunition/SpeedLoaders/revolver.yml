@@ -29,3 +29,5 @@
     steps: 2
     zeroVisible: false
   - type: Appearance
+  - type: Item
+    size: Tiny 

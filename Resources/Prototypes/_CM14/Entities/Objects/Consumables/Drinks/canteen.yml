@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: DrinkBase
   id: CMCanteenBase
@@ -6,7 +6,7 @@
   - type: Sprite
     sprite: _CM14/Objects/Consumable/Drinks/canteen.rsi
   - type: Item
-    size: Small
+    size: Tiny
   - type: Drink
   - type: SolutionContainerManager
     solutions:

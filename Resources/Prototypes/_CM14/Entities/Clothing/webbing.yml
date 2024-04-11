@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: BaseItem
   abstract: true
   id: CMWebbingBase
@@ -34,3 +34,6 @@
   - type: Sprite
     layers:
     - state: webbing
+  - type : Storage
+    grid:
+    - 0,0,5,1

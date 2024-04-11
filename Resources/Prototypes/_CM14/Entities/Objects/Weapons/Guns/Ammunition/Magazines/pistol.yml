@@ -8,7 +8,9 @@
     steps: 2
     zeroVisible: false
   - type: Appearance
-
+  - type: Item
+    size: Tiny
+  
 - type: entity
   parent: CMBaseMagazinePistol
   id: CMMagazinePistolM4A3

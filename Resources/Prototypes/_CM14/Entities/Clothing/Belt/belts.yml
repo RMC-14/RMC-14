@@ -71,6 +71,8 @@
       - Cartridge
       - SecBeltEquip
       - Flashlight
+      components:
+      - BallisticAmmoProvider
 
 - type: entity
   parent: CMBeltBaseStorage

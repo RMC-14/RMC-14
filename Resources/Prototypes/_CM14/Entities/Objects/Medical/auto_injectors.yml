@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: ChemicalMedipen
   id: CMAutoInjector
@@ -14,7 +14,7 @@
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
   - type: Item
-    size: Small
+    size: Tiny
     storedRotation: 90
     sprite: _CM14/Objects/Medical/auto_injectors.rsi
   - type: Hypospray

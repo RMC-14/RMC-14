@@ -27,6 +27,7 @@
     state: ointment
   - type: Item
     heldPrefix: ointment
+    size: Tiny
   - type: Healing
     damageContainers:
       - Biological
@@ -103,6 +104,8 @@
     count: 10
   - type: StackPrice
     price: 10
+  - type: Item
+    size: Tiny
 
 - type: stack
   id: CMGauze
