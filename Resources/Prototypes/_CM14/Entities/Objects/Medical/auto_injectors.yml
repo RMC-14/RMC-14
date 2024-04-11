@@ -14,7 +14,7 @@
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
   - type: Item
-    size: Tiny
+    size: Small
     storedRotation: 90
     sprite: _CM14/Objects/Medical/auto_injectors.rsi
   - type: Hypospray
