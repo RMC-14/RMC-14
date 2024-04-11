@@ -2,6 +2,7 @@ tiles-cm-default = steel tile
 tiles-cm-plate = steel plate tile
 tiles-cm-office = office tile
 tiles-cm-sterile = steel sterile tile
+tiles-cm-sterile-dark = dark steel sterile tile
 tiles-cm-wood = wood tile
 tiles-cm-white = white steel tile
 tiles-cm-green = green steel tile
