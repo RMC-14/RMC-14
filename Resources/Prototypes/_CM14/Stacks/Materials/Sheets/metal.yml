@@ -11,5 +11,5 @@
   name: plasteel
   icon: { sprite: /Textures/_CM14/Objects/Materials/Sheets/plasteel.rsi, state: plasteel }
   spawn: CMSheetPlasteel
-  maxCount: 30
+  maxCount: 50
   itemSize: 1

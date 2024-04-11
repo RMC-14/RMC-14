@@ -30,7 +30,7 @@
 
 #- type: entity
 #  parent: CMBaseMachineCircuitboard
-#  id: CMPortableGeneratorPacmanMachineCircuitboard
+#  id: CMPortableGeneratorPacmanMachineCircuitBoard
 #  name: P.A.C.M.A.N.-type portable generator machine board
 #  components:
 #    - type: Sprite
