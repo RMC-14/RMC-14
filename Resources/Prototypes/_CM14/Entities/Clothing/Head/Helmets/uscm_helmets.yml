@@ -1,4 +1,4 @@
-﻿# m10
+# m10
 - type: entity
   parent: ClothingHeadBase
   id: ArmorHelmetM10
@@ -9,6 +9,21 @@
     sprite: _CM14/Objects/Clothing/Head/Helmets/m10/standard.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Head/Helmets/m10/standard.rsi
+  - type: Storage #hopefully in the future someone smarter than me can add storage(?) for integrated things like netting, HUD, etc. but for now this is for hiding snacks
+    maxItemSize: Small
+    grid:
+    - 0,0,2,1
+    blacklist:
+      tags:
+      - Pouch
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: [ ]
+  - type: UserInterface
+    interfaces:
+    - key: enum.StorageUiKey.Key
+      type: StorageBoundUserInterface
   - type: Armor
     modifiers:
       coefficients:
