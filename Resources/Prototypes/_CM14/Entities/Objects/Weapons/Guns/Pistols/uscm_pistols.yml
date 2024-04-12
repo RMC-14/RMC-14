@@ -3,6 +3,7 @@
   abstract: true
   id: CMWeaponPistolBase
   components:
+  - type: AmmoCounter
   - type: Sprite
     layers:
     - state: base
