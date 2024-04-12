@@ -1,12 +1,12 @@
 - type: trait
-  id: FrontalLisp
+  id: CMFrontalLisp
   name: trait-frontal-lisp-name
   description: trait-frontal-lisp-desc
   components:
     - type: FrontalLisp
 
 - type: trait
-  id: Snoring
+  id: CMSnoring
   name: trait-snoring-name
   description: trait-snoring-desc
   components:
