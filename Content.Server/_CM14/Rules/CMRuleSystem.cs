@@ -5,6 +5,7 @@ using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
 using Content.Server.Roles.Jobs;
+using Content.Shared._CM14.Marines;
 using Content.Shared._CM14.Marines.Squads;
 using Content.Shared._CM14.Xenos;
 using Content.Shared.Coordinates;
@@ -14,9 +15,6 @@ using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
-using MarineComponent = Content.Shared._CM14.Marines.MarineComponent;
-using SquadMemberComponent = Content.Shared._CM14.Marines.Squads.SquadMemberComponent;
-using XenoComponent = Content.Shared._CM14.Xenos.XenoComponent;
 
 namespace Content.Server._CM14.Rules;
 

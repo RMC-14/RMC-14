@@ -112,3 +112,16 @@
     event: !type:XenoWordQueenActionEvent
     useDelay: 10
   - type: XenoWordQueenAction
+
+- type: entity
+  id: ActionXenoGrowOvipositor
+  parent: ActionXenoBase
+  name: Grow Ovipositor # TODO CM14 description
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: grow_ovipositor
+    event: !type:XenoGrowOvipositorActionEvent
+  - type: XenoGrowOvipositorAction

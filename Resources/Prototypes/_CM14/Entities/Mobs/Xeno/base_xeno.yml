@@ -158,6 +158,18 @@
   - type: Speech # TODO CM14 alien language
   - type: GhostOnMove
     mustBeDead: true
+  - type: Hands
+  - type: GiveHands
+    hands:
+    - name: Right Hand
+      location: Right
+    - name: Left Hand
+      location: Left
+  - type: WhitelistPickup
+    any:
+    - type: XenoHugger
+    - type: XenoEgg
+  - type: DropHeldOnIncapacitate
 
 - type: entity
   abstract: true

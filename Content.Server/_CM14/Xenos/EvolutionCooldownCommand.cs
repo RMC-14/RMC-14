@@ -1,10 +1,10 @@
 ﻿using Content.Server.Actions;
 using Content.Server.Administration;
+using Content.Shared._CM14.Xenos;
+using Content.Shared._CM14.Xenos.Evolution;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
 using Robust.Shared.Timing;
-using XenoComponent = Content.Shared._CM14.Xenos.XenoComponent;
-using XenoEvolveActionComponent = Content.Shared._CM14.Xenos.Evolution.XenoEvolveActionComponent;
 
 namespace Content.Server._CM14.Xenos;
 

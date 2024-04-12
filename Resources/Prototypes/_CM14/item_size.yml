@@ -1,0 +1,6 @@
+﻿- type: itemSize
+  id: Invalid
+  weight: 1000000000
+  name: item-component-size-Invalid
+  defaultShape:
+  - 0,0,100,100
