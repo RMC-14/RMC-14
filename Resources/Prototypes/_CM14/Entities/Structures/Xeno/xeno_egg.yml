@@ -1,0 +1,28 @@
+﻿- type: entity
+  parent: BaseItem
+  id: XenoEgg
+  name: egg
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Xenos/xeno_egg.rsi
+    drawdepth: FloorObjects
+    layers:
+    - state: egg_item
+      map: [ "enum.XenoEggLayers.Base" ]
+  - type: Item
+    size: Invalid
+  - type: XenoEgg
+  - type: Damageable
+    damageContainer: Resin
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
