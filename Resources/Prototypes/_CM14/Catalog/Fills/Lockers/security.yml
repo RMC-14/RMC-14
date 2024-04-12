@@ -7,7 +7,6 @@
     contents:
       - id: ClothingHeadHelmetBombSuit
       - id: ClothingOuterSuitBomb
-      # NT is cheap, what can you do...
       - id: CMWirecutter
         prob: 0.9
       - id: CMScrewdriver
