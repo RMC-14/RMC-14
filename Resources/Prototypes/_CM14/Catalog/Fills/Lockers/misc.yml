@@ -1,0 +1,23 @@
+- type: entity
+  id: CMClosetEmergencyFilled
+  parent: CMClosetEmergency
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMClothingMaskGas
+      - id: EmergencyOxygenTankFilled
+      - id: CMFirstAidO2KitFilled
+      - id: CMMarkerFlare
+
+- type: entity
+  id: CMClosetFireFilled
+  parent: CMClosetFire
+  suffix: Filled
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMClothingMaskGas
+        - id: EmergencyOxygenTankFilled
+        - id: CMFireExtinguisher
+        - id: CMBurnAidKitFilled
