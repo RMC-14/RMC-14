@@ -1,4 +1,4 @@
-﻿# TODO CM14 sniper barrel
+# TODO CM14 sniper barrel
 # TODO CM14 base sniper
 - type: entity
   parent: BaseItem
@@ -21,8 +21,8 @@
     - Back
   - type: AmmoCounter
   - type: Gun
-    minAngle: 30
-    maxAngle: 50
+    minAngle: 160
+    maxAngle: 180
     fireRate: 0.5
     selectedMode: SemiAuto
     availableModes:
@@ -30,8 +30,8 @@
     soundGunshot:
       path: /Audio/_CM14/Weapons/Guns/Gunshots/gun_sniper.ogg
   - type: GunWieldBonus
-    minAngle: -30
-    maxAngle: -50
+    minAngle: -160
+    maxAngle: -180
   - type: ItemSlots
     slots:
       gun_magazine:

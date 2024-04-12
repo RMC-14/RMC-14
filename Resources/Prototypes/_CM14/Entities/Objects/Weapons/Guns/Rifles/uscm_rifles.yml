@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: BaseItem
   id: CMBaseWeaponRifle
@@ -42,10 +42,10 @@
     - type: Clothing
       sprite: _CM14/Objects/Weapons/Guns/Rifles/m41a.rsi
     - type: Gun
-      minAngle: 30
-      maxAngle: 60
-      angleIncrease: 10
-      angleDecay: 16
+      minAngle: 120
+      maxAngle: 160
+      angleIncrease: 16
+      angleDecay: 8
       fireRate: 5
       selectedMode: FullAuto
       availableModes:
@@ -55,8 +55,10 @@
       soundGunshot:
         collection: CMM41AShoot
     - type: GunWieldBonus
-      minAngle: -25
-      maxAngle: -50
+      minAngle: -115
+      maxAngle: -150
+      angleIncrease: -6
+      angleDecay: +8 
     - type: ItemSlots
       slots:
         gun_magazine:
@@ -93,10 +95,10 @@
     - type: Clothing
       sprite: _CM14/Objects/Weapons/Guns/Rifles/m41ae2.rsi
     - type: Gun
-      minAngle: 30
-      maxAngle: 60
-      angleIncrease: 2
-      angleDecay: 20
+      minAngle: 120
+      maxAngle: 160
+      angleIncrease: 20
+      angleDecay: 2
       fireRate: 5
       selectedMode: FullAuto
       availableModes:
@@ -106,8 +108,10 @@
       soundGunshot:
         collection: CMM41AShoot
     - type: GunWieldBonus
-      minAngle: -25
-      maxAngle: -30
+      minAngle: -110
+      maxAngle: -145
+      angleIncrease: -6
+      angleDecay: +8 
     - type: ItemSlots
       slots:
         gun_magazine:
@@ -143,8 +147,8 @@
     - type: Clothing
       sprite: _CM14/Objects/Weapons/Guns/Rifles/m4ra.rsi
     - type: Gun
-      minAngle: 30
-      maxAngle: 50
+      minAngle: 130
+      maxAngle: 170
       angleIncrease: 5
       angleDecay: 10
       fireRate: 5
@@ -154,8 +158,8 @@
       soundGunshot:
         path: /Audio/_CM14/Weapons/Guns/Gunshots/gun_m4ra.ogg
     - type: GunWieldBonus
-      minAngle: -30
-      maxAngle: -40
+      minAngle: -120
+      maxAngle: -145
     - type: ItemSlots
       slots:
         gun_magazine:

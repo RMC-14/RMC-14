@@ -22,9 +22,9 @@
   - type: Wieldable
   - type: Gun
     minAngle: 10
-    maxAngle: 30
-    angleIncrease: 10
-    angleDecay: 10
+    maxAngle: 120
+    angleIncrease: 40
+    angleDecay: 2
     fireRate: 10
     selectedMode: SemiAuto
     availableModes:
@@ -33,7 +33,9 @@
       collection: CMM4A3Shoot
   - type: GunWieldBonus
     minAngle: -5
-    maxAngle: -25
+    maxAngle: -100
+    angleIncrease: -30
+    angleDecay: +8
   - type: ItemSlots
     slots:
       gun_magazine:
