@@ -1,4 +1,6 @@
 using Content.Shared._CM14.Barricade.Components;
+using Content.Shared.Climbing.Components;
+using Content.Shared.Climbing.Events;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors;
@@ -31,6 +33,16 @@ public sealed class BarbedSystem : EntitySystem
         SubscribeLocalEvent<BarbedComponent, BarbedDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<BarbedComponent, CutBarbedDoAfterEvent>(WireCutterOnDoAfter);
         SubscribeLocalEvent<BarbedComponent, DoorStateChangedEvent>(OnDoorStateChanged);
+        SubscribeLocalEvent<BarbedComponent, AttemptClimbEvent>(OnClimbAttempt);
+    }
+
+    private void OnClimbAttempt(Entity<BarbedComponent> barbed, ref AttemptClimbEvent args)
+    {
+        if (barbed.Comp.IsBarbed)
+        {
+            args.Cancelled = true;
+            _popupSystem.PopupClient(Loc.GetString("barbed-wire-cant-climb"), barbed.Owner, args.User);
+        }
     }
 
     public void OnInteractUsing(EntityUid uid, BarbedComponent component, InteractUsingEvent args)
