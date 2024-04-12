@@ -229,5 +229,28 @@
   id: 33
   time: '2024-04-10T06:59:53.0000000+00:00'
   url: https://api.github.com/repos/CM-14/CM-14/pulls/1141
+- author: Froffy025
+  changes:
+  - message: Added filled lockers
+    type: Add
+  id: 34
+  time: '2024-04-12T08:32:58.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1182
+- author: DrSmugleaf
+  changes:
+  - message: Added Queen ovipositor and eggs.
+    type: Add
+  - message: Added two hands to xenos that can only hold eggs and facehuggers.
+    type: Add
+  id: 35
+  time: '2024-04-12T10:24:42.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1184
+- author: Whisper
+  changes:
+  - message: non-barbed sandbags are climable
+    type: Add
+  id: 36
+  time: '2024-04-12T08:49:32.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1183
 Name: CM
 Order: -1
