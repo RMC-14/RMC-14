@@ -24,6 +24,7 @@ public sealed partial class MarineOrdersComponent : Component
     /// The range of the order's effect.
     /// </summary>
     [DataField, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
     public int OrderRange = 8;
 
 
@@ -38,6 +39,7 @@ public sealed partial class MarineOrdersComponent : Component
     /// Higher is more intense.
     /// </summary>
     [DataField, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
     public FixedPoint2 Multiplier = 1;
 
 

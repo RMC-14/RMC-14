@@ -15,11 +15,11 @@ public sealed partial class FocusOrderComponent : Component, IOrderComponent
     // CM14 TODO Make this do something when/if you will ever be able to modify the deviation of bullets with an event
     // or something. Trying to do it now would be possible but would then deviate from upstream stuff.
     [DataField, AutoNetworkedField]
-    public FixedPoint2 AccuracyModifier = 0.1;
+    public FixedPoint2 AccuracyModifier = 1.1;
 
     //CM14 TODO Make this do something when/if weapons ever get range.
     [DataField, AutoNetworkedField]
-    public FixedPoint2 RangeModifier = 0.1;
+    public FixedPoint2 RangeModifier = 1.1;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
     public TimeSpan Duration { get; set; }
