@@ -21,7 +21,7 @@ public sealed partial class HoldOrderComponent : Component, IOrderComponent
     /// Resistance to damage.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public FixedPoint2 DamageModifier;
+    public FixedPoint2 DamageModifier = 0.95;
 
     [DataField]
     public List<ProtoId<DamageTypePrototype>> DamageTypes = new() { "Slash", "Blunt" };
