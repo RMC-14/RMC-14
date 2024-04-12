@@ -252,5 +252,14 @@
   id: 36
   time: '2024-04-12T08:49:32.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1183
+- author: Whisper
+  changes:
+  - message: Fixed some guns still using bolting
+    type: Fix
+  - message: Pistols have an ammo counter now
+    type: Fix
+  id: 37
+  time: '2024-04-12T10:47:32.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1185
 Name: CM
 Order: -1
