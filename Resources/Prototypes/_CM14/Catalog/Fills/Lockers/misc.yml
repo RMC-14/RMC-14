@@ -6,7 +6,7 @@
   - type: StorageFill
     contents:
       - id: CMClothingMaskGas
-      - id: EmergencyOxygenTankFilled
+##      - id: EmergencyOxygenTankFilled
       - id: CMFirstAidO2KitFilled
       - id: CMMarkerFlare
 
@@ -18,6 +18,6 @@
     - type: StorageFill
       contents:
         - id: CMClothingMaskGas
-        - id: EmergencyOxygenTankFilled
+ ##       - id: EmergencyOxygenTankFilled
         - id: CMFireExtinguisher
         - id: CMBurnAidKitFilled
