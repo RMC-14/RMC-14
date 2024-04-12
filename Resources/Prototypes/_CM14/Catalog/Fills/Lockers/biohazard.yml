@@ -15,8 +15,8 @@
    components:
    - type: StorageFill
      contents:
-  ##     - id: ClothingOuterBioVirology
-  ##     - id: ClothingHeadHatHoodBioVirology
+       - id: ClothingOuterBioVirology
+       - id: ClothingHeadHatHoodBioVirology
   
  - type: entity
    id: CMClosetBioSecurityFilled
@@ -25,8 +25,8 @@
    components:
    - type: StorageFill
      contents:
-##       - id: ClothingOuterBioSecurity
-##       - id: ClothingHeadHatHoodBioSecurity
+       - id: ClothingOuterBioSecurity
+       - id: ClothingHeadHatHoodBioSecurity
 
  - type: entity
    id: CMClosetBioJanitorFilled
@@ -35,8 +35,8 @@
    components:
    - type: StorageFill
      contents:
- ##      - id: ClothingOuterBioJanitor
- ##      - id: ClothingHeadHatHoodBioJanitor
+       - id: ClothingOuterBioJanitor
+       - id: ClothingHeadHatHoodBioJanitor
 
  - type: entity
    id: CMClosetBioScientistFilled
