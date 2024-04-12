@@ -1,12 +1,12 @@
- - type: entity
+- type: entity
    id: CMClosetBioFilled
    suffix: Filled, Generic
    parent: CMClosetBio
    components:
    - type: StorageFill
      contents:
-       - id: ClothingOuterBioGeneral
-       - id: ClothingHeadHatHoodBioGeneral
+##       - id: ClothingOuterBioGeneral 
+##       - id: ClothingHeadHatHoodBioGeneral
 
  - type: entity
    id: CMClosetBioVirologyFilled
@@ -15,8 +15,8 @@
    components:
    - type: StorageFill
      contents:
-       - id: ClothingOuterBioVirology
-       - id: ClothingHeadHatHoodBioVirology
+##       - id: ClothingOuterBioVirology
+##       - id: ClothingHeadHatHoodBioVirology
   
  - type: entity
    id: CMClosetBioSecurityFilled
@@ -25,8 +25,8 @@
    components:
    - type: StorageFill
      contents:
-       - id: ClothingOuterBioSecurity
-       - id: ClothingHeadHatHoodBioSecurity
+##       - id: ClothingOuterBioSecurity
+##       - id: ClothingHeadHatHoodBioSecurity
 
  - type: entity
    id: CMClosetBioJanitorFilled
@@ -35,8 +35,8 @@
    components:
    - type: StorageFill
      contents:
-       - id: ClothingOuterBioJanitor
-       - id: ClothingHeadHatHoodBioJanitor
+##       - id: ClothingOuterBioJanitor
+##       - id: ClothingHeadHatHoodBioJanitor
 
  - type: entity
    id: CMClosetBioScientistFilled
@@ -45,5 +45,5 @@
    components:
    - type: StorageFill
      contents:
-       - id: ClothingOuterBioScientist
-       - id: ClothingHeadHatHoodBioScientist
+##       - id: ClothingOuterBioScientist
+##       - id: ClothingHeadHatHoodBioScientist

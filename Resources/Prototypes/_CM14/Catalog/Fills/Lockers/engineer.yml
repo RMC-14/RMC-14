@@ -5,10 +5,6 @@
   components:
   - type: StorageFill
     contents:
-      - id: ClothingOuterVestHazard
-        prob: 0.4
-      - ##id: FlashlightLantern
-        ##prob: 0.7
       - id: CMScrewdriver
         prob: 0.7
       - id: CMWrench
@@ -21,24 +17,16 @@
         prob: 0.7
       - id: CMMultitool
         prob: 0.2
-      - id: trayScanner
-        prob: 0.7
-      - id: GasAnalyzer
-        prob: 0.7
+##      - id: trayScanner
+##        prob: 0.7
+##      - id: GasAnalyzer
+##        prob: 0.7
       - id: CMBeltUtility
         prob: 0.2
       - id: CMHandsInsulated
         prob: 0.05
-      - ##id: ClothingHeadHatHardhatRed
-        ##prob: 0.4
-      - id: CableApcStack
-        prob: 0.3
-      - id: CableApcStack
-        prob: 0.3
-      - id: CableApcStack
-        prob: 0.3
-      - id: SprayPainter
-        prob: 0.7
+##      - id: SprayPainter
+##        prob: 0.7
 
 - type: entity
   id: CMClosetRadiationFilled
@@ -47,7 +35,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: ClothingOuterSuitRad
-        amount: 2
-      - id: GeigerCounter
-        amount: 2
+##      - id: ClothingOuterSuitRad
+##        amount: 2
+##      - id: GeigerCounter
+##        amount: 2
