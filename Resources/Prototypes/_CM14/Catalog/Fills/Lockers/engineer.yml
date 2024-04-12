@@ -34,7 +34,7 @@
   suffix: Filled
   components:
   - type: StorageFill
-    contents:
+    contents: []
 ##      - id: ClothingOuterSuitRad
 ##        amount: 2
 ##      - id: GeigerCounter

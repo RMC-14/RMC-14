@@ -4,7 +4,7 @@
    parent: CMClosetBio
    components:
    - type: StorageFill
-     contents:
+     contents: []
 ##       - id: ClothingOuterBioGeneral 
 ##       - id: ClothingHeadHatHoodBioGeneral
 
@@ -14,7 +14,7 @@
    parent: CMClosetBioVirology
    components:
    - type: StorageFill
-     contents:
+     contents: []
 ##       - id: ClothingOuterBioVirology
 ##       - id: ClothingHeadHatHoodBioVirology
   
@@ -24,7 +24,7 @@
    parent: CMClosetBioSecurity
    components:
    - type: StorageFill
-     contents:
+     contents: []
 ##       - id: ClothingOuterBioSecurity
 ##       - id: ClothingHeadHatHoodBioSecurity
 
@@ -34,7 +34,7 @@
    parent: CMClosetBioJanitor
    components:
    - type: StorageFill
-     contents:
+     contents: []
 ##       - id: ClothingOuterBioJanitor
 ##       - id: ClothingHeadHatHoodBioJanitor
 
@@ -44,6 +44,6 @@
    parent: CMClosetBioScientist
    components:
    - type: StorageFill
-     contents:
+     contents: []
 ##       - id: ClothingOuterBioScientist
 ##       - id: ClothingHeadHatHoodBioScientist
