@@ -1,4 +1,5 @@
 ﻿# TODO CM14 sniper barrel
+# TODO CM14 base sniper
 - type: entity
   parent: BaseItem
   id: CMM42ASniperRifle

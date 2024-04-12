@@ -3,41 +3,15 @@
   parent: BaseItem
   id: CMBaseWeaponRifle
   components:
-  - type: Sprite
+  - type: Wieldable
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Rifles/ak.rsi
     quickEquip: false
     slots:
     - Back
     - suitStorage
   - type: AmmoCounter
-  - type: Gun
-    fireRate: 5
-    selectedMode: FullAuto
-    availableModes:
-    - FullAuto
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/batrifle.ogg
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineLightRifle
-        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - MagazineLightRifle
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgeLightRifle
-        priority: 1
-        whitelist:
-          tags:
-          - CartridgeLightRifle
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -46,6 +20,11 @@
     price: 500
   - type: MagazineAmmoProvider
     autoEject: true
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
 
 - type: entity
   parent: CMBaseWeaponRifle
@@ -62,11 +41,6 @@
           map: ["enum.GunVisualLayers.Mag"]
     - type: Clothing
       sprite: _CM14/Objects/Weapons/Guns/Rifles/m41a.rsi
-      quickEquip: false
-      slots:
-        - Back
-        - suitStorage
-    - type: Wieldable
     - type: Gun
       minAngle: 30
       maxAngle: 60
@@ -101,15 +75,7 @@
           whitelist:
             tags:
               - CMCartridgeRifle10x24mm
-    - type: ContainerContainer
-      containers:
-        gun_magazine: !type:ContainerSlot
-        gun_chamber: !type:ContainerSlot
-    - type: MagazineVisuals
-      magState: mag
-      steps: 1
-      zeroVisible: true
-    - type: Appearance
+
 
 - type: entity
   name: M41AE2 heavy pulse rifle
@@ -126,10 +92,6 @@
           map: ["enum.GunVisualLayers.Mag"]
     - type: Clothing
       sprite: _CM14/Objects/Weapons/Guns/Rifles/m41ae2.rsi
-      quickEquip: false
-      slots:
-        - Back
-        - suitStorage
     - type: Gun
       minAngle: 30
       maxAngle: 60
@@ -180,11 +142,6 @@
           map: ["enum.GunVisualLayers.Mag"]
     - type: Clothing
       sprite: _CM14/Objects/Weapons/Guns/Rifles/m4ra.rsi
-      quickEquip: false
-      slots:
-        - Back
-        - suitStorage
-    - type: Wieldable
     - type: Gun
       minAngle: 30
       maxAngle: 50
@@ -217,14 +174,3 @@
           whitelist:
             tags:
               - CMCartridgeRifle10x24mm
-    - type: ContainerContainer
-      containers:
-        gun_magazine: !type:ContainerSlot
-        gun_chamber: !type:ContainerSlot
-    - type: MagazineVisuals
-      magState: mag
-      steps: 1
-      zeroVisible: true
-    - type: Appearance
-    - type: ChamberMagazineAmmoProvider
-      autoEject: true
