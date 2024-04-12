@@ -149,8 +149,8 @@
     - type: Gun
       minAngle: 130
       maxAngle: 170
-      angleIncrease: 5
-      angleDecay: 10
+      angleIncrease: 15
+      angleDecay: 5
       fireRate: 5
       selectedMode: SemiAuto
       availableModes:
@@ -160,6 +160,8 @@
     - type: GunWieldBonus
       minAngle: -120
       maxAngle: -145
+      angleIncrease: -10
+      angleDecay: +5
     - type: ItemSlots
       slots:
         gun_magazine:
