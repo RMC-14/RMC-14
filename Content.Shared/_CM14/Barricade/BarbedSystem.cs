@@ -39,7 +39,10 @@ public sealed class BarbedSystem : EntitySystem
     private void OnClimbAttempt(Entity<BarbedComponent> barbed, ref AttemptClimbEvent args)
     {
         if (barbed.Comp.IsBarbed)
+        {
             args.Cancelled = true;
+            _popupSystem.PopupClient(Loc.GetString("barbed-wire-cant-climb"), barbed.Owner, args.User);
+        }
     }
 
     public void OnInteractUsing(EntityUid uid, BarbedComponent component, InteractUsingEvent args)
