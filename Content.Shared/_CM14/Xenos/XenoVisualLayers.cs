@@ -8,5 +8,6 @@ public enum XenoVisualLayers : byte
     Base,
     Hide,
     Crest,
-    Fortify
+    Fortify,
+    Ovipositor
 }

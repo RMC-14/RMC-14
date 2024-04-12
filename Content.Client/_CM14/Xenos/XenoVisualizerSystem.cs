@@ -1,4 +1,5 @@
 ﻿using Content.Shared._CM14.Xenos;
+using Content.Shared._CM14.Xenos.Egg;
 using Content.Shared._CM14.Xenos.Movement;
 using Content.Shared._CM14.Xenos.Rest;
 using Content.Shared.Mobs;
@@ -9,7 +10,6 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Throwing;
 using Robust.Client.GameObjects;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
-using XenoComponent = Content.Shared._CM14.Xenos.XenoComponent;
 
 namespace Content.Client._CM14.Xenos;
 
@@ -50,9 +50,7 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
 
         var state = MobState.Alive;
         if (Resolve(entity, ref mobState, false))
-        {
             state = mobState.CurrentState;
-        }
 
         Resolve(entity, ref input, ref thrown, false);
 
@@ -74,6 +72,21 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
                     sprite.LayerSetState(layer, "dead");
                 break;
             default:
+                if (sprite.LayerMapTryGet(XenoVisualLayers.Ovipositor, out var oviLayer))
+                {
+                    if (HasComp<XenoAttachedOvipositorComponent>(entity) &&
+                        TryComp(entity, out XenoOvipositorCapableComponent? capable))
+                    {
+                        sprite.LayerSetState(oviLayer, capable.AttachedState);
+                        sprite.LayerSetVisible(oviLayer, true);
+                        sprite.LayerSetVisible(layer, false);
+                        return;
+                    }
+
+                    sprite.LayerSetVisible(oviLayer, false);
+                    sprite.LayerSetVisible(layer, true);
+                }
+
                 if (AppearanceSystem.TryGetData(entity, XenoVisualLayers.Base, out XenoRestState resting, appearance) &&
                     resting == XenoRestState.Resting &&
                     rsi.TryGetState("sleeping", out _))
@@ -133,13 +146,19 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
 
     public override void FrameUpdate(float frameTime)
     {
-        var query = EntityQueryEnumerator<XenoAnimateMovementComponent, InputMoverComponent, MobStateComponent, SpriteComponent>();
-        while (query.MoveNext(out var uid, out _, out var input, out var mobState, out var sprite))
+        var animateQuery = EntityQueryEnumerator<XenoAnimateMovementComponent, InputMoverComponent, MobStateComponent, SpriteComponent>();
+        while (animateQuery.MoveNext(out var uid, out _, out var input, out var mobState, out var sprite))
         {
             if (mobState.CurrentState == MobState.Alive)
             {
                 UpdateSprite((uid, sprite, mobState, null, input, null));
             }
+        }
+
+        var oviQuery = EntityQueryEnumerator<XenoOvipositorCapableComponent, SpriteComponent, AppearanceComponent>();
+        while (oviQuery.MoveNext(out var uid, out _, out var sprite, out var appearance))
+        {
+            UpdateSprite((uid, sprite, null, appearance, null, null));
         }
     }
 }

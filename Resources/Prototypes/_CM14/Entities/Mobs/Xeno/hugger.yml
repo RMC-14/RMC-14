@@ -42,3 +42,7 @@
   - type: XenoLeap
     knockdownTime: 90
   - type: XenoHugger
+  - type: Item
+  - type: WhitelistPickupBy
+    all:
+    - type: Xeno
