@@ -8,9 +8,9 @@
       - id: ClothingHeadHelmetBombSuit
       - id: ClothingOuterSuitBomb
       # NT is cheap, what can you do...
-      - id: Wirecutter
+      - id: CMWirecutter
         prob: 0.9
-      - id: Screwdriver
+      - id: CMScrewdriver
         prob: 0.9
-      - id: Multitool
+      - id: CMMultitool
         prob: 0.5
