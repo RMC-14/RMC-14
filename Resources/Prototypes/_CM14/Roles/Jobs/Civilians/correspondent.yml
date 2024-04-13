@@ -11,6 +11,10 @@
   canBeAntag: true
   accessGroups:
   - CMCorrespondent
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
 
 - type: startingGear
   id: CorrespondentGear

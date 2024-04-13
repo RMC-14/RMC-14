@@ -17,6 +17,19 @@
   canBeAntag: false
   accessGroups:
   - CMCMO
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      fireman: 1
+      intel: 1
+      jtac: 3
+      leadership: 2
+      medical: 3
+      overwatch: 1
+      police: 1
+      research: 1
+      surgery: 2
 
 - type: startingGear
   id: MarineCMOGear

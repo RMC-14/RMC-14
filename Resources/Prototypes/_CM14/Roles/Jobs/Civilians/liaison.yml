@@ -14,6 +14,12 @@
   canBeAntag: true
   accessGroups:
   - MarineMain
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      construction: 1
+      endurance: 2
 
 - type: startingGear
   id: CMGearLiaison

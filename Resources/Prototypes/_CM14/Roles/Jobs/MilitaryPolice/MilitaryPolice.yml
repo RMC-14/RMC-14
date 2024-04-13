@@ -16,6 +16,14 @@
   canBeAntag: false
   accessGroups:
   - MP
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      cqc: 2
+      endurance: 2
+      fireman: 2
+      police: 2
 
 - type: startingGear
   id: MilitaryPoliceGear

@@ -17,6 +17,18 @@
   canBeAntag: false
   accessGroups:
   - CMQM
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      construction: 2
+      fireman: 1
+      intel: 1
+      jtac: 3
+      leadership: 2
+      overwatch: 1
+      police: 1
+      powerLoader: 2
 
 - type: startingGear
   id: CMQuartermasterGear

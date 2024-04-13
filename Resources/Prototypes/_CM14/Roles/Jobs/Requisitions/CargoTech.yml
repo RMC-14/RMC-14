@@ -11,6 +11,12 @@
   canBeAntag: true
   accessGroups:
   - CMCargoTech
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      construction: 1
+      powerLoader: 2
 
 - type: startingGear
   id: CMCargoTechGear

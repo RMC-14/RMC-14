@@ -15,6 +15,18 @@
   canBeAntag: false
   accessGroups:
   - IntelOfficer
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      cqc: 1
+      engineer: 2
+      intel: 2
+      jtac: 2
+      leadership: 2
+      meleeWeapons: 1
+      overwatch: 1
+      research: 1
 
 - type: startingGear
   id: IntelOfficerGear

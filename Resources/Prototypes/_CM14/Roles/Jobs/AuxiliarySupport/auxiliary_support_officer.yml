@@ -17,6 +17,24 @@
   canBeAntag: false
   accessGroups:
   - ASO
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      construction: 2
+      engineer: 2
+      fireman: 1
+      intel: 2
+      jtac: 3
+      leadership: 3
+      medical: 2
+      navigations: 1
+      overwatch: 1
+      pilot: 2
+      police: 1
+      powerLoader: 2
+      surgery: 1
+      vehicles: 1
 
 - type: startingGear
   id: ASOGear

@@ -11,6 +11,14 @@
   canBeAntag: true
   accessGroups:
   - MessTech
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      construction: 1
+      domestics: 2
+      engineer: 1
+      firearms: 2
 
 - type: startingGear
   id: MessTechGear
