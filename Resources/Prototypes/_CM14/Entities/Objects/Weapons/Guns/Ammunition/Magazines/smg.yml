@@ -10,8 +10,8 @@
     mayTransfer: True
     whitelist:
       tags:
-        - CMCartridgeCaseless10x20mm
-    proto: CMCartridgeCaseless10x20mm
+        - CMCartridge10x20mm
+    proto: CMCartridge10x20mm
     capacity: 48
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m39.rsi
