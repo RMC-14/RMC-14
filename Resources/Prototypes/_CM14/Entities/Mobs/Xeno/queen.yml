@@ -2,7 +2,7 @@
   parent:
   - CMXenoDeveloped
   - CMXenoTail
-  id: CMXenoQueen
+  id: CMXenoQueen # TODO CM14 big loud steps
   name: Queen # TODO CM14 use consoles
   description: A huge, looming alien creature. The biggest and the baddest.
   components:
@@ -68,9 +68,6 @@
   - type: XenoArmor
     armor: 25
   - type: XenoWordQueen
-  - type: Tag
-    tags:
-    - DoorBumpOpener # TODO CM14 big loud steps
   - type: MeleeWeapon
     damage:
       groups:
