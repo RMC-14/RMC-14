@@ -15,6 +15,14 @@
   canBeAntag: true
   accessGroups:
   - Researcher
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      intel: 1
+      medical: 3
+      research: 1
+      surgery: 2
 
 - type: startingGear
   id: ResearcherGear

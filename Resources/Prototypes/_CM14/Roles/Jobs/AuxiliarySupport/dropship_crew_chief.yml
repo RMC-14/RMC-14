@@ -11,6 +11,17 @@
   canBeAntag: true
   accessGroups:
   - DropshipCrewChief
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      engineer: 2
+      jtac: 2
+      leadership: 1
+      medical: 2
+      pilot: 1
+      powerLoader: 2
+      surgery: 1
 
 - type: startingGear
   id: DCCGear

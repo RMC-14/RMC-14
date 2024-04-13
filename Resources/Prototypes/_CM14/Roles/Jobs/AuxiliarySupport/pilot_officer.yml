@@ -15,6 +15,18 @@
   canBeAntag: false
   accessGroups:
   - PilotOfficer
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      intel: 1
+      jtac: 2
+      leadership: 1
+      medical: 2
+      overwatch: 1
+      pilot: 2
+      powerLoader: 2
+      surgery: 1
 
 - type: startingGear
   id: PilotOfficerGear

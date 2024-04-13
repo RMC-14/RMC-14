@@ -11,6 +11,10 @@
   canBeAntag: false
   accessGroups:
   - Rifleman
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
 
 - type: startingGear
   id: RiflemanGear
