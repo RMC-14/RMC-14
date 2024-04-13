@@ -150,21 +150,11 @@
     normalBodyTemperature: 310.15
     thermalRegulationTemperatureThreshold: 25
   - type: MovedByPressure
-  - type: Tag
-    tags:
-    - DoorBumpOpener
   - type: NoSlip
   - type: Pullable # TODO CM14 xeno pullable
   - type: Speech # TODO CM14 alien language
   - type: GhostOnMove
     mustBeDead: true
-  - type: Hands
-  - type: GiveHands
-    hands:
-    - name: Right Hand
-      location: Right
-    - name: Left Hand
-      location: Left
   - type: WhitelistPickup
     any:
     - type: XenoHugger
@@ -236,6 +226,16 @@
     damage:
       types:
         Blunt: 5
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+  - type: Hands
+  - type: GiveHands
+    hands:
+    - name: Right Hand
+      location: Right
+    - name: Left Hand
+      location: Left
 
 - type: entity
   abstract: true
