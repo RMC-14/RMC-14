@@ -15,6 +15,12 @@
   canBeAntag: false
   accessGroups:
   - Smartgunner
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      jtac: 1
+      smartgun: 1
 
 - type: startingGear
   id: SmartgunnerGear

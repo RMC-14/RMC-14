@@ -11,6 +11,12 @@
   canBeAntag: true
   accessGroups:
   - CMMedical
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      medical: 3
+      surgery: 1
 
 - type: startingGear
   id: NurseGear
