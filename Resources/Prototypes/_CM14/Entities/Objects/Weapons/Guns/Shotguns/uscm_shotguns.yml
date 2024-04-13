@@ -20,6 +20,7 @@
     soundGunshot:
       path: /Audio/_CM14/Weapons/Guns/Gunshots/gun_shotgun.ogg
   - type: BallisticAmmoProvider
+    cycleable: false
     whitelist:
       tags:
       - CMShellShotgun
