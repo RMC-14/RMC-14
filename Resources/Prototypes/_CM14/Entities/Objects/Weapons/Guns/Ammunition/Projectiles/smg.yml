@@ -1,6 +1,6 @@
 - type: entity
   parent: BaseBullet
-  id: BulletCaseless10x20mm
+  id: Bullet10x20mm
   name: bullet (10x20mm)
   noSpawn: true
   components:

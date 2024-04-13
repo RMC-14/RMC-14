@@ -1,5 +1,14 @@
 - type: entity
   parent: BaseCartridgeRifle
+  id: CMBaseCartridgeRifle
+  name: cartridge
+  abstract: true
+  components:
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+
+- type: entity
+  parent: CMBaseCartridgeRifle
   id: CMCartridgeRifle10x24mm
   name: cartridge (10x24mm)
   components:

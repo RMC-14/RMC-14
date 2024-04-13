@@ -2,6 +2,9 @@
   abstract: true
   parent: BaseCartridgePistol
   id: CMCartridgePistolBase
+  components:
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
 
 - type: entity
   id: CMCartridgePistol9mm

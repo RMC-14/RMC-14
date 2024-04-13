@@ -60,8 +60,8 @@
               - CMMagazineCaselessM39
         gun_chamber:
           name: Chamber
-          startingItem: CMCartridgeCaseless10x20mm
+          startingItem: CMCartridge10x20mm
           priority: 1
           whitelist:
             tags:
-              - CMCartridgeCaseless10x20mm
+              - CMCartridge10x20mm

@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: BaseCartridgeRifle
+  parent: CMBaseCartridgeRifle
   id: CMCartridgeSniper10x28mm
   name: cartridge (10x28mm)
   components:
@@ -18,7 +18,7 @@
 - type: entity
   parent: CMCartridgeSniper10x28mm
   id: CMCartridgeSniper10x28mmIncendiary
-  name: cartridge (10x28mm)
+  name: cartridge (10x28mm) (incendiary)
   components:
   - type: CartridgeAmmo
     proto: CMBulletSniper10x28mmIncendiary
@@ -26,7 +26,7 @@
 - type: entity
   parent: CMCartridgeSniper10x28mm
   id: CMCartridgeSniper10x28mmFlak
-  name: cartridge (10x28mm)
+  name: cartridge (10x28mm) (Flak)
   components:
   - type: CartridgeAmmo
     proto: CMBulletSniper10x28mmFlak
@@ -34,7 +34,7 @@
 - type: entity
   parent: CMCartridgeSniper10x28mm
   id: CMCartridgeSniper10x99mmAntiMateriel
-  name: cartridge (10x99mm)
+  name: cartridge (10x99mm) (AntiMateriel)
   components:
   - type: Tag
     tags:
