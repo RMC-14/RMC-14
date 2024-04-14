@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/mob/hud/alien_standard.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "health_background"
+    },
+    {
+      "name": "health_full"
+    },
+    {
+      "name": "health_16"
+    },
+    {
+      "name": "health_15"
+    },
+    {
+      "name": "health_14"
+    },
+    {
+      "name": "health_13"
+    },
+    {
+      "name": "health_12"
+    },
+    {
+      "name": "health_11"
+    },
+    {
+      "name": "health_10"
+    },
+    {
+      "name": "health_9"
+    },
+    {
+      "name": "health_8"
+    },
+    {
+      "name": "health_7"
+    },
+    {
+      "name": "health_6"
+    },
+    {
+      "name": "health_5"
+    },
+    {
+      "name": "health_4"
+    },
+    {
+      "name": "health_3"
+    },
+    {
+      "name": "health_2"
+    },
+    {
+      "name": "health_1"
+    },
+    {
+      "name": "health_0"
+    },
+    {
+      "name": "health_critical",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "health_dead"
+    }
+  ]
+}

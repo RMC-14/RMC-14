@@ -16,5 +16,8 @@ public enum AlertCategory
     Hunger,
     Thirst,
     Toxins,
-    Battery
+    Battery,
+    XenoNightVision,
+    XenoPlasma,
+    XenoArmor,
 }

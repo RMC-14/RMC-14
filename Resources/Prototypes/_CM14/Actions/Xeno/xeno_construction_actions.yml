@@ -9,6 +9,7 @@
       sprite: _CM14/Actions/xeno_actions.rsi
       state: plant_weeds
     event: !type:XenoPlantWeedsActionEvent
+    useDelay: 1
 
 - type: entity
   id: ActionXenoChooseStructure
