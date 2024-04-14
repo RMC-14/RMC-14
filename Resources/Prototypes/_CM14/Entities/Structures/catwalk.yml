@@ -10,7 +10,7 @@
     sprite: _CM14/Structures/catwalk.rsi
     drawdepth: FloorTiles
     state: catwalk
-    noRot: true
+    noRot: false
   - type: Icon
     sprite: _CM14/Structures/catwalk.rsi
     state: catwalk
