@@ -42,6 +42,7 @@
     - CMXenoPraetorian
   - type: XenoArmor
     armor: 20
+    explosionArmor: 40
   - type: MeleeWeapon
     damage:
       groups:
