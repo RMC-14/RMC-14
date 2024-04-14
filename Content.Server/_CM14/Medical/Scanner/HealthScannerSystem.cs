@@ -34,7 +34,7 @@ public sealed class HealthScannerSystem : EntitySystem
             !HasComp<DamageableComponent>(target) ||
             !HasComp<MobStateComponent>(target) ||
             !HasComp<MobThresholdsComponent>(target) ||
-            !TryComp(target, out ActorComponent? actor))
+            !TryComp(args.User, out ActorComponent? actor))
         {
             return;
         }
