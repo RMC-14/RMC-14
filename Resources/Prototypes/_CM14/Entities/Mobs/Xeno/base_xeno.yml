@@ -163,6 +163,7 @@
     - type: XenoEgg
   - type: DropHeldOnIncapacitate
   - type: NightVision
+  - type: KnockdownOnPullAttemptImmune
 
 - type: entity
   abstract: true
@@ -239,6 +240,7 @@
       location: Right
     - name: Left Hand
       location: Left
+  - type: KnockdownOnPullAttempt
 
 - type: entity
   abstract: true
