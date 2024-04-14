@@ -74,9 +74,9 @@
   components:
   - type: Sprite
     state: cracker
-  - type: SpawnItemsOnUse
-    items:
-    - id: CMMREFoodCracker
+  - type: FlavorProfile
+    flavors:
+    - Cracker
 
 - type: entity
   parent: CMMREFoodSide

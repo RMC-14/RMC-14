@@ -18,9 +18,19 @@ public sealed partial class GunWieldBonusComponent : Component
     [ViewVariables(VVAccess.ReadWrite), DataField("maxAngle"), AutoNetworkedField]
     public Angle MaxAngle = Angle.FromDegrees(-43);
 
-    [ViewVariables(VVAccess.ReadWrite), DataField("angleDecay"), AutoNetworkedField]
-    public Angle AngleDecay = Angle.FromDegrees(-43);
+    /// <summary>
+    /// Recoil bonuses applied upon being wielded.
+    /// Higher angle decay bonus, quicker recovery.
+    /// Lower angle increase bonus (negative numbers), slower buildup.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public Angle AngleDecay = Angle.FromDegrees(0);
 
-    [ViewVariables(VVAccess.ReadWrite), DataField("angleIncrease"), AutoNetworkedField]
-    public Angle AngleIncrease = Angle.FromDegrees(-43);
+	/// <summary>
+    /// Recoil bonuses applied upon being wielded.
+    /// Higher angle decay bonus, quicker recovery.
+    /// Lower angle increase bonus (negative numbers), slower buildup.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public Angle AngleIncrease = Angle.FromDegrees(0);
 }

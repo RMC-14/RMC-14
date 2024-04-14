@@ -63,7 +63,6 @@
       slots:
         gun_magazine:
           name: Magazine
-          startingItem: CMMagazineRifleM41A
           insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
           priority: 2
@@ -72,7 +71,6 @@
               - CMMagazineRifleM41A
         gun_chamber:
           name: Chamber
-          startingItem: CMCartridgeRifle10x24mm
           priority: 1
           whitelist:
             tags:
@@ -116,7 +114,6 @@
       slots:
         gun_magazine:
           name: Magazine
-          startingItem: CMMagazineRifleM41AE2
           insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
           priority: 2
@@ -125,7 +122,6 @@
               - CMMagazineRifleM41AE2
         gun_chamber:
           name: Chamber
-          startingItem: CMCartridgeRifle10x24mm
           priority: 1
           whitelist:
             tags:
@@ -166,7 +162,6 @@
       slots:
         gun_magazine:
           name: Magazine
-          startingItem: CMMagazineRifleM4RA
           insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
           priority: 2
@@ -175,7 +170,6 @@
               - CMMagazineRifleM4RA
         gun_chamber:
           name: Chamber
-          startingItem: CMCartridgeRifle10x24mm
           priority: 1
           whitelist:
             tags:

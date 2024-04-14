@@ -67,7 +67,8 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<XenoChooseConstructionActionComponent, XenoConstructionChosenEvent>(OnActionConstructionChosen);
 
         SubscribeLocalEvent<HiveConstructionNodeComponent, ExaminedEvent>(OnHiveConstructionNodeExamined);
-        SubscribeLocalEvent<HiveConstructionNodeComponent, InteractedNoHandEvent>(OnHiveConstructionNodeInteractedNoHand);
+        SubscribeLocalEvent<HiveConstructionNodeComponent, InteractHandEvent>(OnHiveConstructionNodeInteractedHand);
+        SubscribeLocalEvent<HiveConstructionNodeComponent, InteractNoHandEvent>(OnHiveConstructionNodeInteractedNoHand);
 
         UpdatesAfter.Add(typeof(SharedPhysicsSystem));
     }
@@ -223,6 +224,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         {
             return;
         }
+
         args.Handled = true;
 
         if (_net.IsServer)
@@ -251,35 +253,14 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         args.PushMarkup(Loc.GetString("cm-xeno-construction-plasma-left", ("construction", node.Owner), ("plasma", plasmaLeft)));
     }
 
-    private void OnHiveConstructionNodeInteractedNoHand(Entity<HiveConstructionNodeComponent> node, ref InteractedNoHandEvent args)
+    private void OnHiveConstructionNodeInteractedHand(Entity<HiveConstructionNodeComponent> node, ref InteractHandEvent args)
     {
-        var plasmaLeft = node.Comp.PlasmaCost - node.Comp.PlasmaStored;
-        if (!TryComp(args.User, out XenoConstructionComponent? xeno) ||
-            plasmaLeft < FixedPoint2.Zero ||
-            !TryComp(node, out TransformComponent? nodeTransform) ||
-            !TryComp(args.User, out XenoPlasmaComponent? plasma))
-        {
-            return;
-        }
+        InteractHiveConstructionNode(node, args.User);
+    }
 
-        if (!InRangePopup(args.User, nodeTransform.Coordinates, xeno.OrderConstructionRange.Float()))
-            return;
-
-        var subtract = FixedPoint2.Min(plasma.Plasma, plasmaLeft);
-        if (plasma.Plasma < 1 ||
-            !_xenoPlasma.HasPlasmaPopup((args.User, plasma), subtract))
-        {
-            return;
-        }
-
-        var ev = new XenoConstructionAddPlasmaDoAfterEvent();
-        var delay = xeno.OrderConstructionAddPlasmaDelay;
-        var doAfter = new DoAfterArgs(EntityManager, args.User, delay, ev, args.User, node)
-        {
-            BreakOnMove = true
-        };
-
-        _doAfter.TryStartDoAfter(doAfter);
+    private void OnHiveConstructionNodeInteractedNoHand(Entity<HiveConstructionNodeComponent> node, ref InteractNoHandEvent args)
+    {
+        InteractHiveConstructionNode(node, args.User);
     }
 
     private void OnHiveConstructionNodeAddPlasmaDoAfter(Entity<XenoConstructionComponent> xeno, ref XenoConstructionAddPlasmaDoAfterEvent args)
@@ -324,6 +305,37 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
 
         Spawn(node.Spawn, transform.Coordinates);
         QueueDel(target);
+    }
+
+    private void InteractHiveConstructionNode(Entity<HiveConstructionNodeComponent> node, EntityUid user)
+    {
+        var plasmaLeft = node.Comp.PlasmaCost - node.Comp.PlasmaStored;
+        if (!TryComp(user, out XenoConstructionComponent? xeno) ||
+            plasmaLeft < FixedPoint2.Zero ||
+            !TryComp(node, out TransformComponent? nodeTransform) ||
+            !TryComp(user, out XenoPlasmaComponent? plasma))
+        {
+            return;
+        }
+
+        if (!InRangePopup(user, nodeTransform.Coordinates, xeno.OrderConstructionRange.Float()))
+            return;
+
+        var subtract = FixedPoint2.Min(plasma.Plasma, plasmaLeft);
+        if (plasma.Plasma < 1 ||
+            !_xenoPlasma.HasPlasmaPopup((user, plasma), subtract))
+        {
+            return;
+        }
+
+        var ev = new XenoConstructionAddPlasmaDoAfterEvent();
+        var delay = xeno.OrderConstructionAddPlasmaDelay;
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, user, node)
+        {
+            BreakOnMove = true
+        };
+
+        _doAfter.TryStartDoAfter(doAfter);
     }
 
     private bool TileSolidAndNotBlocked(EntityCoordinates target)

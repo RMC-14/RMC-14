@@ -261,5 +261,94 @@
   id: 37
   time: '2024-04-12T10:47:32.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1185
+- author: DrSmugleaf
+  changes:
+  - message: Fixed moving corroding objects leaving the acid visual effect behind.
+    type: Fix
+  id: 38
+  time: '2024-04-13T08:11:17.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1209
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenos not being able to add plasma to hive cores to build them.
+    type: Fix
+  id: 39
+  time: '2024-04-13T08:19:37.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1211
+- author: DrSmugleaf
+  changes:
+  - message: Fixed runners being able to pull while leaping.
+    type: Fix
+  id: 40
+  time: '2024-04-13T08:09:14.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1208
+- author: DrSmugleaf
+  changes:
+  - message: Added xeno UI and night vision.
+    type: Add
+  - message: Removed stamina from xenos.
+    type: Tweak
+  id: 41
+  time: '2024-04-14T04:50:02.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1230
+- author: DrSmugleaf
+  changes:
+  - message: Fixed larvas and facehuggers bumping open doors when crawling under them.
+    type: Fix
+  - message: Fixed larvas and facehuggers having hands.
+    type: Fix
+  id: 42
+  time: '2024-04-13T10:41:19.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1219
+- author: Whisper
+  changes:
+  - message: grenades no longer explode eachother
+    type: Tweak
+  id: 43
+  time: '2024-04-14T01:28:24.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1224
+- author: DrSmugleaf
+  changes:
+  - message: Added surgery skills to the appropriate roles.
+    type: Add
+  id: 44
+  time: '2024-04-13T06:33:00.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1206
+- author: DrSmugleaf
+  changes:
+  - message: Fixed not being able to use the hf2 health analyzer on others.
+    type: Fix
+  id: 45
+  time: '2024-04-14T00:13:25.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1223
+- author: Whisper
+  changes:
+  - message: Guns no longer start with mags.
+    type: Fix
+  id: 46
+  time: '2024-04-14T00:35:41.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1220
+- author: Whisper
+  changes:
+  - message: shotguns no longer try to cycle when wielding
+    type: Fix
+  id: 47
+  time: '2024-04-13T10:31:05.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1221
+- author: DrSmugleaf
+  changes:
+  - message: Marines will now be knocked down by developed alive xenos when trying
+      to pull them.
+    type: Add
+  id: 48
+  time: '2024-04-14T05:49:33.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1232
+- author: Whisper
+  changes:
+  - message: catwalks rotate correctly now
+    type: Fix
+  id: 49
+  time: '2024-04-14T06:20:19.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1225
 Name: CM
 Order: -1

@@ -23,6 +23,10 @@
       0: Alive
       200: Critical
       300: Dead
+    stateAlertDict:
+      Alive: XenoHealth
+      Critical: XenoCrit
+      Dead: XenoDead
   - type: MobStateActions
     actions:
       Critical:
@@ -99,8 +103,6 @@
         - MobMask
         layer:
         - MobLayer
-  - type: Stamina
-    critThreshold: 200
   - type: SolutionContainerManager
   - type: InjectableSolution
     solution: chemicals
@@ -150,26 +152,18 @@
     normalBodyTemperature: 310.15
     thermalRegulationTemperatureThreshold: 25
   - type: MovedByPressure
-  - type: Tag
-    tags:
-    - DoorBumpOpener
   - type: NoSlip
   - type: Pullable # TODO CM14 xeno pullable
   - type: Speech # TODO CM14 alien language
   - type: GhostOnMove
     mustBeDead: true
-  - type: Hands
-  - type: GiveHands
-    hands:
-    - name: Right Hand
-      location: Right
-    - name: Left Hand
-      location: Left
   - type: WhitelistPickup
     any:
     - type: XenoHugger
     - type: XenoEgg
   - type: DropHeldOnIncapacitate
+  - type: NightVision
+  - type: KnockdownOnPullAttemptImmune
 
 - type: entity
   abstract: true
@@ -236,6 +230,17 @@
     damage:
       types:
         Blunt: 5
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+  - type: Hands
+  - type: GiveHands
+    hands:
+    - name: Right Hand
+      location: Right
+    - name: Left Hand
+      location: Left
+  - type: KnockdownOnPullAttempt
 
 - type: entity
   abstract: true

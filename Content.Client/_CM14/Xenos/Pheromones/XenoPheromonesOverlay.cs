@@ -44,7 +44,6 @@ public sealed class XenoPheromonesOverlay : Overlay
             return;
 
         var handle = args.WorldHandle;
-
         var eyeRot = args.Viewport.Eye?.Rotation ?? default;
 
         _xformQuery = _entity.GetEntityQuery<TransformComponent>();

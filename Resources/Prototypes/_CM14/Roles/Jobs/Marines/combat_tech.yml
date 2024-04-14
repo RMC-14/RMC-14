@@ -15,6 +15,14 @@
   canBeAntag: false
   accessGroups:
   - CombatTech
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      constructiopn: 2
+      engineer: 2
+      jtac: 1
+      vehicle: 1
 
 - type: startingGear
   id: CombatTechGear

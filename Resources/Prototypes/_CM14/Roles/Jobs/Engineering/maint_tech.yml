@@ -15,6 +15,14 @@
   canBeAntag: true
   accessGroups:
   - MaintTech
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      domestics: 1
+      construction: 3
+      engineer: 3
+      powerLoader: 2
 
 - type: startingGear
   id: MaintTechGear

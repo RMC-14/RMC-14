@@ -36,6 +36,8 @@
     plasma: 400
     maxPlasma: 400
     plasmaRegenOnWeeds: 18
+  - type: XenoArmor
+    explosionArmor: 20
   - type: XenoEvolution
     evolvesTo:
     - CMXenoRavager

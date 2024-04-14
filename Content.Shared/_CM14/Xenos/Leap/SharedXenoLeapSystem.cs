@@ -3,7 +3,11 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.DoAfter;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
+using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Movement.Pulling.Events;
+using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Pulling.Events;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
@@ -24,10 +28,11 @@ public sealed class SharedXenoLeapSystem : EntitySystem
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private EntityQuery<MarineComponent> _marineQuery;
     private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -42,7 +47,10 @@ public sealed class SharedXenoLeapSystem : EntitySystem
         SubscribeLocalEvent<XenoLeapComponent, XenoLeapActionEvent>(OnXenoLeapAction);
         SubscribeLocalEvent<XenoLeapComponent, XenoLeapDoAfterEvent>(OnXenoLeapDoAfter);
         SubscribeLocalEvent<XenoLeapComponent, ThrowDoHitEvent>(OnXenoLeapDoHit);
+        SubscribeLocalEvent<XenoLeapComponent, StartPullAttemptEvent>(OnXenoLeapStartPullAttempt);
+        SubscribeLocalEvent<XenoLeapComponent, PullAttemptEvent>(OnXenoLeapPullAttempt);
     }
+
     private void OnXenoLeapAction(Entity<XenoLeapComponent> xeno, ref XenoLeapActionEvent args)
     {
         args.Handled = true;
@@ -70,6 +78,9 @@ public sealed class SharedXenoLeapSystem : EntitySystem
         }
 
         args.Handled = true;
+
+        if (TryComp(xeno, out PullerComponent? puller) && TryComp(puller.Pulling, out PullableComponent? pullable))
+            _pulling.TryStopPull(puller.Pulling.Value, pullable, xeno);
 
         var origin = _transform.GetMapCoordinates(xeno);
         var target = GetCoordinates(args.Coordinates).ToMap(EntityManager, _transform);
@@ -113,6 +124,18 @@ public sealed class SharedXenoLeapSystem : EntitySystem
 
         var ev = new XenoLeapHitEvent((marineId, marine));
         RaiseLocalEvent(xeno, ref ev);
+    }
+
+    private void OnXenoLeapStartPullAttempt(Entity<XenoLeapComponent> ent, ref StartPullAttemptEvent args)
+    {
+        if (_thrownItemQuery.HasComp(ent))
+            args.Cancel();
+    }
+
+    private void OnXenoLeapPullAttempt(Entity<XenoLeapComponent> ent, ref PullAttemptEvent args)
+    {
+        if (_thrownItemQuery.HasComp(ent))
+            args.Cancelled = true;
     }
 
     public override void Update(float frameTime)

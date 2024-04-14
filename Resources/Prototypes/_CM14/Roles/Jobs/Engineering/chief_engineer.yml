@@ -20,6 +20,20 @@
   canBeAntag: false
   accessGroups:
   - CMCE
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      construction: 3
+      engineer: 3
+      fireman: 1
+      intel: 1
+      jtac: 4
+      leadership: 3
+      navigations: 1
+      overwatch: 1
+      police: 1
+      powerLoader: 2
 
 - type: startingGear
   id: CMChiefEngineerGear

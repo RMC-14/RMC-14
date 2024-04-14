@@ -20,6 +20,22 @@
   canBeAntag: false
   accessGroups:
   - CMP
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      construction: 2
+      cqc: 2
+      endurance: 2
+      engineer: 2
+      fireman: 2
+      intel: 1
+      jtac: 3
+      leadership: 2
+      medical: 1
+      meleeWeapons: 1
+      overwatch: 1
+      police: 2
 
 - type: startingGear #todo cm14
   id: ChiefMPGear
