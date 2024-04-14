@@ -1,0 +1,54 @@
+﻿- type: statusIcon
+  abstract: true
+  id: CMHealthIconBase
+  priority: 1
+  locationPreference: Left
+
+- type: statusIcon
+  parent: CMHealthIconBase
+  id: CMHealthIconHealthy
+  icon:
+    sprite: _CM14/Interface/health_hud.rsi
+    state: hudhealthy
+
+- type: statusIcon
+  parent: CMHealthIconBase
+  id: CMHealthIconDeadDefib
+  icon:
+    sprite: _CM14/Interface/health_hud.rsi
+    state: huddeaddefib
+
+- type: statusIcon
+  parent: CMHealthIconBase
+  id: CMHealthIconDeadClose
+  icon:
+    sprite: _CM14/Interface/health_hud.rsi
+    state: huddeadclose
+
+- type: statusIcon
+  parent: CMHealthIconBase
+  id: CMHealthIconDeadAlmost
+  icon:
+    sprite: _CM14/Interface/health_hud.rsi
+    state: huddeadalmost
+
+- type: statusIcon
+  parent: CMHealthIconBase
+  id: CMHealthIconDeadDNR
+  icon:
+    sprite: _CM14/Interface/health_hud.rsi
+    state: huddeaddnr
+
+- type: statusIcon
+  parent: CMHealthIconBase
+  id: CMHealthIconDead
+  icon:
+    sprite: _CM14/Interface/health_hud.rsi
+    state: huddead
+
+- type: statusIcon
+  parent: CMHealthIconBase
+  id: CMHealthIconHCDead
+  icon:
+    sprite: _CM14/Interface/health_hud.rsi
+    state: hudhcdead
