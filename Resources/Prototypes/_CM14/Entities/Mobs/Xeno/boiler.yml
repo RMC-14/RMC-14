@@ -39,6 +39,7 @@
   - type: XenoAcid
   - type: XenoArmor
     armor: 20
+    explosionArmor: 20
   - type: XenoDevour
   - type: MeleeWeapon
     damage:

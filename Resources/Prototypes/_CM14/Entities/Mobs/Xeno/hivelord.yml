@@ -49,6 +49,8 @@
     plasma: 1000
     maxPlasma: 1000
     plasmaRegenOnWeeds: 55
+  - type: XenoArmor
+    explosionArmor: 10
   - type: XenoResinWalker
   - type: MeleeWeapon
     damage:

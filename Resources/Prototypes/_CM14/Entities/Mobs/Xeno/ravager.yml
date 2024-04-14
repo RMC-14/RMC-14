@@ -36,6 +36,7 @@
     plasmaRegenOnWeeds: 15
   - type: XenoArmor
     armor: 25
+    explosionArmor: 80
   - type: MeleeWeapon
     damage:
       groups:

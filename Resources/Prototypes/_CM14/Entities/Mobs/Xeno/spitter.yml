@@ -43,6 +43,7 @@
     - CMXenoBoiler
   - type: XenoArmor
     armor: 15
+    explosionArmor: 20
   - type: MeleeWeapon
     damage:
       groups:

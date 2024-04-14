@@ -8,4 +8,9 @@ public sealed partial class XenoArmorComponent : Component
 {
     [DataField, AutoNetworkedField]
     public int Armor;
+
+    // TODO some rockets should penetrate armor
+    // TODO tank/sniper flak/shotgun incendiary burst is resisted by this but penetrated
+    [DataField, AutoNetworkedField]
+    public int ExplosionArmor;
 }
