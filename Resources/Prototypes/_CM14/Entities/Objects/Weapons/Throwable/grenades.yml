@@ -2,6 +2,15 @@
   name: M40 HEDP grenade
   description: Duck and cover.
   parent: GrenadeBase
+  id: CMGrenadeBase
+  components:
+  - type: ExplosionResistance
+    damageCoefficient: 0
+
+- type: entity
+  name: M40 HEDP grenade
+  description: Duck and cover.
+  parent: CMGrenadeBase
   id: M40HEDP
   components:
   - type: Sprite
@@ -29,7 +38,7 @@
     deleteOnSpawn: true
 
 - type: entity
-  parent: GrenadeBase
+  parent: CMGrenadeBase
   id: M40Smoke
   name: M40 smoke grenade
   description: A grenade that does exactly what it says on the tin.
@@ -54,7 +63,7 @@
     deleteOnSpawn: true
 
 - type: entity
-  parent: GrenadeBase
+  parent: CMGrenadeBase
   id: M40HEFA
   name: M40 HEFA grenade
   description: Shrapnel. Shrapnel! WATCH OUT IT'S SHRAP-
