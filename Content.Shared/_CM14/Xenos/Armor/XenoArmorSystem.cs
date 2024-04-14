@@ -1,5 +1,6 @@
 ﻿using Content.Shared.Alert;
 using Content.Shared.Damage;
+using Content.Shared.Explosion;
 using Content.Shared.FixedPoint;
 
 namespace Content.Shared._CM14.Xenos.Armor;
@@ -15,6 +16,7 @@ public sealed class XenoArmorSystem : EntitySystem
         SubscribeLocalEvent<XenoArmorComponent, ComponentRemove>(OnXenoRemove);
         SubscribeLocalEvent<XenoComponent, DamageModifyEvent>(OnXenoDamageModify);
         SubscribeLocalEvent<XenoArmorComponent, XenoGetArmorEvent>(OnXenoGetArmor);
+        SubscribeLocalEvent<XenoArmorComponent, GetExplosionResistanceEvent>(OnXenoGetExplosionResistance);
         SubscribeLocalEvent<CMArmorPiercingComponent, XenoGetArmorEvent>(OnPiercingXenoGetArmor);
     }
 
@@ -69,6 +71,18 @@ public sealed class XenoArmorSystem : EntitySystem
     private void OnXenoGetArmor(Entity<XenoArmorComponent> xeno, ref XenoGetArmorEvent args)
     {
         args.Armor += xeno.Comp.Armor;
+    }
+
+    private void OnXenoGetExplosionResistance(Entity<XenoArmorComponent> ent, ref GetExplosionResistanceEvent args)
+    {
+        // TODO CM14 unhalve this when we can calculate explosion damage better
+        var armor = ent.Comp.ExplosionArmor / 2;
+
+        if (armor <= 0)
+            return;
+
+        var resist = (float) Math.Pow(1.1, armor / 5.0);
+        args.DamageCoefficient /= resist;
     }
 
     private void OnPiercingXenoGetArmor(Entity<CMArmorPiercingComponent> ent, ref XenoGetArmorEvent args)
