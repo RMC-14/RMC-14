@@ -343,5 +343,12 @@
   id: 48
   time: '2024-04-14T05:49:33.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1232
+- author: Whisper
+  changes:
+  - message: catwalks rotate correctly now
+    type: Fix
+  id: 49
+  time: '2024-04-14T06:20:19.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1225
 Name: CM
 Order: -1
