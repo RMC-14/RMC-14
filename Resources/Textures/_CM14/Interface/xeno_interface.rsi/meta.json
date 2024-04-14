@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/mob/hud/alien_standard.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "act_throw_off"
+    },
+    {
+      "name": "act_throw_normal"
+    },
+    {
+      "name": "act_throw_high"
+    },
+    {
+      "name": "act_drop"
+    },
+    {
+      "name": "hand_inactive",
+      "directions": 4
+    },
+    {
+      "name": "hand_active",
+      "directions": 4
+    },
+    {
+      "name": "act_resist"
+    },
+    {
+      "name": "harm"
+    },
+    {
+      "name": "disarm"
+    },
+    {
+      "name": "help"
+    },
+    {
+      "name": "grab"
+    },
+    {
+      "name": "spit"
+    },
+    {
+      "name": "blocked"
+    },
+    {
+      "name": "s_arrow",
+      "directions": 4
+    },
+    {
+      "name": "walking"
+    },
+    {
+      "name": "running"
+    },
+    {
+      "name": "template"
+    },
+    {
+      "name": "hand1"
+    },
+    {
+      "name": "hand2"
+    },
+    {
+      "name": "act_equip"
+    },
+    {
+      "name": "zone_sel"
+    }
+  ]
+}

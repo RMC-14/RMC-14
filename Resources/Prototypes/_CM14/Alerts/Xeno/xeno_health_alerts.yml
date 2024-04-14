@@ -1,0 +1,62 @@
+- type: alert
+  id: XenoHealth
+  category: Health
+  icons:
+  - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
+    state: health_full
+  - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
+    state: health16
+  - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
+    state: health15
+  - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
+    state: health14
+  - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
+    state: health13
+  - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
+    state: health12
+  - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
+    state: health11
+  - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
+    state: health10
+  - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
+    state: health9
+  - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
+    state: health8
+  - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
+    state: health7
+  - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
+    state: health6
+  - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
+    state: health5
+  - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
+    state: health4
+  - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
+    state: health3
+  - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
+    state: health2
+  - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
+    state: health1
+  - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
+    state: health0
+  name: alerts-health-name
+  description: alerts-health-desc
+  minSeverity: 0
+  maxSeverity: 17
+
+- type: alert
+  id: XenoCrit
+  category: Health
+  icons:
+  - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
+    state: health_critical
+  name: alerts-crit-name
+  description: alerts-crit-desc
+
+- type: alert
+  id: XenoDead
+  category: Health
+  icons:
+  - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
+    state: health_dead
+  name: alerts-dead-name
+  description: alerts-dead-desc

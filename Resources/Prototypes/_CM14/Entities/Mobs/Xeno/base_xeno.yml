@@ -23,6 +23,10 @@
       0: Alive
       200: Critical
       300: Dead
+    stateAlertDict:
+      Alive: XenoHealth
+      Critical: XenoCrit
+      Dead: XenoDead
   - type: MobStateActions
     actions:
       Critical:
@@ -99,8 +103,6 @@
         - MobMask
         layer:
         - MobLayer
-  - type: Stamina
-    critThreshold: 200
   - type: SolutionContainerManager
   - type: InjectableSolution
     solution: chemicals
@@ -160,6 +162,7 @@
     - type: XenoHugger
     - type: XenoEgg
   - type: DropHeldOnIncapacitate
+  - type: NightVision
 
 - type: entity
   abstract: true
