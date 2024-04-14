@@ -5,39 +5,39 @@
   - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
     state: health_full
   - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
-    state: health16
+    state: health_16
   - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
-    state: health15
+    state: health_15
   - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
-    state: health14
+    state: health_14
   - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
-    state: health13
+    state: health_13
   - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
-    state: health12
+    state: health_12
   - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
-    state: health11
+    state: health_11
   - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
-    state: health10
+    state: health_10
   - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
-    state: health9
+    state: health_9
   - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
-    state: health8
+    state: health_8
   - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
-    state: health7
+    state: health_7
   - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
-    state: health6
+    state: health_6
   - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
-    state: health5
+    state: health_5
   - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
-    state: health4
+    state: health_4
   - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
-    state: health3
+    state: health_3
   - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
-    state: health2
+    state: health_2
   - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
-    state: health1
+    state: health_1
   - sprite: /Textures/_CM14/Interface/Alerts/xeno_health.rsi
-    state: health0
+    state: health_0
   name: alerts-health-name
   description: alerts-health-desc
   minSeverity: 0
