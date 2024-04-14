@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/mob/hud/alien_standard.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "armor_90"
+    },
+    {
+      "name": "armor_80"
+    },
+    {
+      "name": "armor_70"
+    },
+    {
+      "name": "armor_60"
+    },
+    {
+      "name": "armor_50"
+    },
+    {
+      "name": "armor_40"
+    },
+    {
+      "name": "armor_30"
+    },
+    {
+      "name": "armor_20"
+    },
+    {
+      "name": "armor_10"
+    },
+    {
+      "name": "armor_00",
+      "delays": [
+        [
+          1,
+          2
+        ]
+      ]
+    },
+    {
+      "name": "armor_100"
+    }
+  ]
+}
