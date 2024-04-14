@@ -51,7 +51,6 @@
       slots:
         gun_magazine:
           name: Magazine
-          startingItem: CMMagazineCaselessM39
           insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
           priority: 2
@@ -60,7 +59,6 @@
               - CMMagazineCaselessM39
         gun_chamber:
           name: Chamber
-          startingItem: CMCartridge10x20mm
           priority: 1
           whitelist:
             tags:
