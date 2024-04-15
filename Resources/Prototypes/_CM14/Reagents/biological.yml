@@ -8,7 +8,7 @@
   recognizable: true
   physicalDesc: reagent-physical-desc-viscous
   slippery: false
-  viscosity: 0.70
+  viscosity: 0.90
   tileReactions:
     - !type:SpillTileReaction
   metabolisms:
