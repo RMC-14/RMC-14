@@ -37,18 +37,18 @@
     - type: Clothing
       sprite: _CM14/Objects/Weapons/Guns/SMGs/m39.rsi
     - type: Gun
-      minAngle: 45
+      minAngle: 15
       maxAngle: 85
-      angleIncrease: 15
-      angleDecay: 8
+      angleIncrease: 30
+      angleDecay: 45
       fireRate: 8
       soundGunshot:
         path: /Audio/_CM14/Weapons/Guns/Gunshots/gun_m39.ogg
     - type: GunWieldBonus
-      minAngle: -40
-      maxAngle: -75
-      angleIncrease: -10
-      angleDecay: +8
+      minAngle: -5
+      maxAngle: -70
+      angleIncrease: -20
+      angleDecay: +10
     - type: ItemSlots
       slots:
         gun_magazine:

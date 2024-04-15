@@ -21,8 +21,8 @@
     - Back
   - type: AmmoCounter
   - type: Gun
-    minAngle: 160
-    maxAngle: 180
+    minAngle: 50
+    maxAngle: 60
     fireRate: 0.5
     selectedMode: SemiAuto
     availableModes:
@@ -30,8 +30,8 @@
     soundGunshot:
       path: /Audio/_CM14/Weapons/Guns/Gunshots/gun_sniper.ogg
   - type: GunWieldBonus
-    minAngle: -160
-    maxAngle: -180
+    minAngle: -30
+    maxAngle: -60
   - type: ItemSlots
     slots:
       gun_magazine:
