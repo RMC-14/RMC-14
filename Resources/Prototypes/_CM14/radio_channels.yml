@@ -13,49 +13,49 @@
   name: chat-radio-marine-common
   keycode: "g" #; and g in cm13
   frequency: 1480
-  color: "#C38312"
+  color: "#a0a0a0"
 
 - type: radioChannel
   id: MarineCommand
   name: chat-radio-marine-command
   keycode: "v" #v in cm13
   frequency: 1481
-  color: "#004080"
+  color: "#5b96d4"
 
 - type: radioChannel
   id: MarineMedical
   name: chat-radio-marine-medical
   keycode: "m" #m in cm13
   frequency: 1482
-  color: "#008160"
+  color: "#009771"
 
 - type: radioChannel
   id: MarineEngineer
   name: chat-radio-marine-engineer
   keycode: "n" #n in cm13
   frequency: 1483
-  color: "#A66300"
+  color: "#e4860c"
 
 - type: radioChannel
   id: MarineMilitaryPolice
   name: chat-radio-marine-military-police
   keycode: "p" #p in cm13
   frequency: 1484
-  color: "#A30000"
+  color: "#da3434"
 
 - type: radioChannel
   id: MarineRequisition
   name: chat-radio-marine-requisition
   keycode: "u" #u in cm13
   frequency: 1485
-  color: "#5F4519"
+  color: "#b17324"
 
 - type: radioChannel
   id: MarineIntel
   name: chat-radio-marine-intel
   keycode: "t" #t in cm13
   frequency: 1486
-  color: "#027D02"
+  color: "#059705"
 
 # Squad channels
 - type: radioChannel
@@ -63,42 +63,42 @@
   name: chat-radio-marine-alpha
   keycode: "a" #a in cm13
   frequency: 1491
-  color: "#EA0000"
+  color: "#ac1616"
 
 - type: radioChannel
   id: MarineBravo
   name: chat-radio-marine-bravo
   keycode: "b" #b in cm13
   frequency: 1492
-  color: "#C68610"
+  color: "#f2af03"
 
 - type: radioChannel
   id: MarineCharlie
   name: chat-radio-marine-charlie
   keycode: "c" #c in cm13
   frequency: 1493
-  color: "#AA55AA"
+  color: "#a03ba0"
 
 - type: radioChannel
   id: MarineDelta
   name: chat-radio-marine-delta
   keycode: "d" #d in cm13
   frequency: 1494
-  color: "#007FCF"
+  color: "#0076c2"
 
 - type: radioChannel
   id: MarineEcho
   name: chat-radio-marine-echo
   keycode: "e" #e in cm13
   frequency: 1495
-  color: "#3EB489"
+  color: "#3baa8a"
 
 - type: radioChannel
   id: MarineFoxtrot
   name: chat-radio-marine-foxtrot
   keycode: "f" #f in cm13
   frequency: 1496
-  color: "#4A4740"
+  color: "#c23c07"
 
 # Non USCM
 - type: radioChannel
@@ -106,5 +106,5 @@
   name: chat-radio-colony
   keycode: "o" #o in cm13
   frequency: 1381
-  color: "#FFFFFF" #todo cm14
+  color: "#993399" #todo cm14
   longRange: true
