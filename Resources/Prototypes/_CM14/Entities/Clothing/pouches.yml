@@ -662,7 +662,6 @@
       - Screwdriver
       - Wrench
       - Wirecutter
-      - EntrenchingTool
       - CableCoil
       - PowerCell
       - Multitool
@@ -673,6 +672,7 @@
       - MachineBoard
       - MachinePart
       - LightReplacer
+      - EntrenchingTool
 
 - type: entity
   parent: CMPouchTools
