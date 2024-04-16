@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: CMXenoBase
   abstract: true
   save: false
@@ -194,11 +194,12 @@
   components:
   - type: CombatMode
   - type: MeleeWeapon
-    altDisarm: true
+    altDisarm: false
     angle: 0
     soundHit:
       collection: AlienClaw
     animation: WeaponArcBite
+    wideAnimation: WeaponArcBite
     damage:
       groups:
         Brute: 12
