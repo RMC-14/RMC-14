@@ -120,7 +120,6 @@ namespace Content.Client.Input
             common.AddFunction(ContentKeyFunctions.OpenAdminMenu);
             common.AddFunction(ContentKeyFunctions.OpenGuidebook);
 
-            
             CMFunctions(contexts);
         }
 
