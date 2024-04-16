@@ -8,4 +8,4 @@ trait-french-name = French Accent
 trait-french-desc = french
 
 trait-mobster-name = Mobster Accent
-trait-mobster-desc = ey gabagool fugeddaboutit i'm walkin here 
+trait-mobster-desc = ey gabagool fugeddaboutit I'm walkin here 
