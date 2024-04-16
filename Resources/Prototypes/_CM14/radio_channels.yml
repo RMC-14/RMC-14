@@ -41,7 +41,7 @@
   name: chat-radio-marine-military-police
   keycode: "p" #p in cm13
   frequency: 1484
-  color: "#da3434"
+  color: "#b6000d"
 
 - type: radioChannel
   id: MarineRequisition
@@ -63,7 +63,7 @@
   name: chat-radio-marine-alpha
   keycode: "a" #a in cm13
   frequency: 1491
-  color: "#ac1616"
+  color: "#c71818"
 
 - type: radioChannel
   id: MarineBravo
@@ -91,7 +91,7 @@
   name: chat-radio-marine-echo
   keycode: "e" #e in cm13
   frequency: 1495
-  color: "#3baa8a"
+  color: "#3be1b1"
 
 - type: radioChannel
   id: MarineFoxtrot
