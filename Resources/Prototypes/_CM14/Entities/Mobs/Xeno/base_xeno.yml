@@ -194,8 +194,6 @@
   components:
   - type: CombatMode
   - type: MeleeWeapon
-    WideAnimation: WeaponArcSlash
-    Range: 2
     widePrimary: true
     altDisarm: true
     angle: 60
