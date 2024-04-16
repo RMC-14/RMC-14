@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: CMBaseWeaponRifle
   id: CMBaseWeaponSMG
@@ -8,9 +8,9 @@
   - type: AmmoCounter
   - type: Gun
     minAngle: 15
-    maxAngle: 35
-    angleIncrease: 10
-    angleDecay: 16
+    maxAngle: 85
+    angleIncrease: 30
+    angleDecay: 45
     fireRate: 8
     selectedMode: FullAuto
     availableModes:
@@ -19,7 +19,9 @@
     - FullAuto
   - type: GunWieldBonus
     minAngle: -5
-    maxAngle: -5
+    maxAngle: -70
+    angleIncrease: -20
+    angleDecay: +10
 
 - type: entity
   parent: CMBaseWeaponSMG

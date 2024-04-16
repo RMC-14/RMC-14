@@ -21,19 +21,20 @@
     - suitStorage
   - type: Wieldable
   - type: Gun
-    minAngle: 10
-    maxAngle: 30
-    angleIncrease: 10
-    angleDecay: 10
-    fireRate: 10
+    minAngle: 5
+    maxAngle: 70
+    angleIncrease: 60
+    angleDecay: 180 ##fire 3x per second one handed and see no accuracy loss
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
     soundGunshot:
       collection: CMM4A3Shoot
   - type: GunWieldBonus
-    minAngle: -5
-    maxAngle: -25
+    minAngle: 0 
+    maxAngle: -50
+    angleIncrease: -50
+    angleDecay: 0
   - type: ItemSlots
     slots:
       gun_magazine:
