@@ -1,0 +1,27 @@
+- type: trait
+  id: Russian
+  name: trait-russian-name
+  description: trait-russian-desc
+  components:
+    - type: RussianAccent
+
+- type: trait
+  id: Mobster
+  name: trait-mobster-name
+  description: trait-mobster-desc
+  components:
+    - type: MobsterAccent
+
+- type: trait
+  id: French
+  name: trait-french-name
+  description: trait-french-desc
+  components:
+    - type: FrenchAccent
+
+- type: trait
+  id: Spanish
+  name: trait-spanish-name
+  description: trait-spanish-desc
+  components:
+    - type: SpanishAccent
