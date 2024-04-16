@@ -194,8 +194,11 @@
   components:
   - type: CombatMode
   - type: MeleeWeapon
+    WideAnimation: WeaponArcSlash
+    Range: 2
+    widePrimary: true
     altDisarm: true
-    angle: 0
+    angle: 60
     soundHit:
       collection: AlienClaw
     animation: WeaponArcBite

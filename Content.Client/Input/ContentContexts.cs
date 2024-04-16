@@ -119,8 +119,6 @@ namespace Content.Client.Input
             common.AddFunction(ContentKeyFunctions.OpenDecalSpawnWindow);
             common.AddFunction(ContentKeyFunctions.OpenAdminMenu);
             common.AddFunction(ContentKeyFunctions.OpenGuidebook);
-
-
             CMFunctions(contexts);
         }
 
@@ -128,6 +126,8 @@ namespace Content.Client.Input
         {
             var human = contexts.GetContext("human");
             human.AddFunction(CMKeyFunctions.CMPumpShotgun);
+
+            human.AddFunction(CMKeyFunctions.CMXenoWideSwing);
         }
     }
 }

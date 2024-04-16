@@ -1,5 +1,7 @@
 using System.Linq;
 using Content.Client.Gameplay;
+using Content.Shared._CM14.Input;
+using Content.Shared._CM14.Weapons.Ranged;
 using Content.Shared.CombatMode;
 using Content.Shared.Effects;
 using Content.Shared.Hands.Components;
@@ -14,6 +16,7 @@ using Robust.Client.Input;
 using Robust.Client.Player;
 using Robust.Client.State;
 using Robust.Shared.Input;
+using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -41,6 +44,46 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         _xformQuery = GetEntityQuery<TransformComponent>();
         SubscribeNetworkEvent<MeleeLungeEvent>(OnMeleeLunge);
         UpdatesOutsidePrediction = true;
+
+        CommandBinds.Builder
+            .Bind(CMKeyFunctions.CMXenoWideSwing,
+                InputCmdHandler.FromDelegate(session =>
+                {
+                    if (session?.AttachedEntity is { } entity)
+                    {
+                        TryPrimaryHeavyAttack();
+                    }
+                }, handle: false))
+            .Register<MeleeWeaponSystem>();
+    }
+
+    public void TryPrimaryHeavyAttack()
+    {
+        {
+            var mousePos = _eyeManager.PixelToMap(_inputManager.MouseScreenPosition);
+
+            EntityCoordinates coordinates = default;
+            if (MapManager.TryFindGridAt(mousePos, out var gridUid, out _))
+            {
+                coordinates = EntityCoordinates.FromMap(gridUid, mousePos, TransformSystem, EntityManager);
+            }
+            else
+            {
+                coordinates = EntityCoordinates.FromMap(MapManager.GetMapEntityId(mousePos.MapId), mousePos, TransformSystem, EntityManager);
+            }
+
+            var entityNull = _player.LocalEntity;
+            if (entityNull == null)
+                return;
+            var entity = entityNull.Value;
+
+            if (!TryGetWeapon(entity, out var weaponUid, out var weapon))
+                return;
+
+            if (weapon.WidePrimary)
+                ClientHeavyAttack(entity, coordinates, weaponUid, weapon);
+            return;
+        }
     }
 
     public override void Update(float frameTime)
