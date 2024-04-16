@@ -245,7 +245,7 @@
     - 0,0,3,1 #3 slots
     whitelist:
       tags: #this gonna be hell
-      - CMMagazineCaselessM39
+      - CMMagazineM39
       - CMMagazineRifleM41A
       - CMMagazineRifleM41AE2
       - CMMagazineRifleM4RA
