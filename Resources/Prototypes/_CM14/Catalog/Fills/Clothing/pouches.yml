@@ -18,10 +18,10 @@
     - id: FlashlightLantern
     - id: CMCrowbarRed
     - id: CMPillCanisterTricordrazine
-    - id: CMTraumaKit
+    - id: CMGauze10
     - id: RadioHandheld
     - id: CMM5Bayonet
-      # splint
+      # 5 splints
 
 - type: entity
   parent: CMPouchSurvivalSynth

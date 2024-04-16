@@ -12,11 +12,35 @@
       map: [ "openLayer" ]
       visible: false
   - type: Storage
-    maxItemSize: Normal
+    maxItemSize: Small
     grid:
-    - 0,0,7,1
+    - 0,0,13,1 # 7 slots
+    whitelist:
+      tags:
+      - DiscreteHealthAnalyzer
+      #      - TODO CM14 CMDropper
+      - Pill
+      - Bottle
+      - Syringe
+      - PillCanister
+      - CMTraumaKit
+      - CMBurnKit
+      - Ointment
+      - Brutepack
+      - Bloodpack
+      #      - TODO CM14 splint
+      #      - TODO CM14 penlight
+      - CMAutoInjector
+      #      - TODO CM14 syringe cases
+      #      - TODO CM14 surgical cases
+      - CMSurgicalLine
+      - CMSynthGraft
+      #      - TODO CM14 roller beds
+      - BodyBag
+      components:
+      - Hypospray
   - type: Item
-    size: Large
+    size: Normal
     sprite: _CM14/Objects/Medical/first_aid_kits.rsi
     heldPrefix: firstaid
   - type: Tag

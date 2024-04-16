@@ -1,8 +1,8 @@
 - type: entity
-  name: marine radiophone
-  description: Also known as a Walkie-Talkie, this device allows for long range communication when telecommunications are down.
   parent: BaseItem
   id: CMRadioHandheld
+  name: marine radiophone
+  description: Also known as a Walkie-Talkie, this device allows for long range communication when telecommunications are down.
   components:
   - type: RadioMicrophone
     broadcastChannel: Handheld

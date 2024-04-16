@@ -1,4 +1,4 @@
-# TODO CM14 sniper barrel
+﻿# TODO CM14 sniper barrel
 # TODO CM14 base sniper
 - type: entity
   parent: BaseItem
@@ -11,9 +11,9 @@
     sprite: _CM14/Objects/Weapons/Guns/Snipers/m42a.rsi
     layers:
     - state: base
-      map: ["enum.GunVisualLayers.Base"]
+      map: [ "enum.GunVisualLayers.Base" ]
   - type: Item
-    size: Huge
+    size: Large
   - type: Clothing
     sprite: _CM14/Objects/Weapons/Guns/Snipers/m42a.rsi
     quickEquip: false

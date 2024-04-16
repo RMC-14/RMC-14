@@ -6,7 +6,7 @@
   suffix: CM14
   components:
   - type: Item
-    size: Normal
+    size: Small
   - type: Tag
     tags:
       - DiscreteHealthAnalyzer

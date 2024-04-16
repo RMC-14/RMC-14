@@ -7,6 +7,7 @@
   - type: Sprite
     sprite: _CM14/Objects/Tanks/anesthetic.rsi
   - type: Item
+    size: Normal
     sprite: _CM14/Objects/Tanks/anesthetic.rsi
   - type: GasTank
     outputPressure: 30.4

@@ -23,7 +23,7 @@
           map: [ "enum.EntrenchingToolComponentVisualLayers.Dirt" ]
           visible: false
     - type: Item
-      size: Small
+      size: Normal # TODO CM14 large unfolded, normal folded
       sprite: _CM14/Objects/Tools/etool.rsi
       heldPrefix: etool
     - type: UseDelay

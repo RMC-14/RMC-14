@@ -6,9 +6,9 @@
   name: retractor
   description: Retracts stuff.
   components:
+  - type: Item
+    size: Small
   - type: CMSurgeryTool
-
-
 
 # Retractor
 - type: entity
@@ -84,6 +84,7 @@
     sprite: _CM14/Objects/Medical/Surgery/cautery.rsi
     state: cautery
   - type: Item
+    size: Tiny
     sprite: _CM14/Objects/Medical/Surgery/cautery.rsi
   - type: MeleeWeapon
     damage:
@@ -154,6 +155,7 @@
     sprite: _CM14/Objects/Medical/Surgery/scalpel.rsi
     state: scalpel
   - type: Item
+    size: Tiny
     sprite: _CM14/Objects/Medical/Surgery/scalpel.rsi
   - type: Sharp
     butcherDelayModifier: 1.5
