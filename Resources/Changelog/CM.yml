@@ -357,5 +357,12 @@
   id: 50
   time: '2024-04-16T06:19:20.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1236
+- author: Whisper
+  changes:
+  - message: Xenos (and humanoids) no longer trigger stepping on glass shards
+    type: Tweak
+  id: 51
+  time: '2024-04-17T07:34:31.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1243
 Name: CM
 Order: -1
