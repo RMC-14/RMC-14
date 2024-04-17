@@ -3,6 +3,9 @@
   abstract: true
   save: false
   components:
+  - type: Tag
+    tags:
+    - ShoesRequiredStepTriggerImmune
   - type: Damageable
     damageContainer: Biological
   - type: Destructible
@@ -233,6 +236,7 @@
   - type: Tag
     tags:
     - DoorBumpOpener
+    - ShoesRequiredStepTriggerImmune
   - type: Hands
   - type: GiveHands
     hands:
