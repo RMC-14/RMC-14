@@ -35,7 +35,7 @@ public sealed class CMStorageSystem : EntitySystem
 
                 // TODO CM14 this might create more space than is necessary to fit the item if there is some free space left in the storage before expanding it
                 var last = grid[^1];
-                var expanded = new Box2i(last.Left, last.Bottom, last.Right + shape.Right, last.Top);
+                var expanded = new Box2i(last.Left, last.Bottom, last.Right + shape.Right + 1, last.Top);
 
                 if (expanded.Top < shape.Top)
                     expanded.Top = shape.Top;
