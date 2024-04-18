@@ -1,7 +1,6 @@
 using System.Numerics;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
-using Content.Shared.Preferences.Loadouts.Effects;
 using Content.Shared.Roles;
 using Content.Shared.StatusIcon;
 using Robust.Client.UserInterface.Controls;
@@ -23,6 +22,7 @@ public sealed class JobPrioritySelector : RequirementsSelector<JobPrototype>
     public JobPrioritySelector(RoleLoadout? loadout, JobPrototype proto, ButtonGroup btnGroup, IPrototypeManager protoMan)
         : base(proto, btnGroup)
     {
+        Visible = proto.IsCM;
         Options.OnItemSelected += args => PriorityChanged?.Invoke(Priority);
 
         var items = new[]
