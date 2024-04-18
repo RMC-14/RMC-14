@@ -27,7 +27,7 @@
     - ActionXenoSlowingSpit
     - ActionXenoScatteredSpit
     - ActionXenoParalyzingSlash
-    - ActionXenoEvolve60 # TODO CM14 300
+    - ActionXenoEvolve300
     # explosionResistance: 10
     tier: 1
   - type: XenoDevour

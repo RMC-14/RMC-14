@@ -28,7 +28,7 @@
     - ActionXenoLeap # TODO CM14 call this pounce, not leap
     - ActionXenoBoneChips
     - ActionXenoZoom
-    - ActionXenoEvolve60 # TODO CM14 300
+    - ActionXenoEvolve300
     # explosionResistance: 10
     tier: 1
   - type: XenoBoneChips

@@ -28,7 +28,7 @@
     #    - ActionXenoPunch
     #    - ActionXenoLunge
     #    - ActionXenoFling
-    - ActionXenoEvolve60 # TODO CM14 540
+    - ActionXenoEvolve540
     # explosionResistance: 40
     tier: 2
   - type: XenoDevour
