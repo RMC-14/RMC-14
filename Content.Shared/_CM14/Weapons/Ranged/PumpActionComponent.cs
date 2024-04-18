@@ -4,8 +4,8 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._CM14.Weapons.Ranged;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(CMPumpActionSystem))]
-public sealed partial class CMPumpActionComponent : Component
+[Access(typeof(SharedPumpActionSystem))]
+public sealed partial class PumpActionComponent : Component
 {
     [DataField, AutoNetworkedField]
     public bool Pumped;
