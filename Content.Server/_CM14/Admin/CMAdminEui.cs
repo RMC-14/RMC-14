@@ -106,7 +106,7 @@ public sealed class CMAdminEui : BaseEui
                 var coordinates = _transform.GetMoverCoordinates(entity);
                 var humanoid = _stationSpawning.SpawnPlayerMob(coordinates, null, profile, null);
                 var startingGear = _prototypes.Index<StartingGearPrototype>(DefaultHumanoidGear);
-                _stationSpawning.EquipStartingGear(humanoid, startingGear, profile);
+                _stationSpawning.EquipStartingGear(humanoid, startingGear);
 
                 if (_mind.TryGetMind(entity, out var mindId, out var mind))
                 {
