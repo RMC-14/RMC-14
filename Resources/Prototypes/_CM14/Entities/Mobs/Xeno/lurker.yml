@@ -28,8 +28,7 @@
     #    - ActionXenoPounce
     #    - ActionXenoInvisibility
     #    - ActionXenoCripplingStrike
-    - ActionXenoEvolve60 # TODO CM14 540
-    # explosionResistance: 20
+    - ActionXenoEvolve540
     tier: 2
   - type: XenoDevour
   - type: XenoPlasma

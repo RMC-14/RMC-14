@@ -31,7 +31,6 @@
     #    - ActionXenoThrowFacehugger
     #    - ActionXenoRetrieveEgg
     #    - ActionXenoHuggerReserve
-    # explosionResistance: 20
     tier: 2
   - type: XenoConstruction
     canOrderConstruction:

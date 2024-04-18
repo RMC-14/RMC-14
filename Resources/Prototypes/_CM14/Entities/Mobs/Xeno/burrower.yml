@@ -30,7 +30,6 @@
     - ActionXenoPlantWeeds
     #    - ActionXenoBurrow
     #    - ActionXenoTremor
-    # explosionResistance: 40
     tier: 2
   - type: XenoPlasma
     plasma: 600

@@ -30,7 +30,6 @@
     #    - ActionXenoSprayAcid
     #    - ActionXenoLongSight
     #    - ActionXenoAcidShroud
-    # explosionResistance: 20
     tier: 3
   - type: XenoPlasma
     plasma: 400

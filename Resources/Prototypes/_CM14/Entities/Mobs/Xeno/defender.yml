@@ -28,7 +28,7 @@
     - ActionXenoHeadbutt
     - ActionXenoTailSweep
     - ActionXenoFortify
-    - ActionXenoEvolve60 # TODO CM14 300
+    - ActionXenoEvolve300
     tier: 1
   - type: XenoEvolution
     evolvesTo:
