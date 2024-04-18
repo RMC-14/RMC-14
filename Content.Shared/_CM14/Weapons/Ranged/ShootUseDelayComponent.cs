@@ -9,5 +9,5 @@ public sealed partial class ShootUseDelayComponent : Component
     public TimeSpan LastPopup;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan PopupCooldown = TimeSpan.FromSeconds(0.333);
+    public TimeSpan PopupCooldown = TimeSpan.FromSeconds(0.5);
 }
