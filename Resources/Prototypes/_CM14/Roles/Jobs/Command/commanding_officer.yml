@@ -55,13 +55,12 @@
   id: CommandingOfficerGear
   equipment:
     jumpsuit: CMJumpsuitCO
-    back: CMBackpackCommand
+    back: CMSatchel
     shoes: CMShoesDressCommander
     head: CMHeadBeretCO
     outerClothing: CMCoatOfficer
     id: CommandingOfficerIDCard
     ears: CMHeadsetSeniorCommand
-  satchel: CMSatchel
 
 - type: entity
   id: SpawnPointCommandingOfficer
