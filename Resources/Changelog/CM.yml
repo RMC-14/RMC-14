@@ -371,5 +371,12 @@
   id: 52
   time: '2024-04-18T20:56:24.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1248
+- author: Whisper
+  changes:
+  - message: Xenos have AI and ghost role takeover
+    type: Add
+  id: 53
+  time: '2024-04-18T21:25:55.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1249
 Name: CM
 Order: -1
