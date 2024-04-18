@@ -2,7 +2,9 @@
 using Content.Shared.ActionBlocker;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
+using Content.Shared.Popups;
 using Content.Shared.Verbs;
+using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Input.Binding;
@@ -13,6 +15,7 @@ public abstract class SharedPumpActionSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -87,6 +90,15 @@ public abstract class SharedPumpActionSystem : EntitySystem
         if (TryComp(user, out HandsComponent? hands) &&
             TryComp(hands.ActiveHandEntity, out PumpActionComponent? pump))
         {
+            var ammo = new GetAmmoCountEvent();
+            RaiseLocalEvent(hands.ActiveHandEntity.Value, ref ammo);
+
+            if (ammo.Count <= 0)
+            {
+                _popup.PopupClient("You don't have any ammo left!", user, user);
+                return;
+            }
+
             TryPump(user, (hands.ActiveHandEntity.Value, pump));
         }
     }
