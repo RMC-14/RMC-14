@@ -29,7 +29,6 @@
     #    - ActionXenoLunge
     #    - ActionXenoFling
     - ActionXenoEvolve540
-    # explosionResistance: 40
     tier: 2
   - type: XenoDevour
   - type: XenoPlasma

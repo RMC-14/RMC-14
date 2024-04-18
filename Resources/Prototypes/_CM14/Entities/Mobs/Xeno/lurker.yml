@@ -29,7 +29,6 @@
     #    - ActionXenoInvisibility
     #    - ActionXenoCripplingStrike
     - ActionXenoEvolve540
-    # explosionResistance: 20
     tier: 2
   - type: XenoDevour
   - type: XenoPlasma

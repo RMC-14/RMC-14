@@ -28,7 +28,6 @@
     - ActionXenoScatteredSpit
     - ActionXenoParalyzingSlash
     - ActionXenoEvolve300
-    # explosionResistance: 10
     tier: 1
   - type: XenoDevour
   - type: XenoPlasma

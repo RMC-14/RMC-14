@@ -29,7 +29,6 @@
     - ActionXenoBoneChips
     - ActionXenoZoom
     - ActionXenoEvolve300
-    # explosionResistance: 10
     tier: 1
   - type: XenoBoneChips
   - type: XenoDevour

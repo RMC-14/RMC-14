@@ -29,7 +29,6 @@
     #    - ActionXenoChargeSpit
     #    - ActionXenoSprayAcid
     - ActionXenoEvolve540
-    # explosionResistance: 20
     tier: 2
   - type: XenoAcid
   - type: XenoDevour
