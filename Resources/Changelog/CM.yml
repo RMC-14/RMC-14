@@ -378,5 +378,13 @@
   id: 53
   time: '2024-04-18T21:25:55.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1249
+- author: DrSmugleaf
+  changes:
+  - message: Fixed evolution cooldowns for defender, drone, lurker, runner, sentinel,
+      spitter and warrior.
+    type: Fix
+  id: 54
+  time: '2024-04-18T21:30:31.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1250
 Name: CM
 Order: -1
