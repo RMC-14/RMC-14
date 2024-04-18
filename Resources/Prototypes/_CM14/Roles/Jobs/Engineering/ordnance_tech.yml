@@ -27,13 +27,12 @@
   id: OrdnanceTechGear
   equipment:
     jumpsuit: CMJumpsuitOrdnanceTech
-    back: CMBackpackEngineer
+    back: CMSatchelEngineer
     shoes: CMBootsBrown
     gloves: CMHandsInsulated
     id: OrdnanceTechIDCard
     ears: CMHeadsetEngineer
     belt: CMBeltUtilityFilled
-  satchel: CMSatchelEngineer
 
 - type: entity
   id: SpawnPointOrdnanceTech

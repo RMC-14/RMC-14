@@ -25,11 +25,10 @@
   id: CMGearLiaison
   equipment:
     jumpsuit: CMJumpsuitLiaisonBlack
-    back: CMBackpack
+    back: CMSatchel
     shoes: CMShoesDress
     id: CMIDCardLiaison
     ears: CMHeadsetLeader
-  satchel: CMSatchel
 
 - type: entity
   id: CMSpawnPointLiaison

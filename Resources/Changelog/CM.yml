@@ -357,5 +357,49 @@
   id: 50
   time: '2024-04-16T06:19:20.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1236
+- author: Whisper
+  changes:
+  - message: Xenos (and humanoids) no longer trigger stepping on glass shards
+    type: Tweak
+  id: 51
+  time: '2024-04-17T07:34:31.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1243
+- author: DrSmugleaf
+  changes:
+  - message: Fixed admin ghosts not being able to pull xenos.
+    type: Fix
+  id: 52
+  time: '2024-04-18T20:56:24.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1248
+- author: Whisper
+  changes:
+  - message: Xenos have AI and ghost role takeover
+    type: Add
+  id: 53
+  time: '2024-04-18T21:25:55.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1249
+- author: DrSmugleaf
+  changes:
+  - message: Fixed evolution cooldowns for defender, drone, lurker, runner, sentinel,
+      spitter and warrior.
+    type: Fix
+  id: 54
+  time: '2024-04-18T21:30:31.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1250
+- author: DrSmugleaf
+  changes:
+  - message: Added examine text to pump shotguns that tell you how to pump it.
+    type: Add
+  - message: Added popups when the user is unable to shoot, either from needing to
+      pump a shotgun or needing to wait before shooting again.
+    type: Add
+  - message: Pump shotguns now have a delay between shots instead of a delay between
+      pumps.
+    type: Tweak
+  - message: Pumping now requires the gun to have at least one bullet left.
+    type: Fix
+  id: 55
+  time: '2024-04-18T23:23:39.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1247
 Name: CM
 Order: -1

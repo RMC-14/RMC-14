@@ -6,6 +6,9 @@
   name: Urist C.M. McHands
   suffix: CM14
   components:
+  - type: Tag
+    tags:
+    - ShoesRequiredStepTriggerImmune
   - type: Marine
   - type: Hunger
   - type: Thirst
