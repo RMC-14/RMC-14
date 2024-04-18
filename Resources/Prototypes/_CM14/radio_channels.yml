@@ -77,14 +77,14 @@
   name: chat-radio-marine-charlie
   keycode: "c" #c in cm13
   frequency: 1493
-  color: "#a03ba0"
+  color: "#a94ac2"
 
 - type: radioChannel
   id: MarineDelta
   name: chat-radio-marine-delta
   keycode: "d" #d in cm13
   frequency: 1494
-  color: "#0076c2"
+  color: "#038ae1"
 
 - type: radioChannel
   id: MarineEcho
@@ -106,5 +106,5 @@
   name: chat-radio-colony
   keycode: "o" #o in cm13
   frequency: 1381
-  color: "#993399" #todo cm14
+  color: "#cf40a6" #todo cm14
   longRange: true
