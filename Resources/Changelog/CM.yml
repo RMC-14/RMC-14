@@ -364,5 +364,12 @@
   id: 51
   time: '2024-04-17T07:34:31.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1243
+- author: DrSmugleaf
+  changes:
+  - message: Fixed admin ghosts not being able to pull xenos.
+    type: Fix
+  id: 52
+  time: '2024-04-18T20:56:24.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1248
 Name: CM
 Order: -1
