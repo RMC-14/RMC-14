@@ -28,7 +28,7 @@
   id: CombatTechGear
   equipment:
     jumpsuit: CMJumpsuitMarineEngineer
-    back: CMBackpackMarineTech
+    back: CMSatchelMarineTech
     shoes: CMBootsBlackFilled
     eyes: ClothingEyesGlassesMeson
     head: CMArmorHelmetM10Tech
@@ -37,7 +37,6 @@
     id: DogtagCombatTech
     ears: CMHeadsetAlphaEngineer
     belt: CMBeltUtilityCombatFilled
-  satchel: CMSatchelMarineTech
 
 - type: entity
   id: SpawnPointCombatTech

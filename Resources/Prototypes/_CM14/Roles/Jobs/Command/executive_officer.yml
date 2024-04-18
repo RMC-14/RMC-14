@@ -44,13 +44,12 @@
   id: ExecutiveOfficerGear
   equipment:
     jumpsuit: CMJumpsuitBO
-    back: CMBackpackCommand
+    back: CMSatchel
     shoes: CMShoesDress
     head: CMHeadCap
     outerClothing: CMCoatOfficer
     id: ExecutiveOfficerIDCard
     ears: CMHeadsetLeader
-  satchel: CMSatchel
 
 - type: entity
   id: SpawnPointExecutiveOfficer

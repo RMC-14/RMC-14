@@ -28,13 +28,12 @@
   equipment:
     jumpsuit: CMJumpsuitDCC
     outerClothing: CMArmorPlatePilot
-    back: CMBackpackMarine
+    back: CMSatchelMarine
     gloves: CMHandsBrown
     shoes: CMBootsBlackFilled
     head: CMHeadCap
     id: DCCIDCard
     ears: CMHeadsetPilot
-  satchel: CMSatchelMarine
 
 - type: entity
   id: CMSpawnPointDCC

@@ -32,14 +32,13 @@
   id: WeaponsSpecialistGear
   equipment:
     jumpsuit: JumpsuitMarine
-    back: CMBackpackMarine
+    back: CMSatchelMarine
     shoes: CMBootsBlackFilled
     head: ArmorHelmetM10
     outerClothing: ArmorMarineM3
     gloves: CMHandsBlack
     id: DogtagWeaponsSpecialist
     ears: CMHeadsetAlpha
-  satchel: CMSatchelMarine
 
 - type: entity
   id: SpawnPointWeaponsSpecialist
