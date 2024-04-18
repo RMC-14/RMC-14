@@ -28,8 +28,7 @@
     #    - ActionXenoSpit
     #    - ActionXenoChargeSpit
     #    - ActionXenoSprayAcid
-    - ActionXenoEvolve60 # TODO CM14 540
-    # explosionResistance: 20
+    - ActionXenoEvolve540
     tier: 2
   - type: XenoAcid
   - type: XenoDevour
