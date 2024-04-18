@@ -92,6 +92,7 @@
   - type: InventorySlots
   - type: Loadout
     prototypes: [ MobAghostGear ]
+  - type: KnockdownOnPullAttemptImmune
 
 - type: entity
   id: ActionAGhostShowSolar
