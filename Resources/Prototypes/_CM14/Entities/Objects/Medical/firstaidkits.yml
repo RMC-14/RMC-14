@@ -26,6 +26,7 @@
       - CMTraumaKit
       - CMBurnKit
       - Ointment
+      - CMOintment
       - Brutepack
       - Bloodpack
       #      - TODO CM14 splint
@@ -53,6 +54,10 @@
           Open: { visible: true }
           Closed: { visible: false }
   - type: Appearance
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - PillCanister
 
 - type: entity
   parent: CMFirstAidKit
@@ -121,7 +126,7 @@
   - type: StorageFill
     contents:
     - id: CMHealthAnalyzer
-    - id: CMPillCanisterDexalin
+    - id: CMPillDexalin
       amount: 2
     - id: CMDexalinPlusAutoInjector
       amount: 3
@@ -180,5 +185,5 @@
     contents:
     - id: CMHealthAnalyzer
     - id: CMPillCanisterDylovene
-    - id: CMPillCanisterDexalin
+    - id: CMPillDylovene
       amount: 3

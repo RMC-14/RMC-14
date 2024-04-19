@@ -17,7 +17,10 @@
     contents:
     - id: FlashlightLantern
     - id: CMCrowbarRed
-    - id: CMPillCanisterTricordrazine
+    - id: CMPillTricordrazine
+    - id: CMPillTricordrazine
+    - id: CMPillTricordrazine
+    - id: CMPillTricordrazine
     - id: CMGauze10
     - id: RadioHandheld
     - id: CMM5Bayonet
@@ -45,14 +48,13 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMTraumaKit # todo cm14 tramadol
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
     #- id: CMTramadolAutoInjector
     - id: CMEmergencyInjector
 
 - type: entity
-  parent: CMPouchFirstAidInjectors
+  parent: CMPouchFirstAid
   id: CMPouchFirstAidFill
   suffix: Filled
   components:
@@ -64,17 +66,20 @@
     # splint
 
 - type: entity
-  parent: CMPouchFirstAidInjectors
+  parent: CMPouchFirstAid
   id: CMPouchFirstAidPills
   suffix: Pills
   components:
   - type: StorageFill
     contents:
-    - id: CMTraumaKit # todo cm14 pill canisters tramadol x2
-    - id: CMPillCanisterKelotane
-    - id: CMPillCanisterBicaridine
-    #- id: CMTramadolAutoInjector
-    #- id: CMTramadolAutoInjector
+    - id: CMPillBicaridine # TODO CM14 packets
+    - id: CMPillBicaridine
+    - id: CMPillBicaridine
+    - id: CMPillBicaridine
+    - id: CMPillKelotane # TODO CM14 packets
+    - id: CMPillKelotane
+    - id: CMPillKelotane
+    - id: CMPillKelotane # TODO CM14 2 tramadol packets
 
 - type: entity
   parent: CMPouchFirstAidERT
@@ -108,10 +113,9 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMTraumaKit
-    # todo cm14 pill can tramadol
-    - id: CMPillCanisterKelotane
+    # TODO CM14 pill bottle tramadol
     - id: CMPillCanisterBicaridine
+    - id: CMPillCanisterKelotane
     - id: CMPillCanisterDexalin
 
 - type: entity

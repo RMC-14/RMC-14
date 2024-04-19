@@ -149,11 +149,12 @@
       tags:
       - Flashlight
       - Crowbar
-      - PillCanister
       - Brutepack
       - Radio
       - Knife
       # todo cm14 splint
+      components:
+      - Pill
 
 - type: entity
   parent: CMPouchSurvival
@@ -190,9 +191,12 @@
       tags:
       - Ointment
       - CMAutoInjector
-      - PillCanister
       - Brutepack
+      - CMTraumaKit
+      - CMBurnKit
       # todo cm14 splint
+      components:
+      - Pill
 
 - type: entity
   parent: CMPouchFirstAid
