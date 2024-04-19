@@ -13,8 +13,6 @@ namespace Content.Shared._CM14.Marines.Orders;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class HoldOrderComponent : Component, IOrderComponent
 {
-    public override bool SessionSpecific => true;
-
     [DataField, AutoNetworkedField]
     public List<(FixedPoint2 Multiplier, TimeSpan ExpiresAt)> Received { get; set; } = new();
 

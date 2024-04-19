@@ -3,7 +3,6 @@ using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
-using Robust.Shared.GameStates;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Marines.Orders;
@@ -21,11 +20,6 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
-        SubscribeLocalEvent<MarineOrdersComponent, ComponentGetStateAttemptEvent>(OnComponentGetState);
-        SubscribeLocalEvent<FocusOrderComponent, ComponentGetStateAttemptEvent>(OnComponentGetState);
-        SubscribeLocalEvent<HoldOrderComponent, ComponentGetStateAttemptEvent>(OnComponentGetState);
-        SubscribeLocalEvent<MoveOrderComponent, ComponentGetStateAttemptEvent>(OnComponentGetState);
 
         SubscribeLocalEvent<MoveOrderComponent, EntityUnpausedEvent>(OnUnpause);
         SubscribeLocalEvent<FocusOrderComponent, EntityUnpausedEvent>(OnUnpause);
@@ -148,16 +142,6 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         comp.Received.Sort((a, b) => a.CompareTo(b));
 
         _movementSpeed.RefreshMovementSpeedModifiers(receiver);
-    }
-
-    private void OnComponentGetState<T>(Entity<T> ent, ref ComponentGetStateAttemptEvent args) where T : IComponent?
-    {
-        // It's null on replays apparently
-        if (args.Player is null)
-            return;
-
-        if (!HasComp<MarineComponent>(args.Player.AttachedEntity))
-            args.Cancelled = true;
     }
 
     public override void Update(float frameTime)
