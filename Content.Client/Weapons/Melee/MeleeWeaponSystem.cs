@@ -16,8 +16,6 @@ using Robust.Client.State;
 using Robust.Shared.Input;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 
 namespace Content.Client.Weapons.Melee;
 
@@ -207,7 +205,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
     /// Raises a heavy attack event with the relevant attacked entities.
     /// This is to avoid lag effecting the client's perspective too much.
     /// </summary>
-    private void ClientHeavyAttack(EntityUid user, EntityCoordinates coordinates, EntityUid meleeUid, MeleeWeaponComponent component)
+    public void ClientHeavyAttack(EntityUid user, EntityCoordinates coordinates, EntityUid meleeUid, MeleeWeaponComponent component)
     {
         // Only run on first prediction to avoid the potential raycast entities changing.
         if (!_xformQuery.TryGetComponent(user, out var userXform) ||
