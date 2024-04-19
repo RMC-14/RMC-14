@@ -49,7 +49,7 @@ public abstract class SharedStorageSystem : EntitySystem
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
     [Dependency] private   readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] protected readonly UseDelaySystem UseDelay = default!;
-    [Dependency] protected readonly CMStorageSystem _cmStorage = default!;
+    [Dependency] protected readonly CMStorageSystem CMStorage = default!;
 
     private EntityQuery<ItemComponent> _itemQuery;
     private EntityQuery<StackComponent> _stackQuery;
@@ -187,7 +187,7 @@ public abstract class SharedStorageSystem : EntitySystem
 
     public virtual void UpdateUI(Entity<StorageComponent?> entity) {}
 
-    public virtual void OpenStorageUI(EntityUid uid, EntityUid entity, StorageComponent? storageComp = null, bool silent = false) { }
+    public virtual void OpenStorageUI(EntityUid uid, EntityUid entity, StorageComponent? storageComp = null, bool silent = false, bool doAfter = true) { }
 
     private void AddTransferVerbs(EntityUid uid, StorageComponent component, GetVerbsEvent<UtilityVerb> args)
     {
@@ -754,7 +754,7 @@ public abstract class SharedStorageSystem : EntitySystem
 
         var maxSize = GetMaxItemSize((uid, storageComp));
         if (ItemSystem.GetSizePrototype(item.Size) > maxSize
-            && !_cmStorage.IgnoreItemSize((uid, storageComp), insertEnt))
+            && !CMStorage.IgnoreItemSize((uid, storageComp), insertEnt))
         {
             reason = "comp-storage-too-big";
             return false;
@@ -762,7 +762,7 @@ public abstract class SharedStorageSystem : EntitySystem
 
         if (TryComp<StorageComponent>(insertEnt, out var insertStorage)
             && GetMaxItemSize((insertEnt, insertStorage)) >= maxSize
-            && !_cmStorage.IgnoreItemSize((uid, storageComp), insertEnt))
+            && !CMStorage.IgnoreItemSize((uid, storageComp), insertEnt))
         {
             reason = "comp-storage-too-big";
             return false;
