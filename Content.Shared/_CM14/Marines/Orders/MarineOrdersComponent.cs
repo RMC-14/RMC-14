@@ -2,7 +2,6 @@ using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared._CM14.Marines.Orders;
 
@@ -12,6 +11,8 @@ namespace Content.Shared._CM14.Marines.Orders;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class MarineOrdersComponent : Component
 {
+    public override bool SessionSpecific => true;
+
     /// <summary>
     /// The default duration of an order.
     /// </summary>
@@ -27,7 +28,6 @@ public sealed partial class MarineOrdersComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public int OrderRange = 8;
 
-
     /// <summary>
     /// Delay between orders
     /// </summary>
@@ -42,33 +42,30 @@ public sealed partial class MarineOrdersComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public FixedPoint2 Multiplier = 1;
 
-
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string FocusAction = "ActionMarineFocus";
+    [DataField]
+    public EntProtoId FocusAction = "ActionMarineFocus";
 
     [DataField]
     public EntityUid? FocusActionEntity;
 
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string HoldAction = "ActionMarineHold";
+    [DataField]
+    public EntProtoId HoldAction = "ActionMarineHold";
 
     [DataField]
     public EntityUid? HoldActionEntity;
 
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string MoveAction = "ActionMarineMove";
+    [DataField]
+    public EntProtoId MoveAction = "ActionMarineMove";
 
     [DataField]
     public EntityUid? MoveActionEntity;
 
     [DataField, AutoNetworkedField]
-    public List<string> MoveCallouts = new() { "move-order-callout-1", "move-order-callout-2", "move-order-callout-3" };
+    public List<LocId> MoveCallouts = new() { "move-order-callout-1", "move-order-callout-2", "move-order-callout-3" };
 
     [DataField, AutoNetworkedField]
-    public List<string> FocusCallouts = new() { "focus-order-callout-1", "focus-order-callout-2", "focus-order-callout-3" };
+    public List<LocId> FocusCallouts = new() { "focus-order-callout-1", "focus-order-callout-2", "focus-order-callout-3" };
 
     [DataField, AutoNetworkedField]
-    public List<string> HoldCallouts = new() { "hold-order-callout-1", "hold-order-callout-2", "hold-order-callout-3" };
-
-    public override bool SessionSpecific => true;
+    public List<LocId> HoldCallouts = new() { "hold-order-callout-1", "hold-order-callout-2", "hold-order-callout-3" };
 }

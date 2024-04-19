@@ -9,13 +9,15 @@ namespace Content.Shared._CM14.Marines.Orders;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class MoveOrderComponent : Component, IOrderComponent
 {
+    public override bool SessionSpecific => true;
+
     [DataField, AutoNetworkedField]
     public SpriteSpecifier Icon = new Rsi(new ResPath("/Textures/_CM14/Interface/marine_orders.rsi"), "move");
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 MoveSpeedModifier = 1.1;
 
-    // CM14 TODO Actually make this do something once we got melee dodging
+    // TODO CM14 Actually make this do something once we got melee dodging
     [DataField, AutoNetworkedField]
     public FixedPoint2 DodgeModifier = 1.1;
 
@@ -27,6 +29,4 @@ public sealed partial class MoveOrderComponent : Component, IOrderComponent
         MoveSpeedModifier *= multiplier;
         DodgeModifier *= multiplier;
     }
-
-    public override bool SessionSpecific => true;
 }

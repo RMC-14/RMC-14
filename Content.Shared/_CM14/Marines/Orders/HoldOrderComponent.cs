@@ -14,6 +14,8 @@ namespace Content.Shared._CM14.Marines.Orders;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class HoldOrderComponent : Component, IOrderComponent
 {
+    public override bool SessionSpecific => true;
+
     [DataField, AutoNetworkedField]
     public SpriteSpecifier Icon = new Rsi(new ResPath("/Textures/_CM14/Interface/marine_orders.rsi"), "hold");
 
@@ -32,7 +34,7 @@ public sealed partial class HoldOrderComponent : Component, IOrderComponent
     /// <remarks>
     /// I am unsure of when pain will be implemented but I am putting this here for the future.
     /// </remarks>
-    /// CM14 TODO Make this do something meaningful when pain is actually a thing.
+    /// TODO CM14 Make this do something meaningful when pain is actually a thing.
     [DataField, AutoNetworkedField]
     public FixedPoint2 PainModifier;
 
@@ -44,5 +46,4 @@ public sealed partial class HoldOrderComponent : Component, IOrderComponent
         DamageModifier *= multiplier;
         PainModifier *= multiplier;
     }
-    public override bool SessionSpecific => true;
 }
