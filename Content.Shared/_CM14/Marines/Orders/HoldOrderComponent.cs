@@ -2,7 +2,6 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Utility;
 using static Robust.Shared.Utility.SpriteSpecifier;
 
@@ -17,13 +16,16 @@ public sealed partial class HoldOrderComponent : Component, IOrderComponent
     public override bool SessionSpecific => true;
 
     [DataField, AutoNetworkedField]
+    public List<(FixedPoint2 Multiplier, TimeSpan ExpiresAt)> Received { get; set; } = new();
+
+    [DataField, AutoNetworkedField]
     public SpriteSpecifier Icon = new Rsi(new ResPath("/Textures/_CM14/Interface/marine_orders.rsi"), "hold");
 
     /// <summary>
     /// Resistance to damage.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public FixedPoint2 DamageModifier = 0.95;
+    public FixedPoint2 DamageModifier = 0.05;
 
     [DataField]
     public List<ProtoId<DamageTypePrototype>> DamageTypes = new() { "Slash", "Blunt" };
@@ -37,13 +39,4 @@ public sealed partial class HoldOrderComponent : Component, IOrderComponent
     /// TODO CM14 Make this do something meaningful when pain is actually a thing.
     [DataField, AutoNetworkedField]
     public FixedPoint2 PainModifier;
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
-    public TimeSpan Duration { get; set; }
-
-    public void AssignMultiplier(FixedPoint2 multiplier)
-    {
-        DamageModifier *= multiplier;
-        PainModifier *= multiplier;
-    }
 }

@@ -1,4 +1,3 @@
-using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -19,45 +18,35 @@ public sealed partial class MarineOrdersComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
     public TimeSpan Duration = TimeSpan.FromSeconds(20);
 
-    public TimeSpan Cooldown => Duration + Delay;
+    /// <summary>
+    /// Delay between orders
+    /// </summary>
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
+    public TimeSpan Cooldown = TimeSpan.FromSeconds(80);
 
     /// <summary>
     /// The range of the order's effect.
     /// </summary>
     [DataField, AutoNetworkedField]
     [ViewVariables(VVAccess.ReadWrite)]
-    public int OrderRange = 8;
+    public int OrderRange = 7;
 
-    /// <summary>
-    /// Delay between orders
-    /// </summary>
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
-    public TimeSpan Delay = TimeSpan.FromMinutes(1);
-
-    /// <summary>
-    /// The intensity of the order.
-    /// Higher is more intense.
-    /// </summary>
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public FixedPoint2 Multiplier = 1;
-
-    [DataField]
     public EntProtoId FocusAction = "ActionMarineFocus";
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? FocusActionEntity;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntProtoId HoldAction = "ActionMarineHold";
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? HoldActionEntity;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntProtoId MoveAction = "ActionMarineMove";
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? MoveActionEntity;
 
     [DataField, AutoNetworkedField]

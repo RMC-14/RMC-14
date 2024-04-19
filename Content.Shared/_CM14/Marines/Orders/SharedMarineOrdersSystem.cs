@@ -1,18 +1,20 @@
+using Content.Shared._CM14.Marines.Skills;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Shared._CM14.Marines.Orders;
 
 public abstract class SharedMarineOrdersSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _receivers = new();
 
@@ -39,10 +41,14 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         SubscribeLocalEvent<MoveOrderComponent, ComponentShutdown>(OnMoveShutdown);
     }
 
-    private void OnDamageModify(EntityUid uid, HoldOrderComponent comp, DamageModifyEvent args)
+    private void OnDamageModify(Entity<HoldOrderComponent> orders, ref DamageModifyEvent args)
     {
+        var comp = orders.Comp;
+        if (comp.Received.Count == 0)
+            return;
+
         var damage = args.Damage.DamageDict;
-        var multiplier = 1 * comp.DamageModifier;
+        var multiplier = 1 - comp.DamageModifier * comp.Received[0].Multiplier;
 
         foreach (var type in comp.DamageTypes)
         {
@@ -51,15 +57,24 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         }
     }
 
-    private void OnRefreshMovement(EntityUid uid, MoveOrderComponent comp, RefreshMovementSpeedModifiersEvent args)
+    private void OnRefreshMovement(Entity<MoveOrderComponent> orders, ref RefreshMovementSpeedModifiersEvent args)
     {
-        var speed = (1 * comp.MoveSpeedModifier).Float();
+        var comp = orders.Comp;
+        if (comp.Received.Count == 0)
+            return;
+
+        var speed = 1 + (comp.MoveSpeedModifier * comp.Received[0].Multiplier).Float();
         args.ModifySpeed(speed, speed);
     }
 
-    private void OnUnpause<T>(EntityUid uid, T comp, EntityUnpausedEvent args) where T : IComponent, IOrderComponent
+    private void OnUnpause<T>(Entity<T> orders, ref EntityUnpausedEvent args) where T : IComponent, IOrderComponent
     {
-        comp.Duration += args.PausedTime;
+        var comp = orders.Comp;
+        for (var i = 0; i < comp.Received.Count; i++)
+        {
+            var received = comp.Received[i];
+            comp.Received[i] = (received.Multiplier, received.ExpiresAt + args.PausedTime);
+        }
     }
 
     private void OnMoveShutdown(Entity<MoveOrderComponent> uid, ref ComponentShutdown ev)
@@ -67,88 +82,81 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         _movementSpeed.RefreshMovementSpeedModifiers(uid);
     }
 
-    protected virtual void OnAction(EntityUid uid, MarineOrdersComponent orders, FocusActionEvent args)
+    protected virtual void OnAction(Entity<MarineOrdersComponent> orders, ref FocusActionEvent args)
     {
-        OnAction(uid, Orders.Focus, orders, args);
+        OnAction<FocusOrderComponent>(orders, args);
     }
 
-    protected virtual void OnAction(EntityUid uid, MarineOrdersComponent orders, HoldActionEvent args)
+    protected virtual void OnAction(Entity<MarineOrdersComponent> orders, ref HoldActionEvent args)
     {
-        OnAction(uid, Orders.Hold, orders, args);
+        OnAction<HoldOrderComponent>(orders, args);
     }
 
-    protected virtual void OnAction(EntityUid uid, MarineOrdersComponent orders, MoveActionEvent args)
+    protected virtual void OnAction(Entity<MarineOrdersComponent> orders, ref MoveActionEvent args)
     {
-        OnAction(uid, Orders.Move, orders, args);
+        OnAction<MoveOrderComponent>(orders, args);
     }
 
-    private void OnAction(EntityUid uid, Orders order, MarineOrdersComponent orders, InstantActionEvent args)
+    private void OnAction<T>(Entity<MarineOrdersComponent> orders, InstantActionEvent args) where T : IOrderComponent, new()
     {
         if (args.Handled)
             return;
 
-        HandleAction(uid, order, orders);
-        args.Handled = true;
+        if (HandleAction<T>(orders))
+            args.Handled = true;
     }
 
-    private void HandleAction(EntityUid uid, Orders order, MarineOrdersComponent orderComp)
+    private bool HandleAction<T>(Entity<MarineOrdersComponent> orders) where T : IOrderComponent, new()
     {
-        if (!TryComp<TransformComponent>(uid, out var xform))
+        if (!TryComp(orders, out TransformComponent? xform) ||
+            _mobState.IsDead(orders))
         {
-            DebugTools.Assert("Order issued by an entity without TransformComponent");
-            return;
+            return false;
         }
 
-        _actions.SetCooldown(orderComp.FocusActionEntity, orderComp.Cooldown);
-        _actions.SetCooldown(orderComp.MoveActionEntity, orderComp.Cooldown);
-        _actions.SetCooldown(orderComp.HoldActionEntity, orderComp.Cooldown);
+        var level = Math.Max(1, CompOrNull<SkillsComponent>(orders)?.Leadership ?? 1);
+        var duration = orders.Comp.Duration * (level + 1);
+
+        _actions.SetCooldown(orders.Comp.FocusActionEntity, orders.Comp.Cooldown);
+        _actions.SetCooldown(orders.Comp.MoveActionEntity, orders.Comp.Cooldown);
+        _actions.SetCooldown(orders.Comp.HoldActionEntity, orders.Comp.Cooldown);
 
         _receivers.Clear();
-
-        _entityLookup.GetEntitiesInRange(xform.Coordinates, orderComp.OrderRange, _receivers);
+        _entityLookup.GetEntitiesInRange(xform.Coordinates, orders.Comp.OrderRange, _receivers);
 
         foreach (var receiver in _receivers)
         {
-            AddOrder(receiver, order, orderComp);
+            if (_mobState.IsDead(receiver))
+                continue;
+
+            AddOrder<T>(receiver, level, duration);
         }
+
+        return true;
     }
 
     /// <summary>
     /// Adds an order component to an entity. If the order already exists then the multiplier and duration is overriden.
     /// </summary>
-    private void AddOrder(EntityUid uid, Orders order, MarineOrdersComponent orderComp)
+    private void AddOrder<T>(Entity<MarineComponent> receiver, int multiplier, TimeSpan duration) where T : IOrderComponent, new()
     {
-        switch (order)
-        {
-            case Orders.Focus:
-                var focusComp = EnsureComp<FocusOrderComponent>(uid);
-                focusComp.AssignMultiplier(orderComp.Multiplier);
-                focusComp.Duration = _timing.CurTime + orderComp.Duration;
-                break;
-            case Orders.Hold:
-                var holdComp = EnsureComp<HoldOrderComponent>(uid);
-                holdComp.AssignMultiplier(orderComp.Multiplier);
-                holdComp.Duration = _timing.CurTime + orderComp.Duration;
-                break;
-            case Orders.Move:
-                var moveComp = EnsureComp<MoveOrderComponent>(uid);
-                moveComp.AssignMultiplier(orderComp.Multiplier);
-                moveComp.Duration = _timing.CurTime + orderComp.Duration;
-                _movementSpeed.RefreshMovementSpeedModifiers(uid);
-                break;
-            default:
-                DebugTools.Assert("Invalid Order");
-                break;
-        }
+        var time = _timing.CurTime;
+        var comp = EnsureComp<T>(receiver);
+
+        comp.Received.Add((multiplier, time + duration));
+        comp.Received.Sort((a, b) => a.CompareTo(b));
+
+        _movementSpeed.RefreshMovementSpeedModifiers(receiver);
     }
 
-    private void OnComponentGetState<T>(EntityUid uid, T comp, ref ComponentGetStateAttemptEvent args)
+    private void OnComponentGetState<T>(Entity<T> ent, ref ComponentGetStateAttemptEvent args) where T : IComponent?
     {
         // It's null on replays apparently
         if (args.Player is null)
             return;
 
-        args.Cancelled = !HasComp<MarineComponent>(args.Player.AttachedEntity);
+        if (!HasComp<MarineComponent>(args.Player.AttachedEntity))
+            args.Cancelled = true;
     }
 
     public override void Update(float frameTime)
@@ -160,16 +168,22 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         RemoveExpired<HoldOrderComponent>();
     }
 
-    private void RemoveExpired<T>() where T: IComponent, IOrderComponent
+    private void RemoveExpired<T>() where T : IComponent, IOrderComponent
     {
         var query = EntityQueryEnumerator<T>();
+        var time = _timing.CurTime;
 
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (_timing.CurTime > comp.Duration)
+            for (var i = comp.Received.Count - 1; i >= 0; i--)
             {
-                RemCompDeferred<T>(uid);
+                var received = comp.Received[i];
+                if (received.ExpiresAt < time)
+                    comp.Received.RemoveAt(i);
             }
+
+            if (comp.Received.Count == 0)
+                RemCompDeferred<T>(uid);
         }
     }
 }

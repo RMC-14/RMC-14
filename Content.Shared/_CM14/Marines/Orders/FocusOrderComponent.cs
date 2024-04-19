@@ -1,6 +1,5 @@
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Utility;
 using static Robust.Shared.Utility.SpriteSpecifier;
 
@@ -10,6 +9,9 @@ namespace Content.Shared._CM14.Marines.Orders;
 public sealed partial class FocusOrderComponent : Component, IOrderComponent
 {
     public override bool SessionSpecific => true;
+
+    [DataField, AutoNetworkedField]
+    public List<(FixedPoint2 Multiplier, TimeSpan ExpiresAt)> Received { get; set; } = new();
 
     [DataField, AutoNetworkedField]
     public SpriteSpecifier Icon = new Rsi(new ResPath("/Textures/_CM14/Interface/marine_orders.rsi"), "focus");
@@ -22,13 +24,4 @@ public sealed partial class FocusOrderComponent : Component, IOrderComponent
     // TODO CM14 Make this do something when/if weapons ever get range.
     [DataField, AutoNetworkedField]
     public FixedPoint2 RangeModifier = 1.1;
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
-    public TimeSpan Duration { get; set; }
-
-    public void AssignMultiplier(FixedPoint2 multiplier)
-    {
-        AccuracyModifier *= multiplier;
-        RangeModifier *= multiplier;
-    }
 }

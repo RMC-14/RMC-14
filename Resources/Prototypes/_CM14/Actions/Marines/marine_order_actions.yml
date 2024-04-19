@@ -1,7 +1,8 @@
 - type: entity
-  id: ActionMarineFocus
   parent: ActionMarineBase
+  id: ActionMarineFocus
   name: Focus!
+  description: Increases gun accuracy for nearby marines
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -11,9 +12,10 @@
     event: !type:FocusActionEvent
 
 - type: entity
-  id: ActionMarineHold
   parent: ActionMarineBase
+  id: ActionMarineHold
   name: Hold!
+  description: Increases damage resistance for nearby marines
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -26,6 +28,7 @@
   id: ActionMarineMove
   parent: ActionMarineBase
   name: Move!
+  description: Increases speed for nearby marines
   components:
   - type: InstantAction
     itemIconStyle: NoItem
