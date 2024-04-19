@@ -69,3 +69,4 @@
       type: HumanoidMarkingModifierBoundUserInterface
     - key: enum.CMSurgeryUIKey.Key
       type: CMSurgeryBui
+  - type: Huggable

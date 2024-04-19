@@ -1,5 +1,7 @@
 ﻿using Content.Shared._CM14.Xenos.Leap;
+using Content.Shared.DoAfter;
 using Content.Shared.Eye.Blinding.Systems;
+using Content.Shared.Interaction;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -17,6 +19,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly BlindableSystem _blindable = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
@@ -24,7 +27,12 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<HuggableComponent, InteractHandEvent>(OnHuggableInteractHand);
+        SubscribeLocalEvent<HuggableComponent, InteractedNoHandEvent>(OnHuggableInteractNoHand);
+
         SubscribeLocalEvent<XenoHuggerComponent, XenoLeapHitEvent>(OnHuggerLeapHit);
+        SubscribeLocalEvent<XenoHuggerComponent, AfterInteractEvent>(OnHuggerAfterInteract);
+        SubscribeLocalEvent<XenoHuggerComponent, AttachHuggerDoAfterEvent>(OnHuggerAttachDoAfter);
 
         SubscribeLocalEvent<HuggerSpentComponent, MapInitEvent>(OnHuggerSpentMapInit);
         SubscribeLocalEvent<HuggerSpentComponent, UpdateMobStateEvent>(OnHuggerSpentUpdateMobState);
@@ -38,25 +46,45 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         SubscribeLocalEvent<VictimBurstComponent, UpdateMobStateEvent>(OnVictimUpdateMobState);
     }
 
+    private void OnHuggableInteractHand(Entity<HuggableComponent> ent, ref InteractHandEvent args)
+    {
+        if (TryComp(args.User, out XenoHuggerComponent? hugger) &&
+            StartHug((args.User, hugger), args.Target, args.User))
+        {
+            args.Handled = true;
+        }
+    }
+
+    private void OnHuggableInteractNoHand(Entity<HuggableComponent> ent, ref InteractedNoHandEvent args)
+    {
+        if (TryComp(args.User, out XenoHuggerComponent? hugger) &&
+            StartHug((args.User, hugger), args.Target, args.User))
+        {
+            args.Handled = true;
+        }
+    }
+
     private void OnHuggerLeapHit(Entity<XenoHuggerComponent> hugger, ref XenoLeapHitEvent args)
     {
-        if (HasComp<HuggerSpentComponent>(hugger) ||
-            EnsureComp<VictimHuggedComponent>(args.Hit, out var victim))
-        {
+        Hug(hugger, args.Hit);
+    }
+
+    private void OnHuggerAfterInteract(Entity<XenoHuggerComponent> ent, ref AfterInteractEvent args)
+    {
+        if (args.Target == null)
             return;
-        }
 
-        victim.RecoverAt = _timing.CurTime + hugger.Comp.KnockdownTime;
+        if (StartHug(ent, args.Target.Value, ent))
+            args.Handled = true;
+    }
 
-        var container = _container.EnsureContainer<ContainerSlot>(args.Hit, victim.ContainerId);
-        _container.Insert(hugger.Owner, container);
+    private void OnHuggerAttachDoAfter(Entity<XenoHuggerComponent> ent, ref AttachHuggerDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled || args.Target == null)
+            return;
 
-        _blindable.UpdateIsBlind(args.Hit.Owner);
-        _appearance.SetData(hugger, victim.HuggedLayer, true);
-
-        EnsureComp<HuggerSpentComponent>(hugger);
-
-        HuggerLeapHit(hugger);
+        if (Hug(ent, args.Target.Value))
+            args.Handled = true;
     }
 
     protected virtual void HuggerLeapHit(Entity<XenoHuggerComponent> hugger)
@@ -111,6 +139,59 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
     private void OnVictimUpdateMobState(Entity<VictimBurstComponent> burst, ref UpdateMobStateEvent args)
     {
         args.State = MobState.Dead;
+    }
+
+    private bool StartHug(Entity<XenoHuggerComponent> hugger, EntityUid victim, EntityUid user)
+    {
+        if (!CanHug(hugger, victim))
+            return false;
+
+        var ev = new AttachHuggerDoAfterEvent();
+        var doAfter = new DoAfterArgs(EntityManager, user, hugger.Comp.ManualAttachDelay, ev, hugger, victim)
+        {
+            BreakOnMove = true
+        };
+        _doAfter.TryStartDoAfter(doAfter);
+
+        return true;
+    }
+
+    private bool CanHug(Entity<XenoHuggerComponent> hugger, EntityUid victim)
+    {
+        if (!HasComp<HuggableComponent>(victim) ||
+            HasComp<HuggerSpentComponent>(hugger) ||
+            HasComp<VictimHuggedComponent>(victim))
+        {
+            return false;
+        }
+
+        if (TryComp(victim, out StandingStateComponent? standing) &&
+            !_standing.IsDown(victim, standing))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool Hug(Entity<XenoHuggerComponent> hugger, EntityUid victim)
+    {
+        if (!CanHug(hugger, victim))
+            return false;
+
+        var victimComp = EnsureComp<VictimHuggedComponent>(victim);
+        victimComp.RecoverAt = _timing.CurTime + hugger.Comp.KnockdownTime;
+
+        var container = _container.EnsureContainer<ContainerSlot>(victim, victimComp.ContainerId);
+        _container.Insert(hugger.Owner, container);
+
+        _blindable.UpdateIsBlind(victim);
+        _appearance.SetData(hugger, victimComp.HuggedLayer, true);
+
+        EnsureComp<HuggerSpentComponent>(hugger);
+
+        HuggerLeapHit(hugger);
+        return true;
     }
 
     public void RefreshIncubationMultipliers(Entity<VictimHuggedComponent?> ent)
