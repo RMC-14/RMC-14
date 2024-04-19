@@ -50,6 +50,7 @@
       smartgun: 1
       surgery: 1
       vehicles: 1
+    - type: MarineOrders
 
 - type: startingGear
   id: CommandingOfficerGear

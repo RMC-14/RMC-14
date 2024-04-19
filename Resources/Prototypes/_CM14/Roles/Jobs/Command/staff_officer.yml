@@ -34,6 +34,7 @@
       police: 1
       powerLoader: 1
       vehicles: 1
+    - type: MarineOrders
 
 - type: startingGear
   id: StaffOfficerGear

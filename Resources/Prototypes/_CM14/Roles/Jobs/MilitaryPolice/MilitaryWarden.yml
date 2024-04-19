@@ -29,6 +29,7 @@
       medical: 1
       overwatch: 1
       police: 2
+    - type: MarineOrders
 
 - type: startingGear
   id: MilitaryWardenGear

@@ -27,6 +27,7 @@
       meleeWeapons: 1
       overwatch: 1
       research: 1
+    - type: MarineOrders
 
 - type: startingGear
   id: IntelOfficerGear

@@ -27,6 +27,7 @@
       pilot: 2
       powerLoader: 2
       surgery: 1
+    - type: MarineOrders
 
 - type: startingGear
   id: PilotOfficerGear

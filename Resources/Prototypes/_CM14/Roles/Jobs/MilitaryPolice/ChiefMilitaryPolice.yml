@@ -36,6 +36,7 @@
       meleeWeapons: 1
       overwatch: 1
       police: 2
+    - type: MarineOrders
 
 - type: startingGear #todo cm14
   id: ChiefMPGear
