@@ -408,5 +408,12 @@
   id: 56
   time: '2024-04-19T02:27:27.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1244
+- author: Whisper
+  changes:
+  - message: Xenos can wideswing with spacebar.
+    type: Add
+  id: 57
+  time: '2024-04-19T02:52:50.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1241
 Name: CM
 Order: -1
