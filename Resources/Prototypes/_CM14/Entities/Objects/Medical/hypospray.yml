@@ -17,6 +17,7 @@
     emptySpriteName: hypospray
     changeColor: true
   - type: Item
+    size: Small
     sprite: _CM14/Objects/Medical/hypospray.rsi
   - type: Hypospray
     injectSound: /Audio/_CM14/Medical/hypospray.ogg

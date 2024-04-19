@@ -15,6 +15,7 @@
         - ReagentId: Vitamin
           Quantity: 5
   - type: Item
+    size: Small
     sprite: _CM14/Objects/Consumable/Food/prepared.rsi
 
 - type: entity

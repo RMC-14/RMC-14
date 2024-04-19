@@ -2,9 +2,9 @@ using System.Collections.Frozen;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._CM14.Inventory;
+using Content.Shared._CM14.Storage;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Containers.ItemSlots;
-using Content.Shared.Coordinates;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.Components;
@@ -49,6 +49,7 @@ public abstract class SharedStorageSystem : EntitySystem
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
     [Dependency] private   readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] protected readonly UseDelaySystem UseDelay = default!;
+    [Dependency] protected readonly CMStorageSystem _cmStorage = default!;
 
     private EntityQuery<ItemComponent> _itemQuery;
     private EntityQuery<StackComponent> _stackQuery;
@@ -752,14 +753,16 @@ public abstract class SharedStorageSystem : EntitySystem
         }
 
         var maxSize = GetMaxItemSize((uid, storageComp));
-        if (ItemSystem.GetSizePrototype(item.Size) > maxSize)
+        if (ItemSystem.GetSizePrototype(item.Size) > maxSize
+            && !_cmStorage.IgnoreItemSize((uid, storageComp), insertEnt))
         {
             reason = "comp-storage-too-big";
             return false;
         }
 
         if (TryComp<StorageComponent>(insertEnt, out var insertStorage)
-            && GetMaxItemSize((insertEnt, insertStorage)) >= maxSize)
+            && GetMaxItemSize((insertEnt, insertStorage)) >= maxSize
+            && !_cmStorage.IgnoreItemSize((uid, storageComp), insertEnt))
         {
             reason = "comp-storage-too-big";
             return false;

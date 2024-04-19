@@ -3,11 +3,12 @@
   abstract: true
   parent: BaseItem
   id: CMEncryptionKey
-  name: Standard Encryption Key
+  name: standard encryption key
   description: An encryption key for a radio headset.
   components:
   - type: EncryptionKey
   - type: Item
+    size: Tiny
     sprite: _CM14/Objects/Devices/encryption_keys.rsi
   - type: Sprite
     sprite: _CM14/Objects/Devices/encryption_keys.rsi

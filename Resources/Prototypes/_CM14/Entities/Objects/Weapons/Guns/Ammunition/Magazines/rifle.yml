@@ -5,12 +5,13 @@
   components:
   - type: Tag
     tags:
-      - CMMagazineRifleM41A
+    - CMMagazineRifle
+    - CMMagazineRifleM41A
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
       tags:
-        - CMCartridgeRifle10x24mm
+      - CMCartridgeRifle10x24mm
     proto: CMCartridgeRifle10x24mm
     capacity: 40
   - type: Sprite
@@ -33,6 +34,7 @@
   components:
   - type: Tag
     tags:
+    - CMMagazineRifle
     - CMMagazineRifleM41A
   - type: BallisticAmmoProvider
     mayTransfer: True
@@ -61,12 +63,13 @@
   components:
   - type: Tag
     tags:
-      - CMMagazineRifleM41AE2
+    - CMMagazineRifle
+    - CMMagazineRifleM41AE2
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
       tags:
-        - CMCartridgeRifle10x24mm
+      - CMCartridgeRifle10x24mm
     proto: CMCartridgeRifle10x24mm
     capacity: 300
   - type: Sprite
@@ -89,12 +92,13 @@
   components:
   - type: Tag
     tags:
-      - CMMagazineRifleM4RA
+    - CMMagazineRifle
+    - CMMagazineRifleM4RA
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
       tags:
-        - CMCartridgeRifle10x24mm
+      - CMCartridgeRifle10x24mm
     proto: CMCartridgeRifle10x24mm
     capacity: 25
   - type: Sprite
@@ -119,3 +123,15 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+
+- type: Tag
+  id: CMMagazineRifle
+
+- type: Tag
+  id: CMMagazineRifleM41A
+
+- type: Tag
+  id: CMMagazineRifleM41AE2
+
+- type: Tag
+  id: CMMagazineRifleM4RA

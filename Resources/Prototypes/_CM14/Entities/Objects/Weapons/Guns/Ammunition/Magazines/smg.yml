@@ -5,12 +5,13 @@
   components:
   - type: Tag
     tags:
-      - CMMagazineCaselessM39
+    - CMMagazineSmg
+    - CMMagazineCaselessM39
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
       tags:
-        - CMCartridge10x20mm
+      - CMCartridge10x20mm
     proto: CMCartridge10x20mm
     capacity: 48
   - type: Sprite
@@ -40,3 +41,9 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+
+- type: Tag
+  id: CMMagazineSmg
+
+- type: Tag
+  id: CMMagazineCaselessM39

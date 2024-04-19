@@ -25,7 +25,10 @@
       visible: false
   - type: Storage
     grid:
-    - 0,0,3,0
+    - 0,0,3,1
+    whitelist:
+      tags:
+      - Cigarette
   - type: StorageFill
     contents:
     - id: Cigarette

@@ -11,24 +11,6 @@
   id: CMCartridgeRifle10x24mm
 
 - type: Tag
-  id: CMMagazineCaselessM39
-
-- type: Tag
-  id: CMMagazinePistolM4A3
-
-- type: Tag
-  id: CMMagazineRifleM41A
-
-- type: Tag
-  id: CMMagazineRifleM41AE2
-
-- type: Tag
-  id: CMMagazineRifleM4RA
-
-- type: Tag
-  id: CMSpeedLoaderM44
-
-- type: Tag
   id: CMMortarShell
 
 - type: Tag
@@ -57,12 +39,6 @@
 
 - type: Tag
   id: Pouch
-
-- type: Tag
-  id: CMShellShotgun
-
-- type: Tag
-  id: CMMagazinePistol88m4AP
 
 - type: Tag
   id: LauncherCompatibleGrenade
