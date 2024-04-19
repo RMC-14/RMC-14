@@ -415,5 +415,24 @@
   id: 57
   time: '2024-04-19T02:52:50.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1241
+- author: DrSmugleaf
+  changes:
+  - message: Added hold and move order actions to all marine roles with leadership
+      skill.
+    type: Add
+  - message: Fixed marine orders applying to dead marines.
+    type: Fix
+  - message: Fixed marine order effects not being multiplied by the giver's leadership
+      skill.
+    type: Fix
+  - message: Fixed marine order effects being inconsistent when multiple of the same
+      type are given at once.
+    type: Fix
+  - message: Made the cooldown, range, and duration of marine orders consistent with
+      CM13.
+    type: Tweak
+  id: 58
+  time: '2024-04-19T06:22:01.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1252
 Name: CM
 Order: -1
