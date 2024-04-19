@@ -1,3 +1,4 @@
+using Content.Shared._CM14.Marines.Skills;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -13,13 +14,13 @@ public sealed partial class MarineOrdersComponent : Component
     public override bool SessionSpecific => true;
 
     /// <summary>
-    /// The default duration of an order.
+    ///     The default duration of an order multiplied by <see cref="SkillsComponent.Leadership"/>.
     /// </summary>
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
     public TimeSpan Duration = TimeSpan.FromSeconds(10);
 
     /// <summary>
-    /// Delay between orders
+    ///     Cooldown given to all order actions on this entity when any are pressed.
     /// </summary>
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
     public TimeSpan Cooldown = TimeSpan.FromSeconds(80);
