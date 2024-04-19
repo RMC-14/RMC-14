@@ -1,6 +1,6 @@
 ﻿- type: entity
-  id: ActionXenoEvolve60
   parent: ActionXenoBase
+  id: ActionXenoEvolve60
   name: Evolve # TODO CM14 description
   components:
   - type: InstantAction
@@ -11,3 +11,19 @@
     event: !type:XenoOpenEvolutionsActionEvent
   - type: XenoEvolveAction
     cooldown: 60
+
+- type: entity
+  parent: ActionXenoEvolve60
+  id: ActionXenoEvolve300
+  name: Evolve
+  components:
+  - type: XenoEvolveAction
+    cooldown: 300
+
+- type: entity
+  parent: ActionXenoEvolve60
+  id: ActionXenoEvolve540
+  name: Evolve
+  components:
+  - type: XenoEvolveAction
+    cooldown: 540

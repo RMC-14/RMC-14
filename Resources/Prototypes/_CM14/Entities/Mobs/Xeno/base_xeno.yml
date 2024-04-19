@@ -1,8 +1,34 @@
-﻿- type: entity
+﻿# Xeno AI
+- type: htnCompound
+  id: CMXenoCompound
+  branches:
+  - tasks:
+    - !type:HTNCompoundTask
+      task: CMXenoMeleeCombatCompound
+  - tasks:
+    - !type:HTNCompoundTask
+      task: IdleCompound
+
+# Selects a target in melee and tries to attack it.
+- type: htnCompound
+  id: CMXenoMeleeCombatCompound
+  branches:
+  # Melee combat (unarmed or otherwise)
+  - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:UtilityOperator
+        proto: NearbyMeleeTargets
+    - !type:HTNCompoundTask
+      task: MeleeAttackTargetCompound
+
+- type: entity
   id: CMXenoBase
   abstract: true
   save: false
   components:
+  - type: Tag
+    tags:
+    - ShoesRequiredStepTriggerImmune
   - type: Damageable
     damageContainer: Biological
   - type: Destructible
@@ -81,9 +107,6 @@
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Generic_mob_burning
-  - type: NpcFactionMember
-    factions:
-    - Xeno
   - type: Sprite
     noRot: true
     drawdepth: Mobs
@@ -164,6 +187,14 @@
   - type: DropHeldOnIncapacitate
   - type: NightVision
   - type: KnockdownOnPullAttemptImmune
+  - type: GhostTakeoverAvailable
+  - type: GhostRole
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: cm-xeno-name
+    description: cm-xeno-description
+    rules: cm-xeno-rules
 
 - type: entity
   abstract: true
@@ -216,12 +247,25 @@
   abstract: true
 
 - type: entity
+  id: CMXenoAI
+  parent: CMXenoBase
+  abstract: true
+  components:
+  - type: HTN
+    rootTask:
+      task: CMXenoCompound
+  - type: NpcFactionMember
+    factions:
+    - Xeno
+
+- type: entity
   id: CMXenoDeveloped
   parent:
   - CMXenoBase
   - CMXenoPrying
   - CMXenoPuller
   - CMXenoMelee
+  - CMXenoAI
   abstract: true
   components:
   - type: DamageOnHighSpeedImpact
@@ -233,6 +277,7 @@
   - type: Tag
     tags:
     - DoorBumpOpener
+    - ShoesRequiredStepTriggerImmune
   - type: Hands
   - type: GiveHands
     hands:

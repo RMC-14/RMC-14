@@ -52,6 +52,10 @@
         amount: 7
   - type: Sprite
     state: pillbox
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - PillCanister
 
 - type: entity
   name: box of syringes

@@ -8,6 +8,8 @@
     sprite: _CM14/Objects/Clothing/Mask/gas.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Mask/gas.rsi
+  - type: Item
+    size: Small
 
 - type: entity
   parent: ClothingMaskPullableBase

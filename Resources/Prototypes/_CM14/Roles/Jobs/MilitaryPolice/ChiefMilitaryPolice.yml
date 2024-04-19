@@ -41,7 +41,7 @@
   id: ChiefMPGear
   equipment:
     jumpsuit: CMJumpsuitWO
-    back: CMBackpackSecurity
+    back: CMSatchelSecurity
     shoes: CMBootsBlackFilled
     head: CMHeadBeretWO
     eyes: ClothingEyesGlassesSecurity
@@ -50,7 +50,6 @@
     outerClothing: CMArmorM3WO
     ears: CMHeadsetCMP
     belt: CMBeltSecurityFilled
-  satchel: CMSatchelSecurity
 
 - type: entity
   id: SpawnPointChiefMP

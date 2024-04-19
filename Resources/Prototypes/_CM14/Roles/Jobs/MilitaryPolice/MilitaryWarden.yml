@@ -34,7 +34,7 @@
   id: MilitaryWardenGear
   equipment:
     jumpsuit: CMJumpsuitWarden
-    back: CMBackpackSecurity
+    back: CMSatchelSecurity
     shoes: CMBootsBlackFilled
     head: CMHeadCapWarden
     eyes: ClothingEyesGlassesSecurity
@@ -43,7 +43,6 @@
     outerClothing: CMArmorM3Warden
     ears: CMHeadsetCMP
     belt: CMBeltSecurityFilled
-  satchel: CMSatchelSecurity
 
 - type: entity
   id: SpawnPointMilitaryWarden

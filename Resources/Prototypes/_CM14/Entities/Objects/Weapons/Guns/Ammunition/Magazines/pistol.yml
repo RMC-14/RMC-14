@@ -16,12 +16,13 @@
   components:
   - type: Tag
     tags:
-      - CMMagazinePistolM4A3
+    - CMMagazinePistol
+    - CMMagazinePistolM4A3
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
       tags:
-        - CMCartridgePistol9mm
+      - CMCartridgePistol9mm
     proto: CMCartridgePistol9mm
     capacity: 9
   - type: Sprite
@@ -39,6 +40,7 @@
   components:
   - type: Tag
     tags:
+    - CMMagazinePistol
     - CMMagazinePistol88m4AP
   - type: BallisticAmmoProvider
     mayTransfer: True
@@ -56,3 +58,12 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: base_ap
+
+- type: Tag
+  id: CMMagazinePistol
+
+- type: Tag
+  id: CMMagazinePistolM4A3
+
+- type: Tag
+  id: CMMagazinePistol88m4AP

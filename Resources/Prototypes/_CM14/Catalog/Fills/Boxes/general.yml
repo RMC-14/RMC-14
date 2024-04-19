@@ -10,9 +10,15 @@
   - type: Item
     sprite: _CM14/Objects/Storage/boxes.rsi
     size: Large
-    shape: 
+    shape:
     - 0,0,6,1
   - type: Storage
     maxItemSize: Small
     grid:
     - 0,0,6,1
+  - type: Tag
+    tags:
+    - CMBoxStorage
+
+- type: Tag
+  id: CMBoxStorage

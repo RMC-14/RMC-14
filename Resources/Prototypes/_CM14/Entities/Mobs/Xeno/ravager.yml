@@ -27,7 +27,6 @@
     #    - ActionXenoCharge
     #    - ActionXenoEmpower
     #    - ActionXenoScissorCut
-    # explosionResistance: 80
     tier: 3
   - type: XenoDevour
   - type: XenoPlasma

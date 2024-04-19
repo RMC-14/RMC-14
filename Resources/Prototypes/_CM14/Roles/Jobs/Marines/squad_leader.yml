@@ -37,14 +37,13 @@
   id: SquadLeaderGear
   equipment:
     jumpsuit: CMJumpsuitMarineRTO
-    back: CMBackpackMarine
+    back: CMSatchelMarine
     shoes: CMBootsBlackFilled
     head: CMArmorHelmetM11
     outerClothing: ArmorMarineM3
     gloves: CMHandsBlack
     id: DogtagSquadLeader
     ears: CMHeadsetAlphaLeader
-  satchel: CMSatchelMarine
 
 - type: entity
   id: SpawnPointSquadLeader

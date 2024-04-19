@@ -17,6 +17,9 @@
     layerStates:
     - rods
     - rods_5
+  - type: Tag
+    tags:
+    - RodMetal1
 #  - type: Construction # TODO CM14 Rod crafting
 #    graph: MetalRod
 #    node: MetalRod
@@ -25,11 +28,8 @@
   parent: CMPartRodMetal
   id: CMPartRodMetal10
   name: metal rod
-  suffix: 10
+  suffix: "10"
   components:
-  - type: Tag
-    tags:
-    - RodMetal1
   - type: Sprite
     state: rods
   - type: Stack
@@ -41,9 +41,6 @@
   name: metal rod
   suffix: Single
   components:
-  - type: Tag
-    tags:
-    - RodMetal1
   - type: Sprite
     state: rods
   - type: Stack
@@ -80,11 +77,8 @@
   parent: CMPartRodPlasteel
   id: CMPartRodPlasteel10
   name: plasteel rod
-  suffix: 10
+  suffix: "10"
   components:
-  - type: Tag
-    tags:
-    - RodMetal1
   - type: Sprite
     state: rods_plasteel
   - type: Stack
@@ -96,9 +90,6 @@
   name: plasteel rod
   suffix: Single
   components:
-  - type: Tag
-    tags:
-    - RodMetal1
   - type: Sprite
     state: rods_plasteel
   - type: Stack

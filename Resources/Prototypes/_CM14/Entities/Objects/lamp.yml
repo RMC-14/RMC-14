@@ -13,4 +13,5 @@
       visible: false
       map: [ "light" ]
   - type: Item
+    size: Large
     sprite: _CM14/Objects/lamp.rsi

@@ -30,7 +30,7 @@
   id: HospitalCorpsmanGear
   equipment:
     jumpsuit: CMJumpsuitMarineMedic
-    back: CMBackpackMarineMedic
+    back: CMSatchelMarineMedic
     shoes: CMBootsBlackFilled
     gloves: CMHandsBlack
     eyes: ClothingEyesHudMedical
@@ -39,7 +39,6 @@
     id: DogtagHospitalCorpsman
     ears: CMHeadsetAlphaMedic
     belt: CMBeltMedicBagFilled
-  satchel: CMSatchelMarineMedic
 
 - type: entity
   id: SpawnPointHospitalCorpsman

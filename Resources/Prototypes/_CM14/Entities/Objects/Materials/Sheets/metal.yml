@@ -9,6 +9,7 @@
     - type: Sprite
       sprite: _CM14/Objects/Materials/Sheets/metal.rsi
     - type: Item
+      size: Normal
       sprite: _CM14/Objects/Materials/Sheets/metal.rsi
 
 - type: entity
@@ -34,7 +35,7 @@
 - type: entity
   parent: CMSheetSteel
   id: CMSheetSteel10
-  suffix: 10
+  suffix: "10"
   components:
     - type: Sprite
       state: steel2
@@ -99,7 +100,7 @@
   parent: CMSheetPlasteel
   id: CMSheetPlasteel10
   name: plasteel
-  suffix: 10
+  suffix: "10"
   components:
     - type: Sprite
       state: plasteel_2
