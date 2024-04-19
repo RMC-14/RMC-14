@@ -401,5 +401,12 @@
   id: 55
   time: '2024-04-18T23:23:39.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1247
+- author: DrSmugleaf
+  changes:
+  - message: Changed all item and storage sizes to be consistent with CM13.
+    type: Tweak
+  id: 56
+  time: '2024-04-19T02:27:27.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1244
 Name: CM
 Order: -1
