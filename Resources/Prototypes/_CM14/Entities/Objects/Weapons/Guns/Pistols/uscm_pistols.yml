@@ -7,9 +7,9 @@
   - type: Sprite
     layers:
     - state: base
-      map: ["enum.GunVisualLayers.Base"]
+      map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
+      map: [ "enum.GunVisualLayers.Mag" ]
   - type: Item
     size: Normal
   - type: Tag
@@ -31,7 +31,7 @@
     soundGunshot:
       collection: CMM4A3Shoot
   - type: GunWieldBonus
-    minAngle: 0 
+    minAngle: 0
     maxAngle: -50
     angleIncrease: -50
     angleDecay: 0
@@ -69,38 +69,38 @@
   name: M4A3 service pistol
   description: An M4A3 Service Pistol, once the standard issue sidearm of the Colonial Marines but has recently been replaced with the 88 Mod 4 combat pistol.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Weapons/Guns/Pistols/m4a3.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Weapons/Guns/Pistols/m4a3.rsi
-    - type: ItemSlots
-      slots:
-        gun_magazine:
-          name: Magazine
-          insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
-          ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
-          priority: 2
-          whitelist:
-            tags:
-            - CMMagazinePistolM4A3
-        gun_chamber:
-          name: Chamber
-          priority: 1
-          whitelist:
-            tags:
-            - CMCartridgePistol9mm
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Pistols/m4a3.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Weapons/Guns/Pistols/m4a3.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazinePistolM4A3
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+          - CMCartridgePistol9mm
 
 - type: entity
   parent: CMWeaponPistolBase
   id: CMWeaponPistol88m4
-  name: 88 mod 4 combat pistol # TODO CM14 sounds
+  name: 88 Mod 4 combat pistol # TODO CM14 sounds
   description: Standard issue USCM firearm. Also found in the hands of Weyland-Yutani PMC teams. Fires 9mm armor shredding rounds and is capable of 3-round burst.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Pistols/88m4.rsi
     layers:
     - state: base
-      map: ["enum.GunVisualLayers.Base"]
+      map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
     sprite: _CM14/Objects/Weapons/Guns/Pistols/88m4.rsi
   - type: Gun

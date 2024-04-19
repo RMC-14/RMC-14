@@ -1,4 +1,5 @@
 ﻿using Content.Shared.Item;
+using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
 
@@ -32,6 +33,7 @@ public sealed class CMStorageSystem : EntitySystem
                     continue;
                 }
 
+                // TODO CM14 this might create more space than is necessary to fit the item if there is some free space left in the storage before expanding it
                 var last = grid[^1];
                 var expanded = new Box2i(last.Left, last.Bottom, last.Right + shape.Right + 1, last.Top);
 
@@ -45,5 +47,11 @@ public sealed class CMStorageSystem : EntitySystem
             if (modified)
                 Dirty(storage);
         }
+    }
+
+    public bool IgnoreItemSize(Entity<StorageComponent> storage, EntityUid item)
+    {
+        return TryComp(storage, out IgnoreContentsSizeComponent? ignore) &&
+               ignore.Items.IsValid(item, EntityManager);
     }
 }

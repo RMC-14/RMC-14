@@ -8,6 +8,7 @@
     sprite: _CM14/Objects/Consumable/Food/mre.rsi
     state: closed
   - type: Item
+    size: Small
     sprite: _CM14/Objects/Consumable/Food/bar.rsi
   - type: Storage
     grid:

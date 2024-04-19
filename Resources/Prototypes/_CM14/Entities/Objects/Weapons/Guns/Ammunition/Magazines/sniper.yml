@@ -6,6 +6,7 @@
   components:
   - type: Tag
     tags:
+    - CMMagazineSniper
     - CMMagazineSniperM42A
   - type: BallisticAmmoProvider
     mayTransfer: True
@@ -72,7 +73,8 @@
   description: A magazine of caseless 10x99mm anti-materiel rounds.
   components:
   - type: Tag
-    tags: []
+    tags:
+    - CMMagazineSniper
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -89,6 +91,9 @@
       map: ["enum.GunVisualLayers.Mag"]
     - state: band_e # TODO CM14 band non e
       color: "#000000"
+
+- type: Tag
+  id: CMMagazineSniper
 
 - type: Tag
   id: CMMagazineSniperM42A

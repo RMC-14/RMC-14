@@ -13,6 +13,7 @@
       map: [ "enum.DamageStateVisualLayers.Base" ]
     - state: screwdriver-screwybits
   - type: Item
+    size: Tiny
     sprite: _CM14/Objects/Tools/screwdriver.rsi
 
 - type: entity
@@ -30,6 +31,7 @@
     - enum.DamageStateVisualLayers.Base:
         cutters: Rainbow
   - type: Item
+    size: Small
     sprite: _CM14/Objects/Tools/wirecutters.rsi
 
 - type: entity
@@ -40,6 +42,7 @@
     sprite: _CM14/Objects/Tools/wrench.rsi
     state: icon
   - type: Item
+    size: Small
     sprite: _CM14/Objects/Tools/wrench.rsi
 
 - type: entity
@@ -54,6 +57,7 @@
     layers: []
     state: multitool
   - type: Item
+    size: Small
     sprite: _CM14/Objects/Tools/multitool.rsi
 
 - type: entity
@@ -64,6 +68,7 @@
     sprite: _CM14/Objects/Tools/crowbar.rsi
     state: icon
   - type: Item
+    size: Small
     sprite: _CM14/Objects/Tools/crowbar.rsi
 
 - type: entity
@@ -88,4 +93,5 @@
       sprite: _CM14/Objects/Tools/hand_labeler.rsi
       state: hand_labeler
     - type: Item
+      size: Normal
       sprite: _CM14/Objects/Tools/hand_labeler.rsi

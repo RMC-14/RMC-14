@@ -12,6 +12,7 @@
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Tag
     tags:
+    - CMMagazineRevolver
     - CMSpeedLoaderM44
   - type: SpeedLoader
   - type: BallisticAmmoProvider
@@ -29,3 +30,9 @@
     steps: 2
     zeroVisible: false
   - type: Appearance
+
+- type: Tag
+  id: CMMagazineRevolver
+
+- type: Tag
+  id: CMSpeedLoaderM44

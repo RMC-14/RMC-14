@@ -19,5 +19,5 @@
     state: "syringe"
   - type: Item
     storedRotation: 90
-    size: Small
+    size: Tiny
     sprite: _CM14/Objects/Medical/syringe.rsi

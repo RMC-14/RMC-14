@@ -10,6 +10,7 @@
     sprite: _CM14/Objects/Misc/paper.rsi
     state: pen
   - type: Item
+    size: Tiny
     sprite: _CM14/Objects/Misc/paper.rsi
 
 - type: entity

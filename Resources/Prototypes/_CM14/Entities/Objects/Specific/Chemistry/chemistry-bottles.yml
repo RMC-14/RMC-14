@@ -3,6 +3,7 @@
   id: CMBottleEmpty
   components:
   - type: Item
+    size: Small
     sprite: _CM14/Objects/Chemistry/bottles.rsi
   - type: Sprite
     sprite: _CM14/Objects/Chemistry/bottles.rsi

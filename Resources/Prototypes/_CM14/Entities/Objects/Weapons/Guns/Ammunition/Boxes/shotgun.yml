@@ -22,7 +22,7 @@
     layers:
     - state: buckshot_e
     - state: buckshot
-      map: ["enum.CMAmmoBoxLayers.Ammo"]
+      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
 
 - type: entity
   parent: CMBoxShotgunBase
@@ -36,7 +36,7 @@
     layers:
     - state: slugs_e
     - state: slugs
-      map: ["enum.CMAmmoBoxLayers.Ammo"]
+      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
 
 - type: entity
   parent: CMBoxShotgunBase
@@ -50,7 +50,7 @@
     layers:
     - state: incendiary_e
     - state: incendiary
-      map: ["enum.CMAmmoBoxLayers.Ammo"]
+      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
 
 - type: entity
   parent: CMBoxShotgunBase
@@ -64,7 +64,7 @@
     layers:
     - state: beanbag_e
     - state: beanbag
-      map: ["enum.CMAmmoBoxLayers.Ammo"]
+      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
 
 - type: entity
   parent: CMBoxShotgunBase
@@ -78,7 +78,7 @@
     layers:
     - state: flechette_e
     - state: flechette
-      map: ["enum.CMAmmoBoxLayers.Ammo"]
+      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
 
 - type: entity
   parent: CMBoxShotgunBase
@@ -92,4 +92,4 @@
     layers:
     - state: incendiarybuck_e
     - state: incendiarybuck
-      map: ["enum.CMAmmoBoxLayers.Ammo"]
+      map: [ "enum.CMAmmoBoxLayers.Ammo" ]

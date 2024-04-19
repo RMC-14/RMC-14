@@ -28,14 +28,16 @@
     slots:
     - back
   - type: Item
-    size: Huge
+    size: Large
   - type: Storage
-    maxItemSize: Huge
+    maxItemSize: Normal
     grid:
-    - 0,0,9,1
+    - 0,0,20,1
     blacklist:
       tags:
       - Pouch
+      - CMFirstAidKit
+#      - EngineerKit
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
