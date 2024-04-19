@@ -108,6 +108,7 @@ public sealed class CMStorageSystem : EntitySystem
         if (!TryComp(uid, out StorageComponent? storage))
             return;
 
+        args.Handled = true;
         _storage.OpenStorageUI(uid.Value, entity.Value, storage, args.Silent, false);
     }
 
