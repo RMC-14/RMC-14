@@ -25,8 +25,6 @@ public sealed class OrdersOverlay : Overlay
 
     private readonly ShaderInstance _shader;
 
-    private EntityQuery<TransformComponent> _xformQuery;
-
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
     public OrdersOverlay()
@@ -45,10 +43,8 @@ public sealed class OrdersOverlay : Overlay
             return;
 
         var handle = args.WorldHandle;
-
         var eyeRot = args.Viewport.Eye?.Rotation ?? default;
 
-        _xformQuery = _entity.GetEntityQuery<TransformComponent>();
         var scaleMatrix = Matrix3.CreateScale(new Vector2(1, 1));
         var rotationMatrix = Matrix3.CreateRotation(-eyeRot);
 
@@ -87,7 +83,7 @@ public sealed class OrdersOverlay : Overlay
 
         var bounds = sprite.Bounds;
 
-        var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
+        var worldPos = _transform.GetWorldPosition(xform);
 
         if (!bounds.Translated(worldPos).Intersects(args.WorldAABB))
             return;

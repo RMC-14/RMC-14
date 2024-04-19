@@ -34,6 +34,7 @@
       overwatch: 1
       police: 1
       powerLoader: 2
+    - type: MarineOrders
 
 - type: startingGear
   id: CMChiefEngineerGear

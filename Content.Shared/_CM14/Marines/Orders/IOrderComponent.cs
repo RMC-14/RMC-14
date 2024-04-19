@@ -1,7 +1,8 @@
+﻿using Content.Shared.FixedPoint;
+
 namespace Content.Shared._CM14.Marines.Orders;
 
-public interface IOrderComponent
+public partial interface IOrderComponent : IComponent
 {
-    public TimeSpan Duration { get; set; }
+    List<(FixedPoint2 Multiplier, TimeSpan ExpiresAt)> Received { get; }
 }
-

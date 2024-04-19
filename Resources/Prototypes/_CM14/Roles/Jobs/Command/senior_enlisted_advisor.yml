@@ -50,6 +50,7 @@
       research: 1
       surgery: 2
       vehicles: 2
+    - type: MarineOrders
 
 - type: startingGear
   id: SeniorEnlistedAdvisorGear

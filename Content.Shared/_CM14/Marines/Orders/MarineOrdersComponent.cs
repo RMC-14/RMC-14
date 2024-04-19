@@ -1,8 +1,7 @@
-using Content.Shared.FixedPoint;
+using Content.Shared._CM14.Marines.Skills;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared._CM14.Marines.Orders;
 
@@ -12,63 +11,52 @@ namespace Content.Shared._CM14.Marines.Orders;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class MarineOrdersComponent : Component
 {
+    public override bool SessionSpecific => true;
+
     /// <summary>
-    /// The default duration of an order.
+    ///     The default duration of an order multiplied by <see cref="SkillsComponent.Leadership"/>.
     /// </summary>
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
-    public TimeSpan Duration = TimeSpan.FromSeconds(20);
+    public TimeSpan Duration = TimeSpan.FromSeconds(10);
 
-    public TimeSpan Cooldown => Duration + Delay;
+    /// <summary>
+    ///     Cooldown given to all order actions on this entity when any are pressed.
+    /// </summary>
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
+    public TimeSpan Cooldown = TimeSpan.FromSeconds(80);
 
     /// <summary>
     /// The range of the order's effect.
     /// </summary>
     [DataField, AutoNetworkedField]
     [ViewVariables(VVAccess.ReadWrite)]
-    public int OrderRange = 8;
+    public int OrderRange = 7;
 
+    // TODO CM14 implement focus order effects
+    // [DataField, AutoNetworkedField]
+    // public EntProtoId FocusAction = "ActionMarineFocus";
+    //
+    // [DataField, AutoNetworkedField]
+    // public EntityUid? FocusActionEntity;
 
-    /// <summary>
-    /// Delay between orders
-    /// </summary>
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
-    public TimeSpan Delay = TimeSpan.FromMinutes(1);
-
-    /// <summary>
-    /// The intensity of the order.
-    /// Higher is more intense.
-    /// </summary>
     [DataField, AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public FixedPoint2 Multiplier = 1;
+    public EntProtoId HoldAction = "ActionMarineHold";
 
-
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string FocusAction = "ActionMarineFocus";
-
-    [DataField]
-    public EntityUid? FocusActionEntity;
-
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string HoldAction = "ActionMarineHold";
-
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? HoldActionEntity;
 
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string MoveAction = "ActionMarineMove";
+    [DataField, AutoNetworkedField]
+    public EntProtoId MoveAction = "ActionMarineMove";
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? MoveActionEntity;
 
     [DataField, AutoNetworkedField]
-    public List<string> MoveCallouts = new() { "move-order-callout-1", "move-order-callout-2", "move-order-callout-3" };
+    public List<LocId> MoveCallouts = new() { "move-order-callout-1", "move-order-callout-2", "move-order-callout-3" };
 
     [DataField, AutoNetworkedField]
-    public List<string> FocusCallouts = new() { "focus-order-callout-1", "focus-order-callout-2", "focus-order-callout-3" };
+    public List<LocId> FocusCallouts = new() { "focus-order-callout-1", "focus-order-callout-2", "focus-order-callout-3" };
 
     [DataField, AutoNetworkedField]
-    public List<string> HoldCallouts = new() { "hold-order-callout-1", "hold-order-callout-2", "hold-order-callout-3" };
-
-    public override bool SessionSpecific => true;
+    public List<LocId> HoldCallouts = new() { "hold-order-callout-1", "hold-order-callout-2", "hold-order-callout-3" };
 }

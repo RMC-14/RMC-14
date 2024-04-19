@@ -32,6 +32,7 @@
       leadership: 1
       medical: 1
       vehicle: 1
+    - type: MarineOrders
 
 - type: startingGear
   id: SquadLeaderGear
