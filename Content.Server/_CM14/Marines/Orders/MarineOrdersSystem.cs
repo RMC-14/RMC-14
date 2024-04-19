@@ -1,6 +1,7 @@
 using Content.Server.Actions;
 using Content.Server.Chat.Systems;
 using Content.Shared._CM14.Marines.Orders;
+using Robust.Shared.Random;
 
 namespace Content.Server._CM14.Marines.Orders;
 
@@ -8,6 +9,7 @@ public sealed class MarineOrdersSystem : SharedMarineOrdersSystem
 {
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     public override void Initialize()
     {
@@ -16,49 +18,54 @@ public sealed class MarineOrdersSystem : SharedMarineOrdersSystem
         SubscribeLocalEvent<MarineOrdersComponent, ComponentShutdown>(OnOrdersShutdown);
     }
 
-    private void OnOrdersMapInit(EntityUid uid, MarineOrdersComponent comp, MapInitEvent ev)
+    private void OnOrdersMapInit(Entity<MarineOrdersComponent> ent, ref MapInitEvent ev)
     {
+        var comp = ent.Comp;
+
         // All the SetUseDelay calls are required because even tho we set the cooldown on all of them once an order
         // is issued for some reason the order that was pressed uses its delays and does not care about its cooldown
         // being set.
-        _actions.AddAction(uid, ref comp.FocusActionEntity, comp.FocusAction);
-        _actions.SetUseDelay(comp.FocusActionEntity, comp.Cooldown);
-        _actions.AddAction(uid, ref comp.HoldActionEntity, comp.HoldAction);
+        // TODO CM14 implement focus order effects
+        // _actions.AddAction(ent, ref comp.FocusActionEntity, comp.FocusAction);
+        // _actions.SetUseDelay(comp.FocusActionEntity, comp.Cooldown);
+        _actions.AddAction(ent, ref comp.HoldActionEntity, comp.HoldAction);
         _actions.SetUseDelay(comp.HoldActionEntity, comp.Cooldown);
-        _actions.AddAction(uid, ref comp.MoveActionEntity, comp.MoveAction);
+        _actions.AddAction(ent, ref comp.MoveActionEntity, comp.MoveAction);
         _actions.SetUseDelay(comp.MoveActionEntity, comp.Cooldown);
     }
 
-    private void OnOrdersShutdown(EntityUid uid, MarineOrdersComponent comp, ComponentShutdown ev)
+    private void OnOrdersShutdown(Entity<MarineOrdersComponent> ent, ref ComponentShutdown ev)
     {
-        _actions.RemoveAction(uid, comp.FocusActionEntity);
-        _actions.RemoveAction(uid, comp.HoldActionEntity);
-        _actions.RemoveAction(uid, comp.MoveActionEntity);
+        // TODO CM14 implement focus order effects
+        // _actions.RemoveAction(ent, ent.Comp.FocusActionEntity);
+        _actions.RemoveAction(ent, ent.Comp.HoldActionEntity);
+        _actions.RemoveAction(ent, ent.Comp.MoveActionEntity);
     }
 
-    protected override void OnAction(EntityUid uid, MarineOrdersComponent comp, MoveActionEvent ev)
+    protected override void OnAction(Entity<MarineOrdersComponent> ent, ref MoveActionEvent ev)
     {
-        base.OnAction(uid, comp, ev);
-        OnAction(uid, comp.MoveCallouts);
+        base.OnAction(ent, ref ev);
+        OnAction(ent, ent.Comp.MoveCallouts);
     }
 
-    protected override void OnAction(EntityUid uid, MarineOrdersComponent comp, HoldActionEvent ev)
+    protected override void OnAction(Entity<MarineOrdersComponent> ent, ref HoldActionEvent ev)
     {
-        base.OnAction(uid, comp, ev);
-        OnAction(uid, comp.HoldCallouts);
+        base.OnAction(ent, ref ev);
+        OnAction(ent, ent.Comp.HoldCallouts);
     }
 
-    protected override void OnAction(EntityUid uid, MarineOrdersComponent comp, FocusActionEvent ev)
+    protected override void OnAction(Entity<MarineOrdersComponent> ent, ref FocusActionEvent ev)
     {
-        base.OnAction(uid, comp, ev);
-        OnAction(uid, comp.FocusCallouts);
+        base.OnAction(ent, ref ev);
+        OnAction(ent, ent.Comp.FocusCallouts);
     }
 
-    private void OnAction(EntityUid uid, List<string> callouts)
+    private void OnAction(EntityUid uid, List<LocId> callouts)
     {
-        var random = new Random();
-        var callout = random.Next(0, callouts.Count);
+        if (callouts.Count == 0)
+            return;
+
+        var callout = _random.Next(0, callouts.Count);
         _chat.TrySendInGameICMessage(uid, Loc.GetString(callouts[callout]), InGameICChatType.Speak, false);
     }
-
 }

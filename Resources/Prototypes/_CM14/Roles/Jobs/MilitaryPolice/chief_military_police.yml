@@ -1,21 +1,25 @@
 - type: job
-  id: MilitaryWarden
+  id: ChiefMP
   parent: JobBaseCM
-  name: job-name-militarywarden
-  description: job-description-militarywarden
-  playTimeTracker: JobMilitaryWarden
+  name: job-name-chief-mp
+  description: job-description-chief-mp
+  playTimeTracker: JobChiefMP
   requirements:
     - !type:DepartmentTimeRequirement
       department: MilitaryPolice
+      time: 36000 # 10 hours
+    - !type:DepartmentTimeRequirement
+      department: MarineCommand
       time: 18000 # 5 hours
   weight: 5
-  startingGear: MilitaryWardenGear
-  icon: "JobIconMilitaryWarden"
-  joinNotifyCrew: false
-  supervisors: job-supervisors-cm14-cmp
+  startingGear: ChiefMPGear
+  icon: "JobIconChiefMP"
+  requireAdminNotify: true
+  joinNotifyCrew: true
+  supervisors: job-supervisors-cm14-co
   canBeAntag: false
   accessGroups:
-  - CMWarden
+  - CMP
   special:
   - !type:AddComponentSpecial
     components:
@@ -24,35 +28,39 @@
       cqc: 2
       endurance: 2
       engineer: 2
-      fireman: 1
-      leadership: 1
+      fireman: 2
+      intel: 1
+      jtac: 3
+      leadership: 2
       medical: 1
+      meleeWeapons: 1
       overwatch: 1
       police: 2
+    - type: MarineOrders
 
-- type: startingGear
-  id: MilitaryWardenGear
+- type: startingGear #todo cm14
+  id: ChiefMPGear
   equipment:
-    jumpsuit: CMJumpsuitWarden
+    jumpsuit: CMJumpsuitWO
     back: CMSatchelSecurity
     shoes: CMBootsBlackFilled
-    head: CMHeadCapWarden
+    head: CMHeadBeretWO
     eyes: ClothingEyesGlassesSecurity
     gloves: CMHandsBlack
-    id: MilitaryWardenIDCard
-    outerClothing: CMArmorM3Warden
+    id: ChiefMPIDCard
+    outerClothing: CMArmorM3WO
     ears: CMHeadsetCMP
     belt: CMBeltSecurityFilled
 
 - type: entity
-  id: SpawnPointMilitaryWarden
+  id: SpawnPointChiefMP
   parent: CMSpawnPointJobBase
-  name: military warden spawn point
+  name: chief mp spawn point
   components:
   - type: SpawnPoint
-    job_id: MilitaryWarden
+    job_id: ChiefMP
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
-    - state: warden
+    - state: chief_military_police
