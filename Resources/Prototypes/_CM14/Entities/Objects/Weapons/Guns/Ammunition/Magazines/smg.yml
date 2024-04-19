@@ -1,12 +1,12 @@
 - type: entity
-  parent: BaseMagazineCaselessRifle
-  id: CMMagazineCaselessM39
+  parent: BaseMagazineRifle
+  id: CMMagazineM39
   name: "M39 magazine (10x20mm)"
   components:
   - type: Tag
     tags:
     - CMMagazineSmg
-    - CMMagazineCaselessM39
+    - CMMagazineM39
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -28,8 +28,8 @@
   - type: Appearance
 
 - type: entity
-  parent: CMMagazineCaselessM39
-  id: CMMagazineExtendedCaselessM39
+  parent: CMMagazineM39
+  id: CMMagazineExtendedM39
   name: "M39 extended magazine (10x20mm)"
   components:
   - type: BallisticAmmoProvider
@@ -46,4 +46,4 @@
   id: CMMagazineSmg
 
 - type: Tag
-  id: CMMagazineCaselessM39
+  id: CMMagazineM39

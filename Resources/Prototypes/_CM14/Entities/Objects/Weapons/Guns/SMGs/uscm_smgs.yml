@@ -58,7 +58,7 @@
         priority: 2
         whitelist:
           tags:
-          - CMMagazineCaselessM39
+          - CMMagazineM39
       gun_chamber:
         name: Chamber
         priority: 1
