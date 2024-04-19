@@ -1,4 +1,3 @@
-using System.Text;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
@@ -14,10 +13,10 @@ namespace Content.Shared.Weapons.Melee;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class MeleeWeaponComponent : Component
 {
-
     /// <summary>
     /// Defines if the primary attack should be a wide swing
     /// </summary>
+    // TODO CM14 move this out and reset the file to upstream once source gen is fixed
     [DataField]
     public bool WidePrimary;
 
