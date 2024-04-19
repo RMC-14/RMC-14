@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent: BaseMagazineRifle
   id: CMMagazineSniperM42A
-  name: "M42A marksman magazine (10x28mm caseless)"
+  name: "M42A marksman magazine (10x28mm)"
   description: A magazine of sniper rifle ammo. An aimed shot with it will deal significant damage.
   components:
   - type: Tag
@@ -70,7 +70,7 @@
   parent: CMMagazineSniperM42A
   id: CMMagazineSniperM42AAntiMateriel
   name: "XM43E1 marksman magazine (10x99mm)"
-  description: A magazine of caseless 10x99mm anti-materiel rounds.
+  description: A magazine of 10x99mm anti-materiel rounds.
   components:
   - type: Tag
     tags:
