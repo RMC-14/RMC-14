@@ -1,6 +1,5 @@
 using Content.Shared.Actions;
 using Content.Shared.Damage;
-using Content.Shared.FixedPoint;
 using Content.Shared.Movement.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Timing;
@@ -40,7 +39,6 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         SubscribeLocalEvent<MoveOrderComponent, ComponentShutdown>(OnMoveShutdown);
     }
 
-
     private void OnDamageModify(EntityUid uid, HoldOrderComponent comp, DamageModifyEvent args)
     {
         var damage = args.Damage.DamageDict;
@@ -52,6 +50,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
                 damage[type] = amount * multiplier;
         }
     }
+
     private void OnRefreshMovement(EntityUid uid, MoveOrderComponent comp, RefreshMovementSpeedModifiersEvent args)
     {
         var speed = (1 * comp.MoveSpeedModifier).Float();
@@ -71,13 +70,11 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
     protected virtual void OnAction(EntityUid uid, MarineOrdersComponent orders, FocusActionEvent args)
     {
         OnAction(uid, Orders.Focus, orders, args);
-
     }
 
     protected virtual void OnAction(EntityUid uid, MarineOrdersComponent orders, HoldActionEvent args)
     {
         OnAction(uid, Orders.Hold, orders, args);
-
     }
 
     protected virtual void OnAction(EntityUid uid, MarineOrdersComponent orders, MoveActionEvent args)
@@ -91,13 +88,11 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
             return;
 
         HandleAction(uid, order, orders);
-
         args.Handled = true;
     }
 
     private void HandleAction(EntityUid uid, Orders order, MarineOrdersComponent orderComp)
     {
-
         if (!TryComp<TransformComponent>(uid, out var xform))
         {
             DebugTools.Assert("Order issued by an entity without TransformComponent");
