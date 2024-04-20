@@ -1,4 +1,5 @@
-﻿using Content.Shared._CM14.Marines;
+﻿using System.Numerics;
+using Content.Shared._CM14.Marines;
 using Content.Shared.ActionBlocker;
 using Content.Shared.DoAfter;
 using Content.Shared.Eye.Blinding.Systems;
@@ -10,10 +11,12 @@ using Content.Shared.Popups;
 using Content.Shared.Pulling.Events;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
-using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Events;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Xenos.Leap;
@@ -23,10 +26,10 @@ public sealed class SharedXenoLeapSystem : EntitySystem
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly BlindableSystem _blindable = default!;
+    [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
@@ -36,19 +39,21 @@ public sealed class SharedXenoLeapSystem : EntitySystem
 
     private EntityQuery<MarineComponent> _marineQuery;
     private EntityQuery<PhysicsComponent> _physicsQuery;
-    private EntityQuery<ThrownItemComponent> _thrownItemQuery;
 
     public override void Initialize()
     {
         _marineQuery = GetEntityQuery<MarineComponent>();
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
-        _thrownItemQuery = GetEntityQuery<ThrownItemComponent>();
 
         SubscribeLocalEvent<XenoLeapComponent, XenoLeapActionEvent>(OnXenoLeapAction);
         SubscribeLocalEvent<XenoLeapComponent, XenoLeapDoAfterEvent>(OnXenoLeapDoAfter);
-        SubscribeLocalEvent<XenoLeapComponent, ThrowDoHitEvent>(OnXenoLeapDoHit);
-        SubscribeLocalEvent<XenoLeapComponent, StartPullAttemptEvent>(OnXenoLeapStartPullAttempt);
-        SubscribeLocalEvent<XenoLeapComponent, PullAttemptEvent>(OnXenoLeapPullAttempt);
+
+        SubscribeLocalEvent<XenoLeapingComponent, StartCollideEvent>(OnXenoLeapingDoHit);
+        SubscribeLocalEvent<XenoLeapingComponent, ComponentRemove>(OnXenoLeapingRemove);
+        SubscribeLocalEvent<XenoLeapingComponent, EntityUnpausedEvent>(OnXenoLeapingUnpaused);
+        SubscribeLocalEvent<XenoLeapingComponent, PhysicsSleepEvent>(OnXenoLeapingPhysicsSleep);
+        SubscribeLocalEvent<XenoLeapingComponent, StartPullAttemptEvent>(OnXenoLeapingStartPullAttempt);
+        SubscribeLocalEvent<XenoLeapingComponent, PullAttemptEvent>(OnXenoLeapingPullAttempt);
     }
 
     private void OnXenoLeapAction(Entity<XenoLeapComponent> xeno, ref XenoLeapActionEvent args)
@@ -77,42 +82,53 @@ public sealed class SharedXenoLeapSystem : EntitySystem
             return;
         }
 
+        if (!_physicsQuery.TryGetComponent(xeno, out var physics))
+            return;
+
+        if (EnsureComp<XenoLeapingComponent>(xeno, out var leaping))
+            return;
+
         args.Handled = true;
+
+        leaping.KnockdownTime = xeno.Comp.KnockdownTime;
+        leaping.HitSound = xeno.Comp.HitSound;
 
         if (TryComp(xeno, out PullerComponent? puller) && TryComp(puller.Pulling, out PullableComponent? pullable))
             _pulling.TryStopPull(puller.Pulling.Value, pullable, xeno);
 
         var origin = _transform.GetMapCoordinates(xeno);
         var target = GetCoordinates(args.Coordinates).ToMap(EntityManager, _transform);
-        var gomen = target.Position - origin.Position;
-        var length = gomen.Length();
+        var direction = target.Position - origin.Position;
 
-        if (length > xeno.Comp.Range)
-        {
-            gomen *= xeno.Comp.Range.Float() / length;
-        }
+        if (direction == Vector2.Zero)
+            return;
 
-        _throwing.TryThrow(xeno, gomen, 30, user: xeno, pushbackRatio: 0);
+        var length = direction.Length();
+        var distance = Math.Clamp(length, 0.1f, xeno.Comp.Range.Float());
+        direction *= distance / length;
+        var impulse = direction.Normalized() * xeno.Comp.Strength * physics.Mass;
+        leaping.LeapEndTime = _timing.CurTime + TimeSpan.FromSeconds(direction.Length() / xeno.Comp.Strength);
+
+        _physics.ApplyLinearImpulse(xeno, impulse, body: physics);
+        _physics.SetBodyStatus(xeno, physics, BodyStatus.InAir);
     }
 
-    private void OnXenoLeapDoHit(Entity<XenoLeapComponent> xeno, ref ThrowDoHitEvent args)
+    private void OnXenoLeapingDoHit(Entity<XenoLeapingComponent> xeno, ref StartCollideEvent args)
     {
-        var marineId = args.Target;
+        var marineId = args.OtherEntity;
 
-        if (HasComp<LeapIncapacitatedComponent>(marineId) ||
-            EnsureComp<LeapIncapacitatedComponent>(marineId, out var victim))
-        {
+        if (EnsureComp<LeapIncapacitatedComponent>(marineId, out var victim))
             return;
-        }
 
         if (!_marineQuery.TryGetComponent(marineId, out var marine))
             return;
 
-        if (_physicsQuery.TryGetComponent(xeno, out var physics) &&
-            _thrownItemQuery.TryGetComponent(xeno, out var thrown))
+        if (_physicsQuery.TryGetComponent(xeno, out var physics))
         {
-            _thrownItem.LandComponent(xeno, thrown, physics, true);
-            _thrownItem.StopThrow(xeno, thrown);
+            _physics.SetBodyStatus(xeno, physics, BodyStatus.OnGround);
+
+            if (physics.Awake)
+                _broadphase.RegenerateContacts(xeno, physics);
         }
 
         victim.RecoverAt = _timing.CurTime + xeno.Comp.KnockdownTime;
@@ -126,26 +142,58 @@ public sealed class SharedXenoLeapSystem : EntitySystem
         RaiseLocalEvent(xeno, ref ev);
     }
 
-    private void OnXenoLeapStartPullAttempt(Entity<XenoLeapComponent> ent, ref StartPullAttemptEvent args)
+    private void OnXenoLeapingRemove(Entity<XenoLeapingComponent> ent, ref ComponentRemove args)
     {
-        if (_thrownItemQuery.HasComp(ent))
-            args.Cancel();
+        StopLeap(ent);
     }
 
-    private void OnXenoLeapPullAttempt(Entity<XenoLeapComponent> ent, ref PullAttemptEvent args)
+    private void OnXenoLeapingUnpaused(Entity<XenoLeapingComponent> ent, ref EntityUnpausedEvent args)
     {
-        if (_thrownItemQuery.HasComp(ent))
-            args.Cancelled = true;
+        ent.Comp.LeapEndTime += args.PausedTime;
+    }
+
+    private void OnXenoLeapingPhysicsSleep(Entity<XenoLeapingComponent> ent, ref PhysicsSleepEvent args)
+    {
+        StopLeap(ent);
+    }
+
+    private void OnXenoLeapingStartPullAttempt(Entity<XenoLeapingComponent> ent, ref StartPullAttemptEvent args)
+    {
+        args.Cancel();
+    }
+
+    private void OnXenoLeapingPullAttempt(Entity<XenoLeapingComponent> ent, ref PullAttemptEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void StopLeap(Entity<XenoLeapingComponent> leaping)
+    {
+        if (_physicsQuery.TryGetComponent(leaping, out var physics))
+        {
+            _physics.SetLinearVelocity(leaping, Vector2.Zero, body: physics);
+            _physics.SetBodyStatus(leaping, physics, BodyStatus.OnGround);
+        }
     }
 
     public override void Update(float frameTime)
     {
+        var time = _timing.CurTime;
+        var leaping = EntityQueryEnumerator<XenoLeapingComponent>();
+        while (leaping.MoveNext(out var uid, out var comp))
+        {
+            if (time < comp.LeapEndTime)
+                continue;
+
+            StopLeap((uid, comp));
+            RemCompDeferred<XenoLeapingComponent>(uid);
+        }
+
         if (_net.IsClient)
             return;
 
-        var time = _timing.CurTime;
-        var query = EntityQueryEnumerator<LeapIncapacitatedComponent>();
-        while (query.MoveNext(out var uid, out var victim))
+        var incapacitated = EntityQueryEnumerator<LeapIncapacitatedComponent>();
+        while (incapacitated.MoveNext(out var uid, out var victim))
         {
             if (victim.RecoverAt > time)
                 continue;
