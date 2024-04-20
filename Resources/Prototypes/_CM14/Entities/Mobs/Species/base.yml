@@ -70,3 +70,7 @@
     - key: enum.CMSurgeryUIKey.Key
       type: CMSurgeryBui
   - type: Huggable
+  - type: Tackleable
+  - type: Tackle
+    stun: 10
+

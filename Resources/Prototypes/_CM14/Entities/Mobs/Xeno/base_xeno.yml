@@ -224,6 +224,8 @@
   id: CMXenoMelee
   components:
   - type: CombatMode
+    canDisarm: true
+    disarmFailChance: 0
   - type: MeleeWeapon
     widePrimary: true
     altDisarm: true
@@ -234,6 +236,7 @@
     damage:
       groups:
         Brute: 12
+  - type: Tackle
 
 - type: entity
   abstract: true

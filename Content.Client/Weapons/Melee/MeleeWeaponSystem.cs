@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Client.Gameplay;
+using Content.Shared._CM14.Tackle;
 using Content.Shared.CombatMode;
 using Content.Shared.Effects;
 using Content.Shared.Hands.Components;
@@ -184,6 +185,13 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         }
 
         var target = GetEntity(ev.Target);
+        if (target != null)
+        {
+            var cmDisarmEvent = new CMDisarmEvent(user);
+            RaiseLocalEvent(target.Value, ref cmDisarmEvent);
+            if (cmDisarmEvent.Handled)
+                return true;
+        }
 
         // They need to either have hands...
         if (!HasComp<HandsComponent>(target!.Value))
