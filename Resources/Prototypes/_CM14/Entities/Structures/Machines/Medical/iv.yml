@@ -75,7 +75,6 @@
     solutions:
       pack:
         maxVol: 300
-        canMix: false
         reagents:
         - ReagentId: Blood
           Quantity: 300
