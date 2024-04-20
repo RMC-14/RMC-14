@@ -36,6 +36,10 @@ public sealed class CMMeleeWeaponSystem : EntitySystem
         var grid = _mapManager.TryFindGridAt(mousePos, out var gridUid, out _)
             ? gridUid
             : _mapManager.GetMapEntityId(mousePos.MapId);
+
+        if (grid == EntityUid.Invalid)
+            return;
+
         var coordinates = EntityCoordinates.FromMap(grid, mousePos, _transform, EntityManager);
 
         if (_player.LocalEntity is not { } entity)
