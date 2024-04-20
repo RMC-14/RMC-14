@@ -47,5 +47,7 @@ public sealed class NightVisionOverlay : Overlay
 
             sprite.Render(handle, eyeRot, rotation, position: position);
         }
+
+        handle.SetTransform(Matrix3.Identity);
     }
 }
