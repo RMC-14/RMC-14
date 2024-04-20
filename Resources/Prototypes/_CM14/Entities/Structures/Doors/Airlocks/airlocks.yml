@@ -14,7 +14,7 @@
     - board
   - type: Occluder
   - type: PaintableAirlock
-    department: Marine
+    department: CMMarine
 
 - type: entity
   parent: CMAirlock
@@ -24,7 +24,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Doors/Airlocks/com_door.rsi
   - type: PaintableAirlock
-    department: MarineCommand
+    department: CMCommand
 
 - type: entity
   parent: CMAirlock
@@ -34,7 +34,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Doors/Airlocks/engi_door.rsi
   - type: PaintableAirlock
-    department: MarineEngineering
+    department: CMEngineering
 
 - type: entity
   parent: CMAirlock
@@ -44,7 +44,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Doors/Airlocks/medi_door.rsi
   - type: PaintableAirlock
-    department: MarineMedical
+    department: CMMedical
 
 - type: entity
   parent: CMAirlock
@@ -54,7 +54,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Doors/Airlocks/sec_door.rsi
   - type: PaintableAirlock
-    department: MilitaryPolice
+    department: CMMilitaryPolice
 
 - type: entity
   parent: CMAirlock
@@ -113,7 +113,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Doors/Airlocks/engi_door_glass.rsi
   - type: PaintableAirlock
-    department: MarineEngineering
+    department: CMEngineering
 
 - type: entity
   parent: CMAirlockGlass
@@ -123,7 +123,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Doors/Airlocks/medi_door_glass.rsi
   - type: PaintableAirlock
-    department: MarineMedical
+    department: CMMedical
 
 - type: entity
   parent: CMAirlockGlass
@@ -133,7 +133,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Doors/Airlocks/sec_door_glass.rsi
   - type: PaintableAirlock
-    department: MilitaryPolice
+    department: CMMilitaryPolice
 
 # Prep
 - type: entity

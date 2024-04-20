@@ -8,7 +8,7 @@
   - !type:DepartmentTimeRequirement
     department: CMMedical
     time: 3600 # 1 hours
-  startingGear: CMGearMarineDoctor
+  startingGear: CMGearDoctor
   icon: "CMJobIconDoctor"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-cmo
