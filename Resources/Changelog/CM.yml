@@ -481,5 +481,12 @@
   id: 64
   time: '2024-04-20T08:17:26.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1283
+- author: Whisper
+  changes:
+  - message: Xeno eggs now burn!
+    type: Add
+  id: 65
+  time: '2024-04-20T12:35:53.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1285
 Name: CM
 Order: -1
