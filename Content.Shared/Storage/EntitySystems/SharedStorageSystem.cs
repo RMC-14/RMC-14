@@ -69,8 +69,13 @@ public abstract class SharedStorageSystem : EntitySystem
 
     public bool CheckingCanInsert;
 
+    private List<EntityUid> _entList = new();
+    private HashSet<EntityUid> _entSet = new();
+
     private readonly List<ItemSizePrototype> _sortedSizes = new();
     private FrozenDictionary<string, ItemSizePrototype> _nextSmallest = FrozenDictionary<string, ItemSizePrototype>.Empty;
+
+    protected readonly List<string> CantFillReasons = [];
 
     /// <inheritdoc />
     public override void Initialize()
@@ -109,8 +114,8 @@ public abstract class SharedStorageSystem : EntitySystem
         SubscribeLocalEvent<StorageComponent, GotReclaimedEvent>(OnReclaimed);
 
         CommandBinds.Builder
-            .Bind(ContentKeyFunctions.OpenBackpack, InputCmdHandler.FromDelegate(HandleOpenBackpack))
-            .Bind(ContentKeyFunctions.OpenBelt, InputCmdHandler.FromDelegate(HandleOpenBelt))
+            .Bind(ContentKeyFunctions.OpenBackpack, InputCmdHandler.FromDelegate(HandleOpenBackpack, handle: false))
+            .Bind(ContentKeyFunctions.OpenBelt, InputCmdHandler.FromDelegate(HandleOpenBelt, handle: false))
             .Register<SharedStorageSystem>();
 
         UpdatePrototypeCache();
@@ -274,36 +279,40 @@ public abstract class SharedStorageSystem : EntitySystem
     /// <returns></returns>
     private void AfterInteract(EntityUid uid, StorageComponent storageComp, AfterInteractEvent args)
     {
-        if (args.Handled || !args.CanReach)
+        if (args.Handled || !args.CanReach || !UseDelay.TryResetDelay(uid, checkDelayed: true))
             return;
 
         // Pick up all entities in a radius around the clicked location.
         // The last half of the if is because carpets exist and this is terrible
         if (storageComp.AreaInsert && (args.Target == null || !HasComp<ItemComponent>(args.Target.Value)))
         {
-            var validStorables = new List<EntityUid>();
+            _entList.Clear();
+            _entSet.Clear();
+            _entityLookupSystem.GetEntitiesInRange(args.ClickLocation, storageComp.AreaInsertRadius, _entSet, LookupFlags.Dynamic | LookupFlags.Sundries);
             var delay = 0f;
 
-            foreach (var entity in _entityLookupSystem.GetEntitiesInRange(args.ClickLocation, storageComp.AreaInsertRadius, LookupFlags.Dynamic | LookupFlags.Sundries))
+            foreach (var entity in _entSet)
             {
                 if (entity == args.User
-                    // || !_itemQuery.HasComponent(entity)
-                    || !TryComp<ItemComponent>(entity, out var itemComp) // Need comp to get item size to get weight
+                    || !_itemQuery.TryGetComponent(entity, out var itemComp) // Need comp to get item size to get weight
                     || !_prototype.TryIndex(itemComp.Size, out var itemSize)
-                    || !CanInsert(uid, entity, out _, storageComp)
+                    || !CanInsert(uid, entity, out _, storageComp, item: itemComp)
                     || !_interactionSystem.InRangeUnobstructed(args.User, entity))
                 {
                     continue;
                 }
 
-                validStorables.Add(entity);
+                _entList.Add(entity);
                 delay += itemSize.Weight * AreaInsertDelayPerItem;
+
+                if (_entList.Count >= StorageComponent.AreaPickupLimit)
+                    break;
             }
 
             //If there's only one then let's be generous
-            if (validStorables.Count > 1)
+            if (_entList.Count > 1)
             {
-                var doAfterArgs = new DoAfterArgs(EntityManager, args.User, delay, new AreaPickupDoAfterEvent(GetNetEntityList(validStorables)), uid, target: uid)
+                var doAfterArgs = new DoAfterArgs(EntityManager, args.User, delay, new AreaPickupDoAfterEvent(GetNetEntityList(_entList)), uid, target: uid)
                 {
                     BreakOnDamage = true,
                     BreakOnMove = true,
@@ -325,7 +334,7 @@ public abstract class SharedStorageSystem : EntitySystem
 
             if (_containerSystem.IsEntityInContainer(target)
                 || target == args.User
-                || !HasComp<ItemComponent>(target))
+                || !_itemQuery.HasComponent(target))
             {
                 return;
             }
@@ -343,10 +352,10 @@ public abstract class SharedStorageSystem : EntitySystem
                 args.Handled = true;
                 if (PlayerInsertEntityInWorld((uid, storageComp), args.User, target))
                 {
-                    RaiseNetworkEvent(new AnimateInsertingEntitiesEvent(GetNetEntity(uid),
+                    EntityManager.RaiseSharedEvent(new AnimateInsertingEntitiesEvent(GetNetEntity(uid),
                         new List<NetEntity> { GetNetEntity(target) },
                         new List<NetCoordinates> { GetNetCoordinates(position) },
-                        new List<Angle> { transformOwner.LocalRotation }));
+                        new List<Angle> { transformOwner.LocalRotation }), args.User);
                 }
             }
         }
@@ -361,20 +370,27 @@ public abstract class SharedStorageSystem : EntitySystem
         var successfullyInserted = new List<EntityUid>();
         var successfullyInsertedPositions = new List<EntityCoordinates>();
         var successfullyInsertedAngles = new List<Angle>();
-        _xformQuery.TryGetComponent(uid, out var xform);
 
-        foreach (var netEntity in args.Entities)
+        if (!_xformQuery.TryGetComponent(uid, out var xform))
         {
-            var entity = GetEntity(netEntity);
+            return;
+        }
+
+        var entCount = Math.Min(StorageComponent.AreaPickupLimit, args.Entities.Count);
+
+        for (var i = 0; i < entCount; i++)
+        {
+            var entity = GetEntity(args.Entities[i]);
 
             // Check again, situation may have changed for some entities, but we'll still pick up any that are valid
             if (_containerSystem.IsEntityInContainer(entity)
                 || entity == args.Args.User
                 || !_itemQuery.HasComponent(entity))
+            {
                 continue;
+            }
 
-            if (xform == null ||
-                !_xformQuery.TryGetComponent(entity, out var targetXform) ||
+            if (!_xformQuery.TryGetComponent(entity, out var targetXform) ||
                 targetXform.MapID != xform.MapID)
             {
                 continue;
@@ -399,12 +415,12 @@ public abstract class SharedStorageSystem : EntitySystem
         // If we picked up at least one thing, play a sound and do a cool animation!
         if (successfullyInserted.Count > 0)
         {
-            Audio.PlayPvs(component.StorageInsertSound, uid);
-            RaiseNetworkEvent(new AnimateInsertingEntitiesEvent(
+            Audio.PlayPredicted(component.StorageInsertSound, uid, args.User);
+            EntityManager.RaiseSharedEvent(new AnimateInsertingEntitiesEvent(
                 GetNetEntity(uid),
                 GetNetEntityList(successfullyInserted),
                 GetNetCoordinatesList(successfullyInsertedPositions),
-                successfullyInsertedAngles));
+                successfullyInsertedAngles), args.User);
         }
 
         args.Handled = true;
@@ -659,8 +675,15 @@ public abstract class SharedStorageSystem : EntitySystem
         if (CheckingCanInsert)
             return;
 
-        if (!CanInsert(uid, args.EntityUid, out _, component, ignoreStacks: true))
+        if (!CanInsert(uid, args.EntityUid, out var reason, component, ignoreStacks: true))
+        {
+#if DEBUG
+            if (reason != null)
+                CantFillReasons.Add(reason);
+#endif
+
             args.Cancel();
+        }
     }
 
     public void UpdateAppearance(Entity<StorageComponent?, AppearanceComponent?> entity)
@@ -1307,7 +1330,7 @@ public abstract class SharedStorageSystem : EntitySystem
         if (session is not { } playerSession)
             return;
 
-        if (playerSession.AttachedEntity is not { Valid: true } playerEnt || !Exists(playerEnt))
+        if (playerSession.AttachedEntity is not {Valid: true} playerEnt || !Exists(playerEnt))
             return;
 
         if (!_inventory.TryGetSlotEntity(playerEnt, slot, out var storageEnt))
@@ -1317,6 +1340,13 @@ public abstract class SharedStorageSystem : EntitySystem
             return;
 
         OpenStorageUI(storageEnt.Value, playerEnt);
+    }
+
+    protected void ClearCantFillReasons()
+    {
+#if DEBUG
+        CantFillReasons.Clear();
+#endif
     }
 
     /// <summary>

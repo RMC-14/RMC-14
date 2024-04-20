@@ -17,7 +17,7 @@ public partial class InventorySystem : EntitySystem
     private void InitializeSlots()
     {
         SubscribeLocalEvent<InventoryComponent, ComponentInit>(OnInit);
-        SubscribeAllEvent<OpenSlotStorageNetworkMessage>(OnOpenSlotStorage);
+        SubscribeNetworkEvent<OpenSlotStorageNetworkMessage>(OnOpenSlotStorage);
 
         _vvm.GetTypeHandler<InventoryComponent>()
             .AddHandler(HandleViewVariablesSlots, ListViewVariablesSlots);
@@ -50,13 +50,12 @@ public partial class InventorySystem : EntitySystem
         if (args.SenderSession.AttachedEntity is not { Valid: true } uid)
             return;
 
-        if (TryGetSlotEntity(uid, ev.Slot, out var entityUid))
+        if (TryGetSlotEntity(uid, ev.Slot, out var entityUid) && TryComp<StorageComponent>(entityUid, out var storageComponent))
         {
-            if (TryComp<StorageComponent>(entityUid, out var storageComponent))
-                _storageSystem.OpenStorageUI(entityUid.Value, uid, storageComponent);
-            else if (TryComp<WebbingClothingComponent>(entityUid, out var webbingClothing))
-                _webbing.OpenStorage((entityUid.Value, webbingClothing), uid);
+            _storageSystem.OpenStorageUI(entityUid.Value, uid, storageComponent);
         }
+        else if (TryComp<WebbingClothingComponent>(entityUid, out var webbingClothing))
+            _webbing.OpenStorage((entityUid.Value, webbingClothing), uid);
     }
 
     public bool TryGetSlotContainer(EntityUid uid, string slot, [NotNullWhen(true)] out ContainerSlot? containerSlot, [NotNullWhen(true)] out SlotDefinition? slotDefinition,
