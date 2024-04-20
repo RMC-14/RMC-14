@@ -1,21 +1,21 @@
 ﻿- type: job
-  id: StaffOfficer
-  parent: JobBaseCM
-  name: job-name-staff-officer
-  description: job-description-Staff-Officer
-  playTimeTracker: JobStaffOfficer
+  parent: CMJobBase
+  id: CMStaffOfficer
+  name: cm-job-name-staff-officer
+  description: cm-job-description-staff-officer
+  playTimeTracker: CMJobStaffOfficer
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 54000 # 15 hours
   - !type:DepartmentTimeRequirement
-    department: MilitaryPolice
+    department: CMMilitaryPolice
     time: 3600 # 1 hours
   weight: 5
-  startingGear: StaffOfficerGear
-  icon: "JobIconStaffOfficer"
+  startingGear: CMGearStaffOfficer
+  icon: "CMJobIconStaffOfficer"
   requireAdminNotify: true
   joinNotifyCrew: true
-  supervisors: job-supervisors-cm14-co
+  supervisors: cm-job-supervisors-co
   canBeAntag: false
   accessGroups:
   - MarineMain
@@ -37,24 +37,27 @@
     - type: MarineOrders
 
 - type: startingGear
-  id: StaffOfficerGear
+  id: CMGearStaffOfficer
   equipment:
     jumpsuit: CMJumpsuitBO
     back: CMSatchelMarine
     shoes: CMShoesDress
     head: CMHeadCap
-    id: StaffOfficerIDCard
+    id: CMIDCardStaffOfficer
     ears: CMHeadsetLeader
 
 - type: entity
-  id: SpawnPointStaffOfficer
   parent: CMSpawnPointJobBase
+  id: CMSpawnPointStaffOfficer
   name: staff officer spawn point
   components:
   - type: SpawnPoint
-    job_id: StaffOfficer
+    job_id: CMStaffOfficer
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
     - state: staff_officer
+      
+- type: playTimeTracker
+  id: CMJobStaffOfficer

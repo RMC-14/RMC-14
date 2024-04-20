@@ -1,13 +1,13 @@
 ﻿- type: job
-  id: Correspondent
-  parent: JobBaseCM
-  name: job-name-correspondent
-  description: job-description-correspondent
-  playTimeTracker: JobCorrespondent
-  startingGear: CorrespondentGear
-  icon: "JobIconCorrespondent"
+  parent: CMJobBase
+  id: CMCorrespondent
+  name: cm-job-name-correspondent
+  description: cm-job-description-correspondent
+  playTimeTracker: CMJobCorrespondent
+  startingGear: CMGearCorrespondent
+  icon: "CMJobIconCorrespondent"
   joinNotifyCrew: false
-  supervisors: job-supervisors-cm14-co
+  supervisors: cm-job-supervisors-co
   canBeAntag: true
   accessGroups:
   - CMCorrespondent
@@ -17,24 +17,27 @@
     - type: Skills
 
 - type: startingGear
-  id: CorrespondentGear
+  id: CMGearCorrespondent
   equipment:
     jumpsuit: CMJumpsuitCorrespondent
     outerClothing: CMCoatCorrespondent
     back: CMSatchel
     shoes: CMBootsBrown
-    id: CorrespondentIDCard
+    id: CMIDCardCorrespondent
     ears: CMHeadsetReporter
 
 - type: entity
-  id: CMSpawnPointCorrespondent
   parent: CMSpawnPointJobBase
+  id: CMSpawnPointCorrespondent
   name: correspondent spawn point
   components:
   - type: SpawnPoint
-    job_id: Correspondent
+    job_id: CMCorrespondent
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
     - state: combat_correspondent
+      
+- type: playTimeTracker
+  id: CMJobCorrespondent

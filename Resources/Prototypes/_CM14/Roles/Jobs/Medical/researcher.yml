@@ -1,17 +1,17 @@
 ﻿- type: job
-  id: Researcher
-  parent: JobBaseCM
-  name: job-name-researcher
-  description: job-description-researcher
-  playTimeTracker: JobResearcher
+  parent: CMJobBase
+  id: CMResearcher
+  name: cm-job-name-researcher
+  description: cm-job-description-researcher
+  playTimeTracker: CMJobResearcher
   requirements:
   - !type:DepartmentTimeRequirement
-    department: Medical
+    department: CMMedical
     time: 18000 # 5 hours
-  startingGear: ResearcherGear
-  icon: "JobIconResearcher"
+  startingGear: CMGearResearcher
+  icon: "CMJobIconResearcher"
   joinNotifyCrew: false
-  supervisors: job-supervisors-cm14-cmo
+  supervisors: cm-job-supervisors-cmo
   canBeAntag: true
   accessGroups:
   - Researcher
@@ -25,24 +25,27 @@
       surgery: 2
 
 - type: startingGear
-  id: ResearcherGear
+  id: CMGearResearcher
   equipment:
     jumpsuit: CMJumpsuitResearch
     back: CMSatchelMedical
     gloves: CMHandsLatex
     shoes: CMShoesDress
-    id: ResearcherIDCard
+    id: CMIDCardResearcher
     ears: CMHeadsetResearcher
 
 - type: entity
-  id: CMSpawnPointResearcher
   parent: CMSpawnPointJobBase
+  id: CMSpawnPointResearcher
   name: researcher spawn point
   components:
   - type: SpawnPoint
-    job_id: Researcher
+    job_id: CMResearcher
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
     - state: researcher
+
+- type: playTimeTracker
+  id: CMJobResearcher

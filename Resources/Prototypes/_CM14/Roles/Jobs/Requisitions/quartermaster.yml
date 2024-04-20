@@ -1,19 +1,19 @@
 - type: job
+  parent: CMJobBase
   id: CMQuartermaster
-  parent: JobBaseCM
-  name: job-name-cm-quartermaster
-  description: job-description-cm-quartermaster
-  playTimeTracker: JobCMQuartermaster
+  name: cm-job-name-quartermaster
+  description: cm-job-description-quartermaster
+  playTimeTracker: CMJobQuartermaster
   requirements:
     - !type:DepartmentTimeRequirement
-      department: Requisitions
+      department: CMRequisitions
       time: 36000 # 10 hours
   weight: 5
-  startingGear: CMQuartermasterGear
-  icon: "JobIconCMQuartermaster"
+  startingGear: CMGearQuartermaster
+  icon: "CMJobIconQuartermaster"
   requireAdminNotify: true
   joinNotifyCrew: true
-  supervisors: job-supervisors-cm14-aso
+  supervisors: cm-job-supervisors-aso
   canBeAntag: false
   accessGroups:
   - CMQM
@@ -32,19 +32,19 @@
     - type: MarineOrders
 
 - type: startingGear
-  id: CMQuartermasterGear
+  id: CMGearQuartermaster
   equipment:
     jumpsuit: CMJumpsuitQM
     back: CMSatchelEngineer
     shoes: CMBootsBrown
     head: CMHeadCapCargo
     gloves: CMHandsBrown
-    id: CMQuartermasterIDCard
+    id: CMIDCardQuartermaster
     ears: CMHeadsetQM
 
 - type: entity
-  id: CMSpawnPointQuartermaster
   parent: CMSpawnPointJobBase
+  id: CMSpawnPointQuartermaster
   name: quartermaster spawn point
   components:
   - type: SpawnPoint
@@ -54,3 +54,6 @@
     - sprite: Markers/jobs.rsi
       state: green
     - state: quartermaster
+
+- type: playTimeTracker
+  id: CMJobQuartermaster

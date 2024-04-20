@@ -1,31 +1,31 @@
 ﻿- type: entity
   parent: CMIDCardSilver
-  id: ASOIDCard
+  id: CMIDCardASO
   name: auxiliary support officer ID card
   components:
   - type: PresetIdCard
-    job: AuxiliarySupportOfficer
+    job: CMAuxiliarySupportOfficer
 
 - type: entity
   parent: CMIDCardBase
-  id: PilotOfficerIDCard
+  id: CMIDCardPilotOfficer
   name: pilot officer's ID card
   components:
   - type: PresetIdCard
-    job: PilotOfficer
+    job: CMPilotOfficer
 
 - type: entity
   parent: CMIDCardBase
-  id: DCCIDCard
+  id: CMIDCardDCC
   name: dropship crew chief's ID card
   components:
   - type: PresetIdCard
-    job: DropshipCrewChief
+    job: CMDropshipCrewChief
 
 - type: entity
   parent: CMIDCardBase
-  id: IntelOfficerIDCard
+  id: CMIDCardIntelOfficer
   name: intel officer's ID card
   components:
   - type: PresetIdCard
-    job: IntelOfficer
+    job: CMIntelOfficer

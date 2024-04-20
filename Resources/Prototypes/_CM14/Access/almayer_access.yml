@@ -3,11 +3,11 @@
 #Req
 - type: accessLevel
   id: CMAccessRequisitions
-  name: department-Requisitions
+  name: cm-department-Requisitions
 
 - type: accessLevel
   id: CMAccessKitchen
-  name: job-name-messtech
+  name: cm-job-name-messtech
 
 #engineering
 - type: accessLevel
@@ -20,7 +20,7 @@
 
 - type: accessLevel
   id: CMAccessOT
-  name: job-name-ordnance-tech
+  name: cm-job-name-ordnance-tech
 
 #medical
 - type: accessLevel
@@ -33,7 +33,7 @@
 
 - type: accessLevel
   id: CMAccessResearch
-  name: job-name-researcher
+  name: cm-job-name-researcher
 
 #civilian
 - type: accessLevel

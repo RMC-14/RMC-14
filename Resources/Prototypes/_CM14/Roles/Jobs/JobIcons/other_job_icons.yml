@@ -1,13 +1,13 @@
 - type: statusIcon
   parent: CMJobIconBase
-  id: JobIconCorrespondent
+  id: CMJobIconCorrespondent
   icon:
     sprite: _CM14/Interface/cm_job_icons.rsi
     state: empty
 
 - type: statusIcon
   parent: CMJobIconBase
-  id: JobIconSurvivor
+  id: CMJobIconSurvivor
   icon:
     sprite: _CM14/Interface/cm_job_icons.rsi
     state: empty

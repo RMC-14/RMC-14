@@ -1,13 +1,14 @@
 ﻿- type: department
-  id: Marine
-  parent: DepartmentBaseCM
-  description: department-Marine-description
+  parent: CMDepartmentBase
+  id: CMMarine
+  name: cm-department-Marine
+  description: cm-department-Marine-description
   color: "#DE3A3A"
   roles:
-  - Rifleman
-  - SquadLeader
-  - FireteamLeader
-  - WeaponsSpecialist
-  - Smartgunner
-  - HospitalCorpsman
-  - CombatTech
+  - CMRifleman
+  - CMSquadLeader
+  - CMFireteamLeader
+  - CMWeaponsSpecialist
+  - CMSmartgunner
+  - CMHospitalCorpsman
+  - CMCombatTech

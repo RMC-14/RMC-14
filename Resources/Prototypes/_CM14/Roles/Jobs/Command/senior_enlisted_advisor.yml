@@ -1,31 +1,31 @@
 - type: job
-  id: SeniorEnlistedAdvisor
-  parent: JobBaseCM
-  name: job-name-senior-enlisted-advisor
-  description: job-description-senior-enlisted-advisor
-  playTimeTracker: JobSeniorEnlistedAdvisor
+  parent: CMJobBase
+  id: CMSeniorEnlistedAdvisor
+  name: cm-job-name-senior-enlisted-advisor
+  description: cm-job-description-senior-enlisted-advisor
+  playTimeTracker: CMJobSeniorEnlistedAdvisor
   requirements:
     - !type:DepartmentTimeRequirement
-      department: Marine
+      department: CMMarine
       time: 54000 # 15 hours
     - !type:DepartmentTimeRequirement
-      department: MarineEngineering
+      department: CMEngineering
       time: 36000 # 10 hours
     - !type:DepartmentTimeRequirement
-      department: MilitaryPolice
+      department: CMMilitaryPolice
       time: 36000 # 10 hours
     - !type:DepartmentTimeRequirement
-      department: Medical
+      department: CMMedical
       time: 36000 # 10 hours
     - !type:DepartmentTimeRequirement
-      department: MarineCommand
+      department: CMCommand
       time: 18000 # 5 hours
   weight: 5
-  startingGear: SeniorEnlistedAdvisorGear
-  icon: "JobIconSEA"
+  startingGear: CMGearSeniorEnlistedAdvisor
+  icon: "CMJobIconSEA"
   requireAdminNotify: true
   joinNotifyCrew: true
-  supervisors: job-supervisors-cm14-co
+  supervisors: cm-job-supervisors-co
   canBeAntag: false
   accessGroups:
   - MarineMain
@@ -53,24 +53,27 @@
     - type: MarineOrders
 
 - type: startingGear
-  id: SeniorEnlistedAdvisorGear
+  id: CMGearSeniorEnlistedAdvisor
   equipment:
     jumpsuit: CMJumpsuitBO
     back: CMSatchelMarine
     shoes: CMBootsBrownFilled
     head: CMHeadCapDrill
-    id: SeniorEnlistedAdvisorIDCard
+    id: CMIDCardSeniorEnlistedAdvisor
     ears: CMHeadsetLeader
 
 - type: entity
-  id: SpawnPointSeniorEnlistedAdvisor
   parent: CMSpawnPointJobBase
+  id: CMSpawnPointSeniorEnlistedAdvisor
   name: senior enlisted advisor spawn point
   components:
   - type: SpawnPoint
-    job_id: SeniorEnlistedAdvisor
+    job_id: CMSeniorEnlistedAdvisor
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
     - state: senior_enlisted_advisor
+      
+- type: playTimeTracker
+  id: CMJobSeniorEnlistedAdvisor

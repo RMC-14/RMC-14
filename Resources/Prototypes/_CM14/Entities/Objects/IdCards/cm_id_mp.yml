@@ -1,23 +1,23 @@
 ﻿- type: entity
   parent: CMIDCardSilver
-  id: ChiefMPIDCard
+  id: CMIDCardChiefMP
   name: chief MP ID card
   components:
   - type: PresetIdCard
-    job: ChiefMP
+    job: CMChiefMP
 
 - type: entity
   parent: CMIDCardBase
-  id: MilitaryWardenIDCard
+  id: CMIDCardMilitaryWarden
   name: warden ID card
   components:
   - type: PresetIdCard
-    job: MilitaryWarden
+    job: CMMilitaryWarden
 
 - type: entity
   parent: CMIDCardBase
-  id: MilitaryPoliceIDCard
+  id: CMIDCardMilitaryPolice
   name: military police ID card
   components:
   - type: PresetIdCard
-    job: MilitaryPolice
+    job: CMMilitaryPolice

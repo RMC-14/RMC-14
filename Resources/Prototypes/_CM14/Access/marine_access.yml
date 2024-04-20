@@ -18,32 +18,32 @@
 # Almayer
 - type: accessLevel
   id: CMAccessMarinePrep
-  name: job-name-rifleman
+  name: cm-job-name-rifleman
 
 - type: accessLevel
   id: CMAccessMedPrep
-  name: job-name-hospital-corpsman
+  name: cm-job-name-hospital-corpsman
 
 - type: accessLevel
   id: CMAccessCombatTechPrep
-  name: job-name-combat-tech
+  name: cm-job-name-combat-tech
 
 - type: accessLevel
   id: CMAccessSquadLeaderPrep
-  name: job-name-fireteam-leader
+  name: cm-job-name-fireteam-leader
 
 - type: accessLevel
   id: CMAccessSpecPrep
-  name: job-name-weapons-specialist
+  name: cm-job-name-weapons-specialist
 
 - type: accessLevel
   id: CMAccessSmartPrep
-  name: job-name-smartgunner
+  name: cm-job-name-smartgunner
 
 - type: accessLevel
   id: CMAccessFTLPrep
-  name: job-name-fireteam-leader
+  name: cm-job-name-fireteam-leader
 
 - type: accessLevel
   id: CMAccessMarineRifleman
-  name: job-name-rifleman
+  name: cm-job-name-rifleman

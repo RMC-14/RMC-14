@@ -1,17 +1,17 @@
 - type: job
-  id: FireteamLeader
-  parent: JobBaseCM
-  name: job-name-fireteam-leader
-  description: job-description-fireteam-leader
-  playTimeTracker: JobFireteamLeader
+  parent: CMJobBase
+  id: CMFireteamLeader
+  name: cm-job-name-fireteam-leader
+  description: cm-job-description-fireteam-leader
+  playTimeTracker: CMJobFireteamLeader
   requirements:
     - !type:DepartmentTimeRequirement
-      department: Marine
+      department: CMMarine
       time: 28800 #8 hrs
-  startingGear: FireteamLeaderGear
-  icon: "JobIconFireteamLeader"
+  startingGear: CMGearFireteamLeader
+  icon: "CMJobIconFireteamLeader"
   joinNotifyCrew: false
-  supervisors: job-supervisors-cm14-sl
+  supervisors: cm-job-supervisors-sl
   canBeAntag: false
   accessGroups:
   - FTL
@@ -24,7 +24,7 @@
       jtac: 3
 
 - type: startingGear
-  id: FireteamLeaderGear
+  id: CMGearFireteamLeader
   equipment:
     jumpsuit: CMJumpsuitMarineRTO
     back: CMSatchelMarine
@@ -32,18 +32,21 @@
     head: CMArmorHelmetM12
     outerClothing: CMArmorM4
     gloves: CMHandsBlack
-    id: DogtagFireteamLeader
+    id: CMDogtagFireteamLeader
     ears: CMHeadsetAlphaTeamLeader
 
 - type: entity
-  id: SpawnPointFireteamLeader
   parent: CMSpawnPointJobBase
+  id: CMSpawnPointFireteamLeader
   name: fireteam leader spawn point
   components:
   - type: SpawnPoint
-    job_id: FireteamLeader
+    job_id: CMFireteamLeader
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
     - state: fireteam_leader
+
+- type: playTimeTracker
+  id: CMJobFireteamLeader

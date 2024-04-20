@@ -1,6 +1,6 @@
 ﻿- type: job
+  parent: CMJobBase
   id: CMLiaison
-  parent: JobBaseCM
   name: cm-job-name-liaison
   description: cm-job-description-liaison
   requirements:
@@ -10,7 +10,7 @@
   startingGear: CMGearLiaison
   icon: "CMJobIconLiaison"
   joinNotifyCrew: false
-  supervisors: job-supervisors-cm14-wy
+  supervisors: cm-job-supervisors-wy
   canBeAntag: true
   accessGroups:
   - MarineMain
@@ -31,8 +31,8 @@
     ears: CMHeadsetLeader
 
 - type: entity
-  id: CMSpawnPointLiaison
   parent: CMSpawnPointJobBase
+  id: CMSpawnPointLiaison
   name: liaison spawn point
   components:
   - type: SpawnPoint
@@ -42,3 +42,6 @@
     - sprite: Markers/jobs.rsi
       state: green
     - state: corp_liaison
+      
+- type: playTimeTracker
+  id: CMJobLiaison

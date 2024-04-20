@@ -1,6 +1,6 @@
 ﻿- type: entity
   parent: CMIDCardSilver
-  id: CMQuartermasterIDCard
+  id: CMIDCardQuartermaster
   name: quartermaster ID card
   components:
   - type: PresetIdCard
@@ -8,7 +8,7 @@
 
 - type: entity
   parent: CMIDCardBase
-  id: CMCargoTechIDCard
+  id: CMIDCardCargoTech
   name: cargo tech's ID card
   components:
   - type: PresetIdCard
@@ -16,8 +16,8 @@
 
 - type: entity
   parent: CMIDCardBase
-  id: MessTechIDCard
+  id: CMIDCardMessTech
   name: mess tech's ID card
   components:
   - type: PresetIdCard
-    job: MessTech
+    job: CMMessTech

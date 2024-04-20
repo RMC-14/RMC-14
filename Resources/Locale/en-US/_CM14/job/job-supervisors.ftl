@@ -1,13 +1,13 @@
 ﻿# supervisors
-job-supervisors-cm14-wy = the Wey-Yu Corporate Office
-job-supervisors-cm14-aso = the Auxiliary Support Officer
-job-supervisors-cm14-co = the Commanding Officer
-job-supervisors-cm14-cmo = the Chief Medical Officer
-job-supervisors-cm14-ares = ARES and APOLLO
-job-supervisors-cm14-po = the Pilot Officers
-job-supervisors-cm14-uscm = USCM High Command
-job-supervisors-cm14-cmp = the Chief MP
-job-supervisors-cm14-qm = the Quartermaster
-job-supervisors-cm14-ce = the Chief Engineer
-job-supervisors-cm14-sl = the acting Squad Leader
-job-supervisors-cm14-nobody = nobody, you are on your own.
+cm-job-supervisors-wy = the Wey-Yu Corporate Office
+cm-job-supervisors-aso = the Auxiliary Support Officer
+cm-job-supervisors-co = the Commanding Officer
+cm-job-supervisors-cmo = the Chief Medical Officer
+cm-job-supervisors-ares = ARES and APOLLO
+cm-job-supervisors-po = the Pilot Officers
+cm-job-supervisors-uscm = USCM High Command
+cm-job-supervisors-cmp = the Chief MP
+cm-job-supervisors-qm = the Quartermaster
+cm-job-supervisors-ce = the Chief Engineer
+cm-job-supervisors-sl = the acting Squad Leader
+cm-job-supervisors-nobody = nobody, you are on your own.

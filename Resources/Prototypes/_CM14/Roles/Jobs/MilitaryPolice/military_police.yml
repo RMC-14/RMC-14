@@ -1,18 +1,18 @@
 - type: job
-  id: MilitaryPolice
-  parent: JobBaseCM
-  name: job-name-militarypolice
-  description: job-description-militarypolice
-  playTimeTracker: JobMilitaryPolice
+  parent: CMJobBase
+  id: CMMilitaryPolice
+  name: cm-job-name-militarypolice
+  description: cm-job-description-militarypolice
+  playTimeTracker: CMJobMilitaryPolice
   requirements:
     - !type:DepartmentTimeRequirement
-      department: Marine
+      department: CMMarine
       time: 36000 # 10 hours
   weight: 5
-  startingGear: MilitaryPoliceGear
-  icon: "JobIconMilitaryPolice"
+  startingGear: CMGearMilitaryPolice
+  icon: "CMJobIconMilitaryPolice"
   joinNotifyCrew: false
-  supervisors: job-supervisors-cm14-cmp
+  supervisors: cm-job-supervisors-cmp
   canBeAntag: false
   accessGroups:
   - MP
@@ -26,28 +26,31 @@
       police: 2
 
 - type: startingGear
-  id: MilitaryPoliceGear
+  id: CMGearMilitaryPolice
   equipment:
     jumpsuit: CMJumpsuitMPBlack
     back: CMSatchelSecurity
     shoes: CMBootsBlackFilled
     head: CMHeadBeretRed
-    eyes: ClothingEyesGlassesSecurity
+    eyes: ClothingEyesGlassesSecurity # todo cm14 replace with cm ones
     gloves: CMHandsBlack
-    id: MilitaryPoliceIDCard
+    id: CMIDCardMilitaryPolice
     outerClothing: CMArmorM2MP
     ears: CMHeadsetMPO
     belt: CMBeltSecurityFilled
 
 - type: entity
-  id: SpawnPointMilitaryPolice
   parent: CMSpawnPointJobBase
+  id: CMSpawnPointMilitaryPolice
   name: military police spawn point
   components:
   - type: SpawnPoint
-    job_id: MilitaryPolice
+    job_id: CMMilitaryPolice
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
     - state: military_police
+
+- type: playTimeTracker
+  id: CMJobMilitaryPolice

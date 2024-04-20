@@ -1,17 +1,17 @@
 - type: job
-  id: Smartgunner
-  parent: JobBaseCM
-  name: job-name-smartgunner
-  description: job-description-smartgunner
-  playTimeTracker: JobSmartgunner
+  parent: CMJobBase
+  id: CMSmartgunner
+  name: cm-job-name-smartgunner
+  description: cm-job-description-smartgunner
+  playTimeTracker: CMJobSmartgunner
   requirements:
     - !type:DepartmentTimeRequirement
-      department: Marine
+      department: CMMarine
       time: 18000 #5 hrs
-  startingGear: SmartgunnerGear
-  icon: "JobIconSmartgunner"
+  startingGear: CMGearSmartgunner
+  icon: "CMJobIconSmartgunner"
   joinNotifyCrew: false
-  supervisors: job-supervisors-cm14-sl
+  supervisors: cm-job-supervisors-sl
   canBeAntag: false
   accessGroups:
   - Smartgunner
@@ -23,7 +23,7 @@
       smartgun: 1
 
 - type: startingGear
-  id: SmartgunnerGear
+  id: CMGearSmartgunner
   equipment:
     jumpsuit: JumpsuitMarine
     back: CMSatchelMarine
@@ -31,18 +31,21 @@
     head: ArmorHelmetM10
     outerClothing: ArmorMarineM3
     gloves: CMHandsBlack
-    id: DogtagSmartgunner
+    id: CMDogtagSmartgunner
     ears: CMHeadsetAlpha
 
 - type: entity
-  id: SpawnPointSmartGunner
   parent: CMSpawnPointJobBase
+  id: CMSpawnPointSmartGunner
   name: smartgunner spawn point
   components:
   - type: SpawnPoint
-    job_id: Smartgunner
+    job_id: CMSmartgunner
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
     - state: smartgunner
+
+- type: playTimeTracker
+  id: CMJobSmartgunner

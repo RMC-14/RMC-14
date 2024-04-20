@@ -1,17 +1,17 @@
 - type: job
-  id: WeaponsSpecialist
-  parent: JobBaseCM
-  name: job-name-weapons-specialist
-  description: job-description-weapons-specialist
-  playTimeTracker: JobWeaponsSpecialist
+  parent: CMJobBase
+  id: CMWeaponsSpecialist
+  name: cm-job-name-weapons-specialist
+  description: cm-job-description-weapons-specialist
+  playTimeTracker: CMJobWeaponsSpecialist
   requirements:
     - !type:DepartmentTimeRequirement
-      department: Marine
+      department: CMMarine
       time: 18000 #5 hrs
-  startingGear: WeaponsSpecialistGear
-  icon: "JobIconWeaponsSpecialist"
+  startingGear: CMGearWeaponsSpecialist
+  icon: "CMJobIconWeaponsSpecialist"
   joinNotifyCrew: false
-  supervisors: job-supervisors-cm14-sl
+  supervisors: cm-job-supervisors-sl
   canBeAntag: false
   accessGroups:
   - WeaponSpec
@@ -29,7 +29,7 @@
 
 
 - type: startingGear
-  id: WeaponsSpecialistGear
+  id: CMGearWeaponsSpecialist
   equipment:
     jumpsuit: JumpsuitMarine
     back: CMSatchelMarine
@@ -37,18 +37,21 @@
     head: ArmorHelmetM10
     outerClothing: ArmorMarineM3
     gloves: CMHandsBlack
-    id: DogtagWeaponsSpecialist
+    id: CMDogtagWeaponsSpecialist
     ears: CMHeadsetAlpha
 
 - type: entity
-  id: SpawnPointWeaponsSpecialist
   parent: CMSpawnPointJobBase
+  id: CMSpawnPointWeaponsSpecialist
   name: weapons specialist spawn point
   components:
   - type: SpawnPoint
-    job_id: WeaponsSpecialist
+    job_id: CMWeaponsSpecialist
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
     - state: weapons_specialist
+
+- type: playTimeTracker
+  id: CMJobWeaponsSpecialist

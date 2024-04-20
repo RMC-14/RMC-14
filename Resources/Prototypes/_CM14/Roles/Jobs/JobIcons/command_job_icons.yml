@@ -1,27 +1,27 @@
 ﻿- type: statusIcon
   parent: CMJobIconBase
-  id: JobIconStaffOfficer
+  id: CMJobIconStaffOfficer
   icon:
     sprite: _CM14/Interface/cm_job_icons.rsi
     state: staff_officer
 
 - type: statusIcon
   parent: CMJobIconBase
-  id: JobIconSEA
+  id: CMJobIconSEA
   icon:
     sprite: _CM14/Interface/cm_job_icons.rsi
     state: senior_enlisted_advisor
 
 - type: statusIcon
   parent: CMJobIconBase
-  id: JobIconCommandingOfficer
+  id: CMJobIconCommandingOfficer
   icon:
     sprite: _CM14/Interface/cm_job_icons.rsi
     state: hudsquad_co
 
 - type: statusIcon
   parent: CMJobIconBase
-  id: JobIconExecutiveOfficer
+  id: CMJobIconExecutiveOfficer
   icon:
     sprite: _CM14/Interface/cm_job_icons.rsi
     state: hudsquad_xo

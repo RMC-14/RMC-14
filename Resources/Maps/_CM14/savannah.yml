@@ -55224,14 +55224,14 @@ entities:
     - type: Transform
       pos: 150.5,16.5
       parent: 2
-- proto: SpawnPointChiefMP
+- proto: CMSpawnPointChiefMP
   entities:
   - uid: 2704
     components:
     - type: Transform
       pos: 17.5,8.5
       parent: 2
-- proto: SpawnPointCombatTech
+- proto: CMSpawnPointCombatTech
   entities:
   - uid: 2707
     components:
@@ -55243,21 +55243,21 @@ entities:
     - type: Transform
       pos: 126.5,-9.5
       parent: 2
-- proto: SpawnPointCommandingOfficer
+- proto: CMSpawnPointCommandingOfficer
   entities:
   - uid: 7409
     components:
     - type: Transform
       pos: 44.5,15.5
       parent: 2
-- proto: SpawnPointExecutiveOfficer
+- proto: CMSpawnPointExecutiveOfficer
   entities:
   - uid: 7793
     components:
     - type: Transform
       pos: 44.5,14.5
       parent: 2
-- proto: SpawnPointFireteamLeader
+- proto: CMSpawnPointFireteamLeader
   entities:
   - uid: 2585
     components:
@@ -55269,7 +55269,7 @@ entities:
     - type: Transform
       pos: 126.5,-4.5
       parent: 2
-- proto: SpawnPointHospitalCorpsman
+- proto: CMSpawnPointHospitalCorpsman
   entities:
   - uid: 2574
     components:
@@ -55303,7 +55303,7 @@ entities:
     - type: Transform
       pos: 166.5,18.5
       parent: 2
-- proto: SpawnPointMaintTech
+- proto: CMSpawnPointMaintTech
   entities:
   - uid: 7382
     components:
@@ -55315,14 +55315,14 @@ entities:
     - type: Transform
       pos: 163.5,9.5
       parent: 2
-- proto: SpawnPointMessTech
+- proto: CMSpawnPointMessTech
   entities:
   - uid: 3942
     components:
     - type: Transform
       pos: 122.5,-13.5
       parent: 2
-- proto: SpawnPointMilitaryPolice
+- proto: CMSpawnPointMilitaryPolice
   entities:
   - uid: 7392
     components:
@@ -55344,7 +55344,7 @@ entities:
     - type: Transform
       pos: 18.5,9.5
       parent: 2
-- proto: SpawnPointMilitaryWarden
+- proto: CMSpawnPointMilitaryWarden
   entities:
   - uid: 3656
     components:
@@ -55358,7 +55358,7 @@ entities:
     - type: Transform
       pos: 135.5,4.5
       parent: 2
-- proto: SpawnPointOrdnanceTech
+- proto: CMSpawnPointOrdnanceTech
   entities:
   - uid: 3779
     components:
@@ -55375,7 +55375,7 @@ entities:
     - type: Transform
       pos: 165.5,10.5
       parent: 2
-- proto: SpawnPointRifleman
+- proto: CMSpawnPointRifleman
   entities:
   - uid: 2525
     components:
@@ -55402,14 +55402,14 @@ entities:
     - type: Transform
       pos: 129.5,-9.5
       parent: 2
-- proto: SpawnPointSeniorEnlistedAdvisor
+- proto: CMSpawnPointSeniorEnlistedAdvisor
   entities:
   - uid: 7389
     components:
     - type: Transform
       pos: 147.5,5.5
       parent: 2
-- proto: SpawnPointSmartGunner
+- proto: CMSpawnPointSmartGunner
   entities:
   - uid: 2584
     components:
@@ -55421,14 +55421,14 @@ entities:
     - type: Transform
       pos: 126.5,-5.5
       parent: 2
-- proto: SpawnPointSquadLeader
+- proto: CMSpawnPointSquadLeader
   entities:
   - uid: 2709
     components:
     - type: Transform
       pos: 129.5,-3.5
       parent: 2
-- proto: SpawnPointStaffOfficer
+- proto: CMSpawnPointStaffOfficer
   entities:
   - uid: 7856
     components:
@@ -55440,7 +55440,7 @@ entities:
     - type: Transform
       pos: 45.5,13.5
       parent: 2
-- proto: SpawnPointWeaponsSpecialist
+- proto: CMSpawnPointWeaponsSpecialist
   entities:
   - uid: 2690
     components:

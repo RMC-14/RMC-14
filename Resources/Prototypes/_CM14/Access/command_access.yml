@@ -4,7 +4,7 @@
 
 - type: accessLevel
   id: CMAccessCMP
-  name: job-name-chief-mp
+  name: cm-job-name-chief-mp
 
 - type: accessLevel
   id: CMAccessQM
@@ -12,24 +12,24 @@
 
 - type: accessLevel
   id: CMAccessSEA
-  name: job-name-senior-enlisted-advisor
+  name: cm-job-name-senior-enlisted-advisor
 
 - type: accessLevel
   id: CMAccessCO
-  name: job-name-commanding-officer
+  name: cm-job-name-commanding-officer
 
 - type: accessLevel
   id: CMAccessCMO
-  name: job-name-cm-cmo
+  name: cm-job-name-cmo
 
 - type: accessLevel
   id: CMAccessCE
-  name: job-name-ce
+  name: cm-job-name-ce
 
 - type: accessLevel
   id: CMAccessASO
-  name: job-name-aso
+  name: cm-job-name-aso
 
 - type: accessLevel
   id: CMAccessCorp
-  name: job-name-corp # this won't exist until test 2
+  name: cm-job-name-corp # this won't exist until test 2
