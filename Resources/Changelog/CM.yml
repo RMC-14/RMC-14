@@ -467,5 +467,12 @@
   id: 62
   time: '2024-04-20T06:20:03.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1256
+- author: DrSmugleaf
+  changes:
+  - message: Xeno armor now only reduces brute damage.
+    type: Fix
+  id: 63
+  time: '2024-04-20T07:34:00.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1281
 Name: CM
 Order: -1
