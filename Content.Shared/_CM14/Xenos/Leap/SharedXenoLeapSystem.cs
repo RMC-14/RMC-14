@@ -9,7 +9,6 @@ using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Pulling.Events;
-using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
@@ -32,7 +31,6 @@ public sealed class SharedXenoLeapSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -90,9 +88,6 @@ public sealed class SharedXenoLeapSystem : EntitySystem
 
         args.Handled = true;
 
-        leaping.KnockdownTime = xeno.Comp.KnockdownTime;
-        leaping.HitSound = xeno.Comp.HitSound;
-
         if (TryComp(xeno, out PullerComponent? puller) && TryComp(puller.Pulling, out PullableComponent? pullable))
             _pulling.TryStopPull(puller.Pulling.Value, pullable, xeno);
 
@@ -107,6 +102,10 @@ public sealed class SharedXenoLeapSystem : EntitySystem
         var distance = Math.Clamp(length, 0.1f, xeno.Comp.Range.Float());
         direction *= distance / length;
         var impulse = direction.Normalized() * xeno.Comp.Strength * physics.Mass;
+
+        leaping.Origin = _transform.GetMoverCoordinates(xeno);
+        leaping.KnockdownTime = xeno.Comp.KnockdownTime;
+        leaping.HitSound = xeno.Comp.HitSound;
         leaping.LeapEndTime = _timing.CurTime + TimeSpan.FromSeconds(direction.Length() / xeno.Comp.Strength);
 
         _physics.ApplyLinearImpulse(xeno, impulse, body: physics);
@@ -138,7 +137,7 @@ public sealed class SharedXenoLeapSystem : EntitySystem
 
         _audio.PlayPredicted(xeno.Comp.HitSound, xeno, xeno);
 
-        var ev = new XenoLeapHitEvent((marineId, marine));
+        var ev = new XenoLeapHitEvent(xeno, (marineId, marine));
         RaiseLocalEvent(xeno, ref ev);
     }
 
@@ -201,7 +200,6 @@ public sealed class SharedXenoLeapSystem : EntitySystem
             RemCompDeferred<LeapIncapacitatedComponent>(uid);
             _blindable.UpdateIsBlind(uid);
             _actionBlocker.UpdateCanMove(uid);
-            _standing.Stand(uid);
         }
     }
 }

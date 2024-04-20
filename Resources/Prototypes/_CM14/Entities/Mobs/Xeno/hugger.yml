@@ -40,7 +40,7 @@
         - SmallMobLayer
   - type: XenoAnimateMovement
   - type: XenoLeap
-    knockdownTime: 90
+    knockdownTime: 1
   - type: XenoHugger
   - type: Item
   - type: WhitelistPickupBy
