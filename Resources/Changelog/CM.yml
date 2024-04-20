@@ -450,5 +450,15 @@
   id: 60
   time: '2024-04-20T05:01:30.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1257
+- author: DrSmugleaf
+  changes:
+  - message: Added attaching facehuggers by clicking downed marines with or as them.
+    type: Add
+  - message: Facehuggers can only hug through a leap if it is done within a very short
+      range of the target.
+    type: Tweak
+  id: 61
+  time: '2024-04-20T06:14:11.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1254
 Name: CM
 Order: -1
