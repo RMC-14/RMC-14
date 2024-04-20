@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: BaseStructure
+  parent: CMBaseStructureCorrodable
   id: CMIV
   name: iv
   description: Allows you to inject blood into a patient or extract blood from them to do a blood transfusion.

@@ -1,6 +1,6 @@
 ﻿- type: entity
   abstract: true
-  parent: BaseStructure
+  parent: CMBaseStructureCorrodable
   id: CMBaseWindow # TODO CM14 this needs to be 2 separate entities eventually
   placement:
     mode: SnapgridCenter

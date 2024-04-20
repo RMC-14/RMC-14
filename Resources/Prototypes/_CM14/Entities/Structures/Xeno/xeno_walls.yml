@@ -1,22 +1,5 @@
 ﻿- type: entity
-  parent: BaseWall
-  id: BaseWallXeno
-  name: resin wall
-  abstract: true
-  placement:
-    mode: SnapgridCenter
-  components:
-  - type: Damageable
-    damageContainer: Resin
-    damageModifierSet: Resin
-  - type: Appearance
-  - type: RadiationBlocker
-    resistance: 5
-  - type: PlacementReplacement
-    key: walls
-
-- type: entity
-  parent: BaseWallXeno
+  parent: CMBaseWallXeno
   id: WallXenoResin
   name: resin wall
   description: Weird slime solidified into a wall.
@@ -39,7 +22,7 @@
         acts: ["Destruction"]
 
 - type: entity
-  parent: BaseWallXeno
+  parent: CMBaseWallXeno
   id: WallXenoResinThick
   name: thick resin wall
   description: Weird slime solidified into a thick wall.
@@ -62,7 +45,7 @@
         acts: ["Destruction"]
 
 - type: entity
-  parent: BaseWallXeno
+  parent: CMBaseWallXeno
   id: BaseMembraneXeno
   name: resin membrane
   abstract: true
