@@ -56,7 +56,7 @@
   parent: BaseItem
   id: CMBloodPack # TODO CM14 blood types
   name: blood pack
-  suffix: Full
+  suffix: CM, empty
   components:
   - type: BloodPack
   - type: Sprite
@@ -75,9 +75,6 @@
     solutions:
       pack:
         maxVol: 300
-        reagents:
-        - ReagentId: Blood
-          Quantity: 300
   - type: FitsInDispenser
     solution: pack
   - type: RefillableSolution
@@ -118,3 +115,17 @@
         Blunt: 5
   - type: StaticPrice
     price: 30
+
+- type: entity
+  parent: CMBloodPack
+  id: CMBloodPackFull # TODO CM14 blood types
+  name: blood pack
+  suffix: CM, Full
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pack:
+        maxVol: 300
+        reagents:
+        - ReagentId: Blood
+          Quantity: 300
