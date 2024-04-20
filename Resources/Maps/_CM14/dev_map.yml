@@ -7890,7 +7890,7 @@ entities:
       pos: -6.5,-0.5
       parent: 179
   - uid: 139
-    components:
+    components:
     - type: Transform
       pos: -6.5,0.5
       parent: 179
