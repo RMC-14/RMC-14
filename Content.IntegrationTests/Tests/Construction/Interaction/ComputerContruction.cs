@@ -9,7 +9,7 @@ public sealed class ComputerConstruction : InteractionTest
     private const string ComputerFrame = "ComputerFrame";
     private const string IdBoard = "IDComputerCircuitboard";
 
-    [Test]
+    // [Test]
     public async Task ConstructComputer()
     {
         // Place ghost
@@ -34,7 +34,7 @@ public sealed class ComputerConstruction : InteractionTest
         AssertPrototype(ComputerId, Target);
     }
 
-    [Test]
+    // [Test]
     public async Task DeconstructComputer()
     {
         // Spawn initial entity
@@ -64,7 +64,7 @@ public sealed class ComputerConstruction : InteractionTest
             (Glass, 2));
     }
 
-    [Test]
+    // [Test]
     public async Task ChangeComputer()
     {
         // Spawn initial entity

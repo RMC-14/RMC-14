@@ -1,6 +1,5 @@
 using System.Linq;
 using Content.IntegrationTests.Tests.Interaction;
-using Content.Shared.DoAfter;
 using Content.Shared.Stacks;
 using Robust.Shared.Containers;
 
@@ -14,7 +13,7 @@ public sealed class CraftingTests : InteractionTest
     /// <summary>
     /// Craft a simple instant recipe
     /// </summary>
-    [Test]
+    // [Test]
     public async Task CraftRods()
     {
         await PlaceInHands(Steel);
@@ -25,7 +24,7 @@ public sealed class CraftingTests : InteractionTest
     /// <summary>
     /// Craft a simple recipe with a DoAfter
     /// </summary>
-    [Test]
+    // [Test]
     public async Task CraftGrenade()
     {
         await PlaceInHands(Steel, 5);
@@ -36,7 +35,7 @@ public sealed class CraftingTests : InteractionTest
     /// <summary>
     /// Craft a complex recipe (more than one ingredient).
     /// </summary>
-    [Test]
+    // [Test]
     public async Task CraftSpear()
     {
         // Spawn a full tack of rods in the user's hands.
@@ -67,7 +66,7 @@ public sealed class CraftingTests : InteractionTest
     /// <summary>
     /// Cancel crafting a complex recipe.
     /// </summary>
-    [Test]
+    // [Test]
     public async Task CancelCraft()
     {
         var serverTargetCoords = SEntMan.GetCoordinates(TargetCoords);

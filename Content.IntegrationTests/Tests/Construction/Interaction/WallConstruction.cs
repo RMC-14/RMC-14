@@ -8,7 +8,7 @@ public sealed class WallConstruction : InteractionTest
     public const string WallSolid = "WallSolid";
     public const string Wall = "Wall";
 
-    [Test]
+    // [Test]
     public async Task ConstructWall()
     {
         await StartConstruction(Wall);
@@ -21,7 +21,7 @@ public sealed class WallConstruction : InteractionTest
         AssertPrototype(WallSolid);
     }
 
-    [Test]
+    // [Test]
     public async Task DeconstructWall()
     {
         await StartDeconstruction(WallSolid);

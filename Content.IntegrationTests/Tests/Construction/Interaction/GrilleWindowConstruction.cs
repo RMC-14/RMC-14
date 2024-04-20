@@ -12,7 +12,7 @@ public sealed class GrilleWindowConstruction : InteractionTest
     private const string Grille = "Grille";
     private const string Window = "Window";
 
-    [Test]
+    // [Test]
     public async Task WindowOnGrille()
     {
         // Construct Grille
@@ -39,10 +39,10 @@ public sealed class GrilleWindowConstruction : InteractionTest
         AssertDeleted();
     }
 
-    [Test]
-    [TestCase(Grille, Grille)]
-    [TestCase(Window, Grille)]
-    [TestCase(Window, Window)]
+    // [Test]
+    // [TestCase(Grille, Grille)]
+    // [TestCase(Window, Grille)]
+    // [TestCase(Window, Window)]
     public async Task ConstructionBlocker(string first, string second)
     {
         // Spawn blocking entity

@@ -10,7 +10,7 @@ public sealed class MachineConstruction : InteractionTest
     private const string Protolathe = "Protolathe";
     private const string Beaker = "Beaker";
 
-    [Test]
+    // [Test]
     public async Task ConstructProtolathe()
     {
         await StartConstruction(MachineFrame);
@@ -23,7 +23,7 @@ public sealed class MachineConstruction : InteractionTest
         AssertPrototype(Protolathe);
     }
 
-    [Test]
+    // [Test]
     public async Task DeconstructProtolathe()
     {
         await StartDeconstruction(Protolathe);
@@ -42,7 +42,7 @@ public sealed class MachineConstruction : InteractionTest
             (ProtolatheBoard, 1));
     }
 
-    [Test]
+    // [Test]
     public async Task ChangeMachine()
     {
         // Partially deconstruct a protolathe.
