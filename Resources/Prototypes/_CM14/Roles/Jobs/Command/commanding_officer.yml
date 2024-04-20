@@ -1,31 +1,31 @@
 ﻿- type: job
-  id: CommandingOfficer
-  parent: JobBaseCM
-  name: job-name-commanding-officer
-  description: job-description-commanding-officer
-  playTimeTracker: JobCommandingOfficer
+  parent: CMJobBase
+  id: CMCommandingOfficer
+  name: cm-job-name-commanding-officer
+  description: cm-job-description-commanding-officer
+  playTimeTracker: CMJobCommandingOfficer
   requirements:
   - !type:DepartmentTimeRequirement
-    department: Marine
+    department: CMMarine
     time: 54000 # 15 hours
   - !type:DepartmentTimeRequirement
-    department: MarineEngineering
+    department: CMEngineering
     time: 36000 # 10 hours
   - !type:DepartmentTimeRequirement
-    department: MilitaryPolice
+    department: CMMilitaryPolice
     time: 36000 # 10 hours
   - !type:DepartmentTimeRequirement
-    department: Medical
+    department: CMMedical
     time: 36000 # 10 hours
   - !type:DepartmentTimeRequirement
-    department: MarineCommand
+    department: CMCommand
     time: 18000 # 5 hours
   weight: 10
-  startingGear: CommandingOfficerGear
-  icon: "JobIconCommandingOfficer"
+  startingGear: CMGearCommandingOfficer
+  icon: "CMJobIconCommandingOfficer"
   requireAdminNotify: true
   joinNotifyCrew: true
-  supervisors: job-supervisors-cm14-uscm
+  supervisors: cm-job-supervisors-uscm
   canBeAntag: false
   accessGroups:
   - ShipMasterAccess
@@ -53,25 +53,28 @@
     - type: MarineOrders
 
 - type: startingGear
-  id: CommandingOfficerGear
+  id: CMGearCommandingOfficer
   equipment:
     jumpsuit: CMJumpsuitCO
     back: CMSatchel
     shoes: CMShoesDressCommander
     head: CMHeadBeretCO
     outerClothing: CMCoatOfficer
-    id: CommandingOfficerIDCard
+    id: CMIDCardCommandingOfficer
     ears: CMHeadsetSeniorCommand
 
 - type: entity
-  id: SpawnPointCommandingOfficer
   parent: CMSpawnPointJobBase
+  id: CMSpawnPointCommandingOfficer
   name: commanding officer spawn point
   components:
   - type: SpawnPoint
-    job_id: CommandingOfficer
+    job_id: CMCommandingOfficer
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
     - state: commanding_officer
+      
+- type: playTimeTracker
+  id: CMJobCommandingOfficer

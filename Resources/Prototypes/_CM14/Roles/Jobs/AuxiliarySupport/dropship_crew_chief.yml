@@ -1,13 +1,13 @@
 ﻿- type: job
-  id: DropshipCrewChief
-  parent: JobBaseCM
-  name: job-name-dcc
-  description: job-description-dcc
-  playTimeTracker: JobDropshipCrewChief
-  startingGear: DCCGear
-  icon: "JobIconDCC"
+  parent: CMJobBase
+  id: CMDropshipCrewChief
+  name: cm-job-name-dcc
+  description: cm-job-description-dcc
+  playTimeTracker: CMJobDropshipCrewChief
+  startingGear: CMGearDCC
+  icon: "CMJobIconDCC"
   joinNotifyCrew: false
-  supervisors: job-supervisors-cm14-po
+  supervisors: cm-job-supervisors-po
   canBeAntag: true
   accessGroups:
   - DropshipCrewChief
@@ -25,7 +25,7 @@
     - type: MarineOrders
 
 - type: startingGear
-  id: DCCGear
+  id: CMGearDCC
   equipment:
     jumpsuit: CMJumpsuitDCC
     outerClothing: CMArmorPlatePilot
@@ -33,18 +33,21 @@
     gloves: CMHandsBrown
     shoes: CMBootsBlackFilled
     head: CMHeadCap
-    id: DCCIDCard
+    id: CMIDCardDCC
     ears: CMHeadsetPilot
 
 - type: entity
-  id: CMSpawnPointDCC
   parent: CMSpawnPointJobBase
+  id: CMSpawnPointDCC
   name: dropship crew chief spawn point
   components:
   - type: SpawnPoint
-    job_id: DropshipCrewChief
+    job_id: CMDropshipCrewChief
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
     - state: dropship_crew_chief
+      
+- type: playTimeTracker
+  id: CMJobDropshipCrewChief

@@ -52,7 +52,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Doors/Airlocks/Double/command_glass.rsi
   - type: PaintableAirlock
-    department: MarineCommand
+    department: CMCommand
 
 - type: entity
   parent: CMDoubleDoorBase
@@ -63,7 +63,7 @@
     sprite: _CM14/Structures/Doors/Airlocks/Double/command_solid.rsi
   - type: Occluder
   - type: PaintableAirlock
-    department: MarineCommand
+    department: CMCommand
 
 - type: entity
   parent: CMDoubleDoorBase
@@ -73,7 +73,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Doors/Airlocks/Double/engineer_glass.rsi
   - type: PaintableAirlock
-    department: MarineEngineering
+    department: CMEngineering
 
 - type: entity
   parent: CMDoubleDoorBase
@@ -84,7 +84,7 @@
     sprite: _CM14/Structures/Doors/Airlocks/Double/engineer_solid.rsi
   - type: Occluder
   - type: PaintableAirlock
-    department: MarineEngineering
+    department: CMEngineering
 
 - type: entity
   parent: CMDoubleDoorBase
@@ -111,7 +111,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Doors/Airlocks/Double/medical_glass.rsi
   - type: PaintableAirlock
-    department: MarineMedical
+    department: CMMedical
 
 - type: entity
   parent: CMDoubleDoorBase
@@ -122,7 +122,7 @@
     sprite: _CM14/Structures/Doors/Airlocks/Double/medical_solid.rsi
   - type: Occluder
   - type: PaintableAirlock
-    department: MarineMedical
+    department: CMMedical
 
 - type: entity
   parent: CMDoubleDoorBase
@@ -189,7 +189,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Doors/Airlocks/Double/security_glass.rsi
   - type: PaintableAirlock
-    department: MilitaryPolice
+    department: CMMilitaryPolice
 
 - type: entity
   parent: CMDoubleDoorBase
@@ -200,4 +200,4 @@
     sprite: _CM14/Structures/Doors/Airlocks/Double/security_solid.rsi
   - type: Occluder
   - type: PaintableAirlock
-    department: MilitaryPolice
+    department: CMMilitaryPolice

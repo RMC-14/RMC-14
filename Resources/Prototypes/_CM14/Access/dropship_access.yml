@@ -6,9 +6,9 @@
 # pilot seat access
 - type: accessLevel
   id: CMAccessPilot
-  name: job-name-pilot
+  name: cm-job-name-pilot
 
 # engines, etc
 - type: accessLevel
   id: CMAccessCrewman
-  name: job-name-dcc
+  name: cm-job-name-dcc

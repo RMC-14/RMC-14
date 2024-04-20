@@ -7,7 +7,7 @@
   - type: AccessReader
     access: [["CMAccessRequisitions"]]
   - type: PaintableAirlock
-    department: Requisitions
+    department: CMRequisitions
 
 - type: entity
   parent: CMAirlockGlassEngineer
@@ -25,7 +25,7 @@
   - type: AccessReader
     access: [["CMAccessRequisitions"]]
   - type: PaintableAirlock
-    department: Requisitions
+    department: CMRequisitions
 
 - type: entity
   parent: CMAirlock
@@ -35,7 +35,7 @@
   - type: AccessReader
     access: [["CMAccessKitchen"]]
   - type: PaintableAirlock
-    department: Requisitions
+    department: CMRequisitions
 
 - type: entity
   parent: CMAirlockGlass
@@ -45,7 +45,7 @@
   - type: AccessReader
     access: [["CMAccessKitchen"]]
   - type: PaintableAirlock
-    department: Requisitions
+    department: CMRequisitions
 
 - type: entity
   parent: CMAirlockMaint
@@ -55,7 +55,7 @@
   - type: AccessReader
     access: [["CMAccessKitchen"]]
   - type: PaintableAirlock
-    department: Requisitions
+    department: CMRequisitions
 
 # Engi
 - type: entity
@@ -82,7 +82,7 @@
   - type: AccessReader
     access: [["CMAccessEngineering"]]
   - type: PaintableAirlock
-    department: MarineEngineering
+    department: CMEngineering
 
 - type: entity
   parent: CMAirlockEngineer
@@ -117,7 +117,7 @@
   - type: AccessReader
     access: [["CMAccessMedical"]]
   - type: PaintableAirlock
-    department: MarineMedical
+    department: CMMedical
 
 - type: entity
   parent: CMAirlockMedical
@@ -144,7 +144,7 @@
   - type: AccessReader
     access: [["CMAccessPress"]]
   - type: PaintableAirlock
-    department: Civilians
+    department: CMCivilians
 
 - type: entity
   parent: CMAirlockGlass
@@ -154,7 +154,7 @@
   - type: AccessReader
     access: [["CMAccessPress"]]
   - type: PaintableAirlock
-    department: Civilians
+    department: CMCivilians
 
 - type: entity
   parent: CMAirlockMaint
@@ -164,4 +164,4 @@
   - type: AccessReader
     access: [["CMAccessPress"]]
   - type: PaintableAirlock
-    department: Civilians
+    department: CMCivilians

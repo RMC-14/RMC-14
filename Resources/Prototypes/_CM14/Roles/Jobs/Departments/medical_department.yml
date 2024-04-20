@@ -1,10 +1,10 @@
 ﻿- type: department
-  id: MarineMedical
-  parent: DepartmentBaseCM
-  description: department-MarineMedical-description
+  parent: CMDepartmentBase
+  id: CMMedical
+  description: cm-department-Medical-description
   color: "#008160"
   roles:
-  - MarineCMO
-  - MarineDoctor
-  - Researcher
-  - Nurse
+  - CMCMO
+  - CMDoctor
+  - CMResearcher
+  - CMNurse

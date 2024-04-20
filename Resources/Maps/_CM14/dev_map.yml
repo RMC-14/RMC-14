@@ -7906,35 +7906,35 @@ entities:
     - type: Transform
       pos: 3.5,8.5
       parent: 179
-- proto: SpawnPointCombatTech
+- proto: CMSpawnPointCombatTech
   entities:
   - uid: 954
     components:
     - type: Transform
       pos: -1.5,1.5
       parent: 179
-- proto: SpawnPointCommandingOfficer
+- proto: CMSpawnPointCommandingOfficer
   entities:
   - uid: 707
     components:
     - type: Transform
       pos: -3.5,3.5
       parent: 179
-- proto: SpawnPointExecutiveOfficer
+- proto: CMSpawnPointExecutiveOfficer
   entities:
   - uid: 1175
     components:
     - type: Transform
       pos: -1.5,0.5
       parent: 179
-- proto: SpawnPointFireteamLeader
+- proto: CMSpawnPointFireteamLeader
   entities:
   - uid: 1191
     components:
     - type: Transform
       pos: 0.5,1.5
       parent: 179
-- proto: SpawnPointHospitalCorpsman
+- proto: CMSpawnPointHospitalCorpsman
   entities:
   - uid: 1192
     components:
@@ -7948,7 +7948,7 @@ entities:
     - type: Transform
       pos: -3.5,3.5
       parent: 179
-- proto: SpawnPointMaintTech
+- proto: CMSpawnPointMaintTech
   entities:
   - uid: 1181
     components:
@@ -7962,49 +7962,49 @@ entities:
     - type: Transform
       pos: -3.5,4.5
       parent: 179
-- proto: SpawnPointOrdnanceTech
+- proto: CMSpawnPointOrdnanceTech
   entities:
   - uid: 1182
     components:
     - type: Transform
       pos: 0.5,0.5
       parent: 179
-- proto: SpawnPointRifleman
+- proto: CMSpawnPointRifleman
   entities:
   - uid: 1193
     components:
     - type: Transform
       pos: -1.5,-0.5
       parent: 179
-- proto: SpawnPointSeniorEnlistedAdvisor
+- proto: CMSpawnPointSeniorEnlistedAdvisor
   entities:
   - uid: 1194
     components:
     - type: Transform
       pos: 0.5,-0.5
       parent: 179
-- proto: SpawnPointSmartGunner
+- proto: CMSpawnPointSmartGunner
   entities:
   - uid: 1195
     components:
     - type: Transform
       pos: 2.5,-0.5
       parent: 179
-- proto: SpawnPointSquadLeader
+- proto: CMSpawnPointSquadLeader
   entities:
   - uid: 1196
     components:
     - type: Transform
       pos: -1.5,-2.5
       parent: 179
-- proto: SpawnPointStaffOfficer
+- proto: CMSpawnPointStaffOfficer
   entities:
   - uid: 1197
     components:
     - type: Transform
       pos: 0.5,-2.5
       parent: 179
-- proto: SpawnPointWeaponsSpecialist
+- proto: CMSpawnPointWeaponsSpecialist
   entities:
   - uid: 1198
     components:

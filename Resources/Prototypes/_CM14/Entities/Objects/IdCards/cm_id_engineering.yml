@@ -1,6 +1,6 @@
 ﻿- type: entity
   parent: CMIDCardSilver
-  id: CMChiefEngineerIDCard
+  id: CMIDCardChiefEngineer
   name: chief engineer ID card
   components:
   - type: PresetIdCard
@@ -8,16 +8,16 @@
 
 - type: entity
   parent: CMIDCardBase
-  id: OrdnanceTechIDCard
+  id: CMIDCardOrdnanceTech
   name: ordnance tech's ID card
   components:
   - type: PresetIdCard
-    job: OrdnanceTech
+    job: CMOrdnanceTech
 
 - type: entity
   parent: CMIDCardBase
-  id: MaintTechIDCard
+  id: CMIDCardMaintTech
   name: maintenance tech's ID card
   components:
   - type: PresetIdCard
-    job: MaintTech
+    job: CMMaintTech

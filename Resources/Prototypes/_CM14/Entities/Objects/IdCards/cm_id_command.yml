@@ -1,31 +1,31 @@
 ﻿- type: entity
   parent: CMIDCardSilver
-  id: StaffOfficerIDCard
+  id: CMIDCardStaffOfficer
   name: staff officer ID card
   components:
   - type: PresetIdCard
-    job: StaffOfficer
+    job: CMStaffOfficer
 
 - type: entity
   parent: CMIDCardSilver
-  id: SeniorEnlistedAdvisorIDCard
+  id: CMIDCardSeniorEnlistedAdvisor
   name: senior enlisted advisor ID card
   components:
   - type: PresetIdCard
-    job: SeniorEnlistedAdvisor
+    job: CMSeniorEnlistedAdvisor
 
 - type: entity
   parent: CMIDCardGold
-  id: CommandingOfficerIDCard
+  id: CMIDCardCommandingOfficer
   name: commanding officer ID card
   components:
   - type: PresetIdCard
-    job: CommandingOfficer
+    job: CMCommandingOfficer
 
 - type: entity
   parent: CMIDCardSilver
-  id: ExecutiveOfficerIDCard
+  id: CMIDCardExecutiveOfficer
   name: executive officer ID card
   components:
   - type: PresetIdCard
-    job: ExecutiveOfficer
+    job: CMExecutiveOfficer

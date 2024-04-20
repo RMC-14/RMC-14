@@ -1,17 +1,17 @@
 ﻿- type: job
-  id: IntelOfficer
-  parent: JobBaseCM
-  name: job-name-intel
-  description: job-description-intel
-  playTimeTracker: JobIntelOfficer
+  parent: CMJobBase
+  id: CMIntelOfficer
+  name: cm-job-name-intel
+  description: cm-job-description-intel
+  playTimeTracker: CMJobIntelOfficer
   requirements:
   - !type:DepartmentTimeRequirement
-    department: Marine
+    department: CMMarine
     time: 18000 # 5 hours
-  startingGear: IntelOfficerGear
-  icon: "JobIconIntelOfficer"
+  startingGear: CMGearIntelOfficer
+  icon: "CMJobIconIntelOfficer"
   joinNotifyCrew: false
-  supervisors: job-supervisors-cm14-aso
+  supervisors: cm-job-supervisors-aso
   canBeAntag: false
   accessGroups:
   - IntelOfficer
@@ -30,7 +30,7 @@
     - type: MarineOrders
 
 - type: startingGear
-  id: IntelOfficerGear
+  id: CMGearIntelOfficer
   equipment:
     jumpsuit: CMJumpsuitIO
     outerClothing: CMArmorM4
@@ -38,18 +38,21 @@
     gloves: CMHandsBlack
     shoes: CMBootsBlackFilled
     head: CMArmorHelmetM12
-    id: IntelOfficerIDCard
+    id: CMIDCardIntelOfficer
     ears: CMHeadsetIntel
 
 - type: entity
-  id: CMSpawnPointIntelOfficer
   parent: CMSpawnPointJobBase
+  id: CMSpawnPointIntelOfficer
   name: intel officer spawn point
   components:
   - type: SpawnPoint
-    job_id: IntelOfficer
+    job_id: CMIntelOfficer
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
     - state: intel_officer
+      
+- type: playTimeTracker
+  id: CMJobIntelOfficer

@@ -1,17 +1,17 @@
 ﻿- type: job
-  id: MarineDoctor
-  parent: JobBaseCM
-  name: job-name-cm-doctor
-  description: job-description-cm-doctor
-  playTimeTracker: JobMarineDoctor
+  parent: CMJobBase
+  id: CMDoctor
+  name: cm-job-name-doctor
+  description: cm-job-description-doctor
+  playTimeTracker: CMJobDoctor
   requirements:
   - !type:DepartmentTimeRequirement
-    department: Medical
+    department: CMMedical
     time: 3600 # 1 hours
-  startingGear: MarineDoctorGear
-  icon: "JobIconMarineDoctor"
+  startingGear: CMGearDoctor
+  icon: "CMJobIconDoctor"
   joinNotifyCrew: false
-  supervisors: job-supervisors-cm14-cmo
+  supervisors: cm-job-supervisors-cmo
   canBeAntag: true
   accessGroups:
   - CMMedical
@@ -23,7 +23,7 @@
       surgery: 2
 
 - type: startingGear
-  id: MarineDoctorGear
+  id: CMGearDoctor
   equipment:
     jumpsuit: CMScrubsBlue
     outerClothing: CMCoatLong
@@ -31,19 +31,22 @@
     gloves: CMHandsLatex
     shoes: ClothingShoesColorWhite
     head: CMHeadCapSurgBlue
-    id: MarineDoctorIDCard
+    id: CMIDCardDoctor
     ears: CMHeadsetMedical
     belt: CMBeltMedicalFilled
 
 - type: entity
-  id: CMSpawnPointDoctor
   parent: CMSpawnPointJobBase
+  id: CMSpawnPointDoctor
   name: doctor spawn point
   components:
   - type: SpawnPoint
-    job_id: MarineDoctor
+    job_id: CMDoctor
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
     - state: doctor
+
+- type: playTimeTracker
+  id: CMJobDoctor

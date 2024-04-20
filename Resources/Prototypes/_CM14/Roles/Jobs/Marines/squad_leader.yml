@@ -1,20 +1,20 @@
 - type: job
-  id: SquadLeader
-  parent: JobBaseCM
-  name: job-name-squad-leader
-  description: job-description-squad-leader
-  playTimeTracker: JobSquadLeader
+  parent: CMJobBase
+  id: CMSquadLeader
+  name: cm-job-name-squad-leader
+  description: cm-job-description-squad-leader
+  playTimeTracker: CMJobSquadLeader
   requirements:
     - !type:DepartmentTimeRequirement
-      department: Marine
+      department: CMMarine
       time: 36000 #10 hrs
     - !type:RoleTimeRequirement
-      role: JobFireteamLeader
+      role: CMJobFireteamLeader
       time: 10800 #3 hrs
-  startingGear: SquadLeaderGear
-  icon: "JobIconSquadLeader"
+  startingGear: CMGearSquadLeader
+  icon: "CMJobIconSquadLeader"
   joinNotifyCrew: false
-  supervisors: job-supervisors-cm14-co
+  supervisors: cm-job-supervisors-co
   canBeAntag: false
   accessGroups:
   - SquadLeader
@@ -35,7 +35,7 @@
     - type: MarineOrders
 
 - type: startingGear
-  id: SquadLeaderGear
+  id: CMGearSquadLeader
   equipment:
     jumpsuit: CMJumpsuitMarineRTO
     back: CMSatchelMarine
@@ -43,18 +43,21 @@
     head: CMArmorHelmetM11
     outerClothing: ArmorMarineM3
     gloves: CMHandsBlack
-    id: DogtagSquadLeader
+    id: CMDogtagSquadLeader
     ears: CMHeadsetAlphaLeader
 
 - type: entity
-  id: SpawnPointSquadLeader
   parent: CMSpawnPointJobBase
+  id: CMSpawnPointSquadLeader
   name: squad leader spawn point
   components:
   - type: SpawnPoint
-    job_id: SquadLeader
+    job_id: CMSquadLeader
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
     - state: squad_leader
+
+- type: playTimeTracker
+  id: CMJobSquadLeader
