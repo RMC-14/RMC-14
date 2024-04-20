@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: CMBaseStructurecorrodible
+  parent: CMBaseStructureCorrodible
   id: CMHypersleepChamber # TODO CM14 spawn squads and other marines here
   name: hypersleep chamber
   description: A large automated capsule with LED displays intended to put anyone inside into 'hypersleep', a form of non-cryogenic statis used on most ships, linked to a long-term hypersleep bay on a lower level.

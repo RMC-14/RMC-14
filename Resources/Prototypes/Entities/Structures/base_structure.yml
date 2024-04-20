@@ -1,6 +1,6 @@
 - type: entity
+  parent: CMCorrodible
   id: BaseStructure
-#  parent: CMcorrodible # todo cm14 we can probably add this back with a component field
   abstract: true
   placement:
     mode: SnapgridCenter

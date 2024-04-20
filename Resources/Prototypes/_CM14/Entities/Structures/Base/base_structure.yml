@@ -8,8 +8,8 @@
 - type: entity
   parent:
   - CMBaseStructure
-  - CMcorrodible
-  id: CMBaseStructurecorrodible
+  - CMCorrodible
+  id: CMBaseStructureCorrodible
   abstract: true
   placement:
     mode: SnapgridCenter
@@ -20,17 +20,20 @@
   abstract: true
   placement:
     mode: SnapgridCenter
+  components:
+  - type: Corrodible
+    isCorrodible: false
 
 - type: entity
-  id: CMcorrodible
+  id: CMCorrodible
   abstract: true
   components:
-  - type: corrodible
+  - type: Corrodible
 
 # BaseWall
 - type: entity
   abstract: true
-  parent: CMBaseStructurecorrodible
+  parent: CMBaseStructureCorrodible
   id: CMBaseWall
   description: A huge chunk of metal used to separate rooms.
   placement:
@@ -68,7 +71,9 @@
         density: 1000
 
 - type: entity
-  parent: BaseWall
+  parent:
+  - BaseWall
+  - CMBaseXenoStructure
   id: CMBaseWallXeno
   name: resin wall
   abstract: true

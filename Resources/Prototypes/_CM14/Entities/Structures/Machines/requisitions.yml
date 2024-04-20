@@ -86,7 +86,7 @@
   - type: CargoSellBlacklist
 
 - type: entity
-  parent: CMBaseStructurecorrodible
+  parent: CMBaseStructureCorrodible
   id: CMRailing
   name: retractable railing
   description: That looks like it doesn't open easily.
