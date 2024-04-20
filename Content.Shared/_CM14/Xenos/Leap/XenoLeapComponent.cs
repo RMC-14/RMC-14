@@ -19,4 +19,7 @@ public sealed partial class XenoLeapComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier? HitSound;
+
+    [DataField, AutoNetworkedField]
+    public int Strength = 30;
 }

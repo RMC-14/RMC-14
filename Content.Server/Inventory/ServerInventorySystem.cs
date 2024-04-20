@@ -1,24 +1,15 @@
-using Content.Server._CM14.Webbing;
-using Content.Server.Storage.EntitySystems;
-using Content.Shared._CM14.Webbing;
 using Content.Shared.Explosion;
 using Content.Shared.Inventory;
-using Content.Shared.Inventory.Events;
-using Content.Shared.Storage;
 
 namespace Content.Server.Inventory
 {
     public sealed class ServerInventorySystem : InventorySystem
     {
-        [Dependency] private readonly StorageSystem _storageSystem = default!;
-        [Dependency] private readonly WebbingSystem _webbing = default!;
-
         public override void Initialize()
         {
             base.Initialize();
 
             SubscribeLocalEvent<InventoryComponent, BeforeExplodeEvent>(OnExploded);
-            SubscribeNetworkEvent<OpenSlotStorageNetworkMessage>(OnOpenSlotStorage);
         }
 
         private void OnExploded(Entity<InventoryComponent> ent, ref BeforeExplodeEvent args)
@@ -29,20 +20,6 @@ namespace Content.Server.Inventory
             {
                 if (slot.ContainedEntity != null)
                     args.Contents.Add(slot.ContainedEntity.Value);
-            }
-        }
-
-        private void OnOpenSlotStorage(OpenSlotStorageNetworkMessage ev, EntitySessionEventArgs args)
-        {
-            if (args.SenderSession.AttachedEntity is not { Valid: true } uid)
-                    return;
-
-            if (TryGetSlotEntity(uid, ev.Slot, out var entityUid))
-            {
-                if (TryComp<StorageComponent>(entityUid, out var storageComponent))
-                    _storageSystem.OpenStorageUI(entityUid.Value, uid, storageComponent);
-                else if (TryComp<WebbingClothingComponent>(entityUid, out var webbingClothing))
-                    _webbing.OpenStorage((entityUid.Value, webbingClothing), uid);
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using Content.Shared._CM14.Xenos;
 using Content.Shared._CM14.Xenos.Egg;
+using Content.Shared._CM14.Xenos.Leap;
 using Content.Shared._CM14.Xenos.Movement;
 using Content.Shared._CM14.Xenos.Rest;
 using Content.Shared.Mobs;
@@ -42,9 +43,9 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
         UpdateDrawDepth((uid, sprite));
     }
 
-    public void UpdateSprite(Entity<SpriteComponent?, MobStateComponent?, AppearanceComponent?, InputMoverComponent?, ThrownItemComponent?> entity)
+    public void UpdateSprite(Entity<SpriteComponent?, MobStateComponent?, AppearanceComponent?, InputMoverComponent?, ThrownItemComponent?, XenoLeapingComponent?> entity)
     {
-        var (_, sprite, mobState, appearance, input, thrown) = entity;
+        var (_, sprite, mobState, appearance, input, thrown, leaping) = entity;
         if (!Resolve(entity, ref sprite, ref appearance))
             return;
 
@@ -52,7 +53,7 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
         if (Resolve(entity, ref mobState, false))
             state = mobState.CurrentState;
 
-        Resolve(entity, ref input, ref thrown, false);
+        Resolve(entity, ref input, ref thrown, ref leaping, false);
 
         if (sprite is not { BaseRSI: { } rsi } ||
             !sprite.LayerMapTryGet(XenoVisualLayers.Base, out var layer))
@@ -95,7 +96,7 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
                     break;
                 }
 
-                if (thrown != null &&
+                if ((leaping != null || thrown != null) &&
                     rsi.TryGetState("thrown", out _))
                 {
                     sprite.LayerSetState(layer, "thrown");
@@ -151,14 +152,14 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
         {
             if (mobState.CurrentState == MobState.Alive)
             {
-                UpdateSprite((uid, sprite, mobState, null, input, null));
+                UpdateSprite((uid, sprite, mobState, null, input));
             }
         }
 
         var oviQuery = EntityQueryEnumerator<XenoOvipositorCapableComponent, SpriteComponent, AppearanceComponent>();
         while (oviQuery.MoveNext(out var uid, out _, out var sprite, out var appearance))
         {
-            UpdateSprite((uid, sprite, null, appearance, null, null));
+            UpdateSprite((uid, sprite, null, appearance));
         }
     }
 }

@@ -1,7 +1,8 @@
 # Almayer personnel
 - type: entity
   parent: ClothingBackpack
-  id: CMBackpack
+  abstract: true
+  id: CMPersonalStorageBase
   name: backpack
   description: You wear this on your back and put items into it.
   components:
@@ -22,7 +23,7 @@
           Closed: { visible: false }
         closedLayer:
           Open: { visible: false }
-          Closed: { visible: true}
+          Closed: { visible: true }
   - type: Clothing
     quickEquip: false
     slots:
@@ -37,7 +38,7 @@
       tags:
       - Pouch
       - CMFirstAidKit
-#      - EngineerKit
+  #      - EngineerKit
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -46,6 +47,15 @@
     interfaces:
     - key: enum.StorageUiKey.Key
       type: StorageBoundUserInterface
+
+- type: entity
+  parent: CMPersonalStorageBase
+  id: CMBackpack
+  name: backpack
+  description: You wear this on your back and put items into it.
+  components:
+  - type: StorageOpenDoAfter
+  - type: StorageCloseOnMove
 
 - type: entity
   parent: CMBackpack
