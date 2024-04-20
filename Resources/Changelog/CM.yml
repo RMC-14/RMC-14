@@ -460,5 +460,12 @@
   id: 61
   time: '2024-04-20T06:14:11.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1254
+- author: Whisper
+  changes:
+  - message: Xenos no longer melt own structures with acid.
+    type: Fix
+  id: 62
+  time: '2024-04-20T06:20:03.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1256
 Name: CM
 Order: -1
