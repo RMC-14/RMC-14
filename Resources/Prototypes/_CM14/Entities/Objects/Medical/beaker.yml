@@ -16,7 +16,6 @@
     solutions:
       beaker:
         maxVol: 60
-        canMix: true
   - type: Spillable
     solution: beaker
   - type: StaticPrice
@@ -42,7 +41,6 @@
     solutions:
       beaker:
         maxVol: 120
-        canMix: true
   - type: SolutionContainerVisuals
     maxFillLevels: 5
     fillBaseName: beakerlarge
