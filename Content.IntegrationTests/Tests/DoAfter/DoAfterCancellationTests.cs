@@ -10,7 +10,6 @@ namespace Content.IntegrationTests.Tests.DoAfter;
 /// This class has various tests that verify that cancelled DoAfters do not complete construction or other interactions.
 /// It also checks that cancellation of a DoAfter does not block future DoAfters.
 /// </summary>
-[Ignore("Uses disabled upstream prototypes")]
 public sealed class DoAfterCancellationTests : InteractionTest
 {
     [Test]

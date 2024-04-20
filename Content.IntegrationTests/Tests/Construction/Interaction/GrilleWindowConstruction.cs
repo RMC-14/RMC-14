@@ -7,7 +7,6 @@ namespace Content.IntegrationTests.Tests.Construction.Interaction;
 /// <summary>
 ///     Check that we can build grilles on top of windows, but not the other way around.
 /// </summary>
-[Ignore("Uses disabled upstream prototypes")]
 public sealed class GrilleWindowConstruction : InteractionTest
 {
     private const string Grille = "Grille";

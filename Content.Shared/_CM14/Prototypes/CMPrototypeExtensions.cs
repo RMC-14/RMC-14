@@ -6,20 +6,26 @@ namespace Content.Shared._CM14.Prototypes;
 
 public static class CMPrototypeExtensions
 {
+    public static bool FilterCM = true;
+
     public static IEnumerable<T> EnumerateCM<T>(this IPrototypeManager prototypes) where T : class, IPrototype, ICMSpecific
     {
-        return prototypes.EnumeratePrototypes<T>().Where(p => p.IsCM);
+        var protos = prototypes.EnumeratePrototypes<T>();
+        if (FilterCM)
+            protos = protos.Where(p => p.IsCM);
+
+        return protos;
     }
 
     public static bool TryCM<T>(this IPrototypeManager prototypes, string id, [NotNullWhen(true)] out T? prototype) where T : class, IPrototype, ICMSpecific
     {
         prototype = default;
 
-        if (!prototypes.TryIndex(id, out T? proto) ||
-            !proto.IsCM)
-        {
+        if (!prototypes.TryIndex(id, out T? proto))
             return false;
-        }
+
+        if (FilterCM && !proto.IsCM)
+            return false;
 
         prototype = proto;
         return true;

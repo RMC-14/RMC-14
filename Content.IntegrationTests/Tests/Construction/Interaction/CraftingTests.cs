@@ -5,7 +5,6 @@ using Robust.Shared.Containers;
 
 namespace Content.IntegrationTests.Tests.Construction.Interaction;
 
-[Ignore("Uses disabled upstream prototypes")]
 public sealed class CraftingTests : InteractionTest
 {
     public const string ShardGlass = "ShardGlass";

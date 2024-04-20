@@ -2,7 +2,6 @@ using Content.IntegrationTests.Tests.Interaction;
 
 namespace Content.IntegrationTests.Tests.Construction.Interaction;
 
-[Ignore("Uses disabled upstream prototypes")]
 public sealed class ComputerConstruction : InteractionTest
 {
     private const string Computer = "Computer";
