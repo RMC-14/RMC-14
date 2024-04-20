@@ -2,12 +2,13 @@ using Content.IntegrationTests.Tests.Interaction;
 
 namespace Content.IntegrationTests.Tests.Construction.Interaction;
 
+[Ignore("Uses disabled upstream prototypes")]
 public sealed class WindowConstruction : InteractionTest
 {
     private const string Window = "Window";
     private const string RWindow = "ReinforcedWindow";
 
-    // [Test]
+    [Test]
     public async Task ConstructWindow()
     {
         await StartConstruction(Window);
@@ -15,7 +16,7 @@ public sealed class WindowConstruction : InteractionTest
         ClientAssertPrototype(Window, ClientTarget);
     }
 
-    // [Test]
+    [Test]
     public async Task DeconstructWindow()
     {
         await StartDeconstruction(Window);
@@ -24,7 +25,7 @@ public sealed class WindowConstruction : InteractionTest
         await AssertEntityLookup((Glass, 2));
     }
 
-    // [Test]
+    [Test]
     public async Task ConstructReinforcedWindow()
     {
         await StartConstruction(RWindow);
@@ -32,7 +33,7 @@ public sealed class WindowConstruction : InteractionTest
         ClientAssertPrototype(RWindow, ClientTarget);
     }
 
-    // [Test]
+    [Test]
     public async Task DeonstructReinforcedWindow()
     {
         await StartDeconstruction(RWindow);
