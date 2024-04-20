@@ -1,4 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._CM14.Webbing;
+using Content.Shared.Inventory.Events;
+using Content.Shared.Storage;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -9,10 +12,12 @@ public partial class InventorySystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IViewVariablesManager _vvm = default!;
+    [Dependency] private readonly SharedWebbingSystem _webbing = default!;
 
     private void InitializeSlots()
     {
         SubscribeLocalEvent<InventoryComponent, ComponentInit>(OnInit);
+        SubscribeAllEvent<OpenSlotStorageNetworkMessage>(OnOpenSlotStorage);
 
         _vvm.GetTypeHandler<InventoryComponent>()
             .AddHandler(HandleViewVariablesSlots, ListViewVariablesSlots);
@@ -37,6 +42,20 @@ public partial class InventorySystem : EntitySystem
             var container = _containerSystem.EnsureContainer<ContainerSlot>(uid, slot.Name);
             container.OccludesLight = false;
             component.Containers[i] = container;
+        }
+    }
+
+    private void OnOpenSlotStorage(OpenSlotStorageNetworkMessage ev, EntitySessionEventArgs args)
+    {
+        if (args.SenderSession.AttachedEntity is not { Valid: true } uid)
+            return;
+
+        if (TryGetSlotEntity(uid, ev.Slot, out var entityUid))
+        {
+            if (TryComp<StorageComponent>(entityUid, out var storageComponent))
+                _storageSystem.OpenStorageUI(entityUid.Value, uid, storageComponent);
+            else if (TryComp<WebbingClothingComponent>(entityUid, out var webbingClothing))
+                _webbing.OpenStorage((entityUid.Value, webbingClothing), uid);
         }
     }
 

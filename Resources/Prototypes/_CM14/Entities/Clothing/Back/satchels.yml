@@ -1,6 +1,6 @@
 # Almayer personnel
 - type: entity
-  parent: CMBackpack
+  parent: CMPersonalStorageBase
   id: CMSatchel
   name: leather satchel
   description: A very fancy satchel made of fine leather. Looks pretty pricey.
