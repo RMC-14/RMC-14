@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: CMBaseStructureCorrodable
+  parent: CMBaseStructurecorrodible
   id: CMWindoorAssembly
   name: windoor assembly
   description: It opens, it closes, and you can see through it!

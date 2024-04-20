@@ -8,8 +8,8 @@
 - type: entity
   parent:
   - CMBaseStructure
-  - CMCorrodable
-  id: CMBaseStructureCorrodable
+  - CMcorrodible
+  id: CMBaseStructurecorrodible
   abstract: true
   placement:
     mode: SnapgridCenter
@@ -22,15 +22,15 @@
     mode: SnapgridCenter
 
 - type: entity
-  id: CMCorrodable
+  id: CMcorrodible
   abstract: true
   components:
-  - type: Corrodable
+  - type: corrodible
 
 # BaseWall
 - type: entity
   abstract: true
-  parent: CMBaseStructureCorrodable
+  parent: CMBaseStructurecorrodible
   id: CMBaseWall
   description: A huge chunk of metal used to separate rooms.
   placement:
