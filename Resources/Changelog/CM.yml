@@ -474,5 +474,12 @@
   id: 63
   time: '2024-04-20T07:34:00.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1281
+- author: DrSmugleaf
+  changes:
+  - message: You can no longer see through containers with the night vision overlay.
+    type: Fix
+  id: 64
+  time: '2024-04-20T08:17:26.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1283
 Name: CM
 Order: -1
