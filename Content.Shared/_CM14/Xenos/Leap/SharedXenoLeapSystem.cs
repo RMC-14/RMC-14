@@ -104,7 +104,7 @@ public sealed class SharedXenoLeapSystem : EntitySystem
         var impulse = direction.Normalized() * xeno.Comp.Strength * physics.Mass;
 
         leaping.Origin = _transform.GetMoverCoordinates(xeno);
-        leaping.KnockdownTime = xeno.Comp.KnockdownTime;
+        leaping.ParalyzeTime = xeno.Comp.KnockdownTime;
         leaping.HitSound = xeno.Comp.HitSound;
         leaping.LeapEndTime = _timing.CurTime + TimeSpan.FromSeconds(direction.Length() / xeno.Comp.Strength);
 
@@ -130,11 +130,9 @@ public sealed class SharedXenoLeapSystem : EntitySystem
                 _broadphase.RegenerateContacts(xeno, physics);
         }
 
-        victim.RecoverAt = _timing.CurTime + xeno.Comp.KnockdownTime;
+        victim.RecoverAt = _timing.CurTime + xeno.Comp.ParalyzeTime;
 
-        _stun.TryKnockdown(marineId, xeno.Comp.KnockdownTime, true);
-        _stun.TryStun(marineId, xeno.Comp.KnockdownTime, true);
-
+        _stun.TryParalyze(marineId, xeno.Comp.ParalyzeTime, true);
         _audio.PlayPredicted(xeno.Comp.HitSound, xeno, xeno);
 
         var ev = new XenoLeapHitEvent(xeno, (marineId, marine));

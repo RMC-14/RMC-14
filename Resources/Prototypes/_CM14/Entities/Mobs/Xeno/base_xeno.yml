@@ -186,7 +186,7 @@
     - type: XenoEgg
   - type: DropHeldOnIncapacitate
   - type: NightVision
-  - type: KnockdownOnPullAttemptImmune
+  - type: ParalyzeOnPullAttemptImmune
   - type: GhostTakeoverAvailable
   - type: GhostRole
     makeSentient: true
@@ -286,7 +286,7 @@
       location: Right
     - name: Left Hand
       location: Left
-  - type: KnockdownOnPullAttempt
+  - type: ParalyzeOnPullAttempt
 
 - type: entity
   abstract: true

@@ -185,9 +185,8 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
             return false;
 
         var victimComp = EnsureComp<VictimHuggedComponent>(victim);
-        victimComp.RecoverAt = _timing.CurTime + hugger.Comp.KnockdownTime;
-        _stun.TryKnockdown(victim, hugger.Comp.KnockdownTime, true);
-        _stun.TryStun(victim, hugger.Comp.KnockdownTime, true);
+        victimComp.RecoverAt = _timing.CurTime + hugger.Comp.ParalyzeTime;
+        _stun.TryParalyze(victim, hugger.Comp.ParalyzeTime, true);
 
         var container = _container.EnsureContainer<ContainerSlot>(victim, victimComp.ContainerId);
         _container.Insert(hugger.Owner, container);

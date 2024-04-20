@@ -101,10 +101,7 @@ public sealed class XenoSpitSystem : EntitySystem
         }
 
         if (!resisted)
-        {
-            _stun.TryKnockdown(target, spit.Comp.Knockdown, true);
-            _stun.TryStun(target, spit.Comp.Knockdown, true);
-        }
+            _stun.TryParalyze(target, spit.Comp.Paralyze, true);
 
         _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { target }, Filter.Pvs(target));
     }
