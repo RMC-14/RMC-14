@@ -443,5 +443,12 @@
   id: 59
   time: '2024-04-20T01:20:15.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1253
+- author: DrSmugleaf
+  changes:
+  - message: Fixed inconsistent range when leaping as a runner or facehugger.
+    type: Fix
+  id: 60
+  time: '2024-04-20T05:01:30.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1257
 Name: CM
 Order: -1
