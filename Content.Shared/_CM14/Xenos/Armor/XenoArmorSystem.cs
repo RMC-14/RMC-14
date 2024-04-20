@@ -1,14 +1,20 @@
 ﻿using Content.Shared.Alert;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Explosion;
 using Content.Shared.FixedPoint;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._CM14.Xenos.Armor;
 
 public sealed class XenoArmorSystem : EntitySystem
 {
     [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+
+    [ValidatePrototypeId<DamageGroupPrototype>]
+    private const string DamageGroup = "Brute";
 
     public override void Initialize()
     {
@@ -58,13 +64,24 @@ public sealed class XenoArmorSystem : EntitySystem
             return;
 
         var resist = Math.Pow(1.1, armor / 5.0);
-        args.Damage /= resist;
+        var types = _prototypes.Index<DamageGroupPrototype>(DamageGroup).DamageTypes;
+
+        foreach (var type in types)
+        {
+            if (args.Damage.DamageDict.TryGetValue(type, out var amount))
+                args.Damage.DamageDict[type] = amount / resist;
+        }
 
         var newDamage = args.Damage.GetTotal();
         if (newDamage < armor * 2)
         {
             var damageWithArmor = FixedPoint2.Max(0, newDamage * 4 - armor);
-            args.Damage *= damageWithArmor / (newDamage * 4);
+
+            foreach (var type in types)
+            {
+                if (args.Damage.DamageDict.TryGetValue(type, out var amount))
+                    args.Damage.DamageDict[type] = amount * damageWithArmor / (newDamage * 4);
+            }
         }
     }
 
