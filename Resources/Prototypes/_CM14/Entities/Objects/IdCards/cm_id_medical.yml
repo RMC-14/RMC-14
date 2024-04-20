@@ -1,31 +1,31 @@
 ﻿- type: entity
   parent: CMIDCardSilver
-  id: MarineCMOIDCard
+  id: CMIDCardCMO
   name: chief medical officer ID card
   components:
   - type: PresetIdCard
-    job: MarineCMO
+    job: CMCMO
 
 - type: entity
   parent: CMIDCardBase
-  id: MarineDoctorIDCard
+  id: CMIDCardDoctor
   name: doctor's ID card
   components:
   - type: PresetIdCard
-    job: MarineDoctor
+    job: CMDoctor
 
 - type: entity
   parent: CMIDCardBase
-  id: NurseIDCard
+  id: CMIDCardNurse
   name: nurse's ID card
   components:
   - type: PresetIdCard
-    job: Nurse
+    job: CMNurse
 
 - type: entity
   parent: CMIDCardBase
-  id: ResearcherIDCard
+  id: CMIDCardResearcher
   name: researcher's ID card
   components:
   - type: PresetIdCard
-    job: Researcher
+    job: CMResearcher

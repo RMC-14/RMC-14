@@ -22,7 +22,7 @@
   - type: AccessReader
     access: [["CMAccessBrig"]]
   - type: PaintableAirlock
-    department: MilitaryPolice
+    department: CMMilitaryPolice
 
 - type: entity
   parent: CMAirlockSecurity

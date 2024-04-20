@@ -14,7 +14,7 @@
   - type: AccessReader
     access: [["CMAccessCommand"]]
   - type: PaintableAirlock
-    department: MarineCommand
+    department: CMCommand
 
 - type: entity
   parent: CMAirlockCommand

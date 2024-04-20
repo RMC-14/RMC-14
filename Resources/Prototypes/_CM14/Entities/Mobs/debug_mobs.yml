@@ -6,7 +6,7 @@
   components:
   - type: Marine
   - type: Loadout
-    prototypes: [ StaffOfficerGear ]
+    prototypes: [ CMGearStaffOfficer ]
 
 - type: entity
   name: CM Test Dummy Spawner

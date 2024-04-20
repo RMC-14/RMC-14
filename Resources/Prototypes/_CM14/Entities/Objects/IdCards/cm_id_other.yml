@@ -1,18 +1,18 @@
 ﻿- type: entity
   parent: CMIDCardBase
-  id: CorrespondentIDCard
+  id: CMIDCardCorrespondent
   name: correspondent ID card
   components:
   - type: PresetIdCard
-    job: Correspondent
+    job: CMCorrespondent
 
 - type: entity
   parent: CMIDCardLanyard
-  id: ColonistIDCard
+  id: CMIDCardColonist
   name: colonist ID card
   components:
   - type: PresetIdCard
-    job: Survivor
+    job: CMSurvivor
 
 - type: entity
   parent: CMIDCardGold

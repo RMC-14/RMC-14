@@ -1,20 +1,20 @@
 - type: job
-  id: HospitalCorpsman
-  parent: JobBaseCM
-  name: job-name-hospital-corpsman
-  description: job-description-hospital-corpsman
-  playTimeTracker: JobHospitalCorpsman
+  parent: CMJobBase
+  id: CMHospitalCorpsman
+  name: cm-job-name-hospital-corpsman
+  description: cm-job-description-hospital-corpsman
+  playTimeTracker: CMJobHospitalCorpsman
   requirements:
     - !type:DepartmentTimeRequirement
-      department: Marine
+      department: CMMarine
       time: 3600 #1 hrs
     - !type:DepartmentTimeRequirement
-      department: Medical
+      department: CMMedical
       time: 3600 #1 hrs
-  startingGear: HospitalCorpsmanGear
-  icon: "JobIconHospitalCorpsman"
+  startingGear: CMGearHospitalCorpsman
+  icon: "CMJobIconHospitalCorpsman"
   joinNotifyCrew: false
-  supervisors: job-supervisors-cm14-sl
+  supervisors: cm-job-supervisors-sl
   canBeAntag: false
   accessGroups:
   - HospitalCorpsman
@@ -27,7 +27,7 @@
       surgery: 1
 
 - type: startingGear
-  id: HospitalCorpsmanGear
+  id: CMGearHospitalCorpsman
   equipment:
     jumpsuit: CMJumpsuitMarineMedic
     back: CMSatchelMarineMedic
@@ -36,19 +36,23 @@
     eyes: ClothingEyesHudMedical
     head: CMArmorHelmetM10Medic
     outerClothing: ArmorMarineM3
-    id: DogtagHospitalCorpsman
+    id: CMDogtagHospitalCorpsman
     ears: CMHeadsetAlphaMedic
     belt: CMBeltMedicBagFilled
 
 - type: entity
-  id: SpawnPointHospitalCorpsman
   parent: CMSpawnPointJobBase
+  id: CMSpawnPointHospitalCorpsman
   name: hospital corpsman spawn point
   components:
   - type: SpawnPoint
-    job_id: HospitalCorpsman
+    job_id: CMHospitalCorpsman
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
     - state: hospital_corpsman
+
+- type: playTimeTracker
+  id: CMJobHospitalCorpsman
+

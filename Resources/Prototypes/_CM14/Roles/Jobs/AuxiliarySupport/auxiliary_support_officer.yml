@@ -1,19 +1,19 @@
 ﻿- type: job
-  id: AuxiliarySupportOfficer
-  parent: JobBaseCM
-  name: job-name-aso
-  description: job-description-aso
-  playTimeTracker: JobAuxiliarySupportOfficer
+  parent: CMJobBase
+  id: CMAuxiliarySupportOfficer
+  name: cm-job-name-aso
+  description: cm-job-description-aso
+  playTimeTracker: CMJobAuxiliarySupportOfficer
   requirements:
   - !type:DepartmentTimeRequirement
-    department: Marine
+    department: CMMarine
     time: 18000 # 5 hours
   weight: 5
-  startingGear: ASOGear
-  icon: "JobIconASO"
+  startingGear: CMGearASO
+  icon: "CMJobIconASO"
   requireAdminNotify: true
   joinNotifyCrew: true
-  supervisors: job-supervisors-cm14-co
+  supervisors: cm-job-supervisors-co
   canBeAntag: false
   accessGroups:
   - ASO
@@ -38,24 +38,27 @@
     - type: MarineOrders
 
 - type: startingGear
-  id: ASOGear
+  id: CMGearASO
   equipment:
     jumpsuit: CMJumpsuitBO
     outerClothing: CMCoatASO
     back: CMSatchel
     shoes: CMBootsBrown
-    id: ASOIDCard
+    id: CMIDCardASO
     ears: CMHeadsetLeader
 
 - type: entity
-  id: CMSpawnPointASO
   parent: CMSpawnPointJobBase
+  id: CMSpawnPointASO
   name: auxiliary support officer spawn point
   components:
   - type: SpawnPoint
-    job_id: AuxiliarySupportOfficer
+    job_id: CMAuxiliarySupportOfficer
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
     - state: auxiliary_support_officer
+
+- type: playTimeTracker
+  id: CMJobAuxiliarySupportOfficer

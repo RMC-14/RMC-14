@@ -1,17 +1,17 @@
 ﻿- type: job
-  id: MaintTech
-  parent: JobBaseCM
-  name: job-name-maint-tech
-  description: job-description-maint-tech
-  playTimeTracker: JobMaintTech
+  parent: CMJobBase
+  id: CMMaintTech
+  name: cm-job-name-maint-tech
+  description: cm-job-description-maint-tech
+  playTimeTracker: CMJobMaintTech
   requirements:
   - !type:DepartmentTimeRequirement
-    department: Marine
+    department: CMMarine
     time: 3600 # 1 hours
-  startingGear: MaintTechGear
-  icon: "JobIconMaintTech"
+  startingGear: CMGearMaintTech
+  icon: "CMJobIconMaintTech"
   joinNotifyCrew: false
-  supervisors: job-supervisors-cm14-ce
+  supervisors: cm-job-supervisors-ce
   canBeAntag: true
   accessGroups:
   - MaintTech
@@ -25,25 +25,28 @@
       powerLoader: 2
 
 - type: startingGear
-  id: MaintTechGear
+  id: CMGearMaintTech
   equipment:
     jumpsuit: CMJumpsuitMaintTech
     back: CMSatchelEngineer
     shoes: CMBootsBrown
     gloves: CMHandsInsulated
-    id: MaintTechIDCard
+    id: CMIDCardMaintTech
     ears: CMHeadsetEngineer
     belt: CMBeltUtilityFilled
 
 - type: entity
-  id: SpawnPointMaintTech
   parent: CMSpawnPointJobBase
+  id: CMSpawnPointMaintTech
   name: maint tech spawn point
   components:
   - type: SpawnPoint
-    job_id: MaintTech
+    job_id: CMMaintTech
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
     - state: maintenance_tech
+
+- type: playTimeTracker
+  id: CMJobMaintTech

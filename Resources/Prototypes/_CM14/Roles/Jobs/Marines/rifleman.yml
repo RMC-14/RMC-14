@@ -1,13 +1,13 @@
 - type: job
-  id: Rifleman
-  parent: JobBaseCM
-  name: job-name-rifleman
-  description: job-description-rifleman
-  playTimeTracker: JobRifleman
-  startingGear: RiflemanGear
-  icon: "JobIconRifleman"
+  parent: CMJobBase
+  id: CMRifleman
+  name: cm-job-name-rifleman
+  description: cm-job-description-rifleman
+  playTimeTracker: CMJobRifleman
+  startingGear: CMGearRifleman
+  icon: "CMJobIconRifleman"
   joinNotifyCrew: false
-  supervisors: job-supervisors-cm14-sl
+  supervisors: cm-job-supervisors-sl
   canBeAntag: false
   accessGroups:
   - Rifleman
@@ -17,7 +17,7 @@
     - type: Skills
 
 - type: startingGear
-  id: RiflemanGear
+  id: CMGearRifleman
   equipment:
     jumpsuit: JumpsuitMarine
     back: CMSatchelMarine
@@ -25,18 +25,21 @@
     head: ArmorHelmetM10
     outerClothing: ArmorMarineM3
     gloves: CMHandsBlack
-    id: DogtagRifleman
+    id: CMDogtagRifleman
     ears: CMHeadsetAlpha
 
 - type: entity
-  id: SpawnPointRifleman
   parent: CMSpawnPointJobBase
+  id: CMSpawnPointRifleman
   name: rifleman spawn point
   components:
   - type: SpawnPoint
-    job_id: Rifleman
+    job_id: CMRifleman
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
     - state: rifleman
+
+- type: playTimeTracker
+  id: CMJobRifleman

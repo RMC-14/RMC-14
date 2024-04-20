@@ -1,13 +1,13 @@
 ﻿- type: job
-  id: Nurse
-  parent: JobBaseCM
-  name: job-name-nurse
-  description: job-description-nurse
-  playTimeTracker: JobNurse
-  startingGear: NurseGear
-  icon: "JobIconNurse"
+  parent: CMJobBase
+  id: CMNurse
+  name: cm-job-name-nurse
+  description: cm-job-description-nurse
+  playTimeTracker: CMJobNurse
+  startingGear: CMGearNurse
+  icon: "CMJobIconNurse"
   joinNotifyCrew: false
-  supervisors: job-supervisors-cm14-cmo
+  supervisors: cm-job-supervisors-cmo
   canBeAntag: true
   accessGroups:
   - CMMedical
@@ -19,26 +19,29 @@
       surgery: 1
 
 - type: startingGear
-  id: NurseGear
+  id: CMGearNurse
   equipment:
     jumpsuit: CMScrubsNurse
     back: CMSatchelMedical
     gloves: CMHandsLatex
     shoes: ClothingShoesColorWhite
     head: CMHeadCapSurgOrange
-    id: NurseIDCard
+    id: CMIDCardNurse
     ears: CMHeadsetMedical
     belt: CMBeltMedicalFilled
 
 - type: entity
-  id: CMSpawnPointNurse
   parent: CMSpawnPointJobBase
+  id: CMSpawnPointNurse
   name: nurse spawn point
   components:
   - type: SpawnPoint
-    job_id: Nurse
+    job_id: CMNurse
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
     - state: nurse
+
+- type: playTimeTracker
+  id: CMJobNurse
