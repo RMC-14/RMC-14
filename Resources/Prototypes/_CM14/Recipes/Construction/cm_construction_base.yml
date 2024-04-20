@@ -1,0 +1,9 @@
+﻿- type: construction
+  abstract: true
+  id: CM
+  isCM: true
+
+- type: constructionGraph
+  abstract: true
+  id: CM
+  isCM: true

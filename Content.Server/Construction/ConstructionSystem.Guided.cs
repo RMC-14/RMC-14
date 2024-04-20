@@ -1,11 +1,11 @@
 using Content.Server.Construction.Components;
+using Content.Shared._CM14.Prototypes;
 using Content.Shared.Construction;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Construction.Steps;
 using Content.Shared.Examine;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
-using Robust.Shared.Player;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Construction
@@ -25,7 +25,7 @@ namespace Content.Server.Construction
 
         private void OnGuideRequested(RequestConstructionGuide msg, EntitySessionEventArgs args)
         {
-            if (!_prototypeManager.TryIndex(msg.ConstructionId, out ConstructionPrototype? prototype))
+            if (!_prototypeManager.TryCM(msg.ConstructionId, out ConstructionPrototype? prototype))
                 return;
 
             if(GetGuide(prototype) is {} guide)

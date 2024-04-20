@@ -4,13 +4,14 @@ using Content.Client.Guidebook;
 using Content.Client.Guidebook.Controls;
 using Content.Client.Lobby;
 using Content.Client.UserInterface.Controls;
+using Content.Shared._CM14.Prototypes;
 using Content.Shared.Input;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
-using static Robust.Client.UserInterface.Controls.BaseButton;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using static Robust.Client.UserInterface.Controls.BaseButton;
 
 namespace Content.Client.UserInterface.Systems.Guidebook;
 
@@ -149,7 +150,7 @@ public sealed class GuidebookUIController : UIController, IOnStateEntered<LobbyS
 
         if (guides == null)
         {
-            guides = _prototypeManager.EnumeratePrototypes<GuideEntryPrototype>()
+            guides = _prototypeManager.EnumerateCM<GuideEntryPrototype>()
                 .ToDictionary(x => x.ID, x => (GuideEntry) x);
         }
         else if (includeChildren)
