@@ -54,3 +54,8 @@
     plasma: 1000
     maxPlasma: 1000
     plasmaRegenOnWeeds: 6
+  - type: Tackle
+    min: 2
+    max: 4
+    chance: 0.35
+    stun: 7
