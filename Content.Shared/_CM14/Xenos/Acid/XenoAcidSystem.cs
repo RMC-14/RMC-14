@@ -28,7 +28,7 @@ public sealed class XenoAcidSystem : EntitySystem
     private void OnXenoCorrosiveAcid(Entity<XenoAcidComponent> xeno, ref XenoCorrosiveAcidEvent args)
     {
         if (xeno.Owner != args.Performer ||
-            !CheckCorrodablePopups(xeno, args.Target))
+            !CheckCorrodiblePopups(xeno, args.Target))
         {
             return;
         }
@@ -45,7 +45,7 @@ public sealed class XenoAcidSystem : EntitySystem
         if (args.Handled || args.Cancelled || args.Target is not { } target)
             return;
 
-        if (!CheckCorrodablePopups(xeno, target))
+        if (!CheckCorrodiblePopups(xeno, target))
             return;
 
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
@@ -70,11 +70,12 @@ public sealed class XenoAcidSystem : EntitySystem
         ent.Comp.CorrodesAt += args.PausedTime;
     }
 
-    private bool CheckCorrodablePopups(Entity<XenoAcidComponent> xeno, EntityUid target)
+    private bool CheckCorrodiblePopups(Entity<XenoAcidComponent> xeno, EntityUid target)
     {
-        if (!HasComp<CorrodableComponent>(target))
+        if (!TryComp(target, out CorrodibleComponent? corrodible) ||
+            !corrodible.IsCorrodible)
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-acid-not-corrodable", ("target", target)), xeno, xeno);
+            _popup.PopupClient(Loc.GetString("cm-xeno-acid-not-corrodible", ("target", target)), xeno, xeno);
             return false;
         }
 

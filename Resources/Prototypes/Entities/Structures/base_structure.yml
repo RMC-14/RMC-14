@@ -1,6 +1,6 @@
 - type: entity
+  parent: CMCorrodible
   id: BaseStructure
-  parent: CMCorrodable
   abstract: true
   placement:
     mode: SnapgridCenter
