@@ -55,11 +55,8 @@
       types:
         Heat: 5
     coldDamage: {}
-    ColdDamageThreshold: 0
   - type: Flammable
     fireSpread: true
-    cold:
-      types: {}
     damage:
       types:
         Heat: 3
@@ -72,7 +69,7 @@
       methods: [Touch]
       effects:
       - !type:HealthChange
-        scaled: true
+        scaleByQuantity: true
         damage:
           types:
             Heat: 10
