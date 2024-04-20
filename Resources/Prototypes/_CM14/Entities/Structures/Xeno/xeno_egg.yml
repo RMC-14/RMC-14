@@ -7,6 +7,11 @@
     snap:
     - Wall
   components:
+  - type: Flammable
+    fireSpread: false
+    damage:
+      types:
+        Heat: 3
   - type: Sprite
     sprite: _CM14/Structures/Xenos/xeno_egg.rsi
     drawdepth: FloorObjects
@@ -26,3 +31,9 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Heat
+        damage: 60
+      behaviors:
+      - !type:BurnBodyBehavior { }
