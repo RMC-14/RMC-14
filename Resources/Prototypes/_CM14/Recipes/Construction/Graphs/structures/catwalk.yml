@@ -1,4 +1,5 @@
 ﻿- type: constructionGraph
+  parent: CM
   id: CMCatwalk
   start: start
   graph:
