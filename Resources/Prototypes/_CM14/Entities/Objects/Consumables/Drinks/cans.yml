@@ -1,55 +1,22 @@
 - type: entity
-  parent: BaseItem
+  parent: DrinkCanBaseFull
   id: CMDrinkCanBase
   abstract: true
   components:
   - type: Sprite
     state: icon
+    layers:
+    - state: icon
+      map: ["enum.OpenableVisuals.Layer"]
   - type: Item
     size: Small
-  - type: Drink
-  - type: Openable
-  - type: PressurizedDrink
   - type: SolutionContainerManager
     solutions:
       drink:
         maxVol: 50
-  - type: SolutionTransfer
-    canChangeTransferAmount: true
-    transferAmount: 10
-    maxTransferAmount: 15
-  - type: UserInterface
-    interfaces:
-    - key: enum.TransferAmountUiKey.Key
-      type: TransferAmountBoundUserInterface
-  - type: FitsInDispenser
-    solution: drink
-  - type: DrawableSolution
-    solution: drink
-  - type: RefillableSolution
-    solution: drink
-  - type: DrainableSolution
-    solution: drink
-  - type: Appearance
-  - type: Spillable
-    solution: drink
-  - type: MeleeWeapon
-    soundNoDamage:
-      path: "/Audio/Effects/Fluids/splat.ogg"
-    damage:
-      types:
-        Blunt: 0
-  - type: UseDelay
-  - type: SpaceGarbage
-  - type: TrashOnSolutionEmpty
-    solution: drink
-  - type: PhysicalComposition
+  - type: PhysicalComposition # todo cm14 add cm materials
     materialComposition:
       Steel: 50
-  - type: Tag
-    tags:
-    - DrinkCan
-    - Recyclable
 
 - type: entity
   parent: CMDrinkCanBase
