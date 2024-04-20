@@ -14,8 +14,3 @@
   - type: Item
     size: Small
     sprite: _CM14/Objects/Tools/welder.rsi
-  - type: Welder
-    litMeleeDamageBonus:
-      types:
-        Heat: 8
-        Blunt: -5
