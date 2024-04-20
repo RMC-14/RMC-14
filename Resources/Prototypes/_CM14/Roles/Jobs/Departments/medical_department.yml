@@ -1,7 +1,6 @@
 ﻿- type: department
   parent: CMDepartmentBase
   id: CMMedical
-  name: cm-department-Medical
   description: cm-department-Medical-description
   color: "#008160"
   roles:

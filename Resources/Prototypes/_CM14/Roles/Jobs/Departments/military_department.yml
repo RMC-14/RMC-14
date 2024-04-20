@@ -1,7 +1,6 @@
 ﻿- type: department
   parent: CMDepartmentBase
   id: CMMilitaryPolice
-  name: cm-department-MilitaryPolice
   description: cm-department-MilitaryPolice-description
   color: "#DE3A3A"
   roles:

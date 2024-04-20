@@ -1,7 +1,6 @@
 ﻿- type: department
   parent: CMDepartmentBase
   id: CMMarine
-  name: cm-department-Marine
   description: cm-department-Marine-description
   color: "#DE3A3A"
   roles:

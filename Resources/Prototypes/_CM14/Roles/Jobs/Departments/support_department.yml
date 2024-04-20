@@ -1,7 +1,6 @@
 ﻿- type: department
   parent: CMDepartmentBase
   id: CMAuxiliarySupport
-  name: cm-department-AuxiliarySupport
   description: cm-department-AuxiliarySupport-description
   color: "#C38312"
   roles:

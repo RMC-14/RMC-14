@@ -1,7 +1,6 @@
 ﻿- type: department
   parent: CMDepartmentBase
   id: CMCivilians
-  name: cm-department-Civilians
   description: cm-department-Civilians-description
   color: "#C38312"
   roles:

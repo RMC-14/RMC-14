@@ -33,7 +33,7 @@
     gloves: CMHandsBrown
     shoes: CMBootsBlackFilled
     head: CMHeadCap
-    id: CMIDCardDDC
+    id: CMIDCardDCC
     ears: CMHeadsetPilot
 
 - type: entity
