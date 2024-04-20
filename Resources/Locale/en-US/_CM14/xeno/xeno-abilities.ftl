@@ -27,7 +27,7 @@ cm-xeno-leap-cancelled = You cancel your leap!
 cm-xeno-weeds-already-here = There are already weeds here!
 
 # Corrosive acid
-cm-xeno-acid-not-corrodable = You can't corrode {THE($target)}!
+cm-xeno-acid-not-corrodible = You can't corrode {THE($target)}!
 cm-xeno-acid-already-corroding = {THE($target)} already has corrosive acid on it!
 
 # Devour

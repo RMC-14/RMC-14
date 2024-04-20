@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: BaseStructure
+  parent: CMBaseStructureCorrodible
   id: CMBarricadeBase
   components:
   - type: Anchorable
