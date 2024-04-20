@@ -7,5 +7,11 @@ namespace Content.Shared._CM14.Xenos.Hugger;
 public sealed partial class XenoHuggerComponent : Component
 {
     [DataField, AutoNetworkedField]
+    public TimeSpan ManualAttachDelay = TimeSpan.FromSeconds(2);
+
+    [DataField, AutoNetworkedField]
     public TimeSpan KnockdownTime = TimeSpan.FromMinutes(1.5);
+
+    [DataField, AutoNetworkedField]
+    public float HugRange = 1.5f;
 }
