@@ -17,7 +17,7 @@
     - trigger:
         !type:DamageTrigger
         damage: 300
-      behaviours:
+      behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
           CMGirder:
@@ -81,7 +81,7 @@
     - trigger:
         !type:DamageTrigger
         damage: 600
-      behaviours:
+      behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
           CMGirder:
@@ -114,7 +114,7 @@
     - trigger:
         !type:DamageTrigger
         damage: 9000
-      behaviours:
+      behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: IconSmooth
@@ -242,7 +242,7 @@
     - trigger:
         !type:DamageTrigger
         damage: 3000
-      behaviours:
+      behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
 
@@ -267,7 +267,7 @@
     - trigger:
         !type:DamageTrigger
         damage: 3000
-      behaviours:
+      behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: IconSmooth
@@ -294,7 +294,7 @@
     - trigger:
         !type:DamageTrigger
         damage: 3000
-      behaviours:
+      behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: IconSmooth
@@ -321,7 +321,7 @@
     - trigger:
         !type:DamageTrigger
         damage: 3000
-      behaviours:
+      behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: IconSmooth
