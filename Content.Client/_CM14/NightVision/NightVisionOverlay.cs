@@ -10,9 +10,9 @@ namespace Content.Client._CM14.NightVision;
 public sealed class NightVisionOverlay : Overlay
 {
     [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] private readonly IPlayerManager _players = default!;
 
+    private readonly ContainerSystem _container;
     private readonly TransformSystem _transform;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
@@ -21,6 +21,7 @@ public sealed class NightVisionOverlay : Overlay
     {
         IoCManager.InjectDependencies(this);
 
+        _container = _entity.System<ContainerSystem>();
         _transform = _entity.System<TransformSystem>();
     }
 
@@ -37,9 +38,12 @@ public sealed class NightVisionOverlay : Overlay
         var eyeRot = eye?.Rotation ?? default;
 
         var entities = _entity.EntityQueryEnumerator<MobStateComponent, SpriteComponent, TransformComponent>();
-        while (entities.MoveNext(out _, out var sprite, out var xform))
+        while (entities.MoveNext(out var uid, out _, out var sprite, out var xform))
         {
             if (xform.MapID != eye?.Position.MapId)
+                continue;
+
+            if (_container.IsEntityOrParentInContainer(uid))
                 continue;
 
             var position = xform.Coordinates.ToMapPos(_entity, _transform);
