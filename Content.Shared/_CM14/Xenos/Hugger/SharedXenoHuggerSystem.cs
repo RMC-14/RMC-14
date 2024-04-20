@@ -6,6 +6,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Standing;
+using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
@@ -23,7 +24,9 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -66,7 +69,9 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
     private void OnHuggerLeapHit(Entity<XenoHuggerComponent> hugger, ref XenoLeapHitEvent args)
     {
-        Hug(hugger, args.Hit);
+        var coordinates = _transform.GetMoverCoordinates(hugger);
+        if (coordinates.InRange(EntityManager, _transform, args.Leaping.Origin, hugger.Comp.HugRange))
+            Hug(hugger, args.Hit);
     }
 
     private void OnHuggerAfterInteract(Entity<XenoHuggerComponent> ent, ref AfterInteractEvent args)
@@ -181,6 +186,8 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
         var victimComp = EnsureComp<VictimHuggedComponent>(victim);
         victimComp.RecoverAt = _timing.CurTime + hugger.Comp.KnockdownTime;
+        _stun.TryKnockdown(victim, hugger.Comp.KnockdownTime, true);
+        _stun.TryStun(victim, hugger.Comp.KnockdownTime, true);
 
         var container = _container.EnsureContainer<ContainerSlot>(victim, victimComp.ContainerId);
         _container.Insert(hugger.Owner, container);
