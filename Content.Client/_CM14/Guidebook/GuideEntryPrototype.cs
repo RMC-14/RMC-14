@@ -2,13 +2,12 @@
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
-// ReSharper disable CheckNamespace
-namespace Content.Shared.Roles;
-// ReSharper restore CheckNamespace
+// ReSharper disable once CheckNamespace
+namespace Content.Client.Guidebook;
 
-public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
+public sealed partial class GuideEntryPrototype : IInheritingPrototype, ICMSpecific
 {
-    [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<JobPrototype>))]
+    [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<GuideEntryPrototype>))]
     public string[]? Parents { get; }
 
     [NeverPushInheritance]

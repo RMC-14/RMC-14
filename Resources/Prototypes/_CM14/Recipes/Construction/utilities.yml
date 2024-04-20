@@ -1,4 +1,5 @@
 - type: construction
+  parent: CM
   name: APC
   id: CMApc
   graph: CMApc
@@ -14,6 +15,7 @@
   canBuildInImpassable: true
 
 - type: construction
+  parent: CM
   name: machine frame
   description: A machine under construction. Needs more parts.
   id: CMMachineFrame

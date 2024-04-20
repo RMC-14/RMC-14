@@ -1,4 +1,4 @@
-﻿using Content.Shared.Roles;
+﻿using Content.Shared._CM14.Prototypes;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
@@ -6,7 +6,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototy
 namespace Content.Shared.Decals;
 // ReSharper restore CheckNamespace
 
-public sealed partial class DecalPrototype : IInheritingPrototype
+public sealed partial class DecalPrototype : IInheritingPrototype, ICMSpecific
 {
     [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<DecalPrototype>))]
     public string[]? Parents { get; }
@@ -16,5 +16,5 @@ public sealed partial class DecalPrototype : IInheritingPrototype
     public bool Abstract { get; }
 
     [DataField]
-    public bool IsCM;
+    public bool IsCM { get; }
 }

@@ -1,6 +1,5 @@
 using System.Linq;
 using Content.IntegrationTests.Tests.Interaction;
-using Content.Shared.DoAfter;
 using Content.Shared.Stacks;
 using Robust.Shared.Containers;
 
