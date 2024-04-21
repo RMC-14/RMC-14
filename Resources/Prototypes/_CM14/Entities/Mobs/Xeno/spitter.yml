@@ -2,6 +2,7 @@
   parent:
   - CMXenoDeveloped
   - CMXenoTail
+  - CMXenoFlammable
   id: CMXenoSpitter
   name: Spitter
   description: A gross, oozing alien of some kind.

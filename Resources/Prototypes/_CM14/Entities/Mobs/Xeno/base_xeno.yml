@@ -98,12 +98,6 @@
     groups:
       Flammable: [Touch]
       Extinguish: [Touch]
-  - type: Flammable
-    fireSpread: true
-    canResistFire: true
-    damage: #per second, scales with number of fire 'stacks'
-      types:
-        Heat: 1
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Generic_mob_burning
@@ -154,26 +148,6 @@
       type: XenoWordQueenBui
   - type: TypingIndicator
     proto: alien
-  - type: AtmosExposed
-  - type: Temperature
-    heatDamageThreshold: 360
-    coldDamageThreshold: -150
-    currentTemperature: 310.15
-    coldDamage: #per second, scales with temperature & other constants
-      types:
-        Cold: 0.1
-    specificHeat: 42
-    heatDamage: #per second, scales with temperature & other constants
-      types:
-        Heat: 0.1
-  - type: ThermalRegulator
-    metabolismHeat: 800
-    radiatedHeat: 100
-    implicitHeatRegulation: 500
-    sweatHeatRegulation: 2000
-    shiveringHeatRegulation: 2000
-    normalBodyTemperature: 310.15
-    thermalRegulationTemperatureThreshold: 25
   - type: MovedByPressure
   - type: NoSlip
   - type: Pullable # TODO CM14 xeno pullable
@@ -195,6 +169,11 @@
     name: cm-xeno-name
     description: cm-xeno-description
     rules: cm-xeno-rules
+  - type: StatusEffects
+    allowed:
+    - Stun
+    - KnockedDown
+    - SlowedDown
 
 - type: entity
   abstract: true
@@ -272,12 +251,6 @@
   - CMXenoAI
   abstract: true
   components:
-  - type: DamageOnHighSpeedImpact
-    soundHit:
-      path: /Audio/Effects/hit_kick.ogg
-    damage:
-      types:
-        Blunt: 5
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -299,3 +272,14 @@
     tailDamage:
       groups:
         Brute: 15
+
+- type: entity
+  abstract: true
+  id: CMXenoFlammable
+  components:
+  - type: Flammable
+    fireSpread: true
+    canResistFire: true
+    damage: #per second, scales with number of fire 'stacks'
+      types:
+        Heat: 3

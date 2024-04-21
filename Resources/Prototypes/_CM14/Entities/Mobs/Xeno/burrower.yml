@@ -2,6 +2,7 @@
   parent:
   - CMXenoDeveloped
   - CMXenoTail
+  - CMXenoFlammable
   id: CMXenoBurrower
   name: Burrower
   description: A beefy alien with sharp claws.

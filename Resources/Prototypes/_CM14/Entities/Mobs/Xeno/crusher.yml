@@ -2,6 +2,7 @@
   parent:
   - CMXenoDeveloped
   - CMXenoTail
+  - CMXenoFlammable
   id: CMXenoCrusher
   name: Crusher
   description: A huge alien with an enormous armored crest.

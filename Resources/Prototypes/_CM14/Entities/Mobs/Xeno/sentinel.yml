@@ -2,6 +2,7 @@
   parent:
   - CMXenoDeveloped
   - CMXenoTail
+  - CMXenoFlammable
   id: CMXenoSentinel
   name: Sentinel
   description: A slithery, spitting kind of alien.
