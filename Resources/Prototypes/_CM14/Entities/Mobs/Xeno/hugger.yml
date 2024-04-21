@@ -1,5 +1,7 @@
 ﻿- type: entity
-  parent: [CMXenoUndeveloped, CMXenoMelee]
+  parent:
+  - CMXenoUndeveloped
+  - CMXenoMelee
   id: CMXenoHugger # TODO CM14 slowly die off weeds
   name: Facehugger
   components:

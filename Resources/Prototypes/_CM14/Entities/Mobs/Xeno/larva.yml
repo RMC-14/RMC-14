@@ -1,5 +1,7 @@
 ﻿- type: entity
-  parent: CMXenoUndeveloped
+  parent:
+  - CMXenoUndeveloped
+  - CMXenoFlammable
   id: CMXenoLarva
   name: Larva
   components:
