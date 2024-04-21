@@ -495,5 +495,15 @@
   id: 66
   time: '2024-04-20T23:02:20.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1282
+- author: DrSmugleaf
+  changes:
+  - message: Added tackling on disarm. Successfully disarming a marine 4 times in
+      a row with less than 4 seconds passing between each disarm will result in them
+      getting knocked down and stunned for 5 seconds. The disarms needed and stun
+      duration vary per xeno caste.
+    type: Add
+  id: 67
+  time: '2024-04-21T02:43:19.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1287
 Name: CM
 Order: -1
