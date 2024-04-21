@@ -5,6 +5,9 @@
   id: BaseAlertOrder
   order:
     - category: Health
+    - category: XenoNightVision
+    - category: XenoPlasma
+    - category: XenoArmor
     - category: Stamina
     - alertType: SuitPower
     - category: Internals
