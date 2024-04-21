@@ -10,7 +10,7 @@ public sealed partial class XenoHuggerComponent : Component
     public TimeSpan ManualAttachDelay = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan KnockdownTime = TimeSpan.FromMinutes(1.5);
+    public TimeSpan ParalyzeTime = TimeSpan.FromMinutes(1.5);
 
     [DataField, AutoNetworkedField]
     public float HugRange = 1.5f;

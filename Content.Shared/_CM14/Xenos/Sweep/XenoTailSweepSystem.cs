@@ -74,8 +74,7 @@ public sealed class XenoTailSweepSystem : EntitySystem
             _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { marine }, filter);
 
             _throwing.TryThrow(marine, diff, 5);
-            _stun.TryKnockdown(marine, xeno.Comp.StunTime, true);
-            _stun.TryStun(marine, xeno.Comp.StunTime, true);
+            _stun.TryParalyze(marine, xeno.Comp.ParalyzeTime, true);
 
             _audio.PlayPvs(xeno.Comp.HitSound, marine);
             SpawnAttachedTo(xeno.Comp.HitEffect, marine.Owner.ToCoordinates());

@@ -41,8 +41,8 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
         var active = EnsureComp<XenoActiveParalyzingSlashComponent>(xeno);
 
         active.ExpireAt = _timing.CurTime + xeno.Comp.ActiveDuration;
-        active.StunDelay = xeno.Comp.StunDelay;
-        active.StunDuration = xeno.Comp.StunDuration;
+        active.ParalyzeDelay = xeno.Comp.StunDelay;
+        active.ParalyzeDuration = xeno.Comp.StunDuration;
 
         Dirty(xeno, active);
 
@@ -65,8 +65,8 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
             // TODO CM14 slight blindness
             var victim = EnsureComp<VictimBeingParalyzedComponent>(entity);
 
-            victim.ParalyzeAt = _timing.CurTime + xeno.Comp.StunDelay;
-            victim.ParalyzeDuration = xeno.Comp.StunDuration;
+            victim.ParalyzeAt = _timing.CurTime + xeno.Comp.ParalyzeDelay;
+            victim.ParalyzeDuration = xeno.Comp.ParalyzeDuration;
 
             Dirty(entity, victim);
 
@@ -108,8 +108,7 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
                 continue;
 
             RemCompDeferred<VictimBeingParalyzedComponent>(uid);
-            _stun.TryKnockdown(uid, victim.ParalyzeDuration, true);
-            _stun.TryStun(uid, victim.ParalyzeDuration, true);
+            _stun.TryParalyze(uid, victim.ParalyzeDuration, true);
         }
     }
 }

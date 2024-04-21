@@ -56,7 +56,7 @@
       shader: unshaded
   - type: XenoSlowingSpitProjectile
     slow: 0
-    knockdown: 1
+    paralyze: 1
     armorResistsKnockdown: false
 
 - type: entity
@@ -73,7 +73,7 @@
       shader: unshaded
   - type: XenoSlowingSpitProjectile
     slow: 5
-    knockdown: 0
+    paralyze: 0
   - type: TimedDespawn
     lifetime: 0.2
   - type: Projectile

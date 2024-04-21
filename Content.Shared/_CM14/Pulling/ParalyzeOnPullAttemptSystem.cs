@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Pulling;
 
-public sealed class KnockdownOnPullAttemptSystem : EntitySystem
+public sealed class ParalyzeOnPullAttemptSystem : EntitySystem
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -17,22 +17,21 @@ public sealed class KnockdownOnPullAttemptSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<KnockdownOnPullAttemptComponent, PullAttemptEvent>(OnKnockdownOnPullAttempt);
+        SubscribeLocalEvent<ParalyzeOnPullAttemptComponent, PullAttemptEvent>(OnParalyzeOnPullAttempt);
     }
 
-    private void OnKnockdownOnPullAttempt(Entity<KnockdownOnPullAttemptComponent> ent, ref PullAttemptEvent args)
+    private void OnParalyzeOnPullAttempt(Entity<ParalyzeOnPullAttemptComponent> ent, ref PullAttemptEvent args)
     {
         var user = args.PullerUid;
         var target = args.PulledUid;
         if (target != ent.Owner ||
-            HasComp<KnockdownOnPullAttemptImmuneComponent>(user) ||
+            HasComp<ParalyzeOnPullAttemptImmuneComponent>(user) ||
             _mobState.IsIncapacitated(ent))
         {
             return;
         }
 
-        _stun.TryStun(user, ent.Comp.Duration, true);
-        _stun.TryKnockdown(user, ent.Comp.Duration, true);
+        _stun.TryParalyze(user, ent.Comp.Duration, true);
         args.Cancelled = true;
 
         if (!_timing.IsFirstTimePredicted)

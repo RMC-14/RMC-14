@@ -46,3 +46,6 @@
     damage:
       groups:
         Brute: 35
+  - type: Tackle
+    threshold: 4
+    stun: 5
