@@ -2,6 +2,7 @@
   parent:
   - CMXenoDeveloped
   - CMXenoTail
+  - CMXenoFlammable
   id: CMXenoWarrior
   name: Warrior
   description: A beefy alien with an armored carapace.

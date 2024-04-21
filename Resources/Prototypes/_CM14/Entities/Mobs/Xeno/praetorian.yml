@@ -2,6 +2,7 @@
   parent:
   - CMXenoDeveloped
   - CMXenoTail
+  - CMXenoFlammable
   id: CMXenoPraetorian
   name: Praetorian
   description: A huge, looming beast of an alien.

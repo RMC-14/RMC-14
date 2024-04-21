@@ -2,6 +2,7 @@
   parent:
   - CMXenoDeveloped
   - CMXenoTail
+  - CMXenoFlammable
   id: CMXenoRavager
   name: Ravager
   description: A huge, nasty red alien with enormous scythed claws.
@@ -43,3 +44,7 @@
   - type: Tackle
     threshold: 4
     stun: 9
+  - type: Flammable
+    damage:
+      types:
+        Heat: 0
