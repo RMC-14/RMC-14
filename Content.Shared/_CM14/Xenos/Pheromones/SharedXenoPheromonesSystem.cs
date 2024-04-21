@@ -19,10 +19,11 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 {
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
@@ -35,12 +36,14 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         .ToArray();
 
     private EntityQuery<DamageableComponent> _damageableQuery;
+    private EntityQuery<MobStateComponent> _mobStateQuery;
 
     public override void Initialize()
     {
         base.Initialize();
 
         _damageableQuery = GetEntityQuery<DamageableComponent>();
+        _mobStateQuery = GetEntityQuery<MobStateComponent>();
 
         SubscribeLocalEvent<XenoPheromonesComponent, EntityUnpausedEvent>(OnXenoPheromonesUnpaused);
         SubscribeLocalEvent<XenoPheromonesComponent, XenoPheromonesActionEvent>(OnXenoPheromonesAction);
@@ -141,7 +144,8 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
     private void OnWardingUpdateMobState(Entity<XenoWardingPheromonesComponent> warding, ref UpdateMobStateEvent args)
     {
-        if (args.State != MobState.Dead ||
+        if (args.Component.CurrentState == MobState.Dead ||
+            args.State != MobState.Dead ||
             !_damageableQuery.TryGetComponent(warding, out var damageable) ||
             !_mobThreshold.TryGetDeadThreshold(warding, out var threshold))
         {
@@ -206,8 +210,12 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
             {
                 if (xeno.OnWeeds)
                 {
-                    _xeno.HealDamage(uid, recovery.HealthRegen * recovery.Multiplier);
-                    _xenoPlasma.RegenPlasma(uid, recovery.PlasmaRegen * recovery.Multiplier);
+                    if (!_mobStateQuery.TryGetComponent(uid, out var mobState) ||
+                        !_mobState.IsDead(uid, mobState))
+                    {
+                        _xeno.HealDamage(uid, recovery.HealthRegen * recovery.Multiplier);
+                        _xenoPlasma.RegenPlasma(uid, recovery.PlasmaRegen * recovery.Multiplier);
+                    }
                 }
 
                 recovery.NextRegenTime = _timing.CurTime + recovery.Delay;
