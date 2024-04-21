@@ -2,6 +2,7 @@
   parent:
   - CMXenoUndeveloped
   - CMXenoMelee
+  - CMXenoFlammable
   id: CMXenoHugger # TODO CM14 slowly die off weeds
   name: Facehugger
   components:

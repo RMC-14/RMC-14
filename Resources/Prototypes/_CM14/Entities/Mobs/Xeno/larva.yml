@@ -45,3 +45,5 @@
         - SmallMobMask
         layer:
         - SmallMobLayer
+  - type: Flammable
+    canResistFire: false
