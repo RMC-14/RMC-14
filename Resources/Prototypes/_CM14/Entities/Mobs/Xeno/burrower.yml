@@ -45,7 +45,5 @@
       groups:
         Brute: 27.5
   - type: Tackle
-    min: 3
-    max: 5
-    chance: 0.40
+    threshold: 4
     stun: 9

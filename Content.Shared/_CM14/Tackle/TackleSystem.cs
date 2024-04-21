@@ -8,7 +8,6 @@ using Content.Shared.Stunnable;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
-using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Tackle;
@@ -18,7 +17,6 @@ public sealed class TackleSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -43,7 +41,7 @@ public sealed class TackleSystem : EntitySystem
 
         _colorFlash.RaiseEffect(Color.Aqua, new List<EntityUid> { target.Owner }, Filter.PvsExcept(args.User));
 
-        if (ShouldParalyze((args.User, tackle), (target, recently)))
+        if (recently.Current < tackle.Threshold)
         {
             var targetName = Identity.Name(target, EntityManager, args.User);
             _popup.PopupClient($"You try to tackle {targetName}", args.User, args.User);
@@ -91,20 +89,6 @@ public sealed class TackleSystem : EntitySystem
         }
 
         _stun.TryParalyze(target, tackle.Stun, true);
-    }
-
-    private bool ShouldParalyze(Entity<TackleComponent> tackle, Entity<TackledRecentlyComponent> able)
-    {
-        if (able.Comp.Current >= tackle.Comp.Max)
-            return true;
-
-        if (able.Comp.Current >= tackle.Comp.Max &&
-            _random.Prob(tackle.Comp.Chance.Float()))
-        {
-            return true;
-        }
-
-        return false;
     }
 
     public override void Update(float frameTime)
