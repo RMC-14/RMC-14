@@ -505,5 +505,17 @@
   id: 67
   time: '2024-04-21T02:43:19.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1287
+- author: DrSmugleaf
+  changes:
+  - message: The xeno Queen can no longer catch fire.
+    type: Add
+  - message: The xeno Ravager is now immune to damage dealt by catching fire.
+    type: Add
+  - message: Xenos can now drop and roll to resist fire by clicking the fire status
+      alert.
+    type: Add
+  id: 68
+  time: '2024-04-21T04:30:56.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1291
 Name: CM
 Order: -1
