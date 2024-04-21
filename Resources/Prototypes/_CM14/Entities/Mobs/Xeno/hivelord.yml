@@ -57,5 +57,5 @@
       groups:
         Brute: 22.5
   - type: Tackle
-    min: 3
+    threshold: 3
     stun: 9
