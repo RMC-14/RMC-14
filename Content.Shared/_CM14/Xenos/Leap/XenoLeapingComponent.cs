@@ -12,7 +12,7 @@ public sealed partial class XenoLeapingComponent : Component
     public EntityCoordinates Origin;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan KnockdownTime;
+    public TimeSpan ParalyzeTime;
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier? HitSound;

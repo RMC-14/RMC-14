@@ -10,7 +10,7 @@ public sealed partial class XenoSlowingSpitProjectileComponent : Component
     public TimeSpan Slow = TimeSpan.FromSeconds(3);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan Knockdown = TimeSpan.FromSeconds(2);
+    public TimeSpan Paralyze = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
     public bool ArmorResistsKnockdown = true;

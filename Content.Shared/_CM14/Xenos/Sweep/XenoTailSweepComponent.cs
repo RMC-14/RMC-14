@@ -21,7 +21,7 @@ public sealed partial class XenoTailSweepComponent : Component
 
     // TODO CM14 scale with damage dealt up to a cap
     [DataField, AutoNetworkedField]
-    public TimeSpan StunTime = TimeSpan.FromSeconds(2);
+    public TimeSpan ParalyzeTime = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier Sound = new SoundCollectionSpecifier("XenoTailSwipe");

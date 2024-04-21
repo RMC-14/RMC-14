@@ -74,3 +74,6 @@
       groups:
         Brute: 40
   - type: XenoOvipositorCapable
+  - type: Tackle
+    threshold: 3
+    stun: 11

@@ -3,4 +3,4 @@
 namespace Content.Shared._CM14.Pulling;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class KnockdownOnPullAttemptImmuneComponent : Component;
+public sealed partial class ParalyzeOnPullAttemptImmuneComponent : Component;
