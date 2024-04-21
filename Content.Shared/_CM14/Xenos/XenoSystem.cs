@@ -6,6 +6,8 @@ using Content.Shared.Access.Components;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
@@ -16,6 +18,7 @@ public sealed class XenoSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -25,6 +28,7 @@ public sealed class XenoSystem : EntitySystem
 
     private EntityQuery<DamageableComponent> _damageableQuery;
     private EntityQuery<MarineComponent> _marineQuery;
+    private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
 
     public override void Initialize()
@@ -33,6 +37,7 @@ public sealed class XenoSystem : EntitySystem
 
         _damageableQuery = GetEntityQuery<DamageableComponent>();
         _marineQuery = GetEntityQuery<MarineComponent>();
+        _mobStateQuery = GetEntityQuery<MobStateComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
 
         SubscribeLocalEvent<XenoComponent, MapInitEvent>(OnXenoMapInit);
@@ -156,6 +161,11 @@ public sealed class XenoSystem : EntitySystem
                 continue;
 
             xeno.NextRegenTime = time + xeno.RegenCooldown;
+            if (_mobStateQuery.TryGetComponent(uid, out var mobState) &&
+                _mobState.IsDead(uid, mobState))
+            {
+                continue;
+            }
 
             if (xeno.OnWeeds)
             {
