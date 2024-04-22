@@ -532,5 +532,13 @@
   id: 69
   time: '2024-04-22T03:48:30.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1293
+- author: DrSmugleaf
+  changes:
+  - message: Medically-unskilled marines now have a 3 second do after delay when using
+      auto-injectors, except for the emergency one.
+    type: Tweak
+  id: 70
+  time: '2024-04-22T04:29:41.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1294
 Name: CM
 Order: -1
