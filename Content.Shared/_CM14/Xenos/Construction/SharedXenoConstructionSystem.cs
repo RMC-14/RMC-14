@@ -255,7 +255,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         if (!TryComp(args.User, out XenoConstructionComponent? construction))
             return;
 
-        if (!InRangePopup(args.User, args.Target, construction.BuildRange.Float()))
+        if (!CanBuildOnTilePopup((args.User, construction), args.Target))
             args.Cancelled = true;
     }
 
@@ -373,10 +373,29 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
 
     private bool CanBuildOnTilePopup(Entity<XenoConstructionComponent> xeno, EntityCoordinates target)
     {
-        if (!InRangePopup(xeno, target, xeno.Comp.BuildRange.Float()) ||
-            !TileSolidAndNotBlocked(target))
+        if (target.GetGridUid(EntityManager) is not { } gridId ||
+            !TryComp(gridId, out MapGridComponent? grid))
+        {
+            _popup.PopupClient("You can't build there!", xeno, xeno);
+            return false;
+        }
+
+        target = target.SnapToGrid(EntityManager, _map);
+        if (!IsOnWeeds((gridId, grid), target))
+        {
+            _popup.PopupClient("You can only shape on weeds. Find some resin before you start building!", xeno, xeno);
+            return false;
+        }
+
+        if (!InRangePopup(xeno, target, xeno.Comp.BuildRange.Float()))
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-cant-reach-there"), xeno, xeno);
+            return false;
+        }
+
+        if (!TileSolidAndNotBlocked(target))
+        {
+            _popup.PopupClient("You can't build there!", xeno, xeno);
             return false;
         }
 
