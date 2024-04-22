@@ -51,5 +51,5 @@
       state: morph_resin
     event: !type:XenoOrderConstructionActionEvent
     deselectOnMiss: false
-    range: 10000
+    range: 20
   - type: XenoConstructionAction
