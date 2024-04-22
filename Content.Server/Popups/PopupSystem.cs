@@ -93,6 +93,10 @@ namespace Content.Server.Popups
             // do nothing duh its for client only
         }
 
+        public override void PopupClient(string? message, EntityCoordinates coordinates, EntityUid? recipient, PopupType type = PopupType.Small)
+        {
+        }
+
         public override void PopupEntity(string? message, EntityUid uid, ICommonSession recipient, PopupType type = PopupType.Small)
         {
             if (message == null)
