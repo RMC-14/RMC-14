@@ -19,6 +19,7 @@
   suffix: Full
   components:
     - type: Stack
+      count: 50
       stackType: CMSteel
       baseLayer: base
       layerStates:
