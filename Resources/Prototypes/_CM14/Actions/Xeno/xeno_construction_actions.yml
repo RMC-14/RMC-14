@@ -36,7 +36,7 @@
       state: secrete_resin
     event: !type:XenoSecreteStructureActionEvent
     deselectOnMiss: false
-    range: 10000
+    range: 20
   - type: XenoConstructionAction
 
 - type: entity
