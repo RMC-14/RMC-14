@@ -35,6 +35,9 @@
       sprite: _CM14/Actions/xeno_actions.rsi
       state: secrete_resin
     event: !type:XenoSecreteStructureActionEvent
+    deselectOnMiss: false
+    range: 20
+  - type: XenoConstructionAction
 
 - type: entity
   id: ActionXenoOrderConstruction
@@ -47,3 +50,6 @@
       sprite: _CM14/Actions/xeno_actions.rsi
       state: morph_resin
     event: !type:XenoOrderConstructionActionEvent
+    deselectOnMiss: false
+    range: 20
+  - type: XenoConstructionAction

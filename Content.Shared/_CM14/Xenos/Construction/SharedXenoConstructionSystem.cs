@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
+using Content.Shared._CM14.Actions;
 using Content.Shared._CM14.Xenos.Construction.Events;
 using Content.Shared._CM14.Xenos.Plasma;
 using Content.Shared.Actions;
@@ -65,6 +66,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<XenoWeedsComponent, AnchorStateChangedEvent>(OnWeedsAnchorChanged);
 
         SubscribeLocalEvent<XenoChooseConstructionActionComponent, XenoConstructionChosenEvent>(OnActionConstructionChosen);
+        SubscribeLocalEvent<XenoConstructionActionComponent, ValidateActionWorldTargetEvent>(OnSecreteActionValidateTarget);
 
         SubscribeLocalEvent<HiveConstructionNodeComponent, ExaminedEvent>(OnHiveConstructionNodeExamined);
         SubscribeLocalEvent<HiveConstructionNodeComponent, InteractHandEvent>(OnHiveConstructionNodeInteractedHand);
@@ -110,7 +112,6 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
             return;
 
         xeno.Comp.BuildChoice = args.StructureId;
-
         Dirty(xeno);
 
         if (TryComp(xeno, out ActorComponent? actor))
@@ -128,6 +129,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         if (xeno.Comp.BuildChoice == null || !CanBuildOnTilePopup(xeno, args.Target))
             return;
 
+        args.Handled = true;
         var ev = new XenoSecreteStructureDoAfterEvent(GetNetCoordinates(args.Target), xeno.Comp.BuildChoice.Value);
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.BuildDelay, ev, xeno)
         {
@@ -247,6 +249,15 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         }
     }
 
+    private void OnSecreteActionValidateTarget(Entity<XenoConstructionActionComponent> ent, ref ValidateActionWorldTargetEvent args)
+    {
+        if (!TryComp(args.User, out XenoConstructionComponent? construction))
+            return;
+
+        if (!CanBuildOnTilePopup((args.User, construction), args.Target))
+            args.Cancelled = true;
+    }
+
     private void OnHiveConstructionNodeExamined(Entity<HiveConstructionNodeComponent> node, ref ExaminedEvent args)
     {
         var plasmaLeft = node.Comp.PlasmaCost - node.Comp.PlasmaStored;
@@ -349,9 +360,10 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
     private bool InRangePopup(EntityUid xeno, EntityCoordinates target, float range)
     {
         var origin = _transform.GetMoverCoordinates(xeno);
+        target = target.SnapToGrid(EntityManager, _map);
         if (!origin.InRange(EntityManager, _transform, target, range))
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-cant-reach-there"), xeno, xeno);
+            _popup.PopupClient(Loc.GetString("cm-xeno-cant-reach-there"), target, xeno);
             return false;
         }
 
@@ -360,11 +372,26 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
 
     private bool CanBuildOnTilePopup(Entity<XenoConstructionComponent> xeno, EntityCoordinates target)
     {
-        // TODO CM14 calculate range limit from grid-snapped coordinates
-        if (!InRangePopup(xeno, target, xeno.Comp.BuildRange.Float()) ||
-            !TileSolidAndNotBlocked(target))
+        if (target.GetGridUid(EntityManager) is not { } gridId ||
+            !TryComp(gridId, out MapGridComponent? grid))
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-cant-reach-there"), xeno, xeno);
+            _popup.PopupClient("You can't build there!", target, xeno);
+            return false;
+        }
+
+        target = target.SnapToGrid(EntityManager, _map);
+        if (!IsOnWeeds((gridId, grid), target))
+        {
+            _popup.PopupClient("You can only shape on weeds. Find some resin before you start building!", target, xeno);
+            return false;
+        }
+
+        if (!InRangePopup(xeno, target, xeno.Comp.BuildRange.Float()))
+            return false;
+
+        if (!TileSolidAndNotBlocked(target))
+        {
+            _popup.PopupClient("You can't build there!", target, xeno);
             return false;
         }
 
@@ -373,7 +400,6 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
 
     private bool CanOrderConstructionPopup(Entity<XenoConstructionComponent> xeno, EntityCoordinates target)
     {
-        // TODO CM14 calculate range limit from grid-snapped coordinates
         if (!InRangePopup(xeno, target, xeno.Comp.OrderConstructionRange.Float()) ||
             !TileSolidAndNotBlocked(target) ||
             target.GetGridUid(EntityManager) is not { } gridId ||
