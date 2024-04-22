@@ -66,7 +66,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<XenoWeedsComponent, AnchorStateChangedEvent>(OnWeedsAnchorChanged);
 
         SubscribeLocalEvent<XenoChooseConstructionActionComponent, XenoConstructionChosenEvent>(OnActionConstructionChosen);
-        SubscribeLocalEvent<XenoSecreteStructureActionComponent, ValidateActionWorldTargetEvent>(OnSecreteActionValidateTarget);
+        SubscribeLocalEvent<XenoConstructionActionComponent, ValidateActionWorldTargetEvent>(OnSecreteActionValidateTarget);
 
         SubscribeLocalEvent<HiveConstructionNodeComponent, ExaminedEvent>(OnHiveConstructionNodeExamined);
         SubscribeLocalEvent<HiveConstructionNodeComponent, InteractHandEvent>(OnHiveConstructionNodeInteractedHand);
@@ -249,7 +249,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         }
     }
 
-    private void OnSecreteActionValidateTarget(Entity<XenoSecreteStructureActionComponent> ent, ref ValidateActionWorldTargetEvent args)
+    private void OnSecreteActionValidateTarget(Entity<XenoConstructionActionComponent> ent, ref ValidateActionWorldTargetEvent args)
     {
         if (!TryComp(args.User, out XenoConstructionComponent? construction))
             return;
