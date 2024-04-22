@@ -517,5 +517,20 @@
   id: 68
   time: '2024-04-21T04:30:56.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1291
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xeno construction range being inconsistent depending on where you
+      click on a tile.
+    type: Fix
+  - message: Increased xeno construction range from 1 tile to 1.9 tiles.
+    type: Tweak
+  - message: Xeno construction now require weeds on the tile.
+    type: Tweak
+  - message: If a location isn't valid for xeno construction, the action will remain
+      selected but show a popup for why it is not valid.
+    type: Tweak
+  id: 69
+  time: '2024-04-22T03:48:30.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1293
 Name: CM
 Order: -1
