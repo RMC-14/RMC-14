@@ -55,7 +55,7 @@
   components:
   - type: PhysicalComposition
     materialComposition:
-      Plasteel: 50 #Half of a regular plasteel sheet to reflect the crafting recipe
+      CMPlasteel: 50 #Half of a regular plasteel sheet to reflect the crafting recipe
   - type: Stack
     stackType: CMPlasteelRod
     baseLayer: base
