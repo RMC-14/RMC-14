@@ -73,7 +73,7 @@ public sealed class XenoArmorSystem : EntitySystem
         }
 
         var newDamage = args.Damage.GetTotal();
-        if (newDamage < armor * 2)
+        if (newDamage != FixedPoint2.Zero && newDamage < armor * 2)
         {
             var damageWithArmor = FixedPoint2.Max(0, newDamage * 4 - armor);
 
