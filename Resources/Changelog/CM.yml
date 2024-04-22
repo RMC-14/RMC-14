@@ -540,5 +540,12 @@
   id: 70
   time: '2024-04-22T04:29:41.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1294
+- author: Whisper
+  changes:
+  - message: Xenos do not take bloodloss damage anymore
+    type: Fix
+  id: 71
+  time: '2024-04-22T06:07:13.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1295
 Name: CM
 Order: -1
