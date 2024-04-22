@@ -88,3 +88,10 @@
         - MobMask
         layer:
         - MobLayer
+      fix2:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.52
+        density: 1000
+        layer:
+        - BulletImpassable
