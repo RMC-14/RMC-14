@@ -19,6 +19,10 @@
   description: Sheets made out of metal. They have been dubbed Metal Sheets.
   suffix: Full
   components:
+    - type: Material
+    - type: PhysicalComposition
+      materialComposition:
+        CMSteel: 100
     - type: Stack
       stackType: CMSteel
       baseLayer: base
