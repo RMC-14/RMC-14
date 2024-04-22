@@ -8,7 +8,7 @@
   },
   "states": [
     {
-      "name": "walking",
+      "name": "alive",
       "directions": 4
     },
     {
