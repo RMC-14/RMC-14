@@ -547,5 +547,14 @@
   id: 71
   time: '2024-04-22T06:07:13.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1295
+- author: DrSmugleaf
+  changes:
+  - message: Fixed some xeno sprites being off-center.
+    type: Fix
+  - message: Fixed some xeno hitboxes being too small.
+    type: Fix
+  id: 72
+  time: '2024-04-22T09:56:26.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1297
 Name: CM
 Order: -1
