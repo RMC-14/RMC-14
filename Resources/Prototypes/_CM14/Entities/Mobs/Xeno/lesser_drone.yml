@@ -8,7 +8,7 @@
   description: An alien drone. Looks... smaller.
   components:
   - type: Sprite
-    sprite: _CM14/Mobs/Xenos/Drone/drone.rsi
+    sprite: _CM14/Mobs/Xenos/LesserDrone/lesser_drone.rsi
   - type: MobState
     allowedStates:
     - Alive
