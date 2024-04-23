@@ -162,6 +162,15 @@ namespace Content.Client.Popups
             PopupEntity(message, uid, type);
         }
 
+        public override void PopupClient(string? message, EntityUid? recipient, PopupType type = PopupType.Small)
+        {
+            if (recipient == null)
+                return;
+
+            if (_timing.IsFirstTimePredicted)
+                PopupCursor(message, recipient.Value, type);
+        }
+
         public override void PopupClient(string? message, EntityUid uid, EntityUid? recipient, PopupType type = PopupType.Small)
         {
             if (recipient == null)
