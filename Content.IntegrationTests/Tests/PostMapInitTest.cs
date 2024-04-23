@@ -64,6 +64,7 @@ namespace Content.IntegrationTests.Tests
             "Atlas",
             "Reach",
             "Train",
+            "Oasis",
             "CMDev",
             "Savannah"
         };
