@@ -52,28 +52,23 @@ jobs:
     - name: Upload files to centcomm
       uses: appleboy/scp-action@master
       with:
-        host: centcomm.spacestation14.io
-        username: wizards-build-push
-        key: ${{ secrets.CENTCOMM_WIZARDS_BUILDS_PUSH_KEY }}
+        host: cdn.xenomorph.gay
+        username: cm14-build-push
+        key: ${{ secrets.CDN_CM14_BUILDS_PUSH_KEY }}
         source: "release/${{ github.sha }}"
-        target: "/home/wizards-build-push/builds_dir/builds/"
+        target: "/home/cm14-build-push/builds_dir/builds/"
         strip_components: 1
 
     - name: Update manifest JSON
       uses: appleboy/ssh-action@master
       with:
-        host: centcomm.spacestation14.io
-        username: wizards-build-push
-        key: ${{ secrets.CENTCOMM_WIZARDS_BUILDS_PUSH_KEY }}
-        script: /home/wizards-build-push/push.ps1 ${{ github.sha }}
+        host: cdn.xenomorph.gay
+        username: cm14-build-push
+        key: ${{ secrets.CDN_CM14_BUILDS_PUSH_KEY }}
+        script: /home/cm14-build-push/push.ps1 ${{ github.sha }}
 
     - name: Publish changelog (Discord)
       run: Tools/actions_changelogs_since_last_run.py
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DISCORD_WEBHOOK_URL: ${{ secrets.CHANGELOG_DISCORD_WEBHOOK }}
-
-    - name: Publish changelog (RSS)
-      run: Tools/actions_changelog_rss.py
-      env:
-        CHANGELOG_RSS_KEY: ${{ secrets.CHANGELOG_RSS_KEY }}
