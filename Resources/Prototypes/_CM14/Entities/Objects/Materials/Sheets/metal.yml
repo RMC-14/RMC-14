@@ -1,3 +1,4 @@
+# Steel
 - type: entity
   abstract: true
   parent: SheetMetalBase
@@ -18,6 +19,10 @@
   description: Sheets made out of metal. They have been dubbed Metal Sheets.
   suffix: Full
   components:
+    - type: Material
+    - type: PhysicalComposition
+      materialComposition:
+        CMSteel: 100
     - type: Stack
       count: 50
       stackType: CMSteel
@@ -55,6 +60,8 @@
       stackType: CMSteel
       count: 1
 
+# Plasteel
+
 - type: entity
   parent: CMSheetMetalBase
   id: CMSheetPlasteel
@@ -64,7 +71,7 @@
     - type: Material
     - type: PhysicalComposition
       materialComposition:
-        Plasteel: 100
+        CMPlasteel: 100
     - type: Stack
       count: 40
       stackType: CMPlasteel
@@ -84,18 +91,6 @@
       sprite: _CM14/Objects/Materials/Sheets/plasteel.rsi
       heldPrefix: plasteel
     - type: Appearance
-    - type: Extractable
-      grindableSolutionName: plasteel
-    - type: SolutionContainerManager
-      solutions:
-        plasteel:
-          reagents:
-            - ReagentId: Plasma
-              Quantity: 10
-            - ReagentId: Iron
-              Quantity: 9
-            - ReagentId: Carbon
-              Quantity: 1
 
 - type: entity
   parent: CMSheetPlasteel

@@ -26,7 +26,7 @@
 #        MatterBin: 3
 #        Manipulator: 1
 #      materialRequirements:
-#        Glass: 1
+#        CMGlass: 1
 
 #- type: entity
 #  parent: CMBaseMachineCircuitboard
@@ -43,7 +43,7 @@
 #        CableHV: 5
 #    - type: PhysicalComposition
 #      materialComposition:
-#        Glass: 200
+#        CMGlass: 200
 #      chemicalComposition:
 #        Silicon: 20
 #    - type: StaticPrice
@@ -64,7 +64,7 @@
 #        CableHV: 10
 #    - type: PhysicalComposition
 #      materialComposition:
-#        Glass: 200
+#        CMGlass: 200
 #      chemicalComposition:
 #        Silicon: 20
 #    - type: StaticPrice
