@@ -556,5 +556,12 @@
   id: 72
   time: '2024-04-22T09:56:26.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1297
+- author: DrSmugleaf
+  changes:
+  - message: Added xenos being able to nest marines onto weeded walls and resin walls.
+    type: Add
+  id: 73
+  time: '2024-04-24T03:45:41.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1302
 Name: CM
 Order: -1
