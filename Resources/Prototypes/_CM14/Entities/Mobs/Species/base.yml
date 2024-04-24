@@ -1,11 +1,50 @@
 ﻿- type: entity
   save: false
-  parent: BaseMobSpeciesOrganic
+  parent: BaseMobSpecies
   id: CMBaseMobSpeciesOrganic
   abstract: true
   name: Urist C.M. McHands
   suffix: CM14
   components:
+  - type: SolutionContainerManager
+  - type: InjectableSolution
+    solution: chemicals
+  - type: Bloodstream
+    bloodReagent: Blood
+    bloodlossDamage:
+      types:
+        Bloodloss: 0.5
+    bloodlossHealDamage:
+      types:
+        Bloodloss: -1
+  - type: Flashable
+  - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute.
+    allowedStates:
+    - Alive
+    damageCap: 20
+    damage:
+      types:
+        Heat: -0.07
+      groups:
+        Brute: -0.07
+  - type: StatusEffects
+    allowed:
+    - Stun
+    - KnockedDown
+    - SlowedDown
+    - Stutter
+    - SeeingRainbows
+    - Electrocution
+    - ForcedSleep
+    - TemporaryBlindness
+    - Drunk
+    - SlurredSpeech
+    - RatvarianLanguage
+    - PressureImmunity
+    - Muted
+    - Pacified
+    - StaminaModifier
+  - type: Blindable
   - type: Tag
     tags:
     - CanPilot
@@ -21,13 +60,6 @@
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: null
-  - type: Butcherable
-    butcheringType: Spike
-    spawned:
-    - id: FoodMeat
-      amount: 5
-  - type: Bloodstream
-    bloodReagent: Blood
   - type: Vocal
     sounds:
       Male: MaleHuman
@@ -50,6 +82,18 @@
     heatDamage:
       types:
         Heat: 1.5
+  - type: ThermalRegulator
+    metabolismHeat: 800
+    radiatedHeat: 100
+    implicitHeatRegulation: 500
+    sweatHeatRegulation: 2000
+    shiveringHeatRegulation: 2000
+    normalBodyTemperature: 310.15
+    thermalRegulationTemperatureThreshold: 25
+  - type: FireVisuals
+    sprite: Mobs/Effects/onfire.rsi
+    normalState: Generic_mob_burning
+    alternateState: Standing
   - type: MeleeWeapon
     soundHit:
       collection: Punch
@@ -76,4 +120,3 @@
   - type: Tackleable
   - type: Tackle
     stun: 10
-

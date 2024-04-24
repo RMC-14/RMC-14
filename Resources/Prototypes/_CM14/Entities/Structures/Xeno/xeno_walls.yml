@@ -20,9 +20,10 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: XenoNestCandidate
 
 - type: entity
-  parent: CMBaseWallXeno
+  parent: WallXenoResin
   id: WallXenoResinThick
   name: thick resin wall
   description: Weird slime solidified into a thick wall.
@@ -73,6 +74,7 @@
         layer:
         - GlassLayer
         density: 1000
+  - type: XenoNestCandidate
 
 - type: entity
   parent: BaseMembraneXeno
