@@ -120,3 +120,4 @@
   - type: Tackleable
   - type: Tackle
     stun: 10
+  - type: XenoNestable

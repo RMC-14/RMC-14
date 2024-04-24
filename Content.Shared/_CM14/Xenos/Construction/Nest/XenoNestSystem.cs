@@ -226,11 +226,17 @@ public sealed class XenoNestSystem : EntitySystem
 
     private bool CanNestPopup(EntityUid user, EntityUid victim, EntityUid surface, Direction direction)
     {
+        if (!HasComp<XenoNestableComponent>(user))
+        {
+            var victimName = Identity.Name(victim, EntityManager, user);
+            _popup.PopupClient($"{victimName} can't be put into a nest!", surface, user);
+            return false;
+        }
+
         if (!_standingState.IsDown(victim))
         {
             var victimName = Identity.Name(victim, EntityManager, user);
             _popup.PopupClient($"{victimName} is resisting, ground them!", victim, user, PopupType.MediumCaution);
-
             return false;
         }
 
