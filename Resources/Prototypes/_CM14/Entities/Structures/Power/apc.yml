@@ -103,13 +103,13 @@
 - type: entity
   parent: CMApcBase
   id: CMApcConstructed
-  suffix: Open
+  suffix: APC, Open
 
 # APCs in use
 - type: entity
   parent: CMApcBase
   id: CMApcLowCapacity
-  suffix: Small powercell, 50kW
+  suffix: APC, Small powercell, 50kW
   components: # todo cm14 / TODO cm14 make apc use powercells
   - type: Battery
     maxCharge: 50000
@@ -118,7 +118,7 @@
 - type: entity
   parent: CMApcBase
   id: CMApcMediumCapacity
-  suffix: Medium powercell, 100kW
+  suffix: APC, Medium powercell, 100kW
   components:
   - type: Battery
     maxCharge: 100000
@@ -127,7 +127,7 @@
 - type: entity
   parent: CMApcBase
   id: CMApcHighCapacity
-  suffix: High powercell, 150kW
+  suffix: APC, High powercell, 150kW
   components:
   - type: Battery
     maxCharge: 150000
