@@ -3918,9 +3918,6 @@ entities:
     - type: Transform
       pos: -0.6298993,4.7431083
       parent: 179
-    - type: NetworkConfigurator
-      devices:
-        'UID: 31739': invalid
 - proto: CMOperatingTable
   entities:
   - uid: 1100
