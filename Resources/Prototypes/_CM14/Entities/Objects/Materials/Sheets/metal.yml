@@ -16,7 +16,8 @@
 - type: entity
   parent: CMSheetMetalBase
   id: CMSheetSteel
-  description: Sheets made out of metal. They have been dubbed Metal Sheets.
+  name: steel sheet
+  description: Sheets made out of steel. They have been dubbed Steel Sheets.
   suffix: Full
   components:
     - type: Material
