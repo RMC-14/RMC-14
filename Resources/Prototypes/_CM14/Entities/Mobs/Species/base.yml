@@ -8,6 +8,9 @@
   components:
   - type: Tag
     tags:
+    - CanPilot
+    - FootstepSound
+    - DoorBumpOpener
     - ShoesRequiredStepTriggerImmune
   - type: Marine
   - type: Hunger
