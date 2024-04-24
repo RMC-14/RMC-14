@@ -394,6 +394,9 @@
     {
       "name": "pipe-tagger-partial",
       "directions": 4
+    },
+    {
+      "name": "disposal-charging"
     }
   ]
 }
