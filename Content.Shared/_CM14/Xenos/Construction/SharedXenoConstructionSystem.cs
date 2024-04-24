@@ -233,47 +233,6 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
             Spawn(args.StructureId, target.SnapToGrid(EntityManager, _map));
     }
 
-    private void OnWeedsAnchorChanged(Entity<XenoWeedsComponent> weeds, ref AnchorStateChangedEvent args)
-    {
-        if (_net.IsServer && !args.Anchored)
-            QueueDel(weeds);
-    }
-
-    private void OnActionConstructionChosen(Entity<XenoChooseConstructionActionComponent> xeno, ref XenoConstructionChosenEvent args)
-    {
-        if (_actions.TryGetActionData(xeno, out var action) &&
-            _prototype.HasIndex(args.Choice))
-        {
-            action.Icon = new SpriteSpecifier.EntityPrototype(args.Choice);
-            Dirty(xeno, action);
-        }
-    }
-
-    private void OnSecreteActionValidateTarget(Entity<XenoConstructionActionComponent> ent, ref ValidateActionWorldTargetEvent args)
-    {
-        if (!TryComp(args.User, out XenoConstructionComponent? construction))
-            return;
-
-        if (!CanBuildOnTilePopup((args.User, construction), args.Target))
-            args.Cancelled = true;
-    }
-
-    private void OnHiveConstructionNodeExamined(Entity<HiveConstructionNodeComponent> node, ref ExaminedEvent args)
-    {
-        var plasmaLeft = node.Comp.PlasmaCost - node.Comp.PlasmaStored;
-        args.PushMarkup(Loc.GetString("cm-xeno-construction-plasma-left", ("construction", node.Owner), ("plasma", plasmaLeft)));
-    }
-
-    private void OnHiveConstructionNodeInteractedHand(Entity<HiveConstructionNodeComponent> node, ref InteractHandEvent args)
-    {
-        InteractHiveConstructionNode(node, args.User);
-    }
-
-    private void OnHiveConstructionNodeInteractedNoHand(Entity<HiveConstructionNodeComponent> node, ref InteractNoHandEvent args)
-    {
-        InteractHiveConstructionNode(node, args.User);
-    }
-
     private void OnHiveConstructionNodeAddPlasmaDoAfter(Entity<XenoConstructionComponent> xeno, ref XenoConstructionAddPlasmaDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled || args.Target is not { } target)
@@ -317,6 +276,48 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         Spawn(node.Spawn, transform.Coordinates);
         QueueDel(target);
     }
+
+    private void OnWeedsAnchorChanged(Entity<XenoWeedsComponent> weeds, ref AnchorStateChangedEvent args)
+    {
+        if (_net.IsServer && !args.Anchored)
+            QueueDel(weeds);
+    }
+
+    private void OnActionConstructionChosen(Entity<XenoChooseConstructionActionComponent> xeno, ref XenoConstructionChosenEvent args)
+    {
+        if (_actions.TryGetActionData(xeno, out var action) &&
+            _prototype.HasIndex(args.Choice))
+        {
+            action.Icon = new SpriteSpecifier.EntityPrototype(args.Choice);
+            Dirty(xeno, action);
+        }
+    }
+
+    private void OnSecreteActionValidateTarget(Entity<XenoConstructionActionComponent> ent, ref ValidateActionWorldTargetEvent args)
+    {
+        if (!TryComp(args.User, out XenoConstructionComponent? construction))
+            return;
+
+        if (!CanBuildOnTilePopup((args.User, construction), args.Target))
+            args.Cancelled = true;
+    }
+
+    private void OnHiveConstructionNodeExamined(Entity<HiveConstructionNodeComponent> node, ref ExaminedEvent args)
+    {
+        var plasmaLeft = node.Comp.PlasmaCost - node.Comp.PlasmaStored;
+        args.PushMarkup(Loc.GetString("cm-xeno-construction-plasma-left", ("construction", node.Owner), ("plasma", plasmaLeft)));
+    }
+
+    private void OnHiveConstructionNodeInteractedHand(Entity<HiveConstructionNodeComponent> node, ref InteractHandEvent args)
+    {
+        InteractHiveConstructionNode(node, args.User);
+    }
+
+    private void OnHiveConstructionNodeInteractedNoHand(Entity<HiveConstructionNodeComponent> node, ref InteractNoHandEvent args)
+    {
+        InteractHiveConstructionNode(node, args.User);
+    }
+
 
     private void InteractHiveConstructionNode(Entity<HiveConstructionNodeComponent> node, EntityUid user)
     {

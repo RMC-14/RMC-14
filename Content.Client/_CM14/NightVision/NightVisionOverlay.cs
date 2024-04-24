@@ -1,9 +1,11 @@
 ﻿using Content.Shared._CM14.NightVision;
+using Content.Shared._CM14.Xenos.Construction.Nest;
 using Content.Shared.Mobs.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
+using Robust.Shared.Map;
 
 namespace Content.Client._CM14.NightVision;
 
@@ -37,21 +39,34 @@ public sealed class NightVisionOverlay : Overlay
         var eye = args.Viewport.Eye;
         var eyeRot = eye?.Rotation ?? default;
 
+        // TODO CM14 this should use its own component
         var entities = _entity.EntityQueryEnumerator<MobStateComponent, SpriteComponent, TransformComponent>();
         while (entities.MoveNext(out var uid, out _, out var sprite, out var xform))
         {
-            if (xform.MapID != eye?.Position.MapId)
-                continue;
+            Render((uid, sprite, xform), eye?.Position.MapId, handle, eyeRot);
+        }
 
-            if (_container.IsEntityOrParentInContainer(uid))
-                continue;
-
-            var position = xform.Coordinates.ToMapPos(_entity, _transform);
-            var rotation = _transform.GetWorldRotation(xform);
-
-            sprite.Render(handle, eyeRot, rotation, position: position);
+        var nests = _entity.EntityQueryEnumerator<XenoNestComponent, SpriteComponent, TransformComponent>();
+        while (nests.MoveNext(out var uid, out _, out var sprite, out var xform))
+        {
+            Render((uid, sprite, xform), eye?.Position.MapId, handle, eyeRot);
         }
 
         handle.SetTransform(Matrix3.Identity);
+    }
+
+    private void Render(Entity<SpriteComponent, TransformComponent> ent, MapId? map, DrawingHandleWorld handle, Angle eyeRot)
+    {
+        var (uid, sprite, xform) = ent;
+        if (xform.MapID != map)
+            return;
+
+        if (_container.IsEntityOrParentInContainer(uid))
+            return;
+
+        var position = xform.Coordinates.ToMapPos(_entity, _transform);
+        var rotation = _transform.GetWorldRotation(xform);
+
+        sprite.Render(handle, eyeRot, rotation, position: position);
     }
 }

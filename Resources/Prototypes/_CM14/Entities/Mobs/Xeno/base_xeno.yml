@@ -234,9 +234,9 @@
   parent: CMXenoBase
   abstract: true
   components:
-  - type: HTN
-    rootTask:
-      task: CMXenoCompound
+#  - type: HTN # TODO CM14 needs to not target nested marines
+#    rootTask:
+#      task: CMXenoCompound
   - type: NpcFactionMember
     factions:
     - Xeno
