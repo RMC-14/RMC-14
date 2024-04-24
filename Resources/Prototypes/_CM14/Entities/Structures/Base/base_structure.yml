@@ -69,6 +69,8 @@
         layer:
         - WallLayer
         density: 1000
+  - type: XenoWeedable
+    spawn: XenoWeedsWall
 
 - type: entity
   parent:

@@ -1,6 +1,7 @@
-﻿- type: entity # TODO CM14 description and sound
+﻿- type: entity # TODO CM14 sound
   id: XenoWeeds
   name: weeds
+  description: Weird black weeds...
   placement:
     mode: SnapgridCenter
     snap:
@@ -85,10 +86,11 @@
 #      params:
 #        volume: 8
 
-- type: entity # TODO CM14 description and sound
+- type: entity # TODO CM14 sound
   parent: XenoWeeds
   id: XenoWeedsSource
   name: resin node
+  description: A weird, pulsating node
   components:
   - type: Sprite
     sprite: _CM14/Structures/Xenos/xeno_weeds.rsi
@@ -97,7 +99,7 @@
     - state: weed0
     - state: constructionnode
 
-- type: entity # TODO CM14 description and sound
+- type: entity # TODO CM14 sound
   parent: XenoWeeds
   id: XenoHiveWeeds
   name: hive weeds
@@ -158,7 +160,7 @@
     - 0:
         hive_weed15: ""
 
-- type: entity # TODO CM14 description and sound
+- type: entity # TODO CM14 sound
   parent: XenoHiveWeeds
   id: XenoHiveWeedsSource
   name: hive resin node
@@ -169,6 +171,40 @@
     layers:
     - state: hive_weed0
     - state: constructionnode
+
+- type: entity
+  id: XenoWeedsWall
+  name: weeds
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        layer:
+        - WallLayer
+        density: 1000
+        hard: false
+  - type: Clickable
+  - type: Sprite
+    sprite: _CM14/Structures/Xenos/xeno_weeds.rsi
+    drawdepth: Objects
+    layers:
+    - state: weedwall
+  - type: IconSmooth
+    key: cm_xeno_weeds_walls
+    base: weedwall
+    mode: Corners
+  - type: XenoNestSurface
 
 - type: edgeSpreader
   id: XenoWeeds
