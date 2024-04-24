@@ -204,7 +204,7 @@
     key: cm_xeno_weeds_walls
     base: weedwall
     mode: Corners
-  - type: XenoNestCandidate
+  - type: XenoNestSurface
 
 - type: edgeSpreader
   id: XenoWeeds

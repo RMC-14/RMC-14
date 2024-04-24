@@ -5,7 +5,7 @@ namespace Content.Shared._CM14.Xenos.Construction.Nest;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(XenoNestSystem))]
-public sealed partial class XenoNestCandidateComponent : Component
+public sealed partial class XenoNestSurfaceComponent : Component
 {
     [DataField, AutoNetworkedField]
     public EntProtoId Nest = "XenoNest";

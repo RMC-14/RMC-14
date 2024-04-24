@@ -20,7 +20,7 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: XenoNestCandidate
+  - type: XenoNestSurface
 
 - type: entity
   parent: WallXenoResin
@@ -74,7 +74,7 @@
         layer:
         - GlassLayer
         density: 1000
-  - type: XenoNestCandidate
+  - type: XenoNestSurface
 
 - type: entity
   parent: BaseMembraneXeno
