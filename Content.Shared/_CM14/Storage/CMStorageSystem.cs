@@ -38,9 +38,13 @@ public sealed class CMStorageSystem : EntitySystem
 
     private void OnStorageFillItem(Entity<StorageFillComponent> storage, ref CMStorageItemFillEvent args)
     {
-        if (!_storage.CanInsert(storage, args.Item, out var reason) &&
-            reason == "comp-storage-insufficient-capacity")
+        var tries = 0;
+        while (!_storage.CanInsert(storage, args.Item, out var reason) &&
+               reason == "comp-storage-insufficient-capacity" &&
+               tries < 3)
         {
+            tries++;
+
             // TODO CM14 make this error if this is a cm-specific storage
             Log.Warning($"Storage {ToPrettyString(storage)} can't fit {ToPrettyString(args.Item)}");
 
@@ -56,7 +60,7 @@ public sealed class CMStorageSystem : EntitySystem
 
                 // TODO CM14 this might create more space than is necessary to fit the item if there is some free space left in the storage before expanding it
                 var last = grid[^1];
-                var expanded = new Box2i(last.Left, last.Bottom, last.Right + shape.Right + 1, last.Top);
+                var expanded = new Box2i(last.Left, last.Bottom, last.Right + shape.Width + 1, last.Top);
 
                 if (expanded.Top < shape.Top)
                     expanded.Top = shape.Top;
