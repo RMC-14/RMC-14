@@ -19,7 +19,7 @@
 - type: entity
   parent: CMStampBase
   id: CMStampCO
-  name: CO`s rubber stamp
+  name: CO's rubber stamp
   components:
   - type: Sprite
     state: stamp-cap
@@ -31,7 +31,7 @@
 - type: entity
   parent: CMStampBase
   id: CMStampASO
-  name: ASO`s rubber stamp
+  name: ASO's rubber stamp
   components:
   - type: Sprite
     state: stamp-hop
@@ -43,7 +43,7 @@
 - type: entity
   parent: CMStampBase
   id: CMStampCMP
-  name: CMP`s rubber stamp
+  name: CMP's rubber stamp
   components:
   - type: Sprite
     state: stamp-hos
@@ -55,7 +55,7 @@
 - type: entity
   parent: CMStampBase
   id: CMStampCMO
-  name: CMO`s rubber stamp
+  name: CMO's rubber stamp
   components:
   - type: Sprite
     state: stamp-cmo
@@ -67,7 +67,7 @@
 - type: entity
   parent: CMStampBase
   id: CMStampQM
-  name: QM`s rubber stamp
+  name: QM's rubber stamp
   components:
   - type: Sprite
     state: stamp-ro
@@ -79,7 +79,7 @@
 - type: entity
   parent: CMStampBase
   id: CMStampCE
-  name: CE`s rubber stamp
+  name: CE's rubber stamp
   components:
   - type: Sprite
     state: stamp-ce
