@@ -7,8 +7,8 @@ namespace Content.Shared._CM14.Xenos.Construction.Nest;
 public sealed partial class XenoNestComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public EntityUid Candidate;
+    public EntityUid? Surface;
 
     [DataField, AutoNetworkedField]
-    public EntityUid Nested;
+    public EntityUid? Nested;
 }
