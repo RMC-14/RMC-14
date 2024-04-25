@@ -513,11 +513,6 @@ entities:
     - type: Transform
       pos: 12.5,21.5
       parent: 179
-  - uid: 94
-    components:
-    - type: Transform
-      pos: -4.5,-5.5
-      parent: 179
   - uid: 446
     components:
     - type: Transform
@@ -2470,54 +2465,6 @@ entities:
     - type: Transform
       pos: -6.5,4.5
       parent: 179
-- proto: ClosetEmergencyFilledRandom
-  entities:
-  - uid: 319
-    components:
-    - type: Transform
-      pos: 1.5,-10.5
-      parent: 179
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.14957
-        moles:
-        - 2.9923203
-        - 11.2568245
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-  - uid: 322
-    components:
-    - type: Transform
-      pos: 0.5,-10.5
-      parent: 179
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.14957
-        moles:
-        - 2.9923203
-        - 11.2568245
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
 - proto: ClosetToolFilled
   entities:
   - uid: 524
@@ -2612,18 +2559,6 @@ entities:
         - 0
         - 0
         - 0
-- proto: ClothingBeltUtilityFilled
-  entities:
-  - uid: 427
-    components:
-    - type: Transform
-      pos: -1.895102,-10.33495
-      parent: 179
-  - uid: 428
-    components:
-    - type: Transform
-      pos: -1.770102,-10.63182
-      parent: 179
 - proto: ClothingHeadHatWelding
   entities:
   - uid: 344
@@ -2638,13 +2573,6 @@ entities:
     - type: Transform
       pos: -10.595239,6.1907988
       parent: 179
-- proto: ClothingMaskGas
-  entities:
-  - uid: 425
-    components:
-    - type: Transform
-      pos: -0.2880585,-10.69432
-      parent: 179
 - proto: ClothingOuterHardsuitAtmos
   entities:
   - uid: 270
@@ -2652,26 +2580,12 @@ entities:
     - type: Transform
       pos: -10.5426235,5.472399
       parent: 179
-- proto: ClothingOuterVest
-  entities:
-  - uid: 426
-    components:
-    - type: Transform
-      pos: -0.9130585,-10.66307
-      parent: 179
 - proto: ClothingShoesBootsMag
   entities:
   - uid: 725
     components:
     - type: Transform
       pos: 0.47880077,8.073378
-      parent: 179
-- proto: ClothingUniformJumpsuitEngineering
-  entities:
-  - uid: 424
-    components:
-    - type: Transform
-      pos: -0.6474335,-10.27245
       parent: 179
 - proto: ClownPDA
   entities:
@@ -2723,7 +2637,7 @@ entities:
       pos: 13.5,10.5
       parent: 179
     - type: Door
-      secondsUntilStateChange: -3846.9224
+      secondsUntilStateChange: -4497.261
       state: Opening
   - uid: 26
     components:
@@ -2748,28 +2662,11 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -10.5,-6.5
       parent: 179
-  - uid: 63
-    components:
-    - type: Transform
-      pos: 2.5,-4.5
-      parent: 179
   - uid: 64
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -7.5,-6.5
-      parent: 179
-  - uid: 67
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -12.5,0.5
-      parent: 179
-  - uid: 143
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -13.5,0.5
       parent: 179
 - proto: CMAirlockGlassMedical
   entities:
@@ -2793,16 +2690,6 @@ entities:
     components:
     - type: Transform
       pos: 20.5,3.5
-      parent: 179
-  - uid: 127
-    components:
-    - type: Transform
-      pos: 16.5,3.5
-      parent: 179
-  - uid: 128
-    components:
-    - type: Transform
-      pos: 15.5,3.5
       parent: 179
 - proto: CMAirlockMedical
   entities:
@@ -2850,6 +2737,13 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -5.5,-14.5
+      parent: 179
+- proto: CMASRSConsole
+  entities:
+  - uid: 425
+    components:
+    - type: Transform
+      pos: 4.5,-5.5
       parent: 179
 - proto: CMBeaker
   entities:
@@ -2995,6 +2889,13 @@ entities:
     components:
     - type: Transform
       pos: -6.726015,-2.9568481
+      parent: 179
+- proto: CMCargoElevator
+  entities:
+  - uid: 309
+    components:
+    - type: Transform
+      pos: -0.5,-8.5
       parent: 179
 - proto: CMCatwalk
   entities:
@@ -3195,14 +3096,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: CMChairOfficeDark
-  entities:
-  - uid: 144
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 0.5,-6.5
-      parent: 179
 - proto: CMChairOfficeWhite
   entities:
   - uid: 145
@@ -3295,42 +3188,12 @@ entities:
           showEnts: False
           occludes: True
           ent: null
-- proto: CMCrateWeldable
-  entities:
-  - uid: 172
-    components:
-    - type: Transform
-      pos: 5.5,-6.5
-      parent: 179
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.14713
-        moles:
-        - 1.9853759
-        - 7.468795
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
 - proto: CMCrowbar
   entities:
   - uid: 147
     components:
     - type: Transform
       pos: -2.172831,4.5306726
-      parent: 179
-  - uid: 423
-    components:
-    - type: Transform
-      pos: -2.861032,-5.524786
       parent: 179
 - proto: CMDexalinPlusAutoInjector
   entities:
@@ -3345,6 +3208,34 @@ entities:
     components:
     - type: Transform
       pos: -1.5,10.5
+      parent: 179
+- proto: CMDoubleDoorEngineerGlass
+  entities:
+  - uid: 67
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -12.5,0.5
+      parent: 179
+  - uid: 127
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -13.5,0.5
+      parent: 179
+- proto: CMDoubleDoorMedicalGlass
+  entities:
+  - uid: 128
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 16.5,3.5
+      parent: 179
+  - uid: 143
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 15.5,3.5
       parent: 179
 - proto: CMDrinkCanSoutoClassic
   entities:
@@ -3390,6 +3281,32 @@ entities:
     components:
     - type: Transform
       pos: -5.3695335,-2.8951197
+      parent: 179
+- proto: CMGear
+  entities:
+  - uid: 172
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -3.5,-11.5
+      parent: 179
+  - uid: 419
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -3.5,-5.5
+      parent: 179
+  - uid: 426
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,-11.5
+      parent: 179
+  - uid: 427
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,-5.5
       parent: 179
 - proto: CMHandsInsulated
   entities:
@@ -3908,11 +3825,6 @@ entities:
       parent: 179
 - proto: CMMultitool
   entities:
-  - uid: 307
-    components:
-    - type: Transform
-      pos: -1.249865,-10.43489
-      parent: 179
   - uid: 430
     components:
     - type: Transform
@@ -3938,6 +3850,123 @@ entities:
     components:
     - type: Transform
       pos: -3.249692,7.64754
+      parent: 179
+- proto: CMRailing
+  entities:
+  - uid: 94
+    components:
+    - type: Transform
+      pos: 0.5,-5.5
+      parent: 179
+  - uid: 144
+    components:
+    - type: Transform
+      pos: -0.5,-5.5
+      parent: 179
+  - uid: 186
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -2.5,-11.5
+      parent: 179
+  - uid: 187
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -3.5,-10.5
+      parent: 179
+  - uid: 286
+    components:
+    - type: Transform
+      pos: -2.5,-5.5
+      parent: 179
+  - uid: 287
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -3.5,-6.5
+      parent: 179
+  - uid: 307
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -3.5,-7.5
+      parent: 179
+  - uid: 312
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -3.5,-8.5
+      parent: 179
+  - uid: 313
+    components:
+    - type: Transform
+      pos: -1.5,-5.5
+      parent: 179
+  - uid: 314
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -3.5,-9.5
+      parent: 179
+  - uid: 319
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -1.5,-11.5
+      parent: 179
+  - uid: 322
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,-10.5
+      parent: 179
+  - uid: 323
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5,-11.5
+      parent: 179
+  - uid: 326
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -0.5,-11.5
+      parent: 179
+  - uid: 383
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,-11.5
+      parent: 179
+  - uid: 387
+    components:
+    - type: Transform
+      pos: 1.5,-5.5
+      parent: 179
+  - uid: 420
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,-9.5
+      parent: 179
+  - uid: 421
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,-8.5
+      parent: 179
+  - uid: 423
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,-7.5
+      parent: 179
+  - uid: 424
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,-6.5
       parent: 179
 - proto: CMRetractor
   entities:
@@ -4297,16 +4326,6 @@ entities:
     - type: Transform
       pos: -15.5,-5.5
       parent: 179
-  - uid: 286
-    components:
-    - type: Transform
-      pos: -1.5,-5.5
-      parent: 179
-  - uid: 287
-    components:
-    - type: Transform
-      pos: -3.5,-5.5
-      parent: 179
   - uid: 298
     components:
     - type: Transform
@@ -4331,26 +4350,6 @@ entities:
     components:
     - type: Transform
       pos: 8.5,9.5
-      parent: 179
-  - uid: 309
-    components:
-    - type: Transform
-      pos: -0.5,-10.5
-      parent: 179
-  - uid: 312
-    components:
-    - type: Transform
-      pos: -1.5,-10.5
-      parent: 179
-  - uid: 313
-    components:
-    - type: Transform
-      pos: -2.5,-10.5
-      parent: 179
-  - uid: 314
-    components:
-    - type: Transform
-      pos: -3.5,-10.5
       parent: 179
   - uid: 315
     components:
@@ -4586,16 +4585,6 @@ entities:
     components:
     - type: Transform
       pos: -6.5,-3.5
-      parent: 179
-  - uid: 515
-    components:
-    - type: Transform
-      pos: -0.5,-5.5
-      parent: 179
-  - uid: 516
-    components:
-    - type: Transform
-      pos: -2.5,-5.5
       parent: 179
   - uid: 660
     components:
@@ -4923,6 +4912,12 @@ entities:
     components:
     - type: Transform
       pos: 14.5,21.5
+      parent: 179
+  - uid: 63
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,-4.5
       parent: 179
   - uid: 66
     components:
@@ -6593,11 +6588,6 @@ entities:
         - ArtifactAnalyzerSender: ArtifactAnalyzerReceiver
 - proto: ComputerCargoOrders
   entities:
-  - uid: 326
-    components:
-    - type: Transform
-      pos: 0.5,-5.5
-      parent: 179
   - uid: 996
     components:
     - type: Transform
@@ -6807,13 +6797,6 @@ entities:
     - type: SingletonDeviceNetServer
       active: False
       available: False
-- proto: DebugBatteryDischarger
-  entities:
-  - uid: 711
-    components:
-    - type: Transform
-      pos: -1.5,-5.5
-      parent: 179
 - proto: DisposalPipe
   entities:
   - uid: 717
@@ -6880,11 +6863,6 @@ entities:
       parent: 179
 - proto: FireExtinguisher
   entities:
-  - uid: 323
-    components:
-    - type: Transform
-      pos: -1.297692,-5.396082
-      parent: 179
   - uid: 868
     components:
     - type: Transform
@@ -6892,11 +6870,6 @@ entities:
       parent: 179
 - proto: FlashlightLantern
   entities:
-  - uid: 421
-    components:
-    - type: Transform
-      pos: -1.934832,-5.154238
-      parent: 179
   - uid: 422
     components:
     - type: Transform
@@ -7120,13 +7093,6 @@ entities:
     components:
     - type: Transform
       pos: 8.5,9.5
-      parent: 179
-- proto: LedLightTube
-  entities:
-  - uid: 481
-    components:
-    - type: Transform
-      pos: -3.511025,-10.35149
       parent: 179
 - proto: LockerBotanistFilled
   entities:
@@ -7474,27 +7440,10 @@ entities:
       parent: 179
 - proto: PowerCellMedium
   entities:
-  - uid: 186
-    components:
-    - type: Transform
-      pos: -2.67511,-10.351
-      parent: 179
-  - uid: 187
-    components:
-    - type: Transform
-      pos: -2.55011,-10.6635
-      parent: 179
   - uid: 360
     components:
     - type: Transform
       pos: -3.7970803,8.275752
-      parent: 179
-- proto: PowerCellRecharger
-  entities:
-  - uid: 1319
-    components:
-    - type: Transform
-      pos: -3.5,-5.5
       parent: 179
 - proto: PowerCellSmall
   entities:
@@ -7834,19 +7783,6 @@ entities:
     - type: Transform
       pos: 6.985283,16.424004
       parent: 179
-- proto: Stool
-  entities:
-  - uid: 383
-    components:
-    - type: Transform
-      pos: -1.5,-9.5
-      parent: 179
-  - uid: 387
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -2.5,-6.5
-      parent: 179
 - proto: Stunbaton
   entities:
   - uid: 913
@@ -7935,18 +7871,6 @@ entities:
     components:
     - type: Transform
       pos: 6.413024,9.39097
-      parent: 179
-- proto: ToolboxElectricalFilled
-  entities:
-  - uid: 419
-    components:
-    - type: Transform
-      pos: -0.8099712,-5.21454
-      parent: 179
-  - uid: 420
-    components:
-    - type: Transform
-      pos: -0.5597038,-5.679647
       parent: 179
 - proto: ToyRubberDuck
   entities:
@@ -8097,13 +8021,6 @@ entities:
     components:
     - type: Transform
       pos: -2.5,3.5
-      parent: 179
-- proto: WeaponCapacitorRecharger
-  entities:
-  - uid: 709
-    components:
-    - type: Transform
-      pos: -2.5,-5.5
       parent: 179
 - proto: WeaponLauncherM92
   entities:
