@@ -1,5 +1,7 @@
 - type: entity
-  parent: CMBaseDoor
+  parent:
+  - CMBaseDoor
+  - CMBaseDoorConstructible
   id: CMAirlock
   name: airlock
   placement:
