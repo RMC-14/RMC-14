@@ -1,0 +1,1030 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/ec4ab3ab5734c5388a95f723d1c98b178519d0ae/icons/turf/dropship.dmi, https://github.com/cmss13-devs/cmss13/blob/ec4ab3ab5734c5388a95f723d1c98b178519d0ae/icons/obj/structures/doors/dropship1_side.dmi, https://github.com/cmss13-devs/cmss13/blob/ec4ab3ab5734c5388a95f723d1c98b178519d0ae/icons/obj/structures/doors/dropship1_cargo.dmi, https://github.com/cmss13-devs/cmss13/blob/ec4ab3ab5734c5388a95f723d1c98b178519d0ae/icons/obj/structures/doors/dropship1_pilot.dmi, https://github.com/cmss13-devs/cmss13/blob/0d05880700236a9e7997e2db26fa21e272975e77/icons/obj/structures/doors/dropship1_side2.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "1",
+      "directions": 4
+    },
+    {
+      "name": "2",
+      "directions": 4
+    },
+    {
+      "name": "3",
+      "directions": 4
+    },
+    {
+      "name": "4",
+      "directions": 4
+    },
+    {
+      "name": "5",
+      "directions": 4
+    },
+    {
+      "name": "6",
+      "directions": 4
+    },
+    {
+      "name": "7",
+      "directions": 4
+    },
+    {
+      "name": "8",
+      "directions": 4
+    },
+    {
+      "name": "9",
+      "directions": 4
+    },
+    {
+      "name": "10",
+      "directions": 4
+    },
+    {
+      "name": "11"
+    },
+    {
+      "name": "12"
+    },
+    {
+      "name": "13"
+    },
+    {
+      "name": "14",
+      "directions": 4
+    },
+    {
+      "name": "15",
+      "directions": 4
+    },
+    {
+      "name": "16",
+      "directions": 4
+    },
+    {
+      "name": "17",
+      "directions": 4
+    },
+    {
+      "name": "18",
+      "directions": 4
+    },
+    {
+      "name": "19",
+      "directions": 4
+    },
+    {
+      "name": "20",
+      "directions": 4
+    },
+    {
+      "name": "21",
+      "directions": 4
+    },
+    {
+      "name": "22",
+      "directions": 4
+    },
+    {
+      "name": "23",
+      "directions": 4
+    },
+    {
+      "name": "24",
+      "directions": 4
+    },
+    {
+      "name": "25",
+      "directions": 4
+    },
+    {
+      "name": "26",
+      "directions": 4
+    },
+    {
+      "name": "27",
+      "directions": 4
+    },
+    {
+      "name": "28",
+      "directions": 4
+    },
+    {
+      "name": "29",
+      "directions": 4
+    },
+    {
+      "name": "30",
+      "directions": 4
+    },
+    {
+      "name": "31",
+      "directions": 4
+    },
+    {
+      "name": "32",
+      "directions": 4
+    },
+    {
+      "name": "33",
+      "directions": 4
+    },
+    {
+      "name": "34",
+      "directions": 4
+    },
+    {
+      "name": "35",
+      "directions": 4
+    },
+    {
+      "name": "36",
+      "directions": 4
+    },
+    {
+      "name": "37",
+      "directions": 4
+    },
+    {
+      "name": "38",
+      "directions": 4
+    },
+    {
+      "name": "39",
+      "directions": 4
+    },
+    {
+      "name": "40",
+      "directions": 4
+    },
+    {
+      "name": "41",
+      "directions": 4
+    },
+    {
+      "name": "42",
+      "directions": 4
+    },
+    {
+      "name": "43",
+      "directions": 4
+    },
+    {
+      "name": "44",
+      "directions": 4
+    },
+    {
+      "name": "45",
+      "directions": 4
+    },
+    {
+      "name": "46",
+      "directions": 4
+    },
+    {
+      "name": "47",
+      "directions": 4
+    },
+    {
+      "name": "48",
+      "directions": 4
+    },
+    {
+      "name": "49",
+      "directions": 4
+    },
+    {
+      "name": "50",
+      "directions": 4
+    },
+    {
+      "name": "51",
+      "directions": 4
+    },
+    {
+      "name": "52",
+      "directions": 4
+    },
+    {
+      "name": "53",
+      "directions": 4
+    },
+    {
+      "name": "54",
+      "directions": 4
+    },
+    {
+      "name": "55"
+    },
+    {
+      "name": "56",
+      "directions": 4
+    },
+    {
+      "name": "57"
+    },
+    {
+      "name": "58"
+    },
+    {
+      "name": "59",
+      "directions": 4
+    },
+    {
+      "name": "60"
+    },
+    {
+      "name": "61",
+      "directions": 4
+    },
+    {
+      "name": "62",
+      "directions": 4
+    },
+    {
+      "name": "63",
+      "directions": 4
+    },
+    {
+      "name": "64",
+      "directions": 4
+    },
+    {
+      "name": "65",
+      "directions": 4
+    },
+    {
+      "name": "66",
+      "directions": 4
+    },
+    {
+      "name": "67",
+      "directions": 4
+    },
+    {
+      "name": "68",
+      "directions": 4
+    },
+    {
+      "name": "69",
+      "directions": 4
+    },
+    {
+      "name": "70",
+      "directions": 4
+    },
+    {
+      "name": "71",
+      "directions": 4
+    },
+    {
+      "name": "72",
+      "directions": 4
+    },
+    {
+      "name": "73",
+      "directions": 4
+    },
+    {
+      "name": "74",
+      "directions": 4
+    },
+    {
+      "name": "75",
+      "directions": 4
+    },
+    {
+      "name": "76",
+      "directions": 4
+    },
+    {
+      "name": "77",
+      "directions": 4
+    },
+    {
+      "name": "78",
+      "directions": 4
+    },
+    {
+      "name": "79"
+    },
+    {
+      "name": "80",
+      "directions": 4
+    },
+    {
+      "name": "81",
+      "directions": 4
+    },
+    {
+      "name": "82",
+      "directions": 4
+    },
+    {
+      "name": "83",
+      "directions": 4
+    },
+    {
+      "name": "84",
+      "directions": 4
+    },
+    {
+      "name": "85",
+      "directions": 4
+    },
+    {
+      "name": "86",
+      "directions": 4
+    },
+    {
+      "name": "87"
+    },
+    {
+      "name": "88"
+    },
+    {
+      "name": "89",
+      "directions": 4
+    },
+    {
+      "name": "90",
+      "directions": 4
+    },
+    {
+      "name": "91",
+      "directions": 4
+    },
+    {
+      "name": "92",
+      "directions": 4
+    },
+    {
+      "name": "93a"
+    },
+    {
+      "name": "93"
+    },
+    {
+      "name": "93b"
+    },
+    {
+      "name": "94",
+      "directions": 4
+    },
+    {
+      "name": "95",
+      "directions": 4
+    },
+    {
+      "name": "96",
+      "directions": 4
+    },
+    {
+      "name": "97",
+      "directions": 4
+    },
+    {
+      "name": "98",
+      "directions": 4
+    },
+    {
+      "name": "99",
+      "directions": 4
+    },
+    {
+      "name": "100",
+      "directions": 4
+    },
+    {
+      "name": "101",
+      "directions": 4
+    },
+    {
+      "name": "102",
+      "directions": 4
+    },
+    {
+      "name": "door_closed",
+      "directions": 4
+    },
+    {
+      "name": "panel_open"
+    },
+    {
+      "name": "door_opening",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "door_open",
+      "directions": 4
+    },
+    {
+      "name": "door_deny",
+      "directions": 4
+    },
+    {
+      "name": "door_closing",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "door_spark",
+      "directions": 4
+    },
+    {
+      "name": "welded",
+      "directions": 4
+    },
+    {
+      "name": "door_locked",
+      "directions": 4
+    },
+    {
+      "name": "o_door_opening",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "o_door_closing",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "cargo_door_closing",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "cargo_door_closed",
+      "directions": 4
+    },
+    {
+      "name": "cargo_door_opening",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "cargo_door_deny",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "cargo_door_locked",
+      "directions": 4
+    },
+    {
+      "name": "cargo_door_open",
+      "directions": 4
+    },
+    {
+      "name": "pilot_door_closed",
+      "directions": 4
+    },
+    {
+      "name": "pilot_door_deny",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "pilot_door_spark",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "pilot_door_locked"
+    },
+    {
+      "name": "pilot_door_opening",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "pilot_door_open"
+    },
+    {
+      "name": "pilot_door_closing",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "pilot_panel_open"
+    },
+    {
+      "name": "pilot_welded"
+    },
+    {
+      "name": "pilot_o_door_opening",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "pilot_o_door_closing",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "double_door_opening",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "double_door_closed",
+      "directions": 4
+    },
+    {
+      "name": "double_door_deny",
+      "directions": 4
+    },
+    {
+      "name": "double_door_locked",
+      "directions": 4
+    },
+    {
+      "name": "double_door_open",
+      "directions": 4
+    },
+    {
+      "name": "double_door_closing",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "unlit"
+    }
+  ]
+}

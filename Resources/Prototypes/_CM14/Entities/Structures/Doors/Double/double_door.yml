@@ -1,6 +1,8 @@
 ﻿- type: entity
   abstract: true
-  parent: CMBaseDoor
+  parent:
+  - CMBaseDoor
+  - CMBaseDoorConstructible
   id: CMDoubleDoorBase
   components:
   - type: CMDoubleDoor

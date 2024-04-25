@@ -1,0 +1,31 @@
+﻿- type: entity
+  parent: CMBaseDoor
+  id: CMAlamoDoor
+  name: alamo crew hatch
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Dropships/alamo.rsi
+    layers:
+    - state: door_closed
+      map: [ "enum.DoorVisualLayers.Base" ]
+    - state: unlit
+      map: ["enum.DoorVisualLayers.BaseUnlit"]
+    - state: unlit
+      map: [ "enum.WeldableLayers.BaseWelded" ]
+    - state: door_locked
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseBolted"]
+    - state: door_spark
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseEmergencyAccess"]
+    - state: panel_open
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Occluder
+  - type: Door
+    closingSpriteState: door_closing
+    openingSpriteState: door_opening
+    openSpriteState: door_open
+    closedSpriteState: door_closed
+    denySpriteState: door_deny
