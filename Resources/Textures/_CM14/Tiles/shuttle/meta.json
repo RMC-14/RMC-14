@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/71d46ee8057d19b12e1495419cb299d2fedef6cc/icons/turf/shuttle.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "floor"
+    },
+    {
+      "name": "floor2"
+    },
+    {
+      "name": "floor3"
+    },
+    {
+      "name": "floor4"
+    },
+    {
+      "name": "floor5"
+    },
+    {
+      "name": "floor6"
+    },
+    {
+      "name": "floor7"
+    },
+    {
+      "name": "vfloor"
+    },
+    {
+      "name": "floor8"
+    },
+    {
+      "name": "rasputin1"
+    },
+    {
+      "name": "rasputin2"
+    },
+    {
+      "name": "rasputin3"
+    },
+    {
+      "name": "rasputin4"
+    },
+    {
+      "name": "rasputin5"
+    },
+    {
+      "name": "rasputin6"
+    },
+    {
+      "name": "rasputin7"
+    },
+    {
+      "name": "rasputin8"
+    },
+    {
+      "name": "rasputin9"
+    },
+    {
+      "name": "rasputin10"
+    },
+    {
+      "name": "rasputin11"
+    },
+    {
+      "name": "rasputin12"
+    },
+    {
+      "name": "rasputin13"
+    },
+    {
+      "name": "rasputin14"
+    },
+    {
+      "name": "rasputin15"
+    }
+  ]
+}

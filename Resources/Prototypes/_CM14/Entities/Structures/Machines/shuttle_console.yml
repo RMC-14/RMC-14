@@ -1,0 +1,54 @@
+﻿- type: entity
+  parent: CMBaseStructure
+  abstract: true
+  id: CMComputerDropship
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/shuttle_console.rsi
+  - type: Corrodible
+    isCorrodible: false
+
+- type: entity
+  parent: CMComputerDropship
+  id: CMComputerDropshipNavigation
+  name: dropship navigation computer
+  description: A flight computer that can be used for autopilot or long-range flights.
+  components:
+  - type: Sprite
+    state: console
+  - type: DropshipNavigationComputer
+  - type: UserInterface
+    interfaces:
+    - key: enum.DropshipNavigationUiKey.Key
+      type: DropshipNavigationBui
+
+# TODO CM14 alamo and normandy specific names for each
+- type: entity
+  parent: CMComputerDropship
+  id: CMComputerDropshipCamerasAlamo
+  name: camera controls
+  description: A computer to monitor cameras linked to the dropship.
+  components:
+  - type: Sprite
+    state: consoleleft
+
+- type: entity
+  parent: CMComputerDropship
+  id: CMComputerDropshipWeapons
+  name: weapons controls
+  description: A computer to manage equipment, weapons and simulations installed on the dropship.
+  components:
+  - type: Sprite
+    state: consoleright
+
+- type: entity
+  parent: MarkerBase
+  id: CMDropshipDestination
+  name: dropship destination
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    state: green
+  - type: FTLBeacon
+  - type: DropshipDestination

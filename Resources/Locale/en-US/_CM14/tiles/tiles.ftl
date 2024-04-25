@@ -27,3 +27,5 @@ tiles-cm-default-alpha = alpha steel tile
 tiles-cm-default-bravo = bravo steel tile
 tiles-cm-default-charlie = charlie steel tile
 tiles-cm-default-delta = delta steel tile
+
+tiles-cm-floor = floor
