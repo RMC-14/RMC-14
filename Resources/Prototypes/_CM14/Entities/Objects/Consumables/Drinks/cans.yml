@@ -3,6 +3,12 @@
   id: CMDrinkCanBase
   abstract: true
   components:
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: { state: "icon" }
+          False: { state: "icon" }
   - type: Sprite
     state: icon
     layers:
