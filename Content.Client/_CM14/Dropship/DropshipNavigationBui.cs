@@ -31,6 +31,12 @@ public sealed class DropshipNavigationBui : BoundUserInterface
             _window.OnClose += Close;
             SetHeader("Flight Controls");
 
+            if (_entities.TryGetComponent(Owner, out TransformComponent? transform) &&
+                _entities.TryGetComponent(transform.ParentUid, out MetaDataComponent? metaData))
+            {
+                _window.Title = $"{metaData.EntityName} {_window.Title}";
+            }
+
             _window.OpenCentered();
         }
 

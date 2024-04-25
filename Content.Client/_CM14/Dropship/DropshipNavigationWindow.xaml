@@ -3,7 +3,7 @@
     xmlns:controls="clr-namespace:Content.Client._CM14.Dropship"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
-    Title="Alamo Flight Computer"
+    Title="Flight Computer"
     MinSize="400 200">
     <PanelContainer>
         <PanelContainer.PanelOverride>

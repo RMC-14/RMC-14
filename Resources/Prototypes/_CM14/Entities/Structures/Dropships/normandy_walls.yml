@@ -1,19 +1,19 @@
 ﻿- type: entity
   abstract: true
   parent: CMBaseWall
-  id: CMBaseAlamoWall
-  name: alamo wall
+  id: CMBaseNormandyWall
+  name: normandy wall
   components:
   - type: Corrodible
     isCorrodible: false
   - type: Sprite
-    sprite: _CM14/Structures/Dropships/alamo.rsi
+    sprite: _CM14/Structures/Dropships/normandy.rsi
   - type: Icon
-    sprite: _CM14/Structures/Dropships/alamo.rsi
+    sprite: _CM14/Structures/Dropships/normandy.rsi
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall1
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall1
   suffix: 1
   components:
   - type: Sprite
@@ -22,8 +22,8 @@
     state: "1"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall2
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall2
   suffix: 2
   components:
   - type: Sprite
@@ -32,8 +32,8 @@
     state: "2"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall3
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall3
   suffix: 3
   components:
   - type: Sprite
@@ -42,8 +42,8 @@
     state: "3"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall4
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall4
   suffix: 4
   components:
   - type: Sprite
@@ -52,8 +52,8 @@
     state: "4"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall5
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall5
   suffix: 5
   components:
   - type: Sprite
@@ -62,8 +62,8 @@
     state: "5"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall6
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall6
   suffix: 6
   components:
   - type: Sprite
@@ -72,8 +72,8 @@
     state: "6"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall7
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall7
   suffix: 7
   components:
   - type: Sprite
@@ -82,8 +82,8 @@
     state: "7"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall8
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall8
   suffix: 8
   components:
   - type: Sprite
@@ -92,8 +92,8 @@
     state: "8"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall9
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall9
   suffix: 9
   components:
   - type: Sprite
@@ -102,8 +102,8 @@
     state: "9"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall10
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall10
   suffix: 10
   components:
   - type: Sprite
@@ -112,8 +112,8 @@
     state: "10"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall11
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall11
   suffix: 11
   components:
   - type: Sprite
@@ -122,8 +122,8 @@
     state: "11"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall12
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall12
   suffix: 12
   components:
   - type: Sprite
@@ -132,8 +132,8 @@
     state: "12"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall13
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall13
   suffix: 13
   components:
   - type: Sprite
@@ -142,8 +142,8 @@
     state: "13"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall14
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall14
   suffix: 14
   components:
   - type: Sprite
@@ -152,8 +152,8 @@
     state: "14"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall15
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall15
   suffix: 15
   components:
   - type: Sprite
@@ -162,8 +162,8 @@
     state: "15"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall16
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall16
   suffix: 16
   components:
   - type: Sprite
@@ -172,8 +172,8 @@
     state: "16"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall17
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall17
   suffix: 17
   components:
   - type: Sprite
@@ -182,8 +182,8 @@
     state: "17"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall18
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall18
   suffix: 18
   components:
   - type: Sprite
@@ -192,8 +192,8 @@
     state: "18"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall19
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall19
   suffix: 19
   components:
   - type: Sprite
@@ -202,8 +202,8 @@
     state: "19"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall20
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall20
   suffix: 20
   components:
   - type: Sprite
@@ -212,8 +212,8 @@
     state: "20"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall21
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall21
   suffix: 21
   components:
   - type: Sprite
@@ -222,8 +222,8 @@
     state: "21"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall22
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall22
   suffix: 22
   components:
   - type: Sprite
@@ -232,8 +232,8 @@
     state: "22"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall23
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall23
   suffix: 23
   components:
   - type: Sprite
@@ -242,8 +242,8 @@
     state: "23"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall24
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall24
   suffix: 24
   components:
   - type: Sprite
@@ -252,8 +252,8 @@
     state: "24"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall25
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall25
   suffix: 25
   components:
   - type: Sprite
@@ -262,8 +262,8 @@
     state: "25"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall26
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall26
   suffix: 26
   components:
   - type: Sprite
@@ -272,8 +272,8 @@
     state: "26"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall27
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall27
   suffix: 27
   components:
   - type: Sprite
@@ -282,8 +282,8 @@
     state: "27"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall28
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall28
   suffix: 28
   components:
   - type: Sprite
@@ -292,8 +292,8 @@
     state: "28"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall29
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall29
   suffix: 29
   components:
   - type: Sprite
@@ -302,8 +302,8 @@
     state: "29"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall30
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall30
   suffix: 30
   components:
   - type: Sprite
@@ -312,8 +312,8 @@
     state: "30"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall31
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall31
   suffix: 31
   components:
   - type: Sprite
@@ -322,8 +322,8 @@
     state: "31"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall32
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall32
   suffix: 32
   components:
   - type: Sprite
@@ -332,8 +332,8 @@
     state: "32"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall33
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall33
   suffix: 33
   components:
   - type: Sprite
@@ -342,8 +342,8 @@
     state: "33"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall34
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall34
   suffix: 34
   components:
   - type: Sprite
@@ -352,8 +352,8 @@
     state: "34"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall35
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall35
   suffix: 35
   components:
   - type: Sprite
@@ -362,8 +362,8 @@
     state: "35"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall36
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall36
   suffix: 36
   components:
   - type: Sprite
@@ -372,8 +372,8 @@
     state: "36"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall37
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall37
   suffix: 37
   components:
   - type: Sprite
@@ -382,8 +382,8 @@
     state: "37"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall38
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall38
   suffix: 38
   components:
   - type: Sprite
@@ -392,8 +392,8 @@
     state: "38"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall39
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall39
   suffix: 39
   components:
   - type: Sprite
@@ -402,8 +402,8 @@
     state: "39"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall40
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall40
   suffix: 40
   components:
   - type: Sprite
@@ -412,8 +412,8 @@
     state: "40"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall41
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall41
   suffix: 41
   components:
   - type: Sprite
@@ -422,8 +422,8 @@
     state: "41"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall42
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall42
   suffix: 42
   components:
   - type: Sprite
@@ -432,8 +432,8 @@
     state: "42"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall43
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall43
   suffix: 43
   components:
   - type: Sprite
@@ -442,8 +442,8 @@
     state: "43"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall44
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall44
   suffix: 44
   components:
   - type: Sprite
@@ -452,8 +452,8 @@
     state: "44"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall45
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall45
   suffix: 45
   components:
   - type: Sprite
@@ -462,8 +462,8 @@
     state: "45"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall46
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall46
   suffix: 46
   components:
   - type: Sprite
@@ -472,8 +472,8 @@
     state: "46"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall47
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall47
   suffix: 47
   components:
   - type: Sprite
@@ -482,8 +482,8 @@
     state: "47"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall48
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall48
   suffix: 48
   components:
   - type: Sprite
@@ -492,8 +492,8 @@
     state: "48"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall49
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall49
   suffix: 49
   components:
   - type: Sprite
@@ -502,8 +502,8 @@
     state: "49"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall50
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall50
   suffix: 50
   components:
   - type: Sprite
@@ -512,8 +512,8 @@
     state: "50"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall51
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall51
   suffix: 51
   components:
   - type: Sprite
@@ -522,8 +522,8 @@
     state: "51"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall52
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall52
   suffix: 52
   components:
   - type: Sprite
@@ -532,8 +532,8 @@
     state: "52"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall53
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall53
   suffix: 53
   components:
   - type: Sprite
@@ -542,8 +542,8 @@
     state: "53"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall54
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall54
   suffix: 54
   components:
   - type: Sprite
@@ -552,8 +552,8 @@
     state: "54"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall55
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall55
   suffix: 55
   components:
   - type: Sprite
@@ -562,8 +562,8 @@
     state: "55"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall56
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall56
   suffix: 56
   components:
   - type: Sprite
@@ -572,8 +572,8 @@
     state: "56"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall57
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall57
   suffix: 57
   components:
   - type: Sprite
@@ -582,8 +582,8 @@
     state: "57"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall58
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall58
   suffix: 58
   components:
   - type: Sprite
@@ -592,8 +592,8 @@
     state: "58"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall59
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall59
   suffix: 59
   components:
   - type: Sprite
@@ -602,8 +602,8 @@
     state: "59"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall60
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall60
   suffix: 60
   components:
   - type: Sprite
@@ -612,8 +612,8 @@
     state: "60"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall61
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall61
   suffix: 61
   components:
   - type: Sprite
@@ -622,8 +622,8 @@
     state: "61"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall62
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall62
   suffix: 62
   components:
   - type: Sprite
@@ -632,8 +632,8 @@
     state: "62"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall63
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall63
   suffix: 63
   components:
   - type: Sprite
@@ -642,8 +642,8 @@
     state: "63"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall64
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall64
   suffix: 64
   components:
   - type: Sprite
@@ -652,8 +652,8 @@
     state: "64"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall65
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall65
   suffix: 65
   components:
   - type: Sprite
@@ -662,8 +662,8 @@
     state: "65"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall66
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall66
   suffix: 66
   components:
   - type: Sprite
@@ -672,8 +672,8 @@
     state: "66"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall67
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall67
   suffix: 67
   components:
   - type: Sprite
@@ -682,8 +682,8 @@
     state: "67"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall68
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall68
   suffix: 68
   components:
   - type: Sprite
@@ -692,8 +692,8 @@
     state: "68"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall69
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall69
   suffix: 69
   components:
   - type: Sprite
@@ -702,8 +702,8 @@
     state: "69"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall70
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall70
   suffix: 70
   components:
   - type: Sprite
@@ -712,8 +712,8 @@
     state: "70"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall71
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall71
   suffix: 71
   components:
   - type: Sprite
@@ -724,8 +724,8 @@
     enabled: false
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall72
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall72
   suffix: 72
   components:
   - type: Sprite
@@ -734,8 +734,8 @@
     state: "72"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall73
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall73
   suffix: 73
   components:
   - type: Sprite
@@ -744,8 +744,8 @@
     state: "73"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall74
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall74
   suffix: 74
   components:
   - type: Sprite
@@ -756,8 +756,8 @@
     enabled: false
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall75
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall75
   suffix: 75
   components:
   - type: Sprite
@@ -766,8 +766,8 @@
     state: "75"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall76
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall76
   suffix: 76
   components:
   - type: Sprite
@@ -776,8 +776,8 @@
     state: "76"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall77
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall77
   suffix: 77
   components:
   - type: Sprite
@@ -786,8 +786,8 @@
     state: "77"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall78
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall78
   suffix: 78
   components:
   - type: Sprite
@@ -798,8 +798,8 @@
     enabled: false
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall79
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall79
   suffix: 79
   components:
   - type: Sprite
@@ -808,8 +808,8 @@
     state: "79"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall80
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall80
   suffix: 80
   components:
   - type: Sprite
@@ -820,8 +820,8 @@
     enabled: false
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall81
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall81
   suffix: 81
   components:
   - type: Sprite
@@ -830,8 +830,8 @@
     state: "81"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall82
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall82
   suffix: 82
   components:
   - type: Sprite
@@ -840,8 +840,8 @@
     state: "82"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall83
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall83
   suffix: 83
   components:
   - type: Sprite
@@ -850,8 +850,8 @@
     state: "83"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall84
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall84
   suffix: 84
   components:
   - type: Sprite
@@ -860,8 +860,8 @@
     state: "84"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall85
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall85
   suffix: 85
   components:
   - type: Sprite
@@ -870,8 +870,8 @@
     state: "85"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall86
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall86
   suffix: 86
   components:
   - type: Sprite
@@ -882,8 +882,8 @@
     enabled: false
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall87
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall87
   suffix: 87
   components:
   - type: Sprite
@@ -892,8 +892,8 @@
     state: "87"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall88
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall88
   suffix: 88
   components:
   - type: Sprite
@@ -902,8 +902,8 @@
     state: "88"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall89
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall89
   suffix: 89
   components:
   - type: Sprite
@@ -914,8 +914,8 @@
     enabled: false
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall90
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall90
   suffix: 90
   components:
   - type: Sprite
@@ -924,8 +924,8 @@
     state: "90"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall91
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall91
   suffix: 91
   components:
   - type: Sprite
@@ -934,8 +934,8 @@
     state: "91"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall92
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall92
   suffix: 92
   components:
   - type: Sprite
@@ -946,8 +946,8 @@
     enabled: false
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall93
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall93
   suffix: 93
   components:
   - type: Sprite
@@ -956,8 +956,8 @@
     state: "93"
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall94
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall94
   suffix: 94
   components:
   - type: Sprite
@@ -968,8 +968,8 @@
     enabled: false
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall95
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall95
   suffix: 95
   components:
   - type: Sprite
@@ -980,8 +980,8 @@
     enabled: false
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall96
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall96
   suffix: 96
   components:
   - type: Sprite
@@ -992,8 +992,8 @@
     enabled: false
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall97
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall97
   suffix: 97
   components:
   - type: Sprite
@@ -1004,8 +1004,8 @@
     enabled: false
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall98
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall98
   suffix: 98
   components:
   - type: Sprite
@@ -1016,8 +1016,8 @@
     enabled: false
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall99
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall99
   suffix: 99
   components:
   - type: Sprite
@@ -1028,8 +1028,8 @@
     enabled: false
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall100
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall100
   suffix: 100
   components:
   - type: Sprite
@@ -1040,8 +1040,8 @@
     enabled: false
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall101
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall101
   suffix: 101
   components:
   - type: Sprite
@@ -1052,8 +1052,8 @@
     enabled: false
 
 - type: entity
-  parent: CMBaseAlamoWall
-  id: CMAlamoWall102
+  parent: CMBaseNormandyWall
+  id: CMNormandyWall102
   suffix: 102
   components:
   - type: Sprite

@@ -6,6 +6,12 @@
 
 - type: tile
   parent: CMShuttleTileBase
+  id: CMShuttleTileInvisible
+  name: invisible
+  sprite: /Textures/_CM14/Tiles/shuttle/invisible.png
+
+- type: tile
+  parent: CMShuttleTileBase
   id: CMShuttleTileRasputin1
   name: rasputin 1
   sprite: /Textures/_CM14/Tiles/shuttle/rasputin1.png
