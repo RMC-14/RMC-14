@@ -17,6 +17,11 @@
   - type: Sprite
     state: console
   - type: DropshipNavigationComputer
+  - type: ActivatableUI
+    key: enum.DropshipNavigationUiKey.Key
+  - type: AccessReader
+    access: [["CMAccessPilot"]]
+  - type: ActivatableUIRequiresAccess
   - type: UserInterface
     interfaces:
     - key: enum.DropshipNavigationUiKey.Key

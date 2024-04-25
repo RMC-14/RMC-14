@@ -1024,6 +1024,9 @@
     {
       "name": "double_door_open",
       "directions": 4
-    }
+    },
+	{
+	  "name": "unlit"
+	}
   ]
 }

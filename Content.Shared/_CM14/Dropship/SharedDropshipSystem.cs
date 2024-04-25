@@ -1,4 +1,4 @@
-﻿using Content.Shared.Interaction;
+﻿using Content.Shared.UserInterface;
 using Robust.Shared.Network;
 
 namespace Content.Shared._CM14.Dropship;
@@ -9,8 +9,7 @@ public abstract class SharedDropshipSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<DropshipNavigationComputerComponent, InteractHandEvent>(OnNavigationInteractHand);
-        SubscribeLocalEvent<DropshipNavigationComputerComponent, ActivateInWorldEvent>(OnNavigationActivateInWorld);
+        SubscribeLocalEvent<DropshipNavigationComputerComponent, AfterActivatableUIOpenEvent>(OnNavigationOpen);
 
         Subs.BuiEvents<DropshipNavigationComputerComponent>(DropshipNavigationUiKey.Key, subs =>
         {
@@ -18,16 +17,9 @@ public abstract class SharedDropshipSystem : EntitySystem
         });
     }
 
-    private void OnNavigationInteractHand(Entity<DropshipNavigationComputerComponent> ent, ref InteractHandEvent args)
+    private void OnNavigationOpen(Entity<DropshipNavigationComputerComponent> ent, ref AfterActivatableUIOpenEvent args)
     {
-        args.Handled = true;
-        Interact(ent, args.User);
-    }
-
-    private void OnNavigationActivateInWorld(Entity<DropshipNavigationComputerComponent> ent, ref ActivateInWorldEvent args)
-    {
-        args.Handled = true;
-        Interact(ent, args.User);
+        RefreshUI(ent);
     }
 
     private void OnDropshipNavigationLaunchMsg(Entity<DropshipNavigationComputerComponent> ent, ref DropshipNavigationLaunchMsg args)
@@ -50,11 +42,11 @@ public abstract class SharedDropshipSystem : EntitySystem
         FlyTo(ent, destination.Value);
     }
 
-    protected virtual void Interact(Entity<DropshipNavigationComputerComponent> ent, EntityUid user)
+    protected virtual void FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination)
     {
     }
 
-    protected virtual void FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination)
+    protected virtual void RefreshUI(Entity<DropshipNavigationComputerComponent> computer)
     {
     }
 }

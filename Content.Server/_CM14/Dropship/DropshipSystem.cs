@@ -5,7 +5,6 @@ using Content.Shared._CM14.Dropship;
 using Content.Shared.Shuttles.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Player;
 
 namespace Content.Server._CM14.Dropship;
 
@@ -28,17 +27,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private void OnRefreshUI<T>(Entity<DropshipComponent> ent, ref T args)
     {
         RefreshUI();
-    }
-
-    protected override void Interact(Entity<DropshipNavigationComputerComponent> ent, EntityUid user)
-    {
-        base.Interact(ent, user);
-
-        if (!TryComp(user, out ActorComponent? actor))
-            return;
-
-        _ui.TryOpen(ent, DropshipNavigationUiKey.Key, actor.PlayerSession);
-        RefreshUI(ent);
     }
 
     protected override void FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination)
@@ -68,16 +56,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         _shuttle.FTLToCoordinates(shuttle.Value, shuttleComp, destCoords, rotation);
     }
 
-    private void RefreshUI()
-    {
-        var computers = EntityQueryEnumerator<DropshipNavigationComputerComponent>();
-        while (computers.MoveNext(out var uid, out var comp))
-        {
-            RefreshUI((uid, comp));
-        }
-    }
-
-    private void RefreshUI(Entity<DropshipNavigationComputerComponent> computer)
+    protected override void RefreshUI(Entity<DropshipNavigationComputerComponent> computer)
     {
         if (!_ui.IsUiOpen(computer, DropshipNavigationUiKey.Key))
             return;
@@ -113,6 +92,15 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         var state = new DropshipNavigationTravellingBuiState(ftl.State, ftl.StateTime, destination);
         _ui.TrySetUiState(computer, DropshipNavigationUiKey.Key, state);
+    }
+
+    private void RefreshUI()
+    {
+        var computers = EntityQueryEnumerator<DropshipNavigationComputerComponent>();
+        while (computers.MoveNext(out var uid, out var comp))
+        {
+            RefreshUI((uid, comp));
+        }
     }
 
     public void RaiseUpdate(EntityUid shuttle)
