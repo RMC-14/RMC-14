@@ -4,8 +4,8 @@
   name: passenger seat
   description: A sturdy chair with a brace that lowers over your body. Prevents being flung around in vehicle during crash being injured as a result. Fasten your seatbelts, kids! Fix with welding tool in case of damage.
   components:
-  - type: Transform
-    anchored: true
+  - type: Physics
+    bodyType: Static
   - type: Sprite
     sprite: _CM14/Structures/Furniture/vehicle_seats.rsi
     state: base
@@ -18,8 +18,8 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: Transform
-    anchored: true
+  - type: Physics
+    bodyType: Static
   - type: Sprite
     sprite: _CM14/Structures/Furniture/vehicle_seats.rsi
     state: pilot_chair
