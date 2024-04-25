@@ -345,6 +345,7 @@ public sealed partial class ShuttleSystem
 
         // Make sure the map is setup before we leave to avoid pop-in (e.g. parallax).
         EnsureFTLMap();
+        _dropship.RaiseUpdate(uid);
         return true;
     }
 
@@ -402,6 +403,8 @@ public sealed partial class ShuttleSystem
                 _transform.SetLocalPosition(wowdio.Value.Entity, gridPhysics.LocalCenter);
             }
         }
+
+        _dropship.RaiseUpdate(uid);
     }
 
     /// <summary>
@@ -420,6 +423,7 @@ public sealed partial class ShuttleSystem
         _thruster.EnableLinearThrustDirection(shuttle, DirectionFlag.South);
 
         _console.RefreshShuttleConsoles(entity.Owner);
+        _dropship.RaiseUpdate(entity);
     }
 
     /// <summary>
@@ -521,12 +525,14 @@ public sealed partial class ShuttleSystem
 
         var ftlEvent = new FTLCompletedEvent(uid, _mapManager.GetMapEntityId(mapId));
         RaiseLocalEvent(uid, ref ftlEvent, true);
+        _dropship.RaiseUpdate(uid);
     }
 
     private void UpdateFTLCooldown(Entity<FTLComponent, ShuttleComponent> entity)
     {
         RemCompDeferred<FTLComponent>(entity);
         _console.RefreshShuttleConsoles(entity);
+        _dropship.RaiseUpdate(entity);
     }
 
     private void UpdateHyperspace()
