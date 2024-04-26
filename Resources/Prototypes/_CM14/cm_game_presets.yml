@@ -1,0 +1,11 @@
+﻿- type: gamePreset
+  id: CMDistressSignal
+  alias:
+  - distresssignal
+  - cmdistresssignal
+  - cmds
+  name: Distress Signal
+  description: Respond to a distress signal sent by a nearby planet.
+  showInVote: false
+  rules:
+  - CMDistressSignal

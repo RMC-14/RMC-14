@@ -245,6 +245,7 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
             {
                 _squad.SetSquad(ev.SpawnResult.Value, squad.Value);
 
+                // TODO CM14 add this to the map file
                 if (TryComp(spawner, out TransformComponent? xform) &&
                     xform.GridUid != null)
                 {
