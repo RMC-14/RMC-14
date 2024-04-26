@@ -25,7 +25,7 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 75
+        Blunt: 65
 
 - type: entity
   parent: CMPelletShotgunBase
@@ -41,16 +41,21 @@
     damage:
       types:
         Blunt: 70
+  - type: CMArmorPiercing
+    amount: 20
 
 - type: entity
   parent: CMPelletShotgunBase
   id: CMPelletShotgunIncendiary
   name: incendiary slug
   components:
+  - type: CMArmorPiercing
+    amount: 20
   - type: Projectile
     damage:
       types:
         Heat: 55
+  # todo cm14 add burning
 
 - type: entity
   parent: CMPelletShotgunBase
@@ -72,6 +77,8 @@
   id: CMPelletShotgunFlechette
   name: flechette shell
   components:
+  - type: CMArmorPiercing
+    amount: 35
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
     layers:
@@ -86,3 +93,5 @@
   parent: CMPelletShotgunBuckshot
   id: CMPelletShotgunIncendiaryBuckshot
   name: incendiary buckshot shell
+  #components: #todo cm14 add burning
+
