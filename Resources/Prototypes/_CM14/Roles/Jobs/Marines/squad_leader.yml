@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobBase
+  parent: CMJobSquadBase
   id: CMSquadLeader
   name: cm-job-name-squad-leader
   description: cm-job-description-squad-leader

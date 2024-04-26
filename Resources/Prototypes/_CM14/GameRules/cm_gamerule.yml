@@ -4,15 +4,5 @@
   noSpawn: true
   components:
   - type: GameRule
-    minPlayers: 10
-  - type: CMRule
-
-- type: entity
-  id: CMTestDistressSignal
-  parent: CMDistressSignal
-  noSpawn: true
-  components:
-  - type: GameRule
     minPlayers: 1
   - type: CMRule
-    playersPerXeno: 2

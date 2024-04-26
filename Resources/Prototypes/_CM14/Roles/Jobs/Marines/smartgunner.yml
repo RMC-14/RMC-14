@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobBase
+  parent: CMJobSquadBase
   id: CMSmartgunner
   name: cm-job-name-smartgunner
   description: cm-job-description-smartgunner

@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobBase
+  parent: CMJobSquadBase
   id: CMRifleman
   name: cm-job-name-rifleman
   description: cm-job-description-rifleman
@@ -15,6 +15,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
+  hasIcon: false
 
 - type: startingGear
   id: CMGearRifleman
