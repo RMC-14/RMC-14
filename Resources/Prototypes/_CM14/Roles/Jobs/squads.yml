@@ -14,25 +14,25 @@
   parent: SquadBase
   components:
   - type: SquadTeam
-    color: "#FF747E"
+    color: "#E61919"
 
 - type: entity
   id: SquadBravo
   parent: SquadBase
   components:
   - type: SquadTeam
-    color: "#A46106"
+    color: "#FFC32D"
 
 - type: entity
   id: SquadCharlie
   parent: SquadBase
   components:
   - type: SquadTeam
-    color: "#D381C9"
+    color: "#C864C8"
 
 - type: entity
   id: SquadDelta
   parent: SquadBase
   components:
   - type: SquadTeam
-    color: "#334E6D"
+    color: "#4148C8"

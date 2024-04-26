@@ -26,4 +26,8 @@ public sealed partial class CMRuleComponent : Component
 
     [DataField]
     public EntityUid Hive;
+
+    // TODO CM14
+    [DataField]
+    public bool XenosEverOnShip;
 }

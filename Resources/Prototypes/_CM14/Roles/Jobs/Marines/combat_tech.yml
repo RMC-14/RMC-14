@@ -1,6 +1,6 @@
 - type: job
+  parent: CMJobSquadBase
   id: CMCombatTech
-  parent: CMJobBase
   name: cm-job-name-combat-tech
   description: cm-job-description-combat-tech
   playTimeTracker: CMJobCombatTech
