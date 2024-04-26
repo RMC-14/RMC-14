@@ -71,7 +71,7 @@
   description: An M4A3 Service Pistol, once the standard issue sidearm of the Colonial Marines but has recently been replaced with the 88 Mod 4 combat pistol.
   components:
   - type: Gun
-    fireRate: 7
+    fireRate: 10
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Pistols/m4a3.rsi
   - type: Clothing
