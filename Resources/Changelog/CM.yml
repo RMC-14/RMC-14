@@ -577,5 +577,47 @@
   id: 75
   time: '2024-04-26T05:08:06.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1916
+- author: QuietlyWhisper
+  changes:
+  - message: Fixed the fire rate for the 88m4 and service pistols.
+    type: Fix
+  id: 76
+  time: '2024-04-26T10:00:55.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2019
+- author: QuietlyWhisper
+  changes:
+  - message: Fixed not being able to store the M42A in the suit storage slot.
+    type: Fix
+  id: 77
+  time: '2024-04-26T10:00:34.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2014
+- author: QuietlyWhisper
+  changes:
+  - message: Fixed burning marines and xenos being able to set others on fire.
+    type: Fix
+  id: 78
+  time: '2024-04-26T10:01:27.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2020
+- author: DrSmugleaf
+  changes:
+  - message: Fixed larva getting stuck when evolving under tables and doors.
+    type: Fix
+  id: 79
+  time: '2024-04-26T10:02:01.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2022
+- author: QuietlyWhisper
+  changes:
+  - message: Fixed marines being able to take temperature damage.
+    type: Fix
+  id: 80
+  time: '2024-04-26T10:01:44.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2021
+- author: QuietlyWhisper
+  changes:
+  - message: Fixed damage and armor piercing values for all shotgun ammo types.
+    type: Fix
+  id: 81
+  time: '2024-04-26T10:00:42.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2017
 Name: CM
 Order: -1
