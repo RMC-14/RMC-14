@@ -278,7 +278,7 @@
   id: CMXenoFlammable
   components:
   - type: Flammable
-    fireSpread: true
+    fireSpread: false
     canResistFire: true
     damage: #per second, scales with number of fire 'stacks'
       types:
