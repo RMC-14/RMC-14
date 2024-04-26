@@ -107,7 +107,7 @@
   - type: Clothing
     sprite: _CM14/Objects/Weapons/Guns/Pistols/88m4.rsi
   - type: Gun
-    fireRate: 5
+    fireRate: 4
     availableModes:
     - SemiAuto
     - Burst
