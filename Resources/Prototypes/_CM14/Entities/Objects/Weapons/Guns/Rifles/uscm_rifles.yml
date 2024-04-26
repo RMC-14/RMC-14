@@ -7,10 +7,10 @@
   - type: Item
     size: Huge
   - type: Clothing
-    quickEquip: false
+    quickEquip: true
     slots:
-    - Back
     - suitStorage
+    - Back
   - type: AmmoCounter
   - type: ContainerContainer
     containers:
