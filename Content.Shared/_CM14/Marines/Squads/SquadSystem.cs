@@ -37,10 +37,10 @@ public sealed class SquadSystem : EntitySystem
 
         foreach (var item in _inventory.GetHandOrInventoryEntities(marine))
         {
-            if (team.Comp.AccessLevel != default &&
+            if (team.Comp.AccessLevel is { Id.Length: > 0 } accessLevel &&
                 TryComp(item, out AccessComponent? access))
             {
-                access.Tags.Add(team.Comp.AccessLevel);
+                access.Tags.Add(accessLevel);
                 Dirty(item, access);
             }
 

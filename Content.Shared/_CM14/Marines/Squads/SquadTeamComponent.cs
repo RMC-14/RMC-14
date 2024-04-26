@@ -16,5 +16,5 @@ public sealed partial class SquadTeamComponent : Component
     public SpriteSpecifier Background;
 
     [DataField]
-    public ProtoId<AccessLevelPrototype> AccessLevel;
+    public ProtoId<AccessLevelPrototype>? AccessLevel;
 }
