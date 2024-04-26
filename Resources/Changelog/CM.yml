@@ -563,5 +563,19 @@
   id: 73
   time: '2024-04-24T03:45:41.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1302
+- author: DrSmugleaf
+  changes:
+  - message: Added dropship piloting.
+    type: Add
+  id: 74
+  time: '2024-04-25T03:22:49.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1308
+- author: DrSmugleaf
+  changes:
+  - message: Added distress signal gamemode.
+    type: Add
+  id: 75
+  time: '2024-04-26T05:08:06.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/1916
 Name: CM
 Order: -1
