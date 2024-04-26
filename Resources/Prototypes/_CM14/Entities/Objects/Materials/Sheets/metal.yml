@@ -1,4 +1,4 @@
-# Steel
+# Metal
 - type: entity
   abstract: true
   parent: SheetMetalBase
@@ -15,9 +15,9 @@
 
 - type: entity
   parent: CMSheetMetalBase
-  id: CMSheetSteel
-  name: steel sheet
-  description: Sheets made out of steel. They have been dubbed Steel Sheets.
+  id: CMSheetMetal
+  name: metal sheet
+  description: Sheets made out of metal. They have been dubbed Metal Sheets.
   suffix: Full
   components:
     - type: Material
@@ -40,8 +40,8 @@
           map: ["base"]
 
 - type: entity
-  parent: CMSheetSteel
-  id: CMSheetSteel10
+  parent: CMSheetMetal
+  id: CMSheetMetal10
   suffix: "10"
   components:
     - type: Sprite
@@ -51,8 +51,8 @@
       count: 10
 
 - type: entity
-  parent: CMSheetSteel
-  id: CMSheetSteel1
+  parent: CMSheetMetal
+  id: CMSheetMetal1
   suffix: Single
   components:
     - type: Sprite

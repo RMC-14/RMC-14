@@ -590,7 +590,7 @@
       entries:
     #- id: CMInsulatedGloves
     #  amount: 3P
-      - id: CMSheetSteel
+      - id: CMSheetMetal
         points: 5
     #- id: CMPlasteelx10
     #  amount: 7P
