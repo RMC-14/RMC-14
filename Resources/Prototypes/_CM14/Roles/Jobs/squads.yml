@@ -10,29 +10,37 @@
       state: hudsquad
 
 - type: entity
-  id: SquadAlpha
   parent: SquadBase
+  id: SquadAlpha
+  name: Alpha
   components:
   - type: SquadTeam
     color: "#E61919"
+    accessLevel: CMAccessAlpha
 
 - type: entity
-  id: SquadBravo
   parent: SquadBase
+  id: SquadBravo
+  name: Bravo
   components:
   - type: SquadTeam
     color: "#FFC32D"
+    accessLevel: CMAccessBravo
 
 - type: entity
-  id: SquadCharlie
   parent: SquadBase
+  id: SquadCharlie
+  name: Charlie
   components:
   - type: SquadTeam
     color: "#C864C8"
+    accessLevel: CMAccessCharlie
 
 - type: entity
-  id: SquadDelta
   parent: SquadBase
+  id: SquadDelta
+  name: Delta
   components:
   - type: SquadTeam
     color: "#4148C8"
+    accessLevel: CMAccessDelta

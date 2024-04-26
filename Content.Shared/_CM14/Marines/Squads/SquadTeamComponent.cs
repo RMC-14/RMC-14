@@ -1,4 +1,6 @@
-﻿using Robust.Shared.GameStates;
+﻿using Content.Shared.Access;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._CM14.Marines.Squads;
@@ -12,4 +14,7 @@ public sealed partial class SquadTeamComponent : Component
 
     [DataField(required: true)]
     public SpriteSpecifier Background;
+
+    [DataField]
+    public ProtoId<AccessLevelPrototype> AccessLevel;
 }
