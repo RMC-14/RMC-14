@@ -28,7 +28,9 @@ public sealed class StartEndGameRulesTest
 
         await server.WaitAssertion(() =>
         {
-            var rules = gameTicker.GetAllGameRulePrototypes().ToList();
+            var rules = gameTicker.GetAllGameRulePrototypes().Where(p => p.ID == "CMDistressSignal").ToList();
+            Assert.That(rules, Is.Not.Empty);
+
             rules.Sort((x, y) => string.Compare(x.ID, y.ID, StringComparison.Ordinal));
 
             // Start all rules

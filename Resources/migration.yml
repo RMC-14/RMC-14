@@ -302,3 +302,6 @@ SpawnPointSmartGunner: CMSpawnPointSmartGunner
 SpawnPointSquadLeader: CMSpawnPointSquadLeader
 SpawnPointStaffOfficer: CMSpawnPointStaffOfficer
 SpawnPointWeaponsSpecialist: CMSpawnPointWeaponsSpecialist
+
+# 2024-04-25
+CMHypersleepChamber: CMHyperSleepChamber

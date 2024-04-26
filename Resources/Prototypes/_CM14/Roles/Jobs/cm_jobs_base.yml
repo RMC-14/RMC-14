@@ -1,9 +1,15 @@
 ﻿- type: job
-  id: CMJobBase
   abstract: true
+  id: CMJobBase
   isCM: true
 
-- type: department
-  id: CMDepartmentBase
+- type: job
   abstract: true
+  parent: CMJobBase
+  id: CMJobSquadBase
+  hasSquad: true
+
+- type: department
+  abstract: true
+  id: CMDepartmentBase
   isCM: true

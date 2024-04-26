@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using Content.Server.GameTicking;
+﻿using Content.Server.GameTicking;
 using Robust.Shared.GameObjects;
 
 namespace Content.IntegrationTests.Tests.GameRules;
 
 [TestFixture]
+[Ignore("Secret game rule is disabled in CM")]
 public sealed class SecretStartsTest
 {
     /// <summary>

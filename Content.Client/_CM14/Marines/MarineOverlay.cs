@@ -73,11 +73,11 @@ public sealed class MarineOverlay : Overlay
 
             var texture = _sprite.Frame0(icon.Icon);
 
-            var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float) texture.Height / EyeManager.PixelsPerMeter;
-            var xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float) texture.Width / EyeManager.PixelsPerMeter;
+            var yOffset = 0.1f + (bounds.Height + sprite.Offset.Y) / 2f - (float) texture.Height / EyeManager.PixelsPerMeter;
+            var xOffset = 0.1f + (bounds.Width + sprite.Offset.X) / 2f - (float) texture.Width / EyeManager.PixelsPerMeter;
 
             var position = new Vector2(xOffset, yOffset);
-            if (icon.Background != null)
+            if (icon.Icon != null && icon.Background != null)
             {
                 var background = _sprite.Frame0(icon.Background);
                 handle.DrawTexture(background, position, icon.BackgroundColor);

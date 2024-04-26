@@ -27,6 +27,7 @@
     - type: Skills
       construction: 1
       endurance: 2
+  hasIcon: false
 
 - type: startingGear
   id: CMGearSurvivor
@@ -49,6 +50,6 @@
     - sprite: Markers/jobs.rsi
       state: green
     - state: survivor
-      
+
 - type: playTimeTracker
   id: CMJobSurvivor
