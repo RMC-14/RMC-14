@@ -21,10 +21,11 @@
     - suitStorage
   - type: Wieldable
   - type: Gun
+    fireRate: 8
     minAngle: 5
     maxAngle: 70
     angleIncrease: 60
-    angleDecay: 180 ##fire 3x per second one handed and see no accuracy loss
+    angleDecay: 180 # fire 3x per second one handed and see no accuracy loss
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -69,6 +70,8 @@
   name: M4A3 service pistol
   description: An M4A3 Service Pistol, once the standard issue sidearm of the Colonial Marines but has recently been replaced with the 88 Mod 4 combat pistol.
   components:
+  - type: Gun
+    fireRate: 7
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Pistols/m4a3.rsi
   - type: Clothing
@@ -104,6 +107,7 @@
   - type: Clothing
     sprite: _CM14/Objects/Weapons/Guns/Pistols/88m4.rsi
   - type: Gun
+    fireRate: 5
     availableModes:
     - SemiAuto
     - Burst
