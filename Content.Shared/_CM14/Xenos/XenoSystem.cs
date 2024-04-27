@@ -111,6 +111,12 @@ public sealed class XenoSystem : EntitySystem
         if (!_damageableQuery.Resolve(xeno, ref xeno.Comp, false))
             return;
 
+        if (_mobStateQuery.TryGetComponent(xeno, out var mobState) &&
+            _mobState.IsDead(xeno, mobState))
+        {
+            return;
+        }
+
         var heal = new DamageSpecifier();
         foreach (var (type, typeAmount) in xeno.Comp.Damage.DamageDict)
         {
@@ -155,11 +161,6 @@ public sealed class XenoSystem : EntitySystem
                 continue;
 
             xeno.NextRegenTime = time + xeno.RegenCooldown;
-            if (_mobStateQuery.TryGetComponent(uid, out var mobState) &&
-                _mobState.IsDead(uid, mobState))
-            {
-                continue;
-            }
 
             if (xeno.OnWeeds)
             {
