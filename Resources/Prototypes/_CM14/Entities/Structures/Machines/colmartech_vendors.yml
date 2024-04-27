@@ -504,15 +504,19 @@
     #- id: CMEngineeringPamphlet
     #  amount: 15P
     - name: Radio Keys
-      entries: []
-    #- id: CMEngineeringRadioEncryptionKey
-    #  amount: 5P
-    #- id: CMIntelRadioEncryptionKey
-    #  amount: 5P
-    #- id: CMJTACRadioEncryption Key
-    #  amount: 5P
-    #- id: CMSupplyRadioEncryption Key
-    #  amount: 5P
+      entries:
+      - id: CMEncryptionKeyEngineer
+        amount: 5
+        points: 5
+      - id: CMEncryptionKeyIntel
+        amount: 5
+        points: 5
+      #- id: CMEncryptionKeyJTAC TODO: Add a JTAC Key.
+      #  amount: 5
+      #  points: 5
+      - id: CMEncryptionKeyRequisition
+        amount: 5
+        points: 5
 
 - type: entity
   parent: ColMarTechBase
@@ -683,15 +687,22 @@
     #- id: CMM79GrenadeLauncher
     #  amount: 18P
     - name: Radio Keys
-      entries: []
-    #- id: CMEngineeringRadioEncryptionKey
-    #  amount: 3P
-    #- id: CMIntelRadioEncryptionKey
-    #  amount: 3P
-    #- id: CMJTACRadioEncryptionKey
-    #  amount: 3P
-    #- id: CMSupplyRadioEncryptionKey
-    #  amount: 3P
+      entries:
+      - id: CMEncryptionKeyEngineer
+        amount: 3
+        points: 3
+      - id: CMEncryptionKeyIntel
+        amount: 3
+        points: 3
+      #- id: CMTacticsRadioEncryptionKey TODO: Add Tactics Key
+      #  amount: 3
+      #  points: 3
+      #- id: CMJTACRadioEncryptionKey TODO: Add JTAC Key.
+      #  amount: 3
+      #  points: 3
+      - id: CMEncryptionKeyRequisition
+        amount: 3
+        points: 3
 
 - type: entity
   parent: ColMarTechBase
@@ -897,11 +908,22 @@
     #- id: CMJTACPamphlet
     #- id: CMEngineeringPamphlet
     - name: Radio Keys
-      entries: []
-    #- id: CMEngineeringRadioEncryptionKey
-    #- id: CMIntelRadioEncryptionKey
-    #- id: CMJTACRadioEncryptionKey
-    #- id: CMSupplyRadioEncryptionKey
+      entries:
+      - id: CMEncryptionKeyEngineer
+        amount: 5
+        points: 5
+      - id: CMEncryptionKeyIntel
+        amount: 5
+        points: 5
+      #- id: CMTacticsRadioEncryptionKey TODO: Add Tactics Key.
+      #  amount: 5
+      #  points: 5
+      #- id: CMJTACRadioEncryptionKey TODO: Add JTAC Key.
+      #  amount: 5
+      #  points: 5
+      - id: CMEncryptionKeyRequisition
+        amount: 5
+        points: 5
 
 - type: entity
   parent: ColMarTechBase
@@ -1047,13 +1069,19 @@
     #- id: CMJTACPamphlet
     #  amount: 15P
     - name: Radio Keys
-      entries: []
-    #- id: CMIntelRadioEncryptionKey
-    #  amount: 3P
-    #- id: CMJTACRadioEncryptionKey
-    #  amount: 3P
-    #- id: CMSupplyRadioEncryptionKey
-    #  amount: 3P
+      entries:
+      - id: CMEncryptionKeyIntel
+        amount: 3
+        points: 3
+      #- id: CMTacticsRadioEncryptionKey TODO: Add Tactics Key
+      #  amount: 3
+      #  points: 3
+      #- id: CMJTACRadioEncryptionKey TODO: Add JTAC Key
+      #  amount: 3
+      #  points: 3
+      - id: CMEncryptionKeyRequisition
+        amount: 3
+        points: 3
 
 - type: entity
   parent: ColMarTechBase
@@ -1239,11 +1267,22 @@
     #    CMJTACPamphlet: 15P
     #    CMEngineeringPamphlet: 15P
     - name: Radio Keys
-      entries: []
-    #    CMEngineeringRadioEncryptionKey: 3P
-    #    CMIntelRadioEncryptionKey: 3P
-    #    CMJTACRadioEncryptionKey: 3P
-    #    CMSupplyRadioEncryptionKey: 3P
+      entries:
+      - id: CMEncryptionKeyEngineer
+        amount: 3
+        points: 3
+      - id: CMEncryptionKeyIntel
+        amount: 3
+        points: 3
+      #- id: CMTacticsRadioEncryptionKey TODO: Add Tactics Key.
+      #  amount: 3
+      #  points: 3
+      #- id: CMJTACRadioEncryptionKey TODO: Add JTAC Key.
+      #   amount: 3
+      #   points: 3
+      - id: CMEncryptionKeyRequisition
+        amount: 3
+        points: 3
 
 - type: entity
   parent: ColMarTechBase
@@ -1435,15 +1474,19 @@
     #- id: CMEngineeringPamphlet
     #  amount: 15P
     - name: Radio Keys
-      entries: []
-    #- id: CMEngineeringRadioEncryptionKey
-    #  amount: 5P
-    #- id: CMIntelRadioEncryptionKey
-    #  amount: 5P
-    #- id: CMJTACRadioEncryptionKey
-    #  amount: 5P
-    #- id: CMSupplyRadioEncryptionKey
-    #  amount: 5P
+      entries:
+      - id: CMEncryptionKeyEngineer
+        amount: 5
+        points: 5
+      - id: CMEncryptionKeyIntel
+        amount: 5
+        points: 5
+      #- id: CMJTACRadioEncryptionKey
+      #  amount: 5
+      #  points: 5
+      - id: CMEncryptionKeyRequisition
+        amount: 5
+        points: 5
 
 - type: entity
   parent: ColMarTechBase
@@ -1597,15 +1640,22 @@
     #- id: CMWeldingVisor
     #  amount: 5
     - name: Radio Keys
-      entries: []
-    #- id: CMEngineeringRadioEncryptionKey
-    #  amount: 5
-    #- id: CMIntelRadioEncryptionKey
-    #  amount: 5
-    #- id: CMJTACRadioEncryptionKey
-    #  amount: 5
-    #- id: CMSupplyRadioEncryptionKey
-    #  amount: 5
+      entries:
+      - id: CMEncryptionKeyEngineer
+        amount: 5
+        points: 5
+      - id: CMEncryptionKeyIntel
+        amount: 5
+        points: 5
+      #- id: CMTacticsRadioEncryptionKey TODO: Add Tactics Key.
+      #  amount: 5
+      #  points: 5
+      #- id: CMJTACRadioEncryptionKey TODO: Add JTAC Key.
+      #  amount: 5
+      #  points: 3
+      - id: CMEncryptionKeyRequisition
+        amount: 5
+        points: 5
 
 - type: entity
   parent: ColMarTechBase
