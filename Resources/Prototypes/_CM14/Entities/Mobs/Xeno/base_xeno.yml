@@ -180,14 +180,11 @@
   id: CMXenoPrying
   components:
   - type: Tool
-    speed: 1.5
     qualities:
     - Prying
   - type: Prying
-    pryPowered: !type:Bool
-      true
-    force: !type:Bool
-      true
+    pryPowered: true
+    speedModifier: 2.7
     useSound:
       path: /Audio/Items/crowbar.ogg
 
