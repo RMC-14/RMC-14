@@ -1,11 +1,11 @@
 ﻿Entries:
-- author: QuietlyWhisper
+- author: Whisper
   changes:
   - message: Added the basic rifleman role!
     type: Add
   id: 1
   time: '2023-08-12T15:18:11.0000000+00:00'
-- author: QuietlyWhisper
+- author: Whisper
   changes:
   - message: Added SL
     type: Add
@@ -113,7 +113,7 @@
     type: Add
   id: 17
   time: '2024-01-03T07:03:14.0000000+00:00'
-- author: irroZ, QuietlyWhisper
+- author: irroZ, Whisper
   changes:
   - message: Added lobby art.
     type: Add
@@ -577,21 +577,21 @@
   id: 75
   time: '2024-04-26T05:08:06.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1916
-- author: QuietlyWhisper
+- author: Whisper
   changes:
   - message: Fixed the fire rate for the 88m4 and service pistols.
     type: Fix
   id: 76
   time: '2024-04-26T10:00:55.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2019
-- author: QuietlyWhisper
+- author: Whisper
   changes:
   - message: Fixed not being able to store the M42A in the suit storage slot.
     type: Fix
   id: 77
   time: '2024-04-26T10:00:34.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2014
-- author: QuietlyWhisper
+- author: Whisper
   changes:
   - message: Fixed burning marines and xenos being able to set others on fire.
     type: Fix
@@ -605,14 +605,14 @@
   id: 79
   time: '2024-04-26T10:02:01.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2022
-- author: QuietlyWhisper
+- author: Whisper
   changes:
   - message: Fixed marines being able to take temperature damage.
     type: Fix
   id: 80
   time: '2024-04-26T10:01:44.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2021
-- author: QuietlyWhisper
+- author: Whisper
   changes:
   - message: Fixed damage and armor piercing values for all shotgun ammo types.
     type: Fix
