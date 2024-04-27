@@ -169,6 +169,9 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
             return false;
         }
 
+        if (_mobState.IsDead(victim))
+            return false;
+
         return true;
     }
 
