@@ -35,7 +35,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.25,-0.45,0.25,0.45"
+          bounds: "-0.5,-0.5,0.5,0.5"
         mask:
         - MachineMask
         layer:
@@ -1361,6 +1361,17 @@
   name: ColMarTech MarineMed
   description: Medical Pharmaceutical dispenser with basic medical supplies for marines.
   components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.38,-0.5,0.35,0.5"
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        density: 200
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/marine_medical.rsi
     layers:
