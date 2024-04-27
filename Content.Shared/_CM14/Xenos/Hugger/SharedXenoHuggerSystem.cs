@@ -241,6 +241,12 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
                 continue;
             }
 
+            if (_mobState.IsDead(uid))
+            {
+                RemCompDeferred<VictimHuggedComponent>(uid);
+                return;
+            }
+
             RemCompDeferred<VictimHuggedComponent>(uid);
             Spawn(hugged.BurstSpawn, xform.Coordinates);
             EnsureComp<VictimBurstComponent>(uid);
