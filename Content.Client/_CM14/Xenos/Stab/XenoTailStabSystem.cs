@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Client.Interactable;
 using Content.Shared._CM14.Xenos.Stab;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
@@ -15,6 +16,7 @@ public sealed class XenoTailStabSystem : SharedXenoTailStabSystem
 {
     [Dependency] private readonly AnimationPlayerSystem _animation = default!;
     [Dependency] private readonly IConsoleHost _console = default!;
+    [Dependency] private readonly InteractionSystem _interaction = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IOverlayManager _overlays = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
@@ -73,6 +75,11 @@ public sealed class XenoTailStabSystem : SharedXenoTailStabSystem
 
         // lie by 20% so the player feels less bad about missing
         var distance = localPos.Length() * 0.80f;
+
+        var origin = _transform.GetMapCoordinates(user);
+        var unobstructedDistance = _interaction.UnobstructedDistance(origin, origin.Offset(localPos));
+        if (distance > unobstructedDistance)
+            distance = unobstructedDistance;
 
         var startOffset = sprite.Rotation.RotateVec(new Vector2(0, -distance / 5f));
         var endOffset = sprite.Rotation.RotateVec(new Vector2(0, -distance));

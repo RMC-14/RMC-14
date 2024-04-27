@@ -36,6 +36,7 @@
     range: 15
     useDelay: 10
     checkCanAccess: false
+  - type: XenoTailStabAction
 
 - type: entity
   id: ActionXenoLeap
