@@ -1,13 +1,9 @@
 ﻿using System.Linq;
 using System.Runtime.InteropServices;
 using Content.Server._CM14.Marines;
-using Content.Server.Administration.Managers;
-using Content.Server.Antag;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
-using Content.Server.Players.PlayTimeTracking;
-using Content.Server.Roles.Jobs;
 using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Spawners.Components;
@@ -17,18 +13,17 @@ using Content.Shared._CM14.Marines;
 using Content.Shared._CM14.Marines.HyperSleep;
 using Content.Shared._CM14.Marines.Squads;
 using Content.Shared._CM14.Xenos;
-using Content.Shared._CM14.Xenos.Hive;
 using Content.Shared.Coordinates;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Nutrition.Components;
+using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Roles;
 using Content.Shared.StatusIcon;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
-using Robust.Server.Player;
 using Robust.Shared.Console;
-using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
@@ -37,22 +32,16 @@ namespace Content.Server._CM14.Rules;
 
 public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
 {
-    [Dependency] private readonly AntagSelectionSystem _antagSelection = default!;
-    [Dependency] private readonly IBanManager _bans = default!;
     [Dependency] private readonly IConsoleHost _console = default!;
     [Dependency] private readonly ContainerSystem _containers = default!;
-    [Dependency] private readonly XenoHiveSystem _hive = default!;
-    [Dependency] private readonly JobSystem _jobs = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly MarineSystem _marines = default!;
     [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly PlayTimeTrackingSystem _playTime = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
-    [Dependency] private readonly StationJobsSystem _stationJobs = default!;
     [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
@@ -115,95 +104,6 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
                 var mind = _mind.GetOrCreateMind(player.UserId);
                 _mind.TransferTo(mind, xenoEnt);
             }
-
-            // Marines
-            // var marineSpawners = GetSpawners();
-            // var lastSquadSpawners = new Dictionary<EntProtoId, EntityUid>();
-            // var lastJobSpawners = new Dictionary<EntProtoId, EntityUid>();
-            // var spawnableStations = GetSpawnableStations();
-            // var assignedJobs = _stationJobs.AssignJobs(profiles, spawnableStations);
-            // var playerIds = ev.PlayerPool.Select(p => p.UserId).ToList();
-            // _stationJobs.AssignOverflowJobs(ref assignedJobs, playerIds, profiles, spawnableStations);
-            //
-            // if (comp.SquadIds.Count > 0)
-            // {
-            //     // TODO CM14 make this support multi-station
-            //     foreach (var (playerId, (assignedJobId, _)) in assignedJobs)
-            //     {
-            //         if (assignedJobId == null)
-            //             continue;
-            //
-            //         if (!_prototypes.TryIndex(assignedJobId, out JobPrototype? job))
-            //             continue;
-            //
-            //         EntityUid spawner;
-            //         if (job.HasSquad)
-            //         {
-            //             if (comp.NextSquad >= comp.SquadIds.Count)
-            //                 comp.NextSquad = 0;
-            //
-            //             var nextSquad = comp.SquadIds[comp.NextSquad++];
-            //             ref var squad = ref CollectionsMarshal.GetValueRefOrAddDefault(comp.Squads, nextSquad, out var exists);
-            //             if (!exists)
-            //                 squad = Spawn(nextSquad);
-            //
-            //             if (marineSpawners.Squad.TryGetValue(nextSquad, out var squadSpawners) &&
-            //                 squadSpawners.TryGetValue(job.ID, out var spawners) &&
-            //                 spawners.Count > 0)
-            //             {
-            //                 spawner = _random.PickAndTake(spawners);
-            //                 lastSquadSpawners[nextSquad] = spawner;
-            //             }
-            //             else if (!lastSquadSpawners.TryGetValue(nextSquad, out spawner))
-            //             {
-            //                 Log.Error($"No valid spawn found for player {playerId}. Squad: {nextSquad}, job: {assignedJobId}");
-            //
-            //                 if (lastSquadSpawners.Count > 0)
-            //                     spawner = lastSquadSpawners.First().Value;
-            //                 else
-            //                     continue;
-            //             }
-            //         }
-            //         else
-            //         {
-            //             if (marineSpawners.NonSquad.TryGetValue(job.ID, out var spawners))
-            //             {
-            //                 spawner = _random.PickAndTake(spawners);
-            //                 lastJobSpawners[job.ID] = spawner;
-            //             }
-            //             else
-            //             {
-            //                 Log.Error($"No valid spawn found for player {playerId}. Job: {assignedJobId}");
-            //
-            //                 if (lastJobSpawners.Count > 0)
-            //                     spawner = lastJobSpawners.First().Value;
-            //                 else
-            //                     continue;
-            //             }
-            //         }
-            //
-            //         EntityUid playerEnt;
-            //         if (TryComp(spawner, out HyperSleepChamberComponent? hyperSleep))
-            //         {
-            //             playerEnt = SpawnInContainerOrDrop();
-            //         }
-            //
-            //         SpriteSpecifier? icon = null;
-            //         var mindId = _mind.GetMind(playerEnt);
-            //         if (_prototypes.TryIndex(job.Icon, out StatusIconPrototype? jobIcon))
-            //             icon = jobIcon.Icon;
-            //
-            //         _marines.MakeMarine(playerEnt, icon);
-            //
-            //         if (_player.TryGetSessionById(playerId, out var session))
-            //             _playTime.PlayerRolesChanged(session);
-            //
-            //         if (job.HasSquad)
-            //             _squad.SetSquad(playerEnt, squad);
-            //     }
-            // }
-
-            // TODO CM14 other roles
         }
     }
 
@@ -253,6 +153,9 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
                 }
             }
 
+            if (TryComp(ev.SpawnResult, out HungerComponent? hunger))
+                _hunger.SetHunger(ev.SpawnResult.Value, 50.0f, hunger);
+
             return;
         }
     }
@@ -279,7 +182,7 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
             var xenos = EntityQueryEnumerator<XenoComponent, MobStateComponent, TransformComponent>();
             var xenosAlive = false;
             var xenosOnShip = false;
-            while (xenos.MoveNext(out var xenoId, out var xeno, out var mobState, out var xform))
+            while (xenos.MoveNext(out var xenoId, out _, out var mobState, out var xform))
             {
                 if (_mobState.IsAlive(xenoId, mobState))
                     xenosAlive = true;
@@ -294,7 +197,7 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
             var marines = EntityQueryEnumerator<MarineComponent, MobStateComponent, TransformComponent>();
             var marinesAlive = false;
             var marinesOnShip = false;
-            while (marines.MoveNext(out var marineId, out var marine, out var mobState, out var xform))
+            while (marines.MoveNext(out var marineId, out _, out var mobState, out var xform))
             {
                 if (_mobState.IsAlive(marineId, mobState))
                     marinesAlive = true;
@@ -351,9 +254,9 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
 
     private bool SpawnXenoMap(Entity<CMRuleComponent> rule)
     {
-        var mapId = _mapManager.CreateMap();
+        var mapId = _map.CreateMap();
         _console.ExecuteCommand($"planet {mapId} Grasslands");
-        rule.Comp.XenoMap = _mapManager.GetMapEntityIdOrThrow(mapId);
+        rule.Comp.XenoMap = mapId;
         return true;
     }
 
