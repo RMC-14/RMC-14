@@ -45,7 +45,6 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         _damageableQuery = GetEntityQuery<DamageableComponent>();
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
 
-        SubscribeLocalEvent<XenoPheromonesComponent, EntityUnpausedEvent>(OnXenoPheromonesUnpaused);
         SubscribeLocalEvent<XenoPheromonesComponent, XenoPheromonesActionEvent>(OnXenoPheromonesAction);
         SubscribeLocalEvent<XenoPheromonesComponent, XenoPheromonesChosenBuiMessage>(OnXenoPheromonesChosenBui);
 
@@ -57,7 +56,6 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, ComponentStartup>(OnXenoStartup);
 
         SubscribeLocalEvent<XenoRecoveryPheromonesComponent, MapInitEvent>(OnRecoveryMapInit);
-        SubscribeLocalEvent<XenoRecoveryPheromonesComponent, EntityUnpausedEvent>(OnRecoveryUnpaused);
 
         // TODO CM14 reduce crit damage
         SubscribeLocalEvent<XenoWardingPheromonesComponent, UpdateMobStateEvent>(OnWardingUpdateMobState,
@@ -95,11 +93,6 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         }
     }
 
-    private void OnXenoPheromonesUnpaused(Entity<XenoPheromonesComponent> ent, ref EntityUnpausedEvent args)
-    {
-        ent.Comp.NextPheromonesPlasmaUse += args.PausedTime;
-    }
-
     private void OnXenoPheromonesAction(Entity<XenoPheromonesComponent> xeno, ref XenoPheromonesActionEvent args)
     {
         if (RemComp<XenoActivePheromonesComponent>(xeno))
@@ -135,11 +128,6 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     private void OnRecoveryMapInit(Entity<XenoRecoveryPheromonesComponent> recovery, ref MapInitEvent args)
     {
         recovery.Comp.NextRegenTime = _timing.CurTime + recovery.Comp.Delay;
-    }
-
-    private void OnRecoveryUnpaused(Entity<XenoRecoveryPheromonesComponent> recovery, ref EntityUnpausedEvent args)
-    {
-        recovery.Comp.NextRegenTime += args.PausedTime;
     }
 
     private void OnWardingUpdateMobState(Entity<XenoWardingPheromonesComponent> warding, ref UpdateMobStateEvent args)

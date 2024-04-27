@@ -1,9 +1,10 @@
 ﻿using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._CM14.Xenos.Walker;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 [Access(typeof(XenoResinWalkerSystem))]
 public sealed partial class XenoResinWalkerComponent : Component
 {
@@ -16,7 +17,7 @@ public sealed partial class XenoResinWalkerComponent : Component
     [DataField, AutoNetworkedField]
     public FixedPoint2 PlasmaUpkeep = 15;
 
-    [DataField, AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextPlasmaUse;
 
     [DataField, AutoNetworkedField]

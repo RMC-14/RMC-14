@@ -48,7 +48,6 @@ public sealed class SharedXenoLeapSystem : EntitySystem
 
         SubscribeLocalEvent<XenoLeapingComponent, StartCollideEvent>(OnXenoLeapingDoHit);
         SubscribeLocalEvent<XenoLeapingComponent, ComponentRemove>(OnXenoLeapingRemove);
-        SubscribeLocalEvent<XenoLeapingComponent, EntityUnpausedEvent>(OnXenoLeapingUnpaused);
         SubscribeLocalEvent<XenoLeapingComponent, PhysicsSleepEvent>(OnXenoLeapingPhysicsSleep);
         SubscribeLocalEvent<XenoLeapingComponent, StartPullAttemptEvent>(OnXenoLeapingStartPullAttempt);
         SubscribeLocalEvent<XenoLeapingComponent, PullAttemptEvent>(OnXenoLeapingPullAttempt);
@@ -142,11 +141,6 @@ public sealed class SharedXenoLeapSystem : EntitySystem
     private void OnXenoLeapingRemove(Entity<XenoLeapingComponent> ent, ref ComponentRemove args)
     {
         StopLeap(ent);
-    }
-
-    private void OnXenoLeapingUnpaused(Entity<XenoLeapingComponent> ent, ref EntityUnpausedEvent args)
-    {
-        ent.Comp.LeapEndTime += args.PausedTime;
     }
 
     private void OnXenoLeapingPhysicsSleep(Entity<XenoLeapingComponent> ent, ref PhysicsSleepEvent args)

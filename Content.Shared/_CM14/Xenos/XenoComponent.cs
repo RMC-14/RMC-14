@@ -6,7 +6,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._CM14.Xenos;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 [Access(typeof(XenoSystem))]
 public sealed partial class XenoComponent : Component
 {
@@ -22,7 +22,7 @@ public sealed partial class XenoComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan RegenCooldown = TimeSpan.FromSeconds(1);
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextRegenTime;
 
     [DataField, AutoNetworkedField]

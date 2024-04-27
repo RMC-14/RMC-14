@@ -2,10 +2,11 @@
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._CM14.Medical.IV;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
 public sealed partial class IVDripComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -20,7 +21,7 @@ public sealed partial class IVDripComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan TransferDelay = TimeSpan.FromSeconds(3);
 
-    [DataField, AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan TransferAt;
 
     [DataField, AutoNetworkedField]

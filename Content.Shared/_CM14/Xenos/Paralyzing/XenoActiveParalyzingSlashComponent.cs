@@ -1,12 +1,13 @@
 ﻿using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._CM14.Xenos.Paralyzing;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 [Access(typeof(XenoParalyzingSlashSystem))]
 public sealed partial class XenoActiveParalyzingSlashComponent : Component
 {
-    [DataField, AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan ExpireAt;
 
     [DataField, AutoNetworkedField]

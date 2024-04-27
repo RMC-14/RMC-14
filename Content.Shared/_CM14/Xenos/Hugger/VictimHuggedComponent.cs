@@ -8,7 +8,7 @@ using static Robust.Shared.Utility.SpriteSpecifier;
 
 namespace Content.Shared._CM14.Xenos.Hugger;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 [Access(typeof(SharedXenoHuggerSystem))]
 public sealed partial class VictimHuggedComponent : Component
 {
@@ -24,13 +24,13 @@ public sealed partial class VictimHuggedComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan FallOffDelay = TimeSpan.FromSeconds(10);
 
-    [DataField, AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan FallOffAt;
 
     [DataField, AutoNetworkedField]
     public bool FellOff;
 
-    [DataField, AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan RecoverAt;
 
     [DataField, AutoNetworkedField]
@@ -39,7 +39,7 @@ public sealed partial class VictimHuggedComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan BurstDelay = TimeSpan.FromMinutes(8);
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan BurstAt;
 
     [DataField, AutoNetworkedField]
