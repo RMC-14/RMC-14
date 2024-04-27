@@ -635,5 +635,16 @@
   id: 83
   time: '2024-04-27T01:39:45.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2023
+- author: DrSmugleaf
+  changes:
+  - message: Fixed being able to hit friendly xenos with a tail stab and being able
+      to hit marines with it through walls.
+    type: Fix
+  - message: The xeno tail stab can now hit 3 marines maximum and has a one second
+      cooldown if it misses.
+    type: Tweak
+  id: 84
+  time: '2024-04-27T02:35:31.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2028
 Name: CM
 Order: -1
