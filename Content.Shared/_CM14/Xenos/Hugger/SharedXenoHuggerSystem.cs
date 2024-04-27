@@ -82,7 +82,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         if (args.Target == null)
             return;
 
-        if (StartHug(ent, args.Target.Value, ent))
+        if (StartHug(ent, args.Target.Value, args.User))
             args.Handled = true;
     }
 
@@ -179,7 +179,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
             HasComp<VictimHuggedComponent>(victim))
         {
             if (popup)
-                _popup.PopupClient($"You can't facehug {victimIdentity}!", victim, hugger, PopupType.MediumCaution);
+                _popup.PopupClient($"You can't facehug {victimIdentity}!", victim, user, PopupType.MediumCaution);
 
             return false;
         }
@@ -188,7 +188,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
             !_standing.IsDown(victim, standing))
         {
             if (popup)
-                _popup.PopupClient($"You can't reach {victimIdentity}, they need to be lying down!", victim, hugger, PopupType.MediumCaution);
+                _popup.PopupClient($"You can't reach {victimIdentity}, they need to be lying down!", victim, user, PopupType.MediumCaution);
 
             return false;
         }
@@ -196,7 +196,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         if (_mobState.IsDead(victim))
         {
             if (popup)
-                _popup.PopupClient("You can't facehug the dead!", victim, hugger, PopupType.MediumCaution);
+                _popup.PopupClient("You can't facehug the dead!", victim, user, PopupType.MediumCaution);
 
             return false;
         }
