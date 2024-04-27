@@ -115,10 +115,19 @@ public sealed class SharedXenoLeapSystem : EntitySystem
     {
         var marineId = args.OtherEntity;
 
-        if (EnsureComp<LeapIncapacitatedComponent>(marineId, out var victim))
+        if (!_marineQuery.TryGetComponent(marineId, out var marine))
             return;
 
-        if (!_marineQuery.TryGetComponent(marineId, out var marine))
+        if (HasComp<LeapIncapacitatedComponent>(marineId))
+            return;
+
+        if (xeno.Comp.KnockedDown)
+            return;
+
+        xeno.Comp.KnockedDown = true;
+        Dirty(xeno);
+
+        if (EnsureComp<LeapIncapacitatedComponent>(marineId, out var victim))
             return;
 
         if (_physicsQuery.TryGetComponent(xeno, out var physics))
