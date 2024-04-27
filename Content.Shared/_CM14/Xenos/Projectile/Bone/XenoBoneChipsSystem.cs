@@ -1,5 +1,4 @@
-﻿using Content.Shared._CM14.Xenos.Plasma;
-using Content.Shared.FixedPoint;
+﻿using Content.Shared.FixedPoint;
 using Content.Shared.Movement.Systems;
 using Robust.Shared.Timing;
 
@@ -13,9 +12,7 @@ public sealed class XenoBoneChipsSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoBoneChipsComponent, XenoBoneChipsActionEvent>(OnXenoBoneSpursAction);
-
         SubscribeLocalEvent<SlowedByBoneChipsComponent, RefreshMovementSpeedModifiersEvent>(OnSlowedBySpitRefreshMovement);
-        SubscribeLocalEvent<SlowedByBoneChipsComponent, EntityUnpausedEvent>(OnSlowedBySpitUnpaused);
     }
 
     private void OnXenoBoneSpursAction(Entity<XenoBoneChipsComponent> xeno, ref XenoBoneChipsActionEvent args)
@@ -39,10 +36,5 @@ public sealed class XenoBoneChipsSystem : EntitySystem
     {
         if (slowed.Comp.ExpiresAt > _timing.CurTime)
             args.ModifySpeed(slowed.Comp.Multiplier, slowed.Comp.Multiplier);
-    }
-
-    private void OnSlowedBySpitUnpaused(Entity<SlowedByBoneChipsComponent> ent, ref EntityUnpausedEvent args)
-    {
-        ent.Comp.ExpiresAt += args.PausedTime;
     }
 }

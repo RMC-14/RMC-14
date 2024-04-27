@@ -1,10 +1,11 @@
 ﻿using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._CM14.Xenos.Egg;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
 public sealed partial class XenoEggComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -16,7 +17,7 @@ public sealed partial class XenoEggComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan MaxTime = TimeSpan.FromSeconds(15);
 
-    [DataField, AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan? GrowAt;
 
     [DataField, AutoNetworkedField]

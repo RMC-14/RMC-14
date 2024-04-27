@@ -32,7 +32,6 @@ public sealed class XenoSpitSystem : EntitySystem
         SubscribeLocalEvent<XenoSlowingSpitProjectileComponent, ProjectileHitEvent>(OnXenoSlowingSpitHit);
 
         SubscribeLocalEvent<SlowedBySpitComponent, RefreshMovementSpeedModifiersEvent>(OnSlowedBySpitRefreshMovement);
-        SubscribeLocalEvent<SlowedBySpitComponent, EntityUnpausedEvent>(OnSlowedBySpitUnpaused);
 
         SubscribeLocalEvent<ArmorComponent, InventoryRelayedEvent<HitBySlowingSpitEvent>>(OnArmorHitBySlowingSpit);
 
@@ -110,11 +109,6 @@ public sealed class XenoSpitSystem : EntitySystem
     {
         if (slowed.Comp.ExpiresAt > _timing.CurTime)
             args.ModifySpeed(slowed.Comp.Multiplier, slowed.Comp.Multiplier);
-    }
-
-    private void OnSlowedBySpitUnpaused(Entity<SlowedBySpitComponent> ent, ref EntityUnpausedEvent args)
-    {
-        ent.Comp.ExpiresAt += args.PausedTime;
     }
 
     private void OnArmorHitBySlowingSpit(Entity<ArmorComponent> ent, ref InventoryRelayedEvent<HitBySlowingSpitEvent> args)

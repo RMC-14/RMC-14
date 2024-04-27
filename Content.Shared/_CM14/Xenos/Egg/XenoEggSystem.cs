@@ -39,9 +39,7 @@ public sealed class XenoEggSystem : EntitySystem
 
         SubscribeLocalEvent<XenoAttachedOvipositorComponent, MapInitEvent>(OnXenoAttachedMapInit);
         SubscribeLocalEvent<XenoAttachedOvipositorComponent, ComponentRemove>(OnXenoAttachedRemove);
-        SubscribeLocalEvent<XenoAttachedOvipositorComponent, EntityUnpausedEvent>(OnXenoAttachedUnpaused);
 
-        SubscribeLocalEvent<XenoEggComponent, EntityUnpausedEvent>(OnXenoEggUnpaused);
         SubscribeLocalEvent<XenoEggComponent, AfterAutoHandleStateEvent>(OnXenoEggAfterState);
         SubscribeLocalEvent<XenoEggComponent, GettingPickedUpAttemptEvent>(OnXenoEggPickedUpAttempt);
         SubscribeLocalEvent<XenoEggComponent, AfterInteractEvent>(OnXenoEggAfterInteract);
@@ -109,18 +107,6 @@ public sealed class XenoEggSystem : EntitySystem
     {
         if (!TerminatingOrDeleted(ent) && TryComp(ent, out TransformComponent? xform))
             _transform.Unanchor(ent, xform);
-    }
-
-    private void OnXenoAttachedUnpaused(Entity<XenoAttachedOvipositorComponent> ent, ref EntityUnpausedEvent args)
-    {
-        if (ent.Comp.NextEgg != null)
-            ent.Comp.NextEgg = ent.Comp.NextEgg.Value + args.PausedTime;
-    }
-
-    private void OnXenoEggUnpaused(Entity<XenoEggComponent> ent, ref EntityUnpausedEvent args)
-    {
-        if (ent.Comp.GrowAt != null)
-            ent.Comp.GrowAt = ent.Comp.GrowAt.Value + args.PausedTime;
     }
 
     private void OnXenoEggAfterState(Entity<XenoEggComponent> ent, ref AfterAutoHandleStateEvent args)

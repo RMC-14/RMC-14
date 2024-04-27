@@ -22,7 +22,6 @@ public sealed class XenoAcidSystem : EntitySystem
 
         SubscribeLocalEvent<XenoAcidComponent, XenoCorrosiveAcidEvent>(OnXenoCorrosiveAcid);
         SubscribeLocalEvent<XenoAcidComponent, XenoCorrosiveAcidDoAfterEvent>(OnXenoCorrosiveAcidDoAfter);
-        SubscribeLocalEvent<CorrodingComponent, EntityUnpausedEvent>(OnCorrodingUnpaused);
     }
 
     private void OnXenoCorrosiveAcid(Entity<XenoAcidComponent> xeno, ref XenoCorrosiveAcidEvent args)
@@ -63,11 +62,6 @@ public sealed class XenoAcidSystem : EntitySystem
             Acid = acid,
             CorrodesAt = _timing.CurTime + args.Time
         });
-    }
-
-    private void OnCorrodingUnpaused(Entity<CorrodingComponent> ent, ref EntityUnpausedEvent args)
-    {
-        ent.Comp.CorrodesAt += args.PausedTime;
     }
 
     private bool CheckCorrodiblePopups(Entity<XenoAcidComponent> xeno, EntityUid target)

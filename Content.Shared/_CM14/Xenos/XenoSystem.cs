@@ -41,7 +41,6 @@ public sealed class XenoSystem : EntitySystem
         _xenoQuery = GetEntityQuery<XenoComponent>();
 
         SubscribeLocalEvent<XenoComponent, MapInitEvent>(OnXenoMapInit);
-        SubscribeLocalEvent<XenoComponent, EntityUnpausedEvent>(OnXenoUnpaused);
         SubscribeLocalEvent<XenoComponent, GetAccessTagsEvent>(OnXenoGetAdditionalAccess);
         SubscribeLocalEvent<XenoComponent, NewXenoEvolvedComponent>(OnNewXenoEvolved);
 
@@ -63,11 +62,6 @@ public sealed class XenoSystem : EntitySystem
         xeno.Comp.NextRegenTime = _timing.CurTime + xeno.Comp.RegenCooldown;
         xeno.Comp.OnWeeds = _xenoConstruction.IsOnWeeds(xeno.Owner);
         Dirty(xeno);
-    }
-
-    private void OnXenoUnpaused(Entity<XenoComponent> xeno, ref EntityUnpausedEvent args)
-    {
-        xeno.Comp.NextRegenTime += args.PausedTime;
     }
 
     private void OnXenoGetAdditionalAccess(Entity<XenoComponent> xeno, ref GetAccessTagsEvent args)

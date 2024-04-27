@@ -30,7 +30,6 @@ public abstract class SharedIVDripSystem : EntitySystem
         SubscribeLocalEvent<IVDripComponent, EntInsertedIntoContainerMessage>(OnIVDripEntInserted);
         SubscribeLocalEvent<IVDripComponent, EntRemovedFromContainerMessage>(OnIVDripEntRemoved);
         SubscribeLocalEvent<IVDripComponent, AfterAutoHandleStateEvent>(OnIVDripAfterHandleState);
-        SubscribeLocalEvent<IVDripComponent, EntityUnpausedEvent>(OnIVDripUnPaused);
 
         SubscribeLocalEvent<IVDripComponent, CanDragEvent>(OnIVDripCanDrag);
         SubscribeLocalEvent<IVDripComponent, CanDropDraggedEvent>(OnIVDripCanDropDragged);
@@ -58,11 +57,6 @@ public abstract class SharedIVDripSystem : EntitySystem
     private void OnIVDripAfterHandleState(Entity<IVDripComponent> iv, ref AfterAutoHandleStateEvent args)
     {
         UpdateIVAppearance(iv);
-    }
-
-    private void OnIVDripUnPaused(Entity<IVDripComponent> iv, ref EntityUnpausedEvent args)
-    {
-        iv.Comp.TransferAt += args.PausedTime;
     }
 
     private void OnIVDripCanDrag(Entity<IVDripComponent> iv, ref CanDragEvent args)

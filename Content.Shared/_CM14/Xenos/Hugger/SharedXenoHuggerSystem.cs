@@ -41,7 +41,6 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         SubscribeLocalEvent<HuggerSpentComponent, UpdateMobStateEvent>(OnHuggerSpentUpdateMobState);
 
         SubscribeLocalEvent<VictimHuggedComponent, MapInitEvent>(OnVictimHuggedMapInit);
-        SubscribeLocalEvent<VictimHuggedComponent, EntityUnpausedEvent>(OnVictimHuggedUnpaused);
         SubscribeLocalEvent<VictimHuggedComponent, ComponentRemove>(OnVictimHuggedRemoved);
         SubscribeLocalEvent<VictimHuggedComponent, CanSeeAttemptEvent>(OnVictimHuggedCancel);
 
@@ -113,12 +112,6 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         victim.Comp.BurstAt = _timing.CurTime + victim.Comp.BurstDelay;
 
         _appearance.SetData(victim, victim.Comp.HuggedLayer, true);
-    }
-
-    private void OnVictimHuggedUnpaused(Entity<VictimHuggedComponent> victim, ref EntityUnpausedEvent args)
-    {
-        victim.Comp.FallOffAt += args.PausedTime;
-        victim.Comp.BurstAt += args.PausedTime;
     }
 
     private void OnVictimHuggedRemoved(Entity<VictimHuggedComponent> victim, ref ComponentRemove args)

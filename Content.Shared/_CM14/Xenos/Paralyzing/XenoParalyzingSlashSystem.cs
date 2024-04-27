@@ -19,16 +19,7 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoParalyzingSlashComponent, XenoParalyzingSlashActionEvent>(OnXenoParalyzingSlashAction);
-
-        SubscribeLocalEvent<XenoActiveParalyzingSlashComponent, EntityUnpausedEvent>(OnXenoParalyzingSlashUnpaused);
         SubscribeLocalEvent<XenoActiveParalyzingSlashComponent, MeleeHitEvent>(OnXenoParalyzingSlashHit);
-
-        SubscribeLocalEvent<VictimBeingParalyzedComponent, EntityUnpausedEvent>(OnVictimBeingParalyzedUnpaused);
-    }
-
-    private void OnXenoParalyzingSlashUnpaused(Entity<XenoActiveParalyzingSlashComponent> xeno, ref EntityUnpausedEvent args)
-    {
-        xeno.Comp.ExpireAt += args.PausedTime;
     }
 
     private void OnXenoParalyzingSlashAction(Entity<XenoParalyzingSlashComponent> xeno, ref XenoParalyzingSlashActionEvent args)
@@ -76,11 +67,6 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
             RemCompDeferred<XenoActiveParalyzingSlashComponent>(xeno);
             break;
         }
-    }
-
-    private void OnVictimBeingParalyzedUnpaused(Entity<VictimBeingParalyzedComponent> victim, ref EntityUnpausedEvent args)
-    {
-        victim.Comp.ParalyzeAt += args.PausedTime;
     }
 
     public override void Update(float frameTime)
