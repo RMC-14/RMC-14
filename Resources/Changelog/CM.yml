@@ -619,5 +619,12 @@
   id: 81
   time: '2024-04-26T10:00:42.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2017
+- author: DangerRevolution
+  changes:
+  - message: Added Encryption Keys to Vendors
+    type: Add
+  id: 82
+  time: '2024-04-27T01:07:17.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2025
 Name: CM
 Order: -1
