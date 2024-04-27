@@ -26,7 +26,7 @@ public sealed partial class XenoComponent : Component
     public TimeSpan NextRegenTime;
 
     [DataField, AutoNetworkedField]
-    public EntityUid Hive;
+    public EntityUid? Hive;
 
     [DataField, AutoNetworkedField]
     public HashSet<ProtoId<AccessLevelPrototype>> AccessLevels = new() { "CMAccessXeno" };

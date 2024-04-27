@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Numerics;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
@@ -22,9 +23,11 @@ namespace Content.Shared._CM14.Xenos.Stab;
 public abstract class SharedXenoTailStabSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly FixtureSystem _fixtures = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
@@ -41,23 +44,15 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         SubscribeLocalEvent<XenoTailStabComponent, XenoTailStabEvent>(OnXenoTailStab);
     }
 
-    private void OnXenoTailStab(Entity<XenoTailStabComponent> xeno, ref XenoTailStabEvent args)
+    private void OnXenoTailStab(Entity<XenoTailStabComponent> stab, ref XenoTailStabEvent args)
     {
-        if (!_actionBlocker.CanAttack(xeno) ||
-            !TryComp(xeno, out TransformComponent? transform))
+        if (!_actionBlocker.CanAttack(stab) ||
+            !TryComp(stab, out TransformComponent? transform))
         {
             return;
         }
 
-        if (TryComp(xeno, out MeleeWeaponComponent? melee))
-        {
-            if (_timing.CurTime < melee.NextAttack)
-                return;
-
-            melee.NextAttack = _timing.CurTime + TimeSpan.FromSeconds(1);
-        }
-
-        var userCoords = _transform.GetMapCoordinates(xeno, transform);
+        var userCoords = _transform.GetMapCoordinates(stab, transform);
         if (userCoords.MapId == MapId.Nullspace)
             return;
 
@@ -65,11 +60,20 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         if (userCoords.MapId != targetCoords.MapId)
             return;
 
-        var tailRange = xeno.Comp.TailRange.Float();
+        if (TryComp(stab, out MeleeWeaponComponent? melee))
+        {
+            if (_timing.CurTime < melee.NextAttack)
+                return;
+
+            melee.NextAttack = _timing.CurTime + TimeSpan.FromSeconds(1);
+            Dirty(stab, melee);
+        }
+
+        var tailRange = stab.Comp.TailRange.Float();
         var box = new Box2(userCoords.Position.X - 0.10f, userCoords.Position.Y, userCoords.Position.X + 0.10f, userCoords.Position.Y + tailRange);
 
         var matrix = _transform.GetInvWorldMatrix(transform).Transform(targetCoords.Position);
-        var rotation = _transform.GetWorldRotation(xeno).RotateVec(-matrix).ToWorldAngle();
+        var rotation = _transform.GetWorldRotation(stab).RotateVec(-matrix).ToWorldAngle();
         var boxRotated = new Box2Rotated(box, rotation, userCoords.Position);
         LastTailAttack = boxRotated;
 
@@ -79,48 +83,83 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         // ray on the right side of the box
         var rightRay = new CollisionRay(boxRotated.BottomRight, (boxRotated.TopRight - boxRotated.BottomRight).Normalized(), AttackMask);
 
+        var hive = CompOrNull<XenoComponent>(stab)?.Hive;
+
+        bool Ignored(EntityUid uid)
+        {
+            if (uid == stab.Owner)
+                return true;
+
+            if (!HasComp<MobStateComponent>(uid))
+                return true;
+
+            if (TryComp(uid, out XenoComponent? otherXeno) &&
+                hive == otherXeno.Hive)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         // dont open allocations ahead
         // entity lookups dont work properly with Box2Rotated
         // so we do one ray cast on each side instead since its narrow enough
         // im sure you could calculate the ray bounds more efficiently
         // but have you seen these allocations either way
-        var intersect = _physics.IntersectRayWithPredicate(transform.MapID, leftRay, tailRange,
-            uid => uid == xeno.Owner || !HasComp<MobStateComponent>(uid), false);
-        intersect = intersect.Concat(_physics.IntersectRayWithPredicate(transform.MapID, rightRay, tailRange,
-            uid => uid == xeno.Owner || !HasComp<MobStateComponent>(uid), false));
-        var results = intersect.Select(r => r.HitEntity).ToList();
+        var intersect = _physics.IntersectRayWithPredicate(transform.MapID, leftRay, tailRange, Ignored, false);
+        intersect = intersect.Concat(_physics.IntersectRayWithPredicate(transform.MapID, rightRay, tailRange, Ignored, false));
+        var results = intersect.Select(r => r.HitEntity).ToHashSet();
 
-        // TODO CM14 no friendly fire
+        var actualResults = new List<EntityUid>();
+        foreach (var result in results)
+        {
+            if (!_interaction.InRangeUnobstructed(stab, result, range: stab.Comp.TailRange.Float()))
+                continue;
+
+            actualResults.Add(result);
+            if (actualResults.Count == 3)
+                break;
+        }
+
         // TODO CM14 sounds
         // TODO CM14 lag compensation
-        var damage = new DamageSpecifier(xeno.Comp.TailDamage);
-        if (results.Count == 0)
+        var damage = new DamageSpecifier(stab.Comp.TailDamage);
+        if (actualResults.Count == 0)
         {
-            var missEvent = new MeleeHitEvent(new List<EntityUid>(), xeno, xeno, damage, null);
-            RaiseLocalEvent(xeno, missEvent);
+            var missEvent = new MeleeHitEvent(new List<EntityUid>(), stab, stab, damage, null);
+            RaiseLocalEvent(stab, missEvent);
+
+            foreach (var action in _actions.GetActions(stab))
+            {
+                if (TryComp(action.Id, out XenoTailStabActionComponent? actionComp))
+                    _actions.SetCooldown(action.Id, actionComp.MissCooldown);
+            }
         }
         else
         {
-            var hitEvent = new MeleeHitEvent(results, xeno, xeno, damage, null);
-            RaiseLocalEvent(xeno, hitEvent);
+            args.Handled = true;
+
+            var hitEvent = new MeleeHitEvent(actualResults, stab, stab, damage, null);
+            RaiseLocalEvent(stab, hitEvent);
 
             if (!hitEvent.Handled)
             {
-                _interaction.DoContactInteraction(xeno, xeno);
+                _interaction.DoContactInteraction(stab, stab);
 
-                foreach (var hit in results)
+                foreach (var hit in actualResults)
                 {
-                    _interaction.DoContactInteraction(xeno, hit);
+                    _interaction.DoContactInteraction(stab, hit);
                 }
 
-                var filter = Filter.Pvs(transform.Coordinates, entityMan: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
-                foreach (var hit in results)
+                var filter = Filter.Pvs(transform.Coordinates, entityMan: EntityManager).RemoveWhereAttachedEntity(o => o == stab.Owner);
+                foreach (var hit in actualResults)
                 {
-                    var attackedEv = new AttackedEvent(xeno, xeno, args.Target);
+                    var attackedEv = new AttackedEvent(stab, stab, args.Target);
                     RaiseLocalEvent(hit, attackedEv);
 
                     var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEv.BonusDamage, hitEvent.ModifiersList);
-                    var change = _damageable.TryChangeDamage(hit, modifiedDamage, origin: xeno);
+                    var change = _damageable.TryChangeDamage(hit, modifiedDamage, origin: stab);
 
                     if (change?.GetTotal() > FixedPoint2.Zero)
                     {
@@ -135,14 +174,12 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         var length = localPos.Length();
         localPos *= tailRange / length;
 
-        DoLunge((xeno, xeno, transform), localPos, "WeaponArcThrust");
+        DoLunge((stab, stab, transform), localPos, "WeaponArcThrust");
 
-        _audio.PlayPredicted(xeno.Comp.TailHitSound, xeno, xeno);
+        _audio.PlayPredicted(stab.Comp.TailHitSound, stab, stab);
 
-        var attackEv = new MeleeAttackEvent(xeno);
-        RaiseLocalEvent(xeno, ref attackEv);
-
-        args.Handled = true;
+        var attackEv = new MeleeAttackEvent(stab);
+        RaiseLocalEvent(stab, ref attackEv);
     }
 
     protected virtual void DoLunge(Entity<XenoTailStabComponent, TransformComponent> user, Vector2 localPos, EntProtoId animationId)
