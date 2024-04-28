@@ -1,6 +1,7 @@
 ﻿using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
 using Content.Server.Chemistry.Containers.EntitySystems;
+using Content.Server.Popups;
 using Content.Server.Temperature.Components;
 using Content.Shared._CM14.Medical.Scanner;
 using Content.Shared.Chemistry.Components;
@@ -19,6 +20,7 @@ public sealed class HealthScannerSystem : EntitySystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly SolutionContainerSystem _solution = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
@@ -41,6 +43,16 @@ public sealed class HealthScannerSystem : EntitySystem
 
         if (_net.IsClient)
             return;
+
+        var ev = new HealthScannerAttemptTargetEvent();
+        RaiseLocalEvent(target.Value, ref ev);
+        if (ev.Cancelled)
+        {
+            if (ev.Popup != null)
+                _popup.PopupEntity(ev.Popup, target.Value, args.User);
+
+            return;
+        }
 
         _audio.PlayPvs(scanner.Comp.Sound, scanner);
         _ui.TryOpen(scanner, HealthScannerUIKey.Key, actor.PlayerSession);
