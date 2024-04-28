@@ -39,12 +39,12 @@ public sealed class CMDoorSystem : EntitySystem
         }
     }
 
-    private AnchoredEntitiesEnumerator GetAdjacentEnumerator(Entity<CMDoubleDoorComponent> ent)
+    private AnchoredEntitiesEnumerator? GetAdjacentEnumerator(Entity<CMDoubleDoorComponent> ent)
     {
         if (!TryComp(ent, out TransformComponent? transform) ||
             !TryComp(transform.GridUid, out MapGridComponent? grid))
         {
-            return default!;
+            return default;
         }
 
         var adjacent = transform.Coordinates.Offset(transform.LocalRotation.GetCardinalDir());
@@ -62,7 +62,9 @@ public sealed class CMDoorSystem : EntitySystem
 
     private void Open(Entity<CMDoubleDoorComponent> ent)
     {
-        var enumerator = GetAdjacentEnumerator(ent);
+        if (GetAdjacentEnumerator(ent) is not { } enumerator)
+            return;
+
         var time = _timing.CurTime;
 
         ent.Comp.LastOpeningAt = time;
@@ -89,7 +91,9 @@ public sealed class CMDoorSystem : EntitySystem
 
     private void Close(Entity<CMDoubleDoorComponent> ent)
     {
-        var enumerator = GetAdjacentEnumerator(ent);
+        if (GetAdjacentEnumerator(ent) is not { } enumerator)
+            return;
+
         var time = _timing.CurTime;
 
         ent.Comp.LastClosingAt = time;
