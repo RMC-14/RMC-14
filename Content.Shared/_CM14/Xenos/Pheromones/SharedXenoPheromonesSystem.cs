@@ -194,10 +194,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
             if (_timing.CurTime > recovery.NextRegenTime)
             {
                 if (xeno.OnWeeds)
-                {
-                    _xeno.HealDamage(uid, recovery.HealthRegen * recovery.Multiplier);
                     _xenoPlasma.RegenPlasma(uid, recovery.PlasmaRegen * recovery.Multiplier);
-                }
 
                 recovery.NextRegenTime = _timing.CurTime + recovery.Delay;
             }
