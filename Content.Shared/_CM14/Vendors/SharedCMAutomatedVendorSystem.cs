@@ -1,9 +1,11 @@
-﻿using Content.Shared.Clothing.Components;
+﻿using System.Numerics;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 namespace Content.Shared._CM14.Vendors;
 
@@ -13,6 +15,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private readonly SlotFlags[] _order =
     [
@@ -43,7 +47,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     protected virtual void OnVendBui(Entity<CMAutomatedVendorComponent> vendor, ref CMVendorVendBuiMessage args)
     {
-        var sections = vendor.Comp.Sections.Count;
+        var comp = vendor.Comp;
+        var sections = comp.Sections.Count;
         var playerName = args.Session.Name;
         if (args.Section < 0 || args.Section >= sections)
         {
@@ -51,7 +56,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return;
         }
 
-        var section = vendor.Comp.Sections[args.Section];
+        var section = comp.Sections[args.Section];
         var entries = section.Entries.Count;
         if (args.Entry < 0 || args.Entry >= entries)
         {
@@ -69,14 +74,13 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return;
         }
 
-        var playerEnt = args.Session.AttachedEntity;
         if (args.Session.AttachedEntity is not { } player)
         {
             Log.Error($"Player {playerName} tried to buy {entry.Id} without an attached entity.");
             return;
         }
 
-        var user = CompOrNull<CMVendorUserComponent>(playerEnt);
+        var user = CompOrNull<CMVendorUserComponent>(player);
         if (section.Choices is { } choices)
         {
             user = EnsureComp<CMVendorUserComponent>(player);
@@ -97,7 +101,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         if (entry.Points != null)
         {
-            if (playerEnt == null || user == null)
+            if (user == null)
             {
                 Log.Error($"Player {playerName} tried to buy {entry.Id} for {entry.Points} points without having points.");
                 return;
@@ -110,7 +114,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             }
 
             user.Points -= entry.Points.Value;
-            Dirty(playerEnt.Value, user);
+            Dirty(player, user);
         }
 
         if (entry.Amount != null)
@@ -122,29 +126,38 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        var min = comp.MinOffset;
+        var max = comp.MaxOffset;
+        var offset = _random.NextVector2Box(min.X, min.Y, max.X, max.Y);
         if (entity.TryGetComponent(out CMVendorBundleComponent? bundle))
         {
             foreach (var bundled in bundle.Bundle)
             {
-                Grab(player, SpawnNextToOrDrop(bundled, vendor));
+                Vend(vendor, player, bundled, offset);
             }
         }
         else
         {
-            Grab(player, SpawnNextToOrDrop(entry.Id, vendor));
+            Vend(vendor, player, entry.Id, offset);
         }
     }
 
-    private void Grab(EntityUid player, EntityUid item)
+    private void Vend(EntityUid vendor, EntityUid player, EntProtoId entity, Vector2 offset)
+    {
+        var spawn = SpawnNextToOrDrop(entity, vendor);
+        if (!Grab(player, spawn) && TryComp(spawn, out TransformComponent? xform))
+            _transform.SetLocalPosition(spawn, xform.LocalPosition + offset, xform);
+    }
+
+    private bool Grab(EntityUid player, EntityUid item)
     {
         if (!HasComp<ItemComponent>(item))
-            return;
+            return false;
 
         // TODO CM14 webbing first
         if (!TryComp(item, out ClothingComponent? clothing))
         {
-            _hands.TryForcePickupAnyHand(player, item);
-            return;
+            return _hands.TryPickupAnyHand(player, item);
         }
 
         var equipped = false;
@@ -154,7 +167,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 continue;
 
             if (!_inventory.TryGetContainerSlotEnumerator(player, out var slots, clothing.Slots))
-                return;
+                continue;
 
             while (slots.MoveNext(out var slot))
             {
@@ -169,7 +182,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 break;
         }
 
-        if (!equipped)
-            _hands.TryForcePickupAnyHand(player, item);
+        if (equipped)
+            return true;
+
+        return _hands.TryPickupAnyHand(player, item);
     }
 }
