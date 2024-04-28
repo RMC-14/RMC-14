@@ -646,5 +646,37 @@
   id: 84
   time: '2024-04-27T02:35:31.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2028
+- author: DrSmugleaf
+  changes:
+  - message: Fixed huggers being able to melee attack and tackle.
+    type: Fix
+  - message: Fixed huggers being able to hug dead marines.
+    type: Fix
+  - message: Leaping xenos can now only hit a max of one marine in a single leap.
+    type: Tweak
+  id: 85
+  time: '2024-04-28T00:55:37.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2034
+- author: DrSmugleaf
+  changes:
+  - message: Chestbursters can no longer burst out of dead marines.
+    type: Fix
+  id: 86
+  time: '2024-04-28T00:56:20.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2036
+- author: DrSmugleaf
+  changes:
+  - message: Marines now spawn in starving in distress signal rounds.
+    type: Tweak
+  id: 87
+  time: '2024-04-28T00:56:28.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2037
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenos being scannable with the hf2 health analyzer.
+    type: Fix
+  id: 88
+  time: '2024-04-28T00:55:28.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2033
 Name: CM
 Order: -1
