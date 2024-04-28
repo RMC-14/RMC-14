@@ -23,9 +23,6 @@ public sealed partial class XenoRecoveryPheromonesComponent : Component
     public TimeSpan Delay = TimeSpan.FromSeconds(1);
 
     [DataField]
-    public FixedPoint2 HealthRegen = 0.5;
-
-    [DataField]
     public FixedPoint2 PlasmaRegen = 1.5;
 
     public override bool SessionSpecific => true;
