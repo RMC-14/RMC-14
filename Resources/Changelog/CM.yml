@@ -678,5 +678,14 @@
   id: 88
   time: '2024-04-28T00:55:28.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2033
+- author: Whisper
+  changes:
+  - message: You can now craft metal rods
+    type: Add
+  - message: cm entities now use CM rods
+    type: Fix
+  id: 89
+  time: '2024-04-28T01:56:06.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2024
 Name: CM
 Order: -1
