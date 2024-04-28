@@ -1278,8 +1278,8 @@
       #  amount: 3
       #  points: 3
       - id: CMJTACRadioEncryptionKey
-         amount: 3
-         points: 3
+        amount: 3
+        points: 3
       - id: CMEncryptionKeyRequisition
         amount: 3
         points: 3
