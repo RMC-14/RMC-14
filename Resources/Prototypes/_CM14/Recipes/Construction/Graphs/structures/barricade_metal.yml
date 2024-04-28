@@ -49,7 +49,7 @@
       completed:
       - !type:SnapToGrid
       steps:
-      - material: Plasteel
+      - material: CMPlasteel
         amount: 3
         doAfter: 6
 
