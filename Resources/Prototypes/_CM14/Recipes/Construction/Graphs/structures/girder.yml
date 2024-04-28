@@ -20,7 +20,7 @@
         - to: start
           completed:
             - !type:SpawnPrototype
-              prototype: CMSheetSteel1
+              prototype: CMSheetMetal1
               amount: 2
             - !type:DeleteEntity {}
           conditions:
@@ -58,7 +58,7 @@
         - to: girder
           completed:
             - !type:GivePrototype
-              prototype: CMSheetSteel1
+              prototype: CMSheetMetal1
               amount: 2
           steps:
             - tool: Welding

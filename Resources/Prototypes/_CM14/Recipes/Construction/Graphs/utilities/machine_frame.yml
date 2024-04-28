@@ -6,7 +6,7 @@
   - node: start
     actions:
     - !type:SpawnPrototype
-      prototype: CMSheetSteel1
+      prototype: CMSheetMetal1
     - !type:DeleteEntity
     edges:
     - to: missingWires
@@ -36,7 +36,7 @@
     - to: start
       completed:
       - !type:SpawnPrototype
-        prototype: CMSheetSteel1
+        prototype: CMSheetMetal1
         amount: 5
       - !type:DeleteEntity
       steps:
@@ -115,6 +115,6 @@
         doAfter: 5
       completed:
       - !type:SpawnPrototype
-        prototype: CMSheetSteel1
+        prototype: CMSheetMetal1
         amount: 3
       - !type:DeleteEntity {}

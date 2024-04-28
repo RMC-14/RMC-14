@@ -24,24 +24,24 @@
 
 - type: construction
   parent: CM
-  id: CMSheetGlassPhoron
-  name: phoron glass
-  description: A sheet of translucent phoron.
-  graph: CMGlass
+  id: CMRodMetal
+  name: metal rod
+  description: Some rods. Can be used for building, or something.
+  graph: CMRods
   startNode: start
-  targetNode: SheetGlassPhoron
+  targetNode: CMRodMetal
   category: construction-category-cm-materials
-  icon: { sprite: _CM14/Objects/Materials/Sheets/phoron_glass.rsi, state: phoronglass }
+  icon: { sprite: _CM14/Objects/Materials/parts.rsi, state: rods }
   objectType: Item
 
 - type: construction
   parent: CM
-  id: CMSheetGlassPhoronReinforced
-  name: reinforced phoron glass
-  description: A reinforced sheet of translucent phoron.
-  graph: CMGlass
+  id: CMRodPlasteel
+  name: plasteel rod
+  description: Some rods. Can be used for building, or something.
+  graph: CMRods
   startNode: start
-  targetNode: SheetGlassPhoronReinforced
+  targetNode: CMRodPlasteel
   category: construction-category-cm-materials
-  icon: { sprite: _CM14/Objects/Materials/Sheets/phoron_reinf_glass.rsi, state: phoronrglass }
+  icon: { sprite: _CM14/Objects/Materials/parts.rsi, state: rods_plasteel }
   objectType: Item

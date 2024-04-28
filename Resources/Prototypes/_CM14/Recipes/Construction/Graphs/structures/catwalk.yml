@@ -19,7 +19,7 @@
         - to: start
           completed:
           - !type:SpawnPrototype
-                prototype: CMPartRodMetal1
+                prototype: CMRodMetal1
                 amount: 2
           - !type:DeleteEntity {}
           steps:
