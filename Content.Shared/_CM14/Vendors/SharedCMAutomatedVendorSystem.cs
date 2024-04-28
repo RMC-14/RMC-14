@@ -1,14 +1,44 @@
-﻿using Robust.Shared.Prototypes;
+﻿using Content.Shared.Clothing.Components;
+using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Inventory;
+using Content.Shared.Item;
+using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._CM14.Vendors;
 
 public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 {
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+
+    private readonly SlotFlags[] _order =
+    [
+        SlotFlags.BACK,
+        SlotFlags.IDCARD,
+        SlotFlags.INNERCLOTHING,
+        SlotFlags.OUTERCLOTHING,
+        SlotFlags.HEAD,
+        SlotFlags.FEET,
+        SlotFlags.MASK,
+        SlotFlags.GLOVES,
+        SlotFlags.EARS,
+        SlotFlags.EYES,
+        SlotFlags.BELT,
+        SlotFlags.SUITSTORAGE,
+        SlotFlags.NECK,
+        SlotFlags.POCKET,
+        SlotFlags.LEGS
+    ];
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<CMAutomatedVendorComponent, CMVendorVendBuiMessage>(OnVendBui);
+        Subs.BuiEvents<CMAutomatedVendorComponent>(CMAutomatedVendorUI.Key, subs =>
+        {
+            subs.Event<CMVendorVendBuiMessage>(OnVendBui);
+        });
     }
 
     protected virtual void OnVendBui(Entity<CMAutomatedVendorComponent> vendor, ref CMVendorVendBuiMessage args)
@@ -40,16 +70,16 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
 
         var playerEnt = args.Session.AttachedEntity;
+        if (args.Session.AttachedEntity is not { } player)
+        {
+            Log.Error($"Player {playerName} tried to buy {entry.Id} without an attached entity.");
+            return;
+        }
+
         var user = CompOrNull<CMVendorUserComponent>(playerEnt);
         if (section.Choices is { } choices)
         {
-            if (playerEnt == null)
-            {
-                Log.Error($"Player {playerName} tried to buy {entry.Id} without an attached entity.");
-                return;
-            }
-
-            user = EnsureComp<CMVendorUserComponent>(playerEnt.Value);
+            user = EnsureComp<CMVendorUserComponent>(player);
             if (!user.Choices.TryGetValue(choices.Id, out var playerChoices))
             {
                 playerChoices = 0;
@@ -89,16 +119,57 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             Dirty(vendor);
         }
 
+        if (_net.IsClient)
+            return;
+
         if (entity.TryGetComponent(out CMVendorBundleComponent? bundle))
         {
             foreach (var bundled in bundle.Bundle)
             {
-                SpawnNextToOrDrop(bundled, vendor);
+                Grab(player, SpawnNextToOrDrop(bundled, vendor));
             }
         }
         else
         {
-            SpawnNextToOrDrop(entry.Id, vendor);
+            Grab(player, SpawnNextToOrDrop(entry.Id, vendor));
         }
+    }
+
+    private void Grab(EntityUid player, EntityUid item)
+    {
+        if (!HasComp<ItemComponent>(item))
+            return;
+
+        // TODO CM14 webbing first
+        if (!TryComp(item, out ClothingComponent? clothing))
+        {
+            _hands.TryForcePickupAnyHand(player, item);
+            return;
+        }
+
+        var equipped = false;
+        foreach (var order in _order)
+        {
+            if ((clothing.Slots & order) == 0)
+                continue;
+
+            if (!_inventory.TryGetContainerSlotEnumerator(player, out var slots, clothing.Slots))
+                return;
+
+            while (slots.MoveNext(out var slot))
+            {
+                if (_inventory.TryEquip(player, item, slot.ID))
+                {
+                    equipped = true;
+                    break;
+                }
+            }
+
+            if (equipped)
+                break;
+        }
+
+        if (!equipped)
+            _hands.TryForcePickupAnyHand(player, item);
     }
 }
