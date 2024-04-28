@@ -687,5 +687,13 @@
   id: 89
   time: '2024-04-28T01:56:06.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2024
+- author: DrSmugleaf
+  changes:
+  - message: Automated vendors will now try to automatically equip items or put them
+      in the user's hands before dropping them on the ground.
+    type: Add
+  id: 90
+  time: '2024-04-28T12:21:07.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2041
 Name: CM
 Order: -1
