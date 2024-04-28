@@ -511,9 +511,9 @@
       - id: CMEncryptionKeyIntel
         amount: 5
         points: 5
-      #- id: CMEncryptionKeyJTAC TODO: Add a JTAC Key.
-      #  amount: 5
-      #  points: 5
+      - id: CMEncryptionKeyJTAC
+        amount: 5
+        points: 5
       - id: CMEncryptionKeyRequisition
         amount: 5
         points: 5
@@ -697,9 +697,9 @@
       #- id: CMTacticsRadioEncryptionKey TODO: Add Tactics Key
       #  amount: 3
       #  points: 3
-      #- id: CMJTACRadioEncryptionKey TODO: Add JTAC Key.
-      #  amount: 3
-      #  points: 3
+      - id: CMJTACRadioEncryptionKey TODO: Add JTAC Key.
+        amount: 3
+        points: 3
       - id: CMEncryptionKeyRequisition
         amount: 3
         points: 3
@@ -918,9 +918,9 @@
       #- id: CMTacticsRadioEncryptionKey TODO: Add Tactics Key.
       #  amount: 5
       #  points: 5
-      #- id: CMJTACRadioEncryptionKey TODO: Add JTAC Key.
-      #  amount: 5
-      #  points: 5
+      - id: CMJTACRadioEncryptionKey
+        amount: 5
+        points: 5
       - id: CMEncryptionKeyRequisition
         amount: 5
         points: 5
@@ -1076,9 +1076,9 @@
       #- id: CMTacticsRadioEncryptionKey TODO: Add Tactics Key
       #  amount: 3
       #  points: 3
-      #- id: CMJTACRadioEncryptionKey TODO: Add JTAC Key
-      #  amount: 3
-      #  points: 3
+      - id: CMJTACRadioEncryptionKey
+        amount: 3
+        points: 3
       - id: CMEncryptionKeyRequisition
         amount: 3
         points: 3
@@ -1277,9 +1277,9 @@
       #- id: CMTacticsRadioEncryptionKey TODO: Add Tactics Key.
       #  amount: 3
       #  points: 3
-      #- id: CMJTACRadioEncryptionKey TODO: Add JTAC Key.
-      #   amount: 3
-      #   points: 3
+      - id: CMJTACRadioEncryptionKey
+         amount: 3
+         points: 3
       - id: CMEncryptionKeyRequisition
         amount: 3
         points: 3
@@ -1481,9 +1481,9 @@
       - id: CMEncryptionKeyIntel
         amount: 5
         points: 5
-      #- id: CMJTACRadioEncryptionKey
-      #  amount: 5
-      #  points: 5
+      - id: CMJTACRadioEncryptionKey
+        amount: 5
+        points: 5
       - id: CMEncryptionKeyRequisition
         amount: 5
         points: 5
@@ -1650,9 +1650,9 @@
       #- id: CMTacticsRadioEncryptionKey TODO: Add Tactics Key.
       #  amount: 5
       #  points: 5
-      #- id: CMJTACRadioEncryptionKey TODO: Add JTAC Key.
-      #  amount: 5
-      #  points: 3
+      - id: CMJTACRadioEncryptionKey
+        amount: 5
+        points: 3
       - id: CMEncryptionKeyRequisition
         amount: 5
         points: 5
