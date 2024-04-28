@@ -3837,14 +3837,14 @@ entities:
     - type: Transform
       pos: -8.5,1.5
       parent: 179
-- proto: CMPartRodMetal
+- proto: CMRodMetal
   entities:
   - uid: 133
     components:
     - type: Transform
       pos: -3.4717777,7.672426
       parent: 179
-- proto: CMPartRodPlasteel
+- proto: CMRodPlasteel
   entities:
   - uid: 1050
     components:
@@ -4053,7 +4053,7 @@ entities:
     - type: Transform
       pos: -4.0129576,7.6107273
       parent: 179
-- proto: CMSheetSteel
+- proto: CMSheetMetal
   entities:
   - uid: 205
     components:

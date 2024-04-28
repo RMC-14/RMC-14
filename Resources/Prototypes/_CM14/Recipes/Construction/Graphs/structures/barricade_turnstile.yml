@@ -22,7 +22,7 @@
     - to: start
       completed:
         - !type:SpawnPrototype
-          prototype: CMSheetSteel1
+          prototype: CMSheetMetal1
           amount: 1
         - !type:DeleteEntity
       conditions:

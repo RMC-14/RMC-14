@@ -1,9 +1,9 @@
 ﻿# Metals
 - type: material
   id: CMSteel
-  stackEntity: CMSheetSteel
-  name: materials-steel
-  icon: { sprite: _CM14/Objects/Materials/Sheets/metal.rsi, state: steel } ##
+  stackEntity: CMSheetMetal
+  name: materials-Metal
+  icon: { sprite: _CM14/Objects/Materials/Sheets/metal.rsi, state: steel }
   price: 0.05
 
 - type: material
