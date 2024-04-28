@@ -304,8 +304,11 @@ public abstract class SharedStorageSystem : EntitySystem
     ///     Opens the storage UI for an entity
     /// </summary>
     /// <param name="entity">The entity to open the UI for</param>
-    public void OpenStorageUI(EntityUid uid, EntityUid entity, StorageComponent? storageComp = null, bool silent = false)
+    public void OpenStorageUI(EntityUid uid, EntityUid entity, StorageComponent? storageComp = null, bool silent = false, bool doAfter = true)
     {
+        if (doAfter && CMStorage.OpenDoAfter(uid, entity, storageComp, silent))
+            return;
+
         if (!Resolve(uid, ref storageComp, false))
             return;
 

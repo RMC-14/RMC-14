@@ -9,8 +9,6 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.GameStates;
-using Robust.Shared.Network;
-using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Xenos.Pheromones;
@@ -20,11 +18,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     private readonly TimeSpan _pheromonePlasmaUseDelay = TimeSpan.FromSeconds(0.5);
@@ -98,10 +94,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
             return;
         }
 
-        if (_net.IsClient || !TryComp(xeno, out ActorComponent? actor))
-            return;
-
-        _ui.TryOpen(xeno, XenoPheromonesUI.Key, actor.PlayerSession);
+        _ui.TryOpenUi(xeno.Owner, XenoPheromonesUI.Key, xeno);
     }
 
     private void OnXenoPheromonesChosenBui(Entity<XenoPheromonesComponent> xeno, ref XenoPheromonesChosenBuiMessage args)
@@ -118,8 +111,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         var popup = Loc.GetString("cm-xeno-pheromones-start", ("pheromones", args.Pheromones.ToString()));
         _popup.PopupEntity(popup, xeno, xeno);
 
-        if (TryComp(xeno, out ActorComponent? actor))
-            _ui.TryClose(xeno, XenoPheromonesUI.Key, actor.PlayerSession);
+        _ui.CloseUi(xeno.Owner, XenoPheromonesUI.Key, xeno);
     }
 
     private void OnRecoveryMapInit(Entity<XenoRecoveryPheromonesComponent> recovery, ref MapInitEvent args)

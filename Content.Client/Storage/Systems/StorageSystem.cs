@@ -173,11 +173,4 @@ public sealed class StorageSystem : SharedStorageSystem
             }
         }
     }
-
-    public override void OpenStorageUI(EntityUid uid, EntityUid entity, StorageComponent? storageComp = null, bool silent = false,
-        bool doAfter = true)
-    {
-        if (doAfter && CMStorage.OpenDoAfter(uid, entity, storageComp, silent))
-            return;
-    }
 }

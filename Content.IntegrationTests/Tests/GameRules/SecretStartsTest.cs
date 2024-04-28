@@ -1,4 +1,5 @@
-﻿using Content.Server.GameTicking;
+﻿using System.Linq;
+using Content.Server.GameTicking;
 using Robust.Shared.GameObjects;
 
 namespace Content.IntegrationTests.Tests.GameRules;

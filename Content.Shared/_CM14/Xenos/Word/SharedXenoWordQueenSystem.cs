@@ -1,14 +1,11 @@
 ﻿using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
-using Robust.Shared.Network;
-using Robust.Shared.Player;
 
 namespace Content.Shared._CM14.Xenos.Word;
 
 public abstract class SharedXenoWordQueenSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     protected int CharacterLimit = 1000;
@@ -34,10 +31,10 @@ public abstract class SharedXenoWordQueenSystem : EntitySystem
 
     private void OnXenoWordQueenAction(Entity<XenoWordQueenComponent> queen, ref XenoWordQueenActionEvent args)
     {
-        if (args.Handled || _net.IsClient || !TryComp(queen, out ActorComponent? actor))
+        if (args.Handled)
             return;
 
-        _ui.TryOpen(queen.Owner, XenoWordQueenUI.Key, actor.PlayerSession);
+        _ui.TryOpenUi(queen.Owner, XenoWordQueenUI.Key, queen);
     }
 
     protected virtual void OnXenoWordQueenBui(Entity<XenoWordQueenComponent> queen, ref XenoWordQueenBuiMessage args)

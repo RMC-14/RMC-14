@@ -7,7 +7,6 @@ using Content.Shared.Mind;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
-using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Xenos.Evolution;
@@ -50,17 +49,15 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     private void OnXenoEvolveAction(Entity<XenoEvolutionComponent> xeno, ref XenoOpenEvolutionsActionEvent args)
     {
-        if (_net.IsClient || !TryComp(xeno, out ActorComponent? actor))
-            return;
-
-        _ui.TryOpen(xeno.Owner, XenoEvolutionUIKey.Key, actor.PlayerSession);
+        _ui.OpenUi(xeno.Owner, XenoEvolutionUIKey.Key, xeno);
     }
 
     private void OnXenoEvolveBui(Entity<XenoEvolutionComponent> xeno, ref XenoEvolveBuiMessage args)
     {
+        var actor = args.Actor;
         if (!xeno.Comp.EvolvesTo.Contains(args.Choice))
         {
-            Log.Warning($"User {args.Session.Name} sent an invalid evolution choice: {args.Choice}.");
+            Log.Warning($"User {ToPrettyString(actor)} sent an invalid evolution choice: {args.Choice}.");
             return;
         }
 
@@ -74,11 +71,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         _doAfter.TryStartDoAfter(doAfter);
 
-        if (_net.IsClient)
-            return;
-
-        if (TryComp(xeno, out ActorComponent? actor))
-            _ui.TryClose(xeno.Owner, XenoEvolutionUIKey.Key, actor.PlayerSession);
+        _ui.CloseUi(xeno.Owner, XenoEvolutionUIKey.Key, actor);
     }
 
     private void OnXenoEvolveDoAfter(Entity<XenoEvolutionComponent> xeno, ref XenoEvolutionDoAfterEvent args)

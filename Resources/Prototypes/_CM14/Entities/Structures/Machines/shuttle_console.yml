@@ -24,8 +24,8 @@
   - type: ActivatableUIRequiresAccess
   - type: UserInterface
     interfaces:
-    - key: enum.DropshipNavigationUiKey.Key
-      type: DropshipNavigationBui
+      enum.DropshipNavigationUiKey.Key:
+        type: DropshipNavigationBui
 
 # TODO CM14 alamo and normandy specific names for each
 - type: entity

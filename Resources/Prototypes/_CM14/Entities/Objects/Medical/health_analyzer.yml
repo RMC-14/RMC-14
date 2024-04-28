@@ -18,8 +18,8 @@
     closeOnHandDeselect: false
   - type: UserInterface
     interfaces:
-    - key: enum.HealthScannerUIKey.Key
-      type: HealthScannerBoundUserInterface
+      enum.HealthScannerUIKey.Key:
+        type: HealthScannerBoundUserInterface
   - type: HealthScanner
     sound:
       path: "/Audio/_CM14/Medical/healthanalyzer.ogg"

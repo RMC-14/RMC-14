@@ -20,13 +20,14 @@ public sealed class ShootUseDelaySystem : EntitySystem
 
     private void OnShotAttempted(Entity<ShootUseDelayComponent> ent, ref ShotAttemptedEvent args)
     {
+        var time = _timing.CurTime;
         if (TryComp(ent, out UseDelayComponent? useDelay) &&
-            _useDelay.IsDelayed((ent, useDelay)))
+            _useDelay.TryGetDelayInfo((ent, useDelay), out var info) &&
+            info.EndTime >= time)
         {
-            var time = _timing.CurTime;
             if (time >= ent.Comp.LastPopup + ent.Comp.PopupCooldown)
             {
-                var timeLeft = useDelay.DelayEndTime - time;
+                var timeLeft = info.EndTime - time;
                 ent.Comp.LastPopup = _timing.CurTime;
                 Dirty(ent);
                 _popup.PopupClient($"You need to wait {timeLeft.TotalSeconds:F1} seconds before shooting again!", args.User, args.User);

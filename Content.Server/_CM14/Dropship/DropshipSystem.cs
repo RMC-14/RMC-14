@@ -58,7 +58,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
     protected override void RefreshUI(Entity<DropshipNavigationComputerComponent> computer)
     {
-        if (!_ui.IsUiOpen(computer, DropshipNavigationUiKey.Key))
+        if (!_ui.IsUiOpen(computer.Owner, DropshipNavigationUiKey.Key))
             return;
 
         if (Transform(computer).GridUid is not { } grid)
@@ -75,7 +75,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 destinations.Add((GetNetEntity(uid), Name(uid)));
             }
 
-            _ui.TrySetUiState(computer, DropshipNavigationUiKey.Key, new DropshipNavigationDestinationsBuiState(destinations));
+            _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, new DropshipNavigationDestinationsBuiState(destinations));
             return;
         }
 
@@ -91,7 +91,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
 
         var state = new DropshipNavigationTravellingBuiState(ftl.State, ftl.StateTime, destination);
-        _ui.TrySetUiState(computer, DropshipNavigationUiKey.Key, state);
+        _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, state);
     }
 
     private void RefreshUI()
