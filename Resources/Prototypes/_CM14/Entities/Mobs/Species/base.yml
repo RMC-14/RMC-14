@@ -50,7 +50,6 @@
     - CanPilot
     - FootstepSound
     - DoorBumpOpener
-    - ShoesRequiredStepTriggerImmune
   - type: Marine
   - type: Hunger
   - type: Thirst
@@ -66,30 +65,11 @@
       Female: FemaleHuman
       Unsexed: MaleHuman
   - type: Flammable
-    fireSpread: true
+    fireSpread: false
     canResistFire: true
     damage:
       types:
         Heat: 3
-  - type: Temperature
-    heatDamageThreshold: 325
-    coldDamageThreshold: 260
-    currentTemperature: 310.15
-    specificHeat: 42
-    coldDamage:
-      types:
-        Cold: 0.1
-    heatDamage:
-      types:
-        Heat: 1.5
-  - type: ThermalRegulator
-    metabolismHeat: 800
-    radiatedHeat: 100
-    implicitHeatRegulation: 500
-    sweatHeatRegulation: 2000
-    shiveringHeatRegulation: 2000
-    normalBodyTemperature: 310.15
-    thermalRegulationTemperatureThreshold: 25
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Generic_mob_burning
@@ -106,19 +86,18 @@
   - type: CMSurgeryTarget
   - type: UserInterface
     interfaces:
-    - key: enum.VoiceMaskUIKey.Key
-      type: VoiceMaskBoundUserInterface
-    - key: enum.HumanoidMarkingModifierKey.Key
-      type: HumanoidMarkingModifierBoundUserInterface
-    - key: enum.StrippingUiKey.Key
-      type: StrippableBoundUserInterface
-    - key: enum.HumanoidMarkingModifierKey.Key
-      type: HumanoidMarkingModifierBoundUserInterface
-    - key: enum.CMSurgeryUIKey.Key
-      type: CMSurgeryBui
+      enum.VoiceMaskUIKey.Key:
+        type: VoiceMaskBoundUserInterface
+      enum.HumanoidMarkingModifierKey.Key:
+        type: HumanoidMarkingModifierBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+      enum.CMSurgeryUIKey.Key:
+        type: CMSurgeryBui
   - type: Huggable
   - type: Tackleable
   - type: Tackle
     stun: 10
   - type: XenoNestable
   - type: Devourable
+  - type: ImmuneToClothingRequiredStepTrigger

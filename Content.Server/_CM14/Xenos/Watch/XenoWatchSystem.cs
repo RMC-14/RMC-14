@@ -13,10 +13,7 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
 
     protected override void OnXenoWatchAction(Entity<XenoComponent> ent, ref XenoWatchActionEvent args)
     {
-        if (!TryComp(ent, out ActorComponent? actor))
-            return;
-
-        _ui.TryOpen(ent.Owner, XenoWatchUIKey.Key, actor.PlayerSession);
+        _ui.OpenUi(ent.Owner, XenoWatchUIKey.Key, ent);
 
         var xenos = new List<Xeno>();
 
@@ -32,7 +29,7 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
             }
         }
 
-        _ui.TrySetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos));
+        _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos));
     }
 
     protected override void Watch(Entity<XenoComponent?, ActorComponent?, EyeComponent?> watcher, Entity<XenoComponent?> watch)

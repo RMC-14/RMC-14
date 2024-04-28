@@ -30,7 +30,6 @@ public abstract class SharedIVDripSystem : EntitySystem
         SubscribeLocalEvent<IVDripComponent, EntInsertedIntoContainerMessage>(OnIVDripEntInserted);
         SubscribeLocalEvent<IVDripComponent, EntRemovedFromContainerMessage>(OnIVDripEntRemoved);
         SubscribeLocalEvent<IVDripComponent, AfterAutoHandleStateEvent>(OnIVDripAfterHandleState);
-        SubscribeLocalEvent<IVDripComponent, EntityUnpausedEvent>(OnIVDripUnPaused);
 
         SubscribeLocalEvent<IVDripComponent, CanDragEvent>(OnIVDripCanDrag);
         SubscribeLocalEvent<IVDripComponent, CanDropDraggedEvent>(OnIVDripCanDropDragged);
@@ -58,11 +57,6 @@ public abstract class SharedIVDripSystem : EntitySystem
     private void OnIVDripAfterHandleState(Entity<IVDripComponent> iv, ref AfterAutoHandleStateEvent args)
     {
         UpdateIVAppearance(iv);
-    }
-
-    private void OnIVDripUnPaused(Entity<IVDripComponent> iv, ref EntityUnpausedEvent args)
-    {
-        iv.Comp.TransferAt += args.PausedTime;
     }
 
     private void OnIVDripCanDrag(Entity<IVDripComponent> iv, ref CanDragEvent args)
@@ -99,12 +93,12 @@ public abstract class SharedIVDripSystem : EntitySystem
         if (iv.Comp.AttachedTo == default)
             Attach(iv, args.User, args.Target);
         else
-            Detach(iv, false, true);
+            Detach(iv, args.User, false, true);
     }
 
     private void OnIVInteractHand(Entity<IVDripComponent> iv, ref InteractHandEvent args)
     {
-        Detach(iv, false, true);
+        Detach(iv, args.User, false, true);
     }
 
     private void OnIVVerbs(Entity<IVDripComponent> iv, ref GetVerbsEvent<InteractionVerb> args)
@@ -151,10 +145,10 @@ public abstract class SharedIVDripSystem : EntitySystem
         _popup.PopupClient(Loc.GetString("cm-iv-attach-self", ("target", to)), to, user);
 
         var others = Filter.PvsExcept(user);
-        _popup.PopupEntity(Loc.GetString("cm-iv-attach-self", ("target", others)), to, others, true);
+        _popup.PopupEntity(Loc.GetString("cm-iv-attach-others", ("user", user), ("target", to)), to, others, true);
     }
 
-    protected void Detach(Entity<IVDripComponent> iv, bool rip, bool predict)
+    protected void Detach(Entity<IVDripComponent> iv, EntityUid? user, bool rip, bool predict)
     {
         if (iv.Comp.AttachedTo is not { } target)
             return;
@@ -162,18 +156,18 @@ public abstract class SharedIVDripSystem : EntitySystem
         iv.Comp.AttachedTo = default;
         Dirty(iv);
 
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
         if (rip)
         {
             if (iv.Comp.RipDamage != null)
                 _damageable.TryChangeDamage(target, iv.Comp.RipDamage, true);
 
+            if (!_timing.IsFirstTimePredicted)
+                return;
+
             var message = Loc.GetString("cm-iv-rip", ("target", target));
             if (predict)
             {
-                _popup.PopupClient(message, target, target);
+                _popup.PopupClient(message, target, user);
 
                 var others = Filter.PvsExcept(target);
                 _popup.PopupEntity(message, target, others, true);
@@ -185,14 +179,20 @@ public abstract class SharedIVDripSystem : EntitySystem
         }
         else
         {
+            if (!_timing.IsFirstTimePredicted)
+                return;
+
             var selfMessage = Loc.GetString("cm-iv-detach-self", ("target", target));
             if (predict)
-                _popup.PopupClient(selfMessage, target, target);
+                _popup.PopupClient(selfMessage, target, user);
             else
                 _popup.PopupEntity(selfMessage, target);
 
-            var others = Filter.PvsExcept(target);
-            _popup.PopupEntity(Loc.GetString("cm-iv-detach-others", ("target", others)), target, others, true);
+            if (user != null)
+            {
+                var others = Filter.PvsExcept(user.Value);
+                _popup.PopupEntity(Loc.GetString("cm-iv-detach-others", ("user", user), ("target", target)), target, others, true);
+            }
         }
     }
 

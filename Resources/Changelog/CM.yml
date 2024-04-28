@@ -1,11 +1,11 @@
 ﻿Entries:
-- author: QuietlyWhisper
+- author: Whisper
   changes:
   - message: Added the basic rifleman role!
     type: Add
   id: 1
   time: '2023-08-12T15:18:11.0000000+00:00'
-- author: QuietlyWhisper
+- author: Whisper
   changes:
   - message: Added SL
     type: Add
@@ -113,7 +113,7 @@
     type: Add
   id: 17
   time: '2024-01-03T07:03:14.0000000+00:00'
-- author: irroZ, QuietlyWhisper
+- author: irroZ, Whisper
   changes:
   - message: Added lobby art.
     type: Add
@@ -577,5 +577,123 @@
   id: 75
   time: '2024-04-26T05:08:06.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1916
+- author: Whisper
+  changes:
+  - message: Fixed the fire rate for the 88m4 and service pistols.
+    type: Fix
+  id: 76
+  time: '2024-04-26T10:00:55.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2019
+- author: Whisper
+  changes:
+  - message: Fixed not being able to store the M42A in the suit storage slot.
+    type: Fix
+  id: 77
+  time: '2024-04-26T10:00:34.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2014
+- author: Whisper
+  changes:
+  - message: Fixed burning marines and xenos being able to set others on fire.
+    type: Fix
+  id: 78
+  time: '2024-04-26T10:01:27.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2020
+- author: DrSmugleaf
+  changes:
+  - message: Fixed larva getting stuck when evolving under tables and doors.
+    type: Fix
+  id: 79
+  time: '2024-04-26T10:02:01.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2022
+- author: Whisper
+  changes:
+  - message: Fixed marines being able to take temperature damage.
+    type: Fix
+  id: 80
+  time: '2024-04-26T10:01:44.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2021
+- author: Whisper
+  changes:
+  - message: Fixed damage and armor piercing values for all shotgun ammo types.
+    type: Fix
+  id: 81
+  time: '2024-04-26T10:00:42.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2017
+- author: DangerRevolution
+  changes:
+  - message: Added Encryption Keys to Vendors
+    type: Add
+  id: 82
+  time: '2024-04-27T01:07:17.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2025
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenos not being able to pry doors by left clicking on them.
+    type: Fix
+  - message: Xenos can now pry open doors in 5 seconds.
+    type: Tweak
+  id: 83
+  time: '2024-04-27T01:39:45.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2023
+- author: DrSmugleaf
+  changes:
+  - message: Fixed being able to hit friendly xenos with a tail stab and being able
+      to hit marines with it through walls.
+    type: Fix
+  - message: The xeno tail stab can now hit 3 marines maximum and has a one second
+      cooldown if it misses.
+    type: Tweak
+  id: 84
+  time: '2024-04-27T02:35:31.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2028
+- author: DrSmugleaf
+  changes:
+  - message: Fixed huggers being able to melee attack and tackle.
+    type: Fix
+  - message: Fixed huggers being able to hug dead marines.
+    type: Fix
+  - message: Leaping xenos can now only hit a max of one marine in a single leap.
+    type: Tweak
+  id: 85
+  time: '2024-04-28T00:55:37.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2034
+- author: DrSmugleaf
+  changes:
+  - message: Chestbursters can no longer burst out of dead marines.
+    type: Fix
+  id: 86
+  time: '2024-04-28T00:56:20.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2036
+- author: DrSmugleaf
+  changes:
+  - message: Marines now spawn in starving in distress signal rounds.
+    type: Tweak
+  id: 87
+  time: '2024-04-28T00:56:28.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2037
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenos being scannable with the hf2 health analyzer.
+    type: Fix
+  id: 88
+  time: '2024-04-28T00:55:28.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2033
+- author: Whisper
+  changes:
+  - message: You can now craft metal rods
+    type: Add
+  - message: cm entities now use CM rods
+    type: Fix
+  id: 89
+  time: '2024-04-28T01:56:06.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2024
+- author: DrSmugleaf
+  changes:
+  - message: Automated vendors will now try to automatically equip items or put them
+      in the user's hands before dropping them on the ground.
+    type: Add
+  id: 90
+  time: '2024-04-28T12:21:07.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2041
 Name: CM
 Order: -1

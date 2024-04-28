@@ -12,12 +12,12 @@
 - type: entity
   parent: CMTileItemBase
   id: CMTileItemSteel
-  name: steel floor
+  name: metal floor
   components:
   - type: Sprite
     state: steel
   - type: Item
-    heldPrefix: steel
+    heldPrefix: metal
   - type: FloorTile
     outputs:
       - Plating

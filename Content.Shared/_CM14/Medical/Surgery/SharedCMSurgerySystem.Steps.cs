@@ -193,8 +193,8 @@ public abstract partial class SharedCMSurgerySystem
 
     private void OnSurgeryTargetStepChosen(Entity<CMSurgeryTargetComponent> ent, ref CMSurgeryStepChosenBuiMessage args)
     {
-        if (args.Session.AttachedEntity is not { } user ||
-            GetEntity(args.Entity) is not { Valid: true } body ||
+        var user = args.Actor;
+        if (GetEntity(args.Entity) is not { Valid: true } body ||
             !IsSurgeryValid(body, args.Part, args.Surgery, args.Step, out var surgery, out var part, out var step))
         {
             return;

@@ -111,7 +111,7 @@ public sealed class StorageSystem : SharedStorageSystem
         if (!Resolve(entity, ref entity.Comp, false))
             return;
 
-        if (entity.Comp.OpenInterfaces.GetValueOrDefault(StorageComponent.StorageUiKey.Key) is not { } bui)
+        if (entity.Comp.ClientOpenInterfaces.GetValueOrDefault(StorageComponent.StorageUiKey.Key) is not { } bui)
             return;
 
         bui.Close();
@@ -172,12 +172,5 @@ public sealed class StorageSystem : SharedStorageSystem
                 _entityPickupAnimation.AnimateEntityPickup(entity, GetCoordinates(initialPosition), transformComp.LocalPosition, msg.EntityAngles[i]);
             }
         }
-    }
-
-    public override void OpenStorageUI(EntityUid uid, EntityUid entity, StorageComponent? storageComp = null, bool silent = false,
-        bool doAfter = true)
-    {
-        if (doAfter && CMStorage.OpenDoAfter(uid, entity, storageComp, silent))
-            return;
     }
 }

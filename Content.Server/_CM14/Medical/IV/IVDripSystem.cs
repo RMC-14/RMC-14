@@ -22,7 +22,7 @@ public sealed class IVDripSystem : SharedIVDripSystem
                 continue;
 
             if (!InRange((ivId, ivComp), attachedTo))
-                Detach((ivId, ivComp), true, false);
+                Detach((ivId, ivComp), null, true, false);
 
             if (_itemSlots.GetItemOrNull(ivId, ivComp.Slot) is not { } pack)
                 continue;

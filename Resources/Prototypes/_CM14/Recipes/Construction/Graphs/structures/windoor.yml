@@ -41,7 +41,7 @@
         anchored: false
       completed:
       - !type:SpawnPrototype
-        prototype: CMSheetSteel1
+        prototype: CMSheetMetal1
         amount: 4
       - !type:DeleteEntity {}
       steps:

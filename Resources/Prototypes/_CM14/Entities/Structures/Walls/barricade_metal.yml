@@ -25,7 +25,7 @@
   parent: CMBarricadeBase
   id: CMBarricadeMetal
   name: Metal Barricade
-  description: A metal barricade that keeps the unwanted out. Upgradable with steel, plasteel, or steel rods for different attributes. Repair with a welder.
+  description: A metal barricade that keeps the unwanted out. Upgradable with metal, plasteel, or metal rods for different attributes. Repair with a welder.
   components:
   - type: MeleeSound
     soundGroups:
@@ -112,7 +112,7 @@
   parent: CMBarricadeMetal
   id: CMBarricadeBrute
   name: Reinforced Barricade
-  description: A heavy-duty barricade reinforced with steel and resistant against thrashing. Repair with a welder.
+  description: A heavy-duty barricade reinforced with metal and resistant against thrashing. Repair with a welder.
   components:
     - type: Sprite
       sprite: _CM14/Structures/Walls/Barricades/barricade.rsi

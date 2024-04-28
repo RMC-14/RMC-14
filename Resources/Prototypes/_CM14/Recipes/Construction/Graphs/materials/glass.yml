@@ -14,36 +14,9 @@
               amount: 1
             - material: MetalRod
               amount: 1
-        - to: SheetGlassPhoron
-          completed:
-            - !type:SetStackCount
-              amount: 1
-          steps:
-            - material: CMGlass
-              amount: 1
-            - material: CMPhoron
-              amount: 1
-        - to: SheetGlassPhoronReinforced
-          completed:
-            - !type:SetStackCount
-              amount: 1
-          steps:
-            - material: CMGlass
-              amount: 1
-            - material: CMPhoron
-              amount: 1
-            - material: MetalRod
-              amount: 1
 
     - node: SheetGlass
       entity: CMSheetGlass
 
     - node: SheetGlassReinforced
       entity: CMSheetGlassReinforced
-
-    - node: SheetGlassPhoron
-      entity: CMSheetGlassPhoron
-
-    - node: SheetGlassPhoronReinforced
-      entity: CMSheetGlassPhoronReinforced
-

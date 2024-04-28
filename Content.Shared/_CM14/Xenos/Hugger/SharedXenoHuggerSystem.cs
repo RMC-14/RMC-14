@@ -1,10 +1,12 @@
 ﻿using Content.Shared._CM14.Xenos.Leap;
 using Content.Shared.DoAfter;
 using Content.Shared.Eye.Blinding.Systems;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
@@ -23,6 +25,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -35,13 +38,13 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
         SubscribeLocalEvent<XenoHuggerComponent, XenoLeapHitEvent>(OnHuggerLeapHit);
         SubscribeLocalEvent<XenoHuggerComponent, AfterInteractEvent>(OnHuggerAfterInteract);
+        SubscribeLocalEvent<XenoHuggerComponent, DoAfterAttemptEvent<AttachHuggerDoAfterEvent>>(OnHuggerAttachDoAfterAttempt);
         SubscribeLocalEvent<XenoHuggerComponent, AttachHuggerDoAfterEvent>(OnHuggerAttachDoAfter);
 
         SubscribeLocalEvent<HuggerSpentComponent, MapInitEvent>(OnHuggerSpentMapInit);
         SubscribeLocalEvent<HuggerSpentComponent, UpdateMobStateEvent>(OnHuggerSpentUpdateMobState);
 
         SubscribeLocalEvent<VictimHuggedComponent, MapInitEvent>(OnVictimHuggedMapInit);
-        SubscribeLocalEvent<VictimHuggedComponent, EntityUnpausedEvent>(OnVictimHuggedUnpaused);
         SubscribeLocalEvent<VictimHuggedComponent, ComponentRemove>(OnVictimHuggedRemoved);
         SubscribeLocalEvent<VictimHuggedComponent, CanSeeAttemptEvent>(OnVictimHuggedCancel);
 
@@ -71,7 +74,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
     {
         var coordinates = _transform.GetMoverCoordinates(hugger);
         if (coordinates.InRange(EntityManager, _transform, args.Leaping.Origin, hugger.Comp.HugRange))
-            Hug(hugger, args.Hit);
+            Hug(hugger, args.Hit, false);
     }
 
     private void OnHuggerAfterInteract(Entity<XenoHuggerComponent> ent, ref AfterInteractEvent args)
@@ -79,8 +82,20 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         if (args.Target == null)
             return;
 
-        if (StartHug(ent, args.Target.Value, ent))
+        if (StartHug(ent, args.Target.Value, args.User))
             args.Handled = true;
+    }
+
+    private void OnHuggerAttachDoAfterAttempt(Entity<XenoHuggerComponent> ent, ref DoAfterAttemptEvent<AttachHuggerDoAfterEvent> args)
+    {
+        if (args.DoAfter.Args.Target is not { } target)
+        {
+            args.Cancel();
+            return;
+        }
+
+        if (!CanHugPopup(ent, target, ent))
+            args.Cancel();
     }
 
     private void OnHuggerAttachDoAfter(Entity<XenoHuggerComponent> ent, ref AttachHuggerDoAfterEvent args)
@@ -115,12 +130,6 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         _appearance.SetData(victim, victim.Comp.HuggedLayer, true);
     }
 
-    private void OnVictimHuggedUnpaused(Entity<VictimHuggedComponent> victim, ref EntityUnpausedEvent args)
-    {
-        victim.Comp.FallOffAt += args.PausedTime;
-        victim.Comp.BurstAt += args.PausedTime;
-    }
-
     private void OnVictimHuggedRemoved(Entity<VictimHuggedComponent> victim, ref ComponentRemove args)
     {
         _blindable.UpdateIsBlind(victim.Owner);
@@ -148,40 +157,56 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
     private bool StartHug(Entity<XenoHuggerComponent> hugger, EntityUid victim, EntityUid user)
     {
-        if (!CanHug(hugger, victim))
+        if (!CanHugPopup(hugger, victim, user))
             return false;
 
         var ev = new AttachHuggerDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, hugger.Comp.ManualAttachDelay, ev, hugger, victim)
         {
-            BreakOnMove = true
+            BreakOnMove = true,
+            AttemptFrequency = AttemptFrequency.EveryTick
         };
         _doAfter.TryStartDoAfter(doAfter);
 
         return true;
     }
 
-    private bool CanHug(Entity<XenoHuggerComponent> hugger, EntityUid victim)
+    private bool CanHugPopup(Entity<XenoHuggerComponent> hugger, EntityUid victim, EntityUid user, bool popup = true)
     {
+        var victimIdentity = Identity.Name(victim, EntityManager, hugger);
         if (!HasComp<HuggableComponent>(victim) ||
             HasComp<HuggerSpentComponent>(hugger) ||
             HasComp<VictimHuggedComponent>(victim))
         {
+            if (popup)
+                _popup.PopupClient($"You can't facehug {victimIdentity}!", victim, user, PopupType.MediumCaution);
+
             return false;
         }
 
         if (TryComp(victim, out StandingStateComponent? standing) &&
             !_standing.IsDown(victim, standing))
         {
+            if (popup)
+                _popup.PopupClient($"You can't reach {victimIdentity}, they need to be lying down!", victim, user, PopupType.MediumCaution);
+
+            return false;
+        }
+
+        if (_mobState.IsDead(victim))
+        {
+            if (popup)
+                _popup.PopupClient("You can't facehug the dead!", victim, user, PopupType.MediumCaution);
+
             return false;
         }
 
         return true;
     }
 
-    private bool Hug(Entity<XenoHuggerComponent> hugger, EntityUid victim)
+    private bool Hug(Entity<XenoHuggerComponent> hugger, EntityUid victim, bool popup = true)
     {
-        if (!CanHug(hugger, victim))
+        if (!CanHugPopup(hugger, victim, hugger, popup))
             return false;
 
         var victimComp = EnsureComp<VictimHuggedComponent>(victim);
@@ -246,6 +271,12 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
                 }
 
                 continue;
+            }
+
+            if (_mobState.IsDead(uid))
+            {
+                RemCompDeferred<VictimHuggedComponent>(uid);
+                return;
             }
 
             RemCompDeferred<VictimHuggedComponent>(uid);

@@ -4,7 +4,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._CM14.Xenos.Pheromones;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 [Access(typeof(SharedXenoPheromonesSystem))]
 public sealed partial class XenoPheromonesComponent : Component
 {
@@ -14,7 +14,7 @@ public sealed partial class XenoPheromonesComponent : Component
     [DataField, AutoNetworkedField]
     public FixedPoint2 PheromonesPlasmaUpkeep = 2.5;
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextPheromonesPlasmaUse;
 
     [DataField, AutoNetworkedField]

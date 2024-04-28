@@ -115,9 +115,6 @@
   - type: Stack
     stackType: CMGlassPhoron
     count: 50
-  - type: Construction
-    graph: CMGlass
-    node: SheetGlassPhoron
 
 - type: entity
   parent: CMSheetGlassPhoron
@@ -159,9 +156,6 @@
   - type: Stack
     stackType: CMGlassPhoronReinforced
     count: 50
-  - type: Construction
-    graph: CMGlass
-    node: SheetGlassPhoronReinforced
 
 - type: entity
   parent: CMSheetGlassPhoronReinforced

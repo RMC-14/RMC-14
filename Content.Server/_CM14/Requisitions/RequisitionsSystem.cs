@@ -59,16 +59,17 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
 
     private void OnBuy(Entity<RequisitionsComputerComponent> computer, ref RequisitionsBuyMsg args)
     {
+        var actor = args.Actor;
         if (args.Category >= computer.Comp.Categories.Count)
         {
-            Log.Error($"Player {args.Session.Name} tried to buy out of bounds requisitions order: category {args.Category}");
+            Log.Error($"Player {ToPrettyString(actor)} tried to buy out of bounds requisitions order: category {args.Category}");
             return;
         }
 
         var category = computer.Comp.Categories[args.Category];
         if (args.Order >= category.Entries.Count)
         {
-            Log.Error($"Player {args.Session.Name} tried to buy out of bounds requisitions order: category {args.Category}");
+            Log.Error($"Player {ToPrettyString(actor)} tried to buy out of bounds requisitions order: category {args.Category}");
             return;
         }
 
@@ -200,7 +201,7 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
         var full = elevator != null && IsFull(elevator.Value);
 
         var state = new RequisitionsBuiState(mode, busy, balance, full);
-        _ui.TrySetUiState(computer, RequisitionsUIKey.Key, state);
+        _ui.SetUiState(computer.Owner, RequisitionsUIKey.Key, state);
     }
 
     private void SendUIStateAll()

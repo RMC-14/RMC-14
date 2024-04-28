@@ -9,7 +9,6 @@ using Content.Shared._CM14.Medical.Surgery.Tools;
 using Content.Shared.Interaction;
 using Content.Shared.Prototypes;
 using Robust.Server.GameObjects;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -62,34 +61,34 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
             }
         }
 
-        _ui.TrySetUiState(body, CMSurgeryUIKey.Key, new CMSurgeryBuiState(surgeries));
+        _ui.SetUiState(body, CMSurgeryUIKey.Key, new CMSurgeryBuiState(surgeries));
     }
 
     private void OnToolAfterInteract(Entity<CMSurgeryToolComponent> ent, ref AfterInteractEvent args)
     {
+        var user = args.User;
         if (args.Handled ||
             args.Target == null ||
-            !TryComp(args.User, out ActorComponent? actor) ||
             !HasComp<CMSurgeryTargetComponent>(args.Target))
         {
             return;
         }
 
-        if (!TryComp(args.User, out SkillsComponent? skills) ||
+        if (!TryComp(user, out SkillsComponent? skills) ||
             skills.Surgery < 1)
         {
-            _popup.PopupEntity("You don't know how to perform surgery!", args.User, args.User);
+            _popup.PopupEntity("You don't know how to perform surgery!", user, user);
             return;
         }
 
-        if (args.User == args.Target)
+        if (user == args.Target)
         {
-            _popup.PopupEntity("You can't perform surgery on yourself!", args.User, args.User);
+            _popup.PopupEntity("You can't perform surgery on yourself!", user, user);
             return;
         }
 
         args.Handled = true;
-        _ui.TryOpen(args.Target.Value, CMSurgeryUIKey.Key, actor.PlayerSession);
+        _ui.OpenUi(args.Target.Value, CMSurgeryUIKey.Key, user);
 
         RefreshUI(args.Target.Value);
     }
