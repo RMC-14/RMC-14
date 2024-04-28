@@ -20,8 +20,8 @@
     key: enum.RequisitionsUIKey.Key
   - type: UserInterface
     interfaces:
-    - key: enum.RequisitionsUIKey.Key
-      type: RequisitionsBui
+      enum.RequisitionsUIKey.Key:
+        type: RequisitionsBui
   - type: Computer
     board: CargoRequestComputerCircuitboard
   - type: PointLight

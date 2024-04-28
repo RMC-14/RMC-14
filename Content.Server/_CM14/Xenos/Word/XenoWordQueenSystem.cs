@@ -27,8 +27,7 @@ public sealed class XenoWordQueenSystem : SharedXenoWordQueenSystem
 
     protected override void OnXenoWordQueenBui(Entity<XenoWordQueenComponent> queen, ref XenoWordQueenBuiMessage args)
     {
-        if (TryComp(queen, out ActorComponent? actor))
-            _ui.TryClose(queen, XenoWordQueenUI.Key, actor.PlayerSession);
+        _ui.CloseUi(queen.Owner, XenoWordQueenUI.Key, queen);
 
         var text = args.Text.Trim();
         if (string.IsNullOrWhiteSpace(text))

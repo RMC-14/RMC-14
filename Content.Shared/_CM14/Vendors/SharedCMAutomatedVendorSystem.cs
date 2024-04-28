@@ -49,10 +49,10 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     {
         var comp = vendor.Comp;
         var sections = comp.Sections.Count;
-        var playerName = args.Session.Name;
+        var actor = args.Actor;
         if (args.Section < 0 || args.Section >= sections)
         {
-            Log.Error($"Player {playerName} sent an invalid vend section: {args.Section}. Max: {sections}");
+            Log.Error($"Player {ToPrettyString(actor)} sent an invalid vend section: {args.Section}. Max: {sections}");
             return;
         }
 
@@ -60,7 +60,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         var entries = section.Entries.Count;
         if (args.Entry < 0 || args.Entry >= entries)
         {
-            Log.Error($"Player {playerName} sent an invalid vend entry: {args.Entry}. Max: {entries}");
+            Log.Error($"Player {ToPrettyString(actor)} sent an invalid vend entry: {args.Entry}. Max: {entries}");
             return;
         }
 
@@ -74,16 +74,10 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return;
         }
 
-        if (args.Session.AttachedEntity is not { } player)
-        {
-            Log.Error($"Player {playerName} tried to buy {entry.Id} without an attached entity.");
-            return;
-        }
-
-        var user = CompOrNull<CMVendorUserComponent>(player);
+        var user = CompOrNull<CMVendorUserComponent>(actor);
         if (section.Choices is { } choices)
         {
-            user = EnsureComp<CMVendorUserComponent>(player);
+            user = EnsureComp<CMVendorUserComponent>(actor);
             if (!user.Choices.TryGetValue(choices.Id, out var playerChoices))
             {
                 playerChoices = 0;
@@ -92,7 +86,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
             if (playerChoices >= choices.Amount)
             {
-                Log.Error($"Player {playerName} tried to buy too many choices.");
+                Log.Error($"Player {ToPrettyString(actor)} tried to buy too many choices.");
                 return;
             }
 
@@ -103,18 +97,18 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         {
             if (user == null)
             {
-                Log.Error($"Player {playerName} tried to buy {entry.Id} for {entry.Points} points without having points.");
+                Log.Error($"Player {ToPrettyString(actor)} tried to buy {entry.Id} for {entry.Points} points without having points.");
                 return;
             }
 
             if (user.Points < entry.Points)
             {
-                Log.Error($"Player {playerName} with {user.Points} tried to buy {entry.Id} for {entry.Points} points without having enough points.");
+                Log.Error($"Player {ToPrettyString(actor)} with {user.Points} tried to buy {entry.Id} for {entry.Points} points without having enough points.");
                 return;
             }
 
             user.Points -= entry.Points.Value;
-            Dirty(player, user);
+            Dirty(actor, user);
         }
 
         if (entry.Amount != null)
@@ -133,12 +127,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         {
             foreach (var bundled in bundle.Bundle)
             {
-                Vend(vendor, player, bundled, offset);
+                Vend(vendor, actor, bundled, offset);
             }
         }
         else
         {
-            Vend(vendor, player, entry.Id, offset);
+            Vend(vendor, actor, entry.Id, offset);
         }
     }
 

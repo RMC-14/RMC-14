@@ -29,13 +29,13 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         if (!TryGetEntity(args.Target, out var destination))
         {
-            Log.Warning($"{args.Session.Name} tried to launch to invalid dropship destination {args.Target}");
+            Log.Warning($"{ToPrettyString(args.Actor)} tried to launch to invalid dropship destination {args.Target}");
             return;
         }
 
         if (!HasComp<DropshipDestinationComponent>(destination))
         {
-            Log.Warning($"{args.Session.Name} tried to launch to invalid dropship destination {ToPrettyString(destination)}");
+            Log.Warning($"{ToPrettyString(args.Actor)} tried to launch to invalid dropship destination {ToPrettyString(destination)}");
             return;
         }
 

@@ -50,7 +50,6 @@
     - CanPilot
     - FootstepSound
     - DoorBumpOpener
-    - ShoesRequiredStepTriggerImmune
   - type: Marine
   - type: Hunger
   - type: Thirst
@@ -87,19 +86,18 @@
   - type: CMSurgeryTarget
   - type: UserInterface
     interfaces:
-    - key: enum.VoiceMaskUIKey.Key
-      type: VoiceMaskBoundUserInterface
-    - key: enum.HumanoidMarkingModifierKey.Key
-      type: HumanoidMarkingModifierBoundUserInterface
-    - key: enum.StrippingUiKey.Key
-      type: StrippableBoundUserInterface
-    - key: enum.HumanoidMarkingModifierKey.Key
-      type: HumanoidMarkingModifierBoundUserInterface
-    - key: enum.CMSurgeryUIKey.Key
-      type: CMSurgeryBui
+      enum.VoiceMaskUIKey.Key:
+        type: VoiceMaskBoundUserInterface
+      enum.HumanoidMarkingModifierKey.Key:
+        type: HumanoidMarkingModifierBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+      enum.CMSurgeryUIKey.Key:
+        type: CMSurgeryBui
   - type: Huggable
   - type: Tackleable
   - type: Tackle
     stun: 10
   - type: XenoNestable
   - type: Devourable
+  - type: ImmuneToClothingRequiredStepTrigger

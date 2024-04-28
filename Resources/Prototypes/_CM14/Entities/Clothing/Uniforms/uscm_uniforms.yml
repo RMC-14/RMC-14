@@ -24,8 +24,8 @@
     - type: WebbingClothing
     - type: UserInterface
       interfaces:
-      - key: enum.StorageUiKey.Key
-        type: StorageBoundUserInterface
+        enum.StorageUiKey.Key:
+          type: StorageBoundUserInterface
 
 - type: entity
   parent: JumpsuitMarine

@@ -16,7 +16,6 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -100,10 +99,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
 
     private void OnXenoChooseStructureAction(Entity<XenoConstructionComponent> xeno, ref XenoChooseStructureActionEvent args)
     {
-        if (_net.IsClient || !TryComp(xeno, out ActorComponent? actor))
-            return;
-
-        _ui.TryOpen(xeno, XenoChooseStructureUI.Key, actor.PlayerSession);
+        _ui.TryOpenUi(xeno.Owner, XenoChooseStructureUI.Key, xeno);
     }
 
     private void OnXenoChooseStructureBui(Entity<XenoConstructionComponent> xeno, ref XenoChooseStructureBuiMessage args)
@@ -114,8 +110,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         xeno.Comp.BuildChoice = args.StructureId;
         Dirty(xeno);
 
-        if (TryComp(xeno, out ActorComponent? actor))
-            _ui.TryClose(xeno, XenoChooseStructureUI.Key, actor.PlayerSession);
+        _ui.CloseUi(xeno.Owner, XenoChooseStructureUI.Key, xeno);
 
         var ev = new XenoConstructionChosenEvent(args.StructureId);
         foreach (var (id, _) in _actions.GetActions(xeno))
@@ -166,11 +161,10 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         if (!CanOrderConstructionPopup(xeno, args.Target))
             return;
 
-        if (_net.IsClient || !TryComp(xeno, out ActorComponent? actor))
-            return;
-
         xeno.Comp.OrderingConstructionAt = args.Target;
-        _ui.TryOpen(xeno, XenoOrderConstructionUI.Key, actor.PlayerSession);
+        Dirty(xeno);
+
+        _ui.TryOpenUi(xeno.Owner, XenoOrderConstructionUI.Key, xeno);
     }
 
     private void OnXenoOrderConstructionBui(Entity<XenoConstructionComponent> xeno, ref XenoOrderConstructionBuiMessage args)
@@ -198,11 +192,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         };
 
         _doAfter.TryStartDoAfter(doAfter);
-
-        if (_net.IsClient || !TryComp(xeno, out ActorComponent? actor))
-            return;
-
-        _ui.TryOpen(xeno, XenoOrderConstructionUI.Key, actor.PlayerSession);
+        _ui.TryOpenUi(xeno.Owner, XenoOrderConstructionUI.Key, xeno);
     }
 
     private void OnXenoOrderConstructionDoAfter(Entity<XenoConstructionComponent> xeno, ref XenoOrderConstructionDoAfterEvent args)

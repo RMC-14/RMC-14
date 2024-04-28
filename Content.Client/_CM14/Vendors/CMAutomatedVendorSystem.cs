@@ -1,12 +1,9 @@
 ﻿using Content.Shared._CM14.Vendors;
-using Robust.Client.GameObjects;
 
 namespace Content.Client._CM14.Vendors;
 
 public sealed class CMAutomatedVendorSystem : SharedCMAutomatedVendorSystem
 {
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -19,7 +16,7 @@ public sealed class CMAutomatedVendorSystem : SharedCMAutomatedVendorSystem
         if (!TryComp(vendor, out UserInterfaceComponent? ui))
             return;
 
-        foreach (var bui in ui.OpenInterfaces.Values)
+        foreach (var bui in ui.ClientOpenInterfaces.Values)
         {
             if (bui is CMAutomatedVendorBui vendorUi)
                 vendorUi.Refresh();

@@ -4,7 +4,6 @@ using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Network;
-using Robust.Shared.Player;
 using static Content.Shared.Storage.StorageComponent;
 
 namespace Content.Shared._CM14.Storage;
@@ -118,19 +117,14 @@ public sealed class CMStorageSystem : EntitySystem
 
     private void OnCloseOnMoveUIOpened(Entity<StorageCloseOnMoveComponent> ent, ref BoundUIOpenedEvent args)
     {
-        if (args.Session.AttachedEntity is not { } player)
-            return;
-
-        var coordinates = GetNetCoordinates(_transform.GetMoverCoordinates(player));
-        EnsureComp<StorageOpenComponent>(ent).OpenedAt[player] = coordinates;
+        var user = args.Actor;
+        var coordinates = GetNetCoordinates(_transform.GetMoverCoordinates(user));
+        EnsureComp<StorageOpenComponent>(ent).OpenedAt[user] = coordinates;
     }
 
     private void OnCloseOnMoveUIClosed(Entity<StorageOpenComponent> ent, ref BoundUIClosedEvent args)
     {
-        if (args.Session.AttachedEntity is not { } player)
-            return;
-
-        ent.Comp.OpenedAt.Remove(player);
+        ent.Comp.OpenedAt.Remove(args.Actor);
     }
 
     public override void Update(float frameTime)
@@ -156,16 +150,7 @@ public sealed class CMStorageSystem : EntitySystem
 
             foreach (var user in _toRemove)
             {
-                if (_net.IsServer && TryComp(user, out ActorComponent? actor))
-                    _ui.TryClose(uid, StorageUiKey.Key, actor.PlayerSession);
-
-                if (_net.IsClient &&
-                    TryComp(uid, out UserInterfaceComponent? ui) &&
-                    ui.OpenInterfaces.TryGetValue(StorageUiKey.Key, out var openUI))
-                {
-                    openUI.Close();
-                }
-
+                _ui.CloseUi(uid, StorageUiKey.Key, user);
                 open.OpenedAt.Remove(user);
             }
 

@@ -12,6 +12,6 @@ public sealed class CMAutomatedVendorSystem : SharedCMAutomatedVendorSystem
         base.OnVendBui(vendor, ref args);
 
         var msg = new CMVendorRefreshBuiMessage();
-        _ui.TrySendUiMessage(vendor, args.UiKey, msg, args.Session);
+        _ui.ServerSendUiMessage(vendor.Owner, args.UiKey, msg, args.Actor);
     }
 }

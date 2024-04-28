@@ -26,9 +26,6 @@
   abstract: true
   save: false
   components:
-  - type: Tag
-    tags:
-    - ShoesRequiredStepTriggerImmune
   - type: Damageable
     damageContainer: Biological
   - type: Destructible
@@ -134,18 +131,18 @@
   - type: Xeno
   - type: UserInterface
     interfaces:
-    - key: enum.XenoEvolutionUIKey.Key
-      type: XenoEvolutionBui
-    - key: enum.XenoWatchUIKey.Key
-      type: XenoWatchBui
-    - key: enum.XenoChooseStructureUI.Key
-      type: XenoChooseStructureBui
-    - key: enum.XenoPheromonesUI.Key
-      type: XenoPheromonesBui
-    - key: enum.XenoOrderConstructionUI.Key
-      type: XenoOrderConstructionBui
-    - key: enum.XenoWordQueenUI.Key
-      type: XenoWordQueenBui
+      enum.XenoEvolutionUIKey.Key:
+        type: XenoEvolutionBui
+      enum.XenoWatchUIKey.Key:
+        type: XenoWatchBui
+      enum.XenoChooseStructureUI.Key:
+        type: XenoChooseStructureBui
+      enum.XenoPheromonesUI.Key:
+        type: XenoPheromonesBui
+      enum.XenoOrderConstructionUI.Key:
+        type: XenoOrderConstructionBui
+      enum.XenoWordQueenUI.Key:
+        type: XenoWordQueenBui
   - type: TypingIndicator
     proto: alien
   - type: MovedByPressure
@@ -174,6 +171,7 @@
     - Stun
     - KnockedDown
     - SlowedDown
+  - type: ImmuneToClothingRequiredStepTrigger
 
 - type: entity
   abstract: true
@@ -251,7 +249,6 @@
   - type: Tag
     tags:
     - DoorBumpOpener
-    - ShoesRequiredStepTriggerImmune
   - type: Hands
   - type: GiveHands
     hands:

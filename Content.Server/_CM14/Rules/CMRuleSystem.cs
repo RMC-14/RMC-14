@@ -51,7 +51,6 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RoundStartAttemptEvent>(OnStartAttempt);
         SubscribeLocalEvent<RulePlayerSpawningEvent>(OnRulePlayerSpawning);
         SubscribeLocalEvent<PlayerSpawningEvent>(OnPlayerSpawning,
             before: [typeof(ArrivalsSystem), typeof(SpawnPointSystem)]);
@@ -61,11 +60,6 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
 
         SubscribeLocalEvent<XenoComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<XenoComponent, ComponentRemove>(OnCompRemove);
-    }
-
-    private void OnStartAttempt(RoundStartAttemptEvent ev)
-    {
-        TryRoundStartAttempt(ev, "Distress Signal");
     }
 
     private void OnRulePlayerSpawning(RulePlayerSpawningEvent ev)

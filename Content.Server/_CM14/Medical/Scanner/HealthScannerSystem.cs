@@ -11,7 +11,6 @@ using Content.Shared.Mobs.Components;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Network;
-using Robust.Shared.Player;
 
 namespace Content.Server._CM14.Medical.Scanner;
 
@@ -35,8 +34,7 @@ public sealed class HealthScannerSystem : EntitySystem
         if (!args.CanReach ||
             !HasComp<DamageableComponent>(target) ||
             !HasComp<MobStateComponent>(target) ||
-            !HasComp<MobThresholdsComponent>(target) ||
-            !TryComp(args.User, out ActorComponent? actor))
+            !HasComp<MobThresholdsComponent>(target))
         {
             return;
         }
@@ -55,7 +53,7 @@ public sealed class HealthScannerSystem : EntitySystem
         }
 
         _audio.PlayPvs(scanner.Comp.Sound, scanner);
-        _ui.TryOpen(scanner, HealthScannerUIKey.Key, actor.PlayerSession);
+        _ui.OpenUi(scanner.Owner, HealthScannerUIKey.Key, args.User);
 
         var blood = _bloodstream.GetBloodLevelPercentage(target.Value) * 100;
         var temperature = CompOrNull<TemperatureComponent>(target)?.CurrentTemperature;
@@ -66,6 +64,6 @@ public sealed class HealthScannerSystem : EntitySystem
             _solution.TryGetSolution(target.Value, bloodstream.ChemicalSolutionName, out _, out chemicals);
         }
 
-        _ui.TrySetUiState(scanner, HealthScannerUIKey.Key, new HealthScannerBuiState(GetNetEntity(target.Value), blood, temperature, chemicals));
+        _ui.SetUiState(scanner.Owner, HealthScannerUIKey.Key, new HealthScannerBuiState(GetNetEntity(target.Value), blood, temperature, chemicals));
     }
 }

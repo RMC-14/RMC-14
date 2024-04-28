@@ -17,8 +17,8 @@
       map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
   - type: UserInterface
     interfaces:
-    - key: enum.CMAutomatedVendorUI.Key
-      type: CMAutomatedVendorBui
+      enum.CMAutomatedVendorUI.Key:
+        type: CMAutomatedVendorBui
   - type: AmbientOnPowered
   - type: AmbientSound
     volume: -9
