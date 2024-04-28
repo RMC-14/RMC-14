@@ -119,6 +119,6 @@
 - type: radioChannel # Only used by Corporate Liason to hand out to bodyguards / command.
   id: WY
   name: chat-radio-WY
-  keycode: "j" #w in CM13
+  keycode: "w" #w in CM13
   frequency: 1487
   color: "#fe9b24"
