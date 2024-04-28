@@ -68,8 +68,11 @@ public sealed class XenoArmorSystem : EntitySystem
 
         foreach (var type in types)
         {
-            if (args.Damage.DamageDict.TryGetValue(type, out var amount))
+            if (args.Damage.DamageDict.TryGetValue(type, out var amount) &&
+                amount > FixedPoint2.Zero)
+            {
                 args.Damage.DamageDict[type] = amount / resist;
+            }
         }
 
         var newDamage = args.Damage.GetTotal();
@@ -79,8 +82,11 @@ public sealed class XenoArmorSystem : EntitySystem
 
             foreach (var type in types)
             {
-                if (args.Damage.DamageDict.TryGetValue(type, out var amount))
+                if (args.Damage.DamageDict.TryGetValue(type, out var amount) &&
+                    amount > FixedPoint2.Zero)
+                {
                     args.Damage.DamageDict[type] = amount * damageWithArmor / (newDamage * 4);
+                }
             }
         }
     }

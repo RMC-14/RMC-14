@@ -17,7 +17,19 @@ public sealed partial class XenoComponent : Component
     public Dictionary<EntProtoId, EntityUid> Actions = new();
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 HealthRegenOnWeeds = 1.25;
+    public FixedPoint2 FlatHealing = 0.5;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 CritHealMultiplier = 0.33;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 RestHealMultiplier = 1;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 StandHealingMultiplier = 0.4;
+
+    [DataField, AutoNetworkedField]
+    public float MaxHealthDivisorHeal = 65;
 
     [DataField, AutoNetworkedField]
     public TimeSpan RegenCooldown = TimeSpan.FromSeconds(1);
