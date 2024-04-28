@@ -34,24 +34,42 @@ public sealed class SquadSystem : EntitySystem
         member.Squad = team;
         member.Background = team.Comp.Background;
         member.BackgroundColor = team.Comp.Color;
+        Dirty(marine, member);
 
-        foreach (var item in _inventory.GetHandOrInventoryEntities(marine))
+        var grant = EnsureComp<SquadGrantAccessComponent>(marine);
+        grant.AccessLevel = team.Comp.AccessLevel;
+
+        if (job != null &&
+            _prototypes.TryIndex(job.Prototype, out var jobProto))
         {
-            if (team.Comp.AccessLevel is { Id.Length: > 0 } accessLevel &&
-                TryComp(item, out AccessComponent? access))
-            {
-                access.Tags.Add(accessLevel);
-                Dirty(item, access);
-            }
-
-            if (job != null &&
-                _prototypes.TryIndex(job.Prototype, out var jobProto) &&
-                TryComp(item, out IdCardComponent? idCard))
-            {
-                _id.TryChangeJobTitle(item, $"{Name(team)} {jobProto.LocalizedName}", idCard);
-            }
+            grant.RoleName = $"{Name(team)} {jobProto.LocalizedName}";
         }
 
-        Dirty(marine, member);
+        Dirty(marine, grant);
+    }
+
+    public override void Update(float frameTime)
+    {
+        var query = EntityQueryEnumerator<SquadGrantAccessComponent>();
+        while (query.MoveNext(out var uid, out var grant))
+        {
+            foreach (var item in _inventory.GetHandOrInventoryEntities(uid))
+            {
+                if (grant.AccessLevel is { Id.Length: > 0 } accessLevel &&
+                    TryComp(item, out AccessComponent? access))
+                {
+                    access.Tags.Add(accessLevel);
+                    Dirty(item, access);
+                }
+
+                if (grant.RoleName != null &&
+                    TryComp(item, out IdCardComponent? idCard))
+                {
+                    _id.TryChangeJobTitle(item, grant.RoleName, idCard);
+                }
+            }
+
+            RemCompDeferred<SquadGrantAccessComponent>(uid);
+        }
     }
 }
