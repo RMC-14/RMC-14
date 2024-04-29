@@ -1277,7 +1277,7 @@
       #- id: CMTacticsRadioEncryptionKey TODO: Add Tactics Key.
       #  amount: 3
       #  points: 3
-      - id: CMJTACRadioEncryptionKey
+      - id: CMEncryptionKeyJTAC
         amount: 3
         points: 3
       - id: CMEncryptionKeyRequisition
