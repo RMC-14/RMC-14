@@ -35,3 +35,16 @@
     sprite: _CM14/Objects/Clothing/Mask/medical.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Mask/medical.rsi
+
+- type: entity
+  parent: CMClothingMaskSterile # This should be re-parented if MedicalMask gets any Medical additions
+  id: CMClothingMaskCoif
+  name: heat absorbent coif
+  description: A close-fitting cap that covers the top, back, and sides of the head. Can also be adjusted to cover the lower part of the face so it keeps the user warm in harsh conditions.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Mask/coif.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Mask/coif.rsi
+  - type: IdentityBlocker
+    coverage: MOUTH
