@@ -1,4 +1,5 @@
-﻿using Content.Shared.Atmos.Rotting;
+﻿using Content.Shared._CM14.Xenos;
+using Content.Shared.Atmos.Rotting;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.SSDIndicator;
@@ -11,7 +12,6 @@ public sealed class CMHealthIconsSystem : EntitySystem
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-
 
     [ValidatePrototypeId<StatusIconPrototype>]
     private const string Healthy = "CMHealthIconHealthy";
@@ -37,7 +37,13 @@ public sealed class CMHealthIconsSystem : EntitySystem
     public IReadOnlyList<StatusIconData> GetIcons(Entity<DamageableComponent> damageable)
     {
         var icons = new List<StatusIconData>();
-        if (_mobState.IsAlive(damageable) || _mobState.IsCritical(damageable) || !_mobState.IsDead(damageable))
+
+        if (HasComp<XenoComponent>(damageable))
+            return icons;
+
+        if (_mobState.IsAlive(damageable) ||
+            _mobState.IsCritical(damageable) ||
+            !_mobState.IsDead(damageable))
         {
             icons.Add(_prototype.Index<StatusIconPrototype>(Healthy));
             return icons;
@@ -52,6 +58,7 @@ public sealed class CMHealthIconsSystem : EntitySystem
             }
         }
 
+        // TODO CM14 don't use perishable
         if (!TryComp(damageable, out PerishableComponent? perishable) ||
             perishable.Stage <= 1)
         {
