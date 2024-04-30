@@ -53,7 +53,7 @@
     resistance: 3
   - type: Occluder
   - type: Damageable
-    damageContainer: Resin
+    damageContainer: StructuralXeno
     damageModifierSet: Resin
   - type: Destructible
     thresholds:
