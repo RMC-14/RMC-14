@@ -1008,9 +1008,9 @@
     #  amount: 6P
     - name: Armors
       entries: []
-    #- id: CMArmorM3B12PatternMarine
+    #- id: CMArmorB12
     #  amount: 24P
-    #- id: CMArmorM4Pattern
+    #- id: CMArmorM4
     #  amount: 30P
     - name: Restricted FIrearms
       entries: []
