@@ -1,9 +1,13 @@
 ﻿- type: damageContainer
-  id: Resin
+  id: Xeno
   supportedGroups:
   - Brute
   - Burn
-  - Toxin
-  - Genetic
+
+- type: damageContainer
+  id: StructuralXeno
+  supportedGroups:
+  - Brute
+  - Burn
   supportedTypes:
   - Structural

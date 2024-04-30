@@ -27,7 +27,7 @@
   save: false
   components:
   - type: Damageable
-    damageContainer: Biological
+    damageContainer: Xeno
   - type: Destructible
     thresholds:
     - trigger:
