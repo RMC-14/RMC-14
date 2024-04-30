@@ -350,8 +350,9 @@
   - type: CMAutomatedVendor
     sections:
     - name: Standard Equipment
+      choices: {CMStandard: 2}
       entries:
-      - id: JumpsuitMarine
+      - id: JumpsuitMarine # TODO cm14 this should be uniform, boots, helmet
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
     - name: Armor
