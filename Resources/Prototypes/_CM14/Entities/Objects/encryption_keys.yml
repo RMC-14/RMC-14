@@ -42,6 +42,19 @@
   - type: Sprite
     state: stripped_key
 
+# Weyland-Yutani
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyWY
+  name: weyland-yutani encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - WY
+    defaultChannel: WY
+  - type: Sprite
+    state: wy_key
+
 # Command
 - type: entity
   parent: CMEncryptionKey
@@ -67,6 +80,19 @@
     defaultChannel: MarineIntel
   - type: Sprite
     state: jtac_key
+
+# JTAC
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyJTAC
+  name: JTAC encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineJTAC
+    defaultChannel: MarineJTAC
+  - type: Sprite
+    state: jtac_key # CM13 uses the same sprite for JTAC and Intel.
 
 # Engineering
 - type: entity
@@ -246,6 +272,7 @@
     - MarineMedical
     - MarineRequisition
     - MarineIntel
+    - MarineJTAC
     defaultChannel: MarineCommand
   - type: Sprite
     state: cap_key
@@ -340,6 +367,7 @@
     - MarineEngineer
     - MarineMedical
     - MarineIntel
+    - MarineJTAC
     defaultChannel: MarineCommand
   - type: Sprite
     state: cap_key
@@ -357,6 +385,7 @@
     - MarineEngineer
     - MarineMedical
     - MarineIntel
+    - MarineJTAC
     defaultChannel: MarineIntel
   - type: Sprite
     state: cap_key
@@ -377,7 +406,7 @@
   - type: Sprite
     state: cap_key
 
-# SOF forgor who is that
+# Marine Special Forces (ERT)
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeySOF

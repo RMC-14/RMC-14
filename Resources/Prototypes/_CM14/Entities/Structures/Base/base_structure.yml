@@ -83,7 +83,7 @@
     mode: SnapgridCenter
   components:
   - type: Damageable
-    damageContainer: Resin
+    damageContainer: StructuralXeno
     damageModifierSet: Resin
   - type: Appearance
   - type: RadiationBlocker

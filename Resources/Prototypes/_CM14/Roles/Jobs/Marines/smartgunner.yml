@@ -29,7 +29,7 @@
     back: CMSatchelMarine
     shoes: CMBootsBlackFilled
     head: ArmorHelmetM10
-    outerClothing: ArmorMarineM3
+    outerClothing: CMArmorM3Medium
     gloves: CMHandsBlack
     id: CMDogtagSmartgunner
     ears: CMHeadsetAlpha

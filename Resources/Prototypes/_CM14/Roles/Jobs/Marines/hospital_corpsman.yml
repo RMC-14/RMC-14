@@ -35,7 +35,7 @@
     gloves: CMHandsBlack
     eyes: ClothingEyesHudMedical
     head: CMArmorHelmetM10Medic
-    outerClothing: ArmorMarineM3
+    outerClothing: CMArmorM3Medium
     id: CMDogtagHospitalCorpsman
     ears: CMHeadsetAlphaMedic
     belt: CMBeltMedicBagFilled
