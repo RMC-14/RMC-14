@@ -32,7 +32,7 @@
     shoes: CMBootsBlackFilled
     eyes: ClothingEyesGlassesMeson
     head: CMArmorHelmetM10Tech
-    outerClothing: ArmorMarineM3
+    outerClothing: CMArmorM3Medium
     gloves: CMHandsInsulated
     id: CMDogtagCombatTech
     ears: CMHeadsetAlphaEngineer

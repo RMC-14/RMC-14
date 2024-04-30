@@ -1,8 +1,8 @@
 ﻿# m3
 - type: entity
   parent: ClothingOuterArmorBasic
-  id: ArmorMarineM3
-  name: M3 Pattern Personal Armor
+  id: CMArmorM3Medium
+  name: M3 Pattern Marine Armor
   description: Standard Issue Armor used by USCM. Provides modest protection from bullet and melee attacks. It also has a shoulder-mounted directional flashlight for night time combat and a HUD to see their Marine roles. An all rounder in terms of protection with an additional 3 slots in the armor.
   components:
     - type: Sprite
@@ -73,10 +73,10 @@
             type: StorageBoundUserInterface
 
 - type: entity
-  parent: ArmorMarineM3
-  id: CMArmorM3B12
-  name: B12 Pattern Personal Armor
-  description: A lightweight suit of carbon fiber body armor built for quick movement. Slightly better than the average M3 Pattern Personal Armor.
+  parent: CMArmorM3Medium
+  id: CMArmorB12
+  name: B12 Pattern marine Armor
+  description: A lightweight suit of carbon fiber body armor built for quick movement. Slightly better than the average M3 Pattern marine Armor.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/b12.rsi
@@ -93,8 +93,8 @@
     damageCoefficient: 0.8
 
 - type: entity
-  parent: ArmorMarineM3
-  id: CMArmorM3
+  parent: CMArmorM3Medium
+  id: CMArmorM3Heavy
   name: M3 EOD Pattern Heavy Armor
   description: A heavier version of the standard M3 pattern armor, the armor is primarily designed to withstand ballistic, explosive, and internal damage, with the drawback of increased bulk and thus reduced movement speed, alongside little additional protection from standard blunt force impacts and none from biological threats.
   components:
@@ -116,7 +116,7 @@
     sprintModifier: 0.75
 
 - type: entity
-  parent: ArmorMarineM3
+  parent: CMArmorM3Medium
   id: CMArmorM3Warden
   name: M3 pattern warden armor
   description: A well-crafted suit of M3 Pattern Armor typically distributed to Wardens.
@@ -127,7 +127,7 @@
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/warden.rsi
 
 - type: entity
-  parent: ArmorMarineM3
+  parent: CMArmorM3Medium
   id: CMArmorM3WO
   name: M3 pattern chief mp armor
   description: A well-crafted suit of M3 Pattern Armor typically distributed to Chief MPs. Useful for letting your men know who is in charge.
@@ -138,7 +138,7 @@
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/wo.rsi
 
 - type: entity
-  parent: ArmorMarineM3
+  parent: CMArmorM3Medium
   id: CMArmorM3G4
   name: M3-G4 Grenadier Armor
   description: A custom set of M3 armour packed to the brim with padding, plating, and every other form of ballistic protection under the sun. Being much heavier than the other armour types, it's able to allow the wearer to stand and counter against alien pounce attempts from the front.
@@ -158,7 +158,7 @@
     damageCoefficient: 0.8
 
 - type: entity
-  parent: ArmorMarineM3
+  parent: CMArmorM3Medium
   id: CMArmorM3T
   name: M3-T Light Armor
   description: A custom set of M3 armor designed for users of long ranged explosive weaponry.
@@ -179,7 +179,7 @@
 
 
 - type: entity
-  parent: ArmorMarineM3
+  parent: CMArmorM3Medium
   id: CMArmorM3Light
   name: M3-L Pattern Light Armor
   description: A lighter, cut down version of the standard M3 pattern armor. It sacrifices protection for more speed. Protects more against acid.
@@ -199,7 +199,7 @@
     damageCoefficient: 0.60
 
 - type: entity
-  parent: ArmorMarineM3
+  parent: CMArmorM3Medium
   id: CMArmorM3Scout
   name: M3-S Light Armor
   description: A custom modified set of M3 Armor designed for recon missions. Allows more mobility for the wearer.
@@ -210,8 +210,8 @@
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/scout.rsi
 
 - type: entity
-  parent: ArmorMarineM3
-  id: CMArmorM3VLPatternBallistics
+  parent: CMArmorM3Medium
+  id: CMArmorM3VLBallistics
   name: M3-VL Pattern Ballistics Vest
   description: Up until 2182 USCM non-combat personnel were issued non-standardized ballistics vests, though the lack of IMP compatibility and suit lamps proved time and time again inefficient. This modified M3-L shell is the result of a 6-year R&D program; It provides utility, protection, AND comfort to all USCM non-combat personnel.
   components:
@@ -230,8 +230,8 @@
     damageCoefficient: 0.85
 
 - type: entity
-  parent: CMArmorM3VLPatternBallistics
-  id: CMArmorM3VLPatternFlakVest
+  parent: CMArmorM3VLBallistics
+  id: CMArmorM3VLFlakVest
   name: M3-VL Pattern Flak Vest
   description: A combination of the standard non-combat M3-VL ballistics vest and M70 flak jacket, this piece of armor has been distributed to dropship crew to keep them safe from threats external and internal...
   components:
@@ -246,7 +246,7 @@
 
 # m4
 - type: entity
-  parent: ArmorMarineM3
+  parent: CMArmorM3Medium
   id: CMArmorM4
   name: M4 Pattern Radio Operator Armor
   description: A well tinkered and crafted hybrid of Smart-Gunner mesh and M3 pattern plates. Robust, yet nimble, with room for all your pouches.
@@ -258,7 +258,7 @@
 
 # m35
 - type: entity
-  parent: ArmorMarineM3
+  parent: CMArmorM3Medium
   id: CMArmorM35
   name: M35 Armor
   description: A custom piece of M3 armor designed to be highly flame retardant.
@@ -270,7 +270,7 @@
 
 # m45
 - type: entity
-  parent: ArmorMarineM3
+  parent: CMArmorM3Medium
   id: CMArmorM45
   name: M45 Pattern Ghillie Armor
   description: A lightweight ghillie camouflage suit, used by USCM snipers on recon missions. Very lightweight and surprisingly very protective.
@@ -282,7 +282,7 @@
 
 # m56
 - type: entity
-  parent: ArmorMarineM3
+  parent: CMArmorM3Medium
   id: CMArmorM56CombatHarness
   name: M56 combat harness
   description: A heavy protective vest designed to be worn with the M56 Smartgun System. \nIt has specially designed straps and reinforcement to carry the Smartgun and accessories.
@@ -314,7 +314,7 @@
 
 # M2
 - type: entity
-  parent: ArmorMarineM3
+  parent: CMArmorM3Medium
   id: CMArmorM2MP
   name: M2 pattern mp armor
   description: M2 Armor offers higher protection against melee attacks but less protection against projectile attacks
@@ -345,7 +345,7 @@
 
 # plate carriers
 - type: entity
-  parent: ArmorMarineM3
+  parent: CMArmorM3Medium
   id: CMArmorPlatePilot
   name: pilot plate carrier
   description: Special plate carrier distributed to the pilots of USCM.
