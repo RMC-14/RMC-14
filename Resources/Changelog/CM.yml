@@ -695,5 +695,21 @@
   id: 90
   time: '2024-04-28T12:21:07.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2041
+- author: DangerRevolution
+  changes:
+  - message: Added JTAC Radio Key
+    type: Add
+  - message: Add Weyland-Yutani radio key
+    type: Add
+  id: 91
+  time: '2024-04-30T06:37:23.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2043
+- author: DrSmugleaf
+  changes:
+  - message: Add xeno hivemind chat.
+    type: Add
+  id: 92
+  time: '2024-05-01T03:23:07.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2049
 Name: CM
 Order: -1
