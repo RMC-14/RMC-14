@@ -111,6 +111,7 @@ public abstract class SharedChatSystem : EntitySystem
         if (input.Length == 0)
             return false;
 
+        // TODO CM14 replace all of this with something else when chat code isnt a joke
         if (input.StartsWith(RadioCommonPrefix))
         {
             output = SanitizeMessageCapital(input[1..].TrimStart());
