@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using Content.Server._CM14.Chat.Chat;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
@@ -14,7 +15,6 @@ using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
-using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
@@ -819,6 +819,9 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
 
         RaiseLocalEvent(new ExpandICChatRecipientstEvent(source, voiceGetRange, recipients));
+
+        var ev = new ChatMessageAfterGetRecipients(recipients);
+        RaiseLocalEvent(source, ref ev);
         return recipients;
     }
 

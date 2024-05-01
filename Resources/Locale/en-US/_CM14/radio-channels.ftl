@@ -18,3 +18,5 @@ chat-radio-marine-foxtrot = Foxtrot
 
 chat-radio-colony = Colony
 chat-radio-WY = Weyland-Yutani
+
+chat-radio-hivemind = Hivemind
