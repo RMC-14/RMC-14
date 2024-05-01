@@ -147,8 +147,9 @@
     proto: alien
   - type: MovedByPressure
   - type: NoSlip
-  - type: Pullable # TODO CM14 xeno pullable
-  - type: Speech # TODO CM14 alien language
+  - type: Pullable
+  - type: Speech
+    speechVerb: Xeno
   - type: GhostOnMove
     mustBeDead: true
   - type: WhitelistPickup
@@ -172,6 +173,13 @@
     - KnockedDown
     - SlowedDown
   - type: ImmuneToClothingRequiredStepTrigger
+  - type: IntrinsicRadioReceiver
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Hivemind
+  - type: ActiveRadio
+    channels:
+    - Hivemind
 
 - type: entity
   abstract: true
@@ -277,3 +285,9 @@
     damage: #per second, scales with number of fire 'stacks'
       types:
         Heat: 3
+
+- type: speechVerb
+  id: Xeno
+  name: Xeno
+  speechVerbStrings:
+  - hisses

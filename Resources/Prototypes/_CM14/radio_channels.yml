@@ -108,3 +108,11 @@
   frequency: 1381
   color: "#cf40a6" #todo cm14
   longRange: true
+
+- type: radioChannel
+  id: Hivemind
+  name: chat-radio-hivemind
+  keycode: "h"
+  frequency: 426
+  color: "#8b36a6"
+  longRange: true

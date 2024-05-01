@@ -16,3 +16,4 @@ chat-radio-marine-echo = Echo
 chat-radio-marine-foxtrot = Foxtrot
 
 chat-radio-colony = Colony
+chat-radio-hivemind = Hivemind
