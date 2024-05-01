@@ -350,49 +350,55 @@
   - type: CMAutomatedVendor
     sections:
     - name: Standard Equipment
-      entries: []
-    #    CMStandardMarineApparel
-    #    CMMRE
-    #    CMMap
+      choices: {CMStandard: 2}
+      entries:
+      - id: JumpsuitMarine # TODO cm14 this should be uniform, boots, helmet
+      - id: CMMRE
+      #- id: CMMap # TODO: Make a map
     - name: Armor
-      entries: []
-    #    CMLightArmor
-    #    CMMediumArmor
-    #    CMHeavyArmor
+      choices: {CMArmour: 1}
+      entries:
+      - id: CMArmorM3Light # Light Armour
+      - id: CMArmorM3Medium # Medium Armour
+      - id: CMArmorM3Heavy # Heavy Armour
     - name: Backpack
-      entries: []
-    #    CMBackpack
-    #    CMSatchel
-    #    CMShotgunScabbard
+      choices: {CMBackpack: 1}
+      entries:
+      - id: CMBackpackMarine
+      - id: CMSatchelMarine
+      #- id: CMShotgunScabbard # TODO: Make a Scabbard
     - name: Belt
-      entries: []
-    #    CMM276AmmoLoadRig
-    #    CMM276GeneralPistolHolsterRig
-    #    CMM276KnifeRigFull
-    #    CMM276M39HolsterRig
-    #    CMM276M44HolsterRig
-    #    CMM276M82FHolsterRig
-    #    CMM276ShotgunShellLoadingRig
-    #    CMM276G8AGeneralUtilityPouch
-    #    CMM276M40GrenadeRigEmpty
+      choices: {CMBelt: 1}
+      entries:
+      - id: CMBeltMarine
+    #    CMM276GeneralPistolHolsterRig #TODO: Make this
+      - id: CMBeltKnife
+    #    CMM276M39HolsterRig #TODO: Make this
+    #    CMM276M44HolsterRig #TODO: Make this
+    #    CMM276M82FHolsterRig #TODO: Make this
+    #    CMM276ShotgunShellLoadingRig #TODO: Make this
+      - id: CMBeltUtility
+    #    CMM276M40GrenadeRigEmpty #TODO: Make this
     - name: Pouches
-      entries: []
-    #    CMBayonetSheathFull
-    #    CMFirstAidPouchRefillableInjectors
-    #    CMFirstAidPouchSplintsGauzeOintment
-    #    CMFirstAidPouchPillPackets
-    #    CMFlarePouchFull
-    #    CMSmallDocumentPouch
-    #    CMMagazinePouch
-    #    CMShotgunShellPouch
-    #    CMMediumGeneralPouch
-    #    CMPistolMagazinePouch
-    #    CMPistolPouch
+      choices: {CMPouch: 2}
+      entries:
+      - id: CMPouchBayonet
+      - id: CMPouchFirstAid
+    #    CMFirstAidPouchSplintsGauzeOintment #TODO: Make this
+    #    CMFirstAidPouchPillPackets #TODO: Make this
+    #    CMFlarePouchFull #TODO: Make this
+    #    CMSmallDocumentPouch #TODO: Make this
+      - id: CMPouchMagazine
+      #- id: CMPouchShotgun #TODO: Make this
+      - id: CMPouchGeneral
+      - id: CMPouchMagazinePistol
+      - id: CMPouchPistol
     - name: Mask
-      entries: []
-    #    CMGasMask
-    #    CMHeatAbsorbentCoif
-    #    CMRebreather
+      choices: {CMMask: 1}
+      entries:
+      - id: CMClothingMaskGas
+    #    CMHeatAbsorbentCoif #TODO: Make this
+    #    CMRebreather #TODO: Make this
     - name: Restricted Firearms
       entries: []
     #- id: CMVP78Pistol
@@ -511,9 +517,9 @@
       - id: CMEncryptionKeyIntel
         amount: 5
         points: 5
-      #- id: CMEncryptionKeyJTAC TODO: Add a JTAC Key.
-      #  amount: 5
-      #  points: 5
+      - id: CMEncryptionKeyJTAC
+        amount: 5
+        points: 5
       - id: CMEncryptionKeyRequisition
         amount: 5
         points: 5
@@ -697,9 +703,9 @@
       #- id: CMTacticsRadioEncryptionKey TODO: Add Tactics Key
       #  amount: 3
       #  points: 3
-      #- id: CMJTACRadioEncryptionKey TODO: Add JTAC Key.
-      #  amount: 3
-      #  points: 3
+      - id: CMEncryptionKeyJTAC
+        amount: 3
+        points: 3
       - id: CMEncryptionKeyRequisition
         amount: 3
         points: 3
@@ -918,9 +924,9 @@
       #- id: CMTacticsRadioEncryptionKey TODO: Add Tactics Key.
       #  amount: 5
       #  points: 5
-      #- id: CMJTACRadioEncryptionKey TODO: Add JTAC Key.
-      #  amount: 5
-      #  points: 5
+      - id: CMEncryptionKeyJTAC
+        amount: 5
+        points: 5
       - id: CMEncryptionKeyRequisition
         amount: 5
         points: 5
@@ -1008,9 +1014,9 @@
     #  amount: 6P
     - name: Armors
       entries: []
-    #- id: CMArmorM3B12PatternMarine
+    #- id: CMArmorB12
     #  amount: 24P
-    #- id: CMArmorM4Pattern
+    #- id: CMArmorM4
     #  amount: 30P
     - name: Restricted FIrearms
       entries: []
@@ -1076,9 +1082,9 @@
       #- id: CMTacticsRadioEncryptionKey TODO: Add Tactics Key
       #  amount: 3
       #  points: 3
-      #- id: CMJTACRadioEncryptionKey TODO: Add JTAC Key
-      #  amount: 3
-      #  points: 3
+      - id: CMEncryptionKeyJTAC
+        amount: 3
+        points: 3
       - id: CMEncryptionKeyRequisition
         amount: 3
         points: 3
@@ -1277,9 +1283,9 @@
       #- id: CMTacticsRadioEncryptionKey TODO: Add Tactics Key.
       #  amount: 3
       #  points: 3
-      #- id: CMJTACRadioEncryptionKey TODO: Add JTAC Key.
-      #   amount: 3
-      #   points: 3
+      - id: CMEncryptionKeyJTAC
+        amount: 3
+        points: 3
       - id: CMEncryptionKeyRequisition
         amount: 3
         points: 3
@@ -1492,9 +1498,9 @@
       - id: CMEncryptionKeyIntel
         amount: 5
         points: 5
-      #- id: CMJTACRadioEncryptionKey
-      #  amount: 5
-      #  points: 5
+      - id: CMEncryptionKeyJTAC
+        amount: 5
+        points: 5
       - id: CMEncryptionKeyRequisition
         amount: 5
         points: 5
@@ -1661,9 +1667,9 @@
       #- id: CMTacticsRadioEncryptionKey TODO: Add Tactics Key.
       #  amount: 5
       #  points: 5
-      #- id: CMJTACRadioEncryptionKey TODO: Add JTAC Key.
-      #  amount: 5
-      #  points: 3
+      - id: CMEncryptionKeyJTAC
+        amount: 5
+        points: 3
       - id: CMEncryptionKeyRequisition
         amount: 5
         points: 5

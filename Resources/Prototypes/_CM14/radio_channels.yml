@@ -57,6 +57,13 @@
   frequency: 1486
   color: "#059705"
 
+- type: radioChannel
+  id: MarineJTAC
+  name: chat-radio-marine-jtac
+  keycode: "j" #j in CM13
+  frequency: 1487
+  color: "#ad3b98"
+
 # Squad channels
 - type: radioChannel
   id: MarineAlpha
@@ -108,6 +115,13 @@
   frequency: 1381
   color: "#cf40a6" #todo cm14
   longRange: true
+
+- type: radioChannel # Only used by Corporate Liason to hand out to bodyguards / command.
+  id: WY
+  name: chat-radio-WY
+  keycode: "w" #w in CM13
+  frequency: 1487
+  color: "#fe9b24"
 
 - type: radioChannel
   id: Hivemind
