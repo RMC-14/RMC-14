@@ -6,10 +6,5 @@
   roles:
   - CMCommandingOfficer
   - CMExecutiveOfficer
-  - CMSeniorEnlistedAdvisor
   - CMStaffOfficer
-  - CMChiefMP
-  - CMCMO
-  - CMQuartermaster
-  - CMAuxiliarySupportOfficer
   primary: false

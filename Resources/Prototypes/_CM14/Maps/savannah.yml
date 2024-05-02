@@ -25,8 +25,9 @@
             #Auxiliary
             CMAuxiliarySupportOfficer: [1, 1]
             CMIntelOfficer: [4, 4]
-            CMPilotOfficer: [2, 2]
-            CMDropshipCrewChief: [2, 2]           
+            CMPilotDropship: [1, 1]
+            CMPilotGunship: [1, 1]
+            CMDropshipCrewChief: [2, 2]
             #Engineering
             CMChiefEngineer: [1, 1]
             CMOrdnanceTech: [3, 3]

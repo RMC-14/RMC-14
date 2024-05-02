@@ -5,8 +5,8 @@
   description: cm-job-description-researcher
   playTimeTracker: CMJobResearcher
   requirements:
-  - !type:DepartmentTimeRequirement
-    department: CMMedical
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
     time: 18000 # 5 hours
   startingGear: CMGearResearcher
   icon: "CMJobIconResearcher"
@@ -28,9 +28,18 @@
   id: CMGearResearcher
   equipment:
     jumpsuit: CMJumpsuitResearch
+    back: CMSatchel
+    shoes: CMShoesLaceup
+    id: CMIDCardResearcher
+    # TODO CM14 random chemical synthesis note, syringe,
+
+- type: startingGear
+  id: CMGearResearcherEquipped
+  equipment:
+    jumpsuit: CMJumpsuitResearch
     back: CMSatchelMedical
     gloves: CMHandsLatex
-    shoes: CMShoesDress
+    shoes: CMShoesLaceup
     id: CMIDCardResearcher
     ears: CMHeadsetResearcher
 

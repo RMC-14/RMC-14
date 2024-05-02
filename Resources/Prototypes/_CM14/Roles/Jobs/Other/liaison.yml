@@ -4,7 +4,8 @@
   name: cm-job-name-liaison
   description: cm-job-description-liaison
   requirements:
-  - !type:OverallPlaytimeRequirement
+  - !type:TotalDepartmentsTimeRequirement
+    group: CMDepartmentsHuman
     time: 36000 # 10 hours
   playTimeTracker: CMJobLiaison
   startingGear: CMGearLiaison
@@ -26,7 +27,7 @@
   equipment:
     jumpsuit: CMJumpsuitLiaisonBlack
     back: CMSatchel
-    shoes: CMShoesDress
+    shoes: CMShoesLaceup
     id: CMIDCardLiaison
     ears: CMHeadsetLeader
 
@@ -42,6 +43,6 @@
     - sprite: Markers/jobs.rsi
       state: green
     - state: corp_liaison
-      
+
 - type: playTimeTracker
   id: CMJobLiaison

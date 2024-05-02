@@ -4,6 +4,10 @@
   name: cm-job-name-nurse
   description: cm-job-description-nurse
   playTimeTracker: CMJobNurse
+  requirements:
+  - !type:TotalDepartmentsTimeRequirement
+    group: CMDepartmentsHuman
+    time: 3600 # 1 hour
   startingGear: CMGearNurse
   icon: "CMJobIconNurse"
   joinNotifyCrew: false
@@ -20,6 +24,14 @@
 
 - type: startingGear
   id: CMGearNurse
+  equipment:
+    jumpsuit: CMScrubsNurse
+    back: CMSatchelMedical
+    shoes: ClothingShoesColorWhite
+    id: CMIDCardNurse
+
+- type: startingGear
+  id: CMGearNurseEquipped
   equipment:
     jumpsuit: CMScrubsNurse
     back: CMSatchelMedical

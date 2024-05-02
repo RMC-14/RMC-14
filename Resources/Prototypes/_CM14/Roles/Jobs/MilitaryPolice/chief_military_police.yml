@@ -5,12 +5,12 @@
   description: cm-job-description-chief-mp
   playTimeTracker: CMJobChiefMP
   requirements:
-    - !type:DepartmentTimeRequirement
-      department: CMMilitaryPolice
-      time: 36000 # 10 hours
-    - !type:DepartmentTimeRequirement
-      department: CMCommand
-      time: 18000 # 5 hours
+  - !type:DepartmentTimeRequirement
+    department: CMMilitaryPolice
+    time: 54000 # 15 hours
+  - !type:DepartmentTimeRequirement
+    department: CMCommand
+    time: 18000 # 5 hours
   weight: 5
   startingGear: CMGearChiefMP
   icon: "CMJobIconChiefMP"
@@ -51,6 +51,8 @@
     outerClothing: CMArmorM3WO
     ears: CMHeadsetCMP
     belt: CMBeltSecurityFilled
+    #    pocket1: TODO CM14 tape recorder
+    pocket2: CMPouchGeneralLarge
 
 - type: entity
   parent: CMSpawnPointJobBase

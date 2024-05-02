@@ -135,7 +135,7 @@
   - type: AccessReader
     access: [["CMAccessResearch"]]
 
-# Civilian
+# Correspondent
 - type: entity
   parent: CMAirlock
   id: CMAirlockPressLocked
@@ -144,7 +144,7 @@
   - type: AccessReader
     access: [["CMAccessPress"]]
   - type: PaintableAirlock
-    department: CMCivilians
+    department: CMOther
 
 - type: entity
   parent: CMAirlockGlass
@@ -154,7 +154,7 @@
   - type: AccessReader
     access: [["CMAccessPress"]]
   - type: PaintableAirlock
-    department: CMCivilians
+    department: CMOther
 
 - type: entity
   parent: CMAirlockMaint
@@ -164,4 +164,4 @@
   - type: AccessReader
     access: [["CMAccessPress"]]
   - type: PaintableAirlock
-    department: CMCivilians
+    department: CMOther
