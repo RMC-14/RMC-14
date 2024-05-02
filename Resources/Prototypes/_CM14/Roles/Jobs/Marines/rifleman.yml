@@ -20,6 +20,12 @@
 - type: startingGear
   id: CMGearRifleman
   equipment:
+    back: CMSatchelMarine
+    id: CMDogtagRifleman
+
+- type: startingGear
+  id: CMGearRiflemanEquipped
+  equipment:
     jumpsuit: JumpsuitMarine
     back: CMSatchelMarine
     shoes: CMBootsBlackFilled

@@ -24,7 +24,7 @@
   - CMAccessCrewman
 
 - type: accessGroup
-  id: PilotOfficer
+  id: Pilot
   tags:
   - CMAccessCommand
   - CMAccessDropship

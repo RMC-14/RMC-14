@@ -5,12 +5,9 @@
   description: cm-job-description-squad-leader
   playTimeTracker: CMJobSquadLeader
   requirements:
-    - !type:DepartmentTimeRequirement
-      department: CMMarine
-      time: 36000 #10 hrs
-    - !type:RoleTimeRequirement
-      role: CMJobFireteamLeader
-      time: 10800 #3 hrs
+  - !type:DepartmentTimeRequirement
+    department: CMMarine
+    time: 36000 # 10 hours
   startingGear: CMGearSquadLeader
   icon: "CMJobIconSquadLeader"
   joinNotifyCrew: false
@@ -36,6 +33,12 @@
 
 - type: startingGear
   id: CMGearSquadLeader
+  equipment:
+    back: CMSatchelMarine
+    id: CMDogtagSquadLeader
+
+- type: startingGear
+  id: CMGearSquadLeaderEquipped
   equipment:
     jumpsuit: CMJumpsuitMarineRTO
     back: CMSatchelMarine

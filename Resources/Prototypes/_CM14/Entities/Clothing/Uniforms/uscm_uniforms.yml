@@ -393,7 +393,7 @@
 - type: entity
   parent: JumpsuitMarine
   id: CMJumpsuitIO
-  name: intelligence officer uniform
+  name: marine intelligence officer uniform
   description: Standard-issue intelligence officer's uniform.
   components:
     - type: Sprite

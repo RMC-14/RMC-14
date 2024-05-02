@@ -5,9 +5,9 @@
   description: cm-job-description-quartermaster
   playTimeTracker: CMJobQuartermaster
   requirements:
-    - !type:DepartmentTimeRequirement
-      department: CMRequisitions
-      time: 36000 # 10 hours
+  - !type:DepartmentTimeRequirement
+    department: CMRequisitions
+    time: 36000 # 10 hours
   weight: 5
   startingGear: CMGearQuartermaster
   icon: "CMJobIconQuartermaster"
@@ -35,12 +35,14 @@
   id: CMGearQuartermaster
   equipment:
     jumpsuit: CMJumpsuitQM
-    back: CMSatchelEngineer
-    shoes: CMBootsBrown
+    back: CMSatchelMarineTech
+    shoes: CMBootsBlack
     head: CMHeadCapCargo
-    gloves: CMHandsBrown
+    gloves: CMHandsInsulated
     id: CMIDCardQuartermaster
     ears: CMHeadsetQM
+    pocket1: CMPouchGeneralMedium
+    pocket2: Flash # TODO CM14 cm flash
 
 - type: entity
   parent: CMSpawnPointJobBase

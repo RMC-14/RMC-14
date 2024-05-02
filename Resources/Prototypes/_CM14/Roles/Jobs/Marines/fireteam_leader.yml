@@ -5,9 +5,9 @@
   description: cm-job-description-fireteam-leader
   playTimeTracker: CMJobFireteamLeader
   requirements:
-    - !type:DepartmentTimeRequirement
-      department: CMMarine
-      time: 28800 #8 hrs
+  - !type:DepartmentTimeRequirement
+    department: CMMarine
+    time: 28800 # 8 hours
   startingGear: CMGearFireteamLeader
   icon: "CMJobIconFireteamLeader"
   joinNotifyCrew: false
@@ -25,6 +25,12 @@
 
 - type: startingGear
   id: CMGearFireteamLeader
+  equipment:
+    back: CMSatchelMarine
+    id: CMDogtagFireteamLeader
+
+- type: startingGear
+  id: CMGearFireteamLeaderEquipped
   equipment:
     jumpsuit: CMJumpsuitMarineRTO
     back: CMSatchelMarine

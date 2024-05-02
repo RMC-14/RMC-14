@@ -288,6 +288,6 @@
 
 - type: speechVerb
   id: Xeno
-  name: Xeno
+  name: chat-speech-verb-name-default
   speechVerbStrings:
   - hisses

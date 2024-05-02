@@ -5,12 +5,12 @@
   description: cm-job-description-hospital-corpsman
   playTimeTracker: CMJobHospitalCorpsman
   requirements:
-    - !type:DepartmentTimeRequirement
-      department: CMMarine
-      time: 3600 #1 hrs
-    - !type:DepartmentTimeRequirement
-      department: CMMedical
-      time: 3600 #1 hrs
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 3600 # 1 hours
+  - !type:DepartmentTimeRequirement
+    department: CMMarine
+    time: 3600 # 1 hour
   startingGear: CMGearHospitalCorpsman
   icon: "CMJobIconHospitalCorpsman"
   joinNotifyCrew: false
@@ -28,6 +28,12 @@
 
 - type: startingGear
   id: CMGearHospitalCorpsman
+  equipment:
+    back: CMSatchelMarineMedic
+    id: CMDogtagHospitalCorpsman
+
+- type: startingGear
+  id: CMGearHospitalCorpsmanEquipped
   equipment:
     jumpsuit: CMJumpsuitMarineMedic
     back: CMSatchelMarineMedic

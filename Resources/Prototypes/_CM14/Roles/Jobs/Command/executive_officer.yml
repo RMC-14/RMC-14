@@ -5,12 +5,9 @@
   description: cm-job-description-executive-officer
   playTimeTracker: CMJobExecutiveOfficer
   requirements:
-  - !type:RoleTimeRequirement
-    role: CMJobStaffOfficer
-    time: 18000 # 5 hours
   - !type:DepartmentTimeRequirement
-    department: CMMilitaryPolice
-    time: 10800 # 3 hours
+    department: CMCommand
+    time: 18000 # 5 hours
   weight: 5
   startingGear: CMGearStaffOfficer
   icon: "CMJobIconExecutiveOfficer"
@@ -46,7 +43,7 @@
   equipment:
     jumpsuit: CMJumpsuitBO
     back: CMSatchel
-    shoes: CMShoesDress
+    shoes: CMShoesLaceup
     head: CMHeadCap
     outerClothing: CMCoatOfficer
     id: CMIDCardExecutiveOfficer
@@ -64,6 +61,6 @@
     - sprite: Markers/jobs.rsi
       state: green
     - state: executive_officer
-      
+
 - type: playTimeTracker
   id: CMJobExecutiveOfficer

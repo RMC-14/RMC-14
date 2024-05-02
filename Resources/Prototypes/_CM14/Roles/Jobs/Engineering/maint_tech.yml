@@ -4,10 +4,6 @@
   name: cm-job-name-maint-tech
   description: cm-job-description-maint-tech
   playTimeTracker: CMJobMaintTech
-  requirements:
-  - !type:DepartmentTimeRequirement
-    department: CMMarine
-    time: 3600 # 1 hours
   startingGear: CMGearMaintTech
   icon: "CMJobIconMaintTech"
   joinNotifyCrew: false
@@ -28,12 +24,13 @@
   id: CMGearMaintTech
   equipment:
     jumpsuit: CMJumpsuitMaintTech
-    back: CMSatchelEngineer
-    shoes: CMBootsBrown
+    back: CMSatchelMarineTech
+    shoes: CMBootsBlack
     gloves: CMHandsInsulated
     id: CMIDCardMaintTech
     ears: CMHeadsetEngineer
-    belt: CMBeltUtilityFilled
+    #    belt: TODO CM14 M276 Pattern General Pistol Holster Rig Filled
+    pocket2: CMPouchGeneralMedium
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -25998,7 +25998,7 @@ entities:
     - type: Transform
       pos: 165.5,10.5
       parent: 2
-- proto: CMSpawnPointPilot
+- proto: CMSpawnPointPilotDropship
   entities:
   - uid: 3914
     components:

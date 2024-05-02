@@ -179,7 +179,7 @@
   parent: CMHeadset
   id: CMHeadsetPilot
   name: marine pilot radio headset
-  description: Used by Pilot Officers.
+  description: Used by Dropship and Gunship Pilots.
   components:
   - type: ContainerFill
     containers:

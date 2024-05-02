@@ -33,13 +33,9 @@
   id: CMGearIntelOfficer
   equipment:
     jumpsuit: CMJumpsuitIO
-    outerClothing: CMArmorM4
-    back: CMSatchelMarineIntel
-    gloves: CMHandsBlack
+    back: CMSatchelMarine
     shoes: CMBootsBlackFilled
-    head: CMArmorHelmetM12
     id: CMIDCardIntelOfficer
-    ears: CMHeadsetIntel
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -53,6 +49,6 @@
     - sprite: Markers/jobs.rsi
       state: green
     - state: intel_officer
-      
+
 - type: playTimeTracker
   id: CMJobIntelOfficer

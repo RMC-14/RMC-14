@@ -50,7 +50,7 @@
 - type: entity
   parent: CMLockerBase
   id: CMLockerPilot
-  name: pilot officer's locker
+  name: pilot's locker
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Lockers/pilot.rsi

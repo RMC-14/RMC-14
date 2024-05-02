@@ -26,6 +26,14 @@ cm-department-Medical-description = Treat all patients that come into medbay. Tr
 department-CMAuxiliarySupport = Auxiliary Support
 cm-department-AuxiliarySupport-description = The Auxiliary support personnel are tasked with supporting the marines either by providing support through firepower or other means.
 
-# non uscm
-department-CMCivilians = Civilian
-cm-department-Civilians-description = Jobs not a part of US Colonial Marine forces.
+# other
+department-CMOther = Other
+cm-department-Other-Description = ""
+
+# survivor
+department-CMSurvivor = Survivor
+cm-department-Survivor-description = Survive whenever possible by yourself or with other survivors.
+
+# human
+department-CMHuman = Human
+cm-department-Human-description = All human roles.
