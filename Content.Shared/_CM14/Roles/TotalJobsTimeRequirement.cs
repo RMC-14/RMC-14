@@ -12,7 +12,7 @@ public sealed partial class TotalJobsTimeRequirement : JobRequirement
     /// Which roles to add up to the required amount of time.
     /// </summary>
     [DataField(required: true)]
-    public EntProtoId<JobGroupComponent> Group;
+    public EntProtoId Group;
 
     /// <summary>
     /// How long (in seconds) this requirement is.
@@ -35,7 +35,12 @@ public sealed partial class TotalJobsTimeRequirement : JobRequirement
         reason = null;
         var playtime = TimeSpan.Zero;
         var trackers = new HashSet<string>();
-        var comp = Group.Get(prototypes);
+        if (!prototypes.Index(Group).TryGetComponent(out JobGroupComponent? comp))
+        {
+            var sawmill = Logger.GetSawmill("job.requirements");
+            sawmill.Error($"No {nameof(DepartmentGroupComponent)} found on entity {Group}");
+            return true;
+        }
 
         // Check all jobs' playtime
         foreach (var jobId in comp.Jobs)
