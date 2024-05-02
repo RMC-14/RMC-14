@@ -11,8 +11,8 @@
     drawdepth: Mobs
     noRot: true
     layers:
-    - sprite: _CM14/Structures/Machines/hypersleep.rsi
-      state: open
+    - state: open
+      map: [ "enum.HyperSleepChamberLayers.Base" ]
   - type: InteractionOutline
   - type: Fixtures
     fixtures:
