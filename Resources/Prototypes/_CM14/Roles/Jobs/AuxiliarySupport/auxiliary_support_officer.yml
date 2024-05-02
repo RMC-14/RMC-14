@@ -8,6 +8,15 @@
   - !type:DepartmentTimeRequirement
     department: CMMarine
     time: 18000 # 5 hours
+  - !type:DepartmentTimeRequirement
+    department: CMRequisitions
+    time: 18000 # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsEngineering
+    time: 18000 # 5 hours
+  - !type:DepartmentTimeRequirement
+    department: CMAuxiliarySupport
+    time: 18000 # 5 hours
   weight: 5
   startingGear: CMGearASO
   icon: "CMJobIconASO"
@@ -43,9 +52,11 @@
     jumpsuit: CMJumpsuitBO
     outerClothing: CMCoatASO
     back: CMSatchel
-    shoes: CMBootsBrown
+    shoes: CMBootsBlack
     id: CMIDCardASO
     ears: CMHeadsetLeader
+    pocket1: CMPouchGeneralLarge
+    pocket2: CMPouchGeneralLarge
 
 - type: entity
   parent: CMSpawnPointJobBase

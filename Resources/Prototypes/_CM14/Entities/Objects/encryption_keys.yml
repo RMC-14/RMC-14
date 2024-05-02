@@ -355,11 +355,11 @@
   - type: Sprite
     state: sec_key
 
-# Pilot Officer
+# Dropship and gunship pilots
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeyPilot
-  name: pilot officer's encryption Key
+  name: pilot's encryption Key
   components:
   - type: EncryptionKey
     channels:

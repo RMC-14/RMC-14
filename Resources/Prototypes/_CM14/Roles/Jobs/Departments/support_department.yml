@@ -5,6 +5,8 @@
   color: "#C38312"
   roles:
   - CMAuxiliarySupportOfficer
-  - CMPilotOfficer
+  - CMPilotDropship
+  - CMPilotGunship
   - CMDropshipCrewChief
   - CMIntelOfficer
+  - CMSeniorEnlistedAdvisor

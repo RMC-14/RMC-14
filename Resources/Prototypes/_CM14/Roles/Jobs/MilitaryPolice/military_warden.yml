@@ -5,9 +5,9 @@
   description: cm-job-description-militarywarden
   playTimeTracker: CMJobMilitaryWarden
   requirements:
-    - !type:DepartmentTimeRequirement
-      department: CMMilitaryPolice
-      time: 18000 # 5 hours
+  - !type:DepartmentTimeRequirement
+    department: CMMilitaryPolice
+    time: 36000 # 10 hours
   weight: 5
   startingGear: CMGearMilitaryWarden
   icon: "CMJobIconMilitaryWarden"
@@ -44,6 +44,8 @@
     outerClothing: CMArmorM3Warden
     ears: CMHeadsetCMP
     belt: CMBeltSecurityFilled
+    #    pocket1: TODO CM14 tape recorder
+    pocket2: CMPouchGeneralLarge
 
 - type: entity
   parent: CMSpawnPointJobBase

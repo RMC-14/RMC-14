@@ -4,6 +4,10 @@
   name: cm-job-name-correspondent
   description: cm-job-description-correspondent
   playTimeTracker: CMJobCorrespondent
+  requirements:
+  - !type:TotalDepartmentsTimeRequirement
+    group: CMDepartmentsHuman
+    time: 36000 # 10 hours
   startingGear: CMGearCorrespondent
   icon: "CMJobIconCorrespondent"
   joinNotifyCrew: false
@@ -22,10 +26,11 @@
   equipment:
     jumpsuit: CMJumpsuitCorrespondent
     outerClothing: CMCoatCorrespondent
-    back: CMSatchel
-    shoes: CMBootsBrown
+    shoes: CMShoesLaceup
     id: CMIDCardCorrespondent
     ears: CMHeadsetReporter
+    #    belt: CMCamera TODO CM14
+    pocket1: CMPouchGeneralLarge
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -16138,7 +16138,7 @@ entities:
       pos: 52.5,3.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -15029.967
+      secondsUntilStateChange: -15071.155
       state: Opening
   - uid: 2756
     components:
@@ -16203,7 +16203,7 @@ entities:
       pos: 123.5,18.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -63650.34
+      secondsUntilStateChange: -63691.527
       state: Opening
   - uid: 2717
     components:
@@ -16213,7 +16213,7 @@ entities:
       pos: 123.5,-17.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -71165.47
+      secondsUntilStateChange: -71206.66
       state: Opening
   - uid: 2741
     components:
@@ -16565,7 +16565,7 @@ entities:
       pos: 121.5,-8.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -70806.74
+      secondsUntilStateChange: -70847.93
       state: Opening
 - proto: CMAirlockMaint
   entities:
@@ -25998,17 +25998,19 @@ entities:
     - type: Transform
       pos: 165.5,10.5
       parent: 2
-- proto: CMSpawnPointPilot
+- proto: CMSpawnPointPilotDropship
   entities:
-  - uid: 3914
-    components:
-    - type: Transform
-      pos: 53.5,-12.5
-      parent: 2
   - uid: 3915
     components:
     - type: Transform
       pos: 51.5,-12.5
+      parent: 2
+- proto: CMSpawnPointPilotGunship
+  entities:
+  - uid: 3044
+    components:
+    - type: Transform
+      pos: 53.5,-12.5
       parent: 2
 - proto: CMSpawnPointQuartermaster
   entities:

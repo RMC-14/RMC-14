@@ -5,15 +5,15 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivor
   requirements:
-  - !type:RoleTimeRequirement
-    role: CMJobRifleman
-    time: 18000 #5 hours
-  - !type:RoleTimeRequirement
-    role: CMJobHospitalCorpsman
-    time: 18000 #5 hours
-  - !type:RoleTimeRequirement
-    role: CMJobCombatTech
-    time: 18000 #5 hours
+  - !type:DepartmentTimeRequirement
+    department: CMMarine
+    time: 18000 # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsEngineering
+    time: 18000 # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 18000 # 5 hours
   startingGear: CMGearSurvivor
   icon: "CMJobIconSurvivor"
   joinNotifyCrew: false

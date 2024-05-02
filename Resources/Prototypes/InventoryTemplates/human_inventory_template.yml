@@ -99,7 +99,7 @@
       stripTime: 6
       uiWindowPos: 2,1
       strippingWindowPos: 2,4
-      dependsOn: jumpsuit
+#      dependsOn: jumpsuit
       displayName: ID
     - name: belt
       slotTexture: belt
@@ -109,6 +109,7 @@
       stripTime: 6
       uiWindowPos: 3,1
       strippingWindowPos: 1,5
+      dependsOn: jumpsuit
       displayName: Belt
     - name: back
       slotTexture: back

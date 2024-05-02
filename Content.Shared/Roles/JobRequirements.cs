@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._CM14.Roles;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Roles.Jobs;
 using JetBrains.Annotations;
@@ -105,6 +106,10 @@ namespace Content.Shared.Roles
 
             switch (requirement)
             {
+                case TotalJobsTimeRequirement totalJobs:
+                    return totalJobs.TryRequirementsMet(requirement, playTimes, out reason, entManager, prototypes);
+                case TotalDepartmentsTimeRequirement totalDepts:
+                    return totalDepts.TryRequirementsMet(requirement, playTimes, out reason, entManager, prototypes);
                 case DepartmentTimeRequirement deptRequirement:
                     var playtime = TimeSpan.Zero;
 
