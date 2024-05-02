@@ -3,6 +3,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
+using Content.Shared.Inventory;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -23,6 +24,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
     [Dependency] private readonly BlindableSystem _blindable = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -208,6 +210,25 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
     {
         if (!CanHugPopup(hugger, victim, hugger, popup))
             return false;
+
+        if (_inventory.TryGetContainerSlotEnumerator(victim, out var slots, SlotFlags.MASK))
+        {
+            var any = false;
+            while (slots.MoveNext(out var slot))
+            {
+                if (slot.ContainedEntity != null)
+                {
+                    _inventory.TryUnequip(victim, victim, slot.ID, force: true);
+                    any = true;
+                }
+            }
+
+            if (any && _net.IsServer)
+            {
+                var name = Identity.Name(victim, EntityManager);
+                _popup.PopupEntity($"The facehugger smashes against {name}'s mask and rips it off!", victim);
+            }
+        }
 
         var victimComp = EnsureComp<VictimHuggedComponent>(victim);
         victimComp.RecoverAt = _timing.CurTime + hugger.Comp.ParalyzeTime;
