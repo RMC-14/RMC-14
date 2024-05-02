@@ -26,13 +26,14 @@
 - type: startingGear
   id: CMGearFireteamLeader
   equipment:
+    jumpsuit: JumpsuitMarine # TODO CM14 all squad roles should spawn with no jumpsuit but still have clothes on
     back: CMSatchelMarine
     id: CMDogtagFireteamLeader
 
 - type: startingGear
   id: CMGearFireteamLeaderEquipped
   equipment:
-    jumpsuit: CMJumpsuitMarineRTO
+    jumpsuit: JumpsuitMarine
     back: CMSatchelMarine
     shoes: CMBootsBlackFilled
     head: CMArmorHelmetM12
