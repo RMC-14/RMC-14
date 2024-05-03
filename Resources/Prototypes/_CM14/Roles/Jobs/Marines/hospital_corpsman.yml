@@ -9,7 +9,7 @@
     group: CMJobsMedical
     time: 3600 # 1 hours
   - !type:DepartmentTimeRequirement
-    department: CMMarine
+    department: CMSquad
     time: 3600 # 1 hour
   startingGear: CMGearHospitalCorpsman
   icon: "CMJobIconHospitalCorpsman"
@@ -39,7 +39,7 @@
     jumpsuit: CMJumpsuitMarineMedic
     back: CMSatchelMarineMedic
     shoes: CMBootsBlackFilled
-    gloves: CMHandsBlack
+    gloves: CMHandsBlackMarine
     eyes: ClothingEyesHudMedical
     head: CMArmorHelmetM10Medic
     outerClothing: CMArmorM3Medium

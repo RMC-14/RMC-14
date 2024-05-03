@@ -6,7 +6,7 @@
   playTimeTracker: CMJobMilitaryPolice
   requirements:
   - !type:DepartmentTimeRequirement
-    department: CMMarine
+    department: CMSquad
     time: 36000 # 10 hours
   weight: 5
   startingGear: CMGearMilitaryPolice
@@ -33,7 +33,7 @@
     shoes: CMBootsBlackFilled
     head: CMHeadBeretRed
     eyes: ClothingEyesGlassesSecurity # todo cm14 replace with cm ones
-    gloves: CMHandsBlack
+    gloves: CMHandsBlackMarine
     id: CMIDCardMilitaryPolice
     outerClothing: CMArmorM2MP
     ears: CMHeadsetMPO

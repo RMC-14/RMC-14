@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Shared._CM14.Marines.Squads;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
@@ -136,9 +137,28 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
     }
 
-    private void Vend(EntityUid vendor, EntityUid player, EntProtoId entity, Vector2 offset)
+    private void Vend(EntityUid vendor, EntityUid player, EntProtoId toVend, Vector2 offset)
     {
-        var spawn = SpawnNextToOrDrop(entity, vendor);
+        if (_prototypes.Index(toVend).TryGetComponent(out CMVendorMapToSquadComponent? mapTo))
+        {
+            if (TryComp(player, out SquadMemberComponent? member) &&
+                member.Squad is { } squad &&
+                CompOrNull<MetaDataComponent>(squad)?.EntityPrototype is { } squadPrototype &&
+                mapTo.Map.TryGetValue(squadPrototype.ID, out var mapped))
+            {
+                toVend = mapped;
+            }
+            else if (mapTo.Default is { } defaultVend)
+            {
+                toVend = defaultVend;
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        var spawn = SpawnNextToOrDrop(toVend, vendor);
         if (!Grab(player, spawn) && TryComp(spawn, out TransformComponent? xform))
             _transform.SetLocalPosition(spawn, xform.LocalPosition + offset, xform);
     }

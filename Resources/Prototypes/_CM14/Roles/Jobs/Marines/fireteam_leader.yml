@@ -6,7 +6,7 @@
   playTimeTracker: CMJobFireteamLeader
   requirements:
   - !type:DepartmentTimeRequirement
-    department: CMMarine
+    department: CMSquad
     time: 28800 # 8 hours
   startingGear: CMGearFireteamLeader
   icon: "CMJobIconFireteamLeader"
@@ -38,7 +38,7 @@
     shoes: CMBootsBlackFilled
     head: CMArmorHelmetM12
     outerClothing: CMArmorM4
-    gloves: CMHandsBlack
+    gloves: CMHandsBlackMarine
     id: CMDogtagFireteamLeader
     ears: CMHeadsetAlphaTeamLeader
 

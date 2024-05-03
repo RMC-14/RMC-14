@@ -350,25 +350,25 @@
   - type: CMAutomatedVendor
     sections:
     - name: Standard Equipment
-      choices: {CMStandard: 2}
+      choices: { CMStandard: 2 }
       entries:
-      - id: JumpsuitMarine # TODO cm14 this should be uniform, boots, helmet
+      - id: CMVendorBundleRiflemanApparel
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
     - name: Armor
-      choices: {CMArmour: 1}
+      choices: { CMArmour: 1 }
       entries:
       - id: CMArmorM3Light # Light Armour
       - id: CMArmorM3Medium # Medium Armour
       - id: CMArmorM3Heavy # Heavy Armour
     - name: Backpack
-      choices: {CMBackpack: 1}
+      choices: { CMBackpack: 1 }
       entries:
       - id: CMBackpackMarine
       - id: CMSatchelMarine
       #- id: CMShotgunScabbard # TODO: Make a Scabbard
     - name: Belt
-      choices: {CMBelt: 1}
+      choices: { CMBelt: 1 }
       entries:
       - id: CMBeltMarine
     #    CMM276GeneralPistolHolsterRig #TODO: Make this
@@ -380,7 +380,7 @@
       - id: CMBeltUtility
     #    CMM276M40GrenadeRigEmpty #TODO: Make this
     - name: Pouches
-      choices: {CMPouch: 2}
+      choices: { CMPouch: 2 }
       entries:
       - id: CMPouchBayonet
       - id: CMPouchFirstAid
@@ -394,7 +394,7 @@
       - id: CMPouchMagazinePistol
       - id: CMPouchPistol
     - name: Mask
-      choices: {CMMask: 1}
+      choices: { CMMask: 1 }
       entries:
       - id: CMClothingMaskGas
     #    CMHeatAbsorbentCoif #TODO: Make this
