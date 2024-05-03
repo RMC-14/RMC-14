@@ -725,5 +725,12 @@
   id: 94
   time: '2024-05-03T01:08:07.363042+00:00'
   url: null
+- author: DrSmugleaf
+  changes:
+  - message: The xeno Queen is now able to hijack the dropship.
+    type: Add
+  id: 95
+  time: '2024-05-03T08:02:39.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2058
 Name: CM
 Order: -1
