@@ -95,3 +95,4 @@
         density: 1000
         layer:
         - BulletImpassable
+  - type: DropshipHijacker
