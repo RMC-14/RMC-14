@@ -6,7 +6,7 @@
   playTimeTracker: CMJobSeniorEnlistedAdvisor
   requirements:
   - !type:DepartmentTimeRequirement
-    department: CMMarine
+    department: CMSquad
     time: 54000 # 15 hours
   - !type:TotalJobsTimeRequirement
     group: CMJobsEngineering

@@ -14,7 +14,7 @@
   supervisors: cm-job-supervisors-cmo
   canBeAntag: true
   accessGroups:
-  - CMMedical
+  - CMMedbay
   special:
   - !type:AddComponentSpecial
     components:

@@ -124,7 +124,7 @@
     mode: NoSprite
   - type: PaintableAirlock
     group: Standard
-    department: CMMarine
+    department: CMSquad
   - type: AccessReader
   - type: StaticPrice
     price: 150

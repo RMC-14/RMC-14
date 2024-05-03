@@ -39,7 +39,7 @@
     shoes: CMBootsBlackFilled
     head: CMHeadCapWarden
     eyes: ClothingEyesGlassesSecurity # todo cm14 replace with cm ones
-    gloves: CMHandsBlack
+    gloves: CMHandsBlackMarine
     id: CMIDCardMilitaryWarden
     outerClothing: CMArmorM3Warden
     ears: CMHeadsetCMP

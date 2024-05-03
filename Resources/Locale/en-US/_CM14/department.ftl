@@ -11,7 +11,7 @@ department-CMRequisitions = Requisitions
 cm-department-Requisitions-description = Dispense supplies to the marines.
 
 # marines
-department-CMMarine = Marine [ALL]
+department-CMSquad = Marines
 cm-department-Marine-description = They form the main fighting body of the Almayer and are sent planetside to fight all kinds of dangers throughout the Neroid Sector.
 
 # engineering
@@ -19,11 +19,11 @@ department-CMEngineering = Engineering
 cm-department-Engineering-description = Your job is to maintain the ship's engine and keep everything running.
 
 # medical
-department-CMMedical = Medical
+department-CMMedbay = Medbay
 cm-department-Medical-description = Treat all patients that come into medbay. Transfer injured marines from the hanger to medbay.
 
 # auxiliary support
-department-CMAuxiliarySupport = Auxiliary Support
+department-CMAuxiliarySupport = Auxiliary Combat Support
 cm-department-AuxiliarySupport-description = The Auxiliary support personnel are tasked with supporting the marines either by providing support through firepower or other means.
 
 # other

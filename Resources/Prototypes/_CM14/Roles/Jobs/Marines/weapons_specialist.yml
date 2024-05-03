@@ -6,7 +6,7 @@
   playTimeTracker: CMJobWeaponsSpecialist
   requirements:
   - !type:DepartmentTimeRequirement
-    department: CMMarine
+    department: CMSquad
     time: 18000 # 5 hours
   startingGear: CMGearWeaponsSpecialist
   icon: "CMJobIconWeaponsSpecialist"
@@ -42,7 +42,7 @@
     shoes: CMBootsBlackFilled
     head: ArmorHelmetM10
     outerClothing: CMArmorM3Medium
-    gloves: CMHandsBlack
+    gloves: CMHandsBlackMarine
     id: CMDogtagWeaponsSpecialist
     ears: CMHeadsetAlpha
 

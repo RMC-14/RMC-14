@@ -113,7 +113,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Doors/Airlocks/Double/medical_glass.rsi
   - type: PaintableAirlock
-    department: CMMedical
+    department: CMMedbay
 
 - type: entity
   parent: CMDoubleDoorBase
@@ -124,7 +124,7 @@
     sprite: _CM14/Structures/Doors/Airlocks/Double/medical_solid.rsi
   - type: Occluder
   - type: PaintableAirlock
-    department: CMMedical
+    department: CMMedbay
 
 - type: entity
   parent: CMDoubleDoorBase
