@@ -6,7 +6,7 @@
   playTimeTracker: CMJobSquadLeader
   requirements:
   - !type:DepartmentTimeRequirement
-    department: CMMarine
+    department: CMSquad
     time: 36000 # 10 hours
   startingGear: CMGearSquadLeader
   icon: "CMJobIconSquadLeader"
@@ -46,7 +46,7 @@
     shoes: CMBootsBlackFilled
     head: CMArmorHelmetM11
     outerClothing: CMArmorM3Medium
-    gloves: CMHandsBlack
+    gloves: CMHandsBlackMarine
     id: CMDogtagSquadLeader
     ears: CMHeadsetAlphaLeader
 

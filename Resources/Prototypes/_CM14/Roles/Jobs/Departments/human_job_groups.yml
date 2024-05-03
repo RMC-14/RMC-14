@@ -10,8 +10,8 @@
     - CMAuxiliarySupport
     - CMCommand
     - CMEngineering
-    - CMMarine
-    - CMMedical
+    - CMSquad
+    - CMMedbay
     - CMMilitaryPolice
     - CMOther
     - CMRequisitions

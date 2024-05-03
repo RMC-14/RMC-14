@@ -117,7 +117,7 @@
   - type: AccessReader
     access: [["CMAccessMedical"]]
   - type: PaintableAirlock
-    department: CMMedical
+    department: CMMedbay
 
 - type: entity
   parent: CMAirlockMedical

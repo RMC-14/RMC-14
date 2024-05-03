@@ -46,7 +46,7 @@
     shoes: CMBootsBlackFilled
     head: CMHeadBeretWO
     eyes: ClothingEyesGlassesSecurity # todo cm14 replace with cm ones
-    gloves: CMHandsBlack
+    gloves: CMHandsBlackMarine
     id: CMIDCardChiefMP
     outerClothing: CMArmorM3WO
     ears: CMHeadsetCMP
