@@ -26,6 +26,8 @@
     interfaces:
       enum.DropshipNavigationUiKey.Key:
         type: DropshipNavigationBui
+      enum.DropshipHijackerUiKey.Key:
+        type: DropshipHijackerBui
 
 # TODO CM14 alamo and normandy specific names for each
 - type: entity
@@ -57,3 +59,15 @@
     state: green
   - type: FTLBeacon
   - type: DropshipDestination
+
+- type: entity
+  parent: MarkerBase
+  id: CMDropshipHijackDestination
+  name: hijack destination
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    state: green
+  - type: FTLBeacon
+  - type: DropshipHijackDestination

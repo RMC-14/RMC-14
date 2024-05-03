@@ -8,4 +8,7 @@ public sealed partial class DropshipComponent : Component
 {
     [DataField, AutoNetworkedField]
     public EntityUid? Destination;
+
+    [DataField, AutoNetworkedField]
+    public bool Crashed;
 }
