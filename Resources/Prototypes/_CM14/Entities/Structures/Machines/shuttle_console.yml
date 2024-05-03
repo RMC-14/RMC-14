@@ -52,6 +52,7 @@
   parent: MarkerBase
   id: CMDropshipDestination
   name: dropship destination
+  description: Defines a valid location for the dropships to FTL to when piloted.
   placement:
     mode: SnapgridCenter
   components:
@@ -64,6 +65,7 @@
   parent: MarkerBase
   id: CMDropshipHijackDestination
   name: hijack destination
+  description: Defines a valid location for the dropships to FTL to when hijacked.
   placement:
     mode: SnapgridCenter
   components:
