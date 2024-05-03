@@ -718,5 +718,12 @@
   id: 93
   time: '2024-05-02T05:25:17.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2050
+- author: DrSmugleaf
+  changes:
+  - message: Replaced the pilot officer with the dropship and gunship pilots.
+    type: Add
+  id: 94
+  time: '2024-05-03T01:08:07.363042+00:00'
+  url: null
 Name: CM
 Order: -1
