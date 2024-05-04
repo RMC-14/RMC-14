@@ -3,7 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   id: CMXenoQueen # TODO CM14 big loud steps
-  name: Queen # TODO CM14 use consoles
+  name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
   components:
   - type: Sprite

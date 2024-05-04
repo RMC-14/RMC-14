@@ -29,6 +29,7 @@
     #    - ActionXenoEmpower
     #    - ActionXenoScissorCut
     tier: 3
+    hudOffset: 0,0.1
   - type: XenoDevour
   - type: XenoPlasma
     plasma: 300

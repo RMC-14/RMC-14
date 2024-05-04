@@ -33,6 +33,7 @@
     - ActionXenoSecreteStructure
     - ActionXenoTransferPlasma
     - ActionXenoEvolve300
+    hudOffset: 0,0.15
     tier: 1
   - type: XenoAcid
   - type: XenoConstruction

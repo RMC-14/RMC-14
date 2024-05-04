@@ -32,6 +32,7 @@
     #    - ActionXenoLongSight
     #    - ActionXenoAcidShroud
     tier: 3
+    hudOffset: 0,0.35
   - type: XenoPlasma
     plasma: 400
     maxPlasma: 400

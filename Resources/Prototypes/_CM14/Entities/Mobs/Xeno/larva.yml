@@ -23,6 +23,7 @@
     - ActionXenoWatch
     - ActionXenoHide
     - ActionXenoEvolve60
+    hudOffset: -0.1,0.125
     tier: 0
   - type: XenoPlasma
     maxPlasma: 10

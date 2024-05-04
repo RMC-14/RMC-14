@@ -30,6 +30,7 @@
     - ActionXenoParalyzingSlash
     - ActionXenoEvolve300
     tier: 1
+    hudOffset: 0,0.157
   - type: XenoDevour
   - type: XenoPlasma
     plasma: 400

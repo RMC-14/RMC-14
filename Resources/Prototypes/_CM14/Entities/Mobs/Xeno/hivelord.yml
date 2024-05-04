@@ -34,6 +34,7 @@
     - ActionXenoTransferPlasma
     - ActionXenoResinWalker
     tier: 2
+    hudOffset: 0,0.35
   - type: XenoAcid
   - type: XenoConstruction
     buildDelay: 1
