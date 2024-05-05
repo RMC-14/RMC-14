@@ -26,7 +26,6 @@ public sealed class XenoPlasmaSystem : EntitySystem
 
         SubscribeLocalEvent<XenoPlasmaComponent, MapInitEvent>(OnXenoPlasmaMapInit);
         SubscribeLocalEvent<XenoPlasmaComponent, ComponentRemove>(OnXenoPlasmaRemove);
-        SubscribeLocalEvent<XenoPlasmaComponent, XenoRegenEvent>(OnXenoRegen);
         SubscribeLocalEvent<XenoPlasmaComponent, RejuvenateEvent>(OnXenoRejuvenate);
         SubscribeLocalEvent<XenoPlasmaComponent, XenoTransferPlasmaActionEvent>(OnXenoTransferPlasmaAction);
         SubscribeLocalEvent<XenoPlasmaComponent, XenoTransferPlasmaDoAfterEvent>(OnXenoTransferDoAfter);
@@ -41,11 +40,6 @@ public sealed class XenoPlasmaSystem : EntitySystem
     private void OnXenoPlasmaRemove(Entity<XenoPlasmaComponent> ent, ref ComponentRemove args)
     {
         _alerts.ClearAlertCategory(ent, AlertCategory.XenoPlasma);
-    }
-
-    private void OnXenoRegen(Entity<XenoPlasmaComponent> xeno, ref XenoRegenEvent args)
-    {
-        RegenPlasma((xeno, xeno), xeno.Comp.PlasmaRegenOnWeeds);
     }
 
     private void OnXenoRejuvenate(Entity<XenoPlasmaComponent> xeno, ref RejuvenateEvent args)
