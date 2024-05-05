@@ -25,11 +25,6 @@ public abstract partial class BaseActionComponent : Component
     [DataField("iconOn")] public SpriteSpecifier? IconOn;
 
     /// <summary>
-    ///     Background to show.
-    /// </summary>
-    [DataField] public SpriteSpecifier? Background;
-
-    /// <summary>
     ///     For toggle actions only, background to show when toggled on.
     /// </summary>
     [DataField] public SpriteSpecifier? BackgroundOn;
