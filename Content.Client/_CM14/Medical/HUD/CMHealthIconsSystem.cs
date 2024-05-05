@@ -34,6 +34,11 @@ public sealed class CMHealthIconsSystem : EntitySystem
     [ValidatePrototypeId<StatusIconPrototype>]
     private const string HCDead = "CMHealthIconDead";
 
+    public StatusIconData GetDeadIcon()
+    {
+        return _prototype.Index<StatusIconPrototype>(Dead);
+    }
+
     public IReadOnlyList<StatusIconData> GetIcons(Entity<DamageableComponent> damageable)
     {
         var icons = new List<StatusIconData>();
@@ -76,7 +81,7 @@ public sealed class CMHealthIconsSystem : EntitySystem
             return icons;
         }
 
-        icons.Add(_prototype.Index<StatusIconPrototype>(Dead));
+        icons.Add(GetDeadIcon());
         return icons;
     }
 }

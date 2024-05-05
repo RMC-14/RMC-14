@@ -1,8 +1,11 @@
 ﻿using System.Numerics;
+using Content.Client._CM14.Medical.HUD;
 using Content.Client._CM14.NightVision;
 using Content.Shared._CM14.Xenos;
+using Content.Shared._CM14.Xenos.Hugger;
 using Content.Shared._CM14.Xenos.Plasma;
 using Content.Shared.Damage;
+using Content.Shared.Ghost;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -26,12 +29,14 @@ public sealed class XenoHudOverlay : Overlay
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
+    private readonly CMHealthIconsSystem _healthIcons;
     private readonly MobStateSystem _mobState;
     private readonly MobThresholdSystem _mobThresholds;
     private readonly SpriteSystem _sprite;
     private readonly TransformSystem _transform;
 
     private readonly EntityQuery<DamageableComponent> _damageableQuery;
+    private readonly EntityQuery<XenoHuggerComponent> _xenoHuggerQuery;
     private readonly EntityQuery<MobStateComponent> _mobStateQuery;
     private readonly EntityQuery<MobThresholdsComponent> _mobThresholdsQuery;
     private readonly EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
@@ -47,12 +52,14 @@ public sealed class XenoHudOverlay : Overlay
     {
         IoCManager.InjectDependencies(this);
 
+        _healthIcons = _entity.System<CMHealthIconsSystem>();
         _mobState = _entity.System<MobStateSystem>();
         _mobThresholds = _entity.System<MobThresholdSystem>();
         _sprite = _entity.System<SpriteSystem>();
         _transform = _entity.System<TransformSystem>();
 
         _damageableQuery = _entity.GetEntityQuery<DamageableComponent>();
+        _xenoHuggerQuery = _entity.GetEntityQuery<XenoHuggerComponent>();
         _mobStateQuery = _entity.GetEntityQuery<MobStateComponent>();
         _mobThresholdsQuery = _entity.GetEntityQuery<MobThresholdsComponent>();
         _xenoPlasmaQuery = _entity.GetEntityQuery<XenoPlasmaComponent>();
@@ -64,7 +71,11 @@ public sealed class XenoHudOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        if (!_entity.HasComponent<XenoComponent>(_players.LocalEntity))
+        var isAdminGhost = _entity.TryGetComponent(_players.LocalEntity, out GhostComponent? ghost) &&
+                           ghost.CanGhostInteract;
+        var isXeno = _entity.HasComponent<XenoComponent>(_players.LocalEntity);
+
+        if (!isXeno && !isAdminGhost)
             return;
 
         var handle = args.WorldHandle;
@@ -75,17 +86,33 @@ public sealed class XenoHudOverlay : Overlay
 
         handle.UseShader(_shader);
 
-        var query = _entity.AllEntityQueryEnumerator<XenoComponent, SpriteComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var xeno, out var sprite, out var xform))
+        if (isXeno)
+        {
+            DrawBars(in args, scaleMatrix, rotationMatrix);
+            DrawDeadIcon(in args, scaleMatrix, rotationMatrix);
+        }
+
+        if (isXeno || isAdminGhost)
+            DrawHuggedIcon(in args, scaleMatrix, rotationMatrix);
+
+        handle.UseShader(null);
+        handle.SetTransform(Matrix3.Identity);
+    }
+
+    private void DrawBars(in OverlayDrawArgs args, Matrix3 scaleMatrix, Matrix3 rotationMatrix)
+    {
+        var handle = args.WorldHandle;
+        var xenos = _entity.AllEntityQueryEnumerator<XenoComponent, SpriteComponent, TransformComponent>();
+        while (xenos.MoveNext(out var uid, out var xeno, out var sprite, out var xform))
         {
             if (xform.MapID != args.MapId)
-                return;
+                continue;
 
             var bounds = sprite.Bounds;
             var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
 
             if (!bounds.Translated(worldPos).Intersects(args.WorldAABB))
-                return;
+                continue;
 
             var worldMatrix = Matrix3.CreateTranslation(worldPos);
             Matrix3.Multiply(scaleMatrix, worldMatrix, out var scaledWorld);
@@ -99,8 +126,77 @@ public sealed class XenoHudOverlay : Overlay
                 UpdatePlasma((uid, xeno, sprite), handle);
             }
         }
+    }
 
-        handle.UseShader(null);
+    private void DrawDeadIcon(in OverlayDrawArgs args, Matrix3 scaleMatrix, Matrix3 rotationMatrix)
+    {
+        var icon = _healthIcons.GetDeadIcon().Icon;
+        var handle = args.WorldHandle;
+        var hugged = _entity.AllEntityQueryEnumerator<MobStateComponent, SpriteComponent, TransformComponent>();
+        while (hugged.MoveNext(out var uid, out var comp, out var sprite, out var xform))
+        {
+            if (xform.MapID != args.MapId)
+                continue;
+
+            if (comp.CurrentState != MobState.Dead)
+                continue;
+
+            if (_xenoHuggerQuery.HasComp(uid))
+                continue;
+
+            var bounds = sprite.Bounds;
+            var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
+
+            if (!bounds.Translated(worldPos).Intersects(args.WorldAABB))
+                continue;
+
+            var worldMatrix = Matrix3.CreateTranslation(worldPos);
+            Matrix3.Multiply(scaleMatrix, worldMatrix, out var scaledWorld);
+            Matrix3.Multiply(rotationMatrix, scaledWorld, out var matrix);
+            handle.SetTransform(matrix);
+
+            var texture = _sprite.GetFrame(icon, _timing.CurTime);
+
+            var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float) texture.Height / EyeManager.PixelsPerMeter * bounds.Height;
+            var xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float) texture.Width / EyeManager.PixelsPerMeter * bounds.Width;
+
+            var position = new Vector2(xOffset, yOffset);
+            handle.DrawTexture(texture, position);
+        }
+    }
+
+    private void DrawHuggedIcon(in OverlayDrawArgs args, Matrix3 scaleMatrix, Matrix3 rotationMatrix)
+    {
+        var handle = args.WorldHandle;
+        var hugged = _entity.AllEntityQueryEnumerator<VictimHuggedComponent, SpriteComponent, TransformComponent>();
+        while (hugged.MoveNext(out var comp, out var sprite, out var xform))
+        {
+            if (xform.MapID != args.MapId)
+                continue;
+
+            var bounds = sprite.Bounds;
+            var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
+
+            if (!bounds.Translated(worldPos).Intersects(args.WorldAABB))
+                continue;
+
+            var worldMatrix = Matrix3.CreateTranslation(worldPos);
+            Matrix3.Multiply(scaleMatrix, worldMatrix, out var scaledWorld);
+            Matrix3.Multiply(rotationMatrix, scaledWorld, out var matrix);
+            handle.SetTransform(matrix);
+
+            var time = _timing.CurTime - comp.AttachedAt;
+            var burstAt = comp.BurstAt - comp.AttachedAt;
+            var level = ContentHelpers.RoundToLevels(time.TotalSeconds, burstAt.TotalSeconds, comp.HuggedIcons.Length);
+            var icon = comp.HuggedIcons[level];
+            var texture = _sprite.GetFrame(icon, _timing.CurTime);
+
+            var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float) texture.Height / EyeManager.PixelsPerMeter * bounds.Height;
+            var xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float) texture.Width / EyeManager.PixelsPerMeter * bounds.Width;
+
+            var position = new Vector2(xOffset, yOffset);
+            handle.DrawTexture(texture, position);
+        }
     }
 
     private void UpdateHealth(Entity<XenoComponent, SpriteComponent, MobStateComponent?> ent, DrawingHandleWorld handle)
