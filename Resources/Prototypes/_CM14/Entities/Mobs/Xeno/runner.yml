@@ -19,6 +19,19 @@
       0: Alive
       230: Critical
       330: Dead
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 1000
+        mask:
+        - Impassable
+        - HighImpassable
+        - LowImpassable
+        layer:
+        - MobLayer
   - type: Xeno
     actionIds:
     - ActionXenoRest
