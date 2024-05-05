@@ -40,6 +40,8 @@ public sealed class XenoRestSystem : EntitySystem
         if (ev.Cancelled)
             return;
 
+        args.Handled = true;
+
         if (HasComp<XenoRestingComponent>(xeno))
         {
             RemComp<XenoRestingComponent>(xeno);
