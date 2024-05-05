@@ -1,6 +1,5 @@
 ﻿using Content.Shared._CM14.Xenos.Armor;
 using Content.Shared._CM14.Xenos.Fortify;
-using Content.Shared._CM14.Xenos.Headbutt;
 using Content.Shared._CM14.Xenos.Rest;
 using Content.Shared._CM14.Xenos.Sweep;
 using Content.Shared.Actions;
@@ -29,8 +28,6 @@ public sealed class XenoCrestSystem : EntitySystem
         SubscribeLocalEvent<XenoCrestComponent, XenoFortifyAttemptEvent>(OnXenoCrestFortifyAttempt);
         SubscribeLocalEvent<XenoCrestComponent, XenoTailSweepAttemptEvent>(OnXenoCrestTailSweepAttempt);
         SubscribeLocalEvent<XenoCrestComponent, XenoRestAttemptEvent>(OnXenoCrestRestAttempt);
-
-        SubscribeLocalEvent<XenoCrestActionComponent, XenoCrestToggledEvent>(OnXenoCrestActionToggled);
     }
 
     private void OnXenoCrestAction(Entity<XenoCrestComponent> xeno, ref XenoToggleCrestActionEvent args)
@@ -52,10 +49,10 @@ public sealed class XenoCrestSystem : EntitySystem
         _movementSpeed.RefreshMovementSpeedModifiers(xeno);
         _appearance.SetData(xeno, XenoVisualLayers.Crest, xeno.Comp.Lowered);
 
-        var ev = new XenoCrestToggledEvent(xeno.Comp.Lowered);
-        foreach (var (id, _) in _actions.GetActions(xeno))
+        foreach (var (actionId, action) in _actions.GetActions(xeno))
         {
-            RaiseLocalEvent(id, ref ev);
+            if (action.BaseEvent is XenoToggleCrestActionEvent)
+                _actions.SetToggled(actionId, xeno.Comp.Lowered);
         }
     }
 
@@ -102,10 +99,5 @@ public sealed class XenoCrestSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("cm-xeno-toggle-crest-cant-rest"), xeno, xeno);
             args.Cancelled = true;
         }
-    }
-
-    private void OnXenoCrestActionToggled(Entity<XenoCrestActionComponent> action, ref XenoCrestToggledEvent args)
-    {
-        _actions.SetToggled(action, args.Lowered);
     }
 }

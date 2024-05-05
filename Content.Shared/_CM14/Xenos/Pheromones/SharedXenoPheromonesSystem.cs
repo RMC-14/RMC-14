@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Content.Shared._CM14.Xenos.Plasma;
+using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
@@ -15,6 +16,7 @@ namespace Content.Shared._CM14.Xenos.Pheromones;
 
 public abstract class SharedXenoPheromonesSystem : EntitySystem
 {
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
@@ -90,6 +92,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     {
         if (RemComp<XenoActivePheromonesComponent>(xeno))
         {
+            _actions.SetToggled(args.Action, false);
             _popup.PopupClient(Loc.GetString("cm-xeno-pheromones-stop"), xeno, xeno);
             return;
         }
@@ -103,6 +106,12 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
             !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PheromonesPlasmaCost))
         {
             return;
+        }
+
+        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        {
+            if (action.BaseEvent is XenoPheromonesActionEvent)
+                _actions.SetToggled(actionId, true);
         }
 
         EnsureComp<XenoActivePheromonesComponent>(xeno).Pheromones = args.Pheromones;

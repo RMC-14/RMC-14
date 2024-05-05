@@ -3,6 +3,7 @@ using Content.Shared._CM14.Xenos.Fortify;
 using Content.Shared._CM14.Xenos.Headbutt;
 using Content.Shared._CM14.Xenos.Sweep;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Actions;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 
@@ -11,6 +12,7 @@ namespace Content.Shared._CM14.Xenos.Rest;
 public sealed class XenoRestSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
@@ -46,11 +48,13 @@ public sealed class XenoRestSystem : EntitySystem
         {
             RemComp<XenoRestingComponent>(xeno);
             _appearance.SetData(xeno, XenoVisualLayers.Base, XenoRestState.NotResting);
+            _actions.SetToggled(args.Action, false);
         }
         else
         {
             AddComp<XenoRestingComponent>(xeno);
             _appearance.SetData(xeno, XenoVisualLayers.Base, XenoRestState.Resting);
+            _actions.SetToggled(args.Action, true);
         }
 
         _actionBlocker.UpdateCanMove(xeno);
