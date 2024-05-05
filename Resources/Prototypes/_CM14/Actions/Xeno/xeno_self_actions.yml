@@ -61,6 +61,8 @@
     event: !type:XenoToggleCrestActionEvent
     useDelay: 2
   - type: XenoCrestAction
+  - type: ActionSharedCooldown
+    id: crest
 
 - type: entity
   id: ActionXenoFortify
@@ -74,6 +76,8 @@
       state: fortify
     event: !type:XenoFortifyActionEvent
     useDelay: 5
+  - type: ActionSharedCooldown
+    id: crest
 
 - type: entity
   id: ActionXenoResinWalker
