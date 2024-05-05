@@ -177,7 +177,7 @@ namespace Content.Shared.Verbs
 
             if (types.Contains(typeof(CMAdminVerb)))
             {
-                var verbEvent = new GetVerbsEvent<CMAdminVerb>(user, target, @using, hands, canInteract, canAccess);
+                var verbEvent = new GetVerbsEvent<CMAdminVerb>(user, target, @using, hands, canInteract, canAccess, extraCategories);
                 RaiseLocalEvent(target, verbEvent, true);
                 verbs.UnionWith(verbEvent.Verbs);
             }
