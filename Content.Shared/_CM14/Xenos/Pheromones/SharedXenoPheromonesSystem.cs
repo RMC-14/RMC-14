@@ -50,8 +50,6 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         SubscribeLocalEvent<XenoActivePheromonesComponent, ComponentGetStateAttemptEvent>(OnComponentGetStateAttempt);
         SubscribeLocalEvent<XenoComponent, ComponentStartup>(OnXenoStartup);
 
-        SubscribeLocalEvent<XenoRecoveryPheromonesComponent, MapInitEvent>(OnRecoveryMapInit);
-
         // TODO CM14 reduce crit damage
         SubscribeLocalEvent<XenoWardingPheromonesComponent, UpdateMobStateEvent>(OnWardingUpdateMobState,
             after: [typeof(MobThresholdSystem)]);
@@ -62,6 +60,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, GetMeleeDamageEvent>(OnFrenzyGetMeleeDamage);
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, RefreshMovementSpeedModifiersEvent>(OnFrenzyMovementSpeedModifiers);
     }
+
     private void OnComponentGetStateAttempt<T>(EntityUid uid, T comp, ref ComponentGetStateAttemptEvent ev)
     {
         // Apparently this happens in replays
@@ -121,11 +120,6 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         _popup.PopupEntity(popup, xeno, xeno);
 
         _ui.CloseUi(xeno.Owner, XenoPheromonesUI.Key, xeno);
-    }
-
-    private void OnRecoveryMapInit(Entity<XenoRecoveryPheromonesComponent> recovery, ref MapInitEvent args)
-    {
-        recovery.Comp.NextRegenTime = _timing.CurTime + recovery.Comp.Delay;
     }
 
     private void OnWardingUpdateMobState(Entity<XenoWardingPheromonesComponent> warding, ref UpdateMobStateEvent args)
@@ -189,17 +183,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         var oldRecovery = _oldReceivers[(int) XenoPheromones.Recovery];
         oldRecovery.Clear();
 
-        var recoveryQuery = EntityQueryEnumerator<XenoRecoveryPheromonesComponent, XenoComponent>();
-        while (recoveryQuery.MoveNext(out var uid, out var recovery, out var xeno))
+        var recoveryQuery = EntityQueryEnumerator<XenoRecoveryPheromonesComponent>();
+        while (recoveryQuery.MoveNext(out var uid, out var recovery))
         {
-            if (_timing.CurTime > recovery.NextRegenTime)
-            {
-                if (xeno.OnWeeds)
-                    _xenoPlasma.RegenPlasma(uid, recovery.PlasmaRegen * recovery.Multiplier);
-
-                recovery.NextRegenTime = _timing.CurTime + recovery.Delay;
-            }
-
             oldRecovery.Add(uid);
             recovery.Multiplier = 0;
         }

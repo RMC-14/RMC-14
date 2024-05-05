@@ -37,7 +37,7 @@
   - type: XenoPlasma
     plasma: 600
     maxPlasma: 600
-    plasmaRegenOnWeeds: 24
+    plasmaRegenOnWeeds: 4
   - type: XenoEvolution
     evolvesTo:
     - CMXenoPraetorian

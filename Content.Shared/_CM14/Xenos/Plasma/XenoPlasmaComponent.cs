@@ -22,4 +22,7 @@ public sealed partial class XenoPlasmaComponent : Component
 
     [DataField(required: true), AutoNetworkedField]
     public FixedPoint2 PlasmaRegenOnWeeds;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 PlasmaRegenOffWeeds = 0.1;
 }

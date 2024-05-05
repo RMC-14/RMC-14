@@ -43,7 +43,7 @@
   - type: XenoPlasma
     plasma: 300
     maxPlasma: 300
-    plasmaRegenOnWeeds: 6
+    plasmaRegenOnWeeds: 4
   - type: MeleeWeapon
     damage:
       groups:

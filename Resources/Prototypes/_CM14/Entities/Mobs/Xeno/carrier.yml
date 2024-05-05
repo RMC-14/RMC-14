@@ -42,7 +42,7 @@
   - type: XenoPlasma
     plasma: 500
     maxPlasma: 500
-    plasmaRegenOnWeeds: 17.5
+    plasmaRegenOnWeeds: 3.5
   - type: XenoArmor
     explosionArmor: 20
   - type: XenoDevour
