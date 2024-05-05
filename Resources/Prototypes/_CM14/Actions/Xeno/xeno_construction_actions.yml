@@ -1,7 +1,8 @@
 ﻿- type: entity
   id: ActionXenoPlantWeeds
   parent: ActionXenoBase
-  name: Plant Weeds # TODO CM14 description
+  name: Plant Weeds
+  description: Plant a weed node that will spread more weeds.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -14,7 +15,8 @@
 - type: entity
   id: ActionXenoChooseStructure
   parent: ActionXenoBase
-  name: Choose Resin Structure # TODO CM14 description
+  name: Choose Resin Structure
+  description: "Choose a structure to secrete with the 'Secrete Resin' action."
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -27,7 +29,8 @@
 - type: entity
   id: ActionXenoSecreteStructure
   parent: ActionXenoBase
-  name: Secrete Resin # TODO CM14 description
+  name: Secrete Resin
+  description: "Builds the structure chosen with the 'Choose Resin Structure' action."
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -43,7 +46,8 @@
 - type: entity
   id: ActionXenoOrderConstruction
   parent: ActionXenoBase
-  name: Order Construction # TODO CM14 description
+  name: Order Construction
+  description: Starts construction of an important hive structure.
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem

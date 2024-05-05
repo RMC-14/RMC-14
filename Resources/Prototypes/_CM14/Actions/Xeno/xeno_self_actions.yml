@@ -1,9 +1,10 @@
 ﻿- type: entity
   id: ActionXenoRest
   parent: ActionXenoBase
-  name: Rest # TODO CM14 description
+  name: Rest
+  description: Lie down to regenerate health and plasma more quickly while on weeds.
   components:
-  - type: InstantAction # TODO CM14 cooldown
+  - type: InstantAction
     itemIconStyle: NoItem
     icon:
       sprite: _CM14/Actions/xeno_actions.rsi
@@ -14,7 +15,7 @@
 - type: entity
   id: ActionXenoWatch
   parent: ActionXenoBase
-  name: Watch # TODO CM14 description
+  name: Watch Xenomorph
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -27,6 +28,7 @@
   id: ActionXenoPheromones
   parent: ActionXenoBase
   name: Emit Pheromones
+  description: Gives a buff to nearby xenomorphs.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -39,6 +41,7 @@
   id: ActionXenoHide
   parent: ActionXenoBase
   name: Hide
+  description: Hide under tables and other objects.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -52,6 +55,7 @@
   id: ActionXenoToggleCrest
   parent: ActionXenoBase
   name: Toggle Crest Defense
+  description: Increases your resistance to projectile damage but slows you down.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -68,6 +72,7 @@
   id: ActionXenoFortify
   parent: ActionXenoBase
   name: Fortify
+  description: Become immobile and extremely resistant to projectile damage.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -83,6 +88,7 @@
   id: ActionXenoResinWalker
   parent: ActionXenoBase
   name: Resin Walker
+  description: Run faster on weeds.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -108,7 +114,8 @@
 - type: entity
   id: ActionXenoWordQueen
   parent: ActionXenoBase
-  name: Word of the Queen # TODO CM14 description
+  name: Word of the Queen
+  description: Sends a message to all members of your hive.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -122,7 +129,8 @@
 - type: entity
   id: ActionXenoGrowOvipositor
   parent: ActionXenoBase
-  name: Grow Ovipositor # TODO CM14 description
+  name: Grow Ovipositor
+  description: Become immobile and start laying eggs which will produce facehuggers.
   components:
   - type: InstantAction
     itemIconStyle: NoItem

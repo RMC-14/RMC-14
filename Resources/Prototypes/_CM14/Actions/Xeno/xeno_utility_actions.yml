@@ -1,7 +1,8 @@
 ﻿- type: entity
   id: ActionXenoTransferPlasma
   parent: ActionXenoBase
-  name: Transfer plasma # TODO CM14 description
+  name: Transfer plasma
+  description: Give plasma to a nearby xeno
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
