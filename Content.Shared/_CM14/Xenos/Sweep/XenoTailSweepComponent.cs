@@ -14,7 +14,7 @@ public sealed partial class XenoTailSweepComponent : Component
     public FixedPoint2 PlasmaCost = 10;
 
     [DataField, AutoNetworkedField]
-    public float Range = 1;
+    public float Range = 1.25f;
 
     [DataField]
     public DamageSpecifier? Damage;
