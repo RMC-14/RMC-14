@@ -1,0 +1,541 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/029cdbdae1a118c40b558a75e8171fbd49d560a6/icons/mob/hud/hud.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "plasma0"
+    },
+    {
+      "name": "plasma10",
+      "delays": [
+        [
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "plasma20",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "plasma30",
+      "delays": [
+        [
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "plasma40",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "plasma50"
+    },
+    {
+      "name": "plasma60"
+    },
+    {
+      "name": "plasma70"
+    },
+    {
+      "name": "plasma80"
+    },
+    {
+      "name": "plasma90"
+    },
+    {
+      "name": "plasma100"
+    },
+    {
+      "name": "xenohealth100"
+    },
+    {
+      "name": "xenohealth90"
+    },
+    {
+      "name": "xenohealth80"
+    },
+    {
+      "name": "xenohealth70"
+    },
+    {
+      "name": "xenohealth60"
+    },
+    {
+      "name": "xenohealth50"
+    },
+    {
+      "name": "xenohealth40",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "xenohealth30",
+      "delays": [
+        [
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "xenohealth20",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "xenohealth10",
+      "delays": [
+        [
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "xenohealth0"
+    },
+    {
+      "name": "xenohealth-1",
+      "delays": [
+        [
+          0.3,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "xenohealth-10",
+      "delays": [
+        [
+          0.28,
+          0.28
+        ]
+      ]
+    },
+    {
+      "name": "xenohealth-20",
+      "delays": [
+        [
+          0.26,
+          0.26
+        ]
+      ]
+    },
+    {
+      "name": "xenohealth-30",
+      "delays": [
+        [
+          0.24000001,
+          0.24000001
+        ]
+      ]
+    },
+    {
+      "name": "xenohealth-40",
+      "delays": [
+        [
+          0.22,
+          0.22
+        ]
+      ]
+    },
+    {
+      "name": "xenohealth-50",
+      "delays": [
+        [
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "xenohealth-60",
+      "delays": [
+        [
+          0.17999999,
+          0.17999999
+        ]
+      ]
+    },
+    {
+      "name": "xenohealth-70",
+      "delays": [
+        [
+          0.16,
+          0.16
+        ]
+      ]
+    },
+    {
+      "name": "xenohealth-80",
+      "delays": [
+        [
+          0.14,
+          0.14
+        ]
+      ]
+    },
+    {
+      "name": "xenohealth-90",
+      "delays": [
+        [
+          0.120000005,
+          0.120000005
+        ]
+      ]
+    },
+    {
+      "name": "xenoarmor100"
+    },
+    {
+      "name": "xenoarmor90"
+    },
+    {
+      "name": "xenoarmor80"
+    },
+    {
+      "name": "xenoarmor70"
+    },
+    {
+      "name": "xenoarmor60"
+    },
+    {
+      "name": "xenoarmor50"
+    },
+    {
+      "name": "xenoarmor40",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "xenoarmor30",
+      "delays": [
+        [
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "xenoarmor20",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "xenoarmor10",
+      "delays": [
+        [
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "xenoarmor0"
+    },
+    {
+      "name": "xenoenergy100"
+    },
+    {
+      "name": "xenoenergy90"
+    },
+    {
+      "name": "xenoenergy80"
+    },
+    {
+      "name": "xenoenergy70"
+    },
+    {
+      "name": "xenoenergy60"
+    },
+    {
+      "name": "xenoenergy50"
+    },
+    {
+      "name": "xenoenergy40"
+    },
+    {
+      "name": "xenoenergy30"
+    },
+    {
+      "name": "xenoenergy20"
+    },
+    {
+      "name": "xenoenergy10"
+    },
+    {
+      "name": "infected0"
+    },
+    {
+      "name": "infected1"
+    },
+    {
+      "name": "infected2"
+    },
+    {
+      "name": "infected3"
+    },
+    {
+      "name": "infected4"
+    },
+    {
+      "name": "infected5"
+    },
+    {
+      "name": "infected6",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "queen_overwatch",
+      "delays": [
+        [
+          24,
+          0.030000001,
+          0.04,
+          0.030000001
+        ]
+      ]
+    },
+    {
+      "name": "hudxenoleader"
+    },
+    {
+      "name": "hudxenoupgrade2"
+    },
+    {
+      "name": "hudxenoupgrade3"
+    },
+    {
+      "name": "hudxenoupgrade4"
+    },
+    {
+      "name": "hudxenoupgrade5",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          5
+        ]
+      ]
+    },
+    {
+      "name": "acid_stacks1",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "acid_stacks2",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "acid_stacks3",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "acid_stacks4",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "prae_tag",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "xeno_freeze",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "xeno_slow",
+      "delays": [
+        [
+          0.2,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "xeno_banished"
+    },
+    {
+      "name": "xenohealth_a100"
+    },
+    {
+      "name": "xenohealth_a90"
+    },
+    {
+      "name": "xenohealth_a80"
+    },
+    {
+      "name": "xenohealth_a70"
+    },
+    {
+      "name": "xenohealth_a60"
+    },
+    {
+      "name": "xenohealth_a50"
+    },
+    {
+      "name": "xenohealth_a40",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "xenohealth_a30",
+      "delays": [
+        [
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "xenohealth_a20",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "xenohealth_a10",
+      "delays": [
+        [
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "xenohealth_a0"
+    },
+    {
+      "name": "hudeye",
+      "delays": [
+        [
+          6,
+          0.1,
+          0.1,
+          0.2,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "hudalien_ally"
+    }
+  ]
+}

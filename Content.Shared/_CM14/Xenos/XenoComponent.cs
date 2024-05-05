@@ -1,4 +1,5 @@
-﻿using Content.Shared.Access;
+﻿using System.Numerics;
+using Content.Shared.Access;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -48,4 +49,7 @@ public sealed partial class XenoComponent : Component
 
     [DataField, AutoNetworkedField]
     public int Tier;
+
+    [DataField, AutoNetworkedField]
+    public Vector2 HudOffset;
 }

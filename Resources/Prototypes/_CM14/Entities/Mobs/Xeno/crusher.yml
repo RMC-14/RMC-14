@@ -29,6 +29,7 @@
     #    - ActionXenoStomp
     #    - ActionXenoDefensiveShield
     tier: 3
+    hudOffset: 0,0.375
   - type: XenoDevour
   - type: XenoPlasma
     plasma: 400
