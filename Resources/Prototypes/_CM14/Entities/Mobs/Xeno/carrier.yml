@@ -33,6 +33,7 @@
     #    - ActionXenoRetrieveEgg
     #    - ActionXenoHuggerReserve
     tier: 2
+    hudOffset: 0,0.19
   - type: XenoConstruction
     canOrderConstruction:
     - HiveCoreXenoConstructionNode

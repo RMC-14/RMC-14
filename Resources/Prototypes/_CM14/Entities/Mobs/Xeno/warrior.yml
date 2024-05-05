@@ -31,6 +31,7 @@
     #    - ActionXenoFling
     - ActionXenoEvolve540
     tier: 2
+    hudOffset: 0,0.25
   - type: XenoDevour
   - type: XenoPlasma
     plasma: 0

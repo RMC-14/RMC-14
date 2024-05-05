@@ -32,6 +32,7 @@
     #    - ActionXenoBurrow
     #    - ActionXenoTremor
     tier: 2
+    hudOffset: 0,0.56
   - type: XenoPlasma
     plasma: 600
     maxPlasma: 600
