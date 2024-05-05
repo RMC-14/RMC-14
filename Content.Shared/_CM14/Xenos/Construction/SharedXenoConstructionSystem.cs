@@ -121,7 +121,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
 
     private void OnXenoSecreteStructureAction(Entity<XenoConstructionComponent> xeno, ref XenoSecreteStructureActionEvent args)
     {
-        if (xeno.Comp.BuildChoice == null || !CanBuildOnTilePopup(xeno, args.Target))
+        if (xeno.Comp.BuildChoice == null || !CanSecreteOnTilePopup(xeno, args.Target))
             return;
 
         args.Handled = true;
@@ -143,14 +143,19 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         var coordinates = GetCoordinates(args.Coordinates);
         if (!coordinates.IsValid(EntityManager) ||
             !xeno.Comp.CanBuild.Contains(args.StructureId) ||
-            !CanBuildOnTilePopup(xeno, GetCoordinates(args.Coordinates)))
+            !CanSecreteOnTilePopup(xeno, GetCoordinates(args.Coordinates)))
+        {
+            return;
+        }
+
+        if (GetStructurePlasmaCost(xeno) is { } cost &&
+            !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, cost))
         {
             return;
         }
 
         args.Handled = true;
 
-        // TODO CM14 construction plasma cost
         // TODO CM14 stop collision for mobs until they move off
         if (_net.IsServer)
             Spawn(args.StructureId, coordinates);
@@ -288,7 +293,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         if (!TryComp(args.User, out XenoConstructionComponent? construction))
             return;
 
-        if (!CanBuildOnTilePopup((args.User, construction), args.Target))
+        if (!CanSecreteOnTilePopup((args.User, construction), args.Target))
             args.Cancelled = true;
     }
 
@@ -308,6 +313,27 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         InteractHiveConstructionNode(node, args.User);
     }
 
+    public FixedPoint2? GetStructurePlasmaCost(EntProtoId prototype)
+    {
+        if (_prototype.TryIndex(prototype, out var buildChoice) &&
+            buildChoice.TryGetComponent(out XenoConstructionPlasmaCostComponent? cost))
+        {
+            return cost.Plasma;
+        }
+
+        return null;
+    }
+
+    private FixedPoint2? GetStructurePlasmaCost(Entity<XenoConstructionComponent> xeno)
+    {
+        if (xeno.Comp.BuildChoice is { } choice &&
+            GetStructurePlasmaCost(choice) is { } cost)
+        {
+            return cost;
+        }
+
+        return null;
+    }
 
     private void InteractHiveConstructionNode(Entity<HiveConstructionNodeComponent> node, EntityUid user)
     {
@@ -361,8 +387,14 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         return true;
     }
 
-    private bool CanBuildOnTilePopup(Entity<XenoConstructionComponent> xeno, EntityCoordinates target)
+    private bool CanSecreteOnTilePopup(Entity<XenoConstructionComponent> xeno, EntityCoordinates target)
     {
+        if (xeno.Comp.BuildChoice == null)
+        {
+            _popup.PopupClient("You need to select a structure to build first! Use the \"Choose Resin Structure\" action.", target, xeno);
+            return false;
+        }
+
         if (target.GetGridUid(EntityManager) is not { } gridId ||
             !TryComp(gridId, out MapGridComponent? grid))
         {
@@ -383,6 +415,12 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         if (!TileSolidAndNotBlocked(target))
         {
             _popup.PopupClient("You can't build there!", target, xeno);
+            return false;
+        }
+
+        if (GetStructurePlasmaCost(xeno) is { } cost &&
+            !_xenoPlasma.HasPlasmaPopup(xeno.Owner, cost))
+        {
             return false;
         }
 

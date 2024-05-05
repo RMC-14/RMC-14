@@ -37,6 +37,7 @@
     event: !type:XenoSecreteStructureActionEvent
     deselectOnMiss: false
     range: 20
+    repeat: true
   - type: XenoConstructionAction
 
 - type: entity

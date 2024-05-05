@@ -35,5 +35,4 @@ public sealed partial class XenoConstructionComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan OrderConstructionAddPlasmaDelay = TimeSpan.FromSeconds(3);
-
 }
