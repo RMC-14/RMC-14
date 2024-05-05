@@ -77,6 +77,8 @@
     closingSpriteState: closed_unlit
   - type: ApcPowerReceiver
     powerLoad: 0
+  - type: XenoConstructionPlasmaCost
+    plasma: 120
 
 - type: entity
   id: DoorXenoResinThick
