@@ -67,3 +67,5 @@
         density: 1000
         layer:
         - BulletImpassable
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 3.5

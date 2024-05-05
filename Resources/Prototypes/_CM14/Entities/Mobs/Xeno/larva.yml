@@ -48,3 +48,5 @@
         - SmallMobLayer
   - type: Flammable
     canResistFire: false
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 6.7

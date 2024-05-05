@@ -61,3 +61,5 @@
   - type: Tackle
     threshold: 3
     stun: 9
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 3

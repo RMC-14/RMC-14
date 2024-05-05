@@ -49,3 +49,5 @@
   - type: WhitelistPickupBy
     all:
     - type: Xeno
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 5

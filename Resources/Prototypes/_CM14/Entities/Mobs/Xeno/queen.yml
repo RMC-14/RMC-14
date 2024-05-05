@@ -96,3 +96,5 @@
         layer:
         - BulletImpassable
   - type: DropshipHijacker
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 2.5
