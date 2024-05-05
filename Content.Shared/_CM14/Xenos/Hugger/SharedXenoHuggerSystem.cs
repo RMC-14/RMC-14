@@ -3,6 +3,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Ghost;
+using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
@@ -15,6 +16,7 @@ using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Xenos.Hugger;
@@ -236,6 +238,21 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
             {
                 var name = Identity.Name(victim, EntityManager);
                 _popup.PopupEntity($"The facehugger smashes against {name}'s mask and rips it off!", victim);
+            }
+        }
+
+        if (TryComp(victim, out HuggableComponent? huggable) &&
+            TryComp(victim, out HumanoidAppearanceComponent? appearance) &&
+            huggable.Sound.TryGetValue(appearance.Sex, out var sound))
+        {
+            if (_net.IsClient)
+            {
+                _audio.PlayPredicted(sound, victim, hugger);
+            }
+            else
+            {
+                var filter = Filter.Pvs(victim);
+                _audio.PlayEntity(sound, filter, victim, true);
             }
         }
 
