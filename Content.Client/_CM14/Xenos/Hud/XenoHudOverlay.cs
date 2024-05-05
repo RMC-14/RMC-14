@@ -96,6 +96,7 @@ public sealed class XenoHudOverlay : Overlay
             DrawHuggedIcon(in args, scaleMatrix, rotationMatrix);
 
         handle.UseShader(null);
+        handle.SetTransform(Matrix3.Identity);
     }
 
     private void DrawBars(in OverlayDrawArgs args, Matrix3 scaleMatrix, Matrix3 rotationMatrix)
