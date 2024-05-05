@@ -4,6 +4,7 @@ using Content.Shared._CM14.Xenos.Construction;
 using Content.Shared._CM14.Xenos.Evolution;
 using Content.Shared._CM14.Xenos.Hive;
 using Content.Shared._CM14.Xenos.Pheromones;
+using Content.Shared._CM14.Xenos.Plasma;
 using Content.Shared._CM14.Xenos.Rest;
 using Content.Shared.Access.Components;
 using Content.Shared.Actions;
@@ -35,6 +36,7 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruction = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     private readonly HashSet<EntityUid> _toUpdate = new();
 
@@ -42,6 +44,8 @@ public sealed class XenoSystem : EntitySystem
     private EntityQuery<MarineComponent> _marineQuery;
     private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
+    private EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
+    private EntityQuery<XenoRecoveryPheromonesComponent> _xenoRecoveryQuery;
 
     public override void Initialize()
     {
@@ -51,6 +55,8 @@ public sealed class XenoSystem : EntitySystem
         _marineQuery = GetEntityQuery<MarineComponent>();
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
+        _xenoPlasmaQuery = GetEntityQuery<XenoPlasmaComponent>();
+        _xenoRecoveryQuery = GetEntityQuery<XenoRecoveryPheromonesComponent>();
 
         SubscribeLocalEvent<XenoComponent, MapInitEvent>(OnXenoMapInit);
         SubscribeLocalEvent<XenoComponent, GetAccessTagsEvent>(OnXenoGetAdditionalAccess);
@@ -60,6 +66,8 @@ public sealed class XenoSystem : EntitySystem
 
         SubscribeLocalEvent<XenoWeedsComponent, StartCollideEvent>(OnWeedsStartCollide);
         SubscribeLocalEvent<XenoWeedsComponent, EndCollideEvent>(OnWeedsEndCollide);
+
+        UpdatesAfter.Add(typeof(SharedXenoPheromonesSystem));
     }
 
     private void OnXenoMapInit(Entity<XenoComponent> xeno, ref MapInitEvent args)
@@ -131,13 +139,10 @@ public sealed class XenoSystem : EntitySystem
         Dirty(xeno, xeno.Comp);
     }
 
-    private FixedPoint2 GetHealAmount(Entity<XenoComponent> xeno)
+    private FixedPoint2 GetWeedsHealAmount(Entity<XenoComponent> xeno)
     {
-        if (!xeno.Comp.OnWeeds ||
-            !_mobThresholds.TryGetIncapThreshold(xeno, out var threshold))
-        {
+        if (!_mobThresholds.TryGetIncapThreshold(xeno, out var threshold))
             return FixedPoint2.Zero;
-        }
 
         FixedPoint2 multiplier;
         if (_mobState.IsCritical(xeno))
@@ -234,12 +239,27 @@ public sealed class XenoSystem : EntitySystem
 
             xeno.NextRegenTime = time + xeno.RegenCooldown;
 
-            var heal = GetHealAmount((uid, xeno));
-            if (heal > FixedPoint2.Zero)
+            if (xeno.OnWeeds)
             {
-                HealDamage(uid, heal);
-                var ev = new XenoRegenEvent();
-                RaiseLocalEvent(uid, ref ev);
+                var heal = GetWeedsHealAmount((uid, xeno));
+                if (heal > FixedPoint2.Zero)
+                {
+                    HealDamage(uid, heal);
+
+                    if (_xenoPlasmaQuery.TryComp(uid, out var plasma))
+                    {
+                        var plasmaRestored = plasma.PlasmaRegenOnWeeds * plasma.MaxPlasma / 100 / 2;
+                        _xenoPlasma.RegenPlasma((uid, plasma), plasmaRestored);
+
+                        if (_xenoRecoveryQuery.TryComp(uid, out var recovery))
+                            _xenoPlasma.RegenPlasma((uid, plasma), plasmaRestored * recovery.Multiplier / 4);
+                    }
+                }
+            }
+            else
+            {
+                if (_xenoPlasmaQuery.TryComp(uid, out var plasma))
+                    _xenoPlasma.RegenPlasma((uid, plasma), FixedPoint2.Max(plasma.PlasmaRegenOffWeeds * plasma.MaxPlasma / 100 / 2, 0.01));
             }
 
             Dirty(uid, xeno);

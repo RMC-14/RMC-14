@@ -65,8 +65,8 @@
     - Heat
     - Shock
   - type: MovementSpeedModifier
-    baseWalkSpeed : 4
-    baseSprintSpeed : 4
+    baseWalkSpeed: 4
+    baseSprintSpeed: 4
   - type: Climbing
   - type: NameIdentifier
     group: GenericNumber
@@ -93,8 +93,8 @@
     horizontalRotation: 0
   - type: Reactive
     groups:
-      Flammable: [Touch]
-      Extinguish: [Touch]
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Generic_mob_burning

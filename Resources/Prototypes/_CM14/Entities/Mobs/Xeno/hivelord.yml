@@ -50,7 +50,7 @@
   - type: XenoPlasma
     plasma: 1000
     maxPlasma: 1000
-    plasmaRegenOnWeeds: 55
+    plasmaRegenOnWeeds: 5.5
   - type: XenoArmor
     explosionArmor: 10
   - type: XenoResinWalker
@@ -61,3 +61,5 @@
   - type: Tackle
     threshold: 3
     stun: 9
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 3
