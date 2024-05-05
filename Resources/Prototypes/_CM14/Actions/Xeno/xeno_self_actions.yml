@@ -45,6 +45,7 @@
       sprite: _CM14/Actions/xeno_actions.rsi
       state: xenohide
     event: !type:XenoHideActionEvent
+    useDelay: 0.5
 
 - type: entity
   id: ActionXenoToggleCrest
