@@ -259,7 +259,7 @@ public sealed class XenoSystem : EntitySystem
             else
             {
                 if (_xenoPlasmaQuery.TryComp(uid, out var plasma))
-                    _xenoPlasma.RegenPlasma((uid, plasma), plasma.PlasmaRegenOffWeeds * plasma.MaxPlasma / 100 / 2);
+                    _xenoPlasma.RegenPlasma((uid, plasma), FixedPoint2.Max(plasma.PlasmaRegenOffWeeds * plasma.MaxPlasma / 100 / 2, 0.01));
             }
 
             Dirty(uid, xeno);
