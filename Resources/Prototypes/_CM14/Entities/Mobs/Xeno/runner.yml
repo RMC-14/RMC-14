@@ -63,6 +63,7 @@
     - CMXenoLurker
   - type: XenoZoom
   - type: MeleeWeapon
+    attackRate: 1.4
     damage:
       groups:
         Brute: 22.5

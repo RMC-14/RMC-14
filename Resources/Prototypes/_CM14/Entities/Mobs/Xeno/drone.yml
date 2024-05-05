@@ -19,6 +19,10 @@
       0: Alive
       500: Critical
       600: Dead
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 22.5
   - type: Xeno
     actionIds:
     - ActionXenoRest
