@@ -1,7 +1,7 @@
 ﻿- type: entity
   id: ActionXenoAcid
   parent: ActionXenoBase
-  name: Corrosive Acid
+  name: Corrosive Acid (75)  # TODO CM14 proper plasma costs
   description: Melts down a structure over time.
   components:
   - type: EntityTargetAction
@@ -60,7 +60,7 @@
 - type: entity
   id: ActionXenoHeadbutt
   parent: ActionXenoBase
-  name: Headbutt
+  name: Headbutt (10) # TODO CM14 proper plasma costs
   description: Charge in a direction and push back any enemies in your way.
   components:
   - type: WorldTargetAction
@@ -76,7 +76,7 @@
 - type: entity
   id: ActionXenoTailSweep
   parent: ActionXenoBase
-  name: Tail Sweep
+  name: Tail Sweep (10) # TODO CM14 proper plasma costs
   description: Knock down any enemies close to you.
   components:
   - type: InstantAction
@@ -90,7 +90,7 @@
 - type: entity
   id: ActionXenoSlowingSpit
   parent: ActionXenoBase
-  name: Slowing Spit
+  name: Slowing Spit (20) # TODO CM14 proper plasma costs
   description: Launches a projectile that will slow the first enemy that it hits, and paralyze them if they have no armor.
   components:
   - type: WorldTargetAction
@@ -105,7 +105,7 @@
 - type: entity
   id: ActionXenoScatteredSpit
   parent: ActionXenoBase
-  name: Scattered Spit
+  name: Scattered Spit (20) # TODO CM14 proper plasma costs
   description: Launches multiple projectiles that will slow any enemies they hit, and paralyze them if they have no armor.
   components:
   - type: WorldTargetAction
@@ -120,7 +120,7 @@
 - type: entity
   id: ActionXenoParalyzingSlash
   parent: ActionXenoBase
-  name: Paralyzing Slash
+  name: Paralyzing Slash (50) # TODO CM14 proper plasma costs
   description: Temporarily charge up a melee attack that will knockdown the first enemy it hits after a short delay.
   components:
   - type: InstantAction

@@ -27,7 +27,7 @@
 - type: entity
   id: ActionXenoPheromones
   parent: ActionXenoBase
-  name: Emit Pheromones
+  name: Emit Pheromones (35) # TODO CM14 proper plasma costs
   description: Gives a buff to nearby xenomorphs.
   components:
   - type: InstantAction
@@ -87,7 +87,7 @@
 - type: entity
   id: ActionXenoResinWalker
   parent: ActionXenoBase
-  name: Resin Walker
+  name: Resin Walker (50) # TODO CM14 proper plasma costs
   description: Run faster on weeds.
   components:
   - type: InstantAction
@@ -114,7 +114,7 @@
 - type: entity
   id: ActionXenoWordQueen
   parent: ActionXenoBase
-  name: Word of the Queen
+  name: Word of the Queen (50) # TODO CM14 proper plasma costs
   description: Sends a message to all members of your hive.
   components:
   - type: InstantAction
@@ -129,7 +129,7 @@
 - type: entity
   id: ActionXenoGrowOvipositor
   parent: ActionXenoBase
-  name: Grow Ovipositor
+  name: Grow Ovipositor (700) # TODO CM14 proper plasma costs
   description: Become immobile and start laying eggs which will produce facehuggers.
   components:
   - type: InstantAction
