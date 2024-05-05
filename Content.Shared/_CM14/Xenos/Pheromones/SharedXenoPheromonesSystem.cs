@@ -25,7 +25,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
-    private readonly TimeSpan _pheromonePlasmaUseDelay = TimeSpan.FromSeconds(0.5);
+    private readonly TimeSpan _pheromonePlasmaUseDelay = TimeSpan.FromSeconds(1);
     private readonly HashSet<Entity<XenoComponent>> _receivers = new();
 
     private readonly HashSet<EntityUid>[] _oldReceivers = Enum.GetValues<XenoPheromones>()
@@ -216,7 +216,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
             if (_timing.CurTime >= pheromones.NextPheromonesPlasmaUse)
             {
                 pheromones.NextPheromonesPlasmaUse += _pheromonePlasmaUseDelay;
-                if (!_xenoPlasma.TryRemovePlasma(uid, pheromones.PheromonesPlasmaUpkeep / 10))
+                if (!_xenoPlasma.TryRemovePlasma(uid, pheromones.PheromonesPlasmaUpkeep))
                 {
                     RemCompDeferred<XenoActivePheromonesComponent>(uid);
                     continue;
