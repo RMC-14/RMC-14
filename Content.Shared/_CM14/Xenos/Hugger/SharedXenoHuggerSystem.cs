@@ -1,6 +1,9 @@
 ﻿using Content.Shared._CM14.Xenos.Leap;
 using Content.Shared.DoAfter;
+using Content.Shared.Examine;
 using Content.Shared.Eye.Blinding.Systems;
+using Content.Shared.Ghost;
+using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
@@ -13,6 +16,7 @@ using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Xenos.Hugger;
@@ -49,6 +53,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         SubscribeLocalEvent<VictimHuggedComponent, MapInitEvent>(OnVictimHuggedMapInit);
         SubscribeLocalEvent<VictimHuggedComponent, ComponentRemove>(OnVictimHuggedRemoved);
         SubscribeLocalEvent<VictimHuggedComponent, CanSeeAttemptEvent>(OnVictimHuggedCancel);
+        SubscribeLocalEvent<VictimHuggedComponent, ExaminedEvent>(OnVictimHuggedExamined);
 
         SubscribeLocalEvent<VictimBurstComponent, MapInitEvent>(OnVictimBurstMapInit);
         SubscribeLocalEvent<VictimBurstComponent, UpdateMobStateEvent>(OnVictimUpdateMobState);
@@ -144,6 +149,12 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
             args.Cancel();
     }
 
+    private void OnVictimHuggedExamined(Entity<VictimHuggedComponent> victim, ref ExaminedEvent args)
+    {
+        if (HasComp<XenoComponent>(args.Examiner) || (CompOrNull<GhostComponent>(args.Examiner)?.CanGhostInteract ?? false))
+            args.PushMarkup("This creature is impregnated.");
+    }
+
     private void OnVictimBurstMapInit(Entity<VictimBurstComponent> burst, ref MapInitEvent args)
     {
         _appearance.SetData(burst, burst.Comp.BurstLayer, true);
@@ -230,8 +241,25 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
             }
         }
 
+        if (TryComp(victim, out HuggableComponent? huggable) &&
+            TryComp(victim, out HumanoidAppearanceComponent? appearance) &&
+            huggable.Sound.TryGetValue(appearance.Sex, out var sound))
+        {
+            if (_net.IsClient)
+            {
+                _audio.PlayPredicted(sound, victim, hugger);
+            }
+            else
+            {
+                var filter = Filter.Pvs(victim);
+                _audio.PlayEntity(sound, filter, victim, true);
+            }
+        }
+
+        var time = _timing.CurTime;
         var victimComp = EnsureComp<VictimHuggedComponent>(victim);
-        victimComp.RecoverAt = _timing.CurTime + hugger.Comp.ParalyzeTime;
+        victimComp.AttachedAt = time;
+        victimComp.RecoverAt = time + hugger.Comp.ParalyzeTime;
         _stun.TryParalyze(victim, hugger.Comp.ParalyzeTime, true);
 
         var container = _container.EnsureContainer<ContainerSlot>(victim, victimComp.ContainerId);
@@ -292,12 +320,6 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
                 }
 
                 continue;
-            }
-
-            if (_mobState.IsDead(uid))
-            {
-                RemCompDeferred<VictimHuggedComponent>(uid);
-                return;
             }
 
             RemCompDeferred<VictimHuggedComponent>(uid);
