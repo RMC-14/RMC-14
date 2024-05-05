@@ -39,6 +39,7 @@
     armor: 25
     explosionArmor: 80
   - type: MeleeWeapon
+    attackRate: 1.05
     damage:
       groups:
         Brute: 45
