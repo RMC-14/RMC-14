@@ -6,16 +6,16 @@
   playTimeTracker: CMJobCommandingOfficer
   requirements:
   - !type:DepartmentTimeRequirement
-    department: CMMarine
+    department: CMSquad
     time: 54000 # 15 hours
-  - !type:DepartmentTimeRequirement
-    department: CMEngineering
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsEngineering
     time: 36000 # 10 hours
   - !type:DepartmentTimeRequirement
     department: CMMilitaryPolice
     time: 36000 # 10 hours
-  - !type:DepartmentTimeRequirement
-    department: CMMedical
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
     time: 36000 # 10 hours
   - !type:DepartmentTimeRequirement
     department: CMCommand
@@ -57,7 +57,7 @@
   equipment:
     jumpsuit: CMJumpsuitCO
     back: CMSatchel
-    shoes: CMShoesDressCommander
+    shoes: CMShoesLaceupCommander
     head: CMHeadBeretCO
     outerClothing: CMCoatOfficer
     id: CMIDCardCommandingOfficer
@@ -75,6 +75,6 @@
     - sprite: Markers/jobs.rsi
       state: green
     - state: commanding_officer
-      
+
 - type: playTimeTracker
   id: CMJobCommandingOfficer

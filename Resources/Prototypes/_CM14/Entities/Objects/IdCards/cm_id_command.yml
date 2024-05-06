@@ -7,14 +7,6 @@
     job: CMStaffOfficer
 
 - type: entity
-  parent: CMIDCardSilver
-  id: CMIDCardSeniorEnlistedAdvisor
-  name: senior enlisted advisor ID card
-  components:
-  - type: PresetIdCard
-    job: CMSeniorEnlistedAdvisor
-
-- type: entity
   parent: CMIDCardGold
   id: CMIDCardCommandingOfficer
   name: commanding officer ID card

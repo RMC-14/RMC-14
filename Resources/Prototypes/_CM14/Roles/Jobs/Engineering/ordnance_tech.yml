@@ -5,9 +5,9 @@
   description: cm-job-description-ordnance-Tech
   playTimeTracker: CMJobOrdnanceTech
   requirements:
-  - !type:DepartmentTimeRequirement
-    department: CMEngineering
-    time: 3600 # 1 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsEngineering
+    time: 3600 # 1 hour
   startingGear: CMGearOrdnanceTech
   icon: "CMJobIconOrdnanceTech"
   joinNotifyCrew: false
@@ -27,12 +27,14 @@
   id: CMGearOrdnanceTech
   equipment:
     jumpsuit: CMJumpsuitOrdnanceTech
-    back: CMSatchelEngineer
-    shoes: CMBootsBrown
+    back: CMSatchelMarineTech
+    shoes: CMBootsBlack
     gloves: CMHandsInsulated
     id: CMIDCardOrdnanceTech
     ears: CMHeadsetEngineer
     belt: CMBeltUtilityFilled
+#    pocket1: CMDemolitionsScanner TODO CM14
+    pocket2: CMPouchGeneralMedium
 
 - type: entity
   parent: CMSpawnPointJobBase

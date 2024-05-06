@@ -28,7 +28,7 @@
   - CMAccessMedPrep # hospital corpsman
   - CMAccessOT # ordnance tech
   - CMAccessPilot # dropship pilot door access
-  - CMAccessPress # reporter access
+  - CMAccessPress # correspondent access
   - CMAccessQM # quartermaster
   - CMAccessRequisitions # (cargo)
   - CMAccessResearch # research access

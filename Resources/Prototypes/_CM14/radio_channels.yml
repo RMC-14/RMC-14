@@ -122,3 +122,11 @@
   keycode: "w" #w in CM13
   frequency: 1487
   color: "#fe9b24"
+
+- type: radioChannel
+  id: Hivemind
+  name: chat-radio-hivemind
+  keycode: "h"
+  frequency: 426
+  color: "#8b36a6"
+  longRange: true

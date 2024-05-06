@@ -29,15 +29,17 @@
     #    - ActionXenoEmpower
     #    - ActionXenoScissorCut
     tier: 3
+    hudOffset: 0,0.1
   - type: XenoDevour
   - type: XenoPlasma
     plasma: 300
     maxPlasma: 300
-    plasmaRegenOnWeeds: 15
+    plasmaRegenOnWeeds: 5
   - type: XenoArmor
     armor: 25
     explosionArmor: 80
   - type: MeleeWeapon
+    attackRate: 1.05
     damage:
       groups:
         Brute: 45
@@ -66,3 +68,5 @@
         density: 1000
         layer:
         - BulletImpassable
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 3.5

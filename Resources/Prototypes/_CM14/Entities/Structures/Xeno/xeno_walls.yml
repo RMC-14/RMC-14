@@ -21,6 +21,8 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: XenoNestSurface
+  - type: XenoConstructionPlasmaCost
+    plasma: 120
 
 - type: entity
   parent: WallXenoResin
@@ -75,6 +77,8 @@
         - GlassLayer
         density: 1000
   - type: XenoNestSurface
+  - type: XenoConstructionPlasmaCost
+    plasma: 95
 
 - type: entity
   parent: BaseMembraneXeno

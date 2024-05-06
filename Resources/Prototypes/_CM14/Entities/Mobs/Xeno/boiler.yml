@@ -32,10 +32,11 @@
     #    - ActionXenoLongSight
     #    - ActionXenoAcidShroud
     tier: 3
+    hudOffset: 0,0.35
   - type: XenoPlasma
     plasma: 400
     maxPlasma: 400
-    plasmaRegenOnWeeds: 16
+    plasmaRegenOnWeeds: 7
   - type: XenoAcid
   - type: XenoArmor
     armor: 20
@@ -48,3 +49,5 @@
   - type: Tackle
     threshold: 5
     stun: 7
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 3.5

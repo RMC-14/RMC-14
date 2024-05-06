@@ -31,20 +31,24 @@
     #    - ActionXenoCripplingStrike
     - ActionXenoEvolve540
     tier: 2
+    hudOffset: 0,0.16
   - type: XenoDevour
   - type: XenoPlasma
     plasma: 400
     maxPlasma: 400
-    plasmaRegenOnWeeds: 18
+    plasmaRegenOnWeeds: 4.5
   - type: XenoArmor
     explosionArmor: 20
   - type: XenoEvolution
     evolvesTo:
     - CMXenoRavager
   - type: MeleeWeapon
+    attackRate: 0.75
     damage:
       groups:
         Brute: 35
   - type: Tackle
     threshold: 4
     stun: 5
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 5

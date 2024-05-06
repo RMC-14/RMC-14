@@ -5,9 +5,9 @@
   description: cm-job-description-combat-tech
   playTimeTracker: CMJobCombatTech
   requirements:
-    - !type:DepartmentTimeRequirement
-      department: CMMarine
-      time: 3600 #1 hrs
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 3600 # 1 hour
   startingGear: CMGearCombatTech
   icon: "CMJobIconCombatTech"
   joinNotifyCrew: false
@@ -26,6 +26,13 @@
 
 - type: startingGear
   id: CMGearCombatTech
+  equipment:
+    jumpsuit: CMJumpsuitMarineEngineer # TODO CM14 all squad roles should spawn with no jumpsuit but still have clothes on
+    back: CMSatchelMarineTech
+    id: CMDogtagCombatTech
+
+- type: startingGear
+  id: CMGearCombatTechEquipped
   equipment:
     jumpsuit: CMJumpsuitMarineEngineer
     back: CMSatchelMarineTech

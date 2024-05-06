@@ -4,13 +4,14 @@
   suffix: Filled
   components:
   - type: StorageFill
-    contents: #todo cm14 port tools
-      - id: CMCrowbar
-      - id: CMWrench
-      - id: CMScrewdriver
-      - id: CMWirecutter
-      - id: CMWelder
-      - id: CMMultitool
+    contents:
+    - id: CMScrewdriver
+    - id: CMWrench
+    - id: CMWelder
+    - id: CMCrowbar
+    - id: CMWirecutter
+#    - id: CMCableCoil30 TODO CM14
+    - id: CMMultitool
 
 - type: entity
   parent: CMBeltUtilityCombat
@@ -18,13 +19,13 @@
   suffix: Filled
   components:
   - type: StorageFill
-    contents: #todo cm14 look up
-      - id: CMCrowbar
-      - id: CMWrench
-      - id: CMScrewdriver
-      - id: CMWirecutter
-      - id: CMWelder
-      - id: CMMultitool
+    contents:
+    - id: CMCrowbar
+    - id: CMWrench
+    - id: CMScrewdriver
+    - id: CMWirecutter
+    - id: CMWelder
+    - id: CMMultitool
 
 - type: entity
   parent: CMBeltKnife
@@ -33,8 +34,8 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMM11Knife
-        amount: 12
+    - id: CMM11Knife
+      amount: 12
 
 - type: entity
   parent: CMBeltSecurity
@@ -43,11 +44,12 @@
   components:
   - type: StorageFill
     contents:
-      - id: GrenadeFlashBang
-      - id: GrenadeFlashBang
-      - id: Stunbaton
-      - id: Handcuffs
-      - id: Handcuffs
+    - id: WeaponDisabler # TODO CM14 cm disabler
+    - id: Flash # TODO CM14 cm flash
+    - id: Stunbaton # TODO CM14 cm stun baton
+    - id: Handcuffs # TODO CM14 cm handcuffs
+#    - id: Pepperspray # TODO CM14
+    - id: ForensicScanner # TODO CM14 cm forensic scanner
 
 - type: entity
   parent: CMBeltMedical
@@ -56,21 +58,21 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMPillCanisterBicaridine
-        amount: 1
-      - id: CMPillCanisterDexalin
-        amount: 1
-      - id: CMPillCanisterDylovene
-        amount: 1
-      - id: CMPillCanisterKelotane
-        amount: 1
-      - id: CMPillCanisterInaprovaline
-        amount: 1
-      # TODO CM14 tramadol and perixadon pills, splint
-      - id: CMOintment
-        amount: 1
-      - id: CMTraumaKit
-        amount: 1
+    - id: CMPillCanisterBicaridine
+      amount: 1
+    - id: CMPillCanisterDexalin
+      amount: 1
+    - id: CMPillCanisterDylovene
+      amount: 1
+    - id: CMPillCanisterKelotane
+      amount: 1
+    - id: CMPillCanisterInaprovaline
+      amount: 1
+    # TODO CM14 tramadol and perixadon pills, splint
+    - id: CMOintment
+      amount: 1
+    - id: CMTraumaKit
+      amount: 1
 
 - type: entity
   parent: CMBeltMedicBag
@@ -79,22 +81,22 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMOintment
-        amount: 2
-      - id: CMTraumaKit
-        amount: 2
-      # TODO CM14 adrenaline autoinjector
-      - id: CMDexalinPlusAutoInjector
-        amount: 1
-      # TODO CM14 oxycodone autoinjector
-      - id: CMPillCanisterBicaridine
-        amount: 1
-      - id: CMPillCanisterDexalin
-        amount: 1
-      - id: CMPillCanisterDylovene
-        amount: 1
-      - id: CMPillCanisterKelotane
-        amount: 1
-      - id: CMPillCanisterInaprovaline
-        amount: 1
-      # TODO CM14 tramadol and perixadon pills, splint
+    - id: CMOintment
+      amount: 2
+    - id: CMTraumaKit
+      amount: 2
+    # TODO CM14 adrenaline autoinjector
+    - id: CMDexalinPlusAutoInjector
+      amount: 1
+    # TODO CM14 oxycodone autoinjector
+    - id: CMPillCanisterBicaridine
+      amount: 1
+    - id: CMPillCanisterDexalin
+      amount: 1
+    - id: CMPillCanisterDylovene
+      amount: 1
+    - id: CMPillCanisterKelotane
+      amount: 1
+    - id: CMPillCanisterInaprovaline
+      amount: 1
+    # TODO CM14 tramadol and perixadon pills, splint

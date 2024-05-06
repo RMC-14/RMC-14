@@ -6,7 +6,16 @@
   playTimeTracker: CMJobAuxiliarySupportOfficer
   requirements:
   - !type:DepartmentTimeRequirement
-    department: CMMarine
+    department: CMSquad
+    time: 18000 # 5 hours
+  - !type:DepartmentTimeRequirement
+    department: CMRequisitions
+    time: 18000 # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsEngineering
+    time: 18000 # 5 hours
+  - !type:DepartmentTimeRequirement
+    department: CMAuxiliarySupport
     time: 18000 # 5 hours
   weight: 5
   startingGear: CMGearASO
@@ -43,9 +52,11 @@
     jumpsuit: CMJumpsuitBO
     outerClothing: CMCoatASO
     back: CMSatchel
-    shoes: CMBootsBrown
+    shoes: CMBootsBlack
     id: CMIDCardASO
     ears: CMHeadsetLeader
+    pocket1: CMPouchGeneralLarge
+    pocket2: CMPouchGeneralLarge
 
 - type: entity
   parent: CMSpawnPointJobBase

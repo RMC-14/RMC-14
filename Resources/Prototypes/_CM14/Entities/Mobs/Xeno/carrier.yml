@@ -33,6 +33,7 @@
     #    - ActionXenoRetrieveEgg
     #    - ActionXenoHuggerReserve
     tier: 2
+    hudOffset: 0,0.19
   - type: XenoConstruction
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
@@ -41,7 +42,7 @@
   - type: XenoPlasma
     plasma: 500
     maxPlasma: 500
-    plasmaRegenOnWeeds: 17.5
+    plasmaRegenOnWeeds: 3.5
   - type: XenoArmor
     explosionArmor: 20
   - type: XenoDevour
@@ -70,3 +71,5 @@
         density: 1000
         layer:
         - BulletImpassable
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 3.5

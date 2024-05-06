@@ -1,0 +1,11 @@
+﻿- type: entity
+  id: CMVendorBundleRiflemanApparel
+  categories:
+  - hideSpawnMenu
+  components:
+  - type: CMVendorBundle
+    bundle:
+    - ArmorHelmetM10
+    - CMVendorHeadsetSquad
+    - CMHandsBlackMarine
+    - CMBootsBlackFilled

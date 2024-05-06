@@ -22,12 +22,14 @@
   id: CMGearCargoTech
   equipment:
     jumpsuit: CMJumpsuitCargoTech
-    back: CMSatchelEngineer
-    shoes: CMBootsBrown
+    back: CMSatchelMarineTech
+    shoes: CMBootsBlack
     head: CMHeadCapCargo
-    gloves: CMHandsBrown
+    gloves: CMHandsInsulated
     id: CMIDCardCargoTech
     ears: CMHeadsetRequisition
+    pocket1: CMPouchGeneralMedium
+#    belt: TODO CM14 M276 Pattern General Pistol Holster Rig Filled
 
 - type: entity
   parent: CMSpawnPointJobBase

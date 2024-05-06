@@ -7,23 +7,23 @@ using static Robust.Shared.Utility.SpriteSpecifier;
 
 namespace Content.Shared._CM14.Xenos.Pheromones;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedXenoPheromonesSystem))]
 public sealed partial class XenoFrenzyPheromonesComponent : Component
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
     public SpriteSpecifier Icon = new Rsi(new ResPath("/Textures/_CM14/Interface/xeno_pheromones_hud.rsi"), "frenzy");
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public FixedPoint2 Multiplier;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float AttackDamageModifier = 1.1f;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public FixedPoint2 MovementSpeedModifier = 0.1;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public List<ProtoId<DamageTypePrototype>> DamageTypes = new() { "Blunt", "Slash", "Piercing" };
 
     public override bool SessionSpecific => true;

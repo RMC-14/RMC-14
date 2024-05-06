@@ -26,6 +26,8 @@
     interfaces:
       enum.DropshipNavigationUiKey.Key:
         type: DropshipNavigationBui
+      enum.DropshipHijackerUiKey.Key:
+        type: DropshipHijackerBui
 
 # TODO CM14 alamo and normandy specific names for each
 - type: entity
@@ -50,6 +52,7 @@
   parent: MarkerBase
   id: CMDropshipDestination
   name: dropship destination
+  description: Defines a valid location for the dropships to FTL to when piloted.
   placement:
     mode: SnapgridCenter
   components:
@@ -57,3 +60,16 @@
     state: green
   - type: FTLBeacon
   - type: DropshipDestination
+
+- type: entity
+  parent: MarkerBase
+  id: CMDropshipHijackDestination
+  name: hijack destination
+  description: Defines a valid location for the dropships to FTL to when hijacked.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    state: green
+  - type: FTLBeacon
+  - type: DropshipHijackDestination

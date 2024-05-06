@@ -5,12 +5,9 @@
   description: cm-job-description-squad-leader
   playTimeTracker: CMJobSquadLeader
   requirements:
-    - !type:DepartmentTimeRequirement
-      department: CMMarine
-      time: 36000 #10 hrs
-    - !type:RoleTimeRequirement
-      role: CMJobFireteamLeader
-      time: 10800 #3 hrs
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 36000 # 10 hours
   startingGear: CMGearSquadLeader
   icon: "CMJobIconSquadLeader"
   joinNotifyCrew: false
@@ -37,12 +34,19 @@
 - type: startingGear
   id: CMGearSquadLeader
   equipment:
-    jumpsuit: CMJumpsuitMarineRTO
+    jumpsuit: JumpsuitMarine # TODO CM14 all squad roles should spawn with no jumpsuit but still have clothes on
+    back: CMSatchelMarine
+    id: CMDogtagSquadLeader
+
+- type: startingGear
+  id: CMGearSquadLeaderEquipped
+  equipment:
+    jumpsuit: JumpsuitMarine
     back: CMSatchelMarine
     shoes: CMBootsBlackFilled
     head: CMArmorHelmetM11
     outerClothing: CMArmorM3Medium
-    gloves: CMHandsBlack
+    gloves: CMHandsBlackMarine
     id: CMDogtagSquadLeader
     ears: CMHeadsetAlphaLeader
 

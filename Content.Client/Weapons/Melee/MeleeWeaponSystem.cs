@@ -42,6 +42,12 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         UpdatesOutsidePrediction = true;
     }
 
+    public override void FrameUpdate(float frameTime)
+    {
+        base.FrameUpdate(frameTime);
+        UpdateEffects();
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);

@@ -5,9 +5,9 @@
   description: cm-job-description-militarypolice
   playTimeTracker: CMJobMilitaryPolice
   requirements:
-    - !type:DepartmentTimeRequirement
-      department: CMMarine
-      time: 36000 # 10 hours
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 36000 # 10 hours
   weight: 5
   startingGear: CMGearMilitaryPolice
   icon: "CMJobIconMilitaryPolice"
@@ -33,11 +33,13 @@
     shoes: CMBootsBlackFilled
     head: CMHeadBeretRed
     eyes: ClothingEyesGlassesSecurity # todo cm14 replace with cm ones
-    gloves: CMHandsBlack
+    gloves: CMHandsBlackMarine
     id: CMIDCardMilitaryPolice
     outerClothing: CMArmorM2MP
     ears: CMHeadsetMPO
     belt: CMBeltSecurityFilled
+    #    pocket1: TODO CM14 tape recorder
+    pocket2: CMPouchGeneralLarge
 
 - type: entity
   parent: CMSpawnPointJobBase

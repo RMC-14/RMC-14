@@ -1,9 +1,9 @@
 # Dress Shoes
 - type: entity
   parent: ClothingShoesBaseButcherable
-  id: CMShoesDress
-  name: dress shoes
-  description: Pre-polished fancy dress shoes. You can see your reflection in them.
+  id: CMShoesLaceup
+  name: laceup shoes
+  description: The height of fashion, and they're pre-polished!
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Shoes/laceup.rsi
@@ -11,8 +11,8 @@
     sprite: _CM14/Objects/Clothing/Shoes/laceup.rsi
 
 - type: entity
-  parent: CMShoesDress
-  id: CMShoesDressCommander
+  parent: CMShoesLaceup
+  id: CMShoesLaceupCommander
   name: commanding officer dress shoes
   description: Has special soles for better trampling those underneath.
 

@@ -2,8 +2,8 @@
 - type: entity
   parent: ClothingUniformBase
   id: JumpsuitMarine
-  name: marine uniform
-  description: A standard-issue Marine uniform.
+  name: USCM uniform
+  description: Standard-issue Marine uniform. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
     - type: Sprite
       sprite: _CM14/Objects/Clothing/Uniforms/Marine/standard.rsi
@@ -30,7 +30,8 @@
 - type: entity
   parent: JumpsuitMarine
   id: CMJumpsuitMarineEngineer
-  name: engineer marine uniform
+  name: USCM ComTech uniform
+  description: Standard-issue Marine combat technician fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
     - type: Sprite
       sprite: _CM14/Objects/Clothing/Uniforms/Marine/engineer.rsi
@@ -50,7 +51,8 @@
 - type: entity
   parent: JumpsuitMarine
   id: CMJumpsuitMarineMedic
-  name: medic marine uniform
+  name: USCM corpsman uniform
+  description: Standard-issue Marine hospital corpsman fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
     - type: Sprite
       sprite: _CM14/Objects/Clothing/Uniforms/Marine/medic.rsi
@@ -393,7 +395,7 @@
 - type: entity
   parent: JumpsuitMarine
   id: CMJumpsuitIO
-  name: intelligence officer uniform
+  name: marine intelligence officer uniform
   description: Standard-issue intelligence officer's uniform.
   components:
     - type: Sprite

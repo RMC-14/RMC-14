@@ -8,11 +8,19 @@
 
 - type: entity
   parent: CMIDCardBase
-  id: CMIDCardPilotOfficer
-  name: pilot officer's ID card
+  id: CMIDCardPilotDropship
+  name: dropship pilot's ID card
   components:
   - type: PresetIdCard
-    job: CMPilotOfficer
+    job: CMPilotDropship
+
+- type: entity
+  parent: CMIDCardBase
+  id: CMIDCardPilotGunship
+  name: gunship pilot's ID card
+  components:
+  - type: PresetIdCard
+    job: CMPilotGunship
 
 - type: entity
   parent: CMIDCardBase

@@ -1,4 +1,12 @@
 ﻿- type: entity
+  parent: CMIDCardSilver
+  id: CMIDCardSeniorEnlistedAdvisor
+  name: senior enlisted advisor ID card
+  components:
+  - type: PresetIdCard
+    job: CMSeniorEnlistedAdvisor
+
+- type: entity
   parent: CMIDCardBase
   id: CMIDCardCorrespondent
   name: correspondent ID card
@@ -21,3 +29,11 @@
   components:
   - type: PresetIdCard
     job: CMLiaison
+
+- type: entity
+  parent: CMIDCardBase
+  id: CMIDCardMessTech
+  name: mess tech's ID card
+  components:
+  - type: PresetIdCard
+    job: CMMessTech

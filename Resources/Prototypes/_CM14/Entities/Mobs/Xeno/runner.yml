@@ -19,6 +19,19 @@
       0: Alive
       230: Critical
       330: Dead
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 1000
+        mask:
+        - Impassable
+        - HighImpassable
+        - LowImpassable
+        layer:
+        - MobLayer
   - type: Xeno
     actionIds:
     - ActionXenoRest
@@ -31,6 +44,7 @@
     - ActionXenoZoom
     - ActionXenoEvolve300
     tier: 1
+    hudOffset: 0,0.63
   - type: XenoBoneChips
   - type: XenoDevour
   - type: XenoHide
@@ -49,9 +63,12 @@
     - CMXenoLurker
   - type: XenoZoom
   - type: MeleeWeapon
+    attackRate: 1.4
     damage:
       groups:
         Brute: 22.5
   - type: Tackle
     threshold: 5
     stun: 8
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 10

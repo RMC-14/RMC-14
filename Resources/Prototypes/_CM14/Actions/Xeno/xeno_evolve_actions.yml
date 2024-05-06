@@ -1,7 +1,8 @@
 ﻿- type: entity
   parent: ActionXenoBase
   id: ActionXenoEvolve60
-  name: Evolve # TODO CM14 description
+  name: Evolve
+  description: Evolve to the next caste of xenomorph.
   components:
   - type: InstantAction
     itemIconStyle: NoItem

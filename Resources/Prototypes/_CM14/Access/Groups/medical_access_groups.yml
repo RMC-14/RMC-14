@@ -8,7 +8,7 @@
   - CMAccessChemistry
 
 - type: accessGroup
-  id: CMMedical
+  id: CMMedbay
   tags:
   - CMAccessMedical
   - CMAccessChemistry
