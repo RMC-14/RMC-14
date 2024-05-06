@@ -158,6 +158,9 @@
   name: ColMarTech automated utilities squad vendor
   description: An automated supply rack hooked up to a small storage of various utilities and tools. Can be accessed by any Marine Rifleman.
   components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessMarinePrep" ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
   - type: CMAutomatedVendor
@@ -226,6 +229,9 @@
   name: ColMarTech automated munition squad vendor
   description: An automated supply rack hooked up to a small storage of various ammunition types. Can be accessed by any Marine Rifleman.
   components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessMarinePrep" ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/requisitions_ammo.rsi
   - type: CMAutomatedVendor
@@ -277,6 +283,9 @@
   name: ColMarTech automated weapons rack
   description: An automated weapon rack hooked up to a big storage of standard-issue weapons.
   components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessMarinePrep" ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
@@ -348,6 +357,9 @@
   name: ColMarTech automated marine equipment rack
   description: An automated rack hooked up to a colossal storage of Marine Rifleman standard-issue equipment.
   components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessMarineRifleman" ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
@@ -533,6 +545,9 @@
   name: ColMarTech squad leader gear rack
   description: An automated gear rack for Squad Leaders.
   components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessSquadLeaderPrep" ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/gear.rsi
   - type: CMAutomatedVendor
@@ -719,6 +734,9 @@
   name: ColMarTech squad leader equipment rack
   description: An automated rack hooked up to a colossal storage of Squad Leader standard-issue equipment.
   components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessSquadLeaderPrep" ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
@@ -779,6 +797,9 @@
   name: ColMarTech squad weapons specialist gear rack
   description: An automated gear rack for Squad Weapons Specialists.
   components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessSpecPrep" ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/specialist_gear.rsi
   - type: CMAutomatedVendor
@@ -847,6 +868,9 @@
   name: ColMarTech squad weapons specialist equipment rack
   description: An automated rack hooked up to a colossal storage of Squad Weapons Specialist standard-issue equipment.
   components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessSpecPrep" ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
@@ -940,6 +964,9 @@
   name: ColMarTech squad comtech gear rack
   description: An automated gear rack for combat technicians.
   components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessCombatTechPrep" ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/combat_technician_gear.rsi
   - type: AccessReader
@@ -1167,6 +1194,8 @@
   name: ColMarTech squad medical gear rack
   description: An automated gear rack for hospital corpsmen.
   components:
+  - type: AccessReader
+    access: [ [ "CMAccessMedPrep" ] ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/medical_gear.rsi
   - type: CMAutomatedVendor
@@ -1299,6 +1328,8 @@
   name: ColMarTech squad medical equipment rack
   description: An automated rack hooked up to a colossal storage of hospital corpsman standard-issue equipment.
   components:
+  - type: AccessReader
+    access: [ [ "CMAccessMedPrep" ] ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
@@ -1415,6 +1446,8 @@
   name: ColMarTech squad smartgunner gear rack
   description: An automated gear rack for Squad Smartgunners.
   components:
+  - type: AccessReader
+    access: [ [ "CMAccessSpecPrep" ] ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/smartgunner_gear.rsi
   - type: CMAutomatedVendor
@@ -1514,6 +1547,8 @@
   name: ColMarTech squad smartgun equipment rack
   description: An automated rack hooked up to a colossal storage of Squad Smartgun standard-issue equipment.
   components:
+  - type: AccessReader
+    access: [ [ "CMAccessSpecPrep" ] ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
@@ -1559,6 +1594,8 @@
   name: ColMarTech fireteam leader gear rack
   description: An automated gear rack for fireteam leaders.
   components:
+  - type: AccessReader
+    access: [ [ "CMAccessFTLPrep" ] ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/fireteam_leader_gear.rsi
   - type: CMAutomatedVendor
@@ -1683,6 +1720,8 @@
   name: ColMarTech fireteam leader equipment rack
   description: An automated rack hooked up to a colossal storage of fireteam leader standard-issue equipment.
   components:
+  - type: AccessReader
+    access: [ [ "CMAccessFTLPrep" ] ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
@@ -1738,6 +1777,9 @@
   name: ColMarTech Surplus Uniform Vendor
   description: An automated rack hooked up to a small storage of standard marine uniforms.
   components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessMarinePrep" ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
