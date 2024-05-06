@@ -48,3 +48,19 @@
     Piercing: 0.8
   flatReductions:
     Blunt: 2
+
+- type: damageModifierSet
+  id: CMBloodlossHuman
+  coefficients:
+    Blunt: 0.08
+    Slash: 0.25
+    Piercing: 0.2
+    Shock: 0.0
+    Cold: 0.0
+    Heat: 0.0 # heat damage cauterizes wounds, but will still hurt obviously.
+    Poison: 0.0
+    Radiation: 0.0
+    Asphyxiation: 0.0
+    Bloodloss: 0.0 # no double dipping
+    Cellular: 0.0
+    Caustic: 0.0
