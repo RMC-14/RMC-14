@@ -969,8 +969,6 @@
     - [ "CMAccessCombatTechPrep" ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/combat_technician_gear.rsi
-  - type: AccessReader
-    access: [ [ "CMAccessCombatTechPrep" ] ]
   - type: CMAutomatedVendor
     sections:
     - name: Engineer Set (Mandatory)
