@@ -180,6 +180,7 @@
   - type: ActiveRadio
     channels:
     - Hivemind
+  - type: StandingState
 
 - type: entity
   abstract: true
