@@ -206,7 +206,7 @@ public sealed class XenoDevourSystem : EntitySystem
             devour = null;
 
             if (popup)
-                _popup.PopupClient("You already have something in your belly, there's no way that will fit!", xeno, xeno, PopupType.SmallCaution);
+                _popup.PopupClient("You already have something in your belly, there's no way that will fit!", victim, xeno, PopupType.SmallCaution);
 
             return false;
         }
