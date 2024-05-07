@@ -386,12 +386,12 @@
       choices: { CMBelt: 1 }
       entries:
       - id: CMBeltMarine
-    #    CMM276GeneralPistolHolsterRig #TODO: Make this
+      #    CMM276GeneralPistolHolsterRig #TODO: Make this
       - id: CMBeltKnife
-    #    CMM276M39HolsterRig #TODO: Make this
-    #    CMM276M44HolsterRig #TODO: Make this
-    #    CMM276M82FHolsterRig #TODO: Make this
-    #    CMM276ShotgunShellLoadingRig #TODO: Make this
+      #    CMM276M39HolsterRig #TODO: Make this
+      #    CMM276M44HolsterRig #TODO: Make this
+      #    CMM276M82FHolsterRig #TODO: Make this
+      #    CMM276ShotgunShellLoadingRig #TODO: Make this
       - id: CMBeltUtility
     #    CMM276M40GrenadeRigEmpty #TODO: Make this
     - name: Pouches
@@ -399,10 +399,10 @@
       entries:
       - id: CMPouchBayonet
       - id: CMPouchFirstAid
-    #    CMFirstAidPouchSplintsGauzeOintment #TODO: Make this
-    #    CMFirstAidPouchPillPackets #TODO: Make this
-    #    CMFlarePouchFull #TODO: Make this
-    #    CMSmallDocumentPouch #TODO: Make this
+      #    CMFirstAidPouchSplintsGauzeOintment #TODO: Make this
+      #    CMFirstAidPouchPillPackets #TODO: Make this
+      #    CMFlarePouchFull #TODO: Make this
+      #    CMSmallDocumentPouch #TODO: Make this
       - id: CMPouchMagazine
       #- id: CMPouchShotgun #TODO: Make this
       - id: CMPouchGeneral
@@ -1126,7 +1126,8 @@
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: AccessReader
-    access: [ [ "CMAccessCombatTechPrep" ] ]
+    access:
+    - [ "CMAccessCombatTechPrep" ]
   - type: CMAutomatedVendor
     sections:
     - name: Standard Equipment
@@ -1193,7 +1194,8 @@
   description: An automated gear rack for hospital corpsmen.
   components:
   - type: AccessReader
-    access: [ [ "CMAccessMedPrep" ] ]
+    access:
+    - [ "CMAccessMedPrep" ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/medical_gear.rsi
   - type: CMAutomatedVendor
@@ -1229,18 +1231,18 @@
     #    CMAutoinjectorTricord: 1P
     - name: Pill Bottles
       entries:
-        - id: CMPillCanisterBicaridine
-          amount: 5 #P
-        - id: CMPillCanisterDylovene
-          amount: 5 #P
-        - id: CMPillCanisterInaprovaline
-          amount: 5 #P
-        - id: CMPillCanisterKelotane
-          amount: 5 #P
-#        - id: CMPillCanisterPeridaxon
-#          amount: 5 #P
-#        - id: CMPillCanisterTramadol
-#          amount: 5 #P
+      - id: CMPillCanisterBicaridine
+        amount: 5 #P
+      - id: CMPillCanisterDylovene
+        amount: 5 #P
+      - id: CMPillCanisterInaprovaline
+        amount: 5 #P
+      - id: CMPillCanisterKelotane
+        amount: 5 #P
+#      - id: CMPillCanisterPeridaxon
+#        amount: 5 #P
+#      - id: CMPillCanisterTramadol
+#        amount: 5 #P
     - name: Medical Utilities
       entries:
       - id: CMHealthAnalyzer
@@ -1327,7 +1329,8 @@
   description: An automated rack hooked up to a colossal storage of hospital corpsman standard-issue equipment.
   components:
   - type: AccessReader
-    access: [ [ "CMAccessMedPrep" ] ]
+    access:
+    - [ "CMAccessMedPrep" ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
@@ -1445,7 +1448,8 @@
   description: An automated gear rack for Squad Smartgunners.
   components:
   - type: AccessReader
-    access: [ [ "CMAccessSpecPrep" ] ]
+    access:
+    - [ "CMAccessSmartPrep" ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/smartgunner_gear.rsi
   - type: CMAutomatedVendor
@@ -1546,7 +1550,8 @@
   description: An automated rack hooked up to a colossal storage of Squad Smartgun standard-issue equipment.
   components:
   - type: AccessReader
-    access: [ [ "CMAccessSpecPrep" ] ]
+    access:
+    - [ "CMAccessSmartPrep" ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
@@ -1593,7 +1598,8 @@
   description: An automated gear rack for fireteam leaders.
   components:
   - type: AccessReader
-    access: [ [ "CMAccessFTLPrep" ] ]
+    access:
+    - [ "CMAccessFTLPrep" ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/fireteam_leader_gear.rsi
   - type: CMAutomatedVendor
@@ -1719,7 +1725,8 @@
   description: An automated rack hooked up to a colossal storage of fireteam leader standard-issue equipment.
   components:
   - type: AccessReader
-    access: [ [ "CMAccessFTLPrep" ] ]
+    access:
+    - [ "CMAccessFTLPrep" ]
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
