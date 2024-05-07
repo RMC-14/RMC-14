@@ -17,6 +17,14 @@
     {
       "name": "up-equipped-MASK",
       "directions": 4
+    },
+    {
+      "name": "equipped-MASK-reptilian",
+      "directions": 4
+    },
+    {
+      "name": "up-equipped-MASK-reptilian",
+      "directions": 4
     }
   ]
 }
