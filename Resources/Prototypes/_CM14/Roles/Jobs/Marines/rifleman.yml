@@ -20,12 +20,19 @@
 - type: startingGear
   id: CMGearRifleman
   equipment:
+    jumpsuit: JumpsuitMarine # TODO CM14 all squad roles should spawn with no jumpsuit but still have clothes on
+    back: CMSatchelMarine
+    id: CMDogtagRifleman
+
+- type: startingGear
+  id: CMGearRiflemanEquipped
+  equipment:
     jumpsuit: JumpsuitMarine
     back: CMSatchelMarine
     shoes: CMBootsBlackFilled
     head: ArmorHelmetM10
-    outerClothing: ArmorMarineM3
-    gloves: CMHandsBlack
+    outerClothing: CMArmorM3Medium
+    gloves: CMHandsBlackMarine
     id: CMDogtagRifleman
     ears: CMHeadsetAlpha
 

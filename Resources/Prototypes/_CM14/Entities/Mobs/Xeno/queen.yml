@@ -3,7 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   id: CMXenoQueen # TODO CM14 big loud steps
-  name: Queen # TODO CM14 use consoles
+  name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
   components:
   - type: Sprite
@@ -64,7 +64,7 @@
   - type: XenoPlasma
     plasma: 1000
     maxPlasma: 1000
-    plasmaRegenOnWeeds: 40
+    plasmaRegenOnWeeds: 4
   - type: XenoArmor
     armor: 25
     explosionArmor: 100
@@ -95,3 +95,6 @@
         density: 1000
         layer:
         - BulletImpassable
+  - type: DropshipHijacker
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 2.5

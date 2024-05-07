@@ -10,7 +10,7 @@
   - type: InteractionOutline
   - type: Clickable
   - type: Damageable
-    damageContainer: Resin
+    damageContainer: StructuralXeno
     damageModifierSet: Resin
   - type: Destructible
     thresholds:
@@ -36,7 +36,7 @@
   - type: InteractionOutline
   - type: Clickable
   - type: Damageable
-    damageContainer: Resin
+    damageContainer: StructuralXeno
     damageModifierSet: Resin
   - type: Destructible
     thresholds:

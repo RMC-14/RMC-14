@@ -11,7 +11,6 @@ using Content.Shared.Administration;
 using Content.Shared.Eui;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._CM14.Admin;
@@ -44,11 +43,6 @@ public sealed class CMAdminEui : BaseEui
         _xeno = _entities.System<XenoSystem>();
 
         _target = _entities.GetNetEntity(target);
-    }
-
-    public static bool CanUse(IAdminManager admin, ICommonSession player)
-    {
-        return admin.HasAdminFlag(player, AdminFlags.Fun);
     }
 
     public override void Opened()

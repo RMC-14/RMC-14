@@ -22,7 +22,7 @@
     size: Invalid
   - type: XenoEgg
   - type: Damageable
-    damageContainer: Resin
+    damageContainer: StructuralXeno
   - type: Destructible
     thresholds:
     - trigger:

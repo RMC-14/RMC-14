@@ -2637,7 +2637,7 @@ entities:
       pos: 13.5,10.5
       parent: 179
     - type: Door
-      secondsUntilStateChange: -4497.261
+      secondsUntilStateChange: -4556.372
       state: Opening
   - uid: 26
     components:
@@ -3837,20 +3837,6 @@ entities:
     - type: Transform
       pos: -8.5,1.5
       parent: 179
-- proto: CMRodMetal
-  entities:
-  - uid: 133
-    components:
-    - type: Transform
-      pos: -3.4717777,7.672426
-      parent: 179
-- proto: CMRodPlasteel
-  entities:
-  - uid: 1050
-    components:
-    - type: Transform
-      pos: -3.249692,7.64754
-      parent: 179
 - proto: CMRailing
   entities:
   - uid: 94
@@ -3977,6 +3963,20 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+- proto: CMRodMetal
+  entities:
+  - uid: 133
+    components:
+    - type: Transform
+      pos: -3.4717777,7.672426
+      parent: 179
+- proto: CMRodPlasteel
+  entities:
+  - uid: 1050
+    components:
+    - type: Transform
+      pos: -3.249692,7.64754
+      parent: 179
 - proto: CMScalpel
   entities:
   - uid: 1085
@@ -4039,20 +4039,6 @@ entities:
     - type: Transform
       pos: -0.5,7.5
       parent: 179
-- proto: CMSheetPhoron
-  entities:
-  - uid: 1077
-    components:
-    - type: Transform
-      pos: 17.530241,24.448145
-      parent: 179
-- proto: CMSheetPlasteel
-  entities:
-  - uid: 478
-    components:
-    - type: Transform
-      pos: -4.0129576,7.6107273
-      parent: 179
 - proto: CMSheetMetal
   entities:
   - uid: 205
@@ -4084,6 +4070,20 @@ entities:
     components:
     - type: Transform
       pos: -15.5,-4.5
+      parent: 179
+- proto: CMSheetPhoron
+  entities:
+  - uid: 1077
+    components:
+    - type: Transform
+      pos: 17.530241,24.448145
+      parent: 179
+- proto: CMSheetPlasteel
+  entities:
+  - uid: 478
+    components:
+    - type: Transform
+      pos: -4.0129576,7.6107273
       parent: 179
 - proto: CMSMESBasic
   entities:
@@ -4176,12 +4176,19 @@ entities:
     - type: Transform
       pos: 0.5,0.5
       parent: 179
-- proto: CMSpawnPointPilot
+- proto: CMSpawnPointPilotDropship
   entities:
-  - uid: 1172
+  - uid: 481
     components:
     - type: Transform
-      pos: 1.5,-0.5
+      pos: 2.5,0.5
+      parent: 179
+- proto: CMSpawnPointPilotGunship
+  entities:
+  - uid: 515
+    components:
+    - type: Transform
+      pos: 2.5,-0.5
       parent: 179
 - proto: CMSpawnPointRifleman
   entities:
@@ -4199,10 +4206,10 @@ entities:
       parent: 179
 - proto: CMSpawnPointSmartGunner
   entities:
-  - uid: 1195
+  - uid: 428
     components:
     - type: Transform
-      pos: 2.5,-0.5
+      pos: 1.5,-0.5
       parent: 179
 - proto: CMSpawnPointSquadLeader
   entities:

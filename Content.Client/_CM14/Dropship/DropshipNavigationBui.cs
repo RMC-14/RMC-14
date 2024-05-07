@@ -25,29 +25,16 @@ public sealed class DropshipNavigationBui : BoundUserInterface
 
     protected override void Open()
     {
-        if (_window == null)
-        {
-            _window = new DropshipNavigationWindow();
-            _window.OnClose += Close;
-            SetHeader("Flight Controls");
+        var window = OpenWindow();
 
-            if (_entities.TryGetComponent(Owner, out TransformComponent? transform) &&
-                _entities.TryGetComponent(transform.ParentUid, out MetaDataComponent? metaData))
-            {
-                _window.Title = $"{metaData.EntityName} {_window.Title}";
-            }
-
-            _window.OpenCentered();
-        }
-
-        _window.CancelButton.Button.OnPressed += _ =>
+        window.CancelButton.Button.OnPressed += _ =>
         {
             SetCancelLaunchDisabled(true);
             _selected = null;
             ResetDestinationButtons();
         };
 
-        _window.LaunchButton.Button.OnPressed += _ =>
+        window.LaunchButton.Button.OnPressed += _ =>
         {
             if (_selected != null)
                 SendMessage(new DropshipNavigationLaunchMsg(_selected.Value));
@@ -62,13 +49,7 @@ public sealed class DropshipNavigationBui : BoundUserInterface
 
     protected override void UpdateState(BoundUserInterfaceState state)
     {
-        if (_window == null)
-        {
-            _window = new DropshipNavigationWindow();
-            _window.OnClose += Close;
-            SetHeader("Flight Controls");
-            _window.OpenCentered();
-        }
+        OpenWindow();
 
         switch (state)
         {
@@ -87,6 +68,25 @@ public sealed class DropshipNavigationBui : BoundUserInterface
 
         if (disposing)
             _window?.Dispose();
+    }
+
+    private DropshipNavigationWindow OpenWindow()
+    {
+        if (_window != null)
+            return _window;
+
+        _window = new DropshipNavigationWindow();
+        _window.OnClose += Close;
+        SetHeader("Flight Controls");
+
+        if (_entities.TryGetComponent(Owner, out TransformComponent? transform) &&
+            _entities.TryGetComponent(transform.ParentUid, out MetaDataComponent? metaData))
+        {
+            _window.Title = $"{metaData.EntityName} {_window.Title}";
+        }
+
+        _window.OpenCentered();
+        return _window;
     }
 
     private void Set(DropshipNavigationDestinationsBuiState destinations)

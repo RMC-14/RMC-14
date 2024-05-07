@@ -695,5 +695,56 @@
   id: 90
   time: '2024-04-28T12:21:07.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2041
+- author: DangerRevolution
+  changes:
+  - message: Added JTAC Radio Key
+    type: Add
+  - message: Add Weyland-Yutani radio key
+    type: Add
+  id: 91
+  time: '2024-04-30T06:37:23.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2043
+- author: DrSmugleaf
+  changes:
+  - message: Add xeno hivemind chat.
+    type: Add
+  id: 92
+  time: '2024-05-01T03:23:07.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2049
+- author: DrSmugleaf
+  changes:
+  - message: The hugger now rips off the victim's mask on hug.
+    type: Fix
+  id: 93
+  time: '2024-05-02T05:25:17.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2050
+- author: DrSmugleaf
+  changes:
+  - message: Replaced the pilot officer with the dropship and gunship pilots.
+    type: Add
+  id: 94
+  time: '2024-05-03T01:08:07.363042+00:00'
+  url: null
+- author: DrSmugleaf
+  changes:
+  - message: The xeno Queen is now able to hijack the dropship.
+    type: Add
+  id: 95
+  time: '2024-05-03T08:02:39.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2058
+- author: DrSmugleaf
+  changes:
+  - message: Added xeno hud to see the health and plasma of all xenos on screen.
+    type: Add
+  id: 96
+  time: '2024-05-05T00:05:44.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2060
+- author: Whisper
+  changes:
+  - message: Vending machines require respective access.
+    type: Add
+  id: 97
+  time: '2024-05-07T01:39:40.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2069
 Name: CM
 Order: -1

@@ -45,11 +45,11 @@ public sealed class XenoWordQueenSystem : SharedXenoWordQueenSystem
         if (text.Length > CharacterLimit)
             text = text[..CharacterLimit].Trim();
 
-        var filter = Filter
+        var xenos = Filter
             .Empty()
             .AddWhereAttachedEntity(ent => CompOrNull<XenoComponent>(ent)?.Hive == queenXeno.Hive);
 
-        if (filter.Count <= 1)
+        if (xenos.Count <= 1)
         {
             _popup.PopupEntity("Nobody could hear you...", queen, queen, PopupType.LargeCaution);
             return;
@@ -62,9 +62,8 @@ public sealed class XenoWordQueenSystem : SharedXenoWordQueenSystem
         const string header = "[color=#921992][font size=16][bold]The words of the Queen reverberate in our head...[/bold][/font][/color]\n";
         var message = $"{header}[color=red][font size=14][bold]{wrapped}[/bold][/font][/color]";
 
-        // TODO CM14 hive channel
-        _chat.ChatMessageToManyFiltered(filter, ChatChannel.Radio, text, message, queen, false, true, null);
-        _audio.PlayGlobal(queen.Comp.Sound, filter, true);
+        _chat.ChatMessageToManyFiltered(xenos, ChatChannel.Radio, text, message, queen, false, true, null);
+        _audio.PlayGlobal(queen.Comp.Sound, xenos, true);
 
         foreach (var (actionId, _) in _actions.GetActions(queen))
         {

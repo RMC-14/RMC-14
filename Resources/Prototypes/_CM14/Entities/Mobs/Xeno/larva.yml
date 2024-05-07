@@ -23,10 +23,11 @@
     - ActionXenoWatch
     - ActionXenoHide
     - ActionXenoEvolve60
+    hudOffset: -0.1,0.125
     tier: 0
   - type: XenoPlasma
     maxPlasma: 10
-    plasmaRegenOnWeeds: 1
+    plasmaRegenOnWeeds: 0.1
   - type: XenoEvolution
     evolvesTo:
     - CMXenoDrone
@@ -47,3 +48,5 @@
         - SmallMobLayer
   - type: Flammable
     canResistFire: false
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 6.7

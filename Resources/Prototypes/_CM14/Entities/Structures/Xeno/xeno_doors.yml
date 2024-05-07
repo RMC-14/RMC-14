@@ -53,7 +53,7 @@
     resistance: 3
   - type: Occluder
   - type: Damageable
-    damageContainer: Resin
+    damageContainer: StructuralXeno
     damageModifierSet: Resin
   - type: Destructible
     thresholds:
@@ -77,6 +77,8 @@
     closingSpriteState: closed_unlit
   - type: ApcPowerReceiver
     powerLoad: 0
+  - type: XenoConstructionPlasmaCost
+    plasma: 120
 
 - type: entity
   id: DoorXenoResinThick

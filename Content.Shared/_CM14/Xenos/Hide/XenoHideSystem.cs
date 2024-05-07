@@ -1,9 +1,10 @@
-﻿using Robust.Shared.Physics.Systems;
+﻿using Content.Shared.Actions;
 
 namespace Content.Shared._CM14.Xenos.Hide;
 
 public sealed class XenoHideSystem : EntitySystem
 {
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
@@ -22,6 +23,12 @@ public sealed class XenoHideSystem : EntitySystem
 
         xeno.Comp.Hiding = !xeno.Comp.Hiding;
         Dirty(xeno);
+
+        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        {
+            if (action.BaseEvent is XenoHideActionEvent)
+                _actions.SetToggled(actionId, xeno.Comp.Hiding);
+        }
 
         _appearance.SetData(xeno, XenoVisualLayers.Hide, xeno.Comp.Hiding);
     }

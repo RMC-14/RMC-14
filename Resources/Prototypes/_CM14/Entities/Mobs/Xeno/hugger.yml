@@ -22,9 +22,10 @@
     - ActionXenoHide
     - ActionXenoLeap
     tier: 0
+    hudOffset: 0,0.4
   - type: XenoPlasma
     maxPlasma: 10
-    plasmaRegenOnWeeds: 1
+    plasmaRegenOnWeeds: 0.1
   - type: XenoEvolution
     evolvesTo:
     - CMXenoDrone
@@ -48,3 +49,5 @@
   - type: WhitelistPickupBy
     all:
     - type: Xeno
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 5

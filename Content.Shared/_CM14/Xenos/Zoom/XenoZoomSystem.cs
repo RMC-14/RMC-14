@@ -1,10 +1,11 @@
-﻿using System.Numerics;
+﻿using Content.Shared.Actions;
 using Content.Shared.Movement.Systems;
 
 namespace Content.Shared._CM14.Xenos.Zoom;
 
 public sealed class XenoZoomSystem : EntitySystem
 {
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedContentEyeSystem _eye = default!;
 
     public override void Initialize()
@@ -26,9 +27,16 @@ public sealed class XenoZoomSystem : EntitySystem
         {
             _eye.SetMaxZoom(xeno, xeno.Comp.Zoom);
             _eye.SetZoom(xeno, xeno.Comp.Zoom);
-            return;
+        }
+        else
+        {
+            _eye.ResetZoom(xeno);
         }
 
-        _eye.ResetZoom(xeno);
+        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        {
+            if (action.BaseEvent is XenoZoomActionEvent)
+                _actions.SetToggled(actionId, xeno.Comp.Enabled);
+        }
     }
 }

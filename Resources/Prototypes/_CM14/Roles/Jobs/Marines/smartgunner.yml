@@ -6,8 +6,8 @@
   playTimeTracker: CMJobSmartgunner
   requirements:
     - !type:DepartmentTimeRequirement
-      department: CMMarine
-      time: 18000 #5 hrs
+      department: CMSquad
+      time: 18000 # 5 hours
   startingGear: CMGearSmartgunner
   icon: "CMJobIconSmartgunner"
   joinNotifyCrew: false
@@ -25,12 +25,19 @@
 - type: startingGear
   id: CMGearSmartgunner
   equipment:
+    jumpsuit: JumpsuitMarine # TODO CM14 all squad roles should spawn with no jumpsuit but still have clothes on
+    back: CMSatchelMarine
+    id: CMDogtagSmartgunner
+
+- type: startingGear
+  id: CMGearSmartgunnerEquipped
+  equipment:
     jumpsuit: JumpsuitMarine
     back: CMSatchelMarine
     shoes: CMBootsBlackFilled
     head: ArmorHelmetM10
-    outerClothing: ArmorMarineM3
-    gloves: CMHandsBlack
+    outerClothing: CMArmorM3Medium
+    gloves: CMHandsBlackMarine
     id: CMDogtagSmartgunner
     ears: CMHeadsetAlpha
 

@@ -1,19 +1,21 @@
 ﻿- type: entity
   id: ActionXenoRest
   parent: ActionXenoBase
-  name: Rest # TODO CM14 description
+  name: Rest
+  description: Lie down to regenerate health and plasma more quickly while on weeds.
   components:
-  - type: InstantAction # TODO CM14 cooldown
+  - type: InstantAction
     itemIconStyle: NoItem
     icon:
       sprite: _CM14/Actions/xeno_actions.rsi
       state: resting
     event: !type:XenoRestActionEvent
+    useDelay: 1
 
 - type: entity
   id: ActionXenoWatch
   parent: ActionXenoBase
-  name: Watch # TODO CM14 description
+  name: Watch Xenomorph
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -25,7 +27,8 @@
 - type: entity
   id: ActionXenoPheromones
   parent: ActionXenoBase
-  name: Emit Pheromones
+  name: Emit Pheromones (35) # TODO CM14 proper plasma costs
+  description: Gives a buff to nearby xenomorphs.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -38,6 +41,7 @@
   id: ActionXenoHide
   parent: ActionXenoBase
   name: Hide
+  description: Hide under tables and other objects.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -45,11 +49,13 @@
       sprite: _CM14/Actions/xeno_actions.rsi
       state: xenohide
     event: !type:XenoHideActionEvent
+    useDelay: 0.5
 
 - type: entity
   id: ActionXenoToggleCrest
   parent: ActionXenoBase
   name: Toggle Crest Defense
+  description: Increases your resistance to projectile damage but slows you down.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -58,12 +64,14 @@
       state: crest_defense
     event: !type:XenoToggleCrestActionEvent
     useDelay: 2
-  - type: XenoCrestAction
+  - type: ActionSharedCooldown
+    id: crest
 
 - type: entity
   id: ActionXenoFortify
   parent: ActionXenoBase
   name: Fortify
+  description: Become immobile and extremely resistant to projectile damage.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -72,11 +80,14 @@
       state: fortify
     event: !type:XenoFortifyActionEvent
     useDelay: 5
+  - type: ActionSharedCooldown
+    id: crest
 
 - type: entity
   id: ActionXenoResinWalker
   parent: ActionXenoBase
-  name: Resin Walker
+  name: Resin Walker (50) # TODO CM14 proper plasma costs
+  description: Run faster on weeds.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -102,7 +113,8 @@
 - type: entity
   id: ActionXenoWordQueen
   parent: ActionXenoBase
-  name: Word of the Queen # TODO CM14 description
+  name: Word of the Queen (50) # TODO CM14 proper plasma costs
+  description: Sends a message to all members of your hive.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -116,7 +128,8 @@
 - type: entity
   id: ActionXenoGrowOvipositor
   parent: ActionXenoBase
-  name: Grow Ovipositor # TODO CM14 description
+  name: Grow Ovipositor (700) # TODO CM14 proper plasma costs
+  description: Become immobile and start laying eggs which will produce facehuggers. Has a 5 minute cooldown.
   components:
   - type: InstantAction
     itemIconStyle: NoItem

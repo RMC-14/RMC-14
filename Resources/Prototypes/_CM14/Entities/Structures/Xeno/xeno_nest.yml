@@ -29,7 +29,7 @@
         hard: false
   - type: Clickable
   - type: Damageable
-    damageContainer: Resin
+    damageContainer: StructuralXeno
   - type: Destructible
     thresholds:
     - trigger:

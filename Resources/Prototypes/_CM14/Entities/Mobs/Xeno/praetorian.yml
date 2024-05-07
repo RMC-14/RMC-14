@@ -31,12 +31,13 @@
     #    - ActionXenoAcidBall
     #    - ActionXenoSprayAcid
     tier: 3
+    hudOffset: 0,0.16
   - type: XenoAcid
   - type: XenoDevour
   - type: XenoPlasma
     plasma: 800
     maxPlasma: 800
-    plasmaRegenOnWeeds: 24
+    plasmaRegenOnWeeds: 3
   - type: XenoArmor
     armor: 25
     explosionArmor: 40

@@ -19,6 +19,18 @@ public sealed partial class VictimHuggedComponent : Component
     public SpriteSpecifier HuggedSprite = new Rsi(new ResPath("/Textures/_CM14/Mobs/Xenos/Hugger/hugger_mask.rsi"), "human");
 
     [DataField, AutoNetworkedField]
+    public SpriteSpecifier[] HuggedIcons =
+    [
+        new Rsi(new ResPath("/Textures/_CM14/Interface/xeno_hud.rsi"), "infected0"),
+        new Rsi(new ResPath("/Textures/_CM14/Interface/xeno_hud.rsi"), "infected1"),
+        new Rsi(new ResPath("/Textures/_CM14/Interface/xeno_hud.rsi"), "infected2"),
+        new Rsi(new ResPath("/Textures/_CM14/Interface/xeno_hud.rsi"), "infected3"),
+        new Rsi(new ResPath("/Textures/_CM14/Interface/xeno_hud.rsi"), "infected4"),
+        new Rsi(new ResPath("/Textures/_CM14/Interface/xeno_hud.rsi"), "infected5"),
+        new Rsi(new ResPath("/Textures/_CM14/Interface/xeno_hud.rsi"), "infected6")
+    ];
+
+    [DataField, AutoNetworkedField]
     public Enum HuggedLayer = VictimHuggedLayer.Hugged;
 
     [DataField, AutoNetworkedField]
@@ -38,6 +50,9 @@ public sealed partial class VictimHuggedComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan BurstDelay = TimeSpan.FromMinutes(8);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan AttachedAt;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan BurstAt;

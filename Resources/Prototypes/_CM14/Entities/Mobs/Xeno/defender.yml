@@ -31,6 +31,7 @@
     - ActionXenoFortify
     - ActionXenoEvolve300
     tier: 1
+    hudOffset: 0,0.2
   - type: XenoEvolution
     evolvesTo:
     - CMXenoWarrior

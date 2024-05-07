@@ -343,10 +343,10 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
             Log.Error($"No valid spawn found for player. Squad: {squadId}, job: {job.ID}");
 
             if (allSpawners.NonSquad.TryGetValue(job.ID, out spawners))
-                return (_random.Pick(spawners), null);
+                return (_random.Pick(spawners), squadEnt);
 
             if (allSpawners.NonSquadFull.TryGetValue(job.ID, out spawners))
-                return (_random.Pick(spawners), null);
+                return (_random.Pick(spawners), squadEnt);
 
             Log.Error($"No valid spawn found for player. Job: {job.ID}");
         }

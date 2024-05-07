@@ -7,17 +7,17 @@ using static Robust.Shared.Utility.SpriteSpecifier;
 
 namespace Content.Shared._CM14.Xenos.Pheromones;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedXenoPheromonesSystem))]
 public sealed partial class XenoWardingPheromonesComponent : Component
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
     public SpriteSpecifier Icon = new Rsi(new ResPath("/Textures/_CM14/Interface/xeno_pheromones_hud.rsi"), "warding");
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public FixedPoint2 Multiplier;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public List<ProtoId<DamageTypePrototype>> DamageTypes = new() { "Bloodloss", "Asphyxiation" };
 
     public override bool SessionSpecific => true;

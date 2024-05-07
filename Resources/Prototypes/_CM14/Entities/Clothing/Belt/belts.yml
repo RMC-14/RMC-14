@@ -191,7 +191,7 @@
 - type: entity
   parent: CMBeltBaseStorage
   id: CMBeltSecurity
-  name: M276 pattern security rig
+  name: M276 pattern military police rig
   description: The M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This configuration is commonly seen among USCM Military Police and peacekeepers, though it can hold some light munitions.
   components:
   - type: Sprite
@@ -210,6 +210,7 @@
       - Flash
       - FlashOnTrigger
       - Stunbaton
+      - ForensicScanner
 
 - type: entity
   parent: CMBeltMarine

@@ -24,6 +24,7 @@ using Robust.Shared.Map.Components;
 namespace Content.IntegrationTests.Tests.GameRules;
 
 [TestFixture]
+[Ignore("Nukeops is not enabled in CM")]
 public sealed class NukeOpsTest
 {
     /// <summary>

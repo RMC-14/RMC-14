@@ -7,6 +7,7 @@ chat-radio-marine-engineer = Engineering
 chat-radio-marine-military-police = Military Police
 chat-radio-marine-requisition = Requisition
 chat-radio-marine-intel = Intelligence
+chat-radio-marine-jtac = JTAC
 
 chat-radio-marine-alpha = Alpha
 chat-radio-marine-bravo = Bravo
@@ -16,3 +17,6 @@ chat-radio-marine-echo = Echo
 chat-radio-marine-foxtrot = Foxtrot
 
 chat-radio-colony = Colony
+chat-radio-WY = Weyland-Yutani
+
+chat-radio-hivemind = Hivemind

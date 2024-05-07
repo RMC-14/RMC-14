@@ -13,11 +13,3 @@
   components:
   - type: PresetIdCard
     job: CMCargoTech
-
-- type: entity
-  parent: CMIDCardBase
-  id: CMIDCardMessTech
-  name: mess tech's ID card
-  components:
-  - type: PresetIdCard
-    job: CMMessTech

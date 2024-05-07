@@ -93,7 +93,10 @@ public sealed class XenoEggSystem : EntitySystem
         foreach (var (actionId, _) in _actions.GetActions(ent))
         {
             if (TryComp(actionId, out XenoGrowOvipositorActionComponent? action))
+            {
                 _actions.SetCooldown(actionId, attaching ? action.AttachCooldown : action.DetachCooldown);
+                _actions.SetToggled(actionId, attaching);
+            }
         }
     }
 

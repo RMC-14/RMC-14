@@ -30,11 +30,12 @@
     - ActionXenoParalyzingSlash
     - ActionXenoEvolve300
     tier: 1
+    hudOffset: 0,0.157
   - type: XenoDevour
   - type: XenoPlasma
     plasma: 400
     maxPlasma: 400
-    plasmaRegenOnWeeds: 12
+    plasmaRegenOnWeeds: 3
   - type: XenoArmor
     explosionArmor: 10
   - type: XenoEvolution

@@ -5,12 +5,9 @@
   description: cm-job-description-chief-engineer
   playTimeTracker: CMJobChiefEngineer
   requirements:
-    - !type:DepartmentTimeRequirement
-      department: CMEngineering
-      time: 36000 # 10 hours
-    - !type:DepartmentTimeRequirement
-      department: CMMilitaryPolice
-      time: 3600 # 1 hour
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsEngineering
+    time: 36000 # 10 hours
   weight: 5
   startingGear: CMGearChiefEngineer
   icon: "CMJobIconChiefEngineer"
@@ -40,12 +37,13 @@
   id: CMGearChiefEngineer
   equipment:
     jumpsuit: CMJumpsuitChiefEngineer
-    back: CMSatchelEngineer
-    shoes: CMBootsBrown
+    back: CMSatchelMarineTech
+    shoes: CMBootsBlack
     gloves: CMHandsInsulated
     id: CMIDCardChiefEngineer
     ears: CMHeadsetCE
     belt: CMBeltUtilityFilled
+    pocket1: CMPouchElectronics
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -59,6 +57,6 @@
     - sprite: Markers/jobs.rsi
       state: green
     - state: chief_engineer
-      
+
 - type: playTimeTracker
   id: CMJobChiefEngineer
