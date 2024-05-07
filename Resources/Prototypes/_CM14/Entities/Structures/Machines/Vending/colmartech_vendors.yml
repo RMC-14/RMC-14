@@ -43,7 +43,6 @@
         density: 200
   - type: ActivatableUI
     key: enum.CMAutomatedVendorUI.Key
-  - type: ActivatableUIRequiresPower
   - type: ActivatableUIRequiresAccess
 
 - type: entity
