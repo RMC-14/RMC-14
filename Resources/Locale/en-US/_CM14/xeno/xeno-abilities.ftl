@@ -30,9 +30,6 @@ cm-xeno-weeds-already-here = There are already weeds here!
 cm-xeno-acid-not-corrodible = You can't corrode {THE($target)}!
 cm-xeno-acid-already-corroding = {THE($target)} already has corrosive acid on it!
 
-# Devour
-cm-xeno-cant-devour = You can't devour {THE($target)}!
-
 # Paralyzing Slash
 cm-xeno-paralyzing-slash-activate = Your next slash will apply neurotoxin!
 cm-xeno-paralyzing-slash-expire = You have waited too long, your slash will no longer apply neurotoxin!
