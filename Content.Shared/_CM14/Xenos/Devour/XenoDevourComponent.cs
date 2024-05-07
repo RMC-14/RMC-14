@@ -15,4 +15,10 @@ public sealed partial class XenoDevourComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier RegurgitateSound = new SoundCollectionSpecifier("XenoDrool");
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan WarnAfter = TimeSpan.FromSeconds(50);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan RegurgitateAfter = TimeSpan.FromSeconds(60);
 }
