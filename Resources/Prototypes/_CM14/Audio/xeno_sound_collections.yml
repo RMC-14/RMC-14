@@ -29,3 +29,16 @@
   - /Audio/_CM14/Xeno/alien_queen_command.ogg
   - /Audio/_CM14/Xeno/alien_queen_command2.ogg
   - /Audio/_CM14/Xeno/alien_queen_command3.ogg
+
+- type: soundCollection
+  id: XenoFootstepLarge
+  files:
+  - /Audio/_CM14/Xeno/alien_footstep_large1.ogg
+  - /Audio/_CM14/Xeno/alien_footstep_large2.ogg
+  - /Audio/_CM14/Xeno/alien_footstep_large3.ogg
+
+- type: soundCollection
+  id: XenoQueenBreath
+  files:
+  - /Audio/_CM14/Xeno/alien_queen_breath1.ogg
+  - /Audio/_CM14/Xeno/alien_queen_breath2.ogg
