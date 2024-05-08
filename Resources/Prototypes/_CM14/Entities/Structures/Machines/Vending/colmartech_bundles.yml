@@ -1,5 +1,6 @@
 ﻿- type: entity
   id: CMVendorBundleRiflemanApparel
+  name:
   categories:
   - hideSpawnMenu
   components:

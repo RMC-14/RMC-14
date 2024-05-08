@@ -96,7 +96,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         var actor = args.Actor;
         if (args.Section < 0 || args.Section >= sections)
         {
-            Log.Error($"Player {ToPrettyString(actor)} sent an invalid vend section: {args.Section}. Max: {sections}");
+            Log.Error($"{ToPrettyString(actor)} sent an invalid vend section: {args.Section}. Max: {sections}");
             return;
         }
 
@@ -104,7 +104,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         var entries = section.Entries.Count;
         if (args.Entry < 0 || args.Entry >= entries)
         {
-            Log.Error($"Player {ToPrettyString(actor)} sent an invalid vend entry: {args.Entry}. Max: {entries}");
+            Log.Error($"{ToPrettyString(actor)} sent an invalid vend entry: {args.Entry}. Max: {entries}");
             return;
         }
 
@@ -119,6 +119,18 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
 
         var user = CompOrNull<CMVendorUserComponent>(actor);
+        if (section.TakeAll is { } takeAll)
+        {
+            user = EnsureComp<CMVendorUserComponent>(actor);
+            if (!user.TakeAll.Add((takeAll, entry.Id)))
+            {
+                Log.Error($"{ToPrettyString(actor)} tried to buy too many take-alls.");
+                return;
+            }
+
+            Dirty(actor, user);
+        }
+
         if (section.Choices is { } choices)
         {
             user = EnsureComp<CMVendorUserComponent>(actor);
@@ -131,7 +143,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
             if (playerChoices >= choices.Amount)
             {
-                Log.Error($"Player {ToPrettyString(actor)} tried to buy too many choices.");
+                Log.Error($"{ToPrettyString(actor)} tried to buy too many choices.");
                 return;
             }
 
@@ -143,13 +155,13 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         {
             if (user == null)
             {
-                Log.Error($"Player {ToPrettyString(actor)} tried to buy {entry.Id} for {entry.Points} points without having points.");
+                Log.Error($"{ToPrettyString(actor)} tried to buy {entry.Id} for {entry.Points} points without having points.");
                 return;
             }
 
             if (user.Points < entry.Points)
             {
-                Log.Error($"Player {ToPrettyString(actor)} with {user.Points} tried to buy {entry.Id} for {entry.Points} points without having enough points.");
+                Log.Error($"{ToPrettyString(actor)} with {user.Points} tried to buy {entry.Id} for {entry.Points} points without having enough points.");
                 return;
             }
 
