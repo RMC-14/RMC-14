@@ -212,8 +212,8 @@
       #  amount: 1
       - id: CMRollerBedSpawnFolded
         amount: 1
-      - id: CMPouchMacheteFill
-        amount: 5
+#      - id: CMMacheteScabbardFull
+#        amount: 5
       #- id: CMBinoculars
       #  amount: 5
       #- id: CMFoldingBarricadesMB6x3
