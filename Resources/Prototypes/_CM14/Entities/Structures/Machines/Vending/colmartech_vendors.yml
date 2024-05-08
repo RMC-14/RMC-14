@@ -744,11 +744,12 @@
     job: CMSquadLeader
     sections:
     - name: Standard Equipment
-      entries: [ ]
-    #- id: CMStandardMarineApparel
-    #- id: CMB12PatternArmor
-    #- id: CMMRE
-    #- id: CMMap
+      takeAll: CMStandard
+      entries:
+      #- id: CMVendorBundleRiflemanApparel # TODO cm14 make a bundle for this role
+      #- id: CMB12PatternArmor
+      - id: CMMRE
+      #- id: CMMap # TODO: Make a map
     - name: Backpack
       entries: [ ]
     #- id: CMBackpack
@@ -881,10 +882,11 @@
     job: CMWeaponsSpecialist
     sections:
     - name: Standard Equipment
-      entries: [ ]
-    #- id: CMStandardMarineApparel
-    #- id: CMMRE
-    #- id: CMMap
+      takeAll: CMStandard
+      entries:
+      #- id: CMVendorBundleRiflemanApparel # TODO cm14 make a bundle for this role
+      - id: CMMRE
+      #- id: CMMap # TODO: Make a map
     - name: Backpack
       entries: [ ]
     #- id: CMBackpack
@@ -1141,10 +1143,11 @@
     job: CMCombatTech
     sections:
     - name: Standard Equipment
-      entries: [ ]
-    #- id: CMStandardMarineApparel
-    #- id: CMMRE
-    #- id: CMMap
+      takeAll: CMStandard
+      entries:
+      #- id: CMVendorBundleRiflemanApparel # TODO cm14 make a bundle for this role
+      - id: CMMRE
+      #- id: CMMap # TODO: Make a map
     - name: Armor
       entries: [ ]
     #- id: CMLightArmor
@@ -1350,11 +1353,12 @@
     job: CMHospitalCorpsman
     sections:
     - name: Standard Equipment
-      entries: [ ]
-    #- id: CMStandardMarineApparel
+      takeAll: CMStandard
+      entries:
+      #- id: CMVendorBundleRiflemanApparel # TODO cm14 make a bundle for this role
+      - id: CMMRE
+      #- id: CMMap # TODO: Make a map
     #- id: CMCombatSterileGloves
-    #- id: CMMRE
-    #- id: CMMap
     - name: Armor
       entries: [ ]
     #- id: CMLightArmor
@@ -1574,10 +1578,11 @@
     job: CMSmartgunner
     sections:
     - name: Standard Equipment
-      entries: [ ]
-    #- id: CMStandardMarineApparel
-    #- id: CMMRE
-    #- id: CMMap
+      takeAll: CMStandard
+      entries:
+      #- id: CMVendorBundleRiflemanApparel # TODO cm14 make a bundle for this role
+      - id: CMMRE
+      #- id: CMMap # TODO: Make a map
     - name: Belt
       entries: [ ]
     #- id: CMM802SmartgunnerSidearmBelt
@@ -1753,11 +1758,12 @@
     job: CMFireteamLeader
     sections:
     - name: Standard Equipment
-      entries: [ ]
-    #- id: CMStandardMarineApparel
+      takeAll: CMStandard
+      entries:
+      #- id: CMVendorBundleRiflemanApparel # TODO cm14 make a bundle for this role
+      - id: CMMRE
+      #- id: CMMap # TODO: Make a map
     #- id: CMM4PatternArmor
-    #- id: CMMRE
-    #- id: CMMap
     #- id: CMEssentialFireteamLeaderUtilities
     - name: Belt
       entries: [ ]
