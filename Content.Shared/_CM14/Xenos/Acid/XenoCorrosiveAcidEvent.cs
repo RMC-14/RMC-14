@@ -7,11 +7,11 @@ namespace Content.Shared._CM14.Xenos.Acid;
 public sealed partial class XenoCorrosiveAcidEvent : EntityTargetActionEvent
 {
     [DataField]
-    public EntProtoId AcidId = "XenoAcid";
+    public EntProtoId AcidId = "XenoAcidNormal";
 
     [DataField]
-    public FixedPoint2 PlasmaCost = 75;
+    public FixedPoint2 PlasmaCost = 100;
 
     [DataField]
-    public TimeSpan Time = TimeSpan.FromSeconds(30);
+    public TimeSpan Time = TimeSpan.FromSeconds(150);
 }
