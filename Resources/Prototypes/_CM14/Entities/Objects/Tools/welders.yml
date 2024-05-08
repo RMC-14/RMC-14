@@ -1,5 +1,5 @@
 - type: entity
-  name: welding tool
+  name: ME3 hand welder
   parent: Welder
   id: CMWelder
   components:

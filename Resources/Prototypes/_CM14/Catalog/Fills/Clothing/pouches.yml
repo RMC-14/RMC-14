@@ -261,7 +261,7 @@
 
 - type: entity
   parent: CMPouchMachete
-  id: CMPouchMacheteFill
+  id: CMPouchMacheteFilled
   suffix: Filled
   components:
   - type: ContainerFill
