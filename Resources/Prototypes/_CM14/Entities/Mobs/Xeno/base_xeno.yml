@@ -183,6 +183,13 @@
   - type: StandingState
   - type: SlowOnPull
     multiplier: 0.6
+  - type: PullWhitelist
+    whitelist:
+      components:
+      - Xeno
+      - XenoEgg
+      - Huggable
+  - type: BlockPullingDead
 
 - type: entity
   abstract: true

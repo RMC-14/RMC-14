@@ -2,9 +2,12 @@
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
+using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Pulling.Events;
 using Content.Shared.Stunnable;
+using Content.Shared.Whitelist;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
@@ -15,8 +18,10 @@ public sealed class CMPullingSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -26,6 +31,12 @@ public sealed class CMPullingSystem : EntitySystem
         SubscribeLocalEvent<SlowOnPullComponent, PullStoppedMessage>(OnSlowPullStopped);
 
         SubscribeLocalEvent<PullingSlowedComponent, RefreshMovementSpeedModifiersEvent>(OnPullingSlowedMovementSpeed);
+
+        SubscribeLocalEvent<PullWhitelistComponent, StartPullAttemptEvent>(OnPullWhitelistStartPullAttempt);
+
+        SubscribeLocalEvent<BlockPullingDeadComponent, StartPullAttemptEvent>(OnBlockDeadStartPullAttempt);
+        SubscribeLocalEvent<BlockPullingDeadComponent, PullStartedMessage>(OnBlockDeadPullStarted);
+        SubscribeLocalEvent<BlockPullingDeadComponent, PullStoppedMessage>(OnBlockDeadPullStopped);
     }
 
     private void OnParalyzeOnPullAttempt(Entity<ParalyzeOnPullAttemptComponent> ent, ref PullAttemptEvent args)
@@ -81,6 +92,46 @@ public sealed class CMPullingSystem : EntitySystem
             TryComp(puller.Pulling, out SlowOnPullComponent? slow))
         {
             args.ModifySpeed(slow.Multiplier, slow.Multiplier);
+        }
+    }
+
+    private void OnPullWhitelistStartPullAttempt(Entity<PullWhitelistComponent> ent, ref StartPullAttemptEvent args)
+    {
+        if (!_whitelist.IsValid(ent.Comp.Whitelist, args.Pulled))
+            args.Cancel();
+    }
+
+    private void OnBlockDeadStartPullAttempt(Entity<BlockPullingDeadComponent> ent, ref StartPullAttemptEvent args)
+    {
+        if (_mobState.IsDead(args.Pulled))
+            args.Cancel();
+    }
+
+    private void OnBlockDeadPullStarted(Entity<BlockPullingDeadComponent> ent, ref PullStartedMessage args)
+    {
+        if (ent.Owner == args.PullerUid)
+            EnsureComp<BlockPullingDeadActiveComponent>(ent);
+    }
+
+    private void OnBlockDeadPullStopped(Entity<BlockPullingDeadComponent> ent, ref PullStoppedMessage args)
+    {
+        if (ent.Owner == args.PullerUid)
+            RemCompDeferred<BlockPullingDeadActiveComponent>(ent);
+    }
+
+    public override void Update(float frameTime)
+    {
+        var blockDeadActive = EntityQueryEnumerator<BlockPullingDeadActiveComponent, PullerComponent>();
+        while (blockDeadActive.MoveNext(out var uid, out _, out var puller))
+        {
+            if (puller.Pulling is not { } pulling ||
+                !TryComp(pulling, out PullableComponent? pullable))
+            {
+                continue;
+            }
+
+            if (_mobState.IsDead(pulling))
+                _pulling.TryStopPull(pulling, pullable, uid);
         }
     }
 }
