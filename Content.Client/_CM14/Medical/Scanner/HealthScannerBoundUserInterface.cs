@@ -113,7 +113,7 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
             _window.BloodTypeLabel.Text = "Blood:";
             var bloodMsg = new FormattedMessage();
             bloodMsg.PushColor(Color.FromHex("#25B732"));
-            bloodMsg.AddText($"{uiState.BloodPercentage}%");
+            bloodMsg.AddText($"{uiState.BloodPercentage:F2}%");
             bloodMsg.Pop();
             _window.BloodAmountLabel.SetMessage(bloodMsg);
 
