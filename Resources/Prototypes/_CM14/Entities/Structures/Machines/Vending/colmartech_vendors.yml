@@ -492,8 +492,8 @@
       entries:
       - id: CMEntrenchingTool
         points: 5
-    #- id: CMSandbags
-    #  points: 20
+      - id: CMSandbagEmpty50
+        points: 20
       - id: CMRollerBedSpawnFolded
         points: 5
     #- id: CMFultonDeviceStack
@@ -626,8 +626,8 @@
     #  points: 5
     #- id: CMBreachingCharge
     #  points: 7
-    #- id: CMSandbagsx25
-    #  points: 10
+      - id: CMSandbagEmpty25
+        points: 10
     #- id: CMSignalFlarePack
     #  points: 7
     #- id: CMToolsPouchFull
