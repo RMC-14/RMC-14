@@ -53,6 +53,7 @@ namespace Content.Shared.Alert
         BorgHealth,
         BorgCrit,
         BorgDead,
+        Deflecting,
         XenoNightVision,
         XenoHealth,
         XenoCrit,
