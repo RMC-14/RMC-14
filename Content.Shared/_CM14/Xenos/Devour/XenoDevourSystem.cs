@@ -227,7 +227,7 @@ public sealed class XenoDevourSystem : EntitySystem
             if (popup)
             {
                 var victimName = Identity.Name(victim, EntityManager, xeno);
-                var strapName = Loc.GetString("zzzz-the", ("ent", Identity.Name(strap, EntityManager, xeno)));
+                var strapName = Loc.GetString("zzzz-the", ("ent", strap));
                 _popup.PopupClient($"{victimName} is buckled to {strapName}.", victim, xeno);
             }
         }
