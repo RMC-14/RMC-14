@@ -97,14 +97,28 @@ public sealed class CMPullingSystem : EntitySystem
 
     private void OnPullWhitelistStartPullAttempt(Entity<PullWhitelistComponent> ent, ref StartPullAttemptEvent args)
     {
+        if (args.Cancelled || ent.Owner == args.Pulled)
+            return;
+
         if (!_whitelist.IsValid(ent.Comp.Whitelist, args.Pulled))
+        {
+            var name = Loc.GetString("zzzz-the", ("ent", args.Pulled));
+            _popup.PopupClient($"We have no use for {name}, why would we want to touch it?", args.Pulled, args.Puller);
             args.Cancel();
+        }
     }
 
     private void OnBlockDeadStartPullAttempt(Entity<BlockPullingDeadComponent> ent, ref StartPullAttemptEvent args)
     {
+        if (args.Cancelled || ent.Owner == args.Pulled)
+            return;
+
         if (_mobState.IsDead(args.Pulled))
+        {
+            var name = Loc.GetString("zzzz-the", ("ent", args.Pulled));
+            _popup.PopupClient($"{name} is dead, why would we want to touch it?", args.Pulled, args.Puller);
             args.Cancel();
+        }
     }
 
     private void OnBlockDeadPullStarted(Entity<BlockPullingDeadComponent> ent, ref PullStartedMessage args)

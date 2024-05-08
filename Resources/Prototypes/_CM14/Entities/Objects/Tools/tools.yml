@@ -48,7 +48,7 @@
 - type: entity
   parent: Multitool
   id: CMMultitool
-  name: Security Access Tuner
+  name: security access tuner
   description: A small handheld tool used to override various machine functions.
   suffix: Multitool
   components:
