@@ -24,7 +24,12 @@ public sealed class CMSoundSystem : EntitySystem
 
     private void OnRandomMapInit(Entity<RandomSoundComponent> ent, ref MapInitEvent args)
     {
-        ent.Comp.PlayAt = _timing.CurTime + _random.Next(ent.Comp.Min, ent.Comp.Max);
+        var min = ent.Comp.Min;
+        var max = ent.Comp.Max;
+        if (max <= min)
+            max = min.Add(TimeSpan.FromTicks(1));
+
+        ent.Comp.PlayAt = _timing.CurTime + _random.Next(min, max);
         Dirty(ent);
     }
 

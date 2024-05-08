@@ -17,5 +17,5 @@ public sealed partial class RandomSoundComponent : Component
     public TimeSpan Max;
 
     [DataField, AutoNetworkedField, AutoPausedField]
-    public TimeSpan PlayAt;
+    public TimeSpan? PlayAt;
 }
