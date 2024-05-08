@@ -28,7 +28,6 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
             return;
 
         args.Handled = true;
-
         var active = EnsureComp<XenoActiveParalyzingSlashComponent>(xeno);
 
         active.ExpireAt = _timing.CurTime + xeno.Comp.ActiveDuration;

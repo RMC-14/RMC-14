@@ -89,6 +89,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
     private void OnXenoPheromonesAction(Entity<XenoPheromonesComponent> xeno, ref XenoPheromonesActionEvent args)
     {
+        args.Handled = true;
         if (RemComp<XenoActivePheromonesComponent>(xeno))
         {
             _actions.SetToggled(args.Action, false);
