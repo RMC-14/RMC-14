@@ -83,7 +83,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.40
-        density: 1000
+        density: 185
         mask:
         - MobMask
         layer:
@@ -92,9 +92,11 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.52
-        density: 1000
+        density: 185
         layer:
         - BulletImpassable
   - type: DropshipHijacker
   - type: MovementSpeedModifier
     baseSprintSpeed: 2.5
+  - type: SlowOnPull
+    multiplier: 0.5
