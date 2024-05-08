@@ -1004,8 +1004,8 @@
     #  points: 3
     #- id: CMBreachingCharge
     #  points: 5
-    #- id: CMSangbags25
-    #  points: 10
+      - id: CMSandbagEmpty25
+        points: 10
     #- id: CMPowerCellSuperCapacity
     #  points: 10
     #- id: CMES11MobileFuelCanister
