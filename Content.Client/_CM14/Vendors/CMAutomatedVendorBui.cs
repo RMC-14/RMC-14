@@ -31,20 +31,14 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         _window.OnClose += Close;
         _window.Title = EntMan.GetComponentOrNull<MetaDataComponent>(Owner)?.EntityName ?? "ColMarTech Vendor";
 
+        var user = EntMan.GetComponentOrNull<CMVendorUserComponent>(_player.LocalEntity);
         if (EntMan.TryGetComponent(Owner, out CMAutomatedVendorComponent? vendor))
         {
             for (var sectionIndex = 0; sectionIndex < vendor.Sections.Count; sectionIndex++)
             {
                 var section = vendor.Sections[sectionIndex];
                 var uiSection = new CMAutomatedVendorSection();
-                var message = new FormattedMessage();
-                message.PushTag(new MarkupNode("bold", new MarkupParameter(section.Name.ToUpperInvariant()), null));
-                message.AddText(section.Name.ToUpperInvariant());
-                if (section.Choices is { } choices)
-                    message.AddText($" (CHOOSE {choices.Amount})");
-                message.Pop();
-
-                uiSection.Label.SetMessage(message);
+                uiSection.Label.SetMessage(GetSectionName(user, section));
 
                 for (var entryIndex = 0; entryIndex < section.Entries.Count; entryIndex++)
                 {
@@ -133,6 +127,8 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         {
             var section = vendor.Sections[sectionIndex];
             var uiSection = (CMAutomatedVendorSection) _window.Sections.GetChild(sectionIndex);
+            uiSection.Label.SetMessage(GetSectionName(user, section));
+
             var sectionDisabled = false;
             if (section.Choices is { } choices)
             {
@@ -148,6 +144,12 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                 var entry = section.Entries[entryIndex];
                 var uiEntry = (CMAutomatedVendorEntry) uiSection.Entries.GetChild(entryIndex);
                 var disabled = sectionDisabled || entry.Amount <= 0;
+                if (section.TakeAll is { } takeAllId)
+                {
+                    var takeAll = user?.TakeAll;
+                    if (takeAll != null && takeAll.Contains((takeAllId, entry.Id)))
+                        disabled = true;
+                }
 
                 if (entry.Points != null)
                 {
@@ -185,5 +187,42 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                 Refresh();
                 break;
         }
+    }
+
+    private FormattedMessage GetSectionName(CMVendorUserComponent? user, CMVendorSection section)
+    {
+        var name = new FormattedMessage();
+        name.PushTag(new MarkupNode("bold", new MarkupParameter(section.Name.ToUpperInvariant()), null));
+        name.AddText(section.Name.ToUpperInvariant());
+
+        if (section.TakeAll != null)
+        {
+            var takeAll = user?.TakeAll;
+            foreach (var entry in section.Entries)
+            {
+                if (takeAll == null || !takeAll.Contains((section.TakeAll, entry.Id)))
+                {
+                    name.AddText(" (TAKE ALL)");
+                    break;
+                }
+            }
+        }
+
+        else if (section.Choices is { } choices)
+        {
+            if (user == null)
+            {
+                name.AddText($" (CHOOSE {choices.Amount})");
+            }
+            else
+            {
+                var left = choices.Amount - user.Choices.GetValueOrDefault(choices.Id);
+                if (left > 0)
+                    name.AddText($" (CHOOSE {left})");
+            }
+        }
+
+        name.Pop();
+        return name;
     }
 }
