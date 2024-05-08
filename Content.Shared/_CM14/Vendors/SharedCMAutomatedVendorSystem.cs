@@ -1,9 +1,14 @@
 ﻿using System.Numerics;
 using Content.Shared._CM14.Marines.Squads;
+using Content.Shared.Access.Components;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
+using Content.Shared.Mind;
+using Content.Shared.Popups;
+using Content.Shared.Roles.Jobs;
+using Content.Shared.UserInterface;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -14,8 +19,11 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 {
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedJobSystem _job = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -40,10 +48,45 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<CMAutomatedVendorComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
+
         Subs.BuiEvents<CMAutomatedVendorComponent>(CMAutomatedVendorUI.Key, subs =>
         {
             subs.Event<CMVendorVendBuiMessage>(OnVendBui);
         });
+    }
+
+    private void OnUIOpenAttempt(Entity<CMAutomatedVendorComponent> vendor, ref ActivatableUIOpenAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (TryComp(vendor, out AccessReaderComponent? reader) &&
+            reader.Enabled &&
+            reader.AccessLists.Count > 0)
+        {
+            foreach (var item in _inventory.GetHandOrInventoryEntities(args.User))
+            {
+                if (HasComp<IdCardComponent>(item) &&
+                    TryComp(item, out IdCardOwnerComponent? owner) &&
+                    owner.Id != args.User)
+                {
+                    _popup.PopupClient("Wrong ID card owner detected.", vendor, args.User);
+                    args.Cancel();
+                    return;
+                }
+            }
+        }
+
+        if (vendor.Comp.Job is not { Id.Length: > 0 } job)
+            return;
+
+        if (!_mind.TryGetMind(args.User, out var mindId, out _) ||
+            !_job.MindHasJobWithId(mindId, job.Id))
+        {
+            _popup.PopupClient("Access denied.", vendor, args.User);
+            args.Cancel();
+        }
     }
 
     protected virtual void OnVendBui(Entity<CMAutomatedVendorComponent> vendor, ref CMVendorVendBuiMessage args)
@@ -53,7 +96,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         var actor = args.Actor;
         if (args.Section < 0 || args.Section >= sections)
         {
-            Log.Error($"Player {ToPrettyString(actor)} sent an invalid vend section: {args.Section}. Max: {sections}");
+            Log.Error($"{ToPrettyString(actor)} sent an invalid vend section: {args.Section}. Max: {sections}");
             return;
         }
 
@@ -61,7 +104,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         var entries = section.Entries.Count;
         if (args.Entry < 0 || args.Entry >= entries)
         {
-            Log.Error($"Player {ToPrettyString(actor)} sent an invalid vend entry: {args.Entry}. Max: {entries}");
+            Log.Error($"{ToPrettyString(actor)} sent an invalid vend entry: {args.Entry}. Max: {entries}");
             return;
         }
 
@@ -76,6 +119,18 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
 
         var user = CompOrNull<CMVendorUserComponent>(actor);
+        if (section.TakeAll is { } takeAll)
+        {
+            user = EnsureComp<CMVendorUserComponent>(actor);
+            if (!user.TakeAll.Add((takeAll, entry.Id)))
+            {
+                Log.Error($"{ToPrettyString(actor)} tried to buy too many take-alls.");
+                return;
+            }
+
+            Dirty(actor, user);
+        }
+
         if (section.Choices is { } choices)
         {
             user = EnsureComp<CMVendorUserComponent>(actor);
@@ -83,28 +138,30 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             {
                 playerChoices = 0;
                 user.Choices[choices.Id] = playerChoices;
+                Dirty(actor, user);
             }
 
             if (playerChoices >= choices.Amount)
             {
-                Log.Error($"Player {ToPrettyString(actor)} tried to buy too many choices.");
+                Log.Error($"{ToPrettyString(actor)} tried to buy too many choices.");
                 return;
             }
 
             user.Choices[choices.Id] = ++playerChoices;
+            Dirty(actor, user);
         }
 
         if (entry.Points != null)
         {
             if (user == null)
             {
-                Log.Error($"Player {ToPrettyString(actor)} tried to buy {entry.Id} for {entry.Points} points without having points.");
+                Log.Error($"{ToPrettyString(actor)} tried to buy {entry.Id} for {entry.Points} points without having points.");
                 return;
             }
 
             if (user.Points < entry.Points)
             {
-                Log.Error($"Player {ToPrettyString(actor)} with {user.Points} tried to buy {entry.Id} for {entry.Points} points without having enough points.");
+                Log.Error($"{ToPrettyString(actor)} with {user.Points} tried to buy {entry.Id} for {entry.Points} points without having enough points.");
                 return;
             }
 

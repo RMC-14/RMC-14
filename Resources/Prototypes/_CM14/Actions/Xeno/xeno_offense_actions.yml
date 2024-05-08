@@ -1,7 +1,7 @@
 ﻿- type: entity
-  id: ActionXenoAcid
+  id: ActionXenoAcidNormal
   parent: ActionXenoBase
-  name: Corrosive Acid (75)  # TODO CM14 proper plasma costs
+  name: Corrosive Acid (100)  # TODO CM14 proper plasma costs
   description: Melts down a structure over time.
   components:
   - type: EntityTargetAction
@@ -10,6 +10,41 @@
       sprite: _CM14/Actions/xeno_actions.rsi
       state: corrosive_acid
     event: !type:XenoCorrosiveAcidEvent
+      acidId: XenoAcidNormal
+      plasmaCost: 100
+      time: 150
+
+- type: entity
+  id: ActionXenoAcidWeak
+  parent: ActionXenoBase
+  name: Weak Corrosive Acid (75)  # TODO CM14 proper plasma costs
+  description: Melts down a structure over time.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: corrosive_acid
+    event: !type:XenoCorrosiveAcidEvent
+      acidId: XenoAcidWeak
+      plasmaCost: 75
+      time: 375
+
+- type: entity
+  id: ActionXenoAcidStrong
+  parent: ActionXenoBase
+  name: Strong Corrosive Acid (125)  # TODO CM14 proper plasma costs
+  description: Melts down a structure over time.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: corrosive_acid
+    event: !type:XenoCorrosiveAcidEvent
+      acidId: XenoAcidStrong
+      plasmaCost: 125
+      time: 60
 
 - type: entity
   id: ActionXenoRegurgitate

@@ -112,7 +112,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.35
-        density: 1000
+        density: 185
         mask:
         - MobMask
         layer:
@@ -181,6 +181,15 @@
     channels:
     - Hivemind
   - type: StandingState
+  - type: SlowOnPull
+    multiplier: 0.6
+  - type: PullWhitelist
+    whitelist:
+      components:
+      - Xeno
+      - XenoEgg
+      - Huggable
+  - type: BlockPullingDead
 
 - type: entity
   abstract: true

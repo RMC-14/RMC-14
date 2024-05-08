@@ -36054,14 +36054,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 32.5,0.5
       parent: 2
-- proto: ComputerId
-  entities:
-  - uid: 8174
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 32.5,-0.5
-      parent: 2
 - proto: ComputerPowerMonitoring
   entities:
   - uid: 125

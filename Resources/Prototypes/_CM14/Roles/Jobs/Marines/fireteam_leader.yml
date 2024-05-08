@@ -22,6 +22,8 @@
       construction: 2
       engineer: 2
       jtac: 3
+    - type: CMVendorUser
+      points: 45
 
 - type: startingGear
   id: CMGearFireteamLeader
