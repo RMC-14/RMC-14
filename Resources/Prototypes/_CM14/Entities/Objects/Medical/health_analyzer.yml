@@ -28,3 +28,6 @@
   - type: GuideHelp
     guides:
     - Medical Doctor
+  - type: UseDelay
+    delay: 1
+  - type: MedicallyUnskilledDoAfter
