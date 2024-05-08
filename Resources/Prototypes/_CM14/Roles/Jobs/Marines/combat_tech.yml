@@ -23,6 +23,8 @@
       engineer: 2
       jtac: 1
       vehicle: 1
+    - type: CMVendorUser
+      points: 45
 
 - type: startingGear
   id: CMGearCombatTech

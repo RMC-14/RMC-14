@@ -137,7 +137,7 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
 
             if (squad != null)
             {
-                _squad.SetSquad(ev.SpawnResult.Value, squad.Value, ev.Job);
+                _squad.AssignSquad(ev.SpawnResult.Value, squad.Value, ev.Job);
 
                 // TODO CM14 add this to the map file
                 if (TryComp(spawner, out TransformComponent? xform) &&
