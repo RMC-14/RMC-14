@@ -911,7 +911,7 @@ namespace Content.Shared.CCVar
         ///     <see cref="ContentTileDefinition.MapAtmosphere"/> set to true.
         /// </summary>
         public static readonly CVarDef<bool> ExplosionCanCreateVacuum =
-            CVarDef.Create("explosion.can_create_vacuum", true, CVar.SERVERONLY);
+            CVarDef.Create("explosion.can_create_vacuum", false, CVar.SERVERONLY);
 
         /*
          * Radiation
