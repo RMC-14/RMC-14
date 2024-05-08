@@ -551,6 +551,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/gear.rsi
   - type: CMAutomatedVendor
+    job: CMSquadLeader
     sections:
     - name: Squad Leader Kit
       entries: [ ]
@@ -740,6 +741,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
+    job: CMSquadLeader
     sections:
     - name: Standard Equipment
       entries: [ ]
@@ -803,6 +805,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/specialist_gear.rsi
   - type: CMAutomatedVendor
+    job: CMWeaponsSpecialist
     sections:
     - name: Weapons Specialist Sets
       choices: { SquadLeaderKit: 1 }
@@ -874,6 +877,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
+    job: CMWeaponsSpecialist
     sections:
     - name: Standard Equipment
       entries: [ ]
@@ -970,6 +974,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/combat_technician_gear.rsi
   - type: CMAutomatedVendor
+    job: CMCombatTech
     sections:
     - name: Engineer Set (Mandatory)
       entries: [ ]
@@ -1129,6 +1134,7 @@
     access:
     - [ "CMAccessCombatTechPrep" ]
   - type: CMAutomatedVendor
+    job: CMCombatTech
     sections:
     - name: Standard Equipment
       entries: [ ]
@@ -1199,6 +1205,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/medical_gear.rsi
   - type: CMAutomatedVendor
+    job: CMHospitalCorpsman
     sections:
     - name: Medical Set (Mandatory)
       entries: [ ]
@@ -1334,6 +1341,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
+    job: CMHospitalCorpsman
     sections:
     - name: Standard Equipment
       entries: [ ]
@@ -1453,6 +1461,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/smartgunner_gear.rsi
   - type: CMAutomatedVendor
+    job: CMSmartgunner
     sections:
     - name: Smartgun Set (Mandatory)
       entries: [ ]
@@ -1555,6 +1564,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
+    job: CMSmartgunner
     sections:
     - name: Standard Equipment
       entries: [ ]
@@ -1603,6 +1613,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/fireteam_leader_gear.rsi
   - type: CMAutomatedVendor
+    job: CMFireteamLeader
     sections:
     - name: Ammunition
       entries: [ ]
@@ -1730,6 +1741,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
+    job: CMFireteamLeader
     sections:
     - name: Standard Equipment
       entries: [ ]
