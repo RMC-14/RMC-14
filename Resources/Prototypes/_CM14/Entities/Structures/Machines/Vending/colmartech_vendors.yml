@@ -201,19 +201,19 @@
       #- id: CMSignalFlarePackM89S
       #  amount: 1
     - name: Miscellaneous
-      entries: [ ]
+      entries:
       #- id: CMEngineerKit
       #  amount: 1
       #- id: CMMap
       #  amount: 5
-      #- id: CMFireExtinguisher
-      #  amount: 5
+      - id: CMFireExtinguisher
+        amount: 5
       #- id: CMFireExtinguisherPortable
       #  amount: 1
-      #- id: CMRollerBed
-      #  amount: 1
-      #- id: CMMacheteScabbardFull
-      #  amount: 5
+      - id: CMRollerBedSpawnFolded
+        amount: 1
+#      - id: CMScabbardMacheteFull
+#        amount: 5
       #- id: CMBinoculars
       #  amount: 5
       #- id: CMFoldingBarricadesMB6x3
@@ -251,12 +251,12 @@
       - id: CMMagazineExtendedRifleM41A
         amount: 1
     - name: Special Ammunition
-      entries:
+      entries: [ ]
       #- id: CMDrumSmartgunM56
       #  amount: 1
-      - id: CMSpeedLoaderM44
-        amount: 2
-    #- id: CMMarksmanSpeedLoaderM44
+      #- id: CMSpeedLoaderM44Heavy
+      #  amount: 2
+    #- id: CMSpeedLoaderM44Marksman
     #  amount: 2
     - name: Restricted Firearm Ammunition
       entries: [ ]
@@ -328,8 +328,8 @@
       entries:
       - id: CMMagazinePistol88m4AP
         amount: 25
-      #- id: CMSpeedloaderM44
-      #  amount: 20
+      - id: CMSpeedLoaderM44
+        amount: 20
       - id: CMMagazinePistolM4A3
         amount: 25
     - name: Attachments
@@ -417,113 +417,113 @@
     - name: Restricted Firearms
       entries: [ ]
     #- id: CMVP78Pistol
-    #  amount: 15P
+    #  points: 15
     #- id: CMSU6SmartPistol
-    #  amount: 15P
+    #  points: 15
     #- id: CMM79GrenadeLauncher
-    #  amount: 30P
+    #  points: 30
     - name: Explosives
       entries: [ ]
     #- id: CMM40HEDPHighExplosivePacket3
-    #  amount: 20P
+    #  points: 20
     #- id: CMM40HIDPIncendiaryPacket3
-    #  amount: 20P
+    #  points: 20
     #- id: CMM40HPDPPhosphorusPacket3
-    #  amount: 20P
+    #  points: 20
     #- id: CMM40HSDPSmokePacket3
-    #  amount: 10P
+    #  points: 10
     #- id: CMM74AGMFragAirburstPacket3
-    #  amount: 15P
+    #  points: 15
     #- id: CMM74AGMIncendiaryAirburstPacket3
-    #  amount: 15P
+    #  points: 15
     #- id: CMM74AGMSmokeAirburstPacket3
-    #  amount: 10P
+    #  points: 10
     #- id: CMM74AGMHornetAirburstPacket3
-    #  amount: 15P
+    #  points: 15
     #- id: CMM20MineBox4
-    #  amount: 20P
+    #  points: 20
     - name: Ammunition
       entries: [ ]
     #- id: CMM4RAAPMagazine
-    #  amount: 10P
+    #  points: 10
     #- id: CMM39APMagazine
-    #  amount: 10P
+    #  points: 10
     #- id: CMM39ExtendedMagazine
-    #  amount: 10P
+    #  points: 10
     #- id: CMM41AAPMagazine
-    #  amount: 10P
+    #  points: 10
     #- id: CMM44HeavySpeedLoader
-    #  amount: 10P
+    #  points: 10
     - name: Armors
       entries: [ ]
     #- id: CMM3B12PatternMarineArmor
-    #  amount: 30P
+    #  points: 30
     #- id: CMM4PatternArmor
-    #  amount: 30P
+    #  points: 30
     - name: Clothing Items
-      entries: [ ]
-    #- id: CMWebbing
-    #  amount: 10P
+      entries:
+      - id: CMWebbing
+        points: 10
     #- id: CMBrownWebbingVest
-    #  amount: 15P
+    #  points: 15
     #- id: CMBlackWebbingVest
-    #  amount: 15P
+    #  points: 15
     #- id: CMDropPouch
-    #  amount: 15P
+    #  points: 15
     #- id: CMShoulderHolster
-    #  amount: 15P
-    #- id: CMMacheteScabbardFull
-    #  amount: 15P
-    #- id: CMMachetePouchFull
-    #  amount: 15P
+    #  points: 15
+    #- id: CMScabbardMacheteFull
+    #  points: 15
+      - id: CMPouchMacheteFilled
+        points: 15
     #- id: CMUSCMRadioTelephonePack
-    #  amount: 15P
+    #  points: 15
     #- id: CMFuelTankStrapPouch
-    #  amount: 5P
+    #  points: 5
     #- id: CMWeldingGoggles
-    #  amount: 5P
+    #  points: 5
     #- id: CMSlingPouch
-    #  amount: 15P
+    #  points: 15
     #- id: CMLargeGeneralPouch
-    #  amount: 15P
+    #  points: 15
     #- id: CMLargeGeneralPouch
-    #  amount: 15P
+    #  points: 15
     - name: Utilities
-      entries: [ ]
-    #- id: CMEntrenchingTool
-    #  amount: 5P
-    #- id: CMSandbags
-    #  amount: 20P
-    #- id: CMRollerBed
-    #  amount: 5P
+      entries:
+      - id: CMEntrenchingTool
+        points: 5
+      - id: CMSandbagEmpty50
+        points: 20
+      - id: CMRollerBedSpawnFolded
+        points: 5
     #- id: CMFultonDeviceStack
-    #  amount: 5P
+    #  points: 5
     #- id: CMFireExtinguisherPortable
-    #  amount: 5P
+    #  points: 5
     #- id: CMMotionDetector
-    #  amount: 15P
+    #  points: 15
     #- id: CMDataDetector
-    #  amount: 15P
+    #  points: 15
     #- id: CMWhistle
-    #  amount: 5P
+    #  points: 5
     - name: Binoculars
       entries: [ ]
     #- id: CMRangeFinder
-    #  amount: 10P
+    #  points: 10
     #- id: CMLaserDesignator
-    #  amount: 15P
+    #  points: 15
     - name: Helmet Optics
       entries: [ ]
     #- id: CMMedicalHelmetOptic
-    #  amount: 15P
+    #  points: 15
     #- id: CMWelding isor
-    #  amount: 5P
+    #  points: 5
     - name: Pamphlets
       entries: [ ]
     #- id: CMJTACPamphlet
-    #  amount: 15P
+    #  points: 15
     #- id: CMEngineeringPamphlet
-    #  amount: 15P
+    #  points: 15
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer
@@ -556,161 +556,161 @@
     - name: Squad Leader Kit
       entries: [ ]
     #- id: CMEssentialSLKit
-    #  amount: 0P
+    #  points: 0
     - name: Squad Kit
       entries: [ ]
     #- id: CMM4RASniperKit
-    #  amount: 0P
+    #  points: 0
     #- id: CMM41AStandardKit
-    #  amount: 0P
+    #  points: 0
     #- id: CMM240PyrotechnicianSupportKit
-    #  amount: 0P
+    #  points: 0
     #- id: CMM2CHeavyMachineGun
-    #  amount: 0P
+    #  points: 0
     #- id: CMM56DHeavyMachineGun
-    #  amount: 0P
+    #  points: 0
     #- id: CMM79GrenadeLauncher
-    #  amount: 0P
+    #  points: 0
     #- id: CMMOU-53Shotgun
-    #  amount: 0P
+    #  points: 0
     #- id: CMXM88HeavyRifle
-    #  amount: 0P
+    #  points: 0
     #- id: CMBasicEngineeringSupplies
-    #  amount: 0P
+    #  points: 0
     - name: Armors
       entries: [ ]
     #- id: CMM4PatternArmor
-    #  amount: 30P
+    #  points: 30
     - name: Clothing Items
-      entries: [ ]
-    #- id: CMMacheteScabbardFull
-    #  amount: 4P
-    #- id: CMMachetePouchFull
-    #  amount: 4P
+      entries:
+    #- id: CMScabbardMacheteFull
+    #  points: 4
+      - id: CMPouchMacheteFilled
+        points: 4
     #- id: CMUSCMRadioTelephonePack
-    #  amount: 5P
+    #  points: 5
     #- id: CMM276PatternCombatToolbeltRig
-    #  amount: 15P
+    #  points: 15
     - name: Utilities
       entries: [ ]
     #- id: CMWhistle
-    #  amount: 3P
+    #  points: 3
     #- id: CMFireExtinguisherPortable
-    #  amount: 3P
+    #  points: 3
     #- id: CMMotionDetector
-    #  amount: 5P
+    #  points: 5
     #- id: CMFultonDeviceStack
-    #  amount: 5P
+    #  points: 5
     - name: Binoculars
       entries: [ ]
     #- id: CMRangeFinder
-    #  amount: 3P
+    #  points: 3
     #- id: CMLaserDesignator
-    #  amount: 5P
+    #  points: 5
     - name: Helmet Optics
       entries: [ ]
     #- id: CMWeldingVisor
-    #  amount: 5P
+    #  points: 5
     #- id: CMMedicalHelmetOptic
-    #  amount: 4P
+    #  points: 4
     #- id: CMNightVisionOptic
-    #  amount: 20P
+    #  points: 20
     - name: Engineering Supplies
       entries:
       #- id: CMInsulatedGloves
-      #  amount: 3P
+      #  points: 3
       - id: CMSheetMetal
         points: 5
     #- id: CMPlasteelx10
-    #  amount: 7P
+    #  points: 7
     #- id: CMPlasticexplosive
-    #  amount: 5P
+    #  points: 5
     #- id: CMBreachingCharge
-    #  amount: 7P
-    #- id: CMSandbagsx25
-    #  amount: 10P
+    #  points: 7
+      - id: CMSandbagEmpty25
+        points: 10
     #- id: CMSignalFlarePack
-    #  amount: 7P
+    #  points: 7
     #- id: CMToolsPouchFull
-    #  amount: 5P
+    #  points: 5
     #- id: CMWeldingGoggles
-    #  amount: 5P
+    #  points: 5
     - name: Explosives
       entries: [ ]
     #- id: CMM40HEDPHighExplosivePacketx3
-    #  amount: 18P
+    #  points: 18
     #- id: CMM40HIDPIncendiaryPacketx3
-    #  amount: 18P
+    #  points: 18
     #- id: CMM40HPDPWhitePhosphorusPacketx3
-    #  amount: 18P
+    #  points: 18
     #- id: CMM40HSDPSmokePacketx3
-    #  amount: 9P
+    #  points: 9
     #- id: CMM74AGM-FragAirburstPacketx3
-    #  amount: 20P
+    #  points: 20
     #- id: CMM74AGM-IncendiaryAirburstPacketx3
-    #  amount: 20P
+    #  points: 20
     #- id: CMM74AGM-SmokeAirburstPacketx3
-    #  amount: 10P
+    #  points: 10
     #- id: CMM74AGM-HornetAirburstPacketx3
-    #  amount: 20P
+    #  points: 20
     #- id: CMM20MineBoxx4mines
-    #  amount: 20P
+    #  points: 20
     #- id: CMM40MFHSMetalFoamGrenade
-    #  amount: 5P
+    #  points: 5
     - name: Medical Supplies
-      entries: [ ]
+      entries:
     #- id: CMBurnKit
-    #  amount: 2P
+    #  points: 2
     #- id: CMTraumaKit
-    #  amount: 2P
+    #  points: 2
     #- id: CMAdvancedFirstaidKit
-    #  amount: 12P
+    #  points: 12
     #- id: CMMedicalSplints
-    #  amount: 1P
+    #  points: 1
     #- id: CMInjectorBicaridine
-    #  amount: 1P
+    #  points: 1
     #- id: CMInjectorDexalin+
-    #  amount: 1P
+    #  points: 1
     #- id: CMInjectorInaprovaline
-    #  amount: 1P
+    #  points: 1
     #- id: CMInjectorKelotane
-    #  amount: 1P
+    #  points: 1
     #- id: CMInjectorOxycodone
-    #  amount: 2P
+    #  points: 2
     #- id: CMInjectorTramadol
-    #  amount: 1P
+    #  points: 1
     #- id: CMInjectorTricord
-    #  amount: 1P
+    #  points: 1
     #- id: CMHealthAnalyzer
-    #  amount: 4P
-    #- id: CMRollerBed
-    #  amount: 2P
+    #  points: 4
+      - id: CMRollerBedSpawnFolded
+        points: 2
     - name: Special Ammunition
       entries: [ ]
     #- id: CMM4RAAPMagazine10x24mm
-    #  amount: 6P
+    #  points: 6
     #- id: CMM39APMagazine10x20mm
-    #  amount: 6P
+    #  points: 6
     #- id: CMM39ExtendedMagazine10x20mm
-    #  amount: 6P
+    #  points: 6
     #- id: CMM41AAPMagazine10x24mm
-    #  amount: 6P
+    #  points: 6
     #- id: CMM41AExtendedMagazine10x24mm
-    #  amount: 6P
+    #  points: 6
     #- id: CMM240IncineratorTankNapthal
-    #  amount: 3P
+    #  points: 3
     #- id: CMM240IncineratorTankB-Gel
-    #  amount: 3P
+    #  points: 3
     - name: Restricted Firearms
       entries: [ ]
     #- id: CMM240IncineratorUnit
-    #  amount: 18P
+    #  points: 18
     #- id: CMVP78Pistol
-    #  amount: 8P
+    #  points: 8
     #- id: CMSU6SmartPistol
-    #  amount: 12P
+    #  points: 12
     #- id: CMM79GrenadeLauncher
-    #  amount: 18P
+    #  points: 18
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer
@@ -744,15 +744,16 @@
     job: CMSquadLeader
     sections:
     - name: Standard Equipment
-      entries: [ ]
-    #- id: CMStandardMarineApparel
-    #- id: CMB12PatternArmor
-    #- id: CMMRE
-    #- id: CMMap
+      takeAll: CMStandard
+      entries:
+      #- id: CMVendorBundleRiflemanApparel # TODO cm14 make a bundle for this role
+      #- id: CMB12PatternArmor
+      - id: CMMRE
+      #- id: CMMap # TODO: Make a map
     - name: Backpack
       entries: [ ]
     #- id: CMBackpack
-    #- id: CMMacheteScabbardFull
+    #- id: CMScabbardMacheteFull
     #- id: CMSatchel
     - name: Belt
       entries: [ ]
@@ -782,11 +783,12 @@
     #- id: CMLargePistolMagazinePouch
     #- id: CMPistolPouch
     - name: Accessories
-      entries: [ ]
-    #- id: CMBlackWebbingVest
-    #- id: CMBrownWebbingVest
-    #- id: CMShoulderHolster
-    #- id: CMWebbing
+      choices: { CMAccessories: 1 }
+      entries:
+      #- id: CMBrownWebbingVest
+      #- id: CMBlackWebbingVest
+      #- id: CMShoulderHolster
+      - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
       entries: [ ]
@@ -811,59 +813,59 @@
       choices: { SquadLeaderKit: 1 }
       entries:
       #- id: DemolitionistSet
-      #  amount: 0P
+      #  points: 0
       #- id: HeavyGrenadierSet
-      #  amount: 0P
+      #  points: 0
       #- id: PyroSet
-      #  amount: 0P
+      #  points: 0
       #- id: ScoutSet
       - id: CMSniperEquipmentCase
     - name: Extra Scout Ammunition
       entries: [ ]
     #- id: A19HighVelocityImpactMagazine
-    #  amount: 40P
+    #  points: 40
     #- id: A19HighVelocityIncendiaryMagazine
-    #  amount: 40P
+    #  points: 40
     #- id: A19HighVelocityMagazine
-    #  amount: 40P
+    #  points: 40
     - name: Extra Sniper Ammunition
       entries: [ ]
     #- id: M42AFlakMagazine
-    #  amount: 40P
+    #  points: 40
     #- id: M42AIncendiaryMagazine
-    #  amount: 40P
+    #  points: 40
     #- id: M42AMarksmanMagazine
-    #  amount: 40P
+    #  points: 40
     - name: Extra Demolitionist Ammunition
       entries: [ ]
     #- id: 84mmAntiArmorRocket
-    #  amount: 40P
+    #  points: 40
     #- id: 84mmHighExplosiveRocket
-    #  amount: 40P
+    #  points: 40
     #- id: 84mmWhitePhosphorusRocket
-    #  amount: 40P
+    #  points: 40
     - name: Extra Grenades
       entries: [ ]
     #- id: M40HEDPGrenadesx6
-    #  amount: 40P
+    #  points: 40
     #- id: M40HIDPIncendiaryGrenadesx6
-    #  amount: 40P
+    #  points: 40
     #- id: M40HPDPWhitePhosphorusGrenadesx6
-    #  amount: 40P
+    #  points: 40
     #- id: M74AGMFFragmentationGrenadesx6
-    #  amount: 40P
+    #  points: 40
     #- id: M74AGMIIncendiaryGrenadesx6
-    #  amount: 40P
+    #  points: 40
     #- id: M74AGMSSmokeGrenadesx6
-    #  amount: 20P
+    #  points: 20
     - name: Extra Flamethrower Tanks
       entries: [ ]
     #- id: LargeIncineratorTank
-    #  amount: 40P
+    #  points: 40
     #- id: LargeIncineratorTankB GreenFlame
-    #  amount: 40P
+    #  points: 40
     #- id: LargeIncineratorTankX BlueFlame
-    #  amount: 40P
+    #  points: 40
 
 - type: entity
   parent: ColMarTechBase
@@ -880,10 +882,11 @@
     job: CMWeaponsSpecialist
     sections:
     - name: Standard Equipment
-      entries: [ ]
-    #- id: CMStandardMarineApparel
-    #- id: CMMRE
-    #- id: CMMap
+      takeAll: CMStandard
+      entries:
+      #- id: CMVendorBundleRiflemanApparel # TODO cm14 make a bundle for this role
+      - id: CMMRE
+      #- id: CMMap # TODO: Make a map
     - name: Backpack
       entries: [ ]
     #- id: CMBackpack
@@ -910,20 +913,22 @@
     #- id: CMPistolPouch
     #- id: CMSlingPouch
     - name: Accessories
-      entries: [ ]
-    #- id: CMBrownWebbingVest
-    #- id: CMBlackWebbingVest
-    #- id: CMShoulderHolster
-    #- id: CMWebbing
+      choices: { CMAccessories: 1 }
+      entries:
+      #- id: CMBrownWebbingVest
+      #- id: CMBlackWebbingVest
+      #- id: CMShoulderHolster
+      - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
       entries: [ ]
     #- id: CMGasMask
     #- id: CMHeatAbsorbentCoif
     - name: Clothing Items
-      entries: [ ]
-    #- id: CMMacheteScabbardFull
-    #- id: CMMachetePouchFull
+      entries:
+    #- id: CMScabbardMacheteFull
+      - id: CMPouchMacheteFilled
+        points: 15
     #- id: CMUSCMRadioTelephonePack
     #- id: CMFuelTankStrapPouch
     #- id: CMWeldingGoggles
@@ -931,9 +936,10 @@
     #- id: CMM276PatternCombatToolbeltRig
     #- id: CMAutoinjectorPouchFull
     - name: Utilities
-      entries: [ ]
+      entries:
     #- id: CMFireExtinguisherPortable
-    #- id: CMRollerBed
+      - id: CMRollerBedSpawnFolded
+        points: 5
     #- id: CMFultonDeviceStack
     #- id: CMMotionDetector
     - name: Helmet Optics
@@ -986,127 +992,127 @@
     #    CMUA42FSentryFlamer
     #    CMUA571CSentryGun
     #- id: CMSentryUpgradeKit
-    #  amount: 15P
+    #  points: 15
     - name: Engineering Supplies
-      entries: [ ]
+      entries:
     #- id: CMAirlockCircuitBoard
-    #  amount: 2P
+    #  points: 2
     #- id: CMAPCCircuitBoard
-    #  amount: 2P
-    #- id: CMEntrenchingTool
-    #  amount: 2P
+    #  points: 2
+      - id: CMEntrenchingTool
+        points: 2
     #- id: CMPowerCellHighCapacity
-    #  amount: 3P
+    #  points: 3
     #- id: CMMetal10
-    #  amount: 5P
+    #  points: 5
     #- id: CMPlasteel10
-    #  amount: 7P
+    #  points: 7
     #- id: CMPlasticExplosive
-    #  amount: 3P
+    #  points: 3
     #- id: CMBreachingCharge
-    #  amount: 5P
-    #- id: CMSangbags25
-    #  amount: 10P
+    #  points: 5
+      - id: CMSandbagEmpty25
+        points: 10
     #- id: CMPowerCellSuperCapacity
-    #  amount: 10P
+    #  points: 10
     #- id: CMES11MobileFuelCanister
-    #  amount: 4P
+    #  points: 4
     - name: Explosives
       entries: [ ]
     #- id: CMM40HEDPHighExplosivePacket3
-    #  amount: 18P
+    #  points: 18
     #- id: CMM40HIDPIncendiaryPacket3
-    #  amount: 18P
+    #  points: 18
     #- id: CMM40HPDPPhosphorusPacket3
-    #  amount: 18P
+    #  points: 18
     #- id: CMM40HSDPSmokePacket3
-    #  amount: 9P
+    #  points: 9
     #- id: CMM74AGMFragAirburstPacket3
-    #  amount: 18P
+    #  points: 18
     #- id: CMM74AGMIncendiaryAirburstPacket3
-    #  amount: 18P
+    #  points: 18
     #- id: CMM74AGMSmokeAirburstPacket3
-    #  amount: 10P
+    #  points: 10
     #- id: CMM74AGMHornetAirburstPacket3
-    #  amount: 20P
+    #  points: 20
     #- id: CMM20MineBox4
-    #  amount: 18P
+    #  points: 18
     #- id: CMM40MFHSMetalFoamGrenade
-    #  amount: 5P
+    #  points: 5
     - name: Ammunition
       entries: [ ]
     #- id: CMMagazineM4RAAP
-    #  amount: 6P
+    #  points: 6
     #- id: CMMagazineM39AP
-    #  amount: 6P
+    #  points: 6
     #- id: CMMagazineExtendedM39
-    #  amount: 6P
+    #  points: 6
     #- id: CMMagazineM41AAP
-    #  amount: 6P
+    #  points: 6
     #- id: CMMagazineExtendedM41A
-    #  amount: 6P
+    #  points: 6
     - name: Armors
       entries: [ ]
     #- id: CMArmorB12
-    #  amount: 24P
+    #  points: 24
     #- id: CMArmorM4
-    #  amount: 30P
+    #  points: 30
     - name: Restricted FIrearms
       entries: [ ]
     #- id: CMVP78Pìstol
-    #  amount: 8P
+    #  points: 8
     #- id: CMSU6SmartPistol
-    #  amount: 12P
+    #  points: 12
     #- id: CMM240IncineratorUnit
-    #  amount: 12P
+    #  points: 12
     #- id: CMM79GrenadeLauncher
-    #  amount: 24P
+    #  points: 24
     #- id: CMM56DHeavyMachineGun
-    #  amount: 24P
+    #  points: 24
     - name: Clothing Items
-      entries: [ ]
-    #- id: CMMacheteScabbardFull
-    #  amount: 6P
-    #- id: CMMachetePouchFull
-    #  amount: 8P
+      entries:
+    #- id: CMScabbardMacheteFull
+    #  points: 6
+      - id: CMPouchMacheteFilled
+        points: 8
     #- id: CMUSCMRadioTelephonePack
-    #  amount: 15P
+    #  points: 15
     #- id: CMFuelTankStrapPouch
-    #  amount: 4P
+    #  points: 4
     #- id: CMSlingPouch
-    #  amount: 6P
+    #  points: 6
     #- id: CMLargeGeneralPouch
-    #  amount: 6P
+    #  points: 6
     #- id: CMM276PatternCombatToolbeltRig
-    #  amount: 15P
+    #  points: 15
     - name: Utilities
-      entries: [ ]
-    #- id: CMRollerBed
-    #  amount: 5P
+      entries:
+      - id: CMRollerBedSpawnFolded
+        points: 5
     #- id: CMFultonDeviceStack
-    #  amount: 5P
+    #  points: 5
     #- id: CMFireExtinguisherPortable
-    #  amount: 3P
+    #  points: 3
     #- id: CMMotionDetector
-    #  amount: 8P
+    #  points: 8
     #- id: CMWhistle
-    #  amount: 3P
+    #  points: 3
     - name: Binoculars
       entries: [ ]
     #- id: CMBinoculars
-    #  amount: 5P
+    #  points: 5
     #- id: CMRangeFinder
-    #  amount: 10P
+    #  points: 10
     #- id: CMLaserDesignator
-    #  amount: 15P
+    #  points: 15
     - name: Helmet Optics
       entries: [ ]
     #- id: CMMedicalHelmetOptic
-    #  amount: 12P
+    #  points: 12
     - name: Pamphlets
       entries: [ ]
     #- id: CMJTACPamphlet
-    #  amount: 15P
+    #  points: 15
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyIntel
@@ -1137,10 +1143,11 @@
     job: CMCombatTech
     sections:
     - name: Standard Equipment
-      entries: [ ]
-    #- id: CMStandardMarineApparel
-    #- id: CMMRE
-    #- id: CMMap
+      takeAll: CMStandard
+      entries:
+      #- id: CMVendorBundleRiflemanApparel # TODO cm14 make a bundle for this role
+      - id: CMMRE
+      #- id: CMMap # TODO: Make a map
     - name: Armor
       entries: [ ]
     #- id: CMLightArmor
@@ -1148,7 +1155,7 @@
     #- id: CMHeavyArmor
     - name: Backpack
       entries: [ ]
-    #- id: CMMacheteScabbardFull
+    #- id: CMScabbardMacheteFull
     #- id: CMTechnicianBackpack
     #- id: CMTechnicianSatchel
     #- id: CMTechnicianWelderpack
@@ -1182,11 +1189,12 @@
     #- id: CMPistolPouch
     #- id: CMToolsPouchFull
     - name: Accessories
-      entries: [ ]
-    #- id: CMBlackWebbingVest
-    #- id: CMBrownWebbingVest
-    #- id: CMShoulderHolster
-    #- id: CMWebbing
+      choices: { CMAccessories: 1 }
+      entries:
+      #- id: CMBrownWebbingVest
+      #- id: CMBlackWebbingVest
+      #- id: CMShoulderHolster
+      - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
       entries: [ ]
@@ -1288,9 +1296,10 @@
     #    CMVP78Pistol: 8P
     #    CMSU6SmartPistol: 12P
     - name: Clothing Items
-      entries: [ ]
-    #    CMMacheteScabbardFull: 6P
-    #    CMMachetePouchFull: 8P
+      entries:
+    #    CMScabbardMacheteFull: 6P
+      - id: CMPouchMacheteFilled
+        points: 8
     #    CMUSCMRadioTelephonePack: 15P
     #    CMFuelTankStrapPouch: 4P
     #    CMWeldingGoggles: 3P
@@ -1344,11 +1353,12 @@
     job: CMHospitalCorpsman
     sections:
     - name: Standard Equipment
-      entries: [ ]
-    #- id: CMStandardMarineApparel
+      takeAll: CMStandard
+      entries:
+      #- id: CMVendorBundleRiflemanApparel # TODO cm14 make a bundle for this role
+      - id: CMMRE
+      #- id: CMMap # TODO: Make a map
     #- id: CMCombatSterileGloves
-    #- id: CMMRE
-    #- id: CMMap
     - name: Armor
       entries: [ ]
     #- id: CMLightArmor
@@ -1392,11 +1402,12 @@
     #- id: CMPistolPouch
     #- id: CMVialPouchFull
     - name: Accessories
-      entries: [ ]
-    #- id: CMBrownWebbingVest
-    #- id: CMBlackWebbingVest
-    #- id: CMShoulderHolster
-    #- id: CMWebbing
+      choices: { CMAccessories: 1 }
+      entries:
+      #- id: CMBrownWebbingVest
+      #- id: CMBlackWebbingVest
+      #- id: CMShoulderHolster
+      - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
       entries: [ ]
@@ -1466,77 +1477,77 @@
     - name: Smartgun Set (Mandatory)
       entries: [ ]
     #- id: CMEssentialSmartgunnerSet
-    #  amount: 0P
+    #  points: 0
     - name: Smartgun Ammunition
       entries: [ ]
     #- id: CMM56SmartgunDrum
-    #  amount: 15P
+    #  points: 15
     - name: Gun Attachments
       entries: [ ]
     #- id: CMLaserSight
-    #  amount: 0P
+    #  points: 0
     #- id: CMRedDotSight
-    #  amount: 0P
+    #  points: 0
     #- id: CMReflexSight
-    #  amount: 0P
+    #  points: 0
     - name: Explosives
       entries: [ ]
     #- id: CMM40HEDPHighExplosivePacketx3
-    #  amount: 30P
+    #  points: 30
     #- id: CMM40HIDPIncendiaryPacketx3
-    #  amount: 30P
+    #  points: 30
     #- id: CMM40HPDPWhitePhosphorusPacketx3
-    #  amount: 30P
+    #  points: 30
     #- id: CMM40HSDPSmokePacketx3
-    #  amount: 15P
+    #  points: 15
     #- id: CMM74AGM-FragAirburstPacketx3
-    #  amount: 20P
+    #  points: 20
     #- id: CMM74AGM-IncendiaryAirburstPacketx3
-    #  amount: 20P
+    #  points: 20
     #- id: CMM74AGM-SmokeAirburstPacketx3
-    #  amount: 10P
+    #  points: 10
     #- id: CMM74AGM-HornetAirburstPacketx3
-    #  amount: 20P
+    #  points: 20
     #- id: CMM20MineBox4
-    #  amount: 20P
+    #  points: 20
     - name: Clothing Items
       entries: [ ]
-    #- id: CMMacheteScabbardFull
-    #  amount: 6P
+    #- id: CMScabbardMacheteFull
+    #  points: 6
     #- id: CMFuelTankStrapPouch
-    #  amount: 5P
+    #  points: 5
     #- id: CMLargeGeneralPouch
-    #  amount: 6P
+    #  points: 6
     - name: Utilities
-      entries: [ ]
+      entries:
     #- id: CMFireExtinguisherPortable
-    #  amount: 5P
+    #  points: 5
     #- id: CMWhistle
-    #  amount: 5P
-    #- id: CMRollerBed
-    #  amount: 5P
+    #  points: 5
+      - id: CMRollerBedSpawnFolded
+        points: 5
     #- id: CMFultonDeviceStack
-    #  amount: 5P
+    #  points: 5
     - name: Binoculars
       entries: [ ]
     #- id: CMBinoculars
-    #  amount: 5P
+    #  points: 5
     #- id: CMRangeFinder
-    #  amount: 10P
+    #  points: 10
     #- id: CMLaserDesignator
-    #  amount: 15P
+    #  points: 15
     - name: Helmet Optics
       entries: [ ]
     #- id: CMMedicalHelmetOptic
-    #  amount: 15P
+    #  points: 15
     #- id: CMWeldingVisor
-    #  amount: 5P
+    #  points: 5
     - name: Pamphlets
       entries: [ ]
     #- id: CMJTACPamphlet
-    #  amount: 15P
+    #  points: 15
     #- id: CMEngineeringPamphlet
-    #  amount: 15P
+    #  points: 15
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer
@@ -1567,16 +1578,18 @@
     job: CMSmartgunner
     sections:
     - name: Standard Equipment
-      entries: [ ]
-    #- id: CMStandardMarineApparel
-    #- id: CMMRE
-    #- id: CMMap
+      takeAll: CMStandard
+      entries:
+      #- id: CMVendorBundleRiflemanApparel # TODO cm14 make a bundle for this role
+      - id: CMMRE
+      #- id: CMMap # TODO: Make a map
     - name: Belt
       entries: [ ]
     #- id: CMM802SmartgunnerSidearmBelt
     #- id: CMM280SmartgunnerDrumBelt
     - name: Pouches
-      entries: [ ]
+      choices: { CMPouch: 2 }
+      entries:
     #- id: CMFlarePouchFull
     #- id: CMElectronicsPouch
     #- id: CMFirstAidPouchRefillableInjectors
@@ -1587,14 +1600,15 @@
     #- id: CMShotgunShellPouch
     #- id: CMMediumGeneralPouch
     #- id: CMPistolPouch
-    #- id: CMMachetePouchFull
+      - id: CMPouchMacheteFilled
     #- id: CMSlingPouch
     - name: Accessories
-      entries: [ ]
+      choices: { CMAccessories: 1 }
+      entries:
     #- id: CMBrownWebbingVest
     #- id: CMBlackWebbingVest
     #- id: CMShoulderHolster
-    #- id: CMWebbing
+      - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
       entries: [ ]
@@ -1668,11 +1682,11 @@
     #- id: CMM3B12PatternMarineArmor
     #  amount: 30
     - name: Clothing Items
-      entries: [ ]
-    #- id: CMMacheteScabbardFull
+      entries:
+    #- id: CMScabbardMacheteFull
     #  amount: 5
-    #- id: CMMachetePouchFull
-    #  amount: 15
+      - id: CMPouchMacheteFilled
+        points: 15
     #- id: CMUSCMRadioTelephonePack
     #  amount: 5
     #- id: CMWeldingGoggles
@@ -1686,15 +1700,15 @@
     #- id: CMNightVisionOptic
     #  amount: 30
     - name: Utilities
-      entries: [ ]
+      entries:
     #- id: CMMotionDetector
     #  amount: 15
     #- id: CMPlasticExplosive
     #  amount: 10
     #- id: CMBreachingCharge
     #  amount: 10
-    #- id: CMRollerBed
-    #  amount: 5
+      - id: CMRollerBedSpawnFolded
+        amount: 5
     #- id: CMFultonDeviceStack
     #  amount: 5
     #- id: CMFireExtinguisherPortable
@@ -1744,11 +1758,12 @@
     job: CMFireteamLeader
     sections:
     - name: Standard Equipment
-      entries: [ ]
-    #- id: CMStandardMarineApparel
+      takeAll: CMStandard
+      entries:
+      #- id: CMVendorBundleRiflemanApparel # TODO cm14 make a bundle for this role
+      - id: CMMRE
+      #- id: CMMap # TODO: Make a map
     #- id: CMM4PatternArmor
-    #- id: CMMRE
-    #- id: CMMap
     #- id: CMEssentialFireteamLeaderUtilities
     - name: Belt
       entries: [ ]
@@ -1777,11 +1792,12 @@
     #- id: CMSidearmPouch
     #- id: CMToolsPouchFull
     - name: Accessories
-      entries: [ ]
-    #- id: CMBlackWebbingVest
-    #- id: CMBrownWebbingVest
-    #- id: CMShoulderHolster
-    #- id: CMWebbing
+      choices: { CMAccessories: 1 }
+      entries:
+      #- id: CMBrownWebbingVest
+      #- id: CMBlackWebbingVest
+      #- id: CMShoulderHolster
+      - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
       entries: [ ]

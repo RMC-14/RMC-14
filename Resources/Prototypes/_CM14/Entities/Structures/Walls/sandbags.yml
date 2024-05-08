@@ -90,6 +90,15 @@
     count: 50
 
 - type: entity
+  parent: CMSandbagEmpty
+  id: CMSandbagEmpty25
+  suffix: "25"
+  components:
+  - type: Stack
+    stackType: CMSandbagEmpty
+    count: 25
+
+- type: entity
   parent: BaseItem
   id: CMSandbagFull
   name: sandbags
