@@ -927,9 +927,10 @@
     #- id: CMM276PatternCombatToolbeltRig
     #- id: CMAutoinjectorPouchFull
     - name: Utilities
-      entries: [ ]
+      entries:
     #- id: CMFireExtinguisherPortable
-    #- id: CMRollerBedSpawnFolded
+      - id: CMRollerBedSpawnFolded
+        points: 5
     #- id: CMFultonDeviceStack
     #- id: CMMotionDetector
     - name: Helmet Optics
