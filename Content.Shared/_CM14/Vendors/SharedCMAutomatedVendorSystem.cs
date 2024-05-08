@@ -126,6 +126,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             {
                 playerChoices = 0;
                 user.Choices[choices.Id] = playerChoices;
+                Dirty(actor, user);
             }
 
             if (playerChoices >= choices.Amount)
@@ -135,6 +136,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             }
 
             user.Choices[choices.Id] = ++playerChoices;
+            Dirty(actor, user);
         }
 
         if (entry.Points != null)
