@@ -25,6 +25,8 @@
       jtac: 1
       medical: 2
       surgery: 1
+    - type: CMVendorUser
+      points: 45
 
 - type: startingGear
   id: CMGearHospitalCorpsman

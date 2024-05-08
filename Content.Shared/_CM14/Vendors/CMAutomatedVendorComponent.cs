@@ -1,5 +1,7 @@
 ﻿using System.Numerics;
+using Content.Shared.Roles;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._CM14.Vendors;
 
@@ -7,6 +9,9 @@ namespace Content.Shared._CM14.Vendors;
 [Access(typeof(SharedCMAutomatedVendorSystem))]
 public sealed partial class CMAutomatedVendorComponent : Component
 {
+    [DataField, AutoNetworkedField]
+    public ProtoId<JobPrototype>? Job;
+
     [DataField, AutoNetworkedField]
     public List<CMVendorSection> Sections = new();
 

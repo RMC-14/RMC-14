@@ -21,6 +21,8 @@
     - type: Skills
       jtac: 1
       smartgun: 1
+    - type: CMVendorUser
+      points: 45
 
 - type: startingGear
   id: CMGearSmartgunner

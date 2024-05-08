@@ -26,6 +26,8 @@
       jtac: 1
       meleeWeapons: 1
       specialistWeapons: 1
+    - type: CMVendorUser
+      points: 45
 
 - type: startingGear
   id: CMGearWeaponsSpecialist

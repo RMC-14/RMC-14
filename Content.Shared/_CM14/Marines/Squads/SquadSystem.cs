@@ -25,7 +25,7 @@ public sealed class SquadSystem : EntitySystem
         args.BackgroundColor = member.Comp.BackgroundColor;
     }
 
-    public void SetSquad(EntityUid marine, Entity<SquadTeamComponent?> team, JobComponent? job)
+    public void AssignSquad(EntityUid marine, Entity<SquadTeamComponent?> team, JobComponent? job)
     {
         if (!Resolve(team, ref team.Comp))
             return;
@@ -62,10 +62,13 @@ public sealed class SquadSystem : EntitySystem
                     Dirty(item, access);
                 }
 
-                if (grant.RoleName != null &&
-                    TryComp(item, out IdCardComponent? idCard))
+                if (TryComp(item, out IdCardComponent? idCard))
                 {
-                    _id.TryChangeJobTitle(item, grant.RoleName, idCard);
+                    if (grant.RoleName != null)
+                        _id.TryChangeJobTitle(item, grant.RoleName, idCard);
+
+                    if (!EnsureComp<IdCardOwnerComponent>(item, out var owner))
+                        owner.Id = uid;
                 }
             }
 

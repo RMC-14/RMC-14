@@ -29,6 +29,8 @@
       leadership: 1
       medical: 1
       vehicle: 1
+    - type: CMVendorUser
+      points: 45
     - type: MarineOrders
 
 - type: startingGear
