@@ -143,6 +143,7 @@ public sealed class XenoDevourSystem : EntitySystem
             return;
         }
 
+        args.Handled = true;
         _container.EmptyContainer(container);
         _popup.PopupClient("We hurl out the contents of our stomach!", xeno, xeno, PopupType.MediumCaution);
         _audio.PlayPredicted(xeno.Comp.RegurgitateSound, xeno, xeno);

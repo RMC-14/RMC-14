@@ -49,6 +49,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     private void OnXenoEvolveAction(Entity<XenoEvolutionComponent> xeno, ref XenoOpenEvolutionsActionEvent args)
     {
+        args.Handled = true;
         _ui.OpenUi(xeno.Owner, XenoEvolutionUIKey.Key, xeno);
     }
 

@@ -34,6 +34,7 @@ public abstract class SharedXenoWordQueenSystem : EntitySystem
         if (args.Handled)
             return;
 
+        args.Handled = true;
         _ui.TryOpenUi(queen.Owner, XenoWordQueenUI.Key, queen);
     }
 

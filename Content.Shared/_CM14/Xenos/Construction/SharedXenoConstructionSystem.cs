@@ -77,7 +77,6 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
     private void OnXenoPlantWeedsAction(Entity<XenoConstructionComponent> xeno, ref XenoPlantWeedsActionEvent args)
     {
         var coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager, _map);
-
         if (coordinates.GetGridUid(EntityManager) is not { } gridUid ||
             !TryComp(gridUid, out MapGridComponent? grid))
         {
@@ -93,12 +92,14 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
             return;
 
+        args.Handled = true;
         if (_net.IsServer)
             Spawn(args.Prototype, coordinates);
     }
 
     private void OnXenoChooseStructureAction(Entity<XenoConstructionComponent> xeno, ref XenoChooseStructureActionEvent args)
     {
+        args.Handled = true;
         _ui.TryOpenUi(xeno.Owner, XenoChooseStructureUI.Key, xeno);
     }
 
@@ -169,6 +170,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         xeno.Comp.OrderingConstructionAt = args.Target;
         Dirty(xeno);
 
+        args.Handled = true;
         _ui.TryOpenUi(xeno.Owner, XenoOrderConstructionUI.Key, xeno);
     }
 
