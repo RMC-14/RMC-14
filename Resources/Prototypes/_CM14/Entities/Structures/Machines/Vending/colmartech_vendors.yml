@@ -494,8 +494,8 @@
     #  points: 5
     #- id: CMSandbags
     #  points: 20
-    - id: CMRollerBedSpawnFolded
-      points: 5
+      - id: CMRollerBedSpawnFolded
+        points: 5
     #- id: CMFultonDeviceStack
     #  points: 5
     #- id: CMFireExtinguisherPortable
