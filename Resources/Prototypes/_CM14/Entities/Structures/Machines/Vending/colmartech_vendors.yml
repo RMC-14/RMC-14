@@ -365,7 +365,7 @@
   - type: CMAutomatedVendor
     sections:
     - name: Standard Equipment
-      choices: { CMStandard: 2 }
+      takeAll: CMStandard
       entries:
       - id: CMVendorBundleRiflemanApparel
       - id: CMMRE
