@@ -23,6 +23,10 @@
       0: Alive
       1000: Critical
       1100: Dead
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
   - type: Xeno
     actionIds:
     - ActionXenoRest
@@ -100,3 +104,21 @@
     baseSprintSpeed: 2.5
   - type: SlowOnPull
     multiplier: 0.5
+  - type: MobMover
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: XenoFootstepLarge
+      params:
+        volume: -12
+  - type: RandomSound
+    sound:
+      collection: XenoQueenBreath
+      params:
+        volume: -10
+    min: 45
+    max: 60
+  - type: SoundOnDeath
+    sound:
+      path: /Audio/_CM14/Xeno/alien_queen_died.ogg
+      params:
+        volume: -6
