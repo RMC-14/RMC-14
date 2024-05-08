@@ -212,7 +212,7 @@
       #  amount: 1
       - id: CMRollerBedSpawnFolded
         amount: 1
-#      - id: CMMacheteScabbardFull
+#      - id: CMScabbardMacheteFull
 #        amount: 5
       #- id: CMBinoculars
       #  amount: 5
@@ -251,12 +251,12 @@
       - id: CMMagazineExtendedRifleM41A
         amount: 1
     - name: Special Ammunition
-      entries:
+      entries: [ ]
       #- id: CMDrumSmartgunM56
       #  amount: 1
-      - id: CMSpeedLoaderM44
-        amount: 2
-    #- id: CMMarksmanSpeedLoaderM44
+      #- id: CMSpeedLoaderM44Heavy
+      #  amount: 2
+    #- id: CMSpeedLoaderM44Marksman
     #  amount: 2
     - name: Restricted Firearm Ammunition
       entries: [ ]
@@ -328,8 +328,8 @@
       entries:
       - id: CMMagazinePistol88m4AP
         amount: 25
-      #- id: CMSpeedloaderM44
-      #  amount: 20
+      - id: CMSpeedloaderM44
+        amount: 20
       - id: CMMagazinePistolM4A3
         amount: 25
     - name: Attachments
@@ -462,8 +462,8 @@
     #  points: 30
     - name: Clothing Items
       entries:
-    #- id: CMWebbing
-    #  points: 10
+      - id: CMWebbing
+        points: 10
     #- id: CMBrownWebbingVest
     #  points: 15
     #- id: CMBlackWebbingVest
@@ -472,9 +472,9 @@
     #  points: 15
     #- id: CMShoulderHolster
     #  points: 15
-    #- id: CMMacheteScabbardFull
+    #- id: CMScabbardMacheteFull
     #  points: 15
-      - id: CMMachetePouchFull
+      - id: CMPouchMacheteFilled
         points: 15
     #- id: CMUSCMRadioTelephonePack
     #  points: 15
@@ -490,8 +490,8 @@
     #  points: 15
     - name: Utilities
       entries:
-    #- id: CMEntrenchingTool
-    #  points: 5
+      - id: CMEntrenchingTool
+        points: 5
     #- id: CMSandbags
     #  points: 20
       - id: CMRollerBedSpawnFolded
@@ -582,9 +582,9 @@
     #  points: 30
     - name: Clothing Items
       entries:
-    #- id: CMMacheteScabbardFull
+    #- id: CMScabbardMacheteFull
     #  points: 4
-      - id: CMMachetePouchFull
+      - id: CMPouchMacheteFilled
         points: 4
     #- id: CMUSCMRadioTelephonePack
     #  points: 5
@@ -750,7 +750,7 @@
     - name: Backpack
       entries: [ ]
     #- id: CMBackpack
-    #- id: CMMacheteScabbardFull
+    #- id: CMScabbardMacheteFull
     #- id: CMSatchel
     - name: Belt
       entries: [ ]
@@ -780,11 +780,12 @@
     #- id: CMLargePistolMagazinePouch
     #- id: CMPistolPouch
     - name: Accessories
-      entries: [ ]
-    #- id: CMBlackWebbingVest
-    #- id: CMBrownWebbingVest
-    #- id: CMShoulderHolster
-    #- id: CMWebbing
+      choices: { CMAccessories: 1 }
+      entries:
+      #- id: CMBrownWebbingVest
+      #- id: CMBlackWebbingVest
+      #- id: CMShoulderHolster
+      - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
       entries: [ ]
@@ -906,11 +907,12 @@
     #- id: CMPistolPouch
     #- id: CMSlingPouch
     - name: Accessories
-      entries: [ ]
-    #- id: CMBrownWebbingVest
-    #- id: CMBlackWebbingVest
-    #- id: CMShoulderHolster
-    #- id: CMWebbing
+      choices: { CMAccessories: 1 }
+      entries:
+      #- id: CMBrownWebbingVest
+      #- id: CMBlackWebbingVest
+      #- id: CMShoulderHolster
+      - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
       entries: [ ]
@@ -918,8 +920,8 @@
     #- id: CMHeatAbsorbentCoif
     - name: Clothing Items
       entries:
-    #- id: CMMacheteScabbardFull
-      - id: CMMachetePouchFull
+    #- id: CMScabbardMacheteFull
+      - id: CMPouchMacheteFilled
         points: 15
     #- id: CMUSCMRadioTelephonePack
     #- id: CMFuelTankStrapPouch
@@ -985,13 +987,13 @@
     #- id: CMSentryUpgradeKit
     #  points: 15
     - name: Engineering Supplies
-      entries: [ ]
+      entries:
     #- id: CMAirlockCircuitBoard
     #  points: 2
     #- id: CMAPCCircuitBoard
     #  points: 2
-    #- id: CMEntrenchingTool
-    #  points: 2
+      - id: CMEntrenchingTool
+        points: 2
     #- id: CMPowerCellHighCapacity
     #  points: 3
     #- id: CMMetal10
@@ -1062,9 +1064,9 @@
     #  points: 24
     - name: Clothing Items
       entries:
-    #- id: CMMacheteScabbardFull
+    #- id: CMScabbardMacheteFull
     #  points: 6
-      - id: CMMachetePouchFull
+      - id: CMPouchMacheteFilled
         points: 8
     #- id: CMUSCMRadioTelephonePack
     #  points: 15
@@ -1144,7 +1146,7 @@
     #- id: CMHeavyArmor
     - name: Backpack
       entries: [ ]
-    #- id: CMMacheteScabbardFull
+    #- id: CMScabbardMacheteFull
     #- id: CMTechnicianBackpack
     #- id: CMTechnicianSatchel
     #- id: CMTechnicianWelderpack
@@ -1178,11 +1180,12 @@
     #- id: CMPistolPouch
     #- id: CMToolsPouchFull
     - name: Accessories
-      entries: [ ]
-    #- id: CMBlackWebbingVest
-    #- id: CMBrownWebbingVest
-    #- id: CMShoulderHolster
-    #- id: CMWebbing
+      choices: { CMAccessories: 1 }
+      entries:
+      #- id: CMBrownWebbingVest
+      #- id: CMBlackWebbingVest
+      #- id: CMShoulderHolster
+      - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
       entries: [ ]
@@ -1284,8 +1287,8 @@
     #    CMSU6SmartPistol: 12P
     - name: Clothing Items
       entries:
-    #    CMMacheteScabbardFull: 6P
-      - id: CMMachetePouchFull
+    #    CMScabbardMacheteFull: 6P
+      - id: CMPouchMacheteFilled
         points: 8
     #    CMUSCMRadioTelephonePack: 15P
     #    CMFuelTankStrapPouch: 4P
@@ -1387,11 +1390,12 @@
     #- id: CMPistolPouch
     #- id: CMVialPouchFull
     - name: Accessories
-      entries: [ ]
-    #- id: CMBrownWebbingVest
-    #- id: CMBlackWebbingVest
-    #- id: CMShoulderHolster
-    #- id: CMWebbing
+      choices: { CMAccessories: 1 }
+      entries:
+      #- id: CMBrownWebbingVest
+      #- id: CMBlackWebbingVest
+      #- id: CMShoulderHolster
+      - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
       entries: [ ]
@@ -1495,7 +1499,7 @@
     #  points: 20
     - name: Clothing Items
       entries: [ ]
-    #- id: CMMacheteScabbardFull
+    #- id: CMScabbardMacheteFull
     #  points: 6
     #- id: CMFuelTankStrapPouch
     #  points: 5
@@ -1581,14 +1585,15 @@
     #- id: CMShotgunShellPouch
     #- id: CMMediumGeneralPouch
     #- id: CMPistolPouch
-      - id: CMMachetePouchFull
+      - id: CMPouchMacheteFilled
     #- id: CMSlingPouch
     - name: Accessories
-      entries: [ ]
+      choices: { CMAccessories: 1 }
+      entries:
     #- id: CMBrownWebbingVest
     #- id: CMBlackWebbingVest
     #- id: CMShoulderHolster
-    #- id: CMWebbing
+      - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
       entries: [ ]
@@ -1662,9 +1667,9 @@
     #  amount: 30
     - name: Clothing Items
       entries:
-    #- id: CMMacheteScabbardFull
+    #- id: CMScabbardMacheteFull
     #  amount: 5
-      - id: CMMachetePouchFull
+      - id: CMPouchMacheteFilled
         points: 15
     #- id: CMUSCMRadioTelephonePack
     #  amount: 5
@@ -1769,11 +1774,12 @@
     #- id: CMSidearmPouch
     #- id: CMToolsPouchFull
     - name: Accessories
-      entries: [ ]
-    #- id: CMBlackWebbingVest
-    #- id: CMBrownWebbingVest
-    #- id: CMShoulderHolster
-    #- id: CMWebbing
+      choices: { CMAccessories: 1 }
+      entries:
+      #- id: CMBrownWebbingVest
+      #- id: CMBlackWebbingVest
+      #- id: CMShoulderHolster
+      - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
       entries: [ ]
