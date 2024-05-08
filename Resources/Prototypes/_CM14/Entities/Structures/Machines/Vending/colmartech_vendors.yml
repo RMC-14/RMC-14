@@ -461,7 +461,7 @@
     #- id: CMM4PatternArmor
     #  points: 30
     - name: Clothing Items
-      entries: [ ]
+      entries:
     #- id: CMWebbing
     #  points: 10
     #- id: CMBrownWebbingVest
@@ -474,8 +474,8 @@
     #  points: 15
     #- id: CMMacheteScabbardFull
     #  points: 15
-    #- id: CMMachetePouchFull
-    #  points: 15
+      - id: CMMachetePouchFull
+        points: 15
     #- id: CMUSCMRadioTelephonePack
     #  points: 15
     #- id: CMFuelTankStrapPouch
@@ -581,11 +581,11 @@
     #- id: CMM4PatternArmor
     #  points: 30
     - name: Clothing Items
-      entries: [ ]
+      entries:
     #- id: CMMacheteScabbardFull
     #  points: 4
-    #- id: CMMachetePouchFull
-    #  points: 4
+      - id: CMMachetePouchFull
+        points: 4
     #- id: CMUSCMRadioTelephonePack
     #  points: 5
     #- id: CMM276PatternCombatToolbeltRig
@@ -917,9 +917,10 @@
     #- id: CMGasMask
     #- id: CMHeatAbsorbentCoif
     - name: Clothing Items
-      entries: [ ]
+      entries:
     #- id: CMMacheteScabbardFull
-    #- id: CMMachetePouchFull
+      - id: CMMachetePouchFull
+        points: 15
     #- id: CMUSCMRadioTelephonePack
     #- id: CMFuelTankStrapPouch
     #- id: CMWeldingGoggles
@@ -1060,11 +1061,11 @@
     #- id: CMM56DHeavyMachineGun
     #  points: 24
     - name: Clothing Items
-      entries: [ ]
+      entries:
     #- id: CMMacheteScabbardFull
     #  points: 6
-    #- id: CMMachetePouchFull
-    #  points: 8
+      - id: CMMachetePouchFull
+        points: 8
     #- id: CMUSCMRadioTelephonePack
     #  points: 15
     #- id: CMFuelTankStrapPouch
@@ -1282,9 +1283,10 @@
     #    CMVP78Pistol: 8P
     #    CMSU6SmartPistol: 12P
     - name: Clothing Items
-      entries: [ ]
+      entries:
     #    CMMacheteScabbardFull: 6P
-    #    CMMachetePouchFull: 8P
+      - id: CMMachetePouchFull
+        points: 8
     #    CMUSCMRadioTelephonePack: 15P
     #    CMFuelTankStrapPouch: 4P
     #    CMWeldingGoggles: 3P
@@ -1567,7 +1569,8 @@
     #- id: CMM802SmartgunnerSidearmBelt
     #- id: CMM280SmartgunnerDrumBelt
     - name: Pouches
-      entries: [ ]
+      choices: { CMPouch: 2 }
+      entries:
     #- id: CMFlarePouchFull
     #- id: CMElectronicsPouch
     #- id: CMFirstAidPouchRefillableInjectors
@@ -1578,7 +1581,7 @@
     #- id: CMShotgunShellPouch
     #- id: CMMediumGeneralPouch
     #- id: CMPistolPouch
-    #- id: CMMachetePouchFull
+      - id: CMMachetePouchFull
     #- id: CMSlingPouch
     - name: Accessories
       entries: [ ]
@@ -1658,11 +1661,11 @@
     #- id: CMM3B12PatternMarineArmor
     #  amount: 30
     - name: Clothing Items
-      entries: [ ]
+      entries:
     #- id: CMMacheteScabbardFull
     #  amount: 5
-    #- id: CMMachetePouchFull
-    #  amount: 15
+      - id: CMMachetePouchFull
+        points: 15
     #- id: CMUSCMRadioTelephonePack
     #  amount: 5
     #- id: CMWeldingGoggles
