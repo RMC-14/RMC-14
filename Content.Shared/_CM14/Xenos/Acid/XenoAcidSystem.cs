@@ -13,7 +13,6 @@ public sealed class XenoAcidSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     public override void Initialize()
@@ -55,8 +54,7 @@ public sealed class XenoAcidSystem : EntitySystem
 
         args.Handled = true;
 
-        var acid = SpawnAtPosition(args.AcidId, target.ToCoordinates());
-        _transform.SetParent(acid, target);
+        var acid = SpawnAttachedTo(args.AcidId, target.ToCoordinates());
         AddComp(target, new CorrodingComponent
         {
             Acid = acid,
