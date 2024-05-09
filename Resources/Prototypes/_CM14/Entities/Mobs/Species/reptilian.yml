@@ -26,3 +26,5 @@
     soundHit:
       path: /Audio/Weapons/pierce.ogg
     animation: WeaponArcClaw
+  - type: Inventory
+    speciesId: reptilian

@@ -9,3 +9,5 @@
   suffix: CM14
   components:
   - type: Marine
+  - type: Inventory
+    speciesId: vox
