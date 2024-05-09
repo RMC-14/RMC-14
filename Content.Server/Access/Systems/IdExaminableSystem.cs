@@ -41,34 +41,22 @@ public sealed class IdExaminableSystem : EntitySystem
         args.Verbs.Add(verb);
     }
 
-    private string? GetPdaOrIdInfo(EntityUid uid)
-    {
-        // PDA
-        if (EntityManager.TryGetComponent(uid, out PdaComponent? pda) &&
-            TryComp<IdCardComponent>(pda.ContainedId, out var id))
-        {
-            return GetNameAndJob(id);
-        }
-
-        // ID Card
-        if (EntityManager.TryGetComponent(uid, out id))
-        {
-            return GetNameAndJob(id);
-        }
-
-        return null;
-    }
-
     private string? GetInfo(EntityUid uid)
     {
-        if (_inventorySystem.TryGetSlotEntity(uid, "id", out var idUid) &&
-            GetPdaOrIdInfo(idUid.Value) is { } idInfo)
-            return idInfo;
-
-        if (_inventorySystem.TryGetSlotEntity(uid, "neck", out var neckUid) &&
-            GetPdaOrIdInfo(neckUid.Value) is { } neckInfo)
-            return neckInfo;
-
+        if (_inventorySystem.TryGetSlotEntity(uid, "id", out var idUid))
+        {
+            // PDA
+            if (EntityManager.TryGetComponent(idUid, out PdaComponent? pda) &&
+                TryComp<IdCardComponent>(pda.ContainedId, out var id))
+            {
+                return GetNameAndJob(id);
+            }
+            // ID Card
+            if (EntityManager.TryGetComponent(idUid, out id))
+            {
+                return GetNameAndJob(id);
+            }
+        }
         return null;
     }
 
