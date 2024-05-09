@@ -24,6 +24,7 @@ namespace Content.Shared._CM14.Xenos.Construction;
 public abstract class SharedXenoConstructionSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
@@ -186,7 +187,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         if (!_prototype.TryIndex(args.StructureId, out var prototype))
             return;
 
-        if (prototype.TryGetComponent(out HiveConstructionNodeComponent? node) &&
+        if (prototype.TryGetComponent(out HiveConstructionNodeComponent? node, _compFactory) &&
             !_xenoPlasma.HasPlasmaPopup(xeno.Owner, node.InitialPlasmaCost, false))
         {
             return;
@@ -218,7 +219,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         if (!_prototype.TryIndex(args.StructureId, out var prototype))
             return;
 
-        if (prototype.TryGetComponent(out HiveConstructionNodeComponent? node) &&
+        if (prototype.TryGetComponent(out HiveConstructionNodeComponent? node, _compFactory) &&
             !_xenoPlasma.TryRemovePlasmaPopup((xeno, plasma), node.InitialPlasmaCost))
         {
             return;
@@ -318,7 +319,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
     public FixedPoint2? GetStructurePlasmaCost(EntProtoId prototype)
     {
         if (_prototype.TryIndex(prototype, out var buildChoice) &&
-            buildChoice.TryGetComponent(out XenoConstructionPlasmaCostComponent? cost))
+            buildChoice.TryGetComponent(out XenoConstructionPlasmaCostComponent? cost, _compFactory))
         {
             return cost.Plasma;
         }

@@ -15,6 +15,7 @@ namespace Content.Client._CM14.Admin;
 [UsedImplicitly]
 public sealed class CMAdminEui : BaseEui
 {
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
     private static readonly Comparer<EntityPrototype> EntityComparer =
@@ -58,7 +59,7 @@ public sealed class CMAdminEui : BaseEui
         var tiers = new SortedDictionary<int, SortedSet<EntityPrototype>>();
         foreach (var entity in _prototypes.EnumeratePrototypes<EntityPrototype>())
         {
-            if (entity.Abstract || !entity.TryGetComponent(out XenoComponent? xeno))
+            if (entity.Abstract || !entity.TryGetComponent(out XenoComponent? xeno, _compFactory))
                 continue;
 
             if (!tiers.TryGetValue(xeno.Tier, out var xenos))
