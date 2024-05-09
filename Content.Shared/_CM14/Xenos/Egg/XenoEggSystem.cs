@@ -232,6 +232,9 @@ public sealed class XenoEggSystem : EntitySystem
         egg.Comp.State = state;
         Dirty(egg);
 
+        if (state == XenoEggState.Opened)
+            RemCompDeferred<XenoFriendlyComponent>(egg);
+
         var ev = new XenoEggStateChangedEvent();
         RaiseLocalEvent(egg, ref ev);
     }

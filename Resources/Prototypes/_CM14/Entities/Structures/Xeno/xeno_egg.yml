@@ -37,3 +37,4 @@
         damage: 60
       behaviors:
       - !type:BurnBodyBehavior { }
+  - type: XenoFriendly

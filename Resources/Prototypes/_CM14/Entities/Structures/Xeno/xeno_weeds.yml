@@ -75,6 +75,7 @@
         weed14: ""
     - 0:
         weed15: ""
+  - type: XenoFriendly
 #  - type: SpeedModifierContacts # TODO CM14 slow down
 #    walkSpeedModifier: 0.5
 #    sprintSpeedModifier: 0.5
@@ -205,6 +206,7 @@
     base: weedwall
     mode: Corners
   - type: XenoNestSurface
+  - type: XenoFriendly
 
 - type: edgeSpreader
   id: XenoWeeds
