@@ -7,45 +7,45 @@
 #    - name: Ammo
 #      entries: []
     - name: Attachments
-      entries:
-      - cost: 3000
-        crate: CMCrateAttachmentRedDot
-      - cost: 3000
-        crate: CMCrateAttachmentTelescopicScope
-      - cost: 3000
-        crate: CMCrateAttachmentMiniScope
-      - cost: 3000
-        crate: CMCrateAttachmentMagneticHarness
-      - cost: 3000
-        crate: CMCrateAttachmentSuppressor
-      - cost: 3000
-        crate: CMCrateAttachmentExtendedBarrel
-      - cost: 3000
-        crate: CMCrateAttachmentCompensator
-      - cost: 3000
-        crate: CMCrateAttachmentForegrip
-      - cost: 3000
-        crate: CMCrateAttachmentGyro
-      - cost: 3000
-        crate: CMCrateAttachmentBipod
-      - cost: 3000
-        crate: CMCrateAttachmentUnderbarrelShotgun
-      - cost: 3000
-        crate: CMCrateAttachmentUnderbarrelExtinguisher
-      - cost: 3000
-        crate: CMCrateAttachmentUnderbarrelFlamer
-      - cost: 3000
-        crate: CMCrateAttachmentBurstfire
-      - cost: 6000
-        crate: CMCrateAttachmentAllStocks
-      - cost: 3000
-        crate: CMCrateAttachmentRevolverStock
-      - cost: 3000
-        crate: CMCrateAttachmentRifleStock
-      - cost: 3000
-        crate: CMCrateAttachmentShotgunStock
-      - cost: 3000
-        crate: CMCrateAttachmentSmgStock
+      entries: [ ] # TODO CM14
+#      - cost: 3000
+#        crate: CMCrateAttachmentRedDot
+#      - cost: 3000
+#        crate: CMCrateAttachmentTelescopicScope
+#      - cost: 3000
+#        crate: CMCrateAttachmentMiniScope
+#      - cost: 3000
+#        crate: CMCrateAttachmentMagneticHarness
+#      - cost: 3000
+#        crate: CMCrateAttachmentSuppressor
+#      - cost: 3000
+#        crate: CMCrateAttachmentExtendedBarrel
+#      - cost: 3000
+#        crate: CMCrateAttachmentCompensator
+#      - cost: 3000
+#        crate: CMCrateAttachmentForegrip
+#      - cost: 3000
+#        crate: CMCrateAttachmentGyro
+#      - cost: 3000
+#        crate: CMCrateAttachmentBipod
+#      - cost: 3000
+#        crate: CMCrateAttachmentUnderbarrelShotgun
+#      - cost: 3000
+#        crate: CMCrateAttachmentUnderbarrelExtinguisher
+#      - cost: 3000
+#        crate: CMCrateAttachmentUnderbarrelFlamer
+#      - cost: 3000
+#        crate: CMCrateAttachmentBurstfire
+#      - cost: 6000
+#        crate: CMCrateAttachmentAllStocks
+#      - cost: 3000
+#        crate: CMCrateAttachmentRevolverStock
+#      - cost: 3000
+#        crate: CMCrateAttachmentRifleStock
+#      - cost: 3000
+#        crate: CMCrateAttachmentShotgunStock
+#      - cost: 3000
+#        crate: CMCrateAttachmentSmgStock
     - name: Clothing
       entries:
       - cost: 2000
