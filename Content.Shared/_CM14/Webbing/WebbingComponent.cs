@@ -1,5 +1,6 @@
 ﻿using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
+using static Robust.Shared.Utility.SpriteSpecifier;
 
 namespace Content.Shared._CM14.Webbing;
 
@@ -8,5 +9,5 @@ namespace Content.Shared._CM14.Webbing;
 public sealed partial class WebbingComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public SpriteSpecifier.Rsi? PlayerSprite = new(new ResPath("_CM14/Objects/Clothing/webbing.rsi"), "equipped");
+    public Rsi? PlayerSprite = new(new ResPath("_CM14/Objects/Clothing/webbing.rsi"), "equipped");
 }
