@@ -70,7 +70,7 @@
   completetime: 4
   materials:
     CMSteel: 50 # 1875
-    CMGlawss: 100 # 3750
+    CMGlass: 100 # 3750
 
 - type: latheRecipe
   id: CMRodMetal
