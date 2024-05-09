@@ -34,7 +34,7 @@
     - CMBucket
 #    - Janitorial bucket (10000 metal)
 #    - Flashlight (62 metal, 25 glass)
-#    - Extinguisher (112 metal)
+    - CMFireExtinguisher
     - CMCrowbar
     - CMMultitool
     - CMTRayScanner
@@ -46,10 +46,8 @@
 #    - Radio headset (93 metal)
 #    - Shortwave radio (93 metal, 31 glass)
 #    - Welding mask (3750 metal, 1250 glass)
-#    - Steel sheets (3750 metal)
-#    - Glass sheets (3750 glass)
-#    - Reinforced glass sheets (1875 metal, 3750 glass)
-#    - Metal rods (2343 metal)
+    - CMSheetGlassReinforced
+    - CMRodMetal
 #    - Kitchen knife (15000 metal)
 #    - Tape recorder (75 metal, 37 glass)
 #    - Airlock electronics (62 metal, 62 glass)
@@ -65,8 +63,8 @@
     - CMRetractor
     - CMCautery
     - CMHemostat
-#    - Glass beaker (625 glass)
-#    - Large glass beaker (6250 glass)
+    - CMBeaker
+    - CMBeakerLarge
 #    - Drinking glass (625 glass)
 #    - Console screen (250 glass)
 #    - Igniter (625 metal, 62 glass)

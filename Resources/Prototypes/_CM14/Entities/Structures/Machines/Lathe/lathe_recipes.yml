@@ -7,6 +7,13 @@
     CMSteel: 67 # 2500
 
 - type: latheRecipe
+  id: CMFireExtinguisher
+  result: CMFireExtinguisher
+  completetime: 4
+  materials:
+    CMSteel: 3 # 112
+
+- type: latheRecipe
   id: CMCrowbar
   result: CMCrowbar
   completetime: 4
@@ -58,6 +65,21 @@
     CMSteel: 5 # 187
 
 - type: latheRecipe
+  id: CMSheetGlassReinforced
+  result: CMSheetGlassReinforced1
+  completetime: 4
+  materials:
+    CMSteel: 50 # 1875
+    CMGlawss: 100 # 3750
+
+- type: latheRecipe
+  id: CMRodMetal
+  result: CMRodMetal1
+  completetime: 4
+  materials:
+    CMSteel: 62 # 2343
+
+- type: latheRecipe
   id: CMScalpel
   result: CMScalpel
   completetime: 4
@@ -104,3 +126,17 @@
   materials:
     CMSteel: 167 # 6250
     CMGlass: 83 # 3125
+
+- type: latheRecipe
+  id: CMBeaker
+  result: CMBeaker
+  completetime: 4
+  materials:
+    CMGlass: 17 # 625
+
+- type: latheRecipe
+  id: CMBeakerLarge
+  result: CMBeakerLarge
+  completetime: 4
+  materials:
+    CMGlass: 167 # 6250
