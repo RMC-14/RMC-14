@@ -1,8 +1,8 @@
 using Content.Shared._CM14.Marines;
-using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.DragDrop;
+using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
@@ -25,8 +25,14 @@ public abstract class SharedIVDripSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
+    private readonly HashSet<EntityUid> _packsToUpdate = new();
+
+    private EntityQuery<BloodPackComponent> _bloodPackQuery;
+
     public override void Initialize()
     {
+        _bloodPackQuery = GetEntityQuery<BloodPackComponent>();
+
         SubscribeLocalEvent<IVDripComponent, EntInsertedIntoContainerMessage>(OnIVDripEntInserted);
         SubscribeLocalEvent<IVDripComponent, EntRemovedFromContainerMessage>(OnIVDripEntRemoved);
         SubscribeLocalEvent<IVDripComponent, AfterAutoHandleStateEvent>(OnIVDripAfterHandleState);
@@ -40,8 +46,9 @@ public abstract class SharedIVDripSystem : EntitySystem
         // TODO CM14 check for BloodstreamComponent instead of MarineComponent
         SubscribeLocalEvent<MarineComponent, CanDropTargetEvent>(OnMarineCanDropTarget);
 
-        SubscribeLocalEvent<BloodPackComponent, MapInitEvent>(OnBloodPackMapInitEvent);
-        SubscribeLocalEvent<BloodPackComponent, SolutionChangedEvent>(OnBloodPackSolutionChanged);
+        SubscribeLocalEvent<BloodPackComponent, MapInitEvent>(OnBloodPackMapInit);
+        SubscribeLocalEvent<BloodPackComponent, AfterAutoHandleStateEvent>(OnBloodPackAfterState);
+        SubscribeLocalEvent<BloodPackComponent, SolutionContainerChangedEvent>(OnBloodPackSolutionChanged);
     }
 
     private void OnIVDripEntInserted(Entity<IVDripComponent> iv, ref EntInsertedIntoContainerMessage args)
@@ -111,17 +118,19 @@ public abstract class SharedIVDripSystem : EntitySystem
         });
     }
 
-    private void OnBloodPackMapInitEvent(Entity<BloodPackComponent> pack, ref MapInitEvent args)
+    private void OnBloodPackMapInit(Entity<BloodPackComponent> pack, ref MapInitEvent args)
     {
-        if (!_solutionContainer.TryGetSolution(pack.Owner, pack.Comp.Solution, out _, out var solution))
-            return;
-
-        UpdatePackVisuals(pack, solution);
+        _packsToUpdate.Add(pack);
     }
 
-    private void OnBloodPackSolutionChanged(Entity<BloodPackComponent> pack, ref SolutionChangedEvent args)
+    private void OnBloodPackAfterState(Entity<BloodPackComponent> pack, ref AfterAutoHandleStateEvent args)
     {
-        UpdatePackVisuals(pack, args.Solution.Comp.Solution);
+        UpdatePackVisuals(pack);
+    }
+
+    private void OnBloodPackSolutionChanged(Entity<BloodPackComponent> pack, ref SolutionContainerChangedEvent args)
+    {
+        UpdatePackVisuals(pack);
     }
 
     protected bool InRange(Entity<IVDripComponent> iv, EntityUid to)
@@ -208,8 +217,14 @@ public abstract class SharedIVDripSystem : EntitySystem
         _popup.PopupClient(msg, iv, user);
     }
 
-    private void UpdatePackVisuals(Entity<BloodPackComponent> pack, Solution solution)
+    protected void UpdatePackVisuals(Entity<BloodPackComponent> pack)
     {
+        if (!_solutionContainer.TryGetSolution(pack.Owner, pack.Comp.Solution, out _, out var solution))
+        {
+            UpdatePackAppearance(pack);
+            return;
+        }
+
         if (_containers.TryGetContainingContainer(pack, out var container) &&
             TryComp(container.Owner, out IVDripComponent? iv))
         {
@@ -222,7 +237,7 @@ public abstract class SharedIVDripSystem : EntitySystem
         UpdatePackAppearance(pack);
     }
 
-    private void UpdateIVVisuals(Entity<IVDripComponent> iv)
+    protected void UpdateIVVisuals(Entity<IVDripComponent> iv)
     {
         // the client doesn't always know about solutions
         if (_net.IsClient)
@@ -259,5 +274,34 @@ public abstract class SharedIVDripSystem : EntitySystem
 
     protected virtual void UpdatePackAppearance(Entity<BloodPackComponent> pack)
     {
+        if (_net.IsClient)
+            return;
+
+        if (_solutionContainer.TryGetSolution(pack.Owner, pack.Comp.Solution, out var solEnt))
+        {
+            var solution = solEnt.Value.Comp.Solution;
+            pack.Comp.FillPercentage = solution.Volume / solution.MaxVolume;
+            pack.Comp.FillColor = solution.GetColor(_prototype);
+        }
+        else
+        {
+            pack.Comp.FillPercentage = FixedPoint2.Zero;
+            pack.Comp.FillColor = Color.Transparent;
+        }
+
+        Dirty(pack);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        foreach (var pack in _packsToUpdate)
+        {
+            if (_bloodPackQuery.TryComp(pack, out var comp))
+                UpdatePackVisuals((pack, comp));
+        }
+
+        _packsToUpdate.Clear();
     }
 }

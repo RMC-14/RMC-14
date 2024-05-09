@@ -1,6 +1,6 @@
-using Content.Server.Body.Components;
-using Content.Server.Chemistry.Containers.EntitySystems;
+﻿using Content.Server.Body.Components;
 using Content.Shared._CM14.Medical.IV;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
 using Robust.Shared.Timing;
 
@@ -10,10 +10,12 @@ public sealed class IVDripSystem : SharedIVDripSystem
 {
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
 
     public override void Update(float frameTime)
     {
+        base.Update(frameTime);
+
         var time = _timing.CurTime;
         var query = EntityQueryEnumerator<IVDripComponent>();
         while (query.MoveNext(out var ivId, out var ivComp))
@@ -48,6 +50,7 @@ public sealed class IVDripSystem : SharedIVDripSystem
                     bloodSolutionEnt.Comp.Solution.Volume < bloodSolutionEnt.Comp.Solution.MaxVolume)
                 {
                     _solutionContainer.TryTransferSolution(bloodSolutionEnt, packSol, ivComp.TransferAmount);
+                    Dirty(packSolEnt.Value);
                 }
             }
             else
@@ -55,11 +58,14 @@ public sealed class IVDripSystem : SharedIVDripSystem
                 if (packSol.Volume < packSol.MaxVolume)
                 {
                     _solutionContainer.TryTransferSolution(packSolEnt.Value, streamSol, ivComp.TransferAmount);
+                    Dirty(streamSolEnt.Value);
                 }
             }
 
             ivComp.TransferAt = time + ivComp.TransferDelay;
             Dirty(ivId, ivComp);
+            UpdateIVVisuals((ivId, ivComp));
+            UpdatePackVisuals((pack, packComponent));
         }
     }
 }
