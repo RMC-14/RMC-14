@@ -23,7 +23,7 @@
     - type: Material
     - type: PhysicalComposition
       materialComposition:
-        CMSteel: 3750
+        CMSteel: 100
     - type: Stack
       count: 50
       stackType: CMSteel
