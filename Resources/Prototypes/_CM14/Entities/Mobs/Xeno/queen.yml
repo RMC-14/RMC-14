@@ -122,3 +122,6 @@
       path: /Audio/_CM14/Xeno/alien_queen_died.ogg
       params:
         volume: -6
+  - type: WhitelistPickup
+    any:
+    - type: XenoEgg

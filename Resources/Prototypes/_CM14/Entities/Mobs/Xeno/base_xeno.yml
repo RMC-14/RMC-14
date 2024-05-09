@@ -153,9 +153,6 @@
   - type: GhostOnMove
     mustBeDead: true
   - type: WhitelistPickup
-    any:
-    - type: XenoHugger
-    - type: XenoEgg
   - type: DropHeldOnIncapacitate
   - type: NightVision
   - type: ParalyzeOnPullAttemptImmune

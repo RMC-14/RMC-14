@@ -51,3 +51,7 @@
   - type: Tackle
     threshold: 5
     stun: 5
+  - type: WhitelistPickup
+    any:
+    - type: XenoHugger
+    - type: XenoEgg
