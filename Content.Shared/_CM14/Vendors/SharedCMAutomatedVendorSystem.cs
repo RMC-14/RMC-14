@@ -17,6 +17,7 @@ namespace Content.Shared._CM14.Vendors;
 
 public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 {
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
@@ -181,7 +182,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         var min = comp.MinOffset;
         var max = comp.MaxOffset;
         var offset = _random.NextVector2Box(min.X, min.Y, max.X, max.Y);
-        if (entity.TryGetComponent(out CMVendorBundleComponent? bundle))
+        if (entity.TryGetComponent(out CMVendorBundleComponent? bundle, _compFactory))
         {
             foreach (var bundled in bundle.Bundle)
             {
@@ -196,7 +197,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private void Vend(EntityUid vendor, EntityUid player, EntProtoId toVend, Vector2 offset)
     {
-        if (_prototypes.Index(toVend).TryGetComponent(out CMVendorMapToSquadComponent? mapTo))
+        if (_prototypes.Index(toVend).TryGetComponent(out CMVendorMapToSquadComponent? mapTo, _compFactory))
         {
             if (TryComp(player, out SquadMemberComponent? member) &&
                 member.Squad is { } squad &&
