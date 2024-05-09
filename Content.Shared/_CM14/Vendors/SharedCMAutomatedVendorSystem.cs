@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using Content.Shared._CM14.Marines.Squads;
+using Content.Shared._CM14.Webbing;
 using Content.Shared.Access.Components;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -27,6 +28,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedWebbingSystem _webbing = default!;
 
     private readonly SlotFlags[] _order =
     [
@@ -226,37 +228,56 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (!HasComp<ItemComponent>(item))
             return false;
 
-        // TODO CM14 webbing first
+        if (TryAttachWebbing(player, item))
+            return true;
+
         if (!TryComp(item, out ClothingComponent? clothing))
         {
             return _hands.TryPickupAnyHand(player, item);
         }
 
-        var equipped = false;
+        if (TryEquip(player, (item, clothing)))
+            return true;
+
+        return _hands.TryPickupAnyHand(player, item);
+    }
+
+    private bool TryAttachWebbing(EntityUid player, EntityUid item)
+    {
+        if (HasComp<WebbingComponent>(item) &&
+            _inventory.TryGetContainerSlotEnumerator(player, out var enumerator))
+        {
+            while (enumerator.MoveNext(out var slot))
+            {
+                if (slot.ContainedEntity is { } contained &&
+                    TryComp(contained, out WebbingClothingComponent? clothing) &&
+                    _webbing.Attach((contained, clothing), item))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private bool TryEquip(EntityUid player, Entity<ClothingComponent> clothing)
+    {
         foreach (var order in _order)
         {
-            if ((clothing.Slots & order) == 0)
+            if ((clothing.Comp.Slots & order) == 0)
                 continue;
 
-            if (!_inventory.TryGetContainerSlotEnumerator(player, out var slots, clothing.Slots))
+            if (!_inventory.TryGetContainerSlotEnumerator(player, out var slots, clothing.Comp.Slots))
                 continue;
 
             while (slots.MoveNext(out var slot))
             {
-                if (_inventory.TryEquip(player, item, slot.ID))
-                {
-                    equipped = true;
-                    break;
-                }
+                if (_inventory.TryEquip(player, clothing, slot.ID))
+                    return true;
             }
-
-            if (equipped)
-                break;
         }
 
-        if (equipped)
-            return true;
-
-        return _hands.TryPickupAnyHand(player, item);
+        return false;
     }
 }
