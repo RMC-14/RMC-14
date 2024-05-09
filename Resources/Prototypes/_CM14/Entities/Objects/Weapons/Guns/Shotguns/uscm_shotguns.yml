@@ -30,8 +30,8 @@
       path: /Audio/_CM14/Weapons/Guns/Reload/m37a2.ogg
   - type: PumpAction
   - type: ShootUseDelay
-  - type: UseDelay
     delay: 2
+  - type: UseDelay
 
 #  - type: GunWieldBonus # TODO CM14
 #    minAngle: -25
