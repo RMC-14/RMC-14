@@ -188,6 +188,7 @@
       - Huggable
   - type: BlockPullingDead
   - type: XenoFriendly
+  - type: Undisposable
 
 - type: entity
   abstract: true
