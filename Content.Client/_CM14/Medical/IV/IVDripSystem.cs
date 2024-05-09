@@ -1,4 +1,5 @@
 ﻿using Content.Shared._CM14.Medical.IV;
+using Content.Shared.Rounding;
 using Robust.Client.GameObjects;
 
 namespace Content.Client._CM14.Medical.IV;
@@ -7,6 +8,7 @@ public sealed class IVDripSystem : SharedIVDripSystem
 {
     protected override void UpdateIVAppearance(Entity<IVDripComponent> iv)
     {
+        base.UpdateIVAppearance(iv);
         if (!TryComp(iv, out SpriteComponent? sprite))
             return;
 
@@ -39,10 +41,21 @@ public sealed class IVDripSystem : SharedIVDripSystem
 
     protected override void UpdatePackAppearance(Entity<BloodPackComponent> pack)
     {
+        base.UpdatePackAppearance(pack);
         if (!TryComp(pack, out SpriteComponent? sprite))
             return;
 
         // TODO CM14 blood types
         sprite.LayerSetVisible(BloodPackVisuals.Label, false);
+
+        if (sprite.LayerMapTryGet(BloodPackVisuals.Fill, out var fillLayer))
+        {
+            var fill = pack.Comp.FillPercentage.Float();
+            var level = ContentHelpers.RoundToLevels(fill, 1, pack.Comp.MaxFillLevels + 1);
+            var state = level > 0 ? $"{pack.Comp.FillBaseName}{level}" : pack.Comp.FillBaseName;
+            sprite.LayerSetState(fillLayer, state);
+            sprite.LayerSetColor(fillLayer, pack.Comp.FillColor);
+            sprite.LayerSetVisible(fillLayer, true);
+        }
     }
 }
