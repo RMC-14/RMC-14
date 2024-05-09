@@ -779,5 +779,12 @@
   id: 101
   time: '2024-05-09T09:59:50.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2086
+- author: DrSmugleaf
+  changes:
+  - message: Added the autolathe with cm specific recipes.
+    type: Add
+  id: 102
+  time: '2024-05-09T10:48:54.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2085
 Name: CM
 Order: -1
