@@ -17,7 +17,7 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      CMGlass: 100
+      CMGlass: 3750
   - type: Sprite
     sprite: _CM14/Objects/Materials/Sheets/glass.rsi
     state: glass
@@ -61,7 +61,7 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      CMReinforcedGlass: 100
+      CMReinforcedGlass: 3750
   - type: Sprite
     sprite: _CM14/Objects/Materials/Sheets/reinf_glass.rsi
     state: rglass
@@ -105,7 +105,7 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      CMPhoronGlass: 100
+      CMPhoronGlass: 3750
   - type: Sprite
     sprite: _CM14/Objects/Materials/Sheets/phoron_glass.rsi
     state: phoronglass
@@ -146,7 +146,7 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      CMPhoronGlassReinforced: 100
+      CMPhoronGlassReinforced: 3750
   - type: Sprite
     sprite: _CM14/Objects/Materials/Sheets/phoron_reinf_glass.rsi
     state: phoronrglass

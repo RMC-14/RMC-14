@@ -1,0 +1,105 @@
+﻿- type: latheRecipe
+  id: CMBucket
+  result: Bucket # TODO CM14
+  completetime: 4
+  materials:
+    CMSteel: 2500
+
+- type: latheRecipe
+  id: CMCrowbar
+  result: CMCrowbar
+  completetime: 4
+  materials:
+    CMSteel: 62
+
+- type: latheRecipe
+  id: CMMultitool
+  result: CMMultitool
+  completetime: 4
+  materials:
+    CMSteel: 62
+    CMGlass: 25
+
+- type: latheRecipe
+  id: CMTRayScanner
+  result: trayScanner # TODO CM14
+  completetime: 4
+  materials:
+    CMSteel: 187
+
+- type: latheRecipe
+  id: CMWelderSmall
+  result: CMWelderSmall
+  completetime: 4
+  materials:
+    CMSteel: 87
+    CMGlass: 37
+
+- type: latheRecipe
+  id: CMScrewdriver
+  result: CMScrewdriver
+  completetime: 4
+  materials:
+    CMSteel: 93
+
+- type: latheRecipe
+  id: CMWirecutter
+  result: CMWirecutter
+  completetime: 4
+  materials:
+    CMSteel: 100
+
+- type: latheRecipe
+  id: CMWrench
+  result: CMWrench
+  completetime: 4
+  materials:
+    CMSteel: 187
+
+- type: latheRecipe
+  id: CMScalpel
+  result: CMScalpel
+  completetime: 4
+  materials:
+    CMSteel: 12500
+    CMGlass: 6250
+
+- type: latheRecipe
+  id: CMCircularSaw
+  result: CMCircularSaw
+  completetime: 4
+  materials:
+    CMSteel: 25000
+    CMGlass: 12500
+
+- type: latheRecipe
+  id: CMSurgicalDrill
+  result: CMSurgicalDrill
+  completetime: 4
+  materials:
+    CMSteel: 18750
+    CMGlass: 12500
+
+- type: latheRecipe
+  id: CMRetractor
+  result: CMRetractor
+  completetime: 4
+  materials:
+    CMSteel: 12500
+    CMGlass: 6250
+
+- type: latheRecipe
+  id: CMCautery
+  result: CMCautery
+  completetime: 4
+  materials:
+    CMSteel: 6250
+    CMGlass: 3125
+
+- type: latheRecipe
+  id: CMHemostat
+  result: CMHemostat
+  completetime: 4
+  materials:
+    CMSteel: 6250
+    CMGlass: 3125
