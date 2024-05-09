@@ -184,7 +184,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         return true;
     }
 
-    private bool CanHugPopup(Entity<XenoHuggerComponent> hugger, EntityUid victim, EntityUid user, bool popup = true)
+    private bool CanHugPopup(Entity<XenoHuggerComponent> hugger, EntityUid victim, EntityUid user, bool popup = true, bool force = false)
     {
         var victimIdentity = Identity.Name(victim, EntityManager, hugger);
         if (!HasComp<HuggableComponent>(victim) ||
@@ -197,7 +197,8 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
             return false;
         }
 
-        if (TryComp(victim, out StandingStateComponent? standing) &&
+        if (!force &&
+            TryComp(victim, out StandingStateComponent? standing) &&
             !_standing.IsDown(victim, standing))
         {
             if (popup)
@@ -217,9 +218,9 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         return true;
     }
 
-    private bool Hug(Entity<XenoHuggerComponent> hugger, EntityUid victim, bool popup = true)
+    public bool Hug(Entity<XenoHuggerComponent> hugger, EntityUid victim, bool popup = true, bool force = false)
     {
-        if (!CanHugPopup(hugger, victim, hugger, popup))
+        if (!CanHugPopup(hugger, victim, hugger, popup, force))
             return false;
 
         if (_inventory.TryGetContainerSlotEnumerator(victim, out var slots, SlotFlags.MASK))
