@@ -13,7 +13,6 @@
     state: dogtag
   - type: Clothing
     slots:
-    - neck
     - idcard
     sprite: _CM14/Objects/CMIDs/dogtags.rsi
   - type: IdCard
@@ -90,6 +89,5 @@
   - type: Clothing
     slots:
     - idcard
-    - neck # it's a lanyard, we could also use a sprite for this if someone makes one
     sprite: _CM14/Objects/CMIDs/lanyard.rsi
 
