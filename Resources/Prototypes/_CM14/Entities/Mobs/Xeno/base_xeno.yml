@@ -182,7 +182,7 @@
     - Hivemind
   - type: StandingState
   - type: SlowOnPull
-    multiplier: 0.6
+    multiplier: 0.75
   - type: PullWhitelist
     whitelist:
       components:
@@ -190,6 +190,7 @@
       - XenoEgg
       - Huggable
   - type: BlockPullingDead
+  - type: XenoFriendly
 
 - type: entity
   abstract: true
