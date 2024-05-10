@@ -55,3 +55,9 @@
     any:
     - type: XenoHugger
     - type: XenoEgg
+  - type: MultiHandedHolder
+    items:
+    - hands: 2
+      whitelist:
+        components:
+        - XenoEgg
