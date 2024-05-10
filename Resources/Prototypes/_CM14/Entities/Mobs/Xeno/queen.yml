@@ -125,3 +125,4 @@
   - type: WhitelistPickup
     any:
     - type: XenoEgg
+  - type: XenoEvolutionGranter
