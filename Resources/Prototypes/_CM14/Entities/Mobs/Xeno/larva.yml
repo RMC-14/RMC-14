@@ -29,6 +29,7 @@
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1
   - type: XenoEvolution
+    requiresGranter: false
     evolvesTo:
     - CMXenoDrone
     - CMXenoDefender

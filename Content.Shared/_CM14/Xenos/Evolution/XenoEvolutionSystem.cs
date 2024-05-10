@@ -4,6 +4,8 @@ using Content.Shared.Climbing.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
 using Content.Shared.Mind;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
@@ -18,6 +20,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -28,15 +31,24 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private readonly HashSet<EntityUid> _doors = new();
     private readonly HashSet<EntityUid> _intersecting = new();
 
+    private EntityQuery<MobStateComponent> _mobStateQuery;
+    private EntityQuery<XenoEvolveActionComponent> _xenoEvolveActionQuery;
+
+    private readonly TimeSpan _cooldownThreshold = TimeSpan.FromSeconds(0.2);
+
     public override void Initialize()
     {
-        base.Initialize();
+        _mobStateQuery = GetEntityQuery<MobStateComponent>();
+        _xenoEvolveActionQuery = GetEntityQuery<XenoEvolveActionComponent>();
 
         SubscribeLocalEvent<XenoEvolveActionComponent, MapInitEvent>(OnXenoEvolveActionMapInit);
 
+        SubscribeLocalEvent<XenoEvolutionComponent, MapInitEvent>(OnXenoEvolveMapInit);
         SubscribeLocalEvent<XenoEvolutionComponent, XenoOpenEvolutionsActionEvent>(OnXenoEvolveAction);
         SubscribeLocalEvent<XenoEvolutionComponent, XenoEvolveBuiMessage>(OnXenoEvolveBui);
         SubscribeLocalEvent<XenoEvolutionComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
+        SubscribeLocalEvent<XenoEvolutionComponent, ActionAddedEvent>(OnXenoEvolveActionAdded);
+        SubscribeLocalEvent<XenoEvolutionComponent, ActionRemovedEvent>(OnXenoEvolveActionRemoved);
 
         SubscribeLocalEvent<XenoNewlyEvolvedComponent, PreventCollideEvent>(OnNewlyEvolvedPreventCollide);
     }
@@ -45,6 +57,18 @@ public sealed class XenoEvolutionSystem : EntitySystem
     {
         if (_action.TryGetActionData(ent, out _, false))
             _action.SetCooldown(ent, _timing.CurTime, _timing.CurTime + ent.Comp.Cooldown);
+    }
+
+    private void OnXenoEvolveMapInit(Entity<XenoEvolutionComponent> ent, ref MapInitEvent args)
+    {
+        foreach (var (actionId, _) in _action.GetActions(ent))
+        {
+            if (_xenoEvolveActionQuery.HasComp(actionId) &&
+                !ent.Comp.EvolutionActions.Contains(actionId))
+            {
+                ent.Comp.EvolutionActions.Add(actionId);
+            }
+        }
     }
 
     private void OnXenoEvolveAction(Entity<XenoEvolutionComponent> xeno, ref XenoOpenEvolutionsActionEvent args)
@@ -112,6 +136,17 @@ public sealed class XenoEvolutionSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-end"), newXeno, newXeno);
     }
 
+    private void OnXenoEvolveActionAdded(Entity<XenoEvolutionComponent> ent, ref ActionAddedEvent args)
+    {
+        if (_xenoEvolveActionQuery.HasComp(args.Action))
+            ent.Comp.EvolutionActions.Add(args.Action);
+    }
+
+    private void OnXenoEvolveActionRemoved(Entity<XenoEvolutionComponent> ent, ref ActionRemovedEvent args)
+    {
+        ent.Comp.EvolutionActions.Remove(args.Action);
+    }
+
     private void OnNewlyEvolvedPreventCollide(Entity<XenoNewlyEvolvedComponent> ent, ref PreventCollideEvent args)
     {
         if (ent.Comp.StopCollide.Contains(args.OtherEntity))
@@ -120,8 +155,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        var query = EntityQueryEnumerator<XenoNewlyEvolvedComponent>();
-        while (query.MoveNext(out var uid, out var comp))
+        var newly = EntityQueryEnumerator<XenoNewlyEvolvedComponent>();
+        while (newly.MoveNext(out var uid, out var comp))
         {
             if (comp.TriedClimb)
             {
@@ -153,6 +188,72 @@ public sealed class XenoEvolutionSystem : EntitySystem
                         _climb.ForciblySetClimbing(uid, intersecting);
                         Dirty(uid, climbing);
                         break;
+                    }
+                }
+            }
+        }
+
+        // TODO CM14 ovipositor attached only after 5 minutes
+        var hasGranter = false;
+        var granters = EntityQueryEnumerator<XenoEvolutionGranterComponent>();
+        while (granters.MoveNext(out var uid, out _))
+        {
+            if (_mobStateQuery.TryComp(uid, out var mobState) &&
+                _mobState.IsDead(uid, mobState))
+            {
+                continue;
+            }
+
+            hasGranter = true;
+            break;
+        }
+
+        var add = TimeSpan.FromSeconds(frameTime);
+        if (!hasGranter && _net.IsServer)
+        {
+            var evolution = EntityQueryEnumerator<XenoEvolutionComponent>();
+            while (evolution.MoveNext(out var xeno, out var comp))
+            {
+                if (!comp.RequiresGranter)
+                    continue;
+
+                if (_mobStateQuery.TryComp(xeno, out var mobState) &&
+                    _mobState.IsDead(xeno, mobState))
+                {
+                    continue;
+                }
+
+                for (var i = comp.EvolutionActions.Count - 1; i >= 0; i--)
+                {
+                    var action = comp.EvolutionActions[i];
+                    if (!_action.TryGetActionData(action, out var actionComp) ||
+                        !_xenoEvolveActionQuery.TryComp(action, out var evolveAction))
+                    {
+                        comp.EvolutionActions.RemoveAt(i);
+                        continue;
+                    }
+
+                    if (actionComp.Cooldown is not { } cooldown)
+                    {
+                        if (evolveAction.CooldownAccumulated != TimeSpan.Zero)
+                        {
+                            evolveAction.CooldownAccumulated = TimeSpan.Zero;
+                            Dirty(action, evolveAction);
+                        }
+
+                        continue;
+                    }
+
+                    // this is a very convoluted way of not calling dirty every tick
+                    // as to not kill the server
+                    evolveAction.CooldownAccumulated += add;
+                    if (evolveAction.CooldownAccumulated >= _cooldownThreshold)
+                    {
+                        var accumulated = evolveAction.CooldownAccumulated;
+                        evolveAction.CooldownAccumulated = TimeSpan.Zero;
+                        Dirty(action, evolveAction);
+
+                        _action.SetCooldown(action, cooldown.Start + accumulated, cooldown.End + accumulated);
                     }
                 }
             }

@@ -8,4 +8,7 @@ public sealed partial class XenoEvolveActionComponent : Component
 {
     [DataField, AutoNetworkedField]
     public TimeSpan Cooldown;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan CooldownAccumulated;
 }
