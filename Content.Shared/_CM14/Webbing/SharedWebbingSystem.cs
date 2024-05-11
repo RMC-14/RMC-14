@@ -26,17 +26,8 @@ public abstract class SharedWebbingSystem : EntitySystem
 
     private void OnWebbingClothingInteractUsing(Entity<WebbingClothingComponent> clothing, ref InteractUsingEvent args)
     {
-        if (!HasComp<WebbingComponent>(args.Used) ||
-            HasComp<StorageComponent>(clothing))
-        {
-            return;
-        }
-
-        var container = _container.EnsureContainer<ContainerSlot>(clothing, clothing.Comp.Container);
-        if (container.Count > 0 || !_container.Insert(args.Used, container))
-            return;
-
-        args.Handled = true;
+        if (Attach(clothing, args.Used))
+            args.Handled = true;
     }
 
     private void OnWebbingClothingGetVerbs(Entity<WebbingClothingComponent> clothing, ref GetVerbsEvent<InteractionVerb> args)
@@ -112,5 +103,20 @@ public abstract class SharedWebbingSystem : EntitySystem
             Dirty(clothing);
             _item.VisualsChanged(clothing);
         }
+    }
+
+    public bool Attach(Entity<WebbingClothingComponent> clothing, EntityUid webbing)
+    {
+        if (!HasComp<WebbingComponent>(webbing) ||
+            HasComp<StorageComponent>(clothing))
+        {
+            return false;
+        }
+
+        var container = _container.EnsureContainer<ContainerSlot>(clothing, clothing.Comp.Container);
+        if (container.Count > 0 || !_container.Insert(webbing, container))
+            return false;
+
+        return true;
     }
 }

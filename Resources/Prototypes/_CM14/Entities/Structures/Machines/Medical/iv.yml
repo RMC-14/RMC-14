@@ -63,7 +63,7 @@
     sprite: _CM14/Objects/Medical/blood_pack.rsi
     layers:
     - state: bloodpack1
-      map: ["enum.SolutionContainerLayers.Fill"]
+      map: ["enum.BloodPackVisuals.Fill"]
       visible: false
     - state: bloodpack
     - state: blank
@@ -92,9 +92,6 @@
   - type: Drink
     solution: pack
   - type: Appearance
-  - type: SolutionContainerVisuals
-    maxFillLevels: 7
-    fillBaseName: bloodpack
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Glass

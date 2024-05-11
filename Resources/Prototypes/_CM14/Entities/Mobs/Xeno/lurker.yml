@@ -40,8 +40,8 @@
   - type: XenoArmor
     explosionArmor: 20
   - type: XenoEvolution
-    evolvesTo:
-    - CMXenoRavager
+#    evolvesTo:
+#    - CMXenoRavager
   - type: MeleeWeapon
     attackRate: 0.75
     damage:

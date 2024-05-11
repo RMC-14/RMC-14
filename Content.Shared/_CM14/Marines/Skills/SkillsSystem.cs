@@ -15,4 +15,21 @@ public sealed class SkillsSystem : EntitySystem
             args.MaxDoAfter(ent.Comp.DoAfter);
         }
     }
+
+    public TimeSpan GetDelay(EntityUid user, EntityUid tool)
+    {
+        if (!TryComp(tool, out MedicallyUnskilledDoAfterComponent? doAfter) ||
+            doAfter.Min <= 0)
+        {
+            return default;
+        }
+
+        if (!TryComp(user, out SkillsComponent? skills) ||
+            skills.Medical < doAfter.Min)
+        {
+            return doAfter.DoAfter;
+        }
+
+        return default;
+    }
 }

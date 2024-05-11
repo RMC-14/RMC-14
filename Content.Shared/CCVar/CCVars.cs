@@ -760,7 +760,7 @@ namespace Content.Shared.CCVar
         ///     Minimum explosion intensity to create an admin alert message. -1 to disable the alert.
         /// </summary>
         public static readonly CVarDef<int> AdminAlertExplosionMinIntensity =
-            CVarDef.Create("admin.alert.explosion_min_intensity", 60, CVar.SERVERONLY);
+            CVarDef.Create("admin.alert.explosion_min_intensity", -1, CVar.SERVERONLY);
 
         /// <summary>
         ///     Minimum particle accelerator strength to create an admin alert message.
@@ -911,7 +911,7 @@ namespace Content.Shared.CCVar
         ///     <see cref="ContentTileDefinition.MapAtmosphere"/> set to true.
         /// </summary>
         public static readonly CVarDef<bool> ExplosionCanCreateVacuum =
-            CVarDef.Create("explosion.can_create_vacuum", true, CVar.SERVERONLY);
+            CVarDef.Create("explosion.can_create_vacuum", false, CVar.SERVERONLY);
 
         /*
          * Radiation

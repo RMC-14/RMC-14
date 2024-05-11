@@ -746,5 +746,67 @@
   id: 97
   time: '2024-05-07T01:39:40.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2069
+- author: DrSmugleaf
+  changes:
+  - message: Added breathing, footstep and dying sounds to the xeno Queen.
+    type: Add
+  id: 98
+  time: '2024-05-08T12:17:58.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2082
+- author: DrSmugleaf
+  changes:
+  - message: The hf2 health analyzer now automatically updates every second.
+    type: Tweak
+  - message: Added a delay to using the hf2 health analyzer for medically unskilled
+      marines.
+    type: Tweak
+  id: 99
+  time: '2024-05-08T12:30:29.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2083
+- author: DrSmugleaf
+  changes:
+  - message: Xenos are now unable to hit each other, their eggs, weeds, nests and
+      dead things.
+    type: Tweak
+  id: 100
+  time: '2024-05-09T10:02:43.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2087
+- author: DrSmugleaf
+  changes:
+  - message: Grown xeno eggs will now automatically try to hug any marines that come
+      within melee range of them.
+    type: Add
+  id: 101
+  time: '2024-05-09T09:59:50.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2086
+- author: DrSmugleaf
+  changes:
+  - message: Added the autolathe with cm specific recipes.
+    type: Add
+  id: 102
+  time: '2024-05-09T10:48:54.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2085
+- author: DrSmugleaf
+  changes:
+  - message: Bullets no longer hit mobs that are in crit, unless they are directly
+      clicked on while shooting.
+    type: Tweak
+  id: 103
+  time: '2024-05-11T05:42:07.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2094
+- author: DrSmugleaf
+  changes:
+  - message: Xeno Drones can now evolve to Queen.
+    type: Add
+  id: 104
+  time: '2024-05-11T05:43:38.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2096
+- author: DangerRevolution
+  changes:
+  - message: Added the Coif
+    type: Add
+  id: 105
+  time: '2024-05-11T05:49:28.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2046
 Name: CM
 Order: -1

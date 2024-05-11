@@ -2,7 +2,7 @@
 - type: material
   id: CMSteel
   stackEntity: CMSheetMetal
-  name: materials-Metal
+  name: materials-metal
   icon: { sprite: _CM14/Objects/Materials/Sheets/metal.rsi, state: steel }
   price: 0.05
 
@@ -57,11 +57,3 @@
   icon: { sprite: _CM14/Objects/Materials/Sheets/phoron.rsi, state: phoron }
   color: "#7e009e"
   price: 0.2
-
-#- type: material # todo cm14 plastic
-#  id: CMPlastic
-#  stackEntity: CMSheetPlastic1
-#  name: materials-plastic
-#  icon: { sprite: _CM14/Objects/Materials/Sheets/other.rsi, state: plastic }
-#  color: "#d9d9d9"
-#  price: 0.1

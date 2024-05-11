@@ -2637,7 +2637,7 @@ entities:
       pos: 13.5,10.5
       parent: 179
     - type: Door
-      secondsUntilStateChange: -4556.372
+      secondsUntilStateChange: -4737.476
       state: Opening
   - uid: 26
     components:
@@ -6569,7 +6569,9 @@ entities:
     - type: Transform
       pos: 4.5,-2.5
       parent: 179
-  - uid: 749
+- proto: ColMarTechSWSGear
+  entities:
+  - uid: 516
     components:
     - type: Transform
       pos: 5.5,-2.5

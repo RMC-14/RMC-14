@@ -719,8 +719,8 @@
 - type: entity
   parent: [ Clothing, ClothingSlotBase ]
   id: CMPouchMachete
-  name: H6B pattern M2132 machete scabbard
-  description: A large leather scabbard used to carry a M2132 machete. It can be strapped to the pouch slot.
+  name: H6B pattern M2132 machete pouch
+  description: A large leather pouch used to carry a M2132 machete. It can be strapped to the pouch slot.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Pouches/machete.rsi

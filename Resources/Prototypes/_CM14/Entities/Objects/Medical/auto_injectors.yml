@@ -15,7 +15,6 @@
       visible: false
   - type: Item
     size: Small
-    storedRotation: 90
     sprite: _CM14/Objects/Medical/auto_injectors.rsi
   - type: Hypospray
     solutionName: pen

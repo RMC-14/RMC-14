@@ -3,7 +3,7 @@ using Content.Shared.Item;
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
-using Robust.Shared.Network;
+using Content.Shared.Whitelist;
 using static Content.Shared.Storage.StorageComponent;
 
 namespace Content.Shared._CM14.Storage;
@@ -12,10 +12,10 @@ public sealed class CMStorageSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     private readonly List<EntityUid> _toRemove = new();
 
@@ -76,7 +76,7 @@ public sealed class CMStorageSystem : EntitySystem
     public bool IgnoreItemSize(Entity<StorageComponent> storage, EntityUid item)
     {
         return TryComp(storage, out IgnoreContentsSizeComponent? ignore) &&
-               ignore.Items.IsValid(item, EntityManager);
+               _whitelist.IsValid(ignore.Items, item);
     }
 
     public bool OpenDoAfter(EntityUid uid, EntityUid entity, StorageComponent? storageComp = null, bool silent = false)

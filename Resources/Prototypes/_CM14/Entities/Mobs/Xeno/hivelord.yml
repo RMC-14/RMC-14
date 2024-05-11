@@ -63,3 +63,13 @@
     stun: 9
   - type: MovementSpeedModifier
     baseSprintSpeed: 3
+  - type: WhitelistPickup
+    any:
+    - type: XenoHugger
+    - type: XenoEgg
+  - type: MultiHandedHolder
+    items:
+    - hands: 2
+      whitelist:
+        components:
+        - XenoEgg

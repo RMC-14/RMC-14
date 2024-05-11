@@ -4,14 +4,14 @@ using Content.Shared.Access.Components;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Emag.Components;
 using Content.Shared.Emag.Systems;
+using Content.Shared.GameTicking;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.PDA;
 using Content.Shared.StationRecords;
+using Robust.Shared.Collections;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
-using Content.Shared.GameTicking;
-using Robust.Shared.Collections;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -153,7 +153,7 @@ public sealed class AccessReaderSystem : EntitySystem
             return IsAllowedInternal(access, stationKeys, reader);
 
         if (!_containerSystem.TryGetContainer(target, reader.ContainerAccessProvider, out var container))
-            return false;
+            return Paused(target); // when mapping, containers with electronics arent spawned
 
         foreach (var entity in container.ContainedEntities)
         {
@@ -335,11 +335,6 @@ public sealed class AccessReaderSystem : EntitySystem
         if (_inventorySystem.TryGetSlotEntity(uid, "id", out var idUid))
         {
             items.Add(idUid.Value);
-        }
-
-        if (_inventorySystem.TryGetSlotEntity(uid, "neck", out var handUid))
-        {
-            items.Add(handUid.Value);
         }
 
         return items.Any();
