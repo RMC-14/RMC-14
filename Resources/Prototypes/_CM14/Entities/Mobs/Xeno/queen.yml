@@ -126,3 +126,6 @@
     any:
     - type: XenoEgg
   - type: XenoEvolutionGranter
+  - type: XenoEvolutionCapped
+    id: CMXenoQueen
+    max: 1

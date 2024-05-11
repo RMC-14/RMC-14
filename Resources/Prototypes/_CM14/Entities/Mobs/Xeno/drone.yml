@@ -54,6 +54,7 @@
 #    - CMXenoCarrier
 #    - CMXenoBurrower
     - CMXenoHivelord
+    - CMXenoQueen
   - type: XenoPheromones
     pheromonesMultiplier: 2
   - type: XenoPlasma
