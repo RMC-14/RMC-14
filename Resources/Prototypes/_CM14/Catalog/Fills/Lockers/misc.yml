@@ -5,7 +5,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMClothingMaskGas
+      - id: CMMaskGas
 ##      - id: EmergencyOxygenTankFilled
       - id: CMFirstAidO2KitFilled
       - id: CMMarkerFlare
@@ -17,7 +17,7 @@
   components:
     - type: StorageFill
       contents:
-        - id: CMClothingMaskGas
+        - id: CMMaskGas
  ##       - id: EmergencyOxygenTankFilled
         - id: CMFireExtinguisher
         - id: CMBurnAidKitFilled
