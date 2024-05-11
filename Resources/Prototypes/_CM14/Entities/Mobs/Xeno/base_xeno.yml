@@ -189,6 +189,7 @@
   - type: BlockPullingDead
   - type: XenoFriendly
   - type: Undisposable
+  - type: ShortExamine
 
 - type: entity
   abstract: true

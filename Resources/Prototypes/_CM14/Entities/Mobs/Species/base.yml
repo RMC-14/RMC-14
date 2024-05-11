@@ -115,3 +115,4 @@
   - type: Devourable
   - type: ImmuneToClothingRequiredStepTrigger
   - type: Undisposable
+  - type: ShortExamine
