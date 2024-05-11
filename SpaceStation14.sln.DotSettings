@@ -55,6 +55,7 @@
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=AL/@EntryIndexedValue">AL</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=BB/@EntryIndexedValue">BB</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=CC/@EntryIndexedValue">CC</s:String>
+	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=FTL/@EntryIndexedValue">FTL</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=CM/@EntryIndexedValue">CM</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=CPR/@EntryIndexedValue">CPR</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=GC/@EntryIndexedValue">GC</s:String>
@@ -278,8 +279,8 @@ public sealed partial class $CLASS$ : IPrototype {
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=659A22762EA4F043BBDF29F397BDCD17/Scope/=B68999B9D6B43E47A02B22C12A54C3CC/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">2.0</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=659A22762EA4F043BBDF29F397BDCD17/Scope/=B68999B9D6B43E47A02B22C12A54C3CC/Type/@EntryValue">InCSharpTypeMember</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=659A22762EA4F043BBDF29F397BDCD17/Scope/=C3001E7C0DA78E4487072B7E050D86C5/@KeyIndexDefined">False</s:Boolean>
-	
-	
+
+
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=659A22762EA4F043BBDF29F397BDCD17/Shortcut/@EntryValue">nfield</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=659A22762EA4F043BBDF29F397BDCD17/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=659A22762EA4F043BBDF29F397BDCD17/Text/@EntryValue">[DataField, AutoNetworkedField]
@@ -295,8 +296,8 @@ public interface $INTERFACE$ {$END$}
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6FEC84BA753850489A437EA766E46428/Field/=ACCESS/Order/@EntryValue">0</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6FEC84BA753850489A437EA766E46428/Reformat/@EntryValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6FEC84BA753850489A437EA766E46428/Scope/=558F05AA0DE96347816FF785232CFB2A/@KeyIndexDefined">False</s:Boolean>
-	
-	
+
+
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6FEC84BA753850489A437EA766E46428/Scope/=C3001E7C0DA78E4487072B7E050D86C5/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6FEC84BA753850489A437EA766E46428/Scope/=C3001E7C0DA78E4487072B7E050D86C5/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">2.0</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6FEC84BA753850489A437EA766E46428/Scope/=C3001E7C0DA78E4487072B7E050D86C5/Type/@EntryValue">InCSharpFile</s:String>
@@ -458,8 +459,8 @@ public sealed class $CLASS$State : ComponentState {
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A6215697E3D73040AA5DBCCCE02713D4/Field/=ACCESS/Order/@EntryValue">0</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A6215697E3D73040AA5DBCCCE02713D4/Reformat/@EntryValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A6215697E3D73040AA5DBCCCE02713D4/Scope/=558F05AA0DE96347816FF785232CFB2A/@KeyIndexDefined">False</s:Boolean>
-	
-	
+
+
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A6215697E3D73040AA5DBCCCE02713D4/Scope/=C3001E7C0DA78E4487072B7E050D86C5/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A6215697E3D73040AA5DBCCCE02713D4/Scope/=C3001E7C0DA78E4487072B7E050D86C5/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">2.0</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A6215697E3D73040AA5DBCCCE02713D4/Scope/=C3001E7C0DA78E4487072B7E050D86C5/Type/@EntryValue">InCSharpFile</s:String>
