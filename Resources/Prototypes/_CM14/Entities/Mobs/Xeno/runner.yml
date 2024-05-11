@@ -59,8 +59,8 @@
   - type: XenoArmor
     explosionArmor: 10
   - type: XenoEvolution
-    evolvesTo:
-    - CMXenoLurker
+#    evolvesTo:
+#    - CMXenoLurker
   - type: XenoZoom
   - type: MeleeWeapon
     attackRate: 1.4
