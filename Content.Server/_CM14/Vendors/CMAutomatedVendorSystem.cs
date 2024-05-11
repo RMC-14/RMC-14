@@ -7,11 +7,11 @@ public sealed class CMAutomatedVendorSystem : SharedCMAutomatedVendorSystem
 {
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
-    protected override void OnVendBui(Entity<CMAutomatedVendorComponent> vendor, ref CMVendorVendBuiMessage args)
+    protected override void OnVendBui(Entity<CMAutomatedVendorComponent> vendor, ref CMVendorVendBuiMsg args)
     {
         base.OnVendBui(vendor, ref args);
 
-        var msg = new CMVendorRefreshBuiMessage();
+        var msg = new CMVendorRefreshBuiMsg();
         _ui.ServerSendUiMessage(vendor.Owner, args.UiKey, msg, args.Actor);
     }
 }

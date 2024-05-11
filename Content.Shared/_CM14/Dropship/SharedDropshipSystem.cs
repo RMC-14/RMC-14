@@ -41,8 +41,7 @@ public abstract class SharedDropshipSystem : EntitySystem
 
     private void OnDropshipNavigationLaunchMsg(Entity<DropshipNavigationComputerComponent> ent, ref DropshipNavigationLaunchMsg args)
     {
-        if (_net.IsClient)
-            return;
+        _ui.CloseUi(ent.Owner, DropshipNavigationUiKey.Key, args.Actor);
 
         if (!TryGetEntity(args.Target, out var destination))
         {
@@ -57,11 +56,12 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
 
         FlyTo(ent, destination.Value, args.Actor);
-        _ui.CloseUi(ent.Owner, DropshipNavigationUiKey.Key, args.Actor);
     }
 
     private void OnHijackerDestinationChosenMsg(Entity<DropshipNavigationComputerComponent> ent, ref DropshipHijackerDestinationChosenBuiMsg args)
     {
+        _ui.CloseUi(ent.Owner, DropshipHijackerUiKey.Key, args.Actor);
+
         if (!TryGetEntity(args.Destination, out var destination))
         {
             Log.Warning($"{ToPrettyString(args.Actor)} tried to hijack to invalid destination");
@@ -82,8 +82,6 @@ public abstract class SharedDropshipSystem : EntitySystem
             dropship.Crashed = true;
             Dirty(xform.ParentUid, dropship);
         }
-
-        _ui.CloseUi(ent.Owner, DropshipHijackerUiKey.Key, args.Actor);
     }
 
     protected virtual bool FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid user, bool hijack = false)

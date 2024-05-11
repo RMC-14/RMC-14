@@ -56,7 +56,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         Subs.BuiEvents<XenoEvolutionComponent>(XenoEvolutionUIKey.Key, subs =>
         {
-            subs.Event<XenoEvolveBuiMessage>(OnXenoEvolveBui);
+            subs.Event<XenoEvolveBuiMsg>(OnXenoEvolveBui);
         });
     }
 
@@ -84,7 +84,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         _ui.OpenUi(xeno.Owner, XenoEvolutionUIKey.Key, xeno);
     }
 
-    private void OnXenoEvolveBui(Entity<XenoEvolutionComponent> xeno, ref XenoEvolveBuiMessage args)
+    private void OnXenoEvolveBui(Entity<XenoEvolutionComponent> xeno, ref XenoEvolveBuiMsg args)
     {
         var actor = args.Actor;
         if (!CanEvolvePopup(xeno, args.Choice))

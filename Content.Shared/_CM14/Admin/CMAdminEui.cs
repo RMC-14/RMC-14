@@ -8,58 +8,32 @@ namespace Content.Shared._CM14.Admin;
 public readonly record struct Hive(NetEntity Id, string Name);
 
 [Serializable, NetSerializable]
-public sealed class CMAdminEuiState : EuiStateBase
+public sealed class CMAdminEuiState(NetEntity target, List<Hive> hives) : EuiStateBase
 {
-    public readonly NetEntity Target;
-    public readonly List<Hive> Hives;
-
-    public CMAdminEuiState(NetEntity target, List<Hive> hives)
-    {
-        Target = target;
-        Hives = hives;
-    }
+    public readonly NetEntity Target = target;
+    public readonly List<Hive> Hives = hives;
 }
 
 [Serializable, NetSerializable]
-public sealed class CMAdminChangeHiveMessage : EuiMessageBase
+public sealed class CMAdminChangeHiveMsg(Hive hive) : EuiMessageBase
 {
-    public readonly Hive Hive;
-
-    public CMAdminChangeHiveMessage(Hive hive)
-    {
-        Hive = hive;
-    }
+    public readonly Hive Hive = hive;
 }
 
 [Serializable, NetSerializable]
-public sealed class CMAdminCreateHiveMessage : EuiMessageBase
+public sealed class CMAdminCreateHiveMsg(string name) : EuiMessageBase
 {
-    public readonly string Name;
-
-    public CMAdminCreateHiveMessage(string name)
-    {
-        Name = name;
-    }
+    public readonly string Name = name;
 }
 
 [Serializable, NetSerializable]
-public sealed class CMAdminTransformHumanoidMessage : EuiMessageBase
+public sealed class CMAdminTransformHumanoidMsg(string speciesId) : EuiMessageBase
 {
-    public readonly string SpeciesId;
-
-    public CMAdminTransformHumanoidMessage(string speciesId)
-    {
-        SpeciesId = speciesId;
-    }
+    public readonly string SpeciesId = speciesId;
 }
 
 [Serializable, NetSerializable]
-public sealed class CMAdminTransformXenoMessage : EuiMessageBase
+public sealed class CMAdminTransformXenoMsg(EntProtoId xenoId) : EuiMessageBase
 {
-    public readonly EntProtoId XenoId;
-
-    public CMAdminTransformXenoMessage(EntProtoId xenoId)
-    {
-        XenoId = xenoId;
-    }
+    public readonly EntProtoId XenoId = xenoId;
 }

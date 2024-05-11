@@ -203,7 +203,7 @@ public sealed class CMSurgeryBui : BoundUserInterface
         stepName.AddText(_entities.GetComponent<MetaDataComponent>(step).EntityName);
 
         var stepButton = new CMSurgeryStepButton { Step = step };
-        stepButton.Button.OnPressed += _ => SendMessage(new CMSurgeryStepChosenBuiMessage(netPart, surgeryId, stepId));
+        stepButton.Button.OnPressed += _ => SendMessage(new CMSurgeryStepChosenBuiMsg(netPart, surgeryId, stepId));
 
         _window.Steps.AddChild(stepButton);
     }

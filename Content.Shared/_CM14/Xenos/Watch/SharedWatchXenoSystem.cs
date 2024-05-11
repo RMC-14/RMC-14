@@ -9,14 +9,19 @@ public abstract class SharedWatchXenoSystem : EntitySystem
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<XenoComponent, XenoWatchActionEvent>(OnXenoWatchAction);
-        SubscribeLocalEvent<XenoComponent, XenoWatchBuiMessage>(OnXenoWatchBui);
         SubscribeLocalEvent<XenoComponent, MoveInputEvent>(OnXenoMoveInput);
+
+        Subs.BuiEvents<XenoComponent>(XenoWatchUIKey.Key, subs =>
+        {
+            subs.Event<XenoWatchBuiMsg>(OnXenoWatchBui);
+        });
     }
 
     private void OnXenoMoveInput(Entity<XenoComponent> xeno, ref MoveInputEvent args)
@@ -27,8 +32,10 @@ public abstract class SharedWatchXenoSystem : EntitySystem
             Unwatch(xeno.Owner, actor.PlayerSession);
     }
 
-    private void OnXenoWatchBui(Entity<XenoComponent> xeno, ref XenoWatchBuiMessage args)
+    private void OnXenoWatchBui(Entity<XenoComponent> xeno, ref XenoWatchBuiMsg args)
     {
+        _ui.CloseUi(xeno.Owner, XenoWatchUIKey.Key, args.Actor);
+
         if (!TryGetEntity(args.Target, out var target))
             return;
 

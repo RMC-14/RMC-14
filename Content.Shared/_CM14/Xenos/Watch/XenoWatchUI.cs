@@ -13,23 +13,13 @@ public enum XenoWatchUIKey : byte
 public readonly record struct Xeno(NetEntity Entity, string Name, EntProtoId? Id);
 
 [Serializable, NetSerializable]
-public sealed class XenoWatchBuiState : BoundUserInterfaceState
+public sealed class XenoWatchBuiState(List<Xeno> xenos) : BoundUserInterfaceState
 {
-    public readonly List<Xeno> Xenos;
-
-    public XenoWatchBuiState(List<Xeno> xenos)
-    {
-        Xenos = xenos;
-    }
+    public readonly List<Xeno> Xenos = xenos;
 }
 
 [Serializable, NetSerializable]
-public sealed class XenoWatchBuiMessage : BoundUserInterfaceMessage
+public sealed class XenoWatchBuiMsg(NetEntity target) : BoundUserInterfaceMessage
 {
-    public readonly NetEntity Target;
-
-    public XenoWatchBuiMessage(NetEntity target)
-    {
-        Target = target;
-    }
+    public readonly NetEntity Target = target;
 }

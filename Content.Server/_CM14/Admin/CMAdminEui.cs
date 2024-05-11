@@ -74,7 +74,7 @@ public sealed class CMAdminEui : BaseEui
 
         switch (msg)
         {
-            case CMAdminChangeHiveMessage changeHive:
+            case CMAdminChangeHiveMsg changeHive:
             {
                 if (_entities.TryGetEntity(_target, out var target) &&
                     _entities.TryGetEntity(changeHive.Hive.Id, out var hive))
@@ -85,13 +85,13 @@ public sealed class CMAdminEui : BaseEui
 
                 break;
             }
-            case CMAdminCreateHiveMessage createHive:
+            case CMAdminCreateHiveMsg createHive:
             {
                 _hive.CreateHive(createHive.Name);
                 StateDirty();
                 break;
             }
-            case CMAdminTransformHumanoidMessage transformHumanoid:
+            case CMAdminTransformHumanoidMsg transformHumanoid:
             {
                 if (_entities.GetEntity(_target) is not { Valid: true } entity)
                     break;
@@ -114,7 +114,7 @@ public sealed class CMAdminEui : BaseEui
                 StateDirty();
                 break;
             }
-            case CMAdminTransformXenoMessage transformXeno:
+            case CMAdminTransformXenoMsg transformXeno:
             {
                 if (_entities.GetEntity(_target) is not { Valid: true } entity)
                     break;

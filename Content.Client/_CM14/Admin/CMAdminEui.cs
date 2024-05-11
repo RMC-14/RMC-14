@@ -51,7 +51,7 @@ public sealed class CMAdminEui : BaseEui
         {
             var button = new CMTransformButton { Type = TransformType.Humanoid };
             button.TransformName.Text = Loc.GetString(species.Name);
-            button.OnPressed += _ => SendMessage(new CMAdminTransformHumanoidMessage(species.ID));
+            button.OnPressed += _ => SendMessage(new CMAdminTransformHumanoidMsg(species.ID));
 
             humanoidRow.Container.AddChild(button);
         }
@@ -81,7 +81,7 @@ public sealed class CMAdminEui : BaseEui
                 button.TransformName.Text = xeno.Name;
                 row.Container.AddChild(button);
 
-                button.OnPressed += _ => SendMessage(new CMAdminTransformXenoMessage(xeno.ID));
+                button.OnPressed += _ => SendMessage(new CMAdminTransformXenoMsg(xeno.ID));
             }
 
             _adminWindow.TransformTab.Container.AddChild(row);
@@ -93,7 +93,7 @@ public sealed class CMAdminEui : BaseEui
     private void OnHiveSelected(ItemListSelectedEventArgs args)
     {
         var item = args.ItemList[args.ItemIndex];
-        var msg = new CMAdminChangeHiveMessage((Hive) item.Metadata!);
+        var msg = new CMAdminChangeHiveMsg((Hive) item.Metadata!);
         SendMessage(msg);
     }
 
@@ -120,7 +120,7 @@ public sealed class CMAdminEui : BaseEui
 
     private void OnCreateHiveEntered(LineEditEventArgs args)
     {
-        var msg = new CMAdminCreateHiveMessage(args.Text);
+        var msg = new CMAdminCreateHiveMsg(args.Text);
         SendMessage(msg);
         _createHiveWindow?.Dispose();
     }

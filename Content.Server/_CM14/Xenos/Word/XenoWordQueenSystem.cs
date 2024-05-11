@@ -25,9 +25,9 @@ public sealed class XenoWordQueenSystem : SharedXenoWordQueenSystem
 
     private readonly Regex _newLineRegex = new("\n{3,}", RegexOptions.Compiled);
 
-    protected override void OnXenoWordQueenBui(Entity<XenoWordQueenComponent> queen, ref XenoWordQueenBuiMessage args)
+    protected override void OnXenoWordQueenBui(Entity<XenoWordQueenComponent> queen, ref XenoWordQueenBuiMsg args)
     {
-        _ui.CloseUi(queen.Owner, XenoWordQueenUI.Key, queen);
+        base.OnXenoWordQueenBui(queen, ref args);
 
         var text = args.Text.Trim();
         if (string.IsNullOrWhiteSpace(text))
