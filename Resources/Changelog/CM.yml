@@ -801,5 +801,12 @@
   id: 104
   time: '2024-05-11T05:43:38.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2096
+- author: DangerRevolution
+  changes:
+  - message: Added the Coif
+    type: Add
+  id: 105
+  time: '2024-05-11T05:49:28.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2046
 Name: CM
 Order: -1
