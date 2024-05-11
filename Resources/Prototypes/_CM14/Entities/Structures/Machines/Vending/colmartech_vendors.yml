@@ -411,7 +411,7 @@
     - name: Mask
       choices: { CMMask: 1 }
       entries:
-      - id: CMClothingMaskGas
+      - id: CMMaskGas
     #    CMHeatAbsorbentCoif #TODO: Make this
     #    CMRebreather #TODO: Make this
     - name: Restricted Firearms
@@ -791,8 +791,8 @@
       - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
-      entries: [ ]
-    #- id: CMGasMask
+      entries:
+      - id: CMMaskGas
     #- id: CMHeatAbsorbentCoif
 
 - type: entity
@@ -921,8 +921,8 @@
       - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
-      entries: [ ]
-    #- id: CMGasMask
+      entries:
+      - id: CMMaskGas
     #- id: CMHeatAbsorbentCoif
     - name: Clothing Items
       entries:
@@ -1197,8 +1197,8 @@
       - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
-      entries: [ ]
-    #- id: CMGasMask
+      entries:
+      - id: CMMaskGas
     #- id: CMHeatAbsorbentCoif
 
 - type: entity
@@ -1410,8 +1410,8 @@
       - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
-      entries: [ ]
-    #- id: CMGasMask
+      entries:
+      - id: CMMaskGas
     #- id: CMHeatAbsorbentCoif
     #- id: CMSterileMask
 
@@ -1611,8 +1611,8 @@
       - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
-      entries: [ ]
-    #- id: CMGasMask
+      entries:
+      - id: CMMaskGas
     #- id: CMHeatAbsorbentCoif
 
 - type: entity
@@ -1800,8 +1800,8 @@
       - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
-      entries: [ ]
-    #- id: CMGasMask
+      entries:
+      - id: CMMaskGas
     #- id: CMHeatAbsorbentCoif
 
 - type: entity
