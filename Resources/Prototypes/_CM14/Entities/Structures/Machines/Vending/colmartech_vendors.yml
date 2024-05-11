@@ -1413,7 +1413,7 @@
       entries:
       #- id: CMGasMask
       - id: CMClothingMaskCoif
-    #- id: CMSterileMask
+      - id: CMClothingMaskSterile
 
 - type: entity
   parent: ColMarTechBase
