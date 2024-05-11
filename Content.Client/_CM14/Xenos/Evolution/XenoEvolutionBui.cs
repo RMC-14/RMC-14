@@ -38,7 +38,7 @@ public sealed class XenoEvolutionBui : BoundUserInterface
 
                 control.Button.OnPressed += _ =>
                 {
-                    SendPredictedMessage(new XenoEvolveBuiMessage(evolutionId));
+                    SendPredictedMessage(new XenoEvolveBuiMsg(evolutionId));
                     Close();
                 };
 

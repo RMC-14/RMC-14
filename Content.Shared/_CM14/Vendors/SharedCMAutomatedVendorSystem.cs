@@ -55,7 +55,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         Subs.BuiEvents<CMAutomatedVendorComponent>(CMAutomatedVendorUI.Key, subs =>
         {
-            subs.Event<CMVendorVendBuiMessage>(OnVendBui);
+            subs.Event<CMVendorVendBuiMsg>(OnVendBui);
         });
     }
 
@@ -92,7 +92,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
     }
 
-    protected virtual void OnVendBui(Entity<CMAutomatedVendorComponent> vendor, ref CMVendorVendBuiMessage args)
+    protected virtual void OnVendBui(Entity<CMAutomatedVendorComponent> vendor, ref CMVendorVendBuiMsg args)
     {
         var comp = vendor.Comp;
         var sections = comp.Sections.Count;

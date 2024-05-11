@@ -9,17 +9,11 @@ public enum CMAutomatedVendorUI : byte
 }
 
 [Serializable, NetSerializable]
-public sealed class CMVendorVendBuiMessage : BoundUserInterfaceMessage
+public sealed class CMVendorVendBuiMsg(int section, int entry) : BoundUserInterfaceMessage
 {
-    public readonly int Section;
-    public readonly int Entry;
-
-    public CMVendorVendBuiMessage(int section, int entry)
-    {
-        Section = section;
-        Entry = entry;
-    }
+    public readonly int Section = section;
+    public readonly int Entry = entry;
 }
 
 [Serializable, NetSerializable]
-public sealed class CMVendorRefreshBuiMessage : BoundUserInterfaceMessage;
+public sealed class CMVendorRefreshBuiMsg : BoundUserInterfaceMessage;

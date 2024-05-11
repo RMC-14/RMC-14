@@ -80,7 +80,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
 
     private void OnButtonPressed(int sectionIndex, int entryIndex)
     {
-        var msg = new CMVendorVendBuiMessage(sectionIndex, entryIndex);
+        var msg = new CMVendorVendBuiMsg(sectionIndex, entryIndex);
         SendMessage(msg);
     }
 
@@ -183,7 +183,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
     {
         switch (message)
         {
-            case CMVendorRefreshBuiMessage:
+            case CMVendorRefreshBuiMsg:
                 Refresh();
                 break;
         }

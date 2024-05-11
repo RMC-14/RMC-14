@@ -37,7 +37,7 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         window.LaunchButton.Button.OnPressed += _ =>
         {
             if (_selected != null)
-                SendMessage(new DropshipNavigationLaunchMsg(_selected.Value));
+                SendPredictedMessage(new DropshipNavigationLaunchMsg(_selected.Value));
 
             SetCancelLaunchDisabled(true);
             _selected = null;

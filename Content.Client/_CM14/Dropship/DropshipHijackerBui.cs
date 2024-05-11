@@ -54,7 +54,7 @@ public sealed class DropshipHijackerBui : BoundUserInterface
 
             button.OnPressed += _ =>
             {
-                SendMessage(new DropshipHijackerDestinationChosenBuiMsg(id));
+                SendPredictedMessage(new DropshipHijackerDestinationChosenBuiMsg(id));
                 Close();
             };
             _window.Destinations.AddChild(button);

@@ -26,9 +26,9 @@ public abstract partial class SharedCMSurgerySystem
         SubscribeLocalEvent<InventoryComponent, CMSurgeryCanPerformStepEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<ArmorComponent, InventoryRelayedEvent<CMSurgeryCanPerformStepEvent>>(OnArmorCanPerformStep);
 
-        Subs.BuiEvents<CMSurgeryTargetComponent>(CMSurgeryUIKey.Key, sub =>
+        Subs.BuiEvents<CMSurgeryTargetComponent>(CMSurgeryUIKey.Key, subs =>
         {
-            sub.Event<CMSurgeryStepChosenBuiMessage>(OnSurgeryTargetStepChosen);
+            subs.Event<CMSurgeryStepChosenBuiMsg>(OnSurgeryTargetStepChosen);
         });
     }
 
@@ -191,7 +191,7 @@ public abstract partial class SharedCMSurgerySystem
             args.Args.Invalid = StepInvalidReason.Armor;
     }
 
-    private void OnSurgeryTargetStepChosen(Entity<CMSurgeryTargetComponent> ent, ref CMSurgeryStepChosenBuiMessage args)
+    private void OnSurgeryTargetStepChosen(Entity<CMSurgeryTargetComponent> ent, ref CMSurgeryStepChosenBuiMsg args)
     {
         var user = args.Actor;
         if (GetEntity(args.Entity) is not { Valid: true } body ||

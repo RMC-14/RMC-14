@@ -10,12 +10,7 @@ public enum XenoEvolutionUIKey : byte
 }
 
 [Serializable, NetSerializable]
-public sealed class XenoEvolveBuiMessage : BoundUserInterfaceMessage
+public sealed class XenoEvolveBuiMsg(EntProtoId choice) : BoundUserInterfaceMessage
 {
-    public readonly EntProtoId Choice;
-
-    public XenoEvolveBuiMessage(EntProtoId choice)
-    {
-        Choice = choice;
-    }
+    public readonly EntProtoId Choice = choice;
 }

@@ -27,25 +27,14 @@ public sealed class RequisitionsBuiState : BoundUserInterfaceState
 }
 
 [Serializable, NetSerializable]
-public sealed class RequisitionsBuyMsg : BoundUserInterfaceMessage
+public sealed class RequisitionsBuyMsg(int category, int order) : BoundUserInterfaceMessage
 {
-    public int Category;
-    public int Order;
-
-    public RequisitionsBuyMsg(int category, int order)
-    {
-        Category = category;
-        Order = order;
-    }
+    public int Category = category;
+    public int Order = order;
 }
 
 [Serializable, NetSerializable]
-public sealed class RequisitionsPlatformMsg : BoundUserInterfaceMessage
+public sealed class RequisitionsPlatformMsg(bool raise) : BoundUserInterfaceMessage
 {
-    public bool Raise;
-
-    public RequisitionsPlatformMsg(bool raise)
-    {
-        Raise = raise;
-    }
+    public bool Raise = raise;
 }

@@ -41,7 +41,6 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         _damageableQuery = GetEntityQuery<DamageableComponent>();
 
         SubscribeLocalEvent<XenoPheromonesComponent, XenoPheromonesActionEvent>(OnXenoPheromonesAction);
-        SubscribeLocalEvent<XenoPheromonesComponent, XenoPheromonesChosenBuiMessage>(OnXenoPheromonesChosenBui);
 
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, ComponentGetStateAttemptEvent>(OnComponentGetStateAttempt);
         SubscribeLocalEvent<XenoWardingPheromonesComponent, ComponentGetStateAttemptEvent>(OnComponentGetStateAttempt);
@@ -59,6 +58,11 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         // TODO CM14 stack slash damage
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, GetMeleeDamageEvent>(OnFrenzyGetMeleeDamage);
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, RefreshMovementSpeedModifiersEvent>(OnFrenzyMovementSpeedModifiers);
+
+        Subs.BuiEvents<XenoPheromonesComponent>(XenoPheromonesUI.Key, subs =>
+        {
+            subs.Event<XenoPheromonesChosenBuiMsg>(OnXenoPheromonesChosenBui);
+        });
     }
 
     private void OnComponentGetStateAttempt<T>(EntityUid uid, T comp, ref ComponentGetStateAttemptEvent ev)
@@ -100,7 +104,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         _ui.TryOpenUi(xeno.Owner, XenoPheromonesUI.Key, xeno);
     }
 
-    private void OnXenoPheromonesChosenBui(Entity<XenoPheromonesComponent> xeno, ref XenoPheromonesChosenBuiMessage args)
+    private void OnXenoPheromonesChosenBui(Entity<XenoPheromonesComponent> xeno, ref XenoPheromonesChosenBuiMsg args)
     {
         if (!Enum.IsDefined(typeof(XenoPheromones), args.Pheromones) ||
             !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PheromonesPlasmaCost))
@@ -118,7 +122,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         xeno.Comp.NextPheromonesPlasmaUse = _timing.CurTime + _pheromonePlasmaUseDelay;
 
         var popup = Loc.GetString("cm-xeno-pheromones-start", ("pheromones", args.Pheromones.ToString()));
-        _popup.PopupEntity(popup, xeno, xeno);
+        _popup.PopupClient(popup, xeno, xeno);
 
         _ui.CloseUi(xeno.Owner, XenoPheromonesUI.Key, xeno);
     }

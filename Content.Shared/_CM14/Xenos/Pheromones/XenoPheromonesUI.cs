@@ -9,12 +9,7 @@ public enum XenoPheromonesUI
 }
 
 [Serializable, NetSerializable]
-public sealed class XenoPheromonesChosenBuiMessage : BoundUserInterfaceMessage
+public sealed class XenoPheromonesChosenBuiMsg(XenoPheromones pheromones) : BoundUserInterfaceMessage
 {
-    public readonly XenoPheromones Pheromones;
-
-    public XenoPheromonesChosenBuiMessage(XenoPheromones pheromones)
-    {
-        Pheromones = pheromones;
-    }
+    public readonly XenoPheromones Pheromones = pheromones;
 }
