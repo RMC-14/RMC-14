@@ -829,5 +829,12 @@
   id: 108
   time: '2024-05-11T07:52:49.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2098
+- author: Whisper
+  changes:
+  - message: Added gas mask to vendors
+    type: Add
+  id: 109
+  time: '2024-05-11T08:01:08.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2102
 Name: CM
 Order: -1
