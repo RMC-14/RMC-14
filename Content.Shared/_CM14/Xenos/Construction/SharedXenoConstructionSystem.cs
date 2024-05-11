@@ -2,6 +2,7 @@
 using System.Linq;
 using Content.Shared._CM14.Xenos.Construction.Events;
 using Content.Shared._CM14.Xenos.Plasma;
+using Content.Shared._CM14.Xenos.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
 using Content.Shared.Coordinates.Helpers;
@@ -35,20 +36,19 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
 
     private static readonly ImmutableArray<Direction> Directions = Enum.GetValues<Direction>()
         .Where(d => d != Direction.Invalid)
         .ToImmutableArray();
 
     private EntityQuery<HiveConstructionNodeComponent> _hiveConstructionNodeQuery;
-    private EntityQuery<XenoWeedsComponent> _weedsQuery;
 
     public override void Initialize()
     {
         base.Initialize();
 
         _hiveConstructionNodeQuery = GetEntityQuery<HiveConstructionNodeComponent>();
-        _weedsQuery = GetEntityQuery<XenoWeedsComponent>();
 
         SubscribeLocalEvent<XenoConstructionComponent, XenoPlantWeedsActionEvent>(OnXenoPlantWeedsAction);
 
@@ -63,14 +63,14 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<XenoConstructionComponent, XenoOrderConstructionDoAfterEvent>(OnXenoOrderConstructionDoAfter);
         SubscribeLocalEvent<XenoConstructionComponent, XenoConstructionAddPlasmaDoAfterEvent>(OnHiveConstructionNodeAddPlasmaDoAfter);
 
-        SubscribeLocalEvent<XenoWeedsComponent, AnchorStateChangedEvent>(OnWeedsAnchorChanged);
-
         SubscribeLocalEvent<XenoChooseConstructionActionComponent, XenoConstructionChosenEvent>(OnActionConstructionChosen);
         SubscribeLocalEvent<XenoConstructionActionComponent, ValidateActionWorldTargetEvent>(OnSecreteActionValidateTarget);
 
         SubscribeLocalEvent<HiveConstructionNodeComponent, ExaminedEvent>(OnHiveConstructionNodeExamined);
         SubscribeLocalEvent<HiveConstructionNodeComponent, InteractHandEvent>(OnHiveConstructionNodeInteractedHand);
         SubscribeLocalEvent<HiveConstructionNodeComponent, InteractNoHandEvent>(OnHiveConstructionNodeInteractedNoHand);
+
+        SubscribeLocalEvent<HiveCoreComponent, MapInitEvent>(OnHiveCoreMapInit);
 
         UpdatesAfter.Add(typeof(SharedPhysicsSystem));
     }
@@ -84,7 +84,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        if (IsOnWeeds((gridUid, grid), coordinates))
+        if (_xenoWeeds.IsOnWeeds((gridUid, grid), coordinates))
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-weeds-already-here"), xeno.Owner, xeno.Owner);
             return;
@@ -263,7 +263,8 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         if (node.PlasmaStored < node.PlasmaCost)
         {
             _popup.PopupClient(
-                Loc.GetString("cm-xeno-requires-more-plasma", ("construction", target), ("plasma", plasmaLeft)), target,
+                Loc.GetString("cm-xeno-requires-more-plasma", ("construction", target), ("plasma", plasmaLeft)),
+                target,
                 args.User);
             return;
         }
@@ -273,12 +274,6 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
 
         Spawn(node.Spawn, transform.Coordinates);
         QueueDel(target);
-    }
-
-    private void OnWeedsAnchorChanged(Entity<XenoWeedsComponent> weeds, ref AnchorStateChangedEvent args)
-    {
-        if (_net.IsServer && !args.Anchored)
-            QueueDel(weeds);
     }
 
     private void OnActionConstructionChosen(Entity<XenoChooseConstructionActionComponent> xeno, ref XenoConstructionChosenEvent args)
@@ -314,6 +309,12 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
     private void OnHiveConstructionNodeInteractedNoHand(Entity<HiveConstructionNodeComponent> node, ref InteractNoHandEvent args)
     {
         InteractHiveConstructionNode(node, args.User);
+    }
+
+    private void OnHiveCoreMapInit(Entity<HiveCoreComponent> ent, ref MapInitEvent args)
+    {
+        var coordinates = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager, _map);
+        Spawn(ent.Comp.Spawns, coordinates);
     }
 
     public FixedPoint2? GetStructurePlasmaCost(EntProtoId prototype)
@@ -406,7 +407,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         }
 
         target = target.SnapToGrid(EntityManager, _map);
-        if (!IsOnWeeds((gridId, grid), target))
+        if (!_xenoWeeds.IsOnWeeds((gridId, grid), target))
         {
             _popup.PopupClient("You can only shape on weeds. Find some resin before you start building!", target, xeno);
             return false;
@@ -459,37 +460,5 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         }
 
         return true;
-    }
-
-    public bool IsOnWeeds(Entity<TransformComponent?> entity)
-    {
-        if (!Resolve(entity, ref entity.Comp))
-            return false;
-
-        var coordinates = _transform.GetMoverCoordinates(entity, entity.Comp).SnapToGrid(EntityManager, _map);
-
-        if (coordinates.GetGridUid(EntityManager) is not { } gridUid ||
-            !TryComp(gridUid, out MapGridComponent? grid))
-        {
-            return false;
-        }
-
-        return IsOnWeeds((gridUid, grid), coordinates);
-    }
-
-    private bool IsOnWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates)
-    {
-        var position = _mapSystem.LocalToTile(grid, grid, coordinates);
-        var enumerator = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, position);
-
-        while (enumerator.MoveNext(out var anchored))
-        {
-            if (_weedsQuery.HasComponent(anchored))
-            {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

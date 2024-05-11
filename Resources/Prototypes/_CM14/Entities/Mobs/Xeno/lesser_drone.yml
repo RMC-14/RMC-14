@@ -61,3 +61,7 @@
       whitelist:
         components:
         - XenoEgg
+  - type: DamageOffWeeds
+    damage:
+      types:
+        Blunt: 2.5

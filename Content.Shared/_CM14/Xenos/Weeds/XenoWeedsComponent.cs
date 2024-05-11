@@ -1,19 +1,19 @@
 ﻿using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._CM14.Xenos.Construction;
+namespace Content.Shared._CM14.Xenos.Weeds;
 
-[RegisterComponent, NetworkedComponent]
-[Access(typeof(SharedXenoConstructionSystem))]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(SharedXenoWeedsSystem))]
 public sealed partial class XenoWeedsComponent : Component
 {
     [DataField]
     public int Range = 5;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool IsSource = true;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? Source;
 
     [DataField]
