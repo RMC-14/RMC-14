@@ -266,10 +266,44 @@ public sealed partial class $CLASS$ : IPrototype {
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=612D1A1D3CD84A4BB90130D6230F13C1/Text/@EntryValue"></s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=652E0DBD3559BD4EA35305A83762B0C8/Field/=CLASS/InitialRange/@EntryValue">-1</s:Int64>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=652E0DBD3559BD4EA35305A83762B0C8/UITag/@EntryValue">SS14</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=659A22762EA4F043BBDF29F397BDCD17/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=659A22762EA4F043BBDF29F397BDCD17/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=659A22762EA4F043BBDF29F397BDCD17/Description/@EntryValue">Automatically Networked Data Field</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=659A22762EA4F043BBDF29F397BDCD17/Field/=NAME/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=659A22762EA4F043BBDF29F397BDCD17/Field/=NAME/Order/@EntryValue">1</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=659A22762EA4F043BBDF29F397BDCD17/Field/=TYPE/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=659A22762EA4F043BBDF29F397BDCD17/Field/=TYPE/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=659A22762EA4F043BBDF29F397BDCD17/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=659A22762EA4F043BBDF29F397BDCD17/Scope/=B68999B9D6B43E47A02B22C12A54C3CC/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=659A22762EA4F043BBDF29F397BDCD17/Scope/=B68999B9D6B43E47A02B22C12A54C3CC/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">2.0</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=659A22762EA4F043BBDF29F397BDCD17/Scope/=B68999B9D6B43E47A02B22C12A54C3CC/Type/@EntryValue">InCSharpTypeMember</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=659A22762EA4F043BBDF29F397BDCD17/Scope/=C3001E7C0DA78E4487072B7E050D86C5/@KeyIndexDefined">False</s:Boolean>
+	
+	
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=659A22762EA4F043BBDF29F397BDCD17/Shortcut/@EntryValue">nfield</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=659A22762EA4F043BBDF29F397BDCD17/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=659A22762EA4F043BBDF29F397BDCD17/Text/@EntryValue">[DataField, AutoNetworkedField]
+public $TYPE$ $NAME$;</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6FAA6736247D464489DF536819A6D103/Text/@EntryValue">$HEADER$namespace $NAMESPACE$;
 
 public interface $INTERFACE$ {$END$}
 </s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6FEC84BA753850489A437EA766E46428/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6FEC84BA753850489A437EA766E46428/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6FEC84BA753850489A437EA766E46428/Description/@EntryValue">Networked Auto State Component</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6FEC84BA753850489A437EA766E46428/Field/=ACCESS/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6FEC84BA753850489A437EA766E46428/Field/=ACCESS/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6FEC84BA753850489A437EA766E46428/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6FEC84BA753850489A437EA766E46428/Scope/=558F05AA0DE96347816FF785232CFB2A/@KeyIndexDefined">False</s:Boolean>
+	
+	
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6FEC84BA753850489A437EA766E46428/Scope/=C3001E7C0DA78E4487072B7E050D86C5/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6FEC84BA753850489A437EA766E46428/Scope/=C3001E7C0DA78E4487072B7E050D86C5/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">2.0</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6FEC84BA753850489A437EA766E46428/Scope/=C3001E7C0DA78E4487072B7E050D86C5/Type/@EntryValue">InCSharpFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6FEC84BA753850489A437EA766E46428/Shortcut/@EntryValue">nscomp</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6FEC84BA753850489A437EA766E46428/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6FEC84BA753850489A437EA766E46428/Text/@EntryValue">[RegisterComponent, Robust.Shared.GameStates.NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof($ACCESS$))]</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B10AC30B0320A4F95A3763001E1DBF6/Text/@EntryValue">$HEADER$namespace $NAMESPACE$;
 
 public enum $ENUM$ {$END$}</s:String>
@@ -417,6 +451,22 @@ public sealed class $CLASS$State : ComponentState {
     }
 }</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A04E4F8184AF3244891524889B282DB9/UITag/@EntryValue">SS14</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A6215697E3D73040AA5DBCCCE02713D4/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A6215697E3D73040AA5DBCCCE02713D4/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A6215697E3D73040AA5DBCCCE02713D4/Description/@EntryValue">Networked Component</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A6215697E3D73040AA5DBCCCE02713D4/Field/=ACCESS/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A6215697E3D73040AA5DBCCCE02713D4/Field/=ACCESS/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A6215697E3D73040AA5DBCCCE02713D4/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A6215697E3D73040AA5DBCCCE02713D4/Scope/=558F05AA0DE96347816FF785232CFB2A/@KeyIndexDefined">False</s:Boolean>
+	
+	
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A6215697E3D73040AA5DBCCCE02713D4/Scope/=C3001E7C0DA78E4487072B7E050D86C5/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A6215697E3D73040AA5DBCCCE02713D4/Scope/=C3001E7C0DA78E4487072B7E050D86C5/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">2.0</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A6215697E3D73040AA5DBCCCE02713D4/Scope/=C3001E7C0DA78E4487072B7E050D86C5/Type/@EntryValue">InCSharpFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A6215697E3D73040AA5DBCCCE02713D4/Shortcut/@EntryValue">ncomp</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A6215697E3D73040AA5DBCCCE02713D4/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A6215697E3D73040AA5DBCCCE02713D4/Text/@EntryValue">[RegisterComponent, Robust.Shared.GameStates.NetworkedComponent]
+[Access(typeof($ACCESS$))]</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=C1EA2E5A7CC15B4387C5C4996D12465E/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=C1EA2E5A7CC15B4387C5C4996D12465E/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=C1EA2E5A7CC15B4387C5C4996D12465E/Description/@EntryValue">Serializable &amp; NetSerializable types</s:String>
