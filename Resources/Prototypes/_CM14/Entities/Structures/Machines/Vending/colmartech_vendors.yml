@@ -504,8 +504,8 @@
     #  points: 15
     #- id: CMDataDetector
     #  points: 15
-    #- id: CMWhistle
-    #  points: 5
+      - id: CMWhistle
+        points: 5
     - name: Binoculars
       entries: [ ]
     #- id: CMRangeFinder
@@ -592,9 +592,9 @@
     #- id: CMM276PatternCombatToolbeltRig
     #  points: 15
     - name: Utilities
-      entries: [ ]
-    #- id: CMWhistle
-    #  points: 3
+      entries:
+      - id: CMWhistle
+        points: 3
     #- id: CMFireExtinguisherPortable
     #  points: 3
     #- id: CMMotionDetector
@@ -1095,8 +1095,8 @@
     #  points: 3
     #- id: CMMotionDetector
     #  points: 8
-    #- id: CMWhistle
-    #  points: 3
+      - id: CMWhistle
+        points: 3
     - name: Binoculars
       entries: [ ]
     #- id: CMBinoculars
@@ -1304,10 +1304,11 @@
     #    CMFuelTankStrapPouch: 4P
     #    CMWeldingGoggles: 3P
     - name: Utilities
-      entries: [ ]
+      entries:
     #    CMFireExtinguisherPortable: 3P
     #    CMMotionDetector: 8P
-    #    CMWhistle: 3P
+      - id: CMWhistle
+        points: 3
     - name: Binoculars
       entries: [ ]
     #    CMBinoculars: 5P
@@ -1522,8 +1523,8 @@
       entries:
     #- id: CMFireExtinguisherPortable
     #  points: 5
-    #- id: CMWhistle
-    #  points: 5
+      - id: CMWhistle
+        points: 5
       - id: CMRollerBedSpawnFolded
         points: 5
     #- id: CMFultonDeviceStack
@@ -1713,8 +1714,8 @@
     #  amount: 5
     #- id: CMFireExtinguisherPortable
     #  amount: 5
-    #- id: CMWhistle
-    #  amount: 5
+      - id: CMWhistle
+        points: 5
     - name: Binoculars
       entries: [ ]
     #- id: CMBinoculars
