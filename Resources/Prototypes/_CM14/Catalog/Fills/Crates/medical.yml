@@ -6,7 +6,7 @@
   - type: StorageFill
     contents:
       # - id: CMSurgicalTray # TODO CM14
-      - id: CMClothingMaskMedical
+      - id: CMMaskGasMedical
       - id: CMScrubsColorGreen
       - id: CMBoxSterileMask
       - id: CMBoxLatexGloves
@@ -47,7 +47,7 @@
         amount: 2
       - id: CMFirstAidO2KitFilled
         amount: 2
-      - id: CMAdvFirstAidKitFilled 
+      - id: CMAdvFirstAidKitFilled
         amount: 2
 
 - type: entity
