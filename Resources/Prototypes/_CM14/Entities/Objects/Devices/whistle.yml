@@ -1,0 +1,8 @@
+﻿- type: entity
+  parent: Whistle
+  id: CMWhistle
+  name: whistle
+  description: A metal pea-whistle. Can be blown while held, or worn in the mouth
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Devices/whistle.rsi
