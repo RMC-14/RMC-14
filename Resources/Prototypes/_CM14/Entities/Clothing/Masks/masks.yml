@@ -27,7 +27,7 @@
 
 - type: entity # todo cm14 this needs a lizard sprite
   parent: ClothingMaskGas
-  id: CMClothingMaskMedical
+  id: CMClothingMaskGasMedical
   name: gas mask
   description: A close-fitting sterile mask that can be connected to an air supply.
   components:

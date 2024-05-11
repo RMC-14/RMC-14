@@ -1,4 +1,5 @@
-﻿using Content.Shared.Access.Systems;
+﻿using Content.Shared.Access.Components;
+using Content.Shared.Access.Systems;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.HealthExaminable;
@@ -13,11 +14,12 @@ public sealed class CMExamineSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<TransformComponent, GetVerbsEvent<ExamineVerb>>(OnGetExaminedVerbs, after: [typeof(HealthExaminableSystem), typeof(IdExaminableSystem)]);
-        SubscribeLocalEvent<TransformComponent, ExaminedEvent>(OnExamined, after: [typeof(HealthExaminableSystem), typeof(IdExaminableSystem)]);
+        SubscribeLocalEvent<ShortExamineComponent, GetVerbsEvent<ExamineVerb>>(OnGetExaminedVerbs, after: [typeof(HealthExaminableSystem), typeof(IdExaminableSystem)]);
+        SubscribeLocalEvent<IdExaminableComponent, ExaminedEvent>(OnIdExamined);
+        SubscribeLocalEvent<HealthExaminableComponent, ExaminedEvent>(OnHealthExamined);
     }
 
-    private void OnGetExaminedVerbs(Entity<TransformComponent> ent, ref GetVerbsEvent<ExamineVerb> args)
+    private void OnGetExaminedVerbs(Entity<ShortExamineComponent> ent, ref GetVerbsEvent<ExamineVerb> args)
     {
         args.Verbs.RemoveWhere(v =>
             v.Text == Loc.GetString("health-examinable-verb-text") ||
@@ -25,20 +27,22 @@ public sealed class CMExamineSystem : EntitySystem
         );
     }
 
-    private void OnExamined(Entity<TransformComponent> ent, ref ExaminedEvent args)
+    private void OnIdExamined(Entity<IdExaminableComponent> ent, ref ExaminedEvent args)
     {
         using (args.PushGroup(nameof(CMExamineSystem), 1))
         {
-            var id = _idExaminable.GetMessage(ent);
-            args.PushMarkup(id);
+            if (_idExaminable.GetInfo(ent) is { } info)
+                args.PushMarkup(info);
         }
+    }
 
+    private void OnHealthExamined(Entity<HealthExaminableComponent> ent, ref ExaminedEvent args)
+    {
         using (args.PushGroup(nameof(CMExamineSystem), -1))
         {
-            if (TryComp(ent, out HealthExaminableComponent? examinable) &&
-                TryComp(ent, out DamageableComponent? damageable))
+            if (TryComp(ent, out DamageableComponent? damageable))
             {
-                args.PushMessage(_healthExaminable.CreateMarkup(ent, examinable, damageable));
+                args.PushMessage(_healthExaminable.CreateMarkup(ent, ent.Comp, damageable));
             }
         }
     }
