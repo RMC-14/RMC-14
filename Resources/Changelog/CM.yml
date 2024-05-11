@@ -808,5 +808,12 @@
   id: 105
   time: '2024-05-11T05:49:28.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2046
+- author: Whisper
+  changes:
+  - message: Added the coif mask to vendors
+    type: Add
+  id: 106
+  time: '2024-05-11T07:51:28.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2097
 Name: CM
 Order: -1
