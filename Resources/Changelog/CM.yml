@@ -786,5 +786,13 @@
   id: 102
   time: '2024-05-09T10:48:54.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2085
+- author: DrSmugleaf
+  changes:
+  - message: Bullets no longer hit mobs that are in crit, unless they are directly
+      clicked on while shooting.
+    type: Tweak
+  id: 103
+  time: '2024-05-11T05:42:07.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2094
 Name: CM
 Order: -1
