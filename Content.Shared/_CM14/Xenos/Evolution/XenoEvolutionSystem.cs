@@ -9,6 +9,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Xenos.Evolution;
@@ -17,12 +18,14 @@ public sealed class XenoEvolutionSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly ClimbSystem _climb = default!;
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
@@ -45,12 +48,16 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         SubscribeLocalEvent<XenoEvolutionComponent, MapInitEvent>(OnXenoEvolveMapInit);
         SubscribeLocalEvent<XenoEvolutionComponent, XenoOpenEvolutionsActionEvent>(OnXenoEvolveAction);
-        SubscribeLocalEvent<XenoEvolutionComponent, XenoEvolveBuiMessage>(OnXenoEvolveBui);
         SubscribeLocalEvent<XenoEvolutionComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
         SubscribeLocalEvent<XenoEvolutionComponent, ActionAddedEvent>(OnXenoEvolveActionAdded);
         SubscribeLocalEvent<XenoEvolutionComponent, ActionRemovedEvent>(OnXenoEvolveActionRemoved);
 
         SubscribeLocalEvent<XenoNewlyEvolvedComponent, PreventCollideEvent>(OnNewlyEvolvedPreventCollide);
+
+        Subs.BuiEvents<XenoEvolutionComponent>(XenoEvolutionUIKey.Key, subs =>
+        {
+            subs.Event<XenoEvolveBuiMessage>(OnXenoEvolveBui);
+        });
     }
 
     private void OnXenoEvolveActionMapInit(Entity<XenoEvolveActionComponent> ent, ref MapInitEvent args)
@@ -80,9 +87,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private void OnXenoEvolveBui(Entity<XenoEvolutionComponent> xeno, ref XenoEvolveBuiMessage args)
     {
         var actor = args.Actor;
-        if (!xeno.Comp.EvolvesTo.Contains(args.Choice))
+        if (!CanEvolvePopup(xeno, args.Choice))
         {
-            Log.Warning($"User {ToPrettyString(actor)} sent an invalid evolution choice: {args.Choice}.");
+            Log.Warning($"{ToPrettyString(actor)} sent an invalid evolution choice: {args.Choice}.");
             return;
         }
 
@@ -90,12 +97,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.EvolutionDelay, ev, xeno);
 
         if (xeno.Comp.EvolutionDelay > TimeSpan.Zero)
-        {
-            _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-start"), xeno, xeno);
-        }
+            _popup.PopupClient(Loc.GetString("cm-xeno-evolution-start"), xeno, xeno);
 
         _doAfter.TryStartDoAfter(doAfter);
-
         _ui.CloseUi(xeno.Owner, XenoEvolutionUIKey.Key, actor);
     }
 
@@ -105,7 +109,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             args.Handled ||
             args.Cancelled ||
             !_mind.TryGetMind(xeno, out var mindId, out _) ||
-            !xeno.Comp.EvolvesTo.Contains(args.Choice))
+            !CanEvolvePopup(xeno, args.Choice))
         {
             return;
         }
@@ -153,6 +157,52 @@ public sealed class XenoEvolutionSystem : EntitySystem
             args.Cancelled = true;
     }
 
+    private bool CanEvolvePopup(Entity<XenoEvolutionComponent> xeno, EntProtoId newXeno)
+    {
+        if (!xeno.Comp.EvolvesTo.Contains(newXeno))
+            return false;
+
+        if (!_prototypes.TryIndex(newXeno, out var prototype))
+            return true;
+
+        // TODO CM14 revive jelly when added should not bring back dead queens
+        if (prototype.TryGetComponent(out XenoEvolutionCappedComponent? capped, _compFactory) &&
+            HasAlive<XenoEvolutionCappedComponent>(capped.Max, e => e.Comp.Id == capped.Id))
+        {
+            _popup.PopupClient($"There already is a living {prototype.Name}!", xeno, xeno, PopupType.MediumCaution);
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool HasAlive<T>(int count, Predicate<Entity<T>>? predicate = null) where T : IComponent
+    {
+        if (count <= 0)
+            return true;
+
+        var total = 0;
+        var query = EntityQueryEnumerator<T>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (_mobStateQuery.TryComp(uid, out var mobState) &&
+                _mobState.IsDead(uid, mobState))
+            {
+                continue;
+            }
+
+            if (predicate != null && !predicate((uid, comp)))
+                continue;
+
+            total++;
+
+            if (total >= count)
+                return true;
+        }
+
+        return false;
+    }
+
     public override void Update(float frameTime)
     {
         var newly = EntityQueryEnumerator<XenoNewlyEvolvedComponent>();
@@ -194,20 +244,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
         // TODO CM14 ovipositor attached only after 5 minutes
-        var hasGranter = false;
-        var granters = EntityQueryEnumerator<XenoEvolutionGranterComponent>();
-        while (granters.MoveNext(out var uid, out _))
-        {
-            if (_mobStateQuery.TryComp(uid, out var mobState) &&
-                _mobState.IsDead(uid, mobState))
-            {
-                continue;
-            }
-
-            hasGranter = true;
-            break;
-        }
-
+        var hasGranter = HasAlive<XenoEvolutionGranterComponent>(1);
         var add = TimeSpan.FromSeconds(frameTime);
         if (!hasGranter && _net.IsServer)
         {
