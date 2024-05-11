@@ -412,7 +412,7 @@
       choices: { CMMask: 1 }
       entries:
       - id: CMClothingMaskGas
-    #    CMHeatAbsorbentCoif #TODO: Make this
+      - id: CMClothingMaskCoif
     #    CMRebreather #TODO: Make this
     - name: Restricted Firearms
       entries: [ ]
@@ -789,9 +789,9 @@
     #- id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
-      entries: [ ]
+      entries:
     #- id: CMGasMask
-    #- id: CMHeatAbsorbentCoif
+      - id: CMClothingMaskCoif
 
 - type: entity
   parent: ColMarTechBase
@@ -917,9 +917,9 @@
     #- id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
-      entries: [ ]
-    #- id: CMGasMask
-    #- id: CMHeatAbsorbentCoif
+      entries:
+      #- id: CMGasMask
+      - id: CMClothingMaskCoif
     - name: Clothing Items
       entries: [ ]
     #- id: CMMacheteScabbardFull
@@ -1189,9 +1189,9 @@
     #- id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
-      entries: [ ]
-    #- id: CMGasMask
-    #- id: CMHeatAbsorbentCoif
+      entries:
+      #- id: CMGasMask
+      - id: CMClothingMaskCoif
 
 - type: entity
   parent: ColMarTechBase
@@ -1399,9 +1399,9 @@
     #- id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
-      entries: [ ]
-    #- id: CMGasMask
-    #- id: CMHeatAbsorbentCoif
+      entries:
+      #- id: CMGasMask
+      - id: CMClothingMaskCoif
     #- id: CMSterileMask
 
 - type: entity
@@ -1597,9 +1597,9 @@
     #- id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
-      entries: [ ]
-    #- id: CMGasMask
-    #- id: CMHeatAbsorbentCoif
+      entries:
+      #- id: CMGasMask
+      - id: CMClothingMaskCoif
 
 - type: entity
   parent: ColMarTechBase
@@ -1784,9 +1784,9 @@
     #- id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
-      entries: [ ]
-    #- id: CMGasMask
-    #- id: CMHeatAbsorbentCoif
+      entries:
+      #- id: CMGasMask
+      - id: CMClothingMaskCoif
 
 - type: entity
   parent: ColMarTechBase
