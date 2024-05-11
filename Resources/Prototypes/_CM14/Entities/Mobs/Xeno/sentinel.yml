@@ -40,8 +40,8 @@
   - type: XenoArmor
     explosionArmor: 10
   - type: XenoEvolution
-    evolvesTo:
-    - CMXenoSpitter
+#    evolvesTo:
+#    - CMXenoSpitter
   - type: XenoParalyzingSlash
   - type: XenoSlowingSpit
   - type: XenoScatteredSpit

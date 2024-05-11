@@ -51,8 +51,8 @@
   - type: XenoDevour
   - type: XenoEvolution
     evolvesTo: # TODO CM14 Queen
-    - CMXenoCarrier
-    - CMXenoBurrower
+#    - CMXenoCarrier
+#    - CMXenoBurrower
     - CMXenoHivelord
   - type: XenoPheromones
     pheromonesMultiplier: 2
