@@ -12,7 +12,7 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private readonly SpriteSystem _sprite;
-    private readonly XenoConstructionSystem _xenoConstruction;
+    private readonly SharedXenoConstructionSystem _xenoConstruction;
 
     [ViewVariables]
     private XenoChooseStructureWindow? _window;
@@ -20,7 +20,7 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
     public XenoChooseStructureBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _sprite = EntMan.System<SpriteSystem>();
-        _xenoConstruction = EntMan.System<XenoConstructionSystem>();
+        _xenoConstruction = EntMan.System<SharedXenoConstructionSystem>();
     }
 
     protected override void Open()

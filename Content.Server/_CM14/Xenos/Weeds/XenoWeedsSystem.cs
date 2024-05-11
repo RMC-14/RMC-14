@@ -1,37 +1,22 @@
 ﻿using System.Numerics;
 using Content.Server.Spreader;
-using Content.Shared._CM14.Xenos.Construction;
+using Content.Shared._CM14.Xenos.Weeds;
 using Content.Shared.Atmos;
 using Content.Shared.Coordinates;
-using Content.Shared.Coordinates.Helpers;
 using Robust.Server.GameObjects;
-using Robust.Shared.Map;
-using XenoWeedableComponent = Content.Shared._CM14.Xenos.Construction.Nest.XenoWeedableComponent;
-using XenoWeedsComponent = Content.Shared._CM14.Xenos.Construction.XenoWeedsComponent;
 
-namespace Content.Server._CM14.Xenos.Construction;
+namespace Content.Server._CM14.Xenos.Weeds;
 
-public sealed class XenoConstructionSystem : SharedXenoConstructionSystem
+public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 {
-    [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
 
     private readonly List<EntityUid> _anchored = new();
 
     public override void Initialize()
     {
         base.Initialize();
-
-        SubscribeLocalEvent<HiveCoreComponent, MapInitEvent>(OnHiveCoreMapInit);
         SubscribeLocalEvent<XenoWeedsComponent, SpreadNeighborsEvent>(OnWeedsSpreadNeighbors);
-        SubscribeLocalEvent<XenoWeedableComponent, AnchorStateChangedEvent>(OnWeedableAnchorStateChanged);
-    }
-
-    private void OnHiveCoreMapInit(Entity<HiveCoreComponent> ent, ref MapInitEvent args)
-    {
-        var coordinates = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager, _map);
-        Spawn(ent.Comp.Spawns, coordinates);
     }
 
     private void OnWeedsSpreadNeighbors(Entity<XenoWeedsComponent> ent, ref SpreadNeighborsEvent args)
@@ -69,6 +54,7 @@ public sealed class XenoConstructionSystem : SharedXenoConstructionSystem
 
             neighborWeedsComp.IsSource = false;
             neighborWeedsComp.Source = source;
+            Dirty(neighborWeeds, neighborWeedsComp);
 
             EnsureComp<ActiveEdgeSpreaderComponent>(neighborWeeds);
 
@@ -102,11 +88,5 @@ public sealed class XenoConstructionSystem : SharedXenoConstructionSystem
             RemCompDeferred<ActiveEdgeSpreaderComponent>(ent);
 
         args.Updates--;
-    }
-
-    private void OnWeedableAnchorStateChanged(Entity<XenoWeedableComponent> ent, ref AnchorStateChangedEvent args)
-    {
-        if (!args.Anchored)
-            QueueDel(ent.Comp.Entity);
     }
 }
