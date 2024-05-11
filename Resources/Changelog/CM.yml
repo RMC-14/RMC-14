@@ -794,5 +794,12 @@
   id: 103
   time: '2024-05-11T05:42:07.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2094
+- author: DrSmugleaf
+  changes:
+  - message: Xeno Drones can now evolve to Queen.
+    type: Add
+  id: 104
+  time: '2024-05-11T05:43:38.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2096
 Name: CM
 Order: -1
