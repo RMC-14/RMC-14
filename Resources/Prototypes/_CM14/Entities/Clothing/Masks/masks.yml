@@ -13,7 +13,7 @@
 
 - type: entity
   parent: ClothingMaskPullableBase
-  id: CMClothingMaskSterile
+  id: CMMaskSterile
   name: sterile mask
   description: A sterile mask designed to help prevent the spread of diseases.
   components:
@@ -38,7 +38,7 @@
 
 - type: entity
   parent: ClothingMaskPullableBase
-  id: CMClothingMaskCoif
+  id: CMMaskCoif
   name: heat absorbent coif
   description: A close-fitting cap that covers the top, back, and sides of the head. Can also be adjusted to cover the lower part of the face so it keeps the user warm in harsh conditions.
   components:
