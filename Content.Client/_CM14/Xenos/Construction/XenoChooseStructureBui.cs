@@ -41,7 +41,7 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
                     name += $" ({cost} plasma)";
 
                 control.Set(name, _sprite.Frame0(structure));
-                control.Button.OnPressed += _ => SendMessage(new XenoChooseStructureBuiMsg(structureId));
+                control.Button.OnPressed += _ => SendPredictedMessage(new XenoChooseStructureBuiMsg(structureId));
 
                 _window.StructureContainer.AddChild(control);
             }

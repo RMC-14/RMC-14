@@ -22,7 +22,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._CM14.Xenos.Construction;
 
-public abstract class SharedXenoConstructionSystem : EntitySystem
+public sealed class SharedXenoConstructionSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
@@ -70,9 +70,13 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
 
         SubscribeLocalEvent<HiveCoreComponent, MapInitEvent>(OnHiveCoreMapInit);
 
-        Subs.BuiEvents<XenoConstructionComponent>(XenoOrderConstructionUI.Key, subs =>
+        Subs.BuiEvents<XenoConstructionComponent>(XenoChooseStructureUI.Key, subs =>
         {
             subs.Event<XenoChooseStructureBuiMsg>(OnXenoChooseStructureBui);
+        });
+
+        Subs.BuiEvents<XenoConstructionComponent>(XenoOrderConstructionUI.Key, subs =>
+        {
             subs.Event<XenoOrderConstructionBuiMsg>(OnXenoOrderConstructionBui);
         });
 
