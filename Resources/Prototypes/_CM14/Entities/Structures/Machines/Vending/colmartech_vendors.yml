@@ -1399,10 +1399,10 @@
     #- id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
-      entries: [ ]
+      entries:
     #- id: CMGasMask
     #- id: CMHeatAbsorbentCoif
-    #- id: CMSterileMask
+      - id: CMClothingMaskSterile
 
 - type: entity
   parent: ColMarTechBase
