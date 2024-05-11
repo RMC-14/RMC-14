@@ -2637,7 +2637,7 @@ entities:
       pos: 13.5,10.5
       parent: 179
     - type: Door
-      secondsUntilStateChange: -4737.476
+      secondsUntilStateChange: -4825.116
       state: Opening
   - uid: 26
     components:
@@ -4099,12 +4099,33 @@ entities:
     - type: Transform
       pos: -0.5,1.5
       parent: 179
+- proto: CMSpawnPointCargoTech
+  entities:
+  - uid: 1329
+    components:
+    - type: Transform
+      pos: 2.5,3.5
+      parent: 179
 - proto: CMSpawnPointChiefEngineer
   entities:
   - uid: 1199
     components:
     - type: Transform
       pos: 1.5,0.5
+      parent: 179
+- proto: CMSpawnPointChiefMP
+  entities:
+  - uid: 1195
+    components:
+    - type: Transform
+      pos: -1.5,2.5
+      parent: 179
+- proto: CMSpawnPointCMO
+  entities:
+  - uid: 709
+    components:
+    - type: Transform
+      pos: -1.5,-1.5
       parent: 179
 - proto: CMSpawnPointCombatTech
   entities:
@@ -4134,6 +4155,13 @@ entities:
     - type: Transform
       pos: 1.5,1.5
       parent: 179
+- proto: CMSpawnPointDoctor
+  entities:
+  - uid: 711
+    components:
+    - type: Transform
+      pos: -0.5,-1.5
+      parent: 179
 - proto: CMSpawnPointExecutiveOfficer
   entities:
   - uid: 1175
@@ -4162,12 +4190,47 @@ entities:
     - type: Transform
       pos: -0.5,-0.5
       parent: 179
+- proto: CMSpawnPointLiaison
+  entities:
+  - uid: 1327
+    components:
+    - type: Transform
+      pos: 1.5,2.5
+      parent: 179
 - proto: CMSpawnPointMaintTech
   entities:
   - uid: 1181
     components:
     - type: Transform
       pos: -0.5,0.5
+      parent: 179
+- proto: CMSpawnPointMessTech
+  entities:
+  - uid: 1328
+    components:
+    - type: Transform
+      pos: 2.5,2.5
+      parent: 179
+- proto: CMSpawnPointMilitaryPolice
+  entities:
+  - uid: 1319
+    components:
+    - type: Transform
+      pos: -0.5,2.5
+      parent: 179
+- proto: CMSpawnPointMilitaryWarden
+  entities:
+  - uid: 1326
+    components:
+    - type: Transform
+      pos: 0.5,2.5
+      parent: 179
+- proto: CMSpawnPointNurse
+  entities:
+  - uid: 749
+    components:
+    - type: Transform
+      pos: 0.5,-1.5
       parent: 179
 - proto: CMSpawnPointOrdnanceTech
   entities:
@@ -4189,6 +4252,20 @@ entities:
     components:
     - type: Transform
       pos: 2.5,-0.5
+      parent: 179
+- proto: CMSpawnPointQuartermaster
+  entities:
+  - uid: 1330
+    components:
+    - type: Transform
+      pos: 1.5,3.5
+      parent: 179
+- proto: CMSpawnPointResearcher
+  entities:
+  - uid: 1172
+    components:
+    - type: Transform
+      pos: 1.5,-1.5
       parent: 179
 - proto: CMSpawnPointRifleman
   entities:
