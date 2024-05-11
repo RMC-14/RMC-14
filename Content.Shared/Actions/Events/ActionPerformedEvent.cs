@@ -1,4 +1,4 @@
-﻿namespace Content.Shared.Actions.Events;
+namespace Content.Shared.Actions.Events;
 
 /// <summary>
 ///     Raised on the action entity when it is used and <see cref="BaseActionEvent.Handled"/>.
