@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: BaseWhistle
+  parent: Whistle
   id: CMWhistle
   name: whistle
   description: A metal pea-whistle. Can be blown while held, or worn in the mouth
