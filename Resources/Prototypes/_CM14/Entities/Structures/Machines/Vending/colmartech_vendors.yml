@@ -617,8 +617,8 @@
     #  points: 20
     - name: Engineering Supplies
       entries:
-      #- id: CMInsulatedGloves
-      #  points: 3
+      - id: CMHandsInsulated
+        points: 3
       - id: CMSheetMetal
         points: 5
     #- id: CMPlasteelx10
@@ -1695,8 +1695,8 @@
     #  amount: 15
     #- id: CMAutoinjectorPouchFull
     #  amount: 15
-    #- id: CMInsulatedGloves
-    #  amount: 3
+      - id: CMHandsInsulated
+        points: 3
     #- id: CMNightVisionOptic
     #  amount: 30
     - name: Utilities
