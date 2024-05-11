@@ -91,8 +91,9 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
                 {
                     damage.DamageAt = null;
                     Dirty(uid, damage);
-                    continue;
                 }
+
+                continue;
             }
             else if (damage.DamageAt == null)
             {
