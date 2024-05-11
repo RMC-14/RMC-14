@@ -411,8 +411,8 @@
     - name: Mask
       choices: { CMMask: 1 }
       entries:
-      - id: CMClothingMaskGas
-    #    CMHeatAbsorbentCoif #TODO: Make this
+      - id: CMMaskGas
+      - id: CMMaskCoif
     #    CMRebreather #TODO: Make this
     - name: Restricted Firearms
       entries: [ ]
@@ -617,8 +617,8 @@
     #  points: 20
     - name: Engineering Supplies
       entries:
-      #- id: CMInsulatedGloves
-      #  points: 3
+      - id: CMHandsInsulated
+        points: 3
       - id: CMSheetMetal
         points: 5
     #- id: CMPlasteelx10
@@ -791,9 +791,9 @@
       - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
-      entries: [ ]
-    #- id: CMGasMask
-    #- id: CMHeatAbsorbentCoif
+      entries:
+      - id: CMMaskGas
+      - id: CMMaskCoif
 
 - type: entity
   parent: ColMarTechBase
@@ -921,9 +921,9 @@
       - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
-      entries: [ ]
-    #- id: CMGasMask
-    #- id: CMHeatAbsorbentCoif
+      entries:
+      - id: CMMaskGas
+      - id: CMMaskCoif
     - name: Clothing Items
       entries:
     #- id: CMScabbardMacheteFull
@@ -1197,9 +1197,9 @@
       - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
-      entries: [ ]
-    #- id: CMGasMask
-    #- id: CMHeatAbsorbentCoif
+      entries:
+      - id: CMMaskGas
+      - id: CMMaskCoif
 
 - type: entity
   parent: ColMarTechBase
@@ -1411,10 +1411,10 @@
       - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
-      entries: [ ]
-    #- id: CMGasMask
-    #- id: CMHeatAbsorbentCoif
-    #- id: CMSterileMask
+      entries:
+      - id: CMMaskGas
+      - id: CMMaskCoif
+      - id: CMMaskSterile
 
 - type: entity
   parent: ColMarTechBase
@@ -1612,9 +1612,9 @@
       - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
-      entries: [ ]
-    #- id: CMGasMask
-    #- id: CMHeatAbsorbentCoif
+      entries:
+      - id: CMMaskGas
+      - id: CMMaskCoif
 
 - type: entity
   parent: ColMarTechBase
@@ -1696,8 +1696,8 @@
     #  amount: 15
     #- id: CMAutoinjectorPouchFull
     #  amount: 15
-    #- id: CMInsulatedGloves
-    #  amount: 3
+      - id: CMHandsInsulated
+        points: 3
     #- id: CMNightVisionOptic
     #  amount: 30
     - name: Utilities
@@ -1801,9 +1801,9 @@
       - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
-      entries: [ ]
-    #- id: CMGasMask
-    #- id: CMHeatAbsorbentCoif
+      entries:
+      - id: CMMaskGas
+      - id: CMMaskCoif
 
 - type: entity
   parent: ColMarTechBase
