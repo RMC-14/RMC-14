@@ -6,3 +6,7 @@
   components:
   - type: Sprite
     sprite: _CM14/Objects/Devices/whistle.rsi
+  - type: Clothing
+    slots:
+      - mask
+      - neck
