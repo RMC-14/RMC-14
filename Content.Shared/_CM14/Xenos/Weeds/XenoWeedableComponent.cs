@@ -1,10 +1,10 @@
 ﻿using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._CM14.Xenos.Construction.Nest;
+namespace Content.Shared._CM14.Xenos.Weeds;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedXenoConstructionSystem))]
+[Access(typeof(SharedXenoWeedsSystem))]
 public sealed partial class XenoWeedableComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
