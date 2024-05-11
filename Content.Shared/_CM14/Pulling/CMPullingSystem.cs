@@ -5,7 +5,6 @@ using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Pulling.Events;
 using Content.Shared.Stunnable;
 using Content.Shared.Whitelist;
 using Robust.Shared.Player;
@@ -32,9 +31,9 @@ public sealed class CMPullingSystem : EntitySystem
 
         SubscribeLocalEvent<PullingSlowedComponent, RefreshMovementSpeedModifiersEvent>(OnPullingSlowedMovementSpeed);
 
-        SubscribeLocalEvent<PullWhitelistComponent, StartPullAttemptEvent>(OnPullWhitelistStartPullAttempt);
+        SubscribeLocalEvent<PullWhitelistComponent, PullAttemptEvent>(OnPullWhitelistPullAttempt);
 
-        SubscribeLocalEvent<BlockPullingDeadComponent, StartPullAttemptEvent>(OnBlockDeadStartPullAttempt);
+        SubscribeLocalEvent<BlockPullingDeadComponent, PullAttemptEvent>(OnBlockDeadPullAttempt);
         SubscribeLocalEvent<BlockPullingDeadComponent, PullStartedMessage>(OnBlockDeadPullStarted);
         SubscribeLocalEvent<BlockPullingDeadComponent, PullStoppedMessage>(OnBlockDeadPullStopped);
     }
@@ -95,29 +94,29 @@ public sealed class CMPullingSystem : EntitySystem
         }
     }
 
-    private void OnPullWhitelistStartPullAttempt(Entity<PullWhitelistComponent> ent, ref StartPullAttemptEvent args)
+    private void OnPullWhitelistPullAttempt(Entity<PullWhitelistComponent> ent, ref PullAttemptEvent args)
     {
-        if (args.Cancelled || ent.Owner == args.Pulled)
+        if (args.Cancelled || ent.Owner == args.PulledUid)
             return;
 
-        if (!_whitelist.IsValid(ent.Comp.Whitelist, args.Pulled))
+        if (!_whitelist.IsValid(ent.Comp.Whitelist, args.PulledUid))
         {
-            var name = Loc.GetString("zzzz-the", ("ent", args.Pulled));
-            _popup.PopupClient($"We have no use for {name}, why would we want to touch it?", args.Pulled, args.Puller);
-            args.Cancel();
+            var name = Loc.GetString("zzzz-the", ("ent", args.PulledUid));
+            _popup.PopupClient($"We have no use for {name}, why would we want to touch it?", args.PulledUid, args.PullerUid);
+            args.Cancelled = true;
         }
     }
 
-    private void OnBlockDeadStartPullAttempt(Entity<BlockPullingDeadComponent> ent, ref StartPullAttemptEvent args)
+    private void OnBlockDeadPullAttempt(Entity<BlockPullingDeadComponent> ent, ref PullAttemptEvent args)
     {
-        if (args.Cancelled || ent.Owner == args.Pulled)
+        if (args.Cancelled || ent.Owner == args.PulledUid)
             return;
 
-        if (_mobState.IsDead(args.Pulled))
+        if (_mobState.IsDead(args.PulledUid))
         {
-            var name = Loc.GetString("zzzz-the", ("ent", args.Pulled));
-            _popup.PopupClient($"{name} is dead, why would we want to touch it?", args.Pulled, args.Puller);
-            args.Cancel();
+            var name = Loc.GetString("zzzz-the", ("ent", args.PulledUid));
+            _popup.PopupClient($"{name} is dead, why would we want to touch it?", args.PulledUid, args.PullerUid);
+            args.Cancelled = true;
         }
     }
 
