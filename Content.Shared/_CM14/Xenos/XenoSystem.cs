@@ -1,5 +1,6 @@
 ﻿using Content.Shared._CM14.Marines;
 using Content.Shared._CM14.Medical.Scanner;
+using Content.Shared._CM14.Vendors;
 using Content.Shared._CM14.Xenos.Evolution;
 using Content.Shared._CM14.Xenos.Hive;
 using Content.Shared._CM14.Xenos.Pheromones;
@@ -13,10 +14,12 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Lathe;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Radio;
 using Content.Shared.Standing;
+using Content.Shared.UserInterface;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
@@ -65,6 +68,7 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, HealthScannerAttemptTargetEvent>(OnXenoHealthScannerAttemptTarget);
         SubscribeLocalEvent<XenoComponent, GetDefaultRadioChannelEvent>(OnXenoGetDefaultRadioChannel);
         SubscribeLocalEvent<XenoComponent, AttackAttemptEvent>(OnXenoAttackAttempt);
+        SubscribeLocalEvent<XenoComponent, UserOpenActivatableUIAttemptEvent>(OnXenoOpenActivatableUIAttempt);
 
         SubscribeLocalEvent<XenoWeedsComponent, StartCollideEvent>(OnWeedsStartCollide);
         SubscribeLocalEvent<XenoWeedsComponent, EndCollideEvent>(OnWeedsEndCollide);
@@ -119,6 +123,18 @@ public sealed class XenoSystem : EntitySystem
         // TODO CM14 this still falsely plays the hit red flash effect on xenos if others are hit in a wide swing
         if (HasComp<XenoFriendlyComponent>(target) ||
             _mobState.IsDead(target))
+        {
+            args.Cancel();
+        }
+    }
+
+    private void OnXenoOpenActivatableUIAttempt(Entity<XenoComponent> ent, ref UserOpenActivatableUIAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (HasComp<LatheComponent>(args.Target) ||
+            HasComp<CMAutomatedVendorComponent>(args.Target))
         {
             args.Cancel();
         }
