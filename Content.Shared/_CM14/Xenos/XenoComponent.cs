@@ -14,7 +14,7 @@ public sealed partial class XenoComponent : Component
     [DataField, AutoNetworkedField]
     public List<EntProtoId> ActionIds = new();
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId, EntityUid> Actions = new();
 
     [DataField, AutoNetworkedField]
