@@ -39,7 +39,7 @@
     plasma: 100
     maxPlasma: 100
     plasmaRegenOnWeeds: 5
-  - type: XenoArmor
+  - type: CMArmor
     armor: 35
     explosionArmor: 70
   - type: XenoCrest

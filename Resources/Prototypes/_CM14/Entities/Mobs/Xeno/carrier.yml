@@ -43,7 +43,7 @@
     plasma: 500
     maxPlasma: 500
     plasmaRegenOnWeeds: 3.5
-  - type: XenoArmor
+  - type: CMArmor
     explosionArmor: 20
   - type: XenoDevour
   - type: MeleeWeapon

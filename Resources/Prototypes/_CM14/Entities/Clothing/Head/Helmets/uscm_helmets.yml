@@ -2,7 +2,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: ArmorHelmetM10
-  name: M10 Pattern Marine Helmet
+  name: M10 pattern marine helmet
   description: A standard M10 Pattern Helmet. The inside label, along with washing information, reads, 'The difference between an open-casket and closed-casket funeral. Wear on head for best results.'. There is a built-in camera on the right side.
   components:
   - type: Sprite
@@ -24,18 +24,14 @@
     interfaces:
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
+  - type: CMArmor
+    armor: 20
+    explosionArmor: 10
 
 - type: entity
   parent: ArmorHelmetM10
   id: CMArmorHelmetM10MP
-  name: M10 Helmet MP
+  name: M10 helmet MP
   description: A special variant of the M10 Pattern Helmet worn by the Military Police of the USCM.
   components:
   - type: Sprite
@@ -46,7 +42,7 @@
 - type: entity
   parent: ArmorHelmetM10
   id: CMArmorHelmetM10ChiefMP
-  name: M10 Helmet Chief MP
+  name: M10 helmet chief MP
   description: A special variant of the M10 Pattern Helmet worn by the Chief MP of the USCM.
   components:
   - type: Sprite
@@ -57,7 +53,7 @@
 - type: entity
   parent: ArmorHelmetM10
   id: CMArmorHelmetM10CO
-  name: M10 Helmet CO
+  name: M10 helmet CO
   description: A special variant of the M10 Pattern Helmet worn by the Commanding Officer of the USCM.
   components:
   - type: Sprite
@@ -68,7 +64,7 @@
 - type: entity
   parent: ArmorHelmetM10
   id: CMArmorHelmetM10Medic
-  name: M10 Medic Helmet
+  name: M10 medic helmet
   description: A special variant of the M10 Pattern Helmet worn by the medic marines of the USCM.
   components:
   - type: Sprite
@@ -79,7 +75,7 @@
 - type: entity
   parent: ArmorHelmetM10
   id: CMArmorHelmetM10Tech
-  name: M10 Tech Helmet
+  name: M10 tech helmet
   description: A special variant of the M10 Pattern Helmet worn by the engineer marines of the USCM.
   components:
   - type: Sprite
@@ -91,7 +87,7 @@
 - type: entity
   parent: ArmorHelmetM10
   id: CMArmorHelmetM11
-  name: M11 Pattern Leader Helmet
+  name: M11 pattern leader helmet
   description: A slightly fancier helmet for marine leaders. This one contains a small built-in camera and has cushioning to project your fragile brain.
   components:
   - type: Sprite
@@ -103,7 +99,7 @@
 - type: entity
   parent: ArmorHelmetM10
   id: CMArmorHelmetM12
-  name: M12 Pattern Helmet
+  name: M12 pattern helmet
   description: An experimental brain-bucket. A dust ruffle hangs from back. Moderately better at deflecting blunt objects at the cost of humiliation. But who will be laughing at the memorial? Not you, you'll be busy getting medals for your intel work or for your fantastic leadership.
   components:
   - type: Sprite
@@ -115,7 +111,7 @@
 - type: entity
   parent: ArmorHelmetM10
   id: CMArmorHelmetM30
-  name: M30 Tactical Helmet
+  name: M30 tactical helmet
   description: The M30 tactical helmet has an left eyepiece filter used to filter tactical data.
   components:
   - type: Sprite
@@ -139,7 +135,7 @@
 - type: entity
   parent: ArmorHelmetM10
   id: CMArmorHelmetM3Scout
-  name: M3-S Helmet
+  name: M3-S helmet
   description: A custom helmet from the M3 series designed to be lightweight and used for recon missions.
   components:
   - type: Sprite
@@ -150,7 +146,7 @@
 - type: entity
   parent: CMArmorHelmetM3Scout
   id: CMArmorHelmetM3G4
-  name: M3-G4 Helmet
+  name: M3-G4 helmet
   description: Pairs with the M3-G4 heavy grenadier plating. A distant cousin of the experimental B18 defensive helmet. As such, it also resists some facehugger latching attempts.
   components:
   - type: Sprite
@@ -162,7 +158,7 @@
 - type: entity
   parent: ArmorHelmetM10
   id: CMArmorHelmetM35
-  name: M35 Helmet
+  name: M35 helmet
   description: A custom helmet from the M3 series designed to be highly flame retardant.
   components:
   - type: Sprite
@@ -174,7 +170,7 @@
 - type: entity
   parent: ArmorHelmetM10
   id: CMArmorHelmetM45
-  name: M45 Ghillie Helmet
+  name: M45 ghillie helmet
   description: A lightweight M45 helmet with ghillie coif used by USCM snipers on recon missions.
   components:
   - type: Sprite
