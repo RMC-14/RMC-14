@@ -1,4 +1,4 @@
-﻿using Content.Shared._CM14.Xenos.Armor;
+﻿using Content.Shared._CM14.Armor;
 using Content.Shared._CM14.Xenos.Fortify;
 using Content.Shared._CM14.Xenos.Rest;
 using Content.Shared._CM14.Xenos.Sweep;
@@ -21,7 +21,7 @@ public sealed class XenoCrestSystem : EntitySystem
         // TODO CM14 resist knockback
         SubscribeLocalEvent<XenoCrestComponent, XenoToggleCrestActionEvent>(OnXenoCrestAction);
         SubscribeLocalEvent<XenoCrestComponent, RefreshMovementSpeedModifiersEvent>(OnXenoCrestRefreshMovementSpeed);
-        SubscribeLocalEvent<XenoCrestComponent, XenoGetArmorEvent>(OnXenoCrestGetArmor);
+        SubscribeLocalEvent<XenoCrestComponent, CMGetArmorEvent>(OnXenoCrestGetArmor);
 
         SubscribeLocalEvent<XenoCrestComponent, BeforeStatusEffectAddedEvent>(OnXenoCrestBeforeStatusAdded);
 
@@ -62,7 +62,7 @@ public sealed class XenoCrestSystem : EntitySystem
             args.ModifySpeed(xeno.Comp.SpeedMultiplier, xeno.Comp.SpeedMultiplier);
     }
 
-    private void OnXenoCrestGetArmor(Entity<XenoCrestComponent> xeno, ref XenoGetArmorEvent args)
+    private void OnXenoCrestGetArmor(Entity<XenoCrestComponent> xeno, ref CMGetArmorEvent args)
     {
         if (xeno.Comp.Lowered)
             args.Armor += xeno.Comp.Armor;

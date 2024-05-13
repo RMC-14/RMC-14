@@ -42,7 +42,7 @@
 #    evolvesTo:
 #    - CMXenoPraetorian
 #    - CMXenoBoiler
-  - type: XenoArmor
+  - type: CMArmor
     armor: 15
     explosionArmor: 20
   - type: MeleeWeapon
