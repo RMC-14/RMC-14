@@ -1,5 +1,5 @@
-﻿using Content.Shared._CM14.Marines.Orders;
-using Content.Shared._CM14.Xenos.Armor;
+﻿using Content.Shared._CM14.Armor;
+using Content.Shared._CM14.Marines.Orders;
 using Content.Shared._CM14.Xenos.Pheromones;
 using Content.Shared.Armor;
 using Content.Shared.Blocking;
@@ -23,7 +23,7 @@ public sealed class CMDamageableSystem : EntitySystem
             after:
             [
                 typeof(SharedArmorSystem), typeof(BlockingSystem), typeof(InventorySystem), typeof(SharedBorgSystem),
-                typeof(SharedMarineOrdersSystem), typeof(XenoArmorSystem), typeof(SharedXenoPheromonesSystem)
+                typeof(SharedMarineOrdersSystem), typeof(CMArmorSystem), typeof(SharedXenoPheromonesSystem)
             ]);
     }
 

@@ -1,4 +1,4 @@
-﻿using Content.Shared._CM14.Xenos.Armor;
+﻿using Content.Shared._CM14.Armor;
 using Content.Shared._CM14.Xenos.Crest;
 using Content.Shared._CM14.Xenos.Headbutt;
 using Content.Shared._CM14.Xenos.Rest;
@@ -30,7 +30,7 @@ public sealed class XenoFortifySystem : EntitySystem
         // TODO CM14 resist knockback from small explosives
         SubscribeLocalEvent<XenoFortifyComponent, XenoFortifyActionEvent>(OnXenoFortifyAction);
 
-        SubscribeLocalEvent<XenoFortifyComponent, XenoGetArmorEvent>(OnXenoFortifyGetArmor);
+        SubscribeLocalEvent<XenoFortifyComponent, CMGetArmorEvent>(OnXenoFortifyGetArmor);
         SubscribeLocalEvent<XenoFortifyComponent, BeforeStatusEffectAddedEvent>(OnXenoFortifyBeforeStatusAdded);
         SubscribeLocalEvent<XenoFortifyComponent, GetExplosionResistanceEvent>(OnXenoFortifyGetExplosionResistance);
 
@@ -81,7 +81,7 @@ public sealed class XenoFortifySystem : EntitySystem
         }
     }
 
-    private void OnXenoFortifyGetArmor(Entity<XenoFortifyComponent> xeno, ref XenoGetArmorEvent args)
+    private void OnXenoFortifyGetArmor(Entity<XenoFortifyComponent> xeno, ref CMGetArmorEvent args)
     {
         if (xeno.Comp.Fortified)
         {
