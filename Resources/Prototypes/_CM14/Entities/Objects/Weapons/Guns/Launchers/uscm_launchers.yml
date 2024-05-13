@@ -19,6 +19,7 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
+    resetOnHandSelected: false
   - type: BallisticAmmoProvider
     whitelist:
       tags:
