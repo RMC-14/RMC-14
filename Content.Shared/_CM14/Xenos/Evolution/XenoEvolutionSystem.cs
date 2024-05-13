@@ -29,6 +29,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     private readonly HashSet<EntityUid> _climbable = new();
     private readonly HashSet<EntityUid> _doors = new();
@@ -118,6 +119,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         var coordinates = _transform.GetMoverCoordinates(xeno.Owner);
         var newXeno = Spawn(args.Choice, coordinates);
+        _xeno.SetSameHive(newXeno, xeno.Owner);
+
         _mind.TransferTo(mindId, newXeno);
         _mind.UnVisit(mindId);
 

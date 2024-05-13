@@ -34,6 +34,9 @@ public sealed partial class XenoEggComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId Spawn = "CMXenoHugger";
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? Hive;
 }
 
 [Serializable, NetSerializable]

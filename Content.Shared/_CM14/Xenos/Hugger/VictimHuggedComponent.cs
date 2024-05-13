@@ -68,4 +68,7 @@ public sealed partial class VictimHuggedComponent : Component
 
     [DataField, AutoNetworkedField, Access(typeof(SharedCMSurgerySystem))]
     public bool RootsCut;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid Hive;
 }

@@ -36,6 +36,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     public override void Initialize()
     {
@@ -261,6 +262,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         var victimComp = EnsureComp<VictimHuggedComponent>(victim);
         victimComp.AttachedAt = time;
         victimComp.RecoverAt = time + hugger.Comp.ParalyzeTime;
+        victimComp.Hive = CompOrNull<XenoComponent>(hugger)?.Hive ?? default;
         _stun.TryParalyze(victim, hugger.Comp.ParalyzeTime, true);
 
         var container = _container.EnsureContainer<ContainerSlot>(victim, victimComp.ContainerId);
@@ -316,15 +318,16 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
             {
                 // TODO CM14 make this less effective against late-stage infections, also make this support faster incubation
                 if (hugged.IncubationMultiplier < 1)
-                {
                     hugged.BurstAt += TimeSpan.FromSeconds(1 - hugged.IncubationMultiplier) * frameTime;
-                }
 
                 continue;
             }
 
             RemCompDeferred<VictimHuggedComponent>(uid);
-            Spawn(hugged.BurstSpawn, xform.Coordinates);
+
+            var spawned = Spawn(hugged.BurstSpawn, xform.Coordinates);
+            _xeno.SetHive(spawned, hugged.Hive);
+
             EnsureComp<VictimBurstComponent>(uid);
 
             _audio.PlayPvs(hugged.BurstSound, uid);

@@ -95,8 +95,10 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
                 _xeno.SetHive(xenoEnt, comp.Hive);
 
                 // TODO CM14 mind name
-                var mind = _mind.GetOrCreateMind(player.UserId);
-                _mind.TransferTo(mind, xenoEnt);
+                if (!_mind.TryGetMind(player.UserId, out var mind))
+                    mind = _mind.CreateMind(player.UserId, Name(xenoEnt));
+
+                _mind.TransferTo(mind.Value, xenoEnt);
             }
         }
     }
