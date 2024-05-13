@@ -159,16 +159,32 @@ public sealed class XenoSystem : EntitySystem
         EnsureComp<XenoComponent>(xeno);
     }
 
-    public void SetHive(Entity<XenoComponent?> xeno, Entity<HiveComponent?> hive)
+    public void SetHive(Entity<XenoComponent?> xeno, Entity<HiveComponent?>? hive)
     {
-        if (!Resolve(xeno, ref xeno.Comp) ||
-            !Resolve(hive, ref hive.Comp))
+        if (!Resolve(xeno, ref xeno.Comp))
+            return;
+
+        if (hive == null)
         {
+            xeno.Comp.Hive = null;
+            Dirty(xeno, xeno.Comp);
             return;
         }
 
+        var hiveEnt = hive.Value;
+        if (!Resolve(hiveEnt, ref hiveEnt.Comp))
+            return;
+
         xeno.Comp.Hive = hive;
         Dirty(xeno, xeno.Comp);
+    }
+
+    public void SetSameHive(Entity<XenoComponent?> to, Entity<XenoComponent?> from)
+    {
+        if (!Resolve(from, ref from.Comp))
+            return;
+
+        SetHive(to, from.Comp.Hive);
     }
 
     private FixedPoint2 GetWeedsHealAmount(Entity<XenoComponent> xeno)
