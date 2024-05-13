@@ -176,8 +176,11 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
             var xenos = EntityQueryEnumerator<XenoComponent, MobStateComponent, TransformComponent>();
             var xenosAlive = false;
             var xenosOnShip = false;
-            while (xenos.MoveNext(out var xenoId, out _, out var mobState, out var xform))
+            while (xenos.MoveNext(out var xenoId, out var xeno, out var mobState, out var xform))
             {
+                if (!xeno.ContributesToVictory)
+                    continue;
+
                 if (_mobState.IsAlive(xenoId, mobState))
                     xenosAlive = true;
 
@@ -202,6 +205,9 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
                 if (marinesAlive && marinesOnShip)
                     break;
             }
+
+            if (xenosOnShip)
+                cmRule.XenosEverOnShip = true;
 
             if (!xenosAlive && !marinesAlive)
             {
