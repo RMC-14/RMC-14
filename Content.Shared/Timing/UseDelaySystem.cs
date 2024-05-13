@@ -123,12 +123,12 @@ public sealed class UseDelaySystem : EntitySystem
     /// <summary>
     /// Returns info for the delay that will end farthest in the future.
     /// </summary>
-    public UseDelayInfo? GetLastEndingDelay(Entity<UseDelayComponent> ent)
+    public UseDelayInfo GetLastEndingDelay(Entity<UseDelayComponent> ent)
     {
-        UseDelayInfo? last = null;
+        var last = ent.Comp.Delays[DefaultId];
         foreach (var entry in ent.Comp.Delays)
         {
-            if (last == null || entry.Value.EndTime > last.EndTime)
+            if (entry.Value.EndTime > last.EndTime)
                 last = entry.Value;
         }
         return last;
