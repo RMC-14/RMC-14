@@ -857,5 +857,13 @@
   id: 112
   time: '2024-05-12T10:15:48.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2106
+- author: DrSmugleaf
+  changes:
+  - message: The M92 grenade launcher's grenades now land exactly where the user clicks
+      and have a short delay before exploding.
+    type: Tweak
+  id: 113
+  time: '2024-05-13T20:58:27.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2133
 Name: CM
 Order: -1
