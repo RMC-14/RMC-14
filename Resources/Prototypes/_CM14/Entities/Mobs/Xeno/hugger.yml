@@ -23,6 +23,7 @@
     - ActionXenoLeap
     tier: 0
     hudOffset: 0,0.4
+    contributesToVictory: false
   - type: XenoPlasma
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1
