@@ -16,5 +16,5 @@ public sealed partial class OnShootTriggerAmmoTimerComponent : Component
     public float? InitialBeepDelay;
 
     [DataField]
-    public SoundSpecifier? Sound;
+    public SoundSpecifier? BeepSound;
 }

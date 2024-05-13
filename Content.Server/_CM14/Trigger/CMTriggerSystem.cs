@@ -16,7 +16,7 @@ public sealed class CMTriggerSystem : EntitySystem
     {
         foreach (var projectile in args.FiredProjectiles)
         {
-            _trigger.HandleTimerTrigger(projectile, null, ent.Comp.Delay, ent.Comp.BeepInterval, ent.Comp.InitialBeepDelay, ent.Comp.Sound);
+            _trigger.HandleTimerTrigger(projectile, null, ent.Comp.Delay, ent.Comp.BeepInterval, ent.Comp.InitialBeepDelay, ent.Comp.BeepSound);
         }
     }
 }
