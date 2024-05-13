@@ -38,3 +38,4 @@
   - type: AmmoFixedDistance
   - type: Wieldable
   - type: GunRequiresWield
+  - type: GunShowUseDelay
