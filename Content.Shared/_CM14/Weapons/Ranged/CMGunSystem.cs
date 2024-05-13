@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Shared.Hands;
 using Content.Shared.Timing;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -32,6 +33,8 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<ProjectileFixedDistanceComponent, PhysicsSleepEvent>(OnProjectileStop);
 
         SubscribeLocalEvent<GunShowUseDelayComponent, GunShotEvent>(OnShowUseDelayShot);
+
+        SubscribeLocalEvent<GunDelayOnSelectComponent, HandSelectedEvent>(OnGunDelayHandSelected);
     }
 
     private void OnAmmoFixedDistanceShot(Entity<AmmoFixedDistanceComponent> ent, ref AmmoShotEvent args)
@@ -85,6 +88,11 @@ public sealed class CMGunSystem : EntitySystem
         var useDelay = EnsureComp<UseDelayComponent>(ent);
         _useDelay.SetLength((ent, useDelay), remaining, ent.Comp.DelayId);
         _useDelay.TryResetDelay((ent, useDelay), false, ent.Comp.DelayId);
+    }
+
+    private void OnGunDelayHandSelected(Entity<GunDelayOnSelectComponent> ent, ref HandSelectedEvent args)
+    {
+
     }
 
     private void StopProjectile(Entity<ProjectileFixedDistanceComponent> projectile)

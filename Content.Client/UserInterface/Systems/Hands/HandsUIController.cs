@@ -459,7 +459,7 @@ public sealed class HandsUIController : UIController, IOnStateEntered<GameplaySt
                 var delay = _useDelay.GetLastEndingDelay((hand.Entity.Value, useDelay));
 
                 hand.CooldownDisplay.Visible = true;
-                hand.CooldownDisplay.FromTime(delay!.StartTime, delay.EndTime);
+                hand.CooldownDisplay.FromTime(delay.StartTime, delay.EndTime);
             }
         }
     }
