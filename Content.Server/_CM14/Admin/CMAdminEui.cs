@@ -1,4 +1,5 @@
-﻿using Content.Server.Administration;
+﻿using Content.Server._CM14.Rules;
+using Content.Server.Administration;
 using Content.Server.Administration.Managers;
 using Content.Server.EUI;
 using Content.Server.Mind;
@@ -12,6 +13,7 @@ using Content.Shared.Eui;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Server._CM14.Admin;
 
@@ -121,6 +123,10 @@ public sealed class CMAdminEui : BaseEui
 
                 var coordinates = _transform.GetMoverCoordinates(entity);
                 var newXeno = _entities.SpawnAttachedTo(transformXeno.XenoId, coordinates);
+                if (_entities.TryGetComponent(entity, out XenoComponent? xeno))
+                    _xeno.SetHive(newXeno, xeno.Hive);
+                else  if (_entities.EntityQuery<CMRuleComponent>().TryFirstOrDefault(out var ruleComponent))
+                    _xeno.SetHive(newXeno, ruleComponent.Hive);
 
                 if (_mind.TryGetMind(entity, out var mindId, out var mind))
                 {
