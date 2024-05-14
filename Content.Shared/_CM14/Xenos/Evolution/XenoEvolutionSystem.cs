@@ -8,6 +8,7 @@ using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Prototypes;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
@@ -174,6 +175,12 @@ public sealed class XenoEvolutionSystem : EntitySystem
             HasLiving<XenoEvolutionCappedComponent>(capped.Max, e => e.Comp.Id == capped.Id))
         {
             _popup.PopupClient($"There already is a living {prototype.Name}!", xeno, xeno, PopupType.MediumCaution);
+            return false;
+        }
+
+        if (!HasLiving<XenoEvolutionGranterComponent>(1) && !prototype.HasComponent<XenoEvolutionGranterComponent>())
+        {
+            _popup.PopupClient("The Hive is shaken by the death of the last Queen. We can't find the strength to evolve.", xeno, xeno, PopupType.MediumCaution);
             return false;
         }
 
