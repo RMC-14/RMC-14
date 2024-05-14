@@ -14,6 +14,9 @@ public sealed partial class XenoEvolutionComponent : Component
     public bool RequiresGranter = true;
 
     [DataField, AutoNetworkedField]
+    public bool CanEvolveWithoutGranter;
+
+    [DataField, AutoNetworkedField]
     public List<EntProtoId> EvolvesTo = new();
 
     [DataField, AutoNetworkedField]

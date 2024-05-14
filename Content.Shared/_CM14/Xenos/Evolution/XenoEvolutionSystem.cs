@@ -8,7 +8,6 @@ using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Prototypes;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
@@ -178,7 +177,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return false;
         }
 
-        if (!HasLiving<XenoEvolutionGranterComponent>(1) && !prototype.HasComponent<XenoEvolutionGranterComponent>())
+        // TODO CM14 only allow evolving towards Queen if none is alive
+        if (!xeno.Comp.CanEvolveWithoutGranter && !HasLiving<XenoEvolutionGranterComponent>(1))
         {
             _popup.PopupClient("The Hive is shaken by the death of the last Queen. We can't find the strength to evolve.", xeno, xeno, PopupType.MediumCaution);
             return false;

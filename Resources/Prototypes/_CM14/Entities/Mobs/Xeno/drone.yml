@@ -49,6 +49,7 @@
     - HiveCoreXenoConstructionNode
   - type: XenoDevour
   - type: XenoEvolution
+    canEvolveWithoutGranter: true
     max: 300
     evolvesTo: # TODO CM14 Queen
 #    - CMXenoCarrier

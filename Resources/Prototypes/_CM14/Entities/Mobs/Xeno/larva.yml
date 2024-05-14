@@ -28,6 +28,7 @@
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1
   - type: XenoEvolution
+    canEvolveWithoutGranter: true
     requiresGranter: false
     max: 60
     evolvesTo:
