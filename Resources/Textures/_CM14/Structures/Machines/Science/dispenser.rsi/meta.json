@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/80da71e3cab8bb1ba03cea07cd4f5c57fd71b7f3/icons/obj/structures/machinery/science_machines.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base"
+    },
+    {
+      "name": "onlight"
+    },
+    {
+      "name": "beaker0"
+    },
+    {
+      "name": "beaker1"
+    },
+    {
+      "name": "beaker2"
+    },
+    {
+      "name": "beaker3"
+    },
+    {
+      "name": "beaker4"
+    }
+  ]
+}
