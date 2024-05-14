@@ -1,9 +1,10 @@
 ﻿using System.Numerics;
-using Content.Shared._CM14.Marines;
 using Content.Shared.ActionBlocker;
 using Content.Shared.DoAfter;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Pulling.Systems;
@@ -20,13 +21,14 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Xenos.Leap;
 
-public sealed class SharedXenoLeapSystem : EntitySystem
+public sealed class XenoLeapSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly BlindableSystem _blindable = default!;
     [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -34,13 +36,12 @@ public sealed class SharedXenoLeapSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
-    private EntityQuery<MarineComponent> _marineQuery;
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
     public override void Initialize()
     {
-        _marineQuery = GetEntityQuery<MarineComponent>();
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
 
         SubscribeLocalEvent<XenoLeapComponent, XenoLeapActionEvent>(OnXenoLeapAction);
@@ -113,22 +114,24 @@ public sealed class SharedXenoLeapSystem : EntitySystem
 
     private void OnXenoLeapingDoHit(Entity<XenoLeapingComponent> xeno, ref StartCollideEvent args)
     {
-        var marineId = args.OtherEntity;
-
-        if (!_marineQuery.TryGetComponent(marineId, out var marine))
-            return;
-
-        if (HasComp<LeapIncapacitatedComponent>(marineId))
-            return;
-
+        var other = args.OtherEntity;
         if (xeno.Comp.KnockedDown)
+            return;
+
+        if (!HasComp<MobStateComponent>(other) || _mobState.IsIncapacitated(other))
+            return;
+
+        if (_xeno.FromSameHive(xeno.Owner, other))
+        {
+            StopLeap(xeno);
+            return;
+        }
+
+        if (EnsureComp<LeapIncapacitatedComponent>(other, out var victim))
             return;
 
         xeno.Comp.KnockedDown = true;
         Dirty(xeno);
-
-        if (EnsureComp<LeapIncapacitatedComponent>(marineId, out var victim))
-            return;
 
         if (_physicsQuery.TryGetComponent(xeno, out var physics))
         {
@@ -140,11 +143,15 @@ public sealed class SharedXenoLeapSystem : EntitySystem
 
         victim.RecoverAt = _timing.CurTime + xeno.Comp.ParalyzeTime;
 
-        _stun.TryParalyze(marineId, xeno.Comp.ParalyzeTime, true);
+        if (_net.IsServer)
+            _stun.TryParalyze(other, xeno.Comp.ParalyzeTime, true);
+
         _audio.PlayPredicted(xeno.Comp.HitSound, xeno, xeno);
 
-        var ev = new XenoLeapHitEvent(xeno, (marineId, marine));
+        var ev = new XenoLeapHitEvent(xeno, other);
         RaiseLocalEvent(xeno, ref ev);
+
+        StopLeap(xeno);
     }
 
     private void OnXenoLeapingRemove(Entity<XenoLeapingComponent> ent, ref ComponentRemove args)
@@ -174,6 +181,8 @@ public sealed class SharedXenoLeapSystem : EntitySystem
             _physics.SetLinearVelocity(leaping, Vector2.Zero, body: physics);
             _physics.SetBodyStatus(leaping, physics, BodyStatus.OnGround);
         }
+
+        RemCompDeferred<XenoLeapingComponent>(leaping);
     }
 
     public override void Update(float frameTime)
@@ -186,7 +195,6 @@ public sealed class SharedXenoLeapSystem : EntitySystem
                 continue;
 
             StopLeap((uid, comp));
-            RemCompDeferred<XenoLeapingComponent>(uid);
         }
 
         if (_net.IsClient)
