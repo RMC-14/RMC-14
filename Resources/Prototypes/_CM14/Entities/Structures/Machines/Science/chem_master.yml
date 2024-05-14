@@ -1,0 +1,18 @@
+- type: entity
+  parent: chem_master # TODO CM14, replace with ChemMaster after
+  id: CMChemMaster
+  name: ChemMaster 3000
+  description: An industrial grade chemical manipulator with pill and bottle production included.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/Science/chem_master.rsi
+    layers:
+    - state: mixer_empty
+    - state: mixer_screen
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Icon
+    sprite: _CM14/Structures/Machines/Science/chem_master.rsi
+    state: mixer_loaded
+  - type: Machine
+    board: CMCircuitboardChemMaster
