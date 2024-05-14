@@ -29,7 +29,6 @@
     #    - ActionXenoPounce
     #    - ActionXenoInvisibility
     #    - ActionXenoCripplingStrike
-    - ActionXenoEvolve540
     tier: 2
     hudOffset: 0,0.16
   - type: XenoDevour
@@ -40,6 +39,7 @@
   - type: CMArmor
     explosionArmor: 20
   - type: XenoEvolution
+    max: 540
 #    evolvesTo:
 #    - CMXenoRavager
   - type: MeleeWeapon

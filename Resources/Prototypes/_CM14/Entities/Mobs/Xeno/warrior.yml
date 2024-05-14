@@ -29,7 +29,6 @@
     #    - ActionXenoPunch
     #    - ActionXenoLunge
     #    - ActionXenoFling
-    - ActionXenoEvolve540
     tier: 2
     hudOffset: 0,0.25
   - type: XenoDevour
@@ -38,6 +37,7 @@
     maxPlasma: 0
     plasmaRegenOnWeeds: 0
   - type: XenoEvolution
+    max: 540
 #    evolvesTo:
 #    - CMXenoCrusher
 #    - CMXenoPraetorian

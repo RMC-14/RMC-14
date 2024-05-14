@@ -3,10 +3,12 @@ using Content.Shared.Climbing.Components;
 using Content.Shared.Climbing.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
+using Content.Shared.FixedPoint;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
@@ -17,6 +19,7 @@ namespace Content.Shared._CM14.Xenos.Evolution;
 public sealed class XenoEvolutionSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _action = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly ClimbSystem _climb = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -37,8 +40,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<XenoEvolveActionComponent> _xenoEvolveActionQuery;
-
-    private readonly TimeSpan _cooldownThreshold = TimeSpan.FromSeconds(0.2);
 
     public override void Initialize()
     {
@@ -170,7 +171,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         // TODO CM14 revive jelly when added should not bring back dead queens
         if (prototype.TryGetComponent(out XenoEvolutionCappedComponent? capped, _compFactory) &&
-            HasAlive<XenoEvolutionCappedComponent>(capped.Max, e => e.Comp.Id == capped.Id))
+            HasLiving<XenoEvolutionCappedComponent>(capped.Max, e => e.Comp.Id == capped.Id))
         {
             _popup.PopupClient($"There already is a living {prototype.Name}!", xeno, xeno, PopupType.MediumCaution);
             return false;
@@ -179,7 +180,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return true;
     }
 
-    private bool HasAlive<T>(int count, Predicate<Entity<T>>? predicate = null) where T : IComponent
+    private bool HasLiving<T>(int count, Predicate<Entity<T>>? predicate = null) where T : IComponent
     {
         if (count <= 0)
             return true;
@@ -246,56 +247,42 @@ public sealed class XenoEvolutionSystem : EntitySystem
             }
         }
 
+        if (_net.IsClient)
+            return;
+
         // TODO CM14 ovipositor attached only after 5 minutes
-        var hasGranter = HasAlive<XenoEvolutionGranterComponent>(1);
-        var add = TimeSpan.FromSeconds(frameTime);
-        if (!hasGranter && _net.IsServer)
+        var time = _timing.CurTime;
+        var hasGranter = HasLiving<XenoEvolutionGranterComponent>(1);
+        var evolution = EntityQueryEnumerator<XenoEvolutionComponent>();
+        while (evolution.MoveNext(out var uid, out var comp))
         {
-            var evolution = EntityQueryEnumerator<XenoEvolutionComponent>();
-            while (evolution.MoveNext(out var xeno, out var comp))
+            if (comp.Action != null)
+                continue;
+
+            if (time < comp.LastPointsAt + TimeSpan.FromSeconds(1))
+                continue;
+
+            comp.LastPointsAt = time;
+            Dirty(uid, comp);
+
+            if (comp.Points >= comp.Max && comp.Action == null)
             {
-                if (!comp.RequiresGranter)
+                _action.AddAction(uid, ref comp.Action, comp.ActionId);
+                _popup.PopupEntity("Our carapace crackles and our tendons strengthen. We are ready to evolve!", uid, uid, PopupType.Large);
+                _audio.PlayEntity(comp.EvolutionReadySound, uid, uid);
+                continue;
+            }
+
+            if (comp.Points < comp.Max)
+            {
+                if (comp.RequiresGranter && !hasGranter)
                     continue;
 
-                if (_mobStateQuery.TryComp(xeno, out var mobState) &&
-                    _mobState.IsDead(xeno, mobState))
-                {
-                    continue;
-                }
-
-                for (var i = comp.EvolutionActions.Count - 1; i >= 0; i--)
-                {
-                    var action = comp.EvolutionActions[i];
-                    if (!_action.TryGetActionData(action, out var actionComp) ||
-                        !_xenoEvolveActionQuery.TryComp(action, out var evolveAction))
-                    {
-                        comp.EvolutionActions.RemoveAt(i);
-                        continue;
-                    }
-
-                    if (actionComp.Cooldown is not { } cooldown)
-                    {
-                        if (evolveAction.CooldownAccumulated != TimeSpan.Zero)
-                        {
-                            evolveAction.CooldownAccumulated = TimeSpan.Zero;
-                            Dirty(action, evolveAction);
-                        }
-
-                        continue;
-                    }
-
-                    // this is a very convoluted way of not calling dirty every tick
-                    // as to not kill the server
-                    evolveAction.CooldownAccumulated += add;
-                    if (evolveAction.CooldownAccumulated >= _cooldownThreshold)
-                    {
-                        var accumulated = evolveAction.CooldownAccumulated;
-                        evolveAction.CooldownAccumulated = TimeSpan.Zero;
-                        Dirty(action, evolveAction);
-
-                        _action.SetCooldown(action, cooldown.Start + accumulated, cooldown.End + accumulated);
-                    }
-                }
+                comp.Points = FixedPoint2.Min(comp.Points + comp.PointsPerSecond, comp.Max);
+            }
+            else if (comp.Points > comp.Max)
+            {
+                comp.Points = FixedPoint2.Max(comp.Points - comp.PointsPerSecond, comp.Max);
             }
         }
     }

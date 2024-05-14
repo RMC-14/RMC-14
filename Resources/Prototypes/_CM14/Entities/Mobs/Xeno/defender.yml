@@ -29,10 +29,10 @@
     - ActionXenoHeadbutt
     - ActionXenoTailSweep
     - ActionXenoFortify
-    - ActionXenoEvolve300
     tier: 1
     hudOffset: 0,0.2
   - type: XenoEvolution
+    max: 300
 #    evolvesTo:
 #    - CMXenoWarrior
   - type: XenoPlasma

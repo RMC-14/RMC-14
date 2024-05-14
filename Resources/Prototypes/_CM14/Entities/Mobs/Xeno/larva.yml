@@ -22,7 +22,6 @@
     - ActionXenoRest
     - ActionXenoWatch
     - ActionXenoHide
-    - ActionXenoEvolve60
     hudOffset: -0.1,0.125
     tier: 0
   - type: XenoPlasma
@@ -30,6 +29,7 @@
     plasmaRegenOnWeeds: 0.1
   - type: XenoEvolution
     requiresGranter: false
+    max: 60
     evolvesTo:
     - CMXenoDrone
     - CMXenoDefender

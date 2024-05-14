@@ -42,7 +42,6 @@
     - ActionXenoLeap # TODO CM14 call this pounce, not leap
     - ActionXenoBoneChips
     - ActionXenoZoom
-    - ActionXenoEvolve300
     tier: 1
     hudOffset: 0,0.63
   - type: XenoBoneChips
@@ -59,6 +58,7 @@
   - type: CMArmor
     explosionArmor: 10
   - type: XenoEvolution
+    max: 300
 #    evolvesTo:
 #    - CMXenoLurker
   - type: XenoZoom

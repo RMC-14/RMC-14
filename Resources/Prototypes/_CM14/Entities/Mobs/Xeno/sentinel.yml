@@ -29,7 +29,6 @@
     - ActionXenoSlowingSpit
     - ActionXenoScatteredSpit
     - ActionXenoParalyzingSlash
-    - ActionXenoEvolve300
     tier: 1
     hudOffset: 0,0.157
   - type: XenoDevour
@@ -40,6 +39,7 @@
   - type: CMArmor
     explosionArmor: 10
   - type: XenoEvolution
+    max: 300
 #    evolvesTo:
 #    - CMXenoSpitter
   - type: XenoParalyzingSlash

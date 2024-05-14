@@ -29,7 +29,6 @@
     #    - ActionXenoSpit
     #    - ActionXenoChargeSpit
     #    - ActionXenoSprayAcid
-    - ActionXenoEvolve540
     tier: 2
     hudOffset: 0,0.16
   - type: XenoAcid
@@ -39,6 +38,7 @@
     maxPlasma: 600
     plasmaRegenOnWeeds: 4
   - type: XenoEvolution
+    max: 540
 #    evolvesTo:
 #    - CMXenoPraetorian
 #    - CMXenoBoiler
