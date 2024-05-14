@@ -1,5 +1,5 @@
-using Robust.Shared.Serialization;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.RadioJammer;
 
@@ -11,7 +11,7 @@ namespace Content.Shared.RadioJammer;
 public sealed partial class RadioJammerComponent : Component
 {
     [DataDefinition]
-    public partial struct RadioJamSetting
+    public partial struct RadioJamSetting()
     {
         /// <summary>
         /// Power usage per second when enabled.
@@ -26,7 +26,7 @@ public sealed partial class RadioJammerComponent : Component
         public float Range;
 
         /// <summary>
-        /// The message that is displayed when switched 
+        /// The message that is displayed when switched
         /// to this setting.
         /// </summary>
         [DataField(required: true)]

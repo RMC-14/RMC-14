@@ -7,7 +7,6 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Projectiles;
 using Content.Shared.Stunnable;
 using Robust.Shared.Network;
-using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
@@ -21,14 +20,13 @@ public sealed class XenoSpitSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedXenoProjectileSystem _xenoProjectile = default!;
+    [Dependency] private readonly XenoProjectileSystem _xenoProjectile = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoSlowingSpitComponent, XenoSlowingSpitActionEvent>(OnXenoSlowingSpitAction);
         SubscribeLocalEvent<XenoScatteredSpitComponent, XenoScatteredSpitActionEvent>(OnXenoScatteredSpitAction);
 
-        SubscribeLocalEvent<XenoSlowingSpitProjectileComponent, PreventCollideEvent>(OnXenoSlowingSpitPreventCollide);
         SubscribeLocalEvent<XenoSlowingSpitProjectileComponent, ProjectileHitEvent>(OnXenoSlowingSpitHit);
 
         SubscribeLocalEvent<SlowedBySpitComponent, RefreshMovementSpeedModifiersEvent>(OnSlowedBySpitRefreshMovement);
@@ -72,18 +70,17 @@ public sealed class XenoSpitSystem : EntitySystem
         );
     }
 
-    private void OnXenoSlowingSpitPreventCollide(Entity<XenoSlowingSpitProjectileComponent> spit, ref PreventCollideEvent args)
-    {
-        if (HasComp<XenoComponent>(args.OtherEntity))
-            args.Cancelled = true;
-    }
-
     private void OnXenoSlowingSpitHit(Entity<XenoSlowingSpitProjectileComponent> spit, ref ProjectileHitEvent args)
     {
         if (_net.IsClient)
             return;
 
         var target = args.Target;
+        if (_xenoProjectile.SameHive(spit.Owner, target))
+        {
+            QueueDel(spit);
+            return;
+        }
 
         if (spit.Comp.Slow > TimeSpan.Zero)
         {
