@@ -21,6 +21,13 @@
     - !type:HTNCompoundTask
       task: MeleeAttackTargetCompound
 
+- type: nameIdentifierGroup
+  id: CMXeno
+  fullName: false
+  prefix: XX
+  minValue: 1
+  maxValue: 999
+
 - type: entity
   id: CMXenoBase
   abstract: true
@@ -69,7 +76,7 @@
     baseSprintSpeed: 4
   - type: Climbing
   - type: NameIdentifier
-    group: GenericNumber
+    group: CMXeno
   - type: Insulated
   - type: Input
     context: "human"
