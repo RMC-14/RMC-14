@@ -80,7 +80,7 @@ namespace Content.Server.Construction
                 }
             }
 
-            var pos = Transform(user).MapPosition;
+            var pos = _transformSystem.GetMapCoordinates(user);
 
             foreach (var near in _lookupSystem.GetEntitiesInRange(pos, 2f, LookupFlags.Contained | LookupFlags.Dynamic | LookupFlags.Sundries | LookupFlags.Approximate))
             {
