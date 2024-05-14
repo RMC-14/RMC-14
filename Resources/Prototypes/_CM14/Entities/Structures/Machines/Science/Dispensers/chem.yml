@@ -6,8 +6,19 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Machines/Science/dispenser.rsi
-    state: base
+    layers:
+    - state: base
+    - state: onlight
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
     snapCardinals: true
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
   - type: ReagentDispenser
     storageWhitelist:
       tags:
