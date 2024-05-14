@@ -47,6 +47,7 @@ public sealed class XenoSystem : EntitySystem
     private EntityQuery<DamageableComponent> _damageableQuery;
     private EntityQuery<MarineComponent> _marineQuery;
     private EntityQuery<MobStateComponent> _mobStateQuery;
+    private EntityQuery<MobThresholdsComponent> _mobThresholdsQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
     private EntityQuery<XenoRecoveryPheromonesComponent> _xenoRecoveryQuery;
@@ -58,6 +59,7 @@ public sealed class XenoSystem : EntitySystem
         _damageableQuery = GetEntityQuery<DamageableComponent>();
         _marineQuery = GetEntityQuery<MarineComponent>();
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
+        _mobThresholdsQuery = GetEntityQuery<MobThresholdsComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
         _xenoPlasmaQuery = GetEntityQuery<XenoPlasmaComponent>();
         _xenoRecoveryQuery = GetEntityQuery<XenoRecoveryPheromonesComponent>();
@@ -189,8 +191,11 @@ public sealed class XenoSystem : EntitySystem
 
     private FixedPoint2 GetWeedsHealAmount(Entity<XenoComponent> xeno)
     {
-        if (!_mobThresholds.TryGetIncapThreshold(xeno, out var threshold))
+        if (!_mobThresholdsQuery.TryComp(xeno, out var thresholds) ||
+            !_mobThresholds.TryGetIncapThreshold(xeno, out var threshold, thresholds))
+        {
             return FixedPoint2.Zero;
+        }
 
         FixedPoint2 multiplier;
         if (_mobState.IsCritical(xeno))
