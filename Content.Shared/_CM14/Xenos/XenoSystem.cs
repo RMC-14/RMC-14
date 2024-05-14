@@ -275,6 +275,17 @@ public sealed class XenoSystem : EntitySystem
         return _marineQuery.HasComponent(defender);
     }
 
+    public bool FromSameHive(Entity<XenoComponent?> xenoOne, Entity<XenoComponent?> xenoTwo)
+    {
+        if (!Resolve(xenoOne, ref xenoOne.Comp, false) ||
+            !Resolve(xenoTwo, ref xenoTwo.Comp, false))
+        {
+            return false;
+        }
+
+        return xenoOne.Comp.Hive == xenoTwo.Comp.Hive;
+    }
+
     public override void Update(float frameTime)
     {
         var query = EntityQueryEnumerator<XenoComponent>();

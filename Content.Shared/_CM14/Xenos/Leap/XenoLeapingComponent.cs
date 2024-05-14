@@ -6,7 +6,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._CM14.Xenos.Leap;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(SharedXenoLeapSystem))]
+[Access(typeof(XenoLeapSystem))]
 public sealed partial class XenoLeapingComponent : Component
 {
     [DataField, AutoNetworkedField]
