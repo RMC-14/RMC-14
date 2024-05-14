@@ -6,3 +6,4 @@
   components:
   - type: Item
   - type: VirtualItem
+  - type: CMVirtualItem
