@@ -1,4 +1,5 @@
-﻿using Content.Shared.Actions;
+﻿using Content.Shared._CM14.Xenos.Hive;
+using Content.Shared.Actions;
 using Content.Shared.Climbing.Components;
 using Content.Shared.Climbing.Systems;
 using Content.Shared.DoAfter;
@@ -89,6 +90,11 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private void OnXenoEvolveBui(Entity<XenoEvolutionComponent> xeno, ref XenoEvolveBuiMsg args)
     {
         var actor = args.Actor;
+        _ui.CloseUi(xeno.Owner, XenoEvolutionUIKey.Key, actor);
+
+        if (_net.IsClient)
+            return;
+
         if (!CanEvolvePopup(xeno, args.Choice))
         {
             Log.Warning($"{ToPrettyString(actor)} sent an invalid evolution choice: {args.Choice}.");
@@ -102,7 +108,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("cm-xeno-evolution-start"), xeno, xeno);
 
         _doAfter.TryStartDoAfter(doAfter);
-        _ui.CloseUi(xeno.Owner, XenoEvolutionUIKey.Key, actor);
     }
 
     private void OnXenoEvolveDoAfter(Entity<XenoEvolutionComponent> xeno, ref XenoEvolutionDoAfterEvent args)
@@ -173,15 +178,52 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (prototype.TryGetComponent(out XenoEvolutionCappedComponent? capped, _compFactory) &&
             HasLiving<XenoEvolutionCappedComponent>(capped.Max, e => e.Comp.Id == capped.Id))
         {
-            _popup.PopupClient($"There already is a living {prototype.Name}!", xeno, xeno, PopupType.MediumCaution);
+            _popup.PopupEntity($"There already is a living {prototype.Name}!", xeno, xeno, PopupType.MediumCaution);
             return false;
         }
 
         // TODO CM14 only allow evolving towards Queen if none is alive
         if (!xeno.Comp.CanEvolveWithoutGranter && !HasLiving<XenoEvolutionGranterComponent>(1))
         {
-            _popup.PopupClient("The Hive is shaken by the death of the last Queen. We can't find the strength to evolve.", xeno, xeno, PopupType.MediumCaution);
+            _popup.PopupEntity(
+                "The Hive is shaken by the death of the last Queen. We can't find the strength to evolve.",
+                xeno,
+                xeno,
+                PopupType.MediumCaution);
             return false;
+        }
+
+        if (prototype.TryGetComponent(out XenoComponent? newXenoComp, _compFactory) &&
+            !newXenoComp.BypassTierCount &&
+            TryComp(xeno, out XenoComponent? oldXenoComp) &&
+            TryComp(oldXenoComp.Hive, out HiveComponent? hive) &&
+            hive.TierLimits.TryGetValue(newXenoComp.Tier, out var value))
+        {
+            var existing = 0;
+            var total = 0;
+            var current = EntityQueryEnumerator<XenoComponent>();
+            while (current.MoveNext(out var existingComp))
+            {
+                if (existingComp.Hive != oldXenoComp.Hive)
+                    continue;
+
+                total++;
+
+                if (existingComp.Tier < newXenoComp.Tier)
+                    continue;
+
+                existing++;
+            }
+
+            if (total != 0 && existing / (float) total >= value)
+            {
+                _popup.PopupEntity(
+                    $"The hive cannot support another Tier {newXenoComp.Tier}, wait for either more aliens to be born or someone to die.",
+                    xeno,
+                    xeno,
+                    PopupType.MediumCaution);
+                return false;
+            }
         }
 
         return true;

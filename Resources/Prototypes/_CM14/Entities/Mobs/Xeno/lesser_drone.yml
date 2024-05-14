@@ -32,6 +32,7 @@
     tier: 0
     hudOffset: -0.15,-0.03
     contributesToVictory: false
+    countedInSlots: false
   - type: XenoAcid
   - type: XenoConstruction
     buildDelay: 4

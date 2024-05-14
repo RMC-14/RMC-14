@@ -55,4 +55,10 @@ public sealed partial class XenoComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool ContributesToVictory = true;
+
+    [DataField, AutoNetworkedField]
+    public bool CountedInSlots = true;
+
+    [DataField, AutoNetworkedField]
+    public bool BypassTierCount;
 }
