@@ -70,5 +70,5 @@ public sealed partial class VictimHuggedComponent : Component
     public bool RootsCut;
 
     [DataField, AutoNetworkedField]
-    public EntityUid Hive;
+    public EntityUid? Hive;
 }
