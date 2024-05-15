@@ -313,17 +313,21 @@ public sealed class XenoDevourSystem : EntitySystem
         return StartDevour(xeno, pulling);
     }
 
-    private void Regurgitate(Entity<DevouredComponent> devoured, Entity<XenoDevourComponent?> xeno)
+    private bool Regurgitate(Entity<DevouredComponent> devoured, Entity<XenoDevourComponent?> xeno, bool doFeedback = true)
     {
         if (!Resolve(xeno, ref xeno.Comp))
-            return;
+            return true;
 
-        if (!_container.TryGetContainer(xeno, xeno.Comp.DevourContainerId, out var container))
-            return;
+        if (!_container.TryGetContainer(xeno, xeno.Comp.DevourContainerId, out var container) ||
+            !_container.Remove(devoured.Owner, container))
+        {
+            return true;
+        }
 
-        _container.Remove(devoured.Owner, container);
-        _popup.PopupClient("We hurl out the contents of our stomach!", xeno, xeno, PopupType.MediumCaution);
-        _audio.PlayPredicted(xeno.Comp.RegurgitateSound, xeno, xeno);
+        if (doFeedback)
+            DoFeedback((xeno, xeno.Comp));
+
+        return false;
     }
 
     private void RegurgitateAll(Entity<XenoDevourComponent> xeno)
@@ -331,11 +335,24 @@ public sealed class XenoDevourSystem : EntitySystem
         if (!_container.TryGetContainer(xeno, xeno.Comp.DevourContainerId, out var container))
             return;
 
+        var any = false;
         foreach (var contained in container.ContainedEntities)
         {
-            if (TryComp(contained, out DevouredComponent? devoured))
-                Regurgitate((contained, devoured), (xeno, xeno));
+            if (TryComp(contained, out DevouredComponent? devoured) &&
+                Regurgitate((contained, devoured), (xeno, xeno), false))
+            {
+                any = true;
+            }
         }
+
+        if (any)
+            DoFeedback(xeno);
+    }
+
+    private void DoFeedback(Entity<XenoDevourComponent> xeno)
+    {
+        _popup.PopupClient("We hurl out the contents of our stomach!", xeno, xeno, PopupType.MediumCaution);
+        _audio.PlayPredicted(xeno.Comp.RegurgitateSound, xeno, xeno);
     }
 
     public override void Update(float frameTime)
@@ -368,8 +385,8 @@ public sealed class XenoDevourSystem : EntitySystem
 
             if (time >= comp.RegurgitateAt)
             {
-                Regurgitate((uid, comp), (xeno, devour));
-                _popup.PopupClient("We hurl out the contents of our stomach!", xeno, xeno, PopupType.MediumCaution);
+                if (Regurgitate((uid, comp), (xeno, devour)))
+                    _popup.PopupClient("We hurl out the contents of our stomach!", xeno, xeno, PopupType.MediumCaution);
             }
         }
     }
