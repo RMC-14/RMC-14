@@ -31,6 +31,7 @@
     sprite: _CM14/Objects/Weapons/Melee/m5_bayonet.rsi
   - type: DisarmMalus
     malus: 0.225
+  - type: CanUseWhileDevoured
 
 - type: entity
   name: M11 throwing knife
