@@ -1,24 +1,21 @@
-﻿using Content.Server.Chat.Managers;
-using Content.Server.Shuttles.Components;
+﻿using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
 using Content.Shared._CM14.Dropship;
-using Content.Shared._CM14.Xenos;
-using Content.Shared.Chat;
+using Content.Shared._CM14.Xenos.Announce;
 using Content.Shared.Interaction;
 using Content.Shared.Shuttles.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Player;
 
 namespace Content.Server._CM14.Dropship;
 
 public sealed class DropshipSystem : SharedDropshipSystem
 {
-    [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly ShuttleSystem _shuttle = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
 
     public override void Initialize()
     {
@@ -103,15 +100,10 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         _shuttle.FTLToCoordinates(shuttle.Value, shuttleComp, destCoords, rotation);
 
-        if (hijack && CompOrNull<XenoComponent>(user)?.Hive is { } hive)
+        if (hijack)
         {
-            var xenos = Filter
-                .Empty()
-                .AddWhereAttachedEntity(ent => CompOrNull<XenoComponent>(ent)?.Hive == hive);
             var text = "The Queen has commanded the metal bird to depart for the metal hive in the sky! Rejoice!";
-            var wrapped = $"[color=#921992][font size=16][bold]{text}[/bold][/font][/color]";
-
-            _chat.ChatMessageToManyFiltered(xenos, ChatChannel.Radio, text, wrapped, user, false, true, null);
+            _xenoAnnounce.AnnounceSameHive(user, text);
         }
 
         return true;

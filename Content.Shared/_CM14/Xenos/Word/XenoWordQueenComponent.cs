@@ -5,7 +5,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._CM14.Xenos.Word;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedXenoWordQueenSystem))]
+[Access(typeof(XenoWordQueenSystem))]
 public sealed partial class XenoWordQueenComponent : Component
 {
     [DataField, AutoNetworkedField]
