@@ -56,7 +56,7 @@
     plasma: 0
     maxPlasma: 0
     plasmaRegenOnWeeds: 0
-  - type: XenoArmor
+  - type: CMArmor
     explosionArmor: 10
   - type: XenoEvolution
 #    evolvesTo:

@@ -34,6 +34,7 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     public override void Initialize()
     {
@@ -265,7 +266,10 @@ public sealed class XenoEggSystem : EntitySystem
             return true;
 
         if (TryComp(egg, out TransformComponent? xform))
+        {
             spawned = SpawnAtPosition(egg.Comp.Spawn, xform.Coordinates);
+            _xeno.SetHive(spawned.Value, egg.Comp.Hive);
+        }
 
         return true;
     }
@@ -310,6 +314,13 @@ public sealed class XenoEggSystem : EntitySystem
             Dirty(uid, attached);
 
             var egg = SpawnAtPosition(capable.Spawn, xform.Coordinates.Offset(capable.Offset));
+            if (TryComp(egg, out XenoEggComponent? eggComp) &&
+                TryComp(uid, out XenoComponent? xeno))
+            {
+                eggComp.Hive = xeno.Hive;
+                Dirty(egg, eggComp);
+            }
+
             _transform.SetLocalRotation(egg, Angle.Zero);
         }
 

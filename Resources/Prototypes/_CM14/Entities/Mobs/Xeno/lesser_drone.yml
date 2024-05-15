@@ -31,6 +31,7 @@
     # evasion: 10
     tier: 0
     hudOffset: -0.15,-0.03
+    contributesToVictory: false
   - type: XenoAcid
   - type: XenoConstruction
     buildDelay: 4

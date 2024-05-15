@@ -1,9 +1,14 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Content.Shared._CM14.Inventory;
 using Content.Shared.Buckle.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Interaction;
+using Content.Shared.Inventory.VirtualItem;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Robust.Shared.Audio.Systems;
@@ -28,14 +33,20 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<DevourableComponent, CanDropDraggedEvent>(OnDevourableCanDropDragged);
         SubscribeLocalEvent<DevourableComponent, DragDropDraggedEvent>(OnDevourableDragDropDragged);
 
+        SubscribeLocalEvent<CMVirtualItemComponent, BeforeRangedInteractEvent>(OnXenoInteractBeforeRangedInteract,
+            before: [typeof(SharedVirtualItemSystem)]);
+
         SubscribeLocalEvent<DevouredComponent, EntGotRemovedFromContainerMessage>(OnDevouredRemovedFromContainer);
         SubscribeLocalEvent<DevouredComponent, ComponentRemove>(OnDevouredRemove);
 
         SubscribeLocalEvent<XenoDevourComponent, CanDropTargetEvent>(OnXenoCanDropTarget);
+        SubscribeLocalEvent<XenoDevourComponent, InteractHandEvent>(OnXenoInteractHand);
+        SubscribeLocalEvent<XenoDevourComponent, InteractedNoHandEvent>(OnXenoInteractNoHand);
         SubscribeLocalEvent<XenoDevourComponent, DoAfterAttemptEvent<XenoDevourDoAfterEvent>>(OnXenoDevourDoAfterAttempt);
         SubscribeLocalEvent<XenoDevourComponent, XenoDevourDoAfterEvent>(OnXenoDevourDoAfter);
         SubscribeLocalEvent<XenoDevourComponent, XenoRegurgitateActionEvent>(OnXenoRegurgitateAction);
         SubscribeLocalEvent<XenoDevourComponent, EntityTerminatingEvent>(OnXenoTerminating);
+        SubscribeLocalEvent<XenoDevourComponent, MobStateChangedEvent>(OnXenoMobStateChanged);
     }
 
     private void OnDevourableCanDropDragged(Entity<DevourableComponent> devourable, ref CanDropDraggedEvent args)
@@ -49,14 +60,20 @@ public sealed class XenoDevourSystem : EntitySystem
 
     private void OnDevourableDragDropDragged(Entity<DevourableComponent> devourable, ref DragDropDraggedEvent args)
     {
-        if (args.Target != args.User)
+        if (args.User != args.Target)
             return;
 
-        if (!CanDevour(args.User, devourable, out var devour, true))
+        if (StartDevour(args.User, devourable))
+            args.Handled = true;
+    }
+
+    private void OnXenoInteractBeforeRangedInteract(Entity<CMVirtualItemComponent> devourable, ref BeforeRangedInteractEvent args)
+    {
+        if (args.User != args.Target)
             return;
 
-        StartDevour((args.User, devour), devourable, devour.DevourDelay);
-        args.Handled = true;
+        if (StartDevourPulled(args.User))
+            args.Handled = true;
     }
 
     private void OnDevouredRemovedFromContainer(Entity<DevouredComponent> devoured, ref EntGotRemovedFromContainerMessage args)
@@ -84,6 +101,24 @@ public sealed class XenoDevourSystem : EntitySystem
             args.CanDrop = true;
 
         args.Handled = true;
+    }
+
+    private void OnXenoInteractHand(Entity<XenoDevourComponent> xeno, ref InteractHandEvent args)
+    {
+        if (args.User != args.Target)
+            return;
+
+        if (StartDevourPulled(args.User))
+            args.Handled = true;
+    }
+
+    private void OnXenoInteractNoHand(Entity<XenoDevourComponent> xeno, ref InteractedNoHandEvent args)
+    {
+        if (args.User != args.Target)
+            return;
+
+        if (StartDevourPulled(args.User))
+            args.Handled = true;
     }
 
     private void OnXenoDevourDoAfterAttempt(Entity<XenoDevourComponent> ent, ref DoAfterAttemptEvent<XenoDevourDoAfterEvent> args)
@@ -154,14 +189,15 @@ public sealed class XenoDevourSystem : EntitySystem
         if (_timing.ApplyingState)
             return;
 
-        if (!_container.TryGetContainer(xeno, xeno.Comp.DevourContainerId, out var container))
+        RegurgitateAll(xeno);
+    }
+
+    private void OnXenoMobStateChanged(Entity<XenoDevourComponent> xeno, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState != MobState.Dead)
             return;
 
-        foreach (var contained in container.ContainedEntities)
-        {
-            if (TryComp(contained, out DevouredComponent? devoured))
-                Regurgitate((contained, devoured), (xeno, xeno));
-        }
+        RegurgitateAll(xeno);
     }
 
     private bool CanDevour(EntityUid xeno, EntityUid victim, [NotNullWhen(true)] out XenoDevourComponent? devour, bool popup = false)
@@ -169,7 +205,8 @@ public sealed class XenoDevourSystem : EntitySystem
         devour = default;
         if (xeno == victim ||
             !TryComp(xeno, out devour) ||
-            HasComp<DevouredComponent>(victim))
+            HasComp<DevouredComponent>(victim) ||
+            !HasComp<DevourableComponent>(victim))
         {
             return false;
         }
@@ -182,7 +219,7 @@ public sealed class XenoDevourSystem : EntitySystem
             return false;
         }
 
-        if (HasComp<XenoComponent>(victim) || !HasComp<DevourableComponent>(victim))
+        if (HasComp<XenoComponent>(victim))
         {
             if (popup)
                 _popup.PopupClient("That wouldn't taste very good.", victim, xeno);
@@ -236,9 +273,12 @@ public sealed class XenoDevourSystem : EntitySystem
         return true;
     }
 
-    private void StartDevour(Entity<XenoDevourComponent> xeno, Entity<DevourableComponent> target, TimeSpan delay)
+    private bool StartDevour(EntityUid xeno, EntityUid target)
     {
-        var doAfter = new DoAfterArgs(EntityManager, xeno, delay, new XenoDevourDoAfterEvent(), xeno, target)
+        if (!CanDevour(xeno, target, out var devour, true))
+            return false;
+
+        var doAfter = new DoAfterArgs(EntityManager, xeno, devour.DevourDelay, new XenoDevourDoAfterEvent(), xeno, target)
         {
             BreakOnMove = true,
             AttemptFrequency = AttemptFrequency.EveryTick
@@ -262,17 +302,55 @@ public sealed class XenoDevourSystem : EntitySystem
         }
 
         _doAfter.TryStartDoAfter(doAfter);
+        return true;
     }
 
-    private void Regurgitate(Entity<DevouredComponent> devoured, Entity<XenoDevourComponent?> xeno)
+    private bool StartDevourPulled(EntityUid xeno)
+    {
+        if (CompOrNull<PullerComponent>(xeno)?.Pulling is not { } pulling)
+            return false;
+
+        return StartDevour(xeno, pulling);
+    }
+
+    private bool Regurgitate(Entity<DevouredComponent> devoured, Entity<XenoDevourComponent?> xeno, bool doFeedback = true)
     {
         if (!Resolve(xeno, ref xeno.Comp))
-            return;
+            return true;
 
+        if (!_container.TryGetContainer(xeno, xeno.Comp.DevourContainerId, out var container) ||
+            !_container.Remove(devoured.Owner, container))
+        {
+            return true;
+        }
+
+        if (doFeedback)
+            DoFeedback((xeno, xeno.Comp));
+
+        return false;
+    }
+
+    private void RegurgitateAll(Entity<XenoDevourComponent> xeno)
+    {
         if (!_container.TryGetContainer(xeno, xeno.Comp.DevourContainerId, out var container))
             return;
 
-        _container.Remove(devoured.Owner, container);
+        var any = false;
+        foreach (var contained in container.ContainedEntities)
+        {
+            if (TryComp(contained, out DevouredComponent? devoured) &&
+                Regurgitate((contained, devoured), (xeno, xeno), false))
+            {
+                any = true;
+            }
+        }
+
+        if (any)
+            DoFeedback(xeno);
+    }
+
+    private void DoFeedback(Entity<XenoDevourComponent> xeno)
+    {
         _popup.PopupClient("We hurl out the contents of our stomach!", xeno, xeno, PopupType.MediumCaution);
         _audio.PlayPredicted(xeno.Comp.RegurgitateSound, xeno, xeno);
     }
@@ -307,8 +385,8 @@ public sealed class XenoDevourSystem : EntitySystem
 
             if (time >= comp.RegurgitateAt)
             {
-                Regurgitate((uid, comp), (xeno, devour));
-                _popup.PopupClient("We hurl out the contents of our stomach!", xeno, xeno, PopupType.MediumCaution);
+                if (Regurgitate((uid, comp), (xeno, devour)))
+                    _popup.PopupClient("We hurl out the contents of our stomach!", xeno, xeno, PopupType.MediumCaution);
             }
         }
     }

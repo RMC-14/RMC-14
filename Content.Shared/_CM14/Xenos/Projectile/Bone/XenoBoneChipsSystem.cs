@@ -7,7 +7,7 @@ namespace Content.Shared._CM14.Xenos.Projectile.Bone;
 public sealed class XenoBoneChipsSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedXenoProjectileSystem _xenoProjectile = default!;
+    [Dependency] private readonly XenoProjectileSystem _xenoProjectile = default!;
 
     public override void Initialize()
     {

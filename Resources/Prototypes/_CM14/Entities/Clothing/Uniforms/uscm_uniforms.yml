@@ -5,27 +5,29 @@
   name: USCM uniform
   description: Standard-issue Marine uniform. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/Marine/standard.rsi
-      state: null
-      layers:
-        - state: icon
-        - map: [ "enum.WebbingVisualLayers.Base" ]
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/Marine/standard.rsi
-    - type: SuitSensor
-      controlsLocked: true
-      randomMode: false
-      mode: SensorCords
-    - type: Tag
-      tags:
-        - ClothMade
-        - WhitelistChameleon
-    - type: WebbingClothing
-    - type: UserInterface
-      interfaces:
-        enum.StorageUiKey.Key:
-          type: StorageBoundUserInterface
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/Marine/standard.rsi
+    state: null
+    layers:
+    - state: icon
+    - map: [ "enum.WebbingVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/Marine/standard.rsi
+  - type: SuitSensor
+    controlsLocked: true
+    randomMode: false
+    mode: SensorCords
+  - type: Tag
+    tags:
+    - ClothMade
+    - WhitelistChameleon
+  - type: WebbingClothing
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: CMArmor
+    armor: 10
 
 - type: entity
   parent: JumpsuitMarine
@@ -33,20 +35,20 @@
   name: USCM ComTech uniform
   description: Standard-issue Marine combat technician fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/Marine/engineer.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/Marine/engineer.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/Marine/engineer.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/Marine/engineer.rsi
 
 - type: entity
   parent: JumpsuitMarine
   id: CMJumpsuitMarineFormal
   name: formal marine uniform
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/Marine/formal.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/Marine/formal.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/Marine/formal.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/Marine/formal.rsi
 
 - type: entity
   parent: JumpsuitMarine
@@ -54,30 +56,30 @@
   name: USCM corpsman uniform
   description: Standard-issue Marine hospital corpsman fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/Marine/medic.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/Marine/medic.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/Marine/medic.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/Marine/medic.rsi
 
 - type: entity
   parent: JumpsuitMarine
   id: CMJumpsuitMarineRTO
   name: rto marine uniform
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/Marine/rto.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/Marine/rto.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/Marine/rto.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/Marine/rto.rsi
 
 - type: entity
   parent: JumpsuitMarine
   id: CMJumpsuitMarineTanker
   name: tanker marine uniform
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/Marine/tanker.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/Marine/tanker.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/Marine/tanker.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/Marine/tanker.rsi
 
 # Military Police
 - type: entity
@@ -86,10 +88,10 @@
   name: MP uniform
   description: A standard-issue MP uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/MP/standard.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/MP/standard.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/MP/standard.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/MP/standard.rsi
 
 - type: entity
   parent: CMJumpsuitMP
@@ -97,10 +99,10 @@
   name: black mp uniform
   description: A standard-issue MP uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/MP/black.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/MP/black.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/MP/black.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/MP/black.rsi
 
 # Military Warden
 - type: entity
@@ -109,10 +111,10 @@
   name: warden uniform
   description: A standard-issue warden uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/Warden/standard.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/Warden/standard.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/Warden/standard.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/Warden/standard.rsi
 
 - type: entity
   parent: CMJumpsuitWarden
@@ -120,10 +122,10 @@
   name: blue warden uniform
   description: The insignia on this uniform tells you that this uniform belongs to the Warden..
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/Warden/blue.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/Warden/blue.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/Warden/blue.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/Warden/blue.rsi
 
 - type: entity
   parent: CMJumpsuitWarden
@@ -131,10 +133,10 @@
   name: red warden uniform
   description: A standard-issue warden uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/Warden/red.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/Warden/red.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/Warden/red.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/Warden/red.rsi
 
 - type: entity
   parent: CMJumpsuitWarden
@@ -142,10 +144,10 @@
   name: corporate warden uniform
   description: A standard-issue warden uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/Warden/corporate.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/Warden/corporate.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/Warden/corporate.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/Warden/corporate.rsi
 
 - type: entity
   parent: CMJumpsuitWarden
@@ -153,10 +155,10 @@
   name: navy warden uniform
   description: A navy variant of warden uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/Warden/navy.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/Warden/navy.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/Warden/navy.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/Warden/navy.rsi
 
 - type: entity
   parent: CMJumpsuitWarden
@@ -164,10 +166,10 @@
   name: tan warden uniform
   description: A standard-issue warden uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/Warden/tan.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/Warden/tan.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/Warden/tan.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/Warden/tan.rsi
 
 # Warrent Officer / CMP
 - type: entity
@@ -176,10 +178,10 @@
   name: chief mp uniform
   description: A standard-issue chief mp uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/wo.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/wo.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/wo.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/wo.rsi
 
 # Quartermaster / RO
 - type: entity
@@ -188,10 +190,10 @@
   name: quartermaster uniform
   description: Standard-issue quartermaster uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/ro.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/ro.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/ro.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/ro.rsi
 
 # Cargotech
 - type: entity
@@ -200,10 +202,10 @@
   name: cargo technician uniform
   description: A standard-issue cargo tech uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/cargo_tech.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/cargo_tech.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/cargo_tech.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/cargo_tech.rsi
 
 # MessTech / Chef
 - type: entity
@@ -212,10 +214,10 @@
   name: mess technician uniform
   description: Standard-issue Mess Technician uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/chef.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/chef.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/chef.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/chef.rsi
 
 # Chief Engineer / EC
 - type: entity
@@ -224,10 +226,10 @@
   name: chief engineer uniform
   description: Standard-issue Chief Engineer uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/ec.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/ec.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/ec.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/ec.rsi
 
 # Ordnance Technician / OT
 - type: entity
@@ -236,10 +238,10 @@
   name: ordnance technician uniform
   description: Standard-issue Ordnance Technician uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/ot.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/ot.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/ot.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/ot.rsi
 
 # Maintenance Technician / MT
 - type: entity
@@ -248,10 +250,10 @@
   name: maintenance technician uniform
   description: Standard-issue Maintenance Technician uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/mt.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/mt.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/mt.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/mt.rsi
 
 # Commanding Officer / CO
 - type: entity
@@ -260,10 +262,10 @@
   name: commanding officer uniform
   description: Standard-issue Commanding Officer uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/CO/standard.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/CO/standard.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/CO/standard.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/CO/standard.rsi
 
 - type: entity
   parent: CMJumpsuitCO
@@ -271,10 +273,10 @@
   name: formal commanding officer uniform
   description: Standard-issue commanding officer uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/CO/formal_black.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/CO/formal_black.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/CO/formal_black.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/CO/formal_black.rsi
 
 - type: entity
   parent: CMJumpsuitCO
@@ -282,10 +284,10 @@
   name: formal commanding officer uniform
   description: Standard-issue commanding officer uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/CO/formal_white.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/CO/formal_white.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/CO/formal_white.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/CO/formal_white.rsi
 
 - type: entity
   parent: CMJumpsuitCO
@@ -293,10 +295,10 @@
   name: commanding officer uniform
   description: Standard-issue commanding officer uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/CO/service.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/CO/service.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/CO/service.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/CO/service.rsi
 
 # Officer
 - type: entity
@@ -305,10 +307,10 @@
   name: officer uniform
   description: Standard-issue officer uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/bo.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/bo.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/bo.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/bo.rsi
 
 # CMO
 - type: entity
@@ -317,10 +319,10 @@
   name: cmo uniform
   description: Standard-issue cmo uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/cmo.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/cmo.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/cmo.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/cmo.rsi
 
 # Scrubs
 - type: entity
@@ -329,10 +331,10 @@
   name: blue scrubs
   description: Standard blue-colored scrubs.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/Scrubs/blue.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/Scrubs/blue.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/Scrubs/blue.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/Scrubs/blue.rsi
 
 - type: entity
   parent: CMScrubsBlue
@@ -340,10 +342,10 @@
   name: green scrubs
   description: Standard green-colored scrubs.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/Scrubs/green.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/Scrubs/green.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/Scrubs/green.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/Scrubs/green.rsi
 
 - type: entity
   parent: CMScrubsBlue
@@ -351,10 +353,10 @@
   name: purple scrubs
   description: Standard purple-colored scrubs.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/Scrubs/purple.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/Scrubs/purple.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/Scrubs/purple.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/Scrubs/purple.rsi
 
 - type: entity
   parent: CMScrubsBlue
@@ -362,10 +364,10 @@
   name: nurse scrubs
   description: Standard-issue nurse scrubs.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/Scrubs/nurse.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/Scrubs/nurse.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/Scrubs/nurse.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/Scrubs/nurse.rsi
 
 # Research
 - type: entity
@@ -374,10 +376,10 @@
   name: reseacher uniform
   description: Standard-issue researcher uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/research.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/research.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/research.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/research.rsi
 
 # Pilot
 - type: entity
@@ -386,10 +388,10 @@
   name: pilot uniform
   description: Standard-issue pilot uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/pilot.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/pilot.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/pilot.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/pilot.rsi
 
 # IO
 - type: entity
@@ -398,10 +400,10 @@
   name: marine intelligence officer uniform
   description: Standard-issue intelligence officer's uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/io.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/io.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/io.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/io.rsi
 
 # Dropship Crew Chief
 - type: entity
@@ -410,10 +412,10 @@
   name: dropship crew chief uniform
   description: Standard-issue dropship crew chief uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/crewchief.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/crewchief.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/crewchief.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/crewchief.rsi
 
 # Tshirts
 - type: entity
@@ -422,30 +424,30 @@
   name: white tshirt
   description: Simple pair of tshirt and pants.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/T-shirt/white.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/T-shirt/white.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/T-shirt/white.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/T-shirt/white.rsi
 
 - type: entity
   parent: CMJumpsuitTShirtWhite
   id: CMJumpsuitTShirtRed
   name: red tshirt
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/T-shirt/red.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/T-shirt/red.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/T-shirt/red.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/T-shirt/red.rsi
 
 - type: entity
   parent: CMJumpsuitTShirtWhite
   id: CMJumpsuitTShirtGray
   name: gray tshirt
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/T-shirt/gray.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/T-shirt/gray.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/T-shirt/gray.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/T-shirt/gray.rsi
 
 # Colonist
 - type: entity
@@ -454,10 +456,10 @@
   name: colonist uniform
   description: Uniform typically distibuted to the colonists.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/colonist.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/colonist.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/colonist.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/colonist.rsi
 
 # Correspondent
 - type: entity
@@ -466,8 +468,8 @@
   name: correspodent uniform
   description: Standard-issue correspodents's uniform.
   components:
-    - type: Sprite
-      sprite: _CM14/Objects/Clothing/Uniforms/correspondent.rsi
-    - type: Clothing
-      sprite: _CM14/Objects/Clothing/Uniforms/correspondent.rsi
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/correspondent.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Uniforms/correspondent.rsi
 

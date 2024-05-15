@@ -69,7 +69,7 @@
     plasma: 1000
     maxPlasma: 1000
     plasmaRegenOnWeeds: 4
-  - type: XenoArmor
+  - type: CMArmor
     armor: 25
     explosionArmor: 100
   - type: XenoWordQueen

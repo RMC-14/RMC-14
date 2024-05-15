@@ -52,4 +52,7 @@ public sealed partial class XenoComponent : Component
 
     [DataField, AutoNetworkedField]
     public Vector2 HudOffset;
+
+    [DataField, AutoNetworkedField]
+    public bool ContributesToVictory = true;
 }

@@ -47,6 +47,7 @@ public sealed class XenoSystem : EntitySystem
     private EntityQuery<DamageableComponent> _damageableQuery;
     private EntityQuery<MarineComponent> _marineQuery;
     private EntityQuery<MobStateComponent> _mobStateQuery;
+    private EntityQuery<MobThresholdsComponent> _mobThresholdsQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
     private EntityQuery<XenoRecoveryPheromonesComponent> _xenoRecoveryQuery;
@@ -58,6 +59,7 @@ public sealed class XenoSystem : EntitySystem
         _damageableQuery = GetEntityQuery<DamageableComponent>();
         _marineQuery = GetEntityQuery<MarineComponent>();
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
+        _mobThresholdsQuery = GetEntityQuery<MobThresholdsComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
         _xenoPlasmaQuery = GetEntityQuery<XenoPlasmaComponent>();
         _xenoRecoveryQuery = GetEntityQuery<XenoRecoveryPheromonesComponent>();
@@ -159,22 +161,41 @@ public sealed class XenoSystem : EntitySystem
         EnsureComp<XenoComponent>(xeno);
     }
 
-    public void SetHive(Entity<XenoComponent?> xeno, Entity<HiveComponent?> hive)
+    public void SetHive(Entity<XenoComponent?> xeno, Entity<HiveComponent?>? hive)
     {
-        if (!Resolve(xeno, ref xeno.Comp) ||
-            !Resolve(hive, ref hive.Comp))
+        if (!Resolve(xeno, ref xeno.Comp))
+            return;
+
+        if (hive == null)
         {
+            xeno.Comp.Hive = null;
+            Dirty(xeno, xeno.Comp);
             return;
         }
+
+        var hiveEnt = hive.Value;
+        if (!Resolve(hiveEnt, ref hiveEnt.Comp))
+            return;
 
         xeno.Comp.Hive = hive;
         Dirty(xeno, xeno.Comp);
     }
 
+    public void SetSameHive(Entity<XenoComponent?> to, Entity<XenoComponent?> from)
+    {
+        if (!Resolve(from, ref from.Comp))
+            return;
+
+        SetHive(to, from.Comp.Hive);
+    }
+
     private FixedPoint2 GetWeedsHealAmount(Entity<XenoComponent> xeno)
     {
-        if (!_mobThresholds.TryGetIncapThreshold(xeno, out var threshold))
+        if (!_mobThresholdsQuery.TryComp(xeno, out var thresholds) ||
+            !_mobThresholds.TryGetIncapThreshold(xeno, out var threshold, thresholds))
+        {
             return FixedPoint2.Zero;
+        }
 
         FixedPoint2 multiplier;
         if (_mobState.IsCritical(xeno))
@@ -257,6 +278,17 @@ public sealed class XenoSystem : EntitySystem
     public bool CanHitLiving(EntityUid xeno, EntityUid defender)
     {
         return _marineQuery.HasComponent(defender);
+    }
+
+    public bool FromSameHive(Entity<XenoComponent?> xenoOne, Entity<XenoComponent?> xenoTwo)
+    {
+        if (!Resolve(xenoOne, ref xenoOne.Comp, false) ||
+            !Resolve(xenoTwo, ref xenoTwo.Comp, false))
+        {
+            return false;
+        }
+
+        return xenoOne.Comp.Hive == xenoTwo.Comp.Hive;
     }
 
     public override void Update(float frameTime)
