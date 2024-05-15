@@ -42,20 +42,13 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private readonly HashSet<EntityUid> _intersecting = new();
 
     private EntityQuery<MobStateComponent> _mobStateQuery;
-    private EntityQuery<XenoEvolveActionComponent> _xenoEvolveActionQuery;
 
     public override void Initialize()
     {
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
-        _xenoEvolveActionQuery = GetEntityQuery<XenoEvolveActionComponent>();
 
-        SubscribeLocalEvent<XenoEvolveActionComponent, MapInitEvent>(OnXenoEvolveActionMapInit);
-
-        SubscribeLocalEvent<XenoEvolutionComponent, MapInitEvent>(OnXenoEvolveMapInit);
         SubscribeLocalEvent<XenoEvolutionComponent, XenoOpenEvolutionsActionEvent>(OnXenoEvolveAction);
         SubscribeLocalEvent<XenoEvolutionComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
-        SubscribeLocalEvent<XenoEvolutionComponent, ActionAddedEvent>(OnXenoEvolveActionAdded);
-        SubscribeLocalEvent<XenoEvolutionComponent, ActionRemovedEvent>(OnXenoEvolveActionRemoved);
 
         SubscribeLocalEvent<XenoNewlyEvolvedComponent, PreventCollideEvent>(OnNewlyEvolvedPreventCollide);
 
@@ -63,24 +56,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
         {
             subs.Event<XenoEvolveBuiMsg>(OnXenoEvolveBui);
         });
-    }
-
-    private void OnXenoEvolveActionMapInit(Entity<XenoEvolveActionComponent> ent, ref MapInitEvent args)
-    {
-        if (_action.TryGetActionData(ent, out _, false))
-            _action.SetCooldown(ent, _timing.CurTime, _timing.CurTime + ent.Comp.Cooldown);
-    }
-
-    private void OnXenoEvolveMapInit(Entity<XenoEvolutionComponent> ent, ref MapInitEvent args)
-    {
-        foreach (var (actionId, _) in _action.GetActions(ent))
-        {
-            if (_xenoEvolveActionQuery.HasComp(actionId) &&
-                !ent.Comp.EvolutionActions.Contains(actionId))
-            {
-                ent.Comp.EvolutionActions.Add(actionId);
-            }
-        }
     }
 
     private void OnXenoEvolveAction(Entity<XenoEvolutionComponent> xeno, ref XenoOpenEvolutionsActionEvent args)
@@ -149,17 +124,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
         Del(xeno.Owner);
 
         _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-end"), newXeno, newXeno);
-    }
-
-    private void OnXenoEvolveActionAdded(Entity<XenoEvolutionComponent> ent, ref ActionAddedEvent args)
-    {
-        if (_xenoEvolveActionQuery.HasComp(args.Action))
-            ent.Comp.EvolutionActions.Add(args.Action);
-    }
-
-    private void OnXenoEvolveActionRemoved(Entity<XenoEvolutionComponent> ent, ref ActionRemovedEvent args)
-    {
-        ent.Comp.EvolutionActions.Remove(args.Action);
     }
 
     private void OnNewlyEvolvedPreventCollide(Entity<XenoNewlyEvolvedComponent> ent, ref PreventCollideEvent args)

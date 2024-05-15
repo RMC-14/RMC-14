@@ -1,4 +1,5 @@
-﻿using Content.Shared.FixedPoint;
+﻿using Content.Shared.Actions;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -35,13 +36,11 @@ public sealed partial class XenoEvolutionComponent : Component
     public TimeSpan LastPointsAt;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId<XenoEvolveActionComponent> ActionId = "ActionXenoEvolve";
+    public EntProtoId<InstantActionComponent> ActionId = "ActionXenoEvolve";
 
     [DataField, AutoNetworkedField]
     public EntityUid? Action;
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier EvolutionReadySound = new SoundPathSpecifier("/Audio/_CM14/Xeno/xeno_evolveready.ogg");
-
-    public readonly List<EntityUid> EvolutionActions = new();
 }
