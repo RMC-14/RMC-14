@@ -1,4 +1,5 @@
 using Content.Shared._CM14.Marines;
+using Content.Shared.Atmos.Rotting;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -25,6 +26,7 @@ public sealed class CPRSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popups = default!;
+    [Dependency] private readonly SharedRottingSystem _rotting = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     // TODO CM14 move this to a component
@@ -74,9 +76,12 @@ public sealed class CPRSystem : EntitySystem
 
         args.Handled = true;
 
+        // TODO CM14 make this not use rotting
+        if (_net.IsServer)
+            _rotting.ReduceAccumulator(target, TimeSpan.FromSeconds(7));
+
         if (!TryComp(target, out DamageableComponent? damageable) ||
-            !damageable.Damage.DamageDict.TryGetValue(HealType, out damage) ||
-            damage <= FixedPoint2.Zero)
+            !damageable.Damage.DamageDict.TryGetValue(HealType, out damage))
         {
             return;
         }
@@ -137,28 +142,14 @@ public sealed class CPRSystem : EntitySystem
 
     private void OnMobStateCPRAttempt(Entity<MobStateComponent> ent, ref ReceiveCPRAttemptEvent args)
     {
-        if (_mobState.IsAlive(ent))
-        {
-            args.Cancelled = true;
+        if (args.Cancelled)
             return;
-        }
 
-        if (_mobState.IsCritical(ent))
-        {
-            if (!TryComp(ent, out DamageableComponent? damageable) ||
-                !damageable.Damage.DamageDict.TryGetValue(HealType, out var damage) ||
-                damage <= FixedPoint2.Zero)
-            {
-                args.Cancelled = true;
-                return;
-            }
-        }
-
-        if (_mobState.IsDead(ent))
-        {
-            // TODO CM14 extend revivable time after death, upstream this is rotting, downstream it needs to be different
+        if (_mobState.IsAlive(ent))
             args.Cancelled = true;
-        }
+
+        if (_mobState.IsDead(ent) && _rotting.IsRotten(ent))
+            args.Cancelled = true;
     }
 
     private void OnMaskCPRAttempt(Entity<MaskComponent> ent, ref InventoryRelayedEvent<ReceiveCPRAttemptEvent> args)
