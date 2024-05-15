@@ -234,6 +234,12 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return false;
     }
 
+    public void SetPoints(Entity<XenoEvolutionComponent> evolution, FixedPoint2 points)
+    {
+        evolution.Comp.Points = points;
+        Dirty(evolution);
+    }
+
     public override void Update(float frameTime)
     {
         var newly = EntityQueryEnumerator<XenoNewlyEvolvedComponent>();
