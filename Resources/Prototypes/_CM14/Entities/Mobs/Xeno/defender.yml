@@ -31,11 +31,11 @@
     - ActionXenoFortify
     tier: 1
     hudOffset: 0,0.2
+    unlockAt: 240 # 4 minutes
   - type: XenoEvolution
     max: 300
 #    evolvesTo:
 #    - CMXenoWarrior
-    unlockAt: 240 # 4 minutes
   - type: XenoPlasma
     plasma: 100
     maxPlasma: 100
