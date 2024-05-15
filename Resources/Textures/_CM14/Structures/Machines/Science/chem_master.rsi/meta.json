@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/80da71e3cab8bb1ba03cea07cd4f5c57fd71b7f3/icons/obj/structures/machinery/science_machines.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "mixer_screen"
+    },
+    {
+      "name": "mixer_loaded_screens",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "mixer_empty"
+    },
+    {
+      "name": "mixer_loaded"
+    },
+    {
+      "name": "mixer_broken"
+    },
+    {
+      "name": "mixer_loaded_broken"
+    }
+  ]
+}

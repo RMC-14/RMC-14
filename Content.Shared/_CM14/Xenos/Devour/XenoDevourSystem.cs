@@ -1,16 +1,23 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Content.Shared._CM14.Inventory;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
+using Content.Shared.Hands;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
+using Content.Shared.Inventory.Events;
 using Content.Shared.Inventory.VirtualItem;
+using Content.Shared.Item;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Popups;
 using Content.Shared.Standing;
+using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
@@ -21,6 +28,7 @@ namespace Content.Shared._CM14.Xenos.Devour;
 public sealed class XenoDevourSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -36,8 +44,18 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<CMVirtualItemComponent, BeforeRangedInteractEvent>(OnXenoInteractBeforeRangedInteract,
             before: [typeof(SharedVirtualItemSystem)]);
 
-        SubscribeLocalEvent<DevouredComponent, EntGotRemovedFromContainerMessage>(OnDevouredRemovedFromContainer);
+        SubscribeLocalEvent<DevouredComponent, ComponentStartup>(OnDevouredStartup);
         SubscribeLocalEvent<DevouredComponent, ComponentRemove>(OnDevouredRemove);
+        SubscribeLocalEvent<DevouredComponent, EntGotRemovedFromContainerMessage>(OnDevouredRemovedFromContainer);
+        SubscribeLocalEvent<DevouredComponent, UpdateCanMoveEvent>(OnDevouredAttempt);
+        SubscribeLocalEvent<DevouredComponent, InteractionAttemptEvent>(OnDevouredAttempt);
+        SubscribeLocalEvent<DevouredComponent, UseAttemptEvent>(OnDevouredAttempt);
+        SubscribeLocalEvent<DevouredComponent, ThrowAttemptEvent>(OnDevouredAttempt);
+        SubscribeLocalEvent<DevouredComponent, DropAttemptEvent>(OnDevouredAttempt);
+        SubscribeLocalEvent<DevouredComponent, PickupAttemptEvent>(OnDevouredPickupAttempt);
+        SubscribeLocalEvent<DevouredComponent, IsEquippingAttemptEvent>(OnDevouredIsEquippingAttempt);
+        SubscribeLocalEvent<DevouredComponent, IsUnequippingAttemptEvent>(OnDevouredIsUnequippingAttempt);
+        SubscribeLocalEvent<DevouredComponent, AttackAttemptEvent>(OnDevouredAttackAttempt);
 
         SubscribeLocalEvent<XenoDevourComponent, CanDropTargetEvent>(OnXenoCanDropTarget);
         SubscribeLocalEvent<XenoDevourComponent, InteractHandEvent>(OnXenoInteractHand);
@@ -76,14 +94,15 @@ public sealed class XenoDevourSystem : EntitySystem
             args.Handled = true;
     }
 
-    private void OnDevouredRemovedFromContainer(Entity<DevouredComponent> devoured, ref EntGotRemovedFromContainerMessage args)
+    private void OnDevouredStartup(Entity<DevouredComponent> devoured, ref ComponentStartup args)
     {
-        if (!_timing.ApplyingState)
-            RemCompDeferred<DevouredComponent>(devoured);
+        _blocker.UpdateCanMove(devoured);
     }
 
     private void OnDevouredRemove(Entity<DevouredComponent> devoured, ref ComponentRemove args)
     {
+        _blocker.UpdateCanMove(devoured);
+
         if (_timing.ApplyingState)
             return;
 
@@ -93,6 +112,41 @@ public sealed class XenoDevourSystem : EntitySystem
         {
             _container.Remove(devoured.Owner, container);
         }
+    }
+
+    private void OnDevouredRemovedFromContainer(Entity<DevouredComponent> devoured, ref EntGotRemovedFromContainerMessage args)
+    {
+        if (!_timing.ApplyingState)
+            RemCompDeferred<DevouredComponent>(devoured);
+    }
+
+    private void OnDevouredAttempt<T>(Entity<DevouredComponent> devoured, ref T args) where T : CancellableEntityEventArgs
+    {
+        args.Cancel();
+    }
+
+    private void OnDevouredAttackAttempt(Entity<DevouredComponent> devoured, ref AttackAttemptEvent args)
+    {
+        if (!HasComp<UsableWhileDevouredComponent>(args.Weapon))
+            args.Cancel();
+    }
+
+    private void OnDevouredPickupAttempt(Entity<DevouredComponent> ent, ref PickupAttemptEvent args)
+    {
+        if (!HasComp<UsableWhileDevouredComponent>(args.Item))
+            args.Cancel();
+    }
+
+    private void OnDevouredIsEquippingAttempt(Entity<DevouredComponent> devoured, ref IsEquippingAttemptEvent args)
+    {
+        if (!HasComp<UsableWhileDevouredComponent>(args.Equipment))
+            args.Cancel();
+    }
+
+    private void OnDevouredIsUnequippingAttempt(Entity<DevouredComponent> devoured, ref IsUnequippingAttemptEvent args)
+    {
+        if (!HasComp<UsableWhileDevouredComponent>(args.Equipment))
+            args.Cancel();
     }
 
     private void OnXenoCanDropTarget(Entity<XenoDevourComponent> xeno, ref CanDropTargetEvent args)
@@ -313,17 +367,21 @@ public sealed class XenoDevourSystem : EntitySystem
         return StartDevour(xeno, pulling);
     }
 
-    private void Regurgitate(Entity<DevouredComponent> devoured, Entity<XenoDevourComponent?> xeno)
+    private bool Regurgitate(Entity<DevouredComponent> devoured, Entity<XenoDevourComponent?> xeno, bool doFeedback = true)
     {
         if (!Resolve(xeno, ref xeno.Comp))
-            return;
+            return true;
 
-        if (!_container.TryGetContainer(xeno, xeno.Comp.DevourContainerId, out var container))
-            return;
+        if (!_container.TryGetContainer(xeno, xeno.Comp.DevourContainerId, out var container) ||
+            !_container.Remove(devoured.Owner, container))
+        {
+            return true;
+        }
 
-        _container.Remove(devoured.Owner, container);
-        _popup.PopupClient("We hurl out the contents of our stomach!", xeno, xeno, PopupType.MediumCaution);
-        _audio.PlayPredicted(xeno.Comp.RegurgitateSound, xeno, xeno);
+        if (doFeedback)
+            DoFeedback((xeno, xeno.Comp));
+
+        return false;
     }
 
     private void RegurgitateAll(Entity<XenoDevourComponent> xeno)
@@ -331,11 +389,24 @@ public sealed class XenoDevourSystem : EntitySystem
         if (!_container.TryGetContainer(xeno, xeno.Comp.DevourContainerId, out var container))
             return;
 
+        var any = false;
         foreach (var contained in container.ContainedEntities)
         {
-            if (TryComp(contained, out DevouredComponent? devoured))
-                Regurgitate((contained, devoured), (xeno, xeno));
+            if (TryComp(contained, out DevouredComponent? devoured) &&
+                Regurgitate((contained, devoured), (xeno, xeno), false))
+            {
+                any = true;
+            }
         }
+
+        if (any)
+            DoFeedback(xeno);
+    }
+
+    private void DoFeedback(Entity<XenoDevourComponent> xeno)
+    {
+        _popup.PopupClient("We hurl out the contents of our stomach!", xeno, xeno, PopupType.MediumCaution);
+        _audio.PlayPredicted(xeno.Comp.RegurgitateSound, xeno, xeno);
     }
 
     public override void Update(float frameTime)
@@ -368,8 +439,8 @@ public sealed class XenoDevourSystem : EntitySystem
 
             if (time >= comp.RegurgitateAt)
             {
-                Regurgitate((uid, comp), (xeno, devour));
-                _popup.PopupClient("We hurl out the contents of our stomach!", xeno, xeno, PopupType.MediumCaution);
+                if (Regurgitate((uid, comp), (xeno, devour)))
+                    _popup.PopupClient("We hurl out the contents of our stomach!", xeno, xeno, PopupType.MediumCaution);
             }
         }
     }

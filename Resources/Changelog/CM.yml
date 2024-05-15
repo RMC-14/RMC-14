@@ -865,5 +865,19 @@
   id: 113
   time: '2024-05-13T20:58:27.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2133
+- author: Tunguso4ka
+  changes:
+  - message: Ported chem, booze, soda dispensers and chem master.
+    type: Add
+  id: 114
+  time: '2024-05-14T23:38:59.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2142
+- author: DrSmugleaf
+  changes:
+  - message: Marines can now cut their way out of a xeno while devoured.
+    type: Add
+  id: 115
+  time: '2024-05-15T02:52:16.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2144
 Name: CM
 Order: -1
