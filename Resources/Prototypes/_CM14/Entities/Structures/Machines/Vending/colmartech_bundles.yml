@@ -1,6 +1,6 @@
 ﻿- type: entity
   id: CMVendorBundleRiflemanApparel
-  name: Standard Marine Apparel
+  name: standard marine apparel
   categories:
   - hideSpawnMenu
   components:

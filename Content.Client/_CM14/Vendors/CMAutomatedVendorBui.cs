@@ -48,7 +48,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                     if (_prototype.TryIndex(entry.Id, out var entity))
                     {
                         uiEntry.Texture.Texture = _sprite.Frame0(entity);
-                        uiEntry.Panel.Button.Label.Text = entity.Name;
+                        uiEntry.Panel.Button.Label.Text = entry.Name ?? entity.Name;
 
                         var msg = new FormattedMessage();
                         msg.AddText(entity.Description);
