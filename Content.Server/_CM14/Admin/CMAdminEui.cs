@@ -26,7 +26,7 @@ public sealed class CMAdminEui : BaseEui
     [ValidatePrototypeId<StartingGearPrototype>]
     private const string DefaultHumanoidGear = "CMGearRifleman";
 
-    private readonly XenoHiveSystem _hive;
+    private readonly SharedXenoHiveSystem _hive;
     private readonly MindSystem _mind;
     private readonly StationSpawningSystem _stationSpawning;
     private readonly SharedTransformSystem _transform;
@@ -38,7 +38,7 @@ public sealed class CMAdminEui : BaseEui
     {
         IoCManager.InjectDependencies(this);
 
-        _hive = _entities.System<XenoHiveSystem>();
+        _hive = _entities.System<SharedXenoHiveSystem>();
         _mind = _entities.System<MindSystem>();
         _stationSpawning = _entities.System<StationSpawningSystem>();
         _transform = _entities.System<SharedTransformSystem>();

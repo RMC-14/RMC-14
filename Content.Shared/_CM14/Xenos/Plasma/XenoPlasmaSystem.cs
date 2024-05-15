@@ -97,7 +97,8 @@ public sealed class XenoPlasmaSystem : EntitySystem
     {
         if (TryComp(args.OldXeno, out XenoPlasmaComponent? oldXeno))
         {
-            var newPlasma = FixedPoint2.Min(oldXeno.Plasma, newXeno.Comp.MaxPlasma);
+            var newMax = newXeno.Comp.MaxPlasma;
+            var newPlasma = FixedPoint2.Min(oldXeno.Plasma / oldXeno.MaxPlasma * newMax, newMax);
             SetPlasma(newXeno, newPlasma);
         }
     }

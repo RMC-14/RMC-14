@@ -54,6 +54,8 @@
 #    - ActionXenoToggleSpitType
     # TODO CM14 fire immunity
     tier: 4
+    bypassTierCount: true
+    unlockAt: 0
   - type: XenoAcid
   - type: XenoConstruction
     canBuild:

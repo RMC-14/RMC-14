@@ -32,6 +32,7 @@
     #    - ActionXenoSprayAcid
     tier: 3
     hudOffset: 0,0.16
+    unlockAt: 900 # 15 minutes
   - type: XenoAcid
   - type: XenoDevour
   - type: XenoPlasma

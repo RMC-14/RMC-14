@@ -33,6 +33,7 @@
     #    - ActionXenoAcidShroud
     tier: 3
     hudOffset: 0,0.35
+    unlockAt: 900 # 15 minutes
   - type: XenoPlasma
     plasma: 400
     maxPlasma: 400
