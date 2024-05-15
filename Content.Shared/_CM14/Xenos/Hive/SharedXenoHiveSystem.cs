@@ -3,7 +3,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._CM14.Xenos.Hive;
 
-public sealed class XenoHiveSystem : EntitySystem
+public abstract class SharedXenoHiveSystem : EntitySystem
 {
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly INetManager _net = default!;

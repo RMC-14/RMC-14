@@ -1,4 +1,4 @@
-﻿cmd-evolutioncooldown-desc = Changes the evolution cooldown for yourself or a xenomorph with the given entity id
-cmd-evolutioncooldown-help = Usage: evolutioncooldown OR evolutioncooldown <seconds> OR evolutioncooldown <player> <seconds>
-cmd-evolutioncooldown-no-evolve-action = Entity {$entity} has no evolve action
-cmd-evolutioncooldown-set-cooldown = Evolution cooldown set to {$seconds}
+﻿cmd-evolution-desc = Changes the evolution points of yourself or a xeno with the given entity id
+cmd-evolution-help = Usage: evolution OR evolution <points> OR evolution <entity> <points>
+cmd-evolution-cant-evolve = Entity {$entity} cannot evolve
+cmd-evolution-set-points = Evolution points set to {$points}

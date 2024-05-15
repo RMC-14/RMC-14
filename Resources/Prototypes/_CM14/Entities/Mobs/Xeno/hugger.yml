@@ -24,12 +24,11 @@
     tier: 0
     hudOffset: 0,0.4
     contributesToVictory: false
+    countedInSlots: false
+    unlockAt: 0
   - type: XenoPlasma
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1
-  - type: XenoEvolution
-    evolvesTo:
-    - CMXenoDrone
   - type: XenoHide
   - type: Fixtures
     fixtures:

@@ -36,9 +36,10 @@
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
     - ActionXenoTransferPlasma
-    - ActionXenoEvolve300
     hudOffset: 0,0.15
     tier: 1
+    bypassTierCount: true
+    unlockAt: 60 # 1 minute
   - type: XenoAcid
   - type: XenoConstruction
     buildDelay: 2
@@ -50,6 +51,8 @@
     - HiveCoreXenoConstructionNode
   - type: XenoDevour
   - type: XenoEvolution
+    canEvolveWithoutGranter: true
+    max: 300
     evolvesTo: # TODO CM14 Queen
 #    - CMXenoCarrier
 #    - CMXenoBurrower

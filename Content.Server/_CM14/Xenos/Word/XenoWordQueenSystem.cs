@@ -8,7 +8,6 @@ using Content.Shared._CM14.Xenos.Word;
 using Content.Shared.Chat;
 using Content.Shared.Popups;
 using Robust.Server.Audio;
-using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 
@@ -20,7 +19,6 @@ public sealed class XenoWordQueenSystem : SharedXenoWordQueenSystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     private readonly Regex _newLineRegex = new("\n{3,}", RegexOptions.Compiled);
