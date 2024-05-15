@@ -131,3 +131,9 @@
   - type: XenoEvolutionCapped
     id: CMXenoQueen
     max: 1
+  - type: EmitSoundOnSpawn
+    sound:
+      path: /Audio/_CM14/Xeno/alien_queen_command.ogg
+      params:
+        volume: -8
+
