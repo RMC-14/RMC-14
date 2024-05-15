@@ -28,6 +28,9 @@ public sealed partial class CMVendorEntry
     public EntProtoId Id;
 
     [DataField]
+    public string? Name;
+
+    [DataField]
     public int? Amount;
 
     [DataField]
