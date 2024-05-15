@@ -4,10 +4,4 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._CM14.Medical.CPR;
 
 [Serializable, NetSerializable]
-public sealed partial class CPRDoAfterEvent : DoAfterEvent
-{
-    public override DoAfterEvent Clone()
-    {
-        return this;
-    }
-}
+public sealed partial class CPRDoAfterEvent : SimpleDoAfterEvent;

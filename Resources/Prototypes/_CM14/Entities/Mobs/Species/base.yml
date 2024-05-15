@@ -118,3 +118,5 @@
   - type: ShortExamine
   - type: MaxDamage
     max: 719 # TODO CM14 this should be per part and smaller
+  - type: Perishable
+    rotAfter: 300
