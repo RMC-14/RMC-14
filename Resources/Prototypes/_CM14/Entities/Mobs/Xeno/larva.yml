@@ -24,6 +24,7 @@
     - ActionXenoHide
     hudOffset: -0.1,0.125
     tier: 0
+    unlockAt: 0
   - type: XenoPlasma
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1

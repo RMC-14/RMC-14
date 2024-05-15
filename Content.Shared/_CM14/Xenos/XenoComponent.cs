@@ -61,4 +61,7 @@ public sealed partial class XenoComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool BypassTierCount;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan UnlockAt = TimeSpan.FromSeconds(60);
 }

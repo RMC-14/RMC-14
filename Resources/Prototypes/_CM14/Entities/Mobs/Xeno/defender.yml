@@ -35,6 +35,7 @@
     max: 300
 #    evolvesTo:
 #    - CMXenoWarrior
+    unlockAt: 240 # 4 minutes
   - type: XenoPlasma
     plasma: 100
     maxPlasma: 100

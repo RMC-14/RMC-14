@@ -5,6 +5,7 @@ using Content.Shared.Climbing.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
 using Content.Shared.FixedPoint;
+using Content.Shared.GameTicking;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -25,6 +26,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -193,7 +195,19 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return false;
         }
 
-        if (prototype.TryGetComponent(out XenoComponent? newXenoComp, _compFactory) &&
+        prototype.TryGetComponent(out XenoComponent? newXenoComp, _compFactory);
+        if (newXenoComp != null &&
+            newXenoComp.UnlockAt > _timing.CurTime - _gameTicker.RoundStartTimeSpan)
+        {
+            _popup.PopupEntity(
+                "The Hive cannot support this caste yet!",
+                xeno,
+                xeno,
+                PopupType.MediumCaution);
+            return false;
+        }
+
+        if (newXenoComp != null &&
             !newXenoComp.BypassTierCount &&
             TryComp(xeno, out XenoComponent? oldXenoComp) &&
             TryComp(oldXenoComp.Hive, out HiveComponent? hive) &&
