@@ -16,7 +16,7 @@
     state: icon
   - type: MeleeWeapon
     wideAnimationRotation: -135
-    attackRate: 1.5
+    attackRate: 1
     damage:
       types:
         Slash: 25
@@ -31,6 +31,7 @@
     sprite: _CM14/Objects/Weapons/Melee/m5_bayonet.rsi
   - type: DisarmMalus
     malus: 0.225
+  - type: UsableWhileDevoured
 
 - type: entity
   name: M11 throwing knife
