@@ -136,4 +136,5 @@
       path: /Audio/_CM14/Xeno/alien_queen_command.ogg
       params:
         volume: -8
-
+  - type: XenoAnnounceDeath
+    message: A sudden tremor ripples through the hive... the Queen has been slain! Vengeance!
