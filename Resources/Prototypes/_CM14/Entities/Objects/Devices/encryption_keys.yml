@@ -63,6 +63,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineCommand
     defaultChannel: MarineCommand
   - type: Sprite
@@ -76,6 +77,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineIntel
     defaultChannel: MarineIntel
   - type: Sprite
@@ -89,6 +91,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineJTAC
     defaultChannel: MarineJTAC
   - type: Sprite
@@ -102,6 +105,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineEngineer
     defaultChannel: MarineEngineer
   - type: Sprite
@@ -115,6 +119,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineMedical
     defaultChannel: MarineMedical
   - type: Sprite
@@ -128,6 +133,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineMilitaryPolice
     defaultChannel: MarineMilitaryPolice
   - type: Sprite
@@ -141,6 +147,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineRequisition
     defaultChannel: MarineRequisition
   - type: Sprite
@@ -154,6 +161,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineAlpha
     defaultChannel: MarineAlpha
   - type: Sprite
@@ -167,6 +175,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineBravo
     defaultChannel: MarineBravo
   - type: Sprite
@@ -180,6 +189,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineCharlie
     defaultChannel: MarineCharlie
   - type: Sprite
@@ -193,6 +203,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineDelta
     defaultChannel: MarineDelta
   - type: Sprite
@@ -206,6 +217,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineEcho
     defaultChannel: MarineEcho
   - type: Sprite
@@ -219,6 +231,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineFoxtrot
     defaultChannel: MarineFoxtrot
   - type: Sprite
@@ -234,6 +247,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineAlpha
     - MarineBravo
     - MarineCharlie
@@ -267,6 +281,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineCommand
     - MarineEngineer
     - MarineMedical
@@ -285,6 +300,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineEngineer
     - MarineCommand
     - MarineMedical
@@ -301,6 +317,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineMedical
     - MarineCommand
     - MarineIntel
@@ -316,6 +333,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineMedical
     - MarineIntel
     defaultChannel: MarineMedical
@@ -330,6 +348,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineCommand
     - MarineMilitaryPolice
     - MarineEngineer
@@ -347,6 +366,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineCommand
     - MarineMilitaryPolice
     - MarineEngineer
@@ -363,6 +383,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineCommand
     - MarineEngineer
     - MarineMedical
@@ -398,6 +419,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineCommand
     - MarineEngineer
     - MarineMedical
@@ -414,6 +436,7 @@
   components:
   - type: EncryptionKey
     channels:
+    - MarineCommon
     - MarineCommand
     - MarineRequisition
     - MarineMedical
