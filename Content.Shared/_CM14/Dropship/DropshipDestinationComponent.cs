@@ -8,4 +8,7 @@ public sealed partial class DropshipDestinationComponent : Component
 {
     [DataField, AutoNetworkedField]
     public EntityUid? Ship;
+
+    [DataField, AutoNetworkedField]
+    public bool AutoRecall;
 }

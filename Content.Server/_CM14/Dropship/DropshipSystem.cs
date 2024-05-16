@@ -159,6 +159,16 @@ public sealed class DropshipSystem : SharedDropshipSystem
         _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, state);
     }
 
+    protected override bool IsShuttle(EntityUid dropship)
+    {
+        return HasComp<ShuttleComponent>(dropship);
+    }
+
+    protected override bool IsInFTL(EntityUid dropship)
+    {
+        return HasComp<FTLComponent>(dropship);
+    }
+
     private void RefreshUI()
     {
         var computers = EntityQueryEnumerator<DropshipNavigationComputerComponent>();
