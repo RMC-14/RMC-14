@@ -108,6 +108,7 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         {
             var button = new DropshipButton();
             button.Text = destination.Name;
+            button.Disabled = destination.Occupied;
             button.BorderColor = Color.Transparent;
             button.BorderThickness = new Thickness(0);
             button.Button.ToggleMode = true;

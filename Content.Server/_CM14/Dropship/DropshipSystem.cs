@@ -89,6 +89,18 @@ public sealed class DropshipSystem : SharedDropshipSystem
             return false;
         }
 
+        if (TryComp(dropship.Destination, out DropshipDestinationComponent? oldDestination))
+        {
+            oldDestination.Ship = null;
+            Dirty(dropship.Destination.Value, oldDestination);
+        }
+
+        if (TryComp(destination, out DropshipDestinationComponent? newDestination))
+        {
+            newDestination.Ship = shuttle;
+            Dirty(destination, newDestination);
+        }
+
         dropship.Destination = destination;
         Dirty(shuttle.Value, dropship);
 
@@ -121,11 +133,11 @@ public sealed class DropshipSystem : SharedDropshipSystem
             !ftl.Running ||
             ftl.State == FTLState.Available)
         {
-            var destinations = new List<(NetEntity Id, string Name)>();
+            var destinations = new List<(NetEntity Id, string Name, bool Occupied)>();
             var query = EntityQueryEnumerator<DropshipDestinationComponent>();
-            while (query.MoveNext(out var uid, out _))
+            while (query.MoveNext(out var uid, out var comp))
             {
-                destinations.Add((GetNetEntity(uid), Name(uid)));
+                destinations.Add((GetNetEntity(uid), Name(uid), comp.Ship != null));
             }
 
             _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, new DropshipNavigationDestinationsBuiState(destinations));

@@ -1,11 +1,9 @@
 ﻿using Content.Shared.UserInterface;
-using Robust.Shared.Network;
 
 namespace Content.Shared._CM14.Dropship;
 
 public abstract class SharedDropshipSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
@@ -49,9 +47,15 @@ public abstract class SharedDropshipSystem : EntitySystem
             return;
         }
 
-        if (!HasComp<DropshipDestinationComponent>(destination))
+        if (!TryComp(destination, out DropshipDestinationComponent? destinationComp))
         {
             Log.Warning($"{ToPrettyString(args.Actor)} tried to launch to invalid dropship destination {ToPrettyString(destination)}");
+            return;
+        }
+
+        if (destinationComp.Ship != null)
+        {
+            Log.Warning($"{ToPrettyString(args.Actor)} tried to launch to occupied dropship destination {ToPrettyString(destination)}");
             return;
         }
 
