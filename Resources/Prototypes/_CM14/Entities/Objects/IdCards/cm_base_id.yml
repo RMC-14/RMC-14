@@ -18,6 +18,7 @@
   - type: IdCard
     nameLocId: cm-access-dogtags-component-owner-name-job-title-text
     fullNameLocId: cm-access-dogtags-component-owner-full-name-job-title-text
+    canMicrowave: false
 
 # generic id bases, they get their information replaced by the job.
 - type: entity
@@ -41,6 +42,7 @@
   - type: IdCard
     nameLocId: cm-access-id-card-component-owner-name-job-title-text
     fullNameLocId: cm-access-id-card-component-owner-full-name-job-title-text
+    canMicrowave: false
   - type: StationRecordKeyStorage
   - type: Tag
     tags:
