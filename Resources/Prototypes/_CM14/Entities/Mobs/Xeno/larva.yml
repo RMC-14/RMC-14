@@ -52,4 +52,5 @@
   - type: Flammable
     canResistFire: false
   - type: MovementSpeedModifier
+    baseWalkSpeed: 3.7
     baseSprintSpeed: 6.7

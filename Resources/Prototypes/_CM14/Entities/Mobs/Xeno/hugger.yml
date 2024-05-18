@@ -50,6 +50,7 @@
     all:
     - type: Xeno
   - type: MovementSpeedModifier
+    baseWalkSpeed: 2.7
     baseSprintSpeed: 5
   - type: DamageOffWeeds
     damage:
