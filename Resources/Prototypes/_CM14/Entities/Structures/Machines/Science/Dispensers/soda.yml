@@ -1,5 +1,5 @@
 - type: entity
-  parent: soda_dispenser # TODO CM14 replace to SodaDispenser, when space-station-14/pull/28014 will get merged there
+  parent: SodaDispenser
   id: CMDispenserSoda
   name: soda fountain
   description: A drink fabricating machine, capable of producing many sugary drinks with just one touch.
