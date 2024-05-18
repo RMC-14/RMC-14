@@ -75,22 +75,10 @@
     solutions:
       pack:
         maxVol: 300
-  - type: FitsInDispenser
-    solution: pack
-  - type: RefillableSolution
-    solution: pack
-  - type: DrainableSolution
-    solution: pack
   - type: ExaminableSolution
-    solution: pack
-  - type: DrawableSolution
-    solution: pack
-  - type: InjectableSolution
     solution: pack
   - type: SolutionTransfer
     canChangeTransferAmount: true
-  - type: Drink
-    solution: pack
   - type: Appearance
   - type: Damageable
     damageContainer: Inorganic
@@ -99,7 +87,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 5
+        damage: 50
       behaviors:
       - !type:SpillBehavior
         solution: pack
