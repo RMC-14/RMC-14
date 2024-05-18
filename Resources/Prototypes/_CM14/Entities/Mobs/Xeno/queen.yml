@@ -103,6 +103,7 @@
         - BulletImpassable
   - type: DropshipHijacker
   - type: MovementSpeedModifier
+    baseWalkSpeed: 1.4
     baseSprintSpeed: 2.5
   - type: SlowOnPull
     multiplier: 0.5

@@ -51,4 +51,5 @@
     threshold: 4
     stun: 9
   - type: MovementSpeedModifier
+    baseWalkSpeed: 2
     baseSprintSpeed: 3.5

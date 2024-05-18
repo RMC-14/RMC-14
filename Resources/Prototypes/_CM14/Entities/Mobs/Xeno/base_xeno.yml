@@ -72,7 +72,7 @@
     - Heat
     - Shock
   - type: MovementSpeedModifier
-    baseWalkSpeed: 4
+    baseWalkSpeed: 2.2
     baseSprintSpeed: 4
   - type: Climbing
   - type: NameIdentifier
