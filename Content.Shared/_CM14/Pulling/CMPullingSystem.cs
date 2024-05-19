@@ -18,8 +18,8 @@ public sealed class CMPullingSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
@@ -44,7 +44,7 @@ public sealed class CMPullingSystem : EntitySystem
         var target = args.PulledUid;
         if (target != ent.Owner ||
             HasComp<ParalyzeOnPullAttemptImmuneComponent>(user) ||
-            _mobState.IsIncapacitated(ent))
+            _mobState.IsDead(ent))
         {
             return;
         }
@@ -57,13 +57,17 @@ public sealed class CMPullingSystem : EntitySystem
 
         foreach (var session in Filter.Pvs(user).Recipients)
         {
-            if (session == IoCManager.Resolve<ISharedPlayerManager>().LocalSession)
+            if (session.AttachedEntity is not { } recipient)
                 continue;
 
-            var puller = Identity.Name(user, EntityManager, session.AttachedEntity);
-            var pulled = Identity.Name(ent, EntityManager, session.AttachedEntity);
+            var puller = Identity.Name(user, EntityManager, recipient);
+            var pulled = Identity.Name(ent, EntityManager, recipient);
             var message = $"{puller} tried to pull {pulled} but instead gets a tail swipe to the head!";
-            _popup.PopupEntity(message, user, session, PopupType.MediumCaution);
+
+            if (args.PullerUid == recipient)
+                _popup.PopupClient(message, user, recipient, PopupType.MediumCaution);
+            else
+                _popup.PopupEntity(message, user, recipient, PopupType.MediumCaution);
         }
     }
 
