@@ -879,5 +879,12 @@
   id: 115
   time: '2024-05-15T02:52:16.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2144
+- author: DrSmugleaf
+  changes:
+  - message: Full health bars are no longer shown on the medical HUD.
+    type: Tweak
+  id: 116
+  time: '2024-05-19T03:58:47.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2157
 Name: CM
 Order: -1
