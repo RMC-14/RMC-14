@@ -64,6 +64,11 @@
       - ActionCritFakeDeath
       - ActionCritLastWords
   - type: Deathgasp
+  - type: SoundOnDeath
+    sound:
+      collection: XenoDeath
+      params:
+        volume: -12
   - type: HealthExaminable
     examinableTypes:
     - Blunt

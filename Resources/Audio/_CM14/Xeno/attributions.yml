@@ -13,6 +13,16 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/ef6587e938058c360d4a685015a4f0ba3aa5473a/sound/weapons/alien_claw_block.ogg"
 
+- files: ["alien_death.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/voice/alien_death.ogg"
+
+- files: ["alien_death2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/voice/alien_death2.ogg"
+
 - files: ["alien_distantroar_3.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
@@ -27,6 +37,11 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/8cad63ffa63108258510a649a07a045274771fb1/sound/voice/alien_drool2.ogg"
+
+- files: ["alien_facehugger_dies.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/voice/alien_facehugger_dies.ogg"
 
 - files: ["alien_footstep_large1.ogg"]
   license: "CC-BY-SA-3.0"
