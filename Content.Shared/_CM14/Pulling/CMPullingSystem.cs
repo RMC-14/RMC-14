@@ -7,18 +7,20 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
-using Robust.Shared.Timing;
+using Robust.Shared.Random;
 
 namespace Content.Shared._CM14.Pulling;
 
 public sealed class CMPullingSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
@@ -49,11 +51,15 @@ public sealed class CMPullingSystem : EntitySystem
             return;
         }
 
-        _stun.TryParalyze(user, ent.Comp.Duration, true);
         args.Cancelled = true;
 
-        if (!_timing.IsFirstTimePredicted)
-            return;
+        if (ent.Comp.Sound is { } sound)
+        {
+            var pitch = _random.NextFloat(ent.Comp.MinPitch, ent.Comp.MaxPitch);
+            _audio.PlayPredicted(sound, ent, user, sound.Params.WithPitchScale(pitch));
+        }
+
+        _stun.TryParalyze(user, ent.Comp.Duration, true);
 
         foreach (var session in Filter.Pvs(user).Recipients)
         {

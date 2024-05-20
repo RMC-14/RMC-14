@@ -56,3 +56,8 @@
     damage:
       types:
         Blunt: 0.5
+  - type: SoundOnDeath
+    sound:
+      path: /Audio/_CM14/Xeno/alien_facehugger_dies.ogg
+      params:
+        volume: -12
