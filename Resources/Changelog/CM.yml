@@ -886,5 +886,12 @@
   id: 116
   time: '2024-05-19T03:58:47.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2157
+- author: DrSmugleaf
+  changes:
+  - message: Added xeno death sounds and xeno pull knockdown sound.
+    type: Add
+  id: 117
+  time: '2024-05-20T02:18:15.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2160
 Name: CM
 Order: -1
