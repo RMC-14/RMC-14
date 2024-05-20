@@ -42,3 +42,9 @@
   files:
   - /Audio/_CM14/Xeno/alien_queen_breath1.ogg
   - /Audio/_CM14/Xeno/alien_queen_breath2.ogg
+
+- type: soundCollection
+  id: XenoDeath
+  files:
+  - /Audio/_CM14/Xeno/alien_death.ogg
+  - /Audio/_CM14/Xeno/alien_death2.ogg
