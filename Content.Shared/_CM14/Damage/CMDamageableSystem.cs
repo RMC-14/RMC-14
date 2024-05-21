@@ -4,14 +4,20 @@ using Content.Shared._CM14.Xenos.Pheromones;
 using Content.Shared.Armor;
 using Content.Shared.Blocking;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Silicons.Borgs;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._CM14.Damage;
 
 public sealed class CMDamageableSystem : EntitySystem
 {
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+
+    private readonly List<string> _types = [];
+
     private EntityQuery<DamageableComponent> _damageableQuery;
 
     public override void Initialize()
@@ -59,5 +65,62 @@ public sealed class CMDamageableSystem : EntitySystem
             return;
 
         args.Damage *= remaining.Float() / modifyTotal.Float();
+    }
+
+    public DamageSpecifier DistributeHealing(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount, DamageSpecifier? equal = null)
+    {
+        equal ??= new DamageSpecifier();
+        if (!Resolve(damageable, ref damageable.Comp, false))
+            return equal;
+
+        if (!_prototypes.TryIndex(groupId, out var group))
+            return equal;
+
+        _types.Clear();
+        foreach (var type in group.DamageTypes)
+        {
+            if (damageable.Comp.Damage.DamageDict.TryGetValue(type, out var current) &&
+                current > FixedPoint2.Zero)
+            {
+                _types.Add(type);
+            }
+        }
+
+        var damage = equal.DamageDict;
+        var add = amount > FixedPoint2.Zero;
+        var left = amount;
+        while (add ? left > 0 : left < 0)
+        {
+            var lastLeft = left;
+            for (var i = _types.Count - 1; i >= 0; i--)
+            {
+                var type = _types[i];
+                var current = damageable.Comp.Damage.DamageDict[type];
+
+                var existingHeal = add ? damage.GetValueOrDefault(type) : -damage.GetValueOrDefault(type);
+                left += existingHeal;
+                var toHeal = FixedPoint2.Min(existingHeal + left / (i + 1), current);
+                if (current <= toHeal)
+                    _types.RemoveAt(i);
+
+                damage[type] = toHeal;
+                left -= toHeal;
+            }
+
+            if (lastLeft == left)
+                break;
+        }
+
+        return equal;
+    }
+
+    public DamageSpecifier DistributeTypes(Entity<DamageableComponent?> damageable, FixedPoint2 amount, DamageSpecifier? equal = null)
+    {
+        foreach (var group in _prototypes.EnumeratePrototypes<DamageGroupPrototype>())
+        {
+            equal = DistributeHealing(damageable, group.ID, amount, equal);
+        }
+
+        return equal ?? new DamageSpecifier();
     }
 }

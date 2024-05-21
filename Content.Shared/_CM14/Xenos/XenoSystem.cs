@@ -1,4 +1,5 @@
-﻿using Content.Shared._CM14.Marines;
+﻿using Content.Shared._CM14.Damage;
+using Content.Shared._CM14.Marines;
 using Content.Shared._CM14.Medical.Scanner;
 using Content.Shared._CM14.Vendors;
 using Content.Shared._CM14.Xenos.Evolution;
@@ -11,7 +12,6 @@ using Content.Shared.Access.Components;
 using Content.Shared.Actions;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Lathe;
@@ -22,20 +22,18 @@ using Content.Shared.Standing;
 using Content.Shared.UserInterface;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Shared._CM14.Xenos;
 
 public sealed class XenoSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _action = default!;
+    [Dependency] private readonly CMDamageableSystem _cmDamageable = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThresholds = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -225,53 +223,15 @@ public sealed class XenoSystem : EntitySystem
             return;
         }
 
-        var heal = new DamageSpecifier();
-        var groups = new Dictionary<string, List<string>>();
-        foreach (var group in _prototypes.EnumeratePrototypes<DamageGroupPrototype>())
+        var heal = _cmDamageable.DistributeTypes((xeno, xeno.Comp), -amount);
+
+        if (heal.GetTotal() > FixedPoint2.Zero)
         {
-            foreach (var type in group.DamageTypes)
-            {
-                if (xeno.Comp.Damage.DamageDict.TryGetValue(type, out var damage) &&
-                    damage > FixedPoint2.Zero)
-                {
-                    groups.GetOrNew(group.ID).Add(type);
-                }
-            }
+            Log.Error($"Tried to deal damage while healing xeno {ToPrettyString(xeno)}");
+            return;
         }
 
-        var typesLeft = new List<string>();
-        foreach (var (_, types) in groups)
-        {
-            var left = amount;
-            FixedPoint2? lastLeft;
-            typesLeft.Clear();
-            typesLeft.AddRange(types);
-
-            while (left > 0)
-            {
-                lastLeft = left;
-
-                for (var i = typesLeft.Count - 1; i >= 0; i--)
-                {
-                    var type = typesLeft[i];
-                    var damage = xeno.Comp.Damage.DamageDict[type];
-                    var existingHeal = -heal.DamageDict.GetValueOrDefault(type);
-                    left += existingHeal;
-                    var toHeal = FixedPoint2.Min(existingHeal + left / (i + 1), damage);
-                    if (damage <= toHeal)
-                        typesLeft.RemoveAt(i);
-
-                    heal.DamageDict[type] = -toHeal;
-                    left -= toHeal;
-                }
-
-                if (lastLeft == left)
-                    break;
-            }
-        }
-
-        if (heal.GetTotal() < FixedPoint2.Zero)
-            _damageable.TryChangeDamage(xeno, heal);
+        _damageable.TryChangeDamage(xeno, heal);
     }
 
     // TODO CM14 generalize this for survivors, synthetics, enemy hives, etc

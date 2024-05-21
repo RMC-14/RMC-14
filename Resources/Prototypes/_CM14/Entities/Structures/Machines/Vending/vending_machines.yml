@@ -4,15 +4,74 @@
   name: Vendomat
   description: A generic vending machine.
   components:
+  - type: AmbientOnPowered
+  - type: AmbientSound
+    volume: -9
+    range: 3
+    enabled: false
+    sound:
+      path: /Audio/Ambience/Objects/vending_machine_hum.ogg
+  - type: Physics
+    bodyType: Static
+  - type: Transform
+    noRot: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.45,0.25,0.45"
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        density: 200
+  - type: Repairable
+    doAfterDelay: 8
+  - type: ActivatableUI
+    key: enum.VendingMachineUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.VendingMachineUiKey.Key:
+        type: VendingMachineBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: TypingIndicator
+    proto: robot
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: Vending
+  - type: IntrinsicRadioReceiver
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Binary
+  - type: ActiveRadio
+    channels:
+    - Binary
+    - Common
+  - type: DoAfter
+  - type: Electrified
+    enabled: false
+    usesApcPower: true
+  - type: PointLight
+    enabled: false
+    castShadows: false
+    radius: 1.5
+  - type: LitOnPowered
+  - type: ApcPowerReceiver
+    powerLoad: 200
+  - type: Appearance
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/generic.rsi
+    snapCardinals: true
     layers:
-    - state: off
+    - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
-    - state: off
+    - state: "off"
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
       shader: unshaded
-    - state: panel
+    - state: "panel"
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: VendingMachine
     pack: CMVendomat
@@ -172,23 +231,108 @@
     pack: CMVendorIngredient
 
 - type: entity
-  parent: CMVendor
+  parent: ColMarTechBase
   id: CMVendorMedical
   name: Wey-Med Plus
   description:
   components:
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/med.rsi
-  - type: VendingMachine
-    pack: CMVendorMedical
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
+    layers:
+    - state: "off"
+    - state: "normal-unshaded"
   - type: AccessReader
     access: [["CMAccessMedical"]]
   - type: CMSolutionRefiller
+  - type: CMAutomatedVendor # TODO CM14 different ui style
+    sections:
+    - name: Field supplies
+      entries:
+      - id: CMBurnKit10
+        amount: 6
+      - id: CMTraumaKit10
+        amount: 6
+      - id: CMOintment10
+        amount: 6
+      - id: CMGauze10
+        amount: 6
+#      - id: CMSplints10 # TODO CM14
+#        amount: 6
+    - name: Autoinjectors
+      entries:
+      - id: CMBicaridineAutoInjector
+        amount: 3
+      - id: CMDexalinPlusAutoInjector
+        amount: 3
+      - id: CMEpinephrineAutoInjector
+        amount: 3
+      - id: CMInaprovalineAutoInjector
+        amount: 3
+      - id: CMKelotaneAutoInjector
+        amount: 3
+#      - id: CMOxycodoneAutoinjector # TODO CM14
+#        amount: 3
+#      - id: CMTramadolAutoinjector # TODO CM14
+#        amount: 3
+      - id: CMTricordrazineAutoInjector
+        amount: 3
+    - name: Liquid bottles
+      entries:
+      - id: CMBottleBicaridine
+        amount: 3
+      - id: CMBottleDylovene
+        amount: 3
+      - id: CMBottleDexalin
+        amount: 3
+      - id: CMBottleInaprovaline
+        amount: 3
+      - id: CMBottleKelotane
+        amount: 3
+#      - id: CMBottleOxycodone # TODO CM14
+#        amount: 3
+#      - id: CMBottlePeridaxon # TODO CM14
+#        amount: 3
+#      - id: CMBottleTramadol # TODO CM14
+#        amount: 3
+    - name: Pill bottles
+      entries:
+      - id: CMPillCanisterBicaridine
+        amount: 2
+      - id: CMPillCanisterDexalin
+        amount: 2
+      - id: CMPillCanisterDylovene
+        amount: 2
+      - id: CMPillCanisterInaprovaline
+        amount: 2
+      - id: CMPillCanisterKelotane
+        amount: 2
+#      - id: CMPillCanisterPeridaxon # TODO CM14
+#        amount: 2
+#      - id: CMPillCanisterTramadol # TODO CM14
+#        amount: 2
+    - name: Medical utilities
+      entries:
+      - id: CMDefibrillator
+        amount: 3
+      - id: CMSurgicalLine
+        amount: 2
+      - id: CMSynthGraft
+        amount: 2
+      - id: CMHypospray # TODO CM14 full of tricordrazine
+        amount: 2
+      - id: CMHealthAnalyzer
+        amount: 5
+      - id: CMBeltMedical
+        amount: 2
+      - id: ClothingEyesHudMedical # TODO CM14
+        amount: 3
+      - id: CMStasisBag
+        amount: 2
+      - id: CMSyringe
+        amount: 7
 
 - type: entity
-  parent: CMVendorMedical
+  parent: CMVendor
   id: CMVendorChemistry
   name: Wey-Chem Plus
   description: Medical chemistry dispenser. Provided by Wey-Yu Pharmaceuticals Division(TM).
@@ -201,7 +345,7 @@
     access: [["CMAccessChemistry"]]
 
 - type: entity
-  parent: CMVendorMedical
+  parent: CMVendor
   id: CMVendorBlood
   name: MM Blood Dispenser
   description: The Marine Med Brand Blood Pack Dispensary is the premier, top-of-the-line blood dispenser of 2105! Get yours today! #dont update year, that`s a joke from cm13
