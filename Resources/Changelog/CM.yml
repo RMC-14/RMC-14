@@ -893,5 +893,15 @@
   id: 117
   time: '2024-05-20T02:18:15.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2160
+- author: DrSmugleaf
+  changes:
+  - message: Ported the effects of all existing medicines.
+    type: Add
+  - message: Added all times to the Wey-Med Plus except for painkillers, splints and
+      peridaxon.
+    type: Add
+  id: 118
+  time: '2024-05-22T00:40:24.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2163
 Name: CM
 Order: -1
