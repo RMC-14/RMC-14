@@ -36,7 +36,7 @@
       drink:
         maxVol: 60
         reagents:
-        - ReagentId: Kelotane
+        - ReagentId: CMKelotane
           Quantity: 60
 
 - type: entity
@@ -50,7 +50,7 @@
       drink:
         maxVol: 60
         reagents:
-        - ReagentId: Inaprovaline
+        - ReagentId: CMInaprovaline
           Quantity: 60
 
 - type: entity
@@ -64,7 +64,7 @@
       drink:
         maxVol: 60
         reagents:
-        - ReagentId: Dylovene
+        - ReagentId: CMDylovene
           Quantity: 60
 
 - type: entity
@@ -78,7 +78,7 @@
       drink:
         maxVol: 60
         reagents:
-        - ReagentId: Bicaridine
+        - ReagentId: CMBicaridine
           Quantity: 60
 
 - type: entity
@@ -92,7 +92,7 @@
       drink:
         maxVol: 60
         reagents:
-        - ReagentId: Dexalin
+        - ReagentId: CMDexalin
           Quantity: 60
 
 #- type: entity

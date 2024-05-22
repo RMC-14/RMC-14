@@ -3244,14 +3244,7 @@ entities:
     - type: Transform
       pos: 3.0753088,8.286457
       parent: 179
-- proto: CMDyloveneAutoInjector
-  entities:
-  - uid: 1226
-    components:
-    - type: Transform
-      pos: -5.195151,-3.4815395
-      parent: 179
-- proto: CMEmergencyInjector
+- proto: CMEmergencyAutoInjector
   entities:
   - uid: 1227
     components:
@@ -4729,7 +4722,7 @@ entities:
     - type: Transform
       pos: -6.2568793,-2.9506752
       parent: 179
-- proto: CMTricordrazineInjector
+- proto: CMTricordrazineAutoInjector
   entities:
   - uid: 1230
     components:

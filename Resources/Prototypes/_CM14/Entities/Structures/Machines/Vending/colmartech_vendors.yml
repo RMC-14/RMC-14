@@ -1456,8 +1456,8 @@
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
   - type: CMAutomatedVendor
     sections:
-    - name: Autoinjectors
-      entries: [ ]
+#    - name: Autoinjectors
+#      entries: [ ]
     #- id: CMFirstAidInjector
     #- id: CMPainStopAutoinjector
     - name: Devices
