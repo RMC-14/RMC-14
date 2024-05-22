@@ -2,7 +2,7 @@
 using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._CM14.Chemistry.Effects;
+namespace Content.Server._CM14.Chemistry.Effects;
 
 public sealed partial class RemoveRecentDefibrillation : ReagentEffect
 {

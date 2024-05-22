@@ -2,7 +2,7 @@
 using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._CM14.Chemistry.Conditions;
+namespace Content.Server._CM14.Chemistry.Conditions;
 
 public sealed partial class RecentlyDefibrillated : ReagentEffectCondition
 {
