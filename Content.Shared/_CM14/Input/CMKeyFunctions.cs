@@ -15,5 +15,9 @@ public sealed class CMKeyFunctions
     public static readonly BoundKeyFunction MappingOpenContextMenu = "MappingOpenContextMenu";
 
     public static readonly BoundKeyFunction CMPumpShotgun = "CMPumpShotgun";
+    public static readonly BoundKeyFunction CMHolsterPrimary = "CMHolsterPrimary";
+    public static readonly BoundKeyFunction CMHolsterSecondary = "CMHolsterSecondary";
+    public static readonly BoundKeyFunction CMHolsterTertiary = "CMHolsterTertiary";
+    public static readonly BoundKeyFunction CMHolsterQuaternary = "CMHolsterQuaternary";
     public static readonly BoundKeyFunction CMXenoWideSwing = "CMXenoWideSwing";
 }
