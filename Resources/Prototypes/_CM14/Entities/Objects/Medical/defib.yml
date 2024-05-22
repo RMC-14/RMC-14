@@ -26,6 +26,8 @@
   - type: Speech
     speechVerb: Robotic
   - type: Defibrillator
+    allowDoAfterMovement: false
+    canDefibCrit: false
     zapHeal:
       types:
         Asphyxiation: -40
