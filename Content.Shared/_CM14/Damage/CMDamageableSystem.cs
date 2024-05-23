@@ -7,22 +7,31 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Silicons.Borgs;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Damage;
 
 public sealed class CMDamageableSystem : EntitySystem
 {
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly List<string> _types = [];
 
     private EntityQuery<DamageableComponent> _damageableQuery;
+    private EntityQuery<MobStateComponent> _mobStateQuery;
 
     public override void Initialize()
     {
         _damageableQuery = GetEntityQuery<DamageableComponent>();
+        _mobStateQuery = GetEntityQuery<MobStateComponent>();
+
+        SubscribeLocalEvent<DamageMobStateComponent, MapInitEvent>(OnDamageMobStateMapInit);
 
         SubscribeLocalEvent<MaxDamageComponent, BeforeDamageChangedEvent>(OnMaxBeforeDamageChanged);
         SubscribeLocalEvent<MaxDamageComponent, DamageModifyEvent>(OnMaxDamageModify,
@@ -31,6 +40,11 @@ public sealed class CMDamageableSystem : EntitySystem
                 typeof(SharedArmorSystem), typeof(BlockingSystem), typeof(InventorySystem), typeof(SharedBorgSystem),
                 typeof(SharedMarineOrdersSystem), typeof(CMArmorSystem), typeof(SharedXenoPheromonesSystem)
             ]);
+    }
+
+    private void OnDamageMobStateMapInit(Entity<DamageMobStateComponent> ent, ref MapInitEvent args)
+    {
+        ent.Comp.DamageAt = _timing.CurTime + ent.Comp.Cooldown;
     }
 
     private void OnMaxBeforeDamageChanged(Entity<MaxDamageComponent> ent, ref BeforeDamageChangedEvent args)
@@ -122,5 +136,36 @@ public sealed class CMDamageableSystem : EntitySystem
         }
 
         return equal ?? new DamageSpecifier();
+    }
+
+    public override void Update(float frameTime)
+    {
+        var time = _timing.CurTime;
+        var query = EntityQueryEnumerator<DamageMobStateComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (time < comp.DamageAt)
+                continue;
+
+            comp.DamageAt = time + comp.Cooldown;
+            Dirty(uid, comp);
+
+            if (!_mobStateQuery.TryComp(uid, out var state) ||
+                !_damageableQuery.TryComp(uid, out var damageable))
+            {
+                continue;
+            }
+
+            switch (state.CurrentState)
+            {
+                case MobState.Alive:
+                    _damageable.TryChangeDamage(uid, comp.NonDeadDamage, true, damageable: damageable);
+                    break;
+                case MobState.Critical:
+                    _damageable.TryChangeDamage(uid, comp.NonDeadDamage, true, damageable: damageable);
+                    _damageable.TryChangeDamage(uid, comp.CritDamage, true, damageable: damageable);
+                    break;
+            }
+        }
     }
 }
