@@ -21,7 +21,7 @@
   parent: ClothingShoesMilitaryBase
   id: CMBootsBlack
   name: marine combat boots
-  description: Standard issue combat boots used by the USCM for combat situations.  All combat, all the time.
+  description: Standard issue combat boots for combat scenarios or combat situations. All combat, all the time.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Shoes/Marines/black.rsi
@@ -55,8 +55,7 @@
 - type: entity
   parent: CMBootsBlack
   id: CMBootsBrown
-  name: brown boots
-  description: Standard issue combat boots used by the USCM for combat situations. All combat, all the time. These are brown.
+  description: Standard issue combat boots for combat scenarios or combat situations. All combat, all the time. These are brown.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Shoes/Marines/brown.rsi
