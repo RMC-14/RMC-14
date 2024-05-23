@@ -1,7 +1,9 @@
-﻿using Content.Shared._CM14.Vendors;
+﻿using System.Linq;
+using Content.Shared._CM14.Vendors;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
+using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -15,14 +17,12 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
 {
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-
-    private readonly SpriteSystem _sprite;
+    [Dependency] private readonly IResourceCache _resource = default!;
 
     private CMAutomatedVendorWindow? _window;
 
     public CMAutomatedVendorBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
-        _sprite = EntMan.System<SpriteSystem>();
     }
 
     protected override void Open()
@@ -47,7 +47,9 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
 
                     if (_prototype.TryIndex(entry.Id, out var entity))
                     {
-                        uiEntry.Texture.Texture = _sprite.Frame0(entity);
+                        uiEntry.Texture.Textures = SpriteComponent.GetPrototypeTextures(entity, _resource)
+                            .Select(o => o.Default)
+                            .ToList();
                         uiEntry.Panel.Button.Label.Text = entry.Name ?? entity.Name;
 
                         var msg = new FormattedMessage();
