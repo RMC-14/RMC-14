@@ -92,7 +92,7 @@ public sealed class XenoFortifySystem : EntitySystem
 
     private void OnXenoFortifyBeforeStatusAdded(Entity<XenoFortifyComponent> xeno, ref BeforeStatusEffectAddedEvent args)
     {
-        if (xeno.Comp.Fortified && args.Key == "Stun")
+        if (xeno.Comp.Fortified && args.Key == xeno.Comp.ImmuneToStatus)
             args.Cancelled = true;
     }
 
