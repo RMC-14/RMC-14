@@ -19,6 +19,7 @@
     quickEquip: false
     slots:
     - suitStorage
+    - belt
   - type: Wieldable
   - type: Gun
     fireRate: 8
