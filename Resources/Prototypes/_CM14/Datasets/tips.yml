@@ -47,7 +47,7 @@
   - "CIC staff can track every USCM-aligned person via the suit sensors console and overwatch console - useful for finding escaped prisoners or dead marines."
   - "Remember that you need to put a defibrillator's paddles away in order to store it."
   - "W-Y PMCs do not have marine IFF. Don't fire Smartguns at them!"
-  - "To talk on multiple radio channels at once, put a COMMA [,] before your message and add up to four prefixes. E.g, ,abcd talks on the main four squad channels at once."
+  - "To talk on multiple radio channels at once, put a COMMA \\[,\\] before your message and add up to four prefixes. E.g, ,abcd talks on the main four squad channels at once."
   - "Put .w or :w before your message to whisper. Another way to whisper is to use the verb 'whisper' in the IC tab or command bar."
   - "Minirockets pack the most punch per cost as far as CAS weaponry is concerned."
   - "The U7 underbarrel shotgun can instantly break down both resin doors and mechanical airlocks, and it's not bad at breaking walls down either."
@@ -185,7 +185,7 @@
   #- Never inject a marine you haven't scanned! You might overdose them; ESPECIALLY so with an emergency autoinjector.
   #- If another marine is stunned, you can click on them with help intent with an open hand to shake them up faster.
   #- Never place barricades facing each other - Not only does this block bullets, both barricades are damaged at once if one is slashed!
-  #- Examine your gun and click [See combat statistics] to view information such as damage for your weapon.
+  #- Examine your gun and click \\[See combat statistics\\] to view information such as damage for your weapon.
   #- Xenomorphs who run while on fire are stunned for some time and emit light. Use that time to catch up and finish them off!
   #- When you have shrapnel embedded, take out your boot knife and use it in your hand to rip them out of your body.
   #- If your weapon has a bayonet, you can manually pry open unpowered doors by clicking on them with the gun. Click on the door again to close it. UPP bayonets can pry them open quicker.
