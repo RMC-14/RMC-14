@@ -70,7 +70,7 @@ public sealed class XenoCrestSystem : EntitySystem
 
     private void OnXenoCrestBeforeStatusAdded(Entity<XenoCrestComponent> xeno, ref BeforeStatusEffectAddedEvent args)
     {
-        if (xeno.Comp.Lowered && args.Key == "Stun")
+        if (xeno.Comp.Lowered && args.Key == xeno.Comp.ImmuneToStatus)
             args.Cancelled = true;
     }
 
