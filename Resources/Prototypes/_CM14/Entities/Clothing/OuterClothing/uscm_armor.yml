@@ -11,6 +11,8 @@
     - state: icon
   - type: Clothing
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/standard.rsi
+    equipDelay: 2
+    unequipDelay: 2
   - type: CMArmor
     armor: 20
     explosionArmor: 15
