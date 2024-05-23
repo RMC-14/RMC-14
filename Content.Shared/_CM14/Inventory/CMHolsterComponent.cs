@@ -18,6 +18,9 @@ public sealed partial class CMHolsterComponent : Component
     public TimeSpan? Cooldown;
 
     [DataField, AutoNetworkedField]
+    public string? CooldownPopup;
+
+    [DataField, AutoNetworkedField]
     public int? Count;
 
     [DataField, AutoNetworkedField]

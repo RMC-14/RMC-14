@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Shared._CM14.Input;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Containers.ItemSlots;
@@ -83,7 +84,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 InputCmdHandler.FromDelegate(session =>
                 {
                     if (session?.AttachedEntity is { } entity)
-                        OnHolster(entity, 3);
+                        OnHolster(entity, 3, CMHolsterChoose.Last);
                 }, handle: false))
             .Register<SharedCMInventorySystem>();
     }
@@ -104,13 +105,13 @@ public abstract class SharedCMInventorySystem : EntitySystem
             return;
 
         var slots = EnsureComp<ItemSlotsComponent>(ent);
-        for (var i = 0; i < ent.Comp.Count; i++)
+        for (var i = 0; i < count; i++)
         {
             var n = i + 1;
             var copy = new ItemSlot(slot);
             copy.Name = $"{copy.Name} {n}";
 
-            _itemSlots.AddItemSlot(ent, $"{slot.ID}{n}", copy);
+            _itemSlots.AddItemSlot(ent, $"{slot.Name}{n}", copy);
         }
 
         Dirty(ent, slots);
@@ -145,8 +146,12 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
     protected void OnEntRemovedFromContainer(Entity<CMHolsterComponent> ent, ref EntRemovedFromContainerMessage args)
     {
-        ent.Comp.LastEjectAt = _timing.CurTime;
-        Dirty(ent);
+        if (!_timing.ApplyingState)
+        {
+            ent.Comp.LastEjectAt = _timing.CurTime;
+            Dirty(ent);
+        }
+
         ContentsUpdated(ent);
     }
 
@@ -154,9 +159,9 @@ public abstract class SharedCMInventorySystem : EntitySystem
     {
     }
 
-    private bool PickupSlot(EntityUid user, Entity<CMHolsterComponent> holster)
+    private bool SlotCanInteract(EntityUid user, Entity<CMHolsterComponent> holster, [NotNullWhen(true)] out ItemSlotsComponent? itemSlots)
     {
-        if (!TryComp(holster, out ItemSlotsComponent? itemSlots))
+        if (!TryComp(holster, out itemSlots))
             return false;
 
         // no quick unholstering other's holsters
@@ -164,8 +169,25 @@ public abstract class SharedCMInventorySystem : EntitySystem
             container.Owner != user &&
             _inventory.HasSlot(container.Owner, container.ID))
         {
+            itemSlots = default;
             return false;
         }
+
+        return true;
+    }
+
+    private bool InsertSlot(EntityUid user, Entity<CMHolsterComponent> holster, EntityUid item)
+    {
+        if (!SlotCanInteract(user, holster, out var itemSlots))
+            return false;
+
+        return _itemSlots.TryInsertEmpty((holster, itemSlots), item, user, true);
+    }
+
+    private bool PickupSlot(EntityUid user, Entity<CMHolsterComponent> holster)
+    {
+        if (!SlotCanInteract(user, holster, out var itemSlots))
+            return false;
 
         foreach (var slot in itemSlots.Slots.Values.OrderBy(s => s.Priority))
         {
@@ -176,7 +198,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         return false;
     }
 
-    private void OnHolster(EntityUid user, int startIndex)
+    private void OnHolster(EntityUid user, int startIndex, CMHolsterChoose choose = CMHolsterChoose.First)
     {
         if (_hands.TryGetActiveItem(user, out var active))
         {
@@ -184,7 +206,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
             return;
         }
 
-        Unholster(user, startIndex);
+        Unholster(user, startIndex, choose);
     }
 
     private void Holster(EntityUid user, EntityUid item)
@@ -195,10 +217,15 @@ public abstract class SharedCMInventorySystem : EntitySystem
             var slots = _inventory.GetSlotEnumerator(user, flag);
             while (slots.MoveNext(out var slot))
             {
+                if (TryComp(slot.ContainedEntity, out CMHolsterComponent? holster) &&
+                    InsertSlot(user, (slot.ContainedEntity.Value, holster), item))
+                {
+                    return;
+                }
+
                 if (slot.ContainedEntity != null)
                     continue;
 
-                // TODO CM14 try in-holster first
                 if (_inventory.TryEquip(user, item, slot.ID, true))
                     return;
             }
@@ -207,7 +234,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         _popup.PopupClient("You are unable to equip that.", user, user, PopupType.SmallCaution);
     }
 
-    private void Unholster(EntityUid user, int startIndex)
+    private void Unholster(EntityUid user, int startIndex, CMHolsterChoose choose)
     {
         if (_order.Length == 0)
             return;
@@ -217,39 +244,71 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
         for (var i = startIndex; i < _order.Length; i++)
         {
-            if (Unholster(user, _order[i]))
+            if (Unholster(user, _order[i], choose, out var stop) || stop)
                 return;
         }
 
         for (var i = 0; i < startIndex; i++)
         {
-            if (Unholster(user, _order[i]))
+            if (Unholster(user, _order[i], choose, out var stop) || stop)
                 return;
         }
     }
 
-    private bool Unholster(EntityUid user, SlotFlags flag)
+    private bool Unholster(EntityUid user, SlotFlags flag, CMHolsterChoose choose, out bool stop)
     {
-        var slots = _inventory.GetSlotEnumerator(user, flag);
-        while (slots.NextItem(out var item))
+        stop = false;
+        var enumerator = _inventory.GetSlotEnumerator(user, flag);
+
+        if (choose == CMHolsterChoose.Last)
         {
-            if (TryComp(item, out CMHolsterComponent? holster) &&
-                PickupSlot(user, (item, holster)))
+            var items = new List<EntityUid>();
+            while (enumerator.NextItem(out var next))
             {
-                return true;
+                items.Add(next);
             }
 
-            var ev = new IsUnholsterableEvent();
-            RaiseLocalEvent(item, ref ev);
+            items.Reverse();
 
-            if (!ev.Unholsterable)
-                continue;
-
-            if (_hands.TryPickup(user, item))
+            foreach (var item in items)
+            {
+                if (Unholster(user, item, out stop))
+                    return true;
+            }
+        }
+        while (enumerator.NextItem(out var item))
+        {
+            if (Unholster(user, item, out stop))
                 return true;
         }
 
         return false;
+    }
+
+    private bool Unholster(EntityUid user, EntityUid item, out bool stop)
+    {
+        stop = false;
+        if (TryComp(item, out CMHolsterComponent? holster))
+        {
+            if (holster.Cooldown is { } cooldown &&
+                _timing.CurTime < holster.LastEjectAt + cooldown)
+            {
+                stop = true;
+                _popup.PopupPredicted(holster.CooldownPopup, user, user, PopupType.SmallCaution);
+                return false;
+            }
+
+            if (PickupSlot(user, (item, holster)))
+                return true;
+        }
+
+        var ev = new IsUnholsterableEvent();
+        RaiseLocalEvent(item, ref ev);
+
+        if (!ev.Unholsterable)
+            return false;
+
+        return _hands.TryPickup(user, item);
     }
 
     public bool TryEquipClothing(EntityUid user, Entity<ClothingComponent> clothing)

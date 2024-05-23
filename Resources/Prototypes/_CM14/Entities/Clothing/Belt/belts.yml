@@ -114,7 +114,7 @@
     sprite: _CM14/Objects/Clothing/Belt/combat_utility.rsi
 
 - type: entity
-  parent: CMBeltBaseStorage
+  parent: CMBeltBase
   id: CMBeltKnife
   name: M276 pattern knife rig
   description: The M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This version is specially designed to store knives. Not commonly issued, but kept in service.
@@ -126,16 +126,16 @@
   - type: ItemSlots
   - type: CMHolster
     cooldown: 1
+    cooldownPopup: You need to wait before drawing another knife!
     count: 12
     slot:
-      knife:
-        name: Knife
-        whitelist:
-          tags:
-          - Knife
-        sizes:
-        - Tiny
-        - Small
+      name: Knife
+      whitelist:
+        tags:
+        - Knife
+      sizes:
+      - Tiny
+      - Small
 
 - type: entity
   parent: CMBeltBaseStorage

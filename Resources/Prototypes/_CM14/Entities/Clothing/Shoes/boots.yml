@@ -20,11 +20,15 @@
 - type: entity
   parent: ClothingShoesMilitaryBase
   id: CMBootsBlack
-  name: black boots
+  name: marine combat boots
   description: Standard issue combat boots used by the USCM for combat situations.  All combat, all the time.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Shoes/Marines/black.rsi
+    layers:
+    - state: icon
+    - state: filled
+      map: [ "enum.CMHolsterLayers.Filled" ]
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Shoes/Marines/black.rsi
   - type: Matchbox
@@ -35,6 +39,7 @@
         whitelist:
           tags:
           - Knife
+  - type: CMHolster
 
 - type: entity
   parent: CMBootsBlack
