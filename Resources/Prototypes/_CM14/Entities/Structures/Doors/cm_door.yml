@@ -137,6 +137,7 @@
     mode: SnapgridCenter
 
 - type: entity
+  abstract: true
   id: CMBaseDoorConstructible
   components:
   - type: Construction
