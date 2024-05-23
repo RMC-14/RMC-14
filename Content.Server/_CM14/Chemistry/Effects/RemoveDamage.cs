@@ -22,6 +22,9 @@ public sealed partial class RemoveDamage : ReagentEffect
 
     public override void Effect(ReagentEffectArgs args)
     {
+        if (args.Scale < 0.95f)
+            return;
+
         if (!args.EntityManager.TryGetComponent(args.SolutionEntity, out DamageableComponent? damageable) ||
             !damageable.Damage.DamageDict.TryGetValue(Type, out var value))
         {

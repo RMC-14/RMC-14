@@ -1,10 +1,10 @@
 ﻿# TODO CM14 other effects
 - type: reagent
-  parent: Dylovene
+  parent: [ CMReagent, Dylovene ]
   id: CMDylovene
-  name: reagent-desc-cmdylovene
+  name: reagent-name-cmdylovene
   desc: reagent-desc-cmdylovene
-  color: "#5986d3"
+  color: "#3fc92a"
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -36,12 +36,13 @@
         - !type:ReagentThreshold
           min: 50
         key: Drunk
+        component: Drunk
         time: 60
         type: Add
 
 # TODO CM14 other effects
 - type: reagent
-  parent: Ethylredoxrazine
+  parent: [ CMReagent, Ethylredoxrazine ]
   id: CMEthylredoxrazine
   name: reagent-name-cmethylredoxrazine
   desc: reagent-desc-cmethylredoxrazine
@@ -71,7 +72,7 @@
 
 # TODO CM14 other effects
 - type: reagent
-  parent: Arithrazine
+  parent: [ CMReagent, Arithrazine ]
   id: CMArithrazine
   name: reagent-name-cmarithrazine
   desc: reagent-desc-cmarithrazine
@@ -107,6 +108,7 @@
         - !type:ReagentThreshold
           min: 12.5
         key: Drunk
+        component: Drunk
         time: 30
         type: Add
       - !type:HealthChange
@@ -130,7 +132,7 @@
 
 # TODO CM14 other effects
 - type: reagent
-  parent: Bicaridine
+  parent: [ CMReagent, Bicaridine ]
   id: CMBicaridine
   name: reagent-name-cmbicaridine
   desc: reagent-desc-cmbicaridine
@@ -160,7 +162,7 @@
 
 # TODO CM14 other effects (remove toxic reagents)
 - type: reagent
-  parent: Cryoxadone
+  parent: [ CMReagent, Cryoxadone ]
   id: CMCryoxadone
   name: reagent-name-cmcryoxadone
   desc: reagent-desc-cmcryoxadone
@@ -188,7 +190,7 @@
 
 # TODO CM14 other effects
 - type: reagent
-  parent: Dermaline
+  parent: [ CMReagent, Dermaline ]
   id: CMDermaline
   name: reagent-name-cmdermaline
   desc: reagent-desc-cmdermaline
@@ -219,7 +221,7 @@
 
 # TODO CM14 other effects
 - type: reagent
-  parent: Dexalin
+  parent: [ CMReagent, Dexalin ]
   id: CMDexalin
   name: reagent-name-cmdexalin
   desc: reagent-desc-cmdexalin
@@ -250,7 +252,7 @@
 
 # TODO CM14 other effects
 - type: reagent
-  parent: DexalinPlus
+  parent: [ CMReagent, DexalinPlus ]
   id: CMDexalinPlus
   name: reagent-name-cmdexalinplus
   desc: reagent-desc-cmdexalinplus
@@ -280,7 +282,7 @@
 # TODO CM14 other effects (pain)
 # TODO CM14 injected only
 - type: reagent
-  parent: Epinephrine
+  parent: [ CMReagent, Epinephrine ]
   id: CMEpinephrine
   name: reagent-name-cmepinephrine
   desc: reagent-desc-cmepinephrine
@@ -293,9 +295,9 @@
         conditions:
         - !type:RecentlyDefibrillated
         damage:
-          - Brute: -5
-          - Burn: -5
-          - Toxin: -5
+        - Brute: -5
+        - Burn: -5
+        - Toxin: -5
       - !type:AdjustReagent
         conditions:
         - !type:RecentlyDefibrillated
@@ -322,7 +324,7 @@
 # TODO CM14 other effects
 # TODO CM14 allow breathing in crit instead of reducing asphyxiation
 - type: reagent
-  parent: Inaprovaline
+  parent: [ CMReagent, Inaprovaline ]
   id: CMInaprovaline
   name: reagent-name-cminaprovaline
   desc: reagent-desc-cminaprovaline
@@ -347,6 +349,15 @@
         - !type:ReagentThreshold
           min: 60
         key: Stun
+        component: Stunned
+        time: 40
+        type: Add
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 60
+        key: KnockedDown
+        component: KnockedDown
         time: 40
         type: Add
       - !type:GenericStatusEffect
@@ -354,12 +365,13 @@
         - !type:ReagentThreshold
           min: 100
         key: Drunk
+        component: Drunk
         time: 40
         type: Add
 
 # TODO CM14 other effects
 - type: reagent
-  parent: Kelotane
+  parent: [ CMReagent, Kelotane ]
   id: CMKelotane
   name: reagent-name-cmkelotane
   desc: reagent-desc-cmkelotane
@@ -385,12 +397,12 @@
           min: 50
         damage:
           groups:
-            Burn: 2.5
+            Brute: 2.5
             Toxin: 2.5
 
 # TODO CM14 other effects
 - type: reagent
-  parent: Leporazine
+  parent: [ CMReagent, Leporazine ]
   id: CMLeporazine
   name: reagent-name-cmleporazine
   desc: reagent-desc-cmleporazine
@@ -399,26 +411,23 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:AdjustTemperature
+      - !type:StabilizeTemperature
+        stable: 310
+        change: 60
+      - !type:GenericStatusEffect
         conditions:
-        - !type:Temperature
-          max: 311
-        amount: 100000 # thermal energy, not temperature!
-      - !type:AdjustTemperature
-        conditions:
-        - !type:Temperature
-          min: 310
-        amount: -10000
-      - !type:PopupMessage
-        type: Local
-        visualType: Medium
-        messages: [ "leporazine-effect-temperature-adjusting" ]
-        probability: 0.2
+        - !type:ReagentThreshold
+          min: 30
+        key: KnockedDown
+        component: KnockedDown
+        time: 40
+        type: Add
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
           min: 30
         key: Stun
+        component: Stunned
         time: 40
         type: Add
       - !type:GenericStatusEffect
@@ -426,14 +435,15 @@
         - !type:ReagentThreshold
           min: 50
         key: Drunk
+        component: Drunk
         time: 30
         type: Add
 
 # TODO CM14 other effects
 - type: reagent
-  parent: Tricordrazine
+  parent: [ CMReagent, Tricordrazine ]
   id: CMTricordrazine
-  name: reagent-desc-cmtricordrazine
+  name: reagent-name-cmtricordrazine
   desc: reagent-desc-cmtricordrazine
   color: "#d87f2b"
   metabolisms:
@@ -472,5 +482,6 @@
         - !type:ReagentThreshold
           min: 50
         key: Drunk
+        component: Drunk
         time: 60
         type: Add

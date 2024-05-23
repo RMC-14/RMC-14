@@ -1,6 +1,7 @@
 ﻿using System.Collections.Frozen;
 using System.Linq;
 using System.Text.Json.Serialization;
+using Content.Shared._CM14.Prototypes;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body.Prototypes;
 using Content.Shared.Chemistry.Components;
@@ -13,7 +14,6 @@ using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 using Robust.Shared.Utility;
 
@@ -21,7 +21,7 @@ namespace Content.Shared.Chemistry.Reagent
 {
     [Prototype("reagent")]
     [DataDefinition]
-    public sealed partial class ReagentPrototype : IPrototype, IInheritingPrototype
+    public sealed partial class ReagentPrototype : IPrototype, IInheritingPrototype, ICMSpecific
     {
         [ViewVariables]
         [IdDataField]
@@ -186,6 +186,10 @@ namespace Content.Shared.Chemistry.Reagent
                 plantMetabolizable.Effect(args);
             }
         }
+
+        // TODO CM14 move out to a partial when https://github.com/space-wizards/RobustToolbox/pull/5160 is merged
+        [DataField]
+        public bool IsCM { get; set; }
     }
 
     [Serializable, NetSerializable]
