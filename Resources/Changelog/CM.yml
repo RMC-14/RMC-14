@@ -903,5 +903,12 @@
   id: 118
   time: '2024-05-22T00:40:24.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2163
+- author: DrSmugleaf
+  changes:
+  - message: Added all cm chemicals to the guidebook.
+    type: Add
+  id: 119
+  time: '2024-05-23T12:08:54.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2168
 Name: CM
 Order: -1
