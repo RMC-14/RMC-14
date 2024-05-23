@@ -231,6 +231,9 @@
       map: [ "enum.CMHolsterLayers.Filled" ]
       visible: false
     - state: icon
+  - type: ContainerContainer
+    containers:
+      pouch: !type:ContainerSlot
   - type: ItemSlots
     slots:
       pouch:

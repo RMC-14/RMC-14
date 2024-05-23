@@ -32,6 +32,9 @@
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Shoes/Marines/black.rsi
   - type: Matchbox
+  - type: ContainerContainer
+    containers:
+      item: !type:ContainerSlot
   - type: ItemSlots
     slots:
       item:
