@@ -34,5 +34,5 @@ reagent-desc-cmkelotane = Common medicine used to treat burns, caustic and corro
 reagent-name-cmleporazine = Leporazine
 reagent-desc-cmleporazine = A drug used to treat hypothermia and hyperthermia. Stabilizes patient body temperture. Prevents the use of cryogenics. Overdosing on leporazine can cause extreme drowsyness.
 
-reagent-name-cmtricordrazine = Leporazine
+reagent-name-cmtricordrazine = Tricordrazine
 reagent-desc-cmtricordrazine = Tricordrazine is a highly potent stimulant, originally derived from cordrazine. Can be used to treat a wide range of injuries.
