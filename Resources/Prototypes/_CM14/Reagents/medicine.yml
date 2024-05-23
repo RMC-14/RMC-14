@@ -411,21 +411,9 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:AdjustTemperature
-        conditions:
-        - !type:Temperature
-          max: 311
-        amount: 100000 # thermal energy, not temperature!
-      - !type:AdjustTemperature
-        conditions:
-        - !type:Temperature
-          min: 310
-        amount: -10000
-      - !type:PopupMessage
-        type: Local
-        visualType: Medium
-        messages: [ "leporazine-effect-temperature-adjusting" ]
-        probability: 0.2
+      - !type:StabilizeTemperature
+        stable: 310
+        change: 60
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold

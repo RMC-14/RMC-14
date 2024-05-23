@@ -59,7 +59,7 @@ public sealed partial class EqualHealthChange : ReagentEffect
         var cmDamageable = args.EntityManager.System<CMDamageableSystem>();
         foreach (var (group, amount) in Damage)
         {
-            damage = cmDamageable.DistributeHealing(args.SolutionEntity, group, amount, damage);
+            damage = cmDamageable.DistributeHealing(args.SolutionEntity, group, amount * args.Scale, damage);
         }
 
         args.EntityManager.System<DamageableSystem>()
