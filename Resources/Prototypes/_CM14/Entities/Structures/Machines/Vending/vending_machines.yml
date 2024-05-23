@@ -332,17 +332,53 @@
         amount: 7
 
 - type: entity
-  parent: CMVendor
+  parent: ColMarTechBase
   id: CMVendorChemistry
   name: Wey-Chem Plus
   description: Medical chemistry dispenser. Provided by Wey-Yu Pharmaceuticals Division(TM).
   components:
   - type: Sprite
-    sprite: _CM14/Structures/Machines/VendingMachines/chem.rsi
-  - type: VendingMachine
-    pack: CMVendorChemistry
+    sprite: _CM14/Structures/Machines/VendingMachines/med.rsi
+    layers:
+    - state: "off"
+    - state: "normal-unshaded"
   - type: AccessReader
     access: [["CMAccessChemistry"]]
+  - type: CMSolutionRefiller
+  - type: CMAutomatedVendor # TODO CM14 different ui style
+    sections:
+    - name: Liquid bottles
+      entries:
+      - id: CMBottleBicaridine
+        amount: 6
+      - id: CMBottleDylovene
+        amount: 6
+      - id: CMBottleDexalin
+        amount: 6
+      - id: CMBottleInaprovaline
+        amount: 6
+      - id: CMBottleKelotane
+        amount: 6
+    #      - id: CMBottleOxycodone # TODO CM14
+    #        amount: 6
+    #      - id: CMBottlePeridaxon # TODO CM14
+    #        amount: 6
+    #      - id: CMBottleTramadol # TODO CM14
+    #        amount: 6
+    - name: Miscellaneous
+      entries:
+      - id: CMBeaker
+        name: Beaker (60 units)
+        amount: 3
+      - id: CMBeakerLarge
+        name: Beaker, Large (120 units)
+        amount: 3
+      - id: CMBoxPillCanister
+        amount: 2
+      - id: Dropper # TODO CM14 cm dropper
+        amount: 3
+      - id: CMSyringe
+        amount: 7
 
 - type: entity
   parent: CMVendor
