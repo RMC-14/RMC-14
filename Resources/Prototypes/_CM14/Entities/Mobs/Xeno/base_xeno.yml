@@ -28,6 +28,7 @@
   minValue: 1
   maxValue: 999
 
+# TODO CM14 xenos should bleed and hurt nearby marines when damaged
 - type: entity
   id: CMXenoBase
   abstract: true
@@ -129,17 +130,6 @@
         - MobMask
         layer:
         - MobLayer
-  - type: SolutionContainerManager
-  - type: InjectableSolution
-    solution: chemicals
-  - type: Bloodstream
-    bloodReagent: FluorosulfuricAcid
-    bloodlossDamage:
-      types:
-        Bloodloss: 0
-    bloodlossHealDamage:
-      types:
-        Bloodloss: -1
   - type: Xeno
   - type: UserInterface
     interfaces:
