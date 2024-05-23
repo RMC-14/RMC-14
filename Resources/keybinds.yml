@@ -577,6 +577,21 @@ binds:
 - function: CMPumpShotgun
   type: State
   key: Space
+- function: CMHolsterPrimary
+  type: State
+  key: F
+- function: CMHolsterSecondary
+  type: State
+  key: F
+  mod1: Shift
+- function: CMHolsterTertiary
+  type: State
+  key: F
+  mod1: Control
+- function: CMHolsterQuaternary
+  type: State
+  key: F
+  mod1: Alt
 - function: CMXenoWideSwing
   type: State
   key: Space

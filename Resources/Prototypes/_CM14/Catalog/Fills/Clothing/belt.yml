@@ -32,10 +32,8 @@
   id: CMBeltKnifeFilled
   suffix: Filled
   components:
-  - type: StorageFill
-    contents:
-    - id: CMM11Knife
-      amount: 12
+  - type: CMHolster
+    startingItem: CMM11Knife
 
 - type: entity
   parent: CMBeltSecurity

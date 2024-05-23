@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Shared._CM14.Inventory;
 using Content.Shared._CM14.Marines.Squads;
 using Content.Shared._CM14.Webbing;
 using Content.Shared.Access.Components;
@@ -18,6 +19,7 @@ namespace Content.Shared._CM14.Vendors;
 
 public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 {
+    [Dependency] private readonly SharedCMInventorySystem _cmInventory = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
@@ -29,25 +31,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedWebbingSystem _webbing = default!;
-
-    private readonly SlotFlags[] _order =
-    [
-        SlotFlags.BACK,
-        SlotFlags.IDCARD,
-        SlotFlags.INNERCLOTHING,
-        SlotFlags.OUTERCLOTHING,
-        SlotFlags.HEAD,
-        SlotFlags.FEET,
-        SlotFlags.MASK,
-        SlotFlags.GLOVES,
-        SlotFlags.EARS,
-        SlotFlags.EYES,
-        SlotFlags.BELT,
-        SlotFlags.SUITSTORAGE,
-        SlotFlags.NECK,
-        SlotFlags.POCKET,
-        SlotFlags.LEGS
-    ];
 
     public override void Initialize()
     {
@@ -236,7 +219,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return _hands.TryPickupAnyHand(player, item);
         }
 
-        if (TryEquip(player, (item, clothing)))
+        if (_cmInventory.TryEquipClothing(player, (item, clothing)))
             return true;
 
         return _hands.TryPickupAnyHand(player, item);
@@ -255,26 +238,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 {
                     return true;
                 }
-            }
-        }
-
-        return false;
-    }
-
-    private bool TryEquip(EntityUid player, Entity<ClothingComponent> clothing)
-    {
-        foreach (var order in _order)
-        {
-            if ((clothing.Comp.Slots & order) == 0)
-                continue;
-
-            if (!_inventory.TryGetContainerSlotEnumerator(player, out var slots, clothing.Comp.Slots))
-                continue;
-
-            while (slots.MoveNext(out var slot))
-            {
-                if (_inventory.TryEquip(player, clothing, slot.ID))
-                    return true;
             }
         }
 

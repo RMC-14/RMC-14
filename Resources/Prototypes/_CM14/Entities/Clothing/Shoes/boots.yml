@@ -20,14 +20,21 @@
 - type: entity
   parent: ClothingShoesMilitaryBase
   id: CMBootsBlack
-  name: black boots
-  description: Standard issue combat boots used by the USCM for combat situations.  All combat, all the time.
+  name: marine combat boots
+  description: Standard issue combat boots for combat scenarios or combat situations. All combat, all the time.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Shoes/Marines/black.rsi
+    layers:
+    - state: icon
+    - state: filled
+      map: [ "enum.CMHolsterLayers.Filled" ]
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Shoes/Marines/black.rsi
   - type: Matchbox
+  - type: ContainerContainer
+    containers:
+      item: !type:ContainerSlot
   - type: ItemSlots
     slots:
       item:
@@ -35,23 +42,21 @@
         whitelist:
           tags:
           - Knife
+  - type: CMHolster
 
 - type: entity
   parent: CMBootsBlack
   id: CMBootsBlackFilled
   suffix: Filled
   components:
-  - type: ContainerFill
-    containers:
-      item:
-      - CMM5Bayonet
+  - type: CMHolster
+    startingItem: CMM5Bayonet
 
 # Brown Boots
 - type: entity
   parent: CMBootsBlack
   id: CMBootsBrown
-  name: brown boots
-  description: Standard issue combat boots used by the USCM for combat situations. All combat, all the time. These are brown.
+  description: Standard issue combat boots for combat scenarios or combat situations. All combat, all the time. These are brown.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Shoes/Marines/brown.rsi
@@ -63,16 +68,15 @@
   id: CMBootsBrownFilled
   suffix: Filled
   components:
-  - type: ContainerFill
-    containers:
-      item:
-      - CMM5Bayonet
+  - type: CMHolster
+    startingItem: CMM5Bayonet
 
 # Jungle Boots
 - type: entity
   parent: CMBootsBlack
   id: CMBootsJungle
   name: jungle boots
+  description: Don't go walkin' slow, the devil's on the loose.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Shoes/Marines/jungle.rsi
@@ -84,8 +88,5 @@
   id: CMBootsJungleFilled
   suffix: Filled
   components:
-  - type: ContainerFill
-    containers:
-      item:
-      - CMM5Bayonet
-
+  - type: CMHolster
+    startingItem: CMM5Bayonet

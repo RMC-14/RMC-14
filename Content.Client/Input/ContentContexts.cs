@@ -130,6 +130,10 @@ namespace Content.Client.Input
         {
             var human = contexts.GetContext("human");
             human.AddFunction(CMKeyFunctions.CMPumpShotgun);
+            human.AddFunction(CMKeyFunctions.CMHolsterPrimary);
+            human.AddFunction(CMKeyFunctions.CMHolsterSecondary);
+            human.AddFunction(CMKeyFunctions.CMHolsterTertiary);
+            human.AddFunction(CMKeyFunctions.CMHolsterQuaternary);
             human.AddFunction(CMKeyFunctions.CMXenoWideSwing);
         }
     }
