@@ -31,15 +31,6 @@
         Bloodloss: -1
     damageBleedModifiers: CMBloodlossHuman
   - type: Flashable
-  - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute.
-    allowedStates:
-    - Alive
-    damageCap: 20
-    damage:
-      types:
-        Heat: -0.07
-      groups:
-        Brute: -0.07
   - type: StatusEffects
     allowed:
     - Stun
@@ -135,3 +126,10 @@
     shiveringHeatRegulation: 2000
     normalBodyTemperature: 310.15
     thermalRegulationTemperatureThreshold: 25
+  - type: DamageMobState
+    critDamage:
+      types:
+        Asphyxiation: 1
+    nonDeadDamage:
+      types:
+        Asphyxiation: -0.33

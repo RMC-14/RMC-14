@@ -192,6 +192,10 @@
   - type: XenoFriendly
   - type: Undisposable
   - type: ShortExamine
+  - type: DamageMobState
+    critDamage:
+      groups:
+        Brute: 1.25
 
 - type: entity
   abstract: true
