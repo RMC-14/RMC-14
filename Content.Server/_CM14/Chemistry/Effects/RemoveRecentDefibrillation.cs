@@ -13,6 +13,9 @@ public sealed partial class RemoveRecentDefibrillation : ReagentEffect
 
     public override void Effect(ReagentEffectArgs args)
     {
+        if (args.Scale < 0.95f)
+            return;
+
         args.EntityManager.RemoveComponentDeferred<CMRecentlyDefibrillatedComponent>(args.SolutionEntity);
     }
 }
