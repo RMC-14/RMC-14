@@ -241,10 +241,6 @@
           tags:
           - Sidearm
           - Flare
-        sizes:
-        - Tiny
-        - Small
-        - Normal
   - type: CMHolster
 
 - type: entity

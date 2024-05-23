@@ -1,5 +1,6 @@
 ﻿using Content.Shared.Containers.ItemSlots;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._CM14.Inventory;
@@ -25,4 +26,7 @@ public sealed partial class CMHolsterComponent : Component
 
     [DataField, AutoNetworkedField]
     public ItemSlot? Slot;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId? StartingItem;
 }

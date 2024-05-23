@@ -104,7 +104,9 @@ public abstract class SharedCMInventorySystem : EntitySystem
         if (ent.Comp.Slot is not { } slot || ent.Comp.Count is not { } count)
             return;
 
+        var itemId = ent.Comp.StartingItem;
         var slots = EnsureComp<ItemSlotsComponent>(ent);
+        var coordinates = Transform(ent).Coordinates;
         for (var i = 0; i < count; i++)
         {
             var n = i + 1;
@@ -112,6 +114,12 @@ public abstract class SharedCMInventorySystem : EntitySystem
             copy.Name = $"{copy.Name} {n}";
 
             _itemSlots.AddItemSlot(ent, $"{slot.Name}{n}", copy);
+
+            if (itemId != null && slot.ContainerSlot is { } containerSlot)
+            {
+                var item = Spawn(itemId, coordinates);
+                _container.Insert(item, containerSlot);
+            }
         }
 
         Dirty(ent, slots);

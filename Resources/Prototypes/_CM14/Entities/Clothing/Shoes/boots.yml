@@ -46,10 +46,8 @@
   id: CMBootsBlackFilled
   suffix: Filled
   components:
-  - type: ContainerFill
-    containers:
-      item:
-      - CMM5Bayonet
+  - type: CMHolster
+    startingItem: CMM5Bayonet
 
 # Brown Boots
 - type: entity
@@ -67,10 +65,8 @@
   id: CMBootsBrownFilled
   suffix: Filled
   components:
-  - type: ContainerFill
-    containers:
-      item:
-      - CMM5Bayonet
+  - type: CMHolster
+    startingItem: CMM5Bayonet
 
 # Jungle Boots
 - type: entity
@@ -89,8 +85,5 @@
   id: CMBootsJungleFilled
   suffix: Filled
   components:
-  - type: ContainerFill
-    containers:
-      item:
-      - CMM5Bayonet
-
+  - type: CMHolster
+    startingItem: CMM5Bayonet
