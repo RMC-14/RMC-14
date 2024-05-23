@@ -1,0 +1,4 @@
+﻿- type: reagent
+  abstract: true
+  id: CMReagent
+  isCM: true

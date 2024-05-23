@@ -13,6 +13,6 @@ public sealed partial class RecentlyDefibrillated : ReagentEffectCondition
 
     public override string GuidebookExplanation(IPrototypeManager prototype)
     {
-        return "on defibrillation";
+        return "defibrillated";
     }
 }
