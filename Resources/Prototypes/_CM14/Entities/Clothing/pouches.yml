@@ -137,14 +137,10 @@
   - type: CMHolster
     count: 5
     slot:
-      knife:
-        name: Knife
-        whitelist:
-          tags:
-          - Knife
-        sizes:
-        - Tiny
-        - Small
+      name: Knife
+      whitelist:
+        tags:
+        - Knife
 
 - type: entity
   parent: [CMPouchStorage, CMPouchOpenClosed]

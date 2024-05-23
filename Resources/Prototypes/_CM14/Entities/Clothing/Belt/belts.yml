@@ -133,9 +133,6 @@
       whitelist:
         tags:
         - Knife
-      sizes:
-      - Tiny
-      - Small
 
 - type: entity
   parent: CMBeltBaseStorage
