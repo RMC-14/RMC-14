@@ -3,11 +3,6 @@
   parent: ClothingBeltBase
   id: CMBeltBase
   abstract: true
-
-- type: entity
-  parent: CMBeltBase
-  id: CMBeltBaseStorage
-  abstract: true
   components:
   - type: Appearance
   - type: Sprite
@@ -25,25 +20,31 @@
           Closed: { visible: false }
         closedLayer:
           Open: { visible: false }
-          Closed: { visible: true}
-  - type: Storage
-    maxItemSize: Small
-    grid:
-    - 0,0,13,1
+          Closed: { visible: true }
   - type: Item
     size: Large
-  - type: ContainerContainer
-    containers:
-      storagebase: !type:Container
-        ents: []
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
 
-# Simple
 - type: entity
   parent: CMBeltBase
+  id: CMBeltBaseStorage
+  abstract: true
+  components:
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,13,1
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+
+# Simple
+- type: entity
+  parent: ClothingBeltBase
   id: CMBeltInflatable
   name: Mr. Quackers
   description: What are we going to do today, Mr. Quackers?
@@ -113,7 +114,7 @@
     sprite: _CM14/Objects/Clothing/Belt/combat_utility.rsi
 
 - type: entity
-  parent: CMBeltBaseStorage
+  parent: CMBeltBase
   id: CMBeltKnife
   name: M276 pattern knife rig
   description: The M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This version is specially designed to store knives. Not commonly issued, but kept in service.
@@ -122,12 +123,16 @@
     sprite: _CM14/Objects/Clothing/Belt/knife.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Belt/knife.rsi
-  - type: Storage
-    grid:
-    - 0,0,11,1 #12 slots
-    whitelist:
-      tags:
-      - Knife
+  - type: ItemSlots
+  - type: CMHolster
+    cooldown: 1
+    cooldownPopup: You need to wait before drawing another knife!
+    count: 12
+    slot:
+      name: Knife
+      whitelist:
+        tags:
+        - Knife
 
 - type: entity
   parent: CMBeltBaseStorage
