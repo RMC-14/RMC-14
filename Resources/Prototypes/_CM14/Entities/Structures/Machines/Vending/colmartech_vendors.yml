@@ -822,6 +822,7 @@
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/specialist_gear.rsi
   - type: CMAutomatedVendor
     job: CMWeaponsSpecialist
+    pointsType: Specialist
     sections:
     - name: Weapons Specialist Sets
       choices: { SquadLeaderKit: 1 }

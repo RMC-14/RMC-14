@@ -125,6 +125,9 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
 
         var anyEntryWithPoints = false;
         var user = EntMan.GetComponentOrNull<CMVendorUserComponent>(_player.LocalEntity);
+        var userPoints = vendor.PointsType == null
+            ? user?.Points ?? 0
+            : user?.ExtraPoints?.GetValueOrDefault(vendor.PointsType) ?? 0;
         for (var sectionIndex = 0; sectionIndex < vendor.Sections.Count; sectionIndex++)
         {
             var section = vendor.Sections[sectionIndex];
@@ -157,7 +160,8 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                 {
                     anyEntryWithPoints = true;
                     uiEntry.Amount.Text = $"{entry.Points}P";
-                    if (user == null || user.Points < entry.Points)
+
+                    if (user == null || userPoints < entry.Points)
                     {
                         disabled = true;
                     }
@@ -172,7 +176,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
             }
         }
 
-        _window.PointsLabel.Text = anyEntryWithPoints ? $"Points Remaining: {user?.Points ?? 0}" : string.Empty;
+        _window.PointsLabel.Text = anyEntryWithPoints ? $"Points Remaining: {userPoints}" : string.Empty;
     }
 
     protected override void Dispose(bool disposing)

@@ -28,6 +28,8 @@
       specialistWeapons: 1
     - type: CMVendorUser
       points: 45
+      extraPoints:
+        Specialist: 120
 
 - type: startingGear
   id: CMGearWeaponsSpecialist

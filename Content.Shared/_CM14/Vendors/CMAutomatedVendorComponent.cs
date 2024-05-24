@@ -10,6 +10,9 @@ namespace Content.Shared._CM14.Vendors;
 public sealed partial class CMAutomatedVendorComponent : Component
 {
     [DataField, AutoNetworkedField]
+    public string? PointsType;
+
+    [DataField, AutoNetworkedField]
     public ProtoId<JobPrototype>? Job;
 
     [DataField, AutoNetworkedField]
