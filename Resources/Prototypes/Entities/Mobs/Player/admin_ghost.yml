@@ -93,6 +93,7 @@
   - type: InventorySlots
   - type: Loadout
     prototypes: [ MobAghostGear ]
+  - type: BypassInteractionChecks
   - type: ParalyzeOnPullAttemptImmune
 
 - type: entity

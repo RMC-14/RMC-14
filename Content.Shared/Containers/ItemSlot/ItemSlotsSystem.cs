@@ -384,11 +384,8 @@ namespace Content.Shared.Containers.ItemSlots
 
             foreach (var slot in slots)
             {
-                if (!CanInsert(ent, item, user, slot))
-                    return false;
-
-                Insert(ent, slot, item, user, excludeUserAudio: excludeUserAudio);
-                return true;
+                if (TryInsert(ent, slot, item, user, excludeUserAudio: excludeUserAudio))
+                    return true;
             }
 
             return false;
