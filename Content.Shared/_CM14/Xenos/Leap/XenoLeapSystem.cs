@@ -10,6 +10,7 @@ using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Pulling.Events;
+using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
@@ -33,6 +34,7 @@ public sealed class XenoLeapSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -105,7 +107,7 @@ public sealed class XenoLeapSystem : EntitySystem
 
         leaping.Origin = _transform.GetMoverCoordinates(xeno);
         leaping.ParalyzeTime = xeno.Comp.KnockdownTime;
-        leaping.HitSound = xeno.Comp.HitSound;
+        leaping.LeapSound = xeno.Comp.LeapSound;
         leaping.LeapEndTime = _timing.CurTime + TimeSpan.FromSeconds(direction.Length() / xeno.Comp.Strength);
 
         _physics.ApplyLinearImpulse(xeno, impulse, body: physics);
@@ -119,6 +121,9 @@ public sealed class XenoLeapSystem : EntitySystem
             return;
 
         if (!HasComp<MobStateComponent>(other) || _mobState.IsIncapacitated(other))
+            return;
+
+        if (_standing.IsDown(other))
             return;
 
         if (_xeno.FromSameHive(xeno.Owner, other))
@@ -145,8 +150,6 @@ public sealed class XenoLeapSystem : EntitySystem
 
         if (_net.IsServer)
             _stun.TryParalyze(other, xeno.Comp.ParalyzeTime, true);
-
-        _audio.PlayPredicted(xeno.Comp.HitSound, xeno, xeno);
 
         var ev = new XenoLeapHitEvent(xeno, other);
         RaiseLocalEvent(xeno, ref ev);
@@ -180,6 +183,14 @@ public sealed class XenoLeapSystem : EntitySystem
         {
             _physics.SetLinearVelocity(leaping, Vector2.Zero, body: physics);
             _physics.SetBodyStatus(leaping, physics, BodyStatus.OnGround);
+        }
+
+        if (!leaping.Comp.PlayedSound)
+        {
+            leaping.Comp.PlayedSound = true;
+            Dirty(leaping);
+
+            _audio.PlayPredicted(leaping.Comp.LeapSound, leaping, leaping);
         }
 
         RemCompDeferred<XenoLeapingComponent>(leaping);
