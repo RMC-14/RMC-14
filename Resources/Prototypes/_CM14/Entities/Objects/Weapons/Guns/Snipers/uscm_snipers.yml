@@ -44,3 +44,7 @@
         whitelist:
           tags:
           - CMCartridgeSniper10x28mm
+  - type: GunUserWhitelist
+    whitelist:
+      components:
+      - SniperWhitelist

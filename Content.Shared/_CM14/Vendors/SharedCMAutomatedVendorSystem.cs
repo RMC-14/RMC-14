@@ -178,6 +178,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         {
             Vend(vendor, actor, entry.Id, offset);
         }
+
+        if (entity.TryGetComponent(out CMChangeUserOnVendComponent? change, _compFactory) &&
+            change.AddComponents != null)
+        {
+            EntityManager.AddComponents(actor, change.AddComponents);
+        }
     }
 
     private void Vend(EntityUid vendor, EntityUid player, EntProtoId toVend, Vector2 offset)
