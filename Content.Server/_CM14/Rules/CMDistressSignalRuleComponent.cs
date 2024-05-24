@@ -3,8 +3,8 @@
 namespace Content.Server._CM14.Rules;
 
 [RegisterComponent]
-[Access(typeof(CMRuleSystem))]
-public sealed partial class CMRuleComponent : Component
+[Access(typeof(CMDistressSignalRuleSystem))]
+public sealed partial class CMDistressSignalRuleComponent : Component
 {
     [DataField]
     public int PlayersPerXeno = 4;
