@@ -41,6 +41,8 @@ public sealed class CMStorageSystem : EntitySystem
         {
             sub.Event<BoundUIClosedEvent>(OnCloseOnMoveUIClosed);
         });
+
+        UpdatesAfter.Add(typeof(SharedStorageSystem));
     }
 
     private void OnDumpableDoAfter(Entity<StorageSkillRequiredComponent> ent, ref DumpableDoAfterEvent args)
@@ -166,8 +168,20 @@ public sealed class CMStorageSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        var query = EntityQueryEnumerator<StorageOpenComponent>();
-        while (query.MoveNext(out var uid, out var open))
+        var removeOnlyQuery = EntityQueryEnumerator<RemoveOnlyStorageComponent>();
+        while (removeOnlyQuery.MoveNext(out var uid, out _))
+        {
+            if (TryComp(uid, out StorageComponent? storage))
+            {
+                storage.Whitelist = new EntityWhitelist();
+                Dirty(uid, storage);
+            }
+
+            RemCompDeferred<RemoveOnlyStorageComponent>(uid);
+        }
+
+        var openQuery = EntityQueryEnumerator<StorageOpenComponent>();
+        while (openQuery.MoveNext(out var uid, out var open))
         {
             _toRemove.Clear();
             foreach (var (user, netOrigin) in open.OpenedAt)
