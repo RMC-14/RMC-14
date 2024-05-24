@@ -15,4 +15,7 @@ public sealed partial class CMVendorUserComponent : Component
 
     [DataField, AutoNetworkedField]
     public int Points;
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<string, int>? ExtraPoints;
 }

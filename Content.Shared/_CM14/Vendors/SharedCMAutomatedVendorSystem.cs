@@ -145,13 +145,20 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 return;
             }
 
-            if (user.Points < entry.Points)
+            var userPoints = vendor.Comp.PointsType == null
+                ? user.Points
+                : user.ExtraPoints?.GetValueOrDefault(vendor.Comp.PointsType) ?? 0;
+            if (userPoints < entry.Points)
             {
                 Log.Error($"{ToPrettyString(actor)} with {user.Points} tried to buy {entry.Id} for {entry.Points} points without having enough points.");
                 return;
             }
 
-            user.Points -= entry.Points.Value;
+            if (vendor.Comp.PointsType == null)
+                user.Points -= entry.Points.Value;
+            else if (user.ExtraPoints != null)
+                user.ExtraPoints[vendor.Comp.PointsType] = userPoints - (entry.Points ?? 0);
+
             Dirty(actor, user);
         }
 
