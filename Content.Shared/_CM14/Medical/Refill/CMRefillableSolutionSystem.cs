@@ -2,6 +2,7 @@
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared.Whitelist;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
@@ -15,6 +16,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -26,7 +28,8 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
     private void OnRefillerInteractUsing(Entity<CMSolutionRefillerComponent> ent, ref InteractUsingEvent args)
     {
         args.Handled = true;
-        if (!TryComp(args.Used, out CMRefillableSolutionComponent? refillable))
+        if (!TryComp(args.Used, out CMRefillableSolutionComponent? refillable) ||
+            !_whitelist.IsValid(ent.Comp.Whitelist, args.Used))
         {
             _popup.PopupClient($"The {Name(ent)} cannot refill the {Name(args.Used)}.", args.User, args.User, PopupType.SmallCaution);
             return;
@@ -35,6 +38,13 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         if (!_solution.TryGetSolution(args.Used, refillable.Solution, out var solution))
             return;
 
+        var solutionComp = solution.Value.Comp.Solution;
+        if (solutionComp.AvailableVolume == FixedPoint2.Zero)
+        {
+            _popup.PopupClient($"The {Name(args.Used)} is full!", args.User, args.User);
+            return;
+        }
+
         var anyRefilled = false;
         foreach (var (reagent, amount) in refillable.Reagents)
         {
@@ -42,6 +52,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
                 continue;
 
             var refill = FixedPoint2.Min(ent.Comp.Current, amount);
+            refill = FixedPoint2.Min(refill, solutionComp.AvailableVolume);
             if (refill == FixedPoint2.Zero)
                 break;
 

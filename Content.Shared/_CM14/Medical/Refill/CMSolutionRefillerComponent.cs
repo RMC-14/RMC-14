@@ -1,5 +1,6 @@
 ﻿using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
+using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -12,6 +13,9 @@ public sealed partial class CMSolutionRefillerComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
     public HashSet<ProtoId<ReagentPrototype>> Reagents = new();
+
+    [DataField(required: true), AutoNetworkedField]
+    public EntityWhitelist Whitelist = new();
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 Current;
