@@ -32,3 +32,6 @@
     - id: CMM42ASniperRifle
 #    - id: CMFacepaintSniper
 #    - id: CMSpotter
+  - type: CMChangeUserOnVend
+    addComponents:
+    - type: SniperWhitelist

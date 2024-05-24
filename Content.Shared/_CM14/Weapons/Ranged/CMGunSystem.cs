@@ -1,8 +1,11 @@
 ﻿using System.Numerics;
+using Content.Shared._CM14.Weapons.Ranged.Whitelist;
+using Content.Shared.Popups;
 using Content.Shared.Timing;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.Whitelist;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
@@ -15,9 +18,11 @@ public sealed class CMGunSystem : EntitySystem
 {
     [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
@@ -32,6 +37,8 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<ProjectileFixedDistanceComponent, PhysicsSleepEvent>(OnProjectileStop);
 
         SubscribeLocalEvent<GunShowUseDelayComponent, GunShotEvent>(OnShowUseDelayShot);
+
+        SubscribeLocalEvent<GunUserWhitelistComponent, AttemptShootEvent>(OnGunUserWhitelistAttemptShoot);
     }
 
     private void OnAmmoFixedDistanceShot(Entity<AmmoFixedDistanceComponent> ent, ref AmmoShotEvent args)
@@ -85,6 +92,19 @@ public sealed class CMGunSystem : EntitySystem
         var useDelay = EnsureComp<UseDelayComponent>(ent);
         _useDelay.SetLength((ent, useDelay), remaining, ent.Comp.DelayId);
         _useDelay.TryResetDelay((ent, useDelay), false, ent.Comp.DelayId);
+    }
+
+    private void OnGunUserWhitelistAttemptShoot(Entity<GunUserWhitelistComponent> ent, ref AttemptShootEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (_whitelist.IsValid(ent.Comp.Whitelist, args.User))
+            return;
+
+        args.Cancelled = true;
+        var gun = Loc.GetString("zzzz-the", ("ent", ent.Owner));
+        _popup.PopupClient($"You don't seem to know how to use {gun}", args.User, args.User);
     }
 
     private void StopProjectile(Entity<ProjectileFixedDistanceComponent> projectile)
