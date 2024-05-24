@@ -1,13 +1,16 @@
 ﻿using System.Linq;
 using System.Runtime.InteropServices;
 using Content.Server._CM14.Marines;
+using Content.Server.Administration.Components;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
+using Content.Server.Power.Components;
 using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Spawners.Components;
 using Content.Server.Spawners.EntitySystems;
+using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared._CM14.Marines;
 using Content.Shared._CM14.Marines.HyperSleep;
@@ -24,13 +27,14 @@ using Content.Shared.StatusIcon;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Console;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
 namespace Content.Server._CM14.Rules;
 
-public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
+public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignalRuleComponent>
 {
     [Dependency] private readonly IConsoleHost _console = default!;
     [Dependency] private readonly ContainerSystem _containers = default!;
@@ -60,6 +64,8 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
 
         SubscribeLocalEvent<XenoComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<XenoComponent, ComponentRemove>(OnCompRemove);
+
+        SubscribeLocalEvent<AlmayerComponent, MapInitEvent>(OnAlmayerMapInit);
     }
 
     private void OnRulePlayerSpawning(RulePlayerSpawningEvent ev)
@@ -167,10 +173,60 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
         CheckRoundShouldEnd();
     }
 
+    private void OnAlmayerMapInit(Entity<AlmayerComponent> almayer, ref MapInitEvent args)
+    {
+        foreach (var ent in GetChildren(almayer))
+        {
+            if (!HasComp<StationInfiniteBatteryTargetComponent>(ent))
+                continue;
+
+            var recharger = EnsureComp<BatterySelfRechargerComponent>(ent);
+            var battery = EnsureComp<BatteryComponent>(ent);
+
+            recharger.AutoRecharge = true;
+            recharger.AutoRechargeRate = battery.MaxCharge; // Instant refill.
+        }
+    }
+
+    private IEnumerable<EntityUid> GetChildren(EntityUid almayer)
+    {
+        if (TryComp<StationDataComponent>(almayer, out var station))
+        {
+            foreach (var grid in station.Grids)
+            {
+                var enumerator = Transform(grid).ChildEnumerator;
+                while (enumerator.MoveNext(out var ent))
+                {
+                    yield return ent;
+                }
+            }
+        }
+        else if (HasComp<MapComponent>(almayer))
+        {
+            var enumerator = Transform(almayer).ChildEnumerator;
+            while (enumerator.MoveNext(out var possibleGrid))
+            {
+                var enumerator2 = Transform(possibleGrid).ChildEnumerator;
+                while (enumerator2.MoveNext(out var ent))
+                {
+                    yield return ent;
+                }
+            }
+        }
+        else
+        {
+            var enumerator = Transform(almayer).ChildEnumerator;
+            while (enumerator.MoveNext(out var ent))
+            {
+                yield return ent;
+            }
+        }
+    }
+
     private void CheckRoundShouldEnd()
     {
         var query = QueryActiveRules();
-        while (query.MoveNext(out var uid, out _, out var cmRule, out var gameRule))
+        while (query.MoveNext(out var uid, out _, out var distress, out var gameRule))
         {
             if (!GameTicker.IsGameRuleAdded(uid, gameRule))
                 continue;
@@ -209,7 +265,7 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
             }
 
             if (xenosOnShip)
-                cmRule.XenosEverOnShip = true;
+                distress.XenosEverOnShip = true;
 
             if (!xenosAlive && !marinesAlive)
             {
@@ -217,7 +273,7 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
                 return;
             }
 
-            if (cmRule.XenosEverOnShip)
+            if (distress.XenosEverOnShip)
             {
                 if (xenosAlive && !marinesOnShip)
                 {
@@ -254,7 +310,7 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
         }
     }
 
-    private bool SpawnXenoMap(Entity<CMRuleComponent> rule)
+    private bool SpawnXenoMap(Entity<CMDistressSignalRuleComponent> rule)
     {
         var mapId = _map.CreateMap();
         _console.ExecuteCommand($"planet {mapId} Grasslands");
@@ -307,7 +363,7 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
         return spawners;
     }
 
-    private (EntProtoId Id, EntityUid Ent) NextSquad(CMRuleComponent rule)
+    private (EntProtoId Id, EntityUid Ent) NextSquad(CMDistressSignalRuleComponent rule)
     {
         if (rule.NextSquad >= rule.SquadIds.Count)
             rule.NextSquad = 0;
@@ -320,7 +376,7 @@ public sealed class CMRuleSystem : GameRuleSystem<CMRuleComponent>
         return (id, squad);
     }
 
-    private (EntityUid Spawner, EntityUid? Squad)? GetSpawner(CMRuleComponent rule, JobPrototype job)
+    private (EntityUid Spawner, EntityUid? Squad)? GetSpawner(CMDistressSignalRuleComponent rule, JobPrototype job)
     {
         var allSpawners = GetSpawners();
         EntityUid? squad = null;
