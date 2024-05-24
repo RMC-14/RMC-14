@@ -28,9 +28,9 @@
   - type: Item
     size: Ginormous
   - type: Storage
-    maxItemSize: Large
+    maxItemSize: Huge
     grid:
-    - 0,0,13,1
+    - 0,0,18,1
   - type: StorageFill
     contents:
     - id: CMArmorM45
