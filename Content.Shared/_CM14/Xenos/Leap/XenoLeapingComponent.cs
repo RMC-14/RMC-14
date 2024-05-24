@@ -16,11 +16,14 @@ public sealed partial class XenoLeapingComponent : Component
     public TimeSpan ParalyzeTime;
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? HitSound;
+    public SoundSpecifier? LeapSound;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LeapEndTime;
 
     [DataField, AutoNetworkedField]
     public bool KnockedDown;
+
+    [DataField, AutoNetworkedField]
+    public bool PlayedSound;
 }

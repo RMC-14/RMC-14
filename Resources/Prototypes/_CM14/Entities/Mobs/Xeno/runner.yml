@@ -51,7 +51,7 @@
   - type: XenoLeap
     delay: 0
     knockdownTime: 2
-    hitSound: /Audio/_CM14/Xeno/alien_pounce.ogg
+    leapSound: /Audio/_CM14/Xeno/alien_pounce.ogg
   - type: XenoPlasma
     plasma: 0
     maxPlasma: 0
