@@ -90,15 +90,24 @@
     reagents:
       CMTricordrazine: 45
 
-#- type: entity
-#  parent: CMAutoInjector
-#  id: CMTricordrazineAutoInjector
-#  name: tricordrazine EZ autoinjector
-#  description: An EZ autoinjector loaded with 3 uses of Tricordrazine, a weak general use medicine for treating damage. Doesn't require any training to use.
-#  components:
-#  - type: MedicallyUnskilledDoAfter
-#    min: 0
-#    doAfter: 0
+- type: entity
+  parent: CMTricordrazineAutoInjector
+  id: CMTricordrazineAutoInjectorNoSkill
+  name: first-aid autoinjector
+  description: An autoinjector loaded with a small dose of medicine for marines to treat themselves with.
+  components:
+  - type: MedicallyUnskilledDoAfter
+    min: 0
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 15
+        reagents:
+        - ReagentId: CMTricordrazine
+          Quantity: 15
+  - type: CMRefillableSolution
+    reagents:
+      CMTricordrazine: 15
 
 - type: entity
   parent: CMAutoInjector
@@ -136,32 +145,7 @@
     reagents:
       CMDexalinPlus: 3
 
-#- type: entity
-#  parent: CMAutoInjector
-#  id: CMTramadolAutoInjector
-#  name: tramadol autoinjector
-#  description: An autoinjector loaded with 3 uses of Tramadol, a weak but effective painkiller for normal wounds.
-#  components:
-#  - type: SolutionContainerManager
-#    solutions:
-#      pen:
-#        maxVol: 45
-#        reagents:
-#        - ReagentId: CMTramadol todo cm14
-#          Quantity: 45
-#  - type: CMRefillableSolution
-#    reagents:
-#      CMTramadol: 45
-
-#- type: entity
-#  parent: CMTramadolAutoInjector
-#  id: CMTramadolAutoInjectorEZ
-#  name: tramadol EZ autoinjector
-#  description: An EZ autoinjector loaded with 3 uses of Tramadol, a weak but effective painkiller for normal wounds. Doesn't require any training to use.
-#  components:
-#  - type: MedicallyUnskilledDoAfter
-#    min: 0
-#    doAfter: 0
+# TODO CM14 tramadol
 
 - type: entity
   parent: CMAutoInjector
@@ -199,24 +183,7 @@
     reagents:
       CMInaprovaline: 90
 
-#- type: entity
-#  parent: CMAutoInjector
-#  id: CMOxycodoneAutoInjector
-#  name: oxycodone autoinjector (EXTREME PAINKILLER)
-#  description: An autoinjector loaded with 3 uses of Oxycodone, a powerful painkiller intended for life-threatening situations.
-#  components:
-#  - type: Hypospray
-#    transferAmount: 10
-#  - type: SolutionContainerManager
-#    solutions:
-#      pen:
-#        maxVol: 30
-#        reagents:
-#        - ReagentId: CMOxycodone
-#          Quantity: 30
-#  - type: CMRefillableSolution
-#    reagents:
-#      CMOxycodone: 30
+# TODO CM14 oxycodone
 
 - type: entity
   parent: CMAutoInjector

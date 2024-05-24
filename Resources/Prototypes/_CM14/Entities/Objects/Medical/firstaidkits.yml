@@ -67,7 +67,7 @@
   - type: StorageFill
     contents:
     - id: CMHealthAnalyzer
-#    - id: CMFirstAidAutoInjector
+    - id: CMTricordrazineAutoInjectorNoSkill
 #    - id: CMPainStopAutoInjector
     - id: CMInaprovalineAutoInjector
     - id: CMGauze10
