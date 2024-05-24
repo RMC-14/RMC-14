@@ -15,6 +15,8 @@ namespace Content.Shared._CM14.Medical.Surgery;
 
 public abstract partial class SharedCMSurgerySystem
 {
+    [Dependency] private readonly SkillsSystem _skills = default!;
+
     private void InitializeSteps()
     {
         SubscribeLocalEvent<CMSurgeryStepComponent, CMSurgeryStepEvent>(OnToolStep);
@@ -127,8 +129,7 @@ public abstract partial class SharedCMSurgerySystem
 
     private void OnToolCanPerform(Entity<CMSurgeryStepComponent> ent, ref CMSurgeryCanPerformStepEvent args)
     {
-        if (!TryComp(args.User, out SkillsComponent? skills) ||
-            skills.Surgery < ent.Comp.Skill)
+        if (!_skills.HasSkills(args.User, new Skills { Surgery = ent.Comp.Skill }))
         {
             args.Invalid = StepInvalidReason.MissingSkills;
             return;

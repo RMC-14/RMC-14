@@ -46,6 +46,8 @@
   - type: Tag
     tags:
     - PillCanister
+  - type: StorageSkillRequired
+    medical: 2
 
 - type: entity
   parent: CMPillCanister

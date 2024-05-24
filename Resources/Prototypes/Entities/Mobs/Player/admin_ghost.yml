@@ -95,6 +95,7 @@
     prototypes: [ MobAghostGear ]
   - type: BypassInteractionChecks
   - type: ParalyzeOnPullAttemptImmune
+  - type: BypassSkillChecks
 
 - type: entity
   id: ActionAGhostShowSolar
