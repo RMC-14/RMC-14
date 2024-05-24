@@ -1456,6 +1456,17 @@
       map: [ "enum.VendingMachineVisualLayers.Base" ]
     - state: "normal"
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+  - type: CMSolutionRefiller
+    current: 600
+    max: 600
+    recharge: 125 # TODO CM14 auto-restock items as well if round is >= 20 minutes in
+    rechargeCooldown: 4
+    reagents:
+    - CMTricordrazine
+#    - CMTramadol # TODO CM14
+    whitelist:
+      components:
+      - Hypospray
   - type: CMAutomatedVendor
     sections:
 #    - name: Autoinjectors
