@@ -9,6 +9,7 @@
     mode: SnapgridCenter
   components:
   - type: Transform
+    anchored: true
     noRot: true
   - type: Clickable
   - type: InteractionOutline

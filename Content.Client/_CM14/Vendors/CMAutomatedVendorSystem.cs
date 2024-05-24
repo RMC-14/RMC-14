@@ -1,4 +1,5 @@
-﻿using Content.Shared._CM14.Vendors;
+﻿using Content.Shared._CM14.Medical.Refill;
+using Content.Shared._CM14.Vendors;
 
 namespace Content.Client._CM14.Vendors;
 
@@ -8,12 +9,13 @@ public sealed class CMAutomatedVendorSystem : SharedCMAutomatedVendorSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CMAutomatedVendorComponent, AfterAutoHandleStateEvent>(OnAfterHandleState);
+        SubscribeLocalEvent<CMAutomatedVendorComponent, AfterAutoHandleStateEvent>(OnRefresh);
+        SubscribeLocalEvent<CMSolutionRefillerComponent, AfterAutoHandleStateEvent>(OnRefresh);
     }
 
-    private void OnAfterHandleState(Entity<CMAutomatedVendorComponent> vendor, ref AfterAutoHandleStateEvent args)
+    private void OnRefresh<T>(Entity<T> ent, ref AfterAutoHandleStateEvent args) where T : IComponent?
     {
-        if (!TryComp(vendor, out UserInterfaceComponent? ui))
+        if (!TryComp(ent, out UserInterfaceComponent? ui))
             return;
 
         foreach (var bui in ui.ClientOpenInterfaces.Values)

@@ -1,7 +1,9 @@
 ﻿using System.Linq;
+using Content.Shared._CM14.Medical.Refill;
 using Content.Shared._CM14.Vendors;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
+using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface.CustomControls;
@@ -30,6 +32,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         _window = new CMAutomatedVendorWindow();
         _window.OnClose += Close;
         _window.Title = EntMan.GetComponentOrNull<MetaDataComponent>(Owner)?.EntityName ?? "ColMarTech Vendor";
+        _window.ReagentsBar.ForegroundStyleBoxOverride = new StyleBoxFlat(Color.FromHex("#AF7F38"));
 
         var user = EntMan.GetComponentOrNull<CMVendorUserComponent>(_player.LocalEntity);
         if (EntMan.TryGetComponent(Owner, out CMAutomatedVendorComponent? vendor))
@@ -177,6 +180,21 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         }
 
         _window.PointsLabel.Text = anyEntryWithPoints ? $"Points Remaining: {userPoints}" : string.Empty;
+
+        if (!EntMan.TryGetComponent(Owner, out CMSolutionRefillerComponent? refiller))
+        {
+            _window.ReagentsContainer.Visible = false;
+            return;
+        }
+
+        _window.ReagentsContainer.Visible = true;
+
+        var current = refiller.Current;
+        var max = refiller.Max;
+        _window.ReagentsBar.MinValue = 0;
+        _window.ReagentsBar.MaxValue = max.Int();
+        _window.ReagentsBar.SetAsRatio((refiller.Current / refiller.Max).Float());
+        _window.ReagentsLabel.Text = $"{current.Int()} units";
     }
 
     protected override void Dispose(bool disposing)
