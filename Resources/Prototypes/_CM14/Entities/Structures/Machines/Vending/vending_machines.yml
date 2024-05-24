@@ -276,6 +276,11 @@
 #    - CMOxycodone # TODO CM14
 #    - CMTramadol # TODO CM14
 #    - CMPeridaxon # TODO CM14
+    whitelist:
+      components:
+      - Hypospray
+      tags:
+      - Bottle
   - type: CMAutomatedVendor # TODO CM14 different ui style
     sections:
     - name: Field supplies
@@ -379,6 +384,9 @@
   - type: CMSolutionRefiller
     current: 1200
     max: 1200
+    whitelist:
+      tags:
+      - Bottle
   - type: CMAutomatedVendor # TODO CM14 different ui style
     sections:
     - name: Liquid bottles

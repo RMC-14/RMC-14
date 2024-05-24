@@ -24,48 +24,8 @@
   - type: Tag
     tags:
     - Bottle
-
-- type: entity
-  parent: CMBottleFilled
-  id: CMBottleKelotane
-  name: kelotane bottle
-  description: A small bottle. Contains kelotane - used to treat burned areas.
-  components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 60
-        reagents:
-        - ReagentId: CMKelotane
-          Quantity: 60
-
-- type: entity
-  parent: CMBottleFilled
-  id: CMBottleInaprovaline
-  name: inaprovaline bottle
-  description: A small bottle. Contains inaprovaline - used to stabilize patients.
-  components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 60
-        reagents:
-        - ReagentId: CMInaprovaline
-          Quantity: 60
-
-- type: entity
-  parent: CMBottleFilled
-  id: CMBottleDylovene
-  name: dylovene bottle
-  description: A small bottle of dylovene. Counters poisons, and repairs toxin damage. A wonder drug.
-  components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 60
-        reagents:
-        - ReagentId: CMDylovene
-          Quantity: 60
+  - type: CMRefillableSolution
+    solution: drink
 
 - type: entity
   parent: CMBottleFilled
@@ -80,6 +40,43 @@
         reagents:
         - ReagentId: CMBicaridine
           Quantity: 60
+  - type: CMRefillableSolution
+    reagents:
+      CMBicaridine: 60
+
+- type: entity
+  parent: CMBottleFilled
+  id: CMBottleKelotane
+  name: kelotane bottle
+  description: A small bottle. Contains kelotane - used to treat burned areas.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 60
+        reagents:
+        - ReagentId: CMKelotane
+          Quantity: 60
+  - type: CMRefillableSolution
+    reagents:
+      CMKelotane: 60
+
+- type: entity
+  parent: CMBottleFilled
+  id: CMBottleDylovene
+  name: dylovene bottle
+  description: A small bottle of dylovene. Counters poisons, and repairs toxin damage. A wonder drug.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 60
+        reagents:
+        - ReagentId: CMDylovene
+          Quantity: 60
+  - type: CMRefillableSolution
+    reagents:
+      CMDylovene: 60
 
 - type: entity
   parent: CMBottleFilled
@@ -94,19 +91,25 @@
         reagents:
         - ReagentId: CMDexalin
           Quantity: 60
+  - type: CMRefillableSolution
+    reagents:
+      CMDexalin: 60
 
-#- type: entity
-#  parent: CMBottleFilled
-#  id: CMBottleTramadol
-#  name: tramadol bottle
-#  description: A small bottle. Contains Tramadol - Used as a basic painkiller.
-#  components:
-#  - type: SolutionContainerManager
-#    solutions:
-#      drink:
-#        maxVol: 60
-#        reagents:
-#        - ReagentId: Tramadol
-#          Quantity: 60
+- type: entity
+  parent: CMBottleFilled
+  id: CMBottleInaprovaline
+  name: inaprovaline bottle
+  description: A small bottle. Contains inaprovaline - used to stabilize patients.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 60
+        reagents:
+        - ReagentId: CMInaprovaline
+          Quantity: 60
+  - type: CMRefillableSolution
+    reagents:
+      CMInaprovaline: 60
 
-# TODO CM14 peridaxon, tramadol
+# TODO CM14 oxycodone, peridaxon, tramadol
