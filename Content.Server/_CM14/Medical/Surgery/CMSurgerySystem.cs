@@ -21,6 +21,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
     private readonly List<EntProtoId> _surgeries = new();
@@ -74,8 +75,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
             return;
         }
 
-        if (!TryComp(user, out SkillsComponent? skills) ||
-            skills.Surgery < 1)
+        if (!_skills.HasSkills(user, new Skills { Surgery = 1 }))
         {
             _popup.PopupEntity("You don't know how to perform surgery!", user, user);
             return;

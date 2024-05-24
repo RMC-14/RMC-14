@@ -1,5 +1,7 @@
-﻿using Content.Shared.DoAfter;
+﻿using Content.Shared._CM14.Marines.Skills;
+using Content.Shared.DoAfter;
 using Content.Shared.Item;
+using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
@@ -12,6 +14,8 @@ public sealed class CMStorageSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
@@ -22,7 +26,11 @@ public sealed class CMStorageSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<StorageFillComponent, CMStorageItemFillEvent>(OnStorageFillItem);
+
         SubscribeLocalEvent<StorageOpenDoAfterComponent, OpenStorageDoAfterEvent>(OnStorageOpenDoAfter);
+
+        SubscribeLocalEvent<StorageSkillRequiredComponent, StorageInteractAttemptEvent>(OnStorageSkillOpenAttempt);
+        SubscribeLocalEvent<StorageSkillRequiredComponent, DumpableDoAfterEvent>(OnDumpableDoAfter, before: [typeof(DumpableSystem)]);
 
         Subs.BuiEvents<StorageCloseOnMoveComponent>(StorageUiKey.Key, sub =>
         {
@@ -33,6 +41,15 @@ public sealed class CMStorageSystem : EntitySystem
         {
             sub.Event<BoundUIClosedEvent>(OnCloseOnMoveUIClosed);
         });
+    }
+
+    private void OnDumpableDoAfter(Entity<StorageSkillRequiredComponent> ent, ref DumpableDoAfterEvent args)
+    {
+        if (args.Handled || args.Cancelled)
+            return;
+
+        if (TryCancel(args.User, ent))
+            args.Handled = true;
     }
 
     private void OnStorageFillItem(Entity<StorageFillComponent> storage, ref CMStorageItemFillEvent args)
@@ -115,6 +132,15 @@ public sealed class CMStorageSystem : EntitySystem
         _storage.OpenStorageUI(uid.Value, entity.Value, storage, args.Silent, false);
     }
 
+    private void OnStorageSkillOpenAttempt(Entity<StorageSkillRequiredComponent> ent, ref StorageInteractAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (TryCancel(args.User, ent))
+            args.Cancelled = true;
+    }
+
     private void OnCloseOnMoveUIOpened(Entity<StorageCloseOnMoveComponent> ent, ref BoundUIOpenedEvent args)
     {
         var user = args.Actor;
@@ -125,6 +151,17 @@ public sealed class CMStorageSystem : EntitySystem
     private void OnCloseOnMoveUIClosed(Entity<StorageOpenComponent> ent, ref BoundUIClosedEvent args)
     {
         ent.Comp.OpenedAt.Remove(args.Actor);
+    }
+
+    private bool TryCancel(EntityUid user, Entity<StorageSkillRequiredComponent> storage)
+    {
+        if (!_skills.HasSkills(user, storage.Comp.Skills))
+        {
+            _popup.PopupClient("It must have some kind of ID lock...", storage, user, PopupType.SmallCaution);
+            return true;
+        }
+
+        return false;
     }
 
     public override void Update(float frameTime)
