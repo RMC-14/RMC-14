@@ -77,7 +77,7 @@ public partial class InventorySystem : EntitySystem
 
         if (TryGetSlotEntity(uid, ev.Slot, out var entityUid) && TryComp<StorageComponent>(entityUid, out var storageComponent))
         {
-            _storageSystem.OpenStorageUI(entityUid.Value, uid, storageComponent);
+            _storageSystem.OpenStorageUI(entityUid.Value, uid, storageComponent, false);
         }
         else if (TryComp<WebbingClothingComponent>(entityUid, out var webbingClothing))
             _webbing.OpenStorage((entityUid.Value, webbingClothing), uid);
