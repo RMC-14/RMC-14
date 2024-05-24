@@ -11,6 +11,12 @@
             <Label Name="PointsLabel" Access="Public" HorizontalExpand="True" Align="Right" />
         </BoxContainer>
         <cc:HSeparator Color="#4972A1" />
+        <BoxContainer Name="ReagentsContainer" Access="Public" Orientation="Horizontal">
+            <Label Text="Reagents" Margin="0 0 5 0" />
+            <ProgressBar Name="ReagentsBar" Access="Public" HorizontalExpand="True">
+                <Label Name="ReagentsLabel" Access="Public" HorizontalAlignment="Right" />
+            </ProgressBar>
+        </BoxContainer>
         <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
             <BoxContainer Orientation="Vertical" Name="Sections" Access="Public" />
         </ScrollContainer>
