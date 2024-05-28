@@ -42,12 +42,12 @@
   components:
   - type: StorageFill
     contents:
-    - id: WeaponDisabler # TODO CM14 cm disabler
-    - id: Flash # TODO CM14 cm flash
-    - id: Stunbaton # TODO CM14 cm stun baton
-    - id: Handcuffs # TODO CM14 cm handcuffs
+    - id: WeaponDisabler # TODO CM14 cm taser
+    - id: CMFlash
+    - id: CMStunbaton
+    - id: CMHandcuffs
 #    - id: Pepperspray # TODO CM14
-    - id: ForensicScanner # TODO CM14 cm forensic scanner
+    - id: ForensicScanner # TODO CM14 cm clue scanner
 
 - type: entity
   parent: CMBeltMedical
