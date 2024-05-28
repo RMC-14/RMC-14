@@ -72,7 +72,7 @@
   - hideSpawnMenu
   components:
   - type: Sprite
-    sprite: _CM14/Objects/shards.rsi
+    sprite: _CM14/Objects/Materials/shards.rsi
     layers:
     - state: bonechips
       shader: unshaded
