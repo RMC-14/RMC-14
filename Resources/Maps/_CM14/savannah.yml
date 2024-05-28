@@ -23199,7 +23199,7 @@ entities:
     - type: Transform
       pos: 113.5,15.5
       parent: 2
-- proto: CMLightBulb
+- proto: CMLightFixtureSmall
   entities:
   - uid: 123
     components:
