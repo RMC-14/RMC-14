@@ -39,7 +39,7 @@
       - !type:EmptyAllContainersBehaviour
       - !type:SpawnEntitiesBehavior
         spawn:
-          CMSheetSteel1:
+          CMSheetMetal1:
             min: 2
             max: 2
       - !type:DoActsBehavior
