@@ -164,7 +164,7 @@ public abstract class SharedWoundsSystem : EntitySystem
         if (treater.Comp.Consumable)
         {
             if (TryComp(treater, out StackComponent? stack))
-                _stacks.Use(treater, 1, stack);
+                _stacks.Use(treater, 2, stack);
             else if (_net.IsServer)
                 QueueDel(treater);
         }
@@ -283,7 +283,17 @@ public abstract class SharedWoundsSystem : EntitySystem
         }
 
         if (untreated || damage != FixedPoint2.Zero)
+        {
+            if (treater.Comp.Consumable &&
+                TryComp(treater, out StackComponent? stack) &&
+                _stacks.GetCount(treater, stack) < 2)
+            {
+                _popup.PopupClient($"You don't have enough {Name(treater)}!", target, user, PopupType.SmallCaution);
+                return false;
+            }
+
             return true;
+        }
 
         if (doPopups)
         {
