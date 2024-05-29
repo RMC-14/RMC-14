@@ -210,6 +210,12 @@ public abstract class SharedWoundsSystem : EntitySystem
     {
         wounded = default;
         damage = FixedPoint2.Zero;
+        if (!HasComp<WoundableComponent>(target) &&
+            !TryComp(target, out wounded))
+        {
+            return false;
+        }
+
         var targetName = Identity.Name(target, EntityManager, user);
         var hasSkills = _skills.HasSkills(user, in treater.Comp.Skills);
         if (!treater.Comp.CanUseUnskilled && !hasSkills)
@@ -220,8 +226,7 @@ public abstract class SharedWoundsSystem : EntitySystem
             return false;
         }
 
-        if (!HasComp<DamageableComponent>(target) ||
-            !TryComp(target, out wounded) ||
+        if (!TryComp(target, out wounded) ||
             wounded.Wounds.Count == 0)
         {
             if (user == target)
