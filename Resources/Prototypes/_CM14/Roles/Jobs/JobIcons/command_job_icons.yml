@@ -2,26 +2,26 @@
   parent: CMJobIconBase
   id: CMJobIconStaffOfficer
   icon:
-    sprite: _CM14/Interface/cm_job_icons.rsi
+    sprite: /Textures/_CM14/Interface/cm_job_icons.rsi
     state: staff_officer
 
 - type: statusIcon
   parent: CMJobIconBase
   id: CMJobIconSEA
   icon:
-    sprite: _CM14/Interface/cm_job_icons.rsi
+    sprite: /Textures/_CM14/Interface/cm_job_icons.rsi
     state: senior_enlisted_advisor
 
 - type: statusIcon
   parent: CMJobIconBase
   id: CMJobIconCommandingOfficer
   icon:
-    sprite: _CM14/Interface/cm_job_icons.rsi
+    sprite: /Textures/_CM14/Interface/cm_job_icons.rsi
     state: hudsquad_co
 
 - type: statusIcon
   parent: CMJobIconBase
   id: CMJobIconExecutiveOfficer
   icon:
-    sprite: _CM14/Interface/cm_job_icons.rsi
+    sprite: /Textures/_CM14/Interface/cm_job_icons.rsi
     state: hudsquad_xo

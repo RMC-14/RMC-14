@@ -2,26 +2,26 @@
   parent: CMJobIconBase
   id: CMJobIconCMO
   icon:
-    sprite: _CM14/Interface/cm_job_icons.rsi
+    sprite: /Textures/_CM14/Interface/cm_job_icons.rsi
     state: hudsquad_cmo
 
 - type: statusIcon
   parent: CMJobIconBase
   id: CMJobIconDoctor
   icon:
-    sprite: _CM14/Interface/cm_job_icons.rsi
+    sprite: /Textures/_CM14/Interface/cm_job_icons.rsi
     state: hudsquad_doctor
 
 - type: statusIcon
   parent: CMJobIconBase
   id: CMJobIconNurse
   icon:
-    sprite: _CM14/Interface/cm_job_icons.rsi
+    sprite: /Textures/_CM14/Interface/cm_job_icons.rsi
     state: hudsquad_nurse
 
 - type: statusIcon
   parent: CMJobIconBase
   id: CMJobIconResearcher
   icon:
-    sprite: _CM14/Interface/cm_job_icons.rsi
+    sprite: /Textures/_CM14/Interface/cm_job_icons.rsi
     state: hudsquad_researcher
