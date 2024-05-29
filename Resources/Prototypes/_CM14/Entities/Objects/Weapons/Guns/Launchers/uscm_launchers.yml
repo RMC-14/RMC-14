@@ -40,3 +40,4 @@
   - type: Wieldable
   - type: GunRequiresWield
   - type: GunShowUseDelay
+  - type: UseDelay
