@@ -38,7 +38,7 @@
     back: CMSatchelSecurity
     shoes: CMBootsBlackFilled
     head: CMHeadCapWarden
-    eyes: ClothingEyesGlassesSecurity # todo cm14 replace with cm ones
+    eyes: CMGlassesSecurity
     gloves: CMHandsBlackMarine
     id: CMIDCardMilitaryWarden
     outerClothing: CMArmorM3Warden
