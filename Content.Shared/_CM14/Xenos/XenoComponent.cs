@@ -45,9 +45,6 @@ public sealed partial class XenoComponent : Component
     public HashSet<ProtoId<AccessLevelPrototype>> AccessLevels = new() { "CMAccessXeno" };
 
     [DataField, AutoNetworkedField]
-    public bool OnWeeds;
-
-    [DataField, AutoNetworkedField]
     public int Tier;
 
     [DataField, AutoNetworkedField]

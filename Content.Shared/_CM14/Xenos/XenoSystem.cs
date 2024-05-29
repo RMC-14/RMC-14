@@ -20,8 +20,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Radio;
 using Content.Shared.Standing;
 using Content.Shared.UserInterface;
-using Robust.Shared.Physics.Events;
-using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Xenos;
@@ -33,20 +31,15 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThresholds = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
-
-    private readonly HashSet<EntityUid> _toUpdate = new();
 
     private EntityQuery<DamageableComponent> _damageableQuery;
     private EntityQuery<MarineComponent> _marineQuery;
     private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<MobThresholdsComponent> _mobThresholdsQuery;
-    private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
     private EntityQuery<XenoRecoveryPheromonesComponent> _xenoRecoveryQuery;
 
@@ -58,7 +51,6 @@ public sealed class XenoSystem : EntitySystem
         _marineQuery = GetEntityQuery<MarineComponent>();
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
         _mobThresholdsQuery = GetEntityQuery<MobThresholdsComponent>();
-        _xenoQuery = GetEntityQuery<XenoComponent>();
         _xenoPlasmaQuery = GetEntityQuery<XenoPlasmaComponent>();
         _xenoRecoveryQuery = GetEntityQuery<XenoRecoveryPheromonesComponent>();
 
@@ -69,9 +61,6 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, GetDefaultRadioChannelEvent>(OnXenoGetDefaultRadioChannel);
         SubscribeLocalEvent<XenoComponent, AttackAttemptEvent>(OnXenoAttackAttempt);
         SubscribeLocalEvent<XenoComponent, UserOpenActivatableUIAttemptEvent>(OnXenoOpenActivatableUIAttempt);
-
-        SubscribeLocalEvent<XenoWeedsComponent, StartCollideEvent>(OnWeedsStartCollide);
-        SubscribeLocalEvent<XenoWeedsComponent, EndCollideEvent>(OnWeedsEndCollide);
 
         UpdatesAfter.Add(typeof(SharedXenoPheromonesSystem));
     }
@@ -88,7 +77,6 @@ public sealed class XenoSystem : EntitySystem
         }
 
         xeno.Comp.NextRegenTime = _timing.CurTime + xeno.Comp.RegenCooldown;
-        xeno.Comp.OnWeeds = _xenoWeeds.IsOnWeeds(xeno.Owner);
         Dirty(xeno);
     }
 
@@ -138,20 +126,6 @@ public sealed class XenoSystem : EntitySystem
         {
             args.Cancel();
         }
-    }
-
-    private void OnWeedsStartCollide(Entity<XenoWeedsComponent> ent, ref StartCollideEvent args)
-    {
-        var other = args.OtherEntity;
-        if (_xenoQuery.TryGetComponent(other, out var xeno) && !xeno.OnWeeds)
-            _toUpdate.Add(other);
-    }
-
-    private void OnWeedsEndCollide(Entity<XenoWeedsComponent> ent, ref EndCollideEvent args)
-    {
-        var other = args.OtherEntity;
-        if (_xenoQuery.TryGetComponent(other, out var xeno) && xeno.OnWeeds)
-            _toUpdate.Add(other);
     }
 
     public void MakeXeno(Entity<XenoComponent?> xeno)
@@ -263,7 +237,7 @@ public sealed class XenoSystem : EntitySystem
 
             xeno.NextRegenTime = time + xeno.RegenCooldown;
 
-            if (xeno.OnWeeds)
+            if (TryComp<OnXenoWeedsComponent>(uid, out var weeds) && weeds.OnXenoWeeds)
             {
                 var heal = GetWeedsHealAmount((uid, xeno));
                 if (heal > FixedPoint2.Zero)
@@ -288,32 +262,5 @@ public sealed class XenoSystem : EntitySystem
 
             Dirty(uid, xeno);
         }
-
-        foreach (var xenoId in _toUpdate)
-        {
-            if (!_xenoQuery.TryGetComponent(xenoId, out var xeno))
-                continue;
-
-            var any = false;
-            foreach (var contact in _physics.GetContactingEntities(xenoId))
-            {
-                if (HasComp<XenoWeedsComponent>(contact))
-                {
-                    any = true;
-                    break;
-                }
-            }
-
-            if (xeno.OnWeeds == any)
-                continue;
-
-            xeno.OnWeeds = any;
-            Dirty(xenoId, xeno);
-
-            var ev = new XenoOnWeedsChangedEvent(xeno.OnWeeds);
-            RaiseLocalEvent(xenoId, ref ev);
-        }
-
-        _toUpdate.Clear();
     }
 }

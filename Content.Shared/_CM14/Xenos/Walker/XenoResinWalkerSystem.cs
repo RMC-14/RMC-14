@@ -1,4 +1,5 @@
 ﻿using Content.Shared._CM14.Xenos.Plasma;
+using Content.Shared._CM14.Xenos.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Movement.Systems;
 using Robust.Shared.Physics.Systems;
@@ -51,9 +52,11 @@ public sealed class XenoResinWalkerSystem : EntitySystem
     private void OnXenoResinWalkerRefreshMovementSpeed(Entity<XenoResinWalkerComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
         if (ent.Comp.Active &&
-            TryComp(ent, out XenoComponent? xeno) &&
-            xeno.OnWeeds)
+            HasComp<XenoComponent>(ent) &&
+            TryComp(ent, out OnXenoWeedsComponent? weeds) &&
+            weeds.OnXenoWeeds)
         {
+            //TODO Actually bother to calculate their proper speed from the two modifiers
             args.ModifySpeed(ent.Comp.SpeedMultiplier, ent.Comp.SpeedMultiplier);
         }
     }
