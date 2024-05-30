@@ -236,7 +236,6 @@
   components:
   - type: Intercom
     supportedChannels:
-    - MarineCommon
     - Colony
 
 - type: entity
