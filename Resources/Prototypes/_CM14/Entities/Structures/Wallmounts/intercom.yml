@@ -37,10 +37,8 @@
     sprite: _CM14/Structures/Wallmounts/intercom.rsi
     layers:
     - state: intercom-p
-      shader: unshaded
     - state: intercom
       map: ["enum.PowerDeviceVisualLayers.Powered"]
-      shader: unshaded
   - type: Transform
     noRot: false
     anchored: true
