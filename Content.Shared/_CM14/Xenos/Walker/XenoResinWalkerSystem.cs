@@ -18,7 +18,7 @@ public sealed class XenoResinWalkerSystem : EntitySystem
     {
         SubscribeLocalEvent<XenoResinWalkerComponent, XenoResinWalkerActionEvent>(OnXenoResinWalkerAction);
         SubscribeLocalEvent<XenoResinWalkerComponent, RefreshMovementSpeedModifiersEvent>(OnXenoResinWalkerRefreshMovementSpeed);
-        SubscribeLocalEvent<XenoResinWalkerComponent, XenoOnWeedsChangedEvent>(OnXenoResinWalkerOnWeedsUpdated);
+        SubscribeLocalEvent<XenoResinWalkerComponent, OnWeedsChangedEvent>(OnXenoResinWalkerOnWeedsUpdated);
 
         UpdatesAfter.Add(typeof(SharedPhysicsSystem));
     }
@@ -61,7 +61,7 @@ public sealed class XenoResinWalkerSystem : EntitySystem
         }
     }
 
-    private void OnXenoResinWalkerOnWeedsUpdated(Entity<XenoResinWalkerComponent> ent, ref XenoOnWeedsChangedEvent args)
+    private void OnXenoResinWalkerOnWeedsUpdated(Entity<XenoResinWalkerComponent> ent, ref OnWeedsChangedEvent args)
     {
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
     }

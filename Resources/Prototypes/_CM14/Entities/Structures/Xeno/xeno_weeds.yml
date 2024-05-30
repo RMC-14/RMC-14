@@ -111,6 +111,8 @@
   components:
   - type: XenoWeeds
     spawns: XenoHiveWeeds
+    speedMultiplierXeno: 2.0
+    speedMultiplierOutsider: 0.2
   - type: EdgeSpreader
     id: XenoWeeds
   - type: Sprite
