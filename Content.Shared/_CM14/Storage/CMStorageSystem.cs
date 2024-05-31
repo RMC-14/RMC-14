@@ -157,7 +157,7 @@ public sealed class CMStorageSystem : EntitySystem
 
     private bool TryCancel(EntityUid user, Entity<StorageSkillRequiredComponent> storage)
     {
-        if (!_skills.HasSkills(user, storage.Comp.Skills))
+        if (!_skills.HasSkills(user, in storage.Comp.Skills))
         {
             _popup.PopupClient("It must have some kind of ID lock...", storage, user, PopupType.SmallCaution);
             return true;

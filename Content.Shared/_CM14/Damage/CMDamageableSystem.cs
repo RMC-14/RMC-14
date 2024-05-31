@@ -84,7 +84,7 @@ public sealed class CMDamageableSystem : EntitySystem
     public DamageSpecifier DistributeHealing(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount, DamageSpecifier? equal = null)
     {
         equal ??= new DamageSpecifier();
-        if (!Resolve(damageable, ref damageable.Comp, false))
+        if (!_damageableQuery.Resolve(damageable, ref damageable.Comp, false))
             return equal;
 
         if (!_prototypes.TryIndex(groupId, out var group))
@@ -113,12 +113,14 @@ public sealed class CMDamageableSystem : EntitySystem
 
                 var existingHeal = add ? damage.GetValueOrDefault(type) : -damage.GetValueOrDefault(type);
                 left += existingHeal;
-                var toHeal = FixedPoint2.Min(existingHeal + left / (i + 1), current);
-                if (current <= toHeal)
+                var toDamage = add
+                    ? FixedPoint2.Min(existingHeal + left / (i + 1), current)
+                    : -FixedPoint2.Min(-(existingHeal + left / (i + 1)), current);
+                if (current <= FixedPoint2.Abs(toDamage))
                     _types.RemoveAt(i);
 
-                damage[type] = toHeal;
-                left -= toHeal;
+                damage[type] = toDamage;
+                left -= toDamage;
             }
 
             if (lastLeft == left)

@@ -67,9 +67,9 @@
     - id: CMPillCanisterInaprovaline
       amount: 1
     # TODO CM14 tramadol and perixadon pills, splint
-    - id: CMOintment
+    - id: CMOintment10
       amount: 1
-    - id: CMTraumaKit
+    - id: CMTraumaKit10
       amount: 1
 
 - type: entity
@@ -79,9 +79,9 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMOintment
+    - id: CMOintment10
       amount: 2
-    - id: CMTraumaKit
+    - id: CMTraumaKit10
       amount: 2
     # TODO CM14 adrenaline autoinjector
     - id: CMDexalinPlusAutoInjector

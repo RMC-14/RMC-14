@@ -19,7 +19,7 @@
     sprite: _CM14/Objects/Medical/Surgery/scalpel.rsi
     state: scalpel
   - type: CMSurgeryStepBleedEffect
-    amount: 5
+    damage: 10
   - type: CMSurgeryStepEmoteEffect
 
 - type: entity
@@ -35,8 +35,7 @@
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
-  - type: CMSurgeryStepBleedEffect
-    amount: -5
+  - type: CMSurgeryClampBleedEffect
 
 - type: entity
   parent: CMSurgeryStepBase

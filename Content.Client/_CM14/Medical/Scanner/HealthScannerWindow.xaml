@@ -5,7 +5,11 @@
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     MinSize="500 600">
     <BoxContainer Orientation="Vertical">
-        <Label Name="PatientLabel" Access="Public" />
+        <BoxContainer Orientation="Horizontal">
+            <Label Name="PatientLabel" Access="Public" />
+            <Control HorizontalExpand="True" />
+            <Label Text="{Loc cm-wounds-brackets-translators-note}" />
+        </BoxContainer>
         <cc:HSeparator Color="#4972A1" Margin="0 0 0 5" />
         <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
             <Label Text="Health:" MinWidth="80" Modulate="#5B88B0" />
@@ -44,6 +48,7 @@
         <BoxContainer Orientation="Horizontal">
             <Label Name="BloodTypeLabel" Access="Public" MinWidth="160" Modulate="#5B88B0" />
             <RichTextLabel Name="BloodAmountLabel" Access="Public" />
+            <RichTextLabel Name="Bleeding" Access="Public" />
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
             <Label Text="Body Temperature:" MinWidth="160" Modulate="#5B88B0" />
