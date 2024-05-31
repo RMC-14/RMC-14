@@ -924,5 +924,15 @@
   id: 121
   time: '2024-05-28T12:36:23.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2170
+- author: DrSmugleaf
+  changes:
+  - message: Added treatable wounds and passive healing when they are treated.
+    type: Add
+  - message: Implemented the trauma kit, burn kit, gauze, ointment, surgical line
+      and synthgraft.
+    type: Add
+  id: 122
+  time: '2024-05-31T22:37:48.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2174
 Name: CM
 Order: -1
