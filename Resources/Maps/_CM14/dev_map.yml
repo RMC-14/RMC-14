@@ -3376,7 +3376,7 @@ entities:
     - type: Transform
       pos: -5.8247805,-3.3549962
       parent: 179
-- proto: CMLightBulb
+- proto: CMLightFixtureSmall
   entities:
   - uid: 59
     components:
