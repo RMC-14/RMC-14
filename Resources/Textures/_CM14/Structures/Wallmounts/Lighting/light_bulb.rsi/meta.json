@@ -48,15 +48,6 @@
       "directions": 4
     },
     {
-      "name": "lbulb"
-    },
-    {
-      "name": "lbulb-burned"
-    },
-    {
-      "name": "lbulb-broken"
-    },
-    {
       "name": "firelight1",
       "directions": 4,
       "delays": [
