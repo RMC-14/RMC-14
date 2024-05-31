@@ -59,8 +59,8 @@
   - type: StorageFill
     contents:
     - id: CMTricordrazineAutoInjector
-    - id: CMTraumaKit
-    - id: CMBurnKit
+    - id: CMTraumaKit10
+    - id: CMBurnKit10
     # splint
 
 - type: entity
@@ -86,7 +86,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMTraumaKit # todo cm14 tramadol
+    - id: CMTraumaKit10 # todo cm14 tramadol
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
     #- id: CMTramadolAutoInjector
@@ -101,8 +101,8 @@
     contents:
     - id: CMHealthAnalyzer
       # splint
-    - id: CMBurnKit
-    - id: CMTraumaKit
+    - id: CMBurnKit10
+    - id: CMTraumaKit10
 
 - type: entity
   parent: CMPouchMedical
@@ -125,8 +125,8 @@
     contents:
     - id: CMHealthAnalyzer
       # splint
-    - id: CMTraumaKit
-    - id: CMBurnKit
+    - id: CMTraumaKit10
+    - id: CMBurnKit10
     - id: CMKelotaneAutoInjector
     - id: CMBicaridineAutoInjector
     #- id: CMOxycodoneAutoInjector
@@ -142,9 +142,9 @@
     contents:
     - id: CMHealthAnalyzer
       # splint x2
-    - id: CMTraumaKit
+    - id: CMTraumaKit10
       amount: 2
-    - id: CMBurnKit
+    - id: CMBurnKit10
       amount: 2
     # todo cm14 autoinjectors oxycodone x2
 #    - id: CMOxycodoneAutoInjector
@@ -215,8 +215,8 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMTraumaKit
-    - id: CMBurnKit
+    - id: CMTraumaKit10
+    - id: CMBurnKit10
     # splint
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector

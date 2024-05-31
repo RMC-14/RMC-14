@@ -5,6 +5,7 @@ using Content.Server.Fluids.EntitySystems;
 using Content.Server.Forensics;
 using Content.Server.Popups;
 using Content.Shared._CM14.Medical.Stasis;
+using Content.Shared._CM14.Medical.Wounds;
 using Content.Shared.Alert;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -195,6 +196,11 @@ public sealed class BloodstreamSystem : EntitySystem
 
     private void OnDamageChanged(Entity<BloodstreamComponent> ent, ref DamageChangedEvent args)
     {
+        var ev = new CMBleedEvent(args);
+        RaiseLocalEvent(ent, ref ev);
+        if (ev.Handled)
+            return;
+
         if (args.DamageDelta is null || !args.DamageIncreased)
         {
             return;
