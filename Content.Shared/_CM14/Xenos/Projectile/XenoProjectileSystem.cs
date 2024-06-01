@@ -76,7 +76,7 @@ public sealed class XenoProjectileSystem : EntitySystem
         float speed)
     {
         var origin = _transform.GetMapCoordinates(xeno);
-        var target = targetCoords.ToMap(EntityManager, _transform);
+        var target = _transform.ToMapCoordinates(targetCoords);
 
         if (origin.MapId != target.MapId ||
             origin.Position == target.Position)

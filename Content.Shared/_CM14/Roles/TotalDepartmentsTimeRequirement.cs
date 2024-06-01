@@ -70,7 +70,7 @@ public sealed partial class TotalDepartmentsTimeRequirement : JobRequirement
             if (deptDiff <= 0)
                 return true;
 
-            reason = FormattedMessage.FromMarkup(Loc.GetString(
+            reason = FormattedMessage.FromMarkupOrThrow(Loc.GetString(
                 "role-timer-total-department-insufficient",
                 ("time", Math.Ceiling(deptDiff)),
                 ("roles", Loc.GetString(comp.Name)),
@@ -81,7 +81,7 @@ public sealed partial class TotalDepartmentsTimeRequirement : JobRequirement
         {
             if (deptDiff <= 0)
             {
-                reason = FormattedMessage.FromMarkup(Loc.GetString(
+                reason = FormattedMessage.FromMarkupOrThrow(Loc.GetString(
                     "role-timer-total-department-too-high",
                     ("time", -deptDiff),
                     ("roles", Loc.GetString(comp.Name)),

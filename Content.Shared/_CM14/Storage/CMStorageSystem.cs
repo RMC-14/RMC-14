@@ -195,7 +195,7 @@ public sealed class CMStorageSystem : EntitySystem
                 var origin = GetCoordinates(netOrigin);
                 var current = _transform.GetMoverCoordinates(user);
 
-                if (!origin.InRange(EntityManager, _transform, current, 0.1f))
+                if (!_transform.InRange(origin, current, 0.1f))
                     _toRemove.Add(user);
             }
 

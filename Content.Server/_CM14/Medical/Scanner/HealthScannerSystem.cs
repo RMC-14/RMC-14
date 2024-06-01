@@ -1,5 +1,4 @@
 ﻿using Content.Server.Body.Components;
-using Content.Server.Body.Systems;
 using Content.Server.DoAfter;
 using Content.Server.Popups;
 using Content.Server.Temperature.Components;
@@ -22,7 +21,6 @@ namespace Content.Server._CM14.Medical.Scanner;
 public sealed class HealthScannerSystem : EntitySystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
     [Dependency] private readonly DoAfterSystem _doAfter = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
@@ -73,7 +71,8 @@ public sealed class HealthScannerSystem : EntitySystem
             return;
         }
 
-        if (!Transform(doAfter.User).Coordinates.InRange(EntityManager, _transform, args.DoAfter.UserPosition, doAfter.MovementThreshold))
+        var userCoords = Transform(doAfter.User).Coordinates;
+        if (!_transform.InRange(userCoords, args.DoAfter.UserPosition, doAfter.MovementThreshold))
             args.Cancel();
     }
 

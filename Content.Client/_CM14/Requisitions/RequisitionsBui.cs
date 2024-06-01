@@ -99,13 +99,13 @@ public sealed class RequisitionsBui : BoundUserInterface
         }
 
         var budget = new FormattedMessage();
-        budget.AddMarkup($"[bold]Supply budget: ${uiState.Balance}[/bold]");
+        budget.AddMarkupOrThrow($"[bold]Supply budget: ${uiState.Balance}[/bold]");
         _window.MainView.BudgetLabel.SetMessage(budget);
         _window.OrderCategoriesView.BudgetLabel.SetMessage(budget);
         _window.CategoryView.BudgetLabel.SetMessage(budget);
 
         var categoryHeader = new FormattedMessage();
-        categoryHeader.AddMarkup("[bold]Select a category[/bold]");
+        categoryHeader.AddMarkupOrThrow("[bold]Select a category[/bold]");
         _window.OrderCategoriesView.CategoryHeaderLabel.SetMessage(categoryHeader);
         _window.OrderCategoriesView.CategoriesContainer.DisposeAllChildren();
 

@@ -43,7 +43,7 @@ public sealed class CMMeleeWeaponSystem : EntitySystem
         else
             return;
 
-        var coordinates = EntityCoordinates.FromMap(grid, mousePos, _transform, EntityManager);
+        var coordinates = _transform.ToCoordinates(grid, mousePos);
 
         if (_player.LocalEntity is not { } entity)
             return;
