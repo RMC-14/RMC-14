@@ -221,7 +221,7 @@ public abstract class SharedWoundsSystem : EntitySystem
         if (!treater.Comp.CanUseUnskilled && !hasSkills)
         {
             if (doPopups)
-                _popup.PopupEntity($"You don't know how to use the {Name(treater)}!", target, user, PopupType.SmallCaution);
+                _popup.PopupClient($"You don't know how to use the {Name(treater)}!", target, user, PopupType.SmallCaution);
 
             return false;
         }
