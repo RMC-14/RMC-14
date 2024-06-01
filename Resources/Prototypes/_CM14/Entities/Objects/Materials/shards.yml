@@ -25,7 +25,7 @@
   components:
   - type: WelderRefinable
     refineResult:
-    - CMSheetGlass1
+    - id: CMSheetGlass1
   - type: Tag
     tags:
       - GlassShard
@@ -52,8 +52,8 @@
         phoronsmall: ""
   - type: WelderRefinable
     refineResult:
-    - CMSheetGlass1
-    - CMSheetPhoron1
+    - id: CMSheetGlass1
+    - id: CMSheetPhoron1
   - type: Tag
     tags:
       - PlasmaGlassShard

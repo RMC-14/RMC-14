@@ -40,8 +40,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<HuggableComponent, InteractHandEvent>(OnHuggableInteractHand);
-        SubscribeLocalEvent<HuggableComponent, InteractedNoHandEvent>(OnHuggableInteractNoHand);
+        SubscribeLocalEvent<HuggableComponent, ActivateInWorldEvent>(OnHuggableActivate);
 
         SubscribeLocalEvent<XenoHuggerComponent, XenoLeapHitEvent>(OnHuggerLeapHit);
         SubscribeLocalEvent<XenoHuggerComponent, AfterInteractEvent>(OnHuggerAfterInteract);
@@ -60,16 +59,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         SubscribeLocalEvent<VictimBurstComponent, UpdateMobStateEvent>(OnVictimUpdateMobState);
     }
 
-    private void OnHuggableInteractHand(Entity<HuggableComponent> ent, ref InteractHandEvent args)
-    {
-        if (TryComp(args.User, out XenoHuggerComponent? hugger) &&
-            StartHug((args.User, hugger), args.Target, args.User))
-        {
-            args.Handled = true;
-        }
-    }
-
-    private void OnHuggableInteractNoHand(Entity<HuggableComponent> ent, ref InteractedNoHandEvent args)
+    private void OnHuggableActivate(Entity<HuggableComponent> ent, ref ActivateInWorldEvent args)
     {
         if (TryComp(args.User, out XenoHuggerComponent? hugger) &&
             StartHug((args.User, hugger), args.Target, args.User))

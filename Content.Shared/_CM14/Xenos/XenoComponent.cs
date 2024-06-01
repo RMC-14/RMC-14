@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using Content.Shared.Access;
+using Content.Shared.Alert;
 using Content.Shared.FixedPoint;
 using Content.Shared.Roles;
 using Robust.Shared.GameStates;
@@ -68,4 +69,7 @@ public sealed partial class XenoComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan UnlockAt = TimeSpan.FromSeconds(60);
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<AlertPrototype> ArmorAlert = "XenoArmor";
 }
