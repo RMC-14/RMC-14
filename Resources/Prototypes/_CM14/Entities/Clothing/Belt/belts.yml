@@ -248,8 +248,8 @@
         name: Sabre
         insertVerbText: sheath-insert-verb
         ejectVerbText: sheath-eject-verb
-        insertSound: /Audio/Items/sheath.ogg
-        ejectSound: /Audio/Items/unsheath.ogg
+        insertSound: /Audio/_CM14/Weapons/sheath.ogg
+        ejectSound: /Audio/_CM14/Weapons/unsheath.ogg
         whitelist:
           tags:
           - Rapier
@@ -260,3 +260,13 @@
           tags:
           - Rapier
   - type: Appearance
+
+- type: entity
+  id: CMClothingBeltRapierFilled
+  parent: CMClothingBeltRapier
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - Rapier
