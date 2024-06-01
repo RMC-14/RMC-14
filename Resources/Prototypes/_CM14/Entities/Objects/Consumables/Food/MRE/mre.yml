@@ -146,5 +146,5 @@
   id: CMMREBox
   suffix: Filled
   components:
-  - type: CMHolster
+  - type: ItemSlotsFill
     startingItem: CMMRE

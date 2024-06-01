@@ -5,6 +5,8 @@
   name: box of M41A2 magazines
   description: A box of magazines.
   components:
+  - type: Item
+    size: Ginormous
   - type: CMAmmoBox
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
