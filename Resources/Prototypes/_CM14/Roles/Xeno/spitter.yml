@@ -1,0 +1,8 @@
+﻿- type: job
+  parent: CMJobXenoBase
+  id: CMXenoSpitter
+  name: cm-job-name-xeno-spitter
+  playTimeTracker: CMJobXenoSpitter
+
+- type: playTimeTracker
+  id: CMJobXenoSpitter

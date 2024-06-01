@@ -9,10 +9,9 @@
     group: CMDepartmentsHuman
     time: 36000 # 10 hours
   startingGear: CMGearCorrespondent
-  icon: "CMJobIconCorrespondent"
+  icon: "CMJobIconEmpty"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
-  canBeAntag: true
   accessGroups:
   - CMCorrespondent
   special:

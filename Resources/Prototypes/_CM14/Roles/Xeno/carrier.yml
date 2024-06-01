@@ -1,0 +1,8 @@
+﻿- type: job
+  parent: CMJobXenoBase
+  id: CMXenoCarrier
+  name: cm-job-name-xeno-carrier
+  playTimeTracker: CMJobXenoCarrier
+
+- type: playTimeTracker
+  id: CMJobXenoCarrier

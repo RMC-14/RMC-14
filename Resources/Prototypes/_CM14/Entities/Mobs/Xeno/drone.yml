@@ -24,6 +24,7 @@
       groups:
         Brute: 22.5
   - type: Xeno
+    role: CMXenoDrone
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate

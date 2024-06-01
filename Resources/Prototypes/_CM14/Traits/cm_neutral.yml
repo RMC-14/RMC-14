@@ -25,3 +25,29 @@
   description: trait-spanish-desc
   components:
     - type: SpanishAccent
+
+- type: trait
+  id: CMPirateAccent
+  name: trait-pirate-accent-name
+  description: trait-pirate-accent-desc
+  components:
+  - type: PirateAccent
+
+- type: trait
+  id: CMAccentless
+  name: trait-accentless-name
+  description: trait-accentless-desc
+  components:
+  - type: Accentless
+    removes:
+    - type: LizardAccent
+    - type: MothAccent
+    - type: ReplacementAccent
+      accent: dwarf
+
+- type: trait
+  id: CMSouthern
+  name: trait-southern-name
+  description: trait-southern-desc
+  components:
+  - type: SouthernAccent

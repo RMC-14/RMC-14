@@ -20,6 +20,7 @@
       700: Critical
       800: Dead
   - type: Xeno
+    role: CMXenoCrusher
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate

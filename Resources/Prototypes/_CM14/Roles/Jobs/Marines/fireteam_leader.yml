@@ -12,7 +12,6 @@
   icon: "CMJobIconFireteamLeader"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
-  canBeAntag: false
   accessGroups:
   - FTL
   special:

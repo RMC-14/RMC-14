@@ -2,8 +2,9 @@ using System.Linq;
 using System.Numerics;
 using Content.Client.CrewManifest;
 using Content.Client.GameTicking.Managers;
-using Content.Client.UserInterface.Controls;
 using Content.Client.Players.PlayTimeTracking;
+using Content.Client.UserInterface.Controls;
+using Content.Shared._CM14.Prototypes;
 using Content.Shared.CCVar;
 using Content.Shared.Roles;
 using Content.Shared.StatusIcon;
@@ -160,7 +161,7 @@ namespace Content.Client.LateJoin
                 };
 
                 var firstCategory = true;
-                var departments = _prototypeManager.EnumeratePrototypes<DepartmentPrototype>().ToArray();
+                var departments = _prototypeManager.EnumerateCM<DepartmentPrototype>().ToArray();
                 Array.Sort(departments, DepartmentUIComparer.Instance);
 
                 _jobButtons[id] = new Dictionary<string, List<JobButton>>();

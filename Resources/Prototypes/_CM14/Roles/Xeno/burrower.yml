@@ -1,0 +1,8 @@
+﻿- type: job
+  parent: CMJobXenoBase
+  id: CMXenoBurrower
+  name: cm-job-name-xeno-burrower
+  playTimeTracker: CMJobXenoBurrower
+
+- type: playTimeTracker
+  id: CMJobXenoBurrower

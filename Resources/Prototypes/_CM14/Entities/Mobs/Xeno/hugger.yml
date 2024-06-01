@@ -16,6 +16,7 @@
       0: Alive
       35: Dead # TODO CM14 gib on death
   - type: Xeno
+    role: CMXenoHugger
     actionIds:
     - ActionXenoRest
     - ActionXenoWatch
@@ -48,7 +49,8 @@
   - type: Item
   - type: WhitelistPickupBy
     all:
-    - type: Xeno
+      components:
+      - Xeno
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.7
     baseSprintSpeed: 5

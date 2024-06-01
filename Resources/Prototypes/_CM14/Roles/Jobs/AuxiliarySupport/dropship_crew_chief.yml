@@ -15,7 +15,6 @@
   icon: "CMJobIconDCC"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-po
-  canBeAntag: true
   accessGroups:
   - DropshipCrewChief
   special:

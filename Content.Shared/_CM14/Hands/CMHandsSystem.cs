@@ -2,12 +2,14 @@
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Item;
 using Content.Shared.Mobs;
+using Content.Shared.Whitelist;
 
 namespace Content.Shared._CM14.Hands;
 
 public sealed class CMHandsSystem : EntitySystem
 {
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -27,12 +29,8 @@ public sealed class CMHandsSystem : EntitySystem
 
     private void OnWhitelistGettingPickedUpAttempt(Entity<WhitelistPickupByComponent> ent, ref GettingPickedUpAttemptEvent args)
     {
-        foreach (var entry in ent.Comp.All.Values)
-        {
-            var type = entry.Component.GetType();
-            if (!HasComp(args.User, type))
-                args.Cancel();
-        }
+        if (_whitelist.IsValid(ent.Comp.All, args.User))
+            args.Cancel();
     }
 
     private void OnWhitelistPickUpAttempt(Entity<WhitelistPickupComponent> ent, ref PickupAttemptEvent args)

@@ -1,0 +1,8 @@
+﻿- type: job
+  parent: CMJobXenoBase
+  id: CMXenoSentinel
+  name: cm-job-name-xeno-sentinel
+  playTimeTracker: CMJobXenoSentinel
+
+- type: playTimeTracker
+  id: CMJobXenoSentinel

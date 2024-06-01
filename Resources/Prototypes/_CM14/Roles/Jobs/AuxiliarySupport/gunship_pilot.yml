@@ -12,7 +12,6 @@
   icon: "CMJobIconPilotGunship"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-aso
-  canBeAntag: false
   accessGroups:
   - Pilot
   special:
