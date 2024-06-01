@@ -177,7 +177,7 @@ public sealed class EntrenchingToolSystem : EntitySystem
             return;
 
         var coordinates = GetCoordinates(args.Coordinates);
-        if (!_mapManager.TryFindGridAt(coordinates.ToMap(EntityManager, _transform), out var gridId, out var gridComp) ||
+        if (!_mapManager.TryFindGridAt(_transform.ToMapCoordinates(coordinates), out var gridId, out var gridComp) ||
             !_interaction.InRangeUnobstructed(full, coordinates, popup: false) ||
             !coordinates.TryGetTileRef(out var turf, EntityManager) ||
             !CanBuild(full, (gridId, gridComp), args.User, turf.Value, args.Direction))
@@ -264,7 +264,7 @@ public sealed class EntrenchingToolSystem : EntitySystem
 
     private bool Build(Entity<FullSandbagComponent> full, EntityUid user, EntityCoordinates coordinates, Direction direction)
     {
-        if (!_mapManager.TryFindGridAt(coordinates.ToMap(EntityManager, _transform), out var gridId, out var gridComp) ||
+        if (!_mapManager.TryFindGridAt(_transform.ToMapCoordinates(coordinates), out var gridId, out var gridComp) ||
             !coordinates.TryGetTileRef(out var tile) ||
             !CanBuild(full, (gridId, gridComp), user, tile.Value, direction))
         {
@@ -305,7 +305,7 @@ public sealed class EntrenchingToolSystem : EntitySystem
         if (TryComp(tool, out ItemToggleComponent? toggle) && !toggle.Activated)
             return false;
 
-        if (!_mapManager.TryFindGridAt(coordinates.ToMap(EntityManager, _transform), out var gridId, out var gridComp))
+        if (!_mapManager.TryFindGridAt(_transform.ToMapCoordinates(coordinates), out var gridId, out var gridComp))
             return false;
 
         tileRef = _mapSystem.GetTileRef(gridId, gridComp, coordinates);

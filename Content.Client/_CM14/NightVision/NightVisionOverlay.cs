@@ -64,7 +64,7 @@ public sealed class NightVisionOverlay : Overlay
         if (_container.IsEntityOrParentInContainer(uid))
             return;
 
-        var position = xform.Coordinates.ToMapPos(_entity, _transform);
+        var position = _transform.GetWorldPosition(xform);
         var rotation = _transform.GetWorldRotation(xform);
 
         sprite.Render(handle, eyeRot, rotation, position: position);

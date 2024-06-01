@@ -160,7 +160,7 @@ public sealed class XenoEggSystem : EntitySystem
             return;
         }
 
-        if (args.ClickLocation.GetGridUid(EntityManager) is not { } gridId ||
+        if (_transform.GetGrid(args.ClickLocation) is not { } gridId ||
             !TryComp(gridId, out MapGridComponent? grid))
         {
             return;
