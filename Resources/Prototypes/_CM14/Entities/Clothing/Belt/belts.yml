@@ -231,3 +231,32 @@
   - type: Storage
     maxItemSize: Huge
 
+- type: entity
+  parent: [ClothingBeltBase, ClothingSlotBase]
+  id: CMClothingBeltRapier
+  name: rapier scaddard
+  description: Rapier scaddard
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Belt/rapier.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Belt/rapier.rsi
+  - type: ItemSlots
+    slots:
+      item:
+        name: Sabre
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
+        whitelist:
+          tags:
+          - Rapier
+  - type: ItemMapper
+    mapLayers:
+      sheath-sabre:
+        whitelist:
+          tags:
+          - Rapier
+  - type: Appearance
