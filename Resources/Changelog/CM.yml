@@ -934,5 +934,12 @@
   id: 122
   time: '2024-05-31T22:37:48.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2174
+- author: DrSmugleaf
+  changes:
+  - message: Added xeno roles and playtime trackers.
+    type: Add
+  id: 123
+  time: '2024-06-01T05:07:56.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2182
 Name: CM
 Order: -1
