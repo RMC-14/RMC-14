@@ -12,7 +12,6 @@
   icon: "CMJobIconSquadLeader"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
-  canBeAntag: false
   accessGroups:
   - SquadLeader
   special:

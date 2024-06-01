@@ -26,7 +26,6 @@
   requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: cm-job-supervisors-co
-  canBeAntag: false
   accessGroups:
   - MarineMain
   special:

@@ -8,6 +8,7 @@ using Content.Client.Lobby.UI.Roles;
 using Content.Client.Message;
 using Content.Client.Players.PlayTimeTracking;
 using Content.Client.UserInterface.Systems.Guidebook;
+using Content.Shared._CM14.Prototypes;
 using Content.Shared.CCVar;
 using Content.Shared.Clothing;
 using Content.Shared.GameTicking;
@@ -380,6 +381,8 @@ namespace Content.Client.Lobby.UI
             #endregion Jobs
 
             TabContainer.SetTabTitle(2, Loc.GetString("humanoid-profile-editor-antags-tab"));
+            // TODO CM14 antags
+            TabContainer.SetTabVisible(2, false);
 
             RefreshTraits();
 
@@ -542,7 +545,7 @@ namespace Content.Client.Lobby.UI
                 ("humanoid-profile-editor-antag-preference-no-button", 1)
             };
 
-            foreach (var antag in _prototypeManager.EnumeratePrototypes<AntagPrototype>().OrderBy(a => Loc.GetString(a.Name)))
+            foreach (var antag in _prototypeManager.EnumerateCM<AntagPrototype>().OrderBy(a => Loc.GetString(a.Name)))
             {
                 if (!antag.SetPreference)
                     continue;
@@ -778,6 +781,7 @@ namespace Content.Client.Lobby.UI
 
                 var jobs = department.Roles.Select(jobId => _prototypeManager.Index<JobPrototype>(jobId))
                     .Where(job => job.SetPreference)
+                    .Where(job => !job.Hidden)
                     .ToArray();
 
                 Array.Sort(jobs, JobUIComparer.Instance);

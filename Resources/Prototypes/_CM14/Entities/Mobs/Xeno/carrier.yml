@@ -20,6 +20,7 @@
       650: Critical
       750: Dead
   - type: Xeno
+    role: CMXenoCarrier
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate

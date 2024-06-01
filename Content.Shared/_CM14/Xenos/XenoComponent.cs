@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
 using Content.Shared.Access;
 using Content.Shared.FixedPoint;
+using Content.Shared.Roles;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -11,6 +12,9 @@ namespace Content.Shared._CM14.Xenos;
 [Access(typeof(XenoSystem))]
 public sealed partial class XenoComponent : Component
 {
+    [DataField(required: true), AutoNetworkedField]
+    public ProtoId<JobPrototype> Role;
+
     [DataField, AutoNetworkedField]
     public List<EntProtoId> ActionIds = new();
 

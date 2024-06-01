@@ -13,7 +13,6 @@
   icon: "CMJobIconMilitaryPolice"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-cmp
-  canBeAntag: false
   accessGroups:
   - MP
   special:

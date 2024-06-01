@@ -33,6 +33,7 @@
         layer:
         - MobLayer
   - type: Xeno
+    role: CMXenoRunner
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate

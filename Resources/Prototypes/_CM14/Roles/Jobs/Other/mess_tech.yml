@@ -8,7 +8,6 @@
   icon: "CMJobIconMessTech"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-aso
-  canBeAntag: true
   accessGroups:
   - MessTech
   special:

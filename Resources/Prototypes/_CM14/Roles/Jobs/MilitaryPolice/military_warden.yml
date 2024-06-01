@@ -13,7 +13,6 @@
   icon: "CMJobIconMilitaryWarden"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-cmp
-  canBeAntag: false
   accessGroups:
   - CMWarden
   special:
