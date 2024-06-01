@@ -32,7 +32,7 @@
   id: CMBeltKnifeFilled
   suffix: Filled
   components:
-  - type: CMHolster
+  - type: CMItemSlots
     startingItem: CMM11Knife
 
 - type: entity

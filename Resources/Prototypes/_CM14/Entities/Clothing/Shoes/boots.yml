@@ -28,7 +28,7 @@
     layers:
     - state: icon
     - state: filled
-      map: [ "enum.CMHolsterLayers.Filled" ]
+      map: [ "enum.CMItemSlotsLayers.Filled" ]
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Shoes/Marines/black.rsi
   - type: Matchbox
@@ -43,13 +43,14 @@
           tags:
           - Knife
   - type: CMHolster
+  - type: CMItemSlots
 
 - type: entity
   parent: CMBootsBlack
   id: CMBootsBlackFilled
   suffix: Filled
   components:
-  - type: CMHolster
+  - type: CMItemSlots
     startingItem: CMM5Bayonet
 
 # Brown Boots
@@ -68,7 +69,7 @@
   id: CMBootsBrownFilled
   suffix: Filled
   components:
-  - type: CMHolster
+  - type: CMItemSlots
     startingItem: CMM5Bayonet
 
 # Jungle Boots
@@ -88,5 +89,5 @@
   id: CMBootsJungleFilled
   suffix: Filled
   components:
-  - type: CMHolster
+  - type: CMItemSlots
     startingItem: CMM5Bayonet
