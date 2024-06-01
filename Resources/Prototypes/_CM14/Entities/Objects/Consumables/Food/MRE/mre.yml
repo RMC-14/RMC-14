@@ -126,7 +126,7 @@
   description: A box of MREs. Nutritious, but not delicious.
   components:
   - type: ItemSlots
-  - type: ItemSlotsFill
+  - type: CMItemSlots
     cooldown: 1
     cooldownPopup: You need to wait before taking another MRE!
     count: 12
@@ -146,5 +146,5 @@
   id: CMMREBox
   suffix: Filled
   components:
-  - type: ItemSlotsFill
+  - type: CMItemSlots
     startingItem: CMMRE
