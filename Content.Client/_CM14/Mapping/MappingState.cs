@@ -16,7 +16,6 @@ using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Placement;
 using Robust.Client.ResourceManagement;
-using Robust.Client.State;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Enums;
@@ -131,7 +130,7 @@ public sealed class MappingState : GameplayStateBase
 
     private bool HandleOpenContextMenu(in PointerInputCmdArgs args)
     {
-        var coords = args.Coordinates.ToMap(_entityManager, _transform);
+        var coords = _transform.ToMapCoordinates(args.Coordinates);
         if (_verbs.TryGetEntityMenuEntities(coords, out var entities))
             _entityMenuController.OpenRootMenu(entities);
 

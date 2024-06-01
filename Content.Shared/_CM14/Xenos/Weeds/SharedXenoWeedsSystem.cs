@@ -70,7 +70,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
         var coordinates = _transform.GetMoverCoordinates(entity, entity.Comp).SnapToGrid(EntityManager, _map);
 
-        if (coordinates.GetGridUid(EntityManager) is not { } gridUid ||
+        if (_transform.GetGrid(coordinates) is not { } gridUid ||
             !TryComp(gridUid, out MapGridComponent? grid))
         {
             return false;

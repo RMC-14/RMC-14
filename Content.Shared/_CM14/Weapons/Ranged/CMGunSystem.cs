@@ -52,7 +52,7 @@ public sealed class CMGunSystem : EntitySystem
         }
 
         var from = _transform.GetMapCoordinates(ent);
-        var to = target.ToMap(EntityManager, _transform);
+        var to = _transform.ToMapCoordinates(target);
         if (from.MapId != to.MapId)
             return;
 

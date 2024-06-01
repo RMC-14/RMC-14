@@ -71,7 +71,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
     private void OnHuggerLeapHit(Entity<XenoHuggerComponent> hugger, ref XenoLeapHitEvent args)
     {
         var coordinates = _transform.GetMoverCoordinates(hugger);
-        if (coordinates.InRange(EntityManager, _transform, args.Leaping.Origin, hugger.Comp.HugRange))
+        if (_transform.InRange(coordinates, args.Leaping.Origin, hugger.Comp.HugRange))
             Hug(hugger, args.Hit, false);
     }
 
