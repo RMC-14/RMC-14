@@ -12,7 +12,6 @@
   icon: "CMJobIconCombatTech"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
-  canBeAntag: false
   accessGroups:
   - CombatTech
   special:

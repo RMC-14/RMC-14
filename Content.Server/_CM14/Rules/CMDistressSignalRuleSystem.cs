@@ -1,11 +1,15 @@
-﻿using System.Linq;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using Content.Server._CM14.Marines;
 using Content.Server.Administration.Components;
+using Content.Server.Administration.Managers;
 using Content.Server.GameTicking;
+using Content.Server.GameTicking.Components;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
+using Content.Server.Parallax;
+using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Power.Components;
+using Content.Server.Preferences.Managers;
 using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Spawners.Components;
@@ -22,12 +26,15 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
+using Content.Shared.Parallax.Biomes;
+using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Content.Shared.StatusIcon;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
-using Robust.Shared.Console;
+using Robust.Server.Player;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
@@ -36,13 +43,17 @@ namespace Content.Server._CM14.Rules;
 
 public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignalRuleComponent>
 {
-    [Dependency] private readonly IConsoleHost _console = default!;
+    [Dependency] private readonly IBanManager _bans = default!;
+    [Dependency] private readonly BiomeSystem _biome = default!;
     [Dependency] private readonly ContainerSystem _containers = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly MarineSystem _marines = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly PlayTimeTrackingSystem _playTime = default!;
+    [Dependency] private readonly IServerPreferencesManager _prefsManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
@@ -50,6 +61,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+
+    [ValidatePrototypeId<BiomeTemplatePrototype>]
+    private const string PlanetBiome = "Grasslands";
 
     public override void Initialize()
     {
@@ -83,28 +97,120 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 continue;
             }
 
-            var totalXenos = ev.PlayerPool.Count / comp.PlayersPerXeno;
-            var profiles = ev.Profiles.ToDictionary();
-
-            // TODO CM14 preferences
-            // Xenos
-            for (var i = 0; i < totalXenos; i++)
+            bool IsAllowed(NetUserId id, ProtoId<JobPrototype> role)
             {
-                var player = _random.PickAndTake(ev.PlayerPool);
-                profiles.Remove(player.UserId);
+                if (!_player.TryGetSessionById(id, out var player))
+                    return false;
+
+                var jobBans = _bans.GetJobBans(player.UserId);
+                if (jobBans == null || jobBans.Contains(role))
+                    return false;
+
+                if (!_playTime.IsAllowed(player, role))
+                    return false;
+
+                return true;
+            }
+
+            NetUserId? SpawnXeno(List<NetUserId> list, EntProtoId ent)
+            {
+                var playerId = _random.PickAndTake(list);
+                if (!_player.TryGetSessionById(playerId, out var player))
+                {
+                    Log.Error($"Failed to find player with id {playerId} during xeno selection.");
+                    return null;
+                }
+
+                ev.PlayerPool.Remove(player);
                 GameTicker.PlayerJoinGame(player);
 
                 // TODO CM14 xeno spawn points
-                var xenoEnt = Spawn("CMXenoDrone", comp.XenoMap.ToCoordinates());
+                var xenoEnt = Spawn(ent, comp.XenoMap.ToCoordinates());
 
                 _xeno.MakeXeno(xenoEnt);
                 _xeno.SetHive(xenoEnt, comp.Hive);
 
-                // TODO CM14 mind name
-                if (!_mind.TryGetMind(player.UserId, out var mind))
-                    mind = _mind.CreateMind(player.UserId, Name(xenoEnt));
+                if (!_mind.TryGetMind(playerId, out var mind))
+                    mind = _mind.CreateMind(playerId);
 
                 _mind.TransferTo(mind.Value, xenoEnt);
+                return playerId;
+            }
+
+            var totalXenos = Math.Max(1, ev.PlayerPool.Count / comp.PlayersPerXeno);
+            var xenoCandidates = new List<NetUserId>[Enum.GetValues<JobPriority>().Length];
+            for (var i = 0; i < xenoCandidates.Length; i++)
+            {
+                xenoCandidates[i] = [];
+            }
+
+            foreach (var (id, profile) in ev.Profiles)
+            {
+                if (!IsAllowed(id, comp.QueenJob))
+                    continue;
+
+                if (profile.JobPriorities.TryGetValue(comp.QueenJob, out var priority) &&
+                    priority > JobPriority.Never)
+                {
+                    xenoCandidates[(int) priority].Add(id);
+                }
+            }
+
+            NetUserId? queenSelected = null;
+            for (var i = xenoCandidates.Length - 1; i >= 0; i--)
+            {
+                var list = xenoCandidates[i];
+                while (list.Count > 0)
+                {
+                    queenSelected = SpawnXeno(list, comp.QueenEnt);
+                    if (queenSelected != null)
+                        break;
+                }
+
+                if (queenSelected != null)
+                {
+                    totalXenos--;
+                    break;
+                }
+            }
+
+            foreach (var list in xenoCandidates)
+            {
+                list.Clear();
+            }
+
+            foreach (var (id, profile) in ev.Profiles)
+            {
+                if (id == queenSelected)
+                    continue;
+
+                if (!IsAllowed(id, comp.XenoSelectableJob))
+                    continue;
+
+                if (profile.JobPriorities.TryGetValue(comp.XenoSelectableJob, out var priority) &&
+                    priority > JobPriority.Never)
+                {
+                    xenoCandidates[(int) priority].Add(id);
+                }
+            }
+
+            var selected = 0;
+            for (var i = xenoCandidates.Length - 1; i >= 0; i--)
+            {
+                var list = xenoCandidates[i];
+                while (list.Count > 0 && selected < totalXenos)
+                {
+                    if (SpawnXeno(list, comp.LarvaEnt) != null)
+                        selected++;
+                }
+            }
+
+            for (var i = selected; i < totalXenos; i++)
+            {
+                // TODO CM14 xeno spawn points
+                var xenoEnt = Spawn(comp.LarvaEnt, comp.XenoMap.ToCoordinates());
+                _xeno.MakeXeno(xenoEnt);
+                _xeno.SetHive(xenoEnt, comp.Hive);
             }
         }
     }
@@ -185,6 +291,44 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             recharger.AutoRecharge = true;
             recharger.AutoRechargeRate = battery.MaxCharge; // Instant refill.
+        }
+    }
+
+    protected override void OnStartAttempt(Entity<CMDistressSignalRuleComponent, GameRuleComponent> gameRule, RoundStartAttemptEvent ev)
+    {
+        if (ev.Forced || ev.Cancelled)
+            return;
+
+        var query = QueryAllRules();
+        while (query.MoveNext(out _, out var distress, out _))
+        {
+            var xenoCandidate = false;
+            foreach (var player in ev.Players)
+            {
+                if (_prefsManager.TryGetCachedPreferences(player.UserId, out var preferences))
+                {
+                    var profile = (HumanoidCharacterProfile) preferences.GetProfile(preferences.SelectedCharacterIndex);
+                    if (profile.JobPriorities.TryGetValue(distress.XenoSelectableJob, out var xenoPriority) &&
+                        xenoPriority > JobPriority.Never)
+                    {
+                        xenoCandidate = true;
+                        break;
+                    }
+
+                    if (profile.JobPriorities.TryGetValue(distress.QueenJob, out var queenPriority) &&
+                        queenPriority > JobPriority.Never)
+                    {
+                        xenoCandidate = true;
+                        break;
+                    }
+                }
+            }
+
+            if (xenoCandidate)
+                continue;
+
+            ChatManager.SendAdminAnnouncement("Can't start distress signal. Requires at least 1 xeno player but we have 0.");
+            ev.Cancel();
         }
     }
 
@@ -313,7 +457,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private bool SpawnXenoMap(Entity<CMDistressSignalRuleComponent> rule)
     {
         var mapId = _map.CreateMap();
-        _console.ExecuteCommand($"planet {mapId} Grasslands");
+        _biome.EnsurePlanet(mapId, _prototypes.Index<BiomeTemplatePrototype>(PlanetBiome));
         rule.Comp.XenoMap = mapId;
         return true;
     }

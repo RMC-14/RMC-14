@@ -14,7 +14,6 @@
   requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: cm-job-supervisors-aso
-  canBeAntag: false
   accessGroups:
   - CMCE
   special:

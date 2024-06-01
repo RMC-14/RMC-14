@@ -12,7 +12,6 @@
   icon: "CMJobIconLiaison"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-wy
-  canBeAntag: true
   accessGroups:
   - MarineMain
   special:

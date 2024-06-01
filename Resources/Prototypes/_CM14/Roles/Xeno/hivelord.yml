@@ -1,0 +1,8 @@
+﻿- type: job
+  parent: CMJobXenoBase
+  id: CMXenoHivelord
+  name: cm-job-name-xeno-hivelord
+  playTimeTracker: CMJobXenoHivelord
+
+- type: playTimeTracker
+  id: CMJobXenoHivelord

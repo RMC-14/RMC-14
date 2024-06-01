@@ -1,0 +1,8 @@
+﻿- type: job
+  parent: CMJobXenoBase
+  id: CMXenoBoiler
+  name: cm-job-name-xeno-boiler
+  playTimeTracker: CMJobXenoBoiler
+
+- type: playTimeTracker
+  id: CMJobXenoBoiler

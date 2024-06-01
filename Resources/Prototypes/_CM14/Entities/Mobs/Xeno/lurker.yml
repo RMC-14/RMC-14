@@ -20,6 +20,7 @@
       450: Critical
       550: Dead
   - type: Xeno
+    role: CMXenoLurker
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate

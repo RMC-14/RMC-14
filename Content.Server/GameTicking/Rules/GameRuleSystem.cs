@@ -35,11 +35,14 @@ public abstract partial class GameRuleSystem<T> : EntitySystem where T : ICompon
             return;
 
         var query = QueryAllRules();
-        while (query.MoveNext(out var uid, out _, out var gameRule))
+        while (query.MoveNext(out var uid, out var rule, out var gameRule))
         {
             var minPlayers = gameRule.MinPlayers;
             if (args.Players.Length >= minPlayers)
+            {
+                OnStartAttempt((uid, rule, gameRule), args);
                 continue;
+            }
 
             ChatManager.SendAdminAnnouncement(Loc.GetString("preset-not-enough-ready-players",
                 ("readyPlayersCount", args.Players.Length),
@@ -80,6 +83,11 @@ public abstract partial class GameRuleSystem<T> : EntitySystem where T : ICompon
 
             AppendRoundEndText(uid, comp, ruleData, ref ev);
         }
+    }
+
+    protected virtual void OnStartAttempt(Entity<T, GameRuleComponent> gameRule, RoundStartAttemptEvent ev)
+    {
+
     }
 
     /// <summary>

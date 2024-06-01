@@ -1,5 +1,5 @@
-﻿using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
+﻿using Content.Shared.Whitelist;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._CM14.Hands;
 
@@ -7,5 +7,5 @@ namespace Content.Shared._CM14.Hands;
 public sealed partial class WhitelistPickupByComponent : Component
 {
     [DataField]
-    public ComponentRegistry All = new();
+    public EntityWhitelist All = new();
 }

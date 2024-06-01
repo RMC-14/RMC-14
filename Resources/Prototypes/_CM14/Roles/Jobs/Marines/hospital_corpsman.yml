@@ -15,7 +15,6 @@
   icon: "CMJobIconHospitalCorpsman"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
-  canBeAntag: false
   accessGroups:
   - HospitalCorpsman
   special:

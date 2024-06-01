@@ -8,7 +8,6 @@
   icon: "CMJobIconCargoTech"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-qm
-  canBeAntag: true
   accessGroups:
   - CMCargoTech
   special:

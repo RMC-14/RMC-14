@@ -243,9 +243,9 @@
     speechVerb: LargeMob
 
 - type: entity
-  id: CMXenoUndeveloped
-  parent: CMXenoBase
   abstract: true
+  parent: CMXenoBase
+  id: CMXenoUndeveloped
 
 - type: entity
   id: CMXenoAI

@@ -12,7 +12,6 @@
   icon: "CMJobIconSmartgunner"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
-  canBeAntag: false
   accessGroups:
   - Smartgunner
   special:

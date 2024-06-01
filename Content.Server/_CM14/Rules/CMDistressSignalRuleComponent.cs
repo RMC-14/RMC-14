@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Prototypes;
+﻿using Content.Shared.Roles;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._CM14.Rules;
 
@@ -30,4 +31,16 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     // TODO CM14
     [DataField]
     public bool XenosEverOnShip;
+
+    [DataField]
+    public ProtoId<JobPrototype> QueenJob = "CMXenoQueen";
+
+    [DataField]
+    public EntProtoId QueenEnt = "CMXenoQueen";
+
+    [DataField]
+    public ProtoId<JobPrototype> XenoSelectableJob = "CMXenoSelectableXenomorph";
+
+    [DataField]
+    public EntProtoId LarvaEnt = "CMXenoLarva";
 }

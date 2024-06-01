@@ -2,7 +2,7 @@
   parent:
   - CMXenoDeveloped
   - CMXenoTail
-  id: CMXenoQueen # TODO CM14 big loud steps
+  id: CMXenoQueen
   name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
   components:
@@ -28,6 +28,7 @@
     - DoorBumpOpener
     - FootstepSound
   - type: Xeno
+    role: CMXenoQueen
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
@@ -52,7 +53,6 @@
 #    - ActionXenoScreech
 #    - ActionXenoSpit
 #    - ActionXenoToggleSpitType
-    # TODO CM14 fire immunity
     tier: 4
     bypassTierCount: true
     unlockAt: 0
