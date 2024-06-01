@@ -1,9 +1,15 @@
-﻿- type: entity
+﻿- type: Tag
+  id: MRE
+
+- type: entity
   parent: BaseStorageItem
   id: CMMRE
   name: USCM MRE
   description: A Meal, Ready-to-Eat. A single-meal combat ration designed to provide a soldier with enough nutrients for a day of strenuous work. Its expiration date is at least 20 years ahead of your combat life expectancy.
   components:
+  - type: Tag
+    tags:
+    - MRE
   - type: Sprite
     sprite: _CM14/Objects/Consumable/Food/mre.rsi
     state: closed
@@ -111,3 +117,34 @@
   - type: Item
     size: Small
   - type: MREItem
+
+- type: entity
+  abstract: true
+  parent: CMMagazineBoxBase
+  id: CMMREBoxBase
+  name: box of MREs
+  description: A box of MREs. Nutritious, but not delicious.
+  components:
+  - type: ItemSlots
+  - type: ItemSlotsFill
+    cooldown: 1
+    cooldownPopup: You need to wait before taking another MRE!
+    count: 12
+    slot:
+      name: MRE
+      whitelist:
+        tags:
+        - MRE
+  - type: Sprite
+    layers:
+    - state: supply_crate
+    - state: magaz_mre
+      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+
+- type: entity
+  parent: CMMREBoxBase
+  id: CMMREBox
+  suffix: Filled
+  components:
+  - type: CMHolster
+    startingItem: CMMRE
