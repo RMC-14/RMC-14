@@ -26,6 +26,7 @@
   requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: cm-job-supervisors-uscm
+  whitelisted: true
   accessGroups:
   - ShipMasterAccess
   special:
