@@ -72,8 +72,12 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
                 var damage = threshold.Value - damageable.TotalDamage;
                 _window.HealthBar.MinValue = 0;
                 _window.HealthBar.MaxValue = threshold.Value.Float();
-                _window.HealthBar.Value = damage.Float() / threshold.Value.Float() * 100f;
-                _window.HealthBarText.Text = $"{_window.HealthBar.Value:F}% healthy";
+
+                var healthValue = damage.Float() / threshold.Value.Float() * 100f;
+                _window.HealthBar.Value = healthValue;
+
+                var healthString = MathHelper.CloseTo(healthValue, 100) ? "100%" : $"{healthValue:F2}%";
+                _window.HealthBarText.Text = $"{healthString} healthy";
             }
 
             _window.ChemicalsContainer.DisposeAllChildren();
