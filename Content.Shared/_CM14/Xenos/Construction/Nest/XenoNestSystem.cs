@@ -35,7 +35,7 @@ public sealed class XenoNestSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<XenoNestSurfaceComponent, InteractHandEvent>(OnNestSurfaceInteractHand);
+        SubscribeLocalEvent<XenoNestSurfaceComponent, ActivateInWorldEvent>(OnNestSurfaceActivate);
         SubscribeLocalEvent<XenoNestSurfaceComponent, DoAfterAttemptEvent<XenoNestDoAfterEvent>>(OnNestSurfaceDoAfterAttempt);
         SubscribeLocalEvent<XenoNestSurfaceComponent, XenoNestDoAfterEvent>(OnNestSurfaceDoAfter);
 
@@ -69,7 +69,7 @@ public sealed class XenoNestSystem : EntitySystem
         DetachNested(null, ent);
     }
 
-    private void OnNestSurfaceInteractHand(Entity<XenoNestSurfaceComponent> ent, ref InteractHandEvent args)
+    private void OnNestSurfaceActivate(Entity<XenoNestSurfaceComponent> ent, ref ActivateInWorldEvent args)
     {
         if (TryComp(args.User, out PullerComponent? puller) &&
             puller.Pulling is { } pulling)

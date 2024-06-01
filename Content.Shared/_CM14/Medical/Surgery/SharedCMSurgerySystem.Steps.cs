@@ -15,8 +15,6 @@ namespace Content.Shared._CM14.Medical.Surgery;
 
 public abstract partial class SharedCMSurgerySystem
 {
-    [Dependency] private readonly SkillsSystem _skills = default!;
-
     private void InitializeSteps()
     {
         SubscribeLocalEvent<CMSurgeryStepComponent, CMSurgeryStepEvent>(OnToolStep);
@@ -221,6 +219,9 @@ public abstract partial class SharedCMSurgerySystem
                 }
             }
         }
+
+        if (TryComp(body, out TransformComponent? xform))
+            _rotateToFace.TryFaceCoordinates(user, _transform.GetMapCoordinates(body, xform).Position);
 
         var ev = new CMSurgeryDoAfterEvent(GetNetEntity(part), args.Surgery, args.Step);
         var doAfter = new DoAfterArgs(EntityManager, user, 2, ev, body, body)

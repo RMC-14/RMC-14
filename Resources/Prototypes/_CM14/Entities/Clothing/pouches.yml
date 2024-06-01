@@ -135,6 +135,7 @@
     sprite: _CM14/Objects/Clothing/Pouches/bayonet.rsi
   - type: ItemSlots
   - type: CMHolster
+  - type: CMItemSlots
     count: 5
     slot:
       name: Knife
@@ -228,7 +229,7 @@
     layers:
     - sprite: _CM14/Objects/Weapons/Guns/gun_underlays.rsi
       state: m4a3 # TODO CM14 per-gun underlay
-      map: [ "enum.CMHolsterLayers.Filled" ]
+      map: [ "enum.CMItemSlotsLayers.Filled" ]
       visible: false
     - state: icon
   - type: ContainerContainer
@@ -245,6 +246,7 @@
           - Sidearm
           - Flare
   - type: CMHolster
+  - type: CMItemSlots
 
 - type: entity
   parent: [CMPouchStorage, CMPouchClosed]

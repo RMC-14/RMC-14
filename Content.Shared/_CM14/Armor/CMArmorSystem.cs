@@ -39,13 +39,14 @@ public sealed class CMArmorSystem : EntitySystem
 
     private void OnMapInit(Entity<CMArmorComponent> armored, ref MapInitEvent args)
     {
-        if (HasComp<XenoComponent>(armored))
-            _alerts.ShowAlert(armored, AlertType.XenoArmor, 0);
+        if (TryComp<XenoComponent>(armored, out var xeno))
+            _alerts.ShowAlert(armored, xeno.ArmorAlert, 0);
     }
 
     private void OnRemove(Entity<CMArmorComponent> armored, ref ComponentRemove args)
     {
-        _alerts.ClearAlertCategory(armored, AlertCategory.XenoArmor);
+        if (TryComp(armored, out XenoComponent? xeno))
+            _alerts.ClearAlert(armored, xeno.ArmorAlert);
     }
 
     private void OnDamageModify(Entity<CMArmorComponent> armored, ref DamageModifyEvent args)

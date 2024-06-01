@@ -46,8 +46,7 @@
       CMGlass: 25
   - type: WelderRefinable
     refineResult:
-    - CMSheetGlass1
-
+    - id: CMSheetGlass1
 
 - type: entity
   parent: CMLightBulbBase
