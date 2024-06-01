@@ -1,5 +1,6 @@
 ﻿using Content.Shared.Alert;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._CM14.NightVision;
@@ -8,7 +9,7 @@ namespace Content.Shared._CM14.NightVision;
 public sealed partial class NightVisionComponent : Component
 {
     [DataField]
-    public AlertType Alert = AlertType.XenoNightVision;
+    public ProtoId<AlertPrototype> Alert = "XenoNightVision";
 
     [DataField, AutoNetworkedField]
     public NightVisionState State = NightVisionState.Half;

@@ -1,6 +1,5 @@
 ﻿- type: alert
   id: XenoNightVision
-  category: XenoNightVision
   icons:
   - sprite: /Textures/_CM14/Interface/Alerts/xeno_night_vision.rsi
     state: nightvision_full

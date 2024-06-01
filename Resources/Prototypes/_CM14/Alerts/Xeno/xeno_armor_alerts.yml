@@ -1,6 +1,5 @@
 ﻿- type: alert
   id: XenoArmor
-  category: XenoArmor
   icons:
   - sprite: /Textures/_CM14/Interface/Alerts/xeno_armor.rsi
     state: armor_100
