@@ -233,19 +233,13 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
             }
         }
 
-        if (TryComp(victim, out HuggableComponent? huggable) &&
+        if (_net.IsServer &&
+            TryComp(victim, out HuggableComponent? huggable) &&
             TryComp(victim, out HumanoidAppearanceComponent? appearance) &&
             huggable.Sound.TryGetValue(appearance.Sex, out var sound))
         {
-            if (_net.IsClient)
-            {
-                _audio.PlayPredicted(sound, victim, hugger);
-            }
-            else
-            {
-                var filter = Filter.Pvs(victim);
-                _audio.PlayEntity(sound, filter, victim, true);
-            }
+            var filter = Filter.Pvs(victim);
+            _audio.PlayEntity(sound, filter, victim, true);
         }
 
         var time = _timing.CurTime;

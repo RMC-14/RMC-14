@@ -197,6 +197,7 @@
       groups:
         Brute: 1.25
   - type: AffectableByWeeds
+  - type: ComplexInteraction
 
 - type: entity
   abstract: true

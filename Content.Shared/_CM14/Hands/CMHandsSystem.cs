@@ -29,7 +29,7 @@ public sealed class CMHandsSystem : EntitySystem
 
     private void OnWhitelistGettingPickedUpAttempt(Entity<WhitelistPickupByComponent> ent, ref GettingPickedUpAttemptEvent args)
     {
-        if (_whitelist.IsValid(ent.Comp.All, args.User))
+        if (!_whitelist.IsValid(ent.Comp.All, args.User))
             args.Cancel();
     }
 
