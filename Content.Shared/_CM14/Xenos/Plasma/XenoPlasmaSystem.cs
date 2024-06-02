@@ -146,7 +146,7 @@ public sealed class XenoPlasmaSystem : EntitySystem
         if (old == xeno.Comp.Plasma)
             return;
 
-        Dirty(xeno, xeno.Comp);
+        Dirty(xeno);
         UpdateAlert((xeno, xeno.Comp));
     }
 
