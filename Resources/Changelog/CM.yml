@@ -941,5 +941,19 @@
   id: 123
   time: '2024-06-01T05:07:56.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2182
+- author: Errant
+  changes:
+  - message: Walking on resin/weeds now speeds up xenos and slows down everyone else.
+    type: Add
+  id: 124
+  time: '2024-06-02T09:41:01.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2201
+- author: Whisper
+  changes:
+  - message: Added mre box
+    type: Add
+  id: 125
+  time: '2024-06-02T08:37:57.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2186
 Name: CM
 Order: -1
