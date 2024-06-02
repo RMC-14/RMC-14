@@ -177,8 +177,8 @@
       entries:
       - id: CMMRE
         amount: 5
-      #- id: CMMREBox
-      #  amount: 1
+      - id: CMMREBox
+        amount: 1
     - name: Tools
       entries:
       - id: CMEntrenchingTool
