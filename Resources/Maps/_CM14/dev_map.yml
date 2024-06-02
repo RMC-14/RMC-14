@@ -7867,7 +7867,7 @@ entities:
     - type: Transform
       pos: 3.5,7.5
       parent: 179
-- proto: SpawnMobMouse
+- proto: CMSpawnMobMouse
   entities:
   - uid: 1307
     components:
