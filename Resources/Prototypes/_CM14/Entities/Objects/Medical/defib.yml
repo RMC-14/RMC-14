@@ -12,7 +12,6 @@
     - state: defib_on
       map: [ "enum.ToggleVisuals.Layer" ]
       visible: false
-      shader: unshaded
   - type: Appearance
   - type: GenericVisualizer
     visuals:
