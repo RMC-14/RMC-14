@@ -18,7 +18,6 @@ public sealed class XenoResinWalkerSystem : EntitySystem
     {
         SubscribeLocalEvent<XenoResinWalkerComponent, XenoResinWalkerActionEvent>(OnXenoResinWalkerAction);
         SubscribeLocalEvent<XenoResinWalkerComponent, RefreshMovementSpeedModifiersEvent>(OnXenoResinWalkerRefreshMovementSpeed);
-        SubscribeLocalEvent<XenoResinWalkerComponent, OnWeedsChangedEvent>(OnXenoResinWalkerOnWeedsUpdated);
 
         UpdatesAfter.Add(typeof(SharedPhysicsSystem));
     }
@@ -52,16 +51,11 @@ public sealed class XenoResinWalkerSystem : EntitySystem
     private void OnXenoResinWalkerRefreshMovementSpeed(Entity<XenoResinWalkerComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
         if (ent.Comp.Active &&
-            HasComp<XenoComponent>(ent) &&
-            HasComp<OnXenoWeedsComponent>(ent))
+            TryComp(ent, out AffectableByWeedsComponent? affected) &&
+            affected.OnXenoWeeds)
         {
             args.ModifySpeed(ent.Comp.SpeedMultiplier, ent.Comp.SpeedMultiplier);
         }
-    }
-
-    private void OnXenoResinWalkerOnWeedsUpdated(Entity<XenoResinWalkerComponent> ent, ref OnWeedsChangedEvent args)
-    {
-        _movementSpeed.RefreshMovementSpeedModifiers(ent);
     }
 
     public override void Update(float frameTime)

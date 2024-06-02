@@ -196,6 +196,7 @@
     critDamage:
       groups:
         Brute: 1.25
+  - type: AffectableByWeeds
 
 - type: entity
   abstract: true

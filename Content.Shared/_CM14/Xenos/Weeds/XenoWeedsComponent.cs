@@ -11,7 +11,7 @@ public sealed partial class XenoWeedsComponent : Component
     public int Range = 5;
 
     [DataField]
-    public float SpeedMultiplierXeno = 1.5f;
+    public float SpeedMultiplierXeno = 1.05f;
 
     [DataField]
     public float SpeedMultiplierOutsider = 0.5f;

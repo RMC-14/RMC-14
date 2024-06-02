@@ -36,6 +36,7 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
+    private EntityQuery<AffectableByWeedsComponent> _affectableQuery;
     private EntityQuery<DamageableComponent> _damageableQuery;
     private EntityQuery<MarineComponent> _marineQuery;
     private EntityQuery<MobStateComponent> _mobStateQuery;
@@ -47,6 +48,7 @@ public sealed class XenoSystem : EntitySystem
     {
         base.Initialize();
 
+        _affectableQuery = GetEntityQuery<AffectableByWeedsComponent>();
         _damageableQuery = GetEntityQuery<DamageableComponent>();
         _marineQuery = GetEntityQuery<MarineComponent>();
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
@@ -236,31 +238,37 @@ public sealed class XenoSystem : EntitySystem
                 continue;
 
             xeno.NextRegenTime = time + xeno.RegenCooldown;
+            Dirty(uid, xeno);
 
-            if (HasComp<OnXenoWeedsComponent>(uid))
+            if (!_affectableQuery.TryComp(uid, out var affectable) ||
+                !affectable.OnXenoWeeds)
             {
-                var heal = GetWeedsHealAmount((uid, xeno));
-                if (heal > FixedPoint2.Zero)
+                if (_xenoPlasmaQuery.TryComp(uid, out var plasma))
                 {
-                    HealDamage(uid, heal);
+                    var amount = FixedPoint2.Max(plasma.PlasmaRegenOffWeeds * plasma.MaxPlasma / 100 / 2, 0.01);
+                    _xenoPlasma.RegenPlasma((uid, plasma), amount);
+                }
 
-                    if (_xenoPlasmaQuery.TryComp(uid, out var plasma))
+                continue;
+            }
+
+            var heal = GetWeedsHealAmount((uid, xeno));
+            if (heal > FixedPoint2.Zero)
+            {
+                HealDamage(uid, heal);
+
+                if (_xenoPlasmaQuery.TryComp(uid, out var plasma))
+                {
+                    var plasmaRestored = plasma.PlasmaRegenOnWeeds * plasma.MaxPlasma / 100 / 2;
+                    _xenoPlasma.RegenPlasma((uid, plasma), plasmaRestored);
+
+                    if (_xenoRecoveryQuery.TryComp(uid, out var recovery))
                     {
-                        var plasmaRestored = plasma.PlasmaRegenOnWeeds * plasma.MaxPlasma / 100 / 2;
-                        _xenoPlasma.RegenPlasma((uid, plasma), plasmaRestored);
-
-                        if (_xenoRecoveryQuery.TryComp(uid, out var recovery))
-                            _xenoPlasma.RegenPlasma((uid, plasma), plasmaRestored * recovery.Multiplier / 4);
+                        var amount = plasmaRestored * recovery.Multiplier / 4;
+                        _xenoPlasma.RegenPlasma((uid, plasma), amount);
                     }
                 }
             }
-            else
-            {
-                if (_xenoPlasmaQuery.TryComp(uid, out var plasma))
-                    _xenoPlasma.RegenPlasma((uid, plasma), FixedPoint2.Max(plasma.PlasmaRegenOffWeeds * plasma.MaxPlasma / 100 / 2, 0.01));
-            }
-
-            Dirty(uid, xeno);
         }
     }
 }

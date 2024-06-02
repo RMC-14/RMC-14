@@ -1,11 +1,11 @@
 ﻿using Content.Shared._CM14.Xenos.Rest;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
-using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
@@ -25,44 +25,43 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
     private readonly HashSet<EntityUid> _toUpdate = new();
 
+    private EntityQuery<AffectableByWeedsComponent> _affectedQuery;
     private EntityQuery<XenoWeedsComponent> _weedsQuery;
-
     private EntityQuery<XenoComponent> _xenoQuery;
 
     public override void Initialize()
     {
+        _affectedQuery = GetEntityQuery<AffectableByWeedsComponent>();
         _weedsQuery = GetEntityQuery<XenoWeedsComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
 
         SubscribeLocalEvent<XenoWeedsComponent, AnchorStateChangedEvent>(OnWeedsAnchorChanged);
+        SubscribeLocalEvent<XenoWeedsComponent, ComponentShutdown>(OnWeedsShutdown);
 
         SubscribeLocalEvent<XenoWeedableComponent, AnchorStateChangedEvent>(OnWeedableAnchorStateChanged);
 
         SubscribeLocalEvent<DamageOffWeedsComponent, MapInitEvent>(OnDamageOffWeedsMapInit);
 
-        SubscribeLocalEvent<MobMoverComponent, OnWeedsChangedEvent>(OnWeedsUpdated);
-        SubscribeLocalEvent<MobMoverComponent, RefreshMovementSpeedModifiersEvent>(WeedsRefreshPassiveSpeed);
+        SubscribeLocalEvent<AffectableByWeedsComponent, RefreshMovementSpeedModifiersEvent>(WeedsRefreshPassiveSpeed);
 
         SubscribeLocalEvent<XenoWeedsComponent, StartCollideEvent>(OnWeedsStartCollide);
         SubscribeLocalEvent<XenoWeedsComponent, EndCollideEvent>(OnWeedsEndCollide);
-    }
 
-    private void OnWeedsUpdated(Entity<MobMoverComponent> ent, ref OnWeedsChangedEvent args)
-    {
-        _movementSpeed.RefreshMovementSpeedModifiers(ent);
-    }
-
-    private void WeedsRefreshPassiveSpeed(Entity<MobMoverComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
-    {
-        var multiplier = TryComp<OnXenoWeedsComponent>(ent, out var weeds) ? weeds.SpeedMultiplier : 1f;
-
-        args.ModifySpeed(multiplier, multiplier);
+        UpdatesAfter.Add(typeof(SharedPhysicsSystem));
     }
 
     private void OnWeedsAnchorChanged(Entity<XenoWeedsComponent> weeds, ref AnchorStateChangedEvent args)
     {
         if (_net.IsServer && !args.Anchored)
             QueueDel(weeds);
+    }
+
+    private void OnWeedsShutdown(Entity<XenoWeedsComponent> ent, ref ComponentShutdown args)
+    {
+        if (!TryComp(ent, out PhysicsComponent? phys))
+            return;
+
+        _toUpdate.UnionWith(_physics.GetContactingEntities(ent, phys));
     }
 
     private void OnWeedableAnchorStateChanged(Entity<XenoWeedableComponent> weedable, ref AnchorStateChangedEvent args)
@@ -74,6 +73,36 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     private void OnDamageOffWeedsMapInit(Entity<DamageOffWeedsComponent> damage, ref MapInitEvent args)
     {
         damage.Comp.DamageAt = _timing.CurTime + damage.Comp.Every;
+    }
+
+    private void WeedsRefreshPassiveSpeed(Entity<AffectableByWeedsComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
+    {
+        if (!EntityManager.TryGetComponent<PhysicsComponent>(ent, out var physicsComponent))
+            return;
+
+        var speed = 0.0f;
+        var isXeno = _xenoQuery.HasComp(ent);
+
+        var any = false;
+        var entries = 0;
+        foreach (var contacting in _physics.GetContactingEntities(ent, physicsComponent))
+        {
+            if (!_weedsQuery.TryComp(contacting, out var weeds))
+                continue;
+
+            speed += isXeno ? weeds.SpeedMultiplierXeno : weeds.SpeedMultiplierOutsider;
+            any = true;
+            entries++;
+        }
+
+        if (entries > 0)
+        {
+            speed /= entries;
+            args.ModifySpeed(speed, speed);
+        }
+
+        ent.Comp.OnXenoWeeds = any;
+        Dirty(ent);
     }
 
     public bool IsOnWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates)
@@ -111,73 +140,22 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     private void OnWeedsStartCollide(Entity<XenoWeedsComponent> ent, ref StartCollideEvent args)
     {
         var other = args.OtherEntity;
-
-        if (!HasComp<MobMoverComponent>(other) ||
-            HasComp<OnXenoWeedsComponent>(other))
-            return;
-
-        _toUpdate.Add(other);
+        if (_affectedQuery.TryComp(other, out var affected) && !affected.OnXenoWeeds)
+            _toUpdate.Add(other);
     }
 
     private void OnWeedsEndCollide(Entity<XenoWeedsComponent> ent, ref EndCollideEvent args)
     {
         var other = args.OtherEntity;
-
-        if (!HasComp<MobMoverComponent>(other) ||
-            !HasComp<OnXenoWeedsComponent>(other))
-            return;
-
-        _toUpdate.Add(other);
+        if (_affectedQuery.TryComp(other, out var affected) && affected.OnXenoWeeds)
+            _toUpdate.Add(other);
     }
 
     public override void Update(float frameTime)
     {
-        // Update OnWeeds status of mobs
         foreach (var mobId in _toUpdate)
         {
-            var contactSpeedMultiplier = 1f;
-            var any = false;
-            var onWeeds = HasComp<OnXenoWeedsComponent>(mobId);
-
-            foreach (var contact in _physics.GetContactingEntities(mobId))
-            {
-                if (TryComp<XenoWeedsComponent>(contact, out var contactComp) )
-                {
-                    any = true;
-
-                    contactSpeedMultiplier = HasComp<XenoComponent>(mobId)
-                        ? contactComp.SpeedMultiplierXeno
-                        : contactComp.SpeedMultiplierOutsider;
-
-                    break;
-                }
-            }
-
-            if (onWeeds == any)
-            {
-                if (TryComp<OnXenoWeedsComponent>(mobId, out var contactComp))
-                {
-                    if (Math.Abs(contactSpeedMultiplier - contactComp.SpeedMultiplier) < 0.01f)
-                        continue;
-                }
-                else
-                    continue;
-            }
-
-            EnsureComp<OnXenoWeedsComponent>(mobId, out var mobComp);
-            if (any)
-            {
-                mobComp.SpeedMultiplier = contactSpeedMultiplier;
-                Dirty(mobId, mobComp);
-            }
-            else
-            {
-                mobComp.SpeedMultiplier = 1f;
-                RemCompDeferred(mobId, EnsureComp<OnXenoWeedsComponent>(mobId));
-            }
-
-            var ev = new OnWeedsChangedEvent(any);
-            RaiseLocalEvent(mobId, ref ev);
+            _movementSpeed.RefreshMovementSpeedModifiers(mobId);
         }
 
         _toUpdate.Clear();
@@ -187,7 +165,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         var query = EntityQueryEnumerator<DamageOffWeedsComponent, DamageableComponent>();
         while (query.MoveNext(out var uid, out var damage, out var damageable))
         {
-            if (HasComp<OnXenoWeedsComponent>(uid))
+            if (TryComp(uid, out AffectableByWeedsComponent? affected) &&
+                affected.OnXenoWeeds)
             {
                 if (damage.DamageAt != null)
                 {

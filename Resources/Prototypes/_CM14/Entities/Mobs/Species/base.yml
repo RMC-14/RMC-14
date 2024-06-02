@@ -133,3 +133,4 @@
     nonDeadDamage:
       types:
         Asphyxiation: -0.33
+  - type: AffectableByWeeds
