@@ -19,12 +19,15 @@
   - type: RotationDrawDepth
     southDrawDepth: OverMobs
   - type: Barricade
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: CMBarricade
 
 # Metal Barricade Tree
 - type: entity
   parent: CMBarricadeBase
   id: CMBarricadeMetal
-  name: Metal Barricade
+  name: metal barricade
   description: A metal barricade that keeps the unwanted out. Upgradable with metal, plasteel, or metal rods for different attributes. Repair with a welder.
   components:
   - type: MeleeSound
@@ -43,9 +46,6 @@
           UnWired: { state: metal_wire, visible: false }
           WiredClosed: { state: metal_wire, visible: true }
     drawdepth: WallTops
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: CMBarricade
   - type: InteractionPopup
     interactSuccessString: fence-rattle-success
     messagePerceivedByOthers: fence-rattle-success
@@ -56,14 +56,13 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 450
       behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 3
+            max: 3
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
@@ -87,7 +86,7 @@
 - type: entity
   parent: CMBarricadeMetal
   id: CMBarricadeBurn
-  name: anti-Biohazard Barricade
+  name: anti-biohazard barricade
   description: A barricade incredibly resistant to corrosive and fire damage but breaks easier. Repair with a welder.
   components:
     - type: Sprite
@@ -111,7 +110,7 @@
 - type: entity
   parent: CMBarricadeMetal
   id: CMBarricadeBrute
-  name: Reinforced Barricade
+  name: reinforced barricade
   description: A heavy-duty barricade reinforced with metal and resistant against thrashing. Repair with a welder.
   components:
     - type: Sprite
@@ -135,7 +134,7 @@
 - type: entity
   parent: CMBarricadeMetal
   id: CMBarricadeExplosive
-  name: Blast-Resistant Barricade
+  name: blast-resistant barricade
   description: An blast-resistant barricade made out of the same stuff in EODs. Repair with a welder.
   components:
     - type: Sprite
@@ -144,7 +143,7 @@
       - state: metal
       - state: explosive_upgrade
     - type: ExplosionResistance
-      damageCoefficient: 0.10
+      damageCoefficient: 0.5
     - type: DamageVisuals
       thresholds: [4, 8, 12]
       damageDivisor: 2
@@ -159,7 +158,7 @@
 - type: entity
   parent: CMBarricadeBase
   id: CMBarricadeTurnstile
-  name: Turnstile
+  name: turnstile
   description: A railing to prevent marines from stepping out of line.
   components:
     - type: Sprite
@@ -175,12 +174,6 @@
           !type:DamageTrigger
           damage: 100
         behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-      - trigger:
-          !type:DamageTrigger
-          damage: 25
-        behaviors:
         - !type:PlaySoundBehavior
           sound:
             collection: MetalBreak
@@ -193,7 +186,7 @@
 - type: entity
   parent: CMBarricadeTurnstile
   id: CMBarricadeTurnstileMed
-  name: Turnstile
+  name: turnstile
   description: A railing to prevent marines from stepping out of line. This one is designed specifically for medical.
   components:
     - type: Sprite
@@ -208,7 +201,7 @@
 - type: entity
   parent: CMBarricadeBase
   id: CMBarricadeMetalDoor
-  name: Folding Metal Barricade
+  name: folding metal barricade
   description: A folding metal barricade weaker than the non-folding counterpart. Able to be opened and closed at a moment's notice. Repair with a welder.
   components:
   - type: MeleeSound
@@ -222,22 +215,18 @@
     - state: folding_metal
       map: ["enum.DoorVisualLayers.Base"]
     drawdepth: WallTops
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Metallic
   - type: Repairable
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 150
+        damage: 400
       behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 3
+            max: 3
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
@@ -282,7 +271,7 @@
 - type: entity
   parent: CMBarricadeMetalDoor
   id: CMBarricadePlasteelDoor
-  name: Folding Plasteel Barricade
+  name: folding plasteel barricade
   description: A tough folding plasteel barricade stronger than its metal counterpart. Can be closed and opened at a moment's notice. Repair with a welder.
   components:
   - type: Sprite
@@ -296,14 +285,13 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 150
+        damage: 800
       behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetPlasteel1:
+            min: 4
+            max: 4
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak

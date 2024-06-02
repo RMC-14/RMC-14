@@ -10,6 +10,21 @@
   - type: Icon
     sprite: _CM14/Structures/Furniture/Tables/standard.rsi
     state: full
+  - type: Damageable
+    damageModifierSet: null
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -4
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 # Reinforced
 - type: entity
