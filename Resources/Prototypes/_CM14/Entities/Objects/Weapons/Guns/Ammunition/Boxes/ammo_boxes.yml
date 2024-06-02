@@ -1,5 +1,5 @@
 ﻿- type: entity
-#  abstract: true
+  abstract: true
   parent: BaseItem
   id: CMMagazineBoxBase
   name: box of M41A2 magazines
