@@ -42,6 +42,8 @@
     range: 20
     repeat: true
   - type: XenoConstructionAction
+    checkStructureSelected: true
+    checkWeeds: true
 
 - type: entity
   id: ActionXenoOrderConstruction
@@ -58,3 +60,5 @@
     deselectOnMiss: false
     range: 20
   - type: XenoConstructionAction
+    checkStructureSelected: false
+    checkWeeds: false

@@ -105,17 +105,18 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         Dirty(ent);
     }
 
-    public bool IsOnWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates)
+    public bool IsOnWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates, bool sourceOnly = false)
     {
         var position = _mapSystem.LocalToTile(grid, grid, coordinates);
         var enumerator = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, position);
 
         while (enumerator.MoveNext(out var anchored))
         {
-            if (_weedsQuery.HasComponent(anchored))
-            {
+            if (!_weedsQuery.TryComp(anchored, out var weeds))
+                continue;
+
+            if (!sourceOnly || weeds.IsSource)
                 return true;
-            }
         }
 
         return false;
@@ -128,7 +129,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
         var coordinates = _transform.GetMoverCoordinates(entity, entity.Comp).SnapToGrid(EntityManager, _map);
 
-        if (coordinates.GetGridUid(EntityManager) is not { } gridUid ||
+        if (_transform.GetGrid(coordinates) is not { } gridUid ||
             !TryComp(gridUid, out MapGridComponent? grid))
         {
             return false;

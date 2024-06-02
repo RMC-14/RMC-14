@@ -1,4 +1,5 @@
-﻿using Content.Shared._CM14.Xenos.Hugger;
+﻿using Content.Shared._CM14.Medical.Wounds;
+using Content.Shared._CM14.Xenos.Hugger;
 using Robust.Shared.Containers;
 
 namespace Content.Shared._CM14.Medical.Stasis;
@@ -18,6 +19,7 @@ public abstract class SharedCMStasisBagSystem : EntitySystem
         SubscribeLocalEvent<CMInStasisComponent, MapInitEvent>(OnInStasisMapInit);
         SubscribeLocalEvent<CMInStasisComponent, ComponentRemove>(OnInStasisRemove);
         SubscribeLocalEvent<CMInStasisComponent, GetHuggedIncubationMultiplierEvent>(OnInStasisGetHuggedIncubationMultiplier);
+        SubscribeLocalEvent<CMInStasisComponent, CMBleedAttemptEvent>(OnInStasisBleedAttempt);
     }
 
     private void OnStasisInsert(Entity<CMStasisBagComponent> ent, ref ContainerIsInsertingAttemptEvent args)
@@ -49,6 +51,11 @@ public abstract class SharedCMStasisBagSystem : EntitySystem
     {
         if (ent.Comp.Running)
             args.Multiply(ent.Comp.IncubationMultiplier);
+    }
+
+    private void OnInStasisBleedAttempt(Entity<CMInStasisComponent> ent, ref CMBleedAttemptEvent args)
+    {
+        args.Cancelled = true;
     }
 
     protected virtual void OnInsert(Entity<CMStasisBagComponent> bag, EntityUid target)

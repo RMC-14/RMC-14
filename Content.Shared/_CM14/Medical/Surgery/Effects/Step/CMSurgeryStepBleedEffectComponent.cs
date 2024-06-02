@@ -7,5 +7,5 @@ namespace Content.Shared._CM14.Medical.Surgery.Effects.Step;
 public sealed partial class CMSurgeryStepBleedEffectComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public int Amount;
+    public int Damage;
 }

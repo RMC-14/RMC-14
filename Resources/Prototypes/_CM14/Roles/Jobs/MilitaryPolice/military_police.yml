@@ -13,7 +13,6 @@
   icon: "CMJobIconMilitaryPolice"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-cmp
-  canBeAntag: false
   accessGroups:
   - MP
   special:
@@ -32,7 +31,7 @@
     back: CMSatchelSecurity
     shoes: CMBootsBlackFilled
     head: CMHeadBeretRed
-    eyes: ClothingEyesGlassesSecurity # todo cm14 replace with cm ones
+    eyes: CMGlassesSecurity
     gloves: CMHandsBlackMarine
     id: CMIDCardMilitaryPolice
     outerClothing: CMArmorM2MP

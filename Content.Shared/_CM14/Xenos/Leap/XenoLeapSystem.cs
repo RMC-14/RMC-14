@@ -94,7 +94,7 @@ public sealed class XenoLeapSystem : EntitySystem
             _pulling.TryStopPull(puller.Pulling.Value, pullable, xeno);
 
         var origin = _transform.GetMapCoordinates(xeno);
-        var target = GetCoordinates(args.Coordinates).ToMap(EntityManager, _transform);
+        var target = _transform.ToMapCoordinates(args.Coordinates);
         var direction = target.Position - origin.Position;
 
         if (direction == Vector2.Zero)

@@ -1,5 +1,4 @@
 ﻿using Content.Server.Body.Components;
-using Content.Server.Body.Systems;
 using Content.Server.DoAfter;
 using Content.Server.Popups;
 using Content.Server.Temperature.Components;
@@ -9,6 +8,7 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
+using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Timing;
@@ -21,7 +21,6 @@ namespace Content.Server._CM14.Medical.Scanner;
 public sealed class HealthScannerSystem : EntitySystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
     [Dependency] private readonly DoAfterSystem _doAfter = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
@@ -72,7 +71,8 @@ public sealed class HealthScannerSystem : EntitySystem
             return;
         }
 
-        if (!Transform(doAfter.User).Coordinates.InRange(EntityManager, _transform, args.DoAfter.UserPosition, doAfter.MovementThreshold))
+        var userCoords = Transform(doAfter.User).Coordinates;
+        if (!_transform.InRange(userCoords, args.DoAfter.UserPosition, doAfter.MovementThreshold))
             args.Cancel();
     }
 
@@ -128,16 +128,25 @@ public sealed class HealthScannerSystem : EntitySystem
         if (scanner.Comp.Target is not { } target)
             return;
 
-        var blood = _bloodstream.GetBloodLevelPercentage(target) * 100;
-        var temperature = CompOrNull<TemperatureComponent>(target)?.CurrentTemperature;
-
+        FixedPoint2 blood = 0;
+        FixedPoint2 maxBlood = 0;
         Solution? chemicals = null;
         if (TryComp(target, out BloodstreamComponent? bloodstream))
         {
+            if (_solution.TryGetSolution(target, bloodstream.BloodSolutionName, out _, out var bloodSolution))
+            {
+                blood = bloodSolution.Volume;
+                maxBlood = bloodSolution.MaxVolume;
+            }
+
             _solution.TryGetSolution(target, bloodstream.ChemicalSolutionName, out _, out chemicals);
         }
 
-        _ui.SetUiState(scanner.Owner, HealthScannerUIKey.Key, new HealthScannerBuiState(GetNetEntity(target), blood, temperature, chemicals));
+        var temperature = CompOrNull<TemperatureComponent>(target)?.CurrentTemperature;
+        var bleeding = bloodstream is { BleedAmount: > 0 };
+        var state = new HealthScannerBuiState(GetNetEntity(target), blood, maxBlood, temperature, chemicals, bleeding);
+
+        _ui.SetUiState(scanner.Owner, HealthScannerUIKey.Key, state);
     }
 
     public override void Update(float frameTime)

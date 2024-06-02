@@ -6,12 +6,12 @@ namespace Content.Client._CM14.Inventory;
 
 public sealed class CMInventorySystem : SharedCMInventorySystem
 {
-    protected override void ContentsUpdated(Entity<CMHolsterComponent> ent)
+    protected override void ContentsUpdated(Entity<CMItemSlotsComponent> ent)
     {
         base.ContentsUpdated(ent);
 
         if (!TryComp(ent, out SpriteComponent? sprite) ||
-            !sprite.LayerMapTryGet(CMHolsterLayers.Filled, out var layer))
+            !sprite.LayerMapTryGet(CMItemSlotsLayers.Filled, out var layer))
         {
             return;
         }

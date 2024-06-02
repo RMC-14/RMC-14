@@ -225,7 +225,7 @@ public abstract class SharedIVDripSystem : EntitySystem
             return;
         }
 
-        if (_containers.TryGetContainingContainer(pack, out var container) &&
+        if (_containers.TryGetContainingContainer((pack, null), out var container) &&
             TryComp(container.Owner, out IVDripComponent? iv))
         {
             iv.FillColor = solution.GetColor(_prototype);

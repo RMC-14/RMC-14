@@ -1,0 +1,8 @@
+﻿- type: job
+  parent: CMJobXenoBase
+  id: CMXenoDrone
+  name: cm-job-name-xeno-drone
+  playTimeTracker: CMJobXenoDrone
+
+- type: playTimeTracker
+  id: CMJobXenoDrone

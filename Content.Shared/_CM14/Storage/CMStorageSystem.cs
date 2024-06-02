@@ -157,7 +157,7 @@ public sealed class CMStorageSystem : EntitySystem
 
     private bool TryCancel(EntityUid user, Entity<StorageSkillRequiredComponent> storage)
     {
-        if (!_skills.HasSkills(user, storage.Comp.Skills))
+        if (!_skills.HasSkills(user, in storage.Comp.Skills))
         {
             _popup.PopupClient("It must have some kind of ID lock...", storage, user, PopupType.SmallCaution);
             return true;
@@ -195,7 +195,7 @@ public sealed class CMStorageSystem : EntitySystem
                 var origin = GetCoordinates(netOrigin);
                 var current = _transform.GetMoverCoordinates(user);
 
-                if (!origin.InRange(EntityManager, _transform, current, 0.1f))
+                if (!_transform.InRange(origin, current, 0.1f))
                     _toRemove.Add(user);
             }
 

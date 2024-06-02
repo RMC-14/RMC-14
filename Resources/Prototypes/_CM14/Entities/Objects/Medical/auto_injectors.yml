@@ -55,18 +55,18 @@
   - type: Item
     sprite: null
   - type: Hypospray
-    transferAmount: 77
+    transferAmount: 58 # TODO CM14 77
   - type: SolutionContainerManager
     solutions:
       pen:
-        maxVol: 77
+        maxVol: 58 # TODO CM14 77
         reagents:
         - ReagentId: CMBicaridine
           Quantity: 29
         - ReagentId: CMKelotane
           Quantity: 29
-        - ReagentId: CMEpinephrine # todo cm14 oxycodone
-          Quantity: 19
+#        - ReagentId: CMOxycodone # TODO cm14 oxycodone
+#          Quantity: 19
   - type: SolutionContainerVisuals
     maxFillLevels: 1
   - type: MedicallyUnskilledDoAfter

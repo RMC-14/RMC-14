@@ -19,8 +19,11 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     public bool IsCM { get; }
 
     [DataField]
-    public bool HasSquad;
+    public readonly bool HasSquad;
 
     [DataField]
-    public bool HasIcon = true;
+    public readonly bool HasIcon = true;
+
+    [DataField]
+    public readonly bool Hidden;
 }

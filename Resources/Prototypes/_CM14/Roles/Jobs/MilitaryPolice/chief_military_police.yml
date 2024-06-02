@@ -17,7 +17,6 @@
   requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: cm-job-supervisors-co
-  canBeAntag: false
   accessGroups:
   - CMP
   special:
@@ -45,7 +44,7 @@
     back: CMSatchelSecurity
     shoes: CMBootsBlackFilled
     head: CMHeadBeretWO
-    eyes: ClothingEyesGlassesSecurity # todo cm14 replace with cm ones
+    eyes: CMGlassesSecurity
     gloves: CMHandsBlackMarine
     id: CMIDCardChiefMP
     outerClothing: CMArmorM3WO

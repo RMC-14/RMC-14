@@ -6,6 +6,7 @@ using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Whitelist;
+using Content.Shared.Wieldable;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
@@ -37,6 +38,7 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<ProjectileFixedDistanceComponent, PhysicsSleepEvent>(OnProjectileStop);
 
         SubscribeLocalEvent<GunShowUseDelayComponent, GunShotEvent>(OnShowUseDelayShot);
+        SubscribeLocalEvent<GunShowUseDelayComponent, ItemWieldedEvent>(OnShowUseDelayWielded);
 
         SubscribeLocalEvent<GunUserWhitelistComponent, AttemptShootEvent>(OnGunUserWhitelistAttemptShoot);
     }
@@ -50,7 +52,7 @@ public sealed class CMGunSystem : EntitySystem
         }
 
         var from = _transform.GetMapCoordinates(ent);
-        var to = target.ToMap(EntityManager, _transform);
+        var to = _transform.ToMapCoordinates(target);
         if (from.MapId != to.MapId)
             return;
 
@@ -82,16 +84,12 @@ public sealed class CMGunSystem : EntitySystem
 
     private void OnShowUseDelayShot(Entity<GunShowUseDelayComponent> ent, ref GunShotEvent args)
     {
-        if (!TryComp(ent, out GunComponent? gun))
-            return;
+        UpdateDelay(ent);
+    }
 
-        var remaining = gun.NextFire - _timing.CurTime;
-        if (remaining <= TimeSpan.Zero)
-            return;
-
-        var useDelay = EnsureComp<UseDelayComponent>(ent);
-        _useDelay.SetLength((ent, useDelay), remaining, ent.Comp.DelayId);
-        _useDelay.TryResetDelay((ent, useDelay), false, ent.Comp.DelayId);
+    private void OnShowUseDelayWielded(Entity<GunShowUseDelayComponent> ent, ref ItemWieldedEvent args)
+    {
+        UpdateDelay(ent);
     }
 
     private void OnGunUserWhitelistAttemptShoot(Entity<GunUserWhitelistComponent> ent, ref AttemptShootEvent args)
@@ -117,6 +115,20 @@ public sealed class CMGunSystem : EntitySystem
 
         if (physics.Awake)
             _broadphase.RegenerateContacts(projectile, physics);
+    }
+
+    private void UpdateDelay(Entity<GunShowUseDelayComponent> ent)
+    {
+        if (!TryComp(ent, out GunComponent? gun))
+            return;
+
+        var remaining = gun.NextFire - _timing.CurTime;
+        if (remaining <= TimeSpan.Zero)
+            return;
+
+        var useDelay = EnsureComp<UseDelayComponent>(ent);
+        _useDelay.SetLength((ent, useDelay), remaining, ent.Comp.DelayId);
+        _useDelay.TryResetDelay((ent, useDelay), false, ent.Comp.DelayId);
     }
 
     public override void Update(float frameTime)

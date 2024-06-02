@@ -8,7 +8,6 @@
   icon: "CMJobIconMaintTech"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-ce
-  canBeAntag: true
   accessGroups:
   - MaintTech
   special:

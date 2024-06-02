@@ -32,7 +32,7 @@
   id: CMBeltKnifeFilled
   suffix: Filled
   components:
-  - type: CMHolster
+  - type: CMItemSlots
     startingItem: CMM11Knife
 
 - type: entity
@@ -42,12 +42,12 @@
   components:
   - type: StorageFill
     contents:
-    - id: WeaponDisabler # TODO CM14 cm disabler
-    - id: Flash # TODO CM14 cm flash
-    - id: Stunbaton # TODO CM14 cm stun baton
-    - id: Handcuffs # TODO CM14 cm handcuffs
+    - id: WeaponDisabler # TODO CM14 cm taser
+    - id: CMFlash
+    - id: CMStunbaton
+    - id: CMHandcuffs
 #    - id: Pepperspray # TODO CM14
-    - id: ForensicScanner # TODO CM14 cm forensic scanner
+    - id: ForensicScanner # TODO CM14 cm clue scanner
 
 - type: entity
   parent: CMBeltMedical
@@ -67,9 +67,9 @@
     - id: CMPillCanisterInaprovaline
       amount: 1
     # TODO CM14 tramadol and perixadon pills, splint
-    - id: CMOintment
+    - id: CMOintment10
       amount: 1
-    - id: CMTraumaKit
+    - id: CMTraumaKit10
       amount: 1
 
 - type: entity
@@ -79,9 +79,9 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMOintment
+    - id: CMOintment10
       amount: 2
-    - id: CMTraumaKit
+    - id: CMTraumaKit10
       amount: 2
     # TODO CM14 adrenaline autoinjector
     - id: CMDexalinPlusAutoInjector

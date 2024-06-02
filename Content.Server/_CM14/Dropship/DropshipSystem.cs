@@ -66,7 +66,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         var shuttle = Transform(computer).GridUid;
         if (!TryComp(shuttle, out ShuttleComponent? shuttleComp))
         {
-            Log.Warning($"Tried to launch through dropship computer {ToPrettyString(computer)} outside of a shuttle.");
+            Log.Warning($"Tried to launch {ToPrettyString(computer)} outside of a shuttle.");
             return false;
         }
 

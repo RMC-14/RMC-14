@@ -1,6 +1,10 @@
-﻿using Content.Shared._CM14.Medical.Scanner;
+﻿using System.Globalization;
+using Content.Client.Message;
+using Content.Shared._CM14.Medical.Scanner;
+using Content.Shared._CM14.Medical.Wounds;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Temperature;
@@ -22,8 +26,11 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
     [ViewVariables]
     private HealthScannerWindow? _window;
 
+    private readonly SharedWoundsSystem _wounds;
+
     public HealthScannerBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
+        _wounds = _entities.System<SharedWoundsSystem>();
     }
 
     protected override void Open()
@@ -54,41 +61,23 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
         var thresholdsSystem = _entities.System<MobThresholdSystem>();
         if (_entities.TryGetComponent(target, out DamageableComponent? damageable))
         {
-            var bruteMsg = new FormattedMessage();
-            bruteMsg.AddText("Brute: ");
-            bruteMsg.PushColor(Color.Red);
-            bruteMsg.AddText(damageable.DamagePerGroup.GetValueOrDefault("Brute").Int().ToString());
-            bruteMsg.Pop();
-            _window.BruteLabel.SetMessage(bruteMsg);
-
-            var burnMsg = new FormattedMessage();
-            burnMsg.AddText("Burn: ");
-            burnMsg.PushColor(Color.Orange);
-            burnMsg.AddText(damageable.DamagePerGroup.GetValueOrDefault("Burn").Int().ToString());
-            burnMsg.Pop();
-            _window.BurnLabel.SetMessage(burnMsg);
-
-            var toxinMsg = new FormattedMessage();
-            toxinMsg.AddText("Toxin: ");
-            toxinMsg.PushColor(Color.Green);
-            toxinMsg.AddText(damageable.DamagePerGroup.GetValueOrDefault("Toxin").Int().ToString());
-            toxinMsg.Pop();
-            _window.ToxinLabel.SetMessage(toxinMsg);
-
-            var oxygenMsg = new FormattedMessage();
-            oxygenMsg.AddText("Oxygen: ");
-            oxygenMsg.PushColor(Color.DeepSkyBlue);
-            oxygenMsg.AddText(damageable.DamagePerGroup.GetValueOrDefault("Airloss").Int().ToString());
-            oxygenMsg.Pop();
-            _window.OxygenLabel.SetMessage(oxygenMsg);
+            var ent = new Entity<DamageableComponent>(target, damageable);
+            AddGroup(ent, _window.BruteLabel, Color.FromHex("#DF3E3E"), "Brute");
+            AddGroup(ent, _window.BurnLabel, Color.FromHex("#FFB833"), "Burn");
+            AddGroup(ent, _window.ToxinLabel, Color.FromHex("#25CA4C"), "Toxin");
+            AddGroup(ent, _window.OxygenLabel, Color.FromHex("#2E93DE"), "Airloss", "Oxygen");
 
             if (thresholdsSystem.TryGetIncapThreshold(target, out var threshold))
             {
                 var damage = threshold.Value - damageable.TotalDamage;
                 _window.HealthBar.MinValue = 0;
                 _window.HealthBar.MaxValue = threshold.Value.Float();
-                _window.HealthBar.Value = damage.Float() / threshold.Value.Float() * 100f;
-                _window.HealthBarText.Text = $"{_window.HealthBar.Value:F}% healthy";
+
+                var healthValue = damage.Float() / threshold.Value.Float() * 100f;
+                _window.HealthBar.Value = healthValue;
+
+                var healthString = MathHelper.CloseTo(healthValue, 100) ? "100%" : $"{healthValue:F2}%";
+                _window.HealthBarText.Text = $"{healthString} healthy";
             }
 
             _window.ChemicalsContainer.DisposeAllChildren();
@@ -113,9 +102,17 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
             _window.BloodTypeLabel.Text = "Blood:";
             var bloodMsg = new FormattedMessage();
             bloodMsg.PushColor(Color.FromHex("#25B732"));
-            bloodMsg.AddText($"{uiState.BloodPercentage:F2}%");
+
+            var percentage = uiState.MaxBlood == 0 ? 100 : uiState.Blood.Float() / uiState.MaxBlood.Float() * 100f;
+            var percentageString = MathHelper.CloseTo(percentage, 100) ? "100%" : $"{percentage:F1}%";
+            bloodMsg.AddText($"{percentageString}, {uiState.Blood}cl");
             bloodMsg.Pop();
             _window.BloodAmountLabel.SetMessage(bloodMsg);
+
+            if (uiState.Bleeding)
+                _window.Bleeding.SetMarkup(" [bold][color=#DF3E3E]\\[Bleeding\\][/color][/bold]");
+            else
+                _window.Bleeding.SetMessage(string.Empty);
 
             var temperatureMsg = new FormattedMessage();
             if (uiState.Temperature is { } temperatureKelvin)
@@ -136,6 +133,26 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
         {
             _window.OpenCentered();
         }
+    }
+
+    private void AddGroup(Entity<DamageableComponent> damageable, RichTextLabel label, Color color, ProtoId<DamageGroupPrototype> group, string? labelStr = null)
+    {
+        // TODO CM14 unhardcode this
+        labelStr ??= group.Id;
+        var msg = new FormattedMessage();
+        msg.AddText($"{labelStr}: ");
+        msg.PushColor(color);
+
+        var damage = damageable.Comp.DamagePerGroup.GetValueOrDefault(group)
+            .Int()
+            .ToString(CultureInfo.InvariantCulture);
+        if (_wounds.HasUntreated(damageable.Owner, group))
+            msg.AddText($"{{{damage}}}");
+        else
+            msg.AddText($"{damage}");
+
+        msg.Pop();
+        label.SetMessage(msg);
     }
 
     protected override void Dispose(bool disposing)

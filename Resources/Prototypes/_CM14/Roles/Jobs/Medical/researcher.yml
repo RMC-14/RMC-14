@@ -12,7 +12,6 @@
   icon: "CMJobIconResearcher"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-cmo
-  canBeAntag: true
   accessGroups:
   - Researcher
   special:

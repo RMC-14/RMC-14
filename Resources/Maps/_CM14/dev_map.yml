@@ -2407,13 +2407,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 14.5,7.5
       parent: 179
-- proto: chem_master
-  entities:
-  - uid: 311
-    components:
-    - type: Transform
-      pos: 8.5,11.5
-      parent: 179
 - proto: ChemDispenser
   entities:
   - uid: 583
@@ -2450,6 +2443,13 @@ entities:
     components:
     - type: Transform
       pos: 6.4651074,9.828774
+      parent: 179
+- proto: ChemMaster
+  entities:
+  - uid: 311
+    components:
+    - type: Transform
+      pos: 8.5,11.5
       parent: 179
 - proto: ChemMasterMachineCircuitboard
   entities:
@@ -2637,7 +2637,7 @@ entities:
       pos: 13.5,10.5
       parent: 179
     - type: Door
-      secondsUntilStateChange: -4825.116
+      secondsUntilStateChange: -4939.7764
       state: Opening
   - uid: 26
     components:
@@ -2871,7 +2871,7 @@ entities:
     - type: Transform
       pos: -5.3926816,-2.3766012
       parent: 179
-- proto: CMBurnKit
+- proto: CMBurnKit10
   entities:
   - uid: 148
     components:
@@ -2883,8 +2883,6 @@ entities:
     - type: Transform
       pos: 18.49201,6.059782
       parent: 179
-- proto: CMBurnKit10
-  entities:
   - uid: 1231
     components:
     - type: Transform
@@ -3195,6 +3193,13 @@ entities:
     - type: Transform
       pos: -2.172831,4.5306726
       parent: 179
+- proto: CMDefibrillator
+  entities:
+  - uid: 1334
+    components:
+    - type: Transform
+      pos: -6.4266605,1.7232721
+      parent: 179
 - proto: CMDexalinPlusAutoInjector
   entities:
   - uid: 1225
@@ -3274,6 +3279,13 @@ entities:
     components:
     - type: Transform
       pos: -5.3695335,-2.8951197
+      parent: 179
+- proto: CMGauze10
+  entities:
+  - uid: 1331
+    components:
+    - type: Transform
+      pos: -6.2414484,-3.6760488
       parent: 179
 - proto: CMGear
   entities:
@@ -3364,7 +3376,7 @@ entities:
     - type: Transform
       pos: -5.8247805,-3.3549962
       parent: 179
-- proto: CMLightBulb
+- proto: CMLightFixtureSmall
   entities:
   - uid: 59
     components:
@@ -3822,6 +3834,13 @@ entities:
     components:
     - type: Transform
       pos: -0.6298993,4.7431083
+      parent: 179
+- proto: CMOintment10
+  entities:
+  - uid: 1226
+    components:
+    - type: Transform
+      pos: -6.6858926,-3.7130857
       parent: 179
 - proto: CMOperatingTable
   entities:
@@ -4318,6 +4337,20 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+- proto: CMSurgicalLine
+  entities:
+  - uid: 1332
+    components:
+    - type: Transform
+      pos: -5.6766334,-3.6991968
+      parent: 179
+- proto: CMSynthGraft
+  entities:
+  - uid: 1333
+    components:
+    - type: Transform
+      pos: -5.181263,-3.708456
+      parent: 179
 - proto: CMSyringe
   entities:
   - uid: 738
@@ -4705,7 +4738,7 @@ entities:
     - type: Transform
       pos: -4.9204593,-2.3766012
       parent: 179
-- proto: CMTraumaKit
+- proto: CMTraumaKit10
   entities:
   - uid: 150
     components:
@@ -7810,7 +7843,7 @@ entities:
     - type: Transform
       pos: 4.5,-4.5
       parent: 179
-- proto: soda_dispenser
+- proto: SodaDispenser
   entities:
   - uid: 751
     components:

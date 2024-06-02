@@ -12,7 +12,6 @@
   icon: "CMJobIconOrdnanceTech"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-ce
-  canBeAntag: true
   accessGroups:
   - OT
   special:
