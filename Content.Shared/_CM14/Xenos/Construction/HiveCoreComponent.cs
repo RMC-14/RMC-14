@@ -27,7 +27,7 @@ public sealed partial class HiveCoreComponent : Component
     public List<EntityUid> LiveLesserDrones = new();
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
-    public TimeSpan NextLesserDroneAt = TimeSpan.FromSeconds(1);
+    public TimeSpan NextLesserDroneAt;
 
     [DataField]
     public TimeSpan NextLesserDroneOviCooldown = TimeSpan.FromSeconds(10);
