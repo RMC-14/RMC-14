@@ -83,7 +83,7 @@
 - type: entity
   name: rapier
   parent: BaseItem
-  id: Rapier
+  id: CMRapier
   description: This rapier was forged by old man Mephistopheles.
   components:
   - type: Sharp

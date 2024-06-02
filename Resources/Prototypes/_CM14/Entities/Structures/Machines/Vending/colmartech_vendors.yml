@@ -765,6 +765,8 @@
       #- id: CMVendorBundleRiflemanApparel # TODO cm14 make a bundle for this role
       #- id: CMB12PatternArmor
       - id: CMMRE
+      - id: CMClothingBeltRapierFilled
+        points: 25
       #- id: CMMap # TODO: Make a map
     - name: Backpack
       entries: [ ]
