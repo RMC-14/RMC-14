@@ -47,17 +47,18 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         damage.Comp.DamageAt = _timing.CurTime + damage.Comp.Every;
     }
 
-    public bool IsOnWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates)
+    public bool IsOnWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates, bool sourceOnly = false)
     {
         var position = _mapSystem.LocalToTile(grid, grid, coordinates);
         var enumerator = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, position);
 
         while (enumerator.MoveNext(out var anchored))
         {
-            if (_weedsQuery.HasComponent(anchored))
-            {
+            if (!_weedsQuery.TryComp(anchored, out var weeds))
+                continue;
+
+            if (!sourceOnly || weeds.IsSource)
                 return true;
-            }
         }
 
         return false;
