@@ -1,6 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
 using Content.Shared._CM14.Xenos.Construction.Events;
+using Content.Shared._CM14.Xenos.Hive;
 using Content.Shared._CM14.Xenos.Plasma;
 using Content.Shared._CM14.Xenos.Weeds;
 using Content.Shared.Actions;
@@ -27,6 +28,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -235,8 +237,15 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         args.Handled = true;
 
-        if (_net.IsServer)
-            Spawn(args.StructureId, target.SnapToGrid(EntityManager, _map));
+        if (_net.IsClient)
+            return;
+
+        var structure = Spawn(args.StructureId, target.SnapToGrid(EntityManager, _map));
+        if (TryComp(xeno, out XenoComponent? xenoComp))
+        {
+            var member = EnsureComp<HiveMemberComponent>(structure);
+            _hive.SetHive((structure, member), xenoComp.Hive);
+        }
     }
 
     private void OnHiveConstructionNodeAddPlasmaDoAfter(Entity<XenoConstructionComponent> xeno, ref XenoConstructionAddPlasmaDoAfterEvent args)
@@ -280,7 +289,11 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        Spawn(node.Spawn, transform.Coordinates);
+        var hive = CompOrNull<HiveMemberComponent>(target)?.Hive;
+        var spawn = Spawn(node.Spawn, transform.Coordinates);
+        var member = EnsureComp<HiveMemberComponent>(spawn);
+        _hive.SetHive((spawn, member), hive);
+
         QueueDel(target);
     }
 
@@ -343,6 +356,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnHiveCoreMapInit(Entity<HiveCoreComponent> ent, ref MapInitEvent args)
     {
+        if (_net.IsClient)
+            return;
+
         var coordinates = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager, _map);
         Spawn(ent.Comp.Spawns, coordinates);
     }
