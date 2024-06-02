@@ -1,4 +1,5 @@
 ﻿using Content.Shared._CM14.Xenos.Plasma;
+using Content.Shared._CM14.Xenos.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Movement.Systems;
 using Robust.Shared.Physics.Systems;
@@ -17,7 +18,6 @@ public sealed class XenoResinWalkerSystem : EntitySystem
     {
         SubscribeLocalEvent<XenoResinWalkerComponent, XenoResinWalkerActionEvent>(OnXenoResinWalkerAction);
         SubscribeLocalEvent<XenoResinWalkerComponent, RefreshMovementSpeedModifiersEvent>(OnXenoResinWalkerRefreshMovementSpeed);
-        SubscribeLocalEvent<XenoResinWalkerComponent, XenoOnWeedsChangedEvent>(OnXenoResinWalkerOnWeedsUpdated);
 
         UpdatesAfter.Add(typeof(SharedPhysicsSystem));
     }
@@ -51,16 +51,11 @@ public sealed class XenoResinWalkerSystem : EntitySystem
     private void OnXenoResinWalkerRefreshMovementSpeed(Entity<XenoResinWalkerComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
         if (ent.Comp.Active &&
-            TryComp(ent, out XenoComponent? xeno) &&
-            xeno.OnWeeds)
+            TryComp(ent, out AffectableByWeedsComponent? affected) &&
+            affected.OnXenoWeeds)
         {
             args.ModifySpeed(ent.Comp.SpeedMultiplier, ent.Comp.SpeedMultiplier);
         }
-    }
-
-    private void OnXenoResinWalkerOnWeedsUpdated(Entity<XenoResinWalkerComponent> ent, ref XenoOnWeedsChangedEvent args)
-    {
-        _movementSpeed.RefreshMovementSpeedModifiers(ent);
     }
 
     public override void Update(float frameTime)
