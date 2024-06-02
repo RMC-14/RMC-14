@@ -53,10 +53,8 @@ public sealed class XenoResinWalkerSystem : EntitySystem
     {
         if (ent.Comp.Active &&
             HasComp<XenoComponent>(ent) &&
-            TryComp(ent, out OnXenoWeedsComponent? weeds) &&
-            weeds.OnXenoWeeds)
+            HasComp<OnXenoWeedsComponent>(ent))
         {
-            //TODO Actually bother to calculate their proper speed from the two modifiers
             args.ModifySpeed(ent.Comp.SpeedMultiplier, ent.Comp.SpeedMultiplier);
         }
     }

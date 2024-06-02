@@ -40,27 +40,23 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
         SubscribeLocalEvent<DamageOffWeedsComponent, MapInitEvent>(OnDamageOffWeedsMapInit);
 
-        //TODO: Is there maybe a more narrow component to filter for?
-        SubscribeLocalEvent<MobMoverComponent, MapInitEvent>(OnMapInitWeedsCheck);
-        SubscribeLocalEvent<OnXenoWeedsComponent, OnWeedsChangedEvent>(OnWeedsUpdated);
-        SubscribeLocalEvent<OnXenoWeedsComponent, RefreshMovementSpeedModifiersEvent>(WeedsRefreshPassiveSpeed);
+        SubscribeLocalEvent<MobMoverComponent, OnWeedsChangedEvent>(OnWeedsUpdated);
+        SubscribeLocalEvent<MobMoverComponent, RefreshMovementSpeedModifiersEvent>(WeedsRefreshPassiveSpeed);
 
         SubscribeLocalEvent<XenoWeedsComponent, StartCollideEvent>(OnWeedsStartCollide);
         SubscribeLocalEvent<XenoWeedsComponent, EndCollideEvent>(OnWeedsEndCollide);
     }
 
-    private void OnWeedsUpdated(Entity<OnXenoWeedsComponent> ent, ref OnWeedsChangedEvent args)
+    private void OnWeedsUpdated(Entity<MobMoverComponent> ent, ref OnWeedsChangedEvent args)
     {
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
     }
 
-    private void WeedsRefreshPassiveSpeed(Entity<OnXenoWeedsComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
+    private void WeedsRefreshPassiveSpeed(Entity<MobMoverComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        if (!TryComp(ent, out OnXenoWeedsComponent? weeds) ||
-            !weeds.OnXenoWeeds)
-            return;
+        var multiplier = TryComp<OnXenoWeedsComponent>(ent, out var weeds) ? weeds.SpeedMultiplier : 1f;
 
-        args.ModifySpeed(ent.Comp.SpeedMultiplier, ent.Comp.SpeedMultiplier);
+        args.ModifySpeed(multiplier, multiplier);
     }
 
     private void OnWeedsAnchorChanged(Entity<XenoWeedsComponent> weeds, ref AnchorStateChangedEvent args)
@@ -78,15 +74,6 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     private void OnDamageOffWeedsMapInit(Entity<DamageOffWeedsComponent> damage, ref MapInitEvent args)
     {
         damage.Comp.DamageAt = _timing.CurTime + damage.Comp.Every;
-    }
-
-    private void OnMapInitWeedsCheck(Entity<MobMoverComponent> mobMover, ref MapInitEvent args)
-    {
-        if (!IsOnWeeds(mobMover.Owner))
-            return;
-
-        //TODO: Add and set  OnWeedsComponent
-        //xeno.Comp.OnWeeds = _xenoWeeds.IsOnWeeds(xeno.Owner);
     }
 
     public bool IsOnWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates)
@@ -126,7 +113,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         var other = args.OtherEntity;
 
         if (!HasComp<MobMoverComponent>(other) ||
-            TryComp<OnXenoWeedsComponent>(other, out var weeds) && weeds.OnXenoWeeds)
+            HasComp<OnXenoWeedsComponent>(other))
             return;
 
         _toUpdate.Add(other);
@@ -137,7 +124,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         var other = args.OtherEntity;
 
         if (!HasComp<MobMoverComponent>(other) ||
-            TryComp<OnXenoWeedsComponent>(other, out var weeds) && !weeds.OnXenoWeeds)
+            !HasComp<OnXenoWeedsComponent>(other))
             return;
 
         _toUpdate.Add(other);
@@ -150,7 +137,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         {
             var contactSpeedMultiplier = 1f;
             var any = false;
-            var mobComp = EnsureComp<OnXenoWeedsComponent>(mobId);
+            var onWeeds = HasComp<OnXenoWeedsComponent>(mobId);
 
             foreach (var contact in _physics.GetContactingEntities(mobId))
             {
@@ -166,25 +153,41 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
                 }
             }
 
-            if (mobComp.OnXenoWeeds == any && Math.Abs(contactSpeedMultiplier - mobComp.SpeedMultiplier) < 0.01f)
-                continue;
+            if (onWeeds == any)
+            {
+                if (TryComp<OnXenoWeedsComponent>(mobId, out var contactComp))
+                {
+                    if (Math.Abs(contactSpeedMultiplier - contactComp.SpeedMultiplier) < 0.01f)
+                        continue;
+                }
+                else
+                    continue;
+            }
 
-            mobComp.OnXenoWeeds = any;
-            mobComp.SpeedMultiplier = contactSpeedMultiplier;
+            EnsureComp<OnXenoWeedsComponent>(mobId, out var mobComp);
+            if (any)
+            {
+                mobComp.SpeedMultiplier = contactSpeedMultiplier;
+                Dirty(mobId, mobComp);
+            }
+            else
+            {
+                mobComp.SpeedMultiplier = 1f;
+                RemCompDeferred(mobId, EnsureComp<OnXenoWeedsComponent>(mobId));
+            }
 
-            Dirty(mobId, mobComp);
-
-            var ev = new OnWeedsChangedEvent(mobComp.OnXenoWeeds);
+            var ev = new OnWeedsChangedEvent(any);
             RaiseLocalEvent(mobId, ref ev);
         }
 
         _toUpdate.Clear();
 
+        // Damage for not being over weeds
         var time = _timing.CurTime;
         var query = EntityQueryEnumerator<DamageOffWeedsComponent, DamageableComponent>();
         while (query.MoveNext(out var uid, out var damage, out var damageable))
         {
-            if (TryComp<OnXenoWeedsComponent>(uid, out var weeds) && weeds.OnXenoWeeds)
+            if (HasComp<OnXenoWeedsComponent>(uid))
             {
                 if (damage.DamageAt != null)
                 {

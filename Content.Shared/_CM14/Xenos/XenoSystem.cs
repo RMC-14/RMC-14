@@ -237,7 +237,7 @@ public sealed class XenoSystem : EntitySystem
 
             xeno.NextRegenTime = time + xeno.RegenCooldown;
 
-            if (TryComp<OnXenoWeedsComponent>(uid, out var weeds) && weeds.OnXenoWeeds)
+            if (HasComp<OnXenoWeedsComponent>(uid))
             {
                 var heal = GetWeedsHealAmount((uid, xeno));
                 if (heal > FixedPoint2.Zero)
