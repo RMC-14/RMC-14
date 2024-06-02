@@ -42,5 +42,5 @@ public sealed partial class XenoEvolutionComponent : Component
     public EntityUid? Action;
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier EvolutionReadySound = new SoundPathSpecifier("/Audio/_CM14/Xeno/xeno_evolveready.ogg");
+    public SoundSpecifier EvolutionReadySound = new SoundPathSpecifier("/Audio/_CM14/Xeno/xeno_evolveready.ogg", AudioParams.Default.WithVolume(-6));
 }
