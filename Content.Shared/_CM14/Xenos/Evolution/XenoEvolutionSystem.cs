@@ -207,7 +207,32 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return true;
     }
 
-    private bool HasLiving<T>(int count, Predicate<Entity<T>>? predicate = null) where T : IComponent
+    // TODO CM14 make this a property of the hive component
+    // TODO CM14 per-hive
+    public int GetLiving<T>(Predicate<Entity<T>>? predicate = null) where T : IComponent
+    {
+        var total = 0;
+        var query = EntityQueryEnumerator<T>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (_mobStateQuery.TryComp(uid, out var mobState) &&
+                _mobState.IsDead(uid, mobState))
+            {
+                continue;
+            }
+
+            if (predicate != null && !predicate((uid, comp)))
+                continue;
+
+            total++;
+        }
+
+        return total;
+    }
+
+    // TODO CM14 make this a property of the hive component
+    // TODO CM14 per-hive
+    public bool HasLiving<T>(int count, Predicate<Entity<T>>? predicate = null) where T : IComponent
     {
         if (count <= 0)
             return true;

@@ -54,4 +54,13 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         EnsureComp<HiveComponent>(ent);
         _metaData.SetEntityName(ent, name);
     }
+
+    public void SetHive(Entity<HiveMemberComponent> member, EntityUid? hive)
+    {
+        if (member.Comp.Hive == hive)
+            return;
+
+        member.Comp.Hive = hive;
+        Dirty(member);
+    }
 }
