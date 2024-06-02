@@ -3,24 +3,26 @@ using Content.Server.Administration.Logs;
 using Content.Server.EUI;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Ghost.Roles.Events;
-using Content.Server.Ghost.Roles.Raffles;
-using Content.Shared.Ghost.Roles.Raffles;
 using Content.Server.Ghost.Roles.UI;
 using Content.Server.Mind.Commands;
+using Content.Server.Popups;
 using Content.Shared.Administration;
 using Content.Shared.Database;
 using Content.Shared.Follower;
 using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Ghost.Roles;
+using Content.Shared.Ghost.Roles.Raffles;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Players;
 using Content.Shared.Roles;
+using Content.Shared.Verbs;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
+using Robust.Shared.Collections;
 using Robust.Shared.Console;
 using Robust.Shared.Enums;
 using Robust.Shared.Player;
@@ -28,9 +30,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Server.Popups;
-using Content.Shared.Verbs;
-using Robust.Shared.Collections;
 
 namespace Content.Server.Ghost.Roles
 {
@@ -691,6 +690,8 @@ namespace Content.Server.Ghost.Roles
 
             if (component.DeleteOnSpawn)
                 QueueDel(uid);
+            else
+                UnregisterGhostRole((uid, ghostRole));
 
             args.TookRole = true;
         }
@@ -785,6 +786,38 @@ namespace Content.Server.Ghost.Roles
                 var msg = Loc.GetString("ghostrole-spawner-select", ("mode", verbText));
                 _popupSystem.PopupEntity(msg, uid, userUid.Value);
             }
+        }
+
+        public void SetAvailable(Entity<GhostRoleMobSpawnerComponent> spawner, int available)
+        {
+            if (spawner.Comp.AvailableTakeovers == available)
+                return;
+
+            spawner.Comp.AvailableTakeovers = available;
+            UpdateSpawner(spawner);
+        }
+
+        public void SetCurrent(Entity<GhostRoleMobSpawnerComponent> spawner, int current)
+        {
+            if (spawner.Comp.CurrentTakeovers == current)
+                return;
+
+            spawner.Comp.CurrentTakeovers = current;
+            UpdateSpawner(spawner);
+        }
+
+        private void UpdateSpawner(Entity<GhostRoleMobSpawnerComponent> spawner)
+        {
+            if (TryComp(spawner, out GhostRoleComponent? ghostRole))
+            {
+                ghostRole.Taken = spawner.Comp.CurrentTakeovers >= spawner.Comp.AvailableTakeovers;
+                if (ghostRole.Taken)
+                    UnregisterGhostRole((spawner, ghostRole));
+                else
+                    RegisterGhostRole((spawner, ghostRole));
+            }
+
+            UpdateAllEui();
         }
     }
 

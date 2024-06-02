@@ -955,5 +955,12 @@
   id: 125
   time: '2024-06-02T08:37:57.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2186
+- author: DrSmugleaf
+  changes:
+  - message: The hive core now slowly produces lesser drones.
+    type: Add
+  id: 126
+  time: '2024-06-02T11:05:36.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2199
 Name: CM
 Order: -1
