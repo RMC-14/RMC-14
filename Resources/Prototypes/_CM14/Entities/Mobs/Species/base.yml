@@ -139,3 +139,4 @@
       types:
         Asphyxiation: -0.33
   - type: NoSlip
+  - type: AffectableByWeeds

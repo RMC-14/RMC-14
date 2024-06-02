@@ -1,0 +1,74 @@
+﻿- type: entity
+  parent: MobMonkey
+  id: CMMobMonkey
+  suffix: CM
+  components:
+  - type: GhostRole
+    prob: 0
+
+- type: entity
+  parent: MobKobold
+  id: CMMobKobold
+  suffix: CM
+  components:
+  - type: GhostRole
+    prob: 0
+
+- type: entity
+  parent: MobMouse
+  id: CMMobMouse
+  suffix: CM
+  components:
+  - type: GhostRole
+    prob: 0
+
+- type: entity
+  parent: MobMouse1
+  id: CMMobMouse1
+  suffix: CM
+  components:
+  - type: GhostRole
+    prob: 0
+
+- type: entity
+  parent: MobMouse2
+  id: CMMobMouse2
+  suffix: CM
+  components:
+  - type: GhostRole
+    prob: 0
+
+- type: entity
+  parent: SpawnMobMonkey
+  id: CMSpawnMobMonkey
+  suffix: CM
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - CMMobMonkey
+
+- type: entity
+  parent: MarkerBase
+  id: CMSpawnMobKobold
+  name: Kobold Spawner
+  suffix: CM
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: kobold
+      sprite: Mobs/Animals/kobold.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - CMMobKobold
+
+- type: entity
+  parent: SpawnMobMouse
+  id: CMSpawnMobMouse
+  suffix: CM
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - CMMobMouse
+    - CMMobMouse1
+    - CMMobMouse2

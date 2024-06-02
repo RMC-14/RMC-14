@@ -1,9 +1,13 @@
 ﻿using Content.Shared._CM14.Xenos.Rest;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
+using Content.Shared.Movement.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Events;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Xenos.Weeds;
@@ -13,27 +17,51 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
+    private readonly HashSet<EntityUid> _toUpdate = new();
+
+    private EntityQuery<AffectableByWeedsComponent> _affectedQuery;
     private EntityQuery<XenoWeedsComponent> _weedsQuery;
+    private EntityQuery<XenoComponent> _xenoQuery;
 
     public override void Initialize()
     {
+        _affectedQuery = GetEntityQuery<AffectableByWeedsComponent>();
         _weedsQuery = GetEntityQuery<XenoWeedsComponent>();
+        _xenoQuery = GetEntityQuery<XenoComponent>();
 
         SubscribeLocalEvent<XenoWeedsComponent, AnchorStateChangedEvent>(OnWeedsAnchorChanged);
+        SubscribeLocalEvent<XenoWeedsComponent, ComponentShutdown>(OnWeedsShutdown);
 
         SubscribeLocalEvent<XenoWeedableComponent, AnchorStateChangedEvent>(OnWeedableAnchorStateChanged);
 
         SubscribeLocalEvent<DamageOffWeedsComponent, MapInitEvent>(OnDamageOffWeedsMapInit);
+
+        SubscribeLocalEvent<AffectableByWeedsComponent, RefreshMovementSpeedModifiersEvent>(WeedsRefreshPassiveSpeed);
+
+        SubscribeLocalEvent<XenoWeedsComponent, StartCollideEvent>(OnWeedsStartCollide);
+        SubscribeLocalEvent<XenoWeedsComponent, EndCollideEvent>(OnWeedsEndCollide);
+
+        UpdatesAfter.Add(typeof(SharedPhysicsSystem));
     }
 
     private void OnWeedsAnchorChanged(Entity<XenoWeedsComponent> weeds, ref AnchorStateChangedEvent args)
     {
         if (_net.IsServer && !args.Anchored)
             QueueDel(weeds);
+    }
+
+    private void OnWeedsShutdown(Entity<XenoWeedsComponent> ent, ref ComponentShutdown args)
+    {
+        if (!TryComp(ent, out PhysicsComponent? phys))
+            return;
+
+        _toUpdate.UnionWith(_physics.GetContactingEntities(ent, phys));
     }
 
     private void OnWeedableAnchorStateChanged(Entity<XenoWeedableComponent> weedable, ref AnchorStateChangedEvent args)
@@ -47,17 +75,48 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         damage.Comp.DamageAt = _timing.CurTime + damage.Comp.Every;
     }
 
-    public bool IsOnWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates)
+    private void WeedsRefreshPassiveSpeed(Entity<AffectableByWeedsComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
+    {
+        if (!EntityManager.TryGetComponent<PhysicsComponent>(ent, out var physicsComponent))
+            return;
+
+        var speed = 0.0f;
+        var isXeno = _xenoQuery.HasComp(ent);
+
+        var any = false;
+        var entries = 0;
+        foreach (var contacting in _physics.GetContactingEntities(ent, physicsComponent))
+        {
+            if (!_weedsQuery.TryComp(contacting, out var weeds))
+                continue;
+
+            speed += isXeno ? weeds.SpeedMultiplierXeno : weeds.SpeedMultiplierOutsider;
+            any = true;
+            entries++;
+        }
+
+        if (entries > 0)
+        {
+            speed /= entries;
+            args.ModifySpeed(speed, speed);
+        }
+
+        ent.Comp.OnXenoWeeds = any;
+        Dirty(ent);
+    }
+
+    public bool IsOnWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates, bool sourceOnly = false)
     {
         var position = _mapSystem.LocalToTile(grid, grid, coordinates);
         var enumerator = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, position);
 
         while (enumerator.MoveNext(out var anchored))
         {
-            if (_weedsQuery.HasComponent(anchored))
-            {
+            if (!_weedsQuery.TryComp(anchored, out var weeds))
+                continue;
+
+            if (!sourceOnly || weeds.IsSource)
                 return true;
-            }
         }
 
         return false;
@@ -79,13 +138,36 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         return IsOnWeeds((gridUid, grid), coordinates);
     }
 
+    private void OnWeedsStartCollide(Entity<XenoWeedsComponent> ent, ref StartCollideEvent args)
+    {
+        var other = args.OtherEntity;
+        if (_affectedQuery.TryComp(other, out var affected) && !affected.OnXenoWeeds)
+            _toUpdate.Add(other);
+    }
+
+    private void OnWeedsEndCollide(Entity<XenoWeedsComponent> ent, ref EndCollideEvent args)
+    {
+        var other = args.OtherEntity;
+        if (_affectedQuery.TryComp(other, out var affected) && affected.OnXenoWeeds)
+            _toUpdate.Add(other);
+    }
+
     public override void Update(float frameTime)
     {
-        var time = _timing.CurTime;
-        var query = EntityQueryEnumerator<DamageOffWeedsComponent, XenoComponent, DamageableComponent>();
-        while (query.MoveNext(out var uid, out var damage, out var xeno, out var damageable))
+        foreach (var mobId in _toUpdate)
         {
-            if (xeno.OnWeeds)
+            _movementSpeed.RefreshMovementSpeedModifiers(mobId);
+        }
+
+        _toUpdate.Clear();
+
+        // Damage for not being over weeds
+        var time = _timing.CurTime;
+        var query = EntityQueryEnumerator<DamageOffWeedsComponent, DamageableComponent>();
+        while (query.MoveNext(out var uid, out var damage, out var damageable))
+        {
+            if (TryComp(uid, out AffectableByWeedsComponent? affected) &&
+                affected.OnXenoWeeds)
             {
                 if (damage.DamageAt != null)
                 {

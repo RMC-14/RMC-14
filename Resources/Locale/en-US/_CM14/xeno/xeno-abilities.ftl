@@ -24,7 +24,7 @@ cm-xeno-fortify-cant-toggle-crest = You can't lower your crest while fortifying!
 cm-xeno-leap-cancelled = You cancel your leap!
 
 # Plant weeds
-cm-xeno-weeds-already-here = There are already weeds here!
+cm-xeno-weeds-source-already-here = There is already a resin node here!
 
 # Corrosive acid
 cm-xeno-acid-not-corrodible = You can't corrode {THE($target)}!

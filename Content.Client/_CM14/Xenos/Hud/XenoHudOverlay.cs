@@ -29,6 +29,7 @@ public sealed class XenoHudOverlay : Overlay
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
+    private readonly ContainerSystem _container;
     private readonly CMHealthIconsSystem _healthIcons;
     private readonly MobStateSystem _mobState;
     private readonly MobThresholdSystem _mobThresholds;
@@ -52,6 +53,7 @@ public sealed class XenoHudOverlay : Overlay
     {
         IoCManager.InjectDependencies(this);
 
+        _container = _entity.System<ContainerSystem>();
         _healthIcons = _entity.System<CMHealthIconsSystem>();
         _mobState = _entity.System<MobStateSystem>();
         _mobThresholds = _entity.System<MobThresholdSystem>();
@@ -108,6 +110,9 @@ public sealed class XenoHudOverlay : Overlay
             if (xform.MapID != args.MapId)
                 continue;
 
+            if (_container.IsEntityOrParentInContainer(uid))
+                return;
+
             var bounds = sprite.Bounds;
             var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
 
@@ -141,6 +146,9 @@ public sealed class XenoHudOverlay : Overlay
             if (comp.CurrentState != MobState.Dead)
                 continue;
 
+            if (_container.IsEntityOrParentInContainer(uid))
+                return;
+
             if (_xenoHuggerQuery.HasComp(uid))
                 continue;
 
@@ -169,10 +177,13 @@ public sealed class XenoHudOverlay : Overlay
     {
         var handle = args.WorldHandle;
         var hugged = _entity.AllEntityQueryEnumerator<VictimHuggedComponent, SpriteComponent, TransformComponent>();
-        while (hugged.MoveNext(out var comp, out var sprite, out var xform))
+        while (hugged.MoveNext(out var uid, out var comp, out var sprite, out var xform))
         {
             if (xform.MapID != args.MapId)
                 continue;
+
+            if (_container.IsEntityOrParentInContainer(uid))
+                return;
 
             var bounds = sprite.Bounds;
             var worldPos = _transform.GetWorldPosition(xform, _xformQuery);

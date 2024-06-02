@@ -91,9 +91,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        if (_xenoWeeds.IsOnWeeds((gridUid, grid), coordinates))
+        if (_xenoWeeds.IsOnWeeds((gridUid, grid), coordinates, true))
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-weeds-already-here"), xeno.Owner, xeno.Owner);
+            _popup.PopupClient(Loc.GetString("cm-xeno-weeds-source-already-here"), xeno.Owner, xeno.Owner);
             return;
         }
 
