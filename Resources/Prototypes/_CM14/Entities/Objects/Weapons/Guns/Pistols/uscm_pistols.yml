@@ -81,6 +81,8 @@
     slots:
       gun_magazine:
         name: Magazine
+        #insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg #TODO cm14 pistol sounds
+        #ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
         priority: 2
         whitelist:
           tags:
