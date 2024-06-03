@@ -768,8 +768,7 @@ namespace Content.Client.Lobby.UI
                         {
                             new Label
                             {
-                                Text = Loc.GetString("humanoid-profile-editor-department-jobs-label",
-                                    ("departmentName", departmentName)),
+                                Text = department.CustomName ?? Loc.GetString("humanoid-profile-editor-department-jobs-label", ("departmentName", departmentName)),
                                 Margin = new Thickness(5f, 0, 0, 0)
                             }
                         }
