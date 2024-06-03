@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Content.Shared._CM14.Inventory;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
 using Content.Shared.DoAfter;
@@ -9,7 +8,6 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
-using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
@@ -40,9 +38,7 @@ public sealed class XenoDevourSystem : EntitySystem
     {
         SubscribeLocalEvent<DevourableComponent, CanDropDraggedEvent>(OnDevourableCanDropDragged);
         SubscribeLocalEvent<DevourableComponent, DragDropDraggedEvent>(OnDevourableDragDropDragged);
-
-        SubscribeLocalEvent<CMVirtualItemComponent, BeforeRangedInteractEvent>(OnXenoInteractBeforeRangedInteract,
-            before: [typeof(SharedVirtualItemSystem)]);
+        SubscribeLocalEvent<DevourableComponent, BeforeRangedInteractEvent>(OnDevourableBeforeRangedInteract);
 
         SubscribeLocalEvent<DevouredComponent, ComponentStartup>(OnDevouredStartup);
         SubscribeLocalEvent<DevouredComponent, ComponentRemove>(OnDevouredRemove);
@@ -84,7 +80,7 @@ public sealed class XenoDevourSystem : EntitySystem
             args.Handled = true;
     }
 
-    private void OnXenoInteractBeforeRangedInteract(Entity<CMVirtualItemComponent> devourable, ref BeforeRangedInteractEvent args)
+    private void OnDevourableBeforeRangedInteract(Entity<DevourableComponent> ent, ref BeforeRangedInteractEvent args)
     {
         if (args.User != args.Target)
             return;
