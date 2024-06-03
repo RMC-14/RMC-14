@@ -1,4 +1,7 @@
-﻿- type: entity
+﻿- type: Tag
+  id: CMFireExtinguisherPortable
+
+- type: entity
   parent: FireExtinguisher
   id: CMFireExtinguisher
   name: fire extinguisher
