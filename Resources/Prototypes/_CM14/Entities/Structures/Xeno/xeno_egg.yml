@@ -34,7 +34,7 @@
         Heat: 3
   - type: Sprite
     sprite: _CM14/Structures/Xenos/xeno_egg.rsi
-    drawdepth: FloorObjects
+    drawdepth: SmallMobs
     layers:
     - state: egg_item
       map: [ "enum.XenoEggLayers.Base" ]

@@ -35,12 +35,17 @@ public sealed class XenoNestSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<XenoNestSurfaceComponent, ActivateInWorldEvent>(OnNestSurfaceActivate);
+        SubscribeLocalEvent<XenoComponent, GetUsedEntityEvent>(OnXenoGetUsedEntity);
+
+        // TODO CM14 make nests part of the wall entity so drag and drop can work
+        SubscribeLocalEvent<XenoNestSurfaceComponent, InteractHandEvent>(OnNestInteractHand);
         SubscribeLocalEvent<XenoNestSurfaceComponent, DoAfterAttemptEvent<XenoNestDoAfterEvent>>(OnNestSurfaceDoAfterAttempt);
         SubscribeLocalEvent<XenoNestSurfaceComponent, XenoNestDoAfterEvent>(OnNestSurfaceDoAfter);
 
         SubscribeLocalEvent<XenoNestComponent, ComponentRemove>(OnNestRemove);
         SubscribeLocalEvent<XenoNestComponent, EntityTerminatingEvent>(OnNestTerminating);
+
+        SubscribeLocalEvent<XenoNestableComponent, BeforeRangedInteractEvent>(OnNestableBeforeRangedInteract);
 
         SubscribeLocalEvent<XenoNestedComponent, ComponentRemove>(OnNestedRemove);
         SubscribeLocalEvent<XenoNestedComponent, PreventCollideEvent>(OnNestedPreventCollide);
@@ -54,6 +59,28 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoNestedComponent, ChangeDirectionAttemptEvent>(OnNestedCancel);
     }
 
+    private void OnXenoGetUsedEntity(Entity<XenoComponent> ent, ref GetUsedEntityEvent args)
+    {
+        if (args.Handled ||
+            CompOrNull<PullerComponent>(ent)?.Pulling is not { } pulling ||
+            !HasComp<XenoNestableComponent>(pulling) ||
+            HasComp<XenoNestedComponent>(pulling))
+        {
+            return;
+        }
+
+        args.Used = pulling;
+    }
+
+    private void OnNestInteractHand(Entity<XenoNestSurfaceComponent> ent, ref InteractHandEvent args)
+    {
+        if (CompOrNull<PullerComponent>(args.User)?.Pulling is not { } pulling)
+            return;
+
+        args.Handled = true;
+        TryStartNesting(args.User, ent, pulling);
+    }
+
     private void OnNestRemove(Entity<XenoNestComponent> ent, ref ComponentRemove args)
     {
         DetachNested(ent, ent.Comp.Nested);
@@ -64,54 +91,18 @@ public sealed class XenoNestSystem : EntitySystem
         DetachNested(ent, ent.Comp.Nested);
     }
 
+    private void OnNestableBeforeRangedInteract(Entity<XenoNestableComponent> ent, ref BeforeRangedInteractEvent args)
+    {
+        if (!TryComp(args.Target, out XenoNestSurfaceComponent? surface))
+            return;
+
+        args.Handled = true;
+        TryStartNesting(args.User, (args.Target.Value, surface), args.Used);
+    }
+
     private void OnNestedRemove(Entity<XenoNestedComponent> ent, ref ComponentRemove args)
     {
         DetachNested(null, ent);
-    }
-
-    private void OnNestSurfaceActivate(Entity<XenoNestSurfaceComponent> ent, ref ActivateInWorldEvent args)
-    {
-        if (TryComp(args.User, out PullerComponent? puller) &&
-            puller.Pulling is { } pulling)
-        {
-            if (GetNestDirection(ent, pulling) is not { } direction ||
-                !CanNestPopup(args.User, pulling, ent, direction))
-            {
-                return;
-            }
-
-            var ev = new XenoNestDoAfterEvent();
-            // TODO CM14 before merge delay
-            var doAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.DoAfter, ev, ent, pulling)
-            {
-                BreakOnMove = true,
-                AttemptFrequency = AttemptFrequency.EveryTick
-            };
-
-            _doAfter.TryStartDoAfter(doAfter);
-
-            // TODO CM14 make a method to do this
-            var victimName = Identity.Name(pulling, EntityManager, args.User);
-            _popup.PopupClient($"You pin {victimName} into the alien nest, preparing the securing resin.", args.User, args.User);
-
-            foreach (var session in Filter.PvsExcept(args.User).Recipients)
-            {
-                if (session.AttachedEntity is not { } recipient)
-                    continue;
-
-                var userName = Identity.Name(args.User, EntityManager, recipient);
-                victimName = Identity.Name(pulling, EntityManager, recipient);
-
-                if (recipient == pulling)
-                {
-                    _popup.PopupEntity($"{userName} pins you into the alien nest, preparing the securing resin.", args.User, recipient, PopupType.MediumCaution);
-                }
-                else
-                {
-                    _popup.PopupEntity($"{userName} pins {victimName} into the alien nest, preparing the securing resin.", args.User, recipient);
-                }
-            }
-        }
     }
 
     private void OnNestSurfaceDoAfterAttempt(Entity<XenoNestSurfaceComponent> ent, ref DoAfterAttemptEvent<XenoNestDoAfterEvent> args)
@@ -214,6 +205,46 @@ public sealed class XenoNestSystem : EntitySystem
         args.Cancel();
     }
 
+    private void TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)
+    {
+        if (GetNestDirection(surface, victim) is not { } direction ||
+            !CanNestPopup(user, victim, surface, direction))
+        {
+            return;
+        }
+
+        var ev = new XenoNestDoAfterEvent();
+        var doAfter = new DoAfterArgs(EntityManager, user, surface.Comp.DoAfter, ev, surface, victim)
+        {
+            BreakOnMove = true,
+            AttemptFrequency = AttemptFrequency.EveryTick
+        };
+
+        _doAfter.TryStartDoAfter(doAfter);
+
+        // TODO CM14 make a method to do this
+        var victimName = Identity.Name(victim, EntityManager, user);
+        _popup.PopupClient($"You pin {victimName} into the alien nest, preparing the securing resin.", user, user);
+
+        foreach (var session in Filter.PvsExcept(user).Recipients)
+        {
+            if (session.AttachedEntity is not { } recipient)
+                continue;
+
+            var userName = Identity.Name(user, EntityManager, recipient);
+            victimName = Identity.Name(victim, EntityManager, recipient);
+
+            if (recipient == victim)
+            {
+                _popup.PopupEntity($"{userName} pins you into the alien nest, preparing the securing resin.", user, recipient, PopupType.MediumCaution);
+            }
+            else
+            {
+                _popup.PopupEntity($"{userName} pins {victimName} into the alien nest, preparing the securing resin.", user, recipient);
+            }
+        }
+    }
+
     private Direction? GetNestDirection(EntityUid surface, EntityUid victim)
     {
         var victimCoords = _transform.GetMoverCoordinates(victim);
@@ -224,31 +255,41 @@ public sealed class XenoNestSystem : EntitySystem
         return (new Angle(delta) + - MathHelper.PiOver2).GetCardinalDir();
     }
 
-    private bool CanNestPopup(EntityUid user, EntityUid victim, EntityUid surface, Direction direction)
+    private bool CanNestPopup(EntityUid user, EntityUid victim, EntityUid surface, Direction direction, bool silent = false)
     {
         if (!HasComp<XenoNestableComponent>(victim))
         {
             var victimName = Identity.Name(victim, EntityManager, user);
-            _popup.PopupClient($"{victimName} can't be put into a nest!", surface, user);
+
+            if (!silent)
+                _popup.PopupClient($"{victimName} can't be put into a nest!", surface, user);
+
             return false;
         }
 
         if (!_standingState.IsDown(victim))
         {
             var victimName = Identity.Name(victim, EntityManager, user);
-            _popup.PopupClient($"{victimName} is resisting, ground them!", victim, user, PopupType.MediumCaution);
+
+            if (!silent)
+                _popup.PopupClient($"{victimName} is resisting, ground them!", victim, user, PopupType.MediumCaution);
+
             return false;
         }
 
         if (!TryComp(surface, out XenoNestSurfaceComponent? surfaceComp))
         {
-            _popup.PopupClient("You can't create a nest there!", surface, user);
+            if (!silent)
+                _popup.PopupClient("You can't create a nest there!", surface, user);
+
             return false;
         }
 
         if (surfaceComp.Nests.ContainsKey(direction))
         {
-            _popup.PopupClient("There is already someone nested there!", surface, user);
+            if (!silent)
+                _popup.PopupClient("There is already someone nested there!", surface, user);
+
             return false;
         }
 
