@@ -51,7 +51,13 @@
   description: A therapeutic toy to assist marines in recovering from mental and behavioral disorders after experiencing the trauma of battles.
   components:
   - type: Sprite
-    state: therapy
+    layers:
+    - state: therapy
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: RandomSprite
+    available:
+    - enum.DamageStateVisualLayers.Base:
+        therapy: Rainbow
 
 - type: entity
   parent: CMPlushieBase
