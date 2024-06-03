@@ -24,4 +24,13 @@ public sealed partial class XenoWeedsComponent : Component
 
     [DataField]
     public EntProtoId Spawns = "XenoWeeds";
+
+    [DataField, AutoNetworkedField]
+    public List<EntityUid> Spread = new();
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan MinRandomDelete = TimeSpan.FromSeconds(9);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan MaxRandomDelete = TimeSpan.FromSeconds(10);
 }

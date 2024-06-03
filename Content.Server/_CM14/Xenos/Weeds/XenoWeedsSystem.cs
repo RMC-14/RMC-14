@@ -22,6 +22,10 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
     private void OnWeedsSpreadNeighbors(Entity<XenoWeedsComponent> ent, ref SpreadNeighborsEvent args)
     {
         var source = ent.Comp.IsSource ? ent.Owner : ent.Comp.Source;
+        var sourceWeeds = CompOrNull<XenoWeedsComponent>(source);
+
+        if (source != null && sourceWeeds != null)
+            Dirty(source.Value, sourceWeeds);
 
         // TODO CM14
         // There is an edge case right now where existing weeds can block new weeds
@@ -54,6 +58,8 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
             neighborWeedsComp.IsSource = false;
             neighborWeedsComp.Source = source;
+            sourceWeeds?.Spread.Add(neighborWeeds);
+
             Dirty(neighborWeeds, neighborWeedsComp);
 
             EnsureComp<ActiveEdgeSpreaderComponent>(neighborWeeds);
@@ -80,6 +86,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                     }
 
                     weedable.Entity = SpawnAtPosition(weedable.Spawn, anchored.ToCoordinates());
+                    sourceWeeds?.Spread.Add(weedable.Entity.Value);
                 }
             }
         }
