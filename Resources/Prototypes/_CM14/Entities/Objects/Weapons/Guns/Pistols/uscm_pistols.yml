@@ -128,3 +128,38 @@
         whitelist:
           tags:
           - CMCartridgePistol9mm
+
+- type: entity
+  parent: CMWeaponPistolBase
+  id: CMWeaponPistolVP78
+  name: VP 78 automatic pistol
+  description: A massive, formidable handgun chambered in 9mm rounds. It has fully automatic and 3 round burst modes.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Pistols/vp78.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _CM14/Objects/Weapons/Guns/Pistols/vp78.rsi
+  - type: Gun
+    fireRate: 4     # TODO: figure out rate of fire because CM-SS13 wiki makes NO SENSE
+    selectedMode: Burst
+    shotsPerBurst: 3
+    availableModes:
+    - FullAuto
+    - Burst
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazinePistolVP78
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+          - CMCartridgePistol9mm
