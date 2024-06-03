@@ -12202,7 +12202,7 @@ entities:
       pos: -45.5,1.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -789.17444
+      secondsUntilStateChange: -857.5908
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -12515,7 +12515,7 @@ entities:
       pos: 32.5,-5.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -14558.163
+      secondsUntilStateChange: -14626.579
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -17501,7 +17501,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 4879.0279316
     - type: Door
-      secondsUntilStateChange: -11751.997
+      secondsUntilStateChange: -11820.413
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -17523,7 +17523,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 4879.0279316
     - type: Door
-      secondsUntilStateChange: -11751.997
+      secondsUntilStateChange: -11820.413
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -45841,6 +45841,13 @@ entities:
       linkedPorts:
         6386:
         - Pressed: Toggle
+- proto: SpawnPointLatejoin
+  entities:
+  - uid: 7914
+    components:
+    - type: Transform
+      pos: -1.5,11.5
+      parent: 2
 - proto: SpawnPointObserver
   entities:
   - uid: 5747
