@@ -2,6 +2,13 @@
 
 namespace Content.Shared._CM14.Dropship;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedDropshipSystem))]
-public sealed partial class DropshipDestinationComponent : Component;
+public sealed partial class DropshipDestinationComponent : Component
+{
+    [DataField, AutoNetworkedField]
+    public EntityUid? Ship;
+
+    [DataField, AutoNetworkedField]
+    public bool AutoRecall;
+}

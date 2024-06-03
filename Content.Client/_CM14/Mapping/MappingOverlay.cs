@@ -1,9 +1,6 @@
 ﻿using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
-using Robust.Client.Input;
 using Robust.Client.Player;
-using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 using static Content.Client._CM14.Mapping.MappingState;
@@ -13,10 +10,8 @@ namespace Content.Client._CM14.Mapping;
 public sealed class MappingOverlay : Overlay
 {
     [Dependency] private readonly IEntityManager _entities = default!;
-    [Dependency] private readonly IInputManager _input = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
 
     // 1 off in case something else uses these colors since we use them to compare
     private static readonly Color PickColor = new(1, 255, 0);

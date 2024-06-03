@@ -34,15 +34,15 @@ public abstract class SharedPumpActionSystem : EntitySystem
             .Register<SharedPumpActionSystem>();
     }
 
+    public override void Shutdown()
+    {
+        CommandBinds.Unregister<SharedPumpActionSystem>();
+    }
+
     protected virtual void OnExamined(Entity<PumpActionComponent> ent, ref ExaminedEvent args)
     {
         // TODO CM14 the server has no idea what this keybind is supposed to be for the client
         args.PushMarkup("[bold]Press [color=cyan]Space[/color] to pump before shooting.[/bold]", 1);
-    }
-
-    public override void Shutdown()
-    {
-        CommandBinds.Unregister<SharedPumpActionSystem>();
     }
 
     private void OnGetVerbs(Entity<PumpActionComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
@@ -70,21 +70,6 @@ public abstract class SharedPumpActionSystem : EntitySystem
         Dirty(ent);
     }
 
-    private void TryPump(EntityUid user, Entity<PumpActionComponent> ent)
-    {
-        if (!ent.Comp.Running ||
-            ent.Comp.Pumped ||
-            !_actionBlocker.CanInteract(user, ent))
-        {
-            return;
-        }
-
-        ent.Comp.Pumped = true;
-        Dirty(ent);
-
-        _audio.PlayPredicted(ent.Comp.Sound, ent, user);
-    }
-
     private void TryPump(EntityUid user)
     {
         if (TryComp(user, out HandsComponent? hands) &&
@@ -101,5 +86,20 @@ public abstract class SharedPumpActionSystem : EntitySystem
 
             TryPump(user, (hands.ActiveHandEntity.Value, pump));
         }
+    }
+
+    private void TryPump(EntityUid user, Entity<PumpActionComponent> ent)
+    {
+        if (!ent.Comp.Running ||
+            ent.Comp.Pumped ||
+            !_actionBlocker.CanInteract(user, ent))
+        {
+            return;
+        }
+
+        ent.Comp.Pumped = true;
+        Dirty(ent);
+
+        _audio.PlayPredicted(ent.Comp.Sound, ent, user);
     }
 }

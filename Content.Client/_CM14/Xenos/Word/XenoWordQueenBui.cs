@@ -34,8 +34,8 @@ public sealed class XenoWordQueenBui : BoundUserInterface
         if (string.IsNullOrWhiteSpace(text))
             return;
 
-        var msg = new XenoWordQueenBuiMessage(text);
-        SendMessage(msg);
+        var msg = new XenoWordQueenBuiMsg(text);
+        SendPredictedMessage(msg);
         _window.Close();
     }
 

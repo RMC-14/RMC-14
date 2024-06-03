@@ -6,7 +6,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMClothingMaskSterile
+      - id: CMMaskSterile
         amount: 7
   - type: Sprite
     state: sterile

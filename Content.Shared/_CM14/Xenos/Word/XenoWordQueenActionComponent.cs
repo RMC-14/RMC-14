@@ -3,5 +3,5 @@
 namespace Content.Shared._CM14.Xenos.Word;
 
 [RegisterComponent, NetworkedComponent]
-[Access(typeof(SharedXenoWordQueenSystem))]
+[Access(typeof(XenoWordQueenSystem))]
 public sealed partial class XenoWordQueenActionComponent : Component;

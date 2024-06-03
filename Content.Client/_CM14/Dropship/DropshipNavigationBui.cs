@@ -25,50 +25,12 @@ public sealed class DropshipNavigationBui : BoundUserInterface
 
     protected override void Open()
     {
-        if (_window == null)
-        {
-            _window = new DropshipNavigationWindow();
-            _window.OnClose += Close;
-            SetHeader("Flight Controls");
-
-            if (_entities.TryGetComponent(Owner, out TransformComponent? transform) &&
-                _entities.TryGetComponent(transform.ParentUid, out MetaDataComponent? metaData))
-            {
-                _window.Title = $"{metaData.EntityName} {_window.Title}";
-            }
-
-            _window.OpenCentered();
-        }
-
-        _window.CancelButton.Button.OnPressed += _ =>
-        {
-            SetCancelLaunchDisabled(true);
-            _selected = null;
-            ResetDestinationButtons();
-        };
-
-        _window.LaunchButton.Button.OnPressed += _ =>
-        {
-            if (_selected != null)
-                SendMessage(new DropshipNavigationLaunchMsg(_selected.Value));
-
-            SetCancelLaunchDisabled(true);
-            _selected = null;
-            ResetDestinationButtons();
-        };
-
-        _entities.System<DropshipSystem>().Uis.Add(this);
+        OpenWindow();
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
     {
-        if (_window == null)
-        {
-            _window = new DropshipNavigationWindow();
-            _window.OnClose += Close;
-            SetHeader("Flight Controls");
-            _window.OpenCentered();
-        }
+        OpenWindow();
 
         switch (state)
         {
@@ -83,10 +45,53 @@ public sealed class DropshipNavigationBui : BoundUserInterface
 
     protected override void Dispose(bool disposing)
     {
-        _entities.System<DropshipSystem>().Uis.Remove(this);
-
         if (disposing)
+        {
+            _window?.Close();
             _window?.Dispose();
+        }
+    }
+
+    private void OpenWindow()
+    {
+        if (_window != null)
+            return;
+
+        _window = new DropshipNavigationWindow();
+        _window.OnClose += OnClose;
+        SetHeader("Flight Controls");
+
+        if (_entities.TryGetComponent(Owner, out TransformComponent? transform) &&
+            _entities.TryGetComponent(transform.ParentUid, out MetaDataComponent? metaData))
+        {
+            _window.Title = $"{metaData.EntityName} {_window.Title}";
+        }
+
+        _window.CancelButton.Button.OnPressed += _ =>
+        {
+            SetCancelLaunchDisabled(true);
+            _selected = null;
+            ResetDestinationButtons();
+        };
+
+        _window.LaunchButton.Button.OnPressed += _ =>
+        {
+            if (_selected != null)
+                SendPredictedMessage(new DropshipNavigationLaunchMsg(_selected.Value));
+
+            SetCancelLaunchDisabled(true);
+            _selected = null;
+            ResetDestinationButtons();
+        };
+
+        _window.OpenCentered();
+        _entities.System<DropshipSystem>().Uis.Add(this);
+    }
+
+    private void OnClose()
+    {
+        _entities.System<DropshipSystem>().Uis.Remove(this);
+        Close();
     }
 
     private void Set(DropshipNavigationDestinationsBuiState destinations)
@@ -108,6 +113,7 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         {
             var button = new DropshipButton();
             button.Text = destination.Name;
+            button.Disabled = destination.Occupied;
             button.BorderColor = Color.Transparent;
             button.BorderThickness = new Thickness(0);
             button.Button.ToggleMode = true;

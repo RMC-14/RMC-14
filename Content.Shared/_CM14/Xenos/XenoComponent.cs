@@ -1,5 +1,8 @@
-﻿using Content.Shared.Access;
+﻿using System.Numerics;
+using Content.Shared.Access;
+using Content.Shared.Alert;
 using Content.Shared.FixedPoint;
+using Content.Shared.Roles;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -10,10 +13,13 @@ namespace Content.Shared._CM14.Xenos;
 [Access(typeof(XenoSystem))]
 public sealed partial class XenoComponent : Component
 {
+    [DataField(required: true), AutoNetworkedField]
+    public ProtoId<JobPrototype> Role;
+
     [DataField, AutoNetworkedField]
     public List<EntProtoId> ActionIds = new();
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId, EntityUid> Actions = new();
 
     [DataField, AutoNetworkedField]
@@ -44,8 +50,23 @@ public sealed partial class XenoComponent : Component
     public HashSet<ProtoId<AccessLevelPrototype>> AccessLevels = new() { "CMAccessXeno" };
 
     [DataField, AutoNetworkedField]
-    public bool OnWeeds;
+    public int Tier;
 
     [DataField, AutoNetworkedField]
-    public int Tier;
+    public Vector2 HudOffset;
+
+    [DataField, AutoNetworkedField]
+    public bool ContributesToVictory = true;
+
+    [DataField, AutoNetworkedField]
+    public bool CountedInSlots = true;
+
+    [DataField, AutoNetworkedField]
+    public bool BypassTierCount;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan UnlockAt = TimeSpan.FromSeconds(60);
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<AlertPrototype> ArmorAlert = "XenoArmor";
 }

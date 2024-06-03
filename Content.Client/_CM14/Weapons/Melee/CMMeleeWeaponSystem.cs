@@ -1,5 +1,6 @@
 ﻿using Content.Client.Weapons.Melee;
 using Content.Shared._CM14.Input;
+using Content.Shared._CM14.Weapons.Melee;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -9,17 +10,20 @@ using Robust.Shared.Map;
 
 namespace Content.Client._CM14.Weapons.Melee;
 
-public sealed class CMMeleeWeaponSystem : EntitySystem
+public sealed class CMMeleeWeaponSystem : SharedCMMeleeWeaponSystem
 {
     [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] private readonly IInputManager _input = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly MeleeWeaponSystem _melee = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
 
     public override void Initialize()
     {
+        base.Initialize();
+
         CommandBinds.Builder
             .Bind(CMKeyFunctions.CMXenoWideSwing,
                 InputCmdHandler.FromDelegate(session =>
@@ -33,14 +37,16 @@ public sealed class CMMeleeWeaponSystem : EntitySystem
     private void TryPrimaryHeavyAttack()
     {
         var mousePos = _eye.PixelToMap(_input.MouseScreenPosition);
-        var grid = _mapManager.TryFindGridAt(mousePos, out var gridUid, out _)
-            ? gridUid
-            : _mapManager.GetMapEntityId(mousePos.MapId);
+        EntityUid grid;
 
-        if (grid == EntityUid.Invalid)
+        if (_mapManager.TryFindGridAt(mousePos, out var gridUid, out _))
+            grid = gridUid;
+        else if (_map.TryGetMap(mousePos.MapId, out var map))
+            grid = map.Value;
+        else
             return;
 
-        var coordinates = EntityCoordinates.FromMap(grid, mousePos, _transform, EntityManager);
+        var coordinates = _transform.ToCoordinates(grid, mousePos);
 
         if (_player.LocalEntity is not { } entity)
             return;

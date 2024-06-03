@@ -9,12 +9,7 @@ public enum XenoWordQueenUI : byte
 }
 
 [Serializable, NetSerializable]
-public sealed class XenoWordQueenBuiMessage : BoundUserInterfaceMessage
+public sealed class XenoWordQueenBuiMsg(string text) : BoundUserInterfaceMessage
 {
-    public readonly string Text;
-
-    public XenoWordQueenBuiMessage(string text)
-    {
-        Text = text;
-    }
+    public readonly string Text = text;
 }

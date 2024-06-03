@@ -35,7 +35,7 @@ public abstract partial class SharedGunSystem
         if (args.Handled)
             return;
 
-        ManualCycle(uid, component, Transform(uid).MapPosition, args.User);
+        ManualCycle(uid, component, TransformSystem.GetMapCoordinates(uid), args.User);
         args.Handled = true;
     }
 
@@ -161,7 +161,7 @@ public abstract partial class SharedGunSystem
             {
                 Text = Loc.GetString("gun-ballistic-cycle"),
                 Disabled = GetBallisticShots(component) == 0,
-                Act = () => ManualCycle(uid, component, Transform(uid).MapPosition, args.User),
+                Act = () => ManualCycle(uid, component, TransformSystem.GetMapCoordinates(uid), args.User),
             });
 
         }
@@ -186,6 +186,7 @@ public abstract partial class SharedGunSystem
             !Paused(uid))
         {
             gunComp.NextFire = Timing.CurTime + TimeSpan.FromSeconds(1 / gunComp.FireRateModified);
+            Dirty(uid, gunComp);
         }
 
         Dirty(uid, component);

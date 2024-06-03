@@ -5,8 +5,8 @@
   description: cm-job-description-cmo
   playTimeTracker: CMJobCMO
   requirements:
-  - !type:DepartmentTimeRequirement
-    department: CMMedical
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
     time: 36000 # 10 hours
   weight: 5
   startingGear: CMGearCMO
@@ -14,13 +14,13 @@
   requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: cm-job-supervisors-co
-  canBeAntag: false
   accessGroups:
   - CMCMO
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
+      firearms: 0
       fireman: 1
       intel: 1
       jtac: 3
@@ -34,6 +34,15 @@
 
 - type: startingGear
   id: CMGearCMO
+  equipment:
+    jumpsuit: CMJumpsuitCMO
+    back: CMSatchel
+    shoes: ClothingShoesColorWhite
+    id: CMIDCardCMO
+    # TODO CM14 random chemical synthesis note
+
+- type: startingGear
+  id: CMGearCMOEquipped
   equipment:
     jumpsuit: CMJumpsuitCMO
     outerClothing: CMCoatLong

@@ -20,6 +20,7 @@
       700: Critical
       800: Dead
   - type: Xeno
+    role: CMXenoCrusher
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
@@ -29,12 +30,14 @@
     #    - ActionXenoStomp
     #    - ActionXenoDefensiveShield
     tier: 3
+    hudOffset: 0,0.375
+    unlockAt: 900 # 15 minutes
   - type: XenoDevour
   - type: XenoPlasma
     plasma: 400
     maxPlasma: 400
-    plasmaRegenOnWeeds: 16
-  - type: XenoArmor
+    plasmaRegenOnWeeds: 4
+  - type: CMArmor
     armor: 30
     explosionArmor: 100
   - type: MeleeWeapon
@@ -44,3 +47,6 @@
   - type: Tackle
     threshold: 5
     stun: 5
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.66
+    baseSprintSpeed: 3

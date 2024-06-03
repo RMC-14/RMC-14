@@ -1,5 +1,4 @@
 ﻿using Content.Client._CM14.Xenos.UI;
-using Content.Shared._CM14.Xenos;
 using Content.Shared._CM14.Xenos.Construction;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
@@ -13,6 +12,7 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private readonly SpriteSystem _sprite;
+    private readonly SharedXenoConstructionSystem _xenoConstruction;
 
     [ViewVariables]
     private XenoChooseStructureWindow? _window;
@@ -20,6 +20,7 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
     public XenoChooseStructureBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _sprite = EntMan.System<SpriteSystem>();
+        _xenoConstruction = EntMan.System<SharedXenoConstructionSystem>();
     }
 
     protected override void Open()
@@ -35,13 +36,12 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
                     continue;
 
                 var control = new XenoChoiceControl();
-                control.Set(structure.Name, _sprite.Frame0(structure));
+                var name = structure.Name;
+                if (_xenoConstruction.GetStructurePlasmaCost(structureId) is { } cost)
+                    name += $" ({cost} plasma)";
 
-                control.Button.OnPressed += _ =>
-                {
-                    SendMessage(new XenoChooseStructureBuiMessage(structureId));
-                    Close();
-                };
+                control.Set(name, _sprite.Frame0(structure));
+                control.Button.OnPressed += _ => SendPredictedMessage(new XenoChooseStructureBuiMsg(structureId));
 
                 _window.StructureContainer.AddChild(control);
             }

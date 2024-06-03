@@ -20,24 +20,27 @@
       650: Critical
       750: Dead
   - type: Xeno
+    role: CMXenoPraetorian
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
-    - ActionXenoAcid
+    - ActionXenoAcidNormal
     #    - ActionXenoSpit
     #    - ActionXenoDash
     #    - ActionXenoAcidBall
     #    - ActionXenoSprayAcid
     tier: 3
+    hudOffset: 0,0.16
+    unlockAt: 900 # 15 minutes
   - type: XenoAcid
   - type: XenoDevour
   - type: XenoPlasma
     plasma: 800
     maxPlasma: 800
-    plasmaRegenOnWeeds: 24
-  - type: XenoArmor
+    plasmaRegenOnWeeds: 3
+  - type: CMArmor
     armor: 25
     explosionArmor: 40
   - type: MeleeWeapon
@@ -53,7 +56,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.35
-        density: 1000
+        density: 185
         mask:
         - MobMask
         layer:
@@ -62,6 +65,6 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.45
-        density: 1000
+        density: 185
         layer:
         - BulletImpassable

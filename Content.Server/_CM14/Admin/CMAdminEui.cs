@@ -1,4 +1,5 @@
-﻿using Content.Server.Administration;
+﻿using Content.Server._CM14.Rules;
+using Content.Server.Administration;
 using Content.Server.Administration.Managers;
 using Content.Server.EUI;
 using Content.Server.Mind;
@@ -11,8 +12,8 @@ using Content.Shared.Administration;
 using Content.Shared.Eui;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Server._CM14.Admin;
 
@@ -25,7 +26,7 @@ public sealed class CMAdminEui : BaseEui
     [ValidatePrototypeId<StartingGearPrototype>]
     private const string DefaultHumanoidGear = "CMGearRifleman";
 
-    private readonly XenoHiveSystem _hive;
+    private readonly SharedXenoHiveSystem _hive;
     private readonly MindSystem _mind;
     private readonly StationSpawningSystem _stationSpawning;
     private readonly SharedTransformSystem _transform;
@@ -37,18 +38,13 @@ public sealed class CMAdminEui : BaseEui
     {
         IoCManager.InjectDependencies(this);
 
-        _hive = _entities.System<XenoHiveSystem>();
+        _hive = _entities.System<SharedXenoHiveSystem>();
         _mind = _entities.System<MindSystem>();
         _stationSpawning = _entities.System<StationSpawningSystem>();
         _transform = _entities.System<SharedTransformSystem>();
         _xeno = _entities.System<XenoSystem>();
 
         _target = _entities.GetNetEntity(target);
-    }
-
-    public static bool CanUse(IAdminManager admin, ICommonSession player)
-    {
-        return admin.HasAdminFlag(player, AdminFlags.Fun);
     }
 
     public override void Opened()
@@ -80,7 +76,7 @@ public sealed class CMAdminEui : BaseEui
 
         switch (msg)
         {
-            case CMAdminChangeHiveMessage changeHive:
+            case CMAdminChangeHiveMsg changeHive:
             {
                 if (_entities.TryGetEntity(_target, out var target) &&
                     _entities.TryGetEntity(changeHive.Hive.Id, out var hive))
@@ -91,13 +87,13 @@ public sealed class CMAdminEui : BaseEui
 
                 break;
             }
-            case CMAdminCreateHiveMessage createHive:
+            case CMAdminCreateHiveMsg createHive:
             {
                 _hive.CreateHive(createHive.Name);
                 StateDirty();
                 break;
             }
-            case CMAdminTransformHumanoidMessage transformHumanoid:
+            case CMAdminTransformHumanoidMsg transformHumanoid:
             {
                 if (_entities.GetEntity(_target) is not { Valid: true } entity)
                     break;
@@ -120,13 +116,17 @@ public sealed class CMAdminEui : BaseEui
                 StateDirty();
                 break;
             }
-            case CMAdminTransformXenoMessage transformXeno:
+            case CMAdminTransformXenoMsg transformXeno:
             {
                 if (_entities.GetEntity(_target) is not { Valid: true } entity)
                     break;
 
                 var coordinates = _transform.GetMoverCoordinates(entity);
                 var newXeno = _entities.SpawnAttachedTo(transformXeno.XenoId, coordinates);
+                if (_entities.TryGetComponent(entity, out XenoComponent? xeno))
+                    _xeno.SetHive(newXeno, xeno.Hive);
+                else  if (_entities.EntityQuery<CMDistressSignalRuleComponent>().TryFirstOrDefault(out var ruleComponent))
+                    _xeno.SetHive(newXeno, ruleComponent.Hive);
 
                 if (_mind.TryGetMind(entity, out var mindId, out var mind))
                 {

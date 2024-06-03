@@ -1,11 +1,9 @@
-using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
-using Content.Shared.Random;
-using Content.Shared.Random.Helpers;
-using Content.Shared.Chemistry.Reagent;
 using System.Linq;
 using Content.Shared.Atmos;
-using FastAccessors;
+using Content.Shared.Random;
+using Content.Shared.Random.Helpers;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 namespace Content.Server.Botany;
 
@@ -282,6 +280,9 @@ public sealed class MutationSystem : EntitySystem
 
     private void MutateSpecies(ref SeedData seed, int bits, int totalbits, float mult)
     {
+        // CM14 no mutating species in cm
+        return;
+
         float p = mult * bits / totalbits;
         p = Math.Clamp(p, 0, 1);
         if (!Random(p))

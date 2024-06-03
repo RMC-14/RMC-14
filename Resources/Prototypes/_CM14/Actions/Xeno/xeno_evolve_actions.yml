@@ -1,7 +1,8 @@
 ﻿- type: entity
   parent: ActionXenoBase
-  id: ActionXenoEvolve60
-  name: Evolve # TODO CM14 description
+  id: ActionXenoEvolve
+  name: Evolve
+  description: Evolve to the next caste of xenomorph.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -9,21 +10,3 @@
       sprite: _CM14/Actions/xeno_actions.rsi
       state: evolve
     event: !type:XenoOpenEvolutionsActionEvent
-  - type: XenoEvolveAction
-    cooldown: 60
-
-- type: entity
-  parent: ActionXenoEvolve60
-  id: ActionXenoEvolve300
-  name: Evolve
-  components:
-  - type: XenoEvolveAction
-    cooldown: 300
-
-- type: entity
-  parent: ActionXenoEvolve60
-  id: ActionXenoEvolve540
-  name: Evolve
-  components:
-  - type: XenoEvolveAction
-    cooldown: 540

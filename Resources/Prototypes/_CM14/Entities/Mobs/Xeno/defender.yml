@@ -20,6 +20,7 @@
       500: Critical
       600: Dead
   - type: Xeno
+    role: CMXenoDefender
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
@@ -29,16 +30,18 @@
     - ActionXenoHeadbutt
     - ActionXenoTailSweep
     - ActionXenoFortify
-    - ActionXenoEvolve300
     tier: 1
+    hudOffset: 0,0.2
+    unlockAt: 240 # 4 minutes
   - type: XenoEvolution
-    evolvesTo:
-    - CMXenoWarrior
+    max: 300
+#    evolvesTo:
+#    - CMXenoWarrior
   - type: XenoPlasma
     plasma: 100
     maxPlasma: 100
     plasmaRegenOnWeeds: 5
-  - type: XenoArmor
+  - type: CMArmor
     armor: 35
     explosionArmor: 70
   - type: XenoCrest
@@ -66,7 +69,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.35
-        density: 1000
+        density: 185
         mask:
         - MobMask
         layer:
@@ -75,6 +78,6 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.45
-        density: 1000
+        density: 185
         layer:
         - BulletImpassable

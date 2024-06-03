@@ -138,6 +138,10 @@
       "directions": 4
     },
     {
+      "name": "weedwall7",
+      "directions": 4
+    },
+    {
       "name": "weednode",
       "delays": [
         [

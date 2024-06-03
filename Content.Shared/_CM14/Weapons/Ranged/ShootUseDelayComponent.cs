@@ -10,4 +10,10 @@ public sealed partial class ShootUseDelayComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan PopupCooldown = TimeSpan.FromSeconds(0.5);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan Delay = TimeSpan.FromSeconds(2);
+
+    [DataField, AutoNetworkedField]
+    public string DelayId = "CMShootUseDelay";
 }

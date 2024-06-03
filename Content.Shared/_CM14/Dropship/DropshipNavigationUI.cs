@@ -5,9 +5,9 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._CM14.Dropship;
 
 [Serializable, NetSerializable]
-public sealed class DropshipNavigationDestinationsBuiState(List<(NetEntity Id, string Name)> destinations) : BoundUserInterfaceState
+public sealed class DropshipNavigationDestinationsBuiState(List<(NetEntity Id, string Name, bool Occupied)> destinations) : BoundUserInterfaceState
 {
-    public readonly List<(NetEntity Id, string Name)> Destinations = destinations;
+    public readonly List<(NetEntity Id, string Name, bool Occupied)> Destinations = destinations;
 }
 
 [Serializable, NetSerializable]

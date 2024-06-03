@@ -16138,7 +16138,7 @@ entities:
       pos: 52.5,3.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -15029.967
+      secondsUntilStateChange: -15071.155
       state: Opening
   - uid: 2756
     components:
@@ -16203,7 +16203,7 @@ entities:
       pos: 123.5,18.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -63650.34
+      secondsUntilStateChange: -63691.527
       state: Opening
   - uid: 2717
     components:
@@ -16213,7 +16213,7 @@ entities:
       pos: 123.5,-17.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -71165.47
+      secondsUntilStateChange: -71206.66
       state: Opening
   - uid: 2741
     components:
@@ -16565,7 +16565,7 @@ entities:
       pos: 121.5,-8.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -70806.74
+      secondsUntilStateChange: -70847.93
       state: Opening
 - proto: CMAirlockMaint
   entities:
@@ -23199,7 +23199,7 @@ entities:
     - type: Transform
       pos: 113.5,15.5
       parent: 2
-- proto: CMLightBulb
+- proto: CMLightFixtureSmall
   entities:
   - uid: 123
     components:
@@ -25998,17 +25998,19 @@ entities:
     - type: Transform
       pos: 165.5,10.5
       parent: 2
-- proto: CMSpawnPointPilot
+- proto: CMSpawnPointPilotDropship
   entities:
-  - uid: 3914
-    components:
-    - type: Transform
-      pos: 53.5,-12.5
-      parent: 2
   - uid: 3915
     components:
     - type: Transform
       pos: 51.5,-12.5
+      parent: 2
+- proto: CMSpawnPointPilotGunship
+  entities:
+  - uid: 3044
+    components:
+    - type: Transform
+      pos: 53.5,-12.5
       parent: 2
 - proto: CMSpawnPointQuartermaster
   entities:
@@ -36051,14 +36053,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 32.5,0.5
-      parent: 2
-- proto: ComputerId
-  entities:
-  - uid: 8174
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 32.5,-0.5
       parent: 2
 - proto: ComputerPowerMonitoring
   entities:
@@ -55408,7 +55402,7 @@ entities:
     - type: Transform
       pos: 109.5,-8.5
       parent: 2
-- proto: SpawnMobMouse
+- proto: CMSpawnMobMouse
   entities:
   - uid: 8597
     components:

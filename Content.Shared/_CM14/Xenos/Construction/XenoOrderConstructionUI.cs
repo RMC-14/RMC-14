@@ -1,5 +1,4 @@
-﻿using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
+﻿using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._CM14.Xenos.Construction;
@@ -11,12 +10,7 @@ public enum XenoOrderConstructionUI : byte
 }
 
 [Serializable, NetSerializable]
-public sealed class XenoOrderConstructionBuiMessage : BoundUserInterfaceMessage
+public sealed class XenoOrderConstructionBuiMsg(EntProtoId structureId) : BoundUserInterfaceMessage
 {
-    public readonly EntProtoId StructureId;
-
-    public XenoOrderConstructionBuiMessage(EntProtoId structureId)
-    {
-        StructureId = structureId;
-    }
+    public readonly EntProtoId StructureId = structureId;
 }

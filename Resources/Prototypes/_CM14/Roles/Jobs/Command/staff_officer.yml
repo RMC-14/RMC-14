@@ -5,18 +5,18 @@
   description: cm-job-description-staff-officer
   playTimeTracker: CMJobStaffOfficer
   requirements:
-  - !type:OverallPlaytimeRequirement
-    time: 54000 # 15 hours
-  - !type:DepartmentTimeRequirement
-    department: CMMilitaryPolice
+  - !type:RoleTimeRequirement
+    role: CMJobSquadLeader
     time: 3600 # 1 hours
+  - !type:TotalDepartmentsTimeRequirement
+    group: CMDepartmentsHuman
+    time: 54000 # 15 hours
   weight: 5
   startingGear: CMGearStaffOfficer
   icon: "CMJobIconStaffOfficer"
   requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: cm-job-supervisors-co
-  canBeAntag: false
   accessGroups:
   - MarineMain
   special:
@@ -25,6 +25,7 @@
     - type: Skills
       construction: 2
       engineer: 2
+      firearms: 1
       fireman: 1
       intel: 1
       jtac: 3
@@ -41,7 +42,7 @@
   equipment:
     jumpsuit: CMJumpsuitBO
     back: CMSatchelMarine
-    shoes: CMShoesDress
+    shoes: CMShoesLaceup
     head: CMHeadCap
     id: CMIDCardStaffOfficer
     ears: CMHeadsetLeader
@@ -58,6 +59,6 @@
     - sprite: Markers/jobs.rsi
       state: green
     - state: staff_officer
-      
+
 - type: playTimeTracker
   id: CMJobStaffOfficer

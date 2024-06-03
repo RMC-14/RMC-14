@@ -3,9 +3,9 @@ using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Server.Chemistry.ReactionEffects;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.Forensics;
-using Content.Server.HealthExaminable;
 using Content.Server.Popups;
 using Content.Shared._CM14.Medical.Stasis;
+using Content.Shared._CM14.Medical.Wounds;
 using Content.Shared.Alert;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -14,6 +14,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Drunk;
 using Content.Shared.FixedPoint;
+using Content.Shared.HealthExaminable;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
@@ -195,6 +196,11 @@ public sealed class BloodstreamSystem : EntitySystem
 
     private void OnDamageChanged(Entity<BloodstreamComponent> ent, ref DamageChangedEvent args)
     {
+        var ev = new CMBleedEvent(args);
+        RaiseLocalEvent(ent, ref ev);
+        if (ev.Handled)
+            return;
+
         if (args.DamageDelta is null || !args.DamageIncreased)
         {
             return;
@@ -398,11 +404,11 @@ public sealed class BloodstreamSystem : EntitySystem
         component.BleedAmount = Math.Clamp(component.BleedAmount, 0, component.MaxBleedAmount);
 
         if (component.BleedAmount == 0)
-            _alertsSystem.ClearAlert(uid, AlertType.Bleed);
+            _alertsSystem.ClearAlert(uid, component.BleedingAlert);
         else
         {
             var severity = (short) Math.Clamp(Math.Round(component.BleedAmount, MidpointRounding.ToZero), 0, 10);
-            _alertsSystem.ShowAlert(uid, AlertType.Bleed, severity);
+            _alertsSystem.ShowAlert(uid, component.BleedingAlert, severity);
         }
 
         return true;

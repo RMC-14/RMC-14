@@ -39,3 +39,4 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: XenoNest
+  - type: XenoFriendly

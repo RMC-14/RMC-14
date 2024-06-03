@@ -21,6 +21,9 @@ public sealed partial class XenoFortifyComponent : Component
     [DataField, AutoNetworkedField]
     public float ExplosionMultiplier = 0.4f;
 
+    [DataField, AutoNetworkedField]
+    public string ImmuneToStatus = "Stun";
+
     [DataField]
     public IPhysShape Shape = new PhysShapeCircle(0.49f);
 }

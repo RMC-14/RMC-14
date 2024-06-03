@@ -1,10 +1,7 @@
-﻿using System.Numerics;
-using Content.Client._CM14.Xenos.UI;
-using Content.Shared._CM14.Xenos;
+﻿using Content.Client._CM14.Xenos.UI;
 using Content.Shared._CM14.Xenos.Construction;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._CM14.Xenos.Construction;
@@ -43,7 +40,7 @@ public sealed class XenoOrderConstructionBui : BoundUserInterface
 
                 control.Button.OnPressed += _ =>
                 {
-                    SendMessage(new XenoOrderConstructionBuiMessage(structureId));
+                    SendMessage(new XenoOrderConstructionBuiMsg(structureId));
                     Close();
                 };
 

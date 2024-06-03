@@ -18,6 +18,7 @@
     canInteract: true
   - type: GhostHearing
   - type: Hands
+  - type: ComplexInteraction
   - type: Puller
   - type: CombatMode
   - type: Physics
@@ -73,6 +74,7 @@
   - type: CargoOrderConsole
   - type: CrewMonitoringConsole
   - type: GeneralStationRecordConsole
+    canDeleteEntries: true
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: CrewMonitor
@@ -92,7 +94,9 @@
   - type: InventorySlots
   - type: Loadout
     prototypes: [ MobAghostGear ]
+  - type: BypassInteractionChecks
   - type: ParalyzeOnPullAttemptImmune
+  - type: BypassSkillChecks
 
 - type: entity
   id: ActionAGhostShowSolar

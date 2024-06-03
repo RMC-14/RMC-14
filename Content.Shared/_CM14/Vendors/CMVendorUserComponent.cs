@@ -1,4 +1,5 @@
 ﻿using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._CM14.Vendors;
 
@@ -10,5 +11,11 @@ public sealed partial class CMVendorUserComponent : Component
     public Dictionary<string, int> Choices = new();
 
     [DataField, AutoNetworkedField]
+    public HashSet<(string Category, EntProtoId Ent)> TakeAll = new();
+
+    [DataField, AutoNetworkedField]
     public int Points;
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<string, int>? ExtraPoints;
 }

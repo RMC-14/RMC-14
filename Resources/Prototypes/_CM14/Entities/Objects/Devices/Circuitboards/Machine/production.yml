@@ -69,3 +69,63 @@
 #        Silicon: 20
 #    - type: StaticPrice
 #      price: 40
+
+- type: entity
+  parent: CMBaseMachineCircuitboard
+  id: CMCircuitboardDispenserChem
+  name: chem dispenser machine board
+  description: A machine printed circuit board for a chemical dispenser.
+  components:
+  - type: Sprite
+    state: blank_mod
+  - type: MachineBoard
+    prototype: CMDispenserChemEmpty
+    # TODO CM14 material requirements
+
+- type: entity
+  parent: CMBaseMachineCircuitboard
+  id: CMCircuitboardDispenserBooze
+  name: booze dispenser machine board
+  description: A machine printed circuit board for a booze dispenser.
+  components:
+  - type: Sprite
+    state: blank_mod
+  - type: MachineBoard
+    prototype: CMDispenserBoozeEmpty
+    # TODO CM14 material requirements
+
+- type: entity
+  parent: CMBaseMachineCircuitboard
+  id: CMCircuitboardDispenserSoda
+  name: soda dispenser machine board
+  description: A machine printed circuit board for a soda dispenser.
+  components:
+  - type: Sprite
+    state: blank_mod
+  - type: MachineBoard
+    prototype: CMDispenserSodaEmpty
+    # TODO CM14 material requirements
+
+- type: entity
+  parent: CMBaseMachineCircuitboard
+  id: CMCircuitboardChemMaster
+  name: chem master machine board
+  description: A machine printed circuit board for a chem master.
+  components:
+  - type: Sprite
+    state: blank_mod
+  - type: MachineBoard
+    prototype: CMChemMaster
+    # TODO CM14 material requirements
+
+- type: entity
+  parent: CMBaseMachineCircuitboard
+  id: CMCircuitboardMicrowave
+  name: microwave machine board
+  description: A machine printed circuit board for a microwave.
+  components:
+  - type: Sprite
+    state: blank_mod
+  - type: MachineBoard
+    prototype: CMMicrowave
+    # TODO CM14 material requirements

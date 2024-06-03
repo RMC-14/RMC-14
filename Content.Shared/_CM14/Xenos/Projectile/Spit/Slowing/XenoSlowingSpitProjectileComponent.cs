@@ -3,7 +3,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._CM14.Xenos.Projectile.Spit.Slowing;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(XenoSpitSystem))]
+[Access(typeof(XenoSpitSystem), typeof(XenoProjectileSystem))]
 public sealed partial class XenoSlowingSpitProjectileComponent : Component
 {
     [DataField, AutoNetworkedField]

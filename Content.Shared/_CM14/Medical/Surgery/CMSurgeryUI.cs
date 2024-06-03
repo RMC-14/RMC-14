@@ -16,7 +16,7 @@ public sealed class CMSurgeryBuiState(Dictionary<NetEntity, List<EntProtoId>> ch
 }
 
 [Serializable, NetSerializable]
-public sealed class CMSurgeryStepChosenBuiMessage(NetEntity part, EntProtoId surgery, EntProtoId step) : BoundUserInterfaceMessage
+public sealed class CMSurgeryStepChosenBuiMsg(NetEntity part, EntProtoId surgery, EntProtoId step) : BoundUserInterfaceMessage
 {
     public readonly NetEntity Part = part;
     public readonly EntProtoId Surgery = surgery;

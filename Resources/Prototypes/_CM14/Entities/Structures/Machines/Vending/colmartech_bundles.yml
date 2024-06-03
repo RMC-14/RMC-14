@@ -1,0 +1,15 @@
+﻿- type: entity
+  id: CMVendorBundleRiflemanApparel
+  name: standard marine apparel
+  categories:
+  - hideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Uniforms/Marine/formal.rsi
+    state: icon
+  - type: CMVendorBundle
+    bundle:
+    - ArmorHelmetM10
+    - CMVendorHeadsetSquad
+    - CMHandsBlackMarine
+    - CMBootsBlackFilled

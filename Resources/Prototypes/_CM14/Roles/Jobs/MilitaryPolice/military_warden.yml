@@ -5,15 +5,14 @@
   description: cm-job-description-militarywarden
   playTimeTracker: CMJobMilitaryWarden
   requirements:
-    - !type:DepartmentTimeRequirement
-      department: CMMilitaryPolice
-      time: 18000 # 5 hours
+  - !type:DepartmentTimeRequirement
+    department: CMMilitaryPolice
+    time: 36000 # 10 hours
   weight: 5
   startingGear: CMGearMilitaryWarden
   icon: "CMJobIconMilitaryWarden"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-cmp
-  canBeAntag: false
   accessGroups:
   - CMWarden
   special:
@@ -24,6 +23,7 @@
       cqc: 2
       endurance: 2
       engineer: 2
+      firearms: 1
       fireman: 1
       leadership: 1
       medical: 1
@@ -38,12 +38,14 @@
     back: CMSatchelSecurity
     shoes: CMBootsBlackFilled
     head: CMHeadCapWarden
-    eyes: ClothingEyesGlassesSecurity # todo cm14 replace with cm ones
-    gloves: CMHandsBlack
+    eyes: CMGlassesSecurity
+    gloves: CMHandsBlackMarine
     id: CMIDCardMilitaryWarden
     outerClothing: CMArmorM3Warden
     ears: CMHeadsetCMP
     belt: CMBeltSecurityFilled
+    #    pocket1: TODO CM14 tape recorder
+    pocket2: CMPouchGeneralLarge
 
 - type: entity
   parent: CMSpawnPointJobBase

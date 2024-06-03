@@ -20,6 +20,7 @@
       500: Critical
       600: Dead
   - type: Xeno
+    role: CMXenoWarrior
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
@@ -29,18 +30,20 @@
     #    - ActionXenoPunch
     #    - ActionXenoLunge
     #    - ActionXenoFling
-    - ActionXenoEvolve540
     tier: 2
+    hudOffset: 0,0.25
+    unlockAt: 540 # 9 minutes
   - type: XenoDevour
   - type: XenoPlasma
     plasma: 0
     maxPlasma: 0
     plasmaRegenOnWeeds: 0
   - type: XenoEvolution
-    evolvesTo:
-    - CMXenoCrusher
-    - CMXenoPraetorian
-  - type: XenoArmor
+    max: 540
+#    evolvesTo:
+#    - CMXenoCrusher
+#    - CMXenoPraetorian
+  - type: CMArmor
     armor: 20
     explosionArmor: 40
   - type: MeleeWeapon

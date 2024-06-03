@@ -26,7 +26,6 @@ public sealed class XenoPlasmaSystem : EntitySystem
 
         SubscribeLocalEvent<XenoPlasmaComponent, MapInitEvent>(OnXenoPlasmaMapInit);
         SubscribeLocalEvent<XenoPlasmaComponent, ComponentRemove>(OnXenoPlasmaRemove);
-        SubscribeLocalEvent<XenoPlasmaComponent, XenoRegenEvent>(OnXenoRegen);
         SubscribeLocalEvent<XenoPlasmaComponent, RejuvenateEvent>(OnXenoRejuvenate);
         SubscribeLocalEvent<XenoPlasmaComponent, XenoTransferPlasmaActionEvent>(OnXenoTransferPlasmaAction);
         SubscribeLocalEvent<XenoPlasmaComponent, XenoTransferPlasmaDoAfterEvent>(OnXenoTransferDoAfter);
@@ -40,12 +39,7 @@ public sealed class XenoPlasmaSystem : EntitySystem
 
     private void OnXenoPlasmaRemove(Entity<XenoPlasmaComponent> ent, ref ComponentRemove args)
     {
-        _alerts.ClearAlertCategory(ent, AlertCategory.XenoPlasma);
-    }
-
-    private void OnXenoRegen(Entity<XenoPlasmaComponent> xeno, ref XenoRegenEvent args)
-    {
-        RegenPlasma((xeno, xeno), xeno.Comp.PlasmaRegenOnWeeds);
+        _alerts.ClearAlert(ent, ent.Comp.Alert);
     }
 
     private void OnXenoRejuvenate(Entity<XenoPlasmaComponent> xeno, ref RejuvenateEvent args)
@@ -103,7 +97,8 @@ public sealed class XenoPlasmaSystem : EntitySystem
     {
         if (TryComp(args.OldXeno, out XenoPlasmaComponent? oldXeno))
         {
-            var newPlasma = FixedPoint2.Min(oldXeno.Plasma, newXeno.Comp.MaxPlasma);
+            var newMax = newXeno.Comp.MaxPlasma;
+            var newPlasma = FixedPoint2.Min(oldXeno.Plasma / oldXeno.MaxPlasma * newMax, newMax);
             SetPlasma(newXeno, newPlasma);
         }
     }
@@ -111,9 +106,9 @@ public sealed class XenoPlasmaSystem : EntitySystem
     private void UpdateAlert(Entity<XenoPlasmaComponent> xeno)
     {
         var level = MathF.Max(0f, xeno.Comp.Plasma.Float());
-        var max = _alerts.GetMaxSeverity(AlertType.XenoPlasma);
+        var max = _alerts.GetMaxSeverity(xeno.Comp.Alert);
         var severity = max - ContentHelpers.RoundToLevels(level, xeno.Comp.MaxPlasma, max + 1);
-        _alerts.ShowAlert(xeno, AlertType.XenoPlasma, (short) severity);
+        _alerts.ShowAlert(xeno, xeno.Comp.Alert, (short) severity);
     }
 
     public bool HasPlasma(Entity<XenoPlasmaComponent> xeno, FixedPoint2 plasma)
@@ -151,7 +146,7 @@ public sealed class XenoPlasmaSystem : EntitySystem
         if (old == xeno.Comp.Plasma)
             return;
 
-        Dirty(xeno, xeno.Comp);
+        Dirty(xeno);
         UpdateAlert((xeno, xeno.Comp));
     }
 

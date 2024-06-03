@@ -3,10 +3,8 @@
   id: CMPouchBayonetFill
   suffix: Filled
   components:
-  - type: StorageFill
-    contents:
-    - id: CMM11Knife
-      amount: 5
+  - type: CMItemSlots
+    startingItem: CMM11Knife
 
 - type: entity
   parent: CMPouchSurvival
@@ -51,7 +49,7 @@
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
     #- id: CMTramadolAutoInjector
-    - id: CMEmergencyInjector
+    - id: CMEmergencyAutoInjector
 
 - type: entity
   parent: CMPouchFirstAid
@@ -60,9 +58,9 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMTricordrazineInjector
-    - id: CMTraumaKit
-    - id: CMBurnKit
+    - id: CMTricordrazineAutoInjector
+    - id: CMTraumaKit10
+    - id: CMBurnKit10
     # splint
 
 - type: entity
@@ -88,11 +86,11 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMTraumaKit # todo cm14 tramadol
+    - id: CMTraumaKit10 # todo cm14 tramadol
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
     #- id: CMTramadolAutoInjector
-    - id: CMEmergencyInjector
+    - id: CMEmergencyAutoInjector
 
 - type: entity
   parent: CMPouchMedical
@@ -103,8 +101,8 @@
     contents:
     - id: CMHealthAnalyzer
       # splint
-    - id: CMBurnKit
-    - id: CMTraumaKit
+    - id: CMBurnKit10
+    - id: CMTraumaKit10
 
 - type: entity
   parent: CMPouchMedical
@@ -127,13 +125,13 @@
     contents:
     - id: CMHealthAnalyzer
       # splint
-    - id: CMTraumaKit
-    - id: CMBurnKit
+    - id: CMTraumaKit10
+    - id: CMBurnKit10
     - id: CMKelotaneAutoInjector
     - id: CMBicaridineAutoInjector
     #- id: CMOxycodoneAutoInjector
-    - id: CMEmergencyInjector
-    - id: CMEmergencyInjector
+    - id: CMEmergencyAutoInjector
+    - id: CMEmergencyAutoInjector
 
 - type: entity
   parent: CMPouchMedicalSocDutch
@@ -144,14 +142,14 @@
     contents:
     - id: CMHealthAnalyzer
       # splint x2
-    - id: CMTraumaKit
+    - id: CMTraumaKit10
       amount: 2
-    - id: CMBurnKit
+    - id: CMBurnKit10
       amount: 2
     # todo cm14 autoinjectors oxycodone x2
 #    - id: CMOxycodoneAutoInjector
 #      amount: 2
-    - id: CMEmergencyInjector
+    - id: CMEmergencyAutoInjector
       amount: 1
 
 - type: entity
@@ -197,7 +195,7 @@
       amount: 2
 #    - id: CMTramadolAutoInjector
 #      amount: 2
-    - id: CMEmergencyInjector
+    - id: CMEmergencyAutoInjector
       amount: 1
 
 - type: entity
@@ -217,21 +215,19 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMTraumaKit
-    - id: CMBurnKit
+    - id: CMTraumaKit10
+    - id: CMBurnKit10
     # splint
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
 
 - type: entity
   parent: CMPouchFlare
-  id: CMPouchFlareFill
+  id: CMPouchFlareFilled
   suffix: Filled
   components:
-  - type: StorageFill
-    contents:
-    - id: CMMarkerFlare
-      amount: 8
+  - type: CMItemSlots
+    startingItem: CMFlare
 
 - type: entity
   parent: CMPouchTools
@@ -261,7 +257,7 @@
 
 - type: entity
   parent: CMPouchMachete
-  id: CMPouchMacheteFill
+  id: CMPouchMacheteFilled
   suffix: Filled
   components:
   - type: ContainerFill

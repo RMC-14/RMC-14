@@ -4,6 +4,7 @@ using Content.Server.Discord;
 using Content.Server.GameTicking.Events;
 using Content.Server.Ghost;
 using Content.Server.Maps;
+using Content.Shared._CM14.Prototypes;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
@@ -173,6 +174,26 @@ namespace Content.Server.GameTicking
             return gridUids;
         }
 
+        public int ReadyPlayerCount()
+        {
+            var total = 0;
+            foreach (var (userId, status) in _playerGameStatuses)
+            {
+                if (LobbyEnabled && status == PlayerGameStatus.NotReadyToPlay)
+                    continue;
+
+                if (!_playerManager.TryGetSessionById(userId, out _))
+                    continue;
+
+                if (_banManager.GetRoleBans(userId) == null)
+                    continue;
+
+                total++;
+            }
+
+            return total;
+        }
+
         public void StartRound(bool force = false)
         {
 #if EXCEPTION_TOLERANCE
@@ -227,6 +248,8 @@ namespace Content.Server.GameTicking
                 }
                 readyPlayerProfiles.Add(userId, profile);
             }
+
+            DebugTools.AssertEqual(readyPlayers.Count, ReadyPlayerCount());
 
             // Just in case it hasn't been loaded previously we'll try loading it.
             LoadMaps();
@@ -602,7 +625,7 @@ namespace Content.Server.GameTicking
         {
             if (CurrentPreset == null) return;
 
-            var options = _prototypeManager.EnumeratePrototypes<RoundAnnouncementPrototype>().ToList();
+            var options = _prototypeManager.EnumerateCM<RoundAnnouncementPrototype>().ToList();
 
             if (options.Count == 0)
                 return;
@@ -773,7 +796,7 @@ namespace Content.Server.GameTicking
     }
 
     /// <summary>
-    ///     Event raised after players were assigned jobs by the GameTicker.
+    ///     Event raised after players were assigned jobs by the GameTicker and have been spawned in.
     ///     You can give on-station people special roles by listening to this event.
     /// </summary>
     public sealed class RulePlayerJobsAssignedEvent

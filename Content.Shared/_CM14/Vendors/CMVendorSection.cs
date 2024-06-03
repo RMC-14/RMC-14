@@ -13,6 +13,9 @@ public sealed partial class CMVendorSection
     [DataField]
     public (string Id, int Amount)? Choices;
 
+    [DataField]
+    public string? TakeAll;
+
     [DataField(required: true)]
     public List<CMVendorEntry> Entries = new();
 }
@@ -23,6 +26,9 @@ public sealed partial class CMVendorEntry
 {
     [DataField(required: true)]
     public EntProtoId Id;
+
+    [DataField]
+    public string? Name;
 
     [DataField]
     public int? Amount;

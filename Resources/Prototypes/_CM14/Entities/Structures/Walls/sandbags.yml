@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent: CMBarricadeBase
   id: CMBarricadeSandbag
-  name: Sandbag Barricade
+  name: sandbag barricade
   description: A makeshift barricade made out of the sand from the ground. Tough to beat but easy to pierce.
   components:
   - type: Climbable
@@ -40,13 +40,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 150
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
+        damage: 450
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -88,6 +82,15 @@
   - type: Stack
     stackType: CMSandbagEmpty
     count: 50
+
+- type: entity
+  parent: CMSandbagEmpty
+  id: CMSandbagEmpty25
+  suffix: "25"
+  components:
+  - type: Stack
+    stackType: CMSandbagEmpty
+    count: 25
 
 - type: entity
   parent: BaseItem

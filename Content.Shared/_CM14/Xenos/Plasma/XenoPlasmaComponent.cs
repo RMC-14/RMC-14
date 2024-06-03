@@ -1,6 +1,8 @@
-﻿using Content.Shared.FixedPoint;
+﻿using Content.Shared.Alert;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._CM14.Xenos.Plasma;
 
@@ -22,4 +24,10 @@ public sealed partial class XenoPlasmaComponent : Component
 
     [DataField(required: true), AutoNetworkedField]
     public FixedPoint2 PlasmaRegenOnWeeds;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 PlasmaRegenOffWeeds = 0.05;
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<AlertPrototype> Alert = "XenoPlasma";
 }

@@ -1,4 +1,5 @@
-﻿using Content.Server.Body.Systems;
+﻿using Content.Server._CM14.Medical.Wounds;
+using Content.Server.Body.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Popups;
 using Content.Shared._CM14.Marines.Skills;
@@ -6,6 +7,7 @@ using Content.Shared._CM14.Medical.Surgery;
 using Content.Shared._CM14.Medical.Surgery.Conditions;
 using Content.Shared._CM14.Medical.Surgery.Effects.Step;
 using Content.Shared._CM14.Medical.Surgery.Tools;
+using Content.Shared._CM14.Medical.Wounds;
 using Content.Shared.Interaction;
 using Content.Shared.Prototypes;
 using Robust.Server.GameObjects;
@@ -16,12 +18,13 @@ namespace Content.Server._CM14.Medical.Surgery;
 
 public sealed class CMSurgerySystem : SharedCMSurgerySystem
 {
-    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly WoundsSystem _wounds = default!;
 
     private readonly List<EntProtoId> _surgeries = new();
 
@@ -30,7 +33,9 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
         base.Initialize();
 
         SubscribeLocalEvent<CMSurgeryToolComponent, AfterInteractEvent>(OnToolAfterInteract);
+
         SubscribeLocalEvent<CMSurgeryStepBleedEffectComponent, CMSurgeryStepEvent>(OnStepBleedComplete);
+        SubscribeLocalEvent<CMSurgeryClampBleedEffectComponent, CMSurgeryStepEvent>(OnStepClampBleedComplete);
         SubscribeLocalEvent<CMSurgeryStepEmoteEffectComponent, CMSurgeryStepEvent>(OnStepScreamComplete);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
@@ -74,8 +79,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
             return;
         }
 
-        if (!TryComp(user, out SkillsComponent? skills) ||
-            skills.Surgery < 1)
+        if (!_skills.HasSkills(user, new Skills { Surgery = 1 }))
         {
             _popup.PopupEntity("You don't know how to perform surgery!", user, user);
             return;
@@ -95,7 +99,12 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
 
     private void OnStepBleedComplete(Entity<CMSurgeryStepBleedEffectComponent> ent, ref CMSurgeryStepEvent args)
     {
-        _bloodstream.TryModifyBleedAmount(args.Body, ent.Comp.Amount);
+        _wounds.AddWound(args.Body, ent.Comp.Damage, WoundType.Surgery, TimeSpan.MaxValue);
+    }
+
+    private void OnStepClampBleedComplete(Entity<CMSurgeryClampBleedEffectComponent> ent, ref CMSurgeryStepEvent args)
+    {
+        _wounds.RemoveWounds(ent.Owner, WoundType.Surgery);
     }
 
     private void OnStepScreamComplete(Entity<CMSurgeryStepEmoteEffectComponent> ent, ref CMSurgeryStepEvent args)

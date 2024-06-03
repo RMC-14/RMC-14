@@ -8,6 +8,7 @@ using Content.Server.Emp;
 using Content.Server.Ghost;
 using Content.Server.Light.Components;
 using Content.Server.Power.Components;
+using Content.Shared._CM14.Light;
 using Content.Shared.Audio;
 using Content.Shared.Damage;
 using Content.Shared.Database;
@@ -20,10 +21,10 @@ using Content.Shared.Light.Components;
 using Content.Shared.Popups;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Robust.Shared.Audio.Systems;
 
 namespace Content.Server.Light.EntitySystems
 {
@@ -122,6 +123,11 @@ namespace Content.Server.Light.EntitySystems
                 var burnedHand = light.CurrentLit && res < lightBulb.BurningTemperature;
                 if (burnedHand)
                 {
+                    var ev = new LightBurnHandAttemptEvent(userUid, uid);
+                    RaiseLocalEvent(userUid, ref ev, true);
+                    if (ev.Cancelled)
+                        return;
+
                     var damage = _damageableSystem.TryChangeDamage(userUid, light.Damage, origin: userUid);
 
                     // If damage is null then the entity could not take heat damage so they did not get burned.

@@ -26,6 +26,7 @@
     damage: {}
   - type: TimedDespawn
     lifetime: 0.3
+  - type: XenoProjectile
 
 - type: entity
   id: XenoSlowingSpitProjectile
@@ -41,6 +42,8 @@
       shader: unshaded
   - type: XenoSlowingSpitProjectile
     armorResistsKnockdown: true
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: true
 
 - type: entity
   id: XenoScatteredSpitProjectile
@@ -58,6 +61,8 @@
     slow: 0
     paralyze: 1
     armorResistsKnockdown: false
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: true
 
 - type: entity
   id: XenoBoneChipsProjectile
@@ -67,7 +72,7 @@
   - hideSpawnMenu
   components:
   - type: Sprite
-    sprite: _CM14/Objects/shards.rsi
+    sprite: _CM14/Objects/Materials/shards.rsi
     layers:
     - state: bonechips
       shader: unshaded
@@ -81,3 +86,5 @@
     damage:
       types:
         Slash: 10
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: false

@@ -1,0 +1,23 @@
+﻿- type: entity
+  parent: KitchenMicrowave
+  id: CMMicrowave
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/microwave.rsi
+    drawdepth: SmallObjects
+    snapCardinals: true
+    layers:
+    - state: mw0
+      map: ["enum.MicrowaveVisualizerLayers.Base"]
+    - state: mw_unlit
+      shader: unshaded
+      map: ["enum.MicrowaveVisualizerLayers.BaseUnlit"]
+    - state: mwbloody0
+      map: ["bloody"]
+      visible: false
+    - state: mwbloody1
+      shader: unshaded
+      map: ["bloodyunshaded"]
+      visible: false
+  - type: Machine
+    board: CMCircuitboardMicrowave

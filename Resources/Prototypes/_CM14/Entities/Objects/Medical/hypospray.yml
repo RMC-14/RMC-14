@@ -20,6 +20,13 @@
     size: Small
     sprite: _CM14/Objects/Medical/hypospray.rsi
   - type: Hypospray
+    transferAmount: 5
     injectSound: /Audio/_CM14/Medical/hypospray.ogg
   - type: Appearance
+  - type: SolutionContainerManager
+    solutions:
+      hypospray:
+        maxVol: 30
+  - type: UseDelay
+    delay: 0.333
 

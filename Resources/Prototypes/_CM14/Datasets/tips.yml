@@ -47,7 +47,7 @@
   - "CIC staff can track every USCM-aligned person via the suit sensors console and overwatch console - useful for finding escaped prisoners or dead marines."
   - "Remember that you need to put a defibrillator's paddles away in order to store it."
   - "W-Y PMCs do not have marine IFF. Don't fire Smartguns at them!"
-  - "To talk on multiple radio channels at once, put a COMMA [,] before your message and add up to four prefixes. E.g, ,abcd talks on the main four squad channels at once."
+  - "To talk on multiple radio channels at once, put a COMMA \\[,\\] before your message and add up to four prefixes. E.g, ,abcd talks on the main four squad channels at once."
   - "Put .w or :w before your message to whisper. Another way to whisper is to use the verb 'whisper' in the IC tab or command bar."
   - "Minirockets pack the most punch per cost as far as CAS weaponry is concerned."
   - "The U7 underbarrel shotgun can instantly break down both resin doors and mechanical airlocks, and it's not bad at breaking walls down either."
@@ -104,11 +104,11 @@
   - "As an alien or marine, be careful of the flank, regardless of if the push is going well or stalling out."
   - "Half of getting good is knowing to be aggressive. The other half is knowing when not to be aggressive."
   - "Use 'North, South, West, East' when referring to locations in-game rather than 'up, down, left, right'."
-  - "As a mentor, you can become the imaginary friend of a new player to teach them!"
+#  - "As a mentor, you can become the imaginary friend of a new player to teach them!"
   - "You shouldn't ignore what your allies are up to. Sometimes they can be organizing a flank in hivemind/radio, sometimes they can be walking up behind you with a slug-loaded shotgun. Either way, it pays to be alert to what they're doing, as much to as what the enemies are."
   - "You can always AdminHelp with the F1 key to question a member of staff regarding rules or game bugs."
-  - "As ghost you are given extra tools for spectating the round. You can jump and follow specific players, get notifications about CAS and OB strikes, can see all health bars, and such."
-  - "You can press ESC key to bring up the game pause menu. It allows you change settings, AdminHelp, and even access the Web Maps of game by clicking at top right." # TODO CM14 AdminHelp and MentorHelp
+#  - "As ghost you are given extra tools for spectating the round. You can jump and follow specific players, get notifications about CAS and OB strikes, can see all health bars, and such."
+#  - "You can press ESC key to bring up the game pause menu. It allows you change settings, AdminHelp, and even access the Web Maps of game by clicking at top right." # TODO CM14 AdminHelp and MentorHelp
   - "Control of intelligence is important be it for retrieving it as marine, or denying it as Xeno."
   - "If the lobby music is too loud or bothering you, you can disable it in Options > Audio in the Escape menu."
   - "You can go to GitHub to view code of the game and propose modifications of your own."
@@ -151,7 +151,6 @@
   - "Colonial Marines 14 is open source! If there's a change you want to make, or a simple item you want to add, then try contributing to the game. It's not as hard as you'd think it is."
   - "Some weapons, such as knives & shivs, have a fast attack speed."
   - "Welding without proper eye protection can cause eye damage, which must be cured with oculine."
-  - "By right clicking on a player, and then clicking the heart icon, you can quickly examine them to check for injuries or how badly they're bleeding. You can also do this to yourself."
 
 # Todo Tips. Tips that once the feature is added we should add back into the pool!
   #- A ‘point blank’ or ‘PB’ is a type of attack with a firearm where you click directly on a mob next to you. These attacks are not effected by accuracy allowing you to quickly fire with weapons like a shotgun to great effect.
@@ -186,7 +185,7 @@
   #- Never inject a marine you haven't scanned! You might overdose them; ESPECIALLY so with an emergency autoinjector.
   #- If another marine is stunned, you can click on them with help intent with an open hand to shake them up faster.
   #- Never place barricades facing each other - Not only does this block bullets, both barricades are damaged at once if one is slashed!
-  #- Examine your gun and click [See combat statistics] to view information such as damage for your weapon.
+  #- Examine your gun and click \\[See combat statistics\\] to view information such as damage for your weapon.
   #- Xenomorphs who run while on fire are stunned for some time and emit light. Use that time to catch up and finish them off!
   #- When you have shrapnel embedded, take out your boot knife and use it in your hand to rip them out of your body.
   #- If your weapon has a bayonet, you can manually pry open unpowered doors by clicking on them with the gun. Click on the door again to close it. UPP bayonets can pry them open quicker.

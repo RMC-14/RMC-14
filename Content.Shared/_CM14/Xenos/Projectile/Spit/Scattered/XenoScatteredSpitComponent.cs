@@ -19,7 +19,7 @@ public sealed partial class XenoScatteredSpitComponent : Component
     public EntProtoId ProjectileId = "XenoScatteredSpitProjectile";
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier Sound = new SoundCollectionSpecifier("XenoSpitAcid");
+    public SoundSpecifier Sound = new SoundCollectionSpecifier("XenoSpitAcid", AudioParams.Default.WithVolume(-10f));
 
     [DataField, AutoNetworkedField]
     public int MaxProjectiles = 5;

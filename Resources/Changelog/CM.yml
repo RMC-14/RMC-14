@@ -695,5 +695,279 @@
   id: 90
   time: '2024-04-28T12:21:07.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2041
+- author: DangerRevolution
+  changes:
+  - message: Added JTAC Radio Key
+    type: Add
+  - message: Add Weyland-Yutani radio key
+    type: Add
+  id: 91
+  time: '2024-04-30T06:37:23.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2043
+- author: DrSmugleaf
+  changes:
+  - message: Add xeno hivemind chat.
+    type: Add
+  id: 92
+  time: '2024-05-01T03:23:07.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2049
+- author: DrSmugleaf
+  changes:
+  - message: The hugger now rips off the victim's mask on hug.
+    type: Fix
+  id: 93
+  time: '2024-05-02T05:25:17.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2050
+- author: DrSmugleaf
+  changes:
+  - message: Replaced the pilot officer with the dropship and gunship pilots.
+    type: Add
+  id: 94
+  time: '2024-05-03T01:08:07.363042+00:00'
+  url: null
+- author: DrSmugleaf
+  changes:
+  - message: The xeno Queen is now able to hijack the dropship.
+    type: Add
+  id: 95
+  time: '2024-05-03T08:02:39.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2058
+- author: DrSmugleaf
+  changes:
+  - message: Added xeno hud to see the health and plasma of all xenos on screen.
+    type: Add
+  id: 96
+  time: '2024-05-05T00:05:44.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2060
+- author: Whisper
+  changes:
+  - message: Vending machines require respective access.
+    type: Add
+  id: 97
+  time: '2024-05-07T01:39:40.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2069
+- author: DrSmugleaf
+  changes:
+  - message: Added breathing, footstep and dying sounds to the xeno Queen.
+    type: Add
+  id: 98
+  time: '2024-05-08T12:17:58.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2082
+- author: DrSmugleaf
+  changes:
+  - message: The hf2 health analyzer now automatically updates every second.
+    type: Tweak
+  - message: Added a delay to using the hf2 health analyzer for medically unskilled
+      marines.
+    type: Tweak
+  id: 99
+  time: '2024-05-08T12:30:29.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2083
+- author: DrSmugleaf
+  changes:
+  - message: Xenos are now unable to hit each other, their eggs, weeds, nests and
+      dead things.
+    type: Tweak
+  id: 100
+  time: '2024-05-09T10:02:43.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2087
+- author: DrSmugleaf
+  changes:
+  - message: Grown xeno eggs will now automatically try to hug any marines that come
+      within melee range of them.
+    type: Add
+  id: 101
+  time: '2024-05-09T09:59:50.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2086
+- author: DrSmugleaf
+  changes:
+  - message: Added the autolathe with cm specific recipes.
+    type: Add
+  id: 102
+  time: '2024-05-09T10:48:54.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2085
+- author: DrSmugleaf
+  changes:
+  - message: Bullets no longer hit mobs that are in crit, unless they are directly
+      clicked on while shooting.
+    type: Tweak
+  id: 103
+  time: '2024-05-11T05:42:07.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2094
+- author: DrSmugleaf
+  changes:
+  - message: Xeno Drones can now evolve to Queen.
+    type: Add
+  id: 104
+  time: '2024-05-11T05:43:38.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2096
+- author: DangerRevolution
+  changes:
+  - message: Added the Coif
+    type: Add
+  id: 105
+  time: '2024-05-11T05:49:28.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2046
+- author: Whisper
+  changes:
+  - message: Added the coif mask to vendors
+    type: Add
+  id: 106
+  time: '2024-05-11T07:51:28.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2097
+- author: Whisper
+  changes:
+  - message: Added insuls to vendors
+    type: Add
+  id: 107
+  time: '2024-05-11T07:53:19.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2100
+- author: Whisper
+  changes:
+  - message: Added sterile mask to vendor
+    type: Add
+  id: 108
+  time: '2024-05-11T07:52:49.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2098
+- author: Whisper
+  changes:
+  - message: Added gas mask to vendors
+    type: Add
+  id: 109
+  time: '2024-05-11T08:01:08.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2102
+- author: DrSmugleaf
+  changes:
+  - message: Huggers and lesser drones now slowly die without weeds.
+    type: Add
+  id: 110
+  time: '2024-05-11T08:06:45.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2099
+- author: Whisper
+  changes:
+  - message: Added whistle
+    type: Add
+  id: 111
+  time: '2024-05-11T08:35:55.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2103
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xeno actions sometimes starting out of order.
+    type: Fix
+  id: 112
+  time: '2024-05-12T10:15:48.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2106
+- author: DrSmugleaf
+  changes:
+  - message: The M92 grenade launcher's grenades now land exactly where the user clicks
+      and have a short delay before exploding.
+    type: Tweak
+  id: 113
+  time: '2024-05-13T20:58:27.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2133
+- author: Tunguso4ka
+  changes:
+  - message: Ported chem, booze, soda dispensers and chem master.
+    type: Add
+  id: 114
+  time: '2024-05-14T23:38:59.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2142
+- author: DrSmugleaf
+  changes:
+  - message: Marines can now cut their way out of a xeno while devoured.
+    type: Add
+  id: 115
+  time: '2024-05-15T02:52:16.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2144
+- author: DrSmugleaf
+  changes:
+  - message: Full health bars are no longer shown on the medical HUD.
+    type: Tweak
+  id: 116
+  time: '2024-05-19T03:58:47.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2157
+- author: DrSmugleaf
+  changes:
+  - message: Added xeno death sounds and xeno pull knockdown sound.
+    type: Add
+  id: 117
+  time: '2024-05-20T02:18:15.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2160
+- author: DrSmugleaf
+  changes:
+  - message: Ported the effects of all existing medicines.
+    type: Add
+  - message: Added all times to the Wey-Med Plus except for painkillers, splints and
+      peridaxon.
+    type: Add
+  id: 118
+  time: '2024-05-22T00:40:24.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2163
+- author: DrSmugleaf
+  changes:
+  - message: Added all cm chemicals to the guidebook.
+    type: Add
+  id: 119
+  time: '2024-05-23T12:08:54.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2168
+- author: DrSmugleaf
+  changes:
+  - message: Added quick holster and unholster keys.
+    type: Add
+  id: 120
+  time: '2024-05-23T13:03:56.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2166
+- author: Tunguso4ka
+  changes:
+  - message: Ported stanbaton, flash and handcuffs from CM13
+    type: Add
+  id: 121
+  time: '2024-05-28T12:36:23.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2170
+- author: DrSmugleaf
+  changes:
+  - message: Added treatable wounds and passive healing when they are treated.
+    type: Add
+  - message: Implemented the trauma kit, burn kit, gauze, ointment, surgical line
+      and synthgraft.
+    type: Add
+  id: 122
+  time: '2024-05-31T22:37:48.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2174
+- author: DrSmugleaf
+  changes:
+  - message: Added xeno roles and playtime trackers.
+    type: Add
+  id: 123
+  time: '2024-06-01T05:07:56.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2182
+- author: Errant
+  changes:
+  - message: Walking on resin/weeds now speeds up xenos and slows down everyone else.
+    type: Add
+  id: 124
+  time: '2024-06-02T09:41:01.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2201
+- author: Whisper
+  changes:
+  - message: Added mre box
+    type: Add
+  id: 125
+  time: '2024-06-02T08:37:57.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2186
+- author: DrSmugleaf
+  changes:
+  - message: The hive core now slowly produces lesser drones.
+    type: Add
+  id: 126
+  time: '2024-06-02T11:05:36.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2199
+- author: Whisper
+  changes:
+  - message: Added portable fire extinguisher
+    type: Add
+  id: 127
+  time: '2024-06-03T11:14:35.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2219
 Name: CM
 Order: -1

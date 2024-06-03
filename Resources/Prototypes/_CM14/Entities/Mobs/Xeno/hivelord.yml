@@ -20,12 +20,13 @@
       550: Critical
       650: Dead
   - type: Xeno
+    role: CMXenoHivelord
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
-    - ActionXenoAcid
+    - ActionXenoAcidNormal
     - ActionXenoPheromones
     - ActionXenoOrderConstruction
     - ActionXenoPlantWeeds
@@ -34,6 +35,8 @@
     - ActionXenoTransferPlasma
     - ActionXenoResinWalker
     tier: 2
+    hudOffset: 0,0.35
+    unlockAt: 180 # 3 minutes
   - type: XenoAcid
   - type: XenoConstruction
     buildDelay: 1
@@ -49,8 +52,8 @@
   - type: XenoPlasma
     plasma: 1000
     maxPlasma: 1000
-    plasmaRegenOnWeeds: 55
-  - type: XenoArmor
+    plasmaRegenOnWeeds: 5.5
+  - type: CMArmor
     explosionArmor: 10
   - type: XenoResinWalker
   - type: MeleeWeapon
@@ -60,3 +63,16 @@
   - type: Tackle
     threshold: 3
     stun: 9
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.66
+    baseSprintSpeed: 3
+  - type: WhitelistPickup
+    any:
+    - type: XenoHugger
+    - type: XenoEgg
+  - type: MultiHandedHolder
+    items:
+    - hands: 2
+      whitelist:
+        components:
+        - XenoEgg

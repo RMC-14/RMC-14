@@ -1,3 +1,57 @@
+# General (for all 4+ teams)
+- type: entity
+  parent: CMAirlockPrep
+  id: CMAirlockPrepLocked
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessMarinePrep"]]
+
+- type: entity
+  parent: CMAirlockPrep
+  id: CMAirlockPrepSL
+  name: squad leader preparations
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessSquadLeaderPrep"]]
+
+- type: entity
+  parent: CMAirlockPrep
+  id: CMAirlockPrepSpec
+  name: squad specialist preparations
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessSpecPrep"]]
+
+- type: entity
+  parent: CMAirlockPrep
+  id: CMAirlockPrepEngineer
+  name: squad comtech preparations
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessCombatTechPrep"]]
+
+- type: entity
+  parent: CMAirlockPrep
+  id: CMAirlockPrepMedical
+  name: squad medical preparations
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessMedPrep"]]
+
+- type: entity
+  parent: CMAirlockPrep
+  id: CMAirlockPrepSmart
+  name: squad smartgunner preparations
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessSmartPrep"]]
+
 #Alpha
 - type: entity
   parent: CMAirlockPrepAlpha

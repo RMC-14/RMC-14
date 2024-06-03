@@ -1,4 +1,4 @@
-﻿using Content.Shared._CM14.Xenos.Armor;
+﻿using Content.Shared._CM14.Armor;
 using Content.Shared._CM14.Xenos.Crest;
 using Content.Shared._CM14.Xenos.Headbutt;
 using Content.Shared._CM14.Xenos.Rest;
@@ -30,7 +30,7 @@ public sealed class XenoFortifySystem : EntitySystem
         // TODO CM14 resist knockback from small explosives
         SubscribeLocalEvent<XenoFortifyComponent, XenoFortifyActionEvent>(OnXenoFortifyAction);
 
-        SubscribeLocalEvent<XenoFortifyComponent, XenoGetArmorEvent>(OnXenoFortifyGetArmor);
+        SubscribeLocalEvent<XenoFortifyComponent, CMGetArmorEvent>(OnXenoFortifyGetArmor);
         SubscribeLocalEvent<XenoFortifyComponent, BeforeStatusEffectAddedEvent>(OnXenoFortifyBeforeStatusAdded);
         SubscribeLocalEvent<XenoFortifyComponent, GetExplosionResistanceEvent>(OnXenoFortifyGetExplosionResistance);
 
@@ -42,8 +42,6 @@ public sealed class XenoFortifySystem : EntitySystem
         SubscribeLocalEvent<XenoFortifyComponent, XenoRestAttemptEvent>(OnXenoFortifyRestAttempt);
         SubscribeLocalEvent<XenoFortifyComponent, XenoTailSweepAttemptEvent>(OnXenoFortifyTailSweepAttempt);
         SubscribeLocalEvent<XenoFortifyComponent, XenoToggleCrestAttemptEvent>(OnXenoFortifyToggleCrestAttempt);
-
-        SubscribeLocalEvent<XenoFortifyActionComponent, XenoFortifyToggledEvent>(OnXenoFortifyActionToggled);
     }
 
     private void OnXenoFortifyAction(Entity<XenoFortifyComponent> xeno, ref XenoFortifyActionEvent args)
@@ -76,14 +74,14 @@ public sealed class XenoFortifySystem : EntitySystem
         _actionBlocker.UpdateCanMove(xeno);
         _appearance.SetData(xeno, XenoVisualLayers.Fortify, xeno.Comp.Fortified);
 
-        var ev = new XenoFortifyToggledEvent(xeno.Comp.Fortified);
-        foreach (var (id, _) in _actions.GetActions(xeno))
+        foreach (var (actionId, action) in _actions.GetActions(xeno))
         {
-            RaiseLocalEvent(id, ref ev);
+            if (action.BaseEvent is XenoFortifyActionEvent)
+                _actions.SetToggled(actionId, xeno.Comp.Fortified);
         }
     }
 
-    private void OnXenoFortifyGetArmor(Entity<XenoFortifyComponent> xeno, ref XenoGetArmorEvent args)
+    private void OnXenoFortifyGetArmor(Entity<XenoFortifyComponent> xeno, ref CMGetArmorEvent args)
     {
         if (xeno.Comp.Fortified)
         {
@@ -94,7 +92,7 @@ public sealed class XenoFortifySystem : EntitySystem
 
     private void OnXenoFortifyBeforeStatusAdded(Entity<XenoFortifyComponent> xeno, ref BeforeStatusEffectAddedEvent args)
     {
-        if (xeno.Comp.Fortified && args.Key == "Stun")
+        if (xeno.Comp.Fortified && args.Key == xeno.Comp.ImmuneToStatus)
             args.Cancelled = true;
     }
 
@@ -146,10 +144,5 @@ public sealed class XenoFortifySystem : EntitySystem
             _popup.PopupClient(Loc.GetString("cm-xeno-fortify-cant-toggle-crest"), xeno, xeno);
             args.Cancelled = true;
         }
-    }
-
-    private void OnXenoFortifyActionToggled(Entity<XenoFortifyActionComponent> xeno, ref XenoFortifyToggledEvent args)
-    {
-        _actions.SetToggled(xeno, args.Fortified);
     }
 }

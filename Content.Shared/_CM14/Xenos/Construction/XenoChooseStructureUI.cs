@@ -10,12 +10,7 @@ public enum XenoChooseStructureUI : byte
 }
 
 [Serializable, NetSerializable]
-public sealed class XenoChooseStructureBuiMessage : BoundUserInterfaceMessage
+public sealed class XenoChooseStructureBuiMsg(EntProtoId structureId) : BoundUserInterfaceMessage
 {
-    public readonly EntProtoId StructureId;
-
-    public XenoChooseStructureBuiMessage(EntProtoId structureId)
-    {
-        StructureId = structureId;
-    }
+    public readonly EntProtoId StructureId = structureId;
 }

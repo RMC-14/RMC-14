@@ -16,18 +16,20 @@
       0: Alive
       35: Dead # TODO CM14 gib on death
   - type: Xeno
+    role: CMXenoHugger
     actionIds:
     - ActionXenoRest
     - ActionXenoWatch
     - ActionXenoHide
     - ActionXenoLeap
     tier: 0
+    hudOffset: 0,0.4
+    contributesToVictory: false
+    countedInSlots: false
+    unlockAt: 0
   - type: XenoPlasma
     maxPlasma: 10
-    plasmaRegenOnWeeds: 1
-  - type: XenoEvolution
-    evolvesTo:
-    - CMXenoDrone
+    plasmaRegenOnWeeds: 0.1
   - type: XenoHide
   - type: Fixtures
     fixtures:
@@ -35,7 +37,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.2
-        density: 100
+        density: 185
         mask:
         - SmallMobMask
         layer:
@@ -47,4 +49,17 @@
   - type: Item
   - type: WhitelistPickupBy
     all:
-    - type: Xeno
+      components:
+      - Xeno
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.7
+    baseSprintSpeed: 5
+  - type: DamageOffWeeds
+    damage:
+      types:
+        Blunt: 0.5
+  - type: SoundOnDeath
+    sound:
+      path: /Audio/_CM14/Xeno/alien_facehugger_dies.ogg
+      params:
+        volume: -12

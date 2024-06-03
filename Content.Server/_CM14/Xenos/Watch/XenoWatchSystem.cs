@@ -13,6 +13,7 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
 
     protected override void OnXenoWatchAction(Entity<XenoComponent> ent, ref XenoWatchActionEvent args)
     {
+        args.Handled = true;
         _ui.OpenUi(ent.Owner, XenoWatchUIKey.Key, ent);
 
         var xenos = new List<Xeno>();

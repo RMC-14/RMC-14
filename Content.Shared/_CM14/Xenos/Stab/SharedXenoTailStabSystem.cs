@@ -55,7 +55,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         if (userCoords.MapId == MapId.Nullspace)
             return;
 
-        var targetCoords = args.Target.ToMap(EntityManager, _transform);
+        var targetCoords = _transform.ToMapCoordinates(args.Target);
         if (userCoords.MapId != targetCoords.MapId)
             return;
 
@@ -111,9 +111,10 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         var results = intersect.Select(r => r.HitEntity).ToHashSet();
 
         var actualResults = new List<EntityUid>();
+        var range = stab.Comp.TailRange.Float();
         foreach (var result in results)
         {
-            if (!_interaction.InRangeUnobstructed(stab, result, range: stab.Comp.TailRange.Float()))
+            if (!_interaction.InRangeUnobstructed(stab.Owner, result, range: range))
                 continue;
 
             actualResults.Add(result);

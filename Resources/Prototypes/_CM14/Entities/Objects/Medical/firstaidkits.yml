@@ -67,7 +67,7 @@
   - type: StorageFill
     contents:
     - id: CMHealthAnalyzer
-#    - id: CMFirstAidAutoInjector
+    - id: CMTricordrazineAutoInjectorNoSkill
 #    - id: CMPainStopAutoInjector
     - id: CMInaprovalineAutoInjector
     - id: CMGauze10
@@ -154,7 +154,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMTricordrazineInjector
+    - id: CMTricordrazineAutoInjector
     - id: CMTraumaKit10
       amount: 3
     - id: CMBurnKit10

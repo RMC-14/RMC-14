@@ -1,0 +1,19 @@
+﻿- type: guideEntry
+  abstract: true
+  id: CM
+  isCM: true
+
+- type: guideEntry
+  parent: CM
+  id: CM14
+  name: guide-entry-cm14
+  text: "/ServerInfo/Guidebook/_CM14/CM14.xml"
+  children:
+#  - Controls
+#  - Jobs
+#  - Survival
+  - CMChemicals
+#  - Antagonists
+#  - Species
+#  - Writing
+#  - Glossary

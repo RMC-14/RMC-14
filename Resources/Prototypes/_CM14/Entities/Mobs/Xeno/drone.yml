@@ -19,21 +19,28 @@
       0: Alive
       500: Critical
       600: Dead
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 22.5
   - type: Xeno
+    role: CMXenoDrone
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
-    - ActionXenoAcid
+    - ActionXenoAcidWeak
     - ActionXenoPheromones
     - ActionXenoOrderConstruction
     - ActionXenoPlantWeeds
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
     - ActionXenoTransferPlasma
-    - ActionXenoEvolve300
+    hudOffset: 0,0.15
     tier: 1
+    bypassTierCount: true
+    unlockAt: 60 # 1 minute
   - type: XenoAcid
   - type: XenoConstruction
     buildDelay: 2
@@ -45,16 +52,29 @@
     - HiveCoreXenoConstructionNode
   - type: XenoDevour
   - type: XenoEvolution
+    canEvolveWithoutGranter: true
+    max: 300
     evolvesTo: # TODO CM14 Queen
-    - CMXenoCarrier
-    - CMXenoBurrower
+#    - CMXenoCarrier
+#    - CMXenoBurrower
     - CMXenoHivelord
+    - CMXenoQueen
   - type: XenoPheromones
     pheromonesMultiplier: 2
   - type: XenoPlasma
     plasma: 1000
     maxPlasma: 1000
-    plasmaRegenOnWeeds: 6
+    plasmaRegenOnWeeds: 4.5
   - type: Tackle
     threshold: 4
     stun: 7
+  - type: WhitelistPickup
+    any:
+    - type: XenoHugger
+    - type: XenoEgg
+  - type: MultiHandedHolder
+    items:
+    - hands: 2
+      whitelist:
+        components:
+        - XenoEgg

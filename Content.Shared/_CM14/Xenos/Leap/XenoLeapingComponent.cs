@@ -6,7 +6,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._CM14.Xenos.Leap;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(SharedXenoLeapSystem))]
+[Access(typeof(XenoLeapSystem))]
 public sealed partial class XenoLeapingComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -16,11 +16,14 @@ public sealed partial class XenoLeapingComponent : Component
     public TimeSpan ParalyzeTime;
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? HitSound;
+    public SoundSpecifier? LeapSound;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LeapEndTime;
 
     [DataField, AutoNetworkedField]
     public bool KnockedDown;
+
+    [DataField, AutoNetworkedField]
+    public bool PlayedSound;
 }

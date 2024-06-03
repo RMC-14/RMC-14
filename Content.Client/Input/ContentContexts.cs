@@ -61,6 +61,7 @@ namespace Content.Client.Input
             human.AddFunction(ContentKeyFunctions.UseItemInHand);
             human.AddFunction(ContentKeyFunctions.AltUseItemInHand);
             human.AddFunction(ContentKeyFunctions.OpenCharacterMenu);
+            human.AddFunction(ContentKeyFunctions.OpenEmotesMenu);
             human.AddFunction(ContentKeyFunctions.ActivateItemInWorld);
             human.AddFunction(ContentKeyFunctions.ThrowItemInHand);
             human.AddFunction(ContentKeyFunctions.AltActivateItemInWorld);
@@ -129,6 +130,10 @@ namespace Content.Client.Input
         {
             var human = contexts.GetContext("human");
             human.AddFunction(CMKeyFunctions.CMPumpShotgun);
+            human.AddFunction(CMKeyFunctions.CMHolsterPrimary);
+            human.AddFunction(CMKeyFunctions.CMHolsterSecondary);
+            human.AddFunction(CMKeyFunctions.CMHolsterTertiary);
+            human.AddFunction(CMKeyFunctions.CMHolsterQuaternary);
             human.AddFunction(CMKeyFunctions.CMXenoWideSwing);
         }
     }

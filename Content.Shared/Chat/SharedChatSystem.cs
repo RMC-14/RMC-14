@@ -1,4 +1,6 @@
 using System.Collections.Frozen;
+using Content.Shared._CM14.Chat;
+using Content.Shared._CM14.Xenos;
 using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.Speech;
@@ -25,6 +27,9 @@ public abstract class SharedChatSystem : EntitySystem
 
     [ValidatePrototypeId<RadioChannelPrototype>]
     public const string CommonChannel = "MarineCommon";
+
+    [ValidatePrototypeId<RadioChannelPrototype>]
+    public const string HivemindChannel = "Hivemind";
 
     public static string DefaultChannelPrefix = $"{RadioChannelPrefix}{DefaultChannelKey}";
 
@@ -106,10 +111,13 @@ public abstract class SharedChatSystem : EntitySystem
         if (input.Length == 0)
             return false;
 
+        // TODO CM14 replace all of this with something else when chat code isnt a joke
         if (input.StartsWith(RadioCommonPrefix))
         {
             output = SanitizeMessageCapital(input[1..].TrimStart());
-            channel = _prototypeManager.Index<RadioChannelPrototype>(CommonChannel);
+            channel = HasComp<XenoComponent>(source)
+                ? _prototypeManager.Index<RadioChannelPrototype>(HivemindChannel)
+                : _prototypeManager.Index<RadioChannelPrototype>(CommonChannel);
             return true;
         }
 
@@ -119,6 +127,9 @@ public abstract class SharedChatSystem : EntitySystem
         if (input.Length < 2 || char.IsWhiteSpace(input[1]))
         {
             output = SanitizeMessageCapital(input[1..].TrimStart());
+            if (HasComp<XenoComponent>(source))
+                return false;
+
             if (!quiet)
                 _popup.PopupEntity(Loc.GetString("chat-manager-no-radio-key"), source, source);
             return true;
@@ -144,6 +155,13 @@ public abstract class SharedChatSystem : EntitySystem
             _popup.PopupEntity(msg, source, source);
         }
 
+        var prefixEv = new ChatGetPrefixEvent(channel);
+        RaiseLocalEvent(source, ref prefixEv);
+        channel = prefixEv.Channel;
+
+        if (HasComp<XenoComponent>(source) && channel == null)
+            return false;
+
         return true;
     }
 
@@ -152,8 +170,14 @@ public abstract class SharedChatSystem : EntitySystem
         if (string.IsNullOrEmpty(message))
             return message;
         // Capitalize first letter
-        message = char.ToUpper(message[0]) + message.Remove(0, 1);
+        message = OopsConcat(char.ToUpper(message[0]).ToString(), message.Remove(0, 1));
         return message;
+    }
+
+    private static string OopsConcat(string a, string b)
+    {
+        // This exists to prevent Roslyn being clever and compiling something that fails sandbox checks.
+        return a + b;
     }
 
     public string SanitizeMessageCapitalizeTheWordI(string message, string theWordI = "i")

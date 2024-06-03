@@ -26,9 +26,9 @@ public abstract partial class SharedCMSurgerySystem
         SubscribeLocalEvent<InventoryComponent, CMSurgeryCanPerformStepEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<ArmorComponent, InventoryRelayedEvent<CMSurgeryCanPerformStepEvent>>(OnArmorCanPerformStep);
 
-        Subs.BuiEvents<CMSurgeryTargetComponent>(CMSurgeryUIKey.Key, sub =>
+        Subs.BuiEvents<CMSurgeryTargetComponent>(CMSurgeryUIKey.Key, subs =>
         {
-            sub.Event<CMSurgeryStepChosenBuiMessage>(OnSurgeryTargetStepChosen);
+            subs.Event<CMSurgeryStepChosenBuiMsg>(OnSurgeryTargetStepChosen);
         });
     }
 
@@ -127,8 +127,7 @@ public abstract partial class SharedCMSurgerySystem
 
     private void OnToolCanPerform(Entity<CMSurgeryStepComponent> ent, ref CMSurgeryCanPerformStepEvent args)
     {
-        if (!TryComp(args.User, out SkillsComponent? skills) ||
-            skills.Surgery < ent.Comp.Skill)
+        if (!_skills.HasSkills(args.User, new Skills { Surgery = ent.Comp.Skill }))
         {
             args.Invalid = StepInvalidReason.MissingSkills;
             return;
@@ -191,7 +190,7 @@ public abstract partial class SharedCMSurgerySystem
             args.Args.Invalid = StepInvalidReason.Armor;
     }
 
-    private void OnSurgeryTargetStepChosen(Entity<CMSurgeryTargetComponent> ent, ref CMSurgeryStepChosenBuiMessage args)
+    private void OnSurgeryTargetStepChosen(Entity<CMSurgeryTargetComponent> ent, ref CMSurgeryStepChosenBuiMsg args)
     {
         var user = args.Actor;
         if (GetEntity(args.Entity) is not { Valid: true } body ||
@@ -220,6 +219,9 @@ public abstract partial class SharedCMSurgerySystem
                 }
             }
         }
+
+        if (TryComp(body, out TransformComponent? xform))
+            _rotateToFace.TryFaceCoordinates(user, _transform.GetMapCoordinates(body, xform).Position);
 
         var ev = new CMSurgeryDoAfterEvent(GetNetEntity(part), args.Surgery, args.Step);
         var doAfter = new DoAfterArgs(EntityManager, user, 2, ev, body, body)

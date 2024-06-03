@@ -1,5 +1,4 @@
 using Content.Shared._CM14.Barricade.Components;
-using Content.Shared.Climbing.Components;
 using Content.Shared.Climbing.Events;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;

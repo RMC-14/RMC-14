@@ -203,7 +203,7 @@ public sealed class CMSurgeryBui : BoundUserInterface
         stepName.AddText(_entities.GetComponent<MetaDataComponent>(step).EntityName);
 
         var stepButton = new CMSurgeryStepButton { Step = step };
-        stepButton.Button.OnPressed += _ => SendMessage(new CMSurgeryStepChosenBuiMessage(netPart, surgeryId, stepId));
+        stepButton.Button.OnPressed += _ => SendMessage(new CMSurgeryStepChosenBuiMsg(netPart, surgeryId, stepId));
 
         _window.Steps.AddChild(stepButton);
     }
@@ -231,7 +231,7 @@ public sealed class CMSurgeryBui : BoundUserInterface
 
             var msg = new FormattedMessage();
             var surgeryName = _entities.GetComponent<MetaDataComponent>(requirement).EntityName;
-            msg.AddMarkup($"[bold]Requires: {surgeryName}[/bold]");
+            msg.AddMarkupOrThrow($"[bold]Requires: {surgeryName}[/bold]");
             label.Set(msg, null);
 
             _window.Steps.AddChild(label);
@@ -346,16 +346,16 @@ public sealed class CMSurgeryBui : BoundUserInterface
                     switch (reason)
                     {
                         case StepInvalidReason.MissingSkills:
-                            stepName.AddMarkup(" [color=red](Missing surgery skill)[/color]");
+                            stepName.AddMarkupOrThrow(" [color=red](Missing surgery skill)[/color]");
                             break;
                         case StepInvalidReason.NeedsOperatingTable:
-                            stepName.AddMarkup(" [color=red](Needs operating table)[/color]");
+                            stepName.AddMarkupOrThrow(" [color=red](Needs operating table)[/color]");
                             break;
                         case StepInvalidReason.Armor:
-                            stepName.AddMarkup(" [color=red](Remove their armor!)[/color]");
+                            stepName.AddMarkupOrThrow(" [color=red](Remove their armor!)[/color]");
                             break;
                         case StepInvalidReason.MissingTool:
-                            stepName.AddMarkup(" [color=red](Missing tool)[/color]");
+                            stepName.AddMarkupOrThrow(" [color=red](Missing tool)[/color]");
                             break;
                     }
                 }
@@ -384,7 +384,7 @@ public sealed class CMSurgeryBui : BoundUserInterface
         _window.DisabledPanel.Visible = true;
 
         var text = new FormattedMessage();
-        text.AddMarkup("[color=red][font size=16]They need to be lying down![/font][/color]");
+        text.AddMarkupOrThrow("[color=red][font size=16]They need to be lying down![/font][/color]");
         _window.DisabledLabel.SetMessage(text);
         _window.DisabledPanel.MouseFilter = MouseFilterMode.Stop;
     }

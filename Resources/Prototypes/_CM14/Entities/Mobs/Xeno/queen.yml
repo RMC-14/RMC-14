@@ -2,8 +2,8 @@
   parent:
   - CMXenoDeveloped
   - CMXenoTail
-  id: CMXenoQueen # TODO CM14 big loud steps
-  name: Queen # TODO CM14 use consoles
+  id: CMXenoQueen
+  name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
   components:
   - type: Sprite
@@ -21,16 +21,21 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      1000: Critical
-      1100: Dead
+      500: Critical
+      600: Dead
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
   - type: Xeno
+    role: CMXenoQueen
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
     - ActionXenoOrderConstruction
-    - ActionXenoAcid
+    - ActionXenoAcidNormal
     - ActionXenoPheromones
     - ActionXenoWordQueen
 #    - ActionXenoPsychicWhisper
@@ -48,8 +53,9 @@
 #    - ActionXenoScreech
 #    - ActionXenoSpit
 #    - ActionXenoToggleSpitType
-    # TODO CM14 fire immunity
     tier: 4
+    bypassTierCount: true
+    unlockAt: 0
   - type: XenoAcid
   - type: XenoConstruction
     canBuild:
@@ -64,8 +70,8 @@
   - type: XenoPlasma
     plasma: 1000
     maxPlasma: 1000
-    plasmaRegenOnWeeds: 40
-  - type: XenoArmor
+    plasmaRegenOnWeeds: 4
+  - type: CMArmor
     armor: 25
     explosionArmor: 100
   - type: XenoWordQueen
@@ -83,7 +89,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.40
-        density: 1000
+        density: 185
         mask:
         - MobMask
         layer:
@@ -92,6 +98,47 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.52
-        density: 1000
+        density: 185
         layer:
         - BulletImpassable
+  - type: DropshipHijacker
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.4
+    baseSprintSpeed: 2.5
+  - type: SlowOnPull
+    multiplier: 0.5
+  - type: MobMover
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: XenoFootstepLarge
+      params:
+        volume: -12
+  - type: RandomSound
+    sound:
+      collection: XenoQueenBreath
+      params:
+        volume: -10
+    min: 45
+    max: 60
+  - type: SoundOnDeath
+    sound:
+      path: /Audio/_CM14/Xeno/alien_queen_died.ogg
+      params:
+        volume: -6
+  - type: WhitelistPickup
+    any:
+    - type: XenoEgg
+  - type: XenoEvolutionGranter
+  - type: XenoEvolutionCapped
+    id: CMXenoQueen
+    max: 1
+  - type: EmitSoundOnSpawn
+    sound:
+      path: /Audio/_CM14/Xeno/alien_queen_command.ogg
+      params:
+        volume: -8
+  - type: XenoAnnounceDeath
+    message: A sudden tremor ripples through the hive... the Queen has been slain! Vengeance!
+  - type: XenoTimeHealth
+    critThreshold: 1000
+    deadThreshold: 1100

@@ -1,7 +1,8 @@
 ﻿- type: entity
-  id: ActionXenoAcid
+  id: ActionXenoAcidNormal
   parent: ActionXenoBase
-  name: Corrosive Acid # TODO CM14 description
+  name: Corrosive Acid (100)  # TODO CM14 proper plasma costs
+  description: Melts down a structure over time.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -9,11 +10,47 @@
       sprite: _CM14/Actions/xeno_actions.rsi
       state: corrosive_acid
     event: !type:XenoCorrosiveAcidEvent
+      acidId: XenoAcidNormal
+      plasmaCost: 100
+      time: 150
+
+- type: entity
+  id: ActionXenoAcidWeak
+  parent: ActionXenoBase
+  name: Weak Corrosive Acid (75)  # TODO CM14 proper plasma costs
+  description: Melts down a structure over time.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: corrosive_acid
+    event: !type:XenoCorrosiveAcidEvent
+      acidId: XenoAcidWeak
+      plasmaCost: 75
+      time: 375
+
+- type: entity
+  id: ActionXenoAcidStrong
+  parent: ActionXenoBase
+  name: Strong Corrosive Acid (125)  # TODO CM14 proper plasma costs
+  description: Melts down a structure over time.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: corrosive_acid
+    event: !type:XenoCorrosiveAcidEvent
+      acidId: XenoAcidStrong
+      plasmaCost: 125
+      time: 60
 
 - type: entity
   id: ActionXenoRegurgitate
   parent: ActionXenoBase
-  name: Regurgitate # TODO CM14 description
+  name: Regurgitate
+  description: Eject any devoured marines.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -25,7 +62,8 @@
 - type: entity
   id: ActionXenoTailStab
   parent: ActionXenoBase
-  name: Tail Stab # TODO CM14 description
+  name: Tail Stab
+  description: Launches an attack towards a given direction. The cooldown is faster if you miss.
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -41,7 +79,8 @@
 - type: entity
   id: ActionXenoLeap
   parent: ActionXenoBase
-  name: Leap # TODO CM14 description
+  name: Leap
+  description: Jump towards a given location and knock down any enemies hit.
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -56,7 +95,8 @@
 - type: entity
   id: ActionXenoHeadbutt
   parent: ActionXenoBase
-  name: Headbutt # TODO CM14 description
+  name: Headbutt (10) # TODO CM14 proper plasma costs
+  description: Charge in a direction and push back any enemies in your way.
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -71,7 +111,8 @@
 - type: entity
   id: ActionXenoTailSweep
   parent: ActionXenoBase
-  name: Tail Sweep # TODO CM14 description
+  name: Tail Sweep (10) # TODO CM14 proper plasma costs
+  description: Knock down any enemies close to you.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -84,7 +125,8 @@
 - type: entity
   id: ActionXenoSlowingSpit
   parent: ActionXenoBase
-  name: Slowing Spit # TODO CM14 description
+  name: Slowing Spit (20) # TODO CM14 proper plasma costs
+  description: Launches a projectile that will slow the first enemy that it hits, and paralyze them if they have no armor.
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -98,7 +140,8 @@
 - type: entity
   id: ActionXenoScatteredSpit
   parent: ActionXenoBase
-  name: Scattered Spit # TODO CM14 description
+  name: Scattered Spit (20) # TODO CM14 proper plasma costs
+  description: Launches multiple projectiles that will slow any enemies they hit, and paralyze them if they have no armor.
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -112,7 +155,8 @@
 - type: entity
   id: ActionXenoParalyzingSlash
   parent: ActionXenoBase
-  name: Paralyzing Slash # TODO CM14 description
+  name: Paralyzing Slash (50) # TODO CM14 proper plasma costs
+  description: Temporarily charge up a melee attack that will knockdown the first enemy it hits after a short delay.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -125,7 +169,8 @@
 - type: entity
   id: ActionXenoBoneChips
   parent: ActionXenoBase
-  name: Bone Chips # TODO CM14 description
+  name: Bone Chips
+  description: Launch a projectile that will damage and slow down the first enemy it hits.
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem

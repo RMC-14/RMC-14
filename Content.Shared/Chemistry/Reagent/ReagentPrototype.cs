@@ -1,6 +1,7 @@
 ﻿using System.Collections.Frozen;
 using System.Linq;
 using System.Text.Json.Serialization;
+using Content.Shared._CM14.Prototypes;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body.Prototypes;
 using Content.Shared.Chemistry.Components;
@@ -13,7 +14,6 @@ using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 using Robust.Shared.Utility;
 
@@ -21,7 +21,7 @@ namespace Content.Shared.Chemistry.Reagent
 {
     [Prototype("reagent")]
     [DataDefinition]
-    public sealed partial class ReagentPrototype : IPrototype, IInheritingPrototype
+    public sealed partial class ReagentPrototype : IPrototype, IInheritingPrototype, ICMSpecific
     {
         [ViewVariables]
         [IdDataField]
@@ -142,7 +142,7 @@ namespace Content.Shared.Chemistry.Reagent
         [DataField]
         public SoundSpecifier FootstepSound = new SoundCollectionSpecifier("FootstepWater", AudioParams.Default.WithVolume(6));
 
-        public FixedPoint2 ReactionTile(TileRef tile, FixedPoint2 reactVolume)
+        public FixedPoint2 ReactionTile(TileRef tile, FixedPoint2 reactVolume, IEntityManager entityManager)
         {
             var removed = FixedPoint2.Zero;
 
@@ -151,7 +151,7 @@ namespace Content.Shared.Chemistry.Reagent
 
             foreach (var reaction in TileReactions)
             {
-                removed += reaction.TileReact(tile, this, reactVolume - removed);
+                removed += reaction.TileReact(tile, this, reactVolume - removed, entityManager);
 
                 if (removed > reactVolume)
                     throw new Exception("Removed more than we have!");
@@ -186,6 +186,10 @@ namespace Content.Shared.Chemistry.Reagent
                 plantMetabolizable.Effect(args);
             }
         }
+
+        // TODO CM14 move out to a partial when https://github.com/space-wizards/RobustToolbox/pull/5160 is merged
+        [DataField]
+        public bool IsCM { get; set; }
     }
 
     [Serializable, NetSerializable]
@@ -195,12 +199,22 @@ namespace Content.Shared.Chemistry.Reagent
 
         public Dictionary<ProtoId<MetabolismGroupPrototype>, ReagentEffectsGuideEntry>? GuideEntries;
 
+        public List<string>? PlantMetabolisms = null;
+
         public ReagentGuideEntry(ReagentPrototype proto, IPrototypeManager prototype, IEntitySystemManager entSys)
         {
             ReagentPrototype = proto.ID;
             GuideEntries = proto.Metabolisms?
                 .Select(x => (x.Key, x.Value.MakeGuideEntry(prototype, entSys)))
                 .ToDictionary(x => x.Key, x => x.Item2);
+            if (proto.PlantMetabolisms.Count > 0)
+            {
+                PlantMetabolisms = new List<string> (proto.PlantMetabolisms
+                    .Select(x => x.GuidebookEffectDescription(prototype, entSys))
+                    .Where(x => x is not null)
+                    .Select(x => x!)
+                    .ToArray());
+            }
         }
     }
 

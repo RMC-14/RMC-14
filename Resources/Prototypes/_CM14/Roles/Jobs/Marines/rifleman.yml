@@ -5,27 +5,36 @@
   description: cm-job-description-rifleman
   playTimeTracker: CMJobRifleman
   startingGear: CMGearRifleman
-  icon: "CMJobIconRifleman"
+  icon: "CMJobIconEmpty"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
-  canBeAntag: false
   accessGroups:
   - Rifleman
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
+      firearms: 1
+    - type: CMVendorUser
+      points: 45
   hasIcon: false
 
 - type: startingGear
   id: CMGearRifleman
+  equipment:
+    jumpsuit: JumpsuitMarine # TODO CM14 all squad roles should spawn with no jumpsuit but still have clothes on
+    back: CMSatchelMarine
+    id: CMDogtagRifleman
+
+- type: startingGear
+  id: CMGearRiflemanEquipped
   equipment:
     jumpsuit: JumpsuitMarine
     back: CMSatchelMarine
     shoes: CMBootsBlackFilled
     head: ArmorHelmetM10
     outerClothing: CMArmorM3Medium
-    gloves: CMHandsBlack
+    gloves: CMHandsBlackMarine
     id: CMDogtagRifleman
     ears: CMHeadsetAlpha
 

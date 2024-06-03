@@ -5,7 +5,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._CM14.Xenos.Leap;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedXenoLeapSystem))]
+[Access(typeof(XenoLeapSystem))]
 public sealed partial class XenoLeapComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -18,7 +18,7 @@ public sealed partial class XenoLeapComponent : Component
     public TimeSpan KnockdownTime = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? HitSound;
+    public SoundSpecifier? LeapSound;
 
     [DataField, AutoNetworkedField]
     public int Strength = 30;

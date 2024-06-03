@@ -4,11 +4,17 @@
   name: cm-job-name-dcc
   description: cm-job-description-dcc
   playTimeTracker: CMJobDropshipCrewChief
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 18000 # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 3600 # 1 hours
   startingGear: CMGearDCC
   icon: "CMJobIconDCC"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-po
-  canBeAntag: true
   accessGroups:
   - DropshipCrewChief
   special:
@@ -16,6 +22,7 @@
     components:
     - type: Skills
       engineer: 2
+      firearms: 1
       jtac: 2
       leadership: 1
       medical: 2
@@ -28,11 +35,8 @@
   id: CMGearDCC
   equipment:
     jumpsuit: CMJumpsuitDCC
-    outerClothing: CMArmorPlatePilot
-    back: CMSatchelMarine
-    gloves: CMHandsBrown
+    back: CMSatchel
     shoes: CMBootsBlackFilled
-    head: CMHeadCap
     id: CMIDCardDCC
     ears: CMHeadsetPilot
 
@@ -48,6 +52,6 @@
     - sprite: Markers/jobs.rsi
       state: green
     - state: dropship_crew_chief
-      
+
 - type: playTimeTracker
   id: CMJobDropshipCrewChief

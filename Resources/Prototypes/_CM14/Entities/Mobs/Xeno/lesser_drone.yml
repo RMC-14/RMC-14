@@ -18,18 +18,23 @@
       0: Alive
       160: Dead # TODO CM14 gib on death
   - type: Xeno
+    role: CMXenoLesserDrone
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
-    - ActionXenoAcid
+    - ActionXenoAcidWeak
     - ActionXenoPheromones
     - ActionXenoPlantWeeds # TODO CM14 only near other weeds for lesser drones
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
     # evasion: 10
     tier: 0
+    hudOffset: -0.15,-0.03
+    contributesToVictory: false
+    countedInSlots: false
+    unlockAt: 0
   - type: XenoAcid
   - type: XenoConstruction
     buildDelay: 4
@@ -42,7 +47,7 @@
   - type: XenoPlasma
     plasma: 300
     maxPlasma: 300
-    plasmaRegenOnWeeds: 6
+    plasmaRegenOnWeeds: 4
   - type: MeleeWeapon
     damage:
       groups:
@@ -50,3 +55,18 @@
   - type: Tackle
     threshold: 5
     stun: 5
+  - type: WhitelistPickup
+    any:
+    - type: XenoHugger
+    - type: XenoEgg
+  - type: MultiHandedHolder
+    items:
+    - hands: 2
+      whitelist:
+        components:
+        - XenoEgg
+  - type: DamageOffWeeds
+    damage:
+      types:
+        Blunt: 2.5
+  - type: XenoHiveCoreRole

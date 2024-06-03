@@ -6,13 +6,12 @@
   playTimeTracker: CMJobIntelOfficer
   requirements:
   - !type:DepartmentTimeRequirement
-    department: CMMarine
+    department: CMSquad
     time: 18000 # 5 hours
   startingGear: CMGearIntelOfficer
   icon: "CMJobIconIntelOfficer"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-aso
-  canBeAntag: false
   accessGroups:
   - IntelOfficer
   special:
@@ -21,6 +20,7 @@
     - type: Skills
       cqc: 1
       engineer: 2
+      firearms: 1
       intel: 2
       jtac: 2
       leadership: 2
@@ -33,13 +33,9 @@
   id: CMGearIntelOfficer
   equipment:
     jumpsuit: CMJumpsuitIO
-    outerClothing: CMArmorM4
-    back: CMSatchelMarineIntel
-    gloves: CMHandsBlack
+    back: CMSatchelMarine
     shoes: CMBootsBlackFilled
-    head: CMArmorHelmetM12
     id: CMIDCardIntelOfficer
-    ears: CMHeadsetIntel
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -53,6 +49,6 @@
     - sprite: Markers/jobs.rsi
       state: green
     - state: intel_officer
-      
+
 - type: playTimeTracker
   id: CMJobIntelOfficer

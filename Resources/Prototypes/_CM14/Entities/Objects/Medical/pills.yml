@@ -24,7 +24,7 @@
       food:
         maxVol: 15
         reagents:
-        - ReagentId: Bicaridine
+        - ReagentId: CMBicaridine
           Quantity: 15
   - type: Sprite
     layers:
@@ -41,7 +41,7 @@
       food:
         maxVol: 15
         reagents:
-        - ReagentId: Dexalin
+        - ReagentId: CMDexalin
           Quantity: 15
   - type: Sprite
     layers:
@@ -58,7 +58,7 @@
       food:
         maxVol: 15
         reagents:
-        - ReagentId: Dylovene
+        - ReagentId: CMDylovene
           Quantity: 15
   - type: Sprite
     layers:
@@ -75,7 +75,7 @@
       food:
         maxVol: 15
         reagents:
-        - ReagentId: Inaprovaline
+        - ReagentId: CMInaprovaline
           Quantity: 15
   - type: Sprite
     layers:
@@ -92,7 +92,7 @@
       food:
         maxVol: 15
         reagents:
-        - ReagentId: Kelotane
+        - ReagentId: CMKelotane
           Quantity: 15
   - type: Sprite
     layers:
@@ -109,7 +109,7 @@
       food:
         maxVol: 15
         reagents:
-        - ReagentId: Tricordrazine
+        - ReagentId: CMTricordrazine
           Quantity: 15
   - type: Sprite
     layers:

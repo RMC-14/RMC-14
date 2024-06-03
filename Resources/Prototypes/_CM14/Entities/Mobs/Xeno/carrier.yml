@@ -20,6 +20,7 @@
       650: Critical
       750: Dead
   - type: Xeno
+    role: CMXenoCarrier
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
@@ -33,6 +34,8 @@
     #    - ActionXenoRetrieveEgg
     #    - ActionXenoHuggerReserve
     tier: 2
+    hudOffset: 0,0.19
+    unlockAt: 300 # 5 minutes
   - type: XenoConstruction
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
@@ -41,8 +44,8 @@
   - type: XenoPlasma
     plasma: 500
     maxPlasma: 500
-    plasmaRegenOnWeeds: 17.5
-  - type: XenoArmor
+    plasmaRegenOnWeeds: 3.5
+  - type: CMArmor
     explosionArmor: 20
   - type: XenoDevour
   - type: MeleeWeapon
@@ -58,7 +61,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.35
-        density: 1000
+        density: 185
         mask:
         - MobMask
         layer:
@@ -67,6 +70,13 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.40
-        density: 1000
+        density: 185
         layer:
         - BulletImpassable
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 3.5
+  - type: WhitelistPickup
+    any:
+    - type: XenoHugger
+    - type: XenoEgg

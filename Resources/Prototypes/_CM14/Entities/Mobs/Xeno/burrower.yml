@@ -20,24 +20,27 @@
       500: Critical
       600: Dead
   - type: Xeno
+    role: CMXenoBurrower
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
-    - ActionXenoAcid
+    - ActionXenoAcidNormal
     - ActionXenoOrderConstruction
     #    - ActionXenoDigTunnel
     - ActionXenoPlantWeeds
     #    - ActionXenoBurrow
     #    - ActionXenoTremor
     tier: 2
+    hudOffset: 0,0.56
+    unlockAt: 420 # 7 minutes
   - type: XenoPlasma
     plasma: 600
     maxPlasma: 600
-    plasmaRegenOnWeeds: 27
+    plasmaRegenOnWeeds: 4.5
   - type: XenoAcid
-  - type: XenoArmor
+  - type: CMArmor
     armor: 25
     explosionArmor: 40
   - type: XenoDevour
@@ -48,3 +51,6 @@
   - type: Tackle
     threshold: 4
     stun: 9
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 3.5

@@ -6,7 +6,16 @@
   playTimeTracker: CMJobAuxiliarySupportOfficer
   requirements:
   - !type:DepartmentTimeRequirement
-    department: CMMarine
+    department: CMSquad
+    time: 18000 # 5 hours
+  - !type:DepartmentTimeRequirement
+    department: CMRequisitions
+    time: 18000 # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsEngineering
+    time: 18000 # 5 hours
+  - !type:DepartmentTimeRequirement
+    department: CMAuxiliarySupport
     time: 18000 # 5 hours
   weight: 5
   startingGear: CMGearASO
@@ -14,7 +23,6 @@
   requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: cm-job-supervisors-co
-  canBeAntag: false
   accessGroups:
   - ASO
   special:
@@ -23,6 +31,7 @@
     - type: Skills
       construction: 2
       engineer: 2
+      firearms: 1
       fireman: 1
       intel: 2
       jtac: 3
@@ -43,9 +52,11 @@
     jumpsuit: CMJumpsuitBO
     outerClothing: CMCoatASO
     back: CMSatchel
-    shoes: CMBootsBrown
+    shoes: CMBootsBlack
     id: CMIDCardASO
     ears: CMHeadsetLeader
+    pocket1: CMPouchGeneralLarge
+    pocket2: CMPouchGeneralLarge
 
 - type: entity
   parent: CMSpawnPointJobBase

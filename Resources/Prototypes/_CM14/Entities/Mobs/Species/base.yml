@@ -6,27 +6,36 @@
   name: Urist C.M. McHands
   suffix: CM14
   components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 185
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
   - type: SolutionContainerManager
   - type: InjectableSolution
     solution: chemicals
   - type: Bloodstream
     bloodReagent: Blood
+    bloodMaxVolume: 560
+    maxBleedAmount: 50
+    bleedReductionAmount: 0
+    bloodRefreshAmount: 0.15
     bloodlossDamage:
       types:
         Bloodloss: 0.5
     bloodlossHealDamage:
       types:
         Bloodloss: -1
+    damageBleedModifiers: CMBloodlossHuman
+  - type: Woundable
   - type: Flashable
-  - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute.
-    allowedStates:
-    - Alive
-    damageCap: 20
-    damage:
-      types:
-        Heat: -0.07
-      groups:
-        Brute: -0.07
   - type: StatusEffects
     allowed:
     - Stun
@@ -59,6 +68,7 @@
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: null
+    healthBarThreshold: 5
   - type: Vocal
     sounds:
       Male: MaleHuman
@@ -101,3 +111,32 @@
   - type: XenoNestable
   - type: Devourable
   - type: ImmuneToClothingRequiredStepTrigger
+  - type: Undisposable
+  - type: ShortExamine
+  - type: MaxDamage
+    max: 719 # TODO CM14 this should be per part and smaller
+  - type: Perishable
+    rotAfter: 300
+  - type: AtmosExposed
+  - type: Temperature
+    heatDamageThreshold: 325
+    coldDamageThreshold: 260
+    currentTemperature: 310.15
+    specificHeat: 42
+  - type: ThermalRegulator
+    metabolismHeat: 800
+    radiatedHeat: 100
+    implicitHeatRegulation: 500
+    sweatHeatRegulation: 2000
+    shiveringHeatRegulation: 2000
+    normalBodyTemperature: 310.15
+    thermalRegulationTemperatureThreshold: 25
+  - type: DamageMobState
+    critDamage:
+      types:
+        Asphyxiation: 1
+    nonDeadDamage:
+      types:
+        Asphyxiation: -0.33
+  - type: NoSlip
+  - type: AffectableByWeeds

@@ -5,14 +5,13 @@
   description: cm-job-description-ordnance-Tech
   playTimeTracker: CMJobOrdnanceTech
   requirements:
-  - !type:DepartmentTimeRequirement
-    department: CMEngineering
-    time: 3600 # 1 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsEngineering
+    time: 3600 # 1 hour
   startingGear: CMGearOrdnanceTech
   icon: "CMJobIconOrdnanceTech"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-ce
-  canBeAntag: true
   accessGroups:
   - OT
   special:
@@ -21,18 +20,21 @@
     - type: Skills
       construction: 3
       engineer: 3
+      firearms: 1
       powerLoader: 2
 
 - type: startingGear
   id: CMGearOrdnanceTech
   equipment:
     jumpsuit: CMJumpsuitOrdnanceTech
-    back: CMSatchelEngineer
-    shoes: CMBootsBrown
+    back: CMSatchelMarineTech
+    shoes: CMBootsBlack
     gloves: CMHandsInsulated
     id: CMIDCardOrdnanceTech
     ears: CMHeadsetEngineer
     belt: CMBeltUtilityFilled
+#    pocket1: CMDemolitionsScanner TODO CM14
+    pocket2: CMPouchGeneralMedium
 
 - type: entity
   parent: CMSpawnPointJobBase

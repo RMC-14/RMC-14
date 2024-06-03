@@ -5,6 +5,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._CM14.Xenos.Egg;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(XenoEggSystem))]
 public sealed partial class XenoOvipositorCapableComponent : Component
 {
     [DataField, AutoNetworkedField]

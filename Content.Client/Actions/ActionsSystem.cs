@@ -247,7 +247,10 @@ namespace Content.Client.Actions
             if (action.ClientExclusive)
             {
                 if (instantAction.Event != null)
+                {
                     instantAction.Event.Performer = user;
+                    instantAction.Event.Action = actionId;
+                }
 
                 PerformAction(user, actions, actionId, instantAction, instantAction.Event, GameTiming.CurTime);
             }
@@ -310,6 +313,12 @@ namespace Content.Client.Actions
             }
 
             AssignSlot?.Invoke(assignments);
+        }
+
+        public void SetAssignments(List<SlotAssignment> actions)
+        {
+            ClearAssignments?.Invoke();
+            AssignSlot?.Invoke(actions);
         }
 
         public record struct SlotAssignment(byte Hotbar, byte Slot, EntityUid ActionId);

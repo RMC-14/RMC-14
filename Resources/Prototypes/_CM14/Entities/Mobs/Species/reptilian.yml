@@ -18,11 +18,13 @@
     proto: lizard
   - type: Vocal
     sounds:
-      Male: UnisexReptilian
-      Female: UnisexReptilian
-      Unsexed: UnisexReptilian
+      Male: MaleReptilian
+      Female: FemaleReptilian
+      Unsexed: MaleReptilian
   - type: Wagging
   - type: MeleeWeapon
     soundHit:
       path: /Audio/Weapons/pierce.ogg
     animation: WeaponArcClaw
+  - type: Inventory
+    speciesId: reptilian

@@ -5,25 +5,33 @@
   description: cm-job-description-doctor
   playTimeTracker: CMJobDoctor
   requirements:
-  - !type:DepartmentTimeRequirement
-    department: CMMedical
-    time: 3600 # 1 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 3600 # 1 hour
   startingGear: CMGearDoctor
   icon: "CMJobIconDoctor"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-cmo
-  canBeAntag: true
   accessGroups:
-  - CMMedical
+  - CMMedbay
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
+      firearms: 0
       medical: 3
       surgery: 2
 
 - type: startingGear
   id: CMGearDoctor
+  equipment:
+    jumpsuit: CMScrubsBlue
+    back: CMSatchelMedical
+    shoes: ClothingShoesColorWhite
+    id: CMIDCardDoctor
+
+- type: startingGear
+  id: CMGearDoctorEquipped
   equipment:
     jumpsuit: CMScrubsBlue
     outerClothing: CMCoatLong
