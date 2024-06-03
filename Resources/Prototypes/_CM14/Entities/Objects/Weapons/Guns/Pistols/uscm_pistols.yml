@@ -133,7 +133,7 @@
   parent: CMWeaponPistolBase
   id: CMWeaponPistolVP78
   name: VP78 automatic pistol
-  description: A massive, formidable handgun chambered in 9mm rounds. It has fully automatic and 3 round burst modes.
+  description: A massive, formidable semi-automatic handgun chambered in 9mm squash-head rounds. A common sight throughout both UA and 3WE space, often held by both Weyland-Yutani PMC units and corporate executives. This weapon is also undergoing limited field testing as part of the USCM's next generation pistol program. The slide is engraved with the Weyland-Yutani logo reminding you who's really in charge.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Pistols/vp78.rsi
