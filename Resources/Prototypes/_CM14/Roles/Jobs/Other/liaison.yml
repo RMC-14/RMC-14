@@ -18,8 +18,8 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      construction: 1
-      endurance: 2
+      firearms: 0
+      vehicles: 1
 
 - type: startingGear
   id: CMGearLiaison

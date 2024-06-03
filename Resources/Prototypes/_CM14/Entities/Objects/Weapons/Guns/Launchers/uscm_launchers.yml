@@ -1,6 +1,6 @@
 - type: entity
   name: M92 grenade launcher
-  parent: BaseWeaponLauncher
+  parent: [BaseWeaponLauncher, CMBaseWeaponGun]
   id: WeaponLauncherM92
   description: Oops.
   components:

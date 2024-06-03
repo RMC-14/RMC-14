@@ -18,6 +18,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
+      firearms: 1
       jtac: 1
       smartgun: 1
     - type: CMVendorUser

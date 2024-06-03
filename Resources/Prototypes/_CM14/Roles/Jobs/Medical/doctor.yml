@@ -18,6 +18,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
+      firearms: 0
       medical: 3
       surgery: 2
 

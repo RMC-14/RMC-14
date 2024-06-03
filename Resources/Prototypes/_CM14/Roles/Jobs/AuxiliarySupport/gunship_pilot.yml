@@ -18,6 +18,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
+      firearms: 1
       intel: 1
       jtac: 2
       leadership: 1

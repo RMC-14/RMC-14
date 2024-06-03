@@ -24,7 +24,7 @@
       tags:
       - CMCartridgePistol9mm
     proto: CMCartridgePistol9mm
-    capacity: 9
+    capacity: 12
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m4a3.rsi
     layers:
