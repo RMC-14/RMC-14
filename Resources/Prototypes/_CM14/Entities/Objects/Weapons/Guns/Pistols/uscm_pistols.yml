@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, CMBaseWeaponGun]
   abstract: true
   id: CMWeaponPistolBase
   components:
@@ -23,19 +23,19 @@
   - type: Wieldable
   - type: Gun
     fireRate: 8
-    minAngle: 5
-    maxAngle: 70
-    angleIncrease: 60
-    angleDecay: 180 # fire 3x per second one handed and see no accuracy loss
+    minAngle: 10
+    maxAngle: 20
+    angleIncrease: 5
+    angleDecay: 10
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
     soundGunshot:
       collection: CMM4A3Shoot
   - type: GunWieldBonus
-    minAngle: 0
-    maxAngle: -50
-    angleIncrease: -50
+    minAngle: -10
+    maxAngle: -10
+    angleIncrease: -4
     angleDecay: 0
   - type: ItemSlots
     slots:

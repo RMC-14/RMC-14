@@ -18,6 +18,8 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
+      firearms: 0
+      vehicles: 1
   hasIcon: false
 
 - type: startingGear

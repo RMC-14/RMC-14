@@ -22,6 +22,7 @@
     components:
     - type: Skills
       engineer: 2
+      firearms: 1
       jtac: 2
       leadership: 1
       medical: 2

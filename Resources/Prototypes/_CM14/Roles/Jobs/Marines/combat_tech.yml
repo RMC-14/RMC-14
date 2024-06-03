@@ -20,6 +20,7 @@
     - type: Skills
       constructiopn: 2
       engineer: 2
+      firearms: 1
       jtac: 1
       vehicle: 1
     - type: CMVendorUser

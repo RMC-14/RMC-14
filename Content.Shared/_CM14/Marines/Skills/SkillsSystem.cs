@@ -48,6 +48,7 @@ public sealed class SkillsSystem : EntitySystem
                skills.Endurance >= required.Endurance &&
                skills.Engineer >= required.Engineer &&
                skills.Execution >= required.Execution &&
+               skills.Firearms >= required.Firearms &&
                skills.Fireman >= required.Fireman &&
                skills.Intel >= required.Intel &&
                skills.Jtac >= required.Jtac &&

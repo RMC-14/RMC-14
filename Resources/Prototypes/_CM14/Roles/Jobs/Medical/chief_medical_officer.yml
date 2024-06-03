@@ -20,6 +20,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
+      firearms: 0
       fireman: 1
       intel: 1
       jtac: 3

@@ -18,6 +18,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
+      firearms: 0
       intel: 1
       medical: 3
       research: 1

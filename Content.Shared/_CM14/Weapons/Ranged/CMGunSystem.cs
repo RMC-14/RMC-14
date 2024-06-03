@@ -1,5 +1,9 @@
 ﻿using System.Numerics;
+using Content.Shared._CM14.Marines.Skills;
 using Content.Shared._CM14.Weapons.Ranged.Whitelist;
+using Content.Shared.Hands;
+using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Timing;
 using Content.Shared.Weapons.Ranged.Components;
@@ -7,6 +11,7 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Whitelist;
 using Content.Shared.Wieldable;
+using Robust.Shared.Containers;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
@@ -18,8 +23,12 @@ namespace Content.Shared._CM14.Weapons.Ranged;
 public sealed class CMGunSystem : EntitySystem
 {
     [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedGunSystem _gun = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
@@ -41,6 +50,9 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<GunShowUseDelayComponent, ItemWieldedEvent>(OnShowUseDelayWielded);
 
         SubscribeLocalEvent<GunUserWhitelistComponent, AttemptShootEvent>(OnGunUserWhitelistAttemptShoot);
+
+        SubscribeLocalEvent<GunUnskilledPenaltyComponent, GotEquippedHandEvent>(OnGunUnskilledPenaltyEquippedHand);
+        SubscribeLocalEvent<GunUnskilledPenaltyComponent, GunRefreshModifiersEvent>(OnGunUnskilledPenaltyRefresh);
     }
 
     private void OnAmmoFixedDistanceShot(Entity<AmmoFixedDistanceComponent> ent, ref AmmoShotEvent args)
@@ -103,6 +115,30 @@ public sealed class CMGunSystem : EntitySystem
         args.Cancelled = true;
         var gun = Loc.GetString("zzzz-the", ("ent", ent.Owner));
         _popup.PopupClient($"You don't seem to know how to use {gun}", args.User, args.User);
+    }
+
+    private void OnGunUnskilledPenaltyEquippedHand(Entity<GunUnskilledPenaltyComponent> ent, ref GotEquippedHandEvent args)
+    {
+        if (TryComp(ent, out GunComponent? gun))
+            _gun.RefreshModifiers((ent, gun));
+    }
+
+    private void OnGunUnskilledPenaltyRefresh(Entity<GunUnskilledPenaltyComponent> ent, ref GunRefreshModifiersEvent args)
+    {
+        if (!_container.TryGetContainingContainer((ent, null), out var container) ||
+            !HasComp<HandsComponent>(container.Owner))
+        {
+            return;
+        }
+
+        if (TryComp(container.Owner, out SkillsComponent? skills) &&
+            skills.Skills.Firearms >= ent.Comp.Firearms)
+        {
+            return;
+        }
+
+        args.MinAngle += ent.Comp.AngleIncrease;
+        args.MaxAngle += ent.Comp.AngleIncrease;
     }
 
     private void StopProjectile(Entity<ProjectileFixedDistanceComponent> projectile)

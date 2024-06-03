@@ -26,6 +26,7 @@
     - type: Skills
       construction: 1
       endurance: 2
+      firearms: 1
   hasIcon: false
 
 - type: startingGear

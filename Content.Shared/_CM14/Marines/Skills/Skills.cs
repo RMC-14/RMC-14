@@ -12,6 +12,7 @@ public readonly record struct Skills(
     int Endurance,
     int Engineer,
     int Execution,
+    int Firearms,
     int Fireman,
     int Intel,
     int Jtac,

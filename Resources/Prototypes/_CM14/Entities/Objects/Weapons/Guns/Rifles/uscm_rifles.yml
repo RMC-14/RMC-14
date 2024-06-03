@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: BaseItem
+  parent: [BaseItem, CMBaseWeaponGun]
   id: CMBaseWeaponRifle
   components:
   - type: Wieldable
@@ -42,10 +42,10 @@
   - type: Clothing
     sprite: _CM14/Objects/Weapons/Guns/Rifles/m41a.rsi
   - type: Gun
-    minAngle: 15
-    maxAngle: 50
-    angleIncrease: 15
-    angleDecay: 30 # fire twice per second to see no recoil
+    minAngle: 30
+    maxAngle: 60
+    angleIncrease: 10
+    angleDecay: 5
     fireRate: 5
     selectedMode: FullAuto
     availableModes:
@@ -55,9 +55,9 @@
     soundGunshot:
       collection: CMM41AShoot
   - type: GunWieldBonus
-    minAngle: -10
+    minAngle: -15
     maxAngle: -40
-    angleIncrease: -5
+    angleIncrease: -8
     angleDecay: 0
   - type: ItemSlots
     slots:
@@ -76,7 +76,6 @@
           tags:
           - CMCartridgeRifle10x24mm
 
-
 - type: entity
   name: M41AE2 heavy pulse rifle
   parent: WeaponRifleM41A
@@ -93,22 +92,15 @@
   - type: Clothing
     sprite: _CM14/Objects/Weapons/Guns/Rifles/m41ae2.rsi
   - type: Gun
-    minAngle: 25
-    maxAngle: 70
-    angleIncrease: 20
-    angleDecay: 40
-    fireRate: 5
-    selectedMode: FullAuto
+    selectedMode: SemiAuto
     availableModes:
-    - SemiAuto
-    - Burst
-    - FullAuto
+    - SemiAuto # TODO CM14 burst with greatly increased angle unless mounted
     soundGunshot:
       collection: CMM41AShoot
   - type: GunWieldBonus
     minAngle: -15
-    maxAngle: -40
-    angleIncrease: -10
+    maxAngle: -45
+    angleIncrease: -8
     angleDecay: 0
   - type: ItemSlots
     slots:
@@ -126,6 +118,7 @@
         whitelist:
           tags:
           - CMCartridgeRifle10x24mm
+  - type: GunRequiresWield
 
 - type: entity
   parent: CMBaseWeaponRifle
@@ -147,7 +140,7 @@
     maxAngle: 70
     angleIncrease: 25
     angleDecay: 45
-    fireRate: 5
+    fireRate: 3.2
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -157,7 +150,7 @@
     minAngle: -20
     maxAngle: -50
     angleIncrease: -5
-    angleDecay: +10
+    angleDecay: 10
   - type: ItemSlots
     slots:
       gun_magazine:

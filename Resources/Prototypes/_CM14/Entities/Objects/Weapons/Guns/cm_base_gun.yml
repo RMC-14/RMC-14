@@ -1,0 +1,5 @@
+﻿- type: entity
+  abstract: true
+  id: CMBaseWeaponGun
+  components:
+  - type: GunUnskilledPenalty
