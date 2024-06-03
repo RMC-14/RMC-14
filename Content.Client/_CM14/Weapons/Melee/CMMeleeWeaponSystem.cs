@@ -1,5 +1,6 @@
 ﻿using Content.Client.Weapons.Melee;
 using Content.Shared._CM14.Input;
+using Content.Shared._CM14.Weapons.Melee;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -9,7 +10,7 @@ using Robust.Shared.Map;
 
 namespace Content.Client._CM14.Weapons.Melee;
 
-public sealed class CMMeleeWeaponSystem : EntitySystem
+public sealed class CMMeleeWeaponSystem : SharedCMMeleeWeaponSystem
 {
     [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] private readonly IInputManager _input = default!;
@@ -21,6 +22,8 @@ public sealed class CMMeleeWeaponSystem : EntitySystem
 
     public override void Initialize()
     {
+        base.Initialize();
+
         CommandBinds.Builder
             .Bind(CMKeyFunctions.CMXenoWideSwing,
                 InputCmdHandler.FromDelegate(session =>

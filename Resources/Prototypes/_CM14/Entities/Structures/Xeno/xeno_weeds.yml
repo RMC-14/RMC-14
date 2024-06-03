@@ -76,9 +76,17 @@
     - 0:
         weed15: ""
   - type: XenoFriendly
-#  - type: SpeedModifierContacts # TODO CM14 slow down
-#    walkSpeedModifier: 0.5
-#    sprintSpeedModifier: 0.5
+  - type: Damageable
+    damageContainer: StructuralXeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ImmuneToUnarmed
 #  - type: Physics
 #    bodyType: Static
 #  - type: FootstepModifier
@@ -90,7 +98,7 @@
 - type: entity # TODO CM14 sound
   parent: XenoWeeds
   id: XenoWeedsSource
-  name: resin node
+  name: weed node
   description: A weird, pulsating node
   components:
   - type: Sprite
@@ -164,7 +172,7 @@
 - type: entity # TODO CM14 sound
   parent: XenoHiveWeeds
   id: XenoHiveWeedsSource
-  name: hive resin node
+  name: hive weed node
   components:
   - type: Sprite
     sprite: _CM14/Structures/Xenos/xeno_weeds.rsi
@@ -207,6 +215,17 @@
     mode: Corners
   - type: XenoNestSurface
   - type: XenoFriendly
+  - type: Damageable
+    damageContainer: StructuralXeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ImmuneToUnarmeda
 
 - type: edgeSpreader
   id: XenoWeeds
