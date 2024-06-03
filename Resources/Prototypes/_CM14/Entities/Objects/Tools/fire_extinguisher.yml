@@ -29,7 +29,7 @@
           False: { state: fire_extinguisher }
 
 - type: entity
-  parent: FireExtinguisher
+  parent: CMFireExtinguisher
   id: CMFireExtinguisherPortable
   name: portable fire extinguisher
   description: A light and compact fibreglass-framed model fire extinguisher.
