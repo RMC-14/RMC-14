@@ -132,7 +132,7 @@
 - type: entity
   parent: CMWeaponPistolBase
   id: CMWeaponPistolVP78
-  name: VP 78 automatic pistol
+  name: VP78 automatic pistol
   description: A massive, formidable handgun chambered in 9mm rounds. It has fully automatic and 3 round burst modes.
   components:
   - type: Sprite

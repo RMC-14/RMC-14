@@ -62,7 +62,7 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: CMMagazinePistolVP78
-  name: VP 78 magazine (9mm)
+  name: VP78 magazine (9mm)
   components:
   - type: Tag
     tags:
