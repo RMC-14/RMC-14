@@ -16,6 +16,7 @@
         - FullTileMask
         layer:
         - TableLayer
+        - LowImpassable
   - type: RotationDrawDepth
     southDrawDepth: OverMobs
   - type: Barricade
