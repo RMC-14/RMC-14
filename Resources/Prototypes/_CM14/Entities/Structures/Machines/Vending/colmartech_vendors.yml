@@ -267,9 +267,9 @@
     #- id: CMSpeedLoaderM44Marksman
     #  amount: 2
     - name: Restricted Firearm Ammunition
-      entries: [ ]
-    #- id: CMMagazineVP78
-    #  amount: 5
+      entries:
+      - id: CMMagazinePistolVP78
+        amount: 5
     #- id: CMMagazineSmartpistolSU6
     #  amount: 5
     #- id: CMIncineratorTankM240
@@ -432,9 +432,9 @@
       - id: CMMaskCoif
     #    CMRebreather #TODO: Make this
     - name: Restricted Firearms
-      entries: [ ]
-    #- id: CMVP78Pistol
-    #  points: 15
+      entries:
+      - id: CMWeaponPistolVP78
+        points: 15
     #- id: CMSU6SmartPistol
     #  points: 15
     #- id: CMM79GrenadeLauncher
@@ -719,11 +719,11 @@
     #- id: CMM240IncineratorTankB-Gel
     #  points: 3
     - name: Restricted Firearms
-      entries: [ ]
+      entries:
     #- id: CMM240IncineratorUnit
     #  points: 18
-    #- id: CMVP78Pistol
-    #  points: 8
+      - id: CMWeaponPistolVP78
+        points: 8
     #- id: CMSU6SmartPistol
     #  points: 12
     #- id: CMM79GrenadeLauncher
@@ -1074,10 +1074,10 @@
     #  points: 24
     #- id: CMArmorM4
     #  points: 30
-    - name: Restricted FIrearms
-      entries: [ ]
-    #- id: CMVP78Pìstol
-    #  points: 8
+    - name: Restricted Firearms
+      entries:
+      - id: CMWeaponPistolVP78
+        points: 8
     #- id: CMSU6SmartPistol
     #  points: 12
     #- id: CMM240IncineratorUnit
@@ -1308,8 +1308,9 @@
     #    CMM3B12PatternMarineArmor: 28P
     #    CMM4PatternArmor: 28P
     - name: Restricted Firearms
-      entries: [ ]
-    #    CMVP78Pistol: 8P
+      entries:
+      - id: CMWeaponPistolVP78
+        points: 8
     #    CMSU6SmartPistol: 12P
     - name: Clothing Items
       entries:
@@ -1699,9 +1700,9 @@
     #- id: CMM40MFHSMetalFoamGrenade
     #  amount: 5
     - name: Restricted Firearms
-      entries: [ ]
-    #- id: CMVP78Pistol
-    #  amount: 10
+      entries:
+      - id: CMWeaponPistolVP78
+        amount: 10
     #- id: CMSU6SmartPistol
     #  amount: 15
     #- id: CMM79GrenadeLauncher
