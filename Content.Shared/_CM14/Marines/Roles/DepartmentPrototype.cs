@@ -17,4 +17,7 @@ public sealed partial class DepartmentPrototype : IInheritingPrototype, ICMSpeci
 
     [DataField]
     public bool IsCM { get; }
+
+    [DataField]
+    public string? CustomName;
 }
