@@ -11,6 +11,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Rejuvenate;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
@@ -54,6 +55,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         SubscribeLocalEvent<VictimHuggedComponent, ComponentRemove>(OnVictimHuggedRemoved);
         SubscribeLocalEvent<VictimHuggedComponent, CanSeeAttemptEvent>(OnVictimHuggedCancel);
         SubscribeLocalEvent<VictimHuggedComponent, ExaminedEvent>(OnVictimHuggedExamined);
+        SubscribeLocalEvent<VictimHuggedComponent, RejuvenateEvent>(OnVictimHuggedRejuvenate);
 
         SubscribeLocalEvent<VictimBurstComponent, MapInitEvent>(OnVictimBurstMapInit);
         SubscribeLocalEvent<VictimBurstComponent, UpdateMobStateEvent>(OnVictimUpdateMobState);
@@ -144,6 +146,11 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
     {
         if (HasComp<XenoComponent>(args.Examiner) || (CompOrNull<GhostComponent>(args.Examiner)?.CanGhostInteract ?? false))
             args.PushMarkup("This creature is impregnated.");
+    }
+
+    private void OnVictimHuggedRejuvenate(Entity<VictimHuggedComponent> victim, ref RejuvenateEvent args)
+    {
+        RemCompDeferred<VictimHuggedComponent>(victim);
     }
 
     private void OnVictimBurstMapInit(Entity<VictimBurstComponent> burst, ref MapInitEvent args)
