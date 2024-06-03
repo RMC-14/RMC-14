@@ -394,7 +394,7 @@
       #      - TODO CM14 splint
       #      - TODO CM14 penlight
       - CMAutoInjector
-      - CMFireExtinguisherMini
+      - CMFireExtinguisherPortable
       #      - TODO CM14 syringe cases
       - CMSurgicalLine
       - CMSynthGraft
@@ -422,7 +422,7 @@
       #      - TODO CM14 splint
       - PillCanister
       - DiscreteHealthAnalyzer
-      - CMFireExtinguisherMini
+      - CMFireExtinguisherPortable
       - CMSurgicalLine
       - CMSynthGraft
       components:
@@ -464,7 +464,7 @@
       - Bloodpack
       #      - TODO CM14 splint
       - CMAutoInjector
-      - CMFireExtinguisherMini
+      - CMFireExtinguisherPortable
       - CMRollerBed
       - BodyBag
       components:
@@ -561,7 +561,7 @@
       - CMAutoInjector
       #      - TODO CM14 syringe case
       #      - TODO CM14 surgical case
-      - CMFireExtinguisherMini
+      - CMFireExtinguisherPortable
       - CMRollerBed
       - CMSurgicalLine
       - CMSynthGraft
