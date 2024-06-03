@@ -12202,7 +12202,7 @@ entities:
       pos: -45.5,1.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -857.5908
+      secondsUntilStateChange: -1064.188
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -12515,7 +12515,7 @@ entities:
       pos: 32.5,-5.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -14626.579
+      secondsUntilStateChange: -14833.177
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -17501,7 +17501,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 4879.0279316
     - type: Door
-      secondsUntilStateChange: -11820.413
+      secondsUntilStateChange: -12027.011
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -17523,7 +17523,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 4879.0279316
     - type: Door
-      secondsUntilStateChange: -11820.413
+      secondsUntilStateChange: -12027.011
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -20671,6 +20671,13 @@ entities:
     - type: Transform
       pos: -43.5,6.5
       parent: 2
+- proto: CMSpawnPointCombatTech
+  entities:
+  - uid: 7915
+    components:
+    - type: Transform
+      pos: 63.5,4.5
+      parent: 2
 - proto: CMSpawnPointCommandingOfficer
   entities:
   - uid: 5757
@@ -20720,6 +20727,20 @@ entities:
     components:
     - type: Transform
       pos: -43.5,7.5
+      parent: 2
+- proto: CMSpawnPointFireteamLeader
+  entities:
+  - uid: 7916
+    components:
+    - type: Transform
+      pos: 64.5,10.5
+      parent: 2
+- proto: CMSpawnPointHospitalCorpsman
+  entities:
+  - uid: 7917
+    components:
+    - type: Transform
+      pos: 63.5,6.5
       parent: 2
 - proto: CMSpawnPointIntelOfficer
   entities:
@@ -20855,6 +20876,28 @@ entities:
     - type: Transform
       pos: 43.5,4.5
       parent: 2
+- proto: CMSpawnPointRifleman
+  entities:
+  - uid: 7918
+    components:
+    - type: Transform
+      pos: 64.5,4.5
+      parent: 2
+  - uid: 7919
+    components:
+    - type: Transform
+      pos: 64.5,6.5
+      parent: 2
+  - uid: 7920
+    components:
+    - type: Transform
+      pos: 64.5,7.5
+      parent: 2
+  - uid: 7924
+    components:
+    - type: Transform
+      pos: 64.5,9.5
+      parent: 2
 - proto: CMSpawnPointSeniorEnlistedAdvisor
   entities:
   - uid: 5750
@@ -20862,12 +20905,33 @@ entities:
     - type: Transform
       pos: -42.5,5.5
       parent: 2
+- proto: CMSpawnPointSmartGunner
+  entities:
+  - uid: 7921
+    components:
+    - type: Transform
+      pos: 63.5,7.5
+      parent: 2
+- proto: CMSpawnPointSquadLeader
+  entities:
+  - uid: 7922
+    components:
+    - type: Transform
+      pos: 63.5,10.5
+      parent: 2
 - proto: CMSpawnPointStaffOfficer
   entities:
   - uid: 5749
     components:
     - type: Transform
       pos: -42.5,8.5
+      parent: 2
+- proto: CMSpawnPointWeaponsSpecialist
+  entities:
+  - uid: 7923
+    components:
+    - type: Transform
+      pos: 63.5,9.5
       parent: 2
 - proto: CMStampApproved
   entities:
