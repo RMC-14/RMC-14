@@ -225,7 +225,7 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: ImmuneToUnarmeda
+  - type: ImmuneToUnarmed
 
 - type: edgeSpreader
   id: XenoWeeds
