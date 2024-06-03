@@ -216,8 +216,8 @@
       #  amount: 5
       - id: CMFireExtinguisher
         amount: 5
-      #- id: CMFireExtinguisherPortable
-      #  amount: 1
+      - id: CMFireExtinguisherPortable
+        amount: 1
       - id: CMRollerBedSpawnFolded
         amount: 1
 #      - id: CMScabbardMacheteFull
@@ -515,8 +515,8 @@
         points: 5
     #- id: CMFultonDeviceStack
     #  points: 5
-    #- id: CMFireExtinguisherPortable
-    #  points: 5
+      - id: CMFireExtinguisherPortable
+        points: 5
     #- id: CMMotionDetector
     #  points: 15
     #- id: CMDataDetector
@@ -612,8 +612,8 @@
       entries:
       - id: CMWhistle
         points: 3
-    #- id: CMFireExtinguisherPortable
-    #  points: 3
+      - id: CMFireExtinguisherPortable
+        points: 3
     #- id: CMMotionDetector
     #  points: 5
     #- id: CMFultonDeviceStack
@@ -959,7 +959,8 @@
     #- id: CMAutoinjectorPouchFull
     - name: Utilities
       entries:
-    #- id: CMFireExtinguisherPortable
+      - id: CMFireExtinguisherPortable
+        points: 5
       - id: CMRollerBedSpawnFolded
         points: 5
     #- id: CMFultonDeviceStack
@@ -1113,8 +1114,8 @@
         points: 5
     #- id: CMFultonDeviceStack
     #  points: 5
-    #- id: CMFireExtinguisherPortable
-    #  points: 3
+      - id: CMFireExtinguisherPortable
+        points: 3
     #- id: CMMotionDetector
     #  points: 8
       - id: CMWhistle
@@ -1329,7 +1330,8 @@
     #    CMWeldingGoggles: 3P
     - name: Utilities
       entries:
-    #    CMFireExtinguisherPortable: 3P
+      - id: CMFireExtinguisherPortable
+        points: 3
     #    CMMotionDetector: 8P
       - id: CMWhistle
         points: 3
@@ -1558,8 +1560,8 @@
     #  points: 6
     - name: Utilities
       entries:
-    #- id: CMFireExtinguisherPortable
-    #  points: 5
+      - id: CMFireExtinguisherPortable
+        points: 5
       - id: CMWhistle
         points: 5
       - id: CMRollerBedSpawnFolded
@@ -1750,8 +1752,8 @@
         amount: 5
     #- id: CMFultonDeviceStack
     #  amount: 5
-    #- id: CMFireExtinguisherPortable
-    #  amount: 5
+      - id: CMFireExtinguisherPortable
+        amount: 5
       - id: CMWhistle
         points: 5
     - name: Binoculars

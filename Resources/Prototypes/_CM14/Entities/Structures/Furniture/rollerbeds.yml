@@ -1,9 +1,15 @@
-﻿- type: entity
+﻿- type: Tag
+  id: CMRollerBed
+
+- type: entity
   parent: RollerBed
   id: CMRollerBed
   name: roller bed
   description: A collapsed roller bed that can be carried around.
   components:
+  - type: Tag
+    tags:
+    - CMRollerBed
   - type: Sprite
     sprite: _CM14/Structures/Furniture/rollerbeds.rsi
     noRot: true
