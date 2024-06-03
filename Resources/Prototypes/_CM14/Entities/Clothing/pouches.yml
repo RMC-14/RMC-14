@@ -394,7 +394,7 @@
       #      - TODO CM14 splint
       #      - TODO CM14 penlight
       - CMAutoInjector
-      #      - TODO CM14 mini fire extinguisher
+      - CMFireExtinguisherPortable
       #      - TODO CM14 syringe cases
       - CMSurgicalLine
       - CMSynthGraft
@@ -422,7 +422,7 @@
       #      - TODO CM14 splint
       - PillCanister
       - DiscreteHealthAnalyzer
-      #      - TODO CM14 mini fire extinguisher
+      - CMFireExtinguisherPortable
       - CMSurgicalLine
       - CMSynthGraft
       components:
@@ -464,8 +464,8 @@
       - Bloodpack
       #      - TODO CM14 splint
       - CMAutoInjector
-      #      - TODO CM14 mini fire extinguisher
-      #      - TODO CM14 roller beds
+      - CMFireExtinguisherPortable
+      - CMRollerBed
       - BodyBag
       components:
       - Hypospray
@@ -561,15 +561,15 @@
       - CMAutoInjector
       #      - TODO CM14 syringe case
       #      - TODO CM14 surgical case
-      #      - TODO CM14 mini fire extinguisher
-      #      - TODO CM14 roller beds
+      - CMFireExtinguisherPortable
+      - CMRollerBed
       - CMSurgicalLine
       - CMSynthGraft
-      #      - TODO CM14 roller beds
+      - CMRollerBed
       - BodyBag
-      #      - TODO CM14 blood containers
       components:
       - Hypospray
+      - IVDrip
 
 - type: entity
   parent: [CMPouchStorage, CMPouchOpenClosed]
