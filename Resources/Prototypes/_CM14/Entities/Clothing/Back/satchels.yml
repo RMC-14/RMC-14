@@ -13,6 +13,18 @@
 
 - type: entity
   parent: CMSatchel
+  id: CMBackpackSniper
+  name: M3 sniper's smock
+  description: A specially-designed smock with pockets for all your sniper needs.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Back/Backpacks/Marines/smock.rsi
+  - type: Storage
+    grid:
+    - 0,0,20,1 # Satchel but with backpack capacity
+
+- type: entity
+  parent: CMSatchel
   id: CMSatchelEngineer
   name: industrial satchel
   description: A tough satchel with extra pockets.
