@@ -35,4 +35,7 @@ public sealed partial class CMVendorEntry
 
     [DataField]
     public int? Points;
+
+    [DataField]
+    public int Spawn = 1;
 }

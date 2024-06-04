@@ -440,9 +440,9 @@
     #- id: CMM79GrenadeLauncher
     #  points: 30
     - name: Explosives
-      entries: [ ]
-    #- id: CMM40HEDPHighExplosivePacket3
-    #  points: 20
+      entries:
+      - id: CMPacketGrenadeHighExplosiveFilled
+        points: 20
     #- id: CMM40HIDPIncendiaryPacket3
     #  points: 20
     #- id: CMM40HPDPPhosphorusPacket3
@@ -655,9 +655,9 @@
     #- id: CMWeldingGoggles
     #  points: 5
     - name: Explosives
-      entries: [ ]
-    #- id: CMM40HEDPHighExplosivePacketx3
-    #  points: 18
+      entries:
+      - id: CMPacketGrenadeHighExplosiveFilled
+        points: 18
     #- id: CMM40HIDPIncendiaryPacketx3
     #  points: 18
     #- id: CMM40HPDPWhitePhosphorusPacketx3
@@ -864,9 +864,10 @@
     #- id: 84mmWhitePhosphorusRocket
     #  points: 40
     - name: Extra Grenades
-      entries: [ ]
-    #- id: M40HEDPGrenadesx6
-    #  points: 40
+      entries:
+      - id: CMGrenadeHighExplosive
+        points: 40
+        spawn: 6
     #- id: M40HIDPIncendiaryGrenadesx6
     #  points: 40
     #- id: M40HPDPWhitePhosphorusGrenadesx6
@@ -1037,9 +1038,9 @@
     #- id: CMES11MobileFuelCanister
     #  points: 4
     - name: Explosives
-      entries: [ ]
-    #- id: CMM40HEDPHighExplosivePacket3
-    #  points: 18
+      entries:
+      - id: CMPacketGrenadeHighExplosiveFilled
+        points: 18
     #- id: CMM40HIDPIncendiaryPacket3
     #  points: 18
     #- id: CMM40HPDPPhosphorusPacket3
@@ -1288,8 +1289,9 @@
     #    CMG8AGeneralUtilityPouch: 15P
     #    CMMS11SmartRefillTank: 6P
     - name: Explosives
-      entries: [ ]
-    #    CMM40HEDPHighExplosivePacketx3grenades: 18P
+      entries:
+      - id: CMPacketGrenadeHighExplosiveFilled
+        points: 18
     #    CMM40HIDPIncendiaryPacketx3grenades: 18P
     #    CMM40HPDPWhitePhosphorusPacketx3grenades: 18P
     #    CMM40HSDPSmokePacketx3grenades: 9P
@@ -1527,9 +1529,9 @@
     #- id: CMReflexSight
     #  points: 0
     - name: Explosives
-      entries: [ ]
-    #- id: CMM40HEDPHighExplosivePacketx3
-    #  points: 30
+      entries:
+      - id: CMPacketGrenadeHighExplosiveFilled
+        points: 30
     #- id: CMM40HIDPIncendiaryPacketx3
     #  points: 30
     #- id: CMM40HPDPWhitePhosphorusPacketx3
@@ -1689,9 +1691,9 @@
     #- id: CMM4A3APMagazine
     #  points: 5
     - name: Explosives
-      entries: [ ]
-    #- id: CMM40HEDPHighExplosivePacketx3
-    #  points: 18
+      entries:
+      - id: CMPacketGrenadeHighExplosiveFilled
+        points: 18
     #- id: CMM40HIDPIncendiaryPacketx3
     #  points: 18
     #- id: CMM40HPDPWhitePhosphorusPacketx3

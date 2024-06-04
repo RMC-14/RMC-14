@@ -141,3 +141,4 @@
   - type: NoSlip
   - type: AffectableByWeeds
   - type: UserIFF
+  - type: UserLimitHits

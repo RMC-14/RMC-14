@@ -3,13 +3,16 @@ using Content.Server.Spreader;
 using Content.Shared._CM14.Xenos.Weeds;
 using Content.Shared.Atmos;
 using Content.Shared.Coordinates;
+using Content.Shared.Maps;
 using Robust.Server.GameObjects;
+using Robust.Shared.Map;
 
 namespace Content.Server._CM14.Xenos.Weeds;
 
 public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 {
     [Dependency] private readonly MapSystem _mapSystem = default!;
+    [Dependency] private readonly ITileDefinitionManager _tiles = default!;
 
     private readonly List<EntityUid> _anchored = new();
 
@@ -44,8 +47,12 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
         var any = false;
         foreach (var neighbor in args.NeighborFreeTiles)
         {
+            var tileRef = neighbor.Tile;
+            if (tileRef.GetContentTileDefinition(_tiles) is { WeedsSpreadable: false })
+                continue;
+
             var gridOwner = neighbor.Grid.Owner;
-            var tile = neighbor.Tile.GridIndices;
+            var tile = tileRef.GridIndices;
             var coords = _mapSystem.GridTileToLocal(gridOwner, neighbor.Grid, tile);
 
             var sourceLocal = _mapSystem.CoordinatesToTile(gridOwner, neighbor.Grid, transform.Coordinates);
@@ -93,7 +100,5 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
         if (!any)
             RemCompDeferred<ActiveEdgeSpreaderComponent>(ent);
-
-        args.Updates--;
     }
 }
