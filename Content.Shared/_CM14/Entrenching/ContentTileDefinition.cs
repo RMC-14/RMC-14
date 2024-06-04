@@ -5,4 +5,7 @@ public sealed partial class ContentTileDefinition
 {
     [DataField]
     public bool CanDig;
+
+    [DataField]
+    public bool WeedsSpreadable = true;
 }
