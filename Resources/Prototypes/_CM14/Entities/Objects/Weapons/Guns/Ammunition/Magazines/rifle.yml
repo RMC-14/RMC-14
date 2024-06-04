@@ -70,7 +70,7 @@
     whitelist:
       tags:
       - CMCartridgeRifle10x24mm
-    proto: CMCartridgeRifle10x24mm
+    proto: AFF
     capacity: 300
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m41ae2.rsi
@@ -85,10 +85,12 @@
     zeroVisible: false
   - type: Appearance
 
+# M4RA
 - type: entity
   parent: BaseMagazineRifle
   id: CMMagazineRifleM4RA
   name: "M4RA magazine (10x24mm)"
+  description: "A magazine of standard 10x24mm rounds for use in the M4RA battle rifle."
   components:
   - type: Tag
     tags:
@@ -109,6 +111,31 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
 
+- type: entity
+  parent: CMMagazineRifleM4RA
+  id: CMMagazineRifleM4RAAP
+  name: M4RA armor-piercing magazine (10x24mm)
+  description: "A magazine of armor-piercing 10x24mm rounds for use in the M4RA battle rifle."
+  suffix: AP
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m4ra.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#1F951F"
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeRifle10x24mmAP
+    proto: CMCartridgeRifle10x24mmAP
+    capacity: 25
+
+# M4RA Extended
 - type: entity
   parent: CMMagazineRifleM4RA
   id: CMMagazineRifleExtendedM4RA
