@@ -198,6 +198,7 @@
         Brute: 1.25
   - type: AffectableByWeeds
   - type: ComplexInteraction
+  - type: UserLimitHits
 
 - type: entity
   abstract: true

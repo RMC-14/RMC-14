@@ -1,66 +1,20 @@
 - type: entity
-  id: HEDPProjectile
-  name: M40 HEDP
-  parent: BaseBulletTrigger
-  noSpawn: true
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    layers:
-      - state: grenade
-  - type: ExplodeOnTrigger
-  - type: Explosive
-    explosionType: Default
-    totalIntensity: 150
-    intensitySlope: 3
-    maxIntensity: 10
-
-- type: entity
-  id: SmokeProjectile
-  name: M40 smoke
-  parent: BaseBulletTrigger
-  noSpawn: true
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    layers:
-      - state: grenade
-  - type: SmokeOnTrigger
-    duration: 30
-    spreadAmount: 50
-
-#- type: entity
-#  id: HEFAProjectile
-#  name: M40 HEFA
-#  parent: BaseBulletTrigger
-#  noSpawn: true
-#  components:
-#  - type: Sprite
-#    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-#    layers:
-#      - state: grenade
-#    canCreateVacuum: false
-#  - type: ClusterGrenade
-#    fillPrototype: ShrapnelProjectile
-#    maxGrenadesCount: 30
-#    grenadeType: enum.GrenadeType.Shoot
-#  - type: ContainerContainer
-#    containers:
-#      cluster-payload: !type:Container
-
-- type: entity
-  id: ShrapnelProjectile
+  parent: BaseBullet
+  id: CMProjectileShrapnel
   name: shrapnel
   noSpawn: true
-  parent: BaseBullet
+  categories:
+  - hideSpawnMenu
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     state: buckshot
   - type: Projectile
-    deleteOnCollide: false
     damage:
       types:
-        Piercing: 45
+        Piercing: 25
+    deleteOnCollide: true
+  - type: CMArmorPiercing
+    amount: 20
   - type: TimedDespawn
     lifetime: 0.25

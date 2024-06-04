@@ -376,3 +376,9 @@ CMOintment: CMOintment10
 
 # 2024-05-27
 DoorRemoteFirefight: null
+
+# 2024-06-04
+M40HEDP: CMGrenadeHighExplosive
+M40Smoke: CMGrenadeSmoke
+M40HEFA: CMGrenadeFrag
+ShrapnelProjectile: CMProjectileShrapnel
