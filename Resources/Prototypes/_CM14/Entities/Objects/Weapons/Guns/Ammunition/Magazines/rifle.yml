@@ -70,7 +70,7 @@
     whitelist:
       tags:
       - CMCartridgeRifle10x24mm
-    proto: AFF
+    proto: CMCartridgeRifle10x24mm
     capacity: 300
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m41ae2.rsi

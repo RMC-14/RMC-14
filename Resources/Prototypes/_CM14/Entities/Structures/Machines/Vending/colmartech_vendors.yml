@@ -245,11 +245,11 @@
   - type: CMAutomatedVendor
     sections:
     - name: Armor-Piercing Ammunition
-      entries: [ ]
-    #- id: CMMagazineM4RAAP
-    #  amount: 3
-    #- id: CMMagazineM39AP
-    #  amount: 3
+      entries:
+      - id: CMMagazineRifleM4RAAP
+        amount: 3
+      - id: CMMagazineM39AP
+        amount: 3
     #- id: CMMagazineM41AAP
     #  amount: 3
     - name: Extended Ammunition
@@ -461,9 +461,9 @@
     - name: Ammunition
       entries:
       - id: CMMagazineRifleM4RAAP
-      points: 10
-    #- id: CMM39APMagazine
-    #  points: 10
+        points: 10
+      - id: CMMagazineM39AP
+        points: 10
     #- id: CMM39ExtendedMagazine
     #  points: 10
     #- id: CMM41AAPMagazine
@@ -703,10 +703,10 @@
         points: 2
     - name: Special Ammunition
       entries:
-    - id: CMMagazineRifleM4RAAP
-      points: 6
-    #- id: CMM39APMagazine10x20mm
-    #  points: 6
+      - id: CMMagazineRifleM4RAAP
+        points: 6
+      - id: CMMagazineM39AP
+        points: 6
     #- id: CMM39ExtendedMagazine10x20mm
     #  points: 6
     #- id: CMM41AAPMagazine10x24mm
@@ -1057,11 +1057,11 @@
     #- id: CMM40MFHSMetalFoamGrenade
     #  points: 5
     - name: Ammunition
-      entries: [ ]
-    #- id: CMMagazineM4RAAP
-    #  points: 6
-    #- id: CMMagazineM39AP
-    #  points: 6
+      entries:
+      - id: CMMagazineRifleM4RAAP
+        points: 6
+      - id: CMMagazineM39AP
+        points: 6
     #- id: CMMagazineExtendedM39
     #  points: 6
     #- id: CMMagazineM41AAP
@@ -1301,7 +1301,8 @@
       entries:
       - id: CMMagazineRifleM4RAAP
         points: 6
-    #    CMM39APMagazine: 6P
+      - id: CMMagazineM39AP
+        point: 6
     #    CMM39ExtendedMagazine: 6P
     #    CMM41AAPMagazine: 6P
     #    CMM41AExtendedMagazine: 6P
@@ -1661,10 +1662,10 @@
     sections:
     - name: Ammunition
       entries:
-    - id: CMMagazineRifleM4RAAP
-      amount: 10
-    #- id: CMM39APMagazine
-    #  amount: 10
+      - id: CMMagazineRifleM4RAAP
+        amount: 10
+      - id: CMMagazineM39AP
+        amount: 10
     #- id: CMM39ExtendedMagazine
     #  amount: 10
     #- id: CMM41AAPMagazine
