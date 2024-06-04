@@ -75,6 +75,8 @@
         whitelist:
           tags:
           - CMCartridgeRifle10x24mm
+  - type: GunDamageModifier
+    multiplier: 1.1
 
 - type: entity
   name: M41AE2 heavy pulse rifle
@@ -167,3 +169,5 @@
         whitelist:
           tags:
           - CMCartridgeRifle10x24mm
+  - type: GunDamageModifier
+    multiplier: 1.4
