@@ -93,7 +93,5 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
         if (!any)
             RemCompDeferred<ActiveEdgeSpreaderComponent>(ent);
-
-        args.Updates--;
     }
 }
