@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ComputerCargoOrders, CMCargoCatalog]
+  parent: [ ComputerCargoOrders, CMCargoCatalog ]
   id: CMASRSConsole
   name: ASRS console
   description: A console for the Automated Storage Retrieval System.
@@ -7,17 +7,20 @@
   components:
   - type: Sprite
     layers:
-    - map: ["computerLayerBody"]
+    - map: [ "computerLayerBody" ]
       state: computer
-    - map: ["computerLayerKeyboard"]
+    - map: [ "computerLayerKeyboard" ]
       state: generic_keyboard
-    - map: ["computerLayerScreen"]
+    - map: [ "computerLayerScreen" ]
       state: request
-    - map: ["computerLayerKeys"]
+    - map: [ "computerLayerKeys" ]
       state: tech_key
   - type: CargoOrderConsole
   - type: ActivatableUI
     key: enum.RequisitionsUIKey.Key
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [ [ "CMAccessRequisitions" ] ]
   - type: UserInterface
     interfaces:
       enum.RequisitionsUIKey.Key:
@@ -28,8 +31,6 @@
     radius: 1.5
     energy: 1.6
     color: "#b89f25"
-  - type: AccessReader
-    access: [["Cargo"]]
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: BasicDevice
