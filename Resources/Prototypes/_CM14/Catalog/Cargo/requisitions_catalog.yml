@@ -90,8 +90,12 @@
         crate: CMCrateFlashlights
       - cost: 1000
         crate: CMCrateHighCapacityPowerCell
-#    - name: Explosives
-#      entries: []
+    - name: Explosives
+      entries:
+      - cost: 3000
+        crate: CMCrateGrenadesHighExplosive
+      - cost: 3000
+        crate: CMCrateGrenadesFrag
     - name: Food
       entries:
       - cost: 1000
