@@ -2,7 +2,7 @@
   parent: FaxMachineBase
   id: CMFax
   name: fax machine
-  description: Liaison`s best and only friend.
+  description: Liaison's best and only friend.
   components:
   - type: Sprite
     sprite: _CM14/Structures/Machines/fax_machine.rsi
