@@ -25,6 +25,7 @@
     magState: mag
     steps: 2
     zeroVisible: false
+    zeroOnlyOnEmpty: true
   - type: Appearance
 
 - type: entity
@@ -57,9 +58,9 @@
   - type: Appearance
 
 - type: entity
+  parent: CMMagazineRifleM41A
   id: CMMagazineRifleM41AE2
   name: "M41AE2 magazine (10x24mm)"
-  parent: CMMagazineRifleM41A
   components:
   - type: Tag
     tags:
