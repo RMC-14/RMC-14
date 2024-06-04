@@ -1,4 +1,5 @@
-﻿using Content.Shared.Roles;
+﻿using Content.Shared._CM14.Weapons.Ranged.IFF;
+using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._CM14.Rules;
@@ -43,4 +44,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     [DataField]
     public EntProtoId LarvaEnt = "CMXenoLarva";
+
+    [DataField]
+    public EntProtoId<IFFFactionComponent> MarineFaction = "FactionMarine";
 }

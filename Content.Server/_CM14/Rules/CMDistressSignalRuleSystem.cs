@@ -19,6 +19,7 @@ using Content.Server.Station.Systems;
 using Content.Shared._CM14.Marines;
 using Content.Shared._CM14.Marines.HyperSleep;
 using Content.Shared._CM14.Marines.Squads;
+using Content.Shared._CM14.Weapons.Ranged.IFF;
 using Content.Shared._CM14.Xenos;
 using Content.Shared.Coordinates;
 using Content.Shared.Mobs;
@@ -46,6 +47,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly IBanManager _bans = default!;
     [Dependency] private readonly BiomeSystem _biome = default!;
     [Dependency] private readonly ContainerSystem _containers = default!;
+    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly MarineSystem _marines = default!;
     [Dependency] private readonly MindSystem _mind = default!;
@@ -243,6 +245,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 ev.SpawnResult = _stationSpawning.SpawnPlayerMob(coordinates, ev.Job, ev.HumanoidCharacterProfile, ev.Station);
             }
 
+            // TODO CM14 split this out with an event
             SpriteSpecifier? icon = null;
             if (job.HasIcon && _prototypes.TryIndex(job.Icon, out StatusIconPrototype? jobIcon))
                 icon = jobIcon.Icon;
@@ -263,6 +266,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             if (TryComp(ev.SpawnResult, out HungerComponent? hunger))
                 _hunger.SetHunger(ev.SpawnResult.Value, 50.0f, hunger);
+
+            _gunIFF.SetUserFaction(ev.SpawnResult.Value, comp.MarineFaction);
 
             return;
         }
