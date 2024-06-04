@@ -459,9 +459,9 @@
     #- id: CMM20MineBox4
     #  points: 20
     - name: Ammunition
-      entries: [ ]
-    #- id: CMM4RAAPMagazine
-    #  points: 10
+      entries:
+      - id: CMMagazineRifleM4RAAP
+      points: 10
     #- id: CMM39APMagazine
     #  points: 10
     #- id: CMM39ExtendedMagazine
@@ -702,9 +702,9 @@
       - id: CMRollerBedSpawnFolded
         points: 2
     - name: Special Ammunition
-      entries: [ ]
-    #- id: CMM4RAAPMagazine10x24mm
-    #  points: 6
+      entries:
+    - id: CMMagazineRifleM4RAAP
+      points: 6
     #- id: CMM39APMagazine10x20mm
     #  points: 6
     #- id: CMM39ExtendedMagazine10x20mm
@@ -1298,8 +1298,9 @@
     #    CMM74AGMHornetAirburstPacketx3airburstgrenades: 20P
     #    CMM20MineBoxx4mines: 20P
     - name: Ammunition
-      entries: [ ]
-    #    CMM4RAAPMagazine: 6P
+      entries:
+      - id: CMMagazineRifleM4RAAP
+        points: 6
     #    CMM39APMagazine: 6P
     #    CMM39ExtendedMagazine: 6P
     #    CMM41AAPMagazine: 6P
@@ -1659,9 +1660,9 @@
     job: CMFireteamLeader
     sections:
     - name: Ammunition
-      entries: [ ]
-    #- id: CMM4RAAPMagazine
-    #  amount: 10
+      entries:
+    - id: CMMagazineRifleM4RAAP
+      amount: 10
     #- id: CMM39APMagazine
     #  amount: 10
     #- id: CMM39ExtendedMagazine

@@ -111,6 +111,7 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
 
+# M4RA AP
 - type: entity
   parent: CMMagazineRifleM4RA
   id: CMMagazineRifleM4RAAP
