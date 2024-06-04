@@ -1,10 +1,23 @@
 - type: entity
   parent: BaseBullet
   id: BulletRifle10x24mm
-  name: bullet (10x24mm)
   noSpawn: true
   components:
   - type: Projectile
     damage:
       types:
         Piercing: 40
+  - type: CMArmorPiercing
+    amount: 5
+
+- type: entity
+  parent: BulletRifle10x24mm
+  id: BulletRifle10x24mmAP
+  noSpawn: true
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+  - type: CMArmorPiercing
+    amount: 40

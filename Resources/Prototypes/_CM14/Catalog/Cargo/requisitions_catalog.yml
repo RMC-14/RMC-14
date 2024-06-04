@@ -4,8 +4,34 @@
   components:
   - type: RequisitionsComputer
     categories:
-#    - name: Ammo
-#      entries: []
+    - name: Ammo
+      entries:
+      - cost: 2000
+        crate: CMCrateMagazineRifleM41A
+      - cost: 4000
+        crate: CMCrateMagazineRifleM41AAP
+      - cost: 4000
+        crate: CMCrateMagazineExtendedRifleM41A
+      - cost: 2000
+        crate: CMCrateMagazineRifleM4RA
+      - cost: 4000
+        crate: CMCrateMagazineRifleM4RAAP
+      - cost: 2000
+        crate: CMCrateMagazineM39
+      - cost: 4000
+        crate: CMCrateMagazineM39AP
+      - cost: 2000
+        crate: CMCrateMagazinePistolM4A3
+      - cost: 3000
+        crate: CMCrateShellsShotgunSlugs
+      - cost: 3000
+        crate: CMCrateShellsShotgunBuckshot
+      - cost: 3000
+        crate: CMCrateShellsShotgunFlechette
+      - cost: 2000
+        crate: CMCrateMagazinePistol88m4AP
+      - cost: 4000
+        crate: CMCrateMagazinePistolVP78
 #    - name: Attachments
 #      entries: [ ] # TODO CM14
 #      - cost: 3000
