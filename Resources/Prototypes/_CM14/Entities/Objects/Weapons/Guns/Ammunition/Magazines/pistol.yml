@@ -7,6 +7,7 @@
     magState: mag
     steps: 2
     zeroVisible: false
+    zeroOnlyOnEmpty: true
   - type: Appearance
 
 - type: entity
