@@ -17,3 +17,18 @@
       - CMCartridge10x20mm
   - type: CartridgeAmmo
     proto: Bullet10x20mm
+
+- type: Tag
+  id: CMCartridge10x20mmAP
+
+- type: entity
+  parent: CMCartridge10x20mm
+  id: CMCartridge10x20mmAP
+  name: AP cartridge (10x20mm)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridge10x20mmAP
+  - type: CartridgeAmmo
+    proto: Bullet10x20mmAP

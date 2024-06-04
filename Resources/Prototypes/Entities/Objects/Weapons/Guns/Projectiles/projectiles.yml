@@ -124,7 +124,7 @@
 
 - type: entity
   id: BaseBulletAP
-  name: base bullet armor-piercing
+  name: base bullet AP
   parent: BaseBullet
   noSpawn: true
   components:
