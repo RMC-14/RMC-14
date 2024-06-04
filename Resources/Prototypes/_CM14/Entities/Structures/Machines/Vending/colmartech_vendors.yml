@@ -250,8 +250,8 @@
         amount: 3
       - id: CMMagazineM39AP
         amount: 3
-    #- id: CMMagazineM41AAP
-    #  amount: 3
+      - id: CMMagazineRifleM4RAAP
+        amount: 3
     - name: Extended Ammunition
       entries:
       - id: CMMagazineExtendedM39
@@ -459,15 +459,17 @@
     #  points: 15
     #- id: CMM20MineBox4
     #  points: 20
-    - name: Ammunition
+    - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM4RAAP
         points: 10
       - id: CMMagazineM39AP
         points: 10
-    #- id: CMM39ExtendedMagazine
-    #  points: 10
+      - id: CMMagazineExtendedM39
+        points: 10
       - id: CMMagazineRifleM41AAP
+        points: 10
+      - id: CMMagazineExtendedRifleM41A
         points: 10
     #- id: CMM44HeavySpeedLoader
     #  points: 10
@@ -708,12 +710,12 @@
         points: 6
       - id: CMMagazineM39AP
         points: 6
-    #- id: CMM39ExtendedMagazine10x20mm
-    #  points: 6
+      - id: CMMagazineExtendedM39
+        points: 6
       - id: CMMagazineRifleM41AAP
         points: 6
-    #- id: CMM41AExtendedMagazine10x24mm
-    #  points: 6
+      - id: CMMagazineExtendedRifleM41A
+        points: 6
     #- id: CMM240IncineratorTankNapthal
     #  points: 3
     #- id: CMM240IncineratorTankB-Gel
@@ -1062,12 +1064,12 @@
         points: 6
       - id: CMMagazineM39AP
         points: 6
-    #- id: CMMagazineExtendedM39
-    #  points: 6
+      - id: CMMagazineExtendedM39
+        points: 6
       - id: CMMagazineRifleM41AAP
         points: 6
-    #- id: CMMagazineExtendedM41A
-    #  points: 6
+      - id: CMMagazineExtendedRifleM41A
+        points: 6
     - name: Armors
       entries: [ ]
     #- id: CMArmorB12
@@ -1302,10 +1304,12 @@
         points: 6
       - id: CMMagazineM39AP
         points: 6
-    #    CMM39ExtendedMagazine: 6P
+      - id: CMMagazineExtendedM39
+        points: 6
       - id: CMMagazineRifleM41AAP
         points: 6
-    #    CMM41AExtendedMagazine: 6P
+      - id: CMMagazineExtendedRifleM41A
+        points: 6
     - name: Armors
       entries: [ ]
     #    CMM3B12PatternMarineArmor: 28P
@@ -1662,115 +1666,111 @@
   - type: CMAutomatedVendor
     job: CMFireteamLeader
     sections:
-    - name: Ammunition
+    - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM4RAAP
-        amount: 10
+        points: 10
       - id: CMMagazineM39AP
-        amount: 10
-    #- id: CMM39ExtendedMagazine
-    #  amount: 10
+        points: 10
+      - id: CMMagazineExtendedM39
+        points: 10
       - id: CMMagazineRifleM41AAP
-        amount: 10
-    #- id: CMM41AExtendedMagazine
-    #  amount: 10
+        points: 10
+      - id: CMMagazineExtendedRifleM41A
+        points: 10
+    - name: Sidearm Ammunition
+      entries:
+      - id: CMMagazinePistolVP78
+        points: 5
     #- id: CMM44HeavySpeedLoader
-    #  amount: 10
+    #  points: 10
     #- id: CMM4A3HPMagazine
-    #  amount: 5
+    #  points: 5
     #- id: CMM4A3APMagazine
-    #  amount: 5
+    #  points: 5
     - name: Explosives
       entries: [ ]
     #- id: CMM40HEDPHighExplosivePacketx3
-    #  amount: 18
+    #  points: 18
     #- id: CMM40HIDPIncendiaryPacketx3
-    #  amount: 18
+    #  points: 18
     #- id: CMM40HPDPWhitePhosphorusPacketx3
-    #  amount: 18
+    #  points: 18
     #- id: CMM40HSDPSmokePacketx3
-    #  amount: 9
+    #  points: 9
     #- id: CMM74AGMFragAirburstPacketx3
-    #  amount: 20
+    #  points: 20
     #- id: CMM74AGMIncendiaryAirburstPacketx3
-    #  amount: 20
+    #  points: 20
     #- id: CMM74AGMSmokeAirburstPacketx3
-    #  amount: 10
+    #  points: 10
     #- id: CMM74AGMHornetAirburstPacketx3
-    #  amount: 20
+    #  points: 20
     #- id: CMM20MineBoxx4
-    #  amount: 20
+    #  points: 20
     #- id: CMM40MFHSMetalFoamGrenade
-    #  amount: 5
+    #  points: 5
     - name: Restricted Firearms
       entries:
-      - id: CMWeaponPistolVP78
-        amount: 10
+      - id: CMWeaponPistolVP78 # TODO CM14 case with 2 mags
+        points: 5 # TODO CM14 10
     #- id: CMSU6SmartPistol
-    #  amount: 15
+    #  points: 15
     #- id: CMM79GrenadeLauncher
-    #  amount: 30
+    #  points: 30
     - name: Armors
       entries: [ ]
     #- id: CMM3B12PatternMarineArmor
-    #  amount: 30
+    #  points: 30
     - name: Clothing Items
       entries:
     #- id: CMScabbardMacheteFull
-    #  amount: 5
+    #  points: 5
       - id: CMPouchMacheteFilled
         points: 15
     #- id: CMUSCMRadioTelephonePack
-    #  amount: 5
+    #  points: 5
     #- id: CMWeldingGoggles
-    #  amount: 3
+    #  points: 3
     #- id: CMM276PatternCombatToolbeltRig
-    #  amount: 15
+    #  points: 15
     #- id: CMAutoinjectorPouchFull
-    #  amount: 15
+    #  points: 15
       - id: CMHandsInsulated
         points: 3
     #- id: CMNightVisionOptic
-    #  amount: 30
+    #  points: 30
     - name: Utilities
       entries:
     #- id: CMMotionDetector
-    #  amount: 15
-    #- id: CMPlasticExplosive
-    #  amount: 10
-    #- id: CMBreachingCharge
-    #  amount: 10
+    #  points: 15
       - id: CMRollerBedSpawnFolded
-        amount: 5
+        points: 5
     #- id: CMFultonDeviceStack
-    #  amount: 5
+    #  points: 5
       - id: CMFireExtinguisherPortable
-        amount: 5
+        points: 5
       - id: CMWhistle
         points: 5
     - name: Binoculars
       entries: [ ]
     #- id: CMBinoculars
-    #  amount: 5
+    #  points: 5
     - name: Helmet Optics
       entries: [ ]
     #- id: CMMedicalHelmetOptic
-    #  amount: 15
+    #  points: 15
     #- id: CMWeldingVisor
-    #  amount: 5
+    #  points: 5
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer
-        amount: 5
         points: 5
       - id: CMEncryptionKeyIntel
-        amount: 5
         points: 5
       - id: CMEncryptionKeyJTAC
-        amount: 5
-        points: 3
+        points: 5
       - id: CMEncryptionKeyRequisition
-        amount: 5
         points: 5
 
 - type: entity
