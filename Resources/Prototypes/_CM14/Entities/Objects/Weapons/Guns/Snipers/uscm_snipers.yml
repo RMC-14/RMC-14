@@ -48,3 +48,7 @@
     whitelist:
       components:
       - SniperWhitelist
+  - type: GunRequiresWield
+  - type: Corrodible
+    isCorrodible: false
+  - type: GunIFF
