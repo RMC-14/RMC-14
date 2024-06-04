@@ -466,8 +466,8 @@
         points: 10
     #- id: CMM39ExtendedMagazine
     #  points: 10
-    #- id: CMM41AAPMagazine
-    #  points: 10
+      - id: CMMagazineRifleM41AAP
+        points: 10
     #- id: CMM44HeavySpeedLoader
     #  points: 10
     - name: Armors
@@ -709,8 +709,8 @@
         points: 6
     #- id: CMM39ExtendedMagazine10x20mm
     #  points: 6
-    #- id: CMM41AAPMagazine10x24mm
-    #  points: 6
+      - id: CMMagazineRifleM41AAP
+        points: 6
     #- id: CMM41AExtendedMagazine10x24mm
     #  points: 6
     #- id: CMM240IncineratorTankNapthal
@@ -1064,8 +1064,8 @@
         points: 6
     #- id: CMMagazineExtendedM39
     #  points: 6
-    #- id: CMMagazineM41AAP
-    #  points: 6
+      - id: CMMagazineRifleM41AAP
+        points: 6
     #- id: CMMagazineExtendedM41A
     #  points: 6
     - name: Armors
@@ -1302,9 +1302,10 @@
       - id: CMMagazineRifleM4RAAP
         points: 6
       - id: CMMagazineM39AP
-        point: 6
+        points: 6
     #    CMM39ExtendedMagazine: 6P
-    #    CMM41AAPMagazine: 6P
+      - id: CMMagazineRifleM41AAP
+        points: 6
     #    CMM41AExtendedMagazine: 6P
     - name: Armors
       entries: [ ]
@@ -1668,8 +1669,8 @@
         amount: 10
     #- id: CMM39ExtendedMagazine
     #  amount: 10
-    #- id: CMM41AAPMagazine
-    #  amount: 10
+      - id: CMMagazineRifleM41AAP
+        amount: 10
     #- id: CMM41AExtendedMagazine
     #  amount: 10
     #- id: CMM44HeavySpeedLoader
