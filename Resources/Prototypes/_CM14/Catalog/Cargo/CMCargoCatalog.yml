@@ -6,8 +6,8 @@
     categories:
 #    - name: Ammo
 #      entries: []
-    - name: Attachments
-      entries: [ ] # TODO CM14
+#    - name: Attachments
+#      entries: [ ] # TODO CM14
 #      - cost: 3000
 #        crate: CMCrateAttachmentRedDot
 #      - cost: 3000
@@ -142,5 +142,15 @@
         crate: CMCrateM41A
       - cost: 4000
         crate: CMCrateM41AE2
-#    - name: Weapons Specialist Ammo
-#      entries: []
+      - cost: 3000
+        crate: CMCrateVP78
+    - name: Weapons Specialist Ammo
+      entries:
+      - cost: 4000
+        crate: CMCrateMagazineM42AMixed
+      - cost: 3000
+        crate: CMCrateMagazineM42AStandard
+      - cost: 3000
+        crate: CMCrateMagazineM42AFlak
+      - cost: 3000
+        crate: CMCrateMagazineM42AIncendiary

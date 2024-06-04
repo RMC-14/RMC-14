@@ -1,0 +1,43 @@
+﻿- type: entity
+  parent: CMCrateAmmo
+  id: CMCrateMagazineM42AMixed
+  name: M42A Sniper Mixed Magazine Crate (marksman x2, flak x2, incendiary x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineSniperM42A
+      amount: 2
+    - id: CMMagazineSniperM42AFlak
+      amount: 2
+    - id: CMMagazineSniperM42AIncendiary
+      amount: 2
+
+- type: entity
+  parent: CMCrateAmmo
+  id: CMCrateMagazineM42AStandard
+  name: M42A Sniper Standard Magazine Crate (x5)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineSniperM42A
+      amount: 5
+
+- type: entity
+  parent: CMCrateAmmo
+  id: CMCrateMagazineM42AFlak
+  name: M42A Sniper Flak Magazine Crate (x5)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineSniperM42AFlak
+      amount: 5
+
+- type: entity
+  parent: CMCrateAmmo
+  id: CMCrateMagazineM42AIncendiary
+  name: M42A Sniper Incendiary Magazine Crate (x5)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineSniperM42AIncendiary
+      amount: 5
