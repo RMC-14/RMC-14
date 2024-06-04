@@ -7291,7 +7291,7 @@ entities:
         - 0
         - 0
         - 0
-- proto: M40HEDP
+- proto: CMGrenadeHighExplosive
   entities:
   - uid: 188
     components:
