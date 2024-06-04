@@ -147,6 +147,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                 }
             }
 
+            var anyAmount = false;
             for (var entryIndex = 0; entryIndex < section.Entries.Count; entryIndex++)
             {
                 var entry = section.Entries[entryIndex];
@@ -176,6 +177,15 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
 
                 uiEntry.Amount.Modulate = disabled ? Color.Red : Color.White;
                 uiEntry.Panel.Button.Disabled = disabled;
+
+                if (!string.IsNullOrWhiteSpace(uiEntry.Amount.Text))
+                    anyAmount = true;
+            }
+
+            for (var entryIndex = 0; entryIndex < section.Entries.Count; entryIndex++)
+            {
+                var uiEntry = (CMAutomatedVendorEntry) uiSection.Entries.GetChild(entryIndex);
+                uiEntry.Amount.Visible = anyAmount;
             }
         }
 
