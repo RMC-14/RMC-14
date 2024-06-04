@@ -7313,7 +7313,7 @@ entities:
     - type: Transform
       pos: -3.542741,-1.0143263
       parent: 179
-- proto: M40HEFA
+- proto: CMGrenadeFrag
   entities:
   - uid: 398
     components:
@@ -7335,7 +7335,7 @@ entities:
     - type: Transform
       pos: -3.2406578,-1.2226596
       parent: 179
-- proto: M40Smoke
+- proto: CMGrenadeSmoke
   entities:
   - uid: 1211
     components:

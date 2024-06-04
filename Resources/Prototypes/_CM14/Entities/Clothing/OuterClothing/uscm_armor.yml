@@ -244,7 +244,7 @@
 - type: entity
   parent: CMArmorM3Medium
   id: CMArmorM45
-  name: M45 pattern ghillie armor
+  name: M45 pattern ghillie armor # TODO CM14 camo
   description: A lightweight ghillie camouflage suit, used by USCM snipers on recon missions. Very lightweight and surprisingly very protective.
   components:
   - type: Sprite
