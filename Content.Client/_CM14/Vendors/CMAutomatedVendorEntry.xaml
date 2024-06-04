@@ -5,7 +5,7 @@
     <BoxContainer Orientation="Horizontal">
         <LayeredTextureRect Name="Texture" Access="Public"
                             HorizontalExpand="False" VerticalExpand="False" />
-        <Label Name="Amount" Access="Public" MinWidth="5" Align="Center" />
+        <Label Name="Amount" Access="Public" MinWidth="30" Align="Center" />
         <Control MinWidth="5" />
         <cc:CMAutomatedVendorPanel Name="Panel" Access="Public" />
         <Button Text="?" Name="TooltipLabel" Access="Public" ModulateSelfOverride="#00000000" />
