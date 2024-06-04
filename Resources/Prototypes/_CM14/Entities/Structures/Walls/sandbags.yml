@@ -5,17 +5,6 @@
   description: A makeshift barricade made out of the sand from the ground. Tough to beat but easy to pierce.
   components:
   - type: Climbable
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.49,-0.49,0.49,-0.38"
-        density: 500
-        mask:
-        - FullTileMask
-        layer:
-        - TableLayer
   - type: MeleeSound
     soundGroups:
       Brute:

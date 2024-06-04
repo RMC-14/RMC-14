@@ -1,10 +1,12 @@
 ﻿<controls:RequisitionsOrderCategoriesView
     xmlns="https://spacestation14.io"
-    xmlns:controls="clr-namespace:Content.Client._CM14.Requisitions">
+    xmlns:controls="clr-namespace:Content.Client._CM14.Requisitions"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls">
     <BoxContainer Orientation="Vertical">
         <RichTextLabel Name="BudgetLabel" Access="Public" />
         <Button Name="MainMenuButton" Access="Public" Text="Main Menu" StyleClasses="ButtonSquare" />
-        <RichTextLabel Name="CategoryHeaderLabel" Access="Public" />
+        <cc:HSeparator Color="#4972A1" Margin="0 5" />
+        <RichTextLabel Name="CategoryHeaderLabel" Access="Public" Margin="0 0 0 5" />
         <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
             <BoxContainer Name="CategoriesContainer" Access="Public" Orientation="Vertical" />
         </ScrollContainer>

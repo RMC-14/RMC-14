@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, CMBaseWeaponGun]
   abstract: true
   id: CMWeaponPistolBase
   components:
@@ -23,19 +23,19 @@
   - type: Wieldable
   - type: Gun
     fireRate: 8
-    minAngle: 5
-    maxAngle: 70
-    angleIncrease: 60
-    angleDecay: 180 # fire 3x per second one handed and see no accuracy loss
+    minAngle: 10
+    maxAngle: 20
+    angleIncrease: 5
+    angleDecay: 10
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
     soundGunshot:
       collection: CMM4A3Shoot
   - type: GunWieldBonus
-    minAngle: 0
-    maxAngle: -50
-    angleIncrease: -50
+    minAngle: -10
+    maxAngle: -10
+    angleIncrease: -4
     angleDecay: 0
   - type: ItemSlots
     slots:
@@ -81,8 +81,8 @@
     slots:
       gun_magazine:
         name: Magazine
-        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        #insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg #TODO cm14 pistol sounds
+        #ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
         priority: 2
         whitelist:
           tags:
@@ -116,12 +116,58 @@
     slots:
       gun_magazine:
         name: Magazine
-        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        #insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg #TODO cm14 pistol sounds
+        #ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
         priority: 2
         whitelist:
           tags:
           - CMMagazinePistol88m4AP
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+          - CMCartridgePistol9mm
+
+- type: entity
+  parent: CMWeaponPistolBase
+  id: CMWeaponPistolVP78
+  name: VP78 pistol
+  description: A massive, formidable semi-automatic handgun chambered in 9mm squash-head rounds. A common sight throughout both UA and 3WE space, often held by both Weyland-Yutani PMC units and corporate executives. This weapon is also undergoing limited field testing as part of the USCM's next generation pistol program. The slide is engraved with the Weyland-Yutani logo reminding you who's really in charge.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Pistols/vp78.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _CM14/Objects/Weapons/Guns/Pistols/vp78.rsi
+  - type: Gun
+    minAngle: 0
+    maxAngle: 5
+    angleIncrease: 1
+    angleDecay: 5
+    fireRate: 2
+    selectedMode: SemiAuto
+    shotsPerBurst: 3
+    availableModes:
+    - SemiAuto
+#    - Burst # TODO CM14 higher fire rate, lower accuracy in burst
+    soundGunshot:
+      collection: CMM4A3Shoot
+  - type: GunWieldBonus
+    minAngle: 0
+    maxAngle: 0
+    angleIncrease: 0
+    angleDecay: 0
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazinePistolVP78
       gun_chamber:
         name: Chamber
         priority: 1

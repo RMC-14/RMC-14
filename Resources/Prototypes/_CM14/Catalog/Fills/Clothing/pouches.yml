@@ -223,13 +223,11 @@
 
 - type: entity
   parent: CMPouchFlare
-  id: CMPouchFlareFill
+  id: CMPouchFlareFilled
   suffix: Filled
   components:
-  - type: StorageFill
-    contents:
-    - id: CMMarkerFlare
-      amount: 8
+  - type: CMItemSlots
+    startingItem: CMFlare
 
 - type: entity
   parent: CMPouchTools

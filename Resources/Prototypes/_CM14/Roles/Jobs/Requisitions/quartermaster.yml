@@ -21,6 +21,7 @@
     components:
     - type: Skills
       construction: 2
+      firearms: 1
       fireman: 1
       intel: 1
       jtac: 3

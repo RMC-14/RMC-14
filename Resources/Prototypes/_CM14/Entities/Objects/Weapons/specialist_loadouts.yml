@@ -40,9 +40,9 @@
     - id: CMMagazineSniperM42AIncendiary
     - id: CMMagazineSniperM42AIncendiary
     - id: CMMagazineSniperM42AFlak
-#    - id: CMBackpackSmock
-#    - id: CMVP78Pistol
-#    - id: CMMagazineVP78
+    - id: CMBackpackSniper
+    - id: CMWeaponPistolVP78
+    - id: CMMagazinePistolVP78
     - id: CMM42ASniperRifle
 #    - id: CMFacepaintSniper
 #    - id: CMSpotter

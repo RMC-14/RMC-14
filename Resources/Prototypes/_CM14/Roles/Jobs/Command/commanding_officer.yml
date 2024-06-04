@@ -35,6 +35,7 @@
     - type: Skills
       cqc: 2
       construction: 2
+      firearms: 1
       fireman: 2
       endurance: 2
       engineer: 2

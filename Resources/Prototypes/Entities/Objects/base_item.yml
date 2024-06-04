@@ -1,5 +1,6 @@
 - type: entity
   name: "item"
+  parent: CMCorrodible
   id: BaseItem
   abstract: true
   components:

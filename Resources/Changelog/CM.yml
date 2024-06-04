@@ -962,5 +962,12 @@
   id: 126
   time: '2024-06-02T11:05:36.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2199
+- author: Whisper
+  changes:
+  - message: Added portable fire extinguisher
+    type: Add
+  id: 127
+  time: '2024-06-03T11:14:35.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2219
 Name: CM
 Order: -1
