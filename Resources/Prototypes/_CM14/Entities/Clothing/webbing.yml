@@ -5,7 +5,7 @@
   name: webbing
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/webbing.rsi
+    sprite: _CM14/Objects/Clothing/Webbing/webbing.rsi
   - type: Item
     size: Large
   - type: Storage
@@ -40,3 +40,32 @@
   - type : Storage
     grid:
     - 0,0,5,1
+
+- type: entity
+  parent: CMWebbing
+  id: CMWebbingBlack
+  name: black webbing vest
+  description: Robust black synthcotton vest with lots of pockets to hold whatever you need, but cannot hold in hands.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Webbing/webbing_black.rsi
+  - type : Storage
+    grid:
+    - 0,0,9,1
+  - type: Webbing
+    playerSprite:
+      sprite: _CM14/Objects/Clothing/Webbing/webbing_black.rsi
+      state: equipped
+
+- type: entity
+  parent: CMWebbingBlack
+  id: CMWebbingBrown
+  name: brown webbing vest
+  description: Worn brownish synthcotton vest with lots of pockets to unload your hands.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Webbing/webbing_brown.rsi
+  - type: Webbing
+    playerSprite:
+      sprite: _CM14/Objects/Clothing/Webbing/webbing_brown.rsi
+      state: equipped
