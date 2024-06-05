@@ -13,3 +13,102 @@
     - CMVendorHeadsetSquad
     - CMHandsBlackMarine
     - CMBootsBlackFilled
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: CMVendorBundleFireteamLeaderApparel
+  name: standard marine apparel
+  components:
+  - type: CMVendorBundle
+    bundle:
+    - ArmorHelmetM10 # TODO CM14 M4
+    - CMVendorHeadsetSquad
+    - CMHandsBlackMarine
+    - CMBootsBlackFilled
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: CMVendorBundleSquadMedicalApparel
+  name: standard marine apparel
+  components:
+  - type: CMVendorBundle
+    bundle:
+    - CMArmorHelmetM10Medic # TODO CM14 M4
+    - CMVendorHeadsetSquad
+    - CMHandsBlackMarine
+    - CMBootsBlackFilled
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: CMVendorBundleSquadMedicalEssentials
+  name: essential medical set
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Medical/stasisbag.rsi
+    state: bodybag_folded
+  - type: CMVendorBundle
+    bundle:
+    - CMStasisBagFolded
+    - CMDefibrillator
+    - CMAdvFirstAidKitFilled
+    - CMHealthAnalyzer
+#    - TODO CM14 medevac
+    - CMRollerBedSpawnFolded
+    - CMSurgicalLine
+    - CMSynthGraft
+    - CMSurgicalCaseFilled
+    - CMBloodPackFull # TODO CM14 O-
+    - CMBloodPackFull # TODO CM14 O-
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: CMVendorBundleCombatTechnicianApparel
+  name: standard marine apparel
+  components:
+  - type: CMVendorBundle
+    bundle:
+    - CMArmorHelmetM10Tech # TODO CM14 M4
+    - CMVendorHeadsetSquad
+    - CMHandsBlackMarine
+    - CMBootsBlackFilled
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: CMVendorBundleCombatTechnicianEssentials
+  name: essential engineer set
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Bombs/c4.rsi
+    state: icon
+  - type: CMVendorBundle
+    bundle:
+#      - # TODO CM14 plastic explosives
+    - CMSandbagEmpty25
+    - CMSheetMetal50
+    - CMSheetPlasteel30
+#    - # TODO CM14 high capacity power cell
+    - CMEntrenchingTool # TODO CM14 check that this starts folded
+    - LightReplacer # TODO CM14 cm light replacer
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: CMVendorBundleSquadLeaderApparel
+  name: standard marine apparel
+  components:
+  - type: CMVendorBundle
+    bundle:
+    - CMArmorHelmetM11 # TODO CM14 M4
+    - CMVendorHeadsetSquad
+    - CMHandsBlackMarine
+    - CMBootsBlackFilled
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: CMVendorBundleWeaponsSpecialistApparel
+  name: standard marine apparel
+  components:
+  - type: CMVendorBundle
+    bundle:
+    - CMVendorHeadsetSquad
+    - CMHandsBlackMarine
+    - CMBootsBlackFilled
