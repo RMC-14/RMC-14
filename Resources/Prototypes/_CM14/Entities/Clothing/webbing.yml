@@ -49,11 +49,13 @@
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Webbing/webbing_black.rsi
-    layers:
-    - state: webbing
   - type : Storage
     grid:
     - 0,0,9,1
+  - type: Webbing
+    playerSprite:
+      sprite: _CM14/Objects/Clothing/Webbing/webbing_black.rsi
+      state: equipped
 
 - type: entity
   parent: CMWebbingBlack
@@ -63,8 +65,7 @@
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Webbing/webbing_brown.rsi
-    layers:
-    - state: webbing
-  - type : Storage
-    grid:
-    - 0,0,9,1
+  - type: Webbing
+    playerSprite:
+      sprite: _CM14/Objects/Clothing/Webbing/webbing_brown.rsi
+      state: equipped
