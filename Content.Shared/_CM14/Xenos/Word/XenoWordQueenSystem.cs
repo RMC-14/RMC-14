@@ -70,7 +70,7 @@ public sealed class XenoWordQueenSystem : EntitySystem
 
         var xenos = Filter
             .Empty()
-            .AddWhereAttachedEntity(ent => CompOrNull<XenoComponent>(ent)?.Hive == queenXeno.Hive);
+            .AddWhereAttachedEntity(ent => TryComp(ent, out XenoComponent? otherXeno) && otherXeno.Hive == queenXeno.Hive);
 
         if (xenos.Count <= 1)
         {

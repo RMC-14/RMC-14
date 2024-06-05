@@ -1,4 +1,5 @@
-﻿using Content.Shared._CM14.Damage;
+﻿using Content.Shared._CM14.CCVar;
+using Content.Shared._CM14.Damage;
 using Content.Shared._CM14.Marines;
 using Content.Shared._CM14.Medical.Scanner;
 using Content.Shared._CM14.Vendors;
@@ -17,9 +18,13 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Lathe;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Components;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Radio;
 using Content.Shared.Standing;
 using Content.Shared.UserInterface;
+using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Xenos;
@@ -28,9 +33,11 @@ public sealed class XenoSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly CMDamageableSystem _cmDamageable = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThresholds = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -43,6 +50,10 @@ public sealed class XenoSystem : EntitySystem
     private EntityQuery<MobThresholdsComponent> _mobThresholdsQuery;
     private EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
     private EntityQuery<XenoRecoveryPheromonesComponent> _xenoRecoveryQuery;
+
+    private float _xenoDamageDealtMultiplier;
+    private float _xenoDamageReceivedMultiplier;
+    private float _xenoSpeedMultiplier;
 
     public override void Initialize()
     {
@@ -63,6 +74,13 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, GetDefaultRadioChannelEvent>(OnXenoGetDefaultRadioChannel);
         SubscribeLocalEvent<XenoComponent, AttackAttemptEvent>(OnXenoAttackAttempt);
         SubscribeLocalEvent<XenoComponent, UserOpenActivatableUIAttemptEvent>(OnXenoOpenActivatableUIAttempt);
+        SubscribeLocalEvent<XenoComponent, GetMeleeDamageEvent>(OnXenoGetMeleeDamage);
+        SubscribeLocalEvent<XenoComponent, DamageModifyEvent>(OnXenoDamageModify);
+        SubscribeLocalEvent<XenoComponent, RefreshMovementSpeedModifiersEvent>(OnXenoRefreshSpeed);
+
+        Subs.CVar(_config, CMCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
+        Subs.CVar(_config, CMCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
+        Subs.CVar(_config, CMCVars.CMXenoSpeedMultiplier, UpdateXenoSpeedMultiplier, true);
 
         UpdatesAfter.Add(typeof(SharedXenoPheromonesSystem));
     }
@@ -80,6 +98,9 @@ public sealed class XenoSystem : EntitySystem
 
         xeno.Comp.NextRegenTime = _timing.CurTime + xeno.Comp.RegenCooldown;
         Dirty(xeno);
+
+        if (!MathHelper.CloseTo(_xenoSpeedMultiplier, 1))
+            _movementSpeed.RefreshMovementSpeedModifiers(xeno);
     }
 
     private void OnXenoGetAdditionalAccess(Entity<XenoComponent> xeno, ref GetAccessTagsEvent args)
@@ -127,6 +148,41 @@ public sealed class XenoSystem : EntitySystem
             HasComp<CMAutomatedVendorComponent>(args.Target))
         {
             args.Cancel();
+        }
+    }
+
+    private void OnXenoGetMeleeDamage(Entity<XenoComponent> ent, ref GetMeleeDamageEvent args)
+    {
+        if (MathHelper.CloseTo(_xenoDamageDealtMultiplier, 1))
+            return;
+
+        args.Damage *= _xenoDamageDealtMultiplier;
+    }
+
+    private void OnXenoDamageModify(Entity<XenoComponent> ent, ref DamageModifyEvent args)
+    {
+        if (MathHelper.CloseTo(_xenoDamageReceivedMultiplier, 1))
+            return;
+
+        args.Damage *= _xenoDamageReceivedMultiplier;
+    }
+
+    private void OnXenoRefreshSpeed(Entity<XenoComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
+    {
+        if (MathHelper.CloseTo(_xenoSpeedMultiplier, 1))
+            return;
+
+        args.ModifySpeed(_xenoSpeedMultiplier, _xenoSpeedMultiplier);
+    }
+
+    private void UpdateXenoSpeedMultiplier(float speed)
+    {
+        _xenoSpeedMultiplier = speed;
+
+        var xenos = EntityQueryEnumerator<XenoComponent, MovementSpeedModifierComponent>();
+        while (xenos.MoveNext(out var uid, out _, out var comp))
+        {
+            _movementSpeed.RefreshMovementSpeedModifiers(uid, comp);
         }
     }
 

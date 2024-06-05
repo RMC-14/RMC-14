@@ -140,7 +140,6 @@
   id: CMBackpackWelder
   name: USCM technician welderpack
   description: A specialized backpack worn by USCM technicians. It carries a fueltank for quick welder refueling and use.
-  suffix: BROKEN, DONT SPAWN #todo cm14 backpack w solution holder support
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Back/Backpacks/Marines/welder.rsi

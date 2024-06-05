@@ -17,6 +17,7 @@
       domestics: 1
       construction: 3
       engineer: 3
+      firearms: 1
       powerLoader: 2
 
 - type: startingGear

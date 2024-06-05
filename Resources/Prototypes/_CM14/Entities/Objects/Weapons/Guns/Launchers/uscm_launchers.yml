@@ -1,6 +1,6 @@
 - type: entity
   name: M92 grenade launcher
-  parent: BaseWeaponLauncher
+  parent: [BaseWeaponLauncher, CMBaseWeaponGun]
   id: WeaponLauncherM92
   description: Oops.
   components:
@@ -25,7 +25,7 @@
       tags:
       - LauncherCompatibleGrenade
     capacity: 5
-    proto: M40HEDP
+    proto: CMGrenadeHighExplosive
     soundInsert:
       path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
   - type: OnShootTriggerAmmoTimer

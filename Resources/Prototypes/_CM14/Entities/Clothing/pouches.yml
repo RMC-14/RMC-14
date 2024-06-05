@@ -394,7 +394,7 @@
       #      - TODO CM14 splint
       #      - TODO CM14 penlight
       - CMAutoInjector
-      #      - TODO CM14 mini fire extinguisher
+      - CMFireExtinguisherPortable
       #      - TODO CM14 syringe cases
       - CMSurgicalLine
       - CMSynthGraft
@@ -422,7 +422,7 @@
       #      - TODO CM14 splint
       - PillCanister
       - DiscreteHealthAnalyzer
-      #      - TODO CM14 mini fire extinguisher
+      - CMFireExtinguisherPortable
       - CMSurgicalLine
       - CMSynthGraft
       components:
@@ -464,8 +464,8 @@
       - Bloodpack
       #      - TODO CM14 splint
       - CMAutoInjector
-      #      - TODO CM14 mini fire extinguisher
-      #      - TODO CM14 roller beds
+      - CMFireExtinguisherPortable
+      - CMRollerBed
       - BodyBag
       components:
       - Hypospray
@@ -561,15 +561,15 @@
       - CMAutoInjector
       #      - TODO CM14 syringe case
       #      - TODO CM14 surgical case
-      #      - TODO CM14 mini fire extinguisher
-      #      - TODO CM14 roller beds
+      - CMFireExtinguisherPortable
+      - CMRollerBed
       - CMSurgicalLine
       - CMSynthGraft
-      #      - TODO CM14 roller beds
+      - CMRollerBed
       - BodyBag
-      #      - TODO CM14 blood containers
       components:
       - Hypospray
+      - IVDrip
 
 - type: entity
   parent: [CMPouchStorage, CMPouchOpenClosed]
@@ -600,20 +600,22 @@
     - 0,0,6,1 #7 slots
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchOpenClosed]
+  parent: CMPouch
   id: CMPouchFlare
   name: flare pouch
   description: A pouch designed to hold flares. Refillable with an M94 flare pack.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Pouches/flare.rsi
-  - type: Storage
-    maxItemSize: Small
-    grid:
-    - 0,0,7,1 #8 slots
-    whitelist:
-      tags:
-      - Flare
+  - type: CMItemSlots
+    cooldown: 1
+    cooldownPopup: You need to wait before taking another flare!
+    count: 8
+    slot:
+      name: Flare
+      whitelist:
+        tags:
+        - Flare
 
 - type: entity
   parent: [CMPouchStorage, CMPouchOpenClosed]

@@ -7,21 +7,21 @@
     size: Large
   - type: AmmoCounter
   - type: Gun
-    minAngle: 15
-    maxAngle: 85
-    angleIncrease: 30
+    minAngle: 20
+    maxAngle: 75
+    angleIncrease: 25
     angleDecay: 45
-    fireRate: 8
+    fireRate: 7
     selectedMode: FullAuto
     availableModes:
     - SemiAuto
     - Burst
     - FullAuto
   - type: GunWieldBonus
-    minAngle: -5
-    maxAngle: -70
-    angleIncrease: -20
-    angleDecay: +10
+    minAngle: -20
+    maxAngle: -50
+    angleIncrease: -5
+    angleDecay: 10
 
 - type: entity
   parent: CMBaseWeaponSMG
@@ -39,16 +39,8 @@
   - type: Clothing
     sprite: _CM14/Objects/Weapons/Guns/SMGs/m39.rsi
   - type: Gun
-    minAngle: 15
-    maxAngle: 35
-    angleIncrease: 10
-    angleDecay: 16
-    fireRate: 8
     soundGunshot:
       path: /Audio/_CM14/Weapons/Guns/Gunshots/gun_m39.ogg
-  - type: GunWieldBonus
-    minAngle: -5
-    maxAngle: -5
   - type: ItemSlots
     slots:
       gun_magazine:

@@ -16,6 +16,7 @@
         - FullTileMask
         layer:
         - TableLayer
+        - LowImpassable
   - type: RotationDrawDepth
     southDrawDepth: OverMobs
   - type: Barricade
@@ -267,6 +268,10 @@
   - type: Construction
     graph: BarricadeMetalDoorGraph
     node: nodeBarricadeMetalDoor
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMBarricadeMetalDoor

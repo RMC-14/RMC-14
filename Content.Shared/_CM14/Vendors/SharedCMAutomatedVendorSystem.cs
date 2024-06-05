@@ -173,17 +173,20 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         var min = comp.MinOffset;
         var max = comp.MaxOffset;
-        var offset = _random.NextVector2Box(min.X, min.Y, max.X, max.Y);
-        if (entity.TryGetComponent(out CMVendorBundleComponent? bundle, _compFactory))
+        for (var i = 0; i < entry.Spawn; i++)
         {
-            foreach (var bundled in bundle.Bundle)
+            var offset = _random.NextVector2Box(min.X, min.Y, max.X, max.Y);
+            if (entity.TryGetComponent(out CMVendorBundleComponent? bundle, _compFactory))
             {
-                Vend(vendor, actor, bundled, offset);
+                foreach (var bundled in bundle.Bundle)
+                {
+                    Vend(vendor, actor, bundled, offset);
+                }
             }
-        }
-        else
-        {
-            Vend(vendor, actor, entry.Id, offset);
+            else
+            {
+                Vend(vendor, actor, entry.Id, offset);
+            }
         }
 
         if (entity.TryGetComponent(out CMChangeUserOnVendComponent? change, _compFactory) &&

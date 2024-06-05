@@ -140,3 +140,5 @@
         Asphyxiation: -0.33
   - type: NoSlip
   - type: AffectableByWeeds
+  - type: UserIFF
+  - type: UserLimitHits

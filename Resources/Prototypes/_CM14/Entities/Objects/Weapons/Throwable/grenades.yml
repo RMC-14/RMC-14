@@ -2,29 +2,31 @@
   abstract: true
   parent: GrenadeBase
   id: CMGrenadeBase
-  name: M40 HEDP grenade
+  name: grenade
   description: Duck and cover.
   components:
+  - type: Explosive
+    explosionType: CM
   - type: ExplosionResistance
     damageCoefficient: 0
   - type: AmmoFixedDistance
 
 - type: entity
-  name: M40 HEDP grenade
-  description: Duck and cover.
   parent: CMGrenadeBase
-  id: M40HEDP
+  id: CMGrenadeHighExplosive
+  name: M40 HEDP grenade
+  description: High-Explosive Dual-Purpose. A small, but deceptively strong blast grenade that has been phasing out the M15 HE grenades alongside the M40 HEFA. Capable of being loaded in the M92 Launcher, or thrown by hand.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Grenades/m40hedp.rsi
   - type: ExplodeOnTrigger
   - type: Explosive
-    explosionType: Default
-    maxIntensity: 10
-    intensitySlope: 3
-    totalIntensity: 135
+    maxIntensity: 40
+    intensitySlope: 10
+    totalIntensity: 400
     canCreateVacuum: false
   - type: OnUseTimerTrigger
+    delay: 4
     beepSound:
       path: "/Audio/Effects/beep1.ogg"
       params:
@@ -39,9 +41,9 @@
 
 - type: entity
   parent: CMGrenadeBase
-  id: M40Smoke
+  id: CMGrenadeSmoke
   name: M40 smoke grenade
-  description: A grenade that does exactly what it says on the tin.
+  description: The M40 HSDP is a small, but powerful smoke grenade. Based off the same platform as the M40 HEDP. It is set to detonate in 2 seconds.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Grenades/m40smoke.rsi
@@ -61,26 +63,28 @@
   - type: Ammo
 
 - type: entity
-  parent: CMGrenadeBase
-  id: M40HEFA
+  parent: CMGrenadeHighExplosive
+  id: CMGrenadeFrag
   name: M40 HEFA grenade
-  description: Shrapnel. Shrapnel! WATCH OUT IT'S SHRAP-
+  description: High-Explosive Fragmenting-Antipersonnel. A small, but deceptively strong fragmentation grenade that has been phasing out the M15 fragmentation grenades alongside the M40 HEDP. Capable of being loaded in the M92 Launcher, or thrown by hand.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Grenades/m40hefa.rsi
+  - type: Explosive
+    maxIntensity: 13.3
+    intensitySlope: 4.5
+    totalIntensity: 110
+    deleteAfterExplosion: false
   - type: ClusterGrenade
-    fillPrototype: ShrapnelProjectile
-    maxGrenadesCount: 30
+    fillPrototype: CMProjectileShrapnel
+    maxGrenadesCount: 48
     grenadeType: enum.GrenadeType.Shoot
-  - type: TimerTriggerVisuals
-    primingSound:
-      path: /Audio/Effects/countdown.ogg
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
   - type: Tag
     tags:
     - Grenade
-#    - LauncherCompatibleGrenade
-#  - type: Ammo
-# Need to rework how cluster is handled
+    - LauncherCompatibleGrenade
+  - type: Ammo
+  - type: ClusterLimitHits

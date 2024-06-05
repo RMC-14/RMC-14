@@ -3,13 +3,16 @@ using Content.Server.Spreader;
 using Content.Shared._CM14.Xenos.Weeds;
 using Content.Shared.Atmos;
 using Content.Shared.Coordinates;
+using Content.Shared.Maps;
 using Robust.Server.GameObjects;
+using Robust.Shared.Map;
 
 namespace Content.Server._CM14.Xenos.Weeds;
 
 public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 {
     [Dependency] private readonly MapSystem _mapSystem = default!;
+    [Dependency] private readonly ITileDefinitionManager _tiles = default!;
 
     private readonly List<EntityUid> _anchored = new();
 
@@ -22,6 +25,10 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
     private void OnWeedsSpreadNeighbors(Entity<XenoWeedsComponent> ent, ref SpreadNeighborsEvent args)
     {
         var source = ent.Comp.IsSource ? ent.Owner : ent.Comp.Source;
+        var sourceWeeds = CompOrNull<XenoWeedsComponent>(source);
+
+        if (source != null && sourceWeeds != null)
+            Dirty(source.Value, sourceWeeds);
 
         // TODO CM14
         // There is an edge case right now where existing weeds can block new weeds
@@ -40,8 +47,12 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
         var any = false;
         foreach (var neighbor in args.NeighborFreeTiles)
         {
+            var tileRef = neighbor.Tile;
+            if (tileRef.GetContentTileDefinition(_tiles) is { WeedsSpreadable: false })
+                continue;
+
             var gridOwner = neighbor.Grid.Owner;
-            var tile = neighbor.Tile.GridIndices;
+            var tile = tileRef.GridIndices;
             var coords = _mapSystem.GridTileToLocal(gridOwner, neighbor.Grid, tile);
 
             var sourceLocal = _mapSystem.CoordinatesToTile(gridOwner, neighbor.Grid, transform.Coordinates);
@@ -54,6 +65,8 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
             neighborWeedsComp.IsSource = false;
             neighborWeedsComp.Source = source;
+            sourceWeeds?.Spread.Add(neighborWeeds);
+
             Dirty(neighborWeeds, neighborWeedsComp);
 
             EnsureComp<ActiveEdgeSpreaderComponent>(neighborWeeds);
@@ -80,13 +93,12 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                     }
 
                     weedable.Entity = SpawnAtPosition(weedable.Spawn, anchored.ToCoordinates());
+                    sourceWeeds?.Spread.Add(weedable.Entity.Value);
                 }
             }
         }
 
         if (!any)
             RemCompDeferred<ActiveEdgeSpreaderComponent>(ent);
-
-        args.Updates--;
     }
 }

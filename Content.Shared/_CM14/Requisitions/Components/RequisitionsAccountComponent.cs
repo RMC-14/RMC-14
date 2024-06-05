@@ -1,8 +1,9 @@
 ﻿using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._CM14.Requisitions.Components;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
 [Access(typeof(SharedRequisitionsSystem))]
 public sealed partial class RequisitionsAccountComponent : Component
 {
@@ -16,5 +17,11 @@ public sealed partial class RequisitionsAccountComponent : Component
     public int StartingDollarsPerMarine = 400;
 
     [DataField]
-    public int GainPerMinute = 300;
+    public int Gain = 150;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan NextGain;
+
+    [DataField]
+    public TimeSpan GainEvery = TimeSpan.FromSeconds(30);
 }

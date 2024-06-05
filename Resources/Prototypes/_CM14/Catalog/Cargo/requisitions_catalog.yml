@@ -4,10 +4,36 @@
   components:
   - type: RequisitionsComputer
     categories:
-#    - name: Ammo
-#      entries: []
-    - name: Attachments
-      entries: [ ] # TODO CM14
+    - name: Ammo
+      entries:
+      - cost: 2000
+        crate: CMCrateMagazineRifleM41A
+      - cost: 4000
+        crate: CMCrateMagazineRifleM41AAP
+      - cost: 4000
+        crate: CMCrateMagazineExtendedRifleM41A
+      - cost: 2000
+        crate: CMCrateMagazineRifleM4RA
+      - cost: 4000
+        crate: CMCrateMagazineRifleM4RAAP
+      - cost: 2000
+        crate: CMCrateMagazineM39
+      - cost: 4000
+        crate: CMCrateMagazineM39AP
+      - cost: 2000
+        crate: CMCrateMagazinePistolM4A3
+      - cost: 3000
+        crate: CMCrateShellsShotgunSlugs
+      - cost: 3000
+        crate: CMCrateShellsShotgunBuckshot
+      - cost: 3000
+        crate: CMCrateShellsShotgunFlechette
+      - cost: 2000
+        crate: CMCrateMagazinePistol88m4AP
+      - cost: 4000
+        crate: CMCrateMagazinePistolVP78
+#    - name: Attachments
+#      entries: [ ] # TODO CM14
 #      - cost: 3000
 #        crate: CMCrateAttachmentRedDot
 #      - cost: 3000
@@ -90,8 +116,12 @@
         crate: CMCrateFlashlights
       - cost: 1000
         crate: CMCrateHighCapacityPowerCell
-#    - name: Explosives
-#      entries: []
+    - name: Explosives
+      entries:
+      - cost: 3000
+        crate: CMCrateGrenadesHighExplosive
+      - cost: 3000
+        crate: CMCrateGrenadesFrag
     - name: Food
       entries:
       - cost: 1000
@@ -142,5 +172,15 @@
         crate: CMCrateM41A
       - cost: 4000
         crate: CMCrateM41AE2
-#    - name: Weapons Specialist Ammo
-#      entries: []
+      - cost: 3000
+        crate: CMCrateVP78
+    - name: Weapons Specialist Ammo
+      entries:
+      - cost: 4000
+        crate: CMCrateMagazineM42AMixed
+      - cost: 3000
+        crate: CMCrateMagazineM42AStandard
+      - cost: 3000
+        crate: CMCrateMagazineM42AFlak
+      - cost: 3000
+        crate: CMCrateMagazineM42AIncendiary
