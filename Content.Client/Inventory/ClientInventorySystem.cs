@@ -87,7 +87,7 @@ namespace Content.Client.Inventory
             if (args.Equipee != _playerManager.LocalEntity)
                 return;
             var update = new SlotSpriteUpdate(args.Equipment, args.SlotGroup, args.Slot,
-                HasComp<StorageComponent>(args.Equipment));
+                HasInventory(args.Equipment, out _));
             OnSpriteUpdate?.Invoke(update);
         }
 
