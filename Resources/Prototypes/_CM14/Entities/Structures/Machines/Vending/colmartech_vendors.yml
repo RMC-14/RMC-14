@@ -499,10 +499,10 @@
       entries:
       - id: CMWebbing
         points: 10
-    #- id: CMBrownWebbingVest
-    #  points: 15
-    #- id: CMBlackWebbingVest
-    #  points: 15
+      - id: CMWebbingBrown
+        points: 15
+      - id: CMWebbingBlack
+        points: 15
     #- id: CMDropPouch
     #  points: 15
     #- id: CMShoulderHolster
@@ -815,8 +815,8 @@
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
-      #- id: CMBrownWebbingVest
-      #- id: CMBlackWebbingVest
+      - id: CMWebbingBrown
+      - id: CMWebbingBlack
       #- id: CMShoulderHolster
       - id: CMWebbing
     #- id: CMDropPouch
@@ -949,8 +949,8 @@
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
-      #- id: CMBrownWebbingVest
-      #- id: CMBlackWebbingVest
+      - id: CMWebbingBrown
+      - id: CMWebbingBlack
       #- id: CMShoulderHolster
       - id: CMWebbing
     #- id: CMDropPouch
@@ -1222,8 +1222,8 @@
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
-      #- id: CMBrownWebbingVest
-      #- id: CMBlackWebbingVest
+      - id: CMWebbingBrown
+      - id: CMWebbingBlack
       #- id: CMShoulderHolster
       - id: CMWebbing
     #- id: CMDropPouch
@@ -1443,8 +1443,8 @@
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
-      #- id: CMBrownWebbingVest
-      #- id: CMBlackWebbingVest
+      - id: CMWebbingBrown
+      - id: CMWebbingBlack
       #- id: CMShoulderHolster
       - id: CMWebbing
     #- id: CMDropPouch
@@ -1656,8 +1656,8 @@
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
-    #- id: CMBrownWebbingVest
-    #- id: CMBlackWebbingVest
+      - id: CMWebbingBrown
+      - id: CMWebbingBlack
     #- id: CMShoulderHolster
       - id: CMWebbing
     #- id: CMDropPouch
@@ -1840,8 +1840,8 @@
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
-      #- id: CMBrownWebbingVest
-      #- id: CMBlackWebbingVest
+      - id: CMWebbingBrown
+      - id: CMWebbingBlack
       #- id: CMShoulderHolster
       - id: CMWebbing
     #- id: CMDropPouch
