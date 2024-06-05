@@ -134,6 +134,7 @@ These rules are neither exactly SS14 or CM13 and should be read in their entiret
         - Names of famous or fictional persons or names that resemble/parody them are strictly forbidden.
         - Terrible names open you up to being politely reminded to change it, smited, or instantly banned, depending on severity.
         - Names resulting in inappropriate phonetic play-on-words are forbidden (ex: "Mike Oxlong", "Ben Dover", "Dixie Normus").
+        - Nicknames, within reason, may be applied to humanoid character's names, in the format of "Firstname 'Nickname' Lastname".
 
     [color=#a4885c]Act like an actual human being.[/color]
         - Do not use text speak or emoticons IC, and do not refer to OOC things like admins or rounds in-game.
