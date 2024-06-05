@@ -41,31 +41,30 @@
 - type: entity
   parent: CMPouchFirstAid
   id: CMPouchFirstAidInjectors
-  description: Contains a painkiller autoinjector, first-aid autoinjector, some Burn kits, and some bandages.
   suffix: Injectors
   components:
   - type: StorageFill
     contents:
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
-    #- id: CMTramadolAutoInjector
+    #- id: CMTramadolAutoInjector # TODO CM14
     - id: CMEmergencyAutoInjector
 
 - type: entity
   parent: CMPouchFirstAid
-  id: CMPouchFirstAidFill
-  suffix: Filled
+  id: CMPouchFirstAidSplintsGauzeOintment
+  suffix: Splints, Gauze, Ointment
   components:
   - type: StorageFill
     contents:
-    - id: CMTricordrazineAutoInjector
-    - id: CMTraumaKit10
-    - id: CMBurnKit10
-    # splint
+    - id: CMBicaridineAutoInjector
+#    - id: CMSplints5
+    - id: CMOintment10
+    - id: CMGauze10
 
 - type: entity
   parent: CMPouchFirstAid
-  id: CMPouchFirstAidPills
+  id: CMPouchFirstAidPills # TODO CM14 packets
   suffix: Pills
   components:
   - type: StorageFill
@@ -184,7 +183,7 @@
 
 - type: entity
   parent: CMPouchAutoinjector
-  id: CMPouchAutoinjectorlFill
+  id: CMPouchAutoinjectorFill
   suffix: Filled
   components:
   - type: StorageFill

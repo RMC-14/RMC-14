@@ -65,15 +65,29 @@
     sprite: _CM14/Objects/Clothing/Belt/marine.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Belt/marine.rsi
+  - type: Item
+    size: Large
   - type: Storage
     maxItemSize: Normal
+    grid:
+    - 0,0,19,1 # TODO CM14 5 slots
     whitelist:
       tags:
-      - Cartridge
-      - SecBeltEquip
-      - Flashlight
+#      - # TODO CM14 FLARE
+#      - # TODO CM14 shotgun shell handfuls
+      - CMMagazinePistol
+      - CMMagazineRevolver
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - Grenade
       components:
       - BallisticAmmoProvider
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - CMMagazineRifle
+      - CMMagazineSmg
 
 - type: entity
   parent: CMBeltBaseStorage

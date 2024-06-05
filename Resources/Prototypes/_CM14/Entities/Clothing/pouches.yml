@@ -120,7 +120,7 @@
     sprite: _CM14/Objects/Clothing/Pouches/large_drop.rsi
   - type: Storage
     grid:
-    - 0,0,5,1 #6 slot
+    - 0,0,11,1 #6 slot
 
 # flamertank / fueltank.rsi
 # m39ap pouch
@@ -199,14 +199,13 @@
     - 0,0,7,1 #4 slots
     whitelist:
       tags:
-      - Ointment
+      - CMOintment
       - CMAutoInjector
-      - Brutepack
-      - CMTraumaKit
-      - CMBurnKit
-      # todo cm14 splint
+      - CMGauze
+      # TODO CM14 splint
+      # TODO CM14 pill packet
       components:
-      - Pill
+      - Pill # TODO CM14 pill packet, remove
 
 - type: entity
   parent: CMPouchFirstAid
