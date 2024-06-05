@@ -1152,6 +1152,7 @@ namespace Content.Shared.Interaction
                 return true;
 
             // webbing accessibility should be checked via its parent clothing
+            // this check itself is meh, probably this needs to be somehow refactored
             return (HasComp<WebbingComponent>(target) &&
                     _containerSystem.TryGetContainingContainer(target, out var targetContainer) &&
                     HasComp<WebbingClothingComponent>(targetContainer.Owner) &&
