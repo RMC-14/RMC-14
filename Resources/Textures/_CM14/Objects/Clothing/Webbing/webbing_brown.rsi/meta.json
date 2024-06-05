@@ -8,10 +8,10 @@
   },
   "states": [
     {
-      "name": "vest_brown"
+      "name": "webbing"
     },
     {
-      "name": "vest_brown",
+      "name": "equipped",
       "directions": 4
     }
   ]
