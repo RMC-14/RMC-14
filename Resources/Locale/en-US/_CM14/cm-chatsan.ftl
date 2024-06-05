@@ -6,7 +6,7 @@ tard = ""
 Humanoid:
 admin = high command
 eorg = warcrimes
-
+beno = xeno
 
 Xeno:
 sniper = long spitter
