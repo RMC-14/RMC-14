@@ -264,26 +264,28 @@
       #  amount: 1
       #- id: CMSpeedLoaderM44Heavy
       #  amount: 2
-    #- id: CMSpeedLoaderM44Marksman
-    #  amount: 2
+      #- id: CMSpeedLoaderM44Marksman
+      #  amount: 2
     - name: Restricted Firearm Ammunition
       entries:
       - id: CMMagazinePistolVP78
         amount: 5
-    #- id: CMMagazineSmartpistolSU6
-    #  amount: 5
-    #- id: CMIncineratorTankM240
-    #  amount: 3
-    #- id: CMMagazineDrumM56D
-    #  amount: 2
-    #- id: CMMagazineBoxM2C
-    #  amount: 2
-    #- id: CMBatonSlugsHIRR
-    #  amount: 6
-    #- id: CMStarShellN74AGMS
-    #  amount: 4
-    #- id: CMHornetShellM74AGMS
-    #  amount: 4
+      #- id: CMMagazineSmartpistolSU6
+      #  amount: 5
+      #- id: CMIncineratorTankM240
+      #  amount: 3
+      #- id: CMMagazineDrumM56D
+      #  amount: 2
+      #- id: CMMagazineBoxM2C
+      #  amount: 2
+      #- id: Box of Breaching Shells (16g)
+      #  amount: 2
+      #- id: CMBatonSlugsHIRR
+      #  amount: 6
+      #- id: CMStarShellN74AGMS
+      #  amount: 4
+      #- id: CMHornetShellM74AGMS
+      #  amount: 4
 
 - type: entity
   parent: ColMarTechBase
@@ -336,8 +338,8 @@
       entries:
       - id: CMMagazinePistol88m4AP
         amount: 25
-      - id: CMSpeedLoaderM44
-        amount: 20
+#      - id: CMSpeedLoaderM44
+#        amount: 20
       - id: CMMagazinePistolM4A3
         amount: 25
     - name: Attachments
@@ -431,6 +433,16 @@
       - id: CMMaskGas
       - id: CMMaskCoif
     #    CMRebreather #TODO: Make this
+    - name: Engineering Supplies
+      entries:
+      - id: CMEntrenchingTool
+        points: 5
+      - id: CMSandbagEmpty50
+        points: 20
+#      - id: ES-11 Mobile Fuel Canister
+#        points: 5
+      - id: CMWelderSmall
+        points: 5
     - name: Restricted Firearms
       entries:
       - id: CMWeaponPistolVP78
@@ -471,8 +483,12 @@
         points: 10
       - id: CMMagazineExtendedRifleM41A
         points: 10
-    #- id: CMM44HeavySpeedLoader
-    #  points: 10
+    - name: Sidearm Ammunition
+      entries:
+#      - id: CMM44HeavySpeedLoader
+#        points: 10
+      - id: CMMagazinePistolVP78
+        points: 5
     - name: Armors
       entries: [ ]
     #- id: CMM3B12PatternMarineArmor
@@ -509,10 +525,6 @@
     #  points: 15
     - name: Utilities
       entries:
-      - id: CMEntrenchingTool
-        points: 5
-      - id: CMSandbagEmpty50
-        points: 20
       - id: CMRollerBedSpawnFolded
         points: 5
     #- id: CMFultonDeviceStack
