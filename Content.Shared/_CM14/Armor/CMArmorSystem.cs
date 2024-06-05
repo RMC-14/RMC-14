@@ -119,6 +119,7 @@ public sealed class CMArmorSystem : EntitySystem
         if (armor <= 0)
             return;
 
+        args.Damage = new DamageSpecifier(args.Damage);
         var resist = Math.Pow(1.1, armor / 5.0);
         var types = _prototypes.Index<DamageGroupPrototype>(DamageGroup).DamageTypes;
 
