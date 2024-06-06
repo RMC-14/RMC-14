@@ -54,7 +54,7 @@ public abstract class SharedXenoHeadbuttSystem : EntitySystem
         args.Handled = true;
 
         var origin = _transform.GetMapCoordinates(xeno);
-        var target = _transform.ToMapCoordinates(args.Target);
+        var target = _transform.GetMapCoordinates(args.Target);
         var diff = target.Position - origin.Position;
         var length = diff.Length();
         diff *= xeno.Comp.Range / length;

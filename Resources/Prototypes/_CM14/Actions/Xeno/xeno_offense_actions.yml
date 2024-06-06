@@ -98,15 +98,14 @@
   name: Headbutt (10) # TODO CM14 proper plasma costs
   description: Charge in a direction and push back any enemies in your way.
   components:
-  - type: WorldTargetAction
+  - type: EntityTargetAction
     itemIconStyle: NoItem
     icon:
       sprite: _CM14/Actions/xeno_actions.rsi
       state: headbutt
     event: !type:XenoHeadbuttActionEvent
-    range: 15
+    range: 3
     useDelay: 6
-    checkCanAccess: false
 
 - type: entity
   id: ActionXenoTailSweep
