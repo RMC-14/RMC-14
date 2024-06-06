@@ -983,5 +983,12 @@
   id: 129
   time: '2024-06-05T08:55:53.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2244
+- author: Errant
+  changes:
+  - message: Added M94 flarepacks and boxes to vendors
+    type: Add
+  id: 130
+  time: '2024-06-06T10:26:01.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2317
 Name: CM
 Order: -1
