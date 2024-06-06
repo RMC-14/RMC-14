@@ -47,12 +47,6 @@
         whitelist:
           tags:
           - MagazinePistol
-      gun_chamber:
-        name: Chamber
-        priority: 1
-        whitelist:
-          tags:
-          - CartridgePistol
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -87,12 +81,6 @@
         whitelist:
           tags:
           - CMMagazinePistolM4A3
-      gun_chamber:
-        name: Chamber
-        priority: 1
-        whitelist:
-          tags:
-          - CMCartridgePistol9mm
 
 - type: entity
   parent: CMWeaponPistolBase
@@ -122,12 +110,6 @@
         whitelist:
           tags:
           - CMMagazinePistol88m4AP
-      gun_chamber:
-        name: Chamber
-        priority: 1
-        whitelist:
-          tags:
-          - CMCartridgePistol9mm
 
 - type: entity
   parent: CMWeaponPistolBase
@@ -168,9 +150,3 @@
         whitelist:
           tags:
           - CMMagazinePistolVP78
-      gun_chamber:
-        name: Chamber
-        priority: 1
-        whitelist:
-          tags:
-          - CMCartridgePistol9mm
