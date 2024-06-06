@@ -227,7 +227,7 @@
   suffix: Filled
   components:
   - type: CMItemSlots
-    startingItem: CMFlareM94
+    startingItem: CMFlare
 
 - type: entity
   parent: CMPouchTools

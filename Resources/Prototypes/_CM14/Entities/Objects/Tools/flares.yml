@@ -1,7 +1,7 @@
 - type: entity
   name: m94 flare
   parent: BaseItem
-  id: CMFlareM94
+  id: CMFlare
   description: A red USCM issued flare. There are instructions on the side, it reads 'pull cord, make light'.
   components:
   - type: Tag
@@ -68,7 +68,7 @@
 - type: entity
   abstract: true
   parent: CMMagazineBoxBase
-  id: CMBoxFlareM94Base
+  id: CMBoxPackFlareBase
   name: box of M94 flare packs
   description: A box of M94 marking flare packs, to brighten up your day.
   components:
@@ -90,17 +90,17 @@
       map: [ "enum.CMAmmoBoxLayers.Ammo" ]
 
 - type: entity
-  parent: CMBoxFlareM94Base
-  id: CMBoxFlareM94
+  parent: CMBoxPackFlareBase
+  id: CMBoxPackFlare
   suffix: Filled
   components:
   - type: CMItemSlots
-    startingItem: CMFlarePackM94
+    startingItem: CMPackFlare
 
 - type: entity
   abstract: true
   parent: CMMagazineBoxBase
-  id: CMFlarePackM94Base
+  id: CMPackFlareBase
   name: M94 flare pack
   description: A pack of M94 marking flares
   components:
@@ -121,9 +121,9 @@
     - state: m94
 
 - type: entity
-  parent: CMFlarePackM94Base
-  id: CMFlarePackM94
+  parent: CMPackFlareBase
+  id: CMPackFlare
   suffix: Filled
   components:
   - type: CMItemSlots
-    startingItem: CMFlareM94
+    startingItem: CMFlare

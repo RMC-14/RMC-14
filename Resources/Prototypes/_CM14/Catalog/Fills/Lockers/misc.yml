@@ -8,7 +8,7 @@
       - id: CMMaskGas
 ##      - id: EmergencyOxygenTankFilled
       - id: CMFirstAidO2KitFilled
-      - id: CMFlareM94
+      - id: CMFlare
 
 - type: entity
   id: CMClosetFireFilled
