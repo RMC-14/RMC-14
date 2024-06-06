@@ -70,6 +70,7 @@
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
+  - type: CMHardArmor
 
 - type: entity
   parent: CMArmorM3Medium

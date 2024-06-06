@@ -1,4 +1,7 @@
-﻿using Content.Shared._CM14.Xenos;
+﻿using Content.Shared._CM14.Medical.Surgery;
+using Content.Shared._CM14.Medical.Surgery.Steps;
+using Content.Shared._CM14.Xenos;
+using Content.Shared._CM14.Xenos.Projectile.Spit.Slowing;
 using Content.Shared.Alert;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -29,6 +32,11 @@ public sealed class CMArmorSystem : EntitySystem
         SubscribeLocalEvent<CMArmorComponent, InventoryRelayedEvent<CMGetArmorEvent>>(OnGetArmorRelayed);
         SubscribeLocalEvent<CMArmorComponent, GetExplosionResistanceEvent>(OnGetExplosionResistance);
         SubscribeLocalEvent<CMArmorComponent, GotEquippedEvent>(OnGotEquipped);
+
+        SubscribeLocalEvent<CMHardArmorComponent, InventoryRelayedEvent<HitBySlowingSpitEvent>>(OnArmorHitBySlowingSpit);
+        SubscribeLocalEvent<CMHardArmorComponent, InventoryRelayedEvent<CMSurgeryCanPerformStepEvent>>(OnArmorCanPerformStep);
+
+        SubscribeLocalEvent<InventoryComponent, CMSurgeryCanPerformStepEvent>(_inventory.RelayEvent);
 
         SubscribeLocalEvent<CMArmorUserComponent, DamageModifyEvent>(OnUserDamageModify);
 
@@ -79,6 +87,17 @@ public sealed class CMArmorSystem : EntitySystem
     private void OnGotEquipped(Entity<CMArmorComponent> armored, ref GotEquippedEvent args)
     {
         EnsureComp<CMArmorUserComponent>(args.Equipee);
+    }
+
+    private void OnArmorHitBySlowingSpit(Entity<CMHardArmorComponent> ent, ref InventoryRelayedEvent<HitBySlowingSpitEvent> args)
+    {
+        args.Args.Cancelled = true;
+    }
+
+    private void OnArmorCanPerformStep(Entity<CMHardArmorComponent> ent, ref InventoryRelayedEvent<CMSurgeryCanPerformStepEvent> args)
+    {
+        if (args.Args.Invalid == StepInvalidReason.None)
+            args.Args.Invalid = StepInvalidReason.Armor;
     }
 
     private void OnUserDamageModify(Entity<CMArmorUserComponent> ent, ref DamageModifyEvent args)
