@@ -112,9 +112,8 @@
     slot:
       name: Flare
       whitelist:
-        sizes:
-        - Tiny
-        - Small
+        tags:
+        - Flare
   - type: Sprite
     sprite: _CM14/Objects/Storage/boxes.rsi
     layers:
