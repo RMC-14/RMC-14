@@ -180,3 +180,33 @@
     event: !type:XenoBoneChipsActionEvent
     useDelay: 12
     range: 15
+
+- type: entity
+  id: ActionXenoPunch
+  parent: ActionXenoBase
+  name: Punch (10)
+  description: Punches the targeted marine dealing a hefty amount of damage as well as slowing the target for seconds.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: punch
+    event: !type:XenoPunchActionEvent
+    range: 1
+    useDelay: 6
+
+- type: entity
+  id: ActionXenoFling
+  parent: ActionXenoBase
+  name: Fling (10)
+  description: Flings the targeted marine a few tiles and damages them.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: fling
+    event: !type:XenoFlingActionEvent
+    range: 1
+    useDelay: 7
