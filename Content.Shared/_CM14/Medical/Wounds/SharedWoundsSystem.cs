@@ -221,7 +221,7 @@ public abstract class SharedWoundsSystem : EntitySystem
         if (!treater.Comp.CanUseUnskilled && !hasSkills)
         {
             if (doPopups)
-                _popup.PopupClient($"You don't know how to use the {Name(treater)}!", target, user, PopupType.SmallCaution);
+                _popup.PopupClient(Loc.GetString("cm-skills-unskilled", ("treater", Name(treater))), target, user, PopupType.SmallCaution);
 
             return false;
         }
@@ -293,7 +293,7 @@ public abstract class SharedWoundsSystem : EntitySystem
                 TryComp(treater, out StackComponent? stack) &&
                 _stacks.GetCount(treater, stack) < 2)
             {
-                _popup.PopupClient($"You don't have enough {Name(treater)}!", target, user, PopupType.SmallCaution);
+                _popup.PopupClient(Loc.GetString("cm-skills-dont-have", ("treater", Name(treater))), target, user, PopupType.SmallCaution);
                 return false;
             }
 
@@ -303,11 +303,11 @@ public abstract class SharedWoundsSystem : EntitySystem
         if (doPopups)
         {
             if (surgeryUntreated)
-                _popup.PopupClient($"{targetName} is cut open, you'll need more than a {Name(treater)}!", target, user, PopupType.SmallCaution);
+                _popup.PopupClient(Loc.GetString("cm-skills-surgery-open-cut", ("target", targetName), ("treater", Name(treater))), target, user, PopupType.SmallCaution);
             else if (otherUntreated)
-                _popup.PopupClient($"{Name(treater)} cannot treat these wounds!", target, user, PopupType.SmallCaution);
+                _popup.PopupClient(Loc.GetString("cm-skills-surgery-cannot-treat", ("treater", Name(treater))), target, user, PopupType.SmallCaution);
             else
-                _popup.PopupClient($"The wounds on {targetName} have already been treated!", target, user);
+                _popup.PopupClient(Loc.GetString("cm-skills-surgery-already-treated", ("target", targetName)), target, user);
         }
 
         wounded = default;
@@ -323,7 +323,7 @@ public abstract class SharedWoundsSystem : EntitySystem
         if (delay > TimeSpan.Zero)
         {
             var name = Loc.GetString("zzzz-the", ("ent", target));
-            _popup.PopupClient($"You start fumbling with {name}.", target, user);
+            _popup.PopupClient(Loc.GetString("cm-surgery-start-fumbling", ("name", name)), target, user);
         }
 
         var scaling = treater.Comp.ScalingDoAfter;

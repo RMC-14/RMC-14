@@ -80,7 +80,7 @@ public abstract class SharedPumpActionSystem : EntitySystem
 
             if (ammo.Count <= 0)
             {
-                _popup.PopupClient("You don't have any ammo left!", user, user);
+                _popup.PopupClient(Loc.GetString("cm-ammo-dont-have"), user, user);
                 return;
             }
 

@@ -59,7 +59,7 @@ public sealed class EntrenchingToolSystem : EntitySystem
 
         if (args.Cancelled)
         {
-            _popup.PopupClient("You stop digging", args.User, args.User);
+            _popup.PopupClient(Loc.GetString("cm-entrenching-stop-digging"), args.User, args.User);
             return;
         }
 
@@ -81,7 +81,7 @@ public sealed class EntrenchingToolSystem : EntitySystem
                 BreakOnMove = true,
             };
             _doAfter.TryStartDoAfter(doAfter);
-            _popup.PopupClient("You begin filling the sandbags", args.User, args.User);
+            _popup.PopupClient(Loc.GetString("cm-entrenching-begin-filling"), args.User, args.User);
             break;
         }
     }
@@ -142,7 +142,7 @@ public sealed class EntrenchingToolSystem : EntitySystem
             BreakOnMove = true,
         };
         _doAfter.TryStartDoAfter(doAfter);
-        _popup.PopupClient("You begin filling the sandbags", args.User, args.User);
+        _popup.PopupClient(Loc.GetString("cm-entrenching-begin-filling"), args.User, args.User);
     }
 
     private void OnFullActivateInWorld(Entity<FullSandbagComponent> full, ref ActivateInWorldEvent args)
@@ -219,7 +219,7 @@ public sealed class EntrenchingToolSystem : EntitySystem
         };
 
         _doAfter.TryStartDoAfter(doAfter);
-        _popup.PopupClient("You start digging", user, user);
+        _popup.PopupClient(Loc.GetString("cm-entrenching-start-digging"), user, user);
         _audio.PlayPredicted(tool.Comp.DigSound, user, user);
 
         if (TryComp(tool, out UseDelayComponent? useDelay))
