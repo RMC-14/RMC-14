@@ -85,11 +85,11 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMTraumaKit10 # todo cm14 tramadol
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
     #- id: CMTramadolAutoInjector
     - id: CMEmergencyAutoInjector
+    - id: CMGauze10
 
 - type: entity
   parent: CMPouchMedical
