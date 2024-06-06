@@ -190,7 +190,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
             HasComp<VictimHuggedComponent>(victim))
         {
             if (popup)
-                _popup.PopupClient(Loc.GetString("cm-xeno-hugg-failed", ("target", victimIdentity)), victim, user, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("cm-xeno-failed-cant-facehug", ("target", victimIdentity)), victim, user, PopupType.MediumCaution);
 
             return false;
         }
@@ -200,7 +200,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
             !_standing.IsDown(victim, standing))
         {
             if (popup)
-                _popup.PopupClient(Loc.GetString("cm-xeno-hugg-failed-cant-reach", ("target", victimIdentity)), victim, user, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("cm-xeno-failed-cant-reach", ("target", victimIdentity)), victim, user, PopupType.MediumCaution);
 
             return false;
         }
@@ -208,7 +208,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         if (_mobState.IsDead(victim))
         {
             if (popup)
-                _popup.PopupClient(Loc.GetString("cm-xeno-facehug-dead"), victim, user, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("cm-xeno-failed-target-dead"), victim, user, PopupType.MediumCaution);
 
             return false;
         }

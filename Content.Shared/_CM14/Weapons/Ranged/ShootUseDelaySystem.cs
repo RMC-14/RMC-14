@@ -37,7 +37,7 @@ public sealed class ShootUseDelaySystem : EntitySystem
                 ent.Comp.LastPopup = _timing.CurTime;
                 Dirty(ent);
                 var seconds = timeLeft.TotalSeconds;
-                _popup.PopupClient(Loc.GetString("cm-ammo-use-delay", ("seconds", seconds)), args.User, args.User);
+                _popup.PopupClient(Loc.GetString("cm-gun-use-delay", ("seconds", seconds)), args.User, args.User);
             }
 
             args.Cancel();

@@ -169,7 +169,7 @@ public sealed class XenoNestSystem : EntitySystem
 
         // TODO CM14 make a method to do this
         var victimName = Identity.Name(victim, EntityManager, args.User);
-        _popup.PopupClient(Loc.GetString("cm-xeno-alien-nest-self", ("target", victimName)), args.User, args.User);
+        _popup.PopupClient(Loc.GetString("cm-xeno-nest-securing-self", ("target", victimName)), args.User, args.User);
 
         foreach (var session in Filter.PvsExcept(args.User).Recipients)
         {
@@ -181,11 +181,11 @@ public sealed class XenoNestSystem : EntitySystem
 
             if (recipient == victim)
             {
-                _popup.PopupEntity(Loc.GetString("cm-xeno-alien-nest-securing-target", ("user", userName)), args.User, recipient, PopupType.MediumCaution);
+                _popup.PopupEntity(Loc.GetString("cm-xeno-nest-securing-target", ("user", userName)), args.User, recipient, PopupType.MediumCaution);
             }
             else
             {
-                _popup.PopupEntity(Loc.GetString("cm-xeno-alien-nest-securing-observer", ("user", userName), ("target", victimName)), args.User, recipient);
+                _popup.PopupEntity(Loc.GetString("cm-xeno-nest-securing-observer", ("user", userName), ("target", victimName)), args.User, recipient);
             }
         }
     }
@@ -224,7 +224,7 @@ public sealed class XenoNestSystem : EntitySystem
 
         // TODO CM14 make a method to do this
         var victimName = Identity.Name(victim, EntityManager, user);
-        _popup.PopupClient(Loc.GetString("cm-xeno-alien-nest-pin-self", ("target", victimName)), user, user);
+        _popup.PopupClient(Loc.GetString("cm-xeno-nest-pin-self", ("target", victimName)), user, user);
 
         foreach (var session in Filter.PvsExcept(user).Recipients)
         {
@@ -236,11 +236,11 @@ public sealed class XenoNestSystem : EntitySystem
 
             if (recipient == victim)
             {
-                _popup.PopupEntity(Loc.GetString("cm-xeno-alien-nest-pin-target", ("user", userName)), user, recipient, PopupType.MediumCaution);
+                _popup.PopupEntity(Loc.GetString("cm-xeno-nest-pin-target", ("user", userName)), user, recipient, PopupType.MediumCaution);
             }
             else
             {
-                _popup.PopupEntity(Loc.GetString("cm-xeno-alien-nest-pin-observer", ("user", userName), ("target", victimName)), user, recipient);
+                _popup.PopupEntity(Loc.GetString("cm-xeno-nest-pin-observer", ("user", userName), ("target", victimName)), user, recipient);
             }
         }
     }
@@ -262,7 +262,7 @@ public sealed class XenoNestSystem : EntitySystem
             var victimName = Identity.Name(victim, EntityManager, user);
 
             if (!silent)
-                _popup.PopupClient(Loc.GetString("cm-xeno-alien-nest-fail-message", ("target", victimName)), surface, user);
+                _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed", ("target", victimName)), surface, user);
 
             return false;
         }
@@ -272,7 +272,7 @@ public sealed class XenoNestSystem : EntitySystem
             var victimName = Identity.Name(victim, EntityManager, user);
 
             if (!silent)
-                _popup.PopupClient(Loc.GetString("cm-xeno-alien-nest-target-resisting", ("target", victimName)), victim, user, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed-target-resisting", ("target", victimName)), victim, user, PopupType.MediumCaution);
 
             return false;
         }
@@ -280,7 +280,7 @@ public sealed class XenoNestSystem : EntitySystem
         if (!TryComp(surface, out XenoNestSurfaceComponent? surfaceComp))
         {
             if (!silent)
-                _popup.PopupClient(Loc.GetString("cm-xeno-alien-nest-fail-message-cant-there"), surface, user);
+                _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed-cant-there"), surface, user);
 
             return false;
         }
@@ -288,7 +288,7 @@ public sealed class XenoNestSystem : EntitySystem
         if (surfaceComp.Nests.ContainsKey(direction))
         {
             if (!silent)
-                _popup.PopupClient(Loc.GetString("cm-xeno-alien-nest-fail-message-cant-already-there"), surface, user);
+                _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed-cant-already-there"), surface, user);
 
             return false;
         }

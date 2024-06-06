@@ -220,7 +220,7 @@ public sealed class XenoDevourSystem : EntitySystem
 
         args.Handled = true;
         _container.EmptyContainer(container);
-        _popup.PopupClient(Loc.GetString("cm-xeno-devour-hurl-contents-stomach"), xeno, xeno, PopupType.MediumCaution);
+        _popup.PopupClient(Loc.GetString("cm-xeno-devour-hurl-out"), xeno, xeno, PopupType.MediumCaution);
         _audio.PlayPredicted(xeno.Comp.RegurgitateSound, xeno, xeno);
     }
 
@@ -254,7 +254,7 @@ public sealed class XenoDevourSystem : EntitySystem
         if (_mobState.IsIncapacitated(xeno))
         {
             if (popup)
-                _popup.PopupClient(Loc.GetString("cm-xeno-devour-cant-right-now"), victim, xeno);
+                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-cant-now"), victim, xeno);
 
             return false;
         }
@@ -262,7 +262,7 @@ public sealed class XenoDevourSystem : EntitySystem
         if (HasComp<XenoComponent>(victim))
         {
             if (popup)
-                _popup.PopupClient(Loc.GetString("cm-xeno-devour-cant"), victim, xeno);
+                _popup.PopupClient(Loc.GetString("cm-xeno-devour-success"), victim, xeno);
 
             return false;
         }
@@ -284,7 +284,7 @@ public sealed class XenoDevourSystem : EntitySystem
             devour = null;
 
             if (popup)
-                _popup.PopupClient(Loc.GetString("cm-xeno-devour-already-have"), victim, xeno, PopupType.SmallCaution);
+                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-stomach-full"), victim, xeno, PopupType.SmallCaution);
 
             return false;
         }

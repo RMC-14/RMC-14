@@ -64,11 +64,11 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         if (anyRefilled)
         {
             Dirty(ent);
-            _popup.PopupClient(Loc.GetString("cm-refillable-solution-whirring-noise", ("self", Name(ent)), ("target", Name(args.Used))), args.User, args.User);
+            _popup.PopupClient(Loc.GetString("cm-refillable-solution-whirring-noise", ("user", Name(ent)), ("target", Name(args.Used))), args.User, args.User);
         }
         else
         {
-            _popup.PopupClient(Loc.GetString("cm-refillable-solution-cannot-refill", ("self", Name(ent)), ("target", Name(args.Used))), args.User, args.User, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("cm-refillable-solution-cannot-refill", ("user", Name(ent)), ("target", Name(args.Used))), args.User, args.User, PopupType.SmallCaution);
         }
     }
 

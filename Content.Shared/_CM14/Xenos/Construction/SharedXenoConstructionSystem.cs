@@ -96,7 +96,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         if (_xenoWeeds.IsOnWeeds((gridUid, grid), coordinates, true))
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-сonstruction-weeds-failed-already-here"), xeno.Owner, xeno.Owner);
+            _popup.PopupClient(Loc.GetString("cm-xeno-weeds-source-already-here"), xeno.Owner, xeno.Owner);
             return;
         }
 
@@ -104,7 +104,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             _tile.TryGetDefinition(tileRef.Tile.TypeId, out var tile) &&
             tile is ContentTileDefinition { WeedsSpreadable: false })
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-сonstruction-weeds-failed"), xeno.Owner, xeno.Owner);
+            _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-weeds"), xeno.Owner, xeno.Owner);
             return;
         }
 
@@ -289,7 +289,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (node.PlasmaStored < node.PlasmaCost)
         {
             _popup.PopupClient(
-                Loc.GetString("cm-xeno-construction-requires-more-plasma", ("construction", target), ("plasma", plasmaLeft)),
+                Loc.GetString("cm-xeno-requires-more-plasma", ("construction", target), ("plasma", plasmaLeft)),
                 target,
                 args.User);
             return;
@@ -328,7 +328,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private void OnHiveConstructionNodeExamined(Entity<HiveConstructionNodeComponent> node, ref ExaminedEvent args)
     {
         var plasmaLeft = node.Comp.PlasmaCost - node.Comp.PlasmaStored;
-        args.PushMarkup(Loc.GetString("cm-xeno-сonstruction-plasma-left", ("construction", node.Owner), ("plasma", plasmaLeft)));
+        args.PushMarkup(Loc.GetString("cm-xeno-construction-plasma-left", ("construction", node.Owner), ("plasma", plasmaLeft)));
     }
 
     private void OnHiveConstructionNodeActivated(Entity<HiveConstructionNodeComponent> node, ref ActivateInWorldEvent args)
@@ -408,7 +408,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         target = target.SnapToGrid(EntityManager, _map);
         if (!_transform.InRange(origin, target, range))
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-сonstruction-failed-cant-reach"), target, xeno);
+            _popup.PopupClient(Loc.GetString("cm-xeno-cant-reach-there"), target, xeno);
             return false;
         }
 
@@ -419,21 +419,21 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     {
         if (checkStructureSelected && xeno.Comp.BuildChoice == null)
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-сonstruction-failed-select-structure"), target, xeno);
+            _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-select-structure"), target, xeno);
             return false;
         }
 
         if (_transform.GetGrid(target) is not { } gridId ||
             !TryComp(gridId, out MapGridComponent? grid))
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-сonstruction-failed-cant-build"), target, xeno);
+            _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
             return false;
         }
 
         target = target.SnapToGrid(EntityManager, _map);
         if (checkWeeds && !_xenoWeeds.IsOnWeeds((gridId, grid), target))
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-сonstruction-failed-need-weeds"), target, xeno);
+            _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-need-weeds"), target, xeno);
             return false;
         }
 
@@ -442,7 +442,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         if (!TileSolidAndNotBlocked(target))
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-сonstruction-failed-cant-build"), target, xeno);
+            _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
             return false;
         }
 
@@ -478,7 +478,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 if (_hiveConstructionNodeQuery.TryGetComponent(ent, out var node) &&
                     node.BlockOtherNodes)
                 {
-                    _popup.PopupClient(Loc.GetString("cm-xeno-сonstruction-failed-close-another", ("target", ent.Value)), xeno, xeno);
+                    _popup.PopupClient(Loc.GetString("cm-xeno-too-close-to-other-node", ("target", ent.Value)), xeno, xeno);
                     return false;
                 }
             }

@@ -55,9 +55,9 @@ public sealed class TackleSystem : EntitySystem
                 targetName = Identity.Name(target, EntityManager, recipient);
 
                 if (recipient == target.Owner)
-                    _popup.PopupEntity(Loc.GetString("cm-tackle-try-recipient", ("self", userName)), args.User, recipient, PopupType.MediumCaution);
+                    _popup.PopupEntity(Loc.GetString("cm-tackle-try-target", ("user", userName)), args.User, recipient, PopupType.MediumCaution);
                 else
-                    _popup.PopupEntity(Loc.GetString("cm-tackle-try-side", ("self", userName), ("target", targetName)), args.User, recipient);
+                    _popup.PopupEntity(Loc.GetString("cm-tackle-try-observer", ("user", userName), ("target", targetName)), args.User, recipient);
             }
 
             return;
@@ -76,9 +76,9 @@ public sealed class TackleSystem : EntitySystem
                 targetName = Identity.Name(target, EntityManager, recipient);
 
                 if (recipient == target.Owner)
-                    _popup.PopupEntity(Loc.GetString("cm-tackle-success-recipient", ("self", userName)), args.User, recipient, PopupType.MediumCaution);
+                    _popup.PopupEntity(Loc.GetString("cm-tackle-success-target", ("user", userName)), args.User, recipient, PopupType.MediumCaution);
                 else
-                    _popup.PopupEntity(Loc.GetString("cm-tackle-success-side", ("self", userName), ("target", targetName)), args.User, recipient);
+                    _popup.PopupEntity(Loc.GetString("cm-tackle-success-observer", ("user", userName), ("target", targetName)), args.User, recipient);
             }
         }
 

@@ -153,7 +153,7 @@ public sealed class XenoEggSystem : EntitySystem
             if (!args.Handled)
             {
                 _hands.TryDrop(user, egg, args.ClickLocation);
-                _popup.PopupClient(Loc.GetString("cm-xeno-egg-plant-outside"), user, user);
+                _popup.PopupClient(Loc.GetString("cm-xeno-egg-failed-plant-outside"), user, user);
             }
 
             args.Handled = true;
@@ -173,7 +173,7 @@ public sealed class XenoEggSystem : EntitySystem
         {
             if (HasComp<XenoEggComponent>(uid))
             {
-                _popup.PopupClient(Loc.GetString("cm-xeno-egg-already-there"), uid.Value, user);
+                _popup.PopupClient(Loc.GetString("cm-xeno-egg-failed-already-there"), uid.Value, user);
                 args.Handled = true;
                 return;
             }
@@ -185,7 +185,7 @@ public sealed class XenoEggSystem : EntitySystem
         // TODO CM14 only on hive weeds
         if (!hasWeeds)
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-egg-planted-weeds"), user, user);
+            _popup.PopupClient(Loc.GetString("cm-xeno-egg-failed-must-weeds"), user, user);
             return;
         }
 
