@@ -363,7 +363,7 @@
         amount: 2
       - id: ClothingEyesHudMedical # TODO CM14
         amount: 3
-      - id: CMStasisBag
+      - id: CMStasisBagFolded
         amount: 2
       - id: CMSyringe
         amount: 7
