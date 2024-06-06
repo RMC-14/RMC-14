@@ -27,6 +27,7 @@
   - type: CMArmor
     armor: 20
     explosionArmor: 10
+  - type: CMHardArmor
 
 - type: entity
   parent: ArmorHelmetM10
