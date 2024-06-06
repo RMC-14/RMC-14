@@ -42,8 +42,9 @@
 
 # Plants
 - type: entity
-  parent: BaseStructureDynamic
+  parent: PottedPlantBase
   id: CMPottedPlantBase
+  abstract: true
   name: potted plant
   description: ""
   components:
