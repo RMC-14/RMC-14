@@ -3,17 +3,20 @@
   wordReplacements:
     cm-chatsan-word-deltard: cm-chatsan-replacement-deltard
     cm-chatsan-word-beno: cm-chatsan-replacement-beno
+    cm-chatsan-word-benos: cm-chatsan-replacement-benos
 
 - type: accent
   id: CMChatSanitizeMarine
   wordReplacements:
     cm-chatsan-word-admin-marine: cm-chatsan-replacement-admin-marine
+    cm-chatsan-word-admins-marine: cm-chatsan-replacement-admins-marine
     cm-chatsan-word-eorg-marine: cm-chatsan-replacement-eorg-marine
 
 - type: accent
   id: CMChatSanitizeXeno
   wordReplacements:
     cm-chatsan-word-admin-xeno: cm-chatsan-replacement-admin-xeno
+    cm-chatsan-word-admins-xeno: cm-chatsan-replacement-admins-xeno
     cm-chatsan-word-eorg-xeno: cm-chatsan-replacement-eorg-xeno
     cm-chatsan-word-sniper: cm-chatsan-replacement-sniper
     cm-chatsan-word-flare: cm-chatsan-replacement-flare
