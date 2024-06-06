@@ -1,12 +1,12 @@
+using Content.Shared._CM14.Item;
+using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
-using Content.Shared.Verbs;
-using Content.Shared.Examine;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Storage;
+using Content.Shared.Verbs;
 using JetBrains.Annotations;
 using Robust.Shared.Containers;
-using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -18,9 +18,14 @@ public abstract class SharedItemSystem : EntitySystem
     [Dependency] private   readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] protected readonly SharedContainerSystem Container = default!;
 
+    private EntityQuery<FixedItemSizeStorageComponent> _fixedItemSizeStorageQuery;
+
     public override void Initialize()
     {
         base.Initialize();
+
+        _fixedItemSizeStorageQuery = GetEntityQuery<FixedItemSizeStorageComponent>();
+
         SubscribeLocalEvent<ItemComponent, GetVerbsEvent<InteractionVerb>>(AddPickupVerb);
         SubscribeLocalEvent<ItemComponent, InteractHandEvent>(OnHandInteract);
         SubscribeLocalEvent<ItemComponent, AfterAutoHandleStateEvent>(OnItemAutoState);
@@ -157,10 +162,16 @@ public abstract class SharedItemSystem : EntitySystem
     /// <summary>
     /// Gets the default shape of an item.
     /// </summary>
-    public IReadOnlyList<Box2i> GetItemShape(Entity<ItemComponent?> uid)
+    public IReadOnlyList<Box2i> GetItemShape(Entity<StorageComponent?> storage, Entity<ItemComponent?> uid)
     {
         if (!Resolve(uid, ref uid.Comp))
             return new Box2i[] { };
+
+        if (_fixedItemSizeStorageQuery.TryComp(storage, out var fixedComp))
+        {
+            fixedComp.CachedSize ??= [Box2i.FromDimensions(Vector2i.Zero, fixedComp.Size - Vector2i.One)];
+            return fixedComp.CachedSize;
+        }
 
         return uid.Comp.Shape ?? GetSizePrototype(uid.Comp.Size).DefaultShape;
     }
@@ -176,20 +187,20 @@ public abstract class SharedItemSystem : EntitySystem
     /// <summary>
     /// Gets the shape of an item, adjusting for rotation and offset.
     /// </summary>
-    public IReadOnlyList<Box2i> GetAdjustedItemShape(Entity<ItemComponent?> entity, ItemStorageLocation location)
+    public IReadOnlyList<Box2i> GetAdjustedItemShape(Entity<StorageComponent?> storage, Entity<ItemComponent?> entity, ItemStorageLocation location)
     {
-        return GetAdjustedItemShape(entity, location.Rotation, location.Position);
+        return GetAdjustedItemShape(storage, entity, location.Rotation, location.Position);
     }
 
     /// <summary>
     /// Gets the shape of an item, adjusting for rotation and offset.
     /// </summary>
-    public IReadOnlyList<Box2i> GetAdjustedItemShape(Entity<ItemComponent?> entity, Angle rotation, Vector2i position)
+    public IReadOnlyList<Box2i> GetAdjustedItemShape(Entity<StorageComponent?> storage, Entity<ItemComponent?> entity, Angle rotation, Vector2i position)
     {
         if (!Resolve(entity, ref entity.Comp))
             return new Box2i[] { };
 
-        var shapes = GetItemShape(entity);
+        var shapes = GetItemShape(storage, entity);
         var boundingShape = shapes.GetBoundingBox();
         var boundingCenter = ((Box2) boundingShape).Center;
         var matty = Matrix3.CreateTransform(boundingCenter, rotation);
