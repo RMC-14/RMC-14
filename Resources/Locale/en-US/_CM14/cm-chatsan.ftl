@@ -4,11 +4,17 @@ cm-chatsan-replacement-deltard = delta
 cm-chatsan-word-admin-marine = admin
 cm-chatsan-replacement-admin-marine = high command
 
+cm-chatsan-word-admins-marine = admins
+cm-chatsan-replacement-admins-marine = high command
+
 cm-chatsan-word-eorg-marine = eorg
 cm-chatsan-replacement-eorg-marine = warcrimes
 
 cm-chatsan-word-beno = beno
 cm-chatsan-replacement-beno = xeno
+
+cm-chatsan-word-benos = benos
+cm-chatsan-replacement-benos = xenos
 
 cm-chatsan-word-eorg-xeno = eorg
 cm-chatsan-replacement-eorg-xeno = sister harm
@@ -105,6 +111,9 @@ cm-chatsan-replacement-almayer = metal hive
 
 cm-chatsan-word-admin-xeno = admin
 cm-chatsan-replacement-admin-xeno = grandmother
+
+cm-chatsan-word-admins-xeno = admins
+cm-chatsan-replacement-admins-xeno = grandmothers
 
 cm-chatsan-word-ob = ob
 cm-chatsan-replacement-ob = skyfire
