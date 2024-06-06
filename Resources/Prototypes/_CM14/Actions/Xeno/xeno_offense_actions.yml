@@ -210,3 +210,33 @@
     event: !type:XenoFlingActionEvent
     range: 1
     useDelay: 7
+
+- type: entity
+  id: ActionXenoStomp
+  parent: ActionXenoBase
+  name: Stomp (20)
+  description: Slam the ground with a 5x5 AOE slow down that affects all hostiles in range.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: stomp
+    event: !type:XenoStompActionEvent
+    useDelay: 20
+
+- type: entity
+  id: ActionXenoCharge
+  parent: ActionXenoBase
+  name: Charge (20)
+  description: Click on a tile you want to charge at, after a brief non cancel-able windup time.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: ready_charge
+    event: !type:XenoChargeActionEvent
+    range: 15
+    useDelay: 15
+    checkCanAccess: false
