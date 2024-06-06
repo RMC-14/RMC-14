@@ -1,0 +1,31 @@
+﻿- type: entity
+  parent: BaseStorageItem
+  id: CMSurgicalCase
+  name: surgical case
+  description: It's a medical case for storing basic surgical tools. # TODO CM14 extended description with instructions for treating internal bleeds once those are added
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Storage/surgical_case.rsi
+    state: surgical_case
+  - type: Item
+    size: Small
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,4,1
+    whitelist:
+      components:
+      - CMScalpel
+      - CMHemostat
+      - CMRetractor
+
+- type: entity
+  parent: CMSurgicalCase
+  id: CMSurgicalCaseFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScalpel
+    - id: CMHemostat
+    - id: CMRetractor
