@@ -39,6 +39,7 @@ public sealed class CPRSystem : EntitySystem
     {
         base.Initialize();
 
+        // TODO CM14 use skills
         // TODO CM14 something more generic than "marine"
         SubscribeLocalEvent<MarineComponent, InteractHandEvent>(OnMarineInteractHand);
         SubscribeLocalEvent<MarineComponent, CPRDoAfterEvent>(OnMarineDoAfter);
