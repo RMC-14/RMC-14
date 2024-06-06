@@ -58,7 +58,7 @@
   - type: Storage
     maxItemSize: Small
     grid:
-    - 0,0,6,1
+    - 0,0,5,1
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -220,13 +220,17 @@
 - type: entity
   parent: CMArmorM3Medium
   id: CMArmorM4
-  name: M4 pattern radio operator armor
+  name: M4 pattern marine armor
   description: A well tinkered and crafted hybrid of Smart-Gunner mesh and M3 pattern plates. Robust, yet nimble, with room for all your pouches.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m4.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m4.rsi
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,7,1
 
 # m35
 - type: entity

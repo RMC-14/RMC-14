@@ -108,7 +108,13 @@ public sealed class ItemGridPiece : Control, IEntityControl
         if (_storageController.IsDragging && _storageController.DraggingGhost?.Entity == Entity && _storageController.DraggingGhost != this)
             return;
 
-        var adjustedShape = _entityManager.System<ItemSystem>().GetAdjustedItemShape((Entity, itemComponent), Location.Rotation, Vector2i.Zero);
+        if (_storageController._container?.StorageEntity is not { } storage ||
+            !_entityManager.TryGetComponent(storage, out StorageComponent? storageComp))
+        {
+            return;
+        }
+
+        var adjustedShape = _entityManager.System<ItemSystem>().GetAdjustedItemShape((storage, storageComp), (Entity, itemComponent), Location.Rotation, Vector2i.Zero);
         var boundingGrid = adjustedShape.GetBoundingBox();
         var size = _centerTexture!.Size * 2 * UIScale;
 
@@ -286,9 +292,9 @@ public sealed class ItemGridPiece : Control, IEntityControl
         }
     }
 
-    public static Vector2 GetCenterOffset(Entity<ItemComponent?> entity, ItemStorageLocation location, IEntityManager entMan)
+    public static Vector2 GetCenterOffset(Entity<StorageComponent?> storage, Entity<ItemComponent?> entity, ItemStorageLocation location, IEntityManager entMan)
     {
-        var boxSize = entMan.System<ItemSystem>().GetAdjustedItemShape(entity, location).GetBoundingBox().Size;
+        var boxSize = entMan.System<ItemSystem>().GetAdjustedItemShape(storage, entity, location).GetBoundingBox().Size;
         var actualSize = new Vector2(boxSize.X + 1, boxSize.Y + 1);
         return actualSize * new Vector2i(8, 8);
     }
