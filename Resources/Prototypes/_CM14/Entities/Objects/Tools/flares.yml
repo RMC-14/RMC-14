@@ -64,3 +64,66 @@
         maxDuration: 30.0
         startValue: 7.0
         endValue: 1.0
+
+- type: entity
+  abstract: true
+  parent: CMMagazineBoxBase
+  id: CMBoxFlareBase
+  name: box of M94 flare packs
+  description: A box of M94 marking flare packs, to brighten up your day.
+  components:
+  - type: CMItemSlots
+    cooldown: 0
+    count: 10
+    slot:
+      name: FlarePack
+      whitelist:
+        sizes:
+        - Tiny
+        - Small
+        - Normal
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    layers:
+    - state: supply_crate
+    - state: magaz_mre
+      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+
+- type: entity
+  parent: CMBoxFlareBase
+  id: CMBoxFlare
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMFlarePack
+
+- type: entity
+  abstract: true
+  parent: CMMagazineBoxBase
+  id: CMFlarePackBase
+  name: M94 flare pack
+  description: A pack of M94 marking flares
+  components:
+  - type: Item
+    size: Normal
+  - type: CMItemSlots
+    cooldown: 0
+    count: 8
+    slot:
+      name: Flare
+      whitelist:
+        sizes:
+        - Tiny
+        - Small
+  - type: Sprite
+    sprite: _CM14/Objects/Storage/boxes.rsi
+    layers:
+    - state: m94
+
+- type: entity
+  parent: CMFlarePackBase
+  id: CMFlarePack
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMFlare
