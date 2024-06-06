@@ -12,6 +12,7 @@
     - type: Item
       size: Normal
       sprite: _CM14/Objects/Materials/Sheets/metal.rsi
+    - type: Appearance
 
 - type: entity
   parent: CMSheetMetalBase
@@ -38,6 +39,7 @@
       layers:
         - state: steel_4
           map: ["base"]
+
 
 - type: entity
   parent: CMSheetMetal
@@ -102,7 +104,6 @@
     - type: Item
       sprite: _CM14/Objects/Materials/Sheets/plasteel.rsi
       heldPrefix: plasteel
-    - type: Appearance
 
 - type: entity
   parent: CMSheetPlasteel

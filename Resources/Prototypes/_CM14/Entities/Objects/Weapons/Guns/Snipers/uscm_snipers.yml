@@ -38,12 +38,6 @@
         whitelist:
           tags:
           - CMMagazineSniperM42A
-      gun_chamber:
-        name: Chamber
-        priority: 1
-        whitelist:
-          tags:
-          - CMCartridgeSniper10x28mm
   - type: GunUserWhitelist
     whitelist:
       components:

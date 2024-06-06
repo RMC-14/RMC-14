@@ -69,12 +69,6 @@
         whitelist:
           tags:
           - CMMagazineRifleM41A
-      gun_chamber:
-        name: Chamber
-        priority: 1
-        whitelist:
-          tags:
-          - CMCartridgeRifle10x24mm
   - type: GunDamageModifier
     multiplier: 1.1
 
@@ -114,12 +108,6 @@
         whitelist:
           tags:
           - CMMagazineRifleM41AE2
-      gun_chamber:
-        name: Chamber
-        priority: 1
-        whitelist:
-          tags:
-          - CMCartridgeRifle10x24mm
   - type: GunRequiresWield
 
 - type: entity
@@ -163,11 +151,5 @@
         whitelist:
           tags:
           - CMMagazineRifleM4RA
-      gun_chamber:
-        name: Chamber
-        priority: 1
-        whitelist:
-          tags:
-          - CMCartridgeRifle10x24mm
   - type: GunDamageModifier
     multiplier: 1.4
