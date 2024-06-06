@@ -89,10 +89,10 @@ cm-chatsan-word-spiders = spiders
 cm-chatsan-replacement-spiders = webspitters
 
 cm-chatsan-word-arachnid = arachnid
-cm-chatsan-replacement-arachnid = webspitter
+cm-chatsan-replacement-arachnid = webspitting host
 
 cm-chatsan-word-arachnids = arachnids
-cm-chatsan-replacement-arachnids = webspitters
+cm-chatsan-replacement-arachnids = webspitting hosts
 
 cm-chatsan-word-dropship = dropship
 cm-chatsan-replacement-dropship = metal bird
