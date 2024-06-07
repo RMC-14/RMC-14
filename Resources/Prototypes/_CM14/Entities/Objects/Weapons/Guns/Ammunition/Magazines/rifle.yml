@@ -48,7 +48,8 @@
   suffix: AP
   components:
   - type: Tag
-    tags: [CMMagazineRifleM41AAP]
+    tags:
+    - CMMagazineRifleM41AAP
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -75,8 +76,7 @@
   components:
   - type: Tag
     tags:
-    - CMMagazineRifle
-    - CMMagazineRifleM41A
+    - CMMagazineRifleM41AExt
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:

@@ -248,7 +248,7 @@
       entries:
       - id: CMMagazineRifleM4RAAP
         amount: 3
-      - id: CMMagazineM39AP
+      - id: CMMagazineSMGM39AP
         amount: 3
       - id: CMMagazineRifleM41AAP
         amount: 3
@@ -320,7 +320,7 @@
         amount: 10
       - id: CMMagazineRifleM4RA
         amount: 15
-      - id: CMMagazineM39
+      - id: CMMagazineSMGM39
         amount: 25
       - id: CMMagazineRifleM41A
         amount: 25
@@ -477,7 +477,7 @@
       entries:
       - id: CMMagazineRifleM4RAAP
         points: 10
-      - id: CMMagazineM39AP
+      - id: CMMagazineSMGM39AP
         points: 10
       - id: CMMagazineExtendedM39
         points: 10
@@ -721,7 +721,7 @@
       entries:
       - id: CMMagazineRifleM4RAAP
         points: 6
-      - id: CMMagazineM39AP
+      - id: CMMagazineSMGM39AP
         points: 6
       - id: CMMagazineExtendedM39
         points: 6
@@ -1092,7 +1092,7 @@
       entries:
       - id: CMMagazineRifleM4RAAP
         points: 6
-      - id: CMMagazineM39AP
+      - id: CMMagazineSMGM39AP
         points: 6
       - id: CMMagazineExtendedM39
         points: 6
@@ -1363,7 +1363,7 @@
       entries:
       - id: CMMagazineRifleM4RAAP
         points: 6
-      - id: CMMagazineM39AP
+      - id: CMMagazineSMGM39AP
         points: 6
       - id: CMMagazineExtendedM39
         points: 6
@@ -1772,7 +1772,7 @@
       entries:
       - id: CMMagazineRifleM4RAAP
         points: 10
-      - id: CMMagazineM39AP
+      - id: CMMagazineSMGM39AP
         points: 10
       - id: CMMagazineExtendedM39
         points: 10

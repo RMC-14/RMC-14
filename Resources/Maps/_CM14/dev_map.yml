@@ -3750,7 +3750,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -0.7047485,-3.4607978
       parent: 179
-- proto: CMMagazineM39
+- proto: CMMagazineSMGM39
   entities:
   - uid: 1219
     components:

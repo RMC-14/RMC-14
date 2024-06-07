@@ -50,7 +50,7 @@
         - CMMagazineRifleM41A
 
 - type: entity
-  parent: CMBoxMagazineRifleM41A
+  parent: CMBoxMagazineBase
   id: CMBoxMagazineRifleM41AAP
   name: magazine box (AP M41A x 10)
   components:
@@ -72,7 +72,7 @@
         - CMMagazineRifleM41AAP
 
 - type: entity
-  parent: CMBoxMagazineRifleM41A
+  parent: CMBoxMagazineBase
   id: CMBoxMagazineRifleM41AExt
   name: magazine box (Ext M41A x 10)
   components:
@@ -92,3 +92,48 @@
       whitelist:
         tags:
         - CMMagazineRifleM41AExt
+
+# M39
+- type: entity
+  parent: CMBoxMagazineBase
+  id: CMBoxMagazineSMGM39
+  name: magazine box (M39 x 12)
+  components:
+  - type: Sprite
+    layers:
+    #    - state: lid_type_ext
+    #    - state: base_m41
+    - state: base_m39
+    - state: text_m39
+    - state: base_type_reg
+    - state: magaz_hv
+      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+  - type: CMItemSlots
+    startingItem: CMMagazineSMGM39
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineSMGM39
+
+- type: entity
+  parent: CMBoxMagazineBase
+  id: CMBoxMagazineSMGM39AP
+  name: magazine box (AP M39 x 10)
+  components:
+  - type: Sprite
+    layers:
+    #    - state: lid_type_ext
+    #    - state: base_m41
+    - state: base_m39
+    - state: text_m39
+    - state: base_type_ap
+    - state: magaz_ap
+      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+  - type: CMItemSlots
+    startingItem: CMMagazineSMGM39AP
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineSMGM39AP

@@ -5,22 +5,22 @@
   - type: RequisitionsComputer
     categories:
     - name: Ammo
-      entries: []
-#      - cost: 2000
-#        crate: CMCrateBoxMagazineRifleM41A
-#      - cost: 4000
-#        crate: CMCrateBoxMagazineRifleM41AAP
-#      - cost: 4000
-#        crate: CMCrateBoxMagazineRifleM41AExt
+      entries:
+      - cost: 2000
+        crate: CMCrateBoxMagazineRifleM41A
+      - cost: 4000
+        crate: CMCrateBoxMagazineRifleM41AAP
+      - cost: 4000
+        crate: CMCrateBoxMagazineRifleM41AExt
 #      - cost: 2000
 #        crate: CMCrateBoxMagazineRifleM4RA
 #      - cost: 4000
 #        crate: CMCrateBoxMagazineRifleM4RAAP
 #      - cost: 2000
-#        crate: CMCrateBoxMagazineM39
-#      - cost: 4000
-#        crate: CMCrateBoxMagazineM39AP
-#      - cost: 2000
+        crate: CMCrateBoxMagazineSMGM39
+      - cost: 4000
+        crate: CMCrateBoxMagazineSMGM39AP
+      - cost: 2000
 #        crate: CMCrateBoxMagazinePistolM4A3
 #      - cost: 3000
 #        crate: CMCrateBoxShellsShotgunSlugs
