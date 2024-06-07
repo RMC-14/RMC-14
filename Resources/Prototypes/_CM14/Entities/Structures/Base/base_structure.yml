@@ -48,8 +48,8 @@
   - type: PlacementReplacement
     key: walls
   - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Metallic
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
   - type: Occluder
   - type: Airtight
   - type: RadiationBlocker
