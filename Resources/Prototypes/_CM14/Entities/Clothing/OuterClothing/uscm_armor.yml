@@ -55,10 +55,17 @@
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 2 #recharge of 2 makes total drain 1w / s so max charge is 1:1 with time. Time to fully charge should be 5 minutes. Having recharge gives light an extended flicker period which gives you some warning to return to light area.
+  - type: Item
+    size: Huge
   - type: Storage
     maxItemSize: Small
     grid:
-    - 0,0,5,1
+    - 0,0,5,1 # 3 slots
+    whitelist:
+      tags:
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - CMMagazineSniper
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -71,6 +78,7 @@
     walkModifier: 0.9
     sprintModifier: 0.9
   - type: CMHardArmor
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: CMArmorM3Medium
@@ -102,6 +110,9 @@
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
+  - type: Storage
+    grid:
+    - 0,0,3,1 # 2 slots
 
 - type: entity
   parent: CMArmorM3Medium
@@ -138,6 +149,8 @@
   - type: CMArmor
     armor: 25
     explosionArmor: 40
+  - type: Corrodible
+    isCorrodible: false
 
 - type: entity
   parent: CMArmorM3Medium
@@ -151,6 +164,8 @@
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/t.rsi
   - type: CMArmor
     explosionArmor: 30
+  - type: Corrodible
+    isCorrodible: false
 
 - type: entity
   parent: CMArmorM3Medium
@@ -165,6 +180,9 @@
   - type: CMArmor
     armor: 15
     explosionArmor: 20
+  - type: Storage
+    grid:
+    - 0,0,3,1 # 2 slots
 
 - type: entity
   parent: CMArmorM3Light
@@ -176,6 +194,9 @@
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/press.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/press.rsi
+  - type: Storage
+    grid:
+    - 0,0,3,1 # 2 slots
 
 - type: entity
   parent: CMArmorM3Medium
@@ -187,6 +208,8 @@
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/scout.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/scout.rsi
+  - type: Corrodible
+    isCorrodible: false
 
 - type: entity
   parent: CMArmorM3Medium
@@ -201,6 +224,9 @@
   - type: CMArmor
     armor: 15
     explosionArmor: 10
+  - type: Storage
+    grid:
+    - 0,0,1,1 # 2 slots
 
 - type: entity
   parent: CMArmorM3VLBallistics
@@ -213,9 +239,8 @@
   - type: Clothing
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/vl_flak.rsi
   - type: Storage
-    maxItemSize: Small
     grid:
-    - 0,0,7,1
+    - 0,0,3,1 # 2 slots
 
 # m4
 - type: entity
@@ -231,25 +256,27 @@
   - type: Storage
     maxItemSize: Small
     grid:
-    - 0,0,7,1
+    - 0,0,7,1 # 4 slots
 
 # m35
 - type: entity
   parent: CMArmorM3Medium
   id: CMArmorM35
-  name: M35 armor
-  description: A custom piece of M3 armor designed to be highly flame retardant.
+  name: M35 pyrotechnician armor
+  description: A custom set of M35 armor designed for use by USCM Pyrotechnicians.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m35.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m35.rsi
+  - type: Corrodible
+    isCorrodible: false
 
 # m45
 - type: entity
   parent: CMArmorM3Medium
   id: CMArmorM45
-  name: M45 pattern ghillie armor # TODO CM14 camo
+  name: M45 pattern ghillie armor # TODO CM14 camo, id lock
   description: A lightweight ghillie camouflage suit, used by USCM snipers on recon missions. Very lightweight and surprisingly very protective.
   components:
   - type: Sprite
@@ -271,7 +298,7 @@
   - type: Storage
     maxItemSize: Small
     grid:
-    - 0,0,7,1
+    - 0,0,3,1 # 2 slots
     whitelist:
       components:
       - GasTank
@@ -303,13 +330,16 @@
   - type: CMArmor
     armor: 25
     explosionArmor: 20
-
-- type: entity
-  parent: CMArmorM2MP
-  id: CMArmorM2Officer
-  name: M2 pattern officer
-  components:
-  - type: Sprite
-    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m2/officer.rsi
-  - type: Clothing
-    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m2/officer.rsi
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,3,1 # 2 slots
+    whitelist:
+      components:
+      - Gun
+      - BallisticAmmoProvider
+      - Stunbaton
+      - # TODO CM14 motion detector, walkman
+      tags:
+      - Handcuffs
+      - Grenade

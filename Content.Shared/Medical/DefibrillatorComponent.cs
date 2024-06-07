@@ -1,7 +1,9 @@
 ﻿using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -38,6 +40,12 @@ public sealed partial class DefibrillatorComponent : Component
     /// </summary>
     [DataField("zapHeal", required: true), ViewVariables(VVAccess.ReadWrite)]
     public DamageSpecifier ZapHeal = default!;
+
+    /// <summary>
+    /// How much damage is healed from getting zapped.
+    /// </summary>
+    [DataField("cmZapHeal"), ViewVariables(VVAccess.ReadWrite)]
+    public List<(ProtoId<DamageGroupPrototype> Group, int Amount)>? CMZapDamage;
 
     /// <summary>
     /// The electrical damage from getting zapped.

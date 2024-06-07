@@ -12,12 +12,13 @@
   - type: Storage
     maxItemSize: Small
     grid:
-    - 0,0,4,1
+    - 0,0,5,1 # 3 slots
     whitelist:
       components:
       - CMScalpel
       - CMHemostat
       - CMRetractor
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: CMSurgicalCase

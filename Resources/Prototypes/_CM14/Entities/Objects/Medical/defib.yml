@@ -1,8 +1,8 @@
 - type: entity
   parent: BaseItem
   id: CMBaseDefibrillator
-  name: defibrillator
-  description: CLEAR! Zzzzat!
+  name: emergency defibrillator
+  description: A handheld emergency defibrillator, used to restore fibrillating patients. Can optionally bring people back from the dead.
   abstract: true
   components:
   - type: Sprite
@@ -20,16 +20,22 @@
           True: { visible: true }
           False: { visible: false }
   - type: Item
-    sprite: Objects/Specific/Medical/defib.rsi
     size: Normal
+    sprite: Objects/Specific/Medical/defib.rsi
   - type: Speech
     speechVerb: Robotic
   - type: Defibrillator
+    doAfterDuration: 6.25
     allowDoAfterMovement: false
     canDefibCrit: false
+    cmZapHeal:
+    - Brute: -12
+    - Burn: -12
+    - Toxin: -12
     zapHeal:
       types:
-        Asphyxiation: -40
+        Asphyxiation: -200
+    zapDamage: 0
   - type: DoAfter
   - type: UseDelay
   - type: StaticPrice
@@ -37,6 +43,9 @@
   - type: GuideHelp
     guides:
     - Medical Doctor
+  - type: RequiresSkill
+    skills:
+      medical: 2
 
 - type: entity
   id: CMDefibrillator

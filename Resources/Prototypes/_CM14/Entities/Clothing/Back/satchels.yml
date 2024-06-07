@@ -9,7 +9,7 @@
     sprite: _CM14/Objects/Clothing/Back/Satchels/Civilians/classic.rsi
   - type: Storage
     grid:
-    - 0,0,7,1
+    - 0,0,14,1 # 15
 
 - type: entity
   parent: CMSatchel
@@ -21,7 +21,7 @@
     sprite: _CM14/Objects/Clothing/Back/Backpacks/Marines/smock.rsi
   - type: Storage
     grid:
-    - 0,0,20,1 # Satchel but with backpack capacity
+    - 0,0,20,1 # 21, Satchel but with backpack capacity
 
 - type: entity
   parent: CMSatchel
@@ -67,12 +67,19 @@
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Back/Satchels/Marines/big.rsi
+  - type: Storage
+    grid:
+    - 0,0,19,1 # 20
 
 - type: entity
   parent: CMSatchelMarineIntel
   id: CMSatchelMarineLogistics
   name: USCM logistics IMP backpack
   description: A standard-issue backpack worn by logistics personnel. It is occasionally issued to combat personnel for longer term expeditions and deep space incursions.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,20,1 # 21
 
 - type: entity
   parent: CMSatchelMarine

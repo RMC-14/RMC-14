@@ -63,7 +63,7 @@
   parent: CMWeaponPistolBase
   id: CMWeaponPistolM4A3
   name: M4A3 service pistol
-  description: An M4A3 Service Pistol, once the standard issue sidearm of the Colonial Marines but has recently been replaced with the 88 Mod 4 combat pistol.
+  description: An M4A3 Service Pistol, once the standard issue sidearm of the Colonial Marines but has recently been replaced with the 88 Mod 4 combat pistol. Fires 9mm pistol rounds.
   components:
   - type: Gun
     fireRate: 10

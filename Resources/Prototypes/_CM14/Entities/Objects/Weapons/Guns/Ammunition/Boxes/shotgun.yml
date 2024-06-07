@@ -4,12 +4,15 @@
   id: CMBoxShotgunBase
   name: box of shotgun shells
   components:
+  - type: Item
+    size: Large
   - type: BallisticAmmoProvider
     proto: CMShellShotgunBase
     capacity: 25
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/shotgun_boxes.rsi
   - type: CMAmmoBox
+  - type: Appearance
 
 - type: entity
   parent: CMBoxShotgunBase
