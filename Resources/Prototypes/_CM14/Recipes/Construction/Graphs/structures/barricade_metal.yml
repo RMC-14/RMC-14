@@ -10,7 +10,6 @@
     - to: nodeMetal
       completed:
       - !type:SnapToGrid
-        southRotation: true
       steps:
       - material: CMSteel
         amount: 3
