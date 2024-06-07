@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0b241c0584b792912d42c34007d808494e386023/icons/obj/items/weapons/guns/ammo_boxes/magazines.dmi, https://github.com/cmss13-devs/cmss13/blob/07455a5f3986b610e7ccdc3096cad1d914fca2f9/icons/obj/items/weapons/guns/ammo_boxes/boxes_and_lids.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0b241c0584b792912d42c34007d808494e386023/icons/obj/items/weapons/guns/ammo_boxes/magazines.dmi, https://github.com/cmss13-devs/cmss13/blob/07455a5f3986b610e7ccdc3096cad1d914fca2f9/icons/obj/items/weapons/guns/ammo_boxes/boxes_and_lids.dmi, https://github.com/cmss13-devs/cmss13/blob/fba613ad33ac51b16689a75bc2f1572b24df282a/icons/obj/items/weapons/guns/ammo_boxes/text.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -579,6 +579,345 @@
     },
     {
       "name": "blank"
+    },
+    {
+      "name": "text"
+    },
+    {
+      "name": "text_blank"
+    },
+    {
+      "name": "text_m4a3"
+    },
+    {
+      "name": "text_mod88"
+    },
+    {
+      "name": "text_vp78"
+    },
+    {
+      "name": "text_su6"
+    },
+    {
+      "name": "text_m44"
+    },
+    {
+      "name": "text_38"
+    },
+    {
+      "name": "text_357"
+    },
+    {
+      "name": "text_rounds"
+    },
+    {
+      "name": "text_rounds_type71"
+    },
+    {
+      "name": "text_m41"
+    },
+    {
+      "name": "text_m39"
+    },
+    {
+      "name": "text_l42"
+    },
+    {
+      "name": "text_m16"
+    },
+    {
+      "name": "text_ar10"
+    },
+    {
+      "name": "text_nsg23"
+    },
+    {
+      "name": "text_mp5"
+    },
+    {
+      "name": "text_deagle"
+    },
+    {
+      "name": "text_type71"
+    },
+    {
+      "name": "text_zhnk72"
+    },
+    {
+      "name": "text_type64"
+    },
+    {
+      "name": "text_type73"
+    },
+    {
+      "name": "text_type19"
+    },
+    {
+      "name": "text_shells"
+    },
+    {
+      "name": "text_4570"
+    },
+    {
+      "name": "text_458"
+    },
+    {
+      "name": "text_m94"
+    },
+    {
+      "name": "text_m89"
+    },
+    {
+      "name": "text_m4ra"
+    },
+    {
+      "name": "text_sg"
+    },
+    {
+      "name": "text_m56d"
+    },
+    {
+      "name": "text_m2c"
+    },
+    {
+      "name": "text_mk1"
+    },
+    {
+      "name": "text_m41ae2"
+    },
+    {
+      "name": "text_xm51"
+    },
+    {
+      "name": "text_mar30"
+    },
+    {
+      "name": "text_mar50"
+    },
+    {
+      "name": "text_uzi"
+    },
+    {
+      "name": "text_mac15"
+    },
+    {
+      "name": "text_mk45"
+    },
+    {
+      "name": "text_m1911"
+    },
+    {
+      "name": "text_fnfp9000"
+    },
+    {
+      "name": "text_b92fs"
+    },
+    {
+      "name": "text_kt42"
+    },
+    {
+      "name": "text_mp27"
+    },
+    {
+      "name": "ammo_marking_base"
+    },
+    {
+      "name": "base_type_blank"
+    },
+    {
+      "name": "base_type_m44_reg"
+    },
+    {
+      "name": "base_type_m44_mark"
+    },
+    {
+      "name": "base_type_m44_heavy"
+    },
+    {
+      "name": "base_type_357_hp"
+    },
+    {
+      "name": "base_type_357_reg"
+    },
+    {
+      "name": "base_type_reg"
+    },
+    {
+      "name": "base_type_ap"
+    },
+    {
+      "name": "base_type_hp"
+    },
+    {
+      "name": "base_type_le"
+    },
+    {
+      "name": "base_type_ext"
+    },
+    {
+      "name": "base_type_incen"
+    },
+    {
+      "name": "base_type_expl"
+    },
+    {
+      "name": "base_type_heap"
+    },
+    {
+      "name": "base_type_impact"
+    },
+    {
+      "name": "base_type_45_heavy"
+    },
+    {
+      "name": "base_type_45_tracker"
+    },
+    {
+      "name": "base_type_45_marksman"
+    },
+    {
+      "name": "base_type_45_training"
+    },
+    {
+      "name": "base_type_reg_heavy"
+    },
+    {
+      "name": "base_type_red_heavy"
+    },
+    {
+      "name": "base_type_holo_heavy"
+    },
+    {
+      "name": "base_type_heap_heavy"
+    },
+    {
+      "name": "base_type_reg_mk1"
+    },
+    {
+      "name": "base_type_ap_mk1"
+    },
+    {
+      "name": "base_type_type71_reg"
+    },
+    {
+      "name": "base_type_type71_ap"
+    },
+    {
+      "name": "base_type_type71_heap"
+    },
+    {
+      "name": "base_type_type73_impact"
+    },
+    {
+      "name": "base_type_nail"
+    },
+    {
+      "name": "base_type_flamer"
+    },
+    {
+      "name": "base_type_flamer_bgel"
+    },
+    {
+      "name": "base_type"
+    },
+    {
+      "name": "ammo_marking_lid"
+    },
+    {
+      "name": "lid_type_45_heavy"
+    },
+    {
+      "name": "lid_type_45_tracker"
+    },
+    {
+      "name": "lid_type_45_marksman"
+    },
+    {
+      "name": "lid_type_45_training"
+    },
+    {
+      "name": "lid_type_m44_reg"
+    },
+    {
+      "name": "lid_type_m44_mark"
+    },
+    {
+      "name": "lid_type_m44_heavy"
+    },
+    {
+      "name": "lid_type_357_hp"
+    },
+    {
+      "name": "lid_type_357_reg"
+    },
+    {
+      "name": "lid_type_reg"
+    },
+    {
+      "name": "lid_type_ap"
+    },
+    {
+      "name": "lid_type_hp"
+    },
+    {
+      "name": "lid_type_le"
+    },
+    {
+      "name": "lid_type_ext"
+    },
+    {
+      "name": "lid_type_incen"
+    },
+    {
+      "name": "lid_type_expl"
+    },
+    {
+      "name": "lid_type_heap"
+    },
+    {
+      "name": "lid_type_impact"
+    },
+    {
+      "name": "lid_type_reg_heavy"
+    },
+    {
+      "name": "lid_type_red_heavy"
+    },
+    {
+      "name": "lid_type_holo_heavy"
+    },
+    {
+      "name": "lid_type_heap_heavy"
+    },
+    {
+      "name": "lid_type_reg_mk1"
+    },
+    {
+      "name": "lid_type_ap_mk1"
+    },
+    {
+      "name": "lid_type_type71_reg"
+    },
+    {
+      "name": "lid_type_type71_ap"
+    },
+    {
+      "name": "lid_type_type71_heap"
+    },
+    {
+      "name": "lid_type_type73_impact"
+    },
+    {
+      "name": "lid_type_nail"
+    },
+    {
+      "name": "lid_type_flamer"
+    },
+    {
+      "name": "lid_type_flamer_bgel"
+    },
+    {
+      "name": "lid_type"
     }
   ]
 }

@@ -37,6 +37,9 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Appearance
 
+- type: Tag
+  id: CMMagazineRifleM41AAP
+
 # m41a AP
 - type: entity
   parent: CMMagazineRifleM41A
@@ -44,6 +47,8 @@
   name: "M41A AP magazine (10x24mm)"
   suffix: AP
   components:
+  - type: Tag
+    tags: [CMMagazineRifleM41AAP]
   - type: BallisticAmmoProvider
     whitelist:
       tags:
