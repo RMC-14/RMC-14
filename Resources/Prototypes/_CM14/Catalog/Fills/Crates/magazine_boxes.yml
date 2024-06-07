@@ -25,23 +25,23 @@
     contents:
     - id: CMBoxMagazineRifleM41AExt
 
-#- type: entity
-#  parent: CMCrateAmmo
-#  id: CMCrateBoxMagazineRifleM4RA
-#  name: Magazine box (M4RA, 16x regular mags)
-#  components:
-#  - type: StorageFill
-#    contents:
-#    - id: CMBoxMagazineRifleM4RA
-#
-#- type: entity
-#  parent: CMCrateAmmo
-#  id: CMCrateBoxMagazineRifleM4RAAP
-#  name: Magazine box (M4RA, 16x AP mags)
-#  components:
-#  - type: StorageFill
-#    contents:
-#    - id: CMBoxMagazineRifleM4RAAP
+- type: entity
+  parent: CMCrateAmmo
+  id: CMCrateBoxMagazineRifleM4RA
+  name: Magazine box (M4RA, 16x regular mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBoxMagazineRifleM4RA
+
+- type: entity
+  parent: CMCrateAmmo
+  id: CMCrateBoxMagazineRifleM4RAAP
+  name: Magazine box (M4RA, 16x AP mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBoxMagazineRifleM4RAAP
 
 - type: entity
   parent: CMCrateAmmo

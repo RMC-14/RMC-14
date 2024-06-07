@@ -137,3 +137,48 @@
       whitelist:
         tags:
         - CMMagazineSMGM39AP
+
+# M4RA
+- type: entity
+  parent: CMBoxMagazineBase
+  id: CMBoxMagazineRifleM4RA
+  name: magazine box (M4RA x 16
+  components:
+  - type: Sprite
+    layers:
+    #    - state: lid_type_ext
+    #    - state: base_m41
+    - state: base_m4ra
+    - state: text_m4ra
+    - state: base_type_reg
+    - state: magaz_reg
+      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+  - type: CMItemSlots
+    startingItem: CMMagazineRifleM4RA
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM4RA
+
+- type: entity
+  parent: CMBoxMagazineBase
+  id: CMBoxMagazineRifleM4RAAP
+  name: magazine box (AP M4RA x 16)
+  components:
+  - type: Sprite
+    layers:
+    #    - state: lid_type_ext
+    #    - state: base_m41
+    - state: base_m4ra
+    - state: text_m4ra
+    - state: base_type_ap
+    - state: magaz_ap
+      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+  - type: CMItemSlots
+    startingItem: CMMagazineRifleM4RAAP
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM4RAAP

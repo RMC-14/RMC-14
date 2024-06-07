@@ -148,6 +148,9 @@
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m4ra.rsi
 
+- type: Tag
+  id: CMMagazineRifleM4RAAP
+
 # M4RA AP
 - type: entity
   parent: CMMagazineRifleM4RA
