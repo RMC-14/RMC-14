@@ -63,7 +63,6 @@
       visible: false
   - type: Item
     sprite: _CM14/Objects/Medical/large_beaker.rsi
-    size: Normal
   - type: SolutionContainerManager
     solutions:
       beaker:
