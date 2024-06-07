@@ -691,9 +691,9 @@
     #  points: 5
     - name: Medical Supplies
       entries:
-      - id: CMBurnKit
+      - id: CMBurnKit10
         points: 2
-      - id: CMTraumaKit
+      - id: CMTraumaKit10
         points: 2
       - id: CMAdvFirstAidKitFilled
         points: 12
@@ -983,8 +983,11 @@
     #- id: CMFuelTankStrapPouch
     #- id: CMWeldingGoggles
       - id: CMPouchGeneralLarge
+        points: 10
       - id: CMBeltUtilityCombat
+        points: 15
       - id: CMPouchAutoinjectorFill
+        points: 15
     - name: Utilities
       entries:
       - id: CMFireExtinguisherPortable

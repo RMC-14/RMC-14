@@ -1,11 +1,5 @@
 ﻿- type: damageContainer
-  id: Xeno
-  supportedGroups:
-  - Brute
-  - Burn
-
-- type: damageContainer
-  id: StructuralXeno
+  id: StructuralMarine
   supportedGroups:
   - Brute
   supportedTypes:

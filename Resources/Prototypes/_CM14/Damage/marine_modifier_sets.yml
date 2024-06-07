@@ -50,3 +50,6 @@
     Bloodloss: 0
     Cellular: 0
     Caustic: 0
+
+- type: damageModifierSet
+  id: StructuralMarine
