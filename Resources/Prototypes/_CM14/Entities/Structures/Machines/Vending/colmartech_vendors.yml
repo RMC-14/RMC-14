@@ -256,7 +256,7 @@
       entries:
       - id: CMMagazineExtendedM39
         amount: 1
-      - id: CMMagazineExtendedRifleM41A
+      - id: CMMagazineRifleM41AExt
         amount: 1
     - name: Special Ammunition
       entries: [ ]
@@ -483,7 +483,7 @@
         points: 10
       - id: CMMagazineRifleM41AAP
         points: 10
-      - id: CMMagazineExtendedRifleM41A
+      - id: CMMagazineRifleM41AExt
         points: 10
     - name: Sidearm Ammunition
       entries:
@@ -727,7 +727,7 @@
         points: 6
       - id: CMMagazineRifleM41AAP
         points: 6
-      - id: CMMagazineExtendedRifleM41A
+      - id: CMMagazineRifleM41AExt
         points: 6
     - name: Sidearm Ammunition
       entries:
@@ -1098,7 +1098,7 @@
         points: 6
       - id: CMMagazineRifleM41AAP
         points: 6
-      - id: CMMagazineExtendedRifleM41A
+      - id: CMMagazineRifleM41AExt
         points: 6
     - name: Armors
       entries:
@@ -1369,7 +1369,7 @@
         points: 6
       - id: CMMagazineRifleM41AAP
         points: 6
-      - id: CMMagazineExtendedRifleM41A
+      - id: CMMagazineRifleM41AExt
         points: 6
     - name: Sidearm Ammunition
       entries:
@@ -1778,7 +1778,7 @@
         points: 10
       - id: CMMagazineRifleM41AAP
         points: 10
-      - id: CMMagazineExtendedRifleM41A
+      - id: CMMagazineRifleM41AExt
         points: 10
     - name: Sidearm Ammunition
       entries:

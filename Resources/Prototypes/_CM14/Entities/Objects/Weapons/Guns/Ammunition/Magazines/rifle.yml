@@ -64,10 +64,13 @@
     - state: ammo_band
       color: "#1F951F"
 
+- type: Tag
+  id: CMMagazineRifleM41AExt
+
 # m41a extended
 - type: entity
   parent: CMMagazineRifleM41A
-  id: CMMagazineExtendedRifleM41A
+  id: CMMagazineRifleM41AExt
   name: "M41A extended magazine (10x24mm)"
   components:
   - type: Tag
