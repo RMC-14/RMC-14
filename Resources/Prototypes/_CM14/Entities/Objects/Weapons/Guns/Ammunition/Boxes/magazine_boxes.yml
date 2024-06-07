@@ -142,7 +142,7 @@
 - type: entity
   parent: CMBoxMagazineBase
   id: CMBoxMagazineRifleM4RA
-  name: magazine box (M4RA x 16
+  name: magazine box (M4RA x 16)
   components:
   - type: Sprite
     layers:

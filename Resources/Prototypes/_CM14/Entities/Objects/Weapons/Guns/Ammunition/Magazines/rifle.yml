@@ -159,6 +159,9 @@
   description: "A magazine of armor-piercing 10x24mm rounds for use in the M4RA battle rifle."
   suffix: AP
   components:
+  - type: Tag
+    tags:
+    - CMMagazineRifleM4RAAP
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m4ra.rsi
     layers:
