@@ -67,7 +67,7 @@
 
 - type: entity
   abstract: true
-  parent: CMMagazineBoxBase
+  parent: CMBoxMagazineBase
   id: CMBoxPackFlareBase
   name: box of M94 flare packs
   description: A box of M94 marking flare packs, to brighten up your day.
@@ -97,7 +97,7 @@
 
 - type: entity
   abstract: true
-  parent: CMMagazineBoxBase
+  parent: CMBoxMagazineBase
   id: CMPackFlareBase
   name: M94 flare pack
   description: A pack of M94 marking flares

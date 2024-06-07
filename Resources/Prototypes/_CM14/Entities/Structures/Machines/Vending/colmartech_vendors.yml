@@ -177,7 +177,7 @@
       entries:
       - id: CMMRE
         amount: 5
-      - id: CMMREBox
+      - id: CMBoxMRE
         amount: 1
     - name: Tools
       entries:
