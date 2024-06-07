@@ -14,6 +14,7 @@ tiles-cm-black = black metal tile
 tiles-cm-ai = ai-room tile
 tiles-cm-tcomms = tcommunications tile
 tiles-cm-cargo = cargo tile
+tiles-cm-plating = plating tile
 tiles-cm-striped = striped tile
 tiles-cm-test = test tile
 tiles-cm-wy = WY tile

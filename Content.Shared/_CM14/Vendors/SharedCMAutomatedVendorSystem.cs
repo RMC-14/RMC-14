@@ -5,6 +5,7 @@ using Content.Shared._CM14.Webbing;
 using Content.Shared.Access.Components;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Mind;
@@ -45,6 +46,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     private void OnUIOpenAttempt(Entity<CMAutomatedVendorComponent> vendor, ref ActivatableUIOpenAttemptEvent args)
     {
         if (args.Cancelled)
+            return;
+
+        if (HasComp<BypassInteractionChecksComponent>(args.User))
             return;
 
         if (TryComp(vendor, out AccessReaderComponent? reader) &&
