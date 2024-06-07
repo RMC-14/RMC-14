@@ -5,6 +5,12 @@
 
 - type: tile
   parent: CMFloorStripedBase
+  id: CMFloorPlating
+  name: tiles-cm-plating
+  sprite: /Textures/_CM14/Tiles/almayer/plating.png
+
+- type: tile
+  parent: CMFloorStripedBase
   id: CMFloorStriped0
   sprite: /Textures/_CM14/Tiles/almayer/plating_striped_0.png
 
