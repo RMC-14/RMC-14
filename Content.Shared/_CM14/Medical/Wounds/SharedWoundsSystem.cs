@@ -221,7 +221,7 @@ public abstract class SharedWoundsSystem : EntitySystem
         if (!treater.Comp.CanUseUnskilled && !hasSkills)
         {
             if (doPopups)
-                _popup.PopupClient(Loc.GetString("cm-wounds-failed-unskilled", ("treater", Name(treater))), target, user, PopupType.SmallCaution);
+                _popup.PopupClient(Loc.GetString("cm-wounds-failed-unskilled", ("treater", treater.Owner)), target, user, PopupType.SmallCaution);
 
             return false;
         }
@@ -293,7 +293,7 @@ public abstract class SharedWoundsSystem : EntitySystem
                 TryComp(treater, out StackComponent? stack) &&
                 _stacks.GetCount(treater, stack) < 2)
             {
-                _popup.PopupClient(Loc.GetString("cm-wounds-failed-not-enough", ("treater", Name(treater))), target, user, PopupType.SmallCaution);
+                _popup.PopupClient(Loc.GetString("cm-wounds-failed-not-enough", ("treater", treater.Owner)), target, user, PopupType.SmallCaution);
                 return false;
             }
 
@@ -303,11 +303,11 @@ public abstract class SharedWoundsSystem : EntitySystem
         if (doPopups)
         {
             if (surgeryUntreated)
-                _popup.PopupClient(Loc.GetString("cm-wounds-open-cut", ("target", targetName), ("treater", Name(treater))), target, user, PopupType.SmallCaution);
+                _popup.PopupClient(Loc.GetString("cm-wounds-open-cut", ("target", targetName), ("treater", treater.Owner)), target, user, PopupType.SmallCaution);
             else if (otherUntreated)
-                _popup.PopupClient(Loc.GetString("cm-wounds-cannot-treat", ("treater", Name(treater))), target, user, PopupType.SmallCaution);
+                _popup.PopupClient(Loc.GetString("cm-wounds-cannot-treat", ("treater", treater.Owner)), target, user, PopupType.SmallCaution);
             else
-                _popup.PopupClient(Loc.GetString("cm-wounds-already-treated", ("target", targetName)), target, user);
+                _popup.PopupClient(Loc.GetString("cm-wounds-already-treated", ("target", target)), target, user);
         }
 
         wounded = default;
@@ -322,8 +322,7 @@ public abstract class SharedWoundsSystem : EntitySystem
         var delay = _skills.GetDelay(user, treater);
         if (delay > TimeSpan.Zero)
         {
-            var name = Loc.GetString("zzzz-the", ("ent", target));
-            _popup.PopupClient(Loc.GetString("cm-wounds-start-fumbling", ("name", name)), target, user);
+            _popup.PopupClient(Loc.GetString("cm-wounds-start-fumbling", ("name", treater.Owner)), target, user);
         }
 
         var scaling = treater.Comp.ScalingDoAfter;

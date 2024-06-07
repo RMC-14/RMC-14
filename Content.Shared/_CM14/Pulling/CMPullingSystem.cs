@@ -111,8 +111,7 @@ public sealed class CMPullingSystem : EntitySystem
 
         if (!_whitelist.IsValid(ent.Comp.Whitelist, args.PulledUid))
         {
-            var name = Loc.GetString("zzzz-the", ("ent", args.PulledUid));
-            _popup.PopupClient(Loc.GetString("cm-pull-whitelist-denied", ("name", name)), args.PulledUid, args.PullerUid);
+            _popup.PopupClient(Loc.GetString("cm-pull-whitelist-denied", ("name", args.PulledUid)), args.PulledUid, args.PullerUid);
             args.Cancelled = true;
         }
     }
@@ -124,8 +123,7 @@ public sealed class CMPullingSystem : EntitySystem
 
         if (_mobState.IsDead(args.PulledUid))
         {
-            var name = Loc.GetString("zzzz-the", ("ent", args.PulledUid));
-            _popup.PopupClient(Loc.GetString("cm-pull-whitelist-denied-dead", ("name", name)), args.PulledUid, args.PullerUid);
+            _popup.PopupClient(Loc.GetString("cm-pull-whitelist-denied-dead", ("name", args.PulledUid)), args.PulledUid, args.PullerUid);
             args.Cancelled = true;
         }
     }

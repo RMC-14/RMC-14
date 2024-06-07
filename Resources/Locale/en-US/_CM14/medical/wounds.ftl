@@ -48,10 +48,9 @@ cm-burns-already-treated-target-popup = The burns on {$target} have already been
 
 cm-wounds-brackets-translators-note = {"{ }"} = Untreated
 
-cm-wounds-failed-unskilled = You don't know how to use the {$treater}!
+cm-wounds-failed-unskilled = You don't know how to use {THE($treater)}!
 cm-wounds-failed-not-enough = You don't have enough {$treater}!
 cm-wounds-open-cut = {$target} is cut open, you'll need more than a {$treater}!
-cm-wounds-cannot-treat = {$treater} cannot treat these wounds!
+cm-wounds-cannot-treat = {THE($treater)} cannot treat these wounds!
 cm-wounds-already-treated = The wounds on {$target} have already been treated!
-cm-wounds-start-fumbling = You start fumbling with {$name}.
-
+cm-wounds-start-fumbling = You start fumbling with {THE($name)}.
