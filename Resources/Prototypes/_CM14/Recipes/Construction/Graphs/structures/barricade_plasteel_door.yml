@@ -10,7 +10,6 @@
     - to: nodeBarricadePlasteelDoor
       completed:
       - !type:SnapToGrid
-        southRotation: true
       steps:
       - material: CMPlasteel
         amount: 5
