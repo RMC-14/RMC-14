@@ -16,11 +16,11 @@
 #        crate: CMCrateBoxMagazineRifleM4RA
 #      - cost: 4000
 #        crate: CMCrateBoxMagazineRifleM4RAAP
-#      - cost: 2000
+      - cost: 2000
         crate: CMCrateBoxMagazineSMGM39
       - cost: 4000
         crate: CMCrateBoxMagazineSMGM39AP
-      - cost: 2000
+#      - cost: 2000
 #        crate: CMCrateBoxMagazinePistolM4A3
 #      - cost: 3000
 #        crate: CMCrateBoxShellsShotgunSlugs
