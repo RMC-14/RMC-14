@@ -111,11 +111,9 @@
   name: empty sandbags
   spawn: CMSandbagEmpty
   maxCount: 50
-  itemSize: 5
 
 - type: stack
   id: CMSandbagFull
   name: empty sandbags
   spawn: CMSandbagFull
   maxCount: 50
-  itemSize: 5

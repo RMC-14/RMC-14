@@ -35,7 +35,6 @@
         Bloodloss: -1
     damageBleedModifiers: CMBloodlossHuman
   - type: Woundable
-  - type: Flashable
   - type: StatusEffects
     allowed:
     - Stun
@@ -53,6 +52,7 @@
     - Muted
     - Pacified
     - StaminaModifier
+    - Flashed
   - type: Blindable
   - type: Tag
     tags:

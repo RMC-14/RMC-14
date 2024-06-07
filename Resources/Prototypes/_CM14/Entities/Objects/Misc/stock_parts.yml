@@ -1,17 +1,20 @@
 # BASE
-
 - type: entity
-  parent: BaseStockPart
+  abstract: true
+#  parent: BaseStockPart
+  parent: BaseItem
   id: CMStockPartBase
   name: stock part
   description: What?
-  abstract: true
   components:
   - type: Sprite
     sprite: _CM14/Objects/Misc/stock_parts.rsi
+  - type: Item
+    size: Small
 
 # RATING 1
 
+# TODO CM14 these, bring them back with a stack type instead of a machine part component
 - type: entity
   parent: CMStockPartBase
   id: CMStockPartScreen
@@ -34,9 +37,9 @@
   components:
   - type: Sprite
     state: capacitor
-  - type: MachinePart
-    part: Capacitor
-    rating: 1
+#  - type: MachinePart
+#    part: Capacitor
+#    rating: 1
   - type: Tag
     tags:
     - CapacitorStockPart
@@ -63,9 +66,9 @@
   components:
   - type: Sprite
     state: micro_mani
-  - type: MachinePart
-    part: Manipulator
-    rating: 1
+#  - type: MachinePart
+#    part: Manipulator
+#    rating: 1
 
 - type: entity
   parent: CMStockPartBase
@@ -89,9 +92,9 @@
   components:
   - type: Sprite
     state: matter_bin
-  - type: MachinePart
-    part: MatterBin
-    rating: 1
+#  - type: MachinePart
+#    part: MatterBin
+#    rating: 1
 
 # RATING 2
 
@@ -101,9 +104,9 @@
   name: advanced capacitor
   description: An advanced capacitor used in the construction of a variety of devices.
   suffix: Rating 2
-  components:
-  - type: MachinePart
-    rating: 2
+#  components:
+#  - type: MachinePart
+#    rating: 2
 
 - type: entity
   parent: CMStockPartScanningModule
@@ -112,7 +115,7 @@
   suffix: Rating 2
   #components:
   #- type: MachinePart
-  #  part: 
+  #  part:
   #  rating: 2
 
 - type: entity
@@ -123,8 +126,8 @@
   components:
   - type: Sprite
     state: nano_mani
-  - type: MachinePart
-    rating: 2
+#  - type: MachinePart
+#    rating: 2
 
 - type: entity
   parent: CMStockPartMicroLaser
@@ -135,7 +138,7 @@
   - type: Sprite
     state: high_micro_laser
   #- type: MachinePart
-  #  part: 
+  #  part:
   #  rating: 2
 
 - type: entity
@@ -146,8 +149,8 @@
   components:
   - type: Sprite
     state: advanced_matter_bin
-  - type: MachinePart
-    rating: 2
+#  - type: MachinePart
+#    rating: 2
 
 # RATING 3
 
@@ -157,9 +160,9 @@
   name: super capacitor
   description: A super-high-capacity capacitor used in the construction of a variety of devices.
   suffix: Rating 3
-  components:
-  - type: MachinePart
-    rating: 3
+#  components:
+#  - type: MachinePart
+#    rating: 3
 
 - type: entity
   parent: CMStockPartScanningModule
@@ -179,8 +182,8 @@
   components:
   - type: Sprite
     state: pico_mani
-  - type: MachinePart
-    rating: 3
+#  - type: MachinePart
+#    rating: 3
 
 - type: entity
   parent: CMStockPartMicroLaser
@@ -201,8 +204,8 @@
   components:
   - type: Sprite
     state: super_matter_bin
-  - type: MachinePart
-    rating: 3
+#  - type: MachinePart
+#    rating: 3
 
 # SUBSPACE
 
@@ -217,5 +220,5 @@
   - type: Sprite
     state: smes_coil
   #- type: MachinePart
-  #  part: 
+  #  part:
   #  rating: 1

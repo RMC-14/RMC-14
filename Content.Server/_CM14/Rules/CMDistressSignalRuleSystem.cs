@@ -3,7 +3,6 @@ using Content.Server._CM14.Marines;
 using Content.Server.Administration.Components;
 using Content.Server.Administration.Managers;
 using Content.Server.GameTicking;
-using Content.Server.GameTicking.Components;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
 using Content.Server.Parallax;
@@ -22,6 +21,7 @@ using Content.Shared._CM14.Marines.Squads;
 using Content.Shared._CM14.Weapons.Ranged.IFF;
 using Content.Shared._CM14.Xenos;
 using Content.Shared.Coordinates;
+using Content.Shared.GameTicking.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -501,11 +501,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 _containers.TryGetContainer(uid, hyperSleep.ContainerId, out var container) &&
                 container.Count > 0)
             {
-                spawners.NonSquadFull.GetOrNew(spawner.Job.ID).Add(uid);
+                spawners.NonSquadFull.GetOrNew(spawner.Job.Value).Add(uid);
             }
             else
             {
-                spawners.NonSquad.GetOrNew(spawner.Job.ID).Add(uid);
+                spawners.NonSquad.GetOrNew(spawner.Job.Value).Add(uid);
             }
         }
 
@@ -583,7 +583,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         {
             if (point.SpawnType == SpawnPointType.Job)
             {
-                if (point.Job?.ID == job.ID)
+                if (point.Job?.Id == job.ID)
                     jobPoints.Add(uid);
                 else
                     anyJobPoints.Add(uid);

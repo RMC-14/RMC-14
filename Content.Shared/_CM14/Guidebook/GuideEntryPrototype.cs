@@ -3,7 +3,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
 // ReSharper disable once CheckNamespace
-namespace Content.Client.Guidebook;
+namespace Content.Shared.Guidebook;
 
 public sealed partial class GuideEntryPrototype : IInheritingPrototype, ICMSpecific
 {
