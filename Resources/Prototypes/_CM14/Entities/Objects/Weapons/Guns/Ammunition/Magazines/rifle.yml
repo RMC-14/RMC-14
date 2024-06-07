@@ -3,6 +3,8 @@
   id: CMMagazineRifleBase
   abstract: true
   components:
+  - type: Item
+    size: Normal
   - type: MagazineVisuals
     magState: mag
     steps: 2

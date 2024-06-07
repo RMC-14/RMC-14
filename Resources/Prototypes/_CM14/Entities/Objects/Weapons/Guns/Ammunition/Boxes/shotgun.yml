@@ -4,6 +4,8 @@
   id: CMBoxShotgunBase
   name: box of shotgun shells
   components:
+  - type: Item
+    size: Large
   - type: BallisticAmmoProvider
     proto: CMShellShotgunBase
     capacity: 25
