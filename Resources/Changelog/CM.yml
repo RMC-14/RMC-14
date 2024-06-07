@@ -997,5 +997,12 @@
   id: 131
   time: '2024-06-07T01:16:07.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2323
+- author: DrSmugleaf
+  changes:
+  - message: Added pill packets.
+    type: Add
+  id: 132
+  time: '2024-06-07T02:01:25.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2326
 Name: CM
 Order: -1
