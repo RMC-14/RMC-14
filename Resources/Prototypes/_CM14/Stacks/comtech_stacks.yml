@@ -3,5 +3,5 @@
   name: barbed wire
   icon: { sprite: _CM14/Objects/barbed_wire.rsi, state: barbed_wire }
   spawn: BarbedWire1
-  maxCount: 30
+  maxCount: 20
   itemSize: 1

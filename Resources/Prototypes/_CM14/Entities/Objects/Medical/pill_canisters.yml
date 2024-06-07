@@ -20,7 +20,7 @@
     storageInsertSound: /Audio/Effects/pill_insert.ogg
     storageRemoveSound: /Audio/Effects/pill_remove.ogg
     grid:
-    - 0,0,7,1
+    - 0,0,15,1 # 16
     storageOpenSound:
       collection: CMPillBottleOpen
     maxItemSize: Small

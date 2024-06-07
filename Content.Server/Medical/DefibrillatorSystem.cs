@@ -227,9 +227,12 @@ public sealed class DefibrillatorSystem : EntitySystem
             if (_mobState.IsDead(target, mob))
             {
                 var heal = new DamageSpecifier(component.ZapHeal);
-                foreach (var (group, amount) in component.CMZapDamage)
+                if (component.CMZapDamage != null)
                 {
-                    heal = _cmDamageable.DistributeHealing(target, group, amount, heal);
+                    foreach (var (group, amount) in component.CMZapDamage)
+                    {
+                        heal = _cmDamageable.DistributeHealing(target, group, amount, heal);
+                    }
                 }
 
                 _damageable.TryChangeDamage(target, heal, true, origin: uid);

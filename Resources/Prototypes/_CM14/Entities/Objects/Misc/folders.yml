@@ -11,14 +11,14 @@
   - type: Item
     sprite: _CM14/Objects/Misc/paper.rsi
     size: Small
-    shape: null
   - type: Storage
     maxItemSize: Small
     grid:
-    - 0,0,4,3
+    - 0,0,4,1
     whitelist:
       tags:
-        - Document
+      - Document
+      - Paper
   - type: Appearance
   - type: Tag
     tags:

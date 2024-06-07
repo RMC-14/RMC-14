@@ -1,5 +1,5 @@
 - type: entity
-  name: m94 flare
+  name: flare
   parent: BaseItem
   id: CMFlare
   description: A red USCM issued flare. There are instructions on the side, it reads 'pull cord, make light'.
