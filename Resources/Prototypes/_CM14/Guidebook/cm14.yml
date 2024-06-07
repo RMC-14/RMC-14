@@ -9,6 +9,7 @@
   name: guide-entry-cm14
   text: "/ServerInfo/Guidebook/_CM14/CM14.xml"
   children:
+  - CMRules
 #  - Controls
 #  - Jobs
 #  - Survival
