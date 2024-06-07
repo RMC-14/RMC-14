@@ -419,7 +419,7 @@
         name: first-aid pouch (refillable injectors)
       - id: CMPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO CM14 splints comma
-      - id: CMPouchFirstAidPills # TODO CM14 packets
+      - id: CMPouchFirstAidPills
         name: first-aid pouch (pills)
       - id: CMPouchFlareFilled
         name: Flare pouch (Filled)
@@ -813,7 +813,7 @@
         name: first-aid pouch (refillable injectors)
       - id: CMPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO CM14 splints comma
-      - id: CMPouchFirstAidPills # TODO CM14 packets
+      - id: CMPouchFirstAidPills
         name: first-aid pouch (pills)
       - id: CMPouchFlareFilled
         name: Flare pouch (Filled)
@@ -1232,7 +1232,7 @@
         name: first-aid pouch (refillable injectors)
       - id: CMPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO CM14 splints comma
-      - id: CMPouchFirstAidPills # TODO CM14 packets
+      - id: CMPouchFirstAidPills
         name: first-aid pouch (pills)
       #- id: CMElectronicsPouchFull
       - id: CMPouchExplosive
@@ -1483,7 +1483,7 @@
         name: first-aid pouch (refillable injectors)
       - id: CMPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO CM14 splints comma
-      - id: CMPouchFirstAidPills # TODO CM14 packets
+      - id: CMPouchFirstAidPills
         name: first-aid pouch (pills)
       - id: CMPouchFirstResponder # TODO CM14 test everything fits
       - id: CMPouchFlareFilled
@@ -1710,7 +1710,7 @@
         name: first-aid pouch (refillable injectors)
       - id: CMPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO CM14 splints comma
-      - id: CMPouchFirstAidPills # TODO CM14 packets
+      - id: CMPouchFirstAidPills
         name: first-aid pouch (pills)
       - id: CMPouchMagazinePistolLarge
       - id: CMPouchMagazine
@@ -1894,7 +1894,7 @@
         name: first-aid pouch (refillable injectors)
       - id: CMPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO CM14 splints comma
-      - id: CMPouchFirstAidPills # TODO CM14 packets
+      - id: CMPouchFirstAidPills
         name: first-aid pouch (pills)
       - id: CMPouchFirstResponder
       - id: CMPouchFlareFilled
