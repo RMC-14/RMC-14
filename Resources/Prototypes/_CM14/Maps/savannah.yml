@@ -10,8 +10,6 @@
         - type: StationNameSetup
           mapNameTemplate: 'USS LCS-14 Savannah'
         - type: StationJobs
-          overflowJobs:
-          - CMRifleman
           availableJobs:
             #Command
             CMCommandingOfficer: [1, 1]

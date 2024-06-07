@@ -23,7 +23,7 @@
   name: glass shard
   description: A shard of broken glass. Could probably be used as ... a throwing weapon?
   components:
-  - type: WelderRefinable
+  - type: ToolRefinable
     refineResult:
     - id: CMSheetGlass1
   - type: Tag
@@ -50,7 +50,7 @@
         phoronlarge: ""
         phoronmedium: ""
         phoronsmall: ""
-  - type: WelderRefinable
+  - type: ToolRefinable
     refineResult:
     - id: CMSheetGlass1
     - id: CMSheetPhoron1

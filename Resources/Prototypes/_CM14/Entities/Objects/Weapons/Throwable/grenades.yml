@@ -98,7 +98,7 @@
 - type: entity
   id: CMExplosionEffectGrenade
   categories:
-  - hideSpawnMenu
+  - HideSpawnMenu
   components:
   - type: Sprite
     sprite: _CM14/Effects/grenade_explosion.rsi
@@ -109,7 +109,7 @@
 - type: entity
   id: CMExplosionEffectShrapnel1
   categories:
-  - hideSpawnMenu
+  - HideSpawnMenu
   components:
   - type: CollisionWake
   - type: Physics
@@ -137,7 +137,7 @@
   parent: CMExplosionEffectShrapnel1
   id: CMExplosionEffectShrapnel2
   categories:
-  - hideSpawnMenu
+  - HideSpawnMenu
   components:
   - type: Sprite
     state: shrapnel_bright2

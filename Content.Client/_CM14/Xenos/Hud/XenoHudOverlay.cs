@@ -83,8 +83,8 @@ public sealed class XenoHudOverlay : Overlay
         var handle = args.WorldHandle;
         var eyeRot = args.Viewport.Eye?.Rotation ?? default;
 
-        var scaleMatrix = Matrix3.CreateScale(new Vector2(1, 1));
-        var rotationMatrix = Matrix3.CreateRotation(-eyeRot);
+        var scaleMatrix = Matrix3x2.CreateScale(new Vector2(1, 1));
+        var rotationMatrix = Matrix3Helpers.CreateRotation(-eyeRot);
 
         handle.UseShader(_shader);
 
@@ -98,10 +98,10 @@ public sealed class XenoHudOverlay : Overlay
             DrawHuggedIcon(in args, scaleMatrix, rotationMatrix);
 
         handle.UseShader(null);
-        handle.SetTransform(Matrix3.Identity);
+        handle.SetTransform(Matrix3x2.Identity);
     }
 
-    private void DrawBars(in OverlayDrawArgs args, Matrix3 scaleMatrix, Matrix3 rotationMatrix)
+    private void DrawBars(in OverlayDrawArgs args, Matrix3x2 scaleMatrix, Matrix3x2 rotationMatrix)
     {
         var handle = args.WorldHandle;
         var xenos = _entity.AllEntityQueryEnumerator<XenoComponent, SpriteComponent, TransformComponent>();
@@ -119,9 +119,9 @@ public sealed class XenoHudOverlay : Overlay
             if (!bounds.Translated(worldPos).Intersects(args.WorldAABB))
                 continue;
 
-            var worldMatrix = Matrix3.CreateTranslation(worldPos);
-            Matrix3.Multiply(scaleMatrix, worldMatrix, out var scaledWorld);
-            Matrix3.Multiply(rotationMatrix, scaledWorld, out var matrix);
+            var worldMatrix = Matrix3x2.CreateTranslation(worldPos);
+            var scaledWorld = Matrix3x2.Multiply(scaleMatrix, worldMatrix);
+            var matrix = Matrix3x2.Multiply(rotationMatrix, scaledWorld);
             handle.SetTransform(matrix);
 
             if (!_mobStateQuery.TryComp(uid, out var mobState) ||
@@ -133,7 +133,7 @@ public sealed class XenoHudOverlay : Overlay
         }
     }
 
-    private void DrawDeadIcon(in OverlayDrawArgs args, Matrix3 scaleMatrix, Matrix3 rotationMatrix)
+    private void DrawDeadIcon(in OverlayDrawArgs args, Matrix3x2 scaleMatrix, Matrix3x2 rotationMatrix)
     {
         var icon = _healthIcons.GetDeadIcon().Icon;
         var handle = args.WorldHandle;
@@ -158,9 +158,9 @@ public sealed class XenoHudOverlay : Overlay
             if (!bounds.Translated(worldPos).Intersects(args.WorldAABB))
                 continue;
 
-            var worldMatrix = Matrix3.CreateTranslation(worldPos);
-            Matrix3.Multiply(scaleMatrix, worldMatrix, out var scaledWorld);
-            Matrix3.Multiply(rotationMatrix, scaledWorld, out var matrix);
+            var worldMatrix = Matrix3x2.CreateTranslation(worldPos);
+            var scaledWorld = Matrix3x2.Multiply(scaleMatrix, worldMatrix);
+            var matrix = Matrix3x2.Multiply(rotationMatrix, scaledWorld);
             handle.SetTransform(matrix);
 
             var texture = _sprite.GetFrame(icon, _timing.CurTime);
@@ -173,7 +173,7 @@ public sealed class XenoHudOverlay : Overlay
         }
     }
 
-    private void DrawHuggedIcon(in OverlayDrawArgs args, Matrix3 scaleMatrix, Matrix3 rotationMatrix)
+    private void DrawHuggedIcon(in OverlayDrawArgs args, Matrix3x2 scaleMatrix, Matrix3x2 rotationMatrix)
     {
         var handle = args.WorldHandle;
         var hugged = _entity.AllEntityQueryEnumerator<VictimHuggedComponent, SpriteComponent, TransformComponent>();
@@ -191,9 +191,9 @@ public sealed class XenoHudOverlay : Overlay
             if (!bounds.Translated(worldPos).Intersects(args.WorldAABB))
                 continue;
 
-            var worldMatrix = Matrix3.CreateTranslation(worldPos);
-            Matrix3.Multiply(scaleMatrix, worldMatrix, out var scaledWorld);
-            Matrix3.Multiply(rotationMatrix, scaledWorld, out var matrix);
+            var worldMatrix = Matrix3x2.CreateTranslation(worldPos);
+            var scaledWorld = Matrix3x2.Multiply(scaleMatrix, worldMatrix);
+            var matrix = Matrix3x2.Multiply(rotationMatrix, scaledWorld);
             handle.SetTransform(matrix);
 
             var time = _timing.CurTime - comp.AttachedAt;

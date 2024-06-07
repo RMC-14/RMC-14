@@ -1,7 +1,7 @@
 ﻿- type: entity
   id: CMDepartmentsHuman
   categories:
-  - hideSpawnMenu
+  - HideSpawnMenu
   components:
   - type: DepartmentGroup
     name: role-timer-human-roles
@@ -20,7 +20,7 @@
 - type: entity
   id: CMJobsMedical
   categories:
-  - hideSpawnMenu
+  - HideSpawnMenu
   components:
   - type: JobGroup
     name: role-timer-medical-roles
@@ -35,7 +35,7 @@
 - type: entity
   id: CMJobsEngineering
   categories:
-  - hideSpawnMenu
+  - HideSpawnMenu
   components:
   - type: JobGroup
     name: role-timer-engineering-roles
@@ -49,7 +49,7 @@
 - type: entity
   id: CMJobsDropship
   categories:
-  - hideSpawnMenu
+  - HideSpawnMenu
   components:
   - type: JobGroup
     name: role-timer-dropship-roles

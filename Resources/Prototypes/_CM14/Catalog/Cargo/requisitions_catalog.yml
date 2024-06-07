@@ -98,8 +98,8 @@
 #        crate: CMCrateWoodenPlanks
 #      - cost: 2000
 #        crate: CMCrateFoldingBarricades
-      - cost: 3000
-        crate: CMCrateSuperconductingMagneticCoil
+#      - cost: 3000
+#        crate: CMCrateSuperconductingMagneticCoil
       - cost: 2000
         crate: CMCrateElectricalMaintenance
       - cost: 2000

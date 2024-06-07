@@ -385,3 +385,6 @@ M40HEDP: CMGrenadeHighExplosive
 M40Smoke: CMGrenadeSmoke
 M40HEFA: CMGrenadeFrag
 ShrapnelProjectile: CMProjectileShrapnel
+
+# 2024-06-06
+CMAutoLathe: CMAutolathe

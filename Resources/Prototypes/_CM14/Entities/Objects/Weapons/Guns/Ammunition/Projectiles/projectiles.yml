@@ -4,7 +4,7 @@
   name: shrapnel
   noSpawn: true
   categories:
-  - hideSpawnMenu
+  - HideSpawnMenu
   components:
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
