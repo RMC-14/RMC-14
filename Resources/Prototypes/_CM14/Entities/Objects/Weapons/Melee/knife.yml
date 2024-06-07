@@ -51,6 +51,12 @@
   - type: Item
     size: Small
     sprite: _CM14/Objects/Weapons/Melee/m11_knife.rsi
+  - type: Tag
+    tags:
+    - ThrowingKnife
+
+- type: Tag
+  id: ThrowingKnife
 
 - type: entity
   parent: CMM5Bayonet

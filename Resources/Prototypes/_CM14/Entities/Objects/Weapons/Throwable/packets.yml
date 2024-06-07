@@ -26,6 +26,7 @@
         type: StorageBoundUserInterface
   - type: UseDelay
     delay: 0.5
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: CMPacketBase

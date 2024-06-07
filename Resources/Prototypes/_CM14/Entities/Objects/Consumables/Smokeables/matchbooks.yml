@@ -2,7 +2,7 @@
 - type: entity
   parent: Matchbox
   id: CMMatchBook
-  name: Lucky Strikes matchbook
+  name: lucky strikes matchbook
   description: A small book of cheap paper matches. Good luck getting them to light. Made by Lucky Strikes, but you'll be anything but lucky when you burn your hand trying to light a match on this.
   components:
   - type: Sprite
@@ -30,11 +30,12 @@
       map: ["mpacket6"]
       visible: false
   - type: Item
+    size: Tiny
     sprite: _CM14/Objects/Consumable/Smokeables/matchbook.rsi
     heldPrefix: null
   - type: Storage
     grid:
-    - 0,0,5,1
+    - 0,0,13,1 # 7 slots
     whitelist:
       tags:
       - Matchstick
@@ -54,6 +55,7 @@
     - mpacket5
     - mpacket6
   - type: MREItem
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: CMMatchBook

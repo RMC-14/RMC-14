@@ -7,6 +7,7 @@
     - type: Sprite
       sprite: _CM14/Objects/Weapons/Melee/flash.rsi
     - type: Item
+      size: Small
       sprite: _CM14/Objects/Weapons/Melee/flash.rsi
     - type: LimitedCharges
       maxCharges: 5

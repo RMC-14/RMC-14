@@ -1,8 +1,10 @@
 # Base
 - type: entity
+  abstract: true
   parent: ClothingBeltBase
   id: CMBeltBase
-  abstract: true
+  name: belt
+  description: Can hold various things.
   components:
   - type: Appearance
   - type: Sprite
@@ -29,9 +31,9 @@
         type: StorageBoundUserInterface
 
 - type: entity
+  abstract: true
   parent: CMBeltBase
   id: CMBeltBaseStorage
-  abstract: true
   components:
   - type: Storage
     maxItemSize: Small
@@ -70,10 +72,10 @@
   - type: Storage
     maxItemSize: Normal
     grid:
-    - 0,0,19,1 # TODO CM14 5 slots
+    - 0,0,9,1 # 5 slots
     whitelist:
       tags:
-#      - # TODO CM14 FLARE
+      - Flare
 #      - # TODO CM14 shotgun shell handfuls
       - CMMagazinePistol
       - CMMagazineRevolver
@@ -81,6 +83,8 @@
       - CMMagazineSmg
       - CMMagazineSniper
       - Grenade
+#      - # TODO CM14 mines
+#      - # TODO CM14 snacks
       components:
       - BallisticAmmoProvider
   - type: IgnoreContentsSize
@@ -88,6 +92,7 @@
       tags:
       - CMMagazineRifle
       - CMMagazineSmg
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -100,9 +105,11 @@
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Belt/utility.rsi
   - type: Storage
-    maxItemSize: Normal
+    maxItemSize: Large
+    grid:
+    - 0,0,19,1 # 10 slots
     whitelist:
-      tags: #todo cm14 port tools
+      tags:
       - Crowbar
       - Screwdriver
       - Wirecutter
@@ -110,11 +117,19 @@
       - CableCoil
       - Multitool
       - Flashlight
+#      - # TODO nailgun, cell, circuit board
       components:
       - Welder
       - PowerCell
       - TrayScanner
       - GasAnalyzer
+      - LightReplacer
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - EntrenchingTool
+      - LightReplacer
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: CMBeltUtility
@@ -126,6 +141,30 @@
     sprite: _CM14/Objects/Clothing/Belt/combat_utility.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Belt/combat_utility.rsi
+  - type: Storage
+    maxItemSize: Large
+    grid:
+    - 0,0,17,1 # 9 slots
+    whitelist:
+      tags:
+      - Crowbar
+      - Screwdriver
+      - Wirecutter
+      - Wrench
+      - CableCoil
+      - Multitool
+      - Flashlight
+      - CMMagazinePistol
+      - CMMagazineRevolver
+#      - # TODO CM14 handful of shotgun shells
+#      - # TODO nailgun, cell, circuit board
+      components:
+      - Welder
+      - PowerCell
+      - TrayScanner
+      - GasAnalyzer
+      - LightReplacer
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: CMBeltBase
@@ -161,15 +200,18 @@
     sprite: _CM14/Objects/Clothing/Belt/medical.rsi
   - type: Storage
     maxItemSize: Normal
+    grid:
+    - 0,0,27,1 # 14 slots
     whitelist:
-      tags: #todo cm14 port med things
+      tags:
       - DiscreteHealthAnalyzer
       # dropper
       - GlassBeaker
       - Bottle
       - PillCanister
       - Syringe
-      # surgical line
+      - CMSurgicalLine
+      - CMSynthGraft
       - Bloodpack
       - Brutepack
       - Gauze
@@ -177,9 +219,16 @@
       - CMOintment
       - CMTraumaKit
       - CMBurnKit
+#      - # TODO CM14 splints
+      - CMAutoInjector
+      - CMRollerBed
+      - BodyBag
+#      - # TODO CM14 latex gloves
       components:
       - Hypospray
       - Defibrillator
+      - Pill
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: CMBeltMedical
@@ -191,6 +240,35 @@
     sprite: _CM14/Objects/Clothing/Belt/medicbag.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Belt/medicbag.rsi
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,41,1 # 21 slots
+    whitelist:
+      tags:
+      - DiscreteHealthAnalyzer
+      - BodyBag
+      - Bottle
+      - PillCanister
+      - Syringe
+      - CMAutoInjector
+      - Bloodpack
+      - Brutepack
+      - Gauze
+      - Ointment
+      - CMOintment
+      - CMTraumaKit
+      - CMBurnKit
+      #      - # TODO CM14 splints
+#      - # TODO CM14 latex gloves
+      components:
+      - Defibrillator
+      - Pill
+  - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - PillCanister
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -207,6 +285,8 @@
     whitelist:
       tags:
       - CMMortarShell
+#      - # TODO CM14 pistol, revolver, flaregun
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -220,17 +300,25 @@
     sprite: _CM14/Objects/Clothing/Belt/security.rsi
   - type: Storage
     maxItemSize: Normal
+    grid:
+    - 0,0,11,1 # 6 slots
     whitelist:
       tags:
       - SecBeltEquip
       - Taser
       - Flashlight
+      - CMMagazinePistol
+#      - # TODO CM14 shotgun handfuls
+      - Taser
       components:
       - Handcuff
       - Flash
       - FlashOnTrigger
       - Stunbaton
       - ForensicScanner
+      - MeleeWeapon
+      - Gun
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: CMBeltMarine
@@ -243,5 +331,17 @@
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Belt/smartgunner.rsi
   - type: Storage
-    maxItemSize: Huge
+    maxItemSize: Normal
+    grid:
+    - 0,0,11,1 # 6 slots
+    whitelist:
+      tags:
+      - CMMagazinePistol
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - CMMagazineSniper
+#      - # TODO CM14 smartgun magazine
+#      - # TODO CM14 shotgun handfuls
+      - Flare
+  - type: FixedItemSizeStorage
 

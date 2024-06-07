@@ -45,7 +45,7 @@ public sealed partial class DefibrillatorComponent : Component
     /// How much damage is healed from getting zapped.
     /// </summary>
     [DataField("cmZapHeal"), ViewVariables(VVAccess.ReadWrite)]
-    public List<(ProtoId<DamageGroupPrototype> Group, int Amount)> CMZapDamage = default!;
+    public List<(ProtoId<DamageGroupPrototype> Group, int Amount)>? CMZapDamage;
 
     /// <summary>
     /// The electrical damage from getting zapped.
