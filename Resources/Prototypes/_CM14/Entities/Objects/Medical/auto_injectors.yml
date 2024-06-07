@@ -69,6 +69,7 @@
 #          Quantity: 19
   - type: SolutionContainerVisuals
     maxFillLevels: 1
+    changeColor: false
   - type: MedicallyUnskilledDoAfter
     min: 0
     doAfter: 0
