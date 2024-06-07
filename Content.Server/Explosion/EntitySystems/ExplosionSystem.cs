@@ -6,6 +6,7 @@ using Content.Server.Chat.Managers;
 using Content.Server.Explosion.Components;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NPC.Pathfinding;
+using Content.Shared._CM14.Explosion;
 using Content.Shared.Armor;
 using Content.Shared.Camera;
 using Content.Shared.CCVar;
@@ -176,6 +177,9 @@ public sealed partial class ExplosionSystem : EntitySystem
             explosive.MaxTileBreak,
             explosive.CanCreateVacuum,
             user);
+
+        var ev = new CMExplosiveTriggeredEvent();
+        RaiseLocalEvent(uid, ref ev);
 
         if (explosive.DeleteAfterExplosion ?? delete)
             EntityManager.QueueDeleteEntity(uid);
