@@ -138,6 +138,8 @@
     priority: 1
   - type: StaticPrice
     price: 500
+  - type: Corrodible
+    isCorrodible: false
 
 # APC under construction
 - type: entity
