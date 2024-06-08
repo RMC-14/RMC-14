@@ -330,7 +330,7 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
     private bool Sell(Entity<RequisitionsElevatorComponent> elevator)
     {
         var account = GetAccount();
-        var entities = _physics.GetContactingEntities(elevator);
+        var entities = _lookup.GetEntitiesIntersecting(elevator);
         var soldAny = false;
         foreach (var entity in entities)
         {
