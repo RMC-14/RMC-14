@@ -5,6 +5,7 @@ using Content.Server._CM14.Chat.Chat;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
+using Content.Server.Examine;
 using Content.Server.GameTicking;
 using Content.Server.Speech.Components;
 using Content.Server.Speech.EntitySystems;
@@ -15,6 +16,7 @@ using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
+using Content.Shared.Examine;
 using Content.Shared.Ghost;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
@@ -60,6 +62,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
     [Dependency] private readonly ReplacementAccentSystem _wordreplacement = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
     [Dependency] private readonly CMChatSystem _cmChat = default!;
 
     public const int VoiceRange = 10; // how far voice goes in world units
@@ -505,8 +508,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (data.Range <= WhisperClearRange)
                 _chatManager.ChatMessageToOne(ChatChannel.Whisper, message, wrappedMessage, source, false, session.Channel);
             //If listener is too far, they only hear fragments of the message
-            //Collisiongroup.Opaque is not ideal for this use. Preferably, there should be a check specifically with "Can Ent1 see Ent2" in mind
-            else if (_interactionSystem.InRangeUnobstructed(source, listener, WhisperMuffledRange, Shared.Physics.CollisionGroup.Opaque)) //Shared.Physics.CollisionGroup.Opaque
+            else if (_examineSystem.InRangeUnOccluded(source, listener, WhisperMuffledRange))
                 _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedMessage, wrappedobfuscatedMessage, source, false, session.Channel);
             //If listener is too far and has no line of sight, they can't identify the whisperer's identity
             else
