@@ -6,9 +6,8 @@ This is to prevent bad actors from avoiding issues. If you need to leave urgentl
 These rules are neither exactly SS14 or CM13 and should be read in their entirety.
 
 [color=#ff0000]Recent Changes[/color]
-    - Added character memory
-    - Grouped rules better
-    - General visual changes
+  - Rules moved to guidebook.
+  - Nicknames allowed on humanoid characters.
 
 [color=#ff0000] Admin decisions are final.[/color] Rules are enforced as intended. Every example of a rule break cannot be written, thus enforcement is subject to admin interpretation of the rule’s intention. Admins may handle rule breaks through in-character consequences at their discretion. This does not apply to zero tolerance rules. You may file a staff complaint with head staff if you find the decision to be incorrect.
 
