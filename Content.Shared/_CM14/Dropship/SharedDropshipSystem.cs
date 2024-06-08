@@ -114,9 +114,9 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
     }
 
-    protected virtual bool FlyTo(Entity<DropshipNavigationComputerComponent> computer,
+    public virtual bool FlyTo(Entity<DropshipNavigationComputerComponent> computer,
         EntityUid destination,
-        EntityUid user,
+        EntityUid? user,
         bool hijack = false)
     {
         return false;

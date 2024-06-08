@@ -60,7 +60,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         RefreshUI();
     }
 
-    protected override bool FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid user, bool hijack = false)
+    public override bool FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid? user, bool hijack = false)
     {
         base.FlyTo(computer, destination, user, hijack);
 
@@ -114,10 +114,10 @@ public sealed class DropshipSystem : SharedDropshipSystem
         destCoords = destCoords.Offset(new Vector2(-0.5f, -0.5f));
         _shuttle.FTLToCoordinates(shuttle.Value, shuttleComp, destCoords, rotation);
 
-        if (hijack)
+        if (user != null && hijack)
         {
             var text = "The Queen has commanded the metal bird to depart for the metal hive in the sky! Rejoice!";
-            _xenoAnnounce.AnnounceSameHive(user, text);
+            _xenoAnnounce.AnnounceSameHive(user.Value, text);
         }
 
         return true;
