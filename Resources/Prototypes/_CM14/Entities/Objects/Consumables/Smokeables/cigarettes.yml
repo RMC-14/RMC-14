@@ -25,7 +25,7 @@
       visible: false
   - type: Storage
     grid:
-    - 0,0,3,1
+    - 0,0,7,1
     whitelist:
       tags:
       - Cigarette
@@ -43,3 +43,4 @@
     - cig3
     - cig4
   - type: MREItem
+  - type: FixedItemSizeStorage

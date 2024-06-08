@@ -2,7 +2,7 @@
   id: CMVendorBundleRiflemanApparel
   name: standard marine apparel
   categories:
-  - hideSpawnMenu
+  - HideSpawnMenu
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Uniforms/Marine/formal.rsi

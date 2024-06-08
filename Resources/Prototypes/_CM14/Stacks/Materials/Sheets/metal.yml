@@ -4,7 +4,6 @@
   icon: { sprite: /Textures/_CM14/Objects/Materials/Sheets/metal.rsi, state: steel }
   spawn: CMSheetMetal
   maxCount: 50
-  itemSize: 1
 
 - type: stack
   id: CMPlasteel
@@ -12,4 +11,3 @@
   icon: { sprite: /Textures/_CM14/Objects/Materials/Sheets/plasteel.rsi, state: plasteel }
   spawn: CMSheetPlasteel
   maxCount: 50
-  itemSize: 1

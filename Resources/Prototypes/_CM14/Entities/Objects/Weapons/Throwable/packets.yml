@@ -1,6 +1,6 @@
 ﻿- type: entity
   abstract: true
-  parent: BaseItem
+  parent: BaseStorageItem
   id: CMPacketBase
   name: packet
   components:
@@ -16,16 +16,9 @@
     whitelist:
       tags:
       - Grenade
-  - type: ContainerContainer
-    containers:
-      storagebase: !type:Container
-        ents: []
-  - type: UserInterface
-    interfaces:
-      enum.StorageUiKey.Key:
-        type: StorageBoundUserInterface
   - type: UseDelay
     delay: 0.5
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: CMPacketBase

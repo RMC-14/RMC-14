@@ -5,7 +5,7 @@
   components:
   - type: Wieldable
   - type: Item
-    size: Huge
+    size: Large
   - type: Clothing
     quickEquip: true
     slots:
@@ -30,7 +30,7 @@
   parent: CMBaseWeaponRifle
   name: M41A pulse rifle MK2
   id: WeaponRifleM41A
-  description: This is the standard issue pulse rifle used by the Colonial Marines. A reliable, robust, and overall effective standard issue weapon, the M41A must be held in two hands to accurately fire.
+  description: The standard issue rifle of the Colonial Marines. Commonly carried by most combat personnel. Uses 10x24mm caseless ammunition.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Rifles/m41a.rsi

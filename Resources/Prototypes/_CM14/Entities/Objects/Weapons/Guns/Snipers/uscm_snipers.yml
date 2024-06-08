@@ -1,5 +1,4 @@
-﻿# TODO CM14 sniper barrel
-# TODO CM14 base sniper
+# TODO CM14 sniper barrel
 - type: entity
   parent: CMBaseWeaponRifle
   id: CMM42ASniperRifle
@@ -12,6 +11,8 @@
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
   - type: Item
     size: Large
   - type: Clothing

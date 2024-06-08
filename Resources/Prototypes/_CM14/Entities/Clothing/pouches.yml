@@ -1,3 +1,4 @@
+# All slot sizes (if using slots instead of total space) here should be twice cm13's (times two minus one, as 0,0,1,1 is 2x2 in ss14
 - type: entity
   parent: Clothing
   id: CMPouch #i know that there are no pouches in upstream, but having "CM" helps finding that item in entity spawner
@@ -16,16 +17,12 @@
     quickEquip: false
     slots:
     - pocket
-  - type: UserInterface
-    interfaces:
-      enum.StorageUiKey.Key:
-        type: StorageBoundUserInterface
   - type: Tag
     tags:
     - Pouch
 
 - type: entity
-  parent: CMPouch
+  parent: [CMPouch, BaseStorageItem]
   id: CMPouchStorage
   name: storage pouch
   abstract: true
@@ -37,10 +34,7 @@
     blacklist:
       tags:
       - Pouch
-  - type: ContainerContainer
-    containers:
-      storagebase: !type:Container
-        ents: [ ]
+      - ThrowingKnife
 
 - type: entity
   parent: CMPouch
@@ -90,7 +84,7 @@
   - type: Storage
     maxItemSize: Normal
     grid:
-    - 0,0,1,1 #2 slots
+    - 0,0,1,1 # 2 slots
     blacklist:
       components:
       - Bible
@@ -120,7 +114,7 @@
     sprite: _CM14/Objects/Clothing/Pouches/large_drop.rsi
   - type: Storage
     grid:
-    - 0,0,11,1 #6 slot
+    - 0,0,5,1 #6 slot
 
 # flamertank / fueltank.rsi
 # m39ap pouch
@@ -154,7 +148,7 @@
   - type: Storage
     maxItemSize: Normal
     grid:
-    - 0,0,8,1 #7 slots
+    - 0,0,13,1 #7 slots
     whitelist:
       tags:
       - Flashlight
@@ -165,6 +159,7 @@
       # todo cm14 splint
       components:
       - Pill
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: CMPouchSurvival
@@ -174,7 +169,7 @@
   components:
   - type: Storage
     grid:
-    - 0,0,5,1 #6 slots
+    - 0,0,11,1 #6 slots
     whitelist:
       tags:
       - Flashlight
@@ -203,9 +198,12 @@
       - CMAutoInjector
       - Brutepack
       # TODO CM14 splint
-      # TODO CM14 pill packet
-      components:
-      - Pill # TODO CM14 pill packet, remove
+      - PillPacket
+  - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - PillPacket
 
 - type: entity
   parent: CMPouchFirstAid
@@ -216,6 +214,7 @@
   - type: Storage
     grid:
     - 0,0,9,1 #5 slots
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: CMPouchClosed
@@ -243,7 +242,7 @@
         whitelist:
           tags:
           - Sidearm
-          - Flare
+#          - FlareGun
   - type: CMHolster
   - type: CMItemSlots
 
@@ -257,11 +256,12 @@
     sprite: _CM14/Objects/Clothing/Pouches/command.rsi
   - type: Storage
     grid:
-    - 0,0,2,1 #3 slots
+    - 0,0,5,1 #3 slots
     whitelist:
       tags:
       - Sidearm
       # todo cm14 binoculars and CO tablet
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: [CMPouchStorage, CMPouchOpenClosed]
@@ -282,7 +282,8 @@
       - CMMagazineRifle
       - CMMagazineSmg
       - CMMagazineSniper
-      # TODO CM14 m60, handfuls
+      # TODO CM14 m60 mag, handfuls
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: CMPouchMagazine
@@ -306,7 +307,7 @@
     sprite: _CM14/Objects/Clothing/Pouches/pistol_mag.rsi
   - type: Storage
     grid:
-    - 0,0,2,1 #3 slots
+    - 0,0,5,1 #3 slots
     whitelist:
       tags:
       - CMMagazinePistol
@@ -322,7 +323,7 @@
     sprite: _CM14/Objects/Clothing/Pouches/large_pistol_mag.rsi
   - type: Storage
     grid:
-    - 0,0,5,1 #6 slots
+    - 0,0,11,1 #6 slots
 
 #- type: entity
 #  parent: CMPouch
@@ -334,7 +335,7 @@
 #    sprite: _CM14/Objects/Clothing/Pouches/medium_shotshells.rsi
 #  - type: Storage
 #    grid:
-#    - 0,0,4,1 #5 slots
+#    - 0,0,9,1 #5 slots
 #    #whitelist: # todo cm14 make shotshells
 
 #- type: entity
@@ -347,7 +348,7 @@
 #    sprite: _CM14/Objects/Clothing/Pouches/large_shotshells.rsi
 #  - type: Storage
 #    grid:
-#    - 0,0,7,1 #7 slots
+#    - 0,0,13,1 #7 slots
 
 - type: entity
   parent: [CMPouchStorage, CMPouchOpenClosed]
@@ -360,10 +361,11 @@
   - type: Storage
     maxItemSize: Normal
     grid:
-    - 0,0,5,1 #6 slots
+    - 0,0,11,1 #6 slots
     whitelist:
       tags:
       - Grenade
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: [CMPouchStorage, CMPouchOpenClosed]
@@ -399,6 +401,7 @@
       - CMSynthGraft
       components:
       - Hypospray
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: CMPouchMedical
@@ -410,7 +413,7 @@
     sprite: _CM14/Objects/Clothing/Pouches/socmed.rsi
   - type: Storage
     grid:
-    - 0,0,12,1 #13 slots
+    - 0,0,25,1 #13 slots
     whitelist:
       tags:
       - CMTraumaKit
@@ -468,6 +471,7 @@
       - BodyBag
       components:
       - Hypospray
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: [CMPouchStorage, CMPouchOpenClosed]
@@ -501,6 +505,9 @@
       tags:
       - GlassBeaker
       - Bottle
+  - type: FixedItemSizeStorage
+
+# TODO CM14 vial pouch
 
 - type: entity
   parent: [CMPouchStorage, CMPouchOpenClosed]
@@ -516,6 +523,7 @@
     whitelist:
       tags:
       - CMAutoInjector
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: [CMPouchStorage, CMPouchOpenClosed]
@@ -527,10 +535,11 @@
     sprite: _CM14/Objects/Clothing/Pouches/syringe.rsi
   - type: Storage
     grid:
-    - 0,0,5,1 #6 slots
+    - 0,0,11,1 #6 slots
     whitelist:
       tags:
       - Syringe
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: [CMPouchStorage, CMPouchOpenClosed]
@@ -566,9 +575,10 @@
       - CMSynthGraft
       - CMRollerBed
       - BodyBag
+#      - TODO CM14 fixovein
       components:
       - Hypospray
-      - IVDrip
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: [CMPouchStorage, CMPouchOpenClosed]
@@ -581,12 +591,14 @@
   - type: Storage
     maxItemSize: Normal
     grid:
-    - 0,0,20,1 #21 slots
+    - 0,0,21,1 #21 slots
     whitelist:
       tags:
       - Document
       - Folder
       - Write
+  - type: FixedItemSizeStorage
+    size: 1,2
 
 - type: entity
   parent: CMPouchDocument
@@ -596,7 +608,7 @@
   components:
   - type: Storage
     grid:
-    - 0,0,6,1 #7 slots
+    - 0,0,7,1 #7 slots
 
 - type: entity
   parent: CMPouch
@@ -609,7 +621,7 @@
   - type: CMItemSlots
     cooldown: 1
     cooldownPopup: You need to wait before taking another flare!
-    count: 8
+    count: 16
     slot:
       name: Flare
       whitelist:
@@ -630,6 +642,7 @@
     whitelist:
       tags:
       - Radio
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: [CMPouchStorage, CMPouchOpenClosed]
@@ -645,10 +658,12 @@
     whitelist:
       tags:
       - PowerCell
+#      - # TODO CM14 the rest of the owl idk theres a lot check cm13
       components:
       - ComputerBoard
       - MachineBoard
       - MachinePart
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: [CMPouchStorage, CMPouchOpenClosed]
@@ -673,6 +688,7 @@
       - EntrenchingTool
       - EmptySandbag
       - LightReplacer
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: [CMPouchStorage, CMPouchOpenClosed]
@@ -703,6 +719,7 @@
       - MachinePart
       - LightReplacer
       - EntrenchingTool
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: CMPouchTools
@@ -714,12 +731,12 @@
     sprite: _CM14/Objects/Clothing/Pouches/soctools.rsi
   - type: Storage
     grid:
-    - 0,0,7,1 #8 slots
+    - 0,0,15,1 #8 slots
 
 - type: entity
   parent: [CMPouchStorage, CMPouchClosed]
   id: CMPouchSling
-  name: sling strap
+  name: sling strap # TODO CM14 implement this
   description: Keeps a single item attached to a strap.
   components:
   - type: Sprite

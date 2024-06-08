@@ -1,7 +1,8 @@
 - type: entity
   parent: BaseItem
   id: CMSpeedLoaderM44
-  name: "speed loader (.44)"
+  name: "M44 speed loader (.44)"
+  description: A revolver speed loader.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/m44.rsi
@@ -10,6 +11,8 @@
       map: [ "enum.GunVisualLayers.Base" ]
     - state: base-1
       map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Item
+    size: Small
   - type: Tag
     tags:
     - CMMagazineRevolver

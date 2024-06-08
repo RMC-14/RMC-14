@@ -1,10 +1,16 @@
-﻿namespace Content.Shared._CM14.Marines.Skills;
+﻿using Content.Shared.Interaction;
+using Content.Shared.Popups;
+
+namespace Content.Shared._CM14.Marines.Skills;
 
 public sealed class SkillsSystem : EntitySystem
 {
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<MedicallyUnskilledDoAfterComponent, AttemptHyposprayUseEvent>(OnAttemptHyposprayUse);
+        SubscribeLocalEvent<RequiresSkillComponent, BeforeRangedInteractEvent>(OnRequiresSkillBeforeRangedInteract);
     }
 
     private void OnAttemptHyposprayUse(Entity<MedicallyUnskilledDoAfterComponent> ent, ref AttemptHyposprayUseEvent args)
@@ -13,6 +19,18 @@ public sealed class SkillsSystem : EntitySystem
             skills.Skills.Medical < ent.Comp.Min)
         {
             args.MaxDoAfter(ent.Comp.DoAfter);
+        }
+    }
+
+    private void OnRequiresSkillBeforeRangedInteract(Entity<RequiresSkillComponent> ent, ref BeforeRangedInteractEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!HasSkills(args.User, in ent.Comp.Skills))
+        {
+            _popup.PopupClient($"You don't know how to use the {Name(args.Used)}...", args.User, PopupType.SmallCaution);
+            args.Handled = true;
         }
     }
 

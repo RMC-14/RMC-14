@@ -69,6 +69,7 @@
 #          Quantity: 19
   - type: SolutionContainerVisuals
     maxFillLevels: 1
+    changeColor: false
   - type: MedicallyUnskilledDoAfter
     min: 0
     doAfter: 0
@@ -96,6 +97,11 @@
   name: first-aid autoinjector
   description: An autoinjector loaded with a small dose of medicine for marines to treat themselves with.
   components:
+  - type: Sprite
+    sprite: _CM14/Objects/Medical/auto_injectors.rsi
+    layers:
+    - state: tricord
+      map: ["enum.SolutionContainerLayers.Fill"]
   - type: MedicallyUnskilledDoAfter
     min: 0
   - type: SolutionContainerManager
@@ -105,6 +111,11 @@
         reagents:
         - ReagentId: CMTricordrazine
           Quantity: 15
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    emptySpriteName: tricord0
+    fillBaseName: tricord
+    changeColor: false
   - type: CMRefillableSolution
     reagents:
       CMTricordrazine: 15

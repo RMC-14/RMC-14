@@ -1,0 +1,68 @@
+﻿- type: entity
+  abstract: true
+  parent: BaseStorageItem
+  id: CMPacketPills
+  name: pill packet
+  description: Contains pills. Once you take them out, they don't go back in.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Medical/pill_packets.rsi
+  - type: Item
+    size: Small
+  - type: Storage # TODO CM14 quick-eject
+    maxItemSize: Small
+    grid:
+    - 0,0,7,1 # 4 slots
+    whitelist:
+      components:
+      - Pill
+  - type: RemoveOnlyStorage
+  - type: FixedItemSizeStorage
+  - type: Tag
+    tags:
+    - PillPacket
+
+- type: Tag
+  id: PillPacket
+
+- type: entity
+  parent: CMPacketPills
+  id: CMPacketPillsTricordrazine
+  name: tricordazine pill packet
+  description: This packet contains tricordazine pills. Heals all types of damage slightly. Once you take them out, they don't go back in. Don't take more than 2 pills in a short period.
+  components:
+  - type: Sprite
+    state: tricordrazine_packet
+  - type: StorageFill
+    contents:
+    - id: CMPillTricordrazine
+      amount: 4
+
+- type: entity
+  parent: CMPacketPills
+  id: CMPacketPillsBicaridine
+  name: bicaridine pill packet
+  description: This packet contains bicaridine pills. Heals brute damage effectively. Once you take them out, they don't go back in. Don't take more than 2 pills in a short period.
+  components:
+  - type: Sprite
+    state: bicaridine_packet
+  - type: StorageFill
+    contents:
+    - id: CMPillBicaridine
+      amount: 4
+
+- type: entity
+  parent: CMPacketPills
+  id: CMPacketPillsKelotane
+  name: kelotane pill packet
+  description: This packet contains kelotane pills. Heals burn damage effectively. Once you take them out, they don't go back in. Don't take more than 2 pills in a short period.
+  components:
+  - type: Sprite
+    state: kelotane_packet
+  - type: StorageFill
+    contents:
+    - id: CMPillKelotane
+      amount: 4
+
+# TODO CM14 tramadol pill packet
+# TODO CM14 oxycodone pill packet

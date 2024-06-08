@@ -36,9 +36,8 @@
     - 0,0,20,1
     blacklist:
       tags:
-      - Pouch
-      - CMFirstAidKit
-  #      - EngineerKit
+      - CMFirstAidKit # TODO CM14 medical skill
+  #      - EngineerKit # TODO CM14
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -92,6 +91,10 @@
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Back/Backpacks/Marines/standard.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,29,1
 
 # Marine
 - type: entity
@@ -131,9 +134,13 @@
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Back/Backpacks/Marines/mortar.rsi
   - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,15,1
     whitelist:
       tags:
       - CMMortarShell
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: CMBackpack
@@ -143,15 +150,19 @@
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Back/Backpacks/Marines/welder.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,17,1
   - type: ExaminableSolution
     solution: tank
   - type: SolutionContainerManager
     solutions:
       tank:
-        maxVol: 500
+        maxVol: 650 # TODO CM14 260 when welders are fixed
         reagents:
         - ReagentId: WeldingFuel
-          Quantity: 500
+          Quantity: 650
   - type: ReagentTank
     tankType: Fuel
   - type: DrainableSolution

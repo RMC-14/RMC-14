@@ -255,11 +255,11 @@ AirlockGlassShuttleEasyPryLocked: AirlockExternalGlassShuttleLocked
 AirlockShuttleEasyPryLocked: AirlockExternalShuttleLocked
 
 # 2024-03-10
-ClothingBackpackFilledDetective: ClothingBackpackSecurityFilledDetective
-ClothingBackpackDuffelFilledDetective: ClothingBackpackDuffelSecurityFilledDetective
-ClothingBackpackSatchelFilledDetective: ClothingBackpackSatchelSecurityFilledDetective
 FoodChili: FoodChiliPepper
 FoodChilly: FoodChillyPepper
+# ClothingBackpackFilledDetective: ClothingBackpackSecurityFilledDetective
+# ClothingBackpackDuffelFilledDetective: ClothingBackpackDuffelSecurityFilledDetective
+# ClothingBackpackSatchelFilledDetective: ClothingBackpackSatchelSecurityFilledDetective
 
 # 2024-03-11
 ImprovisedExplosive: FireBomb
@@ -377,8 +377,14 @@ CMOintment: CMOintment10
 # 2024-05-27
 DoorRemoteFirefight: null
 
+# 2024-06-03
+AirlockServiceCaptainLocked: AirlockCaptainLocked
+
 # 2024-06-04
 M40HEDP: CMGrenadeHighExplosive
 M40Smoke: CMGrenadeSmoke
 M40HEFA: CMGrenadeFrag
 ShrapnelProjectile: CMProjectileShrapnel
+
+# 2024-06-06
+CMAutoLathe: CMAutolathe
