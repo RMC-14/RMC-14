@@ -1,51 +1,9 @@
-[color=#ff0000]YOU MUST BE AT LEAST 16 YEARS OF AGE TO PLAY CM14. ANY USERS SUSPECTED OF BEING UNDER 16 YEARS OF AGE WILL BE BANNED UNTIL THEY ARE OF AGE.[/color]
-
-[color=#ff0000]DISCONNECTING FROM OR IGNORING/EVADING ADMIN-HELPS WILL RESULT IN AN APPEAL ONLY BAN.[/color]
-This is to prevent bad actors from avoiding issues. If you need to leave urgently, let us know and it will be considered in your appeal.
-
-These rules are neither exactly SS14 or CM13 and should be read in their entirety.
-
-[color=#ff0000]Recent Changes[/color]
-  - Rules moved to guidebook.
-  - Nicknames allowed on humanoid characters.
-
-[color=#ff0000] Admin decisions are final.[/color] Rules are enforced as intended. Every example of a rule break cannot be written, thus enforcement is subject to admin interpretation of the rule’s intention. Admins may handle rule breaks through in-character consequences at their discretion. This does not apply to zero tolerance rules. You may file a staff complaint with head staff if you find the decision to be incorrect.
-
-[color=#ff0000]ZERO TOLERANCE RULES[/color]
-
-[color=#ff0000]You are liable to be permanently banned for breaking these rules with no warning.[/color]
-
- [color=#a4885c]Absolutely no hate speech, slurs, bigotry, racism, specism (demeaning other characters in-game due to their in-game race), sexism, disability-related or anything even remotely similar.[/color]
-[italic](note: In the lore of CM14, Nanotrasen workers (and their various humanoid species) have been contracted over to the USCM to build a larger force in exchange for protection of their stations, and have been working for the USCM for a long time. They should be treated as any regular human.)[/italic]
-
- [color=#a4885c]Absolutely no sexual content or Erotic Roleplay (ERP),[/color] [color=#ff0000]including direct or indirect mentions of sexual behavior or actions.[/color]
-    - The server is 16+, not 18+.
-
- [color=#a4885c]Don't communicate in-game/in-character information through methods outside of the game. This is referred to as "Metacomming".[/color]
-    - Admins cannot police metacommunication, we must assume it is being abused. (All involved will be actioned on.)
-[italic](It would alienate squad-mates not using the same method of communication and is not permitted.)[/italic]
-
- [color=#a4885c]Attempting to evade game bans will result in an automatic appeal-only permanent ban that is only appeal-able after six months and only with a voucher of good behavior from another SS13/SS14 server.[/color]
-    - Attempting to evade job bans will result in an appeal-only permanent ban.
-
- [color=#a4885c]Don't use exploits or external programs to play, gain an advantage, or disrupt the server in any way.[/color]
-    - This includes auto clickers and scripts to automate the game or evade AFK detection.
-
-[color=#ff0000]End of round grief of your own faction is not permitted and results in an instant 3 hour ban.[/color]
-
 [color=#ff0000]GENERAL[/color]
 
- [color=#a4885c]These are English servers.[/color]
-    - Speak only English in IC and OOC.
-    - We cannot moderate other languages, nor do we want people to be left out of conversations.
 
- [color=#a4885c]Don't use multiple SS14 accounts to play (referred to as "multi-keying").[/color]
-    - Users knowingly using multiple SS14 accounts will have all of their accounts banned.
-    - This is to prevent players from having respawns and will be treated as such.
 
- [color=#a4885c]Do not ignore or abuse the admin help panel.[/color]
- - Don't bother asking for admins before stating a problem, just send your issue.
- - Hostility to admins will likely result in your removal.
+
+
 
 [color=#ff0000]IN GAME RULES[/color]
 

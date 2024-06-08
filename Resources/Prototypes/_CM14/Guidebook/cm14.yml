@@ -9,7 +9,7 @@
   name: guide-entry-cm14
   text: "/ServerInfo/Guidebook/_CM14/CM14.xml"
   children:
-  - RuleVomit
+#  - RuleVomit
   - CMOverview
 #  - Controls
 #  - Jobs
