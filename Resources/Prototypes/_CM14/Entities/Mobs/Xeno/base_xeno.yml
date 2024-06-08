@@ -199,6 +199,7 @@
   - type: AffectableByWeeds
   - type: ComplexInteraction
   - type: UserLimitHits
+  - type: MovementIgnoreGravity
 
 - type: entity
   abstract: true

@@ -1,4 +1,5 @@
-﻿using Content.Server.Shuttles.Components;
+﻿using System.Numerics;
+using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
 using Content.Shared._CM14.Dropship;
@@ -110,6 +111,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         if (TryComp(shuttle, out PhysicsComponent? physics))
             destCoords = destCoords.Offset(-physics.LocalCenter);
 
+        destCoords = destCoords.Offset(new Vector2(-0.5f, -0.5f));
         _shuttle.FTLToCoordinates(shuttle.Value, shuttleComp, destCoords, rotation);
 
         if (hijack)
