@@ -79,6 +79,12 @@
     sprintModifier: 0.9
   - type: CMHardArmor
   - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - CMMagazinePistol
+      - CMMagazineRifle
+      - CMMagazineSniper
 
 - type: entity
   parent: CMArmorM3Medium
