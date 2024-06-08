@@ -11,6 +11,7 @@ using Content.Shared.CCVar;
 using Robust.Server.ServerStatus;
 using Robust.Shared.Asynchronous;
 using Robust.Shared.Configuration;
+using Serilog;
 
 namespace Content.Server.MoMMI
 {
@@ -23,28 +24,45 @@ namespace Content.Server.MoMMI
         [Dependency] private readonly ITaskManager _taskManager = default!;
 
         private readonly HttpClient _httpClient = new();
+        private string? _oocWebhookUrl;
         private WebhookIdentifier? _webhook = new();
 
         void IPostInjectInit.PostInject()
         {
-            _configurationManager.OnValueChanged(CMCVars.CMOocWebhook,
-                value =>
-                {
-                    if (!string.IsNullOrWhiteSpace(value))
-                    {
-                        _discord.GetWebhook(value, data => _webhook = data.ToIdentifier());
-                    }
-                },
-                true);
             _statusHost.AddHandler(HandleChatPost);
         }
 
         public async void SendOOCMessage(string sender, string message)
         {
             // TODO CM14
-            if (_webhook is { } webhook)
+            var oocWebhook = _configurationManager.GetCVar(CMCVars.CMOocWebhook);
+            if (oocWebhook != _oocWebhookUrl)
+            {
+                _oocWebhookUrl = oocWebhook;
+                if (string.IsNullOrWhiteSpace(oocWebhook))
+                {
+                    _webhook = null;
+                }
+                else
+                {
+                    var identifier = (await _discord.GetWebhook(oocWebhook))?.ToIdentifier();
+                    if (identifier == null)
+                        return;
+
+                    _webhook = identifier;
+                }
+            }
+
+            if (_webhook is not { } webhook)
+                return;
+
+            try
             {
                 await _discord.CreateMessage(webhook, new WebhookPayload { Content = $"**OOC:** `{sender}: {message}`" });
+            }
+            catch (Exception error)
+            {
+                Log.Error(error, "Error relaying OOC message to discord");
             }
 
             return;
