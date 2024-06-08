@@ -150,6 +150,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         if (ent.Comp.Cooldown is { } cooldown &&
             _timing.CurTime < ent.Comp.LastEjectAt + cooldown)
         {
+            _popup.PopupPredicted(ent.Comp.CooldownPopup, ent, args.User, PopupType.SmallCaution);
             args.Cancelled = true;
         }
     }
