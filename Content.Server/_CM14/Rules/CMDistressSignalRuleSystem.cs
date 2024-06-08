@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using Content.Server._CM14.Dropship;
 using Content.Server._CM14.Marines;
 using Content.Server.Administration.Components;
 using Content.Server.Administration.Managers;
@@ -9,17 +10,21 @@ using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Power.Components;
 using Content.Server.Preferences.Managers;
 using Content.Server.RoundEnd;
+using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Spawners.Components;
 using Content.Server.Spawners.EntitySystems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Shared._CM14.Dropship;
 using Content.Shared._CM14.Marines;
 using Content.Shared._CM14.Marines.HyperSleep;
 using Content.Shared._CM14.Marines.Squads;
+using Content.Shared._CM14.Spawners;
 using Content.Shared._CM14.Weapons.Ranged.IFF;
 using Content.Shared._CM14.Xenos;
 using Content.Shared._CM14.Xenos.Evolution;
+using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
 using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
@@ -35,6 +40,7 @@ using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
+using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -49,7 +55,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 {
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IBanManager _bans = default!;
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ContainerSystem _containers = default!;
+    [Dependency] private readonly DropshipSystem _dropship = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly MarineSystem _marines = default!;
@@ -68,6 +77,14 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
+
+    private CVarDef<float>[] FTLCVars = new[]
+    {
+        CCVars.FTLStartupTime,
+        CCVars.FTLTravelTime,
+        CCVars.FTLArrivalTime,
+        CCVars.FTLCooldown
+    };
 
     public override void Initialize()
     {
@@ -91,6 +108,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private void OnRulePlayerSpawning(RulePlayerSpawningEvent ev)
     {
+        var spawnedDropships = false;
         var query = QueryActiveRules();
         while (query.MoveNext(out var uid, out _, out var comp, out var gameRule))
         {
@@ -102,6 +120,20 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             {
                 Log.Error("Failed to load xeno map");
                 continue;
+            }
+
+            var xenoSpawnPoints = new List<EntityUid>();
+            var spawnQuery = AllEntityQuery<XenoSpawnPointComponent>();
+            while (spawnQuery.MoveNext(out var spawnUid, out _))
+            {
+                xenoSpawnPoints.Add(spawnUid);
+            }
+
+            var xenoLeaderSpawnPoints = new List<EntityUid>();
+            var leaderSpawnQuery = AllEntityQuery<XenoLeaderSpawnPointComponent>();
+            while (leaderSpawnQuery.MoveNext(out var spawnUid, out _))
+            {
+                xenoLeaderSpawnPoints.Add(spawnUid);
             }
 
             bool IsAllowed(NetUserId id, ProtoId<JobPrototype> role)
@@ -131,8 +163,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 ev.PlayerPool.Remove(player);
                 GameTicker.PlayerJoinGame(player);
 
-                // TODO CM14 xeno spawn points
-                var xenoEnt = Spawn(ent, comp.XenoMap.ToCoordinates());
+                var leader = _prototypes.TryIndex(ent, out var proto) &&
+                             proto.TryGetComponent(out XenoComponent? xeno, _compFactory) &&
+                             xeno.SpawnAtLeaderPoint;
+
+                var point = _random.Pick(leader ? xenoLeaderSpawnPoints : xenoSpawnPoints);
+                var xenoEnt = SpawnAtPosition(ent, point.ToCoordinates());
 
                 _xeno.MakeXeno(xenoEnt);
                 _xeno.SetHive(xenoEnt, comp.Hive);
@@ -218,6 +254,56 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 var xenoEnt = Spawn(comp.LarvaEnt, comp.XenoMap.ToCoordinates());
                 _xeno.MakeXeno(xenoEnt);
                 _xeno.SetHive(xenoEnt, comp.Hive);
+            }
+
+            if (spawnedDropships)
+                return;
+
+            foreach (var cvar in FTLCVars)
+            {
+                comp.OriginalCVarValues[cvar] = _config.GetCVar(cvar);
+                _config.SetCVar(cvar, 1);
+            }
+
+            // don't open shitcode inside
+            spawnedDropships = true;
+            var dropshipMap = _mapManager.CreateMap();
+            var dropshipPoints = EntityQueryEnumerator<DropshipDestinationComponent, MetaDataComponent>();
+            var ships = new[] { "/Maps/_CM14/alamo.yml", "/Maps/_CM14/normandy.yml" };
+            var shipIndex = 0;
+            while (dropshipPoints.MoveNext(out var destinationId, out _, out var metaData))
+            {
+                if (!metaData.EntityName.Contains("almayer", StringComparison.OrdinalIgnoreCase))
+                    continue;
+
+                _mapLoader.TryLoad(dropshipMap, ships[shipIndex], out var shipGrids);
+                shipIndex++;
+
+                if (shipIndex >= ships.Length)
+                    shipIndex = 0;
+
+                if (shipGrids == null)
+                    continue;
+
+                foreach (var shipGrid in shipGrids)
+                {
+                    var computers = EntityQueryEnumerator<DropshipNavigationComputerComponent, TransformComponent>();
+                    var launched = false;
+                    while (computers.MoveNext(out var computerId, out var computer, out var xform))
+                    {
+                        if (xform.GridUid != shipGrid)
+                            continue;
+
+                        if (!_dropship.FlyTo((computerId, computer), destinationId, null))
+                            continue;
+
+                        launched = true;
+                        break;
+                    }
+
+                    if (launched)
+                        break;
+                }
             }
         }
     }
@@ -633,6 +719,27 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     protected override void ActiveTick(EntityUid uid, CMDistressSignalRuleComponent component, GameRuleComponent gameRule, float frameTime)
     {
         base.ActiveTick(uid, component, gameRule, frameTime);
+
+        if (!component.ResetCVars)
+        {
+            var anyDropships = false;
+            var dropships = EntityQueryEnumerator<DropshipComponent, FTLComponent>();
+            while (dropships.MoveNext(out _, out _))
+            {
+                anyDropships = true;
+            }
+
+            if (!anyDropships)
+            {
+                foreach (var (cvar, value) in component.OriginalCVarValues)
+                {
+                    _config.SetCVar(cvar, value);
+                }
+
+                component.ResetCVars = true;
+            }
+        }
+
         var rules = QueryActiveRules();
         while (rules.MoveNext(out _, out var distress, out _))
         {

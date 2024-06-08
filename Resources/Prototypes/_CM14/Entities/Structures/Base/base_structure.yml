@@ -23,6 +23,7 @@
   components:
   - type: Corrodible
     isCorrodible: false
+  - type: CMIconSmooth
 
 - type: entity
   id: CMCorrodible

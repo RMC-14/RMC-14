@@ -1,0 +1,81 @@
+﻿<controls:RoadmapWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._CM14.Roadmap"
+    MinSize="900 800"
+    Title="{Loc cm-ui-roadmap}">
+    <ScrollContainer>
+        <BoxContainer Orientation="Vertical">
+            <BoxContainer Orientation="Horizontal">
+                <RichTextLabel Name="Header" Access="Public" Margin="0 15 0 10" />
+                <Label HorizontalExpand="True" Align="Right" HorizontalAlignment="Right" Text="*This is not an exhaustive list" Margin="0 0 20 0" />
+            </BoxContainer>
+            <BoxContainer Name="Columns" Access="Public" Orientation="Horizontal">
+                <BoxContainer Name="FirstVersion" Access="Public" Orientation="Vertical" HorizontalExpand="True" Margin="0 0 20 0">
+                    <controls:RoadmapVersionHeader Text="Current version" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Almayer" Text="Ship map for the marines" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="LV-624" Text="Planet map" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Sniper Kit" Text="Sniper loadout for the squad weapons specialist. On completion, its ghillie suit will let you become partially cloaked, and the rifle will have special actions" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Squad automated vendors" Text="Where the marine roles get their equipment at round start" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Requisitions" Text="Department that buys supplies for the rest of the marines" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Marine squad orders" Text="The move, focus and hold orders. These are orders that specific marine roles can use to give a temporary buff to every marine around them" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Firearms skill" Text="Each marine role has a different firearms skill. This impacts how accurate they are with guns" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno Queen" Text="Head caste of the xenomorphs" />
+                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Carrier" Text="Carry huggers around, allowing the Hive to impregnate new hosts on the move. Use pheromones to assist fellow Aliens" />
+                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Burrower" Text="Lay the foundations for resin traps in strategic locations or the Hive's flanks. Flank your way around the map with the tunnel ability and dig tunnels to allow for quick transportation of fellow Aliens from the hive to the frontlines" />
+                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Lurker" Text="Become the ultimate ambusher. Stalk behind the frontlines and on flanks, wound, capture and kill unsuspecting Marines. Harass support personnel" />
+                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Warrior" Text="Fight on the frontlines. Disable and capture lone prey. Punish reckless Marines by flinging them into Alien backlines. Act as one of the Hive's main line combatants" />
+                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Spitter" Text="Protect your fellow Aliens with a corrosive acid spit, allowing you to damage hosts from a distance and deny areas or lanes of fire to them. Use your strong acid to quickly destroy equipment" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Larva removal surgery" Text="No longer a week away" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Treatable wounds" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="CPR and IVs" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Hivelord" Text="Shape the Hive to your will with a massive plasma reserve. Become one with weeds and sprint around weeded terrain like a Runner. Use pheromones to assist fellow Aliens" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Drone" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Runner" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Sentinel" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Defender" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Facehugger" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Larva" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Lesser Drone" />
+                </BoxContainer>
+                <BoxContainer Name="SecondVersion" Access="Public" Orientation="Vertical"  HorizontalExpand="True" Margin="0 0 20 0">
+                    <controls:RoadmapVersionHeader Text="Upcoming" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="USS LCS-14 Savannah" Text="A new ship map for marines to spawn on. Contributed by Tunguso4ka" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Fireteam Leader" Text="More equipment in the fireteam leader's equipment and gear racks" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Squad Leader" Text="More equipment in the squad leader's equipment and gear racks" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Grenadier Kit" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Tier 3 xenos" Text="Crusher, Praetorian, Boiler and Ravager" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Smartgunner" Text="Stay behind marines and fire past friendlies and into the enemy!" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Weapon attachments" Text="Each weapon will be able to be customized with different attachments, changing the weapon's stats" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Limb damage" Text="Each limb on a marine will be able to take damage separately, being able to detach upon receiving too much damage and requiring individual treatment" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Pain and painkillers" Text="Wounds will cause pain which can be dulled with painkillers" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="More surgeries" Text="Foreign object removal, internal bleeding surgery, fractures" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Smoke grenades" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Bullet damage fall-off" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Construction skill" Text="Allows you to build more advanced constructs" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Engineering skill" Text="Allows you to repair and hack more advanced constructs" />
+                </BoxContainer>
+                <BoxContainer Name="ThirdVersion" Access="Public" Orientation="Vertical"  HorizontalExpand="True" Margin="0 0 20 0">
+                    <controls:RoadmapVersionHeader Text="Future versions" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="More lobby art and music" Text="We are always looking for people to contribute more lobby art and music!" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="More planet maps" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="More weapons" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Communications objective" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Nuke endgame" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Specialist's Scout Kit" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Survivors" Text="A role that starts on the planet and must try to survive until rescued by the USCM" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Engineering staff" Text="Maintenance technician and the Chief Engineer" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Synthetics and Working Joes" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Emergency responders" Text="A faction that randomly spawns, with their own objectives" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Orbital bombardment" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Intelligence officer" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Close air support" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Mortars" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Chemical research" Text="Chemicals with random recipes, ingredients and effects" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Dropship modifications" Text="" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Xeno strains" Text="Variations of a xeno caste with different stats and abilities" />
+                </BoxContainer>
+            </BoxContainer>
+        </BoxContainer>
+    </ScrollContainer>
+</controls:RoadmapWindow>

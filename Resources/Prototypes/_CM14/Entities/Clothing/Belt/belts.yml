@@ -186,7 +186,7 @@
       name: Knife
       whitelist:
         tags:
-        - Knife
+        - ThrowingKnife
 
 - type: entity
   parent: CMBeltBaseStorage
