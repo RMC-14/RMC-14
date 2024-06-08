@@ -170,8 +170,8 @@
       entries:
       - cost: 4000
         crate: CMCrateM41A
-      - cost: 4000
-        crate: CMCrateM41AE2
+#      - cost: 4000
+#        crate: CMCrateM41AE2
       - cost: 3000
         crate: CMCrateVP78
     - name: Weapons Specialist Ammo
