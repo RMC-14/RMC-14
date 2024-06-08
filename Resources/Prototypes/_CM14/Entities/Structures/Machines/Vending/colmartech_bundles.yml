@@ -85,10 +85,11 @@
 #      - # TODO CM14 plastic explosives
     - CMSandbagEmpty25
     - CMSheetMetal50
-    - CMSheetPlasteel30
+    - CMSheetPlasteel40
 #    - # TODO CM14 high capacity power cell
     - CMEntrenchingTool # TODO CM14 check that this starts folded
     - LightReplacer # TODO CM14 cm light replacer
+#    - # TODO CM14 apc board
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
