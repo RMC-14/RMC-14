@@ -17,4 +17,7 @@ public sealed class CMCVars : CVars
 
     public static readonly CVarDef<bool> CMPlayHumanoidVoicelines =
         CVarDef.Create("cm.play_humanoid_voicelines", true, CVar.REPLICATED | CVar.CLIENT);
+
+    public static readonly CVarDef<string> CMOocWebhook =
+        CVarDef.Create("cm.ooc_webhook", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
 }

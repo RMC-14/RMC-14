@@ -5,6 +5,8 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Content.Server.Chat.Managers;
+using Content.Server.Discord;
+using Content.Shared._CM14.CCVar;
 using Content.Shared.CCVar;
 using Robust.Server.ServerStatus;
 using Robust.Shared.Asynchronous;
@@ -15,19 +17,38 @@ namespace Content.Server.MoMMI
     internal sealed class MoMMILink : IMoMMILink, IPostInjectInit
     {
         [Dependency] private readonly IConfigurationManager _configurationManager = default!;
+        [Dependency] private readonly DiscordWebhook _discord = default!;
         [Dependency] private readonly IStatusHost _statusHost = default!;
         [Dependency] private readonly IChatManager _chatManager = default!;
         [Dependency] private readonly ITaskManager _taskManager = default!;
 
         private readonly HttpClient _httpClient = new();
+        private WebhookIdentifier? _webhook = new();
 
         void IPostInjectInit.PostInject()
         {
+            _configurationManager.OnValueChanged(CMCVars.CMOocWebhook,
+                value =>
+                {
+                    if (!string.IsNullOrWhiteSpace(value))
+                    {
+                        _discord.GetWebhook(value, data => _webhook = data.ToIdentifier());
+                    }
+                },
+                true);
             _statusHost.AddHandler(HandleChatPost);
         }
 
         public async void SendOOCMessage(string sender, string message)
         {
+            // TODO CM14
+            if (_webhook is { } webhook)
+            {
+                await _discord.CreateMessage(webhook, new WebhookPayload { Content = $"**OOC:** `{sender}: {message}`" });
+            }
+
+            return;
+
             var sentMessage = new MoMMIMessageOOC
             {
                 Sender = sender,
