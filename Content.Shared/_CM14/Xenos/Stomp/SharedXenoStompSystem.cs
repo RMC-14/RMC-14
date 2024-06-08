@@ -82,5 +82,8 @@ public sealed class XenoStompSystem : EntitySystem
                 _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { receiver }, filter);
             }
         }
+
+        if (_net.IsServer)
+            SpawnAttachedTo(xeno.Comp.SelfEffect, xeno.Owner.ToCoordinates());
     }
 }
