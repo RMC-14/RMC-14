@@ -1,16 +1,10 @@
-﻿using System.Numerics;
-using Content.Shared._CM14.Marines;
+﻿using Content.Shared._CM14.Marines;
 using Content.Shared._CM14.Xenos.Plasma;
 using Content.Shared.Coordinates;
-using Content.Shared.Effects;
-using Content.Shared.FixedPoint;
-using Content.Shared.Actions;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Stunnable;
-using Content.Shared.Standing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
-using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Xenos.Screech;
 
@@ -22,7 +16,6 @@ public sealed class XenoScreechSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -35,24 +28,25 @@ public sealed class XenoScreechSystem : EntitySystem
 
     private void OnXenoScreechAction(Entity<XenoScreechComponent> xeno, ref XenoScreechActionEvent args)
     {
-        var ev = new XenoScreechAttemptEvent();
-        RaiseLocalEvent(xeno, ref ev);
+        if (args.Handled)
+            return;
 
-        if (ev.Cancelled)
+        var attempt = new XenoScreechAttemptEvent();
+        RaiseLocalEvent(xeno, ref attempt);
+
+        if (attempt.Cancelled)
+            return;
+
+        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
+            return;
+
+        if (!TryComp(xeno, out TransformComponent? xform))
             return;
 
         args.Handled = true;
 
-        if (!TryComp(xeno, out TransformComponent? xform) ||
-            _mobState.IsDead(xeno))
-        {
-            return;
-        }
-
-        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
-        {
-            return;
-        }
+        if (_net.IsServer)
+            _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
         _receivers.Clear();
         _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.StanRange, _receivers);
@@ -61,6 +55,7 @@ public sealed class XenoScreechSystem : EntitySystem
         {
             if (_mobState.IsDead(receiver))
                 continue;
+
             if (TryComp(xeno, out XenoComponent? xenoComp) &&
                 TryComp(receiver, out XenoComponent? targetXeno) &&
                 xenoComp.Hive == targetXeno.Hive)
@@ -78,6 +73,7 @@ public sealed class XenoScreechSystem : EntitySystem
         {
             if (_mobState.IsDead(receiver))
                 continue;
+
             if (TryComp(xeno, out XenoComponent? xenoComp) &&
                 TryComp(receiver, out XenoComponent? targetXeno) &&
                 xenoComp.Hive == targetXeno.Hive)
@@ -88,12 +84,7 @@ public sealed class XenoScreechSystem : EntitySystem
             _stun.TryParalyze(receiver, xeno.Comp.StunTime, true);
         }
 
-        if (_net.IsClient)
-        {
-            return;
-        }
-
-        _audio.PlayPvs(xeno.Comp.Sound, xeno);
-        SpawnAttachedTo(xeno.Comp.Effect, xeno.Owner.ToCoordinates());
+        if (_net.IsServer)
+            SpawnAttachedTo(xeno.Comp.Effect, xeno.Owner.ToCoordinates());
     }
 }

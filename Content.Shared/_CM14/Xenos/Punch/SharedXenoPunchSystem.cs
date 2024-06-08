@@ -1,17 +1,14 @@
-﻿using System.Numerics;
-using Content.Shared.Coordinates;
+﻿using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Throwing;
 using Content.Shared.Stunnable;
-using Content.Shared.Standing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Shared._CM14.Xenos.Punch;
 
@@ -22,10 +19,7 @@ public abstract class SharedXenoPunchSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ThrownItemComponent> _thrownItemQuery;
@@ -52,6 +46,13 @@ public abstract class SharedXenoPunchSystem : EntitySystem
         args.Handled = true;
 
         var targetId = args.Target;
+
+        if (TryComp(xeno, out XenoComponent? xenoComp) &&
+            TryComp(targetId, out XenoComponent? targetXeno) &&
+            xenoComp.Hive == targetXeno.Hive)
+        {
+            return;
+        }
 
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
