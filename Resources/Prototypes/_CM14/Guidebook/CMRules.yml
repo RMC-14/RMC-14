@@ -5,11 +5,18 @@
   priority: 0
   text: "/ServerInfo/Guidebook/_CM14/Rules/RuleVomit.xml"
 
-#- type: guideEntry
-#  parent: CM
-#  id: CMRules
-#  name: guide-entry-rules
-#  priority: 0
-#  text: "/ServerInfo/Guidebook/_CM14/Rules/Overview.xml"
+- type: guideEntry
+  parent: CM
+  id: CMOverview
+  name: guide-entry-rules
+  priority: 0
+  text: "/ServerInfo/Guidebook/_CM14/Rules/Overview.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMZeroTolerance
+  name: guide-entry-rules
+  priority: 0
+  text: "/ServerInfo/Guidebook/_CM14/Rules/ZeroTolerance.xml"
 
 

@@ -10,6 +10,7 @@
   text: "/ServerInfo/Guidebook/_CM14/CM14.xml"
   children:
   - RuleVomit
+  - CMOverview
 #  - Controls
 #  - Jobs
 #  - Survival
