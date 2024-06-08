@@ -2,33 +2,34 @@
   parent: CM
   id: CMOverview
   name: cm-guide-entry-rules
-  priority: 0
+  priority: -1
   text: "/ServerInfo/Guidebook/_CM14/Rules/Overview.xml"
-  children:
-  - CMBanTypes
-  - CMBanDurations
-  - CMZeroTolerance
-  - CMLanguage
-  - CMMultikey
-  - CMRulesEscalation
-  - CMMetaknowledge
-  - CMKindness
-  - CMMetagrudging
-  - CMMutinies
-  - CMRoleRolling
-  - CMCommandRoles
-  - CMMarineLaw
-  - CMHigherStandards
-  - CMLethalForce
-  - CMLethalForceConsequences
-  - CMProtectDetainees
-  - CMGeneralRoleplayStandards
-  - CMUSCMRoleplayStandards
-  - CMUSCMDeployment
-  - CMCommandRoleplay
-  - CMXenoRoleplay
-  - CMSurvivorRoleplay
-  - CMHostileFactionRoleplay
+  ruleEntry: true
+#  children:
+#  - CMBanTypes
+#  - CMBanDurations
+#  - CMZeroTolerance
+#  - CMLanguage
+#  - CMMultikey
+#  - CMRulesEscalation
+#  - CMMetaknowledge
+#  - CMKindness
+#  - CMMetagrudging
+#  - CMMutinies
+#  - CMRoleRolling
+#  - CMCommandRoles
+#  - CMMarineLaw
+#  - CMHigherStandards
+#  - CMLethalForce
+#  - CMLethalForceConsequences
+#  - CMProtectDetainees
+#  - CMGeneralRoleplayStandards
+#  - CMUSCMRoleplayStandards
+#  - CMUSCMDeployment
+#  - CMCommandRoleplay
+#  - CMXenoRoleplay
+#  - CMSurvivorRoleplay
+#  - CMHostileFactionRoleplay
 
 - type: guideEntry
   parent: CM
