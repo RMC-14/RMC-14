@@ -142,3 +142,4 @@
   - type: AffectableByWeeds
   - type: UserIFF
   - type: UserLimitHits
+  - type: MovementIgnoreGravity
