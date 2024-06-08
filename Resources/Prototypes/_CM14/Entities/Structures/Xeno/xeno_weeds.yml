@@ -87,6 +87,8 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: ImmuneToUnarmed
+  - type: CMIconSmooth
+    smooth: true
 #  - type: Physics
 #    bodyType: Static
 #  - type: FootstepModifier
