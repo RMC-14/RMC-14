@@ -5,7 +5,6 @@ using Content.Server.Administration.Managers;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
-using Content.Server.Parallax;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Power.Components;
 using Content.Server.Preferences.Managers;
@@ -20,22 +19,26 @@ using Content.Shared._CM14.Marines.HyperSleep;
 using Content.Shared._CM14.Marines.Squads;
 using Content.Shared._CM14.Weapons.Ranged.IFF;
 using Content.Shared._CM14.Xenos;
+using Content.Shared._CM14.Xenos.Evolution;
 using Content.Shared.Coordinates;
+using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
-using Content.Shared.Parallax.Biomes;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
-using Content.Shared.StatusIcon;
+using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
+using Robust.Shared.Audio;
+using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
@@ -44,14 +47,15 @@ namespace Content.Server._CM14.Rules;
 
 public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignalRuleComponent>
 {
+    [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IBanManager _bans = default!;
-    [Dependency] private readonly BiomeSystem _biome = default!;
     [Dependency] private readonly ContainerSystem _containers = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly MarineSystem _marines = default!;
     [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly MapSystem _map = default!;
+    [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
+    [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly PlayTimeTrackingSystem _playTime = default!;
@@ -63,9 +67,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
-
-    [ValidatePrototypeId<BiomeTemplatePrototype>]
-    private const string PlanetBiome = "Grasslands";
+    [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
 
     public override void Initialize()
     {
@@ -74,12 +76,15 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         SubscribeLocalEvent<RulePlayerSpawningEvent>(OnRulePlayerSpawning);
         SubscribeLocalEvent<PlayerSpawningEvent>(OnPlayerSpawning,
             before: [typeof(ArrivalsSystem), typeof(SpawnPointSystem)]);
+        SubscribeLocalEvent<RoundEndMessageEvent>(OnRoundEndMessage);
 
         SubscribeLocalEvent<MarineComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<MarineComponent, ComponentRemove>(OnCompRemove);
 
         SubscribeLocalEvent<XenoComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<XenoComponent, ComponentRemove>(OnCompRemove);
+
+        SubscribeLocalEvent<XenoEvolutionGranterComponent, MapInitEvent>(OnMapInit);
 
         SubscribeLocalEvent<AlmayerComponent, MapInitEvent>(OnAlmayerMapInit);
     }
@@ -247,7 +252,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             // TODO CM14 split this out with an event
             SpriteSpecifier? icon = null;
-            if (job.HasIcon && _prototypes.TryIndex(job.Icon, out StatusIconPrototype? jobIcon))
+            if (job.HasIcon && _prototypes.TryIndex(job.Icon, out var jobIcon))
                 icon = jobIcon.Icon;
 
             _marines.MakeMarine(ev.SpawnResult.Value, icon);
@@ -268,8 +273,31 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 _hunger.SetHunger(ev.SpawnResult.Value, 50.0f, hunger);
 
             _gunIFF.SetUserFaction(ev.SpawnResult.Value, comp.MarineFaction);
-
             return;
+        }
+    }
+
+    private void OnRoundEndMessage(RoundEndMessageEvent ev)
+    {
+        var rules = QueryActiveRules();
+        while (rules.MoveNext(out _, out var distress, out _))
+        {
+            if (distress.Result == DistressSignalRuleResult.None)
+                continue;
+
+            var audio = distress.Result switch
+            {
+                DistressSignalRuleResult.None => null,
+                DistressSignalRuleResult.MajorMarineVictory => distress.MajorMarineAudio,
+                DistressSignalRuleResult.MinorMarineVictory => distress.MinorMarineAudio,
+                DistressSignalRuleResult.MajorXenoVictory => distress.MajorXenoAudio,
+                DistressSignalRuleResult.MinorXenoVictory => distress.MinorXenoAudio,
+                DistressSignalRuleResult.AllDied => distress.AllDiedAudio,
+                _ => null
+            };
+
+            if (audio != null)
+                _audio.PlayGlobal(_audio.GetSound(audio), Filter.Broadcast(), true, AudioParams.Default.WithVolume(-4));
         }
     }
 
@@ -284,19 +312,14 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         CheckRoundShouldEnd();
     }
 
+    private void OnMapInit(Entity<XenoEvolutionGranterComponent> ent, ref MapInitEvent args)
+    {
+        CheckRoundShouldEnd();
+    }
+
     private void OnAlmayerMapInit(Entity<AlmayerComponent> almayer, ref MapInitEvent args)
     {
-        foreach (var ent in GetChildren(almayer))
-        {
-            if (!HasComp<StationInfiniteBatteryTargetComponent>(ent))
-                continue;
-
-            var recharger = EnsureComp<BatterySelfRechargerComponent>(ent);
-            var battery = EnsureComp<BatteryComponent>(ent);
-
-            recharger.AutoRecharge = true;
-            recharger.AutoRechargeRate = battery.MaxCharge; // Instant refill.
-        }
+        GridInfinitePower(almayer);
     }
 
     protected override void OnStartAttempt(Entity<CMDistressSignalRuleComponent, GameRuleComponent> gameRule, RoundStartAttemptEvent ev)
@@ -334,41 +357,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             ChatManager.SendAdminAnnouncement("Can't start distress signal. Requires at least 1 xeno player but we have 0.");
             ev.Cancel();
-        }
-    }
-
-    private IEnumerable<EntityUid> GetChildren(EntityUid almayer)
-    {
-        if (TryComp<StationDataComponent>(almayer, out var station))
-        {
-            foreach (var grid in station.Grids)
-            {
-                var enumerator = Transform(grid).ChildEnumerator;
-                while (enumerator.MoveNext(out var ent))
-                {
-                    yield return ent;
-                }
-            }
-        }
-        else if (HasComp<MapComponent>(almayer))
-        {
-            var enumerator = Transform(almayer).ChildEnumerator;
-            while (enumerator.MoveNext(out var possibleGrid))
-            {
-                var enumerator2 = Transform(possibleGrid).ChildEnumerator;
-                while (enumerator2.MoveNext(out var ent))
-                {
-                    yield return ent;
-                }
-            }
-        }
-        else
-        {
-            var enumerator = Transform(almayer).ChildEnumerator;
-            while (enumerator.MoveNext(out var ent))
-            {
-                yield return ent;
-            }
         }
     }
 
@@ -416,54 +404,82 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (xenosOnShip)
                 distress.XenosEverOnShip = true;
 
-            if (!xenosAlive && !marinesAlive)
+            if (xenosAlive && !marinesAlive)
             {
+                distress.Result = DistressSignalRuleResult.MajorXenoVictory;
                 _roundEnd.EndRound();
-                return;
+                continue;
             }
 
-            if (distress.XenosEverOnShip)
+            if (!xenosAlive && marinesAlive)
             {
-                if (xenosAlive && !marinesOnShip)
+                // TODO CM14 this should be when the dropship crashes, not if xenos ever boarded
+                if (distress.XenosEverOnShip)
                 {
-                    // TODO CM14 major xeno victory
+                    distress.Result = DistressSignalRuleResult.MinorXenoVictory;
                     _roundEnd.EndRound();
-                    return;
+                    continue;
                 }
+                else
+                {
+                    distress.Result = DistressSignalRuleResult.MajorMarineVictory;
+                    _roundEnd.EndRound();
+                    continue;
+                }
+            }
 
-                if (!xenosAlive || !xenosOnShip)
-                {
-                    // TODO CM14 minor xeno victory
-                    _roundEnd.EndRound();
-                    return;
-                }
+            if (!xenosAlive && !marinesAlive)
+            {
+                distress.Result = DistressSignalRuleResult.AllDied;
+                _roundEnd.EndRound();
+                continue;
+            }
+
+            if (_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
+            {
+                distress.QueenDiedCheck = null;
+                continue;
             }
             else
             {
-                if (xenosAlive && !marinesAlive)
-                {
-                    // TODO CM14 major xeno victory
-                    _roundEnd.EndRound();
-                    return;
-                }
-
-                if (!xenosAlive && marinesAlive)
-                {
-                    // TODO CM14 major marine victory
-                    _roundEnd.EndRound();
-                    return;
-                }
+                distress.QueenDiedCheck ??= Timing.CurTime + distress.QueenDiedDelay;
             }
 
-            // TODO CM14 no queen minor marine victory
+            if (distress.QueenDiedCheck == null)
+                continue;
+
+            if (Timing.CurTime >= distress.QueenDiedCheck)
+            {
+                if (_xenoEvolution.HasLiving<XenoComponent>(4))
+                {
+                    distress.Result = DistressSignalRuleResult.MinorMarineVictory;
+                    _roundEnd.EndRound();
+                }
+                else
+                {
+                    distress.Result = DistressSignalRuleResult.MajorMarineVictory;
+                    _roundEnd.EndRound();
+                }
+            }
         }
     }
 
     private bool SpawnXenoMap(Entity<CMDistressSignalRuleComponent> rule)
     {
-        var mapId = _map.CreateMap();
-        _biome.EnsurePlanet(mapId, _prototypes.Index<BiomeTemplatePrototype>(PlanetBiome));
-        rule.Comp.XenoMap = mapId;
+        // TODO CM14 different planet-side maps
+        var mapId = _mapManager.CreateMap();
+        if (!_mapLoader.TryLoad(mapId, "/Maps/_CM14/lv624.yml", out var grids) ||
+            grids.Count == 0)
+        {
+            return false;
+        }
+
+        if (grids.Count > 1)
+            Log.Error("Multiple planet-side grids found");
+
+        rule.Comp.XenoMap = grids[0];
+
+        _mapManager.SetMapPaused(mapId, false);
         return true;
     }
 
@@ -603,6 +619,93 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             return (_random.Pick(latePoints), squad);
 
         return null;
+    }
+
+    protected override void AppendRoundEndText(EntityUid uid,
+        CMDistressSignalRuleComponent component,
+        GameRuleComponent gameRule,
+        ref RoundEndTextAppendEvent args)
+    {
+        base.AppendRoundEndText(uid, component, gameRule, ref args);
+        args.AddLine($"{Loc.GetString($"cm-distress-signal-{component.Result.ToString().ToLower()}")}");
+    }
+
+    protected override void ActiveTick(EntityUid uid, CMDistressSignalRuleComponent component, GameRuleComponent gameRule, float frameTime)
+    {
+        base.ActiveTick(uid, component, gameRule, frameTime);
+        var rules = QueryActiveRules();
+        while (rules.MoveNext(out _, out var distress, out _))
+        {
+            if (_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
+                distress.QueenDiedCheck = null;
+
+            if (distress.QueenDiedCheck == null)
+                continue;
+
+            if (Timing.CurTime >= distress.QueenDiedCheck)
+            {
+                if (_xenoEvolution.HasLiving<XenoComponent>(4))
+                {
+                    distress.Result = DistressSignalRuleResult.MinorMarineVictory;
+                    _roundEnd.EndRound();
+                }
+                else
+                {
+                    distress.Result = DistressSignalRuleResult.MajorMarineVictory;
+                    _roundEnd.EndRound();
+                }
+            }
+        }
+    }
+
+    public void GridInfinitePower(EntityUid grid)
+    {
+        foreach (var ent in GetChildren(grid))
+        {
+            if (!HasComp<StationInfiniteBatteryTargetComponent>(ent))
+                continue;
+
+            var recharger = EnsureComp<BatterySelfRechargerComponent>(ent);
+            var battery = EnsureComp<BatteryComponent>(ent);
+
+            recharger.AutoRecharge = true;
+            recharger.AutoRechargeRate = battery.MaxCharge; // Instant refill.
+        }
+    }
+
+    private IEnumerable<EntityUid> GetChildren(EntityUid almayer)
+    {
+        if (TryComp<StationDataComponent>(almayer, out var station))
+        {
+            foreach (var grid in station.Grids)
+            {
+                var enumerator = Transform(grid).ChildEnumerator;
+                while (enumerator.MoveNext(out var ent))
+                {
+                    yield return ent;
+                }
+            }
+        }
+        else if (HasComp<MapComponent>(almayer))
+        {
+            var enumerator = Transform(almayer).ChildEnumerator;
+            while (enumerator.MoveNext(out var possibleGrid))
+            {
+                var enumerator2 = Transform(possibleGrid).ChildEnumerator;
+                while (enumerator2.MoveNext(out var ent))
+                {
+                    yield return ent;
+                }
+            }
+        }
+        else
+        {
+            var enumerator = Transform(almayer).ChildEnumerator;
+            while (enumerator.MoveNext(out var ent))
+            {
+                yield return ent;
+            }
+        }
     }
 }
 
