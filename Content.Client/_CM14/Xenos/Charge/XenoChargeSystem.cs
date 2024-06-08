@@ -1,5 +1,4 @@
 ﻿using System.Numerics;
-using Content.Client.Weapons.Melee;
 using Content.Shared._CM14.Xenos.Charge;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
@@ -25,7 +24,7 @@ public sealed class XenoChargeSystem : SharedXenoChargeSystem
     {
         return new Animation
         {
-            Length = TimeSpan.FromSeconds(0.3f),
+            Length = TimeSpan.FromSeconds(0.4f),
             AnimationTracks =
             {
                 new AnimationTrackComponentProperty()
