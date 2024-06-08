@@ -1,6 +1,7 @@
 ﻿using Content.Shared._CM14.Weapons.Ranged.IFF;
 using Content.Shared.Roles;
 using Robust.Shared.Audio;
+using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._CM14.Rules;
@@ -72,4 +73,8 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     [DataField]
     public SoundSpecifier AllDiedAudio = new SoundCollectionSpecifier("CMAllDied");
+
+    public Dictionary<CVarDef<float>, float> OriginalCVarValues = new();
+
+    public bool ResetCVars;
 }
