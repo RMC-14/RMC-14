@@ -17,6 +17,7 @@ using Content.Server.Station.Systems;
 using Content.Shared._CM14.Marines;
 using Content.Shared._CM14.Marines.HyperSleep;
 using Content.Shared._CM14.Marines.Squads;
+using Content.Shared._CM14.Spawners;
 using Content.Shared._CM14.Weapons.Ranged.IFF;
 using Content.Shared._CM14.Xenos;
 using Content.Shared._CM14.Xenos.Evolution;
@@ -49,6 +50,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 {
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IBanManager _bans = default!;
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly ContainerSystem _containers = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
@@ -104,6 +106,20 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 continue;
             }
 
+            var xenoSpawnPoints = new List<EntityUid>();
+            var spawnQuery = EntityQueryEnumerator<XenoSpawnPointComponent>();
+            while (spawnQuery.MoveNext(out var spawnUid, out _))
+            {
+                xenoSpawnPoints.Add(spawnUid);
+            }
+
+            var xenoLeaderSpawnPoints = new List<EntityUid>();
+            var leaderSpawnQuery = EntityQueryEnumerator<XenoLeaderSpawnPointComponent>();
+            while (leaderSpawnQuery.MoveNext(out var spawnUid, out _))
+            {
+                xenoLeaderSpawnPoints.Add(spawnUid);
+            }
+
             bool IsAllowed(NetUserId id, ProtoId<JobPrototype> role)
             {
                 if (!_player.TryGetSessionById(id, out var player))
@@ -131,8 +147,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 ev.PlayerPool.Remove(player);
                 GameTicker.PlayerJoinGame(player);
 
-                // TODO CM14 xeno spawn points
-                var xenoEnt = Spawn(ent, comp.XenoMap.ToCoordinates());
+                var leader = _prototypes.TryIndex(ent, out var proto) &&
+                             proto.TryGetComponent(out XenoComponent? xeno, _compFactory) &&
+                             xeno.SpawnAtLeaderPoint;
+
+                var point = _random.Pick(leader ? xenoLeaderSpawnPoints : xenoSpawnPoints);
+                var xenoEnt = SpawnAtPosition(ent, point.ToCoordinates());
 
                 _xeno.MakeXeno(xenoEnt);
                 _xeno.SetHive(xenoEnt, comp.Hive);

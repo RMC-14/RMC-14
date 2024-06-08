@@ -29,6 +29,7 @@
     - FootstepSound
   - type: Xeno
     role: CMXenoQueen
+    spawnAtLeaderPoint: true
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate

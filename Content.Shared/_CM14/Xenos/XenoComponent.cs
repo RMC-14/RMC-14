@@ -69,4 +69,7 @@ public sealed partial class XenoComponent : Component
 
     [DataField, AutoNetworkedField]
     public ProtoId<AlertPrototype> ArmorAlert = "XenoArmor";
+
+    [DataField, AutoNetworkedField]
+    public bool SpawnAtLeaderPoint;
 }
