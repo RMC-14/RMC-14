@@ -52,6 +52,8 @@
   - type: ActivatableUI
     key: enum.CMAutomatedVendorUI.Key
   - type: ActivatableUIRequiresAccess
+  - type: WallMount
+    arc: 360
 
 - type: entity
   parent: ColMarTechBase

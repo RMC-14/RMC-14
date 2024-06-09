@@ -26,6 +26,8 @@
     pack: CMDispenserChemInventory
   - type: Machine
     board: CMCircuitboardDispenserChem
+  - type: ApcPowerReceiver
+    powerLoad: 0
 
 - type: reagentDispenserInventory
   id: CMDispenserChemInventory
