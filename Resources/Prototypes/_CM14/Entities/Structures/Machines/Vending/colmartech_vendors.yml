@@ -312,6 +312,7 @@
         amount: 30
       - id: WeaponRifleM41A
         amount: 30
+        recommended: true
     - name: Primary ammunition
       entries:
       - id: CMBoxShotgunFlechette
@@ -362,6 +363,7 @@
         amount: 25
       - id: CMPackFlare
         amount: 10
+        recommended: true
 
 - type: entity
   parent: ColMarTechBase
@@ -399,11 +401,13 @@
         name: backpack
       - id: CMSatchelMarine
         name: satchel
+        recommended: true
       #- id: CMShotgunScabbard # TODO: Make a Scabbard
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
       - id: CMBeltMarine
+        recommended: true
       #    CMM276GeneralPistolHolsterRig #TODO: Make this
       - id: CMBeltKnifeFilled
         name: M276 knife rig (full)
@@ -419,12 +423,16 @@
       - id: CMPouchBayonetFill
       - id: CMPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
+        recommended: true
       - id: CMPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO CM14 splints comma
+        recommended: true
       - id: CMPouchFirstAidPills
         name: first-aid pouch (pills)
+        recommended: true
       - id: CMPouchFlareFilled
         name: Flare pouch (Filled)
+        recommended: true
       #    CMSmallDocumentPouch #TODO: Make this
       - id: CMPouchMagazine
       - id: CMPouchShotgun
