@@ -35,7 +35,7 @@
 - type: entity
   abstract: true
   parent: CMBaseStructureCorrodible
-  id: CMBaseWall
+  id: CMBaseWallInvincible
   description: A huge chunk of metal used to separate rooms.
   placement:
     mode: SnapgridCenter
@@ -48,9 +48,6 @@
     state: full
   - type: PlacementReplacement
     key: walls
-  - type: Damageable
-    damageContainer: StructuralMarine
-    damageModifierSet: StructuralMarine
   - type: Occluder
   - type: Airtight
   - type: RadiationBlocker
@@ -72,6 +69,20 @@
         density: 1000
   - type: XenoWeedable
     spawn: XenoWeedsWall
+  - type: Corrodible
+    isCorrodible: false
+
+- type: entity
+  abstract: true
+  parent: CMBaseWallInvincible
+  id: CMBaseWall
+  description: A huge chunk of metal used to separate rooms.
+  components:
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: Corrodible
+    isCorrodible: true
 
 - type: entity
   parent:
