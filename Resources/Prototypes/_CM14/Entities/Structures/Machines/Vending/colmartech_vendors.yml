@@ -427,7 +427,7 @@
         name: Flare pouch (Filled)
       #    CMSmallDocumentPouch #TODO: Make this
       - id: CMPouchMagazine
-      #- id: CMPouchShotgun #TODO: Make this
+      - id: CMPouchShotgun
       - id: CMPouchGeneral
       - id: CMPouchMagazinePistol
       - id: CMPouchPistol
@@ -959,7 +959,7 @@
       - id: CMPouchFlareFilled
         name: Flare pouch (Filled)
       - id: CMPouchMagazine
-      #- id: CMShotgunShellPouch
+      - id: CMPouchShotgun
       - id: CMPouchMagazinePistolLarge
       - id: CMPouchGeneralMedium
       - id: CMPouchPistol
@@ -1245,7 +1245,7 @@
         name: Flare pouch (Filled)
       - id: CMPouchMagazinePistolLarge
       - id: CMPouchMagazine
-      #- id: CMShotgunShellPouch
+      - id: CMPouchShotgun
       - id: CMPouchGeneralMedium
       - id: CMPouchPistol
       #- id: CMToolsPouchFull
@@ -1497,7 +1497,7 @@
       #- id: CMSlingPouch
       - id: CMPouchMagazinePistolLarge
       - id: CMPouchMagazine
-      #- id: CMShotgunShellPouch
+      - id: CMPouchShotgun
       - id: CMPouchMedical
       #- id: CMMedicalKitPouch
       #- id: CMPressurizedReagentCanisterPouchBicaridine
@@ -1719,7 +1719,7 @@
         name: first-aid pouch (pills)
       - id: CMPouchMagazinePistolLarge
       - id: CMPouchMagazine
-      #- id: CMShotgunShellPouch
+      - id: CMPouchShotgun
       - id: CMPouchGeneralMedium
       - id: CMPouchPistol
       - id: CMPouchMacheteFilled
@@ -1909,7 +1909,7 @@
       #- id: CMSlingPouch
       - id: CMPouchMagazinePistolLarge
       - id: CMPouchMagazine
-      #- id: CMShotgunShellPouch
+      - id: CMPouchShotgun
       - id: CMPouchPistol
       #- id: CMToolsPouchFull
     - name: Accessories
