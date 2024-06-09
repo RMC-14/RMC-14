@@ -84,4 +84,10 @@ public sealed class SkillsSystem : EntitySystem
                skills.Surgery >= required.Surgery &&
                skills.Vehicles >= required.Vehicles;
     }
+
+    public void SetSkills(Entity<SkillsComponent> ent, in Skills skills)
+    {
+        ent.Comp.Skills = skills;
+        Dirty(ent);
+    }
 }
