@@ -45,7 +45,7 @@
     layers:
     - state: icon
     - state: closed
-      map: [ "closed" ]
+      map: [ "closedLayer" ]
   - type: GenericVisualizer
     visuals:
       enum.SharedBagOpenVisuals.BagState:
@@ -65,7 +65,6 @@
       map: [ "closedLayer" ]
     - state: open
       map: [ "openLayer" ]
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.SharedBagOpenVisuals.BagState:
@@ -251,7 +250,7 @@
   - type: CMItemSlots
 
 - type: entity
-  parent: [CMPouchOpenClosed, CMPouchStorage]
+  parent: [CMPouchClosed, CMPouchStorage]
   id: CMPouchCommand
   name: command pouch
   description: A specialized, sturdy pouch issued to Commanding Officers. Can hold their sidearm, the command tablet and a set of binoculars.
