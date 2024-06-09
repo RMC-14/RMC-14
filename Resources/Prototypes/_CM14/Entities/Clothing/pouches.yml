@@ -131,6 +131,8 @@
   - type: ItemSlots
   - type: CMHolster
   - type: CMItemSlots
+    cooldown: 1
+    cooldownPopup: You need to wait before drawing another knife!
     count: 5
     slot:
       name: Knife
