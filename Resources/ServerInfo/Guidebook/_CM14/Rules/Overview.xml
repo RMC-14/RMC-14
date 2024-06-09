@@ -34,10 +34,10 @@
   - [textlink="2. Do not use multiple accounts, or alt accounts, and do not share accounts." link="CMMultikey"]
   - [textlink="3. Follow the rules of escalation against non-hostiles." link="CMRulesEscalation"]
   - [textlink="4. Don't use information gained from outside your character's knowledge." link="CMMetaknowledge"]
-  - [textlink="5. Don't be a dick." link="CMKindness"]
+  - [textlink="5. Don't antagonize your team." link="CMKindness"]
   - [textlink="6. Don't harass or target players across rounds." link="CMMetagrudging"]
   - [textlink="7. Don't immediately quit your role if you do not get the role you want." link="CMRoleRolling"]
-  - [textlink="8. Don't quit a head role without notifying your chain of command or an admin." link="CMCommandRoles"]
+  - [textlink="8. Don't quit a head role without notice." link="CMCommandRoles"]
 
   ## Riots, Mutiny
   - [textlink="1. Mutinies, riots and similar activity require admin permission." link="CMMutinies"]
@@ -49,8 +49,11 @@
   - [textlink="3. MP should try to remain non-lethal and effect arrests, except in specific special circumstances." link="CMLethalForce"]
   - [textlink="4. MP will be expected to answer for use of lethal force." link="CMLethalForceConsequences"]
   - [textlink="5. MP are expected to protect detainees in their custody to the best of their ability." link="CMProtectDetainees"]
+  - Only a whitelisted CO or high command (admins) may approve executions.
+  - Only a whitelisted CO or high command may pardon a sentence.
 
   ## Roleplay Rules
+
   - [textlink="1. General Roleplay Standards." link="CMGeneralRoleplayStandards"]
   - [textlink="2. USCM." link="CMUSCMRoleplayStandards"]
   - [textlink="3. Deployment of USCM." link="CMUSCMDeployment"]
