@@ -66,7 +66,8 @@ namespace Content.IntegrationTests.Tests
             "Train",
             "Oasis",
             "CMDev",
-            "Savannah"
+            "Savannah",
+            "Almayer"
         };
 
         /// <summary>
