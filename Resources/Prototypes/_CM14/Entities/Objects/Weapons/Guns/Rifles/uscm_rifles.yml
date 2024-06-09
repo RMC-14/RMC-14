@@ -7,7 +7,7 @@
   - type: Item
     size: Large
   - type: Clothing
-    quickEquip: true
+    quickEquip: false
     slots:
     - suitStorage
     - Back
@@ -88,9 +88,9 @@
   - type: Clothing
     sprite: _CM14/Objects/Weapons/Guns/Rifles/m41ae2.rsi
   - type: Gun
-    selectedMode: SemiAuto
+    selectedMode: FullAuto
     availableModes:
-    - SemiAuto # TODO CM14 burst with greatly increased angle unless mounted
+    - FullAuto # TODO CM14 burst with greatly increased angle unless mounted
     soundGunshot:
       collection: CMM41AShoot
   - type: GunWieldBonus
