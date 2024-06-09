@@ -16,6 +16,7 @@
   weight: 100
   requireAdminNotify: true
   hidden: false
+  supervisors: nobody
 
 - type: playTimeTracker
   id: CMJobXenoQueen
