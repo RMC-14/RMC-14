@@ -1,0 +1,35 @@
+﻿<Document>
+
+  #Your first day as a rifleman!
+
+  - Just woke up from cryosleep? Well you're probably hungry, so you should head to the food vendor.
+
+  <Box>
+    <GuideEntityEmbed Entity="ColMarTechFood"/>
+  </Box>
+
+
+  - Next head to the standard equipment rack to get your armor and storage!
+
+  <Box>
+    <GuideEntityEmbed Entity="ColMarTechEquipment"/>
+  </Box>
+
+
+  - And finally, visit the automated weapons rack to pick a weapon and mags to go with it!
+  We recommend the M41A Pulse Rifle for beginners.
+  - Also make sure to grab a few armor piercing (AP) mags for the heavier xenos!
+
+  <Box>
+    <GuideEntityEmbed Entity="ColMarTechGuns"/>
+    <GuideEntityEmbed Entity="WeaponRifleM41A"/>
+  </Box>
+  <Box>
+  <GuideEntityEmbed Entity="CMMagazineRifleM41A"/>
+  <GuideEntityEmbed Entity="CMMagazineRifleM41AAP"/>
+</Box>
+
+  - Now you're ready to kill xenomorphs! Try to find the meeting room with your squadmates if the operation hasn't started yet.
+  - Otherwise, ask around for help finding the dropship and get in there!
+
+</Document>
