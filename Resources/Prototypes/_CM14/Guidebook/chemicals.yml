@@ -3,6 +3,7 @@
   id: CMChemicals
   name: guide-entry-chemicals
   text: "/ServerInfo/Guidebook/_CM14/Chemicals.xml"
+  priority: 20
   children:
 #  - Elements
   - CMMedicine
