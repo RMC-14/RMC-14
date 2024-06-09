@@ -16,7 +16,6 @@
     tags:
     - Sidearm
   - type: Clothing
-    quickEquip: false
     slots:
     - suitStorage
     - belt

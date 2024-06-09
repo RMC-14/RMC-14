@@ -7,7 +7,6 @@
   - type: Item
     size: Large
   - type: Clothing
-    quickEquip: true
     slots:
     - suitStorage
     - Back
