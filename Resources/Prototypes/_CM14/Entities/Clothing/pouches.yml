@@ -737,7 +737,7 @@
     - 0,0,15,1 #8 slots
 
 - type: entity
-  parent: [CMPouchOpenClosed, CMPouchStorage]
+  parent: [CMPouchClosed, CMPouchStorage]
   id: CMPouchSling
   name: sling strap # TODO CM14 implement this
   description: Keeps a single item attached to a strap.
