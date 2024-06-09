@@ -10,11 +10,12 @@ public sealed partial class CMAutomatedVendorPanel : Control
 {
     public static readonly Color DefaultColor = Color.FromHex("#141F2F");
     public static readonly Color DefaultBorderColor = Color.FromHex("#4972A1");
-    private static readonly Color HoveredColor = Color.FromHex("#4972A1");
+    public static readonly Color DefaultHoveredColor = Color.FromHex("#4972A1");
     private static readonly Color DisabledColor = Color.FromHex("#999999");
 
     public Color Color = DefaultColor;
     public Color BorderColor = DefaultBorderColor;
+    public Color HoveredColor = DefaultHoveredColor;
 
     public CMAutomatedVendorPanel()
     {
