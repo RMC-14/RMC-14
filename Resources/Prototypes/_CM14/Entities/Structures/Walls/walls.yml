@@ -139,9 +139,9 @@
 
 # Indestructible
 - type: entity
-  parent: CMBaseWall
+  parent: CMBaseWallInvincible
   id: CMWallReinforcedHeavy
-  name: heavy reinforced wall
+  name: heavy reinforced hull
   description: A huge chunk of ultra-reinforced metal used to separate rooms. Looks virtually indestructible.
   components:
   - type: Sprite
@@ -171,6 +171,7 @@
 - type: entity
   parent: CMWallReinforcedHeavy
   id: CMWallReinforcedHeavyAlmayerWhite
+  name: ultra reinforced hull
   components:
   - type: Sprite
     sprite: _CM14/Structures/Walls/almayer_white.rsi
@@ -181,9 +182,11 @@
     key: walls
     base: wall
 
+# TODO CM14 temp hull, breakable only after hijack
+
 # Shuttle
 - type: entity
-  parent: CMBaseWall
+  parent: CMBaseWallInvincible
   id: CMWallShuttleBlack
   components:
   - type: Sprite
@@ -213,7 +216,7 @@
 
 # Cave
 - type: entity
-  parent: CMBaseWall
+  parent: CMBaseWallInvincible
   id: CMWallRock
   name: rock wall
   description: A rough wall of hardened rock.
