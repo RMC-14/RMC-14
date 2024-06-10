@@ -4,8 +4,6 @@
   id: MobXeno
   parent: SimpleSpaceMobBase
   description: They mostly come at night. Mostly.
-  raffle:
-    settings: default
   components:
   - type: Insulated
   - type: CombatMode
