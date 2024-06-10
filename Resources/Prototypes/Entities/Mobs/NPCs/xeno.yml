@@ -4,6 +4,8 @@
   id: MobXeno
   parent: SimpleSpaceMobBase
   description: They mostly come at night. Mostly.
+  raffle:
+    settings: default
   components:
   - type: Insulated
   - type: CombatMode
@@ -129,6 +131,8 @@
   name: Praetorian
   parent: MobXeno
   id: MobXenoPraetorian
+  raffle:
+    settings: default
   components:
   - type: Sprite
     drawdepth: Mobs
@@ -162,6 +166,8 @@
   name: Drone
   parent: MobXeno
   id: MobXenoDrone
+  raffle:
+    settings: default
   components:
   - type: Sprite
     drawdepth: Mobs
@@ -199,6 +205,8 @@
   name: Queen
   parent: MobXeno
   id: MobXenoQueen
+  raffle:
+    settings: default
   components:
   - type: Sprite
     drawdepth: Mobs
@@ -238,6 +246,8 @@
   name: Ravager
   parent: MobXeno
   id: MobXenoRavager
+  raffle:
+    settings: default
   components:
   - type: Sprite
     drawdepth: Mobs
@@ -275,6 +285,8 @@
   name: Runner
   parent: MobXeno
   id: MobXenoRunner
+  raffle:
+    settings: default
   components:
   - type: Sprite
     drawdepth: Mobs
@@ -305,6 +317,8 @@
   name: Rouny
   parent: MobXenoRunner
   id: MobXenoRouny
+  raffle:
+    settings: short
   components:
   - type: Sprite
     drawdepth: Mobs
@@ -320,6 +334,8 @@
   name: Spitter
   parent: MobXeno
   id: MobXenoSpitter
+  raffle:
+    settings: default
   components:
   - type: Sprite
     drawdepth: Mobs
@@ -367,6 +383,8 @@
   name: space adder
   parent: SimpleSpaceMobBase
   id: MobPurpleSnake
+  raffle:
+    settings: default
   description: A menacing purple snake from Kepler-283c.
   components:
   - type: Sprite
@@ -434,6 +452,8 @@
   id: MobSmallPurpleSnake
   suffix: small
   description: A smaller version of the menacing purple snake from Kepler-283c.
+  raffle:
+    settings: default
   components:
   - type: Sprite
     drawdepth: Mobs
