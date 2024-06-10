@@ -320,8 +320,6 @@
   name: Spitter
   parent: MobXeno
   id: MobXenoSpitter
-  raffle:
-    settings: default
   components:
   - type: Sprite
     drawdepth: Mobs
