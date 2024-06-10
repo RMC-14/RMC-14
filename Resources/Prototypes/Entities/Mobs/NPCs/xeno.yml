@@ -318,7 +318,7 @@
   parent: MobXenoRunner
   id: MobXenoRouny
   raffle:
-    settings: short
+    settings: default
   components:
   - type: Sprite
     drawdepth: Mobs
