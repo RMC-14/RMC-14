@@ -46,7 +46,7 @@
   equipment:
     jumpsuit: CMJumpsuitCMO
     outerClothing: CMCoatLong
-    back: CMSatchelMedical
+    back: CMSatchel
     gloves: CMHandsLatex
     shoes: ClothingShoesColorWhite
     head: CMHeadCapCMO
