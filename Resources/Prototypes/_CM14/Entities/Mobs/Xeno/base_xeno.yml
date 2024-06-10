@@ -165,6 +165,8 @@
     allowMovement: true
     name: cm-xeno-name
     description: cm-xeno-description
+    raffle:
+      settings: default
     rules: cm-xeno-rules
   - type: StatusEffects
     allowed:
