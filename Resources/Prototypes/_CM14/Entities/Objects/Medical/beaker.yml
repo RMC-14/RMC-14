@@ -122,6 +122,7 @@
     solutions:
       beaker:
         maxVol: 480
+  - type: SolutionContainerVisuals
   - type: Spillable
     solution: beaker
   - type: StaticPrice
