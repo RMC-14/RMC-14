@@ -115,6 +115,9 @@
     sprite: _CM14/Objects/Tanks/pressurized_reagent_container.rsi
     layers:
     - state: icon
+    - state: can1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
   - type: Item
     size: Large
     sprite: _CM14/Objects/Tanks/pressurized_reagent_container.rsi
@@ -123,6 +126,8 @@
       beaker:
         maxVol: 480
   - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    fillBaseName: can
   - type: Spillable
     solution: beaker
   - type: StaticPrice
