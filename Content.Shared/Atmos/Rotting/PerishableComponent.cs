@@ -37,12 +37,6 @@ public sealed partial class PerishableComponent : Component
     [DataField]
     public TimeSpan PerishUpdateRate = TimeSpan.FromSeconds(5);
 
-    /// <summary>
-    /// How many moles of gas released per second, per unit of mass.
-    /// </summary>
-    [DataField]
-    public float MolsPerSecondPerUnitMass = 0.0025f;
-
     [DataField, AutoNetworkedField]
     public int Stage;
 }

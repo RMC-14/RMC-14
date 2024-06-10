@@ -1,11 +1,9 @@
 using Content.Server.Atmos.EntitySystems;
-using Content.Server.Body.Components;
 using Content.Server.Temperature.Components;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Damage;
 using Robust.Server.Containers;
-using Robust.Shared.Physics.Components;
 using Robust.Shared.Timing;
 
 namespace Content.Server.Atmos.Rotting;
@@ -13,7 +11,6 @@ namespace Content.Server.Atmos.Rotting;
 public sealed class RottingSystem : SharedRottingSystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
 
@@ -21,22 +18,7 @@ public sealed class RottingSystem : SharedRottingSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RottingComponent, BeingGibbedEvent>(OnGibbed);
-
         SubscribeLocalEvent<TemperatureComponent, IsRottingEvent>(OnTempIsRotting);
-    }
-
-    private void OnGibbed(EntityUid uid, RottingComponent component, BeingGibbedEvent args)
-    {
-        if (!TryComp<PhysicsComponent>(uid, out var physics))
-            return;
-
-        if (!TryComp<PerishableComponent>(uid, out var perishable))
-            return;
-
-        var molsToDump = perishable.MolsPerSecondPerUnitMass * physics.FixturesMass * (float) component.TotalRotTime.TotalSeconds;
-        var tileMix = _atmosphere.GetTileMixture(uid, excite: true);
-        tileMix?.AdjustMoles(Gas.Ammonia, molsToDump);
     }
 
     private void OnTempIsRotting(EntityUid uid, TemperatureComponent component, ref IsRottingEvent args)
@@ -120,13 +102,6 @@ public sealed class RottingSystem : SharedRottingSystem
                 }
             }
 
-            if (!TryComp<PhysicsComponent>(uid, out var physics))
-                continue;
-            // We need a way to get the mass of the mob alone without armor etc in the future
-            // or just remove the mass mechanics altogether because they aren't good.
-            var molRate = perishable.MolsPerSecondPerUnitMass * (float) rotting.RotUpdateRate.TotalSeconds;
-            var tileMix = _atmosphere.GetTileMixture(uid, excite: true);
-            tileMix?.AdjustMoles(Gas.Ammonia, molRate * physics.FixturesMass);
         }
     }
 }
