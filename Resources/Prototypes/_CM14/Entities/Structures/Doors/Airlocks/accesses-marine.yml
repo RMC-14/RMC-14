@@ -54,7 +54,7 @@
 
 - type: entity
   parent: CMAirlockPrep
-  id: CMAirlockPrepSmart
+  id: CMAirlockPrepFTL
   name: squad fireteam leader preparations
   suffix: Locked
   components:
