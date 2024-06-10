@@ -30,6 +30,7 @@
   id: CMGearCombatTech
   equipment:
     jumpsuit: CMJumpsuitMarineEngineer # TODO CM14 all squad roles should spawn with no jumpsuit but still have clothes on
+    gloves: CMHandsInsulated
     back: CMSatchelMarineTech
     id: CMDogtagCombatTech
 
