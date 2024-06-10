@@ -22,5 +22,5 @@
         prototype: CMRodMetal1
         amount: 2
       - !type:DeleteEntity {}
-        steps:
-        - tool: Cutting
+      steps:
+      - tool: Cutting

@@ -32,8 +32,8 @@
           sprite: "Objects/Misc/module.rsi"
           state: "door_electronics"
         doAfter: 4
-    
-    - to: glassAssembly
+
+    - to: glassAssembly 
       steps:
       - material: CMGlass
         amount: 5
@@ -47,7 +47,7 @@
       - !type:DeleteEntity {}
       steps:
       - tool: Prying
-          doAfter: 2
+        doAfter: 2
 
   - node: electronics
     entity: CMAirlockAssembly
@@ -208,7 +208,7 @@
     doNotReplaceInheritingEntities: true
     actions:
     - !type:SetWiresPanelSecurity
-        wiresAccessible: true
+      wiresAccessible: true
     - !type:AppearanceChange
     edges:
     - to: glassAssembly

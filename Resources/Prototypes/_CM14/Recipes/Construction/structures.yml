@@ -251,6 +251,7 @@
   targetNode: Catwalk
   category: construction-category-cm-structures
   description: Just like a lattice. Except it looks better.
+  placementMode: SnapgridCenter
   icon:
     sprite: _CM14/Structures/catwalk.rsi
     state: catwalk

@@ -56,8 +56,8 @@
         damage: 200
       behaviors:
       - !type:DoActsBehavior
-            acts: [ "Destruction" ]
-      - trigger:
+        acts: [ "Destruction" ]
+    - trigger:
         !type:DamageTrigger
         damage: 50
       behaviors:

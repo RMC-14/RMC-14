@@ -19,7 +19,7 @@
           electronics: { state: as_1 }
           wired: { state: as_2 }
           airlock: { state: as_3 }
-          glassAssembly { state: as_g0 }
-          glassElectronics { state: as_g1 }
-          glassWired { state: as_g2 }
-          glassAirlock { state: as_g3 }
+          glassAssembly: { state: as_g0 }
+          glassElectronics: { state: as_g1 }
+          glassWired: { state: as_g2 }
+          glassAirlock: { state: as_g3 }
