@@ -3,3 +3,5 @@
   id: CMBaseWeaponGun
   components:
   - type: GunUnskilledPenalty
+  - type: Clothing
+    quickEquip: false

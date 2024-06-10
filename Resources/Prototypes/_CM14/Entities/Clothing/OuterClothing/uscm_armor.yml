@@ -20,9 +20,8 @@
     spriteLayer: light
   - type: PointLight
     enabled: false
-    radius: 3
-    energy: 2
-    mask: /Textures/Effects/LightMasks/cone.png
+    radius: 4
+    softness: 5
     autoRot: true
   - type: HandheldLight
     addPrefix: true
@@ -79,6 +78,12 @@
     sprintModifier: 0.9
   - type: CMHardArmor
   - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - CMMagazinePistol
+      - CMMagazineRifle
+      - CMMagazineSniper
 
 - type: entity
   parent: CMArmorM3Medium

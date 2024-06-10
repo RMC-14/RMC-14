@@ -6,15 +6,12 @@
   suffix: Requisitions
   components:
   - type: Sprite
+    sprite: _CM14/Structures/Machines/asrs_console.rsi
     layers:
-    - map: [ "computerLayerBody" ]
-      state: computer
-    - map: [ "computerLayerKeyboard" ]
-      state: generic_keyboard
-    - map: [ "computerLayerScreen" ]
-      state: request
-    - map: [ "computerLayerKeys" ]
-      state: tech_key
+    - map: ["computerLayerBody"]
+      state: off
+    - map: ["computerLayerScreen"]
+      state: on
   - type: CargoOrderConsole
   - type: ActivatableUI
     key: enum.RequisitionsUIKey.Key

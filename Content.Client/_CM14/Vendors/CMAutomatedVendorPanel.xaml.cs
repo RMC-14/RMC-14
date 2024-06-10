@@ -8,15 +8,21 @@ namespace Content.Client._CM14.Vendors;
 [GenerateTypedNameReferences]
 public sealed partial class CMAutomatedVendorPanel : Control
 {
-    private static readonly Color Color = Color.FromHex("#141F2F");
-    private static readonly Color HoveredColor = Color.FromHex("#4972A1");
+    public static readonly Color DefaultColor = Color.FromHex("#141F2F");
+    public static readonly Color DefaultBorderColor = Color.FromHex("#4972A1");
+    public static readonly Color DefaultHoveredColor = Color.FromHex("#4972A1");
     private static readonly Color DisabledColor = Color.FromHex("#999999");
+
+    public Color Color = DefaultColor;
+    public Color BorderColor = DefaultBorderColor;
+    public Color HoveredColor = DefaultHoveredColor;
 
     public CMAutomatedVendorPanel()
     {
         RobustXamlLoader.Load(this);
 
         Button.OnDrawModeChanged += UpdateColor;
+        UpdateColor();
     }
 
     private void UpdateColor()
@@ -26,5 +32,13 @@ public sealed partial class CMAutomatedVendorPanel : Control
             panel.BackgroundColor = DisabledColor;
         else
             panel.BackgroundColor = Button.IsHovered ? HoveredColor : Color;
+
+        panel.BorderColor = BorderColor;
+    }
+
+    protected override void EnteredTree()
+    {
+        base.EnteredTree();
+        UpdateColor();
     }
 }

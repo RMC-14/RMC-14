@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared.Armor;
 using Content.Shared.Clothing.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands;
@@ -87,8 +86,17 @@ public abstract partial class InventorySystem
         // attempt to perform some interaction
         if (held != null && itemUid != null)
         {
-            _interactionSystem.InteractUsing(actor, held.Value, itemUid.Value,
-                Transform(itemUid.Value).Coordinates);
+            if (_webbing.HasWebbing(itemUid.Value, out var webbing))
+            {
+                _interactionSystem.InteractUsing(actor, held.Value, webbing,
+                    Transform(itemUid.Value).Coordinates);
+            }
+            else
+            {
+                _interactionSystem.InteractUsing(actor, held.Value, itemUid.Value,
+                    Transform(itemUid.Value).Coordinates);
+            }
+
             return;
         }
 

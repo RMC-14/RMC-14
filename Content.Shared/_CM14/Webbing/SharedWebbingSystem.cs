@@ -32,7 +32,7 @@ public abstract class SharedWebbingSystem : EntitySystem
 
     private void OnWebbingClothingGetVerbs(Entity<WebbingClothingComponent> clothing, ref GetVerbsEvent<InteractionVerb> args)
     {
-        if (!HasWebbing(clothing, out _))
+        if (!HasWebbing((clothing, clothing), out _))
             return;
 
         var user = args.User;
@@ -50,13 +50,16 @@ public abstract class SharedWebbingSystem : EntitySystem
 
     public void OpenStorage(Entity<WebbingClothingComponent> clothing, EntityUid user)
     {
-        if (HasWebbing(clothing, out var webbing))
+        if (HasWebbing((clothing, clothing), out var webbing))
             _storage.OpenStorageUI(webbing, user);
     }
 
-    private bool HasWebbing(Entity<WebbingClothingComponent> clothing, out Entity<WebbingComponent> webbing)
+    public bool HasWebbing(Entity<WebbingClothingComponent?> clothing, out Entity<WebbingComponent> webbing)
     {
         webbing = default;
+        if (!Resolve(clothing, ref clothing.Comp, false))
+            return false;
+
         if (!_container.TryGetContainer(clothing, clothing.Comp.Container, out var container) ||
             container.Count <= 0)
         {
@@ -73,12 +76,34 @@ public abstract class SharedWebbingSystem : EntitySystem
         return true;
     }
 
+    public bool Fits(EntityUid? clothing, EntityUid held)
+    {
+        if (!TryComp(clothing, out WebbingClothingComponent? clothingComp))
+            return false;
+
+        // Attach webbing
+        if (clothingComp.Webbing == null &&
+            HasComp<WebbingComponent>(held))
+        {
+            return true;
+        }
+
+        // Insert into webbing
+        if (clothingComp.Webbing is { } webbing &&
+            _storage.CanInsert(webbing, held, out _))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     private void RemoveWebbing(Entity<WebbingClothingComponent> clothing, EntityUid user)
     {
         if (TerminatingOrDeleted(clothing) || !clothing.Comp.Running)
             return;
 
-        if (!HasWebbing(clothing, out var webbing))
+        if (!HasWebbing((clothing, clothing), out var webbing))
             return;
 
         _container.TryRemoveFromContainer(webbing);
