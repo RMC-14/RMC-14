@@ -11,7 +11,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._CM14.Xenos.Fling;
 
-public abstract class SharedXenoFlingSystem : EntitySystem
+public sealed class SharedXenoFlingSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;

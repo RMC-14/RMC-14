@@ -7,7 +7,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._CM14.Xenos.Gut;
 
-public abstract class SharedXenoGutSystem : EntitySystem
+public sealed class SharedXenoGutSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedBodySystem _bodySystem = default!;

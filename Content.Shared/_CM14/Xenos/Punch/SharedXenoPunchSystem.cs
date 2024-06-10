@@ -12,7 +12,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Xenos.Punch;
 
-public abstract class SharedXenoPunchSystem : EntitySystem
+public sealed class SharedXenoPunchSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
