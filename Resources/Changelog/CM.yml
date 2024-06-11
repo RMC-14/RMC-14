@@ -1030,5 +1030,12 @@
   id: 135
   time: '2024-06-11T22:26:43.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2394
+- author: Sigil
+  changes:
+  - message: Hypersleep pods now function as cryo pods.
+    type: Add
+  id: 136
+  time: '2024-06-11T22:36:16.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2405
 Name: CM
 Order: -1
