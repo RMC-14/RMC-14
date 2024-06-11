@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/106c92cdf232ebc12c9d7a2feb23956c6755496f/icons/obj/janitor.dmi, https://github.com/cmss13-devs/cmss13/blob/ca94d2e8715b73103fa9f213be53d343359b4107/icons/obj/items/reagentfillings.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "janibucket"
+    },
+    {
+      "name": "lid_janibucket"
+    },
+    {
+      "name": "janibucket-1"
+    },
+    {
+      "name": "janibucket-2"
+    },
+    {
+      "name": "janibucket-3"
+    }
+  ]
+}
