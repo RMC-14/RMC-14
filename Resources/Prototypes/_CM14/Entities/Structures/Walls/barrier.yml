@@ -22,19 +22,10 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 600
+        damage: 100
       behaviors:
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 300
-      behaviors:
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          CMSheetMetal:
-            min: 5
-            max: 5
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
