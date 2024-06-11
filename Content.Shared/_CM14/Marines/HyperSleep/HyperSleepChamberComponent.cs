@@ -8,13 +8,7 @@ namespace Content.Shared._CM14.Marines.HyperSleep;
 public sealed partial class HyperSleepChamberComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public string ContainerId = "cm_hyper_sleep";
-
-    [DataField, AutoNetworkedField]
-    public string EmptyState = "open";
-
-    [DataField, AutoNetworkedField]
-    public string FilledState = "closed";
+    public string ContainerId = "cm-hypersleep";
 }
 
 [Serializable, NetSerializable]
