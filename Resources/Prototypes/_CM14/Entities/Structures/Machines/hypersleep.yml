@@ -32,16 +32,16 @@
         layer:
         - MachineLayer
   - type: DragInsertContainer
-    containerId: cm_hyper_sleep
+    containerId: cm-hypersleep
   - type: ExitContainerOnMove
-    containerId: cm_hyper_sleep
+    containerId: cm-hypersleep
   - type: ContainerContainer
     containers:
-      cm_hyper_sleep:
+      cm-hypersleep:
         !type:ContainerSlot
   - type: HyperSleepChamber
   - type: Cryostorage
-    containerId: cm_hyper_sleep
+    containerId: cm-hypersleep
   - type: Appearance
   - type: GenericVisualizer
     visuals:
