@@ -42,7 +42,7 @@ public abstract class SharedPumpActionSystem : EntitySystem
     protected virtual void OnExamined(Entity<PumpActionComponent> ent, ref ExaminedEvent args)
     {
         // TODO CM14 the server has no idea what this keybind is supposed to be for the client
-        args.PushMarkup("[bold]Press your [color=cyan]unique action[/color] keybind (Spacebar by default) to pump before shooting.[/bold]", 1);
+        args.PushMarkup(Loc.GetString("cm-gun-pump-examine"), 1);
     }
 
     private void OnGetVerbs(Entity<PumpActionComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
@@ -80,7 +80,7 @@ public abstract class SharedPumpActionSystem : EntitySystem
 
             if (ammo.Count <= 0)
             {
-                _popup.PopupClient("You don't have any ammo left!", user, user);
+                _popup.PopupClient(Loc.GetString("cm-gun-no-ammo-message"), user, user);
                 return;
             }
 
