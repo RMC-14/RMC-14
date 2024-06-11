@@ -25,7 +25,7 @@ public abstract class SharedPumpActionSystem : EntitySystem
         SubscribeLocalEvent<PumpActionComponent, GunShotEvent>(OnGunShot);
 
         CommandBinds.Builder
-            .Bind(CMKeyFunctions.CMPumpShotgun,
+            .Bind(CMKeyFunctions.CMUniqueAction,
                 InputCmdHandler.FromDelegate(session =>
                 {
                     if (session?.AttachedEntity is { } entity)
@@ -42,7 +42,7 @@ public abstract class SharedPumpActionSystem : EntitySystem
     protected virtual void OnExamined(Entity<PumpActionComponent> ent, ref ExaminedEvent args)
     {
         // TODO CM14 the server has no idea what this keybind is supposed to be for the client
-        args.PushMarkup("[bold]Press [color=cyan]Space[/color] to pump before shooting.[/bold]", 1);
+        args.PushMarkup("[bold]Press your [color=cyan]unique action[/color] keybind (Spacebar by default) to pump before shooting.[/bold]", 1);
     }
 
     private void OnGetVerbs(Entity<PumpActionComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
