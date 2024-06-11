@@ -17,7 +17,7 @@ public sealed class PumpActionSystem : SharedPumpActionSystem
         if (!_input.TryGetKeyBinding(CMKeyFunctions.CMUniqueAction, out var bind))
             return;
 
-        args.PushMarkup($"[bold]Press your [color=cyan]unique action[/color] keybind to pump before shooting.[/bold]", 1);
+        args.PushMarkup($"[bold]Press your [color=cyan]unique action[/color] keybind (Spacebar by default) to pump before shooting.[/bold]", 1);
     }
 
     protected override void OnAttemptShoot(Entity<PumpActionComponent> ent, ref AttemptShootEvent args)
