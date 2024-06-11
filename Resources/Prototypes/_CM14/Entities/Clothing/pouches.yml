@@ -76,7 +76,7 @@
           Closed: { visible: true }
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchOpenClosed]
+  parent: [CMPouchOpenClosed, CMPouchStorage]
   id: CMPouchGeneral
   name: light general pouch
   description: A general-purpose pouch used to carry a small item, or two tiny ones.
@@ -120,7 +120,7 @@
 # m39ap pouch
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchOpenClosed]
+  parent: [CMPouchOpenClosed]
   id: CMPouchBayonet
   name: bayonet sheath
   description: Knife to meet you!
@@ -130,15 +130,18 @@
   - type: ItemSlots
   - type: CMHolster
   - type: CMItemSlots
+    cooldown: 1
+    cooldownPopup: You need to wait before drawing another knife!
     count: 5
     slot:
       name: Knife
       whitelist:
         tags:
         - Knife
+        - ThrowingKnife
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchOpenClosed]
+  parent: [CMPouchOpenClosed, CMPouchStorage]
   id: CMPouchSurvival
   name: survival pouch
   description: A pouch given to colonists in the event of an emergency.
@@ -182,7 +185,7 @@
       - Welder
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchOpenClosed]
+  parent: [CMPouchOpenClosed, CMPouchStorage]
   id: CMPouchFirstAid
   name: first-aid pouch
   description: It contains, by default, autoinjectors. But it may also hold ointments, bandages, and pill packets.
@@ -247,7 +250,7 @@
   - type: CMItemSlots
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchClosed]
+  parent: [CMPouchClosed, CMPouchStorage]
   id: CMPouchCommand
   name: command pouch
   description: A specialized, sturdy pouch issued to Commanding Officers. Can hold their sidearm, the command tablet and a set of binoculars.
@@ -264,7 +267,7 @@
   - type: FixedItemSizeStorage
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchOpenClosed]
+  parent: [CMPouchOpenClosed, CMPouchStorage]
   id: CMPouchMagazine
   name: magazine pouch
   description: It can carry magazines.
@@ -359,7 +362,7 @@
 #    - 0,0,13,1 #7 slots
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchOpenClosed]
+  parent: [CMPouchOpenClosed, CMPouchStorage]
   id: CMPouchExplosive
   name: explosive pouch
   description: It can carry grenades, plastic explosives, mine boxes, and other explosives.
@@ -376,7 +379,7 @@
   - type: FixedItemSizeStorage
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchOpenClosed]
+  parent: [CMPouchOpenClosed, CMPouchStorage]
   id: CMPouchMedical
   name: medical pouch
   description: It can carry small medical supplies.
@@ -451,7 +454,7 @@
   description: A heavy pouch containing everything one needs to get themselves back on their feet. Quite the selection. Somehow, the whole pouch manages to look classified, you feel like you're going to get court-marshalled for even looking at it.
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchOpenClosed]
+  parent: [CMPouchOpenClosed, CMPouchStorage]
   id: CMPouchFirstResponder
   name: first responder pouch
   description: A pouch designed for carrying supplies to assist medical personnel and quickly respond to injuries on the battlefield without immediately treating them. Can hold supplies such as roller beds, stasis bags, and health analysers.
@@ -482,7 +485,7 @@
   - type: FixedItemSizeStorage
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchOpenClosed]
+  parent: [CMPouchOpenClosed, CMPouchStorage]
   id: CMPouchVial
   name: vial pouch
   description: A pouch for carrying glass vials.
@@ -496,9 +499,10 @@
     whitelist:
       components:
       - FitsInDispenser
+  - type: FixedItemSizeStorage
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchOpenClosed]
+  parent: [CMPouchOpenClosed, CMPouchStorage]
   id: CMPouchChem
   name: chemist pouch
   description: A pouch for carrying glass beakers.
@@ -515,10 +519,8 @@
       - Bottle
   - type: FixedItemSizeStorage
 
-# TODO CM14 vial pouch
-
 - type: entity
-  parent: [CMPouchStorage, CMPouchOpenClosed]
+  parent: [CMPouchOpenClosed, CMPouchStorage]
   id: CMPouchAutoinjector
   name: auto-injector pouch
   description: A pouch specifically for auto-injectors.
@@ -534,7 +536,7 @@
   - type: FixedItemSizeStorage
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchOpenClosed]
+  parent: [CMPouchOpenClosed, CMPouchStorage]
   id: CMPouchSyringe
   name: syringe pouch
   description: It can carry syringes.
@@ -550,7 +552,7 @@
   - type: FixedItemSizeStorage
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchOpenClosed]
+  parent: [CMPouchOpenClosed, CMPouchStorage]
   id: CMPouchMedkit
   name: medical kit pouch
   description: It's specifically made to hold medical items.
@@ -589,7 +591,7 @@
   - type: FixedItemSizeStorage
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchOpenClosed]
+  parent: [CMPouchOpenClosed, CMPouchStorage]
   id: CMPouchDocument
   name: large document pouch
   description: It can contain papers, folders, disks, technical manuals, and clipboards.
@@ -637,7 +639,7 @@
         - Flare
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchOpenClosed]
+  parent: [CMPouchOpenClosed, CMPouchStorage]
   id: CMPouchRadio
   name: radio pouch
   description: It can contain two handheld radios.
@@ -653,7 +655,7 @@
   - type: FixedItemSizeStorage
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchOpenClosed]
+  parent: [CMPouchOpenClosed, CMPouchStorage]
   id: CMPouchElectronics
   name: electronics pouch
   description: It is designed to hold most electronics, power cells and circuit boards.
@@ -674,7 +676,7 @@
   - type: FixedItemSizeStorage
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchOpenClosed]
+  parent: [CMPouchOpenClosed, CMPouchStorage]
   id: CMPouchConstruction
   name: construction pouch
   description: It's designed to hold construction materials - glass/metal sheets, metal rods, barbed wire, cable coil, and empty sandbags. It also has two hooks for an entrenching tool and light replacer.
@@ -699,7 +701,7 @@
   - type: FixedItemSizeStorage
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchOpenClosed]
+  parent: [CMPouchOpenClosed, CMPouchStorage]
   id: CMPouchTools
   name: tools pouch
   description: It's designed to hold maintenance tools - screwdriver, wrench, cable coil, etc. It also has a hook for an entrenching tool or light replacer.
@@ -742,7 +744,7 @@
     - 0,0,15,1 #8 slots
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchClosed]
+  parent: [CMPouchClosed, CMPouchStorage]
   id: CMPouchSling
   name: sling strap # TODO CM14 implement this
   description: Keeps a single item attached to a strap.
