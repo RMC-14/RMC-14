@@ -159,7 +159,7 @@ public sealed class CMStorageSystem : EntitySystem
     {
         if (!_skills.HasSkills(user, in storage.Comp.Skills))
         {
-            _popup.PopupClient("It must have some kind of ID lock...", storage, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("cm-storage-unskilled"), storage, user, PopupType.SmallCaution);
             return true;
         }
 

@@ -184,13 +184,12 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
     private bool CanHugPopup(Entity<XenoHuggerComponent> hugger, EntityUid victim, EntityUid user, bool popup = true, bool force = false)
     {
-        var victimIdentity = Identity.Name(victim, EntityManager, hugger);
         if (!HasComp<HuggableComponent>(victim) ||
             HasComp<HuggerSpentComponent>(hugger) ||
             HasComp<VictimHuggedComponent>(victim))
         {
             if (popup)
-                _popup.PopupClient($"You can't facehug {victimIdentity}!", victim, user, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("cm-xeno-failed-cant-facehug", ("target", victim)), victim, user, PopupType.MediumCaution);
 
             return false;
         }
@@ -200,7 +199,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
             !_standing.IsDown(victim, standing))
         {
             if (popup)
-                _popup.PopupClient($"You can't reach {victimIdentity}, they need to be lying down!", victim, user, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("cm-xeno-failed-cant-reach", ("target", victim)), victim, user, PopupType.MediumCaution);
 
             return false;
         }
@@ -208,7 +207,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         if (_mobState.IsDead(victim))
         {
             if (popup)
-                _popup.PopupClient("You can't facehug the dead!", victim, user, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("cm-xeno-failed-target-dead"), victim, user, PopupType.MediumCaution);
 
             return false;
         }
@@ -235,8 +234,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
             if (any && _net.IsServer)
             {
-                var name = Identity.Name(victim, EntityManager);
-                _popup.PopupEntity($"The facehugger smashes against {name}'s mask and rips it off!", victim);
+                _popup.PopupEntity(Loc.GetString("cm-xeno-facehug-success", ("target", victim)), victim);
             }
         }
 

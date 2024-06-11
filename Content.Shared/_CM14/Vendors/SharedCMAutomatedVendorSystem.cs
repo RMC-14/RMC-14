@@ -61,7 +61,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                     TryComp(item, out IdCardOwnerComponent? owner) &&
                     owner.Id != args.User)
                 {
-                    _popup.PopupClient("Wrong ID card owner detected.", vendor, args.User);
+                    _popup.PopupClient(Loc.GetString("cm-vending-machine-wrong-card"), vendor, args.User);
                     args.Cancel();
                     return;
                 }
@@ -74,7 +74,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (!_mind.TryGetMind(args.User, out var mindId, out _) ||
             !_job.MindHasJobWithId(mindId, job.Id))
         {
-            _popup.PopupClient("Access denied.", vendor, args.User);
+            _popup.PopupClient(Loc.GetString("cm-vending-machine-access-denied"), vendor, args.User);
             args.Cancel();
         }
     }

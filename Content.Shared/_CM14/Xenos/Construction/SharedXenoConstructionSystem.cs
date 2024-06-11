@@ -104,7 +104,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             _tile.TryGetDefinition(tileRef.Tile.TypeId, out var tile) &&
             tile is ContentTileDefinition { WeedsSpreadable: false })
         {
-            _popup.PopupClient("You can't plant weeds here!", xeno.Owner, xeno.Owner);
+            _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-weeds"), xeno.Owner, xeno.Owner);
             return;
         }
 
@@ -419,21 +419,21 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     {
         if (checkStructureSelected && xeno.Comp.BuildChoice == null)
         {
-            _popup.PopupClient("You need to select a structure to build first! Use the \"Choose Resin Structure\" action.", target, xeno);
+            _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-select-structure"), target, xeno);
             return false;
         }
 
         if (_transform.GetGrid(target) is not { } gridId ||
             !TryComp(gridId, out MapGridComponent? grid))
         {
-            _popup.PopupClient("You can't build there!", target, xeno);
+            _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
             return false;
         }
 
         target = target.SnapToGrid(EntityManager, _map);
         if (checkWeeds && !_xenoWeeds.IsOnWeeds((gridId, grid), target))
         {
-            _popup.PopupClient("You can only shape on weeds. Find some resin before you start building!", target, xeno);
+            _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-need-weeds"), target, xeno);
             return false;
         }
 
@@ -442,7 +442,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         if (!TileSolidAndNotBlocked(target))
         {
-            _popup.PopupClient("You can't build there!", target, xeno);
+            _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
             return false;
         }
 

@@ -247,7 +247,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
             }
         }
 
-        _popup.PopupClient("You are unable to equip that.", user, user, PopupType.SmallCaution);
+        _popup.PopupClient(Loc.GetString("cm-inventory-unable-equip"), user, user, PopupType.SmallCaution);
     }
 
     private void Unholster(EntityUid user, int startIndex, CMHolsterChoose choose)

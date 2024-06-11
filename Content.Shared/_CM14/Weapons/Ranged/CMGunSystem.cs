@@ -115,8 +115,7 @@ public sealed class CMGunSystem : EntitySystem
             return;
 
         args.Cancelled = true;
-        var gun = Loc.GetString("zzzz-the", ("ent", ent.Owner));
-        _popup.PopupClient($"You don't seem to know how to use {gun}", args.User, args.User);
+        _popup.PopupClient(Loc.GetString("cm-gun-unskilled", ("gun", ent.Owner)), args.User, args.User);
     }
 
     private void OnGunUnskilledPenaltyEquippedHand(Entity<GunUnskilledPenaltyComponent> ent, ref GotEquippedHandEvent args)

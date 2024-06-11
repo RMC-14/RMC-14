@@ -43,42 +43,34 @@ public sealed class TackleSystem : EntitySystem
 
         if (recently.Current < tackle.Threshold)
         {
-            var targetName = Identity.Name(target, EntityManager, args.User);
-            _popup.PopupClient($"You try to tackle {targetName}", args.User, args.User);
+            _popup.PopupClient(Loc.GetString("cm-tackle-try-self", ("target", target.Owner)), args.User, args.User);
 
             foreach (var session in Filter.PvsExcept(args.User).Recipients)
             {
                 if (session.AttachedEntity is not { } recipient)
                     continue;
 
-                var userName = Identity.Name(args.User, EntityManager, recipient);
-                targetName = Identity.Name(target, EntityManager, recipient);
-
                 if (recipient == target.Owner)
-                    _popup.PopupEntity($"{userName} tries to tackle you", args.User, recipient, PopupType.MediumCaution);
+                    _popup.PopupEntity(Loc.GetString("cm-tackle-try-target", ("user", args.User)), args.User, recipient, PopupType.MediumCaution);
                 else
-                    _popup.PopupEntity($"{userName} tries to tackle {targetName}", args.User, recipient);
+                    _popup.PopupEntity(Loc.GetString("cm-tackle-try-observer", ("user", args.User), ("target", target.Owner)), args.User, recipient);
             }
 
             return;
         }
         else
         {
-            var targetName = Identity.Name(target, EntityManager, args.User);
-            _popup.PopupClient($"You tackle down {targetName}!", args.User, args.User);
+            _popup.PopupClient(Loc.GetString("cm-tackle-success-self", ("target", args.User)), args.User, args.User);
 
             foreach (var session in Filter.PvsExcept(args.User).Recipients)
             {
                 if (session.AttachedEntity is not { } recipient)
                     continue;
 
-                var userName = Identity.Name(args.User, EntityManager, recipient);
-                targetName = Identity.Name(target, EntityManager, recipient);
-
                 if (recipient == target.Owner)
-                    _popup.PopupEntity($"{userName} tackled you down!", args.User, recipient, PopupType.MediumCaution);
+                    _popup.PopupEntity(Loc.GetString("cm-tackle-success-target", ("user", args.User)), args.User, recipient, PopupType.MediumCaution);
                 else
-                    _popup.PopupEntity($"{userName} tackles down {targetName}!", args.User, recipient);
+                    _popup.PopupEntity(Loc.GetString("cm-tackle-success-observer", ("user", args.User), ("target", target.Owner)), args.User, recipient);
             }
         }
 

@@ -168,24 +168,20 @@ public sealed class XenoNestSystem : EntitySystem
         _standingState.Stand(victim, force: true);
 
         // TODO CM14 make a method to do this
-        var victimName = Identity.Name(victim, EntityManager, args.User);
-        _popup.PopupClient($"You secrete a thick, vile resin, securing {victimName} into the alien nest!", args.User, args.User);
+        _popup.PopupClient(Loc.GetString("cm-xeno-nest-securing-self", ("target", victim)), args.User, args.User);
 
         foreach (var session in Filter.PvsExcept(args.User).Recipients)
         {
             if (session.AttachedEntity is not { } recipient)
                 continue;
 
-            var userName = Identity.Name(args.User, EntityManager, recipient);
-            victimName = Identity.Name(victim, EntityManager, recipient);
-
             if (recipient == victim)
             {
-                _popup.PopupEntity($"{userName} secretes a thick, vile resin, securing you into the alien nest!", args.User, recipient, PopupType.MediumCaution);
+                _popup.PopupEntity(Loc.GetString("cm-xeno-nest-securing-target", ("user", args.User)), args.User, recipient, PopupType.MediumCaution);
             }
             else
             {
-                _popup.PopupEntity($"{userName} secretes a thick, vile resin, securing {victimName} into the alien nest!", args.User, recipient);
+                _popup.PopupEntity(Loc.GetString("cm-xeno-nest-securing-observer", ("user", args.User), ("target", victim)), args.User, recipient);
             }
         }
     }
@@ -223,24 +219,20 @@ public sealed class XenoNestSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfter);
 
         // TODO CM14 make a method to do this
-        var victimName = Identity.Name(victim, EntityManager, user);
-        _popup.PopupClient($"You pin {victimName} into the alien nest, preparing the securing resin.", user, user);
+        _popup.PopupClient(Loc.GetString("cm-xeno-nest-pin-self", ("target", victim)), user, user);
 
         foreach (var session in Filter.PvsExcept(user).Recipients)
         {
             if (session.AttachedEntity is not { } recipient)
                 continue;
 
-            var userName = Identity.Name(user, EntityManager, recipient);
-            victimName = Identity.Name(victim, EntityManager, recipient);
-
             if (recipient == victim)
             {
-                _popup.PopupEntity($"{userName} pins you into the alien nest, preparing the securing resin.", user, recipient, PopupType.MediumCaution);
+                _popup.PopupEntity(Loc.GetString("cm-xeno-nest-pin-target", ("user", user)), user, recipient, PopupType.MediumCaution);
             }
             else
             {
-                _popup.PopupEntity($"{userName} pins {victimName} into the alien nest, preparing the securing resin.", user, recipient);
+                _popup.PopupEntity(Loc.GetString("cm-xeno-nest-pin-observer", ("user", user), ("target", victim)), user, recipient);
             }
         }
     }
@@ -259,20 +251,17 @@ public sealed class XenoNestSystem : EntitySystem
     {
         if (!HasComp<XenoNestableComponent>(victim))
         {
-            var victimName = Identity.Name(victim, EntityManager, user);
 
             if (!silent)
-                _popup.PopupClient($"{victimName} can't be put into a nest!", surface, user);
+                _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed", ("target", victim)), surface, user);
 
             return false;
         }
 
         if (!_standingState.IsDown(victim))
         {
-            var victimName = Identity.Name(victim, EntityManager, user);
-
             if (!silent)
-                _popup.PopupClient($"{victimName} is resisting, ground them!", victim, user, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed-target-resisting", ("target", victim)), victim, user, PopupType.MediumCaution);
 
             return false;
         }
@@ -280,7 +269,7 @@ public sealed class XenoNestSystem : EntitySystem
         if (!TryComp(surface, out XenoNestSurfaceComponent? surfaceComp))
         {
             if (!silent)
-                _popup.PopupClient("You can't create a nest there!", surface, user);
+                _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed-cant-there"), surface, user);
 
             return false;
         }
@@ -288,7 +277,7 @@ public sealed class XenoNestSystem : EntitySystem
         if (surfaceComp.Nests.ContainsKey(direction))
         {
             if (!silent)
-                _popup.PopupClient("There is already someone nested there!", surface, user);
+                _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed-cant-already-there"), surface, user);
 
             return false;
         }
