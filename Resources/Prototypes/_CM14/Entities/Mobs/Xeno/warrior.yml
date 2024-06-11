@@ -28,7 +28,7 @@
     - ActionXenoTailStab
     - ActionXenoHide
     - ActionXenoPunch
-    #    - ActionXenoLunge
+    - ActionXenoLunge
     - ActionXenoFling
     tier: 2
     hudOffset: 0,0.25
@@ -39,6 +39,7 @@
       types:
         Blunt: 30
   - type: XenoFling
+  - type: XenoLunge
   - type: XenoPlasma
     plasma: 0
     maxPlasma: 0

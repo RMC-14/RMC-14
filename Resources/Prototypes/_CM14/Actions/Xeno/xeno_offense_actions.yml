@@ -211,6 +211,21 @@
     useDelay: 7
 
 - type: entity
+  id: ActionXenoLunge
+  parent: ActionXenoBase
+  name: Lunge (10)
+  description: Lunges the warrior towards the targeted marine and puts them into a choke hold (like grabbing them).
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM14/Actions/xeno_actions.rsi
+      state: lunge
+    event: !type:XenoLungeActionEvent
+    range: 5
+    useDelay: 10
+
+- type: entity
   id: ActionXenoScreech
   parent: ActionXenoBase
   name: Screech (250)
