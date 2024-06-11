@@ -26,7 +26,7 @@
   id: CMGearDoctor
   equipment:
     jumpsuit: CMScrubsBlue
-    back: CMSatchel
+    back: CMSatchelMarine
     shoes: ClothingShoesColorWhite
     id: CMIDCardDoctor
 
@@ -35,7 +35,7 @@
   equipment:
     jumpsuit: CMScrubsBlue
     outerClothing: CMCoatLong
-    back: CMSatchel
+    back: CMSatchelMarine
     gloves: CMHandsLatex
     shoes: ClothingShoesColorWhite
     head: CMHeadCapSurgBlue
