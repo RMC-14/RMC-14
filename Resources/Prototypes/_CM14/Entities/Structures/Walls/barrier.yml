@@ -1,6 +1,8 @@
 - type: entity
   parent: DeployableBarrier
   id: CMDeployableBarrier
+  name: deployable barrier
+  description: A deployable barrier. Swipe your ID card to lock/unlock it.
   components:
   - type: Sprite
     sprite: _CM14/Structures/Walls/barrier.rsi
