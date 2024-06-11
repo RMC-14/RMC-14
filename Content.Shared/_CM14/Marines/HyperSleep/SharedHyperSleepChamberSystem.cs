@@ -17,7 +17,6 @@ public abstract class SharedHyperSleepChamberSystem : EntitySystem
     {
         SubscribeLocalEvent<HyperSleepChamberComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<HyperSleepChamberComponent, EntInsertedIntoContainerMessage>(OnInserted);
-        SubscribeLocalEvent<HyperSleepChamberComponent, EntRemovedFromContainerMessage>(OnRemoved);
 
         SubscribeLocalEvent<InsideHyperSleepChamberComponent, MoveInputEvent>(OnMoveInput);
 
@@ -33,21 +32,6 @@ public abstract class SharedHyperSleepChamberSystem : EntitySystem
     {
         if (!_timing.ApplyingState)
             EnsureComp<InsideHyperSleepChamberComponent>(args.Entity).Chamber = ent;
-
-        if (_containers.TryGetContainer(ent, ent.Comp.ContainerId, out var container) &&
-            container.Count > 0)
-        {
-            ChamberFilled(ent);
-        }
-    }
-
-    private void OnRemoved(Entity<HyperSleepChamberComponent> ent, ref EntRemovedFromContainerMessage args)
-    {
-        if (_containers.TryGetContainer(ent, ent.Comp.ContainerId, out var container) &&
-            container.Count == 0)
-        {
-            ChamberEmptied(ent);
-        }
     }
 
     private void OnMoveInput(Entity<InsideHyperSleepChamberComponent> ent, ref MoveInputEvent args)
@@ -58,7 +42,6 @@ public abstract class SharedHyperSleepChamberSystem : EntitySystem
         if (ent.Comp.Chamber is not { } chamber)
             return;
 
-        _containers.RemoveEntity(chamber, ent);
         RemCompDeferred<InsideHyperSleepChamberComponent>(ent);
 
         var outside = EnsureComp<OutsideHyperSleepChamberComponent>(ent);
@@ -70,14 +53,6 @@ public abstract class SharedHyperSleepChamberSystem : EntitySystem
     {
         if (ent.Comp.Chamber == args.OtherEntity)
             args.Cancelled = true;
-    }
-
-    protected virtual void ChamberFilled(Entity<HyperSleepChamberComponent> chamber)
-    {
-    }
-
-    protected virtual void ChamberEmptied(Entity<HyperSleepChamberComponent> chamber)
-    {
     }
 
     public override void Update(float frameTime)
