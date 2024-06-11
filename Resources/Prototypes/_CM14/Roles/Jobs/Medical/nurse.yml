@@ -26,7 +26,7 @@
   id: CMGearNurse
   equipment:
     jumpsuit: CMScrubsNurse
-    back: CMSatchelMedical
+    back: CMSatchelMarine
     shoes: ClothingShoesColorWhite
     id: CMIDCardNurse
 
@@ -34,7 +34,7 @@
   id: CMGearNurseEquipped
   equipment:
     jumpsuit: CMScrubsNurse
-    back: CMSatchelMedical
+    back: CMSatchelMarine
     gloves: CMHandsLatex
     shoes: ClothingShoesColorWhite
     head: CMHeadCapSurgOrange
