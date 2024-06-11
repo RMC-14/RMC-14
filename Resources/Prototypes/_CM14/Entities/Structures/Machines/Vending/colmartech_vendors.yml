@@ -561,9 +561,9 @@
     #  points: 5
     - name: Pamphlets
       entries: [ ]
-    #- id: CMJTACPamphlet
+    #- id: CMPamphletJTAC
     #  points: 15
-    #- id: CMEngineeringPamphlet
+    #- id: CMPamphletEngineering
     #  points: 15
     - name: Radio Keys
       entries:
@@ -1012,8 +1012,8 @@
     #- id: CMWeldingVisor
     - name: Pàmphlets
       entries: [ ]
-    #- id: CMJTACPamphlet
-    #- id: CMEngineeringPamphlet
+    #- id: CMPamphletJTAC
+    #- id: CMPamphletEngineering
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer
@@ -1173,7 +1173,7 @@
     #  points: 12
     - name: Pamphlets
       entries: [ ]
-    #- id: CMJTACPamphlet
+    #- id: CMPamphletJTAC
     #  points: 15
     - name: Radio Keys
       entries:
@@ -1424,8 +1424,8 @@
     #    CMWeldingVisor: 5P
     - name: Pamphlets
       entries: [ ]
-    #    CMJTACPamphlet: 15P
-    #    CMEngineeringPamphlet: 15P
+    #    CMPamphletJTAC: 15P
+    #    CMPamphletEngineering: 15P
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer
@@ -1670,9 +1670,9 @@
     #  points: 5
     - name: Pamphlets
       entries: [ ]
-    #- id: CMJTACPamphlet
+    #- id: CMPamphletJTAC
     #  points: 15
-    #- id: CMEngineeringPamphlet
+    #- id: CMPamphletEngineering
     #  points: 15
     - name: Radio Keys
       entries:
