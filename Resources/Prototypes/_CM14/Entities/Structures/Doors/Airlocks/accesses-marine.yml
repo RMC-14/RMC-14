@@ -52,6 +52,15 @@
   - type: AccessReader
     access: [["CMAccessSmartPrep"]]
 
+- type: entity
+  parent: CMAirlockPrep
+  id: CMAirlockPrepFTL
+  name: squad fireteam leader preparations
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessFTLPrep"]]
+
 #Alpha
 - type: entity
   parent: CMAirlockPrepAlpha
@@ -121,7 +130,7 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessAlpha", "CMAccessSmartPrep"]]
+    access: [["CMAccessAlpha", "CMAccessFTLPrep"]]
 
 # Bravo
 - type: entity
@@ -192,7 +201,7 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessBravo", "CMAccessSmartPrep"]]
+    access: [["CMAccessBravo", "CMAccessFTLPrep"]]
 
 # Charlie
 - type: entity
@@ -263,7 +272,7 @@
   suffix: Locked
   components:
   - type: AccessReader
-    access: [["CMAccessDelta", "CMAccessFTLPrep"]]
+    access: [["CMAccessCharlie", "CMAccessFTLPrep"]]
 
 # Delta
 - type: entity
