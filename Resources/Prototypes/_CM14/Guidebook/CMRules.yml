@@ -1,0 +1,224 @@
+﻿- type: guideEntry
+  parent: CM
+  id: CMOverview
+  name: cm-guide-entry-rules
+  priority: -1
+  text: "/ServerInfo/Guidebook/_CM14/Rules/Overview.xml"
+  ruleEntry: true
+#  children:
+#  - CMBanTypes
+#  - CMBanDurations
+#  - CMZeroTolerance
+#  - CMLanguage
+#  - CMMultikey
+#  - CMRulesEscalation
+#  - CMMetaknowledge
+#  - CMKindness
+#  - CMMetagrudging
+#  - CMMutinies
+#  - CMRoleRolling
+#  - CMCommandRoles
+#  - CMMarineLaw
+#  - CMHigherStandards
+#  - CMLethalForce
+#  - CMLethalForceConsequences
+#  - CMProtectDetainees
+#  - CMGeneralRoleplayStandards
+#  - CMUSCMRoleplayStandards
+#  - CMUSCMDeployment
+#  - CMCommandRoleplay
+#  - CMXenoRoleplay
+#  - CMSurvivorRoleplay
+#  - CMHostileFactionRoleplay
+
+- type: guideEntry
+  parent: CM
+  id: CMBanTypes
+  name: cm-guide-entry-rules-ban-types
+  priority: 1
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/CMBanTypes.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMBanDurations
+  name: cm-guide-entry-rules-ban-durations
+  priority: 2
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/CMBanDurations.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMZeroTolerance
+  name: cm-guide-entry-rules-zero-tolerance
+  priority: 3
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/ZeroTolerance.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMLanguage
+  name: cm-guide-entry-rules-language
+  priority: 4
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/Core/CMLanguage.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMMultikey
+  name: cm-guide-entry-rules-multikey
+  priority: 5
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/Core/CMMultikey.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMRulesEscalation
+  name: cm-guide-entry-rules-escalation
+  priority: 6
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/Core/CMRulesEscalation.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMMetaknowledge
+  name: cm-guide-entry-rules-metaknowledge
+  priority: 7
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/Core/CMMetaknowledge.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMKindness
+  name: cm-guide-entry-rules-kindness
+  priority: 8
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/Core/CMKindness.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMMetagrudging
+  name: cm-guide-entry-rules-metagrudging
+  priority: 9
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/Core/CMMetagrudging.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMMutinies
+  name: cm-guide-entry-rules-mutinies
+  priority: 10
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/Mutiny/CMMutinies.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMRoleRolling
+  name: cm-guide-entry-rules-role-rolling
+  priority: 11
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/Core/CMRoleRolling.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMCommandRoles
+  name: cm-guide-entry-rules-command-roles
+  priority: 12
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/Core/CMCommandRoles.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMMarineLaw
+  name: cm-guide-entry-rules-marine-law
+  priority: 13
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/MilitaryCommand/CMMarineLaw.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMHigherStandards
+  name: cm-guide-entry-rules-higher-standards
+  priority: 14
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/MilitaryCommand/CMHigherStandards.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMLethalForce
+  name: cm-guide-entry-rules-lethal-force
+  priority: 15
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/MilitaryCommand/CMLethalForce.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMLethalForceConsequences
+  name: cm-guide-entry-rules-lethal-force-consequences
+  priority: 16
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/MilitaryCommand/CMLethalForceConsequences.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMProtectDetainees
+  name: cm-guide-entry-rules-protect-detainees
+  priority: 17
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/MilitaryCommand/CMProtectDetainees.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMGeneralRoleplayStandards
+  name: cm-guide-entry-rules-general-roleplay-standards
+  priority: 18
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/Roleplay/CMGeneralRoleplayStandards.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMUSCMRoleplayStandards
+  name: cm-guide-entry-rules-uscm-roleplay-standards
+  priority: 19
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/Roleplay/CMUSCMRoleplayStandards.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMUSCMDeployment
+  name: cm-guide-entry-rules-uscm-deployment
+  priority: 20
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/Roleplay/CMUSCMDeployment.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMCommandRoleplay
+  name: cm-guide-entry-rules-command-roleplay
+  priority: 21
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/Roleplay/CMCommandRoleplay.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMXenoRoleplay
+  name: cm-guide-entry-rules-xeno-roleplay
+  priority: 22
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/Roleplay/CMXenoRoleplay.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMSurvivorRoleplay
+  name: cm-guide-entry-rules-survivor-roleplay
+  priority: 23
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/Roleplay/CMSurvivorRoleplay.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMHostileFactionRoleplay
+  name: cm-guide-entry-rules-faction-roleplay
+  priority: 24
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/Roleplay/CMHostileFactionRoleplay.xml"

@@ -18,6 +18,7 @@
   parent: CMPill
   id: CMPillBicaridine
   name: bicaridine pill (15u)
+  description: A Bicaridine pill. Heals brute damage.
   components:
   - type: SolutionContainerManager
     solutions:
@@ -35,6 +36,7 @@
   parent: CMPill
   id: CMPillDexalin
   name: dexalin pill (15u)
+  description: A Dexalin pill. Used to treat oxygen deprivation.
   components:
   - type: SolutionContainerManager
     solutions:
@@ -52,6 +54,7 @@
   parent: CMPill
   id: CMPillDylovene
   name: dylovene pill (15u)
+  description: An anti-toxin pill. It neutralizes many common toxins, as well as treating toxin damage.
   components:
   - type: SolutionContainerManager
     solutions:
@@ -69,6 +72,7 @@
   parent: CMPill
   id: CMPillInaprovaline
   name: inaprovaline pill (15u)
+  description: An Inaprovaline pill. Used to stabilize patients.
   components:
   - type: SolutionContainerManager
     solutions:
@@ -86,6 +90,7 @@
   parent: CMPill
   id: CMPillKelotane
   name: kelotane pill (15u)
+  description: A Kelotane pill. Used to treat burns.
   components:
   - type: SolutionContainerManager
     solutions:
@@ -103,6 +108,7 @@
   parent: CMPill
   id: CMPillTricordrazine
   name: Tricordrazine pill (15u)
+  description: A Tricordrazine pill. A weak general use medicine for treating damage.
   components:
   - type: SolutionContainerManager
     solutions:
@@ -116,4 +122,4 @@
     - state: pill5
       map: [ "enum.DamageStateVisualLayers.Base" ]
 
-        # TODO CM14 peridaxon, tramadol
+# TODO CM14 peridaxon, tramadol

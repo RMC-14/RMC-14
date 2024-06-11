@@ -11,7 +11,6 @@
       map: ["enum.GunVisualLayers.Base"]
   - type: Clothing
     sprite: _CM14/Objects/Weapons/Guns/Shotguns/m37a2.rsi
-    quickEquip: false
     slots:
     - Back
     - SuitStorage

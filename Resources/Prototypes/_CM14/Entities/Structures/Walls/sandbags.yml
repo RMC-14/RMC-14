@@ -88,7 +88,7 @@
   description: Some bags filled with sand. For now, just cumbersome, but soon to be used for fortifications.
   components:
   - type: Item
-    size: Small
+    size: Large
   - type: Sprite
     sprite: _CM14/Objects/Misc/sandbags.rsi
     state: sandbag_pile
@@ -111,11 +111,9 @@
   name: empty sandbags
   spawn: CMSandbagEmpty
   maxCount: 50
-  itemSize: 5
 
 - type: stack
   id: CMSandbagFull
   name: empty sandbags
   spawn: CMSandbagFull
   maxCount: 50
-  itemSize: 5

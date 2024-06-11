@@ -64,19 +64,15 @@
 
 - type: entity
   parent: CMPouchFirstAid
-  id: CMPouchFirstAidPills # TODO CM14 packets
+  id: CMPouchFirstAidPills
   suffix: Pills
   components:
   - type: StorageFill
     contents:
-    - id: CMPillBicaridine # TODO CM14 packets
-    - id: CMPillBicaridine
-    - id: CMPillBicaridine
-    - id: CMPillBicaridine
-    - id: CMPillKelotane # TODO CM14 packets
-    - id: CMPillKelotane
-    - id: CMPillKelotane
-    - id: CMPillKelotane # TODO CM14 2 tramadol packets
+    - id: CMPacketPillsBicaridine
+    - id: CMPacketPillsKelotane
+#    - id: CMPacketPillsTramadol # TODO CM14
+#    - id: CMPacketPillsTramadol # TODO CM14
 
 - type: entity
   parent: CMPouchFirstAidERT

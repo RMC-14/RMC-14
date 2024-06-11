@@ -33,7 +33,7 @@
   parent: XenoBaseProjectile
   name: slowing spit
   categories:
-  - hideSpawnMenu
+  - HideSpawnMenu
   components:
   - type: Sprite
     sprite: _CM14/Objects/Xeno/xeno_projectiles.rsi
@@ -50,7 +50,7 @@
   parent: XenoBaseProjectile
   name: scattered spit
   categories:
-  - hideSpawnMenu
+  - HideSpawnMenu
   components:
   - type: Sprite
     sprite: _CM14/Objects/Xeno/xeno_projectiles.rsi
@@ -69,7 +69,7 @@
   parent: XenoBaseProjectile
   name: bone chips
   categories:
-  - hideSpawnMenu
+  - HideSpawnMenu
   components:
   - type: Sprite
     sprite: _CM14/Objects/Materials/shards.rsi

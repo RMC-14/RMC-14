@@ -1,4 +1,5 @@
-﻿using Content.Shared._CM14.NightVision;
+﻿using System.Numerics;
+using Content.Shared._CM14.NightVision;
 using Content.Shared._CM14.Xenos.Construction.Nest;
 using Content.Shared.Mobs.Components;
 using Robust.Client.GameObjects;
@@ -52,7 +53,7 @@ public sealed class NightVisionOverlay : Overlay
             Render((uid, sprite, xform), eye?.Position.MapId, handle, eyeRot);
         }
 
-        handle.SetTransform(Matrix3.Identity);
+        handle.SetTransform(Matrix3x2.Identity);
     }
 
     private void Render(Entity<SpriteComponent, TransformComponent> ent, MapId? map, DrawingHandleWorld handle, Angle eyeRot)

@@ -1,0 +1,51 @@
+﻿- type: gameMap
+  id: Almayer
+  mapName: Almayer
+  mapPath: /Maps/_CM14/almayer.yml
+  minPlayers: 0
+  stations:
+    Almayer:
+      stationProto: StandardNanotrasenStation
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'USS Almayer'
+      - type: StationJobs
+        availableJobs:
+          #Command
+          CMCommandingOfficer: [1, 1]
+          CMExecutiveOfficer: [1, 1]
+          CMStaffOfficer: [1, 1] # TODO CM14
+          CMSeniorEnlistedAdvisor: [2, 2]
+          #Military Police
+          CMChiefMP: [1, 1]
+          CMMilitaryWarden: [1, 1]
+          CMMilitaryPolice: [5, 8]
+          #Auxiliary
+#          CMAuxiliarySupportOfficer: [1, 1]
+#          CMIntelOfficer: [4, 4]
+          CMPilotDropship: [2, 2]
+#          CMPilotGunship: [1, 1]
+          CMDropshipCrewChief: [2, 2]
+          #Engineering
+#          CMChiefEngineer: [1, 1]
+#          CMOrdnanceTech: [3, 3]
+#          CMMaintTech: [1, 1]
+          #Medical
+          CMCMO: [1, 1]
+          CMDoctor: [4, 6]
+          CMNurse: [6, 9]
+#          CMResearcher: [2, 2]
+          #Requisition
+          CMQuartermaster: [1, 1]
+          CMCargoTech: [3, 3]
+#          CMMessTech: [1, 1]
+          #Marines
+          CMSquadLeader: [4, 4]
+          CMFireteamLeader: [4, 8]
+#          CMSmartgunner: [8, 16]
+          CMWeaponsSpecialist: [4, 4]
+          CMCombatTech: [8, 12]
+          CMHospitalCorpsman: [8, 16]
+          CMRifleman: [ -1, -1 ]
+          #Civilians
+          CMCorrespondent: [2, 2]

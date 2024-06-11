@@ -25,7 +25,7 @@ public abstract class SharedPumpActionSystem : EntitySystem
         SubscribeLocalEvent<PumpActionComponent, GunShotEvent>(OnGunShot);
 
         CommandBinds.Builder
-            .Bind(CMKeyFunctions.CMPumpShotgun,
+            .Bind(CMKeyFunctions.CMUniqueAction,
                 InputCmdHandler.FromDelegate(session =>
                 {
                     if (session?.AttachedEntity is { } entity)

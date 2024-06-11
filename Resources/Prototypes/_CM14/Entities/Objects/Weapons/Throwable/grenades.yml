@@ -9,6 +9,15 @@
     explosionType: CM
   - type: ExplosionResistance
     damageCoefficient: 0
+  - type: OnUseTimerTrigger
+    delay: 4
+    beepSound:
+      path: "/Audio/_CM14/Explosion/armbomb.ogg"
+      params:
+        volume: -5
+    initialBeepDelay: 0
+    beepInterval: 10
+    doPopup: false
   - type: AmmoFixedDistance
 
 - type: entity
@@ -25,19 +34,13 @@
     intensitySlope: 10
     totalIntensity: 400
     canCreateVacuum: false
-  - type: OnUseTimerTrigger
-    delay: 4
-    beepSound:
-      path: "/Audio/Effects/beep1.ogg"
-      params:
-        volume: 5
-    initialBeepDelay: 0
-    beepInterval: 2 # 2 beeps total (at 0 and 2)
   - type: Tag
     tags:
     - Grenade
     - LauncherCompatibleGrenade
   - type: Ammo
+  - type: CMExplosionEffect
+  - type: CMVocalizeTrigger
 
 - type: entity
   parent: CMGrenadeBase
@@ -88,3 +91,53 @@
     - LauncherCompatibleGrenade
   - type: Ammo
   - type: ClusterLimitHits
+  - type: CMExplosionEffect
+    maxShrapnel: 0
+  - type: CMVocalizeTrigger
+
+- type: entity
+  id: CMExplosionEffectGrenade
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _CM14/Effects/grenade_explosion.rsi
+    state: grenade
+  - type: TimedDespawn
+    lifetime: 0.6
+
+- type: entity
+  id: CMExplosionEffectShrapnel1
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: CollisionWake
+  - type: Physics
+    bodyType: Dynamic
+    fixedRotation: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/shrapnel.rsi
+    state: shrapnel_bright1
+  - type: TimedDespawn
+    lifetime: 0.5
+  - type: DeleteOnCollide
+
+- type: entity
+  parent: CMExplosionEffectShrapnel1
+  id: CMExplosionEffectShrapnel2
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Sprite
+    state: shrapnel_bright2
