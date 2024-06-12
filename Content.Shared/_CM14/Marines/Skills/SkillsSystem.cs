@@ -1,16 +1,26 @@
-﻿using Content.Shared.Interaction;
+﻿using System.Linq;
+using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Examine;
+using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Robust.Shared.Containers;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._CM14.Marines.Skills;
 
 public sealed class SkillsSystem : EntitySystem
 {
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<MedicallyUnskilledDoAfterComponent, AttemptHyposprayUseEvent>(OnAttemptHyposprayUse);
         SubscribeLocalEvent<RequiresSkillComponent, BeforeRangedInteractEvent>(OnRequiresSkillBeforeRangedInteract);
+        SubscribeLocalEvent<ReagentExaminationRequiresSkillComponent, ExaminedEvent>(OnExamineReagentContainer);
     }
 
     private void OnAttemptHyposprayUse(Entity<MedicallyUnskilledDoAfterComponent> ent, ref AttemptHyposprayUseEvent args)
@@ -31,6 +41,52 @@ public sealed class SkillsSystem : EntitySystem
         {
             _popup.PopupClient($"You don't know how to use the {Name(args.Used)}...", args.User, PopupType.SmallCaution);
             args.Handled = true;
+        }
+    }
+
+    private void OnExamineReagentContainer(Entity<ReagentExaminationRequiresSkillComponent> ent, ref ExaminedEvent args)
+    {
+        if (HasSkills(args.Examiner, in ent.Comp.Skills))
+        {
+            if (!TryComp<SolutionContainerManagerComponent>(args.Examined, out var solutionContainerManager) || solutionContainerManager is null)
+            {
+                return;
+            }
+            var foundReagents = new HashSet<string>();
+            foreach (var solutionContainerID in solutionContainerManager.Containers)
+            {
+                if (!_solutionContainerSystem.TryGetSolution(args.Examined, solutionContainerID, out _, out var solution) || solution is null)
+                {
+                    continue;
+                }
+                foreach (var reagent in solution.Contents)
+                {
+                    var reagentName = _prototypeManager.Index<ReagentPrototype>(reagent.Reagent.Prototype).LocalizedName;
+                    foundReagents.Add(reagentName);
+                }
+            }
+            if (foundReagents.Any())
+            {
+
+                int reagentCount = foundReagents.Count;
+                int i = 0;
+                var reagentMessage = "";
+                foreach (var reagentId in foundReagents)
+                {
+                    reagentMessage += reagentId;
+                    if (i > reagentCount)
+                    {
+                        reagentMessage += ", ";
+                    }
+                    ++i;
+                }
+                args.PushMarkup(Loc.GetString("reagents-examine-action-found"));
+                args.PushMarkup(reagentMessage);
+            }
+            else
+            {
+                args.PushMarkup(Loc.GetString("reagents-examine-action-found-none"));
+            }
         }
     }
 
