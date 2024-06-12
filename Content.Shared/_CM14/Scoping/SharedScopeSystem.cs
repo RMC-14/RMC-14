@@ -79,13 +79,14 @@ public abstract partial class SharedScopeSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if(!(_handsSystem.TryGetActiveItem(args.Performer, out var heldItem) && heldItem == uid))
+        if (!(_handsSystem.TryGetActiveItem(args.Performer, out var heldItem) && heldItem == uid))
         {
             var msgError = Loc.GetString("cm-action-popup-scoping-user-must-hold", ("scope", Name(uid)));
             if (_gameTiming.IsFirstTimePredicted && _gameTiming.InPrediction)
             {
                 _popupSystem.PopupEntity(msgError, args.Performer, args.Performer);
             }
+
             return;
         }
 

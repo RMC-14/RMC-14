@@ -5,9 +5,10 @@ using Content.Shared.Camera;
 
 namespace Content.Client._CM14.Scoping;
 
-public sealed class ScopeSystem: SharedScopeSystem
+public sealed class ScopeSystem : SharedScopeSystem
 {
     [Dependency] private readonly ContentEyeSystem _eye = default!;
+
     protected override void StartScopingCamera(EntityUid user, ScopeComponent scopeComponent)
     {
     }

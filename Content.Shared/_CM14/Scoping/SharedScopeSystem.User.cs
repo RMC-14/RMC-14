@@ -20,7 +20,7 @@ public abstract partial class SharedScopeSystem
         if (!TryComp<ScopeComponent>(component.ScopingItem, out var scopeComponent))
             return;
 
-        if (!_transformSystem.InRange(scopeComponent.LastScopedAt,args.NewPosition, 1.5f))
+        if (!_transformSystem.InRange(scopeComponent.LastScopedAt, args.NewPosition, 1.5f))
             UserStopScoping(uid, component);
     }
 

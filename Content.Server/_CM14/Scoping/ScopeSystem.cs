@@ -7,7 +7,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server._CM14.Scoping;
 
-public sealed class ScopeSystem: SharedScopeSystem
+public sealed class ScopeSystem : SharedScopeSystem
 {
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
