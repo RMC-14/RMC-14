@@ -183,7 +183,7 @@ public sealed class XenoDevourSystem : EntitySystem
         var container = _container.EnsureContainer<ContainerSlot>(xeno, xeno.Comp.DevourContainerId);
         if (!_container.Insert(target, container))
         {
-            _popup.PopupClient($"You can't devour {target}!", xeno, xeno, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed", ("target", target)), xeno, xeno, PopupType.SmallCaution);
             return;
         }
 
@@ -191,11 +191,9 @@ public sealed class XenoDevourSystem : EntitySystem
         devoured.WarnAt = _timing.CurTime + xeno.Comp.WarnAfter;
         devoured.RegurgitateAt = _timing.CurTime + xeno.Comp.RegurgitateAfter;
 
-        var targetName = Identity.Name(target, EntityManager, xeno);
-        _popup.PopupClient($"We devour {targetName}!", xeno, xeno, PopupType.Medium);
+        _popup.PopupClient(Loc.GetString("cm-xeno-devour-self", ("target", target)), xeno, xeno, PopupType.Medium);
 
-        var xenoName = Identity.Name(xeno, EntityManager, target);
-        _popup.PopupEntity($"{xenoName} devours you!", xeno, target, PopupType.MediumCaution);
+        _popup.PopupEntity(Loc.GetString("cm-xeno-devour-target", ("user", xeno.Owner)), xeno, target, PopupType.MediumCaution);
 
         var others = Filter.PvsExcept(xeno).RemovePlayerByAttachedEntity(target);
         foreach (var session in others.Recipients)
@@ -203,9 +201,7 @@ public sealed class XenoDevourSystem : EntitySystem
             if (session.AttachedEntity is not { } recipient)
                 continue;
 
-            xenoName = Identity.Name(xeno, EntityManager, recipient);
-            targetName = Identity.Name(target, EntityManager, recipient);
-            _popup.PopupEntity($"{xenoName} devours {targetName}!", xeno, recipient, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("cm-xeno-devour-observer", ("user", xeno.Owner), ("target", target)), xeno, recipient, PopupType.MediumCaution);
         }
     }
 
@@ -220,7 +216,7 @@ public sealed class XenoDevourSystem : EntitySystem
 
         args.Handled = true;
         _container.EmptyContainer(container);
-        _popup.PopupClient("We hurl out the contents of our stomach!", xeno, xeno, PopupType.MediumCaution);
+        _popup.PopupClient(Loc.GetString("cm-xeno-devour-hurl-out"), xeno, xeno, PopupType.MediumCaution);
         _audio.PlayPredicted(xeno.Comp.RegurgitateSound, xeno, xeno);
     }
 
@@ -254,7 +250,7 @@ public sealed class XenoDevourSystem : EntitySystem
         if (_mobState.IsIncapacitated(xeno))
         {
             if (popup)
-                _popup.PopupClient("You can't do that right now!", victim, xeno);
+                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-cant-now"), victim, xeno);
 
             return false;
         }
@@ -262,7 +258,7 @@ public sealed class XenoDevourSystem : EntitySystem
         if (HasComp<XenoComponent>(victim))
         {
             if (popup)
-                _popup.PopupClient("That wouldn't taste very good.", victim, xeno);
+                _popup.PopupClient(Loc.GetString("cm-xeno-devour-success"), victim, xeno);
 
             return false;
         }
@@ -271,8 +267,7 @@ public sealed class XenoDevourSystem : EntitySystem
         {
             if (popup)
             {
-                var victimName = Identity.Name(victim, EntityManager, xeno);
-                _popup.PopupClient($"Ew, {victimName} is already starting to rot.", victim, xeno);
+                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-roting", ("target", victim)), victim, xeno);
             }
 
             return false;
@@ -284,7 +279,7 @@ public sealed class XenoDevourSystem : EntitySystem
             devour = null;
 
             if (popup)
-                _popup.PopupClient("You already have something in your belly, there's no way that will fit!", victim, xeno, PopupType.SmallCaution);
+                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-stomach-full"), victim, xeno, PopupType.SmallCaution);
 
             return false;
         }
@@ -293,8 +288,7 @@ public sealed class XenoDevourSystem : EntitySystem
         {
             if (popup)
             {
-                var victimName = Identity.Name(victim, EntityManager, xeno);
-                _popup.PopupClient($"{victimName} is resisting, ground them!", victim, xeno, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-resisting", ("target", victim)), victim, xeno, PopupType.MediumCaution);
             }
 
             return false;
@@ -304,9 +298,7 @@ public sealed class XenoDevourSystem : EntitySystem
         {
             if (popup)
             {
-                var victimName = Identity.Name(victim, EntityManager, xeno);
-                var strapName = Loc.GetString("zzzz-the", ("ent", strap));
-                _popup.PopupClient($"{victimName} is buckled to {strapName}.", victim, xeno);
+                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-buckled", ("strap", strap), ("target", victim)), victim, xeno);
             }
         }
 
@@ -324,11 +316,9 @@ public sealed class XenoDevourSystem : EntitySystem
             AttemptFrequency = AttemptFrequency.EveryTick
         };
 
-        var targetName = Identity.Name(target, EntityManager, xeno);
-        _popup.PopupClient($"We start to devour {targetName}", target, xeno);
+        _popup.PopupClient(Loc.GetString("cm-xeno-devour-start-self", ("target", target)), target, xeno);
 
-        var xenoName = Identity.Name(xeno, EntityManager, target);
-        _popup.PopupEntity($"{xenoName} is trying to devour you!", xeno, target, PopupType.MediumCaution);
+        _popup.PopupEntity(Loc.GetString("cm-xeno-devour-start-target", ("user", xeno)), xeno, target, PopupType.MediumCaution);
 
         var others = Filter.PvsExcept(xeno).RemovePlayerByAttachedEntity(target);
         foreach (var session in others.Recipients)
@@ -336,9 +326,7 @@ public sealed class XenoDevourSystem : EntitySystem
             if (session.AttachedEntity is not { } recipient)
                 continue;
 
-            xenoName = Identity.Name(xeno, EntityManager, recipient);
-            targetName = Identity.Name(target, EntityManager, recipient);
-            _popup.PopupEntity($"{xenoName} starts to devour {targetName}!", target, recipient, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("cm-xeno-devour-start-observer", ("user", xeno), ("target", target)), target, recipient, PopupType.SmallCaution);
         }
 
         _doAfter.TryStartDoAfter(doAfter);
@@ -391,7 +379,7 @@ public sealed class XenoDevourSystem : EntitySystem
 
     private void DoFeedback(Entity<XenoDevourComponent> xeno)
     {
-        _popup.PopupClient("We hurl out the contents of our stomach!", xeno, xeno, PopupType.MediumCaution);
+        _popup.PopupClient(Loc.GetString("cm-xeno-devour-hurl-out"), xeno, xeno, PopupType.MediumCaution);
         _audio.PlayPredicted(xeno.Comp.RegurgitateSound, xeno, xeno);
     }
 
@@ -419,14 +407,13 @@ public sealed class XenoDevourSystem : EntitySystem
             if (!comp.Warned && time >= comp.WarnAt)
             {
                 comp.Warned = true;
-                var victimName = Identity.Name(uid, EntityManager, xeno);
-                _popup.PopupClient($"We're about to regurgitate {victimName}...", xeno, xeno, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("cm-xeno-devour-regurgitate", ("target", uid)), xeno, xeno, PopupType.MediumCaution);
             }
 
             if (time >= comp.RegurgitateAt)
             {
                 if (Regurgitate((uid, comp), (xeno, devour)))
-                    _popup.PopupClient("We hurl out the contents of our stomach!", xeno, xeno, PopupType.MediumCaution);
+                    _popup.PopupClient(Loc.GetString("cm-xeno-devour-hurl-out"), xeno, xeno, PopupType.MediumCaution);
             }
         }
     }

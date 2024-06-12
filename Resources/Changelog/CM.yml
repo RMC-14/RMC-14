@@ -976,5 +976,77 @@
   id: 128
   time: '2024-06-04T22:04:49.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2236
+- author: Whisper
+  changes:
+  - message: Added large webbing.
+    type: Add
+  id: 129
+  time: '2024-06-05T08:55:53.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2244
+- author: Errant
+  changes:
+  - message: Added M94 flarepacks and boxes to vendors
+    type: Add
+  id: 130
+  time: '2024-06-06T10:26:01.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2317
+- author: ShadowCommander
+  changes:
+  - message: Fixed shotgun shell box not changing sprite when empty.
+    type: Fix
+  id: 131
+  time: '2024-06-07T01:16:07.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2323
+- author: DrSmugleaf
+  changes:
+  - message: Added pill packets.
+    type: Add
+  id: 132
+  time: '2024-06-07T02:01:25.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2326
+- author: Siigiil
+  changes:
+  - message: Vial pouches now use slots.
+    type: Fix
+  - message: Bayonet pouches can now actually hold the knives they spawn with and
+      the same delay as with the knife belt is applied when drawing from them.
+    type: Fix
+  - message: All pouches properly display their closed/open sprites.
+    type: Fix
+  id: 133
+  time: '2024-06-11T22:03:42.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2338
+- author: Siigiil
+  changes:
+  - message: The hotkey for pumping the shotgun has been added to the keybinds menu.
+    type: Add
+  id: 134
+  time: '2024-06-11T22:05:40.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2341
+- author: Hmeister
+  changes:
+  - message: Xenos now have a ghost role raffle.
+    type: Tweak
+  id: 135
+  time: '2024-06-11T22:26:43.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2394
+- author: Sigil
+  changes:
+  - message: Hypersleep pods now function as cryo pods.
+    type: Add
+  id: 136
+  time: '2024-06-11T22:36:16.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2405
+- author: Whisper
+  changes:
+  - message: The guidebook now has basic entry pages for new players.
+    type: Add
+  - message: Added rifleman guidebook
+    type: Add
+  - message: Added drone guidebook
+    type: Add
+  id: 137
+  time: '2024-06-12T05:16:39.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2340
 Name: CM
 Order: -1

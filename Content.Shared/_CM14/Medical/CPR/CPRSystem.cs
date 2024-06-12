@@ -39,6 +39,7 @@ public sealed class CPRSystem : EntitySystem
     {
         base.Initialize();
 
+        // TODO CM14 use skills
         // TODO CM14 something more generic than "marine"
         SubscribeLocalEvent<MarineComponent, InteractHandEvent>(OnMarineInteractHand);
         SubscribeLocalEvent<MarineComponent, CPRDoAfterEvent>(OnMarineDoAfter);
@@ -156,7 +157,7 @@ public sealed class CPRSystem : EntitySystem
     {
         if (!ent.Comp.IsToggled)
         {
-            _popups.PopupClient("Take off their mask first!", ent, args.Args.Performer);
+            _popups.PopupClient(Loc.GetString("cm-crp-take-off-mask"), ent, args.Args.Performer);
             args.Args.Cancelled = true;
         }
     }

@@ -1,0 +1,21 @@
+﻿<controls:RoadmapItem
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._CM14.Roadmap"
+    xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Margin="0 0 0 10"
+    MaxWidth="275">
+    <BoxContainer Orientation="Horizontal" SeparationOverride="0">
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+            <Button Name="HeaderButton" Access="Public" StyleClasses="OpenBoth" />
+            <BoxContainer Name="ContentsContainer" Access="Public" Orientation="Vertical" Visible="False">
+                <RichTextLabel Name="Contents" Access="Public" RectClipContent="True" />
+                <Label Name="StateText" Access="Public" HorizontalAlignment="Right" Align="Right" Margin="0 0 5 0" />
+            </BoxContainer>
+        </BoxContainer>
+        <PanelContainer Name="StateColor" Access="Public" VerticalExpand="True" MinWidth="5" MaxWidth="5">
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat />
+            </PanelContainer.PanelOverride>
+        </PanelContainer>
+    </BoxContainer>
+</controls:RoadmapItem>

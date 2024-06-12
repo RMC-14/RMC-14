@@ -1,5 +1,19 @@
 - type: entity
   parent: BaseMagazineRifle
+  id: CMMagazineRifleBase
+  abstract: true
+  components:
+  - type: Item
+    size: Normal
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+    zeroOnlyOnEmpty: true
+  - type: Appearance
+
+- type: entity
+  parent: CMMagazineRifleBase
   id: CMMagazineRifleM41A
   name: "M41A magazine (10x24mm)"
   components:
@@ -21,11 +35,6 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-  - type: MagazineVisuals
-    magState: mag
-    steps: 2
-    zeroVisible: false
-    zeroOnlyOnEmpty: true
   - type: Appearance
 
 # m41a AP
@@ -112,7 +121,7 @@
 
 # M4RA
 - type: entity
-  parent: BaseMagazineRifle
+  parent: CMMagazineRifleBase
   id: CMMagazineRifleM4RA
   name: "M4RA magazine (10x24mm)"
   description: "A magazine of standard 10x24mm rounds for use in the M4RA battle rifle."
@@ -130,11 +139,6 @@
     capacity: 25
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m4ra.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
 
 # M4RA AP
 - type: entity

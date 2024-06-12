@@ -25,7 +25,7 @@ public abstract class SharedPumpActionSystem : EntitySystem
         SubscribeLocalEvent<PumpActionComponent, GunShotEvent>(OnGunShot);
 
         CommandBinds.Builder
-            .Bind(CMKeyFunctions.CMPumpShotgun,
+            .Bind(CMKeyFunctions.CMUniqueAction,
                 InputCmdHandler.FromDelegate(session =>
                 {
                     if (session?.AttachedEntity is { } entity)
@@ -42,7 +42,7 @@ public abstract class SharedPumpActionSystem : EntitySystem
     protected virtual void OnExamined(Entity<PumpActionComponent> ent, ref ExaminedEvent args)
     {
         // TODO CM14 the server has no idea what this keybind is supposed to be for the client
-        args.PushMarkup("[bold]Press [color=cyan]Space[/color] to pump before shooting.[/bold]", 1);
+        args.PushMarkup(Loc.GetString("cm-gun-pump-examine"), 1);
     }
 
     private void OnGetVerbs(Entity<PumpActionComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
@@ -80,7 +80,7 @@ public abstract class SharedPumpActionSystem : EntitySystem
 
             if (ammo.Count <= 0)
             {
-                _popup.PopupClient("You don't have any ammo left!", user, user);
+                _popup.PopupClient(Loc.GetString("cm-gun-no-ammo-message"), user, user);
                 return;
             }
 

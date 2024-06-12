@@ -2,7 +2,7 @@
   id: SquadBase
   abstract: true
   categories:
-  - "hideSpawnMenu"
+  - HideSpawnMenu
   components:
   - type: SquadTeam
     background:

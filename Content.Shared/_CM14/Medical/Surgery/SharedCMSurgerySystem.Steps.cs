@@ -3,7 +3,6 @@ using Content.Shared._CM14.Medical.Surgery.Conditions;
 using Content.Shared._CM14.Medical.Surgery.Steps;
 using Content.Shared._CM14.Medical.Surgery.Tools;
 using Content.Shared._CM14.Xenos.Hugger;
-using Content.Shared.Armor;
 using Content.Shared.Body.Part;
 using Content.Shared.Buckle.Components;
 using Content.Shared.DoAfter;
@@ -22,9 +21,6 @@ public abstract partial class SharedCMSurgerySystem
         SubscribeLocalEvent<CMSurgeryStepComponent, CMSurgeryCanPerformStepEvent>(OnToolCanPerform);
 
         SubSurgery<CMSurgeryCutLarvaRootsStepComponent>(OnCutLarvaRootsStep, OnCutLarvaRootsCheck);
-
-        SubscribeLocalEvent<InventoryComponent, CMSurgeryCanPerformStepEvent>(_inventory.RelayEvent);
-        SubscribeLocalEvent<ArmorComponent, InventoryRelayedEvent<CMSurgeryCanPerformStepEvent>>(OnArmorCanPerformStep);
 
         Subs.BuiEvents<CMSurgeryTargetComponent>(CMSurgeryUIKey.Key, subs =>
         {
@@ -182,12 +178,6 @@ public abstract partial class SharedCMSurgerySystem
     {
         if (!TryComp(args.Body, out VictimHuggedComponent? hugged) || !hugged.RootsCut)
             args.Cancelled = true;
-    }
-
-    private void OnArmorCanPerformStep(Entity<ArmorComponent> ent, ref InventoryRelayedEvent<CMSurgeryCanPerformStepEvent> args)
-    {
-        if (args.Args.Invalid == StepInvalidReason.None)
-            args.Args.Invalid = StepInvalidReason.Armor;
     }
 
     private void OnSurgeryTargetStepChosen(Entity<CMSurgeryTargetComponent> ent, ref CMSurgeryStepChosenBuiMsg args)

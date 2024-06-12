@@ -39,7 +39,7 @@
     - state: egg_item
       map: [ "enum.XenoEggLayers.Base" ]
   - type: Item
-    size: Invalid
+    size: Ginormous
   - type: XenoEgg
   - type: Damageable
     damageContainer: StructuralXeno
@@ -61,4 +61,3 @@
   - type: StepTrigger
     requiredTriggeredSpeed: 0
     intersectRatio: 0.5
-

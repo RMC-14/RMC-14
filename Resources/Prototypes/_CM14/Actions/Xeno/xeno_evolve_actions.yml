@@ -10,3 +10,12 @@
       sprite: _CM14/Actions/xeno_actions.rsi
       state: evolve
     event: !type:XenoOpenEvolutionsActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoEvolve
+  name: Evolve
+  description: Evolve to the next caste of xenomorph.
+  components:
+    - type: Sprite
+      state: evolve

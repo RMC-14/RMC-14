@@ -10,7 +10,6 @@ using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Client.UserInterface.Systems.Inventory.Controls;
 using Content.Client.UserInterface.Systems.Inventory.Widgets;
 using Content.Client.UserInterface.Systems.Inventory.Windows;
-using Content.Shared._CM14.Webbing;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Hands.Components;
 using Content.Shared.Input;
@@ -36,6 +35,7 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
     [UISystemDependency] private readonly ClientInventorySystem _inventorySystem = default!;
     [UISystemDependency] private readonly HandsSystem _handsSystem = default!;
     [UISystemDependency] private readonly ContainerSystem _container = default!;
+    [UISystemDependency] private readonly WebbingSystem _webbing = default!;
 
     private EntityUid? _playerUid;
     private InventorySlotsComponent? _playerInventory;
@@ -361,9 +361,7 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
                 break;
             }
         }
-        else if (_entities.TryGetComponent(container.ContainedEntity, out WebbingClothingComponent? webbingClothing) &&
-                 webbingClothing.Webbing == null &&
-                 _entities.HasComponent<WebbingComponent>(held))
+        else if (_webbing.Fits(container.ContainedEntity, held))
         {
             fits = true;
         }

@@ -128,6 +128,15 @@ public sealed class HealthScannerSystem : EntitySystem
         if (scanner.Comp.Target is not { } target)
             return;
 
+        if (TerminatingOrDeleted(target))
+        {
+            if (!TerminatingOrDeleted(scanner))
+                _ui.CloseUi(scanner.Owner, HealthScannerUIKey.Key);
+
+            scanner.Comp.Target = null;
+            return;
+        }
+
         FixedPoint2 blood = 0;
         FixedPoint2 maxBlood = 0;
         Solution? chemicals = null;

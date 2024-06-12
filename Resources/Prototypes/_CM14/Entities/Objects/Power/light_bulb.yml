@@ -44,7 +44,7 @@
   - type: PhysicalComposition
     materialComposition:
       CMGlass: 25
-  - type: WelderRefinable
+  - type: ToolRefinable
     refineResult:
     - id: CMSheetGlass1
 

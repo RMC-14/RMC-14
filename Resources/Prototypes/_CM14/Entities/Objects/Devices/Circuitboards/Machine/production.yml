@@ -8,20 +8,20 @@
     state: power_mod
   - type: MachineBoard
     prototype: CMSMESEmpty
-    requirements:
-      Capacitor: 1
-      PowerCell: 4
-    materialRequirements:
-      CableHV: 10
+#    requirements:
+#      Capacitor: 1
+#      PowerCell: 4
+#    materialRequirements:
+#      CableHV: 10
 
-#- type: entity
-#  parent: CMBaseMachineCircuitboard
-#  id: CMAutolatheMachineCircuitboard
-#  name: autolathe machine board
-#  description: A machine printed circuit board for an autolathe
-#  components: # TODO CM14 autolathe
-#    - type: MachineBoard
-#      prototype: CMAutolathe
+- type: entity
+  parent: CMBaseMachineCircuitboard
+  id: CMAutolatheMachineCircuitboard
+  name: autolathe machine board
+  description: A machine printed circuit board for an autolathe
+  components: # TODO CM14 autolathe
+    - type: MachineBoard
+      prototype: CMAutolathe
 #      requirements:
 #        MatterBin: 3
 #        Manipulator: 1
@@ -35,12 +35,12 @@
 #  components:
 #    - type: Sprite
 #      state: power_mod
-#    - type: MachineBoard
-#      prototype: PortableGeneratorPacman # TODO CM14 pacman
-#      requirements:
-#        Capacitor: 1
-#      materialRequirements:
-#        CableHV: 5
+##    - type: MachineBoard
+##      prototype: PortableGeneratorPacman # TODO CM14 pacman
+##      requirements:
+##        Capacitor: 1
+##      materialRequirements:
+##        CableHV: 5
 #    - type: PhysicalComposition
 #      materialComposition:
 #        CMGlass: 200
@@ -48,7 +48,7 @@
 #        Silicon: 20
 #    - type: StaticPrice
 #      price: 40
-#
+
 #- type: entity
 #  parent: CMBaseMachineCircuitboard
 #  id: CMPortableGeneratorSuperPacmanMachineCircuitboard
@@ -57,11 +57,11 @@
 #    - type: Sprite
 #      state: power_mod
 #    - type: MachineBoard
-#      prototype: PortableGeneratorSuperPacman # TODO CM14 super autolathe
-#      requirements:
-#        Capacitor: 2
-#      materialRequirements:
-#        CableHV: 10
+#      prototype: PortableGeneratorSuperPacman # TODO CM14 super pacman
+##      requirements:
+##        Capacitor: 2
+##      materialRequirements:
+##        CableHV: 10
 #    - type: PhysicalComposition
 #      materialComposition:
 #        CMGlass: 200
@@ -128,4 +128,4 @@
     state: blank_mod
   - type: MachineBoard
     prototype: CMMicrowave
-    # TODO CM14 material requirements
+#    # TODO CM14 material requirements

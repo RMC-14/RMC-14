@@ -1,6 +1,5 @@
 using Content.Shared._CM14.Xenos.Projectile.Spit.Scattered;
 using Content.Shared._CM14.Xenos.Projectile.Spit.Slowing;
-using Content.Shared.Armor;
 using Content.Shared.Effects;
 using Content.Shared.Inventory;
 using Content.Shared.Movement.Systems;
@@ -30,8 +29,6 @@ public sealed class XenoSpitSystem : EntitySystem
         SubscribeLocalEvent<XenoSlowingSpitProjectileComponent, ProjectileHitEvent>(OnXenoSlowingSpitHit);
 
         SubscribeLocalEvent<SlowedBySpitComponent, RefreshMovementSpeedModifiersEvent>(OnSlowedBySpitRefreshMovement);
-
-        SubscribeLocalEvent<ArmorComponent, InventoryRelayedEvent<HitBySlowingSpitEvent>>(OnArmorHitBySlowingSpit);
 
         SubscribeLocalEvent<InventoryComponent, HitBySlowingSpitEvent>(_inventory.RelayEvent);
     }
@@ -106,11 +103,6 @@ public sealed class XenoSpitSystem : EntitySystem
     {
         if (slowed.Comp.ExpiresAt > _timing.CurTime)
             args.ModifySpeed(slowed.Comp.Multiplier, slowed.Comp.Multiplier);
-    }
-
-    private void OnArmorHitBySlowingSpit(Entity<ArmorComponent> ent, ref InventoryRelayedEvent<HitBySlowingSpitEvent> args)
-    {
-        args.Args.Cancelled = true;
     }
 
     public override void Update(float frameTime)

@@ -5,6 +5,7 @@ using Content.Server._CM14.Chat.Chat;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
+using Content.Server.Examine;
 using Content.Server.GameTicking;
 using Content.Server.Speech.Components;
 using Content.Server.Speech.EntitySystems;
@@ -15,6 +16,7 @@ using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
+using Content.Shared.Examine;
 using Content.Shared.Ghost;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
@@ -22,6 +24,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Players;
 using Content.Shared.Radio;
 using Content.Shared.Speech;
+using Content.Shared.Whitelist;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -58,6 +61,9 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
     [Dependency] private readonly ReplacementAccentSystem _wordreplacement = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
+    [Dependency] private readonly CMChatSystem _cmChat = default!;
 
     public const int VoiceRange = 10; // how far voice goes in world units
     public const int WhisperClearRange = 2; // how far whisper goes while still being understandable, in world units
@@ -502,8 +508,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (data.Range <= WhisperClearRange)
                 _chatManager.ChatMessageToOne(ChatChannel.Whisper, message, wrappedMessage, source, false, session.Channel);
             //If listener is too far, they only hear fragments of the message
-            //Collisiongroup.Opaque is not ideal for this use. Preferably, there should be a check specifically with "Can Ent1 see Ent2" in mind
-            else if (_interactionSystem.InRangeUnobstructed(source, listener, WhisperMuffledRange, Shared.Physics.CollisionGroup.Opaque)) //Shared.Physics.CollisionGroup.Opaque
+            else if (_examineSystem.InRangeUnOccluded(source, listener, WhisperMuffledRange))
                 _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedMessage, wrappedobfuscatedMessage, source, false, session.Channel);
             //If listener is too far and has no line of sight, they can't identify the whisperer's identity
             else
@@ -711,7 +716,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     private string SanitizeInGameICMessage(EntityUid source, string message, out string? emoteStr, bool capitalize = true, bool punctuate = false, bool capitalizeTheWordI = true)
     {
         var newMessage = message.Trim();
-        newMessage = SanitizeMessageReplaceWords(newMessage);
+        newMessage = SanitizeMessageReplaceWords(source, newMessage);
 
         if (capitalize)
             newMessage = SanitizeMessageCapital(newMessage);
@@ -774,13 +779,14 @@ public sealed partial class ChatSystem : SharedChatSystem
     [ValidatePrototypeId<ReplacementAccentPrototype>]
     public const string ChatSanitize_Accent = "chatsanitize";
 
-    public string SanitizeMessageReplaceWords(string message)
+    public string SanitizeMessageReplaceWords(EntityUid source, string message)
     {
         if (string.IsNullOrEmpty(message)) return message;
 
         var msg = message;
 
         msg = _wordreplacement.ApplyReplacements(msg, ChatSanitize_Accent);
+        msg = _cmChat.SanitizeMessageReplaceWords(source, msg);
 
         return msg;
     }
@@ -823,7 +829,7 @@ public sealed partial class ChatSystem : SharedChatSystem
                 recipients.Add(player, new ICChatRecipientData(-1, true));
         }
 
-        RaiseLocalEvent(new ExpandICChatRecipientstEvent(source, voiceGetRange, recipients));
+        RaiseLocalEvent(new ExpandICChatRecipientsEvent(source, voiceGetRange, recipients));
 
         var ev = new ChatMessageAfterGetRecipients(recipients);
         RaiseLocalEvent(source, ref ev);
@@ -871,7 +877,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 ///     This event is raised before chat messages are sent out to clients. This enables some systems to send the chat
 ///     messages to otherwise out-of view entities (e.g. for multiple viewports from cameras).
 /// </summary>
-public record ExpandICChatRecipientstEvent(EntityUid Source, float VoiceRange, Dictionary<ICommonSession, ChatSystem.ICChatRecipientData> Recipients)
+public record ExpandICChatRecipientsEvent(EntityUid Source, float VoiceRange, Dictionary<ICommonSession, ChatSystem.ICChatRecipientData> Recipients)
 {
 }
 

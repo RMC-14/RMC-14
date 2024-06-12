@@ -5,6 +5,7 @@ using Content.Client.Hands.Systems;
 using Content.Client.Items.Systems;
 using Content.Client.Storage.Systems;
 using Content.Shared._CM14.Inventory;
+using Content.Shared._CM14.Item;
 using Content.Shared.Input;
 using Content.Shared.Item;
 using Content.Shared.Storage;
@@ -13,11 +14,10 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Client.UserInterface.Systems.Storage.Controls;
 
-public sealed class StorageContainer : BaseWindow
+public sealed partial class StorageContainer : BaseWindow
 {
     [Dependency] private readonly IEntityManager _entity = default!;
     private readonly StorageUIController _storageController;
@@ -232,6 +232,8 @@ public sealed class StorageContainer : BaseWindow
         _backgroundGrid.Children.Clear();
         _backgroundGrid.Rows = boundingGrid.Height + 1;
         _backgroundGrid.Columns = boundingGrid.Width + 1;
+
+        var fixedSizeX = _entity.GetComponentOrNull<FixedItemSizeStorageComponent>(StorageEntity)?.Size.X;
         for (var y = boundingGrid.Bottom; y <= boundingGrid.Top; y++)
         {
             for (var x = boundingGrid.Left; x <= boundingGrid.Right; x++)
@@ -240,11 +242,19 @@ public sealed class StorageContainer : BaseWindow
                     ? emptyTexture
                     : blockedTexture;
 
-                _backgroundGrid.AddChild(new TextureRect
+                var rect = new TextureRect
                 {
                     Texture = texture,
                     TextureScale = new Vector2(2, 2)
-                });
+                };
+
+                if (WrapBorders(rect, fixedSizeX, x, boundingGrid.Right) is { } panel)
+                {
+                    _backgroundGrid.AddChild(panel);
+                    continue;
+                }
+
+                _backgroundGrid.AddChild(rect);
             }
         }
     }
@@ -266,6 +276,7 @@ public sealed class StorageContainer : BaseWindow
         _pieceGrid.RemoveAllChildren();
         _pieceGrid.Rows = boundingGrid.Height + 1;
         _pieceGrid.Columns = boundingGrid.Width + 1;
+        var fixedSizeX = _entity.GetComponentOrNull<FixedItemSizeStorageComponent>(StorageEntity)?.Size.X;
         for (var y = boundingGrid.Bottom; y <= boundingGrid.Top; y++)
         {
             for (var x = boundingGrid.Left; x <= boundingGrid.Right; x++)
@@ -274,6 +285,11 @@ public sealed class StorageContainer : BaseWindow
                 {
                     MinSize = size
                 };
+
+                if (WrapBorders(control, fixedSizeX, x, boundingGrid.Right) is { } panel)
+                    _pieceGrid.AddChild(panel);
+                else
+                    _pieceGrid.AddChild(control);
 
                 var currentPosition = new Vector2i(x, y);
 
@@ -311,8 +327,6 @@ public sealed class StorageContainer : BaseWindow
                         control.AddChild(gridPiece);
                     }
                 }
-
-                _pieceGrid.AddChild(control);
             }
         }
     }
@@ -365,6 +379,7 @@ public sealed class StorageContainer : BaseWindow
         var origin = GetMouseGridPieceLocation((currentEnt, itemComp), currentLocation);
 
         var itemShape = itemSystem.GetAdjustedItemShape(
+            (StorageEntity.Value, storageComponent),
             (currentEnt, itemComp),
             currentLocation.Rotation,
             origin);
@@ -386,7 +401,7 @@ public sealed class StorageContainer : BaseWindow
 
             foreach (var location in locations.Value)
             {
-                var shape = itemSystem.GetAdjustedItemShape(currentEnt, location);
+                var shape = itemSystem.GetAdjustedItemShape((StorageEntity.Value, storageComponent), currentEnt, location);
                 var bound = shape.GetBoundingBox();
 
                 var spotFree = storageSystem.ItemFitsInGridLocation(currentEnt, StorageEntity.Value, location);
@@ -441,13 +456,15 @@ public sealed class StorageContainer : BaseWindow
     {
         var origin = Vector2i.Zero;
 
-        if (StorageEntity != null)
-            origin = _entity.GetComponent<StorageComponent>(StorageEntity.Value).Grid.GetBoundingBox().BottomLeft;
+        if (!_entity.TryGetComponent(StorageEntity, out StorageComponent? storage))
+            return origin;
+
+        origin = storage.Grid.GetBoundingBox().BottomLeft;
 
         var textureSize = (Vector2) _emptyTexture!.Size * 2;
         var position = ((UserInterfaceManager.MousePositionScaled.Position
                          - _backgroundGrid.GlobalPosition
-                         - ItemGridPiece.GetCenterOffset(entity, location, _entity) * 2
+                         - ItemGridPiece.GetCenterOffset((StorageEntity.Value, storage), entity, location, _entity) * 2
                          + textureSize / 2f)
                         / textureSize).Floored() + origin;
         return position;
