@@ -1,0 +1,9 @@
+- type: entity
+  id: ActionToggleScope
+  name: Toggle Optics
+  description: Scope in or out with your optics.
+  components:
+  - type: InstantAction
+    icon: { sprite: Objects/Weapons/Melee/shields.rsi, state: teleriot-icon }
+    iconOn: Objects/Weapons/Melee/shields.rsi/teleriot-on.png
+    event: !type:ToggleActionEvent

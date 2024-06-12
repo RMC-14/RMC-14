@@ -1,0 +1,10 @@
+# Used for PVS loading
+- type: entity
+  id: CMScopingChunkLoader
+  name: SCOPING CHUNK LOADER YOU SHOULD NOT SEE THIS
+  noSpawn: true
+  components:
+    - type: Eye
+    - type: Tag
+      tags:
+        - HideContextMenu

@@ -47,3 +47,5 @@
   - type: Corrodible
     isCorrodible: false
   - type: GunIFF
+  - type: Scope
+    zoom: 1.25
