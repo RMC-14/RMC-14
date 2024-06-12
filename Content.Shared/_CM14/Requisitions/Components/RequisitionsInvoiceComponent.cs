@@ -1,0 +1,18 @@
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+
+namespace Content.Shared._CM14.Requisitions.Components;
+
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(SharedRequisitionsSystem))]
+public sealed partial class RequisitionsInvoiceComponent : Component
+{
+    [DataField, AutoNetworkedField]
+    public int Reward = 300;
+
+    [DataField]
+    public EntProtoId PaperOutput = "CMPaperRequisitionInvoice";
+
+    [DataField]
+    public EntProtoId RequiredStamp = "paper_stamp-approve";
+}
