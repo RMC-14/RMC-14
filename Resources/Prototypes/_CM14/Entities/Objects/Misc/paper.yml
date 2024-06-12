@@ -56,7 +56,7 @@
       map: ["enum.PaperVisualLayers.Writing"]
       color: "#9ef5ff"
       visible: false
-    - state: paper_stamp-generic
+    - state: paper_stamp-approve
       map: ["enum.PaperVisualLayers.Stamp"]
       visible: false
   - type: PaperLabelType
