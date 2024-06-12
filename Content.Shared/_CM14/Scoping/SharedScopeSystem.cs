@@ -6,6 +6,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.Toggleable;
+using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Scoping;
@@ -18,6 +19,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -47,7 +49,8 @@ public abstract partial class SharedScopeSystem : EntitySystem
         component.User = args.User;
         Dirty(uid, component);
 
-        EnsureComp<ScopeUserComponent>(args.User);
+        if(_net.IsServer)
+            EnsureComp<ScopeUserComponent>(args.User);
     }
 
     private void OnUnequip(EntityUid uid, ScopeComponent component, GotUnequippedHandEvent args)
@@ -112,9 +115,11 @@ public abstract partial class SharedScopeSystem : EntitySystem
         if (component.IsScoping)
             return false;
 
-        var scopeUserComp = EnsureComp<ScopeUserComponent>(user);
-        scopeUserComp.ScopingItem = item;
-        Dirty(user, scopeUserComp);
+        if (TryComp<ScopeUserComponent>(user, out var scopeUserComp))
+        {
+            scopeUserComp.ScopingItem = item;
+            Dirty(user, scopeUserComp);
+        }
 
         var msgUser = Loc.GetString("cm-action-popup-scoping-user", ("scope", Name(item)));
 
