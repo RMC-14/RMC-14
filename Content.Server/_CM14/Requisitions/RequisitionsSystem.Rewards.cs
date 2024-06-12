@@ -113,7 +113,7 @@ namespace Content.Server._CM14.Requisitions
                 {
                     if (TryComp(content, out RequisitionsInvoiceComponent? containerInvoice)
                         && TryComp(content, out PaperComponent? containerPaper)
-                        && containerInvoice.RequiredStamp.Equals(containerPaper.StampState))
+                        && containerPaper.StampState == containerInvoice.RequiredStamp)
                     {
                         compoundRewards += containerInvoice.Reward;
                     }

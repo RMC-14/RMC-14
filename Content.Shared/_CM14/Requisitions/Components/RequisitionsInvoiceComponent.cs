@@ -14,5 +14,5 @@ public sealed partial class RequisitionsInvoiceComponent : Component
     public EntProtoId PaperOutput = "CMPaperRequisitionInvoice";
 
     [DataField]
-    public EntProtoId RequiredStamp = "paper_stamp-approve";
+    public string? RequiredStamp = "paper_stamp-approve";
 }
