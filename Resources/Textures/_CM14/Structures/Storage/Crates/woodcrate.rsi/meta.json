@@ -21,6 +21,9 @@
     },
     {
       "name": "welded"
+    },
+    {
+      "name": "invoice"
     }
   ]
 }
