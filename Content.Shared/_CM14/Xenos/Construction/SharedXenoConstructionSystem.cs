@@ -412,6 +412,12 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return false;
         }
 
+        if (_transform.InRange(origin, target, 0.75f))
+        {
+            _popup.PopupClient(Loc.GetString("cm-xeno-cant-build-in-self"), target, xeno);
+            return false;
+        }
+
         return true;
     }
 
