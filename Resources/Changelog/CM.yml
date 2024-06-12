@@ -1037,5 +1037,16 @@
   id: 136
   time: '2024-06-11T22:36:16.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2405
+- author: Whisper
+  changes:
+  - message: The guidebook now has basic entry pages for new players.
+    type: Add
+  - message: Added rifleman guidebook
+    type: Add
+  - message: Added drone guidebook
+    type: Add
+  id: 137
+  time: '2024-06-12T05:16:39.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2340
 Name: CM
 Order: -1
