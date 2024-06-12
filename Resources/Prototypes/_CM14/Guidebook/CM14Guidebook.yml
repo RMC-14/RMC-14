@@ -9,22 +9,29 @@
   name: cm-guide-entry-cm14
   text: "/ServerInfo/Guidebook/_CM14/CM14.xml"
   children:
-  - CMNewPlayerGuide
+  - CMGuideNewPlayer
   - CMChemicals
 
 - type: guideEntry
   parent: CM
-  id: CMNewPlayerGuide
+  id: CMGuideNewPlayer
   name: "New player guide"
-  text: "/ServerInfo/Guidebook/_CM14/CMNewPlayerGuide.xml"
+  text: "/ServerInfo/Guidebook/_CM14/CMGuideNewPlayer.xml"
   children:
-  - CMRiflemanGuide
-  #- CMDroneGuide
+  - CMGuideRoleRifleman
+  - CMGuideRoleDrone
 
 - type: guideEntry
   parent: CM
-  id: CMRiflemanGuide
-  name: "Rifleman guide"
-  text: "/ServerInfo/Guidebook/_CM14/NewPlayerGuide/CMRiflemanGuide.xml"
+  id: CMGuideRoleRifleman
+  priority: 0
+  name: "Rifleman Guide"
+  text: "/ServerInfo/Guidebook/_CM14/NewPlayerGuide/CMGuideRoleRifleman.xml"
 
+- type: guideEntry
+  parent: CM
+  id: CMGuideRoleDrone
+  priority: 1
+  name: "Drone Guide"
+  text: "/ServerInfo/Guidebook/_CM14/NewPlayerGuide/CMGuideRoleDrone.xml"
 

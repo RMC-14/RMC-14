@@ -1,0 +1,13 @@
+﻿<Document>
+
+  #New player guide
+
+  - You can use the examine key (Shift + left mouse by default) to examine any entities in the guidebook.
+
+  ##USCM
+  - [textlink="Your first day as a rifleman!" link="CMGuideRoleRifleman"]
+
+  ##Xeno
+  - [textlink="So you've just been born into the hive! Now what?" link="CMGuideRoleDrone"]
+
+</Document>
