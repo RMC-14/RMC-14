@@ -30,4 +30,10 @@ tiles-cm-default-bravo = bravo metal tile
 tiles-cm-default-charlie = charlie metal tile
 tiles-cm-default-delta = delta metal tile
 
+tiles-cm-default-blue = blue metal tile
+tiles-cm-default-green = green metal tile
+tiles-cm-default-purple = purple metal tile
+tiles-cm-default-red = red metal tile
+tiles-cm-default-yellow = yellow metal tile
+
 tiles-cm-floor = floor

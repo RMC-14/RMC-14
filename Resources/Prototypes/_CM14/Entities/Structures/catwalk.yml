@@ -49,3 +49,10 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+
+- type: entity
+  parent: CMCatwalk
+  id: CMCatwalkShiva
+  components:
+  - type: Sprite
+    state: shiva_catwalk
