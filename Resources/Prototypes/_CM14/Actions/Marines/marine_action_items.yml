@@ -1,5 +1,5 @@
 - type: entity
-  id: ActionToggleScope
+  id: CMActionToggleScope
   name: Toggle Optics
   description: Scope in or out with your optics.
   components:

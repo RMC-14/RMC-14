@@ -39,7 +39,7 @@ public sealed partial class ScopeComponent : Component
     public EntityUid? PvsLoader;
 
     [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string ScopingToggleAction = "ActionToggleScope";
+    public string ScopingToggleAction = "CMActionToggleScope";
 
     [DataField, AutoNetworkedField]
     public EntityUid? ScopingToggleActionEntity;
