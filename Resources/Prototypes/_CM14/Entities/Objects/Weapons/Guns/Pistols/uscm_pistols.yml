@@ -109,6 +109,8 @@
         whitelist:
           tags:
           - CMMagazinePistol88m4AP
+  - type: GunDamageModifier
+    multiplier: 1.2
 
 - type: entity
   parent: CMWeaponPistolBase
