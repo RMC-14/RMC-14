@@ -15,7 +15,7 @@
 - type: guideEntry
   parent: CM
   id: CMGuideNewPlayer
-  name: "New player guide"
+  name: "New Player Guide"
   text: "/ServerInfo/Guidebook/_CM14/CMGuideNewPlayer.xml"
   children:
   - CMGuideRoleRifleman
