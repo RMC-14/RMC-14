@@ -13,6 +13,15 @@
     useDelay: 1
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoRest
+  name: Rest
+  description: Lie down to regenerate health and plasma more quickly while on weeds.
+  components:
+  - type: Sprite
+    state: resting
+
+- type: entity
   id: ActionXenoWatch
   parent: ActionXenoBase
   name: Watch Xenomorph
