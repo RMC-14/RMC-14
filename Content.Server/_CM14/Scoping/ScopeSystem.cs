@@ -25,8 +25,7 @@ public sealed class ScopeSystem : SharedScopeSystem
             cameraRecoilComponent.BaseOffset = targetOffset;
             Dirty(user, cameraRecoilComponent);
 
-            _eye.SetMaxZoom(user, Vector2.One * scopeComponent.Zoom);
-            _eye.SetZoom(user, Vector2.One * scopeComponent.Zoom);
+            _eye.SetZoom(user, Vector2.One * scopeComponent.Zoom, true);
             if (TryComp<ActorComponent>(user, out var actorComp))
             {
                 // add cardinal vector, until better pvs handling is introduced here
