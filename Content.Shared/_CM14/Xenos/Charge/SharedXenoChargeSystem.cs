@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
 using Content.Shared._CM14.Marines;
 using Content.Shared._CM14.Xenos.Plasma;
+using Content.Shared._CM14.Xenos.Animations;
 using Content.Shared.DoAfter;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -101,7 +102,7 @@ public abstract class SharedXenoChargeSystem : EntitySystem
         if (_timing.IsFirstTimePredicted && xeno.Comp.Charge is { } charge)
         {
             xeno.Comp.Charge = null;
-            DoLunge(xeno, charge.Normalized());
+            new PlayLungeAnimationEvent(GetNetEntity(xeno), charge.Normalized());
         }
 
         if (TryComp(xeno, out XenoComponent? xenoComp) &&
@@ -133,9 +134,5 @@ public abstract class SharedXenoChargeSystem : EntitySystem
         if (_net.IsServer &&
             HasComp<MarineComponent>(targetId))
             SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
-    }
-
-    protected virtual void DoLunge(EntityUid xeno, Vector2 direction)
-    {
     }
 }

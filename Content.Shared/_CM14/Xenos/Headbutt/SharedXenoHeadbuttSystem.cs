@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using Content.Shared._CM14.Xenos.Plasma;
+using Content.Shared._CM14.Xenos.Animations;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
@@ -79,7 +80,7 @@ public abstract class SharedXenoHeadbuttSystem : EntitySystem
         if (_timing.IsFirstTimePredicted && xeno.Comp.Charge is { } charge)
         {
             xeno.Comp.Charge = null;
-            DoLunge(xeno, charge.Normalized());
+            new PlayLungeAnimationEvent(GetNetEntity(xeno), charge.Normalized());
         }
 
         if (_net.IsServer)
@@ -109,9 +110,5 @@ public abstract class SharedXenoHeadbuttSystem : EntitySystem
 
         if (_net.IsServer)
             SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
-    }
-
-    protected virtual void DoLunge(EntityUid xeno, Vector2 direction)
-    {
     }
 }
