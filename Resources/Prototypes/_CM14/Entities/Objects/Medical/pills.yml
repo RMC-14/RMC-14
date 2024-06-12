@@ -12,6 +12,9 @@
   - type: Item
     size: Tiny
     sprite: _CM14/Objects/Chemistry/pills.rsi
+  - type: ReagentExaminationRequiresSkill
+    skills:
+      medical: 2
 
 # TODO CM14 these need to have a random state per round
 - type: entity
