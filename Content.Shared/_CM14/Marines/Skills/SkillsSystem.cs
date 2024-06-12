@@ -70,18 +70,19 @@ public sealed class SkillsSystem : EntitySystem
 
                 int reagentCount = foundReagents.Count;
                 int i = 0;
-                var reagentMessage = "";
+                var fullMessage = "";
+                fullMessage += Loc.GetString("reagents-examine-action-found");
+                fullMessage += " ";
                 foreach (var reagentId in foundReagents)
                 {
-                    reagentMessage += reagentId;
+                    fullMessage += reagentId;
                     if (i > reagentCount)
                     {
-                        reagentMessage += ", ";
+                        fullMessage += ", ";
                     }
                     ++i;
                 }
-                args.PushMarkup(Loc.GetString("reagents-examine-action-found"));
-                args.PushMarkup(reagentMessage);
+                args.PushMarkup(fullMessage);
             }
             else
             {
