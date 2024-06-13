@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/turf/walls/solaris/solaris.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "solaris_interior"
+    },
+    {
+      "name": "solaris_interior0",
+      "directions": 4
+    },
+    {
+      "name": "solaris_interior1",
+      "directions": 4
+    },
+    {
+      "name": "solaris_interior2",
+      "directions": 4
+    },
+    {
+      "name": "solaris_interior3",
+      "directions": 4
+    },
+    {
+      "name": "solaris_interior4",
+      "directions": 4
+    },
+    {
+      "name": "solaris_interior5",
+      "directions": 4
+    },
+    {
+      "name": "solaris_interior6",
+      "directions": 4
+    },
+    {
+      "name": "solaris_interior7",
+      "directions": 4
+    }
+  ]
+}
