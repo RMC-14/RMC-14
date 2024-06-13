@@ -39,9 +39,10 @@ public sealed partial class PerishableComponent : Component
 
     /// <summary>
     /// How many moles of gas released per second, per unit of mass.
+    /// CM14 default to 0 to prevent any organic species (including base SS14) from generating gas
     /// </summary>
     [DataField]
-    public float MolsPerSecondPerUnitMass = 0.0025f;
+    public float MolsPerSecondPerUnitMass = 0;
 
     [DataField, AutoNetworkedField]
     public int Stage;
