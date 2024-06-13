@@ -228,13 +228,6 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         }
 
         var query = EntityQueryEnumerator<XenoActivePheromonesComponent, XenoPheromonesComponent, TransformComponent>();
-
-        // No objectpool in sharedTM.
-        foreach (var receiver in _pheromonesJob.Receivers)
-        {
-            receiver.Clear();
-        }
-
         _pheromonesJob.Pheromones.Clear();
 
         while (query.MoveNext(out var uid, out var active, out var pheromones, out var xform))
@@ -324,6 +317,8 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
     private record struct PheromonesJob() : IParallelRobustJob
     {
+        public int BatchSize => 4;
+
         public EntityLookupSystem Lookup;
 
         public ValueList<(
@@ -338,7 +333,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         public void Execute(int index)
         {
             var (_, _, pheromones, xform) = Pheromones[index];
-            Lookup.GetEntitiesInRange(xform.Coordinates, pheromones.PheromonesRange, Receivers[index]);
+            ref var receivers = ref Receivers[index];
+            receivers.Clear();
+            Lookup.GetEntitiesInRange(xform.Coordinates, pheromones.PheromonesRange, receivers);
         }
     }
 }
