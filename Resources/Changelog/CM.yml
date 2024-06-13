@@ -1055,5 +1055,12 @@
   id: 138
   time: '2024-06-12T21:48:08.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2410
+- author: K-Dynamic
+  changes:
+  - message: Bodies and perishables no longer produce ammonia
+    type: Tweak
+  id: 139
+  time: '2024-06-13T03:12:58.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2396
 Name: CM
 Order: -1
