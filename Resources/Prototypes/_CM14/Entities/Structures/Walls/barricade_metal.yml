@@ -23,6 +23,7 @@
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: CMBarricade
+  - type: InteractionOutline
 
 # Metal Barricade Tree
 - type: entity
