@@ -76,10 +76,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
         if (!_handsSystem.TryGetActiveItem(args.Performer, out var heldItem) || heldItem != uid)
         {
             var msgError = Loc.GetString("cm-action-popup-scoping-user-must-hold", ("scope", Name(uid)));
-            if (_gameTiming.IsFirstTimePredicted && _gameTiming.InPrediction)
-            {
-                _popupSystem.PopupClient(msgError, args.Performer, args.Performer);
-            }
+            _popupSystem.PopupClient(msgError, args.Performer, args.Performer);
 
             return;
         }
@@ -113,12 +110,9 @@ public abstract partial class SharedScopeSystem : EntitySystem
         }
 
         var msgUser = Loc.GetString("cm-action-popup-scoping-user", ("scope", Name(item)));
+        _popupSystem.PopupClient(msgUser, user, user);
 
         _actionsSystem.SetToggled(component.ScopingToggleActionEntity, true);
-        if (_gameTiming.IsFirstTimePredicted && _gameTiming.InPrediction)
-        {
-            _popupSystem.PopupClient(msgUser, user, user);
-        }
 
         StartScopingCamera(user, component);
 
@@ -141,13 +135,9 @@ public abstract partial class SharedScopeSystem : EntitySystem
         }
 
         var msgUser = Loc.GetString("cm-action-popup-scoping-stopping-user", ("scope", Name(item)));
+        _popupSystem.PopupClient(msgUser, user, user);
 
         _actionsSystem.SetToggled(component.ScopingToggleActionEntity, false);
-
-        if (_gameTiming.IsFirstTimePredicted && _gameTiming.InPrediction)
-        {
-            _popupSystem.PopupClient(msgUser, user, user);
-        }
 
         StopScopingCamera(user, component);
 
