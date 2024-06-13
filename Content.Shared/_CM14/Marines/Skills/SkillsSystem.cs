@@ -5,7 +5,6 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
-using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._CM14.Marines.Skills;
@@ -21,6 +20,7 @@ public sealed class SkillsSystem : EntitySystem
         SubscribeLocalEvent<MedicallyUnskilledDoAfterComponent, AttemptHyposprayUseEvent>(OnAttemptHyposprayUse);
         SubscribeLocalEvent<RequiresSkillComponent, BeforeRangedInteractEvent>(OnRequiresSkillBeforeRangedInteract);
         SubscribeLocalEvent<ReagentExaminationRequiresSkillComponent, ExaminedEvent>(OnExamineReagentContainer);
+        SubscribeLocalEvent<ExamineRequiresSkillComponent, ExaminedEvent>(OnExamineRequiresSkill);
     }
 
     private void OnAttemptHyposprayUse(Entity<MedicallyUnskilledDoAfterComponent> ent, ref AttemptHyposprayUseEvent args)
@@ -47,47 +47,80 @@ public sealed class SkillsSystem : EntitySystem
     private void OnExamineReagentContainer(Entity<ReagentExaminationRequiresSkillComponent> ent, ref ExaminedEvent args)
     {
         if (!HasSkills(args.Examiner, in ent.Comp.Skills))
-            return;
-
-        if (!TryComp(args.Examined, out SolutionContainerManagerComponent? solutionContainerManager) || solutionContainerManager is null)
         {
+            if (ent.Comp.UnskilledExamine != null)
+            {
+                using (args.PushGroup(nameof(ReagentExaminationRequiresSkillComponent)))
+                {
+                    args.PushMarkup(Loc.GetString(ent.Comp.UnskilledExamine));
+                }
+            }
+
             return;
         }
-        var foundReagents = new HashSet<ReagentQuantity>();
-        foreach (var solutionContainerID in solutionContainerManager.Containers)
+
+        if (!TryComp(args.Examined, out SolutionContainerManagerComponent? solutionContainerManager))
+            return;
+
+        var foundReagents = new List<ReagentQuantity>();
+        foreach (var solutionContainerId in solutionContainerManager.Containers)
         {
-            if (!_solutionContainerSystem.TryGetSolution(args.Examined, solutionContainerID, out _, out var solution) || solution is null)
-            {
+            if (!_solutionContainerSystem.TryGetSolution(args.Examined, solutionContainerId, out _, out var solution))
                 continue;
-            }
+
             foreach (var reagent in solution.Contents)
             {
                 foundReagents.Add(reagent);
             }
         }
+
         if (!foundReagents.Any())
         {
-            args.PushMarkup(Loc.GetString("reagents-examine-action-found-none"));
+            using (args.PushGroup(nameof(ReagentExaminationRequiresSkillComponent)))
+            {
+                args.PushMarkup(Loc.GetString(ent.Comp.SkilledExamineNone));
+            }
+
             return;
         }
 
-        int reagentCount = foundReagents.Count;
-        int i = 0;
-        var fullMessage = "";
-        fullMessage += Loc.GetString("reagents-examine-action-found");
-        fullMessage += " ";
-        foreach (var reagent in foundReagents)
+        var reagentCount = foundReagents.Count;
+        var fullMessage = $"{Loc.GetString(ent.Comp.SkilledExamineContains)} ";
+        for (var i = 0; i < foundReagents.Count; i++)
         {
+            var reagent = foundReagents[i];
             var reagentLocalizedName = _prototypeManager.Index<ReagentPrototype>(reagent.Reagent.Prototype).LocalizedName;
             var reagentQuantity = reagent.Quantity;
             fullMessage += $"{reagentLocalizedName}({reagentQuantity}u)";
             if (i > reagentCount)
-            {
                 fullMessage += ", ";
-            }
-            ++i;
         }
-        args.PushMarkup(fullMessage);
+
+        using (args.PushGroup(nameof(ReagentExaminationRequiresSkillComponent)))
+        {
+            args.PushMarkup(fullMessage);
+        }
+    }
+
+    private void OnExamineRequiresSkill(Entity<ExamineRequiresSkillComponent> ent, ref ExaminedEvent args)
+    {
+        if (!HasSkills(args.Examiner, in ent.Comp.Skills))
+        {
+            if (ent.Comp.UnskilledExamine != null)
+            {
+                using (args.PushGroup(nameof(ExamineRequiresSkillComponent), ent.Comp.ExaminePriority))
+                {
+                    args.PushMarkup(Loc.GetString(ent.Comp.UnskilledExamine));
+                }
+            }
+
+            return;
+        }
+
+        using (args.PushGroup(nameof(ExamineRequiresSkillComponent), ent.Comp.ExaminePriority))
+        {
+            args.PushMarkup(Loc.GetString(ent.Comp.SkilledExamine));
+        }
     }
 
     public TimeSpan GetDelay(EntityUid user, EntityUid tool)
