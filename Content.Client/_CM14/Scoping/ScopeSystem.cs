@@ -9,6 +9,20 @@ public sealed class ScopeSystem : SharedScopeSystem
 {
     [Dependency] private readonly ContentEyeSystem _eye = default!;
 
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeNetworkEvent<CMScopeToggleEvent>(OnScopeToggle);
+    }
+
+    private void OnScopeToggle(CMScopeToggleEvent args)
+    {
+        if (TryComp(GetEntity(args.User), out CameraRecoilComponent? cameraRecoilComp))
+        {
+            cameraRecoilComp.BaseOffset = args.EyeOffset;
+        }
+    }
+
     protected override void StartScopingCamera(EntityUid user, ScopeComponent scopeComponent)
     {
     }
