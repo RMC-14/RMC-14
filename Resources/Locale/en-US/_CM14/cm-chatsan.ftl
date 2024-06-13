@@ -1,6 +1,9 @@
 ﻿cm-chatsan-word-deltard = deltard
 cm-chatsan-replacement-deltard = delta
 
+cm-chatsan-word-deltards = deltards
+cm-chatsan-replacement-deltards = deltas
+
 cm-chatsan-word-admin-marine = admin
 cm-chatsan-replacement-admin-marine = high command
 
@@ -178,9 +181,6 @@ cm-chatsan-replacement-executive-officer = young tall queen
 cm-chatsan-word-exec-officer = exec officer
 cm-chatsan-replacement-exec-officer = young tall queen
 
-cm-chatsan-word-sea = sea
-cm-chatsan-replacement-sea = young tall queen
-
 cm-chatsan-word-senior-enlisted = senior enlisted
 cm-chatsan-replacement-senior-enlisted = young tall queen
 
@@ -189,6 +189,9 @@ cm-chatsan-replacement-senior-enlisted-advisor = young tall queen
 
 cm-chatsan-word-lz = lz
 cm-chatsan-replacement-lz = metal bird perch
+
+cm-chatsan-word-shoot = shoot
+cm-chatsan-replacement-shoot = spit
 
 # cm-chatsan-word-#tank = #tank
 # cm-chatsan-replacement-#tank = turtle
