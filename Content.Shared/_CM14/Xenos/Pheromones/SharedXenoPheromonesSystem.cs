@@ -231,18 +231,21 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
         while (query.MoveNext(out var uid, out var active, out var pheromones, out var xform))
         {
-            if (_timing.CurTime >= pheromones.NextPheromonesPlasmaUse)
+            // We'll only update pheromones receivers whenever plasma gets used.
+            // This avoids us having to do lookups every tick.
+            if (_timing.CurTime < pheromones.NextPheromonesPlasmaUse)
             {
-                pheromones.NextPheromonesPlasmaUse += _pheromonePlasmaUseDelay;
-                if (!_xenoPlasma.TryRemovePlasma(uid, pheromones.PheromonesPlasmaUpkeep))
-                {
-                    RemCompDeferred<XenoActivePheromonesComponent>(uid);
-                    continue;
-                }
-
-                Dirty(uid, pheromones);
+                continue;
             }
 
+            pheromones.NextPheromonesPlasmaUse += _pheromonePlasmaUseDelay;
+            if (!_xenoPlasma.TryRemovePlasma(uid, pheromones.PheromonesPlasmaUpkeep))
+            {
+                RemCompDeferred<XenoActivePheromonesComponent>(uid);
+                continue;
+            }
+
+            Dirty(uid, pheromones);
             _pheromonesJob.Pheromones.Add((uid, active, pheromones, xform));
         }
 
