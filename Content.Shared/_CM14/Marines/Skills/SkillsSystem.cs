@@ -46,49 +46,47 @@ public sealed class SkillsSystem : EntitySystem
 
     private void OnExamineReagentContainer(Entity<ReagentExaminationRequiresSkillComponent> ent, ref ExaminedEvent args)
     {
-        if (HasSkills(args.Examiner, in ent.Comp.Skills))
-        {
-            if (!TryComp<SolutionContainerManagerComponent>(args.Examined, out var solutionContainerManager) || solutionContainerManager is null)
-            {
-                return;
-            }
-            var foundReagents = new HashSet<string>();
-            foreach (var solutionContainerID in solutionContainerManager.Containers)
-            {
-                if (!_solutionContainerSystem.TryGetSolution(args.Examined, solutionContainerID, out _, out var solution) || solution is null)
-                {
-                    continue;
-                }
-                foreach (var reagent in solution.Contents)
-                {
-                    var reagentName = _prototypeManager.Index<ReagentPrototype>(reagent.Reagent.Prototype).LocalizedName;
-                    foundReagents.Add(reagentName);
-                }
-            }
-            if (foundReagents.Any())
-            {
+        if (!HasSkills(args.Examiner, in ent.Comp.Skills))
+            return;
 
-                int reagentCount = foundReagents.Count;
-                int i = 0;
-                var fullMessage = "";
-                fullMessage += Loc.GetString("reagents-examine-action-found");
-                fullMessage += " ";
-                foreach (var reagentId in foundReagents)
-                {
-                    fullMessage += reagentId;
-                    if (i > reagentCount)
-                    {
-                        fullMessage += ", ";
-                    }
-                    ++i;
-                }
-                args.PushMarkup(fullMessage);
-            }
-            else
+        if (!TryComp(args.Examined, out SolutionContainerManagerComponent? solutionContainerManager) || solutionContainerManager is null)
+        {
+            return;
+        }
+        var foundReagents = new HashSet<string>();
+        foreach (var solutionContainerID in solutionContainerManager.Containers)
+        {
+            if (!_solutionContainerSystem.TryGetSolution(args.Examined, solutionContainerID, out _, out var solution) || solution is null)
             {
-                args.PushMarkup(Loc.GetString("reagents-examine-action-found-none"));
+                continue;
+            }
+            foreach (var reagent in solution.Contents)
+            {
+                var reagentName = _prototypeManager.Index<ReagentPrototype>(reagent.Reagent.Prototype).LocalizedName;
+                foundReagents.Add(reagentName);
             }
         }
+        if (!foundReagents.Any())
+        {
+            args.PushMarkup(Loc.GetString("reagents-examine-action-found-none"));
+            return;
+        }
+
+        int reagentCount = foundReagents.Count;
+        int i = 0;
+        var fullMessage = "";
+        fullMessage += Loc.GetString("reagents-examine-action-found");
+        fullMessage += " ";
+        foreach (var reagentId in foundReagents)
+        {
+            fullMessage += reagentId;
+            if (i > reagentCount)
+            {
+                fullMessage += ", ";
+            }
+            ++i;
+        }
+        args.PushMarkup(fullMessage);
     }
 
     public TimeSpan GetDelay(EntityUid user, EntityUid tool)
