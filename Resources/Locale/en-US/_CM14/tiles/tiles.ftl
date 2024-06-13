@@ -10,6 +10,7 @@ tiles-cm-green = green metal tile
 tiles-cm-silver = silver metal tile
 tiles-cm-white-sterile = white metal sterile tile
 tiles-cm-green-sterile = green metal sterile tile
+tiles-cm-freezer = freezer tile
 tiles-cm-black = black metal tile
 tiles-cm-ai = ai-room tile
 tiles-cm-tcomms = tcommunications tile
@@ -18,6 +19,8 @@ tiles-cm-plating = plating tile
 tiles-cm-striped = striped tile
 tiles-cm-test = test tile
 tiles-cm-wy = WY tile
+tiles-cm-cult = cult tile
+tiles-cm-engine = engine tile
 
 tiles-cm-dirt = dirt tile
 tiles-cm-desert = desert tile
@@ -32,6 +35,7 @@ tiles-cm-default-charlie = charlie metal tile
 tiles-cm-default-delta = delta metal tile
 
 tiles-cm-default-blue = blue metal tile
+tiles-cm-default-brown = brown metal tile
 tiles-cm-default-green = green metal tile
 tiles-cm-default-purple = purple metal tile
 tiles-cm-default-red = red metal tile
