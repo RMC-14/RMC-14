@@ -1062,5 +1062,12 @@
   id: 139
   time: '2024-06-13T03:12:58.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2396
+- author: Timemaster99
+  changes:
+  - message: Fixed M41a Mk2 inhand and icon sprites
+    type: Fix
+  id: 140
+  time: '2024-06-13T08:09:40.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2425
 Name: CM
 Order: -1
