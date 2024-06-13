@@ -53,7 +53,7 @@ public sealed class SkillsSystem : EntitySystem
         {
             return;
         }
-        var foundReagents = new HashSet<string>();
+        var foundReagents = new HashSet<ReagentQuantity>();
         foreach (var solutionContainerID in solutionContainerManager.Containers)
         {
             if (!_solutionContainerSystem.TryGetSolution(args.Examined, solutionContainerID, out _, out var solution) || solution is null)
@@ -62,8 +62,7 @@ public sealed class SkillsSystem : EntitySystem
             }
             foreach (var reagent in solution.Contents)
             {
-                var reagentName = _prototypeManager.Index<ReagentPrototype>(reagent.Reagent.Prototype).LocalizedName;
-                foundReagents.Add(reagentName);
+                foundReagents.Add(reagent);
             }
         }
         if (!foundReagents.Any())
@@ -77,9 +76,11 @@ public sealed class SkillsSystem : EntitySystem
         var fullMessage = "";
         fullMessage += Loc.GetString("reagents-examine-action-found");
         fullMessage += " ";
-        foreach (var reagentId in foundReagents)
+        foreach (var reagent in foundReagents)
         {
-            fullMessage += reagentId;
+            var reagentLocalizedName = _prototypeManager.Index<ReagentPrototype>(reagent.Reagent.Prototype).LocalizedName;
+            var reagentQuantity = reagent.Quantity;
+            fullMessage += $"{reagentLocalizedName}({reagentQuantity}u)";
             if (i > reagentCount)
             {
                 fullMessage += ", ";
