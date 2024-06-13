@@ -34,67 +34,67 @@ public abstract partial class SharedScopeSystem : EntitySystem
         SubscribeLocalEvent<ScopeComponent, MapInitEvent>(OnMapInit);
     }
 
-    private void OnMapInit(EntityUid uid, ScopeComponent component, MapInitEvent args)
+    private void OnMapInit(Entity<ScopeComponent> ent, ref MapInitEvent args)
     {
-        _actionContainer.EnsureAction(uid, ref component.ScopingToggleActionEntity, component.ScopingToggleAction);
-        Dirty(uid, component);
+        _actionContainer.EnsureAction(ent.Owner, ref ent.Comp.ScopingToggleActionEntity, ent.Comp.ScopingToggleAction);
+        Dirty(ent.Owner, ent.Comp);
     }
 
-    private void OnEquip(EntityUid uid, ScopeComponent component, GotEquippedHandEvent args)
+    private void OnEquip(Entity<ScopeComponent> ent, ref GotEquippedHandEvent args)
     {
-        component.User = args.User;
-        Dirty(uid, component);
+        ent.Comp.User = args.User;
+        Dirty(ent.Owner, ent.Comp);
 
         if(_net.IsServer)
             EnsureComp<ScopeUserComponent>(args.User);
     }
 
-    private void OnUnequip(EntityUid uid, ScopeComponent component, GotUnequippedHandEvent args)
+    private void OnUnequip(Entity<ScopeComponent> ent, ref GotUnequippedHandEvent args)
     {
-        StopScopingHelper(uid, component, args.User);
+        StopScopingHelper(ent.Owner, ent.Comp, args.User);
     }
 
-    private void OnDeselectHand(EntityUid uid, ScopeComponent component, HandDeselectedEvent args)
+    private void OnDeselectHand(Entity<ScopeComponent> ent, ref HandDeselectedEvent args)
     {
         if (args.Handled)
             return;
 
-        if (component.IsScoping)
-            StopScoping(uid, component, args.User);
+        if (ent.Comp.IsScoping)
+            StopScoping(ent.Owner, ent.Comp, args.User);
     }
 
-    private void OnGetActions(EntityUid uid, ScopeComponent component, GetItemActionsEvent args)
+    private void OnGetActions(Entity<ScopeComponent> ent, ref GetItemActionsEvent args)
     {
-        args.AddAction(ref component.ScopingToggleActionEntity, component.ScopingToggleAction);
+        args.AddAction(ref ent.Comp.ScopingToggleActionEntity, ent.Comp.ScopingToggleAction);
     }
 
-    private void OnToggleAction(EntityUid uid, ScopeComponent component, ToggleActionEvent args)
+    private void OnToggleAction(Entity<ScopeComponent> ent, ref ToggleActionEvent args)
     {
         if (args.Handled)
             return;
 
-        if (!_handsSystem.TryGetActiveItem(args.Performer, out var heldItem) || heldItem != uid)
+        if (!_handsSystem.TryGetActiveItem(args.Performer, out var heldItem) || heldItem != ent.Owner)
         {
-            var msgError = Loc.GetString("cm-action-popup-scoping-user-must-hold", ("scope", Name(uid)));
+            var msgError = Loc.GetString("cm-action-popup-scoping-user-must-hold", ("scope", Name(ent.Owner)));
             _popupSystem.PopupClient(msgError, args.Performer, args.Performer);
 
             return;
         }
 
-        if (component.IsScoping)
-            StopScoping(uid, component, args.Performer);
+        if (ent.Comp.IsScoping)
+            StopScoping(ent.Owner, ent.Comp, args.Performer);
         else
-            StartScoping(uid, component, args.Performer);
+            StartScoping(ent.Owner, ent.Comp, args.Performer);
 
         args.Handled = true;
     }
 
-    private void OnShutdown(EntityUid uid, ScopeComponent component, ComponentShutdown args)
+    private void OnShutdown(Entity<ScopeComponent> ent, ref ComponentShutdown args)
     {
-        if (component.User != null)
+        if (ent.Comp.User != null)
         {
-            _actionsSystem.RemoveProvidedActions(component.User.Value, uid);
-            StopScopingHelper(uid, component, component.User.Value);
+            _actionsSystem.RemoveProvidedActions(ent.Comp.User.Value, ent.Owner);
+            StopScopingHelper(ent.Owner, ent.Comp, ent.Comp.User.Value);
         }
     }
 
@@ -147,10 +147,10 @@ public abstract partial class SharedScopeSystem : EntitySystem
         return true;
     }
 
-    private void StopScopingHelper(EntityUid uid, ScopeComponent component, EntityUid user)
+    private void StopScopingHelper(EntityUid item, ScopeComponent component, EntityUid user)
     {
         if (component.IsScoping)
-            StopScoping(uid, component, user);
+            StopScoping(item, component, user);
 
         if (!TryComp(user, out HandsComponent? hands))
             return;

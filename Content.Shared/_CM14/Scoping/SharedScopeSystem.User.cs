@@ -15,36 +15,36 @@ public abstract partial class SharedScopeSystem
         SubscribeLocalEvent<ScopeUserComponent, PlayerDetachedEvent>(OnPlayerDetached);
     }
 
-    private void OnMove(EntityUid uid, ScopeUserComponent component, ref MoveEvent args)
+    private void OnMove(Entity<ScopeUserComponent> ent, ref MoveEvent args)
     {
-        if (!TryComp(component.ScopingItem, out ScopeComponent? scopeComponent))
+        if (!TryComp(ent.Comp.ScopingItem, out ScopeComponent? scopeComponent))
             return;
 
         if (!_transformSystem.InRange(scopeComponent.LastScopedAt, args.NewPosition, 1.5f))
-            UserStopScoping(uid, component);
+            UserStopScoping(ent.Owner, ent.Comp);
     }
 
-    private void OnParentChanged(EntityUid uid, ScopeUserComponent component, ref EntParentChangedMessage args)
+    private void OnParentChanged(Entity<ScopeUserComponent> ent, ref EntParentChangedMessage args)
     {
-        UserStopScoping(uid, component);
+        UserStopScoping(ent.Owner, ent.Comp);
     }
 
-    private void OnInsertAttempt(EntityUid uid, ScopeUserComponent component, ContainerGettingInsertedAttemptEvent args)
+    private void OnInsertAttempt(Entity<ScopeUserComponent> ent, ref ContainerGettingInsertedAttemptEvent args)
     {
-        UserStopScoping(uid, component);
+        UserStopScoping(ent.Owner, ent.Comp);
     }
 
-    private void OnEntityTerminating(EntityUid uid, ScopeUserComponent component, ref EntityTerminatingEvent args)
+    private void OnEntityTerminating(Entity<ScopeUserComponent> ent, ref EntityTerminatingEvent args)
     {
-        if (!TryComp(component.ScopingItem, out ScopeComponent? scopeComponent))
+        if (!TryComp(ent.Comp.ScopingItem, out ScopeComponent? scopeComponent))
             return;
 
-        StopScopingHelper(component.ScopingItem.Value, scopeComponent, uid);
+        StopScopingHelper(ent.Comp.ScopingItem.Value, scopeComponent, ent.Owner);
     }
 
-    private void OnPlayerDetached(EntityUid uid, ScopeUserComponent component, ref PlayerDetachedEvent args)
+    private void OnPlayerDetached(Entity<ScopeUserComponent> ent, ref PlayerDetachedEvent args)
     {
-        UserStopScoping(uid, component);
+        UserStopScoping(ent.Owner, ent.Comp);
     }
 
     private void UserStopScoping(EntityUid uid, ScopeUserComponent component)
