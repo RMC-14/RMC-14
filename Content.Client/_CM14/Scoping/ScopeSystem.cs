@@ -29,7 +29,7 @@ public sealed class ScopeSystem : SharedScopeSystem
 
     protected override void StopScopingCamera(EntityUid user, ScopeComponent scopeComponent)
     {
-        if (TryComp<CameraRecoilComponent>(user, out var cameraRecoilComponent))
+        if (TryComp(user, out CameraRecoilComponent? cameraRecoilComponent))
         {
             _eye.ResetZoom(user);
             cameraRecoilComponent.BaseOffset = Vector2.Zero;

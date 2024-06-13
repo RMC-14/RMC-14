@@ -24,16 +24,17 @@ public sealed class ScopeSystem : SharedScopeSystem
 
         var cardinalVector = xform.LocalRotation.GetCardinalDir().ToVec();
         var targetOffset = cardinalVector * ((smallestViewpointSize * scopeComponent.Zoom - 1) / 2);
-        _eye.SetOffset(user, targetOffset);
+
+        _eye.SetOffset(user, targetOffset); // apparently this is required for aim to work properly
+        _contentEye.SetZoom(user, Vector2.One * scopeComponent.Zoom, true);
 
         var scopeToggleEvent = new CMScopeToggleEvent(GetNetEntity(user), targetOffset);
         RaiseNetworkEvent(scopeToggleEvent, user);
 
-        _contentEye.SetZoom(user, Vector2.One * scopeComponent.Zoom, true);
-        if (TryComp<ActorComponent>(user, out var actorComp))
+        if (TryComp(user, out ActorComponent? actorComp))
         {
             // add cardinal vector, until better pvs handling is introduced here
-            var loaderId = Spawn("CMScopingChunkLoader", _transformSystem.GetMapCoordinates(xform).Offset(targetOffset + cardinalVector * 2));
+            var loaderId = Spawn(scopeComponent.PvsLoaderProto, _transformSystem.GetMapCoordinates(xform).Offset(targetOffset + cardinalVector * 2));
             scopeComponent.PvsLoader = loaderId;
             _viewSubscriber.AddViewSubscriber(loaderId, actorComp.PlayerSession);
         }

@@ -1,9 +1,7 @@
-﻿using System.Linq;
-using Content.Shared.Actions;
+﻿using Content.Shared.Actions;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.Toggleable;
 using Robust.Shared.Network;
@@ -21,13 +19,11 @@ public abstract partial class SharedScopeSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly INetManager _net = default!;
 
-    /// <inheritdoc/>
     public override void Initialize()
     {
         InitializeUser();
         SubscribeLocalEvent<ScopeComponent, GotEquippedHandEvent>(OnEquip);
         SubscribeLocalEvent<ScopeComponent, GotUnequippedHandEvent>(OnUnequip);
-        SubscribeLocalEvent<ScopeComponent, DroppedEvent>(OnDrop);
         SubscribeLocalEvent<ScopeComponent, HandDeselectedEvent>(OnDeselectHand);
 
         SubscribeLocalEvent<ScopeComponent, GetItemActionsEvent>(OnGetActions);
@@ -58,11 +54,6 @@ public abstract partial class SharedScopeSystem : EntitySystem
         StopScopingHelper(uid, component, args.User);
     }
 
-    private void OnDrop(EntityUid uid, ScopeComponent component, DroppedEvent args)
-    {
-        StopScopingHelper(uid, component, args.User);
-    }
-
     private void OnDeselectHand(EntityUid uid, ScopeComponent component, HandDeselectedEvent args)
     {
         if (args.Handled)
@@ -87,7 +78,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
             var msgError = Loc.GetString("cm-action-popup-scoping-user-must-hold", ("scope", Name(uid)));
             if (_gameTiming.IsFirstTimePredicted && _gameTiming.InPrediction)
             {
-                _popupSystem.PopupEntity(msgError, args.Performer, args.Performer);
+                _popupSystem.PopupClient(msgError, args.Performer, args.Performer);
             }
 
             return;
@@ -115,7 +106,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
         if (component.IsScoping)
             return false;
 
-        if (TryComp<ScopeUserComponent>(user, out var scopeUserComp))
+        if (TryComp(user, out ScopeUserComponent? scopeUserComp))
         {
             scopeUserComp.ScopingItem = item;
             Dirty(user, scopeUserComp);
@@ -126,7 +117,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
         _actionsSystem.SetToggled(component.ScopingToggleActionEntity, true);
         if (_gameTiming.IsFirstTimePredicted && _gameTiming.InPrediction)
         {
-            _popupSystem.PopupEntity(msgUser, user, user);
+            _popupSystem.PopupClient(msgUser, user, user);
         }
 
         StartScopingCamera(user, component);
@@ -143,7 +134,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
         if (!component.IsScoping)
             return false;
 
-        if (TryComp<ScopeUserComponent>(user, out var scopeUserComp))
+        if (TryComp(user, out ScopeUserComponent? scopeUserComp))
         {
             scopeUserComp.ScopingItem = null;
             Dirty(user, scopeUserComp);
@@ -155,7 +146,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
         if (_gameTiming.IsFirstTimePredicted && _gameTiming.InPrediction)
         {
-            _popupSystem.PopupEntity(msgUser, user, user);
+            _popupSystem.PopupClient(msgUser, user, user);
         }
 
         StopScopingCamera(user, component);
@@ -171,12 +162,10 @@ public abstract partial class SharedScopeSystem : EntitySystem
         if (component.IsScoping)
             StopScoping(uid, component, user);
 
-        if (!TryComp<HandsComponent>(user, out var hands))
+        if (!TryComp(user, out HandsComponent? hands))
             return;
 
-        var heldItems = _handsSystem.EnumerateHeld(user, hands).ToArray();
-
-        foreach (var heldItem in heldItems)
+        foreach (var heldItem in _handsSystem.EnumerateHeld(user, hands))
         {
             if (HasComp<ScopeComponent>(heldItem))
             {

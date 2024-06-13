@@ -17,7 +17,7 @@ public abstract partial class SharedScopeSystem
 
     private void OnMove(EntityUid uid, ScopeUserComponent component, ref MoveEvent args)
     {
-        if (!TryComp<ScopeComponent>(component.ScopingItem, out var scopeComponent))
+        if (!TryComp(component.ScopingItem, out ScopeComponent? scopeComponent))
             return;
 
         if (!_transformSystem.InRange(scopeComponent.LastScopedAt, args.NewPosition, 1.5f))
@@ -36,7 +36,7 @@ public abstract partial class SharedScopeSystem
 
     private void OnEntityTerminating(EntityUid uid, ScopeUserComponent component, ref EntityTerminatingEvent args)
     {
-        if (!TryComp<ScopeComponent>(component.ScopingItem, out var scopeComponent))
+        if (!TryComp(component.ScopingItem, out ScopeComponent? scopeComponent))
             return;
 
         StopScopingHelper(component.ScopingItem.Value, scopeComponent, uid);
@@ -49,7 +49,7 @@ public abstract partial class SharedScopeSystem
 
     private void UserStopScoping(EntityUid uid, ScopeUserComponent component)
     {
-        if (TryComp<ScopeComponent>(component.ScopingItem, out var scopeComponent) && scopeComponent.IsScoping)
+        if (TryComp(component.ScopingItem, out ScopeComponent? scopeComponent) && scopeComponent.IsScoping)
             StopScoping(component.ScopingItem.Value, scopeComponent, uid);
     }
 }

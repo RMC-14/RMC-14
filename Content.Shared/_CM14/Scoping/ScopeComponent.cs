@@ -1,7 +1,6 @@
 ﻿using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared._CM14.Scoping;
 
@@ -38,8 +37,11 @@ public sealed partial class ScopeComponent : Component
     [ViewVariables, AutoNetworkedField]
     public EntityUid? PvsLoader;
 
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string ScopingToggleAction = "CMActionToggleScope";
+    [DataField]
+    public EntProtoId PvsLoaderProto = "CMScopingChunkLoader";
+
+    [DataField]
+    public EntProtoId ScopingToggleAction = "CMActionToggleScope";
 
     [DataField, AutoNetworkedField]
     public EntityUid? ScopingToggleActionEntity;
