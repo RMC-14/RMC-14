@@ -9,8 +9,12 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
+using Microsoft.Extensions.ObjectPool;
+using Robust.Shared.Collections;
 using Robust.Shared.GameStates;
+using Robust.Shared.Threading;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._CM14.Xenos.Pheromones;
 
@@ -22,11 +26,11 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IParallelManager _parallel = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     private readonly TimeSpan _pheromonePlasmaUseDelay = TimeSpan.FromSeconds(1);
-    private readonly HashSet<Entity<XenoComponent>> _receivers = new();
 
     private readonly HashSet<EntityUid>[] _oldReceivers = Enum.GetValues<XenoPheromones>()
         .Select(_ => new HashSet<EntityUid>())
@@ -34,9 +38,17 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
     private EntityQuery<DamageableComponent> _damageableQuery;
 
+    private PheromonesJob _pheromonesJob;
+
+
     public override void Initialize()
     {
         base.Initialize();
+
+        _pheromonesJob = new PheromonesJob()
+        {
+            Lookup = _entityLookup,
+        };
 
         _damageableQuery = GetEntityQuery<DamageableComponent>();
 
@@ -216,6 +228,15 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         }
 
         var query = EntityQueryEnumerator<XenoActivePheromonesComponent, XenoPheromonesComponent, TransformComponent>();
+
+        // No objectpool in sharedTM.
+        foreach (var receiver in _pheromonesJob.Receivers)
+        {
+            receiver.Clear();
+        }
+
+        _pheromonesJob.Pheromones.Clear();
+
         while (query.MoveNext(out var uid, out var active, out var pheromones, out var xform))
         {
             if (_timing.CurTime >= pheromones.NextPheromonesPlasmaUse)
@@ -230,13 +251,30 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                 Dirty(uid, pheromones);
             }
 
-            _receivers.Clear();
-            _entityLookup.GetEntitiesInRange(xform.Coordinates, pheromones.PheromonesRange, _receivers);
+            _pheromonesJob.Pheromones.Add((uid, active, pheromones, xform));
+        }
+
+        // Bump _receivers to match _pheromones.
+        // Can't use an ObjectPool because Sandboxing in shared and this avoids
+        // re-allocating the sets every single tick.
+        // Downside is more memory overhead, especially if pheromones drops off.
+        for (var i = _pheromonesJob.Receivers.Count; i < _pheromonesJob.Pheromones.Count; i++)
+        {
+            _pheromonesJob.Receivers.Add(new HashSet<Entity<XenoComponent>>());
+        }
+
+        _parallel.ProcessNow(_pheromonesJob, _pheromonesJob.Pheromones.Count);
+        DebugTools.Assert(_pheromonesJob.Receivers.Count >= _pheromonesJob.Pheromones.Count);
+
+        for (var i = 0; i < _pheromonesJob.Pheromones.Count; i++)
+        {
+            var (uid, active, pheromones, xform) = _pheromonesJob.Pheromones[i];
+            var receivers = _pheromonesJob.Receivers[i];
 
             switch (active.Pheromones)
             {
                 case XenoPheromones.Recovery:
-                    foreach (var receiver in _receivers)
+                    foreach (var receiver in receivers)
                     {
                         oldRecovery.Remove(receiver);
                         var recovery = EnsureComp<XenoRecoveryPheromonesComponent>(receiver);
@@ -245,7 +283,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
                     break;
                 case XenoPheromones.Warding:
-                    foreach (var receiver in _receivers)
+                    foreach (var receiver in receivers)
                     {
                         oldWarding.Remove(receiver);
                         var warding = EnsureComp<XenoWardingPheromonesComponent>(receiver);
@@ -254,7 +292,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
                     break;
                 case XenoPheromones.Frenzy:
-                    foreach (var receiver in _receivers)
+                    foreach (var receiver in receivers)
                     {
                         oldFrenzy.Remove(receiver);
                         var frenzy = EnsureComp<XenoFrenzyPheromonesComponent>(receiver);
@@ -281,6 +319,26 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         {
             RemComp<XenoFrenzyPheromonesComponent>(uid);
             _movementSpeed.RefreshMovementSpeedModifiers(uid);
+        }
+    }
+
+    private record struct PheromonesJob() : IParallelRobustJob
+    {
+        public EntityLookupSystem Lookup;
+
+        public ValueList<(
+            EntityUid Uid,
+            XenoActivePheromonesComponent Active,
+            XenoPheromonesComponent Pheromones,
+            TransformComponent Xform
+            )> Pheromones = new();
+
+        public ValueList<HashSet<Entity<XenoComponent>>> Receivers = new();
+
+        public void Execute(int index)
+        {
+            var (_, _, pheromones, xform) = Pheromones[index];
+            Lookup.GetEntitiesInRange(xform.Coordinates, pheromones.PheromonesRange, Receivers[index]);
         }
     }
 }
