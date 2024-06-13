@@ -48,6 +48,9 @@ public sealed class ScopeSystem : SharedScopeSystem
         _eye.SetOffset(user, Vector2.Zero);
         _contentEye.ResetZoom(user);
 
+        var scopeToggleEvent = new CMScopeToggleEvent(GetNetEntity(user), Vector2.Zero);
+        RaiseNetworkEvent(scopeToggleEvent, user);
+
         Del(scopeComponent.PvsLoader);
         scopeComponent.PvsLoader = null;
     }

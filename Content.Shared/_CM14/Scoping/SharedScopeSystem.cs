@@ -5,7 +5,6 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Toggleable;
 using Robust.Shared.Network;
-using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Scoping;
 
@@ -13,10 +12,8 @@ public abstract partial class SharedScopeSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
@@ -117,7 +114,6 @@ public abstract partial class SharedScopeSystem : EntitySystem
         StartScopingCamera(user, component);
 
         component.IsScoping = true;
-        component.LastScopedAt = Transform(user).Coordinates;
         Dirty(item, component);
 
         return true;

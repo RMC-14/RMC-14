@@ -1,4 +1,6 @@
-﻿using Robust.Shared.Containers;
+﻿using Content.Shared.Movement.Events;
+using Content.Shared.Movement.Pulling.Events;
+using Robust.Shared.Containers;
 using Robust.Shared.Player;
 
 namespace Content.Shared._CM14.Scoping;
@@ -7,7 +9,8 @@ public abstract partial class SharedScopeSystem
 {
     public void InitializeUser()
     {
-        SubscribeLocalEvent<ScopeUserComponent, MoveEvent>(OnMove);
+        SubscribeLocalEvent<ScopeUserComponent, MoveInputEvent>(OnMoveInput);
+        SubscribeLocalEvent<ScopeUserComponent, PullStartedMessage>(OnPullStarted);
         SubscribeLocalEvent<ScopeUserComponent, EntParentChangedMessage>(OnParentChanged);
         SubscribeLocalEvent<ScopeUserComponent, ContainerGettingInsertedAttemptEvent>(OnInsertAttempt);
         SubscribeLocalEvent<ScopeUserComponent, EntityTerminatingEvent>(OnEntityTerminating);
@@ -15,13 +18,17 @@ public abstract partial class SharedScopeSystem
         SubscribeLocalEvent<ScopeUserComponent, PlayerDetachedEvent>(OnPlayerDetached);
     }
 
-    private void OnMove(Entity<ScopeUserComponent> ent, ref MoveEvent args)
+    private void OnMoveInput(Entity<ScopeUserComponent> ent, ref MoveInputEvent args)
     {
-        if (!TryComp(ent.Comp.ScopingItem, out ScopeComponent? scopeComponent))
+        UserStopScoping(ent.Owner, ent.Comp);
+    }
+
+    private void OnPullStarted(Entity<ScopeUserComponent> ent, ref PullStartedMessage args)
+    {
+        if(args.PulledUid != ent.Owner)
             return;
 
-        if (!_transformSystem.InRange(scopeComponent.LastScopedAt, args.NewPosition, 1.5f))
-            UserStopScoping(ent.Owner, ent.Comp);
+        UserStopScoping(ent.Owner, ent.Comp);
     }
 
     private void OnParentChanged(Entity<ScopeUserComponent> ent, ref EntParentChangedMessage args)

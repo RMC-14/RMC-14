@@ -1,5 +1,4 @@
 ﻿using Robust.Shared.GameStates;
-using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._CM14.Scoping;
@@ -24,12 +23,6 @@ public sealed partial class ScopeComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public float Zoom = 1f;
-
-    /// <summary>
-    /// Last position of the user when scope was toggled on
-    /// </summary>
-    [ViewVariables, AutoNetworkedField]
-    public EntityCoordinates LastScopedAt;
 
     /// <summary>
     /// Helper entity, which is spawned to load far chunks
