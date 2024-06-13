@@ -111,7 +111,7 @@ public sealed class XenoHudOverlay : Overlay
                 continue;
 
             if (_container.IsEntityOrParentInContainer(uid))
-                return;
+                continue;
 
             var bounds = sprite.Bounds;
             var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
@@ -147,7 +147,7 @@ public sealed class XenoHudOverlay : Overlay
                 continue;
 
             if (_container.IsEntityOrParentInContainer(uid))
-                return;
+                continue;
 
             if (_xenoHuggerQuery.HasComp(uid))
                 continue;
@@ -183,7 +183,7 @@ public sealed class XenoHudOverlay : Overlay
                 continue;
 
             if (_container.IsEntityOrParentInContainer(uid))
-                return;
+                continue;
 
             var bounds = sprite.Bounds;
             var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
