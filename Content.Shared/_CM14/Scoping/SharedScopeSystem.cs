@@ -2,8 +2,10 @@
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Toggleable;
+using Robust.Shared.Containers;
 using Robust.Shared.Network;
 
 namespace Content.Shared._CM14.Scoping;
@@ -14,6 +16,8 @@ public abstract partial class SharedScopeSystem : EntitySystem
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
@@ -73,6 +77,22 @@ public abstract partial class SharedScopeSystem : EntitySystem
         if (!_handsSystem.TryGetActiveItem(args.Performer, out var heldItem) || heldItem != ent.Owner)
         {
             var msgError = Loc.GetString("cm-action-popup-scoping-user-must-hold", ("scope", Name(ent.Owner)));
+            _popupSystem.PopupClient(msgError, args.Performer, args.Performer);
+
+            return;
+        }
+
+        if (_pulling.IsPulled(args.Performer))
+        {
+            var msgError = Loc.GetString("cm-action-popup-scoping-user-must-not-pulled", ("scope", Name(ent.Owner)));
+            _popupSystem.PopupClient(msgError, args.Performer, args.Performer);
+
+            return;
+        }
+
+        if (_container.IsEntityInContainer(args.Performer))
+        {
+            var msgError = Loc.GetString("cm-action-popup-scoping-user-must-not-contained", ("scope", Name(ent.Owner)));
             _popupSystem.PopupClient(msgError, args.Performer, args.Performer);
 
             return;
