@@ -1,6 +1,8 @@
-﻿using Content.Shared.Damage;
+﻿using Content.Shared.Chat.Prototypes;
+using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -53,6 +55,9 @@ public sealed partial class IVDripComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Injecting = true;
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<EmotePrototype> RipEmote = "Scream";
 }
 
 [Serializable, NetSerializable]

@@ -1,4 +1,5 @@
 ﻿using Content.Server.Body.Components;
+using Content.Server.Chat.Systems;
 using Content.Shared._CM14.Medical.IV;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
@@ -8,9 +9,16 @@ namespace Content.Server._CM14.Medical.IV;
 
 public sealed class IVDripSystem : SharedIVDripSystem
 {
+    [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
+
+    protected override void DoRip(Entity<IVDripComponent> iv, EntityUid attached)
+    {
+        base.DoRip(iv, attached);
+        _chat.TryEmoteWithoutChat(attached, iv.Comp.RipEmote);
+    }
 
     public override void Update(float frameTime)
     {
