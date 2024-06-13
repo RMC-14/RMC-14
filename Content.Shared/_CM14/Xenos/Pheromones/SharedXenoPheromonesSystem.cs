@@ -317,8 +317,6 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
     private record struct PheromonesJob() : IParallelRobustJob
     {
-        public int BatchSize => 4;
-
         public EntityLookupSystem Lookup;
 
         public ValueList<(
