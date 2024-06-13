@@ -2,7 +2,6 @@
 using Content.Shared.Damage.Systems;
 using Content.Shared.Effects;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio;
@@ -60,7 +59,7 @@ public sealed class TackleSystem : EntitySystem
         }
         else
         {
-            _popup.PopupClient(Loc.GetString("cm-tackle-success-self", ("target", args.User)), args.User, args.User);
+            _popup.PopupClient(Loc.GetString("cm-tackle-success-self", ("target", target)), args.User, args.User);
 
             foreach (var session in Filter.PvsExcept(args.User).Recipients)
             {
