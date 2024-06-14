@@ -2,6 +2,7 @@
   id: DoorXenoResin # TODO CM14 make them only buildable next to other resin walls
   parent: CMBaseXenoStructure
   name: resin door
+  description: "A resin door that only sisters may pass."
   placement:
     mode: SnapgridCenter
   components:
@@ -84,6 +85,7 @@
   id: DoorXenoResinThick
   parent: DoorXenoResin
   name: thick resin door
+  description: "A thick resin door, which is more durable, that only sisters may pass."
   components:
   - type: Sprite
     sprite: _CM14/Structures/Xenos/xeno_resin_door.rsi
