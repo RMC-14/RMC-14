@@ -1,7 +1,7 @@
 ﻿- type: tile
   abstract: true
   parent: CMTileBase
-  id: CMFloorSteelWhiteGreenBase
+  id: CMFloorSteelPrisonWhiteGreenBase
   name: tiles-cm-green-sterile
 
 - type: tile
