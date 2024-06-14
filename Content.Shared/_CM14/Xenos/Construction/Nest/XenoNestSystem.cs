@@ -1,7 +1,6 @@
 ﻿using System.Numerics;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
-using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
@@ -22,10 +21,10 @@ namespace Content.Shared._CM14.Xenos.Construction.Nest;
 public sealed class XenoNestSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly StandingStateSystem _standingState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly StandingStateSystem _standingState = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -93,7 +92,7 @@ public sealed class XenoNestSystem : EntitySystem
 
     private void OnNestableBeforeRangedInteract(Entity<XenoNestableComponent> ent, ref BeforeRangedInteractEvent args)
     {
-        if (!TryComp(args.Target, out XenoNestSurfaceComponent? surface))
+        if (!args.CanReach || !TryComp(args.Target, out XenoNestSurfaceComponent? surface))
             return;
 
         args.Handled = true;
@@ -251,7 +250,6 @@ public sealed class XenoNestSystem : EntitySystem
     {
         if (!HasComp<XenoNestableComponent>(victim))
         {
-
             if (!silent)
                 _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed", ("target", victim)), surface, user);
 

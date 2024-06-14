@@ -99,7 +99,7 @@ public abstract class SharedWoundsSystem : EntitySystem
 
     private void OnWoundTreaterAfterInteract(Entity<WoundTreaterComponent> ent, ref AfterInteractEvent args)
     {
-        if (args.Target == null)
+        if (!args.CanReach || args.Target == null)
             return;
 
         StartTreatment(args.User, args.Target.Value, ent);
