@@ -228,6 +228,8 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: ImmuneToUnarmed
+  - type: WallMount
+    arc: 360
 
 - type: edgeSpreader
   id: XenoWeeds

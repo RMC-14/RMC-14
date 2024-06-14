@@ -94,7 +94,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
     private void OnHuggerAfterInteract(Entity<XenoHuggerComponent> ent, ref AfterInteractEvent args)
     {
-        if (args.Target == null)
+        if (!args.CanReach || args.Target == null)
             return;
 
         if (StartHug(ent, args.Target.Value, args.User))
