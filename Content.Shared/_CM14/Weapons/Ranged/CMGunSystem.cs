@@ -11,6 +11,7 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Whitelist;
 using Content.Shared.Wieldable;
+using Content.Shared.Wieldable.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
@@ -27,6 +28,7 @@ public sealed class CMGunSystem : EntitySystem
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
@@ -51,10 +53,17 @@ public sealed class CMGunSystem : EntitySystem
 
         SubscribeLocalEvent<GunUserWhitelistComponent, AttemptShootEvent>(OnGunUserWhitelistAttemptShoot);
 
-        SubscribeLocalEvent<GunUnskilledPenaltyComponent, GotEquippedHandEvent>(OnGunUnskilledPenaltyEquippedHand);
+        SubscribeLocalEvent<GunUnskilledPenaltyComponent, GotEquippedHandEvent>(TryRefreshGunModifiers);
+        SubscribeLocalEvent<GunUnskilledPenaltyComponent, GotUnequippedHandEvent>(TryRefreshGunModifiers);
         SubscribeLocalEvent<GunUnskilledPenaltyComponent, GunRefreshModifiersEvent>(OnGunUnskilledPenaltyRefresh);
 
         SubscribeLocalEvent<GunDamageModifierComponent, AmmoShotEvent>(OnGunDamageModifierAmmoShot);
+
+        SubscribeLocalEvent<GunSkilledRecoilComponent, GotEquippedHandEvent>(TryRefreshGunModifiers);
+        SubscribeLocalEvent<GunSkilledRecoilComponent, GotUnequippedHandEvent>(TryRefreshGunModifiers);
+        SubscribeLocalEvent<GunSkilledRecoilComponent, ItemWieldedEvent>(TryRefreshGunModifiers);
+        SubscribeLocalEvent<GunSkilledRecoilComponent, ItemUnwieldedEvent>(TryRefreshGunModifiers);
+        SubscribeLocalEvent<GunSkilledRecoilComponent, GunRefreshModifiersEvent>(OnRecoilSkilledRefreshModifiers);
     }
 
     private void OnAmmoFixedDistanceShot(Entity<AmmoFixedDistanceComponent> ent, ref AmmoShotEvent args)
@@ -118,22 +127,10 @@ public sealed class CMGunSystem : EntitySystem
         _popup.PopupClient(Loc.GetString("cm-gun-unskilled", ("gun", ent.Owner)), args.User, args.User);
     }
 
-    private void OnGunUnskilledPenaltyEquippedHand(Entity<GunUnskilledPenaltyComponent> ent, ref GotEquippedHandEvent args)
-    {
-        if (TryComp(ent, out GunComponent? gun))
-            _gun.RefreshModifiers((ent, gun));
-    }
-
     private void OnGunUnskilledPenaltyRefresh(Entity<GunUnskilledPenaltyComponent> ent, ref GunRefreshModifiersEvent args)
     {
-        if (!_container.TryGetContainingContainer((ent, null), out var container) ||
-            !HasComp<HandsComponent>(container.Owner))
-        {
-            return;
-        }
-
-        if (TryComp(container.Owner, out SkillsComponent? skills) &&
-            skills.Skills.Firearms >= ent.Comp.Firearms)
+        if (TryGetUserSkills(ent, out var skills) &&
+            skills.Comp.Skills.Firearms >= ent.Comp.Firearms)
         {
             return;
         }
@@ -151,6 +148,20 @@ public sealed class CMGunSystem : EntitySystem
 
             comp.Damage *= ent.Comp.Multiplier;
         }
+    }
+
+    private void OnRecoilSkilledRefreshModifiers(Entity<GunSkilledRecoilComponent> ent, ref GunRefreshModifiersEvent args)
+    {
+        if (!TryGetUserSkills(ent, out var user) ||
+            !_skills.HasSkills((user, user), in ent.Comp.Skills))
+        {
+            return;
+        }
+
+        if (ent.Comp.MustBeWielded && CompOrNull<WieldableComponent>(ent)?.Wielded != true)
+            return;
+
+        args.CameraRecoilScalar = 0;
     }
 
     private void StopProjectile(Entity<ProjectileFixedDistanceComponent> projectile)
@@ -177,6 +188,26 @@ public sealed class CMGunSystem : EntitySystem
         var useDelay = EnsureComp<UseDelayComponent>(ent);
         _useDelay.SetLength((ent, useDelay), remaining, ent.Comp.DelayId);
         _useDelay.TryResetDelay((ent, useDelay), false, ent.Comp.DelayId);
+    }
+
+    private void TryRefreshGunModifiers<TComp, TEvent>(Entity<TComp> ent, ref TEvent args) where TComp : IComponent?
+    {
+        if (TryComp(ent, out GunComponent? gun))
+            _gun.RefreshModifiers((ent, gun));
+    }
+
+    private bool TryGetUserSkills(EntityUid gun, out Entity<SkillsComponent> user)
+    {
+        user = default;
+        if (!_container.TryGetContainingContainer((gun, null), out var container) ||
+            !HasComp<HandsComponent>(container.Owner) ||
+            !TryComp(container.Owner, out SkillsComponent? skills))
+        {
+            return false;
+        }
+
+        user = (container.Owner, skills);
+        return true;
     }
 
     public override void Update(float frameTime)
