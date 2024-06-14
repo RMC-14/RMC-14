@@ -57,7 +57,7 @@
 - type: tile
   parent: CMFloorSteelPrisonDarkPurpleBase
   id: CMFloorSteelPrisonDarkPurpleCorners2
-  sprite: /Textures/_CM14/Tiles/prison/darkdarkpurplecorners2_2.png
+  sprite: /Textures/_CM14/Tiles/prison/darkpurplecorners2_2.png
 
 - type: tile
   parent: CMFloorSteelPrisonDarkPurpleBase
