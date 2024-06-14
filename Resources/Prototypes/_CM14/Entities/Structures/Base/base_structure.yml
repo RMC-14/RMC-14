@@ -24,6 +24,8 @@
   - type: Corrodible
     isCorrodible: false
   - type: CMIconSmooth
+  - type: MeleeReceivedMultiplier
+    otherMultiplier: 8.2
 
 - type: entity
   id: CMCorrodible

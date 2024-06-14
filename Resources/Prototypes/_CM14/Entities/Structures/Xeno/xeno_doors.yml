@@ -79,6 +79,10 @@
     powerLoad: 0
   - type: XenoConstructionPlasmaCost
     plasma: 120
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 600
 
 - type: entity
   id: DoorXenoResinThick
@@ -117,3 +121,7 @@
   - type: IconSmooth
     key: walls
     mode: NoSprite
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 900
