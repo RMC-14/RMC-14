@@ -5,6 +5,9 @@
   components:
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Attachments/under.rsi
+  - type: Tag
+    tags:
+    - CMAttachableUnderbarrel
 
 - type: entity
   parent: CMUnderAttachmentBase
@@ -98,3 +101,6 @@
   components:
   - type: Sprite
     state: verticalgrip
+
+- type: Tag
+  id: CMAttachableUnderbarrel

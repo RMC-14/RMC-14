@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [BaseItem, CMBaseWeaponGun]
+  parent: [BaseItem, CMBaseWeaponGun, CMBaseAttachableHolder]
   id: CMBaseWeaponRifle
   components:
   - type: Wieldable

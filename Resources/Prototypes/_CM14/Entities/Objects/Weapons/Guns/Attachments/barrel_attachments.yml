@@ -5,6 +5,9 @@
   components:
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Attachments/barrel.rsi
+  - type: Tag
+    tags:
+    - CMAttachableBarrel
 
 - type: entity
   parent: CMBarrelAttachmentBase
@@ -34,3 +37,6 @@
   components:
   - type: Sprite
     state: suppressor
+
+- type: Tag
+  id: CMAttachableBarrel

@@ -5,6 +5,9 @@
   components:
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Attachments/stock.rsi
+  - type: Tag
+    tags:
+    - CMAttachableStock
 
 - type: entity
   parent: CMStockAttachmentBase
@@ -50,3 +53,6 @@
   components:
   - type: Sprite
     state: 44stock
+
+- type: Tag
+  id: CMAttachableStock

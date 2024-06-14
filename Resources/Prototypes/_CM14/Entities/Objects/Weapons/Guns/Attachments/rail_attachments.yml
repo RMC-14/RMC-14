@@ -5,6 +5,9 @@
   components:
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Attachments/rail.rsi
+  - type: Tag
+    tags:
+    - CMAttachableRail
 
 - type: entity
   parent: CMRailAttachmentBase
@@ -59,3 +62,6 @@
   components:
   - type: Sprite
     state: sniperscope
+
+- type: Tag
+  id: CMAttachableRail
