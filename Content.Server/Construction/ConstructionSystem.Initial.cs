@@ -2,6 +2,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Content.Server.Construction.Components;
+using Content.Shared._CM14.Construction;
 using Content.Shared._CM14.Prototypes;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Construction;
@@ -33,6 +34,7 @@ namespace Content.Server.Construction
         [Dependency] private readonly EntityLookupSystem _lookupSystem = default!;
         [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
         [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+        [Dependency] private readonly CMConstructionSystem _cmConstruction = default!;
 
         // --- WARNING! LEGACY CODE AHEAD! ---
         // This entire file contains the legacy code for initial construction.
@@ -104,6 +106,9 @@ namespace Content.Server.Construction
             EntityCoordinates coords,
             Angle angle = default)
         {
+            if (!_cmConstruction.CanConstruct(user))
+                return null;
+
             // We need a place to hold our construction items!
             var container = _container.EnsureContainer<Container>(user, materialContainer, out var existed);
 
