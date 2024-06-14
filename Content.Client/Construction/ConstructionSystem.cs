@@ -1,8 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Client.Popups;
+using Content.Shared._CM14.Construction;
 using Content.Shared.Construction;
 using Content.Shared.Construction.Prototypes;
-using Content.Shared.Construction.Steps;
 using Content.Shared.Examine;
 using Content.Shared.Input;
 using Content.Shared.Interaction;
@@ -30,6 +30,7 @@ namespace Content.Client.Construction
         [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
         [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
         [Dependency] private readonly PopupSystem _popupSystem = default!;
+        [Dependency] private readonly CMConstructionSystem _cmConstruction = default!;
 
         private readonly Dictionary<int, EntityUid> _ghosts = new();
         private readonly Dictionary<string, ConstructionGuide> _guideCache = new();
@@ -124,6 +125,9 @@ namespace Content.Client.Construction
         private void HandlePlayerAttached(LocalPlayerAttachedEvent msg)
         {
             var available = IsCraftingAvailable(msg.Entity);
+            if (!_cmConstruction.CanConstruct(msg.Entity))
+                available = false;
+
             UpdateCraftingAvailability(available);
         }
 

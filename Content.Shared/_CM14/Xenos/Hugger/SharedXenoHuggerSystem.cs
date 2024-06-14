@@ -1,10 +1,10 @@
 ﻿using Content.Shared._CM14.Xenos.Leap;
 using Content.Shared.DoAfter;
+using Content.Shared.DragDrop;
 using Content.Shared.Examine;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Ghost;
 using Content.Shared.Humanoid;
-using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
@@ -42,11 +42,15 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<HuggableComponent, ActivateInWorldEvent>(OnHuggableActivate);
+        SubscribeLocalEvent<HuggableComponent, CanDropTargetEvent>(OnHuggableCanDropTarget);
 
         SubscribeLocalEvent<XenoHuggerComponent, XenoLeapHitEvent>(OnHuggerLeapHit);
         SubscribeLocalEvent<XenoHuggerComponent, AfterInteractEvent>(OnHuggerAfterInteract);
         SubscribeLocalEvent<XenoHuggerComponent, DoAfterAttemptEvent<AttachHuggerDoAfterEvent>>(OnHuggerAttachDoAfterAttempt);
         SubscribeLocalEvent<XenoHuggerComponent, AttachHuggerDoAfterEvent>(OnHuggerAttachDoAfter);
+        SubscribeLocalEvent<XenoHuggerComponent, CanDragEvent>(OnHuggerCanDrag);
+        SubscribeLocalEvent<XenoHuggerComponent, CanDropDraggedEvent>(OnHuggerCanDropDragged);
+        SubscribeLocalEvent<XenoHuggerComponent, DragDropDraggedEvent>(OnHuggerDragDropDragged);
 
         SubscribeLocalEvent<HuggerSpentComponent, MapInitEvent>(OnHuggerSpentMapInit);
         SubscribeLocalEvent<HuggerSpentComponent, UpdateMobStateEvent>(OnHuggerSpentUpdateMobState);
@@ -59,6 +63,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
         SubscribeLocalEvent<VictimBurstComponent, MapInitEvent>(OnVictimBurstMapInit);
         SubscribeLocalEvent<VictimBurstComponent, UpdateMobStateEvent>(OnVictimUpdateMobState);
+        SubscribeLocalEvent<VictimBurstComponent, RejuvenateEvent>(OnVictimBurstRejuvenate);
     }
 
     private void OnHuggableActivate(Entity<HuggableComponent> ent, ref ActivateInWorldEvent args)
@@ -66,6 +71,16 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         if (TryComp(args.User, out XenoHuggerComponent? hugger) &&
             StartHug((args.User, hugger), args.Target, args.User))
         {
+            args.Handled = true;
+        }
+    }
+
+    private void OnHuggableCanDropTarget(Entity<HuggableComponent> ent, ref CanDropTargetEvent args)
+    {
+        if (TryComp(args.Dragged, out XenoHuggerComponent? hugger) &&
+            CanHugPopup((args.Dragged, hugger), ent, args.User, false))
+        {
+            args.CanDrop = true;
             args.Handled = true;
         }
     }
@@ -79,7 +94,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
     private void OnHuggerAfterInteract(Entity<XenoHuggerComponent> ent, ref AfterInteractEvent args)
     {
-        if (args.Target == null)
+        if (!args.CanReach || args.Target == null)
             return;
 
         if (StartHug(ent, args.Target.Value, args.User))
@@ -105,6 +120,26 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
         if (Hug(ent, args.Target.Value))
             args.Handled = true;
+    }
+
+    private void OnHuggerCanDrag(Entity<XenoHuggerComponent> ent, ref CanDragEvent args)
+    {
+        args.Handled = true;
+    }
+
+    private void OnHuggerCanDropDragged(Entity<XenoHuggerComponent> ent, ref CanDropDraggedEvent args)
+    {
+        if (!CanHugPopup(ent, args.Target, args.User, false))
+            return;
+
+        args.CanDrop = true;
+        args.Handled = true;
+    }
+
+    private void OnHuggerDragDropDragged(Entity<XenoHuggerComponent> ent, ref DragDropDraggedEvent args)
+    {
+        StartHug(ent, args.Target, args.User);
+        args.Handled = true;
     }
 
     protected virtual void HuggerLeapHit(Entity<XenoHuggerComponent> hugger)
@@ -166,6 +201,11 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         args.State = MobState.Dead;
     }
 
+    private void OnVictimBurstRejuvenate(Entity<VictimBurstComponent> burst, ref RejuvenateEvent args)
+    {
+        RemCompDeferred<VictimBurstComponent>(burst);
+    }
+
     private bool StartHug(Entity<XenoHuggerComponent> hugger, EntityUid victim, EntityUid user)
     {
         if (!CanHugPopup(hugger, victim, user))
@@ -184,13 +224,12 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
     private bool CanHugPopup(Entity<XenoHuggerComponent> hugger, EntityUid victim, EntityUid user, bool popup = true, bool force = false)
     {
-        var victimIdentity = Identity.Name(victim, EntityManager, hugger);
         if (!HasComp<HuggableComponent>(victim) ||
             HasComp<HuggerSpentComponent>(hugger) ||
             HasComp<VictimHuggedComponent>(victim))
         {
             if (popup)
-                _popup.PopupClient($"You can't facehug {victimIdentity}!", victim, user, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("cm-xeno-failed-cant-facehug", ("target", victim)), victim, user, PopupType.MediumCaution);
 
             return false;
         }
@@ -200,7 +239,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
             !_standing.IsDown(victim, standing))
         {
             if (popup)
-                _popup.PopupClient($"You can't reach {victimIdentity}, they need to be lying down!", victim, user, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("cm-xeno-failed-cant-reach", ("target", victim)), victim, user, PopupType.MediumCaution);
 
             return false;
         }
@@ -208,7 +247,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         if (_mobState.IsDead(victim))
         {
             if (popup)
-                _popup.PopupClient("You can't facehug the dead!", victim, user, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("cm-xeno-failed-target-dead"), victim, user, PopupType.MediumCaution);
 
             return false;
         }
@@ -235,8 +274,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
             if (any && _net.IsServer)
             {
-                var name = Identity.Name(victim, EntityManager);
-                _popup.PopupEntity($"The facehugger smashes against {name}'s mask and rips it off!", victim);
+                _popup.PopupEntity(Loc.GetString("cm-xeno-facehug-success", ("target", victim)), victim);
             }
         }
 

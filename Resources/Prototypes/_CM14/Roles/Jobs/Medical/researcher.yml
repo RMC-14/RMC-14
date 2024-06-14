@@ -37,7 +37,7 @@
   id: CMGearResearcherEquipped
   equipment:
     jumpsuit: CMJumpsuitResearch
-    back: CMSatchelMedical
+    back: CMSatchelMarine
     gloves: CMHandsLatex
     shoes: CMShoesLaceup
     id: CMIDCardResearcher

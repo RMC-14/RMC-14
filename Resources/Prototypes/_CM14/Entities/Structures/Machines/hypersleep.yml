@@ -13,6 +13,12 @@
     layers:
     - state: open
       map: [ "enum.HyperSleepChamberLayers.Base" ]
+  - type: UserInterface
+    interfaces:
+      enum.CryostorageUIKey.Key:
+        type: CryostorageBoundUserInterface
+  - type: ActivatableUI
+    key: enum.CryostorageUIKey.Key
   - type: InteractionOutline
   - type: Fixtures
     fixtures:
@@ -25,11 +31,24 @@
         - MachineMask
         layer:
         - MachineLayer
+  - type: DragInsertContainer
+    containerId: cm-hypersleep
+  - type: ExitContainerOnMove
+    containerId: cm-hypersleep
   - type: ContainerContainer
     containers:
-      scanner-body:
+      cm-hypersleep:
         !type:ContainerSlot
   - type: HyperSleepChamber
+  - type: Cryostorage
+    containerId: cm-hypersleep
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.CryostorageVisuals.Full:
+        enum.HyperSleepChamberLayers.Base:
+          True: { state: closed }
+          False: { state: open }
 
 - type: entity
   parent: CMHyperSleepChamber

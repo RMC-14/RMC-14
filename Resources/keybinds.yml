@@ -574,7 +574,7 @@ binds:
   type: State
   key: MouseRight
   canFocus: true
-- function: CMPumpShotgun
+- function: CMUniqueAction
   type: State
   key: Space
 - function: CMHolsterPrimary

@@ -1004,5 +1004,77 @@
   id: 132
   time: '2024-06-07T02:01:25.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2326
+- author: Siigiil
+  changes:
+  - message: Vial pouches now use slots.
+    type: Fix
+  - message: Bayonet pouches can now actually hold the knives they spawn with and
+      the same delay as with the knife belt is applied when drawing from them.
+    type: Fix
+  - message: All pouches properly display their closed/open sprites.
+    type: Fix
+  id: 133
+  time: '2024-06-11T22:03:42.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2338
+- author: Siigiil
+  changes:
+  - message: The hotkey for pumping the shotgun has been added to the keybinds menu.
+    type: Add
+  id: 134
+  time: '2024-06-11T22:05:40.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2341
+- author: Hmeister
+  changes:
+  - message: Xenos now have a ghost role raffle.
+    type: Tweak
+  id: 135
+  time: '2024-06-11T22:26:43.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2394
+- author: Sigil
+  changes:
+  - message: Hypersleep pods now function as cryo pods.
+    type: Add
+  id: 136
+  time: '2024-06-11T22:36:16.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2405
+- author: Whisper
+  changes:
+  - message: The guidebook now has basic entry pages for new players.
+    type: Add
+  - message: Added rifleman guidebook
+    type: Add
+  - message: Added drone guidebook
+    type: Add
+  id: 137
+  time: '2024-06-12T05:16:39.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2340
+- author: MetalSage
+  changes:
+  - message: Fixed xeno self cluttering
+    type: Fix
+  id: 138
+  time: '2024-06-12T21:48:08.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2410
+- author: K-Dynamic
+  changes:
+  - message: Bodies and perishables no longer produce ammonia
+    type: Tweak
+  id: 139
+  time: '2024-06-13T03:12:58.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2396
+- author: Timemaster99
+  changes:
+  - message: Fixed M41a Mk2 inhand and icon sprites
+    type: Fix
+  id: 140
+  time: '2024-06-13T08:09:40.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2425
+- author: blueDev2
+  changes:
+  - message: Medically trained personnel can examine pills to see their chemical composition
+    type: Add
+  id: 141
+  time: '2024-06-13T20:14:01.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2413
 Name: CM
 Order: -1

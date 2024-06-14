@@ -2,6 +2,7 @@
   id: CMChatSanitize
   wordReplacements:
     cm-chatsan-word-deltard: cm-chatsan-replacement-deltard
+    cm-chatsan-word-deltards: cm-chatsan-replacement-deltards
     cm-chatsan-word-beno: cm-chatsan-replacement-beno
     cm-chatsan-word-benos: cm-chatsan-replacement-benos
 
@@ -69,7 +70,7 @@
     cm-chatsan-word-xo: cm-chatsan-replacement-xo
     cm-chatsan-word-executive-officer: cm-chatsan-replacement-executive-officer
     cm-chatsan-word-exec-officer: cm-chatsan-replacement-exec-officer
-    cm-chatsan-word-sea: cm-chatsan-replacement-sea
     cm-chatsan-word-senior-enlisted: cm-chatsan-replacement-senior-enlisted
     cm-chatsan-word-senior-enlisted-advisor: cm-chatsan-replacement-senior-enlisted-advisor
     cm-chatsan-word-lz: cm-chatsan-replacement-lz
+    cm-chatsan-word-shoot: cm-chatsan-replacement-shoot

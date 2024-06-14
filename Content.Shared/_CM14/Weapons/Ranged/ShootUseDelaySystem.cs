@@ -36,7 +36,8 @@ public sealed class ShootUseDelaySystem : EntitySystem
                 var timeLeft = info.EndTime - time;
                 ent.Comp.LastPopup = _timing.CurTime;
                 Dirty(ent);
-                _popup.PopupClient($"You need to wait {timeLeft.TotalSeconds:F1} seconds before shooting again!", args.User, args.User);
+                var seconds = $"{timeLeft.TotalSeconds:F1}";
+                _popup.PopupClient(Loc.GetString("cm-gun-use-delay", ("seconds", seconds)), args.User, args.User);
             }
 
             args.Cancel();

@@ -1,5 +1,6 @@
 ﻿using Content.Shared._CM14.Xenos;
 using Content.Shared._CM14.Xenos.Watch;
+using Content.Shared.Mobs.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 
@@ -8,6 +9,7 @@ namespace Content.Server._CM14.Xenos.Watch;
 public sealed class XenoWatchSystem : SharedWatchXenoSystem
 {
     [Dependency] private readonly SharedEyeSystem _eye = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
 
@@ -24,6 +26,9 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
             while (query.MoveNext(out var uid, out var xeno, out var metaData))
             {
                 if (uid == ent.Owner || xeno.Hive != ent.Comp.Hive)
+                    continue;
+
+                if (_mobState.IsDead(uid))
                     continue;
 
                 xenos.Add(new Xeno(GetNetEntity(uid), Name(uid, metaData), metaData.EntityPrototype?.ID));

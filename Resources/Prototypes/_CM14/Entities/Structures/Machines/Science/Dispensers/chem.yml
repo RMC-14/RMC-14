@@ -27,6 +27,7 @@
   - type: Machine
     board: CMCircuitboardDispenserChem
   - type: ApcPowerReceiver
+    needsPower: false # TODO CM14
     powerLoad: 0
 
 - type: reagentDispenserInventory
