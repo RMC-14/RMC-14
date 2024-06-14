@@ -1,0 +1,40 @@
+﻿- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrison
+  sprite: /Textures/_CM14/Tiles/prison/floor.png
+
+- type: tile
+  parent: CMFloorPlate
+  id: CMFloorSteelPrisonPlate
+  sprite: /Textures/_CM14/Tiles/prison/floor_plate.png
+
+- type: tile
+  parent: CMFloorPlate
+  id: CMFloorSteelPrisonPlateCaution0
+  sprite: /Textures/_CM14/Tiles/prison/cell_stripe_0.png
+
+- type: tile
+  parent: CMFloorPlate
+  id: CMFloorSteelPrisonPlateCaution1
+  sprite: /Textures/_CM14/Tiles/prison/cell_stripe_1.png
+
+- type: tile
+  parent: CMFloorPlate
+  id: CMFloorSteelPrisonPlateCaution2
+  sprite: /Textures/_CM14/Tiles/prison/cell_stripe_2.png
+
+- type: tile
+  parent: CMFloorPlate
+  id: CMFloorSteelPrisonPlateCaution3
+  sprite: /Textures/_CM14/Tiles/prison/cell_stripe_3.png
+
+- type: tile
+  parent: CMFloorPlate
+  id: CMFloorSteelPrisonPlateMarked
+  sprite: /Textures/_CM14/Tiles/prison/floor_marked.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrisonSterileWhite
+  name: tiles-cm-white-sterile
+  sprite: /Textures/_CM14/Tiles/prison/sterile_white.png
