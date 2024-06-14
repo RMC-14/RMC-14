@@ -32,6 +32,9 @@ public sealed class RequisitionsBui : BoundUserInterface
         _window.MainView.ViewOrdersButton.OnPressed += _ => { };
 
         _window.OrderCategoriesView.MainMenuButton.OnPressed += _ => ShowView(_window, _window.MainView);
+        _window.OrderCategoriesView.SearchMenuButton.OnPressed += _ => ShowView(_window, _window.OrderSearchView);
+
+        _window.OrderSearchView.BackButton.OnPressed += _ => ShowView(_window, _window.OrderCategoriesView);
 
         _window.CategoryView.BackButton.OnPressed += _ => ShowView(_window, _window.OrderCategoriesView);
 
@@ -103,6 +106,7 @@ public sealed class RequisitionsBui : BoundUserInterface
         _window.MainView.BudgetLabel.SetMessage(budget);
         _window.OrderCategoriesView.BudgetLabel.SetMessage(budget);
         _window.CategoryView.BudgetLabel.SetMessage(budget);
+        _window.OrderSearchView.BudgetLabel.SetMessage(budget);
 
         var categoryHeader = new FormattedMessage();
         categoryHeader.AddMarkupOrThrow("[bold]Select a category[/bold]");

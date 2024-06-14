@@ -6,4 +6,5 @@
     <controls:RequisitionsMainView Name="MainView" Access="Public" />
     <controls:RequisitionsOrderCategoriesView Name="OrderCategoriesView" Access="Public" Visible="False" />
     <controls:RequisitionsCategoryView Name="CategoryView" Access="Public" Visible="False" />
+    <controls:RequisitionsOrderSearchView Name="OrderSearchView" Access="Public" Visible="False" />
 </controls:RequisitionsWindow>
