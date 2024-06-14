@@ -32,9 +32,3 @@
   parent: CMFloorPlate
   id: CMFloorSteelPrisonPlateMarked
   sprite: /Textures/_CM14/Tiles/prison/floor_marked.png
-
-- type: tile
-  parent: CMFloorSteel
-  id: CMFloorSteelPrisonSterileWhite
-  name: tiles-cm-white-sterile
-  sprite: /Textures/_CM14/Tiles/prison/sterile_white.png
