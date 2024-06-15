@@ -1,0 +1,17 @@
+- type: gameMap
+  id: Solaris
+  mapName: Solaris
+  mapPath: /Maps/_CM14/solaris.yml
+  minPlayers: 0
+  stations:
+    Solaris:
+      stationProto: StandardNanotrasenStation
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'LV-1413 (Routerra I)'
+      # - type: StationJobs
+        # availableJobs:
+            # Xenos
+            # CMXenoLeader: [1, 1]
+            # Survivors
+            # CMSurvivor: [5, 5]
