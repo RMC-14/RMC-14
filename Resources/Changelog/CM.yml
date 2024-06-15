@@ -1204,5 +1204,12 @@
   id: 150
   time: '2024-06-15T22:13:09.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2470
+- author: Whisper
+  changes:
+  - message: Two missing bags from the corpsmen vendor have been added.
+    type: Fix
+  id: 151
+  time: '2024-06-15T23:05:52.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2480
 Name: CM
 Order: -1
