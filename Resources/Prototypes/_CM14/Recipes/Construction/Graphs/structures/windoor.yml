@@ -38,9 +38,6 @@
         doAfter: 4
     
     - to: start
-      conditions:
-      - !type:EntityAnchored
-        anchored: false
       completed:
       - !type:SpawnPrototype
         prototype: CMSheetGlassReinforced1
@@ -123,9 +120,6 @@
         doAfter: 4
     
     - to: start
-      conditions:
-      - !type:EntityAnchored
-        anchored: false
       completed:
       - !type:SpawnPrototype
         prototype: CMSheetGlassReinforced1

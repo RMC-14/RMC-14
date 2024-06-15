@@ -24,9 +24,6 @@
     - state: panel_open
       map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
       visible: false
-  - type: Anchorable
-  - type: Pullable
-  - type: Rotatable
   - type: Construction
     graph: CMWindoor
     node: windoor
@@ -62,9 +59,6 @@
     - state: panel_open
       map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
       visible: false
-  - type: Anchorable
-  - type: Pullable
-  - type: Rotatable
   - type: Construction
     graph: CMWindoor
     node: windoorSecure
