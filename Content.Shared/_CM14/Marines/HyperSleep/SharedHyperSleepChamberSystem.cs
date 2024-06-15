@@ -25,7 +25,7 @@ public abstract class SharedHyperSleepChamberSystem : EntitySystem
 
     private void OnMapInit(Entity<HyperSleepChamberComponent> ent, ref MapInitEvent args)
     {
-        _containers.EnsureContainer<ContainerSlot>(ent, ent.Comp.ContainerId);
+        _containers.EnsureContainer<Container>(ent, ent.Comp.ContainerId);
     }
 
     private void OnInserted(Entity<HyperSleepChamberComponent> ent, ref EntInsertedIntoContainerMessage args)
