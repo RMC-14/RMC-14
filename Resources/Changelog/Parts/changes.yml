@@ -39,3 +39,5 @@ changes:
   message: All bullets are now much faster.
 - type: Tweak
   message: Marines that are trained in firearms skill no longer have any camera recoil when firing a wielded gun.
+- type: Tweak
+  message: Added a search bar to the xeno watch window, relay nearby chat bubbles while watching another xeno.
