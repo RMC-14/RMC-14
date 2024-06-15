@@ -1098,5 +1098,23 @@
   id: 144
   time: '2024-06-15T04:25:39.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2472
+- author: Sigil
+  changes:
+  - message: Reinforced girder removed from crafting menu, as it currently has no
+      use.
+    type: Remove
+  - message: Where possible, changed the material requirements and construction steps
+      for objects marines can build to match their CM13 versions.
+    type: Tweak
+  - message: Made girders and other constructible objects drop the CM14 versions of
+      materials.
+    type: Fix
+  - message: Made catwalks snap to the grid properly.
+    type: Fix
+  - message: Made airlocks properly change their appearance during construction.
+    type: Fix
+  id: 145
+  time: '2024-06-15T04:40:55.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2400
 Name: CM
 Order: -1
