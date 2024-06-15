@@ -1083,5 +1083,12 @@
   id: 142
   time: '2024-06-15T03:19:53.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2471
+- author: Hmeister
+  changes:
+  - message: Minor xeno description changes
+    type: Tweak
+  id: 143
+  time: '2024-06-15T03:24:23.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2469
 Name: CM
 Order: -1
