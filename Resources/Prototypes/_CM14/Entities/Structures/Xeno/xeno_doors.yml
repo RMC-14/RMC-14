@@ -2,7 +2,7 @@
   id: DoorXenoResin # TODO CM14 make them only buildable next to other resin walls
   parent: CMBaseXenoStructure
   name: resin door
-  description: A resin door that only sisters may pass.
+  description: That's a resin door.
   placement:
     mode: SnapgridCenter
   components:
