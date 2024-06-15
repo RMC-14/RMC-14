@@ -1197,5 +1197,12 @@
   id: 149
   time: '2024-06-15T09:07:32.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2476
+- author: amo020
+  changes:
+  - message: Added the M79 grenade launcher prototype
+    type: Add
+  id: 150
+  time: '2024-06-15T22:13:09.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2470
 Name: CM
 Order: -1
