@@ -32,6 +32,9 @@ public abstract class SharedWebbingSystem : EntitySystem
 
     private void OnWebbingClothingGetVerbs(Entity<WebbingClothingComponent> clothing, ref GetVerbsEvent<InteractionVerb> args)
     {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
         if (!HasWebbing((clothing, clothing), out _))
             return;
 

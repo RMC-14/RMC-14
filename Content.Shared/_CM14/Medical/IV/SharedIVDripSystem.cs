@@ -112,6 +112,9 @@ public abstract class SharedIVDripSystem : EntitySystem
 
     private void OnIVVerbs(Entity<IVDripComponent> iv, ref GetVerbsEvent<InteractionVerb> args)
     {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
         var user = args.User;
         args.Verbs.Add(new InteractionVerb
         {
