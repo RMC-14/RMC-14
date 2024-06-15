@@ -1090,5 +1090,13 @@
   id: 143
   time: '2024-06-15T03:24:23.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2469
+- author: DrSmugleaf
+  changes:
+  - message: Fixed marines getting stuck on hypersleep chambers at roundstart and
+      having their inventory visually disappear in certain spots.
+    type: Fix
+  id: 144
+  time: '2024-06-15T04:25:39.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2472
 Name: CM
 Order: -1
