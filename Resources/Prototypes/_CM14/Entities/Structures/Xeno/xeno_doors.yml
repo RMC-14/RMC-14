@@ -5,11 +5,6 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: MeleeSound
-    soundGroups:
-      Brute:
-        path:
-          "/Audio/Weapons/smash.ogg" # TODO CM14
   - type: InteractionOutline
   - type: Sprite
     sprite: _CM14/Structures/Xenos/xeno_resin_door.rsi
@@ -83,6 +78,7 @@
     xenoDamage:
       types:
         Slash: 600
+  - type: XenoConstructionRequiresSupport
 
 - type: entity
   id: DoorXenoResinThick

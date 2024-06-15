@@ -48,3 +48,10 @@
   files:
   - /Audio/_CM14/Xeno/alien_death.ogg
   - /Audio/_CM14/Xeno/alien_death2.ogg
+
+- type: soundCollection
+  id: XenoResinBreak
+  files:
+  - /Audio/_CM14/Xeno/alien_resin_break1.ogg
+  - /Audio/_CM14/Xeno/alien_resin_break2.ogg
+  - /Audio/_CM14/Xeno/alien_resin_break3.ogg
