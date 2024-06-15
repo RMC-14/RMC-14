@@ -25,7 +25,6 @@
       tags:
       - LauncherCompatibleGrenade
     capacity: 5
-    proto: CMGrenadeHighExplosive
     soundInsert:
       path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
   - type: OnShootTriggerAmmoTimer
@@ -71,7 +70,6 @@
       tags:
       - LauncherCompatibleGrenade
     capacity: 1
-    proto: CMGrenadeHighExplosive
     soundInsert:
       path: /Audio/_CM14/Weapons/Guns/Reload/m79_reload.ogg
   - type: OnShootTriggerAmmoTimer
