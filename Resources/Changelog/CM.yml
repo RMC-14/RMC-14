@@ -1116,5 +1116,19 @@
   id: 145
   time: '2024-06-15T04:40:55.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2400
+- author: Whisper
+  changes:
+  - message: Jungle walls are invincible
+    type: Fix
+  id: 146
+  time: '2024-06-15T06:40:50.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2475
+- author: Whisper
+  changes:
+  - message: Xenos now have death text on examine.
+    type: Add
+  id: 147
+  time: '2024-06-15T06:40:27.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2474
 Name: CM
 Order: -1
