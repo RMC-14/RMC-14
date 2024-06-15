@@ -85,7 +85,7 @@
   id: DoorXenoResinThick
   parent: DoorXenoResin
   name: thick resin door
-  description: A thick resin door, which is more durable, that only sisters may pass.
+  description: A thick resin door, which is more durable.
   components:
   - type: Sprite
     sprite: _CM14/Structures/Xenos/xeno_resin_door.rsi
