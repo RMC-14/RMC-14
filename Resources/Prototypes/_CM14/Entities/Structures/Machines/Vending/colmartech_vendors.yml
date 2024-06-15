@@ -1507,7 +1507,7 @@
       - id: CMPouchMagazine
       - id: CMPouchShotgun
       - id: CMPouchMedical
-      #- id: CMMedicalKitPouch
+      - id: CMPouchMedicalFill
       #- id: CMPressurizedReagentCanisterPouchBicaridine
       #- id: CMPressurizedReagentCanisterPouchKelotane
       #- id: CMPressurizedReagentCanisterPouchRevivalMix
