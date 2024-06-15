@@ -1130,5 +1130,12 @@
   id: 147
   time: '2024-06-15T06:40:27.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2474
+- author: Whisper
+  changes:
+  - message: Greatly reduced the speed thirst occurs
+    type: Tweak
+  id: 148
+  time: '2024-06-15T07:49:17.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2477
 Name: CM
 Order: -1
