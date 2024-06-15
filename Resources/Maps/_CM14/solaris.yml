@@ -19398,7 +19398,7 @@ entities:
       pos: 101.5,-55.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -37891.895
+      secondsUntilStateChange: -38437.992
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -25013,7 +25013,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 3330.4503844
     - type: Door
-      secondsUntilStateChange: -28391.58
+      secondsUntilStateChange: -28937.678
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -25039,7 +25039,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 3330.4503844
     - type: Door
-      secondsUntilStateChange: -28391.58
+      secondsUntilStateChange: -28937.678
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -25156,7 +25156,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 43929.2410136
     - type: Door
-      secondsUntilStateChange: -41698.715
+      secondsUntilStateChange: -42244.812
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -25170,7 +25170,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 43929.2410136
     - type: Door
-      secondsUntilStateChange: -41698.715
+      secondsUntilStateChange: -42244.812
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -149390,6 +149390,13 @@ entities:
     components:
     - type: Transform
       pos: 156.5,-80.5
+      parent: 2
+- proto: CMSpawnMobWiggles
+  entities:
+  - uid: 28235
+    components:
+    - type: Transform
+      pos: 167.5,-51.5
       parent: 2
 - proto: TableReinforced
   entities:
