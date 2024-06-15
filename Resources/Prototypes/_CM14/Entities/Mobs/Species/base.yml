@@ -62,7 +62,7 @@
   - type: Marine
   - type: Hunger
   - type: Thirst
-    baseDecayRate: 0.01666666666f
+    baseDecayRate: 0.01666666666
   - type: Body
     prototype: Human
     requiredLegs: 2
