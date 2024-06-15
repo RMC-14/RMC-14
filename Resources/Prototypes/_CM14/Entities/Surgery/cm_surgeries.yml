@@ -7,6 +7,7 @@
   parent: CMSurgeryBase
   id: CMSurgeryOpenIncision
   name: Open Incision
+  noSpawn: true
   components:
   - type: CMSurgery
     steps:
@@ -18,6 +19,7 @@
   parent: CMSurgeryBase
   id: CMSurgeryCloseIncision
   name: Close Incision
+  noSpawn: true
   components:
   - type: CMSurgery
     priority: 1
@@ -30,6 +32,7 @@
   parent: CMSurgeryBase
   id: CMSurgeryOpenRibcage
   name: Open Ribcage
+  noSpawn: true
   components:
   - type: CMSurgery
     requirement: CMSurgeryOpenIncision
@@ -44,6 +47,7 @@
   id: CMSurgeryAlienEmbryoRemoval
   name: Alien Embryo Removal
   description: Removal of an alien embryo from the body.
+  noSpawn: true
   components:
   - type: CMSurgery
     priority: -1

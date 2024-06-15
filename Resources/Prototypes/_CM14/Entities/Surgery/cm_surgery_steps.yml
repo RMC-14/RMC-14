@@ -2,6 +2,7 @@
   id: CMSurgeryStepBase
   categories:
   - HideSpawnMenu
+  noSpawn: true
   components:
   - type: CMSurgeryStep
 
@@ -9,6 +10,7 @@
   parent: CMSurgeryStepBase
   id: CMSurgeryStepOpenIncisionScalpel
   name: Cut with a scalpel
+  noSpawn: true
   components:
   - type: CMSurgeryStep
     tool:
@@ -26,6 +28,7 @@
   parent: CMSurgeryStepBase
   id: CMSurgeryStepClampBleeders
   name: Clamp the bleeders
+  noSpawn: true
   components:
   - type: CMSurgeryStep
     tool:
@@ -41,6 +44,7 @@
   parent: CMSurgeryStepBase
   id: CMSurgeryStepRetractSkin
   name: Retract the skin
+  noSpawn: true
   components:
   - type: CMSurgeryStep
     tool:
@@ -55,6 +59,7 @@
   parent: CMSurgeryStepBase
   id: CMSurgeryStepSawBones
   name: Saw through bones
+  noSpawn: true
   components:
   - type: CMSurgeryStep
     tool:
@@ -70,6 +75,7 @@
   parent: CMSurgeryStepBase
   id: CMSurgeryStepPriseOpenBones
   name: Prise the bones open
+  noSpawn: true
   components:
   - type: CMSurgeryStep
     tool:
@@ -84,6 +90,7 @@
   parent: CMSurgeryStepBase
   id: CMSurgeryStepCutLarvaRoots
   name: Cut larva roots
+  noSpawn: true
   components:
   - type: CMSurgeryStep
     skill: 2
@@ -99,6 +106,7 @@
   parent: CMSurgeryStepBase
   id: CMSurgeryStepRemoveLarva
   name: Remove larva
+  noSpawn: true
   components:
   - type: CMSurgeryStep
     skill: 2
@@ -115,6 +123,7 @@
   parent: CMSurgeryStepBase
   id: CMSurgeryStepCloseBones
   name: Close bones
+  noSpawn: true
   components:
   - type: CMSurgeryStep
     tool:
@@ -129,6 +138,7 @@
   parent: CMSurgeryStepBase
   id: CMSurgeryStepMendRibcage
   name: Mend ribcage
+  noSpawn: true
   components:
   - type: CMSurgeryStep
     tool:
@@ -143,6 +153,7 @@
   parent: CMSurgeryStepBase
   id: CMSurgeryStepCloseIncision
   name: Close incision
+  noSpawn: true
   components:
   - type: CMSurgeryStep
     tool:
