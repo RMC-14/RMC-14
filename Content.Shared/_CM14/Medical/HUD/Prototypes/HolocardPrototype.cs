@@ -5,8 +5,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototy
 namespace Content.Shared._CM14.Medical.Prototypes;
 
 /// <summary>
-/// This is a prototype for defining ores that generate in rock
-/// </summary>
+/// This is a prototype for defining Holocards
 [Prototype("holocardPrototype")]
 public sealed partial class HolocardPrototype : IPrototype
 {

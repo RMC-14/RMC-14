@@ -1,17 +1,46 @@
 - type: holocard
+  id: NoneHolocard
+  holocardIcon:
+    priority: 1
+    locationPreference: Right
+  description: hc-none-description
+
+- type: holocard
   id: UrgentHolocard
   holocardIcon:
     priority: 1
+    locationPreference: Right
     icon:
       sprite: /Textures/_CM14/Interface/health_hud_holocard.rsi
       state: hudhcorange
   description: hc-urgent-description
 
 - type: holocard
-  id: UrgentHolocard
+  id: EmergencyHolocard
   holocardIcon:
     priority: 1
+    locationPreference: Right
     icon:
       sprite: /Textures/_CM14/Interface/health_hud_holocard.rsi
-      state: hudhcorange
-  description: hc-urgent-description
+      state: hudhcred
+  description: hc-emergency-description
+
+- type: holocard
+  id: PermaHolocard
+  holocardIcon:
+    priority: 1
+    locationPreference: Right
+    icon:
+      sprite: /Textures/_CM14/Interface/health_hud_holocard.rsi
+      state: hudhcblack
+  description: hc-perma-description
+
+- type: holocard
+  id: XenoHolocard
+  holocardIcon:
+    priority: 1
+    locationPreference: Right
+    icon:
+      sprite: /Textures/_CM14/Interface/health_hud_holocard.rsi
+      state: hudhcpurple
+  description: hc-xeno-description

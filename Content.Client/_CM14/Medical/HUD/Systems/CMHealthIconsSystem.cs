@@ -6,7 +6,7 @@ using Content.Shared.SSDIndicator;
 using Content.Shared.StatusIcon;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client._CM14.Medical.HUD;
+namespace Content.Client._CM14.Medical.HUD.Systems;
 
 public sealed class CMHealthIconsSystem : EntitySystem
 {
