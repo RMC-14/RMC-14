@@ -1076,5 +1076,59 @@
   id: 141
   time: '2024-06-13T20:14:01.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2413
+- author: Cu1r
+  changes:
+  - message: Added tiles necessary to port Fiorina Science Annex.
+    type: Add
+  id: 142
+  time: '2024-06-15T03:19:53.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2471
+- author: Hmeister
+  changes:
+  - message: Minor xeno description changes
+    type: Tweak
+  id: 143
+  time: '2024-06-15T03:24:23.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2469
+- author: DrSmugleaf
+  changes:
+  - message: Fixed marines getting stuck on hypersleep chambers at roundstart and
+      having their inventory visually disappear in certain spots.
+    type: Fix
+  id: 144
+  time: '2024-06-15T04:25:39.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2472
+- author: Sigil
+  changes:
+  - message: Reinforced girder removed from crafting menu, as it currently has no
+      use.
+    type: Remove
+  - message: Where possible, changed the material requirements and construction steps
+      for objects marines can build to match their CM13 versions.
+    type: Tweak
+  - message: Made girders and other constructible objects drop the CM14 versions of
+      materials.
+    type: Fix
+  - message: Made catwalks snap to the grid properly.
+    type: Fix
+  - message: Made airlocks properly change their appearance during construction.
+    type: Fix
+  id: 145
+  time: '2024-06-15T04:40:55.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2400
+- author: Whisper
+  changes:
+  - message: Jungle walls are invincible
+    type: Fix
+  id: 146
+  time: '2024-06-15T06:40:50.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2475
+- author: Whisper
+  changes:
+  - message: Xenos now have death text on examine.
+    type: Add
+  id: 147
+  time: '2024-06-15T06:40:27.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2474
 Name: CM
 Order: -1

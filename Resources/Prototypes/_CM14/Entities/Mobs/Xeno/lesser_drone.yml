@@ -56,9 +56,10 @@
     threshold: 5
     stun: 5
   - type: WhitelistPickup
-    any:
-    - type: XenoHugger
-    - type: XenoEgg
+    whitelist:
+      components:
+      - XenoHugger
+      - XenoEgg
   - type: MultiHandedHolder
     items:
     - hands: 2

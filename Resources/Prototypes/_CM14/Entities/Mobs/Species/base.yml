@@ -143,3 +143,5 @@
   - type: UserIFF
   - type: UserLimitHits
   - type: MovementIgnoreGravity
+  - type: SlowOnPull
+    multiplier: 0.6

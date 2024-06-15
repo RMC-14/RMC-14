@@ -12,7 +12,7 @@
       - !type:SnapToGrid
       steps:
       - material: CMPlasteel
-        amount: 5
+        amount: 8
         doAfter: 4
 
   - node: nodeBarricadePlasteelDoor
@@ -20,13 +20,15 @@
     edges:
     - to: start
       completed:
-        - !type:SpawnPrototype
-          prototype: CMSheetPlasteel1
-          amount: 4
-        - !type:DeleteEntity
+      - !type:SpawnPrototype
+        prototype: CMSheetPlasteel1
+        amount: 8
+      - !type:DeleteEntity
       conditions:
-        - !type:EntityAnchored
-          anchored: false
+      - !type:EntityAnchored
+        anchored: false
       steps:
-        - tool: Screwing
-          doAfter: 4
+      - tool: Screwing
+        doAfter: 1
+      - tool: Prying
+        doAfter: 5
