@@ -227,14 +227,18 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         }
 
         var query = EntityQueryEnumerator<XenoActivePheromonesComponent, XenoPheromonesComponent, TransformComponent>();
+        _pheromonesJob.Receivers.Clear();
         _pheromonesJob.Pheromones.Clear();
 
         while (query.MoveNext(out var uid, out var active, out var pheromones, out var xform))
         {
+            _pheromonesJob.Pheromones.Add((uid, active, pheromones, xform));
+
             // We'll only update pheromones receivers whenever plasma gets used.
             // This avoids us having to do lookups every tick.
             if (_timing.CurTime < pheromones.NextPheromonesPlasmaUse)
             {
+                _pheromonesJob.Receivers.Add((false, active.Receivers));
                 continue;
             }
 
@@ -245,18 +249,15 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                 continue;
             }
 
+            _pheromonesJob.Receivers.Add((true, active.Receivers));
             Dirty(uid, pheromones);
-            _pheromonesJob.Pheromones.Add((uid, active, pheromones, xform));
         }
 
-        // Bump _receivers to match _pheromones.
-        // Can't use an ObjectPool because Sandboxing in shared and this avoids
-        // re-allocating the sets every single tick.
-        // Downside is more memory overhead, especially if pheromones drops off.
-        for (var i = _pheromonesJob.Receivers.Count; i < _pheromonesJob.Pheromones.Count; i++)
-        {
-            _pheromonesJob.Receivers.Add(new HashSet<Entity<XenoComponent>>());
-        }
+        // Okay so essentially:
+        // 1. We only run lookups on every plasma usage and cache that for the next second
+        // 2. We run lookups in parallel
+        // 3. Because the lookups are cached for a second we need to make sure
+        //    none of the target entities are deleted in the interim.
 
         _parallel.ProcessNow(_pheromonesJob, _pheromonesJob.Pheromones.Count);
         DebugTools.Assert(_pheromonesJob.Receivers.Count >= _pheromonesJob.Pheromones.Count);
@@ -264,13 +265,16 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         for (var i = 0; i < _pheromonesJob.Pheromones.Count; i++)
         {
             var (uid, active, pheromones, xform) = _pheromonesJob.Pheromones[i];
-            var receivers = _pheromonesJob.Receivers[i];
+            var receivers = _pheromonesJob.Receivers[i].Receivers;
 
             switch (active.Pheromones)
             {
                 case XenoPheromones.Recovery:
                     foreach (var receiver in receivers)
                     {
+                        if (Deleted(receiver))
+                            continue;
+
                         oldRecovery.Remove(receiver);
                         var recovery = EnsureComp<XenoRecoveryPheromonesComponent>(receiver);
                         AssignMaxMultiplier(ref recovery.Multiplier, pheromones.PheromonesMultiplier);
@@ -280,6 +284,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                 case XenoPheromones.Warding:
                     foreach (var receiver in receivers)
                     {
+                        if (Deleted(receiver))
+                            continue;
+
                         oldWarding.Remove(receiver);
                         var warding = EnsureComp<XenoWardingPheromonesComponent>(receiver);
                         AssignMaxMultiplier(ref warding.Multiplier, pheromones.PheromonesMultiplier);
@@ -289,6 +296,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                 case XenoPheromones.Frenzy:
                     foreach (var receiver in receivers)
                     {
+                        if (Deleted(receiver))
+                            continue;
+
                         oldFrenzy.Remove(receiver);
                         var frenzy = EnsureComp<XenoFrenzyPheromonesComponent>(receiver);
                         AssignMaxMultiplier(ref frenzy.Multiplier, pheromones.PheromonesMultiplier);
@@ -319,6 +329,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
     private record struct PheromonesJob() : IParallelRobustJob
     {
+        // Bumped this because most receivers aren't going to be updating on any individual tick.
+        public int BatchSize => 8;
+
         public EntityLookupSystem Lookup;
 
         public ValueList<(
@@ -328,14 +341,18 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
             TransformComponent Xform
             )> Pheromones = new();
 
-        public ValueList<HashSet<Entity<XenoComponent>>> Receivers = new();
+        public ValueList<(bool Update, HashSet<Entity<XenoComponent>> Receivers)> Receivers = new();
 
         public void Execute(int index)
         {
-            var (_, _, pheromones, xform) = Pheromones[index];
             ref var receivers = ref Receivers[index];
-            receivers.Clear();
-            Lookup.GetEntitiesInRange(xform.Coordinates, pheromones.PheromonesRange, receivers);
+
+            if (!receivers.Update)
+                return;
+
+            var (_, _, pheromones, xform) = Pheromones[index];
+            receivers.Receivers.Clear();
+            Lookup.GetEntitiesInRange(xform.Coordinates, pheromones.PheromonesRange, receivers.Receivers);
         }
     }
 }
