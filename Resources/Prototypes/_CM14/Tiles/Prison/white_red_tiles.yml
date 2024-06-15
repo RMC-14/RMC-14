@@ -46,20 +46,20 @@
 
 - type: tile
   parent: CMFloorSteelPrisonWhiteRedBase
-  id: CMFloorSteelPrisonWhiteRedCorners0
+  id: CMFloorSteelPrisonWhiteRedCorner0
   sprite: /Textures/_CM14/Tiles/prison/whiteredcorner_0.png
 
 - type: tile
   parent: CMFloorSteelPrisonWhiteRedBase
-  id: CMFloorSteelPrisonWhiteRedCorners1
+  id: CMFloorSteelPrisonWhiteRedCorner1
   sprite: /Textures/_CM14/Tiles/prison/whiteredcorner_1.png
 
 - type: tile
   parent: CMFloorSteelPrisonWhiteRedBase
-  id: CMFloorSteelPrisonWhiteRedCorners2
+  id: CMFloorSteelPrisonWhiteRedCorner2
   sprite: /Textures/_CM14/Tiles/prison/whiteredcorner_2.png
 
 - type: tile
   parent: CMFloorSteelPrisonWhiteRedBase
-  id: CMFloorSteelPrisonWhiteRedCorners3
+  id: CMFloorSteelPrisonWhiteRedCorner3
   sprite: /Textures/_CM14/Tiles/prison/whiteredcorner_3.png

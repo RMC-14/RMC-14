@@ -46,22 +46,22 @@
 
 - type: tile
   parent: CMFloorSteelPrisonGreenBase
-  id: CMFloorSteelPrisonGreenCorners0
+  id: CMFloorSteelPrisonGreenCorner0
   sprite: /Textures/_CM14/Tiles/prison/greencorner_0.png
 
 - type: tile
   parent: CMFloorSteelPrisonGreenBase
-  id: CMFloorSteelPrisonGreenCorners1
+  id: CMFloorSteelPrisonGreenCorner1
   sprite: /Textures/_CM14/Tiles/prison/greencorner_1.png
 
 - type: tile
   parent: CMFloorSteelPrisonGreenBase
-  id: CMFloorSteelPrisonGreenCorners2
+  id: CMFloorSteelPrisonGreenCorner2
   sprite: /Textures/_CM14/Tiles/prison/greencorner_2.png
 
 - type: tile
   parent: CMFloorSteelPrisonGreenBase
-  id: CMFloorSteelPrisonGreenCorners3
+  id: CMFloorSteelPrisonGreenCorner3
   sprite: /Textures/_CM14/Tiles/prison/greencorner_3.png
 
 - type: tile

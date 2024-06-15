@@ -4,6 +4,51 @@
   sprite: /Textures/_CM14/Tiles/prison/floor.png
 
 - type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrisonDamaged1
+  sprite: /Textures/_CM14/Tiles/prison/damaged1.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrisonDamaged2
+  sprite: /Textures/_CM14/Tiles/prison/damaged2.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrisonDamaged3
+  sprite: /Textures/_CM14/Tiles/prison/damaged3.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrisonDamaged5
+  sprite: /Textures/_CM14/Tiles/prison/damaged5.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrisonPlating
+  sprite: /Textures/_CM14/Tiles/prison/plating.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrisonPlatingScorched
+  sprite: /Textures/_CM14/Tiles/prison/panelscorched.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrisonPlatingDamage1
+  sprite: /Textures/_CM14/Tiles/prison/platingdmg1.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrisonPlatingDamage2
+  sprite: /Textures/_CM14/Tiles/prison/platingdmg2.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrisonPlatingDamage3
+  sprite: /Textures/_CM14/Tiles/prison/platingdmg3.png
+
+- type: tile
   parent: CMFloorPlate
   id: CMFloorSteelPrisonPlate
   sprite: /Textures/_CM14/Tiles/prison/floor_plate.png
@@ -35,7 +80,7 @@
 
 - type: tile
   parent: CMFloorSteel
-  id: CMFloorSteelPrisonSterileWhite
+  id: CMFloorSteelPrisonWhite
   name: tiles-cm-white-sterile
   sprite: /Textures/_CM14/Tiles/prison/sterile_white.png
   

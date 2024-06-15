@@ -6,11 +6,6 @@
 
 - type: tile
   parent: CMFloorSteelPrisonWhiteGreenBase
-  id: CMFloorSteelPrisonSterileGreen
-  sprite: /Textures/_CM14/Tiles/prison/sterile.png
-
-- type: tile
-  parent: CMFloorSteelPrisonWhiteGreenBase
   id: CMFloorSteelPrisonWhiteGreen0
   sprite: /Textures/_CM14/Tiles/prison/whitegreen_0.png
 
@@ -51,20 +46,25 @@
 
 - type: tile
   parent: CMFloorSteelPrisonWhiteGreenBase
-  id: CMFloorSteelPrisonWhiteGreenCorners0
+  id: CMFloorSteelPrisonWhiteGreenCorner0
   sprite: /Textures/_CM14/Tiles/prison/whitegreencorner_0.png
 
 - type: tile
   parent: CMFloorSteelPrisonWhiteGreenBase
-  id: CMFloorSteelPrisonWhiteGreenCorners1
+  id: CMFloorSteelPrisonWhiteGreenCorner1
   sprite: /Textures/_CM14/Tiles/prison/whitegreencorner_1.png
 
 - type: tile
   parent: CMFloorSteelPrisonWhiteGreenBase
-  id: CMFloorSteelPrisonWhiteGreenCorners2
+  id: CMFloorSteelPrisonWhiteGreenCorner2
   sprite: /Textures/_CM14/Tiles/prison/whitegreencorner_2.png
 
 - type: tile
   parent: CMFloorSteelPrisonWhiteGreenBase
-  id: CMFloorSteelPrisonWhiteGreenCorners3
+  id: CMFloorSteelPrisonWhiteGreenCorner3
   sprite: /Textures/_CM14/Tiles/prison/whitegreencorner_3.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhiteGreenBase
+  id: CMFloorSteelPrisonWhiteGreenFull
+  sprite: /Textures/_CM14/Tiles/prison/whitegreenfull.png
