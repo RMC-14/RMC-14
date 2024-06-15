@@ -288,7 +288,7 @@
 
 # Jungle
 - type: entity
-  parent: CMBaseWall
+  parent: CMBaseWallInvincible
   id: CMWallJungle
   name: jungle vegetation
   description: Exceptionally dense vegetation that you can't see through.
