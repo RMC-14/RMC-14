@@ -5,6 +5,7 @@ namespace Content.Shared._CM14.Medical.Surgery;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedCMSurgerySystem))]
+[EntityCategory("Surgeries")]
 public sealed partial class CMSurgeryComponent : Component
 {
     [DataField, AutoNetworkedField, Access(typeof(SharedCMSurgerySystem), Other = AccessPermissions.ReadWriteExecute)]

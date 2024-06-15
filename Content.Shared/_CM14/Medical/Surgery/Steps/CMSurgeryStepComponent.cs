@@ -5,6 +5,7 @@ namespace Content.Shared._CM14.Medical.Surgery.Steps;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedCMSurgerySystem))]
+[EntityCategory("SurgerySteps")]
 public sealed partial class CMSurgeryStepComponent : Component
 {
     [DataField, AutoNetworkedField]
