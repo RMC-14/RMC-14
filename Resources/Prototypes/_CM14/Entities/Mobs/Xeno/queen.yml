@@ -127,8 +127,9 @@
       params:
         volume: -6
   - type: WhitelistPickup
-    any:
-    - type: XenoEgg
+    whitelist:
+      components:
+      - XenoEgg
   - type: XenoEvolutionGranter
   - type: XenoEvolutionCapped
     id: CMXenoQueen
