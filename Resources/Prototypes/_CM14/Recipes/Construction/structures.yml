@@ -18,24 +18,24 @@
   conditions:
     - !type:TileNotBlocked
 
-- type: construction
-  parent: CM
-  id: CMGirderReinforced
-  name: reinforced girder
-  graph: CMGirder
-  startNode: start
-  targetNode: reinforcedGirder
-  category: construction-category-cm-structures
-  description: A large structural assembly made out of metal and plasteel.
-  icon:
-    sprite: _CM14/Structures/Walls/girder.rsi
-    state: reinforced
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canRotate: false
-  canBuildInImpassable: false
-  conditions:
-    - !type:TileNotBlocked
+#- type: construction
+#  parent: CM
+#  id: CMGirderReinforced
+#  name: reinforced girder
+#  graph: CMGirder
+#  startNode: start
+#  targetNode: reinforcedGirder
+#  category: construction-category-cm-structures
+#  description: A large structural assembly made out of metal and plasteel.
+#  icon:
+#    sprite: _CM14/Structures/Walls/girder.rsi
+#    state: reinforced
+#  objectType: Structure
+#  placementMode: SnapgridCenter
+#  canRotate: false
+#  canBuildInImpassable: false
+#  conditions:
+#    - !type:TileNotBlocked
 
 - type: construction
   parent: CM
@@ -251,6 +251,7 @@
   targetNode: Catwalk
   category: construction-category-cm-structures
   description: Just like a lattice. Except it looks better.
+  placementMode: SnapgridCenter
   icon:
     sprite: _CM14/Structures/catwalk.rsi
     state: catwalk

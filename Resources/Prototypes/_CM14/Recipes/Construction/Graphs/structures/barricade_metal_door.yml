@@ -12,21 +12,23 @@
       - !type:SnapToGrid
       steps:
       - material: CMSteel
-        amount: 5
-        doAfter: 4
+        amount: 6
+        doAfter: 3
 
   - node: nodeBarricadeMetalDoor
     entity: CMBarricadeMetalDoor
     edges:
     - to: start
       completed:
-        - !type:SpawnPrototype
-          prototype: CMSheetMetal1
-          amount: 4
-        - !type:DeleteEntity
+      - !type:SpawnPrototype
+        prototype: CMSheetMetal1
+        amount: 6
+      - !type:DeleteEntity
       conditions:
-        - !type:EntityAnchored
-          anchored: false
+      - !type:EntityAnchored
+        anchored: false
       steps:
-        - tool: Screwing
-          doAfter: 4
+      - tool: Screwing
+        doAfter: 1
+      - tool: Prying
+        doAfter: 5
