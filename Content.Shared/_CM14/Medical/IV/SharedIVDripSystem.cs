@@ -1,7 +1,9 @@
+using System.Linq;
 using Content.Shared._CM14.Marines;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.DragDrop;
+using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
@@ -36,12 +38,12 @@ public abstract class SharedIVDripSystem : EntitySystem
         SubscribeLocalEvent<IVDripComponent, EntInsertedIntoContainerMessage>(OnIVDripEntInserted);
         SubscribeLocalEvent<IVDripComponent, EntRemovedFromContainerMessage>(OnIVDripEntRemoved);
         SubscribeLocalEvent<IVDripComponent, AfterAutoHandleStateEvent>(OnIVDripAfterHandleState);
-
         SubscribeLocalEvent<IVDripComponent, CanDragEvent>(OnIVDripCanDrag);
         SubscribeLocalEvent<IVDripComponent, CanDropDraggedEvent>(OnIVDripCanDropDragged);
         SubscribeLocalEvent<IVDripComponent, DragDropDraggedEvent>(OnIVDripDragDropDragged);
         SubscribeLocalEvent<IVDripComponent, InteractHandEvent>(OnIVInteractHand);
         SubscribeLocalEvent<IVDripComponent, GetVerbsEvent<InteractionVerb>>(OnIVVerbs);
+        SubscribeLocalEvent<IVDripComponent, ExaminedEvent>(OnIVExamine);
 
         // TODO CM14 check for BloodstreamComponent instead of MarineComponent
         SubscribeLocalEvent<MarineComponent, CanDropTargetEvent>(OnMarineCanDropTarget);
@@ -118,6 +120,35 @@ public abstract class SharedIVDripSystem : EntitySystem
         });
     }
 
+    private void OnIVExamine(Entity<IVDripComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(IVDripComponent)))
+        {
+            var injectingMsg = ent.Comp.Injecting
+                ? "cm-iv-examine-injecting"
+                : "cm-iv-examine-drawing";
+            args.PushMarkup(Loc.GetString(injectingMsg, ("iv", ent.Owner)));
+
+            var chemicalsMsg = Loc.GetString("cm-iv-examine-chemicals-none");
+            if (_containers.TryGetContainer(ent, ent.Comp.Slot, out var container) &&
+                container.ContainedEntities.FirstOrDefault() is { Valid: true } packId &&
+                TryComp(packId, out BloodPackComponent? pack) &&
+                _solutionContainer.TryGetSolution(packId, pack.Solution, out _, out var solution))
+            {
+                chemicalsMsg = Loc.GetString("cm-iv-examine-chemicals",
+                    ("attached", packId),
+                    ("units", solution.Volume.Int()));
+            }
+
+            args.PushMarkup(chemicalsMsg);
+
+            var attachedMsg = ent.Comp.AttachedTo is { } attached
+                ? Loc.GetString("cm-iv-examine-attached", ("attached", attached))
+                : Loc.GetString("cm-iv-examine-attached-none");
+            args.PushMarkup(attachedMsg);
+        }
+    }
+
     private void OnBloodPackMapInit(Entity<BloodPackComponent> pack, ref MapInitEvent args)
     {
         _packsToUpdate.Add(pack);
@@ -151,10 +182,18 @@ public abstract class SharedIVDripSystem : EntitySystem
         if (!_timing.IsFirstTimePredicted)
             return;
 
-        _popup.PopupClient(Loc.GetString("cm-iv-attach-self", ("target", to)), to, user);
+        var selfMessage = "cm-iv-attach-self-drawing";
+        var othersMessage = "cm-iv-attach-others-drawing";
+        if (iv.Comp.Injecting)
+        {
+            selfMessage = "cm-iv-attach-self-injecting";
+            othersMessage = "cm-iv-attach-others-injecting";
+        }
+
+        _popup.PopupClient(Loc.GetString(selfMessage, ("target", to)), to, user);
 
         var others = Filter.PvsExcept(user);
-        _popup.PopupEntity(Loc.GetString("cm-iv-attach-others", ("user", user), ("target", to)), to, others, true);
+        _popup.PopupEntity(Loc.GetString(othersMessage, ("user", user), ("target", to)), to, others, true);
     }
 
     protected void Detach(Entity<IVDripComponent> iv, EntityUid? user, bool rip, bool predict)
@@ -185,6 +224,8 @@ public abstract class SharedIVDripSystem : EntitySystem
             {
                 _popup.PopupEntity(message, target);
             }
+
+            DoRip(iv, target);
         }
         else
         {
@@ -200,7 +241,10 @@ public abstract class SharedIVDripSystem : EntitySystem
             if (user != null)
             {
                 var others = Filter.PvsExcept(user.Value);
-                _popup.PopupEntity(Loc.GetString("cm-iv-detach-others", ("user", user), ("target", target)), target, others, true);
+                _popup.PopupEntity(Loc.GetString("cm-iv-detach-others", ("user", user), ("target", target)),
+                    target,
+                    others,
+                    true);
             }
         }
     }
@@ -290,6 +334,10 @@ public abstract class SharedIVDripSystem : EntitySystem
         }
 
         Dirty(pack);
+    }
+
+    protected virtual void DoRip(Entity<IVDripComponent> iv, EntityUid attached)
+    {
     }
 
     public override void Update(float frameTime)

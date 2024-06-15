@@ -42,12 +42,11 @@ public abstract class SharedWatchXenoSystem : EntitySystem
         Watch(xeno.Owner, target.Value);
     }
 
-
     protected virtual void OnXenoWatchAction(Entity<XenoComponent> ent, ref XenoWatchActionEvent args)
     {
     }
 
-    protected virtual void Watch(Entity<XenoComponent?, ActorComponent?, EyeComponent?> watcher, Entity<XenoComponent?> watch)
+    protected virtual void Watch(Entity<XenoComponent?, ActorComponent?, EyeComponent?> watcher, Entity<XenoComponent?> toWatch)
     {
     }
 

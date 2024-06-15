@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f7b9367cb5c083a8c052a40dece9417031e28ffe/icons/turf/floors/bigred.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "mars_dirt_1"
+    },
+    {
+      "name": "mars_dirt_2"
+    },
+    {
+      "name": "mars_dirt_3"
+    },
+    {
+      "name": "mars_dirt_4"
+    },
+    {
+      "name": "mars_dirt_5"
+    },
+    {
+      "name": "mars_dirt_6"
+    },
+    {
+      "name": "mars_dirt_7"
+    },
+    {
+      "name": "mars_dirt_8"
+    },
+    {
+      "name": "mars_dirt_9"
+    },
+    {
+      "name": "mars_dirt_10"
+    },
+    {
+      "name": "mars_dirt_11"
+    },
+    {
+      "name": "mars_dirt_12"
+    },
+    {
+      "name": "mars_dirt_13"
+    },
+    {
+      "name": "mars_dirt_14"
+    },
+    {
+      "name": "mars_cave_1"
+    },
+    {
+      "name": "mars_cave_2"
+    },
+    {
+      "name": "mars_cave_3"
+    },
+    {
+      "name": "mars_cave_4"
+    },
+    {
+      "name": "mars_cave_5"
+    },
+    {
+      "name": "mars_cave_6"
+    },
+    {
+      "name": "mars_cave_7"
+    },
+    {
+      "name": "mars_cave_8"
+    },
+    {
+      "name": "mars_cave_9"
+    },
+    {
+      "name": "mars_cave_10"
+    },
+    {
+      "name": "mars_cave_11"
+    },
+    {
+      "name": "mars_cave_12"
+    },
+    {
+      "name": "mars_cave_13"
+    },
+    {
+      "name": "mars_cave_14"
+    },
+    {
+      "name": "mars_cave_15"
+    },
+    {
+      "name": "mars_cave_16"
+    },
+    {
+      "name": "mars_cave_17"
+    },
+    {
+      "name": "mars_cave_18"
+    },
+    {
+      "name": "mars_cave_19"
+    },
+    {
+      "name": "mars_cave_20"
+    },
+    {
+      "name": "mars_cave_21"
+    },
+    {
+      "name": "mars_cave_22"
+    },
+    {
+      "name": "mars_cave_23"
+    },
+    {
+      "name": "mars_sand_1"
+    },
+    {
+      "name": "mars_sand_2"
+    },
+    {
+      "name": "mars_sand_3"
+    },
+    {
+      "name": "mars_sand_4"
+    },
+    {
+      "name": "mars_sand_5"
+    },
+    {
+      "name": "mars_sand_6"
+    },
+    {
+      "name": "mars_sand_7"
+    },
+    {
+      "name": "mars_sand_8"
+    },
+    {
+      "name": "mars_sand_9"
+    },
+    {
+      "name": "mars_sand_10"
+    },
+    {
+      "name": "mars_sand_11"
+    },
+    {
+      "name": "mars_sand_12"
+    },
+    {
+      "name": "mars_sand_13"
+    }
+  ]
+}

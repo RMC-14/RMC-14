@@ -160,7 +160,7 @@ public sealed class EntrenchingToolSystem : EntitySystem
 
     private void OnFullAfterInteract(Entity<FullSandbagComponent> full, ref AfterInteractEvent args)
     {
-        if (args.Handled || !TryComp(args.User, out TransformComponent? transform))
+        if (args.Handled || !args.CanReach || !TryComp(args.User, out TransformComponent? transform))
             return;
 
         var direction = transform.LocalRotation.GetCardinalDir();

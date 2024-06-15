@@ -23,6 +23,7 @@
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: CMBarricade
+  - type: InteractionOutline
 
 # Metal Barricade Tree
 - type: entity
@@ -62,8 +63,8 @@
       - !type:SpawnEntitiesBehavior
         spawn:
           CMSheetMetal1:
-            min: 3
-            max: 3
+            min: 2
+            max: 2
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak

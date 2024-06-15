@@ -73,6 +73,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
     {
         var user = args.User;
         if (args.Handled ||
+            !args.CanReach ||
             args.Target == null ||
             !HasComp<CMSurgeryTargetComponent>(args.Target))
         {

@@ -2058,8 +2058,8 @@
         amount: 15
       - id: CMPouchMagazine
         amount: 15
-#      - id: Shotgun Shell Pouch
-#        amount: 15
+      - id: CMPouchShotgun
+        amount: 15
       - id: CMPouchGeneralMedium
         amount: 15
       - id: CMPouchMagazinePistol

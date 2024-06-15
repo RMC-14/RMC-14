@@ -29,20 +29,20 @@ public sealed class CMHandsSystem : EntitySystem
 
     private void OnWhitelistGettingPickedUpAttempt(Entity<WhitelistPickupByComponent> ent, ref GettingPickedUpAttemptEvent args)
     {
-        if (!_whitelist.IsValid(ent.Comp.All, args.User))
+        if (args.Cancelled)
+            return;
+
+        if (!_whitelist.IsValid(ent.Comp.Whitelist, args.User))
             args.Cancel();
     }
 
     private void OnWhitelistPickUpAttempt(Entity<WhitelistPickupComponent> ent, ref PickupAttemptEvent args)
     {
-        foreach (var entry in ent.Comp.Any.Values)
-        {
-            var type = entry.Component.GetType();
-            if (HasComp(args.Item, type))
-                return;
-        }
+        if (args.Cancelled)
+            return;
 
-        args.Cancel();
+        if (!_whitelist.IsValid(ent.Comp.Whitelist, args.Item))
+            args.Cancel();
     }
 
     private void OnDropMobStateChanged(Entity<DropHeldOnIncapacitateComponent> ent, ref MobStateChangedEvent args)
@@ -60,5 +60,19 @@ public sealed class CMHandsSystem : EntitySystem
         {
             _hands.TryDrop(ent, hand, checkActionBlocker: false, handsComp: handsComp);
         }
+    }
+
+    public bool IsPickupByAllowed(Entity<WhitelistPickupByComponent?> item, Entity<WhitelistPickupComponent?> user)
+    {
+        Resolve(item, ref item.Comp, false);
+        Resolve(user, ref user.Comp, false);
+
+        if (item.Comp != null && !_whitelist.IsValid(item.Comp.Whitelist, user))
+            return false;
+
+        if (user.Comp != null && !_whitelist.IsValid(user.Comp.Whitelist, item.Owner))
+            return false;
+
+        return true;
     }
 }

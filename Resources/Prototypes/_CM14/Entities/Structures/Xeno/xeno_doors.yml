@@ -2,14 +2,10 @@
   id: DoorXenoResin # TODO CM14 make them only buildable next to other resin walls
   parent: CMBaseXenoStructure
   name: resin door
+  description: That's a resin door.
   placement:
     mode: SnapgridCenter
   components:
-  - type: MeleeSound
-    soundGroups:
-      Brute:
-        path:
-          "/Audio/Weapons/smash.ogg" # TODO CM14
   - type: InteractionOutline
   - type: Sprite
     sprite: _CM14/Structures/Xenos/xeno_resin_door.rsi
@@ -79,11 +75,17 @@
     powerLoad: 0
   - type: XenoConstructionPlasmaCost
     plasma: 120
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 600
+  - type: XenoConstructionRequiresSupport
 
 - type: entity
   id: DoorXenoResinThick
   parent: DoorXenoResin
   name: thick resin door
+  description: A thick resin door, which is more durable.
   components:
   - type: Sprite
     sprite: _CM14/Structures/Xenos/xeno_resin_door.rsi
@@ -117,3 +119,7 @@
   - type: IconSmooth
     key: walls
     mode: NoSprite
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 900

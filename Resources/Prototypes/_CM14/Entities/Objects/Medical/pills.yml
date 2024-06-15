@@ -2,7 +2,7 @@
   name: pill
   parent: Pill
   id: CMPill
-  description: An unknown pill.
+  description: ""
   components:
   - type: Sprite
     sprite: _CM14/Objects/Chemistry/pills.rsi
@@ -12,13 +12,21 @@
   - type: Item
     size: Tiny
     sprite: _CM14/Objects/Chemistry/pills.rsi
+  - type: ReagentExaminationRequiresSkill
+    skilledExamineContains: cm-pill-contains
+    skilledExamineNone: cm-pill-contains-none
+    skills:
+      medical: 1
+  - type: ExamineRequiresSkill
+    unskilledExamine: cm-pill-contents-unknown
+    skilledExamine: cm-pill-contents-none
+    skills:
+      medical: 1
 
 # TODO CM14 these need to have a random state per round
 - type: entity
   parent: CMPill
   id: CMPillBicaridine
-  name: bicaridine pill (15u)
-  description: A Bicaridine pill. Heals brute damage.
   components:
   - type: SolutionContainerManager
     solutions:
@@ -31,12 +39,12 @@
     layers:
     - state: pill3
       map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: cm-pill-contents-bicaridine
 
 - type: entity
   parent: CMPill
   id: CMPillDexalin
-  name: dexalin pill (15u)
-  description: A Dexalin pill. Used to treat oxygen deprivation.
   components:
   - type: SolutionContainerManager
     solutions:
@@ -49,12 +57,12 @@
     layers:
     - state: pill16
       map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: cm-pill-contents-dexalin
 
 - type: entity
   parent: CMPill
   id: CMPillDylovene
-  name: dylovene pill (15u)
-  description: An anti-toxin pill. It neutralizes many common toxins, as well as treating toxin damage.
   components:
   - type: SolutionContainerManager
     solutions:
@@ -67,12 +75,12 @@
     layers:
     - state: pill13
       map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: cm-pill-contents-dylovene
 
 - type: entity
   parent: CMPill
   id: CMPillInaprovaline
-  name: inaprovaline pill (15u)
-  description: An Inaprovaline pill. Used to stabilize patients.
   components:
   - type: SolutionContainerManager
     solutions:
@@ -85,12 +93,12 @@
     layers:
     - state: pill1
       map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: cm-pill-contents-inaprovaline
 
 - type: entity
   parent: CMPill
   id: CMPillKelotane
-  name: kelotane pill (15u)
-  description: A Kelotane pill. Used to treat burns.
   components:
   - type: SolutionContainerManager
     solutions:
@@ -103,12 +111,12 @@
     layers:
     - state: pill5
       map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: cm-pill-contents-kelotane
 
 - type: entity
   parent: CMPill
   id: CMPillTricordrazine
-  name: Tricordrazine pill (15u)
-  description: A Tricordrazine pill. A weak general use medicine for treating damage.
   components:
   - type: SolutionContainerManager
     solutions:
@@ -121,5 +129,7 @@
     layers:
     - state: pill5
       map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: cm-pill-contents-tricordrazine
 
 # TODO CM14 peridaxon, tramadol

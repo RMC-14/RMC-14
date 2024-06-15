@@ -1,0 +1,263 @@
+# Cave
+
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetMarsCave
+  name: tiles-cm-rock
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_1.png
+
+- type: tile
+  parent: CMPlanetMarsCave
+  id: CMPlanetMarsCave1
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_2.png
+
+- type: tile
+  parent: CMPlanetMarsCave
+  id: CMPlanetMarsCave2
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_3.png
+
+- type: tile
+  parent: CMPlanetMarsCave
+  id: CMPlanetMarsCave3
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_4.png
+
+- type: tile
+  parent: CMPlanetMarsCave
+  id: CMPlanetMarsCave4
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_5.png
+
+- type: tile
+  parent: CMPlanetMarsCave
+  id: CMPlanetMarsCave5
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_6.png
+
+- type: tile
+  parent: CMPlanetMarsCave
+  id: CMPlanetMarsCave6
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_7.png
+
+- type: tile
+  parent: CMPlanetMarsCave
+  id: CMPlanetMarsCave7
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_8.png
+
+- type: tile
+  parent: CMPlanetMarsCave
+  id: CMPlanetMarsCave8
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_9.png
+
+- type: tile
+  parent: CMPlanetMarsCave
+  id: CMPlanetMarsCave9
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_10.png
+
+- type: tile
+  parent: CMPlanetMarsCave
+  id: CMPlanetMarsCave10
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_11.png
+
+- type: tile
+  parent: CMPlanetMarsCave
+  id: CMPlanetMarsCave11
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_12.png
+
+- type: tile
+  parent: CMPlanetMarsCave
+  id: CMPlanetMarsCave12
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_13.png
+
+- type: tile
+  parent: CMPlanetMarsCave
+  id: CMPlanetMarsCave13
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_14.png
+
+- type: tile
+  parent: CMPlanetMarsCave
+  id: CMPlanetMarsCave14
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_15.png
+
+- type: tile
+  parent: CMPlanetMarsCave
+  id: CMPlanetMarsCave15
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_16.png
+
+- type: tile
+  parent: CMPlanetMarsCave
+  id: CMPlanetMarsCave16
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_17.png
+
+- type: tile
+  parent: CMPlanetMarsCave
+  id: CMPlanetMarsCave17
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_18.png
+
+- type: tile
+  parent: CMPlanetMarsCave
+  id: CMPlanetMarsCave18
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_19.png
+
+- type: tile
+  parent: CMPlanetMarsCave
+  id: CMPlanetMarsCave19
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_20.png
+
+- type: tile
+  parent: CMPlanetMarsCave
+  id: CMPlanetMarsCave20
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_21.png
+
+- type: tile
+  parent: CMPlanetMarsCave
+  id: CMPlanetMarsCave21
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_22.png
+
+- type: tile
+  parent: CMPlanetMarsCave
+  id: CMPlanetMarsCave22
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_cave_23.png
+
+
+# Dirt
+
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetMarsDirt
+  name: tiles-cm-dirt
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_dirt_1.png
+
+- type: tile
+  parent: CMPlanetMarsDirt
+  id: CMPlanetMarsDirt1
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_dirt_2.png
+
+- type: tile
+  parent: CMPlanetMarsDirt
+  id: CMPlanetMarsDirt2
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_dirt_3.png
+
+- type: tile
+  parent: CMPlanetMarsDirt
+  id: CMPlanetMarsDirt3
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_dirt_4.png
+
+- type: tile
+  parent: CMPlanetMarsDirt
+  id: CMPlanetMarsDirt4
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_dirt_5.png
+
+- type: tile
+  parent: CMPlanetMarsDirt
+  id: CMPlanetMarsDirt5
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_dirt_6.png
+
+- type: tile
+  parent: CMPlanetMarsDirt
+  id: CMPlanetMarsDirt6
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_dirt_7.png
+
+- type: tile
+  parent: CMPlanetMarsDirt
+  id: CMPlanetMarsDirt7
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_dirt_8.png
+
+- type: tile
+  parent: CMPlanetMarsDirt
+  id: CMPlanetMarsDirt8
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_dirt_9.png
+
+- type: tile
+  parent: CMPlanetMarsDirt
+  id: CMPlanetMarsDirt9
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_dirt_10.png
+
+- type: tile
+  parent: CMPlanetMarsDirt
+  id: CMPlanetMarsDirt10
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_dirt_11.png
+
+- type: tile
+  parent: CMPlanetMarsDirt
+  id: CMPlanetMarsDirt11
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_dirt_12.png
+
+- type: tile
+  parent: CMPlanetMarsDirt
+  id: CMPlanetMarsDirt12
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_dirt_13.png
+
+- type: tile
+  parent: CMPlanetMarsDirt
+  id: CMPlanetMarsDirt13
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_dirt_14.png
+
+
+# Sand
+
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetMarsSand
+  name: tiles-cm-sand
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_sand_1.png
+
+- type: tile
+  parent: CMPlanetMarsSand
+  id: CMPlanetMarsSand1
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_sand_2.png
+
+- type: tile
+  parent: CMPlanetMarsSand
+  id: CMPlanetMarsSand2
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_sand_3.png
+
+- type: tile
+  parent: CMPlanetMarsSand
+  id: CMPlanetMarsSand3
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_sand_4.png
+
+- type: tile
+  parent: CMPlanetMarsSand
+  id: CMPlanetMarsSand4
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_sand_5.png
+
+- type: tile
+  parent: CMPlanetMarsSand
+  id: CMPlanetMarsSand5
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_sand_6.png
+
+- type: tile
+  parent: CMPlanetMarsSand
+  id: CMPlanetMarsSand6
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_sand_7.png
+
+- type: tile
+  parent: CMPlanetMarsSand
+  id: CMPlanetMarsSand7
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_sand_8.png
+
+- type: tile
+  parent: CMPlanetMarsSand
+  id: CMPlanetMarsSand8
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_sand_9.png
+
+- type: tile
+  parent: CMPlanetMarsSand
+  id: CMPlanetMarsSand9
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_sand_10.png
+
+- type: tile
+  parent: CMPlanetMarsSand
+  id: CMPlanetMarsSand10
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_sand_11.png
+
+- type: tile
+  parent: CMPlanetMarsSand
+  id: CMPlanetMarsSand11
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_sand_12.png
+
+- type: tile
+  parent: CMPlanetMarsSand
+  id: CMPlanetMarsSand12
+  sprite: /Textures/_CM14/Tiles/planet/bigred/mars_sand_13.png

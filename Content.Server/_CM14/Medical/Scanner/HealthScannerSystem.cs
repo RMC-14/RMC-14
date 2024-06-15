@@ -39,7 +39,8 @@ public sealed class HealthScannerSystem : EntitySystem
 
     private void OnAfterInteract(Entity<HealthScannerComponent> scanner, ref AfterInteractEvent args)
     {
-        if (args.Target is not { } target ||
+        if (!args.CanReach ||
+            args.Target is not { } target ||
             !CanUseHealthScannerPopup(scanner, args.User, target))
         {
             return;
