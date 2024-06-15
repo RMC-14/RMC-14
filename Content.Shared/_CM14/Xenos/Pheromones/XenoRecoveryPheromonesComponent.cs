@@ -14,6 +14,4 @@ public sealed partial class XenoRecoveryPheromonesComponent : Component
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 Multiplier;
-
-    public override bool SessionSpecific => true;
 }

@@ -25,6 +25,4 @@ public sealed partial class XenoFrenzyPheromonesComponent : Component
 
     [DataField, AutoNetworkedField]
     public List<ProtoId<DamageTypePrototype>> DamageTypes = new() { "Blunt", "Slash", "Piercing" };
-
-    public override bool SessionSpecific => true;
 }

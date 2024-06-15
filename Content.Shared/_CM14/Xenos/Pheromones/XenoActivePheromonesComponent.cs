@@ -10,6 +10,4 @@ public sealed partial class XenoActivePheromonesComponent : Component
 
     [DataField, AutoNetworkedField]
     public XenoPheromones Pheromones;
-
-    public override bool SessionSpecific => true;
 }
