@@ -1,0 +1,17 @@
+- type: holocard
+  id: UrgentHolocard
+  holocardIcon:
+    priority: 1
+    icon:
+      sprite: /Textures/_CM14/Interface/health_hud_holocard.rsi
+      state: hudhcorange
+  description: hc-urgent-description
+
+- type: holocard
+  id: UrgentHolocard
+  holocardIcon:
+    priority: 1
+    icon:
+      sprite: /Textures/_CM14/Interface/health_hud_holocard.rsi
+      state: hudhcorange
+  description: hc-urgent-description
