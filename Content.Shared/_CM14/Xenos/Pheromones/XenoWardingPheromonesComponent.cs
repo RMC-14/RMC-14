@@ -19,6 +19,4 @@ public sealed partial class XenoWardingPheromonesComponent : Component
 
     [DataField, AutoNetworkedField]
     public List<ProtoId<DamageTypePrototype>> DamageTypes = new() { "Bloodloss", "Asphyxiation" };
-
-    public override bool SessionSpecific => true;
 }

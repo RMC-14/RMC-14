@@ -45,6 +45,7 @@
       sprite: _CM14/Actions/xeno_actions.rsi
       state: emit_pheromones
     event: !type:XenoPheromonesActionEvent
+    useDelay: 0.33
 
 - type: entity
   id: ActionXenoHide

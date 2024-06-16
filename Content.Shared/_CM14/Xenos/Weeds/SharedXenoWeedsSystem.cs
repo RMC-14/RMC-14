@@ -3,6 +3,7 @@ using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Maps;
 using Content.Shared.Movement.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -17,6 +18,7 @@ namespace Content.Shared._CM14.Xenos.Weeds;
 
 public abstract class SharedXenoWeedsSystem : EntitySystem
 {
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
@@ -232,6 +234,12 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
                 continue;
 
             damage.DamageAt = time + damage.Every;
+
+            if (_container.TryGetContainingContainer((uid, null), out var container) &&
+                _xenoQuery.HasComp(container.Owner))
+            {
+                continue;
+            }
 
             if (!damage.RestingStopsDamage ||
                 !HasComp<XenoRestingComponent>(uid))
