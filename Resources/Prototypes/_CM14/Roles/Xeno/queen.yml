@@ -17,6 +17,9 @@
   requireAdminNotify: true
   hidden: false
   supervisors: nobody
+  accessGroups:
+  - CMAccessXeno
+  - CMAccessXenoQueen
 
 - type: playTimeTracker
   id: CMJobXenoQueen
