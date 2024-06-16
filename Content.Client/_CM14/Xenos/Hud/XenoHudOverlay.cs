@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using Content.Client._CM14.Medical.HUD;
+using Content.Client._CM14.Medical.HUD.Systems;
 using Content.Client._CM14.NightVision;
 using Content.Shared._CM14.Xenos;
 using Content.Shared._CM14.Xenos.Hugger;
