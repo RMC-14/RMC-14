@@ -195,7 +195,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnXenoOrderConstructionAction(Entity<XenoConstructionComponent> xeno, ref XenoOrderConstructionActionEvent args)
     {
-        if (!CanOrderConstructionPopup(xeno, args.Target))
+        if (!CanOrderConstructionPopup(xeno, args.Target, null))
             return;
 
         xeno.Comp.OrderingConstructionAt = args.Target;
@@ -209,7 +209,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     {
         if (xeno.Comp.OrderingConstructionAt is not { } target ||
             !xeno.Comp.CanOrderConstruction.Contains(args.StructureId) ||
-            !CanOrderConstructionPopup(xeno, target))
+            !CanOrderConstructionPopup(xeno, target, args.StructureId))
         {
             return;
         }
@@ -230,7 +230,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         };
 
         _doAfter.TryStartDoAfter(doAfter);
-        _ui.TryOpenUi(xeno.Owner, XenoOrderConstructionUI.Key, xeno);
+        _ui.CloseUi(xeno.Owner, XenoOrderConstructionUI.Key, xeno);
     }
 
     private void OnXenoOrderConstructionDoAfter(Entity<XenoConstructionComponent> xeno, ref XenoOrderConstructionDoAfterEvent args)
@@ -241,7 +241,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         args.Handled = true;
         var target = GetCoordinates(args.Coordinates);
         if (!xeno.Comp.CanOrderConstruction.Contains(args.StructureId) ||
-            !CanOrderConstructionPopup(xeno, target) ||
+            !CanOrderConstructionPopup(xeno, target, args.StructureId) ||
             !TryComp(xeno, out XenoPlasmaComponent? plasma))
         {
             return;
@@ -316,6 +316,23 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         _hive.SetHive((spawn, member), hive);
 
         QueueDel(target);
+
+        if (TryComp(spawn, out HiveConstructionUniqueComponent? unique))
+        {
+            var uniques = EntityQueryEnumerator<HiveConstructionUniqueComponent>();
+            while (uniques.MoveNext(out var uid, out var otherUnique))
+            {
+                if (uid == spawn)
+                    continue;
+
+                if (otherUnique.Id == unique.Id &&
+                    !TerminatingOrDeleted(uid) &&
+                    !EntityManager.IsQueuedForDeletion(uid))
+                {
+                    QueueDel(uid);
+                }
+            }
+        }
     }
 
     private void OnActionConstructionChosen(Entity<XenoChooseConstructionActionComponent> xeno, ref XenoConstructionChosenEvent args)
@@ -501,7 +518,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return false;
         }
 
-        if (buildChoice is { } choice &&
+        if (checkStructureSelected &&
+            buildChoice is { } choice &&
             _prototype.TryIndex(choice, out var choiceProto) &&
             choiceProto.HasComponent<XenoConstructionRequiresSupportComponent>(_compFactory))
         {
@@ -515,7 +533,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         return true;
     }
 
-    private bool CanOrderConstructionPopup(Entity<XenoConstructionComponent> xeno, EntityCoordinates target)
+    private bool CanOrderConstructionPopup(Entity<XenoConstructionComponent> xeno, EntityCoordinates target, EntProtoId? choice)
     {
         if (!CanSecreteOnTilePopup(xeno, xeno.Comp.BuildChoice, target, false, false))
             return false;
@@ -543,7 +561,30 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             }
         }
 
+        if (choice != null &&
+            _prototype.TryIndex(choice, out var choiceProto) &&
+            choiceProto.TryGetComponent(out HiveConstructionUniqueComponent? unique, _compFactory) &&
+            OtherUniqueExists(unique.Id))
+        {
+            _popup.PopupClient(Loc.GetString("cm-xeno-unique-exists", ("choice", choiceProto.Name)), xeno);
+            return false;
+        }
+
         return true;
+    }
+
+    private bool OtherUniqueExists(EntProtoId id)
+    {
+        var uniques = EntityQueryEnumerator<HiveConstructionUniqueComponent>();
+        while (uniques.MoveNext(out var otherUnique))
+        {
+            if (otherUnique.Id == id)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private bool IsSupported(Entity<MapGridComponent> grid, EntityCoordinates coordinates)

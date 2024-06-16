@@ -1268,5 +1268,16 @@
   id: 155
   time: '2024-06-16T05:18:15.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2487
+- author: DrSmugleaf
+  changes:
+  - message: Fixed counting hugged marines as alive towards round end conditions.
+    type: Fix
+  - message: Fixed weeds spreading onto water.
+    type: Fix
+  - message: Fixed xenos being able to build more than one hive core.
+    type: Fix
+  id: 156
+  time: '2024-06-16T06:56:15.0000000+00:00'
+  url: null
 Name: CM
 Order: -1
