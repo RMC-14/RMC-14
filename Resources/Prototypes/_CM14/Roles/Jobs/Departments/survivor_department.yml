@@ -5,3 +5,4 @@
   color: "#C38312"
   roles:
   - CMSurvivor
+  hidden: true # TODO CM14
