@@ -1288,11 +1288,13 @@
     type: Fix
   - message: Fixed pheromones affecting dead xenos.
     type: Fix
-  - message: The hugger's observer ghost now spawns on top of them after a successful hug.
+  - message: The hugger's observer ghost now spawns on top of them after a successful
+      hug.
     type: Fix
   - message: Fixed role distribution being unequal between squads.
     type: Fix
-  - message: Temporarily disabled role timers and roles without any content for the playtest.
+  - message: Temporarily disabled role timers and roles without any content for the
+      playtest.
     type: Tweak
   - message: Added a marine radio announcement and sounds when a hijack happens.
     type: Add
@@ -1301,5 +1303,12 @@
   id: 156
   time: '2024-06-16T06:56:15.0000000+00:00'
   url: null
+- author: Whisper
+  changes:
+  - message: Added unique xeno death emote
+    type: Add
+  id: 157
+  time: '2024-06-16T09:42:06.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2495
 Name: CM
 Order: -1
