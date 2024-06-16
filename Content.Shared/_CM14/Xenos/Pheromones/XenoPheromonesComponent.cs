@@ -22,6 +22,4 @@ public sealed partial class XenoPheromonesComponent : Component
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 PheromonesMultiplier = 1;
-
-    public override bool SessionSpecific => true;
 }
