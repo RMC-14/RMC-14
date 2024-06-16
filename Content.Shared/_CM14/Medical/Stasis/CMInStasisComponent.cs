@@ -3,7 +3,7 @@
 namespace Content.Shared._CM14.Medical.Stasis;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedCMStasisBagSystem))]
+[Access(typeof(CMStasisBagSystem))]
 public sealed partial class CMInStasisComponent : Component
 {
     [DataField, AutoNetworkedField]
