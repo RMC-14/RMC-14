@@ -8,10 +8,16 @@
   },
   "states": [
     {
-      "name": "hudhealthy"
+      "name": "hudhcorange"
     },
     {
-      "name": "huddead"
+      "name": "hudhcpurple"
+    },
+    {
+      "name": "hudhcblack"
+    },
+    {
+      "name": "hudhcred"
     }
 ]
 }
