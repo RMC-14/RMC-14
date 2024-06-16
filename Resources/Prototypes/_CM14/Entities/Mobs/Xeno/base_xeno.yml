@@ -174,7 +174,7 @@
     name: cm-xeno-name
     description: cm-xeno-description
     raffle:
-      settings: default
+      settings: short
     rules: cm-xeno-rules
   - type: StatusEffects
     allowed:
