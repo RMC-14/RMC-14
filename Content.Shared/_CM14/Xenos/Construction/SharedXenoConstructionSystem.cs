@@ -50,6 +50,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private EntityQuery<XenoConstructionSupportComponent> _constructionSupportQuery;
     private EntityQuery<XenoConstructionRequiresSupportComponent> _constructionRequiresSupportQuery;
     private EntityQuery<TransformComponent> _transformQuery;
+    private EntityQuery<XenoConstructComponent> _xenoConstructQuery;
 
     public override void Initialize()
     {
@@ -59,6 +60,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         _constructionSupportQuery = GetEntityQuery<XenoConstructionSupportComponent>();
         _constructionRequiresSupportQuery = GetEntityQuery<XenoConstructionRequiresSupportComponent>();
         _transformQuery = GetEntityQuery<TransformComponent>();
+        _xenoConstructQuery = GetEntityQuery<XenoConstructComponent>();
 
         SubscribeLocalEvent<XenoConstructionComponent, XenoPlantWeedsActionEvent>(OnXenoPlantWeedsAction);
 
@@ -509,6 +511,17 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
             return false;
+        }
+
+        var tile = _mapSystem.CoordinatesToTile(gridId, grid, target);
+        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
+        while (anchored.MoveNext(out var uid))
+        {
+            if (_xenoConstructQuery.HasComp(uid))
+            {
+                _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
+                return false;
+            }
         }
 
         if (checkStructureSelected &&
