@@ -60,7 +60,7 @@ namespace Content.Server.Body.Components
         ///     quantity, would be muuuuch better than just one poison acting.
         /// </summary>
         [DataField("maxReagents")]
-        public int MaxReagentsProcessable = 3;
+        public int MaxReagentsProcessable = 10;
 
         /// <summary>
         ///     A list of metabolism groups that this metabolizer will act on, in order of precedence.
