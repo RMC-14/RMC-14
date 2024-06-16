@@ -28,6 +28,12 @@
   minValue: 1
   maxValue: 999
 
+- type: emote
+  id: CMXenoDeathGasp
+  name: chat-emote-name-deathgasp
+  icon: Interface/Emotes/deathgasp.png
+  chatMessages: [ "cm-xeno-death-gasp" ]
+
 # TODO CM14 xenos should bleed and hurt nearby marines when damaged
 - type: entity
   id: CMXenoBase
@@ -65,6 +71,7 @@
       - ActionCritFakeDeath
       - ActionCritLastWords
   - type: Deathgasp
+    prototype: CMXenoDeathGasp
   - type: SoundOnDeath
     sound:
       collection: XenoDeath
