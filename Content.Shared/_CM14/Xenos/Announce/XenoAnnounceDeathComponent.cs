@@ -7,5 +7,8 @@ namespace Content.Shared._CM14.Xenos.Announce;
 public sealed partial class XenoAnnounceDeathComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
-    public string Message;
+    public LocId Message;
+
+    [DataField, AutoNetworkedField]
+    public Color Color = Color.FromHex("#2A623D");
 }

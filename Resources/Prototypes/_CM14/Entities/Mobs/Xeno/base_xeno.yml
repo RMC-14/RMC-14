@@ -204,6 +204,9 @@
   - type: UserLimitHits
   - type: MovementIgnoreGravity
   - type: DisableConstruction
+  - type: XenoAnnounceDeath # TODO CM14 announce location of death (area)
+    message: cm-xeno-death
+    color: "#459A62"
 
 - type: entity
   abstract: true

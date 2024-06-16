@@ -1276,6 +1276,28 @@
     type: Fix
   - message: Fixed xenos being able to build more than one hive core.
     type: Fix
+  - message: Dropship hatches now automatically lock while travelling.
+    type: Fix
+  - message: Huggers no longer slowly die while picked up by another xeno.
+    type: Fix
+  - message: Fixed being able to build resin structures on top of opened resin doors.
+    type: Fix
+  - message: Fixed xenos not healing while in crit and on weeds.
+    type: Fix
+  - message: Xeno weeds now slow marines less.
+    type: Fix
+  - message: Fixed pheromones affecting dead xenos.
+    type: Fix
+  - message: The hugger's observer ghost now spawns on top of them after a successful hug.
+    type: Fix
+  - message: Fixed role distribution being unequal between squads.
+    type: Fix
+  - message: Temporarily disabled role timers and roles without any content for the playtest.
+    type: Tweak
+  - message: Added a marine radio announcement and sounds when a hijack happens.
+    type: Add
+  - message: The death of every xeno is now announced to the hive.
+    type: Add
   id: 156
   time: '2024-06-16T06:56:15.0000000+00:00'
   url: null
