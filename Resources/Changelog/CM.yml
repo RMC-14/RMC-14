@@ -1255,5 +1255,18 @@
   id: 154
   time: '2024-06-16T05:07:39.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2483
+- author: DrSmugleaf
+  changes:
+  - message: Fixed anyone that was ever put into a stasis bag being unable to process
+      medicine ever again.
+    type: Fix
+  - message: Fixed bleeding being much stronger than intended.
+    type: Fix
+  - message: Fixed humanoids only being able to metabolize a maximum of 3 different
+      medicines at once.
+    type: Fix
+  id: 155
+  time: '2024-06-16T05:18:15.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2487
 Name: CM
 Order: -1
