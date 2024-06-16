@@ -10,8 +10,8 @@
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Head/Helmets/riot.rsi
   - type: CMArmor
-    armor: 20
-    explosionArmor: 10
+    armor: 20 # 30 melee, 10 bullet
+    explosionArmor: 0
   - type: CMHardArmor
   
 - type: entity
