@@ -1248,5 +1248,12 @@
   id: 153
   time: '2024-06-16T05:06:37.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2484
+- author: DrSmugleaf
+  changes:
+  - message: Fixed not being able to use blood packs manually without an IV.
+    type: Fix
+  id: 154
+  time: '2024-06-16T05:07:39.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2483
 Name: CM
 Order: -1
