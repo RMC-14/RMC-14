@@ -18,6 +18,7 @@
       domestics: 2
       engineer: 1
       firearms: 2
+  hidden: true # TODO CM14
 
 - type: startingGear
   id: CMGearMessTech
