@@ -249,10 +249,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 }
             }
 
+            // Any unfilled xeno slots become larva
             for (var i = selected; i < totalXenos; i++)
             {
                 // TODO CM14 xeno spawn points
-                var xenoEnt = Spawn(comp.LarvaEnt, comp.XenoMap.ToCoordinates());
+                var xenoEnt = SpawnAtPosition(comp.LarvaEnt, comp.XenoMap.ToCoordinates());
                 _xeno.MakeXeno(xenoEnt);
                 _xeno.SetHive(xenoEnt, comp.Hive);
             }
