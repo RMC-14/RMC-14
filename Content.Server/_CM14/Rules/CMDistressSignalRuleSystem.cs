@@ -24,6 +24,7 @@ using Content.Shared._CM14.Spawners;
 using Content.Shared._CM14.Weapons.Ranged.IFF;
 using Content.Shared._CM14.Xenos;
 using Content.Shared._CM14.Xenos.Evolution;
+using Content.Shared._CM14.Xenos.Hugger;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
 using Content.Shared.GameTicking;
@@ -248,10 +249,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 }
             }
 
+            // Any unfilled xeno slots become larva
             for (var i = selected; i < totalXenos; i++)
             {
                 // TODO CM14 xeno spawn points
-                var xenoEnt = Spawn(comp.LarvaEnt, comp.XenoMap.ToCoordinates());
+                var xenoEnt = SpawnAtPosition(comp.LarvaEnt, comp.XenoMap.ToCoordinates());
                 _xeno.MakeXeno(xenoEnt);
                 _xeno.SetHive(xenoEnt, comp.Hive);
             }
@@ -477,6 +479,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             var marinesOnShip = false;
             while (marines.MoveNext(out var marineId, out _, out var mobState, out var xform))
             {
+                if (HasComp<VictimHuggedComponent>(marineId) || HasComp<VictimBurstComponent>(marineId))
+                    continue;
+
                 if (_mobState.IsAlive(marineId, mobState))
                     marinesAlive = true;
 

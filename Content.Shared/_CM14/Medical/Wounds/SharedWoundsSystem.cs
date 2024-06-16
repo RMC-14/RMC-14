@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+using Content.Shared._CM14.CCVar;
 using Content.Shared._CM14.Damage;
 using Content.Shared._CM14.Marines.Skills;
 using Content.Shared.Damage;
@@ -13,6 +14,7 @@ using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Stacks;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -25,6 +27,7 @@ public abstract class SharedWoundsSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly CMDamageableSystem _cmDamageable = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -33,6 +36,9 @@ public abstract class SharedWoundsSystem : EntitySystem
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedStackSystem _stacks = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+
+    private float _bloodlossMultiplier = 1;
+    private float _bleedTimeMultiplier = 1;
 
     public override void Initialize()
     {
@@ -46,6 +52,9 @@ public abstract class SharedWoundsSystem : EntitySystem
         SubscribeLocalEvent<WoundTreaterComponent, UseInHandEvent>(OnWoundTreaterUseInHand);
         SubscribeLocalEvent<WoundTreaterComponent, AfterInteractEvent>(OnWoundTreaterAfterInteract);
         SubscribeLocalEvent<WoundTreaterComponent, TreatWoundDoAfterEvent>(OnWoundTreaterDoAfter);
+
+        Subs.CVar(_config, CMCVars.CMBloodlossMultiplier, v => _bloodlossMultiplier = v, true);
+        Subs.CVar(_config, CMCVars.CMBleedTimeMultiplier, v => _bleedTimeMultiplier = v, true);
     }
 
     private void OnWoundableDamaged(Entity<WoundableComponent> ent, ref DamageChangedEvent args)
@@ -343,7 +352,9 @@ public abstract class SharedWoundsSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, treater, target, treater)
         {
             BreakOnDamage = true,
-            BreakOnMove = true
+            BreakOnMove = true,
+            BreakOnHandChange = true,
+            NeedHand = true
         };
         _doAfter.TryStartDoAfter(doAfter);
         _audio.PlayPredicted(treater.Comp.TreatBeginSound, user, user);
@@ -440,18 +451,29 @@ public abstract class SharedWoundsSystem : EntitySystem
             bloodloss = total.Float() * woundable.Comp.BloodLossMultiplier;
         }
 
-        var duration = fixedDuration ?? total.Float() * woundable.Comp.DurationMultiplier;
+        bloodloss *= _bloodlossMultiplier;
+
+        var time = _timing.CurTime;
+        var duration = fixedDuration ?? total.Float() * woundable.Comp.DurationMultiplier * _bleedTimeMultiplier;
         if (EnsureComp<WoundedComponent>(woundable, out var wounded))
         {
             var wounds = CollectionsMarshal.AsSpan(wounded.Wounds);
-            foreach (ref var wound in wounds)
+            for (var i = wounds.Length - 1; i >= 0; i--)
             {
-                wound.Bloodloss += bloodloss;
+                ref var wound = ref wounds[i];
+                if (wound.Type != type)
+                    continue;
 
-                if (duration != TimeSpan.MaxValue &&
-                    wound.StopBleedAt != null)
+                if (wound.StopBleedAt is not { } stopBleedAt || time >= stopBleedAt)
+                    continue;
+
+                if (wound.Bloodloss > 0)
                 {
-                    wound.StopBleedAt = wound.StopBleedAt + duration;
+                    wound.Bloodloss += bloodloss / 1.5f;
+                    wound.StopBleedAt = stopBleedAt + duration / 1.5f;
+                    bloodloss = 0;
+                    duration = TimeSpan.Zero;
+                    break;
                 }
             }
         }
@@ -459,7 +481,7 @@ public abstract class SharedWoundsSystem : EntitySystem
         wounded.BruteWoundGroup = woundable.Comp.BruteWoundGroup;
         wounded.BurnWoundGroup = woundable.Comp.BurnWoundGroup;
 
-        TimeSpan? newDuration = duration == TimeSpan.MaxValue ? null : _timing.CurTime + duration;
+        TimeSpan? newDuration = duration == TimeSpan.MaxValue ? null : time + duration;
         wounded.Wounds.Add(new Wound(total, FixedPoint2.Zero, bloodloss, newDuration, type, false));
         Dirty(woundable, wounded);
     }

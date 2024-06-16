@@ -1,10 +1,14 @@
 using System.Linq;
 using Content.Shared._CM14.Marines;
+using Content.Shared._CM14.Marines.Skills;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
+using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
+using Content.Shared.Hands;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
@@ -20,7 +24,9 @@ public abstract class SharedIVDripSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _containers = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
@@ -51,6 +57,11 @@ public abstract class SharedIVDripSystem : EntitySystem
         SubscribeLocalEvent<BloodPackComponent, MapInitEvent>(OnBloodPackMapInit);
         SubscribeLocalEvent<BloodPackComponent, AfterAutoHandleStateEvent>(OnBloodPackAfterState);
         SubscribeLocalEvent<BloodPackComponent, SolutionContainerChangedEvent>(OnBloodPackSolutionChanged);
+        SubscribeLocalEvent<BloodPackComponent, AfterInteractEvent>(OnBloodPackAfterInteract);
+        SubscribeLocalEvent<BloodPackComponent, AttachBloodPackDoAfterEvent>(OnBloodPackAttachDoAfter);
+        SubscribeLocalEvent<BloodPackComponent, GotUnequippedHandEvent>(OnBloodPackUnequippedHand);
+        SubscribeLocalEvent<BloodPackComponent, GetVerbsEvent<InteractionVerb>>(OnBloodPackVerbs);
+        SubscribeLocalEvent<BloodPackComponent, ExaminedEvent>(OnBloodPackExamine);
     }
 
     private void OnIVDripEntInserted(Entity<IVDripComponent> iv, ref EntInsertedIntoContainerMessage args)
@@ -76,7 +87,7 @@ public abstract class SharedIVDripSystem : EntitySystem
     private void OnIVDripCanDropDragged(Entity<IVDripComponent> iv, ref CanDropDraggedEvent args)
     {
         // TODO CM14 check for BloodstreamComponent instead of MarineComponent
-        if (HasComp<MarineComponent>(args.Target) && InRange(iv, args.Target))
+        if (HasComp<MarineComponent>(args.Target) && InRange(iv, args.Target, iv.Comp.Range))
         {
             args.Handled = true;
             args.CanDrop = true;
@@ -87,7 +98,7 @@ public abstract class SharedIVDripSystem : EntitySystem
     private void OnMarineCanDropTarget(Entity<MarineComponent> marine, ref CanDropTargetEvent args)
     {
         var iv = args.Dragged;
-        if (TryComp(iv, out IVDripComponent? ivComp) && InRange((iv, ivComp), marine))
+        if (TryComp(iv, out IVDripComponent? ivComp) && InRange(iv, marine, ivComp.Range))
         {
             args.Handled = true;
             args.CanDrop = true;
@@ -100,18 +111,21 @@ public abstract class SharedIVDripSystem : EntitySystem
             return;
 
         if (iv.Comp.AttachedTo == default)
-            Attach(iv, args.User, args.Target);
+            AttachIV(iv, args.User, args.Target);
         else
-            Detach(iv, args.User, false, true);
+            DetachIV(iv, args.User, false, true);
     }
 
     private void OnIVInteractHand(Entity<IVDripComponent> iv, ref InteractHandEvent args)
     {
-        Detach(iv, args.User, false, true);
+        DetachIV(iv, args.User, false, true);
     }
 
     private void OnIVVerbs(Entity<IVDripComponent> iv, ref GetVerbsEvent<InteractionVerb> args)
     {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
         var user = args.User;
         args.Verbs.Add(new InteractionVerb
         {
@@ -164,97 +178,193 @@ public abstract class SharedIVDripSystem : EntitySystem
         UpdatePackVisuals(pack);
     }
 
-    protected bool InRange(Entity<IVDripComponent> iv, EntityUid to)
+    private void OnBloodPackAfterInteract(Entity<BloodPackComponent> pack, ref AfterInteractEvent args)
+    {
+        if (args.Target is not { } target)
+            return;
+
+        args.Handled = true;
+
+        var user = args.User;
+        if (pack.Comp.AttachedTo != null)
+        {
+            DetachPack((pack, pack), user, false, true);
+            return;
+        }
+
+        if (!_skills.HasSkills(user, in pack.Comp.SkillRequired))
+        {
+            _popup.PopupClient(Loc.GetString("cm-iv-attach-no-skill"), user, user);
+            return;
+        }
+
+        if (user == target)
+        {
+            _popup.PopupClient(Loc.GetString("cm-blood-pack-cannot-self"), user, user);
+            return;
+        }
+
+        var delay = pack.Comp.AttachDelay;
+        if (delay > TimeSpan.Zero)
+        {
+            var selfPoke = Loc.GetString("cm-blood-pack-poke-self", ("pack", pack.Owner), ("target", target));
+            var othersPoke = Loc.GetString("cm-blood-pack-poke-others", ("user", user), ("pack", pack.Owner), ("target", target));
+            _popup.PopupPredicted(selfPoke, othersPoke, target, user);
+        }
+
+        var ev = new AttachBloodPackDoAfterEvent();
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, pack, target, pack)
+        {
+            BreakOnMove = true,
+            BreakOnDamage = true,
+            BreakOnHandChange = true
+        };
+        _doAfter.TryStartDoAfter(doAfter);
+    }
+
+    private void OnBloodPackAttachDoAfter(Entity<BloodPackComponent> pack, ref AttachBloodPackDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled || args.Target is not { } target)
+            return;
+
+        AttachPack(pack, args.User, target);
+    }
+
+    private void OnBloodPackUnequippedHand(Entity<BloodPackComponent> pack, ref GotUnequippedHandEvent args)
+    {
+        DetachPack((pack, pack), args.User, true, true);
+    }
+
+    private void OnBloodPackVerbs(Entity<BloodPackComponent> pack, ref GetVerbsEvent<InteractionVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
+        var user = args.User;
+        args.Verbs.Add(new InteractionVerb
+        {
+            Act = () => ToggleInject(pack, user),
+            Text = Loc.GetString("cm-iv-verb-toggle-inject")
+        });
+    }
+
+    private void OnBloodPackExamine(Entity<BloodPackComponent> pack, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(BloodPackComponent)))
+        {
+            var injectingMsg = pack.Comp.Injecting
+                ? "cm-iv-examine-injecting"
+                : "cm-iv-examine-drawing";
+            args.PushMarkup(Loc.GetString(injectingMsg, ("iv", pack.Owner)));
+
+            var attachedMsg = pack.Comp.AttachedTo is { } attached
+                ? Loc.GetString("cm-iv-examine-attached", ("attached", attached))
+                : Loc.GetString("cm-iv-examine-attached-none");
+            args.PushMarkup(attachedMsg);
+
+            if (_solutionContainer.TryGetSolution(pack.Owner, pack.Comp.Solution, out _, out var solution))
+                args.PushMarkup(Loc.GetString("cm-blood-pack-contains", ("units", solution.Volume.Int())));
+        }
+    }
+
+    protected bool InRange(EntityUid iv, EntityUid to, float range)
     {
         var ivPos = _transform.GetMapCoordinates(iv);
         var toPos = _transform.GetMapCoordinates(to);
-        return ivPos.InRange(toPos, iv.Comp.Range);
+        return ivPos.InRange(toPos, range);
     }
 
-    protected void Attach(Entity<IVDripComponent> iv, EntityUid user, EntityUid to)
+    protected void AttachIV(Entity<IVDripComponent> iv, EntityUid user, EntityUid to)
     {
-        if (!InRange(iv, to))
+        if (!InRange(iv, to, iv.Comp.Range))
             return;
+
+        if (!_skills.HasSkills(user, in iv.Comp.SkillRequired))
+        {
+            _popup.PopupClient(Loc.GetString("cm-iv-attach-no-skill"), user, user);
+            return;
+        }
 
         iv.Comp.AttachedTo = to;
         Dirty(iv);
 
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
-        var selfMessage = "cm-iv-attach-self-drawing";
-        var othersMessage = "cm-iv-attach-others-drawing";
-        if (iv.Comp.Injecting)
-        {
-            selfMessage = "cm-iv-attach-self-injecting";
-            othersMessage = "cm-iv-attach-others-injecting";
-        }
-
-        _popup.PopupClient(Loc.GetString(selfMessage, ("target", to)), to, user);
-
-        var others = Filter.PvsExcept(user);
-        _popup.PopupEntity(Loc.GetString(othersMessage, ("user", user), ("target", to)), to, others, true);
+        AttachFeedback(iv, user, to, iv.Comp.Injecting);
     }
 
-    protected void Detach(Entity<IVDripComponent> iv, EntityUid? user, bool rip, bool predict)
+    protected void DetachIV(Entity<IVDripComponent> iv, EntityUid? user, bool rip, bool predict)
     {
         if (iv.Comp.AttachedTo is not { } target)
             return;
+
+        if (user != null && !_skills.HasSkills(user.Value, in iv.Comp.SkillRequired))
+        {
+            _popup.PopupClient(Loc.GetString("cm-iv-detach-no-skill"), user.Value, user.Value);
+            return;
+        }
 
         iv.Comp.AttachedTo = default;
         Dirty(iv);
 
         if (rip)
-        {
-            if (iv.Comp.RipDamage != null)
-                _damageable.TryChangeDamage(target, iv.Comp.RipDamage, true);
-
-            if (!_timing.IsFirstTimePredicted)
-                return;
-
-            var message = Loc.GetString("cm-iv-rip", ("target", target));
-            if (predict)
-            {
-                _popup.PopupClient(message, target, user);
-
-                var others = Filter.PvsExcept(target);
-                _popup.PopupEntity(message, target, others, true);
-            }
-            else
-            {
-                _popup.PopupEntity(message, target);
-            }
-
-            DoRip(iv, target);
-        }
+            DoRip(iv.Comp.RipDamage, target, user, iv.Comp.RipEmote, predict);
         else
+            DoDetachFeedback(iv, target, user, predict);
+    }
+
+    private void AttachPack(Entity<BloodPackComponent> pack, EntityUid user, EntityUid to)
+    {
+        if (!InRange(pack, to, pack.Comp.Range))
+            return;
+
+        if (!_skills.HasSkills(user, in pack.Comp.SkillRequired))
         {
-            if (!_timing.IsFirstTimePredicted)
-                return;
-
-            var selfMessage = Loc.GetString("cm-iv-detach-self", ("target", target));
-            if (predict)
-                _popup.PopupClient(selfMessage, target, user);
-            else
-                _popup.PopupEntity(selfMessage, target);
-
-            if (user != null)
-            {
-                var others = Filter.PvsExcept(user.Value);
-                _popup.PopupEntity(Loc.GetString("cm-iv-detach-others", ("user", user), ("target", target)),
-                    target,
-                    others,
-                    true);
-            }
+            _popup.PopupClient(Loc.GetString("cm-iv-attach-no-skill"), user, user);
+            return;
         }
+
+        pack.Comp.AttachedTo = to;
+        Dirty(pack);
+
+        AttachFeedback(pack, user, to, pack.Comp.Injecting);
+    }
+
+    protected void DetachPack(Entity<BloodPackComponent> pack, EntityUid? user, bool rip, bool predict)
+    {
+        if (pack.Comp.AttachedTo is not { } target)
+            return;
+
+        if (user != null && !_skills.HasSkills(user.Value, in pack.Comp.SkillRequired))
+        {
+            _popup.PopupClient(Loc.GetString("cm-iv-detach-no-skill"), user.Value, user.Value);
+            return;
+        }
+
+        pack.Comp.AttachedTo = default;
+        Dirty(pack);
+
+        if (rip)
+            DoRip(pack.Comp.RipDamage, target, user, pack.Comp.RipEmote, predict);
+        else
+            DoDetachFeedback(pack, target, user, predict);
     }
 
     private void ToggleInject(Entity<IVDripComponent> iv, EntityUid user)
     {
-        iv.Comp.Injecting = !iv.Comp.Injecting;
+        ToggleInject(iv, ref iv.Comp.Injecting, user);
         Dirty(iv);
+    }
 
-        var msg = iv.Comp.Injecting
+    private void ToggleInject(Entity<BloodPackComponent> pack, EntityUid user)
+    {
+        ToggleInject(pack, ref pack.Comp.Injecting, user);
+        Dirty(pack);
+    }
+
+    private void ToggleInject(EntityUid iv, ref bool injecting, EntityUid user)
+    {
+        injecting = !injecting;
+
+        var msg = injecting
             ? Loc.GetString("cm-iv-now-injecting")
             : Loc.GetString("cm-iv-now-taking");
 
@@ -336,8 +446,63 @@ public abstract class SharedIVDripSystem : EntitySystem
         Dirty(pack);
     }
 
-    protected virtual void DoRip(Entity<IVDripComponent> iv, EntityUid attached)
+    protected virtual void DoRip(DamageSpecifier? damage, EntityUid attached, EntityUid? user, ProtoId<EmotePrototype> ripEmote, bool predict)
     {
+        if (damage != null)
+            _damageable.TryChangeDamage(attached, damage, true);
+
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
+        var message = Loc.GetString("cm-iv-rip", ("target", attached));
+        if (predict)
+        {
+            _popup.PopupClient(message, attached, user);
+
+            var others = user == null ? Filter.Pvs(attached) : Filter.PvsExcept(user.Value);
+            _popup.PopupEntity(message, attached, others, true);
+        }
+        else
+        {
+            _popup.PopupEntity(message, attached);
+        }
+    }
+
+    private void AttachFeedback(EntityUid iv, EntityUid user, EntityUid to, bool injecting)
+    {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
+        var selfMessage = "cm-iv-attach-self-drawing";
+        var othersMessage = "cm-iv-attach-others-drawing";
+        if (injecting)
+        {
+            selfMessage = "cm-iv-attach-self-injecting";
+            othersMessage = "cm-iv-attach-others-injecting";
+        }
+
+        _popup.PopupClient(Loc.GetString(selfMessage, ("iv", iv), ("target", to)), to, user);
+
+        var others = Filter.PvsExcept(user);
+        _popup.PopupEntity(Loc.GetString(othersMessage, ("iv", iv), ("user", user), ("target", to)), to, others, true);
+    }
+
+    private void DoDetachFeedback(EntityUid iv, EntityUid attached, EntityUid? user, bool predict)
+    {
+        var selfMessage = Loc.GetString("cm-iv-detach-self", ("iv", iv), ("target", attached));
+        if (predict)
+            _popup.PopupClient(selfMessage, attached, user);
+        else
+            _popup.PopupEntity(selfMessage, attached);
+
+        if (user != null)
+        {
+            var others = Filter.PvsExcept(user.Value);
+            _popup.PopupEntity(Loc.GetString("cm-iv-detach-others", ("iv", iv), ("user", user), ("target", attached)),
+                attached,
+                others,
+                true);
+        }
     }
 
     public override void Update(float frameTime)

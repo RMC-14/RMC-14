@@ -56,7 +56,7 @@
   parent: BaseItem
   id: CMBloodPack # TODO CM14 blood types
   name: blood pack
-  description: A blood pack. Contains fluids, typically used for transfusions. Must be used inside an IV drip.
+  description: A blood pack. Contains fluids, typically used for transfusions.
   suffix: CM, empty
   components:
   - type: BloodPack
@@ -76,8 +76,6 @@
     solutions:
       pack:
         maxVol: 300
-  - type: ExaminableSolution
-    solution: pack
   - type: SolutionTransfer
     canChangeTransferAmount: true
   - type: Appearance

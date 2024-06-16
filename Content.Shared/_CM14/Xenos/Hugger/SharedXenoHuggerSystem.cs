@@ -362,7 +362,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
             RemCompDeferred<VictimHuggedComponent>(uid);
 
-            var spawned = Spawn(hugged.BurstSpawn, xform.Coordinates);
+            var spawned = SpawnAtPosition(hugged.BurstSpawn, xform.Coordinates);
             _xeno.SetHive(spawned, hugged.Hive);
 
             EnsureComp<VictimBurstComponent>(uid);

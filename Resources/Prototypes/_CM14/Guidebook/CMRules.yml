@@ -222,3 +222,11 @@
   priority: 24
   ruleEntry: true
   text: "/ServerInfo/Guidebook/_CM14/Rules/Roleplay/CMHostileFactionRoleplay.xml"
+
+- type: guideEntry
+  parent: CM
+  id: CMCommandChain
+  name: cm-guide-entry-rules-command-chain
+  priority: 25
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CM14/Rules/Roleplay/CMCommandChain.xml"

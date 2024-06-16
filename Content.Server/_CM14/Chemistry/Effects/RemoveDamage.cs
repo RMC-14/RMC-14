@@ -9,12 +9,12 @@ namespace Content.Server._CM14.Chemistry.Effects;
 public sealed partial class RemoveDamage : ReagentEffect
 {
     [DataField(required: true)]
-    [JsonPropertyName("type")]
-    public ProtoId<DamageTypePrototype> Type;
+    [JsonPropertyName("group")]
+    public ProtoId<DamageGroupPrototype> Group;
 
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        if (!prototype.TryIndex(Type, out var type))
+        if (!prototype.TryIndex(Group, out var type))
             return null;
 
         return $"Removes all {type.LocalizedName} damage";
@@ -25,19 +25,19 @@ public sealed partial class RemoveDamage : ReagentEffect
         if (args.Scale < 0.95f)
             return;
 
-        if (!args.EntityManager.TryGetComponent(args.SolutionEntity, out DamageableComponent? damageable) ||
-            !damageable.Damage.DamageDict.TryGetValue(Type, out var value))
-        {
+        if (!args.EntityManager.TryGetComponent(args.SolutionEntity, out DamageableComponent? damageable))
             return;
-        }
 
-        var damage = new DamageSpecifier
+        var prototypes = IoCManager.Resolve<IPrototypeManager>();
+        if (!prototypes.TryIndex(Group, out var group))
+            return;
+
+        var damage = new DamageSpecifier();
+        foreach (var type in group.DamageTypes)
         {
-            DamageDict =
-            {
-                [Type] = -value
-            }
-        };
+            if (damageable.Damage.DamageDict.TryGetValue(type, out var amount))
+                damage.DamageDict[type] = -amount;
+        }
 
         args.EntityManager.System<DamageableSystem>()
             .TryChangeDamage(args.SolutionEntity, damage, true, interruptsDoAfters: false);
