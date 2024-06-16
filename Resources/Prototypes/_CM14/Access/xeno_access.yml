@@ -6,3 +6,12 @@
   id: CMAccessXeno
   tags:
   - CMAccessXeno
+
+- type: accessLevel
+  id: CMAccessXenoQueen
+  name: cm-access-xeno-queen
+
+- type: accessGroup
+  id: CMAccessXenoQueen
+  tags:
+  - CMAccessXenoQueen
