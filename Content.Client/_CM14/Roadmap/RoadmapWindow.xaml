@@ -41,6 +41,7 @@
                 <BoxContainer Name="SecondVersion" Access="Public" Orientation="Vertical"  HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Upcoming" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="USS LCS-14 Savannah" Text="A new ship map for marines to spawn on. Contributed by Tunguso4ka" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Solaris Ridge" Text="A new planet-side map. Contributed by Tunguso4ka" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Fireteam Leader" Text="More equipment in the fireteam leader's equipment and gear racks" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Squad Leader" Text="More equipment in the squad leader's equipment and gear racks" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Grenadier Kit" />
