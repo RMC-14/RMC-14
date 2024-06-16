@@ -1177,6 +1177,10 @@
     type: Fix
   - message: Fixed being able to toggle iv mode, pump a shotgun and remove webbing while in crit and other states that normally block interactions.
     type: Fix
+  - message: Rotting no longer deals blunt and cellular damage.
+    type: Fix
+  - message: Fix Dexalin and Dexalin Plus not healing airloss damage caused by low blood.
+    type: Fix
   - message: Water bottles can no longer be destroyed.
     type: Tweak
   - message: Added examine test to IV drips for their mode, target and contents.
