@@ -10,7 +10,7 @@ namespace Content.Shared._CM14.Attachable;
 public sealed partial class AttachableComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public int AttachDoAfter = 2;
+    public float AttachDoAfter = 1.5f;
     
     [DataField, AutoNetworkedField]
     public SoundSpecifier? AttachSound = new SoundPathSpecifier("/Audio/_CM14/Attachable/attachment_add.ogg");

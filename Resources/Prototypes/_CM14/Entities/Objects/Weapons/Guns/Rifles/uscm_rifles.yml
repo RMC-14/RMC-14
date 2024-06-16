@@ -70,6 +70,14 @@
           - CMMagazineRifleM41A
   - type: GunDamageModifier
     multiplier: 1.1
+  - type: AttachableHolder
+    slots:
+      cm-aslot-barrel:
+        tags:
+          - CMAttachableExtendedBarrel
+  - type: AttachableHolderVisuals
+    offsets:
+      cm-aslot-barrel: 0.45, 0.06
 
 - type: entity
   name: M41AE2 heavy pulse rifle

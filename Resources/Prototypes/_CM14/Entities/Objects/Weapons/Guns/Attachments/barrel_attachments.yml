@@ -17,6 +17,13 @@
   components:
   - type: Sprite
     state: ebarrel
+  - type: Tag
+    tags:
+    - CMAttachableBarrel
+    - CMAttachableExtendedBarrel
+  - type: AttachableVisuals
+    rsi: _CM14/Objects/Weapons/Guns/Attachments/barrel.rsi
+    prefix: ebarrel-
 
 - type: entity
   parent: CMBarrelAttachmentBase
@@ -40,3 +47,6 @@
 
 - type: Tag
   id: CMAttachableBarrel
+
+- type: Tag
+  id: CMAttachableExtendedBarrel

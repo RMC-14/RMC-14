@@ -8,7 +8,6 @@ using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 
@@ -18,7 +17,6 @@ namespace Content.Shared._CM14.Attachable;
 public abstract class SharedAttachableHolderSystem : EntitySystem
 {
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
     [Dependency] private readonly SharedItemSystem _itemSystem = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
@@ -150,13 +148,12 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
     
     protected virtual void OnAttached(Entity<AttachableHolderComponent> holder, ref EntInsertedIntoContainerMessage args)
     {
-        if(GetSlots(holder).Contains(args.Container.ID))
+        if(!GetSlots(holder).Contains(args.Container.ID))
             return;
         
-        //_audioSystem.PlayPvs(holder.Comp.AttachSound, holder.Owner);
         UpdateStripUi(holder.Owner, holder.Comp);
         
-        RaiseLocalEvent(holder, new AttachableHolderAttachablesAlteredEvent(args.Entity, holder.Owner, true));
+        RaiseLocalEvent(holder, new AttachableHolderAttachablesAlteredEvent(args.Entity, args.Container.ID, true));
         Dirty(holder);
     }
     
@@ -169,6 +166,7 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
     
     public void StartDetach(Entity<AttachableHolderComponent> holder, EntityUid attachableUid, EntityUid userUid)
     {
+        double doAfter = EntityManager.GetComponent<AttachableComponent>(attachableUid).AttachDoAfter;
         _doAfterSystem.TryStartDoAfter(new DoAfterArgs(
             EntityManager,
             userUid,
@@ -218,13 +216,12 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
     
     protected virtual void OnDetached(Entity<AttachableHolderComponent> holder, ref EntRemovedFromContainerMessage args)
     {
-        if(GetSlots(holder).Contains(args.Container.ID))
+        if(!GetSlots(holder).Contains(args.Container.ID))
             return;
         
-        //_audioSystem.PlayPvs(holder.Comp.AttachSound, holder.Owner);
         UpdateStripUi(holder.Owner, holder.Comp);
         
-        RaiseLocalEvent(holder, new AttachableHolderAttachablesAlteredEvent(args.Entity, holder.Owner, false));
+        RaiseLocalEvent(holder, new AttachableHolderAttachablesAlteredEvent(args.Entity, args.Container.ID, false));
         Dirty(holder);
     }
     
