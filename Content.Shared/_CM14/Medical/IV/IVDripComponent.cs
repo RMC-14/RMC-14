@@ -1,4 +1,5 @@
-﻿using Content.Shared.Chat.Prototypes;
+﻿using Content.Shared._CM14.Marines.Skills;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
@@ -58,6 +59,9 @@ public sealed partial class IVDripComponent : Component
 
     [DataField, AutoNetworkedField]
     public ProtoId<EmotePrototype> RipEmote = "Scream";
+
+    [DataField, AutoNetworkedField]
+    public Skills SkillRequired = new() { Surgery = 1 };
 }
 
 [Serializable, NetSerializable]
