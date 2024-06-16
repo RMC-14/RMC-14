@@ -29,6 +29,19 @@
       enum.DropshipHijackerUiKey.Key:
         type: DropshipHijackerBui
 
+- type: entity
+  parent: CMComputerDropshipNavigation
+  id: CMComputerDropshipNavigationPlanetside
+  name: dropship navigation computer
+  description: A flight computer that can be used to direct linked dropships.
+  suffix: Planetside
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/dropship_nav_computer.rsi
+    state: on
+
+
+
 # TODO CM14 alamo and normandy specific names for each
 - type: entity
   parent: CMComputerDropship
