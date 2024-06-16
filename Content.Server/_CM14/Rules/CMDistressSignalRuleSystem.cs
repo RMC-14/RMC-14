@@ -619,12 +619,19 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         return spawners;
     }
 
-    private (EntProtoId Id, EntityUid Ent) NextSquad(CMDistressSignalRuleComponent rule)
+    private (EntProtoId Id, EntityUid Ent) NextSquad(ProtoId<JobPrototype> job, CMDistressSignalRuleComponent rule)
     {
-        if (rule.NextSquad >= rule.SquadIds.Count)
-            rule.NextSquad = 0;
+        // TODO CM14 this biases people towards alpha as that's the first one, maybe not a problem once people can pick a preferred squad?
+        if (!rule.NextSquad.TryGetValue(job, out var next) ||
+            next >= rule.SquadIds.Count)
+        {
+            rule.NextSquad[job] = 0;
+            next = 0;
+        }
 
-        var id = rule.SquadIds[rule.NextSquad++];
+        var id = rule.SquadIds[next++];
+        rule.NextSquad[job] = next;
+
         ref var squad = ref CollectionsMarshal.GetValueRefOrAddDefault(rule.Squads, id, out var exists);
         if (!exists)
             squad = Spawn(id);
@@ -639,7 +646,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         if (job.HasSquad)
         {
-            var (squadId, squadEnt) = NextSquad(rule);
+            var (squadId, squadEnt) = NextSquad(job, rule);
             squad = squadEnt;
 
             if (allSpawners.Squad.TryGetValue(squadId, out var jobSpawners) &&
