@@ -352,7 +352,9 @@ public abstract class SharedWoundsSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, treater, target, treater)
         {
             BreakOnDamage = true,
-            BreakOnMove = true
+            BreakOnMove = true,
+            BreakOnHandChange = true,
+            NeedHand = true
         };
         _doAfter.TryStartDoAfter(doAfter);
         _audio.PlayPredicted(treater.Comp.TreatBeginSound, user, user);
