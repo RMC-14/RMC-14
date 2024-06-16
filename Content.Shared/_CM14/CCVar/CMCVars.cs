@@ -23,4 +23,10 @@ public sealed class CMCVars : CVars
 
     public static readonly CVarDef<int> CMMaxHeavyAttackTargets =
         CVarDef.Create("cm.max_heavy_attack_targets", 3, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> CMBloodlossMultiplier =
+        CVarDef.Create("cm.bloodloss_multiplier", 1.5f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> CMBleedTimeMultiplier =
+        CVarDef.Create("cm.bleed_time_multiplier", 1f, CVar.REPLICATED | CVar.SERVER);
 }
