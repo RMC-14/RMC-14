@@ -2,3 +2,6 @@
   parent: BaseItem
   abstract: true
   id: CMAttachmentBase
+  components:
+  - type: Item
+    size: Small

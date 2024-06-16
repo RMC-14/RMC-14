@@ -210,8 +210,8 @@
     visuals:
       enum.ToggleVisuals.Toggled:
         enum.ToggleVisuals.Layer:
-          True: {state: scalpel_laser_on}
-          False: {state: scalpel_laser}
+          True: { state: scalpel_laser_on }
+          False: { state: scalpel_laser }
 
 # - - Improved
 - type: entity
@@ -228,8 +228,8 @@
     visuals:
       enum.ToggleVisuals.Toggled:
         enum.ToggleVisuals.Layer:
-          True: {state: scalpel_laser_2_on}
-          False: {state: scalpel_laser_2}
+          True: { state: scalpel_laser_2_on }
+          False: { state: scalpel_laser_2 }
 
 # - - Advanced
 - type: entity
@@ -246,8 +246,8 @@
     visuals:
       enum.ToggleVisuals.Toggled:
         enum.ToggleVisuals.Layer:
-          True: {state: scalpel_laser_3_on}
-          False: {state: scalpel_laser_3}
+          True: { state: scalpel_laser_3_on }
+          False: { state: scalpel_laser_3 }
 
 # - Pict System
 - type: entity
@@ -294,8 +294,8 @@
       path: /Audio/Items/drill_hit.ogg
   - type: Tool
     qualities:
-      - Sawing
-    speed: 1.5
+    - Sawing
+    speedModifier: 1.5
   - type: CMBoneSaw
 
 # - Predator

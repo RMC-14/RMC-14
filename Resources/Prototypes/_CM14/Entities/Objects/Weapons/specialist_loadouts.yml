@@ -26,11 +26,11 @@
           True: { visible: false }
           False: { visible: true }
   - type: Item
-    size: Ginormous
+    size: Huge
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,18,1
+    - 0,0,27,1
   - type: StorageFill
     contents:
     - id: CMArmorM45
@@ -50,3 +50,4 @@
     addComponents:
     - type: SniperWhitelist
   - type: RemoveOnlyStorage
+  - type: FixedItemSizeStorage

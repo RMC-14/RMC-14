@@ -16,36 +16,9 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RequisitionsElevatorComponent, ComponentStartup>(OnElevatorStartup);
         SubscribeLocalEvent<RequisitionsElevatorComponent, AfterAutoHandleStateEvent>(OnElevatorHandleState);
         SubscribeLocalEvent<RequisitionsGearComponent, AfterAutoHandleStateEvent>(OnGearHandleState);
-        SubscribeLocalEvent<RequisitionsRailingComponent, ComponentStartup>(OnRailingStartup);
         SubscribeLocalEvent<RequisitionsRailingComponent, AfterAutoHandleStateEvent>(OnRailingHandleState);
-    }
-
-    private void OnElevatorStartup(Entity<RequisitionsElevatorComponent> elevator, ref ComponentStartup args)
-    {
-        var lowerAnimation = new Animation { Length = TimeSpan.FromSeconds(2.1f) };
-        elevator.Comp.LoweringAnimation = lowerAnimation;
-        lowerAnimation.AnimationTracks.Add(new AnimationTrackSpriteFlick
-        {
-            LayerKey = RequisitionsElevatorLayers.Base,
-            KeyFrames =
-            {
-                new AnimationTrackSpriteFlick.KeyFrame(elevator.Comp.LoweringState, 0)
-            }
-        });
-
-        var raiseAnimation = new Animation { Length = TimeSpan.FromSeconds(2.1f) };
-        elevator.Comp.RaisingAnimation = raiseAnimation;
-        raiseAnimation.AnimationTracks.Add(new AnimationTrackSpriteFlick
-        {
-            LayerKey = RequisitionsElevatorLayers.Base,
-            KeyFrames =
-            {
-                new AnimationTrackSpriteFlick.KeyFrame(elevator.Comp.RaisingState, 0)
-            }
-        });
     }
 
     private void OnElevatorHandleState(Entity<RequisitionsElevatorComponent> elevator, ref AfterAutoHandleStateEvent args)
@@ -68,9 +41,41 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
                 sprite.LayerSetState(layer, elevator.Comp.RaisedState);
                 break;
             case RequisitionsElevatorMode.Lowering:
+                elevator.Comp.LoweringAnimation ??= new Animation
+                {
+                    Length = TimeSpan.FromSeconds(2.1f),
+                    AnimationTracks =
+                    {
+                        new AnimationTrackSpriteFlick
+                        {
+                            LayerKey = RequisitionsElevatorLayers.Base,
+                            KeyFrames =
+                            {
+                                new AnimationTrackSpriteFlick.KeyFrame(elevator.Comp.LoweringState, 0)
+                            }
+                        }
+                    }
+                };
+
                 _animation.Play(elevator, (Animation) elevator.Comp.LoweringAnimation, AnimationKey);
                 break;
             case RequisitionsElevatorMode.Raising:
+                elevator.Comp.RaisingAnimation ??= new Animation
+                {
+                    Length = TimeSpan.FromSeconds(2.1f),
+                    AnimationTracks =
+                    {
+                        new AnimationTrackSpriteFlick
+                        {
+                            LayerKey = RequisitionsElevatorLayers.Base,
+                            KeyFrames =
+                            {
+                                new AnimationTrackSpriteFlick.KeyFrame(elevator.Comp.RaisingState, 0)
+                            }
+                        }
+                    }
+                };
+
                 _animation.Play(elevator, (Animation) elevator.Comp.RaisingAnimation, AnimationKey);
                 break;
         }
@@ -94,29 +99,6 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
         sprite.LayerSetState(layer, state);
     }
 
-    private void OnRailingStartup(Entity<RequisitionsRailingComponent> railing, ref ComponentStartup args)
-    {
-        railing.Comp.LowerAnimation = new Animation { Length = TimeSpan.FromSeconds(1.2f) };
-        ((Animation) railing.Comp.LowerAnimation).AnimationTracks.Add(new AnimationTrackSpriteFlick
-        {
-            LayerKey = RequisitionsRailingLayers.Base,
-            KeyFrames =
-            {
-                new AnimationTrackSpriteFlick.KeyFrame(railing.Comp.LoweringState, 0)
-            }
-        });
-
-        railing.Comp.RaiseAnimation = new Animation { Length = TimeSpan.FromSeconds(1.2f) };
-        ((Animation) railing.Comp.RaiseAnimation).AnimationTracks.Add(new AnimationTrackSpriteFlick
-        {
-            LayerKey = RequisitionsRailingLayers.Base,
-            KeyFrames =
-            {
-                new AnimationTrackSpriteFlick.KeyFrame(railing.Comp.RaisingState, 0)
-            }
-        });
-    }
-
     private void OnRailingHandleState(Entity<RequisitionsRailingComponent> railing, ref AfterAutoHandleStateEvent args)
     {
         if (!TryComp(railing, out SpriteComponent? sprite) ||
@@ -135,9 +117,41 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
                 sprite.LayerSetState(layer, railing.Comp.RaisedState);
                 break;
             case RequisitionsRailingMode.Lowering:
+                railing.Comp.LowerAnimation ??= new Animation
+                {
+                    Length = TimeSpan.FromSeconds(1.2f),
+                    AnimationTracks =
+                    {
+                        new AnimationTrackSpriteFlick
+                        {
+                            LayerKey = RequisitionsRailingLayers.Base,
+                            KeyFrames =
+                            {
+                                new AnimationTrackSpriteFlick.KeyFrame(railing.Comp.LoweringState, 0)
+                            }
+                        }
+                    }
+                };
+
                 _animation.Play(railing, (Animation) railing.Comp.LowerAnimation, AnimationKey);
                 break;
             case RequisitionsRailingMode.Raising:
+                railing.Comp.RaiseAnimation ??= new Animation
+                {
+                    Length = TimeSpan.FromSeconds(1.2f),
+                    AnimationTracks =
+                    {
+                        new AnimationTrackSpriteFlick
+                        {
+                            LayerKey = RequisitionsRailingLayers.Base,
+                            KeyFrames =
+                            {
+                                new AnimationTrackSpriteFlick.KeyFrame(railing.Comp.RaisingState, 0)
+                            }
+                        }
+                    }
+                };
+
                 _animation.Play(railing, (Animation) railing.Comp.RaiseAnimation, AnimationKey);
                 break;
         }

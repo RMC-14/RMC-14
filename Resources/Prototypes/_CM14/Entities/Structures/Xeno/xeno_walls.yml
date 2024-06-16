@@ -23,6 +23,10 @@
   - type: XenoNestSurface
   - type: XenoConstructionPlasmaCost
     plasma: 120
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 225
 
 - type: entity
   parent: WallXenoResin
@@ -46,6 +50,10 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 338
 
 - type: entity
   parent: CMBaseWallXeno
@@ -79,6 +87,10 @@
   - type: XenoNestSurface
   - type: XenoConstructionPlasmaCost
     plasma: 95
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 150
 
 - type: entity
   parent: BaseMembraneXeno
@@ -125,3 +137,7 @@
   - type: IconSmooth
     key: walls
     base: thickmembrane
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 300

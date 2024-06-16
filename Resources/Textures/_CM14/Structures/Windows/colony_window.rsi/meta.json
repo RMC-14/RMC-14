@@ -8,30 +8,6 @@
   },
   "states": [
     {
-      "name": "col_window5"
-    },
-    {
-      "name": "col_window9"
-    },
-    {
-      "name": "col_window10"
-    },
-    {
-      "name": "col_window6"
-    },
-    {
-      "name": "col_rwindow5"
-    },
-    {
-      "name": "col_rwindow9"
-    },
-    {
-      "name": "col_rwindow10"
-    },
-    {
-      "name": "col_rwindow6"
-    },
-    {
       "name": "col_window0"
     },
     {
@@ -47,7 +23,22 @@
       "name": "col_window4"
     },
     {
+      "name": "col_window5"
+    },
+    {
+      "name": "col_window6"
+    },
+    {
+      "name": "col_window7"
+    },
+    {
       "name": "col_window8"
+    },
+    {
+      "name": "col_window9"
+    },
+    {
+      "name": "col_window10"
     },
     {
       "name": "col_window11"
@@ -80,7 +71,22 @@
       "name": "col_rwindow4"
     },
     {
+      "name": "col_rwindow5"
+    },
+    {
+      "name": "col_rwindow6"
+    },
+    {
+      "name": "col_rwindow7"
+    },
+    {
       "name": "col_rwindow8"
+    },
+    {
+      "name": "col_rwindow9"
+    },
+    {
+      "name": "col_rwindow10"
     },
     {
       "name": "col_rwindow11"

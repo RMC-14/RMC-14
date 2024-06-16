@@ -40,8 +40,7 @@ public sealed class XenoOrderConstructionBui : BoundUserInterface
 
                 control.Button.OnPressed += _ =>
                 {
-                    SendMessage(new XenoOrderConstructionBuiMsg(structureId));
-                    Close();
+                    SendPredictedMessage(new XenoOrderConstructionBuiMsg(structureId));
                 };
 
                 _window.StructureContainer.AddChild(control);

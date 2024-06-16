@@ -87,6 +87,8 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: ImmuneToUnarmed
+  - type: CMIconSmooth
+    smooth: true
 #  - type: Physics
 #    bodyType: Static
 #  - type: FootstepModifier
@@ -226,6 +228,8 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: ImmuneToUnarmed
+  - type: WallMount
+    arc: 360
 
 - type: edgeSpreader
   id: XenoWeeds

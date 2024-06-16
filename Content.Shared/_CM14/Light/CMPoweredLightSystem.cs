@@ -16,6 +16,6 @@ public sealed class CMPoweredLightSystem : EntitySystem
     {
         ev.Cancelled = true;
         if (!HasComp<XenoComponent>(ev.User))
-            _popup.PopupEntity("You try to remove the light tube, but it's too hot and you don't want to burn your hand.", ev.Light, ev.User);
+            _popup.PopupEntity(Loc.GetString("cm-light-failed"), ev.Light, ev.User);
     }
 }

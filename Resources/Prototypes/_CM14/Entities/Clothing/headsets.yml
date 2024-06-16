@@ -1,5 +1,4 @@
 - type: entity
-  abstract: true
   parent: Clothing
   id: CMHeadset
   name: marine radio headset

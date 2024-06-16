@@ -7,3 +7,4 @@ cm-ui-create-new-hive = Create new hive
 cm-ui-create-hive-title = New hive name
 cm-ui-humanoid = Humanoid
 cm-ui-tier = Tier {$tier}
+cm-xeno-words-of-the-queen-header = The words of the Queen reverberate in our head...

@@ -4,7 +4,6 @@
   id: CMCrateBase
   name: crate
   description: A rectangular metal crate.
-  abstract: true
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/basic.rsi

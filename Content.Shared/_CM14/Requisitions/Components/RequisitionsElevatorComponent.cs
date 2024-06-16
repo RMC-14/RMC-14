@@ -62,9 +62,9 @@ public sealed partial class RequisitionsElevatorComponent : Component
     [DataField]
     public SoundSpecifier? RaisingSound = new SoundPathSpecifier("/Audio/_CM14/Machines/asrs_raising.ogg");
 
-    public object LoweringAnimation;
+    public object? LoweringAnimation;
 
-    public object RaisingAnimation;
+    public object? RaisingAnimation;
 }
 
 [Serializable, NetSerializable]

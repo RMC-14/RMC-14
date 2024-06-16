@@ -58,7 +58,7 @@ public sealed class XenoWordQueenSystem : EntitySystem
 
         if (!TryComp(queen, out XenoComponent? queenXeno))
         {
-            _popup.PopupClient("Nobody could hear you...", queen, queen, PopupType.LargeCaution);
+            _popup.PopupClient(Loc.GetString("cm-xeno-words-of-the-queen-nobody-hear-you"), queen, queen, PopupType.LargeCaution);
             return;
         }
 
@@ -74,15 +74,16 @@ public sealed class XenoWordQueenSystem : EntitySystem
 
         if (xenos.Count <= 1)
         {
-            _popup.PopupEntity("Nobody could hear you...", queen, queen, PopupType.LargeCaution);
+            _popup.PopupEntity(Loc.GetString("cm-xeno-words-of-the-queen-nobody-hear-you"), queen, queen, PopupType.LargeCaution);
             return;
         }
 
         _xenoPlasma.TryRemovePlasma(queen.Owner, queen.Comp.PlasmaCost);
 
         text = _newLineRegex.Replace(text, "\n\n");
+        var headerText = Loc.GetString("cm-xeno-words-of-the-queen-header");
         var wrapped = FormattedMessage.EscapeText(text);
-        var header = $"{_xenoAnnounce.WrapHive("The words of the Queen reverberate in our head...")}";
+        var header = $"{_xenoAnnounce.WrapHive(headerText)}";
         var message = $"{header}[color=red][font size=14][bold]{wrapped}[/bold][/font][/color]";
 
         _xenoAnnounce.Announce(queen, xenos, text, message, queen.Comp.Sound);

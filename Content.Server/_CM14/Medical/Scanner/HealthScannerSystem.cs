@@ -39,7 +39,8 @@ public sealed class HealthScannerSystem : EntitySystem
 
     private void OnAfterInteract(Entity<HealthScannerComponent> scanner, ref AfterInteractEvent args)
     {
-        if (args.Target is not { } target ||
+        if (!args.CanReach ||
+            args.Target is not { } target ||
             !CanUseHealthScannerPopup(scanner, args.User, target))
         {
             return;
@@ -127,6 +128,15 @@ public sealed class HealthScannerSystem : EntitySystem
     {
         if (scanner.Comp.Target is not { } target)
             return;
+
+        if (TerminatingOrDeleted(target))
+        {
+            if (!TerminatingOrDeleted(scanner))
+                _ui.CloseUi(scanner.Owner, HealthScannerUIKey.Key);
+
+            scanner.Comp.Target = null;
+            return;
+        }
 
         FixedPoint2 blood = 0;
         FixedPoint2 maxBlood = 0;

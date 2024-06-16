@@ -65,8 +65,8 @@
 #        amount: 3
 
 - type: entity
-  id: CMCrateSuperconductingMagneticCoil
   parent: CMCrateConstruction
+  id: CMCrateSuperconductingMagneticCoil
   name: superconducting magnetic coil crate
   components:
   - type: StorageFill

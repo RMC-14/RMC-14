@@ -51,9 +51,3 @@
         whitelist:
           tags:
           - CMMagazineM39
-      gun_chamber:
-        name: Chamber
-        priority: 1
-        whitelist:
-          tags:
-          - CMCartridge10x20mm

@@ -1,8 +1,8 @@
 - type: entity
-  name: cardboard box
+  name: box
   parent: BoxBase
   id: CMBoxCardboard
-  description: A cardboard box for storing things.
+  description: It's just an ordinary box.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Storage/boxes.rsi
@@ -10,12 +10,10 @@
   - type: Item
     sprite: _CM14/Objects/Storage/boxes.rsi
     size: Large
-    shape:
-    - 0,0,6,1
   - type: Storage
     maxItemSize: Small
     grid:
-    - 0,0,6,1
+    - 0,0,13,1
   - type: Tag
     tags:
     - CMBoxStorage

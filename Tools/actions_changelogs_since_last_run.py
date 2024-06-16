@@ -42,8 +42,8 @@ def main():
     session.headers["X-GitHub-Api-Version"] = "2022-11-28"
 
     most_recent = get_most_recent_workflow(session)
-    last_sha = most_recent['head_commit']['id']
-    print(f"Last successful publish job was {most_recent['id']}: {last_sha}")
+    last_sha = "f43bee8e691579b8c0ee4dcf4f249666c2d2c86f"
+    print(f"Last successful publish job was: {last_sha}")
     last_changelog = yaml.safe_load(get_last_changelog(session, last_sha))
     with open(CHANGELOG_FILE, "r") as f:
         cur_changelog = yaml.safe_load(f)

@@ -20,8 +20,8 @@
     heldPrefix: metal
   - type: FloorTile
     outputs:
-      - Plating
-      - CMFloorSteel
+    - Plating
+    - CMFloorSteel
   - type: Stack
     stackType: FloorTileSteel
 
@@ -36,7 +36,7 @@
     heldPrefix: wood
   - type: FloorTile
     outputs:
-      - Plating
-      - CMFloorWood
+    - Plating
+    - CMFloorWood
   - type: Stack
     stackType: FloorTileWood

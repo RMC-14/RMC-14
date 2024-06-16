@@ -45,8 +45,8 @@ public sealed class OrdersOverlay : Overlay
         var handle = args.WorldHandle;
         var eyeRot = args.Viewport.Eye?.Rotation ?? default;
 
-        var scaleMatrix = Matrix3.CreateScale(new Vector2(1, 1));
-        var rotationMatrix = Matrix3.CreateRotation(-eyeRot);
+        var scaleMatrix = Matrix3x2.CreateScale(new Vector2(1, 1));
+        var rotationMatrix = Matrix3Helpers.CreateRotation(-eyeRot);
 
         handle.UseShader(_shader);
 
@@ -74,8 +74,8 @@ public sealed class OrdersOverlay : Overlay
         Entity<SpriteComponent, TransformComponent> ent,
         in OverlayDrawArgs args,
         SpriteSpecifier icon,
-        Matrix3 scaleMatrix,
-        Matrix3 rotationMatrix)
+        Matrix3x2 scaleMatrix,
+        Matrix3x2 rotationMatrix)
     {
         var (_, sprite, xform) = ent;
         if (xform.MapID != args.MapId)
@@ -89,9 +89,9 @@ public sealed class OrdersOverlay : Overlay
             return;
 
         var handle = args.WorldHandle;
-        var worldMatrix = Matrix3.CreateTranslation(worldPos);
-        Matrix3.Multiply(scaleMatrix, worldMatrix, out var scaledWorld);
-        Matrix3.Multiply(rotationMatrix, scaledWorld, out var matrix);
+        var worldMatrix = Matrix3x2.CreateTranslation(worldPos);
+        var scaledWorld = Matrix3x2.Multiply(scaleMatrix, worldMatrix);
+        var matrix = Matrix3x2.Multiply(rotationMatrix, scaledWorld);
         handle.SetTransform(matrix);
 
         var texture = _sprite.GetFrame(icon, _timing.CurTime);

@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Shared._CM14.Webbing;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CombatMode;
@@ -1147,7 +1148,15 @@ namespace Content.Shared.Interaction
             if (_containerSystem.IsInSameOrParentContainer(user, target, out _, out var container))
                 return true;
 
-            return container != null && CanAccessViaStorage(user, target, container);
+            if (container != null && CanAccessViaStorage(user, target, container))
+                return true;
+
+            // webbing accessibility should be checked via its parent clothing
+            // this check itself is meh, probably this needs to be somehow refactored
+            return (HasComp<WebbingComponent>(target) &&
+                    _containerSystem.TryGetContainingContainer(target, out var targetContainer) &&
+                    HasComp<WebbingClothingComponent>(targetContainer.Owner) &&
+                    IsAccessible(user, targetContainer.Owner));
         }
 
         /// <summary>

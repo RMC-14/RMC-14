@@ -11,7 +11,7 @@
     - state: kit_empty
       map: [ "openLayer" ]
       visible: false
-  - type: Storage
+  - type: Storage # TODO CM14 require medical skill for opening this while in another container
     maxItemSize: Small
     grid:
     - 0,0,13,1 # 7 slots
@@ -36,7 +36,7 @@
       #      - TODO CM14 surgical cases
       - CMSurgicalLine
       - CMSynthGraft
-      #      - TODO CM14 roller beds
+      - CMRollerBed
       - BodyBag
       components:
       - Hypospray
@@ -62,13 +62,14 @@
 - type: entity
   parent: CMFirstAidKit
   id: CMFirstAidKitFilled
+  description: It's an emergency medical kit containing basic medication and equipment. No training required to use. # With medical training you can fit this in a backpack. # TODO CM14
   suffix: Filled
   components:
   - type: StorageFill
     contents:
     - id: CMHealthAnalyzer
     - id: CMTricordrazineAutoInjectorNoSkill
-#    - id: CMPainStopAutoInjector
+#    - id: CMPainStopAutoInjectorNoSkill
     - id: CMInaprovalineAutoInjector
     - id: CMGauze10
     - id: CMOintment10
@@ -78,7 +79,7 @@
   parent: CMFirstAidKit
   id: CMBurnAidKit
   name: fire first-aid kit
-  description: It's an emergency medical kit for when the dropship ammo storage spontaneously burns down. With medical training you can fit this in a backpack.
+  description: It's an emergency medical kit for when the dropship ammo storage spontaneously burns down. # With medical training you can fit this in a backpack. # TODO CM14 medical skill
   components:
   - type: Sprite
     layers:
@@ -101,13 +102,13 @@
       amount: 2
     - id: CMKelotaneAutoInjector
       amount: 3
-#    - id: CMPainStopAutoInjector
+#    - id: CMPainStopAutoInjectorNoSkill
 
 - type: entity
   parent: CMFirstAidKit
   id: CMFirstAidO2Kit
   name: oxygen deprivation first-aid kit
-  description: A box full of reoxygenating goodies. With medical training you can fit this in a backpack.
+  description: A box full of reoxygenating goodies. # With medical training you can fit this in a backpack. # TODO CM14 medical skill
   components:
   - type: Sprite
     layers:
@@ -136,7 +137,7 @@
   parent: CMFirstAidKit
   id: CMAdvFirstAidKit
   name: advanced first-aid kit
-  description: Contains more effective methods of medical treatment than a basic first-aid kit, such as burn and trauma kits. With medical training you can fit this in a backpack.
+  description: Contains more effective methods of medical treatment than a basic first-aid kit, such as burn and trauma kits. # With medical training you can fit this in a backpack. # TODO CM14 medical skill
   components:
   - type: Sprite
     layers:
@@ -165,7 +166,7 @@
   parent: CMFirstAidKit
   id: CMToxinAidKit
   name: toxin first-aid kit
-  description: It's an emergency medical kit containing lifesaving anti-toxic medication. With medical training you can fit this in a backpack.
+  description: It's an emergency medical kit containing lifesaving anti-toxic medication. # With medical training you can fit this in a backpack. # TODO CM14 medical skill
   components:
   - type: Sprite
     layers:

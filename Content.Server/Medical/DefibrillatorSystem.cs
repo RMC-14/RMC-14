@@ -7,6 +7,7 @@ using Content.Server.Ghost;
 using Content.Server.Popups;
 using Content.Server.PowerCell;
 using Content.Server.Traits.Assorted;
+using Content.Shared._CM14.Damage;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
@@ -33,6 +34,7 @@ public sealed class DefibrillatorSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ChatSystem _chatManager = default!;
+    [Dependency] private readonly CMDamageableSystem _cmDamageable = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly DoAfterSystem _doAfter = default!;
     [Dependency] private readonly ElectrocutionSystem _electrocution = default!;
@@ -223,7 +225,18 @@ public sealed class DefibrillatorSystem : EntitySystem
         else
         {
             if (_mobState.IsDead(target, mob))
-                _damageable.TryChangeDamage(target, component.ZapHeal, true, origin: uid);
+            {
+                var heal = new DamageSpecifier(component.ZapHeal);
+                if (component.CMZapDamage != null)
+                {
+                    foreach (var (group, amount) in component.CMZapDamage)
+                    {
+                        heal = _cmDamageable.DistributeHealing(target, group, amount, heal);
+                    }
+                }
+
+                _damageable.TryChangeDamage(target, heal, true, origin: uid);
+            }
 
             if (_mobThreshold.TryGetThresholdForState(target, MobState.Dead, out var threshold) &&
                 TryComp<DamageableComponent>(target, out var damageableComponent) &&

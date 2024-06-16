@@ -9,6 +9,7 @@ namespace Content.Shared._CM14.Vendors;
 [Access(typeof(SharedCMAutomatedVendorSystem))]
 public sealed partial class CMAutomatedVendorComponent : Component
 {
+    // TODO CM14 make this EntProtoId<T>? instead of string?
     [DataField, AutoNetworkedField]
     public string? PointsType;
 

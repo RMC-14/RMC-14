@@ -32,6 +32,8 @@
     denySpriteState: door_deny
   - type: ApcPowerReceiver
     powerLoad: 0
+  - type: Docking
+  - type: DockingSignalControl
 
 - type: entity
   parent: CMBaseDoor

@@ -10,8 +10,6 @@
       - type: StationNameSetup
         mapNameTemplate: "Dev"
       - type: StationJobs
-        overflowJobs:
-        - CMCommandingOfficer
         availableJobs:
           CMAuxiliarySupportOfficer: [ -1, -1 ]
           CMDropshipCrewChief: [ -1, -1 ]

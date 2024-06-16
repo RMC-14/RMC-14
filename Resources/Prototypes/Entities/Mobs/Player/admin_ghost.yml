@@ -87,8 +87,7 @@
   - type: Stripping
   - type: SolutionScanner
   - type: IgnoreUIRange
-  - type: ShowRevIcons
-  - type: ShowZombieIcons
+  - type: ShowAntagIcons
   - type: Inventory
     templateId: aghost
   - type: InventorySlots
@@ -102,7 +101,6 @@
   id: ActionAGhostShowSolar
   name: Solar Control Interface
   description: View a solar control interface.
-  noSpawn: true
   components:
   - type: InstantAction
     icon: { sprite: Structures/Machines/parts.rsi, state: box_0 }
@@ -115,7 +113,6 @@
   id: ActionAGhostShowCommunications
   name: Communications Interface
   description: View a communications interface.
-  noSpawn: true
   components:
   - type: InstantAction
     icon: { sprite: Structures/Machines/parts.rsi, state: box_0 }
@@ -128,7 +125,6 @@
   id: ActionAGhostShowRadar
   name: Mass Scanner Interface
   description: View a mass scanner interface.
-  noSpawn: true
   components:
   - type: InstantAction
     icon: { sprite: Structures/Machines/parts.rsi, state: box_0 }
@@ -141,7 +137,6 @@
   id: ActionAGhostShowCargo
   name: Cargo Ordering Interface
   description: View a cargo ordering interface.
-  noSpawn: true
   components:
   - type: InstantAction
     icon: { sprite: Structures/Machines/parts.rsi, state: box_0 }
@@ -154,7 +149,6 @@
   id: ActionAGhostShowCrewMonitoring
   name: Crew Monitoring Interface
   description: View a crew monitoring interface.
-  noSpawn: true
   components:
   - type: InstantAction
     icon: { sprite: Structures/Machines/parts.rsi, state: box_0 }
@@ -167,7 +161,6 @@
   id: ActionAGhostShowStationRecords
   name: Station Records Interface
   description: View a station records Interface
-  noSpawn: true
   components:
   - type: InstantAction
     icon: { sprite: Structures/Machines/parts.rsi, state: box_0 }

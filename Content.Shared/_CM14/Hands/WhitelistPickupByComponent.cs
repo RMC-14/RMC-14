@@ -7,5 +7,5 @@ namespace Content.Shared._CM14.Hands;
 public sealed partial class WhitelistPickupByComponent : Component
 {
     [DataField]
-    public EntityWhitelist All = new();
+    public EntityWhitelist Whitelist = new();
 }

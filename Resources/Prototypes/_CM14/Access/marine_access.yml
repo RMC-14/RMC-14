@@ -30,7 +30,7 @@
 
 - type: accessLevel
   id: CMAccessSquadLeaderPrep
-  name: cm-job-name-fireteam-leader
+  name: cm-job-name-squad-leader
 
 - type: accessLevel
   id: CMAccessSpecPrep
