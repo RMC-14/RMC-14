@@ -4,13 +4,13 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._CM14.Attachable;
 
-public sealed partial class AttachableHolderAttachmentsAlteredEvent : EntityEventArgs
+public sealed partial class AttachableHolderAttachablesAlteredEvent : EntityEventArgs
 {
     public readonly EntityUid AttachableUid;
     public readonly bool Attached;
     
     
-    public AttachableHolderAttachmentsAlteredEvent(EntityUid attachableUid, bool attached)
+    public AttachableHolderAttachablesAlteredEvent(EntityUid attachableUid, bool attached)
     {
         AttachableUid = attachableUid;
         Attached = attached;

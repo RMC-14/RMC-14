@@ -17,7 +17,6 @@ namespace Content.Shared._CM14.Attachable;
 
 public abstract class SharedAttachableHolderSystem : EntitySystem
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
@@ -25,6 +24,7 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
+    [Dependency] protected readonly IEntityManager EntityManager = default!;
     
     private EntityQuery<MetaDataComponent> metaQuery;
 
@@ -64,7 +64,7 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
     
     private void OnAttachableHolderAttachToSlotMessage(EntityUid holderUid, AttachableHolderComponent holderComponent, AttachableHolderAttachToSlotMessage args)
     {
-        _entityManager.TryGetComponent<HandsComponent>(args.Actor, out HandsComponent? handsComponent);
+        EntityManager.TryGetComponent<HandsComponent>(args.Actor, out HandsComponent? handsComponent);
         
         if(handsComponent == null)
             return;
@@ -94,7 +94,7 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
         {
             if(validSlots.Count > 1)
             {
-                _entityManager.TryGetComponent<UserInterfaceComponent>(holder.Owner, out UserInterfaceComponent? userInterfaceComponent);
+                EntityManager.TryGetComponent<UserInterfaceComponent>(holder.Owner, out UserInterfaceComponent? userInterfaceComponent);
                 _uiSystem.OpenUi((holder.Owner, userInterfaceComponent), AttachableHolderUiKeys.ChooseSlotKey, userUid);
                 
                 AttachableHolderChooseSlotUserInterfaceState state = new AttachableHolderChooseSlotUserInterfaceState(validSlots);
@@ -105,9 +105,9 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
         }
         
         _doAfterSystem.TryStartDoAfter(new DoAfterArgs(
-            _entityManager,
+            EntityManager,
             userUid,
-            _entityManager.GetComponent<AttachableComponent>(attachableUid).AttachDoAfter,
+            EntityManager.GetComponent<AttachableComponent>(attachableUid).AttachDoAfter,
             new AttachableAttachDoAfterEvent(slotID),
             holder,
             target: holder.Owner,
@@ -118,7 +118,7 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
         });
     }
     
-    private void OnAttachDoAfter(EntityUid uid, AttachableHolderComponent component, AttachableAttachDoAfterEvent args)
+    protected virtual void OnAttachDoAfter(EntityUid uid, AttachableHolderComponent component, AttachableAttachDoAfterEvent args)
     {
         if(args.Cancelled || args.Handled || args.Args.Target == null || args.Args.Used == null)
             return;
@@ -126,8 +126,8 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
         if(!HasComp<AttachableHolderComponent>(args.Args.Target) || !HasComp<AttachableComponent>(args.Args.Used))
             return;
         
-        if(Attach((args.Args.Target.Value, _entityManager.GetComponent<AttachableHolderComponent>(args.Args.Target.Value)), args.Args.Used.Value, args.Args.User, args.SlotID))
-            _audioSystem.PlayPvs(_entityManager.GetComponent<AttachableComponent>(args.Args.Used.Value).AttachSound, uid);
+        if(!Attach((args.Args.Target.Value, EntityManager.GetComponent<AttachableHolderComponent>(args.Args.Target.Value)), args.Args.Used.Value, args.Args.User, args.SlotID))
+            return;
         
         args.Handled = true;
     }
@@ -156,7 +156,7 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
         //_audioSystem.PlayPvs(holder.Comp.AttachSound, holder.Owner);
         UpdateStripUi(holder.Owner, holder.Comp);
         
-        RaiseLocalEvent(holder, new AttachableHolderAttachmentsAlteredEvent(args.Entity, true));
+        RaiseLocalEvent(holder, new AttachableHolderAttachablesAlteredEvent(args.Entity, holder.Owner, true));
         Dirty(holder);
     }
     
@@ -170,9 +170,9 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
     public void StartDetach(Entity<AttachableHolderComponent> holder, EntityUid attachableUid, EntityUid userUid)
     {
         _doAfterSystem.TryStartDoAfter(new DoAfterArgs(
-            _entityManager,
+            EntityManager,
             userUid,
-            _entityManager.GetComponent<AttachableComponent>(attachableUid).AttachDoAfter,
+            EntityManager.GetComponent<AttachableComponent>(attachableUid).AttachDoAfter,
             new AttachableDetachDoAfterEvent(),
             holder,
             target: holder.Owner,
@@ -183,7 +183,7 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
         });
     }
     
-    private void OnDetachDoAfter(EntityUid uid, AttachableHolderComponent component, DoAfterEvent args)
+    protected virtual void OnDetachDoAfter(EntityUid uid, AttachableHolderComponent component, AttachableDetachDoAfterEvent args)
     {
         if(args.Cancelled || args.Handled || args.Args.Target == null || args.Args.Used == null)
             return;
@@ -191,8 +191,8 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
         if(!HasComp<AttachableHolderComponent>(args.Args.Target) || !HasComp<AttachableComponent>(args.Args.Used))
             return;
         
-        if(Detach((args.Args.Target.Value, _entityManager.GetComponent<AttachableHolderComponent>(args.Args.Target.Value)), args.Args.Used.Value, args.Args.User))
-            _audioSystem.PlayPvs(_entityManager.GetComponent<AttachableComponent>(args.Args.Used.Value).DetachSound, uid);
+        if(!Detach((args.Args.Target.Value, EntityManager.GetComponent<AttachableHolderComponent>(args.Args.Target.Value)), args.Args.Used.Value, args.Args.User))
+            return;
         
         args.Handled = true;
     }
@@ -224,7 +224,7 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
         //_audioSystem.PlayPvs(holder.Comp.AttachSound, holder.Owner);
         UpdateStripUi(holder.Owner, holder.Comp);
         
-        RaiseLocalEvent(holder, new AttachableHolderAttachmentsAlteredEvent(args.Entity, false));
+        RaiseLocalEvent(holder, new AttachableHolderAttachablesAlteredEvent(args.Entity, holder.Owner, false));
         Dirty(holder);
     }
     
@@ -258,7 +258,7 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
     private Dictionary<string, string?> GetSlotsForStripUi(Entity<AttachableHolderComponent> holder)
     {
         Dictionary<string, string?> result = new Dictionary<string, string?>();
-        EntityQuery<MetaDataComponent> metaQuery = _entityManager.GetEntityQuery<MetaDataComponent>();
+        EntityQuery<MetaDataComponent> metaQuery = EntityManager.GetEntityQuery<MetaDataComponent>();
         
         foreach(string slotID in holder.Comp.Slots.Keys)
         {
