@@ -1173,13 +1173,16 @@
   - message: Fixed the sound that resin structures make when hit by a melee attack
       being incorrect.
     type: Fix
-  - message: Fixed being able to Transfer Plasma to a xeno caste that does not use any.
+  - message: Fixed being able to Transfer Plasma to a xeno caste that does not use
+      any.
     type: Fix
-  - message: Fixed being able to toggle iv mode, pump a shotgun and remove webbing while in crit and other states that normally block interactions.
+  - message: Fixed being able to toggle iv mode, pump a shotgun and remove webbing
+      while in crit and other states that normally block interactions.
     type: Fix
   - message: Rotting no longer deals blunt and cellular damage.
     type: Fix
-  - message: Fix Dexalin and Dexalin Plus not healing airloss damage caused by low blood.
+  - message: Fix Dexalin and Dexalin Plus not healing airloss damage caused by low
+      blood.
     type: Fix
   - message: Water bottles can no longer be destroyed.
     type: Tweak
@@ -1219,5 +1222,31 @@
   id: 151
   time: '2024-06-15T23:05:52.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2480
+- author: Whisper
+  changes:
+  - message: Rules tweak; MP may not arrest outside of FOB and flagship unless in
+      a chase.
+    type: Tweak
+  - message: Rules tweak; MP may not arrest while hostile forces are on the flagship
+      unless the person is a threat.
+    type: Tweak
+  - message: Rules tweak; Doctors and MP may deploy to fob with permission from their
+      respective heads.
+    type: Tweak
+  - message: Rules tweak; CO and XO may deploy if they assign a new flagship commander.
+    type: Tweak
+  - message: New guidebook page on chain of command can be found in roleplay rules.
+    type: Add
+  id: 152
+  time: '2024-06-16T05:06:23.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2482
+- author: Whisper
+  changes:
+  - message: Made puddles smaller and spread less easily, requiring a lot more liquid
+      to do anything.
+    type: Tweak
+  id: 153
+  time: '2024-06-16T05:06:37.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2484
 Name: CM
 Order: -1
