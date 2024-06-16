@@ -161,9 +161,15 @@
     - name: Supplies
       entries:
       - cost: 2000
-        crate: CMCrateSuppliesCrayons
+        crate: CMCrateSupplyInternals
+#      - cost: 1000
+#        crate: CMCrateSupplyEvacuation
       - cost: 1000
         crate: CMCrateSuppliesBoxes
+      - cost: 1000
+        crate: CMCrateSupplyJanitor
+      - cost: 2000
+        crate: CMCrateSuppliesCrayons
 #    - name: Vehicle Ammo
 #      entries: []
     - name: Weapons

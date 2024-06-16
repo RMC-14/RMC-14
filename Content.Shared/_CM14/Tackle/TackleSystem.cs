@@ -59,7 +59,7 @@ public sealed class TackleSystem : EntitySystem
         }
         else
         {
-            _popup.PopupClient(Loc.GetString("cm-tackle-success-self", ("target", target)), args.User, args.User);
+            _popup.PopupClient(Loc.GetString("cm-tackle-success-self", ("target", target.Owner)), args.User, args.User);
 
             foreach (var session in Filter.PvsExcept(args.User).Recipients)
             {

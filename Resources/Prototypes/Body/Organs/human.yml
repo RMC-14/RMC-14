@@ -67,7 +67,7 @@
   - type: FlavorProfile
     flavors:
       - people
-  
+
 - type: entity
   id: OrganHumanEyes
   parent: BaseHumanOrgan
@@ -154,7 +154,7 @@
   # This is done because these chemicals need to have some effect even if they aren't being filtered out of your body.
   # You're technically 'immune to poison' without a heart, but.. uhh, you'll have bigger problems on your hands.
   - type: Metabolizer
-    maxReagents: 2
+    maxReagents: 10
     metabolizerTypes: [Human]
     groups:
     - id: Medicine

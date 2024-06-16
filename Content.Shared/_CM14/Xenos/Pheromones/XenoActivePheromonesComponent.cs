@@ -6,8 +6,8 @@ namespace Content.Shared._CM14.Xenos.Pheromones;
 [Access(typeof(SharedXenoPheromonesSystem))]
 public sealed partial class XenoActivePheromonesComponent : Component
 {
+    public HashSet<Entity<XenoComponent>> Receivers = new();
+
     [DataField, AutoNetworkedField]
     public XenoPheromones Pheromones;
-
-    public override bool SessionSpecific => true;
 }

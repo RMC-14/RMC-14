@@ -1,0 +1,86 @@
+﻿- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrison
+  sprite: /Textures/_CM14/Tiles/prison/floor.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrisonDamaged1
+  sprite: /Textures/_CM14/Tiles/prison/damaged1.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrisonDamaged2
+  sprite: /Textures/_CM14/Tiles/prison/damaged2.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrisonDamaged3
+  sprite: /Textures/_CM14/Tiles/prison/damaged3.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrisonDamaged5
+  sprite: /Textures/_CM14/Tiles/prison/damaged5.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrisonPlating
+  sprite: /Textures/_CM14/Tiles/prison/plating.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrisonPlatingScorched
+  sprite: /Textures/_CM14/Tiles/prison/panelscorched.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrisonPlatingDamage1
+  sprite: /Textures/_CM14/Tiles/prison/platingdmg1.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrisonPlatingDamage2
+  sprite: /Textures/_CM14/Tiles/prison/platingdmg2.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrisonPlatingDamage3
+  sprite: /Textures/_CM14/Tiles/prison/platingdmg3.png
+
+- type: tile
+  parent: CMFloorPlate
+  id: CMFloorSteelPrisonPlate
+  sprite: /Textures/_CM14/Tiles/prison/floor_plate.png
+
+- type: tile
+  parent: CMFloorPlate
+  id: CMFloorSteelPrisonPlateCaution0
+  sprite: /Textures/_CM14/Tiles/prison/cell_stripe_0.png
+
+- type: tile
+  parent: CMFloorPlate
+  id: CMFloorSteelPrisonPlateCaution1
+  sprite: /Textures/_CM14/Tiles/prison/cell_stripe_1.png
+
+- type: tile
+  parent: CMFloorPlate
+  id: CMFloorSteelPrisonPlateCaution2
+  sprite: /Textures/_CM14/Tiles/prison/cell_stripe_2.png
+
+- type: tile
+  parent: CMFloorPlate
+  id: CMFloorSteelPrisonPlateCaution3
+  sprite: /Textures/_CM14/Tiles/prison/cell_stripe_3.png
+
+- type: tile
+  parent: CMFloorPlate
+  id: CMFloorSteelPrisonPlateMarked
+  sprite: /Textures/_CM14/Tiles/prison/floor_marked.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrisonWhite
+  name: tiles-cm-white-sterile
+  sprite: /Textures/_CM14/Tiles/prison/sterile_white.png
+  

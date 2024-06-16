@@ -1,4 +1,5 @@
-﻿using Content.Shared._CM14.Xenos.Leap;
+﻿using Content.Shared._CM14.Hands;
+using Content.Shared._CM14.Xenos.Leap;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Examine;
@@ -29,6 +30,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
     [Dependency] private readonly BlindableSystem _blindable = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly CMHandsSystem _cmHands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -129,6 +131,9 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
     private void OnHuggerCanDropDragged(Entity<XenoHuggerComponent> ent, ref CanDropDraggedEvent args)
     {
+        if (args.User != ent.Owner && !_cmHands.IsPickupByAllowed(ent.Owner, args.User))
+            return;
+
         if (!CanHugPopup(ent, args.Target, args.User, false))
             return;
 
@@ -138,6 +143,9 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
     private void OnHuggerDragDropDragged(Entity<XenoHuggerComponent> ent, ref DragDropDraggedEvent args)
     {
+        if (args.User != ent.Owner && !_cmHands.IsPickupByAllowed(ent.Owner, args.User))
+            return;
+
         StartHug(ent, args.Target, args.User);
         args.Handled = true;
     }
@@ -354,7 +362,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
             RemCompDeferred<VictimHuggedComponent>(uid);
 
-            var spawned = Spawn(hugged.BurstSpawn, xform.Coordinates);
+            var spawned = SpawnAtPosition(hugged.BurstSpawn, xform.Coordinates);
             _xeno.SetHive(spawned, hugged.Hive);
 
             EnsureComp<VictimBurstComponent>(uid);

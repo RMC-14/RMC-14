@@ -1,17 +1,15 @@
-﻿using Content.Shared._CM14.Marines.Announce;
-using Content.Shared.GameTicking;
+﻿using Content.Shared._CM14.Xenos;
+using Content.Shared.Interaction;
+using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Robust.Shared.Network;
-using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Dropship;
 
 public abstract class SharedDropshipSystem : EntitySystem
 {
-    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
-    [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
@@ -19,6 +17,8 @@ public abstract class SharedDropshipSystem : EntitySystem
         SubscribeLocalEvent<DropshipNavigationComputerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<DropshipNavigationComputerComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
         SubscribeLocalEvent<DropshipNavigationComputerComponent, AfterActivatableUIOpenEvent>(OnNavigationOpen);
+
+        SubscribeLocalEvent<DropshipTerminalComponent, ActivateInWorldEvent>(OnDropshipTerminalActivateInWorld);
 
         Subs.BuiEvents<DropshipNavigationComputerComponent>(DropshipNavigationUiKey.Key,
             subs =>
@@ -56,6 +56,76 @@ public abstract class SharedDropshipSystem : EntitySystem
     private void OnNavigationOpen(Entity<DropshipNavigationComputerComponent> ent, ref AfterActivatableUIOpenEvent args)
     {
         RefreshUI(ent);
+    }
+
+    private void OnDropshipTerminalActivateInWorld(Entity<DropshipTerminalComponent> ent, ref ActivateInWorldEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        var user = args.User;
+        if (!HasComp<XenoComponent>(user))
+        {
+            _popup.PopupEntity("This terminal doesn't seem to work yet... Maybe you should ask High Command?", user, user, PopupType.MediumCaution);
+            return;
+        }
+
+        if (!HasComp<DropshipHijackerComponent>(user))
+        {
+            _popup.PopupEntity($"You stare cluelessly at the {Name(ent.Owner)}", user, user);
+            return;
+        }
+
+        var userTransform = Transform(user);
+
+        Entity<TransformComponent>? closestDestination = null;
+        var destinations = EntityQueryEnumerator<DropshipDestinationComponent, TransformComponent>();
+        while (destinations.MoveNext(out var uid, out _, out var xform))
+        {
+            if (xform.MapID != userTransform.MapID)
+                continue;
+
+            if (closestDestination == null)
+            {
+                closestDestination = (uid, xform);
+                continue;
+            }
+
+            if (userTransform.Coordinates.TryDistance(EntityManager, xform.Coordinates, out var distance) &&
+                userTransform.Coordinates.TryDistance(EntityManager,
+                    closestDestination.Value.Comp.Coordinates,
+                    out var oldDistance) &&
+                distance < oldDistance)
+            {
+                closestDestination = (uid, xform);
+            }
+        }
+
+        if (closestDestination == null)
+        {
+            _popup.PopupEntity("There are no dropship destinations near you!", user, user, PopupType.MediumCaution);
+            return;
+        }
+
+        var dropships = EntityQueryEnumerator<DropshipComponent>();
+        while (dropships.MoveNext(out var uid, out var dropship))
+        {
+            if (dropship.Crashed || IsInFTL(uid))
+                continue;
+
+            var computerQuery = EntityQueryEnumerator<DropshipNavigationComputerComponent>();
+            while (computerQuery.MoveNext(out var computerId, out var computer))
+            {
+                if (Transform(computerId).GridUid == uid &&
+                    FlyTo((computerId, computer), closestDestination.Value, user))
+                {
+                    _popup.PopupEntity("You call down one of the dropships to your location", user, user, PopupType.LargeCaution);
+                    return;
+                }
+            }
+        }
+
+        _popup.PopupEntity("There are no available dropships! Wait a moment.", user, user, PopupType.LargeCaution);
     }
 
     private void OnDropshipNavigationLaunchMsg(Entity<DropshipNavigationComputerComponent> ent,
@@ -134,79 +204,5 @@ public abstract class SharedDropshipSystem : EntitySystem
     protected virtual bool IsInFTL(EntityUid dropship)
     {
         return false;
-    }
-
-    public override void Update(float frameTime)
-    {
-        if (_net.IsClient)
-            return;
-
-        var time = _timing.CurTime;
-        var roundTime = time - _gameTicker.RoundStartTimeSpan;
-        var computers = EntityQueryEnumerator<DropshipNavigationComputerComponent>();
-        while (computers.MoveNext(out var computerId, out var computer))
-        {
-            if (Transform(computerId).GridUid is not { } dropshipId ||
-                !TryComp(dropshipId, out DropshipComponent? dropship))
-            {
-                continue;
-            }
-
-            if (roundTime < dropship.AutoRecallRoundDelay)
-                continue;
-
-            var dropshipName = Name(dropshipId);
-            if (string.IsNullOrWhiteSpace(dropshipName))
-                dropshipName = "Dropship";
-
-            if (TryComp(dropship.Destination, out DropshipDestinationComponent? currentDestination) &&
-                currentDestination.AutoRecall)
-            {
-                if (dropship.AutoRecallAt != default)
-                {
-                    dropship.AutoRecallAt = default;
-                    Dirty(dropshipId, dropship);
-                }
-
-                continue;
-            }
-
-            if (dropship.AutoRecallAt == default)
-            {
-                dropship.AutoRecallAt = time + dropship.AutoRecallTime;
-                Dirty(dropshipId, dropship);
-
-                var minutes = (int) dropship.AutoRecallTime.TotalMinutes;
-                var seconds = dropship.AutoRecallTime.Seconds;
-                var timeString = string.Empty;
-                if (minutes > 0)
-                    timeString += $" {minutes} minutes";
-
-                if (seconds > 0)
-                    timeString += $" {seconds} seconds";
-
-                _marineAnnounce.Announce(dropshipId, $"The {dropshipName} will be automatically recalled to the planet in{timeString}.", dropship.AnnounceAutoRecallIn);
-            }
-
-            if (time < dropship.AutoRecallAt)
-                continue;
-
-            if (IsInFTL(dropshipId))
-                continue;
-
-            var destinations = EntityQueryEnumerator<DropshipDestinationComponent>();
-            while (destinations.MoveNext(out var destinationId, out var destinationComp))
-            {
-                if (!destinationComp.AutoRecall || destinationComp.Ship != null)
-                    continue;
-
-                if (FlyTo((computerId, computer), destinationId, computerId))
-                {
-                    dropship.AutoRecallAt = default;
-                    _marineAnnounce.Announce(dropshipId, $"The {dropshipName} has been automatically called to {Name(destinationId)}.", dropship.AnnounceAutoRecallIn);
-                    break;
-                }
-            }
-        }
     }
 }

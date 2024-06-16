@@ -20,13 +20,13 @@
     edges:
     - to: start
       completed:
-        - !type:SpawnPrototype
-          prototype: CMSheetMetal1
-          amount: 1
-        - !type:DeleteEntity
+      - !type:SpawnPrototype
+        prototype: CMSheetMetal1
+        amount: 1
+      - !type:DeleteEntity
       conditions:
-        - !type:EntityAnchored
-          anchored: false
+      - !type:EntityAnchored
+        anchored: false
       steps:
-        - tool: Screwing
-          doAfter: 3
+      - tool: Screwing
+        doAfter: 3

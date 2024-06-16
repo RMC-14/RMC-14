@@ -24,6 +24,7 @@ using Content.Shared._CM14.Spawners;
 using Content.Shared._CM14.Weapons.Ranged.IFF;
 using Content.Shared._CM14.Xenos;
 using Content.Shared._CM14.Xenos.Evolution;
+using Content.Shared._CM14.Xenos.Hugger;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
 using Content.Shared.GameTicking;
@@ -248,10 +249,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 }
             }
 
+            // Any unfilled xeno slots become larva
             for (var i = selected; i < totalXenos; i++)
             {
                 // TODO CM14 xeno spawn points
-                var xenoEnt = Spawn(comp.LarvaEnt, comp.XenoMap.ToCoordinates());
+                var xenoEnt = SpawnAtPosition(comp.LarvaEnt, comp.XenoMap.ToCoordinates());
                 _xeno.MakeXeno(xenoEnt);
                 _xeno.SetHive(xenoEnt, comp.Hive);
             }
@@ -477,6 +479,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             var marinesOnShip = false;
             while (marines.MoveNext(out var marineId, out _, out var mobState, out var xform))
             {
+                if (HasComp<VictimHuggedComponent>(marineId) || HasComp<VictimBurstComponent>(marineId))
+                    continue;
+
                 if (_mobState.IsAlive(marineId, mobState))
                     marinesAlive = true;
 
@@ -614,12 +619,19 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         return spawners;
     }
 
-    private (EntProtoId Id, EntityUid Ent) NextSquad(CMDistressSignalRuleComponent rule)
+    private (EntProtoId Id, EntityUid Ent) NextSquad(ProtoId<JobPrototype> job, CMDistressSignalRuleComponent rule)
     {
-        if (rule.NextSquad >= rule.SquadIds.Count)
-            rule.NextSquad = 0;
+        // TODO CM14 this biases people towards alpha as that's the first one, maybe not a problem once people can pick a preferred squad?
+        if (!rule.NextSquad.TryGetValue(job, out var next) ||
+            next >= rule.SquadIds.Count)
+        {
+            rule.NextSquad[job] = 0;
+            next = 0;
+        }
 
-        var id = rule.SquadIds[rule.NextSquad++];
+        var id = rule.SquadIds[next++];
+        rule.NextSquad[job] = next;
+
         ref var squad = ref CollectionsMarshal.GetValueRefOrAddDefault(rule.Squads, id, out var exists);
         if (!exists)
             squad = Spawn(id);
@@ -634,7 +646,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         if (job.HasSquad)
         {
-            var (squadId, squadEnt) = NextSquad(rule);
+            var (squadId, squadEnt) = NextSquad(job, rule);
             squad = squadEnt;
 
             if (allSpawners.Squad.TryGetValue(squadId, out var jobSpawners) &&

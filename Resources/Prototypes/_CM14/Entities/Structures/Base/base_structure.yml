@@ -24,6 +24,14 @@
   - type: Corrodible
     isCorrodible: false
   - type: CMIconSmooth
+  - type: MeleeReceivedMultiplier
+    otherMultiplier: 8.2
+  - type: XenoConstructionSupport
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: XenoResinBreak
+  - type: XenoConstruct
 
 - type: entity
   id: CMCorrodible
@@ -71,6 +79,7 @@
     spawn: XenoWeedsWall
   - type: Corrodible
     isCorrodible: false
+  - type: XenoConstructionSupport
 
 - type: entity
   abstract: true

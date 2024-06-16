@@ -127,8 +127,9 @@
       params:
         volume: -6
   - type: WhitelistPickup
-    any:
-    - type: XenoEgg
+    whitelist:
+      components:
+      - XenoEgg
   - type: XenoEvolutionGranter
   - type: XenoEvolutionCapped
     id: CMXenoQueen
@@ -139,7 +140,8 @@
       params:
         volume: -8
   - type: XenoAnnounceDeath
-    message: A sudden tremor ripples through the hive... the Queen has been slain! Vengeance!
+    message: cm-xeno-death-queen
+    color: "#921992"
   - type: XenoTimeHealth
     critThreshold: 1000
     deadThreshold: 1100
