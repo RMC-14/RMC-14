@@ -11,5 +11,5 @@ namespace Content.Shared._CM14.Medical.Components;
 public sealed partial class HolocardComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public HolocardStaus HolocardStaus = HolocardStaus.None;
+    public HolocardStaus HolocardStaus = HolocardStaus.Urgent;
 }

@@ -19,6 +19,7 @@ using Content.Client.Lobby;
 using Content.Client.Replay;
 using Content.Shared.Administration.Managers;
 using Content.Shared.Players.PlayTimeTracking;
+using Content.Client._CM14.Medical.HUD.Systems;
 
 
 namespace Content.Client.IoC
@@ -50,6 +51,7 @@ namespace Content.Client.IoC
             collection.Register<ContentReplayPlaybackManager, ContentReplayPlaybackManager>();
             collection.Register<ISharedPlaytimeManager, JobRequirementsManager>();
             collection.Register<MappingManager>();
+            collection.Register<HolocardSystem>();
         }
     }
 }

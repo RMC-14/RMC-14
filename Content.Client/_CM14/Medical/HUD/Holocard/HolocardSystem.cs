@@ -7,7 +7,7 @@ using Content.Shared.Damage;
 using Content.Shared.StatusIcon;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client._CM14.Medical.HUD.Systems;
+namespace Content.Client._CM14.Medical.HUD.Holocard;
 
 public sealed class HolocardSystem : SharedHolocardSystem
 {

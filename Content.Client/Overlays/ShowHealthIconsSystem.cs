@@ -1,5 +1,6 @@
 using System.Linq;
-using Content.Client._CM14.Medical.HUD.Systems;
+using Content.Client._CM14.Medical.HUD;
+using Content.Client._CM14.Medical.HUD.Holocard;
 using Content.Shared._CM14.Medical.Components;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Damage;
@@ -62,6 +63,7 @@ public sealed class ShowHealthIconsSystem : EquipmentHudSystem<ShowHealthIconsCo
     {
         if (!IsActive)
             return;
+
         var holocardIcons = _holocard.GetIcons(entity);
 
         args.StatusIcons.AddRange(holocardIcons);

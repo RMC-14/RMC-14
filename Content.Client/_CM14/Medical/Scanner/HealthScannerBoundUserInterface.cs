@@ -1,5 +1,7 @@
 ﻿using System.Globalization;
+using Content.Client._CM14.Medical.HUD.Holocard;
 using Content.Client.Message;
+using Content.Shared._CM14.Medical.Components;
 using Content.Shared._CM14.Medical.Scanner;
 using Content.Shared._CM14.Medical.Wounds;
 using Content.Shared.Chemistry.Reagent;
@@ -22,6 +24,7 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
     [Dependency] private readonly IEntityManager _entities = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly HolocardSystem _holocard = default!;
 
     [ViewVariables]
     private HealthScannerWindow? _window;
@@ -78,6 +81,16 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
 
                 var healthString = MathHelper.CloseTo(healthValue, 100) ? "100%" : $"{healthValue:F2}%";
                 _window.HealthBarText.Text = $"{healthString} healthy";
+            }
+            _window.ChangeHolocardButton.Text = "Change Holocard";
+            if (_entities.TryGetComponent(target, out HolocardComponent? holocardComponent) &&
+            _holocard.TryGetDescription((target, holocardComponent), out var description))
+            {
+                _window.HolocardDescription.Text = description;
+            }
+            else
+            {
+                _window.HolocardDescription.Text = Loc.GetString("hc-none-description");
             }
 
             _window.ChemicalsContainer.DisposeAllChildren();
