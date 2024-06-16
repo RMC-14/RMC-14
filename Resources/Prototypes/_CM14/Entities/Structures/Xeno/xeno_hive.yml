@@ -29,6 +29,8 @@
     availableTakeovers: 2
     deleteOnSpawn: false
     prototype: CMXenoLesserDrone
+  - type: HiveConstructionUnique
+    id: HiveCoreXeno
 
 - type: entity
   id: HiveCoreXenoConstructionNode
@@ -59,3 +61,5 @@
     initialPlasmaCost: 400
     plasmaCost: 1000
     spawn: HiveCoreXeno
+  - type: HiveConstructionUnique
+    id: HiveCoreXeno
