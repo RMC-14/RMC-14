@@ -1076,5 +1076,144 @@
   id: 141
   time: '2024-06-13T20:14:01.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2413
+- author: Cu1r
+  changes:
+  - message: Added tiles necessary to port Fiorina Science Annex.
+    type: Add
+  id: 142
+  time: '2024-06-15T03:19:53.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2471
+- author: Hmeister
+  changes:
+  - message: Minor xeno description changes
+    type: Tweak
+  id: 143
+  time: '2024-06-15T03:24:23.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2469
+- author: DrSmugleaf
+  changes:
+  - message: Fixed marines getting stuck on hypersleep chambers at roundstart and
+      having their inventory visually disappear in certain spots.
+    type: Fix
+  id: 144
+  time: '2024-06-15T04:25:39.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2472
+- author: Sigil
+  changes:
+  - message: Reinforced girder removed from crafting menu, as it currently has no
+      use.
+    type: Remove
+  - message: Where possible, changed the material requirements and construction steps
+      for objects marines can build to match their CM13 versions.
+    type: Tweak
+  - message: Made girders and other constructible objects drop the CM14 versions of
+      materials.
+    type: Fix
+  - message: Made catwalks snap to the grid properly.
+    type: Fix
+  - message: Made airlocks properly change their appearance during construction.
+    type: Fix
+  id: 145
+  time: '2024-06-15T04:40:55.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2400
+- author: Whisper
+  changes:
+  - message: Jungle walls are invincible
+    type: Fix
+  id: 146
+  time: '2024-06-15T06:40:50.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2475
+- author: Whisper
+  changes:
+  - message: Xenos now have death text on examine.
+    type: Add
+  id: 147
+  time: '2024-06-15T06:40:27.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2474
+- author: Whisper
+  changes:
+  - message: Greatly reduced the speed thirst occurs
+    type: Tweak
+  id: 148
+  time: '2024-06-15T07:49:17.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2477
+- author: DrSmugleaf
+  changes:
+  - message: Added the shotgun shell pouch to the surplus uniform vendor.
+    type: Add
+  - message: Facehuggers can now also click-drag themselves onto targets to hug them,
+      or be click-dragged by other castes that are normally able to pick up facehuggers.
+    type: Add
+  - message: Fixed tackling having unlimited range.
+    type: Fix
+  - message: Fixed the xeno hud disappearing when a facehugger is held by a xeno in
+      view.
+    type: Fix
+  - message: Fixed dead xenos showing up the Watch Xenomorph action window.
+    type: Fix
+  - message: Fixed blood dispensers being unpowered and having upstream blood bags
+      instead of cm blood bags.
+    type: Fix
+  - message: Fixed marines being able to use Succumb and Last Words to deny a xeno
+      capture.
+    type: Fix
+  - message: Fixed barricades having no interaction outline.
+    type: Fix
+  - message: Fixed there being no range check for surgery tools, full sandbag building,
+      health scanning, wound treatment, hugging and nesting.
+    type: Fix
+  - message: Fixed xenos being able to access the human construction menu.
+    type: Fix
+  - message: Fixed xeno structures being much slower to destroy with melee weapons
+      than intended, for both marines and xenos.
+    type: Fix
+  - message: Resin doors now require support in the form of a wall, resin membrane
+      or other resin door to build, and will collapse if that support is destroyed.
+    type: Fix
+  - message: Fixed the sound that resin structures make when hit by a melee attack
+      being incorrect.
+    type: Fix
+  - message: Fixed being able to Transfer Plasma to a xeno caste that does not use any.
+    type: Fix
+  - message: Fixed being able to toggle iv mode, pump a shotgun and remove webbing while in crit and other states that normally block interactions.
+    type: Fix
+  - message: Water bottles can no longer be destroyed.
+    type: Tweak
+  - message: Added examine test to IV drips for their mode, target and contents.
+    type: Tweak
+  - message: IV drips now display their mode in the popup when being attached.
+    type: Tweak
+  - message: Changed all round-end outcome messages to be more descriptive of what
+      happened during the round.
+    type: Tweak
+  - message: All bullets are now much faster.
+    type: Tweak
+  - message: Marines that are trained in firearms skill no longer have any camera
+      recoil when firing a wielded gun.
+    type: Tweak
+  - message: Added a search bar to the xeno watch window.
+    type: Tweak
+  - message: You can now see nearby chat bubbles while watching another xeno.
+    type: Tweak
+  - message: Humanoids are now slower to pull around, except when they are on a roller
+      bed.
+    type: Tweak
+  id: 149
+  time: '2024-06-15T09:07:32.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2476
+- author: amo020
+  changes:
+  - message: Added the M79 grenade launcher prototype
+    type: Add
+  id: 150
+  time: '2024-06-15T22:13:09.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2470
+- author: Whisper
+  changes:
+  - message: Two missing bags from the corpsmen vendor have been added.
+    type: Fix
+  id: 151
+  time: '2024-06-15T23:05:52.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2480
 Name: CM
 Order: -1

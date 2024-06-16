@@ -47,6 +47,9 @@ public abstract class SharedPumpActionSystem : EntitySystem
 
     private void OnGetVerbs(Entity<PumpActionComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
     {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
         var user = args.User;
         if (!_actionBlocker.CanInteract(user, args.Target))
             return;

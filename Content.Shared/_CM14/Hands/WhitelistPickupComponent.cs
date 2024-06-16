@@ -1,11 +1,12 @@
-﻿using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
+﻿using Content.Shared.Whitelist;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._CM14.Hands;
 
 [RegisterComponent, NetworkedComponent]
+[Access(typeof(CMHandsSystem))]
 public sealed partial class WhitelistPickupComponent : Component
 {
     [DataField]
-    public ComponentRegistry Any = new();
+    public EntityWhitelist Whitelist = new();
 }

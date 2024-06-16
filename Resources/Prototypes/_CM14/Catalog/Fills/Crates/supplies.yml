@@ -1,13 +1,35 @@
+# SUPPLIES 
+# code/datums/supply_packs/misc.dm
+
+# /datum/supply_packs/internals
 - type: entity
-  id: CMCrateSuppliesCrayons
   parent: CMCrateSupply
-  name: boxes of crayons
+  id: CMCrateSupplyInternals
+  name: oxygen internals crate (x3 masks, x3 tanks)
   components:
   - type: StorageFill
     contents:
-      - id: CrayonBox
-        amount: 5
-        
+    - id: CMMaskGas
+      amount: 3
+    - id: CMGasTankOxygen
+      amount: 3
+
+# /datum/supply_packs/evacuation
+- type: entity
+  parent: CMCrateSupply
+  id: CMCrateSupplyEvacuation
+  name: emergency equipment (x2 toolbox, x2 hazard vest, x5 oxygen tank, x5 masks)
+  components:
+  - type: StorageFill
+    contents:
+    # /obj/item/storage/toolbox/emergency x2
+    # /obj/item/clothing/suit/storage/hazardvest x2
+    - id: CMGasTankOxygen # /obj/item/tank/emergency_oxygen
+      amount: 5
+    - id: CMMaskGas
+      amount: 5
+
+# /datum/supply_packs/boxes
 - type: entity
   id: CMCrateSuppliesBoxes
   parent: CMCrateSupply
@@ -17,3 +39,44 @@
     contents:
       - id: CMBoxCardboard
         amount: 10
+
+# /datum/supply_packs/janitor
+- type: entity
+  parent: CMCrateSupply
+  id: CMCrateSupplyJanitor
+  name: assorted janitorial supplies
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBucket
+      amount: 5
+    - id: CMMop
+      amount: 1
+    - id: CMWetSign
+      amount: 3
+    - id: TrashBag
+      amount: 1
+    - id: SprayBottleSpaceCleaner
+      amount: 1
+    - id: RagItem
+      amount: 1
+    - id: CleanerGrenade
+      amount: 3
+    - id: CMBucketMop
+      amount: 1
+
+# /datum/supply_packs/poster
+
+# /datum/supply_packs/crayons
+- type: entity
+  id: CMCrateSuppliesCrayons
+  parent: CMCrateSupply
+  name: boxes of crayons
+  components:
+  - type: StorageFill
+    contents:
+      - id: CrayonBox
+        amount: 5
+
+# /datum/supply_packs/presents
+# /datum/supply_packs/wrapping_supplies
