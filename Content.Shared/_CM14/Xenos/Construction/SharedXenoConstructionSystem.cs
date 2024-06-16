@@ -36,7 +36,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
@@ -111,9 +110,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        if (_mapSystem.TryGetTileRef(gridUid, grid, coordinates, out var tileRef) &&
-            _tile.TryGetDefinition(tileRef.Tile.TypeId, out var tile) &&
-            tile is ContentTileDefinition { WeedsSpreadable: false })
+        var tile = _mapSystem.CoordinatesToTile(gridUid, grid, coordinates);
+        if (!_xenoWeeds.CanPlaceWeeds((gridUid, grid), tile))
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-weeds"), xeno.Owner, xeno.Owner);
             return;

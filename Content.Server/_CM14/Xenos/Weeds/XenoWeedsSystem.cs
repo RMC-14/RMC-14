@@ -3,16 +3,13 @@ using Content.Server.Spreader;
 using Content.Shared._CM14.Xenos.Weeds;
 using Content.Shared.Atmos;
 using Content.Shared.Coordinates;
-using Content.Shared.Maps;
 using Robust.Server.GameObjects;
-using Robust.Shared.Map;
 
 namespace Content.Server._CM14.Xenos.Weeds;
 
 public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 {
     [Dependency] private readonly MapSystem _mapSystem = default!;
-    [Dependency] private readonly ITileDefinitionManager _tiles = default!;
 
     private readonly List<EntityUid> _anchored = new();
 
@@ -48,18 +45,18 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
         foreach (var neighbor in args.NeighborFreeTiles)
         {
             var tileRef = neighbor.Tile;
-            if (tileRef.GetContentTileDefinition(_tiles) is { WeedsSpreadable: false })
-                continue;
-
             var gridOwner = neighbor.Grid.Owner;
             var tile = tileRef.GridIndices;
-            var coords = _mapSystem.GridTileToLocal(gridOwner, neighbor.Grid, tile);
 
             var sourceLocal = _mapSystem.CoordinatesToTile(gridOwner, neighbor.Grid, transform.Coordinates);
             var diff = Vector2.Abs(tile - sourceLocal);
             if (diff.X >= ent.Comp.Range || diff.Y >= ent.Comp.Range)
                 break;
 
+            if (!CanPlaceWeeds((gridOwner, neighbor.Grid), tile))
+                continue;
+
+            var coords = _mapSystem.GridTileToLocal(gridOwner, neighbor.Grid, tile);
             var neighborWeeds = Spawn(prototype, coords);
             var neighborWeedsComp = EnsureComp<XenoWeedsComponent>(neighborWeeds);
 
@@ -76,7 +73,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
             for (var i = 0; i < 4; i++)
             {
                 var dir = (AtmosDirection) (1 << i);
-                var pos = neighbor.Tile.GridIndices.Offset(dir);
+                var pos = tile.Offset(dir);
                 if (!_mapSystem.TryGetTileRef(gridOwner, neighbor.Grid, pos, out var adjacent))
                     continue;
 

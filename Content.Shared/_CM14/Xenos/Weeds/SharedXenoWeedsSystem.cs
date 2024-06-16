@@ -1,6 +1,7 @@
 ﻿using Content.Shared._CM14.Xenos.Rest;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
+using Content.Shared.Maps;
 using Content.Shared.Movement.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -23,6 +24,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -31,12 +33,14 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     private EntityQuery<AffectableByWeedsComponent> _affectedQuery;
     private EntityQuery<XenoWeedsComponent> _weedsQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
+    private EntityQuery<BlockWeedsComponent> _blockWeedsQuery;
 
     public override void Initialize()
     {
         _affectedQuery = GetEntityQuery<AffectableByWeedsComponent>();
         _weedsQuery = GetEntityQuery<XenoWeedsComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
+        _blockWeedsQuery = GetEntityQuery<BlockWeedsComponent>();
 
         SubscribeLocalEvent<XenoWeedsComponent, AnchorStateChangedEvent>(OnWeedsAnchorChanged);
         SubscribeLocalEvent<XenoWeedsComponent, ComponentShutdown>(OnWeedsShutdown);
@@ -170,6 +174,27 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         var other = args.OtherEntity;
         if (_affectedQuery.TryComp(other, out var affected) && affected.OnXenoWeeds)
             _toUpdate.Add(other);
+    }
+
+    public bool CanPlaceWeeds(Entity<MapGridComponent> grid, Vector2i tile)
+    {
+        if (!_mapSystem.TryGetTileRef(grid, grid, tile, out var tileRef))
+            return false;
+
+        if (_tile.TryGetDefinition(tileRef.Tile.TypeId, out var tileDef) &&
+            tileDef is ContentTileDefinition { WeedsSpreadable: false })
+        {
+            return false;
+        }
+
+        var targetTileAnchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, tile);
+        while (targetTileAnchored.MoveNext(out var uid))
+        {
+            if (_blockWeedsQuery.HasComp(uid))
+                return false;
+        }
+
+        return true;
     }
 
     public override void Update(float frameTime)
