@@ -1,6 +1,23 @@
 # vocal emotes
 - type: emote
-  id: CMMaleWarcry
+  id: MaleWarcry
+  name: chat-emote-name-warcry
+  category: Vocal
+  icon: Interface/Actions/scream.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["chat-emote-msg-warcry"]
+  chatTriggers:
+    - warcry
+    - warcrys
+    - warcrying
+
+- type: emote
+  id: FemaleWarcry
   name: chat-emote-name-warcry
   category: Vocal
   icon: Interface/Actions/scream.png
