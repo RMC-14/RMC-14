@@ -63,8 +63,6 @@
   - type: ItemSlots
   - type: StaticPrice
     price: 50
-    containers:
-      - entity_storage
   - type: RequireProjectileTarget
 
 - type: entity
