@@ -52,7 +52,13 @@ public sealed class AttachableHolderAttachToSlotMessage : BoundUserInterfaceMess
 }
 
 [Serializable, NetSerializable, DataDefinition]
-public sealed partial class AttachableWeaponModifierSet
+public sealed partial class AttachableWeaponMeleeModifierSet
+{
+    
+}
+
+[Serializable, NetSerializable, DataDefinition]
+public sealed partial class AttachableWeaponRangedModifierSet
 {
     [DataField("shotsPerBurst")]
     public int FlatShotsPerBurst = 0;

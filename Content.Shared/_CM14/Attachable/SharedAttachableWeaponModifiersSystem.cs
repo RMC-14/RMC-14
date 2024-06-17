@@ -41,7 +41,7 @@ public sealed class SharedAttachableWeaponModifiersSystem : EntitySystem
             ApplyModifierSet(modifiersComponent.ModifiersUnwielded, ref args);
     }
     
-    private void OnAttachableWeaponModifiersAltered(Entity<AttachableWeaponModifiersComponent> attachable, ref AttachableAlteredEvent args)
+    private void OnAttachableWeaponModifiersAltered(Entity<AttachableWeaponRangedModifiersComponent> attachable, ref AttachableAlteredEvent args)
     {
         if(attachable.Comp.ModifiersWielded == null || attachable.Comp.ModifiersUnwielded == null)
             return;
@@ -77,7 +77,7 @@ public sealed class SharedAttachableWeaponModifiersSystem : EntitySystem
         }
     }
     
-    private void ApplyModifierSet(AttachableWeaponModifierSet modifierSet, ref GunRefreshModifiersEvent args)
+    private void ApplyModifierSet(AttachableWeaponRangedModifierSet modifierSet, ref GunRefreshModifiersEvent args)
     {
         args.ShotsPerBurst += modifierSet.FlatShotsPerBurst;
         
@@ -90,13 +90,13 @@ public sealed class SharedAttachableWeaponModifiersSystem : EntitySystem
         args.ProjectileSpeed *= modifierSet.MultiplierProjectileSpeed;
     }
     
-    private void ApplyModifierSet(AttachableWeaponModifierSet modifierSet, EntityUid gunUid)
+    private void ApplyModifierSet(AttachableWeaponRangedModifierSet modifierSet, EntityUid gunUid)
     {
         _entityManager.EnsureComponent<GunDamageModifierComponent>(gunUid, out GunDamageModifierComponent damageModifierComponent);
         _cmGunSystem.SetGunDamageModifier(damageModifierComponent, damageModifierComponent.Multiplier * modifierSet.MultiplierDamage);
     }
     
-    private void UnapplyModifierSet(AttachableWeaponModifierSet modifierSet, EntityUid gunUid)
+    private void UnapplyModifierSet(AttachableWeaponRangedModifierSet modifierSet, EntityUid gunUid)
     {
         _entityManager.EnsureComponent<GunDamageModifierComponent>(gunUid, out GunDamageModifierComponent damageModifierComponent);
         _cmGunSystem.SetGunDamageModifier(damageModifierComponent, damageModifierComponent.Multiplier / modifierSet.MultiplierDamage);
