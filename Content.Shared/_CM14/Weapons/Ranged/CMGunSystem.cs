@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
 using Content.Shared._CM14.Marines.Skills;
 using Content.Shared._CM14.Weapons.Ranged.Whitelist;
+using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Popups;
@@ -18,7 +19,6 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
-
 namespace Content.Shared._CM14.Weapons.Ranged;
 
 public sealed class CMGunSystem : EntitySystem
@@ -221,5 +221,10 @@ public sealed class CMGunSystem : EntitySystem
 
             RemCompDeferred<ProjectileFixedDistanceComponent>(uid);
         }
+    }
+    
+    public void SetGunDamageModifier(GunDamageModifierComponent component, FixedPoint2 newModifier)
+    {
+        component.Multiplier = newModifier;
     }
 }

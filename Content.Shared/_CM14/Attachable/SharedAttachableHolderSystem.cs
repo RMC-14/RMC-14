@@ -7,7 +7,11 @@ using Content.Shared.Item;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Verbs;
+using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Whitelist;
+using Content.Shared.Wieldable;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 
@@ -17,7 +21,9 @@ namespace Content.Shared._CM14.Attachable;
 public abstract class SharedAttachableHolderSystem : EntitySystem
 {
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly SharedAttachableWeaponModifiersSystem _attachableWeaponsModifiersSystem = default!;
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
+    [Dependency] private readonly SharedGunSystem _gunSystem = default!;
     [Dependency] private readonly SharedItemSystem _itemSystem = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
@@ -29,6 +35,7 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<AttachableHolderComponent, GunRefreshModifiersEvent>(OnAttachableHolderRefreshModifiers, after: new[] { typeof(WieldableSystem) });
         SubscribeLocalEvent<AttachableHolderComponent, InteractUsingEvent>(OnAttachableHolderInteractUsing);
         SubscribeLocalEvent<AttachableHolderComponent, BoundUIOpenedEvent>(OnAttachableHolderUiOpened);
         SubscribeLocalEvent<AttachableHolderComponent, AttachableAttachDoAfterEvent>(OnAttachDoAfter);
@@ -38,6 +45,8 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, AttachableHolderAttachToSlotMessage>(OnAttachableHolderAttachToSlotMessage);
         SubscribeLocalEvent<AttachableHolderComponent, EntInsertedIntoContainerMessage>(OnAttached);
         SubscribeLocalEvent<AttachableHolderComponent, EntRemovedFromContainerMessage>(OnDetached);
+        SubscribeLocalEvent<AttachableHolderComponent, ItemWieldedEvent>(OnHolderWielded);
+        SubscribeLocalEvent<AttachableHolderComponent, ItemUnwieldedEvent>(OnHolderUnwielded);
     }
 
 
@@ -48,6 +57,32 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
             StartAttach(holder, args.Used, args.User);
             args.Handled = true;
         }
+    }
+
+    private void OnAttachableHolderRefreshModifiers(Entity<AttachableHolderComponent> holder, ref GunRefreshModifiersEvent args)
+    {
+        foreach(string slotID in holder.Comp.Slots.Keys)
+        {
+            if(!_containerSystem.TryGetContainer(holder, slotID, out BaseContainer? container) || container.Count <= 0)
+                continue;
+            
+            EntityUid attachableUid = container.ContainedEntities[0];
+            
+            if(!EntityManager.TryGetComponent<AttachableComponent>(attachableUid, out _))
+                continue;
+            
+            _attachableWeaponsModifiersSystem.ApplyWeaponModifiers(attachableUid, ref args);
+        }
+    }
+    
+    private void OnHolderWielded(Entity<AttachableHolderComponent> holder, ref ItemWieldedEvent args)
+    {
+        ApplyModifiers(holder, AttachableAlteredType.Wielded);
+    }
+    
+    private void OnHolderUnwielded(Entity<AttachableHolderComponent> holder, ref ItemUnwieldedEvent args)
+    {
+        ApplyModifiers(holder, AttachableAlteredType.Unwielded);
     }
     
     private void OnAttachableHolderDetachMessage(EntityUid holderUid, AttachableHolderComponent holderComponent, AttachableHolderDetachMessage args)
@@ -154,6 +189,11 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
         UpdateStripUi(holder.Owner, holder.Comp);
         
         RaiseLocalEvent(holder, new AttachableHolderAttachablesAlteredEvent(args.Entity, args.Container.ID, true));
+        RaiseLocalEvent(args.Entity, new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Attached));
+        
+        if(EntityManager.TryGetComponent<GunComponent>(holder.Owner, out GunComponent? gunComponent))
+            _gunSystem.RefreshModifiers((holder.Owner, gunComponent));
+        
         Dirty(holder);
     }
     
@@ -222,6 +262,11 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
         UpdateStripUi(holder.Owner, holder.Comp);
         
         RaiseLocalEvent(holder, new AttachableHolderAttachablesAlteredEvent(args.Entity, args.Container.ID, false));
+        RaiseLocalEvent(args.Entity, new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Detached));
+        
+        if(EntityManager.TryGetComponent<GunComponent>(holder.Owner, out GunComponent? gunComponent))
+            _gunSystem.RefreshModifiers((holder.Owner, gunComponent));
+        
         Dirty(holder);
     }
     
@@ -315,5 +360,21 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
     private List<string> GetSlots(Entity<AttachableHolderComponent> holder)
     {
         return new List<string>(holder.Comp.Slots.Keys);
+    }
+    
+    public void ApplyModifiers(Entity<AttachableHolderComponent> holder, AttachableAlteredType attachableAltered)
+    {
+        foreach(string slotID in holder.Comp.Slots.Keys)
+        {
+            if(!_containerSystem.TryGetContainer(holder, slotID, out BaseContainer? container) || container.Count <= 0)
+                continue;
+            
+            EntityUid attachableUid = container.ContainedEntities[0];
+            
+            if(!EntityManager.TryGetComponent<AttachableComponent>(attachableUid, out _))
+                continue;
+            
+            RaiseLocalEvent(attachableUid, new AttachableAlteredEvent(holder.Owner, attachableAltered));
+        }
     }
 }
