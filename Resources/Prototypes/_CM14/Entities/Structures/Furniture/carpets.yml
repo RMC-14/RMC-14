@@ -8,9 +8,9 @@
   - type: Sprite
     drawdepth: FloorTiles
   - type: Icon
-    state: full
+    state: single
   - type: IconSmooth
-    key: full
+    key: single
     base: carpet_
   - type: Tag
     tags: [ Carpet ]
@@ -32,6 +32,7 @@
   parent: CMCarpetBase
   id: CMCarpetPrison
   components:
+  - type: Clickable
   - type: Sprite
     sprite: /Textures/_CM-14/Structures/Furniture/Carpets/prison_carpet.rsi
   - type: Icon
