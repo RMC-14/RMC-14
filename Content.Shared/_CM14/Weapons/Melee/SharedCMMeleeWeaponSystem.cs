@@ -27,7 +27,7 @@ public abstract class SharedCMMeleeWeaponSystem : EntitySystem
 
     private void OnMeleeReceivedMultiplierDamageModify(Entity<MeleeReceivedMultiplierComponent> ent, ref DamageModifyEvent args)
     {
-        if (!_meleeWeaponQuery.HasComp(args.Origin))
+        if (!_meleeWeaponQuery.HasComp(args.Tool))
             return;
 
         if (_xenoQuery.HasComp(args.Origin))

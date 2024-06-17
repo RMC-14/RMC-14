@@ -136,6 +136,7 @@
     event: !type:XenoSlowingSpitActionEvent
     useDelay: 1.5
     range: 15
+    checkCanAccess: false
 
 - type: entity
   id: ActionXenoScatteredSpit
@@ -151,6 +152,7 @@
     event: !type:XenoScatteredSpitActionEvent
     useDelay: 8
     range: 15
+    checkCanAccess: false
 
 - type: entity
   id: ActionXenoParalyzingSlash

@@ -1312,5 +1312,26 @@
   id: 157
   time: '2024-06-16T09:42:06.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2495
+- author: DrSmugleaf
+  changes:
+  - message: Fixed resin structures taking more damage from guns than intended.
+    type: Fix
+  id: 158
+  time: '2024-06-16T19:55:06.0000000+00:00'
+  url: null
+- author: DrSmugleaf
+  changes:
+  - message: Fixed sentinel spits not shooting out when clicking on and behind walls.
+    type: Fix
+  id: 159
+  time: '2024-06-16T20:08:06.0000000+00:00'
+  url: null
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenos sometimes not healing while on weeds.
+    type: Fix
+  id: 160
+  time: '2024-06-16T21:50:06.0000000+00:00'
+  url: null
 Name: CM
 Order: -1
