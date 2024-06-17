@@ -34,6 +34,6 @@
   components:
   - type: Clickable
   - type: Sprite
-    sprite: /Textures/_CM-14/Structures/Furniture/Carpets/prison_carpet.rsi
+    sprite: Structures/Furniture/Carpets/prison_carpet.rsi
   - type: Icon
-    sprite: /Textures/_CM-14/Structures/Furniture/Carpets/prison_carpet.rsi
+    sprite: Structures/Furniture/Carpets/prison_carpet.rsi
