@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: BaseStorageItem
   id: CMPacketBase
@@ -6,7 +6,11 @@
   components:
   - type: Sprite
     sprite: _CM14/Objects/Storage/packets.rsi
-    state: general_packet
+    layers:
+    - state: general_packet
+    - state: general_packet_e
+      map: [ "emptyLayer" ]
+      visible: false
   - type: Item
     size: Normal
   - type: Storage
@@ -19,6 +23,13 @@
   - type: UseDelay
     delay: 0.5
   - type: FixedItemSizeStorage
+  - type: GenericVisualizer
+    visuals:
+      enum.SharedEmptyStorageVisuals.StorageState:
+        emptyLayer:
+          Empty: { visible: true }
+          NotEmpty: { visible: false }
+  - type: Appearance
 
 - type: entity
   parent: CMPacketBase
@@ -27,7 +38,11 @@
   description: It contains three HEDP high explosive grenades.
   components:
   - type: Sprite
-    state: hedp_packet
+    layers:
+    - state: hedp_packet
+    - state: hedp_packet_e
+      map: [ "emptyLayer" ]
+      visible: false
 
 - type: entity
   parent: CMPacketGrenadeHighExplosive
@@ -47,7 +62,11 @@
   description: It contains three HEFA grenades. Don't tell the HEFA order.
   components:
   - type: Sprite
-    state: hefa_packet
+    layers:
+    - state: hefa_packet
+    - state: hefa_packet_e
+      map: [ "emptyLayer" ]
+      visible: false
 
 - type: entity
   parent: CMPacketGrenadeFrag

@@ -39,23 +39,23 @@ namespace Content.Shared.Storage.EntitySystems;
 
 public abstract class SharedStorageSystem : EntitySystem
 {
-    [Dependency] private   readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] protected readonly IRobustRandom Random = default!;
     [Dependency] protected readonly ActionBlockerSystem ActionBlocker = default!;
-    [Dependency] private   readonly EntityLookupSystem _entityLookupSystem = default!;
-    [Dependency] private   readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookupSystem = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] protected readonly SharedAudioSystem Audio = default!;
-    [Dependency] private   readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private   readonly SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] protected readonly SharedEntityStorageSystem EntityStorage = default!;
-    [Dependency] private   readonly SharedInteractionSystem _interactionSystem = default!;
-    [Dependency] private   readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] protected readonly SharedItemSystem ItemSystem = default!;
-    [Dependency] private   readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private   readonly SharedHandsSystem _sharedHandsSystem = default!;
-    [Dependency] private   readonly SharedStackSystem _stack = default!;
+    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private readonly SharedHandsSystem _sharedHandsSystem = default!;
+    [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
-    [Dependency] private   readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] protected readonly UseDelaySystem UseDelay = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] protected readonly CMStorageSystem CMStorage = default!;
@@ -820,12 +820,14 @@ public abstract class SharedStorageSystem : EntitySystem
         var used = GetCumulativeItemAreas((uid, storage));
 
         var isOpen = _ui.IsUiOpen(entity.Owner, StorageComponent.StorageUiKey.Key);
+        var isEmpty = used == 0;
 
         _appearance.SetData(uid, StorageVisuals.StorageUsed, used, appearance);
         _appearance.SetData(uid, StorageVisuals.Capacity, capacity, appearance);
         _appearance.SetData(uid, StorageVisuals.Open, isOpen, appearance);
         _appearance.SetData(uid, SharedBagOpenVisuals.BagState, isOpen ? SharedBagState.Open : SharedBagState.Closed, appearance);
         _appearance.SetData(uid, StackVisuals.Hide, !isOpen, appearance);
+        _appearance.SetData(uid, SharedEmptyStorageVisuals.StorageState, isEmpty ? SharedStorageState.Empty : SharedStorageState.NotEmpty, appearance);
     }
 
     /// <summary>
