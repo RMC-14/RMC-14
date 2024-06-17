@@ -21,6 +21,9 @@
     bodyType: Static
   - type: Anchorable
   - type: Rotatable
+  - type: Construction
+    graph: CMSeat
+    node: chair
 
 - type: entity
   parent: CMChair
@@ -45,6 +48,9 @@
   - type: Physics
     bodyType: Static
   - type: Anchorable
+  - type: Construction
+    graph: CMSeat
+    node: chairComfy
 
 - type: entity
   parent: CMChairComfy
@@ -149,6 +155,9 @@
     state: officechair_dark
   - type: Rotatable
     rotateWhileAnchored: true
+  - type: Construction
+    graph: CMSeat
+    node: chairOfficeDark
 
 - type: entity
   parent: CMChairOfficeDark
@@ -157,6 +166,9 @@
   components:
   - type: Sprite
     state: officechair_white
+  - type: Construction
+    graph: CMSeat
+    node: chairOfficeWhite
 
 # Wooden chair
 - type: entity

@@ -47,6 +47,9 @@
       - !type:PlaySoundBehavior
         sound:
           collection: GlassBreak
+  - type: Construction
+    graph: CMLightFixture
+    node: tubeLight
 
 # Light Tube, Empty
 - type: entity
@@ -129,6 +132,9 @@
       On: bulb1
       Broken: bulb-broken
       Burned: bulb-burned
+  - type: Construction
+    graph: CMLightFixture
+    node: bulbLight
 
 # Light Bulb, Empty
 - type: entity
