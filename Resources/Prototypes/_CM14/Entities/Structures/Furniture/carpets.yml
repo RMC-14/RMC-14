@@ -1,6 +1,6 @@
 - type: entity
-  parent: BaseStructure
   id: CMCarpetBase
+  parent: BaseStructure
   name: carpet
   description: "Fancy walking surface."
   abstract: true
@@ -29,11 +29,19 @@
             acts: [ "Destruction" ]
 
 - type: entity
-  parent: CMCarpetBase
   id: CMCarpetPrison
+  parent: CarpetBase
   components:
   - type: Clickable
   - type: Sprite
     sprite: _CM-14/Structures/Furniture/Carpets/prison_carpet.rsi
   - type: Icon
     sprite: _CM-14/Structures/Furniture/Carpets/prison_carpet.rsi
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 10
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
