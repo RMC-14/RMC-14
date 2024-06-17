@@ -32,6 +32,8 @@
       collection: MaleCry
     Whistle:
       collection: Whistles
+    Warcry:
+      collection: CMMaleWarcry
 
 - type: emoteSounds
   id: CMFemaleHuman
@@ -66,4 +68,5 @@
       collection: FemaleCry
     Whistle:
       collection: Whistles
-
+    Warcry:
+      collection: CMFemaleWarcry
