@@ -1,47 +1,58 @@
 
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared._CM14.Medical.Prototypes;
+using Content.Shared._CM14.Medical;
+using Content.Shared.StatusIcon;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._CM14.Medical.Systems;
 
 public abstract class SharedHolocardSystem : EntitySystem
 {
-    [ValidatePrototypeId<HolocardPrototype>]
-    private const string None = "NoneHolocard";
-
-    [ValidatePrototypeId<HolocardPrototype>]
-    private const string Urgent = "UrgentHolocard";
-
-    [ValidatePrototypeId<HolocardPrototype>]
-    private const string Emergency = "EmergencyHolocard";
-
-    [ValidatePrototypeId<HolocardPrototype>]
-    private const string Xeno = "PermaHolocard";
-
-    [ValidatePrototypeId<HolocardPrototype>]
-    private const string Permadead = "XenoHolocard";
-    public bool TryGetHolocardPrototypeFromStatus(HolocardStaus holocardStaus, [NotNullWhen(true)] out string? protoId)
+    [NetSerializable, Serializable]
+    public enum HolocardChangeUIKey : byte
     {
-        protoId = null;
+        Key
+    }
+
+    [ValidatePrototypeId<StatusIconPrototype>]
+    private const string Urgent = "UrgentHolocardIcon";
+
+    [ValidatePrototypeId<StatusIconPrototype>]
+    private const string Emergency = "EmergencyHolocardIcon";
+
+    [ValidatePrototypeId<StatusIconPrototype>]
+    private const string Xeno = "PermaHolocardIcon";
+
+    [ValidatePrototypeId<StatusIconPrototype>]
+    private const string Permadead = "XenoHolocardIcon";
+    public bool TryGetHolocardData(HolocardStaus holocardStaus, [NotNullWhen(true)] out HolocardData? holocardData)
+    {
+        holocardData = new();
         switch (holocardStaus)
         {
             case HolocardStaus.None:
-                protoId = None;
+                holocardData.HolocardIconPrototype = null;
+                holocardData.Description = Loc.GetString("hc-none-description");
                 break;
             case HolocardStaus.Urgent:
-                protoId = Urgent;
+                holocardData.HolocardIconPrototype = Urgent;
+                holocardData.Description = Loc.GetString("hc-urgent-description");
                 break;
             case HolocardStaus.Emergency:
-                protoId = Emergency;
+                holocardData.HolocardIconPrototype = Emergency;
+                holocardData.Description = Loc.GetString("hc-emergency-description");
                 break;
             case HolocardStaus.Xeno:
-                protoId = Xeno;
+                holocardData.HolocardIconPrototype = Xeno;
+                holocardData.Description = Loc.GetString("hc-xeno-description");
                 break;
             case HolocardStaus.Permadead:
-                protoId = Permadead;
+                holocardData.HolocardIconPrototype = Permadead;
+                holocardData.Description = Loc.GetString("hc-permadead-description");
                 break;
             default:
+                holocardData = null;
                 return false;
         }
         return true;

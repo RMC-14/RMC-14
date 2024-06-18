@@ -4,6 +4,7 @@
   name: test dummy
   suffix: CM14
   components:
+  - type: HolocardState
   - type: Marine
   - type: Loadout
     prototypes: [ CMGearStaffOfficer ]

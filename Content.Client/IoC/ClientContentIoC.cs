@@ -19,7 +19,7 @@ using Content.Client.Lobby;
 using Content.Client.Replay;
 using Content.Shared.Administration.Managers;
 using Content.Shared.Players.PlayTimeTracking;
-using Content.Client._CM14.Medical.HUD.Systems;
+using Content.Client._CM14.Medical.HUD.Holocard;
 
 
 namespace Content.Client.IoC

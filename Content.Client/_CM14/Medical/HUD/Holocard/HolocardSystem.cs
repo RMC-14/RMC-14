@@ -1,7 +1,7 @@
 
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._CM14.Medical;
 using Content.Shared._CM14.Medical.Components;
-using Content.Shared._CM14.Medical.Prototypes;
 using Content.Shared._CM14.Medical.Systems;
 using Content.Shared.Damage;
 using Content.Shared.StatusIcon;
@@ -13,27 +13,23 @@ public sealed class HolocardSystem : SharedHolocardSystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
-    public IReadOnlyList<StatusIconData> GetIcons(Entity<HolocardComponent> entity)
+    public IReadOnlyList<StatusIconData> GetIcons(Entity<HolocardStateComponent> entity)
     {
         var icons = new List<StatusIconData>();
-        if (TryGetHolocardPrototypeFromStatus(entity.Comp.HolocardStaus, out var holocardProtoid))
+        if (TryGetHolocardData(entity.Comp.HolocardStaus, out var holocardData) && holocardData.HolocardIconPrototype is not null)
         {
-            var holocardPrototype = _prototype.Index<HolocardPrototype>(holocardProtoid);
-            if (holocardPrototype.HolocardIcon is StatusIconPrototype holocardIconPrototype)
-            {
-                icons.Add(holocardIconPrototype);
-            }
+            var holocardIconPrototype = _prototype.Index<StatusIconPrototype>(holocardData.HolocardIconPrototype);
+            icons.Add(holocardIconPrototype);
         }
         return icons;
     }
 
-    public bool TryGetDescription(Entity<HolocardComponent> entity, [NotNullWhen(true)] out string? description)
+    public bool TryGetDescription(Entity<HolocardStateComponent> entity, [NotNullWhen(true)] out string? description)
     {
         description = null;
-        if (TryGetHolocardPrototypeFromStatus(entity.Comp.HolocardStaus, out var holocardProtoid))
+        if (TryGetHolocardData(entity.Comp.HolocardStaus, out var holocardData))
         {
-            var holocardPrototype = _prototype.Index<HolocardPrototype>(holocardProtoid);
-            description = holocardPrototype.Description;
+            description = holocardData.Description;
             return true;
         }
         return false;

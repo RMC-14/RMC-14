@@ -1,8 +1,10 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Content.Client._CM14.Medical.HUD.Holocard;
 using Content.Client.Message;
 using Content.Shared._CM14.Medical.Components;
+using Content.Shared._CM14.Medical.Events;
 using Content.Shared._CM14.Medical.Scanner;
+using Content.Shared._CM14.Medical.Systems;
 using Content.Shared._CM14.Medical.Wounds;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
@@ -82,8 +84,10 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
                 var healthString = MathHelper.CloseTo(healthValue, 100) ? "100%" : $"{healthValue:F2}%";
                 _window.HealthBarText.Text = $"{healthString} healthy";
             }
+
             _window.ChangeHolocardButton.Text = "Change Holocard";
-            if (_entities.TryGetComponent(target, out HolocardComponent? holocardComponent) &&
+            _window.ChangeHolocardButton.OnPressed += OpenChangeHolocardUI;
+            if (_entities.TryGetComponent(target, out HolocardStateComponent? holocardComponent) &&
             _holocard.TryGetDescription((target, holocardComponent), out var description))
             {
                 _window.HolocardDescription.Text = description;
@@ -146,6 +150,11 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
         {
             _window.OpenCentered();
         }
+    }
+
+    private void OpenChangeHolocardUI(BaseButton.ButtonEventArgs obj)
+    {
+        //SendMessage(new OpenChangeHolocardUIEvent(_entities.GetNetEntity(this.Owner), _lastTarget));
     }
 
     private void AddGroup(Entity<DamageableComponent> damageable, RichTextLabel label, Color color, ProtoId<DamageGroupPrototype> group, string? labelStr = null)

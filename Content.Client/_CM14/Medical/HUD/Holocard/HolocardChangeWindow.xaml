@@ -1,0 +1,9 @@
+<DefaultWindow
+    SetSize="250 300"
+    Margin="4 0"
+    xmlns="https://spacestation14.io">
+    <BoxContainer Orientation="Vertical">
+        <LineEdit Name="SearchBar" PlaceHolder="{Loc 'admin-add-reagent-window-search-placeholder'}" HorizontalExpand="True"  Margin ="0 4"/>
+        <ItemList Name="ReagentList" SelectMode="Single" VerticalExpand="True"  Margin ="0 4"/>
+    </BoxContainer>
+</DefaultWindow>

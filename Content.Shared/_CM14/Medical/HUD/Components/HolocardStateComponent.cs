@@ -8,7 +8,7 @@ namespace Content.Shared._CM14.Medical.Components;
 ///
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class HolocardComponent : Component
+public sealed partial class HolocardStateComponent : Component
 {
     [DataField, AutoNetworkedField]
     public HolocardStaus HolocardStaus = HolocardStaus.Urgent;

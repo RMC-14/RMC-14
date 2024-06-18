@@ -71,7 +71,6 @@ public sealed class StatusIconSystem : SharedStatusIconSystem
     public bool IsVisible(Entity<MetaDataComponent> ent, StatusIconData data)
     {
         var viewer = _playerManager.LocalSession?.AttachedEntity;
-
         // Always show our icons to our entity
         if (viewer == ent.Owner)
             return true;

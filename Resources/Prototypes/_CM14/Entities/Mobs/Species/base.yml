@@ -60,6 +60,7 @@
     - FootstepSound
     - DoorBumpOpener
   - type: Marine
+  - type: HolocardState
   - type: Hunger
   - type: Thirst
     baseDecayRate: 0.01666666666

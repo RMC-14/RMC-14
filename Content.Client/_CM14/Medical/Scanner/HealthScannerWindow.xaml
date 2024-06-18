@@ -46,7 +46,7 @@
             </PanelContainer>
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
-            <Button Name="ChangeHolocardButton"  Access="Public" HorizontalExpand="True" Margin ="0 4" />
+            <Button Name="ChangeHolocardButton"  Access="Public" Margin ="0 4" />
             <Label Name="HolocardDescription" Access="Public" MinWidth="160"/>
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
