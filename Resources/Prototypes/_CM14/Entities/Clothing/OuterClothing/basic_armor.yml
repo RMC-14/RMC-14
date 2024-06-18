@@ -1,0 +1,39 @@
+﻿# riot
+- type: entity
+  parent: [ClothingOuterBaseMedium, AllowSuitStorageClothing]
+  id: CMArmorRiot
+  name: M5 riot control armor
+  description: A heavily modified suit of M2 MP Armor used to suppress riots from buckethead marines. Slows you down a lot.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/riot.rsi
+    layers:
+    - state: icon
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/riot.rsi
+    equipDelay: 2
+    unequipDelay: 2
+  - type: CMArmor
+    armor: 30
+    explosionArmor: 10
+  - type: Item
+    size: Huge
+  - type: ClothingSpeedModifier
+    walkModifier: 0.8
+    sprintModifier: 0.8
+  - type: CMHardArmor
+  
+- type: entity
+  parent: CMArmorRiot
+  id: CMArmorRiotOld
+  description: Barring the slightly off-color plates, it's preserved quite well.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/old_riot.rsi
+    layers:
+    - state: icon
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/OuterClothing/Armor/old_riot.rsi
+    equipDelay: 2
+    unequipDelay: 2
+    

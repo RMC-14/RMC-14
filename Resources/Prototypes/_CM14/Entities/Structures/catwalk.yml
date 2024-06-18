@@ -56,3 +56,10 @@
   components:
   - type: Sprite
     state: shiva_catwalk
+
+- type: entity
+  parent: CMCatwalk
+  id: CMCatwalkPrison
+  components:
+  - type: Sprite
+    state: prison_catwalk
