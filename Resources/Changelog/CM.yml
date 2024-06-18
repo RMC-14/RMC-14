@@ -1348,5 +1348,13 @@
   id: 162
   time: '2024-06-18T07:50:16.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2426
+- author: Vermidia
+  changes:
+  - message: The health analyzer now identifies chest-bursted marines as permanently
+      deceased
+    type: Add
+  id: 163
+  time: '2024-06-18T21:45:02.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2540
 Name: CM
 Order: -1
