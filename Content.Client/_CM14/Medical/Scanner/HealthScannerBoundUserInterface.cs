@@ -74,14 +74,21 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
                 _window.HealthBar.MinValue = 0;
                 _window.HealthBar.MaxValue = threshold.Value.Float();
 
-                var healthValue = damage.Float() / threshold.Value.Float() * 100f;
-                _window.HealthBar.Value = healthValue;
-
-                var healthString = MathHelper.CloseTo(healthValue, 100) ? "100%" : $"{healthValue:F2}%";
                 if (_entities.HasComponent<VictimBurstComponent>(target))
+                {
+                    _window.HealthBar.Value = 0;
                     _window.HealthBarText.Text = "Permanently deceased";
+                }
                 else
+                {
+
+                    var healthValue = damage.Float() / threshold.Value.Float() * 100f;
+                    _window.HealthBar.Value = healthValue;
+
+                    var healthString = MathHelper.CloseTo(healthValue, 100) ? "100%" : $"{healthValue:F2}%";
+
                     _window.HealthBarText.Text = $"{healthString} healthy";
+                }
             }
 
             _window.ChemicalsContainer.DisposeAllChildren();
