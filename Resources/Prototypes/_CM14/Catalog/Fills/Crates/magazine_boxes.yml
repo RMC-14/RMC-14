@@ -73,6 +73,15 @@
     contents:
     - id: CMBoxMagazineSMGM39AP
 
+- type: entity
+  parent: CMCrateAmmo
+  id: CMCrateBoxMagazineSMGM39Ext
+  name: Magazine box (M39, 12x regular mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBoxMagazineSMGM39Ext
+
 # m4a3
 - type: entity
   parent: CMCrateAmmo

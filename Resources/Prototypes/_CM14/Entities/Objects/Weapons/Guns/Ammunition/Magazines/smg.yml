@@ -55,7 +55,7 @@
 # M39 Extended
 - type: entity
   parent: CMMagazineSMGM39
-  id: CMMagazineExtendedM39
+  id: CMMagazineSMGM39Ext
   name: "M39 extended magazine (10x20mm)"
   components:
   - type: BallisticAmmoProvider

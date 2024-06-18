@@ -256,7 +256,7 @@
         amount: 3
     - name: Extended Ammunition
       entries:
-      - id: CMMagazineExtendedM39
+      - id: CMMagazineSMGM39Ext
         amount: 1
       - id: CMMagazineRifleM41AExt
         amount: 1
@@ -489,7 +489,7 @@
         points: 10
       - id: CMMagazineSMGM39AP
         points: 10
-      - id: CMMagazineExtendedM39
+      - id: CMMagazineSMGM39Ext
         points: 10
       - id: CMMagazineRifleM41AAP
         points: 10
@@ -733,7 +733,7 @@
         points: 6
       - id: CMMagazineSMGM39AP
         points: 6
-      - id: CMMagazineExtendedM39
+      - id: CMMagazineSMGM39Ext
         points: 6
       - id: CMMagazineRifleM41AAP
         points: 6
@@ -1107,7 +1107,7 @@
         points: 6
       - id: CMMagazineSMGM39AP
         points: 6
-      - id: CMMagazineExtendedM39
+      - id: CMMagazineSMGM39Ext
         points: 6
       - id: CMMagazineRifleM41AAP
         points: 6
@@ -1378,7 +1378,7 @@
         points: 6
       - id: CMMagazineSMGM39AP
         points: 6
-      - id: CMMagazineExtendedM39
+      - id: CMMagazineSMGM39Ext
         points: 6
       - id: CMMagazineRifleM41AAP
         points: 6
@@ -1787,7 +1787,7 @@
         points: 10
       - id: CMMagazineSMGM39AP
         points: 10
-      - id: CMMagazineExtendedM39
+      - id: CMMagazineSMGM39Ext
         points: 10
       - id: CMMagazineRifleM41AAP
         points: 10

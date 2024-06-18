@@ -139,6 +139,28 @@
         tags:
         - CMMagazineSMGM39AP
 
+- type: entity
+  parent: CMBoxMagazineBase
+  id: CMBoxMagazineSMGM39Ext
+  name: magazine box (Ext M39 x 12)
+  components:
+  - type: Sprite
+    layers:
+    #    - state: lid_type_ext
+    #    - state: base_m39_lid
+    - state: base_m39
+    - state: text_m39
+    - state: base_type_ext
+    - state: magaz_hv
+      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+  - type: CMItemSlots
+    startingItem: CMMagazineSMGM39Ext
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineSMGM39Ext
+
 # M4RA
 - type: entity
   parent: CMBoxMagazineBase
