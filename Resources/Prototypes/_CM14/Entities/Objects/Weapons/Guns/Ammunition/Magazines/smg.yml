@@ -53,6 +53,10 @@
       color: "#1F951F"
 
 # M39 Extended
+
+- type: Tag
+  id: CMMagazineSMGM39Ext
+
 - type: entity
   parent: CMMagazineSMGM39
   id: CMMagazineSMGM39Ext

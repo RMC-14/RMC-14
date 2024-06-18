@@ -2,7 +2,7 @@
 
 - type: entity
   parent: CMCrateAmmo
-  id: CMCrateShellsShotgunSlugs
+  id: CMCrateBoxShellsShotgunSlugs
   name: Shell box (100x slug shells)
   components:
   - type: StorageFill
@@ -12,7 +12,7 @@
 
 - type: entity
   parent: CMCrateAmmo
-  id: CMCrateShellsShotgunBuckshot
+  id: CMCrateBoxShellsShotgunBuckshot
   name: Shell box (100x buckshot shells)
   components:
   - type: StorageFill
@@ -22,7 +22,7 @@
 
 - type: entity
   parent: CMCrateAmmo
-  id: CMCrateShellsShotgunFlechette
+  id: CMCrateBoxShellsShotgunFlechette
   name: Shell box (100x flechette shells)
   components:
   - type: StorageFill

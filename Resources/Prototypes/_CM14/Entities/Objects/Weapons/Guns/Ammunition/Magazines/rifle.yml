@@ -177,6 +177,9 @@
       - CMCartridgeRifle10x24mmAP
     proto: CMCartridgeRifle10x24mmAP
 
+- type: Tag
+  id: CMMagazineRifleM4RAExt
+
 # M4RA Extended
 - type: entity
   parent: CMMagazineRifleM4RA
