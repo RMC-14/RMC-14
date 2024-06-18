@@ -37,6 +37,9 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Appearance
 
+- type: Tag
+  id: CMMagazineRifleM41AAP
+
 # m41a AP
 - type: entity
   parent: CMMagazineRifleM41A
@@ -44,6 +47,9 @@
   name: "M41A AP magazine (10x24mm)"
   suffix: AP
   components:
+  - type: Tag
+    tags:
+    - CMMagazineRifleM41AAP
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -59,16 +65,18 @@
     - state: ammo_band
       color: "#1F951F"
 
+- type: Tag
+  id: CMMagazineRifleM41AExt
+
 # m41a extended
 - type: entity
   parent: CMMagazineRifleM41A
-  id: CMMagazineExtendedRifleM41A
+  id: CMMagazineRifleM41AExt
   name: "M41A extended magazine (10x24mm)"
   components:
   - type: Tag
     tags:
-    - CMMagazineRifle
-    - CMMagazineRifleM41A
+    - CMMagazineRifleM41AExt
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -140,6 +148,9 @@
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m4ra.rsi
 
+- type: Tag
+  id: CMMagazineRifleM4RAAP
+
 # M4RA AP
 - type: entity
   parent: CMMagazineRifleM4RA
@@ -148,6 +159,9 @@
   description: "A magazine of armor-piercing 10x24mm rounds for use in the M4RA battle rifle."
   suffix: AP
   components:
+  - type: Tag
+    tags:
+    - CMMagazineRifleM4RAAP
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m4ra.rsi
     layers:
@@ -163,10 +177,13 @@
       - CMCartridgeRifle10x24mmAP
     proto: CMCartridgeRifle10x24mmAP
 
+- type: Tag
+  id: CMMagazineRifleM4RAExt
+
 # M4RA Extended
 - type: entity
   parent: CMMagazineRifleM4RA
-  id: CMMagazineRifleExtendedM4RA
+  id: CMMagazineRifleM4RAExt
   name: "M4RA extended magazine (10x24mm)"
   components:
   - type: BallisticAmmoProvider

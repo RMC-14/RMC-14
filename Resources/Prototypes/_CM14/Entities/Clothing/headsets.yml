@@ -251,7 +251,7 @@
       key_slots:
       - CMEncryptionKeyAlpha
       - CMEncryptionKeyCommon
-      - CMEncryptionKeySquadLeader
+      - CMEncryptionKeyCommand
 
 - type: entity
   parent: CMHeadsetAlpha
@@ -316,7 +316,7 @@
       key_slots:
       - CMEncryptionKeyBravo
       - CMEncryptionKeyCommon
-      - CMEncryptionKeySquadLeader
+      - CMEncryptionKeyCommand
 
 - type: entity
   parent: CMHeadsetBravo
@@ -381,7 +381,7 @@
       key_slots:
       - CMEncryptionKeyCharlie
       - CMEncryptionKeyCommon
-      - CMEncryptionKeySquadLeader
+      - CMEncryptionKeyCommand
 
 - type: entity
   parent: CMHeadsetCharlie
@@ -446,7 +446,7 @@
       key_slots:
       - CMEncryptionKeyDelta
       - CMEncryptionKeyCommon
-      - CMEncryptionKeySquadLeader
+      - CMEncryptionKeyCommand
 
 - type: entity
   parent: CMHeadsetDelta
@@ -511,7 +511,7 @@
       key_slots:
       - CMEncryptionKeyEcho
       - CMEncryptionKeyCommon
-      - CMEncryptionKeySquadLeader
+      - CMEncryptionKeyCommand
 
 - type: entity
   parent: CMHeadsetEcho
@@ -576,7 +576,7 @@
       key_slots:
       - CMEncryptionKeyFoxtrot
       - CMEncryptionKeyCommon
-      - CMEncryptionKeySquadLeader
+      - CMEncryptionKeyCommand
 
 - type: entity
   parent: CMHeadsetFoxtrot

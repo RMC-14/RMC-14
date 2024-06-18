@@ -40,7 +40,7 @@ public sealed class CMArmorSystem : EntitySystem
 
         SubscribeLocalEvent<CMArmorUserComponent, DamageModifyEvent>(OnUserDamageModify);
 
-        SubscribeLocalEvent<CMArmorPiercingComponent, CMGetArmorPiercingEvent>(OnPiercingGetArmor);
+        SubscribeLocalEvent<CMArmorPiercingComponent, CMGetArmorEvent>(OnPiercingGetArmor);
 
         SubscribeLocalEvent<InventoryComponent, CMGetArmorEvent>(_inventory.RelayEvent);
     }
@@ -105,9 +105,9 @@ public sealed class CMArmorSystem : EntitySystem
         ModifyDamage(ent, ref args);
     }
 
-    private void OnPiercingGetArmor(Entity<CMArmorPiercingComponent> piercing, ref CMGetArmorPiercingEvent args)
+    private void OnPiercingGetArmor(Entity<CMArmorPiercingComponent> piercing, ref CMGetArmorEvent args)
     {
-        args.Piercing += piercing.Comp.Amount;
+        args.Armor -= piercing.Comp.Amount;
     }
 
     private void ModifyDamage(EntityUid ent, ref DamageModifyEvent args)
@@ -117,12 +117,9 @@ public sealed class CMArmorSystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
 
         if (args.Tool != null)
-        {
-            var piercingEv = new CMGetArmorPiercingEvent();
-            RaiseLocalEvent(args.Tool.Value, ref piercingEv);
-            ev.Armor -= piercingEv.Piercing;
-        }
+            RaiseLocalEvent(args.Tool.Value, ref ev);
 
+        var armor = Math.Max(ev.Armor, 0);
         if (args.Origin is { } origin)
         {
             var originCoords = _transform.GetMapCoordinates(origin);
@@ -133,12 +130,11 @@ public sealed class CMArmorSystem : EntitySystem
                 var diff = (originCoords.Position - armorCoords.Position).ToWorldAngle().GetCardinalDir();
                 if (diff == _transform.GetWorldRotation(ent).GetCardinalDir())
                 {
-                    ev.Armor += ev.FrontalArmor;
+                    armor += ev.FrontalArmor;
                 }
             }
         }
 
-        var armor = Math.Max(ev.Armor, 0);
         if (armor <= 0)
             return;
 
