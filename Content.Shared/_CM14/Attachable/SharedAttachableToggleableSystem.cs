@@ -1,10 +1,6 @@
-using Content.Shared._CM14.Weapons.Ranged;
 using Content.Shared.DoAfter;
-using Content.Shared.Weapons.Ranged.Components;
-using Content.Shared.Weapons.Ranged.Events;
-using Content.Shared.Wieldable.Components;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Maths;
-using System.Diagnostics.CodeAnalysis;
 
 
 namespace Content.Shared._CM14.Attachable;
@@ -13,6 +9,7 @@ public sealed class SharedAttachableToggleableSystem : EntitySystem
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly SharedAttachableHolderSystem _attachableHolderSystem = default!;
+    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     
     
@@ -69,14 +66,13 @@ public sealed class SharedAttachableToggleableSystem : EntitySystem
         if(!_entityManager.TryGetComponent<AttachableHolderComponent>(args.Args.Used, out AttachableHolderComponent? holderComponent))
             return;
         
-        Logger.Log(LogLevel.Debug, $"DoAfter complete.");
         FinishToggle(attachable, (args.Args.Used.Value, holderComponent), args.SlotID);
+        _audioSystem.PlayPredicted(attachable.Comp.Active ? attachable.Comp.ActivateSound : attachable.Comp.DeactivateSound, attachable, args.User);
         args.Handled = true;
     }
     
     private void FinishToggle(Entity<AttachableToggleableComponent> attachable, Entity<AttachableHolderComponent> holder, string slotID)
     {
-        Logger.Log(LogLevel.Debug, $"Toggled.");
         attachable.Comp.Active = !attachable.Comp.Active;
         RaiseLocalEvent(holder.Owner,
             new AttachableHolderAttachablesAlteredEvent(attachable.Owner, slotID, attachable.Comp.Active ? AttachableAlteredType.Activated : AttachableAlteredType.Deactivated));

@@ -27,6 +27,9 @@ public sealed partial class AttachableToggleableComponent : Component
     [DataField, AutoNetworkedField]
     public bool AttachedOnly = false;
     
-    //[DataField, AutoNetworkedField]
-    //public SoundSpecifier? DetachSound = new SoundPathSpecifier("/Audio/_CM14/Attachable/attachment_remove.ogg");
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? ActivateSound = new SoundPathSpecifier("/Audio/_CM14/Attachable/attachment_activate.ogg");
+    
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? DeactivateSound = new SoundPathSpecifier("/Audio/_CM14/Attachable/attachment_deactivate.ogg");
 }

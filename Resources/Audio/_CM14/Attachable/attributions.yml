@@ -7,3 +7,13 @@
   license: "CC 3.0 BY-SA"
   copyright: "The CM-SS13 development team"
   source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/attachment_remove.ogg"
+
+- files: ["attachment_activate.ogg"]
+  license: "CC 3.0 BY-SA"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/gun_underbarrel_activate.ogg"
+
+- files: ["attachment_deactivate.ogg"]
+  license: "CC 3.0 BY-SA"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/gun_underbarrel_deactivate.ogg"
