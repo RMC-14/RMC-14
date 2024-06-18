@@ -12,7 +12,10 @@ public sealed partial class DeployableItemComponent : Component
     public DeployableItemPosition Position;
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 AlmostEmptyThreshold = FixedPoint2.New(0.4);
+    public FixedPoint2 AlmostEmptyThreshold = FixedPoint2.New(0.33);
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 HalfFullThreshold = FixedPoint2.New(0.66);
 }
 
 [Serializable, NetSerializable]
