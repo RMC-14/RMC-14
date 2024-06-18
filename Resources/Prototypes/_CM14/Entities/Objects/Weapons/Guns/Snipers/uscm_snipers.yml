@@ -47,3 +47,6 @@
   - type: Corrodible
     isCorrodible: false
   - type: GunIFF
+  - type: Scope
+    zoom: 1.25 # TODO CM14 2x and 4x zoom
+    requireWielding: true
