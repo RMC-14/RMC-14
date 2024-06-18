@@ -40,7 +40,7 @@ public sealed class CMArmorSystem : EntitySystem
 
         SubscribeLocalEvent<CMArmorUserComponent, DamageModifyEvent>(OnUserDamageModify);
 
-        SubscribeLocalEvent<CMArmorPiercingComponent, CMGetArmorEvent>(OnPiercingGetArmor);
+        SubscribeLocalEvent<CMArmorPiercingComponent, CMGetArmorPiercingEvent>(OnPiercingGetArmor);
 
         SubscribeLocalEvent<InventoryComponent, CMGetArmorEvent>(_inventory.RelayEvent);
     }
@@ -105,9 +105,9 @@ public sealed class CMArmorSystem : EntitySystem
         ModifyDamage(ent, ref args);
     }
 
-    private void OnPiercingGetArmor(Entity<CMArmorPiercingComponent> piercing, ref CMGetArmorEvent args)
+    private void OnPiercingGetArmor(Entity<CMArmorPiercingComponent> piercing, ref CMGetArmorPiercingEvent args)
     {
-        args.Armor -= piercing.Comp.Amount;
+        args.Piercing += piercing.Comp.Amount;
     }
 
     private void ModifyDamage(EntityUid ent, ref DamageModifyEvent args)
@@ -117,7 +117,11 @@ public sealed class CMArmorSystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
 
         if (args.Tool != null)
-            RaiseLocalEvent(args.Tool.Value, ref ev);
+        {
+            var piercingEv = new CMGetArmorPiercingEvent();
+            RaiseLocalEvent(args.Tool.Value, ref piercingEv);
+            ev.Armor -= piercingEv.Piercing;
+        }
 
         var armor = Math.Max(ev.Armor, 0);
         if (args.Origin is { } origin)
