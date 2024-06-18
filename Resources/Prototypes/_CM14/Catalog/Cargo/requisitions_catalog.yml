@@ -24,12 +24,12 @@
         crate: CMCrateBoxMagazinePistolM4A3
 #      - cost: 3000 # todo cm14 this crate is completed but needs mags
 #        crate: CMCrateBoxMagazinePistolM4A3AP
-#      - cost: 3000
-#        crate: CMCrateBoxShellsShotgunSlugs
-#      - cost: 3000
-#        crate: CMCrateBoxShellsShotgunBuckshot
-#      - cost: 3000
-#        crate: CMCrateBoxShellsShotgunFlechette
+      - cost: 3000
+        crate: CMCrateBoxShellsShotgunSlugs
+      - cost: 3000
+        crate: CMCrateBoxShellsShotgunBuckshot
+      - cost: 3000
+        crate: CMCrateBoxShellsShotgunFlechette
 #      - cost: 2000
 #        crate: CMCrateBoxMagazinePistol88m4AP
 #      - cost: 4000
