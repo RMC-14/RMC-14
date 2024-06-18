@@ -1300,7 +1300,8 @@
     type: Add
   - message: The death of every xeno is now announced to the hive.
     type: Add
-  - message: The Queen is now able to call down a dropship by interacting with a terminal near the landing zones.
+  - message: The Queen is now able to call down a dropship by interacting with a terminal
+      near the landing zones.
     type: Add
   id: 156
   time: '2024-06-16T06:56:15.0000000+00:00'
@@ -1333,5 +1334,12 @@
   id: 160
   time: '2024-06-16T21:50:06.0000000+00:00'
   url: null
+- author: Dorragon
+  changes:
+  - message: Riot armor
+    type: Add
+  id: 161
+  time: '2024-06-18T02:21:32.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2485
 Name: CM
 Order: -1
