@@ -8,3 +8,4 @@
       sprite: _CM14/Actions/scope_actions.rsi
       state: sniperscope
     event: !type:ToggleActionEvent
+    useDelay: 0.25

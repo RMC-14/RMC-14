@@ -1,6 +1,8 @@
 ﻿using Content.Shared.Camera;
+using Content.Shared.Mobs;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Events;
+using Content.Shared.Stunnable;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 
@@ -17,6 +19,9 @@ public partial class SharedScopeSystem
         SubscribeLocalEvent<ScopingComponent, EntityTerminatingEvent>(OnEntityTerminating);
         SubscribeLocalEvent<ScopingComponent, GetEyeOffsetEvent>(OnGetEyeOffset);
         SubscribeLocalEvent<ScopingComponent, PlayerDetachedEvent>(OnPlayerDetached);
+        SubscribeLocalEvent<ScopingComponent, KnockedDownEvent>(OnKnockedDown);
+        SubscribeLocalEvent<ScopingComponent, StunnedEvent>(OnStunned);
+        SubscribeLocalEvent<ScopingComponent, MobStateChangedEvent>(OnMobStateChanged);
     }
 
     private void OnMoveInput(Entity<ScopingComponent> ent, ref MoveInputEvent args)
@@ -57,14 +62,30 @@ public partial class SharedScopeSystem
         UserStopScoping(ent);
     }
 
-    private void UserStopScoping(Entity<ScopingComponent> ent)
+    private void OnKnockedDown(Entity<ScopingComponent> ent, ref KnockedDownEvent args)
     {
-        if (ent.Comp.Scope is not { } scope)
+        UserStopScoping(ent);
+    }
+
+    private void OnStunned(Entity<ScopingComponent> ent, ref StunnedEvent args)
+    {
+        UserStopScoping(ent);
+    }
+
+    private void OnMobStateChanged(Entity<ScopingComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState == MobState.Alive)
             return;
 
-        if (TryComp(scope, out ScopeComponent? scopeComponent) && scopeComponent.User == ent)
-            StopScoping((scope, scopeComponent));
+        UserStopScoping(ent);
+    }
 
+    private void UserStopScoping(Entity<ScopingComponent> ent)
+    {
+        var scope = ent.Comp.Scope;
         RemCompDeferred<ScopingComponent>(ent);
+
+        if (TryComp(scope, out ScopeComponent? scopeComponent) && scopeComponent.User == ent)
+            Unscope((scope.Value, scopeComponent));
     }
 }

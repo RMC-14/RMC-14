@@ -4,6 +4,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._CM14.Scoping;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(SharedScopeSystem))]
 public sealed partial class ScopeComponent : Component
 {
     /// <summary>
@@ -29,4 +30,10 @@ public sealed partial class ScopeComponent : Component
 
     [DataField, AutoNetworkedField]
     public Direction? ScopingDirection;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan Delay = TimeSpan.FromSeconds(1);
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? RelayEntity;
 }

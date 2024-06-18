@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using Content.Shared.Actions;
+using Content.Shared.DoAfter;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Movement.Pulling.Systems;
@@ -7,37 +8,43 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Containers;
-using Robust.Shared.Timing;
 
 namespace Content.Shared._CM14.Scoping;
 
-public sealed partial class SharedScopeSystem : EntitySystem
+public abstract partial class SharedScopeSystem : EntitySystem
 {
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedContentEyeSystem _contentEye = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
 
+    // TODO CM14 scoping making this too high causes pop-in
+    // wait until https://github.com/space-wizards/RobustToolbox/pull/5228 is fixed to increase it
+    // cm13 values: 11 tile offset, 24x24 view in 4x | 6 tile offset, normal view in 2x.
+    // right now we are doing a mix of both and only one setting.
     private const float SmallestViewpointSize = 15;
 
     public override void Initialize()
     {
         InitializeUser();
+
         SubscribeLocalEvent<ScopeComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<ScopeComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<ScopeComponent, ComponentRemove>(OnShutdown);
         SubscribeLocalEvent<ScopeComponent, EntityTerminatingEvent>(OnScopeEntityTerminating);
         SubscribeLocalEvent<ScopeComponent, GotUnequippedHandEvent>(OnUnequip);
         SubscribeLocalEvent<ScopeComponent, HandDeselectedEvent>(OnDeselectHand);
+        SubscribeLocalEvent<ScopeComponent, ItemUnwieldedEvent>(OnUnwielded);
         SubscribeLocalEvent<ScopeComponent, GetItemActionsEvent>(OnGetActions);
         SubscribeLocalEvent<ScopeComponent, ToggleActionEvent>(OnToggleAction);
         SubscribeLocalEvent<ScopeComponent, GunShotEvent>(OnGunShot);
+        SubscribeLocalEvent<ScopeComponent, ScopeDoAfterEvent>(OnScopeDoAfter);
     }
 
     private void OnMapInit(Entity<ScopeComponent> ent, ref MapInitEvent args)
@@ -46,28 +53,34 @@ public sealed partial class SharedScopeSystem : EntitySystem
         Dirty(ent.Owner, ent.Comp);
     }
 
-    private void OnShutdown(Entity<ScopeComponent> ent, ref ComponentShutdown args)
+    private void OnShutdown(Entity<ScopeComponent> ent, ref ComponentRemove args)
     {
         if (ent.Comp.User is not { } user)
             return;
 
-        StopScoping(ent);
+        Unscope(ent);
         _actionsSystem.RemoveProvidedActions(user, ent.Owner);
     }
 
     private void OnScopeEntityTerminating(Entity<ScopeComponent> ent, ref EntityTerminatingEvent args)
     {
-        StopScoping(ent);
+        Unscope(ent);
     }
 
     private void OnUnequip(Entity<ScopeComponent> ent, ref GotUnequippedHandEvent args)
     {
-        StopScoping(ent);
+        Unscope(ent);
     }
 
     private void OnDeselectHand(Entity<ScopeComponent> ent, ref HandDeselectedEvent args)
     {
-        StopScoping(ent);
+        Unscope(ent);
+    }
+
+    private void OnUnwielded(Entity<ScopeComponent> ent, ref ItemUnwieldedEvent args)
+    {
+        if (ent.Comp.RequireWielding)
+            Unscope(ent);
     }
 
     private void OnGetActions(Entity<ScopeComponent> ent, ref GetItemActionsEvent args)
@@ -80,59 +93,107 @@ public sealed partial class SharedScopeSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!_hands.TryGetActiveItem(args.Performer, out var heldItem) || heldItem != ent.Owner)
-        {
-            var msgError = Loc.GetString("cm-action-popup-scoping-user-must-hold", ("scope", ent.Owner));
-            _popup.PopupClient(msgError, args.Performer, args.Performer);
-            return;
-        }
-
-        if (_pulling.IsPulled(args.Performer))
-        {
-            var msgError = Loc.GetString("cm-action-popup-scoping-user-must-not-pulled", ("scope", ent.Owner));
-            _popup.PopupClient(msgError, args.Performer, args.Performer);
-            return;
-        }
-
-        if (_container.IsEntityInContainer(args.Performer))
-        {
-            var msgError = Loc.GetString("cm-action-popup-scoping-user-must-not-contained", ("scope", ent.Owner));
-            _popup.PopupClient(msgError, args.Performer, args.Performer);
-            return;
-        }
-
-        if (ent.Comp.RequireWielding &&
-            TryComp(ent, out WieldableComponent? wieldable) &&
-            !wieldable.Wielded)
-        {
-            var msgError = Loc.GetString("cm-action-popup-scoping-user-must-wield", ("scope", ent.Owner));
-            _popup.PopupClient(msgError, args.Performer, args.Performer);
-            return;
-        }
-
-        ToggleScoping(ent, args.Performer);
         args.Handled = true;
+        ToggleScoping(ent, args.Performer);
     }
 
     private void OnGunShot(Entity<ScopeComponent> ent, ref GunShotEvent args)
     {
         var dir = Transform(args.User).LocalRotation.GetCardinalDir();
         if (ent.Comp.ScopingDirection != dir)
-            StopScoping(ent);
+            Unscope(ent);
     }
 
-    private void StartScoping(Entity<ScopeComponent> scope, EntityUid user)
+    private void OnScopeDoAfter(Entity<ScopeComponent> ent, ref ScopeDoAfterEvent args)
     {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+
+        if (args.Cancelled)
+        {
+            DeleteRelay(ent, args.User);
+            return;
+        }
+
+        var user = args.User;
+        if (!CanScopePopup(ent, user))
+        {
+            DeleteRelay(ent, args.User);
+            return;
+        }
+
+        Scope(ent, user, args.Direction);
+    }
+
+    private bool CanScopePopup(Entity<ScopeComponent> scope, EntityUid user)
+    {
+        if (!_hands.TryGetActiveItem(user, out var heldItem) || heldItem != scope)
+        {
+            var msgError = Loc.GetString("cm-action-popup-scoping-user-must-hold", ("scope", scope.Owner));
+            _popup.PopupClient(msgError, user, user);
+            return false;
+        }
+
+        if (_pulling.IsPulled(user))
+        {
+            var msgError = Loc.GetString("cm-action-popup-scoping-user-must-not-pulled", ("scope", scope.Owner));
+            _popup.PopupClient(msgError, user, user);
+            return false;
+        }
+
+        if (_container.IsEntityInContainer(user))
+        {
+            var msgError = Loc.GetString("cm-action-popup-scoping-user-must-not-contained", ("scope", scope.Owner));
+            _popup.PopupClient(msgError, user, user);
+            return false;
+        }
+
+        if (scope.Comp.RequireWielding &&
+            TryComp(scope, out WieldableComponent? wieldable) &&
+            !wieldable.Wielded)
+        {
+            var msgError = Loc.GetString("cm-action-popup-scoping-user-must-wield", ("scope", scope.Owner));
+            _popup.PopupClient(msgError, user, user);
+            return false;
+        }
+
+        return true;
+    }
+
+    protected virtual Direction? StartScoping(Entity<ScopeComponent> scope, EntityUid user)
+    {
+        if (!CanScopePopup(scope, user))
+            return null;
+
         var xform = Transform(user);
         var cardinalDir = xform.LocalRotation.GetCardinalDir();
+        var ev = new ScopeDoAfterEvent(cardinalDir);
+        var doAfter = new DoAfterArgs(EntityManager, user, scope.Comp.Delay, ev, scope, null, scope)
+        {
+            BreakOnMove = true
+        };
+
+        if (_doAfter.TryStartDoAfter(doAfter))
+            return cardinalDir;
+
+        return null;
+    }
+
+    private void Scope(Entity<ScopeComponent> scope, EntityUid user, Direction direction)
+    {
+        if (TryComp(user, out ScopingComponent? scoping))
+            UserStopScoping((user, scoping));
+
         scope.Comp.User = user;
-        scope.Comp.ScopingDirection = cardinalDir;
+        scope.Comp.ScopingDirection = direction;
 
         Dirty(scope);
-        var scoping = EnsureComp<ScopingComponent>(user);
+        scoping = EnsureComp<ScopingComponent>(user);
         scoping.Scope = scope;
 
-        var targetOffset = cardinalDir.ToVec() * ((SmallestViewpointSize * scope.Comp.Zoom - 1) / 2);
+        var targetOffset = GetScopeOffset(direction, scope.Comp.Zoom);
         scoping.EyeOffset = targetOffset;
 
         var msgUser = Loc.GetString("cm-action-popup-scoping-user", ("scope", Name(scope.Owner)));
@@ -142,10 +203,10 @@ public sealed partial class SharedScopeSystem : EntitySystem
         _contentEye.SetZoom(user, Vector2.One * scope.Comp.Zoom, true);
     }
 
-    private void StopScoping(Entity<ScopeComponent> scope)
+    protected virtual bool Unscope(Entity<ScopeComponent> scope)
     {
         if (scope.Comp.User is not { } user)
-            return;
+            return false;
 
         RemCompDeferred<ScopingComponent>(user);
 
@@ -158,14 +219,30 @@ public sealed partial class SharedScopeSystem : EntitySystem
 
         _actionsSystem.SetToggled(scope.Comp.ScopingToggleActionEntity, false);
         _contentEye.ResetZoom(user);
-        _contentEye.SetZoom(user, Vector2.One * scope.Comp.Zoom, true);
+        return true;
     }
 
     private void ToggleScoping(Entity<ScopeComponent> scope, EntityUid user)
     {
         if (HasComp<ScopingComponent>(user))
-            StopScoping(scope);
-        else
-            StartScoping(scope, user);
+        {
+            Unscope(scope);
+
+            if (TryComp(user, out ScopingComponent? scoping))
+                UserStopScoping((user, scoping));
+
+            return;
+        }
+
+        StartScoping(scope, user);
+    }
+
+    protected Vector2 GetScopeOffset(Direction direction, float zoom)
+    {
+        return direction.ToVec() * ((SmallestViewpointSize * zoom - 1) / 2);
+    }
+
+    protected virtual void DeleteRelay(Entity<ScopeComponent> scope, EntityUid? user)
+    {
     }
 }
