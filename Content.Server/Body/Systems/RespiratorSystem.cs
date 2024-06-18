@@ -5,6 +5,7 @@ using Content.Server.Chat.Systems;
 using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Server.Chemistry.ReagentEffectConditions;
 using Content.Server.Chemistry.ReagentEffects;
+using Content.Shared._CM14.Medical.Stasis;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
 using Content.Shared.Body.Components;
@@ -34,6 +35,7 @@ public sealed class RespiratorSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _protoMan = default!;
     [Dependency] private readonly SolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private readonly CMStasisBagSystem _cmStasisBag = default!;
 
     private static readonly ProtoId<MetabolismGroupPrototype> GasId = new("Gas");
 
@@ -70,6 +72,9 @@ public sealed class RespiratorSystem : EntitySystem
 
             respirator.NextUpdate += respirator.UpdateInterval;
 
+            if (!_cmStasisBag.CanBodyMetabolize(uid))
+                continue;
+
             if (_mobState.IsDead(uid))
                 continue;
 
@@ -95,7 +100,7 @@ public sealed class RespiratorSystem : EntitySystem
                 if (_gameTiming.CurTime >= respirator.LastGaspEmoteTime + respirator.GaspEmoteCooldown)
                 {
                     respirator.LastGaspEmoteTime = _gameTiming.CurTime;
-                    _chat.TryEmoteWithChat(uid, respirator.GaspEmote, ignoreActionBlocker: true);
+                    _chat.TryEmoteWithChat(uid, respirator.GaspEmote, ChatTransmitRange.HideChat, ignoreActionBlocker: true);
                 }
 
                 TakeSuffocationDamage((uid, respirator));

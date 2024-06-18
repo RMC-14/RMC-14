@@ -19,6 +19,7 @@
       engineer: 3
       firearms: 1
       powerLoader: 2
+  hidden: true # TODO CM14
 
 - type: startingGear
   id: CMGearMaintTech

@@ -1173,9 +1173,16 @@
   - message: Fixed the sound that resin structures make when hit by a melee attack
       being incorrect.
     type: Fix
-  - message: Fixed being able to Transfer Plasma to a xeno caste that does not use any.
+  - message: Fixed being able to Transfer Plasma to a xeno caste that does not use
+      any.
     type: Fix
-  - message: Fixed being able to toggle iv mode, pump a shotgun and remove webbing while in crit and other states that normally block interactions.
+  - message: Fixed being able to toggle iv mode, pump a shotgun and remove webbing
+      while in crit and other states that normally block interactions.
+    type: Fix
+  - message: Rotting no longer deals blunt and cellular damage.
+    type: Fix
+  - message: Fix Dexalin and Dexalin Plus not healing airloss damage caused by low
+      blood.
     type: Fix
   - message: Water bottles can no longer be destroyed.
     type: Tweak
@@ -1215,5 +1222,131 @@
   id: 151
   time: '2024-06-15T23:05:52.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2480
+- author: Whisper
+  changes:
+  - message: Rules tweak; MP may not arrest outside of FOB and flagship unless in
+      a chase.
+    type: Tweak
+  - message: Rules tweak; MP may not arrest while hostile forces are on the flagship
+      unless the person is a threat.
+    type: Tweak
+  - message: Rules tweak; Doctors and MP may deploy to fob with permission from their
+      respective heads.
+    type: Tweak
+  - message: Rules tweak; CO and XO may deploy if they assign a new flagship commander.
+    type: Tweak
+  - message: New guidebook page on chain of command can be found in roleplay rules.
+    type: Add
+  id: 152
+  time: '2024-06-16T05:06:23.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2482
+- author: Whisper
+  changes:
+  - message: Made puddles smaller and spread less easily, requiring a lot more liquid
+      to do anything.
+    type: Tweak
+  id: 153
+  time: '2024-06-16T05:06:37.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2484
+- author: DrSmugleaf
+  changes:
+  - message: Fixed not being able to use blood packs manually without an IV.
+    type: Fix
+  id: 154
+  time: '2024-06-16T05:07:39.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2483
+- author: DrSmugleaf
+  changes:
+  - message: Fixed anyone that was ever put into a stasis bag being unable to process
+      medicine ever again.
+    type: Fix
+  - message: Fixed bleeding being much stronger than intended.
+    type: Fix
+  - message: Fixed humanoids only being able to metabolize a maximum of 3 different
+      medicines at once.
+    type: Fix
+  id: 155
+  time: '2024-06-16T05:18:15.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2487
+- author: DrSmugleaf
+  changes:
+  - message: Fixed counting hugged marines as alive towards round end conditions.
+    type: Fix
+  - message: Fixed weeds spreading onto water.
+    type: Fix
+  - message: Fixed xenos being able to build more than one hive core.
+    type: Fix
+  - message: Dropship hatches now automatically lock while travelling.
+    type: Fix
+  - message: Huggers no longer slowly die while picked up by another xeno.
+    type: Fix
+  - message: Fixed being able to build resin structures on top of opened resin doors.
+    type: Fix
+  - message: Fixed xenos not healing while in crit and on weeds.
+    type: Fix
+  - message: Xeno weeds now slow marines less.
+    type: Fix
+  - message: Fixed pheromones affecting dead xenos.
+    type: Fix
+  - message: The hugger's observer ghost now spawns on top of them after a successful
+      hug.
+    type: Fix
+  - message: Fixed role distribution being unequal between squads.
+    type: Fix
+  - message: Temporarily disabled role timers and roles without any content for the
+      playtest.
+    type: Tweak
+  - message: Added a marine radio announcement and sounds when a hijack happens.
+    type: Add
+  - message: The death of every xeno is now announced to the hive.
+    type: Add
+  - message: The Queen is now able to call down a dropship by interacting with a terminal
+      near the landing zones.
+    type: Add
+  id: 156
+  time: '2024-06-16T06:56:15.0000000+00:00'
+  url: null
+- author: Whisper
+  changes:
+  - message: Added unique xeno death emote
+    type: Add
+  id: 157
+  time: '2024-06-16T09:42:06.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2495
+- author: DrSmugleaf
+  changes:
+  - message: Fixed resin structures taking more damage from guns than intended.
+    type: Fix
+  id: 158
+  time: '2024-06-16T19:55:06.0000000+00:00'
+  url: null
+- author: DrSmugleaf
+  changes:
+  - message: Fixed sentinel spits not shooting out when clicking on and behind walls.
+    type: Fix
+  id: 159
+  time: '2024-06-16T20:08:06.0000000+00:00'
+  url: null
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenos sometimes not healing while on weeds.
+    type: Fix
+  id: 160
+  time: '2024-06-16T21:50:06.0000000+00:00'
+  url: null
+- author: Dorragon
+  changes:
+  - message: Riot armor
+    type: Add
+  id: 161
+  time: '2024-06-18T02:21:32.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2485
+- author: geraeumig
+  changes:
+  - message: Added ability to scope in with M42A rifle
+    type: Add
+  id: 162
+  time: '2024-06-18T07:50:16.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2426
 Name: CM
 Order: -1

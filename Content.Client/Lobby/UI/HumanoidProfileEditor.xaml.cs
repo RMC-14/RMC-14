@@ -373,6 +373,7 @@ namespace Content.Client.Lobby.UI
             {
                 PreferenceUnavailableButton.SelectId(args.Id);
                 Profile = Profile?.WithPreferenceUnavailable((PreferenceUnavailableMode) args.Id);
+                SetDirty();
             };
 
             _jobCategories = new Dictionary<string, BoxContainer>();
@@ -822,7 +823,7 @@ namespace Content.Client.Lobby.UI
                             ("departmentName", departmentName))
                     };
 
-                    category.Visible = department.IsCM;
+                    category.Visible = department.IsCM && !department.Hidden;
 
                     if (firstCategory && category.Visible)
                     {
@@ -950,7 +951,7 @@ namespace Content.Client.Lobby.UI
                             if (loadout == null)
                             {
                                 loadout = new RoleLoadout(roleLoadoutProto.ID);
-                                loadout.SetDefault(_prototypeManager);
+                                loadout.SetDefault(Profile, _playerManager.LocalSession, _prototypeManager);
                             }
 
                             OpenLoadout(job, loadout, roleLoadoutProto);

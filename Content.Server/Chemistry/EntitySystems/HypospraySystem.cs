@@ -166,7 +166,9 @@ public sealed class HypospraySystem : SharedHypospraySystem
         var doAfter = new HyposprayDoAfterEvent();
         var args = new DoAfterArgs(EntityManager, user, attemptEv.DoAfter, doAfter, entity, target, entity)
         {
-            BreakOnMove = true
+            BreakOnMove = true,
+            BreakOnHandChange = true,
+            NeedHand = true
         };
         _doAfter.TryStartDoAfter(args);
 

@@ -83,7 +83,7 @@
   components:
   - type: Sprite
     layers:
-    - state: burn
+    - state: ointment
     - state: kit_empty
       map: [ "openLayer" ]
       visible: false
@@ -170,12 +170,12 @@
   components:
   - type: Sprite
     layers:
-    - state: antitox
+    - state: antitoxin
     - state: kit_empty
       map: [ "openLayer" ]
       visible: false
   - type: Item
-    heldPrefix: antitox
+    heldPrefix: antitoxin
 
 - type: entity
   parent: CMToxinAidKit

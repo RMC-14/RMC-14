@@ -14,7 +14,7 @@ public sealed partial class XenoWeedsComponent : Component
     public float SpeedMultiplierXeno = 1.05f;
 
     [DataField]
-    public float SpeedMultiplierOutsider = 0.5f;
+    public float SpeedMultiplierOutsider = 0.6f; // TODO CM14
 
     [DataField, AutoNetworkedField]
     public bool IsSource = true;
