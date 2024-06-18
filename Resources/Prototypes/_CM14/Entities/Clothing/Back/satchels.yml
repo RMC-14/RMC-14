@@ -98,3 +98,23 @@
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Back/Satchels/Marines/techi.rsi
+
+- type: entity
+  parent: CMSatchel
+  id: CMSatchelGrenadeSpec
+  name: USCM IMP M63A1 grenade satchel
+  description: A satchel specially designed to maximize grenade carrying capacity while minimizing the risks of secondary ignition.
+  components:
+  # TODO ID locking feature + make lights green when unlocked.
+  - type: ExplosionResistance
+    damageCoefficient: 0
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Back/Backpacks/Marines/grenadepack.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,23,2 # Can hold 12 grenades of size 2x2. The bottom extra line is for future larger grenades of size 2x3.
+    whitelist:
+      tags:
+      - Grenade
+  - type: FixedItemSizeStorage

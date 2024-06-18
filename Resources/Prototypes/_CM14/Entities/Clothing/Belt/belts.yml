@@ -346,3 +346,37 @@
       - Flare
   - type: FixedItemSizeStorage
 
+
+- type: entity
+  parent: CMBeltMarine
+  id: CMBeltGrenade
+  name: M276 pattern M40 grenade rig
+  description: The M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This version is designed to carry up to 12 of the M40 series of grenades.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Belt/grenade.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Belt/grenade.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,11,2 # 12 slots
+    whitelist:
+      tags:
+      - Grenade
+  - type: FixedItemSizeStorage
+
+- type: entity
+  parent: CMBeltGrenade
+  id: CMBeltGrenadeLarge
+  name: M276 pattern M40 grenade rig Mk. II
+  description: The M276 Mk. II is an upgraded version of the M276 grenade rig, with more storage capacity.
+  components:
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,11,3 # 18 slots for now. If future large grenades are introduced this should be increased to be able to hold at least 18 of any grenade.
+    whitelist:
+      tags:
+      - Grenade
+  - type: FixedItemSizeStorage
