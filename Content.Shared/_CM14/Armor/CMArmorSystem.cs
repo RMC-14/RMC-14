@@ -123,7 +123,6 @@ public sealed class CMArmorSystem : EntitySystem
             ev.Armor -= piercingEv.Piercing;
         }
 
-        var armor = Math.Max(ev.Armor, 0);
         if (args.Origin is { } origin)
         {
             var originCoords = _transform.GetMapCoordinates(origin);
@@ -134,11 +133,12 @@ public sealed class CMArmorSystem : EntitySystem
                 var diff = (originCoords.Position - armorCoords.Position).ToWorldAngle().GetCardinalDir();
                 if (diff == _transform.GetWorldRotation(ent).GetCardinalDir())
                 {
-                    armor += ev.FrontalArmor;
+                    ev.Armor += ev.FrontalArmor;
                 }
             }
         }
 
+        var armor = Math.Max(ev.Armor, 0);
         if (armor <= 0)
             return;
 
