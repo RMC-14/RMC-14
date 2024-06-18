@@ -1,4 +1,5 @@
-﻿- type: entity
+﻿# m41a
+- type: entity
   parent: CMCrateAmmo
   id: CMCrateBoxMagazineRifleM41A
   name: Magazine box (M41A, 10x regular mags)
@@ -25,6 +26,7 @@
     contents:
     - id: CMBoxMagazineRifleM41AExt
 
+# m4ra
 - type: entity
   parent: CMCrateAmmo
   id: CMCrateBoxMagazineRifleM4RA
@@ -43,6 +45,7 @@
     contents:
     - id: CMBoxMagazineRifleM4RAAP
 
+# m39
 - type: entity
   parent: CMCrateAmmo
   id: CMCrateBoxMagazineSMGM39
@@ -61,6 +64,7 @@
     contents:
     - id: CMBoxMagazineSMGM39AP
 
+# m4a3
 - type: entity
   parent: CMCrateAmmo
   id: CMCrateBoxMagazinePistolM4A3
@@ -79,6 +83,7 @@
 #    contents:
 #    - id: CMBoxMagazinePistolM4A3AP
 
+# 88m4 / 88 mod 4
 - type: entity
   parent: CMCrateAmmo
   id: CMCrateBoxMagazinePistol88m4AP
@@ -88,6 +93,7 @@
     contents:
     - id: CMBoxMagazinePistol88m4AP
 
+# VP78
 - type: entity
   parent: CMCrateAmmo
   id: CMCrateBoxMagazinePistolVP78
