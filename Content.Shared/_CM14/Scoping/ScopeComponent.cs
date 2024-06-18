@@ -13,29 +13,20 @@ public sealed partial class ScopeComponent : Component
     public EntityUid? User;
 
     /// <summary>
-    /// Is it currently scoped in
-    /// </summary>
-    [ViewVariables, AutoNetworkedField]
-    public bool IsScoping;
-
-    /// <summary>
     /// Value to which zoom will be set when scoped in
     /// </summary>
     [DataField, AutoNetworkedField]
     public float Zoom = 1f;
 
-    /// <summary>
-    /// Helper entity, which is spawned to load far chunks
-    /// </summary>
-    [ViewVariables, AutoNetworkedField]
-    public EntityUid? PvsLoader;
-
-    [DataField]
-    public EntProtoId PvsLoaderProto = "CMScopingChunkLoader";
-
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntProtoId ScopingToggleAction = "CMActionToggleScope";
 
     [DataField, AutoNetworkedField]
     public EntityUid? ScopingToggleActionEntity;
+
+    [DataField, AutoNetworkedField]
+    public bool RequireWielding;
+
+    [DataField, AutoNetworkedField]
+    public Direction? ScopingDirection;
 }

@@ -1,62 +1,70 @@
-﻿using Content.Shared.Movement.Events;
+﻿using Content.Shared.Camera;
+using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Events;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 
 namespace Content.Shared._CM14.Scoping;
 
-public abstract partial class SharedScopeSystem
+public partial class SharedScopeSystem
 {
-    public void InitializeUser()
+    private void InitializeUser()
     {
-        SubscribeLocalEvent<ScopeUserComponent, MoveInputEvent>(OnMoveInput);
-        SubscribeLocalEvent<ScopeUserComponent, PullStartedMessage>(OnPullStarted);
-        SubscribeLocalEvent<ScopeUserComponent, EntParentChangedMessage>(OnParentChanged);
-        SubscribeLocalEvent<ScopeUserComponent, ContainerGettingInsertedAttemptEvent>(OnInsertAttempt);
-        SubscribeLocalEvent<ScopeUserComponent, EntityTerminatingEvent>(OnEntityTerminating);
-
-        SubscribeLocalEvent<ScopeUserComponent, PlayerDetachedEvent>(OnPlayerDetached);
+        SubscribeLocalEvent<ScopingComponent, MoveInputEvent>(OnMoveInput);
+        SubscribeLocalEvent<ScopingComponent, PullStartedMessage>(OnPullStarted);
+        SubscribeLocalEvent<ScopingComponent, EntParentChangedMessage>(OnParentChanged);
+        SubscribeLocalEvent<ScopingComponent, ContainerGettingInsertedAttemptEvent>(OnInsertAttempt);
+        SubscribeLocalEvent<ScopingComponent, EntityTerminatingEvent>(OnEntityTerminating);
+        SubscribeLocalEvent<ScopingComponent, GetEyeOffsetEvent>(OnGetEyeOffset);
+        SubscribeLocalEvent<ScopingComponent, PlayerDetachedEvent>(OnPlayerDetached);
     }
 
-    private void OnMoveInput(Entity<ScopeUserComponent> ent, ref MoveInputEvent args)
+    private void OnMoveInput(Entity<ScopingComponent> ent, ref MoveInputEvent args)
     {
-        UserStopScoping(ent.Owner, ent.Comp);
+        UserStopScoping(ent);
     }
 
-    private void OnPullStarted(Entity<ScopeUserComponent> ent, ref PullStartedMessage args)
+    private void OnPullStarted(Entity<ScopingComponent> ent, ref PullStartedMessage args)
     {
-        if(args.PulledUid != ent.Owner)
+        if (args.PulledUid != ent.Owner)
             return;
 
-        UserStopScoping(ent.Owner, ent.Comp);
+        UserStopScoping(ent);
     }
 
-    private void OnParentChanged(Entity<ScopeUserComponent> ent, ref EntParentChangedMessage args)
+    private void OnParentChanged(Entity<ScopingComponent> ent, ref EntParentChangedMessage args)
     {
-        UserStopScoping(ent.Owner, ent.Comp);
+        UserStopScoping(ent);
     }
 
-    private void OnInsertAttempt(Entity<ScopeUserComponent> ent, ref ContainerGettingInsertedAttemptEvent args)
+    private void OnInsertAttempt(Entity<ScopingComponent> ent, ref ContainerGettingInsertedAttemptEvent args)
     {
-        UserStopScoping(ent.Owner, ent.Comp);
+        UserStopScoping(ent);
     }
 
-    private void OnEntityTerminating(Entity<ScopeUserComponent> ent, ref EntityTerminatingEvent args)
+    private void OnEntityTerminating(Entity<ScopingComponent> ent, ref EntityTerminatingEvent args)
     {
-        if (!TryComp(ent.Comp.ScopingItem, out ScopeComponent? scopeComponent))
+        UserStopScoping(ent);
+    }
+
+    private void OnGetEyeOffset(Entity<ScopingComponent> ent, ref GetEyeOffsetEvent args)
+    {
+        args.Offset += ent.Comp.EyeOffset;
+    }
+
+    private void OnPlayerDetached(Entity<ScopingComponent> ent, ref PlayerDetachedEvent args)
+    {
+        UserStopScoping(ent);
+    }
+
+    private void UserStopScoping(Entity<ScopingComponent> ent)
+    {
+        if (ent.Comp.Scope is not { } scope)
             return;
 
-        StopScopingHelper(ent.Comp.ScopingItem.Value, scopeComponent, ent.Owner);
-    }
+        if (TryComp(scope, out ScopeComponent? scopeComponent) && scopeComponent.User == ent)
+            StopScoping((scope, scopeComponent));
 
-    private void OnPlayerDetached(Entity<ScopeUserComponent> ent, ref PlayerDetachedEvent args)
-    {
-        UserStopScoping(ent.Owner, ent.Comp);
-    }
-
-    private void UserStopScoping(EntityUid uid, ScopeUserComponent component)
-    {
-        if (TryComp(component.ScopingItem, out ScopeComponent? scopeComponent) && scopeComponent.IsScoping)
-            StopScoping(component.ScopingItem.Value, scopeComponent, uid);
+        RemCompDeferred<ScopingComponent>(ent);
     }
 }

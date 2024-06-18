@@ -4,6 +4,7 @@
   description: Scope in or out with your optics.
   components:
   - type: InstantAction
-    icon: { sprite: Objects/Weapons/Melee/shields.rsi, state: teleriot-icon }
-    iconOn: Objects/Weapons/Melee/shields.rsi/teleriot-on.png
+    icon:
+      sprite: _CM14/Actions/scope_actions.rsi
+      state: sniperscope
     event: !type:ToggleActionEvent
