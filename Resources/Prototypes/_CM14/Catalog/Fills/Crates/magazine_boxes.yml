@@ -79,15 +79,15 @@
 #    contents:
 #    - id: CMBoxMagazinePistolM4A3AP
 
-#- type: entity
-#  parent: CMCrateAmmo
-#  id: CMCrateBoxMagazinePistol88m4AP
-#  name: Magazine box (88 Mod 4 AP, 16x mags)
-#  components:
-#  - type: StorageFill
-#    contents:
-#    - id: CMBoxMagazinePistol88m4AP
-#
+- type: entity
+  parent: CMCrateAmmo
+  id: CMCrateBoxMagazinePistol88m4AP
+  name: Magazine box (88 Mod 4 AP, 16x mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBoxMagazinePistol88m4AP
+
 #- type: entity
 #  parent: CMCrateAmmo
 #  id: CMCrateBoxMagazinePistolVP78

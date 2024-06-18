@@ -30,8 +30,8 @@
         crate: CMCrateBoxShellsShotgunBuckshot
       - cost: 3000
         crate: CMCrateBoxShellsShotgunFlechette
-#      - cost: 2000
-#        crate: CMCrateBoxMagazinePistol88m4AP
+      - cost: 2000
+        crate: CMCrateBoxMagazinePistol88m4AP
 #      - cost: 4000
 #        crate: CMCrateBoxMagazinePistolVP78
 #    - name: Attachments
