@@ -10,7 +10,7 @@
         crate: CMCrateBoxMagazineRifleM41A
       - cost: 4000
         crate: CMCrateBoxMagazineRifleM41AAP
-      - cost: 4000
+      - cost: 3000
         crate: CMCrateBoxMagazineRifleM41AExt
       - cost: 2000
         crate: CMCrateBoxMagazineRifleM4RA
