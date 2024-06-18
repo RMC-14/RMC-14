@@ -363,7 +363,7 @@
         amount: 2
       - id: ClothingEyesHudMedical # TODO CM14
         amount: 3
-      - id: CMStasisBag
+      - id: CMStasisBagFolded
         amount: 2
       - id: CMSyringe
         amount: 7
@@ -432,6 +432,9 @@
     sprite: _CM14/Structures/Machines/VendingMachines/blood.rsi
   - type: VendingMachine
     pack: CMVendorBlood
+  - type: ApcPowerReceiver
+    needsPower: false # TODO CM14
+    powerLoad: 0
 
 - type: entity
   parent: CMVendor

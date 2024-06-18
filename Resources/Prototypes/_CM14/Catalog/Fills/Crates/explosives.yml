@@ -1,0 +1,19 @@
+﻿- type: entity
+  parent: CMCrateExplosives
+  id: CMCrateGrenadesHighExplosive
+  name: M40 HEDP blast grenades crate (x6)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPacketGrenadeHighExplosiveFilled
+      amount: 2
+
+- type: entity
+  parent: CMCrateExplosives
+  id: CMCrateGrenadesFrag
+  name: M40 HEFA fragmentation grenades crate (x6)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPacketGrenadeFragFilled
+      amount: 2

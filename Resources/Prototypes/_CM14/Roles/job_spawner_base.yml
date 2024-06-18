@@ -10,3 +10,10 @@
     spawn_type: Job
   - type: Sprite
     sprite: _CM14/Markers/cm_jobs.rsi
+
+- type: entity
+  id: CMGuidebookRole
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _CM14/Markers/cm_jobs.rsi

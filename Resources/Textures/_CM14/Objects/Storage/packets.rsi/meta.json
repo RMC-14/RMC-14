@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a1079f4912a96473dae51cceaa1d74eafb3939e2/icons/obj/items/weapons/grenade.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "general_packet"
+    },
+    {
+      "name": "general_packet_e"
+    },
+    {
+      "name": "hedp_packet"
+    },
+    {
+      "name": "hedp_packet_e"
+    },
+    {
+      "name": "hidp_packet"
+    },
+    {
+      "name": "hidp_packet_e"
+    },
+    {
+      "name": "hsdp_packet"
+    },
+    {
+      "name": "hsdp_packet_e"
+    },
+    {
+      "name": "hpdp_packet"
+    },
+    {
+      "name": "hpdp_packet_e"
+    },
+    {
+      "name": "hefa_packet"
+    },
+    {
+      "name": "hefa_packet_e"
+    },
+    {
+      "name": "agmf_packet"
+    },
+    {
+      "name": "agmf_packet_e"
+    },
+    {
+      "name": "agmi_packet"
+    },
+    {
+      "name": "agmi_packet_e"
+    },
+    {
+      "name": "agms_packet"
+    },
+    {
+      "name": "agms_packet_e"
+    },
+    {
+      "name": "m15_packet"
+    },
+    {
+      "name": "m15_packet_e"
+    },
+    {
+      "name": "baton_packet"
+    },
+    {
+      "name": "baton_packet_e"
+    },
+    {
+      "name": "hornet_packet"
+    },
+    {
+      "name": "hornet_packet_e"
+    },
+    {
+      "name": "starshell_packet"
+    },
+    {
+      "name": "starshell_packet_e"
+    }
+  ]
+}

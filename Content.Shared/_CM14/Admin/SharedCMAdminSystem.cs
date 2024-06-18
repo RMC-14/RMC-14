@@ -37,7 +37,7 @@ public abstract class SharedCMAdminSystem : EntitySystem
 
     protected bool CanUse(ICommonSession player)
     {
-        return _admin.HasAdminFlag(player, AdminFlags.Fun);
+        return _admin.HasAdminFlag(player, AdminFlags.Debug);
     }
 
     protected virtual void OpenBui(ICommonSession player, EntityUid target)

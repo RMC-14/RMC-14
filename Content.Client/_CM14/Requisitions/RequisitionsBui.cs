@@ -154,6 +154,10 @@ public sealed class RequisitionsBui : BoundUserInterface
         _window.CategoryView.OrdersContainer.DisposeAllChildren();
 
         var category = computer.Categories[categoryIndex];
+        var requestMsg = new FormattedMessage();
+        requestMsg.AddMarkupOrThrow($"[bold]Request from: {category.Name}[/bold]");
+        _window.CategoryView.RequestFromLabel.SetMessage(requestMsg);
+
         var state = State as RequisitionsBuiState;
         for (var i = 0; i < category.Entries.Count; i++)
         {

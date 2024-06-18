@@ -69,7 +69,7 @@
   - type: Appearance
   - type: WiresVisuals
   - type: ApcPowerReceiver
-    powerLoad: 20
+    powerLoad: 0 # TODO CM14 20
   - type: ExtensionCableReceiver
   - type: Electrified
     enabled: false

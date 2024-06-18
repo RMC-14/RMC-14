@@ -12,6 +12,7 @@
     - map: [ "enum.SolutionContainerLayers.Fill" ]
       state: sink-fill-1
       visible: false
+  - type: WallMount
 
 - type: entity
   parent: CMSinkEmpty

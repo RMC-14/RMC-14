@@ -330,7 +330,7 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
     private bool Sell(Entity<RequisitionsElevatorComponent> elevator)
     {
         var account = GetAccount();
-        var entities = _physics.GetContactingEntities(elevator);
+        var entities = _lookup.GetEntitiesIntersecting(elevator);
         var soldAny = false;
         foreach (var entity in entities)
         {
@@ -359,22 +359,31 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
     {
         base.Update(frameTime);
 
+        var time = _timing.CurTime;
         var updateUI = false;
         var accounts = EntityQueryEnumerator<RequisitionsAccountComponent>();
         while (accounts.MoveNext(out var uid, out var account))
         {
-            if (account.Started)
-                continue;
+            if (!account.Started)
+            {
+                account.Started = true;
+                var marines = Count<MarineComponent>();
+                account.Balance = marines * account.StartingDollarsPerMarine;
+                Dirty(uid, account);
 
-            account.Started = true;
-            var marines = Count<MarineComponent>();
-            account.Balance = marines * account.StartingDollarsPerMarine;
-            Dirty(uid, account);
+                updateUI = true;
+            }
 
-            updateUI = true;
+            if (time > account.NextGain)
+            {
+                account.NextGain = time + account.GainEvery;
+                account.Balance += account.Gain;
+                Dirty(uid, account);
+
+                updateUI = true;
+            }
         }
 
-        var time = _timing.CurTime;
         var elevators = EntityQueryEnumerator<RequisitionsElevatorComponent>();
         while (elevators.MoveNext(out var uid, out var elevator))
         {

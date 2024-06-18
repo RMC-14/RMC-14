@@ -44,15 +44,19 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
         var any = false;
         foreach (var neighbor in args.NeighborFreeTiles)
         {
+            var tileRef = neighbor.Tile;
             var gridOwner = neighbor.Grid.Owner;
-            var tile = neighbor.Tile.GridIndices;
-            var coords = _mapSystem.GridTileToLocal(gridOwner, neighbor.Grid, tile);
+            var tile = tileRef.GridIndices;
 
             var sourceLocal = _mapSystem.CoordinatesToTile(gridOwner, neighbor.Grid, transform.Coordinates);
             var diff = Vector2.Abs(tile - sourceLocal);
             if (diff.X >= ent.Comp.Range || diff.Y >= ent.Comp.Range)
                 break;
 
+            if (!CanPlaceWeeds((gridOwner, neighbor.Grid), tile))
+                continue;
+
+            var coords = _mapSystem.GridTileToLocal(gridOwner, neighbor.Grid, tile);
             var neighborWeeds = Spawn(prototype, coords);
             var neighborWeedsComp = EnsureComp<XenoWeedsComponent>(neighborWeeds);
 
@@ -69,7 +73,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
             for (var i = 0; i < 4; i++)
             {
                 var dir = (AtmosDirection) (1 << i);
-                var pos = neighbor.Tile.GridIndices.Offset(dir);
+                var pos = tile.Offset(dir);
                 if (!_mapSystem.TryGetTileRef(gridOwner, neighbor.Grid, pos, out var adjacent))
                     continue;
 
@@ -93,7 +97,5 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
         if (!any)
             RemCompDeferred<ActiveEdgeSpreaderComponent>(ent);
-
-        args.Updates--;
     }
 }

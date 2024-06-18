@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using Content.Client._CM14;
 using Content.Client.ContextMenu.UI;
 using Content.Client.Examine;
 using Content.Client.PDA;
@@ -13,7 +14,6 @@ using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
-using Robust.Shared.Graphics;
 using static Robust.Client.UserInterface.StylesheetHelpers;
 
 namespace Content.Client.Stylesheets
@@ -77,6 +77,8 @@ namespace Content.Client.Stylesheets
         public const string StyleClassLabelBig = "LabelBig";
         public const string StyleClassLabelSmall = "LabelSmall";
         public const string StyleClassButtonBig = "ButtonBig";
+
+        public const string StyleClassButtonHelp = "HelpButton";
 
         public const string StyleClassPopupMessageSmall = "PopupMessageSmall";
         public const string StyleClassPopupMessageSmallCaution = "PopupMessageSmallCaution";
@@ -1346,6 +1348,10 @@ namespace Content.Client.Stylesheets
                     new StyleProperty(PanelContainer.StylePropertyPanel, new StyleBoxFlat { BackgroundColor = NanoGold, ContentMarginBottomOverride = 2, ContentMarginLeftOverride = 2}),
                 }),
 
+                Element<TextureButton>()
+                    .Class(StyleClassButtonHelp)
+                    .Prop(TextureButton.StylePropertyTexture, resCache.GetTexture("/Textures/Interface/VerbIcons/information.svg.192dpi.png")),
+
                 // Labels ---
                 Element<Label>().Class(StyleClassLabelBig)
                     .Prop(Label.StylePropertyFont, notoSans16),
@@ -1599,6 +1605,11 @@ namespace Content.Client.Stylesheets
                     {
                         BackgroundColor = FancyTreeSelectedRowColor,
                     }),
+
+                new StyleRule(new SelectorElement(typeof(Label), new[] { CMStyleClasses.CMLabelAlignLeft }, null, null), new[]
+                {
+                    new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Left),
+                }),
             }).ToList());
         }
     }

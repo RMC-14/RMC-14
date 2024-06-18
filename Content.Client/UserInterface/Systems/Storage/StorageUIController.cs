@@ -29,7 +29,7 @@ public sealed class StorageUIController : UIController, IOnSystemChanged<Storage
     [Dependency] private readonly IUserInterfaceManager _ui = default!;
 
     private readonly DragDropHelper<ItemGridPiece> _menuDragHelper;
-    private StorageContainer? _container;
+    public StorageContainer? _container;
 
     private Vector2? _lastContainerPosition;
 
@@ -288,7 +288,7 @@ public sealed class StorageUIController : UIController, IOnSystemChanged<Storage
             var itemSys = _entity.System<SharedItemSystem>();
 
             var position = _container.GetMouseGridPieceLocation(dragEnt, dragLoc);
-            var itemBounding = itemSys.GetAdjustedItemShape(dragEnt, dragLoc).GetBoundingBox();
+            var itemBounding = itemSys.GetAdjustedItemShape((storageEnt, storageComp), dragEnt, dragLoc).GetBoundingBox();
             var gridBounding = storageComp.Grid.GetBoundingBox();
 
             // The extended bounding box for if this is out of the window is the grid bounding box dimensions combined
@@ -360,7 +360,11 @@ public sealed class StorageUIController : UIController, IOnSystemChanged<Storage
         if (DraggingGhost == null)
             return;
 
+        if (_container?.StorageEntity is not { } storageEnt|| !_entity.TryGetComponent<StorageComponent>(storageEnt, out var storageComp))
+            return;
+
         var offset = ItemGridPiece.GetCenterOffset(
+            (storageEnt, storageComp),
             (DraggingGhost.Entity, null),
             new ItemStorageLocation(DraggingRotation, Vector2i.Zero),
             _entity);

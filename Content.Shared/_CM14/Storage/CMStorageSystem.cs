@@ -67,7 +67,7 @@ public sealed class CMStorageSystem : EntitySystem
             Log.Warning($"Storage {ToPrettyString(storage)} can't fit {ToPrettyString(args.Item)}");
 
             var modified = false;
-            foreach (var shape in _item.GetItemShape((args.Item, args.Item)))
+            foreach (var shape in _item.GetItemShape((storage, args.Storage), (args.Item, args.Item)))
             {
                 var grid = args.Storage.Grid;
                 if (grid.Count == 0)
@@ -159,7 +159,7 @@ public sealed class CMStorageSystem : EntitySystem
     {
         if (!_skills.HasSkills(user, in storage.Comp.Skills))
         {
-            _popup.PopupClient("It must have some kind of ID lock...", storage, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("cm-storage-unskilled"), storage, user, PopupType.SmallCaution);
             return true;
         }
 

@@ -50,6 +50,14 @@
   id: CMBootsBlackFilled
   suffix: Filled
   components:
+  - type: ItemSlots
+    slots:
+      item:
+        name: cm-knife
+        whitelist:
+          tags:
+          - Knife
+        startingItem: CMM5Bayonet
   - type: CMItemSlots
     startingItem: CMM5Bayonet
 

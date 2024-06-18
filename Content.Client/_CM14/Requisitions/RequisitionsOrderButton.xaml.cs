@@ -12,11 +12,13 @@ public sealed partial class RequisitionsOrderButton : BoxContainer
     public RequisitionsOrderButton()
     {
         RobustXamlLoader.Load(this);
+        Button.AddStyleClass(CMStyleClasses.CMLabelAlignLeft);
+        Button.Label.AddStyleClass(CMStyleClasses.CMLabelAlignLeft);
     }
 
     public void SetCost(int cost)
     {
         Cost = cost;
-        CostLabel.Text = $"Cost: ${cost}";
+        CostLabel.Text = $"${cost}";
     }
 }

@@ -32,6 +32,7 @@
       police: 1
       powerLoader: 2
     - type: MarineOrders
+  hidden: true # TODO CM14
 
 - type: startingGear
   id: CMGearChiefEngineer

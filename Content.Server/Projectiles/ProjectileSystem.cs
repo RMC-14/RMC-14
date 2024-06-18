@@ -4,7 +4,6 @@ using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.Camera;
 using Content.Shared.Damage;
 using Content.Shared.Database;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Projectiles;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
@@ -44,6 +43,8 @@ public sealed class ProjectileSystem : SharedProjectileSystem
 
         var ev = new ProjectileHitEvent(component.Damage, target, component.Shooter);
         RaiseLocalEvent(uid, ref ev);
+        if (ev.Handled)
+            return;
 
         var otherName = ToPrettyString(target);
         var direction = args.OurBody.LinearVelocity.Normalized();

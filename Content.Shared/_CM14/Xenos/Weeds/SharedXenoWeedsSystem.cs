@@ -1,7 +1,9 @@
 ﻿using Content.Shared._CM14.Xenos.Rest;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
+using Content.Shared.Maps;
 using Content.Shared.Movement.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -16,6 +18,7 @@ namespace Content.Shared._CM14.Xenos.Weeds;
 
 public abstract class SharedXenoWeedsSystem : EntitySystem
 {
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
@@ -23,6 +26,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -31,12 +35,14 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     private EntityQuery<AffectableByWeedsComponent> _affectedQuery;
     private EntityQuery<XenoWeedsComponent> _weedsQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
+    private EntityQuery<BlockWeedsComponent> _blockWeedsQuery;
 
     public override void Initialize()
     {
         _affectedQuery = GetEntityQuery<AffectableByWeedsComponent>();
         _weedsQuery = GetEntityQuery<XenoWeedsComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
+        _blockWeedsQuery = GetEntityQuery<BlockWeedsComponent>();
 
         SubscribeLocalEvent<XenoWeedsComponent, AnchorStateChangedEvent>(OnWeedsAnchorChanged);
         SubscribeLocalEvent<XenoWeedsComponent, ComponentShutdown>(OnWeedsShutdown);
@@ -172,6 +178,27 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             _toUpdate.Add(other);
     }
 
+    public bool CanPlaceWeeds(Entity<MapGridComponent> grid, Vector2i tile)
+    {
+        if (!_mapSystem.TryGetTileRef(grid, grid, tile, out var tileRef))
+            return false;
+
+        if (_tile.TryGetDefinition(tileRef.Tile.TypeId, out var tileDef) &&
+            tileDef is ContentTileDefinition { WeedsSpreadable: false })
+        {
+            return false;
+        }
+
+        var targetTileAnchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, tile);
+        while (targetTileAnchored.MoveNext(out var uid))
+        {
+            if (_blockWeedsQuery.HasComp(uid))
+                return false;
+        }
+
+        return true;
+    }
+
     public override void Update(float frameTime)
     {
         foreach (var mobId in _toUpdate)
@@ -207,6 +234,12 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
                 continue;
 
             damage.DamageAt = time + damage.Every;
+
+            if (_container.TryGetContainingContainer((uid, null), out var container) &&
+                _xenoQuery.HasComp(container.Owner))
+            {
+                continue;
+            }
 
             if (!damage.RestingStopsDamage ||
                 !HasComp<XenoRestingComponent>(uid))

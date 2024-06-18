@@ -11,7 +11,7 @@
   parent: CMSheetGlassBase
   id: CMSheetGlass
   name: glass
-  description: A sheet of glass.
+  description: Glass is a non-crystalline solid, made out of silicate, the primary constituent of sand. It is valued for its transparency, albeit it is not too resistant to damage.
   suffix: "Full"
   components:
   - type: Material
@@ -99,7 +99,7 @@
   parent: CMSheetGlassBase
   id: CMSheetGlassPhoron
   name: phoron glass
-  description: A sheet of phoron glass.
+  description: Phoron glass is a silicate-phoron alloy turned into a non-crystalline solid. It is transparent just like glass, even if visibly tainted pink, and very resistant to damage and heat.
   suffix: Full
   components:
   - type: Material

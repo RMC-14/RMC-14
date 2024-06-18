@@ -1,18 +1,25 @@
 ﻿# Plasma
 cm-xeno-not-enough-plasma = You don't have enough plasma!
 
-# Costruction
+# Construction
 cm-xeno-choose-resin-structure = Choose Resin Structure
 cm-xeno-order-construction = Build Structure
 cm-xeno-too-close-to-other-node = This is too close to {THE($target)}!
 cm-xeno-requires-more-plasma = {THE($construction)} requires {$plasma} more plasma.
 cm-xeno-construction-plasma-left = A {$construction} construction is designated here. It requires [color=cyan]{$plasma}[/color] more plasma.
 cm-xeno-cant-reach-there = You can't reach there!
+cm-xeno-cant-build-in-self = You can't build structures that close!
+cm-xeno-unique-exists = There's already a {$choice} built!
 
 # Evolve
 cm-xeno-available-evolutions = Available Evolutions
 cm-xeno-evolution-start = You begin to twist and contort.
 cm-xeno-evolution-end = You emerge in a greater form from the husk of your old body. For the hive!
+cm-xeno-evolution-ready = Our carapace crackles and our tendons strengthen. We are ready to evolve!
+cm-xeno-evolution-failed-already-have = There already is a living {$prototype}!
+cm-xeno-evolution-failed-hive-shaken = The Hive is shaken by the death of the last Queen. We can't find the strength to evolve.
+cm-xeno-evolution-failed-cannot-support = The Hive cannot support this caste yet!
+cm-xeno-evolution-failed-hive-full = The hive cannot support another Tier {$tier}, wait for either more aliens to be born or someone to die.
 
 # Fortify
 cm-xeno-fortify-cant-headbutt = You can't headbutt while fortifying!
@@ -60,6 +67,8 @@ cm-xeno-toggle-crest-cant-tail-sweep = You can't tail sweep while your crest is 
 # Transfer Plasma
 cm-xeno-plasma-transferred-to-other = You have transferred {$plasma} plasma to {$target}. You now have {$total}
 cm-xeno-plasma-transferred-to-self = {$target} has transferred {$plasma} plasma to you. You now have {$total}
+cm-xeno-plasma-cannot-self = You can't transfer plasma to yourself!
+cm-xeno-plasma-other-max-zero = {$target} doesn't have any use for plasma!
 
 # Watch
 cm-xeno-watch = Watch Xeno

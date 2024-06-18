@@ -1,6 +1,6 @@
 ﻿- type: entity
   abstract: true
-  parent: CMBaseWall
+  parent: CMBaseWallInvincible
   id: CMBaseAlamoWall
   name: alamo wall
   components:

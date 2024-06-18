@@ -4,14 +4,12 @@ using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Serialization;
@@ -184,4 +182,4 @@ public record struct ProjectileReflectAttemptEvent(EntityUid ProjUid, Projectile
 /// Raised when a projectile hits an entity
 /// </summary>
 [ByRefEvent]
-public record struct ProjectileHitEvent(DamageSpecifier Damage, EntityUid Target, EntityUid? Shooter = null);
+public record struct ProjectileHitEvent(DamageSpecifier Damage, EntityUid Target, EntityUid? Shooter = null, bool Handled = false);

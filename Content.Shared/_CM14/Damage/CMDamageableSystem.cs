@@ -111,7 +111,7 @@ public sealed class CMDamageableSystem : EntitySystem
                 var type = _types[i];
                 var current = damageable.Comp.Damage.DamageDict[type];
 
-                var existingHeal = add ? damage.GetValueOrDefault(type) : -damage.GetValueOrDefault(type);
+                var existingHeal = add ? -damage.GetValueOrDefault(type) : damage.GetValueOrDefault(type);
                 left += existingHeal;
                 var toDamage = add
                     ? FixedPoint2.Min(existingHeal + left / (i + 1), current)

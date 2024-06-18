@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Prototypes;
+using static Robust.Client.UserInterface.Controls.LineEdit;
 
 namespace Content.Client._CM14.Xenos.Watch;
 
@@ -13,7 +14,7 @@ public sealed class XenoWatchBui : BoundUserInterface
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     [ViewVariables]
-    private XenoWatchWindow _window = default!;
+    private XenoWatchWindow? _window;
 
     private readonly SpriteSystem _sprite;
 
@@ -24,9 +25,7 @@ public sealed class XenoWatchBui : BoundUserInterface
 
     protected override void Open()
     {
-        _window = new XenoWatchWindow();
-        _window.OnClose += Close;
-        _window.OpenCentered();
+        EnsureWindow();
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -34,6 +33,7 @@ public sealed class XenoWatchBui : BoundUserInterface
         if (state is not XenoWatchBuiState s)
             return;
 
+        _window = EnsureWindow();
         _window.XenoContainer.DisposeAllChildren();
 
         foreach (var xeno in s.Xenos)
@@ -55,8 +55,36 @@ public sealed class XenoWatchBui : BoundUserInterface
 
     protected override void Dispose(bool disposing)
     {
-        // ReSharper disable once ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
         if (disposing)
             _window?.Dispose();
+    }
+
+    private XenoWatchWindow EnsureWindow()
+    {
+        if (_window != null)
+            return _window;
+
+        _window = new XenoWatchWindow();
+        _window.OnClose += Close;
+        _window.SearchBar.OnTextChanged += OnSearchBarChanged;
+        _window.OpenCentered();
+        return _window;
+    }
+
+    private void OnSearchBarChanged(LineEditEventArgs args)
+    {
+        if (_window is not { Disposed: false })
+            return;
+
+        foreach (var child in _window.XenoContainer.Children)
+        {
+            if (child is not XenoChoiceControl control)
+                continue;
+
+            if (string.IsNullOrWhiteSpace(args.Text))
+                control.Visible = true;
+            else
+                control.Visible = control.NameLabel.GetMessage()?.Contains(args.Text, StringComparison.OrdinalIgnoreCase) ?? false;
+        }
     }
 }

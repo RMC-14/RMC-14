@@ -16,6 +16,13 @@
   sprite: /Textures/_CM14/Tiles/almayer/default.png
 
 - type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelNoWeeds
+  name: tiles-cm-default-no-weeds
+  sprite: /Textures/_CM14/Tiles/almayer/default.png
+  weedsSpreadable: false
+
+- type: tile
   parent: CMTileBase
   id: CMFloorPlate
   name: tiles-cm-plate

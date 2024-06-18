@@ -47,8 +47,9 @@
     knockdownTime: 1
   - type: XenoHugger
   - type: Item
+    size: Invalid
   - type: WhitelistPickupBy
-    all:
+    whitelist:
       components:
       - Xeno
   - type: MovementSpeedModifier

@@ -191,7 +191,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         }
 
         var target = GetEntity(ev.Target);
-        if (target != null)
+        if (target != null && InRange(user, target.Value, component.Range, session))
         {
             var cmDisarmEvent = new CMDisarmEvent(user);
             RaiseLocalEvent(target.Value, ref cmDisarmEvent);

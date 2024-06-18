@@ -31,7 +31,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         if (!TryComp(args.Used, out CMRefillableSolutionComponent? refillable) ||
             !_whitelist.IsValid(ent.Comp.Whitelist, args.Used))
         {
-            _popup.PopupClient($"The {Name(ent)} cannot refill the {Name(args.Used)}.", args.User, args.User, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("cm-refillable-solution-cannot-refill", ("user", ent.Owner), ("target", args.Used)), args.User, args.User, PopupType.SmallCaution);
             return;
         }
 
@@ -41,7 +41,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         var solutionComp = solution.Value.Comp.Solution;
         if (solutionComp.AvailableVolume == FixedPoint2.Zero)
         {
-            _popup.PopupClient($"The {Name(args.Used)} is full!", args.User, args.User);
+            _popup.PopupClient(Loc.GetString("cm-refillable-solution-full", ("target", args.Used)), args.User, args.User);
             return;
         }
 
@@ -64,11 +64,11 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         if (anyRefilled)
         {
             Dirty(ent);
-            _popup.PopupClient($"The {Name(ent)} makes a whirring noise as it refills your {Name(args.Used)}.", args.User, args.User);
+            _popup.PopupClient(Loc.GetString("cm-refillable-solution-whirring-noise", ("user", ent.Owner), ("target", args.Used)), args.User, args.User);
         }
         else
         {
-            _popup.PopupClient($"The {Name(ent)} cannot refill the {Name(args.Used)}.", args.User, args.User, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("cm-refillable-solution-cannot-refill", ("user", ent.Owner), ("target", args.Used)), args.User, args.User, PopupType.SmallCaution);
         }
     }
 

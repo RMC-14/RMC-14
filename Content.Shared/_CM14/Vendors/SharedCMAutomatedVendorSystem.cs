@@ -5,6 +5,7 @@ using Content.Shared._CM14.Webbing;
 using Content.Shared.Access.Components;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Mind;
@@ -47,6 +48,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (args.Cancelled)
             return;
 
+        if (HasComp<BypassInteractionChecksComponent>(args.User))
+            return;
+
         if (TryComp(vendor, out AccessReaderComponent? reader) &&
             reader.Enabled &&
             reader.AccessLists.Count > 0)
@@ -57,7 +61,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                     TryComp(item, out IdCardOwnerComponent? owner) &&
                     owner.Id != args.User)
                 {
-                    _popup.PopupClient("Wrong ID card owner detected.", vendor, args.User);
+                    _popup.PopupClient(Loc.GetString("cm-vending-machine-wrong-card"), vendor, args.User);
                     args.Cancel();
                     return;
                 }
@@ -70,7 +74,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (!_mind.TryGetMind(args.User, out var mindId, out _) ||
             !_job.MindHasJobWithId(mindId, job.Id))
         {
-            _popup.PopupClient("Access denied.", vendor, args.User);
+            _popup.PopupClient(Loc.GetString("cm-vending-machine-access-denied"), vendor, args.User);
             args.Cancel();
         }
     }
@@ -173,17 +177,20 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         var min = comp.MinOffset;
         var max = comp.MaxOffset;
-        var offset = _random.NextVector2Box(min.X, min.Y, max.X, max.Y);
-        if (entity.TryGetComponent(out CMVendorBundleComponent? bundle, _compFactory))
+        for (var i = 0; i < entry.Spawn; i++)
         {
-            foreach (var bundled in bundle.Bundle)
+            var offset = _random.NextVector2Box(min.X, min.Y, max.X, max.Y);
+            if (entity.TryGetComponent(out CMVendorBundleComponent? bundle, _compFactory))
             {
-                Vend(vendor, actor, bundled, offset);
+                foreach (var bundled in bundle.Bundle)
+                {
+                    Vend(vendor, actor, bundled, offset);
+                }
             }
-        }
-        else
-        {
-            Vend(vendor, actor, entry.Id, offset);
+            else
+            {
+                Vend(vendor, actor, entry.Id, offset);
+            }
         }
 
         if (entity.TryGetComponent(out CMChangeUserOnVendComponent? change, _compFactory) &&

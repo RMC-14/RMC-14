@@ -3,3 +3,9 @@
   id: CMBaseWeaponGun
   components:
   - type: GunUnskilledPenalty
+  - type: Clothing
+    quickEquip: false
+  - type: GunSkilledRecoil
+    setRecoil: 0
+    skills:
+      firearms: 1

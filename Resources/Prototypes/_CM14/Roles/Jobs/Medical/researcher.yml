@@ -23,6 +23,7 @@
       medical: 3
       research: 1
       surgery: 2
+  hidden: true # TODO CM14
 
 - type: startingGear
   id: CMGearResearcher
@@ -37,7 +38,7 @@
   id: CMGearResearcherEquipped
   equipment:
     jumpsuit: CMJumpsuitResearch
-    back: CMSatchelMedical
+    back: CMSatchelMarine
     gloves: CMHandsLatex
     shoes: CMShoesLaceup
     id: CMIDCardResearcher

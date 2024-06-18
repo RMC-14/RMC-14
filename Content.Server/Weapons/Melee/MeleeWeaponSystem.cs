@@ -92,10 +92,13 @@ public sealed class MeleeWeaponSystem : SharedMeleeWeaponSystem
         }
 
         var target = GetEntity(ev.Target!.Value);
-        var cmDisarmEvent = new CMDisarmEvent(user);
-        RaiseLocalEvent(target, ref cmDisarmEvent);
-        if (cmDisarmEvent.Handled)
-            return true;
+        if (InRange(user, target, component.Range, session))
+        {
+            var cmDisarmEvent = new CMDisarmEvent(user);
+            RaiseLocalEvent(target, ref cmDisarmEvent);
+            if (cmDisarmEvent.Handled)
+                return true;
+        }
 
         if (_mobState.IsIncapacitated(target))
         {

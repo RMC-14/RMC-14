@@ -28,9 +28,9 @@ public sealed partial class RequisitionsRailingComponent : Component
     [DataField, AutoNetworkedField]
     public string Fixture = "fix1";
 
-    public object LowerAnimation = default!;
+    public object? LowerAnimation;
 
-    public object RaiseAnimation = default!;
+    public object? RaiseAnimation;
 }
 
 [Serializable, NetSerializable]

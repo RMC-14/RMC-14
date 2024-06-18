@@ -35,7 +35,6 @@
         Bloodloss: -1
     damageBleedModifiers: CMBloodlossHuman
   - type: Woundable
-  - type: Flashable
   - type: StatusEffects
     allowed:
     - Stun
@@ -53,6 +52,7 @@
     - Muted
     - Pacified
     - StaminaModifier
+    - Flashed
   - type: Blindable
   - type: Tag
     tags:
@@ -62,6 +62,7 @@
   - type: Marine
   - type: Hunger
   - type: Thirst
+    baseDecayRate: 0.01666666666
   - type: Body
     prototype: Human
     requiredLegs: 2
@@ -140,3 +141,8 @@
         Asphyxiation: -0.33
   - type: NoSlip
   - type: AffectableByWeeds
+  - type: UserIFF
+  - type: UserLimitHits
+  - type: MovementIgnoreGravity
+  - type: SlowOnPull
+    multiplier: 0.6

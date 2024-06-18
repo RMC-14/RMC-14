@@ -8,6 +8,7 @@
   id: StructuralXeno
   supportedGroups:
   - Brute
-  - Burn
   supportedTypes:
+  - Heat
+  - Shock
   - Structural

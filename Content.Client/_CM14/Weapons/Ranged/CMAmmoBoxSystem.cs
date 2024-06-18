@@ -38,6 +38,6 @@ public sealed class CMAmmoBoxSystem : EntitySystem
     private void UpdateAppearance(Entity<CMAmmoBoxComponent, SpriteComponent, AppearanceComponent> box)
     {
         _appearance.TryGetData(box, AmmoVisuals.AmmoCount, out int count, box);
-        box.Comp2.LayerSetVisible(box.Comp1, count > 0);
+        box.Comp2.LayerSetVisible(box.Comp1.AmmoLayer, count > 0);
     }
 }

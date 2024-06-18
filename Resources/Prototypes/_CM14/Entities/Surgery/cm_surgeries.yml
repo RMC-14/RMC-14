@@ -1,7 +1,7 @@
 ﻿- type: entity
   id: CMSurgeryBase
   categories:
-  - hideSpawnMenu
+  - HideSpawnMenu
 
 - type: entity
   parent: CMSurgeryBase

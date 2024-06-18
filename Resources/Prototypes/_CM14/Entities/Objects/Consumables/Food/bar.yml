@@ -21,7 +21,7 @@
 - type: entity
   parent: CMBarFoodBase
   id: CMUSCMProteinBar
-  name: USCM protein bar
+  name: stale USCM protein bar
   description: The most fake-looking protein bar you have ever laid eyes on, covered in a substitution chocolate. The powder used to make these is a substitute of a substitute of whey substitute.
   components:
   - type: Sprite

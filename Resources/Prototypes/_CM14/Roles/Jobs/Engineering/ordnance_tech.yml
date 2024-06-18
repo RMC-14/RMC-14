@@ -2,7 +2,7 @@
   id: CMOrdnanceTech
   parent: CMJobBase
   name: cm-job-name-ordnance-tech
-  description: cm-job-description-ordnance-Tech
+  description: cm-job-description-ordnance-tech
   playTimeTracker: CMJobOrdnanceTech
   requirements:
   - !type:TotalJobsTimeRequirement
@@ -22,6 +22,7 @@
       engineer: 3
       firearms: 1
       powerLoader: 2
+  hidden: true # TODO CM14
 
 - type: startingGear
   id: CMGearOrdnanceTech

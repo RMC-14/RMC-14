@@ -18,7 +18,7 @@
     sprite: _CM14/Objects/Consumable/Food/bar.rsi
   - type: Storage
     grid:
-    - 0,0,7,1
+    - 0,0,13,1
     maxItemSize: Small
     whitelist:
       components:
@@ -89,6 +89,7 @@
       orGroup: matchbook
     - id: CMKoorlanderMatchbook
       orGroup: matchbook
+  - type: FixedItemSizeStorage
 
 - type: entity
   abstract: true

@@ -2,14 +2,14 @@
   parent: BaseItem
   id: CMHealthAnalyzer
   name: HF2 health analyzer
-  description: A hand-held body scanner capable of distinguishing vital signs of the subject.
+  description: A hand-held body scanner able to distinguish vital signs of the subject. The front panel is able to provide the basic readout of the subject's status.
   suffix: CM14
   components:
   - type: Item
     size: Small
   - type: Tag
     tags:
-      - DiscreteHealthAnalyzer
+    - DiscreteHealthAnalyzer
   - type: Sprite
     sprite: _CM14/Objects/Medical/health_analyzer.rsi
     state: health

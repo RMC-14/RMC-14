@@ -5,3 +5,6 @@ grid_impulse = false
 
 [hub]
 tags = "lang:en,region:am_n_e,rp:med"
+
+[physics]
+maxlinvelocity = 41

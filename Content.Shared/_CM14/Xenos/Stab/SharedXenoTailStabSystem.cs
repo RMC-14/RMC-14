@@ -71,7 +71,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         var tailRange = stab.Comp.TailRange.Float();
         var box = new Box2(userCoords.Position.X - 0.10f, userCoords.Position.Y, userCoords.Position.X + 0.10f, userCoords.Position.Y + tailRange);
 
-        var matrix = _transform.GetInvWorldMatrix(transform).Transform(targetCoords.Position);
+        var matrix = Vector2.Transform(targetCoords.Position, _transform.GetInvWorldMatrix(transform));
         var rotation = _transform.GetWorldRotation(stab).RotateVec(-matrix).ToWorldAngle();
         var boxRotated = new Box2Rotated(box, rotation, userCoords.Position);
         LastTailAttack = boxRotated;

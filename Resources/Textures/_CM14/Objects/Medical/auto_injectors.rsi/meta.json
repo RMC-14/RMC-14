@@ -26,6 +26,15 @@
     {
       "name": "inhand-right",
       "directions": 4
+    },
+    {
+      "name": "tricord1"
+    },
+    {
+      "name": "tricord0"
+    },
+    {
+      "name": "tricord"
     }
   ]
 }

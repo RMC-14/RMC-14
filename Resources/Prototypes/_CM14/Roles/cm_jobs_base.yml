@@ -28,3 +28,25 @@
   - CMAccessXeno
   hasIcon: false
   hidden: true
+
+- type: entity
+  parent: MarkerBase
+  id: CMSpawnPointXeno
+  name: xeno spawn point
+  description: A CM14 spawner. Used for xenos.
+  components:
+  - type: XenoSpawnPoint
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: green
+
+- type: entity
+  parent: MarkerBase
+  id: CMSpawnPointXenoLeader
+  name: xeno leader spawn point
+  description: A CM14 spawner. Used for xenos Queens.
+  components:
+  - type: XenoLeaderSpawnPoint
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: green

@@ -7,6 +7,7 @@
     magState: mag
     steps: 2
     zeroVisible: false
+    zeroOnlyOnEmpty: true
   - type: Appearance
 
 - type: entity
@@ -59,6 +60,30 @@
   - type: MagazineVisuals
     magState: base_ap
 
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: CMMagazinePistolVP78
+  name: VP78 magazine (9mm)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - CMMagazinePistolVP78
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgePistol9mm
+    proto: CMCartridgePistol9mm
+    capacity: 18
+  - type: Sprite
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/vp78.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
 - type: Tag
   id: CMMagazinePistol
 
@@ -67,3 +92,6 @@
 
 - type: Tag
   id: CMMagazinePistol88m4AP
+
+- type: Tag
+  id: CMMagazinePistolVP78

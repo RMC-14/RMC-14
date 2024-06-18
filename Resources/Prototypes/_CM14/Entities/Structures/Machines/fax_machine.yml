@@ -1,0 +1,96 @@
+- type: entity
+  parent: FaxMachineBase
+  id: CMFax
+  name: fax machine
+  description: Liaison's best and only friend.
+  components:
+  - type: Sprite
+    sprite: _CM14/Structures/Machines/fax_machine.rsi
+    drawdepth: SmallObjects
+    layers:
+    - state: icon
+      map: [ "enum.FaxMachineVisuals.VisualState" ]
+  - type: Icon
+    sprite: _CM14/Structures/Machines/fax_machine.rsi
+    state: icon
+  - type: GenericVisualizer
+    visuals:
+      enum.FaxMachineVisuals.VisualState:
+        enum.FaxMachineVisuals.VisualState:
+          Printing: { state: printing }
+          Normal: {state: icon}
+
+- type: entity
+  parent: CMFax
+  id: CMFaxCMB
+  name: colonial marshal bureau fax machine
+  suffix: CMB
+  components:
+  - type: FaxMachine
+    name: "Colonial Marshal Bureau"
+    notifyAdmins: true
+
+- type: entity
+  parent: CMFax
+  id: CMFaxWY
+  name: weyland-yutani fax machine
+  suffix: WY
+  components:
+  - type: FaxMachine
+    name: "Weyland-Yutani"
+    notifyAdmins: true
+
+- type: entity
+  parent: CMFax
+  id: CMFaxHighCom
+  name: uscm high command fax machine
+  suffix: USCM HC
+  components:
+  - type: FaxMachine
+    name: "USCM High Command"
+    notifyAdmins: true
+
+- type: entity
+  parent: CMFax
+  id: CMFaxProvost
+  suffix: Provost
+  components:
+  - type: FaxMachine
+    name: "USCM Provost Office"
+    notifyAdmins: true
+
+- type: entity
+  parent: CMFax
+  id: CMFaxPress
+  suffix: Press
+  components:
+  - type: FaxMachine
+    name: "Various Press Organizations"
+    notifyAdmins: true
+
+- type: entity
+  parent: CMFax
+  id: CMFaxCLF
+  suffix: CLF
+  components:
+  - type: FaxMachine
+    name: "Colonial Liberation Front"
+    notifyAdmins: true
+
+- type: entity
+  parent: CMFax
+  id: CMFaxUPP
+  suffix: UPP
+  components:
+  - type: FaxMachine
+    name: "Union of Progressive People"
+    notifyAdmins: true
+
+- type: entity
+  parent: CMFax
+  id: CMFaxTWE
+  suffix: TWE
+  components:
+  - type: FaxMachine
+    name: "Three World Empire"
+    notifyAdmins: true
