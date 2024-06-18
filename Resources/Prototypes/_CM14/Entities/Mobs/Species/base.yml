@@ -106,6 +106,8 @@
         type: StrippableBoundUserInterface
       enum.CMSurgeryUIKey.Key:
         type: CMSurgeryBui
+      enum.HolocardChangeUIKey.Key:
+        type: HolocardChangeBoundUserInterface
   - type: Huggable
   - type: Tackleable
   - type: Tackle
