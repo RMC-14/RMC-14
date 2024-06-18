@@ -249,3 +249,25 @@
       whitelist:
         tags:
         - CMMagazinePistol88m4AP
+
+- type: entity
+  parent: CMBoxMagazineBase
+  id:  CMBoxMagazinePistolVP78
+  name: magazine box (VP78 x 16)
+  components:
+  - type: Sprite
+    layers:
+    #    - state: lid_type_reg
+    #    - state: base_vp78_lid
+    - state: base_vp78
+    - state: text_vp78
+    - state: base_type_reg
+    - state: magaz_reg
+      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+  - type: CMItemSlots
+    startingItem: CMMagazinePistolVP78
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - CMMagazinePistolVP78

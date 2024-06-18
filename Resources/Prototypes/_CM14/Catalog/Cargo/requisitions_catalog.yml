@@ -32,8 +32,8 @@
         crate: CMCrateBoxShellsShotgunFlechette
       - cost: 2000
         crate: CMCrateBoxMagazinePistol88m4AP
-#      - cost: 4000
-#        crate: CMCrateBoxMagazinePistolVP78
+      - cost: 4000
+        crate: CMCrateBoxMagazinePistolVP78
 #    - name: Attachments
 #      entries: [ ] # TODO CM14
 #      - cost: 3000
