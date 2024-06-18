@@ -1,7 +1,8 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Content.Client.Message;
 using Content.Shared._CM14.Medical.Scanner;
 using Content.Shared._CM14.Medical.Wounds;
+using Content.Shared._CM14.Xenos.Hugger;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -77,7 +78,10 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
                 _window.HealthBar.Value = healthValue;
 
                 var healthString = MathHelper.CloseTo(healthValue, 100) ? "100%" : $"{healthValue:F2}%";
-                _window.HealthBarText.Text = $"{healthString} healthy";
+                if (_entities.HasComponent<VictimBurstComponent>(target))
+                    _window.HealthBarText.Text = "Permanently deceased";
+                else
+                    _window.HealthBarText.Text = $"{healthString} healthy";
             }
 
             _window.ChemicalsContainer.DisposeAllChildren();
