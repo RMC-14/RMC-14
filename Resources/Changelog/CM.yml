@@ -1356,5 +1356,15 @@
   id: 163
   time: '2024-06-18T21:45:02.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2540
+- author: Nairodian
+  changes:
+  - message: Added the ability to deconstruct and make; chairs, fences, and light
+      fixtures.
+    type: Add
+  - message: Removed deconstruction for racks and crates.
+    type: Remove
+  id: 164
+  time: '2024-06-18T23:44:23.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2531
 Name: CM
 Order: -1
