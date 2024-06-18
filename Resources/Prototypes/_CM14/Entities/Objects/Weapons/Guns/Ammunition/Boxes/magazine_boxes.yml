@@ -1,4 +1,5 @@
-﻿- type: entity
+﻿# TODO cm14 all of these need cm13 mechanics for placing and taking
+- type: entity
   abstract: true
   parent: BaseItem
   id: CMBoxMagazineBase # todo cm14 all inheritors of this should have updating visuals.
@@ -34,12 +35,12 @@
   components:
   - type: Sprite
     layers:
-  #    - state: lid_type_reg
-  #    - state: base_m41_lid
-    - state: base_m41
-    - state: magaz_reg
-    - state: text_m41
-    - state: base_type_reg
+  #    - state: lid_type_reg # lid stripe,ends in the type of ammo used
+  #    - state: base_m41_lid # matches the base box
+    - state: base_m41 # icon_state = base color of box
+    - state: magaz_reg # overlay_content = sprite of mags
+    - state: text_m41 # overlay_gun_type = text overlay
+    - state: base_type_reg # overlay_ammo_type = box stripe
       map: [ "enum.CMAmmoBoxLayers.Ammo" ]
   - type: CMItemSlots
     startingItem: CMMagazineRifleM41A
@@ -57,7 +58,7 @@
   - type: Sprite
     layers:
     #    - state: lid_type_ap
-    #    - state: base_m41
+    #    - state: base_m41_lid
     - state: base_m41
     - state: magaz_ap
     - state: text_m41
@@ -79,7 +80,7 @@
   - type: Sprite
     layers:
     #    - state: lid_type_ext
-    #    - state: base_m41
+    #    - state: base_m41_lid
     - state: base_m41
     - state: magaz_reg
     - state: text_m41
@@ -102,7 +103,7 @@
   - type: Sprite
     layers:
     #    - state: lid_type_ext
-    #    - state: base_m41
+    #    - state: base_m39_lid
     - state: base_m39
     - state: text_m39
     - state: base_type_reg
@@ -124,7 +125,7 @@
   - type: Sprite
     layers:
     #    - state: lid_type_ext
-    #    - state: base_m41
+    #    - state: base_m39_lid
     - state: base_m39
     - state: text_m39
     - state: base_type_ap
@@ -147,7 +148,7 @@
   - type: Sprite
     layers:
     #    - state: lid_type_ext
-    #    - state: base_m41
+    #    - state: base_m4ra_lid
     - state: base_m4ra
     - state: text_m4ra
     - state: base_type_reg
@@ -168,8 +169,8 @@
   components:
   - type: Sprite
     layers:
-    #    - state: lid_type_ext
-    #    - state: base_m41
+    #    - state: lid_type_ap
+    #    - state: base_m4ra_lid
     - state: base_m4ra
     - state: text_m4ra
     - state: base_type_ap
@@ -182,3 +183,47 @@
       whitelist:
         tags:
         - CMMagazineRifleM4RAAP
+
+- type: entity
+  parent: CMBoxMagazineBase
+  id: CMBoxMagazinePistolM4A3
+  name: magazine box (M4A3 x 16)
+  components:
+  - type: Sprite
+    layers:
+    #    - state: lid_type_reg
+    #    - state: base_m4a3_lid
+    - state: base_m4a3
+    - state: text_m4a3
+    - state: base_type_reg
+    - state: magaz_reg
+      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+  - type: CMItemSlots
+    startingItem: CMMagazinePistolM4A3
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - CMMagazinePistolM4A3
+
+#- type: entity # todo cm14 this box is done but needs mags made
+#  parent: CMBoxMagazineBase
+#  id: CMBoxMagazinePistolM4A3AP
+#  name: magazine box (AP M4A3 x 16)
+#  components:
+#  - type: Sprite
+#    layers:
+#    #    - state: lid_type_ap
+#    #    - state: base_m4a3_lid
+#    - state: base_m4a3
+#    - state: text_m4a3
+#    - state: base_type_ap
+#    - state: magaz_ap
+#      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+#  - type: CMItemSlots
+#    startingItem: CMMagazinePistolM4A3AP
+#    count: 16
+#    slot:
+#      whitelist:
+#        tags:
+#        - CMMagazinePistolM4A3AP
