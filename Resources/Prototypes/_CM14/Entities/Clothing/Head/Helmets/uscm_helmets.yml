@@ -149,12 +149,15 @@
   parent: CMArmorHelmetM3Scout
   id: CMArmorHelmetM3G4
   name: M3-G4 helmet
-  description: Pairs with the M3-G4 heavy grenadier plating. A distant cousin of the experimental B18 defensive helmet. As such, it also resists some facehugger latching attempts.
+  description: Pairs with the M3-G4 heavy grenadier plating. A distant cousin of the experimental B18 defensive helmet. # As such, it also resists some facehugger latching attempts.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Head/Helmets/m3/g4.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Head/Helmets/m3/g4.rsi
+  - type: CMArmor
+    armor: 25
+    explosionArmor: 50
 
 # m35
 - type: entity

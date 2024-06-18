@@ -97,3 +97,21 @@
   - type: Fiber
     fiberMaterial: fibers-durathread
     fiberColor: fibers-brown
+
+- type: entity
+  parent: CMHandsBlackMarine
+  id: CMHandsM3G4
+  name: M3-G4 grenadier gloves
+  description: A pair of plated, but nimble, gloves.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Hands/Gloves/grenadier.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Hands/Gloves/grenadier.rsi
+  - type: Fiber
+    fiberMaterial: fibers-leather
+    fiberColor: fibers-black
+  - type: FingerprintMask
+  - type: CMArmor
+    armor: 40
+    explosionArmor: 50
