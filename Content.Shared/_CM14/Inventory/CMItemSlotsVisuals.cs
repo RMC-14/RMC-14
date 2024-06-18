@@ -3,9 +3,11 @@
 namespace Content.Shared._CM14.Inventory;
 
 [Serializable, NetSerializable]
-public enum CMItemSlotsLayers
+public enum CMItemSlotsVisuals
 {
-    // TODO CM14 replace Filled with Fill
-    Filled,
-    Fill,
+    Empty,
+    Low,
+    Medium,
+    High,
+    Full,
 }

@@ -2,17 +2,16 @@
 - type: entity
   abstract: true
   parent: BaseItem
-  id: CMBoxMagazineBase # todo cm14 all inheritors of this should have updating visuals.
+  id: CMBoxMagazineBase
   name: generic magazine box (? x ?)"
   description: A box of magazines.
   components:
   - type: Item
     size: Huge
-  - type: CMAmmoBox
   - type: ItemSlots
   - type: CMItemSlots
     startingItem: CMMRE
-    cooldown: 1
+    cooldown: 0.5
     cooldownPopup: You need to wait before taking another!
     count: 5
     slot:
@@ -25,7 +24,73 @@
     layers:
     - state: base_m41ae2
     - state: magaz_m41ae2_3
-      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+  - type: Appearance
+  - type: DeployableItem
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_stripe:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: magaz_reg, visible: false }
+          Low: { state: magaz_reg_1, visible: true }
+          Medium: { state: magaz_reg_2, visible: true }
+          High: { state: magaz_reg_3, visible: true }
+          Full: { state: magaz_reg, visible: true }
+
+- type: entity
+  abstract: true
+  parent: CMBoxMagazineBase
+  id: CMBoxMagazineAPBase
+  name: generic magazine box (? x ?)"
+  description: A box of magazines.
+  components:
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_stripe:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: magaz_ap, visible: false }
+          Low: { state: magaz_ap_1, visible: true }
+          Medium: { state: magaz_ap_2, visible: true }
+          High: { state: magaz_ap_3, visible: true }
+          Full: { state: magaz_ap, visible: true }
+
+- type: entity
+  abstract: true
+  parent: CMBoxMagazineBase
+  id: CMBoxMagazineHVBase
+  name: generic magazine box (? x ?)"
+  description: A box of magazines.
+  components:
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_stripe:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: magaz_hv, visible: false }
+          Low: { state: magaz_hv_1, visible: true }
+          Medium: { state: magaz_hv_2, visible: true }
+          High: { state: magaz_hv_3, visible: true }
+          Full: { state: magaz_hv, visible: true }
 
 # M41A
 - type: entity
@@ -35,13 +100,15 @@
   components:
   - type: Sprite
     layers:
-  #    - state: lid_type_reg # lid stripe,ends in the type of ammo used
-  #    - state: base_m41_lid # matches the base box
     - state: base_m41 # icon_state = base color of box
     - state: magaz_reg # overlay_content = sprite of mags
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
     - state: text_m41 # overlay_gun_type = text overlay
     - state: base_type_reg # overlay_ammo_type = box stripe
-      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+    - state: base_m41_lid # matches the base box
+      map: [ "lid" ]
+    - state: lid_type_reg # lid stripe,ends in the type of ammo used
+      map: [ "lid_stripe" ]
   - type: CMItemSlots
     startingItem: CMMagazineRifleM41A
     count: 10
@@ -51,19 +118,21 @@
         - CMMagazineRifleM41A
 
 - type: entity
-  parent: CMBoxMagazineBase
+  parent: CMBoxMagazineAPBase
   id: CMBoxMagazineRifleM41AAP
   name: magazine box (AP M41A x 10)
   components:
   - type: Sprite
     layers:
-    #    - state: lid_type_ap
-    #    - state: base_m41_lid
     - state: base_m41
     - state: magaz_ap
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
     - state: text_m41
     - state: base_type_ap
-      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+    - state: base_m41_lid
+      map: [ "lid" ]
+    - state: lid_type_ap
+      map: [ "lid_stripe" ]
   - type: CMItemSlots
     startingItem: CMMagazineRifleM41AAP
     count: 10
@@ -79,13 +148,15 @@
   components:
   - type: Sprite
     layers:
-    #    - state: lid_type_ext
-    #    - state: base_m41_lid
     - state: base_m41
     - state: magaz_reg
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
     - state: text_m41
     - state: base_type_ext
-      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+    - state: base_m41_lid
+      map: [ "lid" ]
+    - state: lid_type_ext
+      map: [ "lid_stripe" ]
   - type: CMItemSlots
     startingItem: CMMagazineRifleM41AExt
     count: 8
@@ -96,19 +167,21 @@
 
 # M39
 - type: entity
-  parent: CMBoxMagazineBase
+  parent: CMBoxMagazineHVBase
   id: CMBoxMagazineSMGM39
   name: magazine box (M39 x 12)
   components:
   - type: Sprite
     layers:
-    #    - state: lid_type_reg
-    #    - state: base_m39_lid
     - state: base_m39
     - state: text_m39
     - state: base_type_reg
     - state: magaz_hv
-      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_m39_lid
+      map: [ "lid" ]
+    - state: lid_type_reg
+      map: [ "lid_stripe" ]
   - type: CMItemSlots
     startingItem: CMMagazineSMGM39
     count: 12
@@ -124,13 +197,15 @@
   components:
   - type: Sprite
     layers:
-    #    - state: lid_type_ap
-    #    - state: base_m39_lid
     - state: base_m39
     - state: text_m39
     - state: base_type_ap
     - state: magaz_ap
-      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_m39_lid
+      map: [ "lid" ]
+    - state: lid_type_ap
+      map: [ "lid_stripe" ]
   - type: CMItemSlots
     startingItem: CMMagazineSMGM39AP
     count: 12
@@ -140,19 +215,21 @@
         - CMMagazineSMGM39AP
 
 - type: entity
-  parent: CMBoxMagazineBase
+  parent: CMBoxMagazineHVBase
   id: CMBoxMagazineSMGM39Ext
   name: magazine box (Ext M39 x 10)
   components:
   - type: Sprite
     layers:
-    #    - state: lid_type_ext
-    #    - state: base_m39_lid
     - state: base_m39
     - state: text_m39
     - state: base_type_ext
     - state: magaz_hv
-      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_m39_lid
+      map: [ "lid" ]
+    - state: lid_type_ext
+      map: [ "lid_stripe" ]
   - type: CMItemSlots
     startingItem: CMMagazineSMGM39Ext
     count: 10
@@ -169,13 +246,15 @@
   components:
   - type: Sprite
     layers:
-    #    - state: lid_type_reg
-    #    - state: base_m4ra_lid
     - state: base_m4ra
     - state: text_m4ra
     - state: base_type_reg
     - state: magaz_reg
-      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_m4ra_lid
+      map: [ "lid" ]
+    - state: lid_type_reg
+      map: [ "lid_stripe" ]
   - type: CMItemSlots
     startingItem: CMMagazineRifleM4RA
     count: 16
@@ -191,13 +270,15 @@
   components:
   - type: Sprite
     layers:
-    #    - state: lid_type_ap
-    #    - state: base_m4ra_lid
     - state: base_m4ra
     - state: text_m4ra
     - state: base_type_ap
     - state: magaz_ap
-      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_m4ra_lid
+      map: [ "lid" ]
+    - state: lid_type_ap
+      map: [ "lid_stripe" ]
   - type: CMItemSlots
     startingItem: CMMagazineRifleM4RAAP
     count: 16
@@ -213,13 +294,15 @@
   components:
   - type: Sprite
     layers:
-    #    - state: lid_type_ext
-    #    - state: base_m4ra_lid
     - state: base_m4ra
     - state: text_m4ra
     - state: base_type_ext
     - state: magaz_reg
-      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_m4ra_lid
+      map: [ "lid" ]
+    - state: lid_type_ext
+      map: [ "lid_stripe" ]
   - type: CMItemSlots
     startingItem: CMMagazineRifleM4RAExt
     count: 12
@@ -236,13 +319,15 @@
   components:
   - type: Sprite
     layers:
-    #    - state: lid_type_reg
-    #    - state: base_m4a3_lid
     - state: base_m4a3
     - state: text_m4a3
     - state: base_type_reg
     - state: magaz_reg
-      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_m4a3_lid
+      map: [ "lid" ]
+    - state: lid_type_reg
+      map: [ "lid_stripe" ]
   - type: CMItemSlots
     startingItem: CMMagazinePistolM4A3
     count: 16
@@ -258,13 +343,15 @@
 #  components:
 #  - type: Sprite
 #    layers:
-#    #    - state: lid_type_ap
-#    #    - state: base_m4a3_lid
 #    - state: base_m4a3
 #    - state: text_m4a3
 #    - state: base_type_ap
 #    - state: magaz_ap
-#      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+#      map: [ "enum.CMItemSlotsLayers.Fill" ]
+#    - state: base_m4a3_lid
+#      map: [ "lid" ]
+#    - state: lid_type_ap
+#      map: [ "lid_stripe" ]
 #  - type: CMItemSlots
 #    startingItem: CMMagazinePistolM4A3AP
 #    count: 16
@@ -281,13 +368,15 @@
   components:
   - type: Sprite
     layers:
-    #    - state: lid_type_ap
-    #    - state: base_mod88_lid
     - state: base_mod88
     - state: text_mod88
     - state: base_type_ap
     - state: magaz_ap
-      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_mod88_lid
+      map: [ "lid" ]
+    - state: lid_type_ap
+      map: [ "lid_stripe" ]
   - type: CMItemSlots
     startingItem: CMMagazinePistol88m4AP
     count: 16
@@ -304,13 +393,15 @@
   components:
   - type: Sprite
     layers:
-    #    - state: lid_type_reg
-    #    - state: base_vp78_lid
     - state: base_vp78
     - state: text_vp78
     - state: base_type_reg
     - state: magaz_reg
-      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_vp78_lid
+      map: [ "lid" ]
+    - state: lid_type_reg
+      map: [ "lid_stripe" ]
   - type: CMItemSlots
     startingItem: CMMagazinePistolVP78
     count: 16

@@ -17,6 +17,7 @@ namespace Content.Shared._CM14.Inventory;
 
 public abstract class SharedCMInventorySystem : EntitySystem
 {
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
@@ -172,6 +173,49 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
     protected virtual void ContentsUpdated(Entity<CMItemSlotsComponent> ent)
     {
+        if (!TryComp(ent, out ItemSlotsComponent? itemSlots))
+        {
+            _appearance.SetData(ent, CMItemSlotsLayers.Fill, CMItemSlotsVisuals.Empty);
+            return;
+        }
+
+        var total = itemSlots.Slots.Count;
+        if (total == 0)
+        {
+            _appearance.SetData(ent, CMItemSlotsLayers.Fill, CMItemSlotsVisuals.Empty);
+            return;
+        }
+
+        var filled = 0;
+        foreach (var (_, slot) in itemSlots.Slots)
+        {
+            if (slot.ContainerSlot?.ContainedEntity is { } contained &&
+                !TerminatingOrDeleted(contained))
+            {
+                filled++;
+            }
+        }
+
+        if (filled >= total)
+        {
+            _appearance.SetData(ent, CMItemSlotsLayers.Fill, CMItemSlotsVisuals.Full);
+        }
+        else if (filled >= total * 0.666f)
+        {
+            _appearance.SetData(ent, CMItemSlotsLayers.Fill, CMItemSlotsVisuals.High);
+        }
+        else if (filled >= total * 0.333f)
+        {
+            _appearance.SetData(ent, CMItemSlotsLayers.Fill, CMItemSlotsVisuals.Medium);
+        }
+        else if (filled > 0)
+        {
+            _appearance.SetData(ent, CMItemSlotsLayers.Fill, CMItemSlotsVisuals.Low);
+        }
+        else
+        {
+            _appearance.SetData(ent, CMItemSlotsLayers.Fill, CMItemSlotsVisuals.Empty);
+        }
     }
 
     private bool SlotCanInteract(EntityUid user, EntityUid holster, [NotNullWhen(true)] out ItemSlotsComponent? itemSlots)
