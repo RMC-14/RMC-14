@@ -102,7 +102,7 @@
   components:
   - type: Sprite
     layers:
-    #    - state: lid_type_ext
+    #    - state: lid_type_reg
     #    - state: base_m39_lid
     - state: base_m39
     - state: text_m39
@@ -124,7 +124,7 @@
   components:
   - type: Sprite
     layers:
-    #    - state: lid_type_ext
+    #    - state: lid_type_ap
     #    - state: base_m39_lid
     - state: base_m39
     - state: text_m39
@@ -147,7 +147,7 @@
   components:
   - type: Sprite
     layers:
-    #    - state: lid_type_ext
+    #    - state: lid_type_reg
     #    - state: base_m4ra_lid
     - state: base_m4ra
     - state: text_m4ra
@@ -184,6 +184,29 @@
         tags:
         - CMMagazineRifleM4RAAP
 
+- type: entity
+  parent: CMBoxMagazineBase
+  id: CMBoxMagazineRifleM4RAExt
+  name: magazine box (Ext M4RA x 16)
+  components:
+  - type: Sprite
+    layers:
+    #    - state: lid_type_ext
+    #    - state: base_m4ra_lid
+    - state: base_m4ra
+    - state: text_m4ra
+    - state: base_type_ext
+    - state: magaz_reg
+      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+  - type: CMItemSlots
+    startingItem: CMMagazineRifleM4RAExt
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM4RAExt
+
+# m4a3
 - type: entity
   parent: CMBoxMagazineBase
   id: CMBoxMagazinePistolM4A3
@@ -228,6 +251,7 @@
 #        tags:
 #        - CMMagazinePistolM4A3AP
 
+# 88 mod 4 / 88m4
 - type: entity
   parent: CMBoxMagazineBase
   id: CMBoxMagazinePistol88m4AP
@@ -250,6 +274,7 @@
         tags:
         - CMMagazinePistol88m4AP
 
+# VP78
 - type: entity
   parent: CMBoxMagazineBase
   id:  CMBoxMagazinePistolVP78

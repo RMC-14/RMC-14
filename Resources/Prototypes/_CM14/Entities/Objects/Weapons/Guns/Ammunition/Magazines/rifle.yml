@@ -180,7 +180,7 @@
 # M4RA Extended
 - type: entity
   parent: CMMagazineRifleM4RA
-  id: CMMagazineRifleExtendedM4RA
+  id: CMMagazineRifleM4RAExt
   name: "M4RA extended magazine (10x24mm)"
   components:
   - type: BallisticAmmoProvider

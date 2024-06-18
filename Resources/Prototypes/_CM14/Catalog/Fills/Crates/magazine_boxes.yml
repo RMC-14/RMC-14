@@ -45,6 +45,15 @@
     contents:
     - id: CMBoxMagazineRifleM4RAAP
 
+- type: entity
+  parent: CMCrateAmmo
+  id: CMCrateBoxMagazineRifleM4RAExt
+  name: Magazine box (M4RA, 12x extended mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBoxMagazineRifleM4RAExt
+
 # m39
 - type: entity
   parent: CMCrateAmmo
