@@ -1,5 +1,5 @@
 using Content.Shared._CM14.Medical;
-using Content.Shared._CM14.Medical.Events;
+using Content.Shared._CM14.Medical.HUD.Events;
 using Content.Shared.Chemistry.Reagent;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;

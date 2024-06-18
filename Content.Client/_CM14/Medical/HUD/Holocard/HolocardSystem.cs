@@ -1,9 +1,7 @@
 
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared._CM14.Medical;
-using Content.Shared._CM14.Medical.Components;
+using Content.Shared._CM14.Medical.HUD.Components;
 using Content.Shared._CM14.Medical.Systems;
-using Content.Shared.Damage;
 using Content.Shared.StatusIcon;
 using Robust.Shared.Prototypes;
 

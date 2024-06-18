@@ -1,10 +1,10 @@
 using System.Globalization;
 using Content.Client._CM14.Medical.HUD.Holocard;
 using Content.Client.Message;
-using Content.Shared._CM14.Medical.Components;
-using Content.Shared._CM14.Medical.Events;
-using Content.Shared._CM14.Medical.Scanner;
+using Content.Shared._CM14.Medical.HUD.Events;
+using Content.Shared._CM14.Medical.HUD.Components;
 using Content.Shared._CM14.Medical.Systems;
+using Content.Shared._CM14.Medical.Scanner;
 using Content.Shared._CM14.Medical.Wounds;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
@@ -30,6 +30,7 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
 
     [ViewVariables]
     private HealthScannerWindow? _window;
+    private NetEntity _lastTarget;
 
     private readonly SharedWoundsSystem _wounds;
 
@@ -60,6 +61,7 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
 
         if (_entities.GetEntity(uiState.Target) is not { Valid: true } target)
             return;
+        _lastTarget = uiState.Target;
 
         _window.PatientLabel.Text = $"Patient: {Identity.Name(target, _entities, _player.LocalEntity)}";
 
@@ -152,9 +154,12 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
         }
     }
 
-    private void OpenChangeHolocardUI(BaseButton.ButtonEventArgs obj)
+    public void OpenChangeHolocardUI(BaseButton.ButtonEventArgs obj)
     {
-        //SendMessage(new OpenChangeHolocardUIEvent(_entities.GetNetEntity(this.Owner), _lastTarget));
+        if (_player.LocalEntity is EntityUid viewer)
+        {
+            SendMessage(new OpenChangeHolocardUIEvent(_entities.GetNetEntity(viewer), _lastTarget));
+        }
     }
 
     private void AddGroup(Entity<DamageableComponent> damageable, RichTextLabel label, Color color, ProtoId<DamageGroupPrototype> group, string? labelStr = null)

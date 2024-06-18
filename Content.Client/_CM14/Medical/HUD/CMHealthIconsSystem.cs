@@ -1,4 +1,3 @@
-using Content.Shared._CM14.Medical.Components;
 using Content.Shared._CM14.Xenos;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Damage;

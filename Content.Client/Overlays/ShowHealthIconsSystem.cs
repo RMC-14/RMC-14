@@ -1,7 +1,7 @@
 using System.Linq;
 using Content.Client._CM14.Medical.HUD;
 using Content.Client._CM14.Medical.HUD.Holocard;
-using Content.Shared._CM14.Medical.Components;
+using Content.Shared._CM14.Medical.HUD.Components;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Damage;
 using Content.Shared.Inventory.Events;
