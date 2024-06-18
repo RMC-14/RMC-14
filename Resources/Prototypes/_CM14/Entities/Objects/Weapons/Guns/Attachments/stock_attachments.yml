@@ -53,8 +53,8 @@
     rsi: _CM14/Objects/Weapons/Guns/Attachments/stock.rsi
     prefix: smgstockcol-
     showActive: true
-#  - type: AttachableSizeModifier
-#    sizeModifier: 2
+  - type: AttachableToggleableSizeModifier
+    activeSizeModifier: 1
 
 - type: entity
   parent: CMStockAttachmentBase
