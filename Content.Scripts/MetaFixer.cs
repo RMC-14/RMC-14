@@ -36,7 +36,7 @@ public static class MetaFixer
             foreach (var file in Directory.EnumerateFiles(directory, "*.png"))
             {
                 var name = Path.GetFileNameWithoutExtension(file);
-                var size = Image.Identify(file).Size();
+                var size = Image.Identify(file).Size;
                 DirectionType directions;
                 if (size.Height == rsi.Size.Y && size.Width == rsi.Size.X)
                 {
