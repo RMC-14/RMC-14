@@ -1341,5 +1341,12 @@
   id: 161
   time: '2024-06-18T02:21:32.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2485
+- author: geraeumig
+  changes:
+  - message: Added ability to scope in with M42A rifle
+    type: Add
+  id: 162
+  time: '2024-06-18T07:50:16.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2426
 Name: CM
 Order: -1
