@@ -8,7 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Shared._CM14.Attachable;
 
-public sealed class SharedAttachableWeaponModifiersSystem : EntitySystem
+public sealed class SharedAttachableWeaponRangedModsSystem : EntitySystem
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly CMGunSystem _cmGunSystem = default!;
@@ -16,64 +16,122 @@ public sealed class SharedAttachableWeaponModifiersSystem : EntitySystem
     
     public override void Initialize()
     {
-        SubscribeLocalEvent<AttachableWeaponRangedModifiersComponent, AttachableAlteredEvent>(OnAttachableWeaponModifiersAltered);
+        SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableAlteredEvent>(OnAttachableWeaponModifiersAltered);
+        SubscribeLocalEvent<AttachableWeaponRangedModsUnwieldedComponent, AttachableAlteredEvent>(OnAttachableWeaponModifiersAltered);
+        SubscribeLocalEvent<AttachableWeaponRangedModsWieldedComponent, AttachableAlteredEvent>(OnAttachableWeaponModifiersAltered);
     }
     
     
     public void ApplyWeaponModifiers(EntityUid attachableUid, ref GunRefreshModifiersEvent args)
     {
-        if(!_entityManager.TryGetComponent<AttachableComponent>(attachableUid, out _) ||
-            !_entityManager.TryGetComponent<AttachableWeaponRangedModifiersComponent>(attachableUid, out AttachableWeaponRangedModifiersComponent? modifiersComponent))
+        if(!_entityManager.TryGetComponent<AttachableComponent>(attachableUid, out _))
             return;
         
-        if(modifiersComponent.ModifiersWielded == null || modifiersComponent.ModifiersWielded == null)
-            return;
+        if(_entityManager.TryGetComponent<AttachableWeaponRangedModsComponent>(attachableUid, out AttachableWeaponRangedModsComponent? modifiersComponent))
+            ApplyWeaponModifiers(modifiersComponent, ref args);
         
-        if(!_entityManager.TryGetComponent<WieldableComponent>(args.Gun.Owner, out WieldableComponent? wieldableComponent))
-        {
-            ApplyModifierSet(modifiersComponent.ModifiersUnwielded, ref args);
-            return;
-        }
+        if(_entityManager.TryGetComponent<AttachableWeaponRangedModsUnwieldedComponent>(attachableUid, out AttachableWeaponRangedModsUnwieldedComponent? modifiersUnwieldedComponent))
+            ApplyWeaponModifiers(modifiersUnwieldedComponent, ref args);
         
-        if(wieldableComponent.Wielded)
-            ApplyModifierSet(modifiersComponent.ModifiersWielded, ref args);
-        else
-            ApplyModifierSet(modifiersComponent.ModifiersUnwielded, ref args);
+        if(_entityManager.TryGetComponent<AttachableWeaponRangedModsWieldedComponent>(attachableUid, out AttachableWeaponRangedModsWieldedComponent? modifiersWieldedComponent))
+            ApplyWeaponModifiers(modifiersWieldedComponent, ref args);
     }
     
-    private void OnAttachableWeaponModifiersAltered(Entity<AttachableWeaponRangedModifiersComponent> attachable, ref AttachableAlteredEvent args)
+    private void ApplyWeaponModifiers(AttachableWeaponRangedModsComponent modifiersComponent, ref GunRefreshModifiersEvent args)
     {
-        if(attachable.Comp.ModifiersWielded == null || attachable.Comp.ModifiersUnwielded == null)
+        ApplyModifierSet(modifiersComponent.Modifiers, ref args);
+    }
+    
+    private void ApplyWeaponModifiers(AttachableWeaponRangedModsUnwieldedComponent modifiersComponent, ref GunRefreshModifiersEvent args)
+    {
+        if(!_entityManager.TryGetComponent<WieldableComponent>(args.Gun.Owner, out WieldableComponent? wieldableComponent) || !wieldableComponent.Wielded)
+            ApplyModifierSet(modifiersComponent.Modifiers, ref args);
+    }
+    
+    private void ApplyWeaponModifiers(AttachableWeaponRangedModsWieldedComponent modifiersComponent, ref GunRefreshModifiersEvent args)
+    {
+        if(!_entityManager.TryGetComponent<WieldableComponent>(args.Gun.Owner, out WieldableComponent? wieldableComponent) || !wieldableComponent.Wielded)
+            return;
+        ApplyModifierSet(modifiersComponent.Modifiers, ref args);
+    }
+    
+    private void OnAttachableWeaponModifiersAltered(Entity<AttachableWeaponRangedModsComponent> attachable, ref AttachableAlteredEvent args)
+    {
+        if(attachable.Comp.Modifiers == null || !_entityManager.HasComponent<GunComponent>(args.HolderUid))
             return;
         
-        if(!_entityManager.TryGetComponent<GunComponent>(args.HolderUid, out _))
+        switch(args.Alteration)
+        {
+            case AttachableAlteredType.Attached:
+                ApplyModifierSet(attachable.Comp.Modifiers, args.HolderUid);
+                break;
+            
+            case AttachableAlteredType.Detached:
+                UnapplyModifierSet(attachable.Comp.Modifiers, args.HolderUid);
+                break;
+        }
+    }
+    
+    private void OnAttachableWeaponModifiersAltered(Entity<AttachableWeaponRangedModsUnwieldedComponent> attachable, ref AttachableAlteredEvent args)
+    {
+        if(attachable.Comp.Modifiers == null || !_entityManager.HasComponent<GunComponent>(args.HolderUid))
             return;
         
         _entityManager.TryGetComponent<WieldableComponent>(args.HolderUid, out WieldableComponent? wieldableComponent);
-        
         
         switch(args.Alteration)
         {
             case AttachableAlteredType.Attached:
                 if(wieldableComponent != null && wieldableComponent.Wielded)
-                    ApplyModifierSet(attachable.Comp.ModifiersWielded, args.HolderUid);
-                else
-                    ApplyModifierSet(attachable.Comp.ModifiersUnwielded, args.HolderUid);
-                return;
+                    break;
+                ApplyModifierSet(attachable.Comp.Modifiers, args.HolderUid);
+                break;
+            
             case AttachableAlteredType.Detached:
                 if(wieldableComponent != null && wieldableComponent.Wielded)
-                    UnapplyModifierSet(attachable.Comp.ModifiersWielded, args.HolderUid);
-                else
-                    UnapplyModifierSet(attachable.Comp.ModifiersUnwielded, args.HolderUid);
-                return;
+                    break;
+                UnapplyModifierSet(attachable.Comp.Modifiers, args.HolderUid);
+                break;
+            
             case AttachableAlteredType.Wielded:
-                UnapplyModifierSet(attachable.Comp.ModifiersUnwielded, args.HolderUid);
-                ApplyModifierSet(attachable.Comp.ModifiersWielded, args.HolderUid);
-                return;
+                UnapplyModifierSet(attachable.Comp.Modifiers, args.HolderUid);
+                break;
+            
             case AttachableAlteredType.Unwielded:
-                UnapplyModifierSet(attachable.Comp.ModifiersWielded, args.HolderUid);
-                ApplyModifierSet(attachable.Comp.ModifiersUnwielded, args.HolderUid);
-                return;
+                ApplyModifierSet(attachable.Comp.Modifiers, args.HolderUid);
+                break;
+        }
+    }
+    
+    private void OnAttachableWeaponModifiersAltered(Entity<AttachableWeaponRangedModsWieldedComponent> attachable, ref AttachableAlteredEvent args)
+    {
+        if(attachable.Comp.Modifiers == null || !_entityManager.HasComponent<GunComponent>(args.HolderUid))
+            return;
+        
+        if(!_entityManager.TryGetComponent<WieldableComponent>(args.HolderUid, out WieldableComponent? wieldableComponent))
+            return;
+        
+        switch(args.Alteration)
+        {
+            case AttachableAlteredType.Attached:
+                if(!wieldableComponent.Wielded)
+                    break;
+                ApplyModifierSet(attachable.Comp.Modifiers, args.HolderUid);
+                break;
+            
+            case AttachableAlteredType.Detached:
+                if(!wieldableComponent.Wielded)
+                    break;
+                UnapplyModifierSet(attachable.Comp.Modifiers, args.HolderUid);
+                break;
+            
+            case AttachableAlteredType.Wielded:
+                ApplyModifierSet(attachable.Comp.Modifiers, args.HolderUid);
+                break;
+            
+            case AttachableAlteredType.Unwielded:
+                UnapplyModifierSet(attachable.Comp.Modifiers, args.HolderUid);
+                break;
         }
     }
     

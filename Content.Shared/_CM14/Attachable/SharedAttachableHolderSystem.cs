@@ -26,7 +26,7 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private readonly SharedAttachableWeaponModifiersSystem _attachableWeaponsModifiersSystem = default!;
+    [Dependency] private readonly SharedAttachableWeaponRangedModsSystem _attachableWeaponRangedModsSystem = default!;
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly SharedGunSystem _gunSystem = default!;
@@ -109,7 +109,7 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
             if(!EntityManager.TryGetComponent<AttachableComponent>(attachableUid, out _))
                 continue;
             
-            _attachableWeaponsModifiersSystem.ApplyWeaponModifiers(attachableUid, ref args);
+            _attachableWeaponRangedModsSystem.ApplyWeaponModifiers(attachableUid, ref args);
         }
     }
     
