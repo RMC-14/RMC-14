@@ -121,8 +121,8 @@
 
 - type: entity
   abstract: true
-  parent: CMMagazineBoxBase
-  id: CMMREBoxBase
+  parent: CMBoxMagazineBase
+  id: CMBoxMREBase
   name: box of MREs
   description: A box of MREs. Nutritious, but not delicious.
   components:
@@ -143,8 +143,8 @@
       map: [ "enum.CMAmmoBoxLayers.Ammo" ]
 
 - type: entity
-  parent: CMMREBoxBase
-  id: CMMREBox
+  parent: CMBoxMREBase
+  id: CMBoxMRE
   suffix: Filled
   components:
   - type: CMItemSlots

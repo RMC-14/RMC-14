@@ -292,19 +292,6 @@
   - type: Sprite
     state: cap_key
 
-- type: entity
-  parent: CMEncryptionKey
-  id: CMEncryptionKeySquadLeader
-  name: squad leader's encryption key
-  components:
-  - type: EncryptionKey
-    channels:
-    - MarineCommand
-    - MarineJTAC
-    defaultChannel: MarineCommand
-  - type: Sprite
-    state: sl_key
-
 # CE
 - type: entity
   parent: CMEncryptionKey
