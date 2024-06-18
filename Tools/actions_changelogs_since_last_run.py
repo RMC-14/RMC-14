@@ -8,10 +8,9 @@
 import io
 import itertools
 import os
-from typing import Any, Iterable
-
 import requests
 import yaml
+from typing import Any, Iterable
 
 GITHUB_API_URL    = os.environ.get("GITHUB_API_URL", "https://api.github.com")
 GITHUB_REPOSITORY = os.environ["GITHUB_REPOSITORY"]
@@ -166,7 +165,7 @@ def send_to_discord(entries: Iterable[ChangelogEntry]) -> None:
 
         # Flush the group to the message
         message_content.write(group_text)
-
+    
     # Clean up anything remaining
     message_text = message_content.getvalue()
     if len(message_text) > 0:
