@@ -144,7 +144,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (prototype.TryGetComponent(out XenoEvolutionCappedComponent? capped, _compFactory) &&
             HasLiving<XenoEvolutionCappedComponent>(capped.Max, e => e.Comp.Id == capped.Id))
         {
-            _popup.PopupEntity($"There already is a living {prototype.Name}!", xeno, xeno, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-failed-already-have", ("prototype", prototype.Name)), xeno, xeno, PopupType.MediumCaution);
             return false;
         }
 
@@ -152,7 +152,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (!xeno.Comp.CanEvolveWithoutGranter && !HasLiving<XenoEvolutionGranterComponent>(1))
         {
             _popup.PopupEntity(
-                "The Hive is shaken by the death of the last Queen. We can't find the strength to evolve.",
+                Loc.GetString("cm-xeno-evolution-failed-hive-shaken"),
                 xeno,
                 xeno,
                 PopupType.MediumCaution);
@@ -164,7 +164,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             newXenoComp.UnlockAt > _timing.CurTime - _gameTicker.RoundStartTimeSpan)
         {
             _popup.PopupEntity(
-                "The Hive cannot support this caste yet!",
+                Loc.GetString("cm-xeno-evolution-failed-cannot-support"),
                 xeno,
                 xeno,
                 PopupType.MediumCaution);
@@ -196,7 +196,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             if (total != 0 && existing / (float) total >= value)
             {
                 _popup.PopupEntity(
-                    $"The hive cannot support another Tier {newXenoComp.Tier}, wait for either more aliens to be born or someone to die.",
+                    Loc.GetString("cm-xeno-evolution-failed-hive-full", ("tier", newXenoComp.Tier)),
                     xeno,
                     xeno,
                     PopupType.MediumCaution);
@@ -326,7 +326,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             if (comp.Points >= comp.Max && comp.Action == null)
             {
                 _action.AddAction(uid, ref comp.Action, comp.ActionId);
-                _popup.PopupEntity("Our carapace crackles and our tendons strengthen. We are ready to evolve!", uid, uid, PopupType.Large);
+                _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-ready"), uid, uid, PopupType.Large);
                 _audio.PlayEntity(comp.EvolutionReadySound, uid, uid);
                 continue;
             }

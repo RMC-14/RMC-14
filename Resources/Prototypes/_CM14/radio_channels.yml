@@ -1,3 +1,4 @@
+# TODO CM14 remove longrange once communications is in
 # High Command
 - type: radioChannel #USMC High Command, for events and such, basically CentComm channel
   id: MarineHighCommand
@@ -14,6 +15,7 @@
   keycode: "g" #; and g in cm13
   frequency: 1480
   color: "#a0a0a0"
+  longRange: true
 
 - type: radioChannel
   id: MarineCommand
@@ -21,6 +23,7 @@
   keycode: "v" #v in cm13
   frequency: 1481
   color: "#5b96d4"
+  longRange: true
 
 - type: radioChannel
   id: MarineMedical
@@ -28,6 +31,7 @@
   keycode: "m" #m in cm13
   frequency: 1482
   color: "#009771"
+  longRange: true
 
 - type: radioChannel
   id: MarineEngineer
@@ -35,6 +39,7 @@
   keycode: "n" #n in cm13
   frequency: 1483
   color: "#e4860c"
+  longRange: true
 
 - type: radioChannel
   id: MarineMilitaryPolice
@@ -42,6 +47,7 @@
   keycode: "p" #p in cm13
   frequency: 1484
   color: "#be324f"
+  longRange: true
 
 - type: radioChannel
   id: MarineRequisition
@@ -49,6 +55,7 @@
   keycode: "u" #u in cm13
   frequency: 1485
   color: "#b17324"
+  longRange: true
 
 - type: radioChannel
   id: MarineIntel
@@ -56,6 +63,7 @@
   keycode: "t" #t in cm13
   frequency: 1486
   color: "#059705"
+  longRange: true
 
 - type: radioChannel
   id: MarineJTAC
@@ -63,6 +71,7 @@
   keycode: "j" #j in CM13
   frequency: 1487
   color: "#ad3b98"
+  longRange: true
 
 # Squad channels
 - type: radioChannel
@@ -71,6 +80,7 @@
   keycode: "a" #a in cm13
   frequency: 1491
   color: "#dc0a0a"
+  longRange: true
 
 - type: radioChannel
   id: MarineBravo
@@ -78,6 +88,7 @@
   keycode: "b" #b in cm13
   frequency: 1492
   color: "#f2af03"
+  longRange: true
 
 - type: radioChannel
   id: MarineCharlie
@@ -85,6 +96,7 @@
   keycode: "c" #c in cm13
   frequency: 1493
   color: "#a94ac2"
+  longRange: true
 
 - type: radioChannel
   id: MarineDelta
@@ -92,6 +104,7 @@
   keycode: "d" #d in cm13
   frequency: 1494
   color: "#038ae1"
+  longRange: true
 
 - type: radioChannel
   id: MarineEcho
@@ -99,6 +112,7 @@
   keycode: "e" #e in cm13
   frequency: 1495
   color: "#3be1b1"
+  longRange: true
 
 - type: radioChannel
   id: MarineFoxtrot
@@ -106,6 +120,7 @@
   keycode: "f" #f in cm13
   frequency: 1496
   color: "#c23c07"
+  longRange: true
 
 # Non USCM
 - type: radioChannel
@@ -122,6 +137,7 @@
   keycode: "w" #w in CM13
   frequency: 1487
   color: "#fe9b24"
+  longRange: true
 
 - type: radioChannel
   id: Hivemind

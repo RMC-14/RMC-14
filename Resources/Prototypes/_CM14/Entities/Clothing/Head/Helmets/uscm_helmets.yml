@@ -83,6 +83,7 @@
     sprite: _CM14/Objects/Clothing/Head/Helmets/m10/tech.rsi
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Head/Helmets/m10/tech.rsi
+  - type: EyeProtection # TODO CM14 toggleable
 
 # M11
 - type: entity

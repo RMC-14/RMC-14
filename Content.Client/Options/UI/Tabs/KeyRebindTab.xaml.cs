@@ -153,6 +153,7 @@ namespace Content.Client.Options.UI.Tabs
             }
 
             AddHeader("ui-options-header-cm");
+            AddButton(CMKeyFunctions.CMUniqueAction);
             AddButton(CMKeyFunctions.CMHolsterPrimary);
             AddButton(CMKeyFunctions.CMHolsterSecondary);
             AddButton(CMKeyFunctions.CMHolsterTertiary);

@@ -54,6 +54,7 @@
   id: CMCrateMedicalFilled
   parent: CMCrateMedical
   name: medical crate
+  suffix: Filled
   components:
   - type: StorageFill
     contents: # TODO CM14 missing bottles

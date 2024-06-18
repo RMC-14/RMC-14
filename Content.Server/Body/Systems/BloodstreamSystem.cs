@@ -41,6 +41,7 @@ public sealed class BloodstreamSystem : EntitySystem
     [Dependency] private readonly SharedStutteringSystem _stutteringSystem = default!;
     [Dependency] private readonly AlertsSystem _alertsSystem = default!;
     [Dependency] private readonly ForensicsSystem _forensicsSystem = default!;
+    [Dependency] private readonly CMStasisBagSystem _cmStasisBag = default!;
 
     public override void Initialize()
     {
@@ -117,9 +118,7 @@ public sealed class BloodstreamSystem : EntitySystem
 
             bloodstream.NextUpdate += bloodstream.UpdateInterval;
 
-            var ev = new BloodstreamMetabolizeAttemptEvent();
-            RaiseLocalEvent(uid, ref ev);
-            if (ev.Cancelled)
+            if (!_cmStasisBag.CanBodyMetabolize(uid))
                 continue;
 
             if (!_solutionContainerSystem.ResolveSolution(uid, bloodstream.BloodSolutionName, ref bloodstream.BloodSolution, out var bloodSolution))

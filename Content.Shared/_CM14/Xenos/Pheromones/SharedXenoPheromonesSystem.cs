@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Content.Shared._CM14.Xenos.Plasma;
 using Content.Shared.Actions;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
@@ -9,8 +10,11 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
-using Robust.Shared.GameStates;
+using Robust.Shared.Collections;
+using Robust.Shared.Network;
+using Robust.Shared.Threading;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._CM14.Xenos.Pheromones;
 
@@ -19,35 +23,38 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IParallelManager _parallel = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     private readonly TimeSpan _pheromonePlasmaUseDelay = TimeSpan.FromSeconds(1);
-    private readonly HashSet<Entity<XenoComponent>> _receivers = new();
 
     private readonly HashSet<EntityUid>[] _oldReceivers = Enum.GetValues<XenoPheromones>()
         .Select(_ => new HashSet<EntityUid>())
         .ToArray();
+    private readonly HashSet<EntityUid> _refreshSpeeds = new();
 
     private EntityQuery<DamageableComponent> _damageableQuery;
+
+    private PheromonesJob _pheromonesJob;
 
     public override void Initialize()
     {
         base.Initialize();
 
+        _pheromonesJob = new PheromonesJob()
+        {
+            Lookup = _entityLookup,
+        };
+
         _damageableQuery = GetEntityQuery<DamageableComponent>();
 
         SubscribeLocalEvent<XenoPheromonesComponent, XenoPheromonesActionEvent>(OnXenoPheromonesAction);
-
-        SubscribeLocalEvent<XenoFrenzyPheromonesComponent, ComponentGetStateAttemptEvent>(OnComponentGetStateAttempt);
-        SubscribeLocalEvent<XenoWardingPheromonesComponent, ComponentGetStateAttemptEvent>(OnComponentGetStateAttempt);
-        SubscribeLocalEvent<XenoRecoveryPheromonesComponent, ComponentGetStateAttemptEvent>(OnComponentGetStateAttempt);
-        SubscribeLocalEvent<XenoPheromonesComponent, ComponentGetStateAttemptEvent>(OnComponentGetStateAttempt);
-        SubscribeLocalEvent<XenoActivePheromonesComponent, ComponentGetStateAttemptEvent>(OnComponentGetStateAttempt);
-        SubscribeLocalEvent<XenoComponent, ComponentStartup>(OnXenoStartup);
 
         // TODO CM14 reduce crit damage
         SubscribeLocalEvent<XenoWardingPheromonesComponent, UpdateMobStateEvent>(OnWardingUpdateMobState,
@@ -56,6 +63,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         SubscribeLocalEvent<XenoWardingPheromonesComponent, DamageModifyEvent>(OnWardingDamageModify);
 
         // TODO CM14 stack slash damage
+        SubscribeLocalEvent<XenoFrenzyPheromonesComponent, ComponentRemove>(OnFrenzyRemove);
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, GetMeleeDamageEvent>(OnFrenzyGetMeleeDamage);
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, RefreshMovementSpeedModifiersEvent>(OnFrenzyMovementSpeedModifiers);
 
@@ -65,37 +73,15 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         });
     }
 
-    private void OnComponentGetStateAttempt<T>(EntityUid uid, T comp, ref ComponentGetStateAttemptEvent ev)
-    {
-        // Apparently this happens in replays
-        if (ev.Player is null)
-            return;
-
-        ev.Cancelled = !HasComp<XenoComponent>(ev.Player.AttachedEntity);
-    }
-
-    private void OnXenoStartup(EntityUid uid, XenoComponent comp, ref ComponentStartup ev)
-    {
-        DirtyPheromones<XenoPheromonesComponent>();
-        DirtyPheromones<XenoWardingPheromonesComponent>();
-        DirtyPheromones<XenoFrenzyPheromonesComponent>();
-        DirtyPheromones<XenoRecoveryPheromonesComponent>();
-    }
-
-    private void DirtyPheromones<T>() where T: IComponent
-    {
-        var pheromoneQuery = EntityQueryEnumerator<T>();
-        while (pheromoneQuery.MoveNext(out var uid, out var comp))
-        {
-            Dirty(uid, comp);
-        }
-    }
-
     private void OnXenoPheromonesAction(Entity<XenoPheromonesComponent> xeno, ref XenoPheromonesActionEvent args)
     {
         args.Handled = true;
-        if (RemComp<XenoActivePheromonesComponent>(xeno))
+
+        if (HasComp<XenoActivePheromonesComponent>(xeno))
         {
+            if (_net.IsServer)
+                RemComp<XenoActivePheromonesComponent>(xeno);
+
             _actions.SetToggled(args.Action, false);
             _popup.PopupClient(Loc.GetString("cm-xeno-pheromones-stop"), xeno, xeno);
             return;
@@ -118,13 +104,22 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                 _actions.SetToggled(actionId, true);
         }
 
-        EnsureComp<XenoActivePheromonesComponent>(xeno).Pheromones = args.Pheromones;
-        xeno.Comp.NextPheromonesPlasmaUse = _timing.CurTime + _pheromonePlasmaUseDelay;
-
         var popup = Loc.GetString("cm-xeno-pheromones-start", ("pheromones", args.Pheromones.ToString()));
         _popup.PopupClient(popup, xeno, xeno);
 
         _ui.CloseUi(xeno.Owner, XenoPheromonesUI.Key, xeno);
+
+        if (_net.IsClient)
+            return;
+
+        xeno.Comp.NextPheromonesPlasmaUse = _timing.CurTime + _pheromonePlasmaUseDelay;
+        Dirty(xeno);
+
+        var active = EnsureComp<XenoActivePheromonesComponent>(xeno);
+        active.Pheromones = args.Pheromones;
+        Dirty(xeno, active);
+
+        _entityLookup.GetEntitiesInRange(xeno.Owner.ToCoordinates(), xeno.Comp.PheromonesRange, active.Receivers);
     }
 
     private void OnWardingUpdateMobState(Entity<XenoWardingPheromonesComponent> warding, ref UpdateMobStateEvent args)
@@ -162,6 +157,11 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         }
     }
 
+    private void OnFrenzyRemove(Entity<XenoFrenzyPheromonesComponent> ent, ref ComponentRemove args)
+    {
+        _movementSpeed.RefreshMovementSpeedModifiers(ent);
+    }
+
     private void OnFrenzyGetMeleeDamage(Entity<XenoFrenzyPheromonesComponent> frenzy, ref GetMeleeDamageEvent args)
     {
         args.Modifiers.Add(new DamageModifierSet
@@ -184,6 +184,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        if (_net.IsClient)
+            return;
 
         var oldRecovery = _oldReceivers[(int) XenoPheromones.Recovery];
         oldRecovery.Clear();
@@ -216,28 +219,57 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         }
 
         var query = EntityQueryEnumerator<XenoActivePheromonesComponent, XenoPheromonesComponent, TransformComponent>();
+        _pheromonesJob.Receivers.Clear();
+        _pheromonesJob.Pheromones.Clear();
+
         while (query.MoveNext(out var uid, out var active, out var pheromones, out var xform))
         {
-            if (_timing.CurTime >= pheromones.NextPheromonesPlasmaUse)
-            {
-                pheromones.NextPheromonesPlasmaUse += _pheromonePlasmaUseDelay;
-                if (!_xenoPlasma.TryRemovePlasma(uid, pheromones.PheromonesPlasmaUpkeep))
-                {
-                    RemCompDeferred<XenoActivePheromonesComponent>(uid);
-                    continue;
-                }
+            _pheromonesJob.Pheromones.Add((uid, active, pheromones, xform));
 
-                Dirty(uid, pheromones);
+            // We'll only update pheromones receivers whenever plasma gets used.
+            // This avoids us having to do lookups every tick.
+            if (_timing.CurTime < pheromones.NextPheromonesPlasmaUse)
+            {
+                _pheromonesJob.Receivers.Add((false, active.Receivers));
+                continue;
             }
 
-            _receivers.Clear();
-            _entityLookup.GetEntitiesInRange(xform.Coordinates, pheromones.PheromonesRange, _receivers);
+            pheromones.NextPheromonesPlasmaUse = _timing.CurTime + _pheromonePlasmaUseDelay;
+            Dirty(uid, pheromones);
+
+            if (!_xenoPlasma.TryRemovePlasma(uid, pheromones.PheromonesPlasmaUpkeep))
+            {
+                _pheromonesJob.Pheromones.RemoveAt(_pheromonesJob.Pheromones.Count - 1);
+                RemCompDeferred<XenoActivePheromonesComponent>(uid);
+                continue;
+            }
+
+            _pheromonesJob.Receivers.Add((true, active.Receivers));
+            Dirty(uid, pheromones);
+        }
+
+        // Okay so essentially:
+        // 1. We only run lookups on every plasma usage and cache that for the next second
+        // 2. We run lookups in parallel
+        // 3. Because the lookups are cached for a second we need to make sure
+        //    none of the target entities are deleted in the interim.
+
+        _parallel.ProcessNow(_pheromonesJob, _pheromonesJob.Pheromones.Count);
+        DebugTools.Assert(_pheromonesJob.Receivers.Count >= _pheromonesJob.Pheromones.Count);
+
+        for (var i = 0; i < _pheromonesJob.Pheromones.Count; i++)
+        {
+            var (_, active, pheromones, _) = _pheromonesJob.Pheromones[i];
+            var receivers = _pheromonesJob.Receivers[i].Receivers;
 
             switch (active.Pheromones)
             {
                 case XenoPheromones.Recovery:
-                    foreach (var receiver in _receivers)
+                    foreach (var receiver in receivers)
                     {
+                        if (Deleted(receiver) || _mobState.IsDead(receiver))
+                            continue;
+
                         oldRecovery.Remove(receiver);
                         var recovery = EnsureComp<XenoRecoveryPheromonesComponent>(receiver);
                         AssignMaxMultiplier(ref recovery.Multiplier, pheromones.PheromonesMultiplier);
@@ -245,8 +277,11 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
                     break;
                 case XenoPheromones.Warding:
-                    foreach (var receiver in _receivers)
+                    foreach (var receiver in active.Receivers)
                     {
+                        if (Deleted(receiver) || _mobState.IsDead(receiver))
+                            continue;
+
                         oldWarding.Remove(receiver);
                         var warding = EnsureComp<XenoWardingPheromonesComponent>(receiver);
                         AssignMaxMultiplier(ref warding.Multiplier, pheromones.PheromonesMultiplier);
@@ -254,17 +289,24 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
                     break;
                 case XenoPheromones.Frenzy:
-                    foreach (var receiver in _receivers)
+                    foreach (var receiver in active.Receivers)
                     {
+                        if (Deleted(receiver) || _mobState.IsDead(receiver))
+                            continue;
+
                         oldFrenzy.Remove(receiver);
                         var frenzy = EnsureComp<XenoFrenzyPheromonesComponent>(receiver);
                         AssignMaxMultiplier(ref frenzy.Multiplier, pheromones.PheromonesMultiplier);
-
-                        _movementSpeed.RefreshMovementSpeedModifiers(receiver);
+                        _refreshSpeeds.Add(receiver);
                     }
 
                     break;
             }
+        }
+
+        foreach (var uid in _refreshSpeeds)
+        {
+            _movementSpeed.RefreshMovementSpeedModifiers(uid);
         }
 
         foreach (var uid in oldRecovery)
@@ -280,7 +322,35 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         foreach (var uid in oldFrenzy)
         {
             RemComp<XenoFrenzyPheromonesComponent>(uid);
-            _movementSpeed.RefreshMovementSpeedModifiers(uid);
+        }
+    }
+
+    private record struct PheromonesJob() : IParallelRobustJob
+    {
+        // Bumped this because most receivers aren't going to be updating on any individual tick.
+        public int BatchSize => 8;
+
+        public EntityLookupSystem Lookup;
+
+        public ValueList<(
+            EntityUid Uid,
+            XenoActivePheromonesComponent Active,
+            XenoPheromonesComponent Pheromones,
+            TransformComponent Xform
+            )> Pheromones = new();
+
+        public ValueList<(bool Update, HashSet<Entity<XenoComponent>> Receivers)> Receivers = new();
+
+        public void Execute(int index)
+        {
+            ref var receivers = ref Receivers[index];
+
+            if (!receivers.Update)
+                return;
+
+            var (_, _, pheromones, xform) = Pheromones[index];
+            receivers.Receivers.Clear();
+            Lookup.GetEntitiesInRange(xform.Coordinates, pheromones.PheromonesRange, receivers.Receivers);
         }
     }
 }

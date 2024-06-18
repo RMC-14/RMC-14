@@ -30,6 +30,7 @@
       powerLoader: 2
       surgery: 1
     - type: MarineOrders
+  hidden: true # TODO CM14
 
 - type: startingGear
   id: CMGearDCC

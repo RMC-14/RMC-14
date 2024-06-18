@@ -8,8 +8,6 @@ This is the primary repo for CM14. To prevent people forking Robust Toolbox, a "
 
 If you want to host or create content for CM14, this is the repo you need. It contains both RobustToolbox and the content pack for development of new content packs.
 
-Server rules are located [here.](https://github.com/CM-14/CM-14/blob/master/Resources/ServerInfo/CMRules.txt)
-
 ## Links
 
 [Website](https://spacestation14.io/) | [Discord](https://discord.gg/mjpJk2ueDY) | [Steam](https://store.steampowered.com/app/1255460/Space_Station_14/) | [Standalone Download](https://spacestation14.io/about/nightlies/)

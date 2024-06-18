@@ -64,7 +64,6 @@
   icon: { sprite: "/Textures/_CM14/Objects/Medical/medical.rsi", state: ointment }
   spawn: CMOintment1
   maxCount: 10
-  itemSize: 1
 
 - type: entity
   id: CMOintment1
@@ -131,7 +130,6 @@
   icon: { sprite: "/Textures/_CM14/Objects/Medical/medical.rsi", state: gauze }
   spawn: CMGauze1
   maxCount: 10
-  itemSize: 1
 
 - type: entity
   id: CMGauze1
@@ -296,7 +294,6 @@
   icon: { sprite: "/Textures/_CM14/Objects/Medical/medical.rsi", state: burnkit }
   spawn: CMBurnKit1
   maxCount: 10
-  itemSize: 1
 
 - type: entity
   parent: CMBaseHealingItem
@@ -363,4 +360,3 @@
   icon: { sprite: "/Textures/_CM14/Objects/Medical/medical.rsi", state: traumakit }
   spawn: CMTraumaKit1
   maxCount: 10
-  itemSize: 1

@@ -13,6 +13,12 @@
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/shotgun_boxes.rsi
   - type: CMAmmoBox
   - type: Appearance
+  - type: Tag
+    tags:
+    - CMBoxShotgunShells
+
+- type: Tag
+  id: CMBoxShotgunShells
 
 - type: entity
   parent: CMBoxShotgunBase

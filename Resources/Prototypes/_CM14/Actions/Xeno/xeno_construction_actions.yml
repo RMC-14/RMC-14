@@ -1,4 +1,11 @@
 ﻿- type: entity
+  id: CMGuidebookActionXenoBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _CM14/Actions/xeno_actions.rsi
+
+- type: entity
   id: ActionXenoPlantWeeds
   parent: ActionXenoBase
   name: Plant Weeds (75) # TODO CM14 proper plasma costs

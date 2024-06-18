@@ -28,6 +28,12 @@
   minValue: 1
   maxValue: 999
 
+- type: emote
+  id: CMXenoDeathGasp
+  name: chat-emote-name-deathgasp
+  icon: Interface/Emotes/deathgasp.png
+  chatMessages: [ "cm-xeno-death-gasp" ]
+
 # TODO CM14 xenos should bleed and hurt nearby marines when damaged
 - type: entity
   id: CMXenoBase
@@ -65,6 +71,7 @@
       - ActionCritFakeDeath
       - ActionCritLastWords
   - type: Deathgasp
+    prototype: CMXenoDeathGasp
   - type: SoundOnDeath
     sound:
       collection: XenoDeath
@@ -100,6 +107,7 @@
   - type: ContentEye
   - type: CameraRecoil
   - type: MindContainer
+    showExamineInfo: true
   - type: StatusIcon
   - type: RotationVisuals
     defaultRotation: 0
@@ -165,6 +173,8 @@
     allowMovement: true
     name: cm-xeno-name
     description: cm-xeno-description
+    raffle:
+      settings: short
     rules: cm-xeno-rules
   - type: StatusEffects
     allowed:
@@ -199,6 +209,11 @@
   - type: AffectableByWeeds
   - type: ComplexInteraction
   - type: UserLimitHits
+  - type: MovementIgnoreGravity
+  - type: DisableConstruction
+  - type: XenoAnnounceDeath # TODO CM14 announce location of death (area)
+    message: cm-xeno-death
+    color: "#459A62"
 
 - type: entity
   abstract: true

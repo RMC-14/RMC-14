@@ -55,8 +55,36 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                             .ToList();
                         uiEntry.Panel.Button.Label.Text = entry.Name ?? entity.Name;
 
+                        var name = entity.Name;
+                        var color = CMAutomatedVendorPanel.DefaultColor;
+                        var borderColor = CMAutomatedVendorPanel.DefaultBorderColor;
+                        var hoverColor = CMAutomatedVendorPanel.DefaultBorderColor;
+                        if (section.TakeAll != null)
+                        {
+                            name = $"Mandatory: {name}";
+                            color = Color.FromHex("#251A0C");
+                            borderColor = Color.FromHex("#805300");
+                            hoverColor = Color.FromHex("#805300");
+                        }
+                        else if (entry.Recommended)
+                        {
+                            name = $"Recommended: {name}";
+                            color = Color.FromHex("#102919");
+                            borderColor = Color.FromHex("#3A9B52");
+                            hoverColor = Color.FromHex("#3A9B52");
+                        }
+
+                        uiEntry.Panel.Color = color;
+                        uiEntry.Panel.BorderColor = borderColor;
+                        uiEntry.Panel.HoveredColor = hoverColor;
+
                         var msg = new FormattedMessage();
-                        msg.AddText(entity.Description);
+                        msg.AddText(name);
+                        msg.PushNewline();
+
+                        if (!string.IsNullOrWhiteSpace(entity.Description))
+                            msg.AddText(entity.Description);
+
                         var tooltip = new Tooltip();
                         tooltip.SetMessage(msg);
 

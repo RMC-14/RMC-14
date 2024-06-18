@@ -17,12 +17,13 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
         if (args.NewMobState != MobState.Dead)
             return;
 
-        AnnounceSameHive(ent.Owner, ent.Comp.Message);
+        AnnounceSameHive(ent.Owner, Loc.GetString(ent.Comp.Message, ("xeno", ent.Owner)), color: ent.Comp.Color);
     }
 
-    public string WrapHive(string message)
+    public string WrapHive(string message, Color? color = null)
     {
-        return $"[color=#921992][font size=16][bold]{message}[/bold][/font][/color]\n";
+        color ??= Color.FromHex("#921992");
+        return $"[color={color.Value.ToHex()}][font size=16][bold]{message}[/bold][/font][/color]\n";
     }
 
     public virtual void Announce(EntityUid source,
@@ -38,16 +39,18 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
         EntityUid hive,
         string message,
         SoundSpecifier? sound = null,
-        PopupType? popup = null)
+        PopupType? popup = null,
+        Color? color = null)
     {
         var filter = Filter.Empty().AddWhereAttachedEntity(e => CompOrNull<XenoComponent>(e)?.Hive == hive);
-        Announce(source, filter, message, WrapHive(message), sound, popup);
+        Announce(source, filter, message, WrapHive(message, color), sound, popup);
     }
 
     public void AnnounceSameHive(Entity<XenoComponent?> xeno,
         string message,
         SoundSpecifier? sound = null,
-        PopupType? popup = null)
+        PopupType? popup = null,
+        Color? color = null)
     {
         if (!Resolve(xeno, ref xeno.Comp, false))
             return;
@@ -55,6 +58,6 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
         if (xeno.Comp.Hive is not { } hive)
             return;
 
-        AnnounceToHive(xeno, hive, message, sound, popup);
+        AnnounceToHive(xeno, hive, message, sound, popup, color);
     }
 }

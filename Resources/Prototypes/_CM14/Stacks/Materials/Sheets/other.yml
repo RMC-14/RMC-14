@@ -4,5 +4,4 @@
   icon: { sprite: /Textures/_CM14/Objects/Materials/Sheets/phoron.rsi, state: phoron }
   spawn: CMSheetPhoron
   maxCount: 50
-  itemSize: 1
 

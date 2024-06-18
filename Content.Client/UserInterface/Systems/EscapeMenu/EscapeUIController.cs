@@ -1,4 +1,5 @@
-﻿using Content.Client.Gameplay;
+﻿using Content.Client._CM14.Roadmap;
+using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.Guidebook;
 using Content.Client.UserInterface.Systems.Info;
@@ -67,6 +68,12 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
         {
             CloseEscapeWindow();
             _changelog.ToggleWindow();
+        };
+
+        _escapeWindow.RoadmapButton.OnPressed += _ =>
+        {
+            CloseEscapeWindow();
+            UIManager.GetUIController<RoadmapUIController>().ToggleRoadmap();
         };
 
         _escapeWindow.RulesButton.OnPressed += _ =>

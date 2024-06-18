@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/b0bca8ef7dedf94a30f456544bec6ef3aaa7ec8a/icons/obj/items/storage.dmi, https://github.com/cmss13-devs/cmss13/blob/60ca3cddb69147cb17fcaef3b0514586292a4c55/icons/mob/humans/onmob/items_lefthand_0.dmi, https://github.com/cmss13-devs/cmss13/blob/60ca3cddb69147cb17fcaef3b0514586292a4c55/icons/mob/humans/onmob/items_righthand_0.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/ca94d2e8715b73103fa9f213be53d343359b4107/icons/obj/items/storage.dmi, https://github.com/cmss13-devs/cmss13/blob/bec6653d487a49aa2b5a8e0c97bed9612f620211/icons/mob/humans/onmob/items_righthand_0.dmi, https://github.com/cmss13-devs/cmss13/blob/bec6653d487a49aa2b5a8e0c97bed9612f620211/icons/mob/humans/onmob/items_lefthand_0.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -11,64 +11,34 @@
       "name": "firstaid"
     },
     {
-      "name": "advfirstaid"
+      "name": "ointment"
     },
     {
-      "name": "antitox"
+      "name": "firefirstaid"
     },
     {
-      "name": "antitox2"
+      "name": "antitoxin"
     },
     {
-      "name": "antitox3"
+      "name": "radfirstaid"
     },
     {
-      "name": "rad"
-    },
-    {
-      "name": "rad2"
-    },
-    {
-      "name": "rad3"
+      "name": "purplefirstaid"
     },
     {
       "name": "o2"
     },
     {
+      "name": "bezerk"
+    },
+    {
+      "name": "advfirstaid"
+    },
+    {
       "name": "kit_empty"
     },
     {
-      "name": "burn"
-    },
-    {
-      "name": "ointment"
-    },
-    {
-      "name": "advfirstaid-inhand-left",
-      "directions": 4
-    },
-    {
-      "name": "advfirstaid-inhand-right",
-      "directions": 4
-    },
-    {
-      "name": "firstaid-inhand-left",
-      "directions": 4
-    },
-    {
       "name": "firstaid-inhand-right",
-      "directions": 4
-    },
-    {
-      "name": "o2-inhand-left",
-      "directions": 4
-    },
-    {
-      "name": "o2-inhand-right",
-      "directions": 4
-    },
-    {
-      "name": "ointment-inhand-left",
       "directions": 4
     },
     {
@@ -76,11 +46,35 @@
       "directions": 4
     },
     {
+      "name": "antitoxin-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "advfirstaid-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "o2-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "firstaid-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "ointment-inhand-left",
+      "directions": 4
+    },
+    {
       "name": "antitoxin-inhand-left",
       "directions": 4
     },
     {
-      "name": "antitox-inhand-right",
+      "name": "advfirstaid-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "o2-inhand-left",
       "directions": 4
     }
   ]

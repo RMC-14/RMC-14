@@ -98,8 +98,8 @@
 #        crate: CMCrateWoodenPlanks
 #      - cost: 2000
 #        crate: CMCrateFoldingBarricades
-      - cost: 3000
-        crate: CMCrateSuperconductingMagneticCoil
+#      - cost: 3000
+#        crate: CMCrateSuperconductingMagneticCoil
       - cost: 2000
         crate: CMCrateElectricalMaintenance
       - cost: 2000
@@ -161,17 +161,23 @@
     - name: Supplies
       entries:
       - cost: 2000
-        crate: CMCrateSuppliesCrayons
+        crate: CMCrateSupplyInternals
+#      - cost: 1000
+#        crate: CMCrateSupplyEvacuation
       - cost: 1000
         crate: CMCrateSuppliesBoxes
+      - cost: 1000
+        crate: CMCrateSupplyJanitor
+      - cost: 2000
+        crate: CMCrateSuppliesCrayons
 #    - name: Vehicle Ammo
 #      entries: []
     - name: Weapons
       entries:
       - cost: 4000
         crate: CMCrateM41A
-      - cost: 4000
-        crate: CMCrateM41AE2
+#      - cost: 4000
+#        crate: CMCrateM41AE2
       - cost: 3000
         crate: CMCrateVP78
     - name: Weapons Specialist Ammo

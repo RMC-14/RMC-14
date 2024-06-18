@@ -153,7 +153,7 @@ public sealed class XenoEggSystem : EntitySystem
             if (!args.Handled)
             {
                 _hands.TryDrop(user, egg, args.ClickLocation);
-                _popup.PopupClient("Best not to plant this thing outside of a containment cell.", user, user);
+                _popup.PopupClient(Loc.GetString("cm-xeno-egg-failed-plant-outside"), user, user);
             }
 
             args.Handled = true;
@@ -173,7 +173,7 @@ public sealed class XenoEggSystem : EntitySystem
         {
             if (HasComp<XenoEggComponent>(uid))
             {
-                _popup.PopupClient("There's already an egg there.", uid.Value, user);
+                _popup.PopupClient(Loc.GetString("cm-xeno-egg-failed-already-there"), uid.Value, user);
                 args.Handled = true;
                 return;
             }
@@ -185,7 +185,7 @@ public sealed class XenoEggSystem : EntitySystem
         // TODO CM14 only on hive weeds
         if (!hasWeeds)
         {
-            _popup.PopupClient("The egg must be planted on weeds.", user, user);
+            _popup.PopupClient(Loc.GetString("cm-xeno-egg-failed-must-weeds"), user, user);
             return;
         }
 
@@ -242,7 +242,7 @@ public sealed class XenoEggSystem : EntitySystem
         if (egg.Comp.State == XenoEggState.Opened)
         {
             if (user != null)
-                _popup.PopupClient("We clear the hatched egg.", egg, user.Value);
+                _popup.PopupClient(Loc.GetString("cm-xeno-egg-clear"), egg, user.Value);
 
             if (_net.IsClient)
                 return true;
@@ -255,7 +255,7 @@ public sealed class XenoEggSystem : EntitySystem
         if (egg.Comp.State != XenoEggState.Grown)
         {
             if (user != null)
-                _popup.PopupClient("The egg is not developed yet.", egg, user.Value);
+                _popup.PopupClient(Loc.GetString("cm-xeno-egg-not-developed"), egg, user.Value);
 
             return false;
         }

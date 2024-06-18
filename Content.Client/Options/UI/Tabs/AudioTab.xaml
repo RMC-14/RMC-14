@@ -4,6 +4,10 @@
          xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls">
     <BoxContainer Orientation="Vertical">
         <BoxContainer Orientation="Vertical" Margin="8 8 8 8" VerticalExpand="True">
+            <Label Text="{Loc 'cm-ui-cm14'}"
+                   FontColorOverride="{x:Static s:StyleNano.NanoGold}"
+                   StyleClasses="LabelKeyText"/>
+            <CheckBox Name="CMHumanoidVoicelines" Text="{Loc 'cm-ui-audio-humanoid-voicelines'}" Margin="0 0 0 5" />
             <Label Text="{Loc 'ui-options-volume-label'}"
                    FontColorOverride="{x:Static s:StyleNano.NanoGold}"
                    StyleClasses="LabelKeyText"/>

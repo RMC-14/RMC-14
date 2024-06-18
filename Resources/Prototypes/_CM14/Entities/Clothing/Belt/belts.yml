@@ -154,6 +154,7 @@
       - CableCoil
       - Multitool
       - Flashlight
+      - Sidearm
       - CMMagazinePistol
       - CMMagazineRevolver
 #      - # TODO CM14 handful of shotgun shells
@@ -186,7 +187,7 @@
       name: Knife
       whitelist:
         tags:
-        - Knife
+        - ThrowingKnife
 
 - type: entity
   parent: CMBeltBaseStorage

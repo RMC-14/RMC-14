@@ -38,4 +38,7 @@ public sealed partial class CMVendorEntry
 
     [DataField]
     public int Spawn = 1;
+
+    [DataField]
+    public bool Recommended;
 }

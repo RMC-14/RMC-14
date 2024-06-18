@@ -11,7 +11,7 @@
         value: false
       steps:
       - material: CMSteel
-        amount: 4
+        amount: 5
         doAfter: 2
 
   - node: assembly
@@ -19,29 +19,7 @@
     actions:
     - !type:SnapToGrid {}
     - !type:SetAnchor {}
-    edges:
-    - to: wired
-      conditions:
-      - !type:EntityAnchored {}
-      steps:
-      - material: Cable
-        amount: 5
-        doAfter: 2.5
-    - to: start
-      conditions:
-      - !type:EntityAnchored
-        anchored: false
-      completed:
-      - !type:SpawnPrototype
-        prototype: CMSheetMetal1
-        amount: 4
-      - !type:DeleteEntity {}
-      steps:
-      - tool: Welding
-        doAfter: 3
-
-  - node: wired
-    entity: CMAirlockAssembly
+    - !type:AppearanceChange
     edges:
     - to: electronics
       conditions:
@@ -53,32 +31,61 @@
         icon:
           sprite: "Objects/Misc/module.rsi"
           state: "door_electronics"
-        doAfter: 3
-    - to: assembly
+        doAfter: 4
+
+    - to: glassAssembly 
+      steps:
+      - material: CMGlass
+        amount: 5
+        doAfter: 2
+        
+    - to: start
       completed:
       - !type:SpawnPrototype
-        prototype: CableApcStack1
+        prototype: CMSheetMetal1
         amount: 5
+      - !type:DeleteEntity {}
       steps:
-      - tool: Cutting
-        doAfter: 2.5
+      - tool: Prying
+        doAfter: 2
 
   - node: electronics
+    entity: CMAirlockAssembly
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: wired
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+        - material: Cable
+          amount: 1
+          doAfter: 4
+    
+    - to: assembly
+      conditions:
+      - !type:EntityAnchored {}
+      completed:
+      - !type:EmptyAllContainers {}
+      steps:
+      - tool: Prying
+        doAfter: 5
+
+  - node: wired
+    entity: CMAirlockAssembly
+    actions:
+    - !type:AppearanceChange
     edges:
     - to: airlock
       conditions:
       - !type:EntityAnchored {}
       steps:
       - tool: Screwing
-        doAfter: 2.5
-    - to: glassElectronics
-      conditions:
-      - !type:EntityAnchored {}
-      steps:
-      - material: CMGlassReinforced
-        amount: 1
-        doAfter: 2
-    - to: wired
+        doAfter: 4
+      - tool: Welding
+        doAfter: 4
+    
+    - to: assembly
       conditions:
       - !type:EntityAnchored {}
       completed:
@@ -87,44 +94,18 @@
       - tool: Prying
         doAfter: 5
 
-  - node: glassElectronics
-    entity: CMAirlockAssembly
-    edges:
-    - to: glassAirlock
-      conditions:
-      - !type:EntityAnchored {}
-      steps:
-      - material: CMGlassReinforced
-        amount: 1
-        doAfter: 2
-      - tool: Screwing
-        doAfter: 2.5
-    - to: wired
-      conditions:
-      - !type:EntityAnchored {}
-      completed:
-      - !type:EmptyAllContainers {}
-      - !type:SpawnPrototype
-        prototype: CMSheetGlassReinforced1
-        amount: 1
-      steps:
-      - tool: Prying
-        doAfter: 5
-
-## Standard airlock
   - node: airlock
     entity: CMAirlock
     doNotReplaceInheritingEntities: true
     actions:
     - !type:SetWiresPanelSecurity
       wiresAccessible: true
+    - !type:AppearanceChange
     edges:
-    - to: wired
+    - to: assembly
       conditions:
       - !type:EntityAnchored {}
       - !type:DoorWelded {}
-      - !type:DoorBolted
-        value: false
       - !type:WirePanel {}
       - !type:AllWiresCut
       completed:
@@ -133,26 +114,111 @@
       - tool: Prying
         doAfter: 5
 
-## Glass airlock
+    ## Glass
+  - node: glassAssembly
+    entity: CMAirlockAssembly
+    actions:
+    - !type:SnapToGrid {}
+    - !type:SetAnchor {}
+    - !type:AppearanceChange
+    edges:
+    - to: glassElectronics
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tag: DoorElectronics
+        store: board
+        name: "door electronics circuit board"
+        icon:
+          sprite: "Objects/Misc/module.rsi"
+          state: "door_electronics"
+        doAfter: 4
+        
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMSheetMetal1
+        amount: 5
+      - !type:SpawnPrototype
+        prototype: CMSheetGlass1
+        amount: 5
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Prying
+        doAfter: 2
+        
+    - to: assembly
+      conditions:
+      - !type:EntityAnchored {}
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMSheetGlass1
+        amount: 5
+      steps:
+      - tool: Screwing
+        doAfter: 2
+
+  - node: glassElectronics
+    entity: CMAirlockAssembly
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: glassWired
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - material: Cable
+        amount: 1
+        doAfter: 4
+        
+    - to: glassAssembly
+      conditions:
+      - !type:EntityAnchored {}
+      completed:
+      - !type:EmptyAllContainers {}
+      steps:
+      - tool: Prying
+        doAfter: 5
+
+  - node: glassWired
+    entity: CMAirlockAssembly
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: glassAirlock
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tool: Screwing
+        doAfter: 4
+      - tool: Welding
+        doAfter: 4
+        
+    - to: glassAssembly
+      conditions:
+      - !type:EntityAnchored {}
+      completed:
+      - !type:EmptyAllContainers {}
+      steps:
+      - tool: Prying
+        doAfter: 5
+
   - node: glassAirlock
     entity: CMAirlockGlass
     doNotReplaceInheritingEntities: true
     actions:
     - !type:SetWiresPanelSecurity
       wiresAccessible: true
+    - !type:AppearanceChange
     edges:
-    - to: glassElectronics
+    - to: glassAssembly
       conditions:
       - !type:EntityAnchored {}
       - !type:DoorWelded {}
-      - !type:DoorBolted
-        value: false
       - !type:WirePanel {}
       - !type:AllWiresCut
       completed:
-      - !type:SpawnPrototype
-        prototype: CMSheetGlassReinforced1
-        amount: 1
+      - !type:EmptyAllContainers {}
       steps:
       - tool: Prying
-        doAfter: 2
+        doAfter: 5

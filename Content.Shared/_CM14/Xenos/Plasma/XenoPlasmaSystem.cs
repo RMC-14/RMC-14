@@ -49,12 +49,21 @@ public sealed class XenoPlasmaSystem : EntitySystem
 
     private void OnXenoTransferPlasmaAction(Entity<XenoPlasmaComponent> xeno, ref XenoTransferPlasmaActionEvent args)
     {
-        if (xeno.Owner == args.Target ||
-            !HasComp<XenoPlasmaComponent>(args.Target) ||
-            !HasPlasma(xeno, args.Amount))
+        if (xeno.Owner == args.Target)
         {
+            _popup.PopupClient(Loc.GetString("cm-xeno-plasma-cannot-self"), xeno, xeno);
             return;
         }
+
+        if (!TryComp(args.Target, out XenoPlasmaComponent? targetPlasma) ||
+            targetPlasma.MaxPlasma == 0)
+        {
+            _popup.PopupClient(Loc.GetString("cm-xeno-plasma-other-max-zero", ("target", args.Target)), xeno, xeno);
+            return;
+        }
+
+        if (!HasPlasmaPopup((xeno, xeno), args.Amount))
+            return;
 
         args.Handled = true;
 
@@ -98,7 +107,11 @@ public sealed class XenoPlasmaSystem : EntitySystem
         if (TryComp(args.OldXeno, out XenoPlasmaComponent? oldXeno))
         {
             var newMax = newXeno.Comp.MaxPlasma;
-            var newPlasma = FixedPoint2.Min(oldXeno.Plasma / oldXeno.MaxPlasma * newMax, newMax);
+            FixedPoint2 newPlasma = newMax;
+            var divisor = oldXeno.MaxPlasma * newMax;
+            if (divisor != 0)
+                newPlasma = FixedPoint2.Min(oldXeno.Plasma / divisor, newMax);
+
             SetPlasma(newXeno, newPlasma);
         }
     }

@@ -1,7 +1,7 @@
 ﻿- type: entity
   id: CMJobsXeno
   categories:
-  - hideSpawnMenu
+  - HideSpawnMenu
   components:
   - type: JobGroup
     name: role-timer-xeno-roles
@@ -29,7 +29,7 @@
 - type: entity
   id: CMJobsXenoDrones
   categories:
-  - hideSpawnMenu
+  - HideSpawnMenu
   components:
   - type: JobGroup
     name: role-timer-xeno-drones
@@ -44,7 +44,7 @@
 - type: entity
   id: CMJobsXenoTierThree
   categories:
-  - hideSpawnMenu
+  - HideSpawnMenu
   components:
   - type: JobGroup
     name: role-timer-xeno-tier-three

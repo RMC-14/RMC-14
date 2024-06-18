@@ -75,5 +75,15 @@
       state: green
     - state: senior_enlisted_advisor
 
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleSEA
+  name: Senior Enlisted Advisor
+  description: Mentor for the USCM!
+  noSpawn: false
+  components:
+  - type: Sprite
+    state: senior_enlisted_advisor
+
 - type: playTimeTracker
   id: CMJobSeniorEnlistedAdvisor

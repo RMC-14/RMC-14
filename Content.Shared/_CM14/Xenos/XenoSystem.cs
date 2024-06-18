@@ -229,7 +229,7 @@ public sealed class XenoSystem : EntitySystem
 
         FixedPoint2 multiplier;
         if (_mobState.IsCritical(xeno))
-            multiplier = xeno.Comp.CritHealMultiplier;
+            multiplier = xeno.Comp.RestHealMultiplier; // TODO CM14
         else if (_standing.IsDown(xeno) || HasComp<XenoRestingComponent>(xeno))
             multiplier = xeno.Comp.RestHealMultiplier;
         else

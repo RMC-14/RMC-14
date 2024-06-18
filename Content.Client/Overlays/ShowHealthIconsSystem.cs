@@ -26,7 +26,6 @@ public sealed class ShowHealthIconsSystem : EquipmentHudSystem<ShowHealthIconsCo
         base.Initialize();
 
         SubscribeLocalEvent<DamageableComponent, GetStatusIconsEvent>(OnGetStatusIconsEvent);
-
     }
 
     protected override void UpdateInternal(RefreshEquipmentHudEvent<ShowHealthIconsComponent> component)
@@ -48,7 +47,7 @@ public sealed class ShowHealthIconsSystem : EquipmentHudSystem<ShowHealthIconsCo
 
     private void OnGetStatusIconsEvent(Entity<DamageableComponent> entity, ref GetStatusIconsEvent args)
     {
-        if (!IsActive || args.InContainer)
+        if (!IsActive)
             return;
 
         var healthIcons = _healthIcons.GetIcons(entity);

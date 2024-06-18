@@ -27,6 +27,7 @@
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
   - type: Webbing
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: CMWebbingBase

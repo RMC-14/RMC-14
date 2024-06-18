@@ -12,7 +12,7 @@ public sealed partial class NightVisionComponent : Component
     public ProtoId<AlertPrototype> Alert = "XenoNightVision";
 
     [DataField, AutoNetworkedField]
-    public NightVisionState State = NightVisionState.Half;
+    public NightVisionState State = NightVisionState.Full;
 }
 
 [Serializable, NetSerializable]

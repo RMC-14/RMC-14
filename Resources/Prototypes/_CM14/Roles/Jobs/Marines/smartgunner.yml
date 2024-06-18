@@ -23,6 +23,7 @@
       smartgun: 1
     - type: CMVendorUser
       points: 45
+  hidden: true # TODO CM14
 
 - type: startingGear
   id: CMGearSmartgunner
