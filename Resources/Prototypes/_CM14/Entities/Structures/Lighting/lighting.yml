@@ -47,6 +47,9 @@
       - !type:PlaySoundBehavior
         sound:
           collection: GlassBreak
+  - type: Construction
+    graph: CMLightFixture
+    node: tubeLight
 
 # Light Tube, Empty
 - type: entity
@@ -129,6 +132,35 @@
       On: bulb1
       Broken: bulb-broken
       Burned: bulb-burned
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors: #excess damage, don't spawn entities.
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:EmptyAllContainersBehaviour
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+  - type: Construction
+    graph: CMLightFixture
+    node: bulbLight
 
 # Light Bulb, Empty
 - type: entity
