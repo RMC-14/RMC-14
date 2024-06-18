@@ -11,8 +11,6 @@
   - type: ItemSlots
   - type: CMItemSlots
     startingItem: CMMRE
-    cooldown: 0.5
-    cooldownPopup: You need to wait before taking another!
     count: 5
     slot:
       name: Magazine
