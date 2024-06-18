@@ -1,4 +1,6 @@
+using Content.Shared._CM14.Input;
 using Content.Shared.Access.Components;
+using Content.Shared.ActionBlocker;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -14,20 +16,24 @@ using Content.Shared.Whitelist;
 using Content.Shared.Wieldable;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Input.Binding;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace Content.Shared._CM14.Attachable;
 
 public abstract class SharedAttachableHolderSystem : EntitySystem
 {
+    [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly SharedAttachableWeaponModifiersSystem _attachableWeaponsModifiersSystem = default!;
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly SharedGunSystem _gunSystem = default!;
-    [Dependency] private readonly SharedItemSystem _itemSystem = default!;
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private readonly SharedGunSystem _gunSystem = default!;
+    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
+    [Dependency] private readonly SharedItemSystem _itemSystem = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
+    
     [Dependency] protected readonly IEntityManager EntityManager = default!;
     
     private EntityQuery<MetaDataComponent> metaQuery;
@@ -47,6 +53,38 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, EntRemovedFromContainerMessage>(OnDetached);
         SubscribeLocalEvent<AttachableHolderComponent, ItemWieldedEvent>(OnHolderWielded);
         SubscribeLocalEvent<AttachableHolderComponent, ItemUnwieldedEvent>(OnHolderUnwielded);
+
+        CommandBinds.Builder
+            .Bind(CMKeyFunctions.CMActivateAttachableBarrel,
+                InputCmdHandler.FromDelegate(session =>
+                {
+                    if(session?.AttachedEntity is { } userUid)
+                        ToggleAttachable(userUid, "cm-aslot-barrel");
+                }, handle: false))
+            .Bind(CMKeyFunctions.CMActivateAttachableRail,
+                InputCmdHandler.FromDelegate(session =>
+                {
+                    if(session?.AttachedEntity is { } userUid)
+                        ToggleAttachable(userUid, "cm-aslot-rail");
+                }, handle: false))
+            .Bind(CMKeyFunctions.CMActivateAttachableStock,
+                InputCmdHandler.FromDelegate(session =>
+                {
+                    if(session?.AttachedEntity is { } userUid)
+                        ToggleAttachable(userUid, "cm-aslot-stock");
+                }, handle: false))
+            .Bind(CMKeyFunctions.CMActivateAttachableUnderbarrel,
+                InputCmdHandler.FromDelegate(session =>
+                {
+                    if(session?.AttachedEntity is { } userUid)
+                        ToggleAttachable(userUid, "cm-aslot-underbarrel");
+                }, handle: false))
+            .Register<SharedAttachableHolderSystem>();
+    }
+
+    public override void Shutdown()
+    {
+        CommandBinds.Unregister<SharedAttachableHolderSystem>();
     }
 
 
@@ -188,7 +226,7 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
         
         UpdateStripUi(holder.Owner, holder.Comp);
         
-        RaiseLocalEvent(holder, new AttachableHolderAttachablesAlteredEvent(args.Entity, args.Container.ID, true));
+        RaiseLocalEvent(holder, new AttachableHolderAttachablesAlteredEvent(args.Entity, args.Container.ID, AttachableAlteredType.Attached));
         RaiseLocalEvent(args.Entity, new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Attached));
         
         if(EntityManager.TryGetComponent<GunComponent>(holder.Owner, out GunComponent? gunComponent))
@@ -261,7 +299,7 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
         
         UpdateStripUi(holder.Owner, holder.Comp);
         
-        RaiseLocalEvent(holder, new AttachableHolderAttachablesAlteredEvent(args.Entity, args.Container.ID, false));
+        RaiseLocalEvent(holder, new AttachableHolderAttachablesAlteredEvent(args.Entity, args.Container.ID, AttachableAlteredType.Detached));
         RaiseLocalEvent(args.Entity, new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Detached));
         
         if(EntityManager.TryGetComponent<GunComponent>(holder.Owner, out GunComponent? gunComponent))
@@ -376,5 +414,52 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
             
             RaiseLocalEvent(attachableUid, new AttachableAlteredEvent(holder.Owner, attachableAltered));
         }
+    }
+    
+    private void ToggleAttachable(EntityUid userUid, string slotID)
+    {
+        if(!EntityManager.TryGetComponent<HandsComponent>(userUid, out HandsComponent? handsComponent) ||
+            !EntityManager.TryGetComponent<AttachableHolderComponent>(handsComponent.ActiveHandEntity, out AttachableHolderComponent? holderComponent))
+            return;
+        
+        if(!holderComponent.Running || !_actionBlockerSystem.CanInteract(userUid, handsComponent.ActiveHandEntity))
+            return;
+        
+        if(!_containerSystem.TryGetContainer(handsComponent.ActiveHandEntity.Value, slotID, out BaseContainer? container) || container.Count <= 0)
+            return;
+        
+        EntityUid attachableUid = container.ContainedEntities[0];
+        
+        if(!TryComp(attachableUid, out AttachableToggleableComponent? toggleableComponent))
+            return;
+        
+        RaiseLocalEvent(attachableUid, new AttachableToggleStartedEvent((handsComponent.ActiveHandEntity.Value, holderComponent), userUid, slotID));
+    }
+    
+    public void SetSupercedingAttachable(Entity<AttachableHolderComponent> holder, EntityUid? supercedingAttachable)
+    {
+        holder.Comp.SupercedingAttachable = supercedingAttachable;
+    }
+    
+    public bool TryGetSlotID(EntityUid holderUid, EntityUid attachableUid, [NotNullWhen(true)] out string? slotID)
+    {
+        slotID = null;
+        
+        if(!EntityManager.TryGetComponent<AttachableHolderComponent>(holderUid, out AttachableHolderComponent? holderComponent) || 
+            !EntityManager.TryGetComponent<AttachableComponent>(attachableUid, out _))
+            return false;
+        
+        foreach(string id in holderComponent.Slots.Keys)
+        {
+            if(!_containerSystem.TryGetContainer(holderUid, id, out BaseContainer? container) || container.Count <= 0)
+                continue;
+            
+            if(container.ContainedEntities[0] != attachableUid)
+                continue;
+            
+            slotID = id;
+            return true;
+        }
+        return false;
     }
 }

@@ -6,13 +6,13 @@ public sealed partial class AttachableHolderAttachablesAlteredEvent : EntityEven
 {
     public readonly EntityUid AttachableUid;
     public readonly string SlotID;
-    public readonly bool Attached;
+    public readonly AttachableAlteredType Alteration;
     
     
-    public AttachableHolderAttachablesAlteredEvent(EntityUid attachableUid, string slotID, bool attached)
+    public AttachableHolderAttachablesAlteredEvent(EntityUid attachableUid, string slotID, AttachableAlteredType alteration)
     {
         AttachableUid = attachableUid;
         SlotID = slotID;
-        Attached = attached;
+        Alteration = alteration;
     }
 }

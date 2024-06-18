@@ -19,4 +19,9 @@ public sealed partial class AttachableVisualsComponent : Component
     //The slot names can be found in AttachableHolderComponent.cs
     [DataField("prefix", required:true), AutoNetworkedField]
     public string Prefix;
+    
+    //If this is toggled on and the item has an AttachableToggleableComponent, then the visualisation system will try to show a different sprite when it's active.
+    //Each active state must have "-active" appended to the end of its name.
+    [DataField("showActive"), AutoNetworkedField]
+    public bool ShowActive = false;
 }

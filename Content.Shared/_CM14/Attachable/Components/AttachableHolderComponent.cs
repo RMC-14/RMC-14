@@ -9,6 +9,8 @@ namespace Content.Shared._CM14.Attachable;
 [Access(typeof(SharedAttachableHolderSystem))]
 public sealed partial class AttachableHolderComponent : Component
 {
+    public EntityUid? SupercedingAttachable;
+    
     //The key is one of the slot IDs at the bottom of this file. Each key is followed by a listing of all the attachables that fit into that slot.
     [DataField, AutoNetworkedField]
     public Dictionary<string, EntityWhitelist> Slots = new Dictionary<string, EntityWhitelist>();

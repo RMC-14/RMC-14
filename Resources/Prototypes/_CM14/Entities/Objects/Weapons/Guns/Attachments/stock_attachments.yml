@@ -31,10 +31,30 @@
   parent: CMStockAttachmentBase
   id: CMAttachmentM39Stock
   name: submachinegun stock
-  description: A rare ARMAT stock distributed in small numbers to USCM forces. Compatible with the M39, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Seemingly a bit more effective in a brawl
+  description: A rare ARMAT stock distributed in small numbers to USCM forces. Compatible with the M39, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Seemingly a bit more effective in a brawl.
   components:
   - type: Sprite
     state: smgstock
+
+- type: entity
+  parent: CMStockAttachmentBase
+  id: CMAttachmentM39StockCollapsible
+  name: submachinegun folding stock
+  description: A Kirchner brand K2 M39 folding stock, standard issue in the USCM. The stock, when extended, reduces recoil and improves accuracy, but at a reduction to handling and agility. Seemingly a bit more effective in a brawl. This stock can collapse in, removing all positive and negative effects.
+  components:
+  - type: Sprite
+    state: smgstockcc
+  - type: Tag
+    tags:
+    - CMAttachableStock
+    - CMAttachableStockSMGCollapsible
+  - type: AttachableToggleable
+  - type: AttachableVisuals
+    rsi: _CM14/Objects/Weapons/Guns/Attachments/stock.rsi
+    prefix: smgstockcol-
+    showActive: true
+#  - type: AttachableSizeModifier
+#    sizeModifier: 2
 
 - type: entity
   parent: CMStockAttachmentBase
@@ -56,3 +76,6 @@
 
 - type: Tag
   id: CMAttachableStock
+  
+- type: Tag
+  id: CMAttachableStockSMGCollapsible

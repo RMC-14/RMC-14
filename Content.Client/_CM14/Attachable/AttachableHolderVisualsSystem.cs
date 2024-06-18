@@ -8,6 +8,8 @@ namespace Content.Client._CM14.Attachable;
 public sealed class AttachableHolderVisualsSystem : EntitySystem
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly SharedAttachableHolderSystem _attachableHolderSystem = default!;
+    
     
     public override void Initialize()
     {
@@ -21,31 +23,28 @@ public sealed class AttachableHolderVisualsSystem : EntitySystem
         if(!_entityManager.TryGetComponent<AttachableVisualsComponent>(args.AttachableUid, out AttachableVisualsComponent? attachableComponent))
             return;
         
-        if(args.Attached)
+        switch(args.Alteration)
         {
-            AddAttachableOverlay(holder.Owner, holder.Comp, attachableComponent, args.SlotID);
-            return;
+            case AttachableAlteredType.Attached:
+                SetAttachableOverlay(holder.Owner, holder.Comp, attachableComponent, args.SlotID);
+                break;
+                
+            case AttachableAlteredType.Detached:
+                RemoveAttachableOverlay(holder.Owner, holder.Comp, args.SlotID);
+                break;
+                
+            case AttachableAlteredType.Activated:
+                if(!attachableComponent.ShowActive)
+                    break;
+                SetAttachableOverlay(holder.Owner, holder.Comp, attachableComponent, args.SlotID, "-active");
+                break;
+                
+            case AttachableAlteredType.Deactivated:
+                if(!attachableComponent.ShowActive)
+                    break;
+                SetAttachableOverlay(holder.Owner, holder.Comp, attachableComponent, args.SlotID);
+                break;
         }
-        RemoveAttachableOverlay(holder.Owner, holder.Comp, args.SlotID);
-    }
-    
-    private void AddAttachableOverlay(EntityUid holderUid, AttachableHolderVisualsComponent holderComponent, AttachableVisualsComponent attachableComponent, string slotID)
-    {
-        if(!holderComponent.Offsets.ContainsKey(slotID) || !_entityManager.TryGetComponent<SpriteComponent>(holderUid, out SpriteComponent? spriteComponent))
-            return;
-        
-        if(attachableComponent.Rsi == null || attachableComponent.Prefix == null)
-            return;
-        
-        PrototypeLayerData layerData = new PrototypeLayerData()
-        {
-            RsiPath = attachableComponent.Rsi,
-            State = attachableComponent.Prefix + slotID,
-            Offset = holderComponent.Offsets[slotID],
-            Visible = true
-        };
-        
-        spriteComponent.LayerMapSet(slotID, spriteComponent.AddLayer(layerData));
     }
     
     private void RemoveAttachableOverlay(EntityUid holderUid, AttachableHolderVisualsComponent holderComponent, string slotID)
@@ -58,5 +57,30 @@ public sealed class AttachableHolderVisualsSystem : EntitySystem
         
         spriteComponent.LayerMapRemove(slotID);
         spriteComponent.RemoveLayer(index);
+    }
+    
+    private void SetAttachableOverlay(EntityUid holderUid, AttachableHolderVisualsComponent holderComponent, AttachableVisualsComponent attachableComponent, string slotID, string suffix = "")
+    {
+        if(!holderComponent.Offsets.ContainsKey(slotID) || !_entityManager.TryGetComponent<SpriteComponent>(holderUid, out SpriteComponent? spriteComponent))
+            return;
+        
+        if(attachableComponent.Rsi == null || attachableComponent.Prefix == null)
+            return;
+        
+        PrototypeLayerData layerData = new PrototypeLayerData()
+        {
+            RsiPath = attachableComponent.Rsi,
+            State = attachableComponent.Prefix + slotID + suffix,
+            Offset = holderComponent.Offsets[slotID],
+            Visible = true
+        };
+        
+        if(spriteComponent.LayerMapTryGet(slotID, out int index))
+        {
+            spriteComponent.LayerSetData(index, layerData);
+            return;
+        }
+        
+        spriteComponent.LayerMapSet(slotID, spriteComponent.AddLayer(layerData));
     }
 }
