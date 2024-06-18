@@ -15,7 +15,10 @@ public sealed class SharedAttachableToggleableSystem : EntitySystem
     
     public override void Initialize()
     {
-        SubscribeLocalEvent<AttachableToggleableComponent, AttachableAlteredEvent>(OnAttachableAltered);
+        SubscribeLocalEvent<AttachableToggleableComponent, AttachableAlteredEvent>(OnAttachableAltered, after: new[]
+            {
+                typeof(SharedAttachableWeaponRangedModsSystem)
+            });
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleStartedEvent>(OnAttachableToggleStarted);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleDoAfterEvent>(OnAttachableToggleDoAfter);
     }
@@ -74,6 +77,7 @@ public sealed class SharedAttachableToggleableSystem : EntitySystem
     private void FinishToggle(Entity<AttachableToggleableComponent> attachable, Entity<AttachableHolderComponent> holder, string slotID)
     {
         attachable.Comp.Active = !attachable.Comp.Active;
+        RaiseLocalEvent(attachable.Owner, new AttachableAlteredEvent(holder.Owner, attachable.Comp.Active ? AttachableAlteredType.Activated : AttachableAlteredType.Deactivated));
         RaiseLocalEvent(holder.Owner,
             new AttachableHolderAttachablesAlteredEvent(attachable.Owner, slotID, attachable.Comp.Active ? AttachableAlteredType.Activated : AttachableAlteredType.Deactivated));
         
@@ -96,7 +100,5 @@ public sealed class SharedAttachableToggleableSystem : EntitySystem
             }
             _attachableHolderSystem.SetSupercedingAttachable(holder, attachable.Owner);
         }
-        
-        RaiseLocalEvent(attachable.Owner, new AttachableAlteredEvent(holder.Owner, attachable.Comp.Active ? AttachableAlteredType.Activated : AttachableAlteredType.Deactivated));
     }
 }

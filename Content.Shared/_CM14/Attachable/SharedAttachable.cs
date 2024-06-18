@@ -70,16 +70,16 @@ public sealed partial class AttachableWeaponRangedModifierSet
     public float MultiplierCameraRecoilScalar = 1.0f;
     
     [DataField("angleIncrease")]
-    public float MultiplierAngleIncrease = 1.0f;
+    public double MultiplierAngleIncrease = 1.0;
     
     [DataField("angleDecay")]
-    public float MultiplierAngleDecay = 1.0f;
+    public double MultiplierAngleDecay = 1.0;
     
     [DataField("maxAngle")]
-    public float MultiplierMaxAngle = 1.0f;
+    public double MultiplierMaxAngle = 1.0;
     
     [DataField("minAngle")]
-    public float MultiplierMinAngle = 1.0f;
+    public double MultiplierMinAngle = 1.0;
     
     [DataField("fireRate")]
     public float MultiplierFireRate = 1.0f;

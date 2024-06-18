@@ -7,6 +7,9 @@ namespace Content.Shared._CM14.Attachable;
 [Access(typeof(SharedAttachableWeaponRangedModsSystem))]
 public sealed partial class AttachableWeaponRangedModsComponent : Component
 {
-    [DataField("modifiers", required:true), AutoNetworkedField]
-    public AttachableWeaponRangedModifierSet Modifiers;
+    [DataField("unwielded"), AutoNetworkedField]
+    public AttachableWeaponRangedModifierSet ModifiersUnwielded = new AttachableWeaponRangedModifierSet();
+    
+    [DataField("wielded"), AutoNetworkedField]
+    public AttachableWeaponRangedModifierSet ModifiersWielded = new AttachableWeaponRangedModifierSet();
 }
