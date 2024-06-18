@@ -1,7 +1,9 @@
 ﻿using System.Numerics;
+using Content.Shared._CM14.Inventory;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DragDrop;
+using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -19,6 +21,7 @@ public sealed class DeployableItemSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedCMInventorySystem _cmInventory = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -32,6 +35,7 @@ public sealed class DeployableItemSystem : EntitySystem
         SubscribeLocalEvent<DeployableItemComponent, CanDragEvent>(OnCanDrag);
         SubscribeLocalEvent<DeployableItemComponent, CanDropDraggedEvent>(OnCanDropDragged);
         SubscribeLocalEvent<DeployableItemComponent, DragDropDraggedEvent>(OnDragDropDragged);
+        SubscribeLocalEvent<DeployableItemComponent, ExaminedEvent>(OnExamined);
 
         SubscribeLocalEvent<HandsComponent, CanDropTargetEvent>(OnCanDropTarget);
     }
@@ -79,6 +83,31 @@ public sealed class DeployableItemSystem : EntitySystem
         ent.Comp.Position = DeployableItemPosition.None;
         _appearance.SetData(ent, DeployableItemVisuals.Deployed, false);
         Dirty(ent);
+    }
+
+    private void OnExamined(Entity<DeployableItemComponent> ent, ref ExaminedEvent args)
+    {
+        var (filled, total) = _cmInventory.GetItemSlotsFilled(ent.Owner);
+        using (args.PushGroup(nameof(DeployableItemComponent)))
+        {
+            if (ent.Comp.Position == DeployableItemPosition.None)
+            {
+                args.PushMarkup(Loc.GetString("cm-magazine-examine-not-deployed"));
+
+                if (filled >= total * ent.Comp.AlmostEmptyThreshold)
+                    args.PushMarkup(Loc.GetString("cm-magazine-examine-almost-full"));
+                else if (filled > 0)
+                    args.PushMarkup(Loc.GetString("cm-magazine-examine-almost-empty"));
+                else
+                    args.PushMarkup(Loc.GetString("cm-magazine-examine-empty"));
+            }
+            else
+            {
+                args.PushMarkup(Loc.GetString("cm-magazine-examine-deployed-click"));
+                args.PushMarkup(Loc.GetString("cm-magazine-examine-deployed-drag"));
+                args.PushMarkup(Loc.GetString("cm-magazine-examine-magazines", ("filled", filled), ("total", total)));
+            }
+        }
     }
 
     private void OnAfterInteract(Entity<DeployableItemComponent> ent, ref AfterInteractEvent args)

@@ -1,4 +1,5 @@
-﻿using Robust.Shared.GameStates;
+﻿using Content.Shared.FixedPoint;
+using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._CM14.Anchor;
@@ -9,6 +10,9 @@ public sealed partial class DeployableItemComponent : Component
 {
     [DataField, AutoNetworkedField]
     public DeployableItemPosition Position;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 AlmostEmptyThreshold = FixedPoint2.New(0.4);
 }
 
 [Serializable, NetSerializable]

@@ -173,49 +173,22 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
     protected virtual void ContentsUpdated(Entity<CMItemSlotsComponent> ent)
     {
-        if (!TryComp(ent, out ItemSlotsComponent? itemSlots))
-        {
-            _appearance.SetData(ent, CMItemSlotsLayers.Fill, CMItemSlotsVisuals.Empty);
-            return;
-        }
-
-        var total = itemSlots.Slots.Count;
+        var (filled, total) = GetItemSlotsFilled(ent.Owner);
+        CMItemSlotsVisuals visuals;
         if (total == 0)
-        {
-            _appearance.SetData(ent, CMItemSlotsLayers.Fill, CMItemSlotsVisuals.Empty);
-            return;
-        }
-
-        var filled = 0;
-        foreach (var (_, slot) in itemSlots.Slots)
-        {
-            if (slot.ContainerSlot?.ContainedEntity is { } contained &&
-                !TerminatingOrDeleted(contained))
-            {
-                filled++;
-            }
-        }
-
-        if (filled >= total)
-        {
-            _appearance.SetData(ent, CMItemSlotsLayers.Fill, CMItemSlotsVisuals.Full);
-        }
+            visuals = CMItemSlotsVisuals.Empty;
+        else if (filled >= total)
+            visuals = CMItemSlotsVisuals.Full;
         else if (filled >= total * 0.666f)
-        {
-            _appearance.SetData(ent, CMItemSlotsLayers.Fill, CMItemSlotsVisuals.High);
-        }
+            visuals = CMItemSlotsVisuals.High;
         else if (filled >= total * 0.333f)
-        {
-            _appearance.SetData(ent, CMItemSlotsLayers.Fill, CMItemSlotsVisuals.Medium);
-        }
+            visuals = CMItemSlotsVisuals.Medium;
         else if (filled > 0)
-        {
-            _appearance.SetData(ent, CMItemSlotsLayers.Fill, CMItemSlotsVisuals.Low);
-        }
+            visuals = CMItemSlotsVisuals.Low;
         else
-        {
-            _appearance.SetData(ent, CMItemSlotsLayers.Fill, CMItemSlotsVisuals.Empty);
-        }
+            visuals = CMItemSlotsVisuals.Empty;
+
+        _appearance.SetData(ent, CMItemSlotsLayers.Fill, visuals);
     }
 
     private bool SlotCanInteract(EntityUid user, EntityUid holster, [NotNullWhen(true)] out ItemSlotsComponent? itemSlots)
@@ -390,5 +363,27 @@ public abstract class SharedCMInventorySystem : EntitySystem
         }
 
         return false;
+    }
+
+    public (int Filled, int Total) GetItemSlotsFilled(Entity<ItemSlotsComponent?> slots)
+    {
+        if (!Resolve(slots, ref slots.Comp, false))
+            return (0, 0);
+
+        var total = slots.Comp.Slots.Count;
+        if (total == 0)
+            return (0, 0);
+
+        var filled = 0;
+        foreach (var (_, slot) in slots.Comp.Slots)
+        {
+            if (slot.ContainerSlot?.ContainedEntity is { } contained &&
+                !TerminatingOrDeleted(contained))
+            {
+                filled++;
+            }
+        }
+
+        return (filled, slots.Comp.Slots.Count);
     }
 }
