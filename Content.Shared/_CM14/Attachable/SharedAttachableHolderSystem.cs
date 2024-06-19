@@ -14,6 +14,7 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Whitelist;
 using Content.Shared.Wieldable;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Input.Binding;
@@ -27,6 +28,7 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
     [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly SharedAttachableWeaponRangedModsSystem _attachableWeaponRangedModsSystem = default!;
+    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly SharedGunSystem _gunSystem = default!;
@@ -47,8 +49,6 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, AttachableHolderAttachToSlotMessage>(OnAttachableHolderAttachToSlotMessage);
         SubscribeLocalEvent<AttachableHolderComponent, AttachableHolderDetachMessage>(OnAttachableHolderDetachMessage);
         SubscribeLocalEvent<AttachableHolderComponent, BoundUIOpenedEvent>(OnAttachableHolderUiOpened);
-        SubscribeLocalEvent<AttachableHolderComponent, EntInsertedIntoContainerMessage>(OnAttached);
-        SubscribeLocalEvent<AttachableHolderComponent, EntRemovedFromContainerMessage>(OnDetached);
         SubscribeLocalEvent<AttachableHolderComponent, GetVerbsEvent<InteractionVerb>>(OnAttachableHolderGetVerbs);
         SubscribeLocalEvent<AttachableHolderComponent, GunRefreshModifiersEvent>(OnAttachableHolderRefreshModifiers, after: new[] { typeof(WieldableSystem) });
         SubscribeLocalEvent<AttachableHolderComponent, InteractUsingEvent>(OnAttachableHolderInteractUsing);
@@ -197,7 +197,7 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
         });
     }
     
-    protected virtual void OnAttachDoAfter(EntityUid uid, AttachableHolderComponent component, AttachableAttachDoAfterEvent args)
+    private void OnAttachDoAfter(EntityUid uid, AttachableHolderComponent component, AttachableAttachDoAfterEvent args)
     {
         if(args.Cancelled || args.Handled || args.Args.Target == null || args.Args.Used == null)
             return;
@@ -217,6 +217,7 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
             return false;
         
         ContainerSlot container = _containerSystem.EnsureContainer<ContainerSlot>(holder, slotID);
+        container.OccludesLight = false;
         
         if(container.Count > 0 && !Detach(holder, attachableUid, userUid, slotID))
             return false;
@@ -224,20 +225,15 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
         if(!_containerSystem.Insert(attachableUid, container))
             return false;
         
-        return true;
-    }
-    
-    protected virtual void OnAttached(Entity<AttachableHolderComponent> holder, ref EntInsertedIntoContainerMessage args)
-    {
-        if(!holder.Comp.Slots.ContainsKey(args.Container.ID))
-            return;
-        
         UpdateStripUi(holder.Owner, holder.Comp);
         
-        RaiseLocalEvent(holder, new AttachableHolderAttachablesAlteredEvent(args.Entity, args.Container.ID, AttachableAlteredType.Attached));
-        RaiseLocalEvent(args.Entity, new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Attached));
+        RaiseLocalEvent(holder, new AttachableHolderAttachablesAlteredEvent(attachableUid, slotID, AttachableAlteredType.Attached));
+        RaiseLocalEvent(attachableUid, new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Attached));
+        _audioSystem.PlayPredicted(EntityManager.GetComponent<AttachableComponent>(attachableUid).AttachSound, holder, userUid);
         
         Dirty(holder);
+        
+        return true;
     }
     
     //Detaching
@@ -264,7 +260,7 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
         });
     }
     
-    protected virtual void OnDetachDoAfter(EntityUid uid, AttachableHolderComponent component, AttachableDetachDoAfterEvent args)
+    private void OnDetachDoAfter(EntityUid uid, AttachableHolderComponent component, AttachableDetachDoAfterEvent args)
     {
         if(args.Cancelled || args.Handled || args.Args.Target == null || args.Args.Used == null)
             return;
@@ -293,21 +289,17 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
             return false;
         
         _containerSystem.TryRemoveFromContainer(attachable);
+        {
+            UpdateStripUi(holder.Owner, holder.Comp);
+            
+            RaiseLocalEvent(holder.Owner, new AttachableHolderAttachablesAlteredEvent(attachableUid, slotID, AttachableAlteredType.Detached));
+            RaiseLocalEvent(attachableUid, new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Detached, userUid));
+            _audioSystem.PlayPredicted(EntityManager.GetComponent<AttachableComponent>(attachableUid).DetachSound, holder, userUid);
+            
+            Dirty(holder);
+        }
         _handsSystem.TryPickupAnyHand(userUid, attachable);
         return true;
-    }
-    
-    protected virtual void OnDetached(Entity<AttachableHolderComponent> holder, ref EntRemovedFromContainerMessage args)
-    {
-        if(!holder.Comp.Slots.ContainsKey(args.Container.ID))
-            return;
-        
-        UpdateStripUi(holder.Owner, holder.Comp);
-        
-        RaiseLocalEvent(holder, new AttachableHolderAttachablesAlteredEvent(args.Entity, args.Container.ID, AttachableAlteredType.Detached));
-        RaiseLocalEvent(args.Entity, new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Detached));
-        
-        Dirty(holder);
     }
     
     

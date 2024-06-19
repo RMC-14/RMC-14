@@ -38,10 +38,10 @@
       "name": "rxfm5_eva_scope"
     },
     {
-      "name": "flashlight_a"
+      "name": "flashlight-cm-aslot-rail"
     },
     {
-      "name": "flashlight_a-on"
+      "name": "flashlight-cm-aslot-rail-active"
     },
     {
       "name": "reddot_a"

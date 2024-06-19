@@ -32,4 +32,6 @@ public sealed partial class AttachableToggleableComponent : Component
     
     [DataField, AutoNetworkedField]
     public SoundSpecifier? DeactivateSound = new SoundPathSpecifier("/Audio/_CM14/Attachable/attachment_deactivate.ogg");
+    
+    public bool Attached = false;
 }

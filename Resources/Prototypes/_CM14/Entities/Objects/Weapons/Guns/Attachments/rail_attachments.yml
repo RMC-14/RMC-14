@@ -11,6 +11,74 @@
 
 - type: entity
   parent: CMRailAttachmentBase
+  id: CMAttachmentRailFlashlight
+  name: rail flashlight
+  description: A flashlight, for rails, on guns. Can be toggled on and off. A better light source than standard M3 pattern armor lights.
+  components:
+  - type: ToggleableLightVisuals
+    spriteLayer: light
+  - type: PointLight
+    enabled: false
+    radius: 5
+    softness: 5
+    autoRot: true
+    netsync: false
+  - type: HandheldLight
+    addPrefix: false
+    blinkingBehaviourId: blinking
+    radiatingBehaviourId: radiating
+  - type: LightBehaviour
+    behaviours:
+    - !type:FadeBehaviour
+      id: radiating
+      interpolate: Linear
+      maxDuration: 2.0
+      startValue: 3.0
+      endValue: 2.0
+      isLooped: true
+      property: Radius
+      enabled: false
+      reverseWhenFinished: true
+    - !type:PulseBehaviour
+      id: blinking
+      interpolate: Nearest
+      maxDuration: 1.0
+      minValue: 0.1
+      maxValue: 2.0
+      isLooped: true
+      property: Radius
+      enabled: false
+  - type: Battery
+    maxCharge: 10
+    startingCharge: 10
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 3
+  - type: Sprite
+    layers:
+      - state: flashlight
+      - state: flashlight-on
+        shader: unshaded
+        visible: false
+        map: [ "light" ]
+  - type: Item
+    sprite: _CM14/Objects/Weapons/Guns/Attachments/rail.rsi
+  - type: Appearance
+  - type: AttachableToggleable
+    attachedOnly: true
+  - type: AttachableVisuals
+    rsi: _CM14/Objects/Weapons/Guns/Attachments/rail.rsi
+    prefix: flashlight-
+    showActive: true
+  - type: AttachableToggleableSimpleActivate
+  - type: Tag
+    tags:
+    - CMAttachableRail
+    - CMAttachableFlashlight
+    - Flashlight
+
+- type: entity
+  parent: CMRailAttachmentBase
   id: CMAttachmentS42xTelescopicMiniScope
   name: S4 2x telescopic mini-scope
   description: An ARMAT S4 telescoping eye piece. Fixed at a modest 2x zoom. Press the 'use rail attachment' HUD icon or use the verb of the same name to zoom.
@@ -65,3 +133,6 @@
 
 - type: Tag
   id: CMAttachableRail
+
+- type: Tag
+  id: CMAttachableFlashlight

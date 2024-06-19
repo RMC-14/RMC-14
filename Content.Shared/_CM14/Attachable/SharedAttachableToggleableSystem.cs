@@ -1,4 +1,5 @@
 using Content.Shared.DoAfter;
+using Content.Shared.Interaction;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Maths;
 
@@ -21,6 +22,7 @@ public sealed class SharedAttachableToggleableSystem : EntitySystem
             });
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleStartedEvent>(OnAttachableToggleStarted);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleDoAfterEvent>(OnAttachableToggleDoAfter);
+        SubscribeLocalEvent<AttachableToggleableComponent, ActivateInWorldEvent>(OnActivateInWorld);
     }
     
     
@@ -32,12 +34,30 @@ public sealed class SharedAttachableToggleableSystem : EntitySystem
                 if(attachable.Comp.SupercedeHolder && 
                     _entityManager.TryGetComponent<AttachableHolderComponent>(args.HolderUid, out AttachableHolderComponent? holderComponent) &&
                     holderComponent.SupercedingAttachable == attachable.Owner)
+                {
                     _attachableHolderSystem.SetSupercedingAttachable((args.HolderUid, holderComponent), null);
+                }
+                
+                if(attachable.Comp.Active)
+                    RaiseLocalEvent(attachable.Owner, new AttachableAlteredEvent(args.HolderUid, AttachableAlteredType.DetachedDeactivated, args.UserUid));
+                
+                attachable.Comp.Attached = false;
                 attachable.Comp.Active = false;
                 break;
+            
+            case AttachableAlteredType.Attached:
+                attachable.Comp.Attached = true;
+                break;
+            
             default:
                 break;
         }
+    }
+    
+    private void OnActivateInWorld(Entity<AttachableToggleableComponent> attachable, ref ActivateInWorldEvent args)
+    {
+        if(attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
+            args.Handled = true;
     }
     
     private void OnAttachableToggleStarted(Entity<AttachableToggleableComponent> attachable, ref AttachableToggleStartedEvent args)
@@ -69,15 +89,15 @@ public sealed class SharedAttachableToggleableSystem : EntitySystem
         if(!_entityManager.TryGetComponent<AttachableHolderComponent>(args.Args.Used, out AttachableHolderComponent? holderComponent))
             return;
         
-        FinishToggle(attachable, (args.Args.Used.Value, holderComponent), args.SlotID);
+        FinishToggle(attachable, (args.Args.Used.Value, holderComponent), args.SlotID, args.Args.User);
         _audioSystem.PlayPredicted(attachable.Comp.Active ? attachable.Comp.ActivateSound : attachable.Comp.DeactivateSound, attachable, args.User);
         args.Handled = true;
     }
     
-    private void FinishToggle(Entity<AttachableToggleableComponent> attachable, Entity<AttachableHolderComponent> holder, string slotID)
+    private void FinishToggle(Entity<AttachableToggleableComponent> attachable, Entity<AttachableHolderComponent> holder, string slotID, EntityUid? userUid)
     {
         attachable.Comp.Active = !attachable.Comp.Active;
-        RaiseLocalEvent(attachable.Owner, new AttachableAlteredEvent(holder.Owner, attachable.Comp.Active ? AttachableAlteredType.Activated : AttachableAlteredType.Deactivated));
+        RaiseLocalEvent(attachable.Owner, new AttachableAlteredEvent(holder.Owner, attachable.Comp.Active ? AttachableAlteredType.Activated : AttachableAlteredType.Deactivated, userUid));
         RaiseLocalEvent(holder.Owner,
             new AttachableHolderAttachablesAlteredEvent(attachable.Owner, slotID, attachable.Comp.Active ? AttachableAlteredType.Activated : AttachableAlteredType.Deactivated));
         

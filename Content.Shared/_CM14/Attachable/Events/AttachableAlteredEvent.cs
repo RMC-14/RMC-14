@@ -5,12 +5,14 @@ namespace Content.Shared._CM14.Attachable;
 public sealed partial class AttachableAlteredEvent : EntityEventArgs
 {
     public readonly EntityUid HolderUid;
+    public readonly EntityUid? UserUid;
     public readonly AttachableAlteredType Alteration;
     
     
-    public AttachableAlteredEvent(EntityUid holderUid, AttachableAlteredType alteration)
+    public AttachableAlteredEvent(EntityUid holderUid, AttachableAlteredType alteration, EntityUid? userUid = null)
     {
         HolderUid = holderUid;
+        UserUid = userUid;
         Alteration = alteration;
     }
 }
@@ -22,5 +24,6 @@ public enum AttachableAlteredType : byte
     Wielded = 1 << 2,
     Unwielded = 1 << 3,
     Activated = 1 << 4,
-    Deactivated = 1 << 5
+    Deactivated = 1 << 5,
+    DetachedDeactivated = Detached | Deactivated
 }
