@@ -22,7 +22,7 @@
   - type: CMVendorBundle
     bundle:
     - ArmorHelmetM10 # TODO CM14 M4
-    - CMVendorHeadsetSquad
+    - CMVendorHeadsetSquadFTL
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -34,7 +34,7 @@
   - type: CMVendorBundle
     bundle:
     - CMArmorHelmetM10Medic # TODO CM14 M4
-    - CMVendorHeadsetSquad
+    - CMVendorHeadsetSquadCorpsman
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -68,7 +68,7 @@
   - type: CMVendorBundle
     bundle:
     - CMArmorHelmetM10Tech # TODO CM14 M4
-    - CMVendorHeadsetSquad
+    - CMVendorHeadsetSquadComTech
     - CMHandsInsulated
     - CMBootsBlackFilled
 
@@ -99,7 +99,7 @@
   - type: CMVendorBundle
     bundle:
     - CMArmorHelmetM11 # TODO CM14 M4
-    - CMVendorHeadsetSquad
+    - CMVendorHeadsetSquadLeader
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
