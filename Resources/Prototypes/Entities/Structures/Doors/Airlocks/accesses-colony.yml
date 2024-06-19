@@ -1,4 +1,4 @@
-# /obj/structure/machinery/door/airlock/secure/colony
+﻿# /obj/structure/machinery/door/airlock/secure/colony
 - type: entity
   parent: CMAirlockSecure
   id: CMAirlockSecureLockedColony
