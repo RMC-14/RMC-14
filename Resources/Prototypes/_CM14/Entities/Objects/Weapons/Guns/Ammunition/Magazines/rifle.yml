@@ -49,6 +49,8 @@
   components:
   - type: Tag
     tags:
+    - CMMagazineRifle
+    - CMMagazineRifleM41A
     - CMMagazineRifleM41AAP
   - type: BallisticAmmoProvider
     whitelist:
@@ -76,6 +78,8 @@
   components:
   - type: Tag
     tags:
+    - CMMagazineRifle
+    - CMMagazineRifleM41A
     - CMMagazineRifleM41AExt
   - type: BallisticAmmoProvider
     mayTransfer: True
@@ -161,6 +165,8 @@
   components:
   - type: Tag
     tags:
+    - CMMagazineRifle
+    - CMMagazineRifleM4RA
     - CMMagazineRifleM4RAAP
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Magazines/m4ra.rsi
@@ -195,6 +201,11 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - CMMagazineRifleM4RA
+    - CMMagazineRifleM4RExt
 
 - type: Tag
   id: CMMagazineRifle
