@@ -9,3 +9,14 @@
       state: sniperscope
     event: !type:ToggleActionEvent
     useDelay: 0.25
+
+- type: entity
+  id: CMActionToggleAttachable
+  name: Toggle Attachable
+  description: Toggle an attachable. If you're seeing this, someone forgot to set the description properly.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _CM14/Actions/scope_actions.rsi
+      state: sniperscope
+    event: !type:AttachableToggleActionEvent

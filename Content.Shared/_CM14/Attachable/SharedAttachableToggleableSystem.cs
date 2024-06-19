@@ -1,6 +1,8 @@
 using Content.Shared._CM14.Weapons;
+using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
+using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
@@ -11,26 +13,42 @@ namespace Content.Shared._CM14.Attachable;
 
 public sealed class SharedAttachableToggleableSystem : EntitySystem
 {
+    [Dependency] private readonly ActionContainerSystem _actionContainerSystem = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly MetaDataSystem _metaDataSystem = default!;
+    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly SharedAttachableHolderSystem _attachableHolderSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     
-    
     public override void Initialize()
     {
-        SubscribeLocalEvent<AttachableToggleableComponent, AttachableAlteredEvent>(OnAttachableAltered, after: new[]
-            {
-                typeof(SharedAttachableWeaponRangedModsSystem)
-            });
-        SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleStartedEvent>(OnAttachableToggleStarted);
-        SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleDoAfterEvent>(OnAttachableToggleDoAfter);
         SubscribeLocalEvent<AttachableToggleableComponent, ActivateInWorldEvent>(OnActivateInWorld);
+        SubscribeLocalEvent<AttachableToggleableComponent, AttachableAlteredEvent>(OnAttachableAltered, after: new[] { typeof(SharedAttachableWeaponRangedModsSystem) });
+        SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleActionEvent>(OnAttachableToggleAction);
+        SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleDoAfterEvent>(OnAttachableToggleDoAfter);
+        SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleStartedEvent>(OnAttachableToggleStarted);
         SubscribeLocalEvent<AttachableToggleableComponent, AttemptShootEvent>(OnAttemptShoot);
-        //SubscribeLocalEvent<AttachableToggleableComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<AttachableToggleableComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<AttachableToggleableComponent, ToggleActionEvent>(OnToggleAction);
         SubscribeLocalEvent<AttachableToggleableComponent, UniqueActionEvent>(OnUniqueAction);
     }
     
+    
+    private void OnMapInit(Entity<AttachableToggleableComponent> attachable, ref MapInitEvent args)
+    {
+        if(!_actionContainerSystem.EnsureAction(attachable.Owner, ref attachable.Comp.AttachableToggleActionEntity, out BaseActionComponent? actionComponent, attachable.Comp.AttachableToggleAction))
+            return;
+        
+        actionComponent.Icon = attachable.Comp.Icon;
+        actionComponent.IconOn = attachable.Comp.IconActive;
+        actionComponent.Enabled = attachable.Comp.Attached;
+        
+        _metaDataSystem.SetEntityName(attachable.Comp.AttachableToggleActionEntity.Value, attachable.Comp.AttachableToggleActionName);
+        _metaDataSystem.SetEntityDescription(attachable.Comp.AttachableToggleActionEntity.Value, attachable.Comp.AttachableToggleActionDesc);
+        
+        Dirty(attachable);
+    }
     
     private void OnAttachableAltered(Entity<AttachableToggleableComponent> attachable, ref AttachableAlteredEvent args)
     {
@@ -58,6 +76,16 @@ public sealed class SharedAttachableToggleableSystem : EntitySystem
             default:
                 break;
         }
+        
+        if(attachable.Comp.AttachableToggleActionEntity == null ||
+            !_entityManager.TryGetComponent<InstantActionComponent>(attachable.Comp.AttachableToggleActionEntity, out InstantActionComponent? actionComponent))
+        {
+            return;
+        }
+        
+        
+        _actionsSystem.SetToggled(attachable.Comp.AttachableToggleActionEntity, attachable.Comp.Active);
+        actionComponent.Enabled = attachable.Comp.Attached;
     }
     
     private void OnActivateInWorld(Entity<AttachableToggleableComponent> attachable, ref ActivateInWorldEvent args)
@@ -70,12 +98,6 @@ public sealed class SharedAttachableToggleableSystem : EntitySystem
     {
         if(attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
             args.Cancelled = true;
-    }
-    
-    private void OnInteractUsing(Entity<AttachableToggleableComponent> attachable, ref InteractUsingEvent args)
-    {
-        if(attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
-            args.Handled = true;
     }
     
     private void OnUniqueAction(Entity<AttachableToggleableComponent> attachable, ref UniqueActionEvent args)
@@ -144,5 +166,47 @@ public sealed class SharedAttachableToggleableSystem : EntitySystem
             }
             _attachableHolderSystem.SetSupercedingAttachable(holder, attachable.Owner);
         }
+    }
+    
+    public void GrantAction(Entity<AttachableToggleableComponent> attachable, EntityUid performer)
+    {
+        if(attachable.Comp.AttachableToggleActionEntity == null)
+            return;
+        
+        EntityUid[] entityUids = { attachable.Comp.AttachableToggleActionEntity.Value };
+        
+        _actionsSystem.GrantActions(performer, entityUids, attachable.Owner);
+    }
+    
+    public void RevokeAction(Entity<AttachableToggleableComponent> attachable, EntityUid performer)
+    {
+        if(attachable.Comp.AttachableToggleActionEntity == null)
+            return;
+        
+        _actionsSystem.RemoveProvidedAction(performer, attachable.Owner, attachable.Comp.AttachableToggleActionEntity.Value);
+    }
+    
+    private void OnAttachableToggleAction(Entity<AttachableToggleableComponent> attachable, ref AttachableToggleActionEvent args)
+    {
+        args.Handled = true;
+        
+        if(!attachable.Comp.Attached)
+            return;
+        
+        if(!_entityManager.TryGetComponent<TransformComponent>(attachable.Owner, out TransformComponent? transformComponent) ||
+            transformComponent.ParentUid == EntityUid.Invalid ||
+            !_entityManager.TryGetComponent<AttachableHolderComponent>(transformComponent.ParentUid, out AttachableHolderComponent? holderComponent) ||
+            !_attachableHolderSystem.TryGetSlotID(transformComponent.ParentUid, attachable.Owner, out string? slotID))
+        {
+            return;
+        }
+        
+        RaiseLocalEvent(attachable.Owner, new AttachableToggleStartedEvent((transformComponent.ParentUid, holderComponent), args.Performer, slotID));
+    }
+    
+    private void OnToggleAction(Entity<AttachableToggleableComponent> attachable, ref ToggleActionEvent args)
+    {
+        if(attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
+            args.Handled = true;
     }
 }

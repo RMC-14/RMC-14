@@ -2,10 +2,13 @@ using Content.Shared._CM14.Input;
 using Content.Shared._CM14.Weapons;
 using Content.Shared.Access.Components;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Actions;
 using Content.Shared.DoAfter;
+using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
@@ -28,6 +31,7 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly SharedAttachableToggleableSystem _attachableToggleableSystem = default!;
     [Dependency] private readonly SharedAttachableWeaponRangedModsSystem _attachableWeaponRangedModsSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
@@ -51,7 +55,10 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, AttachableHolderDetachMessage>(OnAttachableHolderDetachMessage);
         SubscribeLocalEvent<AttachableHolderComponent, AttemptShootEvent>(OnAttachableHolderAttemptShoot);
         SubscribeLocalEvent<AttachableHolderComponent, BoundUIOpenedEvent>(OnAttachableHolderUiOpened);
+        SubscribeLocalEvent<AttachableHolderComponent, GetItemActionsEvent>(OnGetActions);
         SubscribeLocalEvent<AttachableHolderComponent, GetVerbsEvent<InteractionVerb>>(OnAttachableHolderGetVerbs);
+        SubscribeLocalEvent<AttachableHolderComponent, GotUnequippedEvent>(OnHolderGotUnequipped);
+        SubscribeLocalEvent<AttachableHolderComponent, GotUnequippedHandEvent>(OnHolderGotUnequippedHand);
         SubscribeLocalEvent<AttachableHolderComponent, GunRefreshModifiersEvent>(OnAttachableHolderRefreshModifiers, after: new[] { typeof(WieldableSystem) });
         SubscribeLocalEvent<AttachableHolderComponent, InteractUsingEvent>(OnAttachableHolderInteractUsing);
         SubscribeLocalEvent<AttachableHolderComponent, ItemWieldedEvent>(OnHolderWielded);
@@ -91,8 +98,22 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
     {
         CommandBinds.Unregister<SharedAttachableHolderSystem>();
     }
-
-
+    
+    
+    private void OnGetActions(Entity<AttachableHolderComponent> holder, ref GetItemActionsEvent args)
+    {
+        foreach(string slotID in holder.Comp.Slots.Keys)
+        {
+            if(!_containerSystem.TryGetContainer(holder, slotID, out BaseContainer? container) || container.Count <= 0)
+                continue;
+            
+            if(!EntityManager.TryGetComponent<AttachableToggleableComponent>(container.ContainedEntities[0], out AttachableToggleableComponent? toggleableComponent))
+                continue;
+            
+            _attachableToggleableSystem.GrantAction((container.ContainedEntities[0], toggleableComponent), args.User);
+        }
+    }
+    
     private void OnAttachableHolderInteractUsing(Entity<AttachableHolderComponent> holder, ref InteractUsingEvent args)
     {
         if(CanAttach(holder, args.Used))
@@ -498,5 +519,29 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
             return true;
         }
         return false;
+    }
+    
+    private void OnHolderGotUnequipped(Entity<AttachableHolderComponent> holder, ref GotUnequippedEvent args)
+    {
+        RevokeAttachableActions(holder, args.Equipee);
+    }
+
+    private void OnHolderGotUnequippedHand(Entity<AttachableHolderComponent> holder, ref GotUnequippedHandEvent args)
+    {
+        RevokeAttachableActions(holder, args.User);
+    }
+    
+    private void RevokeAttachableActions(Entity<AttachableHolderComponent> holder, EntityUid performer)
+    {
+        foreach(string slotID in holder.Comp.Slots.Keys)
+        {
+            if(!_containerSystem.TryGetContainer(holder, slotID, out BaseContainer? container) || container.Count <= 0)
+                continue;
+            
+            if(!EntityManager.TryGetComponent<AttachableToggleableComponent>(container.ContainedEntities[0], out AttachableToggleableComponent? toggleableComponent))
+                continue;
+            
+            _attachableToggleableSystem.RevokeAction((container.ContainedEntities[0], toggleableComponent), performer);
+        }
     }
 }

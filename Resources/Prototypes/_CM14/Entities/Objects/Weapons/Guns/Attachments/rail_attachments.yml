@@ -66,6 +66,14 @@
   - type: Appearance
   - type: AttachableToggleable
     attachedOnly: true
+    icon:
+      sprite: _CM14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: flashlight
+    iconActive:
+      sprite: _CM14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: flashlight-on
+    actionName: Activate Rail Flashlight
+    actionDesc: Can be toggled on and off. A better light source than standard M3 pattern armor lights.
   - type: AttachableVisuals
     rsi: _CM14/Objects/Weapons/Guns/Attachments/rail.rsi
     prefix: flashlight-
