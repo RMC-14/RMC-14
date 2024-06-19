@@ -183,8 +183,9 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         if (!_mapSystem.TryGetTileRef(grid, grid, tile, out var tileRef))
             return false;
 
-        if (_tile.TryGetDefinition(tileRef.Tile.TypeId, out var tileDef) &&
-            tileDef is ContentTileDefinition { WeedsSpreadable: false })
+        if (!_tile.TryGetDefinition(tileRef.Tile.TypeId, out var tileDef) ||
+            tileDef is ContentTileDefinition { WeedsSpreadable: false } ||
+            tileDef.ID == ContentTileDefinition.SpaceID)
         {
             return false;
         }

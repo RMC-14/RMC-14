@@ -9,3 +9,51 @@
       SquadBravo: CMHeadsetBravo
       SquadCharlie: CMHeadsetCharlie
       SquadDelta: CMHeadsetDelta
+
+- type: entity
+  id: CMVendorHeadsetSquadLeader
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: CMVendorMapToSquad
+    map:
+      SquadAlpha: CMHeadsetAlphaLeader
+      SquadBravo: CMHeadsetBravoLeader
+      SquadCharlie: CMHeadsetCharlieLeader
+      SquadDelta: CMHeadsetDeltaLeader
+
+- type: entity
+  id: CMVendorHeadsetSquadFTL
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: CMVendorMapToSquad
+    map:
+      SquadAlpha: CMHeadsetAlphaTeamLeader
+      SquadBravo: CMHeadsetBravoTeamLeader
+      SquadCharlie: CMHeadsetCharlieTeamLeader
+      SquadDelta: CMHeadsetDeltaTeamLeader
+
+- type: entity
+  id: CMVendorHeadsetSquadComTech
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: CMVendorMapToSquad
+    map:
+      SquadAlpha: CMHeadsetAlphaEngineer
+      SquadBravo: CMHeadsetBravoEngineer
+      SquadCharlie: CMHeadsetCharlieEngineer
+      SquadDelta: CMHeadsetDeltaEngineer
+
+- type: entity
+  id: CMVendorHeadsetSquadCorpsman
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: CMVendorMapToSquad
+    map:
+      SquadAlpha: CMHeadsetAlphaMedic
+      SquadBravo: CMHeadsetBravoMedic
+      SquadCharlie: CMHeadsetCharlieMedic
+      SquadDelta: CMHeadsetDeltaMedic
