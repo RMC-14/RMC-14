@@ -1,5 +1,8 @@
+using Content.Shared._CM14.Weapons;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
+using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Maths;
 
@@ -23,6 +26,9 @@ public sealed class SharedAttachableToggleableSystem : EntitySystem
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleStartedEvent>(OnAttachableToggleStarted);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleDoAfterEvent>(OnAttachableToggleDoAfter);
         SubscribeLocalEvent<AttachableToggleableComponent, ActivateInWorldEvent>(OnActivateInWorld);
+        SubscribeLocalEvent<AttachableToggleableComponent, AttemptShootEvent>(OnAttemptShoot);
+        //SubscribeLocalEvent<AttachableToggleableComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<AttachableToggleableComponent, UniqueActionEvent>(OnUniqueAction);
     }
     
     
@@ -55,6 +61,24 @@ public sealed class SharedAttachableToggleableSystem : EntitySystem
     }
     
     private void OnActivateInWorld(Entity<AttachableToggleableComponent> attachable, ref ActivateInWorldEvent args)
+    {
+        if(attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
+            args.Handled = true;
+    }
+    
+    private void OnAttemptShoot(Entity<AttachableToggleableComponent> attachable, ref AttemptShootEvent args)
+    {
+        if(attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
+            args.Cancelled = true;
+    }
+    
+    private void OnInteractUsing(Entity<AttachableToggleableComponent> attachable, ref InteractUsingEvent args)
+    {
+        if(attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
+            args.Handled = true;
+    }
+    
+    private void OnUniqueAction(Entity<AttachableToggleableComponent> attachable, ref UniqueActionEvent args)
     {
         if(attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
             args.Handled = true;

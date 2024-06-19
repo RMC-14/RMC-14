@@ -78,10 +78,14 @@
       cm-aslot-rail:
         tags:
           - CMAttachableFlashlight
+      cm-aslot-underbarrel:
+        tags:
+          - CMAttachmentU7UnderbarrelShotgun
   - type: AttachableHolderVisuals
     offsets:
       cm-aslot-barrel: 0.45, 0.06
       cm-aslot-rail: -0.1, 0.23
+      cm-aslot-underbarrel: 0.0, 0.0
 
 - type: entity
   name: M41AE2 heavy pulse rifle

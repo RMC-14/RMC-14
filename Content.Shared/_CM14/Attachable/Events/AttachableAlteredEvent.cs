@@ -2,7 +2,7 @@
 
 namespace Content.Shared._CM14.Attachable;
 
-public sealed partial class AttachableAlteredEvent : EntityEventArgs
+public sealed class AttachableAlteredEvent : EntityEventArgs
 {
     public readonly EntityUid HolderUid;
     public readonly EntityUid? UserUid;

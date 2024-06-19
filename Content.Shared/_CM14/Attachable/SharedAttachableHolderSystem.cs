@@ -1,4 +1,5 @@
 using Content.Shared._CM14.Input;
+using Content.Shared._CM14.Weapons;
 using Content.Shared.Access.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.DoAfter;
@@ -48,12 +49,14 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, AttachableHolderAttachablesAlteredEvent>(OnAttachableHolderAttachablesAltered);
         SubscribeLocalEvent<AttachableHolderComponent, AttachableHolderAttachToSlotMessage>(OnAttachableHolderAttachToSlotMessage);
         SubscribeLocalEvent<AttachableHolderComponent, AttachableHolderDetachMessage>(OnAttachableHolderDetachMessage);
+        SubscribeLocalEvent<AttachableHolderComponent, AttemptShootEvent>(OnAttachableHolderAttemptShoot);
         SubscribeLocalEvent<AttachableHolderComponent, BoundUIOpenedEvent>(OnAttachableHolderUiOpened);
         SubscribeLocalEvent<AttachableHolderComponent, GetVerbsEvent<InteractionVerb>>(OnAttachableHolderGetVerbs);
         SubscribeLocalEvent<AttachableHolderComponent, GunRefreshModifiersEvent>(OnAttachableHolderRefreshModifiers, after: new[] { typeof(WieldableSystem) });
         SubscribeLocalEvent<AttachableHolderComponent, InteractUsingEvent>(OnAttachableHolderInteractUsing);
         SubscribeLocalEvent<AttachableHolderComponent, ItemWieldedEvent>(OnHolderWielded);
         SubscribeLocalEvent<AttachableHolderComponent, ItemUnwieldedEvent>(OnHolderUnwielded);
+        SubscribeLocalEvent<AttachableHolderComponent, UniqueActionEvent>(OnAttachableHolderUniqueAction);
         
 
         CommandBinds.Builder
@@ -97,6 +100,51 @@ public abstract class SharedAttachableHolderSystem : EntitySystem
             StartAttach(holder, args.Used, args.User);
             args.Handled = true;
         }
+        
+        if(holder.Comp.SupercedingAttachable != null)
+        {
+            InteractUsingEvent interactUsingEvent = new InteractUsingEvent(args.User, args.Used, holder.Comp.SupercedingAttachable.Value, args.ClickLocation);
+            RaiseLocalEvent(holder.Comp.SupercedingAttachable.Value, interactUsingEvent);
+            
+            if(interactUsingEvent.Handled)
+            {
+                args.Handled = true;
+                return;
+            }
+            
+            AfterInteractEvent afterInteractEvent = new AfterInteractEvent(args.User, args.Used, holder.Comp.SupercedingAttachable.Value, args.ClickLocation, true);
+            RaiseLocalEvent(args.Used, afterInteractEvent);
+            
+            if(afterInteractEvent.Handled)
+            {
+                args.Handled = true;
+                return;
+            }
+        }
+    }
+    
+    private void OnAttachableHolderAttemptShoot(Entity<AttachableHolderComponent> holder, ref AttemptShootEvent args)
+    {
+        if(holder.Comp.SupercedingAttachable == null)
+            return;
+        
+        args.Cancelled = true;
+            
+        if(!EntityManager.TryGetComponent<GunComponent>(holder.Owner, out GunComponent? holderGunComponent) ||
+            holderGunComponent.ShootCoordinates == null ||
+            !EntityManager.TryGetComponent<GunComponent>(holder.Comp.SupercedingAttachable, out GunComponent? attachableGunComponent))
+            return;
+            
+        _gunSystem.AttemptShoot(args.User, holder.Comp.SupercedingAttachable.Value, attachableGunComponent, holderGunComponent.ShootCoordinates.Value);
+    }
+    
+    private void OnAttachableHolderUniqueAction(Entity<AttachableHolderComponent> holder, ref UniqueActionEvent args)
+    {
+        if(holder.Comp.SupercedingAttachable == null || args.Handled)
+            return;
+        
+        RaiseLocalEvent(holder.Comp.SupercedingAttachable.Value, new UniqueActionEvent(args.UserUid));
+        args.Handled = true;
     }
 
     private void OnAttachableHolderAttachablesAltered(Entity<AttachableHolderComponent> holder, ref AttachableHolderAttachablesAlteredEvent args)
