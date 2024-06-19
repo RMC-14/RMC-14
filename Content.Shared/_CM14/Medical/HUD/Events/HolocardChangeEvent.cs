@@ -10,8 +10,20 @@ namespace Content.Shared._CM14.Medical.HUD.Events;
 public sealed class HolocardChangeEvent : BoundUserInterfaceMessage
 {
     public HolocardStaus NewHolocardStatus;
-    public HolocardChangeEvent(HolocardStaus newHolocardStatus)
+
+    /// <summary>
+    /// The entity changing the holocard
+    /// </summary>
+    public NetEntity Owner;
+
+    /// <summary>
+    /// The entity that owns the holocard being changed
+    /// </summary>
+    //public NetEntity Target;
+
+    public HolocardChangeEvent(NetEntity owner, HolocardStaus newHolocardStatus)
     {
+        Owner = owner;
         NewHolocardStatus = newHolocardStatus;
     }
 }

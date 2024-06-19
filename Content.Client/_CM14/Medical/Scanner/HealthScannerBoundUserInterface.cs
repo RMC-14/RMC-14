@@ -17,6 +17,7 @@ using Robust.Client.Player;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Content.Shared._CM14.Marines.Skills;
 
 namespace Content.Client._CM14.Medical.Scanner;
 
@@ -87,8 +88,20 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
                 _window.HealthBarText.Text = $"{healthString} healthy";
             }
 
-            _window.ChangeHolocardButton.Text = "Change Holocard";
+            _window.ChangeHolocardButton.Text = Loc.GetString("ui-health-scanner-holocard-change");
             _window.ChangeHolocardButton.OnPressed += OpenChangeHolocardUI;
+            if (_player.LocalEntity is EntityUid viewer &&
+                _entities.TryGetComponent(viewer, out SkillsComponent? skills) &&
+                skills.Skills.Medical >= HolocardSystem.MinimumRequiredMedicalSkill)
+            {
+                _window.ChangeHolocardButton.Disabled = false;
+                _window.ChangeHolocardButton.ToolTip = "";
+            }
+            else
+            {
+                _window.ChangeHolocardButton.Disabled = true;
+                _window.ChangeHolocardButton.ToolTip = Loc.GetString("ui-holocard-change-insufficient-skill");
+            }
             if (_entities.TryGetComponent(target, out HolocardStateComponent? holocardComponent) &&
             _holocard.TryGetDescription((target, holocardComponent), out var description))
             {
@@ -154,7 +167,7 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
         }
     }
 
-    public void OpenChangeHolocardUI(BaseButton.ButtonEventArgs obj)
+    private void OpenChangeHolocardUI(BaseButton.ButtonEventArgs obj)
     {
         if (_player.LocalEntity is EntityUid viewer)
         {

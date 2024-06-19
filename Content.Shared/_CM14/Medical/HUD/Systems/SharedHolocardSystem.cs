@@ -1,14 +1,13 @@
 
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared._CM14.Medical;
 using Content.Shared.StatusIcon;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._CM14.Medical.Systems;
 
 public abstract class SharedHolocardSystem : EntitySystem
 {
+    public const int MinimumRequiredMedicalSkill = 2;
     [NetSerializable, Serializable]
     public enum HolocardChangeUIKey : byte
     {
@@ -22,10 +21,11 @@ public abstract class SharedHolocardSystem : EntitySystem
     private const string Emergency = "EmergencyHolocardIcon";
 
     [ValidatePrototypeId<StatusIconPrototype>]
-    private const string Xeno = "PermaHolocardIcon";
+    private const string Xeno = "XenoHolocardIcon";
 
     [ValidatePrototypeId<StatusIconPrototype>]
-    private const string Permadead = "XenoHolocardIcon";
+    private const string Permadead = "PermaHolocardIcon";
+
     public bool TryGetHolocardData(HolocardStaus holocardStaus, [NotNullWhen(true)] out HolocardData? holocardData)
     {
         holocardData = new();
@@ -53,6 +53,32 @@ public abstract class SharedHolocardSystem : EntitySystem
                 break;
             default:
                 holocardData = null;
+                return false;
+        }
+        return true;
+    }
+
+    public bool TryGetHolocardName(HolocardStaus holocardStaus, [NotNullWhen(true)] out string? holocardName)
+    {
+        holocardName = null;
+        switch (holocardStaus)
+        {
+            case HolocardStaus.None:
+                holocardName = Loc.GetString("hc-none-name");
+                break;
+            case HolocardStaus.Urgent:
+                holocardName = Loc.GetString("hc-urgent-name");
+                break;
+            case HolocardStaus.Emergency:
+                holocardName = Loc.GetString("hc-emergency-name");
+                break;
+            case HolocardStaus.Xeno:
+                holocardName = Loc.GetString("hc-xeno-name");
+                break;
+            case HolocardStaus.Permadead:
+                holocardName = Loc.GetString("hc-permadead-name");
+                break;
+            default:
                 return false;
         }
         return true;
