@@ -5,6 +5,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Robust.Shared.Log;
 using static Content.Shared._CM14.Requisitions.Components.RequisitionsElevatorMode;
 
 namespace Content.Client._CM14.Requisitions;
@@ -35,6 +36,9 @@ public sealed class RequisitionsBui : BoundUserInterface
         _window.OrderCategoriesView.SearchMenuButton.OnPressed += _ => ShowView(_window, _window.OrderSearchView);
 
         _window.OrderSearchView.BackButton.OnPressed += _ => ShowView(_window, _window.OrderCategoriesView);
+        _window.OrderSearchView.SearchBar.OnTextChanged += _ => {
+            UpdateItemSearch(_window.OrderSearchView.SearchBar.Text);
+        };
 
         _window.CategoryView.BackButton.OnPressed += _ => ShowView(_window, _window.OrderCategoriesView);
 
@@ -131,6 +135,12 @@ public sealed class RequisitionsBui : BoundUserInterface
                 UpdateOrderButton(order, uiState);
         }
 
+        foreach (var child in _window.OrderSearchView.ResultContainer.Children)
+        {
+            if (child is RequisitionsOrderButton order)
+                UpdateOrderButton(order, uiState);
+        }
+
         if (!_window.IsOpen)
             _window.OpenCentered();
     }
@@ -174,6 +184,59 @@ public sealed class RequisitionsBui : BoundUserInterface
             order.SetCost(entry.Cost);
             UpdateOrderButton(order, state);
             _window.CategoryView.OrdersContainer.AddChild(order);
+        }
+    }
+
+    private void UpdateItemSearch(string? filter = null)
+    {
+        if (_window == null)
+            return;
+
+        if (!_entities.TryGetComponent(Owner, out RequisitionsComputerComponent? computer))
+            return;
+
+        _window.OrderSearchView.ResultContainer.DisposeAllChildren();
+
+        if (string.IsNullOrEmpty(filter))
+            return;
+
+        var state = State as RequisitionsBuiState;
+        for (int catIndex = 0; catIndex < computer.Categories.Count; catIndex++)
+        {
+            var entryCount = 0;
+            var category = computer.Categories[catIndex];
+            var categoryGroup = new RequisitionsOrderSearchGroup();
+
+            for (var entryIndex = 0; entryIndex < category.Entries.Count; entryIndex++)
+            {
+                var entry = category.Entries[entryIndex];
+                var itemName = entry.Name ?? _prototypes.Index<EntityPrototype>(entry.Crate).Name;
+
+                if (!itemName.ToLowerInvariant().Contains(filter.Trim().ToLowerInvariant()))
+                {
+                    continue;
+                }
+
+                var order = new RequisitionsOrderButton();
+                var orderIndex = entryIndex;
+                var categoryIndex = catIndex;
+                order.Button.Text = itemName;
+                order.Button.OnPressed += _ => SendMessage(new RequisitionsBuyMsg(categoryIndex, orderIndex));
+
+                order.SetCost(entry.Cost);
+                UpdateOrderButton(order, state);
+                categoryGroup.GroupItems.AddChild(order);
+                entryCount++;
+            }
+
+            if (entryCount < 1)
+                continue;
+
+            var categoryHeader = new FormattedMessage();
+            categoryHeader.AddMarkupOrThrow($"[bold]Request from: {category.Name}[/bold]");
+            categoryGroup.GroupLabel.SetMessage(categoryHeader);
+
+            _window.OrderSearchView.ResultContainer.AddChild(categoryGroup);
         }
     }
 

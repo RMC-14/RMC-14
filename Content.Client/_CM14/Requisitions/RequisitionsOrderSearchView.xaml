@@ -8,7 +8,8 @@
         <cc:HSeparator Color="#4972A1" Margin="0 5" />
         <LineEdit Name="SearchBar"
             PlaceHolder="Search..."
-            HorizontalExpand="True" />
+            HorizontalExpand="True"
+            Access="Public" />
         <cc:HSeparator Color="#4972A1" Margin="0 5" />
         <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
             <BoxContainer Name="ResultContainer" Access="Public" Orientation="Vertical" />
