@@ -135,10 +135,16 @@ public sealed class RequisitionsBui : BoundUserInterface
                 UpdateOrderButton(order, uiState);
         }
 
-        foreach (var child in _window.OrderSearchView.ResultContainer.Children)
+        foreach (var group in _window.OrderSearchView.ResultContainer.Children)
         {
-            if (child is RequisitionsOrderButton order)
-                UpdateOrderButton(order, uiState);
+            if (group is RequisitionsOrderSearchGroup categoryGroup)
+            {
+                foreach (var child in categoryGroup.GroupItems.Children)
+                {
+                    if (child is RequisitionsOrderButton order)
+                        UpdateOrderButton(order, uiState);
+                }
+            }
         }
 
         if (!_window.IsOpen)
