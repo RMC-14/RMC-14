@@ -34804,7 +34804,7 @@ entities:
       parent: 1
     - type: AtmosPipeColor
       color: '#990000FF'
-- proto: GasVentPump
+- proto: CMVentPump
   entities:
   - uid: 1796
     components:
@@ -35205,7 +35205,7 @@ entities:
       parent: 1
     - type: AtmosPipeColor
       color: '#0055CCFF'
-- proto: GasVentScrubber
+- proto: CMVentScrubber
   entities:
   - uid: 1794
     components:
