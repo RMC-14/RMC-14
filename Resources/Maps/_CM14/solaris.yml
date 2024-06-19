@@ -138355,7 +138355,7 @@ entities:
     - type: Transform
       pos: 101.5,-179.5
       parent: 1
-- proto: GasVentPump
+- proto: CMVentPump
   entities:
   - uid: 16422
     components:
@@ -138875,7 +138875,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 93.5,-181.5
       parent: 1
-- proto: GasVentScrubber
+- proto: CMVentScrubber
   entities:
   - uid: 16421
     components:
