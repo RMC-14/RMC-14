@@ -7,8 +7,6 @@ public sealed class HolocardScannerSystem : EntitySystem
 {
     public override void Initialize()
     {
-        //base.Initialize();
-
         SubscribeLocalEvent<HolocardScannerComponent, HolocardScanEvent>(OnHolocardScanAttempt);
         SubscribeLocalEvent<HolocardScannerComponent, InventoryRelayedEvent<HolocardScanEvent>>((e, c, ev) => OnHolocardScanAttempt(e, c, ev.Args));
     }

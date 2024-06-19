@@ -16,11 +16,6 @@ public sealed class HolocardChangeEvent : BoundUserInterfaceMessage
     /// </summary>
     public NetEntity Owner;
 
-    /// <summary>
-    /// The entity that owns the holocard being changed
-    /// </summary>
-    //public NetEntity Target;
-
     public HolocardChangeEvent(NetEntity owner, HolocardStaus newHolocardStatus)
     {
         Owner = owner;

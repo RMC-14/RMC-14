@@ -19,18 +19,14 @@ public sealed partial class HolocardChangeWindow : DefaultWindow
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly HolocardSystem _holocard = default!;
 
-    //private readonly EntityUid _targetEntity;
     private readonly HolocardChangeBoundUserInterface _owner;
-    //private HolocardStaus? _selectedHolocard;
 
     public HolocardChangeWindow(HolocardChangeBoundUserInterface owner)
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
 
-        //_targetEntity = owner.Owner;
         _owner = owner;
-        //_selectedHolocard = null;
 
         Title = Loc.GetString("ui-holocard-change-title");
 
