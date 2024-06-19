@@ -34,6 +34,7 @@
     state: icon
   - type: Item
     size: Small
+    heldPrefix: unlit
   - type: Appearance
   - type: PointLight
     enabled: false
