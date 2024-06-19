@@ -98,6 +98,21 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/misc/alien_queen_screech.ogg"
 
+- files: ["alien_resin_break1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/effects/alien_resin_break1.ogg"
+
+- files: ["alien_resin_break2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/effects/alien_resin_break2.ogg"
+
+- files: ["alien_resin_break3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/effects/alien_resin_break3.ogg"
+
 - files: ["alien_resin_move1.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"

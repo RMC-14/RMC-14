@@ -22,6 +22,8 @@
     - state: roller_up
       map: ["buckledLayer"]
       visible: false
+  - type: Item
+    size: Small
   - type: GenericVisualizer
     visuals:
       enum.StrapVisuals.State:

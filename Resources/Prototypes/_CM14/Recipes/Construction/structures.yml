@@ -18,24 +18,24 @@
   conditions:
     - !type:TileNotBlocked
 
-- type: construction
-  parent: CM
-  id: CMGirderReinforced
-  name: reinforced girder
-  graph: CMGirder
-  startNode: start
-  targetNode: reinforcedGirder
-  category: construction-category-cm-structures
-  description: A large structural assembly made out of metal and plasteel.
-  icon:
-    sprite: _CM14/Structures/Walls/girder.rsi
-    state: reinforced
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canRotate: false
-  canBuildInImpassable: false
-  conditions:
-    - !type:TileNotBlocked
+#- type: construction
+#  parent: CM
+#  id: CMGirderReinforced
+#  name: reinforced girder
+#  graph: CMGirder
+#  startNode: start
+#  targetNode: reinforcedGirder
+#  category: construction-category-cm-structures
+#  description: A large structural assembly made out of metal and plasteel.
+#  icon:
+#    sprite: _CM14/Structures/Walls/girder.rsi
+#    state: reinforced
+#  objectType: Structure
+#  placementMode: SnapgridCenter
+#  canRotate: false
+#  canBuildInImpassable: false
+#  conditions:
+#    - !type:TileNotBlocked
 
 - type: construction
   parent: CM
@@ -241,6 +241,45 @@
   conditions:
     - !type:TileNotBlocked
 
+#lighting
+- type: construction
+  parent: CM
+  name: tube light fixture
+  id: CMLightTubeFixture
+  graph: CMLightFixture
+  startNode: start
+  targetNode: tubeLight
+  category: construction-category-cm-structures
+  description: A wallmounted fixture for tube lights.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: false
+  icon:
+    sprite: _CM14/Structures/Wallmounts/Lighting/light_tube.rsi
+    state: tube0
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: CM
+  name: bulb light fixture
+  id: CMLightBulbFixture
+  graph: CMLightFixture
+  startNode: start
+  targetNode: bulbLight
+  category: construction-category-cm-structures
+  description: A wallmounted fixture for bulb lights.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: false
+  icon:
+    sprite: _CM14/Structures/Wallmounts/Lighting/light_bulb.rsi
+    state: bulb0
+  conditions:
+    - !type:TileNotBlocked
+
 # Other
 - type: construction
   parent: CM
@@ -251,6 +290,7 @@
   targetNode: Catwalk
   category: construction-category-cm-structures
   description: Just like a lattice. Except it looks better.
+  placementMode: SnapgridCenter
   icon:
     sprite: _CM14/Structures/catwalk.rsi
     state: catwalk
@@ -261,3 +301,22 @@
     targets:
     - Lattice
     - Plating
+
+- type: construction
+  parent: CM
+  id: CMFence
+  name: fence
+  graph: CMFence
+  startNode: start
+  targetNode: fenceMetal
+  category: construction-category-cm-structures
+  description: A large metal mesh strewn between two poles.
+  icon:
+    sprite: _CM14/Structures/fences.rsi
+    state: fence0
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked

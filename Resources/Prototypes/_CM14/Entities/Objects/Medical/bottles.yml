@@ -102,7 +102,7 @@
   parent: CMBottleFilled
   id: CMBottleDexalin
   name: dexalin bottle
-  description: A small bottle. Contains kelotane - used to treat burned areas.
+  description: A small bottle. Contains dexalin - used to treat oxygen deprivation.
   components:
   - type: SolutionContainerManager
     solutions:

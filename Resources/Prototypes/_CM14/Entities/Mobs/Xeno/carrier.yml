@@ -77,6 +77,7 @@
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
   - type: WhitelistPickup
-    any:
-    - type: XenoHugger
-    - type: XenoEgg
+    whitelist:
+      components:
+      - XenoHugger
+      - XenoEgg

@@ -1,10 +1,11 @@
-﻿using Content.Shared._CM14.Xenos.Leap;
+﻿using Content.Shared._CM14.Hands;
+using Content.Shared._CM14.Xenos.Leap;
 using Content.Shared.DoAfter;
+using Content.Shared.DragDrop;
 using Content.Shared.Examine;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Ghost;
 using Content.Shared.Humanoid;
-using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
@@ -29,6 +30,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
     [Dependency] private readonly BlindableSystem _blindable = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly CMHandsSystem _cmHands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -42,11 +44,15 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<HuggableComponent, ActivateInWorldEvent>(OnHuggableActivate);
+        SubscribeLocalEvent<HuggableComponent, CanDropTargetEvent>(OnHuggableCanDropTarget);
 
         SubscribeLocalEvent<XenoHuggerComponent, XenoLeapHitEvent>(OnHuggerLeapHit);
         SubscribeLocalEvent<XenoHuggerComponent, AfterInteractEvent>(OnHuggerAfterInteract);
         SubscribeLocalEvent<XenoHuggerComponent, DoAfterAttemptEvent<AttachHuggerDoAfterEvent>>(OnHuggerAttachDoAfterAttempt);
         SubscribeLocalEvent<XenoHuggerComponent, AttachHuggerDoAfterEvent>(OnHuggerAttachDoAfter);
+        SubscribeLocalEvent<XenoHuggerComponent, CanDragEvent>(OnHuggerCanDrag);
+        SubscribeLocalEvent<XenoHuggerComponent, CanDropDraggedEvent>(OnHuggerCanDropDragged);
+        SubscribeLocalEvent<XenoHuggerComponent, DragDropDraggedEvent>(OnHuggerDragDropDragged);
 
         SubscribeLocalEvent<HuggerSpentComponent, MapInitEvent>(OnHuggerSpentMapInit);
         SubscribeLocalEvent<HuggerSpentComponent, UpdateMobStateEvent>(OnHuggerSpentUpdateMobState);
@@ -59,6 +65,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
         SubscribeLocalEvent<VictimBurstComponent, MapInitEvent>(OnVictimBurstMapInit);
         SubscribeLocalEvent<VictimBurstComponent, UpdateMobStateEvent>(OnVictimUpdateMobState);
+        SubscribeLocalEvent<VictimBurstComponent, RejuvenateEvent>(OnVictimBurstRejuvenate);
     }
 
     private void OnHuggableActivate(Entity<HuggableComponent> ent, ref ActivateInWorldEvent args)
@@ -66,6 +73,16 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         if (TryComp(args.User, out XenoHuggerComponent? hugger) &&
             StartHug((args.User, hugger), args.Target, args.User))
         {
+            args.Handled = true;
+        }
+    }
+
+    private void OnHuggableCanDropTarget(Entity<HuggableComponent> ent, ref CanDropTargetEvent args)
+    {
+        if (TryComp(args.Dragged, out XenoHuggerComponent? hugger) &&
+            CanHugPopup((args.Dragged, hugger), ent, args.User, false))
+        {
+            args.CanDrop = true;
             args.Handled = true;
         }
     }
@@ -79,7 +96,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
     private void OnHuggerAfterInteract(Entity<XenoHuggerComponent> ent, ref AfterInteractEvent args)
     {
-        if (args.Target == null)
+        if (!args.CanReach || args.Target == null)
             return;
 
         if (StartHug(ent, args.Target.Value, args.User))
@@ -105,6 +122,32 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
         if (Hug(ent, args.Target.Value))
             args.Handled = true;
+    }
+
+    private void OnHuggerCanDrag(Entity<XenoHuggerComponent> ent, ref CanDragEvent args)
+    {
+        args.Handled = true;
+    }
+
+    private void OnHuggerCanDropDragged(Entity<XenoHuggerComponent> ent, ref CanDropDraggedEvent args)
+    {
+        if (args.User != ent.Owner && !_cmHands.IsPickupByAllowed(ent.Owner, args.User))
+            return;
+
+        if (!CanHugPopup(ent, args.Target, args.User, false))
+            return;
+
+        args.CanDrop = true;
+        args.Handled = true;
+    }
+
+    private void OnHuggerDragDropDragged(Entity<XenoHuggerComponent> ent, ref DragDropDraggedEvent args)
+    {
+        if (args.User != ent.Owner && !_cmHands.IsPickupByAllowed(ent.Owner, args.User))
+            return;
+
+        StartHug(ent, args.Target, args.User);
+        args.Handled = true;
     }
 
     protected virtual void HuggerLeapHit(Entity<XenoHuggerComponent> hugger)
@@ -164,6 +207,11 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
     private void OnVictimUpdateMobState(Entity<VictimBurstComponent> burst, ref UpdateMobStateEvent args)
     {
         args.State = MobState.Dead;
+    }
+
+    private void OnVictimBurstRejuvenate(Entity<VictimBurstComponent> burst, ref RejuvenateEvent args)
+    {
+        RemCompDeferred<VictimBurstComponent>(burst);
     }
 
     private bool StartHug(Entity<XenoHuggerComponent> hugger, EntityUid victim, EntityUid user)
@@ -314,7 +362,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
             RemCompDeferred<VictimHuggedComponent>(uid);
 
-            var spawned = Spawn(hugged.BurstSpawn, xform.Coordinates);
+            var spawned = SpawnAtPosition(hugged.BurstSpawn, xform.Coordinates);
             _xeno.SetHive(spawned, hugged.Hive);
 
             EnsureComp<VictimBurstComponent>(uid);

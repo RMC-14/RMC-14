@@ -62,6 +62,7 @@
   - type: Marine
   - type: Hunger
   - type: Thirst
+    baseDecayRate: 0.01666666666
   - type: Body
     prototype: Human
     requiredLegs: 2
@@ -143,3 +144,5 @@
   - type: UserIFF
   - type: UserLimitHits
   - type: MovementIgnoreGravity
+  - type: SlowOnPull
+    multiplier: 0.6

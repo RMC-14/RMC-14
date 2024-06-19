@@ -13,11 +13,11 @@
         availableJobs:
           #Command
           CMCommandingOfficer: [1, 1]
-          CMExecutiveOfficer: [1, 1]
-          CMStaffOfficer: [1, 1] # TODO CM14
+#          CMExecutiveOfficer: [1, 1]
+#          CMStaffOfficer: [1, 1] # TODO CM14
           CMSeniorEnlistedAdvisor: [2, 2]
           #Military Police
-          CMChiefMP: [1, 1]
+#          CMChiefMP: [1, 1]
           CMMilitaryWarden: [1, 1]
           CMMilitaryPolice: [5, 8]
           #Auxiliary
@@ -25,13 +25,13 @@
 #          CMIntelOfficer: [4, 4]
           CMPilotDropship: [2, 2]
 #          CMPilotGunship: [1, 1]
-          CMDropshipCrewChief: [2, 2]
+#          CMDropshipCrewChief: [2, 2]
           #Engineering
 #          CMChiefEngineer: [1, 1]
 #          CMOrdnanceTech: [3, 3]
 #          CMMaintTech: [1, 1]
           #Medical
-          CMCMO: [1, 1]
+#          CMCMO: [1, 1]
           CMDoctor: [4, 6]
           CMNurse: [6, 9]
 #          CMResearcher: [2, 2]

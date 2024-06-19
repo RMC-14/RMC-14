@@ -38,7 +38,7 @@
   - type: ContainerContainer
     containers:
       cm-hypersleep:
-        !type:ContainerSlot
+        !type:Container
   - type: HyperSleepChamber
   - type: Cryostorage
     containerId: cm-hypersleep

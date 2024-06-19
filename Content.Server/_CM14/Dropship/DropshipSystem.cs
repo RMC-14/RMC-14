@@ -1,18 +1,24 @@
 ﻿using System.Numerics;
+using Content.Server._CM14.Marines;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
 using Content.Shared._CM14.Dropship;
+using Content.Shared._CM14.Xenos;
 using Content.Shared._CM14.Xenos.Announce;
 using Content.Shared.Interaction;
 using Content.Shared.Shuttles.Systems;
+using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Player;
 
 namespace Content.Server._CM14.Dropship;
 
 public sealed class DropshipSystem : SharedDropshipSystem
 {
+    [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly ShuttleSystem _shuttle = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
@@ -116,8 +122,15 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         if (user != null && hijack)
         {
-            var text = "The Queen has commanded the metal bird to depart for the metal hive in the sky! Rejoice!";
-            _xenoAnnounce.AnnounceSameHive(user.Value, text);
+            var xenoText = "The Queen has commanded the metal bird to depart for the metal hive in the sky! Rejoice!";
+            _xenoAnnounce.AnnounceSameHive(user.Value, xenoText);
+            _audio.PlayPvs(dropship.LocalHijackSound, shuttle.Value);
+
+            var marineText = "Unscheduled dropship departure detected from operational area. Hijack likely. Shutting down autopilot.";
+            _marineAnnounce.Announce(shuttle.Value, marineText, dropship.AnnounceHijackIn);
+
+            var marines = Filter.Empty().AddWhereAttachedEntity(e => !HasComp<XenoComponent>(e));
+            _audio.PlayGlobal(dropship.MarineHijackSound, marines, true);
         }
 
         return true;

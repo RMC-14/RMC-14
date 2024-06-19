@@ -31,6 +31,7 @@
       research: 1
       surgery: 2
     - type: MarineOrders
+  hidden: true # TODO CM14
 
 - type: startingGear
   id: CMGearCMO

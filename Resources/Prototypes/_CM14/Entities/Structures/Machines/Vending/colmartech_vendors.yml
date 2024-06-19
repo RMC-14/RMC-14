@@ -179,7 +179,7 @@
       entries:
       - id: CMMRE
         amount: 5
-      - id: CMMREBox
+      - id: CMBoxMRE
         amount: 1
     - name: Tools
       entries:
@@ -250,15 +250,15 @@
       entries:
       - id: CMMagazineRifleM4RAAP
         amount: 3
-      - id: CMMagazineM39AP
+      - id: CMMagazineSMGM39AP
         amount: 3
       - id: CMMagazineRifleM41AAP
         amount: 3
     - name: Extended Ammunition
       entries:
-      - id: CMMagazineExtendedM39
+      - id: CMMagazineSMGM39Ext
         amount: 1
-      - id: CMMagazineExtendedRifleM41A
+      - id: CMMagazineRifleM41AExt
         amount: 1
     - name: Special Ammunition
       entries: [ ]
@@ -323,7 +323,7 @@
         amount: 10
       - id: CMMagazineRifleM4RA
         amount: 15
-      - id: CMMagazineM39
+      - id: CMMagazineSMGM39
         amount: 25
       - id: CMMagazineRifleM41A
         amount: 25
@@ -487,13 +487,13 @@
       entries:
       - id: CMMagazineRifleM4RAAP
         points: 10
-      - id: CMMagazineM39AP
+      - id: CMMagazineSMGM39AP
         points: 10
-      - id: CMMagazineExtendedM39
+      - id: CMMagazineSMGM39Ext
         points: 10
       - id: CMMagazineRifleM41AAP
         points: 10
-      - id: CMMagazineExtendedRifleM41A
+      - id: CMMagazineRifleM41AExt
         points: 10
     - name: Sidearm Ammunition
       entries:
@@ -731,13 +731,13 @@
       entries:
       - id: CMMagazineRifleM4RAAP
         points: 6
-      - id: CMMagazineM39AP
+      - id: CMMagazineSMGM39AP
         points: 6
-      - id: CMMagazineExtendedM39
+      - id: CMMagazineSMGM39Ext
         points: 6
       - id: CMMagazineRifleM41AAP
         points: 6
-      - id: CMMagazineExtendedRifleM41A
+      - id: CMMagazineRifleM41AExt
         points: 6
     - name: Sidearm Ammunition
       entries:
@@ -1105,13 +1105,13 @@
       entries:
       - id: CMMagazineRifleM4RAAP
         points: 6
-      - id: CMMagazineM39AP
+      - id: CMMagazineSMGM39AP
         points: 6
-      - id: CMMagazineExtendedM39
+      - id: CMMagazineSMGM39Ext
         points: 6
       - id: CMMagazineRifleM41AAP
         points: 6
-      - id: CMMagazineExtendedRifleM41A
+      - id: CMMagazineRifleM41AExt
         points: 6
     - name: Armors
       entries:
@@ -1376,13 +1376,13 @@
       entries:
       - id: CMMagazineRifleM4RAAP
         points: 6
-      - id: CMMagazineM39AP
+      - id: CMMagazineSMGM39AP
         points: 6
-      - id: CMMagazineExtendedM39
+      - id: CMMagazineSMGM39Ext
         points: 6
       - id: CMMagazineRifleM41AAP
         points: 6
-      - id: CMMagazineExtendedRifleM41A
+      - id: CMMagazineRifleM41AExt
         points: 6
     - name: Sidearm Ammunition
       entries:
@@ -1480,14 +1480,14 @@
       choices: { CMBelt: 1 }
       entries:
       - id: CMBeltMarine
-    #- id: CMM276GeneralPistolHolsterRig
-    #- id: CMM276LifesaverBagFull
-    #- id: CMM276MedicalStorageRigFull
-    #- id: CMM276M39HolsterRig
-    #- id: CMM276M44HolsterRig
-    #- id: CMM276M82FHolsterRig
-    #- id: CMM276ShotgunShellLoadingRig
-    #- id: CMM276M40GrenadeRig
+      #- id: CMM276GeneralPistolHolsterRig
+      - id: CMBeltMedicBagFilled
+      - id: CMBeltMedicalFilled
+      #- id: CMM276M39HolsterRig
+      #- id: CMM276M44HolsterRig
+      #- id: CMM276M82FHolsterRig
+      #- id: CMM276ShotgunShellLoadingRig
+      #- id: CMM276M40GrenadeRig
     - name: Pouches
       choices: { CMPouch: 2 }
       entries:
@@ -1785,13 +1785,13 @@
       entries:
       - id: CMMagazineRifleM4RAAP
         points: 10
-      - id: CMMagazineM39AP
+      - id: CMMagazineSMGM39AP
         points: 10
-      - id: CMMagazineExtendedM39
+      - id: CMMagazineSMGM39Ext
         points: 10
       - id: CMMagazineRifleM41AAP
         points: 10
-      - id: CMMagazineExtendedRifleM41A
+      - id: CMMagazineRifleM41AExt
         points: 10
     - name: Sidearm Ammunition
       entries:
@@ -2058,8 +2058,8 @@
         amount: 15
       - id: CMPouchMagazine
         amount: 15
-#      - id: Shotgun Shell Pouch
-#        amount: 15
+      - id: CMPouchShotgun
+        amount: 15
       - id: CMPouchGeneralMedium
         amount: 15
       - id: CMPouchMagazinePistol

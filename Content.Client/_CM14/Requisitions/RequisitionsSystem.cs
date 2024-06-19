@@ -30,7 +30,7 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
         }
 
         if (elevator.Comp.Mode != RequisitionsElevatorMode.Preparing)
-            _animation.Stop(elevator, AnimationKey);
+            _animation.Stop(elevator.Owner, AnimationKey);
 
         switch (elevator.Comp.Mode)
         {
@@ -107,7 +107,7 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
             return;
         }
 
-        _animation.Stop(railing, AnimationKey);
+        _animation.Stop(railing.Owner, AnimationKey);
         switch (railing.Comp.Mode)
         {
             case RequisitionsRailingMode.Lowered:

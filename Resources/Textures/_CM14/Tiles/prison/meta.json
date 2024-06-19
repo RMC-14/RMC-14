@@ -1,0 +1,226 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/8e8d26bbb4f1617ea1b1ffc17ffffca552ce8c11/icons/turf/floors/prison.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "floor"
+    },
+    {
+      "name": "floor_marked"
+    },
+    {
+      "name": "floor_plate"
+    },
+    {
+      "name": "bright_clean",
+    },
+    {
+      "name": "bright_clean2",
+    },
+    {
+      "name": "bright_clean_marked",
+    },
+    {
+      "name": "rampbottom",
+      "directions": 4
+    },
+    {
+      "name": "ramptop",
+      "directions": 4
+    },
+    {
+      "name": "kitchen",
+    },
+    {
+      "name": "cell_stripe",
+      "directions": 4
+    },
+    {
+      "name": "blue",
+      "directions": 8
+    },
+    {
+      "name": "blue_plate",
+      "directions": 4
+    },
+    {
+      "name": "bluecorner",
+      "directions": 4
+    },
+    {
+      "name": "bluefull",
+      "directions": 4
+    },
+    {
+      "name": "darkbrown2",
+      "directions": 8
+    },
+    {
+      "name": "darkbrowncorners2",
+      "directions": 4
+    },
+    {
+      "name": "darkbrownfull2",
+    },
+    {
+      "name": "darkbrown3",
+      "directions": 8
+    },
+    {
+      "name": "darkbrowncorners3",
+      "directions": 4
+    },
+    {
+      "name": "darkpurple2",
+      "directions": 8
+    },
+    {
+      "name": "darkpurplecorners2",
+      "directions": 4
+    },
+    {
+      "name": "darkpurplefull2",
+    },
+    {
+      "name": "darkred2",
+      "directions": 8
+    },
+    {
+      "name": "darkredcorners2",
+      "directions": 4
+    },
+    {
+      "name": "darkredfull2",
+    },
+    {
+      "name": "darkyellow2",
+      "directions": 8
+    },
+    {
+      "name": "darkyellowcorners2",
+      "directions": 4
+    },
+    {
+      "name": "darkyellowfull2",
+    },
+    {
+      "name": "green",
+      "directions": 8
+    },
+    {
+      "name": "greencorner",
+      "directions": 4
+    },
+    {
+      "name": "greenfull",
+      "directions": 4
+    },
+    {
+      "name": "greenblue",
+      "directions": 8
+    },
+    {
+      "name": "greenbluecorner",
+      "directions": 4
+    },
+    {
+      "name": "red",
+      "directions": 8
+    },
+    {
+      "name": "redcorner",
+      "directions": 4
+    },
+    {
+      "name": "redfull",
+    },
+    {
+      "name": "sterile",
+    },
+    {
+      "name": "sterile_white",
+    },
+    {
+      "name": "whitegreen",
+      "directions": 8
+    },
+    {
+      "name": "whitegreencorner",
+      "directions": 4
+    },
+    {
+      "name": "whitegreenfull",
+    },
+    {
+      "name": "whitepurple",
+      "directions": 8
+    },
+    {
+      "name": "whitepurplecorner",
+      "directions": 4
+    },
+    {
+      "name": "whitepurplefull",
+    },
+    {
+      "name": "whitered",
+      "directions": 8
+    },
+    {
+      "name": "whiteredcorner",
+      "directions": 4
+    },
+    {
+      "name": "yellow",
+      "directions": 8
+    },
+    {
+      "name": "yellowcorner",
+      "directions": 4
+    },
+    {
+      "name": "yellowfull",
+    },
+    {
+      "name": "floorscorched1"
+    },
+    {
+      "name": "floorscorched2"
+    },
+    {
+      "name": "damaged1"
+    },
+    {
+      "name": "damaged2"
+    },
+    {
+      "name": "damaged4"
+    },
+    {
+      "name": "damaged5"
+    },
+    {
+      "name": "damaged3"
+    },
+    {
+      "name": "plating"
+    },
+    {
+      "name": "panelscorched"
+    },
+    {
+      "name": "platingdmg1"
+    },
+    {
+      "name": "platingdmg2"
+    },
+    {
+      "name": "platingdmg3"
+    }
+  ]
+}

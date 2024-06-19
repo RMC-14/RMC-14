@@ -7,31 +7,33 @@
     - name: Ammo
       entries:
       - cost: 2000
-        crate: CMCrateMagazineRifleM41A
+        crate: CMCrateBoxMagazineRifleM41A
       - cost: 4000
-        crate: CMCrateMagazineRifleM41AAP
-      - cost: 4000
-        crate: CMCrateMagazineExtendedRifleM41A
-      - cost: 2000
-        crate: CMCrateMagazineRifleM4RA
-      - cost: 4000
-        crate: CMCrateMagazineRifleM4RAAP
-      - cost: 2000
-        crate: CMCrateMagazineM39
-      - cost: 4000
-        crate: CMCrateMagazineM39AP
-      - cost: 2000
-        crate: CMCrateMagazinePistolM4A3
+        crate: CMCrateBoxMagazineRifleM41AAP
       - cost: 3000
-        crate: CMCrateShellsShotgunSlugs
-      - cost: 3000
-        crate: CMCrateShellsShotgunBuckshot
-      - cost: 3000
-        crate: CMCrateShellsShotgunFlechette
+        crate: CMCrateBoxMagazineRifleM41AExt
       - cost: 2000
-        crate: CMCrateMagazinePistol88m4AP
+        crate: CMCrateBoxMagazineRifleM4RA
       - cost: 4000
-        crate: CMCrateMagazinePistolVP78
+        crate: CMCrateBoxMagazineRifleM4RAAP
+      - cost: 2000
+        crate: CMCrateBoxMagazineSMGM39
+      - cost: 4000
+        crate: CMCrateBoxMagazineSMGM39AP
+      - cost: 2000
+        crate: CMCrateBoxMagazinePistolM4A3
+#      - cost: 3000 # todo cm14 this crate is completed but needs mags
+#        crate: CMCrateBoxMagazinePistolM4A3AP
+      - cost: 3000
+        crate: CMCrateBoxShellsShotgunSlugs
+      - cost: 3000
+        crate: CMCrateBoxShellsShotgunBuckshot
+      - cost: 3000
+        crate: CMCrateBoxShellsShotgunFlechette
+      - cost: 2000
+        crate: CMCrateBoxMagazinePistol88m4AP
+      - cost: 4000
+        crate: CMCrateBoxMagazinePistolVP78
 #    - name: Attachments
 #      entries: [ ] # TODO CM14
 #      - cost: 3000
@@ -161,9 +163,15 @@
     - name: Supplies
       entries:
       - cost: 2000
-        crate: CMCrateSuppliesCrayons
+        crate: CMCrateSupplyInternals
+#      - cost: 1000
+#        crate: CMCrateSupplyEvacuation
       - cost: 1000
         crate: CMCrateSuppliesBoxes
+      - cost: 1000
+        crate: CMCrateSupplyJanitor
+      - cost: 2000
+        crate: CMCrateSuppliesCrayons
 #    - name: Vehicle Ammo
 #      entries: []
     - name: Weapons

@@ -20,4 +20,7 @@ public sealed partial class DepartmentPrototype : IInheritingPrototype, ICMSpeci
 
     [DataField]
     public string? CustomName;
+
+    [DataField]
+    public bool Hidden;
 }

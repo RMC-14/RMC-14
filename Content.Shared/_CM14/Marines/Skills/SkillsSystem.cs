@@ -1,16 +1,26 @@
-﻿using Content.Shared.Interaction;
+﻿using System.Linq;
+using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Examine;
+using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._CM14.Marines.Skills;
 
 public sealed class SkillsSystem : EntitySystem
 {
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<MedicallyUnskilledDoAfterComponent, AttemptHyposprayUseEvent>(OnAttemptHyposprayUse);
         SubscribeLocalEvent<RequiresSkillComponent, BeforeRangedInteractEvent>(OnRequiresSkillBeforeRangedInteract);
+        SubscribeLocalEvent<ReagentExaminationRequiresSkillComponent, ExaminedEvent>(OnExamineReagentContainer);
+        SubscribeLocalEvent<ExamineRequiresSkillComponent, ExaminedEvent>(OnExamineRequiresSkill);
     }
 
     private void OnAttemptHyposprayUse(Entity<MedicallyUnskilledDoAfterComponent> ent, ref AttemptHyposprayUseEvent args)
@@ -31,6 +41,85 @@ public sealed class SkillsSystem : EntitySystem
         {
             _popup.PopupClient($"You don't know how to use the {Name(args.Used)}...", args.User, PopupType.SmallCaution);
             args.Handled = true;
+        }
+    }
+
+    private void OnExamineReagentContainer(Entity<ReagentExaminationRequiresSkillComponent> ent, ref ExaminedEvent args)
+    {
+        if (!HasSkills(args.Examiner, in ent.Comp.Skills))
+        {
+            if (ent.Comp.UnskilledExamine != null)
+            {
+                using (args.PushGroup(nameof(ReagentExaminationRequiresSkillComponent)))
+                {
+                    args.PushMarkup(Loc.GetString(ent.Comp.UnskilledExamine));
+                }
+            }
+
+            return;
+        }
+
+        if (!TryComp(args.Examined, out SolutionContainerManagerComponent? solutionContainerManager))
+            return;
+
+        var foundReagents = new List<ReagentQuantity>();
+        foreach (var solutionContainerId in solutionContainerManager.Containers)
+        {
+            if (!_solutionContainerSystem.TryGetSolution(args.Examined, solutionContainerId, out _, out var solution))
+                continue;
+
+            foreach (var reagent in solution.Contents)
+            {
+                foundReagents.Add(reagent);
+            }
+        }
+
+        if (!foundReagents.Any())
+        {
+            using (args.PushGroup(nameof(ReagentExaminationRequiresSkillComponent)))
+            {
+                args.PushMarkup(Loc.GetString(ent.Comp.SkilledExamineNone));
+            }
+
+            return;
+        }
+
+        var reagentCount = foundReagents.Count;
+        var fullMessage = $"{Loc.GetString(ent.Comp.SkilledExamineContains)} ";
+        for (var i = 0; i < foundReagents.Count; i++)
+        {
+            var reagent = foundReagents[i];
+            var reagentLocalizedName = _prototypeManager.Index<ReagentPrototype>(reagent.Reagent.Prototype).LocalizedName;
+            var reagentQuantity = reagent.Quantity;
+            fullMessage += $"{reagentLocalizedName}({reagentQuantity}u)";
+            if (i > reagentCount)
+                fullMessage += ", ";
+        }
+
+        using (args.PushGroup(nameof(ReagentExaminationRequiresSkillComponent)))
+        {
+            args.PushMarkup(fullMessage);
+        }
+    }
+
+    private void OnExamineRequiresSkill(Entity<ExamineRequiresSkillComponent> ent, ref ExaminedEvent args)
+    {
+        if (!HasSkills(args.Examiner, in ent.Comp.Skills))
+        {
+            if (ent.Comp.UnskilledExamine != null)
+            {
+                using (args.PushGroup(nameof(ExamineRequiresSkillComponent), ent.Comp.ExaminePriority))
+                {
+                    args.PushMarkup(Loc.GetString(ent.Comp.UnskilledExamine));
+                }
+            }
+
+            return;
+        }
+
+        using (args.PushGroup(nameof(ExamineRequiresSkillComponent), ent.Comp.ExaminePriority))
+        {
+            args.PushMarkup(Loc.GetString(ent.Comp.SkilledExamine));
         }
     }
 

@@ -37,6 +37,7 @@
       overwatch: 1
       police: 2
     - type: MarineOrders
+  hidden: true # TODO CM14
 
 - type: startingGear
   id: CMGearChiefMP

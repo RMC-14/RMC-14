@@ -230,10 +230,9 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:HealthChange
+      - !type:EqualHealthChange
         damage:
-          types:
-            Asphyxiation: -1
+        - Airloss: -1
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -262,7 +261,7 @@
       metabolismRate: 0.1
       effects:
       - !type:RemoveDamage
-        type: Asphyxiation
+        group: Airloss
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
