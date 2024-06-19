@@ -65,6 +65,10 @@
       - CMMagazineRifle
       - CMMagazineSmg
       - CMMagazineSniper
+      - CMMagazinePistol
+      - Sidearm
+      - Knife
+      - Flashlight
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -81,9 +85,10 @@
   - type: IgnoreContentsSize
     items:
       tags:
-      - CMMagazinePistol
       - CMMagazineRifle
+      - CMMagazineSmg
       - CMMagazineSniper
+      - CMMagazinePistol
 
 - type: entity
   parent: CMArmorM3Medium

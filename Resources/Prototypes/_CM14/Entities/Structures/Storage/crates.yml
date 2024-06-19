@@ -1,10 +1,12 @@
 # Base
 - type: entity
-  parent: CrateGeneric
+  parent: BaseStructureDynamic
   id: CMCrateBase
   name: crate
   description: A rectangular metal crate.
   components:
+  - type: Transform
+    noRot: true
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/basic.rsi
     noRot: true
@@ -20,6 +22,48 @@
     sprite: _CM14/Structures/Storage/Crates/basic.rsi
     state: icon
   - type: RequisitionsCrate
+  - type: InteractionOutline
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.29"
+        density: 50
+        mask:
+        - CrateMask
+        layer:
+        - MachineLayer
+  - type: EntityStorage
+  - type: PlaceableSurface
+    isPlaceable: false
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateDoorOpen: open
+    stateDoorClosed: closed
+  - type: ContainerContainer
+    containers:
+      entity_storage: !type:Container
+      paper_label: !type:ContainerSlot
+  - type: ItemSlots
+  - type: StaticPrice
+    price: 50
+  - type: RequireProjectileTarget
 
 - type: entity
   parent: BaseStructureDynamic

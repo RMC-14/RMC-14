@@ -1,12 +1,12 @@
 - type: entity
   parent: BaseMagazineRifle
-  id: CMMagazineM39
+  id: CMMagazineSMGM39
   name: "M39 magazine (10x20mm)"
   components:
   - type: Tag
     tags:
     - CMMagazineSmg
-    - CMMagazineM39
+    - CMMagazineSMGM39
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -28,10 +28,13 @@
     zeroOnlyOnEmpty: true
   - type: Appearance
 
+- type: Tag
+  id: CMMagazineSMGM39AP
+
 # M39 AP
 - type: entity
-  parent: CMMagazineM39
-  id: CMMagazineM39AP
+  parent: CMMagazineSMGM39
+  id: CMMagazineSMGM39AP
   name: "M39 AP magazine (10x20mm)"
   components:
   - type: BallisticAmmoProvider
@@ -50,9 +53,13 @@
       color: "#1F951F"
 
 # M39 Extended
+
+- type: Tag
+  id: CMMagazineSMGM39Ext
+
 - type: entity
-  parent: CMMagazineM39
-  id: CMMagazineExtendedM39
+  parent: CMMagazineSMGM39
+  id: CMMagazineSMGM39Ext
   name: "M39 extended magazine (10x20mm)"
   components:
   - type: BallisticAmmoProvider
@@ -69,4 +76,4 @@
   id: CMMagazineSmg
 
 - type: Tag
-  id: CMMagazineM39
+  id: CMMagazineSMGM39

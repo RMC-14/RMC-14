@@ -10,9 +10,8 @@
   - type: ExpendableLight
     spentName: expendable-light-spent-flare-name
     spentDesc: expendable-light-spent-flare-desc
-    glowDuration: 530 # lasts a lot longer, 10 minutes :godo:
+    glowDuration: 600
     fadeOutDuration: 30
-    iconStateOn: flare_unlit
     iconStateSpent: flare_spent
     turnOnBehaviourID: turn_on
     fadeOutBehaviourID: fade_out
@@ -22,27 +21,20 @@
   - type: Sprite
     sprite: _CM14/Objects/Misc/flares.rsi
     layers:
-      - map: [ enum.ExpendableLightVisualLayers.Base ]
-        state: flare_base
-        color: "#FFcccc"
-      - map: [ enum.ExpendableLightVisualLayers.Glow ]
-        state: flare_burn
-        color: "#FF5E5E"
+      - map: [ "enum.ExpendableLightVisualLayers.Base" ]
+        state: flare
+      - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
+        state: flare_flame
+        color: "#FFA7A7"
         visible: false
-        shader: unshaded
-      - map: [ enum.ExpendableLightVisualLayers.Overlay ]
-        state: flare_unlit
-        color: "#FFcccc"
+      - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
+        state: overlay
   - type: Icon
     sprite: _CM14/Objects/Misc/flares.rsi
     state: icon
   - type: Item
-    sprite: _CM14/Objects/Misc/flares.rsi
-    heldPrefix: unlit
     size: Small
-    storedSprite:
-      sprite: _CM14/Objects/Misc/flares.rsi
-      state: storage
+    heldPrefix: unlit
   - type: Appearance
   - type: PointLight
     enabled: false
@@ -67,13 +59,14 @@
 
 - type: entity
   abstract: true
-  parent: CMMagazineBoxBase
+  parent: CMBoxMagazineBase
   id: CMBoxPackFlareBase
   name: box of M94 flare packs
   description: A box of M94 marking flare packs, to brighten up your day.
   components:
+  - type: Item
+    size: Huge
   - type: CMItemSlots
-    cooldown: 0
     count: 10
     slot:
       name: FlarePack
@@ -84,8 +77,17 @@
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     layers:
     - state: supply_crate
-    - state: magaz_mre
-      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+    - state: magaz_flares
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: magaz_flares, visible: false }
+          Low: { state: magaz_flares_1, visible: true }
+          Medium: { state: magaz_flares_2, visible: true }
+          High: { state: magaz_flares_3, visible: true }
+          Full: { state: magaz_flares, visible: true }
 
 - type: entity
   parent: CMBoxPackFlareBase
@@ -97,10 +99,10 @@
 
 - type: entity
   abstract: true
-  parent: CMMagazineBoxBase
+  parent: BaseItem
   id: CMPackFlareBase
-  name: M94 flare pack
-  description: A pack of M94 marking flares
+  name: M94 marking flare pack
+  description: A packet of eight M94 Marking Flares. Carried by USCM soldiers to light dark areas that cannot be reached with the usual TNR Shoulder Lamp.
   components:
   - type: Item
     size: Normal
@@ -108,7 +110,6 @@
     tags:
     - CMFlarePack
   - type: CMItemSlots
-    cooldown: 0
     count: 8
     slot:
       name: Flare

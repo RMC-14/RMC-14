@@ -1,0 +1,72 @@
+#chairs
+- type: construction
+  parent: CM
+  name: chair
+  id: CMChair
+  graph: CMSeat
+  startNode: start
+  targetNode: chair
+  category: construction-category-cm-furniture
+  description: A basic chair for sitting.
+  icon:
+    sprite: _CM14/Structures/Furniture/chairs.rsi
+    state: chair
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: CM
+  name: comfy chair
+  id: CMChairComfy
+  graph: CMSeat
+  startNode: start
+  targetNode: chairComfy
+  category: construction-category-cm-furniture
+  description: A comfortable chair for sitting.
+  icon:
+    sprite: _CM14/Structures/Furniture/chairs.rsi
+    state: comfychair
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: CM
+  name: dark office chair
+  id: CMChairOfficeDark
+  graph: CMSeat
+  startNode: start
+  targetNode: chairOfficeDark
+  category: construction-category-cm-furniture
+  description: An office chair for sitting.
+  icon:
+    sprite: _CM14/Structures/Furniture/chairs.rsi
+    state: officechair_dark
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: CM
+  name: white office chair
+  id: CMChairOfficeWhite
+  graph: CMSeat
+  startNode: start
+  targetNode: chairOfficeWhite
+  category: construction-category-cm-furniture
+  description: An office chair for sitting.
+  icon:
+    sprite: _CM14/Structures/Furniture/chairs.rsi
+    state: officechair_white
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked

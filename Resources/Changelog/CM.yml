@@ -1300,7 +1300,8 @@
     type: Add
   - message: The death of every xeno is now announced to the hive.
     type: Add
-  - message: The Queen is now able to call down a dropship by interacting with a terminal near the landing zones.
+  - message: The Queen is now able to call down a dropship by interacting with a terminal
+      near the landing zones.
     type: Add
   id: 156
   time: '2024-06-16T06:56:15.0000000+00:00'
@@ -1312,5 +1313,58 @@
   id: 157
   time: '2024-06-16T09:42:06.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2495
+- author: DrSmugleaf
+  changes:
+  - message: Fixed resin structures taking more damage from guns than intended.
+    type: Fix
+  id: 158
+  time: '2024-06-16T19:55:06.0000000+00:00'
+  url: null
+- author: DrSmugleaf
+  changes:
+  - message: Fixed sentinel spits not shooting out when clicking on and behind walls.
+    type: Fix
+  id: 159
+  time: '2024-06-16T20:08:06.0000000+00:00'
+  url: null
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenos sometimes not healing while on weeds.
+    type: Fix
+  id: 160
+  time: '2024-06-16T21:50:06.0000000+00:00'
+  url: null
+- author: Dorragon
+  changes:
+  - message: Riot armor
+    type: Add
+  id: 161
+  time: '2024-06-18T02:21:32.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2485
+- author: geraeumig
+  changes:
+  - message: Added ability to scope in with M42A rifle
+    type: Add
+  id: 162
+  time: '2024-06-18T07:50:16.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2426
+- author: Vermidia
+  changes:
+  - message: The health analyzer now identifies chest-bursted marines as permanently
+      deceased
+    type: Add
+  id: 163
+  time: '2024-06-18T21:45:02.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2540
+- author: Nairodian
+  changes:
+  - message: Added the ability to deconstruct and make; chairs, fences, and light
+      fixtures.
+    type: Add
+  - message: Removed deconstruction for racks and crates.
+    type: Remove
+  id: 164
+  time: '2024-06-18T23:44:23.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2531
 Name: CM
 Order: -1
