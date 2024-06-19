@@ -5,6 +5,7 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Machines/shuttle_console.rsi
+    drawdepth: SmallObjects
   - type: Corrodible
     isCorrodible: false
 
