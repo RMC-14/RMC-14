@@ -17,6 +17,9 @@
       "name": "flare"
     },
     {
+      "name": "flare_unlit"
+    },
+    {
       "name": "flare_flame",
       "delays": [
         [
