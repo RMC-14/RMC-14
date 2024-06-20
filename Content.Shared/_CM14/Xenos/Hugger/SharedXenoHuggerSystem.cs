@@ -1,5 +1,6 @@
 ﻿using Content.Shared._CM14.Hands;
 using Content.Shared._CM14.Xenos.Leap;
+using Content.Shared._CM14.Xenos.Pheromones;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Examine;
@@ -55,7 +56,8 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         SubscribeLocalEvent<XenoHuggerComponent, DragDropDraggedEvent>(OnHuggerDragDropDragged);
 
         SubscribeLocalEvent<HuggerSpentComponent, MapInitEvent>(OnHuggerSpentMapInit);
-        SubscribeLocalEvent<HuggerSpentComponent, UpdateMobStateEvent>(OnHuggerSpentUpdateMobState);
+        SubscribeLocalEvent<HuggerSpentComponent, UpdateMobStateEvent>(OnHuggerSpentUpdateMobState,
+            after: [typeof(MobThresholdSystem), typeof(SharedXenoPheromonesSystem)]);
 
         SubscribeLocalEvent<VictimHuggedComponent, MapInitEvent>(OnVictimHuggedMapInit);
         SubscribeLocalEvent<VictimHuggedComponent, ComponentRemove>(OnVictimHuggedRemoved);
@@ -64,7 +66,8 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         SubscribeLocalEvent<VictimHuggedComponent, RejuvenateEvent>(OnVictimHuggedRejuvenate);
 
         SubscribeLocalEvent<VictimBurstComponent, MapInitEvent>(OnVictimBurstMapInit);
-        SubscribeLocalEvent<VictimBurstComponent, UpdateMobStateEvent>(OnVictimUpdateMobState);
+        SubscribeLocalEvent<VictimBurstComponent, UpdateMobStateEvent>(OnVictimUpdateMobState,
+            after: [typeof(MobThresholdSystem), typeof(SharedXenoPheromonesSystem)]);
         SubscribeLocalEvent<VictimBurstComponent, RejuvenateEvent>(OnVictimBurstRejuvenate);
     }
 
@@ -308,6 +311,7 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
         _blindable.UpdateIsBlind(victim);
         _appearance.SetData(hugger, victimComp.HuggedLayer, true);
 
+        // TODO CM14 also do damage to the hugger
         EnsureComp<HuggerSpentComponent>(hugger);
 
         HuggerLeapHit(hugger);
