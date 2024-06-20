@@ -16,6 +16,10 @@
     - state: welded
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/basic.rsi
     state: icon
@@ -96,6 +100,18 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/alpha.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/alpha.rsi
 
@@ -107,6 +123,18 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/bravo.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/bravo.rsi
 
@@ -118,6 +146,18 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/charlie.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/charlie.rsi
 
@@ -129,6 +169,18 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/delta.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/delta.rsi
 
@@ -140,6 +192,18 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/ammo.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/ammo.rsi
 
@@ -151,6 +215,18 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/green.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/green.rsi
 
@@ -162,6 +238,18 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/construction.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/construction.rsi
 
@@ -173,6 +261,18 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/explosives.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/explosives.rsi
 
@@ -184,6 +284,18 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/freezer.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/freezer.rsi
 
@@ -195,6 +307,18 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/hydro.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/hydro.rsi
 
@@ -206,6 +330,18 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/oxygen.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/oxygen.rsi
 
@@ -217,6 +353,18 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/plastic.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/plastic.rsi
 
@@ -228,6 +376,18 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/radioactive.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/radioactive.rsi
 
@@ -239,6 +399,18 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/science.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/science.rsi
 
@@ -250,6 +422,18 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/supply.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/supply.rsi
 
@@ -261,6 +445,18 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/weapons.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/weapons.rsi
 
@@ -272,6 +468,18 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/medical.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/medical.rsi
 
@@ -295,6 +503,11 @@
     - state: locked
       map: ["enum.LockVisualLayers.Lock"]
       shader: unshaded
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      offset: "0.28125,0.0"
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: LockVisuals
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/secure_basic.rsi
@@ -311,6 +524,21 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/secure_ammo.rsi
+    layers:
+    - state: base
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      map: ["enum.WeldableLayers.BaseWelded"]
+      visible: false
+    - state: locked
+      map: ["enum.LockVisualLayers.Lock"]
+      shader: unshaded
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      offset: "-0.03125,0.0"
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/secure_ammo.rsi
 
@@ -322,6 +550,21 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/secure_explosives.rsi
+    layers:
+    - state: base
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      map: ["enum.WeldableLayers.BaseWelded"]
+      visible: false
+    - state: locked
+      map: ["enum.LockVisualLayers.Lock"]
+      shader: unshaded
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      offset: "-0.03125,0.0"
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/secure_explosives.rsi
 
@@ -339,6 +582,21 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/secure_hydro.rsi
+    layers:
+    - state: base
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      map: ["enum.WeldableLayers.BaseWelded"]
+      visible: false
+    - state: locked
+      map: ["enum.LockVisualLayers.Lock"]
+      shader: unshaded
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      offset: "0.28125,0.0"
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/secure_hydro.rsi
 
@@ -350,6 +608,21 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/secure_medical.rsi
+    layers:
+    - state: base
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      map: ["enum.WeldableLayers.BaseWelded"]
+      visible: false
+    - state: locked
+      map: ["enum.LockVisualLayers.Lock"]
+      shader: unshaded
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      offset: "-0.03125,0.0"
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/secure_medical.rsi
 
@@ -361,6 +634,21 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/secure_weapons.rsi
+    layers:
+    - state: base
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      map: ["enum.WeldableLayers.BaseWelded"]
+      visible: false
+    - state: locked
+      map: ["enum.LockVisualLayers.Lock"]
+      shader: unshaded
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      offset: "0.28125,0.0"
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/secure_weapons.rsi
 
@@ -372,5 +660,20 @@
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/secure_weyland.rsi
+    layers:
+    - state: base
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      map: ["enum.WeldableLayers.BaseWelded"]
+      visible: false
+    - state: locked
+      map: ["enum.LockVisualLayers.Lock"]
+      shader: unshaded
+    - state: invoice
+      sprite: _CM14/Structures/Storage/Crates/labels.rsi
+      offset: "0.3475,0.0"
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _CM14/Structures/Storage/Crates/secure_weyland.rsi
