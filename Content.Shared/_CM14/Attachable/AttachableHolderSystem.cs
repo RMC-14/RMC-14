@@ -3,6 +3,7 @@ using Content.Shared._CM14.Attachable.Components;
 using Content.Shared._CM14.Attachable.Events;
 using Content.Shared._CM14.Input;
 using Content.Shared._CM14.Weapons.Common;
+using Content.Shared._CM14.Weapons.Ranged;
 using Content.Shared.ActionBlocker;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands;
@@ -46,12 +47,14 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, GetVerbsEvent<InteractionVerb>>(OnAttachableHolderGetVerbs);
         SubscribeLocalEvent<AttachableHolderComponent, GotEquippedHandEvent>(OnHolderGotEquippedHand);
         SubscribeLocalEvent<AttachableHolderComponent, GotUnequippedHandEvent>(OnHolderGotUnequippedHand);
-        SubscribeLocalEvent<AttachableHolderComponent, GunRefreshModifiersEvent>(OnAttachableHolderRefreshModifiers,
+        SubscribeLocalEvent<AttachableHolderComponent, GunRefreshModifiersEvent>(RelayEvent,
             after: new[] { typeof(WieldableSystem) });
         SubscribeLocalEvent<AttachableHolderComponent, InteractUsingEvent>(OnAttachableHolderInteractUsing);
         SubscribeLocalEvent<AttachableHolderComponent, ItemWieldedEvent>(OnHolderWielded);
         SubscribeLocalEvent<AttachableHolderComponent, ItemUnwieldedEvent>(OnHolderUnwielded);
         SubscribeLocalEvent<AttachableHolderComponent, UniqueActionEvent>(OnAttachableHolderUniqueAction);
+        SubscribeLocalEvent<AttachableHolderComponent, GetGunDamageModifierEvent>(RelayEvent);
+        SubscribeLocalEvent<AttachableHolderComponent, GunMuzzleFlashAttemptEvent>(RelayEvent);
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.CMActivateAttachableBarrel,
@@ -159,21 +162,6 @@ public sealed class AttachableHolderSystem : EntitySystem
     {
         if (TryComp<GunComponent>(holder.Owner, out var gunComponent))
             _gun.RefreshModifiers((holder.Owner, gunComponent));
-    }
-
-    private void OnAttachableHolderRefreshModifiers(Entity<AttachableHolderComponent> holder,
-        ref GunRefreshModifiersEvent args)
-    {
-        foreach (var slot in holder.Comp.Slots.Keys)
-        {
-            if (_container.TryGetContainer(holder, slot, out var container))
-            {
-                foreach (var contained in container.ContainedEntities)
-                {
-                    RaiseLocalEvent(contained, ref args);
-                }
-            }
-        }
     }
 
     private void OnHolderWielded(Entity<AttachableHolderComponent> holder, ref ItemWieldedEvent args)
@@ -308,6 +296,8 @@ public sealed class AttachableHolderSystem : EntitySystem
         var addEv = new GrantAttachableActionsEvent(userUid);
         RaiseLocalEvent(attachableUid, ref addEv);
 
+        _gun.RefreshModifiers(holder.Owner);
+
         _audio.PlayPredicted(Comp<AttachableComponent>(attachableUid).AttachSound,
             holder,
             userUid);
@@ -388,6 +378,8 @@ public sealed class AttachableHolderSystem : EntitySystem
 
         var removeEv = new RemoveAttachableActionsEvent(userUid);
         RaiseLocalEvent(attachableUid, ref removeEv);
+
+        _gun.RefreshModifiers(holder.Owner);
 
         _audio.PlayPredicted(Comp<AttachableComponent>(attachableUid).DetachSound,
             holder,
@@ -578,6 +570,20 @@ public sealed class AttachableHolderSystem : EntitySystem
             foreach (var contained in container.ContainedEntities)
             {
                 RaiseLocalEvent(contained, ref ev);
+            }
+        }
+    }
+
+    private void RelayEvent<T>(Entity<AttachableHolderComponent> holder, ref T args) where T : notnull
+    {
+        foreach (var slot in holder.Comp.Slots.Keys)
+        {
+            if (_container.TryGetContainer(holder, slot, out var container))
+            {
+                foreach (var contained in container.ContainedEntities)
+                {
+                    RaiseLocalEvent(contained, ref args);
+                }
             }
         }
     }

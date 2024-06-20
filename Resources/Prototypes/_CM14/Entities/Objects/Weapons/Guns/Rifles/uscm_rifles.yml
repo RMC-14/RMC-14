@@ -75,6 +75,7 @@
       cm-aslot-barrel:
         tags:
           - CMAttachableExtendedBarrel
+          - CMAttachableSuppressor
       cm-aslot-rail:
         tags:
           - CMAttachableFlashlight
@@ -83,7 +84,7 @@
           - CMAttachmentU7UnderbarrelShotgun
   - type: AttachableHolderVisuals
     offsets:
-      cm-aslot-barrel: 0.45, 0.06
+      cm-aslot-barrel: 0.53, 0.06
       cm-aslot-rail: -0.1, 0.23
       cm-aslot-underbarrel: 0.0, 0.0
 
@@ -136,6 +137,9 @@
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
+    - sprite: _CM14/Objects/Weapons/Guns/Attachments/barrel.rsi
+      state: d_m4ra_barrel
+      offset: 0.65, 0
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
@@ -168,3 +172,16 @@
           - CMMagazineRifleM4RA
   - type: GunDamageModifier
     multiplier: 1.4
+  - type: AttachableHolder
+    slots:
+      cm-aslot-barrel:
+        tags:
+        - CMAttachableExtendedBarrel
+        - CMAttachableSuppressor
+      cm-aslot-rail:
+        tags:
+        - CMAttachableFlashlight
+  - type: AttachableHolderVisuals
+    offsets:
+      cm-aslot-barrel: 0.9, 0.03
+      cm-aslot-rail: -0.1, 0.23

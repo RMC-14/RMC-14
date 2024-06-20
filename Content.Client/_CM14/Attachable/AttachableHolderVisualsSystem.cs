@@ -97,7 +97,7 @@ public sealed class AttachableHolderVisualsSystem : EntitySystem
         {
             RsiPath = rsi.ToString(),
             State = state,
-            Offset = holder.Comp.Offsets[slotId],
+            Offset = holder.Comp.Offsets[slotId] + attachable.Comp.Offset,
             Visible = true,
         };
 

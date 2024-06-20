@@ -1,3 +1,4 @@
+using System.Numerics;
 using Robust.Shared.Utility;
 
 namespace Content.Client._CM14.Attachable.Components;
@@ -51,4 +52,7 @@ public sealed partial class AttachableVisualsComponent : Component
 
     [DataField, AutoNetworkedField]
     public int Layer;
+
+    [DataField, AutoNetworkedField]
+    public Vector2 Offset;
 }

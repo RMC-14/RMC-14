@@ -55,7 +55,11 @@
     slots:
       cm-aslot-stock:
         tags:
-          - CMAttachableStockSMGCollapsible
+        - CMAttachableStockSMGCollapsible
+      cm-aslot-barrel:
+        tags:
+        - CMAttachableBarrel
   - type: AttachableHolderVisuals
     offsets:
+      cm-aslot-barrel: 0.44, 0.16
       cm-aslot-stock: -0.58, 0.13

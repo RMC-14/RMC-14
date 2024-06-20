@@ -38,10 +38,10 @@ public sealed partial class AttachableWeaponRangedModifierSet
     public int ShotsPerBurst;
 
     [DataField]
-    public FixedPoint2 Damage = 1.0;
+    public FixedPoint2 DamageFlat = FixedPoint2.Zero;
 
     [DataField]
-    public float Recoil = 1.0f;
+    public float RecoilFlat;
 
     [DataField]
     public double AngleIncrease = 1.0;
@@ -59,7 +59,10 @@ public sealed partial class AttachableWeaponRangedModifierSet
     public float FireRate = 1.0f;
 
     [DataField]
-    public float ProjectileSpeed = 1.0f;
+    public float ProjectileSpeedFlat = 0;
+
+    [DataField]
+    public float ProjectileSpeedMultiplier = 1.0f;
 }
 
 [Serializable, NetSerializable]
