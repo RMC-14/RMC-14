@@ -86,6 +86,49 @@
     state: base_m39
   objectType: Item
 
+# M4RA
+- type: construction
+  parent: CM
+  name: Magazine Box (M4RA Reg)
+  id: CMBoxMagazineRifleM4RA
+  graph: CMBoxMagazine
+  startNode: start
+  targetNode: CMBoxMagazineRifleM4RA
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain regular M4RA mags.
+  icon:
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_m4ra
+  objectType: Item
+
+- type: construction
+  parent: CM
+  name: Magazine Box (M4RA AP)
+  id: CMBoxMagazineRifleM4RAAP
+  graph: CMBoxMagazine
+  startNode: start
+  targetNode: CMBoxMagazineRifleM4RAAP
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain armor piercing M4RA mags.
+  icon:
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_m4ra
+  objectType: Item
+
+- type: construction
+  parent: CM
+  name: Magazine Box (M4RA Ext)
+  id: CMBoxMagazineRifleM4RAExt
+  graph: CMBoxMagazine
+  startNode: start
+  targetNode: CMBoxMagazineRifleM4RAExt
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain extended M4RA mags.
+  icon:
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_m4ra
+  objectType: Item
+
   # Construct graphs
 - type: constructionGraph
   parent: CM
@@ -129,21 +172,48 @@
         amount: 1
         doAfter: 1
 
+    # M4RA
+    - to: CMBoxMagazineRifleM4RA #Emtpy
+      steps:
+      - material: Cardboard
+        amount: 1
+        doAfter: 1
+
+    - to: CMBoxMagazineRifleM4RAAP #Emtpy
+      steps:
+      - material: Cardboard
+        amount: 1
+        doAfter: 1
+
+    - to: CMBoxMagazineRifleM4RAExt #Emtpy
+      steps:
+      - material: Cardboard
+        amount: 1
+        doAfter: 1
+
 
   # Why the fuck do you even need these nodes???
 
   # M41A
   - node: CMBoxMagazineRifleM41A
-    entity: CMBoxMagazineRifleM41A
+    entity: CMBoxMagazineRifleM41A #Emtpy
   - node: CMBoxMagazineRifleM41AAP
-    entity: CMBoxMagazineRifleM41AAP
+    entity: CMBoxMagazineRifleM41AAP #Emtpy
   - node: CMBoxMagazineRifleM41AExt
-    entity: CMBoxMagazineRifleM41AExt
+    entity: CMBoxMagazineRifleM41AExt #Emtpy
 
   # M39
   - node: CMBoxMagazineSMGM39
-    entity: CMBoxMagazineSMGM39
+    entity: CMBoxMagazineSMGM39 #Emtpy
   - node: CMBoxMagazineSMGM39AP
-    entity: CMBoxMagazineSMGM39AP
+    entity: CMBoxMagazineSMGM39AP #Emtpy
   - node: CMBoxMagazineSMGM39Ext
-    entity: CMBoxMagazineSMGM39Ext
+    entity: CMBoxMagazineSMGM39Ext #Emtpy
+
+  # M4RA
+  - node: CMBoxMagazineRifleM4RA
+    entity: CMBoxMagazineRifleM4RA #Emtpy
+  - node: CMBoxMagazineRifleM4RAAP
+    entity: CMBoxMagazineRifleM4RAAP #Emtpy
+  - node: CMBoxMagazineRifleM4RAExt
+    entity: CMBoxMagazineRifleM4RAExt #Emtpy

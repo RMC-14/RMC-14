@@ -197,7 +197,7 @@
         - CMMagazineSMGM39
 
 - type: entity
-  parent: CMBoxMagazineBase
+  parent: CMBoxMagazineAPBase
   id: CMBoxMagazineSMGM39AP
   name: magazine box (AP M39 x 12)
   components:
@@ -256,6 +256,9 @@
   id: CMBoxMagazineRifleM4RA
   name: magazine box (M4RA x 16)
   components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazineRifleM4RA
   - type: Sprite
     layers:
     - state: base_m4ra
@@ -276,10 +279,13 @@
         - CMMagazineRifleM4RA
 
 - type: entity
-  parent: CMBoxMagazineBase
+  parent: CMBoxMagazineAPBase
   id: CMBoxMagazineRifleM4RAAP
   name: magazine box (AP M4RA x 16)
   components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazineRifleM4RAAP
   - type: Sprite
     layers:
     - state: base_m4ra
@@ -304,6 +310,9 @@
   id: CMBoxMagazineRifleM4RAExt
   name: magazine box (Ext M4RA x 12)
   components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazineRifleM4RAExt
   - type: Sprite
     layers:
     - state: base_m4ra
@@ -323,7 +332,7 @@
         tags:
         - CMMagazineRifleM4RAExt
 
-# m4a3
+# M4A3
 - type: entity
   parent: CMBoxMagazineBase
   id: CMBoxMagazinePistolM4A3
@@ -349,7 +358,7 @@
         - CMMagazinePistolM4A3
 
 #- type: entity # todo cm14 this box is done but needs mags made
-#  parent: CMBoxMagazineBase
+#  parent: CMBoxMagazineAPBase
 #  id: CMBoxMagazinePistolM4A3AP
 #  name: magazine box (AP M4A3 x 16)
 #  components:
@@ -374,7 +383,7 @@
 
 # 88 mod 4 / 88m4
 - type: entity
-  parent: CMBoxMagazineBase
+  parent: CMBoxMagazineAPBase
   id: CMBoxMagazinePistol88m4AP
   name: magazine box (88 Mod 4 AP x 16)
   components:
