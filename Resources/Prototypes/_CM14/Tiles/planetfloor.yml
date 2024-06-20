@@ -118,3 +118,18 @@
   parent: CMFloorBlack
   id: CMFloorSteelPlanetDarkish
   sprite: /Textures/_CM14/Tiles/floors/darkish.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPlanetSolarPanel
+  name: solar panel
+  sprite: /Textures/_CM14/Tiles/floors/solarpanel.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPlanetAstroGrass
+  name: tiles-astro-grass
+  sprite: /Textures/_CM14/Tiles/floors/grass1.png
+  footstepSounds:
+    collection: FootstepGrass
+  itemDrop: FloorTileItemAstroGrass
