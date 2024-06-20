@@ -7,121 +7,61 @@
 - type: tile
   parent: CMFloorSteelPrisonDarkBrownBase
   id: CMFloorSteelPrisonDarkBrown0
-  sprite: /Textures/_CM14/Tiles/prison/darkbrown3_0.png
-
-- type: tile
-  parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrown1
-  sprite: /Textures/_CM14/Tiles/prison/darkbrown3_1.png
-
-- type: tile
-  parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrown2
-  sprite: /Textures/_CM14/Tiles/prison/darkbrown3_2.png
-
-- type: tile
-  parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrown3
-  sprite: /Textures/_CM14/Tiles/prison/darkbrown3_3.png
-
-- type: tile
-  parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrown4
-  sprite: /Textures/_CM14/Tiles/prison/darkbrown3_4.png
-
-- type: tile
-  parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrown5
-  sprite: /Textures/_CM14/Tiles/prison/darkbrown3_5.png
-
-- type: tile
-  parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrown6
-  sprite: /Textures/_CM14/Tiles/prison/darkbrown3_6.png
-
-- type: tile
-  parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrown7
-  sprite: /Textures/_CM14/Tiles/prison/darkbrown3_7.png
-
-- type: tile
-  parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrownCorners0
-  sprite: /Textures/_CM14/Tiles/prison/darkbrowncorners3_0.png
-
-- type: tile
-  parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrownCorners1
-  sprite: /Textures/_CM14/Tiles/prison/darkbrowncorners3_1.png
-
-- type: tile
-  parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrownCorners2
-  sprite: /Textures/_CM14/Tiles/prison/darkbrowncorners3_2.png
-
-- type: tile
-  parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrownCorners3
-  sprite: /Textures/_CM14/Tiles/prison/darkbrowncorners3_3.png
-
-- type: tile
-  parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrownPlate0
   sprite: /Textures/_CM14/Tiles/prison/darkbrown2_0.png
 
 - type: tile
   parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrownPlate1
+  id: CMFloorSteelPrisonDarkBrown1
   sprite: /Textures/_CM14/Tiles/prison/darkbrown2_1.png
 
 - type: tile
   parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrownPlate2
+  id: CMFloorSteelPrisonDarkBrown2
   sprite: /Textures/_CM14/Tiles/prison/darkbrown2_2.png
 
 - type: tile
   parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrownPlate3
+  id: CMFloorSteelPrisonDarkBrown3
   sprite: /Textures/_CM14/Tiles/prison/darkbrown2_3.png
 
 - type: tile
   parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrownPlate4
+  id: CMFloorSteelPrisonDarkBrown4
   sprite: /Textures/_CM14/Tiles/prison/darkbrown2_4.png
 
 - type: tile
   parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrownPlate5
+  id: CMFloorSteelPrisonDarkBrown5
   sprite: /Textures/_CM14/Tiles/prison/darkbrown2_5.png
 
 - type: tile
   parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrownPlate6
+  id: CMFloorSteelPrisonDarkBrown6
   sprite: /Textures/_CM14/Tiles/prison/darkbrown2_6.png
 
 - type: tile
   parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrownPlate7
+  id: CMFloorSteelPrisonDarkBrown7
   sprite: /Textures/_CM14/Tiles/prison/darkbrown2_7.png
 
 - type: tile
   parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrownPlateCorners0
+  id: CMFloorSteelPrisonDarkBrownCorners0
   sprite: /Textures/_CM14/Tiles/prison/darkbrowncorners2_0.png
 
 - type: tile
   parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrownPlateCorners1
+  id: CMFloorSteelPrisonDarkBrownCorners1
   sprite: /Textures/_CM14/Tiles/prison/darkbrowncorners2_1.png
 
 - type: tile
   parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrownPlateCorners2
+  id: CMFloorSteelPrisonDarkBrownCorners2
   sprite: /Textures/_CM14/Tiles/prison/darkbrowncorners2_2.png
 
 - type: tile
   parent: CMFloorSteelPrisonDarkBrownBase
-  id: CMFloorSteelPrisonDarkBrownPlateCorners3
+  id: CMFloorSteelPrisonDarkBrownCorners3
   sprite: /Textures/_CM14/Tiles/prison/darkbrowncorners2_3.png
 
 - type: tile

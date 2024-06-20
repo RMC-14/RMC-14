@@ -294,6 +294,24 @@
   footstepSounds:
     collection: FootstepWood
   canDig: false
+  
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetCorsatPlate
+  name: corsat plate
+  sprite: /Textures/_CM14/Tiles/planet/corsat/plate.png
+  footstepSounds:
+    collection: FootstepHull
+  canDig: false
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetPlasticFloor1
+  name: plastic tile
+  sprite: /Textures/_CM14/Tiles/planet/interior/plasticfloor1.png
+  footstepSounds:
+    collection: FootstepFloor
+  canDig: false
 
 - type: tile
   parent: CMPlanetBase
