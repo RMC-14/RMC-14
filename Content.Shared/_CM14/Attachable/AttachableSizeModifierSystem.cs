@@ -8,11 +8,10 @@ namespace Content.Shared._CM14.Attachable;
 
 public sealed class AttachableSizeModifierSystem : EntitySystem
 {
-    private readonly List<ItemSizePrototype> _sortedSizes = new();
-
-    [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedItemSystem _itemSystem = default!;
+
+    private readonly List<ItemSizePrototype> _sortedSizes = new();
 
     public override void Initialize()
     {
@@ -24,14 +23,13 @@ public sealed class AttachableSizeModifierSystem : EntitySystem
         InitItemSizes();
     }
 
-
     private void OnAttachableAltered(Entity<AttachableSizeModifierComponent> attachable,
         ref AttachableAlteredEvent args)
     {
         if (attachable.Comp.SizeModifier == 0)
             return;
 
-        if (!_entityManager.TryGetComponent(args.Holder, out ItemComponent? itemComponent))
+        if (!TryComp(args.Holder, out ItemComponent? itemComponent))
             return;
 
         switch (args.Alteration)
@@ -55,10 +53,10 @@ public sealed class AttachableSizeModifierSystem : EntitySystem
         if (attachable.Comp.ActiveSizeModifier == 0 && attachable.Comp.InactiveSizeModifier == 0)
             return;
 
-        if (!_entityManager.TryGetComponent(args.Holder, out ItemComponent? itemComponent))
+        if (!TryComp(args.Holder, out ItemComponent? itemComponent))
             return;
 
-        if (!_entityManager.TryGetComponent(attachable.Owner, out AttachableToggleableComponent? toggleableComponent))
+        if (!TryComp(attachable.Owner, out AttachableToggleableComponent? toggleableComponent))
             return;
 
         switch (args.Alteration)

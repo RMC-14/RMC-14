@@ -26,15 +26,14 @@ namespace Content.Shared._CM14.Attachable;
 public sealed class AttachableHolderSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly AttachableToggleableSystem _attachableToggleable = default!;
-    [Dependency] private readonly AttachableWeaponRangedModsSystem _attachableWeaponRangedMods = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedGunSystem _gun = default!;
+    [Dependency] private readonly AttachableToggleableSystem _attachableToggleable = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -184,28 +183,26 @@ public sealed class AttachableHolderSystem : EntitySystem
     private void OnAttachableHolderRefreshModifiers(Entity<AttachableHolderComponent> holder,
         ref GunRefreshModifiersEvent args)
     {
-        foreach (var slotId in holder.Comp.Slots.Keys)
+        foreach (var slot in holder.Comp.Slots.Keys)
         {
-            if (!_container.TryGetContainer(holder, slotId, out var container) || container.Count <= 0)
-                continue;
-
-            var attachableUid = container.ContainedEntities[0];
-
-            if (!TryComp<AttachableComponent>(attachableUid, out _))
-                continue;
-
-            _attachableWeaponRangedMods.ApplyWeaponModifiers(attachableUid, ref args);
+            if (_container.TryGetContainer(holder, slot, out var container))
+            {
+                foreach (var contained in container.ContainedEntities)
+                {
+                    RaiseLocalEvent(contained, ref args);
+                }
+            }
         }
     }
 
     private void OnHolderWielded(Entity<AttachableHolderComponent> holder, ref ItemWieldedEvent args)
     {
-        ApplyModifiers(holder, AttachableAlteredType.Wielded);
+        _gun.RefreshModifiers(holder.Owner);
     }
 
     private void OnHolderUnwielded(Entity<AttachableHolderComponent> holder, ref ItemUnwieldedEvent args)
     {
-        ApplyModifiers(holder, AttachableAlteredType.Unwielded);
+        _gun.RefreshModifiers(holder.Owner);
     }
 
     private void OnAttachableHolderDetachMessage(EntityUid holderUid,
@@ -512,23 +509,6 @@ public sealed class AttachableHolderSystem : EntitySystem
         }
 
         return list;
-    }
-
-    public void ApplyModifiers(Entity<AttachableHolderComponent> holder, AttachableAlteredType attachableAltered)
-    {
-        foreach (var slotId in holder.Comp.Slots.Keys)
-        {
-            if (!_container.TryGetContainer(holder, slotId, out var container) || container.Count <= 0)
-                continue;
-
-            var attachableUid = container.ContainedEntities[0];
-
-            if (!TryComp<AttachableComponent>(attachableUid, out _))
-                continue;
-
-            var ev = new AttachableAlteredEvent(holder.Owner, attachableAltered);
-            RaiseLocalEvent(attachableUid, ref ev);
-        }
     }
 
     private void ToggleAttachable(EntityUid userUid, string slotId)

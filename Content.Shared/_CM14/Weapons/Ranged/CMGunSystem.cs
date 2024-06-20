@@ -1,7 +1,6 @@
 ﻿using System.Numerics;
 using Content.Shared._CM14.Marines.Skills;
 using Content.Shared._CM14.Weapons.Ranged.Whitelist;
-using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Popups;
@@ -19,6 +18,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
+
 namespace Content.Shared._CM14.Weapons.Ranged;
 
 public sealed class CMGunSystem : EntitySystem
@@ -146,7 +146,7 @@ public sealed class CMGunSystem : EntitySystem
             if (!_projectileQuery.TryGetComponent(projectile, out var comp))
                 continue;
 
-            comp.Damage *= ent.Comp.Multiplier;
+            comp.Damage *= ent.Comp.ModifiedMultiplier;
         }
     }
 
@@ -210,6 +210,16 @@ public sealed class CMGunSystem : EntitySystem
         return true;
     }
 
+    public void RefreshGunDamageMultiplier(Entity<GunDamageModifierComponent?> gun)
+    {
+        gun.Comp = EnsureComp<GunDamageModifierComponent>(gun);
+
+        var ev = new GetGunDamageModifierEvent(gun.Comp.Multiplier);
+        RaiseLocalEvent(gun, ref ev);
+
+        gun.Comp.ModifiedMultiplier = ev.Multiplier;
+    }
+
     public override void Update(float frameTime)
     {
         var time = _timing.CurTime;
@@ -221,10 +231,5 @@ public sealed class CMGunSystem : EntitySystem
 
             RemCompDeferred<ProjectileFixedDistanceComponent>(uid);
         }
-    }
-    
-    public void SetGunDamageModifier(GunDamageModifierComponent component, FixedPoint2 newModifier)
-    {
-        component.Multiplier = newModifier;
     }
 }

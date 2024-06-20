@@ -13,7 +13,6 @@ namespace Content.Shared._CM14.Attachable;
 public sealed class AttachableToggleableSystem : EntitySystem
 {
     [Dependency] private readonly ActionContainerSystem _actionContainerSystem = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly MetaDataSystem _metaDataSystem = default!;
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly AttachableHolderSystem _attachableHolderSystem = default!;
@@ -33,6 +32,9 @@ public sealed class AttachableToggleableSystem : EntitySystem
         SubscribeLocalEvent<AttachableToggleableComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<AttachableToggleableComponent, ToggleActionEvent>(OnToggleAction);
         SubscribeLocalEvent<AttachableToggleableComponent, UniqueActionEvent>(OnUniqueAction);
+
+        SubscribeLocalEvent<AttachableToggleableSimpleActivateComponent, AttachableAlteredEvent>(OnAttachableAltered,
+            after: new[] { typeof(AttachableWeaponRangedModsSystem) });
     }
 
     private void OnMapInit(Entity<AttachableToggleableComponent> attachable, ref MapInitEvent args)
@@ -68,9 +70,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
                 if (attachable.Comp.Active)
                 {
-                    var ev = new AttachableAlteredEvent(args.Holder,
-                        AttachableAlteredType.DetachedDeactivated,
-                        args.User);
+                    var ev = args with { Alteration = AttachableAlteredType.DetachedDeactivated };
                     RaiseLocalEvent(attachable.Owner, ref ev);
                 }
 
@@ -115,7 +115,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
         ref AttachableToggleStartedEvent args)
     {
         _doAfterSystem.TryStartDoAfter(new DoAfterArgs(
-            _entityManager,
+            EntityManager,
             args.User,
             attachable.Comp.DoAfter,
             new AttachableToggleDoAfterEvent(args.SlotId),
@@ -242,5 +242,27 @@ public sealed class AttachableToggleableSystem : EntitySystem
     {
         if (attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
             args.Handled = true;
+    }
+
+    private void OnAttachableAltered(Entity<AttachableToggleableSimpleActivateComponent> attachable,
+        ref AttachableAlteredEvent args)
+    {
+        if (args.User == null)
+            return;
+
+        switch (args.Alteration)
+        {
+            case AttachableAlteredType.Activated:
+                RaiseLocalEvent(attachable.Owner, new ActivateInWorldEvent(args.User.Value, args.Holder, true));
+                break;
+
+            case AttachableAlteredType.Deactivated:
+                RaiseLocalEvent(attachable.Owner, new ActivateInWorldEvent(args.User.Value, args.Holder, true));
+                break;
+
+            case AttachableAlteredType.DetachedDeactivated:
+                RaiseLocalEvent(attachable.Owner, new ActivateInWorldEvent(args.User.Value, args.Holder, true));
+                break;
+        }
     }
 }
