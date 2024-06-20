@@ -35,7 +35,7 @@
     contents:
     - id: CMArmorM45
     - id: CMArmorHelmetM45
-#    - id: CMM42NightGoggles # TODO CM14
+    - id: CMGlassesM42ScoutSight
     - id: CMMagazineSniperM42A
     - id: CMMagazineSniperM42AIncendiary
     - id: CMMagazineSniperM42AIncendiary

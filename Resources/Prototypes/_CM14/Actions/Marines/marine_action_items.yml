@@ -1,0 +1,28 @@
+- type: entity
+  parent: ActionMarineBase
+  id: CMActionToggleScope
+  name: Toggle Optics
+  description: Scope in or out with your optics.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _CM14/Actions/scope_actions.rsi
+      state: sniperscope
+    event: !type:ToggleActionEvent
+    useDelay: 0.25
+
+- type: entity
+  parent: ActionMarineBase
+  id: CMActionToggleScoutVision
+  name: Toggle the M42 scout sight
+  description: Allows you to see even in complete darkness.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _CM14/Objects/Clothing/Eyes/Glasses/m42_scoutsight.rsi
+      state: icon
+    iconOn:
+      sprite: _CM14/Objects/Clothing/Eyes/Glasses/m42_scoutsight.rsi
+      state: icon_on
+    event: !type:ToggleActionEvent
+    useDelay: 0.25

@@ -1,0 +1,122 @@
+﻿# m41a
+- type: entity
+  parent: CMCrateAmmo
+  id: CMCrateBoxMagazineRifleM41A
+  name: Magazine box (M41A, 10x regular mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBoxMagazineRifleM41A
+
+- type: entity
+  parent: CMCrateAmmo
+  id: CMCrateBoxMagazineRifleM41AAP
+  name: Magazine box (M41A, 10x AP mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBoxMagazineRifleM41AAP
+
+- type: entity
+  parent: CMCrateAmmo
+  id: CMCrateBoxMagazineRifleM41AExt
+  name: Magazine box (M41A, 8x extended mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBoxMagazineRifleM41AExt
+
+# m4ra
+- type: entity
+  parent: CMCrateAmmo
+  id: CMCrateBoxMagazineRifleM4RA
+  name: Magazine box (M4RA, 16x regular mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBoxMagazineRifleM4RA
+
+- type: entity
+  parent: CMCrateAmmo
+  id: CMCrateBoxMagazineRifleM4RAAP
+  name: Magazine box (M4RA, 16x AP mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBoxMagazineRifleM4RAAP
+
+- type: entity
+  parent: CMCrateAmmo
+  id: CMCrateBoxMagazineRifleM4RAExt
+  name: Magazine box (M4RA, 12x extended mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBoxMagazineRifleM4RAExt
+
+# m39
+- type: entity
+  parent: CMCrateAmmo
+  id: CMCrateBoxMagazineSMGM39
+  name: Magazine box (M39, 12x regular mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBoxMagazineSMGM39
+
+- type: entity
+  parent: CMCrateAmmo
+  id: CMCrateBoxMagazineSMGM39AP
+  name: Magazine box (M39, 12x AP mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBoxMagazineSMGM39AP
+
+- type: entity
+  parent: CMCrateAmmo
+  id: CMCrateBoxMagazineSMGM39Ext
+  name: Magazine box (M39, 12x regular mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBoxMagazineSMGM39Ext
+
+# m4a3
+- type: entity
+  parent: CMCrateAmmo
+  id: CMCrateBoxMagazinePistolM4A3
+  name: Magazine box (M4A3, 16x regular mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBoxMagazinePistolM4A3
+
+#- type: entity # todo cm14 needs ammo mags completed, box is done
+#  parent: CMCrateAmmo
+#  id: CMCrateBoxMagazinePistolM4A3AP
+#  name: Magazine box (M4A3, 16x AP mags)
+#  components:
+#  - type: StorageFill
+#    contents:
+#    - id: CMBoxMagazinePistolM4A3AP
+
+# 88m4 / 88 mod 4
+- type: entity
+  parent: CMCrateAmmo
+  id: CMCrateBoxMagazinePistol88m4AP
+  name: Magazine box (88 Mod 4 AP, 16x mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBoxMagazinePistol88m4AP
+
+# VP78
+- type: entity
+  parent: CMCrateAmmo
+  id: CMCrateBoxMagazinePistolVP78
+  name: Magazine box (VP78, 16x mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBoxMagazinePistolVP78

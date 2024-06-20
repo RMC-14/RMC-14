@@ -33,7 +33,7 @@ public static class DoorSplitter
                         if (frame == null)
                             continue;
 
-                        var size = frame.Size();
+                        var size = frame.Size;
                         var (x1, y1) = direction switch
                         {
                             Direction.South => (0, 0),

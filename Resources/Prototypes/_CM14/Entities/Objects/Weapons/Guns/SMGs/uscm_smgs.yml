@@ -50,4 +50,6 @@
         priority: 2
         whitelist:
           tags:
-          - CMMagazineM39
+          - CMMagazineSMGM39
+          - CMMagazineSMGM39AP
+          - CMMagazineSMGM39Ext

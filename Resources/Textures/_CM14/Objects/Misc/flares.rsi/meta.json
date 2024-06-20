@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/274dffcf8574897b6b8fbcad07d81aa0f28292bb/icons/obj/items/lighting.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/274dffcf8574897b6b8fbcad07d81aa0f28292bb/icons/obj/items/lighting.dmi, https://github.com/cmss13-devs/cmss13/blob/884db783073c035b756c175b1bc75fb43279803e/icons/obj/items/lighting.dmi, https://github.com/cmss13-devs/cmss13/blob/884db783073c035b756c175b1bc75fb43279803e/icons/obj/items/lighting.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -11,27 +11,30 @@
       "name": "icon"
     },
     {
-      "name": "flare_base"
+      "name": "flare_spent"
     },
     {
-      "name": "flare_spent"
+      "name": "flare"
     },
     {
       "name": "flare_unlit"
     },
     {
-      "name": "storage"
-    },
-    {
-      "name": "flare_burn",
+      "name": "flare_flame",
       "delays": [
         [
-          0.05,
-          0.05,
-          0.05,
-          0.05
+          0.1,
+          0.1,
+          0.1,
+          0.1
         ]
       ]
+    },
+    {
+      "name": "flare-on"
+    },
+    {
+      "name": "overlay"
     }
   ]
 }

@@ -25,3 +25,6 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: Construction
+    graph: CMFence
+    node: fenceMetal
