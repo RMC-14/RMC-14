@@ -2,7 +2,7 @@
   name: pill
   parent: BaseItem
   id: CMPill
-  description: ""
+  description: "A pill."
   components:
   - type: Sprite
     sprite: _CM14/Objects/Chemistry/pills.rsi
