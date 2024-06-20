@@ -4,13 +4,11 @@ using Content.Shared._CM14.Attachable.Events;
 using Content.Shared._CM14.Input;
 using Content.Shared._CM14.Weapons.Common;
 using Content.Shared.ActionBlocker;
-using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
-using Content.Shared.Inventory.Events;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -29,9 +27,8 @@ public sealed class AttachableHolderSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly AttachableToggleableSystem _attachableToggleable = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
@@ -46,9 +43,8 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, AttachableHolderDetachMessage>(OnAttachableHolderDetachMessage);
         SubscribeLocalEvent<AttachableHolderComponent, AttemptShootEvent>(OnAttachableHolderAttemptShoot);
         SubscribeLocalEvent<AttachableHolderComponent, BoundUIOpenedEvent>(OnAttachableHolderUiOpened);
-        SubscribeLocalEvent<AttachableHolderComponent, GetItemActionsEvent>(OnGetActions);
         SubscribeLocalEvent<AttachableHolderComponent, GetVerbsEvent<InteractionVerb>>(OnAttachableHolderGetVerbs);
-        SubscribeLocalEvent<AttachableHolderComponent, GotUnequippedEvent>(OnHolderGotUnequipped);
+        SubscribeLocalEvent<AttachableHolderComponent, GotEquippedHandEvent>(OnHolderGotEquippedHand);
         SubscribeLocalEvent<AttachableHolderComponent, GotUnequippedHandEvent>(OnHolderGotUnequippedHand);
         SubscribeLocalEvent<AttachableHolderComponent, GunRefreshModifiersEvent>(OnAttachableHolderRefreshModifiers,
             after: new[] { typeof(WieldableSystem) });
@@ -92,21 +88,6 @@ public sealed class AttachableHolderSystem : EntitySystem
     public override void Shutdown()
     {
         CommandBinds.Unregister<AttachableHolderSystem>();
-    }
-
-    private void OnGetActions(Entity<AttachableHolderComponent> holder, ref GetItemActionsEvent args)
-    {
-        foreach (var slotId in holder.Comp.Slots.Keys)
-        {
-            if (!_container.TryGetContainer(holder, slotId, out var container) || container.Count <= 0)
-                continue;
-
-            if (!TryComp<AttachableToggleableComponent>(container.ContainedEntities[0],
-                    out var toggleableComponent))
-                continue;
-
-            _attachableToggleable.GrantAction((container.ContainedEntities[0], toggleableComponent), args.User);
-        }
     }
 
     private void OnAttachableHolderInteractUsing(Entity<AttachableHolderComponent> holder, ref InteractUsingEvent args)
@@ -324,6 +305,9 @@ public sealed class AttachableHolderSystem : EntitySystem
         var ev = new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Attached);
         RaiseLocalEvent(attachableUid, ref ev);
 
+        var addEv = new GrantAttachableActionsEvent(userUid);
+        RaiseLocalEvent(attachableUid, ref addEv);
+
         _audio.PlayPredicted(Comp<AttachableComponent>(attachableUid).AttachSound,
             holder,
             userUid);
@@ -394,21 +378,22 @@ public sealed class AttachableHolderSystem : EntitySystem
             return false;
 
         _container.TryRemoveFromContainer(attachable);
-        {
-            UpdateStripUi(holder.Owner, holder.Comp);
+        UpdateStripUi(holder.Owner, holder.Comp);
 
-            var holderEv = new AttachableHolderAttachablesAlteredEvent(attachableUid, slotId, AttachableAlteredType.Detached);
-            RaiseLocalEvent(holder.Owner, ref holderEv);
+        var holderEv = new AttachableHolderAttachablesAlteredEvent(attachableUid, slotId, AttachableAlteredType.Detached);
+        RaiseLocalEvent(holder.Owner, ref holderEv);
 
-            var ev = new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Detached, userUid);
-            RaiseLocalEvent(attachableUid, ref ev);
+        var ev = new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Detached, userUid);
+        RaiseLocalEvent(attachableUid, ref ev);
 
-            _audio.PlayPredicted(Comp<AttachableComponent>(attachableUid).DetachSound,
-                holder,
-                userUid);
+        var removeEv = new RemoveAttachableActionsEvent(userUid);
+        RaiseLocalEvent(attachableUid, ref removeEv);
 
-            Dirty(holder);
-        }
+        _audio.PlayPredicted(Comp<AttachableComponent>(attachableUid).DetachSound,
+            holder,
+            userUid);
+
+        Dirty(holder);
         _hands.TryPickupAnyHand(userUid, attachable);
         return true;
     }
@@ -567,31 +552,33 @@ public sealed class AttachableHolderSystem : EntitySystem
         return false;
     }
 
-    private void OnHolderGotUnequipped(Entity<AttachableHolderComponent> holder, ref GotUnequippedEvent args)
+    private void OnHolderGotEquippedHand(Entity<AttachableHolderComponent> holder, ref GotEquippedHandEvent args)
     {
-        RevokeAttachableActions(holder, args.Equipee);
+        var ev = new GrantAttachableActionsEvent(args.User);
+        foreach (var slotId in holder.Comp.Slots.Keys)
+        {
+            if (!_container.TryGetContainer(holder, slotId, out var container))
+                continue;
+
+            foreach (var contained in container.ContainedEntities)
+            {
+                RaiseLocalEvent(contained, ref ev);
+            }
+        }
     }
 
     private void OnHolderGotUnequippedHand(Entity<AttachableHolderComponent> holder, ref GotUnequippedHandEvent args)
     {
-        RevokeAttachableActions(holder, args.User);
-    }
-
-    private void RevokeAttachableActions(Entity<AttachableHolderComponent> holder, EntityUid performer)
-    {
+        var ev = new RemoveAttachableActionsEvent(args.User);
         foreach (var slotId in holder.Comp.Slots.Keys)
         {
-            if (!_container.TryGetContainer(holder, slotId, out var container) ||
-                container.Count <= 0)
+            if (!_container.TryGetContainer(holder, slotId, out var container))
+                continue;
+
+            foreach (var contained in container.ContainedEntities)
             {
-                continue;
+                RaiseLocalEvent(contained, ref ev);
             }
-
-            var ent = container.ContainedEntities[0];
-            if (!TryComp<AttachableToggleableComponent>(ent, out var toggleableComponent))
-                continue;
-
-            _attachableToggleable.RevokeAction((ent, toggleableComponent), performer);
         }
     }
 }

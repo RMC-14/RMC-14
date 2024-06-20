@@ -2,6 +2,7 @@ using Content.Shared._CM14.Attachable.Components;
 using Content.Shared._CM14.Attachable.Events;
 using Content.Shared._CM14.Weapons.Common;
 using Content.Shared.Actions;
+using Content.Shared.Actions.Events;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Toggleable;
@@ -24,36 +25,18 @@ public sealed class AttachableToggleableSystem : EntitySystem
         SubscribeLocalEvent<AttachableToggleableComponent, ActivateInWorldEvent>(OnActivateInWorld);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableAlteredEvent>(OnAttachableAltered,
             after: new[] { typeof(AttachableWeaponRangedModsSystem) });
-        SubscribeLocalEvent<AttachableToggleableComponent, Actions.Events.AttachableToggleActionEvent>(OnAttachableToggleAction);
+        SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleActionEvent>(OnAttachableToggleAction);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleDoAfterEvent>(
             OnAttachableToggleDoAfter);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleStartedEvent>(OnAttachableToggleStarted);
         SubscribeLocalEvent<AttachableToggleableComponent, AttemptShootEvent>(OnAttemptShoot);
-        SubscribeLocalEvent<AttachableToggleableComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<AttachableToggleableComponent, ToggleActionEvent>(OnToggleAction);
         SubscribeLocalEvent<AttachableToggleableComponent, UniqueActionEvent>(OnUniqueAction);
+        SubscribeLocalEvent<AttachableToggleableComponent, GrantAttachableActionsEvent>(OnAddAttachableActions);
+        SubscribeLocalEvent<AttachableToggleableComponent, RemoveAttachableActionsEvent>(OnRemoveAttachableActions);
 
         SubscribeLocalEvent<AttachableToggleableSimpleActivateComponent, AttachableAlteredEvent>(OnAttachableAltered,
             after: new[] { typeof(AttachableWeaponRangedModsSystem) });
-    }
-
-    private void OnMapInit(Entity<AttachableToggleableComponent> attachable, ref MapInitEvent args)
-    {
-        if (!_actionContainerSystem.EnsureAction(attachable.Owner,
-                ref attachable.Comp.AttachableToggleActionEntity,
-                out var actionComponent,
-                attachable.Comp.AttachableToggleAction))
-            return;
-
-        actionComponent.Icon = attachable.Comp.Icon;
-        actionComponent.IconOn = attachable.Comp.IconActive;
-        actionComponent.Enabled = attachable.Comp.Attached;
-
-        _metaDataSystem.SetEntityName(attachable.Comp.AttachableToggleActionEntity.Value, attachable.Comp.ActionName);
-        _metaDataSystem.SetEntityDescription(attachable.Comp.AttachableToggleActionEntity.Value,
-            attachable.Comp.ActionDesc);
-
-        Dirty(attachable);
     }
 
     private void OnAttachableAltered(Entity<AttachableToggleableComponent> attachable, ref AttachableAlteredEvent args)
@@ -83,13 +66,13 @@ public sealed class AttachableToggleableSystem : EntitySystem
                 break;
         }
 
-        if (attachable.Comp.AttachableToggleActionEntity == null ||
-            !TryComp(attachable.Comp.AttachableToggleActionEntity, out InstantActionComponent? actionComponent))
+        if (attachable.Comp.Action == null ||
+            !TryComp(attachable.Comp.Action, out InstantActionComponent? actionComponent))
         {
             return;
         }
 
-        _actionsSystem.SetToggled(attachable.Comp.AttachableToggleActionEntity, attachable.Comp.Active);
+        _actionsSystem.SetToggled(attachable.Comp.Action, attachable.Comp.Active);
         actionComponent.Enabled = attachable.Comp.Attached;
     }
 
@@ -196,28 +179,41 @@ public sealed class AttachableToggleableSystem : EntitySystem
         _attachableHolderSystem.SetSupercedingAttachable(holder, attachable.Owner);
     }
 
-    public void GrantAction(Entity<AttachableToggleableComponent> attachable, EntityUid performer)
+    private void OnAddAttachableActions(Entity<AttachableToggleableComponent> ent, ref GrantAttachableActionsEvent args)
     {
-        if (attachable.Comp.AttachableToggleActionEntity == null)
+        var exists = ent.Comp.Action != null;
+        _actionContainerSystem.EnsureAction(ent, ref ent.Comp.Action, ent.Comp.ActionId);
+
+        if (ent.Comp.Action is not { } actionId)
             return;
 
-        EntityUid[] entityUids = { attachable.Comp.AttachableToggleActionEntity.Value };
+        _actionsSystem.GrantContainedAction(args.User, ent.Owner, actionId);
 
-        _actionsSystem.GrantActions(performer, entityUids, attachable.Owner);
+        if (exists)
+            return;
+
+        _metaDataSystem.SetEntityName(actionId, ent.Comp.ActionName);
+        _metaDataSystem.SetEntityDescription(actionId, ent.Comp.ActionDesc);
+
+        if (_actionsSystem.TryGetActionData(actionId, out var action))
+        {
+            action.Icon = ent.Comp.Icon;
+            action.IconOn = ent.Comp.IconActive;
+            action.Enabled = ent.Comp.Attached;
+            Dirty(actionId, action);
+        }
     }
 
-    public void RevokeAction(Entity<AttachableToggleableComponent> attachable, EntityUid performer)
+    private void OnRemoveAttachableActions(Entity<AttachableToggleableComponent> ent, ref RemoveAttachableActionsEvent args)
     {
-        if (attachable.Comp.AttachableToggleActionEntity == null)
+        if (ent.Comp.Action is not { } action)
             return;
 
-        _actionsSystem.RemoveProvidedAction(performer,
-            attachable.Owner,
-            attachable.Comp.AttachableToggleActionEntity.Value);
+        _actionsSystem.RemoveProvidedAction(args.User, ent, action);
     }
 
     private void OnAttachableToggleAction(Entity<AttachableToggleableComponent> attachable,
-        ref Actions.Events.AttachableToggleActionEvent args)
+        ref AttachableToggleActionEvent args)
     {
         args.Handled = true;
 

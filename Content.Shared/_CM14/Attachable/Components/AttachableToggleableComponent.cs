@@ -12,7 +12,7 @@ public sealed partial class AttachableToggleableComponent : Component
     public bool Active = false;
 
     [DataField, AutoNetworkedField]
-    public float DoAfter = 0.0f;
+    public float DoAfter;
 
     [DataField, AutoNetworkedField]
     public bool NeedHand = true;
@@ -32,11 +32,11 @@ public sealed partial class AttachableToggleableComponent : Component
     [DataField, AutoNetworkedField]
     public SoundSpecifier? DeactivateSound = new SoundPathSpecifier("/Audio/_CM14/Attachable/attachment_deactivate.ogg");
 
-    [ViewVariables]
-    public EntityUid? AttachableToggleActionEntity;
+    [DataField, AutoNetworkedField]
+    public EntityUid? Action;
 
     [DataField, AutoNetworkedField]
-    public string AttachableToggleAction = "CMActionToggleAttachable";
+    public string ActionId = "CMActionToggleAttachable";
 
     [DataField, AutoNetworkedField]
     public string ActionName = "Toggle Attachable";
