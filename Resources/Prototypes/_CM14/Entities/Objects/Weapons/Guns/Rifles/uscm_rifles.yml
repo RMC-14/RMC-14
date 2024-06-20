@@ -68,6 +68,8 @@
         whitelist:
           tags:
           - CMMagazineRifleM41A
+          - CMMagazineRifleM41AAP
+          - CMMagazineRifleM41AExt
   - type: GunDamageModifier
     multiplier: 1.1
 
@@ -150,5 +152,7 @@
         whitelist:
           tags:
           - CMMagazineRifleM4RA
+          - CMMagazineRifleM4RAAP
+          - CMMagazineRifleM4RAExt
   - type: GunDamageModifier
     multiplier: 1.4

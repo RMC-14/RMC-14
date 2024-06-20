@@ -195,6 +195,9 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - CMMagazineRifleM4RAExt
 
 - type: Tag
   id: CMMagazineRifle
