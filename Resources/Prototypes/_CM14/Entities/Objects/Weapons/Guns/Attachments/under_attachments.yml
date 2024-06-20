@@ -109,8 +109,6 @@
     supercedeHolder: true
     activateSound: /Audio/_CM14/Attachable/gun_u7_activate.ogg
   - type: AttachableVisuals
-    rsi: _CM14/Objects/Weapons/Guns/Attachments/under.rsi
-    prefix: masterkey-
   - type: AttachableToggleableSimpleActivate
 
 - type: entity

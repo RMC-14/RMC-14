@@ -22,8 +22,6 @@
     - CMAttachableBarrel
     - CMAttachableExtendedBarrel
   - type: AttachableVisuals
-    rsi: _CM14/Objects/Weapons/Guns/Attachments/barrel.rsi
-    prefix: ebarrel-
 
 - type: entity
   parent: CMBarrelAttachmentBase
@@ -34,6 +32,9 @@
   components:
   - type: Sprite
     state: comp
+  - type: AttachmentVisuals
+    rsi: _CM14/Objects/Weapons/Guns/Attachments/barrel.rsi
+    prefix: comp_a
 
 - type: entity
   parent: CMBarrelAttachmentBase

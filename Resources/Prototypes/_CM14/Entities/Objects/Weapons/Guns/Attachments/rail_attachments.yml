@@ -75,8 +75,6 @@
     actionName: Activate Rail Flashlight
     actionDesc: Can be toggled on and off. A better light source than standard M3 pattern armor lights.
   - type: AttachableVisuals
-    rsi: _CM14/Objects/Weapons/Guns/Attachments/rail.rsi
-    prefix: flashlight-
     showActive: true
   - type: AttachableToggleableSimpleActivate
   - type: Tag

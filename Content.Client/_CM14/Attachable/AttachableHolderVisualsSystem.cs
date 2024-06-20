@@ -19,37 +19,36 @@ public sealed class AttachableHolderVisualsSystem : EntitySystem
         if (!TryComp(args.Attachable, out AttachableVisualsComponent? attachableComponent))
             return;
 
+        var attachable = new Entity<AttachableVisualsComponent>(args.Attachable, attachableComponent);
         switch (args.Alteration)
         {
             case AttachableAlteredType.Attached:
-                SetAttachableOverlay(holder.Owner, holder.Comp, attachableComponent, args.SlotId);
+                SetAttachableOverlay(holder, attachable, args.SlotId);
                 break;
 
             case AttachableAlteredType.Detached:
-                RemoveAttachableOverlay(holder.Owner, holder.Comp, args.SlotId);
+                RemoveAttachableOverlay(holder, args.SlotId);
                 break;
 
             case AttachableAlteredType.Activated:
                 if (!attachableComponent.ShowActive)
                     break;
 
-                SetAttachableOverlay(holder.Owner, holder.Comp, attachableComponent, args.SlotId, "-active");
+                SetAttachableOverlay(holder, attachable, args.SlotId, "-on");
                 break;
 
             case AttachableAlteredType.Deactivated:
                 if (!attachableComponent.ShowActive)
                     break;
 
-                SetAttachableOverlay(holder.Owner, holder.Comp, attachableComponent, args.SlotId);
+                SetAttachableOverlay(holder, attachable, args.SlotId);
                 break;
         }
     }
 
-    private void RemoveAttachableOverlay(EntityUid holderUid,
-        AttachableHolderVisualsComponent holderComponent,
-        string slotId)
+    private void RemoveAttachableOverlay(Entity<AttachableHolderVisualsComponent> holder, string slotId)
     {
-        if (!holderComponent.Offsets.ContainsKey(slotId) || !TryComp(holderUid, out SpriteComponent? spriteComponent))
+        if (!holder.Comp.Offsets.ContainsKey(slotId) || !TryComp(holder, out SpriteComponent? spriteComponent))
             return;
 
         if (!spriteComponent.LayerMapTryGet(slotId, out var index))
@@ -59,32 +58,55 @@ public sealed class AttachableHolderVisualsSystem : EntitySystem
         spriteComponent.RemoveLayer(index);
     }
 
-    private void SetAttachableOverlay(EntityUid holderUid,
-        AttachableHolderVisualsComponent holderComponent,
-        AttachableVisualsComponent attachableComponent,
+    private void SetAttachableOverlay(Entity<AttachableHolderVisualsComponent> holder,
+        Entity<AttachableVisualsComponent> attachable,
         string slotId,
         string suffix = "")
     {
-        if (!holderComponent.Offsets.ContainsKey(slotId) || !TryComp(holderUid, out SpriteComponent? spriteComponent))
-            return;
-
-        if (string.IsNullOrWhiteSpace(attachableComponent.Rsi) || string.IsNullOrWhiteSpace(attachableComponent.Prefix))
-            return;
-
-        var layerData = new PrototypeLayerData()
+        if (!holder.Comp.Offsets.ContainsKey(slotId) ||
+            !TryComp(holder, out SpriteComponent? holderSprite))
         {
-            RsiPath = attachableComponent.Rsi,
-            State = attachableComponent.Prefix + slotId + suffix,
-            Offset = holderComponent.Offsets[slotId],
-            Visible = true
-        };
-
-        if (spriteComponent.LayerMapTryGet(slotId, out var index))
-        {
-            spriteComponent.LayerSetData(index, layerData);
             return;
         }
 
-        spriteComponent.LayerMapSet(slotId, spriteComponent.AddLayer(layerData));
+        if (!TryComp(attachable, out SpriteComponent? attachableSprite))
+            return;
+
+        var rsi = attachableSprite.LayerGetActualRSI(attachable.Comp.Layer)?.Path;
+        var state = attachableSprite.LayerGetState(attachable.Comp.Layer).ToString();
+        if (attachable.Comp.Rsi is { } rsiPath)
+        {
+            rsi = rsiPath;
+
+            if (attachable.Comp.Prefix == null)
+                state = slotId;
+        }
+
+        if (!string.IsNullOrWhiteSpace(attachable.Comp.Prefix))
+            state = attachable.Comp.Prefix + state;
+
+        if (attachable.Comp.IncludeSlotName)
+            state += slotId;
+
+        if (!string.IsNullOrWhiteSpace(attachable.Comp.Suffix))
+            state += attachable.Comp.Suffix;
+
+        state += suffix;
+
+        var layerData = new PrototypeLayerData()
+        {
+            RsiPath = rsi.ToString(),
+            State = state,
+            Offset = holder.Comp.Offsets[slotId],
+            Visible = true,
+        };
+
+        if (holderSprite.LayerMapTryGet(slotId, out var index))
+        {
+            holderSprite.LayerSetData(index, layerData);
+            return;
+        }
+
+        holderSprite.LayerMapSet(slotId, holderSprite.AddLayer(layerData));
     }
 }

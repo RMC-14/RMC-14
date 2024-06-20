@@ -50,8 +50,6 @@
     - CMAttachableStockSMGCollapsible
   - type: AttachableToggleable
   - type: AttachableVisuals
-    rsi: _CM14/Objects/Weapons/Guns/Attachments/stock.rsi
-    prefix: smgstockcol-
     showActive: true
   - type: AttachableToggleableSizeModifier
     activeSizeModifier: 1
@@ -76,6 +74,6 @@
 
 - type: Tag
   id: CMAttachableStock
-  
+
 - type: Tag
   id: CMAttachableStockSMGCollapsible
