@@ -1,15 +1,15 @@
 using Content.Shared.DoAfter;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._CM14.Attachable;
+namespace Content.Shared._CM14.Attachable.Events;
 
 [Serializable, NetSerializable]
 public sealed partial class AttachableAttachDoAfterEvent : SimpleDoAfterEvent
 {
-    public readonly string SlotID;
-    
-    public AttachableAttachDoAfterEvent(string slotID)
+    public readonly string SlotId;
+
+    public AttachableAttachDoAfterEvent(string slotId)
     {
-        SlotID = slotID;
+        SlotId = slotId;
     }
 }

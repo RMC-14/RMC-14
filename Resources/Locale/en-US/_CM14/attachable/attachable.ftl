@@ -1,4 +1,3 @@
-
 cm-attachable-holder-strip-ui-title = strip attachables
 cm-attachable-holder-strip-ui-empty-slot = nothing
 

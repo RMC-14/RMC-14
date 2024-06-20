@@ -1,14 +1,6 @@
+namespace Content.Shared._CM14.Weapons.Common;
 
-
-namespace Content.Shared._CM14.Weapons;
-
-public sealed class UniqueActionEvent : HandledEntityEventArgs
+public sealed class UniqueActionEvent(EntityUid userUid) : HandledEntityEventArgs
 {
-    public readonly EntityUid UserUid;
-    
-    
-    public UniqueActionEvent(EntityUid userUid)
-    {
-        UserUid = userUid;
-    }
+    public readonly EntityUid UserUid = userUid;
 }

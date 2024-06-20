@@ -1,91 +1,68 @@
 using Content.Shared.FixedPoint;
-using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Serialization;
-using Robust.Shared.Utility;
-//using System.Math;
-
 
 namespace Content.Shared._CM14.Attachable;
 
 [Serializable, NetSerializable]
-public sealed class AttachableHolderStripUserInterfaceState : BoundUserInterfaceState
+public sealed class AttachableHolderStripUserInterfaceState(Dictionary<string, string?> attachableSlots)
+    : BoundUserInterfaceState
 {
-    public Dictionary<string, string?> AttachableSlots;
-    
-    public AttachableHolderStripUserInterfaceState(Dictionary<string, string?> attachableSlots)
-    {
-        AttachableSlots = attachableSlots;
-    }
+    public Dictionary<string, string?> AttachableSlots = attachableSlots;
 }
 
 [Serializable, NetSerializable]
-public sealed class AttachableHolderChooseSlotUserInterfaceState : BoundUserInterfaceState
+public sealed class AttachableHolderChooseSlotUserInterfaceState(List<string> attachableSlots) : BoundUserInterfaceState
 {
-    public List<string> AttachableSlots;
-    
-    public AttachableHolderChooseSlotUserInterfaceState(List<string> attachableSlots)
-    {
-        AttachableSlots = attachableSlots;
-    }
+    public List<string> AttachableSlots = attachableSlots;
 }
 
 [Serializable, NetSerializable]
-public sealed class AttachableHolderDetachMessage : BoundUserInterfaceMessage
+public sealed class AttachableHolderDetachMessage(string slot) : BoundUserInterfaceMessage
 {
-    public readonly string Slot;
-    
-    public AttachableHolderDetachMessage(string slot)
-    {
-        Slot = slot;
-    }
+    public readonly string Slot = slot;
 }
 
 [Serializable, NetSerializable]
-public sealed class AttachableHolderAttachToSlotMessage : BoundUserInterfaceMessage
+public sealed class AttachableHolderAttachToSlotMessage(string slot) : BoundUserInterfaceMessage
 {
-    public readonly string Slot;
-    
-    public AttachableHolderAttachToSlotMessage(string slot)
-    {
-        Slot = slot;
-    }
+    public readonly string Slot = slot;
 }
 
 [Serializable, NetSerializable, DataDefinition]
 public sealed partial class AttachableWeaponMeleeModifierSet
 {
-    
+
 }
 
 [Serializable, NetSerializable, DataDefinition]
 public sealed partial class AttachableWeaponRangedModifierSet
 {
-    [DataField("shotsPerBurst")]
-    public int FlatShotsPerBurst = 0;
-    
-    [DataField("damage")]
-    public FixedPoint2 MultiplierDamage = 1.0;
-    
-    [DataField("recoil")]
-    public float MultiplierCameraRecoilScalar = 1.0f;
-    
-    [DataField("angleIncrease")]
-    public double MultiplierAngleIncrease = 1.0;
-    
-    [DataField("angleDecay")]
-    public double MultiplierAngleDecay = 1.0;
-    
-    [DataField("maxAngle")]
-    public double MultiplierMaxAngle = 1.0;
-    
-    [DataField("minAngle")]
-    public double MultiplierMinAngle = 1.0;
-    
-    [DataField("fireRate")]
-    public float MultiplierFireRate = 1.0f;
-    
-    [DataField("projectileSpeed")]
-    public float MultiplierProjectileSpeed = 1.0f;
+    [DataField]
+    public int ShotsPerBurst;
+
+    [DataField]
+    public FixedPoint2 Damage = 1.0;
+
+    [DataField]
+    public float Recoil = 1.0f;
+
+    [DataField]
+    public double AngleIncrease = 1.0;
+
+    [DataField]
+    public double AngleDecay = 1.0;
+
+    [DataField]
+    public double MaxAngle = 1.0;
+
+    [DataField]
+    public double MinAngle = 1.0;
+
+    [DataField]
+    public float FireRate = 1.0f;
+
+    [DataField]
+    public float ProjectileSpeed = 1.0f;
 }
 
 [Serializable, NetSerializable]

@@ -1,21 +1,20 @@
 using Robust.Shared.GameStates;
 
-
-namespace Content.Shared._CM14.Attachable;
+namespace Content.Shared._CM14.Attachable.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedAttachableWeaponRangedModsSystem))]
 public sealed partial class AttachableWeaponRangedModsToggleableComponent : Component
 {
-    [DataField("inactiveUnwielded"), AutoNetworkedField]
-    public AttachableWeaponRangedModifierSet ModifiersInactiveUnwielded = new AttachableWeaponRangedModifierSet();
-    
-    [DataField("inactiveWielded"), AutoNetworkedField]
-    public AttachableWeaponRangedModifierSet ModifiersInactiveWielded = new AttachableWeaponRangedModifierSet();
-    
-    [DataField("activeUnwielded"), AutoNetworkedField]
-    public AttachableWeaponRangedModifierSet ModifiersActiveUnwielded = new AttachableWeaponRangedModifierSet();
-    
-    [DataField("activeWielded"), AutoNetworkedField]
-    public AttachableWeaponRangedModifierSet ModifiersActiveWielded = new AttachableWeaponRangedModifierSet();
+    [DataField, AutoNetworkedField]
+    public AttachableWeaponRangedModifierSet InactiveUnwielded = new();
+
+    [DataField, AutoNetworkedField]
+    public AttachableWeaponRangedModifierSet InactiveWielded = new();
+
+    [DataField, AutoNetworkedField]
+    public AttachableWeaponRangedModifierSet ActiveUnwielded = new();
+
+    [DataField, AutoNetworkedField]
+    public AttachableWeaponRangedModifierSet ActiveWielded = new();
 }

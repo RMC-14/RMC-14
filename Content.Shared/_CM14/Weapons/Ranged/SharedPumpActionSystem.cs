@@ -1,5 +1,4 @@
-﻿using Content.Shared._CM14.Input;
-using Content.Shared._CM14.Weapons;
+﻿using Content.Shared._CM14.Weapons.Common;
 using Content.Shared.Examine;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Events;
@@ -39,28 +38,28 @@ public abstract class SharedPumpActionSystem : EntitySystem
         ent.Comp.Pumped = false;
         Dirty(ent);
     }
-    
+
     private void OnUniqueAction(Entity<PumpActionComponent> ent, ref UniqueActionEvent args)
     {
         if(args.Handled)
             return;
-        
+
         var ammo = new GetAmmoCountEvent();
         RaiseLocalEvent(ent.Owner, ref ammo);
-        
+
         if(ammo.Count <= 0)
         {
             _popup.PopupClient(Loc.GetString("cm-gun-no-ammo-message"), args.UserUid, args.UserUid);
             args.Handled = true;
             return;
         }
-        
+
         if(!ent.Comp.Running || ent.Comp.Pumped)
             return;
-        
+
         ent.Comp.Pumped = true;
         Dirty(ent);
-        
+
         args.Handled = true;
 
         _audio.PlayPredicted(ent.Comp.Sound, ent, args.UserUid);

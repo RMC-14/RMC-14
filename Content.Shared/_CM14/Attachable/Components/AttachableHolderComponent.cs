@@ -1,9 +1,7 @@
 using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
-using Robust.Shared.Utility;
 
-
-namespace Content.Shared._CM14.Attachable;
+namespace Content.Shared._CM14.Attachable.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedAttachableHolderSystem))]
@@ -11,10 +9,13 @@ public sealed partial class AttachableHolderComponent : Component
 {
     [ViewVariables]
     public EntityUid? SupercedingAttachable;
-    
-    //The key is one of the slot IDs at the bottom of this file. Each key is followed by a listing of all the attachables that fit into that slot.
+
+    /// <summary>
+    ///     The key is one of the slot IDs at the bottom of this file.
+    ///     Each key is followed by a listing of all the attachables that fit into that slot.
+    /// </summary>
     [DataField, AutoNetworkedField]
-    public Dictionary<string, EntityWhitelist> Slots = new Dictionary<string, EntityWhitelist>();
+    public Dictionary<string, EntityWhitelist> Slots = new();
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

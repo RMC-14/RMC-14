@@ -1,6 +1,3 @@
-using Content.Shared.Actions;
+namespace Content.Shared.Actions.Events;
 
-
-namespace Content.Shared._CM14.Attachable;
-
-public sealed partial class AttachableToggleActionEvent : InstantActionEvent { }
+public sealed partial class AttachableToggleActionEvent : InstantActionEvent;

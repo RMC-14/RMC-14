@@ -1,21 +1,11 @@
+namespace Content.Shared._CM14.Attachable.Events;
 
-
-namespace Content.Shared._CM14.Attachable;
-
-public sealed class AttachableAlteredEvent : EntityEventArgs
-{
-    public readonly EntityUid HolderUid;
-    public readonly EntityUid? UserUid;
-    public readonly AttachableAlteredType Alteration;
-    
-    
-    public AttachableAlteredEvent(EntityUid holderUid, AttachableAlteredType alteration, EntityUid? userUid = null)
-    {
-        HolderUid = holderUid;
-        UserUid = userUid;
-        Alteration = alteration;
-    }
-}
+[ByRefEvent]
+public readonly record struct AttachableAlteredEvent(
+    EntityUid Holder,
+    AttachableAlteredType Alteration,
+    EntityUid? User = null
+);
 
 public enum AttachableAlteredType : byte
 {
@@ -25,5 +15,5 @@ public enum AttachableAlteredType : byte
     Unwielded = 1 << 3,
     Activated = 1 << 4,
     Deactivated = 1 << 5,
-    DetachedDeactivated = Detached | Deactivated
+    DetachedDeactivated = Detached | Deactivated,
 }
