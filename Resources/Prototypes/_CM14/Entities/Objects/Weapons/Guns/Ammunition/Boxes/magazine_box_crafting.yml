@@ -1,4 +1,6 @@
 ﻿# construction ui entries
+
+# M41A
 - type: construction
   parent: CM
   name: Magazine Box (M41A Regular)
@@ -13,6 +15,49 @@
     state: base_m41
   objectType: Item
 
+- type: construction
+  parent: CM
+  name: Magazine Box (M41A AP)
+  id: CMBoxMagazineRifleM41AAP
+  graph: CMBoxMagazine
+  startNode: start
+  targetNode: CMBoxMagazineRifleM41AAP
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain armor piercing M41A mags.
+  icon:
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_m41
+  objectType: Item
+
+- type: construction
+  parent: CM
+  name: Magazine Box (M41A Ext)
+  id: CMBoxMagazineRifleM41AExt
+  graph: CMBoxMagazine
+  startNode: start
+  targetNode: CMBoxMagazineRifleM41AExt
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain extended M41A mags.
+  icon:
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_m41
+  objectType: Item
+
+# M39
+- type: construction
+  parent: CM
+  name: Magazine Box (M39 Regular)
+  id: CMBoxMagazineSMGM39
+  graph: CMBoxMagazine
+  startNode: start
+  targetNode: CMBoxMagazineSMGM39
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain regular M39 mags.
+  icon:
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_m39
+  objectType: Item
+
   # Construct graphs
 - type: constructionGraph
   parent: CM
@@ -20,27 +65,39 @@
   start: start
   graph:
   - node: start
-    actions:
-    - !type:DestroyEntity {}
     edges:
-    - to: CMBoxMagazineRifleM41A
+
+    # M41A
+    - to: CMBoxMagazineRifleM41A #Emtpy
       steps:
       - material: Cardboard
         amount: 1
         doAfter: 1
-      completed:
-      - !type:SpawnPrototype
-        prototype: CMBoxMagazineRifleM41A
-
-# Deconstruct
-  - node: CMBoxMagazineRifleM41A
-    entity: CMBoxMagazineRifleM41A
-    edges:
-    - to: start
-      completed:
-      - !type:SpawnPrototype
-        prototype: MaterialCardboard1
+    - to: CMBoxMagazineRifleM41AAP #Emtpy
       steps:
-      - tool: Screwing
+      - material: Cardboard
+        amount: 1
+        doAfter: 1
+    - to: CMBoxMagazineRifleM41AExt #Emtpy
+      steps:
+      - material: Cardboard
+        amount: 1
         doAfter: 1
 
+    # M39
+    - to: CMBoxMagazineSMGM39 #Emtpy
+      steps:
+      - material: Cardboard
+        amount: 1
+        doAfter: 1
+
+
+# Why the fuck do you even need these nodes???
+  - node: CMBoxMagazineRifleM41A
+    entity: CMBoxMagazineRifleM41A
+  - node: CMBoxMagazineRifleM41AAP
+    entity: CMBoxMagazineRifleM41AAP
+  - node: CMBoxMagazineRifleM41AExt
+    entity: CMBoxMagazineRifleM41AExt
+  - node: CMBoxMagazineSMGM39
+    entity: CMBoxMagazineSMGM39

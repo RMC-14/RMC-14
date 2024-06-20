@@ -119,6 +119,9 @@
   id: CMBoxMagazineRifleM41AAP
   name: magazine box (AP M41A x 10)
   components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazineRifleM41AAP
   - type: Sprite
     layers:
     - state: base_m41
@@ -143,6 +146,9 @@
   id: CMBoxMagazineRifleM41AExt
   name: magazine box (Ext M41A x 8)
   components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazineRifleM41AExt
   - type: Sprite
     layers:
     - state: base_m41
@@ -168,6 +174,9 @@
   id: CMBoxMagazineSMGM39
   name: magazine box (M39 x 12)
   components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazineSMGM39
   - type: Sprite
     layers:
     - state: base_m39
