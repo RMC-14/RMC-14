@@ -40,10 +40,10 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
                 Off();
                 break;
             case NightVisionState.Half:
-                Half();
+                Half(ent);
                 break;
             case NightVisionState.Full:
-                Full();
+                Full(ent);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -64,15 +64,19 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
         _light.DrawLighting = true;
     }
 
-    private void Half()
+    private void Half(Entity<NightVisionComponent> ent)
     {
-        _overlay.AddOverlay(new NightVisionOverlay());
+        if (ent.Comp.Overlay)
+            _overlay.AddOverlay(new NightVisionOverlay());
+
         _light.DrawLighting = true;
     }
 
-    private void Full()
+    private void Full(Entity<NightVisionComponent> ent)
     {
-        _overlay.AddOverlay(new NightVisionOverlay());
+        if (ent.Comp.Overlay)
+            _overlay.AddOverlay(new NightVisionOverlay());
+
         _light.DrawLighting = false;
     }
 }

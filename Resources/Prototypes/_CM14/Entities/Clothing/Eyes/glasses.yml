@@ -23,6 +23,17 @@
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Eyes/Glasses/m42_scoutsight.rsi
+    layers:
+    - state: icon
+      map: [ "nightVisionItemLayer" ]
   - type: Clothing
     sprite: _CM14/Objects/Clothing/Eyes/Glasses/m42_scoutsight.rsi
-  # TODO CM14 : Nightvision stuff
+  - type: NightVisionItem
+    drawShadows: false
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.NightVisionItemVisuals.Active:
+        nightVisionItemLayer:
+          True: { state: icon_on }
+          False: { state: icon }
