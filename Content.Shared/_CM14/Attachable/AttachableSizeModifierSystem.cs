@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._CM14.Attachable;
 
-public sealed class SharedAttachableSizeModifierSystem : EntitySystem
+public sealed class AttachableSizeModifierSystem : EntitySystem
 {
     private readonly List<ItemSizePrototype> _sortedSizes = new();
 

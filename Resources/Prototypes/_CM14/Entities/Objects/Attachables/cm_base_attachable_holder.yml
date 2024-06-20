@@ -7,10 +7,10 @@
     verbText: cm-verb-strip-attachables
     verbOnly: true
     key:
-      enum.AttachableHolderUiKeys.StripKey
+      enum.AttachmentUI.StripKey
   - type: UserInterface
     interfaces:
-      enum.AttachableHolderUiKeys.StripKey:
-        type: AttachableHolderStripBoundUserInterface
-      enum.AttachableHolderUiKeys.ChooseSlotKey:
-        type: AttachableHolderChooseSlotBoundUserInterface
+      enum.AttachmentUI.StripKey:
+        type: AttachmentStripBui
+      enum.AttachmentUI.ChooseSlotKey:
+        type: AttachmentChooseSlotBui

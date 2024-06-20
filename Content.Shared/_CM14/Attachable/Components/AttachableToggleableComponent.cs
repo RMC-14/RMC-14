@@ -5,7 +5,7 @@ using Robust.Shared.Utility;
 namespace Content.Shared._CM14.Attachable.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedAttachableToggleableSystem))]
+[Access(typeof(AttachableToggleableSystem))]
 public sealed partial class AttachableToggleableComponent : Component
 {
     [ViewVariables]

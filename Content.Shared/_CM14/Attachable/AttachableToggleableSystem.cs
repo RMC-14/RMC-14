@@ -10,13 +10,13 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._CM14.Attachable;
 
-public sealed class SharedAttachableToggleableSystem : EntitySystem
+public sealed class AttachableToggleableSystem : EntitySystem
 {
     [Dependency] private readonly ActionContainerSystem _actionContainerSystem = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly MetaDataSystem _metaDataSystem = default!;
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly SharedAttachableHolderSystem _attachableHolderSystem = default!;
+    [Dependency] private readonly AttachableHolderSystem _attachableHolderSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
 
@@ -24,7 +24,7 @@ public sealed class SharedAttachableToggleableSystem : EntitySystem
     {
         SubscribeLocalEvent<AttachableToggleableComponent, ActivateInWorldEvent>(OnActivateInWorld);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableAlteredEvent>(OnAttachableAltered,
-            after: new[] { typeof(SharedAttachableWeaponRangedModsSystem) });
+            after: new[] { typeof(AttachableWeaponRangedModsSystem) });
         SubscribeLocalEvent<AttachableToggleableComponent, Actions.Events.AttachableToggleActionEvent>(OnAttachableToggleAction);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleDoAfterEvent>(
             OnAttachableToggleDoAfter);

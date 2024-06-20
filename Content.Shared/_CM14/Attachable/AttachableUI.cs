@@ -29,10 +29,7 @@ public sealed class AttachableHolderAttachToSlotMessage(string slot) : BoundUser
 }
 
 [Serializable, NetSerializable, DataDefinition]
-public sealed partial class AttachableWeaponMeleeModifierSet
-{
-
-}
+public sealed partial class AttachableWeaponMeleeModifierSet;
 
 [Serializable, NetSerializable, DataDefinition]
 public sealed partial class AttachableWeaponRangedModifierSet
@@ -66,8 +63,8 @@ public sealed partial class AttachableWeaponRangedModifierSet
 }
 
 [Serializable, NetSerializable]
-public enum AttachableHolderUiKeys : byte
+public enum AttachmentUI : byte
 {
     StripKey,
-    ChooseSlotKey
+    ChooseSlotKey,
 }

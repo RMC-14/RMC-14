@@ -13,10 +13,10 @@ namespace Content.Client._CM14.Attachable.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class AttachableHolderStripMenu : FancyWindow
 {
-    private readonly AttachableHolderStripBoundUserInterface _boundUI;
+    private readonly AttachmentStripBui _boundUI;
     private readonly Dictionary<string, AttachableSlotControl> _attachableSlotControls;
 
-    public AttachableHolderStripMenu(AttachableHolderStripBoundUserInterface boundUI)
+    public AttachableHolderStripMenu(AttachmentStripBui boundUI)
     {
         RobustXamlLoader.Load(this);
 
@@ -47,7 +47,7 @@ public sealed partial class AttachableHolderStripMenu : FancyWindow
     {
         private readonly Button AttachableButton;
 
-        public AttachableSlotControl(AttachableHolderStripBoundUserInterface boundUI, string slotId)
+        public AttachableSlotControl(AttachmentStripBui boundUI, string slotId)
         {
             var slotLabel = new Label
             {

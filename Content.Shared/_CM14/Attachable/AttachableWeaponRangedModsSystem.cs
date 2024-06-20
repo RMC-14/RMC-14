@@ -7,16 +7,14 @@ using Content.Shared.Wieldable.Components;
 
 namespace Content.Shared._CM14.Attachable;
 
-public sealed class SharedAttachableWeaponRangedModsSystem : EntitySystem
+public sealed class AttachableWeaponRangedModsSystem : EntitySystem
 {
     [Dependency] private readonly CMGunSystem _cmGunSystem = default!;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableAlteredEvent>(
-            OnAttachableWeaponModifiersAltered);
-        SubscribeLocalEvent<AttachableWeaponRangedModsToggleableComponent, AttachableAlteredEvent>(
-            OnAttachableWeaponModifiersAltered);
+        SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableAlteredEvent>(OnAttachableWeaponModifiersAltered);
+        SubscribeLocalEvent<AttachableWeaponRangedModsToggleableComponent, AttachableAlteredEvent>(OnAttachableWeaponModifiersAltered);
     }
 
     public void ApplyWeaponModifiers(EntityUid attachableUid, ref GunRefreshModifiersEvent args)

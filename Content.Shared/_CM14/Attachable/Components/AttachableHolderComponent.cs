@@ -4,7 +4,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._CM14.Attachable.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedAttachableHolderSystem))]
+[Access(typeof(AttachableHolderSystem))]
 public sealed partial class AttachableHolderComponent : Component
 {
     [ViewVariables]

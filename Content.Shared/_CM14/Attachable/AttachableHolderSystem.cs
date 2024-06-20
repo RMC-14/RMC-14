@@ -23,12 +23,12 @@ using Robust.Shared.Input.Binding;
 
 namespace Content.Shared._CM14.Attachable;
 
-public sealed class SharedAttachableHolderSystem : EntitySystem
+public sealed class AttachableHolderSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedAttachableToggleableSystem _attachableToggleable = default!;
-    [Dependency] private readonly SharedAttachableWeaponRangedModsSystem _attachableWeaponRangedMods = default!;
+    [Dependency] private readonly AttachableToggleableSystem _attachableToggleable = default!;
+    [Dependency] private readonly AttachableWeaponRangedModsSystem _attachableWeaponRangedMods = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -87,12 +87,12 @@ public sealed class SharedAttachableHolderSystem : EntitySystem
                             ToggleAttachable(userUid, "cm-aslot-underbarrel");
                     },
                     handle: false))
-            .Register<SharedAttachableHolderSystem>();
+            .Register<AttachableHolderSystem>();
     }
 
     public override void Shutdown()
     {
-        CommandBinds.Unregister<SharedAttachableHolderSystem>();
+        CommandBinds.Unregister<AttachableHolderSystem>();
     }
 
     private void OnGetActions(Entity<AttachableHolderComponent> holder, ref GetItemActionsEvent args)
@@ -245,7 +245,6 @@ public sealed class SharedAttachableHolderSystem : EntitySystem
         UpdateStripUi(holderUid);
     }
 
-    //Attaching
     public void StartAttach(Entity<AttachableHolderComponent> holder,
         EntityUid attachableUid,
         EntityUid userUid,
@@ -262,11 +261,11 @@ public sealed class SharedAttachableHolderSystem : EntitySystem
             {
                 TryComp<UserInterfaceComponent>(holder.Owner,
                     out var userInterfaceComponent);
-                _ui.OpenUi((holder.Owner, userInterfaceComponent), AttachableHolderUiKeys.ChooseSlotKey, userUid);
+                _ui.OpenUi((holder.Owner, userInterfaceComponent), AttachmentUI.ChooseSlotKey, userUid);
 
                 var state =
                     new AttachableHolderChooseSlotUserInterfaceState(validSlots);
-                _ui.SetUiState(holder.Owner, AttachableHolderUiKeys.ChooseSlotKey, state);
+                _ui.SetUiState(holder.Owner, AttachmentUI.ChooseSlotKey, state);
                 return;
             }
 
@@ -488,7 +487,7 @@ public sealed class SharedAttachableHolderSystem : EntitySystem
 
         var state =
             new AttachableHolderStripUserInterfaceState(GetSlotsForStripUi((holderUid, holderComponent)));
-        _ui.SetUiState(holderUid, AttachableHolderUiKeys.StripKey, state);
+        _ui.SetUiState(holderUid, AttachmentUI.StripKey, state);
     }
 
     private void EnsureSlots(Entity<AttachableHolderComponent> holder)

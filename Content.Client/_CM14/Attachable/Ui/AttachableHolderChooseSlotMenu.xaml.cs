@@ -10,10 +10,10 @@ namespace Content.Client._CM14.Attachable.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class AttachableHolderChooseSlotMenu : FancyWindow
 {
-    private readonly AttachableHolderChooseSlotBoundUserInterface _boundUI;
+    private readonly AttachmentChooseSlotBui _boundUI;
     private readonly Dictionary<string, AttachableSlotControl> _attachableSlotControls;
 
-    public AttachableHolderChooseSlotMenu(AttachableHolderChooseSlotBoundUserInterface boundUI)
+    public AttachableHolderChooseSlotMenu(AttachmentChooseSlotBui boundUI)
     {
         RobustXamlLoader.Load(this);
 
@@ -41,7 +41,7 @@ public sealed partial class AttachableHolderChooseSlotMenu : FancyWindow
     private sealed class AttachableSlotControl : Control
     {
         public AttachableSlotControl(AttachableHolderChooseSlotMenu slotMenu,
-            AttachableHolderChooseSlotBoundUserInterface boundUI,
+            AttachmentChooseSlotBui boundUI,
             string slotId)
         {
             var button = new Button { Text = Loc.GetString(slotId) };

@@ -4,7 +4,7 @@ using Content.Shared.Interaction;
 
 namespace Content.Shared._CM14.Attachable;
 
-public sealed class SharedAttachableToggleableSimpleActivateSystem : EntitySystem
+public sealed class AttachableToggleableSimpleActivateSystem : EntitySystem
 {
     public override void Initialize()
     {
