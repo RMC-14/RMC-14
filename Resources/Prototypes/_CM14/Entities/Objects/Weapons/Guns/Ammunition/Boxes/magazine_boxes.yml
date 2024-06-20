@@ -357,7 +357,7 @@
         tags:
         - CMMagazinePistolM4A3
 
-#- type: entity # todo cm14 this box is done but needs mags made
+#- type: entity # todo cm14 this box is done but needs mags made, dont forget to add it to crafting and cargo
 #  parent: CMBoxMagazineAPBase
 #  id: CMBoxMagazinePistolM4A3AP
 #  name: magazine box (AP M4A3 x 16)
