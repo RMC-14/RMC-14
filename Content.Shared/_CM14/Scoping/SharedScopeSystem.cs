@@ -7,6 +7,7 @@ using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Toggleable;
+using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
@@ -25,12 +26,6 @@ public abstract partial class SharedScopeSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
 
-    // TODO CM14 scoping making this too high causes pop-in
-    // wait until https://github.com/space-wizards/RobustToolbox/pull/5228 is fixed to increase it
-    // cm13 values: 11 tile offset, 24x24 view in 4x | 6 tile offset, normal view in 2x.
-    // right now we are doing a mix of both and only one setting.
-    private const float SmallestViewpointSize = 15;
-
     public override void Initialize()
     {
         InitializeUser();
@@ -45,6 +40,11 @@ public abstract partial class SharedScopeSystem : EntitySystem
         SubscribeLocalEvent<ScopeComponent, ToggleActionEvent>(OnToggleAction);
         SubscribeLocalEvent<ScopeComponent, GunShotEvent>(OnGunShot);
         SubscribeLocalEvent<ScopeComponent, ScopeDoAfterEvent>(OnScopeDoAfter);
+
+        SubscribeLocalEvent<GunScopingComponent, GotUnequippedHandEvent>(OnGunUnequip);
+        SubscribeLocalEvent<GunScopingComponent, HandDeselectedEvent>(OnGunDeselectHand);
+        SubscribeLocalEvent<GunScopingComponent, ItemUnwieldedEvent>(OnGunUnwielded);
+        SubscribeLocalEvent<GunScopingComponent, GunShotEvent>(OnGunGunShot);
     }
 
     private void OnMapInit(Entity<ScopeComponent> ent, ref MapInitEvent args)
@@ -127,34 +127,62 @@ public abstract partial class SharedScopeSystem : EntitySystem
         Scope(ent, user, args.Direction);
     }
 
+    private void OnGunUnequip(Entity<GunScopingComponent> ent, ref GotUnequippedHandEvent args)
+    {
+        UnscopeGun(ent);
+    }
+
+    private void OnGunDeselectHand(Entity<GunScopingComponent> ent, ref HandDeselectedEvent args)
+    {
+        UnscopeGun(ent);
+    }
+
+    private void OnGunUnwielded(Entity<GunScopingComponent> ent, ref ItemUnwieldedEvent args)
+    {
+        UnscopeGun(ent);
+    }
+
+    private void OnGunGunShot(Entity<GunScopingComponent> ent, ref GunShotEvent args)
+    {
+        UnscopeGun(ent);
+    }
+
     private bool CanScopePopup(Entity<ScopeComponent> scope, EntityUid user)
     {
-        if (!_hands.TryGetActiveItem(user, out var heldItem) || heldItem != scope)
+        var ent = scope.Owner;
+        if (scope.Comp.Attachment && !TryGetActiveEntity(scope, out ent))
         {
-            var msgError = Loc.GetString("cm-action-popup-scoping-user-must-hold", ("scope", scope.Owner));
+            var msgError = Loc.GetString("cm-action-popup-scoping-must-attach", ("scope", ent));
+            _popup.PopupClient(msgError, user, user);
+            return false;
+        }
+
+        if (!_hands.TryGetActiveItem(user, out var heldItem) || heldItem != ent)
+        {
+            var msgError = Loc.GetString("cm-action-popup-scoping-user-must-hold", ("scope", ent));
             _popup.PopupClient(msgError, user, user);
             return false;
         }
 
         if (_pulling.IsPulled(user))
         {
-            var msgError = Loc.GetString("cm-action-popup-scoping-user-must-not-pulled", ("scope", scope.Owner));
+            var msgError = Loc.GetString("cm-action-popup-scoping-user-must-not-pulled", ("scope", ent));
             _popup.PopupClient(msgError, user, user);
             return false;
         }
 
         if (_container.IsEntityInContainer(user))
         {
-            var msgError = Loc.GetString("cm-action-popup-scoping-user-must-not-contained", ("scope", scope.Owner));
+            var msgError = Loc.GetString("cm-action-popup-scoping-user-must-not-contained", ("scope", ent));
             _popup.PopupClient(msgError, user, user);
             return false;
         }
 
         if (scope.Comp.RequireWielding &&
-            TryComp(scope, out WieldableComponent? wieldable) &&
+            TryComp(ent, out WieldableComponent? wieldable) &&
             !wieldable.Wielded)
         {
-            var msgError = Loc.GetString("cm-action-popup-scoping-user-must-wield", ("scope", scope.Owner));
+            var msgError = Loc.GetString("cm-action-popup-scoping-user-must-wield", ("scope", ent));
             _popup.PopupClient(msgError, user, user);
             return false;
         }
@@ -190,13 +218,22 @@ public abstract partial class SharedScopeSystem : EntitySystem
         scope.Comp.ScopingDirection = direction;
 
         Dirty(scope);
+
         scoping = EnsureComp<ScopingComponent>(user);
         scoping.Scope = scope;
+        Dirty(user, scoping);
 
-        var targetOffset = GetScopeOffset(direction, scope.Comp.Zoom);
+        if (scope.Comp.Attachment && TryGetActiveEntity(scope, out var active))
+        {
+            var gunScoping = EnsureComp<GunScopingComponent>(active);
+            gunScoping.Scope = scope;
+            Dirty(active, gunScoping);
+        }
+
+        var targetOffset = GetScopeOffset(scope, direction);
         scoping.EyeOffset = targetOffset;
 
-        var msgUser = Loc.GetString("cm-action-popup-scoping-user", ("scope", Name(scope.Owner)));
+        var msgUser = Loc.GetString("cm-action-popup-scoping-user", ("scope", scope.Owner));
         _popup.PopupClient(msgUser, user, user);
 
         _actionsSystem.SetToggled(scope.Comp.ScopingToggleActionEntity, true);
@@ -210,16 +247,25 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
         RemCompDeferred<ScopingComponent>(user);
 
+        if (scope.Comp.Attachment && TryGetActiveEntity(scope, out var active))
+            RemCompDeferred<GunScopingComponent>(active);
+
         scope.Comp.User = null;
         scope.Comp.ScopingDirection = null;
         Dirty(scope);
 
-        var msgUser = Loc.GetString("cm-action-popup-scoping-stopping-user", ("scope", Name(scope.Owner)));
+        var msgUser = Loc.GetString("cm-action-popup-scoping-stopping-user", ("scope", scope.Owner));
         _popup.PopupClient(msgUser, user, user);
 
         _actionsSystem.SetToggled(scope.Comp.ScopingToggleActionEntity, false);
         _contentEye.ResetZoom(user);
         return true;
+    }
+
+    private void UnscopeGun(Entity<GunScopingComponent> gun)
+    {
+        if (TryComp(gun.Comp.Scope, out ScopeComponent? scope))
+            Unscope((gun.Comp.Scope.Value, scope));
     }
 
     private void ToggleScoping(Entity<ScopeComponent> scope, EntityUid user)
@@ -237,9 +283,28 @@ public abstract partial class SharedScopeSystem : EntitySystem
         StartScoping(scope, user);
     }
 
-    protected Vector2 GetScopeOffset(Direction direction, float zoom)
+    private bool TryGetActiveEntity(Entity<ScopeComponent> scope, out EntityUid active)
     {
-        return direction.ToVec() * ((SmallestViewpointSize * zoom - 1) / 2);
+        if (!scope.Comp.Attachment)
+        {
+            active = scope;
+            return true;
+        }
+
+        if (!_container.TryGetContainingContainer((scope, null), out var container) ||
+            !HasComp<GunComponent>(container.Owner))
+        {
+            active = default;
+            return false;
+        }
+
+        active = container.Owner;
+        return true;
+    }
+
+    protected Vector2 GetScopeOffset(Entity<ScopeComponent> scope, Direction direction)
+    {
+        return direction.ToVec() * ((scope.Comp.Offset * scope.Comp.Zoom - 1) / 2);
     }
 
     protected virtual void DeleteRelay(Entity<ScopeComponent> scope, EntityUid? user)

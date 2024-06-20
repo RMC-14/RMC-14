@@ -105,10 +105,31 @@
   parent: CMRailAttachmentBase
   id: CMAttachmentB8SmartScope
   name: B8 smart-scope
-  description: An experimental B8 Smart-Scope. Based on the technologies used in the Smart Gun by ARMAT, this sight has integrated IFF systems. It can only attach to the M4RA Battle Rifle and M44 Combat Revolver.
+  description: An experimental B8 Smart-Scope. Based on the technologies used in the Smart Gun by ARMAT, this sight has integrated IFF systems. It can only attach to the M4RA Battle Rifle. # TODO CM14 and M44 Combat Revolver.
   components:
   - type: Sprite
     state: iffbarrel
+  - type: Tag
+    tags:
+    - CMAttachableRail
+    - CMAttachableFlashlight
+    - CMAttachableSmartScope
+  - type: AttachableToggleable
+    actionId: CMActionToggleScope
+    attachedOnly: true
+    icon:
+      sprite: _CM14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: iffbarrel
+    actionName: Toggle B8 Smart-Scope
+    actionDesc: Lets you see further and shoot through your fellow marines without harming them.
+  - type: AttachableVisuals
+    offset: 0.29, -0.045
+  - type: Scope
+    zoom: 1
+    offset: 12
+    requireWielding: true
+    attachment: true
+  - type: AttachableIFF
 
 - type: entity
   parent: CMRailAttachmentBase
@@ -142,3 +163,6 @@
 
 - type: Tag
   id: CMAttachableFlashlight
+
+- type: Tag
+  id: CMAttachableSmartScope

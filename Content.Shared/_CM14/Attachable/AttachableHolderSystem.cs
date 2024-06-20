@@ -574,7 +574,7 @@ public sealed class AttachableHolderSystem : EntitySystem
         }
     }
 
-    private void RelayEvent<T>(Entity<AttachableHolderComponent> holder, ref T args) where T : notnull
+    public void RelayEvent<T>(Entity<AttachableHolderComponent> holder, ref T args) where T : notnull
     {
         foreach (var slot in holder.Comp.Slots.Keys)
         {
