@@ -3,7 +3,7 @@
 # M41A
 - type: construction
   parent: CM
-  name: Magazine Box (M41A Regular)
+  name: Magazine Box (M41A Reg)
   id: CMBoxMagazineRifleM41A
   graph: CMBoxMagazine
   startNode: start
@@ -46,13 +46,41 @@
 # M39
 - type: construction
   parent: CM
-  name: Magazine Box (M39 Regular)
+  name: Magazine Box (M39 Reg)
   id: CMBoxMagazineSMGM39
   graph: CMBoxMagazine
   startNode: start
   targetNode: CMBoxMagazineSMGM39
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular M39 mags.
+  icon:
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_m39
+  objectType: Item
+
+- type: construction
+  parent: CM
+  name: Magazine Box (M39 AP)
+  id: CMBoxMagazineSMGM39AP
+  graph: CMBoxMagazine
+  startNode: start
+  targetNode: CMBoxMagazineSMGM39AP
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain armor piercing M39 mags.
+  icon:
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_m39
+  objectType: Item
+
+- type: construction
+  parent: CM
+  name: Magazine Box (M39 Ext)
+  id: CMBoxMagazineSMGM39Ext
+  graph: CMBoxMagazine
+  startNode: start
+  targetNode: CMBoxMagazineSMGM39Ext
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain extended M39 mags.
   icon:
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_m39
@@ -90,14 +118,32 @@
       - material: Cardboard
         amount: 1
         doAfter: 1
+    - to: CMBoxMagazineSMGM39AP #Emtpy
+      steps:
+      - material: Cardboard
+        amount: 1
+        doAfter: 1
+    - to: CMBoxMagazineSMGM39Ext #Emtpy
+      steps:
+      - material: Cardboard
+        amount: 1
+        doAfter: 1
 
 
-# Why the fuck do you even need these nodes???
+  # Why the fuck do you even need these nodes???
+
+  # M41A
   - node: CMBoxMagazineRifleM41A
     entity: CMBoxMagazineRifleM41A
   - node: CMBoxMagazineRifleM41AAP
     entity: CMBoxMagazineRifleM41AAP
   - node: CMBoxMagazineRifleM41AExt
     entity: CMBoxMagazineRifleM41AExt
+
+  # M39
   - node: CMBoxMagazineSMGM39
     entity: CMBoxMagazineSMGM39
+  - node: CMBoxMagazineSMGM39AP
+    entity: CMBoxMagazineSMGM39AP
+  - node: CMBoxMagazineSMGM39Ext
+    entity: CMBoxMagazineSMGM39Ext
