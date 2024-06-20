@@ -338,6 +338,9 @@
   id: CMBoxMagazinePistolM4A3
   name: magazine box (M4A3 x 16)
   components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazinePistolM4A3
   - type: Sprite
     layers:
     - state: base_m4a3
@@ -362,6 +365,9 @@
 #  id: CMBoxMagazinePistolM4A3AP
 #  name: magazine box (AP M4A3 x 16)
 #  components:
+#  - type: Construction
+#    graph: CMBoxMagazine
+#    node: CMBoxMagazinePistolM4A3AP
 #  - type: Sprite
 #    layers:
 #    - state: base_m4a3
@@ -387,6 +393,9 @@
   id: CMBoxMagazinePistol88m4AP
   name: magazine box (88 Mod 4 AP x 16)
   components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazinePistol88m4AP
   - type: Sprite
     layers:
     - state: base_mod88
@@ -412,6 +421,9 @@
   id: CMBoxMagazinePistolVP78
   name: magazine box (VP78 x 16)
   components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazinePistolVP78
   - type: Sprite
     layers:
     - state: base_vp78

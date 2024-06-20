@@ -129,6 +129,50 @@
     state: base_m4ra
   objectType: Item
 
+# M4A3
+- type: construction
+  parent: CM
+  name: Magazine Box (M4A3 Reg)
+  id: CMBoxMagazinePistolM4A3
+  graph: CMBoxMagazine
+  startNode: start
+  targetNode: CMBoxMagazinePistolM4A3
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain regular M4A3 mags.
+  icon:
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_m4a3
+  objectType: Item
+
+#- type: construction
+#  parent: CM
+#  name: Magazine Box (M4A3 AP)
+#  id: CMBoxMagazinePistolM4A3AP
+#  graph: CMBoxMagazine
+#  startNode: start
+#  targetNode: CMBoxMagazinePistolM4A3AP
+#  category: construction-category-cm-box-magazine
+#  description: A magazine box that can contain armor piercing M4A3 mags.
+#  icon:
+#    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+#    state: base_m4a3
+#  objectType: Item
+
+# 88 mod 4 / 88m4
+- type: construction
+  parent: CM
+  name: Magazine Box (88 Mod 4 AP)
+  id: CMBoxMagazinePistol88m4AP
+  graph: CMBoxMagazine
+  startNode: start
+  targetNode: CMBoxMagazinePistol88m4AP
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain armor piercing 88 Mod 4 mags.
+  icon:
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_mod88
+  objectType: Item
+
   # Construct graphs
 - type: constructionGraph
   parent: CM
@@ -191,6 +235,26 @@
         amount: 1
         doAfter: 1
 
+    # M4A3
+    - to: CMBoxMagazinePistolM4A3 #Emtpy
+      steps:
+      - material: Cardboard
+        amount: 1
+        doAfter: 1
+
+#    - to: CMBoxMagazinePistolM4A3AP #Emtpy
+#      steps:
+#      - material: Cardboard
+#        amount: 1
+#        doAfter: 1
+
+    # 88 mod 4 / 88m4
+    - to: CMBoxMagazinePistol88m4AP #Emtpy
+      steps:
+      - material: Cardboard
+        amount: 1
+        doAfter: 1
+
 
   # Why the fuck do you even need these nodes???
 
@@ -217,3 +281,13 @@
     entity: CMBoxMagazineRifleM4RAAP #Emtpy
   - node: CMBoxMagazineRifleM4RAExt
     entity: CMBoxMagazineRifleM4RAExt #Emtpy
+
+  # M4A3
+  - node: CMBoxMagazinePistolM4A3
+    entity: CMBoxMagazinePistolM4A3 #Emtpy
+#  - node: CMBoxMagazinePistolM4A3AP
+#    entity: CMBoxMagazinePistolM4A3AP #Emtpy
+
+  # 88M4 / 88 Mod 4
+  - node: CMBoxMagazinePistol88m4AP
+    entity: CMBoxMagazinePistol88m4AP #Emtpy
