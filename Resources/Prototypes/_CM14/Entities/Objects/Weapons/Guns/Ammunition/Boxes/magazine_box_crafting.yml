@@ -1,0 +1,46 @@
+﻿# construction ui entries
+- type: construction
+  parent: CM
+  name: Magazine Box (M41A Regular)
+  id: CMBoxMagazineRifleM41A
+  graph: CMBoxMagazine
+  startNode: start
+  targetNode: CMBoxMagazineRifleM41A
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain regular M41A mags.
+  icon:
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_m41
+  objectType: Item
+
+  # Construct graphs
+- type: constructionGraph
+  parent: CM
+  id: CMBoxMagazine
+  start: start
+  graph:
+  - node: start
+    actions:
+    - !type:DestroyEntity {}
+    edges:
+    - to: CMBoxMagazineRifleM41A
+      steps:
+      - material: Cardboard
+        amount: 1
+        doAfter: 1
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMBoxMagazineRifleM41A
+
+# Deconstruct
+  - node: CMBoxMagazineRifleM41A
+    entity: CMBoxMagazineRifleM41A
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: MaterialCardboard1
+      steps:
+      - tool: Screwing
+        doAfter: 1
+

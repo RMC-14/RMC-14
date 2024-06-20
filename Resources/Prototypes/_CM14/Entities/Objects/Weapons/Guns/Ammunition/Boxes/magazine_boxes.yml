@@ -46,8 +46,6 @@
   abstract: true
   parent: CMBoxMagazineBase
   id: CMBoxMagazineAPBase
-  name: generic magazine box (? x ?)"
-  description: A box of magazines.
   components:
   - type: GenericVisualizer
     visuals:
@@ -70,8 +68,6 @@
   abstract: true
   parent: CMBoxMagazineBase
   id: CMBoxMagazineHVBase
-  name: generic magazine box (? x ?)"
-  description: A box of magazines.
   components:
   - type: GenericVisualizer
     visuals:
@@ -96,6 +92,9 @@
   id: CMBoxMagazineRifleM41A
   name: magazine box (M41A x 10)
   components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazineRifleM41A
   - type: Sprite
     layers:
     - state: base_m41 # icon_state = base color of box
@@ -386,7 +385,7 @@
 # VP78
 - type: entity
   parent: CMBoxMagazineBase
-  id:  CMBoxMagazinePistolVP78
+  id: CMBoxMagazinePistolVP78
   name: magazine box (VP78 x 16)
   components:
   - type: Sprite
