@@ -17,7 +17,6 @@
   - type: Clothing
     slots:
     - ears
-    sprite: _CM14/Objects/Clothing/headsets.rsi
   - type: Sprite
     sprite: _CM14/Objects/Clothing/headsets.rsi
     state: generic_headset
