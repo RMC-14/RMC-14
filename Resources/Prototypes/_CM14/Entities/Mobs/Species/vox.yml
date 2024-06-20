@@ -9,6 +9,5 @@
   suffix: CM14
   components:
   - type: Marine
-  - type: HolocardState
   - type: Inventory
     speciesId: vox

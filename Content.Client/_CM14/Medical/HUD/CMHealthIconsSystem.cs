@@ -1,4 +1,4 @@
-using Content.Shared._CM14.Xenos;
+﻿using Content.Shared._CM14.Xenos;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
@@ -10,8 +10,9 @@ namespace Content.Client._CM14.Medical.HUD;
 
 public sealed class CMHealthIconsSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+
     [ValidatePrototypeId<StatusIconPrototype>]
     private const string Healthy = "CMHealthIconHealthy";
 
