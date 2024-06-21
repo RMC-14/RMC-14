@@ -9,14 +9,6 @@
   - type: Item
     size: Huge
   - type: ItemSlots
-  - type: CMItemSlots
-    startingItem: CMMRE
-    count: 5
-    slot:
-      name: Magazine
-      whitelist:
-        tags:
-        - MRE
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     layers:
@@ -89,7 +81,7 @@
 # M41A
 - type: entity
   parent: CMBoxMagazineBase
-  id: CMBoxMagazineRifleM41A
+  id: CMBoxMagazineRifleM41AEmpty
   name: magazine box (M41A x 10)
   components:
   - type: Construction
@@ -106,6 +98,18 @@
       map: [ "lid" ]
     - state: lid_type_reg # lid stripe,ends in the type of ammo used
       map: [ "lid_stripe" ]
+    - type: CMItemSlots
+      count: 10
+      slot:
+        whitelist:
+          tags:
+          - CMMagazineRifleM41A
+
+- type: entity
+  parent: CMBoxMagazineRifleM41AEmpty
+  id: CMBoxMagazineRifleM41A
+  suffix: Filled
+  components:
   - type: CMItemSlots
     startingItem: CMMagazineRifleM41A
     count: 10
@@ -116,7 +120,7 @@
 
 - type: entity
   parent: CMBoxMagazineAPBase
-  id: CMBoxMagazineRifleM41AAP
+  id: CMBoxMagazineRifleM41AAPEmpty
   name: magazine box (AP M41A x 10)
   components:
   - type: Construction
@@ -133,6 +137,20 @@
       map: [ "lid" ]
     - state: lid_type_ap
       map: [ "lid_stripe" ]
+    - type: CMItemSlots
+      startingItem: CMMagazineRifleM41AAP
+      count: 10
+      slot:
+        whitelist:
+          tags:
+          - CMMagazineRifleM41AAP
+
+- type: entity
+  parent: CMBoxMagazineRifleM41AAPEmpty
+  id: CMBoxMagazineRifleM41AAP
+  name: magazine box (AP M41A x 10)
+  suffix: Filled
+  components:
   - type: CMItemSlots
     startingItem: CMMagazineRifleM41AAP
     count: 10
@@ -143,7 +161,7 @@
 
 - type: entity
   parent: CMBoxMagazineBase
-  id: CMBoxMagazineRifleM41AExt
+  id: CMBoxMagazineRifleM41AExtEmpty
   name: magazine box (Ext M41A x 8)
   components:
   - type: Construction
@@ -161,6 +179,19 @@
     - state: lid_type_ext
       map: [ "lid_stripe" ]
   - type: CMItemSlots
+    count: 8
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM41AExt
+
+- type: entity
+  parent: CMBoxMagazineBase
+  id: CMBoxMagazineRifleM41AExt
+  suffix: Filled
+  name: magazine box (Ext M41A x 8)
+  components:
+  - type: CMItemSlots
     startingItem: CMMagazineRifleM41AExt
     count: 8
     slot:
@@ -171,7 +202,7 @@
 # M39
 - type: entity
   parent: CMBoxMagazineHVBase
-  id: CMBoxMagazineSMGM39
+  id: CMBoxMagazineSMGM39Empty
   name: magazine box (M39 x 12)
   components:
   - type: Construction
@@ -188,6 +219,18 @@
       map: [ "lid" ]
     - state: lid_type_reg
       map: [ "lid_stripe" ]
+    - type: CMItemSlots
+      count: 12
+      slot:
+        whitelist:
+          tags:
+          - CMMagazineSMGM39
+
+- type: entity
+  parent: CMBoxMagazineSMGM39Empty
+  id: CMBoxMagazineSMGM39
+  name: magazine box (M39 x 12)
+  components:
   - type: CMItemSlots
     startingItem: CMMagazineSMGM39
     count: 12
@@ -198,7 +241,7 @@
 
 - type: entity
   parent: CMBoxMagazineAPBase
-  id: CMBoxMagazineSMGM39AP
+  id: CMBoxMagazineSMGM39APEmpty
   name: magazine box (AP M39 x 12)
   components:
   - type: Construction
@@ -215,6 +258,19 @@
       map: [ "lid" ]
     - state: lid_type_ap
       map: [ "lid_stripe" ]
+    - type: CMItemSlots
+      count: 12
+      slot:
+        whitelist:
+          tags:
+          - CMMagazineSMGM39AP
+
+- type: entity
+  parent: CMBoxMagazineSMGM39APEmpty
+  id: CMBoxMagazineSMGM39AP
+  suffix: Full
+  name: magazine box (AP M39 x 12)
+  components:
   - type: CMItemSlots
     startingItem: CMMagazineSMGM39AP
     count: 12
@@ -225,7 +281,7 @@
 
 - type: entity
   parent: CMBoxMagazineHVBase
-  id: CMBoxMagazineSMGM39Ext
+  id: CMBoxMagazineSMGM39ExtEmpty
   name: magazine box (Ext M39 x 10)
   components:
   - type: Construction
@@ -242,6 +298,19 @@
       map: [ "lid" ]
     - state: lid_type_ext
       map: [ "lid_stripe" ]
+    - type: CMItemSlots
+      count: 10
+      slot:
+        whitelist:
+          tags:
+          - CMMagazineSMGM39Ext
+
+- type: entity
+  parent: CMBoxMagazineSMGM39ExtEmpty
+  id: CMBoxMagazineSMGM39Ext
+  name: magazine box (Ext M39 x 10)
+  suffix: Full
+  components:
   - type: CMItemSlots
     startingItem: CMMagazineSMGM39Ext
     count: 10
@@ -253,7 +322,7 @@
 # M4RA
 - type: entity
   parent: CMBoxMagazineBase
-  id: CMBoxMagazineRifleM4RA
+  id: CMBoxMagazineRifleM4RAEmpty
   name: magazine box (M4RA x 16)
   components:
   - type: Construction
@@ -270,6 +339,19 @@
       map: [ "lid" ]
     - state: lid_type_reg
       map: [ "lid_stripe" ]
+    - type: CMItemSlots
+      count: 16
+      slot:
+        whitelist:
+          tags:
+          - CMMagazineRifleM4RA
+
+- type: entity
+  parent: CMBoxMagazineRifleM4RAEmpty
+  id: CMBoxMagazineRifleM4RA
+  name: magazine box (M4RA x 16)
+  suffix: Filled
+  components:
   - type: CMItemSlots
     startingItem: CMMagazineRifleM4RA
     count: 16
@@ -280,7 +362,7 @@
 
 - type: entity
   parent: CMBoxMagazineAPBase
-  id: CMBoxMagazineRifleM4RAAP
+  id: CMBoxMagazineRifleM4RAAPEmpty
   name: magazine box (AP M4RA x 16)
   components:
   - type: Construction
@@ -297,6 +379,19 @@
       map: [ "lid" ]
     - state: lid_type_ap
       map: [ "lid_stripe" ]
+    - type: CMItemSlots
+      startingItem: CMMagazineRifleM4RAAP
+      count: 16
+      slot:
+        whitelist:
+          tags:
+          - CMMagazineRifleM4RAAP
+
+- type: entity
+  parent: CMBoxMagazineRifleM4RAAPEmpty
+  id: CMBoxMagazineRifleM4RAAP
+  name: magazine box (AP M4RA x 16)
+  components:
   - type: CMItemSlots
     startingItem: CMMagazineRifleM4RAAP
     count: 16
@@ -305,7 +400,7 @@
         tags:
         - CMMagazineRifleM4RAAP
 
-- type: entity
+- type: entity # continue here
   parent: CMBoxMagazineBase
   id: CMBoxMagazineRifleM4RAExt
   name: magazine box (Ext M4RA x 12)
