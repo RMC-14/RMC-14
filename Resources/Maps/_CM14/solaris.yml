@@ -14346,24 +14346,12 @@ entities:
       anchored: True
       pos: 100.5,-99.5
       parent: 1
-    - type: Lock
-      locked: True
-    - type: Physics
-      bodyType: Static
-    - type: PointLight
-      enabled: True
   - uid: 17645
     components:
     - type: Transform
       anchored: True
       pos: 101.5,-99.5
       parent: 1
-    - type: Lock
-      locked: True
-    - type: Physics
-      bodyType: Static
-    - type: PointLight
-      enabled: True
   - uid: 20021
     components:
     - type: Transform
