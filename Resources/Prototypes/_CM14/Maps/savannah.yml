@@ -8,7 +8,7 @@
       stationProto: StandardNanotrasenStation
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'USS LCS-14 Savannah'
+          mapNameTemplate: 'LCS-14 Savannah'
         - type: StationJobs
           availableJobs:
             # Command
