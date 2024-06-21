@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [BaseItem, CMBaseWeaponGun, CMBaseAttachableHolder]
+  parent: [ BaseItem, CMBaseWeaponGun, CMBaseAttachableHolder ]
   id: CMBaseWeaponRifle
   components:
   - type: Wieldable
@@ -76,14 +76,14 @@
     slots:
       cm-aslot-barrel:
         tags:
-          - CMAttachableExtendedBarrel
-          - CMAttachableSuppressor
+        - CMAttachableExtendedBarrel
+        - CMAttachableSuppressor
       cm-aslot-rail:
         tags:
-          - CMAttachableFlashlight
+        - CMAttachableFlashlight
       cm-aslot-underbarrel:
         tags:
-          - CMAttachmentU7UnderbarrelShotgun
+        - CMAttachmentU7UnderbarrelShotgun
   - type: AttachableHolderVisuals
     offsets:
       cm-aslot-barrel: 0.53, 0.06

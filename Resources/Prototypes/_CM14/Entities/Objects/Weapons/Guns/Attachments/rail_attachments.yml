@@ -56,11 +56,11 @@
     autoRechargeRate: 3
   - type: Sprite
     layers:
-      - state: flashlight
-      - state: flashlight-on
-        shader: unshaded
-        visible: false
-        map: [ "light" ]
+    - state: flashlight
+    - state: flashlight-on
+      shader: unshaded
+      visible: false
+      map: [ "light" ]
   - type: Item
     sprite: _CM14/Objects/Weapons/Guns/Attachments/rail.rsi
   - type: Appearance
@@ -112,7 +112,6 @@
   - type: Tag
     tags:
     - CMAttachableRail
-    - CMAttachableFlashlight
     - CMAttachableSmartScope
   - type: AttachableToggleable
     actionId: CMActionToggleScope
