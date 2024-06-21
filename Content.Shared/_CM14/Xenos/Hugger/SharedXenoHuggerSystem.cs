@@ -26,7 +26,6 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using System.ComponentModel.Design;
 
 namespace Content.Shared._CM14.Xenos.Hugger;
 

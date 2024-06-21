@@ -3,7 +3,6 @@ using Content.Shared._CM14.Medical.Surgery;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Utility;
 using static Robust.Shared.Utility.SpriteSpecifier;
