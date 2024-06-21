@@ -11,7 +11,7 @@
   startingGear: CMGearLiaison
   icon: "CMJobIconLiaison"
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-wy
+  supervisors: cm-job-supervisors-we-ya
   accessGroups:
   - MarineMain
   special:

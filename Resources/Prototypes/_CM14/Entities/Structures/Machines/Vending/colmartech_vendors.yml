@@ -59,7 +59,7 @@
   parent: ColMarTechBase
   id: ColMarTechFood
   name: ColMarTech food vendor
-  description: USCM Food Vendor, containing standard military Prepared Meals.
+  description: Marine Food Vendor, containing standard military Prepared Meals.
   components:
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/food.rsi
@@ -67,19 +67,19 @@
     sections:
     - name: Prepared Meals
       entries:
-      - id: CMUSCMPreparedMealChicken
+      - id: CMMarinePreparedMealChicken
         amount: 15
-      - id: CMUSCMPreparedMealCornbread
+      - id: CMMarinePreparedMealCornbread
         amount: 15
-      - id: CMUSCMPreparedMealPasta
+      - id: CMMarinePreparedMealPasta
         amount: 15
-      - id: CMUSCMPreparedMealPizza
+      - id: CMMarinePreparedMealPizza
         amount: 15
-      - id: CMUSCMPreparedMealPork
+      - id: CMMarinePreparedMealPork
         amount: 15
-      - id: CMUSCMPreparedMealTofu
+      - id: CMMarinePreparedMealTofu
         amount: 15
-      - id: CMUSCMProteinBar
+      - id: CMMarineProteinBar
         amount: 50
     - name: Flasks
       entries:
@@ -87,9 +87,9 @@
         amount: 10
       - id: CMMetalFlask
         amount: 10
-      - id: CMUSCMFlask
+      - id: CMMarineFlask
         amount: 5
-      - id: CMWYFlask
+      - id: CMWEYAFlask
         amount: 5
 
 - type: entity
@@ -104,63 +104,63 @@
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
   - type: CMAutomatedVendor
-    sections: [ ] # TODO CM14
-#    - name: Barrel
-#      entries:
-#      - id: CMAttachmentExtendedBarrel
-#        amount: 2
-#      - id: CMAttachmentRecoilCompensator
-#        amount: 2
-#      - id: CMAttachmentSuppressor
-#        amount: 2
-#    - name: Rail
-#      entries:
-#      - id: CMAttachmentB8SmartScope
-#        amount: 1
+    sections: # TODO CM14
+    - name: Barrel
+      entries:
+      - id: CMAttachmentExtendedBarrel
+        amount: 3
+      - id: CMAttachmentRecoilCompensator
+        amount: 3
+      - id: CMAttachmentSuppressor
+        amount: 3
+    - name: Rail
+      entries:
+      - id: CMAttachmentB8SmartScope
+        amount: 2
 #      - id: CMAttachmentMagneticHarness
-#        amount: 4
+#        amount: 5
 #      - id: CMAttachmentS42xTelescopicMiniScope
 #        amount: 2
 #      - id: CMAttachmentS5RedDotSight
-#        amount: 3
+#        amount: 4
 #      - id: CMAttachmentS6ReflexSight
-#        amount: 3
+#        amount: 4
 #      - id: CMAttachments84xTelescopicScope
 #        amount: 2
 #    - name: Underbarrel
 #      entries:
 #      - id: CMAttachmentAngledGrip
-#        amount: 2
+#        amount: 3
 #      - id: CMAttachmentBipod
-#        amount: 2
+#        amount: 3
 #      - id: CMAttachmentBurstFireAssembly
-#        amount: 1
+#        amount: 2
 #      - id: CMAttachmentGyroscopicStabilizer
-#        amount: 1
+#        amount: 2
 #      - id: CMAttachmentLaserSight
-#        amount: 3
+#        amount: 4
 #      - id: CMAttachmentMiniFlamethrower
-#        amount: 1
+#        amount: 2
 #      - id: CMAttachmentXMVESG1FlamerNozzle
-#        amount: 1
-#      - id: CMAttachmentU7UnderbarrelShotgun
-#        amount: 1
+#        amount: 2
+      - id: CMAttachmentU7UnderbarrelShotgun
+        amount: 2
 #      - id: CMAttachmentUnderbarrelExtinguisher
-#        amount: 1
+#        amount: 2
 #      - id: CMAttachmentVerticalGrip
-#        amount: 3
+#        amount: 4
 #    - name: Stock
 #      entries:
 #      - id: CMAttachmentM37WoodenStock
-#        amount: 1
+#        amount: 2
 #      - id: CMAttachmentM39ArmBrace
-#        amount: 1
+#        amount: 2
 #      - id: CMAttachmentM39Stock
-#        amount: 1
+#        amount: 2
 #      - id: CMAttachmentM41ASolidStock
-#        amount: 1
+#        amount: 2
 #      - id: CMAttachmentM44MagnumSharpshooterStock
-#        amount: 1
+#        amount: 2
 
 - type: entity
   parent: ColMarTechBase
@@ -523,7 +523,7 @@
     #  points: 15
       - id: CMPouchMacheteFilled
         points: 15
-    #- id: CMUSCMRadioTelephonePack
+    #- id: CMMarineRadioTelephonePack
     #  points: 15
     #- id: CMFuelTankStrapPouch
     #  points: 5
@@ -629,7 +629,7 @@
     #  points: 4
       - id: CMPouchMacheteFilled
         points: 4
-    #- id: CMUSCMRadioTelephonePack
+    #- id: CMMarineRadioTelephonePack
     #  points: 5
       - id: CMBeltUtilityCombat
         points: 15
@@ -995,7 +995,7 @@
     #- id: CMScabbardMacheteFull
       - id: CMPouchMacheteFilled
         points: 15
-    #- id: CMUSCMRadioTelephonePack
+    #- id: CMMarineRadioTelephonePack
     #- id: CMFuelTankStrapPouch
     #- id: CMWeldingGoggles
       - id: CMPouchGeneralLarge
@@ -1143,7 +1143,7 @@
     #  points: 6
       - id: CMPouchMacheteFilled
         points: 8
-    #- id: CMUSCMRadioTelephonePack
+    #- id: CMMarineRadioTelephonePack
     #  points: 15
     #- id: CMFuelTankStrapPouch
     #  points: 4
@@ -1410,7 +1410,7 @@
     #    CMScabbardMacheteFull: 6P
       - id: CMPouchMacheteFilled
         points: 8
-    #    CMUSCMRadioTelephonePack: 15P
+    #    CMMarineRadioTelephonePack: 15P
     #    CMFuelTankStrapPouch: 4P
     #    CMWeldingGoggles: 3P
     - name: Utilities
@@ -1827,7 +1827,7 @@
     #  points: 5
       - id: CMPouchMacheteFilled
         points: 15
-    #- id: CMUSCMRadioTelephonePack
+    #- id: CMMarineRadioTelephonePack
     #  points: 5
     #- id: CMWeldingGoggles
     #  points: 3
@@ -2008,11 +2008,11 @@
         amount: 15
       - id: CMSatchelMarine
         amount: 15
-#      - id: USCM Chestrig
+#      - id: Marine Chestrig
 #        amount: 15
-#      - id: USCM Technical Satchel
+#      - id: Marine Technical Satchel
 #        amount: 15
-#      - id: USCM Technical Chestrig
+#      - id: Marine Technical Chestrig
 #        amount: 15
       - id: CMSatchelMedical
         amount: 15
@@ -2113,11 +2113,11 @@
 #        amount: 10
 #      - id: Firearm Lubricant
 #        amount: 15
-#      - id: USCM Flair
+#      - id: Marine Flair
 #        amount: 15
 #      - id: Falling Falcons Shoulder Patch
 #        amount: 15
-#      - id: USCM Shoulder Patch
+#      - id: Marine Shoulder Patch
 #        amount: 15
 #      - id: Bedroll
 #        amount: 20

@@ -1,4 +1,4 @@
-﻿cm-guide-entry-cm14 = Colonial Marines 14
+﻿cm-guide-entry-cm14 = CM14
 
 cm-guide-entry-rules = Rules
 cm-guide-entry-rules-ban-types = Ban Types
@@ -19,8 +19,8 @@ cm-guide-entry-rules-lethal-force = Lethal Force
 cm-guide-entry-rules-lethal-force-consequences = Lethal Force Consequences
 cm-guide-entry-rules-protect-detainees = Protect Detainees
 cm-guide-entry-rules-general-roleplay-standards = Roleplay Standards
-cm-guide-entry-rules-uscm-roleplay-standards = USCM Roleplay Standards
-cm-guide-entry-rules-uscm-deployment = USCM Deployment
+cm-guide-entry-rules-marine-roleplay-standards = Marine Roleplay Standards
+cm-guide-entry-rules-marine-deployment = Marine Deployment
 cm-guide-entry-rules-command-roleplay = Command Roleplay
 cm-guide-entry-rules-xeno-roleplay = Xeno Roleplay
 cm-guide-entry-rules-survivor-roleplay = Survivor Roleplay

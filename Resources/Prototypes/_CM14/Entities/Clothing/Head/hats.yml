@@ -67,7 +67,7 @@
   parent: ClothingHeadBase
   id: CMHeadCapMP
   name: MP cap
-  description: A ball-cap worn by the more casual of the USCM's Military Police.
+  description: A ball-cap worn by the more casual of the Marines' Military Police.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Head/Hats/mp_cap.rsi

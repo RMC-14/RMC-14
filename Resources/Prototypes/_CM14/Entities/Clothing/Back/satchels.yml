@@ -53,8 +53,8 @@
 - type: entity
   parent: CMSatchel
   id: CMSatchelMarine
-  name: USCM satchel
-  description: A heavy-duty satchel carried by some USCM soldiers and support personnel.
+  name: Marine satchel
+  description: A heavy-duty satchel carried by some Marine soldiers and support personnel.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Back/Satchels/Marines/standard.rsi
@@ -62,8 +62,8 @@
 - type: entity
   parent: CMSatchelMarine
   id: CMSatchelMarineIntel
-  name: USCM lightweight expedition pack
-  description: A heavy-duty IMP based backpack that can be slung around the front or to the side, and can quickly be accessed with only one hand. Usually issued to USCM intelligence officers.
+  name: Marine lightweight expedition pack
+  description: A heavy-duty IMP based backpack that can be slung around the front or to the side, and can quickly be accessed with only one hand. Usually issued to Marine intelligence officers.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Back/Satchels/Marines/big.rsi
@@ -74,7 +74,7 @@
 - type: entity
   parent: CMSatchelMarineIntel
   id: CMSatchelMarineLogistics
-  name: USCM logistics IMP backpack
+  name: Marine logistics IMP backpack
   description: A standard-issue backpack worn by logistics personnel. It is occasionally issued to combat personnel for longer term expeditions and deep space incursions.
   components:
   - type: Storage
@@ -84,8 +84,8 @@
 - type: entity
   parent: CMSatchelMarine
   id: CMSatchelMarineMedic
-  name: USCM corpsman satchel
-  description: A heavy-duty satchel used by USCM medics. It sacrifices capacity for usability. A small patch is sewn to the top flap.
+  name: Marine corpsman satchel
+  description: A heavy-duty satchel used by Marine medics. It sacrifices capacity for usability. A small patch is sewn to the top flap.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Back/Satchels/Marines/medic.rsi
@@ -93,8 +93,8 @@
 - type: entity
   parent: CMSatchelMarine
   id: CMSatchelMarineTech
-  name: USCM technician chestrig
-  description: A heavy-duty chestrig used by some USCM technicians.
+  name: Marine technician chestrig
+  description: A heavy-duty chestrig used by some Marine technicians.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Back/Satchels/Marines/techi.rsi

@@ -62,24 +62,7 @@ public sealed class GunIFFSystem : EntitySystem
 
     private void OnGunIFFAmmoShot(Entity<GunIFFComponent> ent, ref AmmoShotEvent args)
     {
-        if (!_container.TryGetContainingContainer((ent, null), out var container) ||
-            !_userIFFQuery.HasComp(container.Owner))
-        {
-            return;
-        }
-
-        var ev = new GetIFFFactionEvent();
-        RaiseLocalEvent(container.Owner, ref ev);
-
-        if (ev.Faction is not { } id)
-            return;
-
-        foreach (var projectile in args.FiredProjectiles)
-        {
-            var iff = EnsureComp<ProjectileIFFComponent>(projectile);
-            iff.Faction = id;
-            Dirty(projectile, iff);
-        }
+        GiveAmmoIFF(ent, ref args);
     }
 
     private void OnProjectileIFFPreventCollide(Entity<ProjectileIFFComponent> ent, ref PreventCollideEvent args)
@@ -99,7 +82,7 @@ public sealed class GunIFFSystem : EntitySystem
         if (!_userIFFQuery.Resolve(user, ref user.Comp, false))
             return false;
 
-        var ev = new GetIFFFactionEvent();
+        var ev = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
         RaiseLocalEvent(user, ref ev);
         return ev.Faction == faction;
     }
@@ -109,5 +92,27 @@ public sealed class GunIFFSystem : EntitySystem
         user.Comp = EnsureComp<UserIFFComponent>(user);
         user.Comp.Faction = faction;
         Dirty(user);
+    }
+
+    public void GiveAmmoIFF(EntityUid gun, ref AmmoShotEvent args)
+    {
+        if (!_container.TryGetContainingContainer((gun, null), out var container) ||
+            !_userIFFQuery.HasComp(container.Owner))
+        {
+            return;
+        }
+
+        var ev = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
+        RaiseLocalEvent(container.Owner, ref ev);
+
+        if (ev.Faction is not { } id)
+            return;
+
+        foreach (var projectile in args.FiredProjectiles)
+        {
+            var iff = EnsureComp<ProjectileIFFComponent>(projectile);
+            iff.Faction = id;
+            Dirty(projectile, iff);
+        }
     }
 }

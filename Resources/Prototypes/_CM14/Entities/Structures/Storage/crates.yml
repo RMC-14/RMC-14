@@ -191,7 +191,7 @@
   parent: CMCrateWeldable
   id: CMCrateGreen
   name: green crate
-  description: A standard green storage crate employed by the USCM. These things are so common, just about anything could be inside.
+  description: A standard green storage crate employed by the Marines. These things are so common, just about anything could be inside.
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/green.rsi
@@ -410,11 +410,11 @@
 
 - type: entity
   parent: CMCrateSecure
-  id: CMCrateSecureWeyland
-  name: secure W-Y crate
-  description: A secure crate with a W-Y insignia on it.
+  id: CMCrateSecureWeYa
+  name: secure We-Ya crate
+  description: A secure crate with a We-Ya insignia on it.
   components:
   - type: Sprite
-    sprite: _CM14/Structures/Storage/Crates/secure_weyland.rsi
+    sprite: _CM14/Structures/Storage/Crates/secure_we_ya.rsi
   - type: Icon
-    sprite: _CM14/Structures/Storage/Crates/secure_weyland.rsi
+    sprite: _CM14/Structures/Storage/Crates/secure_we_ya.rsi

@@ -4,7 +4,7 @@
 - type: entity
   parent: BaseStorageItem
   id: CMMRE
-  name: USCM MRE
+  name: Marine MRE
   description: A Meal, Ready-to-Eat. A single-meal combat ration designed to provide a soldier with enough nutrients for a day of strenuous work. Its expiration date is at least 20 years ahead of your combat life expectancy.
   components:
   - type: Tag
@@ -75,7 +75,7 @@
       orGroup: dessert
     - id: CMMREComponentHoneyFlan
       orGroup: dessert
-    - id: CMDrinkWYWaterBottle30
+    - id: CMDrinkWEYAWaterBottle30
     - id: CMFortuneCookie
       prob: 0.333
     - id: CMCigarettePackLuckyStrikes
@@ -96,7 +96,7 @@
   parent: BaseItem
   id: CMMREComponentBase
   name: MRE component
-  description: A package from a Meal Ready-to-Eat, property of the US Colonial Marines. Contains a part of a meal, prepared for field consumption.
+  description: A package from a Meal Ready-to-Eat, property of the CM. Contains a part of a meal, prepared for field consumption.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Consumable/Food/mre_components.rsi
@@ -111,7 +111,7 @@
   abstract: true
   parent: CMFoodBase
   id: CMMREFoodBase
-  description: The contents of a USCM Standard issue MRE.
+  description: The contents of a Marine Standard issue MRE.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Consumable/Food/mre_contents.rsi

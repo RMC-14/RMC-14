@@ -75,3 +75,9 @@
   id: CMFloorTComms1
   name: tiles-cm-tcomms
   sprite: /Textures/_CM14/Tiles/almayer/tcomms_1.png
+
+- type: tile
+  parent: CMFloorPlate
+  id: CMFloorOuterHullPlate
+  name: tiles-cm-plate
+  sprite: /Textures/_CM14/Tiles/almayer/outerhull.png

@@ -142,7 +142,7 @@
   id: ActionXenoScatteredSpit
   parent: ActionXenoBase
   name: Scattered Spit (20) # TODO CM14 proper plasma costs
-  description: Launches multiple projectiles that will slow any enemies they hit, and paralyze them if they have no armor.
+  description: Launches multiple projectiles that will briefly paralyze any enemies they hit.
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem

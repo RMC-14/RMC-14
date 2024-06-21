@@ -4770,42 +4770,42 @@ entities:
     - type: Transform
       pos: -5.8186073,-3.4815395
       parent: 179
-- proto: CMUSCMPreparedMealChicken
+- proto: CMMarinePreparedMealChicken
   entities:
   - uid: 171
     components:
     - type: Transform
       pos: 3.5615244,6.810526
       parent: 179
-- proto: CMUSCMPreparedMealCornbread
+- proto: CMMarinePreparedMealCornbread
   entities:
   - uid: 340
     components:
     - type: Transform
       pos: 3.551108,6.591776
       parent: 179
-- proto: CMUSCMPreparedMealPasta
+- proto: CMMarinePreparedMealPasta
   entities:
   - uid: 411
     components:
     - type: Transform
       pos: 3.5719411,6.4146924
       parent: 179
-- proto: CMUSCMPreparedMealPizza
+- proto: CMMarinePreparedMealPizza
   entities:
   - uid: 429
     components:
     - type: Transform
       pos: 3.5615244,6.216776
       parent: 179
-- proto: CMUSCMPreparedMealPork
+- proto: CMMarinePreparedMealPork
   entities:
   - uid: 801
     components:
     - type: Transform
       pos: 3.551108,6.0396924
       parent: 179
-- proto: CMUSCMPreparedMealTofu
+- proto: CMMarinePreparedMealTofu
   entities:
   - uid: 727
     components:

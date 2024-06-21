@@ -1,4 +1,4 @@
-chat-radio-marine-highcommand = USCM HighCommand
+chat-radio-marine-highcommand = Marine HighCommand
 
 chat-radio-marine-common = Marine Common
 chat-radio-marine-command = Command
@@ -17,6 +17,6 @@ chat-radio-marine-echo = Echo
 chat-radio-marine-foxtrot = Foxtrot
 
 chat-radio-colony = Colony
-chat-radio-WY = Weyland-Yutani
+chat-radio-WY = We-Ya
 
 chat-radio-hivemind = Hivemind

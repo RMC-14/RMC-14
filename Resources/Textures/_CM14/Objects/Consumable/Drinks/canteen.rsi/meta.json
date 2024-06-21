@@ -14,10 +14,10 @@
       "name": "flask"
     },
     {
-      "name": "flask_uscm"
+      "name": "flask_marine"
     },
     {
-      "name": "flask_wy"
+      "name": "flask_we_ya"
     }
   ]
 }

@@ -42,18 +42,18 @@
   - type: Sprite
     state: stripped_key
 
-# Weyland-Yutani
+# We-Ya
 - type: entity
   parent: CMEncryptionKey
-  id: CMEncryptionKeyWY
-  name: weyland-yutani encryption Key
+  id: CMEncryptionKeyWEYA
+  name: we-ya encryption Key
   components:
   - type: EncryptionKey
     channels:
-    - WY
-    defaultChannel: WY
+    - WEYA
+    defaultChannel: WEYA
   - type: Sprite
-    state: wy_key
+    state: we_ya_key
 
 # Command
 - type: entity
