@@ -580,7 +580,8 @@ binds:
 #  type: State
 - function: CMActivateAttachableStock
   type: State
-  key: H
+  key: X
+  mod1: Shift
 #- function: CMActivateAttachableUnderbarrel
 #  type: State
 - function: CMUniqueAction
