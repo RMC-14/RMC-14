@@ -104,63 +104,63 @@
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
   - type: CMAutomatedVendor
-    sections: [ ] # TODO CM14
-#    - name: Barrel
-#      entries:
-#      - id: CMAttachmentExtendedBarrel
-#        amount: 2
-#      - id: CMAttachmentRecoilCompensator
-#        amount: 2
-#      - id: CMAttachmentSuppressor
-#        amount: 2
-#    - name: Rail
-#      entries:
-#      - id: CMAttachmentB8SmartScope
-#        amount: 1
+    sections: # TODO CM14
+    - name: Barrel
+      entries:
+      - id: CMAttachmentExtendedBarrel
+        amount: 3
+      - id: CMAttachmentRecoilCompensator
+        amount: 3
+      - id: CMAttachmentSuppressor
+        amount: 3
+    - name: Rail
+      entries:
+      - id: CMAttachmentB8SmartScope
+        amount: 2
 #      - id: CMAttachmentMagneticHarness
-#        amount: 4
+#        amount: 5
 #      - id: CMAttachmentS42xTelescopicMiniScope
 #        amount: 2
 #      - id: CMAttachmentS5RedDotSight
-#        amount: 3
+#        amount: 4
 #      - id: CMAttachmentS6ReflexSight
-#        amount: 3
+#        amount: 4
 #      - id: CMAttachments84xTelescopicScope
 #        amount: 2
 #    - name: Underbarrel
 #      entries:
 #      - id: CMAttachmentAngledGrip
-#        amount: 2
+#        amount: 3
 #      - id: CMAttachmentBipod
-#        amount: 2
+#        amount: 3
 #      - id: CMAttachmentBurstFireAssembly
-#        amount: 1
+#        amount: 2
 #      - id: CMAttachmentGyroscopicStabilizer
-#        amount: 1
+#        amount: 2
 #      - id: CMAttachmentLaserSight
-#        amount: 3
+#        amount: 4
 #      - id: CMAttachmentMiniFlamethrower
-#        amount: 1
+#        amount: 2
 #      - id: CMAttachmentXMVESG1FlamerNozzle
-#        amount: 1
-#      - id: CMAttachmentU7UnderbarrelShotgun
-#        amount: 1
+#        amount: 2
+      - id: CMAttachmentU7UnderbarrelShotgun
+        amount: 2
 #      - id: CMAttachmentUnderbarrelExtinguisher
-#        amount: 1
+#        amount: 2
 #      - id: CMAttachmentVerticalGrip
-#        amount: 3
+#        amount: 4
 #    - name: Stock
 #      entries:
 #      - id: CMAttachmentM37WoodenStock
-#        amount: 1
+#        amount: 2
 #      - id: CMAttachmentM39ArmBrace
-#        amount: 1
+#        amount: 2
 #      - id: CMAttachmentM39Stock
-#        amount: 1
+#        amount: 2
 #      - id: CMAttachmentM41ASolidStock
-#        amount: 1
+#        amount: 2
 #      - id: CMAttachmentM44MagnumSharpshooterStock
-#        amount: 1
+#        amount: 2
 
 - type: entity
   parent: ColMarTechBase
