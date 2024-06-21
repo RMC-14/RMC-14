@@ -92,8 +92,8 @@
 
 - type: entity
   parent: CMMatchBook
-  id: CMExecutiveWYMatchbook
-  name: Weyland-Yutani gold matchbook
+  id: CMExecutiveWEYAMatchbook
+  name: We-Ya gold matchbook
   description: A small book of expensive paper matches. These ones light almost every time, or so the packaging claims.
   components:
   - type: Sprite

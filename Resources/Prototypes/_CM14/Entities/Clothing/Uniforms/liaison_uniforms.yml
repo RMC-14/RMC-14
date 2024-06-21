@@ -4,7 +4,7 @@
   parent: JumpsuitMarine
   id: CMJumpsuitLiaison
   name: liaison's tan suit
-  description: A stiff, stylish tan suit commonly worn by businessmen from the Weyland-Yutani corporation. Expertly crafted to make you look like a prick.
+  description: A stiff, stylish tan suit commonly worn by businessmen from the We-Ya corporation. Expertly crafted to make you look like a prick.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Uniforms/Liaison/liaison_regular.rsi
@@ -15,7 +15,7 @@
   parent: CMJumpsuitLiaison
   id: CMJumpsuitLiaisonCharcoal
   name: liaison's charcoal suit
-  description: A stiff, stylish charcoal suit commonly worn by businessmen from the Weyland-Yutani corporation. Expertly crafted to make you look like a prick.
+  description: A stiff, stylish charcoal suit commonly worn by businessmen from the We-Ya corporation. Expertly crafted to make you look like a prick.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Uniforms/Liaison/liaison_charcoal.rsi
@@ -46,7 +46,7 @@
   parent: CMJumpsuitLiaison
   id: CMJumpsuitLiaisonFormal
   name: liaison's white suit
-  description: A formal, white suit. Looks like something you'd wear to a funeral, a Weyland-Yutani corporate dinner, or both. Stiff as a board, but makes you feel like rolling out of a Rolls-Royce.
+  description: A formal, white suit. Looks like something you'd wear to a funeral, a We-Ya corporate dinner, or both. Stiff as a board, but makes you feel like rolling out of a Rolls-Royce.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Uniforms/Liaison/liaison_formal.rsi
@@ -57,7 +57,7 @@
   parent: CMJumpsuitLiaison
   id: CMJumpsuitLiaisonSuspenders
   name: liaison's attire
-  description: A collared shirt, complimented by a pair of suspenders. Worn by Weyland-Yutani employees who ask the tough questions. Smells faintly of cigars and bad acting.
+  description: A collared shirt, complimented by a pair of suspenders. Worn by We-Ya employees who ask the tough questions. Smells faintly of cigars and bad acting.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Uniforms/Liaison/liaison_suspenders.rsi
@@ -68,7 +68,7 @@
   parent: CMJumpsuitLiaison
   id: CMJumpsuitLiaisonBlazer
   name: liaison's blue blazer
-  description: A stiff but casual blue blazer. Similar can be found in any Weyland-Yutani office. Only the finest wear for the galaxy's most cunning.
+  description: A stiff but casual blue blazer. Similar can be found in any We-Ya office. Only the finest wear for the galaxy's most cunning.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Uniforms/Liaison/liaison_blue_blazer.rsi

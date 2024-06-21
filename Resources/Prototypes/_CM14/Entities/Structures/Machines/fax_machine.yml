@@ -33,11 +33,11 @@
 - type: entity
   parent: CMFax
   id: CMFaxWY
-  name: weyland-yutani fax machine
-  suffix: WY
+  name: we-ya fax machine
+  suffix: WEYA
   components:
   - type: FaxMachine
-    name: "Weyland-Yutani"
+    name: "We-Ya"
     notifyAdmins: true
 
 - type: entity

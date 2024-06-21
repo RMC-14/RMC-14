@@ -91,7 +91,7 @@
   time: '2023-11-28T03:55:33.0000000+00:00'
 - author: thymol-blue
   changes:
-  - message: Added tips relevant to Colonial Marines 14. Be sure to keep an eye out
+  - message: Added tips relevant to CM14. Be sure to keep an eye out
       for them!
     type: Add
   id: 15
@@ -699,7 +699,7 @@
   changes:
   - message: Added JTAC Radio Key
     type: Add
-  - message: Add Weyland-Yutani radio key
+  - message: Add We-Ya radio key
     type: Add
   id: 91
   time: '2024-04-30T06:37:23.0000000+00:00'
@@ -897,7 +897,7 @@
   changes:
   - message: Ported the effects of all existing medicines.
     type: Add
-  - message: Added all times to the Wey-Med Plus except for painkillers, splints and
+  - message: Added all times to the We-Ya-Med Plus except for painkillers, splints and
       peridaxon.
     type: Add
   id: 118

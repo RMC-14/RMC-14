@@ -248,7 +248,7 @@
   parent: CMDrinkCanBase
   id: CMDrinkCanFruitBeer
   name: fruit-beer
-  description: In theory, Mango flavored root beer sounds like a pretty good idea. Weyland-Yutani has disproved yet another theory with its latest line of cola. Canned by the Weyland-Yutani Corporation.
+  description: In theory, Mango flavored root beer sounds like a pretty good idea. We-Ya has disproved yet another theory with its latest line of cola. Canned by the We-Ya Corporation.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Consumable/Drinks/fruit_beer.rsi
@@ -265,7 +265,7 @@
 - type: entity
   parent: CMDrinkCanBase
   id: CMDrinkCanBeerLite
-  name: weyland-yutani lite
+  name: we-ya lite
   description: Beer. You've dialed in your target. Time to fire for effect.
   components:
   - type: Sprite
@@ -283,7 +283,7 @@
 - type: entity
   parent: CMDrinkCanBase
   id: CMDrinkCanAle
-  name: weyland-yutani IPA
+  name: we-ya IPA
   description: Beer's misunderstood cousin.
   components:
   - type: Sprite

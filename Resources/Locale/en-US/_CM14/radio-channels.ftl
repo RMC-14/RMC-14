@@ -17,6 +17,6 @@ chat-radio-marine-echo = Echo
 chat-radio-marine-foxtrot = Foxtrot
 
 chat-radio-colony = Colony
-chat-radio-WY = Weyland-Yutani
+chat-radio-WY = We-Ya
 
 chat-radio-hivemind = Hivemind

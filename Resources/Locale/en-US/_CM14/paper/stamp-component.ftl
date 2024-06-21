@@ -1,6 +1,6 @@
 stamp-component-stamped-name-cm-default = Stamped
 
-stamp-component-stamped-name-cm-weyyu = Weyland-Yutani
+stamp-component-stamped-name-cm-we-ya = We-Ya
 stamp-component-stamped-name-cm-uscm = USCM High Command
 stamp-component-stamped-name-cm-cmb = Colonial Marshal Bureau
 

@@ -1,4 +1,4 @@
-﻿ui-options-header-cm = Colonial Marines 14
+﻿ui-options-header-cm = CM14
 
 ui-options-function-cm-activate-attachable-barrel = Activate barrel attachment
 ui-options-function-cm-activate-attachable-rail = Activate rail attachment

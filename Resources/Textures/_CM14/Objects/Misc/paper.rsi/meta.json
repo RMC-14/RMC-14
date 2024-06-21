@@ -140,7 +140,7 @@
       "name": "clip"
     },
     {
-      "name": "paper_stamp-weyyu"
+      "name": "paper_stamp-we_ya"
     },
     {
       "name": "paper_stamp-uscm"
@@ -179,7 +179,7 @@
       "name": "stamp-uscm"
     },
     {
-      "name": "stamp-weyyu"
+      "name": "stamp-we_ya"
     },
     {
       "name": "stamp-cmb"
@@ -229,24 +229,6 @@
     },
     {
       "name": "paper_p_words"
-    },
-    {
-      "name": "paper_wy_words"
-    },
-    {
-      "name": "paper_wy_grant"
-    },
-    {
-      "name": "paper_wy_synthesis"
-    },
-    {
-      "name": "paper_wy_partial_report"
-    },
-    {
-      "name": "paper_wy_full_report"
-    },
-    {
-      "name": "paper_wy"
     },
     {
       "name": "paper_uscm_words"
