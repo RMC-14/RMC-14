@@ -92,7 +92,7 @@
   parent: CMMREFoodDessert
   id: CMMREFoodSpicedApples
   name: spiced apples
-  description: The contents of a USCM Standard issue MRE. This one is spiced apples.
+  description: The contents of a Marine Standard issue MRE. This one is spiced apples.
   components:
   - type: Sprite
     state: spiced_apples
@@ -104,7 +104,7 @@
   parent: CMMREFoodDessert
   id: CMMREFoodChocolateBrownie
   name: chocolate brownie
-  description: The contents of a USCM Standard issue MRE. This one is chocolate brownie.
+  description: The contents of a Marine Standard issue MRE. This one is chocolate brownie.
   components:
   - type: Sprite
     state: chocolate_brownie
@@ -116,7 +116,7 @@
   parent: CMMREFoodDessert
   id: CMMREFoodSugarCookie
   name: sugar cookie
-  description: The contents of a USCM Standard issue MRE. This one is sugar cookie.
+  description: The contents of a Marine Standard issue MRE. This one is sugar cookie.
   components:
   - type: Sprite
     state: sugar_cookie
@@ -128,7 +128,7 @@
   parent: CMMREFoodDessert
   id: CMMREFoodCocoBar
   name: coco bar
-  description: The contents of a USCM Standard issue MRE. This one is coco bar.
+  description: The contents of a Marine Standard issue MRE. This one is coco bar.
   components:
   - type: Sprite
     state: coco_bar
@@ -140,7 +140,7 @@
   parent: CMMREFoodDessert
   id: CMMREFoodFlan
   name: flan
-  description: The contents of a USCM Standard issue MRE. This one is flan.
+  description: The contents of a Marine Standard issue MRE. This one is flan.
   components:
   - type: Sprite
     state: flan
@@ -152,7 +152,7 @@
   parent: CMMREFoodDessert
   id: CMMREFoodHoneyFlan
   name: honey flan
-  description: The contents of a USCM Standard issue MRE. This one is honey flan.
+  description: The contents of a Marine Standard issue MRE. This one is honey flan.
   components:
   - type: Sprite
     state: honey_flan

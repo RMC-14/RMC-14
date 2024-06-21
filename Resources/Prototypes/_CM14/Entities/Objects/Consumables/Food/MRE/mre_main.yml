@@ -80,7 +80,7 @@
   parent: CMMREFoodMain
   id: CMMREFoodBonelessPorkRibs
   name: boneless pork ribs
-  description: The contents of a USCM Standard issue MRE. This one is boneless pork ribs.
+  description: The contents of a Marine Standard issue MRE. This one is boneless pork ribs.
   components:
   - type: Sprite
     state: boneless_pork_ribs
@@ -92,7 +92,7 @@
   parent: CMMREFoodMain
   id: CMMREFoodGrilledChicken
   name: grilled chicken
-  description: The contents of a USCM Standard issue MRE. This one is grilled chicken.
+  description: The contents of a Marine Standard issue MRE. This one is grilled chicken.
   components:
   - type: Sprite
     state: grilled_chicken
@@ -104,7 +104,7 @@
   parent: CMMREFoodMain
   id: CMMREFoodPizzaSquare
   name: pizza square
-  description: The contents of a USCM Standard issue MRE. This one is pizza square.
+  description: The contents of a Marine Standard issue MRE. This one is pizza square.
   components:
   - type: Sprite
     state: pizza_square
@@ -116,7 +116,7 @@
   parent: CMMREFoodMain
   id: CMMREFoodSpaghettiChunks
   name: spaghetti chunks
-  description: The contents of a USCM Standard issue MRE. This one is spaghetti chunks.
+  description: The contents of a Marine Standard issue MRE. This one is spaghetti chunks.
   components:
   - type: Sprite
     state: spaghetti_chunks
@@ -128,7 +128,7 @@
   parent: CMMREFoodMain
   id: CMMREFoodChickenTender
   name: chicken tender
-  description: The contents of a USCM Standard issue MRE. This one is chicken tender.
+  description: The contents of a Marine Standard issue MRE. This one is chicken tender.
   components:
   - type: Sprite
     state: chicken_tender

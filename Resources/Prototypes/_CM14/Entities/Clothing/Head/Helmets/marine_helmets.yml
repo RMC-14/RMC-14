@@ -33,7 +33,7 @@
   parent: ArmorHelmetM10
   id: CMArmorHelmetM10MP
   name: M10 helmet MP
-  description: A special variant of the M10 Pattern Helmet worn by the Military Police of the USCM.
+  description: A special variant of the M10 Pattern Helmet worn by the Military Police of the Marines.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Head/Helmets/m10/mp.rsi
@@ -44,7 +44,7 @@
   parent: ArmorHelmetM10
   id: CMArmorHelmetM10ChiefMP
   name: M10 helmet chief MP
-  description: A special variant of the M10 Pattern Helmet worn by the Chief MP of the USCM.
+  description: A special variant of the M10 Pattern Helmet worn by the Chief MP of the Marines.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Head/Helmets/m10/cmp.rsi
@@ -55,7 +55,7 @@
   parent: ArmorHelmetM10
   id: CMArmorHelmetM10CO
   name: M10 helmet CO
-  description: A special variant of the M10 Pattern Helmet worn by the Commanding Officer of the USCM.
+  description: A special variant of the M10 Pattern Helmet worn by the Commanding Officer of the Marines.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Head/Helmets/m10/co.rsi
@@ -66,7 +66,7 @@
   parent: ArmorHelmetM10
   id: CMArmorHelmetM10Medic
   name: M10 medic helmet
-  description: A special variant of the M10 Pattern Helmet worn by the medic marines of the USCM.
+  description: A special variant of the M10 Pattern Helmet worn by the medic marines of the Marines.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Head/Helmets/m10/med.rsi
@@ -77,7 +77,7 @@
   parent: ArmorHelmetM10
   id: CMArmorHelmetM10Tech
   name: M10 tech helmet
-  description: A special variant of the M10 Pattern Helmet worn by the engineer marines of the USCM.
+  description: A special variant of the M10 Pattern Helmet worn by the engineer marines of the Marines.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Head/Helmets/m10/tech.rsi
@@ -173,7 +173,7 @@
   parent: ArmorHelmetM10
   id: CMArmorHelmetM45
   name: M45 ghillie helmet
-  description: A lightweight M45 helmet with ghillie coif used by USCM snipers on recon missions.
+  description: A lightweight M45 helmet with ghillie coif used by Marine snipers on recon missions.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Head/Helmets/m45.rsi

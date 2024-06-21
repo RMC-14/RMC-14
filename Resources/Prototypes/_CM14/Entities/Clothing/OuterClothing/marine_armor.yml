@@ -150,7 +150,7 @@
   parent: CMArmorM2MP
   id: CMArmorM3G4
   name: M3-G4 grenadier armor
-  description: A custom set of M3 armor packed to the brim with padding, plating, and every form of ballistic protection under the sun. Used exclusively by USCM Grenadiers.
+  description: A custom set of M3 armor packed to the brim with padding, plating, and every form of ballistic protection under the sun. Used exclusively by Marine Grenadiers.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/g4.rsi
@@ -212,7 +212,7 @@
   parent: CMArmorM3Medium
   id: CMArmorM3Scout
   name: M3-S light armor
-  description: A custom set of M3 armor designed for USCM Scouts.
+  description: A custom set of M3 armor designed for Marine Scouts.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/scout.rsi
@@ -225,7 +225,7 @@
   parent: CMArmorM3Medium
   id: CMArmorM3VLBallistics
   name: M3-VL pattern ballistics vest
-  description: Up until 2182 USCM non-combat personnel were issued non-standardized ballistics vests, though the lack of IMP compatibility and suit lamps proved time and time again inefficient. This modified M3-L shell is the result of a 6-year R&D program; It provides utility, protection, AND comfort to all USCM non-combat personnel.
+  description: Up until 2182 Marine non-combat personnel were issued non-standardized ballistics vests, though the lack of IMP compatibility and suit lamps proved time and time again inefficient. This modified M3-L shell is the result of a 6-year R&D program; It provides utility, protection, AND comfort to all Marine non-combat personnel.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m3/vl.rsi
@@ -273,7 +273,7 @@
   parent: CMArmorM3Medium
   id: CMArmorM35
   name: M35 pyrotechnician armor
-  description: A custom set of M35 armor designed for use by USCM Pyrotechnicians.
+  description: A custom set of M35 armor designed for use by Marine Pyrotechnicians.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m35.rsi
@@ -287,7 +287,7 @@
   parent: CMArmorM3Medium
   id: CMArmorM45
   name: M45 pattern ghillie armor # TODO CM14 camo, id lock
-  description: A lightweight ghillie camouflage suit, used by USCM snipers on recon missions. Very lightweight and surprisingly very protective.
+  description: A lightweight ghillie camouflage suit, used by Marine snipers on recon missions. Very lightweight and surprisingly very protective.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/ghille.rsi

@@ -2,7 +2,7 @@
   parent: ClothingEyesBase
   id: CMGlassesSecurity
   name: security HUD-glasses
-  description: Sunglasses wired up with the best nano-tech the USCM can muster out on the frontier. Displays information about any person you decree worthy of your gaze.
+  description: Sunglasses wired up with the best nano-tech the Marines can muster out on the frontier. Displays information about any person you decree worthy of your gaze.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi

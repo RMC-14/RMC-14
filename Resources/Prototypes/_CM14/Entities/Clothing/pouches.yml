@@ -445,7 +445,7 @@
   parent: CMPouchMedicalSoc
   id: CMPouchMedicalSocDutch
   name: Dutch's Medical Pouch
-  description: A pouch bought from a black market trader by Dutch quite a few years ago. Rumoured to be stolen from secret USCM assets. Its contents have been slowly used up and replaced over the years.
+  description: A pouch bought from a black market trader by Dutch quite a few years ago. Rumoured to be stolen from secret Marine assets. Its contents have been slowly used up and replaced over the years.
 
 - type: entity
   parent: CMPouchMedicalSocDutch

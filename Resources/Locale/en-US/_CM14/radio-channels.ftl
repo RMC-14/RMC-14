@@ -1,4 +1,4 @@
-chat-radio-marine-highcommand = USCM HighCommand
+chat-radio-marine-highcommand = Marine HighCommand
 
 chat-radio-marine-common = Marine Common
 chat-radio-marine-command = Command
