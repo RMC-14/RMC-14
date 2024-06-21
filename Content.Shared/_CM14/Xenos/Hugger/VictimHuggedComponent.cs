@@ -1,12 +1,12 @@
 using Content.Shared.Chat.Prototypes;
 using Content.Shared._CM14.Medical.Surgery;
+using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Utility;
 using static Robust.Shared.Utility.SpriteSpecifier;
-using Content.Shared.Damage;
 
 namespace Content.Shared._CM14.Xenos.Hugger;
 
