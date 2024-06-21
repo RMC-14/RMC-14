@@ -82,7 +82,7 @@ public sealed class GunIFFSystem : EntitySystem
         if (!_userIFFQuery.Resolve(user, ref user.Comp, false))
             return false;
 
-        var ev = new GetIFFFactionEvent();
+        var ev = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
         RaiseLocalEvent(user, ref ev);
         return ev.Faction == faction;
     }
