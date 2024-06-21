@@ -102,7 +102,7 @@ public sealed class GunIFFSystem : EntitySystem
             return;
         }
 
-        var ev = new GetIFFFactionEvent();
+        var ev = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
         RaiseLocalEvent(container.Owner, ref ev);
 
         if (ev.Faction is not { } id)
