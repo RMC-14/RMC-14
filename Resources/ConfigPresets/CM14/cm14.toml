@@ -7,4 +7,4 @@ grid_impulse = false
 tags = "lang:en,region:am_n_e,rp:med"
 
 [physics]
-maxlinvelocity = 41
+maxlinvelocity = 51

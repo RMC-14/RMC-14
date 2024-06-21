@@ -5,25 +5,46 @@
   components:
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Attachments/barrel.rsi
+  - type: Tag
+    tags:
+    - CMAttachableBarrel
 
 - type: entity
   parent: CMBarrelAttachmentBase
   id: CMAttachmentExtendedBarrel
   name: extended barrel
-  description: The lengthened barrel speeds up and stabilizes the bullet, increasing velocity and accuracy.
+  description: The lengthened barrel speeds up and stabilizes the bullet, increasing velocity. # and accuracy.
   components:
   - type: Sprite
     state: ebarrel
+  - type: Tag
+    tags:
+    - CMAttachableBarrel
+    - CMAttachableExtendedBarrel
+  - type: AttachableVisuals
+  - type: AttachableWeaponRangedMods
+    modifiers:
+      projectileSpeedFlat: 10
 
 - type: entity
   parent: CMBarrelAttachmentBase
   id: CMAttachmentRecoilCompensator
   name: recoil compensator
   description: "A muzzle attachment that reduces recoil by diverting expelled gasses upwards.
-    Increases accuracy and reduces recoil, at the cost of a small amount of weapon damage."
+    Reduces recoil, at the cost of a small amount of weapon damage." # increases accuracy and reduces recoil
   components:
   - type: Sprite
     state: comp
+  - type: Tag
+    tags:
+    - CMAttachableBarrel
+    - CMAttachableCompensator
+  - type: AttachableVisuals
+    offset: -0.04, 0
+  - type: AttachableWeaponRangedMods
+    modifiers:
+      damageFlat: -0.1
+      recoilFlat: -1 # TODO CM14 different recoil numbers per gun and hwen unwielded
 
 - type: entity
   parent: CMBarrelAttachmentBase
@@ -34,3 +55,22 @@
   components:
   - type: Sprite
     state: suppressor
+  - type: Tag
+    tags:
+    - CMAttachableBarrel
+    - CMAttachableSuppressor
+  - type: AttachableVisuals
+    offset: -0.03, 0.035
+  - type: AttachableSilencer
+
+- type: Tag
+  id: CMAttachableBarrel
+
+- type: Tag
+  id: CMAttachableExtendedBarrel
+
+- type: Tag
+  id: CMAttachableCompensator
+
+- type: Tag
+  id: CMAttachableSuppressor

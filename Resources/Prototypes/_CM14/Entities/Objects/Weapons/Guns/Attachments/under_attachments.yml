@@ -5,6 +5,9 @@
   components:
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Attachments/under.rsi
+  - type: Tag
+    tags:
+    - CMAttachmentUnderbarrel
 
 - type: entity
   parent: CMUnderAttachmentBase
@@ -80,6 +83,36 @@
   components:
   - type: Sprite
     state: masterkey
+  - type: Tag
+    tags:
+    - CMAttachmentUnderbarrel
+    - CMAttachmentU7UnderbarrelShotgun
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_CM14/Weapons/Guns/Gunshots/gun_shotgun_u7.ogg
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: BallisticAmmoProvider
+    cycleable: false
+    whitelist:
+      tags:
+      - CMShellShotgun
+    capacity: 5
+    proto: null
+    soundInsert:
+      path: /Audio/_CM14/Weapons/Guns/Reload/m37a2.ogg
+  - type: UniqueAction
+  - type: PumpAction
+  - type: ShootUseDelay
+    delay: 2
+  - type: UseDelay
+  - type: AttachableToggleable
+    attachedOnly: true
+    supercedeHolder: true
+    activateSound: /Audio/_CM14/Attachable/gun_u7_activate.ogg
+  - type: AttachableVisuals
+  - type: AttachableToggleableSimpleActivate
 
 - type: entity
   parent: CMUnderAttachmentBase
@@ -98,3 +131,9 @@
   components:
   - type: Sprite
     state: verticalgrip
+
+- type: Tag
+  id: CMAttachmentUnderbarrel
+
+- type: Tag
+  id: CMAttachmentU7UnderbarrelShotgun

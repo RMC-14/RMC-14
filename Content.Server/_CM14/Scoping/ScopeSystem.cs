@@ -18,7 +18,7 @@ public sealed class ScopeSystem : SharedScopeSystem
         if (TryComp(user, out ActorComponent? actor))
         {
             var coords = Transform(user).Coordinates;
-            var offset = GetScopeOffset(direction, scope.Comp.Zoom);
+            var offset = GetScopeOffset(scope, direction);
             scope.Comp.RelayEntity = SpawnAtPosition(null, coords.Offset(offset));
             _viewSubscriber.AddViewSubscriber(scope.Comp.RelayEntity.Value, actor.PlayerSession);
         }
