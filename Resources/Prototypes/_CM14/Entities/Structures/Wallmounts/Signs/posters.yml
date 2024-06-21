@@ -207,7 +207,7 @@
   parent: CMPosterBase
   id: CMPosterSuspicious
   name: "suspicious looking poster"
-  description: "This poster describes USCM as the enemy."
+  description: "This poster describes Marines as the enemy."
   components:
   - type: Sprite
     state: suspicious

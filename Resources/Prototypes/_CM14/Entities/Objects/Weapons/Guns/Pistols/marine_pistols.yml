@@ -85,7 +85,7 @@
   parent: CMWeaponPistolBase
   id: CMWeaponPistol88m4
   name: 88 Mod 4 combat pistol # TODO CM14 sounds
-  description: Standard issue USCM firearm. Also found in the hands of We-Ya PMC teams. Fires 9mm armor shredding rounds and is capable of 3-round burst.
+  description: Standard issue Marine firearm. Also found in the hands of We-Ya PMC teams. Fires 9mm armor shredding rounds and is capable of 3-round burst.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Pistols/88m4.rsi
@@ -116,7 +116,7 @@
   parent: CMWeaponPistolBase
   id: CMWeaponPistolVP78
   name: VP78 pistol
-  description: A massive, formidable semi-automatic handgun chambered in 9mm squash-head rounds. A common sight throughout both UA and 3WE space, often held by both We-Ya PMC units and corporate executives. This weapon is also undergoing limited field testing as part of the USCM's next generation pistol program. The slide is engraved with the We-Ya logo reminding you who's really in charge.
+  description: A massive, formidable semi-automatic handgun chambered in 9mm squash-head rounds. A common sight throughout both UA and 3WE space, often held by both We-Ya PMC units and corporate executives. This weapon is also undergoing limited field testing as part of the Marine's next generation pistol program. The slide is engraved with the We-Ya logo reminding you who's really in charge.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Pistols/vp78.rsi

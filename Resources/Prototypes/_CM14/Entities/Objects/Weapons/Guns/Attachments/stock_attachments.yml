@@ -31,7 +31,7 @@
   parent: CMStockAttachmentBase
   id: CMAttachmentM39Stock
   name: submachinegun stock
-  description: A rare ARMAT stock distributed in small numbers to USCM forces. Compatible with the M39, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Seemingly a bit more effective in a brawl.
+  description: A rare ARMAT stock distributed in small numbers to Marine forces. Compatible with the M39, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Seemingly a bit more effective in a brawl.
   components:
   - type: Sprite
     state: smgstock
@@ -40,7 +40,7 @@
   parent: CMStockAttachmentBase
   id: CMAttachmentM39StockCollapsible
   name: submachinegun folding stock
-  description: A Kirchner brand K2 M39 folding stock, standard issue in the USCM. The stock, when extended, reduces recoil and improves accuracy, but at a reduction to handling and agility. Seemingly a bit more effective in a brawl. This stock can collapse in, removing all positive and negative effects.
+  description: A Kirchner brand K2 M39 folding stock, standard issue in the Marines. The stock, when extended, reduces recoil and improves accuracy, but at a reduction to handling and agility. Seemingly a bit more effective in a brawl. This stock can collapse in, removing all positive and negative effects.
   components:
   - type: Sprite
     state: smgstockcc
@@ -58,7 +58,7 @@
   parent: CMStockAttachmentBase
   id: CMAttachmentM41ASolidStock
   name: M41A solid stock
-  description: A rare stock distributed in small numbers to USCM forces. Compatible with the M41A, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
+  description: A rare stock distributed in small numbers to Marine forces. Compatible with the M41A, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
   components:
   - type: Sprite
     state: riflestock

@@ -143,7 +143,7 @@
       "name": "paper_stamp-we_ya"
     },
     {
-      "name": "paper_stamp-uscm"
+      "name": "paper_stamp-marine"
     },
     {
       "name": "paper_stamp-cmb"
@@ -176,7 +176,7 @@
       "name": "stamp-cmo"
     },
     {
-      "name": "stamp-uscm"
+      "name": "stamp-marine"
     },
     {
       "name": "stamp-we_ya"
@@ -231,10 +231,10 @@
       "name": "paper_p_words"
     },
     {
-      "name": "paper_uscm_words"
+      "name": "paper_marine_words"
     },
     {
-      "name": "paper_uscm"
+      "name": "paper_marine"
     },
     {
       "name": "fortune"

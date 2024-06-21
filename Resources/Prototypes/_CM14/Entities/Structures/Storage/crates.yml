@@ -191,7 +191,7 @@
   parent: CMCrateWeldable
   id: CMCrateGreen
   name: green crate
-  description: A standard green storage crate employed by the USCM. These things are so common, just about anything could be inside.
+  description: A standard green storage crate employed by the Marines. These things are so common, just about anything could be inside.
   components:
   - type: Sprite
     sprite: _CM14/Structures/Storage/Crates/green.rsi

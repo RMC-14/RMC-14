@@ -2,7 +2,7 @@
   name: flare
   parent: BaseItem
   id: CMFlare
-  description: A red USCM issued flare. There are instructions on the side, it reads 'pull cord, make light'.
+  description: A red Marine issued flare. There are instructions on the side, it reads 'pull cord, make light'.
   components:
   - type: Tag
     tags:
@@ -102,7 +102,7 @@
   parent: BaseItem
   id: CMPackFlareBase
   name: M94 marking flare pack
-  description: A packet of eight M94 Marking Flares. Carried by USCM soldiers to light dark areas that cannot be reached with the usual TNR Shoulder Lamp.
+  description: A packet of eight M94 Marking Flares. Carried by Marine soldiers to light dark areas that cannot be reached with the usual TNR Shoulder Lamp.
   components:
   - type: Item
     size: Normal

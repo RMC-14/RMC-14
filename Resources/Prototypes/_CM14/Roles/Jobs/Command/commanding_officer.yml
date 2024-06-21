@@ -25,7 +25,7 @@
   icon: "CMJobIconCommandingOfficer"
   requireAdminNotify: true
   joinNotifyCrew: true
-  supervisors: cm-job-supervisors-uscm
+  supervisors: cm-job-supervisors-marine-high-command
   whitelisted: true
   accessGroups:
   - ShipMasterAccess

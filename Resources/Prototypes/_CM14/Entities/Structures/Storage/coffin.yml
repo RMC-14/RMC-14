@@ -35,12 +35,12 @@
 
 - type: entity
   parent: CMCoffin
-  id: CMCoffinUSCM
-  name: USCM coffin
+  id: CMCoffinMarine
+  name: Marine coffin
   description: A burial receptacle for dearly departed Marines, adorned in red and finished with the Corps' emblem on the interior. Semper fi.
   components:
   - type: Sprite
-    sprite: _CM14/Structures/Storage/Coffins/uscm.rsi
+    sprite: _CM14/Structures/Storage/Coffins/marine.rsi
 
 - type: entity
   parent: CMCoffin

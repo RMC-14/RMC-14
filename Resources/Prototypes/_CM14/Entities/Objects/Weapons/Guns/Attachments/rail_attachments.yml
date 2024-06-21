@@ -96,7 +96,7 @@
   parent: CMRailAttachmentBase
   id: CMAttachmentMagneticHarness
   name: magnetic harness
-  description: A magnetically attached harness kit that attaches to the rail mount of a weapon. When dropped, the weapon will sling to any set of USCM armor.
+  description: A magnetically attached harness kit that attaches to the rail mount of a weapon. When dropped, the weapon will sling to any set of Marine armor.
   components:
   - type: Sprite
     state: magnetic

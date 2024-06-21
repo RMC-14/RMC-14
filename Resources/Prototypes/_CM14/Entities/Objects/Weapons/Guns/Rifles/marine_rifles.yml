@@ -132,7 +132,7 @@
   parent: CMBaseWeaponRifle
   name: M4RA battle rifle
   id: WeaponRifleM4RA
-  description: The M4RA battle rifle is a designated marksman rifle in service with the USCM. Sporting a bullpup configuration, the M4RA battle rifle is perfect for reconnaissance and fire support teams.
+  description: The M4RA battle rifle is a designated marksman rifle in service with the Marine. Sporting a bullpup configuration, the M4RA battle rifle is perfect for reconnaissance and fire support teams.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Rifles/m4ra.rsi

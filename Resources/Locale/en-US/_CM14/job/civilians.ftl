@@ -1,4 +1,4 @@
-﻿# Non USCM Personnel
+﻿# Non Marine Personnel
 cm-job-name-correspondent = Correspondent
 cm-job-description-correspondent = You report on anything and everything that you deem fit to put within the pages of the news.
 CMJobCorrespondent = Correspondent

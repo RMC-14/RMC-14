@@ -29,7 +29,7 @@
   - type: Sprite
     state: pamphlet_medical
 
-# gives miniengie skill 
+# gives miniengie skill
 - type: entity
   parent: CMPamphlet
   id: CMPamphletEngineer
@@ -39,7 +39,7 @@
   - type: Sprite
     state: pamphlet_construction
 
-# gives jtac skill 
+# gives jtac skill
 - type: entity
   parent: CMPamphlet
   id: CMPamphletJTAC
@@ -59,7 +59,7 @@
   - type: Sprite
     state: pamphlet_spotter
 
-# gives powerloader skill / bypasses limit 
+# gives powerloader skill / bypasses limit
 - type: entity
   parent: CMPamphlet
   id: CMPamphletPowerloader
@@ -69,7 +69,7 @@
   - type: Sprite
     state: pamphlet_powerloader
 
-# gives police skill / bypasses limit 
+# gives police skill / bypasses limit
 - type: entity
   parent: CMPamphlet
   id: CMPamphletPolice
@@ -79,7 +79,7 @@
   - type: Sprite
     state: pamphlet_jtac
 
-# gives surgery skill / bypasses limit 
+# gives surgery skill / bypasses limit
 - type: entity
   parent: CMPamphlet
   id: CMPamphletSurgery
@@ -89,7 +89,7 @@
   - type: Sprite
     state: pamphlet_medical
 
-# gives intel skill / bypasses limit 
+# gives intel skill / bypasses limit
 - type: entity
   parent: CMPamphlet
   id: CMPamphletIntel
@@ -107,7 +107,7 @@
   parent: CMPamphlet
   id: CMPamphletLanguage
   name: translation pamphlet
-  description: A pamphlet used by lazy USCM interpreters to quickly learn new languages on the spot.
+  description: A pamphlet used by lazy Marine interpreters to quickly learn new languages on the spot.
 
 # gives japanese language
 - type: entity

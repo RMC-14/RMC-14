@@ -79,7 +79,7 @@
   parent: CMGuidebookRole
   id: CMGuidebookRoleSEA
   name: Senior Enlisted Advisor
-  description: Mentor for the USCM!
+  description: Mentor for the Marines!
   noSpawn: false
   components:
   - type: Sprite
