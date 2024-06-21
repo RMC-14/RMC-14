@@ -42,7 +42,7 @@
     id: CMIDCardQuartermaster
     ears: CMHeadsetQM
     pocket1: CMPouchGeneralMedium
-    pocket2: Flash # TODO CM14 cm flash
+    pocket2: CMFlash
 
 - type: entity
   parent: CMSpawnPointJobBase
