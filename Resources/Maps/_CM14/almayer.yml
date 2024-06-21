@@ -1286,7 +1286,7 @@ entities:
             395: 148,11
             438: 9,-8
     - type: BecomesStation
-      id: Savannah
+      id: Almayer
     - type: GridAtmosphere
       version: 2
       data:
