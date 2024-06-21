@@ -15,8 +15,9 @@
   - type: ShowHealthBars
     damageContainers:
     - Biological
+  - type: HolocardScanner # TODO cm14 add this to CM medical hud instead
   - type: ShowHealthIcons
-    damageContainers: 
+    damageContainers:
     - Biological
 
 - type: entity
