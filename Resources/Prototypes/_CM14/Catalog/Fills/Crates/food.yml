@@ -11,7 +11,7 @@
 - type: entity
   id: CMCrateFoodMRE
   parent: CMCratePlastic
-  name: USCM MRE crate
+  name: Marine MRE crate
   components:
   - type: StorageFill
     contents:
@@ -25,7 +25,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMUSCMPreparedMealPizza
+      - id: CMMarinePreparedMealPizza
         amount: 3
 
 - type: entity

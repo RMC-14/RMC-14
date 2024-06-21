@@ -22,3 +22,9 @@
   - /Audio/_CM14/Weapons/Guns/Gunshots/gun_m41a_4.ogg
   - /Audio/_CM14/Weapons/Guns/Gunshots/gun_m41a_5.ogg
   - /Audio/_CM14/Weapons/Guns/Gunshots/gun_m41a_6.ogg
+
+- type: soundCollection
+  id: CMSilencedShoot
+  files:
+  - /Audio/_CM14/Weapons/Guns/Gunshots/gun_silenced_shot1.ogg
+  - /Audio/_CM14/Weapons/Guns/Gunshots/gun_silenced_shot2.ogg

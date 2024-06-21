@@ -135,7 +135,7 @@ entities:
   - uid: 1
     components:
     - type: MetaData
-      name: USS Savannah
+      name: Marine Savannah
     - type: Transform
     - type: Map
       mapPaused: True
@@ -34804,7 +34804,7 @@ entities:
       parent: 1
     - type: AtmosPipeColor
       color: '#990000FF'
-- proto: CMVentPump
+- proto: GasVentPump
   entities:
   - uid: 1796
     components:
@@ -35205,7 +35205,7 @@ entities:
       parent: 1
     - type: AtmosPipeColor
       color: '#0055CCFF'
-- proto: CMVentScrubber
+- proto: GasVentScrubber
   entities:
   - uid: 1794
     components:

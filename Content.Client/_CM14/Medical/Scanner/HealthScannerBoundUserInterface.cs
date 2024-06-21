@@ -1,5 +1,10 @@
 ﻿using System.Globalization;
+using Content.Client._CM14.Medical.HUD;
 using Content.Client.Message;
+using Content.Shared._CM14.Marines.Skills;
+using Content.Shared._CM14.Medical.HUD;
+using Content.Shared._CM14.Medical.HUD.Components;
+using Content.Shared._CM14.Medical.HUD.Systems;
 using Content.Shared._CM14.Medical.Scanner;
 using Content.Shared._CM14.Medical.Wounds;
 using Content.Shared._CM14.Xenos.Hugger;
@@ -26,11 +31,14 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
 
     [ViewVariables]
     private HealthScannerWindow? _window;
+    private NetEntity _lastTarget;
 
+    private readonly ShowHolocardIconsSystem _holocardIcons;
     private readonly SharedWoundsSystem _wounds;
 
     public HealthScannerBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
+        _holocardIcons = _entities.System<ShowHolocardIconsSystem>();
         _wounds = _entities.System<SharedWoundsSystem>();
     }
 
@@ -56,6 +64,7 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
 
         if (_entities.GetEntity(uiState.Target) is not { Valid: true } target)
             return;
+        _lastTarget = uiState.Target;
 
         _window.PatientLabel.Text = $"Patient: {Identity.Name(target, _entities, _player.LocalEntity)}";
 
@@ -89,6 +98,30 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
 
                     _window.HealthBarText.Text = $"{healthString} healthy";
                 }
+            }
+
+            _window.ChangeHolocardButton.Text = Loc.GetString("ui-health-scanner-holocard-change");
+            _window.ChangeHolocardButton.OnPressed += OpenChangeHolocardUI;
+            if (_player.LocalEntity is { } viewer &&
+                _entities.TryGetComponent(viewer, out SkillsComponent? skills) &&
+                skills.Skills.Medical >= HolocardSystem.MinimumRequiredMedicalSkill)
+            {
+                _window.ChangeHolocardButton.Disabled = false;
+                _window.ChangeHolocardButton.ToolTip = "";
+            }
+            else
+            {
+                _window.ChangeHolocardButton.Disabled = true;
+                _window.ChangeHolocardButton.ToolTip = Loc.GetString("ui-holocard-change-insufficient-skill");
+            }
+            if (_entities.TryGetComponent(target, out HolocardStateComponent? holocardComponent) &&
+                _holocardIcons.TryGetDescription((target, holocardComponent), out var description))
+            {
+                _window.HolocardDescription.Text = description;
+            }
+            else
+            {
+                _window.HolocardDescription.Text = Loc.GetString("hc-none-description");
             }
 
             _window.ChemicalsContainer.DisposeAllChildren();
@@ -144,6 +177,12 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
         {
             _window.OpenCentered();
         }
+    }
+
+    private void OpenChangeHolocardUI(BaseButton.ButtonEventArgs obj)
+    {
+        if (_player.LocalEntity is { } viewer)
+            SendMessage(new OpenChangeHolocardUIEvent(_entities.GetNetEntity(viewer), _lastTarget));
     }
 
     private void AddGroup(Entity<DamageableComponent> damageable, RichTextLabel label, Color color, ProtoId<DamageGroupPrototype> group, string? labelStr = null)

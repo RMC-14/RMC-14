@@ -126,7 +126,7 @@
   parent: CMPosterBase
   id: CMPosterSeegson
   name: "Seegson"
-  description: "Hey, Seegson! That's a blast from the past. They got bought out by Weyland-Yutani around the time one of their space stations de-orbited and fell into a planet's gravity well after a systems failure."
+  description: "Hey, Seegson! That's a blast from the past. They got bought out by We-Ya around the time one of their space stations de-orbited and fell into a planet's gravity well after a systems failure."
   components:
   - type: Sprite
     state: seegson
@@ -142,12 +142,12 @@
 
 - type: entity
   parent: CMPosterBase
-  id: CMPosterWorkingJoe
-  name: "YOU ALWAYS KNOW A WORKING JOE."
-  description: "YOU ALWAYS KNOW A WORKING JOE. YOU ALWAYS KNOW A WORKING JOE. YOU ALWAYS KNOW A WORKING JOE. YOU ALWAYS KNOW A WORKING JOE. YOU ALWAYS KNOW A WORKING JOE."
+  id: CMPosterSynthetic
+  name: "YOU ALWAYS KNOW A SYNTHETIC."
+  description: "YOU ALWAYS KNOW A SYNTHETIC. YOU ALWAYS KNOW A SYNTHETIC. YOU ALWAYS KNOW A SYNTHETIC. YOU ALWAYS KNOW A SYNTHETIC. YOU ALWAYS KNOW A SYNTHETIC."
   components:
   - type: Sprite
-    state: working_joe
+    state: synthetic
 
 - type: entity
   parent: CMPosterBase
@@ -205,18 +205,9 @@
 
 - type: entity
   parent: CMPosterBase
-  id: CMPosterWY
-  name: "Weyland-Yutani poster"
-  description: "You don't have much choice in brand loyalty when there's basically only one brand."
-  components:
-  - type: Sprite
-    state: wy
-
-- type: entity
-  parent: CMPosterBase
   id: CMPosterSuspicious
   name: "suspicious looking poster"
-  description: "This poster describes USCM as the enemy."
+  description: "This poster describes Marines as the enemy."
   components:
   - type: Sprite
     state: suspicious
@@ -376,12 +367,12 @@
 
 - type: entity
   parent: CMPosterBase
-  id: CMPosterPepsi
-  name: "Pepsi Cola"
-  description: "This poster depicts the logo for Pepsi Cola. Pepsi is a soft drink that never really made it off of Earth. It's odd to see a poster advertising it way out here. Maybe someone just likes the logo. They've claimed to be the taste of a new generation for about 200 years."
+  id: CMPosterBepis
+  name: "Bepis Cola"
+  description: "This poster depicts the logo for Bepis Cola. Bepis is a soft drink that never really made it off of Earth. It's odd to see a poster advertising it way out here. Maybe someone just likes the logo. They've claimed to be the taste of a new generation for about 200 years."
   components:
   - type: Sprite
-    state: pepsi
+    state: bepis
 
 - type: entity
   parent: CMPosterBase

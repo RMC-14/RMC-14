@@ -60,6 +60,7 @@
     - FootstepSound
     - DoorBumpOpener
   - type: Marine
+  - type: HolocardState
   - type: Hunger
   - type: Thirst
     baseDecayRate: 0.01666666666
@@ -105,6 +106,9 @@
         type: StrippableBoundUserInterface
       enum.CMSurgeryUIKey.Key:
         type: CMSurgeryBui
+      enum.HolocardChangeUIKey.Key:
+        type: HolocardChangeBoundUserInterface
+        interactionRange: 0
   - type: Huggable
   - type: Tackleable
   - type: Tackle

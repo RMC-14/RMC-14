@@ -112,7 +112,7 @@
 - type: entity
   parent: CMChairComfy
   id: CMChairComfyAlpha
-  description: A simple chair permanently attached to the floor. Covered with a squeaky and way too hard faux-leather, unevenly painted in Alpha squad red. Only for the bravest and freshest USCM recruits.
+  description: A simple chair permanently attached to the floor. Covered with a squeaky and way too hard faux-leather, unevenly painted in Alpha squad red. Only for the bravest and freshest Marine recruits.
   suffix: Alpha
   components:
   - type: Sprite

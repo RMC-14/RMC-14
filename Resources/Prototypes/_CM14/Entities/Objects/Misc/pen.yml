@@ -16,8 +16,8 @@
 - type: entity
   parent: CMPen
   id: CMPenClicky # todo CM14 make it clicky
-  name: WY pen
-  description: It's a WY brand extra clicky black ink pen.
+  name: WEYA pen
+  description: It's a WEYA brand extra clicky black ink pen.
 
 - type: entity
   parent: CMPen

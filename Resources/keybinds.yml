@@ -574,6 +574,16 @@ binds:
   type: State
   key: MouseRight
   canFocus: true
+#- function: CMActivateAttachableBarrel
+#  type: State
+#- function: CMActivateAttachableRail
+#  type: State
+- function: CMActivateAttachableStock
+  type: State
+  key: X
+  mod1: Shift
+#- function: CMActivateAttachableUnderbarrel
+#  type: State
 - function: CMUniqueAction
   type: State
   key: Space

@@ -2,7 +2,7 @@
   parent: BaseKnife
   id: CMM5Bayonet
   name: "M5 'Night Raider' bayonet"
-  description: The standard-issue bayonet of the Colonial Marines. You can slide this knife into your boots. # TODO CM14 , or attach it to the end of a rifle.
+  description: The standard-issue bayonet of the CM. You can slide this knife into your boots. # TODO CM14 , or attach it to the end of a rifle.
   components:
   - type: Clothing
     slots:
@@ -62,7 +62,7 @@
   parent: CMM5Bayonet
   id: CMM2132Machete
   name: M2132 machete
-  description: Latest issue of the USCM Machete.
+  description: Latest issue of the Marine Machete.
   components:
   - type: Clothing
     slots: [ belt ]

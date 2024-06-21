@@ -3,7 +3,7 @@
   parent: ClothingOuterStorageBase
   id: CMCoatChiefMP
   name: chief military police service jacket
-  description: A marine service jacket adopted for use by Military Police personnel on board USCM ships. Ironically most ships require their MP departments to use full armor, making these barely used by on duty MPs. Very popular among those who want to inexplicably smell like donuts.
+  description: A marine service jacket adopted for use by Military Police personnel on board Marine ships. Ironically most ships require their MP departments to use full armor, making these barely used by on duty MPs. Very popular among those who want to inexplicably smell like donuts.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Coats/cmp.rsi
@@ -15,7 +15,7 @@
   parent: ClothingOuterStorageBase
   id: CMCoatWarden
   name: military warden service jacket
-  description: A marine service jacket adopted for use by Military Wardens on board USCM ships. Ironically most ships require their MP departments to use full armor, making these barely used by on duty Wardens. The jacket of choice for looking all night at a set of monitors, while cigarette butts pile around you.
+  description: A marine service jacket adopted for use by Military Wardens on board Marine ships. Ironically most ships require their MP departments to use full armor, making these barely used by on duty Wardens. The jacket of choice for looking all night at a set of monitors, while cigarette butts pile around you.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Coats/warden.rsi
@@ -27,7 +27,7 @@
   parent: ClothingOuterStorageBase
   id: CMCoatMP
   name: military police service jacket
-  description: A marine service jacket adopted for use by Military Police personnel on board USCM ships. Ironically most ships require their MP departments to use full armor, making these barely used by on duty MPs. This variant is also available to regular Marines, if they are willing to bear the shame.
+  description: A marine service jacket adopted for use by Military Police personnel on board Marine ships. Ironically most ships require their MP departments to use full armor, making these barely used by on duty MPs. This variant is also available to regular Marines, if they are willing to bear the shame.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Coats/mp.rsi

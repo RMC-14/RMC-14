@@ -46,6 +46,11 @@
             </PanelContainer>
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
+            <Label Text="Holocard:" MinWidth="80" Modulate="#5B88B0" />
+            <Label Name="HolocardDescription" Access="Public" Align="Right" MinWidth="160"/>
+            <Button Name="ChangeHolocardButton" Access="Public" StyleClasses="OpenBoth" Margin="5 0 0 0" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal">
             <Label Name="BloodTypeLabel" Access="Public" MinWidth="160" Modulate="#5B88B0" />
             <RichTextLabel Name="BloodAmountLabel" Access="Public" />
             <RichTextLabel Name="Bleeding" Access="Public" />

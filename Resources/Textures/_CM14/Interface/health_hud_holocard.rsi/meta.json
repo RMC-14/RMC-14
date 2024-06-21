@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Created by blueDev2 [https://github.com/blueDev2]. Attribution may be done by linking to the github profile",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "hudhcorange"
+    },
+    {
+      "name": "hudhcpurple"
+    },
+    {
+      "name": "hudhcblack"
+    },
+    {
+      "name": "hudhcred"
+    }
+]
+}
