@@ -173,6 +173,21 @@
     state: base_mod88
   objectType: Item
 
+# VP78
+- type: construction
+  parent: CM
+  name: Magazine Box (VP78 Reg)
+  id: CMBoxMagazinePistolVP78
+  graph: CMBoxMagazine
+  startNode: start
+  targetNode: CMBoxMagazinePistolVP78
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain regular VP 78 mags.
+  icon:
+    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_vp78
+  objectType: Item
+
   # Construct graphs
 - type: constructionGraph
   parent: CM
@@ -255,6 +270,13 @@
         amount: 1
         doAfter: 1
 
+    # VP78
+    - to: CMBoxMagazinePistolVP78 #Emtpy
+      steps:
+      - material: Cardboard
+        amount: 1
+        doAfter: 1
+
 
   # Why the fuck do you even need these nodes???
 
@@ -291,3 +313,7 @@
   # 88M4 / 88 Mod 4
   - node: CMBoxMagazinePistol88m4AP
     entity: CMBoxMagazinePistol88m4AP #Emtpy
+
+  # VP78
+  - node: CMBoxMagazinePistolVP78
+    entity: CMBoxMagazinePistolVP78 #Emtpy
