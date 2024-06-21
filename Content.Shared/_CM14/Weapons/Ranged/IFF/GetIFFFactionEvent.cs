@@ -6,5 +6,5 @@ namespace Content.Shared._CM14.Weapons.Ranged.IFF;
 [ByRefEvent]
 public record struct GetIFFFactionEvent(
     EntProtoId<IFFFactionComponent>? Faction,
-    SlotFlags TargetSlots = SlotFlags.IDCARD
+    SlotFlags TargetSlots
 ) : IInventoryRelayEvent;
