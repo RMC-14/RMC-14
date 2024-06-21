@@ -5,3 +5,4 @@
   components:
   - type: Item
     size: Small
+  - type: Attachable

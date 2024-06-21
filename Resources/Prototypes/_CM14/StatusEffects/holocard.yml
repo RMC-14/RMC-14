@@ -1,0 +1,33 @@
+- type: statusIcon
+  abstract: true
+  id: HolocardIcon
+  priority: 1
+  locationPreference: Right
+
+- type: statusIcon
+  parent: HolocardIcon
+  id: UrgentHolocardIcon
+  icon:
+    sprite: /Textures/_CM14/Interface/health_hud_holocard.rsi
+    state: hudhcorange
+
+- type: statusIcon
+  parent: HolocardIcon
+  id: EmergencyHolocardIcon
+  icon:
+    sprite: /Textures/_CM14/Interface/health_hud_holocard.rsi
+    state: hudhcred
+
+- type: statusIcon
+  parent: HolocardIcon
+  id: PermaHolocardIcon
+  icon:
+    sprite: /Textures/_CM14/Interface/health_hud_holocard.rsi
+    state: hudhcblack
+
+- type: statusIcon
+  parent: HolocardIcon
+  id: XenoHolocardIcon
+  icon:
+    sprite: /Textures/_CM14/Interface/health_hud_holocard.rsi
+    state: hudhcpurple

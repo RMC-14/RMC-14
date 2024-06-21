@@ -80,7 +80,7 @@
   parent: CMMREFoodSnack
   id: CMMREFoodBiscuit
   name: biscuit
-  description: The contents of a USCM Standard issue MRE. This one is biscuit.
+  description: The contents of a Marine Standard issue MRE. This one is biscuit.
   components:
   - type: Sprite
     state: biscuit
@@ -92,7 +92,7 @@
   parent: CMMREFoodSnack
   id: CMMREFoodMeatballs
   name: meatballs
-  description: The contents of a USCM Standard issue MRE. This one is meatballs.
+  description: The contents of a Marine Standard issue MRE. This one is meatballs.
   components:
   - type: Sprite
     state: meatballs
@@ -104,7 +104,7 @@
   parent: CMMREFoodSnack
   id: CMMREFoodPretzels
   name: pretzels
-  description: The contents of a USCM Standard issue MRE. This one is pretzels.
+  description: The contents of a Marine Standard issue MRE. This one is pretzels.
   components:
   - type: Sprite
     state: pretzels
@@ -116,7 +116,7 @@
   parent: CMMREFoodSnack
   id: CMMREFoodPeanuts
   name: peanuts
-  description: The contents of a USCM Standard issue MRE. This one is peanuts.
+  description: The contents of a Marine Standard issue MRE. This one is peanuts.
   components:
   - type: Sprite
     state: peanuts
@@ -128,7 +128,7 @@
   parent: CMMREFoodSnack
   id: CMMREFoodSushi
   name: sushi
-  description: The contents of a USCM Standard issue MRE. This one is sushi.
+  description: The contents of a Marine Standard issue MRE. This one is sushi.
   components:
   - type: Sprite
     state: sushi

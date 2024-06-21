@@ -33,21 +33,21 @@
 - type: entity
   parent: CMFax
   id: CMFaxWY
-  name: weyland-yutani fax machine
-  suffix: WY
+  name: we-ya fax machine
+  suffix: WEYA
   components:
   - type: FaxMachine
-    name: "Weyland-Yutani"
+    name: "We-Ya"
     notifyAdmins: true
 
 - type: entity
   parent: CMFax
   id: CMFaxHighCom
-  name: uscm high command fax machine
-  suffix: USCM HC
+  name: marine high command fax machine
+  suffix: Marine HC
   components:
   - type: FaxMachine
-    name: "USCM High Command"
+    name: "Marine High Command"
     notifyAdmins: true
 
 - type: entity
@@ -56,7 +56,7 @@
   suffix: Provost
   components:
   - type: FaxMachine
-    name: "USCM Provost Office"
+    name: "Marine Provost Office"
     notifyAdmins: true
 
 - type: entity

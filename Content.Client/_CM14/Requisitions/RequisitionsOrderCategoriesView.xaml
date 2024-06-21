@@ -6,6 +6,9 @@
         <RichTextLabel Name="BudgetLabel" Access="Public" />
         <Button Name="MainMenuButton" Access="Public" Text="Main Menu" StyleClasses="ButtonSquare" />
         <cc:HSeparator Color="#4972A1" Margin="0 5" />
+        <Control MinWidth="5" />
+        <Button Name="SearchMenuButton" Access="Public" Text="Search item" StyleClasses="ButtonSquare" />
+        <Control MinWidth="5" />
         <RichTextLabel Name="CategoryHeaderLabel" Access="Public" Margin="0 0 0 5" />
         <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
             <BoxContainer Name="CategoriesContainer" Access="Public" Orientation="Vertical" />

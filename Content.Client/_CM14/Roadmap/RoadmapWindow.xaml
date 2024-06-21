@@ -64,7 +64,7 @@
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Communications objective" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Nuke endgame" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Specialist's Scout Kit" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Survivors" Text="A role that starts on the planet and must try to survive until rescued by the USCM" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Survivors" Text="A role that starts on the planet and must try to survive until rescued by the Marines" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Engineering staff" Text="Maintenance technician and the Chief Engineer" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Synthetics and Working Joes" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Emergency responders" Text="A faction that randomly spawns, with their own objectives" />

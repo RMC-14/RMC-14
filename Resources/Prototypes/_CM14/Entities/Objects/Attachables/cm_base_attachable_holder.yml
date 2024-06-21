@@ -1,0 +1,16 @@
+- type: entity
+  abstract: true
+  id: CMBaseAttachableHolder
+  components:
+  - type: AttachableHolder
+  - type: ActivatableUI
+    verbText: cm-verb-strip-attachables
+    verbOnly: true
+    key:
+      enum.AttachmentUI.StripKey
+  - type: UserInterface
+    interfaces:
+      enum.AttachmentUI.StripKey:
+        type: AttachmentStripBui
+      enum.AttachmentUI.ChooseSlotKey:
+        type: AttachmentChooseSlotBui

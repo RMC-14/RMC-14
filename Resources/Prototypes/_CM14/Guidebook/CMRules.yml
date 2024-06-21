@@ -24,8 +24,8 @@
 #  - CMLethalForceConsequences
 #  - CMProtectDetainees
 #  - CMGeneralRoleplayStandards
-#  - CMUSCMRoleplayStandards
-#  - CMUSCMDeployment
+#  - CMMarineRoleplayStandards
+#  - CMMarineDeployment
 #  - CMCommandRoleplay
 #  - CMXenoRoleplay
 #  - CMSurvivorRoleplay
@@ -177,19 +177,19 @@
 
 - type: guideEntry
   parent: CM
-  id: CMUSCMRoleplayStandards
-  name: cm-guide-entry-rules-uscm-roleplay-standards
+  id: CMMarineRoleplayStandards
+  name: cm-guide-entry-rules-marine-roleplay-standards
   priority: 19
   ruleEntry: true
-  text: "/ServerInfo/Guidebook/_CM14/Rules/Roleplay/CMUSCMRoleplayStandards.xml"
+  text: "/ServerInfo/Guidebook/_CM14/Rules/Roleplay/CMMarineRoleplayStandards.xml"
 
 - type: guideEntry
   parent: CM
-  id: CMUSCMDeployment
-  name: cm-guide-entry-rules-uscm-deployment
+  id: CMMarineDeployment
+  name: cm-guide-entry-rules-marine-deployment
   priority: 20
   ruleEntry: true
-  text: "/ServerInfo/Guidebook/_CM14/Rules/Roleplay/CMUSCMDeployment.xml"
+  text: "/ServerInfo/Guidebook/_CM14/Rules/Roleplay/CMMarineDeployment.xml"
 
 - type: guideEntry
   parent: CM

@@ -126,7 +126,7 @@
   parent: CMPosterBase
   id: CMPosterSeegson
   name: "Seegson"
-  description: "Hey, Seegson! That's a blast from the past. They got bought out by Weyland-Yutani around the time one of their space stations de-orbited and fell into a planet's gravity well after a systems failure."
+  description: "Hey, Seegson! That's a blast from the past. They got bought out by We-Ya around the time one of their space stations de-orbited and fell into a planet's gravity well after a systems failure."
   components:
   - type: Sprite
     state: seegson
@@ -205,18 +205,9 @@
 
 - type: entity
   parent: CMPosterBase
-  id: CMPosterWY
-  name: "Weyland-Yutani poster"
-  description: "You don't have much choice in brand loyalty when there's basically only one brand."
-  components:
-  - type: Sprite
-    state: wy
-
-- type: entity
-  parent: CMPosterBase
   id: CMPosterSuspicious
   name: "suspicious looking poster"
-  description: "This poster describes USCM as the enemy."
+  description: "This poster describes Marines as the enemy."
   components:
   - type: Sprite
     state: suspicious
