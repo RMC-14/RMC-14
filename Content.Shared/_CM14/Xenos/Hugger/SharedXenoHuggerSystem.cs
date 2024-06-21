@@ -1,6 +1,8 @@
-﻿using Content.Shared._CM14.Hands;
+using Content.Shared._CM14.Hands;
 using Content.Shared._CM14.Xenos.Leap;
 using Content.Shared._CM14.Xenos.Pheromones;
+using Content.Shared.Chat.Prototypes;
+using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Examine;
@@ -9,6 +11,7 @@ using Content.Shared.Ghost;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
+using Content.Shared.Jittering;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -20,7 +23,10 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using System.ComponentModel.Design;
 
 namespace Content.Shared._CM14.Xenos.Hugger;
 
@@ -41,6 +47,9 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
+    [Dependency] private readonly DamageableSystem _damage = default!;
 
     public override void Initialize()
     {
@@ -361,6 +370,62 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
                 if (hugged.IncubationMultiplier < 1)
                     hugged.BurstAt += TimeSpan.FromSeconds(1 - hugged.IncubationMultiplier) * frameTime;
 
+                // Stages
+                // Percentage of how far along we out to burst time times the number of stages, truncated. You can't go back a stage once you've reached one
+                int stage = Math.Max((int) ((hugged.BurstDelay - (hugged.BurstAt - time)) / hugged.BurstDelay * hugged.FinalStage), hugged.CurrentStage);
+                hugged.CurrentStage = stage;
+                // Symptoms only start after the IntialSymptomStart is passed (by default, 2)
+                if(stage >= hugged.FinalSymptomsStart)
+                {
+                    if (_random.Prob(hugged.MajorPainChance * frameTime))
+                    {
+                        var message = Loc.GetString("cm-xeno-infection-majorpain-" + _random.Pick(new List<string> { "chest", "breathing", "heart" }));
+                        _popup.PopupEntity(message, uid, uid, PopupType.MediumCaution);
+                        if (_random.Prob(0.5f))
+                        {
+                            var ev = new VictimHuggedEmoteEvent(hugged.ScreamId);
+                            RaiseLocalEvent(uid, ev);
+                        }
+                    }
+
+                    if (_random.Prob(hugged.ShakesChance * frameTime))
+                        InfectionShakes(uid, hugged, hugged.BaseKnockdownTime * 3);
+                }
+                else if (stage >= hugged.MiddlingSymptomsStart)
+                {
+                    if (_random.Prob(hugged.ThroatPainChance * frameTime))
+                    {
+                        var message = Loc.GetString("cm-xeno-infection-throat-" + _random.Pick(new List<string> { "sore", "mucous" }));
+                        _popup.PopupEntity(message, uid, uid, PopupType.MediumCaution);
+                    }
+                    // TODO 20% chance to take limb damage
+                    else if (_random.Prob(hugged.MuscleAcheChance * frameTime))
+                    {
+                        _popup.PopupEntity(Loc.GetString("cm-xeno-infection-muscle-ache"), uid, PopupType.MediumCaution);
+                        if (_random.Prob(0.2f))
+                            _damage.TryChangeDamage(uid, hugged.InfectionDamage, true, false);
+                    }
+                    else if (_random.Prob(hugged.SneezeCoughChance * frameTime))
+                    {
+                        var emote = _random.Pick(new List<ProtoId<EmotePrototype>> { hugged.SneezeId, hugged.CoughId });
+                        var ev = new VictimHuggedEmoteEvent(emote);
+                        RaiseLocalEvent(uid, ev);
+                    }
+
+                    if (_random.Prob((hugged.ShakesChance * 5 / 6) * frameTime))
+                        InfectionShakes(uid, hugged, hugged.BaseKnockdownTime * 2);
+                }
+                else if (stage >= hugged.InitialSymptomsStart)
+                {
+                    if (_random.Prob(hugged.MinorPainChance * frameTime))
+                    {
+                        var message = Loc.GetString("cm-xeno-infection-minorpain-" + _random.Pick(new List<string> { "stomach", "chest" }));
+                        _popup.PopupEntity(message, uid, uid, PopupType.MediumCaution);
+                    }
+
+                    if (_random.Prob((hugged.ShakesChance * 2 / 3) * frameTime))
+                        InfectionShakes(uid, hugged, hugged.BaseKnockdownTime);
+                }
                 continue;
             }
 
@@ -373,5 +438,15 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
 
             _audio.PlayPvs(hugged.BurstSound, uid);
         }
+    }
+    // Shakes chances decrease as symptom stages progress, and they get longer
+    private void InfectionShakes(EntityUid victim, VictimHuggedComponent hugged, TimeSpan knockdownTime)
+    {
+        //TODO Minor limb damage and causes pain
+        _stun.TryParalyze(victim, knockdownTime, false);
+        _jitter.DoJitter(victim, hugged.JitterTime, false);
+        _popup.PopupEntity(Loc.GetString("cm-xeno-infection-shakes-self"), victim, victim, PopupType.LargeCaution);
+        _popup.PopupEntity(Loc.GetString("cm-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.LargeCaution);
+        _damage.TryChangeDamage(victim, hugged.InfectionDamage, true, false);
     }
 }

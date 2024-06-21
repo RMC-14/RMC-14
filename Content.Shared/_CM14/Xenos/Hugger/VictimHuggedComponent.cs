@@ -1,10 +1,13 @@
-﻿using Content.Shared._CM14.Medical.Surgery;
+using Content.Shared.Chat.Prototypes;
+using Content.Shared._CM14.Medical.Surgery;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Utility;
 using static Robust.Shared.Utility.SpriteSpecifier;
+using Content.Shared.Damage;
 
 namespace Content.Shared._CM14.Xenos.Hugger;
 
@@ -71,4 +74,55 @@ public sealed partial class VictimHuggedComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid? Hive;
+
+    [DataField, AutoNetworkedField]
+    public int FinalStage = 5;
+
+    [DataField, AutoNetworkedField]
+    public int CurrentStage = 0;
+
+    [DataField, AutoNetworkedField]
+    public int InitialSymptomsStart = 2;
+
+    [DataField, AutoNetworkedField]
+    public int MiddlingSymptomsStart = 3;
+
+    [DataField, AutoNetworkedField]
+    public int FinalSymptomsStart = 4;
+
+    [DataField, AutoNetworkedField]
+    public float ShakesChance = 0.03f;
+
+    [DataField, AutoNetworkedField]
+    public float MinorPainChance = 0.02f;
+
+    [DataField, AutoNetworkedField]
+    public float ThroatPainChance = 0.01f;
+
+    [DataField, AutoNetworkedField]
+    public float MuscleAcheChance = 0.005f;
+
+    [DataField, AutoNetworkedField]
+    public float SneezeCoughChance = 0.01f;
+
+    [DataField, AutoNetworkedField]
+    public float MajorPainChance = 0.01f;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan BaseKnockdownTime = TimeSpan.FromSeconds(1);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan JitterTime = TimeSpan.FromSeconds(5);
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<EmotePrototype> SneezeId = "Sneeze";
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<EmotePrototype> CoughId = "Cough";
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<EmotePrototype> ScreamId = "Scream";
+
+    [DataField, AutoNetworkedField]
+    public DamageSpecifier InfectionDamage = new() { DamageDict = new() { { "Blunt", 1 } } };
 }
