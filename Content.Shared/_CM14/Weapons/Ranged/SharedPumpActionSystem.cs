@@ -20,7 +20,6 @@ public abstract class SharedPumpActionSystem : EntitySystem
         SubscribeLocalEvent<PumpActionComponent, UniqueActionEvent>(OnUniqueAction);
     }
 
-
     protected virtual void OnExamined(Entity<PumpActionComponent> ent, ref ExaminedEvent args)
     {
         // TODO CM14 the server has no idea what this keybind is supposed to be for the client
@@ -41,20 +40,20 @@ public abstract class SharedPumpActionSystem : EntitySystem
 
     private void OnUniqueAction(Entity<PumpActionComponent> ent, ref UniqueActionEvent args)
     {
-        if(args.Handled)
+        if (args.Handled)
             return;
 
         var ammo = new GetAmmoCountEvent();
         RaiseLocalEvent(ent.Owner, ref ammo);
 
-        if(ammo.Count <= 0)
+        if (ammo.Count <= 0)
         {
             _popup.PopupClient(Loc.GetString("cm-gun-no-ammo-message"), args.UserUid, args.UserUid);
             args.Handled = true;
             return;
         }
 
-        if(!ent.Comp.Running || ent.Comp.Pumped)
+        if (!ent.Comp.Running || ent.Comp.Pumped)
             return;
 
         ent.Comp.Pumped = true;

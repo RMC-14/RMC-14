@@ -7,7 +7,7 @@ namespace Content.Shared._CM14.Attachable.Components;
 [Access(typeof(AttachableHolderSystem))]
 public sealed partial class AttachableHolderComponent : Component
 {
-    [ViewVariables]
+    [DataField, AutoNetworkedField]
     public EntityUid? SupercedingAttachable;
 
     /// <summary>

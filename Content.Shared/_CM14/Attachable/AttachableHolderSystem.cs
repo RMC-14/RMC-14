@@ -517,6 +517,7 @@ public sealed class AttachableHolderSystem : EntitySystem
     public void SetSupercedingAttachable(Entity<AttachableHolderComponent> holder, EntityUid? supercedingAttachable)
     {
         holder.Comp.SupercedingAttachable = supercedingAttachable;
+        Dirty(holder);
     }
 
     public bool TryGetSlotId(EntityUid holderUid, EntityUid attachableUid, [NotNullWhen(true)] out string? slotId)
