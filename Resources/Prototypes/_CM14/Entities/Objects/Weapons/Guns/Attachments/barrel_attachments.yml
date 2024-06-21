@@ -40,6 +40,7 @@
     - CMAttachableBarrel
     - CMAttachableCompensator
   - type: AttachableVisuals
+    offset: -0.04, 0
   - type: AttachableWeaponRangedMods
     modifiers:
       damageFlat: -0.1
