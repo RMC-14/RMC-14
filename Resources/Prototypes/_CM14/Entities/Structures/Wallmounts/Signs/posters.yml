@@ -142,12 +142,12 @@
 
 - type: entity
   parent: CMPosterBase
-  id: CMPosterWorkingJoe
-  name: "YOU ALWAYS KNOW A WORKING JOE."
-  description: "YOU ALWAYS KNOW A WORKING JOE. YOU ALWAYS KNOW A WORKING JOE. YOU ALWAYS KNOW A WORKING JOE. YOU ALWAYS KNOW A WORKING JOE. YOU ALWAYS KNOW A WORKING JOE."
+  id: CMPosterSynthetic
+  name: "YOU ALWAYS KNOW A SYNTHETIC."
+  description: "YOU ALWAYS KNOW A SYNTHETIC. YOU ALWAYS KNOW A SYNTHETIC. YOU ALWAYS KNOW A SYNTHETIC. YOU ALWAYS KNOW A SYNTHETIC. YOU ALWAYS KNOW A SYNTHETIC."
   components:
   - type: Sprite
-    state: working_joe
+    state: synthetic
 
 - type: entity
   parent: CMPosterBase
@@ -367,12 +367,12 @@
 
 - type: entity
   parent: CMPosterBase
-  id: CMPosterPepsi
-  name: "Pepsi Cola"
-  description: "This poster depicts the logo for Pepsi Cola. Pepsi is a soft drink that never really made it off of Earth. It's odd to see a poster advertising it way out here. Maybe someone just likes the logo. They've claimed to be the taste of a new generation for about 200 years."
+  id: CMPosterBepis
+  name: "Bepis Cola"
+  description: "This poster depicts the logo for Bepis Cola. Bepis is a soft drink that never really made it off of Earth. It's odd to see a poster advertising it way out here. Maybe someone just likes the logo. They've claimed to be the taste of a new generation for about 200 years."
   components:
   - type: Sprite
-    state: pepsi
+    state: bepis
 
 - type: entity
   parent: CMPosterBase
