@@ -3,7 +3,7 @@ using Content.Shared._CM14.Xenos.Hugger;
 
 namespace Content.Server._CM14.Xenos;
 
-public sealed class XenoHuggerEmoteSystem : EntitySystem
+public sealed class VictimHuggedEmoteSystem : EntitySystem
 {
     [Dependency] private readonly ChatSystem _chat = default!;
 
@@ -11,10 +11,10 @@ public sealed class XenoHuggerEmoteSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<VictimHuggedComponent, VictimHuggedEmoteEvent>(OnDoEmote);
+        SubscribeLocalEvent<VictimHuggedComponent, VictimHuggedEmoteEvent>(OnEmote);
     }
 
-    private void OnDoEmote(Entity<VictimHuggedComponent> ent, ref VictimHuggedEmoteEvent args)
+    private void OnEmote(Entity<VictimHuggedComponent> ent, ref VictimHuggedEmoteEvent args)
     {
         _chat.TryEmoteWithChat(ent, args.Emote);
     }

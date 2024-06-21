@@ -441,6 +441,9 @@ public abstract class SharedXenoHuggerSystem : EntitySystem
     // Shakes chances decrease as symptom stages progress, and they get longer
     private void InfectionShakes(EntityUid victim, VictimHuggedComponent hugged, TimeSpan knockdownTime)
     {
+        // Don't activate when unconscious
+        if (_mobState.IsIncapacitated(victim))
+            return;
         //TODO Minor limb damage and causes pain
         _stun.TryParalyze(victim, knockdownTime, false);
         _jitter.DoJitter(victim, hugged.JitterTime, false);
