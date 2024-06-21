@@ -26,3 +26,15 @@
       state: icon_on
     event: !type:ToggleActionEvent
     useDelay: 0.25
+
+- type: entity
+  parent: ActionMarineBase
+  id: CMActionToggleAttachable
+  name: Toggle Attachable
+  description: Toggle an attachable. If you're seeing this, someone forgot to set the description properly.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _CM14/Actions/scope_actions.rsi
+      state: sniperscope
+    event: !type:AttachableToggleActionEvent

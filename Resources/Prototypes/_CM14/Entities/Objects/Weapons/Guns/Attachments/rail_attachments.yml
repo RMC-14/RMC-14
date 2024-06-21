@@ -5,6 +5,83 @@
   components:
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Attachments/rail.rsi
+  - type: Tag
+    tags:
+    - CMAttachableRail
+
+- type: entity
+  parent: CMRailAttachmentBase
+  id: CMAttachmentRailFlashlight
+  name: rail flashlight
+  description: A flashlight, for rails, on guns. Can be toggled on and off. A better light source than standard M3 pattern armor lights.
+  components:
+  - type: ToggleableLightVisuals
+    spriteLayer: light
+  - type: PointLight
+    enabled: false
+    radius: 5
+    softness: 5
+    autoRot: true
+    netsync: false
+  - type: HandheldLight
+    addPrefix: false
+    blinkingBehaviourId: blinking
+    radiatingBehaviourId: radiating
+  - type: LightBehaviour
+    behaviours:
+    - !type:FadeBehaviour
+      id: radiating
+      interpolate: Linear
+      maxDuration: 2.0
+      startValue: 3.0
+      endValue: 2.0
+      isLooped: true
+      property: Radius
+      enabled: false
+      reverseWhenFinished: true
+    - !type:PulseBehaviour
+      id: blinking
+      interpolate: Nearest
+      maxDuration: 1.0
+      minValue: 0.1
+      maxValue: 2.0
+      isLooped: true
+      property: Radius
+      enabled: false
+  - type: Battery
+    maxCharge: 10
+    startingCharge: 10
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 3
+  - type: Sprite
+    layers:
+    - state: flashlight
+    - state: flashlight-on
+      shader: unshaded
+      visible: false
+      map: [ "light" ]
+  - type: Item
+    sprite: _CM14/Objects/Weapons/Guns/Attachments/rail.rsi
+  - type: Appearance
+  - type: AttachableToggleable
+    attachedOnly: true
+    icon:
+      sprite: _CM14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: flashlight
+    iconActive:
+      sprite: _CM14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: flashlight-on
+    actionName: Activate Rail Flashlight
+    actionDesc: Can be toggled on and off. A better light source than standard M3 pattern armor lights.
+  - type: AttachableVisuals
+    showActive: true
+  - type: AttachableToggleableSimpleActivate
+  - type: Tag
+    tags:
+    - CMAttachableRail
+    - CMAttachableFlashlight
+    - Flashlight
 
 - type: entity
   parent: CMRailAttachmentBase
@@ -28,10 +105,30 @@
   parent: CMRailAttachmentBase
   id: CMAttachmentB8SmartScope
   name: B8 smart-scope
-  description: An experimental B8 Smart-Scope. Based on the technologies used in the Smart Gun by ARMAT, this sight has integrated IFF systems. It can only attach to the M4RA Battle Rifle and M44 Combat Revolver.
+  description: An experimental B8 Smart-Scope. Based on the technologies used in the Smart Gun by ARMAT, this sight has integrated IFF systems. It can only attach to the M4RA Battle Rifle. # TODO CM14 and M44 Combat Revolver.
   components:
   - type: Sprite
     state: iffbarrel
+  - type: Tag
+    tags:
+    - CMAttachableRail
+    - CMAttachableSmartScope
+  - type: AttachableToggleable
+    actionId: CMActionToggleScope
+    attachedOnly: true
+    icon:
+      sprite: _CM14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: iffbarrel
+    actionName: Toggle B8 Smart-Scope
+    actionDesc: Lets you see further and shoot through your fellow marines without harming them.
+  - type: AttachableVisuals
+    offset: 0.29, -0.045
+  - type: Scope
+    zoom: 1
+    offset: 12
+    requireWielding: true
+    attachment: true
+  - type: AttachableIFF
 
 - type: entity
   parent: CMRailAttachmentBase
@@ -59,3 +156,12 @@
   components:
   - type: Sprite
     state: sniperscope
+
+- type: Tag
+  id: CMAttachableRail
+
+- type: Tag
+  id: CMAttachableFlashlight
+
+- type: Tag
+  id: CMAttachableSmartScope

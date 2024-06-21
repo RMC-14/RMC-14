@@ -14,6 +14,10 @@ public sealed class CMKeyFunctions
     public static readonly BoundKeyFunction MappingCancelEraseDecal = "MappingCancelEraseDecal";
     public static readonly BoundKeyFunction MappingOpenContextMenu = "MappingOpenContextMenu";
 
+    public static readonly BoundKeyFunction CMActivateAttachableBarrel = "CMActivateAttachableBarrel";
+    public static readonly BoundKeyFunction CMActivateAttachableRail = "CMActivateAttachableRail";
+    public static readonly BoundKeyFunction CMActivateAttachableStock = "CMActivateAttachableStock";
+    public static readonly BoundKeyFunction CMActivateAttachableUnderbarrel = "CMActivateAttachableUnderbarrel";
     public static readonly BoundKeyFunction CMUniqueAction = "CMUniqueAction";
     public static readonly BoundKeyFunction CMHolsterPrimary = "CMHolsterPrimary";
     public static readonly BoundKeyFunction CMHolsterSecondary = "CMHolsterSecondary";

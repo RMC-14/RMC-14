@@ -146,7 +146,7 @@ public sealed class CMGunSystem : EntitySystem
             if (!_projectileQuery.TryGetComponent(projectile, out var comp))
                 continue;
 
-            comp.Damage *= ent.Comp.Multiplier;
+            comp.Damage *= ent.Comp.ModifiedMultiplier;
         }
     }
 
@@ -208,6 +208,16 @@ public sealed class CMGunSystem : EntitySystem
 
         user = (container.Owner, skills);
         return true;
+    }
+
+    public void RefreshGunDamageMultiplier(Entity<GunDamageModifierComponent?> gun)
+    {
+        gun.Comp = EnsureComp<GunDamageModifierComponent>(gun);
+
+        var ev = new GetGunDamageModifierEvent(gun.Comp.Multiplier);
+        RaiseLocalEvent(gun, ref ev);
+
+        gun.Comp.ModifiedMultiplier = ev.Multiplier;
     }
 
     public override void Update(float frameTime)
