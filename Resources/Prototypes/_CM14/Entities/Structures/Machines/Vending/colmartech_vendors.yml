@@ -89,7 +89,7 @@
         amount: 10
       - id: CMUSCMFlask
         amount: 5
-      - id: CMWYFlask
+      - id: CMWEYAFlask
         amount: 5
 
 - type: entity

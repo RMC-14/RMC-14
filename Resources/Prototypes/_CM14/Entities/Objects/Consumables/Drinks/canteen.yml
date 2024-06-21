@@ -59,9 +59,9 @@
 
 - type: entity
   parent: CMCanteenBase
-  id: CMWYFlask
-  name: Weyland-Yutani flask
-  description: A metal flask embossed with Weyland-Yutani's signature logo that some corporate bootlicker probably ordered to be stocked in USS military vessels' canteen vendors.
+  id: CMWEYAFlask
+  name: We-Ya flask
+  description: A metal flask embossed with We-Ya's signature logo that some corporate bootlicker probably ordered to be stocked in USS military vessels' canteen vendors.
   components:
   - type: Sprite
-    state: flask_wy
+    state: flask_we_ya

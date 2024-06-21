@@ -29,7 +29,7 @@
   parent: CMBaseWeaponRifle
   name: M41A pulse rifle MK2
   id: WeaponRifleM41A
-  description: The standard issue rifle of the Colonial Marines. Commonly carried by most combat personnel. Uses 10x24mm caseless ammunition.
+  description: The standard issue rifle of the CM. Commonly carried by most combat personnel. Uses 10x24mm caseless ammunition.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Weapons/Guns/Rifles/m41a.rsi

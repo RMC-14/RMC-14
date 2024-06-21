@@ -22357,7 +22357,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 98.5,2.5
       parent: 2
-- proto: CMDrinkWYWaterBottle30
+- proto: CMDrinkWEYAWaterBottle30
   entities:
   - uid: 9059
     components:

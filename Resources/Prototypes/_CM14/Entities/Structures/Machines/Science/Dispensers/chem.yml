@@ -2,7 +2,7 @@
   parent: ChemDispenser
   id: CMDispenserChem
   name: chemical dispenser
-  description: A complex machine for mixing elements into chemicals. A Wey-Yu product.
+  description: A complex machine for mixing elements into chemicals. A We-Ya product.
   components:
   - type: Sprite
     sprite: _CM14/Structures/Machines/Science/dispenser.rsi

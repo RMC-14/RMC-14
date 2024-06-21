@@ -1,4 +1,4 @@
-﻿cm-guide-entry-cm14 = Colonial Marines 14
+﻿cm-guide-entry-cm14 = CM14
 
 cm-guide-entry-rules = Rules
 cm-guide-entry-rules-ban-types = Ban Types

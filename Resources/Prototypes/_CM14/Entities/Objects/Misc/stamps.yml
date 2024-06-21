@@ -118,15 +118,15 @@
 
 - type: entity
   parent: CMStampBase
-  id: CMStampWeyYu
-  name: WY rubber stamp
+  id: CMStampWeYa
+  name: WEYA rubber stamp
   components:
   - type: Sprite
-    state: stamp-weyyu
+    state: stamp-we_ya
   - type: Stamp
-    stampedName: stamp-component-stamped-name-cm-weyyu
+    stampedName: stamp-component-stamped-name-cm-we-ya
     stampedColor: "#996600"
-    stampState: "paper_stamp-weyyu"
+    stampState: "paper_stamp-we_ya"
 
 - type: entity
   parent: CMStampBase
