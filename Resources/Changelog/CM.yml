@@ -1366,5 +1366,15 @@
   id: 164
   time: '2024-06-18T23:44:23.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2531
+- author: Sigil
+  changes:
+  - message: Added the systems for attachments.
+    type: Add
+  - message: Added the extended barrel, recoil compensator, suppressor, rail flashlight,
+      b8 smart-scope and underbarrel shotgun.
+    type: Add
+  id: 165
+  time: '2024-06-21T01:22:50.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2467
 Name: CM
 Order: -1
