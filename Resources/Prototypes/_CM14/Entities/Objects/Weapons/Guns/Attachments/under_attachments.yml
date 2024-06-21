@@ -90,6 +90,9 @@
   - type: Gun
     soundGunshot:
       path: /Audio/_CM14/Weapons/Guns/Gunshots/gun_shotgun_u7.ogg
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
   - type: BallisticAmmoProvider
     cycleable: false
     whitelist:
