@@ -122,7 +122,7 @@
   color: "#c23c07"
   longRange: true
 
-# Non USCM
+# Non Marine
 - type: radioChannel
   id: Colony
   name: chat-radio-colony
