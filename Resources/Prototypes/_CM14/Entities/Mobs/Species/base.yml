@@ -108,7 +108,7 @@
         type: CMSurgeryBui
       enum.HolocardChangeUIKey.Key:
         type: HolocardChangeBoundUserInterface
-        interactionRange: 15
+        interactionRange: 0
   - type: Huggable
   - type: Tackleable
   - type: Tackle

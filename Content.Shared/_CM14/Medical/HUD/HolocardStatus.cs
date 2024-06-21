@@ -1,11 +1,13 @@
+using Robust.Shared.Serialization;
 
-namespace Content.Shared._CM14.Medical;
+namespace Content.Shared._CM14.Medical.HUD;
 
-public enum HolocardStaus : byte
+[Serializable, NetSerializable]
+public enum HolocardStatus : byte
 {
     None,
     Urgent,
     Emergency,
     Xeno,
-    Permadead
+    Permadead,
 }

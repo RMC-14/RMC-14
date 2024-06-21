@@ -1,9 +1,10 @@
-using System.Globalization;
-using Content.Client._CM14.Medical.HUD.Holocard;
+﻿using System.Globalization;
+using Content.Client._CM14.Medical.HUD;
 using Content.Client.Message;
-using Content.Shared._CM14.Medical.HUD.Events;
+using Content.Shared._CM14.Marines.Skills;
+using Content.Shared._CM14.Medical.HUD;
 using Content.Shared._CM14.Medical.HUD.Components;
-using Content.Shared._CM14.Medical.Systems;
+using Content.Shared._CM14.Medical.HUD.Systems;
 using Content.Shared._CM14.Medical.Scanner;
 using Content.Shared._CM14.Medical.Wounds;
 using Content.Shared.Chemistry.Reagent;
@@ -17,7 +18,6 @@ using Robust.Client.Player;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using Content.Shared._CM14.Marines.Skills;
 
 namespace Content.Client._CM14.Medical.Scanner;
 
@@ -27,16 +27,17 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
     [Dependency] private readonly IEntityManager _entities = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly HolocardSystem _holocard = default!;
 
     [ViewVariables]
     private HealthScannerWindow? _window;
     private NetEntity _lastTarget;
 
+    private readonly ShowHolocardIconsSystem _holocardIcons;
     private readonly SharedWoundsSystem _wounds;
 
     public HealthScannerBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
+        _holocardIcons = _entities.System<ShowHolocardIconsSystem>();
         _wounds = _entities.System<SharedWoundsSystem>();
     }
 
@@ -90,7 +91,7 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
 
             _window.ChangeHolocardButton.Text = Loc.GetString("ui-health-scanner-holocard-change");
             _window.ChangeHolocardButton.OnPressed += OpenChangeHolocardUI;
-            if (_player.LocalEntity is EntityUid viewer &&
+            if (_player.LocalEntity is { } viewer &&
                 _entities.TryGetComponent(viewer, out SkillsComponent? skills) &&
                 skills.Skills.Medical >= HolocardSystem.MinimumRequiredMedicalSkill)
             {
@@ -103,7 +104,7 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
                 _window.ChangeHolocardButton.ToolTip = Loc.GetString("ui-holocard-change-insufficient-skill");
             }
             if (_entities.TryGetComponent(target, out HolocardStateComponent? holocardComponent) &&
-            _holocard.TryGetDescription((target, holocardComponent), out var description))
+                _holocardIcons.TryGetDescription((target, holocardComponent), out var description))
             {
                 _window.HolocardDescription.Text = description;
             }
@@ -169,10 +170,8 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
 
     private void OpenChangeHolocardUI(BaseButton.ButtonEventArgs obj)
     {
-        if (_player.LocalEntity is EntityUid viewer)
-        {
+        if (_player.LocalEntity is { } viewer)
             SendMessage(new OpenChangeHolocardUIEvent(_entities.GetNetEntity(viewer), _lastTarget));
-        }
     }
 
     private void AddGroup(Entity<DamageableComponent> damageable, RichTextLabel label, Color color, ProtoId<DamageGroupPrototype> group, string? labelStr = null)

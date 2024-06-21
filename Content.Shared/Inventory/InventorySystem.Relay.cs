@@ -1,6 +1,3 @@
-using Content.Shared._CM14.Medical.CPR;
-using Content.Shared._CM14.Medical.HUD.Systems;
-using Content.Shared._CM14.Xenos.Projectile.Spit.Slowing;
 using Content.Shared.Chemistry;
 using Content.Shared.Damage;
 using Content.Shared.Electrocution;
@@ -43,8 +40,6 @@ public partial class InventorySystem
         SubscribeLocalEvent<InventoryComponent, GetEyeProtectionEvent>(RelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, GetBlurEvent>(RelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, SolutionScanEvent>(RelayInventoryEvent);
-        //CM-14: Holocard Scanner
-        SubscribeLocalEvent<InventoryComponent, HolocardScanEvent>(RelayInventoryEvent);
 
         // ComponentActivatedClientSystems
         SubscribeLocalEvent<InventoryComponent, RefreshEquipmentHudEvent<ShowJobIconsComponent>>(RelayInventoryEvent);
