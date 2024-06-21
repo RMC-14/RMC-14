@@ -57,7 +57,7 @@ public abstract class SharedStorageSystem : EntitySystem
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
     [Dependency] private   readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] protected readonly UseDelaySystem UseDelay = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private   readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] protected readonly CMStorageSystem CMStorage = default!;
 
     private EntityQuery<ItemComponent> _itemQuery;
@@ -820,12 +820,14 @@ public abstract class SharedStorageSystem : EntitySystem
         var used = GetCumulativeItemAreas((uid, storage));
 
         var isOpen = _ui.IsUiOpen(entity.Owner, StorageComponent.StorageUiKey.Key);
+        var isEmpty = used == 0;
 
         _appearance.SetData(uid, StorageVisuals.StorageUsed, used, appearance);
         _appearance.SetData(uid, StorageVisuals.Capacity, capacity, appearance);
         _appearance.SetData(uid, StorageVisuals.Open, isOpen, appearance);
         _appearance.SetData(uid, SharedBagOpenVisuals.BagState, isOpen ? SharedBagState.Open : SharedBagState.Closed, appearance);
         _appearance.SetData(uid, StackVisuals.Hide, !isOpen, appearance);
+        _appearance.SetData(uid, SharedEmptyStorageVisuals.StorageState, isEmpty ? SharedStorageState.Empty : SharedStorageState.NotEmpty, appearance);
     }
 
     /// <summary>
