@@ -144,7 +144,9 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
     private void OnGunGunShot(Entity<GunScopingComponent> ent, ref GunShotEvent args)
     {
-        UnscopeGun(ent);
+        var dir = Transform(args.User).LocalRotation.GetCardinalDir();
+        if (TryComp(ent.Comp.Scope, out ScopeComponent? scope) && scope.ScopingDirection != dir)
+            UnscopeGun(ent);
     }
 
     private bool CanScopePopup(Entity<ScopeComponent> scope, EntityUid user)
