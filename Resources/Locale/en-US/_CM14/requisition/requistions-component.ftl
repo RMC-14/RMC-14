@@ -1,5 +1,5 @@
 # Requisition Computer
-requisition-paperwork-receiver-name = USCM Logistics Branch
+requisition-paperwork-receiver-name = Logistics Branch
 requisition-paperwork-reward-message = Confirmation Received! Transfered ${$amount} from budget surplus
 
 # Requisition Invoice
