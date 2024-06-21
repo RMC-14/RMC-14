@@ -15,7 +15,7 @@
       map: [ "enum.GunVisualLayers.Mag" ]
     - sprite: _CM14/Objects/Weapons/Guns/Attachments/barrel.rsi
       state: sniperbarrel
-      offset: 0.75, 0.1
+      offset: 0.715, 0.025
   - type: Item
     size: Large
   - type: Clothing
