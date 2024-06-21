@@ -1,4 +1,4 @@
-<scanner:HealthScannerWindow
+﻿<scanner:HealthScannerWindow
     xmlns="https://spacestation14.io"
     xmlns:scanner="clr-namespace:Content.Client._CM14.Medical.Scanner"
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
@@ -46,8 +46,9 @@
             </PanelContainer>
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
-            <Button Name="ChangeHolocardButton"  Access="Public" Margin ="0 4 20 4" />
+            <Label Text="Holocard:" MinWidth="80" Modulate="#5B88B0" />
             <Label Name="HolocardDescription" Access="Public" Align="Right" MinWidth="160"/>
+            <Button Name="ChangeHolocardButton" Access="Public" StyleClasses="OpenBoth" Margin="5 0 0 0" />
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
             <Label Name="BloodTypeLabel" Access="Public" MinWidth="160" Modulate="#5B88B0" />
