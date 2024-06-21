@@ -51,6 +51,8 @@
         whitelist:
           tags:
           - CMMagazineSMGM39
+          - CMMagazineSMGM39AP
+          - CMMagazineSMGM39Ext
   - type: AttachableHolder
     slots:
       cm-aslot-stock:

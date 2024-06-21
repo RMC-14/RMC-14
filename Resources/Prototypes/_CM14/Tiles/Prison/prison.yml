@@ -24,8 +24,8 @@
   - 1.0
 
 - type: tile
-  id: CMFloorSteelPrisonPlating
-  name: tiles-cm-plating
+  parent: CMFloorPlating
+  id: CMFloorPlatingPrison
   sprite: /Textures/_CM14/Tiles/prison/plating.png
   baseTurf: Lattice
   isSubfloor: true
@@ -35,13 +35,13 @@
   heatCapacity: 10000
 
 - type: tile
-  parent: CMFloorSteelPrisonPlating
-  id: CMFloorSteelPrisonPlatingScorched
+  parent: CMFloorPlatingPrison
+  id: CMFloorPlatingPrisonScorched
   sprite: /Textures/_CM14/Tiles/prison/panelscorched.png
 
 - type: tile
-  parent: CMFloorSteelPrisonPlating
-  id: CMFloorSteelPrisonPlatingDamaged
+  parent: CMFloorPlatingPrison
+  id: CMFloorPlatingPrisonDamaged
   sprite: /Textures/_CM14/Tiles/prison/platingdmg.png
   variants: 3
   placementVariants:
@@ -81,7 +81,7 @@
 
 - type: tile
   parent: CMFloorSteel
-  id: CMFloorSteelPrisonWhite
+  id: CMFloorSteelPrisonWhiteFull
   name: tiles-cm-white-sterile
   sprite: /Textures/_CM14/Tiles/prison/sterile_white.png
   
