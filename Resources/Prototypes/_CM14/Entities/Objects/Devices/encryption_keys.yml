@@ -50,7 +50,7 @@
   components:
   - type: EncryptionKey
     channels:
-    - WY
+    - WEYA
     defaultChannel: WEYA
   - type: Sprite
     state: we_ya_key
