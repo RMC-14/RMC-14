@@ -1384,5 +1384,12 @@
   id: 166
   time: '2024-06-21T01:24:18.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/2541
+- author: blueDev2
+  changes:
+  - message: Added Holocards
+    type: Add
+  id: 167
+  time: '2024-06-21T03:29:30.0000000+00:00'
+  url: https://github.com/CM-14/CM-14/pull/2544
 Name: CM
 Order: -1
