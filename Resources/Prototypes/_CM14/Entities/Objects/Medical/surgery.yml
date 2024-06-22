@@ -314,6 +314,7 @@
   parent: CMBaseToolSurgery
   id: CMBonesetter
   name: bone setter
+  description: 
   components: # TODO CM14
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/bonesetter.rsi
@@ -367,7 +368,8 @@
 - type: entity
   parent: CMBaseToolSurgery
   id: CMBoneGel
-  name: bone gel
+  name: bottle of bone gel
+  description: A container for bone gel that often needs to be refilled from a specialized machine.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/bone_gel.rsi
