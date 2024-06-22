@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
 using Content.Client.Eui;
 using Content.Shared._CM14.Admin;
-using Content.Shared._CM14.Xenos;
+using Content.Shared._CM14.Xenonids;
 using Content.Shared.Eui;
 using Content.Shared.Humanoid.Prototypes;
 using JetBrains.Annotations;

@@ -21,7 +21,7 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Firearms skill" Text="Each marine role has a different firearms skill. This impacts how accurate they are with guns" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno Queen" Text="Head caste of the xenomorphs" />
-                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Carrier" Text="Carry huggers around, allowing the Hive to impregnate new hosts on the move. Use pheromones to assist fellow Aliens" />
+                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Carrier" Text="Carry parasites around, allowing the Hive to impregnate new hosts on the move. Use pheromones to assist fellow Aliens" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Burrower" Text="Lay the foundations for resin traps in strategic locations or the Hive's flanks. Flank your way around the map with the tunnel ability and dig tunnels to allow for quick transportation of fellow Aliens from the hive to the frontlines" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Lurker" Text="Become the ultimate ambusher. Stalk behind the frontlines and on flanks, wound, capture and kill unsuspecting Marines. Harass support personnel" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Warrior" Text="Fight on the frontlines. Disable and capture lone prey. Punish reckless Marines by flinging them into Alien backlines. Act as one of the Hive's main line combatants" />
@@ -34,7 +34,7 @@
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Runner" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Sentinel" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Defender" />
-                    <controls:RoadmapItem ItemState="Complete" HeaderText="Facehugger" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Parasite" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Larva" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Lesser Drone" />
                 </BoxContainer>

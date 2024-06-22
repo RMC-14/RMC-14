@@ -22,9 +22,9 @@ using Content.Shared._CM14.Marines.HyperSleep;
 using Content.Shared._CM14.Marines.Squads;
 using Content.Shared._CM14.Spawners;
 using Content.Shared._CM14.Weapons.Ranged.IFF;
-using Content.Shared._CM14.Xenos;
-using Content.Shared._CM14.Xenos.Evolution;
-using Content.Shared._CM14.Xenos.Hugger;
+using Content.Shared._CM14.Xenonids;
+using Content.Shared._CM14.Xenonids.Evolution;
+using Content.Shared._CM14.Xenonids.Parasite;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
 using Content.Shared.GameTicking;
@@ -479,7 +479,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             var marinesOnShip = false;
             while (marines.MoveNext(out var marineId, out _, out var mobState, out var xform))
             {
-                if (HasComp<VictimHuggedComponent>(marineId) || HasComp<VictimBurstComponent>(marineId))
+                if (HasComp<VictimInfectedComponent>(marineId) || HasComp<VictimBurstComponent>(marineId))
                     continue;
 
                 if (_mobState.IsAlive(marineId, mobState))

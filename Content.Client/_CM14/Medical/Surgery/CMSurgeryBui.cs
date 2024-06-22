@@ -1,4 +1,4 @@
-﻿using Content.Client._CM14.Xenos.UI;
+﻿using Content.Client._CM14.Xenonids.UI;
 using Content.Client.Administration.UI.CustomControls;
 using Content.Shared._CM14.Medical.Surgery;
 using Content.Shared.Body.Part;

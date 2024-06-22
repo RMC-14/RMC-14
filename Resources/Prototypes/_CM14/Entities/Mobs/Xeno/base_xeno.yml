@@ -199,7 +199,7 @@
       components:
       - Xeno
       - XenoEgg
-      - Huggable
+      - Infectable
   - type: BlockPullingDead
   - type: XenoFriendly
   - type: Undisposable

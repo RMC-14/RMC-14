@@ -7,7 +7,6 @@ using Content.Shared._CM14.Medical.HUD.Components;
 using Content.Shared._CM14.Medical.HUD.Systems;
 using Content.Shared._CM14.Medical.Scanner;
 using Content.Shared._CM14.Medical.Wounds;
-using Content.Shared._CM14.Xenos.Hugger;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;

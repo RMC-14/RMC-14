@@ -1,5 +1,5 @@
 ﻿using Content.Server.Chat.Managers;
-using Content.Shared._CM14.Xenos.Announce;
+using Content.Shared._CM14.Xenonids.Announce;
 using Content.Shared.Chat;
 using Content.Shared.Popups;
 using Robust.Server.Audio;

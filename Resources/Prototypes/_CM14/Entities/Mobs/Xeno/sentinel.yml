@@ -8,7 +8,7 @@
   description: A slithery, spitting kind of alien.
   components:
   - type: Sprite
-    sprite: _CM14/Mobs/Xenos/Sentinel/sentinel.rsi
+    sprite: _CM14/Mobs/Xenonids/Sentinel/sentinel.rsi
   - type: MobState
     allowedStates:
     - Alive

@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 using Content.Shared._CM14.NightVision;
-using Content.Shared._CM14.Xenos.Construction.Nest;
+using Content.Shared._CM14.Xenonids.Construction.Nest;
 using Content.Shared.Mobs.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;

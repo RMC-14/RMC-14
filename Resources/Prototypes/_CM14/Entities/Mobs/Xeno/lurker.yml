@@ -8,7 +8,7 @@
   description: A beefy, fast alien with sharp claws.
   components:
   - type: Sprite
-    sprite: _CM14/Mobs/Xenos/Lurker/lurker.rsi
+    sprite: _CM14/Mobs/Xenonids/Lurker/lurker.rsi
   - type: MobState
     allowedStates:
     - Alive

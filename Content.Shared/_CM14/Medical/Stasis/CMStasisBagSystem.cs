@@ -1,5 +1,5 @@
 ﻿using Content.Shared._CM14.Medical.Wounds;
-using Content.Shared._CM14.Xenos.Hugger;
+using Content.Shared._CM14.Xenonids.Parasite;
 using Content.Shared.Body.Organ;
 using Robust.Shared.Containers;
 
@@ -7,7 +7,7 @@ namespace Content.Shared._CM14.Medical.Stasis;
 
 public sealed class CMStasisBagSystem : EntitySystem
 {
-    [Dependency] private readonly SharedXenoHuggerSystem _hugger = default!;
+    [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
 
     private EntityQuery<OrganComponent> _organQuery;
 
@@ -23,7 +23,7 @@ public sealed class CMStasisBagSystem : EntitySystem
         SubscribeLocalEvent<CMInStasisComponent, CMMetabolizeAttemptEvent>(OnBloodstreamMetabolizeAttempt);
         SubscribeLocalEvent<CMInStasisComponent, MapInitEvent>(OnInStasisMapInit);
         SubscribeLocalEvent<CMInStasisComponent, ComponentRemove>(OnInStasisRemove);
-        SubscribeLocalEvent<CMInStasisComponent, GetHuggedIncubationMultiplierEvent>(OnInStasisGetHuggedIncubationMultiplier);
+        SubscribeLocalEvent<CMInStasisComponent, GetInfectedIncubationMultiplierEvent>(OnInStasisGetInfectedIncubationMultiplier);
         SubscribeLocalEvent<CMInStasisComponent, CMBleedAttemptEvent>(OnInStasisBleedAttempt);
     }
 
@@ -44,15 +44,15 @@ public sealed class CMStasisBagSystem : EntitySystem
 
     private void OnInStasisMapInit(Entity<CMInStasisComponent> ent, ref MapInitEvent args)
     {
-        _hugger.RefreshIncubationMultipliers(ent.Owner);
+        _parasite.RefreshIncubationMultipliers(ent.Owner);
     }
 
     private void OnInStasisRemove(Entity<CMInStasisComponent> ent, ref ComponentRemove args)
     {
-        _hugger.RefreshIncubationMultipliers(ent.Owner);
+        _parasite.RefreshIncubationMultipliers(ent.Owner);
     }
 
-    private void OnInStasisGetHuggedIncubationMultiplier(Entity<CMInStasisComponent> ent, ref GetHuggedIncubationMultiplierEvent args)
+    private void OnInStasisGetInfectedIncubationMultiplier(Entity<CMInStasisComponent> ent, ref GetInfectedIncubationMultiplierEvent args)
     {
         if (ent.Comp.Running)
             args.Multiply(ent.Comp.IncubationMultiplier);

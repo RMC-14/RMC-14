@@ -8,7 +8,7 @@
   description: A builder of really big hives.
   components:
   - type: Sprite
-    sprite: _CM14/Mobs/Xenos/Hivelord/hivelord.rsi
+    sprite: _CM14/Mobs/Xenonids/Hivelord/hivelord.rsi
   - type: MobState
     allowedStates:
     - Alive
@@ -69,7 +69,7 @@
   - type: WhitelistPickup
     whitelist:
       components:
-      - XenoHugger
+      - XenoParasite
       - XenoEgg
   - type: MultiHandedHolder
     items:

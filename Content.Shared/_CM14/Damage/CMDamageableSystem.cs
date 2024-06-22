@@ -1,6 +1,6 @@
 ﻿using Content.Shared._CM14.Armor;
 using Content.Shared._CM14.Marines.Orders;
-using Content.Shared._CM14.Xenos.Pheromones;
+using Content.Shared._CM14.Xenonids.Pheromones;
 using Content.Shared.Armor;
 using Content.Shared.Blocking;
 using Content.Shared.Damage;

@@ -8,7 +8,7 @@
   description: A beefy alien with sharp claws.
   components:
   - type: Sprite
-    sprite: _CM14/Mobs/Xenos/Burrower/burrower.rsi
+    sprite: _CM14/Mobs/Xenonids/Burrower/burrower.rsi
   - type: MobState
     allowedStates:
     - Alive

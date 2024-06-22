@@ -3,7 +3,7 @@ using Content.Shared._CM14.Marines.Skills;
 using Content.Shared._CM14.Medical.Surgery.Conditions;
 using Content.Shared._CM14.Medical.Surgery.Effects.Complete;
 using Content.Shared._CM14.Medical.Surgery.Steps.Parts;
-using Content.Shared._CM14.Xenos.Hugger;
+using Content.Shared._CM14.Xenonids.Parasite;
 using Content.Shared.Body.Part;
 using Content.Shared.DoAfter;
 using Content.Shared.GameTicking;
@@ -91,7 +91,7 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
 
     private void OnLarvaValid(Entity<CMSurgeryLarvaConditionComponent> ent, ref CMSurgeryValidEvent args)
     {
-        if (!HasComp<VictimHuggedComponent>(args.Body))
+        if (!HasComp<VictimInfectedComponent>(args.Body))
             args.Cancelled = true;
     }
 
@@ -103,7 +103,7 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
 
     private void OnRemoveLarva(Entity<CMSurgeryRemoveLarvaComponent> ent, ref CMSurgeryCompletedEvent args)
     {
-        RemCompDeferred<VictimHuggedComponent>(ent);
+        RemCompDeferred<VictimInfectedComponent>(ent);
     }
 
     protected bool IsSurgeryValid(EntityUid body, NetEntity netPart, EntProtoId surgery, EntProtoId stepId, out Entity<CMSurgeryComponent> surgeryEnt, out Entity<BodyPartComponent> part, out EntityUid step)

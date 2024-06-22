@@ -7,12 +7,12 @@
   description: A huge, looming alien creature. The biggest and the baddest.
   components:
   - type: Sprite
-    sprite: _CM14/Mobs/Xenos/Queen/queen.rsi
+    sprite: _CM14/Mobs/Xenonids/Queen/queen.rsi
     layers:
     - map: [ "enum.XenoVisualLayers.Base" ]
       state: alive
     - map: [ "enum.XenoVisualLayers.Ovipositor" ]
-      sprite: _CM14/Mobs/Xenos/Queen/ovipositor.rsi
+      sprite: _CM14/Mobs/Xenonids/Queen/ovipositor.rsi
   - type: MobState
     allowedStates:
     - Alive

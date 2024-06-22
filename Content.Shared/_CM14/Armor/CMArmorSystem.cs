@@ -1,7 +1,7 @@
 ﻿using Content.Shared._CM14.Medical.Surgery;
 using Content.Shared._CM14.Medical.Surgery.Steps;
-using Content.Shared._CM14.Xenos;
-using Content.Shared._CM14.Xenos.Projectile.Spit.Slowing;
+using Content.Shared._CM14.Xenonids;
+using Content.Shared._CM14.Xenonids.Projectile.Spit.Slowing;
 using Content.Shared.Alert;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;

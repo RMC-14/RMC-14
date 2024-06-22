@@ -8,7 +8,7 @@
   description: An alien drone.
   components:
   - type: Sprite
-    sprite: _CM14/Mobs/Xenos/Drone/drone.rsi
+    sprite: _CM14/Mobs/Xenonids/Drone/drone.rsi
   - type: MobState
     allowedStates:
     - Alive
@@ -71,7 +71,7 @@
   - type: WhitelistPickup
     whitelist:
       components:
-      - XenoHugger
+      - XenoParasite
       - XenoEgg
   - type: MultiHandedHolder
     items:

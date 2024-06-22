@@ -8,7 +8,7 @@
   description: A strange-looking alien creature. It carries a number of scuttling jointed crablike creatures.
   components:
   - type: Sprite
-    sprite: _CM14/Mobs/Xenos/Carrier/carrier.rsi
+    sprite: _CM14/Mobs/Xenonids/Carrier/carrier.rsi
   - type: MobState
     allowedStates:
     - Alive
@@ -30,9 +30,9 @@
     - ActionXenoPheromones
     - ActionXenoPlantWeeds
     #    - ActionXenoResinHole
-    #    - ActionXenoThrowFacehugger
+    #    - ActionXenoThrowParasite
     #    - ActionXenoRetrieveEgg
-    #    - ActionXenoHuggerReserve
+    #    - ActionXenoParasiteReserve
     tier: 2
     hudOffset: 0,0.19
     unlockAt: 300 # 5 minutes
@@ -79,5 +79,5 @@
   - type: WhitelistPickup
     whitelist:
       components:
-      - XenoHugger
+      - XenoParasite
       - XenoEgg

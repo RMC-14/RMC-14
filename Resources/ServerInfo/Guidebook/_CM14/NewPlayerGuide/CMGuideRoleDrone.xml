@@ -34,17 +34,17 @@
   </Box>\n
 
   - Our final goal is to protect the Queen and plant her eggs so our hive may grow!
-  - Eggs can be placed on weeds, and contain facehuggers.
-  - Facehuggers can be extracted from the eggs, but be wary that facehuggers have short lifespans away from the weeds!
+  - Eggs can be placed on weeds, and contain parasites.
+  - Parasites can be extracted from the eggs, but be wary that parasites have short lifespans away from the weeds!
 
   <Box>
     <GuideEntityEmbed Entity="CMXenoQueen"/>
     <GuideEntityEmbed Entity="XenoEgg"/>
     <GuideEntityEmbed Entity="XenoWeeds"/>
-    <GuideEntityEmbed Entity="CMXenoHugger"/>
+    <GuideEntityEmbed Entity="CMXenoParasite"/>
   </Box>\n
 
-  - When a facehugger is placed on a living host, a new larva will be born! Rejoice!
+  - When a parasite is placed on a living host, a new larva will be born! Rejoice!
   - Hosts that hold the growing larva are very precious, and should be secured to a resin wall as soon as possible.
   <Box>
     <GuideEntityEmbed Entity="SalvageHumanCorpse"/>

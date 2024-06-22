@@ -8,7 +8,7 @@
   description: An alien drone. Looks... smaller.
   components:
   - type: Sprite
-    sprite: _CM14/Mobs/Xenos/LesserDrone/lesser_drone.rsi
+    sprite: _CM14/Mobs/Xenonids/LesserDrone/lesser_drone.rsi
   - type: MobState
     allowedStates:
     - Alive
@@ -58,7 +58,7 @@
   - type: WhitelistPickup
     whitelist:
       components:
-      - XenoHugger
+      - XenoParasite
       - XenoEgg
   - type: MultiHandedHolder
     items:

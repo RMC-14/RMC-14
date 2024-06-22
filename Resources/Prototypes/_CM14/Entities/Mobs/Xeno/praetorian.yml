@@ -8,7 +8,7 @@
   description: A huge, looming beast of an alien.
   components:
   - type: Sprite
-    sprite: _CM14/Mobs/Xenos/Praetorian/praetorian.rsi
+    sprite: _CM14/Mobs/Xenonids/Praetorian/praetorian.rsi
   - type: MobState
     allowedStates:
     - Alive

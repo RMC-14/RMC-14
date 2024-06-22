@@ -139,7 +139,7 @@
   id: ActionXenoGrowOvipositor
   parent: ActionXenoBase
   name: Grow Ovipositor (700) # TODO CM14 proper plasma costs
-  description: Become immobile and start laying eggs which will produce facehuggers. Has a 5 minute cooldown.
+  description: Become immobile and start laying eggs which will produce parasites. Has a 5 minute cooldown.
   components:
   - type: InstantAction
     itemIconStyle: NoItem

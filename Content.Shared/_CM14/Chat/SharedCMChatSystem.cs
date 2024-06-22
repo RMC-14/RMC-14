@@ -1,5 +1,5 @@
 ﻿using Content.Shared._CM14.Marines;
-using Content.Shared._CM14.Xenos;
+using Content.Shared._CM14.Xenonids;
 using Content.Shared.Chat;
 
 namespace Content.Shared._CM14.Chat;

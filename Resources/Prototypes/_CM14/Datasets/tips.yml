@@ -93,8 +93,8 @@
   - "You may rest immediately during a pounce to pounce straight through mobs. It's not very practical or useful though."
   - "Pouncing someone who is buckled to a chair will still stun them, but you won't jump into their tile and they will not be knocked to the ground."
   - "Star shell dust from said grenades is just as meltable as normal flares."
-  - "Playable Facehuggers can leap onto targets with a one-second windup, but this will only infect them if they are adjacent to it.  Otherwise, it will simply knock them down for a small duration."
-  - "As a Facehugger, you cannot talk in hivemind, but you can still open Hive Status and overwatch your sisters. This can be useful if you're locating other Facehuggers, flanker castes, or trying to learn from experienced Facehugger players."
+  - "Playable Parasites can leap onto targets with a one-second windup, but this will only infect them if they are adjacent to it.  Otherwise, it will simply knock them down for a small duration."
+  - "As a Parasite, you cannot talk in hivemind, but you can still open Hive Status and overwatch your sisters. This can be useful if you're locating other Parasites, flanker castes, or trying to learn from experienced Parasite players."
 # TODO CM14  - "Shift-clicking the Queen indicator will tell you what area you are in, on the map."
   - "As a Ravager your abilities become greatly enhanced when you empower with three or more people around you."
 # Meta Tips
@@ -191,7 +191,7 @@
   #- If your weapon has a bayonet, you can manually pry open unpowered doors by clicking on them with the gun. Click on the door again to close it. UPP bayonets can pry them open quicker.
   #- Items on the floor can be shot. Shoot a poorly thrown HEDP away to save your buddies!
   #- You can hold a bayonet or throwing knife on your mask slot. Always be prepared.
-  #- Xenomorphs can't apply huggers to marines if they're on fire.
+  #- Xenomorphs can't apply parasites to marines if they're on fire.
   #- Dragging a Nanomed onto yourself instantly gives a Health Analyzer report. Always know what's wrong with you.
   #- Splints slow you down. Remove them after your bones are healed by using the Remove Your Splints verb.
   # Blood loss can lead to hunger, which can slow you down. Make sure you're always full after taking a beating.

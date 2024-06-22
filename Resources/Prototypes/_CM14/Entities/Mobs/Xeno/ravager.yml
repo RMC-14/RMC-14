@@ -8,7 +8,7 @@
   description: A huge, nasty red alien with enormous scythed claws.
   components:
   - type: Sprite
-    sprite: _CM14/Mobs/Xenos/Ravager/ravager.rsi
+    sprite: _CM14/Mobs/Xenonids/Ravager/ravager.rsi
   - type: MobState
     allowedStates:
     - Alive

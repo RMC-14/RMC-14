@@ -8,7 +8,7 @@
   description: A huge alien with an enormous armored crest.
   components:
   - type: Sprite
-    sprite: _CM14/Mobs/Xenos/Crusher/crusher.rsi
+    sprite: _CM14/Mobs/Xenonids/Crusher/crusher.rsi
   - type: MobState
     allowedStates:
     - Alive

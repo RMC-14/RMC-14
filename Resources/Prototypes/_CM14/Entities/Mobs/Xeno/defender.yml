@@ -8,7 +8,7 @@
   description: A alien with an armored crest.
   components:
   - type: Sprite
-    sprite: _CM14/Mobs/Xenos/Defender/defender.rsi
+    sprite: _CM14/Mobs/Xenonids/Defender/defender.rsi
   - type: MobState
     allowedStates:
     - Alive

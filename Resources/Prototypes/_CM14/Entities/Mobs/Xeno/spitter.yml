@@ -8,7 +8,7 @@
   description: A gross, oozing alien of some kind.
   components:
   - type: Sprite
-    sprite: _CM14/Mobs/Xenos/Spitter/spitter.rsi
+    sprite: _CM14/Mobs/Xenonids/Spitter/spitter.rsi
   - type: MobState
     allowedStates:
     - Alive

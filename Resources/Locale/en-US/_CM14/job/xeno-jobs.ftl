@@ -19,8 +19,8 @@ CMJobXenoDrone = Drone
 cm-job-name-xeno-hivelord = Hivelord
 CMJobXenoHivelord = Hivelord
 
-cm-job-name-xeno-hugger = Hugger
-CMJobXenoHugger = Hugger
+cm-job-name-xeno-parasite = Parasite
+CMJobXenoParasite = Parasite
 
 cm-job-name-xeno-larva = Larva
 CMJobXenoLarva = Larva

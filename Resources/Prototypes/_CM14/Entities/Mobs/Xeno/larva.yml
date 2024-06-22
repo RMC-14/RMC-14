@@ -6,7 +6,7 @@
   name: Larva
   components:
   - type: Sprite
-    sprite: _CM14/Mobs/Xenos/Larva/larva.rsi
+    sprite: _CM14/Mobs/Xenonids/Larva/larva.rsi
   - type: MobState
     allowedStates:
     - Alive

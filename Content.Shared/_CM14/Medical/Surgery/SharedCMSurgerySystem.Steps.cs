@@ -2,7 +2,7 @@
 using Content.Shared._CM14.Medical.Surgery.Conditions;
 using Content.Shared._CM14.Medical.Surgery.Steps;
 using Content.Shared._CM14.Medical.Surgery.Tools;
-using Content.Shared._CM14.Xenos.Hugger;
+using Content.Shared._CM14.Xenonids.Parasite;
 using Content.Shared.Body.Part;
 using Content.Shared.Buckle.Components;
 using Content.Shared.DoAfter;
@@ -167,16 +167,16 @@ public abstract partial class SharedCMSurgerySystem
 
     private void OnCutLarvaRootsStep(Entity<CMSurgeryCutLarvaRootsStepComponent> ent, ref CMSurgeryStepEvent args)
     {
-        if (TryComp(args.Body, out VictimHuggedComponent? hugged) &&
-            hugged.BurstAt > _timing.CurTime)
+        if (TryComp(args.Body, out VictimInfectedComponent? infected) &&
+            infected.BurstAt > _timing.CurTime)
         {
-            hugged.RootsCut = true;
+            infected.RootsCut = true;
         }
     }
 
     private void OnCutLarvaRootsCheck(Entity<CMSurgeryCutLarvaRootsStepComponent> ent, ref CMSurgeryStepCompleteCheckEvent args)
     {
-        if (!TryComp(args.Body, out VictimHuggedComponent? hugged) || !hugged.RootsCut)
+        if (!TryComp(args.Body, out VictimInfectedComponent? infected) || !infected.RootsCut)
             args.Cancelled = true;
     }
 

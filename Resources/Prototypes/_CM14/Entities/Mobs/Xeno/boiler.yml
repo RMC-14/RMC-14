@@ -8,7 +8,7 @@
   description: A huge, grotesque xenomorph covered in glowing, oozing acid slime.
   components:
   - type: Sprite
-    sprite: _CM14/Mobs/Xenos/Boiler/boiler.rsi
+    sprite: _CM14/Mobs/Xenonids/Boiler/boiler.rsi
   - type: MobState
     allowedStates:
     - Alive

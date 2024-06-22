@@ -1,4 +1,4 @@
-﻿using Content.Shared._CM14.Xenos;
+﻿using Content.Shared._CM14.Xenonids;
 using Content.Shared.Popups;
 
 namespace Content.Shared._CM14.Light;

@@ -2,7 +2,7 @@
 using Content.Server.Speech.EntitySystems;
 using Content.Shared._CM14.Chat;
 using Content.Shared._CM14.Marines;
-using Content.Shared._CM14.Xenos;
+using Content.Shared._CM14.Xenonids;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 

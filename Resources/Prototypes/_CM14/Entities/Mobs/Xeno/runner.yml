@@ -8,7 +8,7 @@
   description: A small red alien that looks like it could run fairly quickly...
   components:
   - type: Sprite
-    sprite: _CM14/Mobs/Xenos/Runner/runner.rsi
+    sprite: _CM14/Mobs/Xenonids/Runner/runner.rsi
   - type: MobState
     allowedStates:
     - Alive

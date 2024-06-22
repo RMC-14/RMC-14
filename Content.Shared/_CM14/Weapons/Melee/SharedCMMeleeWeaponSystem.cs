@@ -1,4 +1,4 @@
-﻿using Content.Shared._CM14.Xenos;
+﻿using Content.Shared._CM14.Xenonids;
 using Content.Shared.Damage;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Weapons.Melee;

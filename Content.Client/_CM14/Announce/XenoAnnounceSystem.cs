@@ -1,4 +1,4 @@
-﻿using Content.Shared._CM14.Xenos.Announce;
+﻿using Content.Shared._CM14.Xenonids.Announce;
 
 namespace Content.Client._CM14.Announce;
 
