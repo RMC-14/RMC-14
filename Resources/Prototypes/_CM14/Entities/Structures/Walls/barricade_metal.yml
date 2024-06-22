@@ -4,6 +4,7 @@
   id: CMBarricadeBase
   components:
   - type: Anchorable
+  - type: Rotatable
   - type: Appearance
   - type: Fixtures
     fixtures:
