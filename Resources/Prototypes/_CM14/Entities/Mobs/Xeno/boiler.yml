@@ -5,7 +5,7 @@
   - CMXenoFlammable
   id: CMXenoBoiler
   name: Boiler
-  description: A huge, grotesque xenomorph covered in glowing, oozing acid slime.
+  description: A huge, grotesque xenonid covered in glowing, oozing acid slime.
   components:
   - type: Sprite
     sprite: _CM14/Mobs/Xenonids/Boiler/boiler.rsi

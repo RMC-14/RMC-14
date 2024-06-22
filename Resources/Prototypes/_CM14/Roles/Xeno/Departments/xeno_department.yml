@@ -4,7 +4,7 @@
   description: cm-department-Xeno-description
   color: "#8b36a6"
   weight: 100
-  customName: Xenomorph
+  customName: Xenonid
   roles:
   - CMXenoBoiler
   - CMXenoBurrower
@@ -24,4 +24,4 @@
   - CMXenoSentinel
   - CMXenoSpitter
   - CMXenoWarrior
-  - CMXenoSelectableXenomorph
+  - CMXenoSelectableXeno

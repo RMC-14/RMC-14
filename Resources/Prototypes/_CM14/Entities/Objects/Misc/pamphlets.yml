@@ -149,12 +149,12 @@
   name: stained parchment
   description: A yellowed old piece of parchment covered in strange runes from an alien writing system. The letters seem to shift back and forth into place before your eyes.
 
-# gives xenomorph language
+# gives xenonid language
 - type: entity
   parent: CMPamphletLanguage
-  id: CMPamphletLanguageXenomorph
+  id: CMPamphletLanguageXenonid
   name: Xenobiologist's file
-  description: A xenobiologist's document recording and detailing observations on captive Xenomorph communication via vocalisations and pheromones, as well as notes on attempting to reproduce them by human beings.
+  description: A xenobiologist's document recording and detailing observations on captive Xenonid communication via vocalisations and pheromones, as well as notes on attempting to reproduce them by human beings.
 
 # gives primitive language
 - type: entity

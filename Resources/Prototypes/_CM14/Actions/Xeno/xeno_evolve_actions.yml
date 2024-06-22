@@ -2,7 +2,7 @@
   parent: ActionXenoBase
   id: ActionXenoEvolve
   name: Evolve
-  description: Evolve to the next caste of xenomorph.
+  description: Evolve to the next caste of xenonid.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -15,7 +15,7 @@
   parent: CMGuidebookActionXenoBase
   id: CMGuidebookActionXenoEvolve
   name: Evolve
-  description: Evolve to the next caste of xenomorph.
+  description: Evolve to the next caste of xenonid.
   components:
     - type: Sprite
       state: evolve

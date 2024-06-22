@@ -1149,7 +1149,7 @@
   - message: Fixed the xeno hud disappearing when a parasite is held by a xeno in
       view.
     type: Fix
-  - message: Fixed dead xenos showing up the Watch Xenomorph action window.
+  - message: Fixed dead xenos showing up the Watch Xenonid action window.
     type: Fix
   - message: Fixed blood dispensers being unpowered and having upstream blood bags
       instead of cm blood bags.

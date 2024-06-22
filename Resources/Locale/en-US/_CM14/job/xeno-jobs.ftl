@@ -53,14 +53,14 @@ cm-job-name-xeno-warrior = Warrior
 CMJobXenoWarrior = Warrior
 
 # TODO CM14
-department-CMXeno = Xenomorph
+department-CMXeno = Xenonid
 cm-department-Xeno-description = ""
 
-cm-job-name-selectable-xenomorph = Xenomorph
-CMXenoSelectableXenomorph = Xenomorph
+cm-job-name-selectable-xenonid = Xenonid
+CMXenoSelectableXeno = Xenonid
 
 cm-job-supervisors-queen = the Queen
 
-role-timer-xeno-roles = Xenomorph
+role-timer-xeno-roles = Xenonid
 role-timer-xeno-drones = drone and drone evolutions
 role-timer-xeno-tier-three = tier three castes

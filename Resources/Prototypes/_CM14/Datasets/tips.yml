@@ -31,7 +31,7 @@
   - "Check perma-dead marines (skull icon on medhud) for useful gear, such as webbings, AP ammo, or binoculars."
   - "Always check for traps beneath loose objects - it could save your life!"
   - "Bring a fire extinguisher, it might just save someone's life. They can remove flames that block a push, remove acid from other marines, as well as put out people on fire."
-  - "Trading your life for a Xenomorph's is almost always worth it."
+  - "Trading your life for a Xenonid's is almost always worth it."
   - "No round has ever been won behind a barricade. Apart from the ones that have."
   - "Always clear weeds and alien structures as you advance."
   - "Try not to block off pushes when using a flamethrower."
@@ -81,7 +81,7 @@
   - "Moving through pipes is noisy and entering/leaving the vents has a noticeable visual and auditory cue."
   - "If a fellow alien is stunned, be sure to drag them to safety."
   - "Frenzy increases your speed and damage, Recovery increases your health regeneration, and Warding increases the time you have until you bleed out in critical health."
-  - "Remember that, as a Xenomorph, you can fully disable your night-vision. This helps put into perspective how hidden your position is to marines onscreen."
+  - "Remember that, as a Xenonid, you can fully disable your night-vision. This helps put into perspective how hidden your position is to marines onscreen."
   - "You can devour burst corpses in order to transport them to the Spawn Pool or Egg Morpher easier."
   - "The bigger you are, the more time it'll take to enter a tunnel."
   - "Drag yourself onto a hole in a wall as a medium-sized or smaller Xeno to pass through it."
@@ -186,22 +186,22 @@
   #- If another marine is stunned, you can click on them with help intent with an open hand to shake them up faster.
   #- Never place barricades facing each other - Not only does this block bullets, both barricades are damaged at once if one is slashed!
   #- Examine your gun and click \\[See combat statistics\\] to view information such as damage for your weapon.
-  #- Xenomorphs who run while on fire are stunned for some time and emit light. Use that time to catch up and finish them off!
+  #- Xenonids who run while on fire are stunned for some time and emit light. Use that time to catch up and finish them off!
   #- When you have shrapnel embedded, take out your boot knife and use it in your hand to rip them out of your body.
   #- If your weapon has a bayonet, you can manually pry open unpowered doors by clicking on them with the gun. Click on the door again to close it. UPP bayonets can pry them open quicker.
   #- Items on the floor can be shot. Shoot a poorly thrown HEDP away to save your buddies!
   #- You can hold a bayonet or throwing knife on your mask slot. Always be prepared.
-  #- Xenomorphs can't apply parasites to marines if they're on fire.
+  #- Xenonids can't apply parasites to marines if they're on fire.
   #- Dragging a Nanomed onto yourself instantly gives a Health Analyzer report. Always know what's wrong with you.
   #- Splints slow you down. Remove them after your bones are healed by using the Remove Your Splints verb.
   # Blood loss can lead to hunger, which can slow you down. Make sure you're always full after taking a beating.
   #- Resin structures are weaker to melee than they are to bullets. Take out your knives!
   #- Researchers can make pressurized canister pouches, which can contain up to 480 reagents, and contain custom injectors that can be easily used by privates.
-  #- When fighting xenomorphs, don't aim for the head - It won't increase damage against anyone but your fellow marines.
+  #- When fighting Xenonids, don't aim for the head - It won't increase damage against anyone but your fellow marines.
   #- Don't forget to set the Anti-Aircraft Gun!
   #- You can use a health analyzer in hand (Z key) to check the last scan readout from it.
   #- Holocards are a useful triage tool for doctors and medics. Ensure you assign them (examine the marine with shift-click and select an appropriate holocard) to marines who have taken damage that cannot be healed without surgery. (Hint! major organ damage or larval infection = red card!)
-  #- Escape pods are designed for only three occupants - more than that, or if a larger xenomorph is in the pod, and it will malfunction and blow up on launch.
+  #- Escape pods are designed for only three occupants - more than that, or if a larger xenonid is in the pod, and it will malfunction and blow up on launch.
   #- A misloaded OB can deviate severely from the intended target area - ensure you load them correctly!
   #- The XO and CO are trained in Power Loader use and engineering, and can load the OB.
   #- You can change what your SL tracker beacon is tracking by right clicking on your headset and clicking "Switch Tracker Target".

@@ -24,7 +24,7 @@
 - type: entity
   id: ActionXenoWatch
   parent: ActionXenoBase
-  name: Watch Xenomorph
+  name: Watch Xenonid
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -37,7 +37,7 @@
   id: ActionXenoPheromones
   parent: ActionXenoBase
   name: Emit Pheromones (35) # TODO CM14 proper plasma costs
-  description: Gives a buff to nearby xenomorphs.
+  description: Gives a buff to nearby xenonids.
   components:
   - type: InstantAction
     itemIconStyle: NoItem

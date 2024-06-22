@@ -42,7 +42,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public EntProtoId QueenEnt = "CMXenoQueen";
 
     [DataField]
-    public ProtoId<JobPrototype> XenoSelectableJob = "CMXenoSelectableXenomorph";
+    public ProtoId<JobPrototype> XenoSelectableJob = "CMXenoSelectableXeno";
 
     [DataField]
     public EntProtoId LarvaEnt = "CMXenoLarva";

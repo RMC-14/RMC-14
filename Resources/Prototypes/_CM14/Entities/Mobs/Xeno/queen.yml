@@ -46,8 +46,8 @@
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
     - ActionXenoGrowOvipositor
-#    - ActionXenoBanishXenomorph
-#    - ActionXenoReadmitXenomorph
+#    - ActionXenoBanishXenonid
+#    - ActionXenoReadmitXenonid
 #    - ActionXenoRoyalJelly
 #    - ActionXenoMarkResin
     # Mature
