@@ -150,3 +150,8 @@
   - type: MovementIgnoreGravity
   - type: SlowOnPull
     multiplier: 0.6
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      125: Critical
+      200: Dead

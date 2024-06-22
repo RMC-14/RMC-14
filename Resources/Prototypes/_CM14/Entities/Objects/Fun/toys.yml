@@ -61,16 +61,6 @@
 
 - type: entity
   parent: CMPlushieBase
-  id: CMPlushieYautja
-  name: strange plush
-  description: A plush doll depicting some sort of tall humanoid biped..?
-  components:
-  - type: Sprite
-    state: yautja
-  - type: Rotatable
-
-- type: entity
-  parent: CMPlushieBase
   id: CMPlushieRunnerBeret
   name: XX-121 therapy plush
   description: Don't be sad! Be glad (that you're alive)!
