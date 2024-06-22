@@ -26,7 +26,7 @@ public readonly record struct Skills(
     // forklift certified
     int PowerLoader,
     int Research,
-    int Smartgun,
+    int SmartGun,
     int SpecialistWeapons,
     // no longer a week away
     int Surgery,

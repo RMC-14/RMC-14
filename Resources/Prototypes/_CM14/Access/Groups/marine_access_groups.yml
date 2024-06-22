@@ -22,7 +22,7 @@
   - CMAccessDropship
 
 - type: accessGroup
-  id: Smartgunner
+  id: SmartGunOperator
   tags:
   - CMAccessMarinePrep
   - CMAccessSmartPrep

@@ -26,7 +26,7 @@
           CMFireteamLeader: [ -1, -1 ]
           CMHospitalCorpsman: [ -1, -1 ]
           CMRifleman: [ -1, -1 ]
-          CMSmartgunner: [ -1, -1 ]
+          CMSmartGunOperator: [ -1, -1 ]
           CMSquadLeader: [ -1, -1 ]
           CMWeaponsSpecialist: [ -1, -1 ]
           CMCMO: [ -1, -1 ]

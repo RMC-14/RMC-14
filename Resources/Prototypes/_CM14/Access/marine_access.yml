@@ -38,7 +38,7 @@
 
 - type: accessLevel
   id: CMAccessSmartPrep
-  name: cm-job-name-smartgunner
+  name: cm-job-name-smart-gun-operator
 
 - type: accessLevel
   id: CMAccessFTLPrep

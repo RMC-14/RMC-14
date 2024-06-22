@@ -388,3 +388,6 @@ ShrapnelProjectile: CMProjectileShrapnel
 
 # 2024-06-06
 CMAutoLathe: CMAutolathe
+
+# 2024-06-22
+CMSpawnPointSmartGunner: CMSpawnPointSmartGunOperator

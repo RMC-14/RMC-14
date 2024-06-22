@@ -32,11 +32,11 @@
 
 - type: entity
   parent: CMIDCardStandardDogtag
-  id: CMDogtagSmartgunner
-  name: Smartgunner's dogtags
+  id: CMDogtagSmartGunOperator
+  name: Smart Gun Operator's dogtags
   components:
   - type: PresetIdCard
-    job: CMSmartgunner
+    job: CMSmartGunOperator
 
 - type: entity
   parent: CMIDCardStandardDogtag

@@ -46,7 +46,7 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Squad Leader" Text="More equipment in the squad leader's equipment and gear racks" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Grenadier Kit" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Tier 3 xenos" Text="Crusher, Praetorian, Boiler and Ravager" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Smartgunner" Text="Stay behind marines and fire past friendlies and into the enemy!" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Smart Gun Operator" Text="Stay behind marines and fire past friendlies and into the enemy!" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Weapon attachments" Text="Each weapon will be able to be customized with different attachments, changing the weapon's stats" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Limb damage" Text="Each limb on a marine will be able to take damage separately, being able to detach upon receiving too much damage and requiring individual treatment" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Pain and painkillers" Text="Wounds will cause pain which can be dulled with painkillers" />

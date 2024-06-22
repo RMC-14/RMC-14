@@ -26066,7 +26066,7 @@ entities:
     - type: Transform
       pos: 147.5,5.5
       parent: 2
-- proto: CMSpawnPointSmartGunner
+- proto: CMSpawnPointSmartGunOperator
   entities:
   - uid: 2584
     components:

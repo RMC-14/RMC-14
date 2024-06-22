@@ -65,7 +65,7 @@ public sealed class SkillsCommand : LocalizedCommands
                 "police" => skills.Police,
                 "powerloader" => skills.PowerLoader,
                 "research" => skills.Research,
-                "smartgun" => skills.Smartgun,
+                "smartgun" => skills.SmartGun,
                 "specialistweapons" => skills.SpecialistWeapons,
                 "surgery" => skills.Surgery,
                 "vehicles" => skills.Vehicles,
@@ -152,7 +152,7 @@ public sealed class SkillsCommand : LocalizedCommands
                     skills = skills with { Research = level };
                     break;
                 case "smartgun":
-                    skills = skills with { Smartgun = level };
+                    skills = skills with { SmartGun = level };
                     break;
                 case "specialistweapons":
                     skills = skills with { SpecialistWeapons = level };

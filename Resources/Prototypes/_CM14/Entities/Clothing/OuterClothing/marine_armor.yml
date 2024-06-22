@@ -299,7 +299,7 @@
   parent: CMArmorM3Medium
   id: CMArmorM56CombatHarness
   name: M56 combat harness
-  description: A heavy protective vest designed to be worn with the M56 Smartgun System. \nIt has specially designed straps and reinforcement to carry the Smartgun and accessories.
+  description: A heavy protective vest designed to be worn with the M56 Smart Gun System. \nIt has specially designed straps and reinforcement to carry the Smartgun and accessories.
   components:
   - type: Sprite
     sprite: _CM14/Objects/Clothing/OuterClothing/Armor/m56.rsi
@@ -315,7 +315,7 @@
       - BallisticAmmoProvider
       # Mines
       # Bayonet
-      # Smartgun
+      # Smart Gun
       # Belts
       # Motion detectors
       # Walkman

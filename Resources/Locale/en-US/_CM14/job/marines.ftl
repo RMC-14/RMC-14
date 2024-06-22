@@ -15,9 +15,9 @@ cm-job-name-weapons-specialist = Weapons Specialist
 cm-job-description-weapons-specialist = Gain access to heavier, more powerful weaponry and equipment. Combat professional, lead the squad if needed.
 CMJobWeaponsSpecialist = Weapons Specialist
 
-cm-job-name-smartgunner = Smartgunner
-cm-job-description-smartgunner = Support your Squad with heavy weaponry and give the enemy suppressing fire.
-CMJobSmartgunner = Smart Gunner
+cm-job-name-smart-gun-operator = Smart Gun Operator
+cm-job-description-smart-gun-operator = Support your Squad with heavy weaponry and give the enemy suppressing fire.
+CMJobSmartGunOperator = Smart Gun Operator
 
 cm-job-name-hospital-corpsman = Hospital Corpsman
 cm-job-description-hospital-corpsman = Keep Marines in fighting condition, or as close as you can get them. Medevac those who need to be sent back to Medbay for treatment.

@@ -33,7 +33,7 @@
   - CMAccessRequisitions # (cargo)
   - CMAccessResearch # research access
   - CMAccessSEA # senior enlisted
-  - CMAccessSmartPrep # smartgunner
+  - CMAccessSmartPrep # smart gun operator
   - CMAccessSpecPrep # weapons specialist
   - CMAccessSquadLeaderPrep # squad leader access
   - CMAccessMarineRifleman # this access is used for the basic vendor, which only the rifleman can use.

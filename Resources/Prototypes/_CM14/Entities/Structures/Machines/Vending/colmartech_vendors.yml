@@ -262,7 +262,7 @@
         amount: 1
     - name: Special Ammunition
       entries: [ ]
-      #- id: CMDrumSmartgunM56
+      #- id: CMDrumSmartGunM56
       #  amount: 1
       #- id: CMSpeedLoaderM44Heavy
       #  amount: 2
@@ -1589,24 +1589,24 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSGGear
-  name: ColMarTech squad smartgunner gear rack
-  description: An automated gear rack for Squad Smartgunners.
+  name: ColMarTech squad smart gun operator gear rack
+  description: An automated gear rack for Squad Smart Gun Operators.
   components:
   - type: AccessReader
     access:
     - [ "CMAccessSmartPrep" ]
   - type: Sprite
-    sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/smartgunner_gear.rsi
+    sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/smart_gun_operator_gear.rsi
   - type: CMAutomatedVendor
-    job: CMSmartgunner
+    job: CMSmartGunOperator
     sections:
-    - name: Smartgun Set (Mandatory)
+    - name: Smart Gun Set (Mandatory)
       entries: [ ]
-    #- id: CMEssentialSmartgunnerSet
+    #- id: CMEssentialSmartGunOperatorSet
     #  points: 0
-    - name: Smartgun Ammunition
+    - name: Smart Gun Ammunition
       entries: [ ]
-    #- id: CMM56SmartgunDrum
+    #- id: CMM56SmartGunDrum
     #  points: 15
     - name: Gun Attachments
       entries: [ ]
@@ -1692,8 +1692,8 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSGEquipment
-  name: ColMarTech squad smartgun equipment rack
-  description: An automated rack hooked up to a colossal storage of Squad Smartgun standard-issue equipment.
+  name: ColMarTech squad Smart Gun equipment rack
+  description: An automated rack hooked up to a colossal storage of Squad Smart Gun standard-issue equipment.
   components:
   - type: AccessReader
     access:
@@ -1701,18 +1701,18 @@
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
-    job: CMSmartgunner
+    job: CMSmartGunOperator
     sections:
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
-      - id: CMVendorBundleRiflemanApparel # TODO any CM14 smartgunner specific items?
+      - id: CMVendorBundleRiflemanApparel # TODO any CM14 smart gun operator specific items?
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
     - name: Belt
       entries: [ ]
-    #- id: CMM802SmartgunnerSidearmBelt
-    #- id: CMM280SmartgunnerDrumBelt
+    #- id: CMM802SmartGunOperatorSidearmBelt
+    #- id: CMM280SmartGunOperatorDrumBelt
     - name: Pouches
       choices: { CMPouch: 2 }
       entries:

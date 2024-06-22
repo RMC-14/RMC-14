@@ -46,7 +46,7 @@
 - type: entity
   parent: CMAirlockPrep
   id: CMAirlockPrepSmart
-  name: squad smartgunner preparations
+  name: squad smart gun operator preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -117,7 +117,7 @@
 - type: entity
   parent: CMAirlockPrepAlpha
   id: CMAirlockPrepAlphaSmart
-  name: alpha squad smartgunner preparations
+  name: alpha squad smart gun operator preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -188,7 +188,7 @@
 - type: entity
   parent: CMAirlockPrepBravo
   id: CMAirlockPrepBravoSmart
-  name: bravo squad smartgunner preparations
+  name: bravo squad smart gun operator preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -259,7 +259,7 @@
 - type: entity
   parent: CMAirlockPrepCharlie
   id: CMAirlockPrepCharlieSmart
-  name: charlie squad smartgunner preparations
+  name: charlie squad smart gun operator preparations
   suffix: Locked
   components:
   - type: AccessReader
@@ -330,7 +330,7 @@
 - type: entity
   parent: CMAirlockPrepDelta
   id: CMAirlockPrepDeltaSmart
-  name: delta squad smartgunner preparations
+  name: delta squad smart gun operator preparations
   suffix: Locked
   components:
   - type: AccessReader

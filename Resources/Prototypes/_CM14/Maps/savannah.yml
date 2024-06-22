@@ -42,7 +42,7 @@
             #Marines
             CMSquadLeader: [4, 4]
             CMFireteamLeader: [8, 16]
-            CMSmartgunner: [8, 16]
+            CMSmartGunOperator: [8, 16]
             CMWeaponsSpecialist: [8, 16]
             CMCombatTech: [16, 16]
             CMHospitalCorpsman: [8, 16]

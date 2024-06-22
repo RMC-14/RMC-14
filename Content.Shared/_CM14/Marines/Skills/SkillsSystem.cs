@@ -168,7 +168,7 @@ public sealed class SkillsSystem : EntitySystem
                skills.Police >= required.Police &&
                skills.PowerLoader >= required.PowerLoader &&
                skills.Research >= required.Research &&
-               skills.Smartgun >= required.Smartgun &&
+               skills.SmartGun >= required.SmartGun &&
                skills.SpecialistWeapons >= required.SpecialistWeapons &&
                skills.Surgery >= required.Surgery &&
                skills.Vehicles >= required.Vehicles;
