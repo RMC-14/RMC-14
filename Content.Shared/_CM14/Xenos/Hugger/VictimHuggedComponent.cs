@@ -90,22 +90,22 @@ public sealed partial class VictimHuggedComponent : Component
     public int FinalSymptomsStart = 4;
 
     [DataField, AutoNetworkedField]
-    public float ShakesChance = 0.03f;
+    public float ShakesChance = 0.06f;
 
     [DataField, AutoNetworkedField]
     public float MinorPainChance = 0.02f;
 
     [DataField, AutoNetworkedField]
-    public float ThroatPainChance = 0.01f;
+    public float ThroatPainChance = 0.02f;
 
     [DataField, AutoNetworkedField]
-    public float MuscleAcheChance = 0.005f;
+    public float MuscleAcheChance = 0.01f;
 
     [DataField, AutoNetworkedField]
-    public float SneezeCoughChance = 0.01f;
+    public float SneezeCoughChance = 0.02f;
 
     [DataField, AutoNetworkedField]
-    public float MajorPainChance = 0.01f;
+    public float MajorPainChance = 0.02f;
 
     [DataField, AutoNetworkedField]
     public TimeSpan BaseKnockdownTime = TimeSpan.FromSeconds(1);
