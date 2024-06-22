@@ -18,6 +18,9 @@ public sealed partial class XenoLeapComponent : Component
     public TimeSpan KnockdownTime = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
+    public TimeSpan MoveDelayTime = TimeSpan.FromSeconds(.7);
+
+    [DataField, AutoNetworkedField]
     public SoundSpecifier? LeapSound;
 
     [DataField, AutoNetworkedField]

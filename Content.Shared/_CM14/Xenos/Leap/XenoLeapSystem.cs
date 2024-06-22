@@ -112,6 +112,8 @@ public sealed class XenoLeapSystem : EntitySystem
 
         _physics.ApplyLinearImpulse(xeno, impulse, body: physics);
         _physics.SetBodyStatus(xeno, physics, BodyStatus.InAir);
+
+        _stun.TryStun(xeno, xeno.Comp.MoveDelayTime, true);
     }
 
     private void OnXenoLeapingDoHit(Entity<XenoLeapingComponent> xeno, ref StartCollideEvent args)
