@@ -291,6 +291,7 @@ public sealed class AttachableHolderSystem : EntitySystem
         {
             var addEv = new GrantAttachableActionsEvent(userUid);
             RaiseLocalEvent(attachableUid, ref addEv);
+        }
         
         _audio.PlayPredicted(Comp<AttachableComponent>(attachableUid).AttachSound,
             holder,

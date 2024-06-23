@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.Attachable.Components;
 [Access(typeof(AttachableToggleableSystem))]
 public sealed partial class AttachableToggleableComponent : Component
 {
-    [ViewVariables]
+    [DataField, AutoNetworkedField]
     public bool Active = false;
 
     [DataField, AutoNetworkedField]
