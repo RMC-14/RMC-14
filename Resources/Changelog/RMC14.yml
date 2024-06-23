@@ -1454,5 +1454,12 @@
   id: 175
   time: '2024-06-23T11:25:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2558
+- author: Cephalopod222
+  changes:
+  - message: Added new M54C sprites!
+    type: Add
+  id: 176
+  time: '2024-06-23T20:42:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2572
 Name: RMC14
 Order: -1
