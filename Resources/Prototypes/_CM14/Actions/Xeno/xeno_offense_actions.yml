@@ -1,7 +1,7 @@
 ﻿- type: entity
   id: ActionXenoAcidNormal
   parent: ActionXenoBase
-  name: Corrosive Acid (100)  # TODO CM14 proper plasma costs
+  name: Corrosive Acid (100)  # TODO RMC14 proper plasma costs
   description: Melts down a structure over time.
   components:
   - type: EntityTargetAction
@@ -17,7 +17,7 @@
 - type: entity
   id: ActionXenoAcidWeak
   parent: ActionXenoBase
-  name: Weak Corrosive Acid (75)  # TODO CM14 proper plasma costs
+  name: Weak Corrosive Acid (75)  # TODO RMC14 proper plasma costs
   description: Melts down a structure over time.
   components:
   - type: EntityTargetAction
@@ -33,7 +33,7 @@
 - type: entity
   id: ActionXenoAcidStrong
   parent: ActionXenoBase
-  name: Strong Corrosive Acid (125)  # TODO CM14 proper plasma costs
+  name: Strong Corrosive Acid (125)  # TODO RMC14 proper plasma costs
   description: Melts down a structure over time.
   components:
   - type: EntityTargetAction
@@ -95,7 +95,7 @@
 - type: entity
   id: ActionXenoHeadbutt
   parent: ActionXenoBase
-  name: Headbutt (10) # TODO CM14 proper plasma costs
+  name: Headbutt (10) # TODO RMC14 proper plasma costs
   description: Charge in a direction and push back any enemies in your way.
   components:
   - type: WorldTargetAction
@@ -111,7 +111,7 @@
 - type: entity
   id: ActionXenoTailSweep
   parent: ActionXenoBase
-  name: Tail Sweep (10) # TODO CM14 proper plasma costs
+  name: Tail Sweep (10) # TODO RMC14 proper plasma costs
   description: Knock down any enemies close to you.
   components:
   - type: InstantAction
@@ -125,7 +125,7 @@
 - type: entity
   id: ActionXenoSlowingSpit
   parent: ActionXenoBase
-  name: Slowing Spit (20) # TODO CM14 proper plasma costs
+  name: Slowing Spit (20) # TODO RMC14 proper plasma costs
   description: Launches a projectile that will slow the first enemy that it hits, and paralyze them if they have no armor.
   components:
   - type: WorldTargetAction
@@ -141,7 +141,7 @@
 - type: entity
   id: ActionXenoScatteredSpit
   parent: ActionXenoBase
-  name: Scattered Spit (20) # TODO CM14 proper plasma costs
+  name: Scattered Spit (20) # TODO RMC14 proper plasma costs
   description: Launches multiple projectiles that will briefly paralyze any enemies they hit.
   components:
   - type: WorldTargetAction
@@ -157,7 +157,7 @@
 - type: entity
   id: ActionXenoParalyzingSlash
   parent: ActionXenoBase
-  name: Paralyzing Slash (50) # TODO CM14 proper plasma costs
+  name: Paralyzing Slash (50) # TODO RMC14 proper plasma costs
   description: Temporarily charge up a melee attack that will knockdown the first enemy it hits after a short delay.
   components:
   - type: InstantAction

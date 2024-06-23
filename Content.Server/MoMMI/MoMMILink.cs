@@ -34,7 +34,7 @@ namespace Content.Server.MoMMI
 
         public async void SendOOCMessage(string sender, string message)
         {
-            // TODO CM14
+            // TODO RMC14
             var oocWebhook = _configurationManager.GetCVar(CMCVars.CMOocWebhook);
             if (oocWebhook != _oocWebhookUrl)
             {

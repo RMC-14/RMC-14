@@ -4,7 +4,7 @@
   graph:
     - node: start
       edges:
-        - to: tubeLight # TODO CM14: Needs CMCable/CMWire for further 1:1
+        - to: tubeLight # TODO RMC14: Needs CMCable/CMWire for further 1:1
           steps:
             - material: CMSteel
               amount: 2

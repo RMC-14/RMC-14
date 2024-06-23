@@ -23,7 +23,7 @@
       medical: 3
       research: 1
       surgery: 2
-  hidden: true # TODO CM14
+  hidden: true # TODO RMC14
 
 - type: startingGear
   id: CMGearResearcher
@@ -32,7 +32,7 @@
     back: CMSatchel
     shoes: CMShoesLaceup
     id: CMIDCardResearcher
-    # TODO CM14 random chemical synthesis note, syringe,
+    # TODO RMC14 random chemical synthesis note, syringe,
 
 - type: startingGear
   id: CMGearResearcherEquipped

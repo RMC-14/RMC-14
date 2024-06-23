@@ -1,5 +1,5 @@
 - type: construction
-  parent: CM
+  parent: RMC
   name: barbed wire
   id: Barbedwire
   graph: BarbedWireGraph
@@ -11,7 +11,7 @@
   objectType: Item
 
 - type: construction
-  parent: CM
+  parent: RMC
   id: CMSheetGlassReinforced
   name: reinforced glass
   description: A reinforced sheet of glass.
@@ -23,7 +23,7 @@
   objectType: Item
 
 - type: construction
-  parent: CM
+  parent: RMC
   id: CMRodMetal
   name: metal rod
   description: Some rods. Can be used for building, or something.
@@ -35,7 +35,7 @@
   objectType: Item
 
 - type: construction
-  parent: CM
+  parent: RMC
   id: CMRodPlasteel
   name: plasteel rod
   description: Some rods. Can be used for building, or something.

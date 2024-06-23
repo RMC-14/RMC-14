@@ -130,8 +130,8 @@ public sealed class XenoSystem : EntitySystem
         if (args.Target is not { } target)
             return;
 
-        // TODO CM14 different hives
-        // TODO CM14 this still falsely plays the hit red flash effect on xenos if others are hit in a wide swing
+        // TODO RMC14 different hives
+        // TODO RMC14 this still falsely plays the hit red flash effect on xenos if others are hit in a wide swing
         if (HasComp<XenoFriendlyComponent>(target) ||
             _mobState.IsDead(target))
         {
@@ -229,7 +229,7 @@ public sealed class XenoSystem : EntitySystem
 
         FixedPoint2 multiplier;
         if (_mobState.IsCritical(xeno))
-            multiplier = xeno.Comp.RestHealMultiplier; // TODO CM14
+            multiplier = xeno.Comp.RestHealMultiplier; // TODO RMC14
         else if (_standing.IsDown(xeno) || HasComp<XenoRestingComponent>(xeno))
             multiplier = xeno.Comp.RestHealMultiplier;
         else
@@ -266,7 +266,7 @@ public sealed class XenoSystem : EntitySystem
         _damageable.TryChangeDamage(xeno, heal);
     }
 
-    // TODO CM14 generalize this for survivors, synthetics, enemy hives, etc
+    // TODO RMC14 generalize this for survivors, synthetics, enemy hives, etc
     public bool CanHitLiving(EntityUid xeno, EntityUid defender)
     {
         return _marineQuery.HasComponent(defender);

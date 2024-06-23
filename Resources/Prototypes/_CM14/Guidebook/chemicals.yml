@@ -1,5 +1,5 @@
 ﻿- type: guideEntry
-  parent: CM
+  parent: RMC
   id: CMChemicals
   name: guide-entry-chemicals
   text: "/ServerInfo/Guidebook/_CM14/Chemicals.xml"

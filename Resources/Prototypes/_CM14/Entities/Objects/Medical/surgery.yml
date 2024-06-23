@@ -314,7 +314,7 @@
   parent: CMBaseToolSurgery
   id: CMBonesetter
   name: bone setter
-  components: # TODO CM14
+  components: # TODO RMC14
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/bonesetter.rsi
     state: bonesetter
@@ -339,7 +339,7 @@
   id: CMWoundClamp
   name: wound clamp
   description: Used for clamping wounds after treatment.
-  components: # TODO CM14
+  components: # TODO RMC14
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/wound_clamp.rsi
     state: wound_clamp
@@ -354,7 +354,7 @@
   id: CMAutopsy
   name: We-Ya Brand Automatic Autopsy System(TM)
   description: Putting the FUN back in Autopsy.  This little gadget performs an entire autopsy of whatever strange life form you've found in about 30 seconds.
-  components: # TODO CM14
+  components: # TODO RMC14
   - type: Sprite
     sprite: _CM14/Objects/Medical/Surgery/scalpel.rsi
     state: scalpel_laser_2

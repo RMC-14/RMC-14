@@ -22,7 +22,7 @@ public abstract class SharedPumpActionSystem : EntitySystem
 
     protected virtual void OnExamined(Entity<PumpActionComponent> ent, ref ExaminedEvent args)
     {
-        // TODO CM14 the server has no idea what this keybind is supposed to be for the client
+        // TODO RMC14 the server has no idea what this keybind is supposed to be for the client
         args.PushMarkup(Loc.GetString("cm-gun-pump-examine"), 1);
     }
 

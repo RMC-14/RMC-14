@@ -1,5 +1,5 @@
 - type: constructionGraph
-  parent: CM
+  parent: RMC
   id: BarricadeMetalGraph
   start: start
   graph:
@@ -32,7 +32,7 @@
         doAfter: 1
       - tool: Prying
         doAfter: 2
-    
+
     - to: nodeBurnUpgrade
       completed:
       - !type:SnapToGrid
@@ -40,7 +40,7 @@
       - material: MetalRod
         amount: 6
         doAfter: 6
-    
+
     - to: nodeBruteUpgrade
       completed:
       - !type:SnapToGrid
@@ -48,7 +48,7 @@
       - material: CMSteel
         amount: 3
         doAfter: 6
-    
+
     - to: nodeExplosiveUpgrade
       completed:
       - !type:SnapToGrid

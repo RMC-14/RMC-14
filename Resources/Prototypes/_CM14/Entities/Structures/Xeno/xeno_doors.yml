@@ -1,5 +1,5 @@
 ﻿- type: entity
-  id: DoorXenoResin # TODO CM14 make them only buildable next to other resin walls
+  id: DoorXenoResin # TODO RMC14 make them only buildable next to other resin walls
   parent: CMBaseXenoStructure
   name: resin door
   description: That's a resin door.

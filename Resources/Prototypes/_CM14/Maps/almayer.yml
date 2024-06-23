@@ -14,7 +14,7 @@
           #Command
           CMCommandingOfficer: [1, 1]
 #          CMExecutiveOfficer: [1, 1]
-#          CMStaffOfficer: [1, 1] # TODO CM14
+#          CMStaffOfficer: [1, 1] # TODO RMC14
           CMSeniorEnlistedAdvisor: [2, 2]
           #Military Police
 #          CMChiefMP: [1, 1]

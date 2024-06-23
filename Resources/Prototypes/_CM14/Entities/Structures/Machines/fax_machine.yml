@@ -23,11 +23,11 @@
 - type: entity
   parent: CMFax
   id: CMFaxCMB
-  name: colonial marshal bureau fax machine
+  name: colony marshal bureau fax machine
   suffix: CMB
   components:
   - type: FaxMachine
-    name: "Colonial Marshal Bureau"
+    name: "Colony Marshal Bureau"
     notifyAdmins: true
 
 - type: entity
@@ -74,23 +74,23 @@
   suffix: CLF
   components:
   - type: FaxMachine
-    name: "Colonial Liberation Front"
+    name: "Colony Liberation Front"
     notifyAdmins: true
 
 - type: entity
   parent: CMFax
-  id: CMFaxUPP
-  suffix: UPP
+  id: CMFaxSPP
+  suffix: SPP
   components:
   - type: FaxMachine
-    name: "Union of Progressive People"
+    name: "Socialist Progressive Peoples"
     notifyAdmins: true
 
 - type: entity
   parent: CMFax
-  id: CMFaxTWE
-  suffix: TWE
+  id: CMFaxTSE
+  suffix: TSE
   components:
   - type: FaxMachine
-    name: "Three World Empire"
+    name: "Three Suns Empire"
     notifyAdmins: true

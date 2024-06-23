@@ -182,7 +182,7 @@
     key: walls
     base: wall
 
-# TODO CM14 temp hull, breakable only after hijack
+# TODO RMC14 temp hull, breakable only after hijack
 
 # Shuttle
 - type: entity

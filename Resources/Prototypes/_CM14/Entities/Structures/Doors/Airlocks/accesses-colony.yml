@@ -14,7 +14,7 @@
   suffix: Command, Colony, Locked
   components:
   - type: AccessReader
-    access: [["CMAccessColonyBrig"], ["CMAccessColonyCommand"]] # TODO CM14 add WY Colonial access
+    access: [["CMAccessColonyBrig"], ["CMAccessColonyCommand"]] # TODO RMC14 add WeYa Colonial access
 
 # /obj/structure/machinery/door/airlock/security/colony
 - type: entity
@@ -23,7 +23,7 @@
   suffix: Security, Colony, Locked
   components:
   - type: AccessReader
-    access: [["CMAccessColonyBrig"], ["CMAccessColonyCommand"]] # TODO CM14 add WY Security access
+    access: [["CMAccessColonyBrig"], ["CMAccessColonyCommand"]] # TODO RMC14 add WeYa Security access
 
 # /obj/structure/machinery/door/airlock/engineering/colony
 - type: entity
@@ -32,7 +32,7 @@
   suffix: Engineering, Colony, Locked
   components:
   - type: AccessReader
-    access: [["CMAccessColonyCommand"], ["CMAccessColonyEngineering"], ["CMAccessColonyLogistics"]] # TODO CM14 WY Colonial
+    access: [["CMAccessColonyCommand"], ["CMAccessColonyEngineering"], ["CMAccessColonyLogistics"]] # TODO RMC14 WeYa Colonial
 
 # /obj/structure/machinery/door/airlock/requisitions/colony
 - type: entity
@@ -50,7 +50,7 @@
   suffix: Medical, Colony, Locked
   components:
   - type: AccessReader
-    access: [["CMAccessColonyMedbay"], ["CMAccessColonyCommand"]] # TODO CM14 Research and WY Colonial
+    access: [["CMAccessColonyMedbay"], ["CMAccessColonyCommand"]] # TODO RMC14 Research and WeYa Colonial
 
 # /obj/structure/machinery/door/airlock/research/colony
 - type: entity
@@ -59,7 +59,7 @@
   suffix: Colony, Research, Locked
   components:
   - type: AccessReader
-    access: [["CMAccessColonyCommand"]] # TODO CM14 Research and WY Research
+    access: [["CMAccessColonyCommand"]] # TODO RMC14 Research and WeYa Research
 
 # /obj/structure/machinery/door/airlock/maintenance/colony
 - type: entity
@@ -68,7 +68,7 @@
   suffix: Maintenance, Colony, Locked
   components:
   - type: AccessReader
-    access: [["CMAccessColonyPublic"], ["CMAccessColonyEngineering"]] # TODO CM14 WY Colonial
+    access: [["CMAccessColonyPublic"], ["CMAccessColonyEngineering"]] # TODO RMC14 WeYa Colonial
 
 # /obj/structure/machinery/door/airlock/glass/colony
 - type: entity
@@ -86,7 +86,7 @@
   suffix: Engineering, Colony, Glass, Locked
   components:
   - type: AccessReader
-    access: [["CMAccessColonyCommand"], ["CMAccessColonyEngineering"], ["CMAccessColonyLogistics"]] # TODO CM14 WY Colonial
+    access: [["CMAccessColonyCommand"], ["CMAccessColonyEngineering"], ["CMAccessColonyLogistics"]] # TODO RMC14 WeYa Colonial
 
 # /obj/structure/machinery/door/airlock/glass_security/colony
 - type: entity
@@ -95,7 +95,7 @@
   suffix: Security, Colony, Glass, Locked
   components:
   - type: AccessReader
-    access: [["CMAccessColonyBrig"], ["CMAccessColonyCommand"]] # TODO CM14 add WY Security access
+    access: [["CMAccessColonyBrig"], ["CMAccessColonyCommand"]] # TODO RMC14 add WeYa Security access
 
 # /obj/structure/machinery/door/airlock/glass_medical/colony
 - type: entity
@@ -104,7 +104,7 @@
   suffix: Medical, Colony, Glass, Locked
   components:
   - type: AccessReader
-    access: [["CMAccessColonyMedbay"], ["CMAccessColonyCommand"]] # TODO CM14 Research and WY Colonial
+    access: [["CMAccessColonyMedbay"], ["CMAccessColonyCommand"]] # TODO RMC14 Research and WeYa Colonial
 
 # /obj/structure/machinery/door/airlock/glass_research/colony
 - type: entity
@@ -113,4 +113,4 @@
   suffix: Research, Colony, Glass, Locked
   components:
   - type: AccessReader
-    access: [["CMAccessColonyCommand"]] # TODO CM14 Research and WY Research
+    access: [["CMAccessColonyCommand"]] # TODO RMC14 Research and WeYa Research

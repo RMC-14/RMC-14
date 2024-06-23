@@ -2,7 +2,7 @@
   parent:
   - CMXenoUndeveloped
   - CMXenoFlammable
-  id: CMXenoParasite # TODO CM14 slowly die off weeds
+  id: CMXenoParasite # TODO RMC14 slowly die off weeds
   name: Parasite
   components:
   - type: Sprite
@@ -14,7 +14,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      35: Dead # TODO CM14 gib on death
+      35: Dead # TODO RMC14 gib on death
   - type: Xeno
     role: CMXenoParasite
     actionIds:

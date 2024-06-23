@@ -40,7 +40,7 @@ public sealed class NightVisionOverlay : Overlay
         var eye = args.Viewport.Eye;
         var eyeRot = eye?.Rotation ?? default;
 
-        // TODO CM14 this should use its own component
+        // TODO RMC14 this should use its own component
         var entities = _entity.EntityQueryEnumerator<MobStateComponent, SpriteComponent, TransformComponent>();
         while (entities.MoveNext(out var uid, out _, out var sprite, out var xform))
         {

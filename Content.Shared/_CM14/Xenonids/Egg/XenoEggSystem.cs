@@ -149,7 +149,7 @@ public sealed class XenoEggSystem : EntitySystem
 
         if (HasComp<MarineComponent>(user))
         {
-            // TODO CM14 this should have a better filter than marine component
+            // TODO RMC14 this should have a better filter than marine component
             if (!args.Handled)
             {
                 _hands.TryDrop(user, egg, args.ClickLocation);
@@ -182,7 +182,7 @@ public sealed class XenoEggSystem : EntitySystem
                 hasWeeds = true;
         }
 
-        // TODO CM14 only on hive weeds
+        // TODO RMC14 only on hive weeds
         if (!hasWeeds)
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-egg-failed-must-weeds"), user, user);
@@ -200,7 +200,7 @@ public sealed class XenoEggSystem : EntitySystem
 
     private void OnXenoEggActivateInWorld(Entity<XenoEggComponent> egg, ref ActivateInWorldEvent args)
     {
-        // TODO CM14 multiple hive support
+        // TODO RMC14 multiple hive support
         if (!HasComp<XenoComponent>(args.User))
             return;
 

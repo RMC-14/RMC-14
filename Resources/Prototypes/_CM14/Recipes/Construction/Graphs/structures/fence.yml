@@ -1,5 +1,5 @@
 ﻿- type: constructionGraph
-  parent: CM
+  parent: RMC
   id: CMFence
   start: start
   graph:
@@ -17,7 +17,7 @@
   - node: fenceMetal
     entity: CMFence
     edges:
-    - to: start #TODO CM14: Missing an inbetween cutting step for full 1:1
+    - to: start #TODO RMC14: Missing an inbetween cutting step for full 1:1
       completed:
       - !type:SpawnPrototype
         prototype: CMRodMetal1

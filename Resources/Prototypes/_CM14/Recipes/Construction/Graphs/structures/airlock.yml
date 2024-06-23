@@ -1,5 +1,5 @@
 - type: constructionGraph
-  parent: CM
+  parent: RMC
   id: CMAirlock
   start: start
   graph:
@@ -33,12 +33,12 @@
           state: "door_electronics"
         doAfter: 4
 
-    - to: glassAssembly 
+    - to: glassAssembly
       steps:
       - material: CMGlass
         amount: 5
         doAfter: 2
-        
+
     - to: start
       completed:
       - !type:SpawnPrototype
@@ -61,7 +61,7 @@
         - material: Cable
           amount: 1
           doAfter: 4
-    
+
     - to: assembly
       conditions:
       - !type:EntityAnchored {}
@@ -84,7 +84,7 @@
         doAfter: 4
       - tool: Welding
         doAfter: 4
-    
+
     - to: assembly
       conditions:
       - !type:EntityAnchored {}
@@ -133,7 +133,7 @@
           sprite: "Objects/Misc/module.rsi"
           state: "door_electronics"
         doAfter: 4
-        
+
     - to: start
       completed:
       - !type:SpawnPrototype
@@ -146,7 +146,7 @@
       steps:
       - tool: Prying
         doAfter: 2
-        
+
     - to: assembly
       conditions:
       - !type:EntityAnchored {}
@@ -170,7 +170,7 @@
       - material: Cable
         amount: 1
         doAfter: 4
-        
+
     - to: glassAssembly
       conditions:
       - !type:EntityAnchored {}
@@ -193,7 +193,7 @@
         doAfter: 4
       - tool: Welding
         doAfter: 4
-        
+
     - to: glassAssembly
       conditions:
       - !type:EntityAnchored {}

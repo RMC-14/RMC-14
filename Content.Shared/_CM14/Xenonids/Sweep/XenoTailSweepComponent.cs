@@ -19,7 +19,7 @@ public sealed partial class XenoTailSweepComponent : Component
     [DataField]
     public DamageSpecifier? Damage;
 
-    // TODO CM14 scale with damage dealt up to a cap
+    // TODO RMC14 scale with damage dealt up to a cap
     [DataField, AutoNetworkedField]
     public TimeSpan ParalyzeTime = TimeSpan.FromSeconds(2);
 

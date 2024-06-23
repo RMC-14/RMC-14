@@ -1,5 +1,5 @@
 ﻿- type: constructionGraph
-  parent: CM
+  parent: RMC
   id: CMWindoor
   start: start
   graph:
@@ -28,7 +28,7 @@
       - material: CMRodMetal
         amount: 4
         doAfter: 4
-    
+
     - to: wired
       conditions:
       - !type:EntityAnchored { }
@@ -36,7 +36,7 @@
       - material: Cable
         amount: 1
         doAfter: 4
-    
+
     - to: start
       completed:
       - !type:SpawnPrototype
@@ -61,7 +61,7 @@
           sprite: "Objects/Misc/module.rsi"
           state: "door_electronics"
         doAfter: 4
-    
+
     - to: assembly
       completed:
       - !type:SpawnPrototype
@@ -80,7 +80,7 @@
       steps:
       - tool: Screwing
         doAfter: 4
-    
+
     - to: wired
       conditions:
       - !type:EntityAnchored {}
@@ -118,7 +118,7 @@
       - material: Cable
         amount: 1
         doAfter: 4
-    
+
     - to: start
       completed:
       - !type:SpawnPrototype
@@ -146,7 +146,7 @@
           sprite: "Objects/Misc/module.rsi"
           state: "door_electronics"
         doAfter: 4
-    
+
     - to: assemblySecure
       completed:
       - !type:SpawnPrototype
@@ -165,7 +165,7 @@
       steps:
       - tool: Screwing
         doAfter: 4
-    
+
     - to: wiredSecure
       conditions:
       - !type:EntityAnchored {}

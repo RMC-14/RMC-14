@@ -45,7 +45,7 @@ public abstract class SharedWoundsSystem : EntitySystem
         SubscribeLocalEvent<WoundableComponent, DamageChangedEvent>(OnWoundableDamaged);
         SubscribeLocalEvent<WoundableComponent, CMBleedEvent>(OnWoundableBleed);
 
-        // TODO CM14 anti-bleed medicines
+        // TODO RMC14 anti-bleed medicines
         SubscribeLocalEvent<WoundedComponent, RejuvenateEvent>(OnWoundedRejuvenate);
         SubscribeLocalEvent<WoundedComponent, EntityUnpausedEvent>(OnWoundedUnpaused);
 

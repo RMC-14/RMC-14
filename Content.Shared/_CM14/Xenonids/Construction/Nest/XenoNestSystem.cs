@@ -36,7 +36,7 @@ public sealed class XenoNestSystem : EntitySystem
 
         SubscribeLocalEvent<XenoComponent, GetUsedEntityEvent>(OnXenoGetUsedEntity);
 
-        // TODO CM14 make nests part of the wall entity so drag and drop can work
+        // TODO RMC14 make nests part of the wall entity so drag and drop can work
         SubscribeLocalEvent<XenoNestSurfaceComponent, InteractHandEvent>(OnNestInteractHand);
         SubscribeLocalEvent<XenoNestSurfaceComponent, DoAfterAttemptEvent<XenoNestDoAfterEvent>>(OnNestSurfaceDoAfterAttempt);
         SubscribeLocalEvent<XenoNestSurfaceComponent, XenoNestDoAfterEvent>(OnNestSurfaceDoAfter);
@@ -166,7 +166,7 @@ public sealed class XenoNestSystem : EntitySystem
 
         _standingState.Stand(victim, force: true);
 
-        // TODO CM14 make a method to do this
+        // TODO RMC14 make a method to do this
         _popup.PopupClient(Loc.GetString("cm-xeno-nest-securing-self", ("target", victim)), args.User, args.User);
 
         foreach (var session in Filter.PvsExcept(args.User).Recipients)
@@ -217,7 +217,7 @@ public sealed class XenoNestSystem : EntitySystem
 
         _doAfter.TryStartDoAfter(doAfter);
 
-        // TODO CM14 make a method to do this
+        // TODO RMC14 make a method to do this
         _popup.PopupClient(Loc.GetString("cm-xeno-nest-pin-self", ("target", victim)), user, user);
 
         foreach (var session in Filter.PvsExcept(user).Recipients)

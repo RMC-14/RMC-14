@@ -1,5 +1,5 @@
 - type: constructionGraph
-  parent: CM
+  parent: RMC
   id: CMSeat
   start: start
   graph:

@@ -5,7 +5,7 @@
   components:
   - type: StorageFill
     contents:
-      # - id: CMSurgicalTray # TODO CM14
+      # - id: CMSurgicalTray # TODO RMC14
       - id: CMMaskGasMedical
       - id: CMScrubsColorGreen
       - id: CMBoxSterileMask
@@ -57,7 +57,7 @@
   suffix: Filled
   components:
   - type: StorageFill
-    contents: # TODO CM14 missing bottles
+    contents: # TODO RMC14 missing bottles
       - id: CMBoxPillCanister
       - id: CMBoxSyringe
       - id: CMBottleInaprovaline
@@ -80,7 +80,7 @@
   name: pill bottle crate (x2 each)
   components:
   - type: StorageFill
-    contents: # TODO CM14 missing pill bottles
+    contents: # TODO RMC14 missing pill bottles
       - id: CMBoxPillCanister
         amount: 2
       - id: CMPillCanisterInaprovaline
@@ -98,4 +98,4 @@
       # - id: CMPillCanisterPeridaxon
       #  amount: 2
 
-# TODO CM14 peridaxon, tramadol
+# TODO RMC14 peridaxon, tramadol

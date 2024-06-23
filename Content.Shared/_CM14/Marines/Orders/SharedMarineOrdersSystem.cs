@@ -111,7 +111,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         var level = Math.Max(1, CompOrNull<SkillsComponent>(orders)?.Skills.Leadership ?? 1);
         var duration = orders.Comp.Duration * (level + 1);
 
-        // TODO CM14 implement focus order effects
+        // TODO RMC14 implement focus order effects
         // _actions.SetCooldown(orders.Comp.FocusActionEntity, orders.Comp.Cooldown);
         _actions.SetCooldown(orders.Comp.MoveActionEntity, orders.Comp.Cooldown);
         _actions.SetCooldown(orders.Comp.HoldActionEntity, orders.Comp.Cooldown);

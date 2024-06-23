@@ -107,7 +107,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         _mind.TransferTo(mindId, newXeno);
         _mind.UnVisit(mindId);
 
-        // TODO CM14 this is a hack because climbing on a newly created entity does not work properly for the client
+        // TODO RMC14 this is a hack because climbing on a newly created entity does not work properly for the client
         var comp = EnsureComp<XenoNewlyEvolvedComponent>(newXeno);
 
         _doors.Clear();
@@ -140,7 +140,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (!_prototypes.TryIndex(newXeno, out var prototype))
             return true;
 
-        // TODO CM14 revive jelly when added should not bring back dead queens
+        // TODO RMC14 revive jelly when added should not bring back dead queens
         if (prototype.TryGetComponent(out XenoEvolutionCappedComponent? capped, _compFactory) &&
             HasLiving<XenoEvolutionCappedComponent>(capped.Max, e => e.Comp.Id == capped.Id))
         {
@@ -148,7 +148,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return false;
         }
 
-        // TODO CM14 only allow evolving towards Queen if none is alive
+        // TODO RMC14 only allow evolving towards Queen if none is alive
         if (!xeno.Comp.CanEvolveWithoutGranter && !HasLiving<XenoEvolutionGranterComponent>(1))
         {
             _popup.PopupEntity(
@@ -207,8 +207,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return true;
     }
 
-    // TODO CM14 make this a property of the hive component
-    // TODO CM14 per-hive
+    // TODO RMC14 make this a property of the hive component
+    // TODO RMC14 per-hive
     public int GetLiving<T>(Predicate<Entity<T>>? predicate = null) where T : IComponent
     {
         var total = 0;
@@ -230,8 +230,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return total;
     }
 
-    // TODO CM14 make this a property of the hive component
-    // TODO CM14 per-hive
+    // TODO RMC14 make this a property of the hive component
+    // TODO RMC14 per-hive
     public bool HasLiving<T>(int count, Predicate<Entity<T>>? predicate = null) where T : IComponent
     {
         if (count <= 0)
@@ -308,7 +308,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        // TODO CM14 ovipositor attached only after 5 minutes
+        // TODO RMC14 ovipositor attached only after 5 minutes
         var time = _timing.CurTime;
         var hasGranter = HasLiving<XenoEvolutionGranterComponent>(1);
         var evolution = EntityQueryEnumerator<XenoEvolutionComponent>();

@@ -1,4 +1,4 @@
-﻿# TODO CM14 text labels on the bottom right
+﻿# TODO RMC14 text labels on the bottom right
 - type: entity
   parent: PillCanister
   id: CMPillCanister
@@ -147,7 +147,7 @@
   components:
   - type: Sprite
     layers:
-    - state: pill_canister7 # todo cm14 idk which canister this uses
+    - state: pill_canister7 # TODO RMC14 idk which canister this uses
     - state: open
       map: [ "openLayer" ]
     - state: closed
@@ -157,4 +157,4 @@
     - id: CMPillTricordrazine
       amount: 16
 
-# TODO CM14 peridaxon, tramadol
+# TODO RMC14 peridaxon, tramadol

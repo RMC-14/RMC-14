@@ -1,5 +1,5 @@
 ﻿- type: explosion
-  id: CM
+  id: RMC
   damagePerIntensity:
     types:
       Blunt: 4.5
@@ -11,7 +11,7 @@
   texturePath: /Textures/Effects/fire.rsi
   fireColor: Transparent
   sound:
-    collection: CMExplosion # TODO CM14 bigboom
+    collection: CMExplosion # TODO RMC14 bigboom
     params:
       volume: -3
   smallSound:

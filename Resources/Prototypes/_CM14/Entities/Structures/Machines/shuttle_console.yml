@@ -43,7 +43,7 @@
 #  - type: ActivatableUI
 #    key: enum.DropshipNavigationUiKey.Key
 #  - type: AccessReader
-#    access: [["CMAccessPilot"], ["CMAccessSquadLeaderPrep"], ["CMAccessXenoQueen"]] # TODO CM14 make xeno queen just swipe
+#    access: [["CMAccessPilot"], ["CMAccessSquadLeaderPrep"], ["CMAccessXenoQueen"]] # TODO RMC14 make xeno queen just swipe
 #  - type: ActivatableUIRequiresAccess
   - type: DropshipTerminal
 #  - type: UserInterface
@@ -51,7 +51,7 @@
 #      enum.DropshipTerminalUiKey.Key:
 #        type: DropshipTerminalBui
 
-# TODO CM14 alamo and normandy specific names for each
+# TODO RMC14 alamo and normandy specific names for each
 - type: entity
   parent: CMComputerDropship
   id: CMComputerDropshipCamerasAlamo

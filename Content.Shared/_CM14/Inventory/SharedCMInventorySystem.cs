@@ -243,7 +243,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
     private void Holster(EntityUid user, EntityUid item)
     {
-        // TODO CM14 try uniform-attached weapon and ammo holsters first
+        // TODO RMC14 try uniform-attached weapon and ammo holsters first
         foreach (var flag in _quickEquipOrder)
         {
             var slots = _inventory.GetSlotEnumerator(user, flag);

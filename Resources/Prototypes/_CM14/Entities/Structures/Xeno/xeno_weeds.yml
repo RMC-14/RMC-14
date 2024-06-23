@@ -1,4 +1,4 @@
-﻿- type: entity # TODO CM14 sound
+﻿- type: entity # TODO RMC14 sound
   id: XenoWeeds
   name: weeds
   description: Weird black weeds...
@@ -97,7 +97,7 @@
 #      params:
 #        volume: 8
 
-- type: entity # TODO CM14 sound
+- type: entity # TODO RMC14 sound
   parent: XenoWeeds
   id: XenoWeedsSource
   name: weed node
@@ -110,7 +110,7 @@
     - state: weed0
     - state: constructionnode
 
-- type: entity # TODO CM14 sound
+- type: entity # TODO RMC14 sound
   parent: XenoWeeds
   id: XenoHiveWeeds
   name: hive weeds
@@ -171,7 +171,7 @@
     - 0:
         hive_weed15: ""
 
-- type: entity # TODO CM14 sound
+- type: entity # TODO RMC14 sound
   parent: XenoHiveWeeds
   id: XenoHiveWeedsSource
   name: hive weed node

@@ -63,7 +63,7 @@ public sealed class CMHealthIconsSystem : EntitySystem
             }
         }
 
-        // TODO CM14 don't use perishable
+        // TODO RMC14 don't use perishable
         if (!TryComp(damageable, out PerishableComponent? perishable) ||
             perishable.Stage <= 1)
         {

@@ -18,7 +18,7 @@
       domestics: 2
       engineer: 1
       firearms: 2
-  hidden: true # TODO CM14
+  hidden: true # TODO RMC14
 
 - type: startingGear
   id: CMGearMessTech
@@ -31,7 +31,7 @@
     shoes: CMBootsBlack
     id: CMIDCardMessTech
     ears: CMHeadsetChef
-#    belt: TODO CM14 M276 Pattern General Pistol Holster Rig Filled
+#    belt: TODO RMC14 M276 Pattern General Pistol Holster Rig Filled
     pocket1: CMPouchGeneralMedium
 
 - type: entity

@@ -30,7 +30,7 @@
     sprite: _CM14/Objects/Tanks/hydrogen.rsi
   - type: Item
     sprite: _CM14/Objects/Tanks/hydrogen.rsi
-  # todo cm14 hydrogen fill
+  # TODO RMC14 hydrogen fill
 
 - type: entity
   parent: CMGasTankBase
@@ -67,7 +67,7 @@
     sprite: _CM14/Objects/Tanks/methane.rsi
   - type: Item
     sprite: _CM14/Objects/Tanks/methane.rsi
-  # todo cm14 methane fill
+  # TODO RMC14 methane fill
 
 - type: entity
   parent: CMGasTankBase
@@ -79,7 +79,7 @@
     sprite: _CM14/Objects/Tanks/pacid.rsi
   - type: Item
     sprite: _CM14/Objects/Tanks/pacid.rsi
-  # todo cm14 polyt acid fill
+  # TODO RMC14 polyt acid fill
 
 - type: entity
   parent: CMGasTankBase

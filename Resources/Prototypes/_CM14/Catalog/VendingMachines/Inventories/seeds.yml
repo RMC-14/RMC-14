@@ -1,6 +1,6 @@
 - type: vendingMachineInventory
   id: CMVendorSeeds
-  startingInventory: # todo cm14
+  startingInventory: # TODO RMC14
     BananaSeeds: 3
     BerrySeeds: 3
     CarrotSeeds: 3

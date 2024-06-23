@@ -54,7 +54,7 @@
   - type: XenoEvolution
     canEvolveWithoutGranter: true
     max: 300
-    evolvesTo: # TODO CM14 Queen
+    evolvesTo: # TODO RMC14 Queen
 #    - CMXenoCarrier
 #    - CMXenoBurrower
     - CMXenoHivelord

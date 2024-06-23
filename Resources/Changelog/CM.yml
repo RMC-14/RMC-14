@@ -91,7 +91,7 @@
   time: '2023-11-28T03:55:33.0000000+00:00'
 - author: thymol-blue
   changes:
-  - message: Added tips relevant to CM14. Be sure to keep an eye out
+  - message: Added tips relevant to RMC14. Be sure to keep an eye out
       for them!
     type: Add
   id: 15
@@ -1106,7 +1106,7 @@
   - message: Where possible, changed the material requirements and construction steps
       for objects marines can build to match their CM13 versions.
     type: Tweak
-  - message: Made girders and other constructible objects drop the CM14 versions of
+  - message: Made girders and other constructible objects drop the RMC14 versions of
       materials.
     type: Fix
   - message: Made catwalks snap to the grid properly.

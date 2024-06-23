@@ -55,17 +55,17 @@
   - type: Item
     sprite: null
   - type: Hypospray
-    transferAmount: 58 # TODO CM14 77
+    transferAmount: 58 # TODO RMC14 77
   - type: SolutionContainerManager
     solutions:
       pen:
-        maxVol: 58 # TODO CM14 77
+        maxVol: 58 # TODO RMC14 77
         reagents:
         - ReagentId: CMBicaridine
           Quantity: 29
         - ReagentId: CMKelotane
           Quantity: 29
-#        - ReagentId: CMOxycodone # TODO cm14 oxycodone
+#        - ReagentId: CMOxycodone # TODO RMC14 oxycodone
 #          Quantity: 19
   - type: SolutionContainerVisuals
     maxFillLevels: 1
@@ -156,7 +156,7 @@
     reagents:
       CMDexalinPlus: 3
 
-# TODO CM14 tramadol
+# TODO RMC14 tramadol
 
 - type: entity
   parent: CMAutoInjector
@@ -194,7 +194,7 @@
     reagents:
       CMInaprovaline: 90
 
-# TODO CM14 oxycodone
+# TODO RMC14 oxycodone
 
 - type: entity
   parent: CMAutoInjector

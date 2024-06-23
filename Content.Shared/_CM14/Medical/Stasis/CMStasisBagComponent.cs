@@ -6,7 +6,7 @@ namespace Content.Shared._CM14.Medical.Stasis;
 [Access(typeof(CMStasisBagSystem))]
 public sealed partial class CMStasisBagComponent : Component
 {
-    // TODO CM14 make upstream metabolism modifiers not shit, this just makes metabolism 1000 times slower instead of stopping it
+    // TODO RMC14 make upstream metabolism modifiers not shit, this just makes metabolism 1000 times slower instead of stopping it
     [DataField, AutoNetworkedField]
     public int MetabolismMultiplier = 1000;
 }

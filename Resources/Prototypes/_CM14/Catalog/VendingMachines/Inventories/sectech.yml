@@ -1,6 +1,6 @@
 - type: vendingMachineInventory
   id: CMVendorSec
-  startingInventory: # todo cm14
+  startingInventory: # TODO RMC14
     CMHandcuffs: 8
     Zipties: 10
     GrenadeFlashBang: 4

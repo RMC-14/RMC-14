@@ -4,7 +4,7 @@
   parent: MarkerBase
   abstract: true
   suffix: Job Spawn
-  description: A CM14 job spawner. Used for roundstart and late joins.
+  description: A RMC14 job spawner. Used for roundstart and late joins.
   components:
   - type: SpawnPoint
     spawn_type: Job

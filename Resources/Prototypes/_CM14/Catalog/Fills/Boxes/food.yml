@@ -4,7 +4,7 @@
   id: CMBoxIngredients
   description: This box contains ingredients.
   components:
-  - type: StorageFill # TODO CM14 add ingredients 
+  - type: StorageFill # TODO RMC14 add ingredients
     contents:
       - id: FoodPotato
         amount: 2

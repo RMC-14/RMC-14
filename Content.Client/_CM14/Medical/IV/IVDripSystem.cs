@@ -45,7 +45,7 @@ public sealed class IVDripSystem : SharedIVDripSystem
         if (!TryComp(pack, out SpriteComponent? sprite))
             return;
 
-        // TODO CM14 blood types
+        // TODO RMC14 blood types
         sprite.LayerSetVisible(BloodPackVisuals.Label, false);
 
         if (sprite.LayerMapTryGet(BloodPackVisuals.Fill, out var fillLayer))

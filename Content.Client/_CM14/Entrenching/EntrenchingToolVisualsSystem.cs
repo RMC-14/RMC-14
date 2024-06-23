@@ -44,7 +44,7 @@ public sealed class EntrenchingToolVisualsSystem : EntitySystem
                 {
                     sprite.LayerSetVisible(dirtLayer, true);
 
-                    // TODO CM14 color per dirt type
+                    // TODO RMC14 color per dirt type
                     sprite.LayerSetColor(dirtLayer, Color.FromHex("#C04000"));
                 }
                 else

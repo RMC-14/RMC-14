@@ -35,7 +35,7 @@
   - type: Item
     storedRotation: -90
 
-- type: entity # todo cm14 this needs a lizard sprite
+- type: entity # TODO RMC14 this needs a lizard sprite
   parent: ClothingMaskGas
   id: CMMaskGasMedical
   name: medical gas mask

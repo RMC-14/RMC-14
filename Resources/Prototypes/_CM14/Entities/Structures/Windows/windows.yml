@@ -1,7 +1,7 @@
 ﻿- type: entity
   abstract: true
   parent: CMBaseStructureCorrodible
-  id: CMBaseWindow # TODO CM14 this needs to be 2 separate entities eventually
+  id: CMBaseWindow # TODO RMC14 this needs to be 2 separate entities eventually
   placement:
     mode: SnapgridCenter
     snap:
@@ -76,7 +76,7 @@
     base: white_rwindow
     mode: CardinalFlags
 
-# TODO CM14 break window
+# TODO RMC14 break window
 - type: entity
   parent: CMWindowReinforcedWhiteHull
   id: CMWindowReinforcedWhite

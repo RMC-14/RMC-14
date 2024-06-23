@@ -18,7 +18,7 @@ public sealed partial class CMVocalizeTriggerComponent : Component
     [DataField, AutoNetworkedField]
     public PopupType PopupType = PopupType.MediumCaution;
 
-    // TODO CM14 sounds for other species
+    // TODO RMC14 sounds for other species
     [DataField, AutoNetworkedField]
     public Dictionary<Sex, SoundSpecifier> Sounds = new()
     {

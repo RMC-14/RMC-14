@@ -40,7 +40,7 @@
     - ActionXenoWatch
     - ActionXenoTailStab
     - ActionXenoHide
-    - ActionXenoLeap # TODO CM14 call this pounce, not leap
+    - ActionXenoLeap # TODO RMC14 call this pounce, not leap
     - ActionXenoBoneChips
     - ActionXenoZoom
     tier: 1

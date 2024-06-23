@@ -11,7 +11,7 @@
   - type: ShowMindShieldIcons
   - type: ShowCriminalRecordIcons
   - type: FlashImmunity
-#  - type: GuideHelp # TODO CM14
+#  - type: GuideHelp # TODO RMC14
 #    guides:
 #    - Security
 

@@ -44,7 +44,7 @@
   - type: AttachableWeaponRangedMods
     modifiers:
       damageFlat: -0.1
-      recoilFlat: -1 # TODO CM14 different recoil numbers per gun and hwen unwielded
+      recoilFlat: -1 # TODO RMC14 different recoil numbers per gun and hwen unwielded
 
 - type: entity
   parent: CMBarrelAttachmentBase

@@ -1,5 +1,5 @@
 ﻿- type: guideEntry
-  parent: CM
+  parent: RMC
   id: CMMedicine
   name: guide-entry-medicine
   text: "/ServerInfo/Guidebook/_CM14/Medical/Medicine.xml"

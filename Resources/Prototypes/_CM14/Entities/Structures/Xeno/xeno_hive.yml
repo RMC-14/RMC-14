@@ -1,10 +1,10 @@
 ﻿- type: entity
   id: HiveCoreXeno
-  name: hive core # TODO CM14 allow other structures to be built
+  name: hive core # TODO RMC14 allow other structures to be built
   description: A giant pulsating mound of mass. It looks very much alive.
-  components: # TODO CM14 block ob, mortar and air strikes
+  components: # TODO RMC14 block ob, mortar and air strikes
   - type: Transform
-    anchored: true # TODO CM14 cooldown if destroyed
+    anchored: true # TODO RMC14 cooldown if destroyed
   - type: Sprite
     sprite: _CM14/Structures/Xenos/hive_core.rsi
     state: core
@@ -53,7 +53,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 300 # TODO CM14
+        damage: 300 # TODO RMC14
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]

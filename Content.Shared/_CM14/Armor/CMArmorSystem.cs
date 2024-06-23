@@ -74,7 +74,7 @@ public sealed class CMArmorSystem : EntitySystem
 
     private void OnGetExplosionResistance(Entity<CMArmorComponent> armored, ref GetExplosionResistanceEvent args)
     {
-        // TODO CM14 unhalve this when we can calculate explosion damage better
+        // TODO RMC14 unhalve this when we can calculate explosion damage better
         var armor = armored.Comp.ExplosionArmor / 2;
 
         if (armor <= 0)
@@ -112,7 +112,7 @@ public sealed class CMArmorSystem : EntitySystem
 
     private void ModifyDamage(EntityUid ent, ref DamageModifyEvent args)
     {
-        // TODO CM14 the slot should depend on the part that is receiving the damage once part damage is in
+        // TODO RMC14 the slot should depend on the part that is receiving the damage once part damage is in
         var ev = new CMGetArmorEvent(SlotFlags.OUTERCLOTHING | SlotFlags.INNERCLOTHING);
         RaiseLocalEvent(ent, ref ev);
 

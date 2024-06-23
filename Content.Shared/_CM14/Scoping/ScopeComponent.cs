@@ -19,7 +19,7 @@ public sealed partial class ScopeComponent : Component
     [DataField, AutoNetworkedField]
     public float Zoom = 1f;
 
-    // TODO CM14 scoping making this too high causes pop-in
+    // TODO RMC14 scoping making this too high causes pop-in
     // wait until https://github.com/space-wizards/RobustToolbox/pull/5228 is fixed to increase it
     // cm13 values: 11 tile offset, 24x24 view in 4x | 6 tile offset, normal view in 2x.
     // right now we are doing a mix of both and only one setting.

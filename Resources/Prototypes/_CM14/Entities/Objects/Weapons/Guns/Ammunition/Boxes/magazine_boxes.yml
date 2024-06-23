@@ -1,4 +1,4 @@
-﻿# TODO cm14 all of these need cm13 mechanics for placing and taking
+﻿# TODO RMC14 all of these need cm13 mechanics for placing and taking
 - type: entity
   abstract: true
   parent: BaseItem
@@ -334,7 +334,7 @@
         tags:
         - CMMagazinePistolM4A3
 
-#- type: entity # todo cm14 this box is done but needs mags made
+#- type: entity # TODO RMC14 this box is done but needs mags made
 #  parent: CMBoxMagazineBase
 #  id: CMBoxMagazinePistolM4A3AP
 #  name: magazine box (AP M4A3 x 16)

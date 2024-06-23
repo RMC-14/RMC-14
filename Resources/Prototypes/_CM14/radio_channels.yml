@@ -1,4 +1,4 @@
-# TODO CM14 remove longrange once communications is in
+# TODO RMC14 remove longrange once communications is in
 # High Command
 - type: radioChannel #USMC High Command, for events and such, basically CentComm channel
   id: MarineHighCommand
@@ -128,7 +128,7 @@
   name: chat-radio-colony
   keycode: "o" #o in cm13
   frequency: 1381
-  color: "#cf40a6" #todo cm14
+  color: "#cf40a6" #todo rmc14
   longRange: true
 
 - type: radioChannel # Only used by Corporate Liason to hand out to bodyguards / command.

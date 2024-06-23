@@ -75,7 +75,7 @@ public sealed class CMStasisBagSystem : EntitySystem
 
     public bool CanBodyMetabolize(EntityUid body)
     {
-        // TODO CM14 for now we need to call this manually from upstream code become upstream metabolism code is a sad joke
+        // TODO RMC14 for now we need to call this manually from upstream code become upstream metabolism code is a sad joke
         var ev = new CMMetabolizeAttemptEvent();
         RaiseLocalEvent(body, ref ev);
         return !ev.Cancelled;
@@ -83,7 +83,7 @@ public sealed class CMStasisBagSystem : EntitySystem
 
     public bool CanOrganMetabolize(Entity<OrganComponent?> organ)
     {
-        // TODO CM14 for now we need to call this manually from upstream code become upstream metabolism code is a sad joke
+        // TODO RMC14 for now we need to call this manually from upstream code become upstream metabolism code is a sad joke
         if (!_organQuery.Resolve(organ, ref organ.Comp, false) ||
             organ.Comp.Body is not { } body)
         {

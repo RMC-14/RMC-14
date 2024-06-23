@@ -74,7 +74,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        #insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg #TODO cm14 pistol sounds
+        #insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg #TODO RMC14 pistol sounds
         #ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
         priority: 2
         whitelist:
@@ -84,7 +84,7 @@
 - type: entity
   parent: CMWeaponPistolBase
   id: CMWeaponPistol88m4
-  name: 88 Mod 4 combat pistol # TODO CM14 sounds
+  name: 88 Mod 4 combat pistol # TODO RMC14 sounds
   description: Standard issue Marine firearm. Also found in the hands of We-Ya PMC teams. Fires 9mm armor shredding rounds and is capable of 3-round burst.
   components:
   - type: Sprite
@@ -103,7 +103,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        #insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg #TODO cm14 pistol sounds
+        #insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg #TODO RMC14 pistol sounds
         #ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
         priority: 2
         whitelist:
@@ -135,7 +135,7 @@
     shotsPerBurst: 3
     availableModes:
     - SemiAuto
-#    - Burst # TODO CM14 higher fire rate, lower accuracy in burst
+#    - Burst # TODO RMC14 higher fire rate, lower accuracy in burst
     soundGunshot:
       collection: CMM4A3Shoot
   - type: GunWieldBonus

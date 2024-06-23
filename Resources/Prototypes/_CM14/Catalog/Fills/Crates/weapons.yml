@@ -28,7 +28,7 @@
   name: VP-78 Hand Cannon Crate (x2)
   components:
   - type: StorageFill
-    contents: # TODO CM14 two cases with 1 pìstol 2 mags each
+    contents: # TODO RMC14 two cases with 1 pìstol 2 mags each
     - id: CMWeaponPistolVP78
       amount: 2
     - id: CMMagazinePistolVP78

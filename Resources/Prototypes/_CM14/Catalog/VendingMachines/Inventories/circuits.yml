@@ -3,7 +3,7 @@
   startingInventory:
     FireAlarmElectronics: 5
     CMAPCElectronics: 6
-#    CMAutolatheMachineCircuitboard: 2 # TODO CM14
+#    CMAutolatheMachineCircuitboard: 2 # TODO RMC14
     TelecomServerCircuitboard: 1
     CrewMonitoringComputerCircuitboard: 2
     IDComputerCircuitboard: 2

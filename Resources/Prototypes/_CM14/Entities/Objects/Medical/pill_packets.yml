@@ -9,7 +9,7 @@
     sprite: _CM14/Objects/Medical/pill_packets.rsi
   - type: Item
     size: Small
-  - type: Storage # TODO CM14 quick-eject
+  - type: Storage # TODO RMC14 quick-eject
     maxItemSize: Small
     grid:
     - 0,0,7,1 # 4 slots
@@ -64,5 +64,5 @@
     - id: CMPillKelotane
       amount: 4
 
-# TODO CM14 tramadol pill packet
-# TODO CM14 oxycodone pill packet
+# TODO RMC14 tramadol pill packet
+# TODO RMC14 oxycodone pill packet

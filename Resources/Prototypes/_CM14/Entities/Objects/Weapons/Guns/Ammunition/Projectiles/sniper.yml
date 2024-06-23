@@ -16,7 +16,7 @@
   - type: CMArmorPiercing
     amount: 50
 
-# TODO CM14 incendiary
+# TODO RMC14 incendiary
 - type: entity
   parent: CMBulletSniper10x28mm
   id: CMBulletSniper10x28mmIncendiary
@@ -31,7 +31,7 @@
   - type: CMArmorPiercing
     amount: 20
 
-# TODO CM14 slow
+# TODO RMC14 slow
 - type: entity
   parent: CMBulletSniper10x28mm
   id: CMBulletSniper10x28mmFlak

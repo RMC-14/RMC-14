@@ -58,7 +58,7 @@
   - "Reqs doesn't have an infinite budget."
   - "Good Reqs can land supplies anywhere outside - given coords - and sometimes in a minimal amount of time."
   - "Intel Officers can be put in a squad by going to CIC and requesting it."
-  - "The Colonial Marshals may come to crack down on too heavy of a Black Market usage."
+  - "The Marshals may come to crack down on too heavy of a Black Market usage."
   - "You can put a pistol belt on your suit slot. (Just grab a rifle instead.)"
   - "Need help learning the game and these tips aren't enough? Use MentorHelp or try to get ahold of your ship's Senior Enlisted Advisor."
   - "Both foldable cades & plasteel cades if loosened and folded down can be transported in crates! In this way, you can use the crate as a portable breach-repair kit, or dragged (or carried via Power Loader) to an unsecure area for quick defensive set up."
@@ -95,7 +95,7 @@
   - "Star shell dust from said grenades is just as meltable as normal flares."
   - "Playable Parasites can leap onto targets with a one-second windup, but this will only infect them if they are adjacent to it.  Otherwise, it will simply knock them down for a small duration."
   - "As a Parasite, you cannot talk in hivemind, but you can still open Hive Status and overwatch your sisters. This can be useful if you're locating other Parasites, flanker castes, or trying to learn from experienced Parasite players."
-# TODO CM14  - "Shift-clicking the Queen indicator will tell you what area you are in, on the map."
+# TODO RMC14  - "Shift-clicking the Queen indicator will tell you what area you are in, on the map."
   - "As a Ravager your abilities become greatly enhanced when you empower with three or more people around you."
 # Meta Tips
   - "Try not to get too mad about dying. We’re all here to have fun."
@@ -108,7 +108,7 @@
   - "You shouldn't ignore what your allies are up to. Sometimes they can be organizing a flank in hivemind/radio, sometimes they can be walking up behind you with a slug-loaded shotgun. Either way, it pays to be alert to what they're doing, as much to as what the enemies are."
   - "You can always AdminHelp with the F1 key to question a member of staff regarding rules or game bugs."
 #  - "As ghost you are given extra tools for spectating the round. You can jump and follow specific players, get notifications about CAS and OB strikes, can see all health bars, and such."
-#  - "You can press ESC key to bring up the game pause menu. It allows you change settings, AdminHelp, and even access the Web Maps of game by clicking at top right." # TODO CM14 AdminHelp and MentorHelp
+#  - "You can press ESC key to bring up the game pause menu. It allows you change settings, AdminHelp, and even access the Web Maps of game by clicking at top right." # TODO RMC14 AdminHelp and MentorHelp
   - "Control of intelligence is important be it for retrieving it as marine, or denying it as Xeno."
   - "If the lobby music is too loud or bothering you, you can disable it in Options > Audio in the Escape menu."
   - "You can go to GitHub to view code of the game and propose modifications of your own."
@@ -188,7 +188,7 @@
   #- Examine your gun and click \\[See combat statistics\\] to view information such as damage for your weapon.
   #- Xenonids who run while on fire are stunned for some time and emit light. Use that time to catch up and finish them off!
   #- When you have shrapnel embedded, take out your boot knife and use it in your hand to rip them out of your body.
-  #- If your weapon has a bayonet, you can manually pry open unpowered doors by clicking on them with the gun. Click on the door again to close it. UPP bayonets can pry them open quicker.
+  #- If your weapon has a bayonet, you can manually pry open unpowered doors by clicking on them with the gun. Click on the door again to close it. SPP bayonets can pry them open quicker.
   #- Items on the floor can be shot. Shoot a poorly thrown HEDP away to save your buddies!
   #- You can hold a bayonet or throwing knife on your mask slot. Always be prepared.
   #- Xenonids can't apply parasites to marines if they're on fire.

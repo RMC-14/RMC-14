@@ -14,7 +14,7 @@
 
 # RATING 1
 
-# TODO CM14 these, bring them back with a stack type instead of a machine part component
+# TODO RMC14 these, bring them back with a stack type instead of a machine part component
 - type: entity
   parent: CMStockPartBase
   id: CMStockPartScreen

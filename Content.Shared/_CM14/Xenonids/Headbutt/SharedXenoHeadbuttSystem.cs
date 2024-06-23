@@ -67,7 +67,7 @@ public abstract class SharedXenoHeadbuttSystem : EntitySystem
 
     private void OnXenoHeadbuttHit(Entity<XenoHeadbuttComponent> xeno, ref ThrowDoHitEvent args)
     {
-        // TODO CM14 lag compensation
+        // TODO RMC14 lag compensation
         var targetId = args.Target;
         if (_physicsQuery.TryGetComponent(xeno, out var physics) &&
             _thrownItemQuery.TryGetComponent(xeno, out var thrown))

@@ -25,7 +25,7 @@ public sealed class MarineOrdersSystem : SharedMarineOrdersSystem
         // All the SetUseDelay calls are required because even tho we set the cooldown on all of them once an order
         // is issued for some reason the order that was pressed uses its delays and does not care about its cooldown
         // being set.
-        // TODO CM14 implement focus order effects
+        // TODO RMC14 implement focus order effects
         // _actions.AddAction(ent, ref comp.FocusActionEntity, comp.FocusAction);
         // _actions.SetUseDelay(comp.FocusActionEntity, comp.Cooldown);
         _actions.AddAction(ent, ref comp.HoldActionEntity, comp.HoldAction);
@@ -36,7 +36,7 @@ public sealed class MarineOrdersSystem : SharedMarineOrdersSystem
 
     private void OnOrdersShutdown(Entity<MarineOrdersComponent> ent, ref ComponentShutdown ev)
     {
-        // TODO CM14 implement focus order effects
+        // TODO RMC14 implement focus order effects
         // _actions.RemoveAction(ent, ent.Comp.FocusActionEntity);
         _actions.RemoveAction(ent, ent.Comp.HoldActionEntity);
         _actions.RemoveAction(ent, ent.Comp.MoveActionEntity);

@@ -1,10 +1,10 @@
-﻿# TODO CM14 make these decals (that look correct)
+﻿# TODO RMC14 make these decals (that look correct)
 - type: tile
   abstract: true
   parent: CMTileBase
   id: CMFloorSteelSterileGreenBase
   name: tiles-cm-green-sterile
-  itemDrop: CMTileItemSteel # TODO CM14
+  itemDrop: CMTileItemSteel # TODO RMC14
 
 - type: tile
   parent: CMFloorSteelSterileGreenBase

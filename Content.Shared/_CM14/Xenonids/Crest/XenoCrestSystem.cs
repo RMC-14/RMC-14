@@ -18,7 +18,7 @@ public sealed class XenoCrestSystem : EntitySystem
 
     public override void Initialize()
     {
-        // TODO CM14 resist knockback
+        // TODO RMC14 resist knockback
         SubscribeLocalEvent<XenoCrestComponent, XenoToggleCrestActionEvent>(OnXenoCrestAction);
         SubscribeLocalEvent<XenoCrestComponent, RefreshMovementSpeedModifiersEvent>(OnXenoCrestRefreshMovementSpeed);
         SubscribeLocalEvent<XenoCrestComponent, CMGetArmorEvent>(OnXenoCrestGetArmor);

@@ -252,7 +252,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             // Any unfilled xeno slots become larva
             for (var i = selected; i < totalXenos; i++)
             {
-                // TODO CM14 xeno spawn points
+                // TODO RMC14 xeno spawn points
                 var xenoEnt = SpawnAtPosition(comp.LarvaEnt, comp.XenoMap.ToCoordinates());
                 _xeno.MakeXeno(xenoEnt);
                 _xeno.SetHive(xenoEnt, comp.Hive);
@@ -338,7 +338,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 ev.SpawnResult = _stationSpawning.SpawnPlayerMob(coordinates, ev.Job, ev.HumanoidCharacterProfile, ev.Station);
             }
 
-            // TODO CM14 split this out with an event
+            // TODO RMC14 split this out with an event
             SpriteSpecifier? icon = null;
             if (job.HasIcon && _prototypes.TryIndex(job.Icon, out var jobIcon))
                 icon = jobIcon.Icon;
@@ -349,7 +349,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             {
                 _squad.AssignSquad(ev.SpawnResult.Value, squad.Value, ev.Job);
 
-                // TODO CM14 add this to the map file
+                // TODO RMC14 add this to the map file
                 if (TryComp(spawner, out TransformComponent? xform) &&
                     xform.GridUid != null)
                 {
@@ -504,7 +504,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             if (!xenosAlive && marinesAlive)
             {
-                // TODO CM14 this should be when the dropship crashes, not if xenos ever boarded
+                // TODO RMC14 this should be when the dropship crashes, not if xenos ever boarded
                 if (distress.XenosEverOnShip)
                 {
                     distress.Result = DistressSignalRuleResult.MinorXenoVictory;
@@ -557,7 +557,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private bool SpawnXenoMap(Entity<CMDistressSignalRuleComponent> rule)
     {
-        // TODO CM14 different planet-side maps
+        // TODO RMC14 different planet-side maps
         var mapId = _mapManager.CreateMap();
         if (!_mapLoader.TryLoad(mapId, "/Maps/_CM14/lv624.yml", out var grids) ||
             grids.Count == 0)
@@ -621,7 +621,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private (EntProtoId Id, EntityUid Ent) NextSquad(ProtoId<JobPrototype> job, CMDistressSignalRuleComponent rule)
     {
-        // TODO CM14 this biases people towards alpha as that's the first one, maybe not a problem once people can pick a preferred squad?
+        // TODO RMC14 this biases people towards alpha as that's the first one, maybe not a problem once people can pick a preferred squad?
         if (!rule.NextSquad.TryGetValue(job, out var next) ||
             next >= rule.SquadIds.Count)
         {

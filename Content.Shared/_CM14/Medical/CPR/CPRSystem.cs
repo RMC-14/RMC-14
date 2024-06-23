@@ -29,7 +29,7 @@ public sealed class CPRSystem : EntitySystem
     [Dependency] private readonly SharedRottingSystem _rotting = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
-    // TODO CM14 move this to a component
+    // TODO RMC14 move this to a component
     [ValidatePrototypeId<DamageTypePrototype>]
     private const string HealType = "Asphyxiation";
 
@@ -39,8 +39,8 @@ public sealed class CPRSystem : EntitySystem
     {
         base.Initialize();
 
-        // TODO CM14 use skills
-        // TODO CM14 something more generic than "marine"
+        // TODO RMC14 use skills
+        // TODO RMC14 something more generic than "marine"
         SubscribeLocalEvent<MarineComponent, InteractHandEvent>(OnMarineInteractHand);
         SubscribeLocalEvent<MarineComponent, CPRDoAfterEvent>(OnMarineDoAfter);
 
@@ -77,7 +77,7 @@ public sealed class CPRSystem : EntitySystem
 
         args.Handled = true;
 
-        // TODO CM14 make this not use rotting
+        // TODO RMC14 make this not use rotting
         if (_net.IsServer)
             _rotting.ReduceAccumulator(target, TimeSpan.FromSeconds(7));
 
@@ -96,7 +96,7 @@ public sealed class CPRSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        // TODO CM14 move this value to a component
+        // TODO RMC14 move this value to a component
         var selfPopup = Loc.GetString("cm-cpr-self-perform", ("target", target), ("seconds", 7));
         _popups.PopupEntity(selfPopup, target, performer);
 
@@ -124,7 +124,7 @@ public sealed class CPRSystem : EntitySystem
         var target = ent.Owner;
         var performer = args.Performer;
 
-        // TODO CM14 move this value to a component
+        // TODO RMC14 move this value to a component
         if (ent.Comp.Last > _timing.CurTime - TimeSpan.FromSeconds(7))
         {
             args.Cancelled = true;
@@ -194,7 +194,7 @@ public sealed class CPRSystem : EntitySystem
 
         EnsureComp<ReceivingCPRComponent>(target);
 
-        // TODO CM14 less time for skilled doctors
+        // TODO RMC14 less time for skilled doctors
         var doAfter = new DoAfterArgs(EntityManager, performer, TimeSpan.FromSeconds(4), new CPRDoAfterEvent(), performer, target)
         {
             BreakOnMove = true,

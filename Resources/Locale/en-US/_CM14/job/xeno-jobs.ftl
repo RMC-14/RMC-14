@@ -52,7 +52,7 @@ CMJobXenoSpitter = Spitter
 cm-job-name-xeno-warrior = Warrior
 CMJobXenoWarrior = Warrior
 
-# TODO CM14
+# TODO RMC14
 department-CMXeno = Xenonid
 cm-department-Xeno-description = ""
 

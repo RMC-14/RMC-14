@@ -32,6 +32,6 @@
     delay: 2
   - type: UseDelay
 
-#  - type: GunWieldBonus # TODO CM14
+#  - type: GunWieldBonus # TODO RMC14
 #    minAngle: -25
 #    maxAngle: -50

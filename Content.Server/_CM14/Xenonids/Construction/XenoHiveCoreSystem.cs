@@ -53,9 +53,9 @@ public sealed class XenoHiveCoreSystem : SharedXenoHiveCoreSystem
     {
         base.Update(frameTime);
 
-        // TODO CM14 lesser drone job bans
-        // TODO CM14 30 second delay to grabbing the next lesser drone role
-        // TODO CM14 hive specific
+        // TODO RMC14 lesser drone job bans
+        // TODO RMC14 30 second delay to grabbing the next lesser drone role
+        // TODO RMC14 hive specific
         var time = _timing.CurTime;
         var query = EntityQueryEnumerator<HiveCoreComponent, GhostRoleMobSpawnerComponent>();
         while (query.MoveNext(out var uid, out var core, out var spawner))

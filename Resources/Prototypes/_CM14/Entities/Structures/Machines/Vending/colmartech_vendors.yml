@@ -1,5 +1,5 @@
-# TODO CM14 all of these vendor inventories
-# TODO CM14 deny and vend states
+# TODO RMC14 all of these vendor inventories
+# TODO RMC14 deny and vend states
 - type: entity
   abstract: true
   parent: CMCorrodible
@@ -104,7 +104,7 @@
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
   - type: CMAutomatedVendor
-    sections: # TODO CM14
+    sections: # TODO RMC14
     - name: Barrel
       entries:
       - id: CMAttachmentExtendedBarrel
@@ -425,7 +425,7 @@
         name: first-aid pouch (refillable injectors)
         recommended: true
       - id: CMPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO CM14 splints comma
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
         recommended: true
       - id: CMPouchFirstAidPills
         name: first-aid pouch (pills)
@@ -822,7 +822,7 @@
       - id: CMPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
       - id: CMPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO CM14 splints comma
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
       - id: CMPouchFirstAidPills
         name: first-aid pouch (pills)
       - id: CMPouchFlareFilled
@@ -961,7 +961,7 @@
       - id: CMPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
       - id: CMPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO CM14 splints comma
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
       - id: CMPouchFirstAidPills
         name: first-aid pouch (pills)
       - id: CMPouchFlareFilled
@@ -1244,7 +1244,7 @@
       - id: CMPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
       - id: CMPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO CM14 splints comma
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
       - id: CMPouchFirstAidPills
         name: first-aid pouch (pills)
       #- id: CMElectronicsPouchFull
@@ -1299,7 +1299,7 @@
         points: 1
       - id: CMOintment10
         points: 1
-      - id: CMBloodPackFull # TODO CM14 O-
+      - id: CMBloodPackFull # TODO RMC14 O-
         points: 4
     - name: Firstaid Kits
       entries:
@@ -1313,7 +1313,7 @@
         points: 6
       - id: CMFirstAidO2KitFilled
         points: 6
-#      - id: #    CMRadiationFirstaidKit # TODO CM14
+#      - id: #    CMRadiationFirstaidKit # TODO RMC14
 #        points: 6
     - name: Autoinjectors
       entries:
@@ -1495,10 +1495,10 @@
       - id: CMPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
       - id: CMPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO CM14 splints comma
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
       - id: CMPouchFirstAidPills
         name: first-aid pouch (pills)
-      - id: CMPouchFirstResponder # TODO CM14 test everything fits
+      - id: CMPouchFirstResponder # TODO RMC14 test everything fits
       - id: CMPouchFlareFilled
         name: Flare pouch (filled)
       - id: CMPouchGeneralLarge
@@ -1557,11 +1557,11 @@
   - type: CMSolutionRefiller
     current: 600
     max: 600
-    recharge: 125 # TODO CM14 auto-restock items as well if round is >= 20 minutes in
+    recharge: 125 # TODO RMC14 auto-restock items as well if round is >= 20 minutes in
     rechargeCooldown: 4
     reagents:
     - CMTricordrazine
-#    - CMTramadol # TODO CM14
+#    - CMTramadol # TODO RMC14
     whitelist:
       components:
       - Hypospray
@@ -1577,7 +1577,7 @@
         amount: 3
     - name: Field Supplies
       entries:
-      - id: CMFireExtinguisher # TODO CM14 portable
+      - id: CMFireExtinguisher # TODO RMC14 portable
         amount: 5
       - id: CMOintment10
         amount: 7
@@ -1722,7 +1722,7 @@
       - id: CMPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
       - id: CMPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO CM14 splints comma
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
       - id: CMPouchFirstAidPills
         name: first-aid pouch (pills)
       - id: CMPouchMagazinePistolLarge
@@ -1805,8 +1805,8 @@
     #  points: 5
     - name: Restricted Firearms
       entries:
-      - id: CMWeaponPistolVP78 # TODO CM14 case with 2 mags
-        points: 5 # TODO CM14 10
+      - id: CMWeaponPistolVP78 # TODO RMC14 case with 2 mags
+        points: 5 # TODO RMC14 10
     #- id: CMSU6SmartPistol
     #  points: 15
     #- id: CMM79GrenadeLauncher
@@ -1906,7 +1906,7 @@
       - id: CMPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
       - id: CMPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO CM14 splints comma
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
       - id: CMPouchFirstAidPills
         name: first-aid pouch (pills)
       - id: CMPouchFirstResponder

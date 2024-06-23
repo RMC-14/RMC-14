@@ -45,7 +45,7 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: band_e # TODO CM14 band non e
+    - state: band_e # TODO RMC14 band non e
       color: "#9C2219"
 
 - type: entity
@@ -64,7 +64,7 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: band_e # TODO CM14 band non e
+    - state: band_e # TODO RMC14 band non e
       color: "#7866FF"
 
 - type: entity
@@ -90,7 +90,7 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: band_e # TODO CM14 band non e
+    - state: band_e # TODO RMC14 band non e
       color: "#000000"
 
 - type: Tag

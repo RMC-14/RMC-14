@@ -1,6 +1,6 @@
 - type: vendingMachineInventory
   id: CMVendorSnack
-  startingInventory: # todo cm14
+  startingInventory: # TODO RMC14
     FoodBurgerPlain: 12
     #Burrito 12
     #Hot Dog 12

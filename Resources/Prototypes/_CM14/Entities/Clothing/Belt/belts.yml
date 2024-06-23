@@ -76,15 +76,15 @@
     whitelist:
       tags:
       - Flare
-#      - # TODO CM14 shotgun shell handfuls
+#      - # TODO RMC14 shotgun shell handfuls
       - CMMagazinePistol
       - CMMagazineRevolver
       - CMMagazineRifle
       - CMMagazineSmg
       - CMMagazineSniper
       - Grenade
-#      - # TODO CM14 mines
-#      - # TODO CM14 snacks
+#      - # TODO RMC14 mines
+#      - # TODO RMC14 snacks
       components:
       - BallisticAmmoProvider
   - type: IgnoreContentsSize
@@ -157,7 +157,7 @@
       - Sidearm
       - CMMagazinePistol
       - CMMagazineRevolver
-#      - # TODO CM14 handful of shotgun shells
+#      - # TODO RMC14 handful of shotgun shells
 #      - # TODO nailgun, cell, circuit board
       components:
       - Welder
@@ -220,11 +220,11 @@
       - CMOintment
       - CMTraumaKit
       - CMBurnKit
-#      - # TODO CM14 splints
+#      - # TODO RMC14 splints
       - CMAutoInjector
       - CMRollerBed
       - BodyBag
-#      - # TODO CM14 latex gloves
+#      - # TODO RMC14 latex gloves
       components:
       - Hypospray
       - Defibrillator
@@ -260,8 +260,8 @@
       - CMOintment
       - CMTraumaKit
       - CMBurnKit
-      #      - # TODO CM14 splints
-#      - # TODO CM14 latex gloves
+      #      - # TODO RMC14 splints
+#      - # TODO RMC14 latex gloves
       components:
       - Defibrillator
       - Pill
@@ -286,7 +286,7 @@
     whitelist:
       tags:
       - CMMortarShell
-#      - # TODO CM14 pistol, revolver, flaregun
+#      - # TODO RMC14 pistol, revolver, flaregun
   - type: FixedItemSizeStorage
 
 - type: entity
@@ -309,7 +309,7 @@
       - Taser
       - Flashlight
       - CMMagazinePistol
-#      - # TODO CM14 shotgun handfuls
+#      - # TODO RMC14 shotgun handfuls
       - Taser
       components:
       - Handcuff
@@ -341,8 +341,8 @@
       - CMMagazineRifle
       - CMMagazineSmg
       - CMMagazineSniper
-#      - # TODO CM14 smart gun magazine
-#      - # TODO CM14 shotgun handfuls
+#      - # TODO RMC14 smart gun magazine
+#      - # TODO RMC14 shotgun handfuls
       - Flare
   - type: FixedItemSizeStorage
 

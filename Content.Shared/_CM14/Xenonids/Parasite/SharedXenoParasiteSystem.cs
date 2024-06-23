@@ -311,7 +311,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         _blindable.UpdateIsBlind(victim);
         _appearance.SetData(parasite, victimComp.InfectedLayer, true);
 
-        // TODO CM14 also do damage to the parasite
+        // TODO RMC14 also do damage to the parasite
         EnsureComp<ParasiteSpentComponent>(parasite);
 
         ParasiteLeapHit(parasite);
@@ -357,7 +357,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
             if (infected.BurstAt > time)
             {
-                // TODO CM14 make this less effective against late-stage infections, also make this support faster incubation
+                // TODO RMC14 make this less effective against late-stage infections, also make this support faster incubation
                 if (infected.IncubationMultiplier < 1)
                     infected.BurstAt += TimeSpan.FromSeconds(1 - infected.IncubationMultiplier) * frameTime;
 

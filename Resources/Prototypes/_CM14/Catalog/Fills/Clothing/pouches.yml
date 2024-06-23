@@ -47,7 +47,7 @@
     contents:
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
-    #- id: CMTramadolAutoInjector # TODO CM14
+    #- id: CMTramadolAutoInjector # TODO RMC14
     - id: CMEmergencyAutoInjector
 
 - type: entity
@@ -71,8 +71,8 @@
     contents:
     - id: CMPacketPillsBicaridine
     - id: CMPacketPillsKelotane
-#    - id: CMPacketPillsTramadol # TODO CM14
-#    - id: CMPacketPillsTramadol # TODO CM14
+#    - id: CMPacketPillsTramadol # TODO RMC14
+#    - id: CMPacketPillsTramadol # TODO RMC14
 
 - type: entity
   parent: CMPouchFirstAidERT
@@ -106,7 +106,7 @@
   components:
   - type: StorageFill
     contents:
-    # TODO CM14 pill bottle tramadol
+    # TODO RMC14 pill bottle tramadol
     - id: CMPillCanisterBicaridine
     - id: CMPillCanisterKelotane
     - id: CMPillCanisterDexalin
@@ -116,7 +116,7 @@
   id: CMPouchMedicalSocFill
   suffix: Filled
   components:
-  - type: StorageFill # todo cm14 autoinjectors oxycodone
+  - type: StorageFill # todo rmc14 autoinjectors oxycodone
     contents:
     - id: CMHealthAnalyzer
       # splint
@@ -141,7 +141,7 @@
       amount: 2
     - id: CMBurnKit10
       amount: 2
-    # todo cm14 autoinjectors oxycodone x2
+    # todo rmc14 autoinjectors oxycodone x2
 #    - id: CMOxycodoneAutoInjector
 #      amount: 2
     - id: CMEmergencyAutoInjector
@@ -155,7 +155,7 @@
   - type: StorageFill
     contents:
     - id: CMHealthAnalyzer
-    # todo cm14 roller cryobag
+    # todo rmc14 roller cryobag
 
 - type: entity
   parent: CMPouchVial
@@ -183,7 +183,7 @@
   suffix: Filled
   components:
   - type: StorageFill
-    contents: # todo cm14 autoinjectors kelo x2, tramad x2, emerg
+    contents: # todo rmc14 autoinjectors kelo x2, tramad x2, emerg
     - id: CMBicaridineAutoInjector
       amount: 2
     - id: CMKelotaneAutoInjector

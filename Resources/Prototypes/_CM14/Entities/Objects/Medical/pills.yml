@@ -45,7 +45,7 @@
     tags:
     - Pill
 
-# TODO CM14 these need to have a random state per round
+# TODO RMC14 these need to have a random state per round
 - type: entity
   parent: CMPill
   id: CMPillBicaridine
@@ -154,4 +154,4 @@
   - type: ExamineRequiresSkill
     skilledExamine: cm-pill-contents-tricordrazine
 
-# TODO CM14 peridaxon, tramadol
+# TODO RMC14 peridaxon, tramadol

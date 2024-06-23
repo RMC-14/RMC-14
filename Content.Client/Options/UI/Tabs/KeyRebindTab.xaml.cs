@@ -152,7 +152,7 @@ namespace Content.Client.Options.UI.Tabs
                 KeybindsContainer.AddChild(newCheckBox);
             }
 
-            AddHeader("ui-options-header-cm");
+            AddHeader("ui-options-header-rmc");
             AddButton(CMKeyFunctions.CMActivateAttachableBarrel);
             AddButton(CMKeyFunctions.CMActivateAttachableRail);
             AddButton(CMKeyFunctions.CMActivateAttachableStock);

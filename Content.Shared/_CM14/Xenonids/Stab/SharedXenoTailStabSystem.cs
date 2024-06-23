@@ -122,8 +122,8 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                 break;
         }
 
-        // TODO CM14 sounds
-        // TODO CM14 lag compensation
+        // TODO RMC14 sounds
+        // TODO RMC14 lag compensation
         var damage = new DamageSpecifier(stab.Comp.TailDamage);
         if (actualResults.Count == 0)
         {

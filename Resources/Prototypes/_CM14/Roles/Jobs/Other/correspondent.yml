@@ -30,7 +30,7 @@
     shoes: CMShoesLaceup
     id: CMIDCardCorrespondent
     ears: CMHeadsetReporter
-    #    belt: CMCamera TODO CM14
+    #    belt: CMCamera TODO RMC14
     pocket1: CMPouchGeneralLarge
 
 - type: entity

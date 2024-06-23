@@ -108,7 +108,7 @@
   - type: Gun
     selectedMode: SemiAuto
     availableModes:
-    - SemiAuto # TODO CM14 burst with greatly increased angle unless mounted
+    - SemiAuto # TODO RMC14 burst with greatly increased angle unless mounted
     soundGunshot:
       collection: CMM41AShoot
   - type: GunWieldBonus

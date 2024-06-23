@@ -36,8 +36,8 @@
     - 0,0,20,1
     blacklist:
       tags:
-      - CMFirstAidKit # TODO CM14 medical skill
-  #      - EngineerKit # TODO CM14
+      - CMFirstAidKit # TODO RMC14 medical skill
+  #      - EngineerKit # TODO RMC14
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -159,7 +159,7 @@
   - type: SolutionContainerManager
     solutions:
       tank:
-        maxVol: 650 # TODO CM14 260 when welders are fixed
+        maxVol: 650 # TODO RMC14 260 when welders are fixed
         reagents:
         - ReagentId: WeldingFuel
           Quantity: 650

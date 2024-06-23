@@ -35,7 +35,7 @@
     delay: 1
   - type: PhysicalComposition
     materialComposition:
-      Plastic: 50 # TODO CM14 port cmss13 Plastic
+      Plastic: 50 # TODO RMC14 port cmss13 Plastic
   - type: Tag
     tags:
       - Mop

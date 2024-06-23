@@ -30,7 +30,7 @@ namespace Content.Shared.CCVar
         ///     Guide entry that is displayed by default when a guide is opened.
         /// </summary>
         public static readonly CVarDef<string> DefaultGuide =
-            CVarDef.Create("server.default_guide", "CM14", CVar.REPLICATED | CVar.SERVER);
+            CVarDef.Create("server.default_guide", "RMC14", CVar.REPLICATED | CVar.SERVER);
 
         /*
          * Ambience

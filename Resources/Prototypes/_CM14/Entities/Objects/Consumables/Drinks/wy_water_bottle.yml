@@ -26,4 +26,4 @@
   - type: Sealable
   - type: MREItem
   - type: Destructible
-    thresholds: [] # TODO CM14 destroy on explosion unless inside a container
+    thresholds: [] # TODO RMC14 destroy on explosion unless inside a container

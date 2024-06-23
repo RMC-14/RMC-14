@@ -1,5 +1,5 @@
 - type: constructionGraph
-  parent: CM
+  parent: RMC
   id: CMApc
   start: start
   graph:
@@ -27,7 +27,7 @@
         doAfter: 1.5
       - tool: Screwing
         doAfter: 0
-    
+
     - to: start
       completed:
       - !type:GivePrototype

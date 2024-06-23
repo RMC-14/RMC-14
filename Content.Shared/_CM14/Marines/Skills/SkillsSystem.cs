@@ -145,7 +145,7 @@ public sealed class SkillsSystem : EntitySystem
         if (HasComp<BypassSkillChecksComponent>(ent))
             return true;
 
-        // TODO CM14 turn these into prototypes
+        // TODO RMC14 turn these into prototypes
         Resolve(ent, ref ent.Comp, false);
         var skills = ent.Comp?.Skills ?? default;
         return skills.Antagonist >= required.Antagonist &&

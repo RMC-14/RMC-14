@@ -92,7 +92,7 @@
     contents:
     - id: CMBoxMagazinePistolM4A3
 
-#- type: entity # todo cm14 needs ammo mags completed, box is done
+#- type: entity # TODO RMC14 needs ammo mags completed, box is done
 #  parent: CMCrateAmmo
 #  id: CMCrateBoxMagazinePistolM4A3AP
 #  name: Magazine box (M4A3, 16x AP mags)

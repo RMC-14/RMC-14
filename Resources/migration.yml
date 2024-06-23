@@ -391,3 +391,5 @@ CMAutoLathe: CMAutolathe
 
 # 2024-06-22
 CMSpawnPointSmartGunner: CMSpawnPointSmartGunOperator
+CMFaxUPP: CMFaxSPP
+CMFaxTwE: CMFaxTSE

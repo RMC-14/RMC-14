@@ -6,7 +6,7 @@ namespace Content.Shared._CM14.Marines.Skills;
 [Access(typeof(SkillsSystem))]
 public sealed partial class MedicallyUnskilledDoAfterComponent : Component
 {
-    // TODO CM14 use Skills struct and IncludeDataField
+    // TODO RMC14 use Skills struct and IncludeDataField
     [DataField, AutoNetworkedField]
     public int Min = 1;
 

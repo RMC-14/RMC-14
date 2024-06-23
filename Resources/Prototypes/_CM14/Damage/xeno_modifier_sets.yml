@@ -1,4 +1,4 @@
 ﻿- type: damageModifierSet
-  id: Resin # TODO CM14 rebalance
+  id: Resin # TODO RMC14 rebalance
   coefficients:
     Heat: 1.5

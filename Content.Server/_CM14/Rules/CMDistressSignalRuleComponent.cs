@@ -31,7 +31,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     [DataField]
     public EntityUid Hive;
 
-    // TODO CM14
+    // TODO RMC14
     [DataField]
     public bool XenosEverOnShip;
 

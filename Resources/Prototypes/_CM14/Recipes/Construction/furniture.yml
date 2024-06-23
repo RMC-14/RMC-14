@@ -1,6 +1,6 @@
 #chairs
 - type: construction
-  parent: CM
+  parent: RMC
   name: chair
   id: CMChair
   graph: CMSeat
@@ -18,7 +18,7 @@
     - !type:TileNotBlocked
 
 - type: construction
-  parent: CM
+  parent: RMC
   name: comfy chair
   id: CMChairComfy
   graph: CMSeat
@@ -36,7 +36,7 @@
     - !type:TileNotBlocked
 
 - type: construction
-  parent: CM
+  parent: RMC
   name: dark office chair
   id: CMChairOfficeDark
   graph: CMSeat
@@ -54,7 +54,7 @@
     - !type:TileNotBlocked
 
 - type: construction
-  parent: CM
+  parent: RMC
   name: white office chair
   id: CMChairOfficeWhite
   graph: CMSeat

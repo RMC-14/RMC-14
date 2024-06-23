@@ -19,7 +19,7 @@
       engineer: 3
       firearms: 1
       powerLoader: 2
-  hidden: true # TODO CM14
+  hidden: true # TODO RMC14
 
 - type: startingGear
   id: CMGearMaintTech
@@ -30,7 +30,7 @@
     gloves: CMHandsInsulated
     id: CMIDCardMaintTech
     ears: CMHeadsetEngineer
-    #    belt: TODO CM14 M276 Pattern General Pistol Holster Rig Filled
+    #    belt: TODO RMC14 M276 Pattern General Pistol Holster Rig Filled
     pocket2: CMPouchGeneralMedium
 
 - type: entity

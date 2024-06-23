@@ -1,5 +1,5 @@
 ﻿<Document>
-  #CM14 Rules
+  #RMC14 Rules
 
   ##Recent Changes
   - Rules moved to guidebook.
@@ -29,7 +29,7 @@
   - [textlink="Click here to read the zero tolerance rules." link="CMZeroTolerance"]
 
   ## Core Rules
-  These are the general rules of CM14. Click them for more information.
+  These are the general rules of RMC14. Click them for more information.
   - [textlink="1. These are English servers, please only use english." link="CMLanguage"]
   - [textlink="2. Do not use multiple accounts, or alt accounts, and do not share accounts." link="CMMultikey"]
   - [textlink="3. Follow the rules of escalation against non-hostiles." link="CMRulesEscalation"]

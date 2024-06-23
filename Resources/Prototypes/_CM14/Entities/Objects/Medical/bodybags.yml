@@ -32,7 +32,7 @@
 
 - type: entity
   parent: CMBodyBag
-  id: CMStasisBag # TODO CM14 This needs to halt infected timers or something
+  id: CMStasisBag # TODO RMC14 This needs to halt infected timers or something
   name: stasis bag
   description: A folded, reusable bag designed to prevent additional damage to an occupant.
   components:

@@ -132,7 +132,7 @@
   footstepSounds:
     collection: FootstepAsteroid
 
-# TODO CM14 scoched dirt grass
+# TODO RMC14 scoched dirt grass
 - type: tile
   parent: CMPlanetBase
   id: CMPlanetGrassDirt
@@ -294,7 +294,7 @@
   footstepSounds:
     collection: FootstepWood
   canDig: false
-  
+
 - type: tile
   parent: CMPlanetBase
   id: CMPlanetCorsatPlate

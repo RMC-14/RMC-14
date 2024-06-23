@@ -51,7 +51,7 @@ public abstract class SharedIVDripSystem : EntitySystem
         SubscribeLocalEvent<IVDripComponent, GetVerbsEvent<InteractionVerb>>(OnIVVerbs);
         SubscribeLocalEvent<IVDripComponent, ExaminedEvent>(OnIVExamine);
 
-        // TODO CM14 check for BloodstreamComponent instead of MarineComponent
+        // TODO RMC14 check for BloodstreamComponent instead of MarineComponent
         SubscribeLocalEvent<MarineComponent, CanDropTargetEvent>(OnMarineCanDropTarget);
 
         SubscribeLocalEvent<BloodPackComponent, MapInitEvent>(OnBloodPackMapInit);
@@ -86,7 +86,7 @@ public abstract class SharedIVDripSystem : EntitySystem
 
     private void OnIVDripCanDropDragged(Entity<IVDripComponent> iv, ref CanDropDraggedEvent args)
     {
-        // TODO CM14 check for BloodstreamComponent instead of MarineComponent
+        // TODO RMC14 check for BloodstreamComponent instead of MarineComponent
         if (HasComp<MarineComponent>(args.Target) && InRange(iv, args.Target, iv.Comp.Range))
         {
             args.Handled = true;
@@ -94,7 +94,7 @@ public abstract class SharedIVDripSystem : EntitySystem
         }
     }
 
-    // TODO CM14 check for BloodstreamComponent instead of MarineComponent
+    // TODO RMC14 check for BloodstreamComponent instead of MarineComponent
     private void OnMarineCanDropTarget(Entity<MarineComponent> marine, ref CanDropTargetEvent args)
     {
         var iv = args.Dragged;

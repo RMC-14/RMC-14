@@ -37,7 +37,7 @@
       overwatch: 1
       police: 2
     - type: MarineOrders
-  hidden: true # TODO CM14
+  hidden: true # TODO RMC14
 
 - type: startingGear
   id: CMGearChiefMP
@@ -52,7 +52,7 @@
     outerClothing: CMArmorM3WO
     ears: CMHeadsetCMP
     belt: CMBeltSecurityFilled
-    #    pocket1: TODO CM14 tape recorder
+    #    pocket1: TODO RMC14 tape recorder
     pocket2: CMPouchGeneralLarge
 
 - type: entity

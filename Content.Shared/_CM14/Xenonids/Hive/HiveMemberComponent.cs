@@ -2,7 +2,7 @@
 
 namespace Content.Shared._CM14.Xenonids.Hive;
 
-// TODO CM14 replace other hive properties with this component
+// TODO RMC14 replace other hive properties with this component
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedXenoHiveSystem))]
 public sealed partial class HiveMemberComponent : Component

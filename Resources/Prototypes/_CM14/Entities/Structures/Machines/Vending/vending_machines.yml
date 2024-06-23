@@ -242,7 +242,7 @@
     anchored: true
   - type: Sprite
     sprite: _CM14/Structures/Machines/Medical/medilink.rsi
-    state: medlink_green_clamped # TODO CM14 change states dynamically
+    state: medlink_green_clamped # TODO RMC14 change states dynamically
     drawdepth: FloorObjects
   - type: CMMedicalSupplyLink
 
@@ -262,7 +262,7 @@
   - type: CMSolutionRefiller
     current: 600
     max: 600
-    recharge: 125 # TODO CM14 auto-restock items as well if round is >= 20 minutes in
+    recharge: 125 # TODO RMC14 auto-restock items as well if round is >= 20 minutes in
     rechargeCooldown: 4
     reagents:
     - CMBicaridine
@@ -273,15 +273,15 @@
     - CMTricordrazine
     - CMEpinephrine
     - CMInaprovaline
-#    - CMOxycodone # TODO CM14
-#    - CMTramadol # TODO CM14
-#    - CMPeridaxon # TODO CM14
+#    - CMOxycodone # TODO RMC14
+#    - CMTramadol # TODO RMC14
+#    - CMPeridaxon # TODO RMC14
     whitelist:
       components:
       - Hypospray
       tags:
       - Bottle
-  - type: CMAutomatedVendor # TODO CM14 different ui style
+  - type: CMAutomatedVendor # TODO RMC14 different ui style
     sections:
     - name: Field supplies
       entries:
@@ -293,7 +293,7 @@
         amount: 6
       - id: CMGauze10
         amount: 6
-#      - id: CMSplints10 # TODO CM14
+#      - id: CMSplints10 # TODO RMC14
 #        amount: 6
     - name: Autoinjectors
       entries:
@@ -307,9 +307,9 @@
         amount: 3
       - id: CMKelotaneAutoInjector
         amount: 3
-#      - id: CMOxycodoneAutoinjector # TODO CM14
+#      - id: CMOxycodoneAutoinjector # TODO RMC14
 #        amount: 3
-#      - id: CMTramadolAutoinjector # TODO CM14
+#      - id: CMTramadolAutoinjector # TODO RMC14
 #        amount: 3
       - id: CMTricordrazineAutoInjector
         amount: 3
@@ -325,11 +325,11 @@
         amount: 3
       - id: CMBottleKelotane
         amount: 3
-#      - id: CMBottleOxycodone # TODO CM14
+#      - id: CMBottleOxycodone # TODO RMC14
 #        amount: 3
-#      - id: CMBottlePeridaxon # TODO CM14
+#      - id: CMBottlePeridaxon # TODO RMC14
 #        amount: 3
-#      - id: CMBottleTramadol # TODO CM14
+#      - id: CMBottleTramadol # TODO RMC14
 #        amount: 3
     - name: Pill bottles
       entries:
@@ -343,9 +343,9 @@
         amount: 2
       - id: CMPillCanisterKelotane
         amount: 2
-#      - id: CMPillCanisterPeridaxon # TODO CM14
+#      - id: CMPillCanisterPeridaxon # TODO RMC14
 #        amount: 2
-#      - id: CMPillCanisterTramadol # TODO CM14
+#      - id: CMPillCanisterTramadol # TODO RMC14
 #        amount: 2
     - name: Medical utilities
       entries:
@@ -355,13 +355,13 @@
         amount: 2
       - id: CMSynthGraft
         amount: 2
-      - id: CMHypospray # TODO CM14 full of tricordrazine
+      - id: CMHypospray # TODO RMC14 full of tricordrazine
         amount: 2
       - id: CMHealthAnalyzer
         amount: 5
       - id: CMBeltMedical
         amount: 2
-      - id: ClothingEyesHudMedical # TODO CM14
+      - id: ClothingEyesHudMedical # TODO RMC14
         amount: 3
       - id: CMStasisBagFolded
         amount: 2
@@ -387,7 +387,7 @@
     whitelist:
       tags:
       - Bottle
-  - type: CMAutomatedVendor # TODO CM14 different ui style
+  - type: CMAutomatedVendor # TODO RMC14 different ui style
     sections:
     - name: Liquid bottles
       entries:
@@ -401,11 +401,11 @@
         amount: 6
       - id: CMBottleKelotane
         amount: 6
-    #      - id: CMBottleOxycodone # TODO CM14
+    #      - id: CMBottleOxycodone # TODO RMC14
     #        amount: 6
-    #      - id: CMBottlePeridaxon # TODO CM14
+    #      - id: CMBottlePeridaxon # TODO RMC14
     #        amount: 6
-    #      - id: CMBottleTramadol # TODO CM14
+    #      - id: CMBottleTramadol # TODO RMC14
     #        amount: 6
     - name: Miscellaneous
       entries:
@@ -417,7 +417,7 @@
         amount: 3
       - id: CMBoxPillCanister
         amount: 2
-      - id: Dropper # TODO CM14 cm dropper
+      - id: Dropper # TODO RMC14 cm dropper
         amount: 3
       - id: CMSyringe
         amount: 7
@@ -433,7 +433,7 @@
   - type: VendingMachine
     pack: CMVendorBlood
   - type: ApcPowerReceiver
-    needsPower: false # TODO CM14
+    needsPower: false # TODO RMC14
     powerLoad: 0
 
 - type: entity
@@ -453,7 +453,7 @@
   parent: CMVendor
   id: CMVendorChess
   name: Chess-o-mat
-  description: In 2143 Red Star Drinks, a UPP-CA (Colonial Administration) affiliated corporation ran a promotional sweepstakes for drinkers who had found special codes on the inside of the caps of a limited run of Red Star Vodka, shipping them a Chess-O-Mat with unlimited refills.
+  description: In 2143 Red Star Drinks, a SPP-CA (Colony Administration) affiliated corporation ran a promotional sweepstakes for drinkers who had found special codes on the inside of the caps of a limited run of Red Star Vodka, shipping them a Chess-O-Mat with unlimited refills.
   components:
   - type: Sprite
     sprite: _CM14/Structures/Machines/VendingMachines/chessomat.rsi

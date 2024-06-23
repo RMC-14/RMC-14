@@ -55,7 +55,7 @@
     damage:
       types:
         Heat: 55
-  # todo cm14 add burning
+  # todo rmc14 add burning
 
 - type: entity
   parent: CMPelletShotgunBase
@@ -93,5 +93,5 @@
   parent: CMPelletShotgunBuckshot
   id: CMPelletShotgunIncendiaryBuckshot
   name: incendiary buckshot shell
-  #components: #todo cm14 add burning
+  #components: #TODO RMC14 add burning
 

@@ -165,7 +165,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             BreakOnMove = true
         };
 
-        // TODO CM14 building animation
+        // TODO RMC14 building animation
         _doAfter.TryStartDoAfter(doAfter);
     }
 
@@ -190,7 +190,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         args.Handled = true;
 
-        // TODO CM14 stop collision for mobs until they move off
+        // TODO RMC14 stop collision for mobs until they move off
         if (_net.IsServer)
             Spawn(args.StructureId, coordinates);
     }

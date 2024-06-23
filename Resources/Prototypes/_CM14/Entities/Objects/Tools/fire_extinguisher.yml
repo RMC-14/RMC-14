@@ -25,7 +25,7 @@
     visuals:
       enum.FireExtinguisherVisuals.Safety:
         enabled:
-          True: { state: fire_extinguisher } # TODO CM14
+          True: { state: fire_extinguisher } # TODO RMC14
           False: { state: fire_extinguisher }
 
 - type: entity

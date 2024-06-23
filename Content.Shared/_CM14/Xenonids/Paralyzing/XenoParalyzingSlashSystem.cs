@@ -52,7 +52,7 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
                 continue;
             }
 
-            // TODO CM14 slight blindness
+            // TODO RMC14 slight blindness
             var victim = EnsureComp<VictimBeingParalyzedComponent>(entity);
 
             victim.ParalyzeAt = _timing.CurTime + xeno.Comp.ParalyzeDelay;

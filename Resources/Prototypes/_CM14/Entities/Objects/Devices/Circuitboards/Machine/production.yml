@@ -19,7 +19,7 @@
   id: CMAutolatheMachineCircuitboard
   name: autolathe machine board
   description: A machine printed circuit board for an autolathe
-  components: # TODO CM14 autolathe
+  components: # TODO RMC14 autolathe
     - type: MachineBoard
       prototype: CMAutolathe
 #      requirements:
@@ -36,7 +36,7 @@
 #    - type: Sprite
 #      state: power_mod
 ##    - type: MachineBoard
-##      prototype: PortableGeneratorPacman # TODO CM14 pacman
+##      prototype: PortableGeneratorPacman # TODO RMC14 pacman
 ##      requirements:
 ##        Capacitor: 1
 ##      materialRequirements:
@@ -57,7 +57,7 @@
 #    - type: Sprite
 #      state: power_mod
 #    - type: MachineBoard
-#      prototype: PortableGeneratorSuperPacman # TODO CM14 super pacman
+#      prototype: PortableGeneratorSuperPacman # TODO RMC14 super pacman
 ##      requirements:
 ##        Capacitor: 2
 ##      materialRequirements:
@@ -80,7 +80,7 @@
     state: blank_mod
   - type: MachineBoard
     prototype: CMDispenserChemEmpty
-    # TODO CM14 material requirements
+    # TODO RMC14 material requirements
 
 - type: entity
   parent: CMBaseMachineCircuitboard
@@ -92,7 +92,7 @@
     state: blank_mod
   - type: MachineBoard
     prototype: CMDispenserBoozeEmpty
-    # TODO CM14 material requirements
+    # TODO RMC14 material requirements
 
 - type: entity
   parent: CMBaseMachineCircuitboard
@@ -104,7 +104,7 @@
     state: blank_mod
   - type: MachineBoard
     prototype: CMDispenserSodaEmpty
-    # TODO CM14 material requirements
+    # TODO RMC14 material requirements
 
 - type: entity
   parent: CMBaseMachineCircuitboard
@@ -116,7 +116,7 @@
     state: blank_mod
   - type: MachineBoard
     prototype: CMChemMaster
-    # TODO CM14 material requirements
+    # TODO RMC14 material requirements
 
 - type: entity
   parent: CMBaseMachineCircuitboard
@@ -128,4 +128,4 @@
     state: blank_mod
   - type: MachineBoard
     prototype: CMMicrowave
-#    # TODO CM14 material requirements
+#    # TODO RMC14 material requirements

@@ -60,7 +60,7 @@
       - Bucket
   - type: PhysicalComposition
     materialComposition:
-      Plastic: 50 # TODO CM14 plastic
+      Plastic: 50 # TODO RMC14 plastic
 
 - type: entity
   parent: CMBucket

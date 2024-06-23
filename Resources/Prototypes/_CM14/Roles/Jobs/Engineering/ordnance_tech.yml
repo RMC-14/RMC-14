@@ -22,7 +22,7 @@
       engineer: 3
       firearms: 1
       powerLoader: 2
-  hidden: true # TODO CM14
+  hidden: true # TODO RMC14
 
 - type: startingGear
   id: CMGearOrdnanceTech
@@ -34,7 +34,7 @@
     id: CMIDCardOrdnanceTech
     ears: CMHeadsetEngineer
     belt: CMBeltUtilityFilled
-#    pocket1: CMDemolitionsScanner TODO CM14
+#    pocket1: CMDemolitionsScanner TODO RMC14
     pocket2: CMPouchGeneralMedium
 
 - type: entity

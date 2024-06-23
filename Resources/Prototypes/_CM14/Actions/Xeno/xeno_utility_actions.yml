@@ -1,7 +1,7 @@
 ﻿- type: entity
   id: ActionXenoTransferPlasma
   parent: ActionXenoBase
-  name: Transfer plasma (50) # TODO CM14 proper plasma costs
+  name: Transfer plasma (50) # TODO RMC14 proper plasma costs
   description: Give plasma to a nearby xeno
   components:
   - type: EntityTargetAction

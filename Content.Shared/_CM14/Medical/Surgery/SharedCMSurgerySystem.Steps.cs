@@ -255,7 +255,7 @@ public abstract partial class SharedCMSurgerySystem
 
     public bool PreviousStepsComplete(EntityUid body, EntityUid part, Entity<CMSurgeryComponent> surgery, EntProtoId step)
     {
-        // TODO CM14 use index instead of the prototype id
+        // TODO RMC14 use index instead of the prototype id
         if (surgery.Comp.Requirement is { } requirement)
         {
             if (GetSingleton(requirement) is not { } requiredEnt ||

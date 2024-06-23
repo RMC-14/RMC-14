@@ -187,7 +187,7 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
 
     private void AddGroup(Entity<DamageableComponent> damageable, RichTextLabel label, Color color, ProtoId<DamageGroupPrototype> group, string? labelStr = null)
     {
-        // TODO CM14 unhardcode this
+        // TODO RMC14 unhardcode this
         labelStr ??= group.Id;
         var msg = new FormattedMessage();
         msg.AddText($"{labelStr}: ");

@@ -45,7 +45,7 @@
       surgery: 1
       vehicles: 1
     - type: MarineOrders
-  hidden: true # TODO CM14
+  hidden: true # TODO RMC14
 
 - type: startingGear
   id: CMGearASO

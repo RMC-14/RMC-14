@@ -34,7 +34,7 @@
   icon: Interface/Emotes/deathgasp.png
   chatMessages: [ "cm-xeno-death-gasp" ]
 
-# TODO CM14 xenos should bleed and hurt nearby marines when damaged
+# TODO RMC14 xenos should bleed and hurt nearby marines when damaged
 - type: entity
   id: CMXenoBase
   abstract: true
@@ -213,7 +213,7 @@
   - type: UserLimitHits
   - type: MovementIgnoreGravity
   - type: DisableConstruction
-  - type: XenoAnnounceDeath # TODO CM14 announce location of death (area)
+  - type: XenoAnnounceDeath # TODO RMC14 announce location of death (area)
     message: cm-xeno-death
     color: "#459A62"
 
@@ -272,7 +272,7 @@
   parent: CMXenoBase
   abstract: true
   components:
-#  - type: HTN # TODO CM14 needs to not target nested marines
+#  - type: HTN # TODO RMC14 needs to not target nested marines
 #    rootTask:
 #      task: CMXenoCompound
   - type: NpcFactionMember

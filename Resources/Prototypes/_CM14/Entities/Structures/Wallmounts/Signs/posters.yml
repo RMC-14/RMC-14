@@ -395,7 +395,7 @@
 - type: entity
   parent: CMPosterBase
   id: CMPosterVoteNo
-  name: "Vote 'NO' to Proposition 339 and Vote 'NO!' to the Colonial Protection Act"
+  name: "Vote 'NO' to Proposition 339 and Vote 'NO!' to the Colony Protection Act"
   description: "This poster demands that you vote 'NO!' to that new piece of legislation that would give the military carte blanche permission to stick its nose in corporate affairs. Many view the bill as government overreach, but many others view it as the lesser of two evils compared to letting the megacorps do whatever they want. Because space is friggin' huge, it's going to take a while to gather all of the votes and even if it's passed, it likely won't go into effect until 2186 at the earliest."
   components:
   - type: Sprite

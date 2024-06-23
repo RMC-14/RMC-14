@@ -1,4 +1,4 @@
-﻿# TODO CM14 other effects
+﻿# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagent, Dylovene ]
   id: CMDylovene
@@ -40,7 +40,7 @@
         time: 60
         type: Add
 
-# TODO CM14 other effects
+# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagent, Ethylredoxrazine ]
   id: CMEthylredoxrazine
@@ -70,7 +70,7 @@
           groups:
             Toxin: 2.25
 
-# TODO CM14 other effects
+# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagent, Arithrazine ]
   id: CMArithrazine
@@ -130,7 +130,7 @@
           groups:
             Brute: 0.62
 
-# TODO CM14 other effects
+# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagent, Bicaridine ]
   id: CMBicaridine
@@ -160,7 +160,7 @@
             Burn: 2.5
             Toxin: 1
 
-# TODO CM14 other effects (remove toxic reagents)
+# TODO RMC14 other effects (remove toxic reagents)
 - type: reagent
   parent: [ CMReagent, Cryoxadone ]
   id: CMCryoxadone
@@ -188,7 +188,7 @@
             Asphyxiation: -1
             Cellular: -0.12
 
-# TODO CM14 other effects
+# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagent, Dermaline ]
   id: CMDermaline
@@ -219,7 +219,7 @@
             Burn: 0.88
             Toxin: 0.88
 
-# TODO CM14 other effects
+# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagent, Dexalin ]
   id: CMDexalin
@@ -249,7 +249,7 @@
             Brute: 1
             Toxin: 2
 
-# TODO CM14 other effects
+# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagent, DexalinPlus ]
   id: CMDexalinPlus
@@ -278,8 +278,8 @@
             Brute: 1.5
             Toxin: 3
 
-# TODO CM14 other effects (pain)
-# TODO CM14 injected only
+# TODO RMC14 other effects (pain)
+# TODO RMC14 injected only
 - type: reagent
   parent: [ CMReagent, Epinephrine ]
   id: CMEpinephrine
@@ -320,8 +320,8 @@
           types:
             Asphyxiation: 1.5
 
-# TODO CM14 other effects
-# TODO CM14 allow breathing in crit instead of reducing asphyxiation
+# TODO RMC14 other effects
+# TODO RMC14 allow breathing in crit instead of reducing asphyxiation
 - type: reagent
   parent: [ CMReagent, Inaprovaline ]
   id: CMInaprovaline
@@ -368,7 +368,7 @@
         time: 40
         type: Add
 
-# TODO CM14 other effects
+# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagent, Kelotane ]
   id: CMKelotane
@@ -399,7 +399,7 @@
             Brute: 2.5
             Toxin: 2.5
 
-# TODO CM14 other effects
+# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagent, Leporazine ]
   id: CMLeporazine
@@ -438,7 +438,7 @@
         time: 30
         type: Add
 
-# TODO CM14 other effects
+# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagent, Tricordrazine ]
   id: CMTricordrazine

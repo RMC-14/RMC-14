@@ -1,6 +1,6 @@
 # Walls
 - type: construction
-  parent: CM
+  parent: RMC
   id: CMGirder
   name: girder
   graph: CMGirder
@@ -19,7 +19,7 @@
     - !type:TileNotBlocked
 
 #- type: construction
-#  parent: CM
+#  parent: RMC
 #  id: CMGirderReinforced
 #  name: reinforced girder
 #  graph: CMGirder
@@ -38,7 +38,7 @@
 #    - !type:TileNotBlocked
 
 - type: construction
-  parent: CM
+  parent: RMC
   id: CMWallMetal
   name: wall
   graph: CMGirder
@@ -57,7 +57,7 @@
     - !type:TileNotBlocked
 
 - type: construction
-  parent: CM
+  parent: RMC
   id: CMWallReinforced
   name: reinforced wall
   graph: CMGirder
@@ -77,7 +77,7 @@
 
 # Airlocks
 - type: construction
-  parent: CM
+  parent: RMC
   name: airlock
   id: CMAirlock
   graph: CMAirlock
@@ -95,7 +95,7 @@
     - !type:TileNotBlocked
 
 - type: construction
-  parent: CM
+  parent: RMC
   name: glass airlock
   id: CMAirlockGlass
   graph: CMAirlock
@@ -115,7 +115,7 @@
 
 # Windoors
 - type: construction
-  parent: CM
+  parent: RMC
   name: windoor
   id: CMWindoor
   graph: CMWindoor
@@ -133,7 +133,7 @@
     - !type:TileNotBlocked
 
 - type: construction
-  parent: CM
+  parent: RMC
   name: secure windoor
   id: CMWindoorSecure
   graph: CMWindoor
@@ -152,7 +152,7 @@
 
 # Barricades
 - type: construction
-  parent: CM
+  parent: RMC
   name: Metal Barricade
   id: CMBarricadeMetal
   graph: BarricadeMetalGraph
@@ -170,7 +170,7 @@
     - !type:TileNotBlocked
 
 - type: construction
-  parent: CM
+  parent: RMC
   name: Turnstile
   id: CMBarricadeTurnstile
   graph: BarricadeTurnstileGraph
@@ -188,7 +188,7 @@
     - !type:TileNotBlocked
 
 - type: construction
-  parent: CM
+  parent: RMC
   name: Medical Turnstile
   id: CMBarricadeTurnstileMed
   graph: BarricadeTurnstileMedGraph
@@ -206,7 +206,7 @@
     - !type:TileNotBlocked
 
 - type: construction
-  parent: CM
+  parent: RMC
   name: Folding Metal Barricade
   id: CMBarricadeMetalDoor
   graph: BarricadeMetalDoorGraph
@@ -224,7 +224,7 @@
     - !type:TileNotBlocked
 
 - type: construction
-  parent: CM
+  parent: RMC
   name: Folding Plasteel Barricade
   id: CMBarricadePlasteelDoor
   graph: BarricadePlasteelDoorGraph
@@ -243,7 +243,7 @@
 
 #lighting
 - type: construction
-  parent: CM
+  parent: RMC
   name: tube light fixture
   id: CMLightTubeFixture
   graph: CMLightFixture
@@ -262,7 +262,7 @@
     - !type:TileNotBlocked
 
 - type: construction
-  parent: CM
+  parent: RMC
   name: bulb light fixture
   id: CMLightBulbFixture
   graph: CMLightFixture
@@ -282,7 +282,7 @@
 
 # Other
 - type: construction
-  parent: CM
+  parent: RMC
   id: CMCatwalk
   name: catwalk
   graph: CMCatwalk
@@ -303,7 +303,7 @@
     - Plating
 
 - type: construction
-  parent: CM
+  parent: RMC
   id: CMFence
   name: fence
   graph: CMFence

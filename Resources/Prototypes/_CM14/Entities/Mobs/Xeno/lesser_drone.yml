@@ -16,7 +16,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      160: Dead # TODO CM14 gib on death
+      160: Dead # TODO RMC14 gib on death
   - type: Xeno
     role: CMXenoLesserDrone
     actionIds:
@@ -26,7 +26,7 @@
     - ActionXenoTailStab
     - ActionXenoAcidWeak
     - ActionXenoPheromones
-    - ActionXenoPlantWeeds # TODO CM14 only near other weeds for lesser drones
+    - ActionXenoPlantWeeds # TODO RMC14 only near other weeds for lesser drones
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
     # evasion: 10

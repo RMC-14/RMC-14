@@ -1,4 +1,4 @@
-﻿- type: entity # TODO CM14 split these into per file categories and inherit all to ASRS
+﻿- type: entity # TODO RMC14 split these into per file categories and inherit all to ASRS
   abstract: true
   id: CMCargoCatalog
   components:
@@ -22,7 +22,7 @@
         crate: CMCrateBoxMagazineSMGM39AP
       - cost: 2000
         crate: CMCrateBoxMagazinePistolM4A3
-#      - cost: 3000 # todo cm14 this crate is completed but needs mags
+#      - cost: 3000 # TODO RMC14 this crate is completed but needs mags
 #        crate: CMCrateBoxMagazinePistolM4A3AP
       - cost: 3000
         crate: CMCrateBoxShellsShotgunSlugs
@@ -35,7 +35,7 @@
       - cost: 4000
         crate: CMCrateBoxMagazinePistolVP78
 #    - name: Attachments
-#      entries: [ ] # TODO CM14
+#      entries: [ ] # TODO RMC14
 #      - cost: 3000
 #        crate: CMCrateAttachmentRedDot
 #      - cost: 3000

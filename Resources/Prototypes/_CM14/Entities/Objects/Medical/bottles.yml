@@ -8,7 +8,7 @@
   - type: Sprite
     sprite: _CM14/Objects/Chemistry/bottles.rsi
     layers:
-    - state: bottle-1 #TODO CM14 make something like "bottle-[rand(1..4)]"
+    - state: bottle-1 #TODO RMC14 make something like "bottle-[rand(1..4)]"
     - state: bottle-1-1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
@@ -132,4 +132,4 @@
     reagents:
       CMInaprovaline: 60
 
-# TODO CM14 oxycodone, peridaxon, tramadol
+# TODO RMC14 oxycodone, peridaxon, tramadol

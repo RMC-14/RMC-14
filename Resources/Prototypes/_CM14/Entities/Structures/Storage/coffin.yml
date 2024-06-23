@@ -27,7 +27,7 @@
           collection: WoodDestroy
       - !type:SpawnEntitiesBehavior
         spawn:
-          MaterialWoodPlank1: # TODO CM14 wood material
+          MaterialWoodPlank1: # TODO RMC14 wood material
             min: 1
             max: 4
       - !type:DoActsBehavior

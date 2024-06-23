@@ -58,7 +58,7 @@
   placement:
     mode: SnapgridCenter
   components:
-  #- type: Sprite # todo cm14 make (or find) destroyed box sprite
+  #- type: Sprite # TODO RMC14 make (or find) destroyed box sprite
   #  sprite: _CM14/Structures/Machines/parts.rsi
   - type: Construction
     graph: CMMachineFrame

@@ -9,7 +9,7 @@ public sealed class RotationDrawDepthSystem : EntitySystem
         var query = EntityQueryEnumerator<RotationDrawDepthComponent, SpriteComponent, TransformComponent>();
         while (query.MoveNext(out _, out var rotation, out var sprite, out var xform))
         {
-            // TODO CM14 this needs to support rotated viewports eventually
+            // TODO RMC14 this needs to support rotated viewports eventually
             var dir = xform.LocalRotation.GetCardinalDir();
             switch (dir)
             {

@@ -110,7 +110,7 @@
   parent: CMApcBase
   id: CMApcLowCapacity
   suffix: APC, Small powercell, 50kW
-  components: # todo cm14 / TODO cm14 make apc use powercells
+  components: # TODO RMC14 / TODO RMC14 make apc use powercells
   - type: Battery
     maxCharge: 50000
     startingCharge: 50000

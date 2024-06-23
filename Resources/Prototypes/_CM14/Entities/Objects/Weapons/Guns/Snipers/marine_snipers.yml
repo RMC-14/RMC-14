@@ -1,4 +1,4 @@
-# TODO CM14 sniper barrel
+# TODO RMC14 sniper barrel
 - type: entity
   parent: CMBaseWeaponRifle
   id: CMM42ASniperRifle
@@ -51,5 +51,5 @@
     isCorrodible: false
   - type: GunIFF
   - type: Scope
-    zoom: 1.25 # TODO CM14 2x and 4x zoom
+    zoom: 1.25 # TODO RMC14 2x and 4x zoom
     requireWielding: true

@@ -13,11 +13,11 @@
     FoodCondimentBottleEnzyme: 12
     FoodShakerSalt: 12
     FoodShakerPepper: 12
-    # todo cm14 Mint 12
+    # TODO RMC14 Mint 12
     FoodApple: 12
     FoodBanana: 12
     FoodMushroom: 12
-    # todo cm14 Cherry 12
+    # TODO RMC14 Cherry 12
     FoodChiliPepper: 12
     FoodCabbage: 12
     FoodCarrot: 12
@@ -28,4 +28,4 @@
     FoodOrange: 12
     FoodPotato: 12
     FoodTomato: 12
-    # todo cm14 Whitebeet 12
+    # TODO RMC14 Whitebeet 12

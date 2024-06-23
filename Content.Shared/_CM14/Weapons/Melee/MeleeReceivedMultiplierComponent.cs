@@ -9,7 +9,7 @@ namespace Content.Shared._CM14.Weapons.Melee;
 public sealed partial class MeleeReceivedMultiplierComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
-    public DamageSpecifier XenoDamage; // TODO CM14 other hives
+    public DamageSpecifier XenoDamage; // TODO RMC14 other hives
 
     [DataField(required: true), AutoNetworkedField]
     public FixedPoint2 OtherMultiplier;

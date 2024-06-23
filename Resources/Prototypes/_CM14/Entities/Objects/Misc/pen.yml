@@ -15,7 +15,7 @@
 
 - type: entity
   parent: CMPen
-  id: CMPenClicky # todo CM14 make it clicky
+  id: CMPenClicky # TODO RMC14 make it clicky
   name: WEYA pen
   description: It's a WEYA brand extra clicky black ink pen.
 

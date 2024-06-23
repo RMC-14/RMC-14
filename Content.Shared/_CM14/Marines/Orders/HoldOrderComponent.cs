@@ -34,7 +34,7 @@ public sealed partial class HoldOrderComponent : Component, IOrderComponent
     /// <remarks>
     /// I am unsure of when pain will be implemented but I am putting this here for the future.
     /// </remarks>
-    /// TODO CM14 Make this do something meaningful when pain is actually a thing.
+    /// TODO RMC14 Make this do something meaningful when pain is actually a thing.
     [DataField, AutoNetworkedField]
     public FixedPoint2 PainModifier;
 }

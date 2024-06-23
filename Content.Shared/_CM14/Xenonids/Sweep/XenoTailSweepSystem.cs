@@ -36,7 +36,7 @@ public sealed class XenoTailSweepSystem : EntitySystem
 
     private void OnXenoTailSweepAction(Entity<XenoTailSweepComponent> xeno, ref XenoTailSweepActionEvent args)
     {
-        // TODO CM14 lag compensation
+        // TODO RMC14 lag compensation
         if (!TryComp(xeno, out TransformComponent? transform))
             return;
 
