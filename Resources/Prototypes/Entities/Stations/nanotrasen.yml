@@ -25,7 +25,7 @@
     - BaseStationSiliconLawCrewsimov
     - BaseStationAllEventsEligible
     - BaseStationNanotrasen
-#    - BaseRandomStation # TODO CM14
+#    - BaseRandomStation # TODO RMC14
   noSpawn: true
   components:
     - type: Transform

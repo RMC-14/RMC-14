@@ -1,0 +1,263 @@
+- type: entity
+  noSpawn: true
+  id: CMIntercom
+  name: intercom
+  description: An intercom. For when the marines just needs to know something.
+  abstract: true
+  components:
+  - type: WallMount
+  - type: ApcPowerReceiver
+  - type: Electrified
+    enabled: false
+    usesApcPower: true
+  - type: RadioMicrophone
+    powerRequired: true
+    unobstructedRequired: true
+    listenRange: 2
+    toggleOnInteract: false
+  - type: RadioSpeaker
+    toggleOnInteract: false
+  - type: Intercom
+  - type: Speech
+    speechVerb: Robotic
+  - type: ExtensionCableReceiver
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Appearance
+  - type: WiresVisuals
+  - type: ContainerFill
+    containers:
+      board: [ IntercomElectronics ]
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
+  - type: Sprite
+    noRot: false
+    drawdepth: SmallObjects
+    sprite: _RMC14/Structures/Wallmounts/intercom.rsi
+    layers:
+    - state: intercom-p
+    - state: intercom
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Transform
+    noRot: false
+    anchored: true
+  - type: WiresPanel
+  - type: Wires
+    boardName: wires-board-name-intercom
+    layoutId: Intercom
+  - type: ActivatableUIRequiresPower
+  - type: ActivatableUI
+    key: enum.IntercomUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.IntercomUiKey.Key:
+        type: IntercomBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 200
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+          - !type:PlaySoundBehavior
+            sound:
+              collection: MetalGlassBreak
+              params:
+                volume: -4
+  - type: GenericVisualizer
+    visuals:
+      enum.WiresVisualLayers.MaintenancePanel:
+        enum.WiresVisualLayers.MaintenancePanel:
+          True: { visible: true }
+          False: { visible: false }
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+      enum.RadioDeviceVisuals.Broadcasting:
+        enum.RadioDeviceVisualLayers.Broadcasting:
+          True: { visible: true }
+          False: { visible: false }
+      enum.RadioDeviceVisuals.Speaker:
+        enum.RadioDeviceVisualLayers.Speaker:
+          True: { visible: true }
+          False: { visible: false }
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+
+- type: entity
+  id: CMIntercomCommon
+  parent: CMIntercom
+  suffix: Common
+  components:
+  - type: Intercom
+    supportedChannels:
+    - MarineCommon
+
+- type: entity
+  id: CMIntercomCommand
+  parent: CMIntercom
+  suffix: Command
+  components:
+  - type: Intercom
+    supportedChannels:
+    - MarineCommon
+    - MarineCommand
+
+- type: entity
+  id: CMIntercomMedical
+  parent: CMIntercom
+  suffix: Medical
+  components:
+  - type: Intercom
+    supportedChannels:
+    - MarineCommon
+    - MarineMedical
+
+- type: entity
+  id: CMIntercomEngineering
+  parent: CMIntercom
+  suffix: Engineering
+  components:
+  - type: Intercom
+    supportedChannels:
+    - MarineCommon
+    - MarineEngineer
+
+- type: entity
+  id: CMIntercomMilitaryPolice
+  parent: CMIntercom
+  suffix: Military Police
+  components:
+  - type: Intercom
+    supportedChannels:
+    - MarineCommon
+    - MarineMilitaryPolice
+
+- type: entity
+  id: CMIntercomRequisition
+  parent: CMIntercom
+  suffix: Requisition
+  components:
+  - type: Intercom
+    supportedChannels:
+    - MarineCommon
+    - MarineRequisition
+
+- type: entity
+  id: CMIntercomIntel
+  parent: CMIntercom
+  suffix: Intelligence
+  components:
+  - type: Intercom
+    supportedChannels:
+    - MarineCommon
+    - MarineIntel
+
+- type: entity
+  id: CMIntercomAlpha
+  parent: CMIntercom
+  suffix: Alpha
+  components:
+  - type: Intercom
+    supportedChannels:
+    - MarineCommon
+    - MarineAlpha
+
+- type: entity
+  id: CMIntercomBravo
+  parent: CMIntercom
+  suffix: Bravo
+  components:
+  - type: Intercom
+    supportedChannels:
+    - MarineCommon
+    - MarineBravo
+
+- type: entity
+  id: CMIntercomCharlie
+  parent: CMIntercom
+  suffix: Charlie
+  components:
+  - type: Intercom
+    supportedChannels:
+    - MarineCommon
+    - MarineCharlie
+
+- type: entity
+  id: CMIntercomDelta
+  parent: CMIntercom
+  suffix: Delta
+  components:
+  - type: Intercom
+    supportedChannels:
+    - MarineCommon
+    - MarineDelta
+
+- type: entity
+  id: CMIntercomEcho
+  parent: CMIntercom
+  suffix: Echo
+  components:
+  - type: Intercom
+    supportedChannels:
+    - MarineCommon
+    - MarineEcho
+
+- type: entity
+  id: CMIntercomFoxtrot
+  parent: CMIntercom
+  suffix: Foxtrot
+  components:
+  - type: Intercom
+    supportedChannels:
+    - MarineCommon
+    - MarineFoxtrot
+
+- type: entity
+  id: CMIntercomColony
+  parent: CMIntercom
+  suffix: Colony
+  components:
+  - type: Intercom
+    supportedChannels:
+    - Colony
+
+- type: entity
+  id: CMIntercomAll
+  parent: CMIntercom
+  suffix: All
+  components:
+  - type: Intercom
+    supportedChannels:
+    - MarineHighCommand
+    - MarineCommon
+    - MarineCommand
+    - MarineMedical
+    - MarineEngineer
+    - MarineMilitaryPolice
+    - MarineRequisition
+    - MarineIntel
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - Colony
+

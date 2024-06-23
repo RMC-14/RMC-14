@@ -1,0 +1,9 @@
+﻿<cc:XenoChooseStructureWindow
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client._RMC14.Xenonids.Construction"
+    Title="{Loc cm-xeno-choose-resin-structure}"
+    MinSize="300 300">
+    <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
+        <BoxContainer Orientation="Vertical" Name="StructureContainer" Access="Public" />
+    </ScrollContainer>
+</cc:XenoChooseStructureWindow>

@@ -1,0 +1,22 @@
+- type: constructionGraph
+  parent: RMC
+  id: CMGlass
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: SheetGlassReinforced
+      completed:
+      - !type:SetStackCount
+        amount: 1
+      steps:
+        - material: CMGlass
+          amount: 1
+        - material: CMRodMetal
+          amount: 1
+
+  - node: SheetGlass
+    entity: CMSheetGlass
+
+  - node: SheetGlassReinforced
+    entity: CMSheetGlassReinforced

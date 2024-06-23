@@ -1,0 +1,142 @@
+# Corporate Liaison
+
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitLiaison
+  name: liaison's tan suit
+  description: A stiff, stylish tan suit commonly worn by businessmen from the We-Ya corporation. Expertly crafted to make you look like a prick.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_regular.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_regular.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: CMJumpsuitLiaisonCharcoal
+  name: liaison's charcoal suit
+  description: A stiff, stylish charcoal suit commonly worn by businessmen from the We-Ya corporation. Expertly crafted to make you look like a prick.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_charcoal.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_charcoal.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: CMJumpsuitLiaisonOuting
+  name: liaison's outfit
+  description: A casual outfit consisting of a collared shirt and a vest. Looks like something you might wear on the weekends, or on a visit to a derelict colony.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_outing.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_outing.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaisonOuting
+  id: CMJumpsuitLiaisonOutingRed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_outing_red.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_outing_red.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: CMJumpsuitLiaisonFormal
+  name: liaison's white suit
+  description: A formal, white suit. Looks like something you'd wear to a funeral, a We-Ya corporate dinner, or both. Stiff as a board, but makes you feel like rolling out of a Rolls-Royce.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_formal.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_formal.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: CMJumpsuitLiaisonSuspenders
+  name: liaison's attire
+  description: A collared shirt, complimented by a pair of suspenders. Worn by We-Ya employees who ask the tough questions. Smells faintly of cigars and bad acting.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_suspenders.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_suspenders.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: CMJumpsuitLiaisonBlazer
+  name: liaison's blue blazer
+  description: A stiff but casual blue blazer. Similar can be found in any We-Ya office. Only the finest wear for the galaxy's most cunning.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_blue_blazer.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_blue_blazer.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: CMJumpsuitLiaisonField
+  name: corporate casual
+  description: A pair of dark brown slacks paired with a dark blue button-down shirt. A popular look among those in the corporate world that conduct the majority of their business from night clubs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_field.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_field.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: CMJumpsuitLiaisonIvy
+  name: country club outfit
+  description: A pair of khaki slacks paired with a light blue button-down shirt. A popular look with those in the corporate world that conduct the majority of their business from country clubs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_ivy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_ivy.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: CMJumpsuitLiaisonCorporateFormal
+  name: white suit pants
+  description: A pair of ivory slacks paired with a white shirt. A popular pairing for formal corporate events.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_formal.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_formal.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: CMJumpsuitLiaisonBlack
+  name: black suit pants
+  description: A pair of black slacks paired with a white shirt. The most common pairing among corporate workers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_black.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: CMJumpsuitLiaisonBrown
+  name: brown suit pants
+  description: A pair of brown slacks paired with a white shirt. A common pairing among corporate workers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_brown.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: CMJumpsuitLiaisonBlue
+  name: blue suit pants
+  description: A pair of blue slacks paired with a white shirt. A common pairing among corporate workers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_blue.rsi

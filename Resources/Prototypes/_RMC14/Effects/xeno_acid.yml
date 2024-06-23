@@ -1,0 +1,29 @@
+﻿- type: entity
+  id: XenoAcidNormal
+  name: corrosive acid
+  description: Burbling corrosive stuff. I wouldn't want to touch it.
+  components:
+  - type: Transform
+  - type: Sprite
+    sprite: _RMC14/Effects/xeno_acid.rsi
+    drawdepth: Effects
+    layers:
+    - state: acid_normal
+
+- type: entity
+  parent: XenoAcidNormal
+  id: XenoAcidWeak
+  name: weak corrosive acid
+  components:
+  - type: Sprite
+    layers:
+    - state: acid_weak
+
+- type: entity
+  parent: XenoAcidNormal
+  id: XenoAcidStrong
+  name: strong corrosive acid
+  components:
+  - type: Sprite
+    layers:
+    - state: acid_strong

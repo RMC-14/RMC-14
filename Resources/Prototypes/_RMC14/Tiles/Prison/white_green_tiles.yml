@@ -1,0 +1,70 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelPrisonWhiteGreenBase
+  name: tiles-cm-green-sterile
+
+- type: tile
+  parent: CMFloorSteelPrisonWhiteGreenBase
+  id: CMFloorSteelPrisonWhiteGreen0
+  sprite: /Textures/_RMC14/Tiles/prison/whitegreen_0.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhiteGreenBase
+  id: CMFloorSteelPrisonWhiteGreen1
+  sprite: /Textures/_RMC14/Tiles/prison/whitegreen_1.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhiteGreenBase
+  id: CMFloorSteelPrisonWhiteGreen2
+  sprite: /Textures/_RMC14/Tiles/prison/whitegreen_2.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhiteGreenBase
+  id: CMFloorSteelPrisonWhiteGreen3
+  sprite: /Textures/_RMC14/Tiles/prison/whitegreen_3.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhiteGreenBase
+  id: CMFloorSteelPrisonWhiteGreen4
+  sprite: /Textures/_RMC14/Tiles/prison/whitegreen_4.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhiteGreenBase
+  id: CMFloorSteelPrisonWhiteGreen5
+  sprite: /Textures/_RMC14/Tiles/prison/whitegreen_5.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhiteGreenBase
+  id: CMFloorSteelPrisonWhiteGreen6
+  sprite: /Textures/_RMC14/Tiles/prison/whitegreen_6.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhiteGreenBase
+  id: CMFloorSteelPrisonWhiteGreen7
+  sprite: /Textures/_RMC14/Tiles/prison/whitegreen_7.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhiteGreenBase
+  id: CMFloorSteelPrisonWhiteGreenCorner0
+  sprite: /Textures/_RMC14/Tiles/prison/whitegreencorner_0.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhiteGreenBase
+  id: CMFloorSteelPrisonWhiteGreenCorner1
+  sprite: /Textures/_RMC14/Tiles/prison/whitegreencorner_1.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhiteGreenBase
+  id: CMFloorSteelPrisonWhiteGreenCorner2
+  sprite: /Textures/_RMC14/Tiles/prison/whitegreencorner_2.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhiteGreenBase
+  id: CMFloorSteelPrisonWhiteGreenCorner3
+  sprite: /Textures/_RMC14/Tiles/prison/whitegreencorner_3.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhiteGreenBase
+  id: CMFloorSteelPrisonWhiteGreenFull
+  sprite: /Textures/_RMC14/Tiles/prison/whitegreenfull.png

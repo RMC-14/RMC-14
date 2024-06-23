@@ -1,8 +1,0 @@
-﻿- type: statusIcon
-  parent: JobIcon
-  id: CMJobIconBase
-  abstract: true
-  icon:
-    sprite: /Textures/_CM14/Interface/cm_job_icons.rsi
-  locationPreference: Left
-  offset: 3

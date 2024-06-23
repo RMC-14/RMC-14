@@ -1,0 +1,70 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelPrisonDarkRedBase
+  name: tiles-cm-default-red
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkRedBase
+  id: CMFloorSteelPrisonDarkRed0
+  sprite: /Textures/_RMC14/Tiles/prison/darkred2_0.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkRedBase
+  id: CMFloorSteelPrisonDarkRed1
+  sprite: /Textures/_RMC14/Tiles/prison/darkred2_1.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkRedBase
+  id: CMFloorSteelPrisonDarkRed2
+  sprite: /Textures/_RMC14/Tiles/prison/darkred2_2.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkRedBase
+  id: CMFloorSteelPrisonDarkRed3
+  sprite: /Textures/_RMC14/Tiles/prison/darkred2_3.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkRedBase
+  id: CMFloorSteelPrisonDarkRed4
+  sprite: /Textures/_RMC14/Tiles/prison/darkred2_4.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkRedBase
+  id: CMFloorSteelPrisonDarkRed5
+  sprite: /Textures/_RMC14/Tiles/prison/darkred2_5.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkRedBase
+  id: CMFloorSteelPrisonDarkRed6
+  sprite: /Textures/_RMC14/Tiles/prison/darkred2_6.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkRedBase
+  id: CMFloorSteelPrisonDarkRed7
+  sprite: /Textures/_RMC14/Tiles/prison/darkred2_7.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkRedBase
+  id: CMFloorSteelPrisonDarkRedCorners0
+  sprite: /Textures/_RMC14/Tiles/prison/darkredcorners2_0.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkRedBase
+  id: CMFloorSteelPrisonDarkRedCorners1
+  sprite: /Textures/_RMC14/Tiles/prison/darkredcorners2_1.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkRedBase
+  id: CMFloorSteelPrisonDarkRedCorners2
+  sprite: /Textures/_RMC14/Tiles/prison/darkredcorners2_2.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkRedBase
+  id: CMFloorSteelPrisonDarkRedCorners3
+  sprite: /Textures/_RMC14/Tiles/prison/darkredcorners2_3.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkRedBase
+  id: CMFloorSteelPrisonDarkRedFull
+  sprite: /Textures/_RMC14/Tiles/prison/darkredfull2.png

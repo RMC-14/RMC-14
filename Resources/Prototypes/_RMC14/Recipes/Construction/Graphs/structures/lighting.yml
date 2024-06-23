@@ -1,0 +1,48 @@
+﻿- type: constructionGraph
+  id: CMLightFixture
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: tubeLight # TODO RMC14: Needs CMCable/CMWire for further 1:1
+          steps:
+            - material: CMSteel
+              amount: 2
+              doAfter: 2.0
+        - to: bulbLight
+          steps:
+            - material: CMSteel
+              amount: 1
+              doAfter: 2.0
+
+    - node: tubeLight
+      entity: CMLightFixtureEmpty
+      edges:
+        - to: start
+          conditions:
+            - !type:ContainerEmpty
+              container: "light_bulb"
+          steps:
+            - tool: Screwing
+              doAfter: 2.0
+          completed:
+            - !type:SpawnPrototype
+              prototype: CMSheetMetal1
+              amount: 2
+            - !type:DeleteEntity {}
+
+    - node: bulbLight
+      entity: CMLightFixtureSmallEmpty
+      edges:
+        - to: start
+          conditions:
+            - !type:ContainerEmpty
+              container: "light_bulb"
+          steps:
+            - tool: Screwing
+              doAfter: 2.0
+          completed:
+            - !type:SpawnPrototype
+              prototype: CMSheetMetal1
+              amount: 1
+            - !type:DeleteEntity {}
