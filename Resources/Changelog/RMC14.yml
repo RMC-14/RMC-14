@@ -1433,5 +1433,12 @@
   id: 172
   time: '2024-06-23T11:13:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2566
+- author: Whisper
+  changes:
+  - message: Added medical guidebook.
+    type: Add
+  id: 173
+  time: '2024-06-23T11:17:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2567
 Name: RMC14
 Order: -1
