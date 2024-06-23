@@ -193,13 +193,13 @@
       cm-aslot-barrel:
         whitelist:
           tags:
-          - CMAttachableExtendedBarrel
-          - CMAttachableSuppressor
+          - CMAttachmentExtendedBarrel
+          - CMAttachmentSuppressor
       cm-aslot-rail:
         whitelist:
           tags:
-          - CMAttachableFlashlight
-          - CMAttachableSmartScope
+          - CMAttachmentFlashlight
+          - CMAttachmentB8SmartScope
   - type: AttachableHolderVisuals
     offsets:
       cm-aslot-barrel: 0.9, 0.03
