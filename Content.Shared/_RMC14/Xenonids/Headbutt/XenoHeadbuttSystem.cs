@@ -10,6 +10,10 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Movement.Pulling.Events;
+using Content.Shared.Movement.Pulling.Systems;
+using Content.Shared.Pulling.Events;
 
 namespace Content.Shared._RMC14.Xenonids.Headbutt;
 
@@ -20,6 +24,7 @@ public sealed class XenoHeadbuttSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
+    [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -55,6 +60,9 @@ public sealed class XenoHeadbuttSystem : EntitySystem
 
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
             return;
+
+        if (TryComp(xeno, out PullerComponent? puller) && TryComp(puller.Pulling, out PullableComponent? pullable))
+            _pulling.TryStopPull(puller.Pulling.Value, pullable, xeno);
 
         args.Handled = true;
 
