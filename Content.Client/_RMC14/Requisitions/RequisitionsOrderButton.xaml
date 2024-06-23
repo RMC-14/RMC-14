@@ -1,0 +1,8 @@
+﻿<controls:RequisitionsOrderButton
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Requisitions"
+    Orientation="Horizontal">
+    <Label Name="CostLabel" Access="Public" />
+    <Control MinWidth="5" />
+    <Button Name="Button" Access="Public" StyleClasses="ButtonSquare" HorizontalExpand="True" />
+</controls:RequisitionsOrderButton>

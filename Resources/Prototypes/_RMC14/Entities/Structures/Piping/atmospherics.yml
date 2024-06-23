@@ -1,0 +1,121 @@
+- type: entity
+  parent: GasUnaryBase
+  id: CMVentPump
+  name: vent
+  description: Has a valve and pump attached to it.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    drawdepth: FloorObjects
+    sprite: _RMC14/Structures/Piping/Atmospherics/vent_pump.rsi
+    layers:
+        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+          state: pipeHalf
+          map: [ "enum.PipeVisualLayers.Pipe" ]
+        - state: off
+          map: [ "enabled", "enum.SubfloorLayers.FirstLayer" ]
+  - type: Appearance
+  - type: PipeColorVisuals
+  - type: GenericVisualizer
+    visuals:
+      enum.VentPumpVisuals.State:
+        enabled:
+          Off: { state: off }
+          In: { state: in }
+          Out: { state: on }
+          Welded: { state: welded }
+  - type: DeviceNetwork
+    deviceNetId: AtmosDevices
+    receiveFrequencyId: AtmosMonitor
+    transmitFrequencyId: AtmosMonitor
+    prefix: device-address-prefix-vent
+    sendBroadcastAttemptEvent: true
+    examinableAddress: true
+  - type: AtmosDevice
+  - type: AtmosMonitor
+    temperatureThresholdId: stationTemperature
+    pressureThresholdId: stationPressure
+    gasThresholdPrototypes:
+      Oxygen: stationOxygen
+      Nitrogen: ignore
+      CarbonDioxide: stationCO2
+      Plasma: stationPlasma # everything below is usually bad
+      Tritium: danger
+      WaterVapor: stationWaterVapor
+      Ammonia: stationAmmonia
+      NitrousOxide: stationNO
+      Frezon: danger
+  - type: Tag
+    tags:
+      - GasVent
+      - Unstackable
+  - type: GasVentPump
+  - type: AmbientSound
+    enabled: true
+    volume: -12
+    range: 5
+    sound:
+      path: /Audio/Ambience/Objects/gas_vent.ogg
+  - type: Weldable
+
+- type: entity
+  parent: GasUnaryBase
+  id: CMVentScrubber
+  name: air scrubber
+  description: Has a valve and pump attached to it.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    drawdepth: FloorObjects
+    sprite: _RMC14/Structures/Piping/Atmospherics/vent_scrubber.rsi
+    layers:
+      - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        state: pipeHalf
+        map: [ "enum.PipeVisualLayers.Pipe" ]
+      - state: off
+        map: [ "enabled", "enum.SubfloorLayers.FirstLayer" ]
+  - type: Appearance
+  - type: PipeColorVisuals
+  - type: GenericVisualizer
+    visuals:
+      enum.ScrubberVisuals.State:
+        enabled:
+          Off: { state: off }
+          Scrub: { state: on }
+          Siphon: { state: in }
+          WideScrub: { state: on }
+          Welded: { state: welded }
+  - type: DeviceNetwork
+    deviceNetId: AtmosDevices
+    receiveFrequencyId: AtmosMonitor
+    transmitFrequencyId: AtmosMonitor
+    prefix: device-address-prefix-scrubber
+    examinableAddress: true
+  - type: AtmosMonitor
+    temperatureThresholdId: stationTemperature
+    pressureThresholdId: stationPressure
+    gasThresholdPrototypes:
+      Oxygen: stationOxygen
+      Nitrogen: ignore
+      CarbonDioxide: stationCO2
+      Plasma: stationPlasma # everything below is usually bad
+      Tritium: danger
+      WaterVapor: stationWaterVapor
+      Ammonia: stationAmmonia
+      NitrousOxide: stationNO
+      Frezon: danger
+  - type: Tag
+    tags:
+      - GasScrubber
+      - Unstackable
+  - type: AtmosDevice
+  - type: GasVentScrubber
+  - type: AmbientSound
+    enabled: true
+    volume: -12
+    range: 5
+    sound:
+      path: /Audio/Ambience/Objects/gas_vent.ogg
+  - type: Weldable

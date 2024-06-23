@@ -1,0 +1,8 @@
+﻿- type: department
+  parent: CMDepartmentBase
+  id: CMSurvivor
+  description: cm-department-Civilians-description
+  color: "#C38312"
+  roles:
+  - CMSurvivor
+  hidden: true # TODO RMC14

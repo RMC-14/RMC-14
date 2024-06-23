@@ -1,0 +1,33 @@
+# TODO RMC14 make names from dogtags addable
+
+- type: entity
+  parent: Memorial
+  id: CMMemorial
+  name: slab of victory
+  description: A ship memorial dedicated to the triumphs of the Marines and the fallen marines of this ship. On the left there are grand tales of victory etched into the slab. On the right there is a list of famous marines who have fallen in combat serving the Marines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/memorial.rsi
+    state: ship_memorial
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.50,-0.10,0.50,0.50"
+        density: 85
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+
+- type: entity
+  parent: CMMemorial
+  id: CMMemorialMaintainers
+  name: slab of remembrance
+  description: A memorial to all Maintainer Team members that have retired from working on CM13. No mentor names are present.
+
+- type: entity
+  parent: CMMemorialMaintainers
+  id: CMMemorialAdmins
+  description: A memorial to all Admins and Moderators who have retired from CM13. No mentor names are present.

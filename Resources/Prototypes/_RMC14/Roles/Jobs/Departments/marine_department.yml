@@ -1,0 +1,13 @@
+﻿- type: department
+  parent: CMDepartmentBase
+  id: CMSquad
+  description: cm-department-Marine-description
+  color: "#DE3A3A"
+  roles:
+  - CMRifleman
+  - CMSquadLeader
+  - CMFireteamLeader
+  - CMWeaponsSpecialist
+  - CMSmartGunOperator
+  - CMHospitalCorpsman
+  - CMCombatTech

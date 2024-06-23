@@ -1,0 +1,45 @@
+﻿- type: alert
+  id: XenoPlasma
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_plasma.rsi
+    state: power_display_full
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_plasma.rsi
+    state: power_display_16
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_plasma.rsi
+    state: power_display_15
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_plasma.rsi
+    state: power_display_14
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_plasma.rsi
+    state: power_display_13
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_plasma.rsi
+    state: power_display_12
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_plasma.rsi
+    state: power_display_11
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_plasma.rsi
+    state: power_display_10
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_plasma.rsi
+    state: power_display_9
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_plasma.rsi
+    state: power_display_8
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_plasma.rsi
+    state: power_display_7
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_plasma.rsi
+    state: power_display_6
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_plasma.rsi
+    state: power_display_5
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_plasma.rsi
+    state: power_display_4
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_plasma.rsi
+    state: power_display_3
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_plasma.rsi
+    state: power_display_2
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_plasma.rsi
+    state: power_display_1
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_plasma.rsi
+    state: power_display_0
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_plasma.rsi
+    state: power_display_empty
+  name: Plasma
+  description: Your stored plasma. Used by different abilities.
+  minSeverity: 0
+  maxSeverity: 18

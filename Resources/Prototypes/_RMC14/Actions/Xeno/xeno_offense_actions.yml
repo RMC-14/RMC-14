@@ -1,0 +1,287 @@
+﻿- type: entity
+  id: ActionXenoAcidNormal
+  parent: ActionXenoBase
+  name: Corrosive Acid (100)  # TODO RMC14 proper plasma costs
+  description: Melts down a structure over time.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: corrosive_acid
+    event: !type:XenoCorrosiveAcidEvent
+      acidId: XenoAcidNormal
+      plasmaCost: 100
+      time: 150
+
+- type: entity
+  id: ActionXenoAcidWeak
+  parent: ActionXenoBase
+  name: Weak Corrosive Acid (75)  # TODO RMC14 proper plasma costs
+  description: Melts down a structure over time.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: corrosive_acid
+    event: !type:XenoCorrosiveAcidEvent
+      acidId: XenoAcidWeak
+      plasmaCost: 75
+      time: 375
+
+- type: entity
+  id: ActionXenoAcidStrong
+  parent: ActionXenoBase
+  name: Strong Corrosive Acid (125)  # TODO RMC14 proper plasma costs
+  description: Melts down a structure over time.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: corrosive_acid
+    event: !type:XenoCorrosiveAcidEvent
+      acidId: XenoAcidStrong
+      plasmaCost: 125
+      time: 60
+
+- type: entity
+  id: ActionXenoRegurgitate
+  parent: ActionXenoBase
+  name: Regurgitate
+  description: Eject any devoured marines.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: regurgitate
+    event: !type:XenoRegurgitateActionEvent
+
+- type: entity
+  id: ActionXenoTailStab
+  parent: ActionXenoBase
+  name: Tail Stab
+  description: Launches an attack towards a given direction. The cooldown is faster if you miss.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: tail_attack
+    event: !type:XenoTailStabEvent
+    range: 15
+    useDelay: 10
+    checkCanAccess: false
+  - type: XenoTailStabAction
+
+- type: entity
+  id: ActionXenoLeap
+  parent: ActionXenoBase
+  name: Leap
+  description: Jump towards a given location and knock down any enemies hit.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: pounce
+    event: !type:XenoLeapActionEvent
+    range: 15
+    useDelay: 3
+    checkCanAccess: false
+
+- type: entity
+  id: ActionXenoHeadbutt
+  parent: ActionXenoBase
+  name: Headbutt (10) # TODO RMC14 proper plasma costs
+  description: Charge in a direction and push back any enemies in your way.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: headbutt
+    event: !type:XenoHeadbuttActionEvent
+    range: 3
+    useDelay: 6
+    deselectOnMiss: false
+
+- type: entity
+  id: ActionXenoTailSweep
+  parent: ActionXenoBase
+  name: Tail Sweep (10) # TODO RMC14 proper plasma costs
+  description: Knock down any enemies close to you.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: tail_sweep
+    event: !type:XenoTailSweepActionEvent
+    useDelay: 15
+
+- type: entity
+  id: ActionXenoSlowingSpit
+  parent: ActionXenoBase
+  name: Slowing Spit (20) # TODO RMC14 proper plasma costs
+  description: Launches a projectile that will slow the first enemy that it hits, and paralyze them if they have no armor.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: xeno_spit
+    event: !type:XenoSlowingSpitActionEvent
+    useDelay: 1.5
+    range: 15
+    checkCanAccess: false
+
+- type: entity
+  id: ActionXenoScatteredSpit
+  parent: ActionXenoBase
+  name: Scattered Spit (20) # TODO RMC14 proper plasma costs
+  description: Launches multiple projectiles that will briefly paralyze any enemies they hit.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: acid_shotgun
+    event: !type:XenoScatteredSpitActionEvent
+    useDelay: 8
+    range: 15
+    checkCanAccess: false
+
+- type: entity
+  id: ActionXenoParalyzingSlash
+  parent: ActionXenoBase
+  name: Paralyzing Slash (50) # TODO RMC14 proper plasma costs
+  description: Temporarily charge up a melee attack that will knockdown the first enemy it hits after a short delay.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: lurker_inject_neuro
+    event: !type:XenoParalyzingSlashActionEvent
+    useDelay: 12
+
+- type: entity
+  id: ActionXenoBoneChips
+  parent: ActionXenoBase
+  name: Bone Chips
+  description: Launch a projectile that will damage and slow down the first enemy it hits.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: runner_bonespur
+    event: !type:XenoBoneChipsActionEvent
+    useDelay: 12
+    range: 15
+
+- type: entity
+  id: ActionXenoPunch
+  parent: ActionXenoBase
+  name: Punch
+  description: Punches the targeted marine dealing a hefty amount of damage as well as slowing the target for seconds.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: punch
+    event: !type:XenoPunchActionEvent
+    range: 1
+    useDelay: 4.5
+
+- type: entity
+  id: ActionXenoFling
+  parent: ActionXenoBase
+  name: Fling
+  description: Flings the targeted marine a few tiles and damages them.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: fling
+    event: !type:XenoFlingActionEvent
+    range: 1
+    useDelay: 7
+
+- type: entity
+  id: ActionXenoLunge
+  parent: ActionXenoBase
+  name: Lunge
+  description: Lunges the warrior towards the targeted marine and puts them into a choke hold (like grabbing them).
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: lunge
+    event: !type:XenoLungeActionEvent
+    range: 5
+    useDelay: 10
+
+- type: entity
+  id: ActionXenoScreech
+  parent: ActionXenoBase
+  name: Screech (250)
+  description: A wide area of effect stun, screeches upon activation.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: screech
+    event: !type:XenoScreechActionEvent
+    useDelay: 50
+
+- type: entity
+  id: ActionXenoGut
+  parent: ActionXenoBase
+  name: Gut (200)
+  description: Gibs the mob you decide to gut.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: gut
+    event: !type:XenoGutActionEvent
+    range: 2
+
+- type: entity
+  id: ActionXenoStomp
+  parent: ActionXenoBase
+  name: Stomp (30)
+  description: Slam the ground with a 5x5 AOE slow down that affects all hostiles in range.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: stomp
+    event: !type:XenoStompActionEvent
+    useDelay: 18
+
+- type: entity
+  id: ActionXenoCharge
+  parent: ActionXenoBase
+  name: Charge (20)
+  description: Click on a tile you want to charge at, after a brief non cancel-able windup time.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: ready_charge
+    event: !type:XenoChargeActionEvent
+    range: 9
+    useDelay: 14
+    checkCanAccess: false

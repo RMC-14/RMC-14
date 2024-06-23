@@ -1,0 +1,32 @@
+- type: entity
+  parent: Hypospray
+  id: CMHypospray
+  name: hypospray
+  description: The DeForest Medical Corporation hypospray is a sterile, air-needle auto-injector for rapid administration of drugs to patients.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/hypospray.rsi
+    layers:
+      - state: hypospray
+      - state: hypospray1
+        map: [ "enum.SolutionContainerLayers.Fill" ]
+        visible: false
+  - type: SolutionContainerVisuals
+    maxFillLevels: 6
+    fillBaseName: hypospray
+    emptySpriteName: hypospray
+    changeColor: true
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Medical/hypospray.rsi
+  - type: Hypospray
+    transferAmount: 5
+    injectSound: /Audio/_RMC14/Medical/hypospray.ogg
+  - type: Appearance
+  - type: SolutionContainerManager
+    solutions:
+      hypospray:
+        maxVol: 30
+  - type: UseDelay
+    delay: 0.333
+

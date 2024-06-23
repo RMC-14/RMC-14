@@ -1,0 +1,8 @@
+﻿- type: job
+  parent: CMJobXenoBase
+  id: CMXenoParasite
+  name: cm-job-name-xeno-parasite
+  playTimeTracker: CMJobXenoParasite
+
+- type: playTimeTracker
+  id: CMJobXenoParasite

@@ -1,0 +1,50 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelPlanetYellowBase
+  name: tiles-cm-default-yellow
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: CMFloorSteelPlanetYellow0
+  sprite: /Textures/_RMC14/Tiles/floors/yellow_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: CMFloorSteelPlanetYellow1
+  sprite: /Textures/_RMC14/Tiles/floors/yellow_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: CMFloorSteelPlanetYellow2
+  sprite: /Textures/_RMC14/Tiles/floors/yellow_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: CMFloorSteelPlanetYellow3
+  sprite: /Textures/_RMC14/Tiles/floors/yellow_3.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: CMFloorSteelPlanetYellow4
+  sprite: /Textures/_RMC14/Tiles/floors/yellow_4.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: CMFloorSteelPlanetYellow5
+  sprite: /Textures/_RMC14/Tiles/floors/yellow_5.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: CMFloorSteelPlanetYellow6
+  sprite: /Textures/_RMC14/Tiles/floors/yellow_6.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: CMFloorSteelPlanetYellow7
+  sprite: /Textures/_RMC14/Tiles/floors/yellow_7.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: CMFloorSteelPlanetYellowFull
+  sprite: /Textures/_RMC14/Tiles/floors/yellowfull.png

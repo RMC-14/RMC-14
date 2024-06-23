@@ -1,0 +1,9 @@
+- files: ["its_only_game.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "https://github.com/cmss13-devs/cmss13/commit/a0ea5522bce51fddf7a00bfd1b88d6911fa92ed5"
+  source: "https://github.com/cmss13-devs/cmss13/blob/dbc71b6b0b29fbfa0ec29c34352fd3b0ee05bfff/sound/dyn/roundend/its_only_game.ogg"
+
+- files: ["lets_get_outta_here.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "https://github.com/cmss13-devs/cmss13/commit/a0ea5522bce51fddf7a00bfd1b88d6911fa92ed5"
+  source: "https://github.com/cmss13-devs/cmss13/blob/dbc71b6b0b29fbfa0ec29c34352fd3b0ee05bfff/sound/dyn/roundend/lets_get_outta_here.ogg"

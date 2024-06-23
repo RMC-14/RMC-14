@@ -1,0 +1,71 @@
+- type: entity
+  parent: BaseItem
+  id: CMBaseDefibrillator
+  name: emergency defibrillator
+  description: A handheld emergency defibrillator, used to restore fibrillating patients. Can optionally bring people back from the dead.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/defib.rsi
+    layers:
+    - state: defib
+    - state: defib_on
+      map: [ "enum.ToggleVisuals.Layer" ]
+      visible: false
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Item
+    size: Normal
+    sprite: Objects/Specific/Medical/defib.rsi
+  - type: Speech
+    speechVerb: Robotic
+  - type: Defibrillator
+    doAfterDuration: 6.25
+    allowDoAfterMovement: false
+    canDefibCrit: false
+    cmZapHeal:
+    - Brute: -12
+    - Burn: -12
+    - Toxin: -12
+    zapHeal:
+      types:
+        Asphyxiation: -200
+    zapDamage: 0
+  - type: DoAfter
+  - type: UseDelay
+  - type: StaticPrice
+    price: 100
+  - type: GuideHelp
+    guides:
+    - Medical Doctor
+  - type: RequiresSkill
+    skills:
+      medical: 2
+
+- type: entity
+  id: CMDefibrillator
+  parent: [ CMBaseDefibrillator, PowerCellSlotMediumItem ]
+  suffix: RMC14
+  components:
+  - type: PowerCellDraw
+    useRate: 100
+
+- type: entity
+  id: CMDefibrillatorEmpty
+  parent: CMDefibrillator
+  suffix: RMC14, Empty
+  components:
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+
+- type: entity
+  parent: CMBaseDefibrillator
+  id: CMDefibrillatorInfinite
+  suffix: RMC14, Infinite
