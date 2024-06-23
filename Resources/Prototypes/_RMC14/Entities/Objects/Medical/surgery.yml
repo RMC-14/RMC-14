@@ -314,6 +314,7 @@
   parent: CMBaseToolSurgery
   id: CMBonesetter
   name: bone setter
+  description: Used for setting bones back into place.
   components: # TODO RMC14
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/bonesetter.rsi
