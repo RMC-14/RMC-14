@@ -8,7 +8,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Xenonids.Headbutt;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedXenoHeadbuttSystem))]
+[Access(typeof(XenoHeadbuttSystem))]
 public sealed partial class XenoHeadbuttComponent : Component
 {
     [DataField, AutoNetworkedField]

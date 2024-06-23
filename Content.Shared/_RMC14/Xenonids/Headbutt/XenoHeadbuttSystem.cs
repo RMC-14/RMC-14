@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+﻿using Content.Shared._RMC14.Xenonids.Animation;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -13,7 +13,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Headbutt;
 
-public abstract class SharedXenoHeadbuttSystem : EntitySystem
+public sealed class XenoHeadbuttSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
@@ -23,6 +23,7 @@ public abstract class SharedXenoHeadbuttSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoAnimationsSystem _xenoAnimations = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -39,6 +40,10 @@ public abstract class SharedXenoHeadbuttSystem : EntitySystem
 
     private void OnXenoHeadbuttAction(Entity<XenoHeadbuttComponent> xeno, ref XenoHeadbuttActionEvent args)
     {
+        // TODO RMC14 xenos of the same hive
+        if (args.Target == xeno.Owner || HasComp<XenoComponent>(args.Target))
+            return;
+
         if (args.Handled)
             return;
 
@@ -54,7 +59,7 @@ public abstract class SharedXenoHeadbuttSystem : EntitySystem
         args.Handled = true;
 
         var origin = _transform.GetMapCoordinates(xeno);
-        var target = _transform.ToMapCoordinates(args.Target);
+        var target = _transform.GetMapCoordinates(args.Target);
         var diff = target.Position - origin.Position;
         var length = diff.Length();
         diff *= xeno.Comp.Range / length;
@@ -79,7 +84,7 @@ public abstract class SharedXenoHeadbuttSystem : EntitySystem
         if (_timing.IsFirstTimePredicted && xeno.Comp.Charge is { } charge)
         {
             xeno.Comp.Charge = null;
-            DoLunge(xeno, charge.Normalized());
+            _xenoAnimations.PlayLungeAnimationEvent(xeno, charge);
         }
 
         if (_net.IsServer)
@@ -109,9 +114,5 @@ public abstract class SharedXenoHeadbuttSystem : EntitySystem
 
         if (_net.IsServer)
             SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
-    }
-
-    protected virtual void DoLunge(EntityUid xeno, Vector2 direction)
-    {
     }
 }

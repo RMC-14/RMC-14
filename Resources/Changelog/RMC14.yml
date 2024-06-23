@@ -223,7 +223,7 @@
   url: https://api.github.com/repos/RMC-14/RMC-14/pulls/1140
 - author: ike709
   changes:
-  - message: Added a cargo crate for the M52CE2
+  - message: Added a cargo crate for the M54CE2
     type: Add
   id: 33
   time: '2024-04-10T06:59:53.0000000+00:00'
@@ -1063,7 +1063,7 @@
   url: https://github.com/RMC-14/RMC-14/pull/2396
 - author: Timemaster99
   changes:
-  - message: Fixed M52C Mk2 inhand and icon sprites
+  - message: Fixed M54C Mk2 inhand and icon sprites
     type: Fix
   id: 140
   time: '2024-06-13T08:09:40.0000000+00:00'
@@ -1411,5 +1411,18 @@
   id: 170
   time: '2024-06-23T05:32:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2555
+- author: MetalSage
+  changes:
+  - message: Added the Warrior's punch, fling and lunge actions.
+    type: Add
+  - message: Added the Crusher's charge and stomp actions.
+    type: Add
+  - message: Added the Queen's gut and screech actions.
+    type: Add
+  - message: Defender headbutt action now requires a marine target to be used.
+    type: Fix
+  id: 171
+  time: '2024-06-23T08:03:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2324
 Name: RMC14
 Order: -1

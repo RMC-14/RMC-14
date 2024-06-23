@@ -43,6 +43,21 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/voice/alien_facehugger_dies.ogg"
 
+- files: ["alien_footstep_charge1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/effects/alien_footstep_charge1.ogg"
+
+- files: ["alien_footstep_charge2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/effects/alien_footstep_charge2.ogg"
+
+- files: ["alien_footstep_charge3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/effects/alien_footstep_charge3.ogg"
+
 - files: ["alien_footstep_large1.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"

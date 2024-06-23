@@ -13,3 +13,20 @@
   - type: Tag
     tags:
     - HideContextMenu
+
+- type: entity
+  # Just fades out with no movement animation
+  id: CMEffectGrab
+  noSpawn: true
+  components:
+  - type: TimedDespawn
+    lifetime: 1.6
+  - type: Sprite
+    sprite: _RMC14/Effects/attacks.rsi
+    noRot: true
+    state: grab
+    drawdepth: Effects
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
