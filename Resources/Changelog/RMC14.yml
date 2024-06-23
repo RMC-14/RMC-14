@@ -1461,5 +1461,12 @@
   id: 176
   time: '2024-06-23T20:42:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2572
+- author: MACMAN2003
+  changes:
+  - message: Added weapon attachments to the ASRS requisition console.
+    type: Add
+  id: 177
+  time: '2024-06-23T21:23:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2570
 Name: RMC14
 Order: -1
