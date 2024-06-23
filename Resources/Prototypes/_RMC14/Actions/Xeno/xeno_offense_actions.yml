@@ -255,7 +255,6 @@
       state: gut
     event: !type:XenoGutActionEvent
     range: 2
-    useDelay: 900
 
 - type: entity
   id: ActionXenoStomp

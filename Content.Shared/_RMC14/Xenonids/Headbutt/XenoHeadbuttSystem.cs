@@ -40,6 +40,10 @@ public sealed class XenoHeadbuttSystem : EntitySystem
 
     private void OnXenoHeadbuttAction(Entity<XenoHeadbuttComponent> xeno, ref XenoHeadbuttActionEvent args)
     {
+        // TODO RMC14 xenos of the same hive
+        if (args.Target == xeno.Owner || HasComp<XenoComponent>(args.Target))
+            return;
+
         if (args.Handled)
             return;
 

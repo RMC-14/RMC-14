@@ -28,6 +28,9 @@ public sealed class XenoFlingSystem : EntitySystem
 
     private void OnXenoFlingAction(Entity<XenoFlingComponent> xeno, ref XenoFlingActionEvent args)
     {
+        if (args.Target == xeno.Owner)
+            return;
+
         if (args.Handled)
             return;
 
@@ -37,8 +40,6 @@ public sealed class XenoFlingSystem : EntitySystem
         if (attempt.Cancelled)
             return;
 
-        args.Handled = true;
-
         var targetId = args.Target;
 
         if (TryComp(xeno, out XenoComponent? xenoComp) &&
@@ -47,6 +48,8 @@ public sealed class XenoFlingSystem : EntitySystem
         {
             return;
         }
+
+        args.Handled = true;
 
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);

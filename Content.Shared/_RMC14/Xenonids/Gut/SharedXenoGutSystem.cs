@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.Body.Systems;
 using Content.Shared.Body.Components;
@@ -10,6 +11,7 @@ namespace Content.Shared._RMC14.Xenonids.Gut;
 public sealed class SharedXenoGutSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedBodySystem _bodySystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -25,6 +27,9 @@ public sealed class SharedXenoGutSystem : EntitySystem
 
     private void OnXenoGutAction(Entity<XenoGutComponent> xeno, ref XenoGutActionEvent args)
     {
+        if (args.Target == xeno.Owner || HasComp<XenoComponent>(args.Target))
+            return;
+
         if (args.Handled)
             return;
 
@@ -36,16 +41,16 @@ public sealed class SharedXenoGutSystem : EntitySystem
 
         var target = args.Target;
 
-        if (!TryComp<BodyComponent>(target, out var body))
+        if (!HasComp<BodyComponent>(target))
             return;
 
-        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
+        if (!_xenoPlasma.HasPlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
             return;
 
         args.Handled = true;
 
         var ev = new XenoGutDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.GutDelay, ev, xeno, target)
+        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.Delay, ev, xeno, target)
         {
             BreakOnMove = true,
             BlockDuplicate = true,
@@ -56,19 +61,29 @@ public sealed class SharedXenoGutSystem : EntitySystem
 
     private void OnXenoGutDoAfterEvent(Entity<XenoGutComponent> xeno, ref XenoGutDoAfterEvent args)
     {
-        if (args.Cancelled)
+        if (args.Cancelled || args.Handled || args.Target is not { } target)
             return;
 
-        if (args.Target != null &
-            !TryComp<BodyComponent>(args.Target, out var body))
-        {
+        if (target == xeno.Owner || HasComp<XenoComponent>(target))
             return;
+
+        if (!TryComp<BodyComponent>(target, out var body))
+            return;
+
+        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
+            return;
+
+        args.Handled = true;
+        if (_net.IsServer)
+        {
+            _bodySystem.GibBody(target, true, body);
+            _audio.PlayPvs(xeno.Comp.Sound, xeno);
         }
 
-        if (args.Target != null)
-            _bodySystem.GibBody(args.Target.Value, true, body);
-
-        if (_net.IsServer)
-            _audio.PlayPvs(xeno.Comp.Sound, xeno);
+        foreach (var (actionId, actionComp) in _actions.GetActions(xeno))
+        {
+            if (actionComp.BaseEvent is XenoGutActionEvent)
+                _actions.SetIfBiggerCooldown(actionId, xeno.Comp.Cooldown);
+        }
     }
 }

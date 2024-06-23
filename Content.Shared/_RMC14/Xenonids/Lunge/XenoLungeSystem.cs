@@ -33,6 +33,10 @@ public sealed class XenoLungeSystem : EntitySystem
 
     private void OnXenoLungeAction(Entity<XenoLungeComponent> xeno, ref XenoLungeActionEvent args)
     {
+        // TODO RMC14 xenos of the same hive
+        if (args.Target == xeno.Owner || HasComp<XenoComponent>(args.Target))
+            return;
+
         if (args.Handled)
             return;
 

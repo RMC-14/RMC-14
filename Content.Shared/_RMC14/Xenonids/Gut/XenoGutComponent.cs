@@ -15,8 +15,11 @@ public sealed partial class XenoGutComponent : Component
     public FixedPoint2 PlasmaCost = 200;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan GutDelay = TimeSpan.FromSeconds(5);
+    public TimeSpan Delay = TimeSpan.FromSeconds(8);
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_RMC14/Voice/Xeno/alien_roar1.ogg");
+    public TimeSpan Cooldown = TimeSpan.FromMinutes(15);
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_RMC14/Voice/Xeno/alien_roar1.ogg", AudioParams.Default.WithVolume(-5));
 }

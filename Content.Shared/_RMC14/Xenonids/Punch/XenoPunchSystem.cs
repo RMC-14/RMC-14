@@ -25,6 +25,10 @@ public sealed class XenoPunchSystem : EntitySystem
 
     private void OnXenoPunchAction(Entity<XenoPunchComponent> xeno, ref XenoPunchActionEvent args)
     {
+        // TODO RMC14 xenos of the same hive
+        if (args.Target == xeno.Owner || HasComp<XenoComponent>(args.Target))
+            return;
+
         if (args.Handled)
             return;
 
