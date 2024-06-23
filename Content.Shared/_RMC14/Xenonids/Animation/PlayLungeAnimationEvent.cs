@@ -5,8 +5,9 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Xenonids.Animation;
 
 [Serializable, NetSerializable]
-public class PlayLungeAnimationEvent(NetEntity entityUid, Vector2 direction) : EntityEventArgs
+public class PlayLungeAnimationEvent(NetEntity entityUid, Vector2 direction, bool client) : EntityEventArgs
 {
-    public NetEntity EntityUid { get; } = entityUid;
-    public Vector2 Direction { get; } = direction;
+    public readonly NetEntity EntityUid = entityUid;
+    public readonly Vector2 Direction = direction;
+    public readonly bool Client = client;
 }

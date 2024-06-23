@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.Xenonids.Animation;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
+using Robust.Client.Player;
 using Robust.Shared.Animations;
 using static Robust.Client.Animations.AnimationTrackProperty;
 
@@ -10,6 +11,7 @@ namespace Content.Client._RMC14.Xenonids.Animations;
 public sealed class XenoAnimationsSystem : EntitySystem
 {
     [Dependency] private readonly AnimationPlayerSystem _animation = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
 
     private const string MeleeLungeKey = "melee-lunge";
 
@@ -22,12 +24,16 @@ public sealed class XenoAnimationsSystem : EntitySystem
 
     private void OnPlayLungeAnimation(PlayLungeAnimationEvent ev)
     {
-        var entityUid = GetEntity(ev.EntityUid);
-        var direction = ev.Direction;
+        if (!TryGetEntity(ev.EntityUid, out var entity))
+            return;
 
+        if (!ev.Client && _player.LocalEntity == entity)
+            return;
+
+        var direction = ev.Direction;
         var animation = GetLungeAnimation(direction);
-        _animation.Stop(entityUid, MeleeLungeKey);
-        _animation.Play(entityUid, animation, MeleeLungeKey);
+        _animation.Stop(entity.Value, MeleeLungeKey);
+        _animation.Play(entity.Value, animation, MeleeLungeKey);
     }
 
     private Animation GetLungeAnimation(Vector2 direction)

@@ -9,7 +9,7 @@ public sealed class XenoAnimationsSystem : EntitySystem
 
     public void PlayLungeAnimationEvent(EntityUid entityUid, Vector2 direction)
     {
-        var ev = new PlayLungeAnimationEvent(GetNetEntity(entityUid), direction.Normalized());
+        var ev = new PlayLungeAnimationEvent(GetNetEntity(entityUid), direction.Normalized(), _net.IsClient);
         if (_net.IsServer)
             RaiseNetworkEvent(ev);
         else
