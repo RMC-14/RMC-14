@@ -1,0 +1,163 @@
+﻿# Components
+- type: entity
+  abstract: true
+  parent: CMMREComponentBase
+  id: CMMREMainComponentBase
+  description: An MRE entree component. Contains the main course for nutrients.
+  components:
+  - type: Sprite
+    state: entree
+
+- type: entity
+  parent: CMMREMainComponentBase
+  id: CMMREComponentBonelessPorkRibs
+  name: MRE component (boneless pork ribs)
+  description: An MRE entree component. Contains the main course for nutrients. This one is boneless pork ribs.
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodBonelessPorkRibs
+
+- type: entity
+  parent: CMMREMainComponentBase
+  id: CMMREComponentGrilledChicken
+  name: MRE component (grilled chicken)
+  description: An MRE entree component. Contains the main course for nutrients. This one is grilled chicken.
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodGrilledChicken
+
+- type: entity
+  parent: CMMREMainComponentBase
+  id: CMMREComponentPizzaSquare
+  name: MRE component (pizza square)
+  description: An MRE entree component. Contains the main course for nutrients. This one is pizza square.
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodPizzaSquare
+
+- type: entity
+  parent: CMMREMainComponentBase
+  id: CMMREComponentSpaghettiChunks
+  name: MRE component (spaghetti chunks)
+  description: An MRE entree component. Contains the main course for nutrients. This one is spaghetti chunks.
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodSpaghettiChunks
+
+- type: entity
+  parent: CMMREMainComponentBase
+  id: CMMREComponentChickenTender
+  name: MRE component (chicken tender)
+  description: An MRE entree component. Contains the main course for nutrients. This one is chicken tender.
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodChickenTender
+
+# Foods
+- type: entity
+  abstract: true
+  parent: CMMREFoodBase
+  id: CMMREFoodMain
+  components:
+  - type: Food
+    transferAmount: 5
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 14
+        - ReagentId: TableSalt
+          Quantity: 6
+
+- type: entity
+  parent: CMMREFoodMain
+  id: CMMREFoodBonelessPorkRibs
+  name: boneless pork ribs
+  description: The contents of a Marine Standard issue MRE. This one is boneless pork ribs.
+  components:
+  - type: Sprite
+    state: boneless_pork_ribs
+  - type: FlavorProfile
+    flavors:
+    - BonelessPorkRibs
+
+- type: entity
+  parent: CMMREFoodMain
+  id: CMMREFoodGrilledChicken
+  name: grilled chicken
+  description: The contents of a Marine Standard issue MRE. This one is grilled chicken.
+  components:
+  - type: Sprite
+    state: grilled_chicken
+  - type: FlavorProfile
+    flavors:
+    - GrilledChicken
+
+- type: entity
+  parent: CMMREFoodMain
+  id: CMMREFoodPizzaSquare
+  name: pizza square
+  description: The contents of a Marine Standard issue MRE. This one is pizza square.
+  components:
+  - type: Sprite
+    state: pizza_square
+  - type: FlavorProfile
+    flavors:
+    - PizzaSquare
+
+- type: entity
+  parent: CMMREFoodMain
+  id: CMMREFoodSpaghettiChunks
+  name: spaghetti chunks
+  description: The contents of a Marine Standard issue MRE. This one is spaghetti chunks.
+  components:
+  - type: Sprite
+    state: spaghetti_chunks
+  - type: FlavorProfile
+    flavors:
+    - SpaghettiChunks
+
+- type: entity
+  parent: CMMREFoodMain
+  id: CMMREFoodChickenTender
+  name: chicken tender
+  description: The contents of a Marine Standard issue MRE. This one is chicken tender.
+  components:
+  - type: Sprite
+    state: chicken_tender
+  - type: FlavorProfile
+    flavors:
+    - ChickenTender
+
+# Flavors
+- type: flavor
+  id: BonelessPorkRibs
+  flavorType: Complex
+  description: like boneless pork ribs
+
+- type: flavor
+  id: GrilledChicken
+  flavorType: Complex
+  description: like grilled chicken
+
+- type: flavor
+  id: PizzaSquare
+  flavorType: Complex
+  description: like pizza
+
+- type: flavor
+  id: SpaghettiChunks
+  flavorType: Complex
+  description: like spaghetti
+
+- type: flavor
+  id: ChickenTender
+  flavorType: Complex
+  description: like chicken

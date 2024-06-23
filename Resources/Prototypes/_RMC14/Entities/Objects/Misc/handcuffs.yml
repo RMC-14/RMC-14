@@ -1,0 +1,13 @@
+- type: entity
+  parent: Handcuffs
+  id: CMHandcuffs
+  name: handcuffs
+  description: Use this to keep prisoners in line.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/handcuffs.rsi
+  - type: Handcuff
+    cuffedRSI: _RMC14/Objects/Misc/handcuffs.rsi
+    breakoutTime: 60 # 1minute, just like in code/game/objects/items/handcuffs.dm on line 5
+  - type: UseDelay
+    delay: 4

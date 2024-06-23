@@ -1,0 +1,55 @@
+﻿# RMC-14 Barricade Modifers
+
+# Base Barricade
+- type: damageModifierSet
+  id: CMBarricade
+  coefficients:
+    Heat: 1.15
+    Shock: 1.15
+    Cold: 1.15
+    Caustic: 1.15
+
+# Used in anti-Biohazard Barricade
+- type: damageModifierSet
+  id: CMBurnBarricade
+  coefficients:
+    Heat: 0.75
+    Shock: 0.75
+    Cold: 0.75
+    Caustic: 0.75
+
+# Used in Reinforced Barricade
+- type: damageModifierSet
+  id: CMBruteBarricade
+  coefficients:
+    Blunt: 0.75
+    Slash: 0.75
+    Piercing: 0.75
+
+# Used in sandbags
+- type: damageModifierSet
+  id: CMSandbag
+  coefficients:
+    Heat: 1.15
+    Shock: 1.15
+    Cold: 1.15
+    Caustic: 1.15
+
+- type: damageModifierSet
+  id: CMBloodlossHuman
+  coefficients:
+    Blunt: 0
+    Slash: 0
+    Piercing: 0
+    Shock: 0
+    Cold: 0
+    Heat: 0
+    Poison: 0
+    Radiation: 0
+    Asphyxiation: 0
+    Bloodloss: 0
+    Cellular: 0
+    Caustic: 0
+
+- type: damageModifierSet
+  id: StructuralMarine

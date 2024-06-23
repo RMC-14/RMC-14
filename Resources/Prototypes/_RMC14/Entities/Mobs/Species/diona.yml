@@ -1,0 +1,26 @@
+- type: entity
+  save: false
+  name: Urist C.M McPlants
+  parent: CMBaseMobSpeciesOrganic
+  id: CMMobDiona
+  suffix: RMC14
+  components:
+  - type: HumanoidAppearance
+    species: Diona
+  - type: Icon
+    sprite: Mobs/Species/Diona/parts.rsi
+    state: full
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#75b1f0"
+  - type: Speech
+    speechVerb: Plant
+  - type: Vocal
+    sounds:
+      Male: UnisexDiona
+      Female: UnisexDiona
+      Unsexed: UnisexDiona
+  - type: BodyEmotes
+    soundsId: DionaBodyEmotes

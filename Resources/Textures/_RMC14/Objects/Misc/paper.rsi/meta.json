@@ -1,0 +1,264 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9ab207cd7ffba86a0411d7058645fb8f2a7895f3/icons/obj/items/paper.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "folder_red"
+    },
+    {
+      "name": "folder_blue"
+    },
+    {
+      "name": "folder_yellow"
+    },
+    {
+      "name": "folder_white"
+    },
+    {
+      "name": "folder"
+    },
+    {
+      "name": "folder_black"
+    },
+    {
+      "name": "folder_black_red"
+    },
+    {
+      "name": "folder_black_blue"
+    },
+    {
+      "name": "folder_black_green"
+    },
+    {
+      "name": "folder_black_yellow"
+    },
+    {
+      "name": "folder_black_white"
+    },
+    {
+      "name": "folder_paper"
+    },
+    {
+      "name": "labeler0"
+    },
+    {
+      "name": "labeler1"
+    },
+    {
+      "name": "clipboard"
+    },
+    {
+      "name": "clipboard_over"
+    },
+    {
+      "name": "clipboard_pen"
+    },
+    {
+      "name": "paper_plane"
+    },
+    {
+      "name": "paper_stamp-def"
+    },
+    {
+      "name": "paper_stamp-ro"
+    },
+    {
+      "name": "paper_stamp-cap"
+    },
+    {
+      "name": "paper_stamp-hop"
+    },
+    {
+      "name": "paper_stamp-ce"
+    },
+    {
+      "name": "paper_stamp-hos"
+    },
+    {
+      "name": "paper_stamp-rd"
+    },
+    {
+      "name": "paper_stamp-clown"
+    },
+    {
+      "name": "paper_stamp-cmo"
+    },
+    {
+      "name": "paper_stamp-deny"
+    },
+    {
+      "name": "paper_stamp-approve"
+    },
+    {
+      "name": "paper_talisman"
+    },
+    {
+      "name": "pamphlet"
+    },
+    {
+      "name": "newspaper"
+    },
+    {
+      "name": "scrap"
+    },
+    {
+      "name": "scrap_bloodied"
+    },
+    {
+      "name": "paper_stamp-intaff"
+    },
+    {
+      "name": "cpaper"
+    },
+    {
+      "name": "cpaper_words"
+    },
+    {
+      "name": "paper_stack"
+    },
+    {
+      "name": "paper_stack_words"
+    },
+    {
+      "name": "paper_stamp-circle"
+    },
+    {
+      "name": "paper_stamp-dots"
+    },
+    {
+      "name": "paper_stamp-x"
+    },
+    {
+      "name": "photo"
+    },
+    {
+      "name": "clip"
+    },
+    {
+      "name": "paper_stamp-we_ya"
+    },
+    {
+      "name": "paper_stamp-marine"
+    },
+    {
+      "name": "paper_stamp-cmb"
+    },
+    {
+      "name": "stamp-hos"
+    },
+    {
+      "name": "stamp-hop"
+    },
+    {
+      "name": "stamp-cap"
+    },
+    {
+      "name": "stamp-def"
+    },
+    {
+      "name": "stamp-ro"
+    },
+    {
+      "name": "stamp-ce"
+    },
+    {
+      "name": "stamp-rd"
+    },
+    {
+      "name": "stamp-clown"
+    },
+    {
+      "name": "stamp-cmo"
+    },
+    {
+      "name": "stamp-marine"
+    },
+    {
+      "name": "stamp-we_ya"
+    },
+    {
+      "name": "stamp-cmb"
+    },
+    {
+      "name": "stamp-intaff"
+    },
+    {
+      "name": "stamp-deny"
+    },
+    {
+      "name": "stamp-approve"
+    },
+    {
+      "name": "paper_bin0"
+    },
+    {
+      "name": "paper_bin1"
+    },
+    {
+      "name": "paper_bin2"
+    },
+    {
+      "name": "paper_binb",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "paper"
+    },
+    {
+      "name": "paper_flag"
+    },
+    {
+      "name": "paper_flag_words"
+    },
+    {
+      "name": "paper_stamped"
+    },
+    {
+      "name": "paper_words"
+    },
+    {
+      "name": "paper_p_words"
+    },
+    {
+      "name": "paper_marine_words"
+    },
+    {
+      "name": "paper_marine"
+    },
+    {
+      "name": "fortune"
+    },
+    {
+      "name": "\u002Bblue_tip"
+    },
+    {
+      "name": "\u002Bred_tip"
+    },
+    {
+      "name": "\u002Bblack_tip"
+    },
+    {
+      "name": "\u002Bwhite_tip"
+    },
+    {
+      "name": "\u002Bgreen_tip"
+    },
+    {
+      "name": "pen"
+    },
+    {
+      "name": "fountain_pen"
+    }
+  ]
+}

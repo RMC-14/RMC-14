@@ -1,0 +1,89 @@
+- type: entity
+  parent: PaperBin
+  id: CMPaperBin
+  suffix: Empty
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/paper.rsi
+    state: paper_bin0
+    drawdepth: SmallObjects
+    noRot: true
+  - type: ItemMapper
+    sprite: _RMC14/Objects/Misc/paper.rsi
+    mapLayers:
+      paper_bin1:
+        whitelist:
+          tags:
+          - Document
+          - Write
+
+- type: entity
+  parent: CMPaperBin
+  id: CMPaperBin5
+  suffix: 5
+  components:
+  - type: Bin
+    initialContents:
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    whitelist:
+      tags:
+      - Document
+      - Write
+
+- type: entity
+  parent: CMPaperBin
+  id: CMPaperBin10
+  suffix: 10
+  components:
+  - type: Bin
+    initialContents:
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    whitelist:
+      tags:
+      - Document
+      - Write
+
+- type: entity
+  parent: CMPaperBin
+  id: CMPaperBin20
+  suffix: 20
+  components:
+  - type: Bin
+    initialContents:
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    whitelist:
+      tags:
+      - Document
+      - Write

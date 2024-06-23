@@ -1,0 +1,70 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelShivaPurpleBase
+  name: tiles-cm-default-purple
+
+- type: tile
+  parent: CMFloorSteelShivaPurpleBase
+  id: CMFloorSteelShivaPurple0
+  sprite: /Textures/_RMC14/Tiles/shiva/purple_0.png
+
+- type: tile
+  parent: CMFloorSteelShivaPurpleBase
+  id: CMFloorSteelShivaPurple1
+  sprite: /Textures/_RMC14/Tiles/shiva/purple_1.png
+
+- type: tile
+  parent: CMFloorSteelShivaPurpleBase
+  id: CMFloorSteelShivaPurple2
+  sprite: /Textures/_RMC14/Tiles/shiva/purple_2.png
+
+- type: tile
+  parent: CMFloorSteelShivaPurpleBase
+  id: CMFloorSteelShivaPurple3
+  sprite: /Textures/_RMC14/Tiles/shiva/purple_3.png
+
+- type: tile
+  parent: CMFloorSteelShivaPurpleBase
+  id: CMFloorSteelShivaPurple4
+  sprite: /Textures/_RMC14/Tiles/shiva/purple_4.png
+
+- type: tile
+  parent: CMFloorSteelShivaPurpleBase
+  id: CMFloorSteelShivaPurple5
+  sprite: /Textures/_RMC14/Tiles/shiva/purple_5.png
+
+- type: tile
+  parent: CMFloorSteelShivaPurpleBase
+  id: CMFloorSteelShivaPurple6
+  sprite: /Textures/_RMC14/Tiles/shiva/purple_6.png
+
+- type: tile
+  parent: CMFloorSteelShivaPurpleBase
+  id: CMFloorSteelShivaPurple7
+  sprite: /Textures/_RMC14/Tiles/shiva/purple_7.png
+
+- type: tile
+  parent: CMFloorSteelShivaPurpleBase
+  id: CMFloorSteelShivaPurpleCorners0
+  sprite: /Textures/_RMC14/Tiles/shiva/purplecorners_0.png
+
+- type: tile
+  parent: CMFloorSteelShivaPurpleBase
+  id: CMFloorSteelShivaPurpleCorners1
+  sprite: /Textures/_RMC14/Tiles/shiva/purplecorners_1.png
+
+- type: tile
+  parent: CMFloorSteelShivaPurpleBase
+  id: CMFloorSteelShivaPurpleCorners2
+  sprite: /Textures/_RMC14/Tiles/shiva/purplecorners_2.png
+
+- type: tile
+  parent: CMFloorSteelShivaPurpleBase
+  id: CMFloorSteelShivaPurpleCorners3
+  sprite: /Textures/_RMC14/Tiles/shiva/purplecorners_3.png
+
+- type: tile
+  parent: CMFloorSteelShivaPurpleBase
+  id: CMFloorSteelShivaPurpleFull3
+  sprite: /Textures/_RMC14/Tiles/shiva/purplefull_3.png

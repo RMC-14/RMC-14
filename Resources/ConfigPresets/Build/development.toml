@@ -11,7 +11,7 @@ generator_enabled = false
 [physics]
 # Makes mapping annoying
 grid_splitting = false
-maxlinvelocity = 41
+maxlinvelocity = 51
 
 [procgen]
 preload = false

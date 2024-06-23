@@ -1,0 +1,70 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelPrisonYellowBase
+  name: tiles-cm-default-yellow
+
+- type: tile
+  parent: CMFloorSteelPrisonYellowBase
+  id: CMFloorSteelPrisonYellow0
+  sprite: /Textures/_RMC14/Tiles/prison/yellow_0.png
+
+- type: tile
+  parent: CMFloorSteelPrisonYellowBase
+  id: CMFloorSteelPrisonYellow1
+  sprite: /Textures/_RMC14/Tiles/prison/yellow_1.png
+
+- type: tile
+  parent: CMFloorSteelPrisonYellowBase
+  id: CMFloorSteelPrisonYellow2
+  sprite: /Textures/_RMC14/Tiles/prison/yellow_2.png
+
+- type: tile
+  parent: CMFloorSteelPrisonYellowBase
+  id: CMFloorSteelPrisonYellow3
+  sprite: /Textures/_RMC14/Tiles/prison/yellow_3.png
+
+- type: tile
+  parent: CMFloorSteelPrisonYellowBase
+  id: CMFloorSteelPrisonYellow4
+  sprite: /Textures/_RMC14/Tiles/prison/yellow_4.png
+
+- type: tile
+  parent: CMFloorSteelPrisonYellowBase
+  id: CMFloorSteelPrisonYellow5
+  sprite: /Textures/_RMC14/Tiles/prison/yellow_5.png
+
+- type: tile
+  parent: CMFloorSteelPrisonYellowBase
+  id: CMFloorSteelPrisonYellow6
+  sprite: /Textures/_RMC14/Tiles/prison/yellow_6.png
+
+- type: tile
+  parent: CMFloorSteelPrisonYellowBase
+  id: CMFloorSteelPrisonYellow7
+  sprite: /Textures/_RMC14/Tiles/prison/yellow_7.png
+
+- type: tile
+  parent: CMFloorSteelPrisonYellowBase
+  id: CMFloorSteelPrisonYellowCorner0
+  sprite: /Textures/_RMC14/Tiles/prison/yellowcorner_0.png
+
+- type: tile
+  parent: CMFloorSteelPrisonYellowBase
+  id: CMFloorSteelPrisonYellowCorner1
+  sprite: /Textures/_RMC14/Tiles/prison/yellowcorner_1.png
+
+- type: tile
+  parent: CMFloorSteelPrisonYellowBase
+  id: CMFloorSteelPrisonYellowCorner2
+  sprite: /Textures/_RMC14/Tiles/prison/yellowcorner_2.png
+
+- type: tile
+  parent: CMFloorSteelPrisonYellowBase
+  id: CMFloorSteelPrisonYellowCorner3
+  sprite: /Textures/_RMC14/Tiles/prison/yellowcorner_3.png
+
+- type: tile
+  parent: CMFloorSteelPrisonYellowBase
+  id: CMFloorSteelPrisonYellowFull
+  sprite: /Textures/_RMC14/Tiles/prison/yellowfull.png

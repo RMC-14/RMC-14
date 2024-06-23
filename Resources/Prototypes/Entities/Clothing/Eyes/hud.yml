@@ -15,8 +15,9 @@
   - type: ShowHealthBars
     damageContainers:
     - Biological
+  - type: HolocardScanner # TODO RMC14 add this to RMC14 medical hud instead
   - type: ShowHealthIcons
-    damageContainers: 
+    damageContainers:
     - Biological
 
 - type: entity
