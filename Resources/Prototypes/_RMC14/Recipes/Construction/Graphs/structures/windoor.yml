@@ -1,0 +1,190 @@
+﻿- type: constructionGraph
+  parent: RMC
+  id: CMWindoor
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: assembly
+      completed:
+      - !type:SetAnchor
+        value: false
+      steps:
+      - material: CMGlassReinforced
+        amount: 5
+        doAfter: 2
+
+  - node: assembly
+    entity: CMWindoorAssembly
+    actions:
+    - !type:SnapToGrid {}
+    - !type:SetAnchor {}
+    edges:
+    - to: assemblySecure
+      completed:
+      - !type:SetAnchor
+        value: false
+      steps:
+      - material: CMRodMetal
+        amount: 4
+        doAfter: 4
+
+    - to: wired
+      conditions:
+      - !type:EntityAnchored { }
+      steps:
+      - material: Cable
+        amount: 1
+        doAfter: 4
+
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMSheetGlassReinforced1
+        amount: 5
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Welding
+        doAfter: 4
+
+  - node: wired
+    entity: CMWindoorAssembly
+    edges:
+    - to: electronics
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tag: DoorElectronics
+        store: board
+        name: "door electronics circuit board"
+        icon:
+          sprite: "Objects/Misc/module.rsi"
+          state: "door_electronics"
+        doAfter: 4
+
+    - to: assembly
+      completed:
+      - !type:SpawnPrototype
+        prototype: CableApcStack1
+        amount: 1
+      steps:
+      - tool: Cutting
+        doAfter: 4
+
+  - node: electronics
+    entity: CMWindoorAssembly
+    edges:
+    - to: windoor
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tool: Screwing
+        doAfter: 4
+
+    - to: wired
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tool: Prying
+        doAfter: 4
+
+  - node: windoor
+    entity: CMWindoor
+    edges:
+    - to: wired
+      conditions:
+      - !type:EntityAnchored {}
+      - !type:WirePanel {}
+      - !type:AllWiresCut
+      completed:
+      - !type:EmptyAllContainers
+        pickup: true
+        emptyAtUser: true
+      steps:
+      - tool: Prying
+        doAfter: 4
+
+  ## Secure windoor
+  - node: assemblySecure
+    entity: CMWindoorAssemblySecure
+    actions:
+    - !type:SnapToGrid { }
+    - !type:SetAnchor { }
+    edges:
+    - to: wiredSecure
+      conditions:
+      - !type:EntityAnchored { }
+      steps:
+      - material: Cable
+        amount: 1
+        doAfter: 4
+
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMSheetGlassReinforced1
+        amount: 5
+      - !type:SpawnPrototype
+        prototype: CMRodMetal1
+        amount: 4
+      - !type:DeleteEntity { }
+      steps:
+      - tool: Welding
+        doAfter: 10
+
+  - node: wiredSecure
+    entity: CMWindoorAssemblySecure
+    edges:
+    - to: electronicsSecure
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tag: DoorElectronics
+        store: board
+        name: "door electronics circuit board"
+        icon:
+          sprite: "Objects/Misc/module.rsi"
+          state: "door_electronics"
+        doAfter: 4
+
+    - to: assemblySecure
+      completed:
+      - !type:SpawnPrototype
+        prototype: CableApcStack1
+        amount: 1
+      steps:
+      - tool: Cutting
+        doAfter: 4
+
+  - node: electronicsSecure
+    entity: CMWindoorAssemblySecure
+    edges:
+    - to: windoorSecure
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tool: Screwing
+        doAfter: 4
+
+    - to: wiredSecure
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tool: Prying
+        doAfter: 4
+
+  - node: windoorSecure
+    entity: CMWindoorSecure
+    edges:
+    - to: wiredSecure
+      conditions:
+      - !type:EntityAnchored {}
+      - !type:WirePanel {}
+      - !type:AllWiresCut
+      completed:
+      - !type:EmptyAllContainers
+        pickup: true
+        emptyAtUser: true
+      steps:
+      - tool: Prying
+        doAfter: 4

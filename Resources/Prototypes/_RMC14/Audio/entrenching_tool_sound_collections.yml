@@ -1,0 +1,13 @@
+﻿- type: soundCollection
+  id: CMEntrenchingRustle
+  files:
+  - /Audio/_RMC14/Entrenching/rustle1.ogg
+  - /Audio/_RMC14/Entrenching/rustle2.ogg
+  - /Audio/_RMC14/Entrenching/rustle3.ogg
+  - /Audio/_RMC14/Entrenching/rustle4.ogg
+  - /Audio/_RMC14/Entrenching/rustle5.ogg
+
+- type: soundCollection
+  id: CMEntrenchingThud
+  files:
+  - /Audio/_RMC14/Entrenching/thud.ogg

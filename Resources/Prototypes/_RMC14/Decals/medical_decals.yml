@@ -1,0 +1,224 @@
+- type: decal
+  id: CryoMid
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: cryo_mid
+
+- type: decal
+  id: CryoTop
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: cryo_top
+
+- type: decal
+  id: Cryocell1
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: cryo_cell_1
+
+- type: decal
+  id: CryoCell2
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: cryo_cell_2
+
+- type: decal
+  id: CryoCell3
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: cryo_cell_3
+
+- type: decal
+  id: CryoCell4
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: cryo_cell_4
+
+- type: decal
+  id: Doc1
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: doc_1
+
+- type: decal
+  id: Doc2
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: doc_2
+
+- type: decal
+  id: Doc3
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: doc_3
+
+- type: decal
+  id: Doc4
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: doc_4
+
+- type: decal
+  id: DocStriping
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: doc_striping
+
+- type: decal
+  id: DocStripingDir
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: doc_striping_dir
+
+- type: decal
+  id: Triage
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: triage
+
+- type: decal
+  id: TriageBottom
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: triage_bottom
+
+- type: decal
+  id: TriageLeft
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: triage_dir
+
+- type: decal
+  id: TriageDir
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: triage_dir
+
+- type: decal
+  id: TriageTop
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: triage_top
+
+- type: decal
+  id: TriageLeftDown
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: triage_left_down
+
+- type: decal
+  id: TriageTopLeft
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: triage_top_left
+
+- type: decal
+  id: TriageBottomRight
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: triage_bottom_right
+
+- type: decal
+  id: TriageRightUp
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: triage_right_up
+
+- type: decal
+  id: TriageLeftUp
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: triage_left_up
+
+- type: decal
+  id: TriageRightDown
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: triage_right_down
+
+- type: decal
+  id: TriageTopRight
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: triage_top_right
+
+- type: decal
+  id: TriageBottomLeft
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/medical_decals.rsi
+    state: triage_bottom_left

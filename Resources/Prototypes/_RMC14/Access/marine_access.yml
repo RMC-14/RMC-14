@@ -1,0 +1,49 @@
+﻿# Squads
+- type: accessLevel
+  id: CMAccessAlpha
+  name: squad-alpha
+
+- type: accessLevel
+  id: CMAccessBravo
+  name: squad-bravo
+
+- type: accessLevel
+  id: CMAccessCharlie
+  name: squad-charlie
+
+- type: accessLevel
+  id: CMAccessDelta
+  name: squad-delta
+
+# Almayer
+- type: accessLevel
+  id: CMAccessMarinePrep
+  name: cm-job-name-rifleman
+
+- type: accessLevel
+  id: CMAccessMedPrep
+  name: cm-job-name-hospital-corpsman
+
+- type: accessLevel
+  id: CMAccessCombatTechPrep
+  name: cm-job-name-combat-tech
+
+- type: accessLevel
+  id: CMAccessSquadLeaderPrep
+  name: cm-job-name-squad-leader
+
+- type: accessLevel
+  id: CMAccessSpecPrep
+  name: cm-job-name-weapons-specialist
+
+- type: accessLevel
+  id: CMAccessSmartPrep
+  name: cm-job-name-smart-gun-operator
+
+- type: accessLevel
+  id: CMAccessFTLPrep
+  name: cm-job-name-fireteam-leader
+
+- type: accessLevel
+  id: CMAccessMarineRifleman
+  name: cm-job-name-rifleman

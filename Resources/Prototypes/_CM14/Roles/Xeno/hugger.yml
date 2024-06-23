@@ -1,8 +1,0 @@
-﻿- type: job
-  parent: CMJobXenoBase
-  id: CMXenoHugger
-  name: cm-job-name-xeno-hugger
-  playTimeTracker: CMJobXenoHugger
-
-- type: playTimeTracker
-  id: CMJobXenoHugger

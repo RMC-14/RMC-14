@@ -1,0 +1,114 @@
+﻿- type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  id: CMAutolathe
+  name: autolathe
+  description: It produces items using metal and glass.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/autolathe.rsi
+    layers:
+    - state: autolathe_n
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: autolathe
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: autolathe_t
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Appearance
+  - type: WiresVisuals
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Lathe
+    idleState: autolathe
+    runningState: autolathe_n
+    staticRecipes:
+    - CMBucket
+#    - Janitorial bucket (10000 metal)
+#    - Flashlight (62 metal, 25 glass)
+    - CMFireExtinguisher
+    - CMCrowbar
+    - CMMultitool
+    - CMTRayScanner
+    - CMWelderSmall
+    - CMScrewdriver
+    - CMWirecutter
+    - CMWrench
+#    - Mop (137 metal)
+#    - Radio headset (93 metal)
+#    - Shortwave radio (93 metal, 31 glass)
+#    - Welding mask (3750 metal, 1250 glass)
+    - CMSheetGlassReinforced
+    - CMRodMetal
+#    - Kitchen knife (15000 metal)
+#    - Tape recorder (75 metal, 37 glass)
+#    - Airlock electronics (62 metal, 62 glass)
+#    - Fire alarm electronics (62 metal, 62 glass)
+#    - Power control module (62 metal, 62 glass)
+#    - Matter cartridge (37500 metal, 18750 glass)
+#    - Table parts (9375 metal)
+#    - Reinforced table parts (18750 metal)
+#    - Rack parts (4687 metal)
+    - CMScalpel
+    - CMCircularSaw
+    - CMSurgicalDrill
+    - CMRetractor
+    - CMCautery
+    - CMHemostat
+    - CMBeaker
+    - CMBeakerLarge
+#    - Drinking glass (625 glass)
+#    - Console screen (250 glass)
+#    - Igniter (625 metal, 62 glass)
+#    - Signaller (1250 metal, 250 glass)
+#    - Infrared sensor (1250 metal, 625 glass)
+#    - Timer (625 metal, 62 glass)
+#    - Proximity sensor (1000 metal, 250 glass)
+#    - Light tube (125 glass)
+#    - Light bulb (125 glass)
+#    - Glass ashtray (75 glass)
+#    - Hand labeler (156 metal)
+#    - Camera assembly (875 metal, 375 glass)
+#    - Matrix assembly (9375 metal)
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Metal
+      - Sheet
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: WiresPanel
+  - type: ActivatableUI
+    key: enum.LatheUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.LatheUiKey.Key:
+        type: LatheBoundUserInterface
+      enum.ResearchClientUiKey.Key:
+        type: ResearchClientBoundUserInterface
+  - type: Transform
+    anchored: true
+  - type: StaticPrice
+    price: 800
+  - type: Machine
+    board: CMAutolatheMachineCircuitboard

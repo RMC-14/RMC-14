@@ -5,7 +5,7 @@ using Robust.Shared.GameObjects;
 namespace Content.IntegrationTests.Tests.GameRules;
 
 [TestFixture]
-[Ignore("Secret game rule is disabled in CM")]
+[Ignore("Secret game rule is disabled in RMC14")]
 public sealed class SecretStartsTest
 {
     /// <summary>

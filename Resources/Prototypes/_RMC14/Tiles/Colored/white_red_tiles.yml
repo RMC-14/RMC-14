@@ -1,0 +1,65 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelPlanetWhiteRedBase
+  name: tiles-cm-default-red
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteRedBase
+  id: CMFloorSteelPlanetWhiteRed0
+  sprite: /Textures/_RMC14/Tiles/floors/whitered_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteRedBase
+  id: CMFloorSteelPlanetWhiteRed1
+  sprite: /Textures/_RMC14/Tiles/floors/whitered_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteRedBase
+  id: CMFloorSteelPlanetWhiteRed2
+  sprite: /Textures/_RMC14/Tiles/floors/whitered_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteRedBase
+  id: CMFloorSteelPlanetWhiteRed3
+  sprite: /Textures/_RMC14/Tiles/floors/whitered_3.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteRedBase
+  id: CMFloorSteelPlanetWhiteRed4
+  sprite: /Textures/_RMC14/Tiles/floors/whitered_4.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteRedBase
+  id: CMFloorSteelPlanetWhiteRed5
+  sprite: /Textures/_RMC14/Tiles/floors/whitered_5.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteRedBase
+  id: CMFloorSteelPlanetWhiteRed6
+  sprite: /Textures/_RMC14/Tiles/floors/whitered_6.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteRedBase
+  id: CMFloorSteelPlanetWhiteRed7
+  sprite: /Textures/_RMC14/Tiles/floors/whitered_7.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteRedBase
+  id: CMFloorSteelPlanetWhiteRedCorners0
+  sprite: /Textures/_RMC14/Tiles/floors/whiteredcorner_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteRedBase
+  id: CMFloorSteelPlanetWhiteRedCorners1
+  sprite: /Textures/_RMC14/Tiles/floors/whiteredcorner_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteRedBase
+  id: CMFloorSteelPlanetWhiteRedCorners2
+  sprite: /Textures/_RMC14/Tiles/floors/whiteredcorner_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteRedBase
+  id: CMFloorSteelPlanetWhiteRedCorners3
+  sprite: /Textures/_RMC14/Tiles/floors/whiteredcorner_3.png

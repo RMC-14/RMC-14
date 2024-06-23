@@ -1,0 +1,24 @@
+﻿- type: entity
+  parent: CMBaseMobSpeciesOrganic
+  id: CMTestDummy
+  name: test dummy
+  suffix: RMC14
+  components:
+  - type: Marine
+  - type: Loadout
+    prototypes: [ CMGearStaffOfficer ]
+
+- type: entity
+  name: CM Test Dummy Spawner
+  id: SpawnCMTestDummy
+  parent: MarkerBase
+  suffix: DEBUG
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Mobs/Species/Human/parts.rsi
+      state: full
+  - type: ConditionalSpawner
+    prototypes:
+    - CMTestDummy

@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Content.Server.Chat.Managers;
 using Content.Server.Discord;
-using Content.Shared._CM14.CCVar;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared.CCVar;
 using Robust.Server.ServerStatus;
 using Robust.Shared.Asynchronous;
@@ -34,7 +34,7 @@ namespace Content.Server.MoMMI
 
         public async void SendOOCMessage(string sender, string message)
         {
-            // TODO CM14
+            // TODO RMC14
             var oocWebhook = _configurationManager.GetCVar(CMCVars.CMOocWebhook);
             if (oocWebhook != _oocWebhookUrl)
             {
