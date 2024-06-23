@@ -1440,5 +1440,19 @@
   id: 173
   time: '2024-06-23T11:17:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2567
+- author: vero5123
+  changes:
+  - message: Adds a short move delay to the Runner after hitting a pounce.
+    type: Tweak
+  id: 174
+  time: '2024-06-23T11:25:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2559
+- author: vero5123
+  changes:
+  - message: Defender can no longer pull and headbutt at the same time
+    type: Fix
+  id: 175
+  time: '2024-06-23T11:25:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2558
 Name: RMC14
 Order: -1
