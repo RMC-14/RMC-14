@@ -52,26 +52,26 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<InfectableComponent, ActivateInWorldEvent>(OnHuggableActivate);
-        SubscribeLocalEvent<InfectableComponent, CanDropTargetEvent>(OnHuggableCanDropTarget);
+        SubscribeLocalEvent<InfectableComponent, ActivateInWorldEvent>(OnInfectableActivate);
+        SubscribeLocalEvent<InfectableComponent, CanDropTargetEvent>(OnInfectableCanDropTarget);
 
-        SubscribeLocalEvent<XenoParasiteComponent, XenoLeapHitEvent>(OnHuggerLeapHit);
-        SubscribeLocalEvent<XenoParasiteComponent, AfterInteractEvent>(OnHuggerAfterInteract);
-        SubscribeLocalEvent<XenoParasiteComponent, DoAfterAttemptEvent<AttachParasiteDoAfterEvent>>(OnHuggerAttachDoAfterAttempt);
-        SubscribeLocalEvent<XenoParasiteComponent, AttachParasiteDoAfterEvent>(OnHuggerAttachDoAfter);
-        SubscribeLocalEvent<XenoParasiteComponent, CanDragEvent>(OnHuggerCanDrag);
-        SubscribeLocalEvent<XenoParasiteComponent, CanDropDraggedEvent>(OnHuggerCanDropDragged);
-        SubscribeLocalEvent<XenoParasiteComponent, DragDropDraggedEvent>(OnHuggerDragDropDragged);
+        SubscribeLocalEvent<XenoParasiteComponent, XenoLeapHitEvent>(OnParasiteLeapHit);
+        SubscribeLocalEvent<XenoParasiteComponent, AfterInteractEvent>(OnParasiteAfterInteract);
+        SubscribeLocalEvent<XenoParasiteComponent, DoAfterAttemptEvent<AttachParasiteDoAfterEvent>>(OnParasiteAttachDoAfterAttempt);
+        SubscribeLocalEvent<XenoParasiteComponent, AttachParasiteDoAfterEvent>(OnParasiteAttachDoAfter);
+        SubscribeLocalEvent<XenoParasiteComponent, CanDragEvent>(OnParasiteCanDrag);
+        SubscribeLocalEvent<XenoParasiteComponent, CanDropDraggedEvent>(OnParasiteCanDropDragged);
+        SubscribeLocalEvent<XenoParasiteComponent, DragDropDraggedEvent>(OnParasiteDragDropDragged);
 
-        SubscribeLocalEvent<ParasiteSpentComponent, MapInitEvent>(OnHuggerSpentMapInit);
-        SubscribeLocalEvent<ParasiteSpentComponent, UpdateMobStateEvent>(OnHuggerSpentUpdateMobState,
+        SubscribeLocalEvent<ParasiteSpentComponent, MapInitEvent>(OnParasiteSpentMapInit);
+        SubscribeLocalEvent<ParasiteSpentComponent, UpdateMobStateEvent>(OnParasiteSpentUpdateMobState,
             after: [typeof(MobThresholdSystem), typeof(SharedXenoPheromonesSystem)]);
 
-        SubscribeLocalEvent<VictimInfectedComponent, MapInitEvent>(OnVictimHuggedMapInit);
-        SubscribeLocalEvent<VictimInfectedComponent, ComponentRemove>(OnVictimHuggedRemoved);
-        SubscribeLocalEvent<VictimInfectedComponent, CanSeeAttemptEvent>(OnVictimHuggedCancel);
-        SubscribeLocalEvent<VictimInfectedComponent, ExaminedEvent>(OnVictimHuggedExamined);
-        SubscribeLocalEvent<VictimInfectedComponent, RejuvenateEvent>(OnVictimHuggedRejuvenate);
+        SubscribeLocalEvent<VictimInfectedComponent, MapInitEvent>(OnVictimInfectedMapInit);
+        SubscribeLocalEvent<VictimInfectedComponent, ComponentRemove>(OnVictimInfectedRemoved);
+        SubscribeLocalEvent<VictimInfectedComponent, CanSeeAttemptEvent>(OnVictimInfectedCancel);
+        SubscribeLocalEvent<VictimInfectedComponent, ExaminedEvent>(OnVictimInfectedExamined);
+        SubscribeLocalEvent<VictimInfectedComponent, RejuvenateEvent>(OnVictimInfectedRejuvenate);
 
         SubscribeLocalEvent<VictimBurstComponent, MapInitEvent>(OnVictimBurstMapInit);
         SubscribeLocalEvent<VictimBurstComponent, UpdateMobStateEvent>(OnVictimUpdateMobState,
@@ -79,42 +79,42 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         SubscribeLocalEvent<VictimBurstComponent, RejuvenateEvent>(OnVictimBurstRejuvenate);
     }
 
-    private void OnHuggableActivate(Entity<InfectableComponent> ent, ref ActivateInWorldEvent args)
+    private void OnInfectableActivate(Entity<InfectableComponent> ent, ref ActivateInWorldEvent args)
     {
-        if (TryComp(args.User, out XenoParasiteComponent? hugger) &&
-            StartHug((args.User, hugger), args.Target, args.User))
+        if (TryComp(args.User, out XenoParasiteComponent? parasite) &&
+            StartInfect((args.User, parasite), args.Target, args.User))
         {
             args.Handled = true;
         }
     }
 
-    private void OnHuggableCanDropTarget(Entity<InfectableComponent> ent, ref CanDropTargetEvent args)
+    private void OnInfectableCanDropTarget(Entity<InfectableComponent> ent, ref CanDropTargetEvent args)
     {
-        if (TryComp(args.Dragged, out XenoParasiteComponent? hugger) &&
-            CanHugPopup((args.Dragged, hugger), ent, args.User, false))
+        if (TryComp(args.Dragged, out XenoParasiteComponent? parasite) &&
+            CanInfectPopup((args.Dragged, parasite), ent, args.User, false))
         {
             args.CanDrop = true;
             args.Handled = true;
         }
     }
 
-    private void OnHuggerLeapHit(Entity<XenoParasiteComponent> hugger, ref XenoLeapHitEvent args)
+    private void OnParasiteLeapHit(Entity<XenoParasiteComponent> parasite, ref XenoLeapHitEvent args)
     {
-        var coordinates = _transform.GetMoverCoordinates(hugger);
-        if (_transform.InRange(coordinates, args.Leaping.Origin, hugger.Comp.InfectRange))
-            Hug(hugger, args.Hit, false);
+        var coordinates = _transform.GetMoverCoordinates(parasite);
+        if (_transform.InRange(coordinates, args.Leaping.Origin, parasite.Comp.InfectRange))
+            Hug(parasite, args.Hit, false);
     }
 
-    private void OnHuggerAfterInteract(Entity<XenoParasiteComponent> ent, ref AfterInteractEvent args)
+    private void OnParasiteAfterInteract(Entity<XenoParasiteComponent> ent, ref AfterInteractEvent args)
     {
         if (!args.CanReach || args.Target == null)
             return;
 
-        if (StartHug(ent, args.Target.Value, args.User))
+        if (StartInfect(ent, args.Target.Value, args.User))
             args.Handled = true;
     }
 
-    private void OnHuggerAttachDoAfterAttempt(Entity<XenoParasiteComponent> ent, ref DoAfterAttemptEvent<AttachParasiteDoAfterEvent> args)
+    private void OnParasiteAttachDoAfterAttempt(Entity<XenoParasiteComponent> ent, ref DoAfterAttemptEvent<AttachParasiteDoAfterEvent> args)
     {
         if (args.DoAfter.Args.Target is not { } target)
         {
@@ -122,11 +122,11 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             return;
         }
 
-        if (!CanHugPopup(ent, target, ent))
+        if (!CanInfectPopup(ent, target, ent))
             args.Cancel();
     }
 
-    private void OnHuggerAttachDoAfter(Entity<XenoParasiteComponent> ent, ref AttachParasiteDoAfterEvent args)
+    private void OnParasiteAttachDoAfter(Entity<XenoParasiteComponent> ent, ref AttachParasiteDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled || args.Target == null)
             return;
@@ -135,48 +135,48 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             args.Handled = true;
     }
 
-    private void OnHuggerCanDrag(Entity<XenoParasiteComponent> ent, ref CanDragEvent args)
+    private void OnParasiteCanDrag(Entity<XenoParasiteComponent> ent, ref CanDragEvent args)
     {
         args.Handled = true;
     }
 
-    private void OnHuggerCanDropDragged(Entity<XenoParasiteComponent> ent, ref CanDropDraggedEvent args)
+    private void OnParasiteCanDropDragged(Entity<XenoParasiteComponent> ent, ref CanDropDraggedEvent args)
     {
         if (args.User != ent.Owner && !_cmHands.IsPickupByAllowed(ent.Owner, args.User))
             return;
 
-        if (!CanHugPopup(ent, args.Target, args.User, false))
+        if (!CanInfectPopup(ent, args.Target, args.User, false))
             return;
 
         args.CanDrop = true;
         args.Handled = true;
     }
 
-    private void OnHuggerDragDropDragged(Entity<XenoParasiteComponent> ent, ref DragDropDraggedEvent args)
+    private void OnParasiteDragDropDragged(Entity<XenoParasiteComponent> ent, ref DragDropDraggedEvent args)
     {
         if (args.User != ent.Owner && !_cmHands.IsPickupByAllowed(ent.Owner, args.User))
             return;
 
-        StartHug(ent, args.Target, args.User);
+        StartInfect(ent, args.Target, args.User);
         args.Handled = true;
     }
 
-    protected virtual void HuggerLeapHit(Entity<XenoParasiteComponent> hugger)
+    protected virtual void ParasiteLeapHit(Entity<XenoParasiteComponent> parasite)
     {
     }
 
-    private void OnHuggerSpentMapInit(Entity<ParasiteSpentComponent> spent, ref MapInitEvent args)
+    private void OnParasiteSpentMapInit(Entity<ParasiteSpentComponent> spent, ref MapInitEvent args)
     {
         if (TryComp(spent, out MobStateComponent? mobState))
             _mobState.UpdateMobState(spent, mobState);
     }
 
-    private void OnHuggerSpentUpdateMobState(Entity<ParasiteSpentComponent> spent, ref UpdateMobStateEvent args)
+    private void OnParasiteSpentUpdateMobState(Entity<ParasiteSpentComponent> spent, ref UpdateMobStateEvent args)
     {
         args.State = MobState.Dead;
     }
 
-    private void OnVictimHuggedMapInit(Entity<VictimInfectedComponent> victim, ref MapInitEvent args)
+    private void OnVictimInfectedMapInit(Entity<VictimInfectedComponent> victim, ref MapInitEvent args)
     {
         victim.Comp.FallOffAt = _timing.CurTime + victim.Comp.FallOffDelay;
         victim.Comp.BurstAt = _timing.CurTime + victim.Comp.BurstDelay;
@@ -184,25 +184,25 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         _appearance.SetData(victim, victim.Comp.InfectedLayer, true);
     }
 
-    private void OnVictimHuggedRemoved(Entity<VictimInfectedComponent> victim, ref ComponentRemove args)
+    private void OnVictimInfectedRemoved(Entity<VictimInfectedComponent> victim, ref ComponentRemove args)
     {
         _blindable.UpdateIsBlind(victim.Owner);
         _standing.Stand(victim);
     }
 
-    private void OnVictimHuggedCancel<T>(Entity<VictimInfectedComponent> victim, ref T args) where T : CancellableEntityEventArgs
+    private void OnVictimInfectedCancel<T>(Entity<VictimInfectedComponent> victim, ref T args) where T : CancellableEntityEventArgs
     {
         if (victim.Comp.LifeStage <= ComponentLifeStage.Running && !victim.Comp.Recovered)
             args.Cancel();
     }
 
-    private void OnVictimHuggedExamined(Entity<VictimInfectedComponent> victim, ref ExaminedEvent args)
+    private void OnVictimInfectedExamined(Entity<VictimInfectedComponent> victim, ref ExaminedEvent args)
     {
         if (HasComp<XenoComponent>(args.Examiner) || (CompOrNull<GhostComponent>(args.Examiner)?.CanGhostInteract ?? false))
             args.PushMarkup("This creature is impregnated.");
     }
 
-    private void OnVictimHuggedRejuvenate(Entity<VictimInfectedComponent> victim, ref RejuvenateEvent args)
+    private void OnVictimInfectedRejuvenate(Entity<VictimInfectedComponent> victim, ref RejuvenateEvent args)
     {
         RemCompDeferred<VictimInfectedComponent>(victim);
     }
@@ -225,13 +225,13 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         RemCompDeferred<VictimBurstComponent>(burst);
     }
 
-    private bool StartHug(Entity<XenoParasiteComponent> hugger, EntityUid victim, EntityUid user)
+    private bool StartInfect(Entity<XenoParasiteComponent> parasite, EntityUid victim, EntityUid user)
     {
-        if (!CanHugPopup(hugger, victim, user))
+        if (!CanInfectPopup(parasite, victim, user))
             return false;
 
         var ev = new AttachParasiteDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, hugger.Comp.ManualAttachDelay, ev, hugger, victim)
+        var doAfter = new DoAfterArgs(EntityManager, user, parasite.Comp.ManualAttachDelay, ev, parasite, victim)
         {
             BreakOnMove = true,
             AttemptFrequency = AttemptFrequency.EveryTick
@@ -241,10 +241,10 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         return true;
     }
 
-    private bool CanHugPopup(Entity<XenoParasiteComponent> hugger, EntityUid victim, EntityUid user, bool popup = true, bool force = false)
+    private bool CanInfectPopup(Entity<XenoParasiteComponent> parasite, EntityUid victim, EntityUid user, bool popup = true, bool force = false)
     {
         if (!HasComp<InfectableComponent>(victim) ||
-            HasComp<ParasiteSpentComponent>(hugger) ||
+            HasComp<ParasiteSpentComponent>(parasite) ||
             HasComp<VictimInfectedComponent>(victim))
         {
             if (popup)
@@ -274,9 +274,9 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         return true;
     }
 
-    public bool Hug(Entity<XenoParasiteComponent> hugger, EntityUid victim, bool popup = true, bool force = false)
+    public bool Hug(Entity<XenoParasiteComponent> parasite, EntityUid victim, bool popup = true, bool force = false)
     {
-        if (!CanHugPopup(hugger, victim, hugger, popup, force))
+        if (!CanInfectPopup(parasite, victim, parasite, popup, force))
             return false;
 
         if (_inventory.TryGetContainerSlotEnumerator(victim, out var slots, SlotFlags.MASK))
@@ -309,20 +309,20 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         var time = _timing.CurTime;
         var victimComp = EnsureComp<VictimInfectedComponent>(victim);
         victimComp.AttachedAt = time;
-        victimComp.RecoverAt = time + hugger.Comp.ParalyzeTime;
-        victimComp.Hive = CompOrNull<XenoComponent>(hugger)?.Hive ?? default;
-        _stun.TryParalyze(victim, hugger.Comp.ParalyzeTime, true);
+        victimComp.RecoverAt = time + parasite.Comp.ParalyzeTime;
+        victimComp.Hive = CompOrNull<XenoComponent>(parasite)?.Hive ?? default;
+        _stun.TryParalyze(victim, parasite.Comp.ParalyzeTime, true);
 
         var container = _container.EnsureContainer<ContainerSlot>(victim, victimComp.ContainerId);
-        _container.Insert(hugger.Owner, container);
+        _container.Insert(parasite.Owner, container);
 
         _blindable.UpdateIsBlind(victim);
-        _appearance.SetData(hugger, victimComp.InfectedLayer, true);
+        _appearance.SetData(parasite, victimComp.InfectedLayer, true);
 
-        // TODO CM14 also do damage to the hugger
-        EnsureComp<ParasiteSpentComponent>(hugger);
+        // TODO RMC14 also do damage to the parasite
+        EnsureComp<ParasiteSpentComponent>(parasite);
 
-        HuggerLeapHit(hugger);
+        ParasiteLeapHit(parasite);
         return true;
     }
 
@@ -344,111 +344,111 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
         var time = _timing.CurTime;
         var query = EntityQueryEnumerator<VictimInfectedComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var hugged, out var xform))
+        while (query.MoveNext(out var uid, out var infected, out var xform))
         {
-            if (hugged.FallOffAt < time && !hugged.FellOff)
+            if (infected.FallOffAt < time && !infected.FellOff)
             {
-                hugged.FellOff = true;
-                _appearance.SetData(uid, hugged.InfectedLayer, false);
-                if (_container.TryGetContainer(uid, hugged.ContainerId, out var container))
+                infected.FellOff = true;
+                _appearance.SetData(uid, infected.InfectedLayer, false);
+                if (_container.TryGetContainer(uid, infected.ContainerId, out var container))
                     _container.EmptyContainer(container);
             }
 
-            if (hugged.RecoverAt < time && !hugged.Recovered)
+            if (infected.RecoverAt < time && !infected.Recovered)
             {
-                hugged.Recovered = true;
+                infected.Recovered = true;
                 _blindable.UpdateIsBlind(uid);
             }
 
             if (_net.IsClient)
                 continue;
 
-            if (hugged.BurstAt > time)
+            if (infected.BurstAt > time)
             {
                 // TODO CM14 make this less effective against late-stage infections, also make this support faster incubation
-                if (hugged.IncubationMultiplier < 1)
-                    hugged.BurstAt += TimeSpan.FromSeconds(1 - hugged.IncubationMultiplier) * frameTime;
+                if (infected.IncubationMultiplier < 1)
+                    infected.BurstAt += TimeSpan.FromSeconds(1 - infected.IncubationMultiplier) * frameTime;
 
                 // Stages
                 // Percentage of how far along we out to burst time times the number of stages, truncated. You can't go back a stage once you've reached one
-                int stage = Math.Max((int) ((hugged.BurstDelay - (hugged.BurstAt - time)) / hugged.BurstDelay * hugged.FinalStage), hugged.CurrentStage);
-                hugged.CurrentStage = stage;
+                int stage = Math.Max((int) ((infected.BurstDelay - (infected.BurstAt - time)) / infected.BurstDelay * infected.FinalStage), infected.CurrentStage);
+                infected.CurrentStage = stage;
                 // Symptoms only start after the IntialSymptomStart is passed (by default, 2)
-                if(stage >= hugged.FinalSymptomsStart)
+                if(stage >= infected.FinalSymptomsStart)
                 {
-                    if (_random.Prob(hugged.MajorPainChance * frameTime))
+                    if (_random.Prob(infected.MajorPainChance * frameTime))
                     {
                         var message = Loc.GetString("cm-xeno-infection-majorpain-" + _random.Pick(new List<string> { "chest", "breathing", "heart" }));
                         _popup.PopupEntity(message, uid, uid, PopupType.MediumCaution);
                         if (_random.Prob(0.5f))
                         {
-                            var ev = new VictimInfectedEmoteEvent(hugged.ScreamId);
+                            var ev = new VictimInfectedEmoteEvent(infected.ScreamId);
                             RaiseLocalEvent(uid, ev);
                         }
                     }
 
-                    if (_random.Prob(hugged.ShakesChance * frameTime))
-                        InfectionShakes(uid, hugged, hugged.BaseKnockdownTime * 3);
+                    if (_random.Prob(infected.ShakesChance * frameTime))
+                        InfectionShakes(uid, infected, infected.BaseKnockdownTime * 3);
                 }
-                else if (stage >= hugged.MiddlingSymptomsStart)
+                else if (stage >= infected.MiddlingSymptomsStart)
                 {
-                    if (_random.Prob(hugged.ThroatPainChance * frameTime))
+                    if (_random.Prob(infected.ThroatPainChance * frameTime))
                     {
                         var message = Loc.GetString("cm-xeno-infection-throat-" + _random.Pick(new List<string> { "sore", "mucous" }));
                         _popup.PopupEntity(message, uid, uid, PopupType.MediumCaution);
                     }
                     // TODO 20% chance to take limb damage
-                    else if (_random.Prob(hugged.MuscleAcheChance * frameTime))
+                    else if (_random.Prob(infected.MuscleAcheChance * frameTime))
                     {
                         _popup.PopupEntity(Loc.GetString("cm-xeno-infection-muscle-ache"), uid, PopupType.MediumCaution);
                         if (_random.Prob(0.2f))
-                            _damage.TryChangeDamage(uid, hugged.InfectionDamage, true, false);
+                            _damage.TryChangeDamage(uid, infected.InfectionDamage, true, false);
                     }
-                    else if (_random.Prob(hugged.SneezeCoughChance * frameTime))
+                    else if (_random.Prob(infected.SneezeCoughChance * frameTime))
                     {
-                        var emote = _random.Pick(new List<ProtoId<EmotePrototype>> { hugged.SneezeId, hugged.CoughId });
+                        var emote = _random.Pick(new List<ProtoId<EmotePrototype>> { infected.SneezeId, infected.CoughId });
                         var ev = new VictimInfectedEmoteEvent(emote);
                         RaiseLocalEvent(uid, ev);
                     }
 
-                    if (_random.Prob((hugged.ShakesChance * 5 / 6) * frameTime))
-                        InfectionShakes(uid, hugged, hugged.BaseKnockdownTime * 2);
+                    if (_random.Prob((infected.ShakesChance * 5 / 6) * frameTime))
+                        InfectionShakes(uid, infected, infected.BaseKnockdownTime * 2);
                 }
-                else if (stage >= hugged.InitialSymptomsStart)
+                else if (stage >= infected.InitialSymptomsStart)
                 {
-                    if (_random.Prob(hugged.MinorPainChance * frameTime))
+                    if (_random.Prob(infected.MinorPainChance * frameTime))
                     {
                         var message = Loc.GetString("cm-xeno-infection-minorpain-" + _random.Pick(new List<string> { "stomach", "chest" }));
                         _popup.PopupEntity(message, uid, uid, PopupType.MediumCaution);
                     }
 
-                    if (_random.Prob((hugged.ShakesChance * 2 / 3) * frameTime))
-                        InfectionShakes(uid, hugged, hugged.BaseKnockdownTime);
+                    if (_random.Prob((infected.ShakesChance * 2 / 3) * frameTime))
+                        InfectionShakes(uid, infected, infected.BaseKnockdownTime);
                 }
                 continue;
             }
 
             RemCompDeferred<VictimInfectedComponent>(uid);
 
-            var spawned = SpawnAtPosition(hugged.BurstSpawn, xform.Coordinates);
-            _xeno.SetHive(spawned, hugged.Hive);
+            var spawned = SpawnAtPosition(infected.BurstSpawn, xform.Coordinates);
+            _xeno.SetHive(spawned, infected.Hive);
 
             EnsureComp<VictimBurstComponent>(uid);
 
-            _audio.PlayPvs(hugged.BurstSound, uid);
+            _audio.PlayPvs(infected.BurstSound, uid);
         }
     }
     // Shakes chances decrease as symptom stages progress, and they get longer
-    private void InfectionShakes(EntityUid victim, VictimInfectedComponent hugged, TimeSpan knockdownTime)
+    private void InfectionShakes(EntityUid victim, VictimInfectedComponent infected, TimeSpan knockdownTime)
     {
         // Don't activate when unconscious
         if (_mobState.IsIncapacitated(victim))
             return;
         //TODO Minor limb damage and causes pain
         _stun.TryParalyze(victim, knockdownTime, false);
-        _jitter.DoJitter(victim, hugged.JitterTime, false);
+        _jitter.DoJitter(victim, infected.JitterTime, false);
         _popup.PopupEntity(Loc.GetString("cm-xeno-infection-shakes-self"), victim, victim, PopupType.LargeCaution);
         _popup.PopupEntity(Loc.GetString("cm-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.LargeCaution);
-        _damage.TryChangeDamage(victim, hugged.InfectionDamage, true, false);
+        _damage.TryChangeDamage(victim, infected.InfectionDamage, true, false);
     }
 }
