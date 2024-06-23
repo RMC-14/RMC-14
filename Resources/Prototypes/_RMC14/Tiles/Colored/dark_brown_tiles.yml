@@ -1,0 +1,65 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelPlanetDarkBrownBase
+  name: tiles-cm-default-brown
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkBrownBase
+  id: CMFloorSteelPlanetDarkBrown0
+  sprite: /Textures/_RMC14/Tiles/floors/darkbrown_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkBrownBase
+  id: CMFloorSteelPlanetDarkBrown1
+  sprite: /Textures/_RMC14/Tiles/floors/darkbrown_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkBrownBase
+  id: CMFloorSteelPlanetDarkBrown2
+  sprite: /Textures/_RMC14/Tiles/floors/darkbrown_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkBrownBase
+  id: CMFloorSteelPlanetDarkBrown3
+  sprite: /Textures/_RMC14/Tiles/floors/darkbrown_3.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkBrownBase
+  id: CMFloorSteelPlanetDarkBrown4
+  sprite: /Textures/_RMC14/Tiles/floors/darkbrown_4.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkBrownBase
+  id: CMFloorSteelPlanetDarkBrown5
+  sprite: /Textures/_RMC14/Tiles/floors/darkbrown_5.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkBrownBase
+  id: CMFloorSteelPlanetDarkBrown6
+  sprite: /Textures/_RMC14/Tiles/floors/darkbrown_6.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkBrownBase
+  id: CMFloorSteelPlanetDarkBrown7
+  sprite: /Textures/_RMC14/Tiles/floors/darkbrown_7.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkBrownBase
+  id: CMFloorSteelPlanetDarkBrownCorners0
+  sprite: /Textures/_RMC14/Tiles/floors/darkbrowncorner_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkBrownBase
+  id: CMFloorSteelPlanetDarkBrownCorners1
+  sprite: /Textures/_RMC14/Tiles/floors/darkbrowncorner_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkBrownBase
+  id: CMFloorSteelPlanetDarkBrownCorners2
+  sprite: /Textures/_RMC14/Tiles/floors/darkbrowncorner_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkBrownBase
+  id: CMFloorSteelPlanetDarkBrownCorners3
+  sprite: /Textures/_RMC14/Tiles/floors/darkbrowncorner_3.png

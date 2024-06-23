@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingUniformBase
+  id: CMScrubsColorGreen
+  name: medical scrubs
+  description: It's made of a special fiber that provides minor protection against biohazards. This one is in dark green.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/green.rsi

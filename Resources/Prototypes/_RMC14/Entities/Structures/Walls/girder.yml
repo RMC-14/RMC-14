@@ -1,0 +1,78 @@
+- type: entity
+  parent: Girder
+  id: CMGirder
+  name: girder
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/girder.rsi
+    state: girder
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/girder.rsi
+    state: girder
+  - type: Construction
+    graph: CMGirder
+    node: girder
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+
+- type: entity
+  parent: CMGirder
+  id: CMGirderReinforced
+  name: reinforced girder
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/girder.rsi
+    state: reinforced
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/girder.rsi
+    state: girder
+  ##- type: Construction
+  ##  graph: CMGirder
+  ##  node: reinforcedGirder
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 1
+            max: 1
+          CMSheetPlasteel1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: StaticPrice
+    price: 66

@@ -1,0 +1,135 @@
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPlanet
+  sprite: /Textures/_RMC14/Tiles/floors/floor.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPlanetBot
+  sprite: /Textures/_RMC14/Tiles/floors/bot.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPlanetDelivery
+  sprite: /Textures/_RMC14/Tiles/floors/delivery.png
+
+
+- type: tile
+  parent: CMFloorWhite
+  id: CMFloorSteelPlanetWhite
+  sprite: /Textures/_RMC14/Tiles/floors/white.png
+
+
+- type: tile
+  parent: CMFloorSteelPlanetWhite
+  id: CMFloorSteelPlanetWhiteWarn
+  sprite: /Textures/_RMC14/Tiles/floors/warnwhite_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhite
+  id: CMFloorSteelPlanetWhiteWarn1
+  sprite: /Textures/_RMC14/Tiles/floors/warnwhite_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhite
+  id: CMFloorSteelPlanetWhiteWarn2
+  sprite: /Textures/_RMC14/Tiles/floors/warnwhite_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhite
+  id: CMFloorSteelPlanetWhiteWarn3
+  sprite: /Textures/_RMC14/Tiles/floors/warnwhite_3.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhite
+  id: CMFloorSteelPlanetWhiteWarn4
+  sprite: /Textures/_RMC14/Tiles/floors/warnwhite_4.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhite
+  id: CMFloorSteelPlanetWhiteWarn5
+  sprite: /Textures/_RMC14/Tiles/floors/warnwhite_5.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhite
+  id: CMFloorSteelPlanetWhiteWarn6
+  sprite: /Textures/_RMC14/Tiles/floors/warnwhite_6.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhite
+  id: CMFloorSteelPlanetWhiteWarn7
+  sprite: /Textures/_RMC14/Tiles/floors/warnwhite_7.png
+
+
+- type: tile
+  parent: CMFloorSteelPlanetWhite
+  id: CMFloorSteelPlanetWhiteWarnCorner
+  sprite: /Textures/_RMC14/Tiles/floors/warnwhitecorner_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhite
+  id: CMFloorSteelPlanetWhiteWarnCorner1
+  sprite: /Textures/_RMC14/Tiles/floors/warnwhitecorner_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhite
+  id: CMFloorSteelPlanetWhiteWarnCorner2
+  sprite: /Textures/_RMC14/Tiles/floors/warnwhitecorner_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhite
+  id: CMFloorSteelPlanetWhiteWarnCorner3
+  sprite: /Textures/_RMC14/Tiles/floors/warnwhitecorner_3.png
+
+
+- type: tile
+  parent: CMFloorWhite
+  id: CMFloorSteelPlanetOrange
+  sprite: /Textures/_RMC14/Tiles/floors/orangefull.png
+
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPlanetFreezer
+  name: tiles-cm-freezer
+  sprite: /Textures/_RMC14/Tiles/floors/freezerfloor.png
+
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPlanetCult
+  name: tiles-cm-cult
+  sprite: /Textures/_RMC14/Tiles/floors/cult.png
+
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPlanetEngine
+  name: tiles-cm-engine
+  sprite: /Textures/_RMC14/Tiles/floors/engine.png
+
+
+- type: tile
+  parent: CMFloorBlack
+  id: CMFloorSteelPlanetBlack
+  sprite: /Textures/_RMC14/Tiles/floors/dark2.png
+
+- type: tile
+  parent: CMFloorBlack
+  id: CMFloorSteelPlanetDarkish
+  sprite: /Textures/_RMC14/Tiles/floors/darkish.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPlanetSolarPanel
+  name: solar panel
+  sprite: /Textures/_RMC14/Tiles/floors/solarpanel.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPlanetAstroGrass
+  name: tiles-astro-grass
+  sprite: /Textures/_RMC14/Tiles/floors/grass1.png
+  footstepSounds:
+    collection: FootstepGrass
+  itemDrop: FloorTileItemAstroGrass

@@ -4,7 +4,7 @@ using Content.Client.CrewManifest;
 using Content.Client.GameTicking.Managers;
 using Content.Client.Players.PlayTimeTracking;
 using Content.Client.UserInterface.Controls;
-using Content.Shared._CM14.Prototypes;
+using Content.Shared._RMC14.Prototypes;
 using Content.Shared.CCVar;
 using Content.Shared.Roles;
 using Content.Shared.StatusIcon;

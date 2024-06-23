@@ -1,9 +1,0 @@
-﻿- type: job
-  parent: CMJobXenoBase
-  id: CMXenoSelectableXenomorph
-  name: cm-job-name-selectable-xenomorph
-  playTimeTracker: CMJobSelectableXenomorph
-  hidden: false
-
-- type: playTimeTracker
-  id: CMJobSelectableXenomorph

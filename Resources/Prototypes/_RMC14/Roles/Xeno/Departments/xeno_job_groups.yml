@@ -1,0 +1,56 @@
+﻿- type: entity
+  id: CMJobsXeno
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: JobGroup
+    name: role-timer-xeno-roles
+    color: "#8b36a6"
+    jobs:
+    - CMXenoBoiler
+    - CMXenoBurrower
+    - CMXenoCarrier
+    - CMXenoCrusher
+    - CMXenoDefender
+    - CMXenoDrone
+    - CMXenoHivelord
+    - CMXenoParasite
+    - CMXenoLarva
+    - CMXenoLesserDrone
+    - CMXenoLurker
+    - CMXenoPraetorian
+    - CMXenoQueen
+    - CMXenoRavager
+    - CMXenoRunner
+    - CMXenoSentinel
+    - CMXenoSpitter
+    - CMXenoWarrior
+
+- type: entity
+  id: CMJobsXenoDrones
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: JobGroup
+    name: role-timer-xeno-drones
+    color: "#8b36a6"
+    jobs:
+    - CMXenoBurrower
+    - CMXenoCarrier
+    - CMXenoDrone
+    - CMXenoHivelord
+    - CMXenoQueen
+
+- type: entity
+  id: CMJobsXenoTierThree
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: JobGroup
+    name: role-timer-xeno-tier-three
+    color: "#8b36a6"
+    jobs:
+    - CMXenoBoiler
+    - CMXenoCrusher
+    - CMXenoPraetorian
+    - CMXenoRavager

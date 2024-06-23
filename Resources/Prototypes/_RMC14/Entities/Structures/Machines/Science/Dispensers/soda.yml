@@ -1,0 +1,51 @@
+- type: entity
+  parent: SodaDispenser
+  id: CMDispenserSoda
+  name: soda fountain
+  description: A drink fabricating machine, capable of producing many sugary drinks with just one touch.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/Science/small_dispensers.rsi
+    state: soda_dispenser
+    snapCardinals: true
+  - type: ReagentDispenser
+    storageWhitelist:
+      tags:
+      - DrinkBottle
+    pack: CMDispenserSodaInventory
+  - type: Machine
+    board: CMCircuitboardDispenserSoda
+
+- type: reagentDispenserInventory
+  id: CMDispenserSodaInventory
+  inventory:
+  # Water
+  - DrinkIceJug
+  - DrinkCoffeeJug
+  - DrinkCreamCartonXL
+  - DrinkTeaJug
+  - DrinkColaBottleFull
+  - DrinkSpaceMountainWindBottleFull
+  - DrinkDrGibbJug
+  - DrinkSpaceUpBottleFull
+  - DrinkTonicWaterBottleFull
+  - DrinkSodaWaterBottleFull
+  - DrinkLemonLimeJug
+  - DrinkSugarJug
+  - DrinkJuiceOrangeCartonXL
+  - DrinkJuiceLimeCartonXL
+  - DrinkWaterMelonJuiceJug
+  # Tomato
+  # Carrot
+  # Berry
+  # Grape
+  # Lemon
+  # Banana
+
+- type: entity
+  parent: CMDispenserSoda
+  id: CMDispenserSodaEmpty
+  suffix: Empty
+  components:
+  - type: ReagentDispenser
+    pack: EmptyInventory

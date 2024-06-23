@@ -8,7 +8,7 @@ using Content.Server.Emp;
 using Content.Server.Ghost;
 using Content.Server.Light.Components;
 using Content.Server.Power.Components;
-using Content.Shared._CM14.Light;
+using Content.Shared._RMC14.Light;
 using Content.Shared.Audio;
 using Content.Shared.Damage;
 using Content.Shared.Database;

@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a767d448e1a73e7f96dea6bebc07deee8d54bdc2/icons/obj/items/radio.dmi and https://github.com/cmss13-devs/cmss13/blob/05eaa3484b1a35aa759300bcfc8f0119f009daae/icons/mob/humans/onmob/head_1.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "generic_headset"
+    },
+    {
+      "name": "we_ya_headset"
+    },
+    {
+      "name": "pmc_headset"
+    },
+    {
+      "name": "vai_headset"
+    },
+    {
+      "name": "alpha_headset"
+    },
+    {
+      "name": "bravo_headset"
+    },
+    {
+      "name": "charlie_headset"
+    },
+    {
+      "name": "delta_headset"
+    },
+    {
+      "name": "echo_headset"
+    },
+    {
+      "name": "cryo_headset"
+    },
+    {
+      "name": "ce_headset"
+    },
+    {
+      "name": "cmo_headset"
+    },
+    {
+      "name": "ro_headset"
+    },
+    {
+      "name": "mcom_headset"
+    },
+    {
+      "name": "sec_headset"
+    },
+    {
+      "name": "mco_headset"
+    },
+    {
+      "name": "ms_headset"
+    },
+    {
+      "name": "mhc_headset"
+    },
+    {
+      "name": "soc_headset"
+    },
+    {
+      "name": "pvst_headset"
+    },
+    {
+      "name": "med_headset"
+    },
+    {
+      "name": "req_headset"
+    },
+    {
+      "name": "eng_headset"
+    },
+    {
+      "name": "communicator"
+    },
+    {
+      "name": "cmb_headset"
+    }
+  ]
+}

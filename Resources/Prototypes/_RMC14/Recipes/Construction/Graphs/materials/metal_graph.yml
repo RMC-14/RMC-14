@@ -1,0 +1,27 @@
+﻿- type: constructionGraph
+  parent: RMC
+  id: CMRods
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: CMRodMetal
+      completed:
+      - !type:SetStackCount
+        amount: 2
+      steps:
+      - material: CMSteel
+        amount: 1
+    - to: CMRodPlasteel
+      completed:
+      - !type:SetStackCount
+        amount: 2
+      steps:
+      - material: CMPlasteel
+        amount: 1
+
+  - node: CMRodMetal
+    entity: CMRodMetal
+
+  - node: CMRodPlasteel
+    entity: CMRodPlasteel

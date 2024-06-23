@@ -1,0 +1,192 @@
+- type: entity
+  abstract: true
+  parent: [ BaseItem, CMBaseWeaponGun, CMBaseAttachableHolder ]
+  id: CMBaseWeaponRifle
+  components:
+  - type: Wieldable
+  - type: Item
+    size: Large
+  - type: Clothing
+    slots:
+    - suitStorage
+    - Back
+  - type: AmmoCounter
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: StaticPrice
+    price: 500
+  - type: MagazineAmmoProvider
+    autoEject: true
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+
+- type: entity
+  parent: CMBaseWeaponRifle
+  name: M52C pulse rifle MK2
+  id: WeaponRifleM52C
+  description: The standard issue rifle of the Marines. Commonly carried by most combat personnel. Uses 10x24mm caseless ammunition.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m52c.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m52c.rsi
+  - type: Gun
+    minAngle: 30
+    maxAngle: 60
+    angleIncrease: 10
+    angleDecay: 5
+    fireRate: 5
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    soundGunshot:
+      collection: CMM52CShoot
+  - type: GunWieldBonus
+    minAngle: -15
+    maxAngle: -40
+    angleIncrease: -8
+    angleDecay: 0
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM52C
+          - CMMagazineRifleM52CAP
+          - CMMagazineRifleM52CExt
+  - type: GunDamageModifier
+    multiplier: 1.1
+  - type: AttachableHolder
+    slots:
+      cm-aslot-barrel:
+        tags:
+        - CMAttachableExtendedBarrel
+        - CMAttachableSuppressor
+      cm-aslot-rail:
+        tags:
+        - CMAttachableFlashlight
+      cm-aslot-underbarrel:
+        tags:
+        - CMAttachmentU7UnderbarrelShotgun
+  - type: AttachableHolderVisuals
+    offsets:
+      cm-aslot-barrel: 0.53, 0.06
+      cm-aslot-rail: -0.1, 0.23
+      cm-aslot-underbarrel: 0.0, 0.0
+
+- type: entity
+  name: M52CE2 heavy pulse rifle
+  parent: WeaponRifleM52C
+  id: WeaponRifleM52CE2
+  description: A large squad support weapon capable of laying down sustained suppressing fire from a mounted position. While unstable and less accurate, it can be lugged and shot with two hands.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m52ce2.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m52ce2.rsi
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto # TODO RMC14 burst with greatly increased angle unless mounted
+    soundGunshot:
+      collection: CMM52CShoot
+  - type: GunWieldBonus
+    minAngle: -15
+    maxAngle: -45
+    angleIncrease: -8
+    angleDecay: 0
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM52CE2
+  - type: GunRequiresWield
+
+- type: entity
+  parent: CMBaseWeaponRifle
+  name: M4RA battle rifle
+  id: WeaponRifleM4RA
+  description: The M4RA battle rifle is a designated marksman rifle in service with the Marine. Sporting a bullpup configuration, the M4RA battle rifle is perfect for reconnaissance and fire support teams.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4ra.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+      state: d_m4ra_barrel
+      offset: 0.65, 0
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4ra.rsi
+  - type: Gun
+    minAngle: 20
+    maxAngle: 70
+    angleIncrease: 25
+    angleDecay: 45
+    fireRate: 3.2
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m4ra.ogg
+  - type: GunWieldBonus
+    minAngle: -20
+    maxAngle: -50
+    angleIncrease: -5
+    angleDecay: 10
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM4RA
+          - CMMagazineRifleM4RAAP
+          - CMMagazineRifleM4RAExt
+  - type: GunDamageModifier
+    multiplier: 1.4
+  - type: AttachableHolder
+    slots:
+      cm-aslot-barrel:
+        tags:
+        - CMAttachableExtendedBarrel
+        - CMAttachableSuppressor
+      cm-aslot-rail:
+        tags:
+        - CMAttachableFlashlight
+        - CMAttachableSmartScope
+  - type: AttachableHolderVisuals
+    offsets:
+      cm-aslot-barrel: 0.9, 0.03
+      cm-aslot-rail: -0.1, 0.23
