@@ -52,9 +52,9 @@
 #  components:
 #  - type: StorageFill
 #    contents:
-  #   - id: CMMaterialWoodPlank # todo cm14 add wood material
+  #   - id: CMMaterialWoodPlank # TODO RMC14 add wood material
 
-#- type: entity # todo cm14 add folding barricades
+#- type: entity # TODO RMC14 add folding barricades
 #  id: CMCrateFoldingBarricades
 #  parent: CMCrateConstruction
 #  name: folding metal barricades crate
@@ -80,13 +80,13 @@
   components:
   - type: StorageFill
     contents:
-      - id: ToolboxElectricalFilled # todo cm14 use cm prototype
+      - id: ToolboxElectricalFilled # TODO RMC14 use cm prototype
         amount: 2
       - id: CMHandsInsulated
         amount: 2
-      - id: PowerCellMedium # todo cm14 use cm prototype
+      - id: PowerCellMedium # TODO RMC14 use cm prototype
         amount: 2
-      - id: PowerCellHigh # todo cm14 use cm prototype
+      - id: PowerCellHigh # TODO RMC14 use cm prototype
         amount: 2
 
 - type: entity
@@ -98,14 +98,14 @@
     contents:
       - id: CMBeltUtilityFilled
         amount: 3
-      - id: ClothingOuterVestHazard # todo cm14 use cm prototype
+      - id: ClothingOuterVestHazard # TODO RMC14 use cm prototype
         amount: 3
-      - id: ClothingHeadHatWelding # todo cm14 use cm prototype
+      - id: ClothingHeadHatWelding # TODO RMC14 use cm prototype
         amount: 2
-      - id: ClothingHeadHatHardhatYellow # todo cm14 use cm prototype
+      - id: ClothingHeadHatHardhatYellow # TODO RMC14 use cm prototype
         amount: 1
 
-#- type: entity # todo cm14 probably not relevant to cm14 but will leave it here in case we want it
+#- type: entity # TODO RMC14 probably not relevant to cm14 but will leave it here in case we want it
 #  id: CMCrateInflatableBarriers
 #  parent: CMCrateConstruction
 #  name: inflatable barriers crate
@@ -123,7 +123,7 @@
   parent: CMCrateConstruction
   name: replacement lights crate
   components:
-  - type: StorageFill # todo cm14 this could probably be replaced with cm entities but it's fine for now
+  - type: StorageFill # TODO RMC14 this could probably be replaced with cm entities but it's fine for now
     contents:
       - id: BoxLighttube # 12 tubes in 1 box, so making 42 tubes is hard and makes no sense
         amount: 4
@@ -137,9 +137,9 @@
   components:
   - type: StorageFill
     contents:
-      - id: PortableGeneratorPacmanMachineCircuitboard # todo cm14 use cm prototype
+      - id: PortableGeneratorPacmanMachineCircuitboard # TODO RMC14 use cm prototype
         amount: 2
-      - id: CapacitorStockPart # todo cm14 use cm prototype
+      - id: CapacitorStockPart # TODO RMC14 use cm prototype
         amount: 2
 
 - type: entity
@@ -149,9 +149,9 @@
   components:
   - type: StorageFill
     contents:
-      - id: PortableGeneratorSuperPacmanMachineCircuitboard # todo cm14 use cm prototype
+      - id: PortableGeneratorSuperPacmanMachineCircuitboard # TODO RMC14 use cm prototype
         amount: 2
-      - id: CapacitorStockPart # todo cm14 use cm prototype
+      - id: CapacitorStockPart # TODO RMC14 use cm prototype
         amount: 4
 
 - type: entity
@@ -161,7 +161,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: FlashlightLantern # todo cm14 use cm prototype
+      - id: FlashlightLantern # TODO RMC14 use cm prototype
         amount: 8
 
 - type: entity
@@ -171,5 +171,5 @@
   components:
   - type: StorageFill
     contents:
-      - id: PowerCellHigh # todo cm14 use cm prototype
+      - id: PowerCellHigh # TODO RMC14 use cm prototype
         amount: 8

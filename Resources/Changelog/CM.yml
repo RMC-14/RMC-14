@@ -91,7 +91,7 @@
   time: '2023-11-28T03:55:33.0000000+00:00'
 - author: thymol-blue
   changes:
-  - message: Added tips relevant to CM14. Be sure to keep an eye out
+  - message: Added tips relevant to RMC14. Be sure to keep an eye out
       for them!
     type: Add
   id: 15
@@ -240,7 +240,7 @@
   changes:
   - message: Added Queen ovipositor and eggs.
     type: Add
-  - message: Added two hands to xenos that can only hold eggs and facehuggers.
+  - message: Added two hands to xenos that can only hold eggs and parasites.
     type: Add
   id: 35
   time: '2024-04-12T10:24:42.0000000+00:00'
@@ -293,9 +293,9 @@
   url: https://github.com/CM-14/CM-14/pull/1230
 - author: DrSmugleaf
   changes:
-  - message: Fixed larvas and facehuggers bumping open doors when crawling under them.
+  - message: Fixed larvas and parasites bumping open doors when crawling under them.
     type: Fix
-  - message: Fixed larvas and facehuggers having hands.
+  - message: Fixed larvas and parasites having hands.
     type: Fix
   id: 42
   time: '2024-04-13T10:41:19.0000000+00:00'
@@ -445,16 +445,16 @@
   url: https://github.com/CM-14/CM-14/pull/1253
 - author: DrSmugleaf
   changes:
-  - message: Fixed inconsistent range when leaping as a runner or facehugger.
+  - message: Fixed inconsistent range when leaping as a runner or parasite.
     type: Fix
   id: 60
   time: '2024-04-20T05:01:30.0000000+00:00'
   url: https://github.com/CM-14/CM-14/pull/1257
 - author: DrSmugleaf
   changes:
-  - message: Added attaching facehuggers by clicking downed marines with or as them.
+  - message: Added attaching parasites by clicking downed marines with or as them.
     type: Add
-  - message: Facehuggers can only hug through a leap if it is done within a very short
+  - message: parasites can only infect through a leap if it is done within a very short
       range of the target.
     type: Tweak
   id: 61
@@ -648,9 +648,9 @@
   url: https://github.com/CM-14/CM-14/pull/2028
 - author: DrSmugleaf
   changes:
-  - message: Fixed huggers being able to melee attack and tackle.
+  - message: Fixed parasites being able to melee attack and tackle.
     type: Fix
-  - message: Fixed huggers being able to hug dead marines.
+  - message: Fixed parasites being able to infect dead marines.
     type: Fix
   - message: Leaping xenos can now only hit a max of one marine in a single leap.
     type: Tweak
@@ -713,7 +713,7 @@
   url: https://github.com/CM-14/CM-14/pull/2049
 - author: DrSmugleaf
   changes:
-  - message: The hugger now rips off the victim's mask on hug.
+  - message: The parasite now rips off the victim's mask on infect.
     type: Fix
   id: 93
   time: '2024-05-02T05:25:17.0000000+00:00'
@@ -773,7 +773,7 @@
   url: https://github.com/CM-14/CM-14/pull/2087
 - author: DrSmugleaf
   changes:
-  - message: Grown xeno eggs will now automatically try to hug any marines that come
+  - message: Grown xeno eggs will now automatically try to infect any marines that come
       within melee range of them.
     type: Add
   id: 101
@@ -838,7 +838,7 @@
   url: https://github.com/CM-14/CM-14/pull/2102
 - author: DrSmugleaf
   changes:
-  - message: Huggers and lesser drones now slowly die without weeds.
+  - message: parasites and lesser drones now slowly die without weeds.
     type: Add
   id: 110
   time: '2024-05-11T08:06:45.0000000+00:00'
@@ -1106,7 +1106,7 @@
   - message: Where possible, changed the material requirements and construction steps
       for objects marines can build to match their CM13 versions.
     type: Tweak
-  - message: Made girders and other constructible objects drop the CM14 versions of
+  - message: Made girders and other constructible objects drop the RMC14 versions of
       materials.
     type: Fix
   - message: Made catwalks snap to the grid properly.
@@ -1141,15 +1141,15 @@
   changes:
   - message: Added the shotgun shell pouch to the surplus uniform vendor.
     type: Add
-  - message: Facehuggers can now also click-drag themselves onto targets to hug them,
-      or be click-dragged by other castes that are normally able to pick up facehuggers.
+  - message: parasites can now also click-drag themselves onto targets to infect them,
+      or be click-dragged by other castes that are normally able to pick up parasites.
     type: Add
   - message: Fixed tackling having unlimited range.
     type: Fix
-  - message: Fixed the xeno hud disappearing when a facehugger is held by a xeno in
+  - message: Fixed the xeno hud disappearing when a parasite is held by a xeno in
       view.
     type: Fix
-  - message: Fixed dead xenos showing up the Watch Xenomorph action window.
+  - message: Fixed dead xenos showing up the Watch Xenonid action window.
     type: Fix
   - message: Fixed blood dispensers being unpowered and having upstream blood bags
       instead of cm blood bags.
@@ -1160,7 +1160,7 @@
   - message: Fixed barricades having no interaction outline.
     type: Fix
   - message: Fixed there being no range check for surgery tools, full sandbag building,
-      health scanning, wound treatment, hugging and nesting.
+      health scanning, wound treatment, infecting and nesting.
     type: Fix
   - message: Fixed xenos being able to access the human construction menu.
     type: Fix
@@ -1270,7 +1270,7 @@
   url: https://github.com/CM-14/CM-14/pull/2487
 - author: DrSmugleaf
   changes:
-  - message: Fixed counting hugged marines as alive towards round end conditions.
+  - message: Fixed counting infected marines as alive towards round end conditions.
     type: Fix
   - message: Fixed weeds spreading onto water.
     type: Fix
@@ -1278,7 +1278,7 @@
     type: Fix
   - message: Dropship hatches now automatically lock while travelling.
     type: Fix
-  - message: Huggers no longer slowly die while picked up by another xeno.
+  - message: parasites no longer slowly die while picked up by another xeno.
     type: Fix
   - message: Fixed being able to build resin structures on top of opened resin doors.
     type: Fix
@@ -1288,8 +1288,8 @@
     type: Fix
   - message: Fixed pheromones affecting dead xenos.
     type: Fix
-  - message: The hugger's observer ghost now spawns on top of them after a successful
-      hug.
+  - message: The parasite's observer ghost now spawns on top of them after a successful
+      infect.
     type: Fix
   - message: Fixed role distribution being unequal between squads.
     type: Fix

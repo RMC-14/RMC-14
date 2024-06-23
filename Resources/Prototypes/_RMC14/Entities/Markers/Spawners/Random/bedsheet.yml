@@ -1,0 +1,26 @@
+- type: entity
+  parent: MarkerBase
+  id: CMBedsheetSpawner
+  name: Random Sheet Spawner
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - sprite: _RMC14/Objects/Misc/bedsheets.rsi
+          state: sheetgreen
+    - type: RandomSpawner
+      prototypes:
+        - CMBedsheetBlue
+        - CMBedsheetGreen
+        - CMBedsheetOrange
+        - CMBedsheetPurple
+        - CMBedsheetWhite
+        - CMBedsheetRed
+        - CMBedsheetYellow
+        - CMBedsheetGrayOrange
+        - CMBedsheetMedical
+        - CMBedsheetOrangeFull
+        - CMBedsheetGray
+        - CMBedsheetBrown
+      chance: 0.97
+      offset: 0

@@ -1,0 +1,70 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelShivaWhiteRedBase
+  name: tiles-cm-default-red
+
+- type: tile
+  parent: CMFloorSteelShivaWhiteRedBase
+  id: CMFloorSteelShivaWhiteRed0
+  sprite: /Textures/_RMC14/Tiles/shiva/wred_0.png
+
+- type: tile
+  parent: CMFloorSteelShivaWhiteRedBase
+  id: CMFloorSteelShivaWhiteRed1
+  sprite: /Textures/_RMC14/Tiles/shiva/wred_1.png
+
+- type: tile
+  parent: CMFloorSteelShivaWhiteRedBase
+  id: CMFloorSteelShivaWhiteRed2
+  sprite: /Textures/_RMC14/Tiles/shiva/wred_2.png
+
+- type: tile
+  parent: CMFloorSteelShivaWhiteRedBase
+  id: CMFloorSteelShivaWhiteRed3
+  sprite: /Textures/_RMC14/Tiles/shiva/wred_3.png
+
+- type: tile
+  parent: CMFloorSteelShivaWhiteRedBase
+  id: CMFloorSteelShivaWhiteRed4
+  sprite: /Textures/_RMC14/Tiles/shiva/wred_4.png
+
+- type: tile
+  parent: CMFloorSteelShivaWhiteRedBase
+  id: CMFloorSteelShivaWhiteRed5
+  sprite: /Textures/_RMC14/Tiles/shiva/wred_5.png
+
+- type: tile
+  parent: CMFloorSteelShivaWhiteRedBase
+  id: CMFloorSteelShivaWhiteRed6
+  sprite: /Textures/_RMC14/Tiles/shiva/wred_6.png
+
+- type: tile
+  parent: CMFloorSteelShivaWhiteRedBase
+  id: CMFloorSteelShivaWhiteRed7
+  sprite: /Textures/_RMC14/Tiles/shiva/wred_7.png
+
+- type: tile
+  parent: CMFloorSteelShivaWhiteRedBase
+  id: CMFloorSteelShivaWhiteRedCorners0
+  sprite: /Textures/_RMC14/Tiles/shiva/wredcorners_0.png
+
+- type: tile
+  parent: CMFloorSteelShivaWhiteRedBase
+  id: CMFloorSteelShivaWhiteRedCorners1
+  sprite: /Textures/_RMC14/Tiles/shiva/wredcorners_1.png
+
+- type: tile
+  parent: CMFloorSteelShivaWhiteRedBase
+  id: CMFloorSteelShivaWhiteRedCorners2
+  sprite: /Textures/_RMC14/Tiles/shiva/wredcorners_2.png
+
+- type: tile
+  parent: CMFloorSteelShivaWhiteRedBase
+  id: CMFloorSteelShivaWhiteRedCorners3
+  sprite: /Textures/_RMC14/Tiles/shiva/wredcorners_3.png
+
+- type: tile
+  parent: CMFloorSteelShivaWhiteRedBase
+  id: CMFloorSteelShivaWhiteRedFull3
+  sprite: /Textures/_RMC14/Tiles/shiva/wredfull_3.png

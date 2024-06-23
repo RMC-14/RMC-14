@@ -1,0 +1,54 @@
+- type: constructionGraph
+  parent: RMC
+  id: CMApc
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: apcFrame
+      steps:
+      - material: CMSteel
+        amount: 2
+        doAfter: 0
+      - material: Cable
+        amount: 10
+        doAfter: 2
+
+  - node: apcFrame
+    entity: CMApcFrame
+    edges:
+    - to: apc
+      steps:
+      - component: ApcElectronics
+        name: "power control module"
+        icon:
+          sprite: "_RMC14/Objects/Misc/module.rsi"
+          state: "power_mod"
+        doAfter: 1.5
+      - tool: Screwing
+        doAfter: 0
+
+    - to: start
+      completed:
+      - !type:GivePrototype
+        prototype: CMSheetMetal1
+        amount: 2
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Welding
+        doAfter: 5
+
+  - node: apc
+    entity: CMApcConstructed
+    edges:
+    - to: apcFrame
+      completed:
+      - !type:GivePrototype
+        prototype: CMAPCElectronics
+        amount: 1
+      conditions:
+      - !type:WirePanel
+        open: true
+      steps:
+      - tool: Prying
+        doAfter: 5

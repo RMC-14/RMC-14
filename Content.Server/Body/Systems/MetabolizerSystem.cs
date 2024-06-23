@@ -1,6 +1,6 @@
 using Content.Server.Body.Components;
 using Content.Server.Chemistry.Containers.EntitySystems;
-using Content.Shared._CM14.Medical.Stasis;
+using Content.Shared._RMC14.Medical.Stasis;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body.Organ;
 using Content.Shared.Chemistry.Components;

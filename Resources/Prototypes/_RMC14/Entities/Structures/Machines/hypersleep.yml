@@ -1,0 +1,83 @@
+﻿- type: entity
+  parent: CMBaseStructureCorrodible
+  id: CMHyperSleepChamber
+  name: hypersleep chamber
+  description: A large automated capsule with LED displays intended to put anyone inside into 'hypersleep', a form of non-cryogenic statis used on most ships, linked to a long-term hypersleep bay on a lower level.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/hypersleep.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - state: open
+      map: [ "enum.HyperSleepChamberLayers.Base" ]
+  - type: UserInterface
+    interfaces:
+      enum.CryostorageUIKey.Key:
+        type: CryostorageBoundUserInterface
+  - type: ActivatableUI
+    key: enum.CryostorageUIKey.Key
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: DragInsertContainer
+    containerId: cm-hypersleep
+  - type: ExitContainerOnMove
+    containerId: cm-hypersleep
+  - type: ContainerContainer
+    containers:
+      cm-hypersleep:
+        !type:Container
+  - type: HyperSleepChamber
+  - type: Cryostorage
+    containerId: cm-hypersleep
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.CryostorageVisuals.Full:
+        enum.HyperSleepChamberLayers.Base:
+          True: { state: closed }
+          False: { state: open }
+
+- type: entity
+  parent: CMHyperSleepChamber
+  id: CMHyperSleepChamberAlpha
+  suffix: Alpha
+  components:
+  - type: SquadSpawner
+    squad: SquadAlpha
+
+- type: entity
+  parent: CMHyperSleepChamber
+  id: CMHyperSleepChamberBravo
+  suffix: Bravo
+  components:
+  - type: SquadSpawner
+    squad: SquadBravo
+
+- type: entity
+  parent: CMHyperSleepChamber
+  id: CMHyperSleepChamberCharlie
+  suffix: Charlie
+  components:
+  - type: SquadSpawner
+    squad: SquadCharlie
+
+- type: entity
+  parent: CMHyperSleepChamber
+  id: CMHyperSleepChamberDelta
+  suffix: Delta
+  components:
+  - type: SquadSpawner
+    squad: SquadDelta

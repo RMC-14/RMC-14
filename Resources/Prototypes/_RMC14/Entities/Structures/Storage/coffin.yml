@@ -1,0 +1,52 @@
+- type: entity
+  parent: CMClosetBase
+  id: CMCoffin
+  name: coffin
+  description: It's a burial receptacle for the dearly departed.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Coffins/standard.rsi
+    layers:
+    - state: closed
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: closed
+    stateDoorOpen: open
+    stateDoorClosed: closed
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank1: # TODO RMC14 wood material
+            min: 1
+            max: 4
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: CMCoffin
+  id: CMCoffinMarine
+  name: Marine coffin
+  description: A burial receptacle for dearly departed Marines, adorned in red and finished with the Corps' emblem on the interior. Semper fi.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Coffins/marine.rsi
+
+- type: entity
+  parent: CMCoffin
+  id: CMCoffinPred
+  name: strange coffin
+  description: It's a burial receptacle for the dearly departed. Seems to have weird markings on the side..?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Coffins/pred.rsi

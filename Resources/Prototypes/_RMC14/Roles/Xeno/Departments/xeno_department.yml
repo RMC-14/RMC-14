@@ -1,0 +1,27 @@
+﻿- type: department
+  parent: CMDepartmentBase
+  id: CMXeno
+  description: cm-department-Xeno-description
+  color: "#8b36a6"
+  weight: 100
+  customName: Xenonid
+  roles:
+  - CMXenoBoiler
+  - CMXenoBurrower
+  - CMXenoCarrier
+  - CMXenoCrusher
+  - CMXenoDefender
+  - CMXenoDrone
+  - CMXenoHivelord
+  - CMXenoParasite
+  - CMXenoLarva
+  - CMXenoLesserDrone
+  - CMXenoLurker
+  - CMXenoPraetorian
+  - CMXenoQueen
+  - CMXenoRavager
+  - CMXenoRunner
+  - CMXenoSentinel
+  - CMXenoSpitter
+  - CMXenoWarrior
+  - CMXenoSelectableXeno

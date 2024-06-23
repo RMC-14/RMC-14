@@ -1,0 +1,72 @@
+﻿# TODO RMC14 make these decals (that look correct)
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelWhiteBase
+  name: tiles-cm-white
+  itemDrop: CMTileItemSteel # TODO RMC14
+
+- type: tile
+  parent: CMFloorSteelWhiteBase
+  id: CMFloorSteelWhite0
+  sprite: /Textures/_RMC14/Tiles/almayer/white_0.png
+
+- type: tile
+  parent: CMFloorSteelWhiteBase
+  id: CMFloorSteelWhite1
+  sprite: /Textures/_RMC14/Tiles/almayer/white_1.png
+
+- type: tile
+  parent: CMFloorSteelWhiteBase
+  id: CMFloorSteelWhite2
+  sprite: /Textures/_RMC14/Tiles/almayer/white_2.png
+
+- type: tile
+  parent: CMFloorSteelWhiteBase
+  id: CMFloorSteelWhite3
+  sprite: /Textures/_RMC14/Tiles/almayer/white_3.png
+
+- type: tile
+  parent: CMFloorSteelWhiteBase
+  id: CMFloorSteelWhite4
+  sprite: /Textures/_RMC14/Tiles/almayer/white_4.png
+
+- type: tile
+  parent: CMFloorSteelWhiteBase
+  id: CMFloorSteelWhite5
+  sprite: /Textures/_RMC14/Tiles/almayer/white_5.png
+
+- type: tile
+  parent: CMFloorSteelWhiteBase
+  id: CMFloorSteelWhite6
+  sprite: /Textures/_RMC14/Tiles/almayer/white_6.png
+
+- type: tile
+  parent: CMFloorSteelWhiteBase
+  id: CMFloorSteelWhite7
+  sprite: /Textures/_RMC14/Tiles/almayer/white_7.png
+
+- type: tile
+  parent: CMFloorSteelWhiteBase
+  id: CMFloorSteelWhiteCorner0
+  sprite: /Textures/_RMC14/Tiles/almayer/whitecorner_0.png
+
+- type: tile
+  parent: CMFloorSteelWhiteBase
+  id: CMFloorSteelWhiteCorner1
+  sprite: /Textures/_RMC14/Tiles/almayer/whitecorner_1.png
+
+- type: tile
+  parent: CMFloorSteelWhiteBase
+  id: CMFloorSteelWhiteCorner2
+  sprite: /Textures/_RMC14/Tiles/almayer/whitecorner_2.png
+
+- type: tile
+  parent: CMFloorSteelWhiteBase
+  id: CMFloorSteelWhiteCorner3
+  sprite: /Textures/_RMC14/Tiles/almayer/whitecorner_3.png
+
+- type: tile
+  parent: CMFloorSteelWhiteBase
+  id: CMFloorSteelWhiteFull
+  sprite: /Textures/_RMC14/Tiles/almayer/whitefull.png

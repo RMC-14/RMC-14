@@ -1,5 +1,5 @@
 using System.Linq;
-using Content.Client._CM14.Medical.HUD;
+using Content.Client._RMC14.Medical.HUD;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Damage;
 using Content.Shared.Inventory.Events;

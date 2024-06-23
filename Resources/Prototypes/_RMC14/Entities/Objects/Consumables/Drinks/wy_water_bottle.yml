@@ -1,0 +1,29 @@
+﻿- type: entity
+  parent: DrinkBottlePlasticBaseFull
+  id: CMDrinkWEYAWaterBottle30
+  name: We-Ya bottled spring water
+  description: Overpriced 'Spring' water. Bottled by the We-Ya Corporation.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 50
+        reagents:
+        - ReagentId: Water
+          Quantity: 30
+  - type: Drink
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/we_ya_water_bottle.rsi
+    state: base
+    layers: []
+  - type: Item
+    size: Small
+  - type: DamageOnLand
+    damage: {}
+  - type: DamageOtherOnHit
+    damage: {}
+  - type: Appearance
+  - type: Sealable
+  - type: MREItem
+  - type: Destructible
+    thresholds: [] # TODO RMC14 destroy on explosion unless inside a container

@@ -1,0 +1,89 @@
+- type: decal
+  id: CMDecalArrow
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/markings.rsi
+    state: arrow
+
+- type: decal
+  id: CMDecalCargo
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/markings.rsi
+    state: cargo
+
+- type: decal
+  id: CMDecalStriped0
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/markings.rsi
+    state: striped_0
+
+- type: decal
+  id: CMDecalStriped1
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/markings.rsi
+    state: striped_1
+
+- type: decal
+  id: CMDecalStriped2
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/markings.rsi
+    state: striped_2
+
+- type: decal
+  id: CMDecalStriped3
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/markings.rsi
+    state: striped_3
+
+- type: decal
+  id: CMDecalStripedCorner0
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/markings.rsi
+    state: striped_corner_0
+
+- type: decal
+  id: CMDecalStripedCorner1
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/markings.rsi
+    state: striped_corner_1
+
+- type: decal
+  id: CMDecalStripedCorner2
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/markings.rsi
+    state: striped_corner_2
+
+- type: decal
+  id: CMDecalStripedCorner3
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/markings.rsi
+    state: striped_corner_3
