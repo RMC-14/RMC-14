@@ -6,7 +6,7 @@ using Content.Server.Chat.Managers;
 using Content.Server.Explosion.Components;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NPC.Pathfinding;
-using Content.Shared._CM14.Explosion;
+using Content.Shared._RMC14.Explosion;
 using Content.Shared.Armor;
 using Content.Shared.Camera;
 using Content.Shared.CCVar;

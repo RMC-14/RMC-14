@@ -1,0 +1,55 @@
+- type: job
+  parent: CMJobSquadBase
+  id: CMRifleman
+  name: cm-job-name-rifleman
+  description: cm-job-description-rifleman
+  playTimeTracker: CMJobRifleman
+  startingGear: CMGearRifleman
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-sl
+  accessGroups:
+  - Rifleman
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      firearms: 1
+    - type: CMVendorUser
+      points: 45
+  hasIcon: false
+
+- type: startingGear
+  id: CMGearRifleman
+  equipment:
+    jumpsuit: JumpsuitMarine # TODO RMC14 all squad roles should spawn with no jumpsuit but still have clothes on
+    back: CMSatchelMarine
+    id: CMDogtagRifleman
+
+- type: startingGear
+  id: CMGearRiflemanEquipped
+  equipment:
+    jumpsuit: JumpsuitMarine
+    back: CMSatchelMarine
+    shoes: CMBootsBlackFilled
+    head: ArmorHelmetM10
+    outerClothing: CMArmorM3Medium
+    gloves: CMHandsBlackMarine
+    id: CMDogtagRifleman
+    ears: CMHeadsetAlpha
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointRifleman
+  name: rifleman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMRifleman
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: rifleman
+
+- type: playTimeTracker
+  id: CMJobRifleman

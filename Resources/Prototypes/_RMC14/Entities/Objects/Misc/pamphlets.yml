@@ -1,0 +1,164 @@
+# TODO RMC14 make pamphelts work
+#
+# in simple words pamphlets are skill books
+
+- type: entity
+  parent: BaseItem
+  id: CMPamphlet
+  name: instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge.
+  suffix: NOT IMPLEMENTED
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/pamphlets.rsi
+    state: pamphlet_written
+  - type: Item
+    size: Tiny
+
+
+# SKILLS
+
+
+# gives medical skill
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletMedical
+  name: medical instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge. This one has a medical insignia.
+  components:
+  - type: Sprite
+    state: pamphlet_medical
+
+# gives miniengie skill
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletEngineer
+  name: engineer instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge. This one has an engineering insignia.
+  components:
+  - type: Sprite
+    state: pamphlet_construction
+
+# gives jtac skill
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletJTAC
+  name: JTAC instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge. This one has the image of a radio on it.
+  components:
+  - type: Sprite
+    state: pamphlet_jtac
+
+# gives spotter skill / bypasses limit
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletSpotter
+  name: spotter instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge. This one has the image of a pair of binoculars on it.
+  components:
+  - type: Sprite
+    state: pamphlet_spotter
+
+# gives powerloader skill / bypasses limit
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletPowerloader
+  name: powerloader instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge. This one has a powerloader insignia. The title reads 'Moving freight and squishing heads - a practical guide to Caterpillar P-5000 Work Loader'.
+  components:
+  - type: Sprite
+    state: pamphlet_powerloader
+
+# gives police skill / bypasses limit
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletPolice
+  name: policing instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge. This one has the image of a radio on it.
+  components:
+  - type: Sprite
+    state: pamphlet_jtac
+
+# gives surgery skill / bypasses limit
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletSurgery
+  name: surgery instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge. This one has a medical insignia.
+  components:
+  - type: Sprite
+    state: pamphlet_medical
+
+# gives intel skill / bypasses limit
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletIntel
+  name: field intelligence instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge. This one has an intelligence insignia.
+  components:
+  - type: Sprite
+    state: pamphlet_reading
+
+
+# LANGUAGE / bypasses limit
+
+#
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletLanguage
+  name: translation pamphlet
+  description: A pamphlet used by lazy Marine interpreters to quickly learn new languages on the spot.
+
+# gives japanese language
+- type: entity
+  parent: CMPamphletLanguage
+  id: CMPamphletLanguageJapanese
+  name: Pages of Turedobando Yohei Adobencha Zohuken
+  description: These are some torn pages from a famous isekai manga named 'Turedobando Yohei Adobencha Zohuken' or Japanese Mercenary Adventure Sequel about a travelling band of Freelancers sent into a fantasy world. Why do you even know this?
+
+# gives chinese language
+- type: entity
+  parent: CMPamphletLanguage
+  id: CMPamphletLanguageChinese
+  name: Pages from the Little Red Book
+  description: Pages from the handbook to starting a famine that kills over 100 million of your people. Apparently this will help you learn Chinese.
+  # desc starts with "没有共产党就没有新中国!" but RMC14 doesnt support chinese letters :(
+
+# gives german language
+- type: entity
+  parent: CMPamphletLanguage
+  id: CMPamphletLanguageGerman
+  name: Translated Lyrics to 99 Luftballons
+  description: These hastily scribbled translations of 99 Luftballons, an iconic German hit of the 80s, were meant for the yearly Battalion Karaoke Night. I guess you can get some better use out of this.
+
+# gives spanish language
+- type: entity
+  parent: CMPamphletLanguage
+  id: CMPamphletLanguageSpanish
+  name: America Latina - A Quick Translation Guide for Southern UA states
+  description: This pamphlet was designed for Intelligence Officers operating on Earth to interact with the local populaces of the Latin American states, but only for IOs who managed to sleep through Dialects and Mannerisms Class.
+
+
+# RESTRICTED LANGUAGES
+
+
+# gives sainja language
+- type: entity
+  parent: CMPamphletLanguage
+  id: CMPamphletLanguageYautja
+  name: stained parchment
+  description: A yellowed old piece of parchment covered in strange runes from an alien writing system. The letters seem to shift back and forth into place before your eyes.
+
+# gives xenonid language
+- type: entity
+  parent: CMPamphletLanguage
+  id: CMPamphletLanguageXenonid
+  name: Xenobiologist's file
+  description: A xenobiologist's document recording and detailing observations on captive Xenonid communication via vocalisations and pheromones, as well as notes on attempting to reproduce them by human beings.
+
+# gives primitive language
+- type: entity
+  parent: CMPamphletLanguage
+  id: CMPamphletLanguageMonkey
+  name: scribbled drawings
+  description: A piece of paper covered in crude depictions of bananas and various types of primates. Probably drawn by a three-year-old child - or an unusually intelligent marine.

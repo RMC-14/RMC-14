@@ -1,0 +1,65 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelPlanetWhiteGreenBase
+  name: tiles-cm-default-green
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteGreenBase
+  id: CMFloorSteelPlanetWhiteGreen0
+  sprite: /Textures/_RMC14/Tiles/floors/whitegreen_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteGreenBase
+  id: CMFloorSteelPlanetWhiteGreen1
+  sprite: /Textures/_RMC14/Tiles/floors/whitegreen_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteGreenBase
+  id: CMFloorSteelPlanetWhiteGreen2
+  sprite: /Textures/_RMC14/Tiles/floors/whitegreen_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteGreenBase
+  id: CMFloorSteelPlanetWhiteGreen3
+  sprite: /Textures/_RMC14/Tiles/floors/whitegreen_3.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteGreenBase
+  id: CMFloorSteelPlanetWhiteGreen4
+  sprite: /Textures/_RMC14/Tiles/floors/whitegreen_4.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteGreenBase
+  id: CMFloorSteelPlanetWhiteGreen5
+  sprite: /Textures/_RMC14/Tiles/floors/whitegreen_5.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteGreenBase
+  id: CMFloorSteelPlanetWhiteGreen6
+  sprite: /Textures/_RMC14/Tiles/floors/whitegreen_6.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteGreenBase
+  id: CMFloorSteelPlanetWhiteGreen7
+  sprite: /Textures/_RMC14/Tiles/floors/whitegreen_7.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteGreenBase
+  id: CMFloorSteelPlanetWhiteGreenCorners0
+  sprite: /Textures/_RMC14/Tiles/floors/whitegreencorner_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteGreenBase
+  id: CMFloorSteelPlanetWhiteGreenCorners1
+  sprite: /Textures/_RMC14/Tiles/floors/whitegreencorner_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteGreenBase
+  id: CMFloorSteelPlanetWhiteGreenCorners2
+  sprite: /Textures/_RMC14/Tiles/floors/whitegreencorner_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteGreenBase
+  id: CMFloorSteelPlanetWhiteGreenCorners3
+  sprite: /Textures/_RMC14/Tiles/floors/whitegreencorner_3.png

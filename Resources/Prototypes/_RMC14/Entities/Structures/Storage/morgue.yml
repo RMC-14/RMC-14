@@ -1,0 +1,73 @@
+- type: entity
+  parent: Morgue
+  id: CMMorgue
+  name: morgue
+  description: Used to store bodies until someone fetches them.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/morgue.rsi
+    layers:
+    - state: morgue_closed
+      map: ["enum.MorgueVisualLayers.Base"]
+    - state: morgue_tray
+      offset: 0, -1
+      visible: false
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: morgue_contents
+      visible: false
+      map: ["enum.MorgueVisualLayers.Light"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        # basic open.close layer:
+        enum.MorgueVisualLayers.Base:
+          True: { state: morgue_open}
+          False: { state: morgue_closed}
+        # show/hide morgue tray:
+        enum.StorageVisualLayers.Door:
+          True: { visible: true}
+          False: { visible: false}
+      enum.MorgueVisuals.Contents:
+        # toggle contents light indicator:
+        enum.MorgueVisualLayers.Light:
+          Empty: {visible: false}
+          HasContents: {visible: true}
+          HasMob: {visible: true}
+          HasSoul: {visible: true}
+
+- type: entity
+  parent: Crematorium
+  id: CMCrematorium
+  name: crematorium
+  description: A human incinerator. Works well on barbecue nights.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/morgue.rsi
+    layers:
+    - state: crema_closed
+      map: ["enum.CrematoriumVisualLayers.Base", "enum.StorageVisualLayers.Base"]
+    - state: crema_tray
+      offset: 0, -1
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: crema_contents
+      visible: false
+      map: ["enum.CrematoriumVisualLayers.LightContent"]
+    - state: crema_active
+      visible: false
+      map: ["enum.CrematoriumVisualLayers.LightBurning"]
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: crema_closed
+    stateBaseOpen: crema_open
+    stateDoorOpen: crema_tray
+  - type: GenericVisualizer
+    visuals:
+      enum.CrematoriumVisuals.Burning:
+        enum.CrematoriumVisualLayers.LightBurning:
+          True: { visible: true }
+          False: { visible: false }
+      enum.StorageVisuals.HasContents:
+        enum.CrematoriumVisualLayers.LightContent:
+          True: { visible: true }
+          False: { visible: false }

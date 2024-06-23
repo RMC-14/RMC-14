@@ -1,0 +1,28 @@
+﻿- type: entity
+  abstract: true
+  parent: CMFoodBase
+  id: CMBarFoodBase
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bar.rsi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Vitamin
+          Quantity: 2
+  - type: Item
+    size: Tiny
+    sprite: _RMC14/Objects/Consumable/Food/bar.rsi
+
+- type: entity
+  parent: CMBarFoodBase
+  id: CMMarineProteinBar
+  name: stale Marine protein bar
+  description: The most fake-looking protein bar you have ever laid eyes on, covered in a substitution chocolate. The powder used to make these is a substitute of a substitute of whey substitute.
+  components:
+  - type: Sprite
+    state: protein_bar

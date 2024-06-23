@@ -12,7 +12,7 @@ using Content.IntegrationTests.Tests;
 using Content.IntegrationTests.Tests.Destructible;
 using Content.IntegrationTests.Tests.DeviceNetwork;
 using Content.IntegrationTests.Tests.Interaction.Click;
-using Content.Shared._CM14.Prototypes;
+using Content.Shared._RMC14.Prototypes;
 using Robust.Client;
 using Robust.Server;
 using Robust.Shared.Configuration;

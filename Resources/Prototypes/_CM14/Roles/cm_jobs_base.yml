@@ -33,7 +33,7 @@
   parent: MarkerBase
   id: CMSpawnPointXeno
   name: xeno spawn point
-  description: A CM14 spawner. Used for xenos.
+  description: A RMC14 spawner. Used for xenos.
   components:
   - type: XenoSpawnPoint
   - type: Sprite

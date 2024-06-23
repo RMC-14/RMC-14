@@ -1,0 +1,5 @@
+﻿- type: soundCollection
+  id: CMFoodRip
+  files:
+  - /Audio/_RMC14/Food/rip1.ogg
+  - /Audio/_RMC14/Food/rip2.ogg
