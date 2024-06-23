@@ -50,6 +50,6 @@ public sealed partial class AttachableToggleableComponent : Component
     [DataField, AutoNetworkedField]
     public SpriteSpecifier? IconActive;
 
-    [ViewVariables]
+    [DataField, AutoNetworkedField]
     public bool Attached = false;
 }

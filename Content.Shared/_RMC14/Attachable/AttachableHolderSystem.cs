@@ -281,7 +281,7 @@ public sealed class AttachableHolderSystem : EntitySystem
         var container = _container.EnsureContainer<ContainerSlot>(holder, slotId);
         container.OccludesLight = false;
 
-        if (container.Count > 0 && !Detach(holder, attachableUid, userUid, slotId))
+        if (container.Count > 0 && !Detach(holder, container.ContainedEntities[0], userUid, slotId))
             return false;
 
         if (!_container.Insert(attachableUid, container))

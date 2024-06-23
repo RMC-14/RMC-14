@@ -41,6 +41,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
     private void OnAttachableAltered(Entity<AttachableToggleableComponent> attachable, ref AttachableAlteredEvent args)
     {
+        
         switch (args.Alteration)
         {
             case AttachableAlteredType.Detached:
@@ -207,6 +208,9 @@ public sealed class AttachableToggleableSystem : EntitySystem
     private void OnRemoveAttachableActions(Entity<AttachableToggleableComponent> ent, ref RemoveAttachableActionsEvent args)
     {
         if (ent.Comp.Action is not { } action)
+            return;
+        
+        if (!TryComp(action, out InstantActionComponent? actionComponent) || actionComponent.AttachedEntity != args.User)
             return;
         
         _actionsSystem.RemoveProvidedAction(args.User, ent, action);
