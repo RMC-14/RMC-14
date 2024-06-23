@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/44a98f8b9f8451d7504e9b40e8f157a1c8fc9532/icons/turf/walls/solaris/solaris_windows.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "solaris_rwindow0"
+    },
+    {
+      "name": "solaris_rwindow1"
+    },
+    {
+      "name": "solaris_rwindow2"
+    },
+    {
+      "name": "solaris_rwindow3"
+    },
+    {
+      "name": "solaris_rwindow4"
+    },
+    {
+      "name": "solaris_rwindow5"
+    },
+    {
+      "name": "solaris_rwindow6"
+    },
+    {
+      "name": "solaris_rwindow7"
+    },
+    {
+      "name": "solaris_rwindow8"
+    },
+    {
+      "name": "solaris_rwindow9"
+    },
+    {
+      "name": "solaris_rwindow10"
+    },
+    {
+      "name": "solaris_rwindow11"
+    },
+    {
+      "name": "solaris_rwindow12"
+    },
+    {
+      "name": "solaris_rwindow13"
+    },
+    {
+      "name": "solaris_rwindow14"
+    },
+    {
+      "name": "solaris_rwindow15"
+    }
+  ]
+}

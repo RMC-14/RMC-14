@@ -1,0 +1,153 @@
+# Base
+
+- type: entity
+  parent: RubberStampBase
+  id: CMStampBase
+  abstract: true
+  name: rubber stamp
+  description: A rubber stamp for stamping important documents.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/paper.rsi
+    state: stamp-def
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-default
+    stampState: "paper_stamp-def"
+
+# Heads
+
+- type: entity
+  parent: CMStampBase
+  id: CMStampCO
+  name: CO's rubber stamp
+  components:
+  - type: Sprite
+    state: stamp-cap
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-co
+    stampedColor: "#e38e4f"
+    stampState: "paper_stamp-cap"
+
+- type: entity
+  parent: CMStampBase
+  id: CMStampASO
+  name: ASO's rubber stamp
+  components:
+  - type: Sprite
+    state: stamp-hop
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-aso
+    stampedColor: "#3681bb"
+    stampState: "paper_stamp-hop"
+
+- type: entity
+  parent: CMStampBase
+  id: CMStampCMP
+  name: CMP's rubber stamp
+  components:
+  - type: Sprite
+    state: stamp-hos
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-cmp
+    stampedColor: "#b34444"
+    stampState: "paper_stamp-hos"
+
+- type: entity
+  parent: CMStampBase
+  id: CMStampCMO
+  name: CMO's rubber stamp
+  components:
+  - type: Sprite
+    state: stamp-cmo
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-cmo
+    stampedColor: "#4e806a"
+    stampState: "paper_stamp-cmo"
+
+- type: entity
+  parent: CMStampBase
+  id: CMStampQM
+  name: QM's rubber stamp
+  components:
+  - type: Sprite
+    state: stamp-ro
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-qm
+    stampedColor: "#725c0e"
+    stampState: "paper_stamp-ro"
+
+- type: entity
+  parent: CMStampBase
+  id: CMStampCE
+  name: CE's rubber stamp
+  components:
+  - type: Sprite
+    state: stamp-ce
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-ce
+    stampedColor: "#b0901b"
+    stampState: "paper_stamp-ce"
+
+# Simple
+
+- type: entity
+  parent: CMStampBase
+  id: CMStampApproved
+  name: APPROVED rubber stamp
+  components:
+  - type: Sprite
+    state: stamp-approve
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-approve
+    stampedColor: "#164600"
+    stampState: "paper_stamp-approve"
+
+- type: entity
+  parent: CMStampBase
+  id: CMStampDenied
+  name: DENIED rubber stamp
+  components:
+  - type: Sprite
+    state: stamp-deny
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-deny
+    stampedColor: "#660000"
+    stampState: "paper_stamp-deny"
+
+# Admin Only
+
+- type: entity
+  parent: CMStampBase
+  id: CMStampWeYa
+  name: WEYA rubber stamp
+  components:
+  - type: Sprite
+    state: stamp-we_ya
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-we-ya
+    stampedColor: "#996600"
+    stampState: "paper_stamp-we_ya"
+
+- type: entity
+  parent: CMStampBase
+  id: CMStampMarine
+  name: Marine rubber stamp
+  components:
+  - type: Sprite
+    state: stamp-marine
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-marine
+    stampedColor: "#4e806a"
+    stampState: "paper_stamp-marine"
+
+- type: entity
+  parent: CMStampBase
+  id: CMStampCMB
+  name: CMB rubber stamp
+  components:
+  - type: Sprite
+    state: stamp-cmb
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-cmb
+    stampedColor: "#b0901b"
+    stampState: "paper_stamp-cmb"

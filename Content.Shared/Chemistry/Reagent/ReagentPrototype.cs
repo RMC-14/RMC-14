@@ -1,7 +1,7 @@
 ﻿using System.Collections.Frozen;
 using System.Linq;
 using System.Text.Json.Serialization;
-using Content.Shared._CM14.Prototypes;
+using Content.Shared._RMC14.Prototypes;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body.Prototypes;
 using Content.Shared.Chemistry.Components;
@@ -187,7 +187,7 @@ namespace Content.Shared.Chemistry.Reagent
             }
         }
 
-        // TODO CM14 move out to a partial when https://github.com/space-wizards/RobustToolbox/pull/5160 is merged
+        // TODO RMC14 move out to a partial when https://github.com/space-wizards/RobustToolbox/pull/5160 is merged
         [DataField]
         public bool IsCM { get; set; }
     }

@@ -1,6 +1,6 @@
 using System.Linq;
 using Content.Client.Gameplay;
-using Content.Shared._CM14.Tackle;
+using Content.Shared._RMC14.Tackle;
 using Content.Shared.CombatMode;
 using Content.Shared.Effects;
 using Content.Shared.Hands.Components;
@@ -191,7 +191,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         }
 
         var target = GetEntity(ev.Target);
-        if (target != null)
+        if (target != null && InRange(user, target.Value, component.Range, session))
         {
             var cmDisarmEvent = new CMDisarmEvent(user);
             RaiseLocalEvent(target.Value, ref cmDisarmEvent);

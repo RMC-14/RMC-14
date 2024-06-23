@@ -1,0 +1,31 @@
+# Base SMES
+- type: entity
+  abstract: true
+  parent: BaseSMES
+  id: CMSMESBase
+  name: SMES
+  description: A high-capacity superconducting magnetic energy storage (SMES) unit.
+  components:
+    - type: Sprite
+      sprite: _RMC14/Structures/Power/smes.rsi
+    - type: Machine
+      board: CMSMESMachineCircuitboard
+
+# SMES' in use
+
+- type: entity
+  parent: CMSMESBase
+  id: CMSMESBasic
+  suffix: Basic, 8MW
+  components:
+  - type: Battery
+    maxCharge: 8000000
+    startingCharge: 8000000
+
+- type: entity
+  parent: CMSMESBasic
+  id: CMSMESEmpty
+  suffix: Empty
+  components:
+  - type: Battery
+    startingCharge: 0

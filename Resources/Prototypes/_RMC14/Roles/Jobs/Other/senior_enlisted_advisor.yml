@@ -1,0 +1,89 @@
+- type: job
+  parent: CMJobBase
+  id: CMSeniorEnlistedAdvisor
+  name: cm-job-name-senior-enlisted-advisor
+  description: cm-job-description-senior-enlisted-advisor
+  playTimeTracker: CMJobSeniorEnlistedAdvisor
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 54000 # 15 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsEngineering
+    time: 36000 # 10 hours
+  - !type:DepartmentTimeRequirement
+    department: CMMilitaryPolice
+    time: 36000 # 10 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 36000 # 10 hours
+  - !type:DepartmentTimeRequirement
+    department: CMCommand
+    time: 18000 # 5 hours
+  weight: 5
+  startingGear: CMGearSeniorEnlistedAdvisor
+  icon: "CMJobIconSEA"
+  requireAdminNotify: true
+  joinNotifyCrew: true
+  supervisors: cm-job-supervisors-co
+  whitelisted: true
+  accessGroups:
+  - MarineMain
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      construction: 2
+      cqc: 2
+      endurance: 2
+      engineer: 2
+      firearms: 2
+      fireman: 2
+      intel: 2
+      jtac: 3
+      leadership: 2
+      medical: 3
+      overwatch: 1
+      pilot: 2
+      police: 2
+      powerLoader: 2
+      research: 1
+      surgery: 2
+      vehicles: 2
+    - type: MarineOrders
+
+- type: startingGear
+  id: CMGearSeniorEnlistedAdvisor
+  equipment:
+    jumpsuit: CMJumpsuitBO
+    back: CMSatchelMarine
+    shoes: CMBootsBrownFilled
+    head: CMHeadCapDrill
+    id: CMIDCardSeniorEnlistedAdvisor
+    ears: CMHeadsetLeader
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSeniorEnlistedAdvisor
+  name: senior enlisted advisor spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSeniorEnlistedAdvisor
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: senior_enlisted_advisor
+
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleSEA
+  name: Senior Enlisted Advisor
+  description: Mentor for the Marines!
+  noSpawn: false
+  components:
+  - type: Sprite
+    state: senior_enlisted_advisor
+
+- type: playTimeTracker
+  id: CMJobSeniorEnlistedAdvisor

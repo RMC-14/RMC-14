@@ -1,0 +1,25 @@
+- type: entity
+  parent: BaseItem
+  id: CMRadioHandheld
+  name: marine radiophone
+  description: Also known as a Walkie-Talkie, this device allows for long range communication when telecommunications are down.
+  components:
+  - type: RadioMicrophone
+    broadcastChannel: Handheld
+  - type: RadioSpeaker
+    channels:
+    - Handheld
+  - type: Speech
+    speechVerb: Robotic
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/communication.rsi
+    layers:
+    - state: walkietalkie
+    - state: walkietalkie-on
+    state: walkietalkie
+  - type: Item
+    sprite: _RMC14/Objects/Devices/communication.rsi
+    heldPrefix: walkietalkie
+  - type: Tag
+    tags:
+    - Radio

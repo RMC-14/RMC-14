@@ -1,0 +1,10 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelPrisonPurpleBase
+  name: tiles-cm-default-purple
+
+- type: tile
+  parent: CMFloorSteelPrisonPurpleBase
+  id: CMFloorSteelPrisonPurpleFull
+  sprite: /Textures/_RMC14/Tiles/prison/darkpurplefull2.png

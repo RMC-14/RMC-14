@@ -1,0 +1,106 @@
+﻿- type: entity
+  abstract: true
+  parent: BaseCartridge
+  id: CMShellShotgunBase
+  name: handful of shotgun shell
+  description: A handful of rounds to reload on the go.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi
+    layers:
+    - state: buckshot_shell_1
+  - type: CartridgeAmmo
+    count: 6
+    spread: 15
+    proto: CMPelletShotgunBuckshot
+    deleteOnSpawn: true
+    soundEject:
+      collection: ShellEject
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMShellShotgun
+
+- type: entity
+  parent: CMShellShotgunBase
+  id: CMShellShotgunBuckshot
+  name: handful of buckshot shells
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi
+    layers:
+    - state: buckshot_shell_1
+  - type: CartridgeAmmo
+    proto: CMPelletShotgunBuckshot
+    count: 4
+    spread: 20
+
+- type: entity
+  parent: CMShellShotgunBase
+  id: CMShellShotgunSlugs
+  name: handful of shotgun slugs
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi
+    layers:
+    - state: slug_shell_1
+  - type: CartridgeAmmo
+    count: 1
+    spread: 5
+    proto: CMPelletShotgunSlug
+
+- type: entity
+  parent: CMShellShotgunBase
+  id: CMShellShotgunIncendiary
+  name: handful of incendiary slugs
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi
+    layers:
+    - state: incendiary_slug_1
+  - type: CartridgeAmmo
+    count: 1
+    spread: 5
+    proto: CMPelletShotgunIncendiary
+
+- type: entity
+  parent: CMShellShotgunBase
+  id: CMShellShotgunBeanbag
+  name: handful of beanbag slugs
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi
+    layers:
+    - state: beanbag_slug_1
+  - type: CartridgeAmmo
+    count: 1
+    spread: 5
+    proto: CMPelletShotgunBeanbag
+
+- type: entity
+  parent: CMShellShotgunBase
+  id: CMShellShotgunFlechette
+  name: handful of flechette shells
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi
+    layers:
+    - state: flechette_shell_1
+  - type: CartridgeAmmo
+    proto: CMPelletShotgunFlechette
+    count: 3
+
+- type: entity
+  parent: CMShellShotgunBuckshot
+  id: CMShellShotgunIncendiaryBuckshot
+  name: handful of incendiary buckshot shells
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi
+    layers:
+    - state: incen_buckshot_1
+  - type: CartridgeAmmo
+    proto: CMPelletShotgunIncendiaryBuckshot
+
+- type: Tag
+  id: CMShellShotgun
