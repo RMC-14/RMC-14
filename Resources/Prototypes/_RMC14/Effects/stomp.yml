@@ -1,13 +1,13 @@
-﻿- type: entity
-  # Just fades out with no movement animation
-  id: CMEffectPunch
+- type: entity
+  id: CMEffectSelfStomp
   noSpawn: true
   components:
   - type: TimedDespawn
-    lifetime: 0.4
+    lifetime: 1.6
   - type: Sprite
-    sprite: _RMC14/Effects/attacks.rsi
-    state: punch
+    sprite: _RMC14/Effects/xeno_selfstomp.rsi
+    noRot: true
+    state: stomp
     drawdepth: Effects
   - type: EffectVisuals
   - type: Tag
@@ -15,16 +15,15 @@
     - HideContextMenu
 
 - type: entity
-  # Just fades out with no movement animation
-  id: CMEffectGrab
+  id: CMEffectStomp
   noSpawn: true
   components:
   - type: TimedDespawn
     lifetime: 1.6
   - type: Sprite
-    sprite: _RMC14/Effects/attacks.rsi
+    sprite: _RMC14/Effects/xeno_stomp.rsi
     noRot: true
-    state: grab
+    state: stomp
     drawdepth: Effects
   - type: EffectVisuals
   - type: Tag

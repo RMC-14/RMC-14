@@ -26,13 +26,23 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
-    #    - ActionXenoCharge
-    #    - ActionXenoStomp
+    - ActionXenoCharge
+    - ActionXenoStomp
     #    - ActionXenoDefensiveShield
     tier: 3
     hudOffset: 0,0.375
     unlockAt: 900 # 15 minutes
   - type: XenoDevour
+  - type: XenoStomp
+    damage:
+      types:
+        Blunt: 65
+  - type: XenoCharge
+    damage:
+      types:
+        Blunt: 60
+        Structural: 750
+  - type: XenoAnimateMovement
   - type: XenoPlasma
     plasma: 400
     maxPlasma: 400

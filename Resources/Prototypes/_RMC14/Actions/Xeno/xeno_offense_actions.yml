@@ -98,15 +98,15 @@
   name: Headbutt (10) # TODO RMC14 proper plasma costs
   description: Charge in a direction and push back any enemies in your way.
   components:
-  - type: WorldTargetAction
+  - type: EntityTargetAction
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: headbutt
     event: !type:XenoHeadbuttActionEvent
-    range: 15
+    range: 3
     useDelay: 6
-    checkCanAccess: false
+    deselectOnMiss: false
 
 - type: entity
   id: ActionXenoTailSweep
@@ -182,3 +182,106 @@
     event: !type:XenoBoneChipsActionEvent
     useDelay: 12
     range: 15
+
+- type: entity
+  id: ActionXenoPunch
+  parent: ActionXenoBase
+  name: Punch
+  description: Punches the targeted marine dealing a hefty amount of damage as well as slowing the target for seconds.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: punch
+    event: !type:XenoPunchActionEvent
+    range: 1
+    useDelay: 4.5
+
+- type: entity
+  id: ActionXenoFling
+  parent: ActionXenoBase
+  name: Fling
+  description: Flings the targeted marine a few tiles and damages them.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: fling
+    event: !type:XenoFlingActionEvent
+    range: 1
+    useDelay: 7
+
+- type: entity
+  id: ActionXenoLunge
+  parent: ActionXenoBase
+  name: Lunge
+  description: Lunges the warrior towards the targeted marine and puts them into a choke hold (like grabbing them).
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: lunge
+    event: !type:XenoLungeActionEvent
+    range: 5
+    useDelay: 10
+
+- type: entity
+  id: ActionXenoScreech
+  parent: ActionXenoBase
+  name: Screech (250)
+  description: A wide area of effect stun, screeches upon activation.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: screech
+    event: !type:XenoScreechActionEvent
+    useDelay: 50
+
+- type: entity
+  id: ActionXenoGut
+  parent: ActionXenoBase
+  name: Gut (200)
+  description: Gibs the mob you decide to gut.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: gut
+    event: !type:XenoGutActionEvent
+    range: 2
+
+- type: entity
+  id: ActionXenoStomp
+  parent: ActionXenoBase
+  name: Stomp (30)
+  description: Slam the ground with a 5x5 AOE slow down that affects all hostiles in range.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: stomp
+    event: !type:XenoStompActionEvent
+    useDelay: 18
+
+- type: entity
+  id: ActionXenoCharge
+  parent: ActionXenoBase
+  name: Charge (20)
+  description: Click on a tile you want to charge at, after a brief non cancel-able windup time.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: ready_charge
+    event: !type:XenoChargeActionEvent
+    range: 9
+    useDelay: 14
+    checkCanAccess: false
