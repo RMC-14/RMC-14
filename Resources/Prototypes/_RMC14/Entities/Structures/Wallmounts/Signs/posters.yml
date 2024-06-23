@@ -124,9 +124,9 @@
 
 - type: entity
   parent: CMPosterBase
-  id: CMPosterSeegson
-  name: "Seegson"
-  description: "Hey, Seegson! That's a blast from the past. They got bought out by We-Ya around the time one of their space stations de-orbited and fell into a planet's gravity well after a systems failure."
+  id: CMPosterSynthetic2
+  name: "Synthetic"
+  description: "Hey, Synthetics! That's a blast from the past. They got bought out by We-Ya around the time one of their space stations de-orbited and fell into a planet's gravity well after a systems failure."
   components:
   - type: Sprite
     state: seegson

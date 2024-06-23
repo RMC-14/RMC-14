@@ -56,9 +56,9 @@
 
 - type: entity
   parent: CMStockAttachmentBase
-  id: CMAttachmentM41ASolidStock
-  name: M41A solid stock
-  description: A rare stock distributed in small numbers to Marine forces. Compatible with the M41A, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
+  id: CMAttachmentM52CSolidStock
+  name: M52C solid stock
+  description: A rare stock distributed in small numbers to Marine forces. Compatible with the M52C, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
   components:
   - type: Sprite
     state: riflestock

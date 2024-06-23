@@ -39,9 +39,7 @@
 
 - type: soundCollection
   id: XenoQueenBreath
-  files:
-  - /Audio/_RMC14/Xeno/alien_queen_breath1.ogg
-  - /Audio/_RMC14/Xeno/alien_queen_breath2.ogg
+  files: []
 
 - type: soundCollection
   id: XenoDeath

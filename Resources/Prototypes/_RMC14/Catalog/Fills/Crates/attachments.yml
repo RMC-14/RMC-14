@@ -7,7 +7,7 @@
     contents:
       - id: CMAttachmentS5RedDotSight
         amount: 8
-        
+
 - type: entity
   id: CMCrateAttachmentTelescopicScope
   parent: CMCrateWeldable
@@ -27,7 +27,7 @@
     contents:
       - id: CMAttachmentS42xTelescopicMiniScope
         amount: 2
-        
+
 - type: entity
   id: CMCrateAttachmentMagneticHarness
   parent: CMCrateWeldable
@@ -47,7 +47,7 @@
     contents:
       - id: CMAttachmentSuppressor
         amount: 8
-        
+
 - type: entity
   id: CMCrateAttachmentExtendedBarrel
   parent: CMCrateWeldable
@@ -67,7 +67,7 @@
     contents:
       - id: CMAttachmentRecoilCompensator
         amount: 6
-        
+
 - type: entity
   id: CMCrateAttachmentForegrip
   parent: CMCrateWeldable
@@ -89,7 +89,7 @@
     contents:
       - id: CMAttachmentGyroscopicStabilizer
         amount: 2
-        
+
 - type: entity
   id: CMCrateAttachmentBipod
   parent: CMCrateWeldable
@@ -99,7 +99,7 @@
     contents:
       - id: CMAttachmentBipod
         amount: 6
-        
+
 - type: entity
   id: CMCrateAttachmentUnderbarrelShotgun
   parent: CMCrateWeldable
@@ -119,7 +119,7 @@
     contents:
       - id: CMAttachmentUnderbarrelExtinguisher
         amount: 4
-        
+
 - type: entity
   id: CMCrateAttachmentUnderbarrelFlamer
   parent: CMCrateWeldable
@@ -138,8 +138,8 @@
   - type: StorageFill
     contents:
       - id: CMAttachmentBurstFireAssembly
-        amount: 2 
-        
+        amount: 2
+
 - type: entity
   id: CMCrateAttachmentAllStocks
   parent: CMCrateWeldable
@@ -149,7 +149,7 @@
     contents:
       - id: CMAttachmentM44MagnumSharpshooterStock
         amount: 3
-      - id: CMAttachmentM41ASolidStock
+      - id: CMAttachmentM52CSolidStock
         amount: 3
       - id: CMAttachmentM39Stock
         amount: 3
@@ -175,7 +175,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentM41ASolidStock
+      - id: CMAttachmentM52CSolidStock
         amount: 4
 
 - type: entity

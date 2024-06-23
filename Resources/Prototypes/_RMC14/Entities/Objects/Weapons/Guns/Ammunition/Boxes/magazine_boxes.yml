@@ -90,11 +90,11 @@
           High: { state: magaz_hv_3, visible: true }
           Full: { state: magaz_hv, visible: true }
 
-# M41A
+# M52C
 - type: entity
   parent: CMBoxMagazineBase
-  id: CMBoxMagazineRifleM41A
-  name: magazine box (M41A x 10)
+  id: CMBoxMagazineRifleM52C
+  name: magazine box (M52C x 10)
   components:
   - type: Sprite
     layers:
@@ -108,17 +108,17 @@
     - state: lid_type_reg # lid stripe,ends in the type of ammo used
       map: [ "lid_stripe" ]
   - type: CMItemSlots
-    startingItem: CMMagazineRifleM41A
+    startingItem: CMMagazineRifleM52C
     count: 10
     slot:
       whitelist:
         tags:
-        - CMMagazineRifleM41A
+        - CMMagazineRifleM52C
 
 - type: entity
   parent: CMBoxMagazineAPBase
-  id: CMBoxMagazineRifleM41AAP
-  name: magazine box (AP M41A x 10)
+  id: CMBoxMagazineRifleM52CAP
+  name: magazine box (AP M52C x 10)
   components:
   - type: Sprite
     layers:
@@ -132,17 +132,17 @@
     - state: lid_type_ap
       map: [ "lid_stripe" ]
   - type: CMItemSlots
-    startingItem: CMMagazineRifleM41AAP
+    startingItem: CMMagazineRifleM52CAP
     count: 10
     slot:
       whitelist:
         tags:
-        - CMMagazineRifleM41AAP
+        - CMMagazineRifleM52CAP
 
 - type: entity
   parent: CMBoxMagazineBase
-  id: CMBoxMagazineRifleM41AExt
-  name: magazine box (Ext M41A x 8)
+  id: CMBoxMagazineRifleM52CExt
+  name: magazine box (Ext M52C x 8)
   components:
   - type: Sprite
     layers:
@@ -156,12 +156,12 @@
     - state: lid_type_ext
       map: [ "lid_stripe" ]
   - type: CMItemSlots
-    startingItem: CMMagazineRifleM41AExt
+    startingItem: CMMagazineRifleM52CExt
     count: 8
     slot:
       whitelist:
         tags:
-        - CMMagazineRifleM41AExt
+        - CMMagazineRifleM52CExt
 
 # M39
 - type: entity

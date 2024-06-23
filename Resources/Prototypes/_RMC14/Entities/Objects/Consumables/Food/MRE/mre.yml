@@ -96,7 +96,7 @@
   parent: BaseItem
   id: CMMREComponentBase
   name: MRE component
-  description: A package from a Meal Ready-to-Eat, property of the CM. Contains a part of a meal, prepared for field consumption.
+  description: A package from a Meal Ready-to-Eat, property of the Marines. Contains a part of a meal, prepared for field consumption.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/mre_components.rsi

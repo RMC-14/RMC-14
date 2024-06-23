@@ -14,14 +14,9 @@
   - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m4a3_5.ogg
 
 - type: soundCollection
-  id: CMM41AShoot
+  id: CMM52CShoot
   files:
-  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m41a_1.ogg
-  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m41a_2.ogg
-  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m41a_3.ogg
-  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m41a_4.ogg
-  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m41a_5.ogg
-  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m41a_6.ogg
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_rifle.ogg # TODO RMC14
 
 - type: soundCollection
   id: CMSilencedShoot
