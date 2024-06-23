@@ -8,7 +8,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Xenonids.Charge;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedXenoChargeSystem))]
+[Access(typeof(XenoChargeSystem))]
 public sealed partial class XenoChargeComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -24,14 +24,18 @@ public sealed partial class XenoChargeComponent : Component
     public TimeSpan StunTime = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan ChargeDelay = TimeSpan.FromSeconds(2);
+    public TimeSpan ChargeDelay = TimeSpan.FromSeconds(1.2);
 
     [DataField, AutoNetworkedField]
     public EntProtoId Effect = "CMEffectStomp";
 
+    // TODO RMC14 extra sound on impact
     [DataField, AutoNetworkedField]
     public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_claw_block.ogg");
 
     [DataField, AutoNetworkedField]
     public Vector2? Charge;
+
+    [DataField, AutoNetworkedField]
+    public float Strength = 20;
 }

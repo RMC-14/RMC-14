@@ -26,7 +26,6 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
-    - ActionXenoHide
     - ActionXenoPunch
     - ActionXenoLunge
     - ActionXenoFling
@@ -37,7 +36,7 @@
   - type: XenoPunch
     damage:
       types:
-        Blunt: 30
+        Blunt: 25
   - type: XenoFling
   - type: XenoLunge
   - type: XenoPlasma

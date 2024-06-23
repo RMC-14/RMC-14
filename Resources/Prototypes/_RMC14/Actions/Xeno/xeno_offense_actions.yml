@@ -106,6 +106,7 @@
     event: !type:XenoHeadbuttActionEvent
     range: 3
     useDelay: 6
+    deselectOnMiss: false
 
 - type: entity
   id: ActionXenoTailSweep
@@ -185,7 +186,7 @@
 - type: entity
   id: ActionXenoPunch
   parent: ActionXenoBase
-  name: Punch (10)
+  name: Punch
   description: Punches the targeted marine dealing a hefty amount of damage as well as slowing the target for seconds.
   components:
   - type: EntityTargetAction
@@ -195,12 +196,12 @@
       state: punch
     event: !type:XenoPunchActionEvent
     range: 1
-    useDelay: 6
+    useDelay: 4.5
 
 - type: entity
   id: ActionXenoFling
   parent: ActionXenoBase
-  name: Fling (10)
+  name: Fling
   description: Flings the targeted marine a few tiles and damages them.
   components:
   - type: EntityTargetAction
@@ -215,7 +216,7 @@
 - type: entity
   id: ActionXenoLunge
   parent: ActionXenoBase
-  name: Lunge (10)
+  name: Lunge
   description: Lunges the warrior towards the targeted marine and puts them into a choke hold (like grabbing them).
   components:
   - type: EntityTargetAction
@@ -259,7 +260,7 @@
 - type: entity
   id: ActionXenoStomp
   parent: ActionXenoBase
-  name: Stomp (20)
+  name: Stomp (30)
   description: Slam the ground with a 5x5 AOE slow down that affects all hostiles in range.
   components:
   - type: InstantAction
@@ -268,7 +269,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: stomp
     event: !type:XenoStompActionEvent
-    useDelay: 20
+    useDelay: 18
 
 - type: entity
   id: ActionXenoCharge
@@ -282,6 +283,6 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: ready_charge
     event: !type:XenoChargeActionEvent
-    range: 15
-    useDelay: 15
+    range: 9
+    useDelay: 14
     checkCanAccess: false

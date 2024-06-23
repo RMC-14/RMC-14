@@ -11,7 +11,7 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Fling;
 
-public sealed class SharedXenoFlingSystem : EntitySystem
+public sealed class XenoFlingSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
@@ -21,15 +21,8 @@ public sealed class SharedXenoFlingSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
 
-    private EntityQuery<PhysicsComponent> _physicsQuery;
-    private EntityQuery<ThrownItemComponent> _thrownItemQuery;
-
     public override void Initialize()
     {
-        base.Initialize();
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
-        _thrownItemQuery = GetEntityQuery<ThrownItemComponent>();
-
         SubscribeLocalEvent<XenoFlingComponent, XenoFlingActionEvent>(OnXenoFlingAction);
     }
 

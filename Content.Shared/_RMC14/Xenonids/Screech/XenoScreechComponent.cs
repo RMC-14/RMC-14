@@ -14,17 +14,21 @@ public sealed partial class XenoScreechComponent : Component
     public FixedPoint2 PlasmaCost = 250;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan StunTime = TimeSpan.FromSeconds(5);
+    public TimeSpan StunTime = TimeSpan.FromSeconds(6);
 
     [DataField, AutoNetworkedField]
-    public float StanRange = 10;
+    public TimeSpan ParalyzeTime = TimeSpan.FromSeconds(8);
+
+    // TODO RMC14 stun less within 4 tiles
+    [DataField, AutoNetworkedField]
+    public float StunRange = 7;
 
     [DataField, AutoNetworkedField]
-    public float ParalyzeRange = 2;
+    public float ParalyzeRange = 4;
 
     [DataField, AutoNetworkedField]
     public EntProtoId Effect = "CMEffectScreech";
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_queen_screech.ogg");
+    public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_queen_screech.ogg", AudioParams.Default.WithVolume(-7));
 }

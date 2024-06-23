@@ -12,19 +12,16 @@ namespace Content.Shared._RMC14.Xenonids.Stomp;
 public sealed partial class XenoStompComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public FixedPoint2 PlasmaCost = 20;
+    public FixedPoint2 PlasmaCost = 30;
 
     [DataField]
     public DamageSpecifier Damage = new();
 
     [DataField, AutoNetworkedField]
-    public TimeSpan ParalyzeTime = TimeSpan.FromSeconds(1);
+    public TimeSpan ParalyzeTime = TimeSpan.FromSeconds(0.2);
 
     [DataField, AutoNetworkedField]
-    public float ParalyzeRange = 2.5f;
-
-    [DataField, AutoNetworkedField]
-    public float DamageRange = 0.5f;
+    public float Range = 2;
 
     [DataField, AutoNetworkedField]
     public EntProtoId SelfEffect = "CMEffectSelfStomp";
@@ -32,6 +29,7 @@ public sealed partial class XenoStompComponent : Component
     [DataField, AutoNetworkedField]
     public EntProtoId Effect = "CMEffectStomp";
 
+    // TODO RMC14 bang.ogg
     [DataField, AutoNetworkedField]
     public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_footstep_charge1.ogg");
 }

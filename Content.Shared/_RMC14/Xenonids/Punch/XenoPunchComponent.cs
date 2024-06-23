@@ -8,7 +8,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Xenonids.Punch;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedXenoPunchSystem))]
+[Access(typeof(XenoPunchSystem))]
 public sealed partial class XenoPunchComponent : Component
 {
     [DataField]

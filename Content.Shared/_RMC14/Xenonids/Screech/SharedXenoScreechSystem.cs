@@ -49,7 +49,7 @@ public sealed class XenoScreechSystem : EntitySystem
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
         _receivers.Clear();
-        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.StanRange, _receivers);
+        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.StunRange, _receivers);
 
         foreach (var receiver in _receivers)
         {
@@ -81,7 +81,7 @@ public sealed class XenoScreechSystem : EntitySystem
                 continue;
             }
 
-            _stun.TryParalyze(receiver, xeno.Comp.StunTime, true);
+            _stun.TryParalyze(receiver, xeno.Comp.ParalyzeTime, true);
         }
 
         if (_net.IsServer)

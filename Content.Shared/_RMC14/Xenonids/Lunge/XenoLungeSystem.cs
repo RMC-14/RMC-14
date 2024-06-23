@@ -9,7 +9,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Lunge;
 
-public abstract class SharedXenoLungeSystem : EntitySystem
+public sealed class XenoLungeSystem : EntitySystem
 {
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
@@ -67,7 +67,7 @@ public abstract class SharedXenoLungeSystem : EntitySystem
             _thrownItem.StopThrow(xeno, thrown);
         }
 
-        if (_timing.IsFirstTimePredicted && xeno.Comp.Charge is { } charge)
+        if (_timing.IsFirstTimePredicted && xeno.Comp.Charge != null)
             xeno.Comp.Charge = null;
 
         if (TryComp(xeno, out XenoComponent? xenoComp) &&

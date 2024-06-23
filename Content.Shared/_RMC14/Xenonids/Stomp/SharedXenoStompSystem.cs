@@ -52,7 +52,7 @@ public sealed class XenoStompSystem : EntitySystem
             return;
 
         _receivers.Clear();
-        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.ParalyzeRange, _receivers);
+        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.Range, _receivers);
 
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
@@ -66,9 +66,6 @@ public sealed class XenoStompSystem : EntitySystem
             if (_net.IsServer)
                 SpawnAttachedTo(xeno.Comp.Effect, receiver.Owner.ToCoordinates());
         }
-
-        _receivers.Clear();
-        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.DamageRange, _receivers);
 
         foreach (var receiver in _receivers)
         {

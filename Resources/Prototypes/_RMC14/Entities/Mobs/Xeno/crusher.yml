@@ -36,12 +36,12 @@
   - type: XenoStomp
     damage:
       types:
-        Blunt: 60
+        Blunt: 65
   - type: XenoCharge
     damage:
       types:
         Blunt: 60
-        Structural: 400
+        Structural: 750
   - type: XenoAnimateMovement
   - type: XenoPlasma
     plasma: 400

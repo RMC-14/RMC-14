@@ -8,7 +8,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Xenonids.Fling;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedXenoFlingSystem))]
+[Access(typeof(XenoFlingSystem))]
 public sealed partial class XenoFlingComponent : Component
 {
     [DataField]
