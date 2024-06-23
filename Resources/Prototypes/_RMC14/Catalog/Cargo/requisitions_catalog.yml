@@ -34,8 +34,12 @@
         crate: CMCrateBoxMagazinePistol88m4AP
       - cost: 4000
         crate: CMCrateBoxMagazinePistolVP78
-#    - name: Attachments
-#      entries: [ ] # TODO RMC14
+    - name: Attachments
+      entries:
+      - cost: 3000
+        crate: CMCrateAttachmentSmartScope
+      - cost: 2000
+        crate: CMCrateAttachmentRailFlashlight
 #      - cost: 3000
 #        crate: CMCrateAttachmentRedDot
 #      - cost: 3000
@@ -44,20 +48,20 @@
 #        crate: CMCrateAttachmentMiniScope
 #      - cost: 3000
 #        crate: CMCrateAttachmentMagneticHarness
-#      - cost: 3000
-#        crate: CMCrateAttachmentSuppressor
-#      - cost: 3000
-#        crate: CMCrateAttachmentExtendedBarrel
-#      - cost: 3000
-#        crate: CMCrateAttachmentCompensator
+      - cost: 3000
+        crate: CMCrateAttachmentSuppressor
+      - cost: 3000
+        crate: CMCrateAttachmentExtendedBarrel
+      - cost: 3000
+        crate: CMCrateAttachmentCompensator
 #      - cost: 3000
 #        crate: CMCrateAttachmentForegrip
 #      - cost: 3000
 #        crate: CMCrateAttachmentGyro
 #      - cost: 3000
 #        crate: CMCrateAttachmentBipod
-#      - cost: 3000
-#        crate: CMCrateAttachmentUnderbarrelShotgun
+      - cost: 3000
+        crate: CMCrateAttachmentUnderbarrelShotgun
 #      - cost: 3000
 #        crate: CMCrateAttachmentUnderbarrelExtinguisher
 #      - cost: 3000
