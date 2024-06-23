@@ -5,27 +5,37 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._RMC14.Xenonids.Headbutt;
+namespace Content.Shared._RMC14.Xenonids.Charge;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(XenoHeadbuttSystem))]
-public sealed partial class XenoHeadbuttComponent : Component
+[Access(typeof(XenoChargeSystem))]
+public sealed partial class XenoChargeComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public FixedPoint2 PlasmaCost = 10;
+    public FixedPoint2 PlasmaCost = 20;
 
     [DataField]
     public DamageSpecifier Damage = new();
 
     [DataField, AutoNetworkedField]
-    public float Range = 3;
+    public float Range = 8;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId Effect = "CMEffectPunch";
+    public TimeSpan StunTime = TimeSpan.FromSeconds(2);
 
+    [DataField, AutoNetworkedField]
+    public TimeSpan ChargeDelay = TimeSpan.FromSeconds(1.2);
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId Effect = "CMEffectStomp";
+
+    // TODO RMC14 extra sound on impact
     [DataField, AutoNetworkedField]
     public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_claw_block.ogg");
 
     [DataField, AutoNetworkedField]
     public Vector2? Charge;
+
+    [DataField, AutoNetworkedField]
+    public float Strength = 20;
 }

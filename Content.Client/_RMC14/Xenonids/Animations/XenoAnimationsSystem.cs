@@ -1,23 +1,39 @@
 ﻿using System.Numerics;
-using Content.Shared._RMC14.Xenonids.Headbutt;
+using Content.Shared._RMC14.Xenonids.Animation;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
+using Robust.Client.Player;
 using Robust.Shared.Animations;
 using static Robust.Client.Animations.AnimationTrackProperty;
 
-namespace Content.Client._RMC14.Xenonids.Headbutt;
+namespace Content.Client._RMC14.Xenonids.Animations;
 
-public sealed class XenoHeadbuttSystem : SharedXenoHeadbuttSystem
+public sealed class XenoAnimationsSystem : EntitySystem
 {
     [Dependency] private readonly AnimationPlayerSystem _animation = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
 
     private const string MeleeLungeKey = "melee-lunge";
 
-    protected override void DoLunge(EntityUid xeno, Vector2 direction)
+    public override void Initialize()
     {
+        base.Initialize();
+
+        SubscribeAllEvent<PlayLungeAnimationEvent>(OnPlayLungeAnimation);
+    }
+
+    private void OnPlayLungeAnimation(PlayLungeAnimationEvent ev)
+    {
+        if (!TryGetEntity(ev.EntityUid, out var entity))
+            return;
+
+        if (!ev.Client && _player.LocalEntity == entity)
+            return;
+
+        var direction = ev.Direction;
         var animation = GetLungeAnimation(direction);
-        _animation.Stop(xeno, MeleeLungeKey);
-        _animation.Play(xeno, animation, MeleeLungeKey);
+        _animation.Stop(entity.Value, MeleeLungeKey);
+        _animation.Play(entity.Value, animation, MeleeLungeKey);
     }
 
     private Animation GetLungeAnimation(Vector2 direction)
