@@ -34,7 +34,7 @@ public sealed partial class AttachableVisualsComponent : Component
     ///     The slot names can be found in AttachableHolderComponent.cs
     /// </summary>
     [DataField, AutoNetworkedField]
-    public string? Suffix = "_a";
+    public string? Suffix = "-a";
 
     /// <summary>
     ///     If true, will include the holder's slot name to find this attachment's state

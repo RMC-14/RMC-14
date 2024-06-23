@@ -7,7 +7,7 @@
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
   - type: Tag
     tags:
-    - CMAttachableStock
+    - CMAttachmentStock
 
 - type: entity
   parent: CMStockAttachmentBase
@@ -46,8 +46,8 @@
     state: smgstockcc
   - type: Tag
     tags:
-    - CMAttachableStock
-    - CMAttachableStockSMGCollapsible
+    - CMAttachmentStock
+    - CMAttachmentM39StockCollapsible
   - type: AttachableToggleable
   - type: AttachableVisuals
     showActive: true
@@ -73,7 +73,7 @@
     state: 44stock
 
 - type: Tag
-  id: CMAttachableStock
+  id: CMAttachmentStock
 
 - type: Tag
-  id: CMAttachableStockSMGCollapsible
+  id: CMAttachmentM39StockCollapsible

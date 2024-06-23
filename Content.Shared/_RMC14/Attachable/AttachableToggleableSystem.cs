@@ -208,7 +208,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
     {
         if (ent.Comp.Action is not { } action)
             return;
-
+        
         _actionsSystem.RemoveProvidedAction(args.User, ent, action);
     }
 

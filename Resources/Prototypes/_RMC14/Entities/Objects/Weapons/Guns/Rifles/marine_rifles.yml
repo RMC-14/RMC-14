@@ -40,6 +40,15 @@
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c.rsi
+#  - type: ContainerFill
+#    containers:
+#      cm-aslot-barrel:
+#      - CMAttachmentExtendedBarrel
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+      cm-aslot-barrel: !type:ContainerSlot
   - type: Gun
     minAngle: 30
     maxAngle: 60
@@ -75,15 +84,18 @@
   - type: AttachableHolder
     slots:
       cm-aslot-barrel:
-        tags:
-        - CMAttachableExtendedBarrel
-        - CMAttachableSuppressor
+        whitelist:
+          tags:
+          - CMAttachmentExtendedBarrel
+          - CMAttachmentSuppressor
       cm-aslot-rail:
-        tags:
-        - CMAttachableFlashlight
+        whitelist:
+          tags:
+          - CMAttachmentFlashlight
       cm-aslot-underbarrel:
-        tags:
-        - CMAttachmentU7UnderbarrelShotgun
+        whitelist:
+          tags:
+          - CMAttachmentU7UnderbarrelShotgun
   - type: AttachableHolderVisuals
     offsets:
       cm-aslot-barrel: 0.53, 0.06
@@ -179,13 +191,15 @@
   - type: AttachableHolder
     slots:
       cm-aslot-barrel:
-        tags:
-        - CMAttachableExtendedBarrel
-        - CMAttachableSuppressor
+        whitelist:
+          tags:
+          - CMAttachableExtendedBarrel
+          - CMAttachableSuppressor
       cm-aslot-rail:
-        tags:
-        - CMAttachableFlashlight
-        - CMAttachableSmartScope
+        whitelist:
+          tags:
+          - CMAttachableFlashlight
+          - CMAttachableSmartScope
   - type: AttachableHolderVisuals
     offsets:
       cm-aslot-barrel: 0.9, 0.03

@@ -111,8 +111,15 @@
     attachedOnly: true
     supercedeHolder: true
     activateSound: /Audio/_RMC14/Attachable/gun_u7_activate.ogg
+    actionName: U7 underbarrel shotgun
+    actionDesc: Switch to using the underbarrel shotgun.
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: masterkey
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: masterkey-on
   - type: AttachableVisuals
-  - type: AttachableToggleableSimpleActivate
 
 - type: entity
   parent: CMUnderAttachmentBase

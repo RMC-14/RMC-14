@@ -25,14 +25,14 @@ public sealed partial class AttachableHolderStripMenu : FancyWindow
         OnClose += boundUI.Close;
     }
 
-    public void UpdateMenu(Dictionary<string, string?> attachableSlots)
+    public void UpdateMenu(Dictionary<string, (string?, bool)> attachableSlots)
     {
         foreach (var slotId in attachableSlots.Keys)
         {
             if (!_attachableSlotControls.ContainsKey(slotId))
                 AddSlotControl(slotId);
 
-            _attachableSlotControls[slotId].Update(attachableSlots[slotId]);
+            _attachableSlotControls[slotId].Update(attachableSlots[slotId].Item1, attachableSlots[slotId].Item2);
         }
     }
 
@@ -79,7 +79,7 @@ public sealed partial class AttachableHolderStripMenu : FancyWindow
             AddChild(hBox);
         }
 
-        public void Update(string? attachableName)
+        public void Update(string? attachableName, bool slotLocked)
         {
             if (attachableName == null)
             {
@@ -89,7 +89,7 @@ public sealed partial class AttachableHolderStripMenu : FancyWindow
             }
 
             AttachableButton.Text = attachableName;
-            AttachableButton.Disabled = false;
+            AttachableButton.Disabled = slotLocked;
         }
     }
 }

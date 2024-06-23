@@ -56,12 +56,20 @@
   - type: AttachableHolder
     slots:
       cm-aslot-stock:
-        tags:
-        - CMAttachableStockSMGCollapsible
+        whitelist:
+          tags:
+          - CMAttachmentM39StockCollapsible
       cm-aslot-barrel:
-        tags:
-        - CMAttachableBarrel
+        whitelist:
+          tags:
+          - CMAttachmentExtendedBarrel
+          - CMAttachmentSuppressor
+      cm-aslot-rail:
+        whitelist:
+          tags:
+          - CMAttachmentFlashlight
   - type: AttachableHolderVisuals
     offsets:
       cm-aslot-barrel: 0.44, 0.125
       cm-aslot-stock: -0.58, 0.13
+      cm-aslot-rail: 0.0, 0.0
