@@ -113,7 +113,6 @@ public sealed class XenoLeapSystem : EntitySystem
         _physics.ApplyLinearImpulse(xeno, impulse, body: physics);
         _physics.SetBodyStatus(xeno, physics, BodyStatus.InAir);
 
-        _stun.TryStun(xeno, xeno.Comp.MoveDelayTime, true);
     }
 
     private void OnXenoLeapingDoHit(Entity<XenoLeapingComponent> xeno, ref StartCollideEvent args)
@@ -150,8 +149,10 @@ public sealed class XenoLeapSystem : EntitySystem
 
         victim.RecoverAt = _timing.CurTime + xeno.Comp.ParalyzeTime;
 
-        if (_net.IsServer)
+        if (_net.IsServer) {
             _stun.TryParalyze(other, xeno.Comp.ParalyzeTime, true);
+            _stun.TryStun(xeno, xeno.Comp.MoveDelayTime, true);
+        }
 
         var ev = new XenoLeapHitEvent(xeno, other);
         RaiseLocalEvent(xeno, ref ev);
