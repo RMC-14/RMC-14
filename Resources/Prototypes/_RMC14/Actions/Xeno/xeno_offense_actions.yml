@@ -197,9 +197,9 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: charge_spit
-    event: !type:XenoChargeSpitActionEvent # TODO RMC14 more armor, move faster
     useDelay: 12
     range: 15
+    event: !type:XenoChargeSpitActionEvent # TODO RMC14 more armor, move faster
     checkCanAccess: false
 
 - type: entity
