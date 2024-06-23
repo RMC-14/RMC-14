@@ -55,7 +55,7 @@ jobs:
         host: cdn.rouny-ss14.com
         username: cm14-build-push
         port: 2222
-        key: ${{ secrets.CDN_CM14_BUILDS_PUSH_KEY }}
+        key: ${{ secrets.CDN_RMC14_BUILDS_PUSH_KEY }}
         source: "release/${{ github.sha }}"
         target: "/home/cm14-build-push/builds_dir/builds/"
         strip_components: 1
@@ -66,7 +66,7 @@ jobs:
         host: cdn.rouny-ss14.com
         username: cm14-build-push
         port: 2222
-        key: ${{ secrets.CDN_CM14_BUILDS_PUSH_KEY }}
+        key: ${{ secrets.CDN_RMC14_BUILDS_PUSH_KEY }}
         script: /home/cm14-build-push/push.ps1 ${{ github.sha }}
 
     - name: Publish changelog (Discord)

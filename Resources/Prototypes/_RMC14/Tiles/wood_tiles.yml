@@ -1,0 +1,45 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorWoodBase
+  name: tiles-cm-wood
+  footstepSounds:
+    collection: FootstepWood
+  barestepSounds:
+    collection: BarestepWood
+  itemDrop: CMTileItemWood
+
+- type: tile
+  parent: CMFloorWoodBase
+  id: CMFloorWood
+  sprite: /Textures/_RMC14/Tiles/almayer/wood.png
+
+- type: tile
+  parent: CMFloorWoodBase
+  id: CMFloorWoodBroken2
+  sprite: /Textures/_RMC14/Tiles/almayer/wood-broken2.png
+
+- type: tile
+  parent: CMFloorWoodBase
+  id: CMFloorWoodBroken3
+  sprite: /Textures/_RMC14/Tiles/almayer/wood-broken3.png
+
+- type: tile
+  parent: CMFloorWoodBase
+  id: CMFloorWoodBroken4
+  sprite: /Textures/_RMC14/Tiles/almayer/wood-broken4.png
+
+- type: tile
+  parent: CMFloorWoodBase
+  id: CMFloorWoodBroken5
+  sprite: /Textures/_RMC14/Tiles/almayer/wood-broken5.png
+
+- type: tile
+  parent: CMFloorWoodBase
+  id: CMFloorWoodBroken6
+  sprite: /Textures/_RMC14/Tiles/almayer/wood-broken6.png
+
+- type: tile
+  parent: CMFloorWoodBase
+  id: CMFloorWoodBroken7
+  sprite: /Textures/_RMC14/Tiles/almayer/wood-broken7.png

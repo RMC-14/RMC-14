@@ -1,0 +1,41 @@
+# Welding fuel amounts are multiplied by 2.5 from 13 until we make them work exactly the same
+- type: entity
+  parent: Welder
+  id: CMWelder
+  name: blowtorch
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/welder.rsi
+    layers:
+    - state: icon
+    - state: welder_flame
+      map: ["enum.ToggleVisuals.Layer"]
+      shader: unshaded
+      visible: false
+  - type: Item
+    size: Small # TODO RMC14 large when toggled on
+    sprite: _RMC14/Objects/Tools/welder.rsi
+  - type: Welder
+    fuelConsumption: 0.06 # TODO RMC14 chang ethis when welders are fixed
+    fuelLitCost: 0
+  - type: SolutionContainerManager
+    solutions:
+      Welder:
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 100
+        maxVol: 100 # TODO RMC14 40 when welders are fixed
+
+- type: entity
+  parent: CMWelder
+  id: CMWelderSmall
+  name: ME3 hand welder
+  description: A compact, handheld welding torch used by the Marines for cutting and welding jobs on the field. Due to the small size and slow strength, its function is limited compared to a full-sized technician's blowtorch.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      Welder:
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 12.5
+        maxVol: 12.5 # TODO RMC14 5 when welders are fixed

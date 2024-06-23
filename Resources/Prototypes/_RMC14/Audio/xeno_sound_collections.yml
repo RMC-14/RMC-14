@@ -1,0 +1,57 @@
+﻿- type: soundCollection
+  id: XenoChestBurst
+  files:
+  - /Audio/_RMC14/Xeno/alien_chestburst.ogg
+  - /Audio/_RMC14/Xeno/alien_chestburst2.ogg
+
+- type: soundCollection
+  id: XenoDrool
+  files:
+  - /Audio/_RMC14/Xeno/alien_drool1.ogg
+  - /Audio/_RMC14/Xeno/alien_drool2.ogg
+
+- type: soundCollection
+  id: XenoSpitAcid
+  files:
+  - /Audio/_RMC14/Xeno/alien_spitacid.ogg
+  - /Audio/_RMC14/Xeno/alien_spitacid2.ogg
+
+- type: soundCollection
+  id: XenoTailSwipe
+  files:
+  - /Audio/_RMC14/Xeno/alien_tail_swipe1.ogg
+  - /Audio/_RMC14/Xeno/alien_tail_swipe2.ogg
+  - /Audio/_RMC14/Xeno/alien_tail_swipe3.ogg
+
+- type: soundCollection
+  id: XenoQueenCommand
+  files:
+  - /Audio/_RMC14/Xeno/alien_queen_command.ogg
+  - /Audio/_RMC14/Xeno/alien_queen_command2.ogg
+  - /Audio/_RMC14/Xeno/alien_queen_command3.ogg
+
+- type: soundCollection
+  id: XenoFootstepLarge
+  files:
+  - /Audio/_RMC14/Xeno/alien_footstep_large1.ogg
+  - /Audio/_RMC14/Xeno/alien_footstep_large2.ogg
+  - /Audio/_RMC14/Xeno/alien_footstep_large3.ogg
+
+- type: soundCollection
+  id: XenoQueenBreath
+  files:
+  - /Audio/_RMC14/Xeno/alien_queen_breath1.ogg
+  - /Audio/_RMC14/Xeno/alien_queen_breath2.ogg
+
+- type: soundCollection
+  id: XenoDeath
+  files:
+  - /Audio/_RMC14/Xeno/alien_death.ogg
+  - /Audio/_RMC14/Xeno/alien_death2.ogg
+
+- type: soundCollection
+  id: XenoResinBreak
+  files:
+  - /Audio/_RMC14/Xeno/alien_resin_break1.ogg
+  - /Audio/_RMC14/Xeno/alien_resin_break2.ogg
+  - /Audio/_RMC14/Xeno/alien_resin_break3.ogg

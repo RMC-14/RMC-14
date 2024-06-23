@@ -1,0 +1,97 @@
+﻿- type: entity
+  parent: Screwdriver
+  id: CMScrewdriver
+  components:
+  - type: RandomSprite
+    available:
+    - enum.DamageStateVisualLayers.Base:
+        screwdriver: Rainbow
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/screwdriver.rsi
+    layers:
+    - state: screwdriver
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+    - state: screwdriver-screwybits
+  - type: Item
+    size: Tiny
+    sprite: _RMC14/Objects/Tools/screwdriver.rsi
+
+- type: entity
+  parent: Wirecutter
+  id: CMWirecutter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/wirecutters.rsi
+    layers:
+    - state: cutters
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+    - state: cutters-cutty-thingy
+  - type: RandomSprite
+    available:
+    - enum.DamageStateVisualLayers.Base:
+        cutters: Rainbow
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Tools/wirecutters.rsi
+
+- type: entity
+  parent: Wrench
+  id: CMWrench
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/wrench.rsi
+    state: icon
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Tools/wrench.rsi
+
+- type: entity
+  parent: Multitool
+  id: CMMultitool
+  name: security access tuner
+  description: A small handheld tool used to override various machine functions.
+  suffix: Multitool
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/multitool.rsi
+    layers: []
+    state: multitool
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Tools/multitool.rsi
+
+- type: entity
+  parent: Crowbar
+  id: CMCrowbar
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/crowbar.rsi
+    state: icon
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Tools/crowbar.rsi
+
+- type: entity
+  parent: CMCrowbar
+  id: CMCrowbarRed
+  name: emergency crowbar
+  components:
+  - type: Tag
+    tags:
+    - Crowbar
+    - CrowbarRed
+  - type: Sprite
+    state: red-icon
+  - type: Item
+    heldPrefix: red
+
+- type: entity
+  parent: HandLabeler
+  id: CMHandLabeler
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Tools/hand_labeler.rsi
+      state: hand_labeler
+    - type: Item
+      size: Normal
+      sprite: _RMC14/Objects/Tools/hand_labeler.rsi

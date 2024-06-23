@@ -1,7 +1,0 @@
-﻿using Robust.Shared.GameStates;
-
-namespace Content.Shared._CM14.Xenonids.Parasite;
-
-[RegisterComponent, NetworkedComponent]
-[Access(typeof(SharedXenoParasiteSystem))]
-public sealed partial class ParasiteSpentComponent : Component;

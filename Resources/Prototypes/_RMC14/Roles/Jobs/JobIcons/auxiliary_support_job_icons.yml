@@ -1,0 +1,34 @@
+- type: statusIcon
+  parent: CMJobIconBase
+  id: CMJobIconASO
+  icon:
+    sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
+    state: auxiliary_support_officer
+
+- type: statusIcon
+  parent: CMJobIconBase
+  id: CMJobIconPilotDropship
+  icon:
+    sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_po
+
+- type: statusIcon
+  parent: CMJobIconBase
+  id: CMJobIconPilotGunship
+  icon:
+    sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_po
+
+- type: statusIcon
+  parent: CMJobIconBase
+  id: CMJobIconDCC
+  icon:
+    sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_dcc
+
+- type: statusIcon
+  parent: CMJobIconBase
+  id: CMJobIconIntelOfficer
+  icon:
+    sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_io

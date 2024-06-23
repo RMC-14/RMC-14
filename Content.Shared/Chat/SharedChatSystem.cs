@@ -1,6 +1,6 @@
 using System.Collections.Frozen;
-using Content.Shared._CM14.Chat;
-using Content.Shared._CM14.Xenonids;
+using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.Speech;

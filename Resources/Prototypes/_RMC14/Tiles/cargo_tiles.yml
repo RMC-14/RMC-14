@@ -1,0 +1,29 @@
+﻿- type: tile
+  parent: CMTileBase
+  id: CMFloorCargoBase
+  name: tiles-cm-cargo
+
+- type: tile
+  parent: CMFloorCargoBase
+  id: CMFloorCargo
+  sprite: /Textures/_RMC14/Tiles/almayer/cargo.png
+
+- type: tile
+  parent: CMFloorCargoBase
+  id: CMFloorCargoArrowDown
+  sprite: /Textures/_RMC14/Tiles/almayer/cargo_arrow_0.png
+
+- type: tile
+  parent: CMFloorCargoBase
+  id: CMFloorCargoArrowUp
+  sprite: /Textures/_RMC14/Tiles/almayer/cargo_arrow_1.png
+
+- type: tile
+  parent: CMFloorCargoBase
+  id: CMFloorCargoArrowRight
+  sprite: /Textures/_RMC14/Tiles/almayer/cargo_arrow_2.png
+
+- type: tile
+  parent: CMFloorCargoBase
+  id: CMFloorCargoArrowLeft
+  sprite: /Textures/_RMC14/Tiles/almayer/cargo_arrow_3.png
