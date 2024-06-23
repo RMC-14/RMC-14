@@ -1411,5 +1411,18 @@
   id: 170
   time: '2024-06-23T05:32:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2555
+- author: MetalSage
+  changes:
+  - message: Added the Warrior's punch, fling and lunge actions.
+    type: Add
+  - message: Added the Crusher's charge and stomp actions.
+    type: Add
+  - message: Added the Queen's gut and screech actions.
+    type: Add
+  - message: Defender headbutt action now requires a marine target to be used.
+    type: Fix
+  id: 171
+  time: '2024-06-23T08:03:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2324
 Name: RMC14
 Order: -1
