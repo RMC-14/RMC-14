@@ -1,0 +1,18 @@
+# APC
+- type: entity
+  id: CMAPCElectronics
+  parent: CMBaseElectronics
+  name: power control module
+  description: Circuit used in APC construction.
+  components:
+    - type: ApcElectronics
+    - type: Sprite
+      sprite: _RMC14/Objects/Misc/module.rsi
+      state: power_mod
+    - type: PhysicalComposition
+      materialComposition:
+        CMGlass: 50
+      chemicalComposition:
+        Silicon: 20
+    - type: StaticPrice
+      price: 34

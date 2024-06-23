@@ -1,0 +1,23 @@
+﻿- type: entity
+  parent: Syringe
+  id: CMSyringe
+  suffix: RMC14
+  components:
+  - type: SolutionContainerVisuals
+    maxFillLevels: 3
+    fillBaseName: syringe
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/syringe.rsi
+    layers:
+    - state: syringe
+      map: [ "enum.SolutionContainerLayers.Base" ]
+    - state: syringe1
+      map: [ "enum.SolutionContainerLayers.Fill" ]
+      visible: false
+  - type: Icon
+    sprite: _RMC14/Objects/Medical/syringe.rsi
+    state: "syringe"
+  - type: Item
+    storedRotation: 90
+    size: Tiny
+    sprite: _RMC14/Objects/Medical/syringe.rsi

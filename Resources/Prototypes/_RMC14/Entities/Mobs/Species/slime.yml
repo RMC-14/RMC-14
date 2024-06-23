@@ -1,0 +1,27 @@
+- type: entity
+  save: false
+  parent: CMBaseMobSpeciesOrganic
+  id: CMMobSlimePerson
+  name: Urist C.M McSlime
+  suffix: RMC14
+  components:
+  - type: HumanoidAppearance
+    species: SlimePerson
+  - type: Icon
+    sprite: Mobs/Species/Slime/parts.rsi
+    state: full
+  - type: Speech
+    speechVerb: Slime
+    speechSounds: Slime
+  - type: TypingIndicator
+    proto: slime
+  - type: Vocal
+    sounds:
+      Male: MaleSlime
+      Female: FemaleSlime
+      Unsexed: MaleSlime
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#2cf274"

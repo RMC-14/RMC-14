@@ -1,0 +1,216 @@
+﻿- type: entity
+  abstract: true
+  parent: ChemicalMedipen
+  id: CMAutoInjector
+  name: autoinjector
+  description: An autoinjector.
+  noSpawn: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/auto_injectors.rsi
+    layers:
+    - state: autoinjector
+    - state: autoinjector1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Medical/auto_injectors.rsi
+  - type: Hypospray
+    solutionName: pen
+    injectSound: /Audio/_RMC14/Medical/hypospray.ogg
+    transferAmount: 15
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 45
+  - type: SolutionContainerVisuals
+    maxFillLevels: 3
+    fillBaseName: autoinjector
+    emptySpriteName: autoinjector
+    changeColor: true
+  - type: CMRefillableSolution
+    solution: pen
+    reagents: {}
+  - type: Tag
+    tags:
+    - CMAutoInjector
+  - type: MedicallyUnskilledDoAfter
+  - type: UseDelay
+    delay: 0.333
+
+- type: entity
+  parent: CMAutoInjector
+  id: CMEmergencyAutoInjector
+  name: emergency autoinjector (CAUTION)
+  description: An autoinjector loaded with a special cocktail of chemicals, to be used in life-threatening situations. Doesn't require any training to use.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/emergency_auto_injector.rsi
+    layers:
+    - state: autoinjector
+    - state: autoinjector1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: Item
+    sprite: null
+  - type: Hypospray
+    transferAmount: 58 # TODO RMC14 77
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 58 # TODO RMC14 77
+        reagents:
+        - ReagentId: CMBicaridine
+          Quantity: 29
+        - ReagentId: CMKelotane
+          Quantity: 29
+#        - ReagentId: CMOxycodone # TODO RMC14 oxycodone
+#          Quantity: 19
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    changeColor: false
+  - type: MedicallyUnskilledDoAfter
+    min: 0
+    doAfter: 0
+
+- type: entity
+  parent: CMAutoInjector
+  id: CMTricordrazineAutoInjector
+  name: tricordrazine autoinjector
+  description: An autoinjector loaded with 3 uses of Tricordrazine, a weak general use medicine for treating damage.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 45
+        reagents:
+        - ReagentId: CMTricordrazine
+          Quantity: 45
+  - type: CMRefillableSolution
+    reagents:
+      CMTricordrazine: 45
+
+- type: entity
+  parent: CMTricordrazineAutoInjector
+  id: CMTricordrazineAutoInjectorNoSkill
+  name: first-aid autoinjector
+  description: An autoinjector loaded with a small dose of medicine for marines to treat themselves with.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/auto_injectors.rsi
+    layers:
+    - state: tricord
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: MedicallyUnskilledDoAfter
+    min: 0
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 15
+        reagents:
+        - ReagentId: CMTricordrazine
+          Quantity: 15
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    emptySpriteName: tricord0
+    fillBaseName: tricord
+    changeColor: false
+  - type: CMRefillableSolution
+    reagents:
+      CMTricordrazine: 15
+
+- type: entity
+  parent: CMAutoInjector
+  id: CMKelotaneAutoInjector
+  name: kelotane autoinjector
+  description: An autoinjector loaded with 3 uses of Kelotane, a common burn medicine.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 45
+        reagents:
+        - ReagentId: CMKelotane
+          Quantity: 45
+  - type: CMRefillableSolution
+    reagents:
+      CMKelotane: 45
+
+- type: entity
+  parent: CMAutoInjector
+  id: CMDexalinPlusAutoInjector
+  name: dexalin plus autoinjector
+  description: An autoinjector loaded with 3 uses of Dexalin+, designed to immediately oxygenate the entire body.
+  components:
+  - type: Hypospray
+    transferAmount: 1
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 3
+        reagents:
+        - ReagentId: CMDexalinPlus
+          Quantity: 3
+  - type: CMRefillableSolution
+    reagents:
+      CMDexalinPlus: 3
+
+# TODO RMC14 tramadol
+
+- type: entity
+  parent: CMAutoInjector
+  id: CMBicaridineAutoInjector
+  name: bicaridine autoinjector
+  description: An autoinjector loaded with 3 uses of Bicaridine, a common brute and circulatory damage medicine.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 45
+        reagents:
+        - ReagentId: CMBicaridine
+          Quantity: 45
+  - type: CMRefillableSolution
+    reagents:
+      CMBicaridine: 45
+
+- type: entity
+  parent: CMAutoInjector
+  id: CMInaprovalineAutoInjector
+  name: inaprovaline autoinjector
+  description: An autoinjector loaded with 3 uses of Inaprovaline, an emergency stabilization medicine for patients in critical condition.
+  components:
+  - type: Hypospray
+    transferAmount: 30
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 90
+        reagents:
+        - ReagentId: CMInaprovaline
+          Quantity: 90
+  - type: CMRefillableSolution
+    reagents:
+      CMInaprovaline: 90
+
+# TODO RMC14 oxycodone
+
+- type: entity
+  parent: CMAutoInjector
+  id: CMEpinephrineAutoInjector
+  name: epinephrine autoinjector
+  description: An autoinjector loaded with 3 uses of Epinephrine, better known as Adrenaline, a nerve stimulant useful in restarting the heart.
+  components:
+  - type: Hypospray
+    transferAmount: 5.25
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 15.75
+        reagents:
+        - ReagentId: CMEpinephrine
+          Quantity: 15.75
+  - type: CMRefillableSolution
+    reagents:
+      CMEpinephrine: 15.75

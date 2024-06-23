@@ -1,7 +1,0 @@
-- type: vendingMachineInventory
-  id: CMVendorWalkman
-  startingInventory:
-    #todo cm14 Walkman and music
-    CMPaper: 15
-    d20Dice: 10
-    CMPen: 10

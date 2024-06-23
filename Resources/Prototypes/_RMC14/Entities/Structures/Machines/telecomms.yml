@@ -1,0 +1,27 @@
+- type: entity
+  parent: TelecomServer
+  id: CMTelecomServer
+  name: telecommunication server
+  description: When powered and filled with encryption keys it allows radio headset communication.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/telecomms.rsi
+    snapCardinals: true
+    layers:
+    - state: comm_server_off
+    - state: comm_server
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: comm_server_o
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+
+- type: entity
+  parent: CMTelecomServer
+  id: CMTelecomServerFilled
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyMasterShip
+      - CMEncryptionKeyMasterSquad

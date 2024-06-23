@@ -1,0 +1,14 @@
+﻿- type: tile
+  parent: CMTileBase
+  id: CMFloorTestBase
+  name: tiles-cm-test
+
+- type: tile
+  parent: CMFloorTestBase
+  id: CMFloorTest0
+  sprite: /Textures/_RMC14/Tiles/almayer/test_floor4.png
+
+- type: tile
+  parent: CMFloorTestBase
+  id: CMFloorTest1
+  sprite: /Textures/_RMC14/Tiles/almayer/test_floor5.png

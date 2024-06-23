@@ -1,0 +1,55 @@
+- type: entity
+  id: CMCrateClothingLargePouches
+  parent: CMCrateWeldable
+  name: large pouches crate (2x Pistol, Magazine, General)
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMPouchGeneralLarge
+        amount: 2
+      - id: CMPouchMagazineLarge
+        amount: 2
+      - id: CMPouchMagazinePistolLarge
+        amount: 2
+
+- type: entity
+  id: CMCrateClothingMedicalPouches
+  parent: CMCrateWeldable
+  name: medical pouches crate (1x firstaid, medical, syringe, medkit)
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMPouchFirstAid
+        amount: 1
+      - id: CMPouchMedical
+        amount: 1
+      - id: CMPouchAutoinjector
+        amount: 1
+      - id: CMPouchSyringe
+        amount: 1
+      - id: CMPouchMedkit
+        amount: 1
+
+- type: entity
+  id: CMCrateClothingWebbing
+  parent: CMCrateWeldable
+  name: webbing crate (x4)
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMWebbing # TODO RMC14 this needs both webbing types
+        amount: 4
+
+- type: entity
+  id: CMCrateClothingOfficerOutfit
+  parent: CMCrateWeldable
+  name: officer outfit crate
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMJumpsuitQM
+        amount: 1
+      - id: CMJumpsuitChiefEngineer
+        amount: 1
+      - id: CMJumpsuitBO
+        amount: 3 # executive officer and staff officer have the same uniform

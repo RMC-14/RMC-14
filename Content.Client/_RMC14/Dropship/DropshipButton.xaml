@@ -1,0 +1,9 @@
+﻿<cc:DropshipButton
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client._RMC14.Dropship"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
+    <PanelContainer.PanelOverride>
+        <graphics:StyleBoxFlat />
+    </PanelContainer.PanelOverride>
+    <cc:DropshipInnerButton Name="Button" Access="Public" StyleClasses="OpenBoth" />
+</cc:DropshipButton>
