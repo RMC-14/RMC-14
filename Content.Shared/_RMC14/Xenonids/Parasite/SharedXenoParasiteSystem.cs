@@ -102,7 +102,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
     {
         var coordinates = _transform.GetMoverCoordinates(parasite);
         if (_transform.InRange(coordinates, args.Leaping.Origin, parasite.Comp.InfectRange))
-            Hug(parasite, args.Hit, false);
+            Infect(parasite, args.Hit, false);
     }
 
     private void OnParasiteAfterInteract(Entity<XenoParasiteComponent> ent, ref AfterInteractEvent args)
@@ -131,7 +131,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         if (args.Cancelled || args.Handled || args.Target == null)
             return;
 
-        if (Hug(ent, args.Target.Value))
+        if (Infect(ent, args.Target.Value))
             args.Handled = true;
     }
 
@@ -248,7 +248,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             HasComp<VictimInfectedComponent>(victim))
         {
             if (popup)
-                _popup.PopupClient(Loc.GetString("cm-xeno-failed-cant-facehug", ("target", victim)), victim, user, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("cm-xeno-failed-cant-infect", ("target", victim)), victim, user, PopupType.MediumCaution);
 
             return false;
         }
@@ -274,7 +274,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         return true;
     }
 
-    public bool Hug(Entity<XenoParasiteComponent> parasite, EntityUid victim, bool popup = true, bool force = false)
+    public bool Infect(Entity<XenoParasiteComponent> parasite, EntityUid victim, bool popup = true, bool force = false)
     {
         if (!CanInfectPopup(parasite, victim, parasite, popup, force))
             return false;
@@ -293,14 +293,14 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
             if (any && _net.IsServer)
             {
-                _popup.PopupEntity(Loc.GetString("cm-xeno-facehug-success", ("target", victim)), victim);
+                _popup.PopupEntity(Loc.GetString("cm-xeno-infect-success", ("target", victim)), victim);
             }
         }
 
         if (_net.IsServer &&
-            TryComp(victim, out InfectableComponent? huggable) &&
+            TryComp(victim, out InfectableComponent? infectable) &&
             TryComp(victim, out HumanoidAppearanceComponent? appearance) &&
-            huggable.Sound.TryGetValue(appearance.Sex, out var sound))
+            infectable.Sound.TryGetValue(appearance.Sex, out var sound))
         {
             var filter = Filter.Pvs(victim);
             _audio.PlayEntity(sound, filter, victim, true);
@@ -365,7 +365,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
             if (infected.BurstAt > time)
             {
-                // TODO CM14 make this less effective against late-stage infections, also make this support faster incubation
+                // TODO RMC14 make this less effective against late-stage infections, also make this support faster incubation
                 if (infected.IncubationMultiplier < 1)
                     infected.BurstAt += TimeSpan.FromSeconds(1 - infected.IncubationMultiplier) * frameTime;
 
