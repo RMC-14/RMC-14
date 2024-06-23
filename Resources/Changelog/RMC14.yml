@@ -1397,5 +1397,12 @@
   id: 168
   time: '2024-06-23T05:13:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2557
+- author: blueDev2
+  changes:
+  - message: Health scanner works through stasis bags
+    type: Tweak
+  id: 169
+  time: '2024-06-23T05:25:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2550
 Name: RMC14
 Order: -1
