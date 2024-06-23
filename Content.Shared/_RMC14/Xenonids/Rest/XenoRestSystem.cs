@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Xenonids.Crest;
 using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared._RMC14.Xenonids.Headbutt;
+using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Sweep;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
@@ -27,6 +28,7 @@ public sealed class XenoRestSystem : EntitySystem
         SubscribeLocalEvent<XenoRestingComponent, XenoFortifyAttemptEvent>(OnXenoRestingFortifyAttempt);
         SubscribeLocalEvent<XenoRestingComponent, XenoTailSweepAttemptEvent>(OnXenoRestingTailSweepAttempt);
         SubscribeLocalEvent<XenoRestingComponent, XenoToggleCrestAttemptEvent>(OnXenoRestingToggleCrestAttempt);
+        SubscribeLocalEvent<XenoRestingComponent, XenoLeapAttemptEvent>(OnXenoRestingLeapAttempt);
     }
 
     private void OnXenoRestingCanMove(Entity<XenoRestingComponent> xeno, ref UpdateCanMoveEvent args)
@@ -81,6 +83,12 @@ public sealed class XenoRestSystem : EntitySystem
     private void OnXenoRestingToggleCrestAttempt(Entity<XenoRestingComponent> xeno, ref XenoToggleCrestAttemptEvent args)
     {
         _popup.PopupClient(Loc.GetString("cm-xeno-rest-cant-toggle-crest"), xeno, xeno);
+        args.Cancelled = true;
+    }
+
+    private void OnXenoRestingLeapAttempt(Entity<XenoRestingComponent> xeno, ref XenoLeapAttemptEvent args)
+    {
+        _popup.PopupClient(Loc.GetString("cm-xeno-rest-cant-leap"), xeno, xeno);
         args.Cancelled = true;
     }
 }

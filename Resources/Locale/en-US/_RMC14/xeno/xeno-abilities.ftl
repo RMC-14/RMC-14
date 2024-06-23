@@ -58,6 +58,7 @@ cm-xeno-rest-cant-headbutt = You can't headbutt while resting!
 cm-xeno-rest-cant-fortify = You can't fortify while resting!
 cm-xeno-rest-cant-tail-sweep = You can't tail sweep while resting!
 cm-xeno-rest-cant-toggle-crest = You can't lower your crest while resting!
+cm-xeno-rest-cant-leap = You can't leap while resting!
 
 # Toggle Crest Defense
 cm-xeno-toggle-crest-cant-fortify = You can't fortify while your crest is lowered!
