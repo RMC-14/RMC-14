@@ -1,0 +1,70 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelShivaYellowBase
+  name: tiles-cm-default-yellow
+
+- type: tile
+  parent: CMFloorSteelShivaYellowBase
+  id: CMFloorSteelShivaYellow0
+  sprite: /Textures/_RMC14/Tiles/shiva/yellow_0.png
+
+- type: tile
+  parent: CMFloorSteelShivaYellowBase
+  id: CMFloorSteelShivaYellow1
+  sprite: /Textures/_RMC14/Tiles/shiva/yellow_1.png
+
+- type: tile
+  parent: CMFloorSteelShivaYellowBase
+  id: CMFloorSteelShivaYellow2
+  sprite: /Textures/_RMC14/Tiles/shiva/yellow_2.png
+
+- type: tile
+  parent: CMFloorSteelShivaYellowBase
+  id: CMFloorSteelShivaYellow3
+  sprite: /Textures/_RMC14/Tiles/shiva/yellow_3.png
+
+- type: tile
+  parent: CMFloorSteelShivaYellowBase
+  id: CMFloorSteelShivaYellow4
+  sprite: /Textures/_RMC14/Tiles/shiva/yellow_4.png
+
+- type: tile
+  parent: CMFloorSteelShivaYellowBase
+  id: CMFloorSteelShivaYellow5
+  sprite: /Textures/_RMC14/Tiles/shiva/yellow_5.png
+
+- type: tile
+  parent: CMFloorSteelShivaYellowBase
+  id: CMFloorSteelShivaYellow6
+  sprite: /Textures/_RMC14/Tiles/shiva/yellow_6.png
+
+- type: tile
+  parent: CMFloorSteelShivaYellowBase
+  id: CMFloorSteelShivaYellow7
+  sprite: /Textures/_RMC14/Tiles/shiva/yellow_7.png
+
+- type: tile
+  parent: CMFloorSteelShivaYellowBase
+  id: CMFloorSteelShivaYellowCorners0
+  sprite: /Textures/_RMC14/Tiles/shiva/yellowcorners_0.png
+
+- type: tile
+  parent: CMFloorSteelShivaYellowBase
+  id: CMFloorSteelShivaYellowCorners1
+  sprite: /Textures/_RMC14/Tiles/shiva/yellowcorners_1.png
+
+- type: tile
+  parent: CMFloorSteelShivaYellowBase
+  id: CMFloorSteelShivaYellowCorners2
+  sprite: /Textures/_RMC14/Tiles/shiva/yellowcorners_2.png
+
+- type: tile
+  parent: CMFloorSteelShivaYellowBase
+  id: CMFloorSteelShivaYellowCorners3
+  sprite: /Textures/_RMC14/Tiles/shiva/yellowcorners_3.png
+
+- type: tile
+  parent: CMFloorSteelShivaYellowBase
+  id: CMFloorSteelShivaYellowFull3
+  sprite: /Textures/_RMC14/Tiles/shiva/yellowfull_3.png

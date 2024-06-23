@@ -1,0 +1,19 @@
+﻿- type: entity
+  id: CMOverheadPipe
+  name: overhead pipe segment
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_pipes.rsi
+    state: intact-scrubbers
+    drawdepth: Overdoors
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_pipes.rsi
+    state: intact-scrubbers
+  - type: Anchorable
+  - type: Clickable

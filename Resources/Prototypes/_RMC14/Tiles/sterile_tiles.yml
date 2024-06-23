@@ -1,0 +1,78 @@
+﻿# TODO RMC14 make these decals (that look correct)
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelSterileGreenBase
+  name: tiles-cm-green-sterile
+  itemDrop: CMTileItemSteel # TODO RMC14
+
+- type: tile
+  parent: CMFloorSteelSterileGreenBase
+  id: CMFloorSteelSterileGreen
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green.png
+
+- type: tile
+  parent: CMFloorSteelSterileGreenBase
+  id: CMFloorSteelSterileDark
+  name: tiles-cm-sterile-dark
+  sprite: /Textures/_RMC14/Tiles/almayer/dark_sterile.png
+
+- type: tile
+  parent: CMFloorSteelSterileGreenBase
+  id: CMFloorSteelSterileGreenCorner0
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_corner_0.png
+
+- type: tile
+  parent: CMFloorSteelSterileGreenBase
+  id: CMFloorSteelSterileGreenCorner1
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_corner_1.png
+
+- type: tile
+  parent: CMFloorSteelSterileGreenBase
+  id: CMFloorSteelSterileGreenCorner2
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_corner_2.png
+
+- type: tile
+  parent: CMFloorSteelSterileGreenBase
+  id: CMFloorSteelSterileGreenCorner3
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_corner_3.png
+
+- type: tile
+  parent: CMFloorSteelSterileGreenBase
+  id: CMFloorSteelSterileGreenSide0
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_side_0.png
+
+- type: tile
+  parent: CMFloorSteelSterileGreenBase
+  id: CMFloorSteelSterileGreenSide1
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_side_1.png
+
+- type: tile
+  parent: CMFloorSteelSterileGreenBase
+  id: CMFloorSteelSterileGreenSide2
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_side_2.png
+
+- type: tile
+  parent: CMFloorSteelSterileGreenBase
+  id: CMFloorSteelSterileGreenSide3
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_side_3.png
+
+- type: tile
+  parent: CMFloorSteelSterileGreenBase
+  id: CMFloorSteelSterileGreenSide4
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_side_4.png
+
+- type: tile
+  parent: CMFloorSteelSterileGreenBase
+  id: CMFloorSteelSterileGreenSide5
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_side_5.png
+
+- type: tile
+  parent: CMFloorSteelSterileGreenBase
+  id: CMFloorSteelSterileGreenSide6
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_side_6.png
+
+- type: tile
+  parent: CMFloorSteelSterileGreenBase
+  id: CMFloorSteelSterileGreenSide7
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_side_7.png

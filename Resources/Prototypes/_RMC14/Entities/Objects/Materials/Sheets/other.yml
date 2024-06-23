@@ -1,0 +1,41 @@
+# Phoron
+- type: entity
+  parent: SheetOtherBase
+  id: CMSheetPhoron
+  name: phoron
+  suffix: "Full"
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Materials/Sheets/phoron.rsi
+    state: phoron
+  - type: Item
+    size: Normal
+    sprite: _RMC14/Objects/Materials/Sheets/phoron.rsi
+    heldPrefix: phoron
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      CMPhoron: 100
+  - type: Stack
+    stackType: CMPhoron
+    count: 50
+  - type: Appearance
+  - type: Tag
+    tags:
+    - Sheet
+
+- type: entity
+  parent: CMSheetPhoron
+  id: CMSheetPhoron25
+  suffix: "25"
+  components:
+  - type: Stack
+    count: 25
+
+- type: entity
+  parent: CMSheetPhoron
+  id: CMSheetPhoron1
+  suffix: "1"
+  components:
+  - type: Stack
+    count: 1

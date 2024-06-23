@@ -1,0 +1,24 @@
+﻿<controls:CMAutomatedVendorWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Vendors"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    MinSize="500 700">
+    <BoxContainer Orientation="Vertical">
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="Search" Align="Left" />
+            <LineEdit Name="Search" Access="Public" HorizontalExpand="True" Margin="10 0 0 0" />
+            <Control HorizontalExpand="True" SizeFlagsStretchRatio="0.25" />
+            <Label Name="PointsLabel" Access="Public" HorizontalExpand="True" Align="Right" />
+        </BoxContainer>
+        <cc:HSeparator Color="#4972A1" />
+        <BoxContainer Name="ReagentsContainer" Access="Public" Orientation="Horizontal">
+            <Label Text="Reagents" Margin="0 0 5 0" />
+            <ProgressBar Name="ReagentsBar" Access="Public" HorizontalExpand="True">
+                <Label Name="ReagentsLabel" Access="Public" HorizontalAlignment="Right" />
+            </ProgressBar>
+        </BoxContainer>
+        <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
+            <BoxContainer Orientation="Vertical" Name="Sections" Access="Public" />
+        </ScrollContainer>
+    </BoxContainer>
+</controls:CMAutomatedVendorWindow>

@@ -1,0 +1,13 @@
+- type: stack
+  id: CMRodMetal
+  name: rods
+  icon: { sprite: /Textures/_RMC14/Objects/Materials/parts.rsi, state: rods }
+  spawn: CMRodMetal1
+  maxCount: 60
+
+- type: stack
+  id: CMRodPlasteel
+  name: plasteel rods
+  icon: { sprite: /Textures/_RMC14/Objects/Materials/parts.rsi, state: rods_plasteel }
+  spawn: CMRodPlasteel1
+  maxCount: 60
