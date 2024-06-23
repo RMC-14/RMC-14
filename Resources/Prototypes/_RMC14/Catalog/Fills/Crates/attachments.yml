@@ -149,7 +149,7 @@
     contents:
       - id: CMAttachmentM44MagnumSharpshooterStock
         amount: 3
-      - id: CMAttachmentM52CSolidStock
+      - id: CMAttachmentM54CSolidStock
         amount: 3
       - id: CMAttachmentM39Stock
         amount: 3
@@ -175,7 +175,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentM52CSolidStock
+      - id: CMAttachmentM54CSolidStock
         amount: 4
 
 - type: entity

@@ -26,14 +26,19 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
-    - ActionXenoHide
-    #    - ActionXenoPunch
-    #    - ActionXenoLunge
-    #    - ActionXenoFling
+    - ActionXenoPunch
+    - ActionXenoLunge
+    - ActionXenoFling
     tier: 2
     hudOffset: 0,0.25
     unlockAt: 540 # 9 minutes
   - type: XenoDevour
+  - type: XenoPunch
+    damage:
+      types:
+        Blunt: 25
+  - type: XenoFling
+  - type: XenoLunge
   - type: XenoPlasma
     plasma: 0
     maxPlasma: 0
