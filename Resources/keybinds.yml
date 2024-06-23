@@ -543,7 +543,7 @@ binds:
 
 
 
-# CM14
+# RMC14
 - function: MappingUnselect
   type: State
   key: MouseRight

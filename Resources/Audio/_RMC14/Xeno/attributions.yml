@@ -1,0 +1,169 @@
+- files: ["alien_chestburst.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/voice/alien_chestburst.ogg"
+
+- files: ["alien_chestburst2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/voice/alien_chestburst2.ogg"
+
+- files: ["alien_claw_block.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/ef6587e938058c360d4a685015a4f0ba3aa5473a/sound/weapons/alien_claw_block.ogg"
+
+- files: ["alien_death.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/voice/alien_death.ogg"
+
+- files: ["alien_death2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/voice/alien_death2.ogg"
+
+- files: ["alien_distantroar_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/voice/alien_distantroar_3.ogg"
+
+- files: ["alien_drool1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/8cad63ffa63108258510a649a07a045274771fb1/sound/voice/alien_drool1.ogg"
+
+- files: ["alien_drool2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/8cad63ffa63108258510a649a07a045274771fb1/sound/voice/alien_drool2.ogg"
+
+- files: ["alien_parasite_dies.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/voice/alien_facehugger_dies.ogg"
+
+- files: ["alien_footstep_charge1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/effects/alien_footstep_charge1.ogg"
+
+- files: ["alien_footstep_charge2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/effects/alien_footstep_charge2.ogg"
+
+- files: ["alien_footstep_charge3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/effects/alien_footstep_charge3.ogg"
+
+- files: ["alien_footstep_large1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/effects/alien_footstep_large1.ogg"
+
+- files: ["alien_footstep_large2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/effects/alien_footstep_large2.ogg"
+
+- files: ["alien_footstep_large3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/effects/alien_footstep_large3.ogg"
+
+- files: ["alien_pounce.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/voice/alien_pounce.ogg"
+
+- files: ["alien_queen_command.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/misc/alien_queen_command.ogg"
+
+- files: ["alien_queen_command2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/misc/alien_queen_command2.ogg"
+
+- files: ["alien_queen_command3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/misc/alien_queen_command3.ogg"
+
+- files: ["alien_queen_died.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/misc/alien_queen_died.ogg"
+
+- files: ["alien_queen_screech.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/misc/alien_queen_screech.ogg"
+
+- files: ["alien_resin_break1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/effects/alien_resin_break1.ogg"
+
+- files: ["alien_resin_break2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/effects/alien_resin_break2.ogg"
+
+- files: ["alien_resin_break3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/effects/alien_resin_break3.ogg"
+
+- files: ["alien_resin_move1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/effects/alien_resin_move1.ogg"
+
+- files: ["alien_resin_move2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/effects/alien_resin_move2.ogg"
+
+- files: ["alien_spitacid.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/voice/alien_spitacid.ogg"
+
+- files: ["alien_spitacid2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/voice/alien_spitacid2.ogg"
+
+- files: ["alien_tail_swipe1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/0991f38801d9fc5c7b7e073cb5788ef42822ad08/sound/effects/alien_tail_swipe1.ogg"
+
+- files: ["alien_tail_swipe2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/0991f38801d9fc5c7b7e073cb5788ef42822ad08/sound/effects/alien_tail_swipe2.ogg"
+
+- files: ["alien_tail_swipe3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/0991f38801d9fc5c7b7e073cb5788ef42822ad08/sound/effects/alien_tail_swipe3.ogg"
+
+- files: ["alien_resin_move1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/485afd96d16f4df22dbbb46f214df931d24a2eb8/sound/effects/alien_resin_move1.ogg"
+
+- files: ["alien_resin_move2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/485afd96d16f4df22dbbb46f214df931d24a2eb8/sound/effects/alien_resin_move2.ogg"
+
+- files: ["xeno_evolveready.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/19c2300177ed8da4d25d111aa1a7f8d356552a21/sound/effects/xeno_evolveready.ogg"

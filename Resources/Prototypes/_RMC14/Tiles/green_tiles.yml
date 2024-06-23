@@ -1,0 +1,71 @@
+﻿# TODO RMC14 make these decals (that look correct)
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelGreenBase
+  name: tiles-cm-green
+
+- type: tile
+  parent: CMFloorSteelGreenBase
+  id: CMFloorSteelGreen0
+  sprite: /Textures/_RMC14/Tiles/almayer/green_0.png
+
+- type: tile
+  parent: CMFloorSteelGreenBase
+  id: CMFloorSteelGreen1
+  sprite: /Textures/_RMC14/Tiles/almayer/green_1.png
+
+- type: tile
+  parent: CMFloorSteelGreenBase
+  id: CMFloorSteelGreen2
+  sprite: /Textures/_RMC14/Tiles/almayer/green_2.png
+
+- type: tile
+  parent: CMFloorSteelGreenBase
+  id: CMFloorSteelGreen3
+  sprite: /Textures/_RMC14/Tiles/almayer/green_3.png
+
+- type: tile
+  parent: CMFloorSteelGreenBase
+  id: CMFloorSteelGreen4
+  sprite: /Textures/_RMC14/Tiles/almayer/green_4.png
+
+- type: tile
+  parent: CMFloorSteelGreenBase
+  id: CMFloorSteelGreen5
+  sprite: /Textures/_RMC14/Tiles/almayer/green_5.png
+
+- type: tile
+  parent: CMFloorSteelGreenBase
+  id: CMFloorSteelGreen6
+  sprite: /Textures/_RMC14/Tiles/almayer/green_6.png
+
+- type: tile
+  parent: CMFloorSteelGreenBase
+  id: CMFloorSteelGreen7
+  sprite: /Textures/_RMC14/Tiles/almayer/green_7.png
+
+- type: tile
+  parent: CMFloorSteelGreenBase
+  id: CMFloorSteelGreenCorner0
+  sprite: /Textures/_RMC14/Tiles/almayer/greencorner_0.png
+
+- type: tile
+  parent: CMFloorSteelGreenBase
+  id: CMFloorSteelGreenCorner1
+  sprite: /Textures/_RMC14/Tiles/almayer/greencorner_1.png
+
+- type: tile
+  parent: CMFloorSteelGreenBase
+  id: CMFloorSteelGreenCorner2
+  sprite: /Textures/_RMC14/Tiles/almayer/greencorner_2.png
+
+- type: tile
+  parent: CMFloorSteelGreenBase
+  id: CMFloorSteelGreenCorner3
+  sprite: /Textures/_RMC14/Tiles/almayer/greencorner_3.png
+
+- type: tile
+  parent: CMFloorSteelGreenBase
+  id: CMFloorSteelGreenFull
+  sprite: /Textures/_RMC14/Tiles/almayer/greenfull.png

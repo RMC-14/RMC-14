@@ -1,0 +1,103 @@
+- type: entity
+  parent: BaseItem
+  id: CMBedsheetBase
+  name: bedsheet
+  description: A surprisingly soft linen bedsheet.
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Bed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/bedsheets.rsi
+    noRot: true
+  - type: Item
+    size: Small
+  - type: StaticPrice
+    price: 100
+
+- type: entity
+  parent: CMBedsheetBase
+  id: CMBedsheetBlue
+  components:
+  - type: Sprite
+    state: sheetblue
+
+- type: entity
+  parent: CMBedsheetBase
+  id: CMBedsheetGreen
+  components:
+  - type: Sprite
+    state: sheetgreen
+
+- type: entity
+  parent: CMBedsheetBase
+  id: CMBedsheetOrange
+  components:
+  - type: Sprite
+    state: sheetorange
+
+- type: entity
+  parent: CMBedsheetBase
+  id: CMBedsheetPurple
+  components:
+  - type: Sprite
+    state: sheetpurple
+
+- type: entity
+  parent: CMBedsheetBase
+  id: CMBedsheetWhite
+  components:
+  - type: Sprite
+    state: sheetwhite
+
+- type: entity
+  parent: CMBedsheetBase
+  id: CMBedsheetRed
+  components:
+  - type: Sprite
+    state: sheetred
+
+- type: entity
+  parent: CMBedsheetBase
+  id: CMBedsheetYellow
+  components:
+  - type: Sprite
+    state: sheetyellow
+
+- type: entity
+  parent: CMBedsheetBase
+  id: CMBedsheetGrayOrange
+  components:
+  - type: Sprite
+    state: sheetgrayorange
+
+- type: entity
+  parent: CMBedsheetBase
+  id: CMBedsheetMedical
+  components:
+  - type: Sprite
+    state: sheetmedical
+
+- type: entity
+  parent: CMBedsheetBase
+  id: CMBedsheetOrangeFull
+  components:
+  - type: Sprite
+    state: sheetorangefull
+
+- type: entity
+  parent: CMBedsheetBase
+  id: CMBedsheetGray
+  components:
+  - type: Sprite
+    state: sheetgray
+
+- type: entity
+  parent: CMBedsheetBase
+  id: CMBedsheetBrown
+  components:
+  - type: Sprite
+    state: sheetbrown
+

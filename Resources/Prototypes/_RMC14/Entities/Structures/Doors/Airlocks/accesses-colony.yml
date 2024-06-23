@@ -1,0 +1,116 @@
+﻿# /obj/structure/machinery/door/airlock/secure/colony
+- type: entity
+  parent: CMAirlockSecure
+  id: CMAirlockSecureLockedColony
+  suffix: Colony, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessColonyPublic"]]
+
+# /obj/structure/machinery/door/airlock/command/colony
+- type: entity
+  parent: CMAirlockCommand
+  id: CMAirlockCommandLockedColony
+  suffix: Command, Colony, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessColonyBrig"], ["CMAccessColonyCommand"]] # TODO RMC14 add WeYa Colonial access
+
+# /obj/structure/machinery/door/airlock/security/colony
+- type: entity
+  parent: CMAirlockSecurity
+  id: CMAirlockSecurityLockedColony
+  suffix: Security, Colony, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessColonyBrig"], ["CMAccessColonyCommand"]] # TODO RMC14 add WeYa Security access
+
+# /obj/structure/machinery/door/airlock/engineering/colony
+- type: entity
+  parent: CMAirlockEngineer
+  id: CMAirlockEngineerLockedColony
+  suffix: Engineering, Colony, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessColonyCommand"], ["CMAccessColonyEngineering"], ["CMAccessColonyLogistics"]] # TODO RMC14 WeYa Colonial
+
+# /obj/structure/machinery/door/airlock/requisitions/colony
+- type: entity
+  parent: CMAirlockRequisitionsLocked
+  id: CMAirlockRequisitionsLockedColony
+  suffix: Colony, Requisitions, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessColonyCommand"], ["CMAccessColonyLogistics"]]
+
+# /obj/structure/machinery/door/airlock/medical/colony
+- type: entity
+  parent: CMAirlockMedical
+  id: CMAirlockMedicalLockedColony
+  suffix: Medical, Colony, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessColonyMedbay"], ["CMAccessColonyCommand"]] # TODO RMC14 Research and WeYa Colonial
+
+# /obj/structure/machinery/door/airlock/research/colony
+- type: entity
+  parent: CMAirlockResearchLocked
+  id: CMAirlockResearchLockedColony
+  suffix: Colony, Research, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessColonyCommand"]] # TODO RMC14 Research and WeYa Research
+
+# /obj/structure/machinery/door/airlock/maintenance/colony
+- type: entity
+  parent: CMAirlockMaint
+  id: CMAirlockMaintLockedColony
+  suffix: Maintenance, Colony, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessColonyPublic"], ["CMAccessColonyEngineering"]] # TODO RMC14 WeYa Colonial
+
+# /obj/structure/machinery/door/airlock/glass/colony
+- type: entity
+  parent: CMAirlockGlass
+  id: CMAirlockGlassLockedColony
+  suffix: Colony, Glass, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessColonyPublic"]]
+
+# /obj/structure/machinery/door/airlock/glass_engineering/colony
+- type: entity
+  parent: CMAirlockGlassEngineer
+  id: CMAirlockGlassEngineerLockedColony
+  suffix: Engineering, Colony, Glass, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessColonyCommand"], ["CMAccessColonyEngineering"], ["CMAccessColonyLogistics"]] # TODO RMC14 WeYa Colonial
+
+# /obj/structure/machinery/door/airlock/glass_security/colony
+- type: entity
+  parent: CMAirlockGlassSecurity
+  id: CMAirlockGlassSecurityLockedColony
+  suffix: Security, Colony, Glass, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessColonyBrig"], ["CMAccessColonyCommand"]] # TODO RMC14 add WeYa Security access
+
+# /obj/structure/machinery/door/airlock/glass_medical/colony
+- type: entity
+  parent: CMAirlockGlassMedical
+  id: CMAirlockGlassMedicalLockedColony
+  suffix: Medical, Colony, Glass, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessColonyMedbay"], ["CMAccessColonyCommand"]] # TODO RMC14 Research and WeYa Colonial
+
+# /obj/structure/machinery/door/airlock/glass_research/colony
+- type: entity
+  parent: CMAirlockGlassMedical
+  id: CMAirlockGlassResearchLockedColony
+  suffix: Research, Colony, Glass, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessColonyCommand"]] # TODO RMC14 Research and WeYa Research

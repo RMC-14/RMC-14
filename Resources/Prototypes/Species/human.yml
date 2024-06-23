@@ -2,7 +2,7 @@
   id: Human
   name: species-name-human
   roundStart: true
-  prototype: CMMobHuman # Load the cm14 human instead of ss14
+  prototype: CMMobHuman # Load the rmc14 human instead of ss14
   sprites: MobHumanSprites
   markingLimits: MobHumanMarkingLimits
   dollPrototype: MobHumanDummy

@@ -280,7 +280,7 @@ public sealed class MutationSystem : EntitySystem
 
     private void MutateSpecies(ref SeedData seed, int bits, int totalbits, float mult)
     {
-        // CM14 no mutating species in cm
+        // RMC14 no mutating species in cm
         return;
 
         float p = mult * bits / totalbits;

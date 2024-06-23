@@ -1,0 +1,95 @@
+﻿using Content.Shared.Roles;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+using Robust.Shared.Utility;
+
+namespace Content.Shared._RMC14.Roles;
+
+[Serializable, NetSerializable]
+public sealed partial class TotalDepartmentsTimeRequirement : JobRequirement
+{
+    /// <summary>
+    /// Which departments to add up to the required amount of time.
+    /// </summary>
+    [DataField(required: true)]
+    public EntProtoId Group;
+
+    /// <summary>
+    /// How long (in seconds) this requirement is.
+    /// </summary>
+    [DataField(required: true)]
+    public TimeSpan Time;
+
+    /// <summary>
+    /// If true, requirement will return false if playtime above the specified time.
+    /// </summary>
+    /// <value>
+    /// <c>False</c> by default.<br />
+    /// <c>True</c> for invert general requirement
+    /// </value>
+    [DataField]
+    public bool Inverted;
+
+    public bool TryRequirementsMet(JobRequirement requirement, IReadOnlyDictionary<string, TimeSpan> playTimes, out FormattedMessage? reason, IEntityManager entManager, IPrototypeManager prototypes)
+    {
+        reason = null;
+        var playtime = TimeSpan.Zero;
+        var trackers = new HashSet<string>();
+        if (!prototypes.Index(Group).TryGetComponent(out DepartmentGroupComponent? comp))
+        {
+            var sawmill = Logger.GetSawmill("job.requirements");
+            sawmill.Error($"No {nameof(DepartmentGroupComponent)} found on entity {Group}");
+            return true;
+        }
+
+        // Check all jobs' departments
+        foreach (var departmentId in comp.Departments)
+        {
+            var department = prototypes.Index(departmentId);
+            var jobs = department.Roles;
+
+            // Check all jobs' playtime
+            foreach (var other in jobs)
+            {
+                // The schema is stored on the Job role but we want to explode if the timer isn't found anyway.
+                var proto = prototypes.Index<JobPrototype>(other).PlayTimeTracker;
+                trackers.Add(proto);
+            }
+        }
+
+        foreach (var tracker in trackers)
+        {
+            playTimes.TryGetValue(tracker, out var otherTime);
+            playtime += otherTime;
+        }
+
+        var deptDiff = Time.TotalMinutes - playtime.TotalMinutes;
+
+        if (!Inverted)
+        {
+            if (deptDiff <= 0)
+                return true;
+
+            reason = FormattedMessage.FromMarkupOrThrow(Loc.GetString(
+                "role-timer-total-department-insufficient",
+                ("time", Math.Ceiling(deptDiff)),
+                ("roles", Loc.GetString(comp.Name)),
+                ("rolesColor", comp.Color.ToHex())));
+            return false;
+        }
+        else
+        {
+            if (deptDiff <= 0)
+            {
+                reason = FormattedMessage.FromMarkupOrThrow(Loc.GetString(
+                    "role-timer-total-department-too-high",
+                    ("time", -deptDiff),
+                    ("roles", Loc.GetString(comp.Name)),
+                    ("rolesColor", comp.Color.ToHex())));
+                return false;
+            }
+
+            return true;
+        }
+    }
+}

@@ -1,0 +1,130 @@
+- type: entity
+  name: flare
+  parent: BaseItem
+  id: CMFlare
+  description: A red Marine issued flare. There are instructions on the side, it reads 'pull cord, make light'.
+  components:
+  - type: Tag
+    tags:
+    - Flare
+  - type: ExpendableLight
+    spentName: expendable-light-spent-flare-name
+    spentDesc: expendable-light-spent-flare-desc
+    glowDuration: 600
+    fadeOutDuration: 30
+    iconStateSpent: flare_spent
+    turnOnBehaviourID: turn_on
+    fadeOutBehaviourID: fade_out
+    litSound:
+      path: /Audio/Items/Flare/flare_on.ogg
+    loopedSound: /Audio/Items/Flare/flare_burn.ogg
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/flares.rsi
+    layers:
+      - map: [ "enum.ExpendableLightVisualLayers.Base" ]
+        state: flare
+      - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
+        state: flare_flame
+        color: "#FFA7A7"
+        visible: false
+      - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
+        state: overlay
+  - type: Icon
+    sprite: _RMC14/Objects/Misc/flares.rsi
+    state: icon
+  - type: Item
+    size: Small
+    heldPrefix: unlit
+  - type: Appearance
+  - type: PointLight
+    enabled: false
+    color: "#FF5E5E"
+    radius: 1
+    energy: 5.0
+    netsync: false
+  - type: IgnitionSource
+    temperature: 1000
+  - type: LightBehaviour
+    behaviours:
+      - !type:FadeBehaviour # faster then base flares
+        id: turn_on
+        maxDuration: 5.0
+        startValue: 2.5
+        endValue: 7.0
+      - !type:FadeBehaviour # burns out slower
+        id: fade_out
+        maxDuration: 30.0
+        startValue: 7.0
+        endValue: 1.0
+
+- type: entity
+  abstract: true
+  parent: CMBoxMagazineBase
+  id: CMBoxPackFlareBase
+  name: box of M94 flare packs
+  description: A box of M94 marking flare packs, to brighten up your day.
+  components:
+  - type: Item
+    size: Huge
+  - type: CMItemSlots
+    count: 10
+    slot:
+      name: FlarePack
+      whitelist:
+        tags:
+        - CMFlarePack
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    layers:
+    - state: supply_crate
+    - state: magaz_flares
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: magaz_flares, visible: false }
+          Low: { state: magaz_flares_1, visible: true }
+          Medium: { state: magaz_flares_2, visible: true }
+          High: { state: magaz_flares_3, visible: true }
+          Full: { state: magaz_flares, visible: true }
+
+- type: entity
+  parent: CMBoxPackFlareBase
+  id: CMBoxPackFlare
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMPackFlare
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: CMPackFlareBase
+  name: M94 marking flare pack
+  description: A packet of eight M94 Marking Flares. Carried by Marine soldiers to light dark areas that cannot be reached with the usual TNR Shoulder Lamp.
+  components:
+  - type: Item
+    size: Normal
+  - type: Tag
+    tags:
+    - CMFlarePack
+  - type: CMItemSlots
+    count: 8
+    slot:
+      name: Flare
+      whitelist:
+        tags:
+        - Flare
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/boxes.rsi
+    layers:
+    - state: m94
+
+- type: entity
+  parent: CMPackFlareBase
+  id: CMPackFlare
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMFlare

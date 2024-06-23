@@ -1,0 +1,85 @@
+- type: entity
+  parent: BaseKnife
+  id: CMM5Bayonet
+  name: "M5 'Night Raider' bayonet"
+  description: The standard-issue bayonet of the Marines. You can slide this knife into your boots. # TODO RMC14 , or attach it to the end of a rifle.
+  components:
+  - type: Clothing
+    slots:
+    - mask
+    - pocket
+  - type: Tag
+    tags:
+    - Knife
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/m5_bayonet.rsi
+    state: icon
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    attackRate: 1
+    damage:
+      types:
+        Slash: 25
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 18
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Weapons/Melee/m5_bayonet.rsi
+  - type: DisarmMalus
+    malus: 0.225
+  - type: UsableWhileDevoured
+
+- type: entity
+  name: M11 throwing knife
+  parent: CMM5Bayonet
+  id: CMM11Knife
+  description: A military knife designed to be thrown at the enemy.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/m11_knife.rsi
+    state: icon
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 5
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 50
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Weapons/Melee/m11_knife.rsi
+  - type: Tag
+    tags:
+    - ThrowingKnife
+
+- type: Tag
+  id: ThrowingKnife
+
+- type: entity
+  parent: CMM5Bayonet
+  id: CMM2132Machete
+  name: M2132 machete
+  description: Latest issue of the Marine Machete.
+  components:
+  - type: Clothing
+    slots: [ belt ]
+  - type: Tag
+    tags:
+    - Machete
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/machete.rsi
+    state: icon
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 35
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 4
+  - type: Item
+    size: Large
+    sprite: _RMC14/Objects/Weapons/Melee/machete.rsi

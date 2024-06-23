@@ -1,6 +1,0 @@
-﻿- type: guideEntry
-  parent: CM
-  id: CMMedicine
-  name: guide-entry-medicine
-  text: "/ServerInfo/Guidebook/_CM14/Medical/Medicine.xml"
-  filterEnabled: True

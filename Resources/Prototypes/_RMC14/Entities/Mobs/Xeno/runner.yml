@@ -1,0 +1,77 @@
+﻿- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  - CMXenoFlammable
+  id: CMXenoRunner
+  name: Runner
+  description: A small red alien that looks like it could run fairly quickly...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Runner/runner.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      230: Critical
+      330: Dead
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 185
+        mask:
+        - Impassable
+        - HighImpassable
+        - LowImpassable
+        layer:
+        - MobLayer
+  - type: Xeno
+    role: CMXenoRunner
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoHide
+    - ActionXenoLeap # TODO RMC14 call this pounce, not leap
+    - ActionXenoBoneChips
+    - ActionXenoZoom
+    tier: 1
+    hudOffset: 0,0.63
+    unlockAt: 300 # 5 minutes
+  - type: XenoBoneChips
+  - type: XenoDevour
+  - type: XenoHide
+  - type: XenoLeap
+    delay: 0
+    knockdownTime: 2
+    leapSound: /Audio/_RMC14/Xeno/alien_pounce.ogg
+  - type: XenoPlasma
+    plasma: 0
+    maxPlasma: 0
+    plasmaRegenOnWeeds: 0
+  - type: CMArmor
+    explosionArmor: 10
+  - type: XenoEvolution
+    max: 300
+#    evolvesTo:
+#    - CMXenoLurker
+  - type: XenoZoom
+  - type: MeleeWeapon
+    attackRate: 1.4
+    damage:
+      groups:
+        Brute: 22.5
+  - type: Tackle
+    threshold: 5
+    stun: 8
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 5.55
+    baseSprintSpeed: 10

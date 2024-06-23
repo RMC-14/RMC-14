@@ -1,0 +1,35 @@
+﻿- type: entity
+  parent: BaseStructure
+  id: CMOperatingTable
+  name: operating table
+  description: Used for advanced medical procedures.
+  components:
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/operating_table.rsi
+    state: base
+    noRot: true
+  - type: Icon
+    sprite: _RMC14/Objects/Medical/Surgery/operating_table.rsi
+    state: base
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 100
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: InteractionOutline
+  - type: Strap
+    position: Down
+    rotation: -90
+  - type: CMOperatingTable
+  - type: BuckleClimbable
