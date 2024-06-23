@@ -1,0 +1,79 @@
+- type: entity
+  parent: BoxBase
+  id: CMFolderBase
+  abstract: true
+  name: folder
+  description: A folder.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/paper.rsi
+    state: folder
+  - type: Item
+    sprite: _RMC14/Objects/Misc/paper.rsi
+    size: Small
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,4,1
+    whitelist:
+      tags:
+      - Document
+      - Paper
+  - type: Appearance
+  - type: Tag
+    tags:
+    - Folder
+  - type: StorageFill
+    contents:
+    - id: CMPaper
+      prob: 0.5
+    - id: CMPaper
+      prob: 0.4
+    - id: CMPaper
+      prob: 0.3
+    - id: CMPaper
+      prob: 0.2
+    - id: CMPaper
+      prob: 0.2
+
+- type: entity
+  parent: CMFolderBase
+  id: CMFolderBlue
+  description: A blue folder.
+  components:
+  - type: Sprite
+    state: folder_blue
+
+- type: entity
+  parent: CMFolderBase
+  id: CMFolderRed
+  description: A red folder.
+  components:
+  - type: Sprite
+    state: folder_red
+
+- type: entity
+  parent: CMFolderBase
+  id: CMFolderYellow
+  description: A yellow folder.
+  components:
+  - type: Sprite
+    state: folder_yellow
+
+- type: entity
+  parent: CMFolderBase
+  id: CMFolderWhite
+  description: A white folder.
+  components:
+  - type: Sprite
+    state: folder_white
+
+- type: entity
+  parent: CMFolderBase
+  id: CMFolderBlack
+  description:
+  components:
+  - type: Sprite
+    state: folder_black
+
+# TODO RMC14 make /obj/item/folder/black_random , reference: /code/modules/paperwork/folders.dm 29,1

@@ -1,0 +1,17 @@
+﻿- type: entity
+  parent: Lamp
+  id: CMLamp
+  name: desk lamp
+  description: A desk lamp with an adjustable mount.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/lamp.rsi
+    layers:
+    - state: lamp
+    - state: lamp-on
+      shader: unshaded
+      visible: false
+      map: [ "light" ]
+  - type: Item
+    size: Large
+    sprite: _RMC14/Objects/lamp.rsi

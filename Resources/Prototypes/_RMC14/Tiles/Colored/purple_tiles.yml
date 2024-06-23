@@ -1,0 +1,70 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelPlanetPurpleBase
+  name: tiles-cm-default-purple
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetPurple0
+  sprite: /Textures/_RMC14/Tiles/floors/purple_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetPurple1
+  sprite: /Textures/_RMC14/Tiles/floors/purple_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetPurple2
+  sprite: /Textures/_RMC14/Tiles/floors/purple_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetPurple3
+  sprite: /Textures/_RMC14/Tiles/floors/purple_3.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetPurple4
+  sprite: /Textures/_RMC14/Tiles/floors/purple_4.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetPurple5
+  sprite: /Textures/_RMC14/Tiles/floors/purple_5.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetPurple6
+  sprite: /Textures/_RMC14/Tiles/floors/purple_6.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetPurple7
+  sprite: /Textures/_RMC14/Tiles/floors/purple_7.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetPurpleCorners0
+  sprite: /Textures/_RMC14/Tiles/floors/purplecorner_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetPurpleCorners1
+  sprite: /Textures/_RMC14/Tiles/floors/purplecorner_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetPurpleCorners2
+  sprite: /Textures/_RMC14/Tiles/floors/purplecorner_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetPurpleCorners3
+  sprite: /Textures/_RMC14/Tiles/floors/purplecorner_3.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetPurpleFull
+  sprite: /Textures/_RMC14/Tiles/floors/purplefull.png

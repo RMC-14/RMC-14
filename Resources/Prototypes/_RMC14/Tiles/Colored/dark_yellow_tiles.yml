@@ -1,0 +1,65 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelPlanetDarkYellowBase
+  name: tiles-cm-default-yellow
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkYellowBase
+  id: CMFloorSteelPlanetDarkYellow0
+  sprite: /Textures/_RMC14/Tiles/floors/darkyellow_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkYellowBase
+  id: CMFloorSteelPlanetDarkYellow1
+  sprite: /Textures/_RMC14/Tiles/floors/darkyellow_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkYellowBase
+  id: CMFloorSteelPlanetDarkYellow2
+  sprite: /Textures/_RMC14/Tiles/floors/darkyellow_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkYellowBase
+  id: CMFloorSteelPlanetDarkYellow3
+  sprite: /Textures/_RMC14/Tiles/floors/darkyellow_3.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkYellowBase
+  id: CMFloorSteelPlanetDarkYellow4
+  sprite: /Textures/_RMC14/Tiles/floors/darkyellow_4.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkYellowBase
+  id: CMFloorSteelPlanetDarkYellow5
+  sprite: /Textures/_RMC14/Tiles/floors/darkyellow_5.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkYellowBase
+  id: CMFloorSteelPlanetDarkYellow6
+  sprite: /Textures/_RMC14/Tiles/floors/darkyellow_6.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkYellowBase
+  id: CMFloorSteelPlanetDarkYellow7
+  sprite: /Textures/_RMC14/Tiles/floors/darkyellow_7.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkYellowBase
+  id: CMFloorSteelPlanetDarkYellowCorners0
+  sprite: /Textures/_RMC14/Tiles/floors/darkyellowcorner_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkYellowBase
+  id: CMFloorSteelPlanetDarkYellowCorners1
+  sprite: /Textures/_RMC14/Tiles/floors/darkyellowcorner_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkYellowBase
+  id: CMFloorSteelPlanetDarkYellowCorners2
+  sprite: /Textures/_RMC14/Tiles/floors/darkyellowcorner_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkYellowBase
+  id: CMFloorSteelPlanetDarkYellowCorners3
+  sprite: /Textures/_RMC14/Tiles/floors/darkyellowcorner_3.png

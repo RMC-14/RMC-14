@@ -1,0 +1,56 @@
+﻿- type: Tag
+  id: CMFireExtinguisherPortable
+
+- type: entity
+  parent: FireExtinguisher
+  id: CMFireExtinguisher
+  name: fire extinguisher
+  description: A traditional red fire extinguisher.
+  components:
+  - type: Spray
+    transferAmount: 5
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 50
+        reagents:
+        - ReagentId: Water
+          Quantity: 50
+  - type: Sprite
+    sprite: _RMC14/Objects/fire_extinguisher.rsi
+    layers:
+    - state: fire_extinguisher
+      map: [ "enabled" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.FireExtinguisherVisuals.Safety:
+        enabled:
+          True: { state: fire_extinguisher } # TODO RMC14
+          False: { state: fire_extinguisher }
+
+- type: entity
+  parent: CMFireExtinguisher
+  id: CMFireExtinguisherPortable
+  name: portable fire extinguisher
+  description: A light and compact fibreglass-framed model fire extinguisher.
+  components:
+  - type: Item
+    size: Small
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 30
+        reagents:
+        - ReagentId: Water
+          Quantity: 30
+  - type: Sprite
+    sprite: _RMC14/Objects/fire_extinguisher_mini.rsi
+    layers:
+    - state: minife1
+      map: [ "enabled" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.FireExtinguisherVisuals.Safety:
+        enabled:
+          True: { state: minife0 }
+          False: { state: minife1 }

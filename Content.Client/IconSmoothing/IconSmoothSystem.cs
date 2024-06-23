@@ -340,7 +340,7 @@ namespace Content.Client.IconSmoothing
         {
             while (candidates.MoveNext(out var entity))
             {
-                // TODO CM14 restore to upstream
+                // TODO RMC14 restore to upstream
                 if (smoothQuery.TryGetComponent(entity, out var other) &&
                     other.Enabled)
                 {

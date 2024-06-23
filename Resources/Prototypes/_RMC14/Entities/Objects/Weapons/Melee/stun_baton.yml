@@ -1,0 +1,10 @@
+- type: entity
+  parent: Stunbaton
+  id: CMStunbaton
+  name: stun baton
+  description: A stun baton for incapacitating people with.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/stun_baton.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Melee/stun_baton.rsi

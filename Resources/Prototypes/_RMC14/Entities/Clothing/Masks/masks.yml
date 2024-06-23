@@ -1,0 +1,63 @@
+- type: entity
+  parent: ClothingMaskPullableBase
+  id: CMBaseMask
+  abstract: true
+  components:
+  - type: HideLayerClothing
+    slots:
+    - Snout
+    hideOnToggle: true
+
+- type: entity
+  parent: CMBaseMask
+  id: CMMaskGas
+  name: gas mask
+  description: A face-covering mask that can be connected to an air supply. Filters harmful gases from the air.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/gas.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/gas.rsi
+  - type: Item
+    size: Small
+
+- type: entity
+  parent: CMBaseMask
+  id: CMMaskSterile
+  name: sterile mask
+  description: A sterile mask designed to help prevent the spread of diseases.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/sterile.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/sterile.rsi
+  - type: IngestionBlocker
+  - type: Item
+    storedRotation: -90
+
+- type: entity # TODO RMC14 this needs a lizard sprite
+  parent: ClothingMaskGas
+  id: CMMaskGasMedical
+  name: medical gas mask
+  description: A close-fitting sterile mask that can be connected to an air supply.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/medical.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/medical.rsi
+
+- type: entity
+  parent: CMBaseMask
+  id: CMMaskCoif
+  name: heat absorbent coif
+  description: A close-fitting cap that covers the top, back, and sides of the head. Can also be adjusted to cover the lower part of the face so it keeps the user warm in harsh conditions.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/coif.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/coif.rsi
+  - type: IdentityBlocker
+    coverage: MOUTH
+  - type: IngestionBlocker
+  - type: Item
+    storedRotation: -90

@@ -1,5 +1,5 @@
 using System.Numerics;
-using Content.Shared._CM14.IconSmoothing;
+using Content.Shared._RMC14.IconSmoothing;
 using Content.Shared.IconSmoothing;
 using Robust.Client.GameObjects;
 

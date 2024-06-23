@@ -20,10 +20,10 @@ SERVER_FILES = [
 ]
 
 VERSION = os.environ['GITHUB_SHA']
-FORK_ID = "cm14"
-BUILD_URL = f"https://cdn.xenomorph.gay/builds/cm14/builds/{{FORK_VERSION}}/{FILE}"
-MANIFEST_URL = f"https://cdn.xenomorph.gay/cdn/version/{{FORK_VERSION}}/manifest"
-MANIFEST_DOWNLOAD_URL = f"https://cdn.xenomorph.gay/cdn/version/{{FORK_VERSION}}/download"
+FORK_ID = "rouny"
+BUILD_URL = f"https://cdn.rouny-ss14.com/builds/rouny/builds/{{FORK_VERSION}}/{FILE}"
+MANIFEST_URL = f"https://cdn.rouny-ss14.com/cdn/version/{{FORK_VERSION}}/manifest"
+MANIFEST_DOWNLOAD_URL = f"https://cdn.rouny-ss14.com/cdn/version/{{FORK_VERSION}}/download"
 
 def main() -> None:
     client_file = os.path.join("release", FILE)

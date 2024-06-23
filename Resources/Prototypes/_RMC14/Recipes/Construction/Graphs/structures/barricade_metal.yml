@@ -1,0 +1,112 @@
+- type: constructionGraph
+  parent: RMC
+  id: BarricadeMetalGraph
+  start: start
+  graph:
+  - node: start
+    actions:
+    - !type:DeleteEntity
+    edges:
+    - to: nodeMetal
+      completed:
+      - !type:SnapToGrid
+      steps:
+      - material: CMSteel
+        amount: 4
+        doAfter: 2
+
+  - node: nodeMetal
+    entity: CMBarricadeMetal
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMSheetMetal1
+        amount: 4
+      - !type:DeleteEntity
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tool: Prying
+        doAfter: 2
+
+    - to: nodeBurnUpgrade
+      completed:
+      - !type:SnapToGrid
+      steps:
+      - material: MetalRod
+        amount: 6
+        doAfter: 6
+
+    - to: nodeBruteUpgrade
+      completed:
+      - !type:SnapToGrid
+      steps:
+      - material: CMSteel
+        amount: 3
+        doAfter: 6
+
+    - to: nodeExplosiveUpgrade
+      completed:
+      - !type:SnapToGrid
+      steps:
+      - material: CMPlasteel
+        amount: 3
+        doAfter: 6
+
+  - node: nodeBurnUpgrade
+    entity: CMBarricadeBurn
+    edges:
+    - to: start
+      completed:
+        - !type:SpawnPrototype
+          prototype: CMSheetMetal1
+          amount: 4
+        - !type:DeleteEntity
+      conditions:
+        - !type:EntityAnchored
+          anchored: false
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tool: Prying
+        doAfter: 2
+
+  - node: nodeBruteUpgrade
+    entity: CMBarricadeBrute
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMSheetMetal1
+        amount: 4
+      - !type:DeleteEntity
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tool: Prying
+        doAfter: 2
+
+  - node: nodeExplosiveUpgrade
+    entity: CMBarricadeExplosive
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMSheetMetal1
+        amount: 4
+      - !type:DeleteEntity
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tool: Prying
+        doAfter: 2
