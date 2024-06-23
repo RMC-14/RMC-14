@@ -14,7 +14,7 @@
   name: chat-radio-marine-common
   keycode: "g" #; and g in cm13
   frequency: 1480
-  color: "#a0a0a0"
+  color: "#6FD08C"
   longRange: true
 
 - type: radioChannel
