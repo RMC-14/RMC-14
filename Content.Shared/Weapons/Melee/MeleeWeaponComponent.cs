@@ -16,7 +16,7 @@ public sealed partial class MeleeWeaponComponent : Component
     /// <summary>
     /// Defines if the primary attack should be a wide swing
     /// </summary>
-    // TODO CM14 move this out and reset the file to upstream once source gen is fixed
+    // TODO RMC14 move this out and reset the file to upstream once source gen is fixed
     [DataField]
     public bool WidePrimary;
 
@@ -83,7 +83,7 @@ public sealed partial class MeleeWeaponComponent : Component
 
     [DataField]
     [ViewVariables(VVAccess.ReadWrite)]
-    public FixedPoint2 BluntStaminaDamageFactor = FixedPoint2.New(0.5f);
+    public FixedPoint2 BluntStaminaDamageFactor = FixedPoint2.New(0.0f);
 
     /// <summary>
     /// Multiplies damage by this amount for single-target attacks.

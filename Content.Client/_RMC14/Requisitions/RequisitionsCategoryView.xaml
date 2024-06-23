@@ -1,0 +1,14 @@
+﻿<controls:RequisitionsCategoryView
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Requisitions"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls">
+    <BoxContainer Orientation="Vertical">
+        <RichTextLabel Name="BudgetLabel" Access="Public" />
+        <Button Name="BackButton" Access="Public" Text="Back to all categories" StyleClasses="ButtonSquare" />
+        <cc:HSeparator Color="#4972A1" Margin="0 5" />
+        <RichTextLabel Name="RequestFromLabel" Access="Public" Margin="0 0 0 5" />
+        <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
+            <BoxContainer Name="OrdersContainer" Access="Public" Orientation="Vertical" />
+        </ScrollContainer>
+    </BoxContainer>
+</controls:RequisitionsCategoryView>

@@ -1,0 +1,8 @@
+﻿- type: damageContainer
+  id: StructuralMarine
+  supportedGroups:
+  - Brute
+  supportedTypes:
+  - Heat
+  - Shock
+  - Structural

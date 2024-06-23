@@ -1,0 +1,65 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelPrisonWhitePurpleBase
+  name: tiles-cm-default-purple
+
+- type: tile
+  parent: CMFloorSteelPrisonWhitePurpleBase
+  id: CMFloorSteelPrisonWhitePurple0
+  sprite: /Textures/_RMC14/Tiles/prison/whitepurple_0.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhitePurpleBase
+  id: CMFloorSteelPrisonWhitePurple1
+  sprite: /Textures/_RMC14/Tiles/prison/whitepurple_1.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhitePurpleBase
+  id: CMFloorSteelPrisonWhitePurple2
+  sprite: /Textures/_RMC14/Tiles/prison/whitepurple_2.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhitePurpleBase
+  id: CMFloorSteelPrisonWhitePurple3
+  sprite: /Textures/_RMC14/Tiles/prison/whitepurple_3.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhitePurpleBase
+  id: CMFloorSteelPrisonWhitePurple4
+  sprite: /Textures/_RMC14/Tiles/prison/whitepurple_4.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhitePurpleBase
+  id: CMFloorSteelPrisonWhitePurple5
+  sprite: /Textures/_RMC14/Tiles/prison/whitepurple_5.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhitePurpleBase
+  id: CMFloorSteelPrisonWhitePurple6
+  sprite: /Textures/_RMC14/Tiles/prison/whitepurple_6.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhitePurpleBase
+  id: CMFloorSteelPrisonWhitePurple7
+  sprite: /Textures/_RMC14/Tiles/prison/whitepurple_7.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhitePurpleBase
+  id: CMFloorSteelPrisonWhitePurpleCorner0
+  sprite: /Textures/_RMC14/Tiles/prison/whitepurplecorner_0.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhitePurpleBase
+  id: CMFloorSteelPrisonWhitePurpleCorner1
+  sprite: /Textures/_RMC14/Tiles/prison/whitepurplecorner_1.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhitePurpleBase
+  id: CMFloorSteelPrisonWhitePurpleCorner2
+  sprite: /Textures/_RMC14/Tiles/prison/whitepurplecorner_2.png
+
+- type: tile
+  parent: CMFloorSteelPrisonWhitePurpleBase
+  id: CMFloorSteelPrisonWhitePurpleCorner3
+  sprite: /Textures/_RMC14/Tiles/prison/whitepurplecorner_3.png

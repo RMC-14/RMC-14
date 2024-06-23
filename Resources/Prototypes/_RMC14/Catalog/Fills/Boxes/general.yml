@@ -1,0 +1,22 @@
+- type: entity
+  name: box
+  parent: BoxBase
+  id: CMBoxCardboard
+  description: It's just an ordinary box.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/boxes.rsi
+    state: box
+  - type: Item
+    sprite: _RMC14/Objects/Storage/boxes.rsi
+    size: Large
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,13,1
+  - type: Tag
+    tags:
+    - CMBoxStorage
+
+- type: Tag
+  id: CMBoxStorage

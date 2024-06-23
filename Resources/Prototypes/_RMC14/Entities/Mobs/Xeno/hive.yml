@@ -1,0 +1,7 @@
+﻿- type: entity
+  id: CMXenoHive
+  name: Default
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Hive

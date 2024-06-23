@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/311e8f06c0eae7c6a0ab71ba04943c93c55850eb/icons/obj/items/chemistry.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "tramadol_packet"
+    },
+    {
+      "name": "tricordrazine_packet"
+    },
+    {
+      "name": "pill_packet"
+    },
+    {
+      "name": "kelotane_packet"
+    },
+    {
+      "name": "bicaridine_packet"
+    },
+    {
+      "name": "oxycodone_packet"
+    }
+  ]
+}

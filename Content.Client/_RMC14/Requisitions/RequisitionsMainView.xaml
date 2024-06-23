@@ -1,0 +1,14 @@
+﻿<controls:RequisitionsMainView
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Requisitions"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls">
+    <BoxContainer Orientation="Vertical">
+        <RichTextLabel Name="PlatformLabel" Access="Public" />
+        <Button Name="PlatformButton" Access="Public" StyleClasses="ButtonSquare" />
+        <cc:HSeparator Color="#4972A1" Margin="0 5" />
+        <RichTextLabel Name="BudgetLabel" Access="Public" Margin="0 0 0 5" />
+        <Button Name="OrderItemsButton" Access="Public" Text="Order items" StyleClasses="ButtonSquare" />
+        <Button Name="ViewRequestsButton" Access="Public" Text="View requests" StyleClasses="ButtonSquare" Visible="False" />
+        <Button Name="ViewOrdersButton" Access="Public" Text="View orders" StyleClasses="ButtonSquare" Visible="False" />
+    </BoxContainer>
+</controls:RequisitionsMainView>

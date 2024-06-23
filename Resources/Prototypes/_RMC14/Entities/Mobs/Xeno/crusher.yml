@@ -1,0 +1,62 @@
+﻿- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  - CMXenoFlammable
+  id: CMXenoCrusher
+  name: Crusher
+  description: A huge alien with an enormous armored crest.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Crusher/crusher.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      700: Critical
+      800: Dead
+  - type: Xeno
+    role: CMXenoCrusher
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoCharge
+    - ActionXenoStomp
+    #    - ActionXenoDefensiveShield
+    tier: 3
+    hudOffset: 0,0.375
+    unlockAt: 900 # 15 minutes
+  - type: XenoDevour
+  - type: XenoStomp
+    damage:
+      types:
+        Blunt: 60
+  - type: XenoCharge
+    damage:
+      types:
+        Blunt: 60
+        Structural: 400
+  - type: XenoAnimateMovement
+  - type: XenoPlasma
+    plasma: 400
+    maxPlasma: 400
+    plasmaRegenOnWeeds: 4
+  - type: CMArmor
+    armor: 30
+    explosionArmor: 100
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 40
+  - type: Tackle
+    threshold: 5
+    stun: 5
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.66
+    baseSprintSpeed: 3

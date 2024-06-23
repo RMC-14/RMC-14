@@ -1,9 +1,0 @@
-﻿- type: entity
-  id: ActionXenoBase
-  categories:
-  - hideSpawnMenu
-  components:
-  - type: InstantAction
-    backgroundOn:
-      sprite: _CM14/Actions/xeno_actions.rsi
-      state: template_active_big

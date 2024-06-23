@@ -1,0 +1,60 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMDoctor
+  name: cm-job-name-doctor
+  description: cm-job-description-doctor
+  playTimeTracker: CMJobDoctor
+  requirements:
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 3600 # 1 hour
+  startingGear: CMGearDoctor
+  icon: "CMJobIconDoctor"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-cmo
+  accessGroups:
+  - CMMedbay
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      firearms: 0
+      medical: 3
+      surgery: 2
+
+- type: startingGear
+  id: CMGearDoctor
+  equipment:
+    jumpsuit: CMScrubsBlue
+    back: CMSatchelMarine
+    shoes: ClothingShoesColorWhite
+    id: CMIDCardDoctor
+
+- type: startingGear
+  id: CMGearDoctorEquipped
+  equipment:
+    jumpsuit: CMScrubsBlue
+    outerClothing: CMCoatLong
+    back: CMSatchelMarine
+    gloves: CMHandsLatex
+    shoes: ClothingShoesColorWhite
+    head: CMHeadCapSurgBlue
+    id: CMIDCardDoctor
+    ears: CMHeadsetMedical
+    belt: CMBeltMedicalFilled
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointDoctor
+  name: doctor spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMDoctor
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: doctor
+
+- type: playTimeTracker
+  id: CMJobDoctor

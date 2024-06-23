@@ -1,0 +1,113 @@
+﻿- type: entity
+  parent: BaseStructure
+  id: CMBaseStructure
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+
+- type: entity
+  parent:
+  - CMBaseStructure
+  - CMCorrodible
+  id: CMBaseStructureCorrodible
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+
+- type: entity
+  parent: BaseStructure
+  id: CMBaseXenoStructure
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Corrodible
+    isCorrodible: false
+  - type: CMIconSmooth
+  - type: MeleeReceivedMultiplier
+    otherMultiplier: 8.2
+  - type: XenoConstructionSupport
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: XenoResinBreak
+  - type: XenoConstruct
+
+- type: entity
+  id: CMCorrodible
+  abstract: true
+  components:
+  - type: Corrodible
+
+# BaseWall
+- type: entity
+  abstract: true
+  parent: CMBaseStructureCorrodible
+  id: CMBaseWallInvincible
+  description: A huge chunk of metal used to separate rooms.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Sprite
+    drawdepth: Walls
+  - type: Icon
+    state: full
+  - type: PlacementReplacement
+    key: walls
+  - type: Occluder
+  - type: Airtight
+  - type: RadiationBlocker
+    resistance: 2
+  - type: StaticPrice
+    price: 75
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+        density: 1000
+  - type: XenoWeedable
+    spawn: XenoWeedsWall
+  - type: Corrodible
+    isCorrodible: false
+  - type: XenoConstructionSupport
+
+- type: entity
+  abstract: true
+  parent: CMBaseWallInvincible
+  id: CMBaseWall
+  description: A huge chunk of metal used to separate rooms.
+  components:
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: Corrodible
+    isCorrodible: true
+
+- type: entity
+  parent:
+  - BaseWall
+  - CMBaseXenoStructure
+  id: CMBaseWallXeno
+  name: resin wall
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Damageable
+    damageContainer: StructuralXeno
+    damageModifierSet: Resin
+  - type: Appearance
+  - type: RadiationBlocker
+    resistance: 5
+  - type: PlacementReplacement
+    key: walls

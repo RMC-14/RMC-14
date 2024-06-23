@@ -1,9 +1,0 @@
-﻿- files: ["engine_landing.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from cmss13"
-  source: "https://github.com/cmss13-devs/cmss13/blob/d3d6bb77f88d63c4fbac64596f154306cd099b1f/sound/effects/engine_landing.ogg"
-
-- files: ["engine_startup.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from cmss13"
-  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/effects/engine_startup.ogg"

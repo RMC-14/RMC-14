@@ -5,21 +5,27 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Content.Server.Chat.Managers;
+using Content.Server.Discord;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared.CCVar;
 using Robust.Server.ServerStatus;
 using Robust.Shared.Asynchronous;
 using Robust.Shared.Configuration;
+using Serilog;
 
 namespace Content.Server.MoMMI
 {
     internal sealed class MoMMILink : IMoMMILink, IPostInjectInit
     {
         [Dependency] private readonly IConfigurationManager _configurationManager = default!;
+        [Dependency] private readonly DiscordWebhook _discord = default!;
         [Dependency] private readonly IStatusHost _statusHost = default!;
         [Dependency] private readonly IChatManager _chatManager = default!;
         [Dependency] private readonly ITaskManager _taskManager = default!;
 
         private readonly HttpClient _httpClient = new();
+        private string? _oocWebhookUrl;
+        private WebhookIdentifier? _webhook = new();
 
         void IPostInjectInit.PostInject()
         {
@@ -28,6 +34,39 @@ namespace Content.Server.MoMMI
 
         public async void SendOOCMessage(string sender, string message)
         {
+            // TODO RMC14
+            var oocWebhook = _configurationManager.GetCVar(CMCVars.CMOocWebhook);
+            if (oocWebhook != _oocWebhookUrl)
+            {
+                _oocWebhookUrl = oocWebhook;
+                if (string.IsNullOrWhiteSpace(oocWebhook))
+                {
+                    _webhook = null;
+                }
+                else
+                {
+                    var identifier = (await _discord.GetWebhook(oocWebhook))?.ToIdentifier();
+                    if (identifier == null)
+                        return;
+
+                    _webhook = identifier;
+                }
+            }
+
+            if (_webhook is not { } webhook)
+                return;
+
+            try
+            {
+                await _discord.CreateMessage(webhook, new WebhookPayload { Content = $"**OOC:** `{sender}: {message}`" });
+            }
+            catch (Exception error)
+            {
+                Log.Error(error, "Error relaying OOC message to discord");
+            }
+
+            return;
+
             var sentMessage = new MoMMIMessageOOC
             {
                 Sender = sender,

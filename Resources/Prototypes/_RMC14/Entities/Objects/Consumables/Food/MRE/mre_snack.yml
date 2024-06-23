@@ -1,0 +1,163 @@
+﻿# Components
+- type: entity
+  abstract: true
+  parent: CMMREComponentBase
+  id: CMMRESnackComponentBase
+  description: An MRE snack component. Contains a light snack in case you weren't feeling terribly hungry.
+  components:
+  - type: Sprite
+    state: snack
+
+- type: entity
+  parent: CMMRESnackComponentBase
+  id: CMMREComponentBiscuit
+  name: MRE component (biscuit)
+  description: An MRE snack component. Contains a light snack in case you weren't feeling terribly hungry. This one is biscuit.
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodBiscuit
+
+- type: entity
+  parent: CMMRESnackComponentBase
+  id: CMMREComponentMeatballs
+  name: MRE component (meatballs)
+  description: An MRE snack component. Contains a light snack in case you weren't feeling terribly hungry. This one is meatballs.
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodMeatballs
+
+- type: entity
+  parent: CMMRESnackComponentBase
+  id: CMMREComponentPretzels
+  name: MRE component (pretzels)
+  description: An MRE snack component. Contains a light snack in case you weren't feeling terribly hungry. This one is pretzels.
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodPretzels
+
+- type: entity
+  parent: CMMRESnackComponentBase
+  id: CMMREComponentPeanuts
+  name: MRE component (peanuts)
+  description: An MRE snack component. Contains a light snack in case you weren't feeling terribly hungry. This one is peanuts.
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodPeanuts
+
+- type: entity
+  parent: CMMRESnackComponentBase
+  id: CMMREComponentSushi
+  name: MRE component (sushi)
+  description: An MRE snack component. Contains a light snack in case you weren't feeling terribly hungry. This one is sushi.
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodSushi
+
+# Foods
+- type: entity
+  abstract: true
+  parent: CMMREFoodBase
+  id: CMMREFoodSnack
+  components:
+  - type: Food
+    transferAmount: 1
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 3
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: TableSalt
+          Quantity: 2
+
+- type: entity
+  parent: CMMREFoodSnack
+  id: CMMREFoodBiscuit
+  name: biscuit
+  description: The contents of a Marine Standard issue MRE. This one is biscuit.
+  components:
+  - type: Sprite
+    state: biscuit
+  - type: FlavorProfile
+    flavors:
+    - Biscuit
+
+- type: entity
+  parent: CMMREFoodSnack
+  id: CMMREFoodMeatballs
+  name: meatballs
+  description: The contents of a Marine Standard issue MRE. This one is meatballs.
+  components:
+  - type: Sprite
+    state: meatballs
+  - type: FlavorProfile
+    flavors:
+    - Meatballs
+
+- type: entity
+  parent: CMMREFoodSnack
+  id: CMMREFoodPretzels
+  name: pretzels
+  description: The contents of a Marine Standard issue MRE. This one is pretzels.
+  components:
+  - type: Sprite
+    state: pretzels
+  - type: FlavorProfile
+    flavors:
+    - Pretzels
+
+- type: entity
+  parent: CMMREFoodSnack
+  id: CMMREFoodPeanuts
+  name: peanuts
+  description: The contents of a Marine Standard issue MRE. This one is peanuts.
+  components:
+  - type: Sprite
+    state: peanuts
+  - type: FlavorProfile
+    flavors:
+    - Peanuts
+
+- type: entity
+  parent: CMMREFoodSnack
+  id: CMMREFoodSushi
+  name: sushi
+  description: The contents of a Marine Standard issue MRE. This one is sushi.
+  components:
+  - type: Sprite
+    state: sushi
+  - type: FlavorProfile
+    flavors:
+    - Sushi
+
+# Flavors
+- type: flavor
+  id: Biscuit
+  flavorType: Complex
+  description: like biscuits
+
+- type: flavor
+  id: Meatballs
+  flavorType: Complex
+  description: like meatballs
+
+- type: flavor
+  id: Pretzels
+  flavorType: Complex
+  description: like meatballs
+
+- type: flavor
+  id: Peanuts
+  flavorType: Complex
+  description: like peanuts
+
+- type: flavor
+  id: Sushi
+  flavorType: Complex
+  description: like sushi

@@ -1,4 +1,4 @@
-using Content.Shared._CM14.Item;
+using Content.Shared._RMC14.Item;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -203,7 +203,7 @@ public abstract class SharedItemSystem : EntitySystem
         var shapes = GetItemShape(storage, entity);
         var boundingShape = shapes.GetBoundingBox();
         var boundingCenter = ((Box2) boundingShape).Center;
-        var matty = Matrix3.CreateTransform(boundingCenter, rotation);
+        var matty = Matrix3Helpers.CreateTransform(boundingCenter, rotation);
         var drift = boundingShape.BottomLeft - matty.TransformBox(boundingShape).BottomLeft;
 
         var adjustedShapes = new List<Box2i>();

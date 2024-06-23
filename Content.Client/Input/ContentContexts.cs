@@ -1,4 +1,4 @@
-using Content.Shared._CM14.Input;
+using Content.Shared._RMC14.Input;
 using Content.Shared.Input;
 using Robust.Shared.Input;
 
@@ -129,7 +129,11 @@ namespace Content.Client.Input
         private static void CMFunctions(IInputContextContainer contexts)
         {
             var human = contexts.GetContext("human");
-            human.AddFunction(CMKeyFunctions.CMPumpShotgun);
+            human.AddFunction(CMKeyFunctions.CMActivateAttachableBarrel);
+            human.AddFunction(CMKeyFunctions.CMActivateAttachableRail);
+            human.AddFunction(CMKeyFunctions.CMActivateAttachableStock);
+            human.AddFunction(CMKeyFunctions.CMActivateAttachableUnderbarrel);
+            human.AddFunction(CMKeyFunctions.CMUniqueAction);
             human.AddFunction(CMKeyFunctions.CMHolsterPrimary);
             human.AddFunction(CMKeyFunctions.CMHolsterSecondary);
             human.AddFunction(CMKeyFunctions.CMHolsterTertiary);

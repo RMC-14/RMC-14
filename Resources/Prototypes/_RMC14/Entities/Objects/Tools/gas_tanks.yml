@@ -1,0 +1,101 @@
+- type: entity
+  parent: NitrousOxideTank
+  id: CMAnestheticTank
+  name: anesthetic tank
+  description: A tank with an N2O/O2 gas mix.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/anesthetic.rsi
+  - type: Item
+    size: Normal
+    sprite: _RMC14/Objects/Tanks/anesthetic.rsi
+  - type: GasTank
+    outputPressure: 30.4
+
+# Gas Tanks /obj/item/reagent_container/glass/canister
+
+# for future needs
+- type: entity
+  abstract: true
+  parent: GasTankBase
+  id: CMGasTankBase
+
+- type: entity
+  parent: CMGasTankBase
+  id: CMGasTankHydrogen
+  name: hydrogen canister
+  description: A canister containing pressurized hydrogen. Can be used to refill storage tanks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/hydrogen.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Tanks/hydrogen.rsi
+  # TODO RMC14 hydrogen fill
+
+- type: entity
+  parent: CMGasTankBase
+  id: CMGasTankAmmonia
+  name: ammonia canister
+  description: A canister containing pressurized ammonia. Can be used to refill storage tanks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/ammonia.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Tanks/ammonia.rsi
+  - type: GasTank
+    outputPressure: 21.3
+    air:
+      volume: 5
+      moles:
+        - 0 #         oxygen
+        - 0 #         nitrogen
+        - 0 #         CO2
+        - 0 #         plasma
+        - 0 #         tritium
+        - 0 #         water vapor
+        - 2.0513795 # ammonia
+        # 2.0513795   total
+      temperature: 293.15
+
+- type: entity
+  parent: CMGasTankBase
+  id: CMGasTankMethane
+  name: methane canister
+  description: A canister containing pressurized methane. Can be used to refill storage tanks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/methane.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Tanks/methane.rsi
+  # TODO RMC14 methane fill
+
+- type: entity
+  parent: CMGasTankBase
+  id: CMGasTankPacid
+  name: polytrinic acid canister
+  description: A canister containing pressurized polytrinic acid. Can be used to refill storage tanks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/pacid.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Tanks/pacid.rsi
+  # TODO RMC14 polyt acid fill
+
+- type: entity
+  parent: CMGasTankBase
+  id: CMGasTankOxygen
+  name: oxygen canister
+  description: A canister containing pressurized oxygen. Can be used to refill storage tanks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/oxygen.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Tanks/oxygen.rsi
+  - type: GasTank
+    outputPressure: 21.3
+    air:
+      volume: 5
+      moles:
+        - 2.0513795 # oxygen
+        # 2.0513795   total
+      temperature: 293.15

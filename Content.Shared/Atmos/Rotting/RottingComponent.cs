@@ -16,7 +16,7 @@ public sealed partial class RottingComponent : Component
     /// Whether or not the rotting should deal damage
     /// </summary>
     [DataField]
-    public bool DealDamage = true;
+    public bool DealDamage = false;
 
     /// <summary>
     /// When the next check will happen for rot progression + effects like damage and ammonia
