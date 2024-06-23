@@ -119,8 +119,8 @@
 #      collection: XenoQueenBreath # TODO CM14
 #      params:
 #        volume: -10
-    min: 45
-    max: 60
+#    min: 45
+#    max: 60
   - type: SoundOnDeath
     sound:
       path: /Audio/_RMC14/Xeno/alien_queen_died.ogg
