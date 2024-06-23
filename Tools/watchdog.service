@@ -3,8 +3,8 @@ Description=SS14 Watchdog
 After=network.target
 
 [Service]
-ExecStart=/opt/cm14/watchdog/SS14.Watchdog
-WorkingDirectory=/opt/cm14
+ExecStart=/opt/rmc14/watchdog/SS14.Watchdog
+WorkingDirectory=/opt/rmc14
 Restart=always
 # This is used for git method to not fail instantly.
 Environment="DOTNET_CLI_HOME=/tmp"

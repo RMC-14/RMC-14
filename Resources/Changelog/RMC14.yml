@@ -13,13 +13,13 @@
   time: '2023-08-13T16:10:55.0000000+00:00'
 - author: MaloTV
   changes:
-  - message: Added Original CM Posters!
+  - message: Added Original CMSS13 Posters!
     type: Add
   id: 3
   time: '2023-11-05T04:34:28.0000000+00:00'
 - author: MaloTV
   changes:
-  - message: Added Original CM Medical Decals
+  - message: Added Original CMSS13 Medical Decals
     type: Add
   id: 4
   time: '2023-11-05T03:31:21.0000000+00:00'
@@ -132,22 +132,22 @@
     type: Add
   id: 20
   time: '2024-01-31T02:07:36.0000000+00:00'
-  url: https://api.github.com/repos/CM-14/CM-14/pulls/961
+  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/961
 - author: Tunguso4ka
   changes:
   - message: Glass, Reinforced glass, phoron and phoron glass was ported from the
-      CM13.
+      CMSS13.
     type: Add
   id: 21
   time: '2024-02-06T06:09:16.0000000+00:00'
-  url: https://api.github.com/repos/CM-14/CM-14/pulls/968
+  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/968
 - author: Tunguso4ka
   changes:
   - message: Beakers has been added to the game!
     type: Add
   id: 22
   time: '2024-02-08T06:14:33.0000000+00:00'
-  url: https://api.github.com/repos/CM-14/CM-14/pulls/969
+  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/969
 - author: MetalSage
   changes:
   - message: Added M2132 machete
@@ -156,42 +156,42 @@
     type: Add
   id: 23
   time: '2024-02-08T06:32:57.0000000+00:00'
-  url: https://api.github.com/repos/CM-14/CM-14/pulls/967
+  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/967
 - author: Tunguso4ka
   changes:
   - message: Stock parts have been ported.
     type: Add
   id: 24
   time: '2024-02-08T10:44:46.0000000+00:00'
-  url: https://api.github.com/repos/CM-14/CM-14/pulls/975
+  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/975
 - author: Verification31
   changes:
   - message: Clothing crates have been added to the game.
     type: Add
   id: 25
   time: '2024-02-11T07:08:22.0000000+00:00'
-  url: https://api.github.com/repos/CM-14/CM-14/pulls/977
+  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/977
 - author: MetalSage
   changes:
   - message: Added Medical Requisitions
     type: Add
   id: 26
   time: '2024-02-21T18:00:02.0000000+00:00'
-  url: https://api.github.com/repos/CM-14/CM-14/pulls/983
+  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/983
 - author: Simyon
   changes:
   - message: Suiciding will now result in ghosting, keeping your body alive.
     type: Tweak
   id: 27
   time: '2024-02-24T22:26:31.0000000+00:00'
-  url: https://api.github.com/repos/CM-14/CM-14/pulls/990
+  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/990
 - author: DrSmugleaf
   changes:
   - message: Added Word of the Queen action.
     type: Add
   id: 28
   time: '2024-03-01T01:34:08.0000000+00:00'
-  url: https://api.github.com/repos/CM-14/CM-14/pulls/991
+  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/991
 - author: KittenColony
   changes:
   - message: Marine Radiophones, a military grade walkie talkie.
@@ -200,42 +200,42 @@
     type: Add
   id: 29
   time: '2024-03-03T08:08:21.0000000+00:00'
-  url: https://api.github.com/repos/CM-14/CM-14/pulls/980
+  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/980
 - author: Whisper
   changes:
   - message: Add more fills to cm medical pouches
     type: Add
   id: 30
   time: '2024-03-03T10:47:54.0000000+00:00'
-  url: https://api.github.com/repos/CM-14/CM-14/pulls/978
+  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/978
 - author: Tunguso4ka
   changes:
   - message: Added Corporate Liaison role.
     type: Add
   id: 31
   time: '2024-04-05T04:28:31.0000000+00:00'
-  url: https://api.github.com/repos/CM-14/CM-14/pulls/998
+  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/998
 - author: ike709
   changes:
   - message: Added cargo crates for boxes of crayons and empty boxes
     type: Add
   id: 32
   time: '2024-04-10T06:10:15.0000000+00:00'
-  url: https://api.github.com/repos/CM-14/CM-14/pulls/1140
+  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/1140
 - author: ike709
   changes:
-  - message: Added a cargo crate for the M41AE2
+  - message: Added a cargo crate for the M52CE2
     type: Add
   id: 33
   time: '2024-04-10T06:59:53.0000000+00:00'
-  url: https://api.github.com/repos/CM-14/CM-14/pulls/1141
+  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/1141
 - author: Froffy025
   changes:
   - message: Added filled lockers
     type: Add
   id: 34
   time: '2024-04-12T08:32:58.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1182
+  url: https://github.com/RMC-14/RMC-14/pull/1182
 - author: DrSmugleaf
   changes:
   - message: Added Queen ovipositor and eggs.
@@ -244,14 +244,14 @@
     type: Add
   id: 35
   time: '2024-04-12T10:24:42.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1184
+  url: https://github.com/RMC-14/RMC-14/pull/1184
 - author: Whisper
   changes:
   - message: non-barbed sandbags are climable
     type: Add
   id: 36
   time: '2024-04-12T08:49:32.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1183
+  url: https://github.com/RMC-14/RMC-14/pull/1183
 - author: Whisper
   changes:
   - message: Fixed some guns still using bolting
@@ -260,28 +260,28 @@
     type: Fix
   id: 37
   time: '2024-04-12T10:47:32.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1185
+  url: https://github.com/RMC-14/RMC-14/pull/1185
 - author: DrSmugleaf
   changes:
   - message: Fixed moving corroding objects leaving the acid visual effect behind.
     type: Fix
   id: 38
   time: '2024-04-13T08:11:17.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1209
+  url: https://github.com/RMC-14/RMC-14/pull/1209
 - author: DrSmugleaf
   changes:
   - message: Fixed xenos not being able to add plasma to hive cores to build them.
     type: Fix
   id: 39
   time: '2024-04-13T08:19:37.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1211
+  url: https://github.com/RMC-14/RMC-14/pull/1211
 - author: DrSmugleaf
   changes:
   - message: Fixed runners being able to pull while leaping.
     type: Fix
   id: 40
   time: '2024-04-13T08:09:14.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1208
+  url: https://github.com/RMC-14/RMC-14/pull/1208
 - author: DrSmugleaf
   changes:
   - message: Added xeno UI and night vision.
@@ -290,7 +290,7 @@
     type: Tweak
   id: 41
   time: '2024-04-14T04:50:02.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1230
+  url: https://github.com/RMC-14/RMC-14/pull/1230
 - author: DrSmugleaf
   changes:
   - message: Fixed larvas and parasites bumping open doors when crawling under them.
@@ -299,42 +299,42 @@
     type: Fix
   id: 42
   time: '2024-04-13T10:41:19.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1219
+  url: https://github.com/RMC-14/RMC-14/pull/1219
 - author: Whisper
   changes:
   - message: grenades no longer explode eachother
     type: Tweak
   id: 43
   time: '2024-04-14T01:28:24.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1224
+  url: https://github.com/RMC-14/RMC-14/pull/1224
 - author: DrSmugleaf
   changes:
   - message: Added surgery skills to the appropriate roles.
     type: Add
   id: 44
   time: '2024-04-13T06:33:00.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1206
+  url: https://github.com/RMC-14/RMC-14/pull/1206
 - author: DrSmugleaf
   changes:
   - message: Fixed not being able to use the hf2 health analyzer on others.
     type: Fix
   id: 45
   time: '2024-04-14T00:13:25.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1223
+  url: https://github.com/RMC-14/RMC-14/pull/1223
 - author: Whisper
   changes:
   - message: Guns no longer start with mags.
     type: Fix
   id: 46
   time: '2024-04-14T00:35:41.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1220
+  url: https://github.com/RMC-14/RMC-14/pull/1220
 - author: Whisper
   changes:
   - message: shotguns no longer try to cycle when wielding
     type: Fix
   id: 47
   time: '2024-04-13T10:31:05.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1221
+  url: https://github.com/RMC-14/RMC-14/pull/1221
 - author: DrSmugleaf
   changes:
   - message: Marines will now be knocked down by developed alive xenos when trying
@@ -342,42 +342,42 @@
     type: Add
   id: 48
   time: '2024-04-14T05:49:33.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1232
+  url: https://github.com/RMC-14/RMC-14/pull/1232
 - author: Whisper
   changes:
   - message: catwalks rotate correctly now
     type: Fix
   id: 49
   time: '2024-04-14T06:20:19.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1225
+  url: https://github.com/RMC-14/RMC-14/pull/1225
 - author: Froffy025
   changes:
   - message: Fixed pistols spawning with a magazine included.
     type: Fix
   id: 50
   time: '2024-04-16T06:19:20.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1236
+  url: https://github.com/RMC-14/RMC-14/pull/1236
 - author: Whisper
   changes:
   - message: Xenos (and humanoids) no longer trigger stepping on glass shards
     type: Tweak
   id: 51
   time: '2024-04-17T07:34:31.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1243
+  url: https://github.com/RMC-14/RMC-14/pull/1243
 - author: DrSmugleaf
   changes:
   - message: Fixed admin ghosts not being able to pull xenos.
     type: Fix
   id: 52
   time: '2024-04-18T20:56:24.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1248
+  url: https://github.com/RMC-14/RMC-14/pull/1248
 - author: Whisper
   changes:
   - message: Xenos have AI and ghost role takeover
     type: Add
   id: 53
   time: '2024-04-18T21:25:55.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1249
+  url: https://github.com/RMC-14/RMC-14/pull/1249
 - author: DrSmugleaf
   changes:
   - message: Fixed evolution cooldowns for defender, drone, lurker, runner, sentinel,
@@ -385,7 +385,7 @@
     type: Fix
   id: 54
   time: '2024-04-18T21:30:31.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1250
+  url: https://github.com/RMC-14/RMC-14/pull/1250
 - author: DrSmugleaf
   changes:
   - message: Added examine text to pump shotguns that tell you how to pump it.
@@ -400,21 +400,21 @@
     type: Fix
   id: 55
   time: '2024-04-18T23:23:39.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1247
+  url: https://github.com/RMC-14/RMC-14/pull/1247
 - author: DrSmugleaf
   changes:
-  - message: Changed all item and storage sizes to be consistent with CM13.
+  - message: Changed all item and storage sizes to be consistent with CMSS13.
     type: Tweak
   id: 56
   time: '2024-04-19T02:27:27.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1244
+  url: https://github.com/RMC-14/RMC-14/pull/1244
 - author: Whisper
   changes:
   - message: Xenos can wideswing with spacebar.
     type: Add
   id: 57
   time: '2024-04-19T02:52:50.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1241
+  url: https://github.com/RMC-14/RMC-14/pull/1241
 - author: DrSmugleaf
   changes:
   - message: Added hold and move order actions to all marine roles with leadership
@@ -429,11 +429,11 @@
       type are given at once.
     type: Fix
   - message: Made the cooldown, range, and duration of marine orders consistent with
-      CM13.
+      CMSS13.
     type: Tweak
   id: 58
   time: '2024-04-19T06:22:01.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1252
+  url: https://github.com/RMC-14/RMC-14/pull/1252
 - author: DrSmugleaf
   changes:
   - message: Backpacks now have a two second delay before opening and will close if
@@ -442,14 +442,14 @@
     type: Add
   id: 59
   time: '2024-04-20T01:20:15.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1253
+  url: https://github.com/RMC-14/RMC-14/pull/1253
 - author: DrSmugleaf
   changes:
   - message: Fixed inconsistent range when leaping as a runner or parasite.
     type: Fix
   id: 60
   time: '2024-04-20T05:01:30.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1257
+  url: https://github.com/RMC-14/RMC-14/pull/1257
 - author: DrSmugleaf
   changes:
   - message: Added attaching parasites by clicking downed marines with or as them.
@@ -459,42 +459,42 @@
     type: Tweak
   id: 61
   time: '2024-04-20T06:14:11.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1254
+  url: https://github.com/RMC-14/RMC-14/pull/1254
 - author: Whisper
   changes:
   - message: Xenos no longer melt own structures with acid.
     type: Fix
   id: 62
   time: '2024-04-20T06:20:03.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1256
+  url: https://github.com/RMC-14/RMC-14/pull/1256
 - author: DrSmugleaf
   changes:
   - message: Xeno armor now only reduces brute damage.
     type: Fix
   id: 63
   time: '2024-04-20T07:34:00.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1281
+  url: https://github.com/RMC-14/RMC-14/pull/1281
 - author: DrSmugleaf
   changes:
   - message: You can no longer see through containers with the night vision overlay.
     type: Fix
   id: 64
   time: '2024-04-20T08:17:26.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1283
+  url: https://github.com/RMC-14/RMC-14/pull/1283
 - author: Whisper
   changes:
   - message: Xeno eggs now burn!
     type: Add
   id: 65
   time: '2024-04-20T12:35:53.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1285
+  url: https://github.com/RMC-14/RMC-14/pull/1285
 - author: DrSmugleaf
   changes:
   - message: All non-cm guidebook entries and construction recipes have been removed.
     type: Tweak
   id: 66
   time: '2024-04-20T23:02:20.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1282
+  url: https://github.com/RMC-14/RMC-14/pull/1282
 - author: DrSmugleaf
   changes:
   - message: Added tackling on disarm. Successfully disarming a marine 4 times in
@@ -504,7 +504,7 @@
     type: Add
   id: 67
   time: '2024-04-21T02:43:19.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1287
+  url: https://github.com/RMC-14/RMC-14/pull/1287
 - author: DrSmugleaf
   changes:
   - message: The xeno Queen can no longer catch fire.
@@ -516,7 +516,7 @@
     type: Add
   id: 68
   time: '2024-04-21T04:30:56.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1291
+  url: https://github.com/RMC-14/RMC-14/pull/1291
 - author: DrSmugleaf
   changes:
   - message: Fixed xeno construction range being inconsistent depending on where you
@@ -531,7 +531,7 @@
     type: Tweak
   id: 69
   time: '2024-04-22T03:48:30.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1293
+  url: https://github.com/RMC-14/RMC-14/pull/1293
 - author: DrSmugleaf
   changes:
   - message: Medically-unskilled marines now have a 3 second do after delay when using
@@ -539,14 +539,14 @@
     type: Tweak
   id: 70
   time: '2024-04-22T04:29:41.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1294
+  url: https://github.com/RMC-14/RMC-14/pull/1294
 - author: Whisper
   changes:
   - message: Xenos do not take bloodloss damage anymore
     type: Fix
   id: 71
   time: '2024-04-22T06:07:13.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1295
+  url: https://github.com/RMC-14/RMC-14/pull/1295
 - author: DrSmugleaf
   changes:
   - message: Fixed some xeno sprites being off-center.
@@ -555,77 +555,77 @@
     type: Fix
   id: 72
   time: '2024-04-22T09:56:26.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1297
+  url: https://github.com/RMC-14/RMC-14/pull/1297
 - author: DrSmugleaf
   changes:
   - message: Added xenos being able to nest marines onto weeded walls and resin walls.
     type: Add
   id: 73
   time: '2024-04-24T03:45:41.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1302
+  url: https://github.com/RMC-14/RMC-14/pull/1302
 - author: DrSmugleaf
   changes:
   - message: Added dropship piloting.
     type: Add
   id: 74
   time: '2024-04-25T03:22:49.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1308
+  url: https://github.com/RMC-14/RMC-14/pull/1308
 - author: DrSmugleaf
   changes:
   - message: Added distress signal gamemode.
     type: Add
   id: 75
   time: '2024-04-26T05:08:06.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/1916
+  url: https://github.com/RMC-14/RMC-14/pull/1916
 - author: Whisper
   changes:
   - message: Fixed the fire rate for the 88m4 and service pistols.
     type: Fix
   id: 76
   time: '2024-04-26T10:00:55.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2019
+  url: https://github.com/RMC-14/RMC-14/pull/2019
 - author: Whisper
   changes:
   - message: Fixed not being able to store the M42A in the suit storage slot.
     type: Fix
   id: 77
   time: '2024-04-26T10:00:34.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2014
+  url: https://github.com/RMC-14/RMC-14/pull/2014
 - author: Whisper
   changes:
   - message: Fixed burning marines and xenos being able to set others on fire.
     type: Fix
   id: 78
   time: '2024-04-26T10:01:27.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2020
+  url: https://github.com/RMC-14/RMC-14/pull/2020
 - author: DrSmugleaf
   changes:
   - message: Fixed larva getting stuck when evolving under tables and doors.
     type: Fix
   id: 79
   time: '2024-04-26T10:02:01.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2022
+  url: https://github.com/RMC-14/RMC-14/pull/2022
 - author: Whisper
   changes:
   - message: Fixed marines being able to take temperature damage.
     type: Fix
   id: 80
   time: '2024-04-26T10:01:44.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2021
+  url: https://github.com/RMC-14/RMC-14/pull/2021
 - author: Whisper
   changes:
   - message: Fixed damage and armor piercing values for all shotgun ammo types.
     type: Fix
   id: 81
   time: '2024-04-26T10:00:42.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2017
+  url: https://github.com/RMC-14/RMC-14/pull/2017
 - author: DangerRevolution
   changes:
   - message: Added Encryption Keys to Vendors
     type: Add
   id: 82
   time: '2024-04-27T01:07:17.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2025
+  url: https://github.com/RMC-14/RMC-14/pull/2025
 - author: DrSmugleaf
   changes:
   - message: Fixed xenos not being able to pry doors by left clicking on them.
@@ -634,7 +634,7 @@
     type: Tweak
   id: 83
   time: '2024-04-27T01:39:45.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2023
+  url: https://github.com/RMC-14/RMC-14/pull/2023
 - author: DrSmugleaf
   changes:
   - message: Fixed being able to hit friendly xenos with a tail stab and being able
@@ -645,7 +645,7 @@
     type: Tweak
   id: 84
   time: '2024-04-27T02:35:31.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2028
+  url: https://github.com/RMC-14/RMC-14/pull/2028
 - author: DrSmugleaf
   changes:
   - message: Fixed parasites being able to melee attack and tackle.
@@ -656,37 +656,37 @@
     type: Tweak
   id: 85
   time: '2024-04-28T00:55:37.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2034
+  url: https://github.com/RMC-14/RMC-14/pull/2034
 - author: DrSmugleaf
   changes:
   - message: Chestbursters can no longer burst out of dead marines.
     type: Fix
   id: 86
   time: '2024-04-28T00:56:20.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2036
+  url: https://github.com/RMC-14/RMC-14/pull/2036
 - author: DrSmugleaf
   changes:
   - message: Marines now spawn in starving in distress signal rounds.
     type: Tweak
   id: 87
   time: '2024-04-28T00:56:28.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2037
+  url: https://github.com/RMC-14/RMC-14/pull/2037
 - author: DrSmugleaf
   changes:
   - message: Fixed xenos being scannable with the hf2 health analyzer.
     type: Fix
   id: 88
   time: '2024-04-28T00:55:28.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2033
+  url: https://github.com/RMC-14/RMC-14/pull/2033
 - author: Whisper
   changes:
   - message: You can now craft metal rods
     type: Add
-  - message: cm entities now use CM rods
+  - message: cm entities now use RMC14 rods
     type: Fix
   id: 89
   time: '2024-04-28T01:56:06.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2024
+  url: https://github.com/RMC-14/RMC-14/pull/2024
 - author: DrSmugleaf
   changes:
   - message: Automated vendors will now try to automatically equip items or put them
@@ -694,7 +694,7 @@
     type: Add
   id: 90
   time: '2024-04-28T12:21:07.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2041
+  url: https://github.com/RMC-14/RMC-14/pull/2041
 - author: DangerRevolution
   changes:
   - message: Added JTAC Radio Key
@@ -703,21 +703,21 @@
     type: Add
   id: 91
   time: '2024-04-30T06:37:23.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2043
+  url: https://github.com/RMC-14/RMC-14/pull/2043
 - author: DrSmugleaf
   changes:
   - message: Add xeno hivemind chat.
     type: Add
   id: 92
   time: '2024-05-01T03:23:07.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2049
+  url: https://github.com/RMC-14/RMC-14/pull/2049
 - author: DrSmugleaf
   changes:
   - message: The parasite now rips off the victim's mask on infect.
     type: Fix
   id: 93
   time: '2024-05-02T05:25:17.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2050
+  url: https://github.com/RMC-14/RMC-14/pull/2050
 - author: DrSmugleaf
   changes:
   - message: Replaced the pilot officer with the dropship and gunship pilots.
@@ -731,28 +731,28 @@
     type: Add
   id: 95
   time: '2024-05-03T08:02:39.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2058
+  url: https://github.com/RMC-14/RMC-14/pull/2058
 - author: DrSmugleaf
   changes:
   - message: Added xeno hud to see the health and plasma of all xenos on screen.
     type: Add
   id: 96
   time: '2024-05-05T00:05:44.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2060
+  url: https://github.com/RMC-14/RMC-14/pull/2060
 - author: Whisper
   changes:
   - message: Vending machines require respective access.
     type: Add
   id: 97
   time: '2024-05-07T01:39:40.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2069
+  url: https://github.com/RMC-14/RMC-14/pull/2069
 - author: DrSmugleaf
   changes:
   - message: Added breathing, footstep and dying sounds to the xeno Queen.
     type: Add
   id: 98
   time: '2024-05-08T12:17:58.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2082
+  url: https://github.com/RMC-14/RMC-14/pull/2082
 - author: DrSmugleaf
   changes:
   - message: The hf2 health analyzer now automatically updates every second.
@@ -762,7 +762,7 @@
     type: Tweak
   id: 99
   time: '2024-05-08T12:30:29.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2083
+  url: https://github.com/RMC-14/RMC-14/pull/2083
 - author: DrSmugleaf
   changes:
   - message: Xenos are now unable to hit each other, their eggs, weeds, nests and
@@ -770,7 +770,7 @@
     type: Tweak
   id: 100
   time: '2024-05-09T10:02:43.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2087
+  url: https://github.com/RMC-14/RMC-14/pull/2087
 - author: DrSmugleaf
   changes:
   - message: Grown xeno eggs will now automatically try to infect any marines that come
@@ -778,14 +778,14 @@
     type: Add
   id: 101
   time: '2024-05-09T09:59:50.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2086
+  url: https://github.com/RMC-14/RMC-14/pull/2086
 - author: DrSmugleaf
   changes:
   - message: Added the autolathe with cm specific recipes.
     type: Add
   id: 102
   time: '2024-05-09T10:48:54.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2085
+  url: https://github.com/RMC-14/RMC-14/pull/2085
 - author: DrSmugleaf
   changes:
   - message: Bullets no longer hit mobs that are in crit, unless they are directly
@@ -793,70 +793,70 @@
     type: Tweak
   id: 103
   time: '2024-05-11T05:42:07.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2094
+  url: https://github.com/RMC-14/RMC-14/pull/2094
 - author: DrSmugleaf
   changes:
   - message: Xeno Drones can now evolve to Queen.
     type: Add
   id: 104
   time: '2024-05-11T05:43:38.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2096
+  url: https://github.com/RMC-14/RMC-14/pull/2096
 - author: DangerRevolution
   changes:
   - message: Added the Coif
     type: Add
   id: 105
   time: '2024-05-11T05:49:28.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2046
+  url: https://github.com/RMC-14/RMC-14/pull/2046
 - author: Whisper
   changes:
   - message: Added the coif mask to vendors
     type: Add
   id: 106
   time: '2024-05-11T07:51:28.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2097
+  url: https://github.com/RMC-14/RMC-14/pull/2097
 - author: Whisper
   changes:
   - message: Added insuls to vendors
     type: Add
   id: 107
   time: '2024-05-11T07:53:19.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2100
+  url: https://github.com/RMC-14/RMC-14/pull/2100
 - author: Whisper
   changes:
   - message: Added sterile mask to vendor
     type: Add
   id: 108
   time: '2024-05-11T07:52:49.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2098
+  url: https://github.com/RMC-14/RMC-14/pull/2098
 - author: Whisper
   changes:
   - message: Added gas mask to vendors
     type: Add
   id: 109
   time: '2024-05-11T08:01:08.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2102
+  url: https://github.com/RMC-14/RMC-14/pull/2102
 - author: DrSmugleaf
   changes:
   - message: parasites and lesser drones now slowly die without weeds.
     type: Add
   id: 110
   time: '2024-05-11T08:06:45.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2099
+  url: https://github.com/RMC-14/RMC-14/pull/2099
 - author: Whisper
   changes:
   - message: Added whistle
     type: Add
   id: 111
   time: '2024-05-11T08:35:55.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2103
+  url: https://github.com/RMC-14/RMC-14/pull/2103
 - author: DrSmugleaf
   changes:
   - message: Fixed xeno actions sometimes starting out of order.
     type: Fix
   id: 112
   time: '2024-05-12T10:15:48.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2106
+  url: https://github.com/RMC-14/RMC-14/pull/2106
 - author: DrSmugleaf
   changes:
   - message: The M92 grenade launcher's grenades now land exactly where the user clicks
@@ -864,35 +864,35 @@
     type: Tweak
   id: 113
   time: '2024-05-13T20:58:27.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2133
+  url: https://github.com/RMC-14/RMC-14/pull/2133
 - author: Tunguso4ka
   changes:
   - message: Ported chem, booze, soda dispensers and chem master.
     type: Add
   id: 114
   time: '2024-05-14T23:38:59.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2142
+  url: https://github.com/RMC-14/RMC-14/pull/2142
 - author: DrSmugleaf
   changes:
   - message: Marines can now cut their way out of a xeno while devoured.
     type: Add
   id: 115
   time: '2024-05-15T02:52:16.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2144
+  url: https://github.com/RMC-14/RMC-14/pull/2144
 - author: DrSmugleaf
   changes:
   - message: Full health bars are no longer shown on the medical HUD.
     type: Tweak
   id: 116
   time: '2024-05-19T03:58:47.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2157
+  url: https://github.com/RMC-14/RMC-14/pull/2157
 - author: DrSmugleaf
   changes:
   - message: Added xeno death sounds and xeno pull knockdown sound.
     type: Add
   id: 117
   time: '2024-05-20T02:18:15.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2160
+  url: https://github.com/RMC-14/RMC-14/pull/2160
 - author: DrSmugleaf
   changes:
   - message: Ported the effects of all existing medicines.
@@ -902,28 +902,28 @@
     type: Add
   id: 118
   time: '2024-05-22T00:40:24.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2163
+  url: https://github.com/RMC-14/RMC-14/pull/2163
 - author: DrSmugleaf
   changes:
   - message: Added all cm chemicals to the guidebook.
     type: Add
   id: 119
   time: '2024-05-23T12:08:54.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2168
+  url: https://github.com/RMC-14/RMC-14/pull/2168
 - author: DrSmugleaf
   changes:
   - message: Added quick holster and unholster keys.
     type: Add
   id: 120
   time: '2024-05-23T13:03:56.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2166
+  url: https://github.com/RMC-14/RMC-14/pull/2166
 - author: Tunguso4ka
   changes:
-  - message: Ported stanbaton, flash and handcuffs from CM13
+  - message: Ported stanbaton, flash and handcuffs from CMSS3
     type: Add
   id: 121
   time: '2024-05-28T12:36:23.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2170
+  url: https://github.com/RMC-14/RMC-14/pull/2170
 - author: DrSmugleaf
   changes:
   - message: Added treatable wounds and passive healing when they are treated.
@@ -933,77 +933,77 @@
     type: Add
   id: 122
   time: '2024-05-31T22:37:48.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2174
+  url: https://github.com/RMC-14/RMC-14/pull/2174
 - author: DrSmugleaf
   changes:
   - message: Added xeno roles and playtime trackers.
     type: Add
   id: 123
   time: '2024-06-01T05:07:56.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2182
+  url: https://github.com/RMC-14/RMC-14/pull/2182
 - author: Errant
   changes:
   - message: Walking on resin/weeds now speeds up xenos and slows down everyone else.
     type: Add
   id: 124
   time: '2024-06-02T09:41:01.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2201
+  url: https://github.com/RMC-14/RMC-14/pull/2201
 - author: Whisper
   changes:
   - message: Added mre box
     type: Add
   id: 125
   time: '2024-06-02T08:37:57.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2186
+  url: https://github.com/RMC-14/RMC-14/pull/2186
 - author: DrSmugleaf
   changes:
   - message: The hive core now slowly produces lesser drones.
     type: Add
   id: 126
   time: '2024-06-02T11:05:36.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2199
+  url: https://github.com/RMC-14/RMC-14/pull/2199
 - author: Whisper
   changes:
   - message: Added portable fire extinguisher
     type: Add
   id: 127
   time: '2024-06-03T11:14:35.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2219
+  url: https://github.com/RMC-14/RMC-14/pull/2219
 - author: Whisper
   changes:
   - message: All primary weapons now have AP ammo
     type: Add
   id: 128
   time: '2024-06-04T22:04:49.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2236
+  url: https://github.com/RMC-14/RMC-14/pull/2236
 - author: Whisper
   changes:
   - message: Added large webbing.
     type: Add
   id: 129
   time: '2024-06-05T08:55:53.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2244
+  url: https://github.com/RMC-14/RMC-14/pull/2244
 - author: Errant
   changes:
   - message: Added M94 flarepacks and boxes to vendors
     type: Add
   id: 130
   time: '2024-06-06T10:26:01.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2317
+  url: https://github.com/RMC-14/RMC-14/pull/2317
 - author: ShadowCommander
   changes:
   - message: Fixed shotgun shell box not changing sprite when empty.
     type: Fix
   id: 131
   time: '2024-06-07T01:16:07.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2323
+  url: https://github.com/RMC-14/RMC-14/pull/2323
 - author: DrSmugleaf
   changes:
   - message: Added pill packets.
     type: Add
   id: 132
   time: '2024-06-07T02:01:25.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2326
+  url: https://github.com/RMC-14/RMC-14/pull/2326
 - author: Siigiil
   changes:
   - message: Vial pouches now use slots.
@@ -1015,28 +1015,28 @@
     type: Fix
   id: 133
   time: '2024-06-11T22:03:42.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2338
+  url: https://github.com/RMC-14/RMC-14/pull/2338
 - author: Siigiil
   changes:
   - message: The hotkey for pumping the shotgun has been added to the keybinds menu.
     type: Add
   id: 134
   time: '2024-06-11T22:05:40.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2341
+  url: https://github.com/RMC-14/RMC-14/pull/2341
 - author: Hmeister
   changes:
   - message: Xenos now have a ghost role raffle.
     type: Tweak
   id: 135
   time: '2024-06-11T22:26:43.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2394
+  url: https://github.com/RMC-14/RMC-14/pull/2394
 - author: Sigil
   changes:
   - message: Hypersleep pods now function as cryo pods.
     type: Add
   id: 136
   time: '2024-06-11T22:36:16.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2405
+  url: https://github.com/RMC-14/RMC-14/pull/2405
 - author: Whisper
   changes:
   - message: The guidebook now has basic entry pages for new players.
@@ -1047,49 +1047,49 @@
     type: Add
   id: 137
   time: '2024-06-12T05:16:39.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2340
+  url: https://github.com/RMC-14/RMC-14/pull/2340
 - author: MetalSage
   changes:
   - message: Fixed xeno self cluttering
     type: Fix
   id: 138
   time: '2024-06-12T21:48:08.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2410
+  url: https://github.com/RMC-14/RMC-14/pull/2410
 - author: K-Dynamic
   changes:
   - message: Bodies and perishables no longer produce ammonia
     type: Tweak
   id: 139
   time: '2024-06-13T03:12:58.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2396
+  url: https://github.com/RMC-14/RMC-14/pull/2396
 - author: Timemaster99
   changes:
-  - message: Fixed M41a Mk2 inhand and icon sprites
+  - message: Fixed M52C Mk2 inhand and icon sprites
     type: Fix
   id: 140
   time: '2024-06-13T08:09:40.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2425
+  url: https://github.com/RMC-14/RMC-14/pull/2425
 - author: blueDev2
   changes:
   - message: Medically trained personnel can examine pills to see their chemical composition
     type: Add
   id: 141
   time: '2024-06-13T20:14:01.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2413
+  url: https://github.com/RMC-14/RMC-14/pull/2413
 - author: Cu1r
   changes:
   - message: Added tiles necessary to port Fiorina Science Annex.
     type: Add
   id: 142
   time: '2024-06-15T03:19:53.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2471
+  url: https://github.com/RMC-14/RMC-14/pull/2471
 - author: Hmeister
   changes:
   - message: Minor xeno description changes
     type: Tweak
   id: 143
   time: '2024-06-15T03:24:23.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2469
+  url: https://github.com/RMC-14/RMC-14/pull/2469
 - author: DrSmugleaf
   changes:
   - message: Fixed marines getting stuck on hypersleep chambers at roundstart and
@@ -1097,14 +1097,14 @@
     type: Fix
   id: 144
   time: '2024-06-15T04:25:39.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2472
+  url: https://github.com/RMC-14/RMC-14/pull/2472
 - author: Sigil
   changes:
   - message: Reinforced girder removed from crafting menu, as it currently has no
       use.
     type: Remove
   - message: Where possible, changed the material requirements and construction steps
-      for objects marines can build to match their CM13 versions.
+      for objects marines can build to match their CMSS13 versions.
     type: Tweak
   - message: Made girders and other constructible objects drop the RMC14 versions of
       materials.
@@ -1115,28 +1115,28 @@
     type: Fix
   id: 145
   time: '2024-06-15T04:40:55.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2400
+  url: https://github.com/RMC-14/RMC-14/pull/2400
 - author: Whisper
   changes:
   - message: Jungle walls are invincible
     type: Fix
   id: 146
   time: '2024-06-15T06:40:50.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2475
+  url: https://github.com/RMC-14/RMC-14/pull/2475
 - author: Whisper
   changes:
   - message: Xenos now have death text on examine.
     type: Add
   id: 147
   time: '2024-06-15T06:40:27.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2474
+  url: https://github.com/RMC-14/RMC-14/pull/2474
 - author: Whisper
   changes:
   - message: Greatly reduced the speed thirst occurs
     type: Tweak
   id: 148
   time: '2024-06-15T07:49:17.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2477
+  url: https://github.com/RMC-14/RMC-14/pull/2477
 - author: DrSmugleaf
   changes:
   - message: Added the shotgun shell pouch to the surplus uniform vendor.
@@ -1207,21 +1207,21 @@
     type: Tweak
   id: 149
   time: '2024-06-15T09:07:32.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2476
+  url: https://github.com/RMC-14/RMC-14/pull/2476
 - author: amo020
   changes:
   - message: Added the M79 grenade launcher prototype
     type: Add
   id: 150
   time: '2024-06-15T22:13:09.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2470
+  url: https://github.com/RMC-14/RMC-14/pull/2470
 - author: Whisper
   changes:
   - message: Two missing bags from the corpsmen vendor have been added.
     type: Fix
   id: 151
   time: '2024-06-15T23:05:52.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2480
+  url: https://github.com/RMC-14/RMC-14/pull/2480
 - author: Whisper
   changes:
   - message: Rules tweak; MP may not arrest outside of FOB and flagship unless in
@@ -1239,7 +1239,7 @@
     type: Add
   id: 152
   time: '2024-06-16T05:06:23.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2482
+  url: https://github.com/RMC-14/RMC-14/pull/2482
 - author: Whisper
   changes:
   - message: Made puddles smaller and spread less easily, requiring a lot more liquid
@@ -1247,14 +1247,14 @@
     type: Tweak
   id: 153
   time: '2024-06-16T05:06:37.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2484
+  url: https://github.com/RMC-14/RMC-14/pull/2484
 - author: DrSmugleaf
   changes:
   - message: Fixed not being able to use blood packs manually without an IV.
     type: Fix
   id: 154
   time: '2024-06-16T05:07:39.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2483
+  url: https://github.com/RMC-14/RMC-14/pull/2483
 - author: DrSmugleaf
   changes:
   - message: Fixed anyone that was ever put into a stasis bag being unable to process
@@ -1267,7 +1267,7 @@
     type: Fix
   id: 155
   time: '2024-06-16T05:18:15.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2487
+  url: https://github.com/RMC-14/RMC-14/pull/2487
 - author: DrSmugleaf
   changes:
   - message: Fixed counting infected marines as alive towards round end conditions.
@@ -1312,7 +1312,7 @@
     type: Add
   id: 157
   time: '2024-06-16T09:42:06.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2495
+  url: https://github.com/RMC-14/RMC-14/pull/2495
 - author: DrSmugleaf
   changes:
   - message: Fixed resin structures taking more damage from guns than intended.
@@ -1340,14 +1340,14 @@
     type: Add
   id: 161
   time: '2024-06-18T02:21:32.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2485
+  url: https://github.com/RMC-14/RMC-14/pull/2485
 - author: geraeumig
   changes:
   - message: Added ability to scope in with M42A rifle
     type: Add
   id: 162
   time: '2024-06-18T07:50:16.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2426
+  url: https://github.com/RMC-14/RMC-14/pull/2426
 - author: Vermidia
   changes:
   - message: The health analyzer now identifies chest-bursted marines as permanently
@@ -1355,7 +1355,7 @@
     type: Add
   id: 163
   time: '2024-06-18T21:45:02.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2540
+  url: https://github.com/RMC-14/RMC-14/pull/2540
 - author: Nairodian
   changes:
   - message: Added the ability to deconstruct and make; chairs, fences, and light
@@ -1365,7 +1365,7 @@
     type: Remove
   id: 164
   time: '2024-06-18T23:44:23.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2531
+  url: https://github.com/RMC-14/RMC-14/pull/2531
 - author: Sigil
   changes:
   - message: Added the systems for attachments.
@@ -1375,7 +1375,7 @@
     type: Add
   id: 165
   time: '2024-06-21T01:22:50.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2467
+  url: https://github.com/RMC-14/RMC-14/pull/2467
 - author: noisrevni-dev
   changes:
   - message: Added ASRS item search bar to ease supply crew searching for specific
@@ -1383,13 +1383,13 @@
     type: Add
   id: 166
   time: '2024-06-21T01:24:18.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2541
+  url: https://github.com/RMC-14/RMC-14/pull/2541
 - author: blueDev2
   changes:
   - message: Added Holocards
     type: Add
   id: 167
   time: '2024-06-21T03:29:30.0000000+00:00'
-  url: https://github.com/CM-14/CM-14/pull/2544
-Name: CM
+  url: https://github.com/RMC-14/RMC-14/pull/2544
+Name: RMC14
 Order: -1

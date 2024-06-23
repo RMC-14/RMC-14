@@ -1,7 +1,7 @@
 - type: soundCollection
   id: CMMaleScreams
   files:
-    - /Audio/_RMC14/Voice/Human/male_scream_1.ogg
+  #  - /Audio/_RMC14/Voice/Human/male_scream_1.ogg
     - /Audio/_RMC14/Voice/Human/male_scream_2.ogg
     - /Audio/_RMC14/Voice/Human/male_scream_3.ogg
     - /Audio/_RMC14/Voice/Human/male_scream_4.ogg

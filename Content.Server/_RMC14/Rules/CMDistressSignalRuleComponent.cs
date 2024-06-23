@@ -59,20 +59,21 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     [DataField]
     public DistressSignalRuleResult Result;
 
-    [DataField]
-    public SoundSpecifier MajorMarineAudio = new SoundCollectionSpecifier("CMMarineMajor");
-
-    [DataField]
-    public SoundSpecifier MinorMarineAudio = new SoundCollectionSpecifier("CMMarineMinor");
-
-    [DataField]
-    public SoundSpecifier MajorXenoAudio = new SoundCollectionSpecifier("CMXenoMajor");
-
-    [DataField]
-    public SoundSpecifier MinorXenoAudio = new SoundCollectionSpecifier("CMXenoMinor");
-
-    [DataField]
-    public SoundSpecifier AllDiedAudio = new SoundCollectionSpecifier("CMAllDied");
+    // TODO RMC14
+    // [DataField]
+    // public SoundSpecifier MajorMarineAudio = new SoundCollectionSpecifier("CMMarineMajor");
+    //
+    // [DataField]
+    // public SoundSpecifier MinorMarineAudio = new SoundCollectionSpecifier("CMMarineMinor");
+    //
+    // [DataField]
+    // public SoundSpecifier MajorXenoAudio = new SoundCollectionSpecifier("CMXenoMajor");
+    //
+    // [DataField]
+    // public SoundSpecifier MinorXenoAudio = new SoundCollectionSpecifier("CMXenoMinor");
+    //
+    // [DataField]
+    // public SoundSpecifier AllDiedAudio = new SoundCollectionSpecifier("CMAllDied");
 
     public Dictionary<CVarDef<float>, float> OriginalCVarValues = new();
 

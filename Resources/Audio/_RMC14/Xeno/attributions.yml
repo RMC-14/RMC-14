@@ -63,16 +63,6 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/voice/alien_pounce.ogg"
 
-- files: ["alien_queen_breath1.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from cmss13"
-  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/misc/alien_queen_breath1.ogg"
-
-- files: ["alien_queen_breath2.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from cmss13"
-  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/misc/alien_queen_breath2.ogg"
-
 - files: ["alien_queen_command.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
@@ -157,11 +147,6 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/485afd96d16f4df22dbbb46f214df931d24a2eb8/sound/effects/alien_resin_move2.ogg"
-
-- files: ["queen_alarm.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from cmss13"
-  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/misc/queen_alarm.ogg"
 
 - files: ["xeno_evolveready.ogg"]
   license: "CC-BY-SA-3.0"

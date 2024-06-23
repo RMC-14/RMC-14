@@ -114,11 +114,11 @@
       collection: XenoFootstepLarge
       params:
         volume: -12
-  - type: RandomSound
-    sound:
-      collection: XenoQueenBreath
-      params:
-        volume: -10
+#  - type: RandomSound
+#    sound:
+#      collection: XenoQueenBreath # TODO CM14
+#      params:
+#        volume: -10
     min: 45
     max: 60
   - type: SoundOnDeath
