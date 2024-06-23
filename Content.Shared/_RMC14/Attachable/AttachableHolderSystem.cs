@@ -291,7 +291,6 @@ public sealed class AttachableHolderSystem : EntitySystem
         {
             var addEv = new GrantAttachableActionsEvent(userUid);
             RaiseLocalEvent(attachableUid, ref addEv);
-        }
         
         _audio.PlayPredicted(Comp<AttachableComponent>(attachableUid).AttachSound,
             holder,
@@ -302,7 +301,10 @@ public sealed class AttachableHolderSystem : EntitySystem
     
     private void OnAttached(Entity<AttachableHolderComponent> holder, ref EntInsertedIntoContainerMessage args)
     {
-        if(!HasComp<AttachableComponent>(args.Entity) || !holder.Comp.Slots.ContainsKey(args.Container.ID))
+        if (!HasComp<AttachableComponent>(args.Entity) || !holder.Comp.Slots.ContainsKey(args.Container.ID))
+            return;
+        
+        if (args.OldParent == holder.Owner)
             return;
         
         UpdateStripUi(holder.Owner, holder.Comp);
@@ -369,7 +371,7 @@ public sealed class AttachableHolderSystem : EntitySystem
 
         if (string.IsNullOrEmpty(slotId))
             CanAttach(holder, attachableUid, ref slotId);
-
+        
         if (!_container.TryGetContainer(holder, slotId, out var container) || container.Count <= 0)
             return false;
 
@@ -515,6 +517,9 @@ public sealed class AttachableHolderSystem : EntitySystem
         var attachableUid = container.ContainedEntities[0];
 
         if (!HasComp<AttachableToggleableComponent>(attachableUid))
+            return;
+        
+        if (!TryComp<AttachableToggleableComponent>(attachableUid, out var toggleableComponent))
             return;
 
         var ev = new AttachableToggleStartedEvent((active.Value, holderComponent), userUid, slotId);
