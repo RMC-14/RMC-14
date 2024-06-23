@@ -7,11 +7,11 @@
     - name: Ammo
       entries:
       - cost: 2000
-        crate: CMCrateBoxMagazineRifleM52C
+        crate: CMCrateBoxMagazineRifleM54C
       - cost: 4000
-        crate: CMCrateBoxMagazineRifleM52CAP
+        crate: CMCrateBoxMagazineRifleM54CAP
       - cost: 3000
-        crate: CMCrateBoxMagazineRifleM52CExt
+        crate: CMCrateBoxMagazineRifleM54CExt
       - cost: 2000
         crate: CMCrateBoxMagazineRifleM4RA
       - cost: 4000
@@ -177,9 +177,9 @@
     - name: Weapons
       entries:
       - cost: 4000
-        crate: CMCrateM52C
+        crate: CMCrateM54C
 #      - cost: 4000
-#        crate: CMCrateM52CE2
+#        crate: CMCrateM54CE2
       - cost: 3000
         crate: CMCrateVP78
     - name: Weapons Specialist Ammo
