@@ -1424,5 +1424,14 @@
   id: 171
   time: '2024-06-23T08:03:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2324
+- author: DrSmugleaf
+  changes:
+  - message: Added all Lurker abilities and most of the Spitter's abilities.
+    type: Add
+  - message: Enabled the Spitter, Lurker and Warrior evolutions.
+    type: Add
+  id: 172
+  time: '2024-06-23T11:13:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2566
 Name: RMC14
 Order: -1
