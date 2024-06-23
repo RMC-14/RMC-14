@@ -63,6 +63,7 @@
         whitelist:
           tags:
           - CMAttachmentExtendedBarrel
+          - CMAttachmentRecoilCompensator
           - CMAttachmentSuppressor
       cm-aslot-rail:
         whitelist:

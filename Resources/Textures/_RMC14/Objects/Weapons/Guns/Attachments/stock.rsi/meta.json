@@ -14,10 +14,10 @@
       "name": "smg_brace"
     },
     {
-      "name": "smgstockcc"
+      "name": "smgstockcol"
     },
     {
-      "name": "smgstockc"
+      "name": "smgstockcol-on"
     },
     {
       "name": "smgstock"
@@ -86,10 +86,10 @@
       "name": "smg_brace_a"
     },
     {
-      "name": "smgstockcc_a"
+      "name": "smgstockcol-a"
     },
     {
-      "name": "smgstockc_a"
+      "name": "smgstockcol-a-on"
     },
     {
       "name": "smgstock_a"

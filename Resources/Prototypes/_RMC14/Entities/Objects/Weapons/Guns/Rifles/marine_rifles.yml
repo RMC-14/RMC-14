@@ -100,7 +100,7 @@
     offsets:
       cm-aslot-barrel: 0.53, 0.06
       cm-aslot-rail: -0.1, 0.23
-      cm-aslot-underbarrel: 0.0, 0.0
+      cm-aslot-underbarrel: 0.25, -0.1
 
 - type: entity
   name: M54CE2 heavy pulse rifle
