@@ -1,0 +1,14 @@
+﻿<cc:CMAutomatedVendorPanel
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client._RMC14.Vendors"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    HorizontalExpand="True">
+    <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="0" Name="Panel">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#162031" BorderColor="#4972A1"
+                                   BorderThickness="2" />
+        </PanelContainer.PanelOverride>
+        <cc:CMAutomatedVendorButton Name="Button" Access="Public"
+                                    ModulateSelfOverride="#00000000" HorizontalExpand="True" />
+    </PanelContainer>
+</cc:CMAutomatedVendorPanel>

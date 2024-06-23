@@ -1,0 +1,114 @@
+﻿- type: entity
+  abstract: true
+  id: CMVinesBase
+  name: vines
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/slash.ogg"
+  - type: Sprite
+    sprite: _RMC14/Objects/vines.rsi
+    state: heavy_1
+    drawdepth: Overdoors
+  - type: RandomSprite
+    available:
+    - 0:
+        heavy_1: ""
+        heavy_2: ""
+        heavy_3: ""
+        heavy_4: ""
+        heavy_5: ""
+        heavy_6: ""
+  - type: Appearance
+  - type: Clickable
+  - type: Transform
+    anchored: true
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        density: 7
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        layer:
+        - MidImpassable
+  - type: Damageable
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Temperature
+    heatDamage:
+      types:
+        Heat: 5
+    coldDamage: {}
+  - type: Flammable
+    fireSpread: true
+    damage:
+      types:
+        Heat: 3
+  - type: Reactive
+    groups:
+      Flammable: [Touch]
+      Extinguish: [Touch]
+    reactions:
+    - reagents: [WeedKiller, PlantBGone]
+      methods: [Touch]
+      effects:
+      - !type:HealthChange
+        scaleByQuantity: true
+        damage:
+          types:
+            Heat: 10
+  - type: AtmosExposed
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.8
+    sprintSpeedModifier: 0.8
+
+- type: entity
+  parent: CMVinesBase
+  id: CMVinesLight
+  name: vines
+  description: A mass of twisted vines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/vines.rsi
+    state: light_1
+  - type: RandomSprite
+    available:
+    - 0:
+        light_1: ""
+        light_2: ""
+        light_3: ""
+
+- type: entity
+  parent: CMVinesBase
+  id: CMVinesHeavy
+  name: vines
+  description: A thick, coiled mass of twisted vines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/vines.rsi
+    state: heavy_1
+  - type: RandomSprite
+    available:
+    - 0:
+        heavy_1: ""
+        heavy_2: ""
+        heavy_3: ""
+        heavy_4: ""
+        heavy_5: ""
+        heavy_6: ""

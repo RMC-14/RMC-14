@@ -298,7 +298,7 @@ SpawnPointMaintTech: CMSpawnPointMaintTech
 SpawnPointOrdnanceTech: CMSpawnPointOrdnanceTech
 SpawnPointRifleman: CMSpawnPointRifleman
 SpawnPointSeniorEnlistedAdvisor: CMSpawnPointSeniorEnlistedAdvisor
-SpawnPointSmartGunner: CMSpawnPointSmartGunner
+# SpawnPointSmartGunner: CMSpawnPointSmartGunner
 SpawnPointSquadLeader: CMSpawnPointSquadLeader
 SpawnPointStaffOfficer: CMSpawnPointStaffOfficer
 SpawnPointWeaponsSpecialist: CMSpawnPointWeaponsSpecialist
@@ -388,3 +388,23 @@ ShrapnelProjectile: CMProjectileShrapnel
 
 # 2024-06-06
 CMAutoLathe: CMAutolathe
+
+# 2024-06-22
+CMSpawnPointSmartGunner: CMSpawnPointSmartGunOperator
+CMFaxUPP: CMFaxSPP
+CMFaxTwE: CMFaxTSE
+CMBoxMagazineRifleM41A: CMBoxMagazineRifleM52C
+CMBoxMagazineRifleM41AAP: CMBoxMagazineRifleM52CAP
+CMBoxMagazineRifleM41AExt: CMBoxMagazineRifleM52CExt
+CMMagazineRifleM41A: CMMagazineRifleM52C
+CMMagazineRifleM41AAP: CMMagazineRifleM52CAP
+CMMagazineRifleM41AExt: CMMagazineRifleM52CExt
+CMAttachmentM41ASolidStock: CMAttachmentM52CSolidStock
+WeaponRifleM41A: WeaponRifleM52C
+CMCrateBoxMagazineRifleM41A: CMCrateBoxMagazineRifleM52C
+CMCrateBoxMagazineRifleM41AAP: CMCrateBoxMagazineRifleM52CAP
+CMCrateBoxMagazineRifleM41AExt: CMCrateBoxMagazineRifleM52CExt
+CMCrateM41A: CMCrateM52C
+CMCrateM41AE2: CMCrateM52CE2
+CMMagazineRifleM41AE2: CMMagazineRifleM52CE2
+WeaponRifleM41AE2: WeaponRifleM52CE2

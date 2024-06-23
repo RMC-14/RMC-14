@@ -1,0 +1,40 @@
+- type: entity
+  id: CMCarpetBase
+  parent: BaseStructure
+  name: carpet
+  description: "Fancy walking surface."
+  abstract: true
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+  - type: Icon
+    state: full
+  - type: IconSmooth
+    key: full
+    base: carpet_
+  - type: Tag
+    tags: [ Carpet ]
+  - type: Physics
+    canCollide: false
+  - type: Fixtures
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 10
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+
+- type: entity
+  id: CMCarpetPrison
+  parent: CarpetBase
+  components:
+  - type: Clickable
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Carpets/prison_carpet.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Carpets/prison_carpet.rsi
+

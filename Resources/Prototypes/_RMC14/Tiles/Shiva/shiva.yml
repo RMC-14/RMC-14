@@ -1,0 +1,35 @@
+﻿- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelShiva
+  sprite: /Textures/_RMC14/Tiles/shiva/floor.png
+
+- type: tile
+  parent: CMFloorPlate
+  id: CMFloorSteelShivaPlate
+  sprite: /Textures/_RMC14/Tiles/shiva/floor3.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorSteelShivaMultiTile
+  sprite: /Textures/_RMC14/Tiles/shiva/multi_tiles_0.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorSteelShivaMultiTile1
+  sprite: /Textures/_RMC14/Tiles/shiva/multi_tiles_1.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorSteelShivaMultiTile2
+  sprite: /Textures/_RMC14/Tiles/shiva/multi_tiles_2.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorSteelShivaMultiTile3
+  sprite: /Textures/_RMC14/Tiles/shiva/multi_tiles_3.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorSteelShivaMultiTile4
+  sprite: /Textures/_RMC14/Tiles/shiva/multi_tiles_4.png
+

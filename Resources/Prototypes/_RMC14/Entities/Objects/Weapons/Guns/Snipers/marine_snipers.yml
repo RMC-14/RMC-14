@@ -1,0 +1,55 @@
+# TODO RMC14 sniper barrel
+- type: entity
+  parent: CMBaseWeaponRifle
+  id: CMM42ASniperRifle
+  name: M42A scoped rifle
+  description: "A heavy sniper rifle manufactured by Armat Systems. It has a scope system and fires armor penetrating rounds out of a 15-round magazine.
+    'Peace Through Superior Firepower'"
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m42a.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+      state: sniperbarrel
+      offset: 0.715, 0.025
+  - type: Item
+    size: Large
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m42a.rsi
+  - type: Gun
+    minAngle: 50
+    maxAngle: 50
+    fireRate: 0.5
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_sniper.ogg
+  - type: GunWieldBonus
+    minAngle: -50
+    maxAngle: -50
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineSniperM42A
+  - type: GunUserWhitelist
+    whitelist:
+      components:
+      - SniperWhitelist
+  - type: GunRequiresWield
+  - type: Corrodible
+    isCorrodible: false
+  - type: GunIFF
+  - type: Scope
+    zoom: 1.25 # TODO RMC14 2x and 4x zoom
+    requireWielding: true

@@ -1,0 +1,65 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelPlanetDarkRedBase
+  name: tiles-cm-default-red
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkRedBase
+  id: CMFloorSteelPlanetDarkRed0
+  sprite: /Textures/_RMC14/Tiles/floors/darkred_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkRedBase
+  id: CMFloorSteelPlanetDarkRed1
+  sprite: /Textures/_RMC14/Tiles/floors/darkred_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkRedBase
+  id: CMFloorSteelPlanetDarkRed2
+  sprite: /Textures/_RMC14/Tiles/floors/darkred_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkRedBase
+  id: CMFloorSteelPlanetDarkRed3
+  sprite: /Textures/_RMC14/Tiles/floors/darkred_3.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkRedBase
+  id: CMFloorSteelPlanetDarkRed4
+  sprite: /Textures/_RMC14/Tiles/floors/darkred_4.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkRedBase
+  id: CMFloorSteelPlanetDarkRed5
+  sprite: /Textures/_RMC14/Tiles/floors/darkred_5.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkRedBase
+  id: CMFloorSteelPlanetDarkRed6
+  sprite: /Textures/_RMC14/Tiles/floors/darkred_6.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkRedBase
+  id: CMFloorSteelPlanetDarkRed7
+  sprite: /Textures/_RMC14/Tiles/floors/darkred_7.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkRedBase
+  id: CMFloorSteelPlanetDarkRedCorners0
+  sprite: /Textures/_RMC14/Tiles/floors/darkredcorner_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkRedBase
+  id: CMFloorSteelPlanetDarkRedCorners1
+  sprite: /Textures/_RMC14/Tiles/floors/darkredcorner_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkRedBase
+  id: CMFloorSteelPlanetDarkRedCorners2
+  sprite: /Textures/_RMC14/Tiles/floors/darkredcorner_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkRedBase
+  id: CMFloorSteelPlanetDarkRedCorners3
+  sprite: /Textures/_RMC14/Tiles/floors/darkredcorner_3.png

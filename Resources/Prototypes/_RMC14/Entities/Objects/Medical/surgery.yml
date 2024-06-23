@@ -1,0 +1,376 @@
+# Base
+- type: entity
+  parent: BaseToolSurgery
+  id: CMBaseToolSurgery
+  abstract: true
+  name: retractor
+  description: Retracts stuff.
+  components:
+  - type: Item
+    size: Small
+  - type: CMSurgeryTool
+
+# Retractor
+- type: entity
+  parent: CMBaseToolSurgery
+  id: CMRetractor
+  name: retractor
+  description: Retracts stuff.
+  components:
+  - type: CMSurgeryTool
+    startSound:
+      path: /Audio/_RMC14/Medical/Surgery/retractor1.ogg
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/retractor2.ogg
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/retractor.rsi
+    state: retractor
+  - type: Item
+    sprite: _RMC14/Objects/Medical/Surgery/retractor.rsi
+  - type: CMRetractor
+
+# - Predator
+- type: entity
+  parent: CMRetractor
+  id: CMRetractorPredator
+  name: opener
+  components:
+  - type: Sprite
+    state: predator_retractor
+
+
+
+# Hemostat
+- type: entity
+  parent: CMBaseToolSurgery
+  id: CMHemostat
+  name: hemostat
+  description: You think you have seen this before.
+  components:
+  - type: CMSurgeryTool
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/hemostat1.ogg
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
+    state: hemostat
+  - type: Item
+    sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
+  - type: CMHemostat
+
+# - Predator
+- type: entity
+  parent: CMHemostat
+  id: CMHemostatPredator
+  name: pincher
+  components:
+  - type: Sprite
+    state: predator_hemostat
+
+
+
+# Cautery
+- type: entity
+  parent: CMBaseToolSurgery
+  id: CMCautery
+  name: cautery
+  description: This stops bleeding.
+  components:
+  - type: CMSurgeryTool
+    startSound:
+      path: /Audio/_RMC14/Medical/Surgery/cautery1.ogg
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/cautery2.ogg
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/cautery.rsi
+    state: cautery
+  - type: Item
+    size: Tiny
+    sprite: _RMC14/Objects/Medical/Surgery/cautery.rsi
+  - type: MeleeWeapon
+    damage:
+      types:
+        Heat: 5
+    soundHit:
+      path: /Audio/Effects/lightburn.ogg
+  - type: CMCautery
+
+# - Predator
+- type: entity
+  parent: CMCautery
+  id: CMCauteryPredator
+  name: cauterizer
+  components:
+  - type: Sprite
+    state: predator_cautery
+
+
+
+# Surgical drill
+- type: entity
+  parent: CMBaseToolSurgery
+  id: CMSurgicalDrill
+  name: surgical drill
+  description: You can drill using this item. You dig?
+  components:
+  - type: CMSurgeryTool
+    startSound:
+      path: /Audio/_RMC14/Medical/Surgery/saw.ogg
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/drill.rsi
+    state: drill
+  - type: Item
+    sprite: _RMC14/Objects/Medical/Surgery/drill.rsi
+  - type: MeleeWeapon
+    damage:
+      types:
+        Piercing: 10
+    soundHit:
+      path: /Audio/Items/drill_hit.ogg
+  - type: CMSurgicalDrill
+
+# - Bonedrill
+- type: entity
+  parent: CMSurgicalDrill
+  id: CMSurgicalDrillPredator
+  name: bone drill
+  components:
+  - type: Sprite
+    state: predator_drill
+
+
+
+# Scalpel
+- type: entity
+  parent: CMBaseToolSurgery
+  id: CMScalpel
+  name: scalpel
+  description: Cut, cut, and once more cut.
+  components:
+  - type: CMSurgeryTool
+    startSound:
+      path: /Audio/_RMC14/Medical/Surgery/scalpel1.ogg
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/scalpel2.ogg
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/scalpel.rsi
+    state: scalpel
+  - type: Item
+    size: Tiny
+    sprite: _RMC14/Objects/Medical/Surgery/scalpel.rsi
+  - type: Sharp
+    butcherDelayModifier: 1.5
+  - type: Utensil
+    types:
+    - Knife
+  - type: MeleeWeapon
+    wideAnimationRotation: 90
+    swingLeft: true
+    attackRate: 1.5
+    damage:
+      types:
+        Slash: 8
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: CMScalpel
+
+# - Predator
+- type: entity
+  parent: CMScalpel
+  id: CMScalpelPredator
+  name: cutter
+  components:
+  - type: Sprite
+    state: predator_scalpel
+
+# - Laser
+- type: entity
+  parent: CMScalpel
+  id: CMScalpelLaser
+  name: prototype laser scalpel
+  description: A scalpel augmented with a directed laser, for controlling bleeding as the incision is made. Also functions as a cautery. This one looks like an unreliable early model.
+  components:
+  - type: Sprite
+    layers:
+    - state: scalpel_laser
+      map: [ "enum.ToggleVisuals.Layer" ]
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 0
+  - type: ItemToggle
+    predictable: false
+  - type: ItemToggleHot
+  - type: UseDelay
+  - type: ItemToggleMeleeWeapon
+    activatedDamage:
+      types:
+        Slash: 14
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
+          True: { state: scalpel_laser_on }
+          False: { state: scalpel_laser }
+
+# - - Improved
+- type: entity
+  parent: CMScalpelLaser
+  id: CMScalpelLaserImproved
+  name: laser scalpel
+  description: A scalpel augmented with a directed laser, for controlling bleeding as the incision is made. Also functions as a cautery. This one looks trustworthy, though it could be better.
+  components:
+  - type: Sprite
+    layers:
+    - state: scalpel_laser_2
+      map: [ "enum.ToggleVisuals.Layer" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
+          True: { state: scalpel_laser_2_on }
+          False: { state: scalpel_laser_2 }
+
+# - - Advanced
+- type: entity
+  parent: CMScalpelLaser
+  id: CMScalpelLaserAdvanced
+  name: advanced laser scalpel
+  description: A scalpel augmented with a directed laser, for controlling bleeding as the incision is made. Also functions as a cautery. This one looks to be the pinnacle of precision energy cutlery!
+  components:
+  - type: Sprite
+    layers:
+    - state: scalpel_laser_3
+      map: [ "enum.ToggleVisuals.Layer" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
+          True: { state: scalpel_laser_3_on }
+          False: { state: scalpel_laser_3 }
+
+# - Pict System
+- type: entity
+  parent: CMScalpel
+  id: CMScalpelPICT
+  name: PICT system
+  description: The Precision Incision and Cauterization Tool uses a high-frequency vibrating blade, laser cautery, and suction liquid control system to precisely sever target tissues while preventing all fluid leakage. Despite its troubled development program and horrifying price tag, outside of complex experimental surgeries it isn't any better than an ordinary twenty-dollar scalpel and can't create a full-length incision bloodlessly.
+  components:
+  - type: Sprite
+    state: pict_system
+
+# - Manager
+- type: entity
+  parent: CMScalpel
+  id: CMScalpelManager
+  name: incision management system
+  description: A true extension of the surgeon's body, this marvel instantly and completely prepares an incision allowing for the immediate commencement of therapeutic steps.
+  components:
+  - type: Sprite
+    state: scalpel_manager
+
+
+
+# Circular saw
+- type: entity
+  parent: CMBaseToolSurgery
+  id: CMCircularSaw
+  name: circular saw
+  description: For heavy-duty cutting.
+  components:
+  - type: CMSurgeryTool
+    startSound:
+      path: /Audio/_RMC14/Medical/Surgery/saw.ogg
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/saw.rsi
+    state: saw
+  - type: Item
+    sprite: _RMC14/Objects/Medical/Surgery/saw.rsi
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 15
+    soundHit:
+      path: /Audio/Items/drill_hit.ogg
+  - type: Tool
+    qualities:
+    - Sawing
+    speedModifier: 1.5
+  - type: CMBoneSaw
+
+# - Predator
+- type: entity
+  parent: CMCircularSaw
+  id: CMCircularSawPredator
+  name: bone saw
+  components:
+  - type: Sprite
+    state: predator_bonesaw
+
+
+
+# Bone setter
+- type: entity
+  parent: CMBaseToolSurgery
+  id: CMBonesetter
+  name: bone setter
+  components: # TODO RMC14
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/bonesetter.rsi
+    state: bonesetter
+  - type: Item
+    sprite: _RMC14/Objects/Medical/Surgery/bonesetter.rsi
+
+# - Predator
+- type: entity
+  parent: CMBonesetter
+  id: CMBonesetterPredator
+  name: bone placer
+  components:
+  - type: Sprite
+    state: predator_bonesetter
+
+
+
+# Pump
+# Wound clamp
+- type: entity
+  parent: CMBaseToolSurgery
+  id: CMWoundClamp
+  name: wound clamp
+  description: Used for clamping wounds after treatment.
+  components: # TODO RMC14
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/wound_clamp.rsi
+    state: wound_clamp
+  - type: Item
+    sprite: _RMC14/Objects/Medical/Surgery/wound_clamp.rsi
+
+
+
+# Autopsy (actually just a laser scalpel)
+- type: entity
+  parent: CMBaseToolSurgery
+  id: CMAutopsy
+  name: We-Ya Brand Automatic Autopsy System(TM)
+  description: Putting the FUN back in Autopsy.  This little gadget performs an entire autopsy of whatever strange life form you've found in about 30 seconds.
+  components: # TODO RMC14
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/scalpel.rsi
+    state: scalpel_laser_2
+  - type: Item
+    sprite: _RMC14/Objects/Medical/Surgery/scalpel.rsi
+
+
+
+# Bone Gel
+- type: entity
+  parent: CMBaseToolSurgery
+  id: CMBoneGel
+  name: bottle of bone gel
+  description: A container for bone gel that often needs to be refilled from a specialized machine.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/bone_gel.rsi
+    state: bone-gel
+  - type: CMBoneGel

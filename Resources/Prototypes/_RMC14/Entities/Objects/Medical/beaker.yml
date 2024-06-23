@@ -1,0 +1,141 @@
+- type: entity
+  parent: BaseBeaker
+  id: CMBeakerBase
+  abstract: true
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpillBehavior
+        solution: beaker
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMShardGlass:
+            min: 1
+            max: 1
+        transferForensics: true
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: CMBeakerBase
+  id: CMBeaker
+  name: beaker
+  description: A beaker. Can hold up to 60 units.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/beaker.rsi
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Medical/beaker.rsi
+  - type: SolutionContainerVisuals
+    maxFillLevels: 5
+    fillBaseName: beaker
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 60
+  - type: Spillable
+    solution: beaker
+  - type: StaticPrice
+    price: 10
+
+- type: entity
+  parent: CMBeakerBase
+  id: CMBeakerLarge
+  name: large beaker
+  description: A large beaker. Can hold up to 120 units.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/large_beaker.rsi
+    layers:
+    - state: beakerlarge
+    - state: beakerlarge1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: Item
+    sprite: _RMC14/Objects/Medical/large_beaker.rsi
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 120
+  - type: SolutionContainerVisuals
+    maxFillLevels: 5
+    fillBaseName: beakerlarge
+  - type: Spillable
+    solution: beaker
+  - type: StaticPrice
+    price: 20
+
+# Minitank /obj/item/reagent_container/glass/minitank
+- type: entity
+  parent: CMBeakerBase
+  id: CMMiniTank
+  name: MS-11 Smart Refill Tank
+  description: A robust little tank capable of refilling autoinjectors that previously required a nanomed system to refill. Using the wonders of microchips, it automatically sorts the correct chemicals into most single reagent autoinjectors. It is unable to partially fill them however. A valve exists on the top to transfer reagents to another container or to flush it entirely.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/minitank.rsi
+    layers:
+    - state: icon
+    - state: minitank1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: Item
+    size: Normal
+    sprite: _RMC14/Objects/Tanks/minitank.rsi
+  - type: SolutionContainerVisuals
+    maxFillLevels: 5
+    fillBaseName: minitank
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 180
+  - type: Spillable
+    solution: beaker
+  - type: StaticPrice
+    price: 20
+
+# Pressurised Canister /obj/item/reagent_container/glass/pressurized_canister
+- type: entity
+  parent: CMBeakerBase
+  id: CMPressurizedCanister
+  name: pressurized canister
+  description: A pressurized container. The inner part of a pressurized reagent canister pouch. Only compatible with its pouch, machinery or a storage tank.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/pressurized_reagent_container.rsi
+    layers:
+    - state: icon
+    - state: can1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: Item
+    size: Large
+    sprite: _RMC14/Objects/Tanks/pressurized_reagent_container.rsi
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 480
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    fillBaseName: can
+  - type: Spillable
+    solution: beaker
+  - type: StaticPrice
+    price: 40
+  - type: Tag
+    tags:
+    - PressurizedCanister
+    - ChemDispensable
+
+- type: Tag
+  id: PressurizedCanister

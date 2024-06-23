@@ -1,7 +1,7 @@
 using System.Numerics;
 using Content.Server.Explosion.Components;
 using Content.Server.Weapons.Ranged.Systems;
-using Content.Shared._CM14.Explosion;
+using Content.Shared._RMC14.Explosion;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Flash.Components;
 using Content.Shared.Interaction;

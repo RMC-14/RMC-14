@@ -1,0 +1,137 @@
+- type: entity
+  parent: [ ComputerCargoOrders, CMCargoCatalog ]
+  id: CMASRSConsole
+  name: ASRS console
+  description: A console for the Automated Storage Retrieval System.
+  suffix: Requisitions
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/asrs_console.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: off
+    - map: ["computerLayerScreen"]
+      state: on
+  - type: CargoOrderConsole
+  - type: ActivatableUI
+    key: enum.RequisitionsUIKey.Key
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [ [ "CMAccessRequisitions" ] ]
+  - type: UserInterface
+    interfaces:
+      enum.RequisitionsUIKey.Key:
+        type: RequisitionsBui
+  - type: Computer
+    board: CargoRequestComputerCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#b89f25"
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSource
+    range: 200
+    ports:
+    - OrderSender
+  - type: GuideHelp
+    guides:
+    - Cargo
+  - type: CargoSellBlacklist
+
+- type: entity
+  id: CMCargoElevator
+  name: cargo elevator
+  suffix: Lowered, Requisitions
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Effects/elevator.rsi
+    drawdepth: LowFloors
+    layers:
+    - state: supply_elevator_lowered
+      map: [ "enum.RequisitionsElevatorLayers.Base" ]
+  - type: Physics
+    bodyType: static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-2.3,-2.3,2.3,2.3"
+        layer:
+        - WallLayer
+        mask:
+        - ItemMask
+        density: 1000
+        hard: false
+  - type: Chasm
+  - type: StepTrigger
+    requiredTriggeredSpeed: 0
+    intersectRatio: 1
+    blacklist:
+      tags:
+      - Catwalk
+  - type: RequisitionsElevator
+  - type: CargoSellBlacklist
+
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: CMRailing
+  name: retractable railing
+  description: That looks like it doesn't open easily.
+  suffix: Raised
+  components:
+  - type: Transform
+    anchored: false
+    noRot: false
+  - type: Sprite
+    sprite: _RMC14/Structures/railing.rsi
+    offset: 0,0.5
+    layers:
+    - state: raised
+      map: [ "enum.RequisitionsRailingLayers.Base" ]
+    noRot: true
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,-0.3"
+        layer:
+        - TableLayer
+        mask:
+        - TableMask
+        density: 1000
+  - type: Climbable
+  - type: RequisitionsRailing
+    mode: Raised
+  - type: CargoSellBlacklist
+
+- type: entity
+  id: CMGear
+  name: gear
+  description: ""
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/gear.rsi
+    layers:
+    - state: base
+      map: [ "enum.RequisitionsGearLayers.Base" ]
+  - type: RequisitionsGear
+  - type: CargoSellBlacklist
