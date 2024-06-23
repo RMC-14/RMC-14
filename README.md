@@ -1,4 +1,4 @@
-<p align="center"> <img alt="Space Station 14" width="400" height="400" src="https://github.com/RMC-14/RMC-14/assets/121047731/46f1dcad-1714-41b6-a9e9-7db7b440e466" /></p>
+<p align="center"> <img alt="Space Station 14" width="400" height="400" src="https://github.com/RMC-14/RMC-14/assets/121047731/84edde1b-1a1f-452e-a9b9-64759a865f64" /></p>
 
 RMC14 is inspired by CM13, Space Station 13, that runs on [Robust Toolbox](https://github.com/space-wizards/RobustToolbox).
 
