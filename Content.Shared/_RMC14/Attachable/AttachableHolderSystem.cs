@@ -310,11 +310,11 @@ public sealed class AttachableHolderSystem : EntitySystem
         
         UpdateStripUi(holder.Owner, holder.Comp);
 
-        var holderEv = new AttachableHolderAttachablesAlteredEvent(args.Entity, args.Container.ID, AttachableAlteredType.Attached);
-        RaiseLocalEvent(holder, ref holderEv);
-
         var ev = new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Attached);
         RaiseLocalEvent(args.Entity, ref ev);
+        
+        var holderEv = new AttachableHolderAttachablesAlteredEvent(args.Entity, args.Container.ID, AttachableAlteredType.Attached);
+        RaiseLocalEvent(holder, ref holderEv);
         
         Dirty(holder);
     }
@@ -382,11 +382,11 @@ public sealed class AttachableHolderSystem : EntitySystem
         _container.TryRemoveFromContainer(attachable);
         UpdateStripUi(holder.Owner, holder.Comp);
 
-        var holderEv = new AttachableHolderAttachablesAlteredEvent(attachableUid, slotId, AttachableAlteredType.Detached);
-        RaiseLocalEvent(holder.Owner, ref holderEv);
-
         var ev = new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Detached, userUid);
         RaiseLocalEvent(attachableUid, ref ev);
+        
+        var holderEv = new AttachableHolderAttachablesAlteredEvent(attachableUid, slotId, AttachableAlteredType.Detached);
+        RaiseLocalEvent(holder.Owner, ref holderEv);
 
         var removeEv = new RemoveAttachableActionsEvent(userUid);
         RaiseLocalEvent(attachableUid, ref removeEv);
