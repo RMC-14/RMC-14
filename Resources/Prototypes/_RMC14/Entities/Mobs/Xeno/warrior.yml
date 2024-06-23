@@ -45,8 +45,8 @@
     plasmaRegenOnWeeds: 0
   - type: XenoEvolution
     max: 540
-#    evolvesTo:
-#    - CMXenoCrusher
+    evolvesTo:
+    - CMXenoCrusher
 #    - CMXenoPraetorian
   - type: CMArmor
     armor: 20
