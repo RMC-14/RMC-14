@@ -1,0 +1,6 @@
+- type: statusIcon
+  parent: CMJobIconBase
+  id: CMJobIconLiaison
+  icon:
+    sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
+    state: hudWE-YA

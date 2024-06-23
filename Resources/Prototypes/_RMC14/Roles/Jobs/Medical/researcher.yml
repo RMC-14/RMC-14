@@ -1,0 +1,61 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMResearcher
+  name: cm-job-name-researcher
+  description: cm-job-description-researcher
+  playTimeTracker: CMJobResearcher
+  requirements:
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 18000 # 5 hours
+  startingGear: CMGearResearcher
+  icon: "CMJobIconResearcher"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-cmo
+  accessGroups:
+  - Researcher
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      firearms: 0
+      intel: 1
+      medical: 3
+      research: 1
+      surgery: 2
+  hidden: true # TODO RMC14
+
+- type: startingGear
+  id: CMGearResearcher
+  equipment:
+    jumpsuit: CMJumpsuitResearch
+    back: CMSatchel
+    shoes: CMShoesLaceup
+    id: CMIDCardResearcher
+    # TODO RMC14 random chemical synthesis note, syringe,
+
+- type: startingGear
+  id: CMGearResearcherEquipped
+  equipment:
+    jumpsuit: CMJumpsuitResearch
+    back: CMSatchelMarine
+    gloves: CMHandsLatex
+    shoes: CMShoesLaceup
+    id: CMIDCardResearcher
+    ears: CMHeadsetResearcher
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointResearcher
+  name: researcher spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMResearcher
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: researcher
+
+- type: playTimeTracker
+  id: CMJobResearcher

@@ -1,0 +1,30 @@
+﻿# TODO RMC14 cutting
+- type: entity
+  parent: BaseFenceMetal
+  id: CMFence
+  name: fence
+  description: A large metal mesh strewn between two poles. Intended as a cheap way to separate areas, while allowing one to see through it.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/fences.rsi
+    state: fence0
+  - type: InteractionOutline
+  - type: Clickable
+  - type: IconSmooth
+    key: walls
+    base: fence
+    mode: CardinalFlags
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Construction
+    graph: CMFence
+    node: fenceMetal

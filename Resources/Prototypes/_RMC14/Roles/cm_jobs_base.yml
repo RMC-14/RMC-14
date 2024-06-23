@@ -1,0 +1,52 @@
+﻿- type: job
+  abstract: true
+  id: CMJobBase
+  isCM: true
+  canBeAntag: false
+
+- type: job
+  abstract: true
+  parent: CMJobBase
+  id: CMJobSquadBase
+  hasSquad: true
+
+- type: department
+  abstract: true
+  id: CMDepartmentBase
+  isCM: true
+
+# Xeno
+- type: job
+  abstract: true
+  parent: CMJobBase
+  id: CMJobXenoBase
+  description: null
+  joinNotifyCrew: false
+  icon: "CMJobIconEmpty"
+  supervisors: cm-job-supervisors-queen
+  accessGroups:
+  - CMAccessXeno
+  hasIcon: false
+  hidden: true
+
+- type: entity
+  parent: MarkerBase
+  id: CMSpawnPointXeno
+  name: xeno spawn point
+  description: A RMC14 spawner. Used for xenos.
+  components:
+  - type: XenoSpawnPoint
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: green
+
+- type: entity
+  parent: MarkerBase
+  id: CMSpawnPointXenoLeader
+  name: xeno leader spawn point
+  description: A RMC14 spawner. Used for xenos Queens.
+  components:
+  - type: XenoLeaderSpawnPoint
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: green

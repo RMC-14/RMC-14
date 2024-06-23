@@ -1,0 +1,64 @@
+- type: job
+  parent: CMJobBase
+  id: CMMilitaryWarden
+  name: cm-job-name-militarywarden
+  description: cm-job-description-militarywarden
+  playTimeTracker: CMJobMilitaryWarden
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMMilitaryPolice
+    time: 36000 # 10 hours
+  weight: 5
+  startingGear: CMGearMilitaryWarden
+  icon: "CMJobIconMilitaryWarden"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-cmp
+  accessGroups:
+  - CMWarden
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      construction: 2
+      cqc: 2
+      endurance: 2
+      engineer: 2
+      firearms: 1
+      fireman: 1
+      leadership: 1
+      medical: 1
+      overwatch: 1
+      police: 2
+    - type: MarineOrders
+
+- type: startingGear
+  id: CMGearMilitaryWarden
+  equipment:
+    jumpsuit: CMJumpsuitWarden
+    back: CMSatchelSecurity
+    shoes: CMBootsBlackFilled
+    head: CMHeadCapWarden
+    eyes: CMGlassesSecurity
+    gloves: CMHandsBlackMarine
+    id: CMIDCardMilitaryWarden
+    outerClothing: CMArmorM3Warden
+    ears: CMHeadsetCMP
+    belt: CMBeltSecurityFilled
+    #    pocket1: TODO RMC14 tape recorder
+    pocket2: CMPouchGeneralLarge
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointMilitaryWarden
+  name: military warden spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMMilitaryWarden
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: warden
+
+- type: playTimeTracker
+  id: CMJobMilitaryWarden

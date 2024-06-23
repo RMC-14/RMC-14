@@ -1,0 +1,15 @@
+﻿- type: entity
+  parent: CMAlamoDoor
+  id: CMNormandyDoor
+  name: normandy crew hatch
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+
+- type: entity
+  parent: CMAlamoCockpit
+  id: CMNormandyCockpit
+  suffix: Normandy
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi

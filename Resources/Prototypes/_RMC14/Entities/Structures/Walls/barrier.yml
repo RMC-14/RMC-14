@@ -1,0 +1,31 @@
+- type: entity
+  parent: DeployableBarrier
+  id: CMDeployableBarrier
+  name: deployable barrier
+  description: A deployable barrier. Swipe your ID card to lock/unlock it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/barrier.rsi
+    layers:
+    - state: idle
+    - state: locked
+      map: ["enum.LockVisualLayers.Lock"]
+  - type: Appearance
+  - type: AccessReader
+    access: [["CMAccessMarinePrep"]] # code/game/machinery/deployable.dm line 8
+  - type: Lock
+    locked: false
+    lockOnClick: true
+    lockTime: 1
+    unlockTime: 1
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]

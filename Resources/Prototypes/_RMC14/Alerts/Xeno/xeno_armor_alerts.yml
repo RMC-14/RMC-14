@@ -1,0 +1,29 @@
+﻿- type: alert
+  id: XenoArmor
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_armor.rsi
+    state: armor_100
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_armor.rsi
+    state: armor_90
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_armor.rsi
+    state: armor_80
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_armor.rsi
+    state: armor_70
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_armor.rsi
+    state: armor_60
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_armor.rsi
+    state: armor_50
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_armor.rsi
+    state: armor_40
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_armor.rsi
+    state: armor_30
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_armor.rsi
+    state: armor_20
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_armor.rsi
+    state: armor_10
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_armor.rsi
+    state: armor_00
+  name: Armor
+  description: Your armor. It reduces damage taken.
+  minSeverity: 0
+  maxSeverity: 10

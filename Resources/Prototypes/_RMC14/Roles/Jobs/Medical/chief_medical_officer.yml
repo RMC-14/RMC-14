@@ -1,0 +1,72 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMCMO
+  name: cm-job-name-cmo
+  description: cm-job-description-cmo
+  playTimeTracker: CMJobCMO
+  requirements:
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 36000 # 10 hours
+  weight: 5
+  startingGear: CMGearCMO
+  icon: "CMJobIconCMO"
+  requireAdminNotify: true
+  joinNotifyCrew: true
+  supervisors: cm-job-supervisors-co
+  accessGroups:
+  - CMCMO
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      firearms: 0
+      fireman: 1
+      intel: 1
+      jtac: 3
+      leadership: 2
+      medical: 3
+      overwatch: 1
+      police: 1
+      research: 1
+      surgery: 2
+    - type: MarineOrders
+  hidden: true # TODO RMC14
+
+- type: startingGear
+  id: CMGearCMO
+  equipment:
+    jumpsuit: CMJumpsuitCMO
+    back: CMSatchel
+    shoes: ClothingShoesColorWhite
+    id: CMIDCardCMO
+    # TODO RMC14 random chemical synthesis note
+
+- type: startingGear
+  id: CMGearCMOEquipped
+  equipment:
+    jumpsuit: CMJumpsuitCMO
+    outerClothing: CMCoatLong
+    back: CMSatchelMarine
+    gloves: CMHandsLatex
+    shoes: ClothingShoesColorWhite
+    head: CMHeadCapCMO
+    id: CMIDCardCMO
+    ears: CMHeadsetCMO
+    belt: CMBeltMedicalFilled
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointCMO
+  name: chief medical officer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMCMO
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: chief_medical_officer
+
+- type: playTimeTracker
+  id: CMJobCMO

@@ -1,0 +1,25 @@
+- type: entity
+  parent: AirlockAssembly
+  id: CMAirlockAssembly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/airlock_assemblies.rsi
+    state: as_0
+  - type: Transform
+    noRot: false
+  - type: Construction
+    graph: CMAirlock
+    node: assembly
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ConstructionVisuals.Key:
+        enum.ConstructionVisuals.Layer:
+          assembly: { state: as_0 }
+          electronics: { state: as_1 }
+          wired: { state: as_2 }
+          airlock: { state: as_3 }
+          glassAssembly: { state: as_g0 }
+          glassElectronics: { state: as_g1 }
+          glassWired: { state: as_g2 }
+          glassAirlock: { state: as_g3 }

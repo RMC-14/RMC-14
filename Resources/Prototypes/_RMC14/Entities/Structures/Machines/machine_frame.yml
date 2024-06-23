@@ -1,0 +1,78 @@
+﻿- type: entity
+  parent: UnfinishedMachineFrame
+  id: CMMachineFrameUnfinished
+  suffix: RMC14, Unfinished
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/parts.rsi
+  - type: Construction
+    containers:
+    - machine_board
+    - machine_parts
+    graph: CMMachineFrame
+    node: missingWires
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  parent: MachineFrame
+  id: CMMachineFrame
+  suffix: RMC14, Ready
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/parts.rsi
+  - type: Construction
+    graph: CMMachineFrame
+    node: machineFrame
+    defaultTarget: machine
+    containers:
+    - machine_board
+    - machine_parts
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:ChangeConstructionNodeBehavior
+        node: missingWires
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  parent: MachineFrameDestroyed
+  id: CMMachineFrameDestroyed
+  suffix: RMC14
+  placement:
+    mode: SnapgridCenter
+  components:
+  #- type: Sprite # TODO RMC14 make (or find) destroyed box sprite
+  #  sprite: _RMC14/Structures/Machines/parts.rsi
+  - type: Construction
+    graph: CMMachineFrame
+    node: destroyedMachineFrame
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 1
+            max: 3
+      - !type:DoActsBehavior
+        acts: ["Destruction"]

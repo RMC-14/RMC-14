@@ -1,0 +1,5 @@
+- type: vendingMachineInventory
+  id: CMVendorChess
+  startingInventory:
+    ChessBoard: 3
+    # TODO RMC14 vodka chess pieces
