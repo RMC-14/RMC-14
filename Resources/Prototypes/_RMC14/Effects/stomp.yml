@@ -5,7 +5,7 @@
   - type: TimedDespawn
     lifetime: 1.6
   - type: Sprite
-    sprite: _CM14/Effects/xeno_selfstomp.rsi
+    sprite: _RMC14/Effects/xeno_selfstomp.rsi
     noRot: true
     state: stomp
     drawdepth: Effects
@@ -21,7 +21,7 @@
   - type: TimedDespawn
     lifetime: 1.6
   - type: Sprite
-    sprite: _CM14/Effects/xeno_stomp.rsi
+    sprite: _RMC14/Effects/xeno_stomp.rsi
     noRot: true
     state: stomp
     drawdepth: Effects

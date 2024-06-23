@@ -22,7 +22,7 @@
   - type: TimedDespawn
     lifetime: 1.6
   - type: Sprite
-    sprite: _CM14/Effects/attacks.rsi
+    sprite: _RMC14/Effects/attacks.rsi
     noRot: true
     state: grab
     drawdepth: Effects

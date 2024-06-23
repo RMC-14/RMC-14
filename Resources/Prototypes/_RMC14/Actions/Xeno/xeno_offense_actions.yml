@@ -191,7 +191,7 @@
   - type: EntityTargetAction
     itemIconStyle: NoItem
     icon:
-      sprite: _CM14/Actions/xeno_actions.rsi
+      sprite: _RMC14/Actions/xeno_actions.rsi
       state: punch
     event: !type:XenoPunchActionEvent
     range: 1
@@ -206,7 +206,7 @@
   - type: EntityTargetAction
     itemIconStyle: NoItem
     icon:
-      sprite: _CM14/Actions/xeno_actions.rsi
+      sprite: _RMC14/Actions/xeno_actions.rsi
       state: fling
     event: !type:XenoFlingActionEvent
     range: 1
@@ -221,7 +221,7 @@
   - type: EntityTargetAction
     itemIconStyle: NoItem
     icon:
-      sprite: _CM14/Actions/xeno_actions.rsi
+      sprite: _RMC14/Actions/xeno_actions.rsi
       state: lunge
     event: !type:XenoLungeActionEvent
     range: 5
@@ -236,7 +236,7 @@
   - type: InstantAction
     itemIconStyle: NoItem
     icon:
-      sprite: _CM14/Actions/xeno_actions.rsi
+      sprite: _RMC14/Actions/xeno_actions.rsi
       state: screech
     event: !type:XenoScreechActionEvent
     useDelay: 50
@@ -250,7 +250,7 @@
   - type: EntityTargetAction
     itemIconStyle: NoItem
     icon:
-      sprite: _CM14/Actions/xeno_actions.rsi
+      sprite: _RMC14/Actions/xeno_actions.rsi
       state: gut
     event: !type:XenoGutActionEvent
     range: 2
@@ -265,7 +265,7 @@
   - type: InstantAction
     itemIconStyle: NoItem
     icon:
-      sprite: _CM14/Actions/xeno_actions.rsi
+      sprite: _RMC14/Actions/xeno_actions.rsi
       state: stomp
     event: !type:XenoStompActionEvent
     useDelay: 20
@@ -279,7 +279,7 @@
   - type: WorldTargetAction
     itemIconStyle: NoItem
     icon:
-      sprite: _CM14/Actions/xeno_actions.rsi
+      sprite: _RMC14/Actions/xeno_actions.rsi
       state: ready_charge
     event: !type:XenoChargeActionEvent
     range: 15

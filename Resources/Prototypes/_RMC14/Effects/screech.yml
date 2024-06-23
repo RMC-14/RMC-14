@@ -6,7 +6,7 @@
   - type: TimedDespawn
     lifetime: 3.2
   - type: Sprite
-    sprite: _CM14/Effects/xeno_screech.rsi
+    sprite: _RMC14/Effects/xeno_screech.rsi
     noRot: true
     state: screech
     drawdepth: Effects
