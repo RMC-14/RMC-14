@@ -80,3 +80,7 @@ cm-xeno-plasma-other-max-zero = {$target} doesn't have any use for plasma!
 
 # Watch
 cm-xeno-watch = Watch Xeno
+
+# Charge Spit
+cm-xeno-charge-spit = Our next spit will be stronger.
+cm-xeno-charge-spit-expire = Our spits are back to normal.

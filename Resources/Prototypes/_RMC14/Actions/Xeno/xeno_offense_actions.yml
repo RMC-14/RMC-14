@@ -155,6 +155,38 @@
     checkCanAccess: false
 
 - type: entity
+  id: ActionXenoSpit
+  parent: ActionXenoBase
+  name: Xeno Spit (25) # TODO RMC14 proper plasma costs
+  description: Launches a projectile that will deal damage to the first enemy that it hits.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: xeno_spit
+    event: !type:XenoSpitActionEvent
+    useDelay: 2
+    range: 15
+    checkCanAccess: false
+
+- type: entity
+  id: ActionXenoChargeSpit
+  parent: ActionXenoBase
+  name: Charge Spit (50) # TODO RMC14 proper plasma costs
+  description: Charges up your next spit, making it deal more damage but have less range.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: charge_spit
+    event: !type:XenoChargeSpitActionEvent # TODO CM14 more armor, move faster
+    useDelay: 12
+    range: 15
+    checkCanAccess: false
+
+- type: entity
   id: ActionXenoParalyzingSlash
   parent: ActionXenoBase
   name: Paralyzing Slash (50) # TODO RMC14 proper plasma costs
