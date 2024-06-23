@@ -9,7 +9,7 @@ namespace Content.Shared._RMC14.Xenonids.Projectile.Bone;
 public sealed partial class XenoBoneChipsComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public float Speed = 6;
+    public float Speed = 20;
 
     [DataField, AutoNetworkedField]
     public EntProtoId ProjectileId = "XenoBoneChipsProjectile";

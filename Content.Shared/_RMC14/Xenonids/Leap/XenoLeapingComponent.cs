@@ -26,4 +26,7 @@ public sealed partial class XenoLeapingComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool PlayedSound;
+
+    [DataField, AutoNetworkedField]
+    public bool KnockdownRequiresInvisibility;
 }
