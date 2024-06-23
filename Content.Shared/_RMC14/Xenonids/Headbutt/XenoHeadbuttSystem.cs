@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Xenonids.Animation;
+﻿using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Xenonids.Animation;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -47,6 +48,9 @@ public sealed class XenoHeadbuttSystem : EntitySystem
     {
         // TODO RMC14 xenos of the same hive
         if (args.Target == xeno.Owner || HasComp<XenoComponent>(args.Target))
+            return;
+
+        if (!HasComp<MarineComponent>(args.Target))
             return;
 
         if (args.Handled)
