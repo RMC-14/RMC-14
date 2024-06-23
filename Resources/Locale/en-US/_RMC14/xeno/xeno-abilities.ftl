@@ -38,9 +38,14 @@ cm-xeno-acid-not-corrodible = You can't corrode {THE($target)}!
 cm-xeno-acid-already-corroding = {THE($target)} already has corrosive acid on it!
 
 # Paralyzing Slash
-cm-xeno-paralyzing-slash-activate = Your next slash will apply neurotoxin!
+cm-xeno-paralyzing-slash-activate = Our next slash will apply neurotoxin!
 cm-xeno-paralyzing-slash-expire = You have waited too long, your slash will no longer apply neurotoxin!
 cm-xeno-paralyzing-slash-hit = You add neurotoxin into your attack, {$target} is about to fall over paralyzed!
+
+# Crippling Strike
+cm-xeno-crippling-strike-activate = Our next slash will apply neurotoxin!
+cm-xeno-crippling-strike-expire = You have waited too long, your slash will no longer apply neurotoxin!
+cm-xeno-crippling-strike-hit = We significantly strengthen our attack, slowing the unknown!
 
 # Pheromones
 cm-xeno-choose-pheromones = Choose Pheromones
@@ -84,3 +89,7 @@ cm-xeno-watch = Watch Xeno
 # Charge Spit
 cm-xeno-charge-spit = Our next spit will be stronger.
 cm-xeno-charge-spit-expire = Our spits are back to normal.
+
+# Turn Invisible
+cm-xeno-invisibility-already-invisible = We are already invisible!
+cm-xeno-invisibility-expire = We feel our invisibility end!

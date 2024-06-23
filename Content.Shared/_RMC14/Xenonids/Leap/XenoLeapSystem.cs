@@ -1,4 +1,6 @@
 ﻿using System.Numerics;
+using Content.Shared._RMC14.Xenonids.Invisibility;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.ActionBlocker;
 using Content.Shared.DoAfter;
 using Content.Shared.Eye.Blinding.Systems;
@@ -39,6 +41,7 @@ public sealed class XenoLeapSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
@@ -65,6 +68,12 @@ public sealed class XenoLeapSystem : EntitySystem
             return;
 
         args.Handled = true;
+
+        if (xeno.Comp.PlasmaCost > FixedPoint2.Zero &&
+            !_xenoPlasma.HasPlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
+        {
+            return;
+        }
 
         var ev = new XenoLeapDoAfterEvent(GetNetCoordinates(args.Target));
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.Delay, ev, xeno)
@@ -95,6 +104,14 @@ public sealed class XenoLeapSystem : EntitySystem
             return;
 
         args.Handled = true;
+
+        leaping.KnockdownRequiresInvisibility = xeno.Comp.KnockdownRequiresInvisibility;
+
+        if (xeno.Comp.PlasmaCost > FixedPoint2.Zero &&
+            !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
+        {
+            return;
+        }
 
         if (TryComp(xeno, out PullerComponent? puller) && TryComp(puller.Pulling, out PullableComponent? pullable))
             _pulling.TryStopPull(puller.Pulling.Value, pullable, xeno);
@@ -138,7 +155,7 @@ public sealed class XenoLeapSystem : EntitySystem
             return;
         }
 
-        if (EnsureComp<LeapIncapacitatedComponent>(other, out var victim))
+        if (HasComp<LeapIncapacitatedComponent>(other))
             return;
 
         xeno.Comp.KnockedDown = true;
@@ -152,10 +169,15 @@ public sealed class XenoLeapSystem : EntitySystem
                 _broadphase.RegenerateContacts(xeno, physics);
         }
 
-        victim.RecoverAt = _timing.CurTime + xeno.Comp.ParalyzeTime;
+        if (!xeno.Comp.KnockdownRequiresInvisibility || HasComp<XenoActiveInvisibleComponent>(xeno))
+        {
+            var victim = EnsureComp<LeapIncapacitatedComponent>(other);
+            victim.RecoverAt = _timing.CurTime + xeno.Comp.ParalyzeTime;
+            Dirty(other, victim);
 
-        if (_net.IsServer)
-            _stun.TryParalyze(other, xeno.Comp.ParalyzeTime, true);
+            if (_net.IsServer)
+                _stun.TryParalyze(other, xeno.Comp.ParalyzeTime, true);
+        }
 
         var ev = new XenoLeapHitEvent(xeno, other);
         RaiseLocalEvent(xeno, ref ev);

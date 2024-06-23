@@ -1,19 +1,16 @@
-﻿using Content.Shared.Damage;
+﻿using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
+namespace Content.Shared._RMC14.Xenonids.Crippling;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(XenoSpitSystem))]
-public sealed partial class XenoActiveChargingSpitComponent : Component
+[Access(typeof(XenoCripplingStrikeSystem))]
+public sealed partial class VictimCripplingStrikeSlowedComponent : Component
 {
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan ExpiresAt;
-
-    [DataField]
-    public DamageSpecifier Damage = new();
+    public TimeSpan ExpireAt;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan ProjectileLifetime;
+    public FixedPoint2 SpeedMultiplier = FixedPoint2.New(0.75);
 }

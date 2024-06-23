@@ -49,7 +49,7 @@
   - type: XenoChargeSpit
     damage:
       groups:
-        Burn: 25 # TODO CM14 damage over time
+        Burn: 25 # TODO RMC14 damage over time
   - type: XenoScatteredSpit
   - type: CMArmor
     armor: 15

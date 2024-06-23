@@ -156,7 +156,7 @@ public sealed class XenoSpitSystem : EntitySystem
         var slowedQuery = EntityQueryEnumerator<SlowedBySpitComponent>();
         while (slowedQuery.MoveNext(out var uid, out var slowed))
         {
-            if (slowed.ExpiresAt >= time)
+            if (slowed.ExpiresAt > time)
                 continue;
 
             RemCompDeferred<SlowedBySpitComponent>(uid);
@@ -166,7 +166,7 @@ public sealed class XenoSpitSystem : EntitySystem
         var chargingQuery = EntityQueryEnumerator<XenoActiveChargingSpitComponent>();
         while (chargingQuery.MoveNext(out var uid, out var charging))
         {
-            if (charging.ExpiresAt >= time)
+            if (charging.ExpiresAt > time)
                 continue;
 
             RemCompDeferred<XenoActiveChargingSpitComponent>(uid);
