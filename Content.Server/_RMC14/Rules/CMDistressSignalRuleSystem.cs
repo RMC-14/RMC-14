@@ -782,6 +782,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     {
         foreach (var ent in GetChildren(grid))
         {
+            if (TryComp(ent, out ApcPowerReceiverComponent? receiver))
+                receiver.NeedsPower = false;
+
             if (!HasComp<StationInfiniteBatteryTargetComponent>(ent))
                 continue;
 

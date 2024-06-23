@@ -27,19 +27,19 @@
 
 - type: entity
   parent: CMBaseWeaponRifle
-  name: M52C pulse rifle MK2
-  id: WeaponRifleM52C
+  name: M54C pulse rifle MK2
+  id: WeaponRifleM54C
   description: The standard issue rifle of the Marines. Commonly carried by most combat personnel. Uses 10x24mm caseless ammunition.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m52c.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m52c.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c.rsi
   - type: Gun
     minAngle: 30
     maxAngle: 60
@@ -52,7 +52,7 @@
     - Burst
     - FullAuto
     soundGunshot:
-      collection: CMM52CShoot
+      collection: CMM54CShoot
   - type: GunWieldBonus
     minAngle: -15
     maxAngle: -40
@@ -67,9 +67,9 @@
         priority: 2
         whitelist:
           tags:
-          - CMMagazineRifleM52C
-          - CMMagazineRifleM52CAP
-          - CMMagazineRifleM52CExt
+          - CMMagazineRifleM54C
+          - CMMagazineRifleM54CAP
+          - CMMagazineRifleM54CExt
   - type: GunDamageModifier
     multiplier: 1.1
   - type: AttachableHolder
@@ -91,26 +91,26 @@
       cm-aslot-underbarrel: 0.0, 0.0
 
 - type: entity
-  name: M52CE2 heavy pulse rifle
-  parent: WeaponRifleM52C
-  id: WeaponRifleM52CE2
+  name: M54CE2 heavy pulse rifle
+  parent: WeaponRifleM54C
+  id: WeaponRifleM54CE2
   description: A large squad support weapon capable of laying down sustained suppressing fire from a mounted position. While unstable and less accurate, it can be lugged and shot with two hands.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m52ce2.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m52ce2.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2.rsi
   - type: Gun
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto # TODO RMC14 burst with greatly increased angle unless mounted
     soundGunshot:
-      collection: CMM52CShoot
+      collection: CMM54CShoot
   - type: GunWieldBonus
     minAngle: -15
     maxAngle: -45
@@ -125,7 +125,7 @@
         priority: 2
         whitelist:
           tags:
-          - CMMagazineRifleM52CE2
+          - CMMagazineRifleM54CE2
   - type: GunRequiresWield
 
 - type: entity

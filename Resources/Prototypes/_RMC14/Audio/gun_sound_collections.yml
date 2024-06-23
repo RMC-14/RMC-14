@@ -14,7 +14,7 @@
   - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m4a3_5.ogg
 
 - type: soundCollection
-  id: CMM52CShoot
+  id: CMM54CShoot
   files:
   - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_rifle.ogg # TODO RMC14
 

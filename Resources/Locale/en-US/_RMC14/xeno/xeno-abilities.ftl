@@ -38,9 +38,14 @@ cm-xeno-acid-not-corrodible = You can't corrode {THE($target)}!
 cm-xeno-acid-already-corroding = {THE($target)} already has corrosive acid on it!
 
 # Paralyzing Slash
-cm-xeno-paralyzing-slash-activate = Your next slash will apply neurotoxin!
+cm-xeno-paralyzing-slash-activate = Our next slash will apply neurotoxin!
 cm-xeno-paralyzing-slash-expire = You have waited too long, your slash will no longer apply neurotoxin!
 cm-xeno-paralyzing-slash-hit = You add neurotoxin into your attack, {$target} is about to fall over paralyzed!
+
+# Crippling Strike
+cm-xeno-crippling-strike-activate = Our next slash will apply neurotoxin!
+cm-xeno-crippling-strike-expire = You have waited too long, your slash will no longer apply neurotoxin!
+cm-xeno-crippling-strike-hit = We significantly strengthen our attack, slowing the unknown!
 
 # Pheromones
 cm-xeno-choose-pheromones = Choose Pheromones
@@ -58,6 +63,14 @@ cm-xeno-rest-cant-headbutt = You can't headbutt while resting!
 cm-xeno-rest-cant-fortify = You can't fortify while resting!
 cm-xeno-rest-cant-tail-sweep = You can't tail sweep while resting!
 cm-xeno-rest-cant-toggle-crest = You can't lower your crest while resting!
+cm-xeno-rest-cant-leap = You can't leap while resting!
+cm-xeno-rest-cant-lunge = You can't lunge while resting!
+cm-xeno-rest-cant-punch = You can't punch while resting!
+cm-xeno-rest-cant-fling = You can't punch while resting!
+cm-xeno-rest-cant-charge = You can't punch while resting!
+cm-xeno-rest-cant-stomp = You can't punch while resting!
+cm-xeno-rest-cant-gut = You can't punch while resting!
+cm-xeno-rest-cant-screech = You can't punch while resting!
 
 # Toggle Crest Defense
 cm-xeno-toggle-crest-cant-fortify = You can't fortify while your crest is lowered!
@@ -72,3 +85,11 @@ cm-xeno-plasma-other-max-zero = {$target} doesn't have any use for plasma!
 
 # Watch
 cm-xeno-watch = Watch Xeno
+
+# Charge Spit
+cm-xeno-charge-spit = Our next spit will be stronger.
+cm-xeno-charge-spit-expire = Our spits are back to normal.
+
+# Turn Invisible
+cm-xeno-invisibility-already-invisible = We are already invisible!
+cm-xeno-invisibility-expire = We feel our invisibility end!

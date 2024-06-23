@@ -1,6 +1,14 @@
-﻿using Content.Shared._RMC14.Xenonids.Crest;
+﻿using Content.Shared._RMC14.Xenonids.Charge;
+using Content.Shared._RMC14.Xenonids.Crest;
+using Content.Shared._RMC14.Xenonids.Fling;
 using Content.Shared._RMC14.Xenonids.Fortify;
+using Content.Shared._RMC14.Xenonids.Gut;
 using Content.Shared._RMC14.Xenonids.Headbutt;
+using Content.Shared._RMC14.Xenonids.Leap;
+using Content.Shared._RMC14.Xenonids.Lunge;
+using Content.Shared._RMC14.Xenonids.Punch;
+using Content.Shared._RMC14.Xenonids.Screech;
+using Content.Shared._RMC14.Xenonids.Stomp;
 using Content.Shared._RMC14.Xenonids.Sweep;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
@@ -22,11 +30,20 @@ public sealed class XenoRestSystem : EntitySystem
 
         SubscribeLocalEvent<XenoComponent, XenoRestActionEvent>(OnXenoRestAction);
 
+        // TODO RMC14 generic xeno ability attempt event
         SubscribeLocalEvent<XenoRestingComponent, UpdateCanMoveEvent>(OnXenoRestingCanMove);
         SubscribeLocalEvent<XenoRestingComponent, XenoHeadbuttAttemptEvent>(OnXenoRestingHeadbuttAttempt);
         SubscribeLocalEvent<XenoRestingComponent, XenoFortifyAttemptEvent>(OnXenoRestingFortifyAttempt);
         SubscribeLocalEvent<XenoRestingComponent, XenoTailSweepAttemptEvent>(OnXenoRestingTailSweepAttempt);
         SubscribeLocalEvent<XenoRestingComponent, XenoToggleCrestAttemptEvent>(OnXenoRestingToggleCrestAttempt);
+        SubscribeLocalEvent<XenoRestingComponent, XenoLeapAttemptEvent>(OnXenoRestingLeapAttempt);
+        SubscribeLocalEvent<XenoRestingComponent, XenoLungeAttemptEvent>(OnXenoRestingLungeAttempt);
+        SubscribeLocalEvent<XenoRestingComponent, XenoPunchAttemptEvent>(OnXenoRestingPunchAttempt);
+        SubscribeLocalEvent<XenoRestingComponent, XenoFlingAttemptEvent>(OnXenoRestingFlingAttempt);
+        SubscribeLocalEvent<XenoRestingComponent, XenoChargeAttemptEvent>(OnXenoRestingChargettempt);
+        SubscribeLocalEvent<XenoRestingComponent, XenoStompAttemptEvent>(OnXenoRestingStompAttempt);
+        SubscribeLocalEvent<XenoRestingComponent, XenoGutAttemptEvent>(OnXenoRestingGutAttempt);
+        SubscribeLocalEvent<XenoRestingComponent, XenoScreechAttemptEvent>(OnXenoRestingScreechAttempt);
     }
 
     private void OnXenoRestingCanMove(Entity<XenoRestingComponent> xeno, ref UpdateCanMoveEvent args)
@@ -81,6 +98,54 @@ public sealed class XenoRestSystem : EntitySystem
     private void OnXenoRestingToggleCrestAttempt(Entity<XenoRestingComponent> xeno, ref XenoToggleCrestAttemptEvent args)
     {
         _popup.PopupClient(Loc.GetString("cm-xeno-rest-cant-toggle-crest"), xeno, xeno);
+        args.Cancelled = true;
+    }
+
+    private void OnXenoRestingLeapAttempt(Entity<XenoRestingComponent> xeno, ref XenoLeapAttemptEvent args)
+    {
+        _popup.PopupClient(Loc.GetString("cm-xeno-rest-cant-leap"), xeno, xeno);
+        args.Cancelled = true;
+    }
+
+    private void OnXenoRestingLungeAttempt(Entity<XenoRestingComponent> xeno, ref XenoLungeAttemptEvent args)
+    {
+        _popup.PopupClient(Loc.GetString("cm-xeno-rest-cant-lunge"), xeno, xeno);
+        args.Cancelled = true;
+    }
+
+    private void OnXenoRestingPunchAttempt(Entity<XenoRestingComponent> xeno, ref XenoPunchAttemptEvent args)
+    {
+        _popup.PopupClient(Loc.GetString("cm-xeno-rest-cant-punch"), xeno, xeno);
+        args.Cancelled = true;
+    }
+
+    private void OnXenoRestingFlingAttempt(Entity<XenoRestingComponent> xeno, ref XenoFlingAttemptEvent args)
+    {
+        _popup.PopupClient(Loc.GetString("cm-xeno-rest-cant-fling"), xeno, xeno);
+        args.Cancelled = true;
+    }
+
+    private void OnXenoRestingChargettempt(Entity<XenoRestingComponent> xeno, ref XenoChargeAttemptEvent args)
+    {
+        _popup.PopupClient(Loc.GetString("cm-xeno-rest-cant-charge"), xeno, xeno);
+        args.Cancelled = true;
+    }
+
+    private void OnXenoRestingStompAttempt(Entity<XenoRestingComponent> xeno, ref XenoStompAttemptEvent args)
+    {
+        _popup.PopupClient(Loc.GetString("cm-xeno-rest-cant-stomp"), xeno, xeno);
+        args.Cancelled = true;
+    }
+
+    private void OnXenoRestingGutAttempt(Entity<XenoRestingComponent> xeno, ref XenoGutAttemptEvent args)
+    {
+        _popup.PopupClient(Loc.GetString("cm-xeno-rest-cant-gut"), xeno, xeno);
+        args.Cancelled = true;
+    }
+
+    private void OnXenoRestingScreechAttempt(Entity<XenoRestingComponent> xeno, ref XenoScreechAttemptEvent args)
+    {
+        _popup.PopupClient(Loc.GetString("cm-xeno-rest-cant-screech"), xeno, xeno);
         args.Cancelled = true;
     }
 }

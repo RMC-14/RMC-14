@@ -91,8 +91,7 @@
   time: '2023-11-28T03:55:33.0000000+00:00'
 - author: thymol-blue
   changes:
-  - message: Added tips relevant to RMC14. Be sure to keep an eye out
-      for them!
+  - message: Added tips relevant to RMC14. Be sure to keep an eye out for them!
     type: Add
   id: 15
   time: '2023-11-27T05:48:08.0000000+00:00'
@@ -224,7 +223,7 @@
   url: https://api.github.com/repos/RMC-14/RMC-14/pulls/1140
 - author: ike709
   changes:
-  - message: Added a cargo crate for the M52CE2
+  - message: Added a cargo crate for the M54CE2
     type: Add
   id: 33
   time: '2024-04-10T06:59:53.0000000+00:00'
@@ -454,8 +453,8 @@
   changes:
   - message: Added attaching parasites by clicking downed marines with or as them.
     type: Add
-  - message: parasites can only infect through a leap if it is done within a very short
-      range of the target.
+  - message: parasites can only infect through a leap if it is done within a very
+      short range of the target.
     type: Tweak
   id: 61
   time: '2024-04-20T06:14:11.0000000+00:00'
@@ -773,8 +772,8 @@
   url: https://github.com/RMC-14/RMC-14/pull/2087
 - author: DrSmugleaf
   changes:
-  - message: Grown xeno eggs will now automatically try to infect any marines that come
-      within melee range of them.
+  - message: Grown xeno eggs will now automatically try to infect any marines that
+      come within melee range of them.
     type: Add
   id: 101
   time: '2024-05-09T09:59:50.0000000+00:00'
@@ -897,8 +896,8 @@
   changes:
   - message: Ported the effects of all existing medicines.
     type: Add
-  - message: Added all times to the We-Ya-Med Plus except for painkillers, splints and
-      peridaxon.
+  - message: Added all times to the We-Ya-Med Plus except for painkillers, splints
+      and peridaxon.
     type: Add
   id: 118
   time: '2024-05-22T00:40:24.0000000+00:00'
@@ -1064,7 +1063,7 @@
   url: https://github.com/RMC-14/RMC-14/pull/2396
 - author: Timemaster99
   changes:
-  - message: Fixed M52C Mk2 inhand and icon sprites
+  - message: Fixed M54C Mk2 inhand and icon sprites
     type: Fix
   id: 140
   time: '2024-06-13T08:09:40.0000000+00:00'
@@ -1106,8 +1105,8 @@
   - message: Where possible, changed the material requirements and construction steps
       for objects marines can build to match their CMSS13 versions.
     type: Tweak
-  - message: Made girders and other constructible objects drop the RMC14 versions of
-      materials.
+  - message: Made girders and other constructible objects drop the RMC14 versions
+      of materials.
     type: Fix
   - message: Made catwalks snap to the grid properly.
     type: Fix
@@ -1391,5 +1390,69 @@
   id: 167
   time: '2024-06-21T03:29:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2544
+- author: vero5123
+  changes:
+  - message: runners can not longer leap if resting
+    type: Fix
+  id: 168
+  time: '2024-06-23T05:13:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2557
+- author: blueDev2
+  changes:
+  - message: Health scanner works through stasis bags
+    type: Tweak
+  id: 169
+  time: '2024-06-23T05:25:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2550
+- author: Dorragon
+  changes:
+  - message: Bonegel and bone setter description's and names
+    type: Fix
+  id: 170
+  time: '2024-06-23T05:32:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2555
+- author: MetalSage
+  changes:
+  - message: Added the Warrior's punch, fling and lunge actions.
+    type: Add
+  - message: Added the Crusher's charge and stomp actions.
+    type: Add
+  - message: Added the Queen's gut and screech actions.
+    type: Add
+  - message: Defender headbutt action now requires a marine target to be used.
+    type: Fix
+  id: 171
+  time: '2024-06-23T08:03:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2324
+- author: DrSmugleaf
+  changes:
+  - message: Added all Lurker abilities and most of the Spitter's abilities.
+    type: Add
+  - message: Enabled the Spitter, Lurker and Warrior evolutions.
+    type: Add
+  id: 172
+  time: '2024-06-23T11:13:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2566
+- author: Whisper
+  changes:
+  - message: Added medical guidebook.
+    type: Add
+  id: 173
+  time: '2024-06-23T11:17:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2567
+- author: vero5123
+  changes:
+  - message: Adds a short move delay to the Runner after hitting a pounce.
+    type: Tweak
+  id: 174
+  time: '2024-06-23T11:25:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2559
+- author: vero5123
+  changes:
+  - message: Defender can no longer pull and headbutt at the same time
+    type: Fix
+  id: 175
+  time: '2024-06-23T11:25:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2558
 Name: RMC14
 Order: -1

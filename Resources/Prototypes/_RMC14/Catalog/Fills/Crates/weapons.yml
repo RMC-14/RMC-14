@@ -1,25 +1,25 @@
 - type: entity
-  id: CMCrateM52C
+  id: CMCrateM54C
   parent: CMCrateWeapons
-  name: M52C MK1 Rifle Crate (x2 MK2, x2 magazines)
+  name: M54C MK1 Rifle Crate (x2 MK2, x2 magazines)
   components:
   - type: StorageFill
     contents:
-      - id: WeaponRifleM52C
+      - id: WeaponRifleM54C
         amount: 2
-      - id: CMMagazineRifleM52C
+      - id: CMMagazineRifleM54C
         amount: 2
 
 - type: entity
-  id: CMCrateM52CE2
+  id: CMCrateM54CE2
   parent: CMCrateWeapons
-  name: M52CE2 HPR crate (HPR x2, HPR ammo box x2)
+  name: M54CE2 HPR crate (HPR x2, HPR ammo box x2)
   components:
   - type: StorageFill
     contents:
-      - id: WeaponRifleM52CE2
+      - id: WeaponRifleM54CE2
         amount: 2
-      - id: CMMagazineRifleM52CE2
+      - id: CMMagazineRifleM54CE2
         amount: 2
 
 - type: entity
