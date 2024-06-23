@@ -41,7 +41,7 @@
     - ActionXenoWordQueen
 #    - ActionXenoPsychicWhisper
 #    - ActionXenoPsychicRadiance
-#    - ActionXenoGut
+    - ActionXenoGut
     - ActionXenoPlantWeeds
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
@@ -51,7 +51,7 @@
 #    - ActionXenoRoyalJelly
 #    - ActionXenoMarkResin
     # Mature
-#    - ActionXenoScreech
+    - ActionXenoScreech
 #    - ActionXenoSpit
 #    - ActionXenoToggleSpitType
     tier: 4
@@ -76,6 +76,8 @@
     armor: 25
     explosionArmor: 100
   - type: XenoWordQueen
+  - type: XenoGut
+  - type: XenoScreech
   - type: MeleeWeapon
     damage:
       groups:
@@ -116,7 +118,7 @@
         volume: -12
 #  - type: RandomSound
 #    sound:
-#      collection: XenoQueenBreath # TODO CM14
+#      collection: XenoQueenBreath # TODO RMC14
 #      params:
 #        volume: -10
 #    min: 45
