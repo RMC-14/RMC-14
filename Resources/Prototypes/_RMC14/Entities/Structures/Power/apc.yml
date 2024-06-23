@@ -1,0 +1,135 @@
+- type: entity
+  noSpawn: true
+  parent: BaseAPC
+  id: CMApcBase
+  name: area power controller
+  components:
+  - type: AccessReader
+    access: [["CMAccessEngineering"]]
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Structures/Power/apc.rsi
+    layers:
+    - state: base
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      visible: false
+    - state: display-charging
+      shader: unshaded
+      map: ["enum.ApcVisualLayers.ChargeState"]
+    - state: apcox-0
+      shader: unshaded
+      map: ["enum.ApcVisualLayers.InterfaceLock"]
+    - state: apcox-1
+      shader: unshaded
+      map: ["enum.ApcVisualLayers.PanelLock"]
+    - state: apco0-2
+      shader: unshaded
+      map: ["enum.ApcVisualLayers.Equipment"]
+    - state: apco1-2
+      shader: unshaded
+      map: ["enum.ApcVisualLayers.Lighting"]
+    - state: apco2-2
+      shader: unshaded
+      map: ["enum.ApcVisualLayers.Environment"]
+  - type: PowerMonitoringDevice
+    sprite: _RMC14/Structures/Power/apc.rsi
+    state: base
+  - type: Construction
+    graph: CMApc
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ContainerContainer
+    containers:
+      cell_slot: !type:ContainerSlot {}
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+  - type: Charger
+    slotId: cell_slot
+
+# APC under construction
+- type: entity
+  noSpawn: true
+  parent: APCFrame
+  id: CMApcFrame
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Power/apc.rsi
+    state: panel
+  - type: Construction
+    graph: CMApc
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+# Constructed APC
+- type: entity
+  parent: CMApcBase
+  id: CMApcConstructed
+  suffix: APC, Open
+
+# APCs in use
+- type: entity
+  parent: CMApcBase
+  id: CMApcLowCapacity
+  suffix: APC, Small powercell, 50kW
+  components: # TODO RMC14 / TODO RMC14 make apc use powercells
+  - type: Battery
+    maxCharge: 50000
+    startingCharge: 50000
+
+- type: entity
+  parent: CMApcBase
+  id: CMApcMediumCapacity
+  suffix: APC, Medium powercell, 100kW
+  components:
+  - type: Battery
+    maxCharge: 100000
+    startingCharge: 100000
+
+- type: entity
+  parent: CMApcBase
+  id: CMApcHighCapacity
+  suffix: APC, High powercell, 150kW
+  components:
+  - type: Battery
+    maxCharge: 150000
+    startingCharge: 150000
+

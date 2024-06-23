@@ -1,0 +1,62 @@
+- type: decal
+  id: CMDecalAlmayer0
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: almayer0
+
+- type: decal
+  id: CMDecalAlmayer1
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: almayer1
+
+- type: decal
+  id: CMDecalAlmayer2
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: almayer2
+
+- type: decal
+  id: CMDecalAlmayer3
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: almayer3
+
+- type: decal
+  id: CMDecalAlmayer4
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: almayer4
+
+- type: decal
+  id: CMDecalAlmayer5
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: almayer5
+
+- type: decal
+  id: CMDecalAlmayer6
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: almayer6

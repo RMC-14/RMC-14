@@ -1,0 +1,50 @@
+﻿- type: tile
+  parent: CMTileBase
+  id: CMFloorStripedBase
+  name: tiles-cm-striped
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorPlating
+  name: tiles-cm-plating
+  sprite: /Textures/_RMC14/Tiles/almayer/plating.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorStriped0
+  sprite: /Textures/_RMC14/Tiles/almayer/plating_striped_0.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorStriped1
+  sprite: /Textures/_RMC14/Tiles/almayer/plating_striped_1.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorStriped2
+  sprite: /Textures/_RMC14/Tiles/almayer/plating_striped_2.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorStriped3
+  sprite: /Textures/_RMC14/Tiles/almayer/plating_striped_3.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorStriped4
+  sprite: /Textures/_RMC14/Tiles/almayer/plating_striped_4.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorStriped5
+  sprite: /Textures/_RMC14/Tiles/almayer/plating_striped_5.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorStriped6
+  sprite: /Textures/_RMC14/Tiles/almayer/plating_striped_6.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorStriped7
+  sprite: /Textures/_RMC14/Tiles/almayer/plating_striped_7.png

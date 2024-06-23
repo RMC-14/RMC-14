@@ -1,0 +1,49 @@
+﻿- type: tile
+  parent: CMFloorSteel
+  id: CMFloorAsteroidFloor
+  sprite: /Textures/_RMC14/Tiles/planet/asteroid/floor.png
+
+- type: tile
+  parent: CMFloorPlating
+  id: CMFloorAsteroidPlating
+  sprite: /Textures/_RMC14/Tiles/planet/asteroid/plating.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorAsteroidStriped0
+  sprite: /Textures/_RMC14/Tiles/planet/asteroid/warning_0.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorAsteroidStriped1
+  sprite: /Textures/_RMC14/Tiles/planet/asteroid/warning_1.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorAsteroidStriped2
+  sprite: /Textures/_RMC14/Tiles/planet/asteroid/warning_2.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorAsteroidStriped3
+  sprite: /Textures/_RMC14/Tiles/planet/asteroid/warning_3.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorAsteroidStriped4
+  sprite: /Textures/_RMC14/Tiles/planet/asteroid/warning_4.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorAsteroidStriped5
+  sprite: /Textures/_RMC14/Tiles/planet/asteroid/warning_5.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorAsteroidStriped6
+  sprite: /Textures/_RMC14/Tiles/planet/asteroid/warning_6.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorAsteroidStriped7
+  sprite: /Textures/_RMC14/Tiles/planet/asteroid/warning_7.png

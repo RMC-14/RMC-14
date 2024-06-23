@@ -1,0 +1,56 @@
+﻿- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  - CMXenoFlammable
+  id: CMXenoBoiler
+  name: Boiler
+  description: A huge, grotesque xenonid covered in glowing, oozing acid slime.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Boiler/boiler.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      650: Critical
+      750: Dead
+  - type: Xeno
+    role: CMXenoBoiler
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoAcidStrong
+    #    - ActionXenoBombard
+    #    - ActionXenoToggleGasType
+    #    - ActionXenoSprayAcid
+    #    - ActionXenoLongSight
+    #    - ActionXenoAcidShroud
+    tier: 3
+    hudOffset: 0,0.35
+    unlockAt: 900 # 15 minutes
+  - type: XenoPlasma
+    plasma: 400
+    maxPlasma: 400
+    plasmaRegenOnWeeds: 7
+  - type: XenoAcid
+  - type: CMArmor
+    armor: 20
+    explosionArmor: 20
+  - type: XenoDevour
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 22.5
+  - type: Tackle
+    threshold: 5
+    stun: 7
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 3.5

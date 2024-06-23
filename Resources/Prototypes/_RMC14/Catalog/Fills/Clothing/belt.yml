@@ -1,0 +1,100 @@
+- type: entity
+  parent: CMBeltUtility
+  id: CMBeltUtilityFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWrench
+    - id: CMWelder
+    - id: CMCrowbar
+    - id: CMWirecutter
+#    - id: CMCableCoil30 TODO RMC14
+    - id: CMMultitool
+
+- type: entity
+  parent: CMBeltUtilityCombat
+  id: CMBeltUtilityCombatFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMCrowbar
+    - id: CMWrench
+    - id: CMScrewdriver
+    - id: CMWirecutter
+    - id: CMWelder
+    - id: CMMultitool
+
+- type: entity
+  parent: CMBeltKnife
+  id: CMBeltKnifeFilled
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMM11Knife
+
+- type: entity
+  parent: CMBeltSecurity
+  id: CMBeltSecurityFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponDisabler # TODO RMC14 cm taser
+    - id: CMFlash
+    - id: CMStunbaton
+    - id: CMHandcuffs
+#    - id: Pepperspray # TODO RMC14
+    - id: ForensicScanner # TODO RMC14 cm clue scanner
+
+- type: entity
+  parent: CMBeltMedical
+  id: CMBeltMedicalFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPillCanisterBicaridine
+      amount: 1
+    - id: CMPillCanisterDexalin
+      amount: 1
+    - id: CMPillCanisterDylovene
+      amount: 1
+    - id: CMPillCanisterKelotane
+      amount: 1
+    - id: CMPillCanisterInaprovaline
+      amount: 1
+    # TODO RMC14 tramadol and perixadon pills, splint
+    - id: CMOintment10
+      amount: 1
+    - id: CMTraumaKit10
+      amount: 1
+
+- type: entity
+  parent: CMBeltMedicBag
+  id: CMBeltMedicBagFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMOintment10
+      amount: 2
+    - id: CMTraumaKit10
+      amount: 2
+    # TODO RMC14 adrenaline autoinjector
+    - id: CMDexalinPlusAutoInjector
+      amount: 1
+    # TODO RMC14 oxycodone autoinjector
+    - id: CMPillCanisterBicaridine
+      amount: 1
+    - id: CMPillCanisterDexalin
+      amount: 1
+    - id: CMPillCanisterDylovene
+      amount: 1
+    - id: CMPillCanisterKelotane
+      amount: 1
+    - id: CMPillCanisterInaprovaline
+      amount: 1
+    # TODO RMC14 tramadol and perixadon pills, splint

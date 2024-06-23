@@ -1,0 +1,269 @@
+﻿# Random spawner
+- type: entity
+  parent: PottedPlantRandom
+  id: CMPottedPlantRandom
+  name: random potted plant spawner
+  components:
+  - type: RandomSpawner
+    offset: 0
+    prototypes:
+    - CMPottedPlant0
+    - CMPottedPlant1
+    - CMPottedPlant2
+    - CMPottedPlant3
+    - CMPottedPlant4
+    - CMPottedPlant5
+    - CMPottedPlant6
+    - CMPottedPlant7
+    - CMPottedPlant8
+    - CMPottedPlant9
+    - CMPottedPlant10
+    - CMPottedPlant11
+    - CMPottedPlant12
+    - CMPottedPlant13
+    - CMPottedPlant14
+    - CMPottedPlant15
+    - CMPottedPlant16
+    - CMPottedPlant17
+    - CMPottedPlant18
+    - CMPottedPlant19
+    - CMPottedPlant20
+    - CMPottedPlant21
+    - CMPottedPlant22
+    - CMPottedPlant23
+    - CMPottedPlant24
+    - CMPottedPlant25
+    - CMPottedPlant26
+    - CMPottedPlant27
+    - CMPottedPlant28
+    - CMPottedPlant29
+    - CMPottedPlant30
+    chance: 1
+
+# Plants
+- type: entity
+  parent: PottedPlantBase
+  id: CMPottedPlantBase
+  abstract: true
+  name: potted plant
+  description: ""
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/potted_plants.rsi
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant0
+  components:
+  - type: Sprite
+    state: applebush
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant1
+  components:
+  - type: Sprite
+    state: pottedplant_1
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant2
+  components:
+  - type: Sprite
+    state: pottedplant_2
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant3
+  components:
+  - type: Sprite
+    state: pottedplant_3
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant4
+  components:
+  - type: Sprite
+    state: pottedplant_4
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant5
+  components:
+  - type: Sprite
+    state: pottedplant_5
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant6
+  components:
+  - type: Sprite
+    state: pottedplant_6
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant7
+  components:
+  - type: Sprite
+    state: pottedplant_7
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant8
+  components:
+  - type: Sprite
+    state: pottedplant_8
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant9
+  components:
+  - type: Sprite
+    state: pottedplant_9
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant10
+  components:
+  - type: Sprite
+    state: pottedplant_10
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant11
+  components:
+  - type: Sprite
+    state: pottedplant_11
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant12
+  components:
+  - type: Sprite
+    state: pottedplant_12
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant13
+  components:
+  - type: Sprite
+    state: pottedplant_13
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant14
+  components:
+  - type: Sprite
+    state: pottedplant_14
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant15
+  components:
+  - type: Sprite
+    state: pottedplant_15
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant16
+  components:
+  - type: Sprite
+    state: pottedplant_16
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant17
+  components:
+  - type: Sprite
+    state: pottedplant_17
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant18
+  components:
+  - type: Sprite
+    state: pottedplant_18
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant19
+  components:
+  - type: Sprite
+    state: pottedplant_19
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant20
+  components:
+  - type: Sprite
+    state: pottedplant_20
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant21
+  components:
+  - type: Sprite
+    state: pottedplant_21
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant22
+  components:
+  - type: Sprite
+    state: pottedplant_22
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant23
+  components:
+  - type: Sprite
+    state: pottedplant_23
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant24
+  components:
+  - type: Sprite
+    state: pottedplant_24
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant25
+  components:
+  - type: Sprite
+    state: pottedplant_25
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant26
+  components:
+  - type: Sprite
+    state: pottedplant_26
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant27
+  components:
+  - type: Sprite
+    state: pottedplant_27
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant28
+  components:
+  - type: Sprite
+    state: pottedplant_28
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant29
+  components:
+  - type: Sprite
+    state: pottedplant_29
+
+- type: entity
+  parent: CMPottedPlantBase
+  id: CMPottedPlant30
+  components:
+  - type: Sprite
+    state: pottedplant_30

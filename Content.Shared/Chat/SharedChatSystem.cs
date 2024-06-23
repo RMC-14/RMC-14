@@ -1,6 +1,6 @@
 using System.Collections.Frozen;
-using Content.Shared._CM14.Chat;
-using Content.Shared._CM14.Xenos;
+using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.Speech;
@@ -111,7 +111,7 @@ public abstract class SharedChatSystem : EntitySystem
         if (input.Length == 0)
             return false;
 
-        // TODO CM14 replace all of this with something else when chat code isnt a joke
+        // TODO RMC14 replace all of this with something else when chat code isnt a joke
         if (input.StartsWith(RadioCommonPrefix))
         {
             output = SanitizeMessageCapital(input[1..].TrimStart());

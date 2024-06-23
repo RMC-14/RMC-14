@@ -1,7 +1,0 @@
-﻿<controls:CMAutomatedVendorButton
-    xmlns="https://spacestation14.io"
-    xmlns:controls="clr-namespace:Content.Client._CM14.Vendors">
-    <BoxContainer Orientation="Horizontal">
-        <Label Name="Label" Access="Public" Align="Left" />
-    </BoxContainer>
-</controls:CMAutomatedVendorButton>

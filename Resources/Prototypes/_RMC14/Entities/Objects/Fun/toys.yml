@@ -1,0 +1,70 @@
+- type: entity
+  parent: BasePlushie
+  id: CMPlushieBase
+  name: generic plushie
+  description: perfectly generic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Fun/plushies.rsi
+    state: debug
+
+- type: entity
+  parent: CMPlushieBase
+  id: CMPlushieFarwa
+  name: Farwa plush
+  description: A Farwa plush doll. It's soft and comforting!
+  components:
+  - type: Sprite
+    state: farwa
+
+- type: entity
+  parent: CMPlushieBase
+  id: CMPlushieBarricade
+  name: plushie barricade
+  description: Great for squeezing whenever you're scared. Or lightly hurt. Or in any other situation.
+  components:
+  - type: Sprite
+    state: barricade
+
+- type: entity
+  parent: CMPlushieBase
+  id: CMPlushieBee
+  name: bee plush
+  description: A cute toy that awakens the warrior spirit in the most reserved marine.
+  components:
+  - type: Sprite
+    state: bee
+
+- type: entity
+  parent: CMPlushieBase
+  id: CMPlushieRock
+  name: rock plush
+  description: It says it is a plush on the tag, at least.
+  components:
+  - type: Sprite
+    state: rock
+
+- type: entity
+  parent: CMPlushieBase
+  id: CMPlushieTherapy
+  name: therapy plush
+  description: A therapeutic toy to assist marines in recovering from mental and behavioral disorders after experiencing the trauma of battles.
+  components:
+  - type: Sprite
+    layers:
+    - state: therapy
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: RandomSprite
+    available:
+    - enum.DamageStateVisualLayers.Base:
+        therapy: Rainbow
+
+- type: entity
+  parent: CMPlushieBase
+  id: CMPlushieRunnerBeret
+  name: XX-121 therapy plush
+  description: Don't be sad! Be glad (that you're alive)!
+  components:
+  - type: Sprite
+    state: runner_beret
+  - type: Rotatable

@@ -1,0 +1,70 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelPlanetBlueBase
+  name: tiles-cm-default-blue
+
+- type: tile
+  parent: CMFloorSteelPlanetBlueBase
+  id: CMFloorSteelPlanetBlue0
+  sprite: /Textures/_RMC14/Tiles/floors/blue_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetBlueBase
+  id: CMFloorSteelPlanetBlue1
+  sprite: /Textures/_RMC14/Tiles/floors/blue_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetBlueBase
+  id: CMFloorSteelPlanetBlue2
+  sprite: /Textures/_RMC14/Tiles/floors/blue_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetBlueBase
+  id: CMFloorSteelPlanetBlue3
+  sprite: /Textures/_RMC14/Tiles/floors/blue_3.png
+
+- type: tile
+  parent: CMFloorSteelPlanetBlueBase
+  id: CMFloorSteelPlanetBlue4
+  sprite: /Textures/_RMC14/Tiles/floors/blue_4.png
+
+- type: tile
+  parent: CMFloorSteelPlanetBlueBase
+  id: CMFloorSteelPlanetBlue5
+  sprite: /Textures/_RMC14/Tiles/floors/blue_5.png
+
+- type: tile
+  parent: CMFloorSteelPlanetBlueBase
+  id: CMFloorSteelPlanetBlue6
+  sprite: /Textures/_RMC14/Tiles/floors/blue_6.png
+
+- type: tile
+  parent: CMFloorSteelPlanetBlueBase
+  id: CMFloorSteelPlanetBlue7
+  sprite: /Textures/_RMC14/Tiles/floors/blue_7.png
+
+- type: tile
+  parent: CMFloorSteelPlanetBlueBase
+  id: CMFloorSteelPlanetBlueCorners0
+  sprite: /Textures/_RMC14/Tiles/floors/bluecorner_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetBlueBase
+  id: CMFloorSteelPlanetBlueCorners1
+  sprite: /Textures/_RMC14/Tiles/floors/bluecorner_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetBlueBase
+  id: CMFloorSteelPlanetBlueCorners2
+  sprite: /Textures/_RMC14/Tiles/floors/bluecorner_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetBlueBase
+  id: CMFloorSteelPlanetBlueCorners3
+  sprite: /Textures/_RMC14/Tiles/floors/bluecorner_3.png
+
+- type: tile
+  parent: CMFloorSteelPlanetBlueBase
+  id: CMFloorSteelPlanetBlueFull
+  sprite: /Textures/_RMC14/Tiles/floors/bluefull.png

@@ -1,0 +1,32 @@
+- type: constructionGraph
+  parent: RMC
+  id: BarricadeTurnstileMedGraph
+  start: start
+  graph:
+  - node: start
+    actions:
+    - !type:DeleteEntity
+    edges:
+    - to: nodeTurnstileMed
+      completed:
+      - !type:SnapToGrid
+      steps:
+      - material: CMSteel
+        amount: 2
+        doAfter: 3
+
+  - node: nodeTurnstileMed
+    entity: CMBarricadeTurnstileMed
+    edges:
+    - to: start
+      completed:
+        - !type:SpawnPrototype
+          prototype: CMSheetMetal1
+          amount: 1
+        - !type:DeleteEntity
+      conditions:
+        - !type:EntityAnchored
+          anchored: false
+      steps:
+        - tool: Screwing
+          doAfter: 3
