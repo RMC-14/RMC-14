@@ -1,9 +1,11 @@
 ﻿using Content.Server.Body.Components;
 using Content.Server.DoAfter;
 using Content.Server.Popups;
+using Content.Server.Storage.Components;
 using Content.Server.Temperature.Components;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Scanner;
+using Content.Shared._RMC14.Medical.Stasis;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
@@ -41,7 +43,7 @@ public sealed class HealthScannerSystem : EntitySystem
     {
         if (!args.CanReach ||
             args.Target is not { } target ||
-            !CanUseHealthScannerPopup(scanner, args.User, target))
+            !CanUseHealthScannerPopup(scanner, args.User, ref target))
         {
             return;
         }
@@ -66,7 +68,8 @@ public sealed class HealthScannerSystem : EntitySystem
     private void OnDoAfterAttempt(Entity<HealthScannerComponent> ent, ref DoAfterAttemptEvent<HealthScannerDoAfterEvent> args)
     {
         var doAfter = args.DoAfter.Args;
-        if (!CanUseHealthScannerPopup(ent, doAfter.User, GetEntity(args.Event.Scanned)))
+        var targetEntity = GetEntity(args.Event.Scanned);
+        if (!CanUseHealthScannerPopup(ent, doAfter.User, ref targetEntity))
         {
             args.Cancel();
             return;
@@ -95,8 +98,26 @@ public sealed class HealthScannerSystem : EntitySystem
         UpdateUI(scanner);
     }
 
-    private bool CanUseHealthScannerPopup(Entity<HealthScannerComponent> scanner, EntityUid user, EntityUid target)
+    /// <param name="scanner">The Health Scanner</param>
+    /// <param name="user"> The entity using the Health Scanner</param>
+    /// <param name="target">The entity being scanned by the Health Scanner. May be changed</param>
+    /// <returns></returns>
+    private bool CanUseHealthScannerPopup(Entity<HealthScannerComponent> scanner, EntityUid user, ref EntityUid target)
     {
+        if (HasComp<CMStasisBagComponent>(target) && TryComp(target, out EntityStorageComponent? entityStorage))
+        {
+            foreach (var entity in entityStorage.Contents.ContainedEntities)
+            {
+                if (HasComp<DamageableComponent>(entity) &&
+                HasComp<MobStateComponent>(entity) &&
+                HasComp<MobThresholdsComponent>(entity))
+                {
+                    target = entity;
+                    break;
+                }
+            }
+        }
+
         if (!HasComp<DamageableComponent>(target) ||
             !HasComp<MobStateComponent>(target) ||
             !HasComp<MobThresholdsComponent>(target))
