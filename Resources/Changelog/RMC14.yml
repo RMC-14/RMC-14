@@ -1468,5 +1468,22 @@
   id: 177
   time: '2024-06-23T21:23:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2570
+- author: DrSmugleaf
+  changes:
+  - message: Enabled the Warrior > Crusher evolution.
+    type: Add
+  - message: Fixed the spitter's xeno spit being able to hurt other xenos.
+    type: Fix
+  - message: Fixed the M54C's AP and Extended mags not being able to fit into some
+      storages.
+    type: Fix
+  - message: Tackle stacks no longer expire while downed, making it easier to keep
+      a tackled target down.
+    type: Tweak
+  - message: Fog walls now occlude vision.
+    type: Tweak
+  id: 178
+  time: '2024-06-24T01:20:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2589
 Name: RMC14
 Order: -1
