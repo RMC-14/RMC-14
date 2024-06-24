@@ -354,9 +354,9 @@
   description: The M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This version is designed to carry up to 12 of the M40 series of grenades.
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/Belt/grenade.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/grenade.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/Belt/grenade.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/grenade.rsi
   - type: Storage
     maxItemSize: Normal
     grid:

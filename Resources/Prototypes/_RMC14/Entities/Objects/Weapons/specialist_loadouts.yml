@@ -60,14 +60,14 @@
   components:
   - type: Sprite
     noRot: true
-    sprite: _CM14/Objects/loadout_kits.rsi
+    sprite: _RMC14/Objects/loadout_kits.rsi
     layers:
     - state: closed
       map: [ base ]
     - state: grenadier
       map: [ grenadier ]
   - type: Icon
-    sprite: _CM14/Objects/loadout_kits.rsi
+    sprite: _RMC14/Objects/loadout_kits.rsi
     state: closed
   - type: Appearance
   - type: GenericVisualizer

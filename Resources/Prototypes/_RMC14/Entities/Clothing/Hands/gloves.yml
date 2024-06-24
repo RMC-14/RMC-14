@@ -105,9 +105,9 @@
   description: A pair of plated, but nimble, gloves.
   components:
   - type: Sprite
-    sprite: _CM14/Objects/Clothing/Hands/Gloves/grenadier.rsi
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/grenadier.rsi
   - type: Clothing
-    sprite: _CM14/Objects/Clothing/Hands/Gloves/grenadier.rsi
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/grenadier.rsi
   - type: Fiber
     fiberMaterial: fibers-leather
     fiberColor: fibers-black
