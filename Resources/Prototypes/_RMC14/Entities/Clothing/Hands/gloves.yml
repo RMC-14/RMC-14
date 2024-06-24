@@ -67,7 +67,7 @@
     fiberColor: fibers-white
   - type: Tag
     tags:
-    - CMGLovesLatex
+    - CMGlovesLatex
 
 #insulated
 - type: entity
