@@ -49,6 +49,7 @@
   components:
   - type: Tag
     tags:
+    - CMMagazineRifle
     - CMMagazineRifleM54CAP
   - type: BallisticAmmoProvider
     whitelist:
@@ -76,6 +77,7 @@
   components:
   - type: Tag
     tags:
+    - CMMagazineRifle
     - CMMagazineRifleM54CExt
   - type: BallisticAmmoProvider
     mayTransfer: True
