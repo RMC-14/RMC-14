@@ -458,7 +458,7 @@
 
 - type: tile
   parent: CMPlanetBase
-  id: CMPlanetIce
+  id: CMPlanetIce0
   name: ice
   sprite: /Textures/_RMC14/Tiles/planet/auto_ice/ice_0.png
   variants: 8
@@ -474,7 +474,7 @@
 
 - type: tile
   parent: CMPlanetBase
-  id: CMPlanetIce
+  id: CMPlanetIceComposite
   name: ice
   sprite: /Textures/_RMC14/Tiles/planet/auto_ice/ice_0_composite1.png
   variants: 8
@@ -490,7 +490,7 @@
 
 - type: tile
   parent: CMPlanetBase
-  id: CMPlanetIce
+  id: CMPlanetIce1
   name: ice
   sprite: /Textures/_RMC14/Tiles/planet/auto_ice/ice_1.png
   variants: 8
@@ -506,7 +506,7 @@
 
 - type: tile
   parent: CMPlanetBase
-  id: CMPlanetIce
+  id: CMPlanetIce2
   name: ice
   sprite: /Textures/_RMC14/Tiles/planet/auto_ice/ice_2.png
   variants: 8
