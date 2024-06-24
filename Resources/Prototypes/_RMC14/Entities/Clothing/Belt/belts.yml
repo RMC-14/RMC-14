@@ -260,7 +260,7 @@
       - CMTraumaKit
       - CMBurnKit
       #      - # TODO RMC14 splints
-      - CMGlovesLatex
+      - RMCGlovesLatex
       components:
       - Defibrillator
       - Pill

@@ -67,7 +67,7 @@
     fiberColor: fibers-white
   - type: Tag
     tags:
-    - CMGlovesLatex
+    - RMCGlovesLatex
 
 #insulated
 - type: entity
@@ -102,4 +102,4 @@
     fiberColor: fibers-brown
 
 - type: Tag
-  id: CMGlovesLatex
+  id: RMCGlovesLatex
