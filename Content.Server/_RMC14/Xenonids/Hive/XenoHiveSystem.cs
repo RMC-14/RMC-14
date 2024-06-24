@@ -12,7 +12,6 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
     [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly List<string> _announce = [];
 
@@ -21,7 +20,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
         if (_gameTicker.RunLevel != GameRunLevel.InRound)
             return;
 
-        var roundTime = _timing.CurTime - _gameTicker.RoundStartTimeSpan;
+        var roundTime = _gameTicker.RoundDuration();
         var hives = EntityQueryEnumerator<HiveComponent>();
         while (hives.MoveNext(out var hiveId, out var hive))
         {
