@@ -29,4 +29,7 @@ public sealed class CMCVars : CVars
 
     public static readonly CVarDef<float> CMBleedTimeMultiplier =
         CVarDef.Create("cm.bleed_time_multiplier", 1f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> CMMarinesPerXeno =
+        CVarDef.Create("cm.marines_per_xeno", 3f, CVar.REPLICATED | CVar.SERVER);
 }
