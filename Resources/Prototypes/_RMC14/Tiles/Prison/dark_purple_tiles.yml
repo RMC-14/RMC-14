@@ -1,0 +1,65 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelPrisonDarkPurpleBase
+  name: tiles-cm-default-purple
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkPurpleBase
+  id: CMFloorSteelPrisonDarkPurple0
+  sprite: /Textures/_RMC14/Tiles/prison/darkpurple2_0.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkPurpleBase
+  id: CMFloorSteelPrisonDarkPurple1
+  sprite: /Textures/_RMC14/Tiles/prison/darkpurple2_1.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkPurpleBase
+  id: CMFloorSteelPrisonDarkPurple2
+  sprite: /Textures/_RMC14/Tiles/prison/darkpurple2_2.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkPurpleBase
+  id: CMFloorSteelPrisonDarkPurple3
+  sprite: /Textures/_RMC14/Tiles/prison/darkpurple2_3.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkPurpleBase
+  id: CMFloorSteelPrisonDarkPurple4
+  sprite: /Textures/_RMC14/Tiles/prison/darkpurple2_4.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkPurpleBase
+  id: CMFloorSteelPrisonDarkPurple5
+  sprite: /Textures/_RMC14/Tiles/prison/darkpurple2_5.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkPurpleBase
+  id: CMFloorSteelPrisonDarkPurple6
+  sprite: /Textures/_RMC14/Tiles/prison/darkpurple2_6.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkPurpleBase
+  id: CMFloorSteelPrisonDarkPurple7
+  sprite: /Textures/_RMC14/Tiles/prison/darkpurple2_7.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkPurpleBase
+  id: CMFloorSteelPrisonDarkPurpleCorners0
+  sprite: /Textures/_RMC14/Tiles/prison/darkpurplecorners2_0.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkPurpleBase
+  id: CMFloorSteelPrisonDarkPurpleCorners1
+  sprite: /Textures/_RMC14/Tiles/prison/darkpurplecorners2_1.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkPurpleBase
+  id: CMFloorSteelPrisonDarkPurpleCorners2
+  sprite: /Textures/_RMC14/Tiles/prison/darkpurplecorners2_2.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkPurpleBase
+  id: CMFloorSteelPrisonDarkPurpleCorners3
+  sprite: /Textures/_RMC14/Tiles/prison/darkpurplecorners2_3.png

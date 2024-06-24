@@ -30,7 +30,7 @@ namespace Content.Shared.CCVar
         ///     Guide entry that is displayed by default when a guide is opened.
         /// </summary>
         public static readonly CVarDef<string> DefaultGuide =
-            CVarDef.Create("server.default_guide", "CM14", CVar.REPLICATED | CVar.SERVER);
+            CVarDef.Create("server.default_guide", "RMC14", CVar.REPLICATED | CVar.SERVER);
 
         /*
          * Ambience
@@ -691,7 +691,7 @@ namespace Content.Shared.CCVar
         public static readonly CVarDef<float> AdminChatSoundVolume =
             CVarDef.Create("audio.admin_chat_sound_volume", -5f, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
         public static readonly CVarDef<string> AHelpSound =
-            CVarDef.Create("audio.ahelp_sound", "/Audio/_CM14/Effects/Admin/adminhelp.ogg", CVar.ARCHIVE | CVar.CLIENTONLY);
+            CVarDef.Create("audio.ahelp_sound", "/Audio/_RMC14/Effects/Admin/adminhelp.ogg", CVar.ARCHIVE | CVar.CLIENTONLY);
 
         /*
          * HUD
@@ -1960,7 +1960,7 @@ namespace Content.Shared.CCVar
         /// The time you must spend reading the rules, before the "Request" button is enabled
         /// </summary>
         public static readonly CVarDef<float> GhostRoleTime =
-            CVarDef.Create("ghost.role_time", 3f, CVar.REPLICATED | CVar.SERVER);
+            CVarDef.Create("ghost.role_time", 0f, CVar.REPLICATED | CVar.SERVER);
 
         /// <summary>
         /// Whether or not to kill the player's mob on ghosting, when it is in a critical health state.

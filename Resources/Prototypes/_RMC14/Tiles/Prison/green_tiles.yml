@@ -1,0 +1,75 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelPrisonGreenBase
+  name: tiles-cm-default-green
+
+- type: tile
+  parent: CMFloorSteelPrisonGreenBase
+  id: CMFloorSteelPrisonGreen0
+  sprite: /Textures/_RMC14/Tiles/prison/green_0.png
+
+- type: tile
+  parent: CMFloorSteelPrisonGreenBase
+  id: CMFloorSteelPrisonGreen1
+  sprite: /Textures/_RMC14/Tiles/prison/green_1.png
+
+- type: tile
+  parent: CMFloorSteelPrisonGreenBase
+  id: CMFloorSteelPrisonGreen2
+  sprite: /Textures/_RMC14/Tiles/prison/green_2.png
+
+- type: tile
+  parent: CMFloorSteelPrisonGreenBase
+  id: CMFloorSteelPrisonGreen3
+  sprite: /Textures/_RMC14/Tiles/prison/green_3.png
+
+- type: tile
+  parent: CMFloorSteelPrisonGreenBase
+  id: CMFloorSteelPrisonGreen4
+  sprite: /Textures/_RMC14/Tiles/prison/green_4.png
+
+- type: tile
+  parent: CMFloorSteelPrisonGreenBase
+  id: CMFloorSteelPrisonGreen5
+  sprite: /Textures/_RMC14/Tiles/prison/green_5.png
+
+- type: tile
+  parent: CMFloorSteelPrisonGreenBase
+  id: CMFloorSteelPrisonGreen6
+  sprite: /Textures/_RMC14/Tiles/prison/green_6.png
+
+- type: tile
+  parent: CMFloorSteelPrisonGreenBase
+  id: CMFloorSteelPrisonGreen7
+  sprite: /Textures/_RMC14/Tiles/prison/green_7.png
+
+- type: tile
+  parent: CMFloorSteelPrisonGreenBase
+  id: CMFloorSteelPrisonGreenCorner0
+  sprite: /Textures/_RMC14/Tiles/prison/greencorner_0.png
+
+- type: tile
+  parent: CMFloorSteelPrisonGreenBase
+  id: CMFloorSteelPrisonGreenCorner1
+  sprite: /Textures/_RMC14/Tiles/prison/greencorner_1.png
+
+- type: tile
+  parent: CMFloorSteelPrisonGreenBase
+  id: CMFloorSteelPrisonGreenCorner2
+  sprite: /Textures/_RMC14/Tiles/prison/greencorner_2.png
+
+- type: tile
+  parent: CMFloorSteelPrisonGreenBase
+  id: CMFloorSteelPrisonGreenCorner3
+  sprite: /Textures/_RMC14/Tiles/prison/greencorner_3.png
+
+- type: tile
+  parent: CMFloorSteelPrisonGreenBase
+  id: CMFloorSteelPrisonGreenFull0
+  sprite: /Textures/_RMC14/Tiles/prison/greenfull_0.png
+
+- type: tile
+  parent: CMFloorSteelPrisonGreenBase
+  id: CMFloorSteelPrisonGreenFull1
+  sprite: /Textures/_RMC14/Tiles/prison/greenfull_1.png

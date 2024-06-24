@@ -1,0 +1,55 @@
+﻿- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagRifleman
+  name: Rifleman's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRifleman
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCombatTech
+  name: Combat Tech's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMCombatTech
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagFireteamLeader
+  name: Fireteam Leader's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMFireteamLeader
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagHospitalCorpsman
+  name: Hospital Corpsman's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMHospitalCorpsman
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagSmartGunOperator
+  name: Smart Gun Operator's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMSmartGunOperator
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagSquadLeader
+  name: Squad Leader's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMSquadLeader
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagWeaponsSpecialist
+  name: Weapons Specialist's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMWeaponsSpecialist

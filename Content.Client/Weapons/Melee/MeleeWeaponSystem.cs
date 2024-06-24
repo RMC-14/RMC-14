@@ -1,6 +1,6 @@
 using System.Linq;
 using Content.Client.Gameplay;
-using Content.Shared._CM14.Tackle;
+using Content.Shared._RMC14.Tackle;
 using Content.Shared.CombatMode;
 using Content.Shared.Effects;
 using Content.Shared.Hands.Components;

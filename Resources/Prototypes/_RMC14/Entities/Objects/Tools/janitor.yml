@@ -1,0 +1,110 @@
+- type: entity
+  parent: BaseItem
+  id: CMMop
+  name: mop
+  description: The world of janitalia wouldn't be complete without a mop.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Janitorial/mop.rsi
+    layers:
+      - state: mop
+      - map: ["enum.SolutionContainerLayers.Fill"]
+        state: mop_fill-1
+        visible: false
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Janitorial/mop.rsi
+    size: Normal
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    fillBaseName: mop_fill-
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 10
+    soundHit:
+      collection: MetalThud
+  - type: Spillable
+    solution: absorbed
+  - type: Absorbent
+  - type: SolutionContainerManager
+    solutions:
+      absorbed:
+        maxVol: 100
+  - type: UseDelay
+    delay: 1
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 50 # TODO RMC14 port cmss13 Plastic
+  - type: Tag
+    tags:
+      - Mop
+      - MopBasic
+
+- type: entity
+  parent: BaseItem
+  id: CMWetSign
+  name: wet floor sign
+  description: Caution! Wet Floor!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Janitorial/caution.rsi
+    state: caution
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Janitorial/caution.rsi
+    size: Small
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 50
+  - type: Tag
+    tags:
+      - WetFloorSign
+
+- type: entity
+  parent: BaseItem
+  id: CMWarningCone
+  name: warning cone
+  description: This cone is trying to warn you of something!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Janitorial/cone.rsi
+    state: cone
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Janitorial/cone.rsi
+    size: Small
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 50
+
+- type: entity
+  parent: BaseItem
+  id: CMLightReplacer
+  name: light replacer
+  description: A device to automatically replace lights. Refill with working lightbulbs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Janitorial/light_replacer.rsi
+    state: lightreplacer0
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Janitorial/light_replacer.rsi
+  - type: LightReplacer
+    contents:
+    - id: CMLightTube
+      amount: 8
+    - id: CMLightBulb
+      amount: 5
+  - type: StaticPrice
+    price: 100
+  - type: ContainerContainer
+    containers:
+      light_replacer_storage: !type:Container
+
+- type: entity
+  parent: CMLightReplacer
+  id: CMLightReplacerEmpty
+  suffix: Empty
+  components:
+  - type: LightReplacer
+    contents:
+    - id: CMLightTube
+      amount: 0

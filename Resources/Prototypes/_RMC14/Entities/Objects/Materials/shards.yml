@@ -1,0 +1,60 @@
+﻿- type: entity
+  parent: ShardBase
+  id: CMShardBase
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _RMC14/Objects/Materials/shards.rsi
+        state: large
+        map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: Appearance
+  - type: RandomSprite
+    available:
+    - enum.DamageStateVisualLayers.Base:
+        large: ""
+        medium: ""
+        small: ""
+        tiny: ""
+
+- type: entity
+  parent: CMShardBase
+  id: CMShardGlass
+  name: glass shard
+  description: A shard of broken glass. Could probably be used as ... a throwing weapon?
+  components:
+  - type: ToolRefinable
+    refineResult:
+    - id: CMSheetGlass1
+  - type: Tag
+    tags:
+      - GlassShard
+      - Trash
+
+- type: entity
+  parent: CMShardBase
+  id: CMShardPhoron
+  name: phoron shard
+  description: A shard of broken phoron glass. Considerably tougher than normal glass shards. Apparently not tough enough to be a window.
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _RMC14/Objects/Materials/shards.rsi
+        state: phoron
+        map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: Appearance
+  - type: RandomSprite
+    available:
+    - enum.DamageStateVisualLayers.Base:
+        phoron: ""
+        phoronlarge: ""
+        phoronmedium: ""
+        phoronsmall: ""
+  - type: ToolRefinable
+    refineResult:
+    - id: CMSheetGlass1
+    - id: CMSheetPhoron1
+  - type: Tag
+    tags:
+      - PlasmaGlassShard
+      - Trash

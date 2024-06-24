@@ -1,0 +1,100 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelPrisonBlueBase
+  name: tiles-cm-default-blue
+
+- type: tile
+  parent: CMFloorSteelPrisonBlueBase
+  id: CMFloorSteelPrisonBlue0
+  sprite: /Textures/_RMC14/Tiles/prison/blue_0.png
+
+- type: tile
+  parent: CMFloorSteelPrisonBlueBase
+  id: CMFloorSteelPrisonBlue1
+  sprite: /Textures/_RMC14/Tiles/prison/blue_1.png
+
+- type: tile
+  parent: CMFloorSteelPrisonBlueBase
+  id: CMFloorSteelPrisonBlue2
+  sprite: /Textures/_RMC14/Tiles/prison/blue_2.png
+
+- type: tile
+  parent: CMFloorSteelPrisonBlueBase
+  id: CMFloorSteelPrisonBlue3
+  sprite: /Textures/_RMC14/Tiles/prison/blue_3.png
+
+- type: tile
+  parent: CMFloorSteelPrisonBlueBase
+  id: CMFloorSteelPrisonBlue4
+  sprite: /Textures/_RMC14/Tiles/prison/blue_4.png
+
+- type: tile
+  parent: CMFloorSteelPrisonBlueBase
+  id: CMFloorSteelPrisonBlue5
+  sprite: /Textures/_RMC14/Tiles/prison/blue_5.png
+
+- type: tile
+  parent: CMFloorSteelPrisonBlueBase
+  id: CMFloorSteelPrisonBlue6
+  sprite: /Textures/_RMC14/Tiles/prison/blue_6.png
+
+- type: tile
+  parent: CMFloorSteelPrisonBlueBase
+  id: CMFloorSteelPrisonBlue7
+  sprite: /Textures/_RMC14/Tiles/prison/blue_7.png
+
+- type: tile
+  parent: CMFloorSteelPrisonBlueBase
+  id: CMFloorSteelPrisonBluePlate0
+  sprite: /Textures/_RMC14/Tiles/prison/blue_plate_0.png
+
+- type: tile
+  parent: CMFloorSteelPrisonBlueBase
+  id: CMFloorSteelPrisonBluePlate1
+  sprite: /Textures/_RMC14/Tiles/prison/blue_plate_1.png
+
+- type: tile
+  parent: CMFloorSteelPrisonBlueBase
+  id: CMFloorSteelPrisonBluePlate2
+  sprite: /Textures/_RMC14/Tiles/prison/blue_plate_2.png
+
+- type: tile
+  parent: CMFloorSteelPrisonBlueBase
+  id: CMFloorSteelPrisonBluePlate3
+  sprite: /Textures/_RMC14/Tiles/prison/blue_plate_3.png
+
+- type: tile
+  parent: CMFloorSteelPrisonBlueBase
+  id: CMFloorSteelPrisonBlueCorner0
+  sprite: /Textures/_RMC14/Tiles/prison/bluecorner_0.png
+
+- type: tile
+  parent: CMFloorSteelPrisonBlueBase
+  id: CMFloorSteelPrisonBlueCorner1
+  sprite: /Textures/_RMC14/Tiles/prison/bluecorner_1.png
+
+- type: tile
+  parent: CMFloorSteelPrisonBlueBase
+  id: CMFloorSteelPrisonBlueCorner2
+  sprite: /Textures/_RMC14/Tiles/prison/bluecorner_2.png
+
+- type: tile
+  parent: CMFloorSteelPrisonBlueBase
+  id: CMFloorSteelPrisonBlueCorner3
+  sprite: /Textures/_RMC14/Tiles/prison/bluecorner_3.png
+
+- type: tile
+  parent: CMFloorSteelPrisonBlueBase
+  id: CMFloorSteelPrisonBlueFull0
+  sprite: /Textures/_RMC14/Tiles/prison/bluefull_0.png
+
+- type: tile
+  parent: CMFloorSteelPrisonBlueBase
+  id: CMFloorSteelPrisonBlueFull1
+  sprite: /Textures/_RMC14/Tiles/prison/bluefull_1.png
+
+- type: tile
+  parent: CMFloorSteelPrisonBlueBase
+  id: CMFloorSteelPrisonKitchen
+  sprite: /Textures/_RMC14/Tiles/prison/kitchen.png

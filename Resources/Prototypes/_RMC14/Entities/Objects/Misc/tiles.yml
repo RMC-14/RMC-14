@@ -1,0 +1,42 @@
+- type: entity
+  parent: FloorTileItemBase
+  id: CMTileItemBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tiles/tiles.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Tiles/tiles.rsi
+    size: Normal
+
+- type: entity
+  parent: CMTileItemBase
+  id: CMTileItemSteel
+  name: metal floor
+  components:
+  - type: Sprite
+    state: steel
+  - type: Item
+    heldPrefix: metal
+  - type: FloorTile
+    outputs:
+    - Plating
+    - CMFloorSteel
+  - type: Stack
+    stackType: FloorTileSteel
+
+- type: entity
+  parent: CMTileItemBase
+  id: CMTileItemWood
+  name: wood floor
+  components:
+  - type: Sprite
+    state: wood
+  - type: Item
+    heldPrefix: wood
+  - type: FloorTile
+    outputs:
+    - Plating
+    - CMFloorWood
+  - type: Stack
+    stackType: FloorTileWood

@@ -1,0 +1,224 @@
+# BASE
+- type: entity
+  abstract: true
+#  parent: BaseStockPart
+  parent: BaseItem
+  id: CMStockPartBase
+  name: stock part
+  description: What?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/stock_parts.rsi
+  - type: Item
+    size: Small
+
+# RATING 1
+
+# TODO RMC14 these, bring them back with a stack type instead of a machine part component
+- type: entity
+  parent: CMStockPartBase
+  id: CMStockPartScreen
+  name: console screen
+  description: Used in the construction of computers and other devices with an interactive console.
+  suffix: Rating 1
+  components:
+  - type: Sprite
+    state: screen
+  #- type: MachinePart
+  #  part: Screen
+  #  rating: 1
+
+- type: entity
+  parent: CMStockPartBase
+  id: CMStockPartCapacitor
+  name: capacitor
+  description: A basic capacitor used in the construction of a variety of devices.
+  suffix: Rating 1
+  components:
+  - type: Sprite
+    state: capacitor
+#  - type: MachinePart
+#    part: Capacitor
+#    rating: 1
+  - type: Tag
+    tags:
+    - CapacitorStockPart
+
+- type: entity
+  parent: CMStockPartBase
+  id: CMStockPartScanningModule
+  name: scanning module
+  description: A compact, high resolution scanning module used in the construction of certain devices.
+  suffix: Rating 1
+  components:
+  - type: Sprite
+    state: scan_module
+  #- type: MachinePart
+  #  part: ScanningModule
+  #  rating: 1
+
+- type: entity
+  parent: CMStockPartBase
+  id: CMStockPartManipulatorMicro
+  name: micro-manipulator
+  description: A tiny little manipulator used in the construction of certain devices.
+  suffix: Rating 1
+  components:
+  - type: Sprite
+    state: micro_mani
+#  - type: MachinePart
+#    part: Manipulator
+#    rating: 1
+
+- type: entity
+  parent: CMStockPartBase
+  id: CMStockPartMicroLaser
+  name: micro-laser
+  description: A tiny laser used in certain devices.
+  suffix: Rating 1
+  components:
+  - type: Sprite
+    state: micro_laser
+  #- type: MachinePart
+  #  part: MicroLaser
+  #  rating: 1
+
+- type: entity
+  parent: CMStockPartBase
+  id: CMStockPartMatterBin
+  name: matter bin
+  description: A container for hold compressed matter awaiting re-construction.
+  suffix: Rating 1
+  components:
+  - type: Sprite
+    state: matter_bin
+#  - type: MachinePart
+#    part: MatterBin
+#    rating: 1
+
+# RATING 2
+
+- type: entity
+  parent: CMStockPartCapacitor
+  id: CMStockPartCapacitorAdvanced
+  name: advanced capacitor
+  description: An advanced capacitor used in the construction of a variety of devices.
+  suffix: Rating 2
+#  components:
+#  - type: MachinePart
+#    rating: 2
+
+- type: entity
+  parent: CMStockPartScanningModule
+  id: CMStockPartScanningModuleAdvanced
+  name: advanced scanning module
+  suffix: Rating 2
+  #components:
+  #- type: MachinePart
+  #  part:
+  #  rating: 2
+
+- type: entity
+  parent: CMStockPartManipulatorMicro
+  id: CMStockPartManipulatorNano
+  name: nano-manipulator
+  suffix: Rating 2
+  components:
+  - type: Sprite
+    state: nano_mani
+#  - type: MachinePart
+#    rating: 2
+
+- type: entity
+  parent: CMStockPartMicroLaser
+  id: CMStockPartMicroLaserHigh
+  name: high-power micro-laser
+  suffix: Rating 2
+  components:
+  - type: Sprite
+    state: high_micro_laser
+  #- type: MachinePart
+  #  part:
+  #  rating: 2
+
+- type: entity
+  parent: CMStockPartMatterBin
+  id: CMStockPartMatterAdvanced
+  name: advanced matter bin
+  suffix: Rating 2
+  components:
+  - type: Sprite
+    state: advanced_matter_bin
+#  - type: MachinePart
+#    rating: 2
+
+# RATING 3
+
+- type: entity
+  parent: CMStockPartCapacitor
+  id: CMStockPartCapacitorSuper
+  name: super capacitor
+  description: A super-high-capacity capacitor used in the construction of a variety of devices.
+  suffix: Rating 3
+#  components:
+#  - type: MachinePart
+#    rating: 3
+
+- type: entity
+  parent: CMStockPartScanningModule
+  id: CMStockPartScanningModulePhasic
+  name: phasic scanning module
+  description: A compact, high resolution phasic scanning module used in the construction of certain devices.
+  suffix: Rating 3
+  #components:
+  #- type: MachinePart
+  #  rating: 3
+
+- type: entity
+  parent: CMStockPartManipulatorMicro
+  id: CMStockPartManipulatorPico
+  name: pico-manipulator
+  suffix: Rating 3
+  components:
+  - type: Sprite
+    state: pico_mani
+#  - type: MachinePart
+#    rating: 3
+
+- type: entity
+  parent: CMStockPartMicroLaser
+  id: CMStockPartMicroLaserUltra
+  name: ultra-high-power micro-laser
+  suffix: Rating 3
+  components:
+  - type: Sprite
+    state: ultra_high_micro_laser
+  #- type: MachinePart
+  #  rating: 3
+
+- type: entity
+  parent: CMStockPartMatterBin
+  id: CMStockPartMatterBinSuper
+  name: super matter bin
+  suffix: Rating 3
+  components:
+  - type: Sprite
+    state: super_matter_bin
+#  - type: MachinePart
+#    rating: 3
+
+# SUBSPACE
+
+# SMES
+
+- type: entity
+  parent: CMStockPartBase
+  id: CMStockPartSMESCoil
+  name: superconducting magnetic coil
+  description: Heavy-duty superconducting magnetic coil, mainly used in construction of SMES units.
+  components:
+  - type: Sprite
+    state: smes_coil
+  #- type: MachinePart
+  #  part:
+  #  rating: 1

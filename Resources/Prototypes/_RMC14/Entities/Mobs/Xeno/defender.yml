@@ -1,0 +1,83 @@
+﻿- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  - CMXenoFlammable
+  id: CMXenoDefender
+  name: Defender
+  description: A alien with an armored crest.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Defender/defender.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      500: Critical
+      600: Dead
+  - type: Xeno
+    role: CMXenoDefender
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab # TODO RMC14 name it "tail slam"
+    - ActionXenoToggleCrest
+    - ActionXenoHeadbutt
+    - ActionXenoTailSweep
+    - ActionXenoFortify
+    tier: 1
+    hudOffset: 0,0.2
+    unlockAt: 240 # 4 minutes
+  - type: XenoEvolution
+    max: 300
+    evolvesTo:
+    - CMXenoWarrior
+  - type: XenoPlasma
+    plasma: 100
+    maxPlasma: 100
+    plasmaRegenOnWeeds: 5
+  - type: CMArmor
+    armor: 35
+    explosionArmor: 70
+  - type: XenoCrest
+  - type: XenoDevour
+  - type: XenoHeadbutt
+    damage:
+      types:
+        Blunt: 30 # TODO RMC14 penetrating damage
+  - type: XenoAnimateMovement
+  - type: XenoTailSweep
+    damage:
+      types:
+        Slash: 30
+  - type: XenoFortify
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 27.5
+  - type: Tackle
+    threshold: 4
+    stun: 5
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 185
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+      fix2:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 185
+        layer:
+        - BulletImpassable

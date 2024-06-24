@@ -1,4 +1,4 @@
-﻿using Content.Shared._CM14.StepTrigger;
+﻿using Content.Shared._RMC14.StepTrigger;
 using Content.Shared.Examine;
 using Content.Shared.Inventory;
 using Content.Shared.StepTrigger.Components;

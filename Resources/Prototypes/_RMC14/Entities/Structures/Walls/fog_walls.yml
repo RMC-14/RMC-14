@@ -1,0 +1,43 @@
+﻿# TODO RMC14 make a central system to manage these instead of ticking them all separately
+- type: entity
+  id: CMFogWall
+  name: dense fog
+  description: It looks way too dangerous to traverse. Best wait until it has cleared up.
+  suffix: 25 minutes
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _RMC14/Effects/fog.rsi
+    state: smoke
+  - type: PlacementReplacement
+    key: cm_fog_walls
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+        density: 1000
+  - type: TimedDespawn
+    lifetime: 1500
+  - type: Occluder
+
+- type: entity
+  parent: CMFogWall
+  id: CMFogWallShort
+  suffix: 15 minutes
+  components:
+  - type: TimedDespawn
+    lifetime: 900

@@ -1,0 +1,117 @@
+- type: entity
+  parent: ClothingHandsBase
+  id: CMHandsBlackMarine # TODO RMC14 armor
+  name: marine combat gloves
+  description: "Standard issue marine tactical gloves. It reads: 'knit by Marine Widows Association'."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/black.rsi
+  - type: Fiber
+    fiberMaterial: fibers-leather
+    fiberColor: fibers-black
+  - type: FingerprintMask
+
+- type: entity
+  parent: CMHandsBlackMarine
+  id: CMHandsBrown
+  name: brown gloves
+  description: A pair of brown gloves.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/brown.rsi
+  - type: Fiber
+    fiberColor: fibers-brown
+
+- type: entity
+  parent: CMHandsBlackMarine
+  id: CMHandsLightBrown
+  name: light brown gloves
+  description: A pair of light brown gloves.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/light_brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/light_brown.rsi
+  - type: Fiber
+    fiberColor: fibers-brown
+
+- type: entity
+  parent: CMHandsBlackMarine
+  id: CMHandsWhite
+  name: white gloves
+  description: A pair of white gloves.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/white.rsi
+  - type: Fiber
+    fiberColor: fibers-white
+
+- type: entity
+  parent: CMHandsBlackMarine
+  id: CMHandsLatex
+  name: latex gloves
+  description: A pair of latex gloves.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/latex.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/latex.rsi
+  - type: Fiber
+    fiberMaterial: fibers-latex
+    fiberColor: fibers-white
+
+#insulated
+- type: entity
+  parent: CMHandsBlackMarine
+  id: CMHandsInsulated
+  name: insulated gloves
+  description: These gloves will protect the wearer from electric shocks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/insulated.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/insulated.rsi
+  - type: Insulated
+  - type: GloveHeatResistance
+    heatResistance: 1400
+  - type: Fiber
+    fiberMaterial: fibers-insulative
+    fiberColor: fibers-brown
+
+- type: entity
+  parent: CMHandsInsulated
+  id: CMHandsCaptain
+  name: captain's gloves
+  description: A pair of captain's gloves.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/captain.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/captain.rsi
+  - type: Fiber
+    fiberMaterial: fibers-durathread
+    fiberColor: fibers-brown
+
+- type: entity
+  parent: CMHandsBlackMarine
+  id: CMHandsM3G4
+  name: M3-G4 grenadier gloves
+  description: A pair of plated, but nimble, gloves.
+  components:
+  - type: Sprite
+    sprite: _CM14/Objects/Clothing/Hands/Gloves/grenadier.rsi
+  - type: Clothing
+    sprite: _CM14/Objects/Clothing/Hands/Gloves/grenadier.rsi
+  - type: Fiber
+    fiberMaterial: fibers-leather
+    fiberColor: fibers-black
+  - type: FingerprintMask
+  - type: CMArmor
+    armor: 40
+    explosionArmor: 50

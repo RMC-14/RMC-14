@@ -1,0 +1,61 @@
+- type: job
+  parent: CMJobSquadBase
+  id: CMSmartGunOperator
+  name: cm-job-name-smart-gun-operator
+  description: cm-job-description-smart-gun-operator
+  playTimeTracker: CMJobSmartGunOperator
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: CMSquad
+      time: 18000 # 5 hours
+  startingGear: CMGearSmartGunOperator
+  icon: "CMJobIconSmartGunOperator"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-sl
+  accessGroups:
+  - SmartGunOperator
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      firearms: 1
+      jtac: 1
+      smartGun: 1
+    - type: CMVendorUser
+      points: 45
+  hidden: true # TODO RMC14
+
+- type: startingGear
+  id: CMGearSmartGunOperator
+  equipment:
+    jumpsuit: JumpsuitMarine # TODO RMC14 all squad roles should spawn with no jumpsuit but still have clothes on
+    back: CMSatchelMarine
+    id: CMDogtagSmartGunOperator
+
+- type: startingGear
+  id: CMGearSmartGunOperatorEquipped
+  equipment:
+    jumpsuit: JumpsuitMarine
+    back: CMSatchelMarine
+    shoes: CMBootsBlackFilled
+    head: ArmorHelmetM10
+    outerClothing: CMArmorM3Medium
+    gloves: CMHandsBlackMarine
+    id: CMDogtagSmartGunOperator
+    ears: CMHeadsetAlpha
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSmartGunOperator
+  name: smart gun operator spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSmartGunOperator
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: smart_gun_operator
+
+- type: playTimeTracker
+  id: CMJobSmartGunOperator

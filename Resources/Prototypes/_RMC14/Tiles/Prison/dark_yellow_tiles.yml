@@ -1,0 +1,70 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelPrisonDarkYellowBase
+  name: tiles-cm-default-yellow
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkYellowBase
+  id: CMFloorSteelPrisonDarkYellow0
+  sprite: /Textures/_RMC14/Tiles/prison/darkyellow2_0.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkYellowBase
+  id: CMFloorSteelPrisonDarkYellow1
+  sprite: /Textures/_RMC14/Tiles/prison/darkyellow2_1.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkYellowBase
+  id: CMFloorSteelPrisonDarkYellow2
+  sprite: /Textures/_RMC14/Tiles/prison/darkyellow2_2.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkYellowBase
+  id: CMFloorSteelPrisonDarkYellow3
+  sprite: /Textures/_RMC14/Tiles/prison/darkyellow2_3.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkYellowBase
+  id: CMFloorSteelPrisonDarkYellow4
+  sprite: /Textures/_RMC14/Tiles/prison/darkyellow2_4.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkYellowBase
+  id: CMFloorSteelPrisonDarkYellow5
+  sprite: /Textures/_RMC14/Tiles/prison/darkyellow2_5.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkYellowBase
+  id: CMFloorSteelPrisonDarkYellow6
+  sprite: /Textures/_RMC14/Tiles/prison/darkyellow2_6.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkYellowBase
+  id: CMFloorSteelPrisonDarkYellow7
+  sprite: /Textures/_RMC14/Tiles/prison/darkyellow2_7.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkYellowBase
+  id: CMFloorSteelPrisonDarkYellowCorners0
+  sprite: /Textures/_RMC14/Tiles/prison/darkyellowcorners2_0.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkYellowBase
+  id: CMFloorSteelPrisonDarkYellowCorners1
+  sprite: /Textures/_RMC14/Tiles/prison/darkyellowcorners2_1.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkYellowBase
+  id: CMFloorSteelPrisonDarkYellowCorners2
+  sprite: /Textures/_RMC14/Tiles/prison/darkyellowcorners2_2.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkYellowBase
+  id: CMFloorSteelPrisonDarkYellowCorners3
+  sprite: /Textures/_RMC14/Tiles/prison/darkyellowcorners2_3.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkYellowBase
+  id: CMFloorSteelPrisonDarkYellowFull
+  sprite: /Textures/_RMC14/Tiles/prison/darkyellowfull2.png
