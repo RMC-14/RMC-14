@@ -415,7 +415,7 @@
     sprite: _RMC14/Structures/Walls/shiva_fab_r.rsi
   - type: Icon
     sprite: _RMC14/Structures/Walls/shiva_fab_r.rsi
-    state: shiva_fab_r_h
+    state: shiva_fab_r_h  
   - type: Tag
     tags:
     - Wall
@@ -429,7 +429,7 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: walls
-    base: shiva_fab_r_h
+    base: shiva_fab_r
 
 - type: entity
   parent: CMWallMetal

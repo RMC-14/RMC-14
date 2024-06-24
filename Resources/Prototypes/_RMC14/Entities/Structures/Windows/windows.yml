@@ -164,7 +164,7 @@
 
 - type: entity
   parent: CMBaseWindow
-  id: CMWindowShiba
+  id: CMWindowShiva
   name: window
   description: A glass window inside a wall frame.
   components:
@@ -176,6 +176,7 @@
     state: shiva_window
   - type: IconSmooth
     key: walls
-    base: solaris_window
+    base: shiva_window
     mode: CardinalFlags
   # 40 hp
+  # Temporary corner sprites taken from colony reinforced window, since no corner windows used on shiva.
