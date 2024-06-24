@@ -28,7 +28,8 @@ public sealed class XenoFlingSystem : EntitySystem
 
     private void OnXenoFlingAction(Entity<XenoFlingComponent> xeno, ref XenoFlingActionEvent args)
     {
-        if (args.Target == xeno.Owner)
+        // TODO RMC14 xenos of the same hive
+        if (args.Target == xeno.Owner || HasComp<XenoComponent>(args.Target))
             return;
 
         if (args.Handled)
