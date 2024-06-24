@@ -34,6 +34,7 @@ public sealed class TackleSystem : EntitySystem
         var time = _timing.CurTime;
         var recently = EnsureComp<TackledRecentlyComponent>(target);
         recently.LastTackled = time;
+        recently.LastTackledDuration = tackle.Stun > recently.LastTackledDuration ? tackle.Stun : recently.LastTackledDuration;
         recently.Current += tackle.Strength;
 
         Dirty(target, recently);
@@ -88,9 +89,9 @@ public sealed class TackleSystem : EntitySystem
 
         var time = _timing.CurTime;
         var query = EntityQueryEnumerator<TackledRecentlyComponent, TackleableComponent>();
-        while (query.MoveNext(out var uid, out var recently, out var able))
+        while (query.MoveNext(out var uid, out var recently, out _))
         {
-            if (time > recently.LastTackled + able.Expires)
+            if (time > recently.LastTackled + recently.LastTackledDuration)
                 RemCompDeferred<TackledRecentlyComponent>(uid);
         }
     }

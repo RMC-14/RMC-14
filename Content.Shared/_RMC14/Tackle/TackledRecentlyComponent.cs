@@ -11,4 +11,7 @@ public sealed partial class TackledRecentlyComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan LastTackled;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan LastTackledDuration;
 }

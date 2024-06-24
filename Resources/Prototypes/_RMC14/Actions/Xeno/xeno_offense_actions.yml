@@ -247,7 +247,7 @@
   id: ActionXenoPunch
   parent: ActionXenoBase
   name: Punch
-  description: Punches the targeted marine dealing a hefty amount of damage as well as slowing the target for seconds.
+  description: Punches the targeted marine dealing a hefty amount of damage as well as slowing the target.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
