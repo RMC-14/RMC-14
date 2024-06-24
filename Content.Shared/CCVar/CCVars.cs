@@ -1960,7 +1960,7 @@ namespace Content.Shared.CCVar
         /// The time you must spend reading the rules, before the "Request" button is enabled
         /// </summary>
         public static readonly CVarDef<float> GhostRoleTime =
-            CVarDef.Create("ghost.role_time", 3f, CVar.REPLICATED | CVar.SERVER);
+            CVarDef.Create("ghost.role_time", 0f, CVar.REPLICATED | CVar.SERVER);
 
         /// <summary>
         /// Whether or not to kill the player's mob on ghosting, when it is in a critical health state.
