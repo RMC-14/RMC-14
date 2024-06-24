@@ -65,6 +65,9 @@
   - type: Fiber
     fiberMaterial: fibers-latex
     fiberColor: fibers-white
+  - type: Tag
+    tags:
+    - CMGLovesLatex
 
 #insulated
 - type: entity
@@ -97,3 +100,6 @@
   - type: Fiber
     fiberMaterial: fibers-durathread
     fiberColor: fibers-brown
+
+- type: Tag
+  id: CMGlovesLatex

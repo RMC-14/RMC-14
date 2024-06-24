@@ -253,7 +253,6 @@
       - PillCanister
       - Syringe
       - CMAutoInjector
-      - Bloodpack
       - Brutepack
       - Gauze
       - Ointment
@@ -261,10 +260,11 @@
       - CMTraumaKit
       - CMBurnKit
       #      - # TODO RMC14 splints
-#      - # TODO RMC14 latex gloves
+      - CMGlovesLatex
       components:
       - Defibrillator
       - Pill
+      - BloodPack
   - type: FixedItemSizeStorage
   - type: IgnoreContentsSize
     items:
