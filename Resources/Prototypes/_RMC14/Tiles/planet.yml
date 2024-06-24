@@ -519,3 +519,67 @@
   - 1.0
   - 1.0
   - 1.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetSnow1
+  name: snow
+  sprite: /Textures/_RMC14/Tiles/planet/snow2/snow_1.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetSnow2
+  name: snow
+  sprite: /Textures/_RMC14/Tiles/planet/snow2/snow_2.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetSnow3
+  name: snow
+  sprite: /Textures/_RMC14/Tiles/planet/snow2/snow_3.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetSnow4
+  name: snow
+  sprite: /Textures/_RMC14/Tiles/planet/snow2/snow_4.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
