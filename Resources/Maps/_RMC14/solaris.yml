@@ -190,7 +190,6 @@ entities:
   - uid: 1
     components:
     - type: MetaData
-      desc: 'Weyland Yutani Biological Storage Depot, Population: ~120'
       name: LV-1413 (Routerra I)
     - type: Transform
     - type: Map
