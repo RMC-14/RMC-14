@@ -455,3 +455,67 @@
   id: CMPlanetCoastCornerSE2
   name: coast corner sw
   sprite: /Textures/_RMC14/Tiles/planet/beach/beachcorner2_24.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetIce
+  name: ice
+  sprite: /Textures/_RMC14/Tiles/planet/auto_ice/ice_0.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetIce
+  name: ice
+  sprite: /Textures/_RMC14/Tiles/planet/auto_ice/ice_0_composite1.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetIce
+  name: ice
+  sprite: /Textures/_RMC14/Tiles/planet/auto_ice/ice_1.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetIce
+  name: ice
+  sprite: /Textures/_RMC14/Tiles/planet/auto_ice/ice_2.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
