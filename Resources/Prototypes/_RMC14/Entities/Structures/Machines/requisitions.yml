@@ -41,6 +41,9 @@
     guides:
     - Cargo
   - type: CargoSellBlacklist
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
 
 - type: entity
   id: CMCargoElevator
