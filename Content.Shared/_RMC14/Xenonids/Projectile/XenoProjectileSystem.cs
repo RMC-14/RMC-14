@@ -40,6 +40,7 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (TryComp(args.Target, out XenoComponent? targetXeno) &&
             targetXeno.Hive == ent.Comp.Hive)
         {
+            args.Handled = true;
             QueueDel(ent);
         }
     }
