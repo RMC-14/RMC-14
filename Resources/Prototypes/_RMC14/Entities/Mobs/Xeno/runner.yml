@@ -40,7 +40,7 @@
     - ActionXenoWatch
     - ActionXenoTailStab
     - ActionXenoHide
-    - ActionXenoLeap # TODO RMC14 call this pounce, not leap
+    - ActionXenoPounce # TODO RMC14 call this pounce, not leap
     - ActionXenoBoneChips
     - ActionXenoZoom
     tier: 1
@@ -61,8 +61,8 @@
     explosionArmor: 10
   - type: XenoEvolution
     max: 300
-#    evolvesTo:
-#    - CMXenoLurker
+    evolvesTo:
+    - CMXenoLurker
   - type: XenoZoom
   - type: MeleeWeapon
     attackRate: 1.4

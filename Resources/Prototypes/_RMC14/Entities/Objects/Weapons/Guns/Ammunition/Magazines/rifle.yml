@@ -14,13 +14,13 @@
 
 - type: entity
   parent: CMMagazineRifleBase
-  id: CMMagazineRifleM52C
-  name: "M52C magazine (10x24mm)"
+  id: CMMagazineRifleM54C
+  name: "M54C magazine (10x24mm)"
   components:
   - type: Tag
     tags:
     - CMMagazineRifle
-    - CMMagazineRifleM52C
+    - CMMagazineRifleM54C
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -29,7 +29,7 @@
     proto: CMCartridgeRifle10x24mm
     capacity: 40
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m52c.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -38,25 +38,26 @@
   - type: Appearance
 
 - type: Tag
-  id: CMMagazineRifleM52CAP
+  id: CMMagazineRifleM54CAP
 
-# m52c AP
+# m54c AP
 - type: entity
-  parent: CMMagazineRifleM52C
-  id: CMMagazineRifleM52CAP
-  name: "M52C AP magazine (10x24mm)"
+  parent: CMMagazineRifleM54C
+  id: CMMagazineRifleM54CAP
+  name: "M54C AP magazine (10x24mm)"
   suffix: AP
   components:
   - type: Tag
     tags:
-    - CMMagazineRifleM52CAP
+    - CMMagazineRifle
+    - CMMagazineRifleM54CAP
   - type: BallisticAmmoProvider
     whitelist:
       tags:
       - CMCartridgeRifle10x24mmAP
     proto: CMCartridgeRifle10x24mmAP
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m52c.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -66,17 +67,18 @@
       color: "#1F951F"
 
 - type: Tag
-  id: CMMagazineRifleM52CExt
+  id: CMMagazineRifleM54CExt
 
-# m52c extended
+# m54c extended
 - type: entity
-  parent: CMMagazineRifleM52C
-  id: CMMagazineRifleM52CExt
-  name: "M52C extended magazine (10x24mm)"
+  parent: CMMagazineRifleM54C
+  id: CMMagazineRifleM54CExt
+  name: "M54C extended magazine (10x24mm)"
   components:
   - type: Tag
     tags:
-    - CMMagazineRifleM52CExt
+    - CMMagazineRifle
+    - CMMagazineRifleM54CExt
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -85,7 +87,7 @@
     proto: CMCartridgeRifle10x24mm
     capacity: 60
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m52ce.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -97,16 +99,16 @@
     zeroVisible: false
   - type: Appearance
 
-# M52CE2
+# M54CE2
 - type: entity
-  parent: CMMagazineRifleM52C
-  id: CMMagazineRifleM52CE2
-  name: "M52CE2 magazine (10x24mm)"
+  parent: CMMagazineRifleM54C
+  id: CMMagazineRifleM54CE2
+  name: "M54CE2 magazine (10x24mm)"
   components:
   - type: Tag
     tags:
     - CMMagazineRifle
-    - CMMagazineRifleM52CE2
+    - CMMagazineRifleM54CE2
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -115,7 +117,7 @@
     proto: CMCartridgeRifle10x24mm
     capacity: 300
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m52ce2.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -203,10 +205,10 @@
   id: CMMagazineRifle
 
 - type: Tag
-  id: CMMagazineRifleM52C
+  id: CMMagazineRifleM54C
 
 - type: Tag
-  id: CMMagazineRifleM52CE2
+  id: CMMagazineRifleM54CE2
 
 - type: Tag
   id: CMMagazineRifleM4RA
