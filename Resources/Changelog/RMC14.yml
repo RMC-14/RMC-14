@@ -1485,5 +1485,15 @@
   id: 178
   time: '2024-06-24T01:20:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2589
+- author: DrSmugleaf
+  changes:
+  - message: Raffle durations are now 10 seconds, down from 30, and don't extend when
+      more people join the raffle
+    type: Tweak
+  - message: There is no longer a 3 second delay to clicking the join raffle button.
+    type: Tweak
+  id: 179
+  time: '2024-06-24T01:32:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2590
 Name: RMC14
 Order: -1
