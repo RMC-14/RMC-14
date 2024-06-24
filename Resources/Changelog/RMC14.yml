@@ -1518,5 +1518,13 @@
   id: 182
   time: '2024-06-24T23:53:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2608
+- author: DrSmugleaf
+  changes:
+  - message: The amount of marines per xeno has been lowered from 4 to 3. With 200
+      players this means that 67 xenos will spawn round-start, instead of 50.
+    type: Tweak
+  id: 183
+  time: '2024-06-24T23:58:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2613
 Name: RMC14
 Order: -1
