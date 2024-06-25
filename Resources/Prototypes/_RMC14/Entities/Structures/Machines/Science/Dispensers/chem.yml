@@ -1,6 +1,6 @@
 - type: entity
   parent: ChemDispenser
-  id: CMDispenserChem
+  id: RMCDispenserChem
   name: chemical dispenser
   description: A complex machine for mixing elements into chemicals. A We-Ya product.
   components:
@@ -23,7 +23,7 @@
     storageWhitelist:
       tags:
       - ChemDispensable
-    pack: EmptyInventory # todo RMC14 CMDispenserChemInventory
+    pack: RMCChemDispenserStandardInventory
   - type: Machine
     board: CMCircuitboardDispenserChem
   - type: ApcPowerReceiver
@@ -33,32 +33,31 @@
 - type: reagentDispenserInventory
   id: CMDispenserChemInventory
   inventory:
-  - JugHydrogen
-  - JugLithium
-  - JugCarbon
-  - JugNitrogen
-  - JugOxygen
-  - JugFluorine
-  - JugSodium
-  - JugAluminium
-  - JugSilicon
-  - JugPhosphorus
-  - JugSulfur
-  - JugChlorine
-  - JugPotassium
-  - JugIron
-  - JugCopper
-  - JugMercury
-  - JugRadium
-  # water
-  - JugEthanol
-  - JugSugar
-  # sulfuric acid
+  - RMCJugWater
+  - RMCJugEthanol
+  - RMCJugOxygen
+  - RMCJugCopper
+  - RMCJugNitrogen
+  - RMCJugHydrogen
+  - RMCJugPotassium
+  - RMCJugMercury
+  - RMCJugSulfur
+  - RMCJugCarbon
+  - RMCJugChlorine
+  - RMCJugFluorine
+  - RMCJugSodium
+  - RMCJugPhosphorus
+  - RMCJugLithium
+  - RMCJugSugar
+  - RMCJugIron
+  - RMCJugAluminium
+  - RMCJugSilicon
+  - RMCJugRadium
 
 - type: entity
-  parent: CMDispenserChem
-  id: CMDispenserChemEmpty
+  parent: RMCDispenserChem
+  id: RMCDispenserChemEmpty
   suffix: Empty
   components:
   - type: ReagentDispenser
-    pack: EmptyInventory
+    pack: RMCEmptyInventory
