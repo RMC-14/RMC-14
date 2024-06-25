@@ -1,0 +1,26 @@
+- type: reagentDispenserInventory
+  id: ChemDispenserStandardInventory
+  inventory:
+  - JugWater
+  - JugEthanol
+  - JugOxygen
+  - JugCopper
+  - JugNitrogen
+  - JugHydrogen
+  - JugPotassium
+  - JugMercury
+  - JugSulfur
+  - JugCarbon
+  - JugChlorine
+  - JugFluorine
+  - JugSodium
+  - JugPhosphorus
+  - JugLithium
+  - JugSugar
+  - JugIron
+  - JugAluminium
+  - JugSilicon
+  - JugRadium
+
+- type: reagentDispenserInventory
+  id: EmptyInventory
