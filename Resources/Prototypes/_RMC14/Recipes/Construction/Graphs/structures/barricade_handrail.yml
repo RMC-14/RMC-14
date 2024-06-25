@@ -16,7 +16,7 @@
         doAfter: 3
 
   - node: nodeHandrail
-    entity: CMBarricadeHandrail
+    entity: RMCBarricadeHandrail
     edges:
     - to: start
       completed:

@@ -208,7 +208,7 @@
 - type: construction
   parent: RMC
   name: Handrail
-  id: CMBarricadeHandrail
+  id: RMCBarricadeHandrail
   graph: BarricadeHandrailGraph
   startNode: start
   targetNode: nodeHandrail
