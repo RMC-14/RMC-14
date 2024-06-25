@@ -129,17 +129,17 @@
     zeroVisible: false
   - type: Appearance
 
-# M4RA
+# M4DMR
 - type: entity
   parent: CMMagazineRifleBase
-  id: CMMagazineRifleM4RA
-  name: "M4RA magazine (10x24mm)"
-  description: "A magazine of standard 10x24mm rounds for use in the M4RA battle rifle."
+  id: CMMagazineRifleM4DMR
+  name: "M4DMR magazine (10x24mm)"
+  description: "A magazine of standard 10x24mm rounds for use in the M4DMR battle rifle."
   components:
   - type: Tag
     tags:
     - CMMagazineRifle
-    - CMMagazineRifleM4RA
+    - CMMagazineRifleM4DMR
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -148,24 +148,25 @@
     proto: CMCartridgeRifle10x24mm
     capacity: 25
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4ra.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4dmr.rsi
 
 - type: Tag
-  id: CMMagazineRifleM4RAAP
+  id: CMMagazineRifleM4DMRAP
 
-# M4RA AP
+# M4DMR AP
 - type: entity
-  parent: CMMagazineRifleM4RA
-  id: CMMagazineRifleM4RAAP
-  name: M4RA AP magazine (10x24mm)
-  description: "A magazine of armor-piercing 10x24mm rounds for use in the M4RA battle rifle."
+  parent: CMMagazineRifleM4DMR
+  id: CMMagazineRifleM4DMRAP
+  name: M4DMR AP magazine (10x24mm)
+  description: "A magazine of armor-piercing 10x24mm rounds for use in the M4DMR battle rifle."
   suffix: AP
   components:
   - type: Tag
     tags:
-    - CMMagazineRifleM4RAAP
+    - CMMagazineRifle
+    - CMMagazineRifleM4DMRAP
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4ra.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4dmr.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
@@ -180,18 +181,18 @@
     proto: CMCartridgeRifle10x24mmAP
 
 - type: Tag
-  id: CMMagazineRifleM4RAExt
+  id: CMMagazineRifleM4DMRExt
 
-# M4RA Extended
+# M4DMR Extended
 - type: entity
-  parent: CMMagazineRifleM4RA
-  id: CMMagazineRifleM4RAExt
-  name: "M4RA extended magazine (10x24mm)"
+  parent: CMMagazineRifleM4DMR
+  id: CMMagazineRifleM4DMRExt
+  name: "M4DMR extended magazine (10x24mm)"
   components:
   - type: BallisticAmmoProvider
     capacity: 35
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4rae.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4dmre.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -199,7 +200,8 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Tag
     tags:
-    - CMMagazineRifleM4RAExt
+    - CMMagazineRifle
+    - CMMagazineRifleM4DMRExt
 
 - type: Tag
   id: CMMagazineRifle
@@ -211,4 +213,4 @@
   id: CMMagazineRifleM54CE2
 
 - type: Tag
-  id: CMMagazineRifleM4RA
+  id: CMMagazineRifleM4DMR

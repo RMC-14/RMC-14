@@ -13,17 +13,17 @@
       - cost: 3000
         crate: CMCrateBoxMagazineRifleM54CExt
       - cost: 2000
-        crate: CMCrateBoxMagazineRifleM4RA
+        crate: CMCrateBoxMagazineRifleM4DMR
       - cost: 4000
-        crate: CMCrateBoxMagazineRifleM4RAAP
+        crate: CMCrateBoxMagazineRifleM4DMRAP
       - cost: 2000
-        crate: CMCrateBoxMagazineSMGM39
+        crate: CMCrateBoxMagazineSMGM63
       - cost: 4000
-        crate: CMCrateBoxMagazineSMGM39AP
+        crate: CMCrateBoxMagazineSMGM63AP
       - cost: 2000
-        crate: CMCrateBoxMagazinePistolM4A3
+        crate: CMCrateBoxMagazinePistolM1984
 #      - cost: 3000 # TODO RMC14 this crate is completed but needs mags
-#        crate: CMCrateBoxMagazinePistolM4A3AP
+#        crate: CMCrateBoxMagazinePistolM1984AP
       - cost: 3000
         crate: CMCrateBoxShellsShotgunSlugs
       - cost: 3000
@@ -31,9 +31,9 @@
       - cost: 3000
         crate: CMCrateBoxShellsShotgunFlechette
       - cost: 2000
-        crate: CMCrateBoxMagazinePistol88m4AP
+        crate: CMCrateBoxMagazinePistolM77AP
       - cost: 4000
-        crate: CMCrateBoxMagazinePistolVP78
+        crate: CMCrateBoxMagazinePistolMK80
     - name: Attachments
       entries:
       - cost: 3000
@@ -185,14 +185,14 @@
 #      - cost: 4000
 #        crate: CMCrateM54CE2
       - cost: 3000
-        crate: CMCrateVP78
+        crate: CMCrateMK80
     - name: Weapons Specialist Ammo
       entries:
       - cost: 4000
-        crate: CMCrateMagazineM42AMixed
+        crate: CMCrateMagazineM96SMixed
       - cost: 3000
-        crate: CMCrateMagazineM42AStandard
+        crate: CMCrateMagazineM96SStandard
       - cost: 3000
-        crate: CMCrateMagazineM42AFlak
+        crate: CMCrateMagazineM96SFlak
       - cost: 3000
-        crate: CMCrateMagazineM42AIncendiary
+        crate: CMCrateMagazineM96SIncendiary

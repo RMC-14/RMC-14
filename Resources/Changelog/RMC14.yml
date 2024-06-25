@@ -1495,5 +1495,82 @@
   id: 179
   time: '2024-06-24T01:32:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2590
+- author: Tunguso4ka
+  changes:
+  - message: Chem Dispenser temporary disabled, till the chem recipes added.
+    type: Tweak
+  id: 180
+  time: '2024-06-24T19:22:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2610
+- author: DrSmugleaf
+  changes:
+  - message: Xenonids now accumulate evolution points past their max in the first
+      15 minutes of the round, making it easier for round-start xenonids to choose
+      their evolution as soon as the castes are unlocked.
+    type: Tweak
+  id: 181
+  time: '2024-06-24T23:53:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2612
+- author: DrSmugleaf
+  changes:
+  - message: Fixed 5-slot webbings unintentionally being able to fit larger magazines.
+    type: Fix
+  id: 182
+  time: '2024-06-24T23:53:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2608
+- author: DrSmugleaf
+  changes:
+  - message: The amount of marines per xeno has been lowered from 4 to 3. With 200
+      players this means that 67 xenos will spawn round-start, instead of 50.
+    type: Tweak
+  id: 183
+  time: '2024-06-24T23:58:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2613
+- author: CaasGit
+  changes:
+  - message: Blood bags do not print text when you're clearly out of range.
+    type: Fix
+  id: 184
+  time: '2024-06-25T00:01:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2595
+- author: rain
+  changes:
+  - message: M-marine-s n-now s-tutter less-s.
+    type: Tweak
+  id: 185
+  time: '2024-06-25T01:29:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2596
+- author: CaasGit
+  changes:
+  - message: Add medical hud to corpsman helmets.
+    type: Add
+  id: 186
+  time: '2024-06-25T02:39:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2616
+- author: krose124
+  changes:
+  - message: Parent marine armor (the medium one) speed mult .9 -> .85
+    type: Tweak
+  - message: EOD armor (the heavy one) speed mult .8 -> .75
+    type: Tweak
+  - message: Explicit speed value on M3-L (the light one) speed multiplier as 1
+    type: Add
+  id: 187
+  time: '2024-06-25T02:41:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2611
+- author: vero5123
+  changes:
+  - message: increased the required damage threshold to destroy weed nodes
+    type: Tweak
+  id: 188
+  time: '2024-06-25T03:40:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2560
+- author: vero5123
+  changes:
+  - message: fixes barricades not being rotatable
+    type: Fix
+  id: 189
+  time: '2024-06-25T04:03:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2556
 Name: RMC14
 Order: -1

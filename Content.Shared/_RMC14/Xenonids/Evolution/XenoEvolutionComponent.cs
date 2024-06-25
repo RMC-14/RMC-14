@@ -43,4 +43,7 @@ public sealed partial class XenoEvolutionComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier EvolutionReadySound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/xeno_evolveready.ogg", AudioParams.Default.WithVolume(-6));
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan AccumulatePointsBefore = TimeSpan.FromMinutes(15);
 }
