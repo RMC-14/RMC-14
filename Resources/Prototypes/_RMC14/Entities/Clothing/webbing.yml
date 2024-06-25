@@ -37,6 +37,7 @@
   - type: IgnoreContentsSize
     items:
       tags:
+      - CMMagazineSmg
       - CMMagazinePistol
       - CMMagazineRifle
       - CMMagazineSniper

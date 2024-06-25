@@ -163,6 +163,7 @@
   components:
   - type: Tag
     tags:
+    - CMMagazineRifle
     - CMMagazineRifleM4RAAP
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4ra.rsi
@@ -199,6 +200,7 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Tag
     tags:
+    - CMMagazineRifle
     - CMMagazineRifleM4RAExt
 
 - type: Tag
