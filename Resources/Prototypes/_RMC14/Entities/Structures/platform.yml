@@ -223,8 +223,6 @@
   components:
   - type: Sprite
     state: strata_platform
-  - type: Physics
-    bodyType: Static
 
 - type: entity
   parent: CMPlatformCornerSmall
@@ -234,5 +232,3 @@
   components:
   - type: Sprite
     state: strata_platform_deco
-  - type: Physics
-    bodyType: Static

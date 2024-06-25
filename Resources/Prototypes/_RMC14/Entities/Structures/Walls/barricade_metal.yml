@@ -199,6 +199,78 @@
       graph: BarricadeTurnstileGraph
       node: nodeTurnstile
 
+# Handrails
+- type: entity
+  parent: CMBarricadeBase
+  id: CMBarricadeHandrail
+  name: handrail
+  description: A railing, for your hands. Woooow.
+  components:
+    - type: Sprite
+      drawdepth: WallTops
+      sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
+      state: handrail_a_0
+    - type: Physics
+    - type: Repairable
+    - type: Damageable
+      damageContainer: Inorganic
+      damageModifierSet: Metallic
+    - type: Destructible
+      thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+        - !type:PlaySoundBehavior
+          sound:
+            collection: MetalBreak
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - type: Climbable
+    - type: Construction
+      graph: BarricadeHandrailGraph
+      node: nodeHandrail
+
+- type: entity
+  parent: CMBarricadeHandrail
+  id: CMBarricadeHandrailAlt
+  components:
+    - type: Sprite
+      state: handrail_b_0
+    - type: Construction
+      graph: BarricadeHandrailGraph
+      node: nodeHandrail
+
+- type: entity
+  parent: CMBarricadeHandrail
+  id: CMBarricadeHandrailMed
+  components:
+    - type: Sprite
+      state: handrail_med
+    - type: Construction
+      graph: BarricadeHandrailGraph
+      node: nodeHandrail
+
+- type: entity
+  parent: CMBarricadeHandrail
+  id: CMBarricadeHandrailStrata
+  components:
+    - type: Sprite
+      state: handrail_strata
+    - type: Construction
+      graph: BarricadeHandrailGraph
+      node: nodeHandrail
+
+- type: entity
+  parent: CMBarricadeHandrail
+  id: CMBarricadeHandrailKutjevo
+  components:
+    - type: Sprite
+      state: hr_kutjevo
+    - type: Construction
+      graph: BarricadeHandrailGraph
+      node: nodeHandrail
+
 # Metal Barricade Doors
 - type: entity
   parent: CMBarricadeBase
