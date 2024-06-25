@@ -24,7 +24,7 @@
       behaviors:
       - !type:PlaySoundBehavior
         sound:
-          collection: WoodDestroyHeavy
+          collection: MetalBreak
       - !type:SpawnEntitiesBehavior
         spawn:
           CMSheetMetal1:
