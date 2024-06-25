@@ -28,6 +28,7 @@ tiles-cm-sand = sand tile
 tiles-cm-grass = grass tile
 tiles-cm-dirt-grass = dirt grass tile
 tiles-cm-rock = rock tile
+tiles-cm-red-desert = red desert tile
 
 tiles-cm-default-alpha = alpha metal tile
 tiles-cm-default-bravo = bravo metal tile
