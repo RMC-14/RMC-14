@@ -124,30 +124,30 @@
 
 - type: entity
   parent: CMPosterBase
-  id: CMPosterSynthetic2
-  name: "Synthetic"
-  description: "Hey, Synthetics! That's a blast from the past. They got bought out by We-Ya around the time one of their space stations de-orbited and fell into a planet's gravity well after a systems failure."
+  id: CMPosterSilicon2
+  name: "Silicon"
+  description: "Hey, Silicons! That's a blast from the past. They got bought out by We-Ya around the time one of their space stations de-orbited and fell into a planet's gravity well after a systems failure."
   components:
   - type: Sprite
-    state: seegson
+    state: android
 
 - type: entity
   parent: CMPosterBase
-  id: CMPosterKoorlander
-  name: "Koorlander Gold"
-  description: "Koorlander Golds, lovingly machine rolled for YOUR pleasure."
+  id: CMPosterElectro
+  name: "Electro Gold"
+  description: "Electro Golds, lovingly machine rolled for YOUR pleasure."
   components:
   - type: Sprite
-    state: koorlander
+    state: electro
 
 - type: entity
   parent: CMPosterBase
-  id: CMPosterSynthetic
-  name: "YOU ALWAYS KNOW A SYNTHETIC."
-  description: "YOU ALWAYS KNOW A SYNTHETIC. YOU ALWAYS KNOW A SYNTHETIC. YOU ALWAYS KNOW A SYNTHETIC. YOU ALWAYS KNOW A SYNTHETIC. YOU ALWAYS KNOW A SYNTHETIC."
+  id: CMPosterSilicon
+  name: "YOU ALWAYS KNOW A SILICON."
+  description: "YOU ALWAYS KNOW A SILICON. YOU ALWAYS KNOW A SILICON. YOU ALWAYS KNOW A SILICON. YOU ALWAYS KNOW A SILICON. YOU ALWAYS KNOW A SILICON."
   components:
   - type: Sprite
-    state: synthetic
+    state: silicon
 
 - type: entity
   parent: CMPosterBase
@@ -179,11 +179,11 @@
 - type: entity
   parent: CMPosterBase
   id: CMPosterPulseRifle
-  name: "pulse rifle pinup"
-  description: "The Armat Battlefield Systems Model 41 Derivative 'A' Pulse Rifle Mark One. The only pinup you'll ever need."
+  name: "assault rifle pinup"
+  description: "The Armat Battlefield Systems Model 54 Derivative 'C' Assault Rifle Mark One. The only pinup you'll ever need."
   components:
   - type: Sprite
-    state: pulse_rifle
+    state: assault_rifle
 
 - type: entity
   parent: CMPosterBase
@@ -232,12 +232,12 @@
 
 - type: entity
   parent: CMPosterBase
-  id: CMPosterSouto
-  name: "Souto"
-  description: "Souto. If you don't drink Souto, you probably do stuff like floss and value your kidneys...wimp. Printed in Havana."
+  id: CMPosterBobda
+  name: "Bobda"
+  description: "Bobda. If you don't drink Bobda, you probably do stuff like floss and value your kidneys...wimp. Printed in Havana."
   components:
   - type: Sprite
-    state: souto
+    state: bobda
 
 - type: entity
   parent: CMPosterBase
