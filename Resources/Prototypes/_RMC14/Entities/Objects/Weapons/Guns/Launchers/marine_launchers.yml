@@ -1,25 +1,45 @@
 - type: entity
-  name: M92 grenade launcher
+  name: M83 grenade launcher
   parent: [BaseWeaponLauncher, CMBaseWeaponGun]
-  id: WeaponLauncherM92
-  description: A heavy, 6-shot grenade launcher used by the Marines for area denial and big explosions.
+  id: WeaponLauncherM83
+  description: A heavy, 6-shot grenade launcher used by the UNMC for area denial and big explosions.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m92.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83.rsi
     layers:
     - state: icon
       map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m92.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83.rsi
     quickEquip: true
     slots:
     - suitStorage
   - type: AmmoCounter
   - type: Gun
     fireRate: 0.23
-    path: "/Audio/Effects/beep1.ogg"
-    params:
-      volume: 5
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
+    resetOnHandSelected: false
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - LauncherCompatibleGrenade
+    capacity: 5
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+    proto: CMGrenadeHighExplosive
+    mayTransfer: True
+  - type: OnShootTriggerAmmoTimer
+    delay: 1
+    beepInterval: 2 # 2 beeps total (at 0 and 2)
+    initialBeepDelay: 0
+    beepSound:
+      path: "/Audio/Effects/beep1.ogg"
+      params:
+        volume: 5
   - type: GunUserWhitelist
     whitelist:
       components:
