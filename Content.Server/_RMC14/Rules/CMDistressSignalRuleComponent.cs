@@ -11,9 +11,6 @@ namespace Content.Server._RMC14.Rules;
 public sealed partial class CMDistressSignalRuleComponent : Component
 {
     [DataField]
-    public int PlayersPerXeno = 4;
-
-    [DataField]
     public List<EntProtoId> SquadIds = ["SquadAlpha", "SquadBravo", "SquadCharlie", "SquadDelta"];
 
     [DataField]

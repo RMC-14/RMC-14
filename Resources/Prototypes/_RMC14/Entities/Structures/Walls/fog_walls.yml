@@ -32,6 +32,7 @@
         density: 1000
   - type: TimedDespawn
     lifetime: 1500
+  - type: Occluder
 
 - type: entity
   parent: CMFogWall

@@ -1424,5 +1424,128 @@
   id: 171
   time: '2024-06-23T08:03:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2324
+- author: DrSmugleaf
+  changes:
+  - message: Added all Lurker abilities and most of the Spitter's abilities.
+    type: Add
+  - message: Enabled the Spitter, Lurker and Warrior evolutions.
+    type: Add
+  id: 172
+  time: '2024-06-23T11:13:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2566
+- author: Whisper
+  changes:
+  - message: Added medical guidebook.
+    type: Add
+  id: 173
+  time: '2024-06-23T11:17:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2567
+- author: vero5123
+  changes:
+  - message: Adds a short move delay to the Runner after hitting a pounce.
+    type: Tweak
+  id: 174
+  time: '2024-06-23T11:25:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2559
+- author: vero5123
+  changes:
+  - message: Defender can no longer pull and headbutt at the same time
+    type: Fix
+  id: 175
+  time: '2024-06-23T11:25:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2558
+- author: Cephalopod222
+  changes:
+  - message: Added new M54C sprites!
+    type: Add
+  id: 176
+  time: '2024-06-23T20:42:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2572
+- author: MACMAN2003
+  changes:
+  - message: Added weapon attachments to the ASRS requisition console.
+    type: Add
+  id: 177
+  time: '2024-06-23T21:23:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2570
+- author: DrSmugleaf
+  changes:
+  - message: Enabled the Warrior > Crusher evolution.
+    type: Add
+  - message: Fixed the spitter's xeno spit being able to hurt other xenos.
+    type: Fix
+  - message: Fixed the M54C's AP and Extended mags not being able to fit into some
+      storages.
+    type: Fix
+  - message: Tackle stacks no longer expire while downed, making it easier to keep
+      a tackled target down.
+    type: Tweak
+  - message: Fog walls now occlude vision.
+    type: Tweak
+  id: 178
+  time: '2024-06-24T01:20:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2589
+- author: DrSmugleaf
+  changes:
+  - message: Raffle durations are now 10 seconds, down from 30, and don't extend when
+      more people join the raffle
+    type: Tweak
+  - message: There is no longer a 3 second delay to clicking the join raffle button.
+    type: Tweak
+  id: 179
+  time: '2024-06-24T01:32:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2590
+- author: Tunguso4ka
+  changes:
+  - message: Chem Dispenser temporary disabled, till the chem recipes added.
+    type: Tweak
+  id: 180
+  time: '2024-06-24T19:22:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2610
+- author: DrSmugleaf
+  changes:
+  - message: Xenonids now accumulate evolution points past their max in the first
+      15 minutes of the round, making it easier for round-start xenonids to choose
+      their evolution as soon as the castes are unlocked.
+    type: Tweak
+  id: 181
+  time: '2024-06-24T23:53:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2612
+- author: DrSmugleaf
+  changes:
+  - message: Fixed 5-slot webbings unintentionally being able to fit larger magazines.
+    type: Fix
+  id: 182
+  time: '2024-06-24T23:53:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2608
+- author: DrSmugleaf
+  changes:
+  - message: The amount of marines per xeno has been lowered from 4 to 3. With 200
+      players this means that 67 xenos will spawn round-start, instead of 50.
+    type: Tweak
+  id: 183
+  time: '2024-06-24T23:58:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2613
+- author: CaasGit
+  changes:
+  - message: Blood bags do not print text when you're clearly out of range.
+    type: Fix
+  id: 184
+  time: '2024-06-25T00:01:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2595
+- author: rain
+  changes:
+  - message: M-marine-s n-now s-tutter less-s.
+    type: Tweak
+  id: 185
+  time: '2024-06-25T01:29:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2596
+- author: CaasGit
+  changes:
+  - message: Add medical hud to corpsman helmets.
+    type: Add
+  id: 186
+  time: '2024-06-25T02:39:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2616
 Name: RMC14
 Order: -1

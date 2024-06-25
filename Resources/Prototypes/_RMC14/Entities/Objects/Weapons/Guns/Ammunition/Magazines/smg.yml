@@ -53,6 +53,7 @@
       color: "#1F951F"
   - type: Tag
     tags:
+    - CMMagazineSmg
     - CMMagazineSMGM39AP
 
 # M39 Extended
@@ -76,6 +77,7 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Tag
     tags:
+    - CMMagazineSmg
     - CMMagazineSMGM39Ext
 
 - type: Tag
