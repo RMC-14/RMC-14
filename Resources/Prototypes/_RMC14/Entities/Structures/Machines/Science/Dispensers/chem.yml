@@ -23,15 +23,23 @@
     storageWhitelist:
       tags:
       - ChemDispensable
-    pack: RMCChemDispenserStandardInventory
+    pack: RMCEmptyInventory
   - type: Machine
     board: CMCircuitboardDispenserChem
   - type: ApcPowerReceiver
     needsPower: false # TODO RMC14
     powerLoad: 0
 
+- type: entity
+  parent: RMCDispenserChem
+  id: RMCDispenserChemEmpty
+  suffix: Empty
+  components:
+  - type: ReagentDispenser
+    pack: RMCEmptyInventory
+
 - type: reagentDispenserInventory
-  id: CMDispenserChemInventory
+  id: RMCDispenserChemInventory
   inventory:
   - RMCJugWater
   - RMCJugEthanol
@@ -53,11 +61,7 @@
   - RMCJugAluminium
   - RMCJugSilicon
   - RMCJugRadium
+  - RMCJugSulphuricAcid
 
-- type: entity
-  parent: RMCDispenserChem
-  id: RMCDispenserChemEmpty
-  suffix: Empty
-  components:
-  - type: ReagentDispenser
-    pack: RMCEmptyInventory
+- type: reagentDispenserInventory
+  id: RMCEmptyInventory

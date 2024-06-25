@@ -434,3 +434,19 @@
           reagents:
             - ReagentId: RMCWater
               Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: sulphuric acid
+  id: RMCJugSulphuricAcid
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-sulphuric-acid
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCSulphuricAcid
+              Quantity: 200
