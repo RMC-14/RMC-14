@@ -117,7 +117,7 @@
     - 0,0,5,1 #6 slot
 
 # flamertank / fueltank.rsi
-# m39ap pouch
+# m63ap pouch
 
 - type: entity
   parent: [CMPouchOpenClosed]
@@ -229,7 +229,7 @@
     sprite: _RMC14/Objects/Clothing/Pouches/pistol.rsi
     layers:
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: m4a3 # TODO RMC14 per-gun underlay
+      state: m1984 # TODO RMC14 per-gun underlay
       map: [ "enum.CMItemSlotsLayers.Filled" ]
       visible: false
     - state: icon

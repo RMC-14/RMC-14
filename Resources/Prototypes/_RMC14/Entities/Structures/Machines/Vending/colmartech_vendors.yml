@@ -153,9 +153,9 @@
 #      entries:
 #      - id: CMAttachmentM37WoodenStock
 #        amount: 2
-#      - id: CMAttachmentM39ArmBrace
+#      - id: CMAttachmentM63ArmBrace
 #        amount: 2
-#      - id: CMAttachmentM39Stock
+#      - id: CMAttachmentM63Stock
 #        amount: 2
 #      - id: CMAttachmentM54CSolidStock
 #        amount: 2
@@ -248,15 +248,15 @@
     sections:
     - name: Armor-Piercing Ammunition
       entries:
-      - id: CMMagazineRifleM4RAAP
+      - id: CMMagazineRifleM4DMRAP
         amount: 3
-      - id: CMMagazineSMGM39AP
+      - id: CMMagazineSMGM63AP
         amount: 3
       - id: CMMagazineRifleM54CAP
         amount: 3
     - name: Extended Ammunition
       entries:
-      - id: CMMagazineSMGM39Ext
+      - id: CMMagazineSMGM63Ext
         amount: 1
       - id: CMMagazineRifleM54CExt
         amount: 1
@@ -270,7 +270,7 @@
       #  amount: 2
     - name: Restricted Firearm Ammunition
       entries:
-      - id: CMMagazinePistolVP78
+      - id: CMMagazinePistolMK80
         amount: 5
       #- id: CMMagazineSmartpistolSU6
       #  amount: 5
@@ -304,11 +304,11 @@
     sections:
     - name: Primary firearms
       entries:
-      - id: WeaponRifleM4RA
+      - id: WeaponRifleM4DMR
         amount: 10
-      - id: WeaponShotgunM37A2
+      - id: WeaponShotgunM42A2
         amount: 15
-      - id: WeaponSMGM39
+      - id: WeaponSMGM63
         amount: 30
       - id: WeaponRifleM54C
         amount: 30
@@ -321,33 +321,33 @@
         amount: 10
       - id: CMBoxShotgunSlugs
         amount: 10
-      - id: CMMagazineRifleM4RA
+      - id: CMMagazineRifleM4DMR
         amount: 15
-      - id: CMMagazineSMGM39
+      - id: CMMagazineSMGM63
         amount: 25
       - id: CMMagazineRifleM54C
         amount: 25
     - name: Sidearms
       entries:
-      - id: CMWeaponPistol88m4
+      - id: CMWeaponPistolM77
         amount: 25
       #- id: CMWeaponRevolverM44
       #  amount: 25
-      - id: CMWeaponPistolM4A3
+      - id: CMWeaponPistolM1984
         amount: 25
       #- id: WeaponFlareM82F
       #  amount: 10
     - name: Sidearm ammunition
       entries:
-      - id: CMMagazinePistol88m4AP
+      - id: CMMagazinePistolM77AP
         amount: 25
 #      - id: CMSpeedLoaderM44
 #        amount: 20
-      - id: CMMagazinePistolM4A3
+      - id: CMMagazinePistolM1984
         amount: 25
     - name: Attachments
       entries: [ ]
-      #- id: CMAttachmentFoldingStockM39
+      #- id: CMAttachmentFoldingStockM63
       #  amount: 10
       #- id: CMAttachmentFoldingStockM54C
       #  amount: 10
@@ -411,7 +411,7 @@
       #    CMM276GeneralPistolHolsterRig #TODO: Make this
       - id: CMBeltKnifeFilled
         name: M276 knife rig (full)
-      #    CMM276M39HolsterRig #TODO: Make this
+      #    CMM276M63HolsterRig #TODO: Make this
       #    CMM276M44HolsterRig #TODO: Make this
       #    CMM276M82FHolsterRig #TODO: Make this
       #    CMM276ShotgunShellLoadingRig #TODO: Make this
@@ -457,7 +457,7 @@
         points: 5
     - name: Restricted Firearms
       entries:
-      - id: CMWeaponPistolVP78
+      - id: CMWeaponPistolMK80
         points: 15
     #- id: CMSU6SmartPistol
     #  points: 15
@@ -485,11 +485,11 @@
     #  points: 20
     - name: Primary Ammunition
       entries:
-      - id: CMMagazineRifleM4RAAP
+      - id: CMMagazineRifleM4DMRAP
         points: 10
-      - id: CMMagazineSMGM39AP
+      - id: CMMagazineSMGM63AP
         points: 10
-      - id: CMMagazineSMGM39Ext
+      - id: CMMagazineSMGM63Ext
         points: 10
       - id: CMMagazineRifleM54CAP
         points: 10
@@ -499,7 +499,7 @@
       entries:
 #      - id: CMM44HeavySpeedLoader
 #        points: 10
-      - id: CMMagazinePistolVP78
+      - id: CMMagazinePistolMK80
         points: 5
     - name: Armors
       entries:
@@ -601,7 +601,7 @@
     #  points: 0
     - name: Squad Kit
       entries: [ ]
-    #- id: CMM4RASniperKit
+    #- id: CMM4DMRSniperKit
     #  points: 0
     #- id: CMM54CStandardKit
     #  points: 0
@@ -729,11 +729,11 @@
         points: 2
     - name: Primary Ammunition
       entries:
-      - id: CMMagazineRifleM4RAAP
+      - id: CMMagazineRifleM4DMRAP
         points: 6
-      - id: CMMagazineSMGM39AP
+      - id: CMMagazineSMGM63AP
         points: 6
-      - id: CMMagazineSMGM39Ext
+      - id: CMMagazineSMGM63Ext
         points: 6
       - id: CMMagazineRifleM54CAP
         points: 6
@@ -741,7 +741,7 @@
         points: 6
     - name: Sidearm Ammunition
       entries:
-      - id: CMMagazinePistolVP78
+      - id: CMMagazinePistolMK80
         points: 3
     - name: Special Ammunition
       entries: [ ]
@@ -753,7 +753,7 @@
       entries:
     #- id: CMM240IncineratorUnit
     #  points: 18
-      - id: CMWeaponPistolVP78
+      - id: CMWeaponPistolMK80
         points: 8
     #- id: CMSU6SmartPistol
     #  points: 12
@@ -809,7 +809,7 @@
     #- id: CMM276GeneralPistolHolsterRig
       - id: CMBeltMedicBag
       - id: CMBeltMedical
-    #- id: CMM276M39HolsterRig
+    #- id: CMM276M63HolsterRig
     #- id: CMM276M44HolsterRig
     #- id: CMM276M82FHolsterRig
     #- id: CMM276ShotgunShellLoadingRig
@@ -883,11 +883,11 @@
     #  points: 40
     - name: Extra Sniper Ammunition
       entries:
-      - id: CMMagazineSniperM42AFlak
+      - id: CMMagazineSniperM96SFlak
         points: 40
-      - id: CMMagazineSniperM42AIncendiary
+      - id: CMMagazineSniperM96SIncendiary
         points: 40
-      - id: CMMagazineSniperM42A
+      - id: CMMagazineSniperM96S
         points: 40
     - name: Extra Demolitionist Ammunition
       entries: [ ]
@@ -951,7 +951,7 @@
     #- id: CMG8AGeneralUtilityPouch
       - id: CMBeltMarine
     #- id: CMM276GeneralPistolHolsterRig
-    #- id: CMM276M39HolsterRig
+    #- id: CMM276M63HolsterRig
     #- id: CMM276M44HolsterRig
     #- id: CMM276M82FHolsterRig
     #- id: CMM276ShotgunShellLoadingRig
@@ -1103,11 +1103,11 @@
     #  points: 5
     - name: Ammunition
       entries:
-      - id: CMMagazineRifleM4RAAP
+      - id: CMMagazineRifleM4DMRAP
         points: 6
-      - id: CMMagazineSMGM39AP
+      - id: CMMagazineSMGM63AP
         points: 6
-      - id: CMMagazineSMGM39Ext
+      - id: CMMagazineSMGM63Ext
         points: 6
       - id: CMMagazineRifleM54CAP
         points: 6
@@ -1121,7 +1121,7 @@
         points: 30
     - name: Restricted Firearms
       entries:
-      - id: CMWeaponPistolVP78
+      - id: CMWeaponPistolMK80
         points: 8
     #- id: CMSU6SmartPistol
     #  points: 12
@@ -1230,7 +1230,7 @@
     #- id: CMG8AGeneralUtilityPouch
       - id: CMBeltMarine
     #- id: CMM276GeneralPistolHolsterRig
-    #- id: CMM276M39HolsterRig
+    #- id: CMM276M63HolsterRig
     #- id: CMM276M44HolsterRig
     #- id: CMM276M82FHolsterRig
     #- id: CMM276ShotgunShellLoadingRig
@@ -1374,11 +1374,11 @@
     #    CMM20MineBoxx4mines: 20P
     - name: Primary Ammunition
       entries:
-      - id: CMMagazineRifleM4RAAP
+      - id: CMMagazineRifleM4DMRAP
         points: 6
-      - id: CMMagazineSMGM39AP
+      - id: CMMagazineSMGM63AP
         points: 6
-      - id: CMMagazineSMGM39Ext
+      - id: CMMagazineSMGM63Ext
         points: 6
       - id: CMMagazineRifleM54CAP
         points: 6
@@ -1386,7 +1386,7 @@
         points: 6
     - name: Sidearm Ammunition
       entries:
-      - id: CMMagazinePistolVP78
+      - id: CMMagazinePistolMK80
         points: 3
     - name: Armors
       entries:
@@ -1396,7 +1396,7 @@
         points: 28
     - name: Restricted Firearms
       entries:
-      - id: CMWeaponPistolVP78
+      - id: CMWeaponPistolMK80
         points: 8
     #    CMSU6SmartPistol: 12P
     - name: Clothing Items
@@ -1483,7 +1483,7 @@
       #- id: CMM276GeneralPistolHolsterRig
       - id: CMBeltMedicBagFilled
       - id: CMBeltMedicalFilled
-      #- id: CMM276M39HolsterRig
+      #- id: CMM276M63HolsterRig
       #- id: CMM276M44HolsterRig
       #- id: CMM276M82FHolsterRig
       #- id: CMM276ShotgunShellLoadingRig
@@ -1783,11 +1783,11 @@
     #  points: 5
     - name: Primary Ammunition
       entries:
-      - id: CMMagazineRifleM4RAAP
+      - id: CMMagazineRifleM4DMRAP
         points: 10
-      - id: CMMagazineSMGM39AP
+      - id: CMMagazineSMGM63AP
         points: 10
-      - id: CMMagazineSMGM39Ext
+      - id: CMMagazineSMGM63Ext
         points: 10
       - id: CMMagazineRifleM54CAP
         points: 10
@@ -1795,17 +1795,17 @@
         points: 10
     - name: Sidearm Ammunition
       entries:
-      - id: CMMagazinePistolVP78
+      - id: CMMagazinePistolMK80
         points: 5
     #- id: CMM44HeavySpeedLoader
     #  points: 10
-    #- id: CMM4A3HPMagazine
+    #- id: CMM1984HPMagazine
     #  points: 5
-    #- id: CMM4A3APMagazine
+    #- id: CMM1984APMagazine
     #  points: 5
     - name: Restricted Firearms
       entries:
-      - id: CMWeaponPistolVP78 # TODO RMC14 case with 2 mags
+      - id: CMWeaponPistolMK80 # TODO RMC14 case with 2 mags
         points: 5 # TODO RMC14 10
     #- id: CMSU6SmartPistol
     #  points: 15
@@ -1894,7 +1894,7 @@
     #- id: CMG8AGeneralUtilityPouch
       - id: CMBeltMarine
     #- id: CMM276GeneralPistolHolsterRig
-    #- id: CMM276M39HolsterRig
+    #- id: CMM276M63HolsterRig
     #- id: CMM276M44HolsterRig
     #- id: CMM276M82FHolsterRig
     #- id: CMM276ShotgunShellLoadingRig
@@ -2030,9 +2030,9 @@
 #        amount: 15
 #      - id: M276 Pattern General Pistol Holster Rig
 #        amount: 15
-#      - id: M276 Pattern M39 Holster Rig
+#      - id: M276 Pattern M63 Holster Rig
 #        amount: 15
-#      - id: M276 Pattern M39 Holster Rig And Pouch
+#      - id: M276 Pattern M63 Holster Rig And Pouch
 #        amount: 10
 #      - id: M276 Pattern M44 Holster Rig
 #        amount: 15

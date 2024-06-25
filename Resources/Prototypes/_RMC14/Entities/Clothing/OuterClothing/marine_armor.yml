@@ -78,8 +78,8 @@
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
+    walkModifier: 0.727
+    sprintModifier: 0.727
   - type: CMHardArmor
   - type: FixedItemSizeStorage
   - type: IgnoreContentsSize
@@ -118,8 +118,8 @@
     armor: 25
     explosionArmor: 35
   - type: ClothingSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
+    walkModifier: 0.68
+    sprintModifier: 0.68
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
@@ -190,6 +190,9 @@
   - type: CMArmor
     armor: 15
     explosionArmor: 20
+  - type: ClothingSpeedModifier
+    walkModifier: .814
+    sprintModifier: .814
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots

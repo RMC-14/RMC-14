@@ -1540,5 +1540,37 @@
   id: 185
   time: '2024-06-25T01:29:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2596
+- author: CaasGit
+  changes:
+  - message: Add medical hud to corpsman helmets.
+    type: Add
+  id: 186
+  time: '2024-06-25T02:39:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2616
+- author: krose124
+  changes:
+  - message: Parent marine armor (the medium one) speed mult .9 -> .85
+    type: Tweak
+  - message: EOD armor (the heavy one) speed mult .8 -> .75
+    type: Tweak
+  - message: Explicit speed value on M3-L (the light one) speed multiplier as 1
+    type: Add
+  id: 187
+  time: '2024-06-25T02:41:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2611
+- author: vero5123
+  changes:
+  - message: increased the required damage threshold to destroy weed nodes
+    type: Tweak
+  id: 188
+  time: '2024-06-25T03:40:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2560
+- author: vero5123
+  changes:
+  - message: fixes barricades not being rotatable
+    type: Fix
+  id: 189
+  time: '2024-06-25T04:03:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2556
 Name: RMC14
 Order: -1
