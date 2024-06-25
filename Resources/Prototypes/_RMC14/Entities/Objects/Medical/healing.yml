@@ -192,7 +192,7 @@
   parent: CMBaseHealingItem
   id: CMSynthGraft
   name: synth graft
-  description: An applicator for synthetic skin field grafts. The stuff reeks, itches like the dickens, hurts going on, and the color is a perfectly averaged multiethnic tone that doesn't blend with anyone's complexion. But at least you don't have to stay in sickbay.
+  description: An applicator for silicon skin field grafts. The stuff reeks, itches like the dickens, hurts going on, and the color is a perfectly averaged multiethnic tone that doesn't blend with anyone's complexion. But at least you don't have to stay in sickbay.
   components:
   - type: Tag
     tags:

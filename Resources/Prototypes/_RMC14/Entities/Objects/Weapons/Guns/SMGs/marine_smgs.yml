@@ -25,22 +25,22 @@
 
 - type: entity
   parent: CMBaseWeaponSMG
-  name: M39 submachine gun
-  id: WeaponSMGM39
+  name: M63 submachine gun
+  id: WeaponSMGM63
   description: The Armat Battlefield Systems M-39 submachinegun. Occasionally carried by light-infantry, scouts, engineers and medics.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m39.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m39.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63.rsi
   - type: Gun
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m39.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m63.ogg
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -50,9 +50,9 @@
         priority: 2
         whitelist:
           tags:
-          - CMMagazineSMGM39
-          - CMMagazineSMGM39AP
-          - CMMagazineSMGM39Ext
+          - CMMagazineSMGM63
+          - CMMagazineSMGM63AP
+          - CMMagazineSMGM63Ext
   - type: AttachableHolder
     slots:
       cm-aslot-stock:

@@ -1,15 +1,18 @@
 ﻿using System.Numerics;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Standing;
+using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
@@ -20,11 +23,13 @@ namespace Content.Shared._RMC14.Xenonids.Construction.Nest;
 
 public sealed class XenoNestSystem : EntitySystem
 {
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly StandingStateSystem _standingState = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -56,6 +61,7 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoNestedComponent, PickupAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, AttackAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, ChangeDirectionAttemptEvent>(OnNestedCancel);
+        SubscribeLocalEvent<XenoNestedComponent, DownAttemptEvent>(OnNestedCancel);
     }
 
     private void OnXenoGetUsedEntity(Entity<XenoComponent> ent, ref GetUsedEntityEvent args)
@@ -102,6 +108,11 @@ public sealed class XenoNestSystem : EntitySystem
     private void OnNestedRemove(Entity<XenoNestedComponent> ent, ref ComponentRemove args)
     {
         DetachNested(null, ent);
+        _actionBlocker.UpdateCanMove(ent);
+
+        // TODO RMC14
+        if (HasComp<KnockedDownComponent>(ent) || _mobState.IsIncapacitated(ent))
+            _standing.Down(ent);
     }
 
     private void OnNestSurfaceDoAfterAttempt(Entity<XenoNestSurfaceComponent> ent, ref DoAfterAttemptEvent<XenoNestDoAfterEvent> args)
@@ -164,7 +175,7 @@ public sealed class XenoNestSystem : EntitySystem
         _transform.SetCoordinates(victim, nest.ToCoordinates());
         _transform.SetLocalRotation(victim, direction.ToAngle());
 
-        _standingState.Stand(victim, force: true);
+        _standing.Stand(victim, force: true);
 
         // TODO RMC14 make a method to do this
         _popup.PopupClient(Loc.GetString("cm-xeno-nest-securing-self", ("target", victim)), args.User, args.User);
@@ -261,7 +272,7 @@ public sealed class XenoNestSystem : EntitySystem
             return false;
         }
 
-        if (!_standingState.IsDown(victim))
+        if (!_standing.IsDown(victim))
         {
             if (!silent)
                 _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed-target-resisting", ("target", victim)), victim, user, PopupType.MediumCaution);

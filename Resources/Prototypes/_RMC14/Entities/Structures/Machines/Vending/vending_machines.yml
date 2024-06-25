@@ -109,8 +109,8 @@
 - type: entity
   parent: CMVendor
   id: CMVendorCola
-  name: Souto Softdrinks
-  description: A softdrink vendor provided by Souto Soda Company, Havana.
+  name: Bobda Softdrinks
+  description: A softdrink vendor provided by Bobda Soda Company, Havana.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/cola.rsi

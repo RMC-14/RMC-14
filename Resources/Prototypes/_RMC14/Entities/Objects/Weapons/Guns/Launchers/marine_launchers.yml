@@ -1,16 +1,16 @@
 - type: entity
-  name: M92 grenade launcher
+  name: M83 grenade launcher
   parent: [BaseWeaponLauncher, CMBaseWeaponGun]
-  id: WeaponLauncherM92
+  id: WeaponLauncherM83
   description: Oops.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m92.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83.rsi
     layers:
     - state: icon
       map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m92.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83.rsi
   - type: AmmoCounter
   - type: Gun
     fireRate: 0.23

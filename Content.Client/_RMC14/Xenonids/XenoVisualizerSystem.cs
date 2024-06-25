@@ -82,6 +82,8 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
         }
 
         // TODO RMC14 split this up into multiple systems with ordered event subscription
+        // TODO RMC14 please god
+        string? oviState = null;
         switch (state)
         {
             case MobState.Critical:
@@ -93,19 +95,11 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
                     sprite.LayerSetState(layer, "dead");
                 break;
             default:
-                if (sprite.LayerMapTryGet(XenoVisualLayers.Ovipositor, out var oviLayer))
+                if (HasComp<XenoAttachedOvipositorComponent>(entity) &&
+                    TryComp(entity, out XenoOvipositorCapableComponent? capable))
                 {
-                    if (HasComp<XenoAttachedOvipositorComponent>(entity) &&
-                        TryComp(entity, out XenoOvipositorCapableComponent? capable))
-                    {
-                        sprite.LayerSetState(oviLayer, capable.AttachedState);
-                        sprite.LayerSetVisible(oviLayer, true);
-                        sprite.LayerSetVisible(layer, false);
-                        return;
-                    }
-
-                    sprite.LayerSetVisible(oviLayer, false);
-                    sprite.LayerSetVisible(layer, true);
+                    oviState = capable.AttachedState;
+                    break;
                 }
 
                 if (AppearanceSystem.TryGetData(entity, XenoVisualLayers.Base, out XenoRestState resting, appearance) &&
@@ -152,6 +146,20 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
 
                 break;
         }
+
+        if (!sprite.LayerMapTryGet(XenoVisualLayers.Ovipositor, out var oviLayer))
+            return;
+
+        if (oviState == null)
+        {
+            sprite.LayerSetVisible(oviLayer, false);
+            sprite.LayerSetVisible(layer, true);
+            return;
+        }
+
+        sprite.LayerSetState(oviLayer, oviState);
+        sprite.LayerSetVisible(oviLayer, true);
+        sprite.LayerSetVisible(layer, false);
     }
 
     public void UpdateDrawDepth(Entity<SpriteComponent?> xeno)

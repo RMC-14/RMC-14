@@ -95,7 +95,13 @@ public sealed class XenoInvisibilitySystem : EntitySystem
 
             RemCompDeferred<XenoActiveInvisibleComponent>(uid);
             OnRemoveInvisibility((uid, active));
-            _popup.PopupClient(Loc.GetString("cm-xeno-invisibility-expire"), uid, uid, PopupType.SmallCaution);
+
+            if (!active.DidPopup)
+            {
+                _popup.PopupClient(Loc.GetString("cm-xeno-invisibility-expire"), uid, uid, PopupType.SmallCaution);
+                active.DidPopup = true;
+                Dirty(uid, active);
+            }
         }
     }
 }

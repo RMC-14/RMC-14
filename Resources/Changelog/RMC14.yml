@@ -578,14 +578,14 @@
   url: https://github.com/RMC-14/RMC-14/pull/1916
 - author: Whisper
   changes:
-  - message: Fixed the fire rate for the 88m4 and service pistols.
+  - message: Fixed the fire rate for the M77 and service pistols.
     type: Fix
   id: 76
   time: '2024-04-26T10:00:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2019
 - author: Whisper
   changes:
-  - message: Fixed not being able to store the M42A in the suit storage slot.
+  - message: Fixed not being able to store the M96S in the suit storage slot.
     type: Fix
   id: 77
   time: '2024-04-26T10:00:34.0000000+00:00'
@@ -858,7 +858,7 @@
   url: https://github.com/RMC-14/RMC-14/pull/2106
 - author: DrSmugleaf
   changes:
-  - message: The M92 grenade launcher's grenades now land exactly where the user clicks
+  - message: The M83 grenade launcher's grenades now land exactly where the user clicks
       and have a short delay before exploding.
     type: Tweak
   id: 113
@@ -1342,7 +1342,7 @@
   url: https://github.com/RMC-14/RMC-14/pull/2485
 - author: geraeumig
   changes:
-  - message: Added ability to scope in with M42A rifle
+  - message: Added ability to scope in with M96S rifle
     type: Add
   id: 162
   time: '2024-06-18T07:50:16.0000000+00:00'
@@ -1547,5 +1547,58 @@
   id: 186
   time: '2024-06-25T02:39:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2616
+- author: krose124
+  changes:
+  - message: Parent marine armor (the medium one) speed mult .9 -> .85
+    type: Tweak
+  - message: EOD armor (the heavy one) speed mult .8 -> .75
+    type: Tweak
+  - message: Explicit speed value on M3-L (the light one) speed multiplier as 1
+    type: Add
+  id: 187
+  time: '2024-06-25T02:41:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2611
+- author: vero5123
+  changes:
+  - message: increased the required damage threshold to destroy weed nodes
+    type: Tweak
+  id: 188
+  time: '2024-06-25T03:40:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2560
+- author: vero5123
+  changes:
+  - message: fixes barricades not being rotatable
+    type: Fix
+  id: 189
+  time: '2024-06-25T04:03:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2556
+- author: DrSmugleaf
+  changes:
+  - message: Fixed marines not being able to move after being un-nested.
+    type: Fix
+  - message: Fixed marines falling down if they die while nested, and not falling
+      down once un-nested after being killed..
+    type: Fix
+  id: 190
+  time: '2024-06-25T11:19:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2621
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the Queen not detaching from the ovipositor on crit or death.
+    type: Fix
+  - message: Added popups to the Queen when starting to attach to or detach from the
+      ovipositor.
+    type: Tweak
+  id: 191
+  time: '2024-06-25T11:20:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2622
+- author: DrSmugleaf
+  changes:
+  - message: Fixed duplicate lurker invisibility expired and hive core not enough
+      plasma popups.
+    type: Fix
+  id: 192
+  time: '2024-06-25T12:56:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2623
 Name: RMC14
 Order: -1
