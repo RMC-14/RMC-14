@@ -36,6 +36,7 @@
       params:
         volume: 5
   - type: AmmoFixedDistance
+    highArc: true
   - type: Wieldable
   - type: GunRequiresWield
   - type: GunShowUseDelay
@@ -81,5 +82,6 @@
       params:
         volume: 5
   - type: AmmoFixedDistance
+    highArc: true
   - type: Wieldable
   - type: GunRequiresWield

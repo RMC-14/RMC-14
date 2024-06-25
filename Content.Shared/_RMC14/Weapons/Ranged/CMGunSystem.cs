@@ -44,7 +44,7 @@ public sealed class CMGunSystem : EntitySystem
 
         SubscribeLocalEvent<AmmoFixedDistanceComponent, AmmoShotEvent>(OnAmmoFixedDistanceShot);
 
-        SubscribeLocalEvent<ProjectileFixedDistanceComponent, StartCollideEvent>(OnProjectileStop);
+        SubscribeLocalEvent<ProjectileFixedDistanceComponent, StartCollideEvent>(OnStartCollide);
         SubscribeLocalEvent<ProjectileFixedDistanceComponent, ComponentRemove>(OnProjectileStop);
         SubscribeLocalEvent<ProjectileFixedDistanceComponent, PhysicsSleepEvent>(OnProjectileStop);
 
@@ -97,7 +97,14 @@ public sealed class CMGunSystem : EntitySystem
 
             var comp = EnsureComp<ProjectileFixedDistanceComponent>(projectile);
             comp.FlyEndTime = time + TimeSpan.FromSeconds(direction.Length() / gun.ProjectileSpeedModified);
+            comp.HighArc = ent.Comp.HighArc;
         }
+    }
+
+    private void OnStartCollide(Entity<ProjectileFixedDistanceComponent> ent, ref StartCollideEvent args)
+    {
+        if (!ent.Comp.HighArc)
+            StopProjectile(ent);
     }
 
     private void OnProjectileStop<T>(Entity<ProjectileFixedDistanceComponent> ent, ref T args)
