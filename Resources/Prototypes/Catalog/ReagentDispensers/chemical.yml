@@ -1,5 +1,5 @@
 - type: reagentDispenserInventory
-  id: ChemDispenserStandardInventory
+  id: RMCChemDispenserStandardInventory
   inventory:
   - JugAluminium
   - JugCarbon
@@ -23,4 +23,4 @@
   - JugSulfur
 
 - type: reagentDispenserInventory
-  id: EmptyInventory
+  id: RMCEmptyInventory

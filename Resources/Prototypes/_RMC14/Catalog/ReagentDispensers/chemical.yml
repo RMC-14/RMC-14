@@ -1,5 +1,5 @@
 - type: reagentDispenserInventory
-  id: ChemDispenserStandardInventory
+  id: RMCChemDispenserStandardInventory
   inventory:
   - RMCJugWater
   - RMCJugEthanol

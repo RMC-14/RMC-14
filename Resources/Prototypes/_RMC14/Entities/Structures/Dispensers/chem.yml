@@ -1,0 +1,48 @@
+- type: entity
+  id: RMCChemDispenser
+  name: chemical dispenser
+  suffix: Filled
+  parent: ReagentDispenserBase
+  description: An industrial grade chemical dispenser.
+  components:
+  - type: Sprite
+    sprite: Structures/dispensers.rsi
+    state: industrial-working
+    snapCardinals: true
+  - type: ReagentDispenser
+    storageWhitelist:
+      tags:
+      - ChemDispensable
+    pack: RMCChemDispenserStandardInventory
+  - type: ApcPowerReceiver
+  - type: ExtensionCableReceiver
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Machine
+    board: ChemDispenserMachineCircuitboard
+  - type: GuideHelp
+    guides:
+    - Chemicals
+    - Chemist
+  - type: StealTarget
+    stealGroup: ChemDispenser
+
+- type: entity
+  id: RMCChemDispenserEmpty
+  name: chemical dispenser
+  suffix: Empty
+  parent: RMCChemDispenser
+  components:
+  - type: ReagentDispenser
+    pack: RMCEmptyInventory
