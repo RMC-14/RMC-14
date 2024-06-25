@@ -1540,5 +1540,12 @@
   id: 185
   time: '2024-06-25T01:29:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2596
+- author: CaasGit
+  changes:
+  - message: Add medical hud to corpsman helmets.
+    type: Add
+  id: 186
+  time: '2024-06-25T02:39:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2616
 Name: RMC14
 Order: -1
