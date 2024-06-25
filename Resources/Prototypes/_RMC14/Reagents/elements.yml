@@ -1,8 +1,8 @@
 - type: reagent
-  id: Aluminium # We use real words here.
-  name: reagent-name-aluminium # -we use real words here.
+  id: RMCAluminium
+  name: reagent-name-aluminium
   group: Elements
-  desc: reagent-desc-aluminium # -we use real words here.
+  desc: reagent-desc-aluminium
   physicalDesc: reagent-physical-desc-metallic
   flavor: metallic
   color: "#848789"
@@ -10,7 +10,7 @@
   meltingPoint: 660.0
 
 - type: reagent
-  id: Carbon
+  id: RMCCarbon
   name: reagent-name-carbon
   group: Elements
   desc: reagent-desc-carbon
@@ -21,7 +21,7 @@
   meltingPoint: 3550.0
 
 - type: reagent
-  id: Chlorine
+  id: RMCChlorine
   name: reagent-name-chlorine
   group: Elements
   desc: reagent-desc-chlorine
@@ -48,7 +48,7 @@
             Poison: 2
 
 - type: reagent
-  id: Copper
+  id: RMCCopper
   name: reagent-name-copper
   group: Elements
   desc: reagent-desc-copper
@@ -79,7 +79,7 @@
         amount: 0.4
 
 - type: reagent
-  id: Fluorine
+  id: RMCFluorine
   name: reagent-name-fluorine
   group: Elements
   desc: reagent-desc-fluorine
@@ -106,7 +106,7 @@
             Caustic: 0.5
             Poison: 0.5
 - type: reagent
-  id: Gold
+  id: RMCGold
   name: reagent-name-gold
   group: Elements
   desc: reagent-desc-gold
@@ -117,7 +117,7 @@
   meltingPoint: 1064.76
 
 - type: reagent
-  id: Hydrogen
+  id: RMCHydrogen
   name: reagent-name-hydrogen
   group: Elements
   desc: reagent-desc-hydrogen
@@ -128,7 +128,7 @@
   meltingPoint: -259.2
 
 - type: reagent
-  id: Iron
+  id: RMCIron
   name: reagent-name-iron
   group: Elements
   desc: reagent-desc-iron
@@ -159,7 +159,7 @@
         amount: 0.4
 
 - type: reagent
-  id: Lithium
+  id: RMCLithium
   name: reagent-name-lithium
   group: Elements
   desc: reagent-desc-lithium
@@ -183,10 +183,8 @@
         emote: Laugh
         probability: 0.05
 
-  # TODO: cause some brain damage when woundmed, and generally reduce the stutter/scrambledaccent unless high doses
-
 - type: reagent
-  id: Mercury
+  id: RMCMercury
   name: reagent-name-mercury
   group: Elements
   desc: reagent-desc-mercury
@@ -207,7 +205,7 @@
         component: ScrambledAccent
 
 - type: reagent
-  id: Potassium
+  id: RMCPotassium
   name: reagent-name-potassium
   group: Elements
   desc: reagent-desc-potassium
@@ -218,7 +216,7 @@
   boilingPoint: 759.0
 
 - type: reagent
-  id: Phosphorus
+  id: RMCPhosphorus
   name: reagent-name-phosphorus
   group: Elements
   desc: reagent-desc-phosphorus
@@ -236,7 +234,7 @@
       amount: -2
 
 - type: reagent
-  id: Radium
+  id: RMCRadium
   name: reagent-name-radium
   group: Elements
   parent: Uranium
@@ -248,7 +246,7 @@
   boilingPoint: 1737.0
 
 - type: reagent
-  id: Silicon
+  id: RMCSilicon
   name: reagent-name-silicon
   group: Elements
   desc: reagent-desc-silicon
@@ -266,7 +264,7 @@
             Poison: 1.5
 
 - type: reagent
-  id: Silver
+  id: RMCSilver
   name: reagent-name-silver
   group: Elements
   desc: reagent-desc-silver
@@ -277,7 +275,7 @@
   meltingPoint: 960.5
 
 - type: reagent
-  id: Sulfur
+  id: RMCSulfur
   name: reagent-name-sulfur
   group: Elements
   desc: reagent-desc-sulfur
@@ -295,7 +293,7 @@
             Caustic: 0.1
 
 - type: reagent
-  id: Sodium
+  id: RMCSodium
   name: reagent-name-sodium
   group: Elements
   desc: reagent-desc-sodium
@@ -306,7 +304,7 @@
   boilingPoint: 883.0
 
 - type: reagent
-  id: Uranium
+  id: RMCUranium
   name: reagent-name-uranium
   group: Elements
   desc: reagent-desc-uranium

@@ -1,7 +1,7 @@
 - type: entity
   name: jug
   parent: BaseItem
-  id: Jug
+  id: RMCJug
   description: Used to contain a very large amount of chemicals or solutions. Chugging is extremely ill-advised.
   components:
     - type: SolutionContainerManager
@@ -84,10 +84,10 @@
       - ChemDispensable
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: carbon
-  id: JugCarbon
+  id: RMCJugCarbon
   noSpawn: true
   components:
     - type: Label
@@ -96,14 +96,14 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: Carbon
+            - ReagentId: RMCCarbon
               Quantity: 200
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: fluorine
-  id: JugFluorine
+  id: RMCJugFluorine
   noSpawn: true
   components:
     - type: Label
@@ -112,14 +112,14 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: Fluorine
+            - ReagentId: RMCFluorine
               Quantity: 200
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: chlorine
-  id: JugChlorine
+  id: RMCJugChlorine
   noSpawn: true
   components:
     - type: Label
@@ -128,14 +128,14 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: Chlorine
+            - ReagentId: RMCChlorine
               Quantity: 200
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: aluminium
-  id: JugAluminium
+  id: RMCJugAluminium
   noSpawn: true
   components:
     - type: Label
@@ -144,14 +144,14 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: Aluminium
+            - ReagentId: RMCAluminium
               Quantity: 200
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: phosphorus
-  id: JugPhosphorus
+  id: RMCJugPhosphorus
   noSpawn: true
   components:
     - type: Label
@@ -160,14 +160,14 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: Phosphorus
+            - ReagentId: RMCPhosphorus
               Quantity: 200
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: sulfur
-  id: JugSulfur
+  id: RMCJugSulfur
   noSpawn: true
   components:
     - type: Label
@@ -176,14 +176,14 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: Sulfur
+            - ReagentId: RMCSulfur
               Quantity: 200
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: silicon
-  id: JugSilicon
+  id: RMCJugSilicon
   noSpawn: true
   components:
     - type: Label
@@ -192,14 +192,14 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: Silicon
+            - ReagentId: RMCSilicon
               Quantity: 200
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: hydrogen
-  id: JugHydrogen
+  id: RMCJugHydrogen
   noSpawn: true
   components:
     - type: Label
@@ -208,14 +208,14 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: Hydrogen
+            - ReagentId: RMCHydrogen
               Quantity: 200
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: lithium
-  id: JugLithium
+  id: RMCJugLithium
   noSpawn: true
   components:
     - type: Label
@@ -224,14 +224,14 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: Lithium
+            - ReagentId: RMCLithium
               Quantity: 200
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: sodium
-  id: JugSodium
+  id: RMCJugSodium
   noSpawn: true
   components:
     - type: Label
@@ -240,14 +240,14 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: Sodium
+            - ReagentId: RMCSodium
               Quantity: 200
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: potassium
-  id: JugPotassium
+  id: RMCJugPotassium
   noSpawn: true
   components:
     - type: Label
@@ -256,14 +256,14 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: Potassium
+            - ReagentId: RMCPotassium
               Quantity: 200
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: radium
-  id: JugRadium
+  id: RMCJugRadium
   noSpawn: true
   components:
     - type: Label
@@ -272,14 +272,14 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: Radium
+            - ReagentId: RMCRadium
               Quantity: 200
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: iron
-  id: JugIron
+  id: RMCJugIron
   noSpawn: true
   components:
     - type: Label
@@ -288,7 +288,7 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: Iron
+            - ReagentId: RMCIron
               Quantity: 200
 
 - type: entity
@@ -308,10 +308,10 @@
               Quantity: 200
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: gold
-  id: JugGold
+  id: RMCJugGold
   noSpawn: true
   components:
     - type: Label
@@ -320,14 +320,14 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: Gold
+            - ReagentId: RMCGold
               Quantity: 200
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: mercury
-  id: JugMercury
+  id: RMCJugMercury
   noSpawn: true
   components:
     - type: Label
@@ -336,14 +336,14 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: Mercury
+            - ReagentId: RMCMercury
               Quantity: 200
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: silver
-  id: JugSilver
+  id: RMCJugSilver
   noSpawn: true
   components:
     - type: Label
@@ -352,14 +352,14 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: Silver
+            - ReagentId: RMCSilver
               Quantity: 200
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: ethanol
-  id: JugEthanol
+  id: RMCJugEthanol
   noSpawn: true
   components:
     - type: Label
@@ -368,14 +368,14 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: Ethanol
+            - ReagentId: RMCEthanol
               Quantity: 200
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: sugar
-  id: JugSugar
+  id: RMCJugSugar
   noSpawn: true
   components:
     - type: Label
@@ -384,14 +384,14 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: Sugar
+            - ReagentId: RMCSugar
               Quantity: 200
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: nitrogen
-  id: JugNitrogen
+  id: RMCJugNitrogen
   noSpawn: true
   components:
     - type: Label
@@ -400,14 +400,14 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: Nitrogen
+            - ReagentId: RMCNitrogen
               Quantity: 200
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: oxygen
-  id: JugOxygen
+  id: RMCJugOxygen
   noSpawn: true
   components:
     - type: Label
@@ -416,14 +416,14 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: Oxygen
+            - ReagentId: RMCOxygen
               Quantity: 200
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: Plant-B-Gone
-  id: JugPlantBGone
+  id: RMCJugPlantBGone
   noSpawn: true
   components:
     - type: Label
@@ -432,14 +432,14 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: PlantBGone
+            - ReagentId: RMCPlantBGone
               Quantity: 200
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: welding fuel
-  id: JugWeldingFuel
+  id: RMCJugWeldingFuel
   noSpawn: true
   components:
     - type: Label
@@ -448,5 +448,5 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: WeldingFuel
+            - ReagentId: RMCWeldingFuel
               Quantity: 200
