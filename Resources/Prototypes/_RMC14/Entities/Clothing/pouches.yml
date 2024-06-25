@@ -168,7 +168,7 @@
   parent: CMPouchSurvival
   id: CMPouchSurvivalSynth
   name: synth survival pouch
-  description: An emergency pouch given to synthetics in the event of an emergency.
+  description: An emergency pouch given to silicons in the event of an emergency.
   components:
   - type: Storage
     grid:
