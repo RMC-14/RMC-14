@@ -1,4 +1,7 @@
-﻿using Robust.Shared.GameStates;
+﻿using Content.Shared.Physics;
+using Robust.Shared.GameStates;
+using Robust.Shared.Physics.Dynamics;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
@@ -7,8 +10,8 @@ namespace Content.Shared._RMC14.Weapons.Ranged;
 public sealed partial class AmmoFixedDistanceComponent : Component
 {
     /// <summary>
-    /// If set to true, this makes shots from the weapon pass over creatures and objects.
+    /// This will be applied to the projectiles fired by the weapon.
     /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool HighArc = false;
+    [DataField(customTypeSerializer: typeof(FlagSerializer<CollisionLayer>)), AutoNetworkedField]
+    public int CollisionLayer = (int) CollisionGroup.ThrownItem;
 }

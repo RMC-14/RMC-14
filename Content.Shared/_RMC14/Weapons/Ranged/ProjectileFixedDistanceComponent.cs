@@ -8,7 +8,4 @@ public sealed partial class ProjectileFixedDistanceComponent : Component
 {
     [DataField, AutoNetworkedField]
     public TimeSpan FlyEndTime;
-    
-    [DataField, AutoNetworkedField]
-    public bool HighArc = false;
 }

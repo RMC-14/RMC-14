@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System.Linq;
+using System.Numerics;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
 using Content.Shared.Hands;
@@ -44,7 +45,6 @@ public sealed class CMGunSystem : EntitySystem
 
         SubscribeLocalEvent<AmmoFixedDistanceComponent, AmmoShotEvent>(OnAmmoFixedDistanceShot);
 
-        SubscribeLocalEvent<ProjectileFixedDistanceComponent, StartCollideEvent>(OnStartCollide);
         SubscribeLocalEvent<ProjectileFixedDistanceComponent, ComponentRemove>(OnProjectileStop);
         SubscribeLocalEvent<ProjectileFixedDistanceComponent, PhysicsSleepEvent>(OnProjectileStop);
 
@@ -97,14 +97,13 @@ public sealed class CMGunSystem : EntitySystem
 
             var comp = EnsureComp<ProjectileFixedDistanceComponent>(projectile);
             comp.FlyEndTime = time + TimeSpan.FromSeconds(direction.Length() / gun.ProjectileSpeedModified);
-            comp.HighArc = ent.Comp.HighArc;
+            
+            if (!TryComp(projectile, out FixturesComponent? fixturesComponent) || fixturesComponent.FixtureCount <= 0)
+                continue;
+            
+            var fixture = fixturesComponent.Fixtures.First();
+            _physics.SetCollisionLayer(projectile, fixture.Key, fixture.Value, ent.Comp.CollisionLayer, fixturesComponent);
         }
-    }
-
-    private void OnStartCollide(Entity<ProjectileFixedDistanceComponent> ent, ref StartCollideEvent args)
-    {
-        if (!ent.Comp.HighArc)
-            StopProjectile(ent);
     }
 
     private void OnProjectileStop<T>(Entity<ProjectileFixedDistanceComponent> ent, ref T args)
