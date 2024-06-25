@@ -1,0 +1,85 @@
+﻿- type: entity
+  parent: RMCShutterBase
+  id: RMCPodDoor
+  name: podlock
+  description: That looks like it doesn't open easily.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Shutters/poddoor.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+  - type: AccessReader
+  - type: Door
+    canPry: false
+    crushDamage:
+      types:
+        Blunt: 25 # yowch
+  - type: Occluder
+  - type: Appearance
+  - type: RadiationBlocker
+    resistance: 8
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StrongMetallic
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronics ]
+  #- type: Construction
+  #  graph: BlastDoor
+  #  node: blastdoor
+  #  containers:
+  #  - board
+  - type: StaticPrice
+    price: 280
+
+- type: entity
+  parent: RMCPodDoor
+  id: RMCPodDoorAlmayer
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Shutters/Almayer/poddoor.rsi
+
+- type: entity
+  parent: RMCPodDoorAlmayer
+  id: RMCPodDoorAlmayerOpen
+  suffix: Open
+  components:
+  - type: Door
+    state: Open
+  - type: Occluder
+    enabled: false
+  - type: Physics
+    canCollide: false
+  - type: Airtight
+    airBlocked: false
+  - type: RadiationBlocker
+    enabled: false
+
+- type: entity
+  parent: RMCPodDoor
+  id: RMCPodDoorAlmayerBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Shutters/Almayer/almayer_poddoor.rsi
+
+- type: entity
+  parent: RMCPodDoor
+  id: RMCPodDoorAlmayerWhite
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Shutters/Almayer/white_almayer_poddoor.rsi
+
+- type: entity
+  parent: RMCPodDoor
+  id: RMCPodDoorAI
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Shutters/Almayer/ai_door.rsi
+
+- type: entity
+  parent: RMCPodDoor
+  id: RMCPodDoorAIWhite
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Shutters/Almayer/white_ai_door.rsi

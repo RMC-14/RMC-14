@@ -1,0 +1,43 @@
+- type: entity
+  parent: BaseShutter
+  id: RMCShutterBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Shutters/Almayer/shutter.rsi
+    drawdepth: BlastDoors
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronics ]
+  - type: Appearance
+  - type: Door
+    closeTimeOne: 0.4
+    closeTimeTwo: 0.4
+    openTimeOne: 0.4
+    openTimeTwo: 0.4
+    openingAnimationTime: 1.0
+    closingAnimationTime: 1.0
+
+- type: entity
+  parent: RMCShutterBase
+  id: RMCShutterAlmayer
+  name: shutters
+
+- type: entity
+  parent: RMCShutterAlmayer
+  id: RMCShutterAlmayerOpen
+  suffix: Open
+  components:
+  - type: Door
+    state: Open
+  - type: Occluder
+    enabled: false
+  - type: Physics
+    canCollide: false
+  - type: Airtight
+    airBlocked: false
+  - type: RadiationBlocker
+    enabled: false
