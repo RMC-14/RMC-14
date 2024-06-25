@@ -100,8 +100,8 @@
     # TODO RMC14 tramadol and perixadon pills, splint
 
 - type: entity
-  parent: CMBeltGrenade
-  id: CMBeltGrenadeFilled
+  parent: RMCBeltGrenade
+  id: RMCBeltGrenadeFilled
   suffix: Filled
   components:
   - type: StorageFill
@@ -113,8 +113,8 @@
     # TODO Original is 3 HEDP, 2 HIDP incen, 2 airburst frag, 1 airburst incen
 
 - type: entity
-  parent: CMBeltGrenadeLarge
-  id: CMBeltGrenadeLargeFilled
+  parent: RMCBeltGrenadeLarge
+  id: RMCBeltGrenadeLargeFilled
   suffix: Filled
   components:
   - type: StorageFill

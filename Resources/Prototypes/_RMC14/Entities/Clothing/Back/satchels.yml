@@ -101,8 +101,8 @@
 
 - type: entity
   parent: CMSatchel
-  id: CMSatchelGrenadeSpec
-  name: USCM IMP M63A1 grenade satchel
+  id: RMCSatchelGrenadeSpec
+  name: UNMC IMP M63A1 grenade satchel
   description: A satchel specially designed to maximize grenade carrying capacity while minimizing the risks of secondary ignition.
   components:
   # TODO ID locking feature + make lights green when unlocked.

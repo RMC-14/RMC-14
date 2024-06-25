@@ -56,7 +56,7 @@
   parent: BaseStorageItem
   id: RMCGrenadeSpecEquipmentCase
   name: heavy grenadier equipment case
-  description: "A large case containing a heavy-duty multi-shot Armat Systems M83 grenade launcher, M3-G4 grenadier armor and helmet, significant amount of various M40 grenades and additional pieces of equipment.\n\nDrag this sprite onto yourself to open it up! NOTE: You cannot put items back inside this case."
+  description: "A large case containing a heavy-duty multi-shot M83 grenade launcher, M3-G4 grenadier armor and helmet, significant amount of various M40 grenades and additional pieces of equipment.\n\nDrag this sprite onto yourself to open it up! NOTE: You cannot put items back inside this case."
   components:
   - type: Sprite
     noRot: true
@@ -87,13 +87,13 @@
     - 0,0,21,1
   - type: StorageFill
     contents:
-    - id: WeaponLauncherM92 # check IFF
-    - id: CMBeltGrenadeLargeFilled
-    - id: CMSatchelGrenadeSpec # ID lock
-    - id: CMSatchelGrenadeSpec
-    - id: CMHandsM3G4
-    - id: CMArmorM3G4
-    - id: CMArmorHelmetM3G4 # hugger protection
+    - id: WeaponLauncherM83 # check IFF
+    - id: RMCBeltGrenadeLargeFilled
+    - id: RMCSatchelGrenadeSpec # ID lock
+    - id: RMCSatchelGrenadeSpec
+    - id: RMCHandsM3G4
+    - id: RMCArmorM3G4
+    - id: RMCArmorHelmetM3G4 # hugger protection
     - id: CMWeaponPistolVP78
     - id: CMMagazinePistolVP78
     - id: CMMagazinePistolVP78
