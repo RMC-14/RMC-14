@@ -330,3 +330,208 @@
         damage:
           types:
             Radiation: 2
+
+- type: reagent
+  id: RMCOxygen
+  name: reagent-name-oxygen
+  desc: reagent-desc-oxygen
+  physicalDesc: reagent-physical-desc-gaseous
+  flavor: bitter
+  color: "#c4f5ff"
+  boilingPoint: -183.0
+  meltingPoint: -218.4
+  metabolisms:
+    Gas:
+      effects:
+      - !type:Oxygenate
+        conditions:
+        - !type:OrganType
+          type: Human
+      - !type:Oxygenate
+        conditions:
+        - !type:OrganType
+          type: Animal
+      - !type:Oxygenate
+        conditions:
+        - !type:OrganType
+          type: Rat
+      - !type:Oxygenate
+        conditions:
+        - !type:OrganType
+          type: Plant
+      # Convert Oxygen into CO2.
+      - !type:ModifyLungGas
+        conditions:
+        - !type:OrganType
+          type: Vox
+          shouldHave: false
+        ratios:
+          CarbonDioxide: 1.0
+          Oxygen: -1.0
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Vox
+        scaleByQuantity: true
+        ignoreResistances: true
+        damage:
+          types:
+            Poison:
+              7
+      - !type:AdjustAlert
+        alertType: Toxins
+        conditions:
+          - !type:ReagentThreshold
+            min: 0.5
+          - !type:OrganType
+            type: Vox
+        clear: true
+        time: 5
+
+- type: reagent
+  id: RMCNitrogen
+  name: reagent-name-nitrogen
+  desc: reagent-desc-nitrogen
+  physicalDesc: reagent-physical-desc-gaseous
+  flavor: bitter
+  color: "#a1e1ff"
+  boilingPoint: -195.8
+  meltingPoint: -210.0
+  metabolisms:
+    Poison:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Cold: 1 # liquid nitrogen is cold
+    Gas:
+      effects:
+      - !type:Oxygenate
+        conditions:
+        - !type:OrganType
+          type: Vox
+      - !type:Oxygenate
+        conditions:
+        - !type:OrganType
+          type: Slime
+      # Converts Nitrogen into CO2
+      - !type:ModifyLungGas
+        conditions:
+        - !type:OrganType
+          type: Vox
+        ratios:
+          Ammonia: 1.0
+          Nitrogen: -1.0
+      - !type:ModifyLungGas
+        conditions:
+        - !type:OrganType
+          type: Slime
+        ratios:
+          NitrousOxide: 1.0
+          Nitrogen: -1.0
+
+- type: reagent
+  id: RMCEthanol
+  name: reagent-name-ethanol
+  parent: BaseAlcohol
+  desc: reagent-desc-ethanol
+  slippery: true
+  physicalDesc: reagent-physical-desc-strong-smelling
+  flavor: alcohol
+  color: "#b05b3c"
+  boilingPoint: 78.2
+  meltingPoint: -114.1
+  metabolisms:
+    Alcohol:
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 15
+        - !type:OrganType
+          type: Dwarf
+          shouldHave: false
+        damage:
+          types:
+            Poison: 1
+      # dwarves take less toxin damage and heal a marginal amount of brute
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 15
+        - !type:OrganType
+          type: Dwarf
+        damage:
+          types:
+            Poison: 0.2
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 15
+        - !type:OrganType
+          type: Dwarf
+        damage:
+          groups:
+            Brute: -1
+      - !type:ChemVomit
+        probability: 0.04
+        conditions:
+        - !type:ReagentThreshold
+          reagent: Ethanol
+          min: 12
+        # dwarves immune to vomiting from alcohol
+        - !type:OrganType
+          type: Dwarf
+          shouldHave: false
+      - !type:Drunk
+        boozePower: 2
+
+- type: reagent
+  id: RMCSugar #Candy and grains
+  name: reagent-name-sugar
+  group: Foods
+  desc: reagent-desc-sugar
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: sweet
+  color: white
+  meltingPoint: 146.0
+  metabolisms:
+    Food:
+      effects:
+      - !type:SatiateHunger
+        conditions:
+        - !type:ReagentThreshold #Only satiates when eaten with nutriment
+          reagent: Nutriment
+          min: 0.1
+        factor: 1
+  plantMetabolism:
+  - !type:PlantAdjustNutrition
+    amount: 0.1
+  - !type:PlantAdjustWeeds
+    amount: 2
+  - !type:PlantAdjustPests
+    amount: 2
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/sugarglass.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 7
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+
+- type: reagent
+  id: RMCWater
+  name: reagent-name-water
+  parent: BaseDrink
+  desc: reagent-desc-water
+  slippery: true
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: water
+  color: "#75b1f0"
+  recognizable: true
+  boilingPoint: 100.0
+  meltingPoint: 0.0
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 4
