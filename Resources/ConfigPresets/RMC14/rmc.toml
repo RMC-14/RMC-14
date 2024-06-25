@@ -16,6 +16,7 @@ mode = 1
 maxplayers = 500
 soft_max_players = 250
 panic_bunker.enabled = false
+round_end_pvs_overrides = false
 
 [hub]
 # Set to true to show this server on the public server list
