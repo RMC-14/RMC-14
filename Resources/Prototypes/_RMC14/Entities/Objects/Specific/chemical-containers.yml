@@ -292,10 +292,10 @@
               Quantity: 200
 
 - type: entity
-  parent: Jug
+  parent: RMCJug
   name: jug
   suffix: copper
-  id: JugCopper
+  id: RMCJugCopper
   noSpawn: true
   components:
     - type: Label
@@ -304,7 +304,7 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: Copper
+            - ReagentId: RMCCopper
               Quantity: 200
 
 - type: entity
