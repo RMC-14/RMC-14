@@ -23,4 +23,4 @@
   - RMCJugRadium
 
 - type: reagentDispenserInventory
-  id: EmptyInventory
+  id: RMCEmptyInventory
