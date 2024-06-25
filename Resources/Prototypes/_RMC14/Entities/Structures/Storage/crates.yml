@@ -703,7 +703,7 @@
   description: A secure crate with a We-Ya insignia on it.
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Storage/Crates/secure_weyland.rsi
+    sprite: _RMC14/Structures/Storage/Crates/secure_we_ya.rsi
     layers:
     - state: base
     - state: closed
