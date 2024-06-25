@@ -1,0 +1,69 @@
+﻿[admin]
+deadmin_on_join = true
+
+[adminlogs]
+server_name = "rouny"
+
+[atmos]
+space_wind = false
+monstermos_rip_tiles = false
+grid_impulse = false
+
+[auth]
+mode = 1
+
+[game]
+maxplayers = 500
+soft_max_players = 250
+panic_bunker.enabled = false
+
+[hub]
+# Set to true to show this server on the public server list
+# Before enabling this, read: https://docs.spacestation14.io/hosts/hub-rules
+advertise = true
+
+# Comma-separated list of tags, useful for categorizing your server.
+# See https://docs.spacestation14.io/hosts/hub-rules for more details on this when it becomes relevant.
+tags = "lang:en,region:am_n_e,rp:med"
+
+# Comma-separated list of URLs of hub servers to advertise to.
+hub_urls = "https://central.spacestation14.io/hub/"
+
+[ic]
+flavor_text = true
+
+[infolinks]
+discord = "https://discord.gg/rouny"
+github = "https://github.com/RMC-14/RMC-14"
+bug_report = "https://github.com/RMC-14/RMC-14/issues/new?assignees=&labels=&projects=&template=issue_report.md&title="
+
+[log]
+path = "logs"
+format = "log_%(date)s-%(time)s.txt"
+level = 1
+enabled = false
+
+[net]
+tickrate = 30
+port = 1212
+bindto = "::,0.0.0.0"
+max_connections = 1024
+
+[physics]
+maxlinvelocity = 51
+grid_splitting = false
+
+[replay]
+auto_record = true
+
+[shuttle]
+auto_call_time = 0
+
+[status]
+# The status server is the TCP side, used by the launcher to determine engine version, etc.
+# To be clear: Disabling it makes the launcher unable to connect!
+enabled = true
+
+# This is the address and port the status server binds to.
+# The port is by default set based on net.port so it will follow what you set there.
+bind = "*:1212"
