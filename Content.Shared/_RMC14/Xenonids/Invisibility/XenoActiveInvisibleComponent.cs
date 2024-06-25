@@ -16,4 +16,7 @@ public sealed partial class XenoActiveInvisibleComponent : Component
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 SpeedMultiplier = FixedPoint2.New(1.15);
+
+    [DataField, AutoNetworkedField]
+    public bool DidPopup;
 }
