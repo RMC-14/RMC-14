@@ -3243,7 +3243,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 15.5,3.5
       parent: 179
-- proto: CMDrinkCanSoutoClassic
+- proto: CMDrinkCanBobdaClassic
   entities:
   - uid: 1304
     components:

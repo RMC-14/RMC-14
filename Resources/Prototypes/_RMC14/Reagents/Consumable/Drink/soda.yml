@@ -5,85 +5,85 @@
   id: CMSodaBase
   abstract: true
 
-# SOUTO
+# BOBDA
 
 - type: reagent
   parent: CMSodaBase
-  id: CMSodaSoutoClassic
-  name: reagent-name-souto-classic
-  desc: reagent-desc-souto-classic
+  id: CMSodaBobdaClassic
+  name: reagent-name-bobda-classic
+  desc: reagent-desc-bobda-classic
   physicalDesc: reagent-physical-desc-fizzy
   flavor: soda
   color: "#802b00"
 
 - type: reagent
   parent: CMSodaBase
-  id: CMSodaSoutoCherry
-  name: reagent-name-souto-cherry
-  desc: reagent-desc-souto-cherry
+  id: CMSodaBobdaCherry
+  name: reagent-name-bobda-cherry
+  desc: reagent-desc-bobda-cherry
   physicalDesc: reagent-physical-desc-fizzy
   flavor: soda
   color: "#800000"
 
 - type: reagent
   parent: CMSodaBase
-  id: CMSodaSoutoLime
-  name: reagent-name-souto-lime
-  desc: reagent-desc-souto-lime
+  id: CMSodaBobdaLime
+  name: reagent-name-bobda-lime
+  desc: reagent-desc-bobda-lime
   physicalDesc: reagent-physical-desc-fizzy
   flavor: soda
   color: "#421C52"
 
 - type: reagent
   parent: CMSodaBase
-  id: CMSodaSoutoGrape
-  name: reagent-name-souto-grape
-  desc: reagent-desc-souto-grape
+  id: CMSodaBobdaGrape
+  name: reagent-name-bobda-grape
+  desc: reagent-desc-bobda-grape
   physicalDesc: reagent-physical-desc-fizzy
   flavor: soda
   color: "#421C52"
 
 - type: reagent
   parent: CMSodaBase
-  id: CMSodaSoutoBlue
-  name: reagent-name-souto-blue
-  desc: reagent-desc-souto-blue
+  id: CMSodaBobdaBlue
+  name: reagent-name-bobda-blue
+  desc: reagent-desc-bobda-blue
   physicalDesc: reagent-physical-desc-fizzy
   flavor: soda
   color: "#005B96"
 
 - type: reagent
   parent: CMSodaBase
-  id: CMSodaSoutoPeach
-  name: reagent-name-souto-peach
-  desc: reagent-desc-souto-peach
+  id: CMSodaBobdaPeach
+  name: reagent-name-bobda-peach
+  desc: reagent-desc-bobda-peach
   physicalDesc: reagent-physical-desc-fizzy
   flavor: soda
   color: "#FFE5B4"
 
 - type: reagent
   parent: CMSodaBase
-  id: CMSodaSoutoCranberry
-  name: reagent-name-souto-cranberry
-  desc: reagent-desc-souto-cranberry
+  id: CMSodaBobdaCranberry
+  name: reagent-name-bobda-cranberry
+  desc: reagent-desc-bobda-cranberry
   physicalDesc: reagent-physical-desc-fizzy
   flavor: soda
   color: "#950714"
 
 - type: reagent
   parent: CMSodaBase
-  id: CMSodaSoutoVanilla
-  name: reagent-name-souto-vanilla
-  desc: reagent-desc-souto-vanilla
+  id: CMSodaBobdaVanilla
+  name: reagent-name-bobda-vanilla
+  desc: reagent-desc-bobda-vanilla
   physicalDesc: reagent-physical-desc-fizzy
   flavor: soda
   color: "#F9E5BC"
 
 - type: reagent
   parent: CMSodaBase
-  id: CMSodaSoutoPineapple
-  name: reagent-name-souto-pineapple
-  desc: reagent-desc-souto-pineapple
+  id: CMSodaBobdaPineapple
+  name: reagent-name-bobda-pineapple
+  desc: reagent-desc-bobda-pineapple
   physicalDesc: reagent-physical-desc-fizzy
   flavor: soda
   color: "#FEEB75"
