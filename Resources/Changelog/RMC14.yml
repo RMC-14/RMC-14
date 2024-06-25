@@ -1565,5 +1565,12 @@
   id: 188
   time: '2024-06-25T03:40:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2560
+- author: vero5123
+  changes:
+  - message: fixes barricades not being rotatable
+    type: Fix
+  id: 189
+  time: '2024-06-25T04:03:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2556
 Name: RMC14
 Order: -1
