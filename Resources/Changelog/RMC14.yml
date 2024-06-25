@@ -1572,5 +1572,25 @@
   id: 189
   time: '2024-06-25T04:03:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2556
+- author: DrSmugleaf
+  changes:
+  - message: Fixed marines not being able to move after being un-nested.
+    type: Fix
+  - message: Fixed marines falling down if they die while nested, and not falling
+      down once un-nested after being killed..
+    type: Fix
+  id: 190
+  time: '2024-06-25T11:19:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2621
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the Queen not detaching from the ovipositor on crit or death.
+    type: Fix
+  - message: Added popups to the Queen when starting to attach to or detach from the
+      ovipositor.
+    type: Tweak
+  id: 191
+  time: '2024-06-25T11:20:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2622
 Name: RMC14
 Order: -1
