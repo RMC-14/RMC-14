@@ -1,7 +1,11 @@
 - type: entity
-  parent: BaseShutter
+  parent: CMBaseStructureCorrodible
   id: RMCShutterBase
   abstract: true
+  name: shutters
+  description: That looks like it doesn't open easily.
+  placement:
+    mode: SnapgridCenter
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Shutters/Almayer/shutter.rsi
@@ -9,22 +13,71 @@
     layers:
     - state: closed
       map: ["enum.DoorVisualLayers.Base"]
+  - type: AnimationPlayer
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49" # don't want this colliding with walls or they won't close
+        density: 100
+        mask:
+        - FullTileMask
+        layer:
+        - AirlockLayer
   - type: ContainerFill
     containers:
       board: [ DoorElectronics ]
-  - type: Appearance
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
   - type: Door
+    openDrawDepth: BlastDoors
+    closedDrawDepth: BlastDoors
+    bumpOpen: false
+    clickOpen: false
     closeTimeOne: 0.4
     closeTimeTwo: 0.4
     openTimeOne: 0.4
     openTimeTwo: 0.4
     openingAnimationTime: 1.0
     closingAnimationTime: 1.0
+    crushDamage:
+      types:
+        Blunt: 5
+    openSound:
+      path: /Audio/_RMC14/Machines/blastdoor.ogg
+    closeSound:
+      path: /Audio/_RMC14/Machines/blastdoor.ogg
+  - type: Appearance
+  - type: UserInterface
+    interfaces:
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+  - type: DoorSignalControl
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSink
+    ports:
+      - Open
+      - Close
+      - Toggle
+  - type: DeviceLinkSource
+    ports:
+    - DoorStatus
+    lastSignals:
+      DoorStatus: false
 
 - type: entity
   parent: RMCShutterBase
   id: RMCShutterAlmayer
-  name: shutters
 
 - type: entity
   parent: RMCShutterAlmayer
