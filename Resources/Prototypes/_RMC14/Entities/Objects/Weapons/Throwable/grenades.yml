@@ -18,7 +18,6 @@
     initialBeepDelay: 0
     beepInterval: 10
     doPopup: false
-  - type: AmmoFixedDistance
 
 - type: entity
   parent: CMGrenadeBase

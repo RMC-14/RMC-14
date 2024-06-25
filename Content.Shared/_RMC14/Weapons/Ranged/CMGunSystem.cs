@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Numerics;
+﻿using System.Numerics;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
 using Content.Shared.Hands;
@@ -97,12 +96,6 @@ public sealed class CMGunSystem : EntitySystem
 
             var comp = EnsureComp<ProjectileFixedDistanceComponent>(projectile);
             comp.FlyEndTime = time + TimeSpan.FromSeconds(direction.Length() / gun.ProjectileSpeedModified);
-            
-            if (!TryComp(projectile, out FixturesComponent? fixturesComponent) || fixturesComponent.FixtureCount <= 0)
-                continue;
-            
-            var fixture = fixturesComponent.Fixtures.First();
-            _physics.SetCollisionLayer(projectile, fixture.Key, fixture.Value, ent.Comp.CollisionLayer, fixturesComponent);
         }
     }
 

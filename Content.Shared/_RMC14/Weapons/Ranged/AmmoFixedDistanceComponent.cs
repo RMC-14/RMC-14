@@ -5,13 +5,6 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
 [Access(typeof(CMGunSystem))]
-public sealed partial class AmmoFixedDistanceComponent : Component
-{
-    /// <summary>
-    /// This will be applied to the projectiles fired by the weapon.
-    /// </summary>
-    [DataField(customTypeSerializer: typeof(FlagSerializer<CollisionLayer>)), AutoNetworkedField]
-    public int CollisionLayer = (int) CollisionGroup.ThrownItem;
-}
+public sealed partial class AmmoFixedDistanceComponent : Component; // TODO: Make it so weapons with this component can have arc fire disabled.
