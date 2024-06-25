@@ -220,7 +220,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
 
         if (prototype.TryGetComponent(out HiveConstructionNodeComponent? node, _compFactory) &&
-            !_xenoPlasma.HasPlasmaPopup(xeno.Owner, node.InitialPlasmaCost, false))
+            !_xenoPlasma.HasPlasmaPopup(xeno.Owner, node.InitialPlasmaCost))
         {
             return;
         }
