@@ -3742,7 +3742,7 @@ entities:
     - type: Transform
       pos: 29.5,-1.5
       parent: 179
-- proto: CMM42ASniperRifle
+- proto: CMM96SSniperRifle
   entities:
   - uid: 1323
     components:
@@ -3750,7 +3750,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -0.7047485,-3.4607978
       parent: 179
-- proto: CMMagazineSMGM39
+- proto: CMMagazineSMGM63
   entities:
   - uid: 1219
     components:
@@ -3796,7 +3796,7 @@ entities:
     - type: Transform
       pos: -3.7406578,-0.2539096
       parent: 179
-- proto: CMMagazineRifleM4RA
+- proto: CMMagazineRifleM4DMR
   entities:
   - uid: 1321
     components:
@@ -3808,21 +3808,21 @@ entities:
     - type: Transform
       pos: -1.121415,-3.3045478
       parent: 179
-- proto: CMMagazineSniperM42A
+- proto: CMMagazineSniperM96S
   entities:
   - uid: 1325
     components:
     - type: Transform
       pos: 0.3994183,-3.4191313
       parent: 179
-- proto: CMMagazineSniperM42AFlak
+- proto: CMMagazineSniperM96SFlak
   entities:
   - uid: 708
     components:
     - type: Transform
       pos: -0.34016502,-3.3878813
       parent: 179
-- proto: CMMagazineSniperM42AIncendiary
+- proto: CMMagazineSniperM96SIncendiary
   entities:
   - uid: 1324
     components:
@@ -8135,7 +8135,7 @@ entities:
     - type: Transform
       pos: -2.5,3.5
       parent: 179
-- proto: WeaponLauncherM92
+- proto: WeaponLauncherM83
   entities:
   - uid: 536
     components:
@@ -8168,7 +8168,7 @@ entities:
     - type: Transform
       pos: -3.4906578,0.19400707
       parent: 179
-- proto: WeaponRifleM4RA
+- proto: WeaponRifleM4DMR
   entities:
   - uid: 1320
     components:
@@ -8176,7 +8176,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -1.808915,-3.4607978
       parent: 179
-- proto: WeaponShotgunM37A2
+- proto: WeaponShotgunM42A2
   entities:
   - uid: 1215
     components:
@@ -8184,7 +8184,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -3.725898,-3.4069455
       parent: 179
-- proto: WeaponSMGM39
+- proto: WeaponSMGM63
   entities:
   - uid: 1222
     components:

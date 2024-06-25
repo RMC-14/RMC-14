@@ -24,7 +24,7 @@
   parent: CMGrenadeBase
   id: CMGrenadeHighExplosive
   name: M40 HEDP grenade
-  description: High-Explosive Dual-Purpose. A small, but deceptively strong blast grenade that has been phasing out the M15 HE grenades alongside the M40 HEFA. Capable of being loaded in the M92 Launcher, or thrown by hand.
+  description: High-Explosive Dual-Purpose. A small, but deceptively strong blast grenade that has been phasing out the M15 HE grenades alongside the M40 HEFA. Capable of being loaded in the M83 Launcher, or thrown by hand.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m40hedp.rsi
@@ -69,7 +69,7 @@
   parent: CMGrenadeHighExplosive
   id: CMGrenadeFrag
   name: M40 HEFA grenade
-  description: High-Explosive Fragmenting-Antipersonnel. A small, but deceptively strong fragmentation grenade that has been phasing out the M15 fragmentation grenades alongside the M40 HEDP. Capable of being loaded in the M92 Launcher, or thrown by hand.
+  description: High-Explosive Fragmenting-Antipersonnel. A small, but deceptively strong fragmentation grenade that has been phasing out the M15 fragmentation grenades alongside the M40 HEDP. Capable of being loaded in the M83 Launcher, or thrown by hand.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m40hefa.rsi
