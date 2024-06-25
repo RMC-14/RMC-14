@@ -389,6 +389,9 @@ ShrapnelProjectile: CMProjectileShrapnel
 # 2024-06-06
 CMAutoLathe: CMAutolathe
 
+# 2024-06-15
+ClothingOuterCoatInspector: ClothingOuterCoatDetectiveLoadout
+
 # 2024-06-22
 CMSpawnPointSmartGunner: CMSpawnPointSmartGunOperator
 CMFaxUPP: CMFaxSPP
@@ -408,3 +411,6 @@ CMCrateM41A: CMCrateM54C
 CMCrateM41AE2: CMCrateM54CE2
 CMMagazineRifleM41AE2: CMMagazineRifleM54CE2
 WeaponRifleM41AE2: WeaponRifleM54CE2
+
+# 2024-06-23
+FloorTileItemReinforced: PartRodMetal1
