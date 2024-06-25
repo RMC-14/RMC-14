@@ -49,8 +49,8 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoNestedComponent, ComponentRemove>(OnNestedRemove);
         SubscribeLocalEvent<XenoNestedComponent, PreventCollideEvent>(OnNestedPreventCollide);
         SubscribeLocalEvent<XenoNestedComponent, PullAttemptEvent>(OnNestedPullAttempt);
+        SubscribeLocalEvent<XenoNestedComponent, InteractionAttemptEvent>(OnNestedInteractionAttempt);
         SubscribeLocalEvent<XenoNestedComponent, UpdateCanMoveEvent>(OnNestedCancel);
-        SubscribeLocalEvent<XenoNestedComponent, InteractionAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, UseAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, ThrowAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, PickupAttemptEvent>(OnNestedCancel);
@@ -191,6 +191,11 @@ public sealed class XenoNestSystem : EntitySystem
     }
 
     private void OnNestedPullAttempt(Entity<XenoNestedComponent> ent, ref PullAttemptEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnNestedInteractionAttempt(Entity<XenoNestedComponent> ent, ref InteractionAttemptEvent args)
     {
         args.Cancelled = true;
     }

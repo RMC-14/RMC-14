@@ -72,6 +72,13 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/med.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/med.rsi
+  - type: ShowHealthBars # TODO RMC14 Hack
+    damageContainers:
+    - Biological
+  - type: HolocardScanner # TODO RMC14 Hack
+  - type: ShowHealthIcons # TODO RMC14 Hack
+    damageContainers:
+    - Biological
 
 - type: entity
   parent: ArmorHelmetM10

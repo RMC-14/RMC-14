@@ -49,6 +49,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         SubscribeLocalEvent<XenoEvolutionComponent, XenoOpenEvolutionsActionEvent>(OnXenoEvolveAction);
         SubscribeLocalEvent<XenoEvolutionComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
+        SubscribeLocalEvent<XenoEvolutionComponent, NewXenoEvolvedComponent>(OnXenoEvolutionNewEvolved);
 
         SubscribeLocalEvent<XenoNewlyEvolvedComponent, PreventCollideEvent>(OnNewlyEvolvedPreventCollide);
 
@@ -126,6 +127,15 @@ public sealed class XenoEvolutionSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-end"), newXeno, newXeno);
     }
 
+    private void OnXenoEvolutionNewEvolved(Entity<XenoEvolutionComponent> xeno, ref NewXenoEvolvedComponent args)
+    {
+        if (!TryComp(args.OldXeno, out XenoEvolutionComponent? oldEvolution))
+            return;
+
+        xeno.Comp.Points = FixedPoint2.Max(0, oldEvolution.Points - oldEvolution.Max);
+        Dirty(xeno);
+    }
+
     private void OnNewlyEvolvedPreventCollide(Entity<XenoNewlyEvolvedComponent> ent, ref PreventCollideEvent args)
     {
         if (ent.Comp.StopCollide.Contains(args.OtherEntity))
@@ -161,7 +171,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         prototype.TryGetComponent(out XenoComponent? newXenoComp, _compFactory);
         if (newXenoComp != null &&
-            newXenoComp.UnlockAt > _timing.CurTime - _gameTicker.RoundStartTimeSpan)
+            newXenoComp.UnlockAt > _gameTicker.RoundDuration())
         {
             _popup.PopupEntity(
                 Loc.GetString("cm-xeno-evolution-failed-cannot-support"),
@@ -310,13 +320,11 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         // TODO RMC14 ovipositor attached only after 5 minutes
         var time = _timing.CurTime;
+        var roundDuration = _gameTicker.RoundDuration();
         var hasGranter = HasLiving<XenoEvolutionGranterComponent>(1);
         var evolution = EntityQueryEnumerator<XenoEvolutionComponent>();
         while (evolution.MoveNext(out var uid, out var comp))
         {
-            if (comp.Action != null)
-                continue;
-
             if (time < comp.LastPointsAt + TimeSpan.FromSeconds(1))
                 continue;
 
@@ -331,12 +339,12 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 continue;
             }
 
-            if (comp.Points < comp.Max)
+            if (comp.Points < comp.Max || roundDuration < comp.AccumulatePointsBefore)
             {
                 if (comp.RequiresGranter && !hasGranter)
                     continue;
 
-                comp.Points = FixedPoint2.Min(comp.Points + comp.PointsPerSecond, comp.Max);
+                comp.Points = comp.Points + comp.PointsPerSecond;
             }
             else if (comp.Points > comp.Max)
             {

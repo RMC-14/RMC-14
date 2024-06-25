@@ -16,6 +16,7 @@ using Content.Server.Spawners.Components;
 using Content.Server.Spawners.EntitySystems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.HyperSleep;
@@ -79,13 +80,15 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
 
-    private CVarDef<float>[] FTLCVars = new[]
-    {
+    private readonly CVarDef<float>[] _ftlcVars =
+    [
         CCVars.FTLStartupTime,
         CCVars.FTLTravelTime,
         CCVars.FTLArrivalTime,
-        CCVars.FTLCooldown
-    };
+        CCVars.FTLCooldown,
+    ];
+
+    private float _marinesPerXeno;
 
     public override void Initialize()
     {
@@ -105,6 +108,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         SubscribeLocalEvent<XenoEvolutionGranterComponent, MapInitEvent>(OnMapInit);
 
         SubscribeLocalEvent<AlmayerComponent, MapInitEvent>(OnAlmayerMapInit);
+
+        Subs.CVar(_config, CMCVars.CMMarinesPerXeno, v => _marinesPerXeno = v, true);
     }
 
     private void OnRulePlayerSpawning(RulePlayerSpawningEvent ev)
@@ -181,7 +186,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 return playerId;
             }
 
-            var totalXenos = Math.Max(1, ev.PlayerPool.Count / comp.PlayersPerXeno);
+            var totalXenos = Math.Max(1, ev.PlayerPool.Count / _marinesPerXeno);
             var xenoCandidates = new List<NetUserId>[Enum.GetValues<JobPriority>().Length];
             for (var i = 0; i < xenoCandidates.Length; i++)
             {
@@ -261,7 +266,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (spawnedDropships)
                 return;
 
-            foreach (var cvar in FTLCVars)
+            foreach (var cvar in _ftlcVars)
             {
                 comp.OriginalCVarValues[cvar] = _config.GetCVar(cvar);
                 _config.SetCVar(cvar, 1);
