@@ -93,3 +93,7 @@ cm-xeno-charge-spit-expire = Our spits are back to normal.
 # Turn Invisible
 cm-xeno-invisibility-already-invisible = We are already invisible!
 cm-xeno-invisibility-expire = We feel our invisibility end!
+
+# Ovipositor
+cm-xeno-ovipositor-attach = We start attaching to the ovipositor.
+cm-xeno-ovipositor-detach = We start detaching from the ovipositor.
