@@ -113,7 +113,7 @@
   - type: Storage
     maxItemSize: Normal
     grid:
-    - 0,0,23,2 # Can hold 12 grenades of size 2x2. The bottom extra line is for future larger grenades of size 2x3.
+    - 0,0,23,1 # Can hold 12 grenades of size 2x2.
     whitelist:
       tags:
       - Grenade

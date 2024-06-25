@@ -867,7 +867,7 @@
       entries:
       #- id: DemolitionistSet
       #  points: 0
-      - id: CMGrenadeSpecEquipmentCase
+      - id: RMCGrenadeSpecEquipmentCase
       #  points: 0
       #- id: PyroSet
       #  points: 0
@@ -902,7 +902,7 @@
       - id: CMGrenadeHighExplosive
         points: 40
         spawn: 6
-      - id: CMGrenadeFrag # hefa and smoke temporarily until normal options are coded
+      - id: CMGrenadeFrag # TODO RMC14 hefa and smoke temporarily until normal options are coded
         points: 40
         spawn: 6
       - id: CMGrenadeSmoke
