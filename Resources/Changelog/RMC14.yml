@@ -1592,5 +1592,13 @@
   id: 191
   time: '2024-06-25T11:20:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2622
+- author: DrSmugleaf
+  changes:
+  - message: Fixed duplicate lurker invisibility expired and hive core not enough
+      plasma popups.
+    type: Fix
+  id: 192
+  time: '2024-06-25T12:56:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2623
 Name: RMC14
 Order: -1
