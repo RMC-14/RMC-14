@@ -9,6 +9,9 @@ namespace Content.Shared._RMC14.Xenonids.Leap;
 public sealed partial class XenoLeapComponent : Component
 {
     [DataField, AutoNetworkedField]
+    public FixedPoint2 PlasmaCost = FixedPoint2.Zero;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan Delay = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
@@ -22,4 +25,7 @@ public sealed partial class XenoLeapComponent : Component
 
     [DataField, AutoNetworkedField]
     public int Strength = 20;
+
+    [DataField, AutoNetworkedField]
+    public bool KnockdownRequiresInvisibility = false;
 }

@@ -183,6 +183,9 @@ public abstract class SharedIVDripSystem : EntitySystem
         if (args.Target is not { } target)
             return;
 
+        if (!InRange(pack, target, pack.Comp.Range))
+            return;
+
         args.Handled = true;
 
         var user = args.User;
@@ -217,7 +220,7 @@ public abstract class SharedIVDripSystem : EntitySystem
         {
             BreakOnMove = true,
             BreakOnDamage = true,
-            BreakOnHandChange = true
+            BreakOnHandChange = true,
         };
         _doAfter.TryStartDoAfter(doAfter);
     }

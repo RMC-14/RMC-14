@@ -14,6 +14,7 @@
                     <controls:RoadmapVersionHeader Text="Current version" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Almayer" Text="Ship map for the marines" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="LV-624" Text="Planet map" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Weapon attachments" Text="Each weapon will be able to be customized with different attachments, changing the weapon's stats" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Sniper Kit" Text="Sniper loadout for the squad weapons specialist. On completion, its ghillie suit will let you become partially cloaked, and the rifle will have special actions" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Squad automated vendors" Text="Where the marine roles get their equipment at round start" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Requisitions" Text="Department that buys supplies for the rest of the marines" />
@@ -21,15 +22,16 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Firearms skill" Text="Each marine role has a different firearms skill. This impacts how accurate they are with guns" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno Queen" Text="Head caste of the xenonids" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Crusher" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Spitter" Text="Protect your fellow Aliens with a corrosive acid spit, allowing you to damage hosts from a distance and deny areas or lanes of fire to them. Use your strong acid to quickly destroy equipment" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Carrier" Text="Carry parasites around, allowing the Hive to impregnate new hosts on the move. Use pheromones to assist fellow Aliens" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Burrower" Text="Lay the foundations for resin traps in strategic locations or the Hive's flanks. Flank your way around the map with the tunnel ability and dig tunnels to allow for quick transportation of fellow Aliens from the hive to the frontlines" />
-                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Lurker" Text="Become the ultimate ambusher. Stalk behind the frontlines and on flanks, wound, capture and kill unsuspecting Marines. Harass support personnel" />
-                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Warrior" Text="Fight on the frontlines. Disable and capture lone prey. Punish reckless Marines by flinging them into Alien backlines. Act as one of the Hive's main line combatants" />
-                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Spitter" Text="Protect your fellow Aliens with a corrosive acid spit, allowing you to damage hosts from a distance and deny areas or lanes of fire to them. Use your strong acid to quickly destroy equipment" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Larva removal surgery" Text="No longer a week away" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Treatable wounds" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="CPR and IVs" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Hivelord" Text="Shape the Hive to your will with a massive plasma reserve. Become one with weeds and sprint around weeded terrain like a Runner. Use pheromones to assist fellow Aliens" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Lurker" Text="Become the ultimate ambusher. Stalk behind the frontlines and on flanks, wound, capture and kill unsuspecting Marines. Harass support personnel" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Warrior" Text="Fight on the frontlines. Disable and capture lone prey. Punish reckless Marines by flinging them into Alien backlines. Act as one of the Hive's main line combatants" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Drone" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Runner" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Sentinel" />
@@ -45,9 +47,8 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Fireteam Leader" Text="More equipment in the fireteam leader's equipment and gear racks" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Squad Leader" Text="More equipment in the squad leader's equipment and gear racks" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Grenadier Kit" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Tier 3 xenos" Text="Crusher, Praetorian, Boiler and Ravager" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Tier 3 xenos" Text="Praetorian, Boiler and Ravager" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Smart Gun Operator" Text="Stay behind marines and fire past friendlies and into the enemy!" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Weapon attachments" Text="Each weapon will be able to be customized with different attachments, changing the weapon's stats" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Limb damage" Text="Each limb on a marine will be able to take damage separately, being able to detach upon receiving too much damage and requiring individual treatment" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Pain and painkillers" Text="Wounds will cause pain which can be dulled with painkillers" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="More surgeries" Text="Foreign object removal, internal bleeding surgery, fractures" />
