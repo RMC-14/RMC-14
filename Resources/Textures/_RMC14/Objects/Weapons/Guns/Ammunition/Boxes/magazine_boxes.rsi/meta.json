@@ -239,40 +239,40 @@
       "name": "magaz_flamer_bgel"
     },
     {
-      "name": "magaz_m41ae2_1"
+      "name": "magaz_m54ce2_1"
     },
     {
-      "name": "magaz_m41ae2_2"
+      "name": "magaz_m54ce2_2"
     },
     {
-      "name": "magaz_m41ae2_3"
+      "name": "magaz_m54ce2_3"
     },
     {
-      "name": "magaz_m41ae2"
+      "name": "magaz_m54ce2"
     },
     {
-      "name": "magaz_m41ae2_holo_1"
+      "name": "magaz_m54ce2_holo_1"
     },
     {
-      "name": "magaz_m41ae2_holo_2"
+      "name": "magaz_m54ce2_holo_2"
     },
     {
-      "name": "magaz_m41ae2_holo_3"
+      "name": "magaz_m54ce2_holo_3"
     },
     {
-      "name": "magaz_m41ae2_holo"
+      "name": "magaz_m54ce2_holo"
     },
     {
-      "name": "magaz_m41ae2_heap_1"
+      "name": "magaz_m54ce2_heap_1"
     },
     {
-      "name": "magaz_m41ae2_heap_2"
+      "name": "magaz_m54ce2_heap_2"
     },
     {
-      "name": "magaz_m41ae2_heap_3"
+      "name": "magaz_m54ce2_heap_3"
     },
     {
-      "name": "magaz_m41ae2_heap"
+      "name": "magaz_m54ce2_heap"
     },
     {
       "name": "speedloaders"
@@ -371,13 +371,13 @@
       "name": "base"
     },
     {
-      "name": "base_m4a3"
+      "name": "base_m1984"
     },
     {
-      "name": "base_mod88"
+      "name": "base_m77"
     },
     {
-      "name": "base_vp78"
+      "name": "base_mk80"
     },
     {
       "name": "base_su6"
@@ -389,10 +389,10 @@
       "name": "base_cmb"
     },
     {
-      "name": "base_m39"
+      "name": "base_m63"
     },
     {
-      "name": "base_m4ra"
+      "name": "base_m4dmr"
     },
     {
       "name": "base_m41"
@@ -455,7 +455,7 @@
       "name": "base_m2c"
     },
     {
-      "name": "base_m41ae2"
+      "name": "base_m54ce2"
     },
     {
       "name": "base_flamer"
@@ -485,13 +485,13 @@
       "name": "lids"
     },
     {
-      "name": "base_m4a3_lid"
+      "name": "base_m1984_lid"
     },
     {
-      "name": "base_mod88_lid"
+      "name": "base_m77_lid"
     },
     {
-      "name": "base_vp78_lid"
+      "name": "base_mk80_lid"
     },
     {
       "name": "base_su6_lid"
@@ -503,13 +503,13 @@
       "name": "base_cmb_lid"
     },
     {
-      "name": "base_m39_lid"
+      "name": "base_m63_lid"
     },
     {
-      "name": "base_m4ra_lid"
+      "name": "base_m4dmr_lid"
     },
     {
-      "name": "base_m41_lid"
+      "name": "base_m54_lid"
     },
     {
       "name": "base_l42_lid"
@@ -569,7 +569,7 @@
       "name": "base_m2c_lid"
     },
     {
-      "name": "base_m41ae2_lid"
+      "name": "base_m54ce2_lid"
     },
     {
       "name": "base_flamer_lid"
@@ -587,13 +587,13 @@
       "name": "text_blank"
     },
     {
-      "name": "text_m4a3"
+      "name": "text_m1984"
     },
     {
-      "name": "text_mod88"
+      "name": "text_m77"
     },
     {
-      "name": "text_vp78"
+      "name": "text_mk80"
     },
     {
       "name": "text_su6"
@@ -617,7 +617,7 @@
       "name": "text_m41"
     },
     {
-      "name": "text_m39"
+      "name": "text_m63"
     },
     {
       "name": "text_l42"
@@ -668,7 +668,7 @@
       "name": "text_m89"
     },
     {
-      "name": "text_m4ra"
+      "name": "text_m4dmr"
     },
     {
       "name": "text_sg"
@@ -683,7 +683,7 @@
       "name": "text_mk1"
     },
     {
-      "name": "text_m41ae2"
+      "name": "text_m54ce2"
     },
     {
       "name": "text_xm51"

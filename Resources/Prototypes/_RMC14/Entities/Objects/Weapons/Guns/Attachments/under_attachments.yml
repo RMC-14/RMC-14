@@ -101,7 +101,7 @@
     capacity: 5
     proto: null
     soundInsert:
-      path: /Audio/_RMC14/Weapons/Guns/Reload/m37a2.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
   - type: UniqueAction
   - type: PumpAction
   - type: ShootUseDelay

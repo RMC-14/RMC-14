@@ -19,7 +19,7 @@
     proto: CMBulletPistol9mm
 
 - type: entity
-  id: CMCartridgePistol88m4AP
+  id: CMCartridgePistolM77AP
   name: cartridge (9mm AP)
   parent: CMCartridgePistolBase
   components:
@@ -28,7 +28,7 @@
     - Cartridge
     - CMCartridgePistol9mm
   - type: CartridgeAmmo
-    proto: CMBulletPistol88m4AP
+    proto: CMBulletPistolM77AP
 
 - type: entity
   id: CMCartridgeRevolver44

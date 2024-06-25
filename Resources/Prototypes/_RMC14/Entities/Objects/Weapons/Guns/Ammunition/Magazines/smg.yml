@@ -1,12 +1,12 @@
 - type: entity
   parent: BaseMagazineRifle
-  id: CMMagazineSMGM39
-  name: "M39 magazine (10x20mm)"
+  id: CMMagazineSMGM63
+  name: "M63 magazine (10x20mm)"
   components:
   - type: Tag
     tags:
     - CMMagazineSmg
-    - CMMagazineSMGM39
+    - CMMagazineSMGM63
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -15,7 +15,7 @@
     proto: CMCartridge10x20mm
     capacity: 48
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m39.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m63.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -29,13 +29,13 @@
   - type: Appearance
 
 - type: Tag
-  id: CMMagazineSMGM39AP
+  id: CMMagazineSMGM63AP
 
-# M39 AP
+# M63 AP
 - type: entity
-  parent: CMMagazineSMGM39
-  id: CMMagazineSMGM39AP
-  name: "M39 AP magazine (10x20mm)"
+  parent: CMMagazineSMGM63
+  id: CMMagazineSMGM63AP
+  name: "M63 AP magazine (10x20mm)"
   components:
   - type: BallisticAmmoProvider
     whitelist:
@@ -43,7 +43,7 @@
       - CMCartridge10x20mmAP
     proto: CMCartridge10x20mmAP
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m39.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m63.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
@@ -54,22 +54,22 @@
   - type: Tag
     tags:
     - CMMagazineSmg
-    - CMMagazineSMGM39AP
+    - CMMagazineSMGM63AP
 
-# M39 Extended
+# M63 Extended
 
 - type: Tag
-  id: CMMagazineSMGM39Ext
+  id: CMMagazineSMGM63Ext
 
 - type: entity
-  parent: CMMagazineSMGM39
-  id: CMMagazineSMGM39Ext
-  name: "M39 extended magazine (10x20mm)"
+  parent: CMMagazineSMGM63
+  id: CMMagazineSMGM63Ext
+  name: "M63 extended magazine (10x20mm)"
   components:
   - type: BallisticAmmoProvider
     capacity: 72
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m39e.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m63e.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -78,10 +78,10 @@
   - type: Tag
     tags:
     - CMMagazineSmg
-    - CMMagazineSMGM39Ext
+    - CMMagazineSMGM63Ext
 
 - type: Tag
   id: CMMagazineSmg
 
 - type: Tag
-  id: CMMagazineSMGM39
+  id: CMMagazineSMGM63

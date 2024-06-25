@@ -2,7 +2,7 @@
   parent: BaseStorageItem
   id: CMSniperEquipmentCase
   name: sniper equipment case
-  description: "A large case containing your very own long-range M42A sniper rifle, M45 ghillie armor and helmet, M42 scout sight, ammunition, spotter equipment, and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
+  description: "A large case containing your very own long-range M96S sniper rifle, M45 ghillie armor and helmet, M42 scout sight, ammunition, spotter equipment, and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
   components:
   - type: Sprite
     noRot: true
@@ -36,14 +36,14 @@
     - id: CMArmorM45
     - id: CMArmorHelmetM45
     - id: CMGlassesM42ScoutSight
-    - id: CMMagazineSniperM42A
-    - id: CMMagazineSniperM42AIncendiary
-    - id: CMMagazineSniperM42AIncendiary
-    - id: CMMagazineSniperM42AFlak
+    - id: CMMagazineSniperM96S
+    - id: CMMagazineSniperM96SIncendiary
+    - id: CMMagazineSniperM96SIncendiary
+    - id: CMMagazineSniperM96SFlak
     - id: CMBackpackSniper
-    - id: CMWeaponPistolVP78
-    - id: CMMagazinePistolVP78
-    - id: CMM42ASniperRifle
+    - id: CMWeaponPistolMK80
+    - id: CMMagazinePistolMK80
+    - id: CMM96SSniperRifle
 #    - id: CMFacepaintSniper
 #    - id: CMSpotter
   - type: CMChangeUserOnVend

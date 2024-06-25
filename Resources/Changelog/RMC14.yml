@@ -578,14 +578,14 @@
   url: https://github.com/RMC-14/RMC-14/pull/1916
 - author: Whisper
   changes:
-  - message: Fixed the fire rate for the 88m4 and service pistols.
+  - message: Fixed the fire rate for the M77 and service pistols.
     type: Fix
   id: 76
   time: '2024-04-26T10:00:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2019
 - author: Whisper
   changes:
-  - message: Fixed not being able to store the M42A in the suit storage slot.
+  - message: Fixed not being able to store the M96S in the suit storage slot.
     type: Fix
   id: 77
   time: '2024-04-26T10:00:34.0000000+00:00'
@@ -858,7 +858,7 @@
   url: https://github.com/RMC-14/RMC-14/pull/2106
 - author: DrSmugleaf
   changes:
-  - message: The M92 grenade launcher's grenades now land exactly where the user clicks
+  - message: The M83 grenade launcher's grenades now land exactly where the user clicks
       and have a short delay before exploding.
     type: Tweak
   id: 113
@@ -1342,7 +1342,7 @@
   url: https://github.com/RMC-14/RMC-14/pull/2485
 - author: geraeumig
   changes:
-  - message: Added ability to scope in with M42A rifle
+  - message: Added ability to scope in with M96S rifle
     type: Add
   id: 162
   time: '2024-06-18T07:50:16.0000000+00:00'
