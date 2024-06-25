@@ -10122,7 +10122,7 @@ entities:
     - type: Transform
       pos: -72.5,-16.5
       parent: 1
-- proto: CMMagazinePistolM4A3
+- proto: CMMagazinePistolM1984
   entities:
   - uid: 622
     components:
@@ -22252,7 +22252,7 @@ entities:
     - type: Transform
       pos: -1.5,-29.5
       parent: 1
-- proto: CMWeaponPistolM4A3
+- proto: CMWeaponPistolM1984
   entities:
   - uid: 618
     components:
