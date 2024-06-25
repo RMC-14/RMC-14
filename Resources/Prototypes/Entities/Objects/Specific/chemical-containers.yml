@@ -102,6 +102,22 @@
 - type: entity
   parent: Jug
   name: jug
+  suffix: iodine
+  id: JugIodine
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-iodine
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: Iodine
+              Quantity: 200
+
+- type: entity
+  parent: Jug
+  name: jug
   suffix: fluorine
   id: JugFluorine
   noSpawn: true
