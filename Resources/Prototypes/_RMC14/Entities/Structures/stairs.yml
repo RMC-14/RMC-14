@@ -1,5 +1,5 @@
 - type: entity
-  id: CMStairs
+  id: RMCStairs
   name: stairs
   description: The greatest invention since rocket-propelled grenades.
   placement:
@@ -12,123 +12,112 @@
     drawdepth: FloorTiles
   - type: Transform
     anchored: true
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Metallic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 500
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
 
 - type: entity
-  id: CMStairsCorner
-  parent: CMStairs
+  id: RMCStairsCorner
+  parent: RMCStairs
   suffix: Corner
   components:
   - type: Sprite
     state: p_stair_full_corner
 
 - type: entity
-  id: CMStairsLeft
-  parent: CMStairs
+  id: RMCStairsLeft
+  parent: RMCStairs
   suffix: Left
   components:
   - type: Sprite
     state: p_stair_left_cap
 
 - type: entity
-  id: CMStairsRight
-  parent: CMStairs
+  id: RMCStairsRight
+  parent: RMCStairs
   suffix: Right
   components:
   - type: Sprite
     state: p_stair_right_cap
 
 - type: entity
-  id: CMStairsSolo
-  parent: CMStairs
+  id: RMCStairsSolo
+  parent: RMCStairs
   suffix: Solo
   components:
   - type: Sprite
     state: p_stair_solo_cap
 
 - type: entity
-  id: CMStairsKutjevo
-  parent: CMStairs
+  id: RMCStairsKutjevo
+  parent: RMCStairs
   components:
   - type: Sprite
     state: p_stair_kutjevo_full
 
 - type: entity
-  id: CMStairsKutjevoCorner
-  parent: CMStairs
+  id: RMCStairsKutjevoCorner
+  parent: RMCStairs
   suffix: Corner
   components:
   - type: Sprite
     state: p_stair_kutjevo_full_corner
 
 - type: entity
-  id: CMStairsKutjevoLeft
-  parent: CMStairs
+  id: RMCStairsKutjevoLeft
+  parent: RMCStairs
   suffix: Left
   components:
   - type: Sprite
     state: p_stair_kutjevo_left_cap
 
 - type: entity
-  id: CMStairsKutjevoRight
-  parent: CMStairs
+  id: RMCStairsKutjevoRight
+  parent: RMCStairs
   suffix: Right
   components:
   - type: Sprite
     state: p_stair_kutjevo_right_cap
 
 - type: entity
-  id: CMStairsKutjevoSolo
-  parent: CMStairs
+  id: RMCStairsKutjevoSolo
+  parent: RMCStairs
   suffix: Solo
   components:
   - type: Sprite
     state: p_stair_kutjevo_solo_cap
 
 - type: entity
-  id: CMStairsIce
-  parent: CMStairs
+  id: RMCStairsIce
+  parent: RMCStairs
   components:
   - type: Sprite
     state: p_stair_ice_full
 
 - type: entity
-  id: CMStairsIceCorner
-  parent: CMStairs
+  id: RMCStairsIceCorner
+  parent: RMCStairs
   suffix: Corner
   components:
   - type: Sprite
     state: p_stair_ice_full_corner
 
 - type: entity
-  id: CMStairsIceLeft
-  parent: CMStairs
+  id: RMCStairsIceLeft
+  parent: RMCStairs
   suffix: Left
   components:
   - type: Sprite
     state: p_stair_ice_left_cap
 
 - type: entity
-  id: CMStairsIceRight
-  parent: CMStairs
+  id: RMCStairsIceRight
+  parent: RMCStairs
   suffix: Right
   components:
   - type: Sprite
     state: p_stair_ice_right_cap
 
 - type: entity
-  id: CMStairsIceSolo
-  parent: CMStairs
+  id: RMCStairsIceSolo
+  parent: RMCStairs
   suffix: Solo
   components:
   - type: Sprite

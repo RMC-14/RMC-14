@@ -1,6 +1,6 @@
 ﻿- type: entity
   abstract: true
-  id: CMPlatformBase
+  id: RMCPlatformBase
   name: platform
   description: A square metal surface resting on four legs.
   components:
@@ -12,8 +12,8 @@
   - type: Clickable
 
 - type: entity
-  parent: CMPlatformBase
-  id: CMPlatform
+  parent: RMCPlatformBase
+  id: RMCPlatform
   name: platform
   description: A square metal surface resting on four legs.
   placement:
@@ -38,8 +38,8 @@
   - type: Climbable
 
 - type: entity
-  parent: CMPlatformBase
-  id: CMPlatformCorner
+  parent: RMCPlatformBase
+  id: RMCPlatformCorner
   name: platform
   description: A square metal surface resting on four legs.
   placement:
@@ -73,8 +73,8 @@
   - type: Climbable
 
 - type: entity
-  parent: CMPlatformBase
-  id: CMPlatformCornerSmall
+  parent: RMCPlatformBase
+  id: RMCPlatformCornerSmall
   name: platform
   description: A square metal surface resting on four legs.
   placement:
@@ -99,22 +99,22 @@
   - type: Climbable
 
 - type: entity
-  parent: CMPlatform
-  id: CMPlatformStairRight
+  parent: RMCPlatform
+  id: RMCPlatformStairRight
   components:
   - type: Sprite
     state: platform_stair
 
 - type: entity
-  parent: CMPlatform
-  id: CMPlatformStairLeft
+  parent: RMCPlatform
+  id: RMCPlatformStairLeft
   components:
   - type: Sprite
     state: platform_stair_alt
 
 - type: entity
-  parent: CMPlatform
-  id: CMPlatformKutjevo
+  parent: RMCPlatform
+  id: RMCPlatformKutjevo
   name: raised metal edge
   description: A raised level of metal, often used to elevate areas above others, or construct bridges. You could probably climb it.
   components:
@@ -122,8 +122,8 @@
     state: kutjevo_platform
 
 - type: entity
-  parent: CMPlatformCornerSmall
-  id: CMPlatformKutjevoCornerSmall
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformKutjevoCornerSmall
   name: raised metal corner
   description: The corner of what appears to be raised piece of metal, often used to imply the illusion of elevation in non-Euclidean 2d spaces. But you don't know that, you're just a spaceman with a rifle.
   components:
@@ -131,8 +131,8 @@
     state: kutjevo_platform_deco
 
 - type: entity
-  parent: CMPlatform
-  id: CMPlatformKutjevoSM
+  parent: RMCPlatform
+  id: RMCPlatformKutjevoSM
   name: raised metal edge
   description: A raised level of metal, often used to elevate areas above others, or construct bridges. You could probably climb it.
   components:
@@ -140,8 +140,8 @@
     state: kutjevo_platform_sm
 
 - type: entity
-  parent: CMPlatform
-  id: CMPlatformKutjevoStairRight
+  parent: RMCPlatform
+  id: RMCPlatformKutjevoStairRight
   name: raised metal edge
   description: A raised level of metal, often used to elevate areas above others, or construct bridges. You could probably climb it.
   components:
@@ -149,8 +149,8 @@
     state: kutjevo_platform_sm_stair
 
 - type: entity
-  parent: CMPlatform
-  id: CMPlatformKutjevoStairLeft
+  parent: RMCPlatform
+  id: RMCPlatformKutjevoStairLeft
   name: raised metal edge
   description: A raised level of metal, often used to elevate areas above others, or construct bridges. You could probably climb it.
   components:
@@ -158,8 +158,8 @@
     state: kutjevo_platform_sm_stair_alt
 
 - type: entity
-  parent: CMPlatform
-  id: CMPlatformShiva
+  parent: RMCPlatform
+  id: RMCPlatformShiva
   name: raised rubber cord platform
   description: Reliable steel and a polymer rubber substitute. Doesn't crack under cold weather.
   components:
@@ -167,8 +167,8 @@
     state: shiva
 
 - type: entity
-  parent: CMPlatformCornerSmall
-  id: CMPlatformShivaCornerSmall
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformShivaCornerSmall
   name: raised rubber cord platform
   description: Reliable steel and a polymer rubber substitute. Doesn't crack under cold weather.
   components:
@@ -176,8 +176,8 @@
     state: shiva_deco
 
 - type: entity
-  parent: CMPlatform
-  id: CMPlatformStrata
+  parent: RMCPlatform
+  id: RMCPlatformStrata
   name: raised metal edge
   description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
   components:
@@ -185,8 +185,8 @@
     state: strata_metalplatform
 
 - type: entity
-  parent: CMPlatformCornerSmall
-  id: CMPlatformStrataCornerSmall
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformStrataCornerSmall
   name: raised metal corner
   description: A raised level of metal, often used to elevate areas above others. This is the corner.
   components:
@@ -194,8 +194,8 @@
     state: strata_metalplatform_deco
 
 - type: entity
-  parent: CMPlatform
-  id: CMPlatformKutjevoRock
+  parent: RMCPlatform
+  id: RMCPlatformKutjevoRock
   name: raised rock edge
   description: A collection of stones and rocks that provide ample grappling and vaulting opportunity. Indicates a change in elevation. You could probably climb it.
   components:
@@ -205,8 +205,8 @@
     bodyType: Static
 
 - type: entity
-  parent: CMPlatformCornerSmall
-  id: CMPlatformKutjevoRockCornerSmall
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformKutjevoRockCornerSmall
   name: raised rock corner
   description: A collection of stones and rocks that cap the edge of some conveniently 1-meter-long lengths of perfectly climbable chest high walls.
   components:
@@ -216,8 +216,8 @@
     bodyType: Static
 
 - type: entity
-  parent: CMPlatform
-  id: CMPlatformStrataRock
+  parent: RMCPlatform
+  id: RMCPlatformStrataRock
   name: ice rock edge
   description: A solid chunk of desolate rocks and ice. Looks like you could climb it with some difficulty.
   components:
@@ -225,8 +225,8 @@
     state: strata_platform
 
 - type: entity
-  parent: CMPlatformCornerSmall
-  id: CMPlatformStrataRockCornerSmall
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformStrataRockCornerSmall
   name: ice rock corner
   description: A solid chunk of desolate rocks and ice.
   components:

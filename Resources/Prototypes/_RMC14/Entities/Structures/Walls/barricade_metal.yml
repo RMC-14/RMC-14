@@ -202,7 +202,7 @@
 # Handrails
 - type: entity
   parent: CMBarricadeBase
-  id: CMBarricadeHandrail
+  id: RMCBarricadeHandrail
   name: handrail
   description: A railing, for your hands. Woooow.
   components:
@@ -232,8 +232,8 @@
       node: nodeHandrail
 
 - type: entity
-  parent: CMBarricadeHandrail
-  id: CMBarricadeHandrailAlt
+  parent: RMCBarricadeHandrail
+  id: RMCBarricadeHandrailAlt
   components:
     - type: Sprite
       state: handrail_b_0
@@ -242,8 +242,8 @@
       node: nodeHandrail
 
 - type: entity
-  parent: CMBarricadeHandrail
-  id: CMBarricadeHandrailMed
+  parent: RMCBarricadeHandrail
+  id: RMCBarricadeHandrailMed
   components:
     - type: Sprite
       state: handrail_med
@@ -252,8 +252,8 @@
       node: nodeHandrail
 
 - type: entity
-  parent: CMBarricadeHandrail
-  id: CMBarricadeHandrailStrata
+  parent: RMCBarricadeHandrail
+  id: RMCBarricadeHandrailStrata
   components:
     - type: Sprite
       state: handrail_strata
@@ -262,8 +262,8 @@
       node: nodeHandrail
 
 - type: entity
-  parent: CMBarricadeHandrail
-  id: CMBarricadeHandrailKutjevo
+  parent: RMCBarricadeHandrail
+  id: RMCBarricadeHandrailKutjevo
   components:
     - type: Sprite
       state: hr_kutjevo
