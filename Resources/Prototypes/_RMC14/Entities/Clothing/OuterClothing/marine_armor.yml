@@ -103,7 +103,6 @@
   - type: CMArmor
     armor: 25
     explosionArmor: 20
-  
 
 - type: entity
   parent: CMArmorM3Medium
