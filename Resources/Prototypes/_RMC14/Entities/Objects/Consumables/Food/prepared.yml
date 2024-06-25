@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: CMFoodBase
   id: CMMarinePreparedMealBase
@@ -67,7 +67,7 @@
   parent: CMMarinePreparedMealBase
   id: CMMarinePreparedMealTofu
   name: Marine prepared meal (tofu)
-  description: The Marine doesn't serve tofu you grass sucking hippie. The flag signifies your defeat.
+  description: The UNMC doesn't serve tofu you grass sucking hippie. The flag signifies your defeat.
   components:
   - type: Sprite
     state: tofu

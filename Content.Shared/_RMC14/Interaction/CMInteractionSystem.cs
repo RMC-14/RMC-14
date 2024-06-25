@@ -18,6 +18,6 @@ public sealed class CMInteractionSystem : EntitySystem
             return;
 
         if (_whitelist.IsValid(ent.Comp.Blacklist, args.Uid))
-            args.Cancel();
+            args.Cancelled = true;
     }
 }

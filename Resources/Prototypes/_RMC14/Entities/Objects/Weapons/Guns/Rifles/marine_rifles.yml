@@ -27,7 +27,7 @@
 
 - type: entity
   parent: CMBaseWeaponRifle
-  name: M54C pulse rifle MK2
+  name: M54C assault rifle MK2
   id: WeaponRifleM54C
   description: The standard issue rifle of the Marines. Commonly carried by most combat personnel. Uses 10x24mm caseless ammunition.
   components:
@@ -91,7 +91,7 @@
       cm-aslot-underbarrel: 0.0, 0.0
 
 - type: entity
-  name: M54CE2 heavy pulse rifle
+  name: M54CE2 heavy assault rifle
   parent: WeaponRifleM54C
   id: WeaponRifleM54CE2
   description: A large squad support weapon capable of laying down sustained suppressing fire from a mounted position. While unstable and less accurate, it can be lugged and shot with two hands.
@@ -130,22 +130,22 @@
 
 - type: entity
   parent: CMBaseWeaponRifle
-  name: M4RA battle rifle
-  id: WeaponRifleM4RA
-  description: The M4RA battle rifle is a designated marksman rifle in service with the Marine. Sporting a bullpup configuration, the M4RA battle rifle is perfect for reconnaissance and fire support teams.
+  name: M4DMR battle rifle
+  id: WeaponRifleM4DMR
+  description: The M4DMR battle rifle is a designated marksman rifle in service with the Marine. Sporting a bullpup configuration, the M4DMR battle rifle is perfect for reconnaissance and fire support teams.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4ra.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4dmr.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
-      state: d_m4ra_barrel
+      state: d_m4dmr_barrel
       offset: 0.65, 0
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4ra.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4dmr.rsi
   - type: Gun
     minAngle: 20
     maxAngle: 70
@@ -156,7 +156,7 @@
     availableModes:
     - SemiAuto
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m4ra.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m4dmr.ogg
   - type: GunWieldBonus
     minAngle: -20
     maxAngle: -50
@@ -171,9 +171,9 @@
         priority: 2
         whitelist:
           tags:
-          - CMMagazineRifleM4RA
-          - CMMagazineRifleM4RAAP
-          - CMMagazineRifleM4RAExt
+          - CMMagazineRifleM4DMR
+          - CMMagazineRifleM4DMRAP
+          - CMMagazineRifleM4DMRExt
   - type: GunDamageModifier
     multiplier: 1.4
   - type: AttachableHolder

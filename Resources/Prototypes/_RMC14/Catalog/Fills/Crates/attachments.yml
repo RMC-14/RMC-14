@@ -171,11 +171,11 @@
         amount: 3
       - id: CMAttachmentM54CSolidStock
         amount: 3
-      - id: CMAttachmentM39Stock
+      - id: CMAttachmentM63Stock
         amount: 3
       - id: CMAttachmentM37WoodenStock
         amount: 3
-      - id: CMAttachmentM39ArmBrace
+      - id: CMAttachmentM63ArmBrace
         amount: 1
 
 - type: entity
@@ -215,5 +215,5 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentM39Stock
+      - id: CMAttachmentM63Stock
         amount: 4

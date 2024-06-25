@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/1ea078e04c49e1004b0bb715f252260cdf39b602/icons/obj/structures/props/posters.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/1ea078e04c49e1004b0bb715f252260cdf39b602/icons/obj/structures/props/posters.dmi, electro modified by DrSmugleaf",
   "size": {
     "x": 32,
     "y": 32
@@ -41,13 +41,13 @@
       "name": "arious"
     },
     {
-      "name": "seegson"
+      "name": "android"
     },
     {
-      "name": "koorlander"
+      "name": "electro"
     },
     {
-      "name": "synthetic",
+      "name": "silicon",
       "delays": [
         [
           4,
@@ -65,7 +65,7 @@
       "name": "remember_io"
     },
     {
-      "name": "pulse_rifle"
+      "name": "assault_rifle"
     },
     {
       "name": "miss_july"
@@ -83,7 +83,7 @@
       "name": "groves"
     },
     {
-      "name": "souto"
+      "name": "bobda"
     },
     {
       "name": "art_2"

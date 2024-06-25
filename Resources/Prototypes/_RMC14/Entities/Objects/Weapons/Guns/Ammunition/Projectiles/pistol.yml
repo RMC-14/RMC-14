@@ -21,8 +21,8 @@
 
 - type: entity
   parent: CMBulletBase
-  id: CMBulletPistol88m4AP
-  name: bullet (88m4 AP)
+  id: CMBulletPistolM77AP
+  name: bullet (M77 AP)
   components:
   - type: Projectile
     damage:
