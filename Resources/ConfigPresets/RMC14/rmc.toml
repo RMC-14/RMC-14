@@ -51,10 +51,10 @@ max_connections = 1024
 
 [physics]
 maxlinvelocity = 51
+grid_splitting = false
 
 [replay]
 auto_record = true
-grid_splitting = false
 
 [shuttle]
 auto_call_time = 0
