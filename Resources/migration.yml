@@ -125,8 +125,8 @@ ClothingEyesGlassesCosmeticSunglasses: ClothingEyesGlassesSunglasses
 SpawnPointAssistant: SpawnPointPassenger
 
 # 2024-01-04
-WeaponPistolM4A3: CMWeaponPistolM4A3
-MagazinePistolM4A3: CMMagazinePistolM4A3
+#WeaponPistolM4A3: CMWeaponPistolM4A3
+#MagazinePistolM4A3: CMMagazinePistolM4A3
 
 # 2024-01-05
 DrinkGoldschlagerBottleFull: DrinkGildlagerBottleFull
@@ -463,7 +463,6 @@ CMMagazineSniperM42AIncendiary: CMMagazineSniperM96SIncendiary
 CMMagazineSniperM42AFlak: CMMagazineSniperM96SFlak
 CMMagazineSniperM42AAntiMateriel: CMMagazineSniperM96SAntiMateriel
 CMM42ASniperRifle: CMM96SSniperRifle
-CMDrinkCanBobda: CMDrinkCanBobda
 CMDrinkCanSoutClassico: CMDrinkCanBobdaClassic
 CMDrinkCanSoutCherryo: CMDrinkCanBobdaCherry
 CMDrinkCanSoutLimeo: CMDrinkCanBobdaLime

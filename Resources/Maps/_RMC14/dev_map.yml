@@ -3767,7 +3767,7 @@ entities:
     - type: Transform
       pos: -4.423815,-3.3756955
       parent: 179
-- proto: CMMagazineRifleM41A
+- proto: CMMagazineRifleM54C
   entities:
   - uid: 417
     components:
@@ -3784,7 +3784,7 @@ entities:
     - type: Transform
       pos: -3.542741,0.7252571
       parent: 179
-- proto: CMMagazineRifleM41AE2
+- proto: CMMagazineRifleM54CE2
   entities:
   - uid: 918
     components:
@@ -8149,7 +8149,7 @@ entities:
     - type: Transform
       pos: -13.195735,9.730438
       parent: 179
-- proto: WeaponRifleM41A
+- proto: WeaponRifleM54C
   entities:
   - uid: 4
     components:
@@ -8161,7 +8161,7 @@ entities:
     - type: Transform
       pos: -3.5531578,1.2044238
       parent: 179
-- proto: WeaponRifleM41AE2
+- proto: WeaponRifleM54CE2
   entities:
   - uid: 434
     components:

@@ -239,40 +239,40 @@
       "name": "magaz_flamer_bgel"
     },
     {
-      "name": "magaz_m41ae2_1"
+      "name": "magaz_m54ce2_1"
     },
     {
-      "name": "magaz_m41ae2_2"
+      "name": "magaz_m54ce2_2"
     },
     {
-      "name": "magaz_m41ae2_3"
+      "name": "magaz_m54ce2_3"
     },
     {
-      "name": "magaz_m41ae2"
+      "name": "magaz_m54ce2"
     },
     {
-      "name": "magaz_m41ae2_holo_1"
+      "name": "magaz_m54ce2_holo_1"
     },
     {
-      "name": "magaz_m41ae2_holo_2"
+      "name": "magaz_m54ce2_holo_2"
     },
     {
-      "name": "magaz_m41ae2_holo_3"
+      "name": "magaz_m54ce2_holo_3"
     },
     {
-      "name": "magaz_m41ae2_holo"
+      "name": "magaz_m54ce2_holo"
     },
     {
-      "name": "magaz_m41ae2_heap_1"
+      "name": "magaz_m54ce2_heap_1"
     },
     {
-      "name": "magaz_m41ae2_heap_2"
+      "name": "magaz_m54ce2_heap_2"
     },
     {
-      "name": "magaz_m41ae2_heap_3"
+      "name": "magaz_m54ce2_heap_3"
     },
     {
-      "name": "magaz_m41ae2_heap"
+      "name": "magaz_m54ce2_heap"
     },
     {
       "name": "speedloaders"
@@ -455,7 +455,7 @@
       "name": "base_m2c"
     },
     {
-      "name": "base_m41ae2"
+      "name": "base_m54ce2"
     },
     {
       "name": "base_flamer"
@@ -509,7 +509,7 @@
       "name": "base_m4dmr_lid"
     },
     {
-      "name": "base_m41_lid"
+      "name": "base_m54_lid"
     },
     {
       "name": "base_l42_lid"
@@ -569,7 +569,7 @@
       "name": "base_m2c_lid"
     },
     {
-      "name": "base_m41ae2_lid"
+      "name": "base_m54ce2_lid"
     },
     {
       "name": "base_flamer_lid"
@@ -683,7 +683,7 @@
       "name": "text_mk1"
     },
     {
-      "name": "text_m41ae2"
+      "name": "text_m54ce2"
     },
     {
       "name": "text_xm51"

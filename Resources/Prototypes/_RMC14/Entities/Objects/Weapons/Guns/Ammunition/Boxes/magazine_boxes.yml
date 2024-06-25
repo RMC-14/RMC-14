@@ -20,8 +20,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     layers:
-    - state: base_m41ae2
-    - state: magaz_m41ae2_3
+    - state: base_m54ce2
+    - state: magaz_m54ce2_3
       map: [ "enum.CMItemSlotsLayers.Fill" ]
   - type: Appearance
   - type: DeployableItem
@@ -103,7 +103,7 @@
       map: [ "enum.CMItemSlotsLayers.Fill" ]
     - state: text_m41 # overlay_gun_type = text overlay
     - state: base_type_reg # overlay_ammo_type = box stripe
-    - state: base_m41_lid # matches the base box
+    - state: base_m54_lid # matches the base box
       map: [ "lid" ]
     - state: lid_type_reg # lid stripe,ends in the type of ammo used
       map: [ "lid_stripe" ]
@@ -127,7 +127,7 @@
       map: [ "enum.CMItemSlotsLayers.Fill" ]
     - state: text_m41
     - state: base_type_ap
-    - state: base_m41_lid
+    - state: base_m54_lid
       map: [ "lid" ]
     - state: lid_type_ap
       map: [ "lid_stripe" ]
@@ -151,7 +151,7 @@
       map: [ "enum.CMItemSlotsLayers.Fill" ]
     - state: text_m41
     - state: base_type_ext
-    - state: base_m41_lid
+    - state: base_m54_lid
       map: [ "lid" ]
     - state: lid_type_ext
       map: [ "lid_stripe" ]
