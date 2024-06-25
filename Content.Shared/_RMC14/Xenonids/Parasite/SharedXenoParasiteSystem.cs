@@ -379,7 +379,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                     if (_random.Prob(infected.MajorPainChance * frameTime))
                     {
                         var message = Loc.GetString("cm-xeno-infection-majorpain-" + _random.Pick(new List<string> { "chest", "breathing", "heart" }));
-                        _popup.PopupEntity(message, uid, uid, PopupType.MediumCaution);
+                        _popup.PopupEntity(message, uid, uid, PopupType.SmallCaution);
                         if (_random.Prob(0.5f))
                         {
                             var ev = new VictimInfectedEmoteEvent(infected.ScreamId);
@@ -395,12 +395,12 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                     if (_random.Prob(infected.ThroatPainChance * frameTime))
                     {
                         var message = Loc.GetString("cm-xeno-infection-throat-" + _random.Pick(new List<string> { "sore", "mucous" }));
-                        _popup.PopupEntity(message, uid, uid, PopupType.MediumCaution);
+                        _popup.PopupEntity(message, uid, uid, PopupType.SmallCaution);
                     }
                     // TODO 20% chance to take limb damage
                     else if (_random.Prob(infected.MuscleAcheChance * frameTime))
                     {
-                        _popup.PopupEntity(Loc.GetString("cm-xeno-infection-muscle-ache"), uid, PopupType.MediumCaution);
+                        _popup.PopupEntity(Loc.GetString("cm-xeno-infection-muscle-ache"), uid, PopupType.SmallCaution);
                         if (_random.Prob(0.2f))
                             _damage.TryChangeDamage(uid, infected.InfectionDamage, true, false);
                     }
@@ -419,7 +419,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                     if (_random.Prob(infected.MinorPainChance * frameTime))
                     {
                         var message = Loc.GetString("cm-xeno-infection-minorpain-" + _random.Pick(new List<string> { "stomach", "chest" }));
-                        _popup.PopupEntity(message, uid, uid, PopupType.MediumCaution);
+                        _popup.PopupEntity(message, uid, uid, PopupType.SmallCaution);
                     }
 
                     if (_random.Prob((infected.ShakesChance * 2 / 3) * frameTime))
@@ -447,8 +447,8 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         //TODO Minor limb damage and causes pain
         _stun.TryParalyze(victim, knockdownTime, false);
         _jitter.DoJitter(victim, infected.JitterTime, false);
-        _popup.PopupEntity(Loc.GetString("cm-xeno-infection-shakes-self"), victim, victim, PopupType.LargeCaution);
-        _popup.PopupEntity(Loc.GetString("cm-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.LargeCaution);
+        _popup.PopupEntity(Loc.GetString("cm-xeno-infection-shakes-self"), victim, victim, PopupType.SmallCaution);
+        _popup.PopupEntity(Loc.GetString("cm-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.SmallCaution);
         _damage.TryChangeDamage(victim, infected.InfectionDamage, true, false);
     }
 }
