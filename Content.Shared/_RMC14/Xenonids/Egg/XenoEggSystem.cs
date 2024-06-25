@@ -70,17 +70,22 @@ public sealed class XenoEggSystem : EntitySystem
 
         var ev = new XenoGrowOvipositorDoAfterEvent { PlasmaCost = args.AttachPlasmaCost };
         var delay = args.AttachDoAfter;
+        var popup = new LocId("cm-xeno-ovipositor-attach");
+        var popupType = PopupType.Medium;
         if (hasOvipositor)
         {
             ev.PlasmaCost = FixedPoint2.Zero;
             delay = args.DetachDoAfter;
+            popup = "cm-xeno-ovipositor-detach";
+            popupType = PopupType.MediumCaution;
         }
 
         var doAfterArgs = new DoAfterArgs(EntityManager, xeno, delay, ev, xeno)
         {
-            BreakOnMove = true
+            BreakOnMove = true,
         };
-        _doAfter.TryStartDoAfter(doAfterArgs);
+        if (_doAfter.TryStartDoAfter(doAfterArgs))
+            _popup.PopupClient(Loc.GetString(popup), xeno, xeno, PopupType.Medium);
     }
 
     private void OnXenoGrowOvipositorDoAfter(Entity<XenoComponent> xeno, ref XenoGrowOvipositorDoAfterEvent args)
@@ -299,8 +304,6 @@ public sealed class XenoEggSystem : EntitySystem
                 _actions.SetToggled(actionId, true);
             }
         }
-
-        _popup.PopupClient(Loc.GetString("cm-xeno-ovipositor-attach"), xeno, xeno);
     }
 
     private void DetachOvipositor(Entity<XenoAttachedOvipositorComponent> xeno)
