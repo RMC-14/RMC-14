@@ -1,13 +1,13 @@
 # TODO RMC14 sniper barrel
 - type: entity
   parent: CMBaseWeaponRifle
-  id: CMM42ASniperRifle
-  name: M42A scoped rifle
+  id: CMM96SSniperRifle
+  name: M96S scoped rifle
   description: "A heavy sniper rifle manufactured by Armat Systems. It has a scope system and fires armor penetrating rounds out of a 15-round magazine.
     'Peace Through Superior Firepower'"
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m42a.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
@@ -19,7 +19,7 @@
   - type: Item
     size: Large
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m42a.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s.rsi
   - type: Gun
     minAngle: 50
     maxAngle: 50
@@ -41,7 +41,7 @@
         priority: 2
         whitelist:
           tags:
-          - CMMagazineSniperM42A
+          - CMMagazineSniperM96S
   - type: GunUserWhitelist
     whitelist:
       components:
