@@ -583,3 +583,105 @@
   - 1.0
   - 1.0
   - 1.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetTallGrass
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetTallGrassSnowNorth
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_north_snow.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetTallGrassSnowEast
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_east_snow.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetTallGrassSnowSouth
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_south_snow.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetTallGrassSnowWest
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_west_snow.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetTallGrassSnowNorthEast
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_north_east_snow.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetTallGrassSnowNorthWest
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_north_west_snow.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetTallGrassSnowSouthEast
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_south_east_snow.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetTallGrassSnowSouthWest
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_south_west_snow.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetTallGrassCompositeNorth
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_north_composite.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetTallGrassCompositeEast
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_east_composite.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetTallGrassCompositeSouth
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_south_composite.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetTallGrassCompositeWest
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_west_composite.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetTallGrassCompositeNorthEast
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_north_east_composite.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetTallGrassCompositeNorthWest
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_north_west_composite.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetTallGrassCompositeSouthEast
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_south_east_composite.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetTallGrassCompositeSouthWest
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_south_west_composite.png
