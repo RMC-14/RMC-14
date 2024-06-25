@@ -1526,5 +1526,12 @@
   id: 183
   time: '2024-06-24T23:58:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2613
+- author: CaasGit
+  changes:
+  - message: Blood bags do not print text when you're clearly out of range.
+    type: Fix
+  id: 184
+  time: '2024-06-25T00:01:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2595
 Name: RMC14
 Order: -1
