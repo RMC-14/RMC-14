@@ -134,7 +134,7 @@
     key: walls
     base: solaris_window
     mode: CardinalFlags
-  # 40 hp
+  # TODO RMC14 40 hp
 
 - type: entity
   parent: CMBaseWindow
@@ -152,13 +152,13 @@
     key: walls
     base: solaris_rwindow
     mode: CardinalFlags
-  # 100 hp
+  # TODO RMC14 100 hp
 
 - type: entity
   parent: CMWindowSolarisReinforced
   id: CMWindowSolarisHull
   description: A glass window. Something tells you this one is somehow indestructible.
-  # 1000000 hp
+  # TODO RMC14 1000000 hp
 
 # Prison
 
@@ -178,7 +178,7 @@
     key: walls
     base: prison_window
     mode: CardinalFlags
-  # 40 hp
+  # TODO RMC14 40 hp
 
 - type: entity
   parent: RMCWindowPrison
@@ -194,7 +194,7 @@
     key: walls
     base: prison_cellwindow
     mode: CardinalFlags
-  # 40 hp
+  # TODO RMC14 40 hp
 
 - type: entity
   parent: CMBaseWindow
@@ -212,11 +212,11 @@
     key: walls
     base: prison_rwindow
     mode: CardinalFlags
-  # 100 hp
+  # TODO RMC14 100 hp
 
 - type: entity
   parent: RMCWindowPrisonReinforced
   id: RMCWindowPrisonHull
   name: hull window
   description: A glass window with a special rod matrix inside a wall frame. This one has an automatic shutter system to prevent any atmospheric breach.
-  # 200 hp, but then it spawns indestructible shutters apparently idk
+  # TODO RMC14 200 hp, but then it spawns indestructible shutters apparently idk
