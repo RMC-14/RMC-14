@@ -40,7 +40,6 @@
     - LauncherCompatibleGrenade
   - type: Ammo
   - type: CMExplosionEffect
-    explosion: RMCExplosionEffectGrenadeShockWave
   - type: CMVocalizeTrigger
 
 - type: entity
@@ -92,8 +91,6 @@
     - LauncherCompatibleGrenade
   - type: Ammo
   - type: ClusterLimitHits
-  - type: CMExplosionEffect
-    explosion: CMExplosionEffectGrenade
     maxShrapnel: 0
   - type: CMVocalizeTrigger
 
@@ -109,11 +106,10 @@
     lifetime: 0.6
   
 - type: entity
-  parent: CMExplosionEffectGrenade
   id: RMCExplosionEffectGrenadeShockWave
   components:
   - type: TimedDespawn
-    lifetime: 0.4
+    lifetime: 0.5
   - type: RMCExplosionShockWave
 
 - type: entity
