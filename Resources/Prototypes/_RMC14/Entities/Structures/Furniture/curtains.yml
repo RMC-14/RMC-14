@@ -12,11 +12,11 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          MaterialCloth1: # TODO RMC cloth
-            min: 1
-            max: 2
+#      - !type:SpawnEntitiesBehavior
+#        spawn:
+#          MaterialCloth1: # TODO RMC cloth
+#            min: 1
+#            max: 2
         
 - type: entity
   parent: RMCCurtainBase
