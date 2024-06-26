@@ -9,7 +9,7 @@ using static Content.Shared._RMC14.Vendors.SharedCMAutomatedVendorSystem;
 namespace Content.Server._RMC14.Vendors;
 
 [ToolshedCommand, AdminCommand(AdminFlags.VarEdit)]
-public sealed class AutomatedVendorCommand : ToolshedCommand
+public sealed class VendorPointsCommand : ToolshedCommand
 {
     private CMAutomatedVendorSystem? _automatedVendor;
 

@@ -9,19 +9,19 @@ using Robust.Shared.Toolshed.Syntax;
 namespace Content.Server._RMC14.Xenonids.Evolution;
 
 [ToolshedCommand, AdminCommand(AdminFlags.VarEdit)]
-public sealed class EvolutionCommand : ToolshedCommand
+public sealed class EvolutionPointsCommand : ToolshedCommand
 {
     private XenoEvolutionSystem? _xenoEvolution;
 
-    [CommandImplementation("getpoints")]
-    public int GetPoints([PipedArgument] EntityUid xeno)
+    [CommandImplementation("get")]
+    public int Get([PipedArgument] EntityUid xeno)
     {
         var points = EntityManager.GetComponentOrNull<XenoEvolutionComponent>(xeno)?.Points;
         return points?.Int() ?? 0;
     }
 
-    [CommandImplementation("setpoints")]
-    public EntityUid SetPoints(
+    [CommandImplementation("set")]
+    public EntityUid Set(
         [CommandInvocationContext] IInvocationContext ctx,
         [PipedArgument] EntityUid xeno,
         [CommandArgument] ValueRef<int> points)
@@ -34,32 +34,35 @@ public sealed class EvolutionCommand : ToolshedCommand
         return xeno;
     }
 
-    [CommandImplementation("setpoints")]
-    public IEnumerable<EntityUid> SetPoints(
+    [CommandImplementation("set")]
+    public IEnumerable<EntityUid> Set(
         [CommandInvocationContext] IInvocationContext ctx,
         [PipedArgument] IEnumerable<EntityUid> xenos,
         [CommandArgument] ValueRef<int> points)
     {
-        return xenos.Select(xeno => SetPoints(ctx, xeno, points));
+        return xenos.Select(xeno => Set(ctx, xeno, points));
     }
 
-    [CommandImplementation("maxpoints")]
-    public EntityUid MaxPoints(
+    [CommandImplementation("max")]
+    public EntityUid Max(
         [CommandInvocationContext] IInvocationContext ctx,
         [PipedArgument] EntityUid xeno)
     {
-        if (!TryComp(xeno, out XenoEvolutionComponent? evolution))
+        if (!TryComp(xeno, out XenoEvolutionComponent? evolution) ||
+            evolution.Max >= evolution.Points)
+        {
             return xeno;
+        }
 
         var max = evolution.Max;
-        return SetPoints(ctx, xeno, new ValueRef<int>(max.Int()));
+        return Set(ctx, xeno, new ValueRef<int>(max.Int()));
     }
 
-    [CommandImplementation("maxpoints")]
-    public IEnumerable<EntityUid> MaxPoints(
+    [CommandImplementation("max")]
+    public IEnumerable<EntityUid> Max(
         [CommandInvocationContext] IInvocationContext ctx,
         [PipedArgument] IEnumerable<EntityUid> xenos)
     {
-        return xenos.Select(xeno => MaxPoints(ctx, xeno));
+        return xenos.Select(xeno => Max(ctx, xeno));
     }
 }
