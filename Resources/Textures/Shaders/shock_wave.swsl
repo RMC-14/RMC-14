@@ -19,7 +19,7 @@ void fragment() {
         );
         
         // removes the first few frames of the "animation"
-        Dist = max(Dist, 0.13);
+        Dist = max(Dist, 0.05);
         
         highp float offset = (TIME - floor(TIME)) / TIME;
         highp float CurrentTime = TIME * offset;
