@@ -3,9 +3,9 @@ command-description-vendorpoints-getspecialist = Gets the points that a Weapons 
 command-description-vendorpoints-set = Sets the points that a marine or group of marines have to purchase items with at an automated vendor.
 command-description-vendorpoints-setspecialist = Sets the points that a Weapons Specialist or group of Weapons Specialists have to purchase items with at their gear rack.
 
-command-description-evolution-get = Gets the evolution points of a xeno.
-command-description-evolution-set = Sets the evolution points of a xeno.
-command-description-evolution-max = Maxes out the evolution points of a xeno if they are lower than the max.
+command-description-evolutionpoints-get = Gets the evolution points of a xeno.
+command-description-evolutionpoints-set = Sets the evolution points of a xeno.
+command-description-evolutionpoints-max = Maxes out the evolution points of a xeno if they are lower than the max.
 
 command-description-hive-alldefault = Sets the hive of a xeno or group of xenos.
 
