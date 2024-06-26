@@ -43,8 +43,8 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<DevouredComponent, ComponentStartup>(OnDevouredStartup);
         SubscribeLocalEvent<DevouredComponent, ComponentRemove>(OnDevouredRemove);
         SubscribeLocalEvent<DevouredComponent, EntGotRemovedFromContainerMessage>(OnDevouredRemovedFromContainer);
+        SubscribeLocalEvent<DevouredComponent, InteractionAttemptEvent>(OnDevouredInteractionAttempt);
         SubscribeLocalEvent<DevouredComponent, UpdateCanMoveEvent>(OnDevouredAttempt);
-        SubscribeLocalEvent<DevouredComponent, InteractionAttemptEvent>(OnDevouredAttempt);
         SubscribeLocalEvent<DevouredComponent, UseAttemptEvent>(OnDevouredAttempt);
         SubscribeLocalEvent<DevouredComponent, ThrowAttemptEvent>(OnDevouredAttempt);
         SubscribeLocalEvent<DevouredComponent, DropAttemptEvent>(OnDevouredAttempt);
@@ -113,6 +113,10 @@ public sealed class XenoDevourSystem : EntitySystem
     {
         if (!_timing.ApplyingState)
             RemCompDeferred<DevouredComponent>(devoured);
+    }
+    private void OnDevouredInteractionAttempt(Entity<DevouredComponent> ent, ref InteractionAttemptEvent args)
+    {
+        args.Cancelled = true;
     }
 
     private void OnDevouredAttempt<T>(Entity<DevouredComponent> devoured, ref T args) where T : CancellableEntityEventArgs

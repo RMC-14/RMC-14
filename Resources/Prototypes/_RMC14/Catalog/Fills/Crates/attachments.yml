@@ -9,6 +9,26 @@
         amount: 8
 
 - type: entity
+  id: CMCrateAttachmentSmartScope
+  parent: CMCrateWeldable
+  name: B8 smart-scope attachment crate (x4)
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMAttachmentB8SmartScope
+        amount: 4
+
+- type: entity
+  id: CMCrateAttachmentRailFlashlight
+  parent: CMCrateWeldable
+  name: rail flashlight crate (x8)
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMAttachmentRailFlashlight
+        amount: 8
+
+- type: entity
   id: CMCrateAttachmentTelescopicScope
   parent: CMCrateWeldable
   name: railscope attachment crate (x2)
@@ -151,11 +171,11 @@
         amount: 3
       - id: CMAttachmentM54CSolidStock
         amount: 3
-      - id: CMAttachmentM39Stock
+      - id: CMAttachmentM63Stock
         amount: 3
       - id: CMAttachmentM37WoodenStock
         amount: 3
-      - id: CMAttachmentM39ArmBrace
+      - id: CMAttachmentM63ArmBrace
         amount: 1
 
 - type: entity
@@ -195,5 +215,5 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentM39Stock
+      - id: CMAttachmentM63Stock
         amount: 4

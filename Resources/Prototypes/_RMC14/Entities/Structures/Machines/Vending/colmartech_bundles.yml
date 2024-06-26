@@ -5,8 +5,8 @@
   - HideSpawnMenu
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/formal.rsi
-    state: icon
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: generic_headset
   - type: CMVendorBundle
     bundle:
     - ArmorHelmetM10

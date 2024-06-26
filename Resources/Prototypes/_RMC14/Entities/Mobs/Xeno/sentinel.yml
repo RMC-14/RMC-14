@@ -42,8 +42,8 @@
     explosionArmor: 10
   - type: XenoEvolution
     max: 300
-#    evolvesTo:
-#    - CMXenoSpitter
+    evolvesTo:
+    - CMXenoSpitter
   - type: XenoParalyzingSlash
   - type: XenoSlowingSpit
   - type: XenoScatteredSpit

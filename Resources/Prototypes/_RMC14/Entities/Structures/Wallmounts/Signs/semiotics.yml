@@ -611,12 +611,12 @@
 
 - type: entity
   parent: CMSemioticBase
-  id: CMSemioticSynth_storage
-  name: synthetic storage semiotic
-  description: "Semiotic Standard denoting the nearby presence of a synthetic unit storage room."
+  id: CMSemioticSilicon_storage
+  name: silicon storage semiotic
+  description: "Semiotic Standard denoting the nearby presence of a silicon unit storage room."
   components:
   - type: Sprite
-    state: synthstorage
+    state: siliconstorage
 
 - type: entity
   parent: CMSemioticBase

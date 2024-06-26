@@ -61,7 +61,8 @@
     radius: 1.5
   - type: LitOnPowered
   - type: ApcPowerReceiver
-    powerLoad: 200
+    needsPower: false # TODO RMC14
+    powerLoad: 0
   - type: Appearance
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/generic.rsi
@@ -108,8 +109,8 @@
 - type: entity
   parent: CMVendor
   id: CMVendorCola
-  name: Souto Softdrinks
-  description: A softdrink vendor provided by Souto Soda Company, Havana.
+  name: Bobda Softdrinks
+  description: A softdrink vendor provided by Bobda Soda Company, Havana.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/cola.rsi

@@ -78,16 +78,16 @@
     - id: CMDrinkWEYAWaterBottle30
     - id: CMFortuneCookie
       prob: 0.333
-    - id: CMCigarettePackLuckyStrikes
+    - id: CMCigarettePackLuckySloths
     - id: CMMatchBook
       orGroup: matchbook
     - id: CMBrownMatchBook
       orGroup: matchbook
     - id: CMExecutiveSelectMatchbook
       orGroup: matchbook
-    - id: CMKoorlanderMatchbook
+    - id: CMElectroMatchbook
       orGroup: matchbook
-    - id: CMKoorlanderMatchbook
+    - id: CMElectroMatchbook
       orGroup: matchbook
   - type: FixedItemSizeStorage
 
