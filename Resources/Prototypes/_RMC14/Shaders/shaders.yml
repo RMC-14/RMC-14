@@ -1,4 +1,4 @@
 - type: shader
-  id: ShockWave
+  id: RMCShockWave
   kind: source
   path: "/Textures/_RMC14/Shaders/shock_wave.swsl"
