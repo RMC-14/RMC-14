@@ -21,7 +21,6 @@ namespace Content.Client._RMC14.Explosion
 
         /// <summary>
         ///     Maximum number of distortions that can be shown on screen at a time.
-        ///     If this value is changed, the shader itself also needs to be updated.
         /// </summary>
         public const int MaxCount = 10;
 
