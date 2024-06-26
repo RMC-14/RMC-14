@@ -447,8 +447,8 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         //TODO Minor limb damage and causes pain
         _stun.TryParalyze(victim, knockdownTime, false);
         _jitter.DoJitter(victim, infected.JitterTime, false);
-        _popup.PopupEntity(Loc.GetString("cm-xeno-infection-shakes-self"), victim, victim, PopupType.SmallCaution);
-        _popup.PopupEntity(Loc.GetString("cm-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.SmallCaution);
+        _popup.PopupEntity(Loc.GetString("cm-xeno-infection-shakes-self"), victim, victim, PopupType.MediumCaution);
+        _popup.PopupEntity(Loc.GetString("cm-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.MediumCaution);
         _damage.TryChangeDamage(victim, infected.InfectionDamage, true, false);
     }
 }
