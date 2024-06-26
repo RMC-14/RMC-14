@@ -200,7 +200,7 @@ cm-chatsan-word-felinids = felinids
 cm-chatsan-replacement-felinids = feline hosts
 
 cm-chatsan-word-cat = feline host
-cm-chatsan-word-cats = feline host
+cm-chatsan-word-cats = feline hosts
 
 # cm-chatsan-word-#tank = #tank
 # cm-chatsan-replacement-#tank = turtle
