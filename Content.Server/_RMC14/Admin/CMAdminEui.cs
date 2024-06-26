@@ -125,7 +125,7 @@ public sealed class CMAdminEui : BaseEui
                 var newXeno = _entities.SpawnAttachedTo(transformXeno.XenoId, coordinates);
                 if (_entities.TryGetComponent(entity, out XenoComponent? xeno))
                     _xeno.SetHive(newXeno, xeno.Hive);
-                else  if (_entities.EntityQuery<CMDistressSignalRuleComponent>().TryFirstOrDefault(out var ruleComponent))
+                else if (_entities.EntityQuery<CMDistressSignalRuleComponent>().TryFirstOrDefault(out var ruleComponent))
                     _xeno.SetHive(newXeno, ruleComponent.Hive);
 
                 if (_mind.TryGetMind(entity, out var mindId, out var mind))
