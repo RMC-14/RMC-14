@@ -6,9 +6,9 @@
   markingCategory: HeadTop
   speciesRestriction: [Felinid]
   sprites:
-  - sprite: _RMC14\Mobs\Felinids\felinid_ears.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_ears.rsi
     state: basic_outer
-  - sprite: _RMC14\Mobs\Felinids\felinid_ears.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_ears.rsi
     state: basic_inner
 
 - type: marking
@@ -17,9 +17,9 @@
   markingCategory: HeadTop
   speciesRestriction: [Felinid]
   sprites:
-  - sprite: _RMC14\Mobs\Felinids\felinid_ears.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_ears.rsi
     state: curled_outer
-  - sprite: _RMC14\Mobs\Felinids\felinid_ears.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_ears.rsi
     state: curled_inner
 
 - type: marking
@@ -28,9 +28,9 @@
   markingCategory: HeadTop
   speciesRestriction: [Felinid]
   sprites:
-  - sprite: _RMC14\Mobs\Felinids\felinid_ears.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_ears.rsi
     state: droopy_outer
-  - sprite: _RMC14\Mobs\Felinids\felinid_ears.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_ears.rsi
     state: droopy_inner
 
 - type: marking
@@ -39,9 +39,9 @@
   markingCategory: HeadTop
   speciesRestriction: [Felinid]
   sprites:
-  - sprite: _RMC14\Mobs\Felinids\felinid_ears.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_ears.rsi
     state: basic_outer
-  - sprite: _RMC14\Mobs\Felinids\felinid_ears.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_ears.rsi
     state: fuzzy_inner
 
 - type: marking
@@ -50,9 +50,9 @@
   markingCategory: HeadTop
   speciesRestriction: [Felinid]
   sprites:
-  - sprite: _RMC14\Mobs\Felinids\felinid_ears.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_ears.rsi
     state: stubby_outer
-  - sprite: _RMC14\Mobs\Felinids\felinid_ears.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_ears.rsi
     state: stubby_inner
 
 - type: marking
@@ -61,11 +61,11 @@
   markingCategory: HeadTop
   speciesRestriction: [Felinid]
   sprites:
-  - sprite: _RMC14\Mobs\Felinids\felinid_ears.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_ears.rsi
     state: tall_outer
-  - sprite: _RMC14\Mobs\Felinids\felinid_ears.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_ears.rsi
     state: tall_inner
-  - sprite: _RMC14\Mobs\Felinids\felinid_ears.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_ears.rsi
     state: tall_fuzz
 
 - type: marking
@@ -74,9 +74,9 @@
   markingCategory: HeadTop
   speciesRestriction: [Felinid]
   sprites:
-  - sprite: _RMC14\Mobs\Felinids\felinid_ears.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_ears.rsi
     state: torn_outer
-  - sprite: _RMC14\Mobs\Felinids\felinid_ears.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_ears.rsi
     state: torn_inner
 
 - type: marking
@@ -85,9 +85,9 @@
   markingCategory: HeadTop
   speciesRestriction: [Felinid]
   sprites:
-  - sprite: _RMC14\Mobs\Felinids\felinid_ears.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_ears.rsi
     state: wide_outer
-  - sprite: _RMC14\Mobs\Felinids\felinid_ears.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_ears.rsi
     state: wide_inner
 
 # Felinid Tails
@@ -98,11 +98,11 @@
   markingCategory: Tail
   speciesRestriction: [Felinid]
   sprites:
-  - sprite: _RMC14\Mobs\Felinids\felinid_tails.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
     state: basic_tail_tip
-  - sprite: _RMC14\Mobs\Felinids\felinid_tails.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
     state: basic_tail_stripes_even
-  - sprite: _RMC14\Mobs\Felinids\felinid_tails.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
     state: basic_tail_stripes_odd
 
 - type: marking
@@ -111,13 +111,13 @@
   markingCategory: Tail
   speciesRestriction: [Felinid]
   sprites:
-  - sprite: _RMC14\Mobs\Felinids\felinid_tails.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
     state: basic_tail_tip
-  - sprite: _RMC14\Mobs\Felinids\felinid_tails.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
     state: basic_tail_stripes_even
-  - sprite: _RMC14\Mobs\Felinids\felinid_tails.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
     state: basic_tail_stripes_odd
-  - sprite: _RMC14\Mobs\Felinids\felinid_tails.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
     state: basic_bow
 
 - type: marking
@@ -126,13 +126,13 @@
   markingCategory: Tail
   speciesRestriction: [Felinid]
   sprites:
-  - sprite: _RMC14\Mobs\Felinids\felinid_tails.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
     state: basic_tail_tip
-  - sprite: _RMC14\Mobs\Felinids\felinid_tails.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
     state: basic_tail_stripes_even
-  - sprite: _RMC14\Mobs\Felinids\felinid_tails.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
     state: basic_tail_stripes_odd
-  - sprite: _RMC14\Mobs\Felinids\felinid_tails.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
     state: basic_bell
 
 - type: marking
@@ -141,13 +141,13 @@
   markingCategory: Tail
   speciesRestriction: [Felinid]
   sprites:
-  - sprite: _RMC14\Mobs\Felinids\felinid_tails.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
     state: basic_tail_tip
-  - sprite: _RMC14\Mobs\Felinids\felinid_tails.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
     state: basic_tail_stripes_even
-  - sprite: _RMC14\Mobs\Felinids\felinid_tails.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
     state: basic_tail_stripes_odd
-  - sprite: _RMC14\Mobs\Felinids\felinid_tails.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
     state: basic_bow
-  - sprite: _RMC14\Mobs\Felinids\felinid_tails.rsi
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
     state: basic_bell
