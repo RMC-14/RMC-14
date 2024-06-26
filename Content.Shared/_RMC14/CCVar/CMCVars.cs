@@ -15,8 +15,29 @@ public sealed class CMCVars : CVars
     public static readonly CVarDef<float> CMXenoSpeedMultiplier =
         CVarDef.Create("cm.xeno_speed_multiplier", 1f, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<bool> CMPlayHumanoidVoicelines =
-        CVarDef.Create("cm.play_humanoid_voicelines", true, CVar.REPLICATED | CVar.CLIENT);
+    public static readonly CVarDef<bool> CMPlayVoicelinesArachnid =
+        CVarDef.Create("cm.play_voicelines_arachnid", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> CMPlayVoicelinesDiona =
+        CVarDef.Create("cm.play_voicelines_diona", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> CMPlayVoicelinesDwarf =
+        CVarDef.Create("cm.play_voicelines_dwarf", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> CMPlayVoicelinesFelinid =
+        CVarDef.Create("cm.play_voicelines_felinid", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> CMPlayVoicelinesHuman =
+        CVarDef.Create("cm.play_voicelines_human", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> CMPlayVoicelinesMoth =
+        CVarDef.Create("cm.play_voicelines_moth", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> CMPlayVoicelinesReptilian =
+        CVarDef.Create("cm.play_voicelines_reptilian", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> CMPlayVoicelinesSlime =
+        CVarDef.Create("cm.play_voicelines_slime", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
 
     public static readonly CVarDef<string> CMOocWebhook =
         CVarDef.Create("cm.ooc_webhook", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
