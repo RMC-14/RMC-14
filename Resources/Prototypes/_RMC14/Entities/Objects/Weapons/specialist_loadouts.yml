@@ -95,8 +95,8 @@
     - id: RMCArmorM3G4
     - id: RMCArmorHelmetM3G4 # hugger protection
     - id: CMWeaponPistolMK80
-    - id: CMMagazinePistolVP78
-    - id: CMMagazinePistolVP78
+    - id: CMMagazinePistolMK80
+    - id: CMMagazinePistolMK80
 #    - id: CMBinoculars
   - type: CMChangeUserOnVend
     addComponents:
