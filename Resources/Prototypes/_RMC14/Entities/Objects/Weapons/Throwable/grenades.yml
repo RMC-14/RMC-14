@@ -112,6 +112,8 @@
   parent: CMExplosionEffectGrenade
   id: RMCExplosionEffectGrenadeShockWave
   components:
+  - type: TimedDespawn
+    lifetime: 0.4
   - type: RMCExplosionShockWave
 
 - type: entity
