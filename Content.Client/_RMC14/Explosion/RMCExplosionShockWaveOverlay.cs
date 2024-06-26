@@ -27,7 +27,7 @@ public sealed class RMCExplosionShockWaveOverlay : Overlay, IEntityEventSubscrib
     public RMCExplosionShockWaveOverlay()
     {
         IoCManager.InjectDependencies(this);
-        _shader = _prototypeManager.Index<ShaderPrototype>("ShockWave").Instance().Duplicate();
+        _shader = _prototypeManager.Index<ShaderPrototype>("RMCShockWave").Instance().Duplicate();
     }
 
     private readonly Vector2[] _positions = new Vector2[MaxCount];
