@@ -19,7 +19,7 @@ public sealed class HumanoidVoicelinesSystem : EntitySystem
     private static readonly ProtoId<SpeciesPrototype> HumanSpecies = "Human";
     private static readonly ProtoId<SpeciesPrototype> MothSpecies = "Moth";
     private static readonly ProtoId<SpeciesPrototype> ReptilianSpecies = "Reptilian";
-    private static readonly ProtoId<SpeciesPrototype> SlimeSpecies = "Slime";
+    private static readonly ProtoId<SpeciesPrototype> SlimeSpecies = "SlimePerson";
 
     private readonly Dictionary<ProtoId<SpeciesPrototype>, CVarDef> _cVars = new()
     {
