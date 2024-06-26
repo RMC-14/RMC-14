@@ -1607,5 +1607,13 @@
   id: 193
   time: '2024-06-26T04:29:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2615
+- author: Whisper
+  changes:
+  - message: Autoinjectors no longer inject into containers, use refillable bottles
+      instead.
+    type: Fix
+  id: 194
+  time: '2024-06-26T05:42:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2633
 Name: RMC14
 Order: -1
