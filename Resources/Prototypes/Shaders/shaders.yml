@@ -35,6 +35,11 @@
   path: "/Textures/Shaders/singularity.swsl"
 
 - type: shader
+  id: ShockWave
+  kind: source
+  path: "/Textures/Shaders/shock_wave.swsl"
+
+- type: shader
   id: Radiation
   kind: source
   path: "/Textures/Shaders/radiation.swsl"
