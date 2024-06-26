@@ -25,14 +25,14 @@ public sealed partial class AttachableHolderStripMenu : FancyWindow
         OnClose += boundUI.Close;
     }
 
-    public void UpdateMenu(Dictionary<string, (string?, bool)> attachableSlots)
+    public void UpdateMenu(Dictionary<string, (string? attachableName, bool locked)> attachableSlots)
     {
         foreach (var slotId in attachableSlots.Keys)
         {
             if (!_attachableSlotControls.ContainsKey(slotId))
                 AddSlotControl(slotId);
 
-            _attachableSlotControls[slotId].Update(attachableSlots[slotId].Item1, attachableSlots[slotId].Item2);
+            _attachableSlotControls[slotId].Update(attachableSlots[slotId].attachableName, attachableSlots[slotId].locked);
         }
     }
 

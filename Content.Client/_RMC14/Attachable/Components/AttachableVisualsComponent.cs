@@ -19,7 +19,7 @@ public sealed partial class AttachableVisualsComponent : Component
     ///     This prefix is added to the name of the slot the attachable is installed in.
     ///     The prefix must be in kebab-case and end with a dash, like so: example-prefix-
     ///     The RSI must contain a state for every slot the attachable fits into.
-    ///     If the attachment only fits into one slot, it should be named as follows: normal-state-a.
+    ///     If the attachment only fits into one slot, it should be named as follows: normal-state_suffix.
     ///     The slot names can be found in AttachableHolderComponent.cs
     /// </summary>
     [DataField, AutoNetworkedField]
@@ -27,14 +27,13 @@ public sealed partial class AttachableVisualsComponent : Component
 
     /// <summary>
     ///     Optional, only used if the item's own state should not be used.
-    ///     This prefix is added to the name of the slot the attachable is installed in.
-    ///     The prefix must be in kebab-case and end with a dash, like so: example-prefix-
+    ///     This suffix is added to the name of the slot the attachable is installed in.
     ///     The RSI must contain a state for every slot the attachable fits into.
-    ///     If the attachment only fits into one slot, it should be named as follows: normal-state-suffix.
+    ///     If the attachment only fits into one slot, it should be named as follows: normal-state_suffix.
     ///     The slot names can be found in AttachableHolderComponent.cs
     /// </summary>
     [DataField, AutoNetworkedField]
-    public string? Suffix = "-a";
+    public string? Suffix = "_a";
 
     /// <summary>
     ///     If true, will include the holder's slot name to find this attachment's state

@@ -265,7 +265,7 @@ public sealed class AttachableHolderSystem : EntitySystem
         if (!TryComp(args.Target, out AttachableHolderComponent? holder) ||
             !HasComp<AttachableComponent>(args.Used))
             return;
-        
+
         if (Attach((target, holder), used, args.User, args.SlotId))
             args.Handled = true;
     }
@@ -322,7 +322,7 @@ public sealed class AttachableHolderSystem : EntitySystem
     //Detaching
     public void StartDetach(Entity<AttachableHolderComponent> holder, string slotId, EntityUid userUid)
     {
-        if (TryGetAttachable(holder, slotId, out var attachable) && !holder.Comp.Slots[slotId].Locked)
+        if (TryGetAttachable(holder, slotId, out var attachable) && holder.Comp.Slots.ContainsKey(slotId) && !holder.Comp.Slots[slotId].Locked)
             StartDetach(holder, attachable.Owner, userUid);
     }
 
@@ -372,7 +372,7 @@ public sealed class AttachableHolderSystem : EntitySystem
 
         if (string.IsNullOrEmpty(slotId))
             CanAttach(holder, attachableUid, ref slotId);
-        
+
         if (!_container.TryGetContainer(holder, slotId, out var container) || container.Count <= 0)
             return false;
 
