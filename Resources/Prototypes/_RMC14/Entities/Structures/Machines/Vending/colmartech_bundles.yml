@@ -113,3 +113,27 @@
     - CMVendorHeadsetSquad
     - CMHandsBlackMarine
     - CMBootsBlackFilled
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleMilitaryPoliceApparel
+  name: standard military police apparel
+  components:
+  - type: CMVendorBundle
+    bundle:
+    - CMHandsBlackMarine
+    - CMHeadsetMPO
+    - CMBootsBlackFilled
+    - CMHeadBeretRed
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleWardenApparel
+  name: standard warden apparel
+  components:
+  - type: CMVendorBundle
+    bundle:
+    - CMHandsBlackMarine
+    - CMHeadsetCMP
+    - CMBootsBlackFilled
+    - CMHeadCapWarden
