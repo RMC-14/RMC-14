@@ -1630,5 +1630,14 @@
   id: 196
   time: '2024-06-26T08:40:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2636
+- author: Siigiil
+  changes:
+  - message: Fixed attachment actions not being properly removed.
+    type: Fix
+  - message: Fixed the attachment offsets for the M54.
+    type: Fix
+  id: 197
+  time: '2024-06-26T23:37:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2571
 Name: RMC14
 Order: -1
