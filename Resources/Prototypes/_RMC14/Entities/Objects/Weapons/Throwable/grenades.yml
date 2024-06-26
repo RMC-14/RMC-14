@@ -91,6 +91,7 @@
     - LauncherCompatibleGrenade
   - type: Ammo
   - type: ClusterLimitHits
+  - type: CMExplosionEffect
     maxShrapnel: 0
   - type: CMVocalizeTrigger
 
