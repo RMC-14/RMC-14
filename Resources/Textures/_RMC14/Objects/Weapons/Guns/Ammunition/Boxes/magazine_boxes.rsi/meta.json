@@ -392,7 +392,7 @@
       "name": "base_m63"
     },
     {
-      "name": "base_m4dmr"
+      "name": "base_m4spr"
     },
     {
       "name": "base_m41"
@@ -506,7 +506,7 @@
       "name": "base_m63_lid"
     },
     {
-      "name": "base_m4dmr_lid"
+      "name": "base_m4spr_lid"
     },
     {
       "name": "base_m54_lid"
@@ -668,7 +668,7 @@
       "name": "text_m89"
     },
     {
-      "name": "text_m4dmr"
+      "name": "text_m4spr"
     },
     {
       "name": "text_sg"

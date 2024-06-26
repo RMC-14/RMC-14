@@ -248,7 +248,7 @@
     sections:
     - name: Armor-Piercing Ammunition
       entries:
-      - id: CMMagazineRifleM4DMRAP
+      - id: CMMagazineRifleM4SPRAP
         amount: 3
       - id: CMMagazineSMGM63AP
         amount: 3
@@ -304,7 +304,7 @@
     sections:
     - name: Primary firearms
       entries:
-      - id: WeaponRifleM4DMR
+      - id: WeaponRifleM4SPR
         amount: 10
       - id: WeaponShotgunM42A2
         amount: 15
@@ -321,7 +321,7 @@
         amount: 10
       - id: CMBoxShotgunSlugs
         amount: 10
-      - id: CMMagazineRifleM4DMR
+      - id: CMMagazineRifleM4SPR
         amount: 15
       - id: CMMagazineSMGM63
         amount: 25
@@ -485,7 +485,7 @@
     #  points: 20
     - name: Primary Ammunition
       entries:
-      - id: CMMagazineRifleM4DMRAP
+      - id: CMMagazineRifleM4SPRAP
         points: 10
       - id: CMMagazineSMGM63AP
         points: 10
@@ -601,7 +601,7 @@
     #  points: 0
     - name: Squad Kit
       entries: [ ]
-    #- id: CMM4DMRSniperKit
+    #- id: CMM4SPRSniperKit
     #  points: 0
     #- id: CMM54CStandardKit
     #  points: 0
@@ -729,7 +729,7 @@
         points: 2
     - name: Primary Ammunition
       entries:
-      - id: CMMagazineRifleM4DMRAP
+      - id: CMMagazineRifleM4SPRAP
         points: 6
       - id: CMMagazineSMGM63AP
         points: 6
@@ -1103,7 +1103,7 @@
     #  points: 5
     - name: Ammunition
       entries:
-      - id: CMMagazineRifleM4DMRAP
+      - id: CMMagazineRifleM4SPRAP
         points: 6
       - id: CMMagazineSMGM63AP
         points: 6
@@ -1374,7 +1374,7 @@
     #    CMM20MineBoxx4mines: 20P
     - name: Primary Ammunition
       entries:
-      - id: CMMagazineRifleM4DMRAP
+      - id: CMMagazineRifleM4SPRAP
         points: 6
       - id: CMMagazineSMGM63AP
         points: 6
@@ -1783,7 +1783,7 @@
     #  points: 5
     - name: Primary Ammunition
       entries:
-      - id: CMMagazineRifleM4DMRAP
+      - id: CMMagazineRifleM4SPRAP
         points: 10
       - id: CMMagazineSMGM63AP
         points: 10
