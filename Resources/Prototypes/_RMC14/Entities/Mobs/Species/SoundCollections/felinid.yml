@@ -3,7 +3,6 @@
   files:
   - /Audio/_RMC14/Voice/Felinid/cat_scream1.ogg
   - /Audio/_RMC14/Voice/Felinid/cat_scream2.ogg
-  - /Audio/_RMC14/Voice/Felinid/cat_scream3.ogg
 
 - type: soundCollection
   id: FelinidHisses
