@@ -22,3 +22,18 @@
   license: "CC0-1.0"
   copyright: "Original sound by https://freesound.org/people/Zabuhailo/ - fade in and out, converted to ogg."
   source: "https://freesound.org/people/Zabuhailo/sounds/146968/"
+
+- files: [cat_scream1.ogg]
+  license: "CC-BY-1.0"
+  copyright: "Original sound by https://freesound.org/people/queen_westeros/ - converted to ogg."
+  source: "https://freesound.org/people/queen_westeros/sounds/222590/"
+
+- files: [cat_scream2.ogg]
+  license: "CC-BY-1.0"
+  copyright: "Original sound by https://freesound.org/people/InspectorJ/ - converted to ogg."
+  source: "https://freesound.org/people/InspectorJ/sounds/415209/"
+
+- files: [cat_scream3.ogg]
+  license: "CC-BY-1.0"
+  copyright: "Original sound by https://freesound.org/people/Hamface/ - converted to ogg."
+  source: "https://freesound.org/people/Hamface/sounds/98669/"
