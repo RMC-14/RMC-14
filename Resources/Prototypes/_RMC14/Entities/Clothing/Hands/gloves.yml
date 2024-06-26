@@ -100,8 +100,6 @@
   - type: Fiber
     fiberMaterial: fibers-durathread
     fiberColor: fibers-brown
-  - type: Tag
-    id: RMCGlovesLatex
 
 - type: entity
   parent: CMHandsBlackMarine
