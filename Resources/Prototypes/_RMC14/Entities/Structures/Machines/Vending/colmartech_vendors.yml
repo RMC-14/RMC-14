@@ -1984,7 +1984,7 @@
       - id: CMPouchMagazinePistol
       - id: CMPouchPistol
     - name: Mask
-      choices: ( CMMask: 1 )
+      choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
@@ -2048,7 +2048,7 @@
       - id: CMPouchMagazinePistol
       - id: CMPouchPistol
     - name: Mask
-      choices: ( CMMask: 1 )
+      choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
