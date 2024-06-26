@@ -79,7 +79,7 @@ public abstract class SharedIVDripSystem : EntitySystem
         UpdateIVAppearance(iv);
     }
 
-    private static void OnIVDripCanDrag(Entity<IVDripComponent> iv, ref CanDragEvent args)
+    private void OnIVDripCanDrag(Entity<IVDripComponent> iv, ref CanDragEvent args)
     {
         args.Handled = true;
     }
