@@ -114,7 +114,7 @@
   components:
   - type: TimedDespawn
     lifetime: 0.4
-  - type: CMExplosionShockWave
+  - type: RMCExplosionShockWave
 
 - type: entity
   id: CMExplosionEffectShrapnel1

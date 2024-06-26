@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Content.Client._RMC14.Explosion;
 
-public sealed class CMExplosionShockWaveOverlay : Overlay, IEntityEventSubscriber
+public sealed class RMCExplosionShockWaveOverlay : Overlay, IEntityEventSubscriber
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -24,21 +24,12 @@ public sealed class CMExplosionShockWaveOverlay : Overlay, IEntityEventSubscribe
     /// </summary>
     public const int MaxCount = 10;
 
-    public CMExplosionShockWaveOverlay()
+    public RMCExplosionShockWaveOverlay()
     {
         IoCManager.InjectDependencies(this);
         _shader = _prototypeManager.Index<ShaderPrototype>("ShockWave").Instance().Duplicate();
     }
 
-        private readonly Vector2[] _positions = new Vector2[MaxCount];
-        private readonly float[] _falloffPower = new float[MaxCount];
-        private readonly float[] _sharpness = new float[MaxCount];
-        private readonly float[] _width = new float[MaxCount];
-        private int _count = 0;
-        protected override bool BeforeDraw(in OverlayDrawArgs args)
-        {
-            if (args.Viewport.Eye == null || _xformSystem is null && !_entMan.TrySystem(out _xformSystem))
-                return false;
     private readonly Vector2[] _positions = new Vector2[MaxCount];
     private readonly float[] _falloffPower = new float[MaxCount];
     private readonly float[] _sharpness = new float[MaxCount];
