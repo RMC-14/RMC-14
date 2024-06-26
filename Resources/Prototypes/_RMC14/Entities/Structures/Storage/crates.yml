@@ -60,6 +60,22 @@
   - type: EntityStorageVisuals
     stateDoorOpen: open
     stateDoorClosed: closed
+  - type: GenericVisualizer
+    visuals:
+      enum.PaperLabelVisuals.HasLabel:
+        enum.PaperLabelVisuals.Layer:
+          True: { visible: true }
+          False: { visible: false }
+      enum.PaperLabelVisuals.LabelType:
+        enum.PaperLabelVisuals.Layer:
+          Invoice: { state: invoice }
+  - type: PaperLabel
+    labelSlot:
+      insertVerbText: Attach Invoice
+      ejectVerbText: Remove Invoice
+      whitelist:
+        components:
+        - RequisitionsInvoice
   - type: ContainerContainer
     containers:
       entity_storage: !type:Container
