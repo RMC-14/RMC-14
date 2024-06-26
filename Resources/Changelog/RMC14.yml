@@ -1600,5 +1600,12 @@
   id: 192
   time: '2024-06-25T12:56:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2623
+- author: CaasGit
+  changes:
+  - message: blood bags no longer attempt to poke random objects
+    type: Fix
+  id: 193
+  time: '2024-06-26T04:29:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2615
 Name: RMC14
 Order: -1
