@@ -74,54 +74,54 @@ public sealed partial class VictimInfectedComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid? Hive;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public int FinalStage = 5;
 
     [DataField, AutoNetworkedField]
     public int CurrentStage = 0;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public int InitialSymptomsStart = 2;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public int MiddlingSymptomsStart = 3;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public int FinalSymptomsStart = 4;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public float ShakesChance = 0.06f;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public float MinorPainChance = 0.02f;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public float ThroatPainChance = 0.02f;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public float MuscleAcheChance = 0.01f;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public float SneezeCoughChance = 0.02f;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public float MajorPainChance = 0.02f;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public TimeSpan BaseKnockdownTime = TimeSpan.FromSeconds(1);
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public TimeSpan JitterTime = TimeSpan.FromSeconds(5);
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public ProtoId<EmotePrototype> SneezeId = "Sneeze";
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public ProtoId<EmotePrototype> CoughId = "Cough";
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public ProtoId<EmotePrototype> ScreamId = "Scream";
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public DamageSpecifier InfectionDamage = new() { DamageDict = new() { { "Blunt", 1 } } };
 }
