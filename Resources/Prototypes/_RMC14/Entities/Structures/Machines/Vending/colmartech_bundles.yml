@@ -117,23 +117,10 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleMilitaryPoliceApparel
-  name: standard military police apparel
+  name: Essential Police Set
   components:
   - type: CMVendorBundle
     bundle:
-    - CMHandsBlackMarine
-    - CMHeadsetMPO
-    - CMBootsBlackFilled
-    - CMHeadBeretRed
-
-- type: entity
-  parent: CMVendorBundleRiflemanApparel
-  id: RMCVendorBundleWardenApparel
-  name: standard warden apparel
-  components:
-  - type: CMVendorBundle
-    bundle:
-    - CMHandsBlackMarine
-    - CMHeadsetCMP
-    - CMBootsBlackFilled
-    - CMHeadCapWarden
+    - CMGlassesSecurity
+    - CMBeltSecurityFilled
+    - CMArmorHelmetM10MP

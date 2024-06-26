@@ -1948,12 +1948,20 @@
   - type: CMAutomatedVendor
     job: CMMilitaryPolice
     sections:
+    - name: Police Set (Mandatory)
+      entries:
+      - id: RMCVendorBundleMilitaryPoliceApparel
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
-      - id: RMCVendorBundleMilitaryPoliceApparel
+      - id: CMHandsBlackMarine
+      - id: CMHeadsetMPO
+      - id: CMBootsBlackFilled
+    - name: Armor
+      takeAll: CMStandard
+      entries:
       - id: CMArmorM2MP
-      - id: CMMRE
+      - id: CMHeadBeretRed
     - name: Handgun Case
 #     choices: { CMGunCase: 1 }
       entries: []
@@ -2012,12 +2020,20 @@
   - type: CMAutomatedVendor
     job: CMMilitaryPolice
     sections:
+    - name: Police Set (Mandatory)
+      entries:
+      - id: RMCVendorBundleMilitaryPoliceApparel
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
-      - id: RMCVendorBundleWardenApparel
+      - id: CMHandsBlackMarine
+      - id: CMHeadsetCMP
+      - id: CMBootsBlackFilled
+    - name: Armor
+      takeAll: CMStandard
+      entries:
       - id: CMArmorM3Warden
-      - id: CMMRE
+      - id: CMHeadCapWarden
     - name: Handgun Case
 #     choices: { CMGunCase: 1 }
       entries: []
@@ -2249,4 +2265,5 @@
 #        amount: 4
 #      - id: Squad Optic
 #        amount: 15
+
 
