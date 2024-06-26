@@ -94,7 +94,7 @@
     - id: RMCHandsM3G4
     - id: RMCArmorM3G4
     - id: RMCArmorHelmetM3G4 # hugger protection
-    - id: CMWeaponPistolVP78
+    - id: CMWeaponPistolMK80
     - id: CMMagazinePistolVP78
     - id: CMMagazinePistolVP78
 #    - id: CMBinoculars
