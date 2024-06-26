@@ -6,11 +6,11 @@ using Robust.Shared.Toolshed;
 
 namespace Content.Server._RMC14.Xenonids.Hive;
 
-[ToolshedCommand, AdminCommand(AdminFlags.Debug)]
-public sealed class AllXenosSetDefaultHiveCommand : ToolshedCommand
+[ToolshedCommand, AdminCommand(AdminFlags.VarEdit)]
+public sealed class HiveCommand : ToolshedCommand
 {
-    [CommandImplementation]
-    public void Run([CommandInvocationContext] IInvocationContext ctx)
+    [CommandImplementation("alldefault")]
+    public void AllDefault([CommandInvocationContext] IInvocationContext ctx)
     {
         EntityUid firstHive = default;
         var hives = EntityManager.EntityQueryEnumerator<HiveComponent>();
