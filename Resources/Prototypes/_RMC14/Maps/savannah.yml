@@ -3,6 +3,8 @@
   mapName: Savannah
   mapPath: /Maps/_RMC14/savannah.yml
   minPlayers: 0
+  maxRandomOffset: 0
+  randomRotation: false
   stations:
     Savannah:
       stationProto: StandardNanotrasenStation

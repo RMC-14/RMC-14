@@ -3,6 +3,8 @@
   mapName: Almayer
   mapPath: /Maps/_RMC14/almayer.yml
   minPlayers: 0
+  maxRandomOffset: 0
+  randomRotation: false
   stations:
     Almayer:
       stationProto: StandardNanotrasenStation
