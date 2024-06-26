@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.Attachable.Components;
 [Access(typeof(AttachableToggleableSystem))]
 public sealed partial class AttachableToggleableComponent : Component
 {
-    [ViewVariables]
+    [DataField, AutoNetworkedField]
     public bool Active = false;
 
     [DataField, AutoNetworkedField]
@@ -50,6 +50,6 @@ public sealed partial class AttachableToggleableComponent : Component
     [DataField, AutoNetworkedField]
     public SpriteSpecifier? IconActive;
 
-    [ViewVariables]
+    [DataField, AutoNetworkedField]
     public bool Attached = false;
 }

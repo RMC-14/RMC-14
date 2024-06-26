@@ -7,7 +7,7 @@
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
   - type: Tag
     tags:
-    - CMAttachableRail
+    - CMAttachmentRail
 
 - type: entity
   parent: CMRailAttachmentBase
@@ -79,8 +79,8 @@
   - type: AttachableToggleableSimpleActivate
   - type: Tag
     tags:
-    - CMAttachableRail
-    - CMAttachableFlashlight
+    - CMAttachmentRail
+    - CMAttachmentFlashlight
     - Flashlight
 
 - type: entity
@@ -111,8 +111,8 @@
     state: iffbarrel
   - type: Tag
     tags:
-    - CMAttachableRail
-    - CMAttachableSmartScope
+    - CMAttachmentRail
+    - CMAttachmentB8SmartScope
   - type: AttachableToggleable
     actionId: CMActionToggleScope
     attachedOnly: true
@@ -158,10 +158,10 @@
     state: sniperscope
 
 - type: Tag
-  id: CMAttachableRail
+  id: CMAttachmentRail
 
 - type: Tag
-  id: CMAttachableFlashlight
+  id: CMAttachmentFlashlight
 
 - type: Tag
-  id: CMAttachableSmartScope
+  id: CMAttachmentB8SmartScope
