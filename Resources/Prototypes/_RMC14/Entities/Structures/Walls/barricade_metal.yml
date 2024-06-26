@@ -259,6 +259,8 @@
     openTimeTwo: 0
     openingAnimationTime: 0
     closingAnimationTime: 0
+    # Allow you to close barricades while people are standing on them or multiple are wrenched in the same tile
+    performCollisionCheck: false
     openSound:
       path: /Audio/Items/ratchet.ogg
     closeSound:
@@ -326,6 +328,8 @@
     openTimeTwo: 0
     openingAnimationTime: 0
     closingAnimationTime: 0
+    # Allow you to close barricades while people are standing on them or multiple are wrenched in the same tile
+    performCollisionCheck: false
     openSound:
       path: /Audio/Items/ratchet.ogg
     closeSound:
