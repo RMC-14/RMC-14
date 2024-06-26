@@ -20,6 +20,8 @@
     solutionName: pen
     injectSound: /Audio/_RMC14/Medical/hypospray.ogg
     transferAmount: 15
+    injectOnly: true
+    onlyAffectsMobs: true
   - type: SolutionContainerManager
     solutions:
       pen:
