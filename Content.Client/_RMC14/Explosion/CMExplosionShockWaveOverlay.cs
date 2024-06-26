@@ -30,7 +30,7 @@ namespace Content.Client._RMC14.Explosion
             _shader = _prototypeManager.Index<ShaderPrototype>("ShockWave").Instance().Duplicate();
         }
 
-         private readonly Vector2[] _positions = new Vector2[MaxCount];
+        private readonly Vector2[] _positions = new Vector2[MaxCount];
         private readonly float[] _falloffPower = new float[MaxCount];
         private readonly float[] _sharpness = new float[MaxCount];
         private readonly float[] _width = new float[MaxCount];
