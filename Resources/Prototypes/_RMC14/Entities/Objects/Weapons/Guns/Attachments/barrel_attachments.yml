@@ -43,7 +43,7 @@
     offset: -0.04, 0
   - type: AttachableWeaponRangedMods
     modifiers:
-      damageFlat: -0.1
+      damageAddMult: -0.1
       recoilFlat: -1 # TODO RMC14 different recoil numbers per gun and hwen unwielded
 
 - type: entity

@@ -114,6 +114,9 @@
     - CMAttachmentRail
     - CMAttachmentB8SmartScope
   - type: AttachableToggleable
+    activateAction: true
+    needHand: true
+    breakOnMove: true
     actionId: CMActionToggleScope
     attachedOnly: true
     icon:

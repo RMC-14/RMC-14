@@ -5,49 +5,24 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Attachable;
 
-[Serializable, NetSerializable, DataDefinition]
-public sealed partial class AttachableSlot
-{
-    [DataField]
-    public bool Locked = false;
-    
-    [DataField]
-    public EntityWhitelist Whitelist;
-}
+[DataRecord, Serializable, NetSerializable]
+public record struct AttachableSlot(
+    bool Locked,
+    EntityWhitelist Whitelist
+);
 
-[Serializable, NetSerializable, DataDefinition]
-public sealed partial class AttachableWeaponMeleeModifierSet;
+[DataRecord, Serializable, NetSerializable]
+public record struct AttachableWeaponMeleeModifierSet;
 
-[Serializable, NetSerializable, DataDefinition]
-public sealed partial class AttachableWeaponRangedModifierSet
-{
-    [DataField]
-    public int ShotsPerBurst;
-
-    [DataField]
-    public FixedPoint2 DamageFlat = FixedPoint2.Zero;
-
-    [DataField]
-    public float RecoilFlat;
-
-    [DataField]
-    public double AngleIncrease = 1.0;
-
-    [DataField]
-    public double AngleDecay = 1.0;
-
-    [DataField]
-    public double MaxAngle = 1.0;
-
-    [DataField]
-    public double MinAngle = 1.0;
-
-    [DataField]
-    public float FireRate = 1.0f;
-
-    [DataField]
-    public float ProjectileSpeedFlat = 0;
-
-    [DataField]
-    public float ProjectileSpeedMultiplier = 1.0f;
-}
+[DataRecord, Serializable, NetSerializable]
+public record struct AttachableWeaponRangedModifierSet(
+    int ShotsPerBurstFlat,
+    FixedPoint2 DamageAddMult,
+    float RecoilFlat,
+    double AngleIncreaseFlat,
+    double AngleDecayFlat,
+    double MaxAngleFlat,
+    double MinAngleFlat,
+    float FireRateFlat,
+    float ProjectileSpeedFlat
+);

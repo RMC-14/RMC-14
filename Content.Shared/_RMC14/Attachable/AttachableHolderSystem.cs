@@ -47,8 +47,8 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, BoundUIOpenedEvent>(OnAttachableHolderUiOpened);
         SubscribeLocalEvent<AttachableHolderComponent, EntInsertedIntoContainerMessage>(OnAttached);
         SubscribeLocalEvent<AttachableHolderComponent, GetVerbsEvent<InteractionVerb>>(OnAttachableHolderGetVerbs);
-        SubscribeLocalEvent<AttachableHolderComponent, GotEquippedHandEvent>(OnHolderGotEquippedHand);
-        SubscribeLocalEvent<AttachableHolderComponent, GotUnequippedHandEvent>(OnHolderGotUnequippedHand);
+        SubscribeLocalEvent<AttachableHolderComponent, GotEquippedHandEvent>(RelayEvent);
+        SubscribeLocalEvent<AttachableHolderComponent, GotUnequippedHandEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GunRefreshModifiersEvent>(RelayEvent,
             after: new[] { typeof(WieldableSystem) });
         SubscribeLocalEvent<AttachableHolderComponent, InteractUsingEvent>(OnAttachableHolderInteractUsing);
@@ -57,6 +57,7 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, UniqueActionEvent>(OnAttachableHolderUniqueAction);
         SubscribeLocalEvent<AttachableHolderComponent, GetGunDamageModifierEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GunMuzzleFlashAttemptEvent>(RelayEvent);
+        SubscribeLocalEvent<AttachableHolderComponent, HandDeselectedEvent>(RelayEvent);
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.CMActivateAttachableBarrel,
@@ -557,35 +558,19 @@ public sealed class AttachableHolderSystem : EntitySystem
 
         return false;
     }
-
-    private void OnHolderGotEquippedHand(Entity<AttachableHolderComponent> holder, ref GotEquippedHandEvent args)
+    
+    public bool TryGetHolder(EntityUid attachable, [NotNullWhen(true)] out EntityUid? holderUid)
     {
-        var ev = new GrantAttachableActionsEvent(args.User);
-        foreach (var slotId in holder.Comp.Slots.Keys)
+        if (!TryComp(attachable, out TransformComponent? transformComponent) ||
+            !transformComponent.ParentUid.Valid ||
+            !HasComp<AttachableHolderComponent>(transformComponent.ParentUid))
         {
-            if (!_container.TryGetContainer(holder, slotId, out var container))
-                continue;
-
-            foreach (var contained in container.ContainedEntities)
-            {
-                RaiseLocalEvent(contained, ref ev);
-            }
+            holderUid = null;
+            return false;
         }
-    }
-
-    private void OnHolderGotUnequippedHand(Entity<AttachableHolderComponent> holder, ref GotUnequippedHandEvent args)
-    {
-        var ev = new RemoveAttachableActionsEvent(args.User);
-        foreach (var slotId in holder.Comp.Slots.Keys)
-        {
-            if (!_container.TryGetContainer(holder, slotId, out var container))
-                continue;
-
-            foreach (var contained in container.ContainedEntities)
-            {
-                RaiseLocalEvent(contained, ref ev);
-            }
-        }
+        
+        holderUid = transformComponent.ParentUid;
+        return true;
     }
 
     public void RelayEvent<T>(Entity<AttachableHolderComponent> holder, ref T args) where T : notnull

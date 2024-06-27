@@ -8,21 +8,50 @@ namespace Content.Shared._RMC14.Attachable.Components;
 [Access(typeof(AttachableToggleableSystem))]
 public sealed partial class AttachableToggleableComponent : Component
 {
+    /// <summary>
+    /// If set to true, upon being activated with its hotkey, the attachment will attempt to use its assigned action.
+    /// Used for scopes and other attachments that have actions that don't just activate the attachment's other functions.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool ActivateAction = false;
+    
+    /// <summary>
+    /// Whether the attachment is currently active.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public bool Active = false;
+
+    /// <summary>
+    /// If set to true, the attachment will deactivate upon switching hands.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool NeedHand = false;
+
+    /// <summary>
+    /// If set to true, the attachment will deactivate upon moving.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool BreakOnMove = false;
 
     [DataField, AutoNetworkedField]
     public float DoAfter;
 
     [DataField, AutoNetworkedField]
-    public bool NeedHand = true;
+    public bool DoAfterNeedHand = true;
 
     [DataField, AutoNetworkedField]
-    public bool BreakOnMove = true;
+    public bool DoAfterBreakOnMove = true;
 
+    /// <summary>
+    /// If set to true, this attachment will block some of the holder's functionality when active and perform it instead.
+    /// Used for attached weapons, like the UGL.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public bool SupercedeHolder = false;
 
+    /// <summary>
+    /// If set to true, this attachment's functions only work when it's attached to a holder.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public bool AttachedOnly = false;
 

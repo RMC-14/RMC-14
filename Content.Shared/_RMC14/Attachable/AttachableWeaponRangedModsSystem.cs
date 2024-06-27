@@ -25,17 +25,16 @@ public sealed class AttachableWeaponRangedModsSystem : EntitySystem
 
     private void OnRangedModsRefreshModifiers(Entity<AttachableWeaponRangedModsComponent> ent, ref GunRefreshModifiersEvent args)
     {
-        var set = ent.Comp.Modifiers;
+        var modSet = ent.Comp.Modifiers;
 
-        args.ShotsPerBurst += set.ShotsPerBurst;
-        args.CameraRecoilScalar += set.RecoilFlat;
-        args.AngleIncrease = new Angle(Math.Max(args.AngleIncrease.Theta * set.AngleIncrease, 0.0));
-        args.AngleDecay = new Angle(Math.Max(args.AngleDecay.Theta * set.AngleDecay, 0.0));
-        args.MinAngle = new Angle(Math.Max(args.MinAngle.Theta * set.MinAngle, 0.0));
-        args.MaxAngle = new Angle(Math.Max(args.MaxAngle.Theta * set.MaxAngle, args.MinAngle));
-        args.FireRate *= set.FireRate;
-        args.ProjectileSpeed += set.ProjectileSpeedFlat;
-        args.ProjectileSpeed *= set.ProjectileSpeedMultiplier;
+        args.ShotsPerBurst += modSet.ShotsPerBurstFlat;
+        args.CameraRecoilScalar += modSet.RecoilFlat;
+        args.AngleIncrease = Angle.FromDegrees(Math.Max(args.AngleIncrease.Degrees + modSet.AngleIncreaseFlat, 0.0));
+        args.AngleDecay = Angle.FromDegrees(Math.Max(args.AngleDecay.Degrees + modSet.AngleDecayFlat, 0.0));
+        args.MinAngle = Angle.FromDegrees(Math.Max(args.MinAngle.Degrees + modSet.MinAngleFlat, 0.0));
+        args.MaxAngle = Angle.FromDegrees(Math.Max(args.MaxAngle.Degrees + modSet.MaxAngleFlat, args.MinAngle));
+        args.FireRate = Math.Max(args.FireRate + modSet.FireRateFlat, 0.1f);
+        args.ProjectileSpeed += modSet.ProjectileSpeedFlat;
     }
 
     private void OnRangedModsAltered(Entity<AttachableWeaponRangedModsComponent> attachable,
@@ -46,24 +45,23 @@ public sealed class AttachableWeaponRangedModsSystem : EntitySystem
 
     private void OnRangedModsGetGunDamage(Entity<AttachableWeaponRangedModsComponent> ent, ref GetGunDamageModifierEvent args)
     {
-        args.Multiplier += ent.Comp.Modifiers.DamageFlat;
+        args.Multiplier += ent.Comp.Modifiers.DamageAddMult;
     }
 
     private void OnWieldedRangedModsRefreshModifiers(Entity<AttachableWeaponWieldedRangedModsComponent> ent, ref GunRefreshModifiersEvent args)
     {
-        var set = TryComp(ent, out WieldableComponent? wieldable) && wieldable.Wielded
+        var modSet = TryComp(ent, out WieldableComponent? wieldable) && wieldable.Wielded
             ? ent.Comp.Wielded
             : ent.Comp.Unwielded;
 
-        args.ShotsPerBurst += set.ShotsPerBurst;
-        args.CameraRecoilScalar += set.RecoilFlat;
-        args.AngleIncrease = new Angle(Math.Max(args.AngleIncrease.Theta * set.AngleIncrease, 0.0));
-        args.AngleDecay = new Angle(Math.Max(args.AngleDecay.Theta * set.AngleDecay, 0.0));
-        args.MinAngle = new Angle(Math.Max(args.MinAngle.Theta * set.MinAngle, 0.0));
-        args.MaxAngle = new Angle(Math.Max(args.MaxAngle.Theta * set.MaxAngle, args.MinAngle));
-        args.FireRate *= set.FireRate;
-        args.ProjectileSpeed += set.ProjectileSpeedFlat;
-        args.ProjectileSpeed *= set.ProjectileSpeedMultiplier;
+        args.ShotsPerBurst += modSet.ShotsPerBurstFlat;
+        args.CameraRecoilScalar += modSet.RecoilFlat;
+        args.AngleIncrease = Angle.FromDegrees(Math.Max(args.AngleIncrease.Degrees + modSet.AngleIncreaseFlat, 0.0));
+        args.AngleDecay = Angle.FromDegrees(Math.Max(args.AngleDecay.Degrees + modSet.AngleDecayFlat, 0.0));
+        args.MinAngle = Angle.FromDegrees(Math.Max(args.MinAngle.Degrees + modSet.MinAngleFlat, 0.0));
+        args.MaxAngle = Angle.FromDegrees(Math.Max(args.MaxAngle.Degrees + modSet.MaxAngleFlat, args.MinAngle));
+        args.FireRate = Math.Max(args.FireRate + modSet.FireRateFlat, 0.1f);
+        args.ProjectileSpeed += modSet.ProjectileSpeedFlat;
     }
 
     private void OnWieldedRangedModsAttachableAltered(Entity<AttachableWeaponWieldedRangedModsComponent> ent, ref AttachableAlteredEvent args)
@@ -73,11 +71,11 @@ public sealed class AttachableWeaponRangedModsSystem : EntitySystem
 
     private void OnWieldedRangedModsGetGunDamage(Entity<AttachableWeaponWieldedRangedModsComponent> ent, ref GetGunDamageModifierEvent args)
     {
-        var set = TryComp(ent, out WieldableComponent? wieldable) && wieldable.Wielded
+        var modSet = TryComp(ent, out WieldableComponent? wieldable) && wieldable.Wielded
             ? ent.Comp.Wielded
             : ent.Comp.Unwielded;
 
-        args.Multiplier += set.DamageFlat;
+        args.Multiplier += modSet.DamageAddMult;
     }
 
     private void OnWeaponModifiersAltered(Entity<AttachableWeaponRangedModsToggleableComponent> attachable, ref AttachableAlteredEvent args)
