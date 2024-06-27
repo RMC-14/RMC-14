@@ -93,16 +93,16 @@ public sealed partial class VictimInfectedComponent : Component
     public float ShakesChance = 0.08f;
 
     [DataField]
-    public float MinorPainChance = 0.04f;
+    public float MinorPainChance = 0.03f;
 
     [DataField]
-    public float ThroatPainChance = 0.06f;
+    public float ThroatPainChance = 0.015f;
 
     [DataField]
-    public float MuscleAcheChance = 0.06f;
+    public float MuscleAcheChance = 0.015f;
 
     [DataField]
-    public float SneezeCoughChance = 0.06f;
+    public float SneezeCoughChance = 0.015f;
 
     [DataField]
     public float MajorPainChance = 0.1f;
