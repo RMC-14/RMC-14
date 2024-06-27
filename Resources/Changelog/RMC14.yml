@@ -1639,5 +1639,23 @@
   id: 197
   time: '2024-06-26T23:37:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2571
+- author: DrSmugleaf
+  changes:
+  - message: Ghosting while in crit will now give you a warning that you won't be
+      able to return to your body. Ghosting while dead will still allow you to return
+      if defibbed.
+    type: Tweak
+  - message: Replaced succumb, last words and fake death with the new ghost action.
+    type: Tweak
+  id: 198
+  time: '2024-06-27T05:04:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2644
+- author: DrSmugleaf
+  changes:
+  - message: Humanoid voicelines can now be individually toggled for each species.
+    type: Tweak
+  id: 199
+  time: '2024-06-27T05:04:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2641
 Name: RMC14
 Order: -1
