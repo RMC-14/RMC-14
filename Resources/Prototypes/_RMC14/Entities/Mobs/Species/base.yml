@@ -109,6 +109,9 @@
       enum.HolocardChangeUIKey.Key:
         type: HolocardChangeBoundUserInterface
         interactionRange: 0
+      enum.CMMobStateActionsUI.Key:
+        type: CMGhostActionBui
+        requireInputValidation: false
   - type: Infectable
   - type: Tackleable
   - type: Tackle
@@ -155,3 +158,9 @@
       0: Alive
       125: Critical
       200: Dead
+  - type: MobStateActions
+    actions:
+      Critical:
+      - CMActionGhost
+      Dead:
+      - CMActionGhost

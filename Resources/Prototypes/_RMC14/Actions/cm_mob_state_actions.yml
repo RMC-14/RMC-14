@@ -1,0 +1,13 @@
+﻿- type: entity
+  id: CMActionGhost
+  name: Ghost
+  description: Become a Ghost.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    checkCanInteract: false
+    checkConsciousness: false
+    icon:
+      sprite: Mobs/Ghosts/ghost_human.rsi
+      state: icon
+    event: !type:CMGhostActionEvent
