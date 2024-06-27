@@ -375,7 +375,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                 int stage = Math.Max((int) ((infected.BurstDelay - (infected.BurstAt - time)) / infected.BurstDelay * infected.FinalStage), infected.CurrentStage);
                 if (stage != infected.CurrentStage)
                     infected.CurrentStage = stage;
-                
+
                 // Warn on the last to final stage of a burst
                 if (!infected.DidBurstWarning && stage == infected.FinalStage - 1)
                 {
@@ -387,7 +387,8 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                 }
                 // Symptoms only start after the IntialSymptomStart is passed (by default, 2)
                 // And continue until burst time is reached
-                // TODO after burst time is reached should be when the larva is in a host and is given time to break out
+                // TODO after burst time is reached, the larva is made and stage set to 6, have wait time for someone to take the larva
+                // Stage 7 should auto-burst the victim if we get nobody in stage 6
                 if (stage >= infected.FinalSymptomsStart)
                 {
                     if (_random.Prob(infected.MajorPainChance * frameTime))
@@ -445,6 +446,8 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             RemCompDeferred<VictimInfectedComponent>(uid);
 
             var spawned = SpawnAtPosition(infected.BurstSpawn, xform.Coordinates);
+            infected.CurrentStage = 6;
+
             _xeno.SetHive(spawned, infected.Hive);
 
             EnsureComp<VictimBurstComponent>(uid);
