@@ -387,8 +387,8 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                 }
                 // Symptoms only start after the IntialSymptomStart is passed (by default, 2)
                 // And continue until burst time is reached
-                // TODO after burst time is reached, the larva is made and stage set to 6, have wait time for someone to take the larva
-                // Stage 7 should auto-burst the victim if we get nobody in stage 6
+                // TODO after burst time is reached, the larva is made and stage set to 6, have wait time for someone to take the larva.
+                // During this stage the victim should be in intense pain, and auto-burst after some time
                 if (stage >= infected.FinalSymptomsStart)
                 {
                     if (_random.Prob(infected.MajorPainChance * frameTime))
@@ -398,7 +398,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                         if (_random.Prob(0.5f))
                         {
                             var ev = new VictimInfectedEmoteEvent(infected.ScreamId);
-                            RaiseLocalEvent(uid, ev);
+                            RaiseLocalEvent(uid, ref ev);
                         }
                     }
 
@@ -423,7 +423,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                     {
                         var emote = _random.Pick(new List<ProtoId<EmotePrototype>> { infected.SneezeId, infected.CoughId });
                         var ev = new VictimInfectedEmoteEvent(emote);
-                        RaiseLocalEvent(uid, ev);
+                        RaiseLocalEvent(uid, ref ev);
                     }
 
                     if (_random.Prob((infected.ShakesChance * 5 / 6) * frameTime))
