@@ -1665,5 +1665,12 @@
   id: 200
   time: '2024-06-27T05:08:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2640
+- author: Vermidia
+  changes:
+  - message: Marines will now experience symptoms of being infected.
+    type: Add
+  id: 201
+  time: '2024-06-27T06:49:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2553
 Name: RMC14
 Order: -1
