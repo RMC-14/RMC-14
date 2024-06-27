@@ -58,22 +58,7 @@
   - type: IconSmooth
     key: walls
     mode: NoSprite
-  - type: DoorSignalControl
-  - type: DeviceNetwork
-    deviceNetId: Wireless
-    receiveFrequencyId: BasicDevice
-  - type: WirelessNetworkConnection
-    range: 200
-  - type: DeviceLinkSink
-    ports:
-      - Open
-      - Close
-      - Toggle
-  - type: DeviceLinkSource
-    ports:
-    - DoorStatus
-    lastSignals:
-      DoorStatus: false
+  # TODO RMC14 Add linkable buttons and open/close logic to the shutters, thanks
 
 - type: entity
   parent: RMCShutterBase
