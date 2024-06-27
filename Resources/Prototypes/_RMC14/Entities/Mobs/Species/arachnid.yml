@@ -15,12 +15,12 @@
   - type: Speech
     speechVerb: Arachnid
     speechSounds: Arachnid
+    allowedEmotes: ['Click', 'Chitter']
   - type: Vocal
     sounds:
       Male: UnisexArachnid
       Female: UnisexArachnid
       Unsexed: UnisexArachnid
-    allowedEmotes: ['Click', 'Chitter']
   - type: TypingIndicator
     proto: spider
   - type: MeleeWeapon
