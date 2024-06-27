@@ -40,7 +40,6 @@
     - CMAttachmentBarrel
     - CMAttachmentRecoilCompensator
   - type: AttachableVisuals
-    offset: -0.04, 0
   - type: AttachableWeaponRangedMods
     modifiers:
       damageAddMult: -0.1
@@ -60,7 +59,7 @@
     - CMAttachmentBarrel
     - CMAttachmentSuppressor
   - type: AttachableVisuals
-    offset: -0.03, 0.035
+    offset: 0.0, -0.01
   - type: AttachableSilencer
 
 - type: Tag

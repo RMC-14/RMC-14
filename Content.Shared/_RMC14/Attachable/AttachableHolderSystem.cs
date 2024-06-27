@@ -12,6 +12,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Verbs;
+using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -58,6 +59,7 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, GetGunDamageModifierEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GunMuzzleFlashAttemptEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, HandDeselectedEvent>(RelayEvent);
+        SubscribeLocalEvent<AttachableHolderComponent, MeleeHitEvent>(RelayEvent);
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.CMActivateAttachableBarrel,

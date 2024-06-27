@@ -1,3 +1,4 @@
+using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Whitelist;
 using Robust.Shared.Serialization;
@@ -12,7 +13,9 @@ public record struct AttachableSlot(
 );
 
 [DataRecord, Serializable, NetSerializable]
-public record struct AttachableWeaponMeleeModifierSet;
+public record struct AttachableWeaponMeleeModifierSet(
+    DamageSpecifier? BonusDamage
+);
 
 [DataRecord, Serializable, NetSerializable]
 public record struct AttachableWeaponRangedModifierSet(

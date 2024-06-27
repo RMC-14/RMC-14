@@ -16,9 +16,9 @@ public sealed class AttachableWeaponRangedModsSystem : EntitySystem
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableAlteredEvent>(OnRangedModsAltered);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, GetGunDamageModifierEvent>(OnRangedModsGetGunDamage);
 
-        SubscribeLocalEvent<AttachableWeaponWieldedRangedModsComponent, GunRefreshModifiersEvent>(OnWieldedRangedModsRefreshModifiers);
-        SubscribeLocalEvent<AttachableWeaponWieldedRangedModsComponent, AttachableAlteredEvent>(OnWieldedRangedModsAttachableAltered);
-        SubscribeLocalEvent<AttachableWeaponWieldedRangedModsComponent, GetGunDamageModifierEvent>(OnWieldedRangedModsGetGunDamage);
+        SubscribeLocalEvent<AttachableWeaponRangedModsWieldedComponent, GunRefreshModifiersEvent>(OnWieldedRangedModsRefreshModifiers);
+        SubscribeLocalEvent<AttachableWeaponRangedModsWieldedComponent, AttachableAlteredEvent>(OnWieldedRangedModsAttachableAltered);
+        SubscribeLocalEvent<AttachableWeaponRangedModsWieldedComponent, GetGunDamageModifierEvent>(OnWieldedRangedModsGetGunDamage);
 
         SubscribeLocalEvent<AttachableWeaponRangedModsToggleableComponent, GunRefreshModifiersEvent>(OnToggleableRangedModsRefreshModifiers);
         SubscribeLocalEvent<AttachableWeaponRangedModsToggleableComponent, AttachableAlteredEvent>(OnToggleableRangedModsAttachableAltered);
@@ -27,9 +27,7 @@ public sealed class AttachableWeaponRangedModsSystem : EntitySystem
 
     private void OnRangedModsRefreshModifiers(Entity<AttachableWeaponRangedModsComponent> ent, ref GunRefreshModifiersEvent args)
     {
-        var modSet = ent.Comp.Modifiers;
-
-        ApplyModifierSet(modSet, ref args);
+        ApplyModifierSet(ent.Comp.Modifiers, ref args);
     }
 
     private void OnRangedModsAltered(Entity<AttachableWeaponRangedModsComponent> attachable,
@@ -43,7 +41,7 @@ public sealed class AttachableWeaponRangedModsSystem : EntitySystem
         args.Multiplier += ent.Comp.Modifiers.DamageAddMult;
     }
 
-    private void OnWieldedRangedModsRefreshModifiers(Entity<AttachableWeaponWieldedRangedModsComponent> ent, ref GunRefreshModifiersEvent args)
+    private void OnWieldedRangedModsRefreshModifiers(Entity<AttachableWeaponRangedModsWieldedComponent> ent, ref GunRefreshModifiersEvent args)
     {
         var modSet = TryComp(ent, out WieldableComponent? wieldable) && wieldable.Wielded
             ? ent.Comp.Wielded
@@ -52,12 +50,12 @@ public sealed class AttachableWeaponRangedModsSystem : EntitySystem
         ApplyModifierSet(modSet, ref args);
     }
 
-    private void OnWieldedRangedModsAttachableAltered(Entity<AttachableWeaponWieldedRangedModsComponent> ent, ref AttachableAlteredEvent args)
+    private void OnWieldedRangedModsAttachableAltered(Entity<AttachableWeaponRangedModsWieldedComponent> ent, ref AttachableAlteredEvent args)
     {
         _cmGunSystem.RefreshGunDamageMultiplier(args.Holder);
     }
 
-    private void OnWieldedRangedModsGetGunDamage(Entity<AttachableWeaponWieldedRangedModsComponent> ent, ref GetGunDamageModifierEvent args)
+    private void OnWieldedRangedModsGetGunDamage(Entity<AttachableWeaponRangedModsWieldedComponent> ent, ref GetGunDamageModifierEvent args)
     {
         var modSet = TryComp(ent, out WieldableComponent? wieldable) && wieldable.Wielded
             ? ent.Comp.Wielded

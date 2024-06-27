@@ -90,6 +90,7 @@
           tags:
           - CMAttachmentExtendedBarrel
           - CMAttachmentSuppressor
+          - CMM5Bayonet
       cm-aslot-rail:
         whitelist:
           tags:
@@ -100,7 +101,7 @@
           - CMAttachmentU7UnderbarrelShotgun
   - type: AttachableHolderVisuals
     offsets:
-      cm-aslot-barrel: 0.5, 0.03
+      cm-aslot-barrel: 0.94, 0.03
       cm-aslot-rail: 0.0, 0.20
       cm-aslot-underbarrel: 0.19, -0.14
 

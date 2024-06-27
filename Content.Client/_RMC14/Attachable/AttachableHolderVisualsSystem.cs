@@ -77,13 +77,10 @@ public sealed class AttachableHolderVisualsSystem : EntitySystem
         if (attachable.Comp.Rsi is { } rsiPath)
         {
             rsi = rsiPath;
-
-            if (attachable.Comp.Prefix == null)
-                state = slotId;
         }
 
         if (!string.IsNullOrWhiteSpace(attachable.Comp.Prefix))
-            state = attachable.Comp.Prefix + state;
+            state = attachable.Comp.Prefix;
 
         if (attachable.Comp.IncludeSlotName)
             state += slotId;
