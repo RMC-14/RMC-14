@@ -498,24 +498,26 @@
       effects:
       - !type:EqualHealthChange
         damage:
-        - Brute: -1.5
+        - Brute: -0.75
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 15
         damage:
           groups:
-            Burn: 1.5
+            Burn: 0.375
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 25
         damage:
           groups:
-            Burn: 9
-            Toxin: 3
+            Burn: 3.75
+            Toxin: 1.5
 
 # TODO RMC14 other effects
+# TODO RMC14 progressive eye healing
+# TODO RMC14 brain damage over 50u
 - type: reagent
   parent: [ CMReagent, CMDylovene ]
   id: CMImidazoline
@@ -533,18 +535,19 @@
           min: 30
         damage:
           groups:
-            Toxin: 1
+            Toxin: 0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 50
         damage:
           groups:
-            Brute: 1
-            Burn: 1
-            Toxin: 4
+            Brute: 0.5
+            Burn: 0.5
+            Toxin: 2
 
 # TODO RMC14 other effects
+# TODO RMC14 heal cloneloss
 - type: reagent
   parent: [ CMReagent, CMCryoxadone ]
   id: CMClonexadone
@@ -560,6 +563,6 @@
         - !type:Temperature
           max: 170
         damage:
-        - Toxin: -6
-        - Brute: -6
-        - Burn: -6
+        - Toxin: -3.75
+        - Brute: -2.25
+        - Burn: -3
