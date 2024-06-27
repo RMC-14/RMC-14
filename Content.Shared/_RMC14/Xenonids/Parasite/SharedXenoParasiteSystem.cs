@@ -381,7 +381,10 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                 // Percentage of how far along we out to burst time times the number of stages, truncated. You can't go back a stage once you've reached one
                 int stage = Math.Max((int) ((infected.BurstDelay - (infected.BurstAt - time)) / infected.BurstDelay * infected.FinalStage), infected.CurrentStage);
                 if (stage != infected.CurrentStage)
+                {
                     infected.CurrentStage = stage;
+                    Dirty(uid, infected);
+                }
 
                 // Warn on the last to final stage of a burst
                 if (!infected.DidBurstWarning && stage == infected.FinalStage - 1)
@@ -454,6 +457,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
             var spawned = SpawnAtPosition(infected.BurstSpawn, xform.Coordinates);
             infected.CurrentStage = 6;
+            Dirty(uid, infected);
 
             _xeno.SetHive(spawned, infected.Hive);
 
