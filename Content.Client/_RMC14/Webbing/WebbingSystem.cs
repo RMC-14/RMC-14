@@ -23,6 +23,8 @@ public sealed class WebbingSystem : SharedWebbingSystem
             after: [typeof(ClientClothingSystem)]);
         SubscribeLocalEvent<WebbingClothingComponent, GotEquippedEvent>(OnClothingEquipped);
         SubscribeLocalEvent<WebbingClothingComponent, GotUnequippedEvent>(OnClothingUnequipped);
+
+        SubscribeLocalEvent<WebbingTransferComponent, ComponentRemove>(OnWebbingTransferRemove);
     }
 
     private void OnWebbingClothingEquipmentVisuals(Entity<WebbingClothingComponent> ent, ref GetEquipmentVisualsEvent args)
@@ -96,5 +98,10 @@ public sealed class WebbingSystem : SharedWebbingSystem
 
         if (_player.LocalEntity == args.Container.Owner)
             PlayerWebbingUpdated?.Invoke();
+    }
+
+    private void OnWebbingTransferRemove(Entity<WebbingTransferComponent> ent, ref ComponentRemove args)
+    {
+        PlayerWebbingUpdated?.Invoke();
     }
 }
