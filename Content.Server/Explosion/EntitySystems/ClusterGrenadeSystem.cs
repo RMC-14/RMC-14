@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Server.Explosion.Components;
+using Robust.Shared.Spawners;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared.Explosion.Components;
@@ -122,8 +123,9 @@ public sealed class ClusterGrenadeSystem : EntitySystem
 
                 var clusterEv = new CMClusterSpawnedEvent(_spawned);
                 RaiseLocalEvent(uid, ref clusterEv);
-                // delete the empty shell of the clusterbomb
-                Del(uid);
+                //del or qdel causes lag out the ass for shrapnel type clusters.
+                var despawn = AddComp<TimedDespawnComponent>(uid);
+                despawn.Lifetime = 0.01f;
             }
         }
     }

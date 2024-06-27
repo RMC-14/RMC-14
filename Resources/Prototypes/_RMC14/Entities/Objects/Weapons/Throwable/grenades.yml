@@ -82,6 +82,7 @@
     fillPrototype: CMProjectileShrapnel
     maxGrenadesCount: 48
     grenadeType: enum.GrenadeType.Shoot
+    triggerGrenades: false
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
