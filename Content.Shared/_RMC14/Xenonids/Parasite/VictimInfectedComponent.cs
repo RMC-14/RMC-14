@@ -75,7 +75,7 @@ public sealed partial class VictimInfectedComponent : Component
     public EntityUid? Hive;
 
     [DataField]
-    public int FinalStage = 6;
+    public int FinalStage = 5;
 
     [DataField, AutoNetworkedField]
     public int CurrentStage = 0;
@@ -90,22 +90,25 @@ public sealed partial class VictimInfectedComponent : Component
     public int FinalSymptomsStart = 4;
 
     [DataField]
-    public float ShakesChance = 0.06f;
+    public float ShakesChance = 0.08f;
 
     [DataField]
-    public float MinorPainChance = 0.02f;
+    public float MinorPainChance = 0.04f;
 
     [DataField]
-    public float ThroatPainChance = 0.02f;
+    public float ThroatPainChance = 0.06f;
 
     [DataField]
-    public float MuscleAcheChance = 0.01f;
+    public float MuscleAcheChance = 0.06f;
 
     [DataField]
-    public float SneezeCoughChance = 0.02f;
+    public float SneezeCoughChance = 0.06f;
 
     [DataField]
-    public float MajorPainChance = 0.02f;
+    public float MajorPainChance = 0.1f;
+
+    [DataField]
+    public bool DidBurstWarning = false;
 
     [DataField]
     public TimeSpan BaseKnockdownTime = TimeSpan.FromSeconds(1);

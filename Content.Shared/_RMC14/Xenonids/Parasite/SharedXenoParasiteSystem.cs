@@ -372,11 +372,23 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
                 // Stages
                 // Percentage of how far along we out to burst time times the number of stages, truncated. You can't go back a stage once you've reached one
-                int stage = Math.Max((ContentHelpers.RoundToLevels(time.TotalSeconds, infected.BurstAt.TotalSeconds, infected.FinalStage)) - 1, infected.CurrentStage);
-                if(stage != infected.CurrentStage)
+                int stage = Math.Max((int) ((infected.BurstDelay - (infected.BurstAt - time)) / infected.BurstDelay * infected.FinalStage), infected.CurrentStage);
+                if (stage != infected.CurrentStage)
                     infected.CurrentStage = stage;
+                
+                // Warn on the last to final stage of a burst
+                if (!infected.DidBurstWarning && stage == infected.FinalStage - 1)
+                {
+                    _popup.PopupEntity(Loc.GetString("cm-xeno-infection-burst-soon-self"), uid, uid, PopupType.MediumCaution);
+                    _popup.PopupEntity(Loc.GetString("cm-xeno-infection-burst-soon", ("victim", uid)), uid, Filter.PvsExcept(uid), true, PopupType.MediumCaution);
+                    _jitter.DoJitter(uid, infected.JitterTime * 6, false);
+                    infected.DidBurstWarning = true;
+                    continue;
+                }
                 // Symptoms only start after the IntialSymptomStart is passed (by default, 2)
-                if(stage >= infected.FinalSymptomsStart)
+                // And continue until burst time is reached
+                // TODO after burst time is reached should be when the larva is in a host and is given time to break out
+                if (stage >= infected.FinalSymptomsStart)
                 {
                     if (_random.Prob(infected.MajorPainChance * frameTime))
                     {
@@ -390,7 +402,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                     }
 
                     if (_random.Prob(infected.ShakesChance * frameTime))
-                        InfectionShakes(uid, infected, infected.BaseKnockdownTime * 3);
+                        InfectionShakes(uid, infected, infected.BaseKnockdownTime * 4, infected.JitterTime * 4);
                 }
                 else if (stage >= infected.MiddlingSymptomsStart)
                 {
@@ -414,7 +426,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                     }
 
                     if (_random.Prob((infected.ShakesChance * 5 / 6) * frameTime))
-                        InfectionShakes(uid, infected, infected.BaseKnockdownTime * 2);
+                        InfectionShakes(uid, infected, infected.BaseKnockdownTime * 2, infected.JitterTime * 2);
                 }
                 else if (stage >= infected.InitialSymptomsStart)
                 {
@@ -425,7 +437,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                     }
 
                     if (_random.Prob((infected.ShakesChance * 2 / 3) * frameTime))
-                        InfectionShakes(uid, infected, infected.BaseKnockdownTime);
+                        InfectionShakes(uid, infected, infected.BaseKnockdownTime, infected.JitterTime);
                 }
                 continue;
             }
@@ -441,14 +453,14 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         }
     }
     // Shakes chances decrease as symptom stages progress, and they get longer
-    private void InfectionShakes(EntityUid victim, VictimInfectedComponent infected, TimeSpan knockdownTime)
+    private void InfectionShakes(EntityUid victim, VictimInfectedComponent infected, TimeSpan knockdownTime, TimeSpan jitterTime)
     {
         // Don't activate when unconscious
         if (_mobState.IsIncapacitated(victim))
             return;
         //TODO Minor limb damage and causes pain
         _stun.TryParalyze(victim, knockdownTime, false);
-        _jitter.DoJitter(victim, infected.JitterTime, false);
+        _jitter.DoJitter(victim, jitterTime, false);
         _popup.PopupEntity(Loc.GetString("cm-xeno-infection-shakes-self"), victim, victim, PopupType.MediumCaution);
         _popup.PopupEntity(Loc.GetString("cm-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.MediumCaution);
         _damage.TryChangeDamage(victim, infected.InfectionDamage, true, false);

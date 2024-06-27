@@ -11,3 +11,6 @@ cm-xeno-infection-muscle-ache = Your muscles ache.
 cm-xeno-infection-majorpain-chest = Your chest hurts badly.
 cm-xeno-infection-majorpain-breathing = It becomes difficult to breathe.
 cm-xeno-infection-majorpain-heart = Your heart starts beating rapidly, and each beat is painful.
+
+cm-xeno-infection-burst-soon = {CAPITALIZE($victim)} starts shaking violently!
+cm-xeno-infection-burst-soon-self = You feel something crawling through your insides! 
