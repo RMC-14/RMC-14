@@ -69,7 +69,7 @@ public sealed class StorageSystem : SharedStorageSystem
 
     public void CloseStorageWindow(Entity<StorageComponent?> entity)
     {
-        if (!Resolve(entity, ref entity.Comp))
+        if (!Resolve(entity, ref entity.Comp, false))
             return;
 
         if (!_openStorages.Contains((entity, entity.Comp)))

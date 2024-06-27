@@ -1,6 +1,9 @@
 ﻿using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Inventory;
+using Content.Shared.Mind;
+using Content.Shared.NameModifier.EntitySystems;
+using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Robust.Shared.Prototypes;
 
@@ -10,6 +13,8 @@ public sealed class SquadSystem : EntitySystem
 {
     [Dependency] private readonly SharedIdCardSystem _id = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedJobSystem _job = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
     public override void Initialize()
@@ -25,7 +30,7 @@ public sealed class SquadSystem : EntitySystem
         args.BackgroundColor = member.Comp.BackgroundColor;
     }
 
-    public void AssignSquad(EntityUid marine, Entity<SquadTeamComponent?> team, JobComponent? job)
+    public void AssignSquad(EntityUid marine, Entity<SquadTeamComponent?> team, ProtoId<JobPrototype>? job)
     {
         if (!Resolve(team, ref team.Comp))
             return;
@@ -39,13 +44,26 @@ public sealed class SquadSystem : EntitySystem
         var grant = EnsureComp<SquadGrantAccessComponent>(marine);
         grant.AccessLevel = team.Comp.AccessLevel;
 
-        if (job != null &&
-            _prototypes.TryIndex(job.Prototype, out var jobProto))
+        if (_prototypes.TryIndex(job, out var jobProto))
         {
             grant.RoleName = $"{Name(team)} {jobProto.LocalizedName}";
         }
+        else if (_mind.TryGetMind(marine, out var mindId, out _) &&
+                 _job.MindTryGetJobName(mindId, out var name))
+        {
+            MarineSetTitle(marine, $"{Name(team)} {name}");
+        }
 
         Dirty(marine, grant);
+    }
+
+    private void MarineSetTitle(EntityUid marine, string title)
+    {
+        foreach (var item in _inventory.GetHandOrInventoryEntities(marine))
+        {
+            if (TryComp(item, out IdCardComponent? idCard))
+                _id.TryChangeJobTitle(item, title, idCard);
+        }
     }
 
     public override void Update(float frameTime)
@@ -53,6 +71,9 @@ public sealed class SquadSystem : EntitySystem
         var query = EntityQueryEnumerator<SquadGrantAccessComponent>();
         while (query.MoveNext(out var uid, out var grant))
         {
+            if (grant.RoleName != null)
+                MarineSetTitle(uid, grant.RoleName);
+
             foreach (var item in _inventory.GetHandOrInventoryEntities(uid))
             {
                 if (grant.AccessLevel is { Id.Length: > 0 } accessLevel &&
@@ -62,13 +83,10 @@ public sealed class SquadSystem : EntitySystem
                     Dirty(item, access);
                 }
 
-                if (TryComp(item, out IdCardComponent? idCard))
+                if (HasComp<IdCardComponent>(item) &&
+                    !EnsureComp<IdCardOwnerComponent>(item, out var owner))
                 {
-                    if (grant.RoleName != null)
-                        _id.TryChangeJobTitle(item, grant.RoleName, idCard);
-
-                    if (!EnsureComp<IdCardOwnerComponent>(item, out var owner))
-                        owner.Id = uid;
+                    owner.Id = uid;
                 }
             }
 

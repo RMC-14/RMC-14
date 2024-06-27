@@ -1,0 +1,77 @@
+- type: emote
+  id: Hiss
+  name: chat-emote-name-hiss
+  category: Vocal
+  icon: Interface/Actions/scream.png
+  chatMessages: [hisses.]
+  chatTriggers:
+    - hiss
+    - hisses
+    - hisses.
+    - hisses!
+    - hissing
+    - hissed
+
+- type: emote
+  id: Meow
+  name: chat-emote-name-meow
+  category: Vocal
+  icon: Interface/Actions/scream.png
+  chatMessages: [meows.]
+  chatTriggers:
+    - meow
+    - meows
+    - meows.
+    - meows!
+    - meowing
+    - meowed
+    - miau
+    - miaus
+    - miaus.
+    - miaus!
+    - nya
+    - nyas
+    - nyas.
+    - nyas!
+
+- type: emote
+  id: Mew
+  name: chat-emote-name-mew
+  category: Vocal
+  icon: Interface/Actions/scream.png
+  chatMessages: [mews.]
+  chatTriggers:
+    - mew
+    - mews
+    - mews.
+    - mews!
+    - mewing
+    - mewed
+
+- type: emote
+  id: Growl
+  name: chat-emote-name-growl
+  category: Vocal
+  icon: Interface/Actions/scream.png
+  chatMessages: [growls.]
+  chatTriggers:
+    - growl
+    - growls
+    - growls.
+    - growls!
+    - growling
+    - growled
+
+- type: emote
+  id: Purr
+  name: chat-emote-name-purr
+  category: Vocal
+  icon: Interface/Actions/scream.png
+  chatMessages: [purrs.]
+  chatTriggers:
+    - purr
+    - purrs
+    - purrs.
+    - purrs!
+    - purring
+    - purred

@@ -236,78 +236,78 @@
         tags:
         - CMMagazineSMGM63Ext
 
-# M4DMR
+# M4SPR
 - type: entity
   parent: CMBoxMagazineBase
-  id: CMBoxMagazineRifleM4DMR
-  name: magazine box (M4DMR x 16)
+  id: CMBoxMagazineRifleM4SPR
+  name: magazine box (M4SPR x 16)
   components:
   - type: Sprite
     layers:
-    - state: base_m4dmr
-    - state: text_m4dmr
+    - state: base_m4spr
+    - state: text_m4spr
     - state: base_type_reg
     - state: magaz_reg
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: base_m4dmr_lid
+    - state: base_m4spr_lid
       map: [ "lid" ]
     - state: lid_type_reg
       map: [ "lid_stripe" ]
   - type: CMItemSlots
-    startingItem: CMMagazineRifleM4DMR
+    startingItem: CMMagazineRifleM4SPR
     count: 16
     slot:
       whitelist:
         tags:
-        - CMMagazineRifleM4DMR
+        - CMMagazineRifleM4SPR
 
 - type: entity
   parent: CMBoxMagazineBase
-  id: CMBoxMagazineRifleM4DMRAP
-  name: magazine box (AP M4DMR x 16)
+  id: CMBoxMagazineRifleM4SPRAP
+  name: magazine box (AP M4SPR x 16)
   components:
   - type: Sprite
     layers:
-    - state: base_m4dmr
-    - state: text_m4dmr
+    - state: base_m4spr
+    - state: text_m4spr
     - state: base_type_ap
     - state: magaz_ap
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: base_m4dmr_lid
+    - state: base_m4spr_lid
       map: [ "lid" ]
     - state: lid_type_ap
       map: [ "lid_stripe" ]
   - type: CMItemSlots
-    startingItem: CMMagazineRifleM4DMRAP
+    startingItem: CMMagazineRifleM4SPRAP
     count: 16
     slot:
       whitelist:
         tags:
-        - CMMagazineRifleM4DMRAP
+        - CMMagazineRifleM4SPRAP
 
 - type: entity
   parent: CMBoxMagazineBase
-  id: CMBoxMagazineRifleM4DMRExt
-  name: magazine box (Ext M4DMR x 12)
+  id: CMBoxMagazineRifleM4SPRExt
+  name: magazine box (Ext M4SPR x 12)
   components:
   - type: Sprite
     layers:
-    - state: base_m4dmr
-    - state: text_m4dmr
+    - state: base_m4spr
+    - state: text_m4spr
     - state: base_type_ext
     - state: magaz_reg
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: base_m4dmr_lid
+    - state: base_m4spr_lid
       map: [ "lid" ]
     - state: lid_type_ext
       map: [ "lid_stripe" ]
   - type: CMItemSlots
-    startingItem: CMMagazineRifleM4DMRExt
+    startingItem: CMMagazineRifleM4SPRExt
     count: 12
     slot:
       whitelist:
         tags:
-        - CMMagazineRifleM4DMRExt
+        - CMMagazineRifleM4SPRExt
 
 # m1984
 - type: entity

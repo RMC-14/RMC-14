@@ -7,7 +7,7 @@
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
   - type: Tag
     tags:
-    - CMAttachableBarrel
+    - CMAttachmentBarrel
 
 - type: entity
   parent: CMBarrelAttachmentBase
@@ -19,8 +19,8 @@
     state: ebarrel
   - type: Tag
     tags:
-    - CMAttachableBarrel
-    - CMAttachableExtendedBarrel
+    - CMAttachmentBarrel
+    - CMAttachmentExtendedBarrel
   - type: AttachableVisuals
   - type: AttachableWeaponRangedMods
     modifiers:
@@ -37,8 +37,8 @@
     state: comp
   - type: Tag
     tags:
-    - CMAttachableBarrel
-    - CMAttachableCompensator
+    - CMAttachmentBarrel
+    - CMAttachmentRecoilCompensator
   - type: AttachableVisuals
     offset: -0.04, 0
   - type: AttachableWeaponRangedMods
@@ -57,20 +57,20 @@
     state: suppressor
   - type: Tag
     tags:
-    - CMAttachableBarrel
-    - CMAttachableSuppressor
+    - CMAttachmentBarrel
+    - CMAttachmentSuppressor
   - type: AttachableVisuals
     offset: -0.03, 0.035
   - type: AttachableSilencer
 
 - type: Tag
-  id: CMAttachableBarrel
+  id: CMAttachmentBarrel
 
 - type: Tag
-  id: CMAttachableExtendedBarrel
+  id: CMAttachmentExtendedBarrel
 
 - type: Tag
-  id: CMAttachableCompensator
+  id: CMAttachmentRecoilCompensator
 
 - type: Tag
-  id: CMAttachableSuppressor
+  id: CMAttachmentSuppressor
