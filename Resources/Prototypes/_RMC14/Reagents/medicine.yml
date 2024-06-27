@@ -494,7 +494,7 @@
   color: "#b40000"
   metabolisms:
     Medicine:
-      metabolismRate: 0.2
+      metabolismRate: 0.1
       effects:
       - !type:EqualHealthChange
         damage:
@@ -526,7 +526,7 @@
   color: "#C8A5DC"
   metabolisms:
     Medicine:
-      metabolismRate: 0.2
+      metabolismRate: 0.1
       effects:
       - !type:ChemHealEyeDamage
       - !type:HealthChange
@@ -556,7 +556,7 @@
   color: "#51b4db"
   metabolisms:
     Medicine:
-      metabolismRate: 0.2
+      metabolismRate: 0.1
       effects:
       - !type:EqualHealthChange
         conditions:
