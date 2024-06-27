@@ -8,7 +8,7 @@ uniform highp float[10] falloffPower;
 
 void fragment() {
     highp vec2 coord = FRAGCOORD.xy * SCREEN_PIXEL_SIZE.xy;
-    highp float ratio = SCREEN_PIXEL_SIZE.y / SCREEN_PIXEL_SIZE.x;
+    highp float ratio = SCREEN_PIXEL_SIZE.y / SCREEN_PIXEL_SIZE.x * 0.6;
 
     for (int i = 0; i < count; ++i) {
         highp vec2 WaveCentre = position[i];
