@@ -17,6 +17,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
+using Content.Shared.Rounding;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
@@ -371,8 +372,9 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
                 // Stages
                 // Percentage of how far along we out to burst time times the number of stages, truncated. You can't go back a stage once you've reached one
-                int stage = Math.Max((int) ((infected.BurstDelay - (infected.BurstAt - time)) / infected.BurstDelay * infected.FinalStage), infected.CurrentStage);
-                infected.CurrentStage = stage;
+                int stage = Math.Max((ContentHelpers.RoundToLevels(time.TotalSeconds, infected.BurstAt.TotalSeconds, infected.FinalStage)) - 1, infected.CurrentStage);
+                if(stage != infected.CurrentStage)
+                    infected.CurrentStage = stage;
                 // Symptoms only start after the IntialSymptomStart is passed (by default, 2)
                 if(stage >= infected.FinalSymptomsStart)
                 {
