@@ -1,0 +1,11 @@
+﻿<cc:RMCAdminWindow
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client._RMC14.Admin"
+    Title="{Loc rmc-ui-cm-actions}"
+    MinSize="500 500">
+    <TabContainer Name="Tabs">
+        <cc:RMCTransformTab Name="TransformTab" Access="Public" />
+        <cc:RMCXenoTab Name="XenoTab" Access="Public" />
+        <cc:RMCSquadsTab Name="SquadsTab" Access="Public" />
+    </TabContainer>
+</cc:RMCAdminWindow>
