@@ -43,6 +43,12 @@ namespace Content.Server.Database
         public DbSet<RoleWhitelist> RoleWhitelists { get; set; } = null!;
         public DbSet<BanTemplate> BanTemplate { get; set; } = null!;
 
+        // RMC14
+        public DbSet<RMCDiscordAccount> RMCDiscordAccounts { get; set; } = default!;
+        public DbSet<RMCLinkedAccount> RMCLinkedAccounts { get; set; } = default!;
+        public DbSet<RMCPatronTier> RMCPatronTiers { get; set; } = default!;
+        public DbSet<RMCPatron> RMCPatrons { get; set; } = default!;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Preference>()
@@ -326,6 +332,35 @@ namespace Content.Server.Database
                 .HasForeignKey(w => w.PlayerUserId)
                 .HasPrincipalKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // RMC14
+            modelBuilder.Entity<RMCLinkedAccount>()
+                .HasOne(l => l.Player)
+                .WithOne(p => p.LinkedAccount)
+                .HasForeignKey<RMCLinkedAccount>(l => l.PlayerId)
+                .HasPrincipalKey<Player>(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RMCLinkedAccount>()
+                .HasOne(l => l.Discord)
+                .WithOne(d => d.LinkedAccount)
+                .HasForeignKey<RMCLinkedAccount>(l => l.DiscordId)
+                .HasPrincipalKey<RMCDiscordAccount>(d => d.Id)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RMCPatron>()
+                .HasOne(p => p.Player)
+                .WithOne(p => p.Patron)
+                .HasForeignKey<RMCPatron>(p => p.PlayerId)
+                .HasPrincipalKey<Player>(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RMCPatron>()
+                .HasOne(p => p.Tier)
+                .WithMany(t => t.Patrons)
+                .HasForeignKey(p => p.TierId)
+                .HasPrincipalKey(p => p.Id)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public virtual IQueryable<AdminLog> SearchLogs(IQueryable<AdminLog> query, string searchText)
@@ -543,6 +578,11 @@ namespace Content.Server.Database
         public List<ServerRoleBan> AdminServerRoleBansCreated { get; set; } = null!;
         public List<ServerRoleBan> AdminServerRoleBansLastEdited { get; set; } = null!;
         public List<RoleWhitelist> JobWhitelists { get; set; } = null!;
+
+        // RMC14
+        public RMCLinkedAccount? LinkedAccount { get; set; }
+        // RMC14
+        public RMCPatron? Patron { get; set; }
     }
 
     [Table("whitelist")]
