@@ -81,6 +81,62 @@
     {
       "name": "sandbag_wire",
       "directions": 4
+    },
+    {
+      "name": "handrail_a_0",
+      "directions": 4
+    },
+    {
+      "name": "handrail_b_0",
+      "directions": 4
+    },
+    {
+      "name": "handrail_med",
+      "directions": 4
+    },
+    {
+      "name": "handrail_strata",
+      "directions": 4
+    },
+    {
+      "name": "hr_kutjevo",
+      "directions": 4
+    },
+    {
+      "name": "hr_sandstone",
+      "directions": 4
+    },
+    {
+      "name": "hr_sandstone_b",
+      "directions": 4
+    },
+    {
+      "name": "hr_stone",
+      "directions": 4
+    },
+    {
+      "name": "hr_stone_b",
+      "directions": 4
+    },
+    {
+      "name": "t_handrail_a",
+      "directions": 4
+    },
+    {
+      "name": "t_handrail_a_cap",
+      "directions": 4
+    },
+    {
+      "name": "t_handrail_b",
+      "directions": 4
+    },
+    {
+      "name": "t_handrail_b_cap",
+      "directions": 4
+    },
+    {
+      "name": "wire_rail",
+      "directions": 4
     }
   ]
 }
