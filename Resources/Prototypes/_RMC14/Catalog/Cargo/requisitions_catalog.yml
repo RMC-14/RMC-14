@@ -1,0 +1,200 @@
+﻿- type: entity # TODO RMC14 split these into per file categories and inherit all to ASRS
+  abstract: true
+  id: CMCargoCatalog
+  components:
+  - type: Speech
+    speechVerb: Robotic
+  - type: RequisitionsComputer
+    categories:
+    - name: Ammo
+      entries:
+      - cost: 2000
+        crate: CMCrateBoxMagazineRifleM54C
+      - cost: 4000
+        crate: CMCrateBoxMagazineRifleM54CAP
+      - cost: 3000
+        crate: CMCrateBoxMagazineRifleM54CExt
+      - cost: 2000
+        crate: CMCrateBoxMagazineRifleM4SPR
+      - cost: 4000
+        crate: CMCrateBoxMagazineRifleM4SPRAP
+      - cost: 2000
+        crate: CMCrateBoxMagazineSMGM63
+      - cost: 4000
+        crate: CMCrateBoxMagazineSMGM63AP
+      - cost: 2000
+        crate: CMCrateBoxMagazinePistolM1984
+#      - cost: 3000 # TODO RMC14 this crate is completed but needs mags
+#        crate: CMCrateBoxMagazinePistolM1984AP
+      - cost: 3000
+        crate: CMCrateBoxShellsShotgunSlugs
+      - cost: 3000
+        crate: CMCrateBoxShellsShotgunBuckshot
+      - cost: 3000
+        crate: CMCrateBoxShellsShotgunFlechette
+      - cost: 2000
+        crate: CMCrateBoxMagazinePistolM77AP
+      - cost: 4000
+        crate: CMCrateBoxMagazinePistolMK80
+    - name: Attachments
+      entries:
+      - cost: 3000
+        crate: CMCrateAttachmentSmartScope
+      - cost: 2000
+        crate: CMCrateAttachmentRailFlashlight
+#      - cost: 3000
+#        crate: CMCrateAttachmentRedDot
+#      - cost: 3000
+#        crate: CMCrateAttachmentTelescopicScope
+#      - cost: 3000
+#        crate: CMCrateAttachmentMiniScope
+#      - cost: 3000
+#        crate: CMCrateAttachmentMagneticHarness
+      - cost: 3000
+        crate: CMCrateAttachmentSuppressor
+      - cost: 3000
+        crate: CMCrateAttachmentExtendedBarrel
+      - cost: 3000
+        crate: CMCrateAttachmentCompensator
+#      - cost: 3000
+#        crate: CMCrateAttachmentForegrip
+#      - cost: 3000
+#        crate: CMCrateAttachmentGyro
+#      - cost: 3000
+#        crate: CMCrateAttachmentBipod
+      - cost: 3000
+        crate: CMCrateAttachmentUnderbarrelShotgun
+#      - cost: 3000
+#        crate: CMCrateAttachmentUnderbarrelExtinguisher
+#      - cost: 3000
+#        crate: CMCrateAttachmentUnderbarrelFlamer
+#      - cost: 3000
+#        crate: CMCrateAttachmentBurstfire
+#      - cost: 6000
+#        crate: CMCrateAttachmentAllStocks
+#      - cost: 3000
+#        crate: CMCrateAttachmentRevolverStock
+#      - cost: 3000
+#        crate: CMCrateAttachmentRifleStock
+#      - cost: 3000
+#        crate: CMCrateAttachmentShotgunStock
+#      - cost: 3000
+#        crate: CMCrateAttachmentSmgStock
+    - name: Clothing
+      entries:
+      - cost: 2000
+        crate: CMCrateClothingLargePouches
+      - cost: 2000
+        crate: CMCrateClothingMedicalPouches
+      - cost: 2000
+        crate: CMCrateClothingWebbing
+      - cost: 3000
+        crate: CMCrateClothingOfficerOutfit
+    - name: Engineering
+      entries:
+      - cost: 2000
+        crate: CMCrateEmptySandbags
+      - cost: 3000
+        crate: CMCrateSandbagsConstructionKit
+      - cost: 2000
+        crate: CMCrateMetalSheets
+      - cost: 3000
+        crate: CMCratePlasteelSheets
+      - cost: 2000
+        crate: CMCrateGlassSheets
+#      - cost: 2000
+#        crate: CMCrateWoodenPlanks
+#      - cost: 2000
+#        crate: CMCrateFoldingBarricades
+#      - cost: 3000
+#        crate: CMCrateSuperconductingMagneticCoil
+      - cost: 2000
+        crate: CMCrateElectricalMaintenance
+      - cost: 2000
+        crate: CMCrateMechanicalMaintenance
+#      - cost: 2000
+#        crate: CMCrateInflatableBarriers
+      - cost: 2000
+        crate: CMCrateReplacementLights
+      - cost: 3000
+        crate: CMCratePacmanParts
+      - cost: 4000
+        crate: CMCrateSuperPacmanParts
+      - cost: 1000
+        crate: CMCrateFlashlights
+      - cost: 1000
+        crate: CMCrateHighCapacityPowerCell
+    - name: Explosives
+      entries:
+      - cost: 3000
+        crate: CMCrateGrenadesHighExplosive
+      - cost: 3000
+        crate: CMCrateGrenadesFrag
+    - name: Food
+      entries:
+      - cost: 1000
+        crate: CMCrateFoodDonuts
+      - cost: 1000
+        crate: CMCrateFoodMRE
+      - cost: 3000
+        crate: CMCrateFoodPizza
+      - cost: 1000
+        crate: CMCrateFoodIngredients
+#    - name: Gear
+#      entries: []
+    - name: Medical
+      entries:
+      - cost: 3200
+        crate: CMCrateMedicalSurgery
+      - cost: 2000
+        crate: CMCrateMedicalBodyBag
+      - cost: 1200
+        crate: CMCrateMedicalStasisBag
+      - cost: 1600
+        crate: CMCrateMedicalFirstAid
+      - cost: 2100
+        crate: CMCrateMedicalFilled
+      - cost: 2100
+        crate: CMCrateMedicalPill
+#    - name: Mortar
+#      entries: []
+#    - name: Operations
+#      entries: []
+#    - name: Reagent tanks
+#      entries: []
+#    - name: Research
+#      entries: []
+#    - name: Restricted Equipment
+#      entries: []
+    - name: Supplies
+      entries:
+      - cost: 2000
+        crate: CMCrateSupplyInternals
+#      - cost: 1000
+#        crate: CMCrateSupplyEvacuation
+      - cost: 1000
+        crate: CMCrateSuppliesBoxes
+      - cost: 1000
+        crate: CMCrateSupplyJanitor
+      - cost: 2000
+        crate: CMCrateSuppliesCrayons
+#    - name: Vehicle Ammo
+#      entries: []
+    - name: Weapons
+      entries:
+      - cost: 4000
+        crate: CMCrateM54C
+#      - cost: 4000
+#        crate: CMCrateM54CE2
+      - cost: 3000
+        crate: CMCrateMK80
+    - name: Weapons Specialist Ammo
+      entries:
+      - cost: 4000
+        crate: CMCrateMagazineM96SMixed
+      - cost: 3000
+        crate: CMCrateMagazineM96SStandard
+      - cost: 3000
+        crate: CMCrateMagazineM96SFlak
+      - cost: 3000
+        crate: CMCrateMagazineM96SIncendiary

@@ -1,0 +1,75 @@
+﻿- type: entity
+  parent: BaseWindoor
+  id: CMWindoor
+  name: glass door
+  description: A window, that is also a door. A windoor if you will.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Windoors/windoor.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+    - state: closed_unlit
+      shader: unshaded
+      map: [ "enum.DoorVisualLayers.BaseUnlit" ]
+    - state: welded
+      map: [ "enum.WeldableLayers.BaseWelded" ]
+      visible: false
+    - state: bolted
+      shader: unshaded
+      map: [ "enum.DoorVisualLayers.BaseBolted" ]
+    - state: emergency
+      shader: unshaded
+      map: [ "enum.DoorVisualLayers.BaseEmergencyAccess" ]
+    - state: panel_open
+      map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      visible: false
+  - type: Construction
+    graph: CMWindoor
+    node: windoor
+    containers:
+    - board
+  - type: Airlock
+    openingSpriteState: open_unlit
+    closingSpriteState: closed_unlit
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+
+- type: entity
+  parent: BaseSecureWindoor
+  id: CMWindoorSecure
+  name: secure glass door
+  description: A thick chunk of tempered glass on metal track. Probably more robust than you.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Windoors/secure.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+    - state: closed_unlit
+      shader: unshaded
+      map: [ "enum.DoorVisualLayers.BaseUnlit" ]
+    - state: welded
+      map: [ "enum.WeldableLayers.BaseWelded" ]
+      visible: false
+    - state: bolted
+      shader: unshaded
+      map: [ "enum.DoorVisualLayers.BaseBolted" ]
+    - state: emergency
+      shader: unshaded
+      map: [ "enum.DoorVisualLayers.BaseEmergencyAccess" ]
+    - state: panel_open
+      map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      visible: false
+  - type: Construction
+    graph: CMWindoor
+    node: windoorSecure
+    containers:
+    - board
+  - type: Airlock
+    openingSpriteState: open_unlit
+    closingSpriteState: closed_unlit
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false

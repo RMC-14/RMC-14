@@ -1,0 +1,944 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/turf/floors/floors.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "floor"
+    },
+    {
+      "name": "white"
+    },
+    {
+      "name": "plating"
+    },
+    {
+      "name": "dark"
+    },
+    {
+      "name": "bar"
+    },
+    {
+      "name": "stage_bottom"
+    },
+    {
+      "name": "stage_left"
+    },
+    {
+      "name": "stage_bleft"
+    },
+    {
+      "name": "a"
+    },
+    {
+      "name": "grimy"
+    },
+    {
+      "name": "red",
+      "directions": 8
+    },
+    {
+      "name": "redcorner",
+      "directions": 4
+    },
+    {
+      "name": "redfull"
+    },
+    {
+      "name": "whitered",
+      "directions": 8
+    },
+    {
+      "name": "whiteredcorner",
+      "directions": 4
+    },
+    {
+      "name": "whiteredfull"
+    },
+    {
+      "name": "blue",
+      "directions": 8
+    },
+    {
+      "name": "bluecorner",
+      "directions": 4
+    },
+    {
+      "name": "bluefull"
+    },
+    {
+      "name": "whiteblue",
+      "directions": 8
+    },
+    {
+      "name": "whitebluecorner",
+      "directions": 4
+    },
+    {
+      "name": "whitebluefull"
+    },
+    {
+      "name": "grass1"
+    },
+    {
+      "name": "grass2"
+    },
+    {
+      "name": "grass3"
+    },
+    {
+      "name": "grass4"
+    },
+    {
+      "name": "green",
+      "directions": 8
+    },
+    {
+      "name": "greencorner",
+      "directions": 4
+    },
+    {
+      "name": "greenfull"
+    },
+    {
+      "name": "whitegreen",
+      "directions": 8
+    },
+    {
+      "name": "whitegreencorner",
+      "directions": 4
+    },
+    {
+      "name": "whitegreenfull"
+    },
+    {
+      "name": "yellowsiding",
+      "directions": 8
+    },
+    {
+      "name": "yellowcornersiding",
+      "directions": 4
+    },
+    {
+      "name": "yellow",
+      "directions": 8
+    },
+    {
+      "name": "yellowcorner",
+      "directions": 4
+    },
+    {
+      "name": "yellowfull"
+    },
+    {
+      "name": "whiteyellow",
+      "directions": 8
+    },
+    {
+      "name": "whiteyellowcorner",
+      "directions": 4
+    },
+    {
+      "name": "whiteyellowfull"
+    },
+    {
+      "name": "runedsandstone"
+    },
+    {
+      "name": "black"
+    },
+    {
+      "name": "engine"
+    },
+    {
+      "name": "bcircuita"
+    },
+    {
+      "name": "bcircuitoff"
+    },
+    {
+      "name": "gcircuita"
+    },
+    {
+      "name": "gcircuitoff"
+    },
+    {
+      "name": "neutral",
+      "directions": 8
+    },
+    {
+      "name": "neutralfull"
+    },
+    {
+      "name": "neutralcorner",
+      "directions": 4
+    },
+    {
+      "name": "orange",
+      "directions": 8
+    },
+    {
+      "name": "orangecorner",
+      "directions": 4
+    },
+    {
+      "name": "orangefull"
+    },
+    {
+      "name": "whitehall",
+      "directions": 8
+    },
+    {
+      "name": "whitecorner",
+      "directions": 4
+    },
+    {
+      "name": "arrival",
+      "directions": 8
+    },
+    {
+      "name": "arrivalcorner",
+      "directions": 4
+    },
+    {
+      "name": "escape",
+      "directions": 8
+    },
+    {
+      "name": "escapecorner",
+      "directions": 4
+    },
+    {
+      "name": "purple",
+      "directions": 8
+    },
+    {
+      "name": "purplecorner",
+      "directions": 4
+    },
+    {
+      "name": "purplefull"
+    },
+    {
+      "name": "whitepurple",
+      "directions": 8
+    },
+    {
+      "name": "whitepurplecorner",
+      "directions": 4
+    },
+    {
+      "name": "whitepurplefull"
+    },
+    {
+      "name": "cmo"
+    },
+    {
+      "name": "blackcorner",
+      "directions": 4
+    },
+    {
+      "name": "caution",
+      "directions": 8
+    },
+    {
+      "name": "cautioncorner",
+      "directions": 4
+    },
+    {
+      "name": "floorgrime"
+    },
+    {
+      "name": "solarpanel"
+    },
+    {
+      "name": "freezerfloor"
+    },
+    {
+      "name": "damaged1"
+    },
+    {
+      "name": "damaged3"
+    },
+    {
+      "name": "damaged2"
+    },
+    {
+      "name": "panelscorched"
+    },
+    {
+      "name": "floorscorched1"
+    },
+    {
+      "name": "floorscorched2"
+    },
+    {
+      "name": "damaged4"
+    },
+    {
+      "name": "damaged5"
+    },
+    {
+      "name": "platingdmg1"
+    },
+    {
+      "name": "platingdmg2"
+    },
+    {
+      "name": "platingdmg3"
+    },
+    {
+      "name": "delivery"
+    },
+    {
+      "name": "bot"
+    },
+    {
+      "name": "hydrofloor"
+    },
+    {
+      "name": "warning",
+      "directions": 8
+    },
+    {
+      "name": "warningcorner",
+      "directions": 4
+    },
+    {
+      "name": "brownold",
+      "directions": 8
+    },
+    {
+      "name": "browncornerold",
+      "directions": 4
+    },
+    {
+      "name": "brown",
+      "directions": 8
+    },
+    {
+      "name": "browncorner",
+      "directions": 4
+    },
+    {
+      "name": "redyellow",
+      "directions": 8
+    },
+    {
+      "name": "redyellowfull"
+    },
+    {
+      "name": "redblue",
+      "directions": 8
+    },
+    {
+      "name": "bluered",
+      "directions": 8
+    },
+    {
+      "name": "redbluefull"
+    },
+    {
+      "name": "redgreen",
+      "directions": 8
+    },
+    {
+      "name": "redgreenfull"
+    },
+    {
+      "name": "greenyellow",
+      "directions": 8
+    },
+    {
+      "name": "greenyellowfull"
+    },
+    {
+      "name": "greenblue",
+      "directions": 8
+    },
+    {
+      "name": "greenbluefull"
+    },
+    {
+      "name": "blueyellow",
+      "directions": 8
+    },
+    {
+      "name": "blueyellowfull"
+    },
+    {
+      "name": "showroomfloor"
+    },
+    {
+      "name": "podhatch",
+      "directions": 8
+    },
+    {
+      "name": "podhatchcorner",
+      "directions": 4
+    },
+    {
+      "name": "elevatorshaft"
+    },
+    {
+      "name": "warnplate",
+      "directions": 8
+    },
+    {
+      "name": "warnplatecorner",
+      "directions": 4
+    },
+    {
+      "name": "warnwhite",
+      "directions": 8
+    },
+    {
+      "name": "warnwhitecorner",
+      "directions": 4
+    },
+    {
+      "name": "vault",
+      "directions": 8
+    },
+    {
+      "name": "loadingarea",
+      "directions": 4
+    },
+    {
+      "name": "loadingareadirty1",
+      "directions": 4
+    },
+    {
+      "name": "loadingareadirty2",
+      "directions": 4
+    },
+    {
+      "name": "barber"
+    },
+    {
+      "name": "cult"
+    },
+    {
+      "name": "cultdamage"
+    },
+    {
+      "name": "cultdamage2"
+    },
+    {
+      "name": "cultdamage3"
+    },
+    {
+      "name": "cultdamage4"
+    },
+    {
+      "name": "cultdamage5"
+    },
+    {
+      "name": "cultdamage6"
+    },
+    {
+      "name": "cultdamage7"
+    },
+    {
+      "name": "whitebot"
+    },
+    {
+      "name": "whitedelivery"
+    },
+    {
+      "name": "plaque"
+    },
+    {
+      "name": "lava",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "floor4"
+    },
+    {
+      "name": "ironsand1"
+    },
+    {
+      "name": "ironsand2"
+    },
+    {
+      "name": "ironsand3"
+    },
+    {
+      "name": "ironsand4"
+    },
+    {
+      "name": "ironsand5"
+    },
+    {
+      "name": "ironsand6"
+    },
+    {
+      "name": "ironsand7"
+    },
+    {
+      "name": "ironsand8"
+    },
+    {
+      "name": "ironsand9"
+    },
+    {
+      "name": "ironsand10"
+    },
+    {
+      "name": "ironsand11"
+    },
+    {
+      "name": "ironsand12"
+    },
+    {
+      "name": "ironsand13"
+    },
+    {
+      "name": "ironsand14"
+    },
+    {
+      "name": "ironsand15"
+    },
+    {
+      "name": "snow"
+    },
+    {
+      "name": "yellowpatch"
+    },
+    {
+      "name": "floorgrimecaution",
+      "directions": 4
+    },
+    {
+      "name": "platebot"
+    },
+    {
+      "name": "platebotc"
+    },
+    {
+      "name": "yellowpatch_inv"
+    },
+    {
+      "name": "whitebluegreencorners",
+      "directions": 4
+    },
+    {
+      "name": "white_1"
+    },
+    {
+      "name": "white_2"
+    },
+    {
+      "name": "white_d"
+    },
+    {
+      "name": "white_a"
+    },
+    {
+      "name": "whitered_a",
+      "directions": 8
+    },
+    {
+      "name": "white_b"
+    },
+    {
+      "name": "whitered_b",
+      "directions": 8
+    },
+    {
+      "name": "white_c"
+    },
+    {
+      "name": "whitered_c",
+      "directions": 8
+    },
+    {
+      "name": "whitered_w",
+      "directions": 8
+    },
+    {
+      "name": "whitegreen_v",
+      "directions": 8
+    },
+    {
+      "name": "white_p"
+    },
+    {
+      "name": "white_ex"
+    },
+    {
+      "name": "whitehall_m",
+      "directions": 8
+    },
+    {
+      "name": "white_cmo"
+    },
+    {
+      "name": "whiteblue_ex",
+      "directions": 8
+    },
+    {
+      "name": "white_halfo"
+    },
+    {
+      "name": "white_halfp"
+    },
+    {
+      "name": "dark2"
+    },
+    {
+      "name": "darkpurple2",
+      "directions": 8
+    },
+    {
+      "name": "darkred2",
+      "directions": 8
+    },
+    {
+      "name": "darkblue2",
+      "directions": 8
+    },
+    {
+      "name": "darkgreen2",
+      "directions": 8
+    },
+    {
+      "name": "darkyellow2",
+      "directions": 8
+    },
+    {
+      "name": "darkbrown2",
+      "directions": 8
+    },
+    {
+      "name": "darkpurplecorners2",
+      "directions": 4
+    },
+    {
+      "name": "darkredcorners2",
+      "directions": 4
+    },
+    {
+      "name": "darkbluecorners2",
+      "directions": 4
+    },
+    {
+      "name": "darkgreencorners2",
+      "directions": 4
+    },
+    {
+      "name": "darkyellowcorners2",
+      "directions": 4
+    },
+    {
+      "name": "darkbrowncorners2",
+      "directions": 4
+    },
+    {
+      "name": "darkish"
+    },
+    {
+      "name": "reddirt"
+    },
+    {
+      "name": "podhatchfloor",
+      "directions": 4
+    },
+    {
+      "name": "ventfloor",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "gcircuit",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "cafeteriaold"
+    },
+    {
+      "name": "bcircuit",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "mars_tile_1"
+    },
+    {
+      "name": "mars_tile_2"
+    },
+    {
+      "name": "mars_tile_3"
+    },
+    {
+      "name": "mars_tile_4"
+    },
+    {
+      "name": "mars_tile_5"
+    },
+    {
+      "name": "furnace_on",
+      "delays": [
+        [
+          0.1,
+          2,
+          0.1,
+          0.1,
+          0.5,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "catwalk_water",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "catwalk_water_shallow",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "catwalk_water_shallow_north",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "catwalk_water_shallow_east",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "catwalk_pipe_north"
+    },
+    {
+      "name": "catwalk_pipe_east"
+    },
+    {
+      "name": "catwalk_plating"
+    },
+    {
+      "name": "catwalk_pipe_t_s",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "catwalk_pipe_t_n",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "catwalk_pipe_t_w",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "catwalk_pipe_t_e",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "catwalk_pipe_e_w",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "catwalk_pipe_e_e",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "catwalk_pipe_e_n",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "catwalk_pipe_e_s",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "water_pipe_e_w",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "water_pipe_e_e",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    }
+  ]
+}

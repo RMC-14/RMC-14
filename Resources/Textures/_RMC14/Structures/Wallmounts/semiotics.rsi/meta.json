@@ -1,0 +1,281 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/53b8f7f634ef16422e463bd75eeaa16dccab25ab/icons/obj/structures/props/semiotic_standard.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "airlock"
+    },
+    {
+      "name": "airtraffictower"
+    },
+    {
+      "name": "ammo"
+    },
+    {
+      "name": "analysislab"
+    },
+    {
+      "name": "astronics"
+    },
+    {
+      "name": "autodoc"
+    },
+    {
+      "name": "autoopenclose"
+    },
+    {
+      "name": "bathmens"
+    },
+    {
+      "name": "bathunisex"
+    },
+    {
+      "name": "bathwomens"
+    },
+    {
+      "name": "biohazard"
+    },
+    {
+      "name": "biolab"
+    },
+    {
+      "name": "bridge"
+    },
+    {
+      "name": "bulkheaddoor"
+    },
+    {
+      "name": "chemlab"
+    },
+    {
+      "name": "coffee"
+    },
+    {
+      "name": "comm"
+    },
+    {
+      "name": "commlineconnection"
+    },
+    {
+      "name": "confroom"
+    },
+    {
+      "name": "cryo"
+    },
+    {
+      "name": "debarkationlounge"
+    },
+    {
+      "name": "distpipe"
+    },
+    {
+      "name": "east"
+    },
+    {
+      "name": "elevator"
+    },
+    {
+      "name": "escapepod"
+    },
+    {
+      "name": "exhaust"
+    },
+    {
+      "name": "fibreoptic"
+    },
+    {
+      "name": "firehaz"
+    },
+    {
+      "name": "firingrange"
+    },
+    {
+      "name": "flightcontrol"
+    },
+    {
+      "name": "fluidhaz"
+    },
+    {
+      "name": "foodstorage"
+    },
+    {
+      "name": "fridge"
+    },
+    {
+      "name": "galley"
+    },
+    {
+      "name": "hazard"
+    },
+    {
+      "name": "highrad"
+    },
+    {
+      "name": "highvoltage"
+    },
+    {
+      "name": "hvac"
+    },
+    {
+      "name": "hvacold"
+    },
+    {
+      "name": "ladder"
+    },
+    {
+      "name": "landingzone"
+    },
+    {
+      "name": "laser"
+    },
+    {
+      "name": "lifesupport"
+    },
+    {
+      "name": "luggageclaim"
+    },
+    {
+      "name": "maint"
+    },
+    {
+      "name": "manualopenclose"
+    },
+    {
+      "name": "medcryo"
+    },
+    {
+      "name": "medlifesupport"
+    },
+    {
+      "name": "medical"
+    },
+    {
+      "name": "nonpresszerog"
+    },
+    {
+      "name": "nonpressag"
+    },
+    {
+      "name": "nonpressarea"
+    },
+    {
+      "name": "north"
+    },
+    {
+      "name": "opensup"
+    },
+    {
+      "name": "outpatient"
+    },
+    {
+      "name": "pressareaag"
+    },
+    {
+      "name": "pressarea"
+    },
+    {
+      "name": "radhaz"
+    },
+    {
+      "name": "radshield"
+    },
+    {
+      "name": "radiorad"
+    },
+    {
+      "name": "reduction"
+    },
+    {
+      "name": "reception"
+    },
+    {
+      "name": "refbiostorage"
+    },
+    {
+      "name": "refchemstorage"
+    },
+    {
+      "name": "refridgeration"
+    },
+    {
+      "name": "restrictedarea"
+    },
+    {
+      "name": "rewire"
+    },
+    {
+      "name": "security"
+    },
+    {
+      "name": "south"
+    },
+    {
+      "name": "stairs"
+    },
+    {
+      "name": "storage"
+    },
+    {
+      "name": "suitstorage"
+    },
+    {
+      "name": "siliconstorage"
+    },
+    {
+      "name": "terminal"
+    },
+    {
+      "name": "tramline"
+    },
+    {
+      "name": "twilightzoneterminator"
+    },
+    {
+      "name": "water"
+    },
+    {
+      "name": "waterhaz"
+    },
+    {
+      "name": "west"
+    },
+    {
+      "name": "zerog"
+    },
+    {
+      "name": "0"
+    },
+    {
+      "name": "1"
+    },
+    {
+      "name": "2"
+    },
+    {
+      "name": "3"
+    },
+    {
+      "name": "4"
+    },
+    {
+      "name": "5"
+    },
+    {
+      "name": "6"
+    },
+    {
+      "name": "7"
+    },
+    {
+      "name": "8"
+    },
+    {
+      "name": "9"
+    }
+  ]
+}

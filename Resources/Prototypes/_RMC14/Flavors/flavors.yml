@@ -1,0 +1,4 @@
+- type: flavor
+  id: bobda
+  flavorType: Base
+  description: flavor-base-savory

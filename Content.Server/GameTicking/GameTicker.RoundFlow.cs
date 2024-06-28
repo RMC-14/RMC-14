@@ -4,7 +4,7 @@ using Content.Server.Discord;
 using Content.Server.GameTicking.Events;
 using Content.Server.Ghost;
 using Content.Server.Maps;
-using Content.Shared._CM14.Prototypes;
+using Content.Shared._RMC14.Prototypes;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
@@ -160,6 +160,12 @@ namespace Content.Server.GameTicking
             // Okay I specifically didn't set LoadMap here because this is typically called onto a new map.
             // whereas the command can also be used on an existing map.
             var loadOpts = loadOptions ?? new MapLoadOptions();
+
+            if (map.MaxRandomOffset != 0f)
+                loadOpts.Offset = _robustRandom.NextVector2(map.MaxRandomOffset);
+
+            if (map.RandomRotation)
+                loadOpts.Rotation = _robustRandom.NextAngle();
 
             var ev = new PreGameMapLoad(targetMapId, map, loadOpts);
             RaiseLocalEvent(ev);
@@ -615,11 +621,6 @@ namespace Content.Server.GameTicking
             {
                 LoadMaps();
             }
-        }
-
-        public TimeSpan RoundDuration()
-        {
-            return _gameTiming.CurTime.Subtract(RoundStartTimeSpan);
         }
 
         private void AnnounceRound()

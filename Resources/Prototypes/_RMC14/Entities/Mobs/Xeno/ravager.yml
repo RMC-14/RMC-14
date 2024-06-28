@@ -1,0 +1,75 @@
+﻿- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  - CMXenoFlammable
+  id: CMXenoRavager
+  name: Ravager
+  description: A huge, nasty red alien with enormous scythed claws.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Ravager/ravager.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      650: Critical
+      750: Dead
+  - type: Xeno
+    role: CMXenoRavager
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    #    - ActionXenoCharge
+    #    - ActionXenoEmpower
+    #    - ActionXenoScissorCut
+    tier: 3
+    hudOffset: 0,0.1
+    unlockAt: 900 # 15 minutes
+  - type: XenoDevour
+  - type: XenoPlasma
+    plasma: 300
+    maxPlasma: 300
+    plasmaRegenOnWeeds: 5
+  - type: CMArmor
+    armor: 25
+    explosionArmor: 80
+  - type: MeleeWeapon
+    attackRate: 1.05
+    damage:
+      groups:
+        Brute: 45
+  - type: Tackle
+    threshold: 4
+    stun: 9
+  - type: Flammable
+    damage:
+      types:
+        Heat: 0
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 185
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+      fix2:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.50
+        density: 185
+        layer:
+        - BulletImpassable
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 3.5

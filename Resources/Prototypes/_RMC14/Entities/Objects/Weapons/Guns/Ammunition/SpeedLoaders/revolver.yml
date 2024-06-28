@@ -1,0 +1,41 @@
+- type: entity
+  parent: BaseItem
+  id: CMSpeedLoaderM44
+  name: "M44 speed loader (.44)"
+  description: A revolver speed loader.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/m44.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: base-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - CMMagazineRevolver
+    - CMSpeedLoaderM44
+  - type: SpeedLoader
+  - type: BallisticAmmoProvider
+    proto: CMCartridgeRevolver44
+    whitelist:
+      tags:
+      - CMCartridgeRevolver44
+    capacity: 7
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: MagazineVisuals
+    magState: base
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+
+- type: Tag
+  id: CMMagazineRevolver
+
+- type: Tag
+  id: CMSpeedLoaderM44

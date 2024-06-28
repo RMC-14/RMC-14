@@ -1,0 +1,26 @@
+﻿- type: entity
+  id: CMDisposalUnit
+  parent: DisposalUnit
+  name: disposal unit
+  description: A pneumatic waste disposal unit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Piping/disposal.rsi
+    layers:
+    - state: condisposal
+      map: [ "enum.DisposalUnitVisualLayers.Unanchored" ]
+    - state: disposal
+      map: [ "enum.DisposalUnitVisualLayers.Base" ]
+    - state: disposal-flush
+      map: [ "enum.DisposalUnitVisualLayers.OverlayFlush" ]
+    - state: dispover-charge
+      map: [ "enum.DisposalUnitVisualLayers.OverlayCharging" ]
+    - state: dispover-ready
+      map: [ "enum.DisposalUnitVisualLayers.OverlayReady" ]
+    - state: dispover-full
+      map: [ "enum.DisposalUnitVisualLayers.OverlayFull" ]
+    - state: dispover-handle
+      map: [ "enum.DisposalUnitVisualLayers.OverlayEngaged" ]
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false

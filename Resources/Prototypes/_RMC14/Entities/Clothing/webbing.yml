@@ -1,0 +1,112 @@
+- type: entity
+  parent: BaseItem
+  abstract: true
+  id: CMWebbingBase
+  name: webbing
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing.rsi
+  - type: Item
+    size: Large
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: [ ]
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1 # 3 slots
+  - type: FixedItemSizeStorage
+  - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,5,1 # 3 slots
+    - type: FixedItemSizeStorage
+
+- type: entity
+  parent: CMWebbingBase
+  id: CMWebbing
+  name: webbing
+  description: A sturdy mess of synthcotton belts and buckles, ready to share your burden.
+  components:
+  - type: Sprite
+    state: webbing
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1 # 3 slots
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - CMMagazineSmg
+      - CMMagazinePistol
+      - CMMagazineRifle
+      - CMMagazineSniper
+  - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,5,1 # 3 slots
+    - type: FixedItemSizeStorage
+    - type: IgnoreContentsSize
+      items:
+        tags:
+        - CMMagazineSmg
+        - CMMagazinePistol
+        - CMMagazineRifle
+        - CMMagazineSniper
+
+- type: entity
+  parent: CMWebbingBase
+  id: CMWebbingBlack
+  name: black webbing vest
+  description: Robust black synthcotton vest with lots of pockets to hold whatever you need, but cannot hold in hands.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_black.rsi
+    state: webbing
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,9,1 # 5 slots
+  - type: Webbing
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Webbing/webbing_black.rsi
+      state: equipped
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,9,1 # 5 slots
+    - type: FixedItemSizeStorage
+
+- type: entity
+  parent: CMWebbingBase
+  id: CMWebbingBrown
+  name: brown webbing vest
+  description: Worn brownish synthcotton vest with lots of pockets to unload your hands.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_brown.rsi
+    state: webbing
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,9,1 # 5 slots
+  - type: Webbing
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Webbing/webbing_brown.rsi
+      state: equipped
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,9,1 # 5 slots
+    - type: FixedItemSizeStorage

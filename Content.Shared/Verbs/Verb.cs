@@ -1,4 +1,4 @@
-using Content.Shared._CM14.Admin;
+using Content.Shared._RMC14.Admin;
 using Content.Shared.Database;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
@@ -225,7 +225,7 @@ namespace Content.Shared.Verbs
             typeof(ActivationVerb),
             typeof(ExamineVerb),
             typeof(EquipmentVerb),
-            typeof(CMAdminVerb)
+            typeof(RMCAdminVerb)
         };
     }
 

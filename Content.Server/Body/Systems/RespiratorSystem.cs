@@ -5,7 +5,7 @@ using Content.Server.Chat.Systems;
 using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Server.Chemistry.ReagentEffectConditions;
 using Content.Server.Chemistry.ReagentEffects;
-using Content.Shared._CM14.Medical.Stasis;
+using Content.Shared._RMC14.Medical.Stasis;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
 using Content.Shared.Body.Components;
@@ -331,6 +331,9 @@ public sealed class RespiratorSystem : EntitySystem
         Entity<RespiratorComponent> ent,
         ref ApplyMetabolicMultiplierEvent args)
     {
+        // TODO REFACTOR THIS
+        // This will slowly drift over time due to floating point errors.
+        // Instead, raise an event with the base rates and allow modifiers to get applied to it.
         if (args.Apply)
         {
             ent.Comp.UpdateInterval *= args.Multiplier;

@@ -1,0 +1,25 @@
+﻿- type: soundCollection
+  id: CMShotgunPump
+  files:
+  - /Audio/_RMC14/Weapons/Guns/Pump/shotgunpump1.ogg
+  - /Audio/_RMC14/Weapons/Guns/Pump/shotgunpump2.ogg
+
+- type: soundCollection
+  id: CMM1984Shoot
+  files:
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m1984_1.ogg
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m1984_2.ogg
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m1984_3.ogg
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m1984_4.ogg
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m1984_5.ogg
+
+- type: soundCollection
+  id: CMM54CShoot
+  files:
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_rifle.ogg # TODO RMC14
+
+- type: soundCollection
+  id: CMSilencedShoot
+  files:
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_silenced_shot1.ogg
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_silenced_shot2.ogg

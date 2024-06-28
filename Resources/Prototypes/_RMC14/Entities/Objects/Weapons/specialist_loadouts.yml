@@ -1,0 +1,105 @@
+﻿- type: entity
+  parent: BaseStorageItem
+  id: CMSniperEquipmentCase
+  name: sniper equipment case
+  description: "A large case containing your very own long-range M96S sniper rifle, M45 ghillie armor and helmet, M42 scout sight, ammunition, spotter equipment, and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Objects/loadout_kits.rsi
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: sniper
+      map: [ sniper ]
+  - type: Icon
+    sprite: _RMC14/Objects/loadout_kits.rsi
+    state: closed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        base:
+          True: { state: open }
+          False: { state: closed }
+        sniper:
+          True: { visible: false }
+          False: { visible: true }
+  - type: Item
+    size: Huge
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,27,1
+  - type: StorageFill
+    contents:
+    - id: CMArmorM45
+    - id: CMArmorHelmetM45
+    - id: CMGlassesM42ScoutSight
+    - id: CMMagazineSniperM96S
+    - id: CMMagazineSniperM96SIncendiary
+    - id: CMMagazineSniperM96SIncendiary
+    - id: CMMagazineSniperM96SFlak
+    - id: CMBackpackSniper
+    - id: CMWeaponPistolMK80
+    - id: CMMagazinePistolMK80
+    - id: CMM96SSniperRifle
+#    - id: CMFacepaintSniper
+#    - id: CMSpotter
+  - type: CMChangeUserOnVend
+    addComponents:
+    - type: SniperWhitelist
+  - type: RemoveOnlyStorage
+  - type: FixedItemSizeStorage
+
+- type: entity
+  parent: BaseStorageItem
+  id: RMCGrenadeSpecEquipmentCase
+  name: heavy grenadier equipment case
+  description: "A large case containing a heavy-duty multi-shot M83 grenade launcher, M3-G4 grenadier armor and helmet, significant amount of various M40 grenades and additional pieces of equipment.\n\nDrag this sprite onto yourself to open it up! NOTE: You cannot put items back inside this case."
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Objects/loadout_kits.rsi
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: grenadier
+      map: [ grenadier ]
+  - type: Icon
+    sprite: _RMC14/Objects/loadout_kits.rsi
+    state: closed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        base:
+          True: { state: open }
+          False: { state: closed }
+        grenadier:
+          True: { visible: false }
+          False: { visible: true }
+  - type: Item
+    size: Huge
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,21,1
+  - type: StorageFill
+    contents:
+    - id: WeaponLauncherM83 # check IFF
+    - id: RMCBeltGrenadeLargeFilled
+    - id: RMCSatchelGrenadeSpec # ID lock
+    - id: RMCSatchelGrenadeSpec
+    - id: RMCHandsM3G4
+    - id: RMCArmorM3G4
+    - id: RMCArmorHelmetM3G4 # hugger protection
+    - id: CMWeaponPistolMK80
+    - id: CMMagazinePistolMK80
+    - id: CMMagazinePistolMK80
+#    - id: CMBinoculars
+  - type: CMChangeUserOnVend
+    addComponents:
+    - type: GrenadeSpecWhitelist
+  - type: RemoveOnlyStorage
+  - type: FixedItemSizeStorage

@@ -1,0 +1,96 @@
+- type: entity
+  parent: PartRodMetal
+  id: CMRodMetal
+  name: metal rod
+  description: Some rods. Can be used for building, or something.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Materials/parts.rsi
+    state: rods
+  - type: Item
+    heldPrefix: rods
+    size: Small
+    sprite: _RMC14/Objects/Materials/parts.rsi
+  - type: Stack
+    stackType: CMRodMetal
+    baseLayer: base
+    layerStates:
+    - rods
+    - rods_5
+  - type: Tag
+    tags:
+    - RodMetal1
+  - type: Construction
+    graph: CMRods
+    node: CMRodMetal
+
+- type: entity
+  parent: CMRodMetal
+  id: CMRodMetal10
+  name: metal rod
+  suffix: "10"
+  components:
+  - type: Sprite
+    state: rods
+  - type: Stack
+    count: 10
+
+- type: entity
+  parent: CMRodMetal
+  id: CMRodMetal1
+  name: metal rod
+  suffix: Single
+  components:
+  - type: Sprite
+    state: rods
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: CMRodMetal
+  id: CMRodPlasteel
+  name: plasteel rod
+  description: Some plasteel rods. Can be used for building sturdier structures and objects.
+  suffix: Filled
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      CMPlasteel: 50 #Half of a regular plasteel sheet to reflect the crafting recipe
+  - type: Stack
+    stackType: CMRodPlasteel
+    baseLayer: base
+    layerStates:
+    - rods_plasteel
+    - rods_plasteel_5
+  - type: Sprite
+    state: rods_plasteel
+  - type: Item
+    heldPrefix: rods
+  - type: Construction
+    graph: CMRods
+    node: CMRodPlasteel
+  - type: StackPrice
+    price: 15
+
+- type: entity
+  parent: CMRodPlasteel
+  id: CMRodPlasteel10
+  name: plasteel rod
+  suffix: "10"
+  components:
+  - type: Sprite
+    state: rods_plasteel
+  - type: Stack
+    count: 10
+
+- type: entity
+  parent: CMRodPlasteel
+  id: CMRodPlasteel1
+  name: plasteel rod
+  suffix: Single
+  components:
+  - type: Sprite
+    state: rods_plasteel
+  - type: Stack
+    count: 1

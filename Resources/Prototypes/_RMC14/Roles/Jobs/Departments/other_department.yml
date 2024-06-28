@@ -1,0 +1,12 @@
+﻿- type: department
+  parent: CMDepartmentBase
+  id: CMOther
+  description: cm-department-Other-description
+  color: "#595959"
+  roles:
+#  - CMSilicon # TODO RMC14
+#  - CMAndroid # TODO RMC14
+  - CMSeniorEnlistedAdvisor
+  - CMLiaison
+  - CMCorrespondent
+  - CMMessTech

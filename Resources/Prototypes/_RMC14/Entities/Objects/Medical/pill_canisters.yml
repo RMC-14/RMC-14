@@ -1,0 +1,160 @@
+﻿# TODO RMC14 text labels on the bottom right
+- type: entity
+  parent: PillCanister
+  id: CMPillCanister
+  name: pill bottle
+  description: It's an airtight container for storing medication.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Chemistry/pill_canister.rsi
+    layers:
+    - state: pill_canister
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: Storage
+    quickInsert: true
+    areaInsert: true
+    areaInsertRadius: 1
+    storageInsertSound: /Audio/Effects/pill_insert.ogg
+    storageRemoveSound: /Audio/Effects/pill_remove.ogg
+    grid:
+    - 0,0,15,1 # 16
+    storageOpenSound:
+      collection: CMPillBottleOpen
+    maxItemSize: Small
+    whitelist:
+      components:
+      - Pill
+      tags:
+      - Dice
+      - Paper
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Chemistry/pill_canister.rsi
+  - type: GenericVisualizer
+    visuals:
+      enum.SharedBagOpenVisuals.BagState:
+        openLayer:
+          Open: { visible: true }
+          Closed: { visible: false }
+        closedLayer:
+          Open: { visible: false }
+          Closed: { visible: true }
+  - type: Appearance
+  - type: Tag
+    tags:
+    - PillCanister
+  - type: StorageSkillRequired
+    medical: 2
+
+- type: entity
+  parent: CMPillCanister
+  id: CMPillCanisterBicaridine
+  name: bicaridine pill bottle
+  suffix: Bicaridine, 16
+  components:
+  - type: Sprite
+    layers:
+    - state: pill_canister11
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: CMPillBicaridine
+      amount: 16
+
+- type: entity
+  parent: CMPillCanister
+  id: CMPillCanisterDexalin
+  name: dexalin pill bottle
+  suffix: Dexalin, 16
+  components:
+  - type: Sprite
+    layers:
+    - state: pill_canister1
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: CMPillDexalin
+      amount: 16
+
+- type: entity
+  parent: CMPillCanister
+  id: CMPillCanisterDylovene
+  name: dylovene pill bottle
+  suffix: Dylovene, 16
+  components:
+  - type: Sprite
+    layers:
+    - state: pill_canister6
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: CMPillDylovene
+      amount: 16
+
+- type: entity
+  parent: CMPillCanister
+  id: CMPillCanisterInaprovaline
+  name: inaprovaline pill bottle
+  suffix: Inaprovaline, 16
+  components:
+  - type: Sprite
+    layers:
+    - state: pill_canister3
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: CMPillInaprovaline
+      amount: 16
+
+- type: entity
+  parent: CMPillCanister
+  id: CMPillCanisterKelotane
+  name: kelotane pill bottle
+  suffix: Kelotane, 16
+  components:
+  - type: Sprite
+    layers:
+    - state: pill_canister2
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: CMPillKelotane
+      amount: 16
+
+- type: entity
+  parent: CMPillCanister
+  id: CMPillCanisterTricordrazine
+  name: tricordrazine pill bottle
+  suffix: Tricordrazine, 16
+  components:
+  - type: Sprite
+    layers:
+    - state: pill_canister7 # TODO RMC14 idk which canister this uses
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: CMPillTricordrazine
+      amount: 16
+
+# TODO RMC14 peridaxon, tramadol

@@ -1,0 +1,46 @@
+﻿- type: entity
+  parent: CigPackBase
+  id: CMCigarettePackLuckySloths
+  name: lucky sloths mini packet
+  description: These four-packs of Luckies come in every MRE. They're not as good as the Habana Reals that come in the LACN MREs, but at least they're free.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/lucky_sloths_4.rsi
+    layers:
+    - state: closed
+    - state: open
+      map: ["openLayer"]
+      visible: false
+    - state: cig1
+      map: ["cig1"]
+      visible: false
+    - state: cig2
+      map: ["cig2"]
+      visible: false
+    - state: cig3
+      map: ["cig3"]
+      visible: false
+    - state: cig4
+      map: ["cig4"]
+      visible: false
+  - type: Storage
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - Cigarette
+  - type: StorageFill
+    contents:
+    - id: Cigarette
+      amount: 4
+  - type: ItemCounter
+    count:
+      tags: [Cigarette]
+    composite: true
+    layerStates:
+    - cig1
+    - cig2
+    - cig3
+    - cig4
+  - type: MREItem
+  - type: FixedItemSizeStorage

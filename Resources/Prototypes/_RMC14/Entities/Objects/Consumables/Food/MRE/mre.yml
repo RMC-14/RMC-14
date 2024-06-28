@@ -1,0 +1,158 @@
+﻿- type: Tag
+  id: MRE
+
+- type: entity
+  parent: BaseStorageItem
+  id: CMMRE
+  name: Marine MRE
+  description: A Meal, Ready-to-Eat. A single-meal combat ration designed to provide a soldier with enough nutrients for a day of strenuous work. Its expiration date is at least 20 years ahead of your combat life expectancy.
+  components:
+  - type: Tag
+    tags:
+    - MRE
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/mre.rsi
+    state: closed
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Consumable/Food/bar.rsi
+  - type: Storage
+    grid:
+    - 0,0,13,1
+    maxItemSize: Small
+    whitelist:
+      components:
+      - MREItem
+  - type: Openable
+    sound:
+      collection: CMFoodRip
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: { state: "open" }
+          False: { state: "closed" }
+  - type: StorageFill
+    contents:
+    - id: CMMREComponentBonelessPorkRibs
+      orGroup: main
+    - id: CMMREComponentGrilledChicken
+      orGroup: main
+    - id: CMMREComponentPizzaSquare
+      orGroup: main
+    - id: CMMREComponentSpaghettiChunks
+      orGroup: main
+    - id: CMMREComponentChickenTender
+      orGroup: main
+    - id: CMMREComponentCracker
+      orGroup: side
+    - id: CMMREComponentRiceOnigiri
+      orGroup: side
+    - id: CMMREComponentMashedPotatoes
+      orGroup: side
+    - id: CMMREComponentRisotto
+      orGroup: side
+    - id: CMMREComponentBiscuit
+      orGroup: snack
+    - id: CMMREComponentMeatballs
+      orGroup: snack
+    - id: CMMREComponentPretzels
+      orGroup: snack
+    - id: CMMREComponentPeanuts
+      orGroup: snack
+    - id: CMMREComponentSushi
+      orGroup: snack
+    - id: CMMREComponentBiscuit
+      orGroup: dessert
+    - id: CMMREComponentChocolateBrownie
+      orGroup: dessert
+    - id: CMMREComponentSugarCookie
+      orGroup: dessert
+    - id: CMMREComponentCocoBar
+      orGroup: dessert
+    - id: CMMREComponentFlan
+      orGroup: dessert
+    - id: CMMREComponentHoneyFlan
+      orGroup: dessert
+    - id: CMDrinkWEYAWaterBottle30
+    - id: CMFortuneCookie
+      prob: 0.333
+    - id: CMCigarettePackLuckySloths
+    - id: CMMatchBook
+      orGroup: matchbook
+    - id: CMBrownMatchBook
+      orGroup: matchbook
+    - id: CMExecutiveSelectMatchbook
+      orGroup: matchbook
+    - id: CMElectroMatchbook
+      orGroup: matchbook
+    - id: CMElectroMatchbook
+      orGroup: matchbook
+  - type: FixedItemSizeStorage
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: CMMREComponentBase
+  name: MRE component
+  description: A package from a Meal Ready-to-Eat, property of the Marines. Contains a part of a meal, prepared for field consumption.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/mre_components.rsi
+  - type: Item
+    size: Small
+  - type: SpawnItemsOnUse
+    sound:
+      collection: CMFoodRip
+  - type: MREItem
+
+- type: entity
+  abstract: true
+  parent: CMFoodBase
+  id: CMMREFoodBase
+  description: The contents of a Marine Standard issue MRE.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/mre_contents.rsi
+  - type: Item
+    size: Small
+  - type: MREItem
+
+- type: entity
+  abstract: true
+  parent: CMBoxMagazineBase
+  id: CMBoxMREBase
+  name: box of MREs
+  description: A box of MREs. Nutritious, but not delicious.
+  components:
+  - type: ItemSlots
+  - type: CMItemSlots
+    count: 12
+    slot:
+      name: MRE
+      whitelist:
+        tags:
+        - MRE
+  - type: Sprite
+    layers:
+    - state: supply_crate
+    - state: magaz_mre
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: magaz_mre, visible: false }
+          Low: { state: magaz_mre_1, visible: true }
+          Medium: { state: magaz_mre_2, visible: true }
+          High: { state: magaz_mre_3, visible: true }
+          Full: { state: magaz_mre, visible: true }
+
+- type: entity
+  parent: CMBoxMREBase
+  id: CMBoxMRE
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMMRE

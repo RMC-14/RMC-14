@@ -1,0 +1,653 @@
+- type: entity
+  parent: DrinkCanBaseFull
+  id: CMDrinkCanBase
+  abstract: true
+  components:
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: { state: "icon" }
+          False: { state: "icon" }
+  - type: Sprite
+    state: icon
+    layers:
+    - state: icon
+      map: ["enum.OpenableVisuals.Layer"]
+  - type: Item
+    size: Small
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 50
+  - type: PhysicalComposition # TODO RMC14 add cm materials
+    materialComposition:
+      CMSteel: 50
+
+- type: entity
+  parent: CMDrinkCanBase
+  id: CMDrinkCanCola
+  name: classic cola
+  description: A classic cola with a taste that's been around for centuries. Nobody can beat it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/cola.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/cola.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: Cola
+          Quantity: 30
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBase
+  id: CMDrinkCanMountainWind
+  name: mountain wind
+  description: Blows right through you like a space wind.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/mountain_wind.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/mountain_wind.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: SpaceMountainWind
+          Quantity: 30
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBase
+  id: CMDrinkCanThirteenLoko
+  name: thirteen loko
+  description: Consumption of Thirteen Loko may result in seizures, blindness, drunkenness, or even death. Please Drink Responsibly.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/thirteen_loko.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/thirteen_loko.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: FourteenLoko
+          Quantity: 30
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBase
+  id: CMDrinkCanDrGibb
+  name: dr. gibb
+  description: A delicious mixture of 42 different flavors of chemicals that you can't pronounce.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/dr_gibb.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/dr_gibb.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: DrGibb
+          Quantity: 30
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBase
+  id: CMDrinkCanStarkist
+  name: star-kist
+  description: The taste of a star in liquid form. And, a bit of tuna...?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/starkist.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/starkist.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: Starkist
+          Quantity: 30
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBase
+  id: CMDrinkCanSpaceUp
+  name: space-up
+  description: Tastes like a hull breach in your mouth.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/space_up.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/space_up.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: SpaceUp
+          Quantity: 30
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBase
+  id: CMDrinkCanLemonLime
+  name: lemon-lime
+  description: You wanted ORANGE. It gave you Lemon Lime.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/lemon_lime.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/lemon_lime.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: LemonLime
+          Quantity: 30
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBase
+  id: CMDrinkCanIcedTea
+  name: iced tea can
+  description: Just like the squad redneck's grandmother used to buy.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/ice_tea.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/ice_tea.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: IcedTea
+          Quantity: 30
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBase
+  id: CMDrinkCanGrape
+  name: grape juice
+  description: A can of probably not grape juice.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/purple.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/purple.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: GrapeSoda
+          Quantity: 30
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBase
+  id: CMDrinkCanTonic
+  name: tonic water
+  description: "Step One: Tonic. Check. Step Two: Gin."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/tonic.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/tonic.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: TonicWater
+          Quantity: 30
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBase
+  id: CMDrinkCanSoda
+  name: soda water
+  description: A can of soda water. Tap water's more refreshing cousin...according to those Europe-folk.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/sodawater.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/sodawater.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: SodaWater
+          Quantity: 30
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanSoda
+  id: CMDrinkCanBoda
+  name: boda
+  description: State regulated soda beverage. Enjoy comrades.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/boda.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/boda.rsi
+
+- type: entity
+  parent: CMDrinkCanCola
+  id: CMDrinkCanBodaPlyus
+  name: boda-plyus
+  description: State regulated soda beverage, now with added surplus flavoring. Enjoy comrades.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/blank.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/blank.rsi
+
+- type: entity
+  parent: CMDrinkCanBase
+  id: CMDrinkCanFruitBeer
+  name: fruit-beer
+  description: In theory, Mango flavored root beer sounds like a pretty good idea. We-Ya has disproved yet another theory with its latest line of cola. Canned by the We-Ya Corporation.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/fruit_beer.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/fruit_beer.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: CMSodaFruitBeer
+          Quantity: 30
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBase
+  id: CMDrinkCanBeerLite
+  name: we-ya lite
+  description: Beer. You've dialed in your target. Time to fire for effect.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/beer.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/beer.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: Beer
+          Quantity: 30
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBase
+  id: CMDrinkCanAle
+  name: we-ya IPA
+  description: Beer's misunderstood cousin.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/ale.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/ale.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: Ale
+          Quantity: 30
+        maxVol: 50
+
+# BOBDA
+- type: entity
+  parent: CMDrinkCanBase
+  id: CMDrinkCanBobda
+  name: bobda can
+  description: Canned in Havana.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/classic.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/classic.rsi
+
+- type: entity
+  parent: CMDrinkCanBobda
+  id: CMDrinkCanBobdaClassic
+  name: bobda classic
+  description: The can boldly proclaims it to be tangerine flavored. You can't help but think that's a lie. Canned in Havana.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: CMSodaBobdaClassic
+          Quantity: 50
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBobda
+  id: CMDrinkCanBobdaCherry
+  name: cherry bobda
+  description: Now with more artificial flavors! Canned in Havana
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/cherry.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/cherry.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: CMSodaBobdaCherry
+          Quantity: 50
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBobda
+  id: CMDrinkCanBobdaLime
+  name: lime bobda
+  description: It's not bad. It's not good either, but it's not bad. Canned in Havana.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/lime.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/lime.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: CMSodaBobdaLime
+          Quantity: 50
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBobda
+  id: CMDrinkCanBobdaGrape
+  name: grape bobda
+  description: An old standby for soda flavors. This, however, tastes like grape flavored cough syrup. Canned in Havana.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/grape.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/grape.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: CMSodaBobdaGrape
+          Quantity: 50
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBobda
+  id: CMDrinkCanBobdaBlue
+  name: blue raspberry bobda
+  description: It tastes like the color blue. Technology really is amazing. Canned in Havana.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/blueraspberry.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/blueraspberry.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: CMSodaBobdaBlue
+          Quantity: 50
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBobda
+  id: CMDrinkCanBobdaPeach
+  name: peach bobda
+  description: On one hand, it tastes pretty good. On the other hand, you think you can hear a peach pit rattling on the inside. Canned in Havana.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/peach.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/peach.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: CMSodaBobdaPeach
+          Quantity: 50
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBobda
+  id: CMDrinkCanBobdaCranberry
+  name: cranberry bobda
+  description: On closer inspection, the can reads, 'CRAMberry Bobda.' What the Hell is a Cramberry? Canned in Havana.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/cranberry.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/cranberry.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: CMSodaBobdaCranberry
+          Quantity: 50
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBobda
+  id: CMDrinkCanBobdaVanilla
+  name: vanilla bobda
+  description: When most soft drinks say 'vanilla,' they really mean their classic flavor with a bit of vanilla added. NOT THE BOBDA CORPORATION, BABY! This bad boy is filled to the brim with 100% pure carbonated vanilla extract! It tastes terrible. Canned in Havana.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/vanilla.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/vanilla.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: CMSodaBobdaVanilla
+          Quantity: 50
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBobda
+  id: CMDrinkCanBobdaPineapple
+  name: pineapple bobda
+  description: This tastes like battery acid with a full cup of sugar mixed in. Canned in Havana.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/pineapple.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/pineapple.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: CMSodaBobdaPineapple
+          Quantity: 50
+        maxVol: 50
+
+# DIET BOBDA
+- type: entity
+  parent: CMDrinkCanBobda
+  id: CMDrinkCanBobdaDiet
+  name: diet bobda
+  description: Now with 0% fruit juice! Canned in Havana
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/classic.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/classic.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: Water
+          Quantity: 25
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBobdaDiet
+  id: CMDrinkCanBobdaClassicDiet
+  name: diet bobda classic
+  description: Now with 0% fruit juice! Canned in Havana
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: CMSodaBobdaClassic
+          Quantity: 25
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBobdaDiet
+  id: CMDrinkCanBobdaCherryDiet
+  name: diet cherry bobda
+  description: It's neither diet nor cherry flavored. Canned in Havana.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/cherry.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/cherry.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: CMSodaBobdaCherry
+          Quantity: 25
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBobdaDiet
+  id: CMDrinkCanBobdaLimeDiet
+  name: diet lime bobda
+  description: Ten kinds of acid, two cups of fake sugar, almost a full tank of carbon dioxide, and about 210 kPa all crammed into an aluminum can. What's not to love? Canned in Havana.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/lime.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/lime.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: CMSodaBobdaLime
+          Quantity: 25
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBobdaDiet
+  id: CMDrinkCanBobdaGrapeDiet
+  name: diet grape bobda
+  description: You're fairly certain that this is just grape cough syrup and carbonated water. Canned in Havana.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/grape.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/grape.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: CMSodaBobdaGrape
+          Quantity: 25
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBobdaDiet
+  id: CMDrinkCanBobdaBlueDiet
+  name: diet blue raspberry bobda
+  description: WHAT A SCAM! It doesn't even taste like blue! At best, it tastes like cyan. Canned in Havana.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/blueraspberry.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/blueraspberry.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: CMSodaBobdaBlue
+          Quantity: 25
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBobdaDiet
+  id: CMDrinkCanBobdaPeachDiet
+  name: diet peach bobda
+  description: On one hand, it tastes pretty good. On the other hand, you think you can hear half of a peach pit rattling on the inside. Canned in Havana.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/peach.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/peach.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: CMSodaBobdaPeach
+          Quantity: 25
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBobdaDiet
+  id: CMDrinkCanBobdaCranberryDiet
+  name: diet cranberry bobda
+  description: This tastes more like prunes than cranberries. It's not bad; it's just wrong. Canned in Havana.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/cranberry.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/cranberry.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: CMSodaBobdaCranberry
+          Quantity: 25
+        - ReagentId: Water
+          Quantity: 25
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBobdaDiet
+  id: CMDrinkCanBobdaVanillaDiet
+  name: diet vanilla bobda
+  description: This is a can of watery bitter vanilla extract. You can't possibly imagine who would greenlight such a concept. Canned in Havana.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/vanilla.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/vanilla.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: CMSodaBobdaVanilla
+          Quantity: 25
+        - ReagentId: Water
+          Quantity: 25
+        maxVol: 50
+
+- type: entity
+  parent: CMDrinkCanBobdaDiet
+  id: CMDrinkCanBobdaPineappleDiet
+  name: diet pineapple bobda
+  description: This tastes like battery acid with a half cup of sugar mixed in. Canned in Havana.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/pineapple.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/pineapple.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: CMSodaBobdaPineapple
+          Quantity: 25
+        - ReagentId: Water
+          Quantity: 25
+        maxVol: 50

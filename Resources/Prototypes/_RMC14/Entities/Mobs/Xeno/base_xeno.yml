@@ -1,0 +1,328 @@
+﻿# Xeno AI
+- type: htnCompound
+  id: CMXenoCompound
+  branches:
+  - tasks:
+    - !type:HTNCompoundTask
+      task: CMXenoMeleeCombatCompound
+  - tasks:
+    - !type:HTNCompoundTask
+      task: IdleCompound
+
+# Selects a target in melee and tries to attack it.
+- type: htnCompound
+  id: CMXenoMeleeCombatCompound
+  branches:
+  # Melee combat (unarmed or otherwise)
+  - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:UtilityOperator
+        proto: NearbyMeleeTargets
+    - !type:HTNCompoundTask
+      task: MeleeAttackTargetCompound
+
+- type: nameIdentifierGroup
+  id: CMXeno
+  fullName: false
+  prefix: XX
+  minValue: 1
+  maxValue: 999
+
+- type: emote
+  id: CMXenoDeathGasp
+  name: chat-emote-name-deathgasp
+  icon: Interface/Emotes/deathgasp.png
+  chatMessages: [ "cm-xeno-death-gasp" ]
+
+# TODO RMC14 xenos should bleed and hurt nearby marines when damaged
+- type: entity
+  id: CMXenoBase
+  abstract: true
+  save: false
+  components:
+  - type: Damageable
+    damageContainer: Xeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 400
+      behaviors:
+      - !type:GibBehavior { }
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: Critical
+      300: Dead
+    stateAlertDict:
+      Alive: XenoHealth
+      Critical: XenoCrit
+      Dead: XenoDead
+  - type: MobStateActions
+    actions:
+      Critical:
+      - CMActionGhost
+      Dead:
+      - CMActionGhost
+  - type: Deathgasp
+    prototype: CMXenoDeathGasp
+  - type: SoundOnDeath
+    sound:
+      collection: XenoDeath
+      params:
+        volume: -12
+  - type: HealthExaminable
+    examinableTypes:
+    - Blunt
+    - Slash
+    - Piercing
+    - Heat
+    - Shock
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 4
+  - type: Climbing
+  - type: NameIdentifier
+    group: CMXeno
+  - type: Insulated
+  - type: Input
+    context: "human"
+  - type: Clickable
+  - type: InteractionOutline
+  - type: InputMover
+  - type: LagCompensation
+  - type: MobMover
+  - type: Actions
+  - type: Alerts
+  - type: Appearance
+  - type: DoAfter
+  - type: Examiner
+  - type: Eye
+  - type: ContentEye
+  - type: CameraRecoil
+  - type: MindContainer
+    showExamineInfo: true
+  - type: StatusIcon
+  - type: RotationVisuals
+    defaultRotation: 0
+    horizontalRotation: 0
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+  - type: FireVisuals
+    sprite: Mobs/Effects/onfire.rsi
+    normalState: Generic_mob_burning
+  - type: Sprite
+    noRot: true
+    drawdepth: Mobs
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 185
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Xeno
+  - type: UserInterface
+    interfaces:
+      enum.XenoEvolutionUIKey.Key:
+        type: XenoEvolutionBui
+      enum.XenoWatchUIKey.Key:
+        type: XenoWatchBui
+      enum.XenoChooseStructureUI.Key:
+        type: XenoChooseStructureBui
+      enum.XenoPheromonesUI.Key:
+        type: XenoPheromonesBui
+      enum.XenoOrderConstructionUI.Key:
+        type: XenoOrderConstructionBui
+      enum.XenoWordQueenUI.Key:
+        type: XenoWordQueenBui
+  - type: TypingIndicator
+    proto: alien
+  - type: MovedByPressure
+  - type: NoSlip
+  - type: Pullable
+  - type: Speech
+    speechVerb: Xeno
+  - type: GhostOnMove
+    mustBeDead: true
+  - type: WhitelistPickup
+  - type: DropHeldOnIncapacitate
+  - type: NightVision
+    alert: XenoNightVision
+    overlay: true
+  - type: ParalyzeOnPullAttemptImmune
+  - type: GhostTakeoverAvailable
+  - type: GhostRole
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: cm-xeno-name
+    description: cm-xeno-description
+    raffle:
+      settings: short
+    rules: cm-xeno-rules
+  - type: StatusEffects
+    allowed:
+    - Stun
+    - KnockedDown
+    - SlowedDown
+  - type: ImmuneToClothingRequiredStepTrigger
+  - type: IntrinsicRadioReceiver
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Hivemind
+  - type: ActiveRadio
+    channels:
+    - Hivemind
+  - type: StandingState
+  - type: SlowOnPull
+    multiplier: 0.75
+  - type: PullWhitelist
+    whitelist:
+      components:
+      - Xeno
+      - XenoEgg
+      - Infectable
+  - type: BlockPullingDead
+  - type: XenoFriendly
+  - type: Undisposable
+  - type: ShortExamine
+  - type: DamageMobState
+    critDamage:
+      groups:
+        Brute: 1.25
+  - type: AffectableByWeeds
+  - type: ComplexInteraction
+  - type: UserLimitHits
+  - type: MovementIgnoreGravity
+  - type: DisableConstruction
+  - type: XenoAnnounceDeath # TODO RMC14 announce location of death (area)
+    message: cm-xeno-death
+    color: "#459A62"
+
+- type: entity
+  abstract: true
+  id: CMXenoPrying
+  components:
+  - type: Tool
+    qualities:
+    - Prying
+  - type: Prying
+    pryPowered: true
+    speedModifier: 2.7
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+
+- type: entity
+  abstract: true
+  id: CMXenoPuller
+  components:
+  - type: Puller
+
+- type: entity
+  abstract: true
+  id: CMXenoMelee
+  components:
+  - type: CombatMode
+    canDisarm: true
+    disarmFailChance: 0
+  - type: MeleeWeapon
+    widePrimary: true
+    altDisarm: true
+    angle: 60
+    soundHit:
+      collection: AlienClaw
+    animation: WeaponArcBite
+    damage:
+      groups:
+        Brute: 12
+  - type: Tackle
+
+- type: entity
+  abstract: true
+  id: CMXenoLarge
+  components:
+  - type: Speech
+    speechVerb: LargeMob
+
+- type: entity
+  abstract: true
+  parent: CMXenoBase
+  id: CMXenoUndeveloped
+
+- type: entity
+  id: CMXenoAI
+  parent: CMXenoBase
+  abstract: true
+  components:
+#  - type: HTN # TODO RMC14 needs to not target nested marines
+#    rootTask:
+#      task: CMXenoCompound
+  - type: NpcFactionMember
+    factions:
+    - Xeno
+
+- type: entity
+  id: CMXenoDeveloped
+  parent:
+  - CMXenoBase
+  - CMXenoPrying
+  - CMXenoPuller
+  - CMXenoMelee
+  - CMXenoAI
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+  - type: Hands
+  - type: GiveHands
+    hands:
+    - name: Right Hand
+      location: Right
+    - name: Left Hand
+      location: Left
+  - type: ParalyzeOnPullAttempt
+
+- type: entity
+  abstract: true
+  id: CMXenoTail
+  components:
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 30
+
+- type: entity
+  abstract: true
+  id: CMXenoFlammable
+  components:
+  - type: Flammable
+    fireSpread: false
+    canResistFire: true
+    damage: #per second, scales with number of fire 'stacks'
+      types:
+        Heat: 3
+
+- type: speechVerb
+  id: Xeno
+  name: chat-speech-verb-name-default
+  speechVerbStrings:
+  - hisses

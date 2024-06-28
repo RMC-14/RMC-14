@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/861d5b8c6f723409cc4410491252abfead4180f0/icons/obj/items/clothing/belts.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "m1984"
+    },
+    {
+      "name": "m1984c"
+    },
+    {
+      "name": "m198445"
+    },
+    {
+      "name": "m198445_s"
+    },
+    {
+      "name": "cmateba"
+    },
+    {
+      "name": "cmateba_special"
+    },
+    {
+      "name": "mateba"
+    },
+    {
+      "name": "amateba"
+    },
+    {
+      "name": "aamateba"
+    },
+    {
+      "name": "ny762"
+    },
+    {
+      "name": "webley"
+    },
+    {
+      "name": "pk9u"
+    },
+    {
+      "name": "pk9"
+    },
+    {
+      "name": "pk9r"
+    },
+    {
+      "name": "highpower"
+    },
+    {
+      "name": "highpower_b"
+    },
+    {
+      "name": "highpower_tac"
+    },
+    {
+      "name": "m82f"
+    },
+    {
+      "name": "m44r"
+    },
+    {
+      "name": "m44rc"
+    },
+    {
+      "name": "mk80"
+    },
+    {
+      "name": "_m77"
+    },
+    {
+      "name": "smartpistol"
+    },
+    {
+      "name": "deagle"
+    },
+    {
+      "name": "c_deagle"
+    },
+    {
+      "name": "m43"
+    },
+    {
+      "name": "g_deagle"
+    },
+    {
+      "name": "m357"
+    },
+    {
+      "name": "b92fs"
+    },
+    {
+      "name": "zhnk72"
+    },
+    {
+      "name": "npz92"
+    },
+    {
+      "name": "np92"
+    },
+    {
+      "name": "tt"
+    },
+    {
+      "name": "ttb"
+    },
+    {
+      "name": "xm51"
+    },
+    {
+      "name": "s_xm51"
+    },
+    {
+      "name": "d_xm51"
+    },
+    {
+      "name": "c_xm51"
+    }
+  ]
+}

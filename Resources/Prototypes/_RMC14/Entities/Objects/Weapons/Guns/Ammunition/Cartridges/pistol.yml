@@ -1,0 +1,43 @@
+- type: entity
+  abstract: true
+  parent: BaseCartridgePistol
+  id: CMCartridgePistolBase
+  components:
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+
+- type: entity
+  id: CMCartridgePistol9mm
+  name: cartridge (9mm)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+      - Cartridge
+      - CMCartridgePistol9mm
+  - type: CartridgeAmmo
+    proto: CMBulletPistol9mm
+
+- type: entity
+  id: CMCartridgePistolM77AP
+  name: cartridge (9mm AP)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridgePistol9mm
+  - type: CartridgeAmmo
+    proto: CMBulletPistolM77AP
+
+- type: entity
+  id: CMCartridgeRevolver44
+  name: cartridge (.44)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridgeRevolver44
+  - type: CartridgeAmmo
+    proto: CMBulletRevolver44

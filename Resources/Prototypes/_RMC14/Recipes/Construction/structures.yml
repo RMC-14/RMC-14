@@ -1,0 +1,340 @@
+# Walls
+- type: construction
+  parent: RMC
+  id: CMGirder
+  name: girder
+  graph: CMGirder
+  startNode: start
+  targetNode: girder
+  category: construction-category-cm-structures
+  description: A large structural assembly made out of metal.
+  icon:
+    sprite: _RMC14/Structures/Walls/girder.rsi
+    state: girder
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+#- type: construction
+#  parent: RMC
+#  id: CMGirderReinforced
+#  name: reinforced girder
+#  graph: CMGirder
+#  startNode: start
+#  targetNode: reinforcedGirder
+#  category: construction-category-cm-structures
+#  description: A large structural assembly made out of metal and plasteel.
+#  icon:
+#    sprite: _RMC14/Structures/Walls/girder.rsi
+#    state: reinforced
+#  objectType: Structure
+#  placementMode: SnapgridCenter
+#  canRotate: false
+#  canBuildInImpassable: false
+#  conditions:
+#    - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
+  id: CMWallMetal
+  name: wall
+  graph: CMGirder
+  startNode: start
+  targetNode: wall
+  category: construction-category-cm-structures
+  description: A huge chunk of metal used to separate rooms.
+  icon:
+    sprite: _RMC14/Structures/Walls/metal.rsi
+    state: full
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
+  id: CMWallReinforced
+  name: reinforced wall
+  graph: CMGirder
+  startNode: start
+  targetNode: reinforcedWall
+  category: construction-category-cm-structures
+  description: A huge chunk of reinforced metal used to separate rooms.
+  icon:
+    sprite: _RMC14/Structures/Walls/rwall.rsi
+    state: full
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
+# Airlocks
+- type: construction
+  parent: RMC
+  name: airlock
+  id: CMAirlock
+  graph: CMAirlock
+  startNode: start
+  targetNode: airlock
+  category: construction-category-cm-structures
+  description: It opens, it closes, and maybe crushes you.
+  icon:
+    sprite: _RMC14/Structures/Doors/airlock_assemblies.rsi
+    state: as_3
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
+  name: glass airlock
+  id: CMAirlockGlass
+  graph: CMAirlock
+  startNode: start
+  targetNode: glassAirlock
+  category: construction-category-cm-structures
+  description: It opens, it closes, and maybe crushes you.
+  icon:
+    sprite: _RMC14/Structures/Doors/airlock_assemblies.rsi
+    state: as_g3
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+
+# Windoors
+- type: construction
+  parent: RMC
+  name: windoor
+  id: CMWindoor
+  graph: CMWindoor
+  startNode: start
+  targetNode: windoor
+  category: construction-category-cm-structures
+  description: It opens, it closes, and you can see through it!
+  icon:
+    sprite: _RMC14/Structures/Doors/windoor_assemblies.rsi
+    state: windoor_assembly01
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
+  name: secure windoor
+  id: CMWindoorSecure
+  graph: CMWindoor
+  startNode: start
+  targetNode: windoorSecure
+  category: construction-category-cm-structures
+  description: It opens, it closes, and you can see through it! This one looks tough.
+  icon:
+    sprite: _RMC14/Structures/Doors/windoor_assemblies.rsi
+    state: secure_assembly01
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+  conditions:
+    - !type:TileNotBlocked
+
+# Barricades
+- type: construction
+  parent: RMC
+  name: Metal Barricade
+  id: CMBarricadeMetal
+  graph: BarricadeMetalGraph
+  startNode: start
+  targetNode: nodeMetal
+  category: construction-category-cm-structures
+  description: A military-grade metal barricade.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
+    state: metal
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
+  name: Turnstile
+  id: CMBarricadeTurnstile
+  graph: BarricadeTurnstileGraph
+  startNode: start
+  targetNode: nodeTurnstile
+  category: construction-category-cm-structures
+  description: A fence to ensure marines stay in line.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
+    state: turnstile
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
+  name: Medical Turnstile
+  id: CMBarricadeTurnstileMed
+  graph: BarricadeTurnstileMedGraph
+  startNode: start
+  targetNode: nodeTurnstileMed
+  category: construction-category-cm-structures
+  description: A fence to ensure marines stay in line in medical.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
+    state: turnstile_med
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
+  name: Handrail
+  id: RMCBarricadeHandrail
+  graph: BarricadeHandrailGraph
+  startNode: start
+  targetNode: nodeHandrail
+  category: construction-category-cm-structures
+  description: A railing, for your hands. Woooow.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
+    state: handrail_a_0
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
+  name: Folding Metal Barricade
+  id: CMBarricadeMetalDoor
+  graph: BarricadeMetalDoorGraph
+  startNode: start
+  targetNode: nodeBarricadeMetalDoor
+  category: construction-category-cm-structures
+  description: A barricade that can be folded or opened to allow marines through.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
+    state: folding_metal
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
+  name: Folding Plasteel Barricade
+  id: CMBarricadePlasteelDoor
+  graph: BarricadePlasteelDoorGraph
+  startNode: start
+  targetNode: nodeBarricadePlasteelDoor
+  category: construction-category-cm-structures
+  description: A barricade that can be folded or opened to allow marines through. Made from hardened plasteel.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
+    state: plasteel
+  conditions:
+    - !type:TileNotBlocked
+
+#lighting
+- type: construction
+  parent: RMC
+  name: tube light fixture
+  id: CMLightTubeFixture
+  graph: CMLightFixture
+  startNode: start
+  targetNode: tubeLight
+  category: construction-category-cm-structures
+  description: A wallmounted fixture for tube lights.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: false
+  icon:
+    sprite: _RMC14/Structures/Wallmounts/Lighting/light_tube.rsi
+    state: tube0
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
+  name: bulb light fixture
+  id: CMLightBulbFixture
+  graph: CMLightFixture
+  startNode: start
+  targetNode: bulbLight
+  category: construction-category-cm-structures
+  description: A wallmounted fixture for bulb lights.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: false
+  icon:
+    sprite: _RMC14/Structures/Wallmounts/Lighting/light_bulb.rsi
+    state: bulb0
+  conditions:
+    - !type:TileNotBlocked
+
+# Other
+- type: construction
+  parent: RMC
+  id: CMCatwalk
+  name: catwalk
+  graph: CMCatwalk
+  startNode: start
+  targetNode: Catwalk
+  category: construction-category-cm-structures
+  description: Just like a lattice. Except it looks better.
+  placementMode: SnapgridCenter
+  icon:
+    sprite: _RMC14/Structures/catwalk.rsi
+    state: catwalk
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+
+- type: construction
+  parent: RMC
+  id: CMFence
+  name: fence
+  graph: CMFence
+  startNode: start
+  targetNode: fenceMetal
+  category: construction-category-cm-structures
+  description: A large metal mesh strewn between two poles.
+  icon:
+    sprite: _RMC14/Structures/fences.rsi
+    state: fence0
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked

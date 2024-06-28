@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Taken from https://cm-ss13.com/wiki/Marines",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "chief_engineer"
+    },
+    {
+      "name": "chief_medical_officer"
+    },
+    {
+      "name": "chief_military_police"
+    },
+    {
+      "name": "combat_correspondent"
+    },
+    {
+      "name": "combat_tech"
+    },
+    {
+      "name": "commanding_officer"
+    },
+    {
+      "name": "corp_liaison"
+    },
+    {
+      "name": "cultist"
+    },
+    {
+      "name": "doctor"
+    },
+    {
+      "name": "dropship_crew_chief"
+    },
+    {
+      "name": "executive_officer"
+    },
+    {
+      "name": "fireteam_leader"
+    },
+    {
+      "name": "hospital_corpsman"
+    },
+    {
+      "name": "maintenance_tech"
+    },
+    {
+      "name": "mess_tech"
+    },
+    {
+      "name": "military_police"
+    },
+    {
+      "name": "nurse"
+    },
+    {
+      "name": "ordnance_tech"
+    },
+    {
+      "name": "pilot"
+    },
+    {
+      "name": "pmc"
+    },
+    {
+      "name": "quartermaster"
+    },
+    {
+      "name": "researcher"
+    },
+    {
+      "name": "rifleman"
+    },
+    {
+      "name": "senior_enlisted_advisor"
+    },
+    {
+      "name": "smart_gun_operator"
+    },
+    {
+      "name": "squad_leader"
+    },
+    {
+      "name": "staff_officer"
+    },
+    {
+      "name": "survivor"
+    },
+    {
+      "name": "synth"
+    },
+    {
+      "name": "warden"
+    },
+    {
+      "name": "weapons_specialist"
+    },
+    {
+      "name": "silicon"
+    },
+    {
+      "name": "auxiliary_support_officer"
+    },
+    {
+      "name": "cargo_tech"
+    },
+    {
+      "name": "intel_officer"
+    }
+  ]
+}

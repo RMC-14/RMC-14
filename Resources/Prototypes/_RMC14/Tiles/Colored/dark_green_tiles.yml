@@ -1,0 +1,65 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelPlanetDarkGreenBase
+  name: tiles-cm-default-green
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreenBase
+  id: CMFloorSteelPlanetDarkGreen0
+  sprite: /Textures/_RMC14/Tiles/floors/darkgreen_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreenBase
+  id: CMFloorSteelPlanetDarkGreen1
+  sprite: /Textures/_RMC14/Tiles/floors/darkgreen_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreenBase
+  id: CMFloorSteelPlanetDarkGreen2
+  sprite: /Textures/_RMC14/Tiles/floors/darkgreen_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreenBase
+  id: CMFloorSteelPlanetDarkGreen3
+  sprite: /Textures/_RMC14/Tiles/floors/darkgreen_3.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreenBase
+  id: CMFloorSteelPlanetDarkGreen4
+  sprite: /Textures/_RMC14/Tiles/floors/darkgreen_4.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreenBase
+  id: CMFloorSteelPlanetDarkGreen5
+  sprite: /Textures/_RMC14/Tiles/floors/darkgreen_5.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreenBase
+  id: CMFloorSteelPlanetDarkGreen6
+  sprite: /Textures/_RMC14/Tiles/floors/darkgreen_6.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreenBase
+  id: CMFloorSteelPlanetDarkGreen7
+  sprite: /Textures/_RMC14/Tiles/floors/darkgreen_7.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreenBase
+  id: CMFloorSteelPlanetDarkGreenCorners0
+  sprite: /Textures/_RMC14/Tiles/floors/darkgreencorner_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreenBase
+  id: CMFloorSteelPlanetDarkGreenCorners1
+  sprite: /Textures/_RMC14/Tiles/floors/darkgreencorner_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreenBase
+  id: CMFloorSteelPlanetDarkGreenCorners2
+  sprite: /Textures/_RMC14/Tiles/floors/darkgreencorner_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreenBase
+  id: CMFloorSteelPlanetDarkGreenCorners3
+  sprite: /Textures/_RMC14/Tiles/floors/darkgreencorner_3.png

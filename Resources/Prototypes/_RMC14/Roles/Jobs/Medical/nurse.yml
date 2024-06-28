@@ -1,0 +1,60 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMNurse
+  name: cm-job-name-nurse
+  description: cm-job-description-nurse
+  playTimeTracker: CMJobNurse
+  requirements:
+  - !type:TotalDepartmentsTimeRequirement
+    group: CMDepartmentsHuman
+    time: 3600 # 1 hour
+  startingGear: CMGearNurse
+  icon: "CMJobIconNurse"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-cmo
+  accessGroups:
+  - CMMedbay
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      firearms: 0
+      medical: 3
+      surgery: 1
+
+- type: startingGear
+  id: CMGearNurse
+  equipment:
+    jumpsuit: CMScrubsNurse
+    back: CMSatchelMarine
+    shoes: ClothingShoesColorWhite
+    id: CMIDCardNurse
+    ears: CMHeadsetMedical # TODO RMC14 Medical Vender
+
+- type: startingGear
+  id: CMGearNurseEquipped
+  equipment:
+    jumpsuit: CMScrubsNurse
+    back: CMSatchelMarine
+    gloves: CMHandsLatex
+    shoes: ClothingShoesColorWhite
+    head: CMHeadCapSurgOrange
+    id: CMIDCardNurse
+    ears: CMHeadsetMedical
+    belt: CMBeltMedicalFilled
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointNurse
+  name: nurse spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMNurse
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: nurse
+
+- type: playTimeTracker
+  id: CMJobNurse

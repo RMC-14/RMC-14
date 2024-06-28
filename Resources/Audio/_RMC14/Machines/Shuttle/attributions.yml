@@ -1,0 +1,14 @@
+﻿- files: ["engine_landing.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/d3d6bb77f88d63c4fbac64596f154306cd099b1f/sound/effects/engine_landing.ogg"
+
+- files: ["engine_startup.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/effects/engine_startup.ogg"
+
+- files: ["queen_alarm.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Made by dj-34 (https://github.com/dj-34), edited by Whisper"
+  source: "https://github.com/ss220-space/Paradise/blob/05043bcfb35c2e7bcf1efbdbfbf976e1a2504bc2/sound/effects/epsilon.ogg"

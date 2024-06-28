@@ -1,0 +1,35 @@
+- type: entity
+  id: CMCrateM54C
+  parent: CMCrateWeapons
+  name: M54C MK1 Rifle Crate (x2 MK2, x2 magazines)
+  components:
+  - type: StorageFill
+    contents:
+      - id: WeaponRifleM54C
+        amount: 2
+      - id: CMMagazineRifleM54C
+        amount: 2
+
+- type: entity
+  id: CMCrateM54CE2
+  parent: CMCrateWeapons
+  name: M54CE2 HPR crate (HPR x2, HPR ammo box x2)
+  components:
+  - type: StorageFill
+    contents:
+      - id: WeaponRifleM54CE2
+        amount: 2
+      - id: CMMagazineRifleM54CE2
+        amount: 2
+
+- type: entity
+  id: CMCrateMK80
+  parent: CMCrateWeapons
+  name: MK80 Hand Cannon Crate (x2)
+  components:
+  - type: StorageFill
+    contents: # TODO RMC14 two cases with 1 pìstol 2 mags each
+    - id: CMWeaponPistolMK80
+      amount: 2
+    - id: CMMagazinePistolMK80
+      amount: 4

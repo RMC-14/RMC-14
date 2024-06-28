@@ -1,0 +1,24 @@
+- files: ["attachment_add.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/attachment_add.ogg"
+
+- files: ["attachment_remove.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/attachment_remove.ogg"
+
+- files: ["attachment_activate.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/gun_underbarrel_activate.ogg"
+
+- files: ["attachment_deactivate.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/gun_underbarrel_deactivate.ogg"
+
+- files: ["gun_u7_activate.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/weapons/handling/gun_u7_activate.ogg"

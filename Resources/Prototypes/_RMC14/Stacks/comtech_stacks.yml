@@ -1,0 +1,6 @@
+- type: stack
+  id: BarbedWire
+  name: barbed wire
+  icon: { sprite: _RMC14/Objects/barbed_wire.rsi, state: barbed_wire }
+  spawn: BarbedWire1
+  maxCount: 20

@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Numerics;
-using Content.Client._CM14.Webbing;
+using Content.Client._RMC14.Webbing;
 using Content.Client.Gameplay;
 using Content.Client.Hands.Systems;
 using Content.Client.Inventory;
@@ -148,7 +148,7 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
                 container.AddButton(button);
             }
 
-            var showStorage = _inventorySystem.HasInventory(data.HeldEntity, out _);
+            var showStorage = _entities.HasComponent<StorageComponent>(data.HeldEntity);
             var update = new SlotSpriteUpdate(data.HeldEntity, data.SlotGroup, data.SlotName, showStorage);
             SpriteUpdated(update);
         }
@@ -219,7 +219,7 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
                 _strippingWindow!.InventoryButtons.AddButton(button, data.ButtonOffset);
             }
 
-            var showStorage = _inventorySystem.HasInventory(data.HeldEntity, out _);
+            var showStorage = _entities.HasComponent<StorageComponent>(data.HeldEntity);
             var update = new SlotSpriteUpdate(data.HeldEntity, data.SlotGroup, data.SlotName, showStorage);
             SpriteUpdated(update);
         }
@@ -360,10 +360,6 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
                 fits = true;
                 break;
             }
-        }
-        else if (_webbing.Fits(container.ContainedEntity, held))
-        {
-            fits = true;
         }
 
         hoverSprite.CopyFrom(sprite);

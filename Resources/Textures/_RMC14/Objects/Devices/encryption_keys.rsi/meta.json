@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a767d448e1a73e7f96dea6bebc07deee8d54bdc2/icons/obj/items/radio.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "cypherkey"
+    },
+    {
+      "name": "stripped_key"
+    },
+    {
+      "name": "we_ya_key"
+    },
+    {
+      "name": "pmc_key"
+    },
+    {
+      "name": "upp_key"
+    },
+    {
+      "name": "binary_key"
+    },
+    {
+      "name": "alpha_key"
+    },
+    {
+      "name": "bravo_key"
+    },
+    {
+      "name": "charlie_key"
+    },
+    {
+      "name": "delta_key"
+    },
+    {
+      "name": "echo_key"
+    },
+    {
+      "name": "cryo_key"
+    },
+    {
+      "name": "cap_key"
+    },
+    {
+      "name": "med_key"
+    },
+    {
+      "name": "cmo_key"
+    },
+    {
+      "name": "eng_key"
+    },
+    {
+      "name": "ce_key"
+    },
+    {
+      "name": "sec_key"
+    },
+    {
+      "name": "cmp_key"
+    },
+    {
+      "name": "req_key"
+    },
+    {
+      "name": "sl_key"
+    },
+    {
+      "name": "jtac_key"
+    },
+    {
+      "name": "cmb_key"
+    }
+  ]
+}

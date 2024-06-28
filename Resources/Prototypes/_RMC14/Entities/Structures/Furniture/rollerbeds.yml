@@ -1,0 +1,79 @@
+﻿- type: Tag
+  id: CMRollerBed
+
+- type: entity
+  parent: RollerBed
+  id: CMRollerBed
+  name: roller bed
+  description: A collapsed roller bed that can be carried around.
+  components:
+  - type: Tag
+    tags:
+    - CMRollerBed
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/rollerbeds.rsi
+    noRot: true
+    layers:
+    - state: roller_down
+      map: ["unfoldedLayer"]
+    - state: folded
+      map: ["foldedLayer"]
+      visible: false
+    - state: roller_up
+      map: ["buckledLayer"]
+      visible: false
+  - type: Item
+    size: Small
+  - type: GenericVisualizer
+    visuals:
+      enum.StrapVisuals.State:
+        buckledLayer:
+          True: { visible: true }
+          False: { visible: false }
+      enum.FoldedVisuals.State:
+        foldedLayer:
+          True: { visible: true }
+          False: { visible: false }
+        unfoldedLayer:
+          True: { visible: false }
+          False: { visible: true }
+
+- type: entity
+  parent: CMRollerBed
+  id: CMRollerBedSpawnFolded
+  suffix: folded
+  components:
+  - type: Foldable
+    folded: true
+  - type: Strap
+    enabled: false
+
+- type: entity
+  parent: CMRollerBed
+  id: CMPortableSurgicalBed
+  name: portable surgical bed
+  description: A collapsible surgical bed. It's not perfect, but it's the best you'll get short of an actual surgical table.
+  components:
+  - type: Sprite
+    layers:
+    - state: surgical_down
+      map: ["unfoldedLayer"]
+    - state: surgical_folded
+      map: ["foldedLayer"]
+      visible: false
+    - state: surgical_up
+      map: ["buckledLayer"]
+      visible: false
+  - type: Appearance
+
+- type: entity
+  parent: CMPortableSurgicalBed
+  id: CMPortableSurgicalBedSpawnFolded
+  suffix: folded
+  components:
+  - type: Foldable
+    folded: true
+  - type: Strap
+    enabled: false
+
+# TODO RMC14 medevac stretcher

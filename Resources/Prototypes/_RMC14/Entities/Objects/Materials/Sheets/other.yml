@@ -1,0 +1,49 @@
+# Phoron
+- type: entity
+  parent: SheetOtherBase
+  id: CMSheetPhoron
+  name: phoron
+  suffix: Full
+  components:
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      CMPhoron: 100
+  - type: Stack
+    stackType: CMPhoron
+    count: 50
+  - type: Sprite
+    state: phoron
+    sprite: _RMC14/Objects/Materials/Sheets/phoron.rsi
+  - type: Item
+    heldPrefix: phoron
+    size: Normal
+    sprite: _RMC14/Objects/Materials/Sheets/phoron.rsi
+  - type: Appearance
+  - type: Extractable
+    grindableSolutionName: phoron
+  - type: SolutionContainerManager
+    solutions:
+      phoron:
+        reagents:
+        - ReagentId: RMCPhoron
+          Quantity: 10
+  - type: Tag
+    tags:
+    - Sheet
+
+- type: entity
+  parent: CMSheetPhoron
+  id: CMSheetPhoron25
+  suffix: 25
+  components:
+  - type: Stack
+    count: 25
+
+- type: entity
+  parent: CMSheetPhoron
+  id: CMSheetPhoron1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1

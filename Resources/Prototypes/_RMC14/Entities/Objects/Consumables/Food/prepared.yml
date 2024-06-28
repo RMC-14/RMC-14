@@ -1,0 +1,73 @@
+- type: entity
+  abstract: true
+  parent: CMFoodBase
+  id: CMMarinePreparedMealBase
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 20
+        - ReagentId: Vitamin
+          Quantity: 5
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+
+- type: entity
+  parent: CMMarinePreparedMealBase
+  id: CMMarinePreparedMealCornbread
+  name: Marine prepared meal (cornbread)
+  description: A tray of standard Marine food. Stale cornbread, tomato paste and some green goop fill this tray.
+  components:
+  - type: Sprite
+    state: cornbread
+
+- type: entity
+  parent: CMMarinePreparedMealBase
+  id: CMMarinePreparedMealChicken
+  name: Marine prepared meal (chicken)
+  description: A tray of standard Marine food. Moist chicken, dry rice and a mildly depressed piece of broccoli fill this tray.
+  components:
+  - type: Sprite
+    state: chicken
+
+- type: entity
+  parent: CMMarinePreparedMealBase
+  id: CMMarinePreparedMealPasta
+  name: Marine prepared meal (pasta)
+  description: A tray of standard Marine food. Overcooked spaghetti, waterlogged carrots and two french fries fill this tray.
+  components:
+  - type: Sprite
+    state: pasta
+
+- type: entity
+  parent: CMMarinePreparedMealBase
+  id: CMMarinePreparedMealPizza
+  name: Marine prepared meal (pizza)
+  description: A tray of standard Marine food. Cold pizza, wet green beans and a shitty egg fill this tray. Get something other than pizza, lardass.
+  components:
+  - type: Sprite
+    state: pizza
+
+- type: entity
+  parent: CMMarinePreparedMealBase
+  id: CMMarinePreparedMealPork
+  name: Marine prepared meal (pork)
+  description: A tray of standard Marine food. Partially raw pork, goopy corn and some watery mashed potatoes fill this tray.
+  components:
+  - type: Sprite
+    state: pork
+
+- type: entity
+  parent: CMMarinePreparedMealBase
+  id: CMMarinePreparedMealTofu
+  name: Marine prepared meal (tofu)
+  description: The UNMC doesn't serve tofu you grass sucking hippie. The flag signifies your defeat.
+  components:
+  - type: Sprite
+    state: tofu

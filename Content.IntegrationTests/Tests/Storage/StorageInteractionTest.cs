@@ -67,7 +67,7 @@ public sealed class StorageInteractionTest : InteractionTest
         await ClickControl(ctrl, ContentKeyFunctions.MoveStoredItem);
         await RunTicks(10);
         Assert.That(sys.TryGetContainingContainer((sPda, null), out container));
-        // CM14: We change storage UI logic enough where this does not work anymore
+        // RMC14: We change storage UI logic enough where this does not work anymore
         // Assert.That(container!.Owner, Is.EqualTo(SPlayer));
 
         // UIs should still be open

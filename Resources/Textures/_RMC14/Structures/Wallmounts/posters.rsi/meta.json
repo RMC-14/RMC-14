@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/1ea078e04c49e1004b0bb715f252260cdf39b602/icons/obj/structures/props/posters.dmi, electro modified by DrSmugleaf",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "rolled_poster"
+    },
+    {
+      "name": "poster_ripped"
+    },
+    {
+      "name": "random_anything"
+    },
+    {
+      "name": "the_future"
+    },
+    {
+      "name": "unicorn"
+    },
+    {
+      "name": "rocker_1"
+    },
+    {
+      "name": "president"
+    },
+    {
+      "name": "beth"
+    },
+    {
+      "name": "art_1"
+    },
+    {
+      "name": "eat"
+    },
+    {
+      "name": "arious"
+    },
+    {
+      "name": "android"
+    },
+    {
+      "name": "electro"
+    },
+    {
+      "name": "silicon",
+      "delays": [
+        [
+          4,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "miss_january"
+    },
+    {
+      "name": "f_100"
+    },
+    {
+      "name": "remember_io"
+    },
+    {
+      "name": "assault_rifle"
+    },
+    {
+      "name": "miss_july"
+    },
+    {
+      "name": "miss_april"
+    },
+    {
+      "name": "suspicious"
+    },
+    {
+      "name": "theo"
+    },
+    {
+      "name": "groves"
+    },
+    {
+      "name": "bobda"
+    },
+    {
+      "name": "art_2"
+    },
+    {
+      "name": "art_3"
+    },
+    {
+      "name": "rocker_2"
+    },
+    {
+      "name": "joan"
+    },
+    {
+      "name": "safety_guidance"
+    },
+    {
+      "name": "safety_goggles_1"
+    },
+    {
+      "name": "miss_february"
+    },
+    {
+      "name": "proper_lifting"
+    },
+    {
+      "name": "safety_goggles_2"
+    },
+    {
+      "name": "mr_universe_1"
+    },
+    {
+      "name": "mr_universe_2"
+    },
+    {
+      "name": "mr_universe_3"
+    },
+    {
+      "name": "walkman"
+    },
+    {
+      "name": "tab"
+    },
+    {
+      "name": "bepis"
+    },
+    {
+      "name": "mtv"
+    },
+    {
+      "name": "jimmy"
+    },
+    {
+      "name": "vote_no"
+    },
+    {
+      "name": "falling_falcons"
+    }
+  ]
+}

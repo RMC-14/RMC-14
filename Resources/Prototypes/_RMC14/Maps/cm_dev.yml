@@ -1,0 +1,47 @@
+﻿- type: gameMap
+  id: CMDev
+  mapName: CMDev
+  mapPath: /Maps/_RMC14/dev_map.yml
+  minPlayers: 0
+  maxRandomOffset: 0
+  randomRotation: false
+  stations:
+    Dev:
+      stationProto: StandardNanotrasenStation
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: "Dev"
+      - type: StationJobs
+        availableJobs:
+          CMAuxiliarySupportOfficer: [ -1, -1 ]
+          CMDropshipCrewChief: [ -1, -1 ]
+          CMPilotDropship: [ -1, -1 ]
+          CMPilotGunship: [ -1, -1 ]
+          CMIntelOfficer: [ -1, -1 ]
+          CMCommandingOfficer: [ -1, -1 ]
+          CMExecutiveOfficer: [ -1, -1 ]
+          CMStaffOfficer: [ -1, -1 ]
+          CMChiefEngineer: [ -1, -1 ]
+          CMMaintTech: [ -1, -1 ]
+          CMOrdnanceTech: [ -1, -1 ]
+          CMCombatTech: [ -1, -1 ]
+          CMFireteamLeader: [ -1, -1 ]
+          CMHospitalCorpsman: [ -1, -1 ]
+          CMRifleman: [ -1, -1 ]
+          CMSmartGunOperator: [ -1, -1 ]
+          CMSquadLeader: [ -1, -1 ]
+          CMWeaponsSpecialist: [ -1, -1 ]
+          CMCMO: [ -1, -1 ]
+          CMDoctor: [ -1, -1 ]
+          CMNurse: [ -1, -1 ]
+          CMResearcher: [ -1, -1 ]
+          CMChiefMP: [ -1, -1 ]
+          CMMilitaryPolice: [ -1, -1 ]
+          CMMilitaryWarden: [ -1, -1 ]
+          CMCorrespondent: [ -1, -1 ]
+          CMLiaison: [ -1, -1 ]
+          CMMessTech: [ -1, -1 ]
+          CMSeniorEnlistedAdvisor: [ -1, -1 ]
+          CMCargoTech: [ -1, -1 ]
+          CMQuartermaster: [ -1, -1 ]
+          CMSurvivor: [ -1, -1 ]

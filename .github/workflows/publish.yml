@@ -3,10 +3,10 @@ name: Publish
 concurrency:
   group: publish
 
-on:
-  workflow_dispatch:
-  schedule:
-    - cron: '0 10 * * *'
+# on:
+#  workflow_dispatch:
+#  schedule:
+#    - cron: '0 10 * * *'
 
 jobs:
   build:
@@ -52,7 +52,7 @@ jobs:
     - name: Upload files to centcomm
       uses: appleboy/scp-action@master
       with:
-        host: cdn.xenomorph.gay
+        host: cdn.rouny-ss14.com
         username: cm14-build-push
         port: 2222
         key: ${{ secrets.CDN_CM14_BUILDS_PUSH_KEY }}
@@ -63,7 +63,7 @@ jobs:
     - name: Update manifest JSON
       uses: appleboy/ssh-action@master
       with:
-        host: cdn.xenomorph.gay
+        host: cdn.rouny-ss14.com
         username: cm14-build-push
         port: 2222
         key: ${{ secrets.CDN_CM14_BUILDS_PUSH_KEY }}

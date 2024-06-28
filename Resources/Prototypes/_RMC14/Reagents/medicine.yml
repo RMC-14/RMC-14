@@ -1,0 +1,568 @@
+﻿# TODO RMC14 other effects
+- type: reagent
+  parent: [ CMReagent, Dylovene ]
+  id: CMDylovene
+  name: reagent-name-cmdylovene
+  desc: reagent-desc-cmdylovene
+  color: "#3fc92a"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:EqualHealthChange
+        damage:
+        - Toxin: -1
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Brute: 1
+      - !type:Jitter
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+      - !type:PopupMessage
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        type: Local
+        visualType: Medium
+        messages: [ "generic-reagent-effect-nauseous" ]
+        probability: 0.2
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        key: Drunk
+        component: Drunk
+        time: 60
+        type: Add
+
+# TODO RMC14 other effects
+- type: reagent
+  parent: [ CMReagent, Ethylredoxrazine ]
+  id: CMEthylredoxrazine
+  name: reagent-name-cmethylredoxrazine
+  desc: reagent-desc-cmethylredoxrazine
+  color: "#605048"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:GenericStatusEffect
+        key: Drunk
+        time: 1.5
+        type: Remove
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Toxin: 0.75
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Toxin: 2.25
+
+# TODO RMC14 other effects
+- type: reagent
+  parent: [ CMReagent, Arithrazine ]
+  id: CMArithrazine
+  name: reagent-name-cmarithrazine
+  desc: reagent-desc-cmarithrazine
+  color: "#3c8529"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.03
+      effects:
+      - !type:EqualHealthChange
+        damage:
+        - Toxin: -0.5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 7.5
+        damage:
+          groups:
+            Brute: 0.5
+      - !type:Jitter
+        conditions:
+        - !type:ReagentThreshold
+          min: 12.5
+      - !type:PopupMessage
+        conditions:
+        - !type:ReagentThreshold
+          min: 12.5
+        type: Local
+        visualType: Medium
+        messages: [ "generic-reagent-effect-nauseous" ]
+        probability: 0.2
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 12.5
+        key: Drunk
+        component: Drunk
+        time: 30
+        type: Add
+      - !type:HealthChange
+        damage:
+          groups:
+            Brute: 0.12
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 7.5
+        damage:
+          groups:
+            Brute: 0.25
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 12.5
+        damage:
+          groups:
+            Brute: 0.62
+
+# TODO RMC14 other effects
+- type: reagent
+  parent: [ CMReagent, Bicaridine ]
+  id: CMBicaridine
+  name: reagent-name-cmbicaridine
+  desc: reagent-desc-cmbicaridine
+  color: "#ed4847"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:EqualHealthChange
+        damage:
+        - Brute: -0.5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Burn: 0.25
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Burn: 2.5
+            Toxin: 1
+
+# TODO RMC14 other effects (remove toxic reagents)
+- type: reagent
+  parent: [ CMReagent, Cryoxadone ]
+  id: CMCryoxadone
+  name: reagent-name-cmcryoxadone
+  desc: reagent-desc-cmcryoxadone
+  color: "#4acaca"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:EqualHealthChange
+        conditions:
+        - !type:Temperature
+          max: 170
+        damage:
+        - Brute: -1.5
+        - Burn: -1
+        - Toxin: -1.5
+      - !type:HealthChange
+        conditions:
+        - !type:Temperature
+          max: 170
+        damage:
+          types:
+            Asphyxiation: -1
+            Cellular: -0.12
+
+# TODO RMC14 other effects
+- type: reagent
+  parent: [ CMReagent, Dermaline ]
+  id: CMDermaline
+  name: reagent-name-cmdermaline
+  desc: reagent-desc-cmdermaline
+  color: "#e2972e"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:EqualHealthChange
+        damage:
+        - Burn: -0.75
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 15
+        damage:
+          groups:
+            Burn: 0.37
+            Toxin: 0.37
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 25
+        damage:
+          groups:
+            Burn: 0.88
+            Toxin: 0.88
+
+# TODO RMC14 other effects
+- type: reagent
+  parent: [ CMReagent, Dexalin ]
+  id: CMDexalin
+  name: reagent-name-cmdexalin
+  desc: reagent-desc-cmdexalin
+  color: "#1f28a7"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:EqualHealthChange
+        damage:
+        - Airloss: -1
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Toxin: 0.5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Brute: 1
+            Toxin: 2
+
+# TODO RMC14 other effects
+- type: reagent
+  parent: [ CMReagent, DexalinPlus ]
+  id: CMDexalinPlus
+  name: reagent-name-cmdexalinplus
+  desc: reagent-desc-cmdexalinplus
+  color: "#5887D5"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:RemoveDamage
+        group: Airloss
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 15
+        damage:
+          groups:
+            Toxin: 0.75
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 25
+        damage:
+          groups:
+            Brute: 1.5
+            Toxin: 3
+
+# TODO RMC14 other effects (pain)
+# TODO RMC14 injected only
+- type: reagent
+  parent: [ CMReagent, Epinephrine ]
+  id: CMEpinephrine
+  name: reagent-name-cmepinephrine
+  desc: reagent-desc-cmepinephrine
+  color: "#6bd43c"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.2
+      effects:
+      - !type:EqualHealthChange
+        conditions:
+        - !type:RecentlyDefibrillated
+        damage:
+        - Brute: -5
+        - Burn: -5
+        - Toxin: -5
+      - !type:AdjustReagent
+        conditions:
+        - !type:RecentlyDefibrillated
+        reagent: CMEpinephrine
+        amount: -1
+      - !type:RemoveRecentDefibrillation
+        conditions:
+        - !type:RecentlyDefibrillated
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 10.5
+        damage:
+          groups:
+            Toxin: 0.19
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 20
+        damage:
+          types:
+            Asphyxiation: 1.5
+
+# TODO RMC14 other effects
+# TODO RMC14 allow breathing in crit instead of reducing asphyxiation
+- type: reagent
+  parent: [ CMReagent, Inaprovaline ]
+  id: CMInaprovaline
+  name: reagent-name-cminaprovaline
+  desc: reagent-desc-cminaprovaline
+  color: "#fe33cb"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Critical
+        damage:
+          types:
+            Asphyxiation: -1
+      - !type:Jitter
+        conditions:
+        - !type:ReagentThreshold
+          min: 60
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 60
+        key: Stun
+        component: Stunned
+        time: 40
+        type: Add
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 60
+        key: KnockedDown
+        component: KnockedDown
+        time: 40
+        type: Add
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 100
+        key: Drunk
+        component: Drunk
+        time: 40
+        type: Add
+
+# TODO RMC14 other effects
+- type: reagent
+  parent: [ CMReagent, Kelotane ]
+  id: CMKelotane
+  name: reagent-name-cmkelotane
+  desc: reagent-desc-cmkelotane
+  color: "#f5e123"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:EqualHealthChange
+        damage:
+        - Burn: -0.5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Brute: 0.3
+            Toxin: 0.3
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Brute: 2.5
+            Toxin: 2.5
+
+# TODO RMC14 other effects
+- type: reagent
+  parent: [ CMReagent, Leporazine ]
+  id: CMLeporazine
+  name: reagent-name-cmleporazine
+  desc: reagent-desc-cmleporazine
+  color: "#a03919"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:StabilizeTemperature
+        stable: 310
+        change: 60
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        key: KnockedDown
+        component: KnockedDown
+        time: 40
+        type: Add
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        key: Stun
+        component: Stunned
+        time: 40
+        type: Add
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        key: Drunk
+        component: Drunk
+        time: 30
+        type: Add
+
+# TODO RMC14 other effects
+- type: reagent
+  parent: [ CMReagent, Tricordrazine ]
+  id: CMTricordrazine
+  name: reagent-name-cmtricordrazine
+  desc: reagent-desc-cmtricordrazine
+  color: "#d87f2b"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:EqualHealthChange
+        damage:
+        - Brute: -0.25
+        - Burn: -0.25
+        - Toxin: -0.5
+      - !type:HealthChange
+        damage:
+          types:
+            Asphyxiation: -0.5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Brute: 0.13
+            Burn: 0.26
+            Toxin: 0.26
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Brute: 1.5
+            Burn: 1.25
+            Toxin: 2.25
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        key: Drunk
+        component: Drunk
+        time: 60
+        type: Add
+
+# TODO RMC14 other effects
+- type: reagent
+  parent: [ CMReagent, CMBicaridine ]
+  id: CMMeralyne
+  name: reagent-name-cmmeralyne
+  desc: reagent-desc-cmmeralyne
+  color: "#b40000"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:EqualHealthChange
+        damage:
+        - Brute: -0.75
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 15
+        damage:
+          groups:
+            Burn: 0.375
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 25
+        damage:
+          groups:
+            Burn: 3.75
+            Toxin: 1.5
+
+# TODO RMC14 other effects
+# TODO RMC14 progressive eye healing
+# TODO RMC14 brain damage over 50u
+- type: reagent
+  parent: [ CMReagent, CMDylovene ]
+  id: CMImidazoline
+  name: reagent-name-cmimidazoline
+  desc: reagent-desc-cmimidazoline
+  color: "#C8A5DC"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:ChemHealEyeDamage
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Toxin: 0.5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Brute: 0.5
+            Burn: 0.5
+            Toxin: 2
+
+# TODO RMC14 other effects
+# TODO RMC14 heal cloneloss
+- type: reagent
+  parent: [ CMReagent, CMCryoxadone ]
+  id: CMClonexadone
+  name: reagent-name-cmclonexadone
+  desc: reagent-desc-cmclonexadone
+  color: "#51b4db"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:EqualHealthChange
+        conditions:
+        - !type:Temperature
+          max: 170
+        damage:
+        - Toxin: -3.75
+        - Brute: -2.25
+        - Burn: -3

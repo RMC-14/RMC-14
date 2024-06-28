@@ -1,0 +1,550 @@
+﻿- type: entity
+  abstract: true
+  parent: BaseItem
+  id: CMBoxMagazineBase
+  name: generic magazine box (? x ?)"
+  description: A box of magazines.
+  components:
+  - type: Item
+    size: Huge
+  - type: ItemSlots
+  - type: CMItemSlots
+    startingItem: CMMRE
+    count: 5
+    slot:
+      name: Magazine
+      whitelist:
+        tags:
+        - MRE
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    layers:
+    - state: base_m54ce2
+    - state: magaz_m54ce2_3
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+  - type: Appearance
+  - type: DeployableItem
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_stripe:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: magaz_reg, visible: false }
+          Low: { state: magaz_reg_1, visible: true }
+          Medium: { state: magaz_reg_2, visible: true }
+          High: { state: magaz_reg_3, visible: true }
+          Full: { state: magaz_reg, visible: true }
+
+- type: entity
+  abstract: true
+  parent: CMBoxMagazineBase
+  id: CMBoxMagazineAPBase
+  name: generic magazine box (? x ?)"
+  description: A box of magazines.
+  components:
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_stripe:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: magaz_ap, visible: false }
+          Low: { state: magaz_ap_1, visible: true }
+          Medium: { state: magaz_ap_2, visible: true }
+          High: { state: magaz_ap_3, visible: true }
+          Full: { state: magaz_ap, visible: true }
+
+- type: entity
+  abstract: true
+  parent: CMBoxMagazineBase
+  id: CMBoxMagazineHVBase
+  name: generic magazine box (? x ?)"
+  description: A box of magazines.
+  components:
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_stripe:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: magaz_hv, visible: false }
+          Low: { state: magaz_hv_1, visible: true }
+          Medium: { state: magaz_hv_2, visible: true }
+          High: { state: magaz_hv_3, visible: true }
+          Full: { state: magaz_hv, visible: true }
+
+# M54C
+- type: entity
+  parent: CMBoxMagazineBase
+  id: CMBoxMagazineRifleM54CEmpty
+  name: magazine box (M54C x 10)
+  components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazineRifleM41A
+  - type: Sprite
+    layers:
+    - state: base_m41 # icon_state = base color of box
+    - state: magaz_reg # overlay_content = sprite of mags
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_m41 # overlay_gun_type = text overlay
+    - state: base_type_reg # overlay_ammo_type = box stripe
+    - state: base_m54_lid # matches the base box
+      map: [ "lid" ]
+    - state: lid_type_reg # lid stripe,ends in the type of ammo used
+      map: [ "lid_stripe" ]
+    - type: CMItemSlots
+      count: 10
+      slot:
+        whitelist:
+          tags:
+          - CMMagazineRifleM54C
+
+- type: entity
+  parent: CMBoxMagazineRifleM41AEmpty
+  id: CMBoxMagazineRifleM41A
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMMagazineRifleM54C
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54C
+
+- type: entity
+  parent: CMBoxMagazineAPBase
+  id: CMBoxMagazineRifleM54CAPEmpty
+  name: magazine box (AP M54C x 10)
+  components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazineRifleM41AAP
+  - type: Sprite
+    layers:
+    - state: base_m41
+    - state: magaz_ap
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_m41
+    - state: base_type_ap
+    - state: base_m54_lid
+      map: [ "lid" ]
+    - state: lid_type_ap
+      map: [ "lid_stripe" ]
+    - type: CMItemSlots
+      startingItem: CMMagazineRifleM54CAP
+      count: 10
+      slot:
+        whitelist:
+          tags:
+          - CMMagazineRifleM54CAP
+
+- type: entity
+  parent: CMBoxMagazineRifleM41AAPEmpty
+  id: CMBoxMagazineRifleM41AAP
+  name: magazine box (AP M41A x 10)
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMMagazineRifleM54CAP
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54CAP
+
+- type: entity
+  parent: CMBoxMagazineBase
+  id: CMBoxMagazineRifleM54CEmpty
+  name: magazine box (Ext M54C x 8)
+  components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazineRifleM41AExt
+  - type: Sprite
+    layers:
+    - state: base_m41
+    - state: magaz_reg
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_m41
+    - state: base_type_ext
+    - state: base_m54_lid
+      map: [ "lid" ]
+    - state: lid_type_ext
+      map: [ "lid_stripe" ]
+  - type: CMItemSlots
+    count: 8
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54CExt
+
+- type: entity
+  parent: CMBoxMagazineBase
+  id: CMBoxMagazineRifleM41AExt
+  suffix: Filled
+  name: magazine box (Ext M41A x 8)
+  components:
+  - type: CMItemSlots
+    startingItem: CMMagazineRifleM54CExt
+    count: 8
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54CExt
+
+# M63
+- type: entity
+  parent: CMBoxMagazineHVBase
+  id: CMBoxMagazineSMGM63Empty
+  name: magazine box (M63 x 12)
+  components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazineSMGM39
+  - type: Sprite
+    layers:
+    - state: base_m63
+    - state: text_m63
+    - state: base_type_reg
+    - state: magaz_hv
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_m63_lid
+      map: [ "lid" ]
+    - state: lid_type_reg
+      map: [ "lid_stripe" ]
+    - type: CMItemSlots
+      count: 12
+      slot:
+        whitelist:
+          tags:
+          - CMMagazineSMGM63
+
+- type: entity
+  parent: CMBoxMagazineSMGM39Empty
+  id: CMBoxMagazineSMGM39
+  name: magazine box (M39 x 12)
+  components:
+  - type: CMItemSlots
+    startingItem: CMMagazineSMGM63
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineSMGM63
+
+- type: entity
+  parent: CMBoxMagazineBase
+  id: CMBoxMagazineSMGM63APEmpty
+  name: magazine box (AP M63 x 12)
+  components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazineSMGM39AP
+  - type: Sprite
+    layers:
+    - state: base_m63
+    - state: text_m63
+    - state: base_type_ap
+    - state: magaz_ap
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_m63_lid
+      map: [ "lid" ]
+    - state: lid_type_ap
+      map: [ "lid_stripe" ]
+    - type: CMItemSlots
+      count: 12
+      slot:
+        whitelist:
+          tags:
+          - CMMagazineSMGM63AP
+
+- type: entity
+  parent: CMBoxMagazineSMGM39APEmpty
+  id: CMBoxMagazineSMGM39AP
+  suffix: Full
+  name: magazine box (AP M39 x 12)
+  components:
+  - type: CMItemSlots
+    startingItem: CMMagazineSMGM63AP
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineSMGM63AP
+
+- type: entity
+  parent: CMBoxMagazineHVBase
+  id: CMBoxMagazineSMGM63ExtEmpty
+  name: magazine box (Ext M63 x 10)
+  components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazineSMGM39Ext
+  - type: Sprite
+    layers:
+    - state: base_m63
+    - state: text_m63
+    - state: base_type_ext
+    - state: magaz_hv
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_m63_lid
+      map: [ "lid" ]
+    - state: lid_type_ext
+      map: [ "lid_stripe" ]
+    - type: CMItemSlots
+      count: 10
+      slot:
+        whitelist:
+          tags:
+          - CMMagazineSMGM39Ext
+
+- type: entity
+  parent: CMBoxMagazineSMGM39ExtEmpty
+  id: CMBoxMagazineSMGM39Ext
+  name: magazine box (Ext M39 x 10)
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMMagazineSMGM63Ext
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineSMGM63Ext
+
+# M4SPR
+- type: entity
+  parent: CMBoxMagazineBase
+  id: CMBoxMagazineRifleM4SPREmpty
+  name: magazine box (M4SPR x 16)
+  components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazineRifleM4RA
+  - type: Sprite
+    layers:
+    - state: base_m4spr
+    - state: text_m4spr
+    - state: base_type_reg
+    - state: magaz_reg
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_m4spr_lid
+      map: [ "lid" ]
+    - state: lid_type_reg
+      map: [ "lid_stripe" ]
+    - type: CMItemSlots
+      count: 16
+      slot:
+        whitelist:
+          tags:
+          - CMMagazineRifleM4SPR
+
+- type: entity
+  parent: CMBoxMagazineRifleM4RAEmpty
+  id: CMBoxMagazineRifleM4RA
+  name: magazine box (M4RA x 16)
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMMagazineRifleM4SPR
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM4SPR
+
+- type: entity
+  parent: CMBoxMagazineBase
+  id: CMBoxMagazineRifleM4SPRAPEmpty
+  name: magazine box (AP M4SPR x 16)
+  components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazineRifleM4RAAP
+  - type: Sprite
+    layers:
+    - state: base_m4spr
+    - state: text_m4spr
+    - state: base_type_ap
+    - state: magaz_ap
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_m4spr_lid
+      map: [ "lid" ]
+    - state: lid_type_ap
+      map: [ "lid_stripe" ]
+  - type: CMItemSlots
+    startingItem: CMMagazineRifleM4SPRAP
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM4SPRAP
+
+- type: entity
+  parent: CMBoxMagazineRifleM4RAAPEmpty
+  id: CMBoxMagazineRifleM4RAAP
+  name: magazine box (AP M4RA x 16)
+  components:
+  - type: CMItemSlots
+    startingItem: CMMagazineRifleM4SPRAP
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM4SPRAP
+
+- type: entity # continue here
+  parent: CMBoxMagazineBase
+  id: CMBoxMagazineRifleM4SPRExt
+  name: magazine box (Ext M4SPR x 12)
+  components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazineRifleM4RAExt
+  - type: Sprite
+    layers:
+    - state: base_m4spr
+    - state: text_m4spr
+    - state: base_type_ext
+    - state: magaz_reg
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_m4spr_lid
+      map: [ "lid" ]
+    - state: lid_type_ext
+      map: [ "lid_stripe" ]
+  - type: CMItemSlots
+    startingItem: CMMagazineRifleM4SPRExt
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM4SPRExt
+
+# M1984
+- type: entity
+  parent: CMBoxMagazineBase
+  id: CMBoxMagazinePistolM1984
+  name: magazine box (M1984 x 16)
+  components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazinePistolM4A3
+  - type: Sprite
+    layers:
+    - state: base_m1984
+    - state: text_m1984
+    - state: base_type_reg
+    - state: magaz_reg
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_m1984_lid
+      map: [ "lid" ]
+    - state: lid_type_reg
+      map: [ "lid_stripe" ]
+  - type: CMItemSlots
+    startingItem: CMMagazinePistolM1984
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - CMMagazinePistolM1984
+
+#- type: entity # TODO RMC14 this box is done but needs mags made, dont forget to add it to crafting and cargo
+#  parent: CMBoxMagazineBase
+#  id: CMBoxMagazinePistolM1984AP
+#  name: magazine box (AP M1984 x 16)
+#  components:
+#  - type: Construction
+#    graph: CMBoxMagazine
+#    node: CMBoxMagazinePistolM1984AP
+#  - type: Sprite
+#    layers:
+#    - state: base_m1984
+#    - state: text_m1984
+#    - state: base_type_ap
+#    - state: magaz_ap
+#      map: [ "enum.CMItemSlotsLayers.Fill" ]
+#    - state: base_m1984_lid
+#      map: [ "lid" ]
+#    - state: lid_type_ap
+#      map: [ "lid_stripe" ]
+#  - type: CMItemSlots
+#    startingItem: CMMagazinePistolM1984AP
+#    count: 16
+#    slot:
+#      whitelist:
+#        tags:
+#        - CMMagazinePistolM1984AP
+
+# M77
+- type: entity
+  parent: CMBoxMagazineAPBase
+  id: CMBoxMagazinePistolM77AP
+  name: magazine box (M77 AP x 16)
+  components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazinePistol88m4AP
+  - type: Sprite
+    layers:
+    - state: base_m77
+    - state: text_m77
+    - state: base_type_ap
+    - state: magaz_ap
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_m77_lid
+      map: [ "lid" ]
+    - state: lid_type_ap
+      map: [ "lid_stripe" ]
+  - type: CMItemSlots
+    startingItem: CMMagazinePistolM77AP
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - CMMagazinePistolM77AP
+
+# MK80
+- type: entity
+  parent: CMBoxMagazineBase
+  id:  CMBoxMagazinePistolMK80
+  name: magazine box (MK80 x 16)
+  components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazinePistolMK80
+  - type: Sprite
+    layers:
+    - state: base_mk80
+    - state: text_mk80
+    - state: base_type_reg
+    - state: magaz_reg
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_mk80_lid
+      map: [ "lid" ]
+    - state: lid_type_reg
+      map: [ "lid_stripe" ]
+  - type: CMItemSlots
+    startingItem: CMMagazinePistolMK80
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - CMMagazinePistolMK80

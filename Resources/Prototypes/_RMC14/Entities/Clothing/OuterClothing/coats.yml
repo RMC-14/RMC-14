@@ -1,0 +1,140 @@
+# ChiefMP
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: CMCoatChiefMP
+  name: chief military police service jacket
+  description: A marine service jacket adopted for use by Military Police personnel on board Marine ships. Ironically most ships require their MP departments to use full armor, making these barely used by on duty MPs. Very popular among those who want to inexplicably smell like donuts.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/cmp.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/cmp.rsi
+
+# Military Warden
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: CMCoatWarden
+  name: military warden service jacket
+  description: A marine service jacket adopted for use by Military Wardens on board Marine ships. Ironically most ships require their MP departments to use full armor, making these barely used by on duty Wardens. The jacket of choice for looking all night at a set of monitors, while cigarette butts pile around you.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/warden.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/warden.rsi
+
+# Military Police
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: CMCoatMP
+  name: military police service jacket
+  description: A marine service jacket adopted for use by Military Police personnel on board Marine ships. Ironically most ships require their MP departments to use full armor, making these barely used by on duty MPs. This variant is also available to regular Marines, if they are willing to bear the shame.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/mp.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/mp.rsi
+
+# Mess Seargeant/Tech
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: CMCoatMessTech
+  name: mess technician jacket
+  description: Smells like vanilla. Signifies prestige and power, if a little flashy.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/chef.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/chef.rsi
+
+# Auxiliary Supply Officer
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: CMCoatASO
+  name: aso jacket
+  description: Standard-issue officer jacket.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso.rsi
+
+# Commanding Officer
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: CMCoatCO
+  name: commanding officer jacket
+  description: Standard-issue commanding officer jacket.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/jacket.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/jacket.rsi
+
+- type: entity
+  parent: CMCoatCO
+  id: CMCoatCOBomber
+  name: commanding officer bomber
+  description: Standard-issue commanding officer bomber.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/bomber.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/bomber.rsi
+
+- type: entity
+  parent: CMCoatCO
+  id: CMCoatCOFormalBlack
+  name: formal commanding officer jacket
+  description: Standard-issue commanding officer jacket.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/formal_black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/formal_black.rsi
+
+- type: entity
+  parent: CMCoatCO
+  id: CMCoatCOFormalWhite
+  name: formal commanding officer jacket
+  description: Standard-issue commanding officer jacket.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/formal_white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/formal_white.rsi
+
+# Officer
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: CMCoatOfficer
+  name: officer jacket
+  description: Standard-issue officer jacket.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/officer.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/officer.rsi
+
+# Longcoat
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: CMCoatLong
+  name: long coat
+  description: Standard-issue coat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/long_coat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/long_coat.rsi
+
+# Correspondent
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: CMCoatCorrespondent
+  name: correspondent coat
+  description: Standard-issue correspondent coat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/correspondent.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/correspondent.rsi

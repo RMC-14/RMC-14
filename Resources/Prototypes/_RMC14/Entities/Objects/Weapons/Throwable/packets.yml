@@ -1,0 +1,61 @@
+﻿- type: entity
+  abstract: true
+  parent: BaseStorageItem
+  id: CMPacketBase
+  name: packet
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/packets.rsi
+    state: general_packet
+  - type: Item
+    size: Normal
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1 # 3 slots
+    whitelist:
+      tags:
+      - Grenade
+  - type: UseDelay
+    delay: 0.5
+  - type: FixedItemSizeStorage
+
+- type: entity
+  parent: CMPacketBase
+  id: CMPacketGrenadeHighExplosive
+  name: HEDP grenade packet
+  description: It contains three HEDP high explosive grenades.
+  components:
+  - type: Sprite
+    state: hedp_packet
+
+- type: entity
+  parent: CMPacketGrenadeHighExplosive
+  id: CMPacketGrenadeHighExplosiveFilled
+  name: HEDP grenade packet
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeHighExplosive
+      amount: 3
+
+- type: entity
+  parent: CMPacketBase
+  id: CMPacketGrenadeFrag
+  name: HEFA grenade packet
+  description: It contains three HEFA grenades. Don't tell the HEFA order.
+  components:
+  - type: Sprite
+    state: hefa_packet
+
+- type: entity
+  parent: CMPacketGrenadeFrag
+  id: CMPacketGrenadeFragFilled
+  name: HEFA grenade packet
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFrag
+      amount: 3
