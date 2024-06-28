@@ -15,3 +15,9 @@
     component: Muted
     time: 5
     range: 5
+    whitelist:
+      components: # Will not effect animals/xenos
+        - Marine
+    blacklist:
+      components:
+        - MarineOrders # If you can give orders, the whistle doesn't effect you

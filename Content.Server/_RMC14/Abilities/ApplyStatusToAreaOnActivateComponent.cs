@@ -1,3 +1,4 @@
+using Content.Shared.Whitelist;
 
 namespace Content.Server._RMC14.Abilities;
 
@@ -15,4 +16,13 @@ public sealed partial class ApplyStatusToAreaOnActivateComponent : Component
 
     [DataField]
     public float Range = 1;
+
+    [DataField]
+    public EntityWhitelist? Blacklist = null;
+
+    [DataField]
+    public EntityWhitelist? WhiteList = null;
+
+    [DataField]
+    public bool ApplyToSelf = false;
 }
