@@ -19,6 +19,9 @@
   components:
   - type: Sprite
     color: "#8d0e2a"
+  - type: RequiresSkill
+    skills:
+      police: 2
   - type: ApplyStatusToAreaOnActivate
     key: Muted
     component: Muted
