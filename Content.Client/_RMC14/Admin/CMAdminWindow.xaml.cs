@@ -14,6 +14,6 @@ public sealed partial class CMAdminWindow : DefaultWindow
 
         TabContainer.SetTabTitle(TransformTab, Loc.GetString("cm-ui-transform-tab"));
         TabContainer.SetTabTitle(XenoTab, Loc.GetString("cm-ui-xeno-tab"));
+        TabContainer.SetTabTitle(SquadsTab, Loc.GetString("cm-ui-squads-tab"));
     }
 }
-

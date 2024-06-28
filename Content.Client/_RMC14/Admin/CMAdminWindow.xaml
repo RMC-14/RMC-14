@@ -6,5 +6,6 @@
     <TabContainer Name="Tabs">
         <cc:CMTransformTab Name="TransformTab" Access="Public" />
         <cc:CMXenoTab Name="XenoTab" Access="Public" />
+        <cc:CMSquadsTab Name="SquadsTab" Access="Public" />
     </TabContainer>
 </cc:CMAdminWindow>

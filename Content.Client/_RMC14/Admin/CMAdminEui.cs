@@ -1,10 +1,12 @@
 ﻿using System.Numerics;
 using Content.Client.Eui;
 using Content.Shared._RMC14.Admin;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Eui;
 using Content.Shared.Humanoid.Prototypes;
 using JetBrains.Annotations;
+using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 using static Robust.Client.UserInterface.Controls.ItemList;
@@ -130,6 +132,7 @@ public sealed class CMAdminEui : BaseEui
         if (state is not CMAdminEuiState s)
             return;
 
+        _adminWindow.XenoTab.HiveList.Clear();
         foreach (var hive in s.Hives)
         {
             var list = _adminWindow.XenoTab.HiveList;
@@ -138,6 +141,42 @@ public sealed class CMAdminEui : BaseEui
                 Text = hive.Name,
                 Metadata = hive
             });
+        }
+
+        _adminWindow.SquadsTab.Squads.DisposeAllChildren();
+        foreach (var squad in s.Squads)
+        {
+            var squadRow = new CMSquadRow()
+            {
+                HorizontalExpand = true,
+                Margin = new Thickness(0, 0, 0, 10),
+            };
+
+            squadRow.AddToSquadButton.OnPressed += _ => SendMessage(new CMAdminAddToSquadMsg(squad.Id));
+
+            var button = squadRow.CreateButton;
+            if (squad.Exists)
+            {
+                squadRow.Members.Text = Loc.GetString("cm-ui-members", ("members", squad.Members));
+                button.Disabled = true;
+            }
+            else
+            {
+                button.OnPressed += _ => SendMessage(new CMAdminCreateSquadMsg(squad.Id));
+            }
+
+            if (_prototypes.TryIndex(squad.Id, out var squadPrototype))
+            {
+                button.Text = squadPrototype.Name;
+
+                if (squad.Exists &&
+                    squadPrototype.TryGetComponent(out SquadTeamComponent? squadComp, _compFactory))
+                {
+                    button.ModulateSelfOverride = squadComp.Color;
+                }
+            }
+
+            _adminWindow.SquadsTab.Squads.AddChild(squadRow);
         }
     }
 

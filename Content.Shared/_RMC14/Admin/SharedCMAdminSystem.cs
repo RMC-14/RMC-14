@@ -11,8 +11,6 @@ public abstract class SharedCMAdminSystem : EntitySystem
 
     public override void Initialize()
     {
-        base.Initialize();
-
         SubscribeLocalEvent<GetVerbsEvent<CMAdminVerb>>(OnXenoGetVerbs);
     }
 
