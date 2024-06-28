@@ -8563,12 +8563,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 101.5,-55.5
       parent: 1
-    - type: Door
-      secondsUntilStateChange: -49475.977
-      state: Opening
-    - type: DeviceLinkSource
-      lastSignals:
-        DoorStatus: True
   - uid: 18853
     components:
     - type: Transform
@@ -9496,12 +9490,6 @@ entities:
     - type: Transform
       pos: 91.5,-36.5
       parent: 1
-    - type: Door
-      secondsUntilStateChange: -6853.8887
-      state: Opening
-    - type: DeviceLinkSource
-      lastSignals:
-        DoorStatus: True
   - uid: 17155
     components:
     - type: MetaData
@@ -15022,28 +15010,12 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 137.5,-82.5
       parent: 1
-    - type: CMDoubleDoor
-      lastOpeningAt: 43929.2410136
-    - type: Door
-      secondsUntilStateChange: -53282.797
-      state: Opening
-    - type: DeviceLinkSource
-      lastSignals:
-        DoorStatus: True
   - uid: 18201
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 136.5,-82.5
       parent: 1
-    - type: CMDoubleDoor
-      lastOpeningAt: 43929.2410136
-    - type: Door
-      secondsUntilStateChange: -53282.797
-      state: Opening
-    - type: DeviceLinkSource
-      lastSignals:
-        DoorStatus: True
   - uid: 18202
     components:
     - type: Transform
@@ -139366,6 +139338,65 @@ entities:
     components:
     - type: Transform
       pos: 156.5,-80.5
+      parent: 1
+- proto: RMCBookcase
+  entities:
+  - uid: 21323
+    components:
+    - type: Transform
+      pos: 148.5,-66.5
+      parent: 1
+  - uid: 21324
+    components:
+    - type: Transform
+      pos: 149.5,-66.5
+      parent: 1
+  - uid: 21325
+    components:
+    - type: Transform
+      pos: 150.5,-66.5
+      parent: 1
+  - uid: 21326
+    components:
+    - type: Transform
+      pos: 148.5,-72.5
+      parent: 1
+  - uid: 21327
+    components:
+    - type: Transform
+      pos: 148.5,-73.5
+      parent: 1
+  - uid: 21328
+    components:
+    - type: Transform
+      pos: 148.5,-74.5
+      parent: 1
+  - uid: 21329
+    components:
+    - type: Transform
+      pos: 148.5,-76.5
+      parent: 1
+  - uid: 21330
+    components:
+    - type: Transform
+      pos: 148.5,-78.5
+      parent: 1
+  - uid: 21331
+    components:
+    - type: Transform
+      pos: 148.5,-79.5
+      parent: 1
+  - uid: 21332
+    components:
+    - type: Transform
+      pos: 148.5,-80.5
+      parent: 1
+- proto: RMCBookcaseEngineering
+  entities:
+  - uid: 21333
+    components:
+    - type: Transform
+      pos: 80.5,-118.5
       parent: 1
 - proto: RMCCurtainMedical
   entities:
