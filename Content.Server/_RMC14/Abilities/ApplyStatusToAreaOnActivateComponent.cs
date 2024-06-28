@@ -21,7 +21,7 @@ public sealed partial class ApplyStatusToAreaOnActivateComponent : Component
     public EntityWhitelist? Blacklist = null;
 
     [DataField]
-    public EntityWhitelist? WhiteList = null;
+    public EntityWhitelist? Whitelist = null;
 
     [DataField]
     public bool ApplyToSelf = false;
