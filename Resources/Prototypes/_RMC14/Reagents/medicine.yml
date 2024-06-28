@@ -484,3 +484,85 @@
         component: Drunk
         time: 60
         type: Add
+
+# TODO RMC14 other effects
+- type: reagent
+  parent: [ CMReagent, CMBicaridine ]
+  id: CMMeralyne
+  name: reagent-name-cmmeralyne
+  desc: reagent-desc-cmmeralyne
+  color: "#b40000"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:EqualHealthChange
+        damage:
+        - Brute: -0.75
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 15
+        damage:
+          groups:
+            Burn: 0.375
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 25
+        damage:
+          groups:
+            Burn: 3.75
+            Toxin: 1.5
+
+# TODO RMC14 other effects
+# TODO RMC14 progressive eye healing
+# TODO RMC14 brain damage over 50u
+- type: reagent
+  parent: [ CMReagent, CMDylovene ]
+  id: CMImidazoline
+  name: reagent-name-cmimidazoline
+  desc: reagent-desc-cmimidazoline
+  color: "#C8A5DC"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:ChemHealEyeDamage
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Toxin: 0.5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Brute: 0.5
+            Burn: 0.5
+            Toxin: 2
+
+# TODO RMC14 other effects
+# TODO RMC14 heal cloneloss
+- type: reagent
+  parent: [ CMReagent, CMCryoxadone ]
+  id: CMClonexadone
+  name: reagent-name-cmclonexadone
+  desc: reagent-desc-cmclonexadone
+  color: "#51b4db"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:EqualHealthChange
+        conditions:
+        - !type:Temperature
+          max: 170
+        damage:
+        - Toxin: -3.75
+        - Brute: -2.25
+        - Burn: -3
