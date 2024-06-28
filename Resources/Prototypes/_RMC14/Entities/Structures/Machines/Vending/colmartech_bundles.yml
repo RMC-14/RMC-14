@@ -37,6 +37,7 @@
     - CMVendorHeadsetSquadCorpsman
     - CMHandsBlackMarine
     - CMBootsBlackFilled
+    - ClothingEyesHudMedical # TODO RMC14 Medhud
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
