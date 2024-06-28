@@ -103,3 +103,16 @@
 
 - type: Tag
   id: RMCGlovesLatex
+- type: entity
+  parent: CMHandsBlackMarine
+  id: RMCHandsM3G4
+  name: M3-G4 grenadier gloves
+  description: A pair of plated, but nimble, gloves.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/grenadier.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/grenadier.rsi
+  - type: CMArmor
+    armor: 40
+    explosionArmor: 50
