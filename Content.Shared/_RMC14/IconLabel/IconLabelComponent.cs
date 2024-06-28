@@ -9,7 +9,7 @@ namespace Content.Shared._RMC14.IconLabel;
 public sealed partial class IconLabelComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public LocId LabelTextLocId = string.Empty;
+    public LocId? LabelTextLocId;
 
     [DataField, AutoNetworkedField]
     public int TextSize = 8;

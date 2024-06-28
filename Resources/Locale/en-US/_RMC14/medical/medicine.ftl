@@ -39,7 +39,7 @@ reagent-desc-cmtricordrazine = Tricordrazine is a highly potent stimulant, origi
 
 # Medical Icon Labels
 rmc-tricordazine-container-label-text = TI
-rmc-bicardine-container-label-text = BI
+rmc-bicaridine-container-label-text = BI
 rmc-kelotane-container-label-text = KE
 rmc-dexalin-container-label-text = DX
 rmc-dylovene-container-label-text = DY

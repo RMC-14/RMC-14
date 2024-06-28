@@ -57,7 +57,7 @@
     - id: CMPillBicaridine
       amount: 4
   - type: IconLabel
-    labelTextLocId: rmc-bicardine-container-label-text
+    labelTextLocId: rmc-bicaridine-container-label-text
 
 - type: entity
   parent: CMPacketPills

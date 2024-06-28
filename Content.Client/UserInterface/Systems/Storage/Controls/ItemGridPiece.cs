@@ -222,7 +222,8 @@ public sealed class ItemGridPiece : Control, IEntityControl
 
         if (_entityManager.TryGetComponent(Entity, out IconLabelComponent? iconLabel))
         {
-            if (!Loc.TryGetString(iconLabel.LabelTextLocId, out string? msg))
+            if (iconLabel.LabelTextLocId is null ||
+                !Loc.TryGetString(iconLabel.LabelTextLocId, out string? msg))
             {
                 return;
             }

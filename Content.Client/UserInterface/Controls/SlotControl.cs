@@ -247,7 +247,7 @@ namespace Content.Client.UserInterface.Controls
             IconLabel.FontColorOverride = Color.Black;
             if (_entities.TryGetComponent(Entity, out IconLabelComponent? iconLabel))
             {
-                if (Loc.TryGetString(iconLabel.LabelTextLocId, out String? labelText))
+                if (iconLabel.LabelTextLocId is not null && Loc.TryGetString(iconLabel.LabelTextLocId, out String? labelText))
                 {
                     IconLabel.Text = labelText;
                 }
