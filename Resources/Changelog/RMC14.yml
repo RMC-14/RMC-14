@@ -1696,5 +1696,19 @@
   id: 204
   time: '2024-06-28T01:32:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2409
+- author: Zarq0
+  changes:
+  - message: Ported Meralyne, Imidazoline and Clonexadone from CM13.
+    type: Add
+  id: 205
+  time: '2024-06-28T03:33:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2642
+- author: DrSmugleaf
+  changes:
+  - message: Added Squad creation and moving marines between squads to the admin menu.
+    type: Add
+  id: 206
+  time: '2024-06-28T03:34:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2657
 Name: RMC14
 Order: -1
