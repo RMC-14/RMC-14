@@ -21,6 +21,10 @@
   - type: Tag
     tags:
     - PillPacket
+  - type: IconLabel
+    textSize: 4
+    textColor: White
+    storedOffset: -25, -5
 
 - type: Tag
   id: PillPacket
@@ -37,6 +41,8 @@
     contents:
     - id: CMPillTricordrazine
       amount: 4
+  - type: IconLabel
+    labelTextLocId: rmc-tricordazine-container-label-text
 
 - type: entity
   parent: CMPacketPills
@@ -50,6 +56,8 @@
     contents:
     - id: CMPillBicaridine
       amount: 4
+  - type: IconLabel
+    labelTextLocId: rmc-bicardine-container-label-text
 
 - type: entity
   parent: CMPacketPills
@@ -63,6 +71,8 @@
     contents:
     - id: CMPillKelotane
       amount: 4
+  - type: IconLabel
+    labelTextLocId: rmc-kelotane-container-label-text
 
 # TODO RMC14 tramadol pill packet
 # TODO RMC14 oxycodone pill packet
