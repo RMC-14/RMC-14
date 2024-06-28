@@ -160,8 +160,10 @@
 #      entries: []
 #    - name: Reagent tanks
 #      entries: []
-#    - name: Research
-#      entries: []
+    - name: Research
+      entries:
+      - cost: 3000
+        crate: RMCCrateResearchPhoron
 #    - name: Restricted Equipment
 #      entries: []
     - name: Supplies
