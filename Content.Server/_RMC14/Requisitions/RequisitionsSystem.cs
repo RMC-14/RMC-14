@@ -26,7 +26,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
 
-    public const string PaperRequisitionInvoice = "CMPaperRequisitionInvoice";
+    public const string PaperRequisitionInvoice = "RMCPaperRequisitionInvoice";
 
     public override void Initialize()
     {

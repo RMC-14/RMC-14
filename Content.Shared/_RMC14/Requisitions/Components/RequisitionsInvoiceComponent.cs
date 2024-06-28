@@ -11,7 +11,7 @@ public sealed partial class RequisitionsInvoiceComponent : Component
     public int Reward = 300;
 
     [DataField]
-    public EntProtoId PaperOutput = "CMPaperRequisitionInvoice";
+    public EntProtoId PaperOutput = "RMCPaperRequisitionInvoice";
 
     [DataField]
     public string? RequiredStamp = "paper_stamp-approve";

@@ -45,7 +45,7 @@
 - type: entity
   name: requisition invoice
   parent: CMPaper
-  id: CMPaperRequisitionInvoice
+  id: RMCPaperRequisitionInvoice
   description: 'A single unit of bureaucracy awaiting for approval.'
   components:
   - type: Sprite
