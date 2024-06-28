@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: Whistle
   id: CMWhistle
   name: whistle
@@ -10,3 +10,8 @@
     slots:
       - mask
       - neck
+  - type: ApplyStatusToAreaOnActivate
+    key: Muted
+    component: Muted
+    time: 5
+    range: 5
