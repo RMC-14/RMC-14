@@ -1,8 +1,6 @@
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Interaction.Events;
-using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
-using Content.Shared.Whistle;
 using Content.Shared.Whitelist;
 
 namespace Content.Server._RMC14.Abilities;
@@ -13,7 +11,6 @@ public sealed class ApplyToAreaOnActivateSystem : EntitySystem
     [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly SkillsSystem _skillSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
     public override void Initialize()
     {
         base.Initialize();
