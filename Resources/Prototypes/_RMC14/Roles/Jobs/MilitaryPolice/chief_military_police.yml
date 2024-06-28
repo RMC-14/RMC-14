@@ -54,6 +54,7 @@
     belt: CMBeltSecurityFilled
     #    pocket1: TODO RMC14 tape recorder
     pocket2: CMPouchGeneralLarge
+    neck: CMWhistleMP
 
 - type: entity
   parent: CMSpawnPointJobBase
