@@ -8,3 +8,7 @@ cm-ui-audio-voicelines-moth = Play voicelines for moths
 cm-ui-audio-voicelines-reptilian = Play voicelines for reptilians
 cm-ui-audio-voicelines-slime = Play voicelines for slimes
 cm-ui-roadmap = Roadmap
+rmc-ui-link-discord-account = Link Discord Account
+rmc-ui-link-discord-account-text = Click the button below to copy your code then go to the #account-linking channel to link your accounts.
+rmc-ui-link-discord-account-copy = Copy code
+rmc-ui-link-discord-account-copied = Copied!

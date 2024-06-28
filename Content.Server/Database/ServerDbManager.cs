@@ -304,6 +304,14 @@ namespace Content.Server.Database
         Task<bool> RemoveJobWhitelist(Guid player, ProtoId<JobPrototype> job);
 
         #endregion
+
+        #region RMC14
+
+        Task<Guid?> GetLinkingCode(Guid player);
+
+        Task SetLinkingCode(Guid player, Guid code);
+
+        #endregion
     }
 
     public sealed class ServerDbManager : IServerDbManager
@@ -905,6 +913,18 @@ namespace Content.Server.Database
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.RemoveJobWhitelist(player, job));
+        }
+
+        public Task<Guid?> GetLinkingCode(Guid player)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetLinkingCode(player));
+        }
+
+        public Task SetLinkingCode(Guid player, Guid code)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetLinkingCode(player, code));
         }
 
         // Wrapper functions to run DB commands from the thread pool.

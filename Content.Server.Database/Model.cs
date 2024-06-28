@@ -48,6 +48,7 @@ namespace Content.Server.Database
         public DbSet<RMCLinkedAccount> RMCLinkedAccounts { get; set; } = default!;
         public DbSet<RMCPatronTier> RMCPatronTiers { get; set; } = default!;
         public DbSet<RMCPatron> RMCPatrons { get; set; } = default!;
+        public DbSet<RMCLinkingCodes> RMCLinkingCodes { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -361,6 +362,17 @@ namespace Content.Server.Database
                 .HasForeignKey(p => p.TierId)
                 .HasPrincipalKey(p => p.Id)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RMCPatronTier>()
+                .HasIndex(t => t.DiscordRole)
+                .IsUnique();
+
+            modelBuilder.Entity<RMCLinkingCodes>()
+                .HasOne(l => l.Player)
+                .WithOne(p => p.LinkingCodes)
+                .HasForeignKey<RMCLinkingCodes>(l => l.PlayerId)
+                .HasPrincipalKey<Player>(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public virtual IQueryable<AdminLog> SearchLogs(IQueryable<AdminLog> query, string searchText)
@@ -581,8 +593,8 @@ namespace Content.Server.Database
 
         // RMC14
         public RMCLinkedAccount? LinkedAccount { get; set; }
-        // RMC14
         public RMCPatron? Patron { get; set; }
+        public RMCLinkingCodes? LinkingCodes { get; set; }
     }
 
     [Table("whitelist")]

@@ -44,6 +44,12 @@ public sealed class RMCPatronTier
 
     public bool RoundEndShoutout { get; set; }
 
+    public string Name { get; set; } = default!;
+
+    public ulong DiscordRole { get; set; }
+
+    public int Priority { get; set; }
+
     public List<RMCPatron> Patrons { get; set; } = default!;
 }
 
@@ -59,4 +65,19 @@ public sealed class RMCPatron
     public int TierId { get; set; }
 
     public RMCPatronTier Tier { get; set; } = default!;
+}
+
+[Table("rmc_linking_codes")]
+[Index(nameof(Code))]
+public sealed class RMCLinkingCodes
+{
+    [Key]
+    public Guid PlayerId { get; set; }
+
+    public Player Player { get; set; } = default!;
+
+    public Guid Code { get; set; }
+
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+    public DateTime CreationTime { get; set; }
 }

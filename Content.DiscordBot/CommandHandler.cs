@@ -60,28 +60,84 @@ public sealed class CommandHandler(DiscordSocketClient client, CommandService co
         switch (modal.Data.CustomId)
         {
             case "link-ss14-account":
-                var name = modal.Data.Components.First(c => c.CustomId == "account_name").Value;
-                if (string.IsNullOrWhiteSpace(name))
+                if (modal.GuildId is not { } guildId)
                     break;
 
-                var player = await db.Player.FirstOrDefaultAsync(p => p.LastSeenUserName.ToLower() == name.ToLower());
-                if (player == null)
+                var codeStr = modal.Data.Components.First(c => c.CustomId == "code").Value.Trim();
+                if (string.IsNullOrWhiteSpace(codeStr))
                     break;
 
-                var author = modal.Message.Author.Id;
-                var account = db.RMCLinkedAccounts.FirstOrDefault(l => l.DiscordId == author);
-                if (account == null)
+                await modal.DeferAsync(true);
+                if (!Guid.TryParse(codeStr, out var code))
                 {
-                    account = new RMCLinkedAccount
-                    {
-                        PlayerId = player.UserId,
-                        DiscordId = author,
-                    };
-
-                    db.RMCLinkedAccounts.Add(account);
+                    await modal.FollowupAsync($"{codeStr} isn't a valid code! Get one in-game from the lobby at the top left of the screen.", ephemeral: true);
                 }
 
+                var author = modal.User;
+                var authorId = author.Id;
+                var discord = await db.RMCDiscordAccounts
+                    .Include(d => d.LinkedAccount)
+                    .ThenInclude(l => l.Player)
+                    .ThenInclude(p => p.Patron)
+                    .FirstOrDefaultAsync(a => a.Id == authorId);
+                var codes = await db.RMCLinkingCodes
+                    .Include(l => l.Player)
+                    .ThenInclude(player => player.Patron)
+                    .FirstOrDefaultAsync(p => p.Code == code);
+
+                if (codes == null)
+                {
+                    await modal.FollowupAsync($"No player found with code {codeStr}, join the game server and get another code before trying again, or ask for help in another channel.", ephemeral: true);
+                    break;
+                }
+
+                if (codes.CreationTime < DateTime.UtcNow.Subtract(TimeSpan.FromDays(1)))
+                {
+                    await modal.FollowupAsync($"Code {codeStr} were generated too long ago, join the game server and get another code before trying again.");
+                }
+
+                if (discord?.LinkedAccount is { } linked)
+                {
+                    if (linked.Player.Patron is { } patron)
+                        db.RMCPatrons.Remove(patron);
+
+                    linked.Player.Patron = null;
+                    db.RMCLinkedAccounts.Remove(linked);
+                }
+
+                discord ??= db.RMCDiscordAccounts.Add(new RMCDiscordAccount { Id = authorId }).Entity;
+                discord.LinkedAccount = db.RMCLinkedAccounts.Add(new RMCLinkedAccount { Discord = discord }).Entity;
+                discord.LinkedAccount.Player = codes.Player;
+
+                var roles = client.GetGuild(guildId).GetUser(authorId).Roles.Select(r => r.Id).ToArray();
+                var tiers = await db.RMCPatronTiers
+                    .Where(t => roles.Contains(t.DiscordRole))
+                    .ToListAsync();
+                if (tiers.Count == 0)
+                {
+                    discord.LinkedAccount.Player.Patron = null;
+                }
+                else
+                {
+                    tiers.Sort((a, b) => a.Priority.CompareTo(b.Priority));
+                    var tier = tiers[0];
+                    discord.LinkedAccount.Player.Patron = db.RMCPatrons.Add(new RMCPatron { Tier = tier }).Entity;
+                    discord.LinkedAccount.Player.Patron.Tier = tier;
+                }
+
+                var aDebugString = db.ChangeTracker.ToDebugString();
+                Console.WriteLine(aDebugString);
+
+                db.ChangeTracker.DetectChanges();
                 await db.SaveChangesAsync();
+
+                var msg = $"Linked SS14 account with name {code}";
+                if (codes.Player.Patron == null)
+                    msg += " and no Patreon tier.";
+                else
+                    msg += $" and tier {codes.Player.Patron.Tier.Name}";
+
+                await modal.FollowupAsync(msg, ephemeral: true);
                 break;
         }
     }

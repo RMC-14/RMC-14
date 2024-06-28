@@ -1007,6 +1007,10 @@ namespace Content.Server.Database.Migrations.Postgres
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<decimal>("DiscordRole")
+                        .HasColumnType("numeric(20,0)")
+                        .HasColumnName("discord_role");
+
                     b.Property<bool>("Figurines")
                         .HasColumnType("boolean")
                         .HasColumnName("figurines");
@@ -1015,9 +1019,18 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("boolean")
                         .HasColumnName("lobby_message");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
                     b.Property<bool>("NamedItems")
                         .HasColumnType("boolean")
                         .HasColumnName("named_items");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
 
                     b.Property<bool>("RoundEndShoutout")
                         .HasColumnType("boolean")
@@ -1029,6 +1042,9 @@ namespace Content.Server.Database.Migrations.Postgres
 
                     b.HasKey("Id")
                         .HasName("PK_rmc_patron_tiers");
+
+                    b.HasIndex("DiscordRole")
+                        .IsUnique();
 
                     b.ToTable("rmc_patron_tiers", (string)null);
                 });
