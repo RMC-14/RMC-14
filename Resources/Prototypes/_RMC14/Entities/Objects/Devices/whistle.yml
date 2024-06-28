@@ -15,7 +15,7 @@
   id: CMWhistleMP
   parent: CMWhistle
   name: MP whistle
-  description: A metal pea-whistle. Can be blown while held, or worn in the mouth. This one is a commanding red
+  description: A metal pea-whistle. Can be blown while held, or worn in the mouth. Gets everyone's attention
   components:
   - type: Sprite
     color: "#8d0e2a"

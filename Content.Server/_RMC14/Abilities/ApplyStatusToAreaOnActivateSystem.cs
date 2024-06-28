@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Interaction.Events;
 using Content.Shared.StatusEffect;
+using Content.Shared.Whistle;
 using Content.Shared.Whitelist;
 
 namespace Content.Server._RMC14.Abilities;
@@ -10,11 +11,11 @@ public sealed class ApplyToAreaOnActivateSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private readonly SkillsSystem _skillSystem = default!;
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<ApplyStatusToAreaOnActivateComponent, UseInHandEvent>(OnUsed);
+        SubscribeLocalEvent<ApplyStatusToAreaOnActivateComponent, UseInHandEvent>(OnUsed,
+            before: [typeof(WhistleSystem)], after: [typeof(SkillsSystem)]);
     }
 
     /// <summary>
@@ -25,11 +26,8 @@ public sealed class ApplyToAreaOnActivateSystem : EntitySystem
     /// <param name="args"></param>
     public void OnUsed(Entity<ApplyStatusToAreaOnActivateComponent> ent, ref UseInHandEvent args)
     {
-        if (EntityManager.TryGetComponent<RequiresSkillComponent>(ent, out var reqskill))
-        {
-            if (!HasComp<SkillsComponent>(args.User) || !_skillSystem.HasSkills(args.User, reqskill.Skills))
-                return;
-        }
+        if (args.Handled)
+            return;
         var transform = Transform(args.User);
         foreach (var entity in _entityLookup.GetEntitiesInRange(transform.Coordinates, ent.Comp.Range))
         {
