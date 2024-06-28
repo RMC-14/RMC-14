@@ -1,7 +1,7 @@
-﻿<cc:CMCreateHiveWindow
+﻿<cc:RMCCreateHiveWindow
     xmlns="https://spacestation14.io"
     xmlns:cc="clr-namespace:Content.Client._RMC14.Admin"
-    Title="{Loc cm-ui-create-hive-title}"
+    Title="{Loc rmc-ui-create-hive-title}"
     MinSize="200 50">
     <LineEdit Name="HiveName" Access="Public" />
-</cc:CMCreateHiveWindow>
+</cc:RMCCreateHiveWindow>

@@ -5,7 +5,7 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._RMC14.Admin;
 
 [GenerateTypedNameReferences]
-public sealed partial class CMTransformButton : Button
+public sealed partial class RMCTransformButton : Button
 {
     private static readonly Color HumanoidColor = Color.FromHex("#25A343");
     private static readonly Color HumanoidHighlightColor = Color.FromHex("#2EBA4F");
@@ -27,7 +27,7 @@ public sealed partial class CMTransformButton : Button
         }
     }
 
-    public CMTransformButton()
+    public RMCTransformButton()
     {
         RobustXamlLoader.Load(this);
 

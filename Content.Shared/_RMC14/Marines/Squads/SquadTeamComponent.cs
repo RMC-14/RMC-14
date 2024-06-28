@@ -7,6 +7,7 @@ namespace Content.Shared._RMC14.Marines.Squads;
 
 [RegisterComponent, NetworkedComponent]
 [Access(typeof(SquadSystem))]
+[EntityCategory("Squads")]
 public sealed partial class SquadTeamComponent : Component
 {
     [DataField(required: true)]
@@ -16,5 +17,5 @@ public sealed partial class SquadTeamComponent : Component
     public SpriteSpecifier Background;
 
     [DataField]
-    public ProtoId<AccessLevelPrototype>? AccessLevel;
+    public ProtoId<AccessLevelPrototype>[] AccessLevels;
 }

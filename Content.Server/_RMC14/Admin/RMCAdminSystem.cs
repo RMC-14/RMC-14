@@ -4,7 +4,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Admin;
 
-public sealed class CMAdminSystem : SharedCMAdminSystem
+public sealed class RMCAdminSystem : SharedRMCAdminSystem
 {
     [Dependency] private readonly EuiManager _eui = default!;
 
@@ -13,6 +13,6 @@ public sealed class CMAdminSystem : SharedCMAdminSystem
         if (!CanUse(player))
             return;
 
-        _eui.OpenEui(new CMAdminEui(target), player);
+        _eui.OpenEui(new RMCAdminEui(target), player);
     }
 }

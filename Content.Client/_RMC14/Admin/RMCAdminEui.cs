@@ -1,10 +1,12 @@
 ﻿using System.Numerics;
 using Content.Client.Eui;
 using Content.Shared._RMC14.Admin;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Eui;
 using Content.Shared.Humanoid.Prototypes;
 using JetBrains.Annotations;
+using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 using static Robust.Client.UserInterface.Controls.ItemList;
@@ -13,7 +15,7 @@ using static Robust.Client.UserInterface.Controls.LineEdit;
 namespace Content.Client._RMC14.Admin;
 
 [UsedImplicitly]
-public sealed class CMAdminEui : BaseEui
+public sealed class RMCAdminEui : BaseEui
 {
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
@@ -24,18 +26,18 @@ public sealed class CMAdminEui : BaseEui
     private static readonly Comparer<SpeciesPrototype> SpeciesComparer =
         Comparer<SpeciesPrototype>.Create(static (a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
 
-    private CMAdminWindow _adminWindow = default!;
-    private CMCreateHiveWindow? _createHiveWindow;
+    private RMCAdminWindow _adminWindow = default!;
+    private RMCCreateHiveWindow? _createHiveWindow;
 
     public override void Opened()
     {
-        _adminWindow = new CMAdminWindow();
+        _adminWindow = new RMCAdminWindow();
 
         _adminWindow.XenoTab.HiveList.OnItemSelected += OnHiveSelected;
         _adminWindow.XenoTab.CreateHiveButton.OnPressed += OnCreateHivePressed;
 
-        var humanoidRow = new CMTransformRow();
-        humanoidRow.Label.Text = Loc.GetString("cm-ui-humanoid");
+        var humanoidRow = new RMCTransformRow();
+        humanoidRow.Label.Text = Loc.GetString("rmc-ui-humanoid");
         _adminWindow.TransformTab.Container.AddChild(humanoidRow);
 
         var allSpecies = new SortedSet<SpeciesPrototype>(SpeciesComparer);
@@ -49,9 +51,9 @@ public sealed class CMAdminEui : BaseEui
 
         foreach (var species in allSpecies)
         {
-            var button = new CMTransformButton { Type = TransformType.Humanoid };
+            var button = new RMCTransformButton { Type = TransformType.Humanoid };
             button.TransformName.Text = Loc.GetString(species.Name);
-            button.OnPressed += _ => SendMessage(new CMAdminTransformHumanoidMsg(species.ID));
+            button.OnPressed += _ => SendMessage(new RMCAdminTransformHumanoidMsg(species.ID));
 
             humanoidRow.Container.AddChild(button);
         }
@@ -73,15 +75,15 @@ public sealed class CMAdminEui : BaseEui
 
         foreach (var (tier, xenos) in tiers)
         {
-            var row = new CMTransformRow();
-            row.Label.Text = Loc.GetString("cm-ui-tier", ("tier", tier));
+            var row = new RMCTransformRow();
+            row.Label.Text = Loc.GetString("rmc-ui-tier", ("tier", tier));
             foreach (var xeno in xenos)
             {
-                var button = new CMTransformButton { Type = TransformType.Xeno };
+                var button = new RMCTransformButton { Type = TransformType.Xeno };
                 button.TransformName.Text = xeno.Name;
                 row.Container.AddChild(button);
 
-                button.OnPressed += _ => SendMessage(new CMAdminTransformXenoMsg(xeno.ID));
+                button.OnPressed += _ => SendMessage(new RMCAdminTransformXenoMsg(xeno.ID));
             }
 
             _adminWindow.TransformTab.Container.AddChild(row);
@@ -93,7 +95,7 @@ public sealed class CMAdminEui : BaseEui
     private void OnHiveSelected(ItemListSelectedEventArgs args)
     {
         var item = args.ItemList[args.ItemIndex];
-        var msg = new CMAdminChangeHiveMsg((Hive) item.Metadata!);
+        var msg = new RMCAdminChangeHiveMsg((Hive) item.Metadata!);
         SendMessage(msg);
     }
 
@@ -105,7 +107,7 @@ public sealed class CMAdminEui : BaseEui
             return;
         }
 
-        _createHiveWindow = new CMCreateHiveWindow();
+        _createHiveWindow = new RMCCreateHiveWindow();
         _createHiveWindow.OnClose += OnCreateHiveClosed;
         _createHiveWindow.HiveName.OnTextEntered += OnCreateHiveEntered;
 
@@ -120,16 +122,17 @@ public sealed class CMAdminEui : BaseEui
 
     private void OnCreateHiveEntered(LineEditEventArgs args)
     {
-        var msg = new CMAdminCreateHiveMsg(args.Text);
+        var msg = new RMCAdminCreateHiveMsg(args.Text);
         SendMessage(msg);
         _createHiveWindow?.Dispose();
     }
 
     public override void HandleState(EuiStateBase state)
     {
-        if (state is not CMAdminEuiState s)
+        if (state is not RMCAdminEuiState s)
             return;
 
+        _adminWindow.XenoTab.HiveList.Clear();
         foreach (var hive in s.Hives)
         {
             var list = _adminWindow.XenoTab.HiveList;
@@ -138,6 +141,42 @@ public sealed class CMAdminEui : BaseEui
                 Text = hive.Name,
                 Metadata = hive
             });
+        }
+
+        _adminWindow.SquadsTab.Squads.DisposeAllChildren();
+        foreach (var squad in s.Squads)
+        {
+            var squadRow = new RMCSquadRow()
+            {
+                HorizontalExpand = true,
+                Margin = new Thickness(0, 0, 0, 10),
+            };
+
+            squadRow.AddToSquadButton.OnPressed += _ => SendMessage(new RMCAdminAddToSquadMsg(squad.Id));
+
+            var button = squadRow.CreateButton;
+            if (squad.Exists)
+            {
+                squadRow.Members.Text = Loc.GetString("rmc-ui-members", ("members", squad.Members));
+                button.Disabled = true;
+            }
+            else
+            {
+                button.OnPressed += _ => SendMessage(new RMCAdminCreateSquadMsg(squad.Id));
+            }
+
+            if (_prototypes.TryIndex(squad.Id, out var squadPrototype))
+            {
+                button.Text = squadPrototype.Name;
+
+                if (squad.Exists &&
+                    squadPrototype.TryGetComponent(out SquadTeamComponent? squadComp, _compFactory))
+                {
+                    button.ModulateSelfOverride = squadComp.Color;
+                }
+            }
+
+            _adminWindow.SquadsTab.Squads.AddChild(squadRow);
         }
     }
 
