@@ -143,9 +143,9 @@ namespace Content.Shared.Verbs
                 verbs.UnionWith(verbEvent.Verbs);
             }
 
-            if (types.Contains(typeof(CMAdminVerb)))
+            if (types.Contains(typeof(RMCAdminVerb)))
             {
-                var verbEvent = new GetVerbsEvent<CMAdminVerb>(user, target, @using, hands, canInteract, canAccess, extraCategories);
+                var verbEvent = new GetVerbsEvent<RMCAdminVerb>(user, target, @using, hands, canInteract, canAccess, extraCategories);
                 RaiseLocalEvent(target, verbEvent, true);
                 verbs.UnionWith(verbEvent.Verbs);
             }

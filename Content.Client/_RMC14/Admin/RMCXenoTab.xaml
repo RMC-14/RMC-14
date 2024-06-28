@@ -1,0 +1,12 @@
+﻿<controls:RMCXenoTab
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Admin">
+    <BoxContainer Orientation="Vertical">
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc rmc-ui-xeno-hive}" MinWidth="50" />
+            <ItemList Name="HiveList" Access="Public" MinWidth="150" />
+            <Button Text="{Loc rmc-ui-create-new-hive}" Name="CreateHiveButton" Access="Public"
+                    StyleClasses="ButtonSquare" />
+        </BoxContainer>
+    </BoxContainer>
+</controls:RMCXenoTab>

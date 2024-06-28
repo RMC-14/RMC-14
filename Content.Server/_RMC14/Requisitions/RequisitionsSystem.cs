@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using Content.Server.Cargo.Components;
+using Content.Server.Chat.Systems;
 using Content.Server.Storage.EntitySystems;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Requisitions;
@@ -14,7 +15,7 @@ using static Content.Shared._RMC14.Requisitions.Components.RequisitionsElevatorM
 
 namespace Content.Server._RMC14.Requisitions;
 
-public sealed class RequisitionsSystem : SharedRequisitionsSystem
+public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
@@ -23,6 +24,9 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly PhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly ChatSystem _chatSystem = default!;
+
+    public const string PaperRequisitionInvoice = "RMCPaperRequisitionInvoice";
 
     public override void Initialize()
     {
@@ -54,6 +58,7 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
 
     private void OnComputerBeforeActivatableUIOpen(Entity<RequisitionsComputerComponent> computer, ref BeforeActivatableUIOpenEvent args)
     {
+        SetUILastInteracted(computer);
         SendUIState(computer);
     }
 
@@ -237,6 +242,44 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
         }
     }
 
+    private void SendUIFeedback(Entity<RequisitionsComputerComponent> computerEnt, string flavorText)
+    {
+        if (!TryComp(computerEnt, out RequisitionsComputerComponent? computerComp))
+            return;
+
+        _chatSystem.TrySendInGameICMessage(computerEnt,
+            flavorText,
+            InGameICChatType.Speak,
+            ChatTransmitRange.GhostRangeLimit,
+            nameOverride: Loc.GetString("requisition-paperwork-receiver-name"));
+
+        _audio.PlayPvs(computerComp.IncomingSurplus, computerEnt);
+    }
+
+    private void SendUIFeedback(string flavorText)
+    {
+        var query = EntityQueryEnumerator<RequisitionsComputerComponent>();
+        while (query.MoveNext(out var uid, out var computer))
+        {
+            if (computer.IsLastInteracted)
+                SendUIFeedback((uid, computer), flavorText);
+        }
+    }
+
+    private void SetUILastInteracted(Entity<RequisitionsComputerComponent> computerEnt)
+    {
+        var query = EntityQueryEnumerator<RequisitionsComputerComponent>();
+        while (query.MoveNext(out var uid, out var otherComputer))
+        {
+            otherComputer.IsLastInteracted = false;
+        }
+
+        if (!TryComp(computerEnt, out RequisitionsComputerComponent? selectedComputer))
+            return;
+
+        selectedComputer.IsLastInteracted = true;
+    }
+
     private void TryPlayAudio(Entity<RequisitionsElevatorComponent> elevator)
     {
         var comp = elevator.Comp;
@@ -312,6 +355,8 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
                     _entityStorage.Insert(entity, crate);
                 }
 
+                PrintInvoice(crate, coordinates, PaperRequisitionInvoice);
+
                 yOffset--;
                 if (yOffset < -comp.Radius)
                 {
@@ -332,6 +377,8 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
         var account = GetAccount();
         var entities = _lookup.GetEntitiesIntersecting(elevator);
         var soldAny = false;
+        var bureaucraticRewards = 0;
+        var logisticRecycleRewards = 0;
         foreach (var entity in entities)
         {
             if (entity == elevator.Comp.Audio)
@@ -340,14 +387,22 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
             if (HasComp<CargoSellBlacklistComponent>(entity))
                 continue;
 
+            bureaucraticRewards += SubmitInvoices(entity);
+
             if (TryComp(entity, out RequisitionsCrateComponent? crate))
             {
-                account.Comp.Balance += crate.Reward;
+                logisticRecycleRewards += crate.Reward;
                 soldAny = true;
             }
 
             QueueDel(entity);
         }
+
+        if (bureaucraticRewards > 0)
+            SendUIFeedback(Loc.GetString("requisition-paperwork-reward-message", ("amount", bureaucraticRewards)));
+
+        account.Comp.Balance += bureaucraticRewards;
+        account.Comp.Balance += logisticRecycleRewards;
 
         if (soldAny)
             Dirty(account);

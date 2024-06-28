@@ -7,5 +7,5 @@ namespace Content.Shared._RMC14.Requisitions.Components;
 public sealed partial class RequisitionsCrateComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public int Reward = 500; // TODO RMC14 200
+    public int Reward = 200;
 }

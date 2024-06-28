@@ -1665,5 +1665,50 @@
   id: 200
   time: '2024-06-27T05:08:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2640
+- author: Vermidia
+  changes:
+  - message: Marines will now experience symptoms of being infected.
+    type: Add
+  id: 201
+  time: '2024-06-27T06:49:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2553
+- author: Zarq0
+  changes:
+  - message: Made phoron bars grindable.
+    type: Tweak
+  - message: Added phoron as a reagent.
+    type: Add
+  id: 202
+  time: '2024-06-28T00:35:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2647
+- author: Sigil
+  changes:
+  - message: The grenade launcher now properly fires over creatures and objects.
+    type: Fix
+  id: 203
+  time: '2024-06-28T00:43:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2618
+- author: Noisrevni
+  changes:
+  - message: Added requisitions paperwork reward system, now supply crew can send
+      stamped invoice to gain extra money for the ongoing operation.
+    type: Add
+  id: 204
+  time: '2024-06-28T01:32:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2409
+- author: Zarq0
+  changes:
+  - message: Ported Meralyne, Imidazoline and Clonexadone from CM13.
+    type: Add
+  id: 205
+  time: '2024-06-28T03:33:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2642
+- author: DrSmugleaf
+  changes:
+  - message: Added Squad creation and moving marines between squads to the admin menu.
+    type: Add
+  id: 206
+  time: '2024-06-28T03:34:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2657
 Name: RMC14
 Order: -1
