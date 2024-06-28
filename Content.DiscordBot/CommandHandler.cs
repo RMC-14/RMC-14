@@ -63,7 +63,7 @@ public sealed class CommandHandler(DiscordSocketClient client, CommandService co
                 if (modal.GuildId is not { } guildId)
                     break;
 
-                var codeStr = modal.Data.Components.First(c => c.CustomId == "code").Value.Trim();
+                var codeStr = modal.Data.Components.First(c => c.CustomId == "account_code").Value.Trim();
                 if (string.IsNullOrWhiteSpace(codeStr))
                     break;
 
@@ -125,16 +125,11 @@ public sealed class CommandHandler(DiscordSocketClient client, CommandService co
                     discord.LinkedAccount.Player.Patron.Tier = tier;
                 }
 
-                var aDebugString = db.ChangeTracker.ToDebugString();
-                Console.WriteLine(aDebugString);
-
                 db.ChangeTracker.DetectChanges();
                 await db.SaveChangesAsync();
 
-                var msg = $"Linked SS14 account with name {code}";
-                if (codes.Player.Patron == null)
-                    msg += " and no Patreon tier.";
-                else
+                var msg = $"Linked SS14 account with name {codes.Player.LastSeenUserName}";
+                if (codes.Player.Patron != null)
                     msg += $" and tier {codes.Player.Patron.Tier.Name}";
 
                 await modal.FollowupAsync(msg, ephemeral: true);

@@ -1,6 +1,10 @@
 ﻿<linkAccount:LinkDiscordWindow
     xmlns="https://spacestation14.io"
-    xmlns:linkAccount="clr-namespace:Content.Client._RMC14.LinkAccount">
-    <Label Text="{Loc 'rmc-ui-link-discord-account-text'}" />
-    <Button Name="Button" Access="Public" Text="{Loc 'rmc-ui-link-discord-account-copy'}" />
+    xmlns:linkAccount="clr-namespace:Content.Client._RMC14.LinkAccount"
+    Title="{Loc 'rmc-ui-link-discord-account'}">
+    <BoxContainer Orientation="Vertical">
+        <Label Text="{Loc 'rmc-ui-link-discord-account-text'}" Margin="0 0 0 5" />
+        <Button Name="Button" Access="Public" Text="{Loc 'rmc-ui-link-discord-account-copy'}"
+                StyleClasses="OpenBoth" />
+    </BoxContainer>
 </linkAccount:LinkDiscordWindow>

@@ -39,7 +39,7 @@ await client.StartAsync();
 var builder = new DbContextOptionsBuilder<PostgresServerDbContext>();
 builder.UseNpgsql(connectionString);
 var db = new PostgresServerDbContext(builder.Options);
-await db.Database.MigrateAsync();
+// await db.Database.MigrateAsync();
 
 var interaction = new InteractionService(client);
 var handler = new CommandHandler(client, new CommandService(), interaction, db);

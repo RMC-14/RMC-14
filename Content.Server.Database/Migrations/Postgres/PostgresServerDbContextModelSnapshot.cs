@@ -979,6 +979,29 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("rmc_linked_accounts", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCLinkingCodes", b =>
+                {
+                    b.Property<Guid>("PlayerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("player_id");
+
+                    b.Property<Guid>("Code")
+                        .HasColumnType("uuid")
+                        .HasColumnName("code");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("creation_time");
+
+                    b.HasKey("PlayerId")
+                        .HasName("PK_rmc_linking_codes");
+
+                    b.HasIndex("Code")
+                        .HasDatabaseName("IX_rmc_linking_codes_code");
+
+                    b.ToTable("rmc_linking_codes", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.RMCPatron", b =>
                 {
                     b.Property<Guid>("PlayerId")
@@ -1810,6 +1833,19 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Player");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCLinkingCodes", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "Player")
+                        .WithOne("LinkingCodes")
+                        .HasForeignKey("Content.Server.Database.RMCLinkingCodes", "PlayerId")
+                        .HasPrincipalKey("Content.Server.Database.Player", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_linking_codes_player_player_id");
+
+                    b.Navigation("Player");
+                });
+
             modelBuilder.Entity("Content.Server.Database.RMCPatron", b =>
                 {
                     b.HasOne("Content.Server.Database.Player", "Player")
@@ -2048,6 +2084,8 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("JobWhitelists");
 
                     b.Navigation("LinkedAccount");
+
+                    b.Navigation("LinkingCodes");
 
                     b.Navigation("Patron");
                 });

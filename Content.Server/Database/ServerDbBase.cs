@@ -1666,6 +1666,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             }
 
             linking.Code = code;
+            linking.CreationTime = DateTime.UtcNow;
             await db.DbContext.SaveChangesAsync();
         }
 

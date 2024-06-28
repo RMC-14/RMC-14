@@ -78,6 +78,5 @@ public sealed class RMCLinkingCodes
 
     public Guid Code { get; set; }
 
-    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public DateTime CreationTime { get; set; }
 }
