@@ -1,9 +1,11 @@
 using System.Numerics;
 using Content.Client.Items.Systems;
+using Content.Shared._RMC14.IconLabel;
 using Content.Shared.Item;
 using Content.Shared.Storage;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
+using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.CustomControls;
 
@@ -19,6 +21,7 @@ public sealed class ItemGridPiece : Control, IEntityControl
     public readonly EntityUid Entity;
     public ItemStorageLocation Location;
     public ItemGridPieceMarks? Marked;
+    private Font _font;
 
     public event Action<GUIBoundKeyEventArgs, ItemGridPiece>? OnPiecePressed;
     public event Action<GUIBoundKeyEventArgs, ItemGridPiece>? OnPieceUnpressed;
@@ -48,9 +51,13 @@ public sealed class ItemGridPiece : Control, IEntityControl
     private Texture? _markedSecondTexture;
     #endregion
 
-    public ItemGridPiece(Entity<ItemComponent> entity, ItemStorageLocation location,  IEntityManager entityManager)
+    public ItemGridPiece(Entity<ItemComponent> entity, ItemStorageLocation location, IEntityManager entityManager)
     {
         IoCManager.InjectDependencies(this);
+
+        // Prepare Font for the icon label
+        var cache = IoCManager.Resolve<IResourceCache>();
+        _font = new VectorFont(cache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Regular.ttf"), 8);
 
         _entityManager = entityManager;
         _storageController = UserInterfaceManager.GetUIController<StorageUIController>();
@@ -120,7 +127,7 @@ public sealed class ItemGridPiece : Control, IEntityControl
 
         var hovering = !_storageController.IsDragging && UserInterfaceManager.CurrentlyHovered == this;
         //yeah, this coloring is kinda hardcoded. deal with it. B)
-        Color? colorModulate = hovering  ? null : Color.FromHex("#a8a8a8");
+        Color? colorModulate = hovering ? null : Color.FromHex("#a8a8a8");
 
         var marked = Marked != null;
         Vector2i? maybeMarkedPos = null;
@@ -136,12 +143,12 @@ public sealed class ItemGridPiece : Control, IEntityControl
                 var offset = size * 2 * new Vector2(x - boundingGrid.Left, y - boundingGrid.Bottom);
                 var topLeft = PixelPosition + offset.Floored();
 
-                if (GetTexture(adjustedShape, new Vector2i(x, y), Direction.NorthEast) is {} neTexture)
+                if (GetTexture(adjustedShape, new Vector2i(x, y), Direction.NorthEast) is { } neTexture)
                 {
                     var neOffset = new Vector2(size.X, 0);
                     handle.DrawTextureRect(neTexture, new UIBox2(topLeft + neOffset, topLeft + neOffset + size), colorModulate);
                 }
-                if (GetTexture(adjustedShape, new Vector2i(x, y), Direction.NorthWest) is {} nwTexture)
+                if (GetTexture(adjustedShape, new Vector2i(x, y), Direction.NorthWest) is { } nwTexture)
                 {
                     _texturesPositions.Add((nwTexture, Position + offset / UIScale));
                     handle.DrawTextureRect(nwTexture, new UIBox2(topLeft, topLeft + size), colorModulate);
@@ -152,12 +159,12 @@ public sealed class ItemGridPiece : Control, IEntityControl
                         marked = false;
                     }
                 }
-                if (GetTexture(adjustedShape, new Vector2i(x, y), Direction.SouthEast) is {} seTexture)
+                if (GetTexture(adjustedShape, new Vector2i(x, y), Direction.SouthEast) is { } seTexture)
                 {
                     var seOffset = size;
                     handle.DrawTextureRect(seTexture, new UIBox2(topLeft + seOffset, topLeft + seOffset + size), colorModulate);
                 }
-                if (GetTexture(adjustedShape, new Vector2i(x, y), Direction.SouthWest) is {} swTexture)
+                if (GetTexture(adjustedShape, new Vector2i(x, y), Direction.SouthWest) is { } swTexture)
                 {
                     var swOffset = new Vector2(0, size.Y);
                     handle.DrawTextureRect(swTexture, new UIBox2(topLeft + swOffset, topLeft + swOffset + size), colorModulate);
@@ -198,7 +205,7 @@ public sealed class ItemGridPiece : Control, IEntityControl
                 overrideDirection: Direction.South);
         }
 
-        if (maybeMarkedPos is {} markedPos)
+        if (maybeMarkedPos is { } markedPos)
         {
             var markedTexture = Marked switch
             {
@@ -210,6 +217,31 @@ public sealed class ItemGridPiece : Control, IEntityControl
             if (markedTexture != null)
             {
                 handle.DrawTextureRect(markedTexture, new UIBox2(markedPos, markedPos + size));
+            }
+        }
+
+        if (_entityManager.TryGetComponent(Entity, out IconLabelComponent? iconLabel))
+        {
+            if (!Loc.TryGetString(iconLabel.LabelTextLocId, out string? msg))
+            {
+                return;
+            }
+
+            var textColor = Color.Black;
+            Color.TryFromName(iconLabel.TextColor, out textColor);
+
+
+            var charArray = msg.ToCharArray();
+            var iconLabelPosition = new Vector2((boundingGrid.Width + 1) * size.X * 2 + iconLabel.StoredOffset.X * 2,
+    (boundingGrid.Height + 1) * size.Y * 2 + iconLabel.StoredOffset.Y * 2);
+
+            var textSize = iconLabel.TextSize;
+
+            float sep = 0;
+            foreach (var chr in charArray)
+            {
+                iconLabelPosition.X += sep;
+                sep = _font.DrawChar(handle, new System.Text.Rune(chr), iconLabelPosition, textSize, textColor);
             }
         }
     }
