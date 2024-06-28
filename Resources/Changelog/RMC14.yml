@@ -1681,5 +1681,12 @@
   id: 202
   time: '2024-06-28T00:35:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2647
+- author: Sigil
+  changes:
+  - message: The grenade launcher now properly fires over creatures and objects.
+    type: Fix
+  id: 203
+  time: '2024-06-28T00:43:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2618
 Name: RMC14
 Order: -1
