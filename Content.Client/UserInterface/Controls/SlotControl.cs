@@ -28,9 +28,6 @@ namespace Content.Client.UserInterface.Controls
         public CooldownGraphic CooldownDisplay { get; }
         public Label IconLabel { get; }
 
-        //private readonly Font _font;
-
-
         private SpriteView SpriteView { get; }
 
         public EntityUid? Entity => SpriteView.Entity;
@@ -130,9 +127,6 @@ namespace Content.Client.UserInterface.Controls
         public SlotControl()
         {
             IoCManager.InjectDependencies(this);
-
-            //var cache = IoCManager.Resolve<IResourceCache>();
-            //_font = new VectorFont(cache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Regular.ttf"), 8);
 
             Name = "SlotButton_null";
             MinSize = new Vector2(DefaultButtonSize, DefaultButtonSize);
@@ -303,36 +297,6 @@ namespace Content.Client.UserInterface.Controls
             HighlightRect.Texture = Theme.ResolveTextureOrNull(_highlightTexturePath)?.Texture;
             UpdateChildren();
         }
-
-        /**protected override void Draw(DrawingHandleScreen handle)
-        {
-            if (_entities.TryGetComponent(Entity, out IconLabelComponent? iconLabel))
-            {
-                if (!Loc.TryGetString(iconLabel.LabelTextLocId, out string? msg))
-                {
-                    return;
-                }
-
-                var textColor = Color.Black;
-                Color.TryFromName(iconLabel.TextColor, out textColor);
-
-
-                var charArray = msg.ToCharArray();
-                var charPosition = Position;
-                charPosition.X += iconLabel.Xoffset;
-                charPosition.Y += iconLabel.Yoffset;
-
-                var textSize = iconLabel.TextSize;
-
-                float sep = 0;
-                foreach (var chr in charArray)
-                {
-                    charPosition.X += sep;
-                    sep = _font.DrawChar(handle, new System.Text.Rune(chr), charPosition, textSize, textColor);
-                }
-            }
-            base.Draw(handle);
-        }**/
 
         EntityUid? IEntityControl.UiEntity => Entity;
     }
