@@ -7,12 +7,12 @@
       "y": 32
     },
     "states": [
-        {
-          "name": "icon"
-        },
-        {
-          "name": "equipped-EYES",
-          "directions": 4
-        }
-    ]
+      {
+        "name": "icon"
+      },
+      {
+        "name": "equipped-EYES",
+        "directions": 4
+      }
+  ]
 }
