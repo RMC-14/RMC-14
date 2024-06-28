@@ -37,6 +37,15 @@ reagent-desc-cmleporazine = A drug used to treat hypothermia and hyperthermia. S
 reagent-name-cmtricordrazine = Tricordrazine
 reagent-desc-cmtricordrazine = Tricordrazine is a highly potent stimulant, originally derived from cordrazine. Can be used to treat a wide range of injuries.
 
+reagent-name-cmmeralyne = Meralyne
+reagent-desc-cmmeralyne = Advanced analgesic medication used to treat extremely severe blunt trauma. Allows the body to quickly repair damaged tissue. Overdosing on Meralyne can cause severe corrosion to cell membranes.
+
+reagent-name-cmimidazoline = Imidazoline
+reagent-desc-cmimidazoline = Used for treating non-genetic eye trauma. Generally prescribed as treatment for most cases of eye trauma instead of performing a surgical operation.
+
+reagent-name-cmclonexadone = Clonexadone
+reagent-desc-cmclonexadone = Advanced cryogenic medicine made from cryoxadone. Treats most types of tissue damage. Requires temperatures below 170K to to metabolise correctly.
+
 # Medical Icon Labels
 rmc-tricordazine-container-label-text = TI
 rmc-bicaridine-container-label-text = BI
