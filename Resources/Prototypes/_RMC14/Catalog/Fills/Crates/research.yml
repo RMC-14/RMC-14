@@ -12,7 +12,6 @@
   - type: StorageFill
     contents:
     - id: CMSheetPhoron
-    amount: 1
 
 # /datum/supply_packs/plastic
 # /datum/supply_packs/precious_metals
