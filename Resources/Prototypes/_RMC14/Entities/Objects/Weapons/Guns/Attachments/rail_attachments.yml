@@ -7,7 +7,7 @@
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
   - type: Tag
     tags:
-    - CMAttachableRail
+    - CMAttachmentRail
 
 - type: entity
   parent: CMRailAttachmentBase
@@ -79,8 +79,8 @@
   - type: AttachableToggleableSimpleActivate
   - type: Tag
     tags:
-    - CMAttachableRail
-    - CMAttachableFlashlight
+    - CMAttachmentRail
+    - CMAttachmentFlashlight
     - Flashlight
 
 - type: entity
@@ -105,14 +105,14 @@
   parent: CMRailAttachmentBase
   id: CMAttachmentB8SmartScope
   name: B8 smart-scope
-  description: An experimental B8 Smart-Scope. Based on the technologies used in the Smart Gun by ARMAT, this sight has integrated IFF systems. It can only attach to the M4DMR Battle Rifle. # TODO RMC14 and M44 Combat Revolver.
+  description: An experimental B8 Smart-Scope. Based on the technologies used in the Smart Gun by ARMAT, this sight has integrated IFF systems. It can only attach to the M4SPR Battle Rifle. # TODO RMC14 and M44 Combat Revolver.
   components:
   - type: Sprite
     state: iffbarrel
   - type: Tag
     tags:
-    - CMAttachableRail
-    - CMAttachableSmartScope
+    - CMAttachmentRail
+    - CMAttachmentB8SmartScope
   - type: AttachableToggleable
     actionId: CMActionToggleScope
     attachedOnly: true
@@ -158,10 +158,10 @@
     state: sniperscope
 
 - type: Tag
-  id: CMAttachableRail
+  id: CMAttachmentRail
 
 - type: Tag
-  id: CMAttachableFlashlight
+  id: CMAttachmentFlashlight
 
 - type: Tag
-  id: CMAttachableSmartScope
+  id: CMAttachmentB8SmartScope

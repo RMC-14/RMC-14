@@ -33,6 +33,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedWebbingSystem _webbing = default!;
 
+    // TODO RMC14 make this a prototype
+    public const string SpecialistPoints = "Specialist";
+
     public override void Initialize()
     {
         SubscribeLocalEvent<CMAutomatedVendorComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
@@ -262,5 +265,18 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
 
         return false;
+    }
+
+    public void SetPoints(Entity<CMVendorUserComponent> user, int points)
+    {
+        user.Comp.Points = points;
+        Dirty(user);
+    }
+
+    public void SetExtraPoints(Entity<CMVendorUserComponent> user, string key, int points)
+    {
+        user.Comp.ExtraPoints ??= new Dictionary<string, int>();
+        user.Comp.ExtraPoints[key] = points;
+        Dirty(user);
     }
 }

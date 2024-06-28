@@ -1,0 +1,20 @@
+﻿<controls:CMGhostActionWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Mobs"
+    Title="{Loc 'cm-ghost-window-title'}">
+    <BoxContainer Orientation="Vertical">
+        <RichTextLabel Name="Text" Access="Public" />
+        <BoxContainer Orientation="Horizontal">
+            <Control HorizontalExpand="True" />
+            <Button Name="Stay" Access="Public" Text="{Loc 'cm-ghost-window-stay'}" StyleClasses="OpenBoth"
+                    HorizontalExpand="True" SizeFlagsStretchRatio="3" Margin="0 6" />
+            <Control HorizontalExpand="True" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal">
+            <Control HorizontalExpand="True" />
+            <Button Name="Ghost" Access="Public" Text="{Loc 'cm-ghost-ghost' }" StyleClasses="OpenBoth"
+                    HorizontalExpand="True" SizeFlagsStretchRatio="3" />
+            <Control HorizontalExpand="True" />
+        </BoxContainer>
+    </BoxContainer>
+</controls:CMGhostActionWindow>

@@ -1,6 +1,8 @@
-﻿using Content.Shared._RMC14.Hands;
+using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Pheromones;
+using Content.Shared.Chat.Prototypes;
+using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Examine;
@@ -9,17 +11,21 @@ using Content.Shared.Ghost;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
+using Content.Shared.Jittering;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
+using Content.Shared.Rounding;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Parasite;
@@ -41,6 +47,9 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
+    [Dependency] private readonly DamageableSystem _damage = default!;
 
     public override void Initialize()
     {
@@ -69,6 +78,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         SubscribeLocalEvent<VictimBurstComponent, UpdateMobStateEvent>(OnVictimUpdateMobState,
             after: [typeof(MobThresholdSystem), typeof(SharedXenoPheromonesSystem)]);
         SubscribeLocalEvent<VictimBurstComponent, RejuvenateEvent>(OnVictimBurstRejuvenate);
+        SubscribeLocalEvent<VictimBurstComponent, ExaminedEvent>(OnVictimBurstExamine);
     }
 
     private void OnInfectableActivate(Entity<InfectableComponent> ent, ref ActivateInWorldEvent args)
@@ -217,6 +227,12 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         RemCompDeferred<VictimBurstComponent>(burst);
     }
 
+    private void OnVictimBurstExamine(Entity<VictimBurstComponent> burst, ref ExaminedEvent args)
+    {
+        using(args.PushGroup(nameof(VictimBurstComponent)))
+            args.PushMarkup($"[color=red][bold]{Loc.GetString("rmc-xeno-infected-bursted", ("victim", burst))}[/bold][/color]");
+    }
+
     private bool StartInfect(Entity<XenoParasiteComponent> parasite, EntityUid victim, EntityUid user)
     {
         if (!CanInfectPopup(parasite, victim, user))
@@ -240,7 +256,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             HasComp<VictimInfectedComponent>(victim))
         {
             if (popup)
-                _popup.PopupClient(Loc.GetString("cm-xeno-failed-cant-infect", ("target", victim)), victim, user, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("rmc-xeno-failed-cant-infect", ("target", victim)), victim, user, PopupType.MediumCaution);
 
             return false;
         }
@@ -250,7 +266,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             !_standing.IsDown(victim, standing))
         {
             if (popup)
-                _popup.PopupClient(Loc.GetString("cm-xeno-failed-cant-reach", ("target", victim)), victim, user, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("rmc-xeno-failed-cant-reach", ("target", victim)), victim, user, PopupType.MediumCaution);
 
             return false;
         }
@@ -258,7 +274,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         if (_mobState.IsDead(victim))
         {
             if (popup)
-                _popup.PopupClient(Loc.GetString("cm-xeno-failed-target-dead"), victim, user, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("rmc-xeno-failed-target-dead"), victim, user, PopupType.MediumCaution);
 
             return false;
         }
@@ -285,7 +301,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
             if (any && _net.IsServer)
             {
-                _popup.PopupEntity(Loc.GetString("cm-xeno-infect-success", ("target", victim)), victim);
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-infect-success", ("target", victim)), victim);
             }
         }
 
@@ -361,17 +377,106 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                 if (infected.IncubationMultiplier < 1)
                     infected.BurstAt += TimeSpan.FromSeconds(1 - infected.IncubationMultiplier) * frameTime;
 
+                // Stages
+                // Percentage of how far along we out to burst time times the number of stages, truncated. You can't go back a stage once you've reached one
+                int stage = Math.Max((int) ((infected.BurstDelay - (infected.BurstAt - time)) / infected.BurstDelay * infected.FinalStage), infected.CurrentStage);
+                if (stage != infected.CurrentStage)
+                {
+                    infected.CurrentStage = stage;
+                    Dirty(uid, infected);
+                }
+
+                // Warn on the last to final stage of a burst
+                if (!infected.DidBurstWarning && stage == infected.FinalStage - 1)
+                {
+                    _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon-self"), uid, uid, PopupType.MediumCaution);
+                    _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon", ("victim", uid)), uid, Filter.PvsExcept(uid), true, PopupType.MediumCaution);
+                    _jitter.DoJitter(uid, infected.JitterTime * 6, false);
+                    infected.DidBurstWarning = true;
+                    continue;
+                }
+                // Symptoms only start after the IntialSymptomStart is passed (by default, 2)
+                // And continue until burst time is reached
+                // TODO after burst time is reached, the larva is made and stage set to 6, have wait time for someone to take the larva.
+                // During this stage the victim should be in intense pain, and auto-burst after some time
+                if (stage >= infected.FinalSymptomsStart)
+                {
+                    if (_random.Prob(infected.MajorPainChance * frameTime))
+                    {
+                        var message = Loc.GetString("rmc-xeno-infection-majorpain-" + _random.Pick(new List<string> { "chest", "breathing", "heart" }));
+                        _popup.PopupEntity(message, uid, uid, PopupType.SmallCaution);
+                        if (_random.Prob(0.5f))
+                        {
+                            var ev = new VictimInfectedEmoteEvent(infected.ScreamId);
+                            RaiseLocalEvent(uid, ref ev);
+                        }
+                    }
+
+                    if (_random.Prob(infected.ShakesChance * frameTime))
+                        InfectionShakes(uid, infected, infected.BaseKnockdownTime * 4, infected.JitterTime * 4);
+                }
+                else if (stage >= infected.MiddlingSymptomsStart)
+                {
+                    if (_random.Prob(infected.ThroatPainChance * frameTime))
+                    {
+                        var message = Loc.GetString("rmc-xeno-infection-throat-" + _random.Pick(new List<string> { "sore", "mucous" }));
+                        _popup.PopupEntity(message, uid, uid, PopupType.SmallCaution);
+                    }
+                    // TODO 20% chance to take limb damage
+                    else if (_random.Prob(infected.MuscleAcheChance * frameTime))
+                    {
+                        _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-muscle-ache"), uid, PopupType.SmallCaution);
+                        if (_random.Prob(0.2f))
+                            _damage.TryChangeDamage(uid, infected.InfectionDamage, true, false);
+                    }
+                    else if (_random.Prob(infected.SneezeCoughChance * frameTime))
+                    {
+                        var emote = _random.Pick(new List<ProtoId<EmotePrototype>> { infected.SneezeId, infected.CoughId });
+                        var ev = new VictimInfectedEmoteEvent(emote);
+                        RaiseLocalEvent(uid, ref ev);
+                    }
+
+                    if (_random.Prob((infected.ShakesChance * 5 / 6) * frameTime))
+                        InfectionShakes(uid, infected, infected.BaseKnockdownTime * 2, infected.JitterTime * 2);
+                }
+                else if (stage >= infected.InitialSymptomsStart)
+                {
+                    if (_random.Prob(infected.MinorPainChance * frameTime))
+                    {
+                        var message = Loc.GetString("rmc-xeno-infection-minorpain-" + _random.Pick(new List<string> { "stomach", "chest" }));
+                        _popup.PopupEntity(message, uid, uid, PopupType.SmallCaution);
+                    }
+
+                    if (_random.Prob((infected.ShakesChance * 2 / 3) * frameTime))
+                        InfectionShakes(uid, infected, infected.BaseKnockdownTime, infected.JitterTime);
+                }
                 continue;
             }
 
             RemCompDeferred<VictimInfectedComponent>(uid);
 
             var spawned = SpawnAtPosition(infected.BurstSpawn, xform.Coordinates);
+            infected.CurrentStage = 6;
+            Dirty(uid, infected);
+
             _xeno.SetHive(spawned, infected.Hive);
 
             EnsureComp<VictimBurstComponent>(uid);
 
             _audio.PlayPvs(infected.BurstSound, uid);
         }
+    }
+    // Shakes chances decrease as symptom stages progress, and they get longer
+    private void InfectionShakes(EntityUid victim, VictimInfectedComponent infected, TimeSpan knockdownTime, TimeSpan jitterTime)
+    {
+        // Don't activate when unconscious
+        if (_mobState.IsIncapacitated(victim))
+            return;
+        //TODO Minor limb damage and causes pain
+        _stun.TryParalyze(victim, knockdownTime, false);
+        _jitter.DoJitter(victim, jitterTime, false);
+        _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes-self"), victim, victim, PopupType.MediumCaution);
+        _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.MediumCaution);
+        _damage.TryChangeDamage(victim, infected.InfectionDamage, true, false);
     }
 }
