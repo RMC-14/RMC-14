@@ -6,9 +6,9 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._RMC14.Admin;
 
 [GenerateTypedNameReferences]
-public sealed partial class CMSquadRow : BoxContainer
+public sealed partial class RMCTransformRow : BoxContainer
 {
-    public CMSquadRow()
+    public RMCTransformRow()
     {
         RobustXamlLoader.Load(this);
     }

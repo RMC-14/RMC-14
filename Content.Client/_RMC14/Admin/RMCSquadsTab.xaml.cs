@@ -5,9 +5,9 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._RMC14.Admin;
 
 [GenerateTypedNameReferences]
-public sealed partial class CMSquadsTab : Control
+public sealed partial class RMCSquadsTab : Control
 {
-    public CMSquadsTab()
+    public RMCSquadsTab()
     {
         RobustXamlLoader.Load(this);
     }

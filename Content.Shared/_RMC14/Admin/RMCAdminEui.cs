@@ -11,7 +11,7 @@ public readonly record struct Hive(NetEntity Id, string Name);
 public readonly record struct Squad(EntProtoId Id, bool Exists, int Members);
 
 [Serializable, NetSerializable]
-public sealed class CMAdminEuiState(NetEntity target, List<Hive> hives, List<Squad> squads) : EuiStateBase
+public sealed class RMCAdminEuiState(NetEntity target, List<Hive> hives, List<Squad> squads) : EuiStateBase
 {
     public readonly NetEntity Target = target;
     public readonly List<Hive> Hives = hives;
@@ -19,37 +19,37 @@ public sealed class CMAdminEuiState(NetEntity target, List<Hive> hives, List<Squ
 }
 
 [Serializable, NetSerializable]
-public sealed class CMAdminChangeHiveMsg(Hive hive) : EuiMessageBase
+public sealed class RMCAdminChangeHiveMsg(Hive hive) : EuiMessageBase
 {
     public readonly Hive Hive = hive;
 }
 
 [Serializable, NetSerializable]
-public sealed class CMAdminCreateHiveMsg(string name) : EuiMessageBase
+public sealed class RMCAdminCreateHiveMsg(string name) : EuiMessageBase
 {
     public readonly string Name = name;
 }
 
 [Serializable, NetSerializable]
-public sealed class CMAdminTransformHumanoidMsg(string speciesId) : EuiMessageBase
+public sealed class RMCAdminTransformHumanoidMsg(string speciesId) : EuiMessageBase
 {
     public readonly string SpeciesId = speciesId;
 }
 
 [Serializable, NetSerializable]
-public sealed class CMAdminTransformXenoMsg(EntProtoId xenoId) : EuiMessageBase
+public sealed class RMCAdminTransformXenoMsg(EntProtoId xenoId) : EuiMessageBase
 {
     public readonly EntProtoId XenoId = xenoId;
 }
 
 [Serializable, NetSerializable]
-public sealed class CMAdminCreateSquadMsg(EntProtoId squadId) : EuiMessageBase
+public sealed class RMCAdminCreateSquadMsg(EntProtoId squadId) : EuiMessageBase
 {
     public readonly EntProtoId SquadId = squadId;
 }
 
 [Serializable, NetSerializable]
-public sealed class CMAdminAddToSquadMsg(EntProtoId squadId) : EuiMessageBase
+public sealed class RMCAdminAddToSquadMsg(EntProtoId squadId) : EuiMessageBase
 {
     public readonly EntProtoId SquadId = squadId;
 }

@@ -2,4 +2,4 @@
 
 namespace Content.Client._RMC14.Admin;
 
-public sealed class CMAdminSystem : SharedCMAdminSystem;
+public sealed class RMCAdminSystem : SharedRMCAdminSystem;

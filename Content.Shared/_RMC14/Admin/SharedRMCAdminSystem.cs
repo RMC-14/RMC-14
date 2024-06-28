@@ -5,16 +5,16 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Admin;
 
-public abstract class SharedCMAdminSystem : EntitySystem
+public abstract class SharedRMCAdminSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminManager _admin = default!;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<GetVerbsEvent<CMAdminVerb>>(OnXenoGetVerbs);
+        SubscribeLocalEvent<GetVerbsEvent<RMCAdminVerb>>(OnXenoGetVerbs);
     }
 
-    private void OnXenoGetVerbs(GetVerbsEvent<CMAdminVerb> args)
+    private void OnXenoGetVerbs(GetVerbsEvent<RMCAdminVerb> args)
     {
         if (!TryComp(args.User, out ActorComponent? actor))
             return;
@@ -23,9 +23,9 @@ public abstract class SharedCMAdminSystem : EntitySystem
         if (!CanUse(player))
             return;
 
-        args.Verbs.Add(new CMAdminVerb
+        args.Verbs.Add(new RMCAdminVerb
         {
-            Text = Loc.GetString("cm-ui-open-cm-actions"),
+            Text = Loc.GetString("rmc-ui-open-rmc-actions"),
             Act = () =>
             {
                 OpenBui(player, args.Target);

@@ -225,7 +225,7 @@ namespace Content.Shared.Verbs
             typeof(ActivationVerb),
             typeof(ExamineVerb),
             typeof(EquipmentVerb),
-            typeof(CMAdminVerb)
+            typeof(RMCAdminVerb)
         };
     }
 

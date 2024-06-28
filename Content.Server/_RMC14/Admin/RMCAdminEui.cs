@@ -19,7 +19,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Admin;
 
-public sealed class CMAdminEui : BaseEui
+public sealed class RMCAdminEui : BaseEui
 {
     [Dependency] private readonly IAdminManager _admin = default!;
     [Dependency] private readonly IEntityManager _entities = default!;
@@ -37,7 +37,7 @@ public sealed class CMAdminEui : BaseEui
 
     private NetEntity _target;
 
-    public CMAdminEui(EntityUid target)
+    public RMCAdminEui(EntityUid target)
     {
         IoCManager.InjectDependencies(this);
 
@@ -85,7 +85,7 @@ public sealed class CMAdminEui : BaseEui
             squads.Add(new Squad(squadProto, exists, members));
         }
 
-        return new CMAdminEuiState(_target, hives, squads);
+        return new RMCAdminEuiState(_target, hives, squads);
     }
 
     public override void HandleMessage(EuiMessageBase msg)
@@ -94,7 +94,7 @@ public sealed class CMAdminEui : BaseEui
 
         switch (msg)
         {
-            case CMAdminChangeHiveMsg changeHive:
+            case RMCAdminChangeHiveMsg changeHive:
             {
                 if (_entities.TryGetEntity(_target, out var target) &&
                     _entities.TryGetEntity(changeHive.Hive.Id, out var hive))
@@ -105,13 +105,13 @@ public sealed class CMAdminEui : BaseEui
 
                 break;
             }
-            case CMAdminCreateHiveMsg createHive:
+            case RMCAdminCreateHiveMsg createHive:
             {
                 _hive.CreateHive(createHive.Name);
                 StateDirty();
                 break;
             }
-            case CMAdminTransformHumanoidMsg transformHumanoid:
+            case RMCAdminTransformHumanoidMsg transformHumanoid:
             {
                 if (_entities.GetEntity(_target) is not { Valid: true } entity)
                     break;
@@ -134,7 +134,7 @@ public sealed class CMAdminEui : BaseEui
                 StateDirty();
                 break;
             }
-            case CMAdminTransformXenoMsg transformXeno:
+            case RMCAdminTransformXenoMsg transformXeno:
             {
                 if (_entities.GetEntity(_target) is not { Valid: true } entity)
                     break;
@@ -157,13 +157,13 @@ public sealed class CMAdminEui : BaseEui
                 StateDirty();
                 break;
             }
-            case CMAdminCreateSquadMsg createSquad:
+            case RMCAdminCreateSquadMsg createSquad:
             {
                 _squad.TryEnsureSquad(createSquad.SquadId, out _);
                 StateDirty();
                 break;
             }
-            case CMAdminAddToSquadMsg addToSquad:
+            case RMCAdminAddToSquadMsg addToSquad:
             {
                 if (!_entities.TryGetEntity(_target, out var target) ||
                     !_squad.TryEnsureSquad(addToSquad.SquadId, out var squad))

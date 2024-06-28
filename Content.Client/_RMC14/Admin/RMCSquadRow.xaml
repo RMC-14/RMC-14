@@ -1,10 +1,10 @@
-﻿<controls:CMSquadRow
+﻿<controls:RMCSquadRow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Admin"
     Orientation="Horizontal">
     <Button Name="CreateButton" Access="Public" StyleClasses="OpenBoth" MinWidth="75" Margin="0 0 5 0" />
     <Label Name="Members" Access="Public" />
     <Control HorizontalExpand="True" />
-    <Button Name="AddToSquadButton" Access="Public" Text="{Loc 'cm-ui-add-to-squad'}"
+    <Button Name="AddToSquadButton" Access="Public" Text="{Loc 'rmc-ui-add-to-squad'}"
             StyleClasses="OpenBoth" HorizontalAlignment="Right" />
-</controls:CMSquadRow>
+</controls:RMCSquadRow>
