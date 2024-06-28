@@ -1,4 +1,5 @@
-﻿using Content.Server._RMC14.Rules;
+﻿using System.Linq;
+using Content.Server._RMC14.Rules;
 using Content.Server.Administration;
 using Content.Server.Administration.Managers;
 using Content.Server.EUI;
@@ -6,6 +7,7 @@ using Content.Server.Mind;
 using Content.Server.Station.Systems;
 using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Administration;
@@ -17,7 +19,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Admin;
 
-public sealed class CMAdminEui : BaseEui
+public sealed class RMCAdminEui : BaseEui
 {
     [Dependency] private readonly IAdminManager _admin = default!;
     [Dependency] private readonly IEntityManager _entities = default!;
@@ -28,18 +30,20 @@ public sealed class CMAdminEui : BaseEui
 
     private readonly SharedXenoHiveSystem _hive;
     private readonly MindSystem _mind;
+    private readonly SquadSystem _squad;
     private readonly StationSpawningSystem _stationSpawning;
     private readonly SharedTransformSystem _transform;
     private readonly XenoSystem _xeno;
 
     private NetEntity _target;
 
-    public CMAdminEui(EntityUid target)
+    public RMCAdminEui(EntityUid target)
     {
         IoCManager.InjectDependencies(this);
 
         _hive = _entities.System<SharedXenoHiveSystem>();
         _mind = _entities.System<MindSystem>();
+        _squad = _entities.System<SquadSystem>();
         _stationSpawning = _entities.System<StationSpawningSystem>();
         _transform = _entities.System<SharedTransformSystem>();
         _xeno = _entities.System<XenoSystem>();
@@ -61,13 +65,27 @@ public sealed class CMAdminEui : BaseEui
     public override EuiStateBase GetNewState()
     {
         var hives = new List<Hive>();
-        var query = _entities.EntityQueryEnumerator<HiveComponent, MetaDataComponent>();
-        while (query.MoveNext(out var uid, out _, out var metaData))
+        var hiveQuery = _entities.EntityQueryEnumerator<HiveComponent, MetaDataComponent>();
+        while (hiveQuery.MoveNext(out var uid, out _, out var metaData))
         {
             hives.Add(new Hive(_entities.GetNetEntity(uid), metaData.EntityName));
         }
 
-        return new CMAdminEuiState(_target, hives);
+        var squads = new List<Squad>();
+        foreach (var squadProto in _squad.SquadPrototypes)
+        {
+            var exists = false;
+            var members = 0;
+            if (_squad.TryGetSquad(squadProto, out var squad))
+            {
+                exists = true;
+                members = _squad.GetSquadMembers(squad);
+            }
+
+            squads.Add(new Squad(squadProto, exists, members));
+        }
+
+        return new RMCAdminEuiState(_target, hives, squads);
     }
 
     public override void HandleMessage(EuiMessageBase msg)
@@ -76,7 +94,7 @@ public sealed class CMAdminEui : BaseEui
 
         switch (msg)
         {
-            case CMAdminChangeHiveMsg changeHive:
+            case RMCAdminChangeHiveMsg changeHive:
             {
                 if (_entities.TryGetEntity(_target, out var target) &&
                     _entities.TryGetEntity(changeHive.Hive.Id, out var hive))
@@ -87,13 +105,13 @@ public sealed class CMAdminEui : BaseEui
 
                 break;
             }
-            case CMAdminCreateHiveMsg createHive:
+            case RMCAdminCreateHiveMsg createHive:
             {
                 _hive.CreateHive(createHive.Name);
                 StateDirty();
                 break;
             }
-            case CMAdminTransformHumanoidMsg transformHumanoid:
+            case RMCAdminTransformHumanoidMsg transformHumanoid:
             {
                 if (_entities.GetEntity(_target) is not { Valid: true } entity)
                     break;
@@ -116,7 +134,7 @@ public sealed class CMAdminEui : BaseEui
                 StateDirty();
                 break;
             }
-            case CMAdminTransformXenoMsg transformXeno:
+            case RMCAdminTransformXenoMsg transformXeno:
             {
                 if (_entities.GetEntity(_target) is not { Valid: true } entity)
                     break;
@@ -136,6 +154,24 @@ public sealed class CMAdminEui : BaseEui
 
                 _entities.DeleteEntity(entity);
                 _target = _entities.GetNetEntity(newXeno);
+                StateDirty();
+                break;
+            }
+            case RMCAdminCreateSquadMsg createSquad:
+            {
+                _squad.TryEnsureSquad(createSquad.SquadId, out _);
+                StateDirty();
+                break;
+            }
+            case RMCAdminAddToSquadMsg addToSquad:
+            {
+                if (!_entities.TryGetEntity(_target, out var target) ||
+                    !_squad.TryEnsureSquad(addToSquad.SquadId, out var squad))
+                {
+                    break;
+                }
+
+                _squad.AssignSquad(target.Value, (squad, squad), null);
                 StateDirty();
                 break;
             }
