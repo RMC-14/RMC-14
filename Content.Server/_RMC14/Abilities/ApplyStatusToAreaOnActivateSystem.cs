@@ -29,7 +29,7 @@ public sealed class ApplyToAreaOnActivateSystem : EntitySystem
             if (entity == args.User && !ent.Comp.ApplyToSelf)
                 continue;
 
-            if (_whitelistSystem.IsBlacklistPass(ent.Comp.Blacklist, entity) || _whitelistSystem.IsWhitelistFail(ent.Comp.WhiteList, entity))
+            if (_whitelistSystem.IsBlacklistPass(ent.Comp.Blacklist, entity) || _whitelistSystem.IsWhitelistFail(ent.Comp.Whitelist, entity))
                 continue;
 
             if(ent.Comp.Component != String.Empty)
