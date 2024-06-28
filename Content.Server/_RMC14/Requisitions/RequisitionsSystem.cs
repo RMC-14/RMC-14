@@ -399,10 +399,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         }
 
         if (bureaucraticRewards > 0)
-        {
             SendUIFeedback(Loc.GetString("requisition-paperwork-reward-message", ("amount", bureaucraticRewards)));
-            Console.WriteLine($"Bureaucratic Reward ({bureaucraticRewards} spessos)");
-        }
 
         account.Comp.Balance += bureaucraticRewards;
         account.Comp.Balance += logisticRecycleRewards;
