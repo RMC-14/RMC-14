@@ -1572,5 +1572,143 @@
   id: 189
   time: '2024-06-25T04:03:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2556
+- author: DrSmugleaf
+  changes:
+  - message: Fixed marines not being able to move after being un-nested.
+    type: Fix
+  - message: Fixed marines falling down if they die while nested, and not falling
+      down once un-nested after being killed..
+    type: Fix
+  id: 190
+  time: '2024-06-25T11:19:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2621
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the Queen not detaching from the ovipositor on crit or death.
+    type: Fix
+  - message: Added popups to the Queen when starting to attach to or detach from the
+      ovipositor.
+    type: Tweak
+  id: 191
+  time: '2024-06-25T11:20:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2622
+- author: DrSmugleaf
+  changes:
+  - message: Fixed duplicate lurker invisibility expired and hive core not enough
+      plasma popups.
+    type: Fix
+  id: 192
+  time: '2024-06-25T12:56:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2623
+- author: CaasGit
+  changes:
+  - message: blood bags no longer attempt to poke random objects
+    type: Fix
+  id: 193
+  time: '2024-06-26T04:29:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2615
+- author: Whisper
+  changes:
+  - message: Autoinjectors no longer inject into containers, use refillable bottles
+      instead.
+    type: Fix
+  id: 194
+  time: '2024-06-26T05:42:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2633
+- author: AeraAuling
+  changes:
+  - message: Added Felinids
+    type: Add
+  id: 195
+  time: '2024-06-26T07:27:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2561
+- author: DrSmugleaf
+  changes:
+  - message: Added Toolshed commands for skills, vendor points, squads and evolution
+      points.
+    type: Add
+  id: 196
+  time: '2024-06-26T08:40:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2636
+- author: Siigiil
+  changes:
+  - message: Fixed attachment actions not being properly removed.
+    type: Fix
+  - message: Fixed the attachment offsets for the M54.
+    type: Fix
+  id: 197
+  time: '2024-06-26T23:37:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2571
+- author: DrSmugleaf
+  changes:
+  - message: Ghosting while in crit will now give you a warning that you won't be
+      able to return to your body. Ghosting while dead will still allow you to return
+      if defibbed.
+    type: Tweak
+  - message: Replaced succumb, last words and fake death with the new ghost action.
+    type: Tweak
+  id: 198
+  time: '2024-06-27T05:04:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2644
+- author: DrSmugleaf
+  changes:
+  - message: Humanoid voicelines can now be individually toggled for each species.
+    type: Tweak
+  id: 199
+  time: '2024-06-27T05:04:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2641
+- author: DrSmugleaf
+  changes:
+  - message: Fixed webbing sometimes not opening until reattached or taking multiple
+      attempts to open.
+    type: Fix
+  id: 200
+  time: '2024-06-27T05:08:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2640
+- author: Vermidia
+  changes:
+  - message: Marines will now experience symptoms of being infected.
+    type: Add
+  id: 201
+  time: '2024-06-27T06:49:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2553
+- author: Zarq0
+  changes:
+  - message: Made phoron bars grindable.
+    type: Tweak
+  - message: Added phoron as a reagent.
+    type: Add
+  id: 202
+  time: '2024-06-28T00:35:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2647
+- author: Sigil
+  changes:
+  - message: The grenade launcher now properly fires over creatures and objects.
+    type: Fix
+  id: 203
+  time: '2024-06-28T00:43:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2618
+- author: Noisrevni
+  changes:
+  - message: Added requisitions paperwork reward system, now supply crew can send
+      stamped invoice to gain extra money for the ongoing operation.
+    type: Add
+  id: 204
+  time: '2024-06-28T01:32:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2409
+- author: Zarq0
+  changes:
+  - message: Ported Meralyne, Imidazoline and Clonexadone from CM13.
+    type: Add
+  id: 205
+  time: '2024-06-28T03:33:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2642
+- author: DrSmugleaf
+  changes:
+  - message: Added Squad creation and moving marines between squads to the admin menu.
+    type: Add
+  id: 206
+  time: '2024-06-28T03:34:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2657
 Name: RMC14
 Order: -1

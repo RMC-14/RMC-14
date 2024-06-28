@@ -1,5 +1,8 @@
 ﻿[admin]
 deadmin_on_join = true
+see_own_notes = true
+server_ban_erase_player = true
+new_player_threshold = 600
 
 [adminlogs]
 server_name = "rouny"
@@ -18,6 +21,10 @@ soft_max_players = 250
 panic_bunker.enabled = false
 round_end_pvs_overrides = false
 
+[ghost]
+kill_crit = false
+role_time = 0
+
 [hub]
 # Set to true to show this server on the public server list
 # Before enabling this, read: https://docs.spacestation14.io/hosts/hub-rules
@@ -32,11 +39,17 @@ hub_urls = "https://central.spacestation14.io/hub/"
 
 [ic]
 flavor_text = true
+enable_suicide = false
 
 [infolinks]
-discord = "https://discord.gg/rouny"
-github = "https://github.com/RMC-14/RMC-14"
+#appeal = "https://appeal.rouny-ss14.com"
 bug_report = "https://github.com/RMC-14/RMC-14/issues/new?assignees=&labels=&projects=&template=issue_report.md&title="
+discord = "https://discord.gg/rouny"
+#forum = "https://forum.rouny-ss14.com"
+github = "https://github.com/RMC-14/RMC-14"
+#patreon = ""
+#website = ""
+#wiki = ""
 
 [log]
 path = "logs"

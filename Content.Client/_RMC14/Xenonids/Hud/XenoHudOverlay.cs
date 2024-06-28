@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Client._RMC14.Medical.HUD;
 using Content.Client._RMC14.NightVision;
 using Content.Shared._RMC14.Xenonids;
@@ -198,7 +198,7 @@ public sealed class XenoHudOverlay : Overlay
 
             var time = _timing.CurTime - comp.AttachedAt;
             var burstAt = comp.BurstAt - comp.AttachedAt;
-            var level = ContentHelpers.RoundToLevels(time.TotalSeconds, burstAt.TotalSeconds, comp.InfectedIcons.Length);
+            var level = Math.Min(comp.CurrentStage, comp.InfectedIcons.Length - 1);
             var icon = comp.InfectedIcons[level];
             var texture = _sprite.GetFrame(icon, _timing.CurTime);
 

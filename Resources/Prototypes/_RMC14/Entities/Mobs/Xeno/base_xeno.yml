@@ -67,9 +67,9 @@
   - type: MobStateActions
     actions:
       Critical:
-      - ActionCritSuccumb
-      - ActionCritFakeDeath
-      - ActionCritLastWords
+      - CMActionGhost
+      Dead:
+      - CMActionGhost
   - type: Deathgasp
     prototype: CMXenoDeathGasp
   - type: SoundOnDeath

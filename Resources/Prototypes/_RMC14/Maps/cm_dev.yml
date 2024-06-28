@@ -3,6 +3,8 @@
   mapName: CMDev
   mapPath: /Maps/_RMC14/dev_map.yml
   minPlayers: 0
+  maxRandomOffset: 0
+  randomRotation: false
   stations:
     Dev:
       stationProto: StandardNanotrasenStation
