@@ -7,7 +7,7 @@
   id: CMBoxMagazineRifleM54C
   graph: CMBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazineRifleM54C
+  targetNode: CMBoxMagazineRifleM54CEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular M54C mags.
   icon:
@@ -21,7 +21,7 @@
   id: CMBoxMagazineRifleM54CAP
   graph: CMBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazineRifleM54CAP
+  targetNode: CMBoxMagazineRifleM54CAPEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M54C mags.
   icon:
@@ -35,7 +35,7 @@
   id: CMBoxMagazineRifleM54CExt
   graph: CMBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazineRifleM54CExt
+  targetNode: CMBoxMagazineRifleM54CExtEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain extended M54C mags.
   icon:
@@ -50,7 +50,7 @@
   id: CMBoxMagazineSMGM63
   graph: CMBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazineSMGM63
+  targetNode: CMBoxMagazineSMGM63Empty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular M63 mags.
   icon:
@@ -64,7 +64,7 @@
   id: CMBoxMagazineSMGM63AP
   graph: CMBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazineSMGM63AP
+  targetNode: CMBoxMagazineSMGM63APEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M63 mags.
   icon:
@@ -78,7 +78,7 @@
   id: CMBoxMagazineSMGM63Ext
   graph: CMBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazineSMGM63Ext
+  targetNode: CMBoxMagazineSMGM63ExtEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain extended M63 mags.
   icon:
@@ -93,7 +93,7 @@
   id: CMBoxMagazineRifleM4SPR
   graph: CMBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazineRifleM4SPR
+  targetNode: CMBoxMagazineRifleM4SPREmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular M4RA mags.
   icon:
@@ -107,7 +107,7 @@
   id: CMBoxMagazineRifleM4SPRAP
   graph: CMBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazineRifleM4SPRAP
+  targetNode: CMBoxMagazineRifleM4SPRAPEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M4RA mags.
   icon:
@@ -121,7 +121,7 @@
   id: CMBoxMagazineRifleM4SPRExt
   graph: CMBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazineRifleM4SPRExt
+  targetNode: CMBoxMagazineRifleM4SPRExtEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain extended M4RA mags.
   icon:
@@ -136,7 +136,7 @@
   id: CMBoxMagazinePistolM1984
   graph: CMBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazinePistolM1984
+  targetNode: CMBoxMagazinePistolM1984Empty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular M1984 mags.
   icon:
@@ -150,7 +150,7 @@
 #  id: CMBoxMagazinePistolM1984AP
 #  graph: CMBoxMagazine
 #  startNode: start
-#  targetNode: CMBoxMagazinePistolM1984AP
+#  targetNode: CMBoxMagazinePistolM1984APEmpty
 #  category: construction-category-cm-box-magazine
 #  description: A magazine box that can contain armor piercing M1984 mags.
 #  icon:
@@ -165,7 +165,7 @@
   id: CMBoxMagazinePistolM77AP
   graph: CMBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazinePistolM77AP
+  targetNode: CMBoxMagazinePistolM77APEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M77 mags.
   icon:
@@ -180,7 +180,7 @@
   id: CMBoxMagazinePistolMK80
   graph: CMBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazinePistolMK80
+  targetNode: CMBoxMagazinePistolMK80Empty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular VP 78 mags.
   icon:
