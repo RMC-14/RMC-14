@@ -46,7 +46,8 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, AttachableHolderDetachMessage>(OnAttachableHolderDetachMessage);
         SubscribeLocalEvent<AttachableHolderComponent, AttemptShootEvent>(OnAttachableHolderAttemptShoot);
         SubscribeLocalEvent<AttachableHolderComponent, BoundUIOpenedEvent>(OnAttachableHolderUiOpened);
-        SubscribeLocalEvent<AttachableHolderComponent, EntInsertedIntoContainerMessage>(OnAttached);
+        SubscribeLocalEvent<AttachableHolderComponent, MapInitEvent>(OnHolderMapInit,
+            after: new[] { typeof(ContainerFillSystem) });
         SubscribeLocalEvent<AttachableHolderComponent, GetVerbsEvent<InteractionVerb>>(OnAttachableHolderGetVerbs);
         SubscribeLocalEvent<AttachableHolderComponent, GotEquippedHandEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GotUnequippedHandEvent>(RelayEvent);
@@ -96,6 +97,30 @@ public sealed class AttachableHolderSystem : EntitySystem
     public override void Shutdown()
     {
         CommandBinds.Unregister<AttachableHolderSystem>();
+    }
+
+    private void OnHolderMapInit(Entity<AttachableHolderComponent> holder, ref MapInitEvent args)
+    {
+        foreach (string slotId in holder.Comp.Slots.Keys)
+        {
+            if (!_container.TryGetContainer(holder.Owner, slotId, out var container) || container.Count <= 0)
+                continue;
+
+            container.OccludesLight = false;
+            var attachableUid = container.ContainedEntities[0];
+
+            if (!HasComp<AttachableComponent>(attachableUid))
+                return;
+
+            var ev = new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Attached);
+            RaiseLocalEvent(attachableUid, ref ev);
+
+            var holderEv = new AttachableHolderAttachablesAlteredEvent(attachableUid, slotId, AttachableAlteredType.Attached);
+            RaiseLocalEvent(holder.Owner, ref holderEv);
+        }
+
+        UpdateStripUi(holder.Owner, holder.Comp);
+        Dirty(holder);
     }
 
     private void OnAttachableHolderInteractUsing(Entity<AttachableHolderComponent> holder, ref InteractUsingEvent args)
@@ -290,36 +315,27 @@ public sealed class AttachableHolderSystem : EntitySystem
         if (!_container.Insert(attachableUid, container))
             return false;
 
+        UpdateStripUi(holder.Owner, holder.Comp);
+
+        var ev = new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Attached);
+        RaiseLocalEvent(attachableUid, ref ev);
+
+        var holderEv = new AttachableHolderAttachablesAlteredEvent(attachableUid, slotId, AttachableAlteredType.Attached);
+        RaiseLocalEvent(holder.Owner, ref holderEv);
+
         if(_hands.IsHolding(userUid, holder.Owner))
         {
             var addEv = new GrantAttachableActionsEvent(userUid);
             RaiseLocalEvent(attachableUid, ref addEv);
         }
 
+        Dirty(holder);
+
         _audio.PlayPredicted(Comp<AttachableComponent>(attachableUid).AttachSound,
             holder,
             userUid);
 
         return true;
-    }
-    
-    private void OnAttached(Entity<AttachableHolderComponent> holder, ref EntInsertedIntoContainerMessage args)
-    {
-        if (!HasComp<AttachableComponent>(args.Entity) || !holder.Comp.Slots.ContainsKey(args.Container.ID))
-            return;
-        
-        if (args.OldParent == holder.Owner)
-            return;
-        
-        UpdateStripUi(holder.Owner, holder.Comp);
-
-        var ev = new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Attached);
-        RaiseLocalEvent(args.Entity, ref ev);
-        
-        var holderEv = new AttachableHolderAttachablesAlteredEvent(args.Entity, args.Container.ID, AttachableAlteredType.Attached);
-        RaiseLocalEvent(holder, ref holderEv);
-        
-        Dirty(holder);
     }
 
     //Detaching

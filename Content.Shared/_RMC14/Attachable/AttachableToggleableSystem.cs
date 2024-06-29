@@ -51,7 +51,6 @@ public sealed class AttachableToggleableSystem : EntitySystem
 #region AttachableAlteredEvent handling
     private void OnAttachableAltered(Entity<AttachableToggleableComponent> attachable, ref AttachableAlteredEvent args)
     {
-        
         switch (args.Alteration)
         {
             case AttachableAlteredType.Detached:

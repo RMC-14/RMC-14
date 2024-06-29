@@ -42,15 +42,15 @@
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c.rsi
-#  - type: ContainerFill
-#    containers:
-#      cm-aslot-barrel:
-#      - CMAttachmentExtendedBarrel
+  - type: ContainerFill
+    containers:
+      cm-aslot-underbarrel:
+      - RMCAttachmentU1GrenadeLauncher
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
-      cm-aslot-barrel: !type:ContainerSlot
+      cm-aslot-underbarrel: !type:ContainerSlot
   - type: Gun
     minAngle: 30
     maxAngle: 60
