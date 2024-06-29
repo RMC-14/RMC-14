@@ -319,25 +319,6 @@
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/medical.rsi
 
-- type: entity
-  parent: CMCrateWeldable
-  id: RMCCratePhoron
-  name: phoron crate
-  description: A phoron crate.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Storage/Crates/phoron.rsi
-    layers:
-    - state: base
-      map: ["enum.StorageVisualLayers.Base"]
-    - state: closed
-      map: ["enum.StorageVisualLayers.Door"]
-    - state: welded
-      visible: false
-      map: ["enum.WeldableLayers.BaseWelded"]
-  - type: Icon
-    sprite: _RMC14/Structures/Storage/Crates/phoron.rsi
-
 # Secure
 - type: entity
   parent: CMCrateWeldable
@@ -437,3 +418,12 @@
     sprite: _RMC14/Structures/Storage/Crates/secure_we_ya.rsi
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/secure_we_ya.rsi
+
+- type: entity
+  parent: CMCrateSecure
+  id: RMCCrateSecurePhoron
+  name: phoron crate
+  description: A phoron crate.
+  components:
+  - type: AccessReader
+    access: [["CMAccessResearch"],["CMAccessEngineering"]]
