@@ -10,6 +10,7 @@ using Content.Client.Players.PlayTimeTracking;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.Guidebook;
 using Content.Shared._RMC14.NamedItems;
+using Content.Shared._RMC14.Patron;
 using Content.Shared._RMC14.Prototypes;
 using Content.Shared.CCVar;
 using Content.Shared.Clothing;
@@ -701,6 +702,11 @@ namespace Content.Client.Lobby.UI
         public void RefreshLoadouts()
         {
             _loadoutWindow?.Dispose();
+        }
+
+        public void RefreshRMC(SharedRMCPatronTier? tier)
+        {
+            TabContainer.SetTabVisible(5, tier is { NamedItems: true });
         }
 
         /// <summary>

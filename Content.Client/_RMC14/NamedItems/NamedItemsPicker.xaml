@@ -1,9 +1,11 @@
 ﻿<controls:NamedItemsPicker
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.NamedItems"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
     VerticalExpand="True">
     <BoxContainer Orientation="Vertical">
         <Label Text="{Loc 'rmc-ui-named-items-displayed-as'}" Margin="0 0 0 10" />
+        <cc:HSeparator Margin="0 5" />
         <BoxContainer Orientation="Horizontal">
             <Label Text="{Loc 'rmc-ui-named-primary-gun'}" MinWidth="150" Align="Right" Margin="0 0 5 0" />
             <LineEdit Name="PrimaryGun" Access="Public" HorizontalExpand="True" />

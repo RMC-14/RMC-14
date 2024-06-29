@@ -13,10 +13,13 @@ public sealed class LinkAccountManager : IPostInjectInit
     public SharedRMCPatronTier? Tier { get; private set; }
     public bool Linked { get; private set; }
 
+    public event Action? Updated;
+
     private void OnStatus(LinkAccountStatusMsg ev)
     {
         Tier = ev.PatronTier;
         Linked = ev.Linked;
+        Updated?.Invoke();
     }
 
     private void OnPatronList(RMCPatronListMsg ev)
