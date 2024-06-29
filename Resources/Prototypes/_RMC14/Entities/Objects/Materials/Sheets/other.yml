@@ -34,6 +34,14 @@
 
 - type: entity
   parent: CMSheetPhoron
+  id: CMSheetPhoron30
+  suffix: "30"
+  components:
+  - type: Stack
+    count: 30
+
+- type: entity
+  parent: CMSheetPhoron
   id: CMSheetPhoron1
   suffix: "1"
   components:

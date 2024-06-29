@@ -6,12 +6,12 @@
 # /datum/supply_packs/phoron
 - type: entity
   id: RMCCrateResearchPhoron
-  parent: RMCCratePhoron
-  name: phoron crate (x50)
+  parent: RMCCrateSecurePhoron
+  name: phoron crate (x30)
   components:
   - type: StorageFill
     contents:
-    - id: CMSheetPhoron
+    - id: CMSheetPhoron30
 
 # /datum/supply_packs/plastic
 # /datum/supply_packs/precious_metals
