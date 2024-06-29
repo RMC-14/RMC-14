@@ -97,7 +97,7 @@
   components:
   - type: Construction
     graph: CMBoxMagazine
-    node: CMBoxMagazineRifleM41A
+    node: CMBoxMagazineRifleM54C
   - type: Sprite
     layers:
     - state: base_m41 # icon_state = base color of box
@@ -117,8 +117,8 @@
           - CMMagazineRifleM54C
 
 - type: entity
-  parent: CMBoxMagazineRifleM41AEmpty
-  id: CMBoxMagazineRifleM41A
+  parent: CMBoxMagazineRifleM54CEmpty
+  id: CMBoxMagazineRifleM54C
   suffix: Filled
   components:
   - type: CMItemSlots
@@ -136,7 +136,7 @@
   components:
   - type: Construction
     graph: CMBoxMagazine
-    node: CMBoxMagazineRifleM41AAP
+    node: CMBoxMagazineRifleM54CAP
   - type: Sprite
     layers:
     - state: base_m41
@@ -157,9 +157,9 @@
           - CMMagazineRifleM54CAP
 
 - type: entity
-  parent: CMBoxMagazineRifleM41AAPEmpty
-  id: CMBoxMagazineRifleM41AAP
-  name: magazine box (AP M41A x 10)
+  parent: CMBoxMagazineRifleM54CAPEmpty
+  id: CMBoxMagazineRifleM54CAP
+  name: magazine box (AP M54C x 10)
   suffix: Filled
   components:
   - type: CMItemSlots
@@ -177,7 +177,7 @@
   components:
   - type: Construction
     graph: CMBoxMagazine
-    node: CMBoxMagazineRifleM41AExt
+    node: CMBoxMagazineRifleM54CExt
   - type: Sprite
     layers:
     - state: base_m41
@@ -198,9 +198,9 @@
 
 - type: entity
   parent: CMBoxMagazineBase
-  id: CMBoxMagazineRifleM41AExt
+  id: CMBoxMagazineRifleM54CExt
   suffix: Filled
-  name: magazine box (Ext M41A x 8)
+  name: magazine box (Ext M54C x 8)
   components:
   - type: CMItemSlots
     startingItem: CMMagazineRifleM54CExt
@@ -218,7 +218,7 @@
   components:
   - type: Construction
     graph: CMBoxMagazine
-    node: CMBoxMagazineSMGM39
+    node: CMBoxMagazineSMGM63
   - type: Sprite
     layers:
     - state: base_m63
@@ -238,9 +238,9 @@
           - CMMagazineSMGM63
 
 - type: entity
-  parent: CMBoxMagazineSMGM39Empty
-  id: CMBoxMagazineSMGM39
-  name: magazine box (M39 x 12)
+  parent: CMBoxMagazineSMGM63Empty
+  id: CMBoxMagazineSMGM63
+  name: magazine box (M63 x 12)
   components:
   - type: CMItemSlots
     startingItem: CMMagazineSMGM63
@@ -257,7 +257,7 @@
   components:
   - type: Construction
     graph: CMBoxMagazine
-    node: CMBoxMagazineSMGM39AP
+    node: CMBoxMagazineSMGM63AP
   - type: Sprite
     layers:
     - state: base_m63
@@ -277,10 +277,10 @@
           - CMMagazineSMGM63AP
 
 - type: entity
-  parent: CMBoxMagazineSMGM39APEmpty
-  id: CMBoxMagazineSMGM39AP
+  parent: CMBoxMagazineSMGM63APEmpty
+  id: CMBoxMagazineSMGM63AP
   suffix: Full
-  name: magazine box (AP M39 x 12)
+  name: magazine box (AP M63 x 12)
   components:
   - type: CMItemSlots
     startingItem: CMMagazineSMGM63AP
@@ -297,7 +297,7 @@
   components:
   - type: Construction
     graph: CMBoxMagazine
-    node: CMBoxMagazineSMGM39Ext
+    node: CMBoxMagazineSMGM63Ext
   - type: Sprite
     layers:
     - state: base_m63
@@ -314,12 +314,12 @@
       slot:
         whitelist:
           tags:
-          - CMMagazineSMGM39Ext
+          - CMMagazineSMGM63Ext
 
 - type: entity
-  parent: CMBoxMagazineSMGM39ExtEmpty
-  id: CMBoxMagazineSMGM39Ext
-  name: magazine box (Ext M39 x 10)
+  parent: CMBoxMagazineSMGM63ExtEmpty
+  id: CMBoxMagazineSMGM63Ext
+  name: magazine box (Ext M63 x 10)
   suffix: Full
   components:
   - type: CMItemSlots
@@ -338,7 +338,7 @@
   components:
   - type: Construction
     graph: CMBoxMagazine
-    node: CMBoxMagazineRifleM4RA
+    node: CMBoxMagazineRifleM4SPR
   - type: Sprite
     layers:
     - state: base_m4spr
@@ -358,8 +358,8 @@
           - CMMagazineRifleM4SPR
 
 - type: entity
-  parent: CMBoxMagazineRifleM4RAEmpty
-  id: CMBoxMagazineRifleM4RA
+  parent: CMBoxMagazineRifleM4SPREmpty
+  id: CMBoxMagazineRifleM4SPR
   name: magazine box (M4RA x 16)
   suffix: Filled
   components:
@@ -378,7 +378,7 @@
   components:
   - type: Construction
     graph: CMBoxMagazine
-    node: CMBoxMagazineRifleM4RAAP
+    node: CMBoxMagazineRifleM4SPRAP
   - type: Sprite
     layers:
     - state: base_m4spr
@@ -399,8 +399,8 @@
         - CMMagazineRifleM4SPRAP
 
 - type: entity
-  parent: CMBoxMagazineRifleM4RAAPEmpty
-  id: CMBoxMagazineRifleM4RAAP
+  parent: CMBoxMagazineRifleM4SPRAPEmpty
+  id: CMBoxMagazineRifleM4SPRAP
   name: magazine box (AP M4RA x 16)
   components:
   - type: CMItemSlots
@@ -418,7 +418,7 @@
   components:
   - type: Construction
     graph: CMBoxMagazine
-    node: CMBoxMagazineRifleM4RAExt
+    node: CMBoxMagazineRifleM4SPRExt
   - type: Sprite
     layers:
     - state: base_m4spr
@@ -446,7 +446,7 @@
   components:
   - type: Construction
     graph: CMBoxMagazine
-    node: CMBoxMagazinePistolM4A3
+    node: CMBoxMagazinePistolM1984
   - type: Sprite
     layers:
     - state: base_m1984
@@ -501,7 +501,7 @@
   components:
   - type: Construction
     graph: CMBoxMagazine
-    node: CMBoxMagazinePistol88m4AP
+    node: CMBoxMagazinePistolM77AP
   - type: Sprite
     layers:
     - state: base_m77

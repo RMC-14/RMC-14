@@ -47,7 +47,7 @@
   - type: Tag
     tags:
     - CMAttachmentStock
-    - CMAttachmentM39StockCollapsible
+    - CMAttachmentM63StockCollapsible
   - type: AttachableToggleable
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
@@ -82,4 +82,4 @@
   id: CMAttachmentStock
 
 - type: Tag
-  id: CMAttachmentM39StockCollapsible
+  id: CMAttachmentM63StockCollapsible

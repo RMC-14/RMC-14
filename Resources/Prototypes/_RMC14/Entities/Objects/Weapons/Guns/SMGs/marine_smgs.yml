@@ -58,7 +58,7 @@
       cm-aslot-stock:
         whitelist:
           tags:
-          - CMAttachmentM39StockCollapsible
+          - CMAttachmentM63StockCollapsible
       cm-aslot-barrel:
         whitelist:
           tags:
