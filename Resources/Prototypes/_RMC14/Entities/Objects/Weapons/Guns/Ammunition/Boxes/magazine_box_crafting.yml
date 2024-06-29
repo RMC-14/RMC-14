@@ -2,7 +2,7 @@
 
 # M54C
 - type: construction
-  parent: CM
+  parent: RMC
   name: Magazine Box (M54C Reg)
   id: CMBoxMagazineRifleM54C
   graph: CMBoxMagazine
@@ -16,7 +16,7 @@
   objectType: Item
 
 - type: construction
-  parent: CM
+  parent: RMC
   name: Magazine Box (M54C AP)
   id: CMBoxMagazineRifleM54CAP
   graph: CMBoxMagazine
@@ -30,7 +30,7 @@
   objectType: Item
 
 - type: construction
-  parent: CM
+  parent: RMC
   name: Magazine Box (M54C Ext)
   id: CMBoxMagazineRifleM54CExt
   graph: CMBoxMagazine
@@ -45,7 +45,7 @@
 
 # M63
 - type: construction
-  parent: CM
+  parent: RMC
   name: Magazine Box (M63 Reg)
   id: CMBoxMagazineSMGM63
   graph: CMBoxMagazine
@@ -59,7 +59,7 @@
   objectType: Item
 
 - type: construction
-  parent: CM
+  parent: RMC
   name: Magazine Box (M63 AP)
   id: CMBoxMagazineSMGM63AP
   graph: CMBoxMagazine
@@ -73,7 +73,7 @@
   objectType: Item
 
 - type: construction
-  parent: CM
+  parent: RMC
   name: Magazine Box (M63 Ext)
   id: CMBoxMagazineSMGM63Ext
   graph: CMBoxMagazine
@@ -88,7 +88,7 @@
 
 # M4RA
 - type: construction
-  parent: CM
+  parent: RMC
   name: Magazine Box (M4RA Reg)
   id: CMBoxMagazineRifleM4SPR
   graph: CMBoxMagazine
@@ -102,7 +102,7 @@
   objectType: Item
 
 - type: construction
-  parent: CM
+  parent: RMC
   name: Magazine Box (M4RA AP)
   id: CMBoxMagazineRifleM4SPRAP
   graph: CMBoxMagazine
@@ -116,7 +116,7 @@
   objectType: Item
 
 - type: construction
-  parent: CM
+  parent: RMC
   name: Magazine Box (M4RA Ext)
   id: CMBoxMagazineRifleM4SPRExt
   graph: CMBoxMagazine
@@ -131,7 +131,7 @@
 
 # M1984
 - type: construction
-  parent: CM
+  parent: RMC
   name: Magazine Box (M1984 Reg)
   id: CMBoxMagazinePistolM1984
   graph: CMBoxMagazine
@@ -145,7 +145,7 @@
   objectType: Item
 
 #- type: construction
-#  parent: CM
+#  parent: RMC
 #  name: Magazine Box (M1984 AP)
 #  id: CMBoxMagazinePistolM1984AP
 #  graph: CMBoxMagazine
@@ -160,7 +160,7 @@
 
 # 88 mod 4 / 88m4
 - type: construction
-  parent: CM
+  parent: RMC
   name: Magazine Box (M77 AP)
   id: CMBoxMagazinePistolM77AP
   graph: CMBoxMagazine
@@ -175,7 +175,7 @@
 
 # MK80
 - type: construction
-  parent: CM
+  parent: RMC
   name: Magazine Box (MK80 Reg)
   id: CMBoxMagazinePistolMK80
   graph: CMBoxMagazine
@@ -190,7 +190,7 @@
 
   # Construct graphs
 - type: constructionGraph
-  parent: CM
+  parent: RMC
   id: CMBoxMagazine
   start: start
   graph:
@@ -198,80 +198,80 @@
     edges:
 
     # M54C
-    - to: CMBoxMagazineRifleM54C #Emtpy
+    - to: CMBoxMagazineRifleM54CEmpty
       steps:
       - material: Cardboard
         amount: 1
         doAfter: 1
-    - to: CMBoxMagazineRifleM54CAP #Emtpy
+    - to: CMBoxMagazineRifleM54CAPEmpty
       steps:
       - material: Cardboard
         amount: 1
         doAfter: 1
-    - to: CMBoxMagazineRifleM54CExt #Emtpy
+    - to: CMBoxMagazineRifleM54CExtEmpty
       steps:
       - material: Cardboard
         amount: 1
         doAfter: 1
 
     # M63
-    - to: CMBoxMagazineSMGM63 #Emtpy
+    - to: CMBoxMagazineSMGM63Empty
       steps:
       - material: Cardboard
         amount: 1
         doAfter: 1
-    - to: CMBoxMagazineSMGM63AP #Emtpy
+    - to: CMBoxMagazineSMGM63APEmpty
       steps:
       - material: Cardboard
         amount: 1
         doAfter: 1
-    - to: CMBoxMagazineSMGM63Ext #Emtpy
+    - to: CMBoxMagazineSMGM63ExtEmpty
       steps:
       - material: Cardboard
         amount: 1
         doAfter: 1
 
     # M4SPR
-    - to: CMBoxMagazineRifleM4SPR #Emtpy
+    - to: CMBoxMagazineRifleM4SPREmpty
       steps:
       - material: Cardboard
         amount: 1
         doAfter: 1
 
-    - to: CMBoxMagazineRifleM4SPRAP #Emtpy
+    - to: CMBoxMagazineRifleM4SPRAPEmpty
       steps:
       - material: Cardboard
         amount: 1
         doAfter: 1
 
-    - to: CMBoxMagazineRifleM4SPRExt #Emtpy
+    - to: CMBoxMagazineRifleM4SPRExtEmpty
       steps:
       - material: Cardboard
         amount: 1
         doAfter: 1
 
     # M1984
-    - to: CMBoxMagazinePistolM1984 #Emtpy
+    - to: CMBoxMagazinePistolM1984Empty
       steps:
       - material: Cardboard
         amount: 1
         doAfter: 1
 
-#    - to: CMBoxMagazinePistolM1984AP #Emtpy
+#    - to: CMBoxMagazinePistolM1984APEmpty
 #      steps:
 #      - material: Cardboard
 #        amount: 1
 #        doAfter: 1
 
     # M77AP
-    - to: CMBoxMagazinePistolM77AP #Emtpy
+    - to: CMBoxMagazinePistolM77APEmpty
       steps:
       - material: Cardboard
         amount: 1
         doAfter: 1
 
     # MK80
-    - to: CMBoxMagazinePistolMK80 #Emtpy
+    - to: CMBoxMagazinePistolMK80Empty
       steps:
       - material: Cardboard
         amount: 1
@@ -282,38 +282,38 @@
 
   # M54C
   - node: CMBoxMagazineRifleM54C
-    entity: CMBoxMagazineRifleM54C #Emtpy
+    entity: CMBoxMagazineRifleM54CEmpty
   - node: CMBoxMagazineRifleM54CAP
-    entity: CMBoxMagazineRifleM54CAP #Emtpy
+    entity: CMBoxMagazineRifleM54CAPEmpty
   - node: CMBoxMagazineRifleM54CExt
-    entity: CMBoxMagazineRifleM54CExt #Emtpy
+    entity: CMBoxMagazineRifleM54CExtEmpty
 
   # M63
   - node: CMBoxMagazineSMGM63
-    entity: CMBoxMagazineSMGM63 #Emtpy
+    entity: CMBoxMagazineSMGM63Empty
   - node: CMBoxMagazineSMGM63AP
-    entity: CMBoxMagazineSMGM63AP #Emtpy
+    entity: CMBoxMagazineSMGM63APEmpty
   - node: CMBoxMagazineSMGM63Ext
-    entity: CMBoxMagazineSMGM63Ext #Emtpy
+    entity: CMBoxMagazineSMGM63ExtEmpty
 
   # M4SPR
   - node: CMBoxMagazineRifleM4SPR
-    entity: CMBoxMagazineRifleM4SPR #Emtpy
+    entity: CMBoxMagazineRifleM4SPREmpty
   - node: CMBoxMagazineRifleM4SPRAP
-    entity: CMBoxMagazineRifleM4SPRAP #Emtpy
+    entity: CMBoxMagazineRifleM4SPRAPEmpty
   - node: CMBoxMagazineRifleM4SPRExt
-    entity: CMBoxMagazineRifleM4SPRExt #Emtpy
+    entity: CMBoxMagazineRifleM4SPRExtEmpty
 
   # M1984
   - node: CMBoxMagazinePistolM1984
-    entity: CMBoxMagazinePistolM1984 #Emtpy
+    entity: CMBoxMagazinePistolM1984Empty
 #  - node: CMBoxMagazinePistolM1984AP
-#    entity: CMBoxMagazinePistolM1984AP #Emtpy
+#    entity: CMBoxMagazinePistolM1984APEmpty
 
   # M77AP
   - node: CMBoxMagazinePistolM77AP
-    entity: CMBoxMagazinePistolM77AP #Emtpy
+    entity: CMBoxMagazinePistolM77APEmpty
 
   # MK80
   - node: CMBoxMagazinePistolMK80
-    entity: CMBoxMagazinePistolMK80 #Emtpy
+    entity: CMBoxMagazinePistolMK80Empty
