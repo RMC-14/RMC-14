@@ -2,7 +2,7 @@
   name: M83 grenade launcher
   parent: [BaseWeaponLauncher, CMBaseWeaponGun]
   id: WeaponLauncherM83
-  description: Oops.
+  description: A heavy, 6-shot grenade launcher used by the UNMC for area denial and big explosions.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83.rsi
@@ -11,6 +11,9 @@
       map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83.rsi
+    quickEquip: true
+    slots:
+    - suitStorage
   - type: AmmoCounter
   - type: Gun
     fireRate: 0.23
@@ -27,6 +30,8 @@
     capacity: 5
     soundInsert:
       path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+    proto: CMGrenadeHighExplosive
+    mayTransfer: True
   - type: OnShootTriggerAmmoTimer
     delay: 1
     beepInterval: 2 # 2 beeps total (at 0 and 2)
@@ -35,11 +40,18 @@
       path: "/Audio/Effects/beep1.ogg"
       params:
         volume: 5
+  - type: GunUserWhitelist
+    whitelist:
+      components:
+      - GrenadeSpecWhitelist
+  - type: Corrodible
+    isCorrodible: false
   - type: AmmoFixedDistance
   - type: Wieldable
   - type: GunRequiresWield
   - type: GunShowUseDelay
   - type: UseDelay
+  - type: GunIFF
   - type: RMCNameItemOnVend
     item: PrimaryGun
 

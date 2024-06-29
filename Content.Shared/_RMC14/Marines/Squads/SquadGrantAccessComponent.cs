@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.Marines.Squads;
 public sealed partial class SquadGrantAccessComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public ProtoId<AccessLevelPrototype>? AccessLevel;
+    public ProtoId<AccessLevelPrototype>[] AccessLevels;
 
     [DataField, AutoNetworkedField]
     public string? RoleName;

@@ -81,7 +81,7 @@ public sealed class XenoWordQueenSystem : EntitySystem
         _xenoPlasma.TryRemovePlasma(queen.Owner, queen.Comp.PlasmaCost);
 
         text = _newLineRegex.Replace(text, "\n\n");
-        var headerText = Loc.GetString("cm-xeno-words-of-the-queen-header");
+        var headerText = Loc.GetString("rmc-xeno-words-of-the-queen-header");
         var wrapped = FormattedMessage.EscapeText(text);
         var header = $"{_xenoAnnounce.WrapHive(headerText)}";
         var message = $"{header}[color=red][font size=14][bold]{wrapped}[/bold][/font][/color]";

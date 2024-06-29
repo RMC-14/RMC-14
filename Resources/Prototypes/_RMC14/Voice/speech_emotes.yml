@@ -1,9 +1,10 @@
 - type: emote
   id: Hiss
-  name: chat-emote-name-hiss
+  name: rmc-emote-name-hiss
   category: Vocal
+  available: false
   icon: Interface/Actions/scream.png
-  chatMessages: [hisses.]
+  chatMessages: ["rmc-emote-hiss"]
   chatTriggers:
     - hiss
     - hisses
@@ -14,10 +15,11 @@
 
 - type: emote
   id: Meow
-  name: chat-emote-name-meow
+  name: rmc-emote-name-meow
   category: Vocal
+  available: false
   icon: Interface/Actions/scream.png
-  chatMessages: [meows.]
+  chatMessages: ["rmc-emote-meow"]
   chatTriggers:
     - meow
     - meows
@@ -36,10 +38,11 @@
 
 - type: emote
   id: Mew
-  name: chat-emote-name-mew
+  name: rmc-emote-name-mew
   category: Vocal
+  available: false
   icon: Interface/Actions/scream.png
-  chatMessages: [mews.]
+  chatMessages: ["rmc-emote-mew"]
   chatTriggers:
     - mew
     - mews
@@ -50,10 +53,11 @@
 
 - type: emote
   id: Growl
-  name: chat-emote-name-growl
+  name: rmc-emote-name-growl
   category: Vocal
+  available: false
   icon: Interface/Actions/scream.png
-  chatMessages: [growls.]
+  chatMessages: ["rmc-emote-growl"]
   chatTriggers:
     - growl
     - growls
@@ -64,10 +68,11 @@
 
 - type: emote
   id: Purr
-  name: chat-emote-name-purr
+  name: rmc-emote-name-purr
   category: Vocal
+  available: false
   icon: Interface/Actions/scream.png
-  chatMessages: [purrs.]
+  chatMessages: ["rmc-emote-purr"]
   chatTriggers:
     - purr
     - purrs
