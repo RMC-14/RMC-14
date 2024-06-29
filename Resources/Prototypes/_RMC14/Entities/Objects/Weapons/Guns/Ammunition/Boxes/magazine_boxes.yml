@@ -8,14 +8,6 @@
   - type: Item
     size: Huge
   - type: ItemSlots
-  - type: CMItemSlots
-    startingItem: CMMRE
-    count: 5
-    slot:
-      name: Magazine
-      whitelist:
-        tags:
-        - MRE
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     layers:
@@ -103,7 +95,7 @@
     - state: base_m54 # icon_state = base color of box
     - state: magaz_reg # overlay_content = sprite of mags
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: text_m41 # overlay_gun_type = text overlay
+    - state: text_m54 # overlay_gun_type = text overlay
     - state: base_type_reg # overlay_ammo_type = box stripe
     - state: base_m54_lid # matches the base box
       map: [ "lid" ]
