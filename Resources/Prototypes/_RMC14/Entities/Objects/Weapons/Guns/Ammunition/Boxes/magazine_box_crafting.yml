@@ -12,7 +12,7 @@
   description: A magazine box that can contain regular M54C mags.
   icon:
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m41
+    state: base_m54
   objectType: Item
 
 - type: construction
@@ -26,7 +26,7 @@
   description: A magazine box that can contain armor piercing M54C mags.
   icon:
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m41
+    state: base_m54
   objectType: Item
 
 - type: construction
@@ -40,7 +40,7 @@
   description: A magazine box that can contain extended M54C mags.
   icon:
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m41
+    state: base_m54
   objectType: Item
 
 # M63
@@ -55,7 +55,7 @@
   description: A magazine box that can contain regular M63 mags.
   icon:
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m39
+    state: base_m63
   objectType: Item
 
 - type: construction
@@ -69,7 +69,7 @@
   description: A magazine box that can contain armor piercing M63 mags.
   icon:
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m39
+    state: base_m63
   objectType: Item
 
 - type: construction
@@ -83,7 +83,7 @@
   description: A magazine box that can contain extended M63 mags.
   icon:
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m39
+    state: base_m63
   objectType: Item
 
 # M4RA
@@ -98,7 +98,7 @@
   description: A magazine box that can contain regular M4RA mags.
   icon:
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m4ra
+    state: base_m4spr
   objectType: Item
 
 - type: construction
@@ -112,7 +112,7 @@
   description: A magazine box that can contain armor piercing M4RA mags.
   icon:
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m4ra
+    state: base_m4spr
   objectType: Item
 
 - type: construction
@@ -126,7 +126,7 @@
   description: A magazine box that can contain extended M4RA mags.
   icon:
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m4ra
+    state: base_m4spr
   objectType: Item
 
 # M1984
@@ -141,7 +141,7 @@
   description: A magazine box that can contain regular M1984 mags.
   icon:
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m4a3
+    state: base_m1911
   objectType: Item
 
 #- type: construction
@@ -155,7 +155,7 @@
 #  description: A magazine box that can contain armor piercing M1984 mags.
 #  icon:
 #    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-#    state: base_m4a3
+#    state: base_m1911
 #  objectType: Item
 
 # 88 mod 4 / 88m4
@@ -170,7 +170,7 @@
   description: A magazine box that can contain armor piercing M77 mags.
   icon:
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_mod88
+    state: base_m77
   objectType: Item
 
 # MK80
@@ -185,7 +185,7 @@
   description: A magazine box that can contain regular VP 78 mags.
   icon:
     sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_vp78
+    state: base_mk80
   objectType: Item
 
   # Construct graphs

@@ -100,7 +100,7 @@
     node: CMBoxMagazineRifleM54CEmpty
   - type: Sprite
     layers:
-    - state: base_m41 # icon_state = base color of box
+    - state: base_m54 # icon_state = base color of box
     - state: magaz_reg # overlay_content = sprite of mags
       map: [ "enum.CMItemSlotsLayers.Fill" ]
     - state: text_m41 # overlay_gun_type = text overlay
@@ -139,7 +139,7 @@
     node: CMBoxMagazineRifleM54CAPEmpty
   - type: Sprite
     layers:
-    - state: base_m41
+    - state: base_m54
     - state: magaz_ap
       map: [ "enum.CMItemSlotsLayers.Fill" ]
     - state: text_m41
@@ -180,7 +180,7 @@
     node: CMBoxMagazineRifleM54CExtEmpty
   - type: Sprite
     layers:
-    - state: base_m41
+    - state: base_m54
     - state: magaz_reg
       map: [ "enum.CMItemSlotsLayers.Fill" ]
     - state: text_m41
