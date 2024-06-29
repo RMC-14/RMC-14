@@ -66,6 +66,8 @@ namespace Content.Client.Info
             linkAccountButton.OnPressed += _ => linkAccount.ToggleWindow();
             buttons.AddChild(linkAccountButton);
 
+            AddInfoButton("rmc-ui-patreon", CCVars.InfoLinksPatreon);
+
             void AddInfoButton(string loc, CVarDef<string> cVar)
             {
                 var button = new Button { Text = Loc.GetString(loc) };

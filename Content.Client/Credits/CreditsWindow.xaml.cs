@@ -71,10 +71,8 @@ namespace Content.Client.Credits
         {
             var patrons = LoadPatrons();
 
-            // Do not show "become a patron" button on Steam builds
-            // since Patreon violates Valve's rules about alternative storefronts.
             var linkPatreon = _cfg.GetCVar(CCVars.InfoLinksPatreon);
-            if (!_cfg.GetCVar(CCVars.BrandingSteam) && linkPatreon != "")
+            if (linkPatreon != "")
             {
                 Button patronButton;
                 patronsContainer.AddChild(patronButton = new Button

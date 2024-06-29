@@ -41,3 +41,6 @@ rmc-ui-named-items-in-preferences = You can change the names of your items per-c
 
 rmc-ui-shoutout-marine = [bold]Operation funded by [color=green]{$name}[/color]![/bold]
 rmc-ui-shoutout-xeno = [bold]Hive established by [color=purple]{$name}[/color]![/bold]
+
+rmc-ui-discord = Discord
+rmc-ui-patreon = Patreon
