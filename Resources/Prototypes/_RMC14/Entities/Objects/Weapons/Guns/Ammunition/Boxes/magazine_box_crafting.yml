@@ -281,39 +281,39 @@
   # Why the fuck do you even need these nodes???
 
   # M54C
-  - node: CMBoxMagazineRifleM54C
+  - node: CMBoxMagazineRifleM54CEmpty
     entity: CMBoxMagazineRifleM54CEmpty
-  - node: CMBoxMagazineRifleM54CAP
+  - node: CMBoxMagazineRifleM54CAPEmpty
     entity: CMBoxMagazineRifleM54CAPEmpty
-  - node: CMBoxMagazineRifleM54CExt
+  - node: CMBoxMagazineRifleM54CExtEmpty
     entity: CMBoxMagazineRifleM54CExtEmpty
 
   # M63
-  - node: CMBoxMagazineSMGM63
+  - node: CMBoxMagazineSMGM63Empty
     entity: CMBoxMagazineSMGM63Empty
-  - node: CMBoxMagazineSMGM63AP
+  - node: CMBoxMagazineSMGM63APEmpty
     entity: CMBoxMagazineSMGM63APEmpty
-  - node: CMBoxMagazineSMGM63Ext
+  - node: CMBoxMagazineSMGM63ExtEmpty
     entity: CMBoxMagazineSMGM63ExtEmpty
 
   # M4SPR
-  - node: CMBoxMagazineRifleM4SPR
+  - node: CMBoxMagazineRifleM4SPREmpty
     entity: CMBoxMagazineRifleM4SPREmpty
-  - node: CMBoxMagazineRifleM4SPRAP
+  - node: CMBoxMagazineRifleM4SPRAPEmpty
     entity: CMBoxMagazineRifleM4SPRAPEmpty
-  - node: CMBoxMagazineRifleM4SPRExt
+  - node: CMBoxMagazineRifleM4SPRExtEmpty
     entity: CMBoxMagazineRifleM4SPRExtEmpty
 
   # M1984
-  - node: CMBoxMagazinePistolM1984
+  - node: CMBoxMagazinePistolM1984Empty
     entity: CMBoxMagazinePistolM1984Empty
-#  - node: CMBoxMagazinePistolM1984AP
+#  - node: CMBoxMagazinePistolM1984APEmpty
 #    entity: CMBoxMagazinePistolM1984APEmpty
 
   # M77AP
-  - node: CMBoxMagazinePistolM77AP
+  - node: CMBoxMagazinePistolM77APEmpty
     entity: CMBoxMagazinePistolM77APEmpty
 
   # MK80
-  - node: CMBoxMagazinePistolMK80
+  - node: CMBoxMagazinePistolMK80Empty
     entity: CMBoxMagazinePistolMK80Empty
