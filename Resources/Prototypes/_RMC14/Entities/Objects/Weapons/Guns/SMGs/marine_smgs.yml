@@ -22,6 +22,8 @@
     maxAngle: -50
     angleIncrease: -5
     angleDecay: 10
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
 
 - type: entity
   parent: CMBaseWeaponSMG

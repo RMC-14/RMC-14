@@ -1002,6 +1002,38 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("rmc_linking_codes", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCNamedItems", b =>
+                {
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("integer")
+                        .HasColumnName("profile_id");
+
+                    b.Property<string>("ArmorName")
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("armor_name");
+
+                    b.Property<string>("HelmetName")
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("helmet_name");
+
+                    b.Property<string>("PrimaryGunName")
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("primary_gun_name");
+
+                    b.Property<string>("SidearmName")
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("sidearm_name");
+
+                    b.HasKey("ProfileId")
+                        .HasName("PK_rmc_named_items");
+
+                    b.ToTable("rmc_named_items", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.RMCPatron", b =>
                 {
                     b.Property<Guid>("PlayerId")
@@ -1846,6 +1878,18 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Player");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCNamedItems", b =>
+                {
+                    b.HasOne("Content.Server.Database.Profile", "Profile")
+                        .WithOne("NamedItems")
+                        .HasForeignKey("Content.Server.Database.RMCNamedItems", "ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_named_items_profile_profile_id");
+
+                    b.Navigation("Profile");
+                });
+
             modelBuilder.Entity("Content.Server.Database.RMCPatron", b =>
                 {
                     b.HasOne("Content.Server.Database.Player", "Player")
@@ -2102,6 +2146,8 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Jobs");
 
                     b.Navigation("Loadouts");
+
+                    b.Navigation("NamedItems");
 
                     b.Navigation("Traits");
                 });

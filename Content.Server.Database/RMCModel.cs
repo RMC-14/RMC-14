@@ -80,3 +80,24 @@ public sealed class RMCLinkingCodes
 
     public DateTime CreationTime { get; set; }
 }
+
+[Table("rmc_named_items")]
+public sealed class RMCNamedItems
+{
+    [Key, ForeignKey("Profile")]
+    public int ProfileId { get; set; }
+
+    public Profile Profile { get; set; } = default!;
+
+    [StringLength(20)]
+    public string? PrimaryGunName { get; set; } = default!;
+
+    [StringLength(20)]
+    public string? SidearmName { get; set; } = default!;
+
+    [StringLength(20)]
+    public string? HelmetName { get; set; } = default!;
+
+    [StringLength(20)]
+    public string? ArmorName { get; set; } = default!;
+}

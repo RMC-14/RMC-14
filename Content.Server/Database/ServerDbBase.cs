@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
+using Content.Shared._RMC14.NamedItems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Humanoid;
@@ -50,6 +51,7 @@ namespace Content.Server.Database
                     .ThenInclude(h => h.Loadouts)
                     .ThenInclude(l => l.Groups)
                     .ThenInclude(group => group.Loadouts)
+                .Include(p => p.Profiles).ThenInclude(p => p.NamedItems)
                 .AsSingleQuery()
                 .SingleOrDefaultAsync(p => p.UserId == userId.UserId, cancel);
 
@@ -101,6 +103,7 @@ namespace Content.Server.Database
                 .Include(p => p.Loadouts)
                     .ThenInclude(l => l.Groups)
                     .ThenInclude(group => group.Loadouts)
+                .Include(p => p.NamedItems)
                 .AsSplitQuery()
                 .SingleOrDefault(h => h.Slot == slot);
 
@@ -110,6 +113,7 @@ namespace Content.Server.Database
                 var prefs = await db.DbContext
                     .Preference
                     .Include(p => p.Profiles)
+                    .ThenInclude(p => p.NamedItems)
                     .SingleAsync(p => p.UserId == userId.UserId);
 
                 prefs.Profiles.Add(newProfile);
@@ -257,7 +261,14 @@ namespace Content.Server.Database
                 (PreferenceUnavailableMode) profile.PreferenceUnavailable,
                 antags.ToHashSet(),
                 traits.ToHashSet(),
-                loadouts
+                loadouts,
+                new SharedRMCNamedItems
+                {
+                    PrimaryGunName = profile.NamedItems?.PrimaryGunName,
+                    SidearmName = profile.NamedItems?.SidearmName,
+                    HelmetName = profile.NamedItems?.HelmetName,
+                    ArmorName = profile.NamedItems?.ArmorName,
+                }
             );
         }
 
@@ -337,6 +348,14 @@ namespace Content.Server.Database
 
                 profile.Loadouts.Add(dz);
             }
+
+            profile.NamedItems = new RMCNamedItems
+            {
+                PrimaryGunName = humanoid.NamedItems.PrimaryGunName,
+                SidearmName = humanoid.NamedItems.SidearmName,
+                HelmetName = humanoid.NamedItems.HelmetName,
+                ArmorName = humanoid.NamedItems.ArmorName
+            };
 
             return profile;
         }

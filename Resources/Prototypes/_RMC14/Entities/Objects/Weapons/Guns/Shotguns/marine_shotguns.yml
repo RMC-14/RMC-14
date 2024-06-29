@@ -31,6 +31,8 @@
   - type: ShootUseDelay
     delay: 2
   - type: UseDelay
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
 
 #  - type: GunWieldBonus # TODO RMC14
 #    minAngle: -25

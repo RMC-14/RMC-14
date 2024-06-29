@@ -53,6 +53,7 @@ public sealed class LinkAccountUIController : UIController
                 _clipboard.SetText(_code.ToString());
                 _window.Button.Text = Loc.GetString("rmc-ui-link-discord-account-copied");
                 _window.Button.Disabled = true;
+                _disableUntil = _timing.RealTime.Add(TimeSpan.FromSeconds(3));
             };
 
             _window.OpenCentered();

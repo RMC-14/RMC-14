@@ -28,6 +28,8 @@
     armor: 20
     explosionArmor: 10
   - type: CMHardArmor
+  - type: RMCNameItemOnVend
+    item: Helmet
 
 - type: entity
   parent: ArmorHelmetM10

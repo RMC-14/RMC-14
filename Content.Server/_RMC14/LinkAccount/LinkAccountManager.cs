@@ -105,6 +105,11 @@ public sealed class LinkAccountManager : IPostInjectInit
         _net.ServerSendMessage(msg, player.Channel);
     }
 
+    public SharedRMCPatronTier? GetPatronTier(ICommonSession player)
+    {
+        return _connected.GetValueOrDefault(player.UserId).Tier;
+    }
+
     void IPostInjectInit.PostInject()
     {
         _net.RegisterNetMessage<LinkAccountRequestMsg>(OnRequest);

@@ -425,6 +425,7 @@ namespace Content.Server.Database
 
         public int PreferenceId { get; set; }
         public Preference Preference { get; set; } = null!;
+        public RMCNamedItems? NamedItems { get; set; } = default!;
     }
 
     public class Job

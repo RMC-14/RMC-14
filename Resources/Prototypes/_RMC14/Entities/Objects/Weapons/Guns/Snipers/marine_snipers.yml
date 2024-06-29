@@ -53,3 +53,5 @@
   - type: Scope
     zoom: 1.25 # TODO RMC14 2x and 4x zoom
     requireWielding: true
+  - type: RMCNameItemOnVend
+    item: PrimaryGun

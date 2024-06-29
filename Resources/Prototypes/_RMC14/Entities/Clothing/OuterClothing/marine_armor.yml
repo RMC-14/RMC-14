@@ -89,6 +89,8 @@
       - CMMagazineSmg
       - CMMagazineSniper
       - CMMagazinePistol
+  - type: RMCNameItemOnVend
+    item: Armor
 
 - type: entity
   parent: CMArmorM3Medium
