@@ -2013,7 +2013,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessBrig" ]
+    - [ "CMAccessArmory" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
