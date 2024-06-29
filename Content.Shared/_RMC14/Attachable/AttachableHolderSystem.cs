@@ -289,13 +289,13 @@ public sealed class AttachableHolderSystem : EntitySystem
 
         if (!_container.Insert(attachableUid, container))
             return false;
-        
+
         if(_hands.IsHolding(userUid, holder.Owner))
         {
             var addEv = new GrantAttachableActionsEvent(userUid);
             RaiseLocalEvent(attachableUid, ref addEv);
         }
-        
+
         _audio.PlayPredicted(Comp<AttachableComponent>(attachableUid).AttachSound,
             holder,
             userUid);

@@ -51,6 +51,12 @@ public sealed partial class AttachableVisualsComponent : Component
     [DataField, AutoNetworkedField]
     public bool ShowActive;
 
+    /// <summary>
+    ///     If this is set to true, the attachment will be redrawn on its holder every time it receives an AppearanceChangeEvent. Useful for things like the UGL.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool RedrawOnAppearanceChange;
+
     [DataField, AutoNetworkedField]
     public int Layer;
 

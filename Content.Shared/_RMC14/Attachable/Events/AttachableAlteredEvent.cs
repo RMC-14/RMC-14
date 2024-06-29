@@ -15,5 +15,6 @@ public enum AttachableAlteredType : byte
     Unwielded = 1 << 3,
     Activated = 1 << 4,
     Deactivated = 1 << 5,
+    AppearanceChanged = 1 << 6,
     DetachedDeactivated = Detached | Deactivated,
 }

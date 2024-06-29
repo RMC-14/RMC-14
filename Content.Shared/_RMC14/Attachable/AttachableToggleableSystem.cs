@@ -35,7 +35,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleStartedEvent>(OnAttachableToggleStarted);
         SubscribeLocalEvent<AttachableToggleableComponent, AttemptShootEvent>(OnAttemptShoot);
         SubscribeLocalEvent<AttachableToggleableComponent, ToggleActionEvent>(OnToggleAction);
-        SubscribeLocalEvent<AttachableToggleableComponent, UniqueActionEvent>(OnUniqueAction);
+        //SubscribeLocalEvent<AttachableToggleableComponent, UniqueActionEvent>(OnUniqueAction);
         SubscribeLocalEvent<AttachableToggleableComponent, GrantAttachableActionsEvent>(OnGrantAttachableActions);
         SubscribeLocalEvent<AttachableToggleableComponent, RemoveAttachableActionsEvent>(OnRemoveAttachableActions);
         SubscribeLocalEvent<AttachableToggleableComponent, HandDeselectedEvent>(OnHandDeselected);
@@ -123,16 +123,16 @@ public sealed class AttachableToggleableSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnUniqueAction(Entity<AttachableToggleableComponent> attachable, ref UniqueActionEvent args)
+/*    private void OnUniqueAction(Entity<AttachableToggleableComponent> attachable, ref UniqueActionEvent args)
     {
         if (attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
             args.Handled = true;
-    }
+    }*/
 #endregion
 
     private void OnGotEquippedHand(Entity<AttachableToggleableComponent> attachable, ref GotEquippedHandEvent args)
     {
-        if (!attachable.Comp.Attached)
+        if (!attachable.Comp.Attached || args.Equipped == attachable.Owner)
             return;
         
         args.Handled = true;
@@ -156,7 +156,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
     private void OnGotUnequippedHand(Entity<AttachableToggleableComponent> attachable, ref GotUnequippedHandEvent args)
     {
-        if (!attachable.Comp.Attached)
+        if (!attachable.Comp.Attached || args.Unequipped == attachable.Owner)
             return;
         
         args.Handled = true;
@@ -299,6 +299,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
         }
         
         FinishToggle(attachable, (holderUid.Value, holderComponent), slotId, user);
+        Dirty(attachable);
     }
 #endregion
 

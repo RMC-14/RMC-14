@@ -99,9 +99,10 @@
         whitelist:
           tags:
           - CMAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentU1GrenadeLauncher
   - type: AttachableHolderVisuals
     offsets:
-      cm-aslot-barrel: 0.94, 0.03
+      cm-aslot-barrel: 0.81, 0.00
       cm-aslot-rail: 0.0, 0.20
       cm-aslot-underbarrel: 0.19, -0.14
 

@@ -59,7 +59,7 @@
     - CMAttachmentBarrel
     - CMAttachmentSuppressor
   - type: AttachableVisuals
-    offset: 0.0, -0.01
+    prefix: suppressor2
   - type: AttachableSilencer
 
 - type: Tag

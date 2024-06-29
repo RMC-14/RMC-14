@@ -1,4 +1,6 @@
 using Content.Client._RMC14.Attachable.Components;
+using Content.Shared._RMC14.Attachable;
+using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
 using Robust.Client.GameObjects;
 
@@ -6,11 +8,15 @@ namespace Content.Client._RMC14.Attachable;
 
 public sealed class AttachableHolderVisualsSystem : EntitySystem
 {
+    [Dependency] private readonly AttachableHolderSystem _attachableHolderSystem = default!;
+    
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<AttachableHolderVisualsComponent, AttachableHolderAttachablesAlteredEvent>(OnAttachablesAltered);
+        
+        SubscribeLocalEvent<AttachableVisualsComponent, AppearanceChangeEvent>(OnAttachableAppearanceChange);
     }
 
     private void OnAttachablesAltered(Entity<AttachableHolderVisualsComponent> holder,
@@ -42,6 +48,14 @@ public sealed class AttachableHolderVisualsSystem : EntitySystem
                     break;
 
                 SetAttachableOverlay(holder, attachable, args.SlotId);
+                break;
+            
+            case AttachableAlteredType.AppearanceChanged:
+                string suffix = "";
+                if (attachableComponent.ShowActive && TryComp(args.Attachable, out AttachableToggleableComponent? toggleableComponent) && toggleableComponent.Active)
+                    suffix = "-on";
+                
+                SetAttachableOverlay(holder, attachable, args.SlotId, suffix);
                 break;
         }
     }
@@ -105,5 +119,18 @@ public sealed class AttachableHolderVisualsSystem : EntitySystem
         }
 
         holderSprite.LayerMapSet(slotId, holderSprite.AddLayer(layerData));
+    }
+    
+    private void OnAttachableAppearanceChange(Entity<AttachableVisualsComponent> attachable, ref AppearanceChangeEvent args)
+    {
+        if (!attachable.Comp.RedrawOnAppearanceChange ||
+            !_attachableHolderSystem.TryGetHolder(attachable.Owner, out var holderUid) ||
+            !_attachableHolderSystem.TryGetSlotId(holderUid.Value, attachable.Owner, out var slotId))
+        {
+            return;
+        }
+        
+        var holderEvent = new AttachableHolderAttachablesAlteredEvent(attachable.Owner, slotId, AttachableAlteredType.AppearanceChanged);
+        RaiseLocalEvent(holderUid.Value, ref holderEvent);
     }
 }

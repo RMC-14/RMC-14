@@ -90,6 +90,8 @@
   - type: Gun
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_u7.ogg
+      params:
+        volume: -2
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
@@ -105,12 +107,15 @@
   - type: UniqueAction
   - type: PumpAction
   - type: ShootUseDelay
-    delay: 2
+    delay: 2.1
   - type: UseDelay
   - type: AttachableToggleable
     attachedOnly: true
     supercedeHolder: true
-    activateSound: /Audio/_RMC14/Attachable/gun_u7_activate.ogg
+    activateSound:
+      path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg
+      params:
+        volume: -2
     actionName: U7 underbarrel shotgun
     actionDesc: Switch to using the underbarrel shotgun.
     icon:
@@ -132,6 +137,71 @@
 
 - type: entity
   parent: CMUnderAttachmentBase
+  id: RMCAttachmentU1GrenadeLauncher
+  name: U1 grenade launcher
+  description: A weapon-mounted, reloadable grenade launcher.
+  components:
+  - type: Sprite
+    layers:
+      - state: grenade
+        map: [ "enum.BreechVisuals.Open" ]
+    state: masterkey
+  - type: AmmoCounter
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ugl.ogg
+    resetOnHandSelected: false
+  - type: BallisticAmmoProvider
+    cycleable: false
+    whitelist:
+      tags:
+      - RMCGrenadeM40
+    capacity: 3
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
+      params:
+        volume: -2
+  - type: OnShootTriggerAmmoTimer
+    delay: 1
+    beepInterval: 2
+    initialBeepDelay: 0
+    beepSound:
+      path: "/Audio/Effects/beep1.ogg"
+      params:
+        volume: 5
+  - type: AmmoFixedDistance
+  - type: ShootUseDelay
+    delay: 2.4
+  - type: UseDelay
+  - type: UniqueAction
+  - type: BreechLoaded
+    needOpenClose: true
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.BreechVisuals.Open:
+        enum.BreechVisuals.Open:
+          True: { state: grenade-open }
+          False: { state: grenade }
+  - type: AttachableToggleable
+    attachedOnly: true
+    supercedeHolder: true
+    actionName: U1 grenade launcher
+    actionDesc: Switch to using the underbarrel grenade launcher.
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: grenade
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: grenade-on
+  - type: AttachableVisuals
+    redrawOnAppearanceChange: true
+  - type: Tag
+    tags:
+    - RMCAttachmentU1GrenadeLauncher
+
+- type: entity
+  parent: CMUnderAttachmentBase
   id: CMAttachmentVerticalGrip
   name: vertical grip
   description: A vertical foregrip that offers better accuracy, less recoil, and less scatter, especially during burst fire. \nHowever, it also increases weapon size.
@@ -144,3 +214,6 @@
 
 - type: Tag
   id: CMAttachmentU7UnderbarrelShotgun
+
+- type: Tag
+  id: RMCAttachmentU1GrenadeLauncher
