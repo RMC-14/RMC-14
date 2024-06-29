@@ -6,9 +6,9 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._RMC14.LinkAccount;
 
 [GenerateTypedNameReferences]
-public sealed partial class LinkDiscordWindow : DefaultWindow
+public sealed partial class LinkAccountWindow : DefaultWindow
 {
-    public LinkDiscordWindow()
+    public LinkAccountWindow()
     {
         RobustXamlLoader.Load(this);
     }

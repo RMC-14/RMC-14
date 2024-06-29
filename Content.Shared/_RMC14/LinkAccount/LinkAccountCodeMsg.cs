@@ -4,7 +4,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.LinkAccount;
 
-public sealed class LinkAccountCodeEvent : NetMessage
+public sealed class LinkAccountCodeMsg : NetMessage
 {
     public Guid Code;
 

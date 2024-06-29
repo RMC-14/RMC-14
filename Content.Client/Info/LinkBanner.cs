@@ -58,11 +58,12 @@ namespace Content.Client.Info
             roadmapButton.OnPressed += _ => UserInterfaceManager.GetUIController<RoadmapUIController>().ToggleRoadmap();
             buttons.AddChild(roadmapButton);
 
+            var linkAccount = UserInterfaceManager.GetUIController<LinkAccountUIController>();
             var linkAccountButton = new Button
             {
                 Text = Loc.GetString("rmc-ui-link-discord-account"),
             };
-            linkAccountButton.OnPressed += _ => UserInterfaceManager.GetUIController<LinkDiscordAccountUIController>().ToggleWindow();
+            linkAccountButton.OnPressed += _ => linkAccount.ToggleWindow();
             buttons.AddChild(linkAccountButton);
 
             void AddInfoButton(string loc, CVarDef<string> cVar)

@@ -4,7 +4,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.LinkAccount;
 
-public sealed class LinkAccountRequestEvent : NetMessage
+public sealed class LinkAccountRequestMsg : NetMessage
 {
     public override MsgGroups MsgGroup => MsgGroups.Core;
 
