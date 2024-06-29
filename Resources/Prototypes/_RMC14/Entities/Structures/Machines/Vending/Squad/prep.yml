@@ -1,0 +1,467 @@
+# SQUAD PREPARATION
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechGuns
+  name: ColMarTech automated weapons rack
+  description: An automated weapon rack hooked up to a big storage of standard-issue weapons.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessMarinePrep" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
+  - type: CMAutomatedVendor
+    sections:
+    - name: Primary firearms
+      entries:
+      - id: WeaponRifleM4SPR
+        amount: 10
+      - id: WeaponShotgunM42A2
+        amount: 15
+      - id: WeaponSMGM63
+        amount: 30
+      - id: WeaponRifleM54C
+        amount: 30
+        recommended: true
+    - name: Primary ammunition
+      entries:
+      - id: CMBoxShotgunFlechette
+        amount: 4
+      - id: CMBoxShotgunBuckshot
+        amount: 10
+      - id: CMBoxShotgunSlugs
+        amount: 10
+      - id: CMMagazineRifleM4SPR
+        amount: 15
+      - id: CMMagazineSMGM63
+        amount: 25
+      - id: CMMagazineRifleM54C
+        amount: 25
+    - name: Sidearms
+      entries:
+      - id: CMWeaponPistolM77
+        amount: 25
+      #- id: CMWeaponRevolverM44
+      #  amount: 25
+      - id: CMWeaponPistolM1984
+        amount: 25
+      #- id: WeaponFlareM82F
+      #  amount: 10
+    - name: Sidearm ammunition
+      entries:
+      - id: CMMagazinePistolM77AP
+        amount: 25
+#      - id: CMSpeedLoaderM44
+#        amount: 20
+      - id: CMMagazinePistolM1984
+        amount: 25
+    - name: Attachments
+      entries: [ ]
+      #- id: CMAttachmentFoldingStockM63
+      #  amount: 10
+      #- id: CMAttachmentFoldingStockM54C
+      #  amount: 10
+      #- id: CMAttachmentRailFlashlight
+      #  amount: 25
+      #- id: CMAttachmentUnderbarrelFlashlightGrip
+      #  amount: 10
+      #- id: CMAttachmentUnderslungGrenadeLauncher
+      #  amount: 25
+    - name: Utilities
+      entries:
+      - id: CMM5Bayonet
+        amount: 25
+      - id: CMPackFlare
+        amount: 10
+        recommended: true
+
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechSurplus
+  name: ColMarTech surplus uniform vendor
+  description: An automated rack hooked up to a small storage of standard marine uniforms.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessMarinePrep" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    sections:
+    - name: Standard Equipment
+      entries:
+      - id: CMBootsBlack
+        amount: 15
+      - id: CMBootsBrown
+        amount: 15
+      - id: JumpsuitMarine
+        amount: 15
+      - id: CMHandsBrown
+        amount: 15
+      - id: CMHandsBlackMarine
+        amount: 15
+      - id: CMHeadset
+        amount: 15
+      - id: ArmorHelmetM10
+        amount: 15
+    - name: Webbings
+      entries:
+      - id: CMWebbingBrown
+        amount: 1
+      - id: CMWebbingBlack
+        amount: 1
+      - id: CMWebbing
+        amount: 2
+#      - id: Drop Pouch
+#        amount: 1
+#      - id: Shoulder Holster
+#        amount: 1
+    - name: Armor
+      entries:
+#      - id: M3 Pattern Carrier Marine Armor
+#        amount: 15
+#      - id: M3 Pattern Padded Marine Armor
+#        amount: 15
+#      - id: M3 Pattern Padless Marine Armor
+#        amount: 15
+#      - id: M3 Pattern Ridged Marine Armor
+#        amount: 15
+#      - id: M3 Pattern Skull Marine Armor
+#        amount: 15
+#      - id: M3 Pattern Smooth Marine Armor
+#        amount: 15
+      - id: CMArmorM3Heavy
+        amount: 10
+      - id: CMArmorM3Light
+        amount: 10
+    - name: Backpack
+      entries:
+      - id: CMBackpackMarine
+        amount: 15
+      - id: CMBackpackMarineTech
+        amount: 15
+      - id: CMBackpackMedical
+        amount: 15
+      - id: CMSatchelMarine
+        amount: 15
+#      - id: Marine Chestrig
+#        amount: 15
+#      - id: Marine Technical Satchel
+#        amount: 15
+#      - id: Marine Technical Chestrig
+#        amount: 15
+      - id: CMSatchelMedical
+        amount: 15
+#      - id: Shotgun Scabbard
+#        amount: 5
+    - name: Restricted Backpacks
+      entries:
+      - id: CMBackpackWelder
+        amount: 1
+#      - id: Technician Welder-Satchel
+#        amount: 2
+#      - id: Radio Telephone Backpack
+#        amount: 1
+    - name: Belts
+      entries:
+      - id: CMBeltMarine
+        amount: 15
+#      - id: M276 Pattern M40 Grenade Rig
+#        amount: 10
+#      - id: M276 Pattern Shotgun Shell Loading Rig
+#        amount: 15
+#      - id: M276 Pattern General Pistol Holster Rig
+#        amount: 15
+#      - id: M276 Pattern M63 Holster Rig
+#        amount: 15
+#      - id: M276 Pattern M63 Holster Rig And Pouch
+#        amount: 10
+#      - id: M276 Pattern M44 Holster Rig
+#        amount: 15
+#      - id: M276 Pattern M82F Holster Rig
+#        amount: 5
+      - id: CMBeltKnifeFilled
+        name: M276 Knife Rig (Full)
+        amount: 15
+#      - id: M276 G8-A General Utility Pouch
+#        amount: 15
+    - name: Pouches
+      entries:
+      - id: CMPouchBayonet
+        name: Bayonet Sheath (Full)
+        amount: 15
+      - id: CMPouchFirstAidSplintsGauzeOintment
+        amount: 15
+      - id: CMPouchFirstAidPills
+        amount: 15
+      - id: CMPouchFlareFilled
+        amount: 15
+      - id: CMPouchDocumentSmall
+        amount: 15
+      - id: CMPouchMagazine
+        amount: 15
+      - id: CMPouchShotgun
+        amount: 15
+      - id: CMPouchGeneralMedium
+        amount: 15
+      - id: CMPouchMagazinePistol
+        amount: 15
+      - id: CMPouchPistol
+        amount: 15
+    - name: Restricted Pouches
+      entries:
+      - id: CMPouchConstruction
+        amount: 1
+      - id: CMPouchExplosive
+        amount: 1
+      - id: CMPouchFirstResponder
+        name: First Responder Pouch (Empty)
+        amount: 2
+      - id: CMPouchMagazinePistolLarge
+        amount: 2
+      - id: CMPouchTools
+        amount: 1
+#      - id: Sling Pouch
+#        amount: 1
+    - name: Mask
+      entries:
+      - id: CMMaskGas
+        amount: 15
+      - id: CMMaskCoif
+        amount: 10
+#      - id: Rebreather
+#        amount: 10
+    - name: Miscellaneous
+      entries: [ ]
+#      - id: Ballistic goggles
+#        amount: 10
+#      - id: M1A1 Ballistic goggles
+#        amount: 10
+#      - id: Prescription ballistic goggles
+#        amount: 10
+#      - id: Marine RPG glasses
+#        amount: 10
+#      - id: M5 Integrated Gas Mask
+#        amount: 10
+#      - id: M10 Helmet Netting
+#        amount: 10
+#      - id: M10 Helmet Rain Cover
+#        amount: 10
+#      - id: Firearm Lubricant
+#        amount: 15
+#      - id: Marine Flair
+#        amount: 15
+#      - id: Falling Falcons Shoulder Patch
+#        amount: 15
+#      - id: Marine Shoulder Patch
+#        amount: 15
+#      - id: Bedroll
+#        amount: 20
+    - name: Optics
+      entries: [ ]
+#      - id: Advanced Medical Optic (CORPSMAN ONLY)
+#        amount: 4
+#      - id: Squad Optic
+#        amount: 15
+
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechMunitions
+  name: ColMarTech automated munition squad vendor
+  description: An automated supply rack hooked up to a small storage of various ammunition types. Can be accessed by any Marine Rifleman.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessMarinePrep" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_ammo.rsi
+  - type: CMAutomatedVendor
+    sections:
+    - name: Armor-Piercing Ammunition
+      entries:
+      - id: CMMagazineRifleM4SPRAP
+        amount: 3
+      - id: CMMagazineSMGM63AP
+        amount: 3
+      - id: CMMagazineRifleM54CAP
+        amount: 3
+    - name: Extended Ammunition
+      entries:
+      - id: CMMagazineSMGM63Ext
+        amount: 1
+      - id: CMMagazineRifleM54CExt
+        amount: 1
+    - name: Special Ammunition
+      entries: [ ]
+      #- id: CMDrumSmartGunM56
+      #  amount: 1
+      #- id: CMSpeedLoaderM44Heavy
+      #  amount: 2
+      #- id: CMSpeedLoaderM44Marksman
+      #  amount: 2
+    - name: Restricted Firearm Ammunition
+      entries:
+      - id: CMMagazinePistolMK80
+        amount: 5
+      #- id: CMMagazineSmartpistolSU6
+      #  amount: 5
+      #- id: CMIncineratorTankM240
+      #  amount: 3
+      #- id: CMMagazineDrumM56D
+      #  amount: 2
+      #- id: CMMagazineBoxM2C
+      #  amount: 2
+      #- id: Box of Breaching Shells (16g)
+      #  amount: 2
+      #- id: CMBatonSlugsHIRR
+      #  amount: 6
+      #- id: CMStarShellN74AGMS
+      #  amount: 4
+      #- id: CMHornetShellM74AGMS
+      #  amount: 4
+
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechUtilities
+  name: ColMarTech automated utilities squad vendor
+  description: An automated supply rack hooked up to a small storage of various utilities and tools. Can be accessed by any Marine Rifleman.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessMarinePrep" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
+  - type: CMAutomatedVendor
+    sections:
+    - name: Food
+      entries:
+      - id: CMMRE
+        amount: 5
+      - id: CMBoxMRE
+        amount: 1
+    - name: Tools
+      entries:
+      - id: CMEntrenchingTool
+        amount: 2
+      - id: CMScrewdriver
+        amount: 5
+      - id: CMWirecutter
+        amount: 5
+      - id: CMCrowbar
+        amount: 5
+      - id: CMWrench
+        amount: 5
+      - id: CMMultitool
+        amount: 1
+      - id: CMWelder
+        amount: 1
+#    - name: Flare and light
+#      entries:
+#      #  amount: 1
+#      #- id: CMCombatFlashlight
+#      #  amount: 5
+#      #- id: CMBoxFlashlights
+#      #  amount: 1
+      - id: CMBoxPackFlare
+        amount: 1
+      - id: CMPackFlare
+        amount: 10
+#      #- id: CMSignalFlarePackM89S
+#      #  amount: 1
+    - name: Miscellaneous
+      entries:
+      #- id: CMEngineerKit
+      #  amount: 1
+      #- id: CMMap
+      #  amount: 5
+      - id: CMFireExtinguisher
+        amount: 5
+      - id: CMFireExtinguisherPortable
+        amount: 1
+      - id: CMRollerBedSpawnFolded
+        amount: 1
+#      - id: CMScabbardMacheteFull
+#        amount: 5
+      #- id: CMBinoculars
+      #  amount: 5
+      #- id: CMFoldingBarricadesMB6x3
+      #  amount: 2
+      #- id: CMSparePDTLBattleBuddyKit
+      #  amount: 3
+      #- id: CMPowerCellWYRechargeableMini
+      #  amount: 2
+
+
+- type: entity
+  parent: ColMarTechBase
+  id: ArmatAttachments
+  name: Armat Systems squad attachments vendor
+  description: An automated supply rack hooked up to a small storage of weapons attachments. Can be accessed by any Marine Rifleman.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessMarinePrep" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
+  - type: CMAutomatedVendor
+    sections: # TODO RMC14
+    - name: Barrel
+      entries:
+      - id: CMAttachmentExtendedBarrel
+        amount: 3
+      - id: CMAttachmentRecoilCompensator
+        amount: 3
+      - id: CMAttachmentSuppressor
+        amount: 3
+    - name: Rail
+      entries:
+      - id: CMAttachmentB8SmartScope
+        amount: 2
+#      - id: CMAttachmentMagneticHarness
+#        amount: 5
+#      - id: CMAttachmentS42xTelescopicMiniScope
+#        amount: 2
+#      - id: CMAttachmentS5RedDotSight
+#        amount: 4
+#      - id: CMAttachmentS6ReflexSight
+#        amount: 4
+#      - id: CMAttachments84xTelescopicScope
+#        amount: 2
+#    - name: Underbarrel
+#      entries:
+#      - id: CMAttachmentAngledGrip
+#        amount: 3
+#      - id: CMAttachmentBipod
+#        amount: 3
+#      - id: CMAttachmentBurstFireAssembly
+#        amount: 2
+#      - id: CMAttachmentGyroscopicStabilizer
+#        amount: 2
+#      - id: CMAttachmentLaserSight
+#        amount: 4
+#      - id: CMAttachmentMiniFlamethrower
+#        amount: 2
+#      - id: CMAttachmentXMVESG1FlamerNozzle
+#        amount: 2
+      - id: CMAttachmentU7UnderbarrelShotgun
+        amount: 2
+#      - id: CMAttachmentUnderbarrelExtinguisher
+#        amount: 2
+#      - id: CMAttachmentVerticalGrip
+#        amount: 4
+#    - name: Stock
+#      entries:
+#      - id: CMAttachmentM37WoodenStock
+#        amount: 2
+#      - id: CMAttachmentM63ArmBrace
+#        amount: 2
+#      - id: CMAttachmentM63Stock
+#        amount: 2
+#      - id: CMAttachmentM54CSolidStock
+#        amount: 2
+#      - id: CMAttachmentM44MagnumSharpshooterStock
+#        amount: 2
