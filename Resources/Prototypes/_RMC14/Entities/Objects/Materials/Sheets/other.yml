@@ -47,3 +47,29 @@
   components:
   - type: Stack
     count: 1
+
+# todo rmc14 stacks
+- type: entity
+  parent: SheetOtherBase
+  id: CMSheetCardboard
+  name: cardboard
+  suffix: Full
+  componentS:
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      CMCardboard: 100
+  - type: Stack
+    stackType: RMCCardboard
+    count: 50
+  - type: Sprite
+    state: icon
+    sprite: _RMC14/Objects/Materials/Sheets/rmc_cardboard.rsi
+  - type: Item
+    heldPrefix: cardboard
+    size: Normal
+    sprite: _RMC14/Objects/Materials/Sheets/rmc_cardboard.rsi
+  - type: Appearance
+  - type: Tag
+    tags:
+    - Sheet
