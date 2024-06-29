@@ -141,7 +141,7 @@
   description: A magazine box that can contain regular M1984 mags.
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m1911
+    state: base_m1984
   objectType: Item
 
 #- type: construction
@@ -155,7 +155,7 @@
 #  description: A magazine box that can contain armor piercing M1984 mags.
 #  icon:
 #    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-#    state: base_m1911
+#    state: base_m1984
 #  objectType: Item
 
 # 88 mod 4 / 88m4
