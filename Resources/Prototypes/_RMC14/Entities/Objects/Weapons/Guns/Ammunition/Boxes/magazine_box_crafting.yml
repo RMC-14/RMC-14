@@ -11,7 +11,7 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular M54C mags.
   icon:
-    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_m54
   objectType: Item
 
@@ -25,7 +25,7 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M54C mags.
   icon:
-    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_m54
   objectType: Item
 
@@ -39,7 +39,7 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain extended M54C mags.
   icon:
-    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_m54
   objectType: Item
 
@@ -54,7 +54,7 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular M63 mags.
   icon:
-    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_m63
   objectType: Item
 
@@ -68,7 +68,7 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M63 mags.
   icon:
-    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_m63
   objectType: Item
 
@@ -82,7 +82,7 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain extended M63 mags.
   icon:
-    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_m63
   objectType: Item
 
@@ -97,7 +97,7 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular M4RA mags.
   icon:
-    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_m4spr
   objectType: Item
 
@@ -111,7 +111,7 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M4RA mags.
   icon:
-    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_m4spr
   objectType: Item
 
@@ -125,7 +125,7 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain extended M4RA mags.
   icon:
-    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_m4spr
   objectType: Item
 
@@ -140,7 +140,7 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular M1984 mags.
   icon:
-    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_m1911
   objectType: Item
 
@@ -154,7 +154,7 @@
 #  category: construction-category-cm-box-magazine
 #  description: A magazine box that can contain armor piercing M1984 mags.
 #  icon:
-#    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+#    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
 #    state: base_m1911
 #  objectType: Item
 
@@ -169,7 +169,7 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M77 mags.
   icon:
-    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_m77
   objectType: Item
 
@@ -184,7 +184,7 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular VP 78 mags.
   icon:
-    sprite: _CM14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_mk80
   objectType: Item
 
