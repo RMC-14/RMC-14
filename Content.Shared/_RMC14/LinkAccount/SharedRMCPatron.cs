@@ -1,6 +1,6 @@
 ﻿using Robust.Shared.Serialization;
 
-namespace Content.Shared._RMC14.Patron;
+namespace Content.Shared._RMC14.LinkAccount;
 
 [Serializable, NetSerializable]
 public sealed class SharedRMCPatron(string name, string tier)

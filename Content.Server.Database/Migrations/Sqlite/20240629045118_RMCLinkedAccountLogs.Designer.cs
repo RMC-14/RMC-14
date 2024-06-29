@@ -3,6 +3,7 @@ using System;
 using Content.Server.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Content.Server.Database.Migrations.Sqlite
 {
     [DbContext(typeof(SqliteServerDbContext))]
-    partial class SqliteServerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240629045118_RMCLinkedAccountLogs")]
+    partial class RMCLinkedAccountLogs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
@@ -1032,60 +1035,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("rmc_patrons", (string)null);
                 });
 
-            modelBuilder.Entity("Content.Server.Database.RMCPatronLobbyMessage", b =>
-                {
-                    b.Property<Guid>("PatronId")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("patron_id");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("message");
-
-                    b.HasKey("PatronId")
-                        .HasName("PK_rmc_patron_lobby_messages");
-
-                    b.ToTable("rmc_patron_lobby_messages", (string)null);
-                });
-
-            modelBuilder.Entity("Content.Server.Database.RMCPatronRoundEndMarineShoutout", b =>
-                {
-                    b.Property<Guid>("PatronId")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("patron_id");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("name");
-
-                    b.HasKey("PatronId")
-                        .HasName("PK_rmc_patron_round_end_marine_shoutouts");
-
-                    b.ToTable("rmc_patron_round_end_marine_shoutouts", (string)null);
-                });
-
-            modelBuilder.Entity("Content.Server.Database.RMCPatronRoundEndXenoShoutout", b =>
-                {
-                    b.Property<Guid>("PatronId")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("patron_id");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("name");
-
-                    b.HasKey("PatronId")
-                        .HasName("PK_rmc_patron_round_end_xeno_shoutouts");
-
-                    b.ToTable("rmc_patron_round_end_xeno_shoutouts", (string)null);
-                });
-
             modelBuilder.Entity("Content.Server.Database.RMCPatronTier", b =>
                 {
                     b.Property<int>("Id")
@@ -1943,42 +1892,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Tier");
                 });
 
-            modelBuilder.Entity("Content.Server.Database.RMCPatronLobbyMessage", b =>
-                {
-                    b.HasOne("Content.Server.Database.RMCPatron", "Patron")
-                        .WithOne("LobbyMessage")
-                        .HasForeignKey("Content.Server.Database.RMCPatronLobbyMessage", "PatronId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_rmc_patron_lobby_messages_rmc_patrons_patron_id");
-
-                    b.Navigation("Patron");
-                });
-
-            modelBuilder.Entity("Content.Server.Database.RMCPatronRoundEndMarineShoutout", b =>
-                {
-                    b.HasOne("Content.Server.Database.RMCPatron", "Patron")
-                        .WithOne("RoundEndMarineShoutout")
-                        .HasForeignKey("Content.Server.Database.RMCPatronRoundEndMarineShoutout", "PatronId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_rmc_patron_round_end_marine_shoutouts_rmc_patrons_patron_id");
-
-                    b.Navigation("Patron");
-                });
-
-            modelBuilder.Entity("Content.Server.Database.RMCPatronRoundEndXenoShoutout", b =>
-                {
-                    b.HasOne("Content.Server.Database.RMCPatron", "Patron")
-                        .WithOne("RoundEndXenoShoutout")
-                        .HasForeignKey("Content.Server.Database.RMCPatronRoundEndXenoShoutout", "PatronId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_rmc_patron_round_end_xeno_shoutouts_rmc_patrons_patron_id");
-
-                    b.Navigation("Patron");
-                });
-
             modelBuilder.Entity("Content.Server.Database.RoleWhitelist", b =>
                 {
                     b.HasOne("Content.Server.Database.Player", "Player")
@@ -2237,15 +2150,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .IsRequired();
 
                     b.Navigation("LinkedAccountLogs");
-                });
-
-            modelBuilder.Entity("Content.Server.Database.RMCPatron", b =>
-                {
-                    b.Navigation("LobbyMessage");
-
-                    b.Navigation("RoundEndMarineShoutout");
-
-                    b.Navigation("RoundEndXenoShoutout");
                 });
 
             modelBuilder.Entity("Content.Server.Database.RMCPatronTier", b =>

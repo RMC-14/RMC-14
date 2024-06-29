@@ -23,7 +23,7 @@ public sealed class RMCNamedItemSystem : EntitySystem
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
     {
-        if (_linkAccount.GetPatronTier(ev.Player) is not { NamedItems: true })
+        if (_linkAccount.GetPatron(ev.Player)?.Tier is not { NamedItems: true })
             return;
 
         var user = EnsureComp<RMCUserNamedItemsComponent>(ev.Mob);

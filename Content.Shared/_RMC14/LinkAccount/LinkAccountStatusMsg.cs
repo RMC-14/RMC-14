@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using Content.Shared._RMC14.Patron;
 using Lidgren.Network;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
@@ -10,8 +9,7 @@ public sealed class LinkAccountStatusMsg : NetMessage
 {
     public override MsgGroups MsgGroup => MsgGroups.Core;
 
-    public SharedRMCPatronTier? PatronTier;
-    public bool Linked;
+    public SharedRMCPatronFull? Patron;
 
     public override void ReadFromBuffer(NetIncomingMessage buffer, IRobustSerializer serializer)
     {
@@ -23,13 +21,12 @@ public sealed class LinkAccountStatusMsg : NetMessage
         var length = buffer.ReadVariableInt32();
         using var stream = new MemoryStream(length);
         buffer.ReadAlignedMemory(stream, length);
-        PatronTier = serializer.Deserialize<SharedRMCPatronTier>(stream);
-        Linked = buffer.ReadBoolean();
+        Patron = serializer.Deserialize<SharedRMCPatronFull>(stream);
     }
 
     public override void WriteToBuffer(NetOutgoingMessage buffer, IRobustSerializer serializer)
     {
-        if (PatronTier == null)
+        if (Patron == null)
         {
             buffer.Write(false);
             return;
@@ -39,12 +36,10 @@ public sealed class LinkAccountStatusMsg : NetMessage
         buffer.WritePadBits();
         using (var stream = new MemoryStream())
         {
-            serializer.Serialize(stream, PatronTier);
+            serializer.Serialize(stream, Patron);
             buffer.WriteVariableInt32((int) stream.Length);
             stream.TryGetBuffer(out var segment);
             buffer.Write(segment);
         }
-
-        buffer.Write(Linked);
     }
 }

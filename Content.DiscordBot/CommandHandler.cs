@@ -125,6 +125,12 @@ public sealed class CommandHandler(DiscordSocketClient client, CommandService co
                     discord.LinkedAccount.Player.Patron.Tier = tier;
                 }
 
+                db.RMCLinkedAccountLogs.Add(new RMCLinkedAccountLogs
+                {
+                    Discord = discord,
+                    Player = discord.LinkedAccount.Player,
+                });
+
                 db.ChangeTracker.DetectChanges();
                 await db.SaveChangesAsync();
 

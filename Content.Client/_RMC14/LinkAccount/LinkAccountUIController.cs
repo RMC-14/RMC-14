@@ -3,13 +3,14 @@ using Content.Client.Message;
 using Content.Shared._RMC14.LinkAccount;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
+using static Robust.Client.UserInterface.Controls.LineEdit;
 
 namespace Content.Client._RMC14.LinkAccount;
 
-public sealed class LinkAccountUIController : UIController
+public sealed class LinkAccountUIController : UIController, IOnSystemChanged<LinkAccountSystem>
 {
     [Dependency] private readonly IClipboardManager _clipboard = default!;
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
@@ -17,25 +18,43 @@ public sealed class LinkAccountUIController : UIController
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private LinkAccountWindow? _window;
+    private PatronPerksWindow? _patronPerksWindow;
     private TimeSpan _disableUntil;
 
     private Guid _code;
 
-    public const string ButtonName = "RMCLinkAccountButton";
-
     public override void Initialize()
     {
-        _net.RegisterNetMessage<LinkAccountCodeMsg>(OnCode);
+        _linkAccount.CodeReceived += OnCode;
+        _linkAccount.Updated += OnUpdated;
     }
 
-    private void OnCode(LinkAccountCodeMsg message)
+    private void OnCode(Guid code)
     {
-        _code = message.Code;
+        _code = code;
 
         if (_window == null)
             return;
 
         _window.Button.Disabled = false;
+    }
+
+    private void OnUpdated()
+    {
+        if (UIManager.ActiveScreen is not LobbyGui gui)
+            return;
+
+        gui.CharacterPreview.PatronPerks.Visible = _linkAccount.CanViewPatronPerks();
+    }
+
+    private void OnLobbyMessageReceived(SharedRMCDisplayLobbyMessageEvent message)
+    {
+        if (UIManager.ActiveScreen is not LobbyGui gui)
+            return;
+
+        var user = FormattedMessage.EscapeText(message.User);
+        var msg = FormattedMessage.EscapeText(message.Message);
+        gui.LobbyMessageLabel.SetMarkupPermissive($"[font size=20]Lobby message by: {user}\n{msg}[/font]");
     }
 
     public void ToggleWindow()
@@ -67,6 +86,110 @@ public sealed class LinkAccountUIController : UIController
 
         _window.Close();
         _window = null;
+    }
+
+    public void TogglePatronPerksWindow()
+    {
+        if (_patronPerksWindow == null)
+        {
+            _patronPerksWindow = new PatronPerksWindow();
+            _patronPerksWindow.OnClose += () => _patronPerksWindow = null;
+
+            var tier = _linkAccount.Tier;
+            _patronPerksWindow.LobbyMessageContainer.Visible = tier is { LobbyMessage: true };
+            _patronPerksWindow.LobbyMessage.OnTextEntered += ChangeLobbyMessage;
+            _patronPerksWindow.LobbyMessage.OnFocusExit += ChangeLobbyMessage;
+
+            if (_linkAccount.LobbyMessage?.Message is { } lobbyMessage)
+                _patronPerksWindow.LobbyMessage.Text = lobbyMessage;
+
+            _patronPerksWindow.MarineShoutoutContainer.Visible = tier is { RoundEndShoutout: true };
+            _patronPerksWindow.MarineShoutout.OnTextEntered += ChangeMarineShoutout;
+            _patronPerksWindow.MarineShoutout.OnFocusExit += ChangeMarineShoutout;
+
+            if (_linkAccount.RoundEndShoutout?.Marine is { } marineShoutout)
+                _patronPerksWindow.MarineShoutout.Text = marineShoutout;
+
+            _patronPerksWindow.XenoShoutoutContainer.Visible = tier is { RoundEndShoutout: true };
+            _patronPerksWindow.XenoShoutout.OnTextEntered += ChangeXenoShoutout;
+            _patronPerksWindow.XenoShoutout.OnFocusExit += ChangeXenoShoutout;
+
+            if (_linkAccount.RoundEndShoutout?.Xeno is { } xenoShoutout)
+                _patronPerksWindow.XenoShoutout.Text = xenoShoutout;
+
+            _patronPerksWindow.NamedItemsReference.Visible = tier is { NamedItems: true };
+            UpdateExamples();
+
+            _patronPerksWindow.OpenCentered();
+            return;
+        }
+
+        _patronPerksWindow.Close();
+        _patronPerksWindow = null;
+    }
+
+    private void ChangeLobbyMessage(LineEditEventArgs args)
+    {
+        var text = args.Text;
+        if (text.Length > SharedRMCLobbyMessage.CharacterLimit)
+        {
+            text = text[..SharedRMCLobbyMessage.CharacterLimit];
+            _patronPerksWindow?.LobbyMessage.SetText(text, false);
+        }
+
+        _net.ClientSendMessage(new RMCChangeLobbyMessageMsg { Text = text });
+    }
+
+    private void ChangeMarineShoutout(LineEditEventArgs args)
+    {
+        var text = args.Text;
+        if (text.Length > SharedRMCRoundEndShoutouts.CharacterLimit)
+        {
+            text = text[..SharedRMCRoundEndShoutouts.CharacterLimit];
+            _patronPerksWindow?.LobbyMessage.SetText(text, false);
+        }
+
+        _net.ClientSendMessage(new RMCChangeMarineShoutoutMsg { Name = text });
+        UpdateExamples();
+    }
+
+    private void ChangeXenoShoutout(LineEditEventArgs args)
+    {
+        var text = args.Text;
+        if (text.Length > SharedRMCRoundEndShoutouts.CharacterLimit)
+        {
+            text = text[..SharedRMCRoundEndShoutouts.CharacterLimit];
+            _patronPerksWindow?.LobbyMessage.SetText(text, false);
+        }
+
+        _net.ClientSendMessage(new RMCChangeXenoShoutoutMsg { Name = text });
+        UpdateExamples();
+    }
+
+    private void UpdateExamples()
+    {
+        if (_patronPerksWindow == null)
+            return;
+
+        var marine = _patronPerksWindow.MarineShoutout.Text.Trim();
+        _patronPerksWindow.MarineShoutoutExample.SetMarkupPermissive(string.IsNullOrWhiteSpace(marine)
+            ? " "
+            : $"{Loc.GetString("rmc-ui-shoutout-example")} {Loc.GetString("rmc-ui-shoutout-marine", ("name", marine))}");
+
+        var xeno = _patronPerksWindow.XenoShoutout.Text.Trim();
+        _patronPerksWindow.XenoShoutoutExample.SetMarkupPermissive(string.IsNullOrWhiteSpace(xeno)
+            ? " "
+            : $"{Loc.GetString("rmc-ui-shoutout-example")} {Loc.GetString("rmc-ui-shoutout-xeno", ("name", xeno))}");
+    }
+
+    public void OnSystemLoaded(LinkAccountSystem system)
+    {
+        system.LobbyMessageReceived += OnLobbyMessageReceived;
+    }
+
+    public void OnSystemUnloaded(LinkAccountSystem system)
+    {
+        system.LobbyMessageReceived -= OnLobbyMessageReceived;
     }
 
     public override void FrameUpdate(FrameEventArgs args)

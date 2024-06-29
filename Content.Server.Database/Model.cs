@@ -49,6 +49,10 @@ namespace Content.Server.Database
         public DbSet<RMCPatronTier> RMCPatronTiers { get; set; } = default!;
         public DbSet<RMCPatron> RMCPatrons { get; set; } = default!;
         public DbSet<RMCLinkingCodes> RMCLinkingCodes { get; set; } = default!;
+        public DbSet<RMCLinkedAccountLogs> RMCLinkedAccountLogs { get; set; } = default!;
+        public DbSet<RMCPatronLobbyMessage> RMCPatronLobbyMessages { get; set; } = default!;
+        public DbSet<RMCPatronRoundEndMarineShoutout> RMCPatronRoundEndMarineShoutouts { get; set; } = default!;
+        public DbSet<RMCPatronRoundEndXenoShoutout> RMCPatronRoundEndXenoShoutouts { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -373,6 +377,20 @@ namespace Content.Server.Database
                 .HasForeignKey<RMCLinkingCodes>(l => l.PlayerId)
                 .HasPrincipalKey<Player>(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RMCLinkedAccountLogs>()
+                .HasOne(l => l.Player)
+                .WithMany(p => p.LinkedAccountLogs)
+                .HasForeignKey(l => l.PlayerId)
+                .HasPrincipalKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RMCLinkedAccountLogs>()
+                .HasOne(l => l.Discord)
+                .WithMany(p => p.LinkedAccountLogs)
+                .HasForeignKey(l => l.DiscordId)
+                .HasPrincipalKey(p => p.Id)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public virtual IQueryable<AdminLog> SearchLogs(IQueryable<AdminLog> query, string searchText)
@@ -596,6 +614,7 @@ namespace Content.Server.Database
         public RMCLinkedAccount? LinkedAccount { get; set; }
         public RMCPatron? Patron { get; set; }
         public RMCLinkingCodes? LinkingCodes { get; set; }
+        public List<RMCLinkedAccountLogs> LinkedAccountLogs { get; set; } = default!;
     }
 
     [Table("whitelist")]

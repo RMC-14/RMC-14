@@ -313,9 +313,19 @@ namespace Content.Server.Database
 
         Task<bool> HasLinkedAccount(Guid player, CancellationToken cancel);
 
-        Task<RMCPatronTier?> GetPatronTier(Guid player, CancellationToken cancel);
+        Task<RMCPatron?> GetPatron(Guid player, CancellationToken cancel);
 
         Task<List<RMCPatron>> GetAllPatrons();
+
+        Task SetLobbyMessage(Guid player, string message);
+
+        Task SetMarineShoutout(Guid player, string name);
+
+        Task SetXenoShoutout(Guid player, string name);
+
+        Task<(string Message, string User)?> GetRandomLobbyMessage();
+
+        Task<(string? Marine, string? Xeno)> GetRandomShoutout();
 
         #endregion
     }
@@ -939,16 +949,46 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.HasLinkedAccount(player, cancel));
         }
 
-        public Task<RMCPatronTier?> GetPatronTier(Guid player, CancellationToken cancel)
+        public Task<RMCPatron?> GetPatron(Guid player, CancellationToken cancel)
         {
             DbReadOpsMetric.Inc();
-            return RunDbCommand(() => _db.GetPatronTier(player, cancel));
+            return RunDbCommand(() => _db.GetPatron(player, cancel));
         }
 
         public Task<List<RMCPatron>> GetAllPatrons()
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetAllPatrons());
+        }
+
+        public Task SetLobbyMessage(Guid player, string message)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetLobbyMessage(player, message));
+        }
+
+        public Task SetMarineShoutout(Guid player, string name)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetMarineShoutout(player, name));
+        }
+
+        public Task SetXenoShoutout(Guid player, string name)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetXenoShoutout(player, name));
+        }
+
+        public Task<(string Message, string User)?> GetRandomLobbyMessage()
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetRandomLobbyMessage());
+        }
+
+        public Task<(string? Marine, string? Xeno)> GetRandomShoutout()
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetRandomShoutout());
         }
 
         // Wrapper functions to run DB commands from the thread pool.

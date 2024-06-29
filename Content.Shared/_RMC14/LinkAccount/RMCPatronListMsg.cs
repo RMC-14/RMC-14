@@ -2,7 +2,7 @@
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._RMC14.Patron;
+namespace Content.Shared._RMC14.LinkAccount;
 
 public sealed class RMCPatronListMsg : NetMessage
 {

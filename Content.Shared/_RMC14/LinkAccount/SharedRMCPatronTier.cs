@@ -1,9 +1,9 @@
 ﻿using Robust.Shared.Serialization;
 
-namespace Content.Shared._RMC14.Patron;
+namespace Content.Shared._RMC14.LinkAccount;
 
 [Serializable, NetSerializable]
-public record SharedRMCPatronTier(
+public sealed record SharedRMCPatronTier(
     bool ShowOnCredits,
     bool NamedItems,
     bool Figurines,

@@ -3,5 +3,6 @@ cm-distress-signal-minormarinevictory = [color=green]The xeno hive was thrown in
 cm-distress-signal-majorxenovictory = [color=purple]All of the marines were wiped out![/color]
 cm-distress-signal-minorxenovictory = [color=purple]The xenos hijacked a dropship[/color] [color=green]but were wiped out by the marines![/color]
 cm-distress-signal-alldied = [color=yellow]Mutual Annihilation![/color]
+cm-distress-signal-none = [color=yellow]No outcome![/color]
 
 cm-distress-signal-marine = {$player}
