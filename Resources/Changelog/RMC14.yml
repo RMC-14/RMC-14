@@ -1736,5 +1736,12 @@
   id: 209
   time: '2024-06-30T09:35:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2663
+- author: DrSmugleaf
+  changes:
+  - message: Fixed bullets not hitting xenonid eggs.
+    type: Fix
+  id: 210
+  time: '2024-06-30T11:25:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2671
 Name: RMC14
 Order: -1
