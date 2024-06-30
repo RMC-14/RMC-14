@@ -15,7 +15,7 @@
   parent: ActionXenoBase
   id: ActionXenoDevolve
   name: De-evolve
-  description: Instantly devolve to the previous caste of xenonid. [color=red]You won't get your evolution points refunded![/color]
+  description: Devolve to the previous caste of xenonid. [color=red]You won't get your evolution points refunded![/color]
   components:
   - type: InstantAction
     itemIconStyle: NoItem
