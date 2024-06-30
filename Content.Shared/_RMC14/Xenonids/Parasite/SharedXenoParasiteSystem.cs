@@ -425,7 +425,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                     // TODO 20% chance to take limb damage
                     else if (_random.Prob(infected.MuscleAcheChance * frameTime))
                     {
-                        _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-muscle-ache"), uid, PopupType.SmallCaution);
+                        _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-muscle-ache"), uid, uid, PopupType.SmallCaution);
                         if (_random.Prob(0.2f))
                             _damage.TryChangeDamage(uid, infected.InfectionDamage, true, false);
                     }

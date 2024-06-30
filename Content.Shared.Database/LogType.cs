@@ -105,4 +105,9 @@ public enum LogType
     /// This is a default value used by <c>PlayerRateLimitManager</c>, though users can use different log types.
     /// </remarks>
     RateLimited = 91,
+
+    RMCMarineAnnounce = 10000,
+    RMCXenoAnnounce = RMCMarineAnnounce + 1,
+    RMCNamedItem = RMCMarineAnnounce + 2,
+    RMCRequisitionsBuy = RMCMarineAnnounce + 3,
 }
