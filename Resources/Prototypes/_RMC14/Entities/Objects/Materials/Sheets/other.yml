@@ -110,6 +110,7 @@
   suffix: 25
   components:
   - type: Stack
+    stackType: RMCSheetCardboard
     count: 25
 
 - type: entity
@@ -118,4 +119,5 @@
   suffix: Single
   components:
   - type: Stack
+    stackType: RMCSheetCardboard
     count: 1
