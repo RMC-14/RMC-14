@@ -1,0 +1,23 @@
+﻿- type: entity
+  parent: BaseComputer
+  id: CMGroundsideOperationsConsole
+  name: groundside operations console
+  description: This can be used for various important functions.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/rmc_groundside_communications_console.rsi
+    state: on
+    layers: [ ]
+  - type: ActivatableUI
+    key: enum.MarineCommunicationsComputerUI.Key
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [ [ "CMAccessCommand" ] ]
+  - type: UserInterface
+    interfaces:
+      enum.MarineCommunicationsComputerUI.Key:
+        type: MarineCommunicationsComputerBui
+  - type: MarineCommunicationsComputer
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # TODO RMC14
