@@ -18,7 +18,7 @@ rmc-ui-link-discord-account-already-linked = [bold]Your account is already linke
 rmc-ui-link-discord-account-open-channel = Open channel
 
 rmc-ui-named-items = Named Items
-rmc-ui-named-items-displayed-as = Will be displayed as 'Your Custom Name' M52C Assault Rifle, for example.
+rmc-ui-named-items-displayed-as = Will be displayed as 'Your Custom Name' M54C Assault Rifle, for example.
   Make sure the name you choose doesn't violate the rules.
   If you aren't sure, ask in AHelp! (F1)
 rmc-ui-named-primary-gun = Primary Gun Name
