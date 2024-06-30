@@ -26,6 +26,7 @@ namespace Content.Client.UserInterface.Controls
         public SpriteView HoverSpriteView { get; }
         public TextureButton StorageButton { get; }
         public CooldownGraphic CooldownDisplay { get; }
+        // RMC14 - Declare icon label
         public Label IconLabel { get; }
 
         private SpriteView SpriteView { get; }
@@ -159,10 +160,10 @@ namespace Content.Client.UserInterface.Controls
                 SetSize = new Vector2(DefaultButtonSize, DefaultButtonSize),
                 OverrideDirection = Direction.South
             });
-
+            // RMC14 - Add icon label
             AddChild(IconLabel = new Label
             {
-                Text = "TI",
+                Text = "",
                 SetSize = new Vector2(1f, 1f),
                 HorizontalAlignment = HAlignment.Center,
                 VerticalAlignment = VAlignment.Center,
@@ -242,7 +243,7 @@ namespace Content.Client.UserInterface.Controls
                 ? fullTexture.Texture
                 : Theme.ResolveTextureOrNull(_buttonTexturePath)?.Texture;
             ButtonRect.Texture = texture;
-
+            // RMC14 - Refresh icon label
             IconLabel.Text = "";
             IconLabel.FontColorOverride = Color.Black;
             if (_entities.TryGetComponent(Entity, out IconLabelComponent? iconLabel))
@@ -259,7 +260,7 @@ namespace Content.Client.UserInterface.Controls
 
                 IconLabel.SetSize = new Vector2(iconLabel.TextSize);
             }
-
+            // RMC14 - End Refresh icon label
         }
 
         private void OnButtonPressed(GUIBoundKeyEventArgs args)

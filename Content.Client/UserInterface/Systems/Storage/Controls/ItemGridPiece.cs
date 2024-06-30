@@ -21,6 +21,7 @@ public sealed class ItemGridPiece : Control, IEntityControl
     public readonly EntityUid Entity;
     public ItemStorageLocation Location;
     public ItemGridPieceMarks? Marked;
+    // RMC14 - Declare Font for the icon label
     private Font _font;
 
     public event Action<GUIBoundKeyEventArgs, ItemGridPiece>? OnPiecePressed;
@@ -55,7 +56,7 @@ public sealed class ItemGridPiece : Control, IEntityControl
     {
         IoCManager.InjectDependencies(this);
 
-        // Prepare Font for the icon label
+        // RMC14 - Prepare Font for the icon label
         var cache = IoCManager.Resolve<IResourceCache>();
         _font = new VectorFont(cache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Regular.ttf"), 8);
 
@@ -220,6 +221,7 @@ public sealed class ItemGridPiece : Control, IEntityControl
             }
         }
 
+        // RMC14 - Draw text for the icon label
         if (_entityManager.TryGetComponent(Entity, out IconLabelComponent? iconLabel))
         {
             if (iconLabel.LabelTextLocId is null ||
@@ -245,6 +247,7 @@ public sealed class ItemGridPiece : Control, IEntityControl
                 sep = _font.DrawChar(handle, new System.Text.Rune(chr), iconLabelPosition, textSize, textColor);
             }
         }
+        // RMC14 - End Draw text for the icon label
     }
 
     protected override bool HasPoint(Vector2 point)
