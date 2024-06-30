@@ -14577,6 +14577,12 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 43.5,-15.5
       parent: 1
+  - uid: 21335
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 42.5,-116.5
+      parent: 1
 - proto: CMCrateBase
   entities:
   - uid: 18897
@@ -14756,6 +14762,14 @@ entities:
     components:
     - type: Transform
       pos: 110.5,-28.5
+      parent: 1
+- proto: CMCrowbar
+  entities:
+  - uid: 21334
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 65.5,-94.5
       parent: 1
 - proto: CMDefibrillator
   entities:
@@ -125736,16 +125750,6 @@ entities:
     components:
     - type: Transform
       pos: 103.5,-59.5
-      parent: 1
-  - uid: 23650
-    components:
-    - type: Transform
-      pos: 45.5,-116.5
-      parent: 1
-  - uid: 23655
-    components:
-    - type: Transform
-      pos: 60.5,-92.5
       parent: 1
 - proto: CMWindoor
   entities:
