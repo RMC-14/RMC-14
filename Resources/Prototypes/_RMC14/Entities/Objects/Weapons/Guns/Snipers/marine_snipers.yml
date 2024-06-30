@@ -3,7 +3,7 @@
   parent: CMBaseWeaponRifle
   id: CMM96SSniperRifle
   name: M96S scoped rifle
-  description: "A heavy sniper rifle manufactured by Armat Systems. It has a scope system and fires armor penetrating rounds out of a 15-round magazine.
+  description: "A heavy sniper rifle manufactured by Aegis Armaments. It has a scope system and fires armor penetrating rounds out of a 15-round magazine.
     'Peace Through Superior Firepower'"
   components:
   - type: Sprite

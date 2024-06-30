@@ -27,7 +27,7 @@
   parent: CMBaseWeaponSMG
   name: M63 submachine gun
   id: WeaponSMGM63
-  description: The Armat Battlefield Systems M-39 submachinegun. Occasionally carried by light-infantry, scouts, engineers and medics.
+  description: The Aegis Battlefield Armaments M-63 submachinegun. Occasionally carried by light-infantry, scouts, engineers and medics.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63.rsi
@@ -58,7 +58,7 @@
       cm-aslot-stock:
         whitelist:
           tags:
-          - CMAttachmentM39StockCollapsible
+          - CMAttachmentM63StockCollapsible
       cm-aslot-barrel:
         whitelist:
           tags:

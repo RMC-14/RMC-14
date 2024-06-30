@@ -94,8 +94,8 @@
 
 - type: entity
   parent: ColMarTechBase
-  id: ArmatAttachments
-  name: Armat Systems squad attachments vendor
+  id: CMVendorAttachments
+  name: Aegis Armaments squad attachments vendor
   description: An automated supply rack hooked up to a small storage of weapons attachments. Can be accessed by any Marine Rifleman.
   components:
   - type: AccessReader
