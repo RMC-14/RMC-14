@@ -84,7 +84,7 @@
   id: RMCSheetCardboard
   name: cardboard
   suffix: Full
-  componentS:
+  components:
   - type: Material
   - type: PhysicalComposition
     materialComposition:
