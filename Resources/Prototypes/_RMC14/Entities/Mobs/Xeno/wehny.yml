@@ -5,7 +5,7 @@
   description: A cruel, cruel joke made by some sick individual.
   components:
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Runner/wehny.rsi
+    sprite: _RMC14/Mobs/Xenonids/Wehny/wehny.rsi
   - type: MobThresholds
     thresholds:
       0: Alive
