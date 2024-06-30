@@ -1755,5 +1755,12 @@
   id: 211
   time: '2024-06-30T11:31:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2670
+- author: vero5123
+  changes:
+  - message: adds a shockwave overlay effect.
+    type: Add
+  id: 212
+  time: '2024-06-30T18:48:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2631
 Name: RMC14
 Order: -1
