@@ -3,6 +3,7 @@ using Content.Server.Chat.Managers;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared.Chat;
 using Content.Shared.Database;
+using Content.Shared.Ghost;
 using Content.Shared.Popups;
 using Robust.Server.Audio;
 using Robust.Shared.Audio;
@@ -20,6 +21,8 @@ public sealed class XenoAnnounceSystem : SharedXenoAnnounceSystem
     public override void Announce(EntityUid source, Filter filter, string message, string wrapped, SoundSpecifier? sound = null, PopupType? popup = null)
     {
         base.Announce(source, filter, message, wrapped, sound, popup);
+
+        filter.AddWhereAttachedEntity(HasComp<GhostComponent>);
 
         _adminLogs.Add(LogType.RMCXenoAnnounce, $"{ToPrettyString(source):source} xeno announced message: {message}");
         _chat.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, wrapped, source, false, true, null);
