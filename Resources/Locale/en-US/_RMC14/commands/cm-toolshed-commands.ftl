@@ -7,6 +7,10 @@ command-description-evolutionpoints-get = Gets the evolution points of a xeno.
 command-description-evolutionpoints-set = Sets the evolution points of a xeno.
 command-description-evolutionpoints-max = Maxes out the evolution points of a xeno if they are lower than the max.
 
+command-description-excluderoletimer-add = Exclude a player from the playtime requirements for a specific role.
+command-description-excluderoletimer-get = See all roles for which a player is manually excluded from the regular playtime requirements for.
+command-description-excluderoletimer-remove = Removes a player's exclusion for playtime requirements for a specific role.
+
 command-description-hive-alldefault = Sets the hive of a xeno or group of xenos.
 
 command-description-removeinvalidweeds = Removes any weeds that should not have normally spread to where they are from the map.

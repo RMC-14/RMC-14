@@ -140,6 +140,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RSI.NET", "RSI.NET", "{DC3B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceWizards.RsiLib", "RSI.NET\SpaceWizards.RsiLib\SpaceWizards.RsiLib.csproj", "{3E9BB0F4-5C38-499A-9E35-B4ADDC754982}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Content.DiscordBot", "Content.DiscordBot\Content.DiscordBot.csproj", "{01EECD66-F14B-46BC-8214-1CC8F02CA21C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -467,6 +469,14 @@ Global
 		{3E9BB0F4-5C38-499A-9E35-B4ADDC754982}.DebugOpt|Any CPU.Build.0 = Debug|Any CPU
 		{3E9BB0F4-5C38-499A-9E35-B4ADDC754982}.Tools|Any CPU.ActiveCfg = Debug|Any CPU
 		{3E9BB0F4-5C38-499A-9E35-B4ADDC754982}.Tools|Any CPU.Build.0 = Debug|Any CPU
+		{01EECD66-F14B-46BC-8214-1CC8F02CA21C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01EECD66-F14B-46BC-8214-1CC8F02CA21C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01EECD66-F14B-46BC-8214-1CC8F02CA21C}.DebugOpt|Any CPU.ActiveCfg = Debug|Any CPU
+		{01EECD66-F14B-46BC-8214-1CC8F02CA21C}.DebugOpt|Any CPU.Build.0 = Debug|Any CPU
+		{01EECD66-F14B-46BC-8214-1CC8F02CA21C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01EECD66-F14B-46BC-8214-1CC8F02CA21C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01EECD66-F14B-46BC-8214-1CC8F02CA21C}.Tools|Any CPU.ActiveCfg = Debug|Any CPU
+		{01EECD66-F14B-46BC-8214-1CC8F02CA21C}.Tools|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

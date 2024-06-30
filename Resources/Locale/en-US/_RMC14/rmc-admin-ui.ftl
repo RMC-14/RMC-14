@@ -1,4 +1,4 @@
-﻿rmc-ui-cm-actions = CM Actions
+﻿rmc-ui-cm-actions = RMC Actions
 rmc-ui-transform-tab = Transform
 rmc-ui-xeno-tab = Xeno
 rmc-ui-squads-tab = Squads

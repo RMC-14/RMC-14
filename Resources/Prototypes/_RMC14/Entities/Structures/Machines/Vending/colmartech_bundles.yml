@@ -113,3 +113,17 @@
     - CMVendorHeadsetSquad
     - CMHandsBlackMarine
     - CMBootsBlackFilled
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleMilitaryPoliceApparel
+  name: Essential Police Set
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi
+    state: icon
+  - type: CMVendorBundle
+    bundle:
+    - CMGlassesSecurity
+    - CMBeltSecurityFilled
+    - CMArmorHelmetM10MP

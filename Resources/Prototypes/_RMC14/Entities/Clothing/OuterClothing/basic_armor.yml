@@ -22,6 +22,8 @@
     walkModifier: 0.8
     sprintModifier: 0.8
   - type: CMHardArmor
+  - type: RMCNameItemOnVend
+    item: Armor
 
 - type: entity
   parent: CMArmorRiot
