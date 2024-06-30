@@ -123,9 +123,7 @@ public sealed class ClusterGrenadeSystem : EntitySystem
 
                 var clusterEv = new CMClusterSpawnedEvent(_spawned);
                 RaiseLocalEvent(uid, ref clusterEv);
-                //del or qdel causes lag out the ass for shrapnel type clusters.
-                var despawn = AddComp<TimedDespawnComponent>(uid);
-                despawn.Lifetime = 0.01f;
+                QueueDel(uid);
             }
         }
     }

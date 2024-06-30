@@ -80,7 +80,7 @@
     deleteAfterExplosion: false
   - type: ClusterGrenade
     fillPrototype: CMProjectileShrapnel
-    maxGrenadesCount: 30
+    maxGrenadesCount: 48
     grenadeType: enum.GrenadeType.Shoot
     triggerGrenades: false
   - type: ContainerContainer
