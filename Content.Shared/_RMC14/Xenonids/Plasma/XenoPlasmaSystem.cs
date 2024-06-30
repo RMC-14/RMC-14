@@ -29,7 +29,8 @@ public sealed class XenoPlasmaSystem : EntitySystem
         SubscribeLocalEvent<XenoPlasmaComponent, RejuvenateEvent>(OnXenoRejuvenate);
         SubscribeLocalEvent<XenoPlasmaComponent, XenoTransferPlasmaActionEvent>(OnXenoTransferPlasmaAction);
         SubscribeLocalEvent<XenoPlasmaComponent, XenoTransferPlasmaDoAfterEvent>(OnXenoTransferDoAfter);
-        SubscribeLocalEvent<XenoPlasmaComponent, NewXenoEvolvedComponent>(OnNewXenoEvolved);
+        SubscribeLocalEvent<XenoPlasmaComponent, NewXenoEvolvedEvent>(OnNewXenoEvolved);
+        SubscribeLocalEvent<XenoPlasmaComponent, XenoDevolvedEvent>(OnXenoDevolved);
     }
 
     private void OnXenoPlasmaMapInit(Entity<XenoPlasmaComponent> ent, ref MapInitEvent args)
@@ -102,18 +103,28 @@ public sealed class XenoPlasmaSystem : EntitySystem
         _audio.PlayPredicted(self.Comp.PlasmaTransferSound, self, self);
     }
 
-    private void OnNewXenoEvolved(Entity<XenoPlasmaComponent> newXeno, ref NewXenoEvolvedComponent args)
+    private void OnNewXenoEvolved(Entity<XenoPlasmaComponent> newXeno, ref NewXenoEvolvedEvent args)
     {
-        if (TryComp(args.OldXeno, out XenoPlasmaComponent? oldXeno))
-        {
-            var newMax = newXeno.Comp.MaxPlasma;
-            FixedPoint2 newPlasma = newMax;
-            var divisor = oldXeno.MaxPlasma * newMax;
-            if (divisor != 0)
-                newPlasma = FixedPoint2.Min(oldXeno.Plasma / divisor, newMax);
+        EvolutionTransferPlasma(args.OldXeno, newXeno);
+    }
 
-            SetPlasma(newXeno, newPlasma);
-        }
+    private void OnXenoDevolved(Entity<XenoPlasmaComponent> newXeno, ref XenoDevolvedEvent args)
+    {
+        EvolutionTransferPlasma(args.OldXeno, newXeno);
+    }
+
+    private void EvolutionTransferPlasma(EntityUid oldXeno, Entity<XenoPlasmaComponent> newXeno)
+    {
+        if (!TryComp(oldXeno, out XenoPlasmaComponent? oldXenoPlasma))
+            return;
+
+        var newMax = newXeno.Comp.MaxPlasma;
+        FixedPoint2 newPlasma = newMax;
+        var divisor = oldXenoPlasma.MaxPlasma * newMax;
+        if (divisor != 0)
+            newPlasma = FixedPoint2.Min(oldXenoPlasma.Plasma / divisor, newMax);
+
+        SetPlasma(newXeno, newPlasma);
     }
 
     private void UpdateAlert(Entity<XenoPlasmaComponent> xeno)

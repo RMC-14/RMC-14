@@ -143,6 +143,8 @@
     interfaces:
       enum.XenoEvolutionUIKey.Key:
         type: XenoEvolutionBui
+      enum.XenoDevolveUIKey.Key:
+        type: XenoDevolveBui
       enum.XenoWatchUIKey.Key:
         type: XenoWatchBui
       enum.XenoChooseStructureUI.Key:

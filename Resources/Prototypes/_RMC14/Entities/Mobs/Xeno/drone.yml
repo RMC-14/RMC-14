@@ -37,10 +37,14 @@
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
     - ActionXenoTransferPlasma
+    - ActionXenoDevolve
     hudOffset: 0,0.15
     tier: 1
     bypassTierCount: true
     unlockAt: 60 # 1 minute
+  - type: XenoDevolve
+    devolvesTo:
+    - CMXenoLarva
   - type: XenoAcid
   - type: XenoConstruction
     buildDelay: 2

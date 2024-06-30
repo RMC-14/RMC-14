@@ -34,9 +34,13 @@
     - ActionXenoSecreteStructure
     - ActionXenoTransferPlasma
     - ActionXenoResinWalker
+    - ActionXenoDevolve
     tier: 2
     hudOffset: 0,0.35
     unlockAt: 180 # 3 minutes
+  - type: XenoDevolve
+    devolvesTo:
+    - CMXenoDrone
   - type: XenoAcid
   - type: XenoConstruction
     buildDelay: 1

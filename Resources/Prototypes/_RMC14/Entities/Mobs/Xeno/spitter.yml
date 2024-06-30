@@ -31,9 +31,13 @@
     - ActionXenoChargeSpit
     - ActionXenoScatteredSpit # TODO RMC14 replace this with spray acid
     #    - ActionXenoSprayAcid
+    - ActionXenoDevolve
     tier: 2
     hudOffset: 0,0.16
     unlockAt: 540 # 9 minutes
+  - type: XenoDevolve
+    devolvesTo:
+    - CMXenoSentinel
   - type: XenoAcid
   - type: XenoDevour
   - type: XenoPlasma

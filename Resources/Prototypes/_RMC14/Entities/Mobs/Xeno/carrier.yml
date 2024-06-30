@@ -33,9 +33,13 @@
     #    - ActionXenoThrowParasite
     #    - ActionXenoRetrieveEgg
     #    - ActionXenoParasiteReserve
+    - ActionXenoDevolve
     tier: 2
     hudOffset: 0,0.19
     unlockAt: 300 # 5 minutes
+  - type: XenoDevolve
+    devolvesTo:
+    - CMXenoDrone
   - type: XenoConstruction
     canOrderConstruction:
     - HiveCoreXenoConstructionNode

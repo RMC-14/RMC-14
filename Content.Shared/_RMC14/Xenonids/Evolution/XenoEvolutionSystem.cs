@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Xenonids.Hive;
+﻿using System.Linq;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Actions;
 using Content.Shared.Climbing.Components;
 using Content.Shared.Climbing.Systems;
@@ -47,20 +48,42 @@ public sealed class XenoEvolutionSystem : EntitySystem
     {
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
 
+        SubscribeLocalEvent<XenoDevolveComponent, XenoOpenDevolveActionEvent>(OnXenoOpenDevolveAction);
+
         SubscribeLocalEvent<XenoEvolutionComponent, XenoOpenEvolutionsActionEvent>(OnXenoEvolveAction);
         SubscribeLocalEvent<XenoEvolutionComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
-        SubscribeLocalEvent<XenoEvolutionComponent, NewXenoEvolvedComponent>(OnXenoEvolutionNewEvolved);
+        SubscribeLocalEvent<XenoEvolutionComponent, NewXenoEvolvedEvent>(OnXenoEvolutionNewEvolved);
+        SubscribeLocalEvent<XenoEvolutionComponent, XenoDevolvedEvent>(OnXenoEvolutionDevolved);
 
         SubscribeLocalEvent<XenoNewlyEvolvedComponent, PreventCollideEvent>(OnNewlyEvolvedPreventCollide);
 
-        Subs.BuiEvents<XenoEvolutionComponent>(XenoEvolutionUIKey.Key, subs =>
-        {
-            subs.Event<XenoEvolveBuiMsg>(OnXenoEvolveBui);
-        });
+        Subs.BuiEvents<XenoEvolutionComponent>(XenoEvolutionUIKey.Key,
+            subs =>
+            {
+                subs.Event<XenoEvolveBuiMsg>(OnXenoEvolveBui);
+            });
+
+        Subs.BuiEvents<XenoDevolveComponent>(XenoDevolveUIKey.Key,
+            subs =>
+            {
+                subs.Event<XenoDevolveBuiMsg>(OnXenoDevolveBui);
+            });
+    }
+
+    private void OnXenoOpenDevolveAction(Entity<XenoDevolveComponent> xeno, ref XenoOpenDevolveActionEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+        _ui.OpenUi(xeno.Owner, XenoDevolveUIKey.Key, xeno);
     }
 
     private void OnXenoEvolveAction(Entity<XenoEvolutionComponent> xeno, ref XenoOpenEvolutionsActionEvent args)
     {
+        if (args.Handled)
+            return;
+
         args.Handled = true;
         _ui.OpenUi(xeno.Owner, XenoEvolutionUIKey.Key, xeno);
     }
@@ -86,6 +109,43 @@ public sealed class XenoEvolutionSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("cm-xeno-evolution-start"), xeno, xeno);
 
         _doAfter.TryStartDoAfter(doAfter);
+    }
+
+    private void OnXenoDevolveBui(Entity<XenoDevolveComponent> xeno, ref XenoDevolveBuiMsg args)
+    {
+        if (_net.IsClient ||
+            !_mind.TryGetMind(xeno, out var mindId, out _) ||
+            !xeno.Comp.DevolvesTo.Contains(args.Choice))
+        {
+            return;
+        }
+
+        _ui.CloseUi(xeno.Owner, XenoEvolutionUIKey.Key, xeno);
+
+        var coordinates = _transform.GetMoverCoordinates(xeno.Owner);
+        var newXeno = Spawn(args.Choice, coordinates);
+        _xeno.SetSameHive(newXeno, xeno.Owner);
+
+        _mind.TransferTo(mindId, newXeno);
+        _mind.UnVisit(mindId);
+
+        // TODO RMC14 this is a hack because climbing on a newly created entity does not work properly for the client
+        var comp = EnsureComp<XenoNewlyEvolvedComponent>(newXeno);
+
+        _doors.Clear();
+        _entityLookup.GetEntitiesIntersecting(xeno, _doors);
+        foreach (var id in _doors)
+        {
+            if (HasComp<DoorComponent>(id) || HasComp<AirlockComponent>(id))
+                comp.StopCollide.Add(id);
+        }
+
+        var ev = new XenoDevolvedEvent(xeno);
+        RaiseLocalEvent(newXeno, ref ev);
+
+        Del(xeno.Owner);
+
+        _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-devolve", ("xeno", newXeno)), newXeno, newXeno, PopupType.LargeCaution);
     }
 
     private void OnXenoEvolveDoAfter(Entity<XenoEvolutionComponent> xeno, ref XenoEvolutionDoAfterEvent args)
@@ -119,7 +179,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 comp.StopCollide.Add(id);
         }
 
-        var ev = new NewXenoEvolvedComponent(xeno);
+        var ev = new NewXenoEvolvedEvent(xeno);
         RaiseLocalEvent(newXeno, ref ev);
 
         Del(xeno.Owner);
@@ -127,12 +187,23 @@ public sealed class XenoEvolutionSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-end"), newXeno, newXeno);
     }
 
-    private void OnXenoEvolutionNewEvolved(Entity<XenoEvolutionComponent> xeno, ref NewXenoEvolvedComponent args)
+    private void OnXenoEvolutionNewEvolved(Entity<XenoEvolutionComponent> xeno, ref NewXenoEvolvedEvent args)
     {
-        if (!TryComp(args.OldXeno, out XenoEvolutionComponent? oldEvolution))
+        TransferPoints((args.OldXeno, args.OldXeno), xeno, true);
+    }
+
+    private void OnXenoEvolutionDevolved(Entity<XenoEvolutionComponent> xeno, ref XenoDevolvedEvent args)
+    {
+        TransferPoints(args.OldXeno, (xeno, xeno), false);
+    }
+
+    private void TransferPoints(Entity<XenoEvolutionComponent?> old, Entity<XenoEvolutionComponent> xeno, bool subtract)
+    {
+        if (!Resolve(old, ref old.Comp, false))
             return;
 
-        xeno.Comp.Points = FixedPoint2.Max(0, oldEvolution.Points - oldEvolution.Max);
+        xeno.Comp.Points = subtract ? FixedPoint2.Max(0, old.Comp.Points - old.Comp.Max) : old.Comp.Points;
+
         Dirty(xeno);
     }
 
