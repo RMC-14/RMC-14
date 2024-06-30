@@ -321,6 +321,7 @@
     state: bonesetter
   - type: Item
     sprite: _RMC14/Objects/Medical/Surgery/bonesetter.rsi
+  - type: CMBoneSetter
 
 # - Predator
 - type: entity
