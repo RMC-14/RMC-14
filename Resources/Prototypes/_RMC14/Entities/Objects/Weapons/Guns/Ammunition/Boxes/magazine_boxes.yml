@@ -134,7 +134,7 @@
     - state: base_m54
     - state: magaz_ap
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: text_m41
+    - state: text_m54
     - state: base_type_ap
     - state: base_m54_lid
       map: [ "lid" ]
@@ -175,7 +175,7 @@
     - state: base_m54
     - state: magaz_reg
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: text_m41
+    - state: text_m54
     - state: base_type_ext
     - state: base_m54_lid
       map: [ "lid" ]

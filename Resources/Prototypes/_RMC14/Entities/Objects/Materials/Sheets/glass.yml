@@ -1,4 +1,20 @@
 # Glass
+- type: material
+  id: CMGlass
+  stackEntity: CMSheetGlass
+  name: materials-glass
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/glass.rsi, state: glass }
+  color: "#a8ccd7"
+  price: 0.075
+
+- type: material
+  id: CMReinforcedGlass
+  stackEntity: CMSheetGlassReinforced
+  name: materials-reinforced-glass
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/reinf_glass.rsi, state: rglass }
+  color: "#549bb0"
+  price: 0.16
+
 - type: entity
   parent: SheetGlassBase
   id: CMSheetGlassBase
