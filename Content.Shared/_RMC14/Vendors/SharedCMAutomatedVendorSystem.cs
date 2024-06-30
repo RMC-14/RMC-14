@@ -227,6 +227,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         var spawn = SpawnNextToOrDrop(toVend, vendor);
         if (!Grab(player, spawn) && TryComp(spawn, out TransformComponent? xform))
             _transform.SetLocalPosition(spawn, xform.LocalPosition + offset, xform);
+
+        var ev = new RMCAutomatedVendedUserEvent(spawn);
+        RaiseLocalEvent(player, ref ev);
     }
 
     private bool Grab(EntityUid player, EntityUid item)
