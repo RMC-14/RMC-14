@@ -11,6 +11,9 @@ public sealed partial class CMExplosionEffectComponent : Component
     public EntProtoId Explosion = "CMExplosionEffectGrenade";
 
     [DataField, AutoNetworkedField]
+    public EntProtoId ShockWave = "RMCExplosionEffectGrenadeShockWave";
+
+    [DataField, AutoNetworkedField]
     public List<EntProtoId> ShrapnelEffects = new() { "CMExplosionEffectShrapnel1", "CMExplosionEffectShrapnel2" };
 
     [DataField, AutoNetworkedField]
