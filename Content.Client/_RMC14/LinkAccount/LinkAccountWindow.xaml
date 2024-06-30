@@ -1,0 +1,16 @@
+﻿<linkAccount:LinkAccountWindow
+    xmlns="https://spacestation14.io"
+    xmlns:linkAccount="clr-namespace:Content.Client._RMC14.LinkAccount"
+    Title="{Loc 'rmc-ui-link-discord-account'}">
+    <BoxContainer Orientation="Vertical">
+        <RichTextLabel Name="Label" Access="Public" Margin="0 0 0 5" />
+        <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center"
+                      HorizontalExpand="True">
+            <Button Name="CopyButton" Access="Public" StyleClasses="OpenRight"
+                    Text="{Loc 'rmc-ui-link-discord-account-copy'}" HorizontalExpand="True" />
+            <Button Name="LinkButton" Access="Public" StyleClasses="OpenLeft"
+                    Text="{Loc 'rmc-ui-link-discord-account-open-channel'}"
+                    HorizontalExpand="True" />
+        </BoxContainer>
+    </BoxContainer>
+</linkAccount:LinkAccountWindow>

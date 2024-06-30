@@ -79,7 +79,7 @@
   parent: CMUnderAttachmentBase
   id: CMAttachmentU7UnderbarrelShotgun
   name: U7 underbarrel shotgun
-  description: An ARMAT U7 tactical shotgun. Attaches to the underbarrel of most weapons. Only capable of loading up to five buckshot shells. Specialized for breaching into buildings.
+  description: An AEGIS U7 tactical shotgun. Attaches to the underbarrel of most weapons. Only capable of loading up to five buckshot shells. Specialized for breaching into buildings.
   components:
   - type: Sprite
     state: masterkey

@@ -2656,7 +2656,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: ArmatAttachments
+- proto: CMVendorAttachments
   entities:
   - uid: 8287
     components:

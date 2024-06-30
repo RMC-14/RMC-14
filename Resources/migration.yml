@@ -510,3 +510,4 @@ CMBoxMagazineRifleM4RAExt: CMBoxMagazineRifleM4SPRExt
 CMMagazineRifleM4RAAP: CMMagazineRifleM4SPRAP
 CMMagazineRifleM4RAExt: CMMagazineRifleM4SPRExt
 WeaponRifleM4RA: WeaponRifleM4SPR
+ArmatAttachments: CMVendorAttachments

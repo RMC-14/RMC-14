@@ -3,7 +3,7 @@
   parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing ]
   id: CMArmorM3Medium
   name: M3 pattern marine armor
-  description: A standard CM M3 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage.
+  description: A standard UNMC M3 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard.rsi
@@ -89,6 +89,8 @@
       - CMMagazineSmg
       - CMMagazineSniper
       - CMMagazinePistol
+  - type: RMCNameItemOnVend
+    item: Armor
 
 - type: entity
   parent: CMArmorM3Medium
