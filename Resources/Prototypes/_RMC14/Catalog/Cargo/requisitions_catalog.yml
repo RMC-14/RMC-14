@@ -156,6 +156,8 @@
         crate: CMCrateMedicalFilled
       - cost: 2100
         crate: CMCrateMedicalPill
+      - cost: 2000
+        crate: CMCrateMedicalBlood
 #    - name: Mortar
 #      entries: []
 #    - name: Operations

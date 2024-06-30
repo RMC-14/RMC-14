@@ -73,7 +73,17 @@
       - id: CMPillCanisterKelotane
       # - id: CMPillCanisterTramadol
       # - id: CMPillCanisterPeridaxon
-      - id: Bloodpack
+
+- type: entity
+  id: CMCrateMedicalBlood
+  parent: CMCrateMedical
+  name: blood crate
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMBloodPack
+        amount: 5
 
 - type: entity
   id: CMCrateMedicalPill
