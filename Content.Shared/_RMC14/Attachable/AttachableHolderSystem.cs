@@ -65,6 +65,7 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, GetWieldableSpeedModifiersEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, ContainerGettingInsertedAttemptEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, ContainerGettingRemovedAttemptEvent>(RelayEvent);
+        SubscribeLocalEvent<AttachableHolderComponent, EntGotRemovedFromContainerMessage>(RelayEvent);
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.CMActivateAttachableBarrel,

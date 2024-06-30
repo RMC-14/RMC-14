@@ -14,7 +14,7 @@ public sealed class AttachablePreventDropSystem : EntitySystem
 
     private void OnAttempt<T>(Entity<AttachablePreventDropToggleableComponent> attachable, ref T args) where T : CancellableEntityEventArgs
     {
-        if (!TryComp(attachable.Owner, out AttachableToggleableComponent? toggleableComponent) || !toggleableComponent.Active)
+        if (!TryComp(attachable.Owner, out AttachableToggleableComponent? toggleableComponent) || !toggleableComponent.Attached || !toggleableComponent.Active)
             return;
 
         args.Cancel();

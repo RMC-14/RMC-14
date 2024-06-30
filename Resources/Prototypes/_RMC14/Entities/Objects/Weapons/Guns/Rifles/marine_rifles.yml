@@ -95,6 +95,7 @@
         whitelist:
           tags:
           - CMAttachmentFlashlight
+          - RMCAttachmentMagneticHarness
       cm-aslot-underbarrel:
         whitelist:
           tags:

@@ -100,6 +100,12 @@
   components:
   - type: Sprite
     state: magnetic
+  - type: Tag
+    tags:
+    - CMAttachmentRail
+    - RMCAttachmentMagneticHarness
+  - type: AttachableAutoPickup
+  - type: AttachableVisuals
 
 - type: entity
   parent: CMRailAttachmentBase
@@ -168,3 +174,6 @@
 
 - type: Tag
   id: CMAttachmentB8SmartScope
+
+- type: Tag
+  id: RMCAttachmentMagneticHarness
