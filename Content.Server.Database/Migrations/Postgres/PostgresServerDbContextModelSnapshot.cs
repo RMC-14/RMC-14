@@ -1194,6 +1194,22 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("rmc_patron_tiers", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCRoleTimerExclude", b =>
+                {
+                    b.Property<Guid>("PlayerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("player_id");
+
+                    b.Property<string>("Tracker")
+                        .HasColumnType("text")
+                        .HasColumnName("tracker");
+
+                    b.HasKey("PlayerId", "Tracker")
+                        .HasName("PK_rmc_role_timer_excludes");
+
+                    b.ToTable("rmc_role_timer_excludes", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.RoleWhitelist", b =>
                 {
                     b.Property<Guid>("PlayerUserId")
@@ -2060,6 +2076,19 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Patron");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCRoleTimerExclude", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "Player")
+                        .WithMany("RoleTimerExcludes")
+                        .HasForeignKey("PlayerId")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_role_timer_excludes_player_player_id");
+
+                    b.Navigation("Player");
+                });
+
             modelBuilder.Entity("Content.Server.Database.RoleWhitelist", b =>
                 {
                     b.HasOne("Content.Server.Database.Player", "Player")
@@ -2282,6 +2311,8 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("LinkingCodes");
 
                     b.Navigation("Patron");
+
+                    b.Navigation("RoleTimerExcludes");
                 });
 
             modelBuilder.Entity("Content.Server.Database.Preference", b =>

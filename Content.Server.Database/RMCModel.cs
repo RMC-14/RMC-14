@@ -161,3 +161,15 @@ public sealed class RMCPatronRoundEndXenoShoutout
     [StringLength(100), Required]
     public string Name { get; set; } = default!;
 }
+
+[Table("rmc_role_timer_excludes")]
+[PrimaryKey(nameof(PlayerId), nameof(Tracker))]
+public sealed class RMCRoleTimerExclude
+{
+    [ForeignKey("Player")]
+    public Guid PlayerId { get; set; }
+
+    public Player Player { get; set; } = default!;
+
+    public string Tracker { get; set; } = default!;
+}

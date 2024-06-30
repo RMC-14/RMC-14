@@ -1,5 +1,6 @@
 using Content.Server._RMC14.LinkAccount;
 using Content.Server._RMC14.Mapping;
+using Content.Server._RMC14.PlayTimeTracking;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
@@ -72,6 +73,7 @@ namespace Content.Server.IoC
             // RMC14
             IoCManager.Register<MappingManager>();
             IoCManager.Register<LinkAccountManager>();
+            IoCManager.Register<RMCPlayTimeManager>();
         }
     }
 }

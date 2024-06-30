@@ -1814,6 +1814,45 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             return (marineName, xenoName);
         }
 
+        public async Task<List<string>> GetExcludedRoleTimers(Guid player, CancellationToken cancel)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.RMCRoleTimerExcludes
+                .Where(r => r.PlayerId == player)
+                .Select(r => r.Tracker)
+                .ToListAsync(cancel);
+        }
+
+        public async Task<bool> ExcludeRoleTimer(Guid player, string tracker)
+        {
+            await using var db = await GetDb();
+            var alreadyExcluded = await db.DbContext.RMCRoleTimerExcludes
+                .AnyAsync(r => r.PlayerId == player && r.Tracker == tracker);
+            if (alreadyExcluded)
+                return false;
+
+            db.DbContext.RMCRoleTimerExcludes.Add(new RMCRoleTimerExclude
+            {
+                PlayerId = player,
+                Tracker = tracker,
+            });
+            await db.DbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> RemoveRoleTimerExclusion(Guid player, string tracker)
+        {
+            await using var db = await GetDb();
+            var exclusion = await db.DbContext.RMCRoleTimerExcludes
+                .FirstOrDefaultAsync(r => r.PlayerId == player && r.Tracker == tracker);
+            if (exclusion == null)
+                return false;
+
+            db.DbContext.RMCRoleTimerExcludes.Remove(exclusion);
+            await db.DbContext.SaveChangesAsync();
+            return true;
+        }
+
         #endregion
 
         // SQLite returns DateTime as Kind=Unspecified, Npgsql actually knows for sure it's Kind=Utc.

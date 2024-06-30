@@ -53,6 +53,7 @@ namespace Content.Server.Database
         public DbSet<RMCPatronLobbyMessage> RMCPatronLobbyMessages { get; set; } = default!;
         public DbSet<RMCPatronRoundEndMarineShoutout> RMCPatronRoundEndMarineShoutouts { get; set; } = default!;
         public DbSet<RMCPatronRoundEndXenoShoutout> RMCPatronRoundEndXenoShoutouts { get; set; } = default!;
+        public DbSet<RMCRoleTimerExclude> RMCRoleTimerExcludes { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -391,6 +392,13 @@ namespace Content.Server.Database
                 .HasForeignKey(l => l.DiscordId)
                 .HasPrincipalKey(p => p.Id)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RMCRoleTimerExclude>()
+                .HasOne(r => r.Player)
+                .WithMany(p => p.RoleTimerExcludes)
+                .HasForeignKey(r => r.PlayerId)
+                .HasPrincipalKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public virtual IQueryable<AdminLog> SearchLogs(IQueryable<AdminLog> query, string searchText)
@@ -615,6 +623,7 @@ namespace Content.Server.Database
         public RMCPatron? Patron { get; set; }
         public RMCLinkingCodes? LinkingCodes { get; set; }
         public List<RMCLinkedAccountLogs> LinkedAccountLogs { get; set; } = default!;
+        public List<RMCRoleTimerExclude> RoleTimerExcludes { get; set; } = default!;
     }
 
     [Table("whitelist")]
