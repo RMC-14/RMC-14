@@ -73,6 +73,7 @@
       - id: CMPillCanisterKelotane
       # - id: CMPillCanisterTramadol
       # - id: CMPillCanisterPeridaxon
+      - id: Bloodpack
 
 - type: entity
   id: CMCrateMedicalPill
