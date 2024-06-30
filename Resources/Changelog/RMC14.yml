@@ -1714,7 +1714,7 @@
   changes:
   - message: Added Discord account linking.
     type: Add
-  - message: 'Added Patron perks: mention on the credits, OOC name color, named items,
+  - message: 'Added Patron perks: mention on the credits, OOC name color, named items, figurines,
       lobby messages, and round end shoutout, depending on the tier.'
     type: Add
   id: 207
