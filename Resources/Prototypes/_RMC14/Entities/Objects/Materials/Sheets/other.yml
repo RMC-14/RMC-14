@@ -90,7 +90,7 @@
     materialComposition:
       RMCSheetCardboard: 100
   - type: Stack
-    stackType: RMCCardboard
+    stackType: RMCSheetCardboard
     count: 50
   - type: Sprite
     state: icon
@@ -110,7 +110,6 @@
   suffix: 25
   components:
   - type: Stack
-    stackType: RMCCardboard
     count: 25
 
 - type: entity
@@ -119,5 +118,4 @@
   suffix: Single
   components:
   - type: Stack
-    stackType: RMCCardboard
     count: 1
