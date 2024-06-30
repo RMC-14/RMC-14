@@ -2,7 +2,7 @@ using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
 using Robust.Shared.Containers;
 
-namespace Content.Shared._RMC14.Attachable;
+namespace Content.Shared._RMC14.Attachable.Systems;
 
 public sealed class AttachablePreventDropSystem : EntitySystem
 {

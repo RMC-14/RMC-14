@@ -8,7 +8,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Robust.Shared.Containers;
 
-namespace Content.Shared._RMC14.Attachable;
+namespace Content.Shared._RMC14.Attachable.Systems;
 
 public sealed class AttachableAutoPickupSystem : EntitySystem
 {

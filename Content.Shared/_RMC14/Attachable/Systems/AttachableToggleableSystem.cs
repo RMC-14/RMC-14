@@ -12,7 +12,7 @@ using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._RMC14.Attachable;
+namespace Content.Shared._RMC14.Attachable.Systems;
 
 public sealed class AttachableToggleableSystem : EntitySystem
 {
@@ -28,7 +28,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
     {
         SubscribeLocalEvent<AttachableToggleableComponent, ActivateInWorldEvent>(OnActivateInWorld);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableAlteredEvent>(OnAttachableAltered,
-            after: new[] { typeof(AttachableWeaponRangedModsSystem) });
+            after: new[] { typeof(AttachableModifiersSystem) });
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleActionEvent>(OnAttachableToggleAction);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleDoAfterEvent>(
             OnAttachableToggleDoAfter);
@@ -45,7 +45,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
         SubscribeLocalEvent<AttachableMovementLockedComponent, MoveInputEvent>(OnAttachableMovementLockedMoveInput);
 
         SubscribeLocalEvent<AttachableToggleableSimpleActivateComponent, AttachableAlteredEvent>(OnAttachableAltered,
-            after: new[] { typeof(AttachableWeaponRangedModsSystem) });
+            after: new[] { typeof(AttachableModifiersSystem) });
     }
 
 #region AttachableAlteredEvent handling

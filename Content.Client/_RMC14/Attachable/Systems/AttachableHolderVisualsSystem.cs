@@ -2,9 +2,10 @@ using Content.Client._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
+using Content.Shared._RMC14.Attachable.Systems;
 using Robust.Client.GameObjects;
 
-namespace Content.Client._RMC14.Attachable;
+namespace Content.Client._RMC14.Attachable.Systems;
 
 public sealed class AttachableHolderVisualsSystem : EntitySystem
 {

@@ -1,7 +1,7 @@
 ﻿using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared.Weapons.Ranged.Events;
 
-namespace Content.Shared._RMC14.Attachable;
+namespace Content.Shared._RMC14.Attachable.Systems;
 
 public sealed class AttachableSilencerSystem : EntitySystem
 {

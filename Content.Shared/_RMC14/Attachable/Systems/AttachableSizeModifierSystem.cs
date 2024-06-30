@@ -4,7 +4,7 @@ using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared.Item;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._RMC14.Attachable;
+namespace Content.Shared._RMC14.Attachable.Systems;
 
 public sealed class AttachableSizeModifierSystem : EntitySystem
 {

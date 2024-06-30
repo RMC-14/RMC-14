@@ -65,7 +65,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentSuppressor
+      - id: RMCAttachmentSuppressor
         amount: 8
 
 - type: entity

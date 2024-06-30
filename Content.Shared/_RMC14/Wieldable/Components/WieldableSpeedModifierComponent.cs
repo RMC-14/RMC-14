@@ -7,26 +7,14 @@ namespace Content.Shared._RMC14.Wieldable.Components;
 public sealed partial class WieldableSpeedModifiersComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public float UnwieldedBaseWalk = 1f;
+    public float BaseWalk = 1f;
 
     [DataField, AutoNetworkedField]
-    public float UnwieldedModifiedWalk = 1f;
+    public float ModifiedWalk = 1f;
 
     [DataField, AutoNetworkedField]
-    public float UnwieldedBaseSprint = 1f;
+    public float BaseSprint = 1f;
 
     [DataField, AutoNetworkedField]
-    public float UnwieldedModifiedSprint = 1f;
-    
-    [DataField, AutoNetworkedField]
-    public float WieldedBaseWalk = 1f;
-
-    [DataField, AutoNetworkedField]
-    public float WieldedModifiedWalk = 1f;
-
-    [DataField, AutoNetworkedField]
-    public float WieldedBaseSprint = 1f;
-
-    [DataField, AutoNetworkedField]
-    public float WieldedModifiedSprint = 1f;
+    public float ModifiedSprint = 1f;
 }

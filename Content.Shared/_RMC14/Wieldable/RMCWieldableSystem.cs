@@ -24,10 +24,8 @@ public sealed class RMCWieldableSystem : EntitySystem
     
     private void OnMapInit(Entity<WieldableSpeedModifiersComponent> wieldable, ref MapInitEvent args)
     {
-        wieldable.Comp.UnwieldedModifiedWalk = wieldable.Comp.UnwieldedBaseWalk;
-        wieldable.Comp.UnwieldedModifiedSprint = wieldable.Comp.UnwieldedBaseSprint;
-        wieldable.Comp.WieldedModifiedWalk = wieldable.Comp.WieldedBaseWalk;
-        wieldable.Comp.WieldedModifiedSprint = wieldable.Comp.WieldedBaseSprint;
+        wieldable.Comp.ModifiedWalk = wieldable.Comp.BaseWalk;
+        wieldable.Comp.ModifiedSprint = wieldable.Comp.BaseSprint;
     }
 
     private void OnGotEquippedHand(Entity<WieldableSpeedModifiersComponent> wieldable, ref GotEquippedHandEvent args)
@@ -42,30 +40,18 @@ public sealed class RMCWieldableSystem : EntitySystem
 
     private void OnRefreshMovementSpeedModifiers(Entity<WieldableSpeedModifiersComponent> wieldable, ref HeldRelayedEvent<RefreshMovementSpeedModifiersEvent> args)
     {
-        if (TryComp(wieldable.Owner, out WieldableComponent? wieldableComponent) && wieldableComponent.Wielded)
-        {
-            args.Args.ModifySpeed(wieldable.Comp.WieldedModifiedWalk, wieldable.Comp.WieldedModifiedSprint);
-            return;
-        }
-        
-        args.Args.ModifySpeed(wieldable.Comp.UnwieldedModifiedWalk, wieldable.Comp.UnwieldedModifiedSprint);
+        args.Args.ModifySpeed(wieldable.Comp.ModifiedWalk, wieldable.Comp.ModifiedSprint);
     }
     
     public void RefreshSpeedModifiers(Entity<WieldableSpeedModifiersComponent?> wieldable)
     {
         wieldable.Comp = EnsureComp<WieldableSpeedModifiersComponent>(wieldable);
 
-        var ev = new GetWieldableSpeedModifiersEvent(
-            wieldable.Comp.UnwieldedBaseWalk,
-            wieldable.Comp.UnwieldedBaseSprint,
-            wieldable.Comp.WieldedBaseWalk,
-            wieldable.Comp.WieldedBaseSprint);
+        var ev = new GetWieldableSpeedModifiersEvent(wieldable.Comp.BaseWalk, wieldable.Comp.BaseSprint);
         RaiseLocalEvent(wieldable, ref ev);
 
-        wieldable.Comp.UnwieldedModifiedWalk = ev.UnwieldedWalk > 0 ? ev.UnwieldedWalk : 0;
-        wieldable.Comp.UnwieldedModifiedSprint = ev.UnwieldedSprint > 0 ? ev.UnwieldedSprint : 0;
-        wieldable.Comp.WieldedModifiedWalk = ev.WieldedWalk > 0 ? ev.WieldedWalk : 0;
-        wieldable.Comp.WieldedModifiedSprint = ev.WieldedSprint > 0 ? ev.WieldedSprint : 0;
+        wieldable.Comp.ModifiedWalk = ev.Walk > 0 ? ev.Walk : 0;
+        wieldable.Comp.ModifiedSprint = ev.Sprint > 0 ? ev.Sprint : 0;
         
         RefreshModifiersOnParent(wieldable.Owner);
     }

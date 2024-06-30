@@ -3,7 +3,7 @@ using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Weapons.Ranged.Events;
 
-namespace Content.Shared._RMC14.Attachable;
+namespace Content.Shared._RMC14.Attachable.Systems;
 
 public sealed class AttachableIFFSystem : EntitySystem
 {

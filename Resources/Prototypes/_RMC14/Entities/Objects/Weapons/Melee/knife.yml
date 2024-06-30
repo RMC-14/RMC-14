@@ -11,7 +11,7 @@
   - type: Tag
     tags:
     - Knife
-    - CMAttachmentBarrel
+    - RMCAttachmentBarrel
     - CMM5Bayonet
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Melee/m5_bayonet.rsi
@@ -37,7 +37,7 @@
     prefix: bayonet
   - type: AttachableWeaponMeleeMods
     modifiers:
-      bonusDamage:
+    - bonusDamage:
         types:
           Slash: 20
 
