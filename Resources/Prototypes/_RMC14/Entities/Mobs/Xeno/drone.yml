@@ -37,10 +37,14 @@
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
     - ActionXenoTransferPlasma
+    - ActionXenoDevolve
     hudOffset: 0,0.15
     tier: 1
     bypassTierCount: true
     unlockAt: 60 # 1 minute
+  - type: XenoDevolve
+    devolvesTo:
+    - CMXenoLarva
   - type: XenoAcid
   - type: XenoConstruction
     buildDelay: 2
@@ -54,10 +58,11 @@
   - type: XenoEvolution
     canEvolveWithoutGranter: true
     max: 300
-    evolvesTo: # TODO RMC14 Queen
+    evolvesTo:
 #    - CMXenoCarrier
 #    - CMXenoBurrower
     - CMXenoHivelord
+    evolvesToWithoutPoints:
     - CMXenoQueen
   - type: XenoPheromones
     pheromonesMultiplier: 2

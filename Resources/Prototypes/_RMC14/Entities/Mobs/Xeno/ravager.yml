@@ -29,9 +29,13 @@
     #    - ActionXenoCharge
     #    - ActionXenoEmpower
     #    - ActionXenoScissorCut
+    - ActionXenoDevolve
     tier: 3
     hudOffset: 0,0.1
     unlockAt: 900 # 15 minutes
+  - type: XenoDevolve
+    devolvesTo:
+    - CMXenoLurker
   - type: XenoDevour
   - type: XenoPlasma
     plasma: 300
