@@ -1714,11 +1714,18 @@
   changes:
   - message: Added Discord account linking.
     type: Add
-  - message: 'Added Patron perks: mention on the credits, OOC name color, named items, figurines,
-      lobby messages, and round end shoutout, depending on the tier.'
+  - message: 'Added Patron perks: mention on the credits, OOC name color, named items,
+      figurines, lobby messages, and round end shoutout, depending on the tier.'
     type: Add
   id: 207
   time: '2024-06-30T01:32:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2666
+- author: snebl
+  changes:
+  - message: Fixed damage modifiers not being applied on marine firearms.
+    type: Fix
+  id: 208
+  time: '2024-06-30T08:52:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2669
 Name: RMC14
 Order: -1
