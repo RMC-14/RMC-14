@@ -1,3 +1,4 @@
+using Content.Server._RMC14.LinkAccount;
 using Content.Server._RMC14.Mapping;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
@@ -70,6 +71,7 @@ namespace Content.Server.IoC
 
             // RMC14
             IoCManager.Register<MappingManager>();
+            IoCManager.Register<LinkAccountManager>();
         }
     }
 }

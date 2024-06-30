@@ -2159,7 +2159,7 @@ namespace Content.Shared.CCVar
          */
 
         public static readonly CVarDef<bool> GatewayGeneratorEnabled =
-            CVarDef.Create("gateway.generator_enabled", true);
+            CVarDef.Create("gateway.generator_enabled", false);
 
         // Clippy!
         public static readonly CVarDef<string> TippyEntity =
