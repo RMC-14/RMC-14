@@ -200,80 +200,80 @@
     # M54C
     - to: CMBoxMagazineRifleM54CEmpty
       steps:
-      - material: Cardboard
+      - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
     - to: CMBoxMagazineRifleM54CAPEmpty
       steps:
-      - material: Cardboard
+      - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
     - to: CMBoxMagazineRifleM54CExtEmpty
       steps:
-      - material: Cardboard
+      - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
 
     # M63
     - to: CMBoxMagazineSMGM63Empty
       steps:
-      - material: Cardboard
+      - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
     - to: CMBoxMagazineSMGM63APEmpty
       steps:
-      - material: Cardboard
+      - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
     - to: CMBoxMagazineSMGM63ExtEmpty
       steps:
-      - material: Cardboard
+      - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
 
     # M4SPR
     - to: CMBoxMagazineRifleM4SPREmpty
       steps:
-      - material: Cardboard
+      - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
 
     - to: CMBoxMagazineRifleM4SPRAPEmpty
       steps:
-      - material: Cardboard
+      - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
 
     - to: CMBoxMagazineRifleM4SPRExtEmpty
       steps:
-      - material: Cardboard
+      - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
 
     # M1984
     - to: CMBoxMagazinePistolM1984Empty
       steps:
-      - material: Cardboard
+      - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
 
 #    - to: CMBoxMagazinePistolM1984APEmpty
 #      steps:
-#      - material: Cardboard
+#      - material: RMCSheetCardboard
 #        amount: 1
 #        doAfter: 1
 
     # M77AP
     - to: CMBoxMagazinePistolM77APEmpty
       steps:
-      - material: Cardboard
+      - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
 
     # MK80
     - to: CMBoxMagazinePistolMK80Empty
       steps:
-      - material: Cardboard
+      - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
 
