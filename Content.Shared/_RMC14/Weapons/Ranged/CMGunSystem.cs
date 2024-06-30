@@ -140,6 +140,7 @@ public sealed class CMGunSystem : EntitySystem
 
     private void OnGunDamageModifierAmmoShot(Entity<GunDamageModifierComponent> ent, ref AmmoShotEvent args)
     {
+        RefreshGunDamageMultiplier((ent.Owner, ent.Comp));
         foreach (var projectile in args.FiredProjectiles)
         {
             if (!_projectileQuery.TryGetComponent(projectile, out var comp))
