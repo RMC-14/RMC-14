@@ -1,12 +1,15 @@
 ﻿using Content.Server._RMC14.LinkAccount;
+using Content.Server.Administration.Logs;
 using Content.Server.GameTicking;
 using Content.Shared._RMC14.NamedItems;
 using Content.Shared._RMC14.Vendors;
+using Content.Shared.Database;
 
 namespace Content.Server._RMC14.NamedItems;
 
 public sealed class RMCNamedItemSystem : EntitySystem
 {
+    [Dependency] private readonly IAdminLogManager _adminLogs = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
 
@@ -40,19 +43,19 @@ public sealed class RMCNamedItemSystem : EntitySystem
         switch (item.Item)
         {
             case RMCNamedItemType.PrimaryGun:
-                NameItem(args.Item, names.PrimaryGunName);
+                NameItem(ent, args.Item, names.PrimaryGunName);
                 ent.Comp.Names = names with { PrimaryGunName = null };
                 break;
             case RMCNamedItemType.Sidearm:
-                NameItem(args.Item, names.SidearmName);
+                NameItem(ent, args.Item, names.SidearmName);
                 ent.Comp.Names = names with { SidearmName = null };
                 break;
             case RMCNamedItemType.Helmet:
-                NameItem(args.Item, names.HelmetName);
+                NameItem(ent, args.Item, names.HelmetName);
                 ent.Comp.Names = names with { HelmetName = null };
                 break;
             case RMCNamedItemType.Armor:
-                NameItem(args.Item, names.ArmorName);
+                NameItem(ent, args.Item, names.ArmorName);
                 ent.Comp.Names = names with { ArmorName = null };
                 break;
             default:
@@ -61,13 +64,15 @@ public sealed class RMCNamedItemSystem : EntitySystem
         }
     }
 
-    private void NameItem(EntityUid item, string? name)
+    private void NameItem(EntityUid player, EntityUid item, string? name)
     {
         if (string.IsNullOrWhiteSpace(name))
             return;
 
         name = name.Trim();
         var metaData = MetaData(item);
-        _metaData.SetEntityName(item, $"'{name}' {metaData.EntityName}", metaData);
+        var newName = $"'{name}' {metaData.EntityName}";
+        _metaData.SetEntityName(item, newName, metaData);
+        _adminLogs.Add(LogType.RMCNamedItem, $"{ToPrettyString(player):player} named item {ToPrettyString(item):item} with name {newName}");
     }
 }
