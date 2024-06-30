@@ -67,6 +67,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly MapSystem _mapSystem = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly PlayTimeTrackingSystem _playTime = default!;
@@ -286,13 +287,16 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             // don't open shitcode inside
             spawnedDropships = true;
             var dropshipMap = _mapManager.CreateMap();
-            var dropshipPoints = EntityQueryEnumerator<DropshipDestinationComponent, MetaDataComponent>();
+            var dropshipPoints = EntityQueryEnumerator<DropshipDestinationComponent, MetaDataComponent, TransformComponent>();
             var ships = new[] { "/Maps/_RMC14/alamo.yml", "/Maps/_RMC14/normandy.yml" };
             var shipIndex = 0;
-            while (dropshipPoints.MoveNext(out var destinationId, out _, out var metaData))
+            while (dropshipPoints.MoveNext(out var destinationId, out _, out var metaData, out var destTransform))
             {
-                if (!metaData.EntityName.Contains("almayer", StringComparison.OrdinalIgnoreCase))
+                if (_mapSystem.TryGetMap(destTransform.MapID, out var destinationMapId) &&
+                    comp.XenoMap == destinationMapId)
+                {
                     continue;
+                }
 
                 _mapLoader.TryLoad(dropshipMap, ships[shipIndex], out var shipGrids);
                 shipIndex++;
