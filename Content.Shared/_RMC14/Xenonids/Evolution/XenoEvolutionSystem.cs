@@ -341,7 +341,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
             if (comp.Points < comp.Max || roundDuration < comp.AccumulatePointsBefore)
             {
-                if (comp.RequiresGranter && !hasGranter)
+                if (roundDuration > comp.EvolveWithoutOvipositorFor && comp.RequiresGranter && !hasGranter)
                     continue;
 
                 comp.Points = comp.Points + comp.PointsPerSecond;
