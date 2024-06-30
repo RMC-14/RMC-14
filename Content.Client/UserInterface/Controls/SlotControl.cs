@@ -56,9 +56,9 @@ namespace Content.Client.UserInterface.Controls
             }
         }
 
-        public bool Highlight { get => HighlightRect.Visible; set => HighlightRect.Visible = value; }
+        public bool Highlight { get => HighlightRect.Visible; set => HighlightRect.Visible = value;}
 
-        public bool Blocked { get => BlockedRect.Visible; set => BlockedRect.Visible = value; }
+        public bool Blocked { get => BlockedRect.Visible; set => BlockedRect.Visible = value;}
 
         private string? _blockedTexturePath;
         public string? BlockedTexturePath
