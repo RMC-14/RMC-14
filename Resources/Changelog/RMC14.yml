@@ -1743,5 +1743,17 @@
   id: 210
   time: '2024-06-30T11:25:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2671
+- author: DrSmugleaf
+  changes:
+  - message: Added the ability for xenonids to devolve.
+    type: Add
+  - message: Fixed xenos taking twice as long to evolve than intended.
+    type: Fix
+  - message: Fixed drones not being able to evolve to Queen without enough points.
+      Evolution points are now ignored when evolving from Drone to Queen.
+    type: Fix
+  id: 211
+  time: '2024-06-30T11:31:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2670
 Name: RMC14
 Order: -1
