@@ -327,6 +327,12 @@ namespace Content.Server.Database
 
         Task<(string? Marine, string? Xeno)> GetRandomShoutout();
 
+        Task<List<string>> GetExcludedRoleTimers(Guid player, CancellationToken cancel);
+
+        Task<bool> ExcludeRoleTimer(Guid player, string tracker);
+
+        Task<bool> RemoveRoleTimerExclusion(Guid player, string tracker);
+
         #endregion
     }
 
@@ -989,6 +995,24 @@ namespace Content.Server.Database
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetRandomShoutout());
+        }
+
+        public Task<List<string>> GetExcludedRoleTimers(Guid player, CancellationToken cancel)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetExcludedRoleTimers(player, cancel));
+        }
+
+        public Task<bool> ExcludeRoleTimer(Guid player, string tracker)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.ExcludeRoleTimer(player, tracker));
+        }
+
+        public Task<bool> RemoveRoleTimerExclusion(Guid player, string tracker)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.RemoveRoleTimerExclusion(player, tracker));
         }
 
         // Wrapper functions to run DB commands from the thread pool.
