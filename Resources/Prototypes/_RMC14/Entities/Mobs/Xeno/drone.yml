@@ -54,10 +54,11 @@
   - type: XenoEvolution
     canEvolveWithoutGranter: true
     max: 300
-    evolvesTo: # TODO RMC14 Queen
+    evolvesTo:
 #    - CMXenoCarrier
 #    - CMXenoBurrower
     - CMXenoHivelord
+    evolvesToWithoutPoints:
     - CMXenoQueen
   - type: XenoPheromones
     pheromonesMultiplier: 2

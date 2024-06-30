@@ -142,9 +142,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private bool CanEvolvePopup(Entity<XenoEvolutionComponent> xeno, EntProtoId newXeno)
+    private bool CanEvolvePopup(Entity<XenoEvolutionComponent> xeno, EntProtoId newXeno, bool doPopup = true)
     {
-        if (!xeno.Comp.EvolvesTo.Contains(newXeno))
+        if (!xeno.Comp.EvolvesTo.Contains(newXeno) && !xeno.Comp.EvolvesToWithoutPoints.Contains(newXeno))
             return false;
 
         if (!_prototypes.TryIndex(newXeno, out var prototype))
@@ -154,18 +154,25 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (prototype.TryGetComponent(out XenoEvolutionCappedComponent? capped, _compFactory) &&
             HasLiving<XenoEvolutionCappedComponent>(capped.Max, e => e.Comp.Id == capped.Id))
         {
-            _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-failed-already-have", ("prototype", prototype.Name)), xeno, xeno, PopupType.MediumCaution);
+            if (doPopup)
+                _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-failed-already-have", ("prototype", prototype.Name)), xeno, xeno, PopupType.MediumCaution);
+
             return false;
         }
 
         // TODO RMC14 only allow evolving towards Queen if none is alive
         if (!xeno.Comp.CanEvolveWithoutGranter && !HasLiving<XenoEvolutionGranterComponent>(1))
         {
-            _popup.PopupEntity(
-                Loc.GetString("cm-xeno-evolution-failed-hive-shaken"),
-                xeno,
-                xeno,
-                PopupType.MediumCaution);
+            if (doPopup)
+            {
+                _popup.PopupEntity(
+                    Loc.GetString("cm-xeno-evolution-failed-hive-shaken"),
+                    xeno,
+                    xeno,
+                    PopupType.MediumCaution
+                );
+            }
+
             return false;
         }
 
@@ -173,11 +180,16 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (newXenoComp != null &&
             newXenoComp.UnlockAt > _gameTicker.RoundDuration())
         {
-            _popup.PopupEntity(
-                Loc.GetString("cm-xeno-evolution-failed-cannot-support"),
-                xeno,
-                xeno,
-                PopupType.MediumCaution);
+            if (doPopup)
+            {
+                _popup.PopupEntity(
+                    Loc.GetString("cm-xeno-evolution-failed-cannot-support"),
+                    xeno,
+                    xeno,
+                    PopupType.MediumCaution
+                );
+            }
+
             return false;
         }
 
@@ -205,16 +217,35 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
             if (total != 0 && existing / (float) total >= value)
             {
-                _popup.PopupEntity(
-                    Loc.GetString("cm-xeno-evolution-failed-hive-full", ("tier", newXenoComp.Tier)),
-                    xeno,
-                    xeno,
-                    PopupType.MediumCaution);
+                if (doPopup)
+                {
+                    _popup.PopupEntity(
+                        Loc.GetString("cm-xeno-evolution-failed-hive-full", ("tier", newXenoComp.Tier)),
+                        xeno,
+                        xeno,
+                        PopupType.MediumCaution
+                    );
+                }
+
                 return false;
             }
         }
 
         return true;
+    }
+
+    private bool CanEvolveAny(Entity<XenoEvolutionComponent> xeno)
+    {
+        if (xeno.Comp.Points >= xeno.Comp.Max && xeno.Comp.EvolvesTo.Count > 0)
+            return true;
+
+        foreach (var evolution in xeno.Comp.EvolvesToWithoutPoints)
+        {
+            if (CanEvolvePopup(xeno, evolution, false))
+                return true;
+        }
+
+        return false;
     }
 
     // TODO RMC14 make this a property of the hive component
@@ -331,7 +362,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             comp.LastPointsAt = time;
             Dirty(uid, comp);
 
-            if (comp.Points >= comp.Max && comp.Action == null)
+            if (comp.Action == null && CanEvolveAny((uid, comp)))
             {
                 _action.AddAction(uid, ref comp.Action, comp.ActionId);
                 _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-ready"), uid, uid, PopupType.Large);
@@ -344,11 +375,11 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 if (roundDuration > comp.EvolveWithoutOvipositorFor && comp.RequiresGranter && !hasGranter)
                     continue;
 
-                comp.Points = comp.Points + comp.PointsPerSecond;
+                SetPoints((uid, comp), comp.Points + comp.PointsPerSecond);
             }
             else if (comp.Points > comp.Max)
             {
-                comp.Points = FixedPoint2.Max(comp.Points - comp.PointsPerSecond, comp.Max);
+                SetPoints((uid, comp), FixedPoint2.Max(comp.Points - comp.PointsPerSecond, comp.Max));
             }
         }
     }
