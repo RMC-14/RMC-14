@@ -43,13 +43,7 @@
   - type: Damageable
     damageContainer: Xeno
   - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTypeTrigger
-        damageType: Blunt
-        damage: 400
-      behaviors:
-      - !type:GibBehavior { }
+    thresholds: []
   - type: MobState
     allowedStates:
     - Alive
