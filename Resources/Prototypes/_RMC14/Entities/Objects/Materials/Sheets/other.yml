@@ -83,7 +83,7 @@
   parent: SheetOtherBase
   id: RMCSheetCardboard
   name: cardboard
-  suffix: Full
+  suffix: Full, RMC
   components:
   - type: Material
   - type: PhysicalComposition
@@ -107,7 +107,7 @@
 - type: entity
   parent: RMCSheetCardboard
   id: RMCSheetCardboard25
-  suffix: 25
+  suffix: 25, RMC
   components:
   - type: Stack
     stackType: RMCSheetCardboard
@@ -116,7 +116,7 @@
 - type: entity
   parent: RMCSheetCardboard
   id: RMCSheetCardboard1
-  suffix: Single
+  suffix: Single, RMC
   components:
   - type: Stack
     stackType: RMCSheetCardboard
