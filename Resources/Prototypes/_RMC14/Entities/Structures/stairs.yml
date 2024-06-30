@@ -1,0 +1,124 @@
+- type: entity
+  id: RMCStairs
+  name: stairs
+  description: The greatest invention since rocket-propelled grenades.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Clickable
+  - type: Sprite
+    sprite: _RMC14/Structures/stairs.rsi
+    state: p_stair_full
+    drawdepth: FloorTiles
+  - type: Transform
+    anchored: true
+
+- type: entity
+  id: RMCStairsCorner
+  parent: RMCStairs
+  suffix: Corner
+  components:
+  - type: Sprite
+    state: p_stair_full_corner
+
+- type: entity
+  id: RMCStairsLeft
+  parent: RMCStairs
+  suffix: Left
+  components:
+  - type: Sprite
+    state: p_stair_left_cap
+
+- type: entity
+  id: RMCStairsRight
+  parent: RMCStairs
+  suffix: Right
+  components:
+  - type: Sprite
+    state: p_stair_right_cap
+
+- type: entity
+  id: RMCStairsSolo
+  parent: RMCStairs
+  suffix: Solo
+  components:
+  - type: Sprite
+    state: p_stair_solo_cap
+
+- type: entity
+  id: RMCStairsKutjevo
+  parent: RMCStairs
+  components:
+  - type: Sprite
+    state: p_stair_kutjevo_full
+
+- type: entity
+  id: RMCStairsKutjevoCorner
+  parent: RMCStairs
+  suffix: Corner
+  components:
+  - type: Sprite
+    state: p_stair_kutjevo_full_corner
+
+- type: entity
+  id: RMCStairsKutjevoLeft
+  parent: RMCStairs
+  suffix: Left
+  components:
+  - type: Sprite
+    state: p_stair_kutjevo_left_cap
+
+- type: entity
+  id: RMCStairsKutjevoRight
+  parent: RMCStairs
+  suffix: Right
+  components:
+  - type: Sprite
+    state: p_stair_kutjevo_right_cap
+
+- type: entity
+  id: RMCStairsKutjevoSolo
+  parent: RMCStairs
+  suffix: Solo
+  components:
+  - type: Sprite
+    state: p_stair_kutjevo_solo_cap
+
+- type: entity
+  id: RMCStairsIce
+  parent: RMCStairs
+  components:
+  - type: Sprite
+    state: p_stair_ice_full
+
+- type: entity
+  id: RMCStairsIceCorner
+  parent: RMCStairs
+  suffix: Corner
+  components:
+  - type: Sprite
+    state: p_stair_ice_full_corner
+
+- type: entity
+  id: RMCStairsIceLeft
+  parent: RMCStairs
+  suffix: Left
+  components:
+  - type: Sprite
+    state: p_stair_ice_left_cap
+
+- type: entity
+  id: RMCStairsIceRight
+  parent: RMCStairs
+  suffix: Right
+  components:
+  - type: Sprite
+    state: p_stair_ice_right_cap
+
+- type: entity
+  id: RMCStairsIceSolo
+  parent: RMCStairs
+  suffix: Solo
+  components:
+  - type: Sprite
+    state: p_stair_ice_solo_cap

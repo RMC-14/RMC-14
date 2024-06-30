@@ -96,5 +96,18 @@ public enum LogType
     ChatRateLimited = 87,
     AtmosTemperatureChanged = 88,
     DeviceNetwork = 89,
-    StoreRefund = 90
+    StoreRefund = 90,
+
+    /// <summary>
+    /// User was rate-limited for some spam action.
+    /// </summary>
+    /// <remarks>
+    /// This is a default value used by <c>PlayerRateLimitManager</c>, though users can use different log types.
+    /// </remarks>
+    RateLimited = 91,
+
+    RMCMarineAnnounce = 10000,
+    RMCXenoAnnounce = RMCMarineAnnounce + 1,
+    RMCNamedItem = RMCMarineAnnounce + 2,
+    RMCRequisitionsBuy = RMCMarineAnnounce + 3,
 }

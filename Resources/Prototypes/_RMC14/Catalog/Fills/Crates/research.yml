@@ -1,0 +1,19 @@
+# RESEARCH
+# code/datums/supply_packs/research.dm
+
+# /datum/supply_packs/assembly
+# /datum/supply_packs/pyrotec
+# /datum/supply_packs/phoron
+- type: entity
+  id: RMCCrateResearchPhoron
+  parent: RMCCrateSecurePhoron
+  name: phoron crate (x30)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetPhoron30
+
+# /datum/supply_packs/plastic
+# /datum/supply_packs/precious_metals
+# /datum/supply_packs/exp_production
+# /datum/supply_packs/xeno_tags

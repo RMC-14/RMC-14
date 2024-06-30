@@ -36,7 +36,6 @@
       powerLoader: 1
       vehicles: 1
     - type: MarineOrders
-  hidden: true # TODO RMC14
 
 - type: startingGear
   id: CMGearStaffOfficer

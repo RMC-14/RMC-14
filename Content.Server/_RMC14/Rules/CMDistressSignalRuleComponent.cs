@@ -3,6 +3,7 @@ using Content.Shared.Roles;
 using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server._RMC14.Rules;
 
@@ -10,9 +11,6 @@ namespace Content.Server._RMC14.Rules;
 [Access(typeof(CMDistressSignalRuleSystem))]
 public sealed partial class CMDistressSignalRuleComponent : Component
 {
-    [DataField]
-    public int PlayersPerXeno = 4;
-
     [DataField]
     public List<EntProtoId> SquadIds = ["SquadAlpha", "SquadBravo", "SquadCharlie", "SquadDelta"];
 
@@ -58,6 +56,12 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     [DataField]
     public DistressSignalRuleResult Result;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan? NextCheck;
+
+    [DataField]
+    public TimeSpan CheckEvery = TimeSpan.FromSeconds(5);
 
     // TODO RMC14
     // [DataField]

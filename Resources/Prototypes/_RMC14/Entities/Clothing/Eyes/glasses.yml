@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: ClothingEyesBase
   id: CMGlassesSecurity
   name: security HUD-glasses
@@ -36,3 +36,16 @@
         nightVisionItemLayer:
           True: { state: icon_on }
           False: { state: icon }
+
+- type: entity
+  parent: ClothingEyesHudMedical
+  id: RMCGlassesMedicalHUDGlasses
+  name: medical HUD glasses
+  description: A heads-up display that scans the humanoids in view and provides accurate data about their health status.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
+
+    

@@ -23,13 +23,13 @@
         amount: 2
 
 - type: entity
-  id: CMCrateVP78
+  id: CMCrateMK80
   parent: CMCrateWeapons
-  name: VP-78 Hand Cannon Crate (x2)
+  name: MK80 Hand Cannon Crate (x2)
   components:
   - type: StorageFill
     contents: # TODO RMC14 two cases with 1 pìstol 2 mags each
-    - id: CMWeaponPistolVP78
+    - id: CMWeaponPistolMK80
       amount: 2
-    - id: CMMagazinePistolVP78
+    - id: CMMagazinePistolMK80
       amount: 4
