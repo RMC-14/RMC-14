@@ -5,6 +5,7 @@
   description: This can be used for various important functions.
   components:
   - type: Sprite
+    drawdepth: SmallObjects
     sprite: _RMC14/Structures/Machines/rmc_groundside_communications_console.rsi
     state: on
     layers: [ ]
