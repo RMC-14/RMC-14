@@ -9,6 +9,7 @@ command-description-evolutionpoints-max = Maxes out the evolution points of a xe
 
 command-description-excluderoletimer-add = Exclude a player from the playtime requirements for a specific role.
 command-description-excluderoletimer-get = See all roles for which a player is manually excluded from the regular playtime requirements for.
+command-description-excluderoletimer-remove = Removes a player's exclusion for playtime requirements for a specific role.
 
 command-description-hive-alldefault = Sets the hive of a xeno or group of xenos.
 
