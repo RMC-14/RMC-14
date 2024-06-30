@@ -1780,6 +1780,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 .Include(p => p.Patron)
                 .ThenInclude(p => p.Player)
                 .Where(p => p.Patron.Tier.LobbyMessage)
+                .Where(p => !string.IsNullOrWhiteSpace(p.Message))
                 .Select(p => new { p.Message, p.Patron.Player.LastSeenUserName })
                 .ToListAsync();
 
@@ -1797,12 +1798,14 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             var marineNames = await db.DbContext.RMCPatronRoundEndMarineShoutouts
                 .Include(p => p.Patron)
                 .Where(p => p.Patron.Tier.LobbyMessage)
+                .Where(p => !string.IsNullOrWhiteSpace(p.Name))
                 .Select(p => p.Name)
                 .ToListAsync();
 
             var xenoNames = await db.DbContext.RMCPatronRoundEndXenoShoutouts
                 .Include(p => p.Patron)
                 .Where(p => p.Patron.Tier.LobbyMessage)
+                .Where(p => !string.IsNullOrWhiteSpace(p.Name))
                 .Select(p => p.Name)
                 .ToListAsync();
 
