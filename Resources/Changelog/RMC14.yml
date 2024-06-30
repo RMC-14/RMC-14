@@ -1727,5 +1727,14 @@
   id: 208
   time: '2024-06-30T08:52:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2669
+- author: Zarq0
+  changes:
+  - message: Added a new requisition tab, Research.
+    type: Add
+  - message: Made phoron obtainable through requisitions.
+    type: Tweak
+  id: 209
+  time: '2024-06-30T09:35:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2663
 Name: RMC14
 Order: -1
