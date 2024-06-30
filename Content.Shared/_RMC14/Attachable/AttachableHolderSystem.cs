@@ -63,6 +63,8 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, HandDeselectedEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, MeleeHitEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GetWieldableSpeedModifiersEvent>(RelayEvent);
+        SubscribeLocalEvent<AttachableHolderComponent, ContainerGettingInsertedAttemptEvent>(RelayEvent);
+        SubscribeLocalEvent<AttachableHolderComponent, ContainerGettingRemovedAttemptEvent>(RelayEvent);
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.CMActivateAttachableBarrel,
