@@ -44,7 +44,7 @@ public sealed class LinkAccountManager : IPostInjectInit
 
     public bool CanViewPatronPerks()
     {
-        return Tier is { } tier && (tier.LobbyMessage || tier.RoundEndShoutout);
+        return Tier is { } tier && (tier.NamedItems || tier.Figurines || tier.LobbyMessage || tier.RoundEndShoutout);
     }
 
     void IPostInjectInit.PostInject()

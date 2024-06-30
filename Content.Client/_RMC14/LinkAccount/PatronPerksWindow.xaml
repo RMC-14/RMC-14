@@ -2,29 +2,36 @@
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.LinkAccount"
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
-    Title="{Loc 'rmc-ui-patron-perks'}">
-    <BoxContainer Orientation="Vertical">
-        <BoxContainer Name="LobbyMessageContainer" Access="Public" Orientation="Vertical">
-            <Label Text="{Loc 'rmc-ui-lobby-message'}" />
+    Title="{Loc 'rmc-ui-patron-perks'}"
+    MinSize="625 475">
+    <TabContainer>
+        <BoxContainer Name="LobbyMessageTab" Access="Public" Orientation="Vertical" Margin="5">
             <Label Text="{Loc 'rmc-ui-lobby-message-description'}" />
-            <LineEdit Name="LobbyMessage" Access="Public" />
+            <LineEdit Name="LobbyMessage" Access="Public" Margin="0 10 0 0" />
         </BoxContainer>
-        <cc:HSeparator Margin="0 15" />
-        <BoxContainer Name="MarineShoutoutContainer" Access="Public" Orientation="Vertical">
-            <Label Text="{Loc 'rmc-ui-shoutout-marine-title'}" />
-            <Label Text="{Loc 'rmc-ui-shoutout-marine-description'}" />
-            <RichTextLabel Name="MarineShoutoutExample" Access="Public" />
-            <LineEdit Name="MarineShoutout" Access="Public" />
+        <BoxContainer Name="ShoutoutTab" Access="Public" Orientation="Vertical" Visible="False"
+                      Margin="5">
+            <BoxContainer Access="Public" Orientation="Vertical">
+                <Label Text="{Loc 'rmc-ui-shoutout-marine-title'}" />
+                <Label Text="{Loc 'rmc-ui-shoutout-marine-description'}" />
+                <RichTextLabel Name="MarineShoutoutExample" Access="Public" />
+                <LineEdit Name="MarineShoutout" Access="Public" Margin="0 10 0 0" />
+            </BoxContainer>
+            <cc:HSeparator Margin="0 15" />
+            <BoxContainer Access="Public" Orientation="Vertical">
+                <Label Text="{Loc 'rmc-ui-shoutout-xeno-title'}" />
+                <Label Text="{Loc 'rmc-ui-shoutout-xeno-description'}" />
+                <RichTextLabel Name="XenoShoutoutExample" Access="Public" />
+                <LineEdit Name="XenoShoutout" Access="Public"  Margin="0 10 0 0"/>
+            </BoxContainer>
+            <cc:HSeparator Margin="0 15" />
+            <Label Text="{Loc 'rmc-ui-shoutout-info'}" />
         </BoxContainer>
-        <cc:HSeparator Margin="0 15" />
-        <BoxContainer Name="XenoShoutoutContainer" Access="Public" Orientation="Vertical">
-            <Label Text="{Loc 'rmc-ui-shoutout-xeno-title'}" />
-            <Label Text="{Loc 'rmc-ui-shoutout-xeno-description'}" />
-            <RichTextLabel Name="XenoShoutoutExample" Access="Public" />
-            <LineEdit Name="XenoShoutout" Access="Public" />
+        <BoxContainer Name="NamedItemsReferenceTab" Access="Public" Orientation="Vertical" Margin="5">
+            <Label Text="{Loc 'rmc-ui-named-items-in-preferences'}" />
         </BoxContainer>
-        <cc:HSeparator Margin="0 15" />
-        <Label Name="NamedItemsReference" Access="Public"
-               Text="{Loc 'rmc-ui-named-items-in-preferences'}" Visible="False" />
-    </BoxContainer>
+        <BoxContainer Name="FigurineReferenceTab" Access="Public" Orientation="Vertical" Margin="5">
+            <Label Text="{Loc 'rmc-ui-figurine-in-preferences'}" />
+        </BoxContainer>
+    </TabContainer>
 </controls:PatronPerksWindow>

@@ -4,7 +4,13 @@
     Title="{Loc 'rmc-ui-link-discord-account'}">
     <BoxContainer Orientation="Vertical">
         <RichTextLabel Name="Label" Access="Public" Margin="0 0 0 5" />
-        <Button Name="Button" Access="Public" Text="{Loc 'rmc-ui-link-discord-account-copy'}"
-                StyleClasses="OpenBoth" />
+        <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center"
+                      HorizontalExpand="True">
+            <Button Name="CopyButton" Access="Public" StyleClasses="OpenRight"
+                    Text="{Loc 'rmc-ui-link-discord-account-copy'}" HorizontalExpand="True" />
+            <Button Name="LinkButton" Access="Public" StyleClasses="OpenLeft"
+                    Text="{Loc 'rmc-ui-link-discord-account-open-channel'}"
+                    HorizontalExpand="True" />
+        </BoxContainer>
     </BoxContainer>
 </linkAccount:LinkAccountWindow>
