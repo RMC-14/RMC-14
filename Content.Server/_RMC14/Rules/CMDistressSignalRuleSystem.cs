@@ -249,8 +249,19 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 var list = xenoCandidates[i];
                 while (list.Count > 0 && selected < totalXenos)
                 {
-                    if (SpawnXeno(list, comp.LarvaEnt) != null)
+                    if (queenSelected == null)
+                    {
+                        queenSelected = SpawnXeno(list, comp.QueenEnt);
+                        if (queenSelected != null)
+                        {
+                            totalXenos--;
+                            selected++;
+                        }
+                    }
+                    else if (SpawnXeno(list, comp.LarvaEnt) != null)
+                    {
                         selected++;
+                    }
                 }
             }
 

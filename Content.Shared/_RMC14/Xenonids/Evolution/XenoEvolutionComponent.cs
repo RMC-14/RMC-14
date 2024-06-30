@@ -18,6 +18,9 @@ public sealed partial class XenoEvolutionComponent : Component
     public bool CanEvolveWithoutGranter;
 
     [DataField, AutoNetworkedField]
+    public TimeSpan EvolveWithoutOvipositorFor = TimeSpan.FromMinutes(5);
+
+    [DataField, AutoNetworkedField]
     public List<EntProtoId> EvolvesTo = new();
 
     [DataField, AutoNetworkedField]
