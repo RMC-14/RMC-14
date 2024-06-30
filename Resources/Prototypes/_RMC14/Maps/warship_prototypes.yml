@@ -1,0 +1,18 @@
+﻿- type: entity
+  id: StandardUNMCWarship
+  parent:
+  - BaseStation
+  - BaseStationNews
+  - BaseStationCargo
+  - BaseStationJobsSpawning
+  - BaseStationRecords
+  - BaseStationShuttles
+  - BaseStationCentcomm
+  - BaseStationEvacuation
+  - BaseStationAlertLevels
+  - BaseStationSiliconLawCrewsimov
+  - BaseStationAllEventsEligible
+  - BaseStationNanotrasen
+  noSpawn: true
+  components:
+  - type: Transform
