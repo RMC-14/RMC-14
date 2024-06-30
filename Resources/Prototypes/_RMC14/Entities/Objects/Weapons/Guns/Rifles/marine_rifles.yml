@@ -24,10 +24,12 @@
     steps: 1
     zeroVisible: true
   - type: Appearance
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
 
 - type: entity
   parent: CMBaseWeaponRifle
-  name: M54C pulse rifle MK2
+  name: M54C assault rifle MK2
   id: WeaponRifleM54C
   description: The standard issue rifle of the Marines. Commonly carried by most combat personnel. Uses 10x24mm caseless ammunition.
   components:
@@ -40,6 +42,15 @@
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c.rsi
+#  - type: ContainerFill
+#    containers:
+#      cm-aslot-barrel:
+#      - CMAttachmentExtendedBarrel
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+      cm-aslot-barrel: !type:ContainerSlot
   - type: Gun
     minAngle: 30
     maxAngle: 60
@@ -75,23 +86,26 @@
   - type: AttachableHolder
     slots:
       cm-aslot-barrel:
-        tags:
-        - CMAttachableExtendedBarrel
-        - CMAttachableSuppressor
+        whitelist:
+          tags:
+          - CMAttachmentExtendedBarrel
+          - CMAttachmentSuppressor
       cm-aslot-rail:
-        tags:
-        - CMAttachableFlashlight
+        whitelist:
+          tags:
+          - CMAttachmentFlashlight
       cm-aslot-underbarrel:
-        tags:
-        - CMAttachmentU7UnderbarrelShotgun
+        whitelist:
+          tags:
+          - CMAttachmentU7UnderbarrelShotgun
   - type: AttachableHolderVisuals
     offsets:
-      cm-aslot-barrel: 0.53, 0.06
-      cm-aslot-rail: -0.1, 0.23
-      cm-aslot-underbarrel: 0.0, 0.0
+      cm-aslot-barrel: 0.5, 0.03
+      cm-aslot-rail: 0.0, 0.20
+      cm-aslot-underbarrel: 0.19, -0.14
 
 - type: entity
-  name: M54CE2 heavy pulse rifle
+  name: M54CE2 heavy assault rifle
   parent: WeaponRifleM54C
   id: WeaponRifleM54CE2
   description: A large squad support weapon capable of laying down sustained suppressing fire from a mounted position. While unstable and less accurate, it can be lugged and shot with two hands.
@@ -130,22 +144,22 @@
 
 - type: entity
   parent: CMBaseWeaponRifle
-  name: M4RA battle rifle
-  id: WeaponRifleM4RA
-  description: The M4RA battle rifle is a designated marksman rifle in service with the Marine. Sporting a bullpup configuration, the M4RA battle rifle is perfect for reconnaissance and fire support teams.
+  name: M4SPR battle rifle
+  id: WeaponRifleM4SPR
+  description: The M4SPR battle rifle is a designated marksman rifle in service with the Marine. Sporting a bullpup configuration, the M4SPR battle rifle is perfect for reconnaissance and fire support teams.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4ra.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
-      state: d_m4ra_barrel
+      state: d_m4spr_barrel
       offset: 0.65, 0
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4ra.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr.rsi
   - type: Gun
     minAngle: 20
     maxAngle: 70
@@ -156,7 +170,7 @@
     availableModes:
     - SemiAuto
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m4ra.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m4spr.ogg
   - type: GunWieldBonus
     minAngle: -20
     maxAngle: -50
@@ -171,21 +185,23 @@
         priority: 2
         whitelist:
           tags:
-          - CMMagazineRifleM4RA
-          - CMMagazineRifleM4RAAP
-          - CMMagazineRifleM4RAExt
+          - CMMagazineRifleM4SPR
+          - CMMagazineRifleM4SPRAP
+          - CMMagazineRifleM4SPRExt
   - type: GunDamageModifier
     multiplier: 1.4
   - type: AttachableHolder
     slots:
       cm-aslot-barrel:
-        tags:
-        - CMAttachableExtendedBarrel
-        - CMAttachableSuppressor
+        whitelist:
+          tags:
+          - CMAttachmentExtendedBarrel
+          - CMAttachmentSuppressor
       cm-aslot-rail:
-        tags:
-        - CMAttachableFlashlight
-        - CMAttachableSmartScope
+        whitelist:
+          tags:
+          - CMAttachmentFlashlight
+          - CMAttachmentB8SmartScope
   - type: AttachableHolderVisuals
     offsets:
       cm-aslot-barrel: 0.9, 0.03

@@ -27,12 +27,17 @@
     - ActionXenoWatch
     - ActionXenoTailStab
     - ActionXenoAcidNormal
-    #    - ActionXenoSpit
-    #    - ActionXenoChargeSpit
+    - ActionXenoSpit
+    - ActionXenoChargeSpit
+    - ActionXenoScatteredSpit # TODO RMC14 replace this with spray acid
     #    - ActionXenoSprayAcid
+    - ActionXenoDevolve
     tier: 2
     hudOffset: 0,0.16
     unlockAt: 540 # 9 minutes
+  - type: XenoDevolve
+    devolvesTo:
+    - CMXenoSentinel
   - type: XenoAcid
   - type: XenoDevour
   - type: XenoPlasma
@@ -44,6 +49,12 @@
 #    evolvesTo:
 #    - CMXenoPraetorian
 #    - CMXenoBoiler
+  - type: XenoSpit
+  - type: XenoChargeSpit
+    damage:
+      groups:
+        Burn: 25 # TODO RMC14 damage over time
+  - type: XenoScatteredSpit
   - type: CMArmor
     armor: 15
     explosionArmor: 20

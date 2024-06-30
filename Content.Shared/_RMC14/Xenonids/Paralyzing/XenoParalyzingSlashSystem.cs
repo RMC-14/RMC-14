@@ -82,7 +82,7 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
 
                 RemCompDeferred<XenoActiveParalyzingSlashComponent>(uid);
 
-                _popup.PopupEntity(Loc.GetString("cm-xeno-paralyzing-slash-expire"), uid, uid);
+                _popup.PopupEntity(Loc.GetString("cm-xeno-paralyzing-slash-expire"), uid, uid, PopupType.SmallCaution);
             }
         }
 

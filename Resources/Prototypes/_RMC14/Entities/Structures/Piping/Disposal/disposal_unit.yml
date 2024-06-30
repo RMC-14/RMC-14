@@ -21,3 +21,6 @@
       map: [ "enum.DisposalUnitVisualLayers.OverlayFull" ]
     - state: dispover-handle
       map: [ "enum.DisposalUnitVisualLayers.OverlayEngaged" ]
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false

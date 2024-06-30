@@ -32,6 +32,9 @@
   - type: Airlock
     openingSpriteState: open_unlit
     closingSpriteState: closed_unlit
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
 
 - type: entity
   parent: BaseSecureWindoor
@@ -67,3 +70,6 @@
   - type: Airlock
     openingSpriteState: open_unlit
     closingSpriteState: closed_unlit
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false

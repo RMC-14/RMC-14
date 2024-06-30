@@ -11,19 +11,16 @@ public sealed class CMBuckleSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<BuckleClimbableComponent, BuckleChangeEvent>(OnBuckleClimbableBuckleChange);
+        SubscribeLocalEvent<BuckleClimbableComponent, StrappedEvent>(OnBuckleClimbableStrapped);
 
         SubscribeLocalEvent<ActiveBuckleClimbingComponent, PreventCollideEvent>(OnBuckleClimbablePreventCollide);
     }
 
-    private void OnBuckleClimbableBuckleChange(Entity<BuckleClimbableComponent> ent, ref BuckleChangeEvent args)
+    private void OnBuckleClimbableStrapped(Entity<BuckleClimbableComponent> ent, ref StrappedEvent args)
     {
-        if (args.StrapEntity != ent.Owner)
-            return;
-
-        var active = EnsureComp<ActiveBuckleClimbingComponent>(args.BuckledEntity);
+        var active = EnsureComp<ActiveBuckleClimbingComponent>(args.Buckle);
         active.Strap = ent;
-        Dirty(args.BuckledEntity, active);
+        Dirty(args.Buckle, active);
     }
 
     private void OnBuckleClimbablePreventCollide(Entity<ActiveBuckleClimbingComponent> ent, ref PreventCollideEvent args)

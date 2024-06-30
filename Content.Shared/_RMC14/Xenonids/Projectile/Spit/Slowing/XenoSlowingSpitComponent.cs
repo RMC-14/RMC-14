@@ -13,7 +13,7 @@ public sealed partial class XenoSlowingSpitComponent : Component
     public FixedPoint2 PlasmaCost = 20;
 
     [DataField, AutoNetworkedField]
-    public float Speed = 10;
+    public float Speed = 30;
 
     [DataField, AutoNetworkedField]
     public EntProtoId ProjectileId = "XenoSlowingSpitProjectile";

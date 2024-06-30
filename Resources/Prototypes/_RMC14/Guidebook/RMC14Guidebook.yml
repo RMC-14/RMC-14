@@ -9,14 +9,14 @@
   name: cm-guide-entry-rmc
   text: "/ServerInfo/Guidebook/_RMC14/RMC14.xml"
   children:
-  - CMGuideNewPlayer
-  - CMChemicals
+  - RMCGuideNewPlayer
+  - RMCMedical
 
 - type: guideEntry
   parent: RMC
-  id: CMGuideNewPlayer
+  id: RMCGuideNewPlayer
   name: "New Player Guide"
-  text: "/ServerInfo/Guidebook/_RMC14/CMGuideNewPlayer.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/RMCGuideNewPlayer.xml"
   children:
   - CMGuideRoleRifleman
   - CMGuideRoleDrone
@@ -35,3 +35,11 @@
   name: "Drone Guide"
   text: "/ServerInfo/Guidebook/_RMC14/NewPlayerGuide/CMGuideRoleDrone.xml"
 
+- type: guideEntry
+  parent: RMC
+  id: RMCMedical
+  priority: 2
+  name: "Medical"
+  text: "/ServerInfo/Guidebook/_RMC14/Medical/RMCMedical.xml"
+  children:
+  - CMChemicals

@@ -4,8 +4,8 @@
   description: cm-department-Other-description
   color: "#595959"
   roles:
-#  - CMSynthetic # TODO RMC14
-#  - CMWorkingJoe # TODO RMC14
+#  - CMSilicon # TODO RMC14
+#  - CMAndroid # TODO RMC14
   - CMSeniorEnlistedAdvisor
   - CMLiaison
   - CMCorrespondent

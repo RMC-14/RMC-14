@@ -3,15 +3,8 @@
   parent: SheetOtherBase
   id: CMSheetPhoron
   name: phoron
-  suffix: "Full"
+  suffix: Full
   components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Materials/Sheets/phoron.rsi
-    state: phoron
-  - type: Item
-    size: Normal
-    sprite: _RMC14/Objects/Materials/Sheets/phoron.rsi
-    heldPrefix: phoron
   - type: Material
   - type: PhysicalComposition
     materialComposition:
@@ -19,7 +12,22 @@
   - type: Stack
     stackType: CMPhoron
     count: 50
+  - type: Sprite
+    state: phoron
+    sprite: _RMC14/Objects/Materials/Sheets/phoron.rsi
+  - type: Item
+    heldPrefix: phoron
+    size: Normal
+    sprite: _RMC14/Objects/Materials/Sheets/phoron.rsi
   - type: Appearance
+  - type: Extractable
+    grindableSolutionName: phoron
+  - type: SolutionContainerManager
+    solutions:
+      phoron:
+        reagents:
+        - ReagentId: RMCPhoron
+          Quantity: 10
   - type: Tag
     tags:
     - Sheet
@@ -27,15 +35,23 @@
 - type: entity
   parent: CMSheetPhoron
   id: CMSheetPhoron25
-  suffix: "25"
+  suffix: 25
   components:
   - type: Stack
     count: 25
 
 - type: entity
   parent: CMSheetPhoron
+  id: CMSheetPhoron30
+  suffix: "30"
+  components:
+  - type: Stack
+    count: 30
+
+- type: entity
+  parent: CMSheetPhoron
   id: CMSheetPhoron1
-  suffix: "1"
+  suffix: Single
   components:
   - type: Stack
     count: 1

@@ -1,0 +1,57 @@
+- type: entity
+  parent: Bookshelf
+  id: RMCBookcase
+  name: bookcase
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/bookshelf.rsi
+    snapCardinals: true
+    layers:
+      - state: book-0
+      - map: ["enum.StorageFillLayers.Fill"]
+  - type: Appearance
+  - type: StorageFillVisualizer
+    maxFillLevels: 5
+    fillBaseName: book
+  - type: Damageable
+    damageModifierSet: Metallic
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Storage
+    grid:
+    - 0,0,15,1
+
+- type: entity
+  parent: RMCBookcase
+  id: RMCBookcaseMedical
+  name: medical manuals bookcase
+#  components:
+#  - type: StorageFill
+#    contents:
+#    /obj/item/book/manual/medical_diagnostics_manual x3
+
+- type: entity
+  parent: RMCBookcase
+  id: RMCBookcaseEngineering
+  name: engineering manuals bookcase
+#  components:
+#  - type: StorageFill
+#    contents:
+#    /obj/item/book/manual/engineering_construction
+#    /obj/item/book/manual/engineering_hacking
+#    /obj/item/book/manual/engineering_guide

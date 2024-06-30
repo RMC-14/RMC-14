@@ -45,6 +45,8 @@
   components:
   - type: Foldable
     folded: true
+  - type: Strap
+    enabled: false
 
 - type: entity
   parent: CMRollerBed
@@ -71,5 +73,7 @@
   components:
   - type: Foldable
     folded: true
+  - type: Strap
+    enabled: false
 
 # TODO RMC14 medevac stretcher

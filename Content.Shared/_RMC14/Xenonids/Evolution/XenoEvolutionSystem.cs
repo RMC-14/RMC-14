@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Xenonids.Hive;
+﻿using System.Linq;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Actions;
 using Content.Shared.Climbing.Components;
 using Content.Shared.Climbing.Systems;
@@ -47,19 +48,42 @@ public sealed class XenoEvolutionSystem : EntitySystem
     {
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
 
+        SubscribeLocalEvent<XenoDevolveComponent, XenoOpenDevolveActionEvent>(OnXenoOpenDevolveAction);
+
         SubscribeLocalEvent<XenoEvolutionComponent, XenoOpenEvolutionsActionEvent>(OnXenoEvolveAction);
         SubscribeLocalEvent<XenoEvolutionComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
+        SubscribeLocalEvent<XenoEvolutionComponent, NewXenoEvolvedEvent>(OnXenoEvolutionNewEvolved);
+        SubscribeLocalEvent<XenoEvolutionComponent, XenoDevolvedEvent>(OnXenoEvolutionDevolved);
 
         SubscribeLocalEvent<XenoNewlyEvolvedComponent, PreventCollideEvent>(OnNewlyEvolvedPreventCollide);
 
-        Subs.BuiEvents<XenoEvolutionComponent>(XenoEvolutionUIKey.Key, subs =>
-        {
-            subs.Event<XenoEvolveBuiMsg>(OnXenoEvolveBui);
-        });
+        Subs.BuiEvents<XenoEvolutionComponent>(XenoEvolutionUIKey.Key,
+            subs =>
+            {
+                subs.Event<XenoEvolveBuiMsg>(OnXenoEvolveBui);
+            });
+
+        Subs.BuiEvents<XenoDevolveComponent>(XenoDevolveUIKey.Key,
+            subs =>
+            {
+                subs.Event<XenoDevolveBuiMsg>(OnXenoDevolveBui);
+            });
+    }
+
+    private void OnXenoOpenDevolveAction(Entity<XenoDevolveComponent> xeno, ref XenoOpenDevolveActionEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+        _ui.OpenUi(xeno.Owner, XenoDevolveUIKey.Key, xeno);
     }
 
     private void OnXenoEvolveAction(Entity<XenoEvolutionComponent> xeno, ref XenoOpenEvolutionsActionEvent args)
     {
+        if (args.Handled)
+            return;
+
         args.Handled = true;
         _ui.OpenUi(xeno.Owner, XenoEvolutionUIKey.Key, xeno);
     }
@@ -85,6 +109,43 @@ public sealed class XenoEvolutionSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("cm-xeno-evolution-start"), xeno, xeno);
 
         _doAfter.TryStartDoAfter(doAfter);
+    }
+
+    private void OnXenoDevolveBui(Entity<XenoDevolveComponent> xeno, ref XenoDevolveBuiMsg args)
+    {
+        if (_net.IsClient ||
+            !_mind.TryGetMind(xeno, out var mindId, out _) ||
+            !xeno.Comp.DevolvesTo.Contains(args.Choice))
+        {
+            return;
+        }
+
+        _ui.CloseUi(xeno.Owner, XenoEvolutionUIKey.Key, xeno);
+
+        var coordinates = _transform.GetMoverCoordinates(xeno.Owner);
+        var newXeno = Spawn(args.Choice, coordinates);
+        _xeno.SetSameHive(newXeno, xeno.Owner);
+
+        _mind.TransferTo(mindId, newXeno);
+        _mind.UnVisit(mindId);
+
+        // TODO RMC14 this is a hack because climbing on a newly created entity does not work properly for the client
+        var comp = EnsureComp<XenoNewlyEvolvedComponent>(newXeno);
+
+        _doors.Clear();
+        _entityLookup.GetEntitiesIntersecting(xeno, _doors);
+        foreach (var id in _doors)
+        {
+            if (HasComp<DoorComponent>(id) || HasComp<AirlockComponent>(id))
+                comp.StopCollide.Add(id);
+        }
+
+        var ev = new XenoDevolvedEvent(xeno);
+        RaiseLocalEvent(newXeno, ref ev);
+
+        Del(xeno.Owner);
+
+        _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-devolve", ("xeno", newXeno)), newXeno, newXeno, PopupType.LargeCaution);
     }
 
     private void OnXenoEvolveDoAfter(Entity<XenoEvolutionComponent> xeno, ref XenoEvolutionDoAfterEvent args)
@@ -118,12 +179,32 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 comp.StopCollide.Add(id);
         }
 
-        var ev = new NewXenoEvolvedComponent(xeno);
+        var ev = new NewXenoEvolvedEvent(xeno);
         RaiseLocalEvent(newXeno, ref ev);
 
         Del(xeno.Owner);
 
         _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-end"), newXeno, newXeno);
+    }
+
+    private void OnXenoEvolutionNewEvolved(Entity<XenoEvolutionComponent> xeno, ref NewXenoEvolvedEvent args)
+    {
+        TransferPoints((args.OldXeno, args.OldXeno), xeno, true);
+    }
+
+    private void OnXenoEvolutionDevolved(Entity<XenoEvolutionComponent> xeno, ref XenoDevolvedEvent args)
+    {
+        TransferPoints(args.OldXeno, (xeno, xeno), false);
+    }
+
+    private void TransferPoints(Entity<XenoEvolutionComponent?> old, Entity<XenoEvolutionComponent> xeno, bool subtract)
+    {
+        if (!Resolve(old, ref old.Comp, false))
+            return;
+
+        xeno.Comp.Points = subtract ? FixedPoint2.Max(0, old.Comp.Points - old.Comp.Max) : old.Comp.Points;
+
+        Dirty(xeno);
     }
 
     private void OnNewlyEvolvedPreventCollide(Entity<XenoNewlyEvolvedComponent> ent, ref PreventCollideEvent args)
@@ -132,9 +213,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private bool CanEvolvePopup(Entity<XenoEvolutionComponent> xeno, EntProtoId newXeno)
+    private bool CanEvolvePopup(Entity<XenoEvolutionComponent> xeno, EntProtoId newXeno, bool doPopup = true)
     {
-        if (!xeno.Comp.EvolvesTo.Contains(newXeno))
+        if (!xeno.Comp.EvolvesTo.Contains(newXeno) && !xeno.Comp.EvolvesToWithoutPoints.Contains(newXeno))
             return false;
 
         if (!_prototypes.TryIndex(newXeno, out var prototype))
@@ -144,30 +225,42 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (prototype.TryGetComponent(out XenoEvolutionCappedComponent? capped, _compFactory) &&
             HasLiving<XenoEvolutionCappedComponent>(capped.Max, e => e.Comp.Id == capped.Id))
         {
-            _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-failed-already-have", ("prototype", prototype.Name)), xeno, xeno, PopupType.MediumCaution);
+            if (doPopup)
+                _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-failed-already-have", ("prototype", prototype.Name)), xeno, xeno, PopupType.MediumCaution);
+
             return false;
         }
 
         // TODO RMC14 only allow evolving towards Queen if none is alive
         if (!xeno.Comp.CanEvolveWithoutGranter && !HasLiving<XenoEvolutionGranterComponent>(1))
         {
-            _popup.PopupEntity(
-                Loc.GetString("cm-xeno-evolution-failed-hive-shaken"),
-                xeno,
-                xeno,
-                PopupType.MediumCaution);
+            if (doPopup)
+            {
+                _popup.PopupEntity(
+                    Loc.GetString("cm-xeno-evolution-failed-hive-shaken"),
+                    xeno,
+                    xeno,
+                    PopupType.MediumCaution
+                );
+            }
+
             return false;
         }
 
         prototype.TryGetComponent(out XenoComponent? newXenoComp, _compFactory);
         if (newXenoComp != null &&
-            newXenoComp.UnlockAt > _timing.CurTime - _gameTicker.RoundStartTimeSpan)
+            newXenoComp.UnlockAt > _gameTicker.RoundDuration())
         {
-            _popup.PopupEntity(
-                Loc.GetString("cm-xeno-evolution-failed-cannot-support"),
-                xeno,
-                xeno,
-                PopupType.MediumCaution);
+            if (doPopup)
+            {
+                _popup.PopupEntity(
+                    Loc.GetString("cm-xeno-evolution-failed-cannot-support"),
+                    xeno,
+                    xeno,
+                    PopupType.MediumCaution
+                );
+            }
+
             return false;
         }
 
@@ -195,16 +288,35 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
             if (total != 0 && existing / (float) total >= value)
             {
-                _popup.PopupEntity(
-                    Loc.GetString("cm-xeno-evolution-failed-hive-full", ("tier", newXenoComp.Tier)),
-                    xeno,
-                    xeno,
-                    PopupType.MediumCaution);
+                if (doPopup)
+                {
+                    _popup.PopupEntity(
+                        Loc.GetString("cm-xeno-evolution-failed-hive-full", ("tier", newXenoComp.Tier)),
+                        xeno,
+                        xeno,
+                        PopupType.MediumCaution
+                    );
+                }
+
                 return false;
             }
         }
 
         return true;
+    }
+
+    private bool CanEvolveAny(Entity<XenoEvolutionComponent> xeno)
+    {
+        if (xeno.Comp.Points >= xeno.Comp.Max && xeno.Comp.EvolvesTo.Count > 0)
+            return true;
+
+        foreach (var evolution in xeno.Comp.EvolvesToWithoutPoints)
+        {
+            if (CanEvolvePopup(xeno, evolution, false))
+                return true;
+        }
+
+        return false;
     }
 
     // TODO RMC14 make this a property of the hive component
@@ -310,20 +422,18 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         // TODO RMC14 ovipositor attached only after 5 minutes
         var time = _timing.CurTime;
+        var roundDuration = _gameTicker.RoundDuration();
         var hasGranter = HasLiving<XenoEvolutionGranterComponent>(1);
         var evolution = EntityQueryEnumerator<XenoEvolutionComponent>();
         while (evolution.MoveNext(out var uid, out var comp))
         {
-            if (comp.Action != null)
-                continue;
-
             if (time < comp.LastPointsAt + TimeSpan.FromSeconds(1))
                 continue;
 
             comp.LastPointsAt = time;
             Dirty(uid, comp);
 
-            if (comp.Points >= comp.Max && comp.Action == null)
+            if (comp.Action == null && CanEvolveAny((uid, comp)))
             {
                 _action.AddAction(uid, ref comp.Action, comp.ActionId);
                 _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-ready"), uid, uid, PopupType.Large);
@@ -331,16 +441,16 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 continue;
             }
 
-            if (comp.Points < comp.Max)
+            if (comp.Points < comp.Max || roundDuration < comp.AccumulatePointsBefore)
             {
-                if (comp.RequiresGranter && !hasGranter)
+                if (roundDuration > comp.EvolveWithoutOvipositorFor && comp.RequiresGranter && !hasGranter)
                     continue;
 
-                comp.Points = FixedPoint2.Min(comp.Points + comp.PointsPerSecond, comp.Max);
+                SetPoints((uid, comp), comp.Points + comp.PointsPerSecond);
             }
             else if (comp.Points > comp.Max)
             {
-                comp.Points = FixedPoint2.Max(comp.Points - comp.PointsPerSecond, comp.Max);
+                SetPoints((uid, comp), FixedPoint2.Max(comp.Points - comp.PointsPerSecond, comp.Max));
             }
         }
     }

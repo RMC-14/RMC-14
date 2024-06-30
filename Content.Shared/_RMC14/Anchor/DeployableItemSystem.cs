@@ -95,7 +95,7 @@ public sealed class DeployableItemSystem : EntitySystem
                 else if (filled < total * ent.Comp.HalfFullThreshold)
                     args.PushMarkup(Loc.GetString("cm-magazine-box-examine-half-full"));
                 else
-                    args.PushMarkup(Loc.GetString("cm-magazine-examine-almost-full"));
+                    args.PushMarkup(Loc.GetString("cm-magazine-box-examine-almost-full"));
             }
             else
             {

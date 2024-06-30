@@ -42,7 +42,7 @@
     back: CMSatchelMarineMedic
     shoes: CMBootsBlackFilled
     gloves: CMHandsBlackMarine
-    eyes: ClothingEyesHudMedical
+    eyes: RMCGlassesMedicalHUDGlasses
     head: CMArmorHelmetM10Medic
     outerClothing: CMArmorM3Medium
     id: CMDogtagHospitalCorpsman
