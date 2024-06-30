@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared._RMC14.Input;
 using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared._RMC14.Weapons.Ranged;
+using Content.Shared._RMC14.Wieldable.Events;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Containers;
 using Content.Shared.DoAfter;
@@ -61,6 +62,7 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, GunMuzzleFlashAttemptEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, HandDeselectedEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, MeleeHitEvent>(RelayEvent);
+        SubscribeLocalEvent<AttachableHolderComponent, GetWieldableSpeedModifiersEvent>(RelayEvent);
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.CMActivateAttachableBarrel,

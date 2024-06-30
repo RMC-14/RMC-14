@@ -29,3 +29,9 @@ public record struct AttachableWeaponRangedModifierSet(
     float FireRateFlat,
     float ProjectileSpeedFlat
 );
+
+[DataRecord, Serializable, NetSerializable]
+public record struct AttachableSpeedModifierSet(
+    float Walk,
+    float Sprint
+);
