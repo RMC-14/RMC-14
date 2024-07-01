@@ -454,7 +454,7 @@
   id: RMCSulphuricAcid
   name: reagent-name-sulphuric-rmc-acid
   group: Toxins
-  desc: reagent-desc-sulfuric-rmc-acid
+  desc: reagent-desc-sulphuric-rmc-acid
   physicalDesc: reagent-physical-desc-oily
   flavor: acid
   color: "#BF8C00"
