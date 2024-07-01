@@ -1824,5 +1824,13 @@
   id: 220
   time: '2024-07-01T03:28:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2547
+- author: DrSmugleaf
+  changes:
+  - message: 'Added 2 Patron figurines: Fox Bridgeton and Kills-The-Mice. They will
+      appear on some tables if the dropship and planet map, and are randomly chosen.'
+    type: Add
+  id: 221
+  time: '2024-07-01T04:02:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2686
 Name: RMC14
 Order: -1
