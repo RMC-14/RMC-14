@@ -3,7 +3,7 @@
   id: CMRodMetal
   name: metal rod
   description: Some rods. Can be used for building, or something.
-  suffix: Full
+  suffix: Filled
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Materials/parts.rsi
@@ -52,7 +52,7 @@
   id: CMRodPlasteel
   name: plasteel rod
   description: Some plasteel rods. Can be used for building sturdier structures and objects.
-  suffix: Full
+  suffix: Filled
   components:
   - type: PhysicalComposition
     materialComposition:

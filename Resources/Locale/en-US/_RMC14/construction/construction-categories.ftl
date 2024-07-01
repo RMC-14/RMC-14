@@ -1,5 +1,6 @@
-construction-category-cm-all = CM All
-construction-category-cm-structures = CM Structures
-construction-category-cm-utilities = CM Utilities
-construction-category-cm-materials = CM Materials
-construction-category-cm-furniture = CM Furniture
+construction-category-cm-all = All
+construction-category-cm-structures = Structures
+construction-category-cm-utilities = Utilities
+construction-category-cm-materials = Materials
+construction-category-cm-furniture = Furniture
+construction-category-cm-box-magazine = Magazine Boxes
