@@ -74,6 +74,14 @@
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/secure_door.rsi
 
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockCell
+  name: cell door
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/cell_door.rsi
+
 # Glass
 - type: entity
   parent: CMAirlock
