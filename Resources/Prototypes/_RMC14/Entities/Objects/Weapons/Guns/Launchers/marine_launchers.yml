@@ -97,15 +97,21 @@
         map: ["enum.GunVisualLayers.Base"]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/RASKEL.rsi
+    slots:
+    - Back
+    - suitStorage
   - type: Gun
+    minAngle: 0
+    maxAngle: 1
     fireRate: 0.4
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
   - type: BallisticAmmoProvider
+    cycleable: false
     whitelist:
       tags:
-        - CartridgeRocket
-    proto: CartridgeRocket
+        - CMCartridgeRocketDisposable
+    proto: CMCartridgeRocketDisposable
     capacity: 1
     soundInsert:
       path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg

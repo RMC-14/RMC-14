@@ -1,0 +1,39 @@
+- type: entity
+  id: CMBulletRocketDisposable
+  name: rocket
+  parent: BaseBulletTrigger
+  noSpawn: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/Rocket_Projectiles.rsi
+    layers:
+      - state: dispo
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 50
+    intensitySlope: 12
+    totalIntensity: 500
+    canCreateVacuum: false
+  - type: PointLight
+    radius: 5
+    color: orange
+    energy: 0.5
+
+- type: entity
+  id: CMCartridgeRocketDisposable
+  name: disposable rocket
+  parent: BaseItem
+  description: A simple single-use launcher rocket. This should probably be inside a tube.
+  components:
+  - type: Tag
+    tags:
+      - CartridgeRocketDisposable
+  - type: Item
+    size: Large
+  - type: CartridgeAmmo
+    proto: CMBulletRocketDisposable
+    deleteOnSpawn: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
+    state: rpg
