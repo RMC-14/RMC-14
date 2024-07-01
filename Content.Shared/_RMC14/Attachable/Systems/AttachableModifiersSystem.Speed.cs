@@ -18,10 +18,18 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
 
     private void OnAttachableAltered(Entity<AttachableSpeedModsComponent> attachable, ref AttachableAlteredEvent args)
     {
-        if (args.Alteration == AttachableAlteredType.AppearanceChanged || args.Alteration == AttachableAlteredType.DetachedDeactivated)
-            return;
+        switch(args.Alteration)
+        {
+            case AttachableAlteredType.AppearanceChanged:
+                break;
 
-        _wieldableSystem.RefreshSpeedModifiers(args.Holder);
+            case AttachableAlteredType.DetachedDeactivated:
+                break;
+
+            default:
+                _wieldableSystem.RefreshSpeedModifiers(args.Holder);
+                break;
+        }
     }
 
     private void OnGetSpeedModifiers(Entity<AttachableSpeedModsComponent> attachable, ref GetWieldableSpeedModifiersEvent args)

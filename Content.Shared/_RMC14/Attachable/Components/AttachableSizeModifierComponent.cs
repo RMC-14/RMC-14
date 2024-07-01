@@ -4,11 +4,11 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._RMC14.Attachable.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(AttachableSizeModifierSystem))]
+[Access(typeof(AttachableModifiersSystem))]
 public sealed partial class AttachableSizeModifierComponent : Component
 {
-    [DataField(required: true), AutoNetworkedField]
-    public int SizeModifier = 0;
+    [DataField, AutoNetworkedField]
+    public List<AttachableSizeModifierSet> Modifiers = new();
 
     public int ResetIncrement = 0;
 }

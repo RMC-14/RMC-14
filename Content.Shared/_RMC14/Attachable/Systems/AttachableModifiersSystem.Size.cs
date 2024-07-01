@@ -6,19 +6,18 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Attachable.Systems;
 
-public sealed class AttachableSizeModifierSystem : EntitySystem
+public sealed partial class AttachableModifiersSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedItemSystem _itemSystem = default!;
 
     private readonly List<ItemSizePrototype> _sortedSizes = new();
 
-    public override void Initialize()
+    private void InitializeSize()
     {
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         SubscribeLocalEvent<AttachableSizeModifierComponent, AttachableAlteredEvent>(OnAttachableAltered);
-        SubscribeLocalEvent<AttachableToggleableSizeModifierComponent, AttachableAlteredEvent>(OnAttachableAltered);
 
         InitItemSizes();
     }
@@ -26,7 +25,7 @@ public sealed class AttachableSizeModifierSystem : EntitySystem
     private void OnAttachableAltered(Entity<AttachableSizeModifierComponent> attachable,
         ref AttachableAlteredEvent args)
     {
-        if (attachable.Comp.SizeModifier == 0)
+        if (attachable.Comp.Modifiers.Count == 0)
             return;
 
         if (!TryComp(args.Holder, out ItemComponent? itemComponent))
@@ -34,68 +33,25 @@ public sealed class AttachableSizeModifierSystem : EntitySystem
 
         switch (args.Alteration)
         {
-            case AttachableAlteredType.Attached:
-                IncrementSize(args.Holder,
-                    itemComponent,
-                    attachable.Comp.SizeModifier,
-                    out attachable.Comp.ResetIncrement);
-                return;
+            case AttachableAlteredType.AppearanceChanged:
+                break;
+
+            case AttachableAlteredType.DetachedDeactivated:
+                break;
 
             case AttachableAlteredType.Detached:
                 ResetSize(args.Holder, itemComponent, attachable.Comp.ResetIncrement);
-                return;
-        }
-    }
+                break;
 
-    private void OnAttachableAltered(Entity<AttachableToggleableSizeModifierComponent> attachable,
-        ref AttachableAlteredEvent args)
-    {
-        if (attachable.Comp.ActiveSizeModifier == 0 && attachable.Comp.InactiveSizeModifier == 0)
-            return;
-
-        if (!TryComp(args.Holder, out ItemComponent? itemComponent))
-            return;
-
-        if (!TryComp(attachable.Owner, out AttachableToggleableComponent? toggleableComponent))
-            return;
-
-        switch (args.Alteration)
-        {
-            case AttachableAlteredType.Attached:
-                if (toggleableComponent.Active)
-                {
-                    IncrementSize(args.Holder,
-                        itemComponent,
-                        attachable.Comp.ActiveSizeModifier,
-                        out attachable.Comp.ResetIncrement);
-                    return;
-                }
-
-                IncrementSize(args.Holder,
-                    itemComponent,
-                    attachable.Comp.InactiveSizeModifier,
-                    out attachable.Comp.ResetIncrement);
-                return;
-
-            case AttachableAlteredType.Detached:
+            default:
                 ResetSize(args.Holder, itemComponent, attachable.Comp.ResetIncrement);
-                return;
-
-            case AttachableAlteredType.Activated:
-                ResetSize(args.Holder, itemComponent, attachable.Comp.ResetIncrement);
-                IncrementSize(args.Holder,
+                IncrementSize(
+                    attachable,
+                    args.Holder,
                     itemComponent,
-                    attachable.Comp.ActiveSizeModifier,
+                    attachable.Comp.Modifiers,
                     out attachable.Comp.ResetIncrement);
-                return;
-
-            case AttachableAlteredType.Deactivated:
-                ResetSize(args.Holder, itemComponent, attachable.Comp.ResetIncrement);
-                IncrementSize(args.Holder,
-                    itemComponent,
-                    attachable.Comp.InactiveSizeModifier,
-                    out attachable.Comp.ResetIncrement);
-                return;
+                break;
         }
     }
 
@@ -117,8 +73,24 @@ public sealed class AttachableSizeModifierSystem : EntitySystem
         _sortedSizes.Sort();
     }
 
-    private void IncrementSize(EntityUid holder, ItemComponent itemComponent, int sizeIncrement, out int resetIncrement)
+    private void IncrementSize(
+        Entity<AttachableSizeModifierComponent> attachable,
+        EntityUid holder,
+        ItemComponent itemComponent,
+        List<AttachableSizeModifierSet> modifiers,
+        out int resetIncrement)
     {
+        resetIncrement = 0;
+        int sizeIncrement = 0;
+
+        foreach (var modSet in modifiers)
+        {
+            if (!CanApplyModifiers(attachable, modSet.Conditions))
+                continue;
+            
+            sizeIncrement += modSet.SizeIncrement;
+        }
+
         if (TryGetIncrementedSize(itemComponent.Size, sizeIncrement, out var newSize, out resetIncrement))
             _itemSystem.SetSize(holder, newSize.Value, itemComponent);
     }
@@ -129,7 +101,8 @@ public sealed class AttachableSizeModifierSystem : EntitySystem
             _itemSystem.SetSize(holder, newSize.Value, itemComponent);
     }
 
-    private bool TryGetIncrementedSize(ProtoId<ItemSizePrototype> size,
+    private bool TryGetIncrementedSize(
+        ProtoId<ItemSizePrototype> size,
         int increment,
         [NotNullWhen(true)] out ProtoId<ItemSizePrototype>? newSize,
         out int resetIncrement)

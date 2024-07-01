@@ -13,6 +13,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
     {
         InitializeMelee();
         InitializeRanged();
+        InitializeSize();
         InitializeSpeed();
     }
 

@@ -57,8 +57,11 @@
       state: smgstockcol-on
   - type: AttachableVisuals
     showActive: true
-  - type: AttachableToggleableSizeModifier
-    activeSizeModifier: 1
+  - type: AttachableSizeModifier
+    modifiers:
+    - conditions:
+        activeOnly: true
+      sizeIncrement: 1
 
 - type: entity
   parent: CMStockAttachmentBase

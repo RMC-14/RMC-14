@@ -49,3 +49,9 @@ public record struct AttachableSpeedModifierSet(
     float Walk,
     float Sprint
 );
+
+[DataRecord, Serializable, NetSerializable]
+public record struct AttachableSizeModifierSet(
+    AttachableModifierConditions? Conditions,
+    int SizeIncrement
+);
