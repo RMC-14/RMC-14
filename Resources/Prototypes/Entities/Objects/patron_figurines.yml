@@ -1,0 +1,40 @@
+﻿- type: entity
+  abstract: true
+  parent: BaseFigurine
+  id: RMCBaseFigurinePatron
+  description: A small miniature.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/patron_figurines.rsi
+    scale: 0.5, 0.5
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerFigurinePatron
+  name: patron figurine spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: Objects/Fun/figurines.rsi
+    state: bartender
+  - type: RandomSpawner # TODO RMC14 max 1 of each if any have yet to be picked at least once, to guarantee variety
+    prototypes:
+    - RMCFigurinePatronFoxBridgeton
+    - RMCFigurinePatronKillsTheMice
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronFoxBridgeton
+  name: Fox Bridgeton figurine
+  components:
+  - type: Sprite
+    state: Fox_Bridgeton
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKillsTheMice
+  name: Kills-The-Mice figurine
+  components:
+  - type: Sprite
+    state: Kills-The-Mice
