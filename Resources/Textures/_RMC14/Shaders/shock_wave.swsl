@@ -30,11 +30,11 @@ void fragment() {
             highp float DiffTime = Diff * ScaleDiff;
             highp vec2 DiffTexCoord = normalize(coord - WaveCentre);
             coord += (DiffTexCoord * DiffTime) / (CurrentTime * Dist * falloffPower[i]);
-            highp vec4 Color = texture(SCREEN_TEXTURE, coord);
+            highp vec4 Color = zTextureSpec(SCREEN_TEXTURE, coord);
             Color += (Color * ScaleDiff) / (CurrentTime * Dist * 40.0);
             COLOR = Color;
         } else {
-            COLOR = texture(SCREEN_TEXTURE, UV);
+            COLOR = zTextureSpec(SCREEN_TEXTURE, UV);
         }
     }
 }
