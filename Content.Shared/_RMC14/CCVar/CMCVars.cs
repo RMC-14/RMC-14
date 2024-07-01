@@ -62,4 +62,7 @@ public sealed class CMCVars : CVars
 
     public static readonly CVarDef<string> RMCDiscordAccountLinkingMessageLink =
         CVarDef.Create("rmc.discord_account_linking_message_link", "", CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCRequisitionsBalanceGain =
+        CVarDef.Create("rmc.requisitions_balance_gain", 750, CVar.REPLICATED | CVar.SERVER);
 }
