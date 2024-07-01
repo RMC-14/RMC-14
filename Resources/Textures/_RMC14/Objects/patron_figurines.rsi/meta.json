@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 32,
+    "y": 34
+  },
+  "states": [
+    {
+      "name": "Fox_Bridgeton"
+    },
+    {
+      "name": "Kills-The-Mice"
+    }
+  ]
+}
