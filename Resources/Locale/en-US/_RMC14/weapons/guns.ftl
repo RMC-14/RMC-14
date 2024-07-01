@@ -6,3 +6,5 @@ cm-gun-pump-examine = [bold]Press your [color=cyan]unique action[/color] keybind
 rmc-breech-loaded-open-shoot-attempt = You need to close the breech first!
 rmc-breech-loaded-not-ready-to-shoot = You need to open and close the breech first!
 rmc-breech-loaded-closed-load-attempt = You need to open the breech first!
+
+rmc-wield-use-delay = You need to wait {$seconds} seconds before wielding {THE($wieldable)}!

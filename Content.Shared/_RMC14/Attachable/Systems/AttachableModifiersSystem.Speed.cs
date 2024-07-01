@@ -8,8 +8,6 @@ namespace Content.Shared._RMC14.Attachable.Systems;
 
 public sealed partial class AttachableModifiersSystem : EntitySystem
 {
-    [Dependency] private readonly RMCWieldableSystem _wieldableSystem = default!;
-
     private void InitializeSpeed()
     {
         SubscribeLocalEvent<AttachableSpeedModsComponent, AttachableAlteredEvent>(OnAttachableAltered);

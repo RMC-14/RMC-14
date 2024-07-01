@@ -55,3 +55,9 @@ public record struct AttachableSizeModifierSet(
     AttachableModifierConditions? Conditions,
     int SizeIncrement
 );
+
+[DataRecord, Serializable, NetSerializable]
+public record struct AttachableWieldDelayModifierSet(
+    AttachableModifierConditions? Conditions,
+    TimeSpan Delay
+);

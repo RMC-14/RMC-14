@@ -5,7 +5,7 @@ namespace Content.Shared._RMC14.Attachable.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(AttachableModifiersSystem))]
-public sealed partial class AttachableSizeModifierComponent : Component
+public sealed partial class AttachableSizeModsComponent : Component
 {
     [DataField, AutoNetworkedField]
     public List<AttachableSizeModifierSet> Modifiers = new();

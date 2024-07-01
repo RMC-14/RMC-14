@@ -8,8 +8,6 @@ namespace Content.Shared._RMC14.Attachable.Systems;
 
 public sealed partial class AttachableModifiersSystem : EntitySystem
 {
-    [Dependency] private readonly CMGunSystem _cmGunSystem = default!;
-
     private void InitializeRanged()
     {
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, GunRefreshModifiersEvent>(OnRangedModsRefreshModifiers);

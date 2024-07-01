@@ -8,21 +8,18 @@ namespace Content.Shared._RMC14.Attachable.Systems;
 
 public sealed partial class AttachableModifiersSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedItemSystem _itemSystem = default!;
-
     private readonly List<ItemSizePrototype> _sortedSizes = new();
 
     private void InitializeSize()
     {
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
-        SubscribeLocalEvent<AttachableSizeModifierComponent, AttachableAlteredEvent>(OnAttachableAltered);
+        SubscribeLocalEvent<AttachableSizeModsComponent, AttachableAlteredEvent>(OnAttachableAltered);
 
         InitItemSizes();
     }
 
-    private void OnAttachableAltered(Entity<AttachableSizeModifierComponent> attachable,
+    private void OnAttachableAltered(Entity<AttachableSizeModsComponent> attachable,
         ref AttachableAlteredEvent args)
     {
         if (attachable.Comp.Modifiers.Count == 0)
@@ -74,7 +71,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
     }
 
     private void IncrementSize(
-        Entity<AttachableSizeModifierComponent> attachable,
+        Entity<AttachableSizeModsComponent> attachable,
         EntityUid holder,
         ItemComponent itemComponent,
         List<AttachableSizeModifierSet> modifiers,

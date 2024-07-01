@@ -63,6 +63,7 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, HandDeselectedEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, MeleeHitEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GetWieldableSpeedModifiersEvent>(RelayEvent);
+        SubscribeLocalEvent<AttachableHolderComponent, GetWieldDelayEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, ContainerGettingInsertedAttemptEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, ContainerGettingRemovedAttemptEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, EntGotRemovedFromContainerMessage>(RelayEvent);
