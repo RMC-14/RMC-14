@@ -135,16 +135,16 @@
   parent: RMCJug
   name: jug
   suffix: aluminium
-  id: RMCJugAluminium
+  id: RMCJugAluminum
   noSpawn: true
   components:
     - type: Label
-      currentLabel: reagent-name-aluminium
+      currentLabel: reagent-name-aluminum
     - type: SolutionContainerManager
       solutions:
         beaker:
           reagents:
-            - ReagentId: RMCAluminium
+            - ReagentId: RMCAluminum
               Quantity: 200
 
 - type: entity
