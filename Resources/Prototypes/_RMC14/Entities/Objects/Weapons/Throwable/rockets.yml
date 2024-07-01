@@ -5,12 +5,12 @@
   noSpawn: true
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/Rocket_Projectiles.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/rocket_projectiles.rsi
     layers:
       - state: dispo
   - type: ExplodeOnTrigger
   - type: Explosive
-    explosionType: Default
+    explosionType: RMC
     maxIntensity: 50
     intensitySlope: 12
     totalIntensity: 500
@@ -28,12 +28,12 @@
   components:
   - type: Tag
     tags:
-      - CartridgeRocketDisposable
+      - CMRocketDisposable
   - type: Item
     size: Large
   - type: CartridgeAmmo
     proto: CMBulletRocketDisposable
     deleteOnSpawn: true
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
-    state: rpg
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/rocket_projectiles.rsi
+    state: rocketdispo

@@ -110,7 +110,7 @@
     cycleable: false
     whitelist:
       tags:
-        - CMCartridgeRocketDisposable
+        - CMRocketDisposable
     proto: CMCartridgeRocketDisposable
     capacity: 1
     soundInsert:
