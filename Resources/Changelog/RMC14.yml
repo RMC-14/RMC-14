@@ -1852,5 +1852,12 @@
   id: 223
   time: '2024-07-01T04:25:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2692
+- author: DrSmugleaf
+  changes:
+  - message: Added Patron figurine for Fritz Vohlkson the Sniper Specialist.
+    type: Add
+  id: 224
+  time: '2024-07-01T04:33:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2693
 Name: RMC14
 Order: -1
