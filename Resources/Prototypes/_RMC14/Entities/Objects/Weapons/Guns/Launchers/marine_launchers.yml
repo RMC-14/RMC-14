@@ -131,10 +131,7 @@
     capacity: 1
     soundInsert:
       path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
-    zeroVisible: false
-    slots:
-    - Back
-    - suitStorage
+
   - type: Appearance
   - type: Wieldable
   - type: GunRequiresWield
