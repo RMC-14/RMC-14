@@ -1,11 +1,11 @@
 - type: reagent
-  id: RMCAluminium
-  name: reagent-name-aluminium
+  id: RMCAluminum
+  name: reagent-name-rmc-aluminum
   group: Elements
-  desc: reagent-desc-aluminium
+  desc: reagent-desc-rmc-aluminum
   physicalDesc: reagent-physical-desc-metallic
   flavor: metallic
-  color: "#848789"
+  color: "#A8A8A8"
   boilingPoint: 2327.0
   meltingPoint: 660.0
 
@@ -16,7 +16,7 @@
   desc: reagent-desc-carbon
   physicalDesc: reagent-physical-desc-crystalline
   flavor: bitter
-  color: "#22282b"
+  color: "#1C1300"
   boilingPoint: 4200.0
   meltingPoint: 3550.0
 
@@ -27,7 +27,7 @@
   desc: reagent-desc-chlorine
   physicalDesc: reagent-physical-desc-gaseous
   flavor: bitter
-  color: "#a2ff00"
+  color: "#808080"
   meltingPoint: -101.5
   boilingPoint: -34.04
   plantMetabolism:
@@ -54,7 +54,7 @@
   desc: reagent-desc-copper
   physicalDesc: reagent-physical-desc-metallic
   flavor: metallic
-  color: "#b05b3c"
+  color: "#6E3B08"
   boilingPoint: 2595.0
   meltingPoint: 1083.0
   metabolisms:
@@ -85,7 +85,7 @@
   desc: reagent-desc-fluorine
   physicalDesc: reagent-physical-desc-gaseous
   flavor: bitter
-  color: "#ba85cc"
+  color: "#808080"
   boilingPoint: -188.11
   meltingPoint: -219.67
   plantMetabolism:
@@ -105,6 +105,7 @@
           types:
             Caustic: 0.5
             Poison: 0.5
+
 - type: reagent
   id: RMCGold
   name: reagent-name-gold
@@ -123,7 +124,7 @@
   desc: reagent-desc-hydrogen
   physicalDesc: reagent-physical-desc-gaseous
   flavor: bitter
-  color: "#cccccc"
+  color: "#808080"
   boilingPoint: -253.0
   meltingPoint: -259.2
 
@@ -134,7 +135,7 @@
   desc: reagent-desc-iron
   physicalDesc: reagent-physical-desc-metallic
   flavor: metallic
-  color: "#434b4d"
+  color: "#C8A5DC"
   boilingPoint: 2862.0
   meltingPoint: 1538.0
   metabolisms:
@@ -165,7 +166,7 @@
   desc: reagent-desc-lithium
   physicalDesc: reagent-physical-desc-shiny
   flavor: metallic
-  color: "#d6c0a7"
+  color: "#808080"
   meltingPoint: 180.5
   boilingPoint: 1330.0
   metabolisms:
@@ -190,7 +191,7 @@
   desc: reagent-desc-mercury
   physicalDesc: reagent-physical-desc-shiny
   flavor: metallic
-  color: "#929296"
+  color: "#484848"
   meltingPoint: -38.83
   boilingPoint: 356.73
   metabolisms:
@@ -211,7 +212,7 @@
   desc: reagent-desc-potassium
   physicalDesc: reagent-physical-desc-shiny
   flavor: metallic
-  color: "#c6c8cc"
+  color: "#A0A0A0"
   meltingPoint: 65.5
   boilingPoint: 759.0
 
@@ -222,7 +223,7 @@
   desc: reagent-desc-phosphorus
   physicalDesc: reagent-physical-desc-powdery
   flavor: metallic
-  color: "#f5da9a"
+  color: "#832828"
   meltingPoint: 44.2
   boilingPoint: 280.5
   plantMetabolism:
@@ -241,7 +242,7 @@
   desc: reagent-desc-radium
   physicalDesc: reagent-physical-desc-glowing
   flavor: metallic
-  color: "#00ff04"
+  color: "#C7C7C7"
   meltingPoint: 700.0
   boilingPoint: 1737.0
 
@@ -252,7 +253,7 @@
   desc: reagent-desc-silicon
   physicalDesc: reagent-physical-desc-crystalline
   flavor: metallic
-  color: "#364266"
+  color: "#A8A8A8"
   boilingPoint: 3265.0
   meltingPoint: 1414.0
   metabolisms:
@@ -281,7 +282,7 @@
   desc: reagent-desc-sulfur
   physicalDesc: reagent-physical-desc-powdery
   flavor: bitter
-  color: "#fff385"
+  color: "#BF8C00"
   boilingPoint: 445.0
   meltingPoint: 120.0
   metabolisms:
@@ -299,7 +300,7 @@
   desc: reagent-desc-sodium
   physicalDesc: reagent-physical-desc-metallic
   flavor: bitter
-  color: "#a7b3d6"
+  color: "#808080"
   meltingPoint: 97.8
   boilingPoint: 883.0
 
@@ -310,7 +311,7 @@
   desc: reagent-desc-uranium
   physicalDesc: reagent-physical-desc-metallic
   flavor: metallic
-  color: "#8fa191"
+  color: "#B8B8C0"
   meltingPoint: 1133.0
   boilingPoint: 4131.0
   plantMetabolism:
@@ -337,7 +338,7 @@
   desc: reagent-desc-oxygen
   physicalDesc: reagent-physical-desc-gaseous
   flavor: bitter
-  color: "#c4f5ff"
+  color: "#808080"
   boilingPoint: -183.0
   meltingPoint: -218.4
   metabolisms:
@@ -366,7 +367,7 @@
   desc: reagent-desc-nitrogen
   physicalDesc: reagent-physical-desc-gaseous
   flavor: bitter
-  color: "#a1e1ff"
+  color: "#808080"
   boilingPoint: -195.8
   meltingPoint: -210.0
   metabolisms:
@@ -385,7 +386,7 @@
   slippery: true
   physicalDesc: reagent-physical-desc-strong-smelling
   flavor: alcohol
-  color: "#b05b3c"
+  color: "#404030"
   boilingPoint: 78.2
   meltingPoint: -114.1
   metabolisms:
@@ -440,7 +441,7 @@
   slippery: true
   physicalDesc: reagent-physical-desc-translucent
   flavor: water
-  color: "#75b1f0"
+  color: "#0064C8"
   recognizable: true
   boilingPoint: 100.0
   meltingPoint: 0.0
@@ -452,12 +453,12 @@
 
 - type: reagent
   id: RMCSulphuricAcid
-  name: reagent-name-sulphuric-rmc-acid
+  name: reagent-name-rmc-sulphuric-acid
   group: Toxins
-  desc: reagent-desc-sulphuric-rmc-acid
+  desc: reagent-desc-rmc-sulphuric-acid
   physicalDesc: reagent-physical-desc-oily
   flavor: acid
-  color: "#BF8C00"
+  color: "#DB5008"
   recognizable: true
   boilingPoint: 337.0
   meltingPoint: 10.31
