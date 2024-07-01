@@ -1817,5 +1817,12 @@
   id: 219
   time: '2024-07-01T03:07:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2688
+- author: Whisper
+  changes:
+  - message: You can now deconstruct magazine boxes into cardboard and craft new ones.
+    type: Add
+  id: 220
+  time: '2024-07-01T03:28:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2547
 Name: RMC14
 Order: -1
