@@ -1,6 +1,6 @@
 - type: entity
   parent: [ BaseKnife, CMAttachmentBase ]
-  id: CMM5Bayonet
+  id: RMCM5Bayonet
   name: "M5 'Night Raider' bayonet"
   description: The standard-issue bayonet of the Marines. You can slide this knife into your boots. # TODO RMC14 , or attach it to the end of a rifle.
   components:
@@ -12,7 +12,7 @@
     tags:
     - Knife
     - RMCAttachmentBarrel
-    - CMM5Bayonet
+    - RMCM5Bayonet
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Melee/m5_bayonet.rsi
     state: icon
@@ -40,6 +40,11 @@
     - bonusDamage:
         types:
           Slash: 20
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        unwieldedOnly: true
+      accuracyAddMult: -0.05
 
 - type: entity
   name: M11 throwing knife
@@ -103,4 +108,4 @@
     malus: 0.225
 
 - type: Tag
-  id: CMM5Bayonet
+  id: RMCM5Bayonet

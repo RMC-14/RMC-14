@@ -28,13 +28,14 @@ namespace Content.Shared._RMC14.Attachable.Systems;
 public sealed class AttachableHolderSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedVerbSystem _verbSystem = default!;
 
     public override void Initialize()
     {
@@ -69,32 +70,39 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, EntGotRemovedFromContainerMessage>(RelayEvent);
 
         CommandBinds.Builder
-            .Bind(CMKeyFunctions.CMActivateAttachableBarrel,
+            .Bind(CMKeyFunctions.RMCActivateAttachableBarrel,
                 InputCmdHandler.FromDelegate(session =>
                     {
                         if (session?.AttachedEntity is { } userUid)
-                            ToggleAttachable(userUid, "cm-aslot-barrel");
+                            ToggleAttachable(userUid, "rmc-aslot-barrel");
                     },
                     handle: false))
-            .Bind(CMKeyFunctions.CMActivateAttachableRail,
+            .Bind(CMKeyFunctions.RMCActivateAttachableRail,
                 InputCmdHandler.FromDelegate(session =>
                     {
                         if (session?.AttachedEntity is { } userUid)
-                            ToggleAttachable(userUid, "cm-aslot-rail");
+                            ToggleAttachable(userUid, "rmc-aslot-rail");
                     },
                     handle: false))
-            .Bind(CMKeyFunctions.CMActivateAttachableStock,
+            .Bind(CMKeyFunctions.RMCActivateAttachableStock,
                 InputCmdHandler.FromDelegate(session =>
                     {
                         if (session?.AttachedEntity is { } userUid)
-                            ToggleAttachable(userUid, "cm-aslot-stock");
+                            ToggleAttachable(userUid, "rmc-aslot-stock");
                     },
                     handle: false))
-            .Bind(CMKeyFunctions.CMActivateAttachableUnderbarrel,
+            .Bind(CMKeyFunctions.RMCActivateAttachableUnderbarrel,
                 InputCmdHandler.FromDelegate(session =>
                     {
                         if (session?.AttachedEntity is { } userUid)
-                            ToggleAttachable(userUid, "cm-aslot-underbarrel");
+                            ToggleAttachable(userUid, "rmc-aslot-underbarrel");
+                    },
+                    handle: false))
+            .Bind(CMKeyFunctions.RMCFieldStripHeldItem,
+                InputCmdHandler.FromDelegate(session =>
+                    {
+                        if (session?.AttachedEntity is { } userUid)
+                            FieldStripHeldItem(userUid);
                     },
                     handle: false))
             .Register<AttachableHolderSystem>();
@@ -550,6 +558,29 @@ public sealed class AttachableHolderSystem : EntitySystem
 
         var ev = new AttachableToggleStartedEvent((active.Value, holderComponent), userUid, slotId);
         RaiseLocalEvent(attachableUid, ref ev);
+    }
+
+    private void FieldStripHeldItem(EntityUid userUid)
+    {
+        if (!TryComp<HandsComponent>(userUid, out var handsComponent) ||
+            !TryComp<AttachableHolderComponent>(handsComponent.ActiveHandEntity, out var holderComponent))
+        {
+            return;
+        }
+
+        EntityUid holderUid = handsComponent.ActiveHandEntity.Value;
+
+        if (!holderComponent.Running || !_actionBlocker.CanInteract(userUid, holderUid))
+            return;
+
+        foreach (var verb in _verbSystem.GetLocalVerbs(holderUid, userUid, typeof(Verb)))
+        {
+            if (!verb.Text.Equals(Loc.GetString("rmc-verb-strip-attachables")))
+                continue;
+
+            _verbSystem.ExecuteVerb(verb, userUid, holderUid);
+            break;
+        }
     }
 
     public void SetSupercedingAttachable(Entity<AttachableHolderComponent> holder, EntityUid? supercedingAttachable)

@@ -26,6 +26,9 @@
     modifiers:
     - accuracyAddMult: 0.2
       projectileSpeedFlat: 10
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.4
 
 - type: entity
   parent: CMBarrelAttachmentBase

@@ -44,13 +44,13 @@
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c.rsi
   - type: ContainerFill
     containers:
-      cm-aslot-underbarrel:
+      rmc-aslot-underbarrel:
       - RMCAttachmentU1GrenadeLauncher
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
-      cm-aslot-underbarrel: !type:ContainerSlot
+      rmc-aslot-underbarrel: !type:ContainerSlot
   - type: Gun
     minAngle: 30
     maxAngle: 60
@@ -85,28 +85,28 @@
     multiplier: 1.1
   - type: AttachableHolder
     slots:
-      cm-aslot-barrel:
+      rmc-aslot-barrel:
         whitelist:
           tags:
           - CMAttachmentExtendedBarrel
           - RMCAttachmentSuppressor
-          - CMM5Bayonet
+          - RMCM5Bayonet
           - RMCAttachmentBarrelCharger
-      cm-aslot-rail:
+      rmc-aslot-rail:
         whitelist:
           tags:
           - CMAttachmentFlashlight
           - RMCAttachmentMagneticHarness
-      cm-aslot-underbarrel:
+      rmc-aslot-underbarrel:
         whitelist:
           tags:
           - CMAttachmentU7UnderbarrelShotgun
           - RMCAttachmentU1GrenadeLauncher
   - type: AttachableHolderVisuals
     offsets:
-      cm-aslot-barrel: 0.81, 0.00
-      cm-aslot-rail: 0.0, 0.20
-      cm-aslot-underbarrel: 0.19, -0.14
+      rmc-aslot-barrel: 0.81, 0.00
+      rmc-aslot-rail: 0.0, 0.20
+      rmc-aslot-underbarrel: 0.19, -0.14
 
 - type: entity
   name: M54CE2 heavy assault rifle
@@ -196,17 +196,17 @@
     multiplier: 1.4
   - type: AttachableHolder
     slots:
-      cm-aslot-barrel:
+      rmc-aslot-barrel:
         whitelist:
           tags:
           - CMAttachmentExtendedBarrel
           - RMCAttachmentSuppressor
-      cm-aslot-rail:
+      rmc-aslot-rail:
         whitelist:
           tags:
           - CMAttachmentFlashlight
           - CMAttachmentB8SmartScope
   - type: AttachableHolderVisuals
     offsets:
-      cm-aslot-barrel: 0.9, 0.03
-      cm-aslot-rail: -0.1, 0.23
+      rmc-aslot-barrel: 0.9, 0.03
+      rmc-aslot-rail: -0.1, 0.23

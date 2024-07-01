@@ -4,7 +4,7 @@
   components:
   - type: AttachableHolder
   - type: ActivatableUI
-    verbText: cm-verb-strip-attachables
+    verbText: rmc-verb-strip-attachables
     verbOnly: true
     key:
       enum.AttachmentUI.StripKey

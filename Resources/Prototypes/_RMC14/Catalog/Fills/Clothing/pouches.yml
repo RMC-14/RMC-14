@@ -21,7 +21,7 @@
     - id: CMPillTricordrazine
     - id: CMGauze10
     - id: RadioHandheld
-    - id: CMM5Bayonet
+    - id: RMCM5Bayonet
       # 5 splints
 
 - type: entity
@@ -36,7 +36,7 @@
     - id: CMWelder
     - id: CableApcStack
     - id: RadioHandheld
-    - id: CMM5Bayonet
+    - id: RMCM5Bayonet
 
 - type: entity
   parent: CMPouchFirstAid

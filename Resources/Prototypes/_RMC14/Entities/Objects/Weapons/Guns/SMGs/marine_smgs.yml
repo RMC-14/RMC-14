@@ -59,22 +59,22 @@
           - CMMagazineSMGM63Ext
   - type: AttachableHolder
     slots:
-      cm-aslot-stock:
+      rmc-aslot-stock:
         whitelist:
           tags:
           - CMAttachmentM63StockCollapsible
-      cm-aslot-barrel:
+      rmc-aslot-barrel:
         whitelist:
           tags:
           - CMAttachmentExtendedBarrel
           - CMAttachmentRecoilCompensator
           - RMCAttachmentSuppressor
-      cm-aslot-rail:
+      rmc-aslot-rail:
         whitelist:
           tags:
           - CMAttachmentFlashlight
   - type: AttachableHolderVisuals
     offsets:
-      cm-aslot-barrel: 0.44, 0.125
-      cm-aslot-stock: -0.58, 0.13
-      cm-aslot-rail: 0.0, 0.0
+      rmc-aslot-barrel: 0.44, 0.125
+      rmc-aslot-stock: -0.58, 0.13
+      rmc-aslot-rail: 0.0, 0.0

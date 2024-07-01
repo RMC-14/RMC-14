@@ -1,9 +1,9 @@
-cm-attachable-holder-strip-ui-title = strip attachables
-cm-attachable-holder-strip-ui-empty-slot = nothing
+rmc-attachable-holder-strip-ui-title = strip attachables
+rmc-attachable-holder-strip-ui-empty-slot = nothing
 
-cm-verb-strip-attachables = Strip Attachables
+rmc-verb-strip-attachables = Strip Attachables
 
-cm-aslot-barrel = Barrel
-cm-aslot-rail = Rail
-cm-aslot-stock = Stock
-cm-aslot-underbarrel = Underbarrel
+rmc-aslot-barrel = Barrel
+rmc-aslot-rail = Rail
+rmc-aslot-stock = Stock
+rmc-aslot-underbarrel = Underbarrel
