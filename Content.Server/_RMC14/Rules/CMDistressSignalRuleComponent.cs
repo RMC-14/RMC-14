@@ -31,7 +31,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     // TODO RMC14
     [DataField]
-    public bool XenosEverOnShip;
+    public bool Hijack;
 
     [DataField]
     public ProtoId<JobPrototype> QueenJob = "CMXenoQueen";
