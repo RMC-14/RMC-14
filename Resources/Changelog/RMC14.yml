@@ -1785,5 +1785,37 @@
   id: 215
   time: '2024-07-01T02:50:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2680
+- author: DrSmugleaf
+  changes:
+  - message: Fixed surgery incorrectly thinking that someone on an operating table
+      is not lying down.
+    type: Fix
+  id: 216
+  time: '2024-07-01T03:08:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2687
+- author: DrSmugleaf
+  changes:
+  - message: Increased Requisitions money gain from $600 a minute to $1500 a minute.
+    type: Tweak
+  id: 217
+  time: '2024-07-01T03:06:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2689
+- author: DrSmugleaf
+  changes:
+  - message: Set the default amount of marines per xeno back up to 4. 50 xenos per
+      200 players.
+    type: Tweak
+  - message: Decreased both the travel time and cooldown of dropships by 30 seconds.
+    type: Tweak
+  id: 218
+  time: '2024-07-01T03:05:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2681
+- author: DrSmugleaf
+  changes:
+  - message: Fixed power cell rechargers on the Almayer not being to recharge anything.
+    type: Fix
+  id: 219
+  time: '2024-07-01T03:07:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2688
 Name: RMC14
 Order: -1
