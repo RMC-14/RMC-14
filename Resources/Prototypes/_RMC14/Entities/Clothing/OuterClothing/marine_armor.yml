@@ -16,6 +16,8 @@
   - type: CMArmor
     armor: 20
     explosionArmor: 15
+    wieldSlowdownCompensationWalk: 0.08
+    wieldSlowdownCompensationSprint: 0.136
   - type: ToggleableLightVisuals
     spriteLayer: light
   - type: PointLight

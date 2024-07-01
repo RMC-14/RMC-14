@@ -30,13 +30,18 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
     {
         if (conditions == null)
             return true;
-        
-        TryComp(attachableUid, out WieldableComponent? wieldableComponent);
-        
-        if (conditions.Value.UnwieldedOnly && wieldableComponent != null && wieldableComponent.Wielded)
-            return false;
-        else if (conditions.Value.WieldedOnly && (wieldableComponent == null || !wieldableComponent.Wielded))
-            return false;
+
+        _attachableHolderSystem.TryGetHolder(attachableUid, out var holderUid);
+
+        if (holderUid != null)
+        {
+            TryComp(holderUid, out WieldableComponent? wieldableComponent);
+
+            if (conditions.Value.UnwieldedOnly && wieldableComponent != null && wieldableComponent.Wielded)
+                return false;
+            else if (conditions.Value.WieldedOnly && (wieldableComponent == null || !wieldableComponent.Wielded))
+                return false;
+        }
 
         TryComp(attachableUid, out AttachableToggleableComponent? toggleableComponent);
 
@@ -44,14 +49,15 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
             return false;
         else if (conditions.Value.ActiveOnly && (toggleableComponent == null || !toggleableComponent.Active))
             return false;
-        
+
         if (conditions.Value.Whitelist != null &&
-            _attachableHolderSystem.TryGetHolder(attachableUid, out var holderUid) &&
-            !_whitelistSystem.IsWhitelistPass(conditions.Value.Whitelist, holderUid.Value))
+            holderUid != null &&
+            (!conditions.Value.IsBlacklist && !_whitelistSystem.IsWhitelistPass(conditions.Value.Whitelist, holderUid.Value) ||
+            conditions.Value.IsBlacklist && !_whitelistSystem.IsWhitelistFail(conditions.Value.Whitelist, holderUid.Value)))
         {
             return false;
         }
-        
+
         return true;
     }
 }

@@ -39,6 +39,9 @@ public sealed partial class ScopeComponent : Component
     public bool RequireWielding;
 
     [DataField, AutoNetworkedField]
+    public bool UseInHand;
+
+    [DataField, AutoNetworkedField]
     public Direction? ScopingDirection;
 
     [DataField, AutoNetworkedField]

@@ -1,6 +1,6 @@
 ﻿- type: entity
   abstract: true
-  parent: CMAttachmentBase
+  parent: RMCAttachmentBase
   id: CMUnderAttachmentBase
   components:
   - type: Sprite
@@ -209,6 +209,127 @@
   - type: Sprite
     state: verticalgrip
 
+- type: entity
+  parent: CMUnderAttachmentBase
+  id: RMCAttachmentFlashlightGrip
+  name: underbarrel flashlight grip
+  description: Holy smokes RO man, they put a grip on a flashlight! Reduces recoil and scatter by a tiny amount. Works as a light source. # Boosts accuracy by a tiny amount.
+  components:
+  - type: ToggleableLightVisuals
+    spriteLayer: light
+  - type: PointLight
+    enabled: false
+    radius: 5
+    softness: 5
+    autoRot: true
+    netsync: false
+  - type: HandheldLight
+    addPrefix: false
+    blinkingBehaviourId: blinking
+    radiatingBehaviourId: radiating
+  - type: LightBehaviour
+    behaviours:
+    - !type:FadeBehaviour
+      id: radiating
+      interpolate: Linear
+      maxDuration: 2.0
+      startValue: 3.0
+      endValue: 2.0
+      isLooped: true
+      property: Radius
+      enabled: false
+      reverseWhenFinished: true
+    - !type:PulseBehaviour
+      id: blinking
+      interpolate: Nearest
+      maxDuration: 1.0
+      minValue: 0.1
+      maxValue: 2.0
+      isLooped: true
+      property: Radius
+      enabled: false
+  - type: Battery
+    maxCharge: 10
+    startingCharge: 10
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 3
+  - type: Sprite
+    layers:
+    - state: flashgrip
+    - state: flashgrip-on
+      shader: unshaded
+      visible: false
+      map: [ "light" ]
+  - type: Item
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+  - type: Appearance
+  - type: AttachableToggleable
+    attachedOnly: true
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: flashgrip
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: flashgrip-on
+    actionName: Activate Underbarrel Flashlight Grip
+    actionDesc: Can be toggled on and off. A better light source than standard M3 pattern armor lights.
+  - type: AttachableVisuals
+    showActive: true
+  - type: AttachableToggleableSimpleActivate
+  - type: Tag
+    tags:
+    - CMAttachmentUnderbarrel
+    - RMCAttachmentFlashlightGrip
+    - Flashlight
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.05
+      recoilFlat: -1
+      scatterFlat: -1
+
+- type: entity
+  parent: RMCAttachmentFlashlightGrip
+  id: RMCAttachmentLaserLightModule
+  name: MK80 laser-light module
+  description: A Laser-Light module for the MK80 Service Pistol which is currently undergoing limited field testing as part of the marines' next generation pistol program. All MK80 pistols come equipped with the module.
+  components:
+  - type: Sprite
+    layers:
+    - state: laserlight
+    - state: laserlight-on
+      shader: unshaded
+      visible: false
+      map: [ "light" ]
+  - type: Tag
+    tags:
+    - CMAttachmentUnderbarrel
+    - RMCAttachmentLaserLightModule
+    - Flashlight
+  - type: AttachableToggleable
+    attachedOnly: true
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: laserlight
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: laserlight-on
+    actionName: Activate Laser-Light Module
+    actionDesc: Can be toggled on and off. A better light source than standard M3 pattern armor lights.
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - accuracyAddMult: 0.05
+    - conditions:
+        wieldedOnly: true
+      recoilFlat: -1
+      scatterFlat: -1
+    - conditions:
+        unwieldedOnly: true
+      accuracyMovementPenaltyAddMult: -1
+      scatterFlat: -2
+
 - type: Tag
   id: CMAttachmentUnderbarrel
 
@@ -217,3 +338,9 @@
 
 - type: Tag
   id: RMCAttachmentU1GrenadeLauncher
+
+- type: Tag
+  id: RMCAttachmentFlashlightGrip
+
+- type: Tag
+  id: RMCAttachmentLaserLightModule

@@ -210,11 +210,13 @@ public sealed class AttachableHolderSystem : EntitySystem
 
     private void OnHolderWielded(Entity<AttachableHolderComponent> holder, ref ItemWieldedEvent args)
     {
+        AlterAllAttachables(holder, AttachableAlteredType.Wielded);
         _gun.RefreshModifiers(holder.Owner);
     }
 
     private void OnHolderUnwielded(Entity<AttachableHolderComponent> holder, ref ItemUnwieldedEvent args)
     {
+        AlterAllAttachables(holder, AttachableAlteredType.Unwielded);
         _gun.RefreshModifiers(holder.Owner);
     }
 
@@ -511,7 +513,8 @@ public sealed class AttachableHolderSystem : EntitySystem
     {
         foreach (var slotId in holder.Comp.Slots.Keys)
         {
-            _container.EnsureContainer<ContainerSlot>(holder, slotId);
+            var container = _container.EnsureContainer<ContainerSlot>(holder, slotId);
+            container.OccludesLight = false;
         }
     }
 
@@ -639,6 +642,18 @@ public sealed class AttachableHolderSystem : EntitySystem
                     RaiseLocalEvent(contained, ref args);
                 }
             }
+        }
+    }
+
+    private void AlterAllAttachables(Entity<AttachableHolderComponent> holder, AttachableAlteredType alteration)
+    {
+        foreach (var slotId in holder.Comp.Slots.Keys)
+        {
+            if (!_container.TryGetContainer(holder, slotId, out var container) || container.Count <= 0)
+                continue;
+
+            var ev = new AttachableAlteredEvent(holder.Owner, alteration);
+            RaiseLocalEvent(container.ContainedEntities[0], ref ev);
         }
     }
 }

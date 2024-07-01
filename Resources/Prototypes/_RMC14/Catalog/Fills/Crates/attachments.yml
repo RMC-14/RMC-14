@@ -5,7 +5,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentS5RedDotSight
+      - id: RMCAttachmentS5RedDotSight
         amount: 8
 
 - type: entity
@@ -25,7 +25,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentRailFlashlight
+      - id: RMCAttachmentRailFlashlight
         amount: 8
 
 - type: entity
@@ -35,7 +35,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachments84xTelescopicScope
+      - id: RMCAttachmentS84xTelescopicScope
         amount: 2
 
 - type: entity
@@ -55,7 +55,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentMagneticHarness
+      - id: RMCAttachmentMagneticHarness
         amount: 6
 
 - type: entity
@@ -75,7 +75,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentExtendedBarrel
+      - id: RMCAttachmentExtendedBarrel
         amount: 6
 
 - type: entity
@@ -85,7 +85,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentRecoilCompensator
+      - id: RMCAttachmentRecoilCompensator
         amount: 6
 
 - type: entity

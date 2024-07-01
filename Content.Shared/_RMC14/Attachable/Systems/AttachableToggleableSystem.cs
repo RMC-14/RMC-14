@@ -150,7 +150,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
         if (!attachable.Comp.NeedHand || !attachable.Comp.Active)
             return;
 
-        Toggle(attachable, args.User);
+        Toggle(attachable, args.User, true);
     }
 
     private void OnGotUnequippedHand(Entity<AttachableToggleableComponent> attachable, ref GotUnequippedHandEvent args)
@@ -165,7 +165,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
         if (!attachable.Comp.NeedHand || !attachable.Comp.Active)
             return;
 
-        Toggle(attachable, args.User);
+        Toggle(attachable, args.User, true);
     }
     
     private void OnAttachableMovementLockedMoveInput(Entity<AttachableMovementLockedComponent> user, ref MoveInputEvent args)
@@ -179,7 +179,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
                 continue;
             }
             
-            Toggle((attachableUid, toggleableComponent), user.Owner);
+            Toggle((attachableUid, toggleableComponent), user.Owner, true);
         }
         
         RemCompDeferred<AttachableMovementLockedComponent>(user);
@@ -233,11 +233,14 @@ public sealed class AttachableToggleableSystem : EntitySystem
         Entity<AttachableToggleableComponent> attachable,
         Entity<AttachableHolderComponent> holder,
         string slotId,
-        EntityUid? userUid)
+        EntityUid? userUid,
+        bool interrupted = false)
     {
         attachable.Comp.Active = !attachable.Comp.Active;
 
-        var mode = attachable.Comp.Active ? AttachableAlteredType.Activated : AttachableAlteredType.Deactivated;
+        var mode = attachable.Comp.Active
+            ? AttachableAlteredType.Activated
+            : interrupted ? AttachableAlteredType.Interrupted : AttachableAlteredType.Deactivated;
         var ev = new AttachableAlteredEvent(holder.Owner, mode, userUid);
         RaiseLocalEvent(attachable.Owner, ref ev);
 
@@ -249,15 +252,6 @@ public sealed class AttachableToggleableSystem : EntitySystem
             if (attachable.Comp.SupercedeHolder && holder.Comp.SupercedingAttachable == attachable.Owner)
                 _attachableHolderSystem.SetSupercedingAttachable(holder, null);
             return;
-        }
-        
-        if (attachable.Comp.ActivateAction &&
-            attachable.Comp.Action != null &&
-            userUid != null &&
-            TryComp(userUid, out ActionsComponent? actionsComponent) &&
-            TryComp(attachable.Comp.Action, out InstantActionComponent? actionComponent))
-        {
-            _actionsSystem.PerformAction(userUid.Value, actionsComponent, attachable.Comp.Action.Value, actionComponent, actionComponent.Event, _gameTiming.CurTime);
         }
         
         if (attachable.Comp.BreakOnMove && userUid != null)
@@ -287,8 +281,8 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
         _attachableHolderSystem.SetSupercedingAttachable(holder, attachable.Owner);
     }
-    
-    private void Toggle(Entity<AttachableToggleableComponent> attachable, EntityUid user)
+
+    private void Toggle(Entity<AttachableToggleableComponent> attachable, EntityUid user, bool interrupted = false)
     {
         if (!_attachableHolderSystem.TryGetHolder(attachable.Owner, out var holderUid) ||
             !TryComp(holderUid, out AttachableHolderComponent? holderComponent) ||
@@ -297,7 +291,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
             return;
         }
         
-        FinishToggle(attachable, (holderUid.Value, holderComponent), slotId, user);
+        FinishToggle(attachable, (holderUid.Value, holderComponent), slotId, user, interrupted);
         Dirty(attachable);
     }
 #endregion
@@ -331,6 +325,8 @@ public sealed class AttachableToggleableSystem : EntitySystem
             action.Enabled = ent.Comp.Attached;
             Dirty(actionId, action);
         }
+
+        Dirty(ent);
     }
 
     private void OnRemoveAttachableActions(Entity<AttachableToggleableComponent> ent, ref RemoveAttachableActionsEvent args)

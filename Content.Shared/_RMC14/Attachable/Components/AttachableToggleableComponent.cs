@@ -10,13 +10,6 @@ namespace Content.Shared._RMC14.Attachable.Components;
 public sealed partial class AttachableToggleableComponent : Component
 {
     /// <summary>
-    /// If set to true, upon being activated with its hotkey, the attachment will attempt to use its assigned action.
-    /// Used for scopes and other attachments that have actions that don't just activate the attachment's other functions.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool ActivateAction = false;
-    
-    /// <summary>
     /// Whether the attachment is currently active.
     /// </summary>
     [DataField, AutoNetworkedField]

@@ -56,11 +56,9 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
             return;
 
         args.ShotsPerBurst += modSet.ShotsPerBurstFlat;
-        args.CameraRecoilScalar += modSet.RecoilFlat;
-        args.AngleIncrease = Angle.FromDegrees(Math.Max(args.AngleIncrease.Degrees + modSet.AngleIncreaseFlat, 0.0));
-        args.AngleDecay = Angle.FromDegrees(Math.Max(args.AngleDecay.Degrees + modSet.AngleDecayFlat, 0.0));
-        args.MinAngle = Angle.FromDegrees(Math.Max(args.MinAngle.Degrees + modSet.MinAngleFlat, 0.0));
-        args.MaxAngle = Angle.FromDegrees(Math.Max(args.MaxAngle.Degrees + modSet.MaxAngleFlat, args.MinAngle));
+        args.CameraRecoilScalar = Math.Max(args.CameraRecoilScalar + modSet.RecoilFlat, 0);
+        args.MinAngle = Angle.FromDegrees(Math.Max(args.MinAngle.Degrees + modSet.ScatterFlat, 0.0));
+        args.MaxAngle = Angle.FromDegrees(Math.Max(args.MaxAngle.Degrees + modSet.ScatterFlat, args.MinAngle));
         args.ProjectileSpeed += modSet.ProjectileSpeedFlat;
 
         // Fire delay doesn't work quite like SS14 fire rate, so we're having to do maths:

@@ -66,13 +66,13 @@
       rmc-aslot-barrel:
         whitelist:
           tags:
-          - CMAttachmentExtendedBarrel
-          - CMAttachmentRecoilCompensator
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
           - RMCAttachmentSuppressor
       rmc-aslot-rail:
         whitelist:
           tags:
-          - CMAttachmentFlashlight
+          - RMCAttachmentFlashlight
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.44, 0.125

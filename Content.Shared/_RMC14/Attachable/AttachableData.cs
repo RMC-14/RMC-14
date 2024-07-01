@@ -18,6 +18,7 @@ public record struct AttachableModifierConditions(
     bool WieldedOnly,
     bool ActiveOnly,
     bool InactiveOnly,
+    bool IsBlacklist,
     EntityWhitelist? Whitelist
 );
 
@@ -31,23 +32,28 @@ public record struct AttachableWeaponMeleeModifierSet(
 public record struct AttachableWeaponRangedModifierSet(
     AttachableModifierConditions? Conditions,
     FixedPoint2 AccuracyAddMult, // Not implemented yet. Added to have all the values already on our attachments, so whoever implements this doesn't need to dig through CM13. Remove this comment once implemented.
+    FixedPoint2 AccuracyMovementPenaltyAddMult, // As above.
     FixedPoint2 DamageFalloffAddMult, // As above.
-    int ShotsPerBurstFlat,
-    FixedPoint2 DamageAddMult,
-    float RecoilFlat,
-    double AngleIncreaseFlat,
-    double AngleDecayFlat,
-    double MaxAngleFlat,
-    double MinAngleFlat,
-    float FireDelayFlat, // CM13 fire delay is in BYOND ticks, i.e. deciseconds. Conversion to RMC: BYOND_FIRE_DELAY / 10
-    float ProjectileSpeedFlat
+    double BurstScatterFlat, // As above. Conversion to RMC: CM_SCATTER * 2
+    int ShotsPerBurstFlat, // Modifies the maximum number of shots in a burst.
+    FixedPoint2 DamageAddMult, // Additive multiplier to damage.
+    float RecoilFlat, // How much the camera shakes when you shoot.
+    double ScatterFlat, // Scatter in degrees. This is how far bullets go from where you aim. Conversion to RMC: CM_SCATTER * 2
+    float FireDelayFlat, // The delay between each shot. Conversion to RMC: CM_FIRE_DELAY / 10
+    float ProjectileSpeedFlat // How fast the projectiles move. Conversion to RMC: CM_PROJECTILE_SPEED * 10
 );
 
+// SS13 has move delay instead of speed. Move delay isn't implemented here, and approximating it through maths like fire delay is scuffed because of how the events used to change speed work.
+// So instead we take the default speed values and use them to convert it to a multiplier beforehand.
+// Converting from move delay to additive multiplier: 1 / (1 / SS14_SPEED + SS13_MOVE_DELAY) / SS14_SPEED - 1
+// Speed and move delay are inversely proportional. So 1 divided by speed is move delay and vice versa.
+// We then add the ss13 move delay, and divide 1 by the result to convert it back into speed.
+// Then we divide it by the original speed and subtract 1 from the result to get the additive multiplier.
 [DataRecord, Serializable, NetSerializable]
 public record struct AttachableSpeedModifierSet(
     AttachableModifierConditions? Conditions,
-    float Walk,
-    float Sprint
+    float Walk, // Use the default walk speed when converting from SS13: 2.5f
+    float Sprint // Use the default sprint speed when converting from SS13: 4.5f
 );
 
 [DataRecord, Serializable, NetSerializable]

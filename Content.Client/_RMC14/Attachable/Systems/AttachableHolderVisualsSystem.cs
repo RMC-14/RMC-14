@@ -50,6 +50,13 @@ public sealed class AttachableHolderVisualsSystem : EntitySystem
 
                 SetAttachableOverlay(holder, attachable, args.SlotId);
                 break;
+
+            case AttachableAlteredType.Interrupted:
+                if (!attachableComponent.ShowActive)
+                    break;
+
+                SetAttachableOverlay(holder, attachable, args.SlotId);
+                break;
             
             case AttachableAlteredType.AppearanceChanged:
                 string suffix = "";

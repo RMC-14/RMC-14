@@ -1,7 +1,7 @@
 ﻿- type: entity
   abstract: true
-  parent: CMAttachmentBase
-  id: CMBarrelAttachmentBase
+  parent: RMCAttachmentBase
+  id: RMCBarrelAttachmentBase
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
@@ -10,8 +10,8 @@
     - RMCAttachmentBarrel
 
 - type: entity
-  parent: CMBarrelAttachmentBase
-  id: CMAttachmentExtendedBarrel
+  parent: RMCBarrelAttachmentBase
+  id: RMCAttachmentExtendedBarrel
   name: extended barrel
   description: The lengthened barrel speeds up and stabilizes the bullet, increasing velocity. # and accuracy.
   components:
@@ -20,18 +20,20 @@
   - type: Tag
     tags:
     - RMCAttachmentBarrel
-    - CMAttachmentExtendedBarrel
+    - RMCAttachmentExtendedBarrel
   - type: AttachableVisuals
   - type: AttachableWeaponRangedMods
     modifiers:
-    - accuracyAddMult: 0.2
-      projectileSpeedFlat: 10
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.2
+    - projectileSpeedFlat: 10
   - type: AttachableWieldDelayMods
     modifiers:
     - delay: 0.4
 
 - type: entity
-  parent: CMBarrelAttachmentBase
+  parent: RMCBarrelAttachmentBase
   id: RMCAttachmentBarrelCharger
   name: barrel charger
   description: The lengthened barrel speeds up and stabilizes the bullet, increasing velocity. # and accuracy.
@@ -45,16 +47,28 @@
   - type: AttachableVisuals
   - type: AttachableWeaponRangedMods
     modifiers:
-    - accuracyAddMult: -0.15
-      damageAddMult: 0.3
-      fireDelayFlat: 0.25
+    - fireDelayFlat: 0.25
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: -0.15
     - conditions:
         unwieldedOnly: true
       accuracyAddMult: -0.35
+    - conditions:
+        whitelist:
+          tags:
+          - RMCWeaponShotgun
+      damageAddMult: 0.05
+    - conditions:
+        isBlacklist: true
+        whitelist:
+          tags:
+          - RMCWeaponShotgun
+      damageAddMult: 0.3
 
 - type: entity
-  parent: CMBarrelAttachmentBase
-  id: CMAttachmentRecoilCompensator
+  parent: RMCBarrelAttachmentBase
+  id: RMCAttachmentRecoilCompensator
   name: recoil compensator
   description: "A muzzle attachment that reduces recoil by diverting expelled gasses upwards.
     Reduces recoil, at the cost of a small amount of weapon damage." # increases accuracy and reduces recoil
@@ -64,15 +78,22 @@
   - type: Tag
     tags:
     - RMCAttachmentBarrel
-    - CMAttachmentRecoilCompensator
+    - RMCAttachmentRecoilCompensator
   - type: AttachableVisuals
   - type: AttachableWeaponRangedMods
     modifiers:
-    - damageAddMult: -0.1
-      recoilFlat: -1 # TODO RMC14 different recoil numbers per gun and hwen unwielded
+    - accuracyAddMult: 0.2
+      damageFalloffAddMult: 0.1
+      damageAddMult: -0.1
+    - conditions:
+        wieldedOnly: true
+      recoilFlat: -3 # TODO: Figure out recoil modifiers equivalent to CM.
+    - conditions:
+        unwieldedOnly: true
+      recoilFlat: -2 # TODO: Figure out recoil modifiers equivalent to CM.
 
 - type: entity
-  parent: CMBarrelAttachmentBase
+  parent: RMCBarrelAttachmentBase
   id: RMCAttachmentSuppressor
   name: suppressor
   description: "A small tube with exhaust ports to expel noise and gas.
@@ -95,10 +116,10 @@
   id: RMCAttachmentBarrel
 
 - type: Tag
-  id: CMAttachmentExtendedBarrel
+  id: RMCAttachmentExtendedBarrel
 
 - type: Tag
-  id: CMAttachmentRecoilCompensator
+  id: RMCAttachmentRecoilCompensator
 
 - type: Tag
   id: RMCAttachmentSuppressor

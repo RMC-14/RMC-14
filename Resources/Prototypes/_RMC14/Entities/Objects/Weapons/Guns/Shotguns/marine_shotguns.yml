@@ -31,9 +31,15 @@
   - type: ShootUseDelay
     delay: 2
   - type: UseDelay
+  - type: Tag
+    tags:
+      - RMCWeaponShotgun
   - type: RMCNameItemOnVend
     item: PrimaryGun
 
 #  - type: GunWieldBonus # TODO RMC14
 #    minAngle: -25
 #    maxAngle: -50
+
+- type: Tag
+  id: RMCWeaponShotgun

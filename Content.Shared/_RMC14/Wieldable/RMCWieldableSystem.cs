@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Wieldable.Components;
 using Content.Shared._RMC14.Wieldable.Events;
 using Content.Shared.Hands;
@@ -58,6 +59,16 @@ public sealed class RMCWieldableSystem : EntitySystem
 
     private void OnRefreshMovementSpeedModifiers(Entity<WieldableSpeedModifiersComponent> wieldable, ref HeldRelayedEvent<RefreshMovementSpeedModifiersEvent> args)
     {
+        if (TryComp(wieldable.Owner, out TransformComponent? transformComponent) &&
+            transformComponent.ParentUid.Valid &&
+            TryComp(transformComponent.ParentUid, out CMArmorUserComponent? userComponent))
+        {
+            args.Args.ModifySpeed(
+                Math.Max(wieldable.Comp.ModifiedWalk - userComponent.WieldSlowdownCompensationWalk, 0), 
+                Math.Max(wieldable.Comp.ModifiedSprint - userComponent.WieldSlowdownCompensationSprint, 0));
+            return;
+        }
+
         args.Args.ModifySpeed(wieldable.Comp.ModifiedWalk, wieldable.Comp.ModifiedSprint);
     }
     

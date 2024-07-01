@@ -88,15 +88,16 @@
       rmc-aslot-barrel:
         whitelist:
           tags:
-          - CMAttachmentExtendedBarrel
+          - RMCAttachmentExtendedBarrel
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
           - RMCAttachmentBarrelCharger
       rmc-aslot-rail:
         whitelist:
           tags:
-          - CMAttachmentFlashlight
+          - RMCAttachmentFlashlight
           - RMCAttachmentMagneticHarness
+          - RMCAttachmentS84xTelescopicScope
       rmc-aslot-underbarrel:
         whitelist:
           tags:
@@ -199,12 +200,12 @@
       rmc-aslot-barrel:
         whitelist:
           tags:
-          - CMAttachmentExtendedBarrel
+          - RMCAttachmentExtendedBarrel
           - RMCAttachmentSuppressor
       rmc-aslot-rail:
         whitelist:
           tags:
-          - CMAttachmentFlashlight
+          - RMCAttachmentFlashlight
           - CMAttachmentB8SmartScope
   - type: AttachableHolderVisuals
     offsets:
