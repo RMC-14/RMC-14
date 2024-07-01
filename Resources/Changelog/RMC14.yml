@@ -1778,5 +1778,12 @@
   id: 214
   time: '2024-07-01T00:09:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2678
+- author: vero5123
+  changes:
+  - message: Fixes shockwave shader when compatibility mode is enabled.
+    type: Fix
+  id: 215
+  time: '2024-07-01T02:50:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2680
 Name: RMC14
 Order: -1
