@@ -52,7 +52,7 @@ public sealed class CMCVars : CVars
         CVarDef.Create("cm.bleed_time_multiplier", 1f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> CMMarinesPerXeno =
-        CVarDef.Create("cm.marines_per_xeno", 3f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("cm.marines_per_xeno", 3.75f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCPatronLobbyMessageTimeSeconds =
         CVarDef.Create("rmc.patron_lobby_message_time_seconds", 30, CVar.REPLICATED | CVar.SERVER);
