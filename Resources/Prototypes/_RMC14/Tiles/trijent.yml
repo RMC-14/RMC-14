@@ -1,7 +1,7 @@
 # Desert
 
 - type: tile
-  parent: RMCPlanetBase
+  parent: CMPlanetBase
   id: RMCPlanetRedDesert
   name: tiles-RMC-red-desert
   sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert1.png
@@ -198,7 +198,7 @@
   
 - type: tile
   abstract: true
-  parent: RMCPlanetBase
+  parent: CMPlanetBase
   id: RMCPlanetRedDesertTransitionCorner
   name: tiles-rmc-red-desert
 
@@ -224,7 +224,7 @@
 
 - type: tile
   abstract: true
-  parent: RMCPlanetBase
+  parent: CMPlanetBase
   id: RMCPlanetRedDesertTransitionEdge
   name: tiles-rmc-red-desert
 
@@ -281,7 +281,7 @@
 # Desert Dirt
 
 - type: tile
-  parent: RMCPlanetBase
+  parent: CMPlanetBase
   id: RMCPlanetRedDesertDirt
   name: tiles-rmc-red-desert
   sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt1.png
@@ -303,7 +303,7 @@
 
 - type: tile
   abstract: true
-  parent: RMCPlanetBase
+  parent: CMPlanetBase
   id: RMCPlanetRedDesertDirtTransitionCorner1
   name: tiles-rmc-red-desert
 
@@ -329,7 +329,7 @@
 
 - type: tile
   abstract: true
-  parent: RMCPlanetBase
+  parent: CMPlanetBase
   id: RMCPlanetRedDesertDirtTransitionCorner2
   name: tiles-rmc-red-desert
 
@@ -355,7 +355,7 @@
 
 - type: tile
   abstract: true
-  parent: RMCPlanetBase
+  parent: CMPlanetBase
   id: RMCPlanetRedDesertDirtTransitionEdge1
   name: tiles-rmc-red-desert
   
@@ -401,7 +401,7 @@
 
 - type: tile
   abstract: true
-  parent: RMCPlanetBase
+  parent: CMPlanetBase
   id: RMCPlanetRedDesertDirtTransitionEdge2
   name: tiles-rmc-red-desert
 
@@ -449,7 +449,7 @@
 # Desert Rock
 
 - type: tile
-  parent: RMCPlanetBase
+  parent: CMPlanetBase
   id: RMCPlanetRedDesertRock
   name: tiles-rmc-red-desert
   sprite: /Textures/_RMC14/Tiles/planet/red_desert/rock1.png
@@ -461,7 +461,7 @@
 
 - type: tile
   abstract: true
-  parent: RMCPlanetBase
+  parent: CMPlanetBase
   id: RMCPlanetRedDesertRock1Transition
   name: tiles-rmc-red-desert
 
@@ -518,14 +518,14 @@
 # Desert Grass
 
 - type: tile
-  parent: RMCPlanetBase
+  parent: CMPlanetBase
   id: RMCPlanetRedDesertGrass
   name: tiles-rmc-red-desert
   sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_grass.png
   
 - type: tile
   abstract: true
-  parent: RMCPlanetBase
+  parent: CMPlanetBase
   id: RMCPlanetRedDesertGrassTransitionEdge
   name: tiles-rmc-red-desert
 
@@ -572,7 +572,7 @@
 # Desert Crust
 
 - type: tile
-  parent: RMCPlanetBase
+  parent: CMPlanetBase
   id: RMCPlanetRedDesertCrust
   name: tiles-rmc-red-desert
   sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust1.png
