@@ -62,7 +62,7 @@ public sealed class CMChatSystem : SharedCMChatSystem
         }
     }
 
-    public string SanitizeMessageReplaceWords(EntityUid source, string msg)
+    public override string SanitizeMessageReplaceWords(EntityUid source, string msg)
     {
         msg = _wordreplacement.ApplyReplacements(msg, ChatSanitize);
 

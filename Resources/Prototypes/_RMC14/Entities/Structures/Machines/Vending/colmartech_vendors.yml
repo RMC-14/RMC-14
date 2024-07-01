@@ -94,8 +94,8 @@
 
 - type: entity
   parent: ColMarTechBase
-  id: ArmatAttachments
-  name: Armat Systems squad attachments vendor
+  id: CMVendorAttachments
+  name: Aegis Armaments squad attachments vendor
   description: An automated supply rack hooked up to a small storage of weapons attachments. Can be accessed by any Marine Rifleman.
   components:
   - type: AccessReader
@@ -248,7 +248,7 @@
     sections:
     - name: Armor-Piercing Ammunition
       entries:
-      - id: CMMagazineRifleM4DMRAP
+      - id: CMMagazineRifleM4SPRAP
         amount: 3
       - id: CMMagazineSMGM63AP
         amount: 3
@@ -304,7 +304,7 @@
     sections:
     - name: Primary firearms
       entries:
-      - id: WeaponRifleM4DMR
+      - id: WeaponRifleM4SPR
         amount: 10
       - id: WeaponShotgunM42A2
         amount: 15
@@ -321,7 +321,7 @@
         amount: 10
       - id: CMBoxShotgunSlugs
         amount: 10
-      - id: CMMagazineRifleM4DMR
+      - id: CMMagazineRifleM4SPR
         amount: 15
       - id: CMMagazineSMGM63
         amount: 25
@@ -485,7 +485,7 @@
     #  points: 20
     - name: Primary Ammunition
       entries:
-      - id: CMMagazineRifleM4DMRAP
+      - id: CMMagazineRifleM4SPRAP
         points: 10
       - id: CMMagazineSMGM63AP
         points: 10
@@ -601,7 +601,7 @@
     #  points: 0
     - name: Squad Kit
       entries: [ ]
-    #- id: CMM4DMRSniperKit
+    #- id: CMM4SPRSniperKit
     #  points: 0
     #- id: CMM54CStandardKit
     #  points: 0
@@ -729,7 +729,7 @@
         points: 2
     - name: Primary Ammunition
       entries:
-      - id: CMMagazineRifleM4DMRAP
+      - id: CMMagazineRifleM4SPRAP
         points: 6
       - id: CMMagazineSMGM63AP
         points: 6
@@ -867,7 +867,7 @@
       entries:
       #- id: DemolitionistSet
       #  points: 0
-      #- id: HeavyGrenadierSet
+      - id: RMCGrenadeSpecEquipmentCase
       #  points: 0
       #- id: PyroSet
       #  points: 0
@@ -901,6 +901,12 @@
       entries:
       - id: CMGrenadeHighExplosive
         points: 40
+        spawn: 6
+      - id: CMGrenadeFrag # TODO RMC14 hefa and smoke temporarily until normal options are coded
+        points: 40
+        spawn: 6
+      - id: CMGrenadeSmoke
+        points: 20
         spawn: 6
     #- id: M40HIDPIncendiaryGrenadesx6
     #  points: 40
@@ -1103,7 +1109,7 @@
     #  points: 5
     - name: Ammunition
       entries:
-      - id: CMMagazineRifleM4DMRAP
+      - id: CMMagazineRifleM4SPRAP
         points: 6
       - id: CMMagazineSMGM63AP
         points: 6
@@ -1374,7 +1380,7 @@
     #    CMM20MineBoxx4mines: 20P
     - name: Primary Ammunition
       entries:
-      - id: CMMagazineRifleM4DMRAP
+      - id: CMMagazineRifleM4SPRAP
         points: 6
       - id: CMMagazineSMGM63AP
         points: 6
@@ -1783,7 +1789,7 @@
     #  points: 5
     - name: Primary Ammunition
       entries:
-      - id: CMMagazineRifleM4DMRAP
+      - id: CMMagazineRifleM4SPRAP
         points: 10
       - id: CMMagazineSMGM63AP
         points: 10
@@ -1932,6 +1938,148 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+
+# MILITARY POLICE
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechMilitaryPoliceEquipment
+  name: ColMarTech Military Police Equipment Rack
+  description: An automated rack hooked up to a colossal storage of Military Police standard-issue equipment.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessBrig" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    job: CMMilitaryPolice
+    sections:
+    - name: Police Set (Mandatory)
+      entries:
+      - id: RMCVendorBundleMilitaryPoliceApparel
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: CMHandsBlackMarine
+      - id: CMHeadsetMPO
+      - id: CMBootsBlackFilled
+    - name: Armor
+      takeAll: CMArmor
+      entries:
+      - id: CMArmorM2MP
+      - id: CMHeadBeretRed
+    - name: Handgun Case
+#     choices: { CMGunCase: 1 }
+      entries: []
+#     - id: M77 Gun case
+#     - id: Combat Revolver Gun case
+#     - id: M1984 Gun case
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: CMSatchelSecurity
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries: []
+#     - id: CMM276GeneralPistolHolsterRig
+#     - id: CMM276M44HolsterRig
+#     - M276 G8-A General Utility Pouch
+    - name: Pouches
+      choices: { CMPouch: 2 }
+      entries:
+      - id: CMPouchGeneralMedium
+      - id: CMPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
+      - id: CMPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 add 'splints,'
+      - id: CMPouchFirstAidPills
+        name: first-aid pouch (pills)
+      - id: CMPouchMagazinePistol
+      - id: CMPouchPistol
+    - name: Mask
+      choices: { CMMask: 1 }
+      entries:
+      - id: CMMaskGas
+      - id: CMMaskCoif
+#     - id: Rebreather
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBrown
+      - id: CMWebbingBlack
+      #- id: CMShoulderHolster
+      - id: CMWebbing
+
+# WARDEN
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechWardenEquipment
+  name: ColMarTech Military Warden Equipment Rack
+  description: An automated rack hooked up to a colossal storage of Military Police standard-issue equipment.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessArmory" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    job: CMMilitaryPolice
+    sections:
+    - name: Police Set (Mandatory)
+      entries:
+      - id: RMCVendorBundleMilitaryPoliceApparel
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: CMHandsBlackMarine
+      - id: CMHeadsetCMP
+      - id: CMBootsBlackFilled
+    - name: Armor
+      takeAll: CMArmor
+      entries:
+      - id: CMArmorM3Warden
+      - id: CMHeadCapWarden
+    - name: Handgun Case
+#     choices: { CMGunCase: 1 }
+      entries: []
+#     - id: M77 Gun case
+#     - id: Combat Revolver Gun case
+#     - id: M1984 Gun case
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: CMSatchelSecurity
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries: []
+#     - id: CMM276GeneralPistolHolsterRig
+#     - id: CMM276M44HolsterRig
+#     - M276 G8-A General Utility Pouch
+    - name: Pouches
+      choices: { CMPouch: 2 }
+      entries:
+      - id: CMPouchGeneralMedium
+      - id: CMPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
+      - id: CMPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 add 'splints,'
+      - id: CMPouchFirstAidPills
+        name: first-aid pouch (pills)
+      - id: CMPouchMagazinePistol
+      - id: CMPouchPistol
+    - name: Mask
+      choices: { CMMask: 1 }
+      entries:
+      - id: CMMaskGas
+      - id: CMMaskCoif
+#     - id: Rebreather
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBrown
+      - id: CMWebbingBlack
+      #- id: CMShoulderHolster
+      - id: CMWebbing
 
 - type: entity
   parent: ColMarTechBase
@@ -2121,4 +2269,5 @@
 #        amount: 4
 #      - id: Squad Optic
 #        amount: 15
+
 

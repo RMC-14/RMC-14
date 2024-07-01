@@ -193,6 +193,17 @@ cm-chatsan-replacement-lz = metal bird perch
 cm-chatsan-word-shoot = shoot
 cm-chatsan-replacement-shoot = spit
 
+cm-chatsan-word-felinid = felinid
+cm-chatsan-replacement-felinid = feline host
+
+cm-chatsan-word-felinids = felinids
+cm-chatsan-replacement-felinids = feline hosts
+
+cm-chatsan-word-cat = feline host
+cm-chatsan-word-cats = feline hosts
+
+# TODO RMC14 rouny > runner but only if no rouny was spawned in the round
+
 # cm-chatsan-word-#tank = #tank
 # cm-chatsan-replacement-#tank = turtle
 

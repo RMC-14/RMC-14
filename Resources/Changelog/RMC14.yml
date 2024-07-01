@@ -1592,5 +1592,279 @@
   id: 191
   time: '2024-06-25T11:20:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2622
+- author: DrSmugleaf
+  changes:
+  - message: Fixed duplicate lurker invisibility expired and hive core not enough
+      plasma popups.
+    type: Fix
+  id: 192
+  time: '2024-06-25T12:56:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2623
+- author: CaasGit
+  changes:
+  - message: blood bags no longer attempt to poke random objects
+    type: Fix
+  id: 193
+  time: '2024-06-26T04:29:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2615
+- author: Whisper
+  changes:
+  - message: Autoinjectors no longer inject into containers, use refillable bottles
+      instead.
+    type: Fix
+  id: 194
+  time: '2024-06-26T05:42:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2633
+- author: AeraAuling
+  changes:
+  - message: Added Felinids
+    type: Add
+  id: 195
+  time: '2024-06-26T07:27:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2561
+- author: DrSmugleaf
+  changes:
+  - message: Added Toolshed commands for skills, vendor points, squads and evolution
+      points.
+    type: Add
+  id: 196
+  time: '2024-06-26T08:40:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2636
+- author: Siigiil
+  changes:
+  - message: Fixed attachment actions not being properly removed.
+    type: Fix
+  - message: Fixed the attachment offsets for the M54.
+    type: Fix
+  id: 197
+  time: '2024-06-26T23:37:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2571
+- author: DrSmugleaf
+  changes:
+  - message: Ghosting while in crit will now give you a warning that you won't be
+      able to return to your body. Ghosting while dead will still allow you to return
+      if defibbed.
+    type: Tweak
+  - message: Replaced succumb, last words and fake death with the new ghost action.
+    type: Tweak
+  id: 198
+  time: '2024-06-27T05:04:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2644
+- author: DrSmugleaf
+  changes:
+  - message: Humanoid voicelines can now be individually toggled for each species.
+    type: Tweak
+  id: 199
+  time: '2024-06-27T05:04:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2641
+- author: DrSmugleaf
+  changes:
+  - message: Fixed webbing sometimes not opening until reattached or taking multiple
+      attempts to open.
+    type: Fix
+  id: 200
+  time: '2024-06-27T05:08:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2640
+- author: Vermidia
+  changes:
+  - message: Marines will now experience symptoms of being infected.
+    type: Add
+  id: 201
+  time: '2024-06-27T06:49:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2553
+- author: Zarq0
+  changes:
+  - message: Made phoron bars grindable.
+    type: Tweak
+  - message: Added phoron as a reagent.
+    type: Add
+  id: 202
+  time: '2024-06-28T00:35:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2647
+- author: Sigil
+  changes:
+  - message: The grenade launcher now properly fires over creatures and objects.
+    type: Fix
+  id: 203
+  time: '2024-06-28T00:43:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2618
+- author: Noisrevni
+  changes:
+  - message: Added requisitions paperwork reward system, now supply crew can send
+      stamped invoice to gain extra money for the ongoing operation.
+    type: Add
+  id: 204
+  time: '2024-06-28T01:32:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2409
+- author: Zarq0
+  changes:
+  - message: Ported Meralyne, Imidazoline and Clonexadone from CM13.
+    type: Add
+  id: 205
+  time: '2024-06-28T03:33:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2642
+- author: DrSmugleaf
+  changes:
+  - message: Added Squad creation and moving marines between squads to the admin menu.
+    type: Add
+  id: 206
+  time: '2024-06-28T03:34:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2657
+- author: DrSmugleaf
+  changes:
+  - message: Added Discord account linking.
+    type: Add
+  - message: 'Added Patron perks: mention on the credits, OOC name color, named items,
+      figurines, lobby messages, and round end shoutout, depending on the tier.'
+    type: Add
+  id: 207
+  time: '2024-06-30T01:32:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2666
+- author: snebl
+  changes:
+  - message: Fixed damage modifiers not being applied on marine firearms.
+    type: Fix
+  id: 208
+  time: '2024-06-30T08:52:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2669
+- author: Zarq0
+  changes:
+  - message: Added a new requisition tab, Research.
+    type: Add
+  - message: Made phoron obtainable through requisitions.
+    type: Tweak
+  id: 209
+  time: '2024-06-30T09:35:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2663
+- author: DrSmugleaf
+  changes:
+  - message: Fixed bullets not hitting xenonid eggs.
+    type: Fix
+  id: 210
+  time: '2024-06-30T11:25:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2671
+- author: DrSmugleaf
+  changes:
+  - message: Added the ability for xenonids to devolve.
+    type: Add
+  - message: Fixed xenos taking twice as long to evolve than intended.
+    type: Fix
+  - message: Fixed drones not being able to evolve to Queen without enough points.
+      Evolution points are now ignored when evolving from Drone to Queen.
+    type: Fix
+  id: 211
+  time: '2024-06-30T11:31:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2670
+- author: vero5123
+  changes:
+  - message: adds a shockwave overlay effect.
+    type: Add
+  id: 212
+  time: '2024-06-30T18:48:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2631
+- author: DrSmugleaf
+  changes:
+  - message: Fixed humanoids and xenos being gibbed when receiving exclusively Blunt
+      (M40 HEDP) damage.
+    type: Fix
+  id: 213
+  time: '2024-06-30T23:56:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2676
+- author: DrSmugleaf
+  changes:
+  - message: Added 4 more medbay vendors to Savannah and surgery tools to its surgery
+      room.
+    type: Tweak
+  id: 214
+  time: '2024-07-01T00:09:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2678
+- author: vero5123
+  changes:
+  - message: Fixes shockwave shader when compatibility mode is enabled.
+    type: Fix
+  id: 215
+  time: '2024-07-01T02:50:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2680
+- author: DrSmugleaf
+  changes:
+  - message: Fixed surgery incorrectly thinking that someone on an operating table
+      is not lying down.
+    type: Fix
+  id: 216
+  time: '2024-07-01T03:08:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2687
+- author: DrSmugleaf
+  changes:
+  - message: Increased Requisitions money gain from $600 a minute to $1500 a minute.
+    type: Tweak
+  id: 217
+  time: '2024-07-01T03:06:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2689
+- author: DrSmugleaf
+  changes:
+  - message: Set the default amount of marines per xeno back up to 4. 50 xenos per
+      200 players.
+    type: Tweak
+  - message: Decreased both the travel time and cooldown of dropships by 30 seconds.
+    type: Tweak
+  id: 218
+  time: '2024-07-01T03:05:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2681
+- author: DrSmugleaf
+  changes:
+  - message: Fixed power cell rechargers on the Almayer not being to recharge anything.
+    type: Fix
+  id: 219
+  time: '2024-07-01T03:07:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2688
+- author: Whisper
+  changes:
+  - message: You can now deconstruct magazine boxes into cardboard and craft new ones.
+    type: Add
+  id: 220
+  time: '2024-07-01T03:28:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2547
+- author: DrSmugleaf
+  changes:
+  - message: 'Added 2 Patron figurines: Fox Bridgeton and Kills-The-Mice. They will
+      appear on some tables if the dropship and planet map, and are randomly chosen.'
+    type: Add
+  id: 221
+  time: '2024-07-01T04:02:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2686
+- author: DrSmugleaf
+  changes:
+  - message: Marines and xenos that are abandoned and left on the planet after a hijack
+      will no longer be counted for round end.
+    type: Fix
+  id: 222
+  time: '2024-07-01T04:10:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2691
+- author: DrSmugleaf
+  changes:
+  - message: "Increased the M54C's initial accuracy and on short bursts while wielded.\
+      \ Minimum spread from 15\xBA to 5\xBA, angle increase per shot from 5\xBA to\
+      \ 1\xBA, angle decay per second from 5\xBA to 10\xBA."
+    type: Tweak
+  - message: "Massively increased the M4SPR's accuracy while wielded. Its angle now\
+      \ increases by 3\xBA per shot, down from 20\xBA."
+    type: Tweak
+  id: 223
+  time: '2024-07-01T04:25:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2692
+- author: DrSmugleaf
+  changes:
+  - message: Added Patron figurine for Fritz Vohlkson the Sniper Specialist.
+    type: Add
+  id: 224
+  time: '2024-07-01T04:33:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2693
+- author: Tunguso4ka
+  changes:
+  - message: Fire Team Leaders now have their own prep room on the Savannah!
+    type: Add
+  id: 225
+  time: '2024-07-01T10:03:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2700
 Name: RMC14
 Order: -1

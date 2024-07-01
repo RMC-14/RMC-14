@@ -32,9 +32,13 @@
     - ActionXenoPlantWeeds
     #    - ActionXenoBurrow
     #    - ActionXenoTremor
+    - ActionXenoDevolve
     tier: 2
     hudOffset: 0,0.56
     unlockAt: 420 # 7 minutes
+  - type: XenoDevolve
+    devolvesTo:
+    - CMXenoDrone
   - type: XenoPlasma
     plasma: 600
     maxPlasma: 600

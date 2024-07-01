@@ -2,6 +2,7 @@
 using Content.Client.Administration.UI.CustomControls;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared.Body.Part;
+using Content.Shared.Rotation;
 using Content.Shared.Standing;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
@@ -18,7 +19,6 @@ public sealed class CMSurgeryBui : BoundUserInterface
     [Dependency] private readonly IEntityManager _entities = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
 
-    private readonly StandingStateSystem _standing;
     private readonly CMSurgerySystem _system;
 
     [ViewVariables]
@@ -30,7 +30,6 @@ public sealed class CMSurgeryBui : BoundUserInterface
 
     public CMSurgeryBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
-        _standing = _entities.System<StandingStateSystem>();
         _system = _entities.System<CMSurgerySystem>();
     }
 
@@ -374,7 +373,7 @@ public sealed class CMSurgeryBui : BoundUserInterface
         if (_window == null)
             return;
 
-        if (_standing.IsDown(Owner))
+        if (_system.IsLyingDown(Owner))
         {
             _window.DisabledPanel.Visible = false;
             _window.DisabledPanel.MouseFilter = MouseFilterMode.Ignore;

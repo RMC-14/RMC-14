@@ -1,11 +1,10 @@
 ﻿using Content.Server.Explosion.EntitySystems;
 using Content.Server.Popups;
-using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Voicelines;
 using Content.Shared.Humanoid;
 using Content.Shared.Popups;
 using Robust.Server.Audio;
-using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Explosion;
@@ -13,7 +12,7 @@ namespace Content.Server._RMC14.Explosion;
 public sealed class CMExplosionSystem : SharedCMExplosionSystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly INetConfigurationManager _config = default!;
+    [Dependency] private readonly HumanoidVoicelinesSystem _humanoidVoicelines = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
 
     public override void Initialize()
@@ -35,18 +34,13 @@ public sealed class CMExplosionSystem : SharedCMExplosionSystem
         _popup.PopupEntity(popup, user, Filter.PvsExcept(user), true, ent.Comp.PopupType);
 
         var gender = CompOrNull<HumanoidAppearanceComponent>(user)?.Sex ?? Sex.Unsexed;
-        if (ent.Comp.Sounds.TryGetValue(gender, out var sound))
-        {
-            foreach (var session in Filter.Pvs(user).Recipients)
-            {
-                if (session.AttachedEntity is not { } recipient ||
-                    !_config.GetClientCVar(session.Channel, CMCVars.CMPlayHumanoidVoicelines))
-                {
-                    continue;
-                }
+        if (!ent.Comp.Sounds.TryGetValue(gender, out var sound))
+            return;
 
-                _audio.PlayEntity(sound, recipient, user);
-            }
-        }
+        var filter = Filter.Pvs(user).RemoveWhere(s => !_humanoidVoicelines.ShouldPlayVoiceline(user, s));
+        if (filter.Count == 0)
+            return;
+
+        _audio.PlayEntity(sound, filter, user, true);
     }
 }

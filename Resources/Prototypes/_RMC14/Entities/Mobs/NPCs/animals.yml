@@ -5,6 +5,7 @@
   components:
   - type: GhostRole
     prob: 0
+  - type: Infectable
 
 - type: entity
   parent: MobKobold
@@ -13,6 +14,7 @@
   components:
   - type: GhostRole
     prob: 0
+  - type: Infectable
 
 - type: entity
   parent: MobMouse

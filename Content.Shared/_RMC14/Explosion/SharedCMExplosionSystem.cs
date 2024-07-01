@@ -15,6 +15,7 @@ public abstract class SharedCMExplosionSystem : EntitySystem
 
     private void OnExplosionEffectTriggered(Entity<CMExplosionEffectComponent> ent, ref CMExplosiveTriggeredEvent args)
     {
+        SpawnNextToOrDrop(ent.Comp.ShockWave, ent);
         SpawnNextToOrDrop(ent.Comp.Explosion, ent);
 
         if (ent.Comp.MaxShrapnel > 0)

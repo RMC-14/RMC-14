@@ -135,9 +135,9 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         }
     }
 
-    public void SetShooter(EntityUid id, ProjectileComponent component, EntityUid shooterId)
+    public void SetShooter(EntityUid id, ProjectileComponent component, EntityUid? shooterId = null)
     {
-        if (component.Shooter == shooterId)
+        if (component.Shooter == shooterId || shooterId == null)
             return;
 
         component.Shooter = shooterId;
