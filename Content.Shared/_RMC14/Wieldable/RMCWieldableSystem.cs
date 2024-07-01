@@ -64,8 +64,8 @@ public sealed class RMCWieldableSystem : EntitySystem
             TryComp(transformComponent.ParentUid, out CMArmorUserComponent? userComponent))
         {
             args.Args.ModifySpeed(
-                Math.Max(wieldable.Comp.ModifiedWalk - userComponent.WieldSlowdownCompensationWalk, 0), 
-                Math.Max(wieldable.Comp.ModifiedSprint - userComponent.WieldSlowdownCompensationSprint, 0));
+                Math.Min(wieldable.Comp.ModifiedWalk + userComponent.WieldSlowdownCompensationWalk, 1f), 
+                Math.Min(wieldable.Comp.ModifiedSprint + userComponent.WieldSlowdownCompensationSprint, 1f));
             return;
         }
 
