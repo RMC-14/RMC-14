@@ -495,6 +495,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 _almayerMaps.Add(xform.MapID);
             }
 
+            var time = Timing.CurTime;
             var xenosAlive = false;
             var xenos = EntityQueryEnumerator<ActorComponent, XenoComponent, MobStateComponent, TransformComponent>();
             while (xenos.MoveNext(out var xenoId, out _, out var xeno, out var mobState, out var xform))
@@ -503,7 +504,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     continue;
 
                 if (_mobState.IsAlive(xenoId, mobState) &&
-                    (!distress.Hijack || _almayerMaps.Contains(xform.MapID)))
+                    (distress.AbandonedAt == null ||
+                     time < distress.AbandonedAt ||
+                     !distress.Hijack ||
+                     _almayerMaps.Contains(xform.MapID)))
                 {
                     xenosAlive = true;
                 }
@@ -520,7 +524,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     continue;
 
                 if (_mobState.IsAlive(marineId, mobState) &&
-                    (!distress.Hijack || _almayerMaps.Contains(xform.MapID)))
+                    (distress.AbandonedAt == null ||
+                     time < distress.AbandonedAt ||
+                     !distress.Hijack ||
+                     _almayerMaps.Contains(xform.MapID)))
                 {
                     marinesAlive = true;
                 }
