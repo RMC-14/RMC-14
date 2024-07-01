@@ -1,6 +1,6 @@
 # species
 - type: emoteSounds
-  id: CMMaleHuman
+  id: RMCMaleHuman
   params:
     variation: 0.125
   sounds:
@@ -36,7 +36,7 @@
       collection: MaleGasp
 
 - type: emoteSounds
-  id: CMFemaleHuman
+  id: RMCFemaleHuman
   params:
     variation: 0.125
   sounds:
@@ -72,7 +72,7 @@
       collection: FemaleGasp
 
 - type: emoteSounds
-  id: CMMaleFelinid
+  id: RMCMaleFelinid
   params:
     variation: 0.125
   sounds:
@@ -110,7 +110,7 @@
       collection: MaleDeathGasp
 
 - type: emoteSounds
-  id: CMFemaleFelinid
+  id: RMCFemaleFelinid
   params:
     variation: 0.125
   sounds:
@@ -148,7 +148,7 @@
       collection: FemaleDeathGasp
 
 - type: emoteSounds
-  id: CMMaleSlime
+  id: RMCMaleSlime
   params:
     variation: 0.125
   sounds:
@@ -186,7 +186,7 @@
       collection: MaleGasp
 
 - type: emoteSounds
-  id: CMFemaleSlime
+  id: RMCFemaleSlime
   params:
     variation: 0.125
   sounds:
