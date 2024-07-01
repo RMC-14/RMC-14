@@ -14,10 +14,10 @@
       "name": "smg_brace"
     },
     {
-      "name": "smgstockcc"
+      "name": "smgstockcol"
     },
     {
-      "name": "smgstockc"
+      "name": "smgstockcol-on"
     },
     {
       "name": "smgstock"
@@ -53,10 +53,10 @@
       "name": "nsg23_stock"
     },
     {
-      "name": "m41_folding_on"
+      "name": "m52_folding_on"
     },
     {
-      "name": "m41_folding"
+      "name": "m52_folding"
     },
     {
       "name": "riflestock"
@@ -86,10 +86,10 @@
       "name": "smg_brace_a"
     },
     {
-      "name": "smgstockcc_a"
+      "name": "smgstockcol_a"
     },
     {
-      "name": "smgstockc_a"
+      "name": "smgstockcol_a-on"
     },
     {
       "name": "smgstock_a"
@@ -104,10 +104,10 @@
       "name": "l42stock_a"
     },
     {
-      "name": "m41_folding_a_on"
+      "name": "m52_folding_a_on"
     },
     {
-      "name": "m41_folding_a"
+      "name": "m52_folding_a"
     },
     {
       "name": "riflestock_a"
@@ -182,10 +182,10 @@
       "name": "m44r_stock"
     },
     {
-      "name": "mod88_stock"
+      "name": "m77_stock"
     },
     {
-      "name": "mod88_stock_a"
+      "name": "m77_stock_a"
     },
     {
       "name": "vulture_stock"

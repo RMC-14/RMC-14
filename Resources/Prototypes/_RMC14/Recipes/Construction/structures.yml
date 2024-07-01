@@ -207,6 +207,24 @@
 
 - type: construction
   parent: RMC
+  name: Handrail
+  id: RMCBarricadeHandrail
+  graph: BarricadeHandrailGraph
+  startNode: start
+  targetNode: nodeHandrail
+  category: construction-category-cm-structures
+  description: A railing, for your hands. Woooow.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
+    state: handrail_a_0
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
   name: Folding Metal Barricade
   id: CMBarricadeMetalDoor
   graph: BarricadeMetalDoorGraph

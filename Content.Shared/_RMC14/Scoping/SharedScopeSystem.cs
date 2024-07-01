@@ -197,6 +197,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
         if (!CanScopePopup(scope, user))
             return null;
 
+        // TODO RMC14 make this work properly with rotations
         var xform = Transform(user);
         var cardinalDir = xform.LocalRotation.GetCardinalDir();
         var ev = new ScopeDoAfterEvent(cardinalDir);

@@ -1,0 +1,67 @@
+﻿- type: entity
+  parent: BaseCurtains
+  id: RMCCurtainBase
+  name: curtain
+  abstract: true
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+#      - !type:SpawnEntitiesBehavior
+#        spawn:
+#          MaterialCloth1: # TODO RMC cloth
+#            min: 1
+#            max: 2
+        
+- type: entity
+  parent: RMCCurtainBase
+  id: RMCCurtainGreen
+  components:
+  - type: Sprite
+    snapCardinals: true
+    sprite: _RMC14/Structures/Furniture/Curtains/green.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+
+- type: entity
+  parent: RMCCurtainBase
+  id: RMCCurtainMedical
+  name: plastic curtain
+  components:
+  - type: Sprite
+    snapCardinals: true
+    sprite: _RMC14/Structures/Furniture/Curtains/green.rsi
+    layers:
+    - state: closed
+      color: "#B8F5E3"
+      map: ["enum.DoorVisualLayers.Base"]
+
+- type: entity
+  parent: RMCCurtainBase
+  id: RMCCurtainShower
+  name: shower curtain
+  components:
+  - type: Sprite
+    snapCardinals: true
+    sprite: _RMC14/Structures/Furniture/Curtains/shower.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+
+- type: entity
+  parent: RMCCurtainBase
+  id: RMCCurtainRed
+  name: red curtain
+  components:
+  - type: Sprite
+    snapCardinals: true
+    sprite: _RMC14/Structures/Furniture/Curtains/red.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]

@@ -18,7 +18,13 @@ public sealed partial class XenoEvolutionComponent : Component
     public bool CanEvolveWithoutGranter;
 
     [DataField, AutoNetworkedField]
+    public TimeSpan EvolveWithoutOvipositorFor = TimeSpan.FromMinutes(5);
+
+    [DataField, AutoNetworkedField]
     public List<EntProtoId> EvolvesTo = new();
+
+    [DataField, AutoNetworkedField]
+    public List<EntProtoId> EvolvesToWithoutPoints = new();
 
     [DataField, AutoNetworkedField]
     public TimeSpan EvolutionDelay = TimeSpan.FromSeconds(3);
@@ -30,7 +36,7 @@ public sealed partial class XenoEvolutionComponent : Component
     public FixedPoint2 Max;
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 PointsPerSecond = 0.5;
+    public FixedPoint2 PointsPerSecond = 1;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastPointsAt;
@@ -43,4 +49,7 @@ public sealed partial class XenoEvolutionComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier EvolutionReadySound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/xeno_evolveready.ogg", AudioParams.Default.WithVolume(-6));
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan AccumulatePointsBefore = TimeSpan.FromMinutes(15);
 }

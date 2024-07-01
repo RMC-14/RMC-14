@@ -1,0 +1,27 @@
+# TODO RMC14 other effects
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCPhoron
+  name: reagent-name-rmcphoron
+  desc: reagent-desc-rmcphoron
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#E71B00"
+  tileReactions:
+  - !type:FlammableTileReaction {}
+  reactiveEffects:
+    Flammable:
+      methods: [ Touch ]
+      effects:
+      - !type:FlammableReaction
+        multiplier: 0.2
+  metabolisms:
+    Poison:
+      metabolismRate: 0.05
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 0.25
+      - !type:FlammableReaction
+        multiplier: 0.2

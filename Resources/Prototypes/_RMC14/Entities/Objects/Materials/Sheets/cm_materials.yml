@@ -14,23 +14,6 @@
   color: "#696969"
   price: 0.28
 
-# Glass
-- type: material
-  id: CMGlass
-  stackEntity: CMSheetGlass
-  name: materials-glass
-  icon: { sprite: _RMC14/Objects/Materials/Sheets/glass.rsi, state: glass }
-  color: "#a8ccd7"
-  price: 0.075
-
-- type: material
-  id: CMReinforcedGlass
-  stackEntity: CMSheetGlassReinforced
-  name: materials-reinforced-glass
-  icon: { sprite: _RMC14/Objects/Materials/Sheets/reinf_glass.rsi, state: rglass }
-  color: "#549bb0"
-  price: 0.16
-
 # Phoron glass
 
 - type: material
@@ -48,12 +31,3 @@
   icon: { sprite: _RMC14/Objects/Materials/Sheets/phoron_reinf_glass.rsi, state: phoronrglass }
   color: "#8c4069"
   price: 0.40
-
-# Other
-- type: material
-  id: CMPhoron
-  stackEntity: CMSheetPhoron
-  name: materials-phoron
-  icon: { sprite: _RMC14/Objects/Materials/Sheets/phoron.rsi, state: phoron }
-  color: "#7e009e"
-  price: 0.2

@@ -7,11 +7,11 @@ using Robust.Shared.Toolshed;
 
 namespace Content.Server._RMC14.Xenonids.Weeds;
 
-[ToolshedCommand, AdminCommand(AdminFlags.Debug)]
+[ToolshedCommand, AdminCommand(AdminFlags.Spawn)]
 public sealed class RemoveInvalidWeedsCommand : ToolshedCommand
 {
     [CommandImplementation]
-    public void Rejuvenate([CommandInvocationContext] IInvocationContext ctx)
+    public void Run([CommandInvocationContext] IInvocationContext ctx)
     {
         var mapSystem = GetSys<SharedMapSystem>();
         var blockQuery = EntityManager.GetEntityQuery<BlockWeedsComponent>();

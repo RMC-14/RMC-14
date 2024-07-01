@@ -25,8 +25,28 @@
     impactEffect: XenoProjectileImpactEffect
     damage: {}
   - type: TimedDespawn
-    lifetime: 0.3
+    lifetime: 0.2
   - type: XenoProjectile
+
+- type: entity
+  id: XenoSpitProjectile
+  parent: XenoBaseProjectile
+  name: spit
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: neurotoxin
+      shader: unshaded
+  - type: Projectile
+    impactEffect: null
+    damage:
+      groups:
+        Burn: 18 # TODO RMC14 damage fall-off and higher at close range
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: true
 
 - type: entity
   id: XenoSlowingSpitProjectile

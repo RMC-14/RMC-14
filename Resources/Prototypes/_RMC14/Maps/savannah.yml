@@ -3,49 +3,59 @@
   mapName: Savannah
   mapPath: /Maps/_RMC14/savannah.yml
   minPlayers: 0
+  maxPlayers: 100
+  maxRandomOffset: 0
+  randomRotation: false
   stations:
     Savannah:
-      stationProto: StandardNanotrasenStation
+      stationProto: StandardUNMCWarship
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'USS LCS-14 Savannah'
+          mapNameTemplate: 'LCS-14 Savannah'
         - type: StationJobs
           availableJobs:
-            #Command
+            # Command
             CMCommandingOfficer: [1, 1]
             CMExecutiveOfficer: [1, 1]
-            CMStaffOfficer: [2, 2]
+            CMStaffOfficer: [1, 1]
             CMSeniorEnlistedAdvisor: [1, 1]
-            #Military Police
+
+            # Military Police
             CMChiefMP: [1, 1]
             CMMilitaryWarden: [1, 1]
-            CMMilitaryPolice: [4, 4]
-            #Auxiliary
+            CMMilitaryPolice: [5, 8]
+
+            # Auxiliary
             CMAuxiliarySupportOfficer: [1, 1]
-            CMIntelOfficer: [4, 4]
-            CMPilotDropship: [1, 1]
-            CMPilotGunship: [1, 1]
+#            CMIntelOfficer: [4, 4]
+            CMPilotDropship: [2, 2] # TODO RMC14 1
+#            CMPilotGunship: [1, 1]
             CMDropshipCrewChief: [2, 2]
-            #Engineering
-            CMChiefEngineer: [1, 1]
-            CMOrdnanceTech: [3, 3]
-            CMMaintTech: [1, 1]
-            #Medical
+
+            # Engineering
+#            CMChiefEngineer: [1, 1]
+#            CMOrdnanceTech: [3, 3]
+#            CMMaintTech: [2, 1]
+
+            # Medical
             CMCMO: [1, 1]
-            CMDoctor: [4, 4]
-            CMNurse: [2, 2]
-            CMResearcher: [2, 2]
-            #Requisition
+            CMDoctor: [4, 6]
+            CMNurse: [4, 6]
+#            CMResearcher: [2, 2]
+
+            # Requisition
             CMQuartermaster: [1, 1]
-            CMCargoTech: [4, 4]
-            CMMessTech: [1, 1]
-            #Marines
+            CMCargoTech: [3, 3]
+#            CMMessTech: [1, 1]
+
+            # Marines
             CMSquadLeader: [4, 4]
-            CMFireteamLeader: [8, 16]
-            CMSmartGunOperator: [8, 16]
-            CMWeaponsSpecialist: [8, 16]
-            CMCombatTech: [16, 16]
+            CMFireteamLeader: [4, 8]
+#            CMSmartGunOperator: [8, 16]
+            CMWeaponsSpecialist: [4, 4]
+            CMCombatTech: [8, 12]
             CMHospitalCorpsman: [8, 16]
             CMRifleman: [ -1, -1 ]
-            #Civilians
+
+            # Civilians
             CMCorrespondent: [2, 2]
