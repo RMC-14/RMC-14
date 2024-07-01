@@ -17,6 +17,7 @@ if (File.Exists("config.json"))
 {
     var config = await JsonSerializer.DeserializeAsync<Config>(File.OpenRead("config.json")) ?? new Config();
     token = config.Token;
+    connectionString = config.DatabaseString;
 }
 
 #if DEBUG

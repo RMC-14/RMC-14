@@ -1755,5 +1755,116 @@
   id: 211
   time: '2024-06-30T11:31:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2670
+- author: vero5123
+  changes:
+  - message: adds a shockwave overlay effect.
+    type: Add
+  id: 212
+  time: '2024-06-30T18:48:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2631
+- author: DrSmugleaf
+  changes:
+  - message: Fixed humanoids and xenos being gibbed when receiving exclusively Blunt
+      (M40 HEDP) damage.
+    type: Fix
+  id: 213
+  time: '2024-06-30T23:56:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2676
+- author: DrSmugleaf
+  changes:
+  - message: Added 4 more medbay vendors to Savannah and surgery tools to its surgery
+      room.
+    type: Tweak
+  id: 214
+  time: '2024-07-01T00:09:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2678
+- author: vero5123
+  changes:
+  - message: Fixes shockwave shader when compatibility mode is enabled.
+    type: Fix
+  id: 215
+  time: '2024-07-01T02:50:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2680
+- author: DrSmugleaf
+  changes:
+  - message: Fixed surgery incorrectly thinking that someone on an operating table
+      is not lying down.
+    type: Fix
+  id: 216
+  time: '2024-07-01T03:08:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2687
+- author: DrSmugleaf
+  changes:
+  - message: Increased Requisitions money gain from $600 a minute to $1500 a minute.
+    type: Tweak
+  id: 217
+  time: '2024-07-01T03:06:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2689
+- author: DrSmugleaf
+  changes:
+  - message: Set the default amount of marines per xeno back up to 4. 50 xenos per
+      200 players.
+    type: Tweak
+  - message: Decreased both the travel time and cooldown of dropships by 30 seconds.
+    type: Tweak
+  id: 218
+  time: '2024-07-01T03:05:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2681
+- author: DrSmugleaf
+  changes:
+  - message: Fixed power cell rechargers on the Almayer not being to recharge anything.
+    type: Fix
+  id: 219
+  time: '2024-07-01T03:07:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2688
+- author: Whisper
+  changes:
+  - message: You can now deconstruct magazine boxes into cardboard and craft new ones.
+    type: Add
+  id: 220
+  time: '2024-07-01T03:28:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2547
+- author: DrSmugleaf
+  changes:
+  - message: 'Added 2 Patron figurines: Fox Bridgeton and Kills-The-Mice. They will
+      appear on some tables if the dropship and planet map, and are randomly chosen.'
+    type: Add
+  id: 221
+  time: '2024-07-01T04:02:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2686
+- author: DrSmugleaf
+  changes:
+  - message: Marines and xenos that are abandoned and left on the planet after a hijack
+      will no longer be counted for round end.
+    type: Fix
+  id: 222
+  time: '2024-07-01T04:10:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2691
+- author: DrSmugleaf
+  changes:
+  - message: "Increased the M54C's initial accuracy and on short bursts while wielded.\
+      \ Minimum spread from 15\xBA to 5\xBA, angle increase per shot from 5\xBA to\
+      \ 1\xBA, angle decay per second from 5\xBA to 10\xBA."
+    type: Tweak
+  - message: "Massively increased the M4SPR's accuracy while wielded. Its angle now\
+      \ increases by 3\xBA per shot, down from 20\xBA."
+    type: Tweak
+  id: 223
+  time: '2024-07-01T04:25:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2692
+- author: DrSmugleaf
+  changes:
+  - message: Added Patron figurine for Fritz Vohlkson the Sniper Specialist.
+    type: Add
+  id: 224
+  time: '2024-07-01T04:33:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2693
+- author: Tunguso4ka
+  changes:
+  - message: Fire Team Leaders now have their own prep room on the Savannah!
+    type: Add
+  id: 225
+  time: '2024-07-01T10:03:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2700
 Name: RMC14
 Order: -1

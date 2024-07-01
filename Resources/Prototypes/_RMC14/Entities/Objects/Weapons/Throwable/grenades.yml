@@ -81,6 +81,7 @@
     fillPrototype: CMProjectileShrapnel
     maxGrenadesCount: 48
     grenadeType: enum.GrenadeType.Shoot
+    triggerGrenades: false
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
@@ -104,6 +105,13 @@
     state: grenade
   - type: TimedDespawn
     lifetime: 0.6
+  
+- type: entity
+  id: RMCExplosionEffectGrenadeShockWave
+  components:
+  - type: TimedDespawn
+    lifetime: 0.5
+  - type: RMCExplosionShockWave
 
 - type: entity
   id: CMExplosionEffectShrapnel1

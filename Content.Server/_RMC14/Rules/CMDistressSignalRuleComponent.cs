@@ -31,7 +31,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     // TODO RMC14
     [DataField]
-    public bool XenosEverOnShip;
+    public bool Hijack;
 
     [DataField]
     public ProtoId<JobPrototype> QueenJob = "CMXenoQueen";
@@ -62,6 +62,12 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     [DataField]
     public TimeSpan CheckEvery = TimeSpan.FromSeconds(5);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan? AbandonedAt;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan AbandonedDelay = TimeSpan.FromMinutes(5);
 
     // TODO RMC14
     // [DataField]

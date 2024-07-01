@@ -1345,7 +1345,7 @@ namespace Content.Shared.CCVar
         ///     Config for when the restart vote should be allowed to be called based on percentage of ghosts.
         ///
         public static readonly CVarDef<int> VoteRestartGhostPercentage =
-            CVarDef.Create("vote.restart_ghost_percentage", 55, CVar.SERVERONLY);
+            CVarDef.Create("vote.restart_ghost_percentage", 75, CVar.SERVERONLY);
 
         /// <summary>
         ///     See vote.enabled, but specific to preset votes
@@ -1498,7 +1498,7 @@ namespace Content.Shared.CCVar
         /// How long a shuttle spends in FTL.
         /// </summary>
         public static readonly CVarDef<float> FTLTravelTime =
-            CVarDef.Create("shuttle.travel_time", 100f, CVar.SERVERONLY);
+            CVarDef.Create("shuttle.travel_time", 70f, CVar.SERVERONLY); // TODO RMC14 100
 
         /// <summary>
         /// How long the final stage of FTL before arrival should be.
@@ -1510,7 +1510,7 @@ namespace Content.Shared.CCVar
         /// How much time needs to pass before a shuttle can FTL again.
         /// </summary>
         public static readonly CVarDef<float> FTLCooldown =
-            CVarDef.Create("shuttle.cooldown", 120f, CVar.SERVERONLY);
+            CVarDef.Create("shuttle.cooldown", 90f, CVar.SERVERONLY); // TODO RMC14 120f
 
         /// <summary>
         /// The maximum <see cref="PhysicsComponent.Mass"/> a grid can have before it becomes unable to FTL.
