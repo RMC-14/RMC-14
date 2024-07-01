@@ -1832,5 +1832,13 @@
   id: 221
   time: '2024-07-01T04:02:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2686
+- author: DrSmugleaf
+  changes:
+  - message: Marines and xenos that are abandoned and left on the planet after a hijack
+      will no longer be counted for round end.
+    type: Fix
+  id: 222
+  time: '2024-07-01T04:10:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2691
 Name: RMC14
 Order: -1
