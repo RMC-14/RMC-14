@@ -1840,5 +1840,17 @@
   id: 222
   time: '2024-07-01T04:10:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2691
+- author: DrSmugleaf
+  changes:
+  - message: "Increased the M54C's initial accuracy and on short bursts while wielded.\
+      \ Minimum spread from 15\xBA to 5\xBA, angle increase per shot from 5\xBA to\
+      \ 1\xBA, angle decay per second from 5\xBA to 10\xBA."
+    type: Tweak
+  - message: "Massively increased the M4SPR's accuracy while wielded. Its angle now\
+      \ increases by 3\xBA per shot, down from 20\xBA."
+    type: Tweak
+  id: 223
+  time: '2024-07-01T04:25:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2692
 Name: RMC14
 Order: -1
