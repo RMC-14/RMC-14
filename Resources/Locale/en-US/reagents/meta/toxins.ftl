@@ -22,6 +22,7 @@ reagent-desc-ferrochromic-acid = A mildy corrosive solution, unable of causing s
 reagent-name-fluorosulfuric-acid = fluorosulfuric acid
 reagent-desc-fluorosulfuric-acid = A highly corrosive chemical, capable of leaving quite a mark on your skin.
 
+reagent-name-sulphuric-acid = sulphuric acid
 reagent-name-sulfuric-acid = sulfuric acid
 reagent-desc-sulfuric-acid = A corrosive chemical. Keep away from your face.
 
