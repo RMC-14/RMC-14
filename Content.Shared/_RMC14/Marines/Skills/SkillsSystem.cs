@@ -4,7 +4,6 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
-using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Robust.Shared.Prototypes;
 
@@ -20,7 +19,6 @@ public sealed class SkillsSystem : EntitySystem
     {
         SubscribeLocalEvent<MedicallyUnskilledDoAfterComponent, AttemptHyposprayUseEvent>(OnAttemptHyposprayUse);
         SubscribeLocalEvent<RequiresSkillComponent, BeforeRangedInteractEvent>(OnRequiresSkillBeforeRangedInteract);
-        SubscribeLocalEvent<RequiresSkillComponent, UseInHandEvent>(OnRequiresSkillBeforeInteract);
         SubscribeLocalEvent<ReagentExaminationRequiresSkillComponent, ExaminedEvent>(OnExamineReagentContainer);
         SubscribeLocalEvent<ExamineRequiresSkillComponent, ExaminedEvent>(OnExamineRequiresSkill);
     }
@@ -42,15 +40,6 @@ public sealed class SkillsSystem : EntitySystem
         if (!HasSkills(args.User, in ent.Comp.Skills))
         {
             _popup.PopupClient($"You don't know how to use the {Name(args.Used)}...", args.User, PopupType.SmallCaution);
-            args.Handled = true;
-        }
-    }
-
-    private void OnRequiresSkillBeforeInteract(Entity<RequiresSkillComponent> ent, ref UseInHandEvent args)
-    {
-        if (!HasSkills(args.User, in ent.Comp.Skills))
-        {
-            _popup.PopupClient($"You don't know how to use the {Name(ent)}...", args.User, PopupType.SmallCaution);
             args.Handled = true;
         }
     }
