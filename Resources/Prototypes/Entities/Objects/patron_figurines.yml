@@ -20,8 +20,8 @@
     state: bartender
   - type: RandomSpawner # TODO RMC14 max 1 of each if any have yet to be picked at least once, to guarantee variety
     prototypes:
-    - CMFigurinePatronFoxBridgeton
-    - CMFigurinePatronKillsTheMice
+    - RMCFigurinePatronFoxBridgeton
+    - RMCFigurinePatronKillsTheMice
 
 - type: entity
   parent: RMCBaseFigurinePatron
