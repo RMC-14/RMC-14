@@ -1,17 +1,25 @@
 # Phoron
+- type: material
+  id: CMPhoron
+  stackEntity: CMSheetPhoron
+  name: materials-phoron
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/phoron.rsi, state: phoron }
+  color: "#7e009e"
+  price: 0.2
+
+- type: stack
+  id: CMPhoron
+  name: phoron
+  icon: { sprite: /Textures/_RMC14/Objects/Materials/Sheets/phoron.rsi, state: phoron }
+  spawn: CMSheetPhoron
+  maxCount: 50
+
 - type: entity
   parent: SheetOtherBase
   id: CMSheetPhoron
   name: phoron
-  suffix: "Full"
+  suffix: Full
   components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Materials/Sheets/phoron.rsi
-    state: phoron
-  - type: Item
-    size: Normal
-    sprite: _RMC14/Objects/Materials/Sheets/phoron.rsi
-    heldPrefix: phoron
   - type: Material
   - type: PhysicalComposition
     materialComposition:
@@ -19,7 +27,22 @@
   - type: Stack
     stackType: CMPhoron
     count: 50
+  - type: Sprite
+    state: phoron
+    sprite: _RMC14/Objects/Materials/Sheets/phoron.rsi
+  - type: Item
+    heldPrefix: phoron
+    size: Normal
+    sprite: _RMC14/Objects/Materials/Sheets/phoron.rsi
   - type: Appearance
+  - type: Extractable
+    grindableSolutionName: phoron
+  - type: SolutionContainerManager
+    solutions:
+      phoron:
+        reagents:
+        - ReagentId: RMCPhoron
+          Quantity: 10
   - type: Tag
     tags:
     - Sheet
@@ -27,15 +50,82 @@
 - type: entity
   parent: CMSheetPhoron
   id: CMSheetPhoron25
-  suffix: "25"
+  suffix: 25
   components:
   - type: Stack
     count: 25
 
 - type: entity
   parent: CMSheetPhoron
-  id: CMSheetPhoron1
-  suffix: "1"
+  id: CMSheetPhoron30
+  suffix: "30"
   components:
   - type: Stack
+    count: 30
+
+- type: entity
+  parent: CMSheetPhoron
+  id: CMSheetPhoron1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1
+
+# Cardboard
+- type: material
+  id: RMCSheetCardboard
+  stackEntity: RMCSheetCardboard
+  name: materials-cardboard
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/rmc_cardboard.rsi, state: icon }
+  color: "#70736C"
+  price: 0.01
+
+- type: stack
+  id: RMCSheetCardboard
+  name: materials-cardboard
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/rmc_cardboard.rsi, state: icon }
+  spawn: RMCSheetCardboard
+  maxCount: 50
+
+- type: entity
+  parent: SheetOtherBase
+  id: RMCSheetCardboard
+  name: cardboard
+  suffix: Full, RMC
+  components:
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      RMCSheetCardboard: 100
+  - type: Stack
+    stackType: RMCSheetCardboard
+    count: 50
+  - type: Sprite
+    state: icon
+    sprite: _RMC14/Objects/Materials/Sheets/rmc_cardboard.rsi
+  - type: Item
+    heldPrefix: cardboard
+    size: Normal
+    sprite: _RMC14/Objects/Materials/Sheets/rmc_cardboard.rsi
+  - type: Appearance
+  - type: Tag
+    tags:
+    - Sheet
+
+- type: entity
+  parent: RMCSheetCardboard
+  id: RMCSheetCardboard25
+  suffix: 25, RMC
+  components:
+  - type: Stack
+    stackType: RMCSheetCardboard
+    count: 25
+
+- type: entity
+  parent: RMCSheetCardboard
+  id: RMCSheetCardboard1
+  suffix: Single, RMC
+  components:
+  - type: Stack
+    stackType: RMCSheetCardboard
     count: 1

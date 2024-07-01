@@ -12,6 +12,10 @@
       "directions": 4
     },
     {
+      "name": "platform_corner",
+      "directions": 4
+    },
+    {
       "name": "platform_stair",
       "directions": 4
     },
@@ -21,14 +25,6 @@
     },
     {
       "name": "platform_deco",
-      "directions": 8
-    },
-    {
-      "name": "platform_deco-alt",
-      "directions": 8
-    },
-    {
-      "name": "platform_overlay",
       "directions": 4
     },
     {
@@ -40,19 +36,11 @@
       "directions": 4
     },
     {
-      "name": "strata_platform_overlay",
-      "directions": 4
-    },
-    {
       "name": "strata_metalplatform",
       "directions": 4
     },
     {
       "name": "strata_metalplatform_deco",
-      "directions": 4
-    },
-    {
-      "name": "strata_metalplatform_overlay",
       "directions": 4
     },
     {
@@ -64,19 +52,11 @@
       "directions": 4
     },
     {
-      "name": "kutjevo_platform_overlay",
-      "directions": 4
-    },
-    {
       "name": "kutjevo_rock",
       "directions": 4
     },
     {
       "name": "kutjevo_rock_deco",
-      "directions": 4
-    },
-    {
-      "name": "kutjevo_rock_overlay",
       "directions": 4
     },
     {
@@ -120,7 +100,7 @@
     },
     {
       "name": "shiva_deco",
-      "directions": 8
+      "directions": 4
     }
   ]
 }

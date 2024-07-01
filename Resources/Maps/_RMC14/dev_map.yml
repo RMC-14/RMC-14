@@ -3796,7 +3796,7 @@ entities:
     - type: Transform
       pos: -3.7406578,-0.2539096
       parent: 179
-- proto: CMMagazineRifleM4DMR
+- proto: CMMagazineRifleM4SPR
   entities:
   - uid: 1321
     components:
@@ -8168,7 +8168,7 @@ entities:
     - type: Transform
       pos: -3.4906578,0.19400707
       parent: 179
-- proto: WeaponRifleM4DMR
+- proto: WeaponRifleM4SPR
   entities:
   - uid: 1320
     components:

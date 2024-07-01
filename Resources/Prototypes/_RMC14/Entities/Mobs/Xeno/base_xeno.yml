@@ -43,13 +43,7 @@
   - type: Damageable
     damageContainer: Xeno
   - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTypeTrigger
-        damageType: Blunt
-        damage: 400
-      behaviors:
-      - !type:GibBehavior { }
+    thresholds: []
   - type: MobState
     allowedStates:
     - Alive
@@ -67,9 +61,9 @@
   - type: MobStateActions
     actions:
       Critical:
-      - ActionCritSuccumb
-      - ActionCritFakeDeath
-      - ActionCritLastWords
+      - CMActionGhost
+      Dead:
+      - CMActionGhost
   - type: Deathgasp
     prototype: CMXenoDeathGasp
   - type: SoundOnDeath
@@ -143,6 +137,8 @@
     interfaces:
       enum.XenoEvolutionUIKey.Key:
         type: XenoEvolutionBui
+      enum.XenoDevolveUIKey.Key:
+        type: XenoDevolveBui
       enum.XenoWatchUIKey.Key:
         type: XenoWatchBui
       enum.XenoChooseStructureUI.Key:

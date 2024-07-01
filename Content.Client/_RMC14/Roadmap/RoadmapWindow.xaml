@@ -7,7 +7,17 @@
         <BoxContainer Orientation="Vertical">
             <BoxContainer Orientation="Horizontal">
                 <RichTextLabel Name="Header" Access="Public" Margin="0 15 0 10" />
-                <Label HorizontalExpand="True" Align="Right" HorizontalAlignment="Right" Text="*This is not an exhaustive list" Margin="0 0 20 0" />
+                <Control HorizontalExpand="True" />
+                <BoxContainer Orientation="Vertical" Margin="0 0 20 0">
+                    <BoxContainer Orientation="Horizontal">
+                        <Button Name="DiscordButton" Access="Public" Text="{Loc 'rmc-ui-discord'}"
+                                Visible="False" StyleClasses="OpenRight" HorizontalExpand="True" />
+                        <Button Name="PatreonButton" Access="Public" Text="{Loc 'rmc-ui-patreon'}"
+                                Visible="False" StyleClasses="OpenLeft" HorizontalExpand="True" />
+                    </BoxContainer>
+                    <Label HorizontalExpand="True" Align="Right" VerticalAlignment="Bottom"
+                           Text="*This is not an exhaustive list" />
+                </BoxContainer>
             </BoxContainer>
             <BoxContainer Name="Columns" Access="Public" Orientation="Horizontal">
                 <BoxContainer Name="FirstVersion" Access="Public" Orientation="Vertical" HorizontalExpand="True" Margin="0 0 20 0">

@@ -362,7 +362,7 @@
         amount: 5
       - id: CMBeltMedical
         amount: 2
-      - id: ClothingEyesHudMedical # TODO RMC14
+      - id: RMCGlassesMedicalHUDGlasses
         amount: 3
       - id: CMStasisBagFolded
         amount: 2

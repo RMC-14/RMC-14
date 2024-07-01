@@ -23,4 +23,9 @@ public abstract class SharedCMChatSystem : EntitySystem
         if (args.Channel?.ID != SharedChatSystem.HivemindChannel)
             args.Channel = null;
     }
+
+    public virtual string SanitizeMessageReplaceWords(EntityUid source, string msg)
+    {
+        return msg;
+    }
 }

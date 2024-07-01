@@ -30,9 +30,13 @@
     - ActionXenoHeadbutt
     - ActionXenoTailSweep
     - ActionXenoFortify
+    - ActionXenoDevolve
     tier: 1
     hudOffset: 0,0.2
     unlockAt: 240 # 4 minutes
+  - type: XenoDevolve
+    devolvesTo:
+    - CMXenoLarva
   - type: XenoEvolution
     max: 300
     evolvesTo:

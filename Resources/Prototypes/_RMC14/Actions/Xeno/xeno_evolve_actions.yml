@@ -12,6 +12,19 @@
     event: !type:XenoOpenEvolutionsActionEvent
 
 - type: entity
+  parent: ActionXenoBase
+  id: ActionXenoDevolve
+  name: De-evolve
+  description: Devolve to the previous caste of xenonid. [color=red]You won't get your evolution points refunded![/color]
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: xeno_deevolve
+    event: !type:XenoOpenDevolveActionEvent
+
+- type: entity
   parent: CMGuidebookActionXenoBase
   id: CMGuidebookActionXenoEvolve
   name: Evolve

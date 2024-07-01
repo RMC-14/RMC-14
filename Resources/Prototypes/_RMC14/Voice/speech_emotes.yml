@@ -1,0 +1,82 @@
+- type: emote
+  id: Hiss
+  name: rmc-emote-name-hiss
+  category: Vocal
+  available: false
+  icon: Interface/Actions/scream.png
+  chatMessages: ["rmc-emote-hiss"]
+  chatTriggers:
+    - hiss
+    - hisses
+    - hisses.
+    - hisses!
+    - hissing
+    - hissed
+
+- type: emote
+  id: Meow
+  name: rmc-emote-name-meow
+  category: Vocal
+  available: false
+  icon: Interface/Actions/scream.png
+  chatMessages: ["rmc-emote-meow"]
+  chatTriggers:
+    - meow
+    - meows
+    - meows.
+    - meows!
+    - meowing
+    - meowed
+    - miau
+    - miaus
+    - miaus.
+    - miaus!
+    - nya
+    - nyas
+    - nyas.
+    - nyas!
+
+- type: emote
+  id: Mew
+  name: rmc-emote-name-mew
+  category: Vocal
+  available: false
+  icon: Interface/Actions/scream.png
+  chatMessages: ["rmc-emote-mew"]
+  chatTriggers:
+    - mew
+    - mews
+    - mews.
+    - mews!
+    - mewing
+    - mewed
+
+- type: emote
+  id: Growl
+  name: rmc-emote-name-growl
+  category: Vocal
+  available: false
+  icon: Interface/Actions/scream.png
+  chatMessages: ["rmc-emote-growl"]
+  chatTriggers:
+    - growl
+    - growls
+    - growls.
+    - growls!
+    - growling
+    - growled
+
+- type: emote
+  id: Purr
+  name: rmc-emote-name-purr
+  category: Vocal
+  available: false
+  icon: Interface/Actions/scream.png
+  chatMessages: ["rmc-emote-purr"]
+  chatTriggers:
+    - purr
+    - purrs
+    - purrs.
+    - purrs!
+    - purring
+    - purred

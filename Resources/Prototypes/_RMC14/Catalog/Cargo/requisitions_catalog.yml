@@ -2,6 +2,8 @@
   abstract: true
   id: CMCargoCatalog
   components:
+  - type: Speech
+    speechVerb: Robotic
   - type: RequisitionsComputer
     categories:
     - name: Ammo
@@ -13,9 +15,9 @@
       - cost: 3000
         crate: CMCrateBoxMagazineRifleM54CExt
       - cost: 2000
-        crate: CMCrateBoxMagazineRifleM4DMR
+        crate: CMCrateBoxMagazineRifleM4SPR
       - cost: 4000
-        crate: CMCrateBoxMagazineRifleM4DMRAP
+        crate: CMCrateBoxMagazineRifleM4SPRAP
       - cost: 2000
         crate: CMCrateBoxMagazineSMGM63
       - cost: 4000
@@ -160,8 +162,10 @@
 #      entries: []
 #    - name: Reagent tanks
 #      entries: []
-#    - name: Research
-#      entries: []
+    - name: Research
+      entries:
+      - cost: 3000
+        crate: RMCCrateResearchPhoron
 #    - name: Restricted Equipment
 #      entries: []
     - name: Supplies
