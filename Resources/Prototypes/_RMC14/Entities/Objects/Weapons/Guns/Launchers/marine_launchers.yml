@@ -83,3 +83,38 @@
   - type: AmmoFixedDistance
   - type: Wieldable
   - type: GunRequiresWield
+
+- type: entity
+  name: RAS-KEL
+  parent: [BaseWeaponLauncher, CMBaseWeaponGun]
+  id: CMWeaponLauncherRASKEL
+  description: The Rapid-Anti-Structure/Kinetic-Explosive-Launcher, a single use rocket launcher. The words 'FOWARD TO ENEMY' are scribbled on the front in sharpie.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/RASKEL.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/RASKEL.rsi
+  - type: Gun
+    fireRate: 0.4
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+        - CartridgeRocket
+    proto: CartridgeRocket
+    capacity: 1
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+    zeroVisible: false
+    slots:
+    - Back
+    - suitStorage
+  - type: Appearance
+  - type: Wieldable
+  - type: GunRequiresWield
+  - type: GunShowUseDelay
+  - type: UseDelay
