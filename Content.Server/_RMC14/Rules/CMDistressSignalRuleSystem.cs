@@ -488,6 +488,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     distress.Hijack = true;
             }
 
+            var time = Timing.CurTime;
+            if (distress.Hijack)
+                distress.AbandonedAt ??= time + distress.AbandonedDelay;
+
             _almayerMaps.Clear();
             var almayerQuery = EntityQueryEnumerator<AlmayerComponent, TransformComponent>();
             while (almayerQuery.MoveNext(out _, out var xform))
@@ -495,7 +499,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 _almayerMaps.Add(xform.MapID);
             }
 
-            var time = Timing.CurTime;
             var xenosAlive = false;
             var xenos = EntityQueryEnumerator<ActorComponent, XenoComponent, MobStateComponent, TransformComponent>();
             while (xenos.MoveNext(out var xenoId, out _, out var xeno, out var mobState, out var xform))
