@@ -301,14 +301,6 @@
   - type: Tag
     tags:
     - Wall
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 3000
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: IconSmooth
     key: walls
     base: jungle_veg
