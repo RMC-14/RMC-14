@@ -22,11 +22,13 @@
     prototypes:
     - RMCFigurinePatronFoxBridgeton
     - RMCFigurinePatronKillsTheMice
+    - RMCFigurinePatronFritzVohlkson
 
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronFoxBridgeton
   name: Fox Bridgeton figurine
+  description: This is like that book by George Orwell, Nineteen Eighty Fo'
   components:
   - type: Sprite
     state: Fox_Bridgeton
@@ -38,3 +40,12 @@
   components:
   - type: Sprite
     state: Kills-The-Mice
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronFritzVohlkson
+  name: Fritz_Vohlkson figurine
+  description: SIR YES SIR OORAH!
+  components:
+  - type: Sprite
+    state: Fritz_Vohlkson
