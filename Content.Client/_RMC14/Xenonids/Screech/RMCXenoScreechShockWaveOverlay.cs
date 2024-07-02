@@ -34,7 +34,7 @@ public sealed class RMCXenoScreechShockWaveOverlay : Overlay, IEntityEventSubscr
         if (args.Viewport.Eye == null || _xformSystem is null && !_entMan.TrySystem(out _xformSystem))
             return false;
 
-        var query = _entMan.EntityQueryEnumerator<XenoScreechShockWaveComponent, TransformComponent>();
+        var query = _entMan.EntityQueryEnumerator<RMCXenoScreechShockWaveComponent, TransformComponent>();
 
         if (query.MoveNext(out var uid, out var distortion, out var xform))
         {
