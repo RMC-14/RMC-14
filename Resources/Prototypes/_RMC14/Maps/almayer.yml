@@ -58,3 +58,6 @@
 
           #Civilians
           CMCorrespondent: [2, 2]
+
+          # Other
+          CMLiaison: [1, 1]
