@@ -1987,5 +1987,13 @@
   id: 242
   time: '2024-07-02T15:32:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2760
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenonid pheromones not deactivating when the emitter goes into
+      crit or dies.
+    type: Fix
+  id: 243
+  time: '2024-07-02T15:45:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2761
 Name: RMC14
 Order: -1
