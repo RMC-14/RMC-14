@@ -468,7 +468,7 @@ public sealed partial class ExplosionSystem
         {
             var pos = _transformSystem.GetWorldPosition(xform);
             var adjustedThrowForce = throwForce;
-            if (HasComp<MobStateComponent>(uid)) 
+            if (HasComp<MobStateComponent>(uid))
             {
                 adjustedThrowForce /= 5;
                 _stun.TryKnockdown(uid, TimeSpan.FromSeconds(1), true);
