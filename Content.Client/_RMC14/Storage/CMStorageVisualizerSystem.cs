@@ -15,10 +15,10 @@ public sealed class CMStorageVisualizerSystem : VisualizerSystem<CMStorageVisual
             return;
 
         // If empty
-        if (!AppearanceSystem.TryGetData<int>(uid, StorageVisuals.StorageUsed, out var level, args.Component))
+        if (!AppearanceSystem.TryGetData<int>(uid, StorageVisuals.StorageUsed, out var used, args.Component))
             return;
 
-        if (level == 0)
+        if (used == 0)
         {
             if (component.StorageOpen != null)
                 args.Sprite.LayerSetVisible(component.StorageOpen, false);
