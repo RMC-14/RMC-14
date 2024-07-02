@@ -5,6 +5,9 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Storage;
 
+/// <summary>
+/// Sets the empty, open, and closed layer visibility for a storage item.
+/// </summary>
 public sealed class CMStorageVisualizerSystem : VisualizerSystem<CMStorageVisualizerComponent>
 {
     protected override void OnAppearanceChange(EntityUid uid,
