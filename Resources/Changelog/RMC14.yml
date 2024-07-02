@@ -1888,5 +1888,12 @@
   id: 228
   time: '2024-07-02T00:06:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2731
+- author: Whisper
+  changes:
+  - message: Faxes and microwaves temporarily no longer require power.
+    type: Fix
+  id: 229
+  time: '2024-07-02T00:09:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2732
 Name: RMC14
 Order: -1
