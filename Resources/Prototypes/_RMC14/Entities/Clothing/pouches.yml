@@ -76,6 +76,34 @@
           Closed: { visible: true }
 
 - type: entity
+  parent: CMPouch
+  id: CMPouchFill
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+    - state: partial
+      map: [ "partialLayer" ]
+    - state: full
+      map: [ "fullLayer" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.CMItemSlotsLayers.Fill:
+        fullLayer:
+          Empty: { visible: false }
+          Low: { visible: false }
+          Medium: { visible: true }
+          High: { visible: true }
+          Full: { visible: true }
+        partialLayer:
+          Empty: { visible: false }
+          Low: { visible: true }
+          Medium: { visible: false }
+          High: { visible: false }
+          Full: { visible: false }
+
+- type: entity
   parent: [CMPouchOpenClosed, CMPouchStorage]
   id: CMPouchGeneral
   name: light general pouch
@@ -329,7 +357,7 @@
     - 0,0,11,1 #6 slots
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchOpenClosed]
+  parent: [CMPouchStorage, CMPouchFill]
   id: CMPouchShotgun
   name: shotgun shell pouch
   description: It can contain a single box of shotgun shells. # It can contain handfuls of shells, or bullets if you choose to for some reason. # TODO RMC14
@@ -621,7 +649,7 @@
     - 0,0,7,1 #7 slots
 
 - type: entity
-  parent: CMPouch
+  parent: CMPouchFill
   id: CMPouchFlare
   name: flare pouch
   description: A pouch designed to hold flares. Refillable with an M94 flare pack.
@@ -631,9 +659,9 @@
     layers:
     - state: icon
     - state: open
-      map: [ "openLayer" ]
+      map: [ "partialLayer" ]
     - state: closed
-      map: [ "closedLayer" ]
+      map: [ "fullLayer" ]
   - type: CMItemSlots
     cooldown: 1
     cooldownPopup: You need to wait before taking another flare!
@@ -643,21 +671,6 @@
       whitelist:
         tags:
         - Flare
-  - type: GenericVisualizer
-    visuals:
-      enum.CMItemSlotsLayers.Fill:
-        closedLayer:
-          Empty: { visible: false }
-          Low: { visible: false }
-          Medium: { visible: true }
-          High: { visible: true }
-          Full: { visible: true }
-        openLayer:
-          Empty: { visible: false }
-          Low: { visible: true }
-          Medium: { visible: false }
-          High: { visible: false }
-          Full: { visible: false }
 
 - type: entity
   parent: [CMPouchOpenClosed, CMPouchStorage]
