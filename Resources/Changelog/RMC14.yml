@@ -1866,5 +1866,27 @@
   id: 225
   time: '2024-07-01T10:03:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2700
+- author: whisper
+  changes:
+  - message: Blood bags are no longer destructible, they can still be melted with
+      acid.
+    type: Fix
+  id: 226
+  time: '2024-07-02T00:06:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2729
+- author: Whisper
+  changes:
+  - message: Crusher no longer devolves to crusher
+    type: Fix
+  id: 227
+  time: '2024-07-02T00:06:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2727
+- author: Whisper
+  changes:
+  - message: Lathes temporarily no longer need power.
+    type: Fix
+  id: 228
+  time: '2024-07-02T00:06:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2731
 Name: RMC14
 Order: -1
