@@ -7,6 +7,8 @@
   name: Lesser Drone
   description: An alien drone. Looks... smaller.
   components:
+  - type: GhostRole
+    name: cm-job-name-xeno-lesser-drone
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/LesserDrone/lesser_drone.rsi
   - type: MobState
