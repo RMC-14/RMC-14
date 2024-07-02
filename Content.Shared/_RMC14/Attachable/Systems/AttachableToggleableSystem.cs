@@ -232,7 +232,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
             
             Toggle((attachableUid, toggleableComponent), user.Owner, true);
         }
-        
+
         RemCompDeferred<AttachableMovementLockedComponent>(user);
     }
 #endregion
@@ -278,6 +278,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
             attachable,
             args.User);
         args.Handled = true;
+        Dirty(attachable);
     }
 
     private void FinishToggle(

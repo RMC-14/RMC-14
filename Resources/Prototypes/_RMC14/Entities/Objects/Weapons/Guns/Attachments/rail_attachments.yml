@@ -80,7 +80,7 @@
   - type: Tag
     tags:
     - RMCAttachmentRail
-    - RMCAttachmentFlashlight
+    - RMCAttachmentRailFlashlight
     - Flashlight
 
 - type: entity
@@ -361,7 +361,7 @@
   id: RMCAttachmentRail
 
 - type: Tag
-  id: RMCAttachmentFlashlight
+  id: RMCAttachmentRailFlashlight
 
 - type: Tag
   id: RMCAttachmentB8SmartScope

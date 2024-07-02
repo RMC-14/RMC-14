@@ -211,8 +211,8 @@
   components:
   - type: Sprite
     layers:
-      - state: grenade
-        map: [ "enum.BreechVisuals.Open" ]
+    - state: grenade
+      map: [ "enum.BreechVisuals.Open" ]
   - type: AmmoCounter
   - type: Gun
     soundGunshot:
@@ -333,7 +333,7 @@
 
 - type: entity
   parent: RMCUnderAttachmentBase
-  id: RMCAttachmentFlashlightGrip
+  id: RMCAttachmentRailFlashlightGrip
   name: underbarrel flashlight grip
   description: Holy smokes RO man, they put a grip on a flashlight! Reduces recoil and scatter by a tiny amount. Works as a light source. # Boosts accuracy by a tiny amount.
   components:
@@ -402,7 +402,7 @@
   - type: Tag
     tags:
     - RMCAttachmentUnderbarrel
-    - RMCAttachmentFlashlightGrip
+    - RMCAttachmentRailFlashlightGrip
     - Flashlight
   - type: AttachableWeaponRangedMods
     modifiers:
@@ -413,7 +413,7 @@
       scatterFlat: -1
 
 - type: entity
-  parent: RMCAttachmentFlashlightGrip
+  parent: RMCAttachmentRailFlashlightGrip
   id: RMCAttachmentLaserLightModule
   name: MK80 laser-light module
   description: A Laser-Light module for the MK80 Service Pistol which is currently undergoing limited field testing as part of the marines' next generation pistol program. All MK80 pistols come equipped with the module.
@@ -479,7 +479,7 @@
   id: RMCAttachmentVerticalGrip
 
 - type: Tag
-  id: RMCAttachmentFlashlightGrip
+  id: RMCAttachmentRailFlashlightGrip
 
 - type: Tag
   id: RMCAttachmentLaserLightModule

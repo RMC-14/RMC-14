@@ -44,12 +44,15 @@
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c.rsi
   - type: ContainerFill
     containers:
+      rmc-aslot-stock:
+      - RMCAttachmentM54CStockCollapsible
       rmc-aslot-underbarrel:
       - RMCAttachmentU1GrenadeLauncher
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
+      rmc-aslot-stock: !type:ContainerSlot
       rmc-aslot-underbarrel: !type:ContainerSlot
   - type: Gun
     minAngle: 30
@@ -88,29 +91,39 @@
       rmc-aslot-barrel:
         whitelist:
           tags:
+          - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
-          - RMCAttachmentBarrelCharger
       rmc-aslot-rail:
         whitelist:
           tags:
-          - RMCAttachmentFlashlight
+          - RMCAttachmentRailFlashlight
           - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
           - RMCAttachmentS84xTelescopicScope
           - RMCAttachmentS42xTelescopicMiniscope
-          - RMCAttachmentS42xAdvancedTelescopicMiniscope
-          - RMCAttachmentMiniscopeHunting
-          - RMCAttachmentSlavicScope
+      rmc-aslot-stock:
+        whitelist:
+          tags:
+          - RMCAttachmentM54CStockSolid
+          - RMCAttachmentM54CStockCollapsible
       rmc-aslot-underbarrel:
         whitelist:
           tags:
-          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentRailFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
           - RMCAttachmentU1GrenadeLauncher
+          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentVerticalGrip
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.81, 0.00
-      rmc-aslot-rail: 0.0, 0.20
+      rmc-aslot-rail: 0.16, 0.20
+      rmc-aslot-stock: -0.57, 0.03
       rmc-aslot-underbarrel: 0.19, -0.14
 
 - type: entity
@@ -209,7 +222,7 @@
       rmc-aslot-rail:
         whitelist:
           tags:
-          - RMCAttachmentFlashlight
+          - RMCAttachmentRailFlashlight
           - RMCAttachmentB8SmartScope
   - type: AttachableHolderVisuals
     offsets:

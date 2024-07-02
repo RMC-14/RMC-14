@@ -128,6 +128,7 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentM54CStockSolid
+  - type: AttachableVisuals
   - type: AttachableSpeedMods
     modifiers:
     - conditions:
@@ -158,7 +159,7 @@
 
 - type: entity
   parent: RMCAttachmentM54CStockSolid
-  id: RMCAttachmentM54CStockMarksman
+  id: RMCAttachmentM54CStockSolidMarksman
   name: M54C marksman stock
   description: A rare stock distributed in small numbers to UNMC forces. Compatible with the M54C, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
   components:
@@ -169,7 +170,7 @@
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentM54CStockMarksman
+    - RMCAttachmentM54CStockSolidMarksman
 
 - type: entity
   parent: RMCStockAttachmentCollapsibleBase
@@ -509,7 +510,7 @@
   id: RMCAttachmentM54CStockSolid
 
 - type: Tag
-  id: RMCAttachmentM54CStockMarksman
+  id: RMCAttachmentM54CStockSolidMarksman
 
 - type: Tag
   id: RMCAttachmentM54CStockCollapsible

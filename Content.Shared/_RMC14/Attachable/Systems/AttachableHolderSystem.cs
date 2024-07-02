@@ -123,14 +123,16 @@ public sealed class AttachableHolderSystem : EntitySystem
             container.OccludesLight = false;
             var attachableUid = container.ContainedEntities[0];
 
-            if (!HasComp<AttachableComponent>(attachableUid))
-                return;
+            if (!TryComp(attachableUid, out AttachableComponent? attachableComponent))
+                continue;
 
             var ev = new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Attached);
             RaiseLocalEvent(attachableUid, ref ev);
 
             var holderEv = new AttachableHolderAttachablesAlteredEvent(attachableUid, slotId, AttachableAlteredType.Attached);
             RaiseLocalEvent(holder.Owner, ref holderEv);
+
+            Dirty(attachableUid, attachableComponent);
         }
 
         UpdateStripUi(holder.Owner, holder.Comp);
