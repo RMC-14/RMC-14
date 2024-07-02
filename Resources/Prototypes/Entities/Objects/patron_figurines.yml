@@ -19,16 +19,7 @@
     - state: red
     - sprite: Objects/Fun/figurines.rsi
     state: bartender
-  - type: RandomSpawner # TODO RMC14 max 1 of each if any have yet to be picked at least once, to guarantee variety
-    prototypes:
-    - RMCFigurinePatronFoxBridgeton #
-    - RMCFigurinePatronKillsTheMice #e04261e0-0248-49d5-9398-08f84d53e4c0
-    - RMCFigurinePatronFritzVohlkson #
-    - RMCFigurinePatronMinervaHostel #ef4494f1-097b-4448-b93d-751b1425bafd
-    - RMCFigurinePatronTempestasFrostbiteGlacies #88404592-511d-4792-aa00-88743a918284
-    - RMCFigurinePatronSilvanodAndrea #ba2e69da-8743-43b0-8c89-e1da20656503
-    - RMCFigurinePatronIanthaAtikson #f6aa2920-580c-4b8d-aacc-efa441aa115b
-    - RMCFigurinePatronScottFigure #f6aa2920-580c-4b8d-aacc-efa441aa115b
+  - type: RandomPatronFigurineSpawner # TODO RMC14 max 1 of each if any have yet to be picked at least once, to guarantee variety
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -38,6 +29,8 @@
   components:
   - type: Sprite
     state: Fox_Bridgeton
+  - type: PatronFigurine
+    id: 76016009-20fb-4e88-ac6e-1fdefe800a37
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -47,6 +40,8 @@
   components:
   - type: Sprite
     state: Kills-The-Mice
+  - type: PatronFigurine
+    id: e04261e0-0248-49d5-9398-08f84d53e4c0
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -56,6 +51,8 @@
   components:
   - type: Sprite
     state: Fritz_Vohlkson
+  - type: PatronFigurine
+    id: 3676980a-d9a2-4c7c-84de-c8d97ef07eab
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -65,14 +62,19 @@
   components:
   - type: Sprite
     state: minerva_hostel
+  - type: PatronFigurine
+    id: ef4494f1-097b-4448-b93d-751b1425bafd
 
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronTempestasFrostbiteGlacies
   name: Tempestas 'Frostbite' Glacies figurine
+  description: If I die before you continue, You shall have heard my final dying roar.
   components:
   - type: Sprite
     state: Tempestas_Frostbite_Glacies
+  - type: PatronFigurine
+    id: 88404592-511d-4792-aa00-88743a918284
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -82,6 +84,8 @@
   components:
   - type: Sprite
     state: Silvano_dAndrea
+  - type: PatronFigurine
+    id: ba2e69da-8743-43b0-8c89-e1da20656503
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -91,12 +95,38 @@
   components:
   - type: Sprite
     state: Iantha_Atikson
+  - type: PatronFigurine
+    id: f6aa2920-580c-4b8d-aacc-efa441aa115b
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronScottFigure
+  id: RMCFigurinePatronScott
   name: Scott Hoover figurine
   description: "I work for the company. But don't let that fool you, I'm really an OK guy!"
   components:
   - type: Sprite
     state: Scott_Hoover
+  - type: PatronFigurine
+    id: b40372e9-f136-472f-ae90-017928025e4f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurineRyanRockstarRuan
+  name: Ryan "Rockstar" Ruan
+  description: "He had big dreams of being a rockstar, but the marines corps had other plans. That, and also the fact that he has no idea how to play the guitar."
+  components:
+  - type: Sprite
+    state: ryan_rockstar_ruan
+  - type: PatronFigurine
+    id: b40372e9-f136-472f-ae90-017928025e4f # TODO
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKasumiAyako
+  name: Kasumi Ayako figurine
+  description: "The emotional support cat."
+  components:
+  - type: Sprite
+    state: kasumi_ayako
+  - type: PatronFigurine
+    id: fef9a99e-5111-4094-b484-67af44ebd03
