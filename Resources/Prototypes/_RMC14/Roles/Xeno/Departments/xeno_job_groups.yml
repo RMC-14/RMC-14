@@ -39,6 +39,7 @@
     - CMXenoCarrier
     - CMXenoDrone
     - CMXenoHivelord
+    - CMXenoLesserDrone
     - CMXenoQueen
 
 - type: entity
