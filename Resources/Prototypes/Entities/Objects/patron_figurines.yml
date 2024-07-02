@@ -129,7 +129,7 @@
   - type: Sprite
     state: kasumi_ayako
   - type: PatronFigurine
-    id: fef9a99e-5111-4094-b484-67af44ebd03
+    id: fef9a99e-5111-4094-b484-67af44ebd031
 
 - type: entity
   parent: RMCBaseFigurinePatron
