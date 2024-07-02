@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Wieldable.Components;
 using Content.Shared._RMC14.Wieldable.Events;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Movement.Systems;
@@ -38,6 +39,7 @@ public sealed class RMCWieldableSystem : EntitySystem
         SubscribeLocalEvent<WieldDelayComponent, BeforeWieldEvent>(OnBeforeWield);
         SubscribeLocalEvent<WieldDelayComponent, GotEquippedHandEvent>(OnGotEquippedHand);
         SubscribeLocalEvent<WieldDelayComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<WieldDelayComponent, UseInHandEvent>(OnUseInHand);
 
         SubscribeLocalEvent<InventoryComponent, RefreshWieldSlowdownCompensationEvent>(_inventorySystem.RelayEvent);
     }
@@ -179,6 +181,17 @@ public sealed class RMCWieldableSystem : EntitySystem
     {
         _useDelaySystem.SetLength(wieldable.Owner, wieldable.Comp.ModifiedDelay, wieldUseDelayID);
         _useDelaySystem.TryResetDelay(wieldable.Owner, id: wieldUseDelayID);
+    }
+
+    private void OnUseInHand(Entity<WieldDelayComponent> wieldable, ref UseInHandEvent args)
+    {
+        if (!TryComp(wieldable.Owner, out UseDelayComponent? useDelayComponent) ||
+            !_useDelaySystem.IsDelayed((wieldable.Owner, useDelayComponent), wieldUseDelayID))
+        {
+            return;
+        }
+
+        args.Handled = true;
     }
 
     public void RefreshWieldDelay(Entity<WieldDelayComponent?> wieldable)
