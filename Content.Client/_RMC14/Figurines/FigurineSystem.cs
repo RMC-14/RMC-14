@@ -28,7 +28,9 @@ public sealed class FigurineSystem : EntitySystem
     {
 #if !FULL_RELEASE
         SubscribeNetworkEvent<FigurineRequestEvent>(OnFigurineRequest);
-        _ui.RootControl.AddChild(_control);
+
+        if (_control.Parent == null)
+            _ui.RootControl.AddChild(_control);
 #endif
     }
 
