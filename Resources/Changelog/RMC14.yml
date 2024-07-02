@@ -1909,5 +1909,12 @@
   id: 231
   time: '2024-07-02T01:03:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2734
+- author: Whisper
+  changes:
+  - message: Cargo techs now spawn with an approval stamp.
+    type: Add
+  id: 232
+  time: '2024-07-02T02:22:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2736
 Name: RMC14
 Order: -1
