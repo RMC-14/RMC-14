@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared._RMC14.Input;
@@ -22,6 +23,7 @@ using Content.Shared.Wieldable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
+using Robust.Shared.Map;
 
 namespace Content.Shared._RMC14.Attachable.Systems;
 
@@ -115,13 +117,20 @@ public sealed class AttachableHolderSystem : EntitySystem
 
     private void OnHolderMapInit(Entity<AttachableHolderComponent> holder, ref MapInitEvent args)
     {
-        foreach (string slotId in holder.Comp.Slots.Keys)
+        var xform = Transform(holder.Owner);
+        var coords = new EntityCoordinates(holder.Owner, Vector2.Zero);
+
+        foreach (var slotId in holder.Comp.Slots.Keys)
         {
-            if (!_container.TryGetContainer(holder.Owner, slotId, out var container) || container.Count <= 0)
+            if (holder.Comp.Slots[slotId].StartingAttachable == null)
                 continue;
 
+            var container = _container.EnsureContainer<ContainerSlot>(holder, slotId);
             container.OccludesLight = false;
-            var attachableUid = container.ContainedEntities[0];
+
+            var attachableUid = Spawn(holder.Comp.Slots[slotId].StartingAttachable, coords);
+            if (!_container.Insert(attachableUid, container, containerXform: xform))
+                continue;
 
             if (!TryComp(attachableUid, out AttachableComponent? attachableComponent))
                 continue;
@@ -620,6 +629,19 @@ public sealed class AttachableHolderSystem : EntitySystem
         }
 
         return false;
+    }
+
+    public bool HasSlot(Entity<AttachableHolderComponent?> holder, string slotId)
+    {
+        if (holder.Comp == null)
+        {
+            if (!TryComp(holder.Owner, out AttachableHolderComponent? holderComponent))
+                return false;
+
+            holder.Comp = holderComponent;
+        }
+
+        return holder.Comp.Slots.ContainsKey(slotId);
     }
     
     public bool TryGetHolder(EntityUid attachable, [NotNullWhen(true)] out EntityUid? holderUid)

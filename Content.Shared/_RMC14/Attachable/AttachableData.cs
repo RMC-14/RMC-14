@@ -1,6 +1,7 @@
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Whitelist;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 
@@ -9,7 +10,8 @@ namespace Content.Shared._RMC14.Attachable;
 [DataRecord, Serializable, NetSerializable]
 public record struct AttachableSlot(
     bool Locked,
-    EntityWhitelist Whitelist
+    EntityWhitelist Whitelist,
+    ProtoId<EntityPrototype>? StartingAttachable
 );
 
 [DataRecord, Serializable, NetSerializable]

@@ -42,18 +42,10 @@
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c.rsi
-  - type: ContainerFill
-    containers:
-      rmc-aslot-stock:
-      - RMCAttachmentM54CStockCollapsible
-      rmc-aslot-underbarrel:
-      - RMCAttachmentU1GrenadeLauncher
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
-      rmc-aslot-stock: !type:ContainerSlot
-      rmc-aslot-underbarrel: !type:ContainerSlot
   - type: Gun
     minAngle: 30
     maxAngle: 60
@@ -89,6 +81,7 @@
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
+        startingAttachable: RMCAttachmentExtendedBarrel
         whitelist:
           tags:
           - RMCAttachmentBarrelCharger
@@ -96,6 +89,7 @@
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
       rmc-aslot-rail:
+        startingAttachable: RMCAttachmentRailFlashlight
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight
@@ -105,11 +99,13 @@
           - RMCAttachmentS84xTelescopicScope
           - RMCAttachmentS42xTelescopicMiniscope
       rmc-aslot-stock:
+        startingAttachable: RMCAttachmentM54CStockCollapsible
         whitelist:
           tags:
           - RMCAttachmentM54CStockSolid
           - RMCAttachmentM54CStockCollapsible
       rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentU1GrenadeLauncher
         whitelist:
           tags:
           - RMCAttachmentAngledGrip
