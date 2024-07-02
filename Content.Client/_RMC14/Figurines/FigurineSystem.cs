@@ -1,48 +1,59 @@
 ﻿using System.IO;
 using System.Numerics;
 using Content.Client.Administration.Managers;
-using Content.Shared.Verbs;
+using Content.Shared._RMC14.Figurines;
+using Content.Shared.Administration;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
+using Robust.Client.Player;
 using Robust.Client.UserInterface;
-using Robust.Shared.ContentPack;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using Color = Robust.Shared.Maths.Color;
 
-namespace Content.Client._RMC14.Sprite;
+namespace Content.Client._RMC14.Figurines;
 
-public sealed class ContentSpriteSystem : EntitySystem
+public sealed class FigurineSystem : EntitySystem
 {
     [Dependency] private readonly IClientAdminManager _adminManager = default!;
     [Dependency] private readonly IClyde _clyde = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly IUserInterfaceManager _ui = default!;
 
     private readonly ContentSpriteControl _control = new();
 
     public override void Initialize()
     {
-        base.Initialize();
-
-        IoCManager.Resolve<IUserInterfaceManager>().RootControl.AddChild(_control);
-        SubscribeLocalEvent<GetVerbsEvent<Verb>>(GetVerbs);
+#if !FULL_RELEASE
+        SubscribeNetworkEvent<FigurineRequestEvent>(OnFigurineRequest);
+        _ui.RootControl.AddChild(_control);
+#endif
     }
 
     public override void Shutdown()
     {
-        base.Shutdown();
-        IoCManager.Resolve<IUserInterfaceManager>().RootControl.RemoveChild(_control);
+#if !FULL_RELEASE
+        _ui.RootControl.AddChild(_control);
+#endif
     }
 
-    private void Export(EntityUid entity)
+    private void OnFigurineRequest(FigurineRequestEvent ev)
     {
         if (!_timing.IsFirstTimePredicted)
             return;
 
-        if (!TryComp(entity, out SpriteComponent? spriteComp))
+        if (!_adminManager.HasFlag(AdminFlags.Host))
             return;
+
+        if (_player.LocalEntity is not { } ent)
+            return;
+
+        if (!TryComp(ent, out SpriteComponent? spriteComp))
+            return;
+
+        spriteComp.Scale = Vector2.One;
 
         // Don't want to wait for engine pr
         var size = Vector2i.Zero;
@@ -59,36 +70,14 @@ public sealed class ContentSpriteSystem : EntitySystem
         if (size.Equals(Vector2i.Zero))
             return;
 
-        foreach (var direction in new[] { Direction.South, Direction.East, Direction.North, Direction.West })
-        {
-            var texture = _clyde.CreateRenderTarget(new Vector2i(size.X, size.Y), new RenderTargetFormatParameters(RenderTargetColorFormat.Rgba8Srgb), name: "export");
+        var texture = _clyde.CreateRenderTarget(new Vector2i(size.X, size.Y), new RenderTargetFormatParameters(RenderTargetColorFormat.Rgba8Srgb), name: "export");
 
-            _control.QueuedTextures.Enqueue((texture, direction, entity));
-        }
-    }
-
-    private void GetVerbs(GetVerbsEvent<Verb> ev)
-    {
-        if (!_adminManager.IsAdmin())
-            return;
-
-        Verb verb = new()
-        {
-            Text = "Export entity as PNG",
-            Category = VerbCategory.Debug,
-            Act = () =>
-            {
-                Export(ev.Target);
-            },
-        };
-
-        ev.Verbs.Add(verb);
+        _control.QueuedTextures.Enqueue((texture, Direction.South, ent));
     }
 
     private sealed class ContentSpriteControl : Control
     {
         [Dependency] private readonly IEntityManager _entManager = default!;
-        [Dependency] private readonly IResourceManager _resManager = default!;
 
         internal readonly Queue<(IRenderTexture Texture, Direction Direction, EntityUid Entity)> QueuedTextures = new();
 
@@ -105,12 +94,7 @@ public sealed class ContentSpriteSystem : EntitySystem
             {
                 try
                 {
-                    if (!_entManager.TryGetComponent(queued.Entity, out MetaDataComponent? metadata))
-                        continue;
-
-                    var filename = metadata.EntityName;
                     var result = queued;
-
                     handle.RenderInRenderTarget(queued.Texture,
                         () =>
                         {
@@ -122,33 +106,13 @@ public sealed class ContentSpriteSystem : EntitySystem
                         },
                         Color.Transparent);
 
-                    var directory = new ResPath("/Exports");
-
-                    if (!_resManager.UserData.IsDir(directory))
-                    {
-                        _resManager.UserData.CreateDir(directory);
-                    }
-
-                    var fullFileName = directory / $"{filename}-{queued.Direction}-{queued.Entity}.png";
-
                     queued.Texture.CopyPixelsToMemory<Rgba32>(image =>
                     {
-                        if (_resManager.UserData.Exists(fullFileName))
-                        {
-                            Logger.Info($"Found existing file {fullFileName} to replace.");
-                            _resManager.UserData.Delete(fullFileName);
-                        }
-
-                        using var file = _resManager.UserData.Open(
-                            fullFileName,
-                            FileMode.CreateNew,
-                            FileAccess.Write,
-                            FileShare.None
-                        );
-                        image.SaveAsPng(file);
+                        var stream = new MemoryStream();
+                        image.SaveAsPng(stream);
+                        var ev = new FigurineImageEvent(stream.ToArray());
+                        _entManager.EntityNetManager.SendSystemNetworkMessage(ev);
                     });
-
-                    Logger.Info($"Saved screenshot to {fullFileName}");
                 }
                 catch (Exception exc)
                 {
