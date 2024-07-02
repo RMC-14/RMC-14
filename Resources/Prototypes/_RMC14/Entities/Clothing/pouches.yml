@@ -76,6 +76,34 @@
           Closed: { visible: true }
 
 - type: entity
+  parent: CMPouch
+  id: RMCPouchFill
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+    - state: partial
+      map: [ "partialLayer" ]
+    - state: full
+      map: [ "fullLayer" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.CMItemSlotsLayers.Fill:
+        fullLayer:
+          Empty: { visible: false }
+          Low: { visible: false }
+          Medium: { visible: true }
+          High: { visible: true }
+          Full: { visible: true }
+        partialLayer:
+          Empty: { visible: false }
+          Low: { visible: true }
+          Medium: { visible: false }
+          High: { visible: false }
+          Full: { visible: false }
+
+- type: entity
   parent: [CMPouchOpenClosed, CMPouchStorage]
   id: CMPouchGeneral
   name: light general pouch
@@ -621,13 +649,19 @@
     - 0,0,7,1 #7 slots
 
 - type: entity
-  parent: CMPouch
+  parent: RMCPouchFill
   id: CMPouchFlare
   name: flare pouch
   description: A pouch designed to hold flares. Refillable with an M94 flare pack.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/flare.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "partialLayer" ]
+    - state: closed
+      map: [ "fullLayer" ]
   - type: CMItemSlots
     cooldown: 1
     cooldownPopup: You need to wait before taking another flare!
