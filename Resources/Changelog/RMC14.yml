@@ -1902,5 +1902,12 @@
   id: 230
   time: '2024-07-02T00:13:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2733
+- author: vero5123
+  changes:
+  - message: Adds shockwave overlay to queen's screech
+    type: Add
+  id: 231
+  time: '2024-07-02T01:03:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2734
 Name: RMC14
 Order: -1
