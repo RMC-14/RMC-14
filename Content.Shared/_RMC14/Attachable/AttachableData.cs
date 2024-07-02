@@ -45,15 +45,15 @@ public record struct AttachableWeaponRangedModifierSet(
 
 // SS13 has move delay instead of speed. Move delay isn't implemented here, and approximating it through maths like fire delay is scuffed because of how the events used to change speed work.
 // So instead we take the default speed values and use them to convert it to a multiplier beforehand.
-// Converting from move delay to additive multiplier: 1 / (1 / SS14_SPEED + SS13_MOVE_DELAY) / SS14_SPEED - 1
+// Converting from move delay to additive multiplier: 1 / (1 / SS14_SPEED + SS13_MOVE_DELAY / 10) / SS14_SPEED - 1
 // Speed and move delay are inversely proportional. So 1 divided by speed is move delay and vice versa.
 // We then add the ss13 move delay, and divide 1 by the result to convert it back into speed.
 // Then we divide it by the original speed and subtract 1 from the result to get the additive multiplier.
 [DataRecord, Serializable, NetSerializable]
 public record struct AttachableSpeedModifierSet(
     AttachableModifierConditions? Conditions,
-    float Walk, // Use the default walk speed when converting from SS13: 2.5f
-    float Sprint // Use the default sprint speed when converting from SS13: 4.5f
+    float Walk, // Default human walk speed: 2.5f
+    float Sprint // Default human sprint speed: 4.5f
 );
 
 [DataRecord, Serializable, NetSerializable]
