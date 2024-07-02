@@ -64,7 +64,7 @@
   description: Smells of cigars.
   components:
   - type: Sprite
-    state: Minerva_Hostel
+    state: minerva_hostel
 
 - type: entity
   parent: RMCBaseFigurinePatron
