@@ -1,11 +1,11 @@
-﻿namespace Content.Shared._CM14.Storage;
+﻿namespace Content.Shared._RMC14.Storage;
 
 [RegisterComponent]
 public sealed partial class CMStorageVisualizerComponent : Component
 {
-    [DataField(required: true)]
-    public string StorageOpen;
+    [DataField]
+    public string? StorageClosed;
 
-    [DataField(required: true)]
-    public string StorageClosed;
+    [DataField]
+    public string? StorageOpen;
 }

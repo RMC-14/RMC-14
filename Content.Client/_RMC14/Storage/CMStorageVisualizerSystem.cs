@@ -1,9 +1,9 @@
-﻿using Content.Shared._CM14.Storage;
+﻿using Content.Shared._RMC14.Storage;
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
 using Robust.Client.GameObjects;
 
-namespace Content.Client._CM14.Storage;
+namespace Content.Client._RMC14.Storage;
 
 public sealed class CMStorageVisualizerSystem : VisualizerSystem<CMStorageVisualizerComponent>
 {
@@ -20,8 +20,10 @@ public sealed class CMStorageVisualizerSystem : VisualizerSystem<CMStorageVisual
 
         if (level == 0)
         {
-            args.Sprite.LayerSetVisible(component.StorageOpen, false);
-            args.Sprite.LayerSetVisible(component.StorageClosed, false);
+            if (component.StorageOpen != null)
+                args.Sprite.LayerSetVisible(component.StorageOpen, false);
+            if (component.StorageClosed != null)
+                args.Sprite.LayerSetVisible(component.StorageClosed, false);
             return;
         }
 
@@ -34,13 +36,17 @@ public sealed class CMStorageVisualizerSystem : VisualizerSystem<CMStorageVisual
 
         if (state == SharedBagState.Open)
         {
-            args.Sprite.LayerSetVisible(component.StorageOpen, true);
-            args.Sprite.LayerSetVisible(component.StorageClosed, false);
+            if (component.StorageOpen != null)
+                args.Sprite.LayerSetVisible(component.StorageOpen, true);
+            if (component.StorageClosed != null)
+                args.Sprite.LayerSetVisible(component.StorageClosed, false);
         }
         else
         {
-            args.Sprite.LayerSetVisible(component.StorageOpen, false);
-            args.Sprite.LayerSetVisible(component.StorageClosed, true);
+            if (component.StorageOpen != null)
+                args.Sprite.LayerSetVisible(component.StorageOpen, false);
+            if (component.StorageClosed != null)
+                args.Sprite.LayerSetVisible(component.StorageClosed, true);
         }
     }
 }
