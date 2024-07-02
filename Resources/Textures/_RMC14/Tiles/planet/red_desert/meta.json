@@ -1,0 +1,300 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/81834712c1d5820aaa5ac71e21937459f718cb43/icons/turf/floors/desert.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "desert1"
+    },
+    {
+      "name": "desert2"
+    },
+    {
+      "name": "desert3"
+    },
+    {
+      "name": "desert_corner_northeast1"
+    },
+    {
+      "name": "desert_corner_northeast2"
+    },
+    {
+      "name": "desert_corner_northeast3"
+    },
+    {
+      "name": "desert_corner_northwest1"
+    },
+    {
+      "name": "desert_corner_northwest2"
+    },
+    {
+      "name": "desert_corner_northwest3"
+    },
+    {
+      "name": "desert_corner_southeast1"
+    },
+    {
+      "name": "desert_corner_southeast2"
+    },
+    {
+      "name": "desert_corner_southeast3"
+    },
+    {
+      "name": "desert_corner_southwest1"
+    },
+    {
+      "name": "desert_corner_southwest2"
+    },
+    {
+      "name": "desert_corner_southwest3"
+    },
+    {
+      "name": "desert_east1"
+    },
+    {
+      "name": "desert_east2"
+    },
+    {
+      "name": "desert_east3"
+    },
+    {
+      "name": "desert_grass"
+    },
+    {
+      "name": "desert_grass_transition_edge1",
+      "directions": 8
+    },
+    {
+      "name": "desert_north1"
+    },
+    {
+      "name": "desert_north2"
+    },
+    {
+      "name": "desert_north3"
+    },
+    {
+      "name": "desert_northeast1"
+    },
+    {
+      "name": "desert_northeast2"
+    },
+    {
+      "name": "desert_northeast3"
+    },
+    {
+      "name": "desert_northwest1"
+    },
+    {
+      "name": "desert_northwest2"
+    },
+    {
+      "name": "desert_northwest3"
+    },
+    {
+      "name": "desert_south1"
+    },
+    {
+      "name": "desert_south2"
+    },
+    {
+      "name": "desert_south3"
+    },
+    {
+      "name": "desert_southeast1"
+    },
+    {
+      "name": "desert_southeast2"
+    },
+    {
+      "name": "desert_southeast3"
+    },
+    {
+      "name": "desert_southwest1"
+    },
+    {
+      "name": "desert_southwest2"
+    },
+    {
+      "name": "desert_southwest3"
+    },
+    {
+      "name": "desert_transition_corner1",
+      "directions": 4
+    },
+    {
+      "name": "desert_transition_edge1",
+      "directions": 8
+    },
+    {
+      "name": "desert_west1"
+    },
+    {
+      "name": "desert_west2"
+    },
+    {
+      "name": "desert_west3"
+    },
+    {
+      "name": "crust1"
+    },
+    {
+      "name": "crust2"
+    },
+    {
+      "name": "crust3"
+    },
+    {
+      "name": "crust_south1"
+    },
+    {
+      "name": "crust_south2"
+    },
+    {
+      "name": "crust_south3"
+    },
+    {
+      "name": "crust_west1"
+    },
+    {
+      "name": "crust_west2"
+    },
+    {
+      "name": "crust_west3"
+    },
+    {
+      "name": "crust_north1"
+    },
+    {
+      "name": "crust_north2"
+    },
+    {
+      "name": "crust_north3"
+    },
+    {
+      "name": "crust_east1"
+    },
+    {
+      "name": "crust_east2"
+    },
+    {
+      "name": "crust_east3"
+    },
+    {
+      "name": "crust_corner_southwest1"
+    },
+    {
+      "name": "crust_corner_southwest2"
+    },
+    {
+      "name": "crust_corner_southwest3"
+    },
+    {
+      "name": "crust_corner_southeast1"
+    },
+    {
+      "name": "crust_corner_southeast2"
+    },
+    {
+      "name": "crust_corner_southeast3"
+    },
+    {
+      "name": "crust_corner_northeast1"
+    },
+    {
+      "name": "crust_corner_northeast2"
+    },
+    {
+      "name": "crust_corner_northeast3"
+    },
+    {
+      "name": "crust_corner_northwest1"
+    },
+    {
+      "name": "crust_corner_northwest2"
+    },
+    {
+      "name": "crust_corner_northwest3"
+    },
+    {
+      "name": "crust_southwest1"
+    },
+    {
+      "name": "crust_southwest2"
+    },
+    {
+      "name": "crust_southwest3"
+    },
+    {
+      "name": "crust_southeast1"
+    },
+    {
+      "name": "crust_southeast2"
+    },
+    {
+      "name": "crust_southeast3"
+    },
+    {
+      "name": "crust_northwest1"
+    },
+    {
+      "name": "crust_northwest2"
+    },
+    {
+      "name": "crust_northwest3"
+    },
+    {
+      "name": "crust_northeast1"
+    },
+    {
+      "name": "crust_northeast2"
+    },
+    {
+      "name": "crust_northeast3"
+    },
+    {
+      "name": "dirt1"
+    },
+    {
+      "name": "dirt2"
+    },
+    {
+      "name": "dirt3"
+    },
+    {
+      "name": "dirt4"
+    },
+    {
+      "name": "dirt4_transition_corner1"
+    },
+    {
+      "name": "dirt4_transition_corner2"
+    },
+    {
+      "name": "dirt4_transition_edge1"
+    },
+    {
+      "name": "dirt4_transition_edge2"
+    },
+    {
+      "name": "rock1"
+    },
+    {
+      "name": "rock2"
+    },
+    {
+      "name": "rock3"
+    },
+    {
+      "name": "rock4"
+    },
+    {
+      "name": "rock2_transition",
+	  "directions": 8
+    },
+  ]
+}
