@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared._RMC14.Attachable.Systems;
 using Robust.Client.GameObjects;
+using Robust.Shared.Containers;
 
 namespace Content.Client._RMC14.Attachable.Systems;
 
@@ -15,9 +16,19 @@ public sealed class AttachableHolderVisualsSystem : EntitySystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<AttachableHolderVisualsComponent, EntRemovedFromContainerMessage>(OnDetached);
         SubscribeLocalEvent<AttachableHolderVisualsComponent, AttachableHolderAttachablesAlteredEvent>(OnAttachablesAltered);
         
         SubscribeLocalEvent<AttachableVisualsComponent, AppearanceChangeEvent>(OnAttachableAppearanceChange);
+    }
+
+    private void OnDetached(Entity<AttachableHolderVisualsComponent> holder, ref EntRemovedFromContainerMessage args)
+    {
+        if (!HasComp<AttachableVisualsComponent>(args.Entity) || !_attachableHolderSystem.HasSlot(holder.Owner, args.Container.ID))
+            return;
+
+        var holderEv = new AttachableHolderAttachablesAlteredEvent(args.Entity, args.Container.ID, AttachableAlteredType.Detached);
+        RaiseLocalEvent(holder, ref holderEv);
     }
 
     private void OnAttachablesAltered(Entity<AttachableHolderVisualsComponent> holder,

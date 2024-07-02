@@ -50,6 +50,7 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, AttachableHolderDetachMessage>(OnAttachableHolderDetachMessage);
         SubscribeLocalEvent<AttachableHolderComponent, AttemptShootEvent>(OnAttachableHolderAttemptShoot);
         SubscribeLocalEvent<AttachableHolderComponent, BoundUIOpenedEvent>(OnAttachableHolderUiOpened);
+        SubscribeLocalEvent<AttachableHolderComponent, EntInsertedIntoContainerMessage>(OnAttached);
         SubscribeLocalEvent<AttachableHolderComponent, MapInitEvent>(OnHolderMapInit,
             after: new[] { typeof(ContainerFillSystem) });
         SubscribeLocalEvent<AttachableHolderComponent, GetVerbsEvent<InteractionVerb>>(OnAttachableHolderGetVerbs);
@@ -131,17 +132,6 @@ public sealed class AttachableHolderSystem : EntitySystem
             var attachableUid = Spawn(holder.Comp.Slots[slotId].StartingAttachable, coords);
             if (!_container.Insert(attachableUid, container, containerXform: xform))
                 continue;
-
-            if (!TryComp(attachableUid, out AttachableComponent? attachableComponent))
-                continue;
-
-            var ev = new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Attached);
-            RaiseLocalEvent(attachableUid, ref ev);
-
-            var holderEv = new AttachableHolderAttachablesAlteredEvent(attachableUid, slotId, AttachableAlteredType.Attached);
-            RaiseLocalEvent(holder.Owner, ref holderEv);
-
-            Dirty(attachableUid, attachableComponent);
         }
 
         UpdateStripUi(holder.Owner, holder.Comp);
@@ -345,14 +335,6 @@ public sealed class AttachableHolderSystem : EntitySystem
         if (!_container.Insert(attachableUid, container))
             return false;
 
-        UpdateStripUi(holder.Owner, holder.Comp);
-
-        var ev = new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Attached);
-        RaiseLocalEvent(attachableUid, ref ev);
-
-        var holderEv = new AttachableHolderAttachablesAlteredEvent(attachableUid, slotId, AttachableAlteredType.Attached);
-        RaiseLocalEvent(holder.Owner, ref holderEv);
-
         if(_hands.IsHolding(userUid, holder.Owner))
         {
             var addEv = new GrantAttachableActionsEvent(userUid);
@@ -366,6 +348,20 @@ public sealed class AttachableHolderSystem : EntitySystem
             userUid);
 
         return true;
+    }
+
+    private void OnAttached(Entity<AttachableHolderComponent> holder, ref EntInsertedIntoContainerMessage args)
+    {
+        if (!TryComp(args.Entity, out AttachableComponent? attachableComponent) || !holder.Comp.Slots.ContainsKey(args.Container.ID))
+            return;
+
+        UpdateStripUi(holder.Owner, holder.Comp);
+
+        var ev = new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Attached);
+        RaiseLocalEvent(args.Entity, ref ev);
+
+        var holderEv = new AttachableHolderAttachablesAlteredEvent(args.Entity, args.Container.ID, AttachableAlteredType.Attached);
+        RaiseLocalEvent(holder, ref holderEv);
     }
 
     //Detaching
@@ -399,13 +395,10 @@ public sealed class AttachableHolderSystem : EntitySystem
         if (args.Cancelled || args.Handled || args.Target == null || args.Used == null)
             return;
 
-        if (!HasComp<AttachableHolderComponent>(args.Target) || !HasComp<AttachableComponent>(args.Used))
+        if (!TryComp(args.Target, out AttachableHolderComponent? holderComponent) || !HasComp<AttachableComponent>(args.Used))
             return;
 
-        if (!Detach((args.Target.Value,
-                    Comp<AttachableHolderComponent>(args.Target.Value)),
-                args.Used.Value,
-                args.User))
+        if (!Detach((args.Target.Value, holderComponent), args.Used.Value, args.User))
             return;
 
         args.Handled = true;
@@ -414,13 +407,13 @@ public sealed class AttachableHolderSystem : EntitySystem
     public bool Detach(Entity<AttachableHolderComponent> holder,
         EntityUid attachableUid,
         EntityUid userUid,
-        string slotId = "")
+        string? slotId = null)
     {
         if (TerminatingOrDeleted(holder) || !holder.Comp.Running)
             return false;
 
-        if (string.IsNullOrEmpty(slotId))
-            CanAttach(holder, attachableUid, ref slotId);
+        if (string.IsNullOrEmpty(slotId) && !TryGetSlotId(holder.Owner, attachableUid, out slotId))
+            return false;
 
         if (!_container.TryGetContainer(holder, slotId, out var container) || container.Count <= 0)
             return false;
@@ -428,7 +421,9 @@ public sealed class AttachableHolderSystem : EntitySystem
         if (!TryGetAttachable(holder, slotId, out var attachable))
             return false;
 
-        _container.TryRemoveFromContainer(attachable);
+        if (!_container.Remove(attachable.Owner, container, force: true))
+            return false;
+
         UpdateStripUi(holder.Owner, holder.Comp);
 
         var ev = new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Detached, userUid);
