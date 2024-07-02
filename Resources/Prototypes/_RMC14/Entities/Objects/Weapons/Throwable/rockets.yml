@@ -11,7 +11,7 @@
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: RMC
-    maxIntensity: 50
+    maxIntensity: 500
     intensitySlope: 12
     totalIntensity: 500
     canCreateVacuum: false
