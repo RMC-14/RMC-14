@@ -618,7 +618,14 @@ public abstract class SharedStorageSystem : EntitySystem
         }
 
         // Else, interact using the held item
-        _interactionSystem.InteractUsing(player, hands.ActiveHandEntity.Value, entity, Transform(entity).Coordinates, checkCanInteract: false);
+        if (_interactionSystem.InteractUsing(player,
+                hands.ActiveHandEntity.Value,
+                entity,
+                Transform(entity).Coordinates,
+                checkCanInteract: false))
+            return;
+
+        PlayerInsertHeldEntity((uid, storageComp), (player, hands));
     }
 
     private void OnSetItemLocation(StorageSetItemLocationEvent msg, EntitySessionEventArgs args)
