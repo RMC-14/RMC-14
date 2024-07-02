@@ -130,3 +130,14 @@
     state: kasumi_ayako
   - type: PatronFigurine
     id: fef9a99e-5111-4094-b484-67af44ebd03
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronChikiSugimoto
+  name: Chiki Sugimoto figurine
+  description: “Hi! Me Chiki!”
+  components:
+  - type: Sprite
+    state: chiki_sugimoto
+  - type: PatronFigurine
+    id: d2e290ff-da44-45df-9e6d-bba2ce98446b
