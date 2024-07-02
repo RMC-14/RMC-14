@@ -5,5 +5,5 @@
 public sealed partial class PatronFigurineComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
-    public Guid Id;
+    public string Id;
 }
