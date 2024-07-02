@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMBaseMachineCircuitboard
   id: CMSMESMachineCircuitboard
   name: SMES machine board
@@ -79,7 +79,7 @@
   - type: Sprite
     state: blank_mod
   - type: MachineBoard
-    prototype: CMDispenserChemEmpty
+    prototype: RMCDispenserChemEmpty
     # TODO RMC14 material requirements
 
 - type: entity
