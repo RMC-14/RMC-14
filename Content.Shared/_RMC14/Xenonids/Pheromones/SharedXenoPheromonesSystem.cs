@@ -77,12 +77,12 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     {
         args.Handled = true;
 
+        _actions.SetToggled(args.Action, false);
         if (HasComp<XenoActivePheromonesComponent>(xeno))
         {
             if (_net.IsServer)
                 RemComp<XenoActivePheromonesComponent>(xeno);
 
-            _actions.SetToggled(args.Action, false);
             _popup.PopupClient(Loc.GetString("cm-xeno-pheromones-stop"), xeno, xeno);
             return;
         }
@@ -221,6 +221,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         var query = EntityQueryEnumerator<XenoActivePheromonesComponent, XenoPheromonesComponent, TransformComponent>();
         _pheromonesJob.Receivers.Clear();
         _pheromonesJob.Pheromones.Clear();
+        _refreshSpeeds.Clear();
 
         while (query.MoveNext(out var uid, out var active, out var pheromones, out var xform))
         {
@@ -296,8 +297,11 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
                         oldFrenzy.Remove(receiver);
                         var frenzy = EnsureComp<XenoFrenzyPheromonesComponent>(receiver);
+                        var old = frenzy.Multiplier;
                         AssignMaxMultiplier(ref frenzy.Multiplier, pheromones.PheromonesMultiplier);
-                        _refreshSpeeds.Add(receiver);
+
+                        if (frenzy.Multiplier != old)
+                            _refreshSpeeds.Add(receiver);
                     }
 
                     break;
