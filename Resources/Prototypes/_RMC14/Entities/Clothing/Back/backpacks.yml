@@ -15,15 +15,9 @@
     - state: closed
       map: [ "closedLayer" ]
   - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.SharedBagOpenVisuals.BagState:
-        openLayer:
-          Open: { visible: true }
-          Closed: { visible: false }
-        closedLayer:
-          Open: { visible: false }
-          Closed: { visible: true }
+  - type: CMStorageVisualizer
+    storageOpen: openLayer
+    storageClosed: closedLayer
   - type: Clothing
     quickEquip: false
     slots:
