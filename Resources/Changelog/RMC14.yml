@@ -1895,5 +1895,12 @@
   id: 229
   time: '2024-07-02T00:09:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2732
+- author: Whisper
+  changes:
+  - message: Fixed grenade launcher being one grenade short in capacity.
+    type: Fix
+  id: 230
+  time: '2024-07-02T00:13:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2733
 Name: RMC14
 Order: -1
