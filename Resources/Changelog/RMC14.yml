@@ -1995,5 +1995,13 @@
   id: 243
   time: '2024-07-02T15:45:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2761
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the client not getting feedback trying to build a hive core when
+      one already exists far away from it
+    type: Fix
+  id: 244
+  time: '2024-07-02T15:51:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2762
 Name: RMC14
 Order: -1
