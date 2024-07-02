@@ -67,26 +67,24 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, GetMeleeDamageEvent>(OnFrenzyGetMeleeDamage);
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, RefreshMovementSpeedModifiersEvent>(OnFrenzyMovementSpeedModifiers);
 
+        SubscribeLocalEvent<XenoActivePheromonesComponent, MobStateChangedEvent>(OnActiveMobStateChanged);
+
         Subs.BuiEvents<XenoPheromonesComponent>(XenoPheromonesUI.Key, subs =>
         {
             subs.Event<XenoPheromonesChosenBuiMsg>(OnXenoPheromonesChosenBui);
         });
     }
 
+    private void OnActiveMobStateChanged(Entity<XenoActivePheromonesComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState == MobState.Critical || args.NewMobState == MobState.Dead)
+            DeactivatePheromones(ent.Owner);
+    }
+
     private void OnXenoPheromonesAction(Entity<XenoPheromonesComponent> xeno, ref XenoPheromonesActionEvent args)
     {
         args.Handled = true;
-
-        _actions.SetToggled(args.Action, false);
-        if (HasComp<XenoActivePheromonesComponent>(xeno))
-        {
-            if (_net.IsServer)
-                RemComp<XenoActivePheromonesComponent>(xeno);
-
-            _popup.PopupClient(Loc.GetString("cm-xeno-pheromones-stop"), xeno, xeno);
-            return;
-        }
-
+        DeactivatePheromones((xeno, xeno));
         _ui.TryOpenUi(xeno.Owner, XenoPheromonesUI.Key, xeno);
     }
 
@@ -179,6 +177,27 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     private void AssignMaxMultiplier(ref FixedPoint2 a, FixedPoint2 b)
     {
         a = FixedPoint2.Max(a, b);
+    }
+
+    private void DeactivatePheromones(Entity<XenoPheromonesComponent?> xeno)
+    {
+        if (!Resolve(xeno, ref xeno.Comp, false))
+            return;
+
+        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        {
+            if (action.BaseEvent is XenoPheromonesActionEvent)
+                _actions.SetToggled(actionId, false);
+        }
+
+        if (HasComp<XenoActivePheromonesComponent>(xeno))
+        {
+            if (_net.IsServer)
+                RemComp<XenoActivePheromonesComponent>(xeno);
+
+            _popup.PopupClient(Loc.GetString("cm-xeno-pheromones-stop"), xeno, xeno);
+            return;
+        }
     }
 
     public override void Update(float frameTime)
