@@ -18,8 +18,8 @@ public record struct AttachableModifierConditions(
     bool WieldedOnly,
     bool ActiveOnly,
     bool InactiveOnly,
-    bool IsBlacklist,
-    EntityWhitelist? Whitelist
+    EntityWhitelist? Whitelist,
+    EntityWhitelist? Blacklist
 );
 
 [DataRecord, Serializable, NetSerializable]

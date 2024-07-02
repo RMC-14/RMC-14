@@ -50,12 +50,14 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
         else if (conditions.Value.ActiveOnly && (toggleableComponent == null || !toggleableComponent.Active))
             return false;
 
-        if (conditions.Value.Whitelist != null &&
-            holderUid != null &&
-            (!conditions.Value.IsBlacklist && !_whitelistSystem.IsWhitelistPass(conditions.Value.Whitelist, holderUid.Value) ||
-            conditions.Value.IsBlacklist && !_whitelistSystem.IsWhitelistFail(conditions.Value.Whitelist, holderUid.Value)))
+
+        if (holderUid != null)
         {
-            return false;
+            if (conditions.Value.Whitelist != null && _whitelistSystem.IsWhitelistFail(conditions.Value.Whitelist, holderUid.Value))
+                return false;
+
+            if (conditions.Value.Blacklist != null && _whitelistSystem.IsWhitelistPass(conditions.Value.Blacklist, holderUid.Value))
+                return false;
         }
 
         return true;

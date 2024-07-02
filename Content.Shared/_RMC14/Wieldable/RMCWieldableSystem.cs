@@ -1,8 +1,9 @@
-using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Wieldable.Components;
 using Content.Shared._RMC14.Wieldable.Events;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
+using Content.Shared.Inventory;
+using Content.Shared.Inventory.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Timing;
@@ -15,6 +16,7 @@ namespace Content.Shared._RMC14.Wieldable;
 public sealed class RMCWieldableSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly InventorySystem _inventorySystem = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifierSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly UseDelaySystem _useDelaySystem = default!;
@@ -30,9 +32,14 @@ public sealed class RMCWieldableSystem : EntitySystem
         SubscribeLocalEvent<WieldableSpeedModifiersComponent, ItemWieldedEvent>(OnItemWielded);
         SubscribeLocalEvent<WieldableSpeedModifiersComponent, MapInitEvent>(OnMapInit);
 
+        SubscribeLocalEvent<WieldSlowdownCompensationComponent, GotEquippedEvent>(OnGotEquipped);
+        SubscribeLocalEvent<WieldSlowdownCompensationComponent, GotUnequippedEvent>(OnGotUnequipped);
+
         SubscribeLocalEvent<WieldDelayComponent, BeforeWieldEvent>(OnBeforeWield);
         SubscribeLocalEvent<WieldDelayComponent, GotEquippedHandEvent>(OnGotEquippedHand);
         SubscribeLocalEvent<WieldDelayComponent, MapInitEvent>(OnMapInit);
+
+        SubscribeLocalEvent<InventoryComponent, RefreshWieldSlowdownCompensationEvent>(_inventorySystem.RelayEvent);
     }
 
     private void OnMapInit(Entity<WieldableSpeedModifiersComponent> wieldable, ref MapInitEvent args)
@@ -61,11 +68,11 @@ public sealed class RMCWieldableSystem : EntitySystem
     {
         if (TryComp(wieldable.Owner, out TransformComponent? transformComponent) &&
             transformComponent.ParentUid.Valid &&
-            TryComp(transformComponent.ParentUid, out CMArmorUserComponent? userComponent))
+            TryComp(transformComponent.ParentUid, out WieldSlowdownCompensationUserComponent? userComponent))
         {
             args.Args.ModifySpeed(
-                Math.Min(wieldable.Comp.ModifiedWalk + userComponent.WieldSlowdownCompensationWalk, 1f), 
-                Math.Min(wieldable.Comp.ModifiedSprint + userComponent.WieldSlowdownCompensationSprint, 1f));
+                Math.Min(wieldable.Comp.ModifiedWalk + userComponent.Walk, 1f),
+                Math.Min(wieldable.Comp.ModifiedSprint + userComponent.Sprint, 1f));
             return;
         }
 
@@ -109,6 +116,37 @@ public sealed class RMCWieldableSystem : EntitySystem
         }
         
         _movementSpeedModifierSystem.RefreshMovementSpeedModifiers(transformComponent.ParentUid);
+    }
+#endregion
+
+#region Wield slowdown compensation
+    private void OnGotEquipped(Entity<WieldSlowdownCompensationComponent> armour, ref GotEquippedEvent args)
+    {
+        EnsureComp(args.Equipee, out WieldSlowdownCompensationUserComponent comp);
+
+        RefreshWieldSlowdownCompensation((args.Equipee, comp));
+    }
+
+    private void OnGotUnequipped(Entity<WieldSlowdownCompensationComponent> armour, ref GotUnequippedEvent args)
+    {
+        EnsureComp(args.Equipee, out WieldSlowdownCompensationUserComponent comp);
+
+        RefreshWieldSlowdownCompensation((args.Equipee, comp));
+    }
+
+    private void RefreshWieldSlowdownCompensation(Entity<WieldSlowdownCompensationUserComponent> user)
+    {
+        var ev = new RefreshWieldSlowdownCompensationEvent(~SlotFlags.POCKET);
+        RaiseLocalEvent(user.Owner, ref ev);
+
+        user.Comp.Walk = ev.Walk;
+        user.Comp.Walk = ev.Sprint;
+    }
+
+    private void OnRefreshWieldSlowdownCompensation(Entity<WieldSlowdownCompensationComponent> armour, ref InventoryRelayedEvent<RefreshWieldSlowdownCompensationEvent> args)
+    {
+        args.Args.Walk += armour.Comp.Walk;
+        args.Args.Sprint += armour.Comp.Sprint;
     }
 #endregion
 

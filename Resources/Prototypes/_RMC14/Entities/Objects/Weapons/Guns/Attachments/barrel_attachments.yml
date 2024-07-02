@@ -60,8 +60,7 @@
           - RMCWeaponShotgun
       damageAddMult: 0.05
     - conditions:
-        isBlacklist: true
-        whitelist:
+        blacklist:
           tags:
           - RMCWeaponShotgun
       damageAddMult: 0.3

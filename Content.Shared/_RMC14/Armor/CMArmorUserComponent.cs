@@ -2,13 +2,6 @@
 
 namespace Content.Shared._RMC14.Armor;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
 [Access(typeof(CMArmorSystem))]
-public sealed partial class CMArmorUserComponent : Component
-{
-    [DataField, AutoNetworkedField]
-    public float WieldSlowdownCompensationWalk = 0f;
-
-    [DataField, AutoNetworkedField]
-    public float WieldSlowdownCompensationSprint = 0f;
-}
+public sealed partial class CMArmorUserComponent : Component;

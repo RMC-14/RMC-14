@@ -1,6 +1,6 @@
 using Content.Shared.Inventory;
 
-namespace Content.Shared._RMC14.Armor;
+namespace Content.Shared._RMC14.Wieldable;
 
 [ByRefEvent]
 public record struct RefreshWieldSlowdownCompensationEvent(

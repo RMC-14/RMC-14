@@ -30,10 +30,8 @@ public sealed class CMArmorSystem : EntitySystem
         SubscribeLocalEvent<CMArmorComponent, DamageModifyEvent>(OnDamageModify);
         SubscribeLocalEvent<CMArmorComponent, CMGetArmorEvent>(OnGetArmor);
         SubscribeLocalEvent<CMArmorComponent, InventoryRelayedEvent<CMGetArmorEvent>>(OnGetArmorRelayed);
-        SubscribeLocalEvent<CMArmorComponent, InventoryRelayedEvent<RefreshWieldSlowdownCompensationEvent>>(OnRefreshWieldSlowdownCompensation);
         SubscribeLocalEvent<CMArmorComponent, GetExplosionResistanceEvent>(OnGetExplosionResistance);
         SubscribeLocalEvent<CMArmorComponent, GotEquippedEvent>(OnGotEquipped);
-        SubscribeLocalEvent<CMArmorComponent, GotUnequippedEvent>(OnGotUnequipped);
 
         SubscribeLocalEvent<CMHardArmorComponent, InventoryRelayedEvent<HitBySlowingSpitEvent>>(OnArmorHitBySlowingSpit);
         SubscribeLocalEvent<CMHardArmorComponent, InventoryRelayedEvent<CMSurgeryCanPerformStepEvent>>(OnArmorCanPerformStep);
@@ -45,7 +43,6 @@ public sealed class CMArmorSystem : EntitySystem
         SubscribeLocalEvent<CMArmorPiercingComponent, CMGetArmorPiercingEvent>(OnPiercingGetArmor);
 
         SubscribeLocalEvent<InventoryComponent, CMGetArmorEvent>(_inventory.RelayEvent);
-        SubscribeLocalEvent<InventoryComponent, RefreshWieldSlowdownCompensationEvent>(_inventory.RelayEvent);
     }
 
     private void OnMapInit(Entity<CMArmorComponent> armored, ref MapInitEvent args)
@@ -89,16 +86,7 @@ public sealed class CMArmorSystem : EntitySystem
 
     private void OnGotEquipped(Entity<CMArmorComponent> armored, ref GotEquippedEvent args)
     {
-        var comp = EnsureComp<CMArmorUserComponent>(args.Equipee);
-
-        RefreshWieldSlowdownCompensation((args.Equipee, comp));
-    }
-
-    private void OnGotUnequipped(Entity<CMArmorComponent> armored, ref GotUnequippedEvent args)
-    {
-        var comp = EnsureComp<CMArmorUserComponent>(args.Equipee);
-
-        RefreshWieldSlowdownCompensation((args.Equipee, comp));
+        EnsureComp<CMArmorUserComponent>(args.Equipee);
     }
 
     private void OnArmorHitBySlowingSpit(Entity<CMHardArmorComponent> ent, ref InventoryRelayedEvent<HitBySlowingSpitEvent> args)
@@ -181,20 +169,5 @@ public sealed class CMArmorSystem : EntitySystem
                 }
             }
         }
-    }
-
-    private void RefreshWieldSlowdownCompensation(Entity<CMArmorUserComponent> user)
-    {
-        var ev = new RefreshWieldSlowdownCompensationEvent(~SlotFlags.POCKET);
-        RaiseLocalEvent(user.Owner, ref ev);
-
-        user.Comp.WieldSlowdownCompensationWalk = ev.Walk;
-        user.Comp.WieldSlowdownCompensationSprint = ev.Sprint;
-    }
-
-    private void OnRefreshWieldSlowdownCompensation(Entity<CMArmorComponent> armour, ref InventoryRelayedEvent<RefreshWieldSlowdownCompensationEvent> args)
-    {
-        args.Args.Walk += armour.Comp.WieldSlowdownCompensationWalk;
-        args.Args.Sprint += armour.Comp.WieldSlowdownCompensationSprint;
     }
 }
