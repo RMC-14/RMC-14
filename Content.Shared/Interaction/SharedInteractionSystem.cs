@@ -908,10 +908,20 @@ namespace Content.Shared.Interaction
         }
 
         /// <summary>
-        /// Uses a item/object on an entity
+        /// Uses an item/object on an entity
         /// Finds components with the InteractUsing interface and calls their function
         /// NOTE: Does not have an InRangeUnobstructed check
         /// </summary>
+        /// <param name="user">User doing the interaction.</param>
+        /// <param name="used">Item being used on the <paramref name="target"/>.</param>
+        /// <param name="target">Entity getting interacted with by the <paramref name="user"/> using the
+        ///     <paramref name="used"/> entity.</param>
+        /// <param name="clickLocation">The location that the <paramref name="user"/> clicked.</param>
+        /// <param name="checkCanInteract">Whether to check that the <paramref name="user"/> can interact with the
+        ///     <paramref name="target"/>.</param>
+        /// <param name="checkCanUse">Whether to check that the <paramref name="user"/> can use the
+        ///     <paramref name="used"/> entity.</param>
+        /// <returns>True if the interaction was handled. Otherwise, false.</returns>
         public bool InteractUsing(
             EntityUid user,
             EntityUid used,
@@ -946,6 +956,13 @@ namespace Content.Shared.Interaction
         /// <summary>
         ///     Used when clicking on an entity resulted in no other interaction. Used for low-priority interactions.
         /// </summary>
+        /// <param name="user"><inheritdoc cref="InteractUsing"/></param>
+        /// <param name="used"><inheritdoc cref="InteractUsing"/></param>
+        /// <param name="target"><inheritdoc cref="InteractUsing"/></param>
+        /// <param name="clickLocation"><inheritdoc cref="InteractUsing"/></param>
+        /// <param name="canReach">Whether the <paramref name="user"/> is in range of the <paramref name="target"/>.
+        ///     </param>
+        /// <returns>True if the interaction was handled. Otherwise, false.</returns>
         public bool InteractDoAfter(EntityUid user, EntityUid used, EntityUid? target, EntityCoordinates clickLocation, bool canReach)
         {
             if (target is {Valid: false})

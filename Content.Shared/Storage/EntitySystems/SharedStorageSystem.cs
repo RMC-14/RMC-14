@@ -1078,7 +1078,7 @@ public abstract class SharedStorageSystem : EntitySystem
     /// </summary>
     /// <param name="ent">The storage entity and component to insert into.</param>
     /// <param name="player">The player and hands component to insert the held entity from.</param>
-    /// <returns>True if inserted, false otherwise.</returns>
+    /// <returns>True if inserted, otherwise false.</returns>
     public bool PlayerInsertHeldEntity(Entity<StorageComponent?> ent, Entity<HandsComponent?> player)
     {
         if (!Resolve(ent.Owner, ref ent.Comp)
