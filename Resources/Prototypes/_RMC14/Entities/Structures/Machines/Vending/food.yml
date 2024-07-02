@@ -1,0 +1,65 @@
+# FOOD
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechFood
+  name: ColMarTech food vendor
+  description: Marine Food Vendor, containing standard military Prepared Meals.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/food.rsi
+  - type: CMAutomatedVendor
+    sections:
+    - name: Prepared Meals
+      entries:
+      - id: CMMarinePreparedMealChicken
+        amount: 15
+      - id: CMMarinePreparedMealCornbread
+        amount: 15
+      - id: CMMarinePreparedMealPasta
+        amount: 15
+      - id: CMMarinePreparedMealPizza
+        amount: 15
+      - id: CMMarinePreparedMealPork
+        amount: 15
+      - id: CMMarinePreparedMealTofu
+        amount: 15
+      - id: CMMarineProteinBar
+        amount: 50
+    - name: Flasks
+      entries:
+      - id: CMCanteen
+        amount: 10
+      - id: CMMetalFlask
+        amount: 10
+      - id: CMMarineFlask
+        amount: 5
+      - id: CMWEYAFlask
+        amount: 5
+
+# TODO RMC14 replace VendingMachine with CMAutomatedVendor
+- type: entity
+  parent: CMVendor
+  id: CMVendorBooze
+  name: Booze-O-Mat
+  description: A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/boozeomat.rsi
+  - type: VendingMachine
+    pack: CMVendorBooze
+    denyState: deny-unshaded
+    ejectState: eject-unshaded
+
+- type: entity
+  parent: CMVendor
+  id: CMVendorChess
+  name: Chess-o-mat
+  description: In 2143 Red Star Drinks, a SPP-CA (Colony Administration) affiliated corporation ran a promotional sweepstakes for drinkers who had found special codes on the inside of the caps of a limited run of Red Star Vodka, shipping them a Chess-O-Mat with unlimited refills.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/chessomat.rsi
+  - type: VendingMachine
+    pack: CMVendorChess
+    denyState: deny-unshaded
+    ejectState: eject-unshaded

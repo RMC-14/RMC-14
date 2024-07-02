@@ -1,0 +1,56 @@
+# TODO RMC14 all of these vendor inventories
+# TODO RMC14 deny and vend states
+- type: entity
+  abstract: true
+  parent: CMCorrodible
+  id: ColMarTechBase
+  name: ColMarTech vendor
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Tag
+    tags:
+    - Structure
+  #    offState: off
+  #    brokenState: broken
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/colmartechweapons.rsi
+    layers:
+    - state: "off"
+      map: [ "enum.VendingMachineVisualLayers.Base" ]
+    - state: "base"
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+  - type: UserInterface
+    interfaces:
+      enum.CMAutomatedVendorUI.Key:
+        type: CMAutomatedVendorBui
+  - type: AmbientOnPowered
+  - type: AmbientSound
+    volume: -9
+    range: 3
+    enabled: false
+    sound:
+      path: /Audio/Ambience/Objects/vending_machine_hum.ogg
+  - type: ActivatableUI
+    key: enum.CMAutomatedVendorUI.Key
+  - type: ActivatableUIRequiresAccess
+  - type: WallMount
+    arc: 360

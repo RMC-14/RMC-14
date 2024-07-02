@@ -1,0 +1,79 @@
+# ENGINEERING
+
+- type: entity
+  parent: CMVendor
+  id: CMVendorTool
+  name: tool storage machine
+  description: A large storage machine containing various tools and devices for general repair.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/tool.rsi
+  - type: VendingMachine
+    pack: CMVendorTool
+    denyState: deny-unshaded
+    ejectState: eject-unshaded
+  - type: AccessReader
+    access: [["CMAccessEngineering"], ["CMAccessColonyEngineering"]]
+
+
+- type: entity
+  parent: CMVendorTool
+  id: CMVendorCircuits
+  name: circuit board vendor
+  description: A safe storage for pre-programmed circuit boards, it has an internal gyroscope to keep any external force from moving the boards, thick insulation and a custom 2.1mm UPS port for charging various We-Ya exclusive devices (sold separately).
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/robotics.rsi
+  - type: VendingMachine
+    pack: CMVendorCircuits
+
+
+- type: entity
+  parent: CMVendorTool
+  id: CMVendorElectronics
+  name: electronics vendor
+  description: Spare tool vendor. What? Did you expect some witty description?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/engivend.rsi
+  - type: VendingMachine
+    pack: CMVendorElectronics
+
+
+- type: entity
+  parent: CMVendorTool
+  id: CMVendorComponent
+  name: component storage machine
+  description: A large storage machine containing various components.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/engi.rsi
+  - type: VendingMachine
+    pack: CMVendorComponent
+
+
+- type: entity
+  parent: CMVendor
+  id: CMVendorScience
+  name: We-Ya SciVend
+  description: Vendor containing basic equipment for your experiments.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/robotics.rsi
+  - type: VendingMachine
+    pack: CMVendorScience
+    denyState: deny-unshaded
+    ejectState: eject-unshaded
+  - type: AccessReader
+    access: [["CMAccessResearch"]]
+
+
+- type: entity
+  parent: CMVendorScience
+  id: CMVendorRobotics
+  name: Robotech Deluxe
+  description: All the tools you need to create your own robot army.
+  components:
+  - type: VendingMachine
+    pack: CMVendorRobotics
+
