@@ -1,6 +1,5 @@
 ﻿using Content.Shared._RMC14.Storage;
 using Content.Shared.Storage;
-using Content.Shared.Storage.Components;
 using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Storage;
@@ -31,13 +30,10 @@ public sealed class CMStorageVisualizerSystem : VisualizerSystem<CMStorageVisual
         }
 
         // Open or closed
-        if (!AppearanceSystem.TryGetData<SharedBagState>(uid,
-                SharedBagOpenVisuals.BagState,
-                out var state,
-                args.Component))
+        if (!AppearanceSystem.TryGetData<bool>(uid, StorageVisuals.Open, out var open, args.Component))
             return;
 
-        if (state == SharedBagState.Open)
+        if (open)
         {
             if (component.StorageOpen != null)
                 args.Sprite.LayerSetVisible(component.StorageOpen, true);
