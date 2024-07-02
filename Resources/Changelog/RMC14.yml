@@ -1931,5 +1931,12 @@
   id: 234
   time: '2024-07-02T06:27:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2723
+- author: ShadowCommander
+  changes:
+  - message: Added empty sprite for the flare pack.
+    type: Add
+  id: 235
+  time: '2024-07-02T07:59:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2747
 Name: RMC14
 Order: -1
