@@ -628,6 +628,12 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/flare.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
   - type: CMItemSlots
     cooldown: 1
     cooldownPopup: You need to wait before taking another flare!
@@ -637,6 +643,21 @@
       whitelist:
         tags:
         - Flare
+  - type: GenericVisualizer
+    visuals:
+      enum.CMItemSlotsLayers.Fill:
+        closedLayer:
+          Empty: { visible: false }
+          Low: { visible: false }
+          Medium: { visible: true }
+          High: { visible: true }
+          Full: { visible: true }
+        openLayer:
+          Empty: { visible: false }
+          Low: { visible: true }
+          Medium: { visible: false }
+          High: { visible: false }
+          Full: { visible: false }
 
 - type: entity
   parent: [CMPouchOpenClosed, CMPouchStorage]
