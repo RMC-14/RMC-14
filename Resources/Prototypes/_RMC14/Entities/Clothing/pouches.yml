@@ -319,7 +319,7 @@
     - 0,0,11,1 #6 slots
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchOpenClosed]
+  parent: [CMPouchStorage]
   id: CMPouchShotgun
   name: shotgun shell pouch
   description: It can contain a single box of shotgun shells. # It can contain handfuls of shells, or bullets if you choose to for some reason. # TODO RMC14
