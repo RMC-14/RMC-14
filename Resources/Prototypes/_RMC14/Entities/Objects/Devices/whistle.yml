@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: Whistle
   id: CMWhistle
   name: whistle
@@ -10,3 +10,26 @@
     slots:
       - mask
       - neck
+
+- type: entity
+  id: CMWhistleMP
+  parent: CMWhistle
+  name: MP whistle
+  description: A metal pea-whistle. Can be blown while held, or worn in the mouth. This one is a commanding red
+  components:
+  - type: Sprite
+    color: "#8d0e2a"
+  - type: RequiresSkill
+    skills:
+      police: 2
+  - type: ApplyStatusToAreaOnActivate
+    key: Muted
+    component: Muted
+    time: 5
+    range: 5
+    whitelist:
+      components: # Will not effect animals/xenos
+        - Marine
+    blacklist:
+      components:
+        - MarineOrders # If you can give orders, the whistle doesn't effect you
