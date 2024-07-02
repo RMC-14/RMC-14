@@ -2,7 +2,7 @@
   abstract: true
   parent: BaseFigurine
   id: RMCBaseFigurinePatron
-  description: A small miniature.
+  description: A small, detailed miniature.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/patron_figurines.rsi
@@ -12,6 +12,7 @@
   parent: MarkerBase
   id: RMCSpawnerFigurinePatron
   name: patron figurine spawner
+  description: A patron figurine spawner.
   components:
   - type: Sprite
     layers:
@@ -20,9 +21,14 @@
     state: bartender
   - type: RandomSpawner # TODO RMC14 max 1 of each if any have yet to be picked at least once, to guarantee variety
     prototypes:
-    - RMCFigurinePatronFoxBridgeton
-    - RMCFigurinePatronKillsTheMice
-    - RMCFigurinePatronFritzVohlkson
+    - RMCFigurinePatronFoxBridgeton #
+    - RMCFigurinePatronKillsTheMice #e04261e0-0248-49d5-9398-08f84d53e4c0
+    - RMCFigurinePatronFritzVohlkson #
+    - RMCFigurinePatronMinervaHostel #ef4494f1-097b-4448-b93d-751b1425bafd
+    - RMCFigurinePatronTempestasFrostbiteGlacies #88404592-511d-4792-aa00-88743a918284
+    - RMCFigurinePatronSilvanodAndrea #ba2e69da-8743-43b0-8c89-e1da20656503
+    - RMCFigurinePatronIanthaAtikson #f6aa2920-580c-4b8d-aacc-efa441aa115b
+    - RMCFigurinePatronScottFigure #f6aa2920-580c-4b8d-aacc-efa441aa115b
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -37,6 +43,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronKillsTheMice
   name: Kills-The-Mice figurine
+  description: It looks neat.
   components:
   - type: Sprite
     state: Kills-The-Mice
@@ -44,8 +51,52 @@
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronFritzVohlkson
-  name: Fritz_Vohlkson figurine
-  description: SIR YES SIR OORAH!
+  name: Fritz Vohlkson figurine
+  description: "SIR YES SIR OORAH!"
   components:
   - type: Sprite
     state: Fritz_Vohlkson
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMinervaHostel
+  name: Minerva Hostel figurine
+  description: Smells of cigars.
+  components:
+  - type: Sprite
+    state: Minerva_Hostel
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronTempestasFrostbiteGlacies
+  name: Tempestas 'Frostbite' Glacies figurine
+  components:
+  - type: Sprite
+    state: Tempestas_'Frostbite'_Glacies
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSilvanodAndrea
+  name: Silvano d'Andrea figurine
+  description: Employee of the Month, every month.
+  components:
+  - type: Sprite
+    state: Silvano_d'Andrea
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronIanthaAtikson
+  name: Iantha Atikson figurine
+  description: Everyone's favorite Reqqie! Just don't ask for crayons...
+  components:
+  - type: Sprite
+    state: Iantha_Atikson
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronScottFigure
+  name: Scott Hoover figurine
+  description: "I work for the company. But don't let that fool you, I'm really an OK guy!"
+  components:
+  - type: Sprite
+    state: Scott_Hoover
