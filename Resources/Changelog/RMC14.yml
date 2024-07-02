@@ -1945,5 +1945,12 @@
   id: 236
   time: '2024-07-02T08:15:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2737
+- author: DrSmugleaf
+  changes:
+  - message: Fixed grass being able to have weeds planted or spread onto it.
+    type: Fix
+  id: 237
+  time: '2024-07-02T13:47:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2755
 Name: RMC14
 Order: -1
