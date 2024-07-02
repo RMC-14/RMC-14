@@ -23,15 +23,11 @@ public sealed class RMCAdminEui : BaseEui
 {
     [Dependency] private readonly IAdminManager _admin = default!;
     [Dependency] private readonly IEntityManager _entities = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
-    [ValidatePrototypeId<StartingGearPrototype>]
-    private const string DefaultHumanoidGear = "CMGearRifleman";
-
+    private readonly RMCAdminSystem _rmcAdmin;
     private readonly SharedXenoHiveSystem _hive;
     private readonly MindSystem _mind;
     private readonly SquadSystem _squad;
-    private readonly StationSpawningSystem _stationSpawning;
     private readonly SharedTransformSystem _transform;
     private readonly XenoSystem _xeno;
 
@@ -41,10 +37,10 @@ public sealed class RMCAdminEui : BaseEui
     {
         IoCManager.InjectDependencies(this);
 
+        _rmcAdmin = _entities.System<RMCAdminSystem>();
         _hive = _entities.System<SharedXenoHiveSystem>();
         _mind = _entities.System<MindSystem>();
         _squad = _entities.System<SquadSystem>();
-        _stationSpawning = _entities.System<StationSpawningSystem>();
         _transform = _entities.System<SharedTransformSystem>();
         _xeno = _entities.System<XenoSystem>();
 
@@ -116,12 +112,7 @@ public sealed class RMCAdminEui : BaseEui
                 if (_entities.GetEntity(_target) is not { Valid: true } entity)
                     break;
 
-                var profile = HumanoidCharacterProfile.RandomWithSpecies(transformHumanoid.SpeciesId);
-                var coordinates = _transform.GetMoverCoordinates(entity);
-                var humanoid = _stationSpawning.SpawnPlayerMob(coordinates, null, profile, null);
-                var startingGear = _prototypes.Index<StartingGearPrototype>(DefaultHumanoidGear);
-                _stationSpawning.EquipStartingGear(humanoid, startingGear);
-
+                var humanoid = _rmcAdmin.RandomizeMarine(entity, transformHumanoid.SpeciesId);
                 if (_mind.TryGetMind(entity, out var mindId, out var mind))
                 {
                     _mind.TransferTo(mindId, humanoid, mind: mind);
