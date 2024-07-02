@@ -16,8 +16,8 @@
       map: [ "closedLayer" ]
   - type: Appearance
   - type: CMStorageVisualizer
-    storageOpen: openLayer
     storageClosed: closedLayer
+    storageOpen: openLayer
   - type: Clothing
     quickEquip: false
     slots:
