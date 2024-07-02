@@ -15,6 +15,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared.Mobs.Components;
 using Robust.Shared.Utility;
 using TimedDespawnComponent = Robust.Shared.Spawners.TimedDespawnComponent;
 
@@ -467,9 +468,10 @@ public sealed partial class ExplosionSystem
         {
             var pos = _transformSystem.GetWorldPosition(xform);
             var adjustedThrowForce = throwForce;
-            if (_stun.TryKnockdown(uid, TimeSpan.FromSeconds(1), true))
+            if (HasComp<MobStateComponent>(uid)) 
             {
-                adjustedThrowForce /= 4;
+                adjustedThrowForce /= 5;
+                _stun.TryKnockdown(uid, TimeSpan.FromSeconds(1), true);
             }
             _throwingSystem.TryThrow(
                 uid,
