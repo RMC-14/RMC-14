@@ -6,6 +6,7 @@ using Content.Shared.Actions.Events;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands;
 using Content.Shared.Interaction;
+using Content.Shared.Light;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.Toggleable;
@@ -35,7 +36,8 @@ public sealed class AttachableToggleableSystem : EntitySystem
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleDoAfterEvent>(OnAttachableToggleDoAfter);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleStartedEvent>(OnAttachableToggleStarted);
         SubscribeLocalEvent<AttachableToggleableComponent, AttemptShootEvent>(OnAttemptShoot);
-        SubscribeLocalEvent<AttachableToggleableComponent, ToggleActionEvent>(OnToggleAction);
+        SubscribeLocalEvent<AttachableToggleableComponent, ToggleActionEvent>(OnToggleAction,
+            before: new[] { typeof(SharedHandheldLightSystem) });
         //SubscribeLocalEvent<AttachableToggleableComponent, UniqueActionEvent>(OnUniqueAction);
         SubscribeLocalEvent<AttachableToggleableComponent, GrantAttachableActionsEvent>(OnGrantAttachableActions);
         SubscribeLocalEvent<AttachableToggleableComponent, RemoveAttachableActionsEvent>(OnRemoveAttachableActions);

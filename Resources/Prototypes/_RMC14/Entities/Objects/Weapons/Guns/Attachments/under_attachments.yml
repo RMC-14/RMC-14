@@ -431,7 +431,6 @@
     - RMCAttachmentLaserLightModule
     - Flashlight
   - type: AttachableToggleable
-    attachedOnly: true
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: laserlight
