@@ -27,7 +27,7 @@
     whitelist:
       tags:
       - LauncherCompatibleGrenade
-    capacity: 5
+    capacity: 6
     soundInsert:
       path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
     proto: CMGrenadeHighExplosive
