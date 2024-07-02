@@ -463,16 +463,21 @@ public sealed partial class ExplosionSystem
             && throwForce > 0
             && !EntityManager.IsQueuedForDeletion(uid)
             && _physicsQuery.TryGetComponent(uid, out var physics)
-            && physics.BodyType == BodyType.Dynamic)
+            && (physics.BodyType == BodyType.Dynamic || physics.BodyType == BodyType.KinematicController))
         {
             var pos = _transformSystem.GetWorldPosition(xform);
+            var adjustedThrowForce = throwForce;
+            if (_stun.TryKnockdown(uid, TimeSpan.FromSeconds(1), true))
+            {
+                adjustedThrowForce /= 3;
+            }
             _throwingSystem.TryThrow(
                 uid,
                  pos - epicenter.Position,
                 physics,
                 xform,
                 _projectileQuery,
-                throwForce);
+                adjustedThrowForce);
         }
     }
 
