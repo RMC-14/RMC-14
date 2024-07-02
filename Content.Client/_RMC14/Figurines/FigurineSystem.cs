@@ -29,15 +29,14 @@ public sealed class FigurineSystem : EntitySystem
 #if !FULL_RELEASE
         SubscribeNetworkEvent<FigurineRequestEvent>(OnFigurineRequest);
 
-        if (_control.Parent == null)
-            _ui.RootControl.AddChild(_control);
+        _ui.RootControl.AddChild(_control);
 #endif
     }
 
     public override void Shutdown()
     {
 #if !FULL_RELEASE
-        _ui.RootControl.AddChild(_control);
+        _ui.RootControl.RemoveChild(_control);
 #endif
     }
 

@@ -72,7 +72,7 @@
   name: Tempestas 'Frostbite' Glacies figurine
   components:
   - type: Sprite
-    state: Tempestas_'Frostbite'_Glacies
+    state: Tempestas_Frostbite_Glacies
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -81,7 +81,7 @@
   description: Employee of the Month, every month.
   components:
   - type: Sprite
-    state: Silvano_d'Andrea
+    state: Silvano_dAndrea
 
 - type: entity
   parent: RMCBaseFigurinePatron
