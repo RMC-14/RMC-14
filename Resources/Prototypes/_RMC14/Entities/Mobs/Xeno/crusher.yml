@@ -35,7 +35,7 @@
     unlockAt: 900 # 15 minutes
   - type: XenoDevolve
     devolvesTo:
-    - CMXenoCrusher
+    - CMXenoWarrior
   - type: XenoDevour
   - type: XenoStomp
     damage:
