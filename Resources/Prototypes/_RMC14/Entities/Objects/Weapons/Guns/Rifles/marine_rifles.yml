@@ -105,7 +105,7 @@
       rmc-aslot-underbarrel:
         whitelist:
           tags:
-          - CMAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentU1GrenadeLauncher
   - type: AttachableHolderVisuals
     offsets:

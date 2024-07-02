@@ -95,9 +95,9 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentVerticalGrip
+      - id: RMCAttachmentVerticalGrip
         amount: 4
-      - id: CMAttachmentAngledGrip
+      - id: RMCAttachmentAngledGrip
         amount: 4
 
 - type: entity
@@ -107,7 +107,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentGyroscopicStabilizer
+      - id: RMCAttachmentGyroscopicStabilizer
         amount: 2
 
 - type: entity
@@ -127,7 +127,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentU7UnderbarrelShotgun
+      - id: RMCAttachmentU7UnderbarrelShotgun
         amount: 4
 
 - type: entity
@@ -137,7 +137,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentUnderbarrelExtinguisher
+      - id: RMCAttachmentUnderbarrelExtinguisher
         amount: 4
 
 - type: entity
@@ -157,7 +157,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentBurstFireAssembly
+      - id: RMCAttachmentBurstFireAssembly
         amount: 2
 
 - type: entity
