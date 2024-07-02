@@ -119,7 +119,6 @@
     layers:
     - state: m94_e
       map: [ "emptyLayer" ]
-      visible: false
     - state: m94
       map: [ "fullLayer" ]
   - type: Appearance
