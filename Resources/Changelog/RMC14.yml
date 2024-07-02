@@ -1966,5 +1966,19 @@
   id: 239
   time: '2024-07-02T15:29:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2757
+- author: DrSmugleaf
+  changes:
+  - message: Fixed larvas and parasites being able to open xenonid eggs.
+    type: Fix
+  id: 240
+  time: '2024-07-02T15:31:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2758
+- author: DrSmugleaf
+  changes:
+  - message: Correspondents now spawn with a microphone in their pocket.
+    type: Add
+  id: 241
+  time: '2024-07-02T15:30:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2759
 Name: RMC14
 Order: -1
