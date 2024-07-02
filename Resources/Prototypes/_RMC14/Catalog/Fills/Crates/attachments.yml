@@ -15,7 +15,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentB8SmartScope
+      - id: RMCAttachmentB8SmartScope
         amount: 4
 
 - type: entity

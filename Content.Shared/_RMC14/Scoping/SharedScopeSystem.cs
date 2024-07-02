@@ -216,7 +216,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
         var ev = new ScopeDoAfterEvent(cardinalDir);
         var doAfter = new DoAfterArgs(EntityManager, user, scope.Comp.Delay, ev, scope, null, scope)
         {
-            BreakOnMove = true
+            BreakOnMove = !scope.Comp.AllowMovement
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
@@ -237,6 +237,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
         scoping = EnsureComp<ScopingComponent>(user);
         scoping.Scope = scope;
+        scoping.AllowMovement = scope.Comp.AllowMovement;
         Dirty(user, scoping);
 
         if (scope.Comp.Attachment && TryGetActiveEntity(scope, out var active))

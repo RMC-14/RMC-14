@@ -98,6 +98,10 @@
           - RMCAttachmentFlashlight
           - RMCAttachmentMagneticHarness
           - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+          - RMCAttachmentS42xAdvancedTelescopicMiniscope
+          - RMCAttachmentMiniscopeHunting
+          - RMCAttachmentSlavicScope
       rmc-aslot-underbarrel:
         whitelist:
           tags:
@@ -206,7 +210,7 @@
         whitelist:
           tags:
           - RMCAttachmentFlashlight
-          - CMAttachmentB8SmartScope
+          - RMCAttachmentB8SmartScope
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.9, 0.03
