@@ -41,6 +41,14 @@
     prob: 0
 
 - type: entity
+  parent: MobCorgiPuppy
+  id: CMMobWiggles
+  name: Mr. Wiggles
+  description: It's a corgi puppy.
+
+# Spawners
+
+- type: entity
   parent: SpawnMobMonkey
   id: CMSpawnMobMonkey
   suffix: CM
@@ -74,3 +82,18 @@
     - CMMobMouse
     - CMMobMouse1
     - CMMobMouse2
+
+- type: entity
+  parent: MarkerBase
+  id: CMSpawnMobWiggles
+  name: Mr. Wiggles Spawner
+  suffix: CM
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: puppy
+      sprite: Mobs/Pets/corgi.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - CMMobWiggles
