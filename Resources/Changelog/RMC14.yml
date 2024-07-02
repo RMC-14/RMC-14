@@ -1952,5 +1952,19 @@
   id: 237
   time: '2024-07-02T13:47:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2755
+- author: DrSmugleaf
+  changes:
+  - message: Increased the delay between pointings from 0.5 seconds to 2 seconds.
+    type: Tweak
+  id: 238
+  time: '2024-07-02T15:29:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2756
+- author: Whisper
+  changes:
+  - message: Xenonids are now separated by caste in the ghost role panel.
+    type: Fix
+  id: 239
+  time: '2024-07-02T15:29:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2757
 Name: RMC14
 Order: -1
