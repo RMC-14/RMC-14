@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/turf/walls/windows.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "prison_window0"
+    },
+    {
+      "name": "prison_window1"
+    },
+    {
+      "name": "prison_window2"
+    },
+    {
+      "name": "prison_window3"
+    },
+    {
+      "name": "prison_window4"
+    },
+    {
+      "name": "prison_window5"
+    },
+    {
+      "name": "prison_window6"
+    },
+    {
+      "name": "prison_window7"
+    },
+    {
+      "name": "prison_window8"
+    },
+    {
+      "name": "prison_window9"
+    },
+    {
+      "name": "prison_window10"
+    },
+    {
+      "name": "prison_window11"
+    },
+    {
+      "name": "prison_window12"
+    },
+    {
+      "name": "prison_window13"
+    },
+    {
+      "name": "prison_window14"
+    },
+    {
+      "name": "prison_window15"
+    }
+  ]
+}
