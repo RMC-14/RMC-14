@@ -469,7 +469,7 @@ public sealed partial class ExplosionSystem
             var adjustedThrowForce = throwForce;
             if (_stun.TryKnockdown(uid, TimeSpan.FromSeconds(1), true))
             {
-                adjustedThrowForce /= 3;
+                adjustedThrowForce /= 4;
             }
             _throwingSystem.TryThrow(
                 uid,
