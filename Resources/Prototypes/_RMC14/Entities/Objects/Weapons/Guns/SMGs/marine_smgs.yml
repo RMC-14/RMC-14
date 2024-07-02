@@ -62,7 +62,7 @@
       rmc-aslot-stock:
         whitelist:
           tags:
-          - CMAttachmentM63StockCollapsible
+          - RMCAttachmentM63StockCollapsible
       rmc-aslot-barrel:
         whitelist:
           tags:

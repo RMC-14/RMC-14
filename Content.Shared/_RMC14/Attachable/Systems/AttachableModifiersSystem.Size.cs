@@ -85,7 +85,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
             if (!CanApplyModifiers(attachable, modSet.Conditions))
                 continue;
             
-            sizeIncrement += modSet.SizeIncrement;
+            sizeIncrement += modSet.Size;
         }
 
         if (TryGetIncrementedSize(itemComponent.Size, sizeIncrement, out var newSize, out resetIncrement))

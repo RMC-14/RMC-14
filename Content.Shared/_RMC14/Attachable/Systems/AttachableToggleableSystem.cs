@@ -7,6 +7,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Hands;
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Events;
+using Content.Shared.Popups;
 using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
@@ -23,6 +24,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
     [Dependency] private readonly AttachableHolderSystem _attachableHolderSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
 
     public override void Initialize()
     {
@@ -30,8 +32,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableAlteredEvent>(OnAttachableAltered,
             after: new[] { typeof(AttachableModifiersSystem) });
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleActionEvent>(OnAttachableToggleAction);
-        SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleDoAfterEvent>(
-            OnAttachableToggleDoAfter);
+        SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleDoAfterEvent>(OnAttachableToggleDoAfter);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleStartedEvent>(OnAttachableToggleStarted);
         SubscribeLocalEvent<AttachableToggleableComponent, AttemptShootEvent>(OnAttemptShoot);
         SubscribeLocalEvent<AttachableToggleableComponent, ToggleActionEvent>(OnToggleAction);
@@ -46,6 +47,11 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
         SubscribeLocalEvent<AttachableToggleableSimpleActivateComponent, AttachableAlteredEvent>(OnAttachableAltered,
             after: new[] { typeof(AttachableModifiersSystem) });
+
+        SubscribeLocalEvent<AttachableToggleablePreventShootComponent, AttachableAlteredEvent>(OnAttachableAltered,
+            after: new[] { typeof(AttachableModifiersSystem) });
+        
+        SubscribeLocalEvent<AttachableGunPreventShootComponent, AttemptShootEvent>(OnAttemptShoot);
     }
 
 #region AttachableAlteredEvent handling
@@ -86,8 +92,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
         actionComponent.Enabled = attachable.Comp.Attached;
     }
     
-    private void OnAttachableAltered(Entity<AttachableToggleableSimpleActivateComponent> attachable,
-        ref AttachableAlteredEvent args)
+    private void OnAttachableAltered(Entity<AttachableToggleableSimpleActivateComponent> attachable, ref AttachableAlteredEvent args)
     {
         if (args.User == null)
             return;
@@ -107,6 +112,40 @@ public sealed class AttachableToggleableSystem : EntitySystem
                 break;
         }
     }
+    
+    private void OnAttachableAltered(Entity<AttachableToggleablePreventShootComponent> attachable, ref AttachableAlteredEvent args)
+    {
+        if (!TryComp(attachable.Owner, out AttachableToggleableComponent? toggleableComponent))
+            return;
+
+        EnsureComp(args.Holder, out AttachableGunPreventShootComponent preventShootComponent);
+
+        switch (args.Alteration)
+        {
+            case AttachableAlteredType.Attached:
+                preventShootComponent.Message = attachable.Comp.Message;
+                preventShootComponent.PreventShoot = attachable.Comp.ShootWhenActive && !toggleableComponent.Active || !attachable.Comp.ShootWhenActive && toggleableComponent.Active;
+                break;
+
+            case AttachableAlteredType.Detached:
+                preventShootComponent.Message = "";
+                break;
+
+            case AttachableAlteredType.Activated:
+                preventShootComponent.PreventShoot = !attachable.Comp.ShootWhenActive;
+                break;
+
+            case AttachableAlteredType.Deactivated:
+                preventShootComponent.PreventShoot = attachable.Comp.ShootWhenActive;
+                break;
+
+            case AttachableAlteredType.DetachedDeactivated:
+                preventShootComponent.PreventShoot = false;
+                break;
+        }
+        
+        Dirty(args.Holder, preventShootComponent);
+    }
 #endregion
 
 #region AttachedOnly lockouts
@@ -120,6 +159,16 @@ public sealed class AttachableToggleableSystem : EntitySystem
     {
         if (attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
             args.Cancelled = true;
+    }
+
+    private void OnAttemptShoot(Entity<AttachableGunPreventShootComponent> gun, ref AttemptShootEvent args)
+    {
+        if (args.Cancelled || !gun.Comp.PreventShoot)
+            return;
+
+        args.Cancelled = true;
+
+        _popupSystem.PopupClient(gun.Comp.Message, args.User, args.User);
     }
 
 /*    private void OnUniqueAction(Entity<AttachableToggleableComponent> attachable, ref UniqueActionEvent args)

@@ -173,6 +173,9 @@ public sealed class AttachableHolderSystem : EntitySystem
 
     private void OnAttachableHolderAttemptShoot(Entity<AttachableHolderComponent> holder, ref AttemptShootEvent args)
     {
+        if (args.Cancelled)
+            return;
+
         if (holder.Comp.SupercedingAttachable == null)
             return;
 

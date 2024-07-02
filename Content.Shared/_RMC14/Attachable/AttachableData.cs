@@ -59,7 +59,7 @@ public record struct AttachableSpeedModifierSet(
 [DataRecord, Serializable, NetSerializable]
 public record struct AttachableSizeModifierSet(
     AttachableModifierConditions? Conditions,
-    int SizeIncrement
+    int Size
 );
 
 [DataRecord, Serializable, NetSerializable]
