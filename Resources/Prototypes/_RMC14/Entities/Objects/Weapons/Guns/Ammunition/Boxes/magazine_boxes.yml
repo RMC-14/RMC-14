@@ -352,7 +352,7 @@
 - type: entity
   parent: CMBoxMagazineRifleM4SPREmpty
   id: CMBoxMagazineRifleM4SPR
-  name: magazine box (M4RA x 16)
+  name: magazine box (M4SPR x 16)
   suffix: Filled
   components:
   - type: CMItemSlots
@@ -392,7 +392,7 @@
 - type: entity
   parent: CMBoxMagazineRifleM4SPRAPEmpty
   id: CMBoxMagazineRifleM4SPRAP
-  name: magazine box (AP M4RA x 16)
+  name: magazine box (AP M4SPR x 16)
   components:
   - type: CMItemSlots
     startingItem: CMMagazineRifleM4SPRAP
