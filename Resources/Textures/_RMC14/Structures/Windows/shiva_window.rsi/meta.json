@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/8e8d26bbb4f1617ea1b1ffc17ffffca552ce8c11/icons/turf/walls/ice_colony/shiva_windows.dmi and https://github.com/cmss13-devs/cmss13/blob/6c8f3153bb8846baa74e413b3ed8d3355aebcea3/icons/turf/walls/windows.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "shiva_window"
+    },
+    {
+      "name": "shiva_window0"
+    },
+    {
+      "name": "shiva_window1"
+    },
+    {
+      "name": "shiva_window2"
+    },
+    {
+      "name": "shiva_window3"
+    },
+    {
+      "name": "shiva_window4"
+    },
+    {
+      "name": "shiva_window5"
+    },
+    {
+      "name": "shiva_window6"
+    },
+    {
+      "name": "shiva_window7"
+    },
+    {
+      "name": "shiva_window8"
+    },
+    {
+      "name": "shiva_window9"
+    },
+    {
+      "name": "shiva_window10"
+    },
+    {
+      "name": "shiva_window11"
+    },
+    {
+      "name": "shiva_window12"
+    },
+    {
+      "name": "shiva_window13"
+    },
+    {
+      "name": "shiva_window14"
+    },
+    {
+      "name": "shiva_window15"
+    }
+  ]
+}
