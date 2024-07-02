@@ -1923,5 +1923,13 @@
   id: 233
   time: '2024-07-02T06:09:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2739
+- author: Mattshark89
+  changes:
+  - message: Lesser Drone playtime now counts as drone caste playtime. For the Queen
+      (unlock)!
+    type: Add
+  id: 234
+  time: '2024-07-02T06:27:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2723
 Name: RMC14
 Order: -1
