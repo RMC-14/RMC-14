@@ -81,7 +81,6 @@
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
-        startingAttachable: RMCAttachmentExtendedBarrel
         whitelist:
           tags:
           - RMCAttachmentBarrelCharger
@@ -89,7 +88,6 @@
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
       rmc-aslot-rail:
-        startingAttachable: RMCAttachmentRailFlashlight
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight

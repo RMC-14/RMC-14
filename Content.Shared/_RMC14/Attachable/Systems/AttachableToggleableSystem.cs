@@ -354,10 +354,21 @@ public sealed class AttachableToggleableSystem : EntitySystem
         GrantAttachableActions(ent, args.User);
     }
     
-    private void GrantAttachableActions(Entity<AttachableToggleableComponent> ent, EntityUid user)
+    private void GrantAttachableActions(Entity<AttachableToggleableComponent> ent, EntityUid user, bool doSecondTry = true)
     {
+        // This is to prevent ActionContainerSystem from shitting itself if the attachment has actions other than its attachment toggle.
+        if (!TryComp(ent.Owner, out ActionsContainerComponent? actionsContainerComponent) || actionsContainerComponent.Container == null)
+        {
+            EnsureComp<ActionsContainerComponent>(ent.Owner);
+
+            if (doSecondTry)
+                GrantAttachableActions(ent, user, false);
+
+            return;
+        }
+
         var exists = ent.Comp.Action != null;
-        _actionContainerSystem.EnsureAction(ent, ref ent.Comp.Action, ent.Comp.ActionId);
+        _actionContainerSystem.EnsureAction(ent, ref ent.Comp.Action, ent.Comp.ActionId, actionsContainerComponent);
 
         if (ent.Comp.Action is not { } actionId)
             return;
