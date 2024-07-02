@@ -42,8 +42,6 @@
     radius: 1
     energy: 5.0
     netsync: false
-  - type: IgnitionSource
-    temperature: 1000
   - type: LightBehaviour
     behaviours:
       - !type:FadeBehaviour # faster then base flares
