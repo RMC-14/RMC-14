@@ -75,6 +75,17 @@
       # - id: CMPillCanisterPeridaxon
 
 - type: entity
+  id: CMCrateMedicalBlood
+  parent: CMCrateMedical
+  name: blood crate
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMBloodPack
+        amount: 5
+
+- type: entity
   id: CMCrateMedicalPill
   parent: CMCrateMedical
   name: pill bottle crate (x2 each)
