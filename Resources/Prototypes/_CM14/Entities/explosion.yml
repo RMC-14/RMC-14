@@ -1,0 +1,22 @@
+- type: entity
+  id: BaseExplosion
+  abstract: true
+  components:
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 20
+    intensitySlope: 5
+    totalIntensity: 10
+    maxTileBreak: 1
+  - type: ExplodeOnInit
+    explodeOnInit: false
+  - type: CMExplosionEffect
+  - type: Sprite
+    sprite: _CM14/Effects/target.rsi
+    layers:
+    - state: alert
+      shader: unshaded
+    - state: outline
+      shader: unshaded
+    - state: target
+      shader: unshaded
