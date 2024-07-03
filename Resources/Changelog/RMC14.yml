@@ -2027,5 +2027,12 @@
   id: 247
   time: '2024-07-03T11:17:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2786
+- author: Vermidia
+  changes:
+  - message: Sentinel corrosive acid now works
+    type: Fix
+  id: 248
+  time: '2024-07-03T11:19:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2766
 Name: RMC14
 Order: -1
