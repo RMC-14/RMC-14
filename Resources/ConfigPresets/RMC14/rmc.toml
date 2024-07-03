@@ -34,9 +34,6 @@ advertise = true
 # See https://docs.spacestation14.io/hosts/hub-rules for more details on this when it becomes relevant.
 tags = "lang:en,region:am_n_e,rp:med"
 
-# Comma-separated list of URLs of hub servers to advertise to.
-hub_urls = "https://central.spacestation14.io/hub/"
-
 [ic]
 flavor_text = true
 enable_suicide = false

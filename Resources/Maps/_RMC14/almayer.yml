@@ -1652,7 +1652,7 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: BecomesStation
-      id: Savannah
+      id: Almayer
     - type: RadiationGridResistance
     - type: LoadedMap
     - type: FootstepModifier

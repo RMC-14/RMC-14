@@ -2003,5 +2003,78 @@
   id: 244
   time: '2024-07-02T15:51:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2762
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the nomads packet being able to fit items other than cigarettes,
+      the cigar case being able to fit items other than cigars, and the match box
+      being able to fit items other than matches.
+    type: Fix
+  id: 245
+  time: '2024-07-03T11:03:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2790
+- author: DrSmugleaf
+  changes:
+  - message: Fixed showing upstream mechanical changes for species when changing it
+      in the character editor, when there are actually none.
+    type: Fix
+  id: 246
+  time: '2024-07-03T11:02:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2789
+- author: ShadowCommander
+  changes:
+  - message: Xenonids can now drag drop hosts to nest them on nest-able surfaces.
+    type: Add
+  id: 247
+  time: '2024-07-03T11:17:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2786
+- author: Vermidia
+  changes:
+  - message: Sentinel corrosive acid now works
+    type: Fix
+  id: 248
+  time: '2024-07-03T11:19:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2766
+- author: ShadowCommander
+  changes:
+  - message: Added empty sprites for backpacks, satchels, belts, and pouches.
+    type: Add
+  id: 249
+  time: '2024-07-03T11:26:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2750
+- author: Whisper
+  changes:
+  - message: Medical belt UI should be friendlier for players with smaller screens.
+    type: Fix
+  id: 250
+  time: '2024-07-03T11:47:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2773
+- author: Whisper
+  changes:
+  - message: Hydroponics no longer drop SS14 steel and glass.
+    type: Fix
+  id: 251
+  time: '2024-07-03T11:46:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2778
+- author: Vermidia
+  changes:
+  - message: Lesser drones now use different sprites from normal drones
+    type: Tweak
+  id: 252
+  time: '2024-07-03T11:48:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2782
+- author: blueDev2
+  changes:
+  - message: Fixed health icons on shorter marines
+    type: Fix
+  id: 253
+  time: '2024-07-03T11:59:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2763
+- author: Whisper
+  changes:
+  - message: Crafted magazine boxes can now hold magazines
+    type: Fix
+  id: 254
+  time: '2024-07-03T12:01:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2787
 Name: RMC14
 Order: -1

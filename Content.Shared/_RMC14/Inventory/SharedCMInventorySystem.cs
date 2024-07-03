@@ -130,6 +130,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
             }
         }
 
+        ContentsUpdated(ent);
         Dirty(ent, slots);
     }
 
