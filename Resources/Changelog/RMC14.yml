@@ -2041,5 +2041,19 @@
   id: 249
   time: '2024-07-03T11:26:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2750
+- author: Whisper
+  changes:
+  - message: Medical belt UI should be friendlier for players with smaller screens.
+    type: Fix
+  id: 250
+  time: '2024-07-03T11:47:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2773
+- author: Whisper
+  changes:
+  - message: Hydroponics no longer drop SS14 steel and glass.
+    type: Fix
+  id: 251
+  time: '2024-07-03T11:46:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2778
 Name: RMC14
 Order: -1
