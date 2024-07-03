@@ -33,7 +33,7 @@
           High: { state: magaz_reg_3, visible: true }
           Full: { state: magaz_reg, visible: true }
   - type: RMCDeconstruct
-    verbText: rmc-deconstruct-fold
+    verbText: rmc-deconstruct-verb-fold
     deleteEntity: true
     spawnEntries:
     - id: RMCSheetCardboard1
