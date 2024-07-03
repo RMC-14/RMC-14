@@ -1,6 +1,6 @@
-﻿using Content.Shared.Database;
+﻿using Content.Shared.Construction;
+using Content.Shared.Database;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Storage;
 using Content.Shared.Verbs;
 using Robust.Shared.Random;
 
@@ -23,8 +23,6 @@ public sealed class RMCDeconstructSystem : EntitySystem
         if (!args.CanAccess || !args.CanInteract || args.Hands == null)
             return;
 
-        var user = args.User;
-
         var v = new Verb
         {
             Priority = 1,
@@ -33,32 +31,10 @@ public sealed class RMCDeconstructSystem : EntitySystem
             DoContactInteraction = true,
             Act = () =>
             {
-                Deconstruct(ent, user);
+                RaiseLocalEvent(ent, new ConstructionInteractionEvent());
             }
         };
 
         args.Verbs.Add(v);
-    }
-
-    private void Deconstruct(Entity<RMCDeconstructComponent> ent, EntityUid user)
-    {
-        if (ent.Comp.SpawnEntries is not null)
-        {
-            var coords = Transform(ent).Coordinates;
-
-            EntityUid? entityToPlaceInHands = null;
-            foreach (var proto in EntitySpawnCollection.GetSpawns(ent.Comp.SpawnEntries, _random))
-            {
-                entityToPlaceInHands = SpawnAtPosition(proto, coords);
-            }
-
-            if (entityToPlaceInHands != null)
-            {
-                _hands.PickupOrDrop(user, entityToPlaceInHands.Value);
-            }
-        }
-
-        if (ent.Comp.DeleteEntity)
-            Del(ent);
     }
 }
