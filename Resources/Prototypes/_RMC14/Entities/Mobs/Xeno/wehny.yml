@@ -13,8 +13,7 @@
       4000: Dead
   - type: XenoEvolution
     max: 300
-    evolvesTo:
-    - CMXenoWehny
+    evolvesTo: [ ]
   - type: MeleeWeapon
     attackRate: 2.0
     damage:
