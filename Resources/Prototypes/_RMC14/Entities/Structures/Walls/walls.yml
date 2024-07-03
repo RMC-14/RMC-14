@@ -264,7 +264,7 @@
   parent: CMBaseWall
   id: CMWallWood
   name: wood wall
-  description: A huge chunk of metal used to separate rooms.
+  description: A wooden wall used to separate rooms.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/wood.rsi
