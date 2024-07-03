@@ -141,7 +141,6 @@
     - state: lid_type_ap
       map: [ "lid_stripe" ]
   - type: CMItemSlots
-    startingItem: CMMagazineRifleM54CAP
     count: 10
     slot:
       whitelist:
