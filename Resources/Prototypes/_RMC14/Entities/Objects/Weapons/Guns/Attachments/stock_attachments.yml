@@ -42,7 +42,7 @@
   description: A non-standard heavy wooden stock for the M42A2 Shotgun. More cumbersome than the standard issue stakeout, but reduces recoil and improves accuracy. Allegedly makes a pretty good club in a fight too.
   components:
   - type: Sprite
-    state: stock
+    state: d-stock
   - type: AttachableVisuals
     suffix: ""
   - type: Tag
