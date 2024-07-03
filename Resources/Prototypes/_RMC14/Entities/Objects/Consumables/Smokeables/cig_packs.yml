@@ -1,0 +1,8 @@
+﻿- type: entity
+  parent: CigPackBlack
+  id: CMCigPackBlack
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - Cigarette

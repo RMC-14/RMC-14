@@ -2,8 +2,19 @@
   parent: hydroponicsTray
   name: hydroponics tray
   id: CMHydroponicsTray
-  description: ""
+  description: Used for growing plants.
   components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
   - type: Sprite
     sprite: _RMC14/Structures/hydroponics.rsi
     layers:
