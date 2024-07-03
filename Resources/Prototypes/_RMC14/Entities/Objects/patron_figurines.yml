@@ -58,7 +58,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronMinervaHostel
   name: Minerva Hostel figurine
-  description: Smells of cigars.
+  description: The battle's maestro, always in tune with the chaos.
   components:
   - type: Sprite
     state: minerva_hostel
@@ -118,7 +118,7 @@
   - type: Sprite
     state: ryan_rockstar_ruan
   - type: PatronFigurine
-    id: b40372e9-f136-472f-ae90-017928025e4f # TODO
+    id: 240c6025-7b47-4457-9ed1-985010b2ff08
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -141,3 +141,25 @@
     state: chiki_sugimoto
   - type: PatronFigurine
     id: d2e290ff-da44-45df-9e6d-bba2ce98446b
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronArchylleCatleay
+  name: Archylle Catleay figurine
+  description: The inspirational cat, following the footsteps of her mother
+  components:
+  - type: Sprite
+    state: archylle_catleay
+  - type: PatronFigurine
+    id: ca33bb3d-1944-4d65-b1d4-b0be04712300
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronTessieTerrence
+  name: Tessie Terrence figurine
+  description: "She's here to brighten your day!"
+  components:
+  - type: Sprite
+    state: tessie_terrence
+  - type: PatronFigurine
+    id: b18fcc29-5fa3-4489-8df0-4ceb994b4fb3
