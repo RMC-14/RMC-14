@@ -2,6 +2,7 @@
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
+using Content.Shared.DragDrop;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
@@ -45,6 +46,8 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoNestSurfaceComponent, InteractHandEvent>(OnNestInteractHand);
         SubscribeLocalEvent<XenoNestSurfaceComponent, DoAfterAttemptEvent<XenoNestDoAfterEvent>>(OnNestSurfaceDoAfterAttempt);
         SubscribeLocalEvent<XenoNestSurfaceComponent, XenoNestDoAfterEvent>(OnNestSurfaceDoAfter);
+        SubscribeLocalEvent<XenoNestSurfaceComponent, CanDropTargetEvent>(OnCanDropTarget);
+        SubscribeLocalEvent<XenoNestSurfaceComponent, DragDropTargetEvent>(OnDragDropTarget);
 
         SubscribeLocalEvent<XenoNestComponent, ComponentRemove>(OnNestRemove);
         SubscribeLocalEvent<XenoNestComponent, EntityTerminatingEvent>(OnNestTerminating);
@@ -195,6 +198,28 @@ public sealed class XenoNestSystem : EntitySystem
             }
         }
     }
+
+    #region DragDrop
+
+    private void OnCanDropTarget(Entity<XenoNestSurfaceComponent> ent, ref CanDropTargetEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (GetNestDirection(ent, args.Dragged) is not { } direction)
+            return;
+
+        args.CanDrop = CanNestPopup(args.User, args.Dragged, ent, direction);
+        args.Handled = true;
+    }
+
+    private void OnDragDropTarget(Entity<XenoNestSurfaceComponent> ent, ref DragDropTargetEvent args)
+    {
+        args.Handled = true;
+        TryStartNesting(args.User, ent, args.Dragged);
+    }
+
+    #endregion
 
     private void OnNestedPreventCollide(Entity<XenoNestedComponent> ent, ref PreventCollideEvent args)
     {
