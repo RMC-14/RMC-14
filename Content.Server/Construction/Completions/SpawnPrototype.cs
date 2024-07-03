@@ -26,7 +26,7 @@ namespace Content.Server.Construction.Completions
 
             if (EntityPrototypeHelpers.HasComponent<StackComponent>(Prototype))
             {
-                var stackEnt = entityManager.SpawnEntity(Prototype, coordinates);
+                var stackEnt = entityManager.SpawnAtPosition(Prototype, coordinates);
                 var stack = entityManager.GetComponent<StackComponent>(stackEnt);
                 entityManager.EntitySysManager.GetEntitySystem<StackSystem>().SetCount(stackEnt, Amount, stack);
             }
@@ -34,7 +34,7 @@ namespace Content.Server.Construction.Completions
             {
                 for (var i = 0; i < Amount; i++)
                 {
-                    entityManager.SpawnEntity(Prototype, coordinates);
+                    entityManager.SpawnAtPosition(Prototype, coordinates);
                 }
             }
 
