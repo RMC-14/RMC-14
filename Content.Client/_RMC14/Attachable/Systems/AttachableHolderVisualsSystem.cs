@@ -37,11 +37,15 @@ public sealed class AttachableHolderVisualsSystem : EntitySystem
         if (!TryComp(args.Attachable, out AttachableVisualsComponent? attachableComponent))
             return;
 
+        string suffix = "";
+        if (attachableComponent.ShowActive && TryComp(args.Attachable, out AttachableToggleableComponent? toggleableComponent) && toggleableComponent.Active)
+            suffix = "-on";
+
         var attachable = new Entity<AttachableVisualsComponent>(args.Attachable, attachableComponent);
         switch (args.Alteration)
         {
             case AttachableAlteredType.Attached:
-                SetAttachableOverlay(holder, attachable, args.SlotId);
+                SetAttachableOverlay(holder, attachable, args.SlotId, suffix);
                 break;
 
             case AttachableAlteredType.Detached:
@@ -52,14 +56,14 @@ public sealed class AttachableHolderVisualsSystem : EntitySystem
                 if (!attachableComponent.ShowActive)
                     break;
 
-                SetAttachableOverlay(holder, attachable, args.SlotId, "-on");
+                SetAttachableOverlay(holder, attachable, args.SlotId, suffix);
                 break;
 
             case AttachableAlteredType.Deactivated:
                 if (!attachableComponent.ShowActive)
                     break;
 
-                SetAttachableOverlay(holder, attachable, args.SlotId);
+                SetAttachableOverlay(holder, attachable, args.SlotId, suffix);
                 break;
 
             case AttachableAlteredType.Interrupted:
@@ -70,10 +74,6 @@ public sealed class AttachableHolderVisualsSystem : EntitySystem
                 break;
             
             case AttachableAlteredType.AppearanceChanged:
-                string suffix = "";
-                if (attachableComponent.ShowActive && TryComp(args.Attachable, out AttachableToggleableComponent? toggleableComponent) && toggleableComponent.Active)
-                    suffix = "-on";
-                
                 SetAttachableOverlay(holder, attachable, args.SlotId, suffix);
                 break;
         }

@@ -52,7 +52,7 @@
   - type: Tag
     tags:
     - RMCAttachmentUnderbarrel
-    - RMCAttachmentGyroscopicStabilizer
+    - RMCAttachmentBurstFireAssembly
   - type: AttachableWeaponRangedMods
     modifiers:
     - shotsPerBurstFlat: 2

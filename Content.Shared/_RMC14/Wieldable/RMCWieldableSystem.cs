@@ -36,7 +36,6 @@ public sealed class RMCWieldableSystem : EntitySystem
         SubscribeLocalEvent<WieldSlowdownCompensationComponent, GotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<WieldSlowdownCompensationComponent, GotUnequippedEvent>(OnGotUnequipped);
 
-        SubscribeLocalEvent<WieldDelayComponent, BeforeWieldEvent>(OnBeforeWield);
         SubscribeLocalEvent<WieldDelayComponent, GotEquippedHandEvent>(OnGotEquippedHand);
         SubscribeLocalEvent<WieldDelayComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<WieldDelayComponent, UseInHandEvent>(OnUseInHand);
@@ -46,8 +45,7 @@ public sealed class RMCWieldableSystem : EntitySystem
 
     private void OnMapInit(Entity<WieldableSpeedModifiersComponent> wieldable, ref MapInitEvent args)
     {
-        wieldable.Comp.ModifiedWalk = wieldable.Comp.BaseWalk;
-        wieldable.Comp.ModifiedSprint = wieldable.Comp.BaseSprint;
+        RefreshSpeedModifiers((wieldable.Owner, wieldable.Comp));
     }
 
     private void OnMapInit(Entity<WieldDelayComponent> wieldable, ref MapInitEvent args)
@@ -99,21 +97,18 @@ public sealed class RMCWieldableSystem : EntitySystem
 
         wieldable.Comp.ModifiedWalk = ev.Walk > 0 ? ev.Walk : 0;
         wieldable.Comp.ModifiedSprint = ev.Sprint > 0 ? ev.Sprint : 0;
-        
+
         RefreshModifiersOnParent(wieldable.Owner);
     }
 
     private void OnItemUnwielded(Entity<WieldableSpeedModifiersComponent> wieldable, ref ItemUnwieldedEvent args)
     {
-        if (args.User == null)
-            return;
-        
-        _movementSpeedModifierSystem.RefreshMovementSpeedModifiers(args.User.Value);
+        RefreshSpeedModifiers((wieldable.Owner, wieldable.Comp));
     }
 
     private void OnItemWielded(Entity<WieldableSpeedModifiersComponent> wieldable, ref ItemWieldedEvent args)
     {
-        RefreshModifiersOnParent(wieldable.Owner);
+        RefreshSpeedModifiers((wieldable.Owner, wieldable.Comp));
     }
     
     private void RefreshModifiersOnParent(EntityUid wieldableUid)
@@ -162,30 +157,6 @@ public sealed class RMCWieldableSystem : EntitySystem
 #endregion
 
 #region Wield delay
-    private void OnBeforeWield(Entity<WieldDelayComponent> wieldable, ref BeforeWieldEvent args)
-    {
-        if (!TryComp(wieldable.Owner, out UseDelayComponent? useDelayComponent) ||
-            !_useDelaySystem.IsDelayed((wieldable.Owner, useDelayComponent), wieldUseDelayID))
-        {
-            return;
-        }
-
-        args.Cancel();
-
-        if (!_useDelaySystem.TryGetDelayInfo((wieldable.Owner, useDelayComponent), out var info, wieldUseDelayID) ||
-            !TryComp(wieldable.Owner, out TransformComponent? transformComponent) ||
-            !transformComponent.ParentUid.Valid ||
-            !TryComp(transformComponent.ParentUid, out HandsComponent? handsComponent) ||
-            handsComponent.ActiveHandEntity != wieldable.Owner)
-        {
-            return;
-        }
-
-        var time = $"{(info.EndTime - _timing.CurTime).TotalSeconds:F1}";
-
-        _popupSystem.PopupClient(Loc.GetString("rmc-wield-use-delay", ("seconds", time), ("wieldable", wieldable.Owner)), transformComponent.ParentUid, transformComponent.ParentUid);
-    }
-
     private void OnGotEquippedHand(Entity<WieldDelayComponent> wieldable, ref GotEquippedHandEvent args)
     {
         _useDelaySystem.SetLength(wieldable.Owner, wieldable.Comp.ModifiedDelay, wieldUseDelayID);
@@ -201,6 +172,15 @@ public sealed class RMCWieldableSystem : EntitySystem
         }
 
         args.Handled = true;
+
+        if (!_useDelaySystem.TryGetDelayInfo((wieldable.Owner, useDelayComponent), out var info, wieldUseDelayID))
+        {
+            return;
+        }
+
+        var time = $"{(info.EndTime - _timing.CurTime).TotalSeconds:F1}";
+
+        _popupSystem.PopupClient(Loc.GetString("rmc-wield-use-delay", ("seconds", time), ("wieldable", wieldable.Owner)), args.User, args.User);
     }
 
     public void RefreshWieldDelay(Entity<WieldDelayComponent?> wieldable)

@@ -298,6 +298,8 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentM79Stock
+  - type: AttachableVisuals
+    suffix: ""
   - type: AttachableWieldDelayMods
     modifiers: []
 
@@ -313,6 +315,7 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentM63Stock
+  - type: AttachableVisuals
   - type: AttachableWieldDelayMods
     modifiers:
     - delay: 0.4

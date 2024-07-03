@@ -357,6 +357,28 @@
         inactiveOnly: true
       accuracyAddMult: -0.05
 
+- type: entity
+  parent: RMCAttachmentScopeBase
+  id: RMCM96SIntegratedScope
+  name: M96S integrated scope
+  description: This isn't supposed to come off the gun. How did you get it?
+  components:
+  - type: Sprite
+    state: m96s-scope
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCM96SIntegratedScope
+  - type: AttachableToggleable
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: m96s-scope
+    actionName: Toggle M96S Integrated Scope
+    actionDesc: Lets you see further.
+  - type: Scope
+    zoom: 1.25 # TODO RMC14 2x and 4x zoom
+    delay: 1
+
 - type: Tag
   id: RMCAttachmentRail
 
@@ -389,3 +411,6 @@
 
 - type: Tag
   id: RMCAttachmentMiniscopeHunting
+
+- type: Tag
+  id: RMCM96SIntegratedScope

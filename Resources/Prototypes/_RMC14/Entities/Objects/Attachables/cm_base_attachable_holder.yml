@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  id: CMBaseAttachableHolder
+  id: RMCBaseAttachableHolder
   components:
   - type: AttachableHolder
   - type: ActivatableUI
