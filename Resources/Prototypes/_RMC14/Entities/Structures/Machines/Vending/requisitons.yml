@@ -346,7 +346,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCargoAttachments
-  name: Armat systems attachments vendor
+  name: Aegis Armaments attachments vendor
   description: An automated supply rack hooked up to a big storage of weapons attachments. Can be accessed by the Requisitions Officer and Cargo Techs.
   components:
   - type: AccessReader
