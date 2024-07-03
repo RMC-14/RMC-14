@@ -133,7 +133,12 @@ public sealed partial class WelderRefineDoAfterEvent : SimpleDoAfterEvent
 {
 }
 
-[Serializable, NetSerializable]
 public sealed class ConstructionInteractionEvent : EntityEventArgs
 {
+    public EntityUid User;
+
+    public ConstructionInteractionEvent(EntityUid user)
+    {
+        User = user;
+    }
 }

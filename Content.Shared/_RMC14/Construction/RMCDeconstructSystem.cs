@@ -23,6 +23,8 @@ public sealed class RMCDeconstructSystem : EntitySystem
         if (!args.CanAccess || !args.CanInteract || args.Hands == null)
             return;
 
+        var user = args.User;
+
         var v = new Verb
         {
             Priority = 1,
@@ -31,7 +33,7 @@ public sealed class RMCDeconstructSystem : EntitySystem
             DoContactInteraction = true,
             Act = () =>
             {
-                RaiseLocalEvent(ent, new ConstructionInteractionEvent());
+                RaiseLocalEvent(ent, new ConstructionInteractionEvent(user));
             }
         };
 

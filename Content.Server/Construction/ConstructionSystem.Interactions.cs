@@ -260,8 +260,10 @@ namespace Content.Server.Construction
 
                 case InteractionGraphStep:
                 {
-                    if (ev is not ConstructionInteractionEvent)
+                    if (ev is not ConstructionInteractionEvent cInteractionEv)
                         break;
+
+                    user = cInteractionEv.User;
 
                     return HandleResult.True;
                 }
