@@ -134,7 +134,6 @@ public sealed class AttachableHolderSystem : EntitySystem
                 continue;
         }
 
-        UpdateStripUi(holder.Owner, holder.Comp);
         Dirty(holder);
     }
 

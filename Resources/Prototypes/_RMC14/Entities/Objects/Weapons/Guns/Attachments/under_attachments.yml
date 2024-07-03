@@ -333,7 +333,7 @@
 
 - type: entity
   parent: RMCUnderAttachmentBase
-  id: RMCAttachmentRailFlashlightGrip
+  id: RMCAttachmentFlashlightGrip
   name: underbarrel flashlight grip
   description: Holy smokes RO man, they put a grip on a flashlight! Reduces recoil and scatter by a tiny amount. Works as a light source. # Boosts accuracy by a tiny amount.
   components:
@@ -402,7 +402,7 @@
   - type: Tag
     tags:
     - RMCAttachmentUnderbarrel
-    - RMCAttachmentRailFlashlightGrip
+    - RMCAttachmentFlashlightGrip
     - Flashlight
   - type: AttachableWeaponRangedMods
     modifiers:
@@ -413,7 +413,7 @@
       scatterFlat: -1
 
 - type: entity
-  parent: RMCAttachmentRailFlashlightGrip
+  parent: RMCAttachmentFlashlightGrip
   id: RMCAttachmentLaserLightModule
   name: MK80 laser-light module
   description: A Laser-Light module for the MK80 Service Pistol which is currently undergoing limited field testing as part of the marines' next generation pistol program. All MK80 pistols come equipped with the module.
@@ -479,7 +479,7 @@
   id: RMCAttachmentVerticalGrip
 
 - type: Tag
-  id: RMCAttachmentRailFlashlightGrip
+  id: RMCAttachmentFlashlightGrip
 
 - type: Tag
   id: RMCAttachmentLaserLightModule

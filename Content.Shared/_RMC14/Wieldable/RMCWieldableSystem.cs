@@ -85,7 +85,16 @@ public sealed class RMCWieldableSystem : EntitySystem
     {
         wieldable.Comp = EnsureComp<WieldableSpeedModifiersComponent>(wieldable);
 
-        var ev = new GetWieldableSpeedModifiersEvent(wieldable.Comp.BaseWalk, wieldable.Comp.BaseSprint);
+        var walkSpeed = wieldable.Comp.BaseWalk;
+        var sprintSpeed = wieldable.Comp.BaseSprint;
+
+        if (!TryComp(wieldable.Owner, out WieldableComponent? wieldableComponent) || !wieldableComponent.Wielded)
+        {
+            walkSpeed = 1f;
+            sprintSpeed = 1f;
+        }
+
+        var ev = new GetWieldableSpeedModifiersEvent(walkSpeed, sprintSpeed);
         RaiseLocalEvent(wieldable, ref ev);
 
         wieldable.Comp.ModifiedWalk = ev.Walk > 0 ? ev.Walk : 0;

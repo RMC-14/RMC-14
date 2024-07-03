@@ -64,6 +64,11 @@
     maxAngle: -40
     angleIncrease: -9
     angleDecay: 5
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.8
+    baseSprint: 0.69
+  - type: WieldDelay
+    baseDelay: 0.6
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -81,6 +86,7 @@
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
+        startingAttachable: RMCAttachmentSuppressor
         whitelist:
           tags:
           - RMCAttachmentBarrelCharger
@@ -88,6 +94,7 @@
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
       rmc-aslot-rail:
+        startingAttachable: RMCAttachmentRailFlashlight
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight
@@ -107,7 +114,7 @@
         whitelist:
           tags:
           - RMCAttachmentAngledGrip
-          - RMCAttachmentRailFlashlightGrip
+          - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentLaserSight
           - RMCAttachmentU1GrenadeLauncher
@@ -116,9 +123,9 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.81, 0.00
-      rmc-aslot-rail: 0.16, 0.20
-      rmc-aslot-stock: -0.57, 0.03
-      rmc-aslot-underbarrel: 0.19, -0.14
+      rmc-aslot-rail: 0.125, 0.185
+      rmc-aslot-stock: -0.875, 0.0325
+      rmc-aslot-underbarrel: 0.312, -0.343
 
 - type: entity
   name: M54CE2 heavy assault rifle

@@ -6,6 +6,10 @@ namespace Content.Shared._RMC14.Wieldable.Components;
 [Access(typeof(RMCWieldableSystem))]
 public sealed partial class WieldDelayComponent : Component
 {
+    /// <summary>
+    /// The base delay which is then modified by attachments.
+    /// Conversion from 13: SS13_WIELD_DELAY / 10
+    /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan BaseDelay = TimeSpan.FromSeconds(0.4);
 

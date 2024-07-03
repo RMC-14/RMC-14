@@ -77,6 +77,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
                 attachable.Comp.Attached = false;
                 attachable.Comp.Active = false;
+                Dirty(attachable);
                 break;
 
             case AttachableAlteredType.Attached:
