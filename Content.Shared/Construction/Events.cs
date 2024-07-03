@@ -132,3 +132,8 @@ public sealed partial class ConstructionInteractDoAfterEvent : DoAfterEvent
 public sealed partial class WelderRefineDoAfterEvent : SimpleDoAfterEvent
 {
 }
+
+[Serializable, NetSerializable]
+public sealed class ConstructionInteractionEvent : EntityEventArgs
+{
+}

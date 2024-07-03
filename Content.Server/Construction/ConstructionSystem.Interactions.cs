@@ -41,6 +41,7 @@ namespace Content.Server.Construction
                 new []{typeof(EncryptionKeySystem)});
             SubscribeLocalEvent<ConstructionComponent, OnTemperatureChangeEvent>(EnqueueEvent);
             SubscribeLocalEvent<ConstructionComponent, PartAssemblyPartInsertedEvent>(EnqueueEvent);
+            SubscribeLocalEvent<ConstructionComponent, ConstructionInteractionEvent>(EnqueueEvent);
         }
 
         /// <summary>
@@ -257,6 +258,13 @@ namespace Content.Server.Construction
                 // Also make sure your event handler properly handles validation.
                 // Note: Please use braces for your new case, it's convenient.
 
+                case InteractionGraphStep:
+                {
+                    if (ev is not ConstructionInteractionEvent)
+                        break;
+
+                    return HandleResult.True;
+                }
                 case EntityInsertConstructionGraphStep insertStep:
                 {
                     // EntityInsert steps only work with InteractUsing!

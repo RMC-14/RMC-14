@@ -46,6 +46,11 @@ namespace Content.Shared.Construction.Steps
                 return typeof(PartAssemblyConstructionGraphStep);
             }
 
+            if (node.Has("interaction"))
+            {
+                return typeof(InteractionGraphStep);
+            }
+
             return null;
         }
 
