@@ -45,7 +45,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentS42xTelescopicMiniScope
+      - id: RMCAttachmentS42xTelescopicMiniscope
         amount: 2
 
 - type: entity
