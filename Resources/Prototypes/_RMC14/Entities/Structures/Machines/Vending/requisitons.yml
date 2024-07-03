@@ -360,8 +360,8 @@
       entries:
       - id: CMAttachmentExtendedBarrel
         amount: 7
-      #- id: M5 Bayonet
-      #  amount: 11
+      - id: CMM5Bayonet
+        amount: 11
       - id: CMAttachmentRecoilCompensator
         amount: 7
       - id: CMAttachmentSuppressor
@@ -370,43 +370,43 @@
       entries:
       - id: CMAttachmentB8SmartScope
         amount: 4
-      #- id: Magnetic Harness
+      #- id: RMCAttachmentMagneticHarness
       #  amount: 9
       - id: CMAttachmentRailFlashlight
         amount: 11
-      #- id: S4 2x Telescopic Mini-Scope
+      #- id: RMCAttachmentS42xTelescopicMiniscope
       #  amount: 5
-      #- id: S5 Red-Dot Sight
+      #- id: RMCAttachmentS5RedDotSight
       #  amount: 10
-      #- id: S6 Reflex Sight
+      #- id: RMCAttachmentS6ReflexSight
       #  amount: 10
-      #- id: S8 4x Telescopic Scope
+      #- id: RMCAttachmentS84xTelescopicScope
       #  amount: 5
     - name: Underbarrel
       entries:
-      #- id: Angled Grip
+      #- id: RMCAttachmentAngledGrip
       #  amount: 7
-      #- id: Bipod
+      #- id: RMCAttachmentBipod
       #  amount: 7
-      #- id: Burst Fire Assembly
+      #- id: RMCAttachmentBurstFireAssembly
       #  amount: 5
-      #- id: Gyroscopic Stabilizer
+      #- id: RMCAttachmentGyroscopicStabilizer
       #  amount: 5
-      #- id: Laser Sight
+      #- id: RMCAttachmentLaserSight
       #  amount: 10
-      #- id: Mini Flamethrower
+      #- id: RMCAttachmentMiniFlamethrower
       #  amount: 5
-      #- id: XM-VESG-1 Flamer Nozzle
+      #- id: RMCAttachmentXMVESG1FlamerNozzle
       #  amount: 5
       - id: CMAttachmentU7UnderbarrelShotgun
         amount: 5
-      #- id: Underbarrel Extinguisher
+      #- id: RMCAttachmentUnderbarrelExtinguisher
       #  amount: 5
-      #- id: Underbarrel Flashlight Grip
+      #- id: RMCAttachmentU1GrenadeLauncher
       #  amount: 10
-      #- id: Underslung Grenade Launcher
+      #- id: RMCAttachmentMK1GrenadeLauncher
       #  amount: 10
-      #- id: Vertical Grip
+      #- id: RMCAttachmentVerticalGrip
       #  amount: 10
     - name: Stock
       entries: [ ]
