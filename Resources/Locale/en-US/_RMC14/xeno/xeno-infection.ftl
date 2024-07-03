@@ -15,4 +15,4 @@ rmc-xeno-infection-majorpain-heart = Your heart starts beating rapidly, and each
 rmc-xeno-infection-burst-soon = {CAPITALIZE($victim)} starts shaking violently!
 rmc-xeno-infection-burst-soon-self = You feel something crawling through your insides!
 
-rmc-xeno-infected-bursted = {CAPITALIZE(SUBJECT($victim))} has a giant hole in {POSS-ADJ($victim)} chest!
+rmc-xeno-infected-bursted = {CAPITALIZE(SUBJECT($victim))} {CONJUGATE-HAVE($victim)} a giant hole in {POSS-ADJ($victim)} chest!
