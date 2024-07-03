@@ -32,7 +32,7 @@
           Medium: { state: magaz_reg_2, visible: true }
           High: { state: magaz_reg_3, visible: true }
           Full: { state: magaz_reg, visible: true }
-  - type: RMCDeconstruct
+  - type: ConstructionInteractionVerb
     verbText: rmc-construction-verb-fold
     verbFailedText: rmc-construction-verb-fold-failed
 
