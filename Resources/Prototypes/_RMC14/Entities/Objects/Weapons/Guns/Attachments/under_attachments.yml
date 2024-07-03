@@ -213,6 +213,10 @@
     layers:
     - state: grenade
       map: [ "enum.BreechVisuals.Open" ]
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
   - type: AmmoCounter
   - type: Gun
     soundGunshot:
