@@ -1,6 +1,6 @@
 - type: entity
   parent: CMXenoRunner
-  id: CMXenoWehny
+  id: RMCXenoWehny
   name: Wehny
   description: A cruel, cruel joke made by some sick individual.
   components:
