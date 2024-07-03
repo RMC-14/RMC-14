@@ -2,7 +2,7 @@
   parent: hydroponicsTray
   name: hydroponics tray
   id: CMHydroponicsTray
-  description: ""
+  description: Used for growing plants.
   components:
   - type: Fixtures
     fixtures:
