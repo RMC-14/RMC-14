@@ -1,0 +1,64 @@
+
+- type: entity
+  parent: CMWallMetal
+  id: RMCWallPrison
+  name: metal wall
+  description: A huge chunk of metal used to separate rooms.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/prison_wall.rsi
+    state: metal
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/prison_wall.rsi
+    state: metal
+  - type: IconSmooth
+    key: wall
+    base: metal
+
+- type: entity
+  parent: CMWallReinforced
+  id: RMCWallPrisonReinforced
+  name: reinforced metal wall
+  description: A huge chunk of ultra-reinforced metal used to separate rooms.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/prison_rwall.rsi
+    state: rwall
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/prison_rwall.rsi
+    state: rwall
+  - type: IconSmooth
+    key: wall
+    base: rwall
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallPrisonHull
+  name: heavy reinforced wall
+  description: A huge chunk of ultra-reinforced metal used to separate rooms. Looks virtually indestructible.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/prison_rwall.rsi
+    state: rwall
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/prison_rwall.rsi
+    state: hwall
+  - type: IconSmooth
+    key: wall
+    base: rwall
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallBoneResin
+  name: skeletal resin
+  description: A wall made of molted old resin. This place is more alive than you are.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/bone_resin.rsi
+    state: bone_resin
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/bone_resin.rsi
+    state: bone_resin
+  - type: IconSmooth
+    key: wall
+    base: bone_resin
