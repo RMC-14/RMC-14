@@ -283,37 +283,145 @@
   # M54C
   - node: CMBoxMagazineRifleM54CEmpty
     entity: CMBoxMagazineRifleM54CEmpty
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: RMCSheetCardboard1
+        amount: 1
+      - !type:DeleteEntity {}
+      steps:
+      - interaction:
   - node: CMBoxMagazineRifleM54CAPEmpty
     entity: CMBoxMagazineRifleM54CAPEmpty
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: RMCSheetCardboard1
+        amount: 1
+      - !type:DeleteEntity {}
+      steps:
+      - interaction:
   - node: CMBoxMagazineRifleM54CExtEmpty
     entity: CMBoxMagazineRifleM54CExtEmpty
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: RMCSheetCardboard1
+        amount: 1
+      - !type:DeleteEntity {}
+      steps:
+      - interaction:
 
   # M63
   - node: CMBoxMagazineSMGM63Empty
     entity: CMBoxMagazineSMGM63Empty
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: RMCSheetCardboard1
+        amount: 1
+      - !type:DeleteEntity {}
+      steps:
+      - interaction:
   - node: CMBoxMagazineSMGM63APEmpty
     entity: CMBoxMagazineSMGM63APEmpty
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: RMCSheetCardboard1
+        amount: 1
+      - !type:DeleteEntity {}
+      steps:
+      - interaction:
   - node: CMBoxMagazineSMGM63ExtEmpty
     entity: CMBoxMagazineSMGM63ExtEmpty
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: RMCSheetCardboard1
+        amount: 1
+      - !type:DeleteEntity {}
+      steps:
+      - interaction:
 
   # M4SPR
   - node: CMBoxMagazineRifleM4SPREmpty
     entity: CMBoxMagazineRifleM4SPREmpty
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: RMCSheetCardboard1
+        amount: 1
+      - !type:DeleteEntity {}
+      steps:
+      - interaction:
   - node: CMBoxMagazineRifleM4SPRAPEmpty
     entity: CMBoxMagazineRifleM4SPRAPEmpty
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: RMCSheetCardboard1
+        amount: 1
+      - !type:DeleteEntity {}
+      steps:
+      - interaction:
   - node: CMBoxMagazineRifleM4SPRExtEmpty
     entity: CMBoxMagazineRifleM4SPRExtEmpty
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: RMCSheetCardboard1
+        amount: 1
+      - !type:DeleteEntity {}
+      steps:
+      - interaction:
 
   # M1984
   - node: CMBoxMagazinePistolM1984Empty
     entity: CMBoxMagazinePistolM1984Empty
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: RMCSheetCardboard1
+        amount: 1
+      - !type:DeleteEntity {}
+      steps:
+      - interaction:
 #  - node: CMBoxMagazinePistolM1984APEmpty
 #    entity: CMBoxMagazinePistolM1984APEmpty
 
   # M77AP
   - node: CMBoxMagazinePistolM77APEmpty
     entity: CMBoxMagazinePistolM77APEmpty
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: RMCSheetCardboard1
+        amount: 1
+      - !type:DeleteEntity {}
+      steps:
+      - interaction:
 
   # MK80
   - node: CMBoxMagazinePistolMK80Empty
     entity: CMBoxMagazinePistolMK80Empty
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: RMCSheetCardboard1
+        amount: 1
+      - !type:DeleteEntity {}
+      steps:
+      - interaction:
