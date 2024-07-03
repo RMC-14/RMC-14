@@ -142,3 +142,13 @@ public sealed class ConstructionInteractionEvent : EntityEventArgs
         User = user;
     }
 }
+
+[Serializable, NetSerializable]
+public sealed partial class ConstructionInteractionDoAfterEvent : DoAfterEvent
+{
+    public ConstructionInteractionDoAfterEvent(ConstructionInteractionEvent cInteractionEv)
+    {
+    }
+
+    public override DoAfterEvent Clone() => this;
+}

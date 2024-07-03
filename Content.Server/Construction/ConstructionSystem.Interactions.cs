@@ -34,6 +34,7 @@ namespace Content.Server.Construction
         private void InitializeInteractions()
         {
             SubscribeLocalEvent<ConstructionComponent, ConstructionInteractDoAfterEvent>(EnqueueEvent);
+            SubscribeLocalEvent<ConstructionComponent, ConstructionInteractionDoAfterEvent>(EnqueueEvent);
 
             // Event handling. Add your subscriptions here! Just make sure they're all handled by EnqueueEvent.
             SubscribeLocalEvent<ConstructionComponent, InteractUsingEvent>(EnqueueEvent,
@@ -245,6 +246,15 @@ namespace Content.Server.Construction
 
                 doAfterState = DoAfterState.Completed;
             }
+            else if (ev is ConstructionInteractionDoAfterEvent interactionDoAfter)
+            {
+                if (interactionDoAfter.Cancelled)
+                    return HandleResult.False;
+
+                ev = new ConstructionInteractionEvent(interactionDoAfter.User);
+
+                doAfterState = DoAfterState.Completed;
+            }
 
             // The cases in this switch will handle the interaction and return
             switch (step)
@@ -258,12 +268,48 @@ namespace Content.Server.Construction
                 // Also make sure your event handler properly handles validation.
                 // Note: Please use braces for your new case, it's convenient.
 
-                case InteractionGraphStep:
+                case InteractionGraphStep interactionStep:
                 {
-                    if (ev is not ConstructionInteractionEvent cInteractionEv)
+                    if (ev is not ConstructionInteractionEvent interactEv)
                         break;
 
-                    user = cInteractionEv.User;
+                    user = interactEv.User;
+
+                    if (validation)
+                        return HandleResult.Validated;
+
+                    // If we still haven't completed this step's DoAfter...
+                    if (doAfterState == DoAfterState.None && interactionStep.DoAfter > 0)
+                    {
+                        var doAfterEv = new ConstructionInteractionDoAfterEvent(interactEv);
+
+                        var doAfterEventArgs = new DoAfterArgs(EntityManager,
+                            interactEv.User,
+                            step.DoAfter,
+                            doAfterEv,
+                            uid,
+                            uid,
+                            interactEv.User)
+                        {
+                            BreakOnDamage = false,
+                            BreakOnMove = true,
+                            NeedHand = true
+                        };
+
+                        var started  = _doAfterSystem.TryStartDoAfter(doAfterEventArgs);
+
+                        if (!started)
+                            return HandleResult.False;
+
+#if DEBUG
+                        // Verify that the resulting DoAfter event will be handled by the current construction state.
+                        // if it can't what is even the point of raising this DoAfter?
+                        doAfterEv.DoAfter = new(default, doAfterEventArgs, default);
+                        var result = HandleInteraction(uid, doAfterEv, step, validation: true, out _, construction);
+                        DebugTools.Assert(result == HandleResult.Validated);
+#endif
+                        return HandleResult.DoAfter;
+                    }
 
                     return HandleResult.True;
                 }
