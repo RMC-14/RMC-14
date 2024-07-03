@@ -57,7 +57,7 @@
       - id: CMMagazinePistolM1984
         amount: 25
     - name: Attachments
-      entries: [ ]
+      entries:
       - id: RMCAttachmentM63StockCollapsible
         amount: 10
       - id: RMCAttachmentM54CStockCollapsible
