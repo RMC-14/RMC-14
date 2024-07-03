@@ -152,7 +152,7 @@
       entries:
       - id: CMPouchAutoinjector
         amount: 1
-      #- id: Medical Kit Pouch
+      #- id: CMPouchMedkit
       #  amount: 2
       - id: CMPouchFirstAidInjectors
         amount: 5
@@ -161,8 +161,8 @@
         amount: 2
       - id: CMPouchSyringe
         amount: 2
-      #- id: Tools Pouch (Full) # No full version afaik?
-      #  amount: 2
+      - id: CMPouchTools # TODO should be a full tools pouch
+        amount: 2
       - id: CMPouchConstruction
         amount: 2
       - id: CMPouchElectronics
@@ -173,7 +173,7 @@
         amount: 5
       - id: CMPouchDocument
         amount: 2
-      #- id: Sling Pouch
+      #- id: CMPouchSling
       #  amount: 2
       - id: CMPouchMacheteFilled
         amount: 1
@@ -196,7 +196,7 @@
         amount: 1
       - id: CMPouchMagazineLarge
         amount: 1
-      #- id: Large Shotgun Shell Pouch
+      #- id: CMPouchShotgunLarge
       #  amount: 1
     - name: Miscellaneous
       entries:
@@ -410,19 +410,19 @@
       #  amount: 10
     - name: Stock
       entries: [ ]
-      #- id: M37 Wooden Stock
+      #- id: RMCAttachmentM42A2WoodenStock
       #  amount: 5
-      #- id: M39 Arm Brace
+      #- id: RMCAttachmentM63ArmBrace
       #  amount: 5
-      #- id: M39 Folding Stock
+      #- id: RMCAttachmentM63StockCollapsible
       #  amount: 5
-      #- id: M39 Stock
+      #- id: RMCAttachmentM63Stock
       #  amount: 5
-      #- id: M41A Solid Stock
+      #- id: RMCAttachmentM54CStockSolid
       #  amount: 5
-      #- id: M41A Folding Stock
+      #- id: RMCAttachmentM54CStockCollapsible
       #  amount: 5
-      #- id: M44 Magnum Sharpshooter Stock
+      #- id: RMCAttachmentM44MagnumSharpshooterStock
       #  amount: 5
 
 #UNIFORM VENDOR
