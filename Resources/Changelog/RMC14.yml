@@ -2055,5 +2055,12 @@
   id: 251
   time: '2024-07-03T11:46:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2778
+- author: Vermidia
+  changes:
+  - message: Lesser drones now use different sprites from normal drones
+    type: Tweak
+  id: 252
+  time: '2024-07-03T11:48:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2782
 Name: RMC14
 Order: -1
