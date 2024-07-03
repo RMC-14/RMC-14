@@ -290,6 +290,8 @@
     entity: CMBoxMagazineRifleM54CEmpty
     edges:
     - to: start
+      conditions:
+      - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
         doAfter: 1
@@ -297,6 +299,8 @@
     entity: CMBoxMagazineRifleM54CAPEmpty
     edges:
     - to: start
+      conditions:
+      - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
         doAfter: 1
@@ -304,6 +308,8 @@
     entity: CMBoxMagazineRifleM54CExtEmpty
     edges:
     - to: start
+      conditions:
+      - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
         doAfter: 1
@@ -313,6 +319,8 @@
     entity: CMBoxMagazineSMGM63Empty
     edges:
     - to: start
+      conditions:
+      - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
         doAfter: 1
@@ -320,6 +328,8 @@
     entity: CMBoxMagazineSMGM63APEmpty
     edges:
     - to: start
+      conditions:
+      - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
         doAfter: 1
@@ -327,6 +337,8 @@
     entity: CMBoxMagazineSMGM63ExtEmpty
     edges:
     - to: start
+      conditions:
+      - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
         doAfter: 1
@@ -336,6 +348,8 @@
     entity: CMBoxMagazineRifleM4SPREmpty
     edges:
     - to: start
+      conditions:
+      - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
         doAfter: 1
@@ -343,6 +357,8 @@
     entity: CMBoxMagazineRifleM4SPRAPEmpty
     edges:
     - to: start
+      conditions:
+      - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
         doAfter: 1
@@ -350,6 +366,8 @@
     entity: CMBoxMagazineRifleM4SPRExtEmpty
     edges:
     - to: start
+      conditions:
+      - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
         doAfter: 1
@@ -359,6 +377,8 @@
     entity: CMBoxMagazinePistolM1984Empty
     edges:
     - to: start
+      conditions:
+      - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
         doAfter: 1
@@ -370,6 +390,8 @@
     entity: CMBoxMagazinePistolM77APEmpty
     edges:
     - to: start
+      conditions:
+      - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
         doAfter: 1
@@ -379,6 +401,8 @@
     entity: CMBoxMagazinePistolMK80Empty
     edges:
     - to: start
+      conditions:
+      - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
         doAfter: 1
