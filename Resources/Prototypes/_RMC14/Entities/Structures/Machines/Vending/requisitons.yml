@@ -5,7 +5,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCargoGuns
-  name: ColMarTech Automated Armaments Vendor
+  name: ColMarTech automated armaments vendor
   description: An automated supply rack hooked up to a big storage of various firearms and explosives. Can be accessed by the Requisitions Officer and Cargo Techs.
   components:
   - type: AccessReader
@@ -250,7 +250,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCargoAmmo
-  name: ColMarTech Automated Munition Vendor
+  name: ColMarTech automated munition vendor
   description: An automated supply rack hooked up to a big storage of various ammunition types. Can be accessed by the Requisitions Officer and Cargo Techs.
   components:
   - type: AccessReader
@@ -346,7 +346,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCargoAttachments
-  name: Armat Systems Attachments Vendor
+  name: Armat systems attachments vendor
   description: An automated supply rack hooked up to a big storage of weapons attachments. Can be accessed by the Requisitions Officer and Cargo Techs.
   components:
   - type: AccessReader
@@ -430,7 +430,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCargoUniform
-  name: ColMarTech Surplus Uniform Vendor
+  name: ColMarTech surplus uniform vendor
   description: An automated supply rack hooked up to a big storage of standard marine uniforms. Can be accessed by the Requisitions Officer and Cargo Techs.
   components:
   - type: AccessReader
