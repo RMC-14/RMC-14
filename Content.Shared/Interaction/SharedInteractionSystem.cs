@@ -937,7 +937,7 @@ namespace Content.Shared.Interaction
                 return false;
 
             if (RangedInteractDoBefore(user, used, target, clickLocation, true))
-                return false;
+                return true;
 
             // all interactions should only happen when in range / unobstructed, so no range check is needed
             var interactUsingEvent = new InteractUsingEvent(user, used, target, clickLocation);
