@@ -11,7 +11,12 @@ command-description-excluderoletimer-add = Exclude a player from the playtime re
 command-description-excluderoletimer-get = See all roles for which a player is manually excluded from the regular playtime requirements for.
 command-description-excluderoletimer-remove = Removes a player's exclusion for playtime requirements for a specific role.
 
+command-description-figurine-export = Exports the current character as a figurine.
+command-description-figurine-openslots = Opens up infinite slots for all jobs on all map prototypes until the whole server is restarted.
+
 command-description-hive-alldefault = Sets the hive of a xeno or group of xenos.
+
+command-description-marine-randomize = Deletes and then spawns a marine or group of marines in the same place with a randomized name, species and appearance.
 
 command-description-removeinvalidweeds = Removes any weeds that should not have normally spread to where they are from the map.
 

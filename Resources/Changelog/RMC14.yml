@@ -1866,5 +1866,180 @@
   id: 225
   time: '2024-07-01T10:03:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2700
+- author: whisper
+  changes:
+  - message: Blood bags are no longer destructible, they can still be melted with
+      acid.
+    type: Fix
+  id: 226
+  time: '2024-07-02T00:06:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2729
+- author: Whisper
+  changes:
+  - message: Crusher no longer devolves to crusher
+    type: Fix
+  id: 227
+  time: '2024-07-02T00:06:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2727
+- author: Whisper
+  changes:
+  - message: Lathes temporarily no longer need power.
+    type: Fix
+  id: 228
+  time: '2024-07-02T00:06:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2731
+- author: Whisper
+  changes:
+  - message: Faxes and microwaves temporarily no longer require power.
+    type: Fix
+  id: 229
+  time: '2024-07-02T00:09:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2732
+- author: Whisper
+  changes:
+  - message: Fixed grenade launcher being one grenade short in capacity.
+    type: Fix
+  id: 230
+  time: '2024-07-02T00:13:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2733
+- author: vero5123
+  changes:
+  - message: Adds shockwave overlay to queen's screech
+    type: Add
+  id: 231
+  time: '2024-07-02T01:03:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2734
+- author: Whisper
+  changes:
+  - message: Cargo techs now spawn with an approval stamp.
+    type: Add
+  id: 232
+  time: '2024-07-02T02:22:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2736
+- author: JoeHammad
+  changes:
+  - message: fixed M4SPR box name
+    type: Tweak
+  id: 233
+  time: '2024-07-02T06:09:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2739
+- author: Mattshark89
+  changes:
+  - message: Lesser Drone playtime now counts as drone caste playtime. For the Queen
+      (unlock)!
+    type: Add
+  id: 234
+  time: '2024-07-02T06:27:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2723
+- author: ShadowCommander
+  changes:
+  - message: Added empty sprite for the flare pack.
+    type: Add
+  id: 235
+  time: '2024-07-02T07:59:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2747
+- author: ShadowCommander
+  changes:
+  - message: Added pouch fill level visuals.
+    type: Add
+  id: 236
+  time: '2024-07-02T08:15:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2737
+- author: DrSmugleaf
+  changes:
+  - message: Fixed grass being able to have weeds planted or spread onto it.
+    type: Fix
+  id: 237
+  time: '2024-07-02T13:47:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2755
+- author: DrSmugleaf
+  changes:
+  - message: Increased the delay between pointings from 0.5 seconds to 2 seconds.
+    type: Tweak
+  id: 238
+  time: '2024-07-02T15:29:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2756
+- author: Whisper
+  changes:
+  - message: Xenonids are now separated by caste in the ghost role panel.
+    type: Fix
+  id: 239
+  time: '2024-07-02T15:29:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2757
+- author: DrSmugleaf
+  changes:
+  - message: Fixed larvas and parasites being able to open xenonid eggs.
+    type: Fix
+  id: 240
+  time: '2024-07-02T15:31:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2758
+- author: DrSmugleaf
+  changes:
+  - message: Correspondents now spawn with a microphone in their pocket.
+    type: Add
+  id: 241
+  time: '2024-07-02T15:30:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2759
+- author: DrSmugleaf
+  changes:
+  - message: Added a Liaison job slot to the Almayer and Savannah.
+    type: Add
+  id: 242
+  time: '2024-07-02T15:32:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2760
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenonid pheromones not deactivating when the emitter goes into
+      crit or dies.
+    type: Fix
+  id: 243
+  time: '2024-07-02T15:45:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2761
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the client not getting feedback trying to build a hive core when
+      one already exists far away from it
+    type: Fix
+  id: 244
+  time: '2024-07-02T15:51:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2762
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the nomads packet being able to fit items other than cigarettes,
+      the cigar case being able to fit items other than cigars, and the match box
+      being able to fit items other than matches.
+    type: Fix
+  id: 245
+  time: '2024-07-03T11:03:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2790
+- author: DrSmugleaf
+  changes:
+  - message: Fixed showing upstream mechanical changes for species when changing it
+      in the character editor, when there are actually none.
+    type: Fix
+  id: 246
+  time: '2024-07-03T11:02:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2789
+- author: ShadowCommander
+  changes:
+  - message: Xenonids can now drag drop hosts to nest them on nest-able surfaces.
+    type: Add
+  id: 247
+  time: '2024-07-03T11:17:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2786
+- author: Vermidia
+  changes:
+  - message: Sentinel corrosive acid now works
+    type: Fix
+  id: 248
+  time: '2024-07-03T11:19:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2766
+- author: ShadowCommander
+  changes:
+  - message: Added empty sprites for backpacks, satchels, belts, and pouches.
+    type: Add
+  id: 249
+  time: '2024-07-03T11:26:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2750
 Name: RMC14
 Order: -1

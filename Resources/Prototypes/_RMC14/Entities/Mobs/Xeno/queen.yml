@@ -6,6 +6,8 @@
   name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
   components:
+  - type: GhostRole
+    name: cm-job-name-xeno-queen
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Queen/queen.rsi
     layers:

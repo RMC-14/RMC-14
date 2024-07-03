@@ -29,6 +29,7 @@
     id: CMIDCardCargoTech
     ears: CMHeadsetRequisition
     pocket1: CMPouchGeneralMedium
+    pocket2: CMStampApproved
 #    belt: TODO RMC14 M276 Pattern General Pistol Holster Rig Filled
 
 - type: entity
