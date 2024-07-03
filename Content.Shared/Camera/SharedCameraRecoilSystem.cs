@@ -75,7 +75,6 @@ public abstract class SharedCameraRecoilSystem : EntitySystem
                     y = 0;
 
                 recoil.CurrentKick = new Vector2(x, y);
-
             }
 
             if (recoil.CurrentKick == recoil.LastKick)
