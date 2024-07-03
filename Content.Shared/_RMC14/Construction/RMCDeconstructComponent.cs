@@ -1,6 +1,4 @@
-﻿using Content.Shared.Storage;
-
-namespace Content.Shared._RMC14.Construction;
+﻿namespace Content.Shared._RMC14.Construction;
 
 [RegisterComponent]
 public sealed partial class RMCDeconstructComponent : Component
@@ -9,8 +7,5 @@ public sealed partial class RMCDeconstructComponent : Component
     public string? VerbText;
 
     [DataField]
-    public List<EntitySpawnEntry>? SpawnEntries;
-
-    [DataField]
-    public bool DeleteEntity;
+    public string? VerbFailedText;
 }

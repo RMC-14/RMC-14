@@ -34,9 +34,7 @@
           Full: { state: magaz_reg, visible: true }
   - type: RMCDeconstruct
     verbText: rmc-deconstruct-verb-fold
-    deleteEntity: true
-    spawnEntries:
-    - id: RMCSheetCardboard1
+    verbFailedText: rmc-deconstruct-verb-fold-failed
 
 - type: entity
   abstract: true

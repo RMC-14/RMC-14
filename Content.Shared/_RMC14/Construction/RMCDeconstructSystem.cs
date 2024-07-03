@@ -1,15 +1,13 @@
 ﻿using Content.Shared.Construction;
 using Content.Shared.Database;
-using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Popups;
 using Content.Shared.Verbs;
-using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Construction;
 
 public sealed class RMCDeconstructSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -33,8 +31,17 @@ public sealed class RMCDeconstructSystem : EntitySystem
             DoContactInteraction = true,
             Act = () =>
             {
-                RaiseLocalEvent(ent, new ConstructionInteractionEvent(user));
-            }
+                var ev = new ConstructionInteractionEvent(user);
+                RaiseLocalEvent(ent, ev);
+
+                if (ev.Handled)
+                    return;
+
+                _popup.PopupClient(
+                    Loc.GetString(ent.Comp.VerbFailedText ?? "rmc-deconstruct-verb-failed",
+                        ("entityName", ent.Owner)),
+                    user);
+            },
         };
 
         args.Verbs.Add(v);

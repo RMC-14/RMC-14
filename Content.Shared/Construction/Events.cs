@@ -133,7 +133,7 @@ public sealed partial class WelderRefineDoAfterEvent : SimpleDoAfterEvent
 {
 }
 
-public sealed class ConstructionInteractionEvent : EntityEventArgs
+public sealed class ConstructionInteractionEvent : HandledEntityEventArgs
 {
     public EntityUid User;
 

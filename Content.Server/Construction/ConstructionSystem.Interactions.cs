@@ -273,6 +273,8 @@ namespace Content.Server.Construction
                     if (ev is not ConstructionInteractionEvent interactEv)
                         break;
 
+                    interactEv.Handled = true;
+
                     user = interactEv.User;
 
                     if (validation)
