@@ -2,8 +2,8 @@
 - type: entity
   parent: Matchbox
   id: CMMatchBook
-  name: lucky strikes matchbook
-  description: A small book of cheap paper matches. Good luck getting them to light. Made by Lucky Strikes, but you'll be anything but lucky when you burn your hand trying to light a match on this.
+  name: lucky sloths matchbook
+  description: A small book of cheap paper matches. Good luck getting them to light. Made by Lucky Sloths, but you'll be anything but lucky when you burn your hand trying to light a match on this.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/matchbook.rsi
@@ -81,8 +81,8 @@
 
 - type: entity
   parent: CMMatchBook
-  id: CMKoorlanderMatchbook
-  name: Koorlander matchbook
+  id: CMElectroMatchbook
+  name: Electro matchbook
   description: A small book of cheap paper matches. Good luck getting them to light.
   components:
   - type: Sprite

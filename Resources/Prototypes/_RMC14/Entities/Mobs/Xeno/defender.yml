@@ -7,6 +7,8 @@
   name: Defender
   description: A alien with an armored crest.
   components:
+  - type: GhostRole
+    name: cm-job-name-xeno-defender
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Defender/defender.rsi
   - type: MobState
@@ -30,9 +32,13 @@
     - ActionXenoHeadbutt
     - ActionXenoTailSweep
     - ActionXenoFortify
+    - ActionXenoDevolve
     tier: 1
     hudOffset: 0,0.2
     unlockAt: 240 # 4 minutes
+  - type: XenoDevolve
+    devolvesTo:
+    - CMXenoLarva
   - type: XenoEvolution
     max: 300
     evolvesTo:

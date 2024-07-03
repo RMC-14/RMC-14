@@ -46,12 +46,8 @@
     - state: icon
     - state: closed
       map: [ "closedLayer" ]
-  - type: GenericVisualizer
-    visuals:
-      enum.SharedBagOpenVisuals.BagState:
-        closedLayer:
-          Open: { visible: false }
-          Closed: { visible: true }
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
 
 - type: entity
   parent: CMPouch
@@ -65,15 +61,37 @@
       map: [ "closedLayer" ]
     - state: open
       map: [ "openLayer" ]
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+
+- type: entity
+  parent: CMPouch
+  id: RMCPouchFill
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+    - state: partial
+      map: [ "partialLayer" ]
+    - state: full
+      map: [ "fullLayer" ]
   - type: GenericVisualizer
     visuals:
-      enum.SharedBagOpenVisuals.BagState:
-        openLayer:
-          Open: { visible: true }
-          Closed: { visible: false }
-        closedLayer:
-          Open: { visible: false }
-          Closed: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        fullLayer:
+          Empty: { visible: false }
+          Low: { visible: false }
+          Medium: { visible: true }
+          High: { visible: true }
+          Full: { visible: true }
+        partialLayer:
+          Empty: { visible: false }
+          Low: { visible: true }
+          Medium: { visible: false }
+          High: { visible: false }
+          Full: { visible: false }
 
 - type: entity
   parent: [CMPouchOpenClosed, CMPouchStorage]
@@ -117,7 +135,7 @@
     - 0,0,5,1 #6 slot
 
 # flamertank / fueltank.rsi
-# m39ap pouch
+# m63ap pouch
 
 - type: entity
   parent: [CMPouchOpenClosed]
@@ -168,7 +186,7 @@
   parent: CMPouchSurvival
   id: CMPouchSurvivalSynth
   name: synth survival pouch
-  description: An emergency pouch given to synthetics in the event of an emergency.
+  description: An emergency pouch given to silicons in the event of an emergency.
   components:
   - type: Storage
     grid:
@@ -220,7 +238,7 @@
   - type: FixedItemSizeStorage
 
 - type: entity
-  parent: CMPouchClosed
+  parent: CMPouch
   id: CMPouchPistol
   name: sidearm pouch
   description: You could carry a pistol in this; more importantly, you could draw it quickly. Useful for emergencies.
@@ -229,7 +247,7 @@
     sprite: _RMC14/Objects/Clothing/Pouches/pistol.rsi
     layers:
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: m4a3 # TODO RMC14 per-gun underlay
+      state: m1984 # TODO RMC14 per-gun underlay
       map: [ "enum.CMItemSlotsLayers.Filled" ]
       visible: false
     - state: icon
@@ -329,7 +347,7 @@
     - 0,0,11,1 #6 slots
 
 - type: entity
-  parent: [CMPouchStorage, CMPouchOpenClosed]
+  parent: [CMPouchStorage]
   id: CMPouchShotgun
   name: shotgun shell pouch
   description: It can contain a single box of shotgun shells. # It can contain handfuls of shells, or bullets if you choose to for some reason. # TODO RMC14
@@ -621,13 +639,19 @@
     - 0,0,7,1 #7 slots
 
 - type: entity
-  parent: CMPouch
+  parent: RMCPouchFill
   id: CMPouchFlare
   name: flare pouch
   description: A pouch designed to hold flares. Refillable with an M94 flare pack.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/flare.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "partialLayer" ]
+    - state: closed
+      map: [ "fullLayer" ]
   - type: CMItemSlots
     cooldown: 1
     cooldownPopup: You need to wait before taking another flare!

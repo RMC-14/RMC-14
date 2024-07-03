@@ -5,9 +5,11 @@ using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
+using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Item;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -43,6 +45,7 @@ public sealed class XenoEggSystem : EntitySystem
 
         SubscribeLocalEvent<XenoAttachedOvipositorComponent, MapInitEvent>(OnXenoAttachedMapInit);
         SubscribeLocalEvent<XenoAttachedOvipositorComponent, ComponentRemove>(OnXenoAttachedRemove);
+        SubscribeLocalEvent<XenoAttachedOvipositorComponent, MobStateChangedEvent>(OnXenoMobStateChanged);
 
         SubscribeLocalEvent<XenoEggComponent, AfterAutoHandleStateEvent>(OnXenoEggAfterState);
         SubscribeLocalEvent<XenoEggComponent, GettingPickedUpAttemptEvent>(OnXenoEggPickedUpAttempt);
@@ -68,17 +71,22 @@ public sealed class XenoEggSystem : EntitySystem
 
         var ev = new XenoGrowOvipositorDoAfterEvent { PlasmaCost = args.AttachPlasmaCost };
         var delay = args.AttachDoAfter;
+        var popup = new LocId("cm-xeno-ovipositor-attach");
+        var popupType = PopupType.Medium;
         if (hasOvipositor)
         {
             ev.PlasmaCost = FixedPoint2.Zero;
             delay = args.DetachDoAfter;
+            popup = "cm-xeno-ovipositor-detach";
+            popupType = PopupType.MediumCaution;
         }
 
         var doAfterArgs = new DoAfterArgs(EntityManager, xeno, delay, ev, xeno)
         {
-            BreakOnMove = true
+            BreakOnMove = true,
         };
-        _doAfter.TryStartDoAfter(doAfterArgs);
+        if (_doAfter.TryStartDoAfter(doAfterArgs))
+            _popup.PopupClient(Loc.GetString(popup), xeno, xeno, PopupType.Medium);
     }
 
     private void OnXenoGrowOvipositorDoAfter(Entity<XenoComponent> xeno, ref XenoGrowOvipositorDoAfterEvent args)
@@ -92,18 +100,10 @@ public sealed class XenoEggSystem : EntitySystem
 
         args.Handled = true;
 
-        var attaching = !EnsureComp(xeno, out XenoAttachedOvipositorComponent _);
-        if (!attaching)
-            RemComp<XenoAttachedOvipositorComponent>(xeno);
-
-        foreach (var (actionId, _) in _actions.GetActions(xeno))
-        {
-            if (TryComp(actionId, out XenoGrowOvipositorActionComponent? action))
-            {
-                _actions.SetCooldown(actionId, attaching ? action.AttachCooldown : action.DetachCooldown);
-                _actions.SetToggled(actionId, attaching);
-            }
-        }
+        if (TryComp(xeno, out XenoAttachedOvipositorComponent? attached))
+            DetachOvipositor((xeno, attached));
+        else
+            AttachOvipositor(xeno.Owner);
     }
 
     private void OnXenoAttachedMapInit(Entity<XenoAttachedOvipositorComponent> attached, ref MapInitEvent args)
@@ -116,6 +116,11 @@ public sealed class XenoEggSystem : EntitySystem
     {
         if (!TerminatingOrDeleted(attached) && TryComp(attached, out TransformComponent? xform))
             _transform.Unanchor(attached, xform);
+    }
+
+    private void OnXenoMobStateChanged(Entity<XenoAttachedOvipositorComponent> ent, ref MobStateChangedEvent args)
+    {
+        DetachOvipositor(ent);
     }
 
     private void OnXenoEggAfterState(Entity<XenoEggComponent> egg, ref AfterAutoHandleStateEvent args)
@@ -201,7 +206,7 @@ public sealed class XenoEggSystem : EntitySystem
     private void OnXenoEggActivateInWorld(Entity<XenoEggComponent> egg, ref ActivateInWorldEvent args)
     {
         // TODO RMC14 multiple hive support
-        if (!HasComp<XenoComponent>(args.User))
+        if (!HasComp<XenoComponent>(args.User) || !HasComp<HandsComponent>(args.User))
             return;
 
         if (Open(egg, args.User, out _))
@@ -284,6 +289,39 @@ public sealed class XenoEggSystem : EntitySystem
 
         var ev = new XenoEggStateChangedEvent();
         RaiseLocalEvent(egg, ref ev);
+    }
+
+    private void AttachOvipositor(Entity<XenoAttachedOvipositorComponent?> xeno)
+    {
+        if (EnsureComp<XenoAttachedOvipositorComponent>(xeno, out var attached))
+            return;
+
+        xeno.Comp = attached;
+        foreach (var (actionId, _) in _actions.GetActions(xeno))
+        {
+            if (TryComp(actionId, out XenoGrowOvipositorActionComponent? action))
+            {
+                _actions.SetCooldown(actionId, action.AttachCooldown);
+                _actions.SetToggled(actionId, true);
+            }
+        }
+    }
+
+    private void DetachOvipositor(Entity<XenoAttachedOvipositorComponent> xeno)
+    {
+        if (!RemCompDeferred<XenoAttachedOvipositorComponent>(xeno))
+            return;
+
+        foreach (var (actionId, _) in _actions.GetActions(xeno))
+        {
+            if (TryComp(actionId, out XenoGrowOvipositorActionComponent? action))
+            {
+                _actions.SetCooldown(actionId, action.DetachCooldown);
+                _actions.SetToggled(actionId, false);
+            }
+        }
+
+        _popup.PopupClient(Loc.GetString("cm-xeno-ovipositor-detach"), xeno, xeno);
     }
 
     public override void Update(float frameTime)

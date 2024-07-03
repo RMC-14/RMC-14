@@ -1,0 +1,10 @@
+﻿- type: entity
+  parent: CigarCase
+  id: CMCigarCase
+  components:
+  - type: Storage
+    grid:
+    - 0,0,3,1
+    whitelist:
+      tags:
+      - Cigar

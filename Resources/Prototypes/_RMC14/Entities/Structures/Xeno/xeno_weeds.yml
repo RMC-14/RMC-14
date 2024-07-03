@@ -109,6 +109,14 @@
     layers:
     - state: weed0
     - state: constructionnode
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 33
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity # TODO RMC14 sound
   parent: XenoWeeds
@@ -182,6 +190,14 @@
     layers:
     - state: hive_weed0
     - state: constructionnode
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 33
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity
   id: XenoWeedsWall

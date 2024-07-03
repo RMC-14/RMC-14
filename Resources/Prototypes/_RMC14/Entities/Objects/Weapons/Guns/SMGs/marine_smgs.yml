@@ -22,25 +22,27 @@
     maxAngle: -50
     angleIncrease: -5
     angleDecay: 10
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
 
 - type: entity
   parent: CMBaseWeaponSMG
-  name: M39 submachine gun
-  id: WeaponSMGM39
-  description: The Armat Battlefield Systems M-39 submachinegun. Occasionally carried by light-infantry, scouts, engineers and medics.
+  name: M63 submachine gun
+  id: WeaponSMGM63
+  description: The Aegis Battlefield Armaments M-63 submachinegun. Occasionally carried by light-infantry, scouts, engineers and medics.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m39.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m39.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63.rsi
   - type: Gun
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m39.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m63.ogg
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -50,18 +52,27 @@
         priority: 2
         whitelist:
           tags:
-          - CMMagazineSMGM39
-          - CMMagazineSMGM39AP
-          - CMMagazineSMGM39Ext
+          - CMMagazineSMGM63
+          - CMMagazineSMGM63AP
+          - CMMagazineSMGM63Ext
   - type: AttachableHolder
     slots:
       cm-aslot-stock:
-        tags:
-        - CMAttachableStockSMGCollapsible
+        whitelist:
+          tags:
+          - CMAttachmentM63StockCollapsible
       cm-aslot-barrel:
-        tags:
-        - CMAttachableBarrel
+        whitelist:
+          tags:
+          - CMAttachmentExtendedBarrel
+          - CMAttachmentRecoilCompensator
+          - CMAttachmentSuppressor
+      cm-aslot-rail:
+        whitelist:
+          tags:
+          - CMAttachmentFlashlight
   - type: AttachableHolderVisuals
     offsets:
       cm-aslot-barrel: 0.44, 0.125
       cm-aslot-stock: -0.58, 0.13
+      cm-aslot-rail: 0.0, 0.0

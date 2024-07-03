@@ -1,0 +1,9 @@
+- type: shader
+  id: RMCShockWave
+  kind: source
+  path: "/Textures/_RMC14/Shaders/shock_wave.swsl"
+
+- type: shader
+  id: RMCXenoScreechShockWave
+  kind: source
+  path: "/Textures/_RMC14/Shaders/screech_shock_wave.swsl"

@@ -18,13 +18,12 @@
     initialBeepDelay: 0
     beepInterval: 10
     doPopup: false
-  - type: AmmoFixedDistance
 
 - type: entity
   parent: CMGrenadeBase
   id: CMGrenadeHighExplosive
   name: M40 HEDP grenade
-  description: High-Explosive Dual-Purpose. A small, but deceptively strong blast grenade that has been phasing out the M15 HE grenades alongside the M40 HEFA. Capable of being loaded in the M92 Launcher, or thrown by hand.
+  description: High-Explosive Dual-Purpose. A small, but deceptively strong blast grenade that has been phasing out the M15 HE grenades alongside the M40 HEFA. Capable of being loaded in grenade launchers, or thrown by hand.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m40hedp.rsi
@@ -69,7 +68,7 @@
   parent: CMGrenadeHighExplosive
   id: CMGrenadeFrag
   name: M40 HEFA grenade
-  description: High-Explosive Fragmenting-Antipersonnel. A small, but deceptively strong fragmentation grenade that has been phasing out the M15 fragmentation grenades alongside the M40 HEDP. Capable of being loaded in the M92 Launcher, or thrown by hand.
+  description: High-Explosive Fragmenting-Antipersonnel. A small, but deceptively strong fragmentation grenade that has been phasing out the M15 fragmentation grenades alongside the M40 HEDP. Capable of being loaded in grenade launchers, or thrown by hand.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m40hefa.rsi
@@ -82,6 +81,7 @@
     fillPrototype: CMProjectileShrapnel
     maxGrenadesCount: 48
     grenadeType: enum.GrenadeType.Shoot
+    triggerGrenades: false
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
@@ -105,6 +105,13 @@
     state: grenade
   - type: TimedDespawn
     lifetime: 0.6
+  
+- type: entity
+  id: RMCExplosionEffectGrenadeShockWave
+  components:
+  - type: TimedDespawn
+    lifetime: 0.5
+  - type: RMCExplosionShockWave
 
 - type: entity
   id: CMExplosionEffectShrapnel1

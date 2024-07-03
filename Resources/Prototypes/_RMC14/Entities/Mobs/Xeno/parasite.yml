@@ -5,6 +5,8 @@
   id: CMXenoParasite # TODO RMC14 slowly die off weeds
   name: Parasite
   components:
+  - type: GhostRole
+    name: cm-job-name-xeno-parasite
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Parasite/parasite.rsi
   - type: MobState

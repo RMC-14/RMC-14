@@ -3,6 +3,7 @@
          xmlns:humanoid="clr-namespace:Content.Client.Humanoid"
          xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
          xmlns:ui="clr-namespace:Content.Client.Lobby.UI"
+         xmlns:namedItems="clr-namespace:Content.Client._RMC14.NamedItems"
          HorizontalExpand="True">
         <!-- Left side -->
         <BoxContainer Orientation="Vertical" Margin="10 10 10 10" HorizontalExpand="True">
@@ -133,6 +134,10 @@
                     <ScrollContainer VerticalExpand="True">
                         <humanoid:MarkingPicker Name="Markings" IgnoreCategories="Hair,FacialHair" />
                     </ScrollContainer>
+                </BoxContainer>
+                <BoxContainer Name="NamedItemsTab" Orientation="Vertical" Margin="10">
+                    <!-- Named Items -->
+                    <namedItems:NamedItemsPicker Name="NamedItems" />
                 </BoxContainer>
             </TabContainer>
         </BoxContainer>

@@ -7,6 +7,8 @@
   name: Crusher
   description: A huge alien with an enormous armored crest.
   components:
+  - type: GhostRole
+    name: cm-job-name-xeno-crusher
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Crusher/crusher.rsi
   - type: MobState
@@ -29,9 +31,13 @@
     - ActionXenoCharge
     - ActionXenoStomp
     #    - ActionXenoDefensiveShield
+    - ActionXenoDevolve
     tier: 3
     hudOffset: 0,0.375
     unlockAt: 900 # 15 minutes
+  - type: XenoDevolve
+    devolvesTo:
+    - CMXenoWarrior
   - type: XenoDevour
   - type: XenoStomp
     damage:

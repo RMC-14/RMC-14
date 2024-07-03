@@ -1,6 +1,9 @@
-﻿using Content.Server.Chat.Managers;
+﻿using Content.Server.Administration.Logs;
+using Content.Server.Chat.Managers;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared.Chat;
+using Content.Shared.Database;
+using Content.Shared.Ghost;
 using Content.Shared.Popups;
 using Robust.Server.Audio;
 using Robust.Shared.Audio;
@@ -10,6 +13,7 @@ namespace Content.Server._RMC14.Announce;
 
 public sealed class XenoAnnounceSystem : SharedXenoAnnounceSystem
 {
+    [Dependency] private readonly IAdminLogManager _adminLogs = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -18,6 +22,9 @@ public sealed class XenoAnnounceSystem : SharedXenoAnnounceSystem
     {
         base.Announce(source, filter, message, wrapped, sound, popup);
 
+        filter.AddWhereAttachedEntity(HasComp<GhostComponent>);
+
+        _adminLogs.Add(LogType.RMCXenoAnnounce, $"{ToPrettyString(source):source} xeno announced message: {message}");
         _chat.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, wrapped, source, false, true, null);
         _audio.PlayGlobal(sound, filter, true);
 

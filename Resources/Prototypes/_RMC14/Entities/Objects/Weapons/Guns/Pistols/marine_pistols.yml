@@ -30,7 +30,7 @@
     availableModes:
     - SemiAuto
     soundGunshot:
-      collection: CMM4A3Shoot
+      collection: CMM1984Shoot
   - type: GunWieldBonus
     minAngle: -10
     maxAngle: -10
@@ -57,19 +57,21 @@
   - type: Appearance
   - type: MagazineAmmoProvider
     autoEject: true
+  - type: RMCNameItemOnVend
+    item: Sidearm
 
 - type: entity
   parent: CMWeaponPistolBase
-  id: CMWeaponPistolM4A3
-  name: M4A3 service pistol
-  description: An M4A3 Service Pistol, once the standard issue sidearm of the Marines but has recently been replaced with the 88 Mod 4 combat pistol. Fires 9mm pistol rounds.
+  id: CMWeaponPistolM1984
+  name: M1984 service pistol
+  description: An M1984 Service Pistol, once the standard issue sidearm of the Marines but has recently been replaced with the M77 combat pistol. Fires 9mm pistol rounds.
   components:
   - type: Gun
     fireRate: 10
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m4a3.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m1984.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m4a3.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m1984.rsi
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -79,21 +81,21 @@
         priority: 2
         whitelist:
           tags:
-          - CMMagazinePistolM4A3
+          - CMMagazinePistolM1984
 
 - type: entity
   parent: CMWeaponPistolBase
-  id: CMWeaponPistol88m4
-  name: 88 Mod 4 combat pistol # TODO RMC14 sounds
+  id: CMWeaponPistolM77
+  name: M77 combat pistol # TODO RMC14 sounds
   description: Standard issue Marine firearm. Also found in the hands of We-Ya PMC teams. Fires 9mm armor shredding rounds and is capable of 3-round burst.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/88m4.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m77.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/88m4.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m77.rsi
   - type: Gun
     fireRate: 4
     availableModes:
@@ -108,23 +110,23 @@
         priority: 2
         whitelist:
           tags:
-          - CMMagazinePistol88m4AP
+          - CMMagazinePistolM77AP
   - type: GunDamageModifier
     multiplier: 1.2
 
 - type: entity
   parent: CMWeaponPistolBase
-  id: CMWeaponPistolVP78
-  name: VP78 pistol
+  id: CMWeaponPistolMK80
+  name: MK80 pistol
   description: A massive, formidable semi-automatic handgun chambered in 9mm squash-head rounds. A common sight throughout both UA and 3WE space, often held by both We-Ya PMC units and corporate executives. This weapon is also undergoing limited field testing as part of the Marine's next generation pistol program. The slide is engraved with the We-Ya logo reminding you who's really in charge.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/vp78.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mk80.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/vp78.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mk80.rsi
   - type: Gun
     minAngle: 0
     maxAngle: 5
@@ -137,7 +139,7 @@
     - SemiAuto
 #    - Burst # TODO RMC14 higher fire rate, lower accuracy in burst
     soundGunshot:
-      collection: CMM4A3Shoot
+      collection: CMM1984Shoot
   - type: GunWieldBonus
     minAngle: 0
     maxAngle: 0
@@ -150,4 +152,4 @@
         priority: 2
         whitelist:
           tags:
-          - CMMagazinePistolVP78
+          - CMMagazinePistolMK80

@@ -93,7 +93,7 @@
 - type: entity
   parent: CMStampBase
   id: CMStampApproved
-  name: APPOVED rubber stamp
+  name: APPROVED rubber stamp
   components:
   - type: Sprite
     state: stamp-approve

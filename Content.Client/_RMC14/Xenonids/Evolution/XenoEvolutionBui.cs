@@ -28,25 +28,38 @@ public sealed class XenoEvolutionBui : BoundUserInterface
 
         if (EntMan.TryGetComponent(Owner, out XenoEvolutionComponent? xeno))
         {
-            foreach (var evolutionId in xeno.EvolvesTo)
+            foreach (var evolutionId in xeno.EvolvesToWithoutPoints)
             {
-                if (!_prototype.TryIndex(evolutionId, out var evolution))
-                    continue;
+                AddEvolution(evolutionId);
+            }
 
-                var control = new XenoChoiceControl();
-                control.Set(evolution.Name, _sprite.Frame0(evolution));
-
-                control.Button.OnPressed += _ =>
+            if (xeno.Points >= xeno.Max)
+            {
+                foreach (var evolutionId in xeno.EvolvesTo)
                 {
-                    SendPredictedMessage(new XenoEvolveBuiMsg(evolutionId));
-                    Close();
-                };
-
-                _window.EvolutionsContainer.AddChild(control);
+                    AddEvolution(evolutionId);
+                }
             }
         }
 
         _window.OpenCentered();
+    }
+
+    private void AddEvolution(EntProtoId evolutionId)
+    {
+        if (!_prototype.TryIndex(evolutionId, out var evolution))
+            return;
+
+        var control = new XenoChoiceControl();
+        control.Set(evolution.Name, _sprite.Frame0(evolution));
+
+        control.Button.OnPressed += _ =>
+        {
+            SendPredictedMessage(new XenoEvolveBuiMsg(evolutionId));
+            Close();
+        };
+
+        _window?.EvolutionsContainer.AddChild(control);
     }
 
     protected override void Dispose(bool disposing)

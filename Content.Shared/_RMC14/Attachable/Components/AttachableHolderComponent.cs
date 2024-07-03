@@ -15,7 +15,7 @@ public sealed partial class AttachableHolderComponent : Component
     ///     Each key is followed by a listing of all the attachables that fit into that slot.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public Dictionary<string, EntityWhitelist> Slots = new();
+    public Dictionary<string, AttachableSlot> Slots = new();
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

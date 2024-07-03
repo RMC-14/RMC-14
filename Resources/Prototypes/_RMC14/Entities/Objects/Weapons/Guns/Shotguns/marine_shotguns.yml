@@ -1,16 +1,16 @@
 ﻿- type: entity
   parent: [BaseWeaponShotgun, CMBaseWeaponGun]
-  name: M37A2 Pump Shotgun
-  id: WeaponShotgunM37A2
-  description: An Armat Battlefield Systems classic design, the M37A2 combines close-range firepower with long term reliability. Needs to be pumped.
+  name: M42A2 Pump Shotgun
+  id: WeaponShotgunM42A2
+  description: An Aegis Battlefield Armaments classic design, the M42A2 combines close-range firepower with long term reliability. Needs to be pumped.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m37a2.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m37a2.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2.rsi
     slots:
     - Back
     - SuitStorage
@@ -26,11 +26,13 @@
     capacity: 9
     proto: null
     soundInsert:
-      path: /Audio/_RMC14/Weapons/Guns/Reload/m37a2.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
   - type: PumpAction
   - type: ShootUseDelay
     delay: 2
   - type: UseDelay
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
 
 #  - type: GunWieldBonus # TODO RMC14
 #    minAngle: -25

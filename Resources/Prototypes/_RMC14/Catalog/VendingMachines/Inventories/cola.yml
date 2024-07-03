@@ -2,24 +2,24 @@
   id: CMVendorCola
   startingInventory:
     # BASIC
-    CMDrinkCanSoutoClassic: 10
-    CMDrinkCanSoutoCherry: 10
-    CMDrinkCanSoutoLime: 10
-    CMDrinkCanSoutoGrape: 10
-    CMDrinkCanSoutoBlue: 10
-    CMDrinkCanSoutoPeach: 10
-    CMDrinkCanSoutoCranberry: 10
-    CMDrinkCanSoutoVanilla: 10
-    CMDrinkCanSoutoPineapple: 10
+    CMDrinkCanBobdaClassic: 10
+    CMDrinkCanBobdaCherry: 10
+    CMDrinkCanBobdaLime: 10
+    CMDrinkCanBobdaGrape: 10
+    CMDrinkCanBobdaBlue: 10
+    CMDrinkCanBobdaPeach: 10
+    CMDrinkCanBobdaCranberry: 10
+    CMDrinkCanBobdaVanilla: 10
+    CMDrinkCanBobdaPineapple: 10
     # DIET
-    CMDrinkCanSoutoClassicDiet: 10
-    CMDrinkCanSoutoCherryDiet: 10
-    CMDrinkCanSoutoLimeDiet: 10
-    CMDrinkCanSoutoGrapeDiet: 10
-    CMDrinkCanSoutoBlueDiet: 10
-    CMDrinkCanSoutoPeachDiet: 10
-    CMDrinkCanSoutoCranberryDiet: 10
-    CMDrinkCanSoutoVanillaDiet: 10
-    CMDrinkCanSoutoPineappleDiet: 10
-    # NON SOUTO
+    CMDrinkCanBobdaClassicDiet: 10
+    CMDrinkCanBobdaCherryDiet: 10
+    CMDrinkCanBobdaLimeDiet: 10
+    CMDrinkCanBobdaGrapeDiet: 10
+    CMDrinkCanBobdaBlueDiet: 10
+    CMDrinkCanBobdaPeachDiet: 10
+    CMDrinkCanBobdaCranberryDiet: 10
+    CMDrinkCanBobdaVanillaDiet: 10
+    CMDrinkCanBobdaPineappleDiet: 10
+    # NON BOBDA
     CMDrinkCanCola: 10

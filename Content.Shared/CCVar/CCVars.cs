@@ -128,13 +128,13 @@ namespace Content.Shared.CCVar
         ///     Minimum time between meteor swarms in minutes.
         /// </summary>
         public static readonly CVarDef<float>
-            MeteorSwarmMinTime = CVarDef.Create("events.meteor_swarm_min_time", 7.5f, CVar.ARCHIVE | CVar.SERVERONLY);
+            MeteorSwarmMinTime = CVarDef.Create("events.meteor_swarm_min_time", 12.5f, CVar.ARCHIVE | CVar.SERVERONLY);
 
         /// <summary>
         ///     Maximum time between meteor swarms in minutes.
         /// </summary>
         public static readonly CVarDef<float>
-            MeteorSwarmMaxTime = CVarDef.Create("events.meteor_swarm_max_time", 12.5f, CVar.ARCHIVE | CVar.SERVERONLY);
+            MeteorSwarmMaxTime = CVarDef.Create("events.meteor_swarm_max_time", 17.5f, CVar.ARCHIVE | CVar.SERVERONLY);
 
         /*
          * Game
@@ -236,7 +236,7 @@ namespace Content.Shared.CCVar
         /// If roles should be restricted based on time.
         /// </summary>
         public static readonly CVarDef<bool>
-            GameRoleTimers = CVarDef.Create("game.role_timers", false, CVar.SERVER | CVar.REPLICATED);
+            GameRoleTimers = CVarDef.Create("game.role_timers", true, CVar.SERVER | CVar.REPLICATED);
 
         /// <summary>
         /// Override default role requirements using a <see cref="JobRequirementOverridePrototype"/>
@@ -438,7 +438,7 @@ namespace Content.Shared.CCVar
         /// but may cause lag during round end with very high player counts.
         /// </summary>
         public static readonly CVarDef<bool> RoundEndPVSOverrides =
-            CVarDef.Create("game.round_end_pvs_overrides", false, CVar.SERVERONLY);
+            CVarDef.Create("game.round_end_pvs_overrides", true, CVar.SERVERONLY);
 
         /*
          * Discord
@@ -884,6 +884,25 @@ namespace Content.Shared.CCVar
             CVarDef.Create("admin.bypass_max_players", true, CVar.SERVERONLY);
 
         /*
+         * AHELP
+         */
+
+        /// <summary>
+        /// Ahelp rate limit values are accounted in periods of this size (seconds).
+        /// After the period has passed, the count resets.
+        /// </summary>
+        /// <seealso cref="AhelpRateLimitCount"/>
+        public static readonly CVarDef<int> AhelpRateLimitPeriod =
+            CVarDef.Create("ahelp.rate_limit_period", 2, CVar.SERVERONLY);
+
+        /// <summary>
+        /// How many ahelp messages are allowed in a single rate limit period.
+        /// </summary>
+        /// <seealso cref="AhelpRateLimitPeriod"/>
+        public static readonly CVarDef<int> AhelpRateLimitCount =
+            CVarDef.Create("ahelp.rate_limit_count", 10, CVar.SERVERONLY);
+
+        /*
          * Explosions
          */
 
@@ -1326,7 +1345,7 @@ namespace Content.Shared.CCVar
         ///     Config for when the restart vote should be allowed to be called based on percentage of ghosts.
         ///
         public static readonly CVarDef<int> VoteRestartGhostPercentage =
-            CVarDef.Create("vote.restart_ghost_percentage", 55, CVar.SERVERONLY);
+            CVarDef.Create("vote.restart_ghost_percentage", 75, CVar.SERVERONLY);
 
         /// <summary>
         ///     See vote.enabled, but specific to preset votes
@@ -1399,7 +1418,7 @@ namespace Content.Shared.CCVar
         /// Should we pre-load all of the procgen atlasses.
         /// </summary>
         public static readonly CVarDef<bool> ProcgenPreload =
-            CVarDef.Create("procgen.preload", true, CVar.SERVERONLY);
+            CVarDef.Create("procgen.preload", false, CVar.SERVERONLY);
 
         /*
          * Shuttles
@@ -1467,7 +1486,7 @@ namespace Content.Shared.CCVar
         /// Whether to automatically preloading grids by GridPreloaderSystem
         /// </summary>
         public static readonly CVarDef<bool> PreloadGrids =
-            CVarDef.Create("shuttle.preload_grids", true, CVar.SERVERONLY);
+            CVarDef.Create("shuttle.preload_grids", false, CVar.SERVERONLY);
 
         /// <summary>
         /// How long the warmup time before FTL start should be.
@@ -1479,7 +1498,7 @@ namespace Content.Shared.CCVar
         /// How long a shuttle spends in FTL.
         /// </summary>
         public static readonly CVarDef<float> FTLTravelTime =
-            CVarDef.Create("shuttle.travel_time", 100f, CVar.SERVERONLY);
+            CVarDef.Create("shuttle.travel_time", 70f, CVar.SERVERONLY); // TODO RMC14 100
 
         /// <summary>
         /// How long the final stage of FTL before arrival should be.
@@ -1491,7 +1510,7 @@ namespace Content.Shared.CCVar
         /// How much time needs to pass before a shuttle can FTL again.
         /// </summary>
         public static readonly CVarDef<float> FTLCooldown =
-            CVarDef.Create("shuttle.cooldown", 120f, CVar.SERVERONLY);
+            CVarDef.Create("shuttle.cooldown", 90f, CVar.SERVERONLY); // TODO RMC14 120f
 
         /// <summary>
         /// The maximum <see cref="PhysicsComponent.Mass"/> a grid can have before it becomes unable to FTL.
@@ -2140,7 +2159,7 @@ namespace Content.Shared.CCVar
          */
 
         public static readonly CVarDef<bool> GatewayGeneratorEnabled =
-            CVarDef.Create("gateway.generator_enabled", true);
+            CVarDef.Create("gateway.generator_enabled", false);
 
         // Clippy!
         public static readonly CVarDef<string> TippyEntity =
@@ -2161,5 +2180,16 @@ namespace Content.Shared.CCVar
         /// </summary>
         public static readonly CVarDef<bool> DebugPow3rDisableParallel =
             CVarDef.Create("debug.pow3r_disable_parallel", true, CVar.SERVERONLY);
+
+        /*
+         * GUIDEBOOK
+         */
+
+        /// <summary>
+        ///     Whether or not to show a button that opens the guidebook when a player changes their species,
+        ///     explaining the difference between each.
+        /// </summary>
+        public static readonly CVarDef<bool> GuidebookShowEditorSpeciesButton =
+            CVarDef.Create("guidebook.show_editor_species_button", false, CVar.SERVER | CVar.REPLICATED);
     }
 }

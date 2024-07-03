@@ -7,6 +7,8 @@
   name: Praetorian
   description: A huge, looming beast of an alien.
   components:
+  - type: GhostRole
+    name: cm-job-name-xeno-praetorian
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Praetorian/praetorian.rsi
   - type: MobState
@@ -31,9 +33,14 @@
     #    - ActionXenoDash
     #    - ActionXenoAcidBall
     #    - ActionXenoSprayAcid
+    - ActionXenoDevolve
     tier: 3
     hudOffset: 0,0.16
     unlockAt: 900 # 15 minutes
+  - type: XenoDevolve
+    devolvesTo:
+    - CMXenoWarrior
+    - CMXenoSpitter
   - type: XenoAcid
   - type: XenoDevour
   - type: XenoPlasma

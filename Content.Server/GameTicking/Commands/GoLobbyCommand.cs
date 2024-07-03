@@ -7,7 +7,7 @@ using Robust.Shared.Console;
 
 namespace Content.Server.GameTicking.Commands
 {
-    [AdminCommand(AdminFlags.Round)]
+    [AdminCommand(AdminFlags.Host)]
     public sealed class GoLobbyCommand : IConsoleCommand
     {
         [Dependency] private readonly IEntityManager _e = default!;

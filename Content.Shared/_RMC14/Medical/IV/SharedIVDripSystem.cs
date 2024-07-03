@@ -33,7 +33,7 @@ public abstract class SharedIVDripSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
-    private readonly HashSet<EntityUid> _packsToUpdate = new();
+    private readonly HashSet<EntityUid> _packsToUpdate = [];
 
     private EntityQuery<BloodPackComponent> _bloodPackQuery;
 
@@ -87,22 +87,20 @@ public abstract class SharedIVDripSystem : EntitySystem
     private void OnIVDripCanDropDragged(Entity<IVDripComponent> iv, ref CanDropDraggedEvent args)
     {
         // TODO RMC14 check for BloodstreamComponent instead of MarineComponent
-        if (HasComp<MarineComponent>(args.Target) && InRange(iv, args.Target, iv.Comp.Range))
-        {
-            args.Handled = true;
-            args.CanDrop = true;
-        }
+        if (!HasComp<MarineComponent>(args.Target) || !InRange(iv, args.Target, iv.Comp.Range))
+            return;
+        args.Handled = true;
+        args.CanDrop = true;
     }
 
     // TODO RMC14 check for BloodstreamComponent instead of MarineComponent
     private void OnMarineCanDropTarget(Entity<MarineComponent> marine, ref CanDropTargetEvent args)
     {
         var iv = args.Dragged;
-        if (TryComp(iv, out IVDripComponent? ivComp) && InRange(iv, marine, ivComp.Range))
-        {
-            args.Handled = true;
-            args.CanDrop = true;
-        }
+        if (!TryComp(iv, out IVDripComponent? ivComp) || !InRange(iv, marine, ivComp.Range))
+            return;
+        args.Handled = true;
+        args.CanDrop = true;
     }
 
     private void OnIVDripDragDropDragged(Entity<IVDripComponent> iv, ref DragDropDraggedEvent args)
@@ -130,7 +128,7 @@ public abstract class SharedIVDripSystem : EntitySystem
         args.Verbs.Add(new InteractionVerb
         {
             Act = () => ToggleInject(iv, user),
-            Text = Loc.GetString("cm-iv-verb-toggle-inject")
+            Text = Loc.GetString("cm-iv-verb-toggle-inject"),
         });
     }
 
@@ -183,6 +181,10 @@ public abstract class SharedIVDripSystem : EntitySystem
         if (args.Target is not { } target)
             return;
 
+        // TODO RMC14 check for BloodstreamComponent instead of MarineComponent
+        if (!InRange(pack, target, pack.Comp.Range) || !HasComp<MarineComponent>(target))
+            return;
+
         args.Handled = true;
 
         var user = args.User;
@@ -208,7 +210,10 @@ public abstract class SharedIVDripSystem : EntitySystem
         if (delay > TimeSpan.Zero)
         {
             var selfPoke = Loc.GetString("cm-blood-pack-poke-self", ("pack", pack.Owner), ("target", target));
-            var othersPoke = Loc.GetString("cm-blood-pack-poke-others", ("user", user), ("pack", pack.Owner), ("target", target));
+            var othersPoke = Loc.GetString("cm-blood-pack-poke-others",
+                ("user", user),
+                ("pack", pack.Owner),
+                ("target", target));
             _popup.PopupPredicted(selfPoke, othersPoke, target, user);
         }
 
@@ -217,7 +222,7 @@ public abstract class SharedIVDripSystem : EntitySystem
         {
             BreakOnMove = true,
             BreakOnDamage = true,
-            BreakOnHandChange = true
+            BreakOnHandChange = true,
         };
         _doAfter.TryStartDoAfter(doAfter);
     }
@@ -244,7 +249,7 @@ public abstract class SharedIVDripSystem : EntitySystem
         args.Verbs.Add(new InteractionVerb
         {
             Act = () => ToggleInject(pack, user),
-            Text = Loc.GetString("cm-iv-verb-toggle-inject")
+            Text = Loc.GetString("cm-iv-verb-toggle-inject"),
         });
     }
 
@@ -274,7 +279,7 @@ public abstract class SharedIVDripSystem : EntitySystem
         return ivPos.InRange(toPos, range);
     }
 
-    protected void AttachIV(Entity<IVDripComponent> iv, EntityUid user, EntityUid to)
+    private void AttachIV(Entity<IVDripComponent> iv, EntityUid user, EntityUid to)
     {
         if (!InRange(iv, to, iv.Comp.Range))
             return;
@@ -400,26 +405,26 @@ public abstract class SharedIVDripSystem : EntitySystem
             return;
         }
 
-        if (_containers.TryGetContainer(iv, iv.Comp.Slot, out var container))
-        {
-            foreach (var entity in container.ContainedEntities)
-            {
-                if (TryComp(entity, out BloodPackComponent? pack) &&
-                    _solutionContainer.TryGetSolution(entity, pack.Solution, out _, out var solution))
-                {
-                    iv.Comp.FillColor = solution.GetColor(_prototype);
-                    iv.Comp.FillPercentage = (int) (solution.Volume / solution.MaxVolume * 100);
-                    Dirty(iv);
-                    UpdateIVAppearance(iv);
-                    return;
-                }
-            }
+        if (!_containers.TryGetContainer(iv, iv.Comp.Slot, out var container))
+            return;
 
-            iv.Comp.FillColor = Color.White;
-            iv.Comp.FillPercentage = 0;
+        foreach (var entity in container.ContainedEntities)
+        {
+            if (!TryComp(entity, out BloodPackComponent? pack) ||
+                !_solutionContainer.TryGetSolution(entity, pack.Solution, out _, out var solution))
+                continue;
+
+            iv.Comp.FillColor = solution.GetColor(_prototype);
+            iv.Comp.FillPercentage = (int) (solution.Volume / solution.MaxVolume * 100);
             Dirty(iv);
             UpdateIVAppearance(iv);
+            return;
         }
+
+        iv.Comp.FillColor = Color.White;
+        iv.Comp.FillPercentage = 0;
+        Dirty(iv);
+        UpdateIVAppearance(iv);
     }
 
     protected virtual void UpdateIVAppearance(Entity<IVDripComponent> iv)
@@ -446,7 +451,11 @@ public abstract class SharedIVDripSystem : EntitySystem
         Dirty(pack);
     }
 
-    protected virtual void DoRip(DamageSpecifier? damage, EntityUid attached, EntityUid? user, ProtoId<EmotePrototype> ripEmote, bool predict)
+    protected virtual void DoRip(DamageSpecifier? damage,
+        EntityUid attached,
+        EntityUid? user,
+        ProtoId<EmotePrototype> ripEmote,
+        bool predict)
     {
         if (damage != null)
             _damageable.TryChangeDamage(attached, damage, true);
@@ -495,14 +504,14 @@ public abstract class SharedIVDripSystem : EntitySystem
         else
             _popup.PopupEntity(selfMessage, attached);
 
-        if (user != null)
-        {
-            var others = Filter.PvsExcept(user.Value);
-            _popup.PopupEntity(Loc.GetString("cm-iv-detach-others", ("iv", iv), ("user", user), ("target", attached)),
-                attached,
-                others,
-                true);
-        }
+        if (user == null)
+            return;
+
+        var others = Filter.PvsExcept(user.Value);
+        _popup.PopupEntity(Loc.GetString("cm-iv-detach-others", ("iv", iv), ("user", user), ("target", attached)),
+            attached,
+            others,
+            true);
     }
 
     public override void Update(float frameTime)

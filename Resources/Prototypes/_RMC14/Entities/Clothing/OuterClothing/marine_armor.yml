@@ -3,7 +3,7 @@
   parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing ]
   id: CMArmorM3Medium
   name: M3 pattern marine armor
-  description: A standard CM M3 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage.
+  description: A standard UNMC M3 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard.rsi
@@ -78,8 +78,8 @@
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
+    walkModifier: 0.727
+    sprintModifier: 0.727
   - type: CMHardArmor
   - type: FixedItemSizeStorage
   - type: IgnoreContentsSize
@@ -89,6 +89,8 @@
       - CMMagazineSmg
       - CMMagazineSniper
       - CMMagazinePistol
+  - type: RMCNameItemOnVend
+    item: Armor
 
 - type: entity
   parent: CMArmorM3Medium
@@ -118,8 +120,8 @@
     armor: 25
     explosionArmor: 35
   - type: ClothingSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
+    walkModifier: 0.68
+    sprintModifier: 0.68
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
@@ -148,7 +150,7 @@
 
 - type: entity
   parent: CMArmorM2MP
-  id: CMArmorM3G4
+  id: RMCArmorM3G4
   name: M3-G4 grenadier armor
   description: A custom set of M3 armor packed to the brim with padding, plating, and every form of ballistic protection under the sun. Used exclusively by Marine Grenadiers.
   components:
@@ -190,6 +192,9 @@
   - type: CMArmor
     armor: 15
     explosionArmor: 20
+  - type: ClothingSpeedModifier
+    walkModifier: .814
+    sprintModifier: .814
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots

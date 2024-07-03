@@ -298,188 +298,188 @@
           Quantity: 30
         maxVol: 50
 
-# SOUTO
+# BOBDA
 - type: entity
   parent: CMDrinkCanBase
-  id: CMDrinkCanSouto
-  name: souto can
+  id: CMDrinkCanBobda
+  name: bobda can
   description: Canned in Havana.
   abstract: true
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/classic.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/classic.rsi
   - type: Item
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/classic.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/classic.rsi
 
 - type: entity
-  parent: CMDrinkCanSouto
-  id: CMDrinkCanSoutoClassic
-  name: souto classic
+  parent: CMDrinkCanBobda
+  id: CMDrinkCanBobdaClassic
+  name: bobda classic
   description: The can boldly proclaims it to be tangerine flavored. You can't help but think that's a lie. Canned in Havana.
   components:
   - type: SolutionContainerManager
     solutions:
       drink:
         reagents:
-        - ReagentId: CMSodaSoutoClassic
+        - ReagentId: CMSodaBobdaClassic
           Quantity: 50
         maxVol: 50
 
 - type: entity
-  parent: CMDrinkCanSouto
-  id: CMDrinkCanSoutoCherry
-  name: cherry souto
+  parent: CMDrinkCanBobda
+  id: CMDrinkCanBobdaCherry
+  name: cherry bobda
   description: Now with more artificial flavors! Canned in Havana
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/cherry.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/cherry.rsi
   - type: Item
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/cherry.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/cherry.rsi
   - type: SolutionContainerManager
     solutions:
       drink:
         reagents:
-        - ReagentId: CMSodaSoutoCherry
+        - ReagentId: CMSodaBobdaCherry
           Quantity: 50
         maxVol: 50
 
 - type: entity
-  parent: CMDrinkCanSouto
-  id: CMDrinkCanSoutoLime
-  name: lime souto
+  parent: CMDrinkCanBobda
+  id: CMDrinkCanBobdaLime
+  name: lime bobda
   description: It's not bad. It's not good either, but it's not bad. Canned in Havana.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/lime.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/lime.rsi
   - type: Item
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/lime.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/lime.rsi
   - type: SolutionContainerManager
     solutions:
       drink:
         reagents:
-        - ReagentId: CMSodaSoutoLime
+        - ReagentId: CMSodaBobdaLime
           Quantity: 50
         maxVol: 50
 
 - type: entity
-  parent: CMDrinkCanSouto
-  id: CMDrinkCanSoutoGrape
-  name: grape souto
+  parent: CMDrinkCanBobda
+  id: CMDrinkCanBobdaGrape
+  name: grape bobda
   description: An old standby for soda flavors. This, however, tastes like grape flavored cough syrup. Canned in Havana.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/grape.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/grape.rsi
   - type: Item
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/grape.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/grape.rsi
   - type: SolutionContainerManager
     solutions:
       drink:
         reagents:
-        - ReagentId: CMSodaSoutoGrape
+        - ReagentId: CMSodaBobdaGrape
           Quantity: 50
         maxVol: 50
 
 - type: entity
-  parent: CMDrinkCanSouto
-  id: CMDrinkCanSoutoBlue
-  name: blue raspberry souto
+  parent: CMDrinkCanBobda
+  id: CMDrinkCanBobdaBlue
+  name: blue raspberry bobda
   description: It tastes like the color blue. Technology really is amazing. Canned in Havana.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/blueraspberry.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/blueraspberry.rsi
   - type: Item
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/blueraspberry.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/blueraspberry.rsi
   - type: SolutionContainerManager
     solutions:
       drink:
         reagents:
-        - ReagentId: CMSodaSoutoBlue
+        - ReagentId: CMSodaBobdaBlue
           Quantity: 50
         maxVol: 50
 
 - type: entity
-  parent: CMDrinkCanSouto
-  id: CMDrinkCanSoutoPeach
-  name: peach souto
+  parent: CMDrinkCanBobda
+  id: CMDrinkCanBobdaPeach
+  name: peach bobda
   description: On one hand, it tastes pretty good. On the other hand, you think you can hear a peach pit rattling on the inside. Canned in Havana.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/peach.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/peach.rsi
   - type: Item
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/peach.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/peach.rsi
   - type: SolutionContainerManager
     solutions:
       drink:
         reagents:
-        - ReagentId: CMSodaSoutoPeach
+        - ReagentId: CMSodaBobdaPeach
           Quantity: 50
         maxVol: 50
 
 - type: entity
-  parent: CMDrinkCanSouto
-  id: CMDrinkCanSoutoCranberry
-  name: cranberry souto
-  description: On closer inspection, the can reads, 'CRAMberry Souto.' What the Hell is a Cramberry? Canned in Havana.
+  parent: CMDrinkCanBobda
+  id: CMDrinkCanBobdaCranberry
+  name: cranberry bobda
+  description: On closer inspection, the can reads, 'CRAMberry Bobda.' What the Hell is a Cramberry? Canned in Havana.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/cranberry.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/cranberry.rsi
   - type: Item
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/cranberry.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/cranberry.rsi
   - type: SolutionContainerManager
     solutions:
       drink:
         reagents:
-        - ReagentId: CMSodaSoutoCranberry
+        - ReagentId: CMSodaBobdaCranberry
           Quantity: 50
         maxVol: 50
 
 - type: entity
-  parent: CMDrinkCanSouto
-  id: CMDrinkCanSoutoVanilla
-  name: vanilla souto
-  description: When most soft drinks say 'vanilla,' they really mean their classic flavor with a bit of vanilla added. NOT THE SOUTO CORPORATION, BABY! This bad boy is filled to the brim with 100% pure carbonated vanilla extract! It tastes terrible. Canned in Havana.
+  parent: CMDrinkCanBobda
+  id: CMDrinkCanBobdaVanilla
+  name: vanilla bobda
+  description: When most soft drinks say 'vanilla,' they really mean their classic flavor with a bit of vanilla added. NOT THE BOBDA CORPORATION, BABY! This bad boy is filled to the brim with 100% pure carbonated vanilla extract! It tastes terrible. Canned in Havana.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/vanilla.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/vanilla.rsi
   - type: Item
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/vanilla.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/vanilla.rsi
   - type: SolutionContainerManager
     solutions:
       drink:
         reagents:
-        - ReagentId: CMSodaSoutoVanilla
+        - ReagentId: CMSodaBobdaVanilla
           Quantity: 50
         maxVol: 50
 
 - type: entity
-  parent: CMDrinkCanSouto
-  id: CMDrinkCanSoutoPineapple
-  name: pineapple souto
+  parent: CMDrinkCanBobda
+  id: CMDrinkCanBobdaPineapple
+  name: pineapple bobda
   description: This tastes like battery acid with a full cup of sugar mixed in. Canned in Havana.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/pineapple.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/pineapple.rsi
   - type: Item
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/pineapple.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/pineapple.rsi
   - type: SolutionContainerManager
     solutions:
       drink:
         reagents:
-        - ReagentId: CMSodaSoutoPineapple
+        - ReagentId: CMSodaBobdaPineapple
           Quantity: 50
         maxVol: 50
 
-# DIET SOUTO
+# DIET BOBDA
 - type: entity
-  parent: CMDrinkCanSouto
-  id: CMDrinkCanSoutoDiet
-  name: diet souto
+  parent: CMDrinkCanBobda
+  id: CMDrinkCanBobdaDiet
+  name: diet bobda
   description: Now with 0% fruit juice! Canned in Havana
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/Diet/classic.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/classic.rsi
   - type: Item
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/Diet/classic.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/classic.rsi
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -489,164 +489,164 @@
         maxVol: 50
 
 - type: entity
-  parent: CMDrinkCanSoutoDiet
-  id: CMDrinkCanSoutoClassicDiet
-  name: diet souto classic
+  parent: CMDrinkCanBobdaDiet
+  id: CMDrinkCanBobdaClassicDiet
+  name: diet bobda classic
   description: Now with 0% fruit juice! Canned in Havana
   components:
   - type: SolutionContainerManager
     solutions:
       drink:
         reagents:
-        - ReagentId: CMSodaSoutoClassic
+        - ReagentId: CMSodaBobdaClassic
           Quantity: 25
         maxVol: 50
 
 - type: entity
-  parent: CMDrinkCanSoutoDiet
-  id: CMDrinkCanSoutoCherryDiet
-  name: diet cherry souto
+  parent: CMDrinkCanBobdaDiet
+  id: CMDrinkCanBobdaCherryDiet
+  name: diet cherry bobda
   description: It's neither diet nor cherry flavored. Canned in Havana.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/Diet/cherry.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/cherry.rsi
   - type: Item
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/Diet/cherry.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/cherry.rsi
   - type: SolutionContainerManager
     solutions:
       drink:
         reagents:
-        - ReagentId: CMSodaSoutoCherry
+        - ReagentId: CMSodaBobdaCherry
           Quantity: 25
         maxVol: 50
 
 - type: entity
-  parent: CMDrinkCanSoutoDiet
-  id: CMDrinkCanSoutoLimeDiet
-  name: diet lime souto
+  parent: CMDrinkCanBobdaDiet
+  id: CMDrinkCanBobdaLimeDiet
+  name: diet lime bobda
   description: Ten kinds of acid, two cups of fake sugar, almost a full tank of carbon dioxide, and about 210 kPa all crammed into an aluminum can. What's not to love? Canned in Havana.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/Diet/lime.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/lime.rsi
   - type: Item
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/Diet/lime.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/lime.rsi
   - type: SolutionContainerManager
     solutions:
       drink:
         reagents:
-        - ReagentId: CMSodaSoutoLime
+        - ReagentId: CMSodaBobdaLime
           Quantity: 25
         maxVol: 50
 
 - type: entity
-  parent: CMDrinkCanSoutoDiet
-  id: CMDrinkCanSoutoGrapeDiet
-  name: diet grape souto
+  parent: CMDrinkCanBobdaDiet
+  id: CMDrinkCanBobdaGrapeDiet
+  name: diet grape bobda
   description: You're fairly certain that this is just grape cough syrup and carbonated water. Canned in Havana.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/Diet/grape.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/grape.rsi
   - type: Item
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/Diet/grape.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/grape.rsi
   - type: SolutionContainerManager
     solutions:
       drink:
         reagents:
-        - ReagentId: CMSodaSoutoGrape
+        - ReagentId: CMSodaBobdaGrape
           Quantity: 25
         maxVol: 50
 
 - type: entity
-  parent: CMDrinkCanSoutoDiet
-  id: CMDrinkCanSoutoBlueDiet
-  name: diet blue raspberry souto
+  parent: CMDrinkCanBobdaDiet
+  id: CMDrinkCanBobdaBlueDiet
+  name: diet blue raspberry bobda
   description: WHAT A SCAM! It doesn't even taste like blue! At best, it tastes like cyan. Canned in Havana.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/Diet/blueraspberry.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/blueraspberry.rsi
   - type: Item
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/Diet/blueraspberry.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/blueraspberry.rsi
   - type: SolutionContainerManager
     solutions:
       drink:
         reagents:
-        - ReagentId: CMSodaSoutoBlue
+        - ReagentId: CMSodaBobdaBlue
           Quantity: 25
         maxVol: 50
 
 - type: entity
-  parent: CMDrinkCanSoutoDiet
-  id: CMDrinkCanSoutoPeachDiet
-  name: diet peach souto
+  parent: CMDrinkCanBobdaDiet
+  id: CMDrinkCanBobdaPeachDiet
+  name: diet peach bobda
   description: On one hand, it tastes pretty good. On the other hand, you think you can hear half of a peach pit rattling on the inside. Canned in Havana.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/Diet/peach.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/peach.rsi
   - type: Item
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/Diet/peach.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/peach.rsi
   - type: SolutionContainerManager
     solutions:
       drink:
         reagents:
-        - ReagentId: CMSodaSoutoPeach
+        - ReagentId: CMSodaBobdaPeach
           Quantity: 25
         maxVol: 50
 
 - type: entity
-  parent: CMDrinkCanSoutoDiet
-  id: CMDrinkCanSoutoCranberryDiet
-  name: diet cranberry souto
+  parent: CMDrinkCanBobdaDiet
+  id: CMDrinkCanBobdaCranberryDiet
+  name: diet cranberry bobda
   description: This tastes more like prunes than cranberries. It's not bad; it's just wrong. Canned in Havana.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/Diet/cranberry.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/cranberry.rsi
   - type: Item
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/Diet/cranberry.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/cranberry.rsi
   - type: SolutionContainerManager
     solutions:
       drink:
         reagents:
-        - ReagentId: CMSodaSoutoCranberry
+        - ReagentId: CMSodaBobdaCranberry
           Quantity: 25
         - ReagentId: Water
           Quantity: 25
         maxVol: 50
 
 - type: entity
-  parent: CMDrinkCanSoutoDiet
-  id: CMDrinkCanSoutoVanillaDiet
-  name: diet vanilla souto
+  parent: CMDrinkCanBobdaDiet
+  id: CMDrinkCanBobdaVanillaDiet
+  name: diet vanilla bobda
   description: This is a can of watery bitter vanilla extract. You can't possibly imagine who would greenlight such a concept. Canned in Havana.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/Diet/vanilla.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/vanilla.rsi
   - type: Item
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/Diet/vanilla.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/vanilla.rsi
   - type: SolutionContainerManager
     solutions:
       drink:
         reagents:
-        - ReagentId: CMSodaSoutoVanilla
+        - ReagentId: CMSodaBobdaVanilla
           Quantity: 25
         - ReagentId: Water
           Quantity: 25
         maxVol: 50
 
 - type: entity
-  parent: CMDrinkCanSoutoDiet
-  id: CMDrinkCanSoutoPineappleDiet
-  name: diet pineapple souto
+  parent: CMDrinkCanBobdaDiet
+  id: CMDrinkCanBobdaPineappleDiet
+  name: diet pineapple bobda
   description: This tastes like battery acid with a half cup of sugar mixed in. Canned in Havana.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/Diet/pineapple.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/pineapple.rsi
   - type: Item
-    sprite: _RMC14/Objects/Consumable/Drinks/Souto/Diet/pineapple.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/pineapple.rsi
   - type: SolutionContainerManager
     solutions:
       drink:
         reagents:
-        - ReagentId: CMSodaSoutoPineapple
+        - ReagentId: CMSodaBobdaPineapple
           Quantity: 25
         - ReagentId: Water
           Quantity: 25

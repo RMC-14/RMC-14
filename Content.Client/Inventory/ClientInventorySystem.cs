@@ -1,8 +1,6 @@
-using System.Diagnostics.CodeAnalysis;
 using Content.Client.Clothing;
 using Content.Client.Examine;
 using Content.Client.Verbs.UI;
-using Content.Shared._RMC14.Webbing;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
@@ -87,7 +85,7 @@ namespace Content.Client.Inventory
             if (args.Equipee != _playerManager.LocalEntity)
                 return;
             var update = new SlotSpriteUpdate(args.Equipment, args.SlotGroup, args.Slot,
-                HasInventory(args.Equipment, out _));
+                HasComp<StorageComponent>(args.Equipment));
             OnSpriteUpdate?.Invoke(update);
         }
 
@@ -235,25 +233,6 @@ namespace Content.Client.Inventory
                 return;
 
             EntityManager.RaisePredictiveEvent(new InteractInventorySlotEvent(GetNetEntity(item.Value), altInteract: true));
-        }
-
-        public bool HasInventory([NotNullWhen(true)] EntityUid? id, out Entity<StorageComponent> storage)
-        {
-            if (TryComp(id, out StorageComponent? storageComp))
-            {
-                storage = (id.Value, storageComp);
-                return true;
-            }
-
-            if (TryComp(id, out WebbingClothingComponent? clothing) &&
-                TryComp(clothing.Webbing, out storageComp))
-            {
-                storage = (clothing.Webbing.Value, storageComp);
-                return true;
-            }
-
-            storage = default;
-            return false;
         }
 
         public sealed class SlotData
