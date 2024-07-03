@@ -2,12 +2,14 @@
 using Content.Shared.Database;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
+using Robust.Shared.Network;
 
 namespace Content.Shared.Construction.EntitySystems;
 
 public sealed class ConstructionInteractionVerbSystem : EntitySystem
 {
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
     {
@@ -34,10 +36,10 @@ public sealed class ConstructionInteractionVerbSystem : EntitySystem
                 var ev = new ConstructionInteractionEvent(user);
                 RaiseLocalEvent(ent, ev);
 
-                if (ev.Handled)
+                if (_net.IsClient || ev.Handled)
                     return;
 
-                _popup.PopupClient(Loc.GetString(ent.Comp.VerbFailedText, ("entityName", ent.Owner)), user);
+                _popup.PopupEntity(Loc.GetString(ent.Comp.VerbFailedText, ("entityName", ent.Owner)), ent, user);
             },
         };
 
