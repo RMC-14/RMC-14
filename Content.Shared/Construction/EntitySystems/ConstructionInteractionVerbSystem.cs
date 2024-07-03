@@ -1,11 +1,11 @@
-﻿using Content.Shared.Construction;
+﻿using Content.Shared.Construction.Components;
 using Content.Shared.Database;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 
-namespace Content.Shared._RMC14.Construction;
+namespace Content.Shared.Construction.EntitySystems;
 
-public sealed class RMCDeconstructSystem : EntitySystem
+public sealed class ConstructionInteractionVerbSystem : EntitySystem
 {
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
@@ -13,10 +13,10 @@ public sealed class RMCDeconstructSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RMCDeconstructComponent, GetVerbsEvent<Verb>>(OnGetVerbs);
+        SubscribeLocalEvent<ConstructionInteractionVerbComponent, GetVerbsEvent<Verb>>(OnGetVerbs);
     }
 
-    private void OnGetVerbs(Entity<RMCDeconstructComponent> ent, ref GetVerbsEvent<Verb> args)
+    private void OnGetVerbs(Entity<ConstructionInteractionVerbComponent> ent, ref GetVerbsEvent<Verb> args)
     {
         if (!args.CanAccess || !args.CanInteract || args.Hands == null)
             return;
@@ -26,7 +26,7 @@ public sealed class RMCDeconstructSystem : EntitySystem
         var v = new Verb
         {
             Priority = 1,
-            Text = Loc.GetString(ent.Comp.VerbText ?? "rmc-deconstruct-verb"),
+            Text = Loc.GetString(ent.Comp.VerbText),
             Impact = LogImpact.Low,
             DoContactInteraction = true,
             Act = () =>
@@ -37,10 +37,7 @@ public sealed class RMCDeconstructSystem : EntitySystem
                 if (ev.Handled)
                     return;
 
-                _popup.PopupClient(
-                    Loc.GetString(ent.Comp.VerbFailedText ?? "rmc-deconstruct-verb-failed",
-                        ("entityName", ent.Owner)),
-                    user);
+                _popup.PopupClient(Loc.GetString(ent.Comp.VerbFailedText, ("entityName", ent.Owner)), user);
             },
         };
 

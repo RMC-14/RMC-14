@@ -33,8 +33,8 @@
           High: { state: magaz_reg_3, visible: true }
           Full: { state: magaz_reg, visible: true }
   - type: RMCDeconstruct
-    verbText: rmc-deconstruct-verb-fold
-    verbFailedText: rmc-deconstruct-verb-fold-failed
+    verbText: rmc-construction-verb-fold
+    verbFailedText: rmc-construction-verb-fold-failed
 
 - type: entity
   abstract: true
