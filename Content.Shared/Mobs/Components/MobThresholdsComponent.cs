@@ -17,6 +17,12 @@ public sealed partial class MobThresholdsComponent : Component
     [DataField("triggersAlerts")]
     public bool TriggersAlerts = true;
 
+    [DataField("canStunOnExplosion")]
+    /// <summary>
+    /// If the mob can be thrown or stunned on explosions. 
+    /// </summary>
+    public bool CanStunOnExplosion = true;
+
     [DataField("currentThresholdState")]
     public MobState CurrentThresholdState;
 

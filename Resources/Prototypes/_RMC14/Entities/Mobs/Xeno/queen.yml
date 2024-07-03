@@ -19,6 +19,7 @@
     - Critical
     - Dead
   - type: MobThresholds
+    canStunOnExplosion: false
     thresholds:
       0: Alive
       500: Critical

@@ -468,11 +468,16 @@ public sealed partial class ExplosionSystem
         {
             var pos = _transformSystem.GetWorldPosition(xform);
             var adjustedThrowForce = throwForce;
-            if (HasComp<MobStateComponent>(uid))
+
+            if (TryComp<MobThresholdsComponent>(uid, out var thresholdComp))
             {
+                if (!thresholdComp.CanStunOnExplosion)
+                    return;
+
                 adjustedThrowForce /= 5;
                 _stun.TryKnockdown(uid, TimeSpan.FromSeconds(1), true);
             }
+            
             _throwingSystem.TryThrow(
                 uid,
                  pos - epicenter.Position,
