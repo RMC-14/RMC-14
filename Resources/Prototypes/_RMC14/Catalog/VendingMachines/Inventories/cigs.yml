@@ -1,8 +1,8 @@
 - type: vendingMachineInventory
   id: CMVendorCigs
   startingInventory:
-    CigPackBlack: 50 #TODO RMC14 lucky sloths
-    CigarCase: 20 #TODO RMC14 tarbacktube
-    Matchbox: 15
+    CMCigPackBlack: 50 #TODO RMC14 lucky sloths
+    CMCigarCase: 20 #TODO RMC14 tarbacktube
+    CMMatchbox: 15
     Lighter: 25
     #TODO RMC14 Zippo 10
