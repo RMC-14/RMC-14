@@ -292,18 +292,21 @@
     - to: start
       steps:
       - interaction:
+        doAfter: 1
   - node: CMBoxMagazineRifleM54CAPEmpty
     entity: CMBoxMagazineRifleM54CAPEmpty
     edges:
     - to: start
       steps:
       - interaction:
+        doAfter: 1
   - node: CMBoxMagazineRifleM54CExtEmpty
     entity: CMBoxMagazineRifleM54CExtEmpty
     edges:
     - to: start
       steps:
       - interaction:
+        doAfter: 1
 
   # M63
   - node: CMBoxMagazineSMGM63Empty
@@ -312,18 +315,21 @@
     - to: start
       steps:
       - interaction:
+        doAfter: 1
   - node: CMBoxMagazineSMGM63APEmpty
     entity: CMBoxMagazineSMGM63APEmpty
     edges:
     - to: start
       steps:
       - interaction:
+        doAfter: 1
   - node: CMBoxMagazineSMGM63ExtEmpty
     entity: CMBoxMagazineSMGM63ExtEmpty
     edges:
     - to: start
       steps:
       - interaction:
+        doAfter: 1
 
   # M4SPR
   - node: CMBoxMagazineRifleM4SPREmpty
@@ -332,18 +338,21 @@
     - to: start
       steps:
       - interaction:
+        doAfter: 1
   - node: CMBoxMagazineRifleM4SPRAPEmpty
     entity: CMBoxMagazineRifleM4SPRAPEmpty
     edges:
     - to: start
       steps:
       - interaction:
+        doAfter: 1
   - node: CMBoxMagazineRifleM4SPRExtEmpty
     entity: CMBoxMagazineRifleM4SPRExtEmpty
     edges:
     - to: start
       steps:
       - interaction:
+        doAfter: 1
 
   # M1984
   - node: CMBoxMagazinePistolM1984Empty
@@ -352,6 +361,7 @@
     - to: start
       steps:
       - interaction:
+        doAfter: 1
 #  - node: CMBoxMagazinePistolM1984APEmpty
 #    entity: CMBoxMagazinePistolM1984APEmpty
 
@@ -362,6 +372,7 @@
     - to: start
       steps:
       - interaction:
+        doAfter: 1
 
   # MK80
   - node: CMBoxMagazinePistolMK80Empty
@@ -370,3 +381,4 @@
     - to: start
       steps:
       - interaction:
+        doAfter: 1
