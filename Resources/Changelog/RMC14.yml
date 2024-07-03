@@ -2069,5 +2069,12 @@
   id: 253
   time: '2024-07-03T11:59:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2763
+- author: Whisper
+  changes:
+  - message: Crafted magazine boxes can now hold magazines
+    type: Fix
+  id: 254
+  time: '2024-07-03T12:01:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2787
 Name: RMC14
 Order: -1
