@@ -43,7 +43,7 @@ namespace Content.Client.Info
 
         private void PopulateTutorial(Info tutorialList)
         {
-            AddSection(tutorialList, Loc.GetString("ui-info-header-intro"), "Intro.txt");
+            //AddSection(tutorialList, Loc.GetString("ui-info-header-intro"), "Intro.txt");
             var infoControlSection = new InfoControlsSection();
             tutorialList.InfoContainer.AddChild(infoControlSection);
             AddSection(tutorialList, Loc.GetString("ui-info-header-gameplay"), "Gameplay.txt", true);
