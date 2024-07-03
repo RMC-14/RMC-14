@@ -340,8 +340,6 @@
       #  amount: 4
       #- id: Shotgun Shell Box (16g) (Breaching x 120)
       #  amount: 1
-#It SHOULD have ammo boxes, but it converts magazines it has into them when vending and i am too smooth brained to code
-
 
  #ATTACHMENTS VENDOR
  
