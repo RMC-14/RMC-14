@@ -2107,5 +2107,49 @@
   id: 258
   time: '2024-07-04T01:52:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2801
+- author: DrSmugleaf
+  changes:
+  - message: Explosion and screech shockwave effects no longer temporarily reset your
+      camera to the default rotation.
+    type: Fix
+  id: 259
+  time: '2024-07-04T04:44:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2807
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenonids being able to devolve if damaged. Xenonids now must be
+      on full health before devolving.
+    type: Fix
+  id: 260
+  time: '2024-07-04T04:44:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2805
+- author: DrSmugleaf
+  changes:
+  - message: Added 5 empty blood packs to the MM blood dispenser.
+    type: Add
+  - message: Fixed the Hospital Corpsman not having medical access.
+    type: Fix
+  - message: The MM blood dispenser now uses the fancy vendor UI, and no longer has
+      a delay to vending blood packs.
+    type: Tweak
+  id: 261
+  time: '2024-07-04T04:45:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2804
+- author: DrSmugleaf
+  changes:
+  - message: Fixed intercoms having no power.
+    type: Fix
+  id: 262
+  time: '2024-07-04T04:45:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2808
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Immature Queens being able to use Screech. Any Queen, including
+      newly-evolved ones, must wait until they are mature (10 minutes) before being
+      able to use it.
+    type: Fix
+  id: 263
+  time: '2024-07-04T04:43:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2806
 Name: RMC14
 Order: -1
