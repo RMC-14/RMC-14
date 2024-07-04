@@ -9,7 +9,7 @@ public abstract class GunAPStacksSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<GunAPStacksModifierComponent, AmmoShotEvent>(OnGunShot);
-        SubscribeLocalEvent<GunAPStacksModifierComponent, BulletHitEvent>(ChangeStack);
+        SubscribeLocalEvent<GunAPStacksModifierComponent, EmbedEvent>(ChangeStack);
     }
     private void OnGunShot()
     {
