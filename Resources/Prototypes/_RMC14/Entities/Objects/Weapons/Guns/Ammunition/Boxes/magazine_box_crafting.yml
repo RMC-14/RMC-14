@@ -294,7 +294,6 @@
       - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
-        doAfter: 1
   - node: CMBoxMagazineRifleM54CAPEmpty
     entity: CMBoxMagazineRifleM54CAPEmpty
     edges:
@@ -303,7 +302,6 @@
       - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
-        doAfter: 1
   - node: CMBoxMagazineRifleM54CExtEmpty
     entity: CMBoxMagazineRifleM54CExtEmpty
     edges:
@@ -312,7 +310,6 @@
       - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
-        doAfter: 1
 
   # M63
   - node: CMBoxMagazineSMGM63Empty
@@ -323,7 +320,6 @@
       - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
-        doAfter: 1
   - node: CMBoxMagazineSMGM63APEmpty
     entity: CMBoxMagazineSMGM63APEmpty
     edges:
@@ -332,7 +328,6 @@
       - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
-        doAfter: 1
   - node: CMBoxMagazineSMGM63ExtEmpty
     entity: CMBoxMagazineSMGM63ExtEmpty
     edges:
@@ -341,7 +336,6 @@
       - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
-        doAfter: 1
 
   # M4SPR
   - node: CMBoxMagazineRifleM4SPREmpty
@@ -352,7 +346,6 @@
       - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
-        doAfter: 1
   - node: CMBoxMagazineRifleM4SPRAPEmpty
     entity: CMBoxMagazineRifleM4SPRAPEmpty
     edges:
@@ -361,7 +354,6 @@
       - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
-        doAfter: 1
   - node: CMBoxMagazineRifleM4SPRExtEmpty
     entity: CMBoxMagazineRifleM4SPRExtEmpty
     edges:
@@ -370,7 +362,6 @@
       - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
-        doAfter: 1
 
   # M1984
   - node: CMBoxMagazinePistolM1984Empty
@@ -381,7 +372,6 @@
       - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
-        doAfter: 1
 #  - node: CMBoxMagazinePistolM1984APEmpty
 #    entity: CMBoxMagazinePistolM1984APEmpty
 
@@ -394,7 +384,6 @@
       - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
-        doAfter: 1
 
   # MK80
   - node: CMBoxMagazinePistolMK80Empty
@@ -405,4 +394,3 @@
       - !type:RMCItemSlotsEmpty
       steps:
       - interaction:
-        doAfter: 1
