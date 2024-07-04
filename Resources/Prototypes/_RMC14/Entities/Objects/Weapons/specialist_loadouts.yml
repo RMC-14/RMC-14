@@ -37,9 +37,9 @@
     - id: CMArmorHelmetM45
     - id: CMGlassesM42ScoutSight
     - id: CMMagazineSniperM96S
-    - id: CMMagazineSniperM96SIncendiary
-    - id: CMMagazineSniperM96SIncendiary
-    - id: CMMagazineSniperM96SFlak
+    - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SIncendiary
+    - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SIncendiary
+    - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
     - id: CMBackpackSniper
     - id: CMWeaponPistolMK80
     - id: CMMagazinePistolMK80
