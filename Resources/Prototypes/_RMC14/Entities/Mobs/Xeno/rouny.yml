@@ -3,7 +3,7 @@
   - CMXenoRunner
   id: RMCXenoRouny
   name: Rouny
-  suffix: xenoid version
+  suffix: RMC14
   description: thas a fuckin rouny
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Rouny.rsi
