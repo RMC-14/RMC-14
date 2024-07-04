@@ -2085,5 +2085,27 @@
   id: 255
   time: '2024-07-04T01:51:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2802
+- author: Whisper
+  changes:
+  - message: Added Dagobert Dogburglar figurine.
+    type: Add
+  id: 256
+  time: '2024-07-04T01:52:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2800
+- author: UnicornOnLSD
+  changes:
+  - message: Entrenching tools are now worthy of being in tools belts.
+    type: Add
+  id: 257
+  time: '2024-07-04T01:53:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2797
+- author: ShadowCommander
+  changes:
+  - message: Players can now use melee attacks and shoves while dragging an entity
+      in their active hand.
+    type: Tweak
+  id: 258
+  time: '2024-07-04T01:52:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2801
 Name: RMC14
 Order: -1
