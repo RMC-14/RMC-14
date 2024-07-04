@@ -11,14 +11,32 @@ public abstract class GunAPStacksSystem : EntitySystem
         SubscribeLocalEvent<GunAPStacksModifierComponent, AmmoShotEvent>(OnGunShot);
         SubscribeLocalEvent<GunAPStacksModifierComponent, ProjectileEmbedEvent>(ChangeStack);
     }
-    private void OnGunShot()
+    private void OnGunShot(Entity<GunAPStacksModifierComponent> ent)
     {
         //Apply AP to the bullet
+        ent.Comp.AP = ent.Comp.Stacks * 10;
+        if(ent.Comp.AP > 50)
+        {
+            ent.Comp.AP = 50;
+        }
+        
         
     }
-    private void ChangeStack(EntityUid? shooter, EntityUid weapon, EntityUid target)
+    private void ChangeStack(Entity<GunAPStacksModifierComponent> ent, EntityUid? shooter, EntityUid weapon, EntityUid target)
     {
         //If xenoid hit increase stack
+        if(ent.Comp.Stacks > 5)
+        {
+            ent.Comp.Stacks = 5;
+        }
+        else
+        {
+            ent.Comp.Stacks++;
+        }
         //if anything else decrease stack
+        if(ent.Comp.Stacks != 0)
+        {
+            ent.Comp.Stacks--;
+        }
     }
 }
