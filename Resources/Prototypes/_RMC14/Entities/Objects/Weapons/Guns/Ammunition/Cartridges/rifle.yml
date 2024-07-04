@@ -50,5 +50,5 @@
     - Cartridge
     - CMCartridgeRifle458SOCOM
   - type: CartridgeAmmo
-    proto: BulletRifle10x24mmAP
+    proto: BulletRifle458SOCOM
 
