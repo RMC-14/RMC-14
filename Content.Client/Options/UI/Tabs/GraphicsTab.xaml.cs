@@ -75,7 +75,7 @@ public sealed partial class GraphicsTab : Control
         ViewportScaleSlider.Visible = !ViewportStretchCheckBox.Pressed;
         IntegerScalingCheckBox.Visible = ViewportStretchCheckBox.Pressed;
         ViewportVerticalFitCheckBox.Visible = ViewportStretchCheckBox.Pressed;
-        ViewportWidthSlider.Visible = !ViewportStretchCheckBox.Pressed || !ViewportVerticalFitCheckBox.Pressed;
+        ViewportWidthSlider.Visible = false;// !ViewportStretchCheckBox.Pressed || !ViewportVerticalFitCheckBox.Pressed;
     }
 
     private void UpdateViewportWidthRange()
