@@ -203,6 +203,35 @@
     - CMMagazineRifle
     - CMMagazineRifleM4SPRExt
 
+#XM88 "Magazine" its handfuls
+  - type: entity
+  parent: CMMagazineRifleBase
+  id: CMMagazineRifleXM88
+  name: "Handful of .458 Rounds"
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - CMMagazineRifleXM88
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeRifle458
+    proto: CMCartridgeRifle458
+    capacity: 9
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/XM88.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+- type: Tag
+  id: CMMagazineRifleM54CAP
+
 - type: Tag
   id: CMMagazineRifle
 
@@ -214,3 +243,6 @@
 
 - type: Tag
   id: CMMagazineRifleM4SPR
+
+- type: Tag
+  id: CMMagazineRifleXM88
