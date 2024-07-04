@@ -1,0 +1,564 @@
+- type: entity
+  abstract: true
+  parent: CMBaseWallInvincible
+  id: RMCBaseERTShuttleWall
+  name: shuttle wall
+  components:
+  - type: Corrodible
+    isCorrodible: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/ert_shuttle.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Dropships/ert_shuttle.rsi
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleEngineLeft1
+  name: engine
+  suffix: Left
+  components:
+  - type: Sprite
+    state: leftengine_1
+  - type: Icon
+    state: leftengine_1
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleEngineLeft2
+  name: engine
+  suffix: Left
+  components:
+  - type: Sprite
+    state: leftengine_2
+  - type: Icon
+    state: leftengine_2
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleEngineLeft3
+  name: engine
+  suffix: Left
+  components:
+  - type: Sprite
+    state: leftengine_3
+  - type: Icon
+    state: leftengine_3
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleEngineRight1
+  name: engine
+  suffix: Right
+  components:
+  - type: Sprite
+    state: rightengine_1
+  - type: Icon
+    state: rightengine_1
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleEngineRight2
+  name: engine
+  suffix: Right
+  components:
+  - type: Sprite
+    state: rightengine_2
+  - type: Icon
+    state: rightengine_2
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleEngineRight3
+  name: engine
+  suffix: Right
+  components:
+  - type: Sprite
+    state: rightengine_3
+  - type: Icon
+    state: rightengine_3
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandardEngineLeft
+  suffix: Left
+  components:
+  - type: Sprite
+    state: stan_leftengine
+  - type: Icon
+    state: stan_leftengine
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandardEngineRight
+  suffix: Right
+  components:
+  - type: Sprite
+    state: stan_rightengine
+  - type: Icon
+    state: stan_rightengine
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard1
+  suffix: 1
+  components:
+  - type: Sprite
+    state: stan_black_t_down
+  - type: Icon
+    state: stan_black_t_down
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard2
+  suffix: 2
+  components:
+  - type: Sprite
+    state: stan_black_t_up
+  - type: Icon
+    state: stan_black_t_up
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard3
+  suffix: 3
+  components:
+  - type: Sprite
+    state: stan_inner_dark
+  - type: Icon
+    state: stan_inner_dark
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard4
+  suffix: 4
+  components:
+  - type: Sprite
+    state: stan_inner_s_w
+  - type: Icon
+    state: stan_inner_s_w
+ 
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard5
+  suffix: 5
+  components:
+  - type: Sprite
+    state: stan_inner_t_left
+  - type: Icon
+    state: stan_inner_t_left
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard6
+  suffix: 6
+  components:
+  - type: Sprite
+    state: stan_inner_t_right
+  - type: Icon
+    state: stan_inner_t_right
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard7
+  suffix: 7
+  components:
+  - type: Sprite
+    state: stan_inner_w_1
+  - type: Icon
+    state: stan_inner_w_1
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard8
+  suffix: 8
+  components:
+  - type: Sprite
+    state: stan_inner_w_2
+  - type: Icon
+    state: stan_inner_w_2
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard9
+  suffix: 9
+  components:
+  - type: Sprite
+    state: stan_l_w
+  - type: Icon
+    state: stan_l_w
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard10
+  suffix: 10
+  components:
+  - type: Sprite
+    state: stan_r_w
+  - type: Icon
+    state: stan_r_w
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard11
+  suffix: 11
+  components:
+  - type: Sprite
+    state: stan_white_t_up
+  - type: Icon
+    state: stan_white_t_up
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard12
+  suffix: 12
+  components:
+  - type: Sprite
+    state: stan1
+  - type: Icon
+    state: stan1
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard13
+  suffix: 13
+  components:
+  - type: Sprite
+    state: stan2
+  - type: Icon
+    state: stan2
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard14
+  suffix: 14
+  components:
+  - type: Sprite
+    state: stan3
+  - type: Icon
+    state: stan3
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard15
+  suffix: 15
+  components:
+  - type: Sprite
+    state: stan4
+  - type: Icon
+    state: stan4
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard16
+  suffix: 16
+  components:
+  - type: Sprite
+    state: stan5
+  - type: Icon
+    state: stan5
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard17
+  suffix: 17
+  components:
+  - type: Sprite
+    state: stan8
+  - type: Icon
+    state: stan8
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard18
+  suffix: 18
+  components:
+  - type: Sprite
+    state: stan9
+  - type: Icon
+    state: stan9
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard19
+  suffix: 19
+  components:
+  - type: Sprite
+    state: stan20
+  - type: Icon
+    state: stan20
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard20
+  suffix: 20
+  components:
+  - type: Sprite
+    state: stan21
+  - type: Icon
+    state: stan21
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard21
+  suffix: 21
+  components:
+  - type: Sprite
+    state: stan22
+  - type: Icon
+    state: stan22
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard22
+  suffix: 22
+  components:
+  - type: Sprite
+    state: stan23
+  - type: Icon
+    state: stan23
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard23
+  suffix: 23
+  components:
+  - type: Sprite
+    state: stan25
+  - type: Icon
+    state: stan25
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard24
+  suffix: 24
+  components:
+  - type: Sprite
+    state: stan27
+  - type: Icon
+    state: stan27
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallWhiteEngineLeft
+  suffix: Left
+  components:
+  - type: Sprite
+    state: wy_leftengine
+  - type: Icon
+    state: wy_leftengine
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallWhiteEngineRight
+  suffix: Right
+  components:
+  - type: Sprite
+    state: wy_rightengine
+  - type: Icon
+    state: wy_rightengine
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallWhite1
+  suffix: 1
+  components:
+  - type: Sprite
+    state: wy1
+  - type: Icon
+    state: wy1
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallWhite2
+  suffix: 2
+  components:
+  - type: Sprite
+    state: wy2
+  - type: Icon
+    state: wy2
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallWhite3
+  suffix: 3
+  components:
+  - type: Sprite
+    state: wy3
+  - type: Icon
+    state: wy3
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallWhite4
+  suffix: 4
+  components:
+  - type: Sprite
+    state: wy4
+  - type: Icon
+    state: wy4
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallWhite5
+  suffix: 5
+  components:
+  - type: Sprite
+    state: wy5
+  - type: Icon
+    state: wy5
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallWhite6
+  suffix: 6
+  components:
+  - type: Sprite
+    state: wy8
+  - type: Icon
+    state: wy8
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallWhite7
+  suffix: 7
+  components:
+  - type: Sprite
+    state: wy9
+  - type: Icon
+    state: wy9
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallWhite8
+  suffix: 8
+  components:
+  - type: Sprite
+    state: wy12
+  - type: Icon
+    state: wy12
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallWhite9
+  suffix: 9
+  components:
+  - type: Sprite
+    state: wy13
+  - type: Icon
+    state: wy13
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallWhite10
+  suffix: 10
+  components:
+  - type: Sprite
+    state: wy14
+  - type: Icon
+    state: wy14
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallWhite11
+  suffix: 11
+  components:
+  - type: Sprite
+    state: wy15
+  - type: Icon
+    state: wy15
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallWhite12
+  suffix: 12
+  components:
+  - type: Sprite
+    state: wy16
+  - type: Icon
+    state: wy16
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallWhite13
+  suffix: 13
+  components:
+  - type: Sprite
+    state: wy17
+  - type: Icon
+    state: wy17
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallWhite14
+  suffix: 14
+  components:
+  - type: Sprite
+    state: wy20
+  - type: Icon
+    state: wy20
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallWhite15
+  suffix: 15
+  components:
+  - type: Sprite
+    state: wy21
+  - type: Icon
+    state: wy21
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallWhite16
+  suffix: 16
+  components:
+  - type: Sprite
+    state: wy22
+  - type: Icon
+    state: wy22
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallWhite17
+  suffix: 17
+  components:
+  - type: Sprite
+    state: wy23
+  - type: Icon
+    state: wy23
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallWhite18
+  suffix: 18
+  components:
+  - type: Sprite
+    state: wy25
+  - type: Icon
+    state: wy25
+
+- type: entity
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallWhite19
+  suffix: 19
+  components:
+  - type: Sprite
+    state: wy27
+  - type: Icon
+    state: wy27
+  - type: Occluder
+    enabled: false
