@@ -11,5 +11,5 @@ public sealed partial class GunAPStacksModifierComponent : Component
     public byte Stacks = 0;
 
     [DataField, AutoNetworkedField]
-    public byte ModifiedStacks = 0;
+    public byte ModifiedStacks;
 }
