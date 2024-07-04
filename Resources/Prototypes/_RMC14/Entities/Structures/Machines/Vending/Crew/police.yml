@@ -12,7 +12,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
-    job: CMMilitaryPolice
+    jobs:
+    - CMMilitaryPolice
     sections:
     - name: Police Set (Mandatory)
       entries:
@@ -83,7 +84,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
-    job: CMMilitaryPolice
+    jobs:
+    - CMMilitaryPolice
     sections:
     - name: Police Set (Mandatory)
       entries:
