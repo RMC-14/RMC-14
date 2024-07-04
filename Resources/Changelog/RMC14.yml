@@ -2195,5 +2195,13 @@
   id: 269
   time: '2024-07-04T11:43:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2815
+- author: Whisper
+  changes:
+  - message: Sniper specialists will only spawn with regular mags temporarily, as
+      the status effects for the others are not implemented.
+    type: Tweak
+  id: 270
+  time: '2024-07-04T11:46:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2816
 Name: RMC14
 Order: -1
