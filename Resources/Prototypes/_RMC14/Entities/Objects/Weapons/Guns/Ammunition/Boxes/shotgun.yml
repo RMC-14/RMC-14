@@ -103,3 +103,18 @@
     - state: incendiarybuck_e
     - state: incendiarybuck
       map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+      
+- type: entity
+  parent: CMBoxShotgunBase
+  id: CMBoxRifleXM88
+  name: .458 SOCOM Rounds
+  description: A box filled with handfuls of .458 SOCOM rounds, designed for use with the XM88 heavy rifle. 
+  components:
+  - type: BallisticAmmoProvider
+    proto: CMMagazineRifleXM88
+    capacity: 60
+  - type: Sprite
+    layers:
+    - state: buckshot_e #FIXME
+    - state: buckshot   #FIXME
+      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
