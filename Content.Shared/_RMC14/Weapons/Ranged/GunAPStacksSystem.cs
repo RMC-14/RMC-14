@@ -14,8 +14,9 @@ public abstract class GunAPStacksSystem : EntitySystem
     private void OnGunShot()
     {
         //Apply AP to the bullet
+        
     }
-    private void ChangeStack()
+    private void ChangeStack(EntityUid? shooter, EntityUid weapon, EntityUid target)
     {
         //If xenoid hit increase stack
         //if anything else decrease stack
