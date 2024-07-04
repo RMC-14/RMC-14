@@ -7,6 +7,8 @@
   name: Carrier
   description: A strange-looking alien creature. It carries a number of scuttling jointed crablike creatures.
   components:
+  - type: GhostRole
+    name: cm-job-name-xeno-carrier
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Carrier/carrier.rsi
   - type: MobState

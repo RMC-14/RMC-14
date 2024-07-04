@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Content.Server.Administration;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Administration;
 using Robust.Shared.Toolshed;
@@ -30,6 +31,9 @@ public sealed class SkillsCommand : ToolshedCommand
         [CommandArgument] SkillType skill,
         [CommandArgument] ValueRef<int> level)
     {
+        if (!HasComp<MarineComponent>(marine))
+            return marine;
+
         _skills ??= GetSys<SkillsSystem>();
         var skillsComp = EnsureComp<SkillsComponent>(marine);
         object skills = skillsComp.Skills;

@@ -1,6 +1,6 @@
 # species
 - type: emoteSounds
-  id: CMMaleHuman
+  id: RMCMaleHuman
   params:
     variation: 0.125
   sounds:
@@ -32,9 +32,11 @@
       collection: MaleCry
     Whistle:
       collection: Whistles
+    Gasp:
+      collection: MaleGasp
 
 - type: emoteSounds
-  id: CMFemaleHuman
+  id: RMCFemaleHuman
   params:
     variation: 0.125
   sounds:
@@ -66,9 +68,11 @@
       collection: FemaleCry
     Whistle:
       collection: Whistles
+    Gasp:
+      collection: FemaleGasp
 
 - type: emoteSounds
-  id: CMMaleFelinid
+  id: RMCMaleFelinid
   params:
     variation: 0.125
   sounds:
@@ -106,7 +110,7 @@
       collection: MaleDeathGasp
 
 - type: emoteSounds
-  id: CMFemaleFelinid
+  id: RMCFemaleFelinid
   params:
     variation: 0.125
   sounds:
@@ -142,3 +146,79 @@
       collection: FemaleGasp
     DefaultDeathgasp:
       collection: FemaleDeathGasp
+
+- type: emoteSounds
+  id: RMCMaleSlime
+  params:
+    variation: 0.125
+  sounds:
+    Squish:
+      collection: Squishes
+    Scream:
+      collection: CMMaleScreams
+    Laugh:
+      collection: MaleLaugh
+    Sneeze:
+      collection: MaleSneezes
+    Cough:
+      collection: MaleCoughs
+    CatMeow:
+      collection: CatMeows
+    CatHisses:
+      collection: CatHisses
+    MonkeyScreeches:
+      collection: MonkeyScreeches
+    RobotBeep:
+      collection: RobotBeeps
+    Yawn:
+      collection: MaleYawn
+    Snore:
+      collection: Snores
+    Honk:
+      collection: BikeHorn
+    Sigh:
+      collection: MaleSigh
+    Crying:
+      collection: MaleCry
+    Whistle:
+      collection: Whistles
+    Gasp:
+      collection: MaleGasp
+
+- type: emoteSounds
+  id: RMCFemaleSlime
+  params:
+    variation: 0.125
+  sounds:
+    Squish:
+      collection: Squishes
+    Scream:
+      collection: CMFemaleScreams
+    Laugh:
+      collection: FemaleLaugh
+    Sneeze:
+      collection: FemaleSneezes
+    Cough:
+      collection: FemaleCoughs
+    CatMeow:
+      collection: CatMeows
+    CatHisses:
+      collection: CatHisses
+    MonkeyScreeches:
+      collection: MonkeyScreeches
+    RobotBeep:
+      collection: RobotBeeps
+    Yawn:
+      collection: FemaleYawn
+    Snore:
+      collection: Snores
+    Honk:
+      collection: BikeHorn
+    Sigh:
+      collection: FemaleSigh
+    Crying:
+      collection: FemaleCry
+    Whistle:
+      collection: Whistles
+    Gasp:
+      collection: FemaleGasp

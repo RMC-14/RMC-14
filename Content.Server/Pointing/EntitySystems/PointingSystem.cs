@@ -40,7 +40,7 @@ namespace Content.Server.Pointing.EntitySystems
         [Dependency] private readonly IAdminLogManager _adminLogger = default!;
         [Dependency] private readonly ExamineSystemShared _examine = default!;
 
-        private static readonly TimeSpan PointDelay = TimeSpan.FromSeconds(0.5f);
+        private static readonly TimeSpan PointDelay = TimeSpan.FromSeconds(2f);
 
         /// <summary>
         ///     A dictionary of players to the last time that they

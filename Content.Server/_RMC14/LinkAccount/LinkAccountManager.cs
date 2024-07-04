@@ -19,6 +19,9 @@ public sealed class LinkAccountManager : IPostInjectInit
     private readonly TimeSpan _minimumWait = TimeSpan.FromSeconds(0.5);
     private readonly Dictionary<NetUserId, SharedRMCPatronFull> _connected = new();
     private readonly List<SharedRMCPatron> _allPatrons = [];
+    private readonly HashSet<Guid> _figurines = [];
+
+    public event Action? PatronsReloaded;
 
     private async Task LoadData(ICommonSession player, CancellationToken cancel)
     {
@@ -141,10 +144,16 @@ public sealed class LinkAccountManager : IPostInjectInit
         var patrons = await _db.GetAllPatrons();
 
         _allPatrons.Clear();
+        _figurines.Clear();
         foreach (var patron in patrons)
         {
             _allPatrons.Add(new SharedRMCPatron(patron.Player.LastSeenUserName, patron.Tier.Name));
+
+            if (patron.Tier.Figurines)
+                _figurines.Add(patron.PlayerId);
         }
+
+        PatronsReloaded?.Invoke();
     }
 
     public void SendPatronsToAll()
@@ -167,6 +176,11 @@ public sealed class LinkAccountManager : IPostInjectInit
     public SharedRMCPatronFull? GetPatron(NetUserId userId)
     {
         return _connected.GetValueOrDefault(userId);
+    }
+
+    public IReadOnlySet<Guid> GetFigurines()
+    {
+        return _figurines;
     }
 
     void IPostInjectInit.PostInject()

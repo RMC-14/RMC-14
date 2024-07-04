@@ -2,6 +2,7 @@
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
+using Content.Shared.DragDrop;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
@@ -45,6 +46,8 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoNestSurfaceComponent, InteractHandEvent>(OnNestInteractHand);
         SubscribeLocalEvent<XenoNestSurfaceComponent, DoAfterAttemptEvent<XenoNestDoAfterEvent>>(OnNestSurfaceDoAfterAttempt);
         SubscribeLocalEvent<XenoNestSurfaceComponent, XenoNestDoAfterEvent>(OnNestSurfaceDoAfter);
+        SubscribeLocalEvent<XenoNestSurfaceComponent, CanDropTargetEvent>(OnCanDropTarget);
+        SubscribeLocalEvent<XenoNestSurfaceComponent, DragDropTargetEvent>(OnDragDropTarget);
 
         SubscribeLocalEvent<XenoNestComponent, ComponentRemove>(OnNestRemove);
         SubscribeLocalEvent<XenoNestComponent, EntityTerminatingEvent>(OnNestTerminating);
@@ -196,6 +199,25 @@ public sealed class XenoNestSystem : EntitySystem
         }
     }
 
+    #region DragDrop
+
+    private void OnCanDropTarget(Entity<XenoNestSurfaceComponent> ent, ref CanDropTargetEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        args.CanDrop = CanBeNested(args.User, args.Dragged, (ent, ent.Comp), silent: true);
+        args.Handled = true;
+    }
+
+    private void OnDragDropTarget(Entity<XenoNestSurfaceComponent> ent, ref DragDropTargetEvent args)
+    {
+        args.Handled = true;
+        TryStartNesting(args.User, ent, args.Dragged);
+    }
+
+    #endregion
+
     private void OnNestedPreventCollide(Entity<XenoNestedComponent> ent, ref PreventCollideEvent args)
     {
         args.Cancelled = true;
@@ -262,7 +284,10 @@ public sealed class XenoNestSystem : EntitySystem
         return (new Angle(delta) + - MathHelper.PiOver2).GetCardinalDir();
     }
 
-    private bool CanNestPopup(EntityUid user, EntityUid victim, EntityUid surface, Direction direction, bool silent = false)
+    private bool CanBeNested(EntityUid user,
+        EntityUid victim,
+        Entity<XenoNestSurfaceComponent?> surface,
+        bool silent = false)
     {
         if (!HasComp<XenoNestableComponent>(victim))
         {
@@ -272,18 +297,31 @@ public sealed class XenoNestSystem : EntitySystem
             return false;
         }
 
-        if (!_standing.IsDown(victim))
+        if (!Resolve(surface, ref surface.Comp))
         {
             if (!silent)
-                _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed-target-resisting", ("target", victim)), victim, user, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed-cant-there"), surface, user);
 
             return false;
         }
 
-        if (!TryComp(surface, out XenoNestSurfaceComponent? surfaceComp))
+        return true;
+    }
+
+    private bool CanNestPopup(EntityUid user,
+        EntityUid victim,
+        EntityUid surface,
+        Direction direction,
+        bool silent = false)
+    {
+        var surfaceComp = Comp<XenoNestSurfaceComponent>(surface);
+        if (!CanBeNested(user, victim, (surface, surfaceComp), silent))
+            return false;
+
+        if (!_standing.IsDown(victim))
         {
             if (!silent)
-                _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed-cant-there"), surface, user);
+                _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed-target-resisting", ("target", victim)), victim, user, PopupType.MediumCaution);
 
             return false;
         }

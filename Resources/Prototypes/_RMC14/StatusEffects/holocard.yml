@@ -1,8 +1,9 @@
 - type: statusIcon
   abstract: true
   id: HolocardIcon
-  priority: 1
-  locationPreference: Right
+  priority: 3
+  locationPreference: Left
+  isShaded: true
 
 - type: statusIcon
   parent: HolocardIcon

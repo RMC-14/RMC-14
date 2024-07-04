@@ -1,0 +1,64 @@
+﻿
+- type: entity
+  parent: CMWallMetal
+  id: CMWallSolaris
+  name: colony wall
+  description: Tough looking walls that have been blasted by sand since the day they were erected. A testament to human willpower.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/solaris_wall.rsi
+    state: solaris_interior
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/solaris_wall.rsi
+    state: solaris_interior
+  - type: IconSmooth
+    key: wall
+    base: solaris_interior
+
+- type: entity
+  parent: CMWallReinforced
+  id: CMWallSolarisReinforced
+  name: reinforced colony wall
+  description: Tough looking walls that have been blasted by sand since the day they were erected. A testament to human willpower.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/solaris_rwall.rsi
+    state: solaris_interior_r
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/solaris_rwall.rsi
+    state: solaris_interior_r
+  - type: IconSmooth
+    key: wall
+    base: solaris_interior_r
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: CMWallSolarisHull
+  name: heavy reinforced colony wall
+  description: Tough looking walls that have been blasted by sand since the day they were erected. A testament to human willpower.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/solaris_rwall.rsi
+    state: solaris_interior_r
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/solaris_rwall.rsi
+    state: solaris_interior_h
+  - type: IconSmooth
+    key: wall
+    base: solaris_interior_r
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: CMWallSolarisRock
+  name: rock wall
+  description: Tough looking walls that have been blasted by sand since the day they were erected. A testament to human willpower.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/solaris_rock.rsi
+    state: solaris_rock
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/solaris_rock.rsi
+    state: solaris_rock
+  - type: IconSmooth
+    key: wall
+    base: solaris_rock

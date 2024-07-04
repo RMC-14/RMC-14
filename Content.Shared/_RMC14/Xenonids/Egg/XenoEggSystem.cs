@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
+using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Item;
@@ -205,7 +206,7 @@ public sealed class XenoEggSystem : EntitySystem
     private void OnXenoEggActivateInWorld(Entity<XenoEggComponent> egg, ref ActivateInWorldEvent args)
     {
         // TODO RMC14 multiple hive support
-        if (!HasComp<XenoComponent>(args.User))
+        if (!HasComp<XenoComponent>(args.User) || !HasComp<HandsComponent>(args.User))
             return;
 
         if (Open(egg, args.User, out _))

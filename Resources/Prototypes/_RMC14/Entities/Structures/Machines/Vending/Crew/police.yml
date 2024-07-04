@@ -1,0 +1,144 @@
+# MILITARY POLICE
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechMilitaryPoliceEquipment
+  name: ColMarTech Military Police Equipment Rack
+  description: An automated rack hooked up to a colossal storage of Military Police standard-issue equipment.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessBrig" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMMilitaryPolice
+    sections:
+    - name: Police Set (Mandatory)
+      entries:
+      - id: RMCVendorBundleMilitaryPoliceApparel
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: CMHandsBlackMarine
+      - id: CMHeadsetMPO
+      - id: CMBootsBlackFilled
+    - name: Armor
+      takeAll: CMArmor
+      entries:
+      - id: CMArmorM2MP
+      - id: CMHeadBeretRed
+    - name: Handgun Case
+#     choices: { CMGunCase: 1 }
+      entries: []
+#     - id: M77 Gun case
+#     - id: Combat Revolver Gun case
+#     - id: M1984 Gun case
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: CMSatchelSecurity
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries: []
+#     - id: CMM276GeneralPistolHolsterRig
+#     - id: CMM276M44HolsterRig
+#     - M276 G8-A General Utility Pouch
+    - name: Pouches
+      choices: { CMPouch: 2 }
+      entries:
+      - id: CMPouchGeneralMedium
+      - id: CMPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
+      - id: CMPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 add 'splints,'
+      - id: CMPouchFirstAidPills
+        name: first-aid pouch (pills)
+      - id: CMPouchMagazinePistol
+      - id: CMPouchPistol
+    - name: Mask
+      choices: { CMMask: 1 }
+      entries:
+      - id: CMMaskGas
+      - id: CMMaskCoif
+#     - id: Rebreather
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBrown
+      - id: CMWebbingBlack
+      #- id: CMShoulderHolster
+      - id: CMWebbing
+
+# WARDEN
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechWardenEquipment
+  name: ColMarTech Military Warden Equipment Rack
+  description: An automated rack hooked up to a colossal storage of Military Police standard-issue equipment.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessArmory" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMMilitaryPolice
+    sections:
+    - name: Police Set (Mandatory)
+      entries:
+      - id: RMCVendorBundleMilitaryPoliceApparel
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: CMHandsBlackMarine
+      - id: CMHeadsetCMP
+      - id: CMBootsBlackFilled
+    - name: Armor
+      takeAll: CMArmor
+      entries:
+      - id: CMArmorM3Warden
+      - id: CMHeadCapWarden
+    - name: Handgun Case
+#     choices: { CMGunCase: 1 }
+      entries: []
+#     - id: M77 Gun case
+#     - id: Combat Revolver Gun case
+#     - id: M1984 Gun case
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: CMSatchelSecurity
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries: []
+#     - id: CMM276GeneralPistolHolsterRig
+#     - id: CMM276M44HolsterRig
+#     - M276 G8-A General Utility Pouch
+    - name: Pouches
+      choices: { CMPouch: 2 }
+      entries:
+      - id: CMPouchGeneralMedium
+      - id: CMPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
+      - id: CMPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 add 'splints,'
+      - id: CMPouchFirstAidPills
+        name: first-aid pouch (pills)
+      - id: CMPouchMagazinePistol
+      - id: CMPouchPistol
+    - name: Mask
+      choices: { CMMask: 1 }
+      entries:
+      - id: CMMaskGas
+      - id: CMMaskCoif
+#     - id: Rebreather
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBrown
+      - id: CMWebbingBlack
+      #- id: CMShoulderHolster
+      - id: CMWebbing

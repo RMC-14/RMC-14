@@ -1,0 +1,286 @@
+# MEDICAL
+
+- type: entity
+  id: CMMedilinkSupplyPort
+  name: medilink supply port
+  description: A complex network of pipes and machinery, linking to large storage systems below the deck. Medical vendors linked to this port will be able to infinitely restock supplies.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/Medical/medilink.rsi
+    state: medlink_green_clamped # TODO RMC14 change states dynamically
+    drawdepth: FloorObjects
+  - type: CMMedicalSupplyLink
+
+
+- type: entity
+  parent: ColMarTechBase
+  id: CMVendorMedical
+  name: We-Ya-Med Plus
+  description: Medical pharmaceutical dispenser. Provided by We-Ya Pharmaceuticals Division(TM).
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/med.rsi
+    layers:
+    - state: "off"
+    - state: "normal-unshaded"
+  - type: AccessReader
+    access: [["CMAccessMedical"]]
+  - type: CMSolutionRefiller
+    current: 600
+    max: 600
+    recharge: 125 # TODO RMC14 auto-restock items as well if round is >= 20 minutes in
+    rechargeCooldown: 4
+    reagents:
+    - CMBicaridine
+    - CMKelotane
+    - CMDylovene
+    - CMDexalin
+    - CMDexalinPlus
+    - CMTricordrazine
+    - CMEpinephrine
+    - CMInaprovaline
+#    - CMOxycodone # TODO RMC14
+#    - CMTramadol # TODO RMC14
+#    - CMPeridaxon # TODO RMC14
+    whitelist:
+      components:
+      - Hypospray
+      tags:
+      - Bottle
+  - type: CMAutomatedVendor # TODO RMC14 different ui style
+    sections:
+    - name: Field supplies
+      entries:
+      - id: CMBurnKit10
+        amount: 6
+      - id: CMTraumaKit10
+        amount: 6
+      - id: CMOintment10
+        amount: 6
+      - id: CMGauze10
+        amount: 6
+#      - id: CMSplints10 # TODO RMC14
+#        amount: 6
+    - name: Autoinjectors
+      entries:
+      - id: CMBicaridineAutoInjector
+        amount: 3
+      - id: CMDexalinPlusAutoInjector
+        amount: 3
+      - id: CMEpinephrineAutoInjector
+        amount: 3
+      - id: CMInaprovalineAutoInjector
+        amount: 3
+      - id: CMKelotaneAutoInjector
+        amount: 3
+#      - id: CMOxycodoneAutoinjector # TODO RMC14
+#        amount: 3
+#      - id: CMTramadolAutoinjector # TODO RMC14
+#        amount: 3
+      - id: CMTricordrazineAutoInjector
+        amount: 3
+    - name: Liquid bottles
+      entries:
+      - id: CMBottleBicaridine
+        amount: 3
+      - id: CMBottleDylovene
+        amount: 3
+      - id: CMBottleDexalin
+        amount: 3
+      - id: CMBottleInaprovaline
+        amount: 3
+      - id: CMBottleKelotane
+        amount: 3
+#      - id: CMBottleOxycodone # TODO RMC14
+#        amount: 3
+#      - id: CMBottlePeridaxon # TODO RMC14
+#        amount: 3
+#      - id: CMBottleTramadol # TODO RMC14
+#        amount: 3
+    - name: Pill bottles
+      entries:
+      - id: CMPillCanisterBicaridine
+        amount: 2
+      - id: CMPillCanisterDexalin
+        amount: 2
+      - id: CMPillCanisterDylovene
+        amount: 2
+      - id: CMPillCanisterInaprovaline
+        amount: 2
+      - id: CMPillCanisterKelotane
+        amount: 2
+#      - id: CMPillCanisterPeridaxon # TODO RMC14
+#        amount: 2
+#      - id: CMPillCanisterTramadol # TODO RMC14
+#        amount: 2
+    - name: Medical utilities
+      entries:
+      - id: CMDefibrillator
+        amount: 3
+      - id: CMSurgicalLine
+        amount: 2
+      - id: CMSynthGraft
+        amount: 2
+      - id: CMHypospray # TODO RMC14 full of tricordrazine
+        amount: 2
+      - id: CMHealthAnalyzer
+        amount: 5
+      - id: CMBeltMedical
+        amount: 2
+      - id: RMCGlassesMedicalHUDGlasses
+        amount: 3
+      - id: CMStasisBagFolded
+        amount: 2
+      - id: CMSyringe
+        amount: 7
+
+
+- type: entity
+  parent: CMVendorMedical
+  id: CMVendorChemistry
+  name: We-Ya-Chem Plus
+  description: Medical chemistry dispenser. Provided by We-Ya Pharmaceuticals Division(TM).
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/med.rsi
+    layers:
+    - state: "off"
+    - state: "normal-unshaded"
+  - type: AccessReader
+    access: [["CMAccessChemistry"]]
+  - type: CMSolutionRefiller
+    current: 1200
+    max: 1200
+    whitelist:
+      tags:
+      - Bottle
+  - type: CMAutomatedVendor # TODO RMC14 different ui style
+    sections:
+    - name: Liquid bottles
+      entries:
+      - id: CMBottleBicaridine
+        amount: 6
+      - id: CMBottleDylovene
+        amount: 6
+      - id: CMBottleDexalin
+        amount: 6
+      - id: CMBottleInaprovaline
+        amount: 6
+      - id: CMBottleKelotane
+        amount: 6
+    #      - id: CMBottleOxycodone # TODO RMC14
+    #        amount: 6
+    #      - id: CMBottlePeridaxon # TODO RMC14
+    #        amount: 6
+    #      - id: CMBottleTramadol # TODO RMC14
+    #        amount: 6
+    - name: Miscellaneous
+      entries:
+      - id: CMBeaker
+        name: Beaker (60 units)
+        amount: 3
+      - id: CMBeakerLarge
+        name: Beaker, Large (120 units)
+        amount: 3
+      - id: CMBoxPillCanister
+        amount: 2
+      - id: Dropper # TODO RMC14 cm dropper
+        amount: 3
+      - id: CMSyringe
+        amount: 7
+
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechMarineMedical
+  name: ColMarTech MarineMed
+  description: Medical Pharmaceutical dispenser with basic medical supplies for marines.
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.38,-0.5,0.35,0.5"
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        density: 200
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/marine_medical.rsi
+    layers:
+    - state: "off"
+      map: [ "enum.VendingMachineVisualLayers.Base" ]
+    - state: "normal"
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+  - type: CMSolutionRefiller
+    current: 600
+    max: 600
+    recharge: 125 # TODO RMC14 auto-restock items as well if round is >= 20 minutes in
+    rechargeCooldown: 4
+    reagents:
+    - CMTricordrazine
+#    - CMTramadol # TODO RMC14
+    whitelist:
+      components:
+      - Hypospray
+  - type: CMAutomatedVendor
+    sections:
+#    - name: Autoinjectors
+#      entries: [ ]
+    #- id: CMFirstAidInjector
+    #- id: CMPainStopAutoinjector
+    - name: Devices
+      entries:
+      - id: CMHealthAnalyzer
+        amount: 3
+    - name: Field Supplies
+      entries:
+      - id: CMFireExtinguisher # TODO RMC14 portable
+        amount: 5
+      - id: CMOintment10
+        amount: 7
+      - id: CMGauze10
+        amount: 7
+#      - id: CMMedicalSplints5
+#        amount: 7
+
+- type: entity
+  parent: ColMarTechBase
+  id: CMVendorBlood
+  name: MM Blood Dispenser
+  description: The Marine Med Brand Blood Pack Dispensary is the premier, top-of-the-line blood dispenser of 2105! Get yours today! #dont update year, that`s a joke from cm13
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/blood.rsi
+    snapCardinals: true
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+      shader: unshaded
+    - state: "panel"
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: ApcPowerReceiver
+    needsPower: false # TODO RMC14
+    powerLoad: 0
+  - type: AccessReader
+    access:
+    - [ "CMAccessMedical" ]
+  - type: CMAutomatedVendor
+    sections:
+    - name: Blood Packs
+      entries:
+      - id: CMBloodPackFull
+        amount: 30
+    - name: Miscellaneous
+      entries:
+      - id: CMBloodPack
+        amount: 5
+        name: empty blood pack

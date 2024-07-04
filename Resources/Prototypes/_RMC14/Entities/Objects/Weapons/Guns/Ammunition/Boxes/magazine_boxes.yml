@@ -101,12 +101,12 @@
       map: [ "lid" ]
     - state: lid_type_reg # lid stripe,ends in the type of ammo used
       map: [ "lid_stripe" ]
-    - type: CMItemSlots
-      count: 10
-      slot:
-        whitelist:
-          tags:
-          - CMMagazineRifleM54C
+  - type: CMItemSlots
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54C
 
 - type: entity
   parent: CMBoxMagazineRifleM54CEmpty
@@ -140,13 +140,12 @@
       map: [ "lid" ]
     - state: lid_type_ap
       map: [ "lid_stripe" ]
-    - type: CMItemSlots
-      startingItem: CMMagazineRifleM54CAP
-      count: 10
-      slot:
-        whitelist:
-          tags:
-          - CMMagazineRifleM54CAP
+  - type: CMItemSlots
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54CAP
 
 - type: entity
   parent: CMBoxMagazineRifleM54CAPEmpty
@@ -222,12 +221,12 @@
       map: [ "lid" ]
     - state: lid_type_reg
       map: [ "lid_stripe" ]
-    - type: CMItemSlots
-      count: 12
-      slot:
-        whitelist:
-          tags:
-          - CMMagazineSMGM63
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineSMGM63
 
 - type: entity
   parent: CMBoxMagazineSMGM63Empty
@@ -261,12 +260,12 @@
       map: [ "lid" ]
     - state: lid_type_ap
       map: [ "lid_stripe" ]
-    - type: CMItemSlots
-      count: 12
-      slot:
-        whitelist:
-          tags:
-          - CMMagazineSMGM63AP
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineSMGM63AP
 
 - type: entity
   parent: CMBoxMagazineSMGM63APEmpty
@@ -301,12 +300,12 @@
       map: [ "lid" ]
     - state: lid_type_ext
       map: [ "lid_stripe" ]
-    - type: CMItemSlots
-      count: 10
-      slot:
-        whitelist:
-          tags:
-          - CMMagazineSMGM63Ext
+  - type: CMItemSlots
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineSMGM63Ext
 
 - type: entity
   parent: CMBoxMagazineSMGM63ExtEmpty
@@ -342,17 +341,17 @@
       map: [ "lid" ]
     - state: lid_type_reg
       map: [ "lid_stripe" ]
-    - type: CMItemSlots
-      count: 16
-      slot:
-        whitelist:
-          tags:
-          - CMMagazineRifleM4SPR
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM4SPR
 
 - type: entity
   parent: CMBoxMagazineRifleM4SPREmpty
   id: CMBoxMagazineRifleM4SPR
-  name: magazine box (M4RA x 16)
+  name: magazine box (M4SPR x 16)
   suffix: Filled
   components:
   - type: CMItemSlots
@@ -392,7 +391,7 @@
 - type: entity
   parent: CMBoxMagazineRifleM4SPRAPEmpty
   id: CMBoxMagazineRifleM4SPRAP
-  name: magazine box (AP M4RA x 16)
+  name: magazine box (AP M4SPR x 16)
   components:
   - type: CMItemSlots
     startingItem: CMMagazineRifleM4SPRAP

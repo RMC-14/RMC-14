@@ -7,6 +7,8 @@
   name: Sentinel
   description: A slithery, spitting kind of alien.
   components:
+  - type: GhostRole
+    name: cm-job-name-xeno-sentinel
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Sentinel/sentinel.rsi
   - type: MobState
@@ -48,6 +50,7 @@
     max: 300
     evolvesTo:
     - CMXenoSpitter
+  - type: XenoAcid
   - type: XenoParalyzingSlash
   - type: XenoSlowingSpit
   - type: XenoScatteredSpit
