@@ -2180,5 +2180,12 @@
   id: 267
   time: '2024-07-04T11:08:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2809
+- author: Dorragon
+  changes:
+  - message: Requisition vendors
+    type: Add
+  id: 268
+  time: '2024-07-04T11:38:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2791
 Name: RMC14
 Order: -1
