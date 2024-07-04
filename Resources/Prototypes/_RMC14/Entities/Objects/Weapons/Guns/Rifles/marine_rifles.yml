@@ -250,6 +250,7 @@
       path: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
   - type: GunDamageModifier
     multiplier: 1
+  - type: GunAPStacksModifier
   - type: AttachableHolder
     slots:
       cm-aslot-barrel:
