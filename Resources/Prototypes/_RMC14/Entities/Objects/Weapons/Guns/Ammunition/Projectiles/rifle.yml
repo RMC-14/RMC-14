@@ -21,3 +21,16 @@
         Piercing: 30
   - type: CMArmorPiercing
     amount: 40
+
+- type: entity
+  parent: BulletRifle10x24mm
+  id: BulletRifle458SOCOM
+  noSpawn: true
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 80
+  - type: CMArmorPiercing
+    amount: 0
+  - type: GunAPStacks
