@@ -5,7 +5,7 @@ namespace Content.Shared._RMC14.Weapons.Ranged;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(CMGunSystem))]
-public sealed partial class GunDamageModifierComponent : Component
+public sealed partial class GunAPStacksModifierComponent : Component
 {
     [DataField, AutoNetworkedField]
     public byte Stacks = 0;
