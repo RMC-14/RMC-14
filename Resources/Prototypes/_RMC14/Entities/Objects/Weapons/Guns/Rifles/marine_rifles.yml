@@ -206,3 +206,62 @@
     offsets:
       cm-aslot-barrel: 0.9, 0.03
       cm-aslot-rail: -0.1, 0.23
+      
+- type: entity
+  parent: CMBaseWeaponRifle
+  name: XM88 Heavy Rifle
+  id: WeaponRifleXM88
+  description: An experimental man-portable anti-material rifle chambered in .458 SOCOM. It must be manually chambered for every shot.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+      state: d_m4spr_barrel
+      offset: 0.65, 0
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88.rsi
+  - type: Gun
+    minAngle: 20
+    maxAngle: 70
+    angleIncrease: 25
+    angleDecay: 45
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_xm88.ogg
+  - type: PumpAction
+  - type: ShootUseDelay
+    delay: 1
+  - type: UseDelay
+  - type: GunWieldBonus
+    minAngle: -20
+    maxAngle: -50
+    angleIncrease: -22
+    angleDecay: 10
+  - type: BallisticAmmoProvider
+    cycleable: false
+    whitelist:
+      tags:
+      - CMShellShotgun
+    capacity: 9
+    proto: null
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+  - type: GunDamageModifier
+    multiplier: 1
+  - type: AttachableHolder
+    slots:
+      cm-aslot-barrel:
+        whitelist:
+          tags:
+          - CMAttachmentExtendedBarrel
+          - CMAttachmentSuppressor
+      cm-aslot-rail:
+        whitelist:
+          tags:
+          - CMAttachmentFlashlight
+  - type: AttachableHolderVisuals
+    offsets:
+      cm-aslot-barrel: 0.9, 0.03
+      cm-aslot-rail: -0.1, 0.23
