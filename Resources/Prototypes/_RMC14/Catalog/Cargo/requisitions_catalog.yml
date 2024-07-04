@@ -190,6 +190,8 @@
 #        crate: CMCrateM54CE2
       - cost: 3000
         crate: CMCrateMK80
+      - cost: 4000
+        crate: CMCrateXM88
     - name: Weapons Specialist Ammo
       entries:
       - cost: 4000
