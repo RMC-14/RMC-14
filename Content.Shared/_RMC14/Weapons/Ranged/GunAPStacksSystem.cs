@@ -4,12 +4,15 @@ using Content.Shared.Weapons.Ranged.Systems;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
-public abstract class SharedPumpActionSystem : EntitySystem
+public abstract class GunAPStacksSystem : EntitySystem
 {
     public override void Initialize()
     {
-        SubscribeLocalEvent<PumpActionComponent, ExaminedEvent>(OnExamined, before: [typeof(SharedGunSystem)]);
+        SubscribeLocalEvent<GunAPStacksMofifierComponent, AmmoShotEvent>(OnGunShot);
         SubscribeLocalEvent<PumpActionComponent, AttemptShootEvent>(OnAttemptShoot);
     }
-
+    private void OnGunShot()
+    {
+        //Apply AP to the bullet
+    }
 }
