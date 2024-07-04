@@ -12,7 +12,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/specialist_gear.rsi
   - type: CMAutomatedVendor
-    job: CMWeaponsSpecialist
+    jobs:
+    - CMWeaponsSpecialist
     pointsType: Specialist
     sections:
     - name: Weapons Specialist Sets
@@ -36,10 +37,10 @@
     #  points: 40
     - name: Extra Sniper Ammunition
       entries:
-      - id: CMMagazineSniperM96SFlak
-        points: 40
-      - id: CMMagazineSniperM96SIncendiary
-        points: 40
+#      - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
+#        points: 40
+#      - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SIncendiary
+#        points: 40
       - id: CMMagazineSniperM96S
         points: 40
     - name: Extra Demolitionist Ammunition
@@ -92,7 +93,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
-    job: CMWeaponsSpecialist
+    jobs:
+    - CMWeaponsSpecialist
     sections:
     - name: Standard Equipment
       takeAll: CMStandard

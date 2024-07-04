@@ -38,6 +38,7 @@ public sealed class FigurineSystem : EntitySystem
 
     public override void Shutdown()
     {
+        base.Shutdown();
         _linkAccount.PatronsReloaded -= ReloadActiveFigurines;
     }
 

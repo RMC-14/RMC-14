@@ -1,18 +1,17 @@
+using System.Numerics;
 using Content.Shared._RMC14.Xenonids.Screech;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
-using System.Collections.Generic;
-using System.Numerics;
 
-namespace Content.Client._RMC14.Xenonids;
+namespace Content.Client._RMC14.Xenonids.Screech;
 
 public sealed class RMCXenoScreechShockWaveOverlay : Overlay, IEntityEventSubscriber
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
-    private SharedTransformSystem? _xformSystem = null;
+    private SharedTransformSystem? _xformSystem;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
     public override bool RequestScreenTexture => true;
@@ -72,7 +71,7 @@ public sealed class RMCXenoScreechShockWaveOverlay : Overlay, IEntityEventSubscr
 
         var worldHandle = args.WorldHandle;
         worldHandle.UseShader(_shader);
-        worldHandle.DrawRect(args.WorldAABB, Color.White);
+        worldHandle.DrawRect(args.WorldBounds, Color.White);
         worldHandle.UseShader(null);
     }
 }

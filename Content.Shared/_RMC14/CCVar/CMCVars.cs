@@ -64,5 +64,11 @@ public sealed class CMCVars : CVars
         CVarDef.Create("rmc.discord_account_linking_message_link", "", CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCRequisitionsBalanceGain =
-        CVarDef.Create("rmc.requisitions_balance_gain", 750, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.requisitions_balance_gain", 300, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<string> RMCDiscordToken =
+        CVarDef.Create("rmc.discord_token", "", CVar.SERVER | CVar.SERVERONLY | CVar.CONFIDENTIAL);
+
+    public static readonly CVarDef<ulong> RMCDiscordAdminChatChannel =
+        CVarDef.Create("rmc.discord_admin_chat_channel", 0UL, CVar.SERVER | CVar.SERVERONLY | CVar.CONFIDENTIAL);
 }

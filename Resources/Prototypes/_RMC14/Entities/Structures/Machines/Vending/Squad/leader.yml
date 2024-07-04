@@ -12,7 +12,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/gear.rsi
   - type: CMAutomatedVendor
-    job: CMSquadLeader
+    jobs:
+    - CMSquadLeader
     sections:
     - name: Squad Leader Kit
       takeAll: CMStandard
@@ -206,7 +207,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
-    job: CMSquadLeader
+    jobs:
+    - CMSquadLeader
     sections:
     - name: Standard Equipment
       takeAll: CMStandard
