@@ -7,7 +7,6 @@ public sealed class RMCBulkyArmorSystem : EntitySystem
 {
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
-
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCBulkyArmorComponent, BeingEquippedAttemptEvent>(OnBeingEquippedAttempt);
@@ -21,7 +20,7 @@ public sealed class RMCBulkyArmorSystem : EntitySystem
         if (args.EquipTarget == args.Equipee)
             _popup.PopupClient(Loc.GetString("rmc-bulky-armor-user-unable", ("armor", armor)), args.Equipee, args.Equipee, PopupType.MediumCaution);
         else
-            _popup.PopupClient(Loc.GetString("rmc-bulky-armor-target-unable", ("target", args.EquipTarget), ("armor", armor)), args.Equipee, args.Equipee, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-bulky-armor-target-unable", ("target", args.EquipTarget), ("armor", armor)), args.Equipee, args.Equipee, PopupType.MediumCaution);
 
         args.Cancel();
     }

@@ -21,11 +21,6 @@
       firearms: 0
       medical: 3
       surgery: 2
-    - type: MobThresholds
-      thresholds:
-        0: Alive
-        75: Critical
-        200: Dead
     - type: RMCUserBulkyArmorIncapable
 
 - type: startingGear

@@ -7,5 +7,5 @@ namespace Content.Shared._RMC14.Marines.Armor;
 public sealed partial class RMCBulkyArmorComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public bool IsBulky;
+    public bool IsBulky = true;
 }
