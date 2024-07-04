@@ -12,7 +12,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/combat_technician_gear.rsi
   - type: CMAutomatedVendor
-    job: CMCombatTech
+    jobs:
+    - CMCombatTech
     sections:
     - name: Engineer Set (Mandatory)
       takeAll: CMEngineerSet
@@ -170,7 +171,8 @@
     access:
     - [ "CMAccessCombatTechPrep" ]
   - type: CMAutomatedVendor
-    job: CMCombatTech
+    jobs:
+    - CMCombatTech
     sections:
     - name: Standard Equipment
       takeAll: CMStandard

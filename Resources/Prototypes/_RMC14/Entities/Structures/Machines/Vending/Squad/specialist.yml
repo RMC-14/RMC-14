@@ -12,7 +12,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/specialist_gear.rsi
   - type: CMAutomatedVendor
-    job: CMWeaponsSpecialist
+    jobs:
+    - CMWeaponsSpecialist
     pointsType: Specialist
     sections:
     - name: Weapons Specialist Sets
@@ -92,7 +93,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
-    job: CMWeaponsSpecialist
+    jobs:
+    - CMWeaponsSpecialist
     sections:
     - name: Standard Equipment
       takeAll: CMStandard
