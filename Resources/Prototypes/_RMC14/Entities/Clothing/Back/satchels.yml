@@ -118,3 +118,38 @@
       tags:
       - Grenade
   - type: FixedItemSizeStorage
+
+- type: entity
+  parent: CMSatchel
+  id: CMSathelWelder
+  name: UNMC technician welder-satchel
+  description: A specialized satchel worn by UNMC technicians and engineers. It carries two small fuel tanks for quick welder refueling and use.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/welder.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,12,1
+  - type: ExaminableSolution
+    solution: tank
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 250 # TODO RMC14 100 when welders are fixed
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 250
+  - type: ReagentTank
+    tankType: Fuel
+  - type: DrainableSolution
+    solution: tank
+  - type: SolutionTransfer
+    transferAmount: 50
+    maxTransferAmount: 100
+    minTransferAmount: 10
+    canChangeTransferAmount: true
+  - type: RefillableSolution
+    solution: tank
+  - type: DrawableSolution
+    solution: tank

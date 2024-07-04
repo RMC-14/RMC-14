@@ -195,7 +195,7 @@
       - id: CMBackpackMarineTech
       - id: CMSatchelMarineTech
       - id: CMBackpackWelder
-    #- id: CMTechnicianWelderSatchel
+      - id: CMSatchelWelder
     #- id: CMTechnicianWelderChestrig
     - name: Belt
       choices: { CMBelt: 1 }
