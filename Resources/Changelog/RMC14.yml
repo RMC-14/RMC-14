@@ -2166,5 +2166,12 @@
   id: 265
   time: '2024-07-04T08:10:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2673
+- author: DrSmugleaf
+  changes:
+  - message: Linked in-game and Discord admin chats.
+    type: Add
+  id: 266
+  time: '2024-07-04T10:17:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2810
 Name: RMC14
 Order: -1
