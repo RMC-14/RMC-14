@@ -18,9 +18,10 @@ public abstract class GunAPStacksSystem : EntitySystem
         if(ent.Comp.AP > 50)
         {
             ent.Comp.AP = 50;
+            
         }
         
-        
+        Dirty(ent);
     }
     private void ChangeStack(Entity<GunAPStacksModifierComponent> ent, EntityUid? shooter, EntityUid weapon, EntityUid target)
     {
@@ -34,5 +35,6 @@ public abstract class GunAPStacksSystem : EntitySystem
         {
             ent.Comp.Stacks--;
         }
+        Dirty(ent);
     }
 }
