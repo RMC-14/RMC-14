@@ -2173,5 +2173,12 @@
   id: 266
   time: '2024-07-04T10:17:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2810
+- author: snebl
+  changes:
+  - message: Fixed xenonids being able to attack and build while resting.
+    type: Fix
+  id: 267
+  time: '2024-07-04T11:08:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2809
 Name: RMC14
 Order: -1
