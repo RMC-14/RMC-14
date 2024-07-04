@@ -33,3 +33,15 @@
       amount: 2
     - id: CMMagazinePistolMK80
       amount: 4
+      
+- type: entity
+  id: CMCrateXM88
+  parent: CMCrateWeapons
+  name: XM88 Heavy Rifle crate (XM88 x2, XM88 ammo box x2)
+  components:
+  - type: StorageFill
+    contents:
+      - id: WeaponRifleXM88
+        amount: 2
+      - id: CMBoxRifleXM88
+        amount: 2
