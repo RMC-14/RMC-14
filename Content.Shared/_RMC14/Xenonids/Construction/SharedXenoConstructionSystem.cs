@@ -158,6 +158,12 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
+        var attempt = new XenoSecreteStructureAttemptEvent();
+        RaiseLocalEvent(xeno, ref attempt);
+
+        if (attempt.Cancelled)
+            return;
+
         args.Handled = true;
         var ev = new XenoSecreteStructureDoAfterEvent(GetNetCoordinates(args.Target), choice);
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.BuildDelay, ev, xeno)
