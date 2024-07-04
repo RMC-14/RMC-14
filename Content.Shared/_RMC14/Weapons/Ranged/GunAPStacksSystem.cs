@@ -8,11 +8,16 @@ public abstract class GunAPStacksSystem : EntitySystem
 {
     public override void Initialize()
     {
-        SubscribeLocalEvent<GunAPStacksMofifierComponent, AmmoShotEvent>(OnGunShot);
-        SubscribeLocalEvent<PumpActionComponent, AttemptShootEvent>(OnAttemptShoot);
+        SubscribeLocalEvent<GunAPStacksModifierComponent, AmmoShotEvent>(OnGunShot);
+        SubscribeLocalEvent<GunAPStacksModifierComponent, BulletHitEvent>(ChangeStack);
     }
     private void OnGunShot()
     {
         //Apply AP to the bullet
+    }
+    private void ChangeStack()
+    {
+        //If xenoid hit increase stack
+        //if anything else decrease stack
     }
 }
