@@ -251,15 +251,36 @@
 #        amount: 7
 
 - type: entity
-  parent: CMVendor
+  parent: ColMarTechBase
   id: CMVendorBlood
   name: MM Blood Dispenser
   description: The Marine Med Brand Blood Pack Dispensary is the premier, top-of-the-line blood dispenser of 2105! Get yours today! #dont update year, that`s a joke from cm13
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/blood.rsi
-  - type: VendingMachine
-    pack: CMVendorBlood
+    snapCardinals: true
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+      shader: unshaded
+    - state: "panel"
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: ApcPowerReceiver
     needsPower: false # TODO RMC14
     powerLoad: 0
+  - type: AccessReader
+    access:
+    - [ "CMAccessMedical" ]
+  - type: CMAutomatedVendor
+    sections:
+    - name: Blood Packs
+      entries:
+      - id: CMBloodPackFull
+        amount: 30
+    - name: Miscellaneous
+      entries:
+      - id: CMBloodPack
+        amount: 5
+        name: empty blood pack
