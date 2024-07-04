@@ -118,6 +118,7 @@
       - TrayScanner
       - GasAnalyzer
       - LightReplacer
+      - EntrenchingTool
   - type: IgnoreContentsSize
     items:
       components:
@@ -159,6 +160,7 @@
       - TrayScanner
       - GasAnalyzer
       - LightReplacer
+      - EntrenchingTool
   - type: FixedItemSizeStorage
 
 - type: entity
