@@ -30,11 +30,6 @@
       police: 1
       research: 1
       surgery: 2
-    - type: MobThresholds
-      thresholds:
-        0: Alive
-        75: Critical
-        200: Dead
     - type: RMCUserBulkyArmorIncapable
     - type: MarineOrders
 
