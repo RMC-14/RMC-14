@@ -278,9 +278,10 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             return false;
         }
 
-        if (!force &&
-            TryComp(victim, out StandingStateComponent? standing) &&
-            !_standing.IsDown(victim, standing))
+        if (!force
+            && !HasComp<XenoNestedComponent>(victim)
+            && TryComp(victim, out StandingStateComponent? standing)
+            && !_standing.IsDown(victim, standing))
         {
             if (popup)
                 _popup.PopupClient(Loc.GetString("rmc-xeno-failed-cant-reach", ("target", victim)), victim, user, PopupType.MediumCaution);
