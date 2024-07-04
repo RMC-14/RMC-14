@@ -2076,5 +2076,14 @@
   id: 254
   time: '2024-07-03T12:01:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2787
+- author: ShadowCommander
+  changes:
+  - message: Changed parasite interaction on a host from hug to infect.
+    type: Add
+  - message: Fixed nests blocking host infection.
+    type: Fix
+  id: 255
+  time: '2024-07-04T01:51:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2802
 Name: RMC14
 Order: -1
