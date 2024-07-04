@@ -2151,5 +2151,13 @@
   id: 263
   time: '2024-07-04T04:43:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2806
+- author: DrSmugleaf
+  changes:
+  - message: 'The roadmap has been updated to reflect current and upcoming changes:
+      Blood types, Smart Gun Operator, and the Weapons Specialist''s Grenadier kit.'
+    type: Tweak
+  id: 264
+  time: '2024-07-04T04:59:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2803
 Name: RMC14
 Order: -1
