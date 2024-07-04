@@ -269,19 +269,19 @@
       - id: CMBoxShotgunSlugs
         amount: 40
       - id: CMMagazineRifleM4SPR
-        amount: 60
+        amount: 45
       - id: CMMagazineRifleM54C
         amount: 100
       - id: CMMagazineSMGM63
         amount: 100
       #- id: M44 Speed Loader (.44)
       #  amount: 80
-      #- id: M4A3 Magazine (9mm)
-      #  amount: 100
+      - id: CMMagazinePistolM1984
+        amount: 102
     - name: Armor-piercing ammunition
       entries:
-      #- id: 88 Mod 4 AP Magazine (9mm)
-      #  amount: 50
+      - id: CMMagazinePistolM77AP
+        amount: 50
       - id: CMMagazineRifleM4SPRAP
         amount: 16
       - id: CMMagazineSMGM63AP
@@ -342,7 +342,7 @@
       #  amount: 1
 
  #ATTACHMENTS VENDOR
- 
+
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCargoAttachments
