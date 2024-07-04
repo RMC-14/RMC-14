@@ -92,6 +92,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
     public override void Shutdown()
     {
+        base.Shutdown();
         CommandBinds.Unregister<SharedCMInventorySystem>();
     }
 
