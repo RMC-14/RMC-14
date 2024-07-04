@@ -25,11 +25,7 @@ public abstract class GunAPStacksSystem : EntitySystem
     private void ChangeStack(Entity<GunAPStacksModifierComponent> ent, EntityUid? shooter, EntityUid weapon, EntityUid target)
     {
         //If xenoid hit increase stack
-        if(ent.Comp.Stacks > 5)
-        {
-            ent.Comp.Stacks = 5;
-        }
-        else
+        if(ent.Comp.Stacks < 5)
         {
             ent.Comp.Stacks++;
         }
