@@ -2187,5 +2187,13 @@
   id: 268
   time: '2024-07-04T11:38:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2791
+- author: DrSmugleaf
+  changes:
+  - message: With the addition of requisitions vendors, the default money gain of
+      requisitions has been lowered back down from 1500 per minute to 600 per minute.
+    type: Tweak
+  id: 269
+  time: '2024-07-04T11:43:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2815
 Name: RMC14
 Order: -1
