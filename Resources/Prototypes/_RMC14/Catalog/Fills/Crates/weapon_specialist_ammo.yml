@@ -7,9 +7,9 @@
     contents:
     - id: CMMagazineSniperM96S
       amount: 2
-    - id: CMMagazineSniperM96SFlak
+    - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
       amount: 2
-    - id: CMMagazineSniperM96SIncendiary
+    - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SIncendiary
       amount: 2
 
 - type: entity
@@ -29,7 +29,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazineSniperM96SFlak
+    - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
       amount: 5
 
 - type: entity
@@ -39,5 +39,5 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazineSniperM96SIncendiary
+    - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SIncendiary
       amount: 5
