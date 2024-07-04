@@ -1,0 +1,20 @@
+﻿- type: entity
+  parent:
+  - CMXenoRunner
+  id: RMCXenoRouny
+  name: Rouny
+  suffix: xenoid version
+  description: thas a fuckin rouny
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Rouny.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: XenoEvolution
+    max: 300
+    evolvesTo: [ ]
+  - type: Tackle
+    threshold: 2
+    stun: 20 #lol
