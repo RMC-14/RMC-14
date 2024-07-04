@@ -5,6 +5,7 @@
   name: Rouny
   suffix: RMC14
   description: thas a fuckin rouny
+  components:
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Rouny.rsi
   - type: MobState
