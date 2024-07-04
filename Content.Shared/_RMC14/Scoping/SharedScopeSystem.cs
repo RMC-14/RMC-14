@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using Content.Shared.Actions;
+using Content.Shared.Camera;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
@@ -22,6 +23,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedContentEyeSystem _contentEye = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
@@ -241,6 +243,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
         _actionsSystem.SetToggled(scope.Comp.ScopingToggleActionEntity, true);
         _contentEye.SetZoom(user, Vector2.One * scope.Comp.Zoom, true);
+        UpdateOffset(user);
     }
 
     protected virtual bool Unscope(Entity<ScopeComponent> scope)
@@ -312,5 +315,12 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
     protected virtual void DeleteRelay(Entity<ScopeComponent> scope, EntityUid? user)
     {
+    }
+
+    private void UpdateOffset(EntityUid user)
+    {
+        var ev = new GetEyeOffsetEvent();
+        RaiseLocalEvent(user, ref ev);
+        _eye.SetOffset(user, ev.Offset);
     }
 }
