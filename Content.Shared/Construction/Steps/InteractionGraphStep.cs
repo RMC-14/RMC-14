@@ -3,6 +3,7 @@ using ConstructionInteractionVerbComponent = Content.Shared.Construction.Compone
 
 namespace Content.Shared.Construction.Steps;
 
+[DataDefinition]
 public sealed partial class InteractionGraphStep : ConstructionGraphStep
 {
     /// <summary>
