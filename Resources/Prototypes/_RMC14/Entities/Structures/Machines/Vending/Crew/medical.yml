@@ -1,0 +1,97 @@
+# MEDICAL
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechCrewMedicalEquipment
+  name: ColMarTech Medical Equipment Rack
+  description: An automated equipment vendor for the Medical Department.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessMedical" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMNurse
+    - CMDoctor
+    - CMResearcher
+    - CMCMO
+    sections:
+    - name: Medical Set (Mandatory)
+      takeAll: CMMedicalSet
+      entries:
+      - id: CMVendorBundleCrewMedicalEssentialsNurse
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: CMHandsLatex
+      - id: CMHeadsetMedical
+    - name: Eyewear
+      choices: { CMEyewear: 1 }
+      entries:
+      - id: RMCGlassesMedicalHUDGlasses
+#      - id: Prescription Medical HUD Glasses
+    - name: Uniform
+      choices: { CMUniform: 1 }
+      entries:
+      - id: CMScrubsNurse
+#      - id: Green Scrubs
+#      - id: Blue Scrubs
+#      - id: Purple Scrubs
+#    - name: Suit
+#      choices: { CMSuit: 1 }
+#      entries:
+#      - id: Medical's apron
+#    - name: Snow gear (Snow use only)
+#      takeall: CMSnowgear
+#      entries:
+#      - id: Snowcoat
+#      - id: Balaclava
+#      - id: Snow Scarf
+    - name: Headwear
+      choices: { CMHeadwear: 1 }
+      entries:
+      - id: CMHeadCapSurgOrange
+      - id: CMHeadCapSurgBlue
+      - id: CMHeadCapSurgPurple
+      - id: CMHeadCapSurgGreen
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      - id: CMBeltMedicBagFilled
+      - id: CMBeltMedicalFilled
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: CMBackpackMarine
+        name: backpack
+      - id: CMSatchelMarine
+        name: satchel
+      - id: CMBackpackMedical
+      - id: CMSatchelMedical
+    - name: Pouches
+      choices: { CMPouch: 2 }
+      entries:
+      - id: CMPouchAutoinjector
+      - id: CMPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
+      - id: CMPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+      - id: CMPouchFirstAidPills
+        name: first-aid pouch (pills)
+      - id: CMPouchFirstResponder
+      - id: CMPouchMedical
+      #- id: CMMedicalKitPouch
+      #- id: CMPressurizedReagentCanisterPouchBicaridine
+      #- id: CMPressurizedReagentCanisterPouchKelotane
+      #- id: CMPressurizedReagentCanisterPouchRevivalMix
+      #- id: CMPressurizedReagentCanisterPouchTricordrazine
+      #- id: CMPressurizedReagentCanisterPouchEmpty
+      #- id: CMSlingPouch
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBrown
+      - id: CMWebbingBlack
+      - id: CMWebbing
