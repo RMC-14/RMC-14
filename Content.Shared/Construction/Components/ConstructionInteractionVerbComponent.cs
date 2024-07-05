@@ -4,8 +4,8 @@
 public sealed partial class ConstructionInteractionVerbComponent : Component
 {
     [DataField]
-    public string VerbText = "construction-interaction-component-verb";
+    public LocId VerbText = "construction-interaction-component-verb";
 
     [DataField]
-    public string VerbFailedText = "construction-interaction-component-verb-failed";
+    public LocId VerbFailedText = "construction-interaction-component-verb-failed";
 }
