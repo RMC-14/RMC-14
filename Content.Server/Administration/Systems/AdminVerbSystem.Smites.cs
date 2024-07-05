@@ -103,6 +103,7 @@ public sealed partial class AdminVerbSystem
             Act = () =>
             {
                 var coords = _transformSystem.GetMapCoordinates(args.Target);
+                // RMC-14: Add explosionCause argument, set to null, to QueueExplosion call.
                 Timer.Spawn(_gameTiming.TickPeriod,
                     () => _explosionSystem.QueueExplosion(coords, ExplosionSystem.DefaultExplosionPrototypeId,
                         4, 1, 2, maxTileBreak: 0, explosionCause: null), // it gibs, damage doesn't need to be high.

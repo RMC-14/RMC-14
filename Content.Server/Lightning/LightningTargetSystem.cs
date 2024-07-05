@@ -33,10 +33,12 @@ public sealed class LightningTargetSystem : EntitySystem
             _explosionSystem.QueueExplosion(
                 _transform.GetMapCoordinates(uid),
                 uid.Comp.ExplosionPrototype,
-                uid.Comp.TotalIntensity, uid.Comp.Dropoff,
+                uid.Comp.TotalIntensity,
+                uid.Comp.Dropoff,
                 uid.Comp.MaxTileIntensity,
                 canCreateVacuum: false,
-                explosionCause: null);
+                explosionCause: null // RMC-14
+            );
         }
     }
 }

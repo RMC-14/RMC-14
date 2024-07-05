@@ -257,7 +257,18 @@ public sealed partial class ExplosionSystem : EntitySystem
 
         var posFound = _transformSystem.TryGetMapOrGridCoordinates(uid, out var gridPos, pos);
 
-        QueueExplosion(mapPos, typeId, totalIntensity, slope, maxTileIntensity, uid, tileBreakScale, maxTileBreak, canCreateVacuum, addLog: false);
+        QueueExplosion(
+            mapPos,
+            typeId,
+            totalIntensity,
+            slope,
+            maxTileIntensity,
+            uid, // RMC-14: uid is the cause of the explosion. Pass it.
+            tileBreakScale,
+            maxTileBreak,
+            canCreateVacuum,
+            addLog: false
+        );
 
         if (!addLog)
             return;
@@ -285,7 +296,7 @@ public sealed partial class ExplosionSystem : EntitySystem
         float totalIntensity,
         float slope,
         float maxTileIntensity,
-        EntityUid? explosionCause,
+        EntityUid? explosionCause, // RMC-14
         float tileBreakScale = 1f,
         int maxTileBreak = int.MaxValue,
         bool canCreateVacuum = true,
@@ -330,7 +341,7 @@ public sealed partial class ExplosionSystem : EntitySystem
             TileBreakScale = tileBreakScale,
             MaxTileBreak = maxTileBreak,
             CanCreateVacuum = canCreateVacuum,
-            ExplosionCause = explosionCause
+            ExplosionCause = explosionCause // RMC-14
         };
         _explosionQueue.Enqueue(boom);
         _queuedExplosions.Add(boom);
@@ -347,20 +358,30 @@ public sealed partial class ExplosionSystem : EntitySystem
         if (!_mapManager.MapExists(pos.MapId))
             return null;
 
-        var results = GetExplosionTiles(pos, queued.Proto.ID, queued.TotalIntensity, queued.Slope, queued.MaxTileIntensity);
+        var results = GetExplosionTiles(pos,
+            queued.Proto.ID,
+            queued.TotalIntensity,
+            queued.Slope,
+            queued.MaxTileIntensity);
 
         if (results == null)
             return null;
 
         var (area, iterationIntensity, spaceData, gridData, spaceMatrix) = results.Value;
 
-        var visualEnt = CreateExplosionVisualEntity(pos, queued.Proto.ID, spaceMatrix, spaceData, gridData.Values, iterationIntensity);
+        var visualEnt = CreateExplosionVisualEntity(pos,
+            queued.Proto.ID,
+            spaceMatrix,
+            spaceData,
+            gridData.Values,
+            iterationIntensity);
 
         // camera shake
         CameraShake(iterationIntensity.Count * 4f, pos, queued.TotalIntensity);
 
         //For whatever bloody reason, sound system requires ENTITY coordinates.
-        var mapEntityCoords = EntityCoordinates.FromMap(_mapManager.GetMapEntityId(pos.MapId), pos, _transformSystem, EntityManager);
+        var mapEntityCoords =
+            EntityCoordinates.FromMap(_mapManager.GetMapEntityId(pos.MapId), pos, _transformSystem, EntityManager);
 
         // play sound.
         // for the normal audio, we want everyone in pvs range
@@ -400,7 +421,8 @@ public sealed partial class ExplosionSystem : EntitySystem
             EntityManager,
             _mapManager,
             visualEnt,
-            queued.ExplosionCause);
+            queued.ExplosionCause // RMC-14
+        );
     }
 
     private void CameraShake(float range, MapCoordinates epicenter, float totalIntensity)

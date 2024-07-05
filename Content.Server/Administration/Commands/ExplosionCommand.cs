@@ -132,6 +132,7 @@ public sealed class ExplosionCommand : IConsoleCommand
         }
 
         var sysMan = IoCManager.Resolve<IEntitySystemManager>();
+        // RMC-14: Add explosionCause argument to QueueExplosion call, set to null.
         sysMan.GetEntitySystem<ExplosionSystem>().QueueExplosion(coords, type.ID, intensity, slope, maxIntensity, explosionCause: null);
     }
 }

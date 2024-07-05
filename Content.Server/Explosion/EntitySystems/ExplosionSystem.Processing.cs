@@ -208,7 +208,8 @@ public sealed partial class ExplosionSystem
         HashSet<EntityUid> processed,
         string id,
         float? fireStacks,
-        EntityUid? explosionCause)
+        EntityUid? explosionCause // RMC-14
+        )
     {
         var size = grid.Comp.TileSize;
         var gridBox = new Box2(tile * size, (tile + 1) * size);
@@ -227,7 +228,7 @@ public sealed partial class ExplosionSystem
         // process those entities
         foreach (var (uid, xform) in list)
         {
-            ProcessEntity(uid, epicenter, damage, throwForce, id, xform, fireStacks, explosionCause);
+            ProcessEntity(uid, epicenter, damage, throwForce, id, xform, fireStacks, explosionCause); // RMC-14: Add explosionCause
         }
 
         // process anchored entities
@@ -237,7 +238,7 @@ public sealed partial class ExplosionSystem
         foreach (var entity in _anchored)
         {
             processed.Add(entity);
-            ProcessEntity(entity, epicenter, damage, throwForce, id, null, fireStacks, explosionCause);
+            ProcessEntity(entity, epicenter, damage, throwForce, id, null, fireStacks, explosionCause); // RMC-14: Add explosionCause
         }
 
         // Walls and reinforced walls will break into girders. These girders will also be considered turf-blocking for
@@ -273,7 +274,7 @@ public sealed partial class ExplosionSystem
         {
             // Here we only throw, no dealing damage. Containers n such might drop their entities after being destroyed, but
             // they should handle their own damage pass-through, with their own damage reduction calculation.
-            ProcessEntity(uid, epicenter, null, throwForce, id, xform, null, explosionCause);
+            ProcessEntity(uid, epicenter, null, throwForce, id, xform, null, explosionCause); // RMC-14: Add explosionCause
         }
 
         return !tileBlocked;
@@ -310,7 +311,8 @@ public sealed partial class ExplosionSystem
         HashSet<EntityUid> processed,
         string id,
         float? fireStacks,
-        EntityUid? explosionCause)
+        EntityUid? explosionCause // RMC-14
+        )
     {
         var gridBox = Box2.FromDimensions(tile * DefaultTileSize, new Vector2(DefaultTileSize, DefaultTileSize));
         var worldBox = spaceMatrix.TransformBox(gridBox);
@@ -326,7 +328,7 @@ public sealed partial class ExplosionSystem
         foreach (var (uid, xform) in state.Item1)
         {
             processed.Add(uid);
-            ProcessEntity(uid, epicenter, damage, throwForce, id, xform, fireStacks, explosionCause);
+            ProcessEntity(uid, epicenter, damage, throwForce, id, xform, fireStacks, explosionCause); // RMC-14: Add explosionCause
         }
 
         if (throwForce <= 0)
@@ -340,7 +342,7 @@ public sealed partial class ExplosionSystem
 
         foreach (var (uid, xform) in list)
         {
-            ProcessEntity(uid, epicenter, null, throwForce, id, xform, fireStacks, explosionCause);
+            ProcessEntity(uid, epicenter, null, throwForce, id, xform, fireStacks, explosionCause); // RMC-14: Add explosionCause
         }
     }
 
@@ -439,7 +441,8 @@ public sealed partial class ExplosionSystem
         string id,
         TransformComponent? xform,
         float? fireStacksOnIgnite,
-        EntityUid? explosionCause)
+        EntityUid? explosionCause // RMC-14
+        )
     {
         if (originalDamage != null)
         {
@@ -672,7 +675,7 @@ sealed class Explosion
 
     public readonly EntityUid VisualEnt;
 
-    private readonly EntityUid? _explosionCause;
+    private readonly EntityUid? _explosionCause; // RMC-14
 
     /// <summary>
     ///     Initialize a new instance for processing
@@ -691,10 +694,11 @@ sealed class Explosion
         IEntityManager entMan,
         IMapManager mapMan,
         EntityUid visualEnt,
-        EntityUid? explosionCause)
+        EntityUid? explosionCause // RMC-14
+        )
     {
         VisualEnt = visualEnt;
-        _explosionCause = explosionCause;
+        _explosionCause = explosionCause; // RMC-14
         _system = system;
         ExplosionType = explosionType;
         _tileSetIntensity = tileSetIntensity;
@@ -859,7 +863,8 @@ sealed class Explosion
                     ProcessedEntities,
                     ExplosionType.ID,
                     ExplosionType.FireStacks,
-                    _explosionCause);
+                    _explosionCause // RMC-14
+                    );
 
                 // If the floor is not blocked by some dense object, damage the floor tiles.
                 if (canDamageFloor)
@@ -878,7 +883,8 @@ sealed class Explosion
                     ProcessedEntities,
                     ExplosionType.ID,
                     ExplosionType.FireStacks,
-                    _explosionCause);
+                    _explosionCause // RMC-14
+                    );
             }
 
             if (!MoveNext())
@@ -919,5 +925,5 @@ public sealed class QueuedExplosion
     public float TotalIntensity, Slope, MaxTileIntensity, TileBreakScale;
     public int MaxTileBreak;
     public bool CanCreateVacuum;
-    public EntityUid? ExplosionCause;
+    public EntityUid? ExplosionCause; // RMC-14
 }

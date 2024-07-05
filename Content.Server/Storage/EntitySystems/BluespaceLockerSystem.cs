@@ -390,7 +390,7 @@ public sealed class BluespaceLockerSystem : EntitySystem
         {
             case BluespaceLockerDestroyType.Explode:
                 _explosionSystem.QueueExplosion(uid.ToCoordinates().ToMap(EntityManager, _transformSystem),
-                    ExplosionSystem.DefaultExplosionPrototypeId, 4, 1, 2, maxTileBreak: 0, explosionCause: null);
+                    ExplosionSystem.DefaultExplosionPrototypeId, 4, 1, 2, maxTileBreak: 0, explosionCause: null); // RMC-14: Add explosionCause, set to null
                 goto case BluespaceLockerDestroyType.Delete;
             case BluespaceLockerDestroyType.Delete:
                 QueueDel(uid);
