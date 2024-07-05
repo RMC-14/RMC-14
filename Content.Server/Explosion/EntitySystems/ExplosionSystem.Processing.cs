@@ -2,6 +2,7 @@ using System.Numerics;
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
+using Content.Shared.Database;
 using Content.Shared.Explosion;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Maps;
@@ -13,6 +14,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics;
+using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -441,9 +443,19 @@ public sealed partial class ExplosionSystem
             GetEntitiesToDamage(uid, originalDamage, id);
             foreach (var (entity, damage) in _toDamage)
             {
+                // BEGIN RMC-14 ADDITION: Log explosion damage to players.
+                if (TryComp<ActorComponent>(entity, out var actorComponent)) // Filter for "humanoids".
+                {
+                    // No idea why uid is referring to the player who caused the explosion if grenade, but it is.
+                    _adminLogger.Add(
+                        LogType.HitScanHit,
+                        LogImpact.High,
+                        $"{ToPrettyString(uid):cause} caused an explosion at {epicenter:coordinates}, dealing {damage.GetTotal():damage} to {ToPrettyString(entity):damageTarget}."
+                    );
+                }
+                // END RMC-14 ADDITION
                 // TODO EXPLOSIONS turn explosions into entities, and pass the the entity in as the damage origin.
                 _damageableSystem.TryChangeDamage(entity, damage, ignoreResistances: true);
-
             }
         }
 
