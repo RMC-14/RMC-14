@@ -2241,5 +2241,13 @@
   id: 274
   time: '2024-07-05T10:32:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2827
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the round not ending when the only marines left alive and not infected
+      are all nested.
+    type: Fix
+  id: 275
+  time: '2024-07-05T10:39:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2830
 Name: RMC14
 Order: -1
