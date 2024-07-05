@@ -1,0 +1,392 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/ec4ab3ab5734c5388a95f723d1c98b178519d0ae/icons/turf/ert_shuttle.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "leftengine_1",
+      "directions": 4
+    },
+    {
+      "name": "leftengine_2",
+      "directions": 4
+    },
+    {
+      "name": "leftengine_3",
+      "directions": 4
+    },
+    {
+      "name": "rightengine_1",
+      "directions": 4
+    },
+    {
+      "name": "rightengine_2",
+      "directions": 4
+    },
+    {
+      "name": "rightengine_3",
+      "directions": 4
+    },
+    {
+      "name": "stan1",
+      "directions": 4
+    },
+    {
+      "name": "stan2",
+      "directions": 4
+    },
+    {
+      "name": "stan3",
+      "directions": 4
+    },
+    {
+      "name": "stan_l_w",
+      "directions": 4
+    },
+    {
+      "name": "stan_r_w",
+      "directions": 4
+    },
+    {
+      "name": "stan4",
+      "directions": 4
+    },
+    {
+      "name": "stan_inner_w_2",
+      "directions": 4
+    },
+    {
+      "name": "stan5",
+      "directions": 4
+    },
+    {
+      "name": "stan_leftengine",
+      "directions": 4
+    },
+    {
+      "name": "stan8",
+      "directions": 4
+    },
+    {
+      "name": "stan9",
+      "directions": 4
+    },
+    {
+      "name": "stan_rightengine",
+      "directions": 4
+    },
+    {
+      "name": "stan20",
+      "directions": 4
+    },
+    {
+      "name": "stan21",
+      "directions": 4
+    },
+    {
+      "name": "stan22",
+      "directions": 4
+    },
+    {
+      "name": "stan23",
+      "directions": 4
+    },
+    {
+      "name": "stan25",
+      "directions": 4
+    },
+    {
+      "name": "stan27",
+      "directions": 4
+    },
+    {
+      "name": "stan_black_t_down",
+      "directions": 4
+    },
+    {
+      "name": "stan_black_t_up",
+      "directions": 4
+    },
+    {
+      "name": "stan_inner_dark",
+      "directions": 4
+    },
+    {
+      "name": "stan_inner_s_w",
+      "directions": 4
+    },
+    {
+      "name": "stan_inner_t_right",
+      "directions": 4
+    },
+    {
+      "name": "stan_inner_t_left",
+      "directions": 4
+    },
+    {
+      "name": "stan_inner_w_1",
+      "directions": 4
+    },
+    {
+      "name": "stan_white_t_up",
+      "directions": 4
+    },
+    {
+      "name": "upp1",
+      "directions": 4
+    },
+    {
+      "name": "upp2",
+      "directions": 4
+    },
+    {
+      "name": "upp3",
+      "directions": 4
+    },
+    {
+      "name": "upp4",
+      "directions": 4
+    },
+    {
+      "name": "upp5",
+      "directions": 4
+    },
+    {
+      "name": "upp_leftengine",
+      "directions": 4
+    },
+    {
+      "name": "upp8",
+      "directions": 4
+    },
+    {
+      "name": "upp9",
+      "directions": 4
+    },
+    {
+      "name": "upp_rightengine",
+      "directions": 4
+    },
+    {
+      "name": "upp16",
+      "directions": 4
+    },
+    {
+      "name": "upp20",
+      "directions": 4
+    },
+    {
+      "name": "upp21",
+      "directions": 4
+    },
+    {
+      "name": "upp22",
+      "directions": 4
+    },
+    {
+      "name": "upp23",
+      "directions": 4
+    },
+    {
+      "name": "upp25",
+      "directions": 4
+    },
+    {
+      "name": "upp27",
+      "directions": 4
+    },
+    {
+      "name": "wy1",
+      "directions": 4
+    },
+    {
+      "name": "wy2",
+      "directions": 4
+    },
+    {
+      "name": "wy3",
+      "directions": 4
+    },
+    {
+      "name": "wy4",
+      "directions": 4
+    },
+    {
+      "name": "wy5",
+      "directions": 4
+    },
+    {
+      "name": "wy_leftengine",
+      "directions": 4
+    },
+    {
+      "name": "wy8",
+      "directions": 4
+    },
+    {
+      "name": "wy9",
+      "directions": 4
+    },
+    {
+      "name": "wy_rightengine",
+      "directions": 4
+    },
+    {
+      "name": "wy12",
+      "directions": 4
+    },
+    {
+      "name": "wy13",
+      "directions": 4
+    },
+    {
+      "name": "wy14",
+      "directions": 4
+    },
+    {
+      "name": "wy15",
+      "directions": 4
+    },
+    {
+      "name": "wy16",
+      "directions": 4
+    },
+    {
+      "name": "wy17",
+      "directions": 4
+    },
+    {
+      "name": "wy20",
+      "directions": 4
+    },
+    {
+      "name": "wy21",
+      "directions": 4
+    },
+    {
+      "name": "wy22",
+      "directions": 4
+    },
+    {
+      "name": "wy23",
+      "directions": 4
+    },
+    {
+      "name": "wy25",
+      "directions": 4
+    },
+    {
+      "name": "wy27",
+      "directions": 4
+    },
+    {
+      "name": "T1"
+    },
+    {
+      "name": "T2"
+    },
+    {
+      "name": "T3"
+    },
+    {
+      "name": "T4"
+    },
+    {
+      "name": "T5"
+    },
+    {
+      "name": "T6"
+    },
+    {
+      "name": "T15"
+    },
+    {
+      "name": "T7"
+    },
+    {
+      "name": "T8"
+    },
+    {
+      "name": "T20"
+    },
+    {
+      "name": "T9"
+    },
+    {
+      "name": "T17"
+    },
+    {
+      "name": "T10"
+    },
+    {
+      "name": "T19"
+    },
+    {
+      "name": "T11"
+    },
+    {
+      "name": "T16"
+    },
+    {
+      "name": "T12"
+    },
+    {
+      "name": "T13"
+    },
+    {
+      "name": "T14"
+    },
+    {
+      "name": "twe1"
+    },
+    {
+      "name": "twe2"
+    },
+    {
+      "name": "twe3"
+    },
+    {
+      "name": "twe4"
+    },
+    {
+      "name": "twe5"
+    },
+    {
+      "name": "twe_leftengine"
+    },
+    {
+      "name": "twe8"
+    },
+    {
+      "name": "twe9"
+    },
+    {
+      "name": "twe_rightengine"
+    },
+    {
+      "name": "twe16"
+    },
+    {
+      "name": "twe20"
+    },
+    {
+      "name": "twe21"
+    },
+    {
+      "name": "twe22"
+    },
+    {
+      "name": "twe23"
+    },
+    {
+      "name": "twe25"
+    },
+    {
+      "name": "twe27"
+    }
+  ]
+}
