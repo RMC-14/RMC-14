@@ -454,7 +454,7 @@ public sealed partial class ExplosionSystem
                         _adminLogger.Add(
                             LogType.HitScanHit,
                             LogImpact.High,
-                            $"Explosion at {epicenter:coordinates} dealt {damage.GetTotal():damage} to {ToPrettyString(entity):damageTarget}."
+                            $"Explosion at {epicenter:coordinates} dealt {damage.GetTotal():damage} to {ToPrettyString(entity)}."
                         );
                     }
                     else
@@ -462,7 +462,7 @@ public sealed partial class ExplosionSystem
                         _adminLogger.Add(
                             LogType.HitScanHit,
                             LogImpact.High,
-                            $"{ToPrettyString(explosionCause):cause} caused an explosion at {epicenter:coordinates}, dealing {damage.GetTotal():damage} to {ToPrettyString(entity):damageTarget}."
+                            $"{ToPrettyString(explosionCause)} caused an explosion at {epicenter:coordinates}, dealing {damage.GetTotal():damage} to {ToPrettyString(entity)}."
                         );
                     }
                 }
