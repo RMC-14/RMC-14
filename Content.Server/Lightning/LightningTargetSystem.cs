@@ -35,7 +35,8 @@ public sealed class LightningTargetSystem : EntitySystem
                 uid.Comp.ExplosionPrototype,
                 uid.Comp.TotalIntensity, uid.Comp.Dropoff,
                 uid.Comp.MaxTileIntensity,
-                canCreateVacuum: false);
+                canCreateVacuum: false,
+                explosionCause: null);
         }
     }
 }

@@ -207,7 +207,8 @@ public sealed partial class ExplosionSystem
         MapCoordinates epicenter,
         HashSet<EntityUid> processed,
         string id,
-        float? fireStacks)
+        float? fireStacks,
+        EntityUid? explosionCause)
     {
         var size = grid.Comp.TileSize;
         var gridBox = new Box2(tile * size, (tile + 1) * size);
@@ -226,7 +227,7 @@ public sealed partial class ExplosionSystem
         // process those entities
         foreach (var (uid, xform) in list)
         {
-            ProcessEntity(uid, epicenter, damage, throwForce, id, xform, fireStacks);
+            ProcessEntity(uid, epicenter, damage, throwForce, id, xform, fireStacks, explosionCause);
         }
 
         // process anchored entities
@@ -236,7 +237,7 @@ public sealed partial class ExplosionSystem
         foreach (var entity in _anchored)
         {
             processed.Add(entity);
-            ProcessEntity(entity, epicenter, damage, throwForce, id, null, fireStacks);
+            ProcessEntity(entity, epicenter, damage, throwForce, id, null, fireStacks, explosionCause);
         }
 
         // Walls and reinforced walls will break into girders. These girders will also be considered turf-blocking for
@@ -272,7 +273,7 @@ public sealed partial class ExplosionSystem
         {
             // Here we only throw, no dealing damage. Containers n such might drop their entities after being destroyed, but
             // they should handle their own damage pass-through, with their own damage reduction calculation.
-            ProcessEntity(uid, epicenter, null, throwForce, id, xform, null);
+            ProcessEntity(uid, epicenter, null, throwForce, id, xform, null, explosionCause);
         }
 
         return !tileBlocked;
@@ -308,7 +309,8 @@ public sealed partial class ExplosionSystem
         MapCoordinates epicenter,
         HashSet<EntityUid> processed,
         string id,
-        float? fireStacks)
+        float? fireStacks,
+        EntityUid? explosionCause)
     {
         var gridBox = Box2.FromDimensions(tile * DefaultTileSize, new Vector2(DefaultTileSize, DefaultTileSize));
         var worldBox = spaceMatrix.TransformBox(gridBox);
@@ -324,7 +326,7 @@ public sealed partial class ExplosionSystem
         foreach (var (uid, xform) in state.Item1)
         {
             processed.Add(uid);
-            ProcessEntity(uid, epicenter, damage, throwForce, id, xform, fireStacks);
+            ProcessEntity(uid, epicenter, damage, throwForce, id, xform, fireStacks, explosionCause);
         }
 
         if (throwForce <= 0)
@@ -338,7 +340,7 @@ public sealed partial class ExplosionSystem
 
         foreach (var (uid, xform) in list)
         {
-            ProcessEntity(uid, epicenter, null, throwForce, id, xform, fireStacks);
+            ProcessEntity(uid, epicenter, null, throwForce, id, xform, fireStacks, explosionCause);
         }
     }
 
@@ -436,7 +438,8 @@ public sealed partial class ExplosionSystem
         float throwForce,
         string id,
         TransformComponent? xform,
-        float? fireStacksOnIgnite)
+        float? fireStacksOnIgnite,
+        EntityUid? explosionCause)
     {
         if (originalDamage != null)
         {
@@ -446,12 +449,22 @@ public sealed partial class ExplosionSystem
                 // BEGIN RMC-14 ADDITION: Log explosion damage to players.
                 if (TryComp<ActorComponent>(entity, out var actorComponent)) // Filter for "humanoids".
                 {
-                    // No idea why uid is referring to the player who caused the explosion if grenade, but it is.
-                    _adminLogger.Add(
-                        LogType.HitScanHit,
-                        LogImpact.High,
-                        $"{ToPrettyString(uid):cause} caused an explosion at {epicenter:coordinates}, dealing {damage.GetTotal():damage} to {ToPrettyString(entity):damageTarget}."
-                    );
+                    if (explosionCause == null)
+                    {
+                        _adminLogger.Add(
+                            LogType.HitScanHit,
+                            LogImpact.High,
+                            $"Explosion at {epicenter:coordinates} dealt {damage.GetTotal():damage} to {ToPrettyString(entity):damageTarget}."
+                        );
+                    }
+                    else
+                    {
+                        _adminLogger.Add(
+                            LogType.HitScanHit,
+                            LogImpact.High,
+                            $"{ToPrettyString(explosionCause):cause} caused an explosion at {epicenter:coordinates}, dealing {damage.GetTotal():damage} to {ToPrettyString(entity):damageTarget}."
+                        );
+                    }
                 }
                 // END RMC-14 ADDITION
                 // TODO EXPLOSIONS turn explosions into entities, and pass the the entity in as the damage origin.
@@ -659,6 +672,8 @@ sealed class Explosion
 
     public readonly EntityUid VisualEnt;
 
+    private readonly EntityUid? _explosionCause;
+
     /// <summary>
     ///     Initialize a new instance for processing
     /// </summary>
@@ -675,9 +690,11 @@ sealed class Explosion
         bool canCreateVacuum,
         IEntityManager entMan,
         IMapManager mapMan,
-        EntityUid visualEnt)
+        EntityUid visualEnt,
+        EntityUid? explosionCause)
     {
         VisualEnt = visualEnt;
+        _explosionCause = explosionCause;
         _system = system;
         ExplosionType = explosionType;
         _tileSetIntensity = tileSetIntensity;
@@ -841,7 +858,8 @@ sealed class Explosion
                     Epicenter,
                     ProcessedEntities,
                     ExplosionType.ID,
-                    ExplosionType.FireStacks);
+                    ExplosionType.FireStacks,
+                    _explosionCause);
 
                 // If the floor is not blocked by some dense object, damage the floor tiles.
                 if (canDamageFloor)
@@ -859,7 +877,8 @@ sealed class Explosion
                     Epicenter,
                     ProcessedEntities,
                     ExplosionType.ID,
-                    ExplosionType.FireStacks);
+                    ExplosionType.FireStacks,
+                    _explosionCause);
             }
 
             if (!MoveNext())
@@ -900,4 +919,5 @@ public sealed class QueuedExplosion
     public float TotalIntensity, Slope, MaxTileIntensity, TileBreakScale;
     public int MaxTileBreak;
     public bool CanCreateVacuum;
+    public EntityUid? ExplosionCause;
 }
