@@ -160,8 +160,8 @@
       entries:
       - id: CMBackpackWelder
         amount: 1
-#      - id: Technician Welder-Satchel
-#        amount: 2
+      - id: RMCSatchelWelder
+        amount: 2
 #      - id: Radio Telephone Backpack
 #        amount: 1
     - name: Belts
