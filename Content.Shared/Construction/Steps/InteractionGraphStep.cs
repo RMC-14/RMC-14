@@ -3,9 +3,11 @@ using ConstructionInteractionVerbComponent = Content.Shared.Construction.Compone
 
 namespace Content.Shared.Construction.Steps;
 
-[DataDefinition]
 public sealed partial class InteractionGraphStep : ConstructionGraphStep
 {
+    [DataField]
+    public string? Interaction;
+
     /// <summary>
     /// A localization string used for the guidebook.
     /// </summary>
