@@ -3,6 +3,7 @@
   id: CMHealthIconBase
   priority: 1
   locationPreference: Left
+  isShaded: true
 
 - type: statusIcon
   parent: CMHealthIconBase

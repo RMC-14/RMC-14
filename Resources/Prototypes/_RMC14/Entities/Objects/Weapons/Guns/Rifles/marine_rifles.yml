@@ -24,6 +24,8 @@
     steps: 1
     zeroVisible: true
   - type: Appearance
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
 
 - type: entity
   parent: CMBaseWeaponRifle
@@ -63,10 +65,10 @@
     soundGunshot:
       collection: CMM54CShoot
   - type: GunWieldBonus
-    minAngle: -15
+    minAngle: -25
     maxAngle: -40
-    angleIncrease: -8
-    angleDecay: 0
+    angleIncrease: -9
+    angleDecay: 5
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -124,10 +126,10 @@
     soundGunshot:
       collection: CMM54CShoot
   - type: GunWieldBonus
-    minAngle: -15
+    minAngle: -25
     maxAngle: -45
-    angleIncrease: -8
-    angleDecay: 0
+    angleIncrease: -9
+    angleDecay: 5
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -172,7 +174,7 @@
   - type: GunWieldBonus
     minAngle: -20
     maxAngle: -50
-    angleIncrease: -5
+    angleIncrease: -22
     angleDecay: 10
   - type: ItemSlots
     slots:

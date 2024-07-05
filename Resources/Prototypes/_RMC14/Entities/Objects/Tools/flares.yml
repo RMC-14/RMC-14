@@ -42,8 +42,6 @@
     radius: 1
     energy: 5.0
     netsync: false
-  - type: IgnitionSource
-    temperature: 1000
   - type: LightBehaviour
     behaviours:
       - !type:FadeBehaviour # faster then base flares
@@ -119,7 +117,26 @@
   - type: Sprite
     sprite: _RMC14/Objects/Storage/boxes.rsi
     layers:
+    - state: m94_e
+      map: [ "emptyLayer" ]
     - state: m94
+      map: [ "fullLayer" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.CMItemSlotsLayers.Fill:
+        fullLayer:
+          Empty: { visible: false }
+          Low: { visible: true }
+          Medium: { visible: true }
+          High: { visible: true }
+          Full: { visible: true }
+        emptyLayer:
+          Empty: { visible: true }
+          Low: { visible: false }
+          Medium: { visible: false }
+          High: { visible: false }
+          Full: { visible: false }
 
 - type: entity
   parent: CMPackFlareBase

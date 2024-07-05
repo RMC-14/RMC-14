@@ -395,7 +395,7 @@
       "name": "base_m4spr"
     },
     {
-      "name": "base_m41"
+      "name": "base_m54"
     },
     {
       "name": "base_l42"
@@ -614,9 +614,6 @@
       "name": "text_rounds_type71"
     },
     {
-      "name": "text_m41"
-    },
-    {
       "name": "text_m63"
     },
     {
@@ -702,9 +699,6 @@
     },
     {
       "name": "text_mk45"
-    },
-    {
-      "name": "text_m1911"
     },
     {
       "name": "text_fnfp9000"
@@ -918,6 +912,12 @@
     },
     {
       "name": "lid_type"
+    },
+    {
+      "name": "text_m1911"
+    },
+    {
+      "name": "text_m54"
     }
   ]
 }

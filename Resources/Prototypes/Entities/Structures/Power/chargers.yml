@@ -105,6 +105,9 @@
           tags:
           - PowerCell
           - PowerCellSmall
+  - type: ApcPowerReceiver
+    needsPower: false # TODO RMC14
+    powerLoad: 0
 
 - type: entity
   parent: [ BaseItemRecharger, ConstructibleMachine ]

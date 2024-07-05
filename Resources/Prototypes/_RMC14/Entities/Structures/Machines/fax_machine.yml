@@ -4,6 +4,9 @@
   name: fax machine
   description: Liaison's best and only friend.
   components:
+  - type: ApcPowerReceiver
+    needsPower: false # TODO RMC14
+    powerLoad: 0
   - type: Sprite
     sprite: _RMC14/Structures/Machines/fax_machine.rsi
     drawdepth: SmallObjects

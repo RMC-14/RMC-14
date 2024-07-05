@@ -87,7 +87,7 @@
   parent: CMRailAttachmentBase
   id: CMAttachmentS42xTelescopicMiniScope
   name: S4 2x telescopic mini-scope
-  description: An ARMAT S4 telescoping eye piece. Fixed at a modest 2x zoom. Press the 'use rail attachment' HUD icon or use the verb of the same name to zoom.
+  description: An AEGIS S4 telescoping eye piece. Fixed at a modest 2x zoom. Press the 'use rail attachment' HUD icon or use the verb of the same name to zoom.
   components:
   - type: Sprite
     state: miniscope
@@ -105,7 +105,7 @@
   parent: CMRailAttachmentBase
   id: CMAttachmentB8SmartScope
   name: B8 smart-scope
-  description: An experimental B8 Smart-Scope. Based on the technologies used in the Smart Gun by ARMAT, this sight has integrated IFF systems. It can only attach to the M4SPR Battle Rifle. # TODO RMC14 and M44 Combat Revolver.
+  description: An experimental B8 Smart-Scope. Based on the technologies used in the Smart Gun by AEGIS, this sight has integrated IFF systems. It can only attach to the M4SPR Battle Rifle. # TODO RMC14 and M44 Combat Revolver.
   components:
   - type: Sprite
     state: iffbarrel
@@ -143,7 +143,7 @@
   parent: CMRailAttachmentBase
   id: CMAttachmentS6ReflexSight
   name: S6 reflex sight
-  description: An ARMAT S6 reflex sight. A zero-magnification alternative to iron sights with a more open optic window when compared to the S5 red-dot. Helps to reduce scatter during automated fire.
+  description: An AEGIS S6 reflex sight. A zero-magnification alternative to iron sights with a more open optic window when compared to the S5 red-dot. Helps to reduce scatter during automated fire.
   components:
   - type: Sprite
     state: reflex
@@ -152,7 +152,7 @@
   parent: CMRailAttachmentBase
   id: CMAttachments84xTelescopicScope
   name: S8 4x telescopic scope
-  description: An ARMAT S8 telescopic eye piece. Fixed at 4x zoom. Press the 'use rail attachment' HUD icon or use the verb of the same name to zoom.
+  description: An AEGIS S8 telescopic eye piece. Fixed at 4x zoom. Press the 'use rail attachment' HUD icon or use the verb of the same name to zoom.
   components:
   - type: Sprite
     state: sniperscope

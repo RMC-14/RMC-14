@@ -31,7 +31,7 @@
   parent: CMStockAttachmentBase
   id: CMAttachmentM63Stock
   name: submachinegun stock
-  description: A rare ARMAT stock distributed in small numbers to Marine forces. Compatible with the M63, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Seemingly a bit more effective in a brawl.
+  description: A rare AEGIS stock distributed in small numbers to Marine forces. Compatible with the M63, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Seemingly a bit more effective in a brawl.
   components:
   - type: Sprite
     state: smgstock
@@ -47,7 +47,7 @@
   - type: Tag
     tags:
     - CMAttachmentStock
-    - CMAttachmentM39StockCollapsible
+    - CMAttachmentM63StockCollapsible
   - type: AttachableToggleable
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
@@ -82,4 +82,4 @@
   id: CMAttachmentStock
 
 - type: Tag
-  id: CMAttachmentM39StockCollapsible
+  id: CMAttachmentM63StockCollapsible

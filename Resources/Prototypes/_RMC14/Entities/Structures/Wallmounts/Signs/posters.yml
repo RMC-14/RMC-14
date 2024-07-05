@@ -180,7 +180,7 @@
   parent: CMPosterBase
   id: CMPosterPulseRifle
   name: "assault rifle pinup"
-  description: "The Armat Battlefield Systems Model 54 Derivative 'C' Assault Rifle Mark One. The only pinup you'll ever need."
+  description: "The Aegis Battlefield Armaments Model 54 Derivative 'C' Assault Rifle Mark One. The only pinup you'll ever need."
   components:
   - type: Sprite
     state: assault_rifle

@@ -27,7 +27,7 @@
     whitelist:
       tags:
       - LauncherCompatibleGrenade
-    capacity: 5
+    capacity: 6
     soundInsert:
       path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
     proto: CMGrenadeHighExplosive
@@ -52,6 +52,8 @@
   - type: GunShowUseDelay
   - type: UseDelay
   - type: GunIFF
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
 
 - type: entity
   name: M79 grenade launcher
@@ -95,3 +97,5 @@
   - type: AmmoFixedDistance
   - type: Wieldable
   - type: GunRequiresWield
+  - type: RMCNameItemOnVend
+    item: PrimaryGun

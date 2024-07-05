@@ -1,14 +1,18 @@
 ﻿using System.Numerics;
+using Content.Server.Administration.Logs;
 using Content.Server.Cargo.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Storage.EntitySystems;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
+using Content.Shared.Database;
 using Content.Shared.Mobs.Components;
 using Content.Shared.UserInterface;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
+using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
 using static Content.Shared._RMC14.Requisitions.Components.RequisitionsElevatorMode;
@@ -17,7 +21,9 @@ namespace Content.Server._RMC14.Requisitions;
 
 public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 {
+    [Dependency] private readonly IAdminLogManager _adminLogs = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
@@ -27,6 +33,8 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
     [Dependency] private readonly ChatSystem _chatSystem = default!;
 
     public const string PaperRequisitionInvoice = "RMCPaperRequisitionInvoice";
+
+    private int _gain;
 
     public override void Initialize()
     {
@@ -42,6 +50,8 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             subs.Event<RequisitionsBuyMsg>(OnBuy);
             subs.Event<RequisitionsPlatformMsg>(OnPlatform);
         });
+
+        Subs.CVar(_config, CMCVars.RMCRequisitionsBalanceGain, v => _gain = v, true);
     }
 
     private void OnComputerMapInit(Entity<RequisitionsComputerComponent> ent, ref MapInitEvent args)
@@ -94,6 +104,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         account.Balance -= order.Cost;
         elevator.Comp.Orders.Add(order);
         SendUIStateAll();
+        _adminLogs.Add(LogType.RMCRequisitionsBuy, $"{ToPrettyString(args.Actor):actor} bought requisitions crate {order.Name} with crate {order.Crate} for {order.Cost}");
     }
 
     private void OnPlatform(Entity<RequisitionsComputerComponent> computer, ref RequisitionsPlatformMsg args)
@@ -432,7 +443,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             if (time > account.NextGain)
             {
                 account.NextGain = time + account.GainEvery;
-                account.Balance += account.Gain;
+                account.Balance += _gain;
                 Dirty(uid, account);
 
                 updateUI = true;

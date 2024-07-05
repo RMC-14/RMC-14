@@ -82,16 +82,6 @@
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Glass
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:SpillBehavior
-        solution: pack
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: DamageOnHighSpeedImpact
     minimumSpeed: 2
     damage:

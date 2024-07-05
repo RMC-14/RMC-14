@@ -209,6 +209,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnXenoOrderConstructionBui(Entity<XenoConstructionComponent> xeno, ref XenoOrderConstructionBuiMsg args)
     {
+        _ui.CloseUi(xeno.Owner, XenoOrderConstructionUI.Key, xeno);
         if (xeno.Comp.OrderingConstructionAt is not { } target ||
             !xeno.Comp.CanOrderConstruction.Contains(args.StructureId) ||
             !CanOrderConstructionPopup(xeno, target, args.StructureId))
@@ -232,7 +233,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         };
 
         _doAfter.TryStartDoAfter(doAfter);
-        _ui.CloseUi(xeno.Owner, XenoOrderConstructionUI.Key, xeno);
     }
 
     private void OnXenoOrderConstructionDoAfter(Entity<XenoConstructionComponent> xeno, ref XenoOrderConstructionDoAfterEvent args)
@@ -579,7 +579,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             choiceProto.TryGetComponent(out HiveConstructionUniqueComponent? unique, _compFactory) &&
             OtherUniqueExists(unique.Id))
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-unique-exists", ("choice", choiceProto.Name)), xeno);
+            // server-only as the core may not be in the client's PVS bubble
+            if (_net.IsServer)
+                _popup.PopupEntity(Loc.GetString("cm-xeno-unique-exists", ("choice", choiceProto.Name)), xeno, PopupType.MediumCaution);
+
             return false;
         }
 

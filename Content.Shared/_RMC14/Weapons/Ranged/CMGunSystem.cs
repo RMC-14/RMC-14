@@ -57,6 +57,7 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<GunUnskilledPenaltyComponent, GunRefreshModifiersEvent>(OnGunUnskilledPenaltyRefresh);
 
         SubscribeLocalEvent<GunDamageModifierComponent, AmmoShotEvent>(OnGunDamageModifierAmmoShot);
+        SubscribeLocalEvent<GunDamageModifierComponent, MapInitEvent>(OnGunDamageModifierMapInit);
 
         SubscribeLocalEvent<GunSkilledRecoilComponent, GotEquippedHandEvent>(TryRefreshGunModifiers);
         SubscribeLocalEvent<GunSkilledRecoilComponent, GotUnequippedHandEvent>(TryRefreshGunModifiers);
@@ -136,6 +137,11 @@ public sealed class CMGunSystem : EntitySystem
 
         args.MinAngle += ent.Comp.AngleIncrease;
         args.MaxAngle += ent.Comp.AngleIncrease;
+    }
+
+    private void OnGunDamageModifierMapInit(Entity<GunDamageModifierComponent> ent, ref MapInitEvent args)
+    {
+        RefreshGunDamageMultiplier((ent.Owner, ent.Comp));
     }
 
     private void OnGunDamageModifierAmmoShot(Entity<GunDamageModifierComponent> ent, ref AmmoShotEvent args)
