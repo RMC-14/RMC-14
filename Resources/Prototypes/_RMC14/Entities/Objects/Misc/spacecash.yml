@@ -35,15 +35,15 @@
 
 - type: material
   id: Dollar
-  name: dollar
+  name: 1 dollar bill
   unit: materials-unit-bill
-  stackEntity: RMCSpaceCash
+  stackEntity: RMCSpaceCash1
   icon: { sprite: /Textures/_RMC14/Objects/Misc/spacecash.rsi, state: spacecash1 }
   price: 1
 
 - type: stack
   id: Dollar
-  name: dollar
+  name: 1 dollar bill
   icon: { sprite: /Textures/_RMC14/Objects/Misc/spacecash.rsi, state: spacecash1 }
   spawn: RMCSpaceCash1
 
