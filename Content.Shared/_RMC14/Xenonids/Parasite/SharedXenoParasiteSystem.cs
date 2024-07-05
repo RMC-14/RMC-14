@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Hands;
+using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared.Chat.Prototypes;
@@ -58,6 +59,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
         SubscribeLocalEvent<XenoParasiteComponent, XenoLeapHitEvent>(OnParasiteLeapHit);
         SubscribeLocalEvent<XenoParasiteComponent, AfterInteractEvent>(OnParasiteAfterInteract);
+        SubscribeLocalEvent<XenoParasiteComponent, BeforeInteractHandEvent>(OnParasiteInteractHand);
         SubscribeLocalEvent<XenoParasiteComponent, DoAfterAttemptEvent<AttachParasiteDoAfterEvent>>(OnParasiteAttachDoAfterAttempt);
         SubscribeLocalEvent<XenoParasiteComponent, AttachParasiteDoAfterEvent>(OnParasiteAttachDoAfter);
         SubscribeLocalEvent<XenoParasiteComponent, CanDragEvent>(OnParasiteCanDrag);
@@ -114,6 +116,16 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
         if (StartInfect(ent, args.Target.Value, args.User))
             args.Handled = true;
+    }
+
+    private void OnParasiteInteractHand(Entity<XenoParasiteComponent> ent, ref BeforeInteractHandEvent args)
+    {
+        if (!IsInfectable(ent, args.Target))
+            return;
+
+        StartInfect(ent, args.Target, ent);
+
+        args.Handled = true;
     }
 
     private void OnParasiteAttachDoAfterAttempt(Entity<XenoParasiteComponent> ent, ref DoAfterAttemptEvent<AttachParasiteDoAfterEvent> args)
@@ -249,11 +261,16 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         return true;
     }
 
+    private bool IsInfectable(EntityUid parasite, EntityUid victim)
+    {
+        return HasComp<InfectableComponent>(victim)
+               && !HasComp<ParasiteSpentComponent>(parasite)
+               && !HasComp<VictimInfectedComponent>(victim);
+    }
+
     private bool CanInfectPopup(Entity<XenoParasiteComponent> parasite, EntityUid victim, EntityUid user, bool popup = true, bool force = false)
     {
-        if (!HasComp<InfectableComponent>(victim) ||
-            HasComp<ParasiteSpentComponent>(parasite) ||
-            HasComp<VictimInfectedComponent>(victim))
+        if (!IsInfectable(parasite, victim))
         {
             if (popup)
                 _popup.PopupClient(Loc.GetString("rmc-xeno-failed-cant-infect", ("target", victim)), victim, user, PopupType.MediumCaution);
@@ -261,9 +278,10 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             return false;
         }
 
-        if (!force &&
-            TryComp(victim, out StandingStateComponent? standing) &&
-            !_standing.IsDown(victim, standing))
+        if (!force
+            && !HasComp<XenoNestedComponent>(victim)
+            && TryComp(victim, out StandingStateComponent? standing)
+            && !_standing.IsDown(victim, standing))
         {
             if (popup)
                 _popup.PopupClient(Loc.GetString("rmc-xeno-failed-cant-reach", ("target", victim)), victim, user, PopupType.MediumCaution);

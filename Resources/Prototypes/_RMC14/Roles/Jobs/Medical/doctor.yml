@@ -21,6 +21,7 @@
       firearms: 0
       medical: 3
       surgery: 2
+    - type: RMCUserBulkyArmorIncapable
 
 - type: startingGear
   id: CMGearDoctor

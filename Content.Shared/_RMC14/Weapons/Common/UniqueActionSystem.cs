@@ -29,6 +29,7 @@ public sealed class UniqueActionSystem : EntitySystem
 
     public override void Shutdown()
     {
+        base.Shutdown();
         CommandBinds.Unregister<UniqueActionSystem>();
     }
 

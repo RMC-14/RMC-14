@@ -488,8 +488,6 @@ CMPosterSynthetic2: CMPosterSilicon2
 CMCigarettePackLuckyStrikes: CMCigarettePackLuckySloths
 CMKoorlanderMatchbook: CMElectroMatchbook
 CMPosterKoorlander: CMPosterElectro
-
-# 2024-06-24
 CMCrateBoxMagazineRifleM4DMR: CMCrateBoxMagazineRifleM4SPR
 CMCrateBoxMagazineRifleM4DMRAP: CMCrateBoxMagazineRifleM4SPRAP
 CMCrateBoxMagazineRifleM4DMRExt: CMCrateBoxMagazineRifleM4SPRExt
@@ -511,3 +509,6 @@ CMMagazineRifleM4RAAP: CMMagazineRifleM4SPRAP
 CMMagazineRifleM4RAExt: CMMagazineRifleM4SPRExt
 WeaponRifleM4RA: WeaponRifleM4SPR
 ArmatAttachments: CMVendorAttachments
+
+# 2024-07-1
+CMDispenserChem : RMCDispenserChem

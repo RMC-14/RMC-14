@@ -12,6 +12,7 @@ public partial class SharedScopeSystem
 {
     private void InitializeUser()
     {
+        SubscribeLocalEvent<ScopingComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<ScopingComponent, MoveInputEvent>(OnMoveInput);
         SubscribeLocalEvent<ScopingComponent, PullStartedMessage>(OnPullStarted);
         SubscribeLocalEvent<ScopingComponent, EntParentChangedMessage>(OnParentChanged);
@@ -22,6 +23,12 @@ public partial class SharedScopeSystem
         SubscribeLocalEvent<ScopingComponent, KnockedDownEvent>(OnKnockedDown);
         SubscribeLocalEvent<ScopingComponent, StunnedEvent>(OnStunned);
         SubscribeLocalEvent<ScopingComponent, MobStateChangedEvent>(OnMobStateChanged);
+    }
+
+    private void OnRemove(Entity<ScopingComponent> user, ref ComponentRemove args)
+    {
+        if (!TerminatingOrDeleted(user))
+            UpdateOffset(user);
     }
 
     private void OnMoveInput(Entity<ScopingComponent> ent, ref MoveInputEvent args)

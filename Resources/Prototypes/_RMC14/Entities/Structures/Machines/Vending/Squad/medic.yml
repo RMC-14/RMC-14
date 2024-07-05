@@ -12,7 +12,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/medical_gear.rsi
   - type: CMAutomatedVendor
-    job: CMHospitalCorpsman
+    jobs:
+    - CMHospitalCorpsman
     sections:
     - name: Medical Set (Mandatory)
       takeAll: CMMedicalSet
@@ -183,7 +184,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
-    job: CMHospitalCorpsman
+    jobs:
+    - CMHospitalCorpsman
     sections:
     - name: Standard Equipment
       takeAll: CMStandard

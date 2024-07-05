@@ -12,7 +12,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/fireteam_leader_gear.rsi
   - type: CMAutomatedVendor
-    job: CMFireteamLeader
+    jobs:
+    - CMFireteamLeader
     sections:
     - name: Explosives
       entries:
@@ -133,7 +134,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
-    job: CMFireteamLeader
+    jobs:
+    - CMFireteamLeader
     sections:
     - name: Standard Equipment
       takeAll: CMStandard

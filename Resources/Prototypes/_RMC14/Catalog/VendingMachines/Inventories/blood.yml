@@ -1,4 +1,0 @@
-- type: vendingMachineInventory
-  id: CMVendorBlood
-  startingInventory:
-    CMBloodPackFull: 30 #TODO RMC14 different blood groups

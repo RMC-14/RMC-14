@@ -45,6 +45,8 @@ namespace Content.Server.Chat.Managers
         [Dependency] private readonly IEntityManager _entityManager = default!;
         [Dependency] private readonly PlayerRateLimitManager _rateLimitManager = default!;
         [Dependency] private readonly LinkAccountManager _linkAccount = default!;
+        // [Dependency] private readonly RMCDiscordManager _discord = default!;
+
 
         /// <summary>
         /// The maximum length a player-sent message can be sent
@@ -276,6 +278,8 @@ namespace Content.Server.Chat.Managers
             var wrappedMessage = Loc.GetString("chat-manager-send-admin-chat-wrap-message",
                                             ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")),
                                             ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
+
+            // _discord.SendDiscordAdminMessage(player.Name, message);
 
             foreach (var client in clients)
             {

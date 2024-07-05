@@ -12,7 +12,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/smart_gun_operator_gear.rsi
   - type: CMAutomatedVendor
-    job: CMSmartGunOperator
+    jobs:
+    - CMSmartGunOperator
     sections:
     - name: Smart Gun Set (Mandatory)
       entries: [ ]
@@ -115,7 +116,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
-    job: CMSmartGunOperator
+    jobs:
+    - CMSmartGunOperator
     sections:
     - name: Standard Equipment
       takeAll: CMStandard

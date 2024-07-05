@@ -163,3 +163,25 @@
     state: tessie_terrence
   - type: PatronFigurine
     id: b18fcc29-5fa3-4489-8df0-4ceb994b4fb3
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronDagobertDogburglar
+  name: Dagobert Dogburglar figurine
+  description: "One must imagine marines happy."
+  components:
+  - type: Sprite
+    state: dagobert_dogburglar
+  - type: PatronFigurine
+    id: ea85ee23-6be6-46fb-8346-a8ba8e320298
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronHerbsquirto
+  name: Herbsquirto figurine
+  description: "The corporation's best botanist."
+  components:
+  - type: Sprite
+    state: herbsquirto
+  - type: PatronFigurine
+    id: 9226a461-8d9a-49a2-824e-fdf9a7b1d81f
