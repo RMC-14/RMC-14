@@ -2225,5 +2225,21 @@
   id: 272
   time: '2024-07-05T04:51:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2826
+- author: DrSmugleaf
+  changes:
+  - message: Fixed showing the inventory button in the bottom left to xenonids, which
+      have no inventory slots.
+    type: Fix
+  id: 273
+  time: '2024-07-05T10:32:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2828
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenonid weeds behind walls getting destroyed by explosions on the
+      other side of the wall.
+    type: Fix
+  id: 274
+  time: '2024-07-05T10:32:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2827
 Name: RMC14
 Order: -1
