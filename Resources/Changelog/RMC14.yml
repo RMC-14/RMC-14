@@ -2205,17 +2205,25 @@
   url: https://github.com/RMC-14/RMC-14/pull/2816
 - author: DrSmugleaf
   changes:
-  - message: Medbay personnel (doctors, nurses, researchers and CMOs but NOT hospital corpsmen) are now unable
-      to equip any armor other than the M3-VL pattern ballistics vest.
+  - message: Medbay personnel (doctors, nurses, researchers and CMOs but NOT hospital
+      corpsmen) are now unable to equip any armor other than the M3-VL pattern ballistics
+      vest.
     type: Tweak
-  - message: Medbay personnel now have +75 degrees added to their spread if using guns other than pistols,
-      increased from +10.
+  - message: Medbay personnel now have +75 degrees added to their spread if using
+      guns other than pistols, increased from +10.
     type: Tweak
-  - message: Medbay personnel now have a decreased accuracy penalty when firing pistols of
-      5 degrees, and only a 10 degree accuracy penalty when firing SMGs.
+  - message: Medbay personnel now have a decreased accuracy penalty when firing pistols
+      of 5 degrees, and only a 10 degree accuracy penalty when firing SMGs.
     type: Tweak
   id: 271
   time: '2024-07-04T12:54:37.0000000+00:00'
   url: null
+- author: snebl
+  changes:
+  - message: Fixed the punch and fling Xenonid abilities working on dead marines.
+    type: Fix
+  id: 272
+  time: '2024-07-05T04:51:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2826
 Name: RMC14
 Order: -1
