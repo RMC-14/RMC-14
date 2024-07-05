@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.Marines;
 using Content.Server.Administration.Components;
@@ -25,6 +24,7 @@ using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Spawners;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.CCVar;
@@ -93,9 +93,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private readonly List<MapId> _almayerMaps = [];
     private float _marinesPerXeno;
 
+    private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
+
     public override void Initialize()
     {
         base.Initialize();
+
+        _xenoNestedQuery = GetEntityQuery<XenoNestedComponent>();
 
         SubscribeLocalEvent<RulePlayerSpawningEvent>(OnRulePlayerSpawning);
         SubscribeLocalEvent<PlayerSpawningEvent>(OnPlayerSpawning,
@@ -523,8 +527,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             var marinesAlive = false;
             while (marines.MoveNext(out var marineId, out _, out _, out var mobState, out var xform))
             {
-                if (HasComp<VictimInfectedComponent>(marineId) || HasComp<VictimBurstComponent>(marineId))
+                if (HasComp<VictimInfectedComponent>(marineId) ||
+                    HasComp<VictimBurstComponent>(marineId) ||
+                    _xenoNestedQuery.HasComp(marineId))
+                {
                     continue;
+                }
 
                 if (_mobState.IsAlive(marineId, mobState) &&
                     (distress.AbandonedAt == null ||
