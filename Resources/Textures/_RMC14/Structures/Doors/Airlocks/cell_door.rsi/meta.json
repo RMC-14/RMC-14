@@ -1,86 +1,22 @@
 {
   "version": 1,
-  "license": null,
-  "copyright": null,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken/modified from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f7b9367cb5c083a8c052a40dece9417031e28ffe/icons/obj/structures/doors/prison_FOP/prison_hatches.dmi",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-      "name": "door_closed",
+      "name": "closed",
       "directions": 4
     },
     {
-      "name": "door_locked",
+      "name": "locked",
       "directions": 4
     },
     {
-      "name": "door_opening",
-      "directions": 4,
-      "delays": [
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.6
-        ],
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.6
-        ],
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.6
-        ],
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.6
-        ]
-      ]
-    },
-    {
-      "name": "door_deny",
-      "directions": 4,
-      "delays": [
-        [
-          0.1,
-          0.1,
-          0.1
-        ],
-        [
-          0.1,
-          0.1,
-          0.1
-        ],
-        [
-          0.1,
-          0.1,
-          0.1
-        ],
-        [
-          0.1,
-          0.1,
-          0.1
-        ]
-      ]
-    },
-    {
-      "name": "door_closing",
+      "name": "opening",
       "directions": 4,
       "delays": [
         [
@@ -114,11 +50,71 @@
       ]
     },
     {
-      "name": "door_open",
+      "name": "deny",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "closing",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.2
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.2
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.2
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "open",
       "directions": 4
     },
     {
-      "name": "door_spark",
+      "name": "spark",
       "directions": 4,
       "delays": [
         [
@@ -163,73 +159,8 @@
       "name": "welded",
       "directions": 4
     },
-    {
-      "name": "o_door_opening",
-      "directions": 4,
-      "delays": [
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.2
-        ],
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.2
-        ],
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.2
-        ],
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.2
-        ]
-      ]
-    },
-    {
-      "name": "o_door_closing",
-      "directions": 4,
-      "delays": [
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.2
-        ],
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.2
-        ],
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.2
-        ],
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.2
-        ]
-      ]
-    }
+	{
+		"name": "unlit"
+	}
   ]
 }
