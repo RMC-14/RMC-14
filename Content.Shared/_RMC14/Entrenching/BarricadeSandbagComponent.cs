@@ -10,18 +10,18 @@ public sealed partial class BarricadeSandbagComponent : Component
     /// <summary>
     /// Optionally set stackable material received upon deconstruction.
     /// </summary>
-    [DataField("material")]
+    [DataField]
     public EntProtoId Material = "CMSandbagFull";
 
     /// <summary>
     /// Optional maximum amount of material received upon deconstruction.
     /// </summary>
-    [DataField("maxMaterial")]
+    [DataField]
     public int MaxMaterial = 0;
 
     /// <summary>
     /// Optionally set damage interval at which material is lost.
     /// </summary>
-    [DataField("materialLossDamageInterval")]
+    [DataField]
     public int MaterialLossDamageInterval = 75;
 }
