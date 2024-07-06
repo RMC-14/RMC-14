@@ -1,4 +1,5 @@
 ﻿using Content.Server.GameTicking;
+using Content.Server.Ghost.Roles.Components;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Coordinates;
 using Robust.Shared.Player;
@@ -14,6 +15,8 @@ public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
     {
         if (!TryComp(parasite, out ActorComponent? actor))
             return;
+
+        RemComp<GhostTakeoverAvailableComponent>(parasite);
 
         var session = actor.PlayerSession;
         _gameTicker.SpawnObserver(session);
