@@ -338,3 +338,23 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
+  id: RMCGrille
+  name: grille
+  graph: RMCGrille
+  startNode: start
+  targetNode: Grille
+  category: construction-category-cm-structures
+  description: A flimsy lattice of metal rods.
+  icon:
+    sprite: _RMC14/Structures/Walls/grille.rsi
+    state: grille
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
