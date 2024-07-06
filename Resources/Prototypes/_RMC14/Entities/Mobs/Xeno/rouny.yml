@@ -6,7 +6,7 @@
   suffix: RMC14
   description: thas a fuckin rouny
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Rouny.rsi
+    sprite: _RMC14/Mobs/Xenonids/Rouny/rouny.rsi
   - type: MobState
     allowedStates:
     - Alive
