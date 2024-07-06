@@ -202,6 +202,8 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
     {
         _blindable.UpdateIsBlind(victim.Owner);
         _standing.Stand(victim);
+        if (_net.IsServer && TryComp<TransformComponent>(victim, out var xform))
+            SpawnAtPosition("RMCXenoEmbryo", xform.Coordinates);
     }
 
     private void OnVictimInfectedCancel<T>(Entity<VictimInfectedComponent> victim, ref T args) where T : CancellableEntityEventArgs
