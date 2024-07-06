@@ -300,7 +300,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: screech
     event: !type:XenoScreechActionEvent
-    useDelay: 100
+    useDelay: 150
 
 - type: entity
   id: ActionXenoGut
