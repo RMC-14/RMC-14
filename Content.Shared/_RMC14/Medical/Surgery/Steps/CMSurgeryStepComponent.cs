@@ -22,4 +22,7 @@ public sealed partial class CMSurgeryStepComponent : Component
 
     [DataField]
     public ComponentRegistry? BodyRemove;
+
+    [DataField]
+    public EntProtoId? Spawn;
 }

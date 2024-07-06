@@ -106,6 +106,7 @@
     - type: CMHemostat
     bodyRemove:
     - type: VictimInfected
+    spawn: RMCXenoEmbryo
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat

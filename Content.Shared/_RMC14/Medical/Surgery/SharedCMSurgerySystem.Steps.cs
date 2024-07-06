@@ -80,6 +80,9 @@ public abstract partial class SharedCMSurgerySystem
                 RemComp(args.Body, reg.Component.GetType());
             }
         }
+
+        if (_net.IsServer && ent.Comp.Spawn != null && TryComp<TransformComponent>(args.Body, out var xform))
+            SpawnAtPosition(ent.Comp.Spawn, xform.Coordinates);
     }
 
     private void OnToolCheck(Entity<CMSurgeryStepComponent> ent, ref CMSurgeryStepCompleteCheckEvent args)
