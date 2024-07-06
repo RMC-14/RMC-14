@@ -1,7 +1,11 @@
-﻿using Content.Client.Message;
+using Content.Client.Message;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared.Doors.Components;
+using Content.Shared.Doors.Systems;
 using Content.Shared.Shuttles.Systems;
 using JetBrains.Annotations;
+using Content.Client._RMC14.Dropship;
+using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Dropship;
@@ -11,6 +15,7 @@ public sealed class DropshipNavigationBui : BoundUserInterface
 {
     [Dependency] private readonly IEntityManager _entities = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedDoorSystem _door = default!;
 
     [ViewVariables]
     private DropshipNavigationWindow? _window;
@@ -103,6 +108,7 @@ public sealed class DropshipNavigationBui : BoundUserInterface
 
         _window.DestinationsContainer.Visible = true;
         _window.ProgressBarContainer.Visible = false;
+        _window.DoorLockingContainer.Visible = true;
         _window.CancelButton.Visible = true;
         _window.LaunchButton.Visible = true;
 
@@ -127,6 +133,58 @@ public sealed class DropshipNavigationBui : BoundUserInterface
 
             _destinations[button] = destination.Name;
             _window.DestinationsContainer.AddChild(button);
+        }
+
+        if (_entities.TryGetComponent(Owner, out Content.Client._RMC14.Dropship.DropshipNavigationComputerComponent? computerComponent))
+        {
+            foreach (var door in computerComponent.LockableDoors)
+            {
+                var locName = door.Key;
+                var doorEntities = door.Value;
+
+                var doorLockingButton = new DropshipButton();
+                doorLockingButton.Text = Loc.GetString(locName);
+                doorLockingButton.Button.ToggleMode = true;
+
+                if (computerComponent.DoorGroupLockStates.TryGetValue(locName, out var lockState))
+                {
+                    doorLockingButton.Button.Pressed = lockState;
+                }
+                else
+                {
+                    doorLockingButton.Button.Pressed = false;
+                }
+
+                if (doorLockingButton.Button.Pressed)
+                {
+                    doorLockingButton.BackgroundColor = Color.Blue;
+                }
+                else
+                {
+                    doorLockingButton.BackgroundColor = Color.LightBlue;
+                }
+
+                doorLockingButton.Button.OnToggled += (BaseButton.ButtonToggledEventArgs args) =>
+                {
+                    foreach (var doorEntity in doorEntities)
+                    {
+                        if (_entities.TryGetComponent(doorEntity, out DoorBoltComponent? doorBoltComponent))
+                        {
+                            if (args.Pressed)
+                            {
+                                doorLockingButton.BackgroundColor = Color.Blue;
+                                _door.SetBoltsDown((doorEntity, doorBoltComponent), true);
+                            }
+                            else
+                            {
+                                doorLockingButton.BackgroundColor = Color.LightBlue;
+                                _door.SetBoltsDown((doorEntity, doorBoltComponent), false);
+                            }
+                        }
+                    }
+                };
+                _window.DoorLockingContainer.AddChild(doorLockingButton);
+            }
         }
     }
 
@@ -157,6 +215,8 @@ public sealed class DropshipNavigationBui : BoundUserInterface
             case FTLState.Travelling:
                 SetHeader($"In flight: {destination}"); // 100s
                 _window.ProgressBarHeader.SetMarkup(Msg($"Time until destination: T-{time}s"));
+
+                _window.DoorLockingContainer.Visible = false;
                 break;
             case FTLState.Arriving:
                 SetHeader($"Final Approach: {destination}"); // 10s
@@ -165,6 +225,8 @@ public sealed class DropshipNavigationBui : BoundUserInterface
             case FTLState.Cooldown:
                 SetHeader("Refueling in progress"); // 120s
                 _window.ProgressBarHeader.SetMarkup(Msg($"Ready to launch in T-{time}s"));
+
+                _window.DoorLockingContainer.Visible = true;
                 break;
             default:
                 return;

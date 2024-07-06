@@ -69,3 +69,24 @@
     powerLoad: 0
   - type: AccessReader
     access: [["CMAccessPilot"]]
+
+- type: entity
+  parent: CMAlamoDoor
+  id: CMAlamoDoorLeft
+  components:
+  - type: LockableDropshipDoor
+    locName: left-door-dropship-name
+
+- type: entity
+  parent: CMAlamoDoor
+  id: CMAlamoDoorRight
+  components:
+  - type: LockableDropshipDoor
+    locName: right-door-dropship-name
+
+- type: entity
+  parent: CMAlamoDoor
+  id: CMAlamoDoorBack
+  components:
+  - type: LockableDropshipDoor
+    locName: back-door-dropship-name

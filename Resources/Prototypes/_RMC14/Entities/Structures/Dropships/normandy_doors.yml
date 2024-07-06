@@ -13,3 +13,24 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Dropships/normandy.rsi
+
+- type: entity
+  parent: CMNormandyDoor
+  id: CMNormandyDoorLeft
+  components:
+  - type: LockableDropshipDoor
+    locName: left-door-dropship-name
+
+- type: entity
+  parent: CMNormandyDoor
+  id: CMNormandyDoorRight
+  components:
+  - type: LockableDropshipDoor
+    locName: right-door-dropship-name
+
+- type: entity
+  parent: CMNormandyDoor
+  id: CMNormandyDoorBack
+  components:
+  - type: LockableDropshipDoor
+    locName: back-door-dropship-name
