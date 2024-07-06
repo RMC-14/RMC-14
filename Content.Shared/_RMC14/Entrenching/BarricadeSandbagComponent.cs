@@ -1,7 +1,27 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Entrenching;
 
 [RegisterComponent, NetworkedComponent]
 [Access(typeof(BarricadeSandbagComponent))]
-public sealed partial class BarricadeSandbagComponent : Component;
+public sealed partial class BarricadeSandbagComponent : Component
+{
+    /// <summary>
+    /// Optionally set stackable material received upon deconstruction.
+    /// </summary>
+    [DataField("material")]
+    public EntProtoId Material = "CMSandbagFull";
+
+    /// <summary>
+    /// Optional maximum amount of material received upon deconstruction.
+    /// </summary>
+    [DataField("maxMaterial")]
+    public int MaxMaterial = 0;
+
+    /// <summary>
+    /// Optionally set damage interval at which material is lost.
+    /// </summary>
+    [DataField("materialLossDamageInterval")]
+    public int MaterialLossDamageInterval = 75;
+}

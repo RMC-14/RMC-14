@@ -85,13 +85,15 @@ public sealed class EntrenchingToolSystem : EntitySystem
 
         if (_net.IsServer)
         {
-            var full = Spawn("CMSandbagFull", EntityManager.GetCoordinates(args.Coordinates));
+            if (!TryComp(args.Target, out BarricadeSandbagComponent? barricade))
+                return;
+            var full = Spawn(barricade.Material, EntityManager.GetCoordinates(args.Coordinates));
 
-            var bagsSalvaged = 0;
-            if (TryComp(full, out FullSandbagComponent? fullSandbag))
+            var bagsSalvaged = barricade.MaxMaterial;
+            if (bagsSalvaged <= 0 && TryComp(full, out FullSandbagComponent? fullSandbag))
                 bagsSalvaged = fullSandbag.StackRequired;
             if (TryComp(args.Target, out DamageableComponent? damageable))
-                bagsSalvaged -= Math.Max((int) damageable.TotalDamage / 75 - 1, 0);
+                bagsSalvaged -= Math.Max((int) damageable.TotalDamage / barricade.MaterialLossDamageInterval - 1, 0);
 
             Del(args.Target);
 
