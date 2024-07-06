@@ -4,3 +4,17 @@
   icon: { sprite: _RMC14/Objects/barbed_wire.rsi, state: barbed_wire }
   spawn: BarbedWire1
   maxCount: 20
+
+- type: stack
+  id: RMCInflatableWall
+  name: inflatable wall
+  icon: { sprite: _RMC14/Objects/Misc/inflatable_wall.rsi, state: folded_wall }
+  spawn: RMCInflatableWall1
+  maxCount: 10
+
+- type: stack
+  id: RMCInflatableDoor
+  name: inflatable door
+  icon: { sprite: _RMC14/Objects/Misc/inflatable_door.rsi, state: folded_door }
+  spawn: RMCInflatableDoor1
+  maxCount: 4

@@ -38,8 +38,8 @@
       steps:
       - tool: Cutting
         doAfter: 0.25
-        - to: Grille
-          steps:
-          - material: CMRodMetal
-            amount: 1
-            doAfter: 0.5
+    - to: Grille
+      steps:
+      - material: CMRodMetal
+        amount: 1
+        doAfter: 0.5
