@@ -83,29 +83,29 @@ public sealed class EntrenchingToolSystem : EntitySystem
 
         args.Handled = true;
 
-        if (_net.IsServer)
+        if (_net.IsClient)
+            return;
+
+        if (!TryComp(args.Target, out BarricadeSandbagComponent? barricade))
+            return;
+        var full = Spawn(barricade.Material, EntityManager.GetCoordinates(args.Coordinates));
+
+        var bagsSalvaged = barricade.MaxMaterial;
+        if (bagsSalvaged <= 0 && TryComp(full, out FullSandbagComponent? fullSandbag))
+            bagsSalvaged = fullSandbag.StackRequired;
+        if (TryComp(args.Target, out DamageableComponent? damageable))
+            bagsSalvaged -= Math.Max((int) damageable.TotalDamage / barricade.MaterialLossDamageInterval - 1, 0);
+
+        Del(args.Target);
+
+        if (bagsSalvaged <= 0)
         {
-            if (!TryComp(args.Target, out BarricadeSandbagComponent? barricade))
-                return;
-            var full = Spawn(barricade.Material, EntityManager.GetCoordinates(args.Coordinates));
-
-            var bagsSalvaged = barricade.MaxMaterial;
-            if (bagsSalvaged <= 0 && TryComp(full, out FullSandbagComponent? fullSandbag))
-                bagsSalvaged = fullSandbag.StackRequired;
-            if (TryComp(args.Target, out DamageableComponent? damageable))
-                bagsSalvaged -= Math.Max((int) damageable.TotalDamage / barricade.MaterialLossDamageInterval - 1, 0);
-
-            Del(args.Target);
-
-            if (bagsSalvaged <= 0)
-            {
-                Del(full);
-                return;
-            }
-
-            if (TryComp(full, out StackComponent? fullStack))
-                _stack.SetCount(full, bagsSalvaged, fullStack);
+            Del(full);
+            return;
         }
+
+        if (TryComp(full, out StackComponent? fullStack))
+            _stack.SetCount(full, bagsSalvaged, fullStack);
     }
 
     private void OnDoAfter(Entity<EntrenchingToolComponent> tool, ref EntrenchingToolDoAfterEvent args)
