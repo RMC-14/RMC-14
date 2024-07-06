@@ -39,15 +39,17 @@
   name: Secrete Resin
   description: "Builds the structure chosen with the 'Choose Resin Structure' action."
   components:
-  - type: WorldTargetAction
+  - type: EntityWorldTargetAction
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: secrete_resin
     event: !type:XenoSecreteStructureActionEvent
     deselectOnMiss: false
+    checkCanAccess: false
     range: 20
     repeat: true
+    canTargetSelf: false
   - type: XenoConstructionAction
     checkStructureSelected: true
     checkWeeds: true

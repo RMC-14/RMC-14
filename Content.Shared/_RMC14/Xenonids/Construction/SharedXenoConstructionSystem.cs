@@ -153,7 +153,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private void OnXenoSecreteStructureAction(Entity<XenoConstructionComponent> xeno, ref XenoSecreteStructureActionEvent args)
     {
         if (xeno.Comp.BuildChoice is not { } choice ||
-            !CanSecreteOnTilePopup(xeno, choice, args.Target, true, true))
+            !CanSecreteOnTilePopup(xeno, choice, args.Coords, true, true))
         {
             return;
         }
@@ -165,7 +165,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
 
         args.Handled = true;
-        var ev = new XenoSecreteStructureDoAfterEvent(GetNetCoordinates(args.Target), choice);
+        var ev = new XenoSecreteStructureDoAfterEvent(GetNetCoordinates(args.Coords), choice);
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.BuildDelay, ev, xeno)
         {
             BreakOnMove = true

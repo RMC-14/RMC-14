@@ -2,4 +2,4 @@
 
 namespace Content.Shared._RMC14.Xenonids.Construction.Events;
 
-public sealed partial class XenoSecreteStructureActionEvent : WorldTargetActionEvent;
+public sealed partial class XenoSecreteStructureActionEvent : EntityWorldTargetActionEvent;
