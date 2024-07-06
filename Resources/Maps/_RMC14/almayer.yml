@@ -7310,7 +7310,7 @@ entities:
     - type: Transform
       pos: 87.5,1.5
       parent: 1
-- proto: CMCotablet
+- proto: RMCTabletCO
   entities:
   - uid: 961
     components:
