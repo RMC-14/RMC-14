@@ -29,11 +29,11 @@
       "name": "prison_plating_catwalk_alt"
     },
 	{
-      "name": "monorail",
+      "name": "monorailStraight",
       "directions": 4
     },
     {
-      "name": "monorail_bend",
+      "name": "monorailBend",
       "directions": 4
     }
   ]

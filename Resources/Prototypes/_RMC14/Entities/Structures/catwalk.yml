@@ -69,6 +69,7 @@
 - type: entity
   id: RMCMonorailStraight
   name: monorail track
+  description: The rail system for the CORSAT monorail.
   placement:
     mode: SnapgridCenter
   components:
@@ -93,7 +94,7 @@
       - Catwalk
 
 - type: entity
-  parent: RMCMonorail
+  parent: RMCMonorailStraight
   id: RMCMonorailBend
   components:
   - type: Sprite
