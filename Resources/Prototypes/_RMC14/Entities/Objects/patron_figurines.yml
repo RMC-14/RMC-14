@@ -185,3 +185,14 @@
     state: herbsquirto
   - type: PatronFigurine
     id: 9226a461-8d9a-49a2-824e-fdf9a7b1d81f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRainyCloudly
+  name: Rainy Cloudly figurine
+  description: "The pearlescent slimeperson figurine ripples and shimmers like a puddle, emanating a faint scent of fresh rain and whispers of distant thunder."
+  components:
+  - type: Sprite
+    state: rainy_cloudly
+  - type: PatronFigurine
+    id: 90e95245-6924-4f20-8e6c-05541c63547f
