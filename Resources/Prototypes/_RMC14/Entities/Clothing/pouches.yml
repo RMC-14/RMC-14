@@ -825,3 +825,5 @@
   - type: Tag
     tags:
     - Pouch
+  - type: CMHolster
+  - type: CMItemSlots
