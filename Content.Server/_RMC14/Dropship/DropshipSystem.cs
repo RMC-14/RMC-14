@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Server._RMC14.Marines;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
@@ -66,7 +66,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         RefreshUI();
     }
 
-    public override bool FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid? user, bool hijack = false)
+    public override bool FlyTo(Entity<SharedDropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid? user, bool hijack = false)
     {
         base.FlyTo(computer, destination, user, hijack);
 
@@ -136,7 +136,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         return true;
     }
 
-    protected override void RefreshUI(Entity<DropshipNavigationComputerComponent> computer)
+    protected override void RefreshUI(Entity<SharedDropshipNavigationComputerComponent> computer)
     {
         if (!_ui.IsUiOpen(computer.Owner, DropshipNavigationUiKey.Key))
             return;

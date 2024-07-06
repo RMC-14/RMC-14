@@ -315,7 +315,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
                 foreach (var shipGrid in shipGrids)
                 {
-                    var computers = EntityQueryEnumerator<DropshipNavigationComputerComponent, TransformComponent>();
+                    var computers = EntityQueryEnumerator<SharedDropshipNavigationComputerComponent, TransformComponent>();
                     var launched = false;
                     while (computers.MoveNext(out var computerId, out var computer, out var xform))
                     {
