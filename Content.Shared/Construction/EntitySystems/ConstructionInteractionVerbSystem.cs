@@ -33,7 +33,7 @@ public sealed class ConstructionInteractionVerbSystem : EntitySystem
             DoContactInteraction = true,
             Act = () =>
             {
-                var ev = new ConstructionInteractionEvent(user);
+                var ev = new ConstructionInteractionEvent(user, ent.Comp.InteractionId);
                 RaiseLocalEvent(ent, ev);
 
                 if (_net.IsClient || ev.Handled)

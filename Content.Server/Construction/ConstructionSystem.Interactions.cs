@@ -251,7 +251,7 @@ namespace Content.Server.Construction
                 if (interactionDoAfter.Cancelled)
                     return HandleResult.False;
 
-                ev = new ConstructionInteractionEvent(interactionDoAfter.User);
+                ev = new ConstructionInteractionEvent(interactionDoAfter.User, interactionDoAfter.Id);
 
                 doAfterState = DoAfterState.Completed;
             }
@@ -273,6 +273,10 @@ namespace Content.Server.Construction
                     if (ev is not ConstructionInteractionEvent interactEv)
                         break;
 
+                    // Only check matching IDs if the step has an ID set.
+                    if (interactionStep.Interaction is not null && interactEv.Id != interactionStep.Interaction)
+                        return HandleResult.False;
+
                     interactEv.Handled = true;
 
                     user = interactEv.User;
@@ -290,8 +294,7 @@ namespace Content.Server.Construction
                             step.DoAfter,
                             doAfterEv,
                             uid,
-                            uid,
-                            interactEv.User)
+                            uid)
                         {
                             BreakOnDamage = false,
                             BreakOnMove = true,

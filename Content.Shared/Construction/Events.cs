@@ -136,18 +136,23 @@ public sealed partial class WelderRefineDoAfterEvent : SimpleDoAfterEvent
 public sealed class ConstructionInteractionEvent : HandledEntityEventArgs
 {
     public EntityUid User;
+    public string? Id;
 
-    public ConstructionInteractionEvent(EntityUid user)
+    public ConstructionInteractionEvent(EntityUid user, string? id)
     {
         User = user;
+        Id = id;
     }
 }
 
 [Serializable, NetSerializable]
 public sealed partial class ConstructionInteractionDoAfterEvent : DoAfterEvent
 {
+    public string? Id;
+
     public ConstructionInteractionDoAfterEvent(ConstructionInteractionEvent cInteractionEv)
     {
+        Id = cInteractionEv.Id;
     }
 
     public override DoAfterEvent Clone() => this;

@@ -4,6 +4,9 @@
 public sealed partial class ConstructionInteractionVerbComponent : Component
 {
     [DataField]
+    public string? InteractionId;
+
+    [DataField]
     public LocId VerbText = "construction-interaction-component-verb";
 
     [DataField]
