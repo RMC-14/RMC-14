@@ -116,6 +116,8 @@
   - type: IconSmooth
     key: walls
     base: membrane
+  - type: XenoConstructionUpgrade
+    proto: WallXenoMembraneThick
 
 - type: entity
   parent: BaseMembraneXeno

@@ -80,6 +80,8 @@
       types:
         Slash: 600
   - type: XenoConstructionRequiresSupport
+  - type: XenoConstructionUpgrade
+    proto: DoorXenoResinThick
 
 - type: entity
   id: DoorXenoResinThick
