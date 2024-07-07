@@ -28,15 +28,18 @@ public abstract class GunAPStacksSystem : EntitySystem
         //If xenoid hit increase stack
         if(HasComp<XenoComponent>(target))
         {
-            if(ent.Comp.Stacks < 5)
+            if(ent.Comp.Stacks < 5)//stacks cap at 50ap or 5 stacks
             {
             ent.Comp.Stacks++;
             }
         }
         //if anything else decrease stack
-        if(ent.Comp.Stacks != 0)
+        else
         {
-            ent.Comp.Stacks--;
+            if(ent.Comp.Stacks != 0)
+            {
+                ent.Comp.Stacks--;
+            }
         }
         Dirty(ent);
     }
