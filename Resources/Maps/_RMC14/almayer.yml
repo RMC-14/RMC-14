@@ -7310,13 +7310,6 @@ entities:
     - type: Transform
       pos: 87.5,1.5
       parent: 1
-- proto: RMCTabletCO
-  entities:
-  - uid: 961
-    components:
-    - type: Transform
-      pos: -33.5,-7.5
-      parent: 1
 - proto: CMCrateClothingOfficerOutfit
   entities:
   - uid: 7992
