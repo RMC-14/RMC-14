@@ -14,7 +14,6 @@
   - type: ActivatableUIRequiresAccess
   - type: AccessReader
     access: [ [ "CMAccessCommand" ] ]
-    key: enum.MarineCommunicationsComputerUI.Key
   - type: UserInterface
     interfaces:
       enum.MarineCommunicationsComputerUI.Key:
