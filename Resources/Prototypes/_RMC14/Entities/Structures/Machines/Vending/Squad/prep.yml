@@ -432,7 +432,7 @@
 #      - id: CMAttachments84xTelescopicScope
 #        amount: 2
     - name: Underbarrel
-      entries: []
+      entries:
 #      - id: CMAttachmentAngledGrip
 #        amount: 3
 #      - id: CMAttachmentBipod
