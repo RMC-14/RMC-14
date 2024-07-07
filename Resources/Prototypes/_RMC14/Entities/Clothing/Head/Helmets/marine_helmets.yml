@@ -10,7 +10,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/standard.rsi
   - type: Storage #hopefully in the future someone smarter than me can add storage(?) for integrated things like netting, HUD, etc. but for now this is for hiding snacks
-    maxItemSize: Small
+    maxItemSize: Tiny
     grid:
     - 0,0,2,1
     blacklist:
