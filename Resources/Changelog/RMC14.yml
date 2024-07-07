@@ -2270,5 +2270,63 @@
   id: 278
   time: '2024-07-06T10:14:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2848
+- author: Vermidia
+  changes:
+  - message: MREs can now be stored in webbing and armor
+    type: Add
+  id: 279
+  time: '2024-07-07T00:53:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2858
+- author: DrSmugleaf
+  changes:
+  - message: Fixed not being able to normal attack breakable walls.
+    type: Fix
+  id: 280
+  time: '2024-07-07T01:04:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2862
+- author: ShadowCommander
+  changes:
+  - message: Parasites no longer show up in ghost roles after infection.
+    type: Fix
+  id: 281
+  time: '2024-07-07T01:03:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2854
+- author: snebl
+  changes:
+  - message: Sandbag barricades can now be deconstructed with the entrenching tool.
+    type: Add
+  id: 282
+  time: '2024-07-07T01:06:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2843
+- author: TsjipTsjip
+  changes:
+  - message: Explosion damage dealt to players is now logged again.
+    type: Add
+  id: 283
+  time: '2024-07-07T01:07:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2852
+- author: Whisper
+  changes:
+  - message: Made queen footsteps louder.
+    type: Tweak
+  id: 284
+  time: '2024-07-07T04:03:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2863
+- author: tsp01
+  changes:
+  - message: Added Command Tablet
+    type: Add
+  - message: changed UI name for groundside operations console to "Groundside Operations"
+    type: Tweak
+  id: 285
+  time: '2024-07-07T04:04:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2847
+- author: Vermidia
+  changes:
+  - message: Larva removal surgery now spits out the removed larva
+    type: Add
+  id: 286
+  time: '2024-07-07T04:12:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2859
 Name: RMC14
 Order: -1
