@@ -1,0 +1,21 @@
+- type: entity
+  parent: BaseItem
+  id: RMCTabletCO
+  name: command tablet
+  description: A portable command interface used by top brass, capable of issuing commands over long ranges to their linked computer. Built to withstand a nuclear bomb.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/command_tablet.rsi
+    state: cotablet
+  - type: Item
+    size: Normal
+  - type: ActivatableUI
+    key: enum.MarineCommunicationsComputerUI.Key
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [ [ "CMAccessCommand" ] ]
+  - type: UserInterface
+    interfaces:
+      enum.MarineCommunicationsComputerUI.Key:
+        type: MarineCommunicationsComputerBui
+  - type: MarineCommunicationsComputer
