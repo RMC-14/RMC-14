@@ -2270,5 +2270,12 @@
   id: 278
   time: '2024-07-06T10:14:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2848
+- author: Vermidia
+  changes:
+  - message: MREs can now be stored in webbing and armor
+    type: Add
+  id: 279
+  time: '2024-07-07T00:53:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2858
 Name: RMC14
 Order: -1
