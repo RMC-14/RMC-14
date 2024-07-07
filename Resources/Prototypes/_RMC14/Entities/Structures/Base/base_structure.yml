@@ -42,7 +42,6 @@
 # BaseWall
 - type: entity
   abstract: true
-  parent: CMBaseStructureCorrodible
   id: CMBaseWallInvincible
   description: A huge chunk of metal used to separate rooms.
   placement:
@@ -50,6 +49,10 @@
     snap:
     - Wall
   components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
   - type: Sprite
     drawdepth: Walls
   - type: Icon
@@ -58,12 +61,6 @@
     key: walls
   - type: Occluder
   - type: Airtight
-  - type: RadiationBlocker
-    resistance: 2
-  - type: StaticPrice
-    price: 75
-  - type: Physics
-    bodyType: Static
   - type: Fixtures
     fixtures:
       fix1:
@@ -77,8 +74,6 @@
         density: 1000
   - type: XenoWeedable
     spawn: XenoWeedsWall
-  - type: Corrodible
-    isCorrodible: false
   - type: XenoConstructionSupport
 
 - type: entity
@@ -92,6 +87,7 @@
     damageModifierSet: StructuralMarine
   - type: Corrodible
     isCorrodible: true
+  - type: Clickable
 
 - type: entity
   parent:

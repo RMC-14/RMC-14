@@ -4,6 +4,9 @@
   name: autolathe
   description: It produces items using metal and glass.
   components:
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
   - type: Sprite
     sprite: _RMC14/Structures/Machines/autolathe.rsi
     layers:

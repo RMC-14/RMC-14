@@ -14,15 +14,9 @@
       map: [ "openLayer" ]
     - state: full
       map: [ "closedLayer" ]
-  - type: GenericVisualizer
-    visuals:
-      enum.SharedBagOpenVisuals.BagState:
-        openLayer:
-          Open: { visible: true }
-          Closed: { visible: false }
-        closedLayer:
-          Open: { visible: false }
-          Closed: { visible: true }
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
   - type: Item
     size: Large
   - type: UserInterface
@@ -124,6 +118,7 @@
       - TrayScanner
       - GasAnalyzer
       - LightReplacer
+      - EntrenchingTool
   - type: IgnoreContentsSize
     items:
       components:
@@ -165,6 +160,7 @@
       - TrayScanner
       - GasAnalyzer
       - LightReplacer
+      - EntrenchingTool
   - type: FixedItemSizeStorage
 
 - type: entity
@@ -202,7 +198,7 @@
   - type: Storage
     maxItemSize: Normal
     grid:
-    - 0,0,27,1 # 14 slots
+    - 0,0,13,3 # 14 slots
     whitelist:
       tags:
       - DiscreteHealthAnalyzer
@@ -374,7 +370,7 @@
   components:
   - type: Storage
     maxItemSize: Normal
-    grid: 
+    grid:
     - 0,0,11,5 # 18 slots for now. If future large grenades are introduced this should be increased to be able to hold at least 18 of any grenade.
     whitelist:
       tags:

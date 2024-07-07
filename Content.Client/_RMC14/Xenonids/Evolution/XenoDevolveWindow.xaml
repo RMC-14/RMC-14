@@ -1,0 +1,9 @@
+﻿<controls:XenoDevolveWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Xenonids.Evolution"
+    Title="{Loc rmc-xeno-evolution-devolve-title}"
+    MinSize="300 300">
+    <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
+        <BoxContainer Orientation="Vertical" Name="DevolutionsContainer" Access="Public" />
+    </ScrollContainer>
+</controls:XenoDevolveWindow>

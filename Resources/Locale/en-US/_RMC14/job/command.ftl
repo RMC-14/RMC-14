@@ -4,7 +4,7 @@ cm-job-description-senior-enlisted-advisor = Advise and train inexperienced crew
 CMJobSeniorEnlistedAdvisor = Senior Enlisted Advisor
 
 cm-job-name-staff-officer = Staff Officer
-cm-job-description-staff-officer = Monitor the marines, man the CIC. In charge of logistics and the overwatch system. Next in line to take command after the executive officer.
+cm-job-description-staff-officer = Monitor the marines, man the CIC. In charge of logistics and the overwatch system.
 CMJobStaffOfficer = Staff Officer
 
 cm-job-name-commanding-officer = Commanding Officer

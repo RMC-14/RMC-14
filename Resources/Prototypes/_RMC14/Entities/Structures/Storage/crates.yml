@@ -737,3 +737,12 @@
       map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/secure_we_ya.rsi
+
+- type: entity
+  parent: CMCrateSecure
+  id: RMCCrateSecurePhoron
+  name: phoron crate
+  description: A phoron crate.
+  components:
+  - type: AccessReader
+    access: [["CMAccessResearch"],["CMAccessEngineering"]]

@@ -5,6 +5,7 @@
   components:
   - type: TimedDespawn
     lifetime: 3.2
+  - type: RMCXenoScreechShockWave
   - type: Sprite
     sprite: _RMC14/Effects/xeno_screech.rsi
     noRot: true

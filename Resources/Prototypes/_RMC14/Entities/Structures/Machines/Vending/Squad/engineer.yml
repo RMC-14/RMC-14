@@ -1,0 +1,244 @@
+# COMBAT TECHNICIAN
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechSCTGear
+  name: ColMarTech squad comtech gear rack
+  description: An automated gear rack for combat technicians.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessCombatTechPrep" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/combat_technician_gear.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMCombatTech
+    sections:
+    - name: Engineer Set (Mandatory)
+      takeAll: CMEngineerSet
+      entries:
+      - id: CMVendorBundleCombatTechnicianEssentials
+    - name: Handheld Defense
+      entries: [ ]
+    #    CM21STeslaCoil
+    #    CMJIMAPlantedFlag
+    #    CMUA42FSentryFlamer
+    #    CMUA571CSentryGun
+    #- id: CMSentryUpgradeKit
+    #  points: 15
+    - name: Engineering Supplies
+      entries:
+    #- id: CMAirlockCircuitBoard
+    #  points: 2
+    #- id: CMAPCCircuitBoard
+    #  points: 2
+      - id: CMEntrenchingTool
+        points: 2
+    #- id: CMPowerCellHighCapacity
+    #  points: 3
+      - id: CMSheetMetal10
+        points: 5
+      - id: CMSheetPlasteel10
+        points: 7
+    #- id: CMPlasticExplosive
+    #  points: 3
+    #- id: CMBreachingCharge
+    #  points: 5
+      - id: CMSandbagEmpty25
+        points: 10
+    #- id: CMPowerCellSuperCapacity
+    #  points: 10
+    #- id: CMES11MobileFuelCanister
+    #  points: 4
+    - name: Explosives
+      entries:
+      - id: CMPacketGrenadeHighExplosiveFilled
+        points: 18
+    #- id: CMM40HIDPIncendiaryPacket3
+    #  points: 18
+    #- id: CMM40HPDPPhosphorusPacket3
+    #  points: 18
+    #- id: CMM40HSDPSmokePacket3
+    #  points: 9
+    #- id: CMM74AGMFragAirburstPacket3
+    #  points: 18
+    #- id: CMM74AGMIncendiaryAirburstPacket3
+    #  points: 18
+    #- id: CMM74AGMSmokeAirburstPacket3
+    #  points: 10
+    #- id: CMM74AGMHornetAirburstPacket3
+    #  points: 20
+    #- id: CMM20MineBox4
+    #  points: 18
+    #- id: CMM40MFHSMetalFoamGrenade
+    #  points: 5
+    - name: Ammunition
+      entries:
+      - id: CMMagazineRifleM4SPRAP
+        points: 6
+      - id: CMMagazineSMGM63AP
+        points: 6
+      - id: CMMagazineSMGM63Ext
+        points: 6
+      - id: CMMagazineRifleM54CAP
+        points: 6
+      - id: CMMagazineRifleM54CExt
+        points: 6
+    - name: Armors
+      entries:
+      - id: CMArmorB12
+        points: 24
+      - id: CMArmorM4
+        points: 30
+    - name: Restricted Firearms
+      entries:
+      - id: CMWeaponPistolMK80
+        points: 8
+    #- id: CMSU6SmartPistol
+    #  points: 12
+    #- id: CMM240IncineratorUnit
+    #  points: 12
+    #- id: CMM79GrenadeLauncher
+    #  points: 24
+    #- id: CMM56DHeavyMachineGun
+    #  points: 24
+    - name: Clothing Items
+      entries:
+    #- id: CMScabbardMacheteFull
+    #  points: 6
+      - id: CMPouchMacheteFilled
+        points: 8
+    #- id: CMMarineRadioTelephonePack
+    #  points: 15
+    #- id: CMFuelTankStrapPouch
+    #  points: 4
+    #- id: CMSlingPouch
+    #  points: 6
+      - id: CMPouchGeneralLarge
+        points: 6
+      - id: CMBeltUtilityCombat
+        points: 15
+    - name: Utilities
+      entries:
+      - id: CMRollerBedSpawnFolded
+        points: 5
+    #- id: CMFultonDeviceStack
+    #  points: 5
+      - id: CMFireExtinguisherPortable
+        points: 3
+    #- id: CMMotionDetector
+    #  points: 8
+      - id: CMWhistle
+        points: 3
+    - name: Binoculars
+      entries: [ ]
+    #- id: CMBinoculars
+    #  points: 5
+    #- id: CMRangeFinder
+    #  points: 10
+    #- id: CMLaserDesignator
+    #  points: 15
+    - name: Helmet Optics
+      entries: [ ]
+    #- id: CMMedicalHelmetOptic
+    #  points: 12
+    - name: Pamphlets
+      entries: [ ]
+    #- id: CMPamphletJTAC
+    #  points: 15
+    - name: Radio Keys
+      entries:
+      - id: CMEncryptionKeyIntel
+        amount: 3
+        points: 3
+      - id: CMEncryptionKeyJTAC
+        amount: 3
+        points: 3
+      - id: CMEncryptionKeyRequisition
+        amount: 3
+        points: 3
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechSCTEquipment
+  name: ColMarTech squad comtech equipment rack
+  description: An automated rack hooked up to a colossal storage of combat technician standard-issue equipment.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: AccessReader
+    access:
+    - [ "CMAccessCombatTechPrep" ]
+  - type: CMAutomatedVendor
+    jobs:
+    - CMCombatTech
+    sections:
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: CMVendorBundleCombatTechnicianApparel
+      - id: CMMRE
+      #- id: CMMap # TODO: Make a map
+    - name: Armor
+      choices: { CMArmor: 1 }
+      entries:
+      - id: CMArmorM3Light
+        name: light armor
+      - id: CMArmorM3Medium
+        name: medium armor
+      - id: CMArmorM3Heavy
+        name: heavy armor
+    - name: Backpack
+      entries:
+    #- id: CMScabbardMacheteFull
+      - id: CMBackpackMarineTech
+      - id: CMSatchelMarineTech
+      - id: CMBackpackWelder
+      - id: RMCSatchelWelder
+    #- id: CMTechnicianWelderChestrig
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+    #- id: CMG8AGeneralUtilityPouch
+      - id: CMBeltMarine
+    #- id: CMM276GeneralPistolHolsterRig
+    #- id: CMM276M63HolsterRig
+    #- id: CMM276M44HolsterRig
+    #- id: CMM276M82FHolsterRig
+    #- id: CMM276ShotgunShellLoadingRig
+    #- id: CMM276MortarOperatorBelt
+      - id: CMBeltUtilityFilled
+    #- id: CMM276M40GrenadeRig
+    - name: Pouches
+      choices: { CMPouch: 2 }
+      entries:
+      - id: CMPouchConstruction
+      - id: CMPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
+      - id: CMPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+      - id: CMPouchFirstAidPills
+        name: first-aid pouch (pills)
+      #- id: CMElectronicsPouchFull
+      - id: CMPouchExplosive
+      - id: CMPouchFlareFilled
+        name: Flare pouch (Filled)
+      - id: CMPouchMagazinePistolLarge
+      - id: CMPouchMagazine
+      - id: CMPouchShotgun
+      - id: CMPouchGeneralMedium
+      - id: CMPouchPistol
+      #- id: CMToolsPouchFull
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBrown
+      - id: CMWebbingBlack
+      #- id: CMShoulderHolster
+      - id: CMWebbing
+    #- id: CMDropPouch
+    - name: Mask
+      entries:
+      - id: CMMaskGas
+      - id: CMMaskCoif

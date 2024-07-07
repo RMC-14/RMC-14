@@ -46,6 +46,12 @@
   name: Mr. Wiggles
   description: It's a corgi puppy.
 
+- type: entity
+  parent: MobCatCalico
+  id: CMMobJones
+  name: Jones
+  description: A tough, old stray whose origin no one seems to know.
+
 # Spawners
 
 - type: entity
@@ -97,3 +103,18 @@
   - type: ConditionalSpawner
     prototypes:
     - CMMobWiggles
+
+- type: entity
+  parent: MarkerBase
+  id: CMSpawnMobJones
+  name: Jones Spawner
+  suffix: CM
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: cat2
+      sprite: Mobs/Pets/cat.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - CMMobJones

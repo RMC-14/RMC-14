@@ -69,7 +69,8 @@ public sealed class XenoSystem : EntitySystem
 
         SubscribeLocalEvent<XenoComponent, MapInitEvent>(OnXenoMapInit);
         SubscribeLocalEvent<XenoComponent, GetAccessTagsEvent>(OnXenoGetAdditionalAccess);
-        SubscribeLocalEvent<XenoComponent, NewXenoEvolvedComponent>(OnNewXenoEvolved);
+        SubscribeLocalEvent<XenoComponent, NewXenoEvolvedEvent>(OnNewXenoEvolved);
+        SubscribeLocalEvent<XenoComponent, XenoDevolvedEvent>(OnXenoDevolved);
         SubscribeLocalEvent<XenoComponent, HealthScannerAttemptTargetEvent>(OnXenoHealthScannerAttemptTarget);
         SubscribeLocalEvent<XenoComponent, GetDefaultRadioChannelEvent>(OnXenoGetDefaultRadioChannel);
         SubscribeLocalEvent<XenoComponent, AttackAttemptEvent>(OnXenoAttackAttempt);
@@ -108,7 +109,13 @@ public sealed class XenoSystem : EntitySystem
         args.Tags.UnionWith(xeno.Comp.AccessLevels);
     }
 
-    private void OnNewXenoEvolved(Entity<XenoComponent> newXeno, ref NewXenoEvolvedComponent args)
+    private void OnNewXenoEvolved(Entity<XenoComponent> newXeno, ref NewXenoEvolvedEvent args)
+    {
+        var oldRotation = _transform.GetWorldRotation(args.OldXeno);
+        _transform.SetWorldRotation(newXeno, oldRotation);
+    }
+
+    private void OnXenoDevolved(Entity<XenoComponent> newXeno, ref XenoDevolvedEvent args)
     {
         var oldRotation = _transform.GetWorldRotation(args.OldXeno);
         _transform.SetWorldRotation(newXeno, oldRotation);

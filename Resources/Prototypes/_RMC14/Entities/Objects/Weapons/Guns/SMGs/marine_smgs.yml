@@ -24,6 +24,8 @@
     angleDecay: 10
   - type: RMCNameItemOnVend
     item: PrimaryGun
+  - type: GunUnskilledPenalty
+    angleIncrease: 20
 
 - type: entity
   parent: CMBaseWeaponSMG

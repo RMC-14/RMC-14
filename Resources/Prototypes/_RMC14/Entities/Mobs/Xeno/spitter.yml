@@ -7,6 +7,8 @@
   name: Spitter
   description: A gross, oozing alien of some kind.
   components:
+  - type: GhostRole
+    name: cm-job-name-xeno-spitter
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Spitter/spitter.rsi
   - type: MobState
@@ -31,9 +33,13 @@
     - ActionXenoChargeSpit
     - ActionXenoScatteredSpit # TODO RMC14 replace this with spray acid
     #    - ActionXenoSprayAcid
+    - ActionXenoDevolve
     tier: 2
     hudOffset: 0,0.16
     unlockAt: 540 # 9 minutes
+  - type: XenoDevolve
+    devolvesTo:
+    - CMXenoSentinel
   - type: XenoAcid
   - type: XenoDevour
   - type: XenoPlasma

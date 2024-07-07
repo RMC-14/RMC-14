@@ -78,6 +78,7 @@
   - 1.0
   - 1.0
   - 1.0
+  weedsSpreadable: false
 
 - type: tile
   parent: CMPlanetBase
@@ -95,6 +96,7 @@
     North: /Textures/_RMC14/Tiles/planet/grass1/double_edge.png
     West: /Textures/_RMC14/Tiles/planet/grass1/double_edge.png
   baseTurf: CMPlanetDirt
+  weedsSpreadable: false
 
 - type: tile
   parent: CMPlanetBase
@@ -113,6 +115,7 @@
     West: /Textures/_RMC14/Tiles/planet/grass2/double_edge.png
   footstepSounds:
     collection: FootstepAsteroid
+  weedsSpreadable: false
 
 - type: tile
   parent: CMPlanetBase
@@ -131,6 +134,7 @@
     West: /Textures/_RMC14/Tiles/planet/grass3/double_edge.png
   footstepSounds:
     collection: FootstepAsteroid
+  weedsSpreadable: false
 
 # TODO RMC14 scoched dirt grass
 - type: tile
@@ -138,75 +142,76 @@
   id: CMPlanetGrassDirt
   name: grass dirt
   sprite: /Textures/_RMC14/Tiles/planet/grass1/grass.png
+  weedsSpreadable: false
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetGrassDirt
   id: CMPlanetGrassDirtNW
   name: grass dirt nw
   sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt_corner_0.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetGrassDirt
   id: CMPlanetGrassDirtNE
   name: grass dirt ne
   sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt_corner_1.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetGrassDirt
   id: CMPlanetGrassDirtSE
   name: grass dirt se
   sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt_corner_2.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetGrassDirt
   id: CMPlanetGrassDirtSW
   name: grass dirt sw
   sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt_corner_3.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetGrassDirt
   id: CMPlanetGrassDirtNW2
   name: grass dirt nw 2
   sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt_corner2_0.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetGrassDirt
   id: CMPlanetGrassDirtSE2
   name: grass dirt se 2
   sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt_corner2_1.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetGrassDirt
   id: CMPlanetGrassDirtNE2
   name: grass dirt ne 2
   sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt_corner2_2.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetGrassDirt
   id: CMPlanetGrassDirtSW2
   name: grass dirt sw 2
   sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt_corner2_3.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetGrassDirt
   id: CMPlanetGrassDirtNorth
   name: grass dirt north
   sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt_edge_0.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetGrassDirt
   id: CMPlanetGrassDirtSouth
   name: grass dirt south
   sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt_edge_1.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetGrassDirt
   id: CMPlanetGrassDirtWest
   name: grass dirt west
   sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt_edge_2.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetGrassDirt
   id: CMPlanetGrassDirtEast
   name: grass dirt east
   sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt_edge_3.png
@@ -455,3 +460,233 @@
   id: CMPlanetCoastCornerSE2
   name: coast corner sw
   sprite: /Textures/_RMC14/Tiles/planet/beach/beachcorner2_24.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetIce0
+  name: ice
+  sprite: /Textures/_RMC14/Tiles/planet/auto_ice/ice_0.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetIceComposite
+  name: ice
+  sprite: /Textures/_RMC14/Tiles/planet/auto_ice/ice_0_composite1.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetIce1
+  name: ice
+  sprite: /Textures/_RMC14/Tiles/planet/auto_ice/ice_1.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetIce2
+  name: ice
+  sprite: /Textures/_RMC14/Tiles/planet/auto_ice/ice_2.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetSnow1
+  name: snow
+  sprite: /Textures/_RMC14/Tiles/planet/snow2/snow_1.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetSnow2
+  name: snow
+  sprite: /Textures/_RMC14/Tiles/planet/snow2/snow_2.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetSnow3
+  name: snow
+  sprite: /Textures/_RMC14/Tiles/planet/snow2/snow_3.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetSnow4
+  name: snow
+  sprite: /Textures/_RMC14/Tiles/planet/snow2/snow_4.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetTallGrass
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetTallGrassSnowNorth
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_north_snow.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetTallGrassSnowEast
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_east_snow.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetTallGrassSnowSouth
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_south_snow.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetTallGrassSnowWest
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_west_snow.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetTallGrassSnowNorthEast
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_north_east_snow.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetTallGrassSnowNorthWest
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_north_west_snow.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetTallGrassSnowSouthEast
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_south_east_snow.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetTallGrassSnowSouthWest
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_south_west_snow.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetTallGrassCompositeNorth
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_north_composite.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetTallGrassCompositeEast
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_east_composite.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetTallGrassCompositeSouth
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_south_composite.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetTallGrassCompositeWest
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_west_composite.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetTallGrassCompositeNorthEast
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_north_east_composite.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetTallGrassCompositeNorthWest
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_north_west_composite.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetTallGrassCompositeSouthEast
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_south_east_composite.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RCMPlanetTallGrassCompositeSouthWest
+  name: tall grass
+  sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_south_west_composite.png

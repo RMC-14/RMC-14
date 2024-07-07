@@ -102,10 +102,7 @@
 - Flags: SERVER
   Commands:
   - delete
-  - pausemap
   - unpausemap
-  - restart
-  - shutdown
 
 - Flags: SPAWN
   Commands:
@@ -134,6 +131,9 @@
   - fuck
   - replay_recording_start
   - replay_recording_stop
+  - restart
+  - shutdown
+  - pausemap
 
 - Flags: QUERY
   Commands:

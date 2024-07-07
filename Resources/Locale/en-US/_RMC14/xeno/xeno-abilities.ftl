@@ -20,6 +20,9 @@ cm-xeno-evolution-failed-already-have = There already is a living {$prototype}!
 cm-xeno-evolution-failed-hive-shaken = The Hive is shaken by the death of the last Queen. We can't find the strength to evolve.
 cm-xeno-evolution-failed-cannot-support = The Hive cannot support this caste yet!
 cm-xeno-evolution-failed-hive-full = The hive cannot support another Tier {$tier}, wait for either more aliens to be born or someone to die.
+rmc-xeno-evolution-devolve-title = De-Evolve To
+rmc-xeno-evolution-devolve = You devolve to {$xeno}!
+rmc-xeno-evolution-cant-devolve-damaged = We are too weak to deevolve, we must regain our health first.
 
 # Fortify
 cm-xeno-fortify-cant-headbutt = You can't headbutt while fortifying!
@@ -59,18 +62,19 @@ cm-xeno-pheromones-stop = You stop emitting pheromones
 cm-xeno-none-devoured = You haven't devoured anyone!
 
 # Rest
-cm-xeno-rest-cant-headbutt = You can't headbutt while resting!
-cm-xeno-rest-cant-fortify = You can't fortify while resting!
-cm-xeno-rest-cant-tail-sweep = You can't tail sweep while resting!
-cm-xeno-rest-cant-toggle-crest = You can't lower your crest while resting!
-cm-xeno-rest-cant-leap = You can't leap while resting!
-cm-xeno-rest-cant-lunge = You can't lunge while resting!
-cm-xeno-rest-cant-punch = You can't punch while resting!
-cm-xeno-rest-cant-fling = You can't punch while resting!
-cm-xeno-rest-cant-charge = You can't punch while resting!
-cm-xeno-rest-cant-stomp = You can't punch while resting!
-cm-xeno-rest-cant-gut = You can't punch while resting!
-cm-xeno-rest-cant-screech = You can't punch while resting!
+rmc-xeno-rest-cant-headbutt = You can't headbutt while resting!
+rmc-xeno-rest-cant-fortify = You can't fortify while resting!
+rmc-xeno-rest-cant-tail-sweep = You can't tail sweep while resting!
+rmc-xeno-rest-cant-toggle-crest = You can't lower your crest while resting!
+rmc-xeno-rest-cant-leap = You can't leap while resting!
+rmc-xeno-rest-cant-lunge = You can't lunge while resting!
+rmc-xeno-rest-cant-punch = You can't punch while resting!
+rmc-xeno-rest-cant-fling = You can't fling while resting!
+rmc-xeno-rest-cant-charge = You can't charge while resting!
+rmc-xeno-rest-cant-stomp = You can't stomp while resting!
+rmc-xeno-rest-cant-gut = You can't gut while resting!
+rmc-xeno-rest-cant-screech = You can't screech while resting!
+rmc-xeno-rest-cant-secrete = You can't secrete while resting!
 
 # Toggle Crest Defense
 cm-xeno-toggle-crest-cant-fortify = You can't fortify while your crest is lowered!

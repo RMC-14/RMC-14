@@ -7,6 +7,8 @@
   name: Boiler
   description: A huge, grotesque xenonid covered in glowing, oozing acid slime.
   components:
+  - type: GhostRole
+    name: cm-job-name-xeno-boiler
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Boiler/boiler.rsi
   - type: MobState
@@ -32,9 +34,13 @@
     #    - ActionXenoSprayAcid
     #    - ActionXenoLongSight
     #    - ActionXenoAcidShroud
+    - ActionXenoDevolve
     tier: 3
     hudOffset: 0,0.35
     unlockAt: 900 # 15 minutes
+  - type: XenoDevolve
+    devolvesTo:
+    - CMXenoSpitter
   - type: XenoPlasma
     plasma: 400
     maxPlasma: 400

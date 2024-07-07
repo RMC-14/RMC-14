@@ -1,0 +1,198 @@
+﻿- type: entity
+  abstract: true
+  parent: BaseFigurine
+  id: RMCBaseFigurinePatron
+  description: A small, detailed miniature.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/patron_figurines.rsi
+    scale: 0.5, 0.5
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerFigurinePatron
+  name: patron figurine spawner
+  description: A patron figurine spawner.
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: Objects/Fun/figurines.rsi
+    state: bartender
+  - type: RandomPatronFigurineSpawner # TODO RMC14 max 1 of each if any have yet to be picked at least once, to guarantee variety
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronFoxBridgeton
+  name: Fox Bridgeton figurine
+  description: This is like that book by George Orwell, Nineteen Eighty Fo'
+  components:
+  - type: Sprite
+    state: Fox_Bridgeton
+  - type: PatronFigurine
+    id: 76016009-20fb-4e88-ac6e-1fdefe800a37
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKillsTheMice
+  name: Kills-The-Mice figurine
+  description: It looks neat.
+  components:
+  - type: Sprite
+    state: Kills-The-Mice
+  - type: PatronFigurine
+    id: e04261e0-0248-49d5-9398-08f84d53e4c0
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronFritzVohlkson
+  name: Fritz Vohlkson figurine
+  description: "SIR YES SIR OORAH!"
+  components:
+  - type: Sprite
+    state: Fritz_Vohlkson
+  - type: PatronFigurine
+    id: 3676980a-d9a2-4c7c-84de-c8d97ef07eab
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMinervaHostel
+  name: Minerva Hostel figurine
+  description: The battle's maestro, always in tune with the chaos.
+  components:
+  - type: Sprite
+    state: minerva_hostel
+  - type: PatronFigurine
+    id: ef4494f1-097b-4448-b93d-751b1425bafd
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronTempestasFrostbiteGlacies
+  name: Tempestas 'Frostbite' Glacies figurine
+  description: If I die before you continue, You shall have heard my final dying roar.
+  components:
+  - type: Sprite
+    state: Tempestas_Frostbite_Glacies
+  - type: PatronFigurine
+    id: 88404592-511d-4792-aa00-88743a918284
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSilvanodAndrea
+  name: Silvano d'Andrea figurine
+  description: Employee of the Month, every month.
+  components:
+  - type: Sprite
+    state: Silvano_dAndrea
+  - type: PatronFigurine
+    id: ba2e69da-8743-43b0-8c89-e1da20656503
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronIanthaAtikson
+  name: Iantha Atikson figurine
+  description: Everyone's favorite Reqqie! Just don't ask for crayons...
+  components:
+  - type: Sprite
+    state: Iantha_Atikson
+  - type: PatronFigurine
+    id: f6aa2920-580c-4b8d-aacc-efa441aa115b
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronScott
+  name: Scott Hoover figurine
+  description: "I work for the company. But don't let that fool you, I'm really an OK guy!"
+  components:
+  - type: Sprite
+    state: Scott_Hoover
+  - type: PatronFigurine
+    id: b40372e9-f136-472f-ae90-017928025e4f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurineRyanRockstarRuan
+  name: Ryan "Rockstar" Ruan
+  description: "He had big dreams of being a rockstar, but the marines corps had other plans. That, and also the fact that he has no idea how to play the guitar."
+  components:
+  - type: Sprite
+    state: ryan_rockstar_ruan
+  - type: PatronFigurine
+    id: 240c6025-7b47-4457-9ed1-985010b2ff08
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKasumiAyako
+  name: Kasumi Ayako figurine
+  description: "The emotional support cat."
+  components:
+  - type: Sprite
+    state: kasumi_ayako
+  - type: PatronFigurine
+    id: fef9a99e-5111-4094-b484-67af44ebd031
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronChikiSugimoto
+  name: Chiki Sugimoto figurine
+  description: “Hi! Me Chiki!”
+  components:
+  - type: Sprite
+    state: chiki_sugimoto
+  - type: PatronFigurine
+    id: d2e290ff-da44-45df-9e6d-bba2ce98446b
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronArchylleCatleay
+  name: Archylle Catleay figurine
+  description: The inspirational cat, following the footsteps of her mother
+  components:
+  - type: Sprite
+    state: archylle_catleay
+  - type: PatronFigurine
+    id: ca33bb3d-1944-4d65-b1d4-b0be04712300
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronTessieTerrence
+  name: Tessie Terrence figurine
+  description: "She's here to brighten your day!"
+  components:
+  - type: Sprite
+    state: tessie_terrence
+  - type: PatronFigurine
+    id: b18fcc29-5fa3-4489-8df0-4ceb994b4fb3
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronDagobertDogburglar
+  name: Dagobert Dogburglar figurine
+  description: "One must imagine marines happy."
+  components:
+  - type: Sprite
+    state: dagobert_dogburglar
+  - type: PatronFigurine
+    id: ea85ee23-6be6-46fb-8346-a8ba8e320298
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronHerbsquirto
+  name: Herbsquirto figurine
+  description: "The corporation's best botanist."
+  components:
+  - type: Sprite
+    state: herbsquirto
+  - type: PatronFigurine
+    id: 9226a461-8d9a-49a2-824e-fdf9a7b1d81f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRainyCloudly
+  name: Rainy Cloudly figurine
+  description: "The pearlescent slimeperson figurine ripples and shimmers like a puddle, emanating a faint scent of fresh rain and whispers of distant thunder."
+  components:
+  - type: Sprite
+    state: rainy_cloudly
+  - type: PatronFigurine
+    id: 90e95245-6924-4f20-8e6c-05541c63547f

@@ -69,6 +69,7 @@
       - Sidearm
       - Knife
       - Flashlight
+      - MRE
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -89,8 +90,10 @@
       - CMMagazineSmg
       - CMMagazineSniper
       - CMMagazinePistol
+      - MRE
   - type: RMCNameItemOnVend
     item: Armor
+  - type: RMCBulkyArmor
 
 - type: entity
   parent: CMArmorM3Medium
@@ -242,6 +245,8 @@
   - type: Storage
     grid:
     - 0,0,1,1 # 2 slots
+  - type: RMCBulkyArmor
+    isBulky: false
 
 - type: entity
   parent: CMArmorM3VLBallistics

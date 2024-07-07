@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Characters created by their respective owners. Figurine sprites made by DrSmugleaf.",
+  "size": {
+    "x": 32,
+    "y": 34
+  },
+  "states": [
+    {
+      "name": "Fox_Bridgeton"
+    },
+    {
+      "name": "Fritz_Vohlkson"
+    },
+    {
+      "name": "Kills-The-Mice"
+    },
+    {
+      "name": "minerva_hostel"
+    },
+    {
+      "name": "Tempestas_Frostbite_Glacies"
+    },
+    {
+      "name": "Silvano_dAndrea"
+    },
+    {
+      "name": "Iantha_Atikson"
+    },
+    {
+      "name": "Scott_Hoover"
+    },
+    {
+      "name": "ryan_rockstar_ruan"
+    },
+    {
+      "name": "kasumi_ayako"
+    },
+    {
+      "name": "chiki_sugimoto"
+    },
+    {
+      "name": "archylle_catleay"
+    },
+    {
+      "name": "tessie_terrence"
+    },
+    {
+      "name": "dagobert_dogburglar"
+    },
+    {
+      "name": "herbsquirto"
+    },
+    {
+      "name": "rainy_cloudly"
+    }
+  ]
+}

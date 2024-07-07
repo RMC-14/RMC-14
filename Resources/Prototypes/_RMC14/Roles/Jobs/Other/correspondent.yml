@@ -32,6 +32,7 @@
     ears: CMHeadsetReporter
     #    belt: CMCamera TODO RMC14
     pocket1: CMPouchGeneralLarge
+    pocket2: MicrophoneInstrument
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -2,6 +2,12 @@
   id: Hiss
   name: rmc-emote-name-hiss
   category: Vocal
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
   available: false
   icon: Interface/Actions/scream.png
   chatMessages: ["rmc-emote-hiss"]
@@ -17,6 +23,12 @@
   id: Meow
   name: rmc-emote-name-meow
   category: Vocal
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
   available: false
   icon: Interface/Actions/scream.png
   chatMessages: ["rmc-emote-meow"]
@@ -40,6 +52,12 @@
   id: Mew
   name: rmc-emote-name-mew
   category: Vocal
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
   available: false
   icon: Interface/Actions/scream.png
   chatMessages: ["rmc-emote-mew"]
@@ -55,6 +73,12 @@
   id: Growl
   name: rmc-emote-name-growl
   category: Vocal
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
   available: false
   icon: Interface/Actions/scream.png
   chatMessages: ["rmc-emote-growl"]
@@ -70,6 +94,12 @@
   id: Purr
   name: rmc-emote-name-purr
   category: Vocal
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
   available: false
   icon: Interface/Actions/scream.png
   chatMessages: ["rmc-emote-purr"]
