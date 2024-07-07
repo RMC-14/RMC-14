@@ -2305,5 +2305,12 @@
   id: 283
   time: '2024-07-07T01:07:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2852
+- author: Whisper
+  changes:
+  - message: Made queen footsteps louder.
+    type: Tweak
+  id: 284
+  time: '2024-07-07T04:03:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2863
 Name: RMC14
 Order: -1
