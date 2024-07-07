@@ -362,7 +362,7 @@
       - Gun
       - BallisticAmmoProvider
       - Stunbaton
-      - # TODO RMC14 motion detector, walkman
+#      - # TODO RMC14 motion detector, walkman
       tags:
       - Handcuffs
       - Grenade
