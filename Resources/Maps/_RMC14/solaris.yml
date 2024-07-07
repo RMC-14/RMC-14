@@ -8095,114 +8095,6 @@ entities:
     - type: Transform
       pos: 174.5,-58.5
       parent: 1
-  - uid: 18654
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 111.5,-71.5
-      parent: 1
-  - uid: 18655
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 111.5,-72.5
-      parent: 1
-  - uid: 18656
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 111.5,-73.5
-      parent: 1
-  - uid: 18657
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 112.5,-71.5
-      parent: 1
-  - uid: 18658
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 112.5,-72.5
-      parent: 1
-  - uid: 18659
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 112.5,-73.5
-      parent: 1
-  - uid: 18660
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 113.5,-71.5
-      parent: 1
-  - uid: 18661
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 113.5,-72.5
-      parent: 1
-  - uid: 18662
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 113.5,-73.5
-      parent: 1
-  - uid: 18663
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 114.5,-71.5
-      parent: 1
-  - uid: 18664
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 114.5,-72.5
-      parent: 1
-  - uid: 18665
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 114.5,-73.5
-      parent: 1
-  - uid: 18666
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 115.5,-71.5
-      parent: 1
-  - uid: 18667
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 115.5,-72.5
-      parent: 1
-  - uid: 18668
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 115.5,-73.5
-      parent: 1
-  - uid: 18669
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 116.5,-71.5
-      parent: 1
-  - uid: 18670
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 116.5,-72.5
-      parent: 1
-  - uid: 18671
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 116.5,-73.5
-      parent: 1
 - proto: CarpetChapel
   entities:
   - uid: 17320
@@ -8583,24 +8475,32 @@ entities:
       parent: 1
   - uid: 18231
     components:
+    - type: MetaData
+      name: kitchen storage
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 139.5,-73.5
       parent: 1
   - uid: 18232
     components:
+    - type: MetaData
+      name: kitchen storage
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 144.5,-73.5
       parent: 1
   - uid: 18297
     components:
+    - type: MetaData
+      name: bar breakroom
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 123.5,-73.5
       parent: 1
   - uid: 18298
     components:
+    - type: MetaData
+      name: bar breakroom
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 121.5,-67.5
@@ -8747,14 +8647,17 @@ entities:
       parent: 1
   - uid: 27491
     components:
+    - type: MetaData
+      name: dormitories toilet
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 18.5,-185.5
       parent: 1
-  - uid: 27517
+- proto: CMAirlockAssembly
+  entities:
+  - uid: 24501
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 28.5,-193.5
       parent: 1
 - proto: CMAirlockCommandLockedColony
@@ -8811,6 +8714,12 @@ entities:
     - type: Transform
       pos: 90.5,-90.5
       parent: 1
+    - type: Door
+      secondsUntilStateChange: -2735.1023
+      state: Opening
+    - type: DeviceLinkSource
+      lastSignals:
+        DoorStatus: True
   - uid: 16553
     components:
     - type: MetaData
@@ -8841,90 +8750,120 @@ entities:
       parent: 1
   - uid: 17060
     components:
+    - type: MetaData
+      name: engine reactor control
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 77.5,-131.5
       parent: 1
   - uid: 17061
     components:
+    - type: MetaData
+      name: engineering tool storage
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 69.5,-124.5
       parent: 1
   - uid: 17062
     components:
+    - type: MetaData
+      name: engine reactor control
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 74.5,-127.5
       parent: 1
   - uid: 17063
     components:
+    - type: MetaData
+      name: engineering workshop
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 63.5,-127.5
       parent: 1
   - uid: 17064
     components:
+    - type: MetaData
+      name: engineering workshop
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 53.5,-130.5
       parent: 1
   - uid: 17065
     components:
+    - type: MetaData
+      name: engineering break room
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 50.5,-126.5
       parent: 1
   - uid: 17066
     components:
+    - type: MetaData
+      name: engineering break room
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 45.5,-124.5
       parent: 1
   - uid: 17067
     components:
+    - type: MetaData
+      name: engineering lockers
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 59.5,-125.5
       parent: 1
   - uid: 17068
     components:
+    - type: MetaData
+      name: engineering lockers
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 57.5,-125.5
       parent: 1
   - uid: 17069
     components:
+    - type: MetaData
+      name: engineering workshop
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 53.5,-128.5
       parent: 1
   - uid: 17070
     components:
+    - type: MetaData
+      name: engine reactor control
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 71.5,-131.5
       parent: 1
   - uid: 17071
     components:
+    - type: MetaData
+      name: chief engineer's office
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 79.5,-123.5
       parent: 1
   - uid: 17072
     components:
+    - type: MetaData
+      name: engineering SMES
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 66.5,-120.5
       parent: 1
   - uid: 17073
     components:
+    - type: MetaData
+      name: power substation
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 47.5,-144.5
       parent: 1
   - uid: 17074
     components:
+    - type: MetaData
+      name: power substation
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 47.5,-141.5
@@ -9010,18 +8949,24 @@ entities:
       parent: 1
   - uid: 18215
     components:
+    - type: MetaData
+      name: greenhouse storage
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 147.5,-69.5
       parent: 1
   - uid: 18216
     components:
+    - type: MetaData
+      name: crew habitation complex
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 127.5,-79.5
       parent: 1
   - uid: 18217
     components:
+    - type: MetaData
+      name: crew habitation complex
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 127.5,-82.5
@@ -9046,6 +8991,12 @@ entities:
     - type: Transform
       pos: 114.5,-63.5
       parent: 1
+    - type: Door
+      secondsUntilStateChange: -42.477886
+      state: Opening
+    - type: DeviceLinkSource
+      lastSignals:
+        DoorStatus: True
   - uid: 19888
     components:
     - type: MetaData
@@ -9444,17 +9395,23 @@ entities:
   entities:
   - uid: 17136
     components:
+    - type: MetaData
+      name: lambda checkpoint
     - type: Transform
       pos: 166.5,-86.5
       parent: 1
   - uid: 17137
     components:
+    - type: MetaData
+      name: lambda checkpoint
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 161.5,-89.5
       parent: 1
   - uid: 17138
     components:
+    - type: MetaData
+      name: lambda checkpoint
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 171.5,-89.5
@@ -9669,6 +9626,8 @@ entities:
       parent: 1
   - uid: 27514
     components:
+    - type: MetaData
+      name: access door
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 35.5,-193.5
@@ -9745,11 +9704,15 @@ entities:
       parent: 1
   - uid: 17173
     components:
+    - type: MetaData
+      name: machine room
     - type: Transform
       pos: 49.5,-177.5
       parent: 1
   - uid: 17174
     components:
+    - type: MetaData
+      name: machine room
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 41.5,-176.5
@@ -9848,78 +9811,112 @@ entities:
   entities:
   - uid: 17177
     components:
+    - type: MetaData
+      name: engine reactor
     - type: Transform
       pos: 65.5,-131.5
       parent: 1
   - uid: 17178
     components:
+    - type: MetaData
+      name: engine reactor
     - type: Transform
       pos: 65.5,-133.5
       parent: 1
   - uid: 17179
     components:
+    - type: MetaData
+      name: engine reactor
     - type: Transform
       pos: 83.5,-146.5
       parent: 1
   - uid: 17180
     components:
+    - type: MetaData
+      name: engine reactor
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 82.5,-142.5
       parent: 1
   - uid: 17450
     components:
+    - type: MetaData
+      name: engine reactor
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 66.5,-142.5
       parent: 1
   - uid: 17451
     components:
+    - type: MetaData
+      name: engine reactor
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 66.5,-147.5
       parent: 1
   - uid: 17452
     components:
+    - type: MetaData
+      name: engine reactor
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 66.5,-138.5
       parent: 1
   - uid: 17454
     components:
+    - type: MetaData
+      name: engine reactor
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 82.5,-138.5
       parent: 1
   - uid: 17455
     components:
+    - type: MetaData
+      name: engine reactor
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 82.5,-147.5
       parent: 1
   - uid: 17456
     components:
+    - type: MetaData
+      name: engine reactor
     - type: Transform
       pos: 65.5,-146.5
       parent: 1
   - uid: 17457
     components:
+    - type: MetaData
+      name: engine reactor
     - type: Transform
       pos: 83.5,-131.5
       parent: 1
   - uid: 17458
     components:
+    - type: MetaData
+      name: engine reactor
     - type: Transform
       pos: 83.5,-133.5
       parent: 1
+    - type: Door
+      secondsUntilStateChange: -3788.7551
+      state: Opening
+    - type: DeviceLinkSource
+      lastSignals:
+        DoorStatus: True
   - uid: 17459
     components:
+    - type: MetaData
+      name: engineering secure storage
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 64.5,-121.5
       parent: 1
   - uid: 17460
     components:
+    - type: MetaData
+      name: engineering secure storage
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 64.5,-122.5
@@ -12174,6 +12171,96 @@ entities:
     components:
     - type: Transform
       pos: 115.5,-188.5
+      parent: 1
+  - uid: 18654
+    components:
+    - type: Transform
+      pos: 116.5,-73.5
+      parent: 1
+  - uid: 18655
+    components:
+    - type: Transform
+      pos: 116.5,-72.5
+      parent: 1
+  - uid: 18656
+    components:
+    - type: Transform
+      pos: 112.5,-72.5
+      parent: 1
+  - uid: 18657
+    components:
+    - type: Transform
+      pos: 115.5,-73.5
+      parent: 1
+  - uid: 18658
+    components:
+    - type: Transform
+      pos: 116.5,-71.5
+      parent: 1
+  - uid: 18659
+    components:
+    - type: Transform
+      pos: 112.5,-73.5
+      parent: 1
+  - uid: 18660
+    components:
+    - type: Transform
+      pos: 115.5,-72.5
+      parent: 1
+  - uid: 18661
+    components:
+    - type: Transform
+      pos: 111.5,-73.5
+      parent: 1
+  - uid: 18662
+    components:
+    - type: Transform
+      pos: 112.5,-71.5
+      parent: 1
+  - uid: 18663
+    components:
+    - type: Transform
+      pos: 114.5,-73.5
+      parent: 1
+  - uid: 18664
+    components:
+    - type: Transform
+      pos: 111.5,-71.5
+      parent: 1
+  - uid: 18665
+    components:
+    - type: Transform
+      pos: 111.5,-72.5
+      parent: 1
+  - uid: 18666
+    components:
+    - type: Transform
+      pos: 115.5,-71.5
+      parent: 1
+  - uid: 18667
+    components:
+    - type: Transform
+      pos: 113.5,-71.5
+      parent: 1
+  - uid: 18668
+    components:
+    - type: Transform
+      pos: 113.5,-72.5
+      parent: 1
+  - uid: 18669
+    components:
+    - type: Transform
+      pos: 114.5,-72.5
+      parent: 1
+  - uid: 18670
+    components:
+    - type: Transform
+      pos: 114.5,-71.5
+      parent: 1
+  - uid: 18671
+    components:
+    - type: Transform
+      pos: 113.5,-73.5
       parent: 1
 - proto: CMCatwalk
   entities:
@@ -14950,6 +15037,14 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 101.5,-100.5
       parent: 1
+    - type: CMDoubleDoor
+      lastOpeningAt: 2730.2724706
+    - type: Door
+      secondsUntilStateChange: -2754.1716
+      state: Opening
+    - type: DeviceLinkSource
+      lastSignals:
+        DoorStatus: True
   - uid: 17643
     components:
     - type: MetaData
@@ -14958,6 +15053,14 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 100.5,-100.5
       parent: 1
+    - type: CMDoubleDoor
+      lastOpeningAt: 2730.2724706
+    - type: Door
+      secondsUntilStateChange: -2754.1716
+      state: Opening
+    - type: DeviceLinkSource
+      lastSignals:
+        DoorStatus: True
   - uid: 22256
     components:
     - type: MetaData
@@ -15084,105 +15187,141 @@ entities:
   entities:
   - uid: 17448
     components:
+    - type: MetaData
+      name: chapel
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 160.5,-91.5
       parent: 1
   - uid: 17449
     components:
+    - type: MetaData
+      name: chapel
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 159.5,-91.5
       parent: 1
   - uid: 18199
     components:
+    - type: MetaData
+      name: library
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 153.5,-81.5
       parent: 1
   - uid: 18200
     components:
+    - type: MetaData
+      name: kitchen
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 137.5,-82.5
       parent: 1
   - uid: 18201
     components:
+    - type: MetaData
+      name: kitchen
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 136.5,-82.5
       parent: 1
   - uid: 18202
     components:
+    - type: MetaData
+      name: library
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 152.5,-81.5
       parent: 1
   - uid: 18203
     components:
+    - type: MetaData
+      name: bar
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 117.5,-82.5
       parent: 1
   - uid: 18204
     components:
+    - type: MetaData
+      name: bar
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 118.5,-82.5
       parent: 1
   - uid: 18205
     components:
+    - type: MetaData
+      name: bar
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 125.5,-81.5
       parent: 1
   - uid: 18206
     components:
+    - type: MetaData
+      name: kitchen
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 129.5,-81.5
       parent: 1
   - uid: 18207
     components:
+    - type: MetaData
+      name: kitchen
     - type: Transform
       pos: 129.5,-80.5
       parent: 1
   - uid: 18208
     components:
+    - type: MetaData
+      name: bar
     - type: Transform
       pos: 125.5,-80.5
       parent: 1
   - uid: 18209
     components:
+    - type: MetaData
+      name: kitchen storage
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 142.5,-71.5
       parent: 1
   - uid: 18210
     components:
+    - type: MetaData
+      name: kitchen storage
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 141.5,-71.5
       parent: 1
   - uid: 18211
     components:
+    - type: MetaData
+      name: greenhouse storage
     - type: Transform
       pos: 138.5,-68.5
       parent: 1
   - uid: 18212
     components:
+    - type: MetaData
+      name: greenhouse storage
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 138.5,-69.5
       parent: 1
   - uid: 18213
     components:
+    - type: MetaData
+      name: greenhouse storage
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 131.5,-65.5
       parent: 1
   - uid: 18214
     components:
+    - type: MetaData
+      name: greenhouse storage
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 132.5,-65.5
@@ -15433,12 +15572,16 @@ entities:
       parent: 1
   - uid: 22940
     components:
+    - type: MetaData
+      name: engineering complex
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 56.5,-117.5
       parent: 1
   - uid: 22941
     components:
+    - type: MetaData
+      name: engineering complex
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 57.5,-117.5
@@ -15506,47 +15649,63 @@ entities:
       parent: 1
   - uid: 23991
     components:
+    - type: MetaData
+      name: engineering complex
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 82.5,-117.5
       parent: 1
   - uid: 23992
     components:
+    - type: MetaData
+      name: engineering complex
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 82.5,-123.5
       parent: 1
   - uid: 23993
     components:
+    - type: MetaData
+      name: engineering complex
     - type: Transform
       pos: 88.5,-134.5
       parent: 1
   - uid: 23994
     components:
+    - type: MetaData
+      name: engineering complex
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 88.5,-135.5
       parent: 1
   - uid: 23995
     components:
+    - type: MetaData
+      name: engineering complex
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 83.5,-123.5
       parent: 1
   - uid: 23996
     components:
+    - type: MetaData
+      name: engineering complex
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 83.5,-117.5
       parent: 1
   - uid: 25063
     components:
+    - type: MetaData
+      name: engineering complex
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 92.5,-131.5
       parent: 1
   - uid: 25064
     components:
+    - type: MetaData
+      name: engineering complex
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 92.5,-136.5
@@ -15559,6 +15718,8 @@ entities:
       parent: 1
   - uid: 25066
     components:
+    - type: MetaData
+      name: engineering complex
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 91.5,-131.5
@@ -15571,6 +15732,8 @@ entities:
       parent: 1
   - uid: 25068
     components:
+    - type: MetaData
+      name: engineering complex
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 91.5,-136.5
@@ -15656,34 +15819,46 @@ entities:
       parent: 1
   - uid: 27513
     components:
+    - type: MetaData
+      name: abondoned mining storage
     - type: Transform
       pos: 16.5,-188.5
       parent: 1
   - uid: 27515
     components:
+    - type: MetaData
+      name: abondoned mining storage
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 27.5,-182.5
       parent: 1
   - uid: 27516
     components:
+    - type: MetaData
+      name: abondoned mining storage
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 16.5,-189.5
       parent: 1
   - uid: 27518
     components:
+    - type: MetaData
+      name: abondoned mining storage
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 26.5,-182.5
       parent: 1
   - uid: 27519
     components:
+    - type: MetaData
+      name: abondoned mining storage
     - type: Transform
       pos: 35.5,-187.5
       parent: 1
   - uid: 27520
     components:
+    - type: MetaData
+      name: abondoned mining storage
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 35.5,-188.5
@@ -143899,6 +144074,16 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 89.5,-98.5
       parent: 1
+  - uid: 24502
+    components:
+    - type: Transform
+      pos: 58.5,-118.5
+      parent: 1
+  - uid: 24503
+    components:
+    - type: Transform
+      pos: 59.5,-122.5
+      parent: 1
 - proto: RMCDispenserChem
   entities:
   - uid: 16685
@@ -145975,6 +146160,17 @@ entities:
       rot: 3.141592653589793 rad
       pos: 79.5,-76.5
       parent: 1
+  - uid: 24504
+    components:
+    - type: Transform
+      pos: 150.5,-97.5
+      parent: 1
+  - uid: 24505
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 150.5,-93.5
+      parent: 1
 - proto: TableReinforced
   entities:
   - uid: 16576
@@ -146992,38 +147188,6 @@ entities:
     components:
     - type: Transform
       pos: 165.48717,-50.530224
-      parent: 1
-- proto: XenoNest
-  entities:
-  - uid: 28105
-    components:
-    - type: Transform
-      pos: 195.5,-184.5
-      parent: 1
-  - uid: 28106
-    components:
-    - type: Transform
-      pos: 195.5,-183.5
-      parent: 1
-  - uid: 28107
-    components:
-    - type: Transform
-      pos: 195.5,-182.5
-      parent: 1
-  - uid: 28108
-    components:
-    - type: Transform
-      pos: 196.5,-184.5
-      parent: 1
-  - uid: 28109
-    components:
-    - type: Transform
-      pos: 196.5,-183.5
-      parent: 1
-  - uid: 28110
-    components:
-    - type: Transform
-      pos: 196.5,-182.5
       parent: 1
 - proto: XenoWeedsSource
   entities:
