@@ -175,7 +175,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         args.Handled = true;
         var ev = new XenoSecreteStructureDoAfterEvent(GetNetEntity(args.Entity), GetNetCoordinates(args.Coords), choice);
-        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.BuildDelay, ev, xeno)
+        var doAfter = new DoAfterArgs(EntityManager, xeno, canReplace ? new TimeSpan(0) : xeno.Comp.BuildDelay, ev, xeno)
         {
             BreakOnMove = true
         };
