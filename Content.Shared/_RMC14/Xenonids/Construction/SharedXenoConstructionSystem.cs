@@ -159,9 +159,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (xeno.Comp.BuildChoice is not { } choice)
             return;
 
-        var canReplace = args.Entity != null && !CanReplaceStructure(xeno, choice, args.Entity.Value, true);
+        var canReplace = args.Entity != null && CanReplaceStructure(xeno, choice, args.Entity.Value, true);
 
-        var canCreate = args.Coords != null && !CanSecreteOnTilePopup(xeno, choice, args.Coords.Value, true, true);
+        var canCreate = args.Coords != null &&
+                        CanSecreteOnTilePopup(xeno, choice, args.Coords.Value, true, true, canReplace);
 
         if (!canReplace && !canCreate)
             return;
@@ -408,7 +409,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                             construction.BuildChoice,
                             args.Coords.Value,
                             ent.Comp.CheckStructureSelected,
-                            ent.Comp.CheckWeeds);
+                            ent.Comp.CheckWeeds,
+                            canReplace);
 
         if (!canReplace && !canCreate)
             args.Cancelled = true;
@@ -583,7 +585,12 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         return true;
     }
 
-    private bool CanSecreteOnTilePopup(Entity<XenoConstructionComponent> xeno, EntProtoId? buildChoice, EntityCoordinates target, bool checkStructureSelected, bool checkWeeds)
+    private bool CanSecreteOnTilePopup(Entity<XenoConstructionComponent> xeno,
+        EntProtoId? buildChoice,
+        EntityCoordinates target,
+        bool checkStructureSelected,
+        bool checkWeeds,
+        bool silent = false)
     {
         if (!CanSecreteResin(xeno, buildChoice, target, checkStructureSelected))
             return false;
@@ -591,20 +598,23 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (_transform.GetGrid(target) is not { } gridId ||
             !TryComp(gridId, out MapGridComponent? grid))
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
+            if (!silent)
+                _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
             return false;
         }
 
         target = target.SnapToGrid(EntityManager, _map);
         if (checkWeeds && !_xenoWeeds.IsOnWeeds((gridId, grid), target))
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-need-weeds"), target, xeno);
+            if (!silent)
+                _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-need-weeds"), target, xeno);
             return false;
         }
 
         if (!TileSolidAndNotBlocked(target))
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
+            if (!silent)
+                _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
             return false;
         }
 
@@ -614,7 +624,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             if (_xenoConstructQuery.HasComp(uid))
             {
-                _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
+                if (!silent)
+                    _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
                 return false;
             }
         }
@@ -626,7 +637,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             if (!IsSupported((gridId, grid), target))
             {
-                _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-requires-support", ("choice", choiceProto.Name)), target, xeno);
+                if (!silent)
+                    _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-requires-support", ("choice", choiceProto.Name)), target, xeno);
                 return false;
             }
         }
