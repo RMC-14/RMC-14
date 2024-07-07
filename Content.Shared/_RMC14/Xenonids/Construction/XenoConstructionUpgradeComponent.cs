@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Prototypes;
+﻿using Content.Shared.FixedPoint;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Construction;
 
@@ -6,5 +7,5 @@ namespace Content.Shared._RMC14.Xenonids.Construction;
 public sealed partial class XenoConstructionUpgradeComponent : Component
 {
     [DataField]
-    public EntProtoId UpgradeProto;
+    public EntProtoId Proto;
 }

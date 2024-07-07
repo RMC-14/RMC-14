@@ -28,7 +28,7 @@
       types:
         Slash: 225
   - type: XenoConstructionUpgrade
-    upgradeProto: WallXenoResinThick
+    proto: WallXenoResinThick
 
 - type: entity
   parent: WallXenoResin
