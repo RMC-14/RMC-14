@@ -2321,5 +2321,12 @@
   id: 285
   time: '2024-07-07T04:04:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2847
+- author: Vermidia
+  changes:
+  - message: Larva removal surgery now spits out the removed larva
+    type: Add
+  id: 286
+  time: '2024-07-07T04:12:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2859
 Name: RMC14
 Order: -1
