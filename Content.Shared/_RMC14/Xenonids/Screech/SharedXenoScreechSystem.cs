@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Physics;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
@@ -27,6 +28,7 @@ public sealed class XenoScreechSystem : EntitySystem
     }
 
     private readonly HashSet<Entity<MarineComponent>> _receivers = new();
+    private readonly CollisionGroup _opaqueObjectsMask = CollisionGroup.Opaque;
 
     private void OnXenoScreechAction(Entity<XenoScreechComponent> xeno, ref XenoScreechActionEvent args)
     {
@@ -58,7 +60,7 @@ public sealed class XenoScreechSystem : EntitySystem
             if (_mobState.IsDead(receiver))
                 continue;
 			
-			if (!_interactionSystem.InRangeUnobstructed(xeno.Owner, receiver.Owner))
+			if (!_interactionSystem.InRangeUnobstructed(xeno.Owner, receiver.Owner, collisionMask:_opaqueObjectsMask))
                 continue;
 
             if (TryComp(xeno, out XenoComponent? xenoComp) &&
@@ -79,7 +81,7 @@ public sealed class XenoScreechSystem : EntitySystem
             if (_mobState.IsDead(receiver))
                 continue;
 
-			if (!_interactionSystem.InRangeUnobstructed(xeno.Owner, receiver.Owner))
+			if (!_interactionSystem.InRangeUnobstructed(xeno.Owner, receiver.Owner, collisionMask:_opaqueObjectsMask))
                 continue;
 
             if (TryComp(xeno, out XenoComponent? xenoComp) &&
