@@ -3,7 +3,6 @@
   parent: CMBaseStructureCorrodible
   id: CMBarricadeBase
   components:
-  - type: Anchorable
   - type: Rotatable
   - type: Appearance
   - type: Fixtures
@@ -33,6 +32,7 @@
   name: metal barricade
   description: A metal barricade that keeps the unwanted out. Upgradable with metal, plasteel, or metal rods for different attributes. Repair with a welder.
   components:
+  - type: Anchorable
   - type: MeleeSound
     soundGroups:
       Brute:
@@ -164,6 +164,7 @@
   name: turnstile
   description: A railing to prevent marines from stepping out of line.
   components:
+    - type: Anchorable
     - type: Sprite
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
       layers:
@@ -207,6 +208,7 @@
   name: handrail
   description: A railing, for your hands. Woooow.
   components:
+    - type: Anchorable
     - type: Sprite
       drawdepth: WallTops
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
@@ -279,6 +281,7 @@
   name: folding metal barricade
   description: A folding metal barricade weaker than the non-folding counterpart. Able to be opened and closed at a moment's notice. Repair with a welder.
   components:
+  - type: Anchorable
   - type: MeleeSound
     soundGroups:
       Brute:
