@@ -152,20 +152,21 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnXenoSecreteStructureAction(Entity<XenoConstructionComponent> xeno, ref XenoSecreteStructureActionEvent args)
     {
-        if (xeno.Comp.BuildChoice is not { } choice ||
-            !CanSecreteOnTilePopup(xeno, choice, args.Coords, true, true))
-        {
+        if (xeno.Comp.BuildChoice is not { } choice)
             return;
-        }
 
-        var attempt = new XenoSecreteStructureAttemptEvent();
+        if ((args.Entity != null && !CanReplaceStructure(xeno, choice, args.Entity.Value))
+            && (args.Coords != null && !CanSecreteOnTilePopup(xeno, choice, args.Coords.Value, true, true)))
+            return;
+
+        var attempt = new XenoSecreteStructureAttemptEvent(args.Entity);
         RaiseLocalEvent(xeno, ref attempt);
 
         if (attempt.Cancelled)
             return;
 
         args.Handled = true;
-        var ev = new XenoSecreteStructureDoAfterEvent(GetNetCoordinates(args.Coords), choice);
+        var ev = new XenoSecreteStructureDoAfterEvent(GetNetEntity(args.Entity), GetNetCoordinates(args.Coords), choice);
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.BuildDelay, ev, xeno)
         {
             BreakOnMove = true
@@ -175,30 +176,65 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfter);
     }
 
+    private bool CanReplaceStructure(Entity<XenoConstructionComponent> xeno, EntProtoId choice, EntityUid target)
+    {
+        if (!TryComp(target, out XenoConstructionUpgradeComponent? comp))
+            return false;
+
+        if (choice != comp.UpgradeProto)
+            return false;
+
+        return true;
+    }
+
     private void OnXenoSecreteStructureDoAfter(Entity<XenoConstructionComponent> xeno, ref XenoSecreteStructureDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled)
             return;
 
-        var coordinates = GetCoordinates(args.Coordinates);
-        if (!coordinates.IsValid(EntityManager) ||
-            !xeno.Comp.CanBuild.Contains(args.StructureId) ||
-            !CanSecreteOnTilePopup(xeno, args.StructureId, GetCoordinates(args.Coordinates), true, true))
-        {
+        if (!xeno.Comp.CanBuild.Contains(args.StructureId))
             return;
-        }
-
-        if (GetStructurePlasmaCost(args.StructureId) is { } cost &&
-            !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, cost))
-        {
-            return;
-        }
-
-        args.Handled = true;
 
         // TODO RMC14 stop collision for mobs until they move off
-        if (_net.IsServer)
-            Spawn(args.StructureId, coordinates);
+
+        // Replace existing construction
+        var entity = GetEntity(args.EntityToReplace);
+        if (entity != null && entity.Value.IsValid() && CanReplaceStructure(xeno, args.StructureId, entity.Value))
+        {
+            if (GetStructurePlasmaCost(args.StructureId) is { } cost
+                && !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, cost))
+                return;
+
+            args.Handled = true;
+
+            if (!_net.IsServer)
+                return;
+
+            var coords = _transform.GetMapCoordinates(entity.Value);
+            Spawn(args.StructureId, coords);
+
+            Del(entity);
+            return;
+        }
+
+        // Build new construction
+        var coordinates = GetCoordinates(args.Coordinates);
+        if (coordinates != null
+            && coordinates.Value.IsValid(EntityManager)
+            && CanSecreteOnTilePopup(xeno, args.StructureId, coordinates.Value, true, true))
+        {
+            if (GetStructurePlasmaCost(args.StructureId) is { } cost
+                && !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, cost))
+                return;
+
+            args.Handled = true;
+
+            if (!_net.IsServer)
+                return;
+
+            Spawn(args.StructureId, coordinates.Value);
+            return;
+        }
     }
 
     private void OnXenoOrderConstructionAction(Entity<XenoConstructionComponent> xeno, ref XenoOrderConstructionActionEvent args)

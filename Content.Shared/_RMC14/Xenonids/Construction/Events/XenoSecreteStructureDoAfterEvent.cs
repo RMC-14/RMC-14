@@ -9,13 +9,17 @@ namespace Content.Shared._RMC14.Xenonids.Construction.Events;
 public sealed partial class XenoSecreteStructureDoAfterEvent : DoAfterEvent
 {
     [DataField]
-    public NetCoordinates Coordinates;
+    public NetCoordinates? Coordinates;
 
     [DataField]
     public EntProtoId StructureId = "WallXenoResin";
 
-    public XenoSecreteStructureDoAfterEvent(NetCoordinates coordinates, EntProtoId structureId)
+    [DataField]
+    public NetEntity? EntityToReplace;
+
+    public XenoSecreteStructureDoAfterEvent(NetEntity? entToReplace, NetCoordinates? coordinates, EntProtoId structureId)
     {
+        EntityToReplace = entToReplace;
         Coordinates = coordinates;
         StructureId = structureId;
     }
