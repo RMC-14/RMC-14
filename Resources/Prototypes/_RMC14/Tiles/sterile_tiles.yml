@@ -2,77 +2,77 @@
 - type: tile
   abstract: true
   parent: CMTileBase
-  id: CMFloorSteelSterileGreenBase
-  name: tiles-cm-green-sterile
+  id: CMFloorSteelSterileBlueBase
+  name: tiles-cm-blue-sterile
   itemDrop: CMTileItemSteel # TODO RMC14
 
 - type: tile
-  parent: CMFloorSteelSterileGreenBase
-  id: CMFloorSteelSterileGreen
-  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green.png
+  parent: CMFloorSteelSterileBlueBase
+  id: CMFloorSteelSterileBlue
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_blue.png
 
 - type: tile
-  parent: CMFloorSteelSterileGreenBase
+  parent: CMFloorSteelSterileBlueBase
   id: CMFloorSteelSterileDark
   name: tiles-cm-sterile-dark
   sprite: /Textures/_RMC14/Tiles/almayer/dark_sterile.png
 
 - type: tile
-  parent: CMFloorSteelSterileGreenBase
-  id: CMFloorSteelSterileGreenCorner0
-  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_corner_0.png
+  parent: CMFloorSteelSterileBlueBase
+  id: CMFloorSteelSterileBlueCorner0
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_blue_corner_0.png
 
 - type: tile
-  parent: CMFloorSteelSterileGreenBase
-  id: CMFloorSteelSterileGreenCorner1
-  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_corner_1.png
+  parent: CMFloorSteelSterileBlueBase
+  id: CMFloorSteelSterileBlueCorner1
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_blue_corner_1.png
 
 - type: tile
-  parent: CMFloorSteelSterileGreenBase
-  id: CMFloorSteelSterileGreenCorner2
-  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_corner_2.png
+  parent: CMFloorSteelSterileBlueBase
+  id: CMFloorSteelSterileBlueCorner2
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_blue_corner_2.png
 
 - type: tile
-  parent: CMFloorSteelSterileGreenBase
-  id: CMFloorSteelSterileGreenCorner3
-  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_corner_3.png
+  parent: CMFloorSteelSterileBlueBase
+  id: CMFloorSteelSterileBlueCorner3
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_blue_corner_3.png
 
 - type: tile
-  parent: CMFloorSteelSterileGreenBase
-  id: CMFloorSteelSterileGreenSide0
-  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_side_0.png
+  parent: CMFloorSteelSterileBlueBase
+  id: CMFloorSteelSterileBlueSide0
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_blue_side_0.png
 
 - type: tile
-  parent: CMFloorSteelSterileGreenBase
-  id: CMFloorSteelSterileGreenSide1
-  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_side_1.png
+  parent: CMFloorSteelSterileBlueBase
+  id: CMFloorSteelSterileBlueSide1
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_blue_side_1.png
 
 - type: tile
-  parent: CMFloorSteelSterileGreenBase
-  id: CMFloorSteelSterileGreenSide2
-  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_side_2.png
+  parent: CMFloorSteelSterileBlueBase
+  id: CMFloorSteelSterileBlueSide2
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_blue_side_2.png
 
 - type: tile
-  parent: CMFloorSteelSterileGreenBase
-  id: CMFloorSteelSterileGreenSide3
-  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_side_3.png
+  parent: CMFloorSteelSterileBlueBase
+  id: CMFloorSteelSterileBlueSide3
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_blue_side_3.png
 
 - type: tile
-  parent: CMFloorSteelSterileGreenBase
-  id: CMFloorSteelSterileGreenSide4
-  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_side_4.png
+  parent: CMFloorSteelSterileBlueBase
+  id: CMFloorSteelSterileBlueSide4
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_blue_side_4.png
 
 - type: tile
-  parent: CMFloorSteelSterileGreenBase
-  id: CMFloorSteelSterileGreenSide5
-  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_side_5.png
+  parent: CMFloorSteelSterileBlueBase
+  id: CMFloorSteelSterileBlueSide5
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_blue_side_5.png
 
 - type: tile
-  parent: CMFloorSteelSterileGreenBase
-  id: CMFloorSteelSterileGreenSide6
-  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_side_6.png
+  parent: CMFloorSteelSterileBlueBase
+  id: CMFloorSteelSterileBlueSide6
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_blue_side_6.png
 
 - type: tile
-  parent: CMFloorSteelSterileGreenBase
-  id: CMFloorSteelSterileGreenSide7
-  sprite: /Textures/_RMC14/Tiles/almayer/sterile_green_side_7.png
+  parent: CMFloorSteelSterileBlueBase
+  id: CMFloorSteelSterileBlueSide7
+  sprite: /Textures/_RMC14/Tiles/almayer/sterile_blue_side_7.png
