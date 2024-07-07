@@ -413,7 +413,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
 
         var canReplace = args.Target != null &&
-                         !CanReplaceStructure((args.User, construction),
+                         CanReplaceStructure((args.User, construction),
                              construction.BuildChoice,
                              args.Target.Value,
                              ent.Comp.CheckStructureSelected);
