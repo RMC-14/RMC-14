@@ -183,21 +183,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfter);
     }
 
-    private bool CanReplaceStructure(Entity<XenoConstructionComponent> xeno, EntProtoId? choice, EntityUid target,
-        bool checkStructureSelected)
-    {
-        if (!CanSecreteResin(xeno, choice, target.ToCoordinates(), checkStructureSelected))
-            return false;
-
-        if (!TryComp(target, out XenoConstructionUpgradeComponent? comp))
-            return false;
-
-        if (choice != comp.UpgradeProto)
-            return false;
-
-        return true;
-    }
-
     private void OnXenoSecreteStructureDoAfter(Entity<XenoConstructionComponent> xeno, ref XenoSecreteStructureDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled)
@@ -555,22 +540,44 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         return true;
     }
 
-    private bool CanSecreteResin(Entity<XenoConstructionComponent> xeno, EntProtoId? buildChoice, EntityCoordinates target, bool checkStructureSelected)
+    private bool CanSecreteResin(Entity<XenoConstructionComponent> xeno, EntProtoId? buildChoice, EntityCoordinates
+            target, bool checkStructureSelected, FixedPoint2? plasmaCost = null)
     {
-        if (checkStructureSelected && buildChoice == null)
+        if (checkStructureSelected)
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-select-structure"), target, xeno);
-            return false;
-        }
+            if (buildChoice == null)
+            {
+                _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-select-structure"), target, xeno);
+                return false;
+            }
 
-        if (checkStructureSelected &&
-            GetStructurePlasmaCost(buildChoice) is { } cost &&
-            !_xenoPlasma.HasPlasmaPopup(xeno.Owner, cost))
-        {
-            return false;
+            var cost = plasmaCost ?? GetStructurePlasmaCost(buildChoice);
+            if (cost != null && !_xenoPlasma.HasPlasmaPopup(xeno.Owner, cost.Value))
+            {
+                return false;
+            }
         }
 
         if (!InRangePopup(xeno, target, xeno.Comp.BuildRange.Float()))
+            return false;
+
+        return true;
+    }
+
+    private bool CanReplaceStructure(Entity<XenoConstructionComponent> xeno, EntProtoId? choice, EntityUid target,
+        bool checkStructureSelected)
+    {
+        if (!TryComp(target, out XenoConstructionUpgradeComponent? comp))
+            return false;
+
+        var cost = GetStructurePlasmaCost(choice);
+        if (TryComp(target, out XenoConstructionPlasmaCostComponent? targetPlasmaCost))
+            cost -= targetPlasmaCost.Plasma;
+
+        if (!CanSecreteResin(xeno, choice, target.ToCoordinates(), checkStructureSelected, cost))
+            return false;
+
+        if (choice != comp.Proto)
             return false;
 
         return true;
