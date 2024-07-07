@@ -2328,5 +2328,13 @@
   id: 286
   time: '2024-07-07T04:12:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2859
+- author: DrSmugleaf
+  changes:
+  - message: Fix the patron perks window initially showing the lobby message tab even
+      if the user's tier doesn't have that perk.
+    type: Fix
+  id: 287
+  time: '2024-07-07T11:11:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2869
 Name: RMC14
 Order: -1
