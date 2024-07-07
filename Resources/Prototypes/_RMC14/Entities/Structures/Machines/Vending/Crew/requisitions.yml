@@ -117,7 +117,7 @@
         amount: 2
       #- id: Mortar Shell Backpack
       #  amount: 1
-      - id: CMSatchelWelder
+      - id: RMCSatchelWelder
         amount: 5
       #- id: IMP Ammo Rack
       #   amount: 2

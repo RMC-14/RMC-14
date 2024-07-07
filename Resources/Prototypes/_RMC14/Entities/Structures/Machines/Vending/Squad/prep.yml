@@ -193,10 +193,13 @@
         name: Bayonet Sheath (Full)
         amount: 15
       - id: CMPouchFirstAidSplintsGauzeOintment
+        name: First-Aid Pouch (Splints, Gauze, Ointment)
         amount: 15
       - id: CMPouchFirstAidPills
+        name: First-Aid Pouch (Pill Packets)
         amount: 15
       - id: CMPouchFlareFilled
+        name: Flare Pouch (Full)
         amount: 15
       - id: CMPouchDocumentSmall
         amount: 15
