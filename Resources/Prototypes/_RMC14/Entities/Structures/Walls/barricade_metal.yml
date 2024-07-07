@@ -32,6 +32,7 @@
   name: metal barricade
   description: A metal barricade that keeps the unwanted out. Upgradable with metal, plasteel, or metal rods for different attributes. Repair with a welder.
   components:
+  - type: Climbable
   - type: Anchorable
   - type: MeleeSound
     soundGroups:
