@@ -199,6 +199,35 @@ public sealed class XenoNestSystem : EntitySystem
         }
     }
 
+    public void TransferNested(Entity<XenoNestSurfaceComponent> from, Entity<XenoNestSurfaceComponent> to)
+    {
+        var nestCoordinates = to.Owner.ToCoordinates();
+
+        foreach (var (direction, nest) in from.Comp.Nests)
+        {
+            to.Comp.Nests.Add(direction, nest);
+
+            var offset = direction switch
+            {
+                Direction.South => new Vector2(0, -0.25f),
+                Direction.East => new Vector2(0.5f, 0),
+                Direction.North => new Vector2(0, 0.5f),
+                Direction.West => new Vector2(-0.5f, 0),
+                _ => Vector2.Zero
+            };
+            _transform.SetCoordinates(nest, nestCoordinates.Offset(offset));
+
+            if (!TryComp(nest, out XenoNestComponent? nestComp))
+                continue;
+
+            nestComp.Surface = to;
+            Dirty(nest, nestComp);
+        }
+        from.Comp.Nests.Clear();
+        Dirty(from);
+        Dirty(to);
+    }
+
     #region DragDrop
 
     private void OnCanDropTarget(Entity<XenoNestSurfaceComponent> ent, ref CanDropTargetEvent args)

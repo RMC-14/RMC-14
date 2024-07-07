@@ -27,6 +27,8 @@
     xenoDamage:
       types:
         Slash: 225
+  - type: XenoConstructionUpgrade
+    upgradeProto: WallXenoResinThick
 
 - type: entity
   parent: WallXenoResin

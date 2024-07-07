@@ -1,6 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
+using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
@@ -41,6 +42,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
+    [Dependency] private readonly XenoNestSystem _xenoNest = default!;
 
     private static readonly ImmutableArray<Direction> Directions = Enum.GetValues<Direction>()
         .Where(d => d != Direction.Invalid)
@@ -155,8 +157,11 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (xeno.Comp.BuildChoice is not { } choice)
             return;
 
-        if ((args.Entity != null && !CanReplaceStructure(xeno, choice, args.Entity.Value))
-            && (args.Coords != null && !CanSecreteOnTilePopup(xeno, choice, args.Coords.Value, true, true)))
+        var canReplace = args.Entity != null && !CanReplaceStructure(xeno, choice, args.Entity.Value);
+
+        var canCreate = args.Coords != null && !CanSecreteOnTilePopup(xeno, choice, args.Coords.Value, true, true);
+
+        if (!canReplace && !canCreate)
             return;
 
         var attempt = new XenoSecreteStructureAttemptEvent(args.Entity);
@@ -211,7 +216,13 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 return;
 
             var coords = _transform.GetMapCoordinates(entity.Value);
-            Spawn(args.StructureId, coords);
+            var spawned = Spawn(args.StructureId, coords);
+
+            if (TryComp(entity, out XenoNestSurfaceComponent? nestSurface)
+                && TryComp(spawned, out XenoNestSurfaceComponent? spawnedNestSurface))
+            {
+                _xenoNest.TransferNested((entity.Value, nestSurface), (spawned, spawnedNestSurface));
+            }
 
             Del(entity);
             return;
