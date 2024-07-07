@@ -212,8 +212,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var entity = GetEntity(args.EntityToReplace);
         if (entity != null && entity.Value.IsValid() && CanReplaceStructure(xeno, args.StructureId, entity.Value, true))
         {
-            if (GetStructurePlasmaCost(args.StructureId) is { } cost
-                && !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, cost))
+            if (GetStructurePlasmaCost(args.StructureId) is { } cost &&
+                !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, cost))
                 return;
 
             args.Handled = true;
@@ -224,8 +224,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             var coords = _transform.GetMapCoordinates(entity.Value);
             var spawned = Spawn(args.StructureId, coords);
 
-            if (TryComp(entity, out XenoNestSurfaceComponent? nestSurface)
-                && TryComp(spawned, out XenoNestSurfaceComponent? spawnedNestSurface))
+            if (TryComp(entity, out XenoNestSurfaceComponent? nestSurface) &&
+                TryComp(spawned, out XenoNestSurfaceComponent? spawnedNestSurface))
             {
                 _xenoNest.TransferNested((entity.Value, nestSurface), (spawned, spawnedNestSurface));
             }
@@ -236,12 +236,12 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         // Build new construction
         var coordinates = GetCoordinates(args.Coordinates);
-        if (coordinates != null
-            && coordinates.Value.IsValid(EntityManager)
-            && CanSecreteOnTilePopup(xeno, args.StructureId, coordinates.Value, true, true))
+        if (coordinates != null &&
+            coordinates.Value.IsValid(EntityManager) &&
+            CanSecreteOnTilePopup(xeno, args.StructureId, coordinates.Value, true, true))
         {
-            if (GetStructurePlasmaCost(args.StructureId) is { } cost
-                && !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, cost))
+            if (GetStructurePlasmaCost(args.StructureId) is { } cost &&
+                !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, cost))
                 return;
 
             args.Handled = true;
@@ -412,14 +412,14 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (!TryComp(args.User, out XenoConstructionComponent? construction))
             return;
 
-        var canReplace = args.Target != null
-                         && !CanReplaceStructure((args.User, construction),
+        var canReplace = args.Target != null &&
+                         !CanReplaceStructure((args.User, construction),
                              construction.BuildChoice,
                              args.Target.Value,
                              ent.Comp.CheckStructureSelected);
 
-        var canCreate = args.Coords != null
-                        && CanSecreteOnTilePopup((args.User, construction),
+        var canCreate = args.Coords != null &&
+                        CanSecreteOnTilePopup((args.User, construction),
                             construction.BuildChoice,
                             args.Coords.Value,
                             ent.Comp.CheckStructureSelected,
