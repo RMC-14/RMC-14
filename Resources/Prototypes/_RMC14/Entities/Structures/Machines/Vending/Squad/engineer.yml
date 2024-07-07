@@ -229,7 +229,7 @@
       - id: CMPouchShotgun
       - id: CMPouchGeneralMedium
       - id: CMPouchPistol
-      #- id: CMToolsPouchFull
+      - id: CMToolsPouchFill
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:

@@ -148,10 +148,10 @@
         amount: 15
 #      - id: Marine Chestrig
 #        amount: 15
-#      - id: Marine Technical Satchel
-#        amount: 15
-#      - id: Marine Technical Chestrig
-#        amount: 15
+      - id: CMBackpackMarineTech
+        amount: 15
+      - id: CMSatchelMarineTech
+        amount: 15
       - id: CMSatchelMedical
         amount: 15
 #      - id: Shotgun Scabbard
@@ -431,8 +431,8 @@
 #        amount: 4
 #      - id: CMAttachments84xTelescopicScope
 #        amount: 2
-#    - name: Underbarrel
-#      entries:
+    - name: Underbarrel
+      entries: []
 #      - id: CMAttachmentAngledGrip
 #        amount: 3
 #      - id: CMAttachmentBipod
@@ -453,8 +453,8 @@
 #        amount: 2
 #      - id: CMAttachmentVerticalGrip
 #        amount: 4
-#    - name: Stock
-#      entries:
+    - name: Stock
+      entries: []
 #      - id: CMAttachmentM37WoodenStock
 #        amount: 2
 #      - id: CMAttachmentM63ArmBrace

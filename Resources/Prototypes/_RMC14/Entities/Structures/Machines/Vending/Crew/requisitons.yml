@@ -117,8 +117,8 @@
         amount: 2
       #- id: Mortar Shell Backpack
       #  amount: 1
-      #- id: Technician Welder-Satchel
-      #  amount: 5
+      - id: CMSatchelWelder
+        amount: 5
       #- id: IMP Ammo Rack
       #   amount: 2
       #- id: Radio Telephone Pack
@@ -152,8 +152,8 @@
       entries:
       - id: CMPouchAutoinjector
         amount: 1
-      #- id: CMPouchMedkit
-      #  amount: 2
+      - id: CMPouchMedkit
+        amount: 2
       - id: CMPouchFirstAidInjectors
         amount: 5
       - id: CMPouchFirstResponder
