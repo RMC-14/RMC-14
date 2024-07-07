@@ -2298,5 +2298,12 @@
   id: 282
   time: '2024-07-07T01:06:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2843
+- author: TsjipTsjip
+  changes:
+  - message: Explosion damage dealt to players is now logged again.
+    type: Add
+  id: 283
+  time: '2024-07-07T01:07:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2852
 Name: RMC14
 Order: -1
