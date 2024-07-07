@@ -10,6 +10,7 @@
   - type: Item
     size: Normal
   - type: ActivatableUI
+    key: enum.MarineCommunicationsComputerUI.Key
   - type: ActivatableUIRequiresAccess
   - type: AccessReader
     access: [ [ "CMAccessCommand" ] ]
