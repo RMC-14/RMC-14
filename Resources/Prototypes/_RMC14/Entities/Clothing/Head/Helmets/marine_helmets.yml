@@ -34,6 +34,28 @@
   - type: ExplosionResistance
     damageCoefficient: 0
     worn: false
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - RMCFlask
+      - CMScalpel
+      tags:
+#      - TODO RMC14 lighters
+#      - TODO RMC14 matchbox
+      - Cigarette
+#      - TODO RMC14 cards
+      - Slice
+#      - TODO RMC14 glasses (eyewear)
+#      - TODO RMC14 walkman and casettes
+#      - TODO RMC14 helmet garb
+      - Pen
+      - Crayon
+#      - TODO RMC14 handful of bullets
+      - Flashlight
+      - Brutepack
+      - CMOintment
+      - CMAutoInjector
+      - PillPacket
 
 - type: entity
   parent: ArmorHelmetM10
