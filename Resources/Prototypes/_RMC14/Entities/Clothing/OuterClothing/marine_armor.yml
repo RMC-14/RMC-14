@@ -94,6 +94,9 @@
   - type: RMCNameItemOnVend
     item: Armor
   - type: RMCBulkyArmor
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
 
 - type: entity
   parent: CMArmorM3Medium

@@ -31,6 +31,9 @@
   - type: RMCNameItemOnVend
     item: Helmet
   - type: RMCBulkyArmor
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
 
 - type: entity
   parent: ArmorHelmetM10
