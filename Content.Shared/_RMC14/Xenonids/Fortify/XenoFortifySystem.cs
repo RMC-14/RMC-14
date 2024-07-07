@@ -79,6 +79,9 @@ public sealed class XenoFortifySystem : EntitySystem
             if (action.BaseEvent is XenoFortifyActionEvent)
                 _actions.SetToggled(actionId, xeno.Comp.Fortified);
         }
+
+        var ev = new XenoFortifiedEvent(xeno.Comp.Fortified);
+        RaiseLocalEvent(xeno, ref ev);
     }
 
     private void OnXenoFortifyGetArmor(Entity<XenoFortifyComponent> xeno, ref CMGetArmorEvent args)
