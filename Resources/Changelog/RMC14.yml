@@ -2312,5 +2312,14 @@
   id: 284
   time: '2024-07-07T04:03:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2863
+- author: tsp01
+  changes:
+  - message: Added Command Tablet
+    type: Add
+  - message: changed UI name for groundside operations console to "Groundside Operations"
+    type: Tweak
+  id: 285
+  time: '2024-07-07T04:04:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2847
 Name: RMC14
 Order: -1
