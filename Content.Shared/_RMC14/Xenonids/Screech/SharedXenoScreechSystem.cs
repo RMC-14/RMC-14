@@ -16,7 +16,7 @@ public sealed class XenoScreechSystem : EntitySystem
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly INetManager _net = default!;
-	[Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
+    [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
 
@@ -59,8 +59,8 @@ public sealed class XenoScreechSystem : EntitySystem
         {
             if (_mobState.IsDead(receiver))
                 continue;
-			
-			if (!_interactionSystem.InRangeUnobstructed(xeno.Owner, receiver.Owner, collisionMask:_opaqueObjectsMask))
+
+            if (!_interactionSystem.InRangeUnobstructed(xeno.Owner, receiver.Owner, collisionMask:_opaqueObjectsMask))
                 continue;
 
             if (TryComp(xeno, out XenoComponent? xenoComp) &&
@@ -81,7 +81,7 @@ public sealed class XenoScreechSystem : EntitySystem
             if (_mobState.IsDead(receiver))
                 continue;
 
-			if (!_interactionSystem.InRangeUnobstructed(xeno.Owner, receiver.Owner, collisionMask:_opaqueObjectsMask))
+            if (!_interactionSystem.InRangeUnobstructed(xeno.Owner, receiver.Owner, collisionMask:_opaqueObjectsMask))
                 continue;
 
             if (TryComp(xeno, out XenoComponent? xenoComp) &&
