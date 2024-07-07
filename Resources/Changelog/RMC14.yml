@@ -2291,5 +2291,12 @@
   id: 281
   time: '2024-07-07T01:03:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2854
+- author: snebl
+  changes:
+  - message: Sandbag barricades can now be deconstructed with the entrenching tool.
+    type: Add
+  id: 282
+  time: '2024-07-07T01:06:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2843
 Name: RMC14
 Order: -1
