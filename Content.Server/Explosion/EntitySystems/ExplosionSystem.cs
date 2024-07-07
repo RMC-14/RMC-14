@@ -257,7 +257,7 @@ public sealed partial class ExplosionSystem : EntitySystem
 
         var posFound = _transformSystem.TryGetMapOrGridCoordinates(uid, out var gridPos, pos);
 
-        QueueExplosion(mapPos, typeId, totalIntensity, slope, maxTileIntensity, tileBreakScale, maxTileBreak, canCreateVacuum, addLog: false);
+        QueueExplosion(mapPos, typeId, totalIntensity, slope, maxTileIntensity, uid, tileBreakScale, maxTileBreak, canCreateVacuum, addLog: false);
 
         if (!addLog)
             return;
@@ -285,6 +285,7 @@ public sealed partial class ExplosionSystem : EntitySystem
         float totalIntensity,
         float slope,
         float maxTileIntensity,
+        EntityUid? cause,
         float tileBreakScale = 1f,
         int maxTileBreak = int.MaxValue,
         bool canCreateVacuum = true,
@@ -328,7 +329,8 @@ public sealed partial class ExplosionSystem : EntitySystem
             MaxTileIntensity = maxTileIntensity,
             TileBreakScale = tileBreakScale,
             MaxTileBreak = maxTileBreak,
-            CanCreateVacuum = canCreateVacuum
+            CanCreateVacuum = canCreateVacuum,
+            Cause = cause
         };
         _explosionQueue.Enqueue(boom);
         _queuedExplosions.Add(boom);
@@ -397,7 +399,8 @@ public sealed partial class ExplosionSystem : EntitySystem
             queued.CanCreateVacuum,
             EntityManager,
             _mapManager,
-            visualEnt);
+            visualEnt,
+            queued.Cause);
     }
 
     private void CameraShake(float range, MapCoordinates epicenter, float totalIntensity)

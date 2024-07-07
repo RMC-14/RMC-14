@@ -85,7 +85,7 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
     jobs:
-    - CMMilitaryPolice
+    - CMMilitaryWarden
     sections:
     - name: Police Set (Mandatory)
       entries:
