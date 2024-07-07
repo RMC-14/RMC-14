@@ -123,7 +123,8 @@
   description: A rare stock distributed in small numbers to UNMC forces. Compatible with the M54C, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
   components:
   - type: Sprite
-    state: riflestock
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: m54c-solid
   - type: Tag
     tags:
     - RMCAttachmentStock
@@ -179,7 +180,8 @@
   description: The standard back end of any gun starting with M54. Compatible with the M54C series, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
   components:
   - type: Sprite
-    state: m54-folding
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: m54c-col
   - type: Tag
     tags:
     - RMCAttachmentStock
@@ -187,11 +189,11 @@
   - type: AttachableToggleable
     doAfter: 0.5
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
-      state: m54-folding
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+      state: m54c-col
     iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
-      state: m54-folding-on
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+      state: m54c-col-on
     actionName: Toggle M54C Folding Stock
   - type: AttachableSizeMods
     modifiers:

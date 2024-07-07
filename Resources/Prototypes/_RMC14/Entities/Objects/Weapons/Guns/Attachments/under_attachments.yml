@@ -17,6 +17,7 @@
     However, it also increases weapon size."
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
     state: angledgrip
   - type: AttachableVisuals
   - type: Tag
@@ -241,6 +242,7 @@
       params:
         volume: 5
   - type: AmmoFixedDistance
+    maxRange: 7
   - type: ShootUseDelay
     delay: 2.4
   - type: UseDelay
@@ -286,6 +288,8 @@
     capacity: 5
   - type: ShootUseDelay
     delay: 3
+  - type: AmmoFixedDistance
+    maxRange: 10
   - type: GenericVisualizer
     visuals:
       enum.BreechVisuals.Open:
@@ -312,6 +316,7 @@
   description: A vertical foregrip that offers better accuracy, less recoil, and less scatter, especially during burst fire. \nHowever, it also increases weapon size.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
     state: verticalgrip
   - type: AttachableVisuals
   - type: Tag

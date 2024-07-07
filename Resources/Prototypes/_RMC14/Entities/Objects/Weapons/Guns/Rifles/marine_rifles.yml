@@ -120,10 +120,10 @@
           - RMCAttachmentVerticalGrip
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.81, 0.00
-      rmc-aslot-rail: 0.125, 0.185
-      rmc-aslot-stock: -0.875, 0.0325
-      rmc-aslot-underbarrel: 0.312, -0.343
+      rmc-aslot-barrel: 0.75, 0.00
+      rmc-aslot-rail: 0.06, 0.185
+      rmc-aslot-stock: -0.84, 0.0325
+      rmc-aslot-underbarrel: 0.25, -0.343
 
 - type: entity
   name: M54CE2 heavy assault rifle
