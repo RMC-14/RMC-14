@@ -2,6 +2,7 @@
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Throwing;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
@@ -14,6 +15,7 @@ namespace Content.Shared._RMC14.Xenonids.Fling;
 public sealed class XenoFlingSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -42,6 +44,9 @@ public sealed class XenoFlingSystem : EntitySystem
             return;
 
         var targetId = args.Target;
+
+        if (_mobState.IsDead(targetId))
+            return;
 
         if (TryComp(xeno, out XenoComponent? xenoComp) &&
             TryComp(targetId, out XenoComponent? targetXeno) &&

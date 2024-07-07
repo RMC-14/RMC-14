@@ -4,6 +4,7 @@
   name: sandbag barricade
   description: A makeshift barricade made out of the sand from the ground. Tough to beat but easy to pierce.
   components:
+  - type: BarricadeSandbag
   - type: Climbable
   - type: MeleeSound
     soundGroups:

@@ -4,7 +4,7 @@
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
     Title="{Loc 'rmc-ui-patron-perks'}"
     MinSize="625 475">
-    <TabContainer>
+    <TabContainer Name="Tabs" Access="Public">
         <BoxContainer Name="LobbyMessageTab" Access="Public" Orientation="Vertical" Margin="5">
             <Label Text="{Loc 'rmc-ui-lobby-message-description'}" />
             <LineEdit Name="LobbyMessage" Access="Public" Margin="0 10 0 0" />

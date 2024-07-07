@@ -144,6 +144,16 @@ public sealed class LinkAccountUIController : UIController, IOnSystemChanged<Lin
 
             UpdateExamples();
 
+            for (var i = 0; i < _patronPerksWindow.Tabs.ChildCount; i++)
+            {
+                var child = _patronPerksWindow.Tabs.GetChild(i);
+                if (!child.GetValue(TabVisibleProperty))
+                    continue;
+
+                _patronPerksWindow.Tabs.CurrentTab = i;
+                break;
+            }
+
             _patronPerksWindow.OpenCentered();
             return;
         }

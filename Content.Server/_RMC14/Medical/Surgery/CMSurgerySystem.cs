@@ -37,6 +37,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
         SubscribeLocalEvent<CMSurgeryStepBleedEffectComponent, CMSurgeryStepEvent>(OnStepBleedComplete);
         SubscribeLocalEvent<CMSurgeryClampBleedEffectComponent, CMSurgeryStepEvent>(OnStepClampBleedComplete);
         SubscribeLocalEvent<CMSurgeryStepEmoteEffectComponent, CMSurgeryStepEvent>(OnStepScreamComplete);
+        SubscribeLocalEvent<RMCSurgeryStepSpawnEffectComponent, CMSurgeryStepEvent>(OnStepSpawnComplete);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
@@ -111,6 +112,12 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
     private void OnStepScreamComplete(Entity<CMSurgeryStepEmoteEffectComponent> ent, ref CMSurgeryStepEvent args)
     {
         _chat.TryEmoteWithChat(args.Body, ent.Comp.Emote);
+    }
+
+    private void OnStepSpawnComplete(Entity<RMCSurgeryStepSpawnEffectComponent> ent, ref CMSurgeryStepEvent args)
+    {
+        if(TryComp<TransformComponent>(args.Body, out var xform))
+            SpawnAtPosition(ent.Comp.Entity, xform.Coordinates);
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)

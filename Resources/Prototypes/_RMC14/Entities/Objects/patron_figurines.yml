@@ -174,3 +174,36 @@
     state: dagobert_dogburglar
   - type: PatronFigurine
     id: ea85ee23-6be6-46fb-8346-a8ba8e320298
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronHerbsquirto
+  name: Herbsquirto figurine
+  description: "The corporation's best botanist."
+  components:
+  - type: Sprite
+    state: herbsquirto
+  - type: PatronFigurine
+    id: 9226a461-8d9a-49a2-824e-fdf9a7b1d81f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRainyCloudly
+  name: Rainy Cloudly figurine
+  description: "The pearlescent slimeperson figurine ripples and shimmers like a puddle, emanating a faint scent of fresh rain and whispers of distant thunder."
+  components:
+  - type: Sprite
+    state: rainy_cloudly
+  - type: PatronFigurine
+    id: 90e95245-6924-4f20-8e6c-05541c63547f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAtlasBootes
+  name: Atlas 'The Law' Bootes figurine
+  description: "A young career officer with a big tail and heart."
+  components:
+  - type: Sprite
+    state: atlas_bootes
+  - type: PatronFigurine
+    id: c16859d8-1d88-4f9b-a2ab-2fc980ab8111
