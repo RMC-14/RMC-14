@@ -88,19 +88,19 @@ tilemap:
   53: CMFloorSteelSilverCorner3
   48: CMFloorSteelSilverFull
   29: CMFloorSteelSterileDark
-  34: CMFloorSteelSterileGreen
-  33: CMFloorSteelSterileGreenCorner0
-  27: CMFloorSteelSterileGreenCorner1
-  31: CMFloorSteelSterileGreenCorner2
-  25: CMFloorSteelSterileGreenCorner3
-  28: CMFloorSteelSterileGreenSide0
-  30: CMFloorSteelSterileGreenSide1
-  32: CMFloorSteelSterileGreenSide2
-  26: CMFloorSteelSterileGreenSide3
-  36: CMFloorSteelSterileGreenSide4
-  37: CMFloorSteelSterileGreenSide5
-  35: CMFloorSteelSterileGreenSide6
-  116: CMFloorSteelSterileGreenSide7
+  34: CMFloorSteelSterileBlue
+  33: CMFloorSteelSterileBlueCorner0
+  27: CMFloorSteelSterileBlueCorner1
+  31: CMFloorSteelSterileBlueCorner2
+  25: CMFloorSteelSterileBlueCorner3
+  28: CMFloorSteelSterileBlueSide0
+  30: CMFloorSteelSterileBlueSide1
+  32: CMFloorSteelSterileBlueSide2
+  26: CMFloorSteelSterileBlueSide3
+  36: CMFloorSteelSterileBlueSide4
+  37: CMFloorSteelSterileBlueSide5
+  35: CMFloorSteelSterileBlueSide6
+  116: CMFloorSteelSterileBlueSide7
   109: CMFloorSteelWhite0
   23: CMFloorSteelWhite1
   22: CMFloorSteelWhite2
