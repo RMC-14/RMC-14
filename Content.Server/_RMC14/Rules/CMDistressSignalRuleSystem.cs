@@ -431,7 +431,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             return;
 
         var rules = QueryAllRules();
-        while (rules.MoveNext(out var uid, out var comp, out _))
+        while (rules.MoveNext(out var comp, out _))
         {
             var adjust = comp.Result switch
             {
