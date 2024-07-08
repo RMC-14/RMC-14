@@ -10,7 +10,7 @@
         southRotation: true
       steps:
       - material: CMRodMetal
-        amount: 2
+        amount: 4
         doAfter: 1
 
   - node: Grille
