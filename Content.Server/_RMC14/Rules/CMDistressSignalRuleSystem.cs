@@ -26,6 +26,7 @@ using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
@@ -63,6 +64,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly ContainerSystem _containers = default!;
     [Dependency] private readonly DropshipSystem _dropship = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly MarineSystem _marines = default!;
     [Dependency] private readonly MindSystem _mind = default!;
@@ -530,16 +532,21 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             distress.NextCheck ??= Timing.CurTime + distress.CheckEvery;
 
+            var hijack = false;
             var dropshipQuery = EntityQueryEnumerator<DropshipComponent>();
             while (dropshipQuery.MoveNext(out var dropship))
             {
                 if (dropship.Crashed)
-                    distress.Hijack = true;
+                    hijack = true;
             }
 
             var time = Timing.CurTime;
-            if (distress.Hijack)
+            if (!distress.Hijack && hijack)
+            {
+                distress.Hijack = true;
                 distress.AbandonedAt ??= time + distress.AbandonedDelay;
+                _hive.SetSeeThroughContainers(distress.Hive, true);
+            }
 
             _almayerMaps.Clear();
             var almayerQuery = EntityQueryEnumerator<AlmayerComponent, TransformComponent>();

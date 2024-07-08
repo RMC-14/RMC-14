@@ -178,4 +178,13 @@ public abstract class SharedNightVisionSystem : EntitySystem
             RemCompDeferred<NightVisionComponent>(user.Value);
         }
     }
+
+    public void SetSeeThroughContainers(Entity<NightVisionComponent?> ent, bool see)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
+            return;
+
+        ent.Comp.SeeThroughContainers = see;
+        Dirty(ent);
+    }
 }
