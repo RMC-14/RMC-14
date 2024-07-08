@@ -2381,5 +2381,20 @@
   id: 291
   time: '2024-07-08T02:26:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2884
+- author: DrSmugleaf
+  changes:
+  - message: Fixed microwaves being invincible.
+    type: Fix
+  id: 292
+  time: '2024-07-08T03:43:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2888
+- author: DrSmugleaf
+  changes:
+  - message: Fixed crushers, defenders, runners and other xenonid castes sometimes
+      being able to charge or leap through barricades.
+    type: Fix
+  id: 293
+  time: '2024-07-08T03:43:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2889
 Name: RMC14
 Order: -1
