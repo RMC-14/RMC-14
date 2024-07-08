@@ -80,7 +80,7 @@
   - type: Barbed
     thornsDamage:
       types:
-        Slash: 6
+        Slash: 10
   - type: Construction
     graph: BarricadeMetalGraph
     node: nodeMetal
@@ -343,7 +343,7 @@
   - type: Barbed
     thornsDamage:
       types:
-        Slash: 6
+        Slash: 10
   - type: Construction
     graph: BarricadeMetalDoorGraph
     node: nodeBarricadeMetalDoor

@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared.Climbing.Events;
 using Content.Shared.Damage;
@@ -33,15 +34,7 @@ public sealed class BarbedSystem : EntitySystem
         SubscribeLocalEvent<BarbedComponent, CutBarbedDoAfterEvent>(WireCutterOnDoAfter);
         SubscribeLocalEvent<BarbedComponent, DoorStateChangedEvent>(OnDoorStateChanged);
         SubscribeLocalEvent<BarbedComponent, AttemptClimbEvent>(OnClimbAttempt);
-    }
-
-    private void OnClimbAttempt(Entity<BarbedComponent> barbed, ref AttemptClimbEvent args)
-    {
-        if (barbed.Comp.IsBarbed)
-        {
-            args.Cancelled = true;
-            _popupSystem.PopupClient(Loc.GetString("barbed-wire-cant-climb"), barbed.Owner, args.User);
-        }
+        SubscribeLocalEvent<BarbedComponent, CMGetArmorPiercingEvent>(OnGetArmorPiercing);
     }
 
     public void OnInteractUsing(EntityUid uid, BarbedComponent component, InteractUsingEvent args)
@@ -122,18 +115,33 @@ public sealed class BarbedSystem : EntitySystem
         _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-finish"), barbed.Owner, args.User);
     }
 
-    private void OnAttacked(EntityUid uid, BarbedComponent component, AttackedEvent args)
+    private void OnAttacked(Entity<BarbedComponent> barbed, ref AttackedEvent args)
     {
-        if (component.IsBarbed)
+        if (barbed.Comp.IsBarbed)
         {
-            _damageableSystem.TryChangeDamage(args.User, component.ThornsDamage);
-            _popupSystem.PopupClient(Loc.GetString("barbed-wire-damage"), uid, args.User, PopupType.SmallCaution);
+            _damageableSystem.TryChangeDamage(args.User, barbed.Comp.ThornsDamage, origin: barbed, tool: barbed);
+            _popupSystem.PopupClient(Loc.GetString("barbed-wire-damage"), barbed, args.User, PopupType.SmallCaution);
         }
     }
 
     private void OnDoorStateChanged(Entity<BarbedComponent> barbed, ref DoorStateChangedEvent args)
     {
         UpdateAppearance(barbed);
+    }
+
+    private void OnClimbAttempt(Entity<BarbedComponent> barbed, ref AttemptClimbEvent args)
+    {
+        if (barbed.Comp.IsBarbed)
+        {
+            args.Cancelled = true;
+            _popupSystem.PopupClient(Loc.GetString("barbed-wire-cant-climb"), barbed.Owner, args.User);
+        }
+    }
+
+    private void OnGetArmorPiercing(Entity<BarbedComponent> barbed, ref CMGetArmorPiercingEvent args)
+    {
+        if (barbed.Comp.IsBarbed)
+            args.Piercing = 1000;
     }
 
     private void UpdateAppearance(Entity<BarbedComponent> barbed)

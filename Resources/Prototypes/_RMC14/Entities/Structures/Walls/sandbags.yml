@@ -46,7 +46,7 @@
   - type: Barbed
     thornsDamage:
       types:
-        Slash: 6
+        Slash: 10
 
 - type: entity
   parent: BaseItem
