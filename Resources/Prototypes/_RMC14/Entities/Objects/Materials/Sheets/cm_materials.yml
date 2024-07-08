@@ -31,29 +31,3 @@
   icon: { sprite: _RMC14/Objects/Materials/Sheets/phoron_reinf_glass.rsi, state: phoronrglass }
   color: "#8c4069"
   price: 0.40
-
-# Other
-
-- type: material
-  id: CMPhoron
-  stackEntity: CMSheetPhoron
-  name: materials-phoron
-  icon: { sprite: _RMC14/Objects/Materials/Sheets/phoron.rsi, state: phoron }
-  color: "#7e009e"
-  price: 0.2
-
-- type: material
-  id: RMCSheetCardboard
-  stackEntity: RMCSheetCardboard
-  name: materials-cardboard
-  icon: { sprite: _RMC14/Objects/Materials/Sheets/rmc_cardboard.rsi, state: icon }
-  color: "#70736C"
-  price: 0.01
-
-- type: material
-  id: RMCWood
-  stackEntity: RMCPlankWood
-  name: materials-wood
-  icon: { sprite: _RMC14/Objects/Materials/Sheets/wood.rsi, state: wood }
-  color: "#966F33"
-  price: 0.05

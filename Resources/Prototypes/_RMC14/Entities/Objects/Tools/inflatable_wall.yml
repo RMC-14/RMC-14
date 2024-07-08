@@ -1,3 +1,10 @@
+- type: stack
+  id: RMCInflatableWall
+  name: inflatable wall
+  icon: { sprite: _RMC14/Objects/Misc/inflatable_wall.rsi, state: folded_wall }
+  spawn: RMCInflatableWallFolded1
+  maxCount: 10
+
 - type: entity
   parent: BaseItem
   id: RMCInflatableWallFolded
@@ -21,6 +28,23 @@
     - type: Clickable
 
 - type: entity
+  parent: RMCInflatableWallFolded
+  id: RMCInflatableWallFolded1
+  suffix: Single
+  components:
+    - type: Sprite
+      state: folded_wall
+    - type: Stack
+      count: 1
+
+- type: stack
+  id: RMCInflatableDoor
+  name: inflatable door
+  icon: { sprite: _RMC14/Objects/Misc/inflatable_door.rsi, state: folded_door }
+  spawn: RMCInflatableDoorFolded1
+  maxCount: 4
+
+- type: entity
   parent: BaseItem
   id: RMCInflatableDoorFolded
   name: inflatable door
@@ -41,16 +65,6 @@
       doAfter: 1
       removeOnInteract: true
     - type: Clickable
-
-- type: entity
-  parent: RMCInflatableWallFolded
-  id: RMCInflatableWallFolded1
-  suffix: Single
-  components:
-    - type: Sprite
-      state: folded_wall
-    - type: Stack
-      count: 1
 
 - type: entity
   parent: RMCInflatableDoorFolded

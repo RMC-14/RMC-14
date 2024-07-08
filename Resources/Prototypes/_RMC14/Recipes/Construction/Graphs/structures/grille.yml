@@ -10,7 +10,7 @@
         southRotation: true
       steps:
       - material: CMRodMetal
-        amount: 2
+        amount: 4
         doAfter: 1
 
   - node: Grille
@@ -20,7 +20,7 @@
       completed:
       - !type:SpawnPrototype
         prototype: CMRodMetal1
-        amount: 2
+        amount: 1
       - !type:DeleteEntity
       steps:
       - tool: Cutting

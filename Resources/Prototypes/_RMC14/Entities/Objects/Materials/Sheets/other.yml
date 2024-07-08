@@ -1,4 +1,19 @@
 # Phoron
+- type: material
+  id: CMPhoron
+  stackEntity: CMSheetPhoron
+  name: materials-phoron
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/phoron.rsi, state: phoron }
+  color: "#7e009e"
+  price: 0.2
+
+- type: stack
+  id: CMPhoron
+  name: phoron
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/phoron.rsi, state: phoron }
+  spawn: CMSheetPhoron
+  maxCount: 50
+
 - type: entity
   parent: SheetOtherBase
   id: CMSheetPhoron
@@ -57,6 +72,21 @@
     count: 1
 
 # Cardboard
+- type: material
+  id: RMCSheetCardboard
+  stackEntity: RMCSheetCardboard
+  name: materials-cardboard
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/rmc_cardboard.rsi, state: icon }
+  color: "#70736C"
+  price: 0.01
+
+- type: stack
+  id: RMCSheetCardboard
+  name: materials-cardboard
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/rmc_cardboard.rsi, state: icon }
+  spawn: RMCSheetCardboard
+  maxCount: 50
+
 - type: entity
   parent: SheetOtherBase
   id: RMCSheetCardboard
@@ -101,6 +131,21 @@
     count: 1
 
 # Wood
+- type: material
+  id: RMCWood
+  stackEntity: RMCPlankWood
+  name: materials-wood
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/wood.rsi, state: wood }
+  color: "#966F33"
+  price: 0.05
+
+- type: stack
+  id: RMCWood
+  name: wood plank
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/wood.rsi, state: wood }
+  spawn: RMCPlankWood
+  maxCount: 50
+
 - type: entity
   parent: SheetOtherBase
   id: RMCPlankWood
