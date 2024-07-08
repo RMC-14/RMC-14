@@ -24,6 +24,7 @@
     damageContainer: Inorganic
     damageModifierSet: CMBarricade
   - type: InteractionOutline
+  - type: RMCDropshipBlocked
 
 # Metal Barricade Tree
 - type: entity

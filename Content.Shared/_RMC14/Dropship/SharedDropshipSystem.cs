@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Xenonids;
+using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
@@ -8,6 +9,7 @@ namespace Content.Shared._RMC14.Dropship;
 
 public abstract class SharedDropshipSystem : EntitySystem
 {
+    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
@@ -45,10 +47,23 @@ public abstract class SharedDropshipSystem : EntitySystem
     private void OnUIOpenAttempt(Entity<DropshipNavigationComputerComponent> ent,
         ref ActivatableUIOpenAttemptEvent args)
     {
-        if (TryComp(ent, out TransformComponent? xform) &&
-            TryComp(xform.ParentUid, out DropshipComponent? dropship) &&
+        if (args.Cancelled)
+            return;
+
+        var xform = Transform(ent);
+        if (TryComp(xform.ParentUid, out DropshipComponent? dropship) &&
             dropship.Crashed)
         {
+            args.Cancel();
+            return;
+        }
+
+        var roundDuration = _gameTicker.RoundDuration();
+        if (roundDuration < dropship?.RoundStartDelay)
+        {
+            var minutesLeft = Math.Max(1, (int) (dropship.RoundStartDelay - roundDuration).TotalMinutes);
+            var msg = Loc.GetString("rmc-dropship-pre-flight-fueling", ("minutes", minutesLeft));
+            _popup.PopupClient(msg, ent.Owner, args.User, PopupType.MediumCaution);
             args.Cancel();
         }
     }
