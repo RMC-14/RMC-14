@@ -258,6 +258,7 @@
     range: 1
     useDelay: 4.5
     deselectOnMiss: false
+  - type: XenoOffensiveAction
 
 - type: entity
   id: ActionXenoFling
@@ -274,12 +275,13 @@
     range: 1
     useDelay: 7
     deselectOnMiss: false
+  - type: XenoOffensiveAction
 
 - type: entity
   id: ActionXenoLunge
   parent: ActionXenoBase
   name: Lunge
-  description: Lunges the warrior towards the targeted marine and puts them into a choke hold (like grabbing them).
+  description: Lunges the warrior towards the targeted marine and grabs them.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -290,6 +292,7 @@
     range: 5
     useDelay: 10
     deselectOnMiss: false
+  - type: XenoOffensiveAction
 
 - type: entity
   id: ActionXenoScreech
