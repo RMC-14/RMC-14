@@ -106,6 +106,15 @@
     stackType: CMSandbagFull
     count: 50
 
+- type: entity
+  parent: CMSandbagFull
+  id: CMSandbagFull25
+  suffix: "25"
+  components:
+  - type: Stack
+    stackType: CMSandbagFull
+    count: 25
+
 - type: stack
   id: CMSandbagEmpty
   name: empty sandbags
