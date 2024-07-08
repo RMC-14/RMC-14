@@ -87,6 +87,7 @@
     damageModifierSet: StructuralMarine
   - type: Corrodible
     isCorrodible: true
+  - type: Clickable
 
 - type: entity
   parent:

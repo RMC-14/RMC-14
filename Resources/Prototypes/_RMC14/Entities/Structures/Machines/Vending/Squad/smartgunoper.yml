@@ -126,15 +126,15 @@
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
     - name: Belt
-      entries: [ ]
-    #- id: CMM802SmartGunOperatorSidearmBelt
-    #- id: CMM280SmartGunOperatorDrumBelt
+      entries:
+     #- id: CMM802SmartGunOperatorSidearmBelt
+      - id: CMBeltSmartGunOperator
     - name: Pouches
       choices: { CMPouch: 2 }
       entries:
       - id: CMPouchFlareFilled
         name: Flare pouch (Filled)
-      #- id: CMElectronicsPouch
+      - id: CMPouchElectronics
       - id: CMPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
       - id: CMPouchFirstAidSplintsGauzeOintment
