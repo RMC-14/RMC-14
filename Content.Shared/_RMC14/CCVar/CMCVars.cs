@@ -83,4 +83,10 @@ public sealed class CMCVars : CVars
 
     public static readonly CVarDef<ulong> RMCDiscordAdminChatChannel =
         CVarDef.Create("rmc.discord_admin_chat_channel", 0UL, CVar.SERVER | CVar.SERVERONLY | CVar.CONFIDENTIAL);
+
+    /// <summary>
+    ///     Comma-separated list of maps to load as the planet in the distress signal gamemode.
+    /// </summary>
+    public static readonly CVarDef<string> RMCPlanetMaps =
+        CVarDef.Create("rmc.planet_maps", "/Maps/_RMC14/lv624.yml", CVar.SERVER | CVar.SERVERONLY);
 }
