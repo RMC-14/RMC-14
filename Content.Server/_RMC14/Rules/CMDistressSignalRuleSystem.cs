@@ -90,12 +90,14 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         CCVars.FTLCooldown,
     ];
 
-    private readonly List<MapId> _almayerMaps = [];
+    private string _planetMaps = default!;
     private float _marinesPerXeno;
     private bool _autoBalance;
     private float _autoBalanceStep;
     private float _autoBalanceMin;
     private float _autoBalanceMax;
+
+    private readonly List<MapId> _almayerMaps = [];
 
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
 
@@ -121,6 +123,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         SubscribeLocalEvent<AlmayerComponent, MapInitEvent>(OnAlmayerMapInit);
 
+        Subs.CVar(_config, CMCVars.RMCPlanetMaps, v => _planetMaps = v, true);
         Subs.CVar(_config, CMCVars.CMMarinesPerXeno, v => _marinesPerXeno = v, true);
         Subs.CVar(_config, CMCVars.RMCAutoBalance, v => _autoBalance = v, true);
         Subs.CVar(_config, CMCVars.RMCAutoBalanceStep, v => _autoBalanceStep = v, true);
@@ -653,7 +656,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     {
         // TODO RMC14 different planet-side maps
         var mapId = _mapManager.CreateMap();
-        if (!_mapLoader.TryLoad(mapId, "/Maps/_RMC14/lv624.yml", out var grids) ||
+        var planetMap = _random.Pick(_planetMaps.Split(","));
+        if (!_mapLoader.TryLoad(mapId, planetMap, out var grids) ||
             grids.Count == 0)
         {
             return false;
