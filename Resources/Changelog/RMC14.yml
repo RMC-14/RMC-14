@@ -2461,5 +2461,26 @@
   id: 301
   time: '2024-07-08T09:09:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2892
+- author: DrSmugleaf
+  changes:
+  - message: The dropship crew hatches can now be locked by the pilot from the navigation
+      computer.
+    type: Add
+  - message: Fixed dropship doors not closing during travel if someone is in the way.
+    type: Fix
+  - message: Fixed being able to build barricades and other fortifications on or move
+      existing ones onto dropships.
+    type: Fix
+  - message: Fixed dropships having no initial cooldown, They now need 15 minutes
+      of round time to pass before they can start flying.
+    type: Fix
+  - message: Fixed dropship crew hatches being corrodible.
+    type: Fix
+  - message: The health of dropship crew hatches has been doubled to 1000 as a temporary
+      measure until separate prying timers for xenos and marines is implemented.
+    type: Tweak
+  id: 302
+  time: '2024-07-08T10:19:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2894
 Name: RMC14
 Order: -1
