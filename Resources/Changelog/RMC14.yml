@@ -2431,5 +2431,12 @@
   id: 297
   time: '2024-07-08T03:48:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2881
+- author: ShadowCommander
+  changes:
+  - message: Added unfolding magazine boxes into cardboard sheets.
+    type: Add
+  id: 298
+  time: '2024-07-08T03:55:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2855
 Name: RMC14
 Order: -1
