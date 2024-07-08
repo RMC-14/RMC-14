@@ -20,7 +20,6 @@
   - type: StaminaDamageOnCollide
     damage: 45
   - type: Projectile
-    impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
         Heat: 5
