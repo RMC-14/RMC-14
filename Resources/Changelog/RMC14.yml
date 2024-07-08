@@ -2558,5 +2558,12 @@
   id: 311
   time: '2024-07-08T11:52:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2901
+- author: ShadowCommander
+  changes:
+  - message: Ship staff no longer spawn hungry.
+    type: Fix
+  id: 312
+  time: '2024-07-08T20:47:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2904
 Name: RMC14
 Order: -1
