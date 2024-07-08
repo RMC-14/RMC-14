@@ -92,6 +92,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private readonly List<MapId> _almayerMaps = [];
     private float _marinesPerXeno;
+    private bool _autoBalance;
+    private float _autoBalanceStep;
+    private float _autoBalanceMin;
+    private float _autoBalanceMax;
 
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
 
@@ -105,6 +109,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         SubscribeLocalEvent<PlayerSpawningEvent>(OnPlayerSpawning,
             before: [typeof(ArrivalsSystem), typeof(SpawnPointSystem)]);
         SubscribeLocalEvent<RoundEndMessageEvent>(OnRoundEndMessage);
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
         SubscribeLocalEvent<MarineComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<MarineComponent, ComponentRemove>(OnCompRemove);
@@ -117,6 +122,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         SubscribeLocalEvent<AlmayerComponent, MapInitEvent>(OnAlmayerMapInit);
 
         Subs.CVar(_config, CMCVars.CMMarinesPerXeno, v => _marinesPerXeno = v, true);
+        Subs.CVar(_config, CMCVars.RMCAutoBalance, v => _autoBalance = v, true);
+        Subs.CVar(_config, CMCVars.RMCAutoBalanceStep, v => _autoBalanceStep = v, true);
+        Subs.CVar(_config, CMCVars.RMCAutoBalanceMax, v => _autoBalanceMax = v, true);
+        Subs.CVar(_config, CMCVars.RMCAutoBalanceMin, v => _autoBalanceMin = v, true);
     }
 
     private void OnRulePlayerSpawning(RulePlayerSpawningEvent ev)
@@ -413,6 +422,39 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             if (audio != null)
                 _audio.PlayGlobal(_audio.GetSound(audio), Filter.Broadcast(), true, AudioParams.Default.WithVolume(0));
+        }
+    }
+
+    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
+    {
+        if (!_autoBalance)
+            return;
+
+        var rules = QueryAllRules();
+        while (rules.MoveNext(out var uid, out var comp, out _))
+        {
+            var adjust = comp.Result switch
+            {
+                DistressSignalRuleResult.None => 0,
+                DistressSignalRuleResult.MajorMarineVictory => -1,
+                DistressSignalRuleResult.MinorMarineVictory => -1,
+                DistressSignalRuleResult.MajorXenoVictory => 1,
+                DistressSignalRuleResult.MinorXenoVictory => 0,
+                DistressSignalRuleResult.AllDied => 0,
+                _ => throw new ArgumentOutOfRangeException(),
+            };
+
+            if (adjust == 0)
+                continue;
+
+            var value = _marinesPerXeno + adjust * _autoBalanceStep;
+            if (value > _autoBalanceMax)
+                value = _autoBalanceMax;
+            else if (value < _autoBalanceMin)
+                value = _autoBalanceMin;
+
+            _config.SetCVar(CMCVars.CMMarinesPerXeno, value);
+            break;
         }
     }
 
