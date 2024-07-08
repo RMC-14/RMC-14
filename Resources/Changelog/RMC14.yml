@@ -2572,5 +2572,28 @@
   id: 313
   time: '2024-07-08T21:28:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2910
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the lifesaver bag's storage UI being extremely long, it is now
+      split into 3 rows instead. Same storage space as before.
+    type: Fix
+  id: 314
+  time: '2024-07-08T22:05:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2912
+- author: DrSmugleaf
+  changes:
+  - message: Fixed a bug where the health bar overlay for xenos would sometimes momentarily
+      disappear.
+    type: Fix
+  id: 315
+  time: '2024-07-08T22:05:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2911
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenos not being able to corrode folding barricades.
+    type: Fix
+  id: 316
+  time: '2024-07-08T22:05:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2913
 Name: RMC14
 Order: -1
