@@ -2550,5 +2550,13 @@
   id: 310
   time: '2024-07-08T11:24:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2900
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the defender being able to push nested marines deeper into the
+      walls with its abilities.
+    type: Fix
+  id: 311
+  time: '2024-07-08T11:52:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2901
 Name: RMC14
 Order: -1
