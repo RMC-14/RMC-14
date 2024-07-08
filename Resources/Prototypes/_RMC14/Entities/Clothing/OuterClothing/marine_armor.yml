@@ -94,6 +94,9 @@
   - type: RMCNameItemOnVend
     item: Armor
   - type: RMCBulkyArmor
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
 
 - type: entity
   parent: CMArmorM3Medium
@@ -359,7 +362,7 @@
       - Gun
       - BallisticAmmoProvider
       - Stunbaton
-      - # TODO RMC14 motion detector, walkman
+#      - # TODO RMC14 motion detector, walkman
       tags:
       - Handcuffs
       - Grenade
