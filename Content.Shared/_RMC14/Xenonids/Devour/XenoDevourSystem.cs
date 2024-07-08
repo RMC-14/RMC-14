@@ -4,7 +4,6 @@ using Content.Shared.Buckle.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Hands;
-using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
@@ -18,6 +17,7 @@ using Content.Shared.Standing;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
@@ -30,6 +30,7 @@ public sealed class XenoDevourSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -45,9 +46,9 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<DevouredComponent, EntGotRemovedFromContainerMessage>(OnDevouredRemovedFromContainer);
         SubscribeLocalEvent<DevouredComponent, InteractionAttemptEvent>(OnDevouredInteractionAttempt);
         SubscribeLocalEvent<DevouredComponent, UpdateCanMoveEvent>(OnDevouredAttempt);
-        SubscribeLocalEvent<DevouredComponent, UseAttemptEvent>(OnDevouredAttempt);
         SubscribeLocalEvent<DevouredComponent, ThrowAttemptEvent>(OnDevouredAttempt);
         SubscribeLocalEvent<DevouredComponent, DropAttemptEvent>(OnDevouredAttempt);
+        SubscribeLocalEvent<DevouredComponent, UseAttemptEvent>(OnUseAttempt);
         SubscribeLocalEvent<DevouredComponent, PickupAttemptEvent>(OnDevouredPickupAttempt);
         SubscribeLocalEvent<DevouredComponent, IsEquippingAttemptEvent>(OnDevouredIsEquippingAttempt);
         SubscribeLocalEvent<DevouredComponent, IsUnequippingAttemptEvent>(OnDevouredIsUnequippingAttempt);
@@ -116,12 +117,22 @@ public sealed class XenoDevourSystem : EntitySystem
     }
     private void OnDevouredInteractionAttempt(Entity<DevouredComponent> ent, ref InteractionAttemptEvent args)
     {
-        args.Cancelled = true;
+        if (args.Target == null)
+            return;
+
+        if (!HasComp<UsableWhileDevouredComponent>(args.Target))
+            args.Cancelled = true;
     }
 
     private void OnDevouredAttempt<T>(Entity<DevouredComponent> devoured, ref T args) where T : CancellableEntityEventArgs
     {
         args.Cancel();
+    }
+
+    private void OnUseAttempt(Entity<DevouredComponent> ent, ref UseAttemptEvent args)
+    {
+        if (!HasComp<UsableWhileDevouredComponent>(args.Used))
+            args.Cancel();
     }
 
     private void OnDevouredAttackAttempt(Entity<DevouredComponent> devoured, ref AttackAttemptEvent args)
@@ -144,7 +155,7 @@ public sealed class XenoDevourSystem : EntitySystem
 
     private void OnDevouredIsUnequippingAttempt(Entity<DevouredComponent> devoured, ref IsUnequippingAttemptEvent args)
     {
-        if (!HasComp<UsableWhileDevouredComponent>(args.Equipment))
+        // if (!HasComp<UsableWhileDevouredComponent>(args.Equipment))
             args.Cancel();
     }
 
@@ -196,7 +207,6 @@ public sealed class XenoDevourSystem : EntitySystem
         devoured.RegurgitateAt = _timing.CurTime + xeno.Comp.RegurgitateAfter;
 
         _popup.PopupClient(Loc.GetString("cm-xeno-devour-self", ("target", target)), xeno, xeno, PopupType.Medium);
-
         _popup.PopupEntity(Loc.GetString("cm-xeno-devour-target", ("user", xeno.Owner)), xeno, target, PopupType.MediumCaution);
 
         var others = Filter.PvsExcept(xeno).RemovePlayerByAttachedEntity(target);
@@ -383,12 +393,18 @@ public sealed class XenoDevourSystem : EntitySystem
 
     private void DoFeedback(Entity<XenoDevourComponent> xeno)
     {
-        _popup.PopupClient(Loc.GetString("cm-xeno-devour-hurl-out"), xeno, xeno, PopupType.MediumCaution);
-        _audio.PlayPredicted(xeno.Comp.RegurgitateSound, xeno, xeno);
+        if (_net.IsServer)
+        {
+            _popup.PopupEntity(Loc.GetString("cm-xeno-devour-hurl-out"), xeno, xeno, PopupType.MediumCaution);
+            _audio.PlayPvs(xeno.Comp.RegurgitateSound, xeno);
+        }
     }
 
     public override void Update(float frameTime)
     {
+        if (_net.IsClient)
+            return;
+
         var time = _timing.CurTime;
         var devoured = EntityQueryEnumerator<DevouredComponent, TransformComponent>();
         while (devoured.MoveNext(out var uid, out var comp, out var xform))
@@ -411,13 +427,13 @@ public sealed class XenoDevourSystem : EntitySystem
             if (!comp.Warned && time >= comp.WarnAt)
             {
                 comp.Warned = true;
-                _popup.PopupClient(Loc.GetString("cm-xeno-devour-regurgitate", ("target", uid)), xeno, xeno, PopupType.MediumCaution);
+                _popup.PopupEntity(Loc.GetString("cm-xeno-devour-regurgitate", ("target", uid)), xeno, xeno, PopupType.MediumCaution);
             }
 
             if (time >= comp.RegurgitateAt)
             {
                 if (Regurgitate((uid, comp), (xeno, devour)))
-                    _popup.PopupClient(Loc.GetString("cm-xeno-devour-hurl-out"), xeno, xeno, PopupType.MediumCaution);
+                    _popup.PopupEntity(Loc.GetString("cm-xeno-devour-hurl-out"), xeno, xeno, PopupType.MediumCaution);
             }
         }
     }
