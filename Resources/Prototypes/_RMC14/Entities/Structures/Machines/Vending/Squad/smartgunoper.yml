@@ -128,7 +128,7 @@
     - name: Belt
       entries: [ ]
     #- id: CMM802SmartGunOperatorSidearmBelt
-    #- id: CMM280SmartGunOperatorDrumBelt
+    - id: CMBeltSmartGunOperator
     - name: Pouches
       choices: { CMPouch: 2 }
       entries:
