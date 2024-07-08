@@ -290,6 +290,18 @@ public sealed class XenoSystem : EntitySystem
         return xenoOne.Comp.Hive == xenoTwo.Comp.Hive;
     }
 
+    public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target)
+    {
+        // TODO RMC14 xenos of the same hive
+        if (xeno == target)
+            return false;
+
+        if (_mobState.IsDead(target))
+            return false;
+
+        return HasComp<MarineComponent>(target);
+    }
+
     public override void Update(float frameTime)
     {
         var query = EntityQueryEnumerator<XenoComponent>();
