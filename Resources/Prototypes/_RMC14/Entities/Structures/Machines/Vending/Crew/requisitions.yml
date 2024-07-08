@@ -117,8 +117,8 @@
         amount: 2
       #- id: Mortar Shell Backpack
       #  amount: 1
-      #- id: Technician Welder-Satchel
-      #  amount: 5
+      - id: RMCSatchelWelder
+        amount: 5
       #- id: IMP Ammo Rack
       #   amount: 2
       #- id: Radio Telephone Pack
@@ -161,7 +161,8 @@
         amount: 2
       - id: CMPouchSyringe
         amount: 2
-      - id: CMPouchTools # TODO should be a full tools pouch
+      - id: CMPouchToolsFill
+        name: Tools Pouch (Full)
         amount: 2
       - id: CMPouchConstruction
         amount: 2
