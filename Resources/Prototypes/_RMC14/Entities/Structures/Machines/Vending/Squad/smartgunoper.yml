@@ -126,7 +126,7 @@
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
     - name: Belt
-      entries: [ ]
+      entries:
      #- id: CMM802SmartGunOperatorSidearmBelt
       - id: CMBeltSmartGunOperator
     - name: Pouches
