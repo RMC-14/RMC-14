@@ -1,20 +1,17 @@
-﻿using Content.Shared._RMC14.Marines;
-using Content.Shared._RMC14.Xenonids.Animation;
+﻿using Content.Shared._RMC14.Xenonids.Animation;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
+using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Content.Shared.Movement.Pulling.Components;
-using Content.Shared.Movement.Pulling.Events;
-using Content.Shared.Movement.Pulling.Systems;
-using Content.Shared.Pulling.Events;
 
 namespace Content.Shared._RMC14.Xenonids.Headbutt;
 
@@ -30,6 +27,7 @@ public sealed class XenoHeadbuttSystem : EntitySystem
     [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoAnimationsSystem _xenoAnimations = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -46,11 +44,7 @@ public sealed class XenoHeadbuttSystem : EntitySystem
 
     private void OnXenoHeadbuttAction(Entity<XenoHeadbuttComponent> xeno, ref XenoHeadbuttActionEvent args)
     {
-        // TODO RMC14 xenos of the same hive
-        if (args.Target == xeno.Owner || HasComp<XenoComponent>(args.Target))
-            return;
-
-        if (!HasComp<MarineComponent>(args.Target))
+        if (!_xeno.CanAbilityAttackTarget(xeno, args.Target))
             return;
 
         if (args.Handled)
