@@ -2336,5 +2336,50 @@
   id: 287
   time: '2024-07-07T11:11:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2869
+- author: DrSmugleaf
+  changes:
+  - message: Fixed barbed wire damage not piercing through xeno armor. It now always
+      deals the same amount of damage, regardless of armor.
+    type: Fix
+  - message: Fixed barbed wire damage being too low. It now deals 10 damage, up from
+      6.
+    type: Fix
+  id: 288
+  time: '2024-07-08T02:26:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2872
+- author: DrSmugleaf
+  changes:
+  - message: Fixed explosions destroying destroyable items inside backpacks, belts,
+      pouches, webbings, armors and helmets. Any items stored inside will no longer
+      be destroyed by an explosion.
+    type: Fix
+  - message: Helmets now have two slots for items instead of a single 3 space area,
+      allowing for two injectors, bandages, ointments or pill packets to fit inside,
+      for example.
+    type: Tweak
+  - message: 'Fixed small items fitting into helmets. Only tiny items and the following
+      items can be fit into helmets: auto injectors, pill packets, bandages, ointment,
+      flasks, scalpels, cigarettes, pizza slices, pens, crayons and flashlights,'
+    type: Fix
+  id: 289
+  time: '2024-07-08T02:26:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2868
+- author: DrSmugleaf
+  changes:
+  - message: Fixed thick resin structures (the hivelord ones) being cheaper to build
+      than intended. The thick wall now costs 170 plasma, up from 120. The thick membrane
+      now costs 120, up from 95. The thick door now costs 145, up from 120.
+    type: Fix
+  id: 290
+  time: '2024-07-08T02:26:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2873
+- author: DrSmugleaf
+  changes:
+  - message: Fixed being able to eat req invoices and being able to put them into
+      fax machines.
+    type: Fix
+  id: 291
+  time: '2024-07-08T02:26:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2884
 Name: RMC14
 Order: -1
