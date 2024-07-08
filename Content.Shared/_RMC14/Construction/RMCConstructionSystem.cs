@@ -6,6 +6,7 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Collision.Shapes;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 
@@ -66,12 +67,16 @@ public sealed class RMCConstructionSystem : EntitySystem
 
     private void OnMapInit(Entity<RMCDropshipBlockedComponent> ent, ref MapInitEvent args)
     {
+        if (!TryComp(ent, out PhysicsComponent? physics))
+            return;
+
         var shape = new PhysShapeCircle(0.49f);
         _fixture.TryCreateFixture(
             ent,
             shape,
             ent.Comp.FixtureId,
-            collisionMask: (int) CollisionGroup.DropshipImpassable
+            collisionMask: (int) CollisionGroup.DropshipImpassable,
+            body: physics
         );
     }
 
