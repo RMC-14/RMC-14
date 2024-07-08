@@ -3,7 +3,6 @@
   parent: CMBaseStructureCorrodible
   id: CMBarricadeBase
   components:
-  - type: Anchorable
   - type: Rotatable
   - type: Appearance
   - type: Fixtures
@@ -33,6 +32,8 @@
   name: metal barricade
   description: A metal barricade that keeps the unwanted out. Upgradable with metal, plasteel, or metal rods for different attributes. Repair with a welder.
   components:
+  - type: Climbable
+  - type: Anchorable
   - type: MeleeSound
     soundGroups:
       Brute:
@@ -73,14 +74,14 @@
         acts: [ "Destruction" ]
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 2
+    damageDivisor: 25
     trackAllDamage: true
     damageOverlay:
       sprite: _RMC14/Structures/Walls/Barricades/metal_barricade_cracks.rsi
   - type: Barbed
     thornsDamage:
       types:
-        Slash: 6
+        Slash: 10
   - type: Construction
     graph: BarricadeMetalGraph
     node: nodeMetal
@@ -102,7 +103,7 @@
       damageModifierSet: CMBurnBarricade
     - type: DamageVisuals
       thresholds: [4, 8, 12]
-      damageDivisor: 2
+      damageDivisor: 25
       trackAllDamage: true
       damageOverlay:
         sprite: _RMC14/Structures/Walls/Barricades/burn_barricade_cracks.rsi
@@ -126,7 +127,7 @@
       damageModifierSet: CMBruteBarricade
     - type: DamageVisuals
       thresholds: [4, 8, 12]
-      damageDivisor: 2
+      damageDivisor: 25
       trackAllDamage: true
       damageOverlay:
         sprite: _RMC14/Structures/Walls/Barricades/brute_barricade_cracks.rsi
@@ -149,7 +150,7 @@
       damageCoefficient: 0.5
     - type: DamageVisuals
       thresholds: [4, 8, 12]
-      damageDivisor: 2
+      damageDivisor: 25
       trackAllDamage: true
       damageOverlay:
         sprite: _RMC14/Structures/Walls/Barricades/explosive_barricade_cracks.rsi
@@ -164,6 +165,7 @@
   name: turnstile
   description: A railing to prevent marines from stepping out of line.
   components:
+    - type: Anchorable
     - type: Sprite
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
       layers:
@@ -207,6 +209,7 @@
   name: handrail
   description: A railing, for your hands. Woooow.
   components:
+    - type: Anchorable
     - type: Sprite
       drawdepth: WallTops
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
@@ -279,6 +282,7 @@
   name: folding metal barricade
   description: A folding metal barricade weaker than the non-folding counterpart. Able to be opened and closed at a moment's notice. Repair with a welder.
   components:
+  - type: Anchorable
   - type: MeleeSound
     soundGroups:
       Brute:
@@ -340,7 +344,7 @@
   - type: Barbed
     thornsDamage:
       types:
-        Slash: 6
+        Slash: 10
   - type: Construction
     graph: BarricadeMetalDoorGraph
     node: nodeBarricadeMetalDoor
