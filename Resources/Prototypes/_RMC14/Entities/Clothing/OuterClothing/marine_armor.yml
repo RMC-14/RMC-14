@@ -70,6 +70,7 @@
       - Knife
       - Flashlight
       - MRE
+      - Grenade
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
