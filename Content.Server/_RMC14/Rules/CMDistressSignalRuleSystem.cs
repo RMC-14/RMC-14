@@ -390,10 +390,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 {
                     EnsureComp<AlmayerComponent>(xform.GridUid.Value);
                 }
-            }
 
-            if (TryComp(ev.SpawnResult, out HungerComponent? hunger))
-                _hunger.SetHunger(ev.SpawnResult.Value, 50.0f, hunger);
+                if (TryComp(ev.SpawnResult, out HungerComponent? hunger))
+                    _hunger.SetHunger(ev.SpawnResult.Value, 50.0f, hunger);
+            }
 
             _gunIFF.SetUserFaction(ev.SpawnResult.Value, comp.MarineFaction);
             return;
