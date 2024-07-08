@@ -12,6 +12,11 @@
             - material: CMSteel
               amount: 1
               doAfter: 1
+        - to: stool
+          steps:
+            - material: CMSteel
+              amount: 1
+              doAfter: 1
         - to: chairComfy
           steps:
             - material: CMSteel
