@@ -17,6 +17,12 @@
   - type: Gun
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser.ogg
+  - type: Wieldable
+  - type: GunWieldBonus
+    minAngle: -10
+    maxAngle: -10
+    angleIncrease: -4
+    angleDecay: 0
   - type: Battery
     maxCharge: 10000
     startingCharge: 10000
