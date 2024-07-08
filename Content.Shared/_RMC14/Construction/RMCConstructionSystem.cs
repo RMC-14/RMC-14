@@ -47,7 +47,21 @@ public sealed class RMCConstructionSystem : EntitySystem
 
     private void OnDropshipMapInit(Entity<DropshipComponent> ent, ref MapInitEvent args)
     {
-        SpawnBlockers(ent);
+        _toCreate.Clear();
+
+        var enumerator = Transform(ent).ChildEnumerator;
+        while (enumerator.MoveNext(out var child))
+        {
+            if (!_doorQuery.HasComp(child))
+                continue;
+
+            _toCreate.Add(child.ToCoordinates());
+        }
+
+        foreach (var toCreate in _toCreate)
+        {
+            SpawnAtPosition(Blocker, toCreate);
+        }
     }
 
     private void OnMapInit(Entity<RMCDropshipBlockedComponent> ent, ref MapInitEvent args)
@@ -86,24 +100,5 @@ public sealed class RMCConstructionSystem : EntitySystem
     public bool CanConstruct(EntityUid? user)
     {
         return !HasComp<DisableConstructionComponent>(user);
-    }
-
-    private void SpawnBlockers(EntityUid ent)
-    {
-        _toCreate.Clear();
-
-        var enumerator = Transform(ent).ChildEnumerator;
-        while (enumerator.MoveNext(out var child))
-        {
-            if (!_doorQuery.HasComp(child))
-                continue;
-
-            _toCreate.Add(child.ToCoordinates());
-        }
-
-        foreach (var toCreate in _toCreate)
-        {
-            SpawnAtPosition(Blocker, toCreate);
-        }
     }
 }

@@ -1,3 +1,4 @@
+using Content.Server._RMC14.Dropship;
 using Content.Server.Doors.Systems;
 using Content.Server.NPC.Pathfinding;
 using Content.Server.Shuttles.Components;
@@ -26,6 +27,7 @@ namespace Content.Server.Shuttles.Systems
         [Dependency] private readonly SharedJointSystem _jointSystem = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly SharedTransformSystem _transform = default!;
+        [Dependency] private readonly DropshipSystem _dropship = default!;
 
         private const string DockingJoint = "docking";
 
@@ -76,23 +78,11 @@ namespace Content.Server.Shuttles.Systems
             {
                 if (enabled)
                 {
-                    var doorComp = CompOrNull<DoorComponent>(entity);
-                    var oldCheck = doorComp?.PerformCollisionCheck ?? false;
-
-                    if (doorComp != null)
-                        doorComp.PerformCollisionCheck = false;
-
-                    _doorSystem.StartClosing(entity);
-                    _doorSystem.OnPartialClose(entity);
-                    _doorSystem.SetBoltsDown((entity.Owner, entity.Comp2), enabled);
-
-                    if (doorComp != null)
-                        doorComp.PerformCollisionCheck = oldCheck;
+                    _dropship.LockDoor((entity, entity));
                 }
                 else
                 {
-                    _doorSystem.SetBoltsDown((entity.Owner, entity.Comp2), false);
-                    _doorSystem.TryOpen(gridUid);
+                    _dropship.UnlockDoor((entity, entity));
                 }
             }
         }
