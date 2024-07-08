@@ -70,6 +70,7 @@
       - Knife
       - Flashlight
       - MRE
+      - Grenade
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -94,6 +95,9 @@
   - type: RMCNameItemOnVend
     item: Armor
   - type: RMCBulkyArmor
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
 
 - type: entity
   parent: CMArmorM3Medium
@@ -152,7 +156,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo.rsi
 
 - type: entity
-  parent: CMArmorM2MP
+  parent: CMArmorM3Medium
   id: RMCArmorM3G4
   name: M3-G4 grenadier armor
   description: A custom set of M3 armor packed to the brim with padding, plating, and every form of ballistic protection under the sun. Used exclusively by Marine Grenadiers.
@@ -359,7 +363,7 @@
       - Gun
       - BallisticAmmoProvider
       - Stunbaton
-      - # TODO RMC14 motion detector, walkman
+#      - # TODO RMC14 motion detector, walkman
       tags:
       - Handcuffs
       - Grenade

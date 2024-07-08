@@ -2336,5 +2336,130 @@
   id: 287
   time: '2024-07-07T11:11:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2869
+- author: DrSmugleaf
+  changes:
+  - message: Fixed barbed wire damage not piercing through xeno armor. It now always
+      deals the same amount of damage, regardless of armor.
+    type: Fix
+  - message: Fixed barbed wire damage being too low. It now deals 10 damage, up from
+      6.
+    type: Fix
+  id: 288
+  time: '2024-07-08T02:26:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2872
+- author: DrSmugleaf
+  changes:
+  - message: Fixed explosions destroying destroyable items inside backpacks, belts,
+      pouches, webbings, armors and helmets. Any items stored inside will no longer
+      be destroyed by an explosion.
+    type: Fix
+  - message: Helmets now have two slots for items instead of a single 3 space area,
+      allowing for two injectors, bandages, ointments or pill packets to fit inside,
+      for example.
+    type: Tweak
+  - message: 'Fixed small items fitting into helmets. Only tiny items and the following
+      items can be fit into helmets: auto injectors, pill packets, bandages, ointment,
+      flasks, scalpels, cigarettes, pizza slices, pens, crayons and flashlights,'
+    type: Fix
+  id: 289
+  time: '2024-07-08T02:26:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2868
+- author: DrSmugleaf
+  changes:
+  - message: Fixed thick resin structures (the hivelord ones) being cheaper to build
+      than intended. The thick wall now costs 170 plasma, up from 120. The thick membrane
+      now costs 120, up from 95. The thick door now costs 145, up from 120.
+    type: Fix
+  id: 290
+  time: '2024-07-08T02:26:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2873
+- author: DrSmugleaf
+  changes:
+  - message: Fixed being able to eat req invoices and being able to put them into
+      fax machines.
+    type: Fix
+  id: 291
+  time: '2024-07-08T02:26:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2884
+- author: DrSmugleaf
+  changes:
+  - message: Fixed microwaves being invincible.
+    type: Fix
+  id: 292
+  time: '2024-07-08T03:43:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2888
+- author: DrSmugleaf
+  changes:
+  - message: Fixed crushers, defenders, runners and other xenonid castes sometimes
+      being able to charge or leap through barricades.
+    type: Fix
+  id: 293
+  time: '2024-07-08T03:43:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2889
+- author: DrSmugleaf
+  changes:
+  - message: Fixed marines not being able to take out their boot knife to attack xenonids
+      while devoured.
+    type: Fix
+  id: 294
+  time: '2024-07-08T03:45:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2891
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the grenadier armor not being able to fit any items.
+    type: Fix
+  - message: Fixed the grenadier armor only having 2 slots, it now has 3 slots.
+    type: Fix
+  - message: Fixed armor not being able to fit grenades.
+    type: Fix
+  id: 295
+  time: '2024-07-08T03:45:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2887
+- author: DrSmugleaf
+  changes:
+  - message: Fixed being able to drop equipped items to the ground while nested.
+    type: Fix
+  id: 296
+  time: '2024-07-08T03:45:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2890
+- author: diraven
+  changes:
+  - message: Fixed metal barricades and sandbags damage thresholds for them to look
+      more progressively more broken rather then almost fully destroyed after a slightest
+      hit.
+    type: Fix
+  id: 297
+  time: '2024-07-08T03:48:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2881
+- author: ShadowCommander
+  changes:
+  - message: Added unfolding magazine boxes into cardboard sheets.
+    type: Add
+  id: 298
+  time: '2024-07-08T03:55:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2855
+- author: diraven
+  changes:
+  - message: Added an ability to climb metal barricades that do not have barbed wire.
+    type: Add
+  id: 299
+  time: '2024-07-08T05:18:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2865
+- author: Whisper
+  changes:
+  - message: Cardboard box crate now gives a stack of cardboard instead
+    type: Tweak
+  id: 300
+  time: '2024-07-08T09:09:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2893
+- author: DrSmugleaf
+  changes:
+  - message: Temporarily added an autobalance feature that will change the ratio of
+      marines per xeno round-start depending on round outcome. This was already being
+      done by the hosts manually from time to time but is now automatic.
+    type: Add
+  id: 301
+  time: '2024-07-08T09:09:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2892
 Name: RMC14
 Order: -1
