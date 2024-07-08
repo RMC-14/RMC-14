@@ -2565,5 +2565,12 @@
   id: 312
   time: '2024-07-08T20:47:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2904
+- author: diraven
+  changes:
+  - message: Pheromones icons are now shown even without direct line of sight.
+    type: Tweak
+  id: 313
+  time: '2024-07-08T21:28:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2910
 Name: RMC14
 Order: -1
