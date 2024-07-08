@@ -2422,5 +2422,14 @@
   id: 296
   time: '2024-07-08T03:45:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2890
+- author: diraven
+  changes:
+  - message: Fixed metal barricades and sandbags damage thresholds for them to look
+      more progressively more broken rather then almost fully destroyed after a slightest
+      hit.
+    type: Fix
+  id: 297
+  time: '2024-07-08T03:48:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2881
 Name: RMC14
 Order: -1
