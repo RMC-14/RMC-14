@@ -68,7 +68,7 @@
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronTempestasFrostbiteGlacies
-  name: Tempestas 'Frostbite' Glacies figurine
+  name: Tempestas 'Frostclaw' Glacies figurine
   description: If I die before you continue, You shall have heard my final dying roar.
   components:
   - type: Sprite
