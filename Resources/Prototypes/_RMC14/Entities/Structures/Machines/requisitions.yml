@@ -76,6 +76,10 @@
         volume: -1
   - type: RequireProjectileTarget
   - type: InteractionOutline
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
+        ents: []
 
 - type: entity
   id: CMCargoElevator
