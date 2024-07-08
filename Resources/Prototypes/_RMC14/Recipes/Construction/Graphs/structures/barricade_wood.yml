@@ -14,3 +14,5 @@
       - material: RMCWood
         amount: 5
         doAfter: 3
+  - node: nodeWood
+    entity: RMCBarricadeWood
