@@ -2489,5 +2489,43 @@
   id: 303
   time: '2024-07-08T10:55:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2829
+- author: DrSmugleaf
+  changes:
+  - message: 'Added the Warrior''s missing passive: lifesteal on melee hits. Limited
+      to 1 heal per melee attack, it heals the Warrior for 7% of its current missing
+      health, adding 1% for each marine that is within a 3 tile radius of it, to a
+      maximum of 9% total. Minimum heal of 20, maximum heal of 40. A popup is displayed
+      to the Warrior and marines if the max of 9% is reached. This does not count
+      nested nor dead marines.'
+    type: Fix
+  - message: Fixed the Warrior's abilities being able to target weeds, items, and
+      dead marines. Warrior abilities now remain selected until a valid target is
+      clicked, or the ability is cancelled with right click.
+    type: Fix
+  id: 304
+  time: '2024-07-08T11:06:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2897
+- author: UnicornOnLSD
+  changes:
+  - message: Marines have finally developped kinetic reflexes for machetes ! (You
+      can now use holster keys on machete pouch)
+    type: Add
+  id: 305
+  time: '2024-07-08T11:07:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2851
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenos being affected by camera recoil from bullet hits.
+    type: Fix
+  id: 306
+  time: '2024-07-08T11:06:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2896
+- author: snebl
+  changes:
+  - message: Fixed sandbag barricades being repairable with a welder.
+    type: Fix
+  id: 307
+  time: '2024-07-08T11:06:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2899
 Name: RMC14
 Order: -1
