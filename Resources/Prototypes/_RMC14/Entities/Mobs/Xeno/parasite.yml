@@ -7,6 +7,10 @@
   components:
   - type: GhostRole
     name: cm-job-name-xeno-parasite
+    requirements:
+    - !type:DepartmentTimeRequirement
+      department: CMXeno
+      time: 18000 #5 hours
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Parasite/parasite.rsi
   - type: MobState
