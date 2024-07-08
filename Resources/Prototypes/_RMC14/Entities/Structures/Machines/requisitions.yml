@@ -5,7 +5,7 @@
   - type: RequisitionsAccount
 
 - type: entity
-  parent: [ BaseStructure, CMCargoCatalog ]
+  parent: [ CMBaseStructureCorrodible, CMCargoCatalog ]
   id: CMASRSConsole
   name: ASRS console
   description: A console for the Automated Storage Retrieval System.
