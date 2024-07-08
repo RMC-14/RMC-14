@@ -161,7 +161,8 @@
         amount: 2
       - id: CMPouchSyringe
         amount: 2
-      - id: CMPouchTools # TODO should be a full tools pouch
+      - id: CMPouchToolsFill
+        name: Tools Pouch (Full)
         amount: 2
       - id: CMPouchConstruction
         amount: 2
