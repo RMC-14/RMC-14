@@ -458,7 +458,7 @@ namespace Content.Server.GameTicking
                     ("minutes", duration.Minutes),
                     ("seconds", duration.Seconds));
 
-                if (_distressSignal.SelectedPlanetMap is { } planet &&
+                if (_distressSignal.SelectedPlanetMapName is { } planet &&
                     _distressSignal.OperationName is { } operation)
                 {
                     var mapName = _gameMapManager.GetSelectedMap()?.MapName;
@@ -664,7 +664,7 @@ namespace Content.Server.GameTicking
                 var mapName = _gameMapManager.GetSelectedMap()?.MapName ?? Loc.GetString("discord-round-notifications-unknown-map");
                 var content = Loc.GetString("discord-round-notifications-started", ("id", RoundId), ("map", mapName));
 
-                if (_distressSignal.SelectedPlanetMap is { } planet &&
+                if (_distressSignal.SelectedPlanetMapName is { } planet &&
                     _distressSignal.OperationName is { } operation)
                 {
                     content = Loc.GetString("rmc-discord-round-notifications-started",

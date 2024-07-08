@@ -106,6 +106,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
 
     public string? SelectedPlanetMap { get; private set; }
+    public string? SelectedPlanetMapName { get; private set; }
     public string? OperationName { get; private set; }
 
     public override void Initialize()
@@ -695,6 +696,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         // TODO RMC14 different planet-side maps
         var mapId = _mapManager.CreateMap();
         SelectedPlanetMap = _random.Pick(_planetMaps.Split(","));
+        SelectedPlanetMapName = SelectedPlanetMap.Replace("/Maps/_RMC14/", "").Replace(".yml", "");
         if (!_mapLoader.TryLoad(mapId, SelectedPlanetMap, out var grids) ||
             grids.Count == 0)
         {

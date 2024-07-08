@@ -153,7 +153,7 @@
   id: RMCOperationSuffixes
   components:
   - type: RMCDistressSignalSuffixes
-    prefixes:
+    suffixes:
     - "Abilene"
     - "Alpha"
     - "Animus"
