@@ -2482,5 +2482,12 @@
   id: 302
   time: '2024-07-08T10:19:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2894
+- author: Dorragon
+  changes:
+  - message: Medical crew vendor
+    type: Add
+  id: 303
+  time: '2024-07-08T10:55:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2829
 Name: RMC14
 Order: -1
