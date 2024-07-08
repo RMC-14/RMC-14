@@ -19,6 +19,7 @@ public sealed class XenoPunchSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     public override void Initialize()
     {
@@ -27,8 +28,7 @@ public sealed class XenoPunchSystem : EntitySystem
 
     private void OnXenoPunchAction(Entity<XenoPunchComponent> xeno, ref XenoPunchActionEvent args)
     {
-        // TODO RMC14 xenos of the same hive
-        if (args.Target == xeno.Owner || HasComp<XenoComponent>(args.Target))
+        if (!_xeno.CanAbilityAttackTarget(xeno, args.Target))
             return;
 
         if (args.Handled)
@@ -40,23 +40,12 @@ public sealed class XenoPunchSystem : EntitySystem
         if (attempt.Cancelled)
             return;
 
-        var targetId = args.Target;
-
-        if (_mobState.IsDead(targetId))
-            return;
-
-        if (TryComp(xeno, out XenoComponent? xenoComp) &&
-            TryComp(targetId, out XenoComponent? targetXeno) &&
-            xenoComp.Hive == targetXeno.Hive)
-        {
-            return;
-        }
-
         args.Handled = true;
 
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
+        var targetId = args.Target;
         var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage);
         if (damage?.GetTotal() > FixedPoint2.Zero)
         {
