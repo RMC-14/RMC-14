@@ -439,7 +439,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 DistressSignalRuleResult.MajorMarineVictory => -1,
                 DistressSignalRuleResult.MinorMarineVictory => -1,
                 DistressSignalRuleResult.MajorXenoVictory => 1,
-                DistressSignalRuleResult.MinorXenoVictory => 0,
+                DistressSignalRuleResult.MinorXenoVictory => 0, // hijack but all xenos die
                 DistressSignalRuleResult.AllDied => 0,
                 _ => throw new ArgumentOutOfRangeException(),
             };
