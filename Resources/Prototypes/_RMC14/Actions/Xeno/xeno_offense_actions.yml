@@ -257,6 +257,7 @@
     event: !type:XenoPunchActionEvent
     range: 1
     useDelay: 4.5
+    deselectOnMiss: false
 
 - type: entity
   id: ActionXenoFling
@@ -272,6 +273,7 @@
     event: !type:XenoFlingActionEvent
     range: 1
     useDelay: 7
+    deselectOnMiss: false
 
 - type: entity
   id: ActionXenoLunge
@@ -287,6 +289,7 @@
     event: !type:XenoLungeActionEvent
     range: 5
     useDelay: 10
+    deselectOnMiss: false
 
 - type: entity
   id: ActionXenoScreech
