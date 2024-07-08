@@ -152,8 +152,8 @@
       entries:
       - id: CMPouchAutoinjector
         amount: 1
-      - id: CMPouchMedkit
-        amount: 2
+      #- id: CMPouchMedkit
+      #  amount: 2
       - id: CMPouchFirstAidInjectors
         amount: 5
       - id: CMPouchFirstResponder
