@@ -1,8 +1,11 @@
 ﻿using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Player;
@@ -20,11 +23,15 @@ public sealed class XenoLifestealSystem : EntitySystem
 
     private EntityQuery<DamageableComponent> _damageableQuery;
     private EntityQuery<MarineComponent> _marineQuery;
+    private EntityQuery<MobStateComponent> _mobStateQuery;
+    private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
 
     public override void Initialize()
     {
         _damageableQuery = GetEntityQuery<DamageableComponent>();
         _marineQuery = GetEntityQuery<MarineComponent>();
+        _mobStateQuery = GetEntityQuery<MobStateComponent>();
+        _xenoNestedQuery = GetEntityQuery<XenoNestedComponent>();
 
         SubscribeLocalEvent<XenoLifestealComponent, MeleeHitEvent>(OnMeleeHit);
     }
@@ -39,6 +46,15 @@ public sealed class XenoLifestealSystem : EntitySystem
         {
             if (!_marineQuery.HasComp(hit))
                 continue;
+
+            if (_xenoNestedQuery.HasComp(hit))
+                continue;
+
+            if (_mobStateQuery.TryComp(hit, out var mobState) &&
+                mobState.CurrentState == MobState.Dead)
+            {
+                continue;
+            }
 
             found = true;
             break;
@@ -62,6 +78,15 @@ public sealed class XenoLifestealSystem : EntitySystem
         {
             if (!_marineQuery.HasComp(hit))
                 continue;
+
+            if (_xenoNestedQuery.HasComp(hit))
+                continue;
+
+            if (_mobStateQuery.TryComp(hit, out var mobState) &&
+                mobState.CurrentState == MobState.Dead)
+            {
+                continue;
+            }
 
             lifesteal += xeno.Comp.TargetIncreasePercentage;
             if (lifesteal >= xeno.Comp.MaxPercentage)
