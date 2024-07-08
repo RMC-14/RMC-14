@@ -2535,5 +2535,20 @@
   id: 308
   time: '2024-07-08T11:11:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2866
+- author: UnicornOnLSD
+  changes:
+  - message: Several medical sprites are now BLU, per player demand.
+    type: Add
+  id: 309
+  time: '2024-07-08T11:24:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2895
+- author: DrSmugleaf
+  changes:
+  - message: All caps including surgical can now hold any combination of 2 lighters,
+      cigarettes and matchsticks.
+    type: Tweak
+  id: 310
+  time: '2024-07-08T11:24:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2900
 Name: RMC14
 Order: -1
