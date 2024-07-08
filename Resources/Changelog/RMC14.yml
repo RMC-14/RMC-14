@@ -2396,5 +2396,31 @@
   id: 293
   time: '2024-07-08T03:43:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2889
+- author: DrSmugleaf
+  changes:
+  - message: Fixed marines not being able to take out their boot knife to attack xenonids
+      while devoured.
+    type: Fix
+  id: 294
+  time: '2024-07-08T03:45:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2891
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the grenadier armor not being able to fit any items.
+    type: Fix
+  - message: Fixed the grenadier armor only having 2 slots, it now has 3 slots.
+    type: Fix
+  - message: Fixed armor not being able to fit grenades.
+    type: Fix
+  id: 295
+  time: '2024-07-08T03:45:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2887
+- author: DrSmugleaf
+  changes:
+  - message: Fixed being able to drop equipped items to the ground while nested.
+    type: Fix
+  id: 296
+  time: '2024-07-08T03:45:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2890
 Name: RMC14
 Order: -1
