@@ -20,7 +20,7 @@
       completed:
       - !type:SpawnPrototype
         prototype: CMRodMetal1
-        amount: 2
+        amount: 1
       - !type:DeleteEntity
       steps:
       - tool: Cutting
