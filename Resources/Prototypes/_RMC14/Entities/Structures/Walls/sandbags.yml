@@ -25,7 +25,6 @@
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: CMSandbag
-  - type: Repairable
   - type: Destructible
     thresholds:
     - trigger:
