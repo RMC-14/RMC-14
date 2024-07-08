@@ -90,6 +90,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         CCVars.FTLCooldown,
     ];
 
+    private readonly HashSet<string> _operationNames = new();
+    private readonly HashSet<string> _operationPrefixes = new();
+    private readonly HashSet<string> _operationSuffixes = new();
+
     private string _planetMaps = default!;
     private float _marinesPerXeno;
     private bool _autoBalance;
@@ -101,11 +105,16 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
 
+    public string? SelectedPlanetMap { get; private set; }
+    public string? OperationName { get; private set; }
+
     public override void Initialize()
     {
         base.Initialize();
 
         _xenoNestedQuery = GetEntityQuery<XenoNestedComponent>();
+
+        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         SubscribeLocalEvent<RulePlayerSpawningEvent>(OnRulePlayerSpawning);
         SubscribeLocalEvent<PlayerSpawningEvent>(OnPlayerSpawning,
@@ -129,6 +138,14 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         Subs.CVar(_config, CMCVars.RMCAutoBalanceStep, v => _autoBalanceStep = v, true);
         Subs.CVar(_config, CMCVars.RMCAutoBalanceMax, v => _autoBalanceMax = v, true);
         Subs.CVar(_config, CMCVars.RMCAutoBalanceMin, v => _autoBalanceMin = v, true);
+
+        ReloadPrototypes();
+    }
+
+    private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
+    {
+        if (ev.WasModified<EntityPrototype>())
+            ReloadPrototypes();
     }
 
     private void OnRulePlayerSpawning(RulePlayerSpawningEvent ev)
@@ -139,6 +156,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         {
             if (!GameTicker.IsGameRuleAdded(uid, gameRule))
                 continue;
+
+            OperationName = GetRandomOperationName();
 
             comp.Hive = Spawn(comp.HiveId);
             if (!SpawnXenoMap((uid, comp)))
@@ -482,6 +501,25 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         GridInfinitePower(almayer);
     }
 
+    private void ReloadPrototypes()
+    {
+        _operationNames.Clear();
+        _operationPrefixes.Clear();
+        _operationSuffixes.Clear();
+
+        foreach (var prototype in _prototypes.EnumeratePrototypes<EntityPrototype>())
+        {
+            if (prototype.TryGetComponent(out RMCDistressSignalNamesComponent? names, _compFactory))
+                _operationNames.UnionWith(names.Names);
+
+            if (prototype.TryGetComponent(out RMCDistressSignalPrefixesComponent? prefixes, _compFactory))
+                _operationPrefixes.UnionWith(prefixes.Prefixes);
+
+            if (prototype.TryGetComponent(out RMCDistressSignalSuffixesComponent? suffixes, _compFactory))
+                _operationSuffixes.UnionWith(suffixes.Suffixes);
+        }
+    }
+
     protected override void OnStartAttempt(Entity<CMDistressSignalRuleComponent, GameRuleComponent> gameRule, RoundStartAttemptEvent ev)
     {
         if (ev.Forced || ev.Cancelled)
@@ -656,8 +694,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     {
         // TODO RMC14 different planet-side maps
         var mapId = _mapManager.CreateMap();
-        var planetMap = _random.Pick(_planetMaps.Split(","));
-        if (!_mapLoader.TryLoad(mapId, planetMap, out var grids) ||
+        SelectedPlanetMap = _random.Pick(_planetMaps.Split(","));
+        if (!_mapLoader.TryLoad(mapId, SelectedPlanetMap, out var grids) ||
             grids.Count == 0)
         {
             return false;
@@ -928,6 +966,21 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 yield return ent;
             }
         }
+    }
+
+    private string GetRandomOperationName()
+    {
+        var name = string.Empty;
+        if (_operationNames.Count > 0)
+            name += $"{_random.Pick(_operationNames)} ";
+
+        if (_operationPrefixes.Count > 0)
+            name += $"{_random.Pick(_operationPrefixes)}";
+
+        if (_operationSuffixes.Count > 0)
+            name += $"-{_random.Pick(_operationSuffixes)}";
+
+        return name.Trim();
     }
 }
 
