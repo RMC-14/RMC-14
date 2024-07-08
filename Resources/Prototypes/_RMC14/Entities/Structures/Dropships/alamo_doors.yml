@@ -28,6 +28,8 @@
     openingSpriteState: door_opening
     openSpriteState: door_open
     closedSpriteState: door_closed
+    canCrush: false
+    performCollisionCheck: true
   - type: Airlock
     denySpriteState: door_deny
   - type: ApcPowerReceiver
