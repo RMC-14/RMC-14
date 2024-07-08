@@ -37,10 +37,10 @@
   - type: IgnoreContentsSize
     items:
       components:
+      - RMCLighter
       - RMCFlask
       - CMScalpel
       tags:
-#      - TODO RMC14 lighters
 #      - TODO RMC14 matchbox
       - Cigarette
 #      - TODO RMC14 cards
