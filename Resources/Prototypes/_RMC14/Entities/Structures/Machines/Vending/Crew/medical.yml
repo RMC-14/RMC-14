@@ -82,7 +82,7 @@
         name: first-aid pouch (pills)
       - id: CMPouchFirstResponder
       - id: CMPouchMedical
-      - id: CMMedicalKitPouch
+      #- id: CMMedicalKitPouch
       #- id: CMPressurizedReagentCanisterPouchBicaridine
       #- id: CMPressurizedReagentCanisterPouchKelotane
       #- id: CMPressurizedReagentCanisterPouchRevivalMix
