@@ -8525,64 +8525,86 @@ entities:
       parent: 1
   - uid: 18849
     components:
+    - type: MetaData
+      name: dormitories bedroom
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 113.5,-55.5
       parent: 1
   - uid: 18850
     components:
+    - type: MetaData
+      name: dormitories bedroom
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 109.5,-55.5
       parent: 1
   - uid: 18851
     components:
+    - type: MetaData
+      name: dormitories bedroom
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 105.5,-55.5
       parent: 1
   - uid: 18852
     components:
+    - type: MetaData
+      name: dormitories bedroom
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 101.5,-55.5
       parent: 1
   - uid: 18853
     components:
+    - type: MetaData
+      name: dormitories storage
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 96.5,-69.5
       parent: 1
   - uid: 18854
     components:
+    - type: MetaData
+      name: dormitories storage
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 96.5,-65.5
       parent: 1
   - uid: 18855
     components:
+    - type: MetaData
+      name: dormitories bedroom
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 96.5,-63.5
       parent: 1
   - uid: 18856
     components:
+    - type: MetaData
+      name: dormitories bedroom
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 96.5,-53.5
       parent: 1
   - uid: 18911
     components:
+    - type: MetaData
+      name: dormitories toilet
     - type: Transform
       pos: 105.5,-68.5
       parent: 1
   - uid: 18912
     components:
+    - type: MetaData
+      name: dormitories toilet
     - type: Transform
       pos: 107.5,-68.5
       parent: 1
   - uid: 18913
     components:
+    - type: MetaData
+      name: dormitories toilet
     - type: Transform
       pos: 109.5,-68.5
       parent: 1
@@ -8715,7 +8737,7 @@ entities:
       pos: 90.5,-90.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -2735.1023
+      secondsUntilStateChange: -3911.343
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -8739,11 +8761,15 @@ entities:
   entities:
   - uid: 16555
     components:
+    - type: MetaData
+      name: telecommunications
     - type: Transform
       pos: 13.5,-26.5
       parent: 1
   - uid: 16556
     components:
+    - type: MetaData
+      name: telecommunications
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 10.5,-30.5
@@ -8973,26 +8999,34 @@ entities:
       parent: 1
   - uid: 18299
     components:
+    - type: MetaData
+      name: recreation
     - type: Transform
       pos: 112.5,-70.5
       parent: 1
   - uid: 18300
     components:
+    - type: MetaData
+      name: recreation
     - type: Transform
       pos: 114.5,-70.5
       parent: 1
   - uid: 18301
     components:
+    - type: MetaData
+      name: recreation
     - type: Transform
       pos: 112.5,-63.5
       parent: 1
   - uid: 18302
     components:
+    - type: MetaData
+      name: recreation
     - type: Transform
       pos: 114.5,-63.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -42.477886
+      secondsUntilStateChange: -1218.7186
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -9900,7 +9934,7 @@ entities:
       pos: 83.5,-133.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -3788.7551
+      secondsUntilStateChange: -4964.996
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -15040,7 +15074,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 2730.2724706
     - type: Door
-      secondsUntilStateChange: -2754.1716
+      secondsUntilStateChange: -3930.4124
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -15056,7 +15090,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 2730.2724706
     - type: Door
-      secondsUntilStateChange: -2754.1716
+      secondsUntilStateChange: -3930.4124
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -15151,34 +15185,46 @@ entities:
   entities:
   - uid: 20232
     components:
+    - type: MetaData
+      name: engineering workshop
     - type: Transform
       pos: 24.5,-47.5
       parent: 1
   - uid: 20233
     components:
+    - type: MetaData
+      name: engineering workshop
     - type: Transform
       pos: 23.5,-39.5
       parent: 1
   - uid: 20234
     components:
+    - type: MetaData
+      name: engineering workshop
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 23.5,-40.5
       parent: 1
   - uid: 20235
     components:
+    - type: MetaData
+      name: engineering workshop
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 24.5,-48.5
       parent: 1
   - uid: 20236
     components:
+    - type: MetaData
+      name: engineering workshop
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 21.5,-43.5
       parent: 1
   - uid: 20237
     components:
+    - type: MetaData
+      name: engineering workshop
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 22.5,-43.5
@@ -15340,11 +15386,15 @@ entities:
       parent: 1
   - uid: 18825
     components:
+    - type: MetaData
+      name: dormitories
     - type: Transform
       pos: 116.5,-57.5
       parent: 1
   - uid: 18826
     components:
+    - type: MetaData
+      name: dormitories
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 116.5,-58.5
@@ -15363,24 +15413,32 @@ entities:
       parent: 1
   - uid: 18875
     components:
+    - type: MetaData
+      name: dormitories
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 100.5,-70.5
       parent: 1
   - uid: 18876
     components:
+    - type: MetaData
+      name: dormitories
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 99.5,-70.5
       parent: 1
   - uid: 18881
     components:
+    - type: MetaData
+      name: dormitories
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 98.5,-52.5
       parent: 1
   - uid: 18882
     components:
+    - type: MetaData
+      name: dormitories
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 97.5,-52.5
@@ -15867,24 +15925,32 @@ entities:
   entities:
   - uid: 18877
     components:
+    - type: MetaData
+      name: dormitories restroom
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 107.5,-63.5
       parent: 1
   - uid: 18878
     components:
+    - type: MetaData
+      name: dormitories restroom
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 108.5,-63.5
       parent: 1
   - uid: 18879
     components:
+    - type: MetaData
+      name: dormitories restroom
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 101.5,-67.5
       parent: 1
   - uid: 18880
     components:
+    - type: MetaData
+      name: dormitories restroom
     - type: Transform
       pos: 101.5,-66.5
       parent: 1
@@ -23371,11 +23437,6 @@ entities:
       parent: 1
 - proto: CMSpawnPointSurvivor
   entities:
-  - uid: 17049
-    components:
-    - type: Transform
-      pos: 105.5,-69.5
-      parent: 1
   - uid: 18175
     components:
     - type: Transform
