@@ -2445,5 +2445,21 @@
   id: 299
   time: '2024-07-08T05:18:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2865
+- author: Whisper
+  changes:
+  - message: Cardboard box crate now gives a stack of cardboard instead
+    type: Tweak
+  id: 300
+  time: '2024-07-08T09:09:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2893
+- author: DrSmugleaf
+  changes:
+  - message: Temporarily added an autobalance feature that will change the ratio of
+      marines per xeno round-start depending on round outcome. This was already being
+      done by the hosts manually from time to time but is now automatic.
+    type: Add
+  id: 301
+  time: '2024-07-08T09:09:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2892
 Name: RMC14
 Order: -1
