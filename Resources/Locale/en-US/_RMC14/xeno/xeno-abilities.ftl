@@ -37,7 +37,7 @@ cm-xeno-leap-cancelled = You cancel your leap!
 cm-xeno-weeds-source-already-here = There is already a resin node here!
 
 # Corrosive acid
-cm-xeno-acid-not-corrodible = You can't corrode {THE($target)}!
+cm-xeno-acid-not-corrodible = We cannot dissolve {THE($target)}!
 cm-xeno-acid-already-corroding = {THE($target)} already has corrosive acid on it!
 
 # Paralyzing Slash

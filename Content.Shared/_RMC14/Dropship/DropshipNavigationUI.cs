@@ -25,6 +25,9 @@ public sealed class DropshipNavigationLaunchMsg(NetEntity target) : BoundUserInt
 }
 
 [Serializable, NetSerializable]
+public sealed class DropshipLockdownMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
 public enum DropshipNavigationUiKey
 {
     Key

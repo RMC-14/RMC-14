@@ -28,12 +28,24 @@
     openingSpriteState: door_opening
     openSpriteState: door_open
     closedSpriteState: door_closed
+    canCrush: false
+    performCollisionCheck: true
   - type: Airlock
     denySpriteState: door_deny
   - type: ApcPowerReceiver
     powerLoad: 0
   - type: Docking
   - type: DockingSignalControl
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1000
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Corrodible
+    isCorrodible: false
 
 - type: entity
   parent: CMBaseDoor
