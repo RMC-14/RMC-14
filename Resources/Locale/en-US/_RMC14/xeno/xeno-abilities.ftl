@@ -22,6 +22,7 @@ cm-xeno-evolution-failed-cannot-support = The Hive cannot support this caste yet
 cm-xeno-evolution-failed-hive-full = The hive cannot support another Tier {$tier}, wait for either more aliens to be born or someone to die.
 rmc-xeno-evolution-devolve-title = De-Evolve To
 rmc-xeno-evolution-devolve = You devolve to {$xeno}!
+rmc-xeno-evolution-cant-evolve-damaged = We must be at full health to evolve.
 rmc-xeno-evolution-cant-devolve-damaged = We are too weak to deevolve, we must regain our health first.
 
 # Fortify
