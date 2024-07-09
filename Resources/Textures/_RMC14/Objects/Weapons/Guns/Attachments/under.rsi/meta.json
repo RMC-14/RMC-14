@@ -26,7 +26,7 @@
       "name": "lasersight"
     },
     {
-      "name": "vplaserlight"
+      "name": "laserlight"
     },
     {
       "name": "gyro"
@@ -116,10 +116,10 @@
       "name": "lasersight_a"
     },
     {
-      "name": "vplaserlight_a"
+      "name": "laserlight_a"
     },
     {
-      "name": "vplaserlight_a-on"
+      "name": "laserlight_a-on"
     },
     {
       "name": "gyro_a",
@@ -202,16 +202,16 @@
       "name": "grenade_a"
     },
     {
-      "name": "grenade-mk1_a-open"
+      "name": "grenade-mk1-open_a"
     },
     {
-      "name": "grenade_a-open"
+      "name": "grenade-open_a"
     },
     {
       "name": "grenade-m203_a"
     },
     {
-      "name": "grenade-m203_a-open"
+      "name": "grenade-m203-open_a"
     },
     {
       "name": "flamethrower_a",
@@ -259,7 +259,7 @@
       "name": "grenade-m203-on"
     },
     {
-      "name": "vplaserlight-on"
+      "name": "laserlight-on"
     }
   ]
 }

@@ -29,6 +29,12 @@ public sealed partial class ScopeComponent : Component
     [DataField, AutoNetworkedField]
     public float Offset = 15;
 
+    /// <summary>
+    /// If set to true, the user's movement won't interrupt the scoping action.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool AllowMovement;
+
     [DataField, AutoNetworkedField]
     public EntProtoId ScopingToggleAction = "CMActionToggleScope";
 
@@ -37,6 +43,9 @@ public sealed partial class ScopeComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool RequireWielding;
+
+    [DataField, AutoNetworkedField]
+    public bool UseInHand;
 
     [DataField, AutoNetworkedField]
     public Direction? ScopingDirection;
