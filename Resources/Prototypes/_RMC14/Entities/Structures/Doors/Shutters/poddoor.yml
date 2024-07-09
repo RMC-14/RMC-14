@@ -14,6 +14,8 @@
     crushDamage:
       types:
         Blunt: 25 # yowch
+    performCollisionCheck: false
+    canCrush: false
   - type: Occluder
   - type: Appearance
   - type: RadiationBlocker
@@ -31,6 +33,7 @@
   #  - board
   - type: StaticPrice
     price: 280
+  - type: RMCPodDoor
 
 - type: entity
   parent: RMCPodDoor

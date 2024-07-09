@@ -1,0 +1,22 @@
+﻿- type: entity
+  id: RMCPodDoorButton
+  name: button
+  description: A remote control-switch for a door.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    drawdepth: SmallObjects
+    sprite: _RMC14/Objects/door_button.rsi
+    layers:
+    - state: doorctrl
+      map: [ "enum.RMCPodDoorButtonLayers.Animation" ]
+  - type: Clickable
+  - type: InteractionOutline
+  - type: WallMount
+    arc: 360
+  - type: RMCDoorButton
