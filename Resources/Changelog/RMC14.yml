@@ -2623,5 +2623,12 @@
   id: 320
   time: '2024-07-09T03:51:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2922
+- author: Sphiral
+  changes:
+  - message: Barricades now have a 0.7 use delay
+    type: Tweak
+  id: 321
+  time: '2024-07-09T04:09:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2837
 Name: RMC14
 Order: -1
