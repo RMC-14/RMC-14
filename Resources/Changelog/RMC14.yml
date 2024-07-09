@@ -2630,5 +2630,12 @@
   id: 321
   time: '2024-07-09T04:09:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2837
+- author: Tunguso4ka
+  changes:
+  - message: Ported Solaris Ridge
+    type: Add
+  id: 322
+  time: '2024-07-09T08:51:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2479
 Name: RMC14
 Order: -1
