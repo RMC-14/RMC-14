@@ -209,7 +209,17 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
                 ev.PlayerPool.Remove(player);
                 GameTicker.PlayerJoinGame(player);
+                var xenoEnt = SpawnXenoEnt(ent);
 
+                if (!_mind.TryGetMind(playerId, out var mind))
+                    mind = _mind.CreateMind(playerId);
+
+                _mind.TransferTo(mind.Value, xenoEnt);
+                return playerId;
+            }
+
+            EntityUid SpawnXenoEnt(EntProtoId ent)
+            {
                 var leader = _prototypes.TryIndex(ent, out var proto) &&
                              proto.TryGetComponent(out XenoComponent? xeno, _compFactory) &&
                              xeno.SpawnAtLeaderPoint;
@@ -219,12 +229,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
                 _xeno.MakeXeno(xenoEnt);
                 _xeno.SetHive(xenoEnt, comp.Hive);
-
-                if (!_mind.TryGetMind(playerId, out var mind))
-                    mind = _mind.CreateMind(playerId);
-
-                _mind.TransferTo(mind.Value, xenoEnt);
-                return playerId;
+                return xenoEnt;
             }
 
             var totalXenos = Math.Max(1, ev.PlayerPool.Count / _marinesPerXeno);
@@ -309,10 +314,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             // Any unfilled xeno slots become larva
             for (var i = selected; i < totalXenos; i++)
             {
-                // TODO RMC14 xeno spawn points
-                var xenoEnt = SpawnAtPosition(comp.LarvaEnt, comp.XenoMap.ToCoordinates());
-                _xeno.MakeXeno(xenoEnt);
-                _xeno.SetHive(xenoEnt, comp.Hive);
+                // TODO RMC14 burrowed larva
+                SpawnXenoEnt(comp.LarvaEnt);
             }
 
             if (spawnedDropships)
