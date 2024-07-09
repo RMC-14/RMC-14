@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Map;
+﻿using Content.Shared._RMC14.NightVision;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -10,6 +11,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedNightVisionSystem _nightVision = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
     public override void Initialize()
@@ -62,5 +64,21 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 
         member.Comp.Hive = hive;
         Dirty(member);
+    }
+
+    public void SetSeeThroughContainers(Entity<HiveComponent?> hive, bool see)
+    {
+        if (!Resolve(hive, ref hive.Comp, false))
+            return;
+
+        hive.Comp.SeeThroughContainers = see;
+        var xenos = EntityQueryEnumerator<XenoComponent>();
+        while (xenos.MoveNext(out var uid, out var xeno))
+        {
+            if (xeno.Hive != hive)
+                continue;
+
+            _nightVision.SetSeeThroughContainers(uid, see);
+        }
     }
 }
