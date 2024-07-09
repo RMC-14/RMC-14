@@ -5,7 +5,7 @@
   - type: RequisitionsAccount
 
 - type: entity
-  parent: [ ComputerCargoOrders, CMCargoCatalog ]
+  parent: [ CMBaseStructureCorrodible, CMCargoCatalog ]
   id: CMASRSConsole
   name: ASRS console
   description: A console for the Automated Storage Retrieval System.
@@ -18,6 +18,23 @@
       state: off
     - map: ["computerLayerScreen"]
       state: on
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.35,0.25,0.35"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: GlassSmash
   - type: CargoOrderConsole
   - type: ActivatableUI
     key: enum.RequisitionsUIKey.Key
@@ -50,6 +67,19 @@
   - type: ApcPowerReceiver
     powerLoad: 0
     needsPower: false
+  - type: Appearance
+  - type: LitOnPowered
+  - type: EmitSoundOnUIOpen
+    sound:
+      collection: Keyboard
+      params:
+        volume: -1
+  - type: RequireProjectileTarget
+  - type: InteractionOutline
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
+        ents: []
 
 - type: entity
   id: CMCargoElevator
