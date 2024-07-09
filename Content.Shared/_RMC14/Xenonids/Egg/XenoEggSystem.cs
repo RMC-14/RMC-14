@@ -44,7 +44,7 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
 
-    private static readonly ProtoId<TagPrototype> _structureTag = "Structure";
+    private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
 
     private EntityQuery<StepTriggerComponent> _stepTriggerQuery;
 
@@ -198,7 +198,7 @@ public sealed class XenoEggSystem : EntitySystem
             }
 
             if (HasComp<XenoConstructComponent>(uid) ||
-                _tags.HasTag(uid.Value, _structureTag))
+                _tags.HasTag(uid.Value, StructureTag))
             {
                 var msg = Loc.GetString("cm-xeno-egg-blocked");
                 _popup.PopupClient(msg, uid.Value, user, PopupType.SmallCaution);
