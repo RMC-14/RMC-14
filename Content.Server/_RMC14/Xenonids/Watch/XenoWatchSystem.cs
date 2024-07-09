@@ -110,6 +110,8 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
             }
         }
 
+        xenos.Sort((a, b) => a.Name.CompareTo(b.Name));
+
         _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos));
     }
 
