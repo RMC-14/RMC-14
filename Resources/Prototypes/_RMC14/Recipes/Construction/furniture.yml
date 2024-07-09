@@ -19,6 +19,24 @@
 
 - type: construction
   parent: RMC
+  name: stool
+  id: CMStool
+  graph: CMSeat
+  startNode: start
+  targetNode: stool
+  category: construction-category-cm-furniture
+  description: Apply butt.
+  icon:
+    sprite: _RMC14/Structures/Furniture/chairs.rsi
+    state: stool
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
   name: comfy chair
   id: CMChairComfy
   graph: CMSeat
