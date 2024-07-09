@@ -8,7 +8,7 @@
     drawdepth: SmallObjects
     layers:
     - state: recharger
-      #map: ["enum.PowerChargerVisualLayers.Base"]
+      #map: ["enum.PowerChargerVisualLayers.Base"] # TODO RMC14 charge visuals
     - state: recharger-0
       #map: ["enum.PowerChargerVisualLayers.Light"]
       shader: unshaded
