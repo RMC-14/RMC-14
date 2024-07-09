@@ -2660,5 +2660,13 @@
   id: 325
   time: '2024-07-09T10:51:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2928
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenonids being able to put eggs inside resin structures and being
+      able to build on top of eggs to hide them.
+    type: Fix
+  id: 326
+  time: '2024-07-09T11:08:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2927
 Name: RMC14
 Order: -1
