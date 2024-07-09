@@ -156,8 +156,11 @@
   components:
   - type: AttachableToggleable
     needHand: true
-    breakOnMove: true
+    doInterrupt: true
     attachedOnly: true
+    breakOnMove: true
+    breakOnRotate: true
+    wieldedOnly: true
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: sniperscope
@@ -341,13 +344,12 @@
     - RMCAttachmentRail
     - RMCAttachmentB8SmartScope
   - type: AttachableToggleable
+    doAfter: 0.8
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: huntingscope
     actionName: Toggle B8 Smart-Scope
     actionDesc: Lets you see further and shoot through your fellow marines without harming them.
-  - type: Scope
-    delay: 0.8
   - type: AttachableIFF
   - type: AttachableWeaponRangedMods
     modifiers:

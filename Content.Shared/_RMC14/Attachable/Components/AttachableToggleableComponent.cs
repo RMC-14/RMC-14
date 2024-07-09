@@ -22,10 +22,28 @@ public sealed partial class AttachableToggleableComponent : Component
     public bool NeedHand = false;
 
     /// <summary>
+    /// If set to true, the attachment will not toggle itself when its action is interrupted. Used in cases where the item toggles itself separately, like scopes.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool DoInterrupt = false;
+
+    /// <summary>
     /// If set to true, the attachment will deactivate upon moving.
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool BreakOnMove = false;
+
+    /// <summary>
+    /// If set to true, the attachment will deactivate upon rotating to any direction other than the one it was activated in.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool BreakOnRotate = false;
+
+    /// <summary>
+    /// If set to true, the attachment can only be activated when the holder is wielded.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool WieldedOnly = false;
 
     [DataField, AutoNetworkedField]
     public float DoAfter;

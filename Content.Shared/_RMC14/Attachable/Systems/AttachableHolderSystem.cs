@@ -49,6 +49,7 @@ public sealed class AttachableHolderSystem : EntitySystem
             OnAttachableHolderAttachToSlotMessage);
         SubscribeLocalEvent<AttachableHolderComponent, AttachableHolderDetachMessage>(OnAttachableHolderDetachMessage);
         SubscribeLocalEvent<AttachableHolderComponent, AttemptShootEvent>(OnAttachableHolderAttemptShoot);
+        SubscribeLocalEvent<AttachableHolderComponent, GunShotEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, BoundUIOpenedEvent>(OnAttachableHolderUiOpened);
         SubscribeLocalEvent<AttachableHolderComponent, EntInsertedIntoContainerMessage>(OnAttached);
         SubscribeLocalEvent<AttachableHolderComponent, MapInitEvent>(OnHolderMapInit,
