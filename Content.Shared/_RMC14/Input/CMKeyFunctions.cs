@@ -14,10 +14,11 @@ public sealed class CMKeyFunctions
     public static readonly BoundKeyFunction MappingCancelEraseDecal = "MappingCancelEraseDecal";
     public static readonly BoundKeyFunction MappingOpenContextMenu = "MappingOpenContextMenu";
 
-    public static readonly BoundKeyFunction CMActivateAttachableBarrel = "CMActivateAttachableBarrel";
-    public static readonly BoundKeyFunction CMActivateAttachableRail = "CMActivateAttachableRail";
-    public static readonly BoundKeyFunction CMActivateAttachableStock = "CMActivateAttachableStock";
-    public static readonly BoundKeyFunction CMActivateAttachableUnderbarrel = "CMActivateAttachableUnderbarrel";
+    public static readonly BoundKeyFunction RMCActivateAttachableBarrel = "RMCActivateAttachableBarrel";
+    public static readonly BoundKeyFunction RMCActivateAttachableRail = "RMCActivateAttachableRail";
+    public static readonly BoundKeyFunction RMCActivateAttachableStock = "RMCActivateAttachableStock";
+    public static readonly BoundKeyFunction RMCActivateAttachableUnderbarrel = "RMCActivateAttachableUnderbarrel";
+    public static readonly BoundKeyFunction RMCFieldStripHeldItem = "RMCFieldStripHeldItem";
     public static readonly BoundKeyFunction CMUniqueAction = "CMUniqueAction";
     public static readonly BoundKeyFunction CMHolsterPrimary = "CMHolsterPrimary";
     public static readonly BoundKeyFunction CMHolsterSecondary = "CMHolsterSecondary";

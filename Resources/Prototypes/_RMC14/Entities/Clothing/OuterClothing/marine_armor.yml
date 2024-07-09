@@ -16,6 +16,9 @@
   - type: CMArmor
     armor: 20
     explosionArmor: 15
+  - type: WieldSlowdownCompensation
+    walk: 0.08
+    sprint: 0.136
   - type: ToggleableLightVisuals
     spriteLayer: light
   - type: PointLight
@@ -126,6 +129,9 @@
   - type: CMArmor
     armor: 25
     explosionArmor: 35
+  - type: WieldSlowdownCompensation
+    walk: 0.12
+    sprint: 0.198
   - type: ClothingSpeedModifier
     walkModifier: 0.68
     sprintModifier: 0.68

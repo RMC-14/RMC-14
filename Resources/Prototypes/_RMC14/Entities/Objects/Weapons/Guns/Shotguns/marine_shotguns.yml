@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: [BaseWeaponShotgun, CMBaseWeaponGun]
+  parent: [BaseWeaponShotgun, CMBaseWeaponGun, RMCBaseAttachableHolder ]
   name: M42A2 Pump Shotgun
   id: WeaponShotgunM42A2
   description: An Aegis Battlefield Armaments classic design, the M42A2 combines close-range firepower with long term reliability. Needs to be pumped.
@@ -15,6 +15,11 @@
     - Back
     - SuitStorage
   - type: Wieldable
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.842
+    baseSprint: 0.748
+  - type: WieldDelay
+    baseDelay: 0.6
   - type: Gun
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun.ogg
@@ -31,9 +36,47 @@
   - type: ShootUseDelay
     delay: 2
   - type: UseDelay
+  - type: Tag
+    tags:
+      - RMCWeaponShotgun
   - type: RMCNameItemOnVend
     item: PrimaryGun
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentRecoilCompensator
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-stock:
+        whitelist:
+          tags:
+          - RMCAttachmentM42A2WoodenStock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentVerticalGrip
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.81, 0.06
+      rmc-aslot-rail: -0.025, 0.125
+      rmc-aslot-stock: -0.375, -0.029
+      rmc-aslot-underbarrel: 0.25, -0.31
 
 #  - type: GunWieldBonus # TODO RMC14
 #    minAngle: -25
 #    maxAngle: -50
+
+- type: Tag
+  id: RMCWeaponShotgun
