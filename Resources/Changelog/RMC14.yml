@@ -2630,5 +2630,35 @@
   id: 321
   time: '2024-07-09T04:09:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2837
+- author: Tunguso4ka
+  changes:
+  - message: Ported Solaris Ridge
+    type: Add
+  id: 322
+  time: '2024-07-09T08:51:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2479
+- author: Vermidia
+  changes:
+  - message: Getting infected now also mutes you (in addition to paralyzing and blinding
+      you)
+    type: Add
+  id: 323
+  time: '2024-07-09T09:40:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2925
+- author: DrSmugleaf
+  changes:
+  - message: Fixed damaged xenonids being able to evolve. Xenos must now be on full
+      health to evolve, same as devolving.
+    type: Fix
+  id: 324
+  time: '2024-07-09T10:50:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2929
+- author: DrSmugleaf
+  changes:
+  - message: Fixed defenders staying fortified after going into crit.
+    type: Fix
+  id: 325
+  time: '2024-07-09T10:51:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2928
 Name: RMC14
 Order: -1

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
+using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
@@ -51,6 +52,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private EntityQuery<XenoConstructionRequiresSupportComponent> _constructionRequiresSupportQuery;
     private EntityQuery<TransformComponent> _transformQuery;
     private EntityQuery<XenoConstructComponent> _xenoConstructQuery;
+    private EntityQuery<XenoEggComponent> _xenoEggQuery;
 
     public override void Initialize()
     {
@@ -61,6 +63,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         _constructionRequiresSupportQuery = GetEntityQuery<XenoConstructionRequiresSupportComponent>();
         _transformQuery = GetEntityQuery<TransformComponent>();
         _xenoConstructQuery = GetEntityQuery<XenoConstructComponent>();
+        _xenoEggQuery = GetEntityQuery<XenoEggComponent>();
 
         SubscribeLocalEvent<XenoConstructionComponent, XenoPlantWeedsActionEvent>(OnXenoPlantWeedsAction);
 
@@ -523,7 +526,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
         while (anchored.MoveNext(out var uid))
         {
-            if (_xenoConstructQuery.HasComp(uid))
+            if (_xenoConstructQuery.HasComp(uid) || _xenoEggQuery.HasComp(uid))
             {
                 _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
                 return false;
