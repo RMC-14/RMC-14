@@ -109,6 +109,13 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return;
         }
 
+        if (TryComp(xeno, out DamageableComponent? damageable) &&
+            damageable.TotalDamage > FixedPoint2.Zero)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-cant-evolve-damaged"), xeno, xeno, PopupType.MediumCaution);
+            return;
+        }
+
         var ev = new XenoEvolutionDoAfterEvent(args.Choice);
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.EvolutionDelay, ev, xeno);
 
