@@ -2,8 +2,8 @@
 - type: entity
   parent: CMClosetBase
   id: CMLockerBase
+  name: secure locker
   description: It's an immobile card-locked storage unit.
-  abstract: true
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/standard.rsi
@@ -109,6 +109,16 @@
 
 - type: entity
   parent: CMLockerBase
+  id: RMCLockerHydro
+  name: botanist's locker
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/hydro.rsi
+  - type: AccessReader
+    access: [["CMAccessResearch"]]
+
+- type: entity
+  parent: CMLockerBase
   id: CMLockerQM
   name: quartermaster's locker
   components:
@@ -205,6 +215,16 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/engineer_welder.rsi
+  - type: AccessReader
+    access: [["CMAccessEngineering"]]
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerEngineerGeneric
+  name: workshop materials
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/engineer_generic.rsi
   - type: AccessReader
     access: [["CMAccessEngineering"]]
 

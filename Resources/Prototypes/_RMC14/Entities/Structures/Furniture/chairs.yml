@@ -32,6 +32,18 @@
   - type: Sprite
     state: chair_alt
 
+- type: entity
+  parent: CMChair
+  id: RMCStool
+  name: stool
+  description: Apply butt.
+  components:
+  - type: Sprite
+    state: stool
+  - type: Construction
+    graph: CMSeat
+    node: stool
+
 # Comfy chair
 - type: entity
   parent: CMSeatBase
