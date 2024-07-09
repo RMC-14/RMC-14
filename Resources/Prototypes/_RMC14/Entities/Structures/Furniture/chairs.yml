@@ -36,6 +36,7 @@
   parent: CMChair
   id: RMCStool
   name: stool
+  description: Apply butt.
   components:
   - type: Sprite
     state: stool
