@@ -86,7 +86,7 @@
     - CMSandbagEmpty25
     - CMSheetMetal50
     - CMSheetPlasteel40
-#    - # TODO RMC14 high capacity power cell
+    - RMCPowerCellHigh
     - CMEntrenchingTool
     - CMLightReplacer
 #    - CMAPCElectronics # TODO RMC14 uncomment when power
