@@ -110,4 +110,6 @@ public enum LogType
     RMCXenoAnnounce = RMCMarineAnnounce + 1,
     RMCNamedItem = RMCMarineAnnounce + 2,
     RMCRequisitionsBuy = RMCMarineAnnounce + 3,
+    RMCEvolve = RMCMarineAnnounce + 4,
+    RMCDevolve = RMCMarineAnnounce + 5,
 }
