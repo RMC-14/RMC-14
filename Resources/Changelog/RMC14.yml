@@ -2689,5 +2689,14 @@
   id: 329
   time: '2024-07-09T19:30:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2934
+- author: Zarq
+  changes:
+  - message: Added recipes for current medicines.
+    type: Add
+  - message: Re-enabled the Chemical Dispenser.
+    type: Tweak
+  id: 330
+  time: '2024-07-09T19:52:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2735
 Name: RMC14
 Order: -1
