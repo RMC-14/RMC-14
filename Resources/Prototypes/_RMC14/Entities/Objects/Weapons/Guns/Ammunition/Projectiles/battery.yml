@@ -1,0 +1,28 @@
+- type: entity
+  parent: BaseBullet
+  id: RMCProjectileTaser
+  noSpawn: true
+  name: taser bolt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/stun_projectiles.rsi
+    layers:
+    - state: stun
+      shader: unshaded
+  - type: Reflective
+    reflective:
+    - Energy
+  - type: FlyBySound
+    sound:
+      path: /Audio/_RMC14/Bullets/energy_miss1.ogg
+      params:
+        volume: 5
+  - type: StaminaDamageOnCollide
+    damage: 45
+  - type: Projectile
+    damage:
+      types:
+        Heat: 5
+    soundHit:
+      path: /Audio/_RMC14/Bullets/energy_impact1.ogg
+    forceSound: true
