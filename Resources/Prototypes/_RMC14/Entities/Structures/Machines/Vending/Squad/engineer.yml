@@ -195,7 +195,7 @@
       - id: CMBackpackMarineTech
       - id: CMSatchelMarineTech
       - id: CMBackpackWelder
-    #- id: CMTechnicianWelderSatchel
+      - id: RMCSatchelWelder
     #- id: CMTechnicianWelderChestrig
     - name: Belt
       choices: { CMBelt: 1 }
@@ -229,7 +229,8 @@
       - id: CMPouchShotgun
       - id: CMPouchGeneralMedium
       - id: CMPouchPistol
-      #- id: CMToolsPouchFull
+      - id: CMPouchToolsFill
+        name: Tools pouch (Filled)
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:

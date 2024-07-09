@@ -35,6 +35,7 @@
   - type: ApcPowerReceiver
     powerLoad: 0
     needsPower: false
+  - type: RMCDropshipBlocked
 
 - type: entity
   parent: BaseSecureWindoor
@@ -73,3 +74,4 @@
   - type: ApcPowerReceiver
     powerLoad: 0
     needsPower: false
+  - type: RMCDropshipBlocked

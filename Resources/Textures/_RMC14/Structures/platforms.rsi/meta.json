@@ -28,6 +28,10 @@
       "directions": 4
     },
     {
+      "name": "platform_round",
+      "directions": 4
+    },
+    {
       "name": "strata_platform",
       "directions": 4
     },

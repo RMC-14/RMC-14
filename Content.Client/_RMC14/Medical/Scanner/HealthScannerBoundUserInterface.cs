@@ -81,7 +81,7 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
             {
                 var damage = threshold.Value - damageable.TotalDamage;
                 _window.HealthBar.MinValue = 0;
-                _window.HealthBar.MaxValue = threshold.Value.Float();
+                _window.HealthBar.MaxValue = 100;
 
                 if (_entities.HasComponent<VictimBurstComponent>(target))
                 {
@@ -90,6 +90,9 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
                 }
                 else
                 {
+                    //Scale negative values with how close to death we are - if we have a different crit and dead state
+                    if (damage < 0 && thresholdsSystem.TryGetDeadThreshold(target, out var deadThreshold) && deadThreshold != threshold)
+                        threshold = deadThreshold - threshold;
 
                     var healthValue = damage.Float() / threshold.Value.Float() * 100f;
                     _window.HealthBar.Value = healthValue;

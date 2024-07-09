@@ -1,0 +1,18 @@
+- type: constructionGraph
+  parent: RMC
+  id: BarricadeWoodGraph
+  start: start
+  graph:
+  - node: start
+    actions:
+    - !type:DeleteEntity
+    edges:
+    - to: nodeWood
+      completed:
+      - !type:SnapToGrid
+      steps:
+      - material: RMCWood
+        amount: 5
+        doAfter: 3
+  - node: nodeWood
+    entity: RMCBarricadeWood

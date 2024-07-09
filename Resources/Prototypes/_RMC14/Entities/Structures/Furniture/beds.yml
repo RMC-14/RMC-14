@@ -10,3 +10,19 @@
     sprite: _RMC14/Structures/Furniture/bed.rsi
     state: bed
   - type: InteractionOutline
+
+- type: entity
+  parent: CMBed
+  id: RMCBedAlt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/bed.rsi
+    state: abed
+
+- type: entity
+  parent: CMBed
+  id: RMCBedPsych
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/bed.rsi
+    state: psychbed

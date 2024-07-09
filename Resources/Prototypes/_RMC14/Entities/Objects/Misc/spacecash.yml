@@ -1,0 +1,106 @@
+- type: entity
+  parent: SpaceCash
+  id: RMCSpaceCash
+  name: dollars
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/spacecash.rsi
+    state: spacecash1
+    layers:
+    - state: spacecash1
+      map: ["base"]
+  - type: Stack
+    stackType: Dollar
+    count: 1
+    baseLayer: base
+    layerStates:
+    - spacecash1
+    - spacecash10
+    - spacecash20
+    - spacecash50
+    - spacecash100
+    - spacecash200
+    - spacecash500
+    - spacecash1000
+  - type: PhysicalComposition
+    materialComposition:
+      Dollar: 1
+  - type: Appearance
+
+- type: entity
+  parent: RMCSpaceCash
+  id: RMCSpaceCash1
+  name: 1 dollar bill
+  description: A single US Government minted one dollar bill. It has a picture of George Washington printed on it. Makes most people of English origin cry, but isn't worth very much. Could probably get you half a hot-dog in some systems.
+
+- type: material
+  id: Dollar
+  name: 1 dollar bill
+  unit: materials-unit-bill
+  stackEntity: RMCSpaceCash1
+  icon: { sprite: /Textures/_RMC14/Objects/Misc/spacecash.rsi, state: spacecash1 }
+  price: 1
+
+- type: stack
+  id: Dollar
+  name: 1 dollar bill
+  icon: { sprite: /Textures/_RMC14/Objects/Misc/spacecash.rsi, state: spacecash1 }
+  spawn: RMCSpaceCash1
+
+# TODO RMC14 make different bills
+
+- type: entity
+  parent: RMCSpaceCash1
+  id: RMCSpaceCash10
+  suffix: 10
+  components:
+  - type: Stack
+    count: 10
+
+- type: entity
+  parent: RMCSpaceCash1
+  id: RMCSpaceCash20
+  suffix: 20
+  components:
+  - type: Stack
+    count: 20
+
+- type: entity
+  parent: RMCSpaceCash1
+  id: RMCSpaceCash50
+  suffix: 50
+  components:
+  - type: Stack
+    count: 50
+
+- type: entity
+  parent: RMCSpaceCash1
+  id: RMCSpaceCash100
+  suffix: 100
+  components:
+  - type: Stack
+    count: 100
+
+- type: entity
+  parent: RMCSpaceCash1
+  id: RMCSpaceCash200
+  suffix: 200
+  components:
+  - type: Stack
+    count: 200
+
+- type: entity
+  parent: RMCSpaceCash1
+  id: RMCSpaceCash500
+  suffix: 500
+  components:
+  - type: Stack
+    count: 500
+
+- type: entity
+  parent: RMCSpaceCash1
+  id: RMCSpaceCash1000
+  suffix: 1000
+  components:
+  - type: Stack
+    count: 1000

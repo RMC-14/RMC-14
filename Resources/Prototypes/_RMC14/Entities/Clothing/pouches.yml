@@ -20,6 +20,9 @@
   - type: Tag
     tags:
     - Pouch
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
 
 - type: entity
   parent: [CMPouch, BaseStorageItem]
@@ -825,3 +828,5 @@
   - type: Tag
     tags:
     - Pouch
+  - type: CMHolster
+  - type: CMItemSlots

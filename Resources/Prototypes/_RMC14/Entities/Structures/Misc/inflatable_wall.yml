@@ -1,0 +1,122 @@
+- type: entity
+  id: RMCInflatableWall
+  name: inflatable wall
+  description: An inflated membrane. Activate to deflate. Do not puncture.
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/inflatable_wall.rsi
+    state: wall
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 15
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Inflatable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: DisassembleOnAltVerb
+    prototype: RMCInflatableWallFolded1
+    doAfter: 3
+  - type: Airtight
+  - type: Transform
+    anchored: true
+  placement:
+    mode: SnapgridCenter
+
+- type: entity
+  parent: BaseMaterialDoor
+  id: RMCInflatableDoor
+  name: inflatable door
+  description: An inflated membrane. Activate to deflate. Now with a door. Do not puncture.
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/inflatable_door.rsi
+    state: closed
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 15
+        layer:
+        - WallLayer
+  - type: Door
+    occludes: false
+    openSound:
+      path: /Audio/Misc/zip.ogg
+    closeSound:
+      path: /Audio/Misc/zip.ogg
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Inflatable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: DisassembleOnAltVerb
+    prototype: RMCInflatableDoorFolded1
+    doAfter: 3
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: CMBaseStructure
+  id: RMCInflatableWallBroken
+  name: popped inflatable wall
+  description: This used to be an inflatable wall, now it's just a mess of plastic.
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/inflatable_wall.rsi
+    state: wall_popped
+  - type: Fixtures # overwrite BaseStructure parent.
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Inflatable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  parent: RMCInflatableWallBroken
+  id: RMCInflatableDoorBroken
+  name: popped inflatable door
+  description: This used to be an inflatable door, now it's just a mess of plastic.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/inflatable_door.rsi
+    state: door_popped

@@ -1,4 +1,5 @@
-﻿using Content.Shared.DoAfter;
+﻿using Content.Shared.Damage;
+using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Maps;
@@ -35,6 +36,7 @@ public sealed class EntrenchingToolSystem : EntitySystem
         SubscribeLocalEvent<EntrenchingToolComponent, EntrenchingToolDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<EntrenchingToolComponent, ItemToggledEvent>(OnItemToggled);
         SubscribeLocalEvent<EntrenchingToolComponent, SandbagFillDoAfterEvent>(OnSandbagFillDoAfter);
+        SubscribeLocalEvent<EntrenchingToolComponent, SandbagDismantleDoAfterEvent>(OnSandbagDismantleDoAfter);
 
         SubscribeLocalEvent<EmptySandbagComponent, InteractUsingEvent>(OnEmptyInteractUsing);
 
@@ -48,8 +50,62 @@ public sealed class EntrenchingToolSystem : EntitySystem
         if (!args.CanReach)
             return;
 
+        if (HasComp<BarricadeSandbagComponent>(args.Target))
+        {
+            DismantleSandbagBaricade(tool, ref args);
+            args.Handled = true;
+            return;
+        }
+
         StartDigging(tool, args.User, args.ClickLocation);
         args.Handled = true;
+    }
+
+    private void DismantleSandbagBaricade(Entity<EntrenchingToolComponent> tool, ref AfterInteractEvent args)
+    {
+        if (TryComp(tool, out ItemToggleComponent? toggle) && !toggle.Activated)
+            return;
+
+        _popup.PopupClient(Loc.GetString("cm-entrenching-dismantle"), args.User, args.User);
+
+        var ev = new SandbagDismantleDoAfterEvent(GetNetCoordinates(args.ClickLocation));
+        var doAfter = new DoAfterArgs(EntityManager, args.User, tool.Comp.DigDelay, ev, tool, args.Target, tool)
+        {
+            BreakOnMove = true,
+        };
+        _doAfter.TryStartDoAfter(doAfter);
+    }
+
+    private void OnSandbagDismantleDoAfter(Entity<EntrenchingToolComponent> tool, ref SandbagDismantleDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled)
+            return;
+
+        args.Handled = true;
+
+        if (_net.IsClient)
+            return;
+
+        if (!TryComp(args.Target, out BarricadeSandbagComponent? barricade))
+            return;
+        var full = Spawn(barricade.Material, EntityManager.GetCoordinates(args.Coordinates));
+
+        var bagsSalvaged = barricade.MaxMaterial;
+        if (bagsSalvaged <= 0 && TryComp(full, out FullSandbagComponent? fullSandbag))
+            bagsSalvaged = fullSandbag.StackRequired;
+        if (TryComp(args.Target, out DamageableComponent? damageable))
+            bagsSalvaged -= Math.Max((int) damageable.TotalDamage / barricade.MaterialLossDamageInterval - 1, 0);
+
+        Del(args.Target);
+
+        if (bagsSalvaged <= 0)
+        {
+            Del(full);
+            return;
+        }
+
+        if (TryComp(full, out StackComponent? fullStack))
+            _stack.SetCount(full, bagsSalvaged, fullStack);
     }
 
     private void OnDoAfter(Entity<EntrenchingToolComponent> tool, ref EntrenchingToolDoAfterEvent args)

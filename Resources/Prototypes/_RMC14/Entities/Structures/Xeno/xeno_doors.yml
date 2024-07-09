@@ -125,3 +125,5 @@
     xenoDamage:
       types:
         Slash: 900
+  - type: XenoConstructionPlasmaCost
+    plasma: 145

@@ -5,6 +5,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
@@ -65,6 +66,8 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoNestedComponent, AttackAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, ChangeDirectionAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, DownAttemptEvent>(OnNestedCancel);
+        SubscribeLocalEvent<XenoNestedComponent, IsEquippingAttemptEvent>(OnNestedCancel);
+        SubscribeLocalEvent<XenoNestedComponent, IsUnequippingAttemptEvent>(OnNestedCancel);
     }
 
     private void OnXenoGetUsedEntity(Entity<XenoComponent> ent, ref GetUsedEntityEvent args)
