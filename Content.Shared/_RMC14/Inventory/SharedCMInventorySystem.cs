@@ -360,7 +360,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         if (slots.Count == 0)
             return false;
 
-        slots.Sort();
+        slots.Sort(ItemSlotsSystem.SortEmpty);
 
         itemSlot = slots[0];
         return true;
