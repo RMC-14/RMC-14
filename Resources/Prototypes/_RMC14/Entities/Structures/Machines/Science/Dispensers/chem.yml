@@ -23,7 +23,7 @@
     storageWhitelist:
       tags:
       - ChemDispensable
-    pack: RMCEmptyInventory
+    pack: RMCDispenserChemInventory
   - type: Machine
     board: CMCircuitboardDispenserChem
   - type: ApcPowerReceiver
