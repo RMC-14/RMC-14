@@ -349,7 +349,7 @@
       components:
       - Xeno
   - type: UseDelay
-    delay: 0.7
+    delay: 0.3
 
 - type: entity
   parent: CMBarricadeMetalDoor
