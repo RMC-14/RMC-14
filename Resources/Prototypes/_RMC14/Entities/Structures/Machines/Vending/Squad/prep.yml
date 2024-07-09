@@ -395,8 +395,8 @@
       #  amount: 2
       #- id: CMSparePDTLBattleBuddyKit
       #  amount: 3
-      #- id: CMPowerCellWYRechargeableMini
-      #  amount: 2
+      - id: CMPowerCellCrap
+        amount: 2
 
 
 - type: entity

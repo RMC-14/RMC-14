@@ -1,7 +1,7 @@
 - type: entity
   noSpawn: true
   parent: BaseAPC
-  id: CMApcBase
+  id: RMCAPCBase
   name: area power controller
   components:
   - type: AccessReader
@@ -36,7 +36,7 @@
     sprite: _RMC14/Structures/Power/apc.rsi
     state: base
   - type: Construction
-    graph: CMApc
+    graph: RMAPC
   - type: Destructible
     thresholds:
     - trigger:
@@ -72,13 +72,13 @@
 - type: entity
   noSpawn: true
   parent: APCFrame
-  id: CMApcFrame
+  id: RMCAPCFrame
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Power/apc.rsi
     state: panel
   - type: Construction
-    graph: CMApc
+    graph: RMAPC
   - type: Destructible
     thresholds:
     - trigger:
@@ -101,35 +101,43 @@
 
 # Constructed APC
 - type: entity
-  parent: CMApcBase
-  id: CMApcConstructed
+  parent: RMCAPCBase
+  id: RMCAPCConstructed
   suffix: APC, Open
 
 # APCs in use
 - type: entity
-  parent: CMApcBase
-  id: CMApcLowCapacity
-  suffix: APC, Small powercell, 50kW
-  components: # TODO RMC14 / TODO RMC14 make apc use powercells
-  - type: Battery
-    maxCharge: 50000
-    startingCharge: 50000
+  parent: RMCAPCBase
+  id: RMCAPCWeak
+  suffix: APC, Weak
+  components:
+  - type: ContainerFill
+    containers:
+      cell_slot: [ RMCPowerCell ]
 
 - type: entity
-  parent: CMApcBase
-  id: CMApcMediumCapacity
-  suffix: APC, Medium powercell, 100kW
+  parent: RMCAPCBase
+  id: RMCAPCHigh
+  suffix: APC, High
   components:
-  - type: Battery
-    maxCharge: 100000
-    startingCharge: 100000
+  - type: ContainerFill
+    containers:
+      cell_slot: [ RMCPowerCellHigh ]
 
 - type: entity
-  parent: CMApcBase
-  id: CMApcHighCapacity
-  suffix: APC, High powercell, 150kW
+  parent: RMCAPCBase
+  id: RMCAPCSuper
+  suffix: APC, Super
   components:
-  - type: Battery
-    maxCharge: 150000
-    startingCharge: 150000
+  - type: ContainerFill
+    containers:
+      cell_slot: [ RMCPowerCellSuper ]
 
+- type: entity
+  parent: RMCAPCBase
+  id: RMCAPCHyper
+  suffix: APC, Hyper
+  components:
+  - type: ContainerFill
+    containers:
+      cell_slot: [ RMCPowerCellHyper ]

@@ -1,6 +1,6 @@
 - type: constructionGraph
   parent: RMC
-  id: CMApc
+  id: RMCAPC
   start: start
   graph:
   - node: start
@@ -15,7 +15,7 @@
         doAfter: 2
 
   - node: apcFrame
-    entity: CMApcFrame
+    entity: RMCAPCFrame
     edges:
     - to: apc
       steps:
@@ -39,7 +39,7 @@
         doAfter: 5
 
   - node: apc
-    entity: CMApcConstructed
+    entity: RMCAPCConstructed
     edges:
     - to: apcFrame
       completed:
@@ -52,3 +52,5 @@
       steps:
       - tool: Prying
         doAfter: 5
+
+# TODO RMC14 add constructions nodes for weak, high. super

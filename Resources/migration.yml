@@ -512,3 +512,7 @@ ArmatAttachments: CMVendorAttachments
 
 # 2024-07-1
 CMDispenserChem : RMCDispenserChem
+
+# 2024-07-09
+CMApcLowCapacity: RMCAPCWeak
+CMApcMediumCapacity: RMCAPCHigh
