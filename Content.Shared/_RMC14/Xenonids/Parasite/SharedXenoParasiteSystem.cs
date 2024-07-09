@@ -20,6 +20,7 @@ using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Rounding;
 using Content.Shared.Standing;
+using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -51,6 +52,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
 
     public override void Initialize()
     {
@@ -338,6 +340,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         victimComp.RecoverAt = time + parasite.Comp.ParalyzeTime;
         victimComp.Hive = CompOrNull<XenoComponent>(parasite)?.Hive ?? default;
         _stun.TryParalyze(victim, parasite.Comp.ParalyzeTime, true);
+        _status.TryAddStatusEffect(victim, "Muted", parasite.Comp.ParalyzeTime, true, "Muted");
 
         var container = _container.EnsureContainer<ContainerSlot>(victim, victimComp.ContainerId);
         _container.Insert(parasite.Owner, container);
