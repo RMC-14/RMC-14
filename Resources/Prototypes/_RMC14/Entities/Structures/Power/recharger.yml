@@ -1,0 +1,57 @@
+- type: entity
+  parent: BaseRecharger
+  id: RMCRecharger
+  name: recharger
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Power/recharger.rsi
+    drawdepth: SmallObjects
+    layers:
+    - state: recharger
+      #map: ["enum.PowerChargerVisualLayers.Base"] # TODO RMC14 charge visuals
+    - state: recharger-0
+      #map: ["enum.PowerChargerVisualLayers.Light"]
+      shader: unshaded
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.10,-0.10,0.10,0.10"
+        density: 500
+        mask:
+        - TabletopMachineMask
+        layer:
+        - BulletImpassable
+  - type: ContainerContainer
+    containers:
+      charger_slot: !type:ContainerSlot
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: ApcPowerReceiver
+    needsPower: false # TODO RMC14
+    powerLoad: 0 #15 kW
+  - type: Charger
+    chargeRate: 1000
+  - type: ItemSlots
+    slots:
+      charger_slot:
+        ejectOnInteract: true
+        whitelist:
+          components:
+          - Stunbaton
+          - PowerCell
+          - ProjectileBatteryAmmoProvider
+          - Defibrillator
+          # SmartGun Battery
+  - type: ItemMapper
+    sprite: _RMC14/Structures/Power/recharger.rsi
+    mapLayers:
+      recharger-taser:
+        whitelist:
+          tags:
+            - Taser
+      recharger-baton:
+        whitelist:
+          components:
+            - Stunbaton
