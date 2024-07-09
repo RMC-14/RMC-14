@@ -42,7 +42,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: WeaponDisabler # TODO RMC14 cm taser
+    - id: RMCWeaponTaser
     - id: CMFlash
     - id: CMStunbaton
     - id: CMHandcuffs
