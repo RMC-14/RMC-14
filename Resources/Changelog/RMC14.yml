@@ -2682,5 +2682,12 @@
   id: 328
   time: '2024-07-09T19:29:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2871
+- author: diraven
+  changes:
+  - message: Xenos in "watch xeno" skill ui are now sorted alphabetically.
+    type: Tweak
+  id: 329
+  time: '2024-07-09T19:30:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2934
 Name: RMC14
 Order: -1
