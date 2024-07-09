@@ -395,7 +395,7 @@
       #  amount: 2
       #- id: CMSparePDTLBattleBuddyKit
       #  amount: 3
-      - id: CMPowerCellCrap
+      - id: RMCPowerCellCrap
         amount: 2
 
 
