@@ -2668,5 +2668,12 @@
   id: 326
   time: '2024-07-09T11:08:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2927
+- author: DrSmugleaf
+  changes:
+  - message: Fixed eggs being able to infect through corners.
+    type: Fix
+  id: 327
+  time: '2024-07-09T19:23:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2931
 Name: RMC14
 Order: -1
