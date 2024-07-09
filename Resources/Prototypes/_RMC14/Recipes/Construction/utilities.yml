@@ -1,8 +1,8 @@
 - type: construction
   parent: RMC
   name: APC
-  id: RMCAPC
-  graph: RMCAPC
+  id: CMApc
+  graph: CMApc
   startNode: start
   targetNode: apc
   category: construction-category-cm-utilities
