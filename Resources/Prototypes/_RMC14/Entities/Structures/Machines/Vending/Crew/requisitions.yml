@@ -229,7 +229,7 @@
       #  amount: 3
       - id: CMFireExtinguisherPortable
         amount: 3
-      - id: PowerCellHigh # TODO RMC14 use cm prototype
+      - id: RMCPowerCellHigh
         amount: 1
       #- id: Fulton Device Stack
       #  amount: 1
