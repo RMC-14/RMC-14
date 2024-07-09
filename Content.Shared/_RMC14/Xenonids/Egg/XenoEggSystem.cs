@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
@@ -14,9 +15,11 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StepTrigger.Systems;
+using Content.Shared.Tag;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -34,9 +37,12 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+
+    private static readonly ProtoId<TagPrototype> _structureTag = "Structure";
 
     public override void Initialize()
     {
@@ -85,8 +91,9 @@ public sealed class XenoEggSystem : EntitySystem
         {
             BreakOnMove = true,
         };
+
         if (_doAfter.TryStartDoAfter(doAfterArgs))
-            _popup.PopupClient(Loc.GetString(popup), xeno, xeno, PopupType.Medium);
+            _popup.PopupClient(Loc.GetString(popup), xeno, xeno, popupType);
     }
 
     private void OnXenoGrowOvipositorDoAfter(Entity<XenoComponent> xeno, ref XenoGrowOvipositorDoAfterEvent args)
@@ -178,7 +185,17 @@ public sealed class XenoEggSystem : EntitySystem
         {
             if (HasComp<XenoEggComponent>(uid))
             {
-                _popup.PopupClient(Loc.GetString("cm-xeno-egg-failed-already-there"), uid.Value, user);
+                var msg = Loc.GetString("cm-xeno-egg-failed-already-there");
+                _popup.PopupClient(msg, uid.Value, user, PopupType.SmallCaution);
+                args.Handled = true;
+                return;
+            }
+
+            if (HasComp<XenoConstructComponent>(uid) ||
+                _tags.HasTag(uid.Value, _structureTag))
+            {
+                var msg = Loc.GetString("cm-xeno-egg-blocked");
+                _popup.PopupClient(msg, uid.Value, user, PopupType.SmallCaution);
                 args.Handled = true;
                 return;
             }
