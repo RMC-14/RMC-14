@@ -353,6 +353,8 @@
     blacklist:
       components:
       - Xeno
+  - type: UseDelay
+    delay: 0.3
 
 - type: entity
   parent: CMBarricadeMetalDoor
