@@ -25,6 +25,7 @@ public sealed class XenoTailSweepSystem : EntitySystem
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _hit = new();
@@ -63,6 +64,9 @@ public sealed class XenoTailSweepSystem : EntitySystem
         var origin = _transform.GetMapCoordinates(xeno);
         foreach (var marine in _hit)
         {
+            if (!_xeno.CanAbilityAttackTarget(xeno, marine))
+                return;
+
             var marineCoords = _transform.GetMapCoordinates(marine);
             var diff = marineCoords.Position - origin.Position;
             diff *= xeno.Comp.Range / 3;

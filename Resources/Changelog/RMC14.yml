@@ -2328,5 +2328,307 @@
   id: 286
   time: '2024-07-07T04:12:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2859
+- author: DrSmugleaf
+  changes:
+  - message: Fix the patron perks window initially showing the lobby message tab even
+      if the user's tier doesn't have that perk.
+    type: Fix
+  id: 287
+  time: '2024-07-07T11:11:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2869
+- author: DrSmugleaf
+  changes:
+  - message: Fixed barbed wire damage not piercing through xeno armor. It now always
+      deals the same amount of damage, regardless of armor.
+    type: Fix
+  - message: Fixed barbed wire damage being too low. It now deals 10 damage, up from
+      6.
+    type: Fix
+  id: 288
+  time: '2024-07-08T02:26:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2872
+- author: DrSmugleaf
+  changes:
+  - message: Fixed explosions destroying destroyable items inside backpacks, belts,
+      pouches, webbings, armors and helmets. Any items stored inside will no longer
+      be destroyed by an explosion.
+    type: Fix
+  - message: Helmets now have two slots for items instead of a single 3 space area,
+      allowing for two injectors, bandages, ointments or pill packets to fit inside,
+      for example.
+    type: Tweak
+  - message: 'Fixed small items fitting into helmets. Only tiny items and the following
+      items can be fit into helmets: auto injectors, pill packets, bandages, ointment,
+      flasks, scalpels, cigarettes, pizza slices, pens, crayons and flashlights,'
+    type: Fix
+  id: 289
+  time: '2024-07-08T02:26:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2868
+- author: DrSmugleaf
+  changes:
+  - message: Fixed thick resin structures (the hivelord ones) being cheaper to build
+      than intended. The thick wall now costs 170 plasma, up from 120. The thick membrane
+      now costs 120, up from 95. The thick door now costs 145, up from 120.
+    type: Fix
+  id: 290
+  time: '2024-07-08T02:26:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2873
+- author: DrSmugleaf
+  changes:
+  - message: Fixed being able to eat req invoices and being able to put them into
+      fax machines.
+    type: Fix
+  id: 291
+  time: '2024-07-08T02:26:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2884
+- author: DrSmugleaf
+  changes:
+  - message: Fixed microwaves being invincible.
+    type: Fix
+  id: 292
+  time: '2024-07-08T03:43:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2888
+- author: DrSmugleaf
+  changes:
+  - message: Fixed crushers, defenders, runners and other xenonid castes sometimes
+      being able to charge or leap through barricades.
+    type: Fix
+  id: 293
+  time: '2024-07-08T03:43:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2889
+- author: DrSmugleaf
+  changes:
+  - message: Fixed marines not being able to take out their boot knife to attack xenonids
+      while devoured.
+    type: Fix
+  id: 294
+  time: '2024-07-08T03:45:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2891
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the grenadier armor not being able to fit any items.
+    type: Fix
+  - message: Fixed the grenadier armor only having 2 slots, it now has 3 slots.
+    type: Fix
+  - message: Fixed armor not being able to fit grenades.
+    type: Fix
+  id: 295
+  time: '2024-07-08T03:45:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2887
+- author: DrSmugleaf
+  changes:
+  - message: Fixed being able to drop equipped items to the ground while nested.
+    type: Fix
+  id: 296
+  time: '2024-07-08T03:45:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2890
+- author: diraven
+  changes:
+  - message: Fixed metal barricades and sandbags damage thresholds for them to look
+      more progressively more broken rather then almost fully destroyed after a slightest
+      hit.
+    type: Fix
+  id: 297
+  time: '2024-07-08T03:48:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2881
+- author: ShadowCommander
+  changes:
+  - message: Added unfolding magazine boxes into cardboard sheets.
+    type: Add
+  id: 298
+  time: '2024-07-08T03:55:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2855
+- author: diraven
+  changes:
+  - message: Added an ability to climb metal barricades that do not have barbed wire.
+    type: Add
+  id: 299
+  time: '2024-07-08T05:18:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2865
+- author: Whisper
+  changes:
+  - message: Cardboard box crate now gives a stack of cardboard instead
+    type: Tweak
+  id: 300
+  time: '2024-07-08T09:09:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2893
+- author: DrSmugleaf
+  changes:
+  - message: Temporarily added an autobalance feature that will change the ratio of
+      marines per xeno round-start depending on round outcome. This was already being
+      done by the hosts manually from time to time but is now automatic.
+    type: Add
+  id: 301
+  time: '2024-07-08T09:09:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2892
+- author: DrSmugleaf
+  changes:
+  - message: The dropship crew hatches can now be locked by the pilot from the navigation
+      computer.
+    type: Add
+  - message: Fixed dropship doors not closing during travel if someone is in the way.
+    type: Fix
+  - message: Fixed being able to build barricades and other fortifications on or move
+      existing ones onto dropships.
+    type: Fix
+  - message: Fixed dropships having no initial cooldown, They now need 15 minutes
+      of round time to pass before they can start flying.
+    type: Fix
+  - message: Fixed dropship crew hatches being corrodible.
+    type: Fix
+  - message: The health of dropship crew hatches has been doubled to 1000 as a temporary
+      measure until separate prying timers for xenos and marines is implemented.
+    type: Tweak
+  id: 302
+  time: '2024-07-08T10:19:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2894
+- author: Dorragon
+  changes:
+  - message: Medical crew vendor
+    type: Add
+  id: 303
+  time: '2024-07-08T10:55:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2829
+- author: DrSmugleaf
+  changes:
+  - message: 'Added the Warrior''s missing passive: lifesteal on melee hits. Limited
+      to 1 heal per melee attack, it heals the Warrior for 7% of its current missing
+      health, adding 1% for each marine that is within a 3 tile radius of it, to a
+      maximum of 9% total. Minimum heal of 20, maximum heal of 40. A popup is displayed
+      to the Warrior and marines if the max of 9% is reached. This does not count
+      nested nor dead marines.'
+    type: Fix
+  - message: Fixed the Warrior's abilities being able to target weeds, items, and
+      dead marines. Warrior abilities now remain selected until a valid target is
+      clicked, or the ability is cancelled with right click.
+    type: Fix
+  id: 304
+  time: '2024-07-08T11:06:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2897
+- author: UnicornOnLSD
+  changes:
+  - message: Marines have finally developped kinetic reflexes for machetes ! (You
+      can now use holster keys on machete pouch)
+    type: Add
+  id: 305
+  time: '2024-07-08T11:07:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2851
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenos being affected by camera recoil from bullet hits.
+    type: Fix
+  id: 306
+  time: '2024-07-08T11:06:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2896
+- author: snebl
+  changes:
+  - message: Fixed sandbag barricades being repairable with a welder.
+    type: Fix
+  id: 307
+  time: '2024-07-08T11:06:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2899
+- author: Mattshark89
+  changes:
+  - message: The Queen's screech no longer affects marines behind opaque walls. It
+      still affects marines behind barricades.
+    type: Tweak
+  id: 308
+  time: '2024-07-08T11:11:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2866
+- author: UnicornOnLSD
+  changes:
+  - message: Several medical sprites are now BLU, per player demand.
+    type: Add
+  id: 309
+  time: '2024-07-08T11:24:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2895
+- author: DrSmugleaf
+  changes:
+  - message: All caps including surgical can now hold any combination of 2 lighters,
+      cigarettes and matchsticks.
+    type: Tweak
+  id: 310
+  time: '2024-07-08T11:24:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2900
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the defender being able to push nested marines deeper into the
+      walls with its abilities.
+    type: Fix
+  id: 311
+  time: '2024-07-08T11:52:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2901
+- author: ShadowCommander
+  changes:
+  - message: Ship staff no longer spawn hungry.
+    type: Fix
+  id: 312
+  time: '2024-07-08T20:47:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2904
+- author: diraven
+  changes:
+  - message: Pheromones icons are now shown even without direct line of sight.
+    type: Tweak
+  id: 313
+  time: '2024-07-08T21:28:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2910
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the lifesaver bag's storage UI being extremely long, it is now
+      split into 3 rows instead. Same storage space as before.
+    type: Fix
+  id: 314
+  time: '2024-07-08T22:05:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2912
+- author: DrSmugleaf
+  changes:
+  - message: Fixed a bug where the health bar overlay for xenos would sometimes momentarily
+      disappear.
+    type: Fix
+  id: 315
+  time: '2024-07-08T22:05:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2911
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenos not being able to corrode folding barricades.
+    type: Fix
+  id: 316
+  time: '2024-07-08T22:05:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2913
+- author: DrSmugleaf
+  changes:
+  - message: Xenos can now see non-xenos hidden in lockers after a hijack.
+    type: Tweak
+  id: 317
+  time: '2024-07-09T00:03:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2920
+- author: DrSmugleaf
+  changes:
+  - message: Fixed being able to deconstruct the ASRS console.
+    type: Fix
+  id: 318
+  time: '2024-07-09T00:48:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2919
+- author: Tunguso4ka
+  changes:
+  - message: Ported disabler gun!
+    type: Add
+  id: 319
+  time: '2024-07-09T00:49:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2916
+- author: DrSmugleaf
+  changes:
+  - message: Added pod door buttons.
+    type: Add
+  id: 320
+  time: '2024-07-09T03:51:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2922
+- author: Sphiral
+  changes:
+  - message: Barricades now have a 0.7 use delay
+    type: Tweak
+  id: 321
+  time: '2024-07-09T04:09:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2837
 Name: RMC14
 Order: -1

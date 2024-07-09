@@ -75,6 +75,7 @@
   - type: XenoWeedable
     spawn: XenoWeedsWall
   - type: XenoConstructionSupport
+  - type: RMCDropshipBlocked
 
 - type: entity
   abstract: true

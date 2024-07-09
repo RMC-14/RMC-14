@@ -64,16 +64,16 @@
     snapCardinals: true
     layers:
     - state: mw0
-      map: ["enum.MicrowaveVisualizerLayers.Base"]
+      map: [ "enum.MicrowaveVisualizerLayers.Base" ]
     - state: mw_unlit
       shader: unshaded
-      map: ["enum.MicrowaveVisualizerLayers.BaseUnlit"]
+      map: [ "enum.MicrowaveVisualizerLayers.BaseUnlit" ]
     - state: mwbloody0
-      map: ["bloody"]
+      map: [ "bloody" ]
       visible: false
     - state: mwbloody1
       shader: unshaded
-      map: ["bloodyunshaded"]
+      map: [ "bloodyunshaded" ]
       visible: false
   - type: Destructible
     thresholds:
@@ -82,7 +82,7 @@
         damage: 100
       behaviors:
       - !type:DoActsBehavior
-        acts: ["Breakage"]
+        acts: [ "Destruction" ]
   - type: Explosive
     explosionType: Default
     maxIntensity: 10

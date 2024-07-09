@@ -63,6 +63,7 @@ max_connections = 1024
 [physics]
 maxlinvelocity = 51
 grid_splitting = false
+target_minimum_tickrate = 120
 
 [replay]
 auto_record = true

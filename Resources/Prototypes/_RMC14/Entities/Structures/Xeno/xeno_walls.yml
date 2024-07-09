@@ -54,6 +54,8 @@
     xenoDamage:
       types:
         Slash: 338
+  - type: XenoConstructionPlasmaCost
+    plasma: 170
 
 - type: entity
   parent: CMBaseWallXeno
@@ -141,3 +143,5 @@
     xenoDamage:
       types:
         Slash: 300
+  - type: XenoConstructionPlasmaCost
+    plasma: 120

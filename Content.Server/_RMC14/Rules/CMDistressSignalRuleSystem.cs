@@ -26,6 +26,7 @@ using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
@@ -63,6 +64,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly ContainerSystem _containers = default!;
     [Dependency] private readonly DropshipSystem _dropship = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly MarineSystem _marines = default!;
     [Dependency] private readonly MindSystem _mind = default!;
@@ -90,10 +92,24 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         CCVars.FTLCooldown,
     ];
 
-    private readonly List<MapId> _almayerMaps = [];
+    private readonly HashSet<string> _operationNames = new();
+    private readonly HashSet<string> _operationPrefixes = new();
+    private readonly HashSet<string> _operationSuffixes = new();
+
+    private string _planetMaps = default!;
     private float _marinesPerXeno;
+    private bool _autoBalance;
+    private float _autoBalanceStep;
+    private float _autoBalanceMin;
+    private float _autoBalanceMax;
+
+    private readonly List<MapId> _almayerMaps = [];
 
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
+
+    public string? SelectedPlanetMap { get; private set; }
+    public string? SelectedPlanetMapName { get; private set; }
+    public string? OperationName { get; private set; }
 
     public override void Initialize()
     {
@@ -101,10 +117,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         _xenoNestedQuery = GetEntityQuery<XenoNestedComponent>();
 
+        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+
         SubscribeLocalEvent<RulePlayerSpawningEvent>(OnRulePlayerSpawning);
         SubscribeLocalEvent<PlayerSpawningEvent>(OnPlayerSpawning,
             before: [typeof(ArrivalsSystem), typeof(SpawnPointSystem)]);
         SubscribeLocalEvent<RoundEndMessageEvent>(OnRoundEndMessage);
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
         SubscribeLocalEvent<MarineComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<MarineComponent, ComponentRemove>(OnCompRemove);
@@ -116,7 +135,20 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         SubscribeLocalEvent<AlmayerComponent, MapInitEvent>(OnAlmayerMapInit);
 
+        Subs.CVar(_config, CMCVars.RMCPlanetMaps, v => _planetMaps = v, true);
         Subs.CVar(_config, CMCVars.CMMarinesPerXeno, v => _marinesPerXeno = v, true);
+        Subs.CVar(_config, CMCVars.RMCAutoBalance, v => _autoBalance = v, true);
+        Subs.CVar(_config, CMCVars.RMCAutoBalanceStep, v => _autoBalanceStep = v, true);
+        Subs.CVar(_config, CMCVars.RMCAutoBalanceMax, v => _autoBalanceMax = v, true);
+        Subs.CVar(_config, CMCVars.RMCAutoBalanceMin, v => _autoBalanceMin = v, true);
+
+        ReloadPrototypes();
+    }
+
+    private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
+    {
+        if (ev.WasModified<EntityPrototype>())
+            ReloadPrototypes();
     }
 
     private void OnRulePlayerSpawning(RulePlayerSpawningEvent ev)
@@ -127,6 +159,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         {
             if (!GameTicker.IsGameRuleAdded(uid, gameRule))
                 continue;
+
+            OperationName = GetRandomOperationName();
 
             comp.Hive = Spawn(comp.HiveId);
             if (!SpawnXenoMap((uid, comp)))
@@ -381,10 +415,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 {
                     EnsureComp<AlmayerComponent>(xform.GridUid.Value);
                 }
-            }
 
-            if (TryComp(ev.SpawnResult, out HungerComponent? hunger))
-                _hunger.SetHunger(ev.SpawnResult.Value, 50.0f, hunger);
+                if (TryComp(ev.SpawnResult, out HungerComponent? hunger))
+                    _hunger.SetHunger(ev.SpawnResult.Value, 50.0f, hunger);
+            }
 
             _gunIFF.SetUserFaction(ev.SpawnResult.Value, comp.MarineFaction);
             return;
@@ -416,6 +450,39 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         }
     }
 
+    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
+    {
+        if (!_autoBalance)
+            return;
+
+        var rules = QueryAllRules();
+        while (rules.MoveNext(out var comp, out _))
+        {
+            var adjust = comp.Result switch
+            {
+                DistressSignalRuleResult.None => 0,
+                DistressSignalRuleResult.MajorMarineVictory => -1,
+                DistressSignalRuleResult.MinorMarineVictory => -1,
+                DistressSignalRuleResult.MajorXenoVictory => 1,
+                DistressSignalRuleResult.MinorXenoVictory => 0, // hijack but all xenos die
+                DistressSignalRuleResult.AllDied => 0,
+                _ => throw new ArgumentOutOfRangeException(),
+            };
+
+            if (adjust == 0)
+                continue;
+
+            var value = _marinesPerXeno + adjust * _autoBalanceStep;
+            if (value > _autoBalanceMax)
+                value = _autoBalanceMax;
+            else if (value < _autoBalanceMin)
+                value = _autoBalanceMin;
+
+            _config.SetCVar(CMCVars.CMMarinesPerXeno, value);
+            break;
+        }
+    }
+
     private void OnMobStateChanged<T>(Entity<T> ent, ref MobStateChangedEvent args) where T : IComponent?
     {
         if (args.NewMobState == MobState.Dead)
@@ -435,6 +502,25 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private void OnAlmayerMapInit(Entity<AlmayerComponent> almayer, ref MapInitEvent args)
     {
         GridInfinitePower(almayer);
+    }
+
+    private void ReloadPrototypes()
+    {
+        _operationNames.Clear();
+        _operationPrefixes.Clear();
+        _operationSuffixes.Clear();
+
+        foreach (var prototype in _prototypes.EnumeratePrototypes<EntityPrototype>())
+        {
+            if (prototype.TryGetComponent(out RMCDistressSignalNamesComponent? names, _compFactory))
+                _operationNames.UnionWith(names.Names);
+
+            if (prototype.TryGetComponent(out RMCDistressSignalPrefixesComponent? prefixes, _compFactory))
+                _operationPrefixes.UnionWith(prefixes.Prefixes);
+
+            if (prototype.TryGetComponent(out RMCDistressSignalSuffixesComponent? suffixes, _compFactory))
+                _operationSuffixes.UnionWith(suffixes.Suffixes);
+        }
     }
 
     protected override void OnStartAttempt(Entity<CMDistressSignalRuleComponent, GameRuleComponent> gameRule, RoundStartAttemptEvent ev)
@@ -485,16 +571,21 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             distress.NextCheck ??= Timing.CurTime + distress.CheckEvery;
 
+            var hijack = false;
             var dropshipQuery = EntityQueryEnumerator<DropshipComponent>();
             while (dropshipQuery.MoveNext(out var dropship))
             {
                 if (dropship.Crashed)
-                    distress.Hijack = true;
+                    hijack = true;
             }
 
             var time = Timing.CurTime;
-            if (distress.Hijack)
+            if (!distress.Hijack && hijack)
+            {
+                distress.Hijack = true;
                 distress.AbandonedAt ??= time + distress.AbandonedDelay;
+                _hive.SetSeeThroughContainers(distress.Hive, true);
+            }
 
             _almayerMaps.Clear();
             var almayerQuery = EntityQueryEnumerator<AlmayerComponent, TransformComponent>();
@@ -611,7 +702,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     {
         // TODO RMC14 different planet-side maps
         var mapId = _mapManager.CreateMap();
-        if (!_mapLoader.TryLoad(mapId, "/Maps/_RMC14/lv624.yml", out var grids) ||
+        SelectedPlanetMap = _random.Pick(_planetMaps.Split(","));
+        SelectedPlanetMapName = SelectedPlanetMap.Replace("/Maps/_RMC14/", "").Replace(".yml", "");
+        if (!_mapLoader.TryLoad(mapId, SelectedPlanetMap, out var grids) ||
             grids.Count == 0)
         {
             return false;
@@ -882,6 +975,21 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 yield return ent;
             }
         }
+    }
+
+    private string GetRandomOperationName()
+    {
+        var name = string.Empty;
+        if (_operationNames.Count > 0)
+            name += $"{_random.Pick(_operationNames)} ";
+
+        if (_operationPrefixes.Count > 0)
+            name += $"{_random.Pick(_operationPrefixes)}";
+
+        if (_operationSuffixes.Count > 0)
+            name += $"-{_random.Pick(_operationSuffixes)}";
+
+        return name.Trim();
     }
 }
 

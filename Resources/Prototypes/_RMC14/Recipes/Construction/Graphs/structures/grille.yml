@@ -1,0 +1,45 @@
+- type: constructionGraph
+  id: RMCGrille
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: Grille
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      steps:
+      - material: CMRodMetal
+        amount: 4
+        doAfter: 1
+
+  - node: Grille
+    entity: RMCGrille
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMRodMetal1
+        amount: 1
+      - !type:DeleteEntity
+      steps:
+      - tool: Cutting
+        doAfter: 0.25
+
+  - node: grilleBroken
+    entity: RMCGrilleBroken
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMRodMetal1
+        amount: 1
+      - !type:DeleteEntity
+      steps:
+      - tool: Cutting
+        doAfter: 0.25
+    - to: Grille
+      steps:
+      - material: CMRodMetal
+        amount: 1
+        doAfter: 0.5

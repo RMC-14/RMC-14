@@ -32,6 +32,9 @@
           Medium: { state: magaz_reg_2, visible: true }
           High: { state: magaz_reg_3, visible: true }
           Full: { state: magaz_reg, visible: true }
+  - type: RMCUnfoldCardboard
+    spawns:
+    - id: RMCSheetCardboard1
 
 - type: entity
   abstract: true

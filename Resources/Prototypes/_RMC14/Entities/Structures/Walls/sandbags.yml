@@ -25,7 +25,6 @@
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: CMSandbag
-  - type: Repairable
   - type: Destructible
     thresholds:
     - trigger:
@@ -39,14 +38,14 @@
         acts: [ "Destruction" ]
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 2
+    damageDivisor: 25
     trackAllDamage: true
     damageOverlay:
       sprite: _RMC14/Structures/Walls/Barricades/sandbag_cracks.rsi
   - type: Barbed
     thornsDamage:
       types:
-        Slash: 6
+        Slash: 10
 
 - type: entity
   parent: BaseItem
@@ -106,6 +105,15 @@
   - type: Stack
     stackType: CMSandbagFull
     count: 50
+
+- type: entity
+  parent: CMSandbagFull
+  id: CMSandbagFull25
+  suffix: "25"
+  components:
+  - type: Stack
+    stackType: CMSandbagFull
+    count: 25
 
 - type: stack
   id: CMSandbagEmpty

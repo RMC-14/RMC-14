@@ -13,6 +13,7 @@ using Content.Shared.Rounding;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
+using Robust.Client.ResourceManagement;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -27,6 +28,7 @@ public sealed class XenoHudOverlay : Overlay
     [Dependency] private readonly IOverlayManager _overlay = default!;
     [Dependency] private readonly IPlayerManager _players = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IResourceCache _resourceCache = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly ContainerSystem _container;
@@ -48,6 +50,8 @@ public sealed class XenoHudOverlay : Overlay
     public override OverlaySpace Space => _overlay.HasOverlay<NightVisionOverlay>()
         ? OverlaySpace.WorldSpace
         : OverlaySpace.WorldSpaceBelowFOV;
+
+    private readonly ResPath _rsiPath = new("/Textures/_RMC14/Interface/xeno_hud.rsi");
 
     public XenoHudOverlay()
     {
@@ -244,7 +248,11 @@ public sealed class XenoHudOverlay : Overlay
             state = $"xenohealth{name}";
         }
 
-        var icon = new Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_hud.rsi"), state);
+        var icon = new Rsi(_rsiPath, state);
+        var rsi = _resourceCache.GetResource<RSIResource>(icon.RsiPath).RSI;
+        if (!rsi.TryGetState(icon.RsiState, out _))
+            return;
+
         var texture = _sprite.GetFrame(icon, _timing.CurTime);
 
         var bounds = sprite.Bounds;

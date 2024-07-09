@@ -6,12 +6,14 @@ using Content.Server.Radio.EntitySystems;
 using Content.Server.Roles.Jobs;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
+using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
 using Content.Shared.Radio;
 using Robust.Server.Audio;
 using Robust.Shared.Audio;
+using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -23,12 +25,15 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     [Dependency] private readonly IAdminLogManager _adminLogs = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly JobSystem _job = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+
+    private int _characterLimit = 1000;
 
     public override void Initialize()
     {
@@ -39,6 +44,8 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
             {
                 subs.Event<MarineCommunicationsComputerMsg>(OnMarineCommunicationsComputerMsg);
             });
+
+        Subs.CVar(_config, CCVars.ChatMaxMessageLength, limit => _characterLimit = limit, true);
     }
 
     private void OnMarineCommunicationsComputerMsg(Entity<MarineCommunicationsComputerComponent> ent, ref MarineCommunicationsComputerMsg args)
@@ -53,7 +60,11 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
             return;
         }
 
-        Announce(args.Actor, args.Text, ent.Comp.Sound);
+        var text = args.Text;
+        if (text.Length > _characterLimit)
+            text = text[.._characterLimit].Trim();
+
+        Announce(args.Actor, text, ent.Comp.Sound);
 
         ent.Comp.LastAnnouncement = time;
         Dirty(ent);

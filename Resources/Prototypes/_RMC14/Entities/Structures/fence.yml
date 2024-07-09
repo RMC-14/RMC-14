@@ -28,3 +28,4 @@
   - type: Construction
     graph: CMFence
     node: fenceMetal
+  - type: RMCDropshipBlocked

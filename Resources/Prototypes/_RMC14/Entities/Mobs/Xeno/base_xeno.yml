@@ -39,7 +39,7 @@
   id: CMXenoBase
   abstract: true
   save: false
-  components:
+  components: # TODO RMC14 camera recoil from large explosions? check 13
   - type: Damageable
     damageContainer: Xeno
   - type: Destructible
@@ -99,7 +99,6 @@
   - type: Examiner
   - type: Eye
   - type: ContentEye
-  - type: CameraRecoil
   - type: MindContainer
     showExamineInfo: true
   - type: StatusIcon

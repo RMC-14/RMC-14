@@ -24,6 +24,7 @@
     damageContainer: Inorganic
     damageModifierSet: CMBarricade
   - type: InteractionOutline
+  - type: RMCDropshipBlocked
 
 # Metal Barricade Tree
 - type: entity
@@ -32,6 +33,7 @@
   name: metal barricade
   description: A metal barricade that keeps the unwanted out. Upgradable with metal, plasteel, or metal rods for different attributes. Repair with a welder.
   components:
+  - type: Climbable
   - type: Anchorable
   - type: MeleeSound
     soundGroups:
@@ -73,14 +75,14 @@
         acts: [ "Destruction" ]
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 2
+    damageDivisor: 25
     trackAllDamage: true
     damageOverlay:
       sprite: _RMC14/Structures/Walls/Barricades/metal_barricade_cracks.rsi
   - type: Barbed
     thornsDamage:
       types:
-        Slash: 6
+        Slash: 10
   - type: Construction
     graph: BarricadeMetalGraph
     node: nodeMetal
@@ -102,7 +104,7 @@
       damageModifierSet: CMBurnBarricade
     - type: DamageVisuals
       thresholds: [4, 8, 12]
-      damageDivisor: 2
+      damageDivisor: 25
       trackAllDamage: true
       damageOverlay:
         sprite: _RMC14/Structures/Walls/Barricades/burn_barricade_cracks.rsi
@@ -126,7 +128,7 @@
       damageModifierSet: CMBruteBarricade
     - type: DamageVisuals
       thresholds: [4, 8, 12]
-      damageDivisor: 2
+      damageDivisor: 25
       trackAllDamage: true
       damageOverlay:
         sprite: _RMC14/Structures/Walls/Barricades/brute_barricade_cracks.rsi
@@ -149,7 +151,7 @@
       damageCoefficient: 0.5
     - type: DamageVisuals
       thresholds: [4, 8, 12]
-      damageDivisor: 2
+      damageDivisor: 25
       trackAllDamage: true
       damageOverlay:
         sprite: _RMC14/Structures/Walls/Barricades/explosive_barricade_cracks.rsi
@@ -343,7 +345,7 @@
   - type: Barbed
     thornsDamage:
       types:
-        Slash: 6
+        Slash: 10
   - type: Construction
     graph: BarricadeMetalDoorGraph
     node: nodeBarricadeMetalDoor
@@ -351,6 +353,8 @@
     blacklist:
       components:
       - Xeno
+  - type: UseDelay
+    delay: 0.3
 
 - type: entity
   parent: CMBarricadeMetalDoor
