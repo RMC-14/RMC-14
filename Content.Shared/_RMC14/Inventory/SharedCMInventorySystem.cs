@@ -281,16 +281,14 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
         foreach (var slot in validSlots)
         {
-            _itemSlots.TryInsertEmpty(slot.Ent, item, user, true);
-
-            if (slot.ItemSlot != null)
-            {
-                _itemSlots.TryInsert(slot.Ent, slot.ItemSlot, item, user);
+            // Try insert into holster
+            if (slot.ItemSlot != null &&
+                _itemSlots.TryInsert(slot.Ent, slot.ItemSlot, item, user, excludeUserAudio: true))
                 return;
-            }
 
-            // Try equip to slot
-            if (slot.Slot != null && _inventory.TryEquip(user, item, slot.Slot.ID, true))
+            // Try equip to inventory slot
+            if (slot.Slot != null &&
+                _inventory.TryEquip(user, item, slot.Slot.ID, true))
                 return;
         }
 
