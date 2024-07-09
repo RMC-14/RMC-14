@@ -50,6 +50,8 @@
       path: /Audio/_RMC14/Machines/blastdoor.ogg
     closeSound:
       path: /Audio/_RMC14/Machines/blastdoor.ogg
+    performCollisionCheck: false
+    canCrush: false
   - type: Appearance
   - type: UserInterface
     interfaces:
@@ -64,6 +66,8 @@
 - type: entity
   parent: RMCShutterBase
   id: RMCShutterAlmayer
+  components:
+  - type: RMCPodDoor
 
 - type: entity
   parent: RMCShutterAlmayer

@@ -8015,11 +8015,6 @@ entities:
     - type: Transform
       pos: 167.5,-56.5
       parent: 1
-  - uid: 16823
-    components:
-    - type: Transform
-      pos: 167.5,-55.5
-      parent: 1
   - uid: 16824
     components:
     - type: Transform
@@ -8737,7 +8732,7 @@ entities:
       pos: 90.5,-90.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -3911.343
+      secondsUntilStateChange: -9314.089
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -9026,7 +9021,7 @@ entities:
       pos: 114.5,-63.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -1218.7186
+      secondsUntilStateChange: -6621.4644
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -9934,7 +9929,7 @@ entities:
       pos: 83.5,-133.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -4964.996
+      secondsUntilStateChange: -10367.742
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -15074,7 +15069,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 2730.2724706
     - type: Door
-      secondsUntilStateChange: -3930.4124
+      secondsUntilStateChange: -9333.158
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -15090,7 +15085,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 2730.2724706
     - type: Door
-      secondsUntilStateChange: -3930.4124
+      secondsUntilStateChange: -9333.158
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -44827,11 +44822,6 @@ entities:
     - type: Transform
       pos: 189.5,-53.5
       parent: 1
-  - uid: 16366
-    components:
-    - type: Transform
-      pos: 190.5,-53.5
-      parent: 1
   - uid: 16367
     components:
     - type: Transform
@@ -44887,6 +44877,11 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 163.5,-86.5
+      parent: 1
+  - uid: 16823
+    components:
+    - type: Transform
+      pos: 190.5,-53.5
       parent: 1
   - uid: 17261
     components:
@@ -144194,615 +144189,1126 @@ entities:
   entities:
   - uid: 17546
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 92.5,-142.5
       parent: 1
   - uid: 17586
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 90.5,-142.5
       parent: 1
   - uid: 17612
     components:
+    - type: MetaData
+      name: Lambda Checkpoint Interior
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 169.5,-84.5
       parent: 1
   - uid: 17613
     components:
+    - type: MetaData
+      name: Lambda Checkpoint Interior
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 169.5,-85.5
       parent: 1
   - uid: 17614
     components:
+    - type: MetaData
+      name: Filtration Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 138.5,-117.5
       parent: 1
   - uid: 17615
     components:
+    - type: MetaData
+      name: Filtration Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 138.5,-120.5
       parent: 1
   - uid: 17618
     components:
+    - type: MetaData
+      name: Filtration Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 138.5,-118.5
       parent: 1
   - uid: 17621
     components:
+    - type: MetaData
+      name: Lambda Checkpoint Exterior
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 163.5,-85.5
       parent: 1
   - uid: 17622
     components:
+    - type: MetaData
+      name: Lambda Lockdown
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 146.5,-28.5
       parent: 1
   - uid: 17623
     components:
+    - type: MetaData
+      name: Filtration Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 135.5,-117.5
       parent: 1
   - uid: 17631
     components:
+    - type: MetaData
+      name: Filtration Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 135.5,-119.5
       parent: 1
   - uid: 17632
     components:
+    - type: MetaData
+      name: Filtration Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 135.5,-120.5
       parent: 1
   - uid: 17633
     components:
+    - type: MetaData
+      name: Filtration Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 133.5,-141.5
       parent: 1
   - uid: 17634
     components:
+    - type: MetaData
+      name: Filtration Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 135.5,-118.5
       parent: 1
   - uid: 17640
     components:
+    - type: MetaData
+      name: Filtration Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 133.5,-144.5
       parent: 1
   - uid: 17684
     components:
+    - type: MetaData
+      name: Filtration Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 135.5,-141.5
       parent: 1
   - uid: 17685
     components:
+    - type: MetaData
+      name: Filtration Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 135.5,-144.5
       parent: 1
   - uid: 17686
     components:
+    - type: MetaData
+      name: Filtration Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 135.5,-140.5
       parent: 1
   - uid: 17687
     components:
+    - type: MetaData
+      name: Filtration Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 135.5,-143.5
       parent: 1
   - uid: 17689
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 93.5,-144.5
       parent: 1
   - uid: 17690
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 92.5,-144.5
       parent: 1
   - uid: 17691
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 91.5,-142.5
       parent: 1
   - uid: 19092
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 91.5,-144.5
       parent: 1
   - uid: 19128
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 103.5,-142.5
       parent: 1
   - uid: 19138
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 102.5,-142.5
       parent: 1
   - uid: 19140
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 102.5,-144.5
       parent: 1
   - uid: 19141
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 104.5,-142.5
       parent: 1
   - uid: 19142
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 105.5,-142.5
       parent: 1
   - uid: 19143
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 104.5,-144.5
       parent: 1
   - uid: 19144
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 103.5,-144.5
       parent: 1
   - uid: 19145
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 105.5,-144.5
       parent: 1
   - uid: 19149
     components:
+    - type: MetaData
+      name: Filtration Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 133.5,-142.5
       parent: 1
   - uid: 19150
     components:
+    - type: MetaData
+      name: Filtration Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 133.5,-139.5
       parent: 1
   - uid: 19151
     components:
+    - type: MetaData
+      name: Filtration Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 133.5,-143.5
       parent: 1
   - uid: 19152
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 93.5,-142.5
       parent: 1
   - uid: 19153
     components:
+    - type: MetaData
+      name: Virology Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 31.5,-71.5
       parent: 1
   - uid: 19160
     components:
+    - type: MetaData
+      name: Virology Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 33.5,-72.5
       parent: 1
   - uid: 19161
     components:
+    - type: MetaData
+      name: Virology Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 31.5,-73.5
       parent: 1
   - uid: 19162
     components:
+    - type: MetaData
+      name: Virology Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 31.5,-72.5
       parent: 1
   - uid: 19163
     components:
+    - type: MetaData
+      name: Virology Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 33.5,-71.5
       parent: 1
   - uid: 19164
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       pos: 45.5,-136.5
       parent: 1
   - uid: 19165
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       pos: 44.5,-136.5
       parent: 1
   - uid: 19172
     components:
+    - type: MetaData
+      name: closed
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 40.5,-166.5
       parent: 1
   - uid: 19174
     components:
+    - type: MetaData
+      name: closed
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 39.5,-166.5
       parent: 1
   - uid: 19176
     components:
+    - type: MetaData
+      name: closed
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 41.5,-166.5
       parent: 1
   - uid: 19179
     components:
+    - type: MetaData
+      name: closed
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 42.5,-166.5
       parent: 1
   - uid: 19187
     components:
+    - type: MetaData
+      name: closed
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 39.5,-161.5
       parent: 1
   - uid: 19188
     components:
+    - type: MetaData
+      name: closed
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 42.5,-161.5
       parent: 1
   - uid: 19189
     components:
+    - type: MetaData
+      name: closed
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 40.5,-161.5
       parent: 1
   - uid: 19190
     components:
+    - type: MetaData
+      name: closed
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 41.5,-161.5
       parent: 1
   - uid: 19201
     components:
+    - type: MetaData
+      name: closed
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 38.5,-166.5
       parent: 1
   - uid: 19202
     components:
+    - type: MetaData
+      name: Virology Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 33.5,-73.5
       parent: 1
   - uid: 19203
     components:
+    - type: MetaData
+      name: Lambda Checkpoint Interior
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 169.5,-82.5
       parent: 1
   - uid: 19204
     components:
+    - type: MetaData
+      name: Lambda Checkpoint Interior
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 169.5,-83.5
       parent: 1
   - uid: 19205
     components:
+    - type: MetaData
+      name: Lambda Checkpoint Exterior
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 163.5,-82.5
       parent: 1
   - uid: 19206
     components:
+    - type: MetaData
+      name: Filtration Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 135.5,-142.5
       parent: 1
   - uid: 19208
     components:
+    - type: MetaData
+      name: Filtration Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 133.5,-140.5
       parent: 1
   - uid: 19209
     components:
+    - type: MetaData
+      name: Lambda Checkpoint Exterior
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 163.5,-84.5
       parent: 1
   - uid: 19214
     components:
+    - type: MetaData
+      name: Filtration Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 138.5,-119.5
       parent: 1
   - uid: 19215
     components:
+    - type: MetaData
+      name: Lambda Checkpoint Exterior
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 163.5,-83.5
       parent: 1
   - uid: 19216
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 49.5,-137.5
       parent: 1
   - uid: 19217
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       pos: 46.5,-136.5
       parent: 1
   - uid: 19218
     components:
+    - type: MetaData
+      name: Lambda Lockdown
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 146.5,-31.5
       parent: 1
   - uid: 19219
     components:
+    - type: MetaData
+      name: Lambda Lockdown
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 146.5,-32.5
       parent: 1
   - uid: 19220
     components:
+    - type: MetaData
+      name: Lambda Lockdown
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 146.5,-29.5
       parent: 1
   - uid: 19221
     components:
+    - type: MetaData
+      name: Lambda Lockdown
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 146.5,-30.5
       parent: 1
   - uid: 19222
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 49.5,-140.5
       parent: 1
   - uid: 19223
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 49.5,-139.5
       parent: 1
   - uid: 19224
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 49.5,-138.5
       parent: 1
   - uid: 19225
     components:
+    - type: MetaData
+      name: Filtration Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 133.5,-138.5
       parent: 1
   - uid: 19384
     components:
+    - type: MetaData
+      name: closed
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 38.5,-161.5
       parent: 1
   - uid: 20270
     components:
+    - type: MetaData
+      name: Eta Lockdown
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 90.5,-144.5
       parent: 1
   - uid: 20277
     components:
+    - type: MetaData
+      name: Workshop Garage
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 31.5,-42.5
       parent: 1
   - uid: 20278
     components:
+    - type: MetaData
+      name: Workshop Garage
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 31.5,-43.5
       parent: 1
   - uid: 20279
     components:
+    - type: MetaData
+      name: Workshop Garage
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 31.5,-44.5
       parent: 1
   - uid: 20280
     components:
+    - type: MetaData
+      name: Workshop Garage
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 31.5,-45.5
       parent: 1
   - uid: 20350
     components:
+    - type: MetaData
+      name: Radiation Shielding
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 68.5,-133.5
       parent: 1
   - uid: 20351
     components:
+    - type: MetaData
+      name: Radiation Shielding
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 69.5,-133.5
       parent: 1
   - uid: 20353
     components:
+    - type: MetaData
+      name: Radiation Shielding
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 70.5,-133.5
       parent: 1
   - uid: 20354
     components:
+    - type: MetaData
+      name: Radiation Shielding
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 72.5,-134.5
       parent: 1
   - uid: 20355
     components:
+    - type: MetaData
+      name: Radiation Shielding
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 73.5,-134.5
       parent: 1
   - uid: 20356
     components:
+    - type: MetaData
+      name: Radiation Shielding
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 74.5,-134.5
       parent: 1
   - uid: 20357
     components:
+    - type: MetaData
+      name: Radiation Shielding
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 75.5,-134.5
       parent: 1
   - uid: 20358
     components:
+    - type: MetaData
+      name: Radiation Shielding
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 76.5,-134.5
       parent: 1
   - uid: 20359
     components:
+    - type: MetaData
+      name: Radiation Shielding
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 78.5,-133.5
       parent: 1
   - uid: 20360
     components:
+    - type: MetaData
+      name: Radiation Shielding
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 79.5,-133.5
       parent: 1
   - uid: 20361
     components:
+    - type: MetaData
+      name: Radiation Shielding
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 80.5,-133.5
       parent: 1
   - uid: 21287
     components:
+    - type: MetaData
+      name: Lambda Observation Shutters
     - type: Transform
       pos: 194.5,-56.5
       parent: 1
   - uid: 21288
     components:
+    - type: MetaData
+      name: Lambda Observation Shutters
     - type: Transform
       pos: 195.5,-56.5
       parent: 1
   - uid: 21289
     components:
+    - type: MetaData
+      name: Lambda Observation Shutters
     - type: Transform
       pos: 191.5,-56.5
       parent: 1
   - uid: 21290
     components:
+    - type: MetaData
+      name: Lambda Observation Shutters
     - type: Transform
       pos: 192.5,-56.5
       parent: 1
   - uid: 21291
     components:
+    - type: MetaData
+      name: Lambda Observation Shutters
     - type: Transform
       pos: 191.5,-53.5
       parent: 1
   - uid: 21292
     components:
+    - type: MetaData
+      name: Lambda Observation Shutters
     - type: Transform
       pos: 192.5,-53.5
       parent: 1
   - uid: 21293
     components:
+    - type: MetaData
+      name: Lambda Observation Shutters
     - type: Transform
       pos: 194.5,-53.5
       parent: 1
   - uid: 21294
     components:
+    - type: MetaData
+      name: Lambda Observation Shutters
     - type: Transform
       pos: 195.5,-53.5
       parent: 1
   - uid: 21297
     components:
+    - type: MetaData
+      name: Lambda Lockdown
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 148.5,-32.5
       parent: 1
   - uid: 21298
     components:
+    - type: MetaData
+      name: Lambda Lockdown
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 148.5,-31.5
       parent: 1
   - uid: 21299
     components:
+    - type: MetaData
+      name: Lambda Lockdown
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 148.5,-30.5
       parent: 1
   - uid: 21300
     components:
+    - type: MetaData
+      name: Lambda Lockdown
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 148.5,-29.5
       parent: 1
   - uid: 21301
     components:
+    - type: MetaData
+      name: Lambda Lockdown
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 148.5,-28.5
       parent: 1
   - uid: 21303
     components:
+    - type: MetaData
+      name: Podlock
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 176.5,-43.5
       parent: 1
   - uid: 21304
     components:
+    - type: MetaData
+      name: Podlock
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 176.5,-45.5
       parent: 1
   - uid: 21305
     components:
+    - type: MetaData
+      name: Podlock
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 176.5,-46.5
+      parent: 1
+- proto: RMCPodDoorButton
+  entities:
+  - uid: 16366
+    components:
+    - type: MetaData
+      name: Lambda Observation Shutters
+    - type: Transform
+      pos: 190.5,-53.5
+      parent: 1
+  - uid: 17049
+    components:
+    - type: MetaData
+      name: Eta Lockdown
+    - type: Transform
+      pos: 114.5,-167.5
+      parent: 1
+  - uid: 24506
+    components:
+    - type: MetaData
+      name: Engineering
+    - type: Transform
+      pos: 52.5,-132.5
+      parent: 1
+  - uid: 24507
+    components:
+    - type: MetaData
+      name: Storm Shutters
+    - type: Transform
+      pos: 77.5,-127.5
+      parent: 1
+  - uid: 24508
+    components:
+    - type: MetaData
+      name: Radiation Shielding
+    - type: Transform
+      pos: 77.5,-130.5
+      parent: 1
+  - uid: 24509
+    components:
+    - type: MetaData
+      name: Filtration Plant Shutters
+    - type: Transform
+      pos: 100.5,-127.5
+      parent: 1
+  - uid: 24510
+    components:
+    - type: MetaData
+      name: Filtration Plant Shutters
+    - type: Transform
+      pos: 94.5,-119.5
+      parent: 1
+  - uid: 24511
+    components:
+    - type: MetaData
+      name: Filtration Lockdown
+    - type: Transform
+      pos: 109.5,-126.5
+      parent: 1
+  - uid: 24512
+    components:
+    - type: MetaData
+      name: Storm Shutters
+    - type: Transform
+      pos: 66.5,-114.5
+      parent: 1
+  - uid: 24513
+    components:
+    - type: MetaData
+      name: Storm Shutters
+    - type: Transform
+      pos: 56.5,-97.5
+      parent: 1
+  - uid: 24514
+    components:
+    - type: MetaData
+      name: Storm Shutters
+    - type: Transform
+      pos: 65.5,-97.5
+      parent: 1
+  - uid: 24515
+    components:
+    - type: MetaData
+      name: Storm Shutters
+    - type: Transform
+      pos: 127.5,-106.5
+      parent: 1
+  - uid: 24516
+    components:
+    - type: MetaData
+      name: Storm Shutters
+    - type: Transform
+      pos: 123.5,-99.5
+      parent: 1
+  - uid: 24517
+    components:
+    - type: MetaData
+      name: Storm Shutters
+    - type: Transform
+      pos: 148.5,-98.5
+      parent: 1
+  - uid: 24518
+    components:
+    - type: MetaData
+      name: Storm Shutters
+    - type: Transform
+      pos: 88.5,-94.5
+      parent: 1
+  - uid: 24519
+    components:
+    - type: MetaData
+      name: Storm Shutters
+    - type: Transform
+      pos: 95.5,-82.5
+      parent: 1
+  - uid: 24520
+    components:
+    - type: MetaData
+      name: Lambda Checkpoint Exterior
+    - type: Transform
+      pos: 162.5,-87.5
+      parent: 1
+  - uid: 24521
+    components:
+    - type: MetaData
+      name: Lambda Checkpoint Interior
+    - type: Transform
+      pos: 170.5,-87.5
+      parent: 1
+  - uid: 24522
+    components:
+    - type: MetaData
+      name: Virology Lockdown
+    - type: Transform
+      pos: 16.5,-86.5
+      parent: 1
+  - uid: 24523
+    components:
+    - type: MetaData
+      name: Storm Shutters
+    - type: Transform
+      pos: 69.5,-85.5
+      parent: 1
+  - uid: 24524
+    components:
+    - type: MetaData
+      name: Kitchen Shutters
+    - type: Transform
+      pos: 147.5,-81.5
+      parent: 1
+  - uid: 24525
+    components:
+    - type: MetaData
+      name: Library Shutters
+    - type: Transform
+      pos: 154.5,-80.5
+      parent: 1
+  - uid: 24526
+    components:
+    - type: MetaData
+      name: Bar Complex Shutters
+    - type: Transform
+      pos: 125.5,-77.5
+      parent: 1
+  - uid: 24527
+    components:
+    - type: MetaData
+      name: Quarantine Lockdown
+    - type: Transform
+      pos: 205.5,-76.5
+      parent: 1
+  - uid: 24528
+    components:
+    - type: MetaData
+      name: Kitchen Greenhouse
+    - type: Transform
+      pos: 139.5,-74.5
+      parent: 1
+  - uid: 24529
+    components:
+    - type: MetaData
+      name: Storm Shutters
+    - type: Transform
+      pos: 113.5,-70.5
+      parent: 1
+  - uid: 24530
+    components:
+    - type: MetaData
+      name: Dormitories
+    - type: Transform
+      pos: 109.5,-63.5
+      parent: 1
+  - uid: 24531
+    components:
+    - type: MetaData
+      name: Dormitories
+    - type: Transform
+      pos: 96.5,-67.5
+      parent: 1
+  - uid: 24532
+    components:
+    - type: MetaData
+      name: Greenhouse
+    - type: Transform
+      pos: 147.5,-66.5
+      parent: 1
+  - uid: 24533
+    components:
+    - type: MetaData
+      name: Medical
+    - type: Transform
+      pos: 77.5,-65.5
+      parent: 1
+  - uid: 24534
+    components:
+    - type: MetaData
+      name: Medical
+    - type: Transform
+      pos: 72.5,-59.5
+      parent: 1
+  - uid: 24535
+    components:
+    - type: MetaData
+      name: Medical
+    - type: Transform
+      pos: 68.5,-48.5
+      parent: 1
+  - uid: 24536
+    components:
+    - type: MetaData
+      name: Lambda Observation Shutters
+    - type: Transform
+      pos: 196.5,-53.5
+      parent: 1
+  - uid: 24537
+    components:
+    - type: MetaData
+      name: Lambda Lockdown
+    - type: Transform
+      pos: 177.5,-48.5
+      parent: 1
+  - uid: 24538
+    components:
+    - type: MetaData
+      name: Marshal Offices
+    - type: Transform
+      pos: 84.5,-46.5
+      parent: 1
+  - uid: 24539
+    components:
+    - type: MetaData
+      name: Marshal Offices
+    - type: Transform
+      pos: 72.5,-42.5
+      parent: 1
+  - uid: 24540
+    components:
+    - type: MetaData
+      name: Marshal Offices
+    - type: Transform
+      pos: 66.5,-36.5
+      parent: 1
+  - uid: 24541
+    components:
+    - type: MetaData
+      name: Marshal Offices
+    - type: Transform
+      pos: 94.5,-33.5
+      parent: 1
+  - uid: 24542
+    components:
+    - type: MetaData
+      name: Marshal Office Complex
+    - type: Transform
+      pos: 103.5,-44.5
+      parent: 1
+  - uid: 24544
+    components:
+    - type: MetaData
+      name: Workshop Garage
+    - type: Transform
+      pos: 31.5,-41.5
+      parent: 1
+  - uid: 24545
+    components:
+    - type: MetaData
+      name: Telecommunications Shutters
+    - type: Transform
+      pos: 5.5,-33.5
+      parent: 1
+  - uid: 24546
+    components:
+    - type: MetaData
+      name: Garage Shutters
+    - type: Transform
+      pos: 100.5,-30.5
+      parent: 1
+  - uid: 24547
+    components:
+    - type: MetaData
+      name: Spaceport
+    - type: Transform
+      pos: 50.5,-13.5
       parent: 1
 - proto: RMCShutterAlmayer
   entities:
   - uid: 17514
     components:
+    - type: MetaData
+      name: Filtration Plant Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 107.5,-131.5
@@ -144815,18 +145321,24 @@ entities:
       parent: 1
   - uid: 19236
     components:
+    - type: MetaData
+      name: Filtration Plant Shutters
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 94.5,-117.5
       parent: 1
   - uid: 19368
     components:
+    - type: MetaData
+      name: Filtration Plant Shutters
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 94.5,-118.5
       parent: 1
   - uid: 19369
     components:
+    - type: MetaData
+      name: Filtration Plant Shutters
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 94.5,-116.5
@@ -144849,6 +145361,8 @@ entities:
       parent: 1
   - uid: 19379
     components:
+    - type: MetaData
+      name: Filtration Plant Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 106.5,-131.5
@@ -144867,6 +145381,8 @@ entities:
       parent: 1
   - uid: 19382
     components:
+    - type: MetaData
+      name: Filtration Plant Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 105.5,-131.5
@@ -144878,72 +145394,98 @@ entities:
       parent: 1
   - uid: 20271
     components:
+    - type: MetaData
+      name: Telecommunications Shutters
     - type: Transform
       pos: 7.5,-34.5
       parent: 1
   - uid: 20272
     components:
+    - type: MetaData
+      name: Telecommunications Shutters
     - type: Transform
       pos: 8.5,-34.5
       parent: 1
   - uid: 20273
     components:
+    - type: MetaData
+      name: Telecommunications Shutters
     - type: Transform
       pos: 9.5,-34.5
       parent: 1
   - uid: 20274
     components:
+    - type: MetaData
+      name: Telecommunications Shutters
     - type: Transform
       pos: 12.5,-34.5
       parent: 1
   - uid: 20275
     components:
+    - type: MetaData
+      name: Telecommunications Shutters
     - type: Transform
       pos: 13.5,-34.5
       parent: 1
   - uid: 20276
     components:
+    - type: MetaData
+      name: Telecommunications Shutters
     - type: Transform
       pos: 14.5,-34.5
       parent: 1
   - uid: 20281
     components:
+    - type: MetaData
+      name: Spaceport
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 47.5,-18.5
       parent: 1
   - uid: 20282
     components:
+    - type: MetaData
+      name: Spaceport
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 48.5,-18.5
       parent: 1
   - uid: 20283
     components:
+    - type: MetaData
+      name: Spaceport
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 49.5,-18.5
       parent: 1
   - uid: 20284
     components:
+    - type: MetaData
+      name: Spaceport
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 44.5,-18.5
       parent: 1
   - uid: 20285
     components:
+    - type: MetaData
+      name: Spaceport
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 45.5,-18.5
       parent: 1
   - uid: 20286
     components:
+    - type: MetaData
+      name: Spaceport
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 42.5,-16.5
       parent: 1
   - uid: 20287
     components:
+    - type: MetaData
+      name: Spaceport
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 42.5,-15.5
@@ -145126,171 +145668,231 @@ entities:
       parent: 1
   - uid: 20320
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 52.5,-121.5
       parent: 1
   - uid: 20321
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 51.5,-121.5
       parent: 1
   - uid: 20322
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 50.5,-121.5
       parent: 1
   - uid: 20323
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 49.5,-121.5
       parent: 1
   - uid: 20324
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 48.5,-121.5
       parent: 1
   - uid: 20325
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 47.5,-121.5
       parent: 1
   - uid: 20326
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 46.5,-121.5
       parent: 1
   - uid: 20327
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 45.5,-121.5
       parent: 1
   - uid: 20328
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 44.5,-121.5
       parent: 1
   - uid: 20329
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 44.5,-124.5
       parent: 1
   - uid: 20330
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 46.5,-124.5
       parent: 1
   - uid: 20331
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 47.5,-125.5
       parent: 1
   - uid: 20332
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 47.5,-128.5
       parent: 1
   - uid: 20333
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 47.5,-129.5
       parent: 1
   - uid: 20334
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 47.5,-130.5
       parent: 1
   - uid: 20335
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 43.5,-123.5
       parent: 1
   - uid: 20336
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 43.5,-122.5
       parent: 1
   - uid: 20337
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 53.5,-122.5
       parent: 1
   - uid: 20338
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 53.5,-123.5
       parent: 1
   - uid: 20339
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 53.5,-124.5
       parent: 1
   - uid: 20340
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       pos: 48.5,-126.5
       parent: 1
   - uid: 20341
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       pos: 49.5,-126.5
       parent: 1
   - uid: 20342
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       pos: 51.5,-126.5
       parent: 1
   - uid: 20343
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       pos: 52.5,-126.5
       parent: 1
   - uid: 20344
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       pos: 49.5,-132.5
       parent: 1
   - uid: 20345
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       pos: 51.5,-132.5
       parent: 1
   - uid: 20346
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       pos: 54.5,-131.5
       parent: 1
   - uid: 20347
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       pos: 55.5,-131.5
       parent: 1
   - uid: 20348
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       pos: 59.5,-133.5
       parent: 1
   - uid: 20349
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       pos: 60.5,-133.5
       parent: 1
@@ -145438,239 +146040,321 @@ entities:
       parent: 1
   - uid: 20437
     components:
+    - type: MetaData
+      name: Library Shutters
     - type: Transform
       pos: 149.5,-81.5
       parent: 1
   - uid: 20438
     components:
+    - type: MetaData
+      name: Library Shutters
     - type: Transform
       pos: 150.5,-81.5
       parent: 1
   - uid: 20439
     components:
+    - type: MetaData
+      name: Library Shutters
     - type: Transform
       pos: 155.5,-81.5
       parent: 1
   - uid: 20440
     components:
+    - type: MetaData
+      name: Library Shutters
     - type: Transform
       pos: 156.5,-81.5
       parent: 1
   - uid: 20441
     components:
+    - type: MetaData
+      name: Library Shutters
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 157.5,-79.5
       parent: 1
   - uid: 20442
     components:
+    - type: MetaData
+      name: Library Shutters
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 157.5,-78.5
       parent: 1
   - uid: 20443
     components:
+    - type: MetaData
+      name: Library Shutters
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 157.5,-76.5
       parent: 1
   - uid: 20444
     components:
+    - type: MetaData
+      name: Library Shutters
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 157.5,-75.5
       parent: 1
   - uid: 20446
     components:
+    - type: MetaData
+      name: Library Shutters
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 157.5,-73.5
       parent: 1
   - uid: 20470
     components:
+    - type: MetaData
+      name: Library Shutters
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 157.5,-72.5
       parent: 1
   - uid: 20471
     components:
+    - type: MetaData
+      name: Kitchen Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 131.5,-82.5
       parent: 1
   - uid: 20472
     components:
+    - type: MetaData
+      name: Kitchen Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 132.5,-82.5
       parent: 1
   - uid: 20473
     components:
+    - type: MetaData
+      name: Kitchen Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 133.5,-82.5
       parent: 1
   - uid: 20474
     components:
+    - type: MetaData
+      name: Kitchen Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 134.5,-82.5
       parent: 1
   - uid: 20475
     components:
+    - type: MetaData
+      name: Kitchen Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 139.5,-82.5
       parent: 1
   - uid: 20476
     components:
+    - type: MetaData
+      name: Kitchen Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 140.5,-82.5
       parent: 1
   - uid: 20477
     components:
+    - type: MetaData
+      name: Kitchen Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 141.5,-82.5
       parent: 1
   - uid: 20478
     components:
+    - type: MetaData
+      name: Kitchen Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 144.5,-82.5
       parent: 1
   - uid: 20479
     components:
+    - type: MetaData
+      name: Kitchen Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 143.5,-82.5
       parent: 1
   - uid: 20480
     components:
+    - type: MetaData
+      name: Kitchen Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 145.5,-82.5
       parent: 1
   - uid: 20481
     components:
+    - type: MetaData
+      name: Greenhouse
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 130.5,-65.5
       parent: 1
   - uid: 20482
     components:
+    - type: MetaData
+      name: Greenhouse
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 133.5,-65.5
       parent: 1
   - uid: 20483
     components:
+    - type: MetaData
+      name: Greenhouse
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 134.5,-65.5
       parent: 1
   - uid: 20484
     components:
+    - type: MetaData
+      name: Greenhouse
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 135.5,-65.5
       parent: 1
   - uid: 20485
     components:
+    - type: MetaData
+      name: Greenhouse
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 136.5,-65.5
       parent: 1
   - uid: 20491
     components:
+    - type: MetaData
+      name: Greenhouse
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 137.5,-65.5
       parent: 1
   - uid: 20492
     components:
+    - type: MetaData
+      name: Greenhouse
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 139.5,-64.5
       parent: 1
   - uid: 20493
     components:
+    - type: MetaData
+      name: Greenhouse
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 140.5,-64.5
       parent: 1
   - uid: 20494
     components:
+    - type: MetaData
+      name: Greenhouse
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 141.5,-64.5
       parent: 1
   - uid: 20495
     components:
+    - type: MetaData
+      name: Greenhouse
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 144.5,-64.5
       parent: 1
   - uid: 20496
     components:
+    - type: MetaData
+      name: Greenhouse
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 145.5,-64.5
       parent: 1
   - uid: 20497
     components:
+    - type: MetaData
+      name: Greenhouse
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 146.5,-64.5
       parent: 1
   - uid: 20498
     components:
+    - type: MetaData
+      name: Greenhouse
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 129.5,-66.5
       parent: 1
   - uid: 20499
     components:
+    - type: MetaData
+      name: Greenhouse
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 129.5,-67.5
       parent: 1
   - uid: 20500
     components:
+    - type: MetaData
+      name: Greenhouse
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 129.5,-68.5
       parent: 1
   - uid: 20501
     components:
+    - type: MetaData
+      name: Greenhouse
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 129.5,-69.5
       parent: 1
   - uid: 20819
     components:
+    - type: MetaData
+      name: Greenhouse
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 129.5,-70.5
       parent: 1
   - uid: 20820
     components:
+    - type: MetaData
+      name: Bar Complex Shutters
     - type: Transform
       pos: 112.5,-82.5
       parent: 1
   - uid: 20821
     components:
+    - type: MetaData
+      name: Bar Complex Shutters
     - type: Transform
       pos: 114.5,-82.5
       parent: 1
   - uid: 20822
     components:
+    - type: MetaData
+      name: Bar Complex Shutters
     - type: Transform
       pos: 121.5,-82.5
       parent: 1
   - uid: 20823
     components:
+    - type: MetaData
+      name: Bar Complex Shutters
     - type: Transform
       pos: 124.5,-82.5
       parent: 1
@@ -145682,159 +146366,217 @@ entities:
       parent: 1
   - uid: 20825
     components:
+    - type: MetaData
+      name: Bar Complex Shutters
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 110.5,-78.5
       parent: 1
   - uid: 20826
     components:
+    - type: MetaData
+      name: Bar Complex Shutters
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 110.5,-76.5
       parent: 1
   - uid: 20827
     components:
+    - type: MetaData
+      name: Bar Complex Shutters
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 110.5,-74.5
       parent: 1
   - uid: 20932
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 97.5,-70.5
       parent: 1
   - uid: 20933
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 98.5,-70.5
       parent: 1
   - uid: 20934
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 92.5,-63.5
       parent: 1
   - uid: 20935
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 92.5,-62.5
       parent: 1
   - uid: 20936
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 92.5,-60.5
       parent: 1
   - uid: 20937
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 92.5,-59.5
       parent: 1
   - uid: 20938
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 92.5,-57.5
       parent: 1
   - uid: 20939
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 92.5,-56.5
       parent: 1
   - uid: 20940
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 92.5,-54.5
       parent: 1
   - uid: 20941
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 92.5,-53.5
       parent: 1
   - uid: 20942
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       pos: 100.5,-52.5
       parent: 1
   - uid: 20943
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       pos: 101.5,-52.5
       parent: 1
   - uid: 20944
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       pos: 105.5,-52.5
       parent: 1
   - uid: 20945
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       pos: 106.5,-52.5
       parent: 1
   - uid: 20946
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       pos: 108.5,-52.5
       parent: 1
   - uid: 20947
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       pos: 109.5,-52.5
       parent: 1
   - uid: 20948
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       pos: 113.5,-52.5
       parent: 1
   - uid: 20949
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       pos: 114.5,-52.5
       parent: 1
   - uid: 20950
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       pos: 116.5,-45.5
       parent: 1
   - uid: 20951
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       pos: 117.5,-45.5
       parent: 1
   - uid: 20952
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       pos: 118.5,-45.5
       parent: 1
   - uid: 20953
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       pos: 119.5,-45.5
       parent: 1
   - uid: 20954
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       pos: 134.5,-59.5
       parent: 1
   - uid: 20955
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       pos: 135.5,-59.5
       parent: 1
   - uid: 20956
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       pos: 136.5,-59.5
       parent: 1
   - uid: 20957
     components:
+    - type: MetaData
+      name: Dormitories
     - type: Transform
       pos: 137.5,-59.5
       parent: 1
@@ -145850,66 +146592,88 @@ entities:
       parent: 1
   - uid: 20960
     components:
+    - type: MetaData
+      name: Marshal Office Complex
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 110.5,-41.5
       parent: 1
   - uid: 20961
     components:
+    - type: MetaData
+      name: Marshal Office Complex
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 110.5,-42.5
       parent: 1
   - uid: 20962
     components:
+    - type: MetaData
+      name: Marshal Office Complex
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 110.5,-43.5
       parent: 1
   - uid: 20963
     components:
+    - type: MetaData
+      name: Marshal Office Complex
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 110.5,-44.5
       parent: 1
   - uid: 20964
     components:
+    - type: MetaData
+      name: Marshal Office Complex
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 110.5,-45.5
       parent: 1
   - uid: 20965
     components:
+    - type: MetaData
+      name: Marshal Office Complex
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 110.5,-46.5
       parent: 1
   - uid: 20966
     components:
+    - type: MetaData
+      name: Marshal Office Complex
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 110.5,-47.5
       parent: 1
   - uid: 20967
     components:
+    - type: MetaData
+      name: Marshal Offices
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 85.5,-48.5
       parent: 1
   - uid: 20968
     components:
+    - type: MetaData
+      name: Marshal Offices
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 86.5,-48.5
       parent: 1
   - uid: 20969
     components:
+    - type: MetaData
+      name: Marshal Offices
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 63.5,-35.5
       parent: 1
   - uid: 20970
     components:
+    - type: MetaData
+      name: Marshal Offices
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 63.5,-34.5
@@ -145948,63 +146712,85 @@ entities:
       parent: 1
   - uid: 20977
     components:
+    - type: MetaData
+      name: Marshal Offices
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 96.5,-28.5
       parent: 1
   - uid: 20978
     components:
+    - type: MetaData
+      name: Marshal Offices
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 98.5,-28.5
       parent: 1
   - uid: 20979
     components:
+    - type: MetaData
+      name: Medical
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 63.5,-48.5
       parent: 1
   - uid: 20980
     components:
+    - type: MetaData
+      name: Medical
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 64.5,-48.5
       parent: 1
   - uid: 20981
     components:
+    - type: MetaData
+      name: Medical
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 65.5,-48.5
       parent: 1
   - uid: 20982
     components:
+    - type: MetaData
+      name: Medical
     - type: Transform
       pos: 77.5,-54.5
       parent: 1
   - uid: 20983
     components:
+    - type: MetaData
+      name: Medical
     - type: Transform
       pos: 78.5,-54.5
       parent: 1
   - uid: 20984
     components:
+    - type: MetaData
+      name: Medical
     - type: Transform
       pos: 79.5,-54.5
       parent: 1
   - uid: 20985
     components:
+    - type: MetaData
+      name: Medical
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 84.5,-66.5
       parent: 1
   - uid: 20986
     components:
+    - type: MetaData
+      name: Medical
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 84.5,-67.5
       parent: 1
   - uid: 20987
     components:
+    - type: MetaData
+      name: Medical
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 84.5,-68.5
