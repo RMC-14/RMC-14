@@ -211,6 +211,8 @@
   - type: XenoAnnounceDeath # TODO RMC14 announce location of death (area)
     message: cm-xeno-death
     color: "#459A62"
+  - type: ExplosionResistance
+    damageCoefficient: 2
 
 - type: entity
   abstract: true
