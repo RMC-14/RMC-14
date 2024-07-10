@@ -32,6 +32,7 @@
       Brute:
         collection: XenoResinBreak
   - type: XenoConstruct
+  - type: RMCWallExplosionDeletable
 
 - type: entity
   id: CMCorrodible
