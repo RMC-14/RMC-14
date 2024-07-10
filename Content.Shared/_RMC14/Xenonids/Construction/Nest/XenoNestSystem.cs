@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
@@ -244,7 +244,7 @@ public sealed class XenoNestSystem : EntitySystem
     private void TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)
     {
         if (GetNestDirection(surface, victim) is not { } direction ||
-            !CanNestPopup(user, victim, surface, direction))
+            !CanNestPopup(user, victim, surface, direction) || !HasComp<XenoComponent>(user))
         {
             return;
         }
