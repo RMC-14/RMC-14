@@ -463,11 +463,14 @@ namespace Content.Server.GameTicking
                 {
                     var mapName = _gameMapManager.GetSelectedMap()?.MapName;
                     mapName ??= Loc.GetString("discord-round-notifications-unknown-map");
-                    content = Loc.GetString("rmc-discord-round-notifications-started",
+                    content = Loc.GetString("rmc-discord-round-notifications-end",
                         ("id", RoundId),
                         ("operation", operation),
                         ("planet", planet),
-                        ("ship", mapName));
+                        ("ship", mapName),
+                        ("hours", Math.Truncate(duration.TotalHours)),
+                        ("minutes", duration.Minutes),
+                        ("seconds", duration.Seconds));
                 }
 
                 var payload = new WebhookPayload { Content = content };
