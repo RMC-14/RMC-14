@@ -71,6 +71,7 @@
         layer:
         - WallLayer
         density: 1000
+  - type: RMCWallExplosionDeletable
 
 - type: entity
   parent: CMBaseWindow

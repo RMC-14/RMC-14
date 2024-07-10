@@ -1,0 +1,40 @@
+﻿- type: entity
+  parent: BaseItem
+  id: RMCExplosiveBreachingCharge
+  name: breaching charge # TODO RMC14 disable with multitool?
+  description: An explosive device used to break into areas while protecting the user from the blast as well as deploying deadly shrapnel on the other side.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Explosives/satchel_charge.rsi
+    state: icon
+    layers:
+    - state: icon
+      map: ["base"]
+  - type: Item
+    size: Small
+  - type: Sticky
+    stickDelay: 1
+    canUnstick: false
+    stickPopupStart: comp-sticky-start-stick-bomb
+    stickPopupSuccess: comp-sticky-success-stick-bomb
+    unstickPopupStart: comp-sticky-start-unstick-bomb
+    unstickPopupSuccess: comp-sticky-success-unstick-bomb
+    whitelist:
+      components:
+      - RMCWallExplosionDeletable
+  - type: Explosive
+    explosionType: RMC
+    totalIntensity: 1
+    intensitySlope: 5
+    maxIntensity: 1
+    canCreateVacuum: false
+  - type: ExplodeOnTrigger
+  - type: StickyVisualizer
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.Trigger.TriggerVisuals.VisualState:
+        base:
+          Primed: { state: active }
+          Unprimed: { state: icon }
+  - type: RMCExplosiveDeleteWalls
