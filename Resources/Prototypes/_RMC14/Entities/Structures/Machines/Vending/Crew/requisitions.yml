@@ -371,8 +371,8 @@
       entries:
       - id: RMCAttachmentB8SmartScope
         amount: 4
-      - id: RMCAttachmentMagneticHarness
-        amount: 9
+      #- id: RMCAttachmentMagneticHarness
+      #  amount: 9
       - id: RMCAttachmentRailFlashlight
         amount: 11
       - id: RMCAttachmentS42xTelescopicMiniscope
