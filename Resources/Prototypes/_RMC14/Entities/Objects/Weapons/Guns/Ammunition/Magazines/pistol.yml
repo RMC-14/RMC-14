@@ -47,7 +47,7 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridgePistol9mm
+      - CMCartridgePistol9mmAP
     proto: CMCartridgePistolM77AP
     capacity: 19
   - type: Sprite
