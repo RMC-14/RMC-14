@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Timing;
@@ -33,6 +34,7 @@ public sealed class CMGunSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+        [Dependency] private readonly FixtureSystem _fixtures = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ProjectileComponent> _projectileQuery;
@@ -42,10 +44,11 @@ public sealed class CMGunSystem : EntitySystem
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
         _projectileQuery = GetEntityQuery<ProjectileComponent>();
 
-        SubscribeLocalEvent<AmmoFixedDistanceComponent, AmmoShotEvent>(OnAmmoFixedDistanceShot);
+        SubscribeLocalEvent<ShootAtFixedPointComponent, AmmoShotEvent>(OnShootAtFixedPointShot);
 
-        SubscribeLocalEvent<ProjectileFixedDistanceComponent, ComponentRemove>(OnProjectileStop);
-        SubscribeLocalEvent<ProjectileFixedDistanceComponent, PhysicsSleepEvent>(OnProjectileStop);
+        SubscribeLocalEvent<ProjectileFixedDistanceComponent, PreventCollideEvent>(OnCollisionCheckArc);
+        SubscribeLocalEvent<ProjectileFixedDistanceComponent, ComponentRemove>(OnEventToStopProjectile);
+        SubscribeLocalEvent<ProjectileFixedDistanceComponent, PhysicsSleepEvent>(OnEventToStopProjectile);
 
         SubscribeLocalEvent<GunShowUseDelayComponent, GunShotEvent>(OnShowUseDelayShot);
         SubscribeLocalEvent<GunShowUseDelayComponent, ItemWieldedEvent>(OnShowUseDelayWielded);
@@ -66,7 +69,16 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<GunSkilledRecoilComponent, GunRefreshModifiersEvent>(OnRecoilSkilledRefreshModifiers);
     }
 
-    private void OnAmmoFixedDistanceShot(Entity<AmmoFixedDistanceComponent> ent, ref AmmoShotEvent args)
+    /// <summary>
+    /// Shoot at a targeted point's coordinates. The projectile will stop at that location instead of continuing on until it hits something.
+    /// There is also an option to arc the projectile with ShootArc or ProjectileArcing = true, making it ignore most collision.
+    /// </summary>
+    /// <remarks>
+    /// For some reason, the engine seem to cause MaxFixedRange's conversion to actual projectile max ranges of around +1 tile.
+    /// As a result, conversions should be 1 less than max_range when porting, and the minimum range for this feature is around 2 tiles.
+    /// This could be manually tweaked try and fix it, but the math seems like it should be fine and it's predictable enough to be worked around for now.
+    /// </remarks>
+    private void OnShootAtFixedPointShot(Entity<ShootAtFixedPointComponent> ent, ref AmmoShotEvent args)
     {
         if (!TryComp(ent, out GunComponent? gun) ||
             gun.ShootCoordinates is not { } target)
@@ -74,33 +86,76 @@ public sealed class CMGunSystem : EntitySystem
             return;
         }
 
+        // Find start and end coordinates for vector.
         var from = _transform.GetMapCoordinates(ent);
         var to = _transform.ToMapCoordinates(target);
+        // Must be same map.
         if (from.MapId != to.MapId)
             return;
 
+        // Calculate vector, cancel if it ends up at 0.
         var direction = to.Position - from.Position;
         if (direction == Vector2.Zero)
             return;
 
+        // Get current time and normalize the vector for physics math.
         var time = _timing.CurTime;
         var normalized = direction.Normalized();
+
+        // Send each FiredProjectile with a PhysicsComponent off with the same Vector. Max 
         foreach (var projectile in args.FiredProjectiles)
         {
             if (!_physicsQuery.TryComp(projectile, out var physics))
                 continue;
 
+            // Calculate needed impulse to get to target, remove all velocity from projectile, then apply.
             var impulse = normalized * gun.ProjectileSpeedModified * physics.Mass;
             _physics.SetLinearVelocity(projectile, Vector2.Zero, body: physics);
             _physics.ApplyLinearImpulse(projectile, impulse, body: physics);
             _physics.SetBodyStatus(projectile, physics, BodyStatus.InAir);
 
+            // Apply the ProjectileFixedDistanceComponent onto each fired projectile, which both holds the FlyEndTime to be continually checked
+            // and will trigger the OnEventToStopProjectile function once the PFD Component is deleted at that time. See Update()
             var comp = EnsureComp<ProjectileFixedDistanceComponent>(projectile);
-            comp.FlyEndTime = time + TimeSpan.FromSeconds(direction.Length() / gun.ProjectileSpeedModified);
+
+            // Transfer arcing to the projectile.
+            if (Comp<ShootAtFixedPointComponent>(ent).ShootArc)
+                comp.ProjectileArcing = true;
+
+            float ammoDistance = (float)Comp<ShootAtFixedPointComponent>(ent).MaxFixedRange;
+
+            // Take the lowest nonzero MaxFixedRange between projectile and gun for the capped vector length.
+            if (TryComp(projectile, out ProjectileComponent? normalProjectile) && normalProjectile.MaxFixedRange > 0)
+            {
+                if (ammoDistance > 0)
+                    ammoDistance = float.Min(ammoDistance, (float)normalProjectile.MaxFixedRange);
+                else
+                    ammoDistance = (float)normalProjectile.MaxFixedRange;
+            }
+            // Calculate travel time and equivalent distance based either on click location or calculated max range, whichever is shorter.
+            if (ammoDistance > 0)
+            {
+                float cappedRange = float.Min(direction.Length(), ammoDistance);
+                comp.FlyEndTime = time + TimeSpan.FromSeconds(cappedRange / gun.ProjectileSpeedModified);
+            }
+            else
+                comp.FlyEndTime = time + TimeSpan.FromSeconds(direction.Length() / gun.ProjectileSpeedModified);
         }
     }
 
-    private void OnProjectileStop<T>(Entity<ProjectileFixedDistanceComponent> ent, ref T args)
+    /// <summary>
+    /// If the projectile collides with anything that doesn't have CollisionGroup.Impassable like walls, and it's arcing, ignore the collision.
+    /// </summary>
+    private void OnCollisionCheckArc(Entity<ProjectileFixedDistanceComponent> ent, ref PreventCollideEvent args)
+    {
+        int otherLayers = (int)args.OtherFixture.CollisionLayer;
+        int impassableLayer = (int)CollisionGroup.Impassable;
+        if (((Comp<ProjectileFixedDistanceComponent>(ent).ProjectileArcing) && !((args.OtherFixture.CollisionLayer & impassableLayer) == impassableLayer)))
+            args.Cancelled = true;
+        return;
+    }
+
+    private void OnEventToStopProjectile<T>(Entity<ProjectileFixedDistanceComponent> ent, ref T args)
     {
         StopProjectile(ent);
     }
