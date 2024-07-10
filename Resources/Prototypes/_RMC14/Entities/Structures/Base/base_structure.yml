@@ -89,6 +89,7 @@
   - type: Corrodible
     isCorrodible: true
   - type: Clickable
+  - type: RMCWallExplosionDeletable
 
 - type: entity
   parent:
