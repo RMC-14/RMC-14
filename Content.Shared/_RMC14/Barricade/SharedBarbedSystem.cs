@@ -15,7 +15,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Barricade;
 
-public sealed class BarbedSystem : EntitySystem
+public abstract class SharedBarbedSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
@@ -144,7 +144,7 @@ public sealed class BarbedSystem : EntitySystem
             args.Piercing = 1000;
     }
 
-    private void UpdateAppearance(Entity<BarbedComponent> barbed)
+    protected void UpdateAppearance(Entity<BarbedComponent> barbed)
     {
         var open = TryComp(barbed, out DoorComponent? door) && door.State == DoorState.Open;
 
