@@ -8732,7 +8732,7 @@ entities:
       pos: 90.5,-90.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -9314.089
+      secondsUntilStateChange: -9643.103
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -9021,7 +9021,7 @@ entities:
       pos: 114.5,-63.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -6621.4644
+      secondsUntilStateChange: -6950.4785
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -9929,7 +9929,7 @@ entities:
       pos: 83.5,-133.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -10367.742
+      secondsUntilStateChange: -10696.756
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -15069,7 +15069,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 2730.2724706
     - type: Door
-      secondsUntilStateChange: -9333.158
+      secondsUntilStateChange: -9662.172
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -15085,7 +15085,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 2730.2724706
     - type: Door
-      secondsUntilStateChange: -9333.158
+      secondsUntilStateChange: -9662.172
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -146977,6 +146977,103 @@ entities:
     components:
     - type: Transform
       pos: 178.5,-33.5
+      parent: 1
+- proto: RMCTurretGaussSpaceborne
+  entities:
+  - uid: 24543
+    components:
+    - type: Transform
+      pos: 18.5,-20.5
+      parent: 1
+  - uid: 24548
+    components:
+    - type: Transform
+      pos: 33.5,-8.5
+      parent: 1
+  - uid: 24549
+    components:
+    - type: Transform
+      pos: 19.5,-31.5
+      parent: 1
+  - uid: 24550
+    components:
+    - type: Transform
+      pos: 33.5,-31.5
+      parent: 1
+  - uid: 24551
+    components:
+    - type: Transform
+      pos: 49.5,-20.5
+      parent: 1
+  - uid: 24552
+    components:
+    - type: Transform
+      pos: 19.5,-8.5
+      parent: 1
+  - uid: 24553
+    components:
+    - type: Transform
+      pos: 34.5,-20.5
+      parent: 1
+  - uid: 24554
+    components:
+    - type: Transform
+      pos: 49.5,-31.5
+      parent: 1
+  - uid: 24555
+    components:
+    - type: Transform
+      pos: 42.5,-25.5
+      parent: 1
+  - uid: 24556
+    components:
+    - type: Transform
+      pos: 42.5,-36.5
+      parent: 1
+  - uid: 24557
+    components:
+    - type: Transform
+      pos: 38.5,-36.5
+      parent: 1
+  - uid: 24558
+    components:
+    - type: Transform
+      pos: 25.5,-131.5
+      parent: 1
+  - uid: 24559
+    components:
+    - type: Transform
+      pos: 39.5,-131.5
+      parent: 1
+  - uid: 24560
+    components:
+    - type: Transform
+      pos: 39.5,-107.5
+      parent: 1
+  - uid: 24561
+    components:
+    - type: Transform
+      pos: 25.5,-107.5
+      parent: 1
+  - uid: 24562
+    components:
+    - type: Transform
+      pos: 25.5,-119.5
+      parent: 1
+  - uid: 24563
+    components:
+    - type: Transform
+      pos: 39.5,-119.5
+      parent: 1
+  - uid: 24564
+    components:
+    - type: Transform
+      pos: 45.5,-102.5
+      parent: 1
+  - uid: 24565
+    components:
+    - type: Transform
+      pos: 45.5,-96.5
       parent: 1
 - proto: StairDark
   entities:
