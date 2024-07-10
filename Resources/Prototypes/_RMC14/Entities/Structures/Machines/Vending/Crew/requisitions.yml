@@ -89,8 +89,8 @@
       #  amount: 6
       #- id: Plastic Explosives
       #  amount: 3
-      #- id: Breaching Charges
-      #  amount: 2
+      - id: Breaching Charges
+        amount: 2
     - name: Webbings
       entries:
       - id: CMWebbingBrown
