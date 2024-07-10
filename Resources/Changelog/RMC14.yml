@@ -2705,5 +2705,12 @@
   id: 331
   time: '2024-07-10T03:01:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2936
+- author: DrSmugleaf
+  changes:
+  - message: Fixed walls and membranes not destroying weed nodes under them when constructed.
+    type: Fix
+  id: 332
+  time: '2024-07-10T03:34:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2942
 Name: RMC14
 Order: -1
