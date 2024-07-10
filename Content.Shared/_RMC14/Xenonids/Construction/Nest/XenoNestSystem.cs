@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
@@ -259,7 +259,7 @@ public sealed class XenoNestSystem : EntitySystem
 
     private void TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)
     {
-        if (GetNestDirection(surface, victim) is not { } direction ||
+        if (!HasComp<XenoComponent>(user) || GetNestDirection(surface, victim) is not { } direction ||
             !CanNestPopup(user, victim, surface, direction))
         {
             return;
