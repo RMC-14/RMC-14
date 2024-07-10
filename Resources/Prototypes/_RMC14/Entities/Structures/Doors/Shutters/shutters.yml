@@ -61,6 +61,7 @@
     key: walls
     mode: NoSprite
   - type: Airtight
+  - type: RMCWallExplosionDeletable
   # TODO RMC14 Add linkable buttons and open/close logic to the shutters, thanks
 
 - type: entity
