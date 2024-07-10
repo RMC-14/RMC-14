@@ -20,6 +20,8 @@
     state: "1"
   - type: Icon
     state: "1"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -30,6 +32,8 @@
     state: "2"
   - type: Icon
     state: "2"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -60,6 +64,8 @@
     state: "5"
   - type: Icon
     state: "5"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -70,6 +76,8 @@
     state: "6"
   - type: Icon
     state: "6"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -170,6 +178,8 @@
     state: "16"
   - type: Icon
     state: "16"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -180,6 +190,8 @@
     state: "17"
   - type: Icon
     state: "17"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -230,6 +242,8 @@
     state: "22"
   - type: Icon
     state: "22"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -240,6 +254,8 @@
     state: "23"
   - type: Icon
     state: "23"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -270,6 +286,8 @@
     state: "26"
   - type: Icon
     state: "26"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -280,6 +298,8 @@
     state: "27"
   - type: Icon
     state: "27"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -290,6 +310,8 @@
     state: "28"
   - type: Icon
     state: "28"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -300,6 +322,8 @@
     state: "29"
   - type: Icon
     state: "29"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -330,6 +354,8 @@
     state: "32"
   - type: Icon
     state: "32"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -340,6 +366,8 @@
     state: "33"
   - type: Icon
     state: "33"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -350,6 +378,8 @@
     state: "34"
   - type: Icon
     state: "34"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -360,6 +390,8 @@
     state: "35"
   - type: Icon
     state: "35"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -390,6 +422,8 @@
     state: "38"
   - type: Icon
     state: "38"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -400,6 +434,8 @@
     state: "39"
   - type: Icon
     state: "39"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -410,6 +446,8 @@
     state: "40"
   - type: Icon
     state: "40"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -420,6 +458,8 @@
     state: "41"
   - type: Icon
     state: "41"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -620,6 +660,8 @@
     state: "61"
   - type: Icon
     state: "61"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -660,6 +702,8 @@
     state: "65"
   - type: Icon
     state: "65"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -670,6 +714,8 @@
     state: "66"
   - type: Icon
     state: "66"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -710,6 +756,8 @@
     state: "70"
   - type: Icon
     state: "70"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
