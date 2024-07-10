@@ -236,7 +236,7 @@
     #- id: CMM276M82FHolsterRig
     #- id: CMM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
-    #- id: CMM276M40GrenadeRig
+      - id: RMCBeltGrenade
     - name: Pouches
       choices: { CMPouch: 2 }
       entries:

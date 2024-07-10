@@ -168,8 +168,8 @@
       entries:
       - id: CMBeltMarine
         amount: 15
-#      - id: M276 Pattern M40 Grenade Rig
-#        amount: 10
+      - id: RMCBeltGrenade
+        amount: 10
 #      - id: M276 Pattern Shotgun Shell Loading Rig
 #        amount: 15
 #      - id: M276 Pattern General Pistol Holster Rig
