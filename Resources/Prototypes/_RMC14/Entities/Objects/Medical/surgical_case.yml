@@ -19,6 +19,9 @@
       - CMHemostat
       - CMRetractor
   - type: FixedItemSizeStorage
+  - type: Tag
+    tags:
+      - CMSurgicalCase
 
 - type: entity
   parent: CMSurgicalCase

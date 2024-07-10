@@ -32,6 +32,9 @@
   id: CMSurgicalLine
 
 - type: Tag
+  id: CMSurgicalCase
+
+- type: Tag
   id: CMBurnKit
 
 - type: Tag
