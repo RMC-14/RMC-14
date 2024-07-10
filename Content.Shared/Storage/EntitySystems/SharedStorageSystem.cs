@@ -917,7 +917,8 @@ public abstract class SharedStorageSystem : EntitySystem
 
         if (TryComp<StorageComponent>(insertEnt, out var insertStorage)
             && GetMaxItemSize((insertEnt, insertStorage)) >= maxSize
-            && !CMStorage.IgnoreItemSize((uid, storageComp), insertEnt))
+            && !CMStorage.IgnoreItemSize((uid, storageComp), insertEnt)
+            && !_whitelistSystem.IsWhitelistPass(storageComp.Whitelist, insertEnt))
         {
             reason = "comp-storage-too-big";
             return false;
