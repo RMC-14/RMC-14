@@ -60,7 +60,10 @@ public sealed class XenoScreechSystem : EntitySystem
             if (_mobState.IsDead(receiver))
                 continue;
 
-            if (!_interactionSystem.InRangeUnobstructed(xeno.Owner, receiver.Owner, collisionMask:_opaqueObjectsMask))
+            if (!_interactionSystem.InRangeUnobstructed(xeno.Owner,
+                    receiver.Owner,
+                    xeno.Comp.StunRange,
+                    collisionMask: _opaqueObjectsMask))
                 continue;
 
             if (TryComp(xeno, out XenoComponent? xenoComp) &&
@@ -81,7 +84,10 @@ public sealed class XenoScreechSystem : EntitySystem
             if (_mobState.IsDead(receiver))
                 continue;
 
-            if (!_interactionSystem.InRangeUnobstructed(xeno.Owner, receiver.Owner, collisionMask:_opaqueObjectsMask))
+            if (!_interactionSystem.InRangeUnobstructed(xeno.Owner,
+                    receiver.Owner,
+                    xeno.Comp.ParalyzeRange,
+                    collisionMask: _opaqueObjectsMask))
                 continue;
 
             if (TryComp(xeno, out XenoComponent? xenoComp) &&
