@@ -201,8 +201,8 @@
       #  amount: 1
     - name: Miscellaneous
       entries:
-      #- id: Combat Flashlight
-      #   amount: 5
+      - id: RMCFlashlight # Combat Flashlight
+        amount: 5
       - id: CMEntrenchingTool
         amount: 4
       - id: CMMaskGas

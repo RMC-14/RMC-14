@@ -362,11 +362,11 @@
         amount: 1
       - id: CMWelder
         amount: 1
-#    - name: Flare and light
-#      entries:
+    - name: Flare and light
+      entries:
 #      #  amount: 1
-#      #- id: CMCombatFlashlight
-#      #  amount: 5
+      - id: RMCFlashlight # Combat Flashlight
+        amount: 5
 #      #- id: CMBoxFlashlights
 #      #  amount: 1
       - id: CMBoxPackFlare
