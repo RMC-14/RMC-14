@@ -2796,5 +2796,13 @@
   id: 340
   time: '2024-07-10T12:45:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2957
+- author: Siigiil
+  changes:
+  - message: Magnetic harness temporarily removed from vendors due to being horribly
+      bugged.
+    type: Remove
+  id: 341
+  time: '2024-07-10T20:06:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2959
 Name: RMC14
 Order: -1
