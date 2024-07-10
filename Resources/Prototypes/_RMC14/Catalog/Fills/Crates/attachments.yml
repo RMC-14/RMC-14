@@ -5,7 +5,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentS5RedDotSight
+      - id: RMCAttachmentS5RedDotSight
         amount: 8
 
 - type: entity
@@ -15,7 +15,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentB8SmartScope
+      - id: RMCAttachmentB8SmartScope
         amount: 4
 
 - type: entity
@@ -25,7 +25,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentRailFlashlight
+      - id: RMCAttachmentRailFlashlight
         amount: 8
 
 - type: entity
@@ -35,7 +35,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachments84xTelescopicScope
+      - id: RMCAttachmentS84xTelescopicScope
         amount: 2
 
 - type: entity
@@ -45,7 +45,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentS42xTelescopicMiniScope
+      - id: RMCAttachmentS42xTelescopicMiniscope
         amount: 2
 
 - type: entity
@@ -55,7 +55,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentMagneticHarness
+      - id: RMCAttachmentMagneticHarness
         amount: 6
 
 - type: entity
@@ -65,7 +65,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentSuppressor
+      - id: RMCAttachmentSuppressor
         amount: 8
 
 - type: entity
@@ -75,7 +75,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentExtendedBarrel
+      - id: RMCAttachmentExtendedBarrel
         amount: 6
 
 - type: entity
@@ -85,7 +85,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentRecoilCompensator
+      - id: RMCAttachmentRecoilCompensator
         amount: 6
 
 - type: entity
@@ -95,9 +95,9 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentVerticalGrip
+      - id: RMCAttachmentVerticalGrip
         amount: 4
-      - id: CMAttachmentAngledGrip
+      - id: RMCAttachmentAngledGrip
         amount: 4
 
 - type: entity
@@ -107,7 +107,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentGyroscopicStabilizer
+      - id: RMCAttachmentGyroscopicStabilizer
         amount: 2
 
 - type: entity
@@ -127,7 +127,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentU7UnderbarrelShotgun
+      - id: RMCAttachmentU7UnderbarrelShotgun
         amount: 4
 
 - type: entity
@@ -137,7 +137,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentUnderbarrelExtinguisher
+      - id: RMCAttachmentUnderbarrelExtinguisher
         amount: 4
 
 - type: entity
@@ -157,7 +157,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentBurstFireAssembly
+      - id: RMCAttachmentBurstFireAssembly
         amount: 2
 
 - type: entity
@@ -167,15 +167,15 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentM44MagnumSharpshooterStock
+      - id: RMCAttachmentM44MagnumSharpshooterStock
         amount: 3
-      - id: CMAttachmentM54CSolidStock
+      - id: RMCAttachmentM54CStockSolid
         amount: 3
-      - id: CMAttachmentM63Stock
+      - id: RMCAttachmentM63Stock
         amount: 3
-      - id: CMAttachmentM37WoodenStock
+      - id: RMCAttachmentM42A2WoodenStock
         amount: 3
-      - id: CMAttachmentM63ArmBrace
+      - id: RMCAttachmentM63ArmBrace
         amount: 1
 
 - type: entity
@@ -185,7 +185,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentM44MagnumSharpshooterStock
+      - id: RMCAttachmentM44MagnumSharpshooterStock
         amount: 4
 
 - type: entity
@@ -195,7 +195,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentM54CSolidStock
+      - id: RMCAttachmentM54CStockSolid
         amount: 4
 
 - type: entity
@@ -205,7 +205,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentM37WoodenStock
+      - id: RMCAttachmentM42A2WoodenStock
         amount: 4
 
 - type: entity
@@ -215,5 +215,5 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentM63Stock
+      - id: RMCAttachmentM63Stock
         amount: 4

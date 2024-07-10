@@ -37,6 +37,7 @@
     tags:
     - Grenade
     - LauncherCompatibleGrenade
+    - RMCGrenadeM40
   - type: Ammo
   - type: CMExplosionEffect
   - type: CMVocalizeTrigger
@@ -62,6 +63,7 @@
     tags:
     - Grenade
     - LauncherCompatibleGrenade
+    - RMCGrenadeM40
   - type: Ammo
 
 - type: entity
@@ -89,6 +91,7 @@
     tags:
     - Grenade
     - LauncherCompatibleGrenade
+    - RMCGrenadeM40
   - type: Ammo
   - type: ClusterLimitHits
   - type: CMExplosionEffect
@@ -148,3 +151,6 @@
   components:
   - type: Sprite
     state: shrapnel_bright2
+
+- type: Tag
+  id: RMCGrenadeM40

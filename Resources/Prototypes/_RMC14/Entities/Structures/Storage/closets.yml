@@ -21,6 +21,20 @@
     stateDoorOpen: open
     stateDoorClosed: closed
 
+- type: entity
+  parent: CMClosetBase
+  id: RMCCabinetBase
+  name: cabinet
+  description: Old will forever be in fashion.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/cabinet.rsi
+  - type: EntityStorage
+    closeSound:
+      path: /Audio/Effects/woodenclosetclose.ogg
+    openSound:
+      path: /Audio/Effects/woodenclosetopen.ogg
+
 # Utilities
 - type: entity
   parent: CMClosetBase

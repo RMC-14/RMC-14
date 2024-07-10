@@ -1,9 +1,14 @@
 - type: entity
   abstract: true
-  parent: [ BaseItem, CMBaseWeaponGun, CMBaseAttachableHolder ]
+  parent: [ BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder ]
   id: CMBaseWeaponRifle
   components:
   - type: Wieldable
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.8
+    baseSprint: 0.69
+  - type: WieldDelay
+    baseDelay: 0.6
   - type: Item
     size: Large
   - type: Clothing
@@ -42,15 +47,10 @@
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c.rsi
-#  - type: ContainerFill
-#    containers:
-#      cm-aslot-barrel:
-#      - CMAttachmentExtendedBarrel
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
-      cm-aslot-barrel: !type:ContainerSlot
   - type: Gun
     minAngle: 30
     maxAngle: 60
@@ -85,24 +85,45 @@
     multiplier: 1.1
   - type: AttachableHolder
     slots:
-      cm-aslot-barrel:
+      rmc-aslot-barrel:
         whitelist:
           tags:
-          - CMAttachmentExtendedBarrel
-          - CMAttachmentSuppressor
-      cm-aslot-rail:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
         whitelist:
           tags:
-          - CMAttachmentFlashlight
-      cm-aslot-underbarrel:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentM54CStockCollapsible
         whitelist:
           tags:
-          - CMAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentM54CStockSolid
+          - RMCAttachmentM54CStockCollapsible
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentU1GrenadeLauncher
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentU1GrenadeLauncher
+          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentVerticalGrip
   - type: AttachableHolderVisuals
     offsets:
-      cm-aslot-barrel: 0.5, 0.03
-      cm-aslot-rail: 0.0, 0.20
-      cm-aslot-underbarrel: 0.19, -0.14
+      rmc-aslot-barrel: 0.75, 0.00
+      rmc-aslot-rail: 0.06, 0.185
+      rmc-aslot-stock: -0.84, 0.0325
+      rmc-aslot-underbarrel: 0.25, -0.343
 
 - type: entity
   name: M54CE2 heavy assault rifle
@@ -125,6 +146,9 @@
     - SemiAuto # TODO RMC14 burst with greatly increased angle unless mounted
     soundGunshot:
       collection: CMM54CShoot
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.696
+    baseSprint: 0.559
   - type: GunWieldBonus
     minAngle: -25
     maxAngle: -45
@@ -141,6 +165,34 @@
           tags:
           - CMMagazineRifleM54CE2
   - type: GunRequiresWield
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentVerticalGrip
+  - type: AttachableHolderVisuals # CHANGE THESE WHEN THIS THING GETS ITS OWN SPRITE
+    offsets:
+      rmc-aslot-barrel: 0.81, 0.00
+      rmc-aslot-rail: 0.125, 0.185
+      rmc-aslot-stock: -0.875, 0.0325
+      rmc-aslot-underbarrel: 0.312, -0.343
 
 - type: entity
   parent: CMBaseWeaponRifle
@@ -176,6 +228,8 @@
     maxAngle: -50
     angleIncrease: -22
     angleDecay: 10
+  - type: WieldDelay
+    baseDelay: 0.2
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -192,17 +246,31 @@
     multiplier: 1.4
   - type: AttachableHolder
     slots:
-      cm-aslot-barrel:
+      rmc-aslot-barrel:
         whitelist:
           tags:
-          - CMAttachmentExtendedBarrel
-          - CMAttachmentSuppressor
-      cm-aslot-rail:
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
         whitelist:
           tags:
-          - CMAttachmentFlashlight
-          - CMAttachmentB8SmartScope
+          - RMCAttachmentB8SmartScope
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS42xTelescopicMiniscope
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentLaserSight
+          - RMCAttachmentVerticalGrip
   - type: AttachableHolderVisuals
     offsets:
-      cm-aslot-barrel: 0.9, 0.03
-      cm-aslot-rail: -0.1, 0.23
+      rmc-aslot-barrel: 1.18, 0.0
+      rmc-aslot-rail: 0.225, 0.125
+      rmc-aslot-underbarrel: 0.62, -0.31

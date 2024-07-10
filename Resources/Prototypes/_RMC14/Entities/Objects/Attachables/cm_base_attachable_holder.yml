@@ -1,10 +1,10 @@
 - type: entity
   abstract: true
-  id: CMBaseAttachableHolder
+  id: RMCBaseAttachableHolder
   components:
   - type: AttachableHolder
   - type: ActivatableUI
-    verbText: cm-verb-strip-attachables
+    verbText: rmc-verb-strip-attachables
     verbOnly: true
     key:
       enum.AttachmentUI.StripKey
