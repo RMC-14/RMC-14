@@ -596,7 +596,6 @@
       #      - TODO RMC14 splint
       - CMAutoInjector
       #      - TODO RMC14 syringe case
-      - CMSurgicalCase
       - CMFireExtinguisherPortable
       - CMRollerBed
       - CMSurgicalLine
@@ -607,6 +606,10 @@
       components:
       - Hypospray
   - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - CMSurgicalCase
 
 - type: entity
   parent: [CMPouchOpenClosed, CMPouchStorage]
