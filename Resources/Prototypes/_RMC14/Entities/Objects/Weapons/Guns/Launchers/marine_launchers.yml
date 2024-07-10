@@ -50,7 +50,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0
   - type: ShootAtFixedPoint
-    shootArc: true
+    ShootArcProj: true
   - type: Wieldable
   - type: GunRequiresWield
   - type: WieldableSpeedModifiers
@@ -113,7 +113,7 @@
       params:
         volume: 5
   - type: ShootAtFixedPoint
-    shootArc: true
+    ShootArcProj: true
   - type: Wieldable
   - type: GunRequiresWield
   - type: WieldableSpeedModifiers
@@ -193,4 +193,4 @@
     # This is a temporary hack to guarantee it will always go off after stopping even if it doesn't collide with anything.
     # Works for almost all gameplay purposes at least right now because even max range rockets are less than 0.2s and it's fast enough not matter.
   - type: ShootAtFixedPoint
-    ShootArc: false
+    ShootArcProj: false

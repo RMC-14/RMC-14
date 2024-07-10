@@ -9,17 +9,15 @@ public sealed partial class ShootAtFixedPointComponent : Component // TODO: Make
     /// <summary>
     /// Sets the maximum range for a projectile fired with ShootAtFixedPointComponent.
     /// This can be set on both the Projectile and ShootAtFixedPoint Components.
-    /// The default value is 0 for no cap. The minimum nonzero value between the two is used.
+    /// The default value is null for no cap. The minimum value between the two is used.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public double MaxFixedRange = 0;
+    public float? MaxFixedRange;
 
     /// <summary>
     /// Should projectiles launched by a gun with this component be fired in an 'arc'?
-    /// If true, it will ignore most collisions except for Impassable fixture masks.
+    /// If true, they will ignore most collisions except for Impassable fixture layers.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool ShootArc = false;
-
-    // Rename this to ShootAtPoint maybe? ShootAtFixedPoint makes it sound like this goes on an AmmoComponent entit to give it a fixed range it'll always go to.
+    public bool ShootArcProj = false;
 }

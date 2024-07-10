@@ -13,9 +13,9 @@ public sealed partial class ProjectileFixedDistanceComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan FlyEndTime;
     /// <summary>
-    /// Should projectiles launched by a gun with this component be fired in an 'arc'?
-    /// If true, it will ignore most collisions except for Impassable fixture masks.
+    /// If true, the entity containing this component will ignore most collisions except for Impassable fixture layers.
+    /// This is granted to a fired entity by the ShootAtFixedPointComponent based on its ShootArcProj boolean.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool ProjectileArcing = false;
+    public bool ArcProj = false;
 }

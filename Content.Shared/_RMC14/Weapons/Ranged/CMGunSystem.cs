@@ -71,7 +71,7 @@ public sealed class CMGunSystem : EntitySystem
 
     /// <summary>
     /// Shoot at a targeted point's coordinates. The projectile will stop at that location instead of continuing on until it hits something.
-    /// There is also an option to arc the projectile with ShootArc or ProjectileArcing = true, making it ignore most collision.
+    /// There is also an option to arc the projectile with ShootArcProj or ArcProj = true, making it ignore most collision.
     /// </summary>
     /// <remarks>
     /// For some reason, the engine seem to cause MaxFixedRange's conversion to actual projectile max ranges of around +1 tile.
@@ -98,7 +98,9 @@ public sealed class CMGunSystem : EntitySystem
         if (direction == Vector2.Zero)
             return;
 
-        var distance = ent.Comp.MaxFixedRange != null ? Math.Min(ent.Comp.MaxFixedRange, direction.Length()) : direction.Length();
+        // Check for a max range from the ShootAtFixedPointComponent. If defined, take the minimum between that and the calculated distance.
+        var distance = ent.Comp.MaxFixedRange != null ? Math.Min(ent.Comp.MaxFixedRange.Value, direction.Length()) : direction.Length();
+        // Get current time and normalize the vector for physics math.
         var time = _timing.CurTime;
         var normalized = direction.Normalized();
 
@@ -119,27 +121,16 @@ public sealed class CMGunSystem : EntitySystem
             var comp = EnsureComp<ProjectileFixedDistanceComponent>(projectile);
 
             // Transfer arcing to the projectile.
-            if (Comp<ShootAtFixedPointComponent>(ent).ShootArc)
-                comp.ProjectileArcing = true;
-
-            float ammoDistance = (float)Comp<ShootAtFixedPointComponent>(ent).MaxFixedRange;
+            if (Comp<ShootAtFixedPointComponent>(ent).ShootArcProj)
+                comp.ArcProj = true;
 
             // Take the lowest nonzero MaxFixedRange between projectile and gun for the capped vector length.
             if (TryComp(projectile, out ProjectileComponent? normalProjectile) && normalProjectile.MaxFixedRange > 0)
             {
-                if (ammoDistance > 0)
-                    ammoDistance = float.Min(ammoDistance, (float)normalProjectile.MaxFixedRange);
-                else
-                    ammoDistance = (float)normalProjectile.MaxFixedRange;
+                distance = distance > 0 ? Math.Min(normalProjectile.MaxFixedRange.Value, distance) : normalProjectile.MaxFixedRange.Value;
             }
             // Calculate travel time and equivalent distance based either on click location or calculated max range, whichever is shorter.
-            if (ammoDistance > 0)
-            {
-                float cappedRange = float.Min(direction.Length(), ammoDistance);
-                comp.FlyEndTime = time + TimeSpan.FromSeconds(cappedRange / gun.ProjectileSpeedModified);
-            }
-            else
-                comp.FlyEndTime = time + TimeSpan.FromSeconds(ammoDistance / gun.ProjectileSpeedModified);
+            comp.FlyEndTime = time + TimeSpan.FromSeconds(distance / gun.ProjectileSpeedModified);
         }
     }
 
@@ -150,7 +141,7 @@ public sealed class CMGunSystem : EntitySystem
     {
         int otherLayers = (int)args.OtherFixture.CollisionLayer;
         int impassableLayer = (int)CollisionGroup.Impassable;
-        if (((Comp<ProjectileFixedDistanceComponent>(ent).ProjectileArcing) && !((args.OtherFixture.CollisionLayer & impassableLayer) == impassableLayer)))
+        if (((Comp<ProjectileFixedDistanceComponent>(ent).ArcProj) && !((args.OtherFixture.CollisionLayer & impassableLayer) == impassableLayer)))
             args.Cancelled = true;
         return;
     }
