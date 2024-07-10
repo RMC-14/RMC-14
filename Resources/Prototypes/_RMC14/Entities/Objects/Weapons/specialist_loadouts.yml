@@ -56,7 +56,7 @@
   parent: BaseStorageItem
   id: RMCGrenadeSpecEquipmentCase
   name: heavy grenadier equipment case
-  description: "A large case containing a heavy-duty multi-shot M83 grenade launcher, M3-G4 grenadier armor and helmet, significant amount of various M40 grenades and additional pieces of equipment.\n\nDrag this sprite onto yourself to open it up! NOTE: You cannot put items back inside this case."
+  description: "A large case containing a heavy-duty multi-shot M83 grenade launcher, M3-G4 grenadier armor and helmet, significant amount of various M40 grenades and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
   components:
   - type: Sprite
     noRot: true
@@ -101,5 +101,64 @@
   - type: CMChangeUserOnVend
     addComponents:
     - type: GrenadeSpecWhitelist
+  - type: RemoveOnlyStorage
+  - type: FixedItemSizeStorage
+
+- type: entity
+  parent: BaseStorageItem
+  id: RMCDemoSpecEquipmentCase
+  name: demolitionist equipment case
+  description: "A large case containing a heavy-caliber M5 Anti-Tank Launcher, reinforced M3-T light armor, five 84mm rockets, and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Objects/loadout_kits.rsi
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: demo
+      map: [ demo ]
+  - type: Icon
+    sprite: _RMC14/Objects/loadout_kits.rsi
+    state: closed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        base:
+          True: { state: open }
+          False: { state: closed }
+        demo:
+          True: { visible: false }
+          False: { visible: true }
+  - type: Item
+    size: Huge
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,33,1 # 17 items total
+  - type: StorageFill
+    contents:
+    - id: RMCArmorM3TDemo
+    - id: RMCArmorHelmetM3TDemo # TODO RMC14 Give hearing protection component if ear damage is added
+      amount: 2 # For loader. Hearing protection should prevent backblast stun, damage, and deafness effects.
+    - id: RMCSatchelDemoSpec
+      amount: 2
+    - id: RMCWeaponLauncherM5ATL
+    - id: RMCRocket84mm
+      amount: 3 # +1 no WP
+    - id: RMCRocket84mmAntiArmor
+      amount: 2
+#    - id: RMCRocket84mmWhitePhosphorous
+#      amount: 1
+    - id: CMWeaponPistolMK80
+    - id: CMMagazinePistolMK80
+      amount: 2
+#    - id: RMCPlasticExplosives
+#      amount: 2
+#    - id: CMBinoculars
+  - type: CMChangeUserOnVend
+    addComponents:
+    - type: DemoSpecWhitelist
   - type: RemoveOnlyStorage
   - type: FixedItemSizeStorage

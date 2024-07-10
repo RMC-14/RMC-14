@@ -19,8 +19,7 @@
     - name: Weapons Specialist Sets
       choices: { SquadLeaderKit: 1 }
       entries:
-      #- id: DemolitionistSet
-      #  points: 0
+      - id: RMCDemoSpecEquipmentCase
       - id: RMCGrenadeSpecEquipmentCase
       #  points: 0
       #- id: PyroSet
@@ -44,22 +43,25 @@
       - id: CMMagazineSniperM96S
         points: 40
     - name: Extra Demolitionist Ammunition
-      entries: [ ]
-    #- id: 84mmAntiArmorRocket
-    #  points: 40
-    #- id: 84mmHighExplosiveRocket
-    #  points: 40
+      entries:
+      - id: RMCRocket84mmAntiArmor
+        points: 40
+      - id: RMCRocket84mm
+        points: 40
     #- id: 84mmWhitePhosphorusRocket
     #  points: 40
     - name: Extra Grenades
       entries:
       - id: CMGrenadeHighExplosive
+        name: M40 HEDP Blast Grenades (x6)
         points: 40
         spawn: 6
       - id: CMGrenadeFrag # TODO RMC14 hefa and smoke temporarily until normal options are coded
+        name: M40 HEFA Frag Grenades (x6)
         points: 40
         spawn: 6
       - id: CMGrenadeSmoke
+        name: M40 HSDP Smoke Grenades (x6)
         points: 20
         spawn: 6
     #- id: M40HIDPIncendiaryGrenadesx6
