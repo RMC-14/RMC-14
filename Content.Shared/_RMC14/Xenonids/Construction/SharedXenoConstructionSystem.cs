@@ -53,17 +53,19 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private EntityQuery<TransformComponent> _transformQuery;
     private EntityQuery<XenoConstructComponent> _xenoConstructQuery;
     private EntityQuery<XenoEggComponent> _xenoEggQuery;
+    private EntityQuery<XenoWeedsComponent> _xenoWeedsQuery;
 
     public override void Initialize()
     {
-        base.Initialize();
-
         _hiveConstructionNodeQuery = GetEntityQuery<HiveConstructionNodeComponent>();
         _constructionSupportQuery = GetEntityQuery<XenoConstructionSupportComponent>();
         _constructionRequiresSupportQuery = GetEntityQuery<XenoConstructionRequiresSupportComponent>();
         _transformQuery = GetEntityQuery<TransformComponent>();
         _xenoConstructQuery = GetEntityQuery<XenoConstructComponent>();
         _xenoEggQuery = GetEntityQuery<XenoEggComponent>();
+        _xenoWeedsQuery = GetEntityQuery<XenoWeedsComponent>();
+
+        SubscribeLocalEvent<XenoConstructComponent, MapInitEvent>(OnConstructMapInit);
 
         SubscribeLocalEvent<XenoConstructionComponent, XenoPlantWeedsActionEvent>(OnXenoPlantWeedsAction);
 
@@ -98,6 +100,33 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         });
 
         UpdatesAfter.Add(typeof(SharedPhysicsSystem));
+    }
+
+    private void OnConstructMapInit(Entity<XenoConstructComponent> ent, ref MapInitEvent args)
+    {
+        if (!ent.Comp.DestroyWeeds)
+            return;
+
+        var xform = Transform(ent);
+        if (xform.GridUid is not { } gridId ||
+            !TryComp(gridId, out MapGridComponent? grid))
+        {
+            return;
+        }
+
+        var coordinates = _transform.GetMapCoordinates((ent, xform));
+        var indices = _mapSystem.TileIndicesFor(gridId, grid, coordinates);
+        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, indices);
+        while (anchored.MoveNext(out var uid))
+        {
+            if (TerminatingOrDeleted(uid.Value) || EntityManager.IsQueuedForDeletion(uid.Value))
+                continue;
+
+            if (!_xenoWeedsQuery.HasComp(uid))
+                continue;
+
+            QueueDel(uid);
+        }
     }
 
     private void OnXenoPlantWeedsAction(Entity<XenoConstructionComponent> xeno, ref XenoPlantWeedsActionEvent args)
