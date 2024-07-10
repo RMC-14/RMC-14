@@ -9,4 +9,6 @@
     setRecoil: 0
     skills:
       firearms: 1
-  - type: UniqueAction
+  - type: UseDelay
+    delay: 0
+  - type: WieldDelay

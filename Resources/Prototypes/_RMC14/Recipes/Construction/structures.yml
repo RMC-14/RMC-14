@@ -171,6 +171,24 @@
 
 - type: construction
   parent: RMC
+  name: Wooden Barricade
+  id: RMCBarricadeWood
+  graph: BarricadeWoodGraph
+  startNode: start
+  targetNode: nodeWood
+  category: construction-category-cm-structures
+  description: A makeshift wooden barricade.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
+    state: wooden
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
   name: Turnstile
   id: CMBarricadeTurnstile
   graph: BarricadeTurnstileGraph
@@ -338,3 +356,23 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
+  id: RMCGrille
+  name: grille
+  graph: RMCGrille
+  startNode: start
+  targetNode: Grille
+  category: construction-category-cm-structures
+  description: A flimsy lattice of metal rods.
+  icon:
+    sprite: _RMC14/Structures/Walls/grille.rsi
+    state: grille
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false

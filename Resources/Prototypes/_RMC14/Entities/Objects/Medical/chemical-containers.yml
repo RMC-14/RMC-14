@@ -1,0 +1,452 @@
+- type: entity
+  name: jug
+  parent: BaseItem
+  id: RMCJug
+  description: Used to contain a very large amount of chemicals or solutions. Chugging is extremely ill-advised.
+  components:
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          maxVol: 200
+    - type: Sprite
+      sprite: Objects/Specific/Chemistry/jug.rsi
+      layers:
+        - state: jug
+        - state: jug1
+          map: [ "enum.SolutionContainerLayers.Fill" ]
+          visible: false
+    - type: Item
+      size: Normal
+      sprite: Objects/Specific/Chemistry/jug.rsi
+    - type: MixableSolution
+      solution: beaker
+    - type: RefillableSolution
+      solution: beaker
+    - type: DrainableSolution
+      solution: beaker
+    - type: ExaminableSolution
+      solution: beaker
+    - type: DrawableSolution
+      solution: beaker
+    - type: InjectableSolution
+      solution: beaker
+    - type: SolutionTransfer
+      canChangeTransferAmount: true
+    - type: SolutionItemStatus
+      solution: beaker
+    - type: UserInterface
+      interfaces:
+        enum.TransferAmountUiKey.Key:
+          type: TransferAmountBoundUserInterface
+    - type: Drink
+      solution: beaker
+    - type: Spillable
+      solution: beaker
+    - type: Appearance
+    - type: SolutionContainerVisuals
+      maxFillLevels: 6
+      fillBaseName: jug
+      inHandsMaxFillLevels: 5
+      inHandsFillBaseName: -fill-
+    - type: StaticPrice
+      price: 60
+    - type: Damageable
+      damageContainer: Inorganic
+    - type: Destructible
+      thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 200
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+      - trigger:
+          !type:DamageTrigger
+          damage: 20
+        behaviors:
+        - !type:PlaySoundBehavior
+          sound:
+            collection: MetalBreak
+            params:
+              volume: -4
+        - !type:SpillBehavior { }
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            SheetPlastic1:
+              min: 0
+              max: 1
+          transferForensics: true
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - type: Label
+    - type: Tag
+      tags:
+      - ChemDispensable
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: carbon
+  id: RMCJugCarbon
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-carbon
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCCarbon
+              Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: fluorine
+  id: RMCJugFluorine
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-fluorine
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCFluorine
+              Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: chlorine
+  id: RMCJugChlorine
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-chlorine
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCChlorine
+              Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: aluminium
+  id: RMCJugAluminum
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-rmc-aluminum
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCAluminum
+              Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: phosphorus
+  id: RMCJugPhosphorus
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-phosphorus
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCPhosphorus
+              Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: sulfur
+  id: RMCJugSulfur
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-sulfur
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCSulfur
+              Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: silicon
+  id: RMCJugSilicon
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-silicon
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCSilicon
+              Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: hydrogen
+  id: RMCJugHydrogen
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-hydrogen
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCHydrogen
+              Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: lithium
+  id: RMCJugLithium
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-lithium
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCLithium
+              Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: sodium
+  id: RMCJugSodium
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-sodium
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCSodium
+              Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: potassium
+  id: RMCJugPotassium
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-potassium
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCPotassium
+              Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: radium
+  id: RMCJugRadium
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-radium
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCRadium
+              Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: iron
+  id: RMCJugIron
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-iron
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCIron
+              Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: copper
+  id: RMCJugCopper
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-copper
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCCopper
+              Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: gold
+  id: RMCJugGold
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-gold
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCGold
+              Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: mercury
+  id: RMCJugMercury
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-mercury
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCMercury
+              Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: silver
+  id: RMCJugSilver
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-silver
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCSilver
+              Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: ethanol
+  id: RMCJugEthanol
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-ethanol
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCEthanol
+              Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: sugar
+  id: RMCJugSugar
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-sugar
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCSugar
+              Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: nitrogen
+  id: RMCJugNitrogen
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-nitrogen
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCNitrogen
+              Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: oxygen
+  id: RMCJugOxygen
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-oxygen
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCOxygen
+              Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: water
+  id: RMCJugWater
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-water
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCWater
+              Quantity: 200
+
+- type: entity
+  parent: RMCJug
+  name: jug
+  suffix: sulphuric acid
+  id: RMCJugSulphuricAcid
+  noSpawn: true
+  components:
+    - type: Label
+      currentLabel: reagent-name-rmc-sulphuric-acid
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          reagents:
+            - ReagentId: RMCSulphuricAcid
+              Quantity: 200

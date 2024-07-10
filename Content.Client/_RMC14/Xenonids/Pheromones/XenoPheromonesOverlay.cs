@@ -26,7 +26,7 @@ public sealed class XenoPheromonesOverlay : Overlay
 
     private readonly ShaderInstance _shader;
 
-    public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
+    public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
     public XenoPheromonesOverlay()
     {

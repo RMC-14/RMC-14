@@ -1,9 +1,10 @@
 ﻿ui-options-header-rmc = RMC14
 
-ui-options-function-cm-activate-attachable-barrel = Activate barrel attachment
-ui-options-function-cm-activate-attachable-rail = Activate rail attachment
-ui-options-function-cm-activate-attachable-stock = Activate stock attachment
-ui-options-function-cm-activate-attachable-underbarrel = Activate underbarrel attachment
+ui-options-function-rmc-activate-attachable-barrel = Activate barrel attachment
+ui-options-function-rmc-activate-attachable-rail = Activate rail attachment
+ui-options-function-rmc-activate-attachable-stock = Activate stock attachment
+ui-options-function-rmc-activate-attachable-underbarrel = Activate underbarrel attachment
+ui-options-function-rmc-field-strip-held-item = Field strip held item
 ui-options-function-cm-unique-action = Unique action
 ui-options-function-cm-holster-primary = Unholster
 ui-options-function-cm-holster-secondary = Unholster secondary

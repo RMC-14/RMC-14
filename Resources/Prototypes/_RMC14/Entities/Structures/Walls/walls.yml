@@ -264,7 +264,7 @@
   parent: CMBaseWall
   id: CMWallWood
   name: wood wall
-  description: A huge chunk of metal used to separate rooms.
+  description: A wooden wall used to separate rooms.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/wood.rsi
@@ -301,79 +301,36 @@
   - type: Tag
     tags:
     - Wall
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 3000
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: IconSmooth
     key: walls
     base: jungle_veg
 
-# Solaris
+# Elevator
 - type: entity
-  parent: CMWallMetal
-  id: CMWallSolaris
-  name: colony wall
-  description: Tough looking walls that have been blasted by sand since the day they were erected. A testament to human willpower.
+  parent: CMBaseWallInvincible
+  id: RMCWallElevator
+  name: elevator wall
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Walls/solaris_wall.rsi
-    state: solaris_interior
+    sprite: _RMC14/Structures/Walls/elevator.rsi
   - type: Icon
-    sprite: _RMC14/Structures/Walls/solaris_wall.rsi
-    state: solaris_interior
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: full
+  - type: Tag
+    tags:
+    - Wall
   - type: IconSmooth
-    key: wall
-    base: solaris_interior
-
-- type: entity
-  parent: CMWallReinforced
-  id: CMWallSolarisReinforced
-  name: reinforced colony wall
-  description: Tough looking walls that have been blasted by sand since the day they were erected. A testament to human willpower.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Walls/solaris_rwall.rsi
-    state: solaris_interior_r
-  - type: Icon
-    sprite: _RMC14/Structures/Walls/solaris_rwall.rsi
-    state: solaris_interior_r
-  - type: IconSmooth
-    key: wall
-    base: solaris_interior_r
+    key: walls
+    base: wall
 
 - type: entity
   parent: CMBaseWallInvincible
-  id: CMWallSolarisHull
-  name: heavy reinforced colony wall
-  description: Tough looking walls that have been blasted by sand since the day they were erected. A testament to human willpower.
+  id: RMCWallElevatorBroken
+  name: elevator wall
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Walls/solaris_rwall.rsi
-    state: solaris_interior_r
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_broke
   - type: Icon
-    sprite: _RMC14/Structures/Walls/solaris_rwall.rsi
-    state: solaris_interior_h
-  - type: IconSmooth
-    key: wall
-    base: solaris_interior_r
-
-- type: entity
-  parent: CMBaseWallInvincible
-  id: CMWallSolarisRock
-  name: rock wall
-  description: Tough looking walls that have been blasted by sand since the day they were erected. A testament to human willpower.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Walls/solaris_rock.rsi
-    state: solaris_rock
-  - type: Icon
-    sprite: _RMC14/Structures/Walls/solaris_rock.rsi
-    state: solaris_rock
-  - type: IconSmooth
-    key: wall
-    base: solaris_rock
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_broke

@@ -1,0 +1,202 @@
+# FIRE TEAM LEADER
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechFLGear
+  name: ColMarTech fireteam leader gear rack
+  description: An automated gear rack for fireteam leaders.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessFTLPrep" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/fireteam_leader_gear.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMFireteamLeader
+    sections:
+    - name: Explosives
+      entries:
+      - id: CMPacketGrenadeHighExplosiveFilled
+        points: 18
+    #- id: CMM40HIDPIncendiaryPacketx3
+    #  points: 18
+    #- id: CMM40HPDPWhitePhosphorusPacketx3
+    #  points: 18
+    #- id: CMM40HSDPSmokePacketx3
+    #  points: 9
+    #- id: CMM74AGMFragAirburstPacketx3
+    #  points: 20
+    #- id: CMM74AGMIncendiaryAirburstPacketx3
+    #  points: 20
+    #- id: CMM74AGMSmokeAirburstPacketx3
+    #  points: 10
+    #- id: CMM74AGMHornetAirburstPacketx3
+    #  points: 20
+    #- id: CMM20MineBoxx4
+    #  points: 20
+    #- id: CMM40MFHSMetalFoamGrenade
+    #  points: 5
+    - name: Primary Ammunition
+      entries:
+      - id: CMMagazineRifleM4SPRAP
+        points: 10
+      - id: CMMagazineSMGM63AP
+        points: 10
+      - id: CMMagazineSMGM63Ext
+        points: 10
+      - id: CMMagazineRifleM54CAP
+        points: 10
+      - id: CMMagazineRifleM54CExt
+        points: 10
+    - name: Sidearm Ammunition
+      entries:
+      - id: CMMagazinePistolMK80
+        points: 5
+    #- id: CMM44HeavySpeedLoader
+    #  points: 10
+    #- id: CMM1984HPMagazine
+    #  points: 5
+    #- id: CMM1984APMagazine
+    #  points: 5
+    - name: Restricted Firearms
+      entries:
+      - id: CMWeaponPistolMK80 # TODO RMC14 case with 2 mags
+        points: 5 # TODO RMC14 10
+    #- id: CMSU6SmartPistol
+    #  points: 15
+    #- id: CMM79GrenadeLauncher
+    #  points: 30
+    - name: Armors
+      entries:
+      - id: CMArmorB12
+        points: 30
+    - name: Clothing Items
+      entries:
+    #- id: CMScabbardMacheteFull
+    #  points: 5
+      - id: CMPouchMacheteFilled
+        points: 15
+    #- id: CMMarineRadioTelephonePack
+    #  points: 5
+    #- id: CMWeldingGoggles
+    #  points: 3
+      - id: CMBeltUtilityCombat
+        points: 15
+      - id: CMPouchAutoinjectorFill
+        points: 15
+      - id: CMHandsInsulated
+        points: 3
+    #- id: CMNightVisionOptic
+    #  points: 30
+    - name: Engineering Supplies
+      entries:
+#      - id: Plastic Explosive
+#        points: 10
+      - id: RMCExplosiveBreachingCharge
+        points: 10
+#      - id: ES-11 Mobile Fuel Canister
+#        points: 10
+      - id: CMWelderSmall
+        points: 5
+    - name: Utilities
+      entries:
+    #- id: CMMotionDetector
+    #  points: 15
+      - id: CMRollerBedSpawnFolded
+        points: 5
+    #- id: CMFultonDeviceStack
+    #  points: 5
+      - id: CMFireExtinguisherPortable
+        points: 5
+      - id: CMWhistle
+        points: 5
+    - name: Binoculars
+      entries: [ ]
+    #- id: CMBinoculars
+    #  points: 5
+    - name: Helmet Optics
+      entries: [ ]
+    #- id: CMMedicalHelmetOptic
+    #  points: 15
+    #- id: CMWeldingVisor
+    #  points: 5
+    - name: Radio Keys
+      entries:
+      - id: CMEncryptionKeyEngineer
+        points: 5
+      - id: CMEncryptionKeyIntel
+        points: 5
+      - id: CMEncryptionKeyJTAC
+        points: 5
+      - id: CMEncryptionKeyRequisition
+        points: 5
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechFLEquipment
+  name: ColMarTech fireteam leader equipment rack
+  description: An automated rack hooked up to a colossal storage of fireteam leader standard-issue equipment.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessFTLPrep" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMFireteamLeader
+    sections:
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: CMVendorBundleRiflemanApparel
+      - id: CMArmorM4
+      - id: CMMRE
+      #- id: CMMap # TODO: Make a map
+    #- id: CMEssentialFireteamLeaderUtilities
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+    #- id: CMG8AGeneralUtilityPouch
+      - id: CMBeltMarine
+    #- id: CMM276GeneralPistolHolsterRig
+    #- id: CMM276M63HolsterRig
+    #- id: CMM276M44HolsterRig
+    #- id: CMM276M82FHolsterRig
+    #- id: CMM276ShotgunShellLoadingRig
+      - id: CMBeltUtilityFilled
+    #- id: CMM276M40GrenadeRig
+    - name: Pouches
+      choices: { CMPouch: 2 }
+      entries:
+      - id: CMPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
+      - id: CMPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+      - id: CMPouchFirstAidPills
+        name: first-aid pouch (pills)
+      - id: CMPouchFirstResponder
+      - id: CMPouchFlareFilled
+        name: Flare pouch (Filled)
+      #- id: CMFuelTankStrapPouch
+      - id: CMPouchGeneralLarge
+      #- id: CMSlingPouch
+      - id: CMPouchMagazinePistolLarge
+      - id: CMPouchMagazine
+      - id: CMPouchShotgun
+      - id: CMPouchPistol
+      - id: CMPouchToolsFill
+        name: Tools pouch (Filled)
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBrown
+      - id: CMWebbingBlack
+      #- id: CMShoulderHolster
+      - id: CMWebbing
+    #- id: CMDropPouch
+    - name: Mask
+      entries:
+      - id: CMMaskGas
+      - id: CMMaskCoif

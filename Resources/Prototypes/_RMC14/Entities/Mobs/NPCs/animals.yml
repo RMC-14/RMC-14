@@ -41,26 +41,48 @@
     prob: 0
 
 - type: entity
-  parent: SpawnMobMonkey
+  parent: MobCorgiPuppy
+  id: CMMobWiggles
+  name: Mr. Wiggles
+  description: It's a corgi puppy.
+
+- type: entity
+  parent: MobCatCalico
+  id: CMMobJones
+  name: Jones
+  description: A tough, old stray whose origin no one seems to know.
+
+# Spawners
+
+- type: entity
+  parent: MarkerBase
   id: CMSpawnMobMonkey
-  suffix: CM
+  name: monkey spawner
+  suffix: RMC
   components:
-  - type: ConditionalSpawner
+  - type: Sprite
+    layers:
+    - state: green
+    - state: monkey
+      sprite: Mobs/Animals/monkey.rsi
+  - type: ProportionalSpawner
+    id: CMSpawnMobMonkey
     prototypes:
     - CMMobMonkey
 
 - type: entity
   parent: MarkerBase
   id: CMSpawnMobKobold
-  name: Kobold Spawner
-  suffix: CM
+  name: kobold spawner
+  suffix: RMC
   components:
   - type: Sprite
     layers:
     - state: green
     - state: kobold
       sprite: Mobs/Animals/kobold.rsi
-  - type: ConditionalSpawner
+  - type: ProportionalSpawner
+    id: CMSpawnMobMonkey
     prototypes:
     - CMMobKobold
 
@@ -74,3 +96,33 @@
     - CMMobMouse
     - CMMobMouse1
     - CMMobMouse2
+
+- type: entity
+  parent: MarkerBase
+  id: CMSpawnMobWiggles
+  name: Mr. Wiggles Spawner
+  suffix: CM
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: puppy
+      sprite: Mobs/Pets/corgi.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - CMMobWiggles
+
+- type: entity
+  parent: MarkerBase
+  id: CMSpawnMobJones
+  name: Jones Spawner
+  suffix: CM
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: cat2
+      sprite: Mobs/Pets/cat.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - CMMobJones

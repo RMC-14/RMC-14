@@ -7,6 +7,8 @@
   name: Boiler
   description: A huge, grotesque xenonid covered in glowing, oozing acid slime.
   components:
+  - type: GhostRole
+    name: cm-job-name-xeno-boiler
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Boiler/boiler.rsi
   - type: MobState

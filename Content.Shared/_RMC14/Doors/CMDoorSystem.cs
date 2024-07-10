@@ -1,18 +1,27 @@
-﻿using Content.Shared.Directions;
+﻿using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Access.Systems;
+using Content.Shared.Directions;
 using Content.Shared.Doors;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
+using Content.Shared.Interaction;
+using Content.Shared.Popups;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Map.Enumerators;
+using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Doors;
 
 public sealed class CMDoorSystem : EntitySystem
 {
+    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private readonly SharedDoorSystem _doors = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private EntityQuery<DoorComponent> _doorQuery;
     private EntityQuery<CMDoubleDoorComponent> _doubleQuery;
@@ -24,6 +33,8 @@ public sealed class CMDoorSystem : EntitySystem
 
         // TODO RMC14 there is an edge case where one door can close but the other can't, to fix this CanClose should be checked on the adjacent door when a double door tries to close
         SubscribeLocalEvent<CMDoubleDoorComponent, DoorStateChangedEvent>(OnDoorStateChanged);
+
+        SubscribeLocalEvent<RMCDoorButtonComponent, ActivateInWorldEvent>(OnButtonActivateInWorld);
     }
 
     private void OnDoorStateChanged(Entity<CMDoubleDoorComponent> door, ref DoorStateChangedEvent args)
@@ -37,6 +48,53 @@ public sealed class CMDoorSystem : EntitySystem
                 Close(door);
                 break;
         }
+    }
+
+    private void OnButtonActivateInWorld(Entity<RMCDoorButtonComponent> button, ref ActivateInWorldEvent args)
+    {
+        var user = args.User;
+        if (HasComp<XenoComponent>(user))
+            return;
+
+        if (!_accessReader.IsAllowed(user, button))
+        {
+            // TODO RMC14 denied animation
+            _popup.PopupClient(Loc.GetString("cm-vending-machine-access-denied"), button, user, PopupType.SmallCaution);
+            return;
+        }
+
+        var time = _timing.CurTime;
+        if (time < button.Comp.LastUse + button.Comp.Cooldown)
+            return;
+
+        button.Comp.LastUse = time;
+        var buttonName = Name(button);
+        var buttonTransform = Transform(button);
+
+        var doors = EntityQueryEnumerator<RMCPodDoorComponent, DoorComponent, TransformComponent, MetaDataComponent>();
+        while (doors.MoveNext(out var door, out _, out var doorComp, out var doorTransform, out var metaData))
+        {
+            if (TerminatingOrDeleted(door))
+                continue;
+
+            if (buttonTransform.MapID != doorTransform.MapID)
+                continue;
+
+            if (buttonName != metaData.EntityName)
+                continue;
+
+            if (doorComp.State == DoorState.Open)
+            {
+                _doors.StartClosing(door);
+            }
+            else
+            {
+                _doors.TryOpen(door, doorComp);
+            }
+        }
+
+        if (_net.IsServer)
+            RaiseNetworkEvent(new RMCPodDoorButtonPressedEvent(GetNetEntity(button)), Filter.PvsExcept(button));
     }
 
     private AnchoredEntitiesEnumerator? GetAdjacentEnumerator(Entity<CMDoubleDoorComponent> ent)

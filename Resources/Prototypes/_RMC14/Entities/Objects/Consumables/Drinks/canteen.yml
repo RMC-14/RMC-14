@@ -29,6 +29,7 @@
       - !type:SpillBehavior { }
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: RMCFlask
 
 - type: entity
   parent: CMCanteenBase

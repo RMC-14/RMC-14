@@ -1,6 +1,43 @@
 ﻿- type: entity
   abstract: true
   parent: CMBaseStructureCorrodible
+  id: RMCBaseWindowFrame
+  name: "window frame"
+  description: A big hole in the wall that used to sport a large window. Can be vaulted through.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    drawdepth: Walls
+  - type: PlacementReplacement
+    key: walls
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: StaticPrice
+    price: 75
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+        density: 1000
+  - type: Climbable
+
+- type: entity
+  abstract: true
+  parent: CMBaseStructureCorrodible
   id: CMBaseWindow # TODO RMC14 this needs to be 2 separate entities eventually
   placement:
     mode: SnapgridCenter
@@ -34,6 +71,7 @@
         layer:
         - WallLayer
         density: 1000
+  - type: RMCWallExplosionDeletable
 
 - type: entity
   parent: CMBaseWindow
@@ -116,46 +154,23 @@
     mode: CardinalFlags
 
 
-# Solaris
+# Shiva
 
 - type: entity
   parent: CMBaseWindow
-  id: CMWindowSolaris
+  id: CMWindowShiva
   name: window
   description: A glass window inside a wall frame.
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Windows/solaris_window.rsi
-    state: solaris_window0
+    sprite: _RMC14/Structures/Windows/shiva_window.rsi
+    state: shiva_window0
   - type: Icon
-    sprite: _RMC14/Structures/Windows/solaris_window.rsi
-    state: solaris_window0
+    sprite: _RMC14/Structures/Windows/shiva_window.rsi
+    state: shiva_window
   - type: IconSmooth
     key: walls
-    base: solaris_window
+    base: shiva_window
     mode: CardinalFlags
   # 40 hp
-
-- type: entity
-  parent: CMBaseWindow
-  id: CMWindowSolarisReinforced
-  name: reinforced window
-  description: A glass window. The inside is reinforced with a few tempered matrix rods along the base. It looks rather strong. Might take a few good hits to shatter it.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Windows/solaris_rwindow.rsi
-    state: solaris_rwindow0
-  - type: Icon
-    sprite: _RMC14/Structures/Windows/solaris_rwindow.rsi
-    state: solaris_rwindow0
-  - type: IconSmooth
-    key: walls
-    base: solaris_rwindow
-    mode: CardinalFlags
-  # 100 hp
-
-- type: entity
-  parent: CMWindowSolarisReinforced
-  id: CMWindowSolarisHull
-  description: A glass window. Something tells you this one is somehow indestructible.
-  # 1000000 hp
+  # Temporary corner sprites taken from colony reinforced window, since no corner windows used on shiva.

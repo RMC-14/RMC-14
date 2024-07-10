@@ -1,0 +1,263 @@
+# HOSPITAL CORPSMAN
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechMedicalGear
+  name: ColMarTech squad medical gear rack
+  description: An automated gear rack for hospital corpsmen.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessMedPrep" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/medical_gear.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMHospitalCorpsman
+    sections:
+    - name: Medical Set (Mandatory)
+      takeAll: CMMedicalSet
+      entries:
+      - id: CMVendorBundleSquadMedicalEssentials
+    - name: Field Supplies
+      entries:
+      - id: CMBurnKit10
+        points: 2
+      - id: CMTraumaKit10
+        points: 2
+    #    CMMedicalSplints: 1P
+      - id: CMGauze10
+        points: 1
+      - id: CMOintment10
+        points: 1
+      - id: CMBloodPackFull # TODO RMC14 O-
+        points: 4
+    - name: Firstaid Kits
+      entries:
+      - id: CMAdvFirstAidKitFilled
+        points: 12
+      - id: CMFirstAidKitFilled
+        points: 5
+      - id: CMBurnAidKitFilled
+        points: 6
+      - id: CMToxinAidKitFilled
+        points: 6
+      - id: CMFirstAidO2KitFilled
+        points: 6
+#      - id: #    CMRadiationFirstaidKit # TODO RMC14
+#        points: 6
+    - name: Autoinjectors
+      entries:
+      - id: CMBicaridineAutoInjector
+        points: 1
+      - id: CMDexalinPlusAutoInjector
+        points: 1
+      - id: CMEpinephrineAutoInjector
+        points: 2
+      - id: CMInaprovalineAutoInjector
+        points: 1
+      - id: CMKelotaneAutoInjector
+        points: 1
+#      - id: CMAutoinjectorOxycodone
+#        points: 2
+#      - id: CMAutoinjectorTramadol
+#        points: 1
+      - id: CMTricordrazineAutoInjector
+        points: 1
+    - name: Pill Bottles
+      entries:
+      - id: CMPillCanisterBicaridine
+        points: 5
+      - id: CMPillCanisterDexalin
+        points: 5
+      - id: CMPillCanisterDylovene
+        points: 5
+      - id: CMPillCanisterInaprovaline
+        points: 5
+      - id: CMPillCanisterKelotane
+        points: 5
+#      - id: CMPillCanisterPeridaxon
+#        points: 5
+#      - id: CMPillCanisterTramadol
+#        points: 5
+    - name: Medical Utilities
+      entries:
+      - id: CMHealthAnalyzer
+        points: 4
+      - id: CMRollerBedSpawnFolded
+        points: 4
+      - id: CMStasisBagFolded
+        points: 6
+    #    CMPressurizedReagentCanisterPouchEMPTY: 3P
+    #    CMG8AGeneralUtilityPouch: 15P
+    #    CMMS11SmartRefillTank: 6P
+    - name: Explosives
+      entries:
+      - id: CMPacketGrenadeHighExplosiveFilled
+        points: 18
+    #    CMM40HIDPIncendiaryPacketx3grenades: 18P
+    #    CMM40HPDPWhitePhosphorusPacketx3grenades: 18P
+    #    CMM40HSDPSmokePacketx3grenades: 9P
+    #    CMM74AGMFragAirburstPacketx3airburstgrenades: 20P
+    #    CMM74AGMIncendiaryAirburstPacketx3airburstgrenades: 20P
+    #    CMM74AGMSmokeAirburstPacketx3airburstgrenades: 10P
+    #    CMM74AGMHornetAirburstPacketx3airburstgrenades: 20P
+    #    CMM20MineBoxx4mines: 20P
+    - name: Primary Ammunition
+      entries:
+      - id: CMMagazineRifleM4SPRAP
+        points: 6
+      - id: CMMagazineSMGM63AP
+        points: 6
+      - id: CMMagazineSMGM63Ext
+        points: 6
+      - id: CMMagazineRifleM54CAP
+        points: 6
+      - id: CMMagazineRifleM54CExt
+        points: 6
+    - name: Sidearm Ammunition
+      entries:
+      - id: CMMagazinePistolMK80
+        points: 3
+    - name: Armors
+      entries:
+      - id: CMArmorB12
+        points: 28
+      - id: CMArmorM4
+        points: 28
+    - name: Restricted Firearms
+      entries:
+      - id: CMWeaponPistolMK80
+        points: 8
+    #    CMSU6SmartPistol: 12P
+    - name: Clothing Items
+      entries:
+    #    CMScabbardMacheteFull: 6P
+      - id: CMPouchMacheteFilled
+        points: 8
+    #    CMMarineRadioTelephonePack: 15P
+    #    CMFuelTankStrapPouch: 4P
+    #    CMWeldingGoggles: 3P
+    - name: Utilities
+      entries:
+      - id: CMFireExtinguisherPortable
+        points: 3
+    #    CMMotionDetector: 8P
+      - id: CMWhistle
+        points: 3
+    - name: Binoculars
+      entries: [ ]
+    #    CMBinoculars: 5P
+    #    CMRangeFinder: 10P
+    #    CMLaserDesignator: 15P
+    - name: Helmet Optics
+      entries: [ ]
+    #    CMWeldingVisor: 5P
+    - name: Pamphlets
+      entries: [ ]
+    #    CMPamphletJTAC: 15P
+    #    CMPamphletEngineering: 15P
+    - name: Radio Keys
+      entries:
+      - id: CMEncryptionKeyEngineer
+        amount: 3
+        points: 3
+      - id: CMEncryptionKeyIntel
+        amount: 3
+        points: 3
+      - id: CMEncryptionKeyJTAC
+        amount: 3
+        points: 3
+      - id: CMEncryptionKeyRequisition
+        amount: 3
+        points: 3
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechMedicalEquipment
+  name: ColMarTech squad medical equipment rack
+  description: An automated rack hooked up to a colossal storage of hospital corpsman standard-issue equipment.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessMedPrep" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMHospitalCorpsman
+    sections:
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: CMVendorBundleSquadMedicalApparel
+      - id: CMMRE
+      #- id: CMMap # TODO: Make a map
+    #- id: CMCombatSterileGloves
+    - name: Armor
+      choices: { CMArmor: 1 }
+      entries:
+      - id: CMArmorM3Light
+        name: light armor
+      - id: CMArmorM3Medium
+        name: medium armor
+      - id: CMArmorM3Heavy
+        name: heavy armor
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: CMBackpackMedical
+      - id: CMSatchelMedical
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      - id: CMBeltMarine
+      #- id: CMM276GeneralPistolHolsterRig
+      - id: CMBeltMedicBagFilled
+      - id: CMBeltMedicalFilled
+      #- id: CMM276M63HolsterRig
+      #- id: CMM276M44HolsterRig
+      #- id: CMM276M82FHolsterRig
+      #- id: CMM276ShotgunShellLoadingRig
+      #- id: CMM276M40GrenadeRig
+    - name: Pouches
+      choices: { CMPouch: 2 }
+      entries:
+      - id: CMPouchAutoinjector
+      - id: CMPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
+      - id: CMPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+      - id: CMPouchFirstAidPills
+        name: first-aid pouch (pills)
+      - id: CMPouchFirstResponder # TODO RMC14 test everything fits
+      - id: CMPouchFlareFilled
+        name: Flare pouch (filled)
+      - id: CMPouchGeneralLarge
+      #- id: CMSlingPouch
+      - id: CMPouchMagazinePistolLarge
+      - id: CMPouchMagazine
+      - id: CMPouchShotgun
+      - id: CMPouchMedical
+      #- id: CMPouchMedkit
+      #- id: CMPressurizedReagentCanisterPouchBicaridine
+      #- id: CMPressurizedReagentCanisterPouchKelotane
+      #- id: CMPressurizedReagentCanisterPouchRevivalMix
+      #- id: CMPressurizedReagentCanisterPouchTricordrazine
+      #- id: CMPressurizedReagentCanisterPouchEmpty
+      - id: CMPouchPistol
+      #- id: CMVialPouchFull
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBrown
+      - id: CMWebbingBlack
+      #- id: CMShoulderHolster
+      - id: CMWebbing
+    #- id: CMDropPouch
+    - name: Mask
+      choices: { CMMask: 1 }
+      entries:
+      - id: CMMaskGas
+      - id: CMMaskCoif
+      - id: CMMaskSterile

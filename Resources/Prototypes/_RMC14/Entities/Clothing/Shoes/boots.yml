@@ -1,6 +1,6 @@
 # Dress Shoes
 - type: entity
-  parent: ClothingShoesBaseButcherable
+  parent: ClothingShoesBase
   id: CMShoesLaceup
   name: laceup shoes
   description: The height of fashion, and they're pre-polished!
@@ -44,6 +44,7 @@
           - Knife
   - type: CMHolster
   - type: CMItemSlots
+  - type: UsableWhileDevoured
 
 - type: entity
   parent: CMBootsBlack
@@ -57,9 +58,9 @@
         whitelist:
           tags:
           - Knife
-        startingItem: CMM5Bayonet
+        startingItem: RMCM5Bayonet
   - type: CMItemSlots
-    startingItem: CMM5Bayonet
+    startingItem: RMCM5Bayonet
 
 # Brown Boots
 - type: entity
@@ -78,7 +79,7 @@
   suffix: Filled
   components:
   - type: CMItemSlots
-    startingItem: CMM5Bayonet
+    startingItem: RMCM5Bayonet
 
 # Jungle Boots
 - type: entity
@@ -98,4 +99,4 @@
   suffix: Filled
   components:
   - type: CMItemSlots
-    startingItem: CMM5Bayonet
+    startingItem: RMCM5Bayonet

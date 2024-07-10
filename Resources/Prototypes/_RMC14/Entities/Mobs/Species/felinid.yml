@@ -12,9 +12,9 @@
     scale: 0.8, 0.8
   - type: Vocal
     sounds:
-      Male: CMMaleFelinid
-      Unsexed: CMMaleFelinid
-      Female: CMFemaleFelinid
+      Male: RMCMaleFelinid
+      Unsexed: RMCMaleFelinid
+      Female: RMCFemaleFelinid
   - type: Speech
     allowedEmotes: ['Hiss', 'Meow', 'Mew', 'Growl', 'Purr']
 

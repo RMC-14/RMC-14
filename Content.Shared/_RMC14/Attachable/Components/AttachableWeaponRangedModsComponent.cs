@@ -1,11 +1,12 @@
+using Content.Shared._RMC14.Attachable.Systems;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Attachable.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(AttachableWeaponRangedModsSystem))]
+[Access(typeof(AttachableModifiersSystem))]
 public sealed partial class AttachableWeaponRangedModsComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public AttachableWeaponRangedModifierSet Modifiers = new();
+    public List<AttachableWeaponRangedModifierSet> Modifiers = new();
 }

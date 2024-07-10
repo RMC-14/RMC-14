@@ -7,6 +7,8 @@
   name: Spitter
   description: A gross, oozing alien of some kind.
   components:
+  - type: GhostRole
+    name: cm-job-name-xeno-spitter
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Spitter/spitter.rsi
   - type: MobState

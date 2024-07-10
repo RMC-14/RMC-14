@@ -80,6 +80,8 @@
       types:
         Slash: 600
   - type: XenoConstructionRequiresSupport
+  - type: XenoConstruct
+    destroyWeeds: false
 
 - type: entity
   id: DoorXenoResinThick
@@ -123,3 +125,5 @@
     xenoDamage:
       types:
         Slash: 900
+  - type: XenoConstructionPlasmaCost
+    plasma: 145

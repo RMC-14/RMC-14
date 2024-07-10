@@ -63,3 +63,44 @@
   components:
   - type: Sprite
     state: prison_catwalk
+
+# Monorail
+
+- type: entity
+  id: RMCMonorailStraight
+  name: monorail track
+  description: The rail system for the CORSAT monorail.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Clickable
+  - type: Sprite
+    sprite: _RMC14/Structures/catwalk.rsi
+    drawdepth: FloorTiles
+    state: monorailStraight
+    noRot: false
+  - type: Icon
+    sprite: _RMC14/Structures/catwalk.rsi
+    state: monorailStraight
+  - type: Transform
+    anchored: true
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepCatwalk
+      params:
+        volume: 8
+  - type: Tag
+    tags:
+      - Catwalk
+
+- type: entity
+  parent: RMCMonorailStraight
+  id: RMCMonorailBend
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/catwalk.rsi
+    drawdepth: FloorTiles
+    state: monorailBend
+  - type: Icon
+    sprite: _RMC14/Structures/catwalk.rsi
+    state: monorailBend

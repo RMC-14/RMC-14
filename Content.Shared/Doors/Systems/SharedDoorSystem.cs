@@ -15,12 +15,12 @@ using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Tools.Systems;
 using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 
 namespace Content.Shared.Doors.Systems;
 
@@ -572,6 +572,9 @@ public abstract partial class SharedDoorSystem : EntitySystem
                 continue;
 
             if (_entityLookup.GetWorldAABB(otherPhysics.Owner).IntersectPercentage(doorAABB) < IntersectPercentage)
+                continue;
+
+            if (otherPhysics.CollisionLayer == (int) CollisionGroup.DropshipImpassable)
                 continue;
 
             yield return otherPhysics.Owner;

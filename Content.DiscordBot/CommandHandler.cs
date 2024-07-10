@@ -93,7 +93,7 @@ public sealed class CommandHandler(DiscordSocketClient client, CommandService co
 
                 if (codes.CreationTime < DateTime.UtcNow.Subtract(TimeSpan.FromDays(1)))
                 {
-                    await modal.FollowupAsync($"Code {codeStr} were generated too long ago, join the game server and get another code before trying again.");
+                    await modal.FollowupAsync($"Code {codeStr} were generated too long ago, join the game server and get another code before trying again.", ephemeral: true);
                 }
 
                 if (discord?.LinkedAccount is { } linked)

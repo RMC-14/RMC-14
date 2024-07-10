@@ -1,0 +1,216 @@
+# RIFLEMAN
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechEquipment
+  name: ColMarTech automated marine equipment rack
+  description: An automated rack hooked up to a colossal storage of Marine Rifleman standard-issue equipment.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessMarineRifleman" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
+  - type: CMAutomatedVendor
+    sections:
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: CMVendorBundleRiflemanApparel
+      - id: CMMRE
+        name: MRE
+      #- id: CMMap # TODO: Make a map
+    - name: Armor
+      choices: { CMArmour: 1 }
+      entries:
+      - id: CMArmorM3Light
+        name: light armor
+      - id: CMArmorM3Medium
+        name: medium armor
+      - id: CMArmorM3Heavy
+        name: heavy armor
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: CMBackpackMarine
+        name: backpack
+      - id: CMSatchelMarine
+        name: satchel
+        recommended: true
+      #- id: CMShotgunScabbard # TODO: Make a Scabbard
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      - id: CMBeltMarine
+        recommended: true
+      #    CMM276GeneralPistolHolsterRig #TODO: Make this
+      - id: CMBeltKnifeFilled
+        name: M276 knife rig (full)
+      #    CMM276M63HolsterRig #TODO: Make this
+      #    CMM276M44HolsterRig #TODO: Make this
+      #    CMM276M82FHolsterRig #TODO: Make this
+      #    CMM276ShotgunShellLoadingRig #TODO: Make this
+      - id: CMBeltUtility
+    #    CMM276M40GrenadeRigEmpty #TODO: Make this
+    - name: Pouches
+      choices: { CMPouch: 2 }
+      entries:
+      - id: CMPouchBayonetFill
+      - id: CMPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
+        recommended: true
+      - id: CMPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        recommended: true
+      - id: CMPouchFirstAidPills
+        name: first-aid pouch (pills)
+        recommended: true
+      - id: CMPouchFlareFilled
+        name: Flare pouch (Filled)
+        recommended: true
+      #    CMSmallDocumentPouch #TODO: Make this
+      - id: CMPouchMagazine
+      - id: CMPouchShotgun
+      - id: CMPouchGeneral
+      - id: CMPouchMagazinePistol
+      - id: CMPouchPistol
+    - name: Mask
+      choices: { CMMask: 1 }
+      entries:
+      - id: CMMaskGas
+      - id: CMMaskCoif
+    #    CMRebreather #TODO: Make this
+    - name: Engineering Supplies
+      entries:
+      - id: CMEntrenchingTool
+        points: 5
+      - id: CMSandbagEmpty50
+        points: 20
+#      - id: ES-11 Mobile Fuel Canister
+#        points: 5
+      - id: CMWelderSmall
+        points: 5
+    - name: Restricted Firearms
+      entries:
+      - id: CMWeaponPistolMK80
+        points: 15
+    #- id: CMSU6SmartPistol
+    #  points: 15
+    #- id: CMM79GrenadeLauncher
+    #  points: 30
+    - name: Explosives
+      entries:
+      - id: CMPacketGrenadeHighExplosiveFilled
+        points: 20
+    #- id: CMM40HIDPIncendiaryPacket3
+    #  points: 20
+    #- id: CMM40HPDPPhosphorusPacket3
+    #  points: 20
+    #- id: CMM40HSDPSmokePacket3
+    #  points: 10
+    #- id: CMM74AGMFragAirburstPacket3
+    #  points: 15
+    #- id: CMM74AGMIncendiaryAirburstPacket3
+    #  points: 15
+    #- id: CMM74AGMSmokeAirburstPacket3
+    #  points: 10
+    #- id: CMM74AGMHornetAirburstPacket3
+    #  points: 15
+    #- id: CMM20MineBox4
+    #  points: 20
+    - name: Primary Ammunition
+      entries:
+      - id: CMMagazineRifleM4SPRAP
+        points: 10
+      - id: CMMagazineSMGM63AP
+        points: 10
+      - id: CMMagazineSMGM63Ext
+        points: 10
+      - id: CMMagazineRifleM54CAP
+        points: 10
+      - id: CMMagazineRifleM54CExt
+        points: 10
+    - name: Sidearm Ammunition
+      entries:
+#      - id: CMM44HeavySpeedLoader
+#        points: 10
+      - id: CMMagazinePistolMK80
+        points: 5
+    - name: Armors
+      entries:
+      - id: CMArmorB12
+        points: 30
+      - id: CMArmorM4
+        points: 20
+    - name: Clothing Items
+      entries:
+      - id: CMWebbing
+        points: 10
+      - id: CMWebbingBrown
+        points: 15
+      - id: CMWebbingBlack
+        points: 15
+    #- id: CMDropPouch
+    #  points: 15
+    #- id: CMShoulderHolster
+    #  points: 15
+    #- id: CMScabbardMacheteFull
+    #  points: 15
+      - id: CMPouchMacheteFilled
+        points: 15
+    #- id: CMMarineRadioTelephonePack
+    #  points: 15
+    #- id: CMFuelTankStrapPouch
+    #  points: 5
+    #- id: CMWeldingGoggles
+    #  points: 5
+    #- id: CMSlingPouch
+    #  points: 15
+      - id: CMPouchGeneralLarge
+        points: 15
+    - name: Utilities
+      entries:
+      - id: CMRollerBedSpawnFolded
+        points: 5
+    #- id: CMFultonDeviceStack
+    #  points: 5
+      - id: CMFireExtinguisherPortable
+        points: 5
+    #- id: CMMotionDetector
+    #  points: 15
+    #- id: CMDataDetector
+    #  points: 15
+      - id: CMWhistle
+        points: 5
+    - name: Binoculars
+      entries: [ ]
+    #- id: CMRangeFinder
+    #  points: 10
+    #- id: CMLaserDesignator
+    #  points: 15
+    - name: Helmet Optics
+      entries: [ ]
+    #- id: CMMedicalHelmetOptic
+    #  points: 15
+    #- id: CMWeldingVisor
+    #  points: 5
+    - name: Pamphlets
+      entries: [ ]
+    #- id: CMPamphletJTAC
+    #  points: 15
+    #- id: CMPamphletEngineering
+    #  points: 15
+    - name: Radio Keys
+      entries:
+      - id: CMEncryptionKeyEngineer
+        amount: 5
+        points: 5
+      - id: CMEncryptionKeyIntel
+        amount: 5
+        points: 5
+      - id: CMEncryptionKeyJTAC
+        amount: 5
+        points: 5
+      - id: CMEncryptionKeyRequisition
+        amount: 5
+        points: 5

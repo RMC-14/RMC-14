@@ -30,6 +30,7 @@
       police: 1
       research: 1
       surgery: 2
+    - type: RMCUserBulkyArmorIncapable
     - type: MarineOrders
 
 - type: startingGear

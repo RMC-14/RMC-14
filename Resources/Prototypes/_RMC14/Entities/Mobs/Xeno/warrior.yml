@@ -7,6 +7,8 @@
   name: Warrior
   description: A beefy alien with an armored carapace.
   components:
+  - type: GhostRole
+    name: cm-job-name-xeno-warrior
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Warrior/warrior.rsi
   - type: MobState
@@ -62,3 +64,4 @@
   - type: Tackle
     threshold: 4
     stun: 5
+  - type: XenoLifesteal
