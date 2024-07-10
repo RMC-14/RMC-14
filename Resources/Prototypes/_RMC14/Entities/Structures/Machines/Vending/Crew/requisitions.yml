@@ -89,7 +89,7 @@
       #  amount: 6
       #- id: Plastic Explosives
       #  amount: 3
-      - id: Breaching Charges
+      - id: RMCExplosiveBreachingCharge
         amount: 2
     - name: Webbings
       entries:
