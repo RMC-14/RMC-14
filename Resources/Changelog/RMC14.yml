@@ -2757,5 +2757,37 @@
   id: 338
   time: '2024-07-10T09:48:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2943
+- author: DrSmugleaf
+  changes:
+  - message: Fixed anyone being able to walk through the Almayer's medbay, and hospital
+      corpsmen being able to walk into the medbay's chemistry rooms. The marine tide
+      must now walk through the top or bottom hallways towards the hangar.
+    type: Fix
+  - message: Fixed security airlocks not being security locked on the Almayer.
+    type: Fix
+  - message: Temporarily unpowered all Intercoms until the xenonids are no longer
+      able to speak in plain English through them.
+    type: Fix
+  - message: Added the Almayer's north and south hangar pod doors, and meeting room
+      security checkpoints shutters.
+    type: Add
+  - message: Added medical equipment racks and chemical dispensers to the Almayer's
+      medbay.
+    type: Add
+  - message: Added a command tablet next to the groundside operations console on the
+      Almayer.
+    type: Add
+  - message: Moved the liaison's spawn point on the Almayer into a temporary room
+      with a fax and paper.
+    type: Tweak
+  - message: Moved the correspondent's spawn point on the Almayer into a temporary
+      room with two cameras.
+    type: Tweak
+  - message: Added one more staff officer slot on the Almayer, and one more cargo
+      tech slot.
+    type: Tweak
+  id: 339
+  time: '2024-07-10T12:27:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2955
 Name: RMC14
 Order: -1
