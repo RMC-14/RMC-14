@@ -144,8 +144,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         xeno.Comp.BuildChoice = args.StructureId;
         Dirty(xeno);
 
-        _ui.CloseUi(xeno.Owner, XenoChooseStructureUI.Key, xeno);
-
         var ev = new XenoConstructionChosenEvent(args.StructureId);
         foreach (var (id, _) in _actions.GetActions(xeno))
         {
