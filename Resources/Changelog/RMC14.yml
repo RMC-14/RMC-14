@@ -2741,5 +2741,14 @@
   id: 336
   time: '2024-07-10T07:47:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2938
+- author: DrSmugleaf
+  changes:
+  - message: The xenonid "Choose Resin Structure" window now stays open after making
+      a selection, allowing it to be changed back and forth without reopening the
+      window.
+    type: Tweak
+  id: 337
+  time: '2024-07-10T08:29:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2951
 Name: RMC14
 Order: -1
