@@ -2804,5 +2804,14 @@
   id: 341
   time: '2024-07-10T20:06:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2959
+- author: tsp01
+  changes:
+  - message: blood can be stored in the correct pouches and belts
+    type: Fix
+  - message: surgical cases can be stored in the correct pouches and belts
+    type: Fix
+  id: 342
+  time: '2024-07-10T20:08:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2940
 Name: RMC14
 Order: -1
