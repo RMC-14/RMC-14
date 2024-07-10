@@ -2719,5 +2719,27 @@
   id: 333
   time: '2024-07-10T07:34:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2947
+- author: DrSmugleaf
+  changes:
+  - message: Fixed nested marines getting knocked back into walls by grenade explosions.
+    type: Fix
+  id: 334
+  time: '2024-07-10T07:47:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2945
+- author: DrSmugleaf
+  changes:
+  - message: Default projectile speed has been increased by 24%
+    type: Tweak
+  id: 335
+  time: '2024-07-10T07:47:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2946
+- author: DrSmugleaf
+  changes:
+  - message: Fixed some dropship tiles not being see-through. This includes the engines
+      on the sides, and the winglets next to the side and bottom crew hatches.
+    type: Fix
+  id: 336
+  time: '2024-07-10T07:47:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2938
 Name: RMC14
 Order: -1
