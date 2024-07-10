@@ -2698,5 +2698,12 @@
   id: 330
   time: '2024-07-09T19:52:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2735
+- author: blueDev2
+  changes:
+  - message: Barricades with barbed wires maintain their barbed wires when upgrading
+    type: Fix
+  id: 331
+  time: '2024-07-10T03:01:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2936
 Name: RMC14
 Order: -1
