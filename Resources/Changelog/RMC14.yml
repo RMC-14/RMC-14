@@ -2789,5 +2789,12 @@
   id: 339
   time: '2024-07-10T12:27:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2955
+- author: Whisper
+  changes:
+  - message: Fixed M1984 accepting 9mm AP in regular mags.
+    type: Fix
+  id: 340
+  time: '2024-07-10T12:45:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2957
 Name: RMC14
 Order: -1
