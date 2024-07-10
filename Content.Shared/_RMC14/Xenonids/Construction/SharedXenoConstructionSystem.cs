@@ -1,13 +1,16 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
+using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Atmos;
 using Content.Shared.Coordinates.Helpers;
+using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
@@ -28,6 +31,7 @@ namespace Content.Shared._RMC14.Xenonids.Construction;
 public sealed class SharedXenoConstructionSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
@@ -51,16 +55,20 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private EntityQuery<XenoConstructionRequiresSupportComponent> _constructionRequiresSupportQuery;
     private EntityQuery<TransformComponent> _transformQuery;
     private EntityQuery<XenoConstructComponent> _xenoConstructQuery;
+    private EntityQuery<XenoEggComponent> _xenoEggQuery;
+    private EntityQuery<XenoWeedsComponent> _xenoWeedsQuery;
 
     public override void Initialize()
     {
-        base.Initialize();
-
         _hiveConstructionNodeQuery = GetEntityQuery<HiveConstructionNodeComponent>();
         _constructionSupportQuery = GetEntityQuery<XenoConstructionSupportComponent>();
         _constructionRequiresSupportQuery = GetEntityQuery<XenoConstructionRequiresSupportComponent>();
         _transformQuery = GetEntityQuery<TransformComponent>();
         _xenoConstructQuery = GetEntityQuery<XenoConstructComponent>();
+        _xenoEggQuery = GetEntityQuery<XenoEggComponent>();
+        _xenoWeedsQuery = GetEntityQuery<XenoWeedsComponent>();
+
+        SubscribeLocalEvent<XenoConstructComponent, MapInitEvent>(OnConstructMapInit);
 
         SubscribeLocalEvent<XenoConstructionComponent, XenoPlantWeedsActionEvent>(OnXenoPlantWeedsAction);
 
@@ -97,6 +105,33 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         UpdatesAfter.Add(typeof(SharedPhysicsSystem));
     }
 
+    private void OnConstructMapInit(Entity<XenoConstructComponent> ent, ref MapInitEvent args)
+    {
+        if (!ent.Comp.DestroyWeeds)
+            return;
+
+        var xform = Transform(ent);
+        if (xform.GridUid is not { } gridId ||
+            !TryComp(gridId, out MapGridComponent? grid))
+        {
+            return;
+        }
+
+        var coordinates = _transform.GetMapCoordinates((ent, xform));
+        var indices = _mapSystem.TileIndicesFor(gridId, grid, coordinates);
+        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, indices);
+        while (anchored.MoveNext(out var uid))
+        {
+            if (TerminatingOrDeleted(uid.Value) || EntityManager.IsQueuedForDeletion(uid.Value))
+                continue;
+
+            if (!_xenoWeedsQuery.HasComp(uid))
+                continue;
+
+            QueueDel(uid);
+        }
+    }
+
     private void OnXenoPlantWeedsAction(Entity<XenoConstructionComponent> xeno, ref XenoPlantWeedsActionEvent args)
     {
         var coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager, _map);
@@ -124,7 +159,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         args.Handled = true;
         if (_net.IsServer)
-            Spawn(args.Prototype, coordinates);
+        {
+            var weeds = Spawn(args.Prototype, coordinates);
+            _adminLogs.Add(LogType.RMCXenoPlantWeeds, $"Xeno {ToPrettyString(xeno):xeno} planted weeds {ToPrettyString(weeds):weeds} at {coordinates}");
+        }
     }
 
     private void OnXenoChooseStructureAction(Entity<XenoConstructionComponent> xeno, ref XenoChooseStructureActionEvent args)
@@ -140,8 +178,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         xeno.Comp.BuildChoice = args.StructureId;
         Dirty(xeno);
-
-        _ui.CloseUi(xeno.Owner, XenoChooseStructureUI.Key, xeno);
 
         var ev = new XenoConstructionChosenEvent(args.StructureId);
         foreach (var (id, _) in _actions.GetActions(xeno))
@@ -198,7 +234,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         // TODO RMC14 stop collision for mobs until they move off
         if (_net.IsServer)
-            Spawn(args.StructureId, coordinates);
+        {
+            var structure = Spawn(args.StructureId, coordinates);
+            _adminLogs.Add(LogType.RMCXenoConstruct, $"Xeno {ToPrettyString(xeno):xeno} constructed {ToPrettyString(structure):structure} at {coordinates}");
+        }
     }
 
     private void OnXenoOrderConstructionAction(Entity<XenoConstructionComponent> xeno, ref XenoOrderConstructionActionEvent args)
@@ -269,12 +308,16 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var structure = Spawn(args.StructureId, target.SnapToGrid(EntityManager, _map));
+        var coordinates = target.SnapToGrid(EntityManager, _map);
+        var structure = Spawn(args.StructureId, coordinates);
+
         if (TryComp(xeno, out XenoComponent? xenoComp))
         {
             var member = EnsureComp<HiveMemberComponent>(structure);
             _hive.SetHive((structure, member), xenoComp.Hive);
         }
+
+        _adminLogs.Add(LogType.RMCXenoOrderConstruction, $"Xeno {ToPrettyString(xeno):xeno} ordered construction of {ToPrettyString(structure):structure} at {coordinates}");
     }
 
     private void OnHiveConstructionNodeAddPlasmaDoAfter(Entity<XenoConstructionComponent> xeno, ref XenoConstructionAddPlasmaDoAfterEvent args)
@@ -303,6 +346,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         args.Handled = true;
 
+        _adminLogs.Add(LogType.RMCXenoOrderConstructionPlasma, $"Xeno {ToPrettyString(xeno):xeno} added {subtract} plasma to {ToPrettyString(target):target} at {transform.Coordinates}");
+
         node.PlasmaStored += subtract;
         plasmaLeft = node.PlasmaCost - node.PlasmaStored;
 
@@ -322,6 +367,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var spawn = Spawn(node.Spawn, transform.Coordinates);
         var member = EnsureComp<HiveMemberComponent>(spawn);
         _hive.SetHive((spawn, member), hive);
+
+        _adminLogs.Add(LogType.RMCXenoOrderConstructionComplete, $"Xeno {ToPrettyString(xeno):xeno} completed construction of {ToPrettyString(target):xeno} which turned into {ToPrettyString(spawn):spawn} at {transform.Coordinates}");
 
         QueueDel(target);
 
@@ -523,7 +570,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
         while (anchored.MoveNext(out var uid))
         {
-            if (_xenoConstructQuery.HasComp(uid))
+            if (_xenoConstructQuery.HasComp(uid) || _xenoEggQuery.HasComp(uid))
             {
                 _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
                 return false;

@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Attachable.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 
@@ -12,20 +13,20 @@ public sealed partial class AttachableHolderComponent : Component
 
     /// <summary>
     ///     The key is one of the slot IDs at the bottom of this file.
-    ///     Each key is followed by a listing of all the attachables that fit into that slot.
+    ///     Each key is followed by the description of the slot.
     /// </summary>
     [DataField, AutoNetworkedField]
     public Dictionary<string, AttachableSlot> Slots = new();
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Slot IDs should be named as follows: cm-aslot-SLOTNAME, for example: cm-aslot-barrel.                     *
- * Each slot ID must have a name attached to it in \Resources\Locale\en-US\_RMC14\attachable\attachable.ftl   *
+ * Slot IDs should be named as follows: rmc-aslot-SLOTNAME, for example: rmc-aslot-barrel.                   *
+ * Each slot ID must have a name attached to it in \Resources\Locale\en-US\_RMC14\attachable\attachable.ftl  *
  * The slot list is below. If you add more, list them here so others can use the comment for reference.      *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * GUN SLOTS:
- *   cm-aslot-barrel
- *   cm-aslot-rail
- *   cm-aslot-stock
- *   cm-aslot-underbarrel
+ *   rmc-aslot-barrel
+ *   rmc-aslot-rail
+ *   rmc-aslot-stock
+ *   rmc-aslot-underbarrel
  */

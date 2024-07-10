@@ -12,6 +12,11 @@
             - material: CMSteel
               amount: 1
               doAfter: 1
+        - to: stool
+          steps:
+            - material: CMSteel
+              amount: 1
+              doAfter: 1
         - to: chairComfy
           steps:
             - material: CMSteel
@@ -30,6 +35,17 @@
 
     - node: chair
       entity: CMChair
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: CMSheetMetal1
+          steps:
+            - tool: Screwing
+              doAfter: 1
+
+    - node: stool
+      entity: RMCStool
       edges:
         - to: start
           completed:

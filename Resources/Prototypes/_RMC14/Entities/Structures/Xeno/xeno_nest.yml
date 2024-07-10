@@ -7,8 +7,6 @@
     snap:
     - Wall
   components:
-  - type: Transform
-    anchored: true
   - type: Physics
     bodyType: Static
   - type: Sprite

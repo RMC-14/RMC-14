@@ -58,9 +58,9 @@
         whitelist:
           tags:
           - Knife
-        startingItem: CMM5Bayonet
+        startingItem: RMCM5Bayonet
   - type: CMItemSlots
-    startingItem: CMM5Bayonet
+    startingItem: RMCM5Bayonet
 
 # Brown Boots
 - type: entity
@@ -79,7 +79,7 @@
   suffix: Filled
   components:
   - type: CMItemSlots
-    startingItem: CMM5Bayonet
+    startingItem: RMCM5Bayonet
 
 # Jungle Boots
 - type: entity
@@ -99,4 +99,4 @@
   suffix: Filled
   components:
   - type: CMItemSlots
-    startingItem: CMM5Bayonet
+    startingItem: RMCM5Bayonet

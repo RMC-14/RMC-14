@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Content.Server.Administration;
-using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.Administration;
 using Robust.Shared.Toolshed;
@@ -49,7 +48,7 @@ public sealed class EvolutionPointsCommand : ToolshedCommand
         [PipedArgument] EntityUid xeno)
     {
         if (!TryComp(xeno, out XenoEvolutionComponent? evolution) ||
-            evolution.Max >= evolution.Points)
+            evolution.Points >= evolution.Max)
         {
             return xeno;
         }

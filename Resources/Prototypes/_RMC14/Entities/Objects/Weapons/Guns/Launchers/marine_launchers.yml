@@ -1,6 +1,6 @@
 - type: entity
   name: M83 grenade launcher
-  parent: [BaseWeaponLauncher, CMBaseWeaponGun]
+  parent: [ BaseWeaponLauncher, CMBaseWeaponGun, RMCBaseAttachableHolder ]
   id: WeaponLauncherM83
   description: A heavy, 6-shot grenade launcher used by the UNMC for area denial and big explosions.
   components:
@@ -49,15 +49,29 @@
   - type: AmmoFixedDistance
   - type: Wieldable
   - type: GunRequiresWield
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.696
+    baseSprint: 0.559
+  - type: WieldDelay
+    baseDelay: 0.8
   - type: GunShowUseDelay
   - type: UseDelay
   - type: GunIFF
   - type: RMCNameItemOnVend
     item: PrimaryGun
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentMagneticHarness
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: 0.0, 0.185
 
 - type: entity
   name: M79 grenade launcher
-  parent: [BaseWeaponLauncher, CMBaseWeaponGun]
+  parent: [ BaseWeaponLauncher, CMBaseWeaponGun, RMCBaseAttachableHolder ]
   id: CMWeaponLauncherM79
   description: The M79 grenade launcher is a single-shot, shoulder-fired, break-action grenade launcher.
   components:
@@ -97,5 +111,29 @@
   - type: AmmoFixedDistance
   - type: Wieldable
   - type: GunRequiresWield
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.696
+    baseSprint: 0.559
+  - type: WieldDelay
+    baseDelay: 0.8
   - type: RMCNameItemOnVend
     item: PrimaryGun
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentM79Stock
+        whitelist:
+          tags:
+          - RMCAttachmentM79Stock
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: -0.065, 0.125
+      rmc-aslot-stock: -0.56, 0.0

@@ -1,53 +1,364 @@
 ﻿- type: entity
   abstract: true
-  parent: CMAttachmentBase
-  id: CMStockAttachmentBase
+  parent: RMCAttachmentBase
+  id: RMCStockAttachmentBase
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
   - type: Tag
     tags:
-    - CMAttachmentStock
+    - RMCAttachmentStock
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.2
+  - type: AttachableSizeMods
+    modifiers:
+    - size: 2
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 5
 
 - type: entity
-  parent: CMStockAttachmentBase
-  id: CMAttachmentM37WoodenStock
-  name: M37 wooden stock
-  description: A non-standard heavy wooden stock for the M37 Shotgun. More cumbersome than the standard issue stakeout, but reduces recoil and improves accuracy. Allegedly makes a pretty good club in a fight too.
+  abstract: true
+  parent: RMCStockAttachmentBase
+  id: RMCStockAttachmentCollapsibleBase
+  components:
+  - type: AttachableVisuals
+    showActive: true
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+  - type: AttachableToggleable
+    actionDesc: Extend the stock.
+  - type: AttachableWieldDelayMods
+    modifiers: []
+
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentM42A2WoodenStock
+  name: M42A2 wooden stock
+  description: A non-standard heavy wooden stock for the M42A2 Shotgun. More cumbersome than the standard issue stakeout, but reduces recoil and improves accuracy. Allegedly makes a pretty good club in a fight too.
   components:
   - type: Sprite
-    state: stock
+    state: d-stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM42A2WoodenStock
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      walk: -0.059
+      sprint: -0.101
+  - type: AttachableWieldDelayMods
+    modifiers:
+      - delay: 0.4
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.2
+      recoilFlat: -2
+      scatterFlat: -6
+    - conditions:
+        unwieldedOnly: true
+      accuracyMovementPenaltyAddMult: -1
+      accuracyAddMult: -0.15
+      recoilFlat: 2
+      scatterFlat: 6
 
 - type: entity
-  parent: CMStockAttachmentBase
-  id: CMAttachmentM63ArmBrace
-  name: submachinegun arm brace
-  description: A specialized stock for use on an M63 submachine gun. It makes one handing more accurate at the expense of burst amount. Wielding the weapon with this stock attached confers a major inaccuracy and recoil debuff.
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentDoubleBarrelShotgunStock
+  name: double barrel shotgun stock
+  description: A chunky piece of wood coated in varnish and age.
   components:
   - type: Sprite
-    state: smg_brace
+    state: db-stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentDoubleBarrelShotgunStock
+  - type: AttachableWieldDelayMods
+    modifiers: []
 
 - type: entity
-  parent: CMStockAttachmentBase
-  id: CMAttachmentM63Stock
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentSlavicStock
+  name: double barrel shotgun stock
+  description: A chunky piece of wood coated in varnish and age.
+  components:
+  - type: Sprite
+    state: slavicstock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentSlavicStock
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - fireDelayFlat: 0.5
+      recoilFlat: -1
+      scatterFlat: -2
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.05
+    - conditions:
+        unwieldedOnly: true
+      accuracyMovementPenaltyAddMult: -1
+      accuracyAddMult: -0.05
+
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentM54CStockSolid
+  name: M54C solid stock
+  description: A rare stock distributed in small numbers to UNMC forces. Compatible with the M54C, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: m54c-solid
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM54CStockSolid
+  - type: AttachableVisuals
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      walk: -0.059
+      sprint: -0.101
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.4
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 10
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.25
+      recoilFlat: -3
+      scatterFlat: -8
+    - conditions:
+        unwieldedOnly: true
+      accuracyMovementPenaltyAddMult: -2
+      accuracyAddMult: -0.15
+      recoilFlat: 2
+      scatterFlat: 6
+
+- type: entity
+  parent: RMCAttachmentM54CStockSolid
+  id: RMCAttachmentM54CStockSolidMarksman
+  name: M54C marksman stock
+  description: A rare stock distributed in small numbers to UNMC forces. Compatible with the M54C, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
+    state: m54markstock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM54CStockSolidMarksman
+
+- type: entity
+  parent: RMCStockAttachmentCollapsibleBase
+  id: RMCAttachmentM54CStockCollapsible
+  name: M54C folding stock
+  description: The standard back end of any gun starting with M54. Compatible with the M54C series, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: m54c-col
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM54CStockCollapsible
+  - type: AttachableToggleable
+    doAfter: 0.5
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+      state: m54c-col
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+      state: m54c-col-on
+    actionName: Toggle M54C Folding Stock
+  - type: AttachableSizeMods
+    modifiers:
+      - size: 1
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+        activeOnly: true
+      walk: -0.059
+      sprint: -0.101
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - conditions:
+        activeOnly: true
+      delay: 0.2
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+        activeOnly: true
+      accuracyAddMult: 0.10
+      recoilFlat: -1
+      scatterFlat: -4
+    - conditions:
+        unwieldedOnly: true
+        activeOnly: true
+      accuracyMovementPenaltyAddMult: -1
+      accuracyAddMult: -0.15
+      recoilFlat: 2
+      scatterFlat: 6
+
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentM16Stock
+  name: M16 bump stock
+  description: Technically illegal in the state of California.
+  components:
+  - type: Sprite
+    state: m16-stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM16Stock
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.1
+
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentM16StockCollapsible
+  name: collapsible M16 stock
+  description: Very illegal in the state of California.
+  components:
+  - type: Sprite
+    state: m16-folding
+  - type: AttachableVisuals
+    suffix: ""
+  - type: AttachableToggleable
+    doAfter: 0.5
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
+      state: m16-folding
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
+      state: m16-folding-on
+    actionName: Toggle Collapsible M16 Stock
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM16StockCollapsible
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+        activeOnly: true
+      walk: -0.059
+      sprint: -0.101
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - conditions:
+        activeOnly: true
+      delay: 0.1
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+        activeOnly: true
+      accuracyAddMult: 0.10
+      recoilFlat: -1
+      scatterFlat: -4
+
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentM79Stock
+  name: M79 hardened polykevlon stock
+  description: Helps to mitigate the recoil of launching a 40mm grenade. Fits only to the M79.
+  components:
+  - type: Sprite
+    state: m79-stock
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM79Stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: AttachableWieldDelayMods
+    modifiers: []
+
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentM63Stock
   name: submachinegun stock
-  description: A rare AEGIS stock distributed in small numbers to Marine forces. Compatible with the M63, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Seemingly a bit more effective in a brawl.
+  description: A rare AEGIS stock distributed in small numbers to UNMC forces. Compatible with the M63, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Seemingly a bit more effective in a brawl.
   components:
   - type: Sprite
     state: smgstock
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM63Stock
+  - type: AttachableVisuals
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.4
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      walk: -0.024
+      sprint: -0.043
+  - type: AttachableSizeMods
+    modifiers:
+    - size: 1
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 15
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.35
+      recoilFlat: -3
+      scatterFlat: -10
+    - conditions:
+        unwieldedOnly: true
+      accuracyMovementPenaltyAddMult: -1
 
 - type: entity
-  parent: CMStockAttachmentBase
-  id: CMAttachmentM63StockCollapsible
+  parent: RMCStockAttachmentCollapsibleBase
+  id: RMCAttachmentM63StockCollapsible
   name: submachinegun folding stock
-  description: A Kirchner brand K2 M63 folding stock, standard issue in the Marines. The stock, when extended, reduces recoil and improves accuracy, but at a reduction to handling and agility. Seemingly a bit more effective in a brawl. This stock can collapse in, removing all positive and negative effects.
+  description: A Kirchner brand K2 M63 folding stock, standard issue in the UNMC. The stock, when extended, reduces recoil and improves accuracy, but at a reduction to handling and agility. Seemingly a bit more effective in a brawl. This stock can collapse in, removing all positive and negative effects.
   components:
   - type: Sprite
     state: smgstockcol
   - type: Tag
     tags:
-    - CMAttachmentStock
-    - CMAttachmentM63StockCollapsible
+    - RMCAttachmentStock
+    - RMCAttachmentM63StockCollapsible
   - type: AttachableToggleable
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
@@ -55,31 +366,178 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
       state: smgstockcol-on
-  - type: AttachableVisuals
-    showActive: true
-  - type: AttachableToggleableSizeModifier
-    activeSizeModifier: 1
+    actionName: Toggle Submachinegun Folding Stock
+  - type: AttachableSizeMods
+    modifiers:
+    - conditions:
+        activeOnly: true
+      size: 1
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+        activeOnly: true
+      walk: -0.024
+      sprint: -0.043
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - conditions:
+        activeOnly: true
+      delay: 0.4
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+        activeOnly: true
+      accuracyAddMult: 0.15
+      recoilFlat: -2
+      scatterFlat: -6
+    - conditions:
+        unwieldedOnly: true
+        activeOnly: true
+      accuracyMovementPenaltyAddMult: -1
+      accuracyAddMult: -0.15
+      recoilFlat: 2
+      scatterFlat: 2
 
 - type: entity
-  parent: CMStockAttachmentBase
-  id: CMAttachmentM54CSolidStock
-  name: M54C solid stock
-  description: A rare stock distributed in small numbers to Marine forces. Compatible with the M54C, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
+  parent: RMCStockAttachmentCollapsibleBase
+  id: RMCAttachmentM63ArmBrace
+  name: submachinegun arm brace
+  description: A specialized stock for use on an M63 submachine gun. It makes one handing more accurate at the expense of burst amount. Wielding the weapon with this stock attached confers a major inaccuracy and recoil debuff.
   components:
   - type: Sprite
-    state: riflestock
+    state: smg-brace
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM63ArmBrace
+  - type: AttachableToggleable
+    doAfter: 2.5
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
+      state: smg-brace
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
+      state: smg-brace-on
+    actionName: Toggle Submachinegun Arm Brace
+    actionDesc: Lock the arm brace to your arm.
+  - type: AttachablePreventDropToggleable
+  - type: AttachableSizeMods
+    modifiers:
+    - size: 1
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.6
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - shotsPerBurstFlat: -3
+    - conditions:
+        wieldedOnly: true
+        activeOnly: true
+      accuracyAddMult: -0.15
+      recoilFlat: 4
+      scatterFlat: 6
+    - conditions:
+        unwieldedOnly: true
+        activeOnly: true
+      accuracyMovementPenaltyAddMult: -2
+      accuracyAddMult: 0.2
+      recoilFlat: -2
 
 - type: entity
-  parent: CMStockAttachmentBase
-  id: CMAttachmentM44MagnumSharpshooterStock
+  parent: RMCStockAttachmentCollapsibleBase
+  id: RMCAttachmentM44MagnumSharpshooterStock
   name: M44 magnum sharpshooter stock
   description: A wooden stock modified for use on a 44-magnum. Increases accuracy and reduces recoil at the expense of handling and agility. Less effective in melee as well.
   components:
   - type: Sprite
     state: 44stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM44MagnumSharpshooterStock
+  - type: AttachableToggleablePreventShoot
+    message: You need to extend the stock first!
+  - type: AttachableToggleable
+    doAfter: 1.5
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
+      state: 44stock
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
+      state: 44stock-on
+    actionName: Toggle M44 Magnum Sharpshooter Stock
+  - type: AttachableSizeMods
+    modifiers:
+    - size: 1
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.4
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      walk: -0.059
+      sprint: -0.101
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: -5
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.35
+      recoilFlat: -2
+      scatterFlat: -6
+    - conditions:
+        unwieldedOnly: true
+      accuracyAddMult: -0.10
+      recoilFlat: 2
+      scatterFlat: 6
 
 - type: Tag
-  id: CMAttachmentStock
+  id: RMCAttachmentStock
 
 - type: Tag
-  id: CMAttachmentM63StockCollapsible
+  id: RMCAttachmentM42A2WoodenStock
+
+- type: Tag
+  id: RMCAttachmentDoubleBarrelShotgunStock
+
+- type: Tag
+  id: RMCAttachmentSlavicStock
+
+- type: Tag
+  id: RMCAttachmentM54CStockSolid
+
+- type: Tag
+  id: RMCAttachmentM54CStockSolidMarksman
+
+- type: Tag
+  id: RMCAttachmentM54CStockCollapsible
+
+- type: Tag
+  id: RMCAttachmentM16Stock
+
+- type: Tag
+  id: RMCAttachmentM16StockCollapsible
+
+- type: Tag
+  id: RMCAttachmentM79Stock
+
+- type: Tag
+  id: RMCAttachmentM63Stock
+
+- type: Tag
+  id: RMCAttachmentM63StockCollapsible
+
+- type: Tag
+  id: RMCAttachmentM63ArmBrace
+
+- type: Tag
+  id: RMCAttachmentM44MagnumSharpshooterStock

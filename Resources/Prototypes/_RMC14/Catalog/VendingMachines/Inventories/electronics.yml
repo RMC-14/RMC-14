@@ -5,5 +5,5 @@
     CMMultitool: 6
     DoorElectronics: 8
     CMAPCElectronics: 8
-    PowerCellHigh: 6
-    PowerCellSmall: 14
+    RMCPowerCellHigh: 6
+    RMCPowerCell: 14

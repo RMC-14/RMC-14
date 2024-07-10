@@ -80,6 +80,8 @@
       types:
         Slash: 600
   - type: XenoConstructionRequiresSupport
+  - type: XenoConstruct
+    destroyWeeds: false
 
 - type: entity
   id: DoorXenoResinThick
