@@ -243,8 +243,8 @@ public sealed class XenoNestSystem : EntitySystem
 
     private void TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)
     {
-        if (GetNestDirection(surface, victim) is not { } direction ||
-            !CanNestPopup(user, victim, surface, direction) || !HasComp<XenoComponent>(user))
+        if (!HasComp<XenoComponent>(user) || GetNestDirection(surface, victim) is not { } direction ||
+            !CanNestPopup(user, victim, surface, direction))
         {
             return;
         }
