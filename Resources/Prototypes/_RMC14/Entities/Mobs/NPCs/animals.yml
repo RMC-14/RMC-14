@@ -1,5 +1,6 @@
 ﻿- type: entity
   id: RMCSmallHost
+  name: abstract small host
   abstract: true
   components:
   - type: Infectable
@@ -7,7 +8,7 @@
   - type: Devourable
 
 - type: entity
-  parent: MobMonkey, RMCSmallHost
+  parent: [MobMonkey, RMCSmallHost]
   id: CMMobMonkey
   suffix: CM
   components:
@@ -16,7 +17,7 @@
 
 
 - type: entity
-  parent: MobKobold, RMCSmallHost
+  parent: [MobKobold, RMCSmallHost]
   id: CMMobKobold
   suffix: CM
   components:
