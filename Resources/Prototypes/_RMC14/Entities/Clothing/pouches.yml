@@ -596,6 +596,7 @@
       #      - TODO RMC14 splint
       - CMAutoInjector
       #      - TODO RMC14 syringe case
+      - CMSurgicalCase
       - CMFireExtinguisherPortable
       - CMRollerBed
       - CMSurgicalLine
