@@ -11,9 +11,9 @@
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: RMC
-    maxIntensity: 500
-    intensitySlope: 12
-    totalIntensity: 500
+    maxIntensity: 400
+    intensitySlope: 200
+    totalIntensity: 400
     canCreateVacuum: false
   - type: PointLight
     radius: 5
