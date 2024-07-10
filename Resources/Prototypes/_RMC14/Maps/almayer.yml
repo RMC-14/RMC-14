@@ -16,7 +16,7 @@
           #Command
           CMCommandingOfficer: [1, 1]
           CMExecutiveOfficer: [1, 1]
-          CMStaffOfficer: [1, 1]
+          CMStaffOfficer: [2, 2]
           CMSeniorEnlistedAdvisor: [2, 2]
 
           #Military Police
@@ -44,7 +44,7 @@
 
           #Requisition
           CMQuartermaster: [1, 1]
-          CMCargoTech: [3, 3]
+          CMCargoTech: [4, 4]
 #          CMMessTech: [1, 1]
 
           #Marines

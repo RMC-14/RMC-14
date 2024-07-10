@@ -5,7 +5,7 @@
   suffix: Kitchen, Locked
   components:
   - type: AccessReader
-    access: [["CMAccessKitchen"]]
+    access: [ [ "CMAccessKitchen" ] ]
 
 # Secure
 - type: entity
@@ -14,7 +14,7 @@
   suffix: Brig, Locked
   components:
   - type: AccessReader
-    access: [["CMAccessBrig"]]
+    access: [ [ "CMAccessBrig" ] ]
 
 - type: entity
   parent: CMWindoorSecure
@@ -22,7 +22,7 @@
   suffix: Requisitions, Locked
   components:
   - type: AccessReader
-    access: [["CMAccessRequisitions"]]
+    access: [ [ "CMAccessRequisitions" ] ]
 
 - type: entity
   parent: CMWindoorSecure
@@ -30,7 +30,7 @@
   suffix: Medical, Locked
   components:
   - type: AccessReader
-    access: [["CMAccessMedical"]]
+    access: [ [ "CMAccessMedical" ] ]
 
 - type: entity
   parent: CMWindoorSecure
@@ -38,4 +38,12 @@
   suffix: Engineering, Locked
   components:
   - type: AccessReader
-    access: [["CMAccessEngineering"]]
+    access: [ [ "CMAccessEngineering" ] ]
+
+- type: entity
+  parent: CMWindoorSecure
+  id: CMWindoorSecureCommand
+  suffix: Command, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessCommand" ] ]
