@@ -89,8 +89,13 @@ public sealed class DropshipSystem : SharedDropshipSystem
     {
         if (_transform.GetGrid(ent.Owner) is not { } grid ||
             !TryComp(grid, out DropshipComponent? dropship) ||
-            dropship.Crashed ||
-            HasComp<FTLComponent>(grid))
+            dropship.Crashed)
+        {
+            return;
+        }
+
+        if (TryComp(grid, out FTLComponent? ftl) &&
+            ftl.State is FTLState.Travelling or FTLState.Arriving)
         {
             return;
         }
