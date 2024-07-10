@@ -8,38 +8,10 @@
   },
   "states": [
     {
-      "name": "lamp"
-    },
-    {
-      "name": "lamp-on"
-    },
-    {
-      "name": "lampgreen"
-    },
-    {
-      "name": "lampgreen-on"
-    },
-    {
       "name": "tripod_lamp"
     },
     {
       "name": "tripod_lamp-on",
-      "delays": [
-        [
-          12,
-          0.1,
-          0.2,
-          0.1,
-          0.1,
-          0.1
-        ]
-      ]
-    },
-    {
-      "name": "tripod_lamp_grey"
-    },
-    {
-      "name": "tripod_lamp_grey-on",
       "delays": [
         [
           12,
