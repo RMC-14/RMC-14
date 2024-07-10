@@ -229,7 +229,7 @@
       #  amount: 3
       - id: CMFireExtinguisherPortable
         amount: 3
-      - id: PowerCellHigh # TODO RMC14 use cm prototype
+      - id: RMCPowerCellHigh
         amount: 1
       #- id: Fulton Device Stack
       #  amount: 1
@@ -359,71 +359,71 @@
     sections:
     - name: Barrel
       entries:
-      - id: CMAttachmentExtendedBarrel
+      - id: RMCAttachmentExtendedBarrel
         amount: 7
-      - id: CMM5Bayonet
+      - id: RMCM5Bayonet
         amount: 11
-      - id: CMAttachmentRecoilCompensator
+      - id: RMCAttachmentRecoilCompensator
         amount: 7
-      - id: CMAttachmentSuppressor
+      - id: RMCAttachmentSuppressor
         amount: 7
     - name: Rail
       entries:
-      - id: CMAttachmentB8SmartScope
+      - id: RMCAttachmentB8SmartScope
         amount: 4
-      #- id: RMCAttachmentMagneticHarness
-      #  amount: 9
-      - id: CMAttachmentRailFlashlight
+      - id: RMCAttachmentMagneticHarness
+        amount: 9
+      - id: RMCAttachmentRailFlashlight
         amount: 11
-      #- id: RMCAttachmentS42xTelescopicMiniscope
-      #  amount: 5
-      #- id: RMCAttachmentS5RedDotSight
+      - id: RMCAttachmentS42xTelescopicMiniscope
+        amount: 5
+      #- id: RMCAttachmentS5RedDotSight # UNCOMMENT WHEN ACCURACY IS IMPLEMENTED
       #  amount: 10
-      #- id: RMCAttachmentS6ReflexSight
-      #  amount: 10
-      #- id: RMCAttachmentS84xTelescopicScope
-      #  amount: 5
+      - id: RMCAttachmentS6ReflexSight
+        amount: 10
+      - id: RMCAttachmentS84xTelescopicScope
+        amount: 5
     - name: Underbarrel
       entries:
-      #- id: RMCAttachmentAngledGrip
-      #  amount: 7
+      - id: RMCAttachmentAngledGrip
+        amount: 7
       #- id: RMCAttachmentBipod
       #  amount: 7
-      #- id: RMCAttachmentBurstFireAssembly
-      #  amount: 5
-      #- id: RMCAttachmentGyroscopicStabilizer
-      #  amount: 5
-      #- id: RMCAttachmentLaserSight
-      #  amount: 10
+      - id: RMCAttachmentBurstFireAssembly
+        amount: 5
+      - id: RMCAttachmentGyroscopicStabilizer
+        amount: 5
+      - id: RMCAttachmentLaserSight
+        amount: 10
       #- id: RMCAttachmentMiniFlamethrower
       #  amount: 5
       #- id: RMCAttachmentXMVESG1FlamerNozzle
       #  amount: 5
-      - id: CMAttachmentU7UnderbarrelShotgun
+      - id: RMCAttachmentU7UnderbarrelShotgun
         amount: 5
       #- id: RMCAttachmentUnderbarrelExtinguisher
       #  amount: 5
-      #- id: RMCAttachmentU1GrenadeLauncher
+      - id: RMCAttachmentU1GrenadeLauncher
+        amount: 10
+      #- id: RMCAttachmentMK1GrenadeLauncher # UNCOMMENT WHEN THE MK1 IS ADDED
       #  amount: 10
-      #- id: RMCAttachmentMK1GrenadeLauncher
-      #  amount: 10
-      #- id: RMCAttachmentVerticalGrip
-      #  amount: 10
+      - id: RMCAttachmentVerticalGrip
+        amount: 10
     - name: Stock
-      entries: [ ]
-      #- id: RMCAttachmentM42A2WoodenStock
-      #  amount: 5
-      #- id: RMCAttachmentM63ArmBrace
-      #  amount: 5
-      #- id: RMCAttachmentM63StockCollapsible
-      #  amount: 5
-      #- id: RMCAttachmentM63Stock
-      #  amount: 5
-      #- id: RMCAttachmentM54CStockSolid
-      #  amount: 5
-      #- id: RMCAttachmentM54CStockCollapsible
-      #  amount: 5
-      #- id: RMCAttachmentM44MagnumSharpshooterStock
+      entries:
+      - id: RMCAttachmentM42A2WoodenStock
+        amount: 5
+      - id: RMCAttachmentM63ArmBrace
+        amount: 5
+      - id: RMCAttachmentM63StockCollapsible
+        amount: 5
+      - id: RMCAttachmentM63Stock
+        amount: 5
+      - id: RMCAttachmentM54CStockSolid
+        amount: 5
+      - id: RMCAttachmentM54CStockCollapsible
+        amount: 5
+      #- id: RMCAttachmentM44MagnumSharpshooterStock # UNCOMMENT WHEN THE M44 IS ADDED
       #  amount: 5
 
 #UNIFORM VENDOR

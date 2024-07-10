@@ -1,3 +1,8 @@
+- files: ["grenade_insert.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13, converted to .ogg"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/weapons/grenade_insert.wav"
+
 - files: ["m42a2.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"

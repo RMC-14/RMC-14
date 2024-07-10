@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent: BaseItem
   abstract: true
-  id: CMAttachmentBase
+  id: RMCAttachmentBase
   components:
   - type: Item
     size: Small

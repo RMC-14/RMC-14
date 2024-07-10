@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Attachable.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
@@ -8,21 +9,61 @@ namespace Content.Shared._RMC14.Attachable.Components;
 [Access(typeof(AttachableToggleableSystem))]
 public sealed partial class AttachableToggleableComponent : Component
 {
+    /// <summary>
+    /// Whether the attachment is currently active.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public bool Active = false;
+
+    /// <summary>
+    /// If set to true, the attachment will deactivate upon switching hands.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool NeedHand = false;
+
+    /// <summary>
+    /// If set to true, the attachment will not toggle itself when its action is interrupted. Used in cases where the item toggles itself separately, like scopes.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool DoInterrupt = false;
+
+    /// <summary>
+    /// If set to true, the attachment will deactivate upon moving.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool BreakOnMove = false;
+
+    /// <summary>
+    /// If set to true, the attachment will deactivate upon rotating to any direction other than the one it was activated in.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool BreakOnRotate = false;
+
+    /// <summary>
+    /// If set to true, the attachment can only be activated when the holder is wielded.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool WieldedOnly = false;
 
     [DataField, AutoNetworkedField]
     public float DoAfter;
 
     [DataField, AutoNetworkedField]
-    public bool NeedHand = true;
+    public bool DoAfterNeedHand = true;
 
     [DataField, AutoNetworkedField]
-    public bool BreakOnMove = true;
+    public bool DoAfterBreakOnMove = true;
 
+    /// <summary>
+    /// If set to true, this attachment will block some of the holder's functionality when active and perform it instead.
+    /// Used for attached weapons, like the UGL.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public bool SupercedeHolder = false;
 
+    /// <summary>
+    /// If set to true, this attachment's functions only work when it's attached to a holder.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public bool AttachedOnly = false;
 

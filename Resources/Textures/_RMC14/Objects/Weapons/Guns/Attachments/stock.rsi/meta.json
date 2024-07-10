@@ -8,10 +8,10 @@
   },
   "states": [
     {
-      "name": "smg_brace_on"
+      "name": "smg-brace-on"
     },
     {
-      "name": "smg_brace"
+      "name": "smg-brace"
     },
     {
       "name": "smgstockcol"
@@ -32,7 +32,7 @@
       "name": "s_stock"
     },
     {
-      "name": "d_stock"
+      "name": "d-stock"
     },
     {
       "name": "c_stock"
@@ -53,16 +53,16 @@
       "name": "nsg23_stock"
     },
     {
-      "name": "m52_folding_on"
+      "name": "m54-folding-on"
     },
     {
-      "name": "m52_folding"
+      "name": "m54-folding"
     },
     {
       "name": "riflestock"
     },
     {
-      "name": "m79_stock"
+      "name": "m79-stock"
     },
     {
       "name": "r4t-stock"
@@ -80,10 +80,10 @@
       "name": "c_r4t-stock"
     },
     {
-      "name": "smg_brace_a_on"
+      "name": "smg-brace_a-on"
     },
     {
-      "name": "smg_brace_a"
+      "name": "smg-brace_a"
     },
     {
       "name": "smgstockcol_a"
@@ -104,34 +104,34 @@
       "name": "l42stock_a"
     },
     {
-      "name": "m52_folding_a_on"
+      "name": "m54-folding_a-on"
     },
     {
-      "name": "m52_folding_a"
+      "name": "m54-folding_a"
     },
     {
       "name": "riflestock_a"
     },
     {
-      "name": "m79_stock_a"
+      "name": "m79-stock_a"
+    },
+    {
+      "name": "44stock-on"
     },
     {
       "name": "44stock"
     },
     {
-      "name": "44stock_folded"
-    },
-    {
       "name": "ar10_stock"
     },
     {
-      "name": "m16_stock"
+      "name": "m16-stock"
     },
     {
-      "name": "m16_folding_on"
+      "name": "m16-folding-on"
     },
     {
-      "name": "m16_folding"
+      "name": "m16-folding"
     },
     {
       "name": "boomslang-stock"
@@ -149,7 +149,7 @@
       "name": "u_boomslang-stock"
     },
     {
-      "name": "m4markstock"
+      "name": "m54markstock"
     },
     {
       "name": "huntingstock"
@@ -170,7 +170,7 @@
       "name": "hg3717_stock"
     },
     {
-      "name": "db_stock"
+      "name": "db-stock"
     },
     {
       "name": "44stock_old"

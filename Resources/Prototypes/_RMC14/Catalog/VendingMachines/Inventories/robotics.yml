@@ -4,11 +4,11 @@
     CableApcStack: 4
     SawElectric: 2
     CMCrowbar: 2
-    Scalpel: 2
+    CMScalpel: 2
     CMScrewdriver: 2
-    Flash: 4
-    PowerCellHigh: 4
+    CMFlash: 4
+    RMCPowerCellHigh: 4
     ProximitySensor: 4
     RemoteSignaller: 4
-    HandheldHealthAnalyzer: 2
+    CMHealthAnalyzer: 2
     NitrousOxideTankFilled: 2

@@ -2668,5 +2668,49 @@
   id: 326
   time: '2024-07-09T11:08:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2927
+- author: DrSmugleaf
+  changes:
+  - message: Fixed eggs being able to infect through corners.
+    type: Fix
+  id: 327
+  time: '2024-07-09T19:23:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2931
+- author: DrSmugleaf
+  changes:
+  - message: Re-enabled the Discord game admin chat bridge.
+    type: Add
+  id: 328
+  time: '2024-07-09T19:29:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2871
+- author: diraven
+  changes:
+  - message: Xenos in "watch xeno" skill ui are now sorted alphabetically.
+    type: Tweak
+  id: 329
+  time: '2024-07-09T19:30:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2934
+- author: Zarq
+  changes:
+  - message: Added recipes for current medicines.
+    type: Add
+  - message: Re-enabled the Chemical Dispenser.
+    type: Tweak
+  id: 330
+  time: '2024-07-09T19:52:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2735
+- author: blueDev2
+  changes:
+  - message: Barricades with barbed wires maintain their barbed wires when upgrading
+    type: Fix
+  id: 331
+  time: '2024-07-10T03:01:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2936
+- author: DrSmugleaf
+  changes:
+  - message: Fixed walls and membranes not destroying weed nodes under them when constructed.
+    type: Fix
+  id: 332
+  time: '2024-07-10T03:34:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2942
 Name: RMC14
 Order: -1

@@ -32,7 +32,7 @@
       "name": "sniperscope"
     },
     {
-      "name": "miniscope_nsg23"
+      "name": "miniscope-nsg23"
     },
     {
       "name": "rxfm5_eva_scope"
@@ -62,7 +62,7 @@
       "name": "sniperscope_a"
     },
     {
-      "name": "miniscope_nsg23_a"
+      "name": "miniscope-nsg23_a"
     },
     {
       "name": "rxfm5_eva_scope_a"
@@ -129,6 +129,9 @@
     },
     {
       "name": "collisight_a"
+    },
+    {
+      "name": "m96s-scope"
     }
   ]
 }
