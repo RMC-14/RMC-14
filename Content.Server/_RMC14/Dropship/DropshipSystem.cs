@@ -30,6 +30,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
 
     private EntityQuery<DockingComponent> _dockingQuery;
+    private EntityQuery<DoorComponent> _doorQuery;
     private EntityQuery<DoorBoltComponent> _doorBoltQuery;
 
     public override void Initialize()
@@ -37,6 +38,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         base.Initialize();
 
         _dockingQuery = GetEntityQuery<DockingComponent>();
+        _doorQuery = GetEntityQuery<DoorComponent>();
         _doorBoltQuery = GetEntityQuery<DoorBoltComponent>();
 
         SubscribeLocalEvent<DropshipNavigationComputerComponent, ActivateInWorldEvent>(OnActivateInWorld);
@@ -246,19 +248,20 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
     public void LockDoor(Entity<DoorBoltComponent?> door)
     {
-        var doorComp = CompOrNull<DoorComponent>(door);
-        var oldCheck = doorComp?.PerformCollisionCheck ?? false;
-        if (doorComp != null)
+        if (_doorQuery.TryComp(door, out var doorComp) &&
+            doorComp.State != DoorState.Closed)
+        {
+            var oldCheck = doorComp.PerformCollisionCheck;
             doorComp.PerformCollisionCheck = false;
 
-        _door.StartClosing(door);
-        _door.OnPartialClose(door);
+            _door.StartClosing(door);
+            _door.OnPartialClose(door);
+
+            doorComp.PerformCollisionCheck = oldCheck;
+        }
 
         if (_doorBoltQuery.Resolve(door, ref door.Comp, false))
             _door.SetBoltsDown((door.Owner, door.Comp), true);
-
-        if (doorComp != null)
-            doorComp.PerformCollisionCheck = oldCheck;
     }
 
     public void UnlockDoor(Entity<DoorBoltComponent?> door)
