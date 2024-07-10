@@ -2698,5 +2698,57 @@
   id: 330
   time: '2024-07-09T19:52:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2735
+- author: blueDev2
+  changes:
+  - message: Barricades with barbed wires maintain their barbed wires when upgrading
+    type: Fix
+  id: 331
+  time: '2024-07-10T03:01:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2936
+- author: DrSmugleaf
+  changes:
+  - message: Fixed walls and membranes not destroying weed nodes under them when constructed.
+    type: Fix
+  id: 332
+  time: '2024-07-10T03:34:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2942
+- author: DrSmugleaf
+  changes:
+  - message: Added admin logs for plant weeds, xeno construction and order construction.!
+    type: Add
+  id: 333
+  time: '2024-07-10T07:34:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2947
+- author: DrSmugleaf
+  changes:
+  - message: Fixed nested marines getting knocked back into walls by grenade explosions.
+    type: Fix
+  id: 334
+  time: '2024-07-10T07:47:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2945
+- author: DrSmugleaf
+  changes:
+  - message: Default projectile speed has been increased by 24%
+    type: Tweak
+  id: 335
+  time: '2024-07-10T07:47:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2946
+- author: DrSmugleaf
+  changes:
+  - message: Fixed some dropship tiles not being see-through. This includes the engines
+      on the sides, and the winglets next to the side and bottom crew hatches.
+    type: Fix
+  id: 336
+  time: '2024-07-10T07:47:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2938
+- author: DrSmugleaf
+  changes:
+  - message: The xenonid "Choose Resin Structure" window now stays open after making
+      a selection, allowing it to be changed back and forth without reopening the
+      window.
+    type: Tweak
+  id: 337
+  time: '2024-07-10T08:29:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2951
 Name: RMC14
 Order: -1
