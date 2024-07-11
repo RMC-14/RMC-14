@@ -188,8 +188,7 @@ public sealed class RMCWieldableSystem : EntitySystem
 
         var time = $"{(info.EndTime - _timing.CurTime).TotalSeconds:F1}";
 
-        //_popupSystem.PopupClient(Loc.GetString("rmc-wield-use-delay", ("seconds", time), ("wieldable", wieldable.Owner)), args.User, args.User);
-        // Uncomment when there's a cooldown on popups from a source.
+        _popupSystem.PopupClient(Loc.GetString("rmc-wield-use-delay", ("seconds", time), ("wieldable", wieldable.Owner)), args.User, args.User);
     }
 
     public void RefreshWieldDelay(Entity<WieldDelayComponent?> wieldable)
@@ -231,6 +230,7 @@ public sealed class RMCWieldableSystem : EntitySystem
         var time = $"{(info.EndTime - _timing.CurTime).TotalSeconds:F1}";
 
         //_popupSystem.PopupClient(Loc.GetString("rmc-shoot-use-delay", ("seconds", time), ("wieldable", wieldable.Owner)), args.User, args.User);
+        // Uncomment when there's a cooldown on popups from a source.
     }
 
 #endregion
