@@ -4,10 +4,10 @@
     CMHandcuffs: 8
     Zipties: 10
     GrenadeFlashBang: 4
-    WeaponDisabler: 4 # Taser 4
+    RMCWeaponTaser: 4
     # Pepper spray 4
     CMStunbaton: 4
-    FlashlightSeclite: 4
+    RMCFlashlight: 4
     CMBeltSecurityFilled: 4
     CMFlash: 5
     FoodBoxDonut: 12

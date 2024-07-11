@@ -23,6 +23,9 @@
     interfaces:
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
 
 - type: entity
   abstract: true
@@ -111,13 +114,15 @@
       - CableCoil
       - Multitool
       - Flashlight
-#      - # TODO nailgun, cell, circuit board
+      - PowerCell
+#      - # TODO nailgun, circuit board
       components:
       - Welder
       - PowerCell
       - TrayScanner
       - GasAnalyzer
       - LightReplacer
+      - EntrenchingTool
   - type: IgnoreContentsSize
     items:
       components:
@@ -151,14 +156,16 @@
       - Sidearm
       - CMMagazinePistol
       - CMMagazineRevolver
+      - PowerCell
 #      - # TODO RMC14 handful of shotgun shells
-#      - # TODO nailgun, cell, circuit board
+#      - # TODO nailgun, circuit board
       components:
       - Welder
       - PowerCell
       - TrayScanner
       - GasAnalyzer
       - LightReplacer
+      - EntrenchingTool
   - type: FixedItemSizeStorage
 
 - type: entity
@@ -207,8 +214,8 @@
       - Syringe
       - CMSurgicalLine
       - CMSynthGraft
-      - Bloodpack
       - Brutepack
+      - CMBloodPack
       - Gauze
       - Ointment
       - CMOintment
@@ -238,7 +245,7 @@
   - type: Storage
     maxItemSize: Small
     grid:
-    - 0,0,41,1 # 21 slots
+    - 0,0,13,5 # 21 slots
     whitelist:
       tags:
       - DiscreteHealthAnalyzer
@@ -248,6 +255,7 @@
       - Syringe
       - CMAutoInjector
       - Brutepack
+      - CMBloodPack
       - Gauze
       - Ointment
       - CMOintment
@@ -258,7 +266,6 @@
       components:
       - Defibrillator
       - Pill
-      - BloodPack
   - type: FixedItemSizeStorage
   - type: IgnoreContentsSize
     items:

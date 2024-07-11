@@ -39,7 +39,7 @@
   id: CMXenoBase
   abstract: true
   save: false
-  components:
+  components: # TODO RMC14 camera recoil from large explosions? check 13
   - type: Damageable
     damageContainer: Xeno
   - type: Destructible
@@ -99,7 +99,6 @@
   - type: Examiner
   - type: Eye
   - type: ContentEye
-  - type: CameraRecoil
   - type: MindContainer
     showExamineInfo: true
   - type: StatusIcon
@@ -212,6 +211,9 @@
   - type: XenoAnnounceDeath # TODO RMC14 announce location of death (area)
     message: cm-xeno-death
     color: "#459A62"
+  - type: NpcFactionMember
+    factions:
+    - RMCXeno
 
 - type: entity
   abstract: true
@@ -267,13 +269,10 @@
   id: CMXenoAI
   parent: CMXenoBase
   abstract: true
-  components:
+#  components:
 #  - type: HTN # TODO RMC14 needs to not target nested marines
 #    rootTask:
 #      task: CMXenoCompound
-  - type: NpcFactionMember
-    factions:
-    - Xeno
 
 - type: entity
   id: CMXenoDeveloped

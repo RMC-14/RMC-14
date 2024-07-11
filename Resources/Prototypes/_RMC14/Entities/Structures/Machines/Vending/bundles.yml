@@ -86,10 +86,10 @@
     - CMSandbagEmpty25
     - CMSheetMetal50
     - CMSheetPlasteel40
-#    - # TODO RMC14 high capacity power cell
-    - CMEntrenchingTool # TODO RMC14 check that this starts folded
-    - LightReplacer # TODO RMC14 cm light replacer
-#    - # TODO RMC14 apc board
+    - RMCPowerCellHigh
+    - CMEntrenchingTool
+    - CMLightReplacer
+#    - CMAPCElectronics # TODO RMC14 uncomment when power
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
@@ -127,3 +127,21 @@
     - CMGlassesSecurity
     - CMBeltSecurityFilled
     - CMArmorHelmetM10MP
+    
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: CMVendorBundleCrewMedicalEssentialsNurse
+  name: essential medical set
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/defib.rsi
+    state: defib
+  - type: CMVendorBundle
+    bundle:
+    - CMDefibrillator
+    - CMAdvFirstAidKitFilled
+    - CMHealthAnalyzer
+    - CMSurgicalLine
+    - CMSynthGraft
+    - CMSurgicalCaseFilled
+#   - Syringe case # TODO RMC14 syringe cases

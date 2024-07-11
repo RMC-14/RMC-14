@@ -1,5 +1,6 @@
 ﻿using Content.Shared.Hands.Components;
 using Content.Shared.Inventory;
+using Content.Shared.NPC.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics.Events;
@@ -12,10 +13,12 @@ public sealed class GunIFFSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
 
+    private EntityQuery<NpcFactionMemberComponent> _npcFactionMemberQuery;
     private EntityQuery<UserIFFComponent> _userIFFQuery;
 
     public override void Initialize()
     {
+        _npcFactionMemberQuery = GetEntityQuery<NpcFactionMemberComponent>();
         _userIFFQuery = GetEntityQuery<UserIFFComponent>();
 
         SubscribeLocalEvent<UserIFFComponent, GetIFFFactionEvent>(OnUserIFFGetFaction);

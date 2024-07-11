@@ -1,10 +1,12 @@
-﻿using System.Numerics;
+using System.Numerics;
+using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
@@ -36,18 +38,22 @@ public sealed class XenoNestSystem : EntitySystem
 
     private readonly List<Direction> _candidateNests = new();
 
+    private EntityQuery<XenoWeedableComponent> _xenoWeedable;
+
     public override void Initialize()
     {
         base.Initialize();
 
+        _xenoWeedable = GetEntityQuery<XenoWeedableComponent>();
+
         SubscribeLocalEvent<XenoComponent, GetUsedEntityEvent>(OnXenoGetUsedEntity);
 
-        // TODO RMC14 make nests part of the wall entity so drag and drop can work
-        SubscribeLocalEvent<XenoNestSurfaceComponent, InteractHandEvent>(OnNestInteractHand);
-        SubscribeLocalEvent<XenoNestSurfaceComponent, DoAfterAttemptEvent<XenoNestDoAfterEvent>>(OnNestSurfaceDoAfterAttempt);
+        SubscribeLocalEvent<XenoNestSurfaceComponent, InteractHandEvent>(OnSurfaceInteractHand);
+        SubscribeLocalEvent<XenoNestSurfaceComponent, DoAfterAttemptEvent<XenoNestDoAfterEvent>>(OnSurfaceDoAfterAttempt);
         SubscribeLocalEvent<XenoNestSurfaceComponent, XenoNestDoAfterEvent>(OnNestSurfaceDoAfter);
-        SubscribeLocalEvent<XenoNestSurfaceComponent, CanDropTargetEvent>(OnCanDropTarget);
-        SubscribeLocalEvent<XenoNestSurfaceComponent, DragDropTargetEvent>(OnDragDropTarget);
+        SubscribeLocalEvent<XenoNestSurfaceComponent, CanDropTargetEvent>(OnSurfaceCanDropTarget);
+        SubscribeLocalEvent<XenoNestSurfaceComponent, DragDropTargetEvent>(OnSurfaceDragDropTarget);
+        SubscribeLocalEvent<XenoNestSurfaceComponent, EntityTerminatingEvent>(OnSurfaceTerminating);
 
         SubscribeLocalEvent<XenoNestComponent, ComponentRemove>(OnNestRemove);
         SubscribeLocalEvent<XenoNestComponent, EntityTerminatingEvent>(OnNestTerminating);
@@ -65,6 +71,8 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoNestedComponent, AttackAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, ChangeDirectionAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, DownAttemptEvent>(OnNestedCancel);
+        SubscribeLocalEvent<XenoNestedComponent, IsEquippingAttemptEvent>(OnNestedCancel);
+        SubscribeLocalEvent<XenoNestedComponent, IsUnequippingAttemptEvent>(OnNestedCancel);
     }
 
     private void OnXenoGetUsedEntity(Entity<XenoComponent> ent, ref GetUsedEntityEvent args)
@@ -80,7 +88,7 @@ public sealed class XenoNestSystem : EntitySystem
         args.Used = pulling;
     }
 
-    private void OnNestInteractHand(Entity<XenoNestSurfaceComponent> ent, ref InteractHandEvent args)
+    private void OnSurfaceInteractHand(Entity<XenoNestSurfaceComponent> ent, ref InteractHandEvent args)
     {
         if (CompOrNull<PullerComponent>(args.User)?.Pulling is not { } pulling)
             return;
@@ -118,7 +126,7 @@ public sealed class XenoNestSystem : EntitySystem
             _standing.Down(ent);
     }
 
-    private void OnNestSurfaceDoAfterAttempt(Entity<XenoNestSurfaceComponent> ent, ref DoAfterAttemptEvent<XenoNestDoAfterEvent> args)
+    private void OnSurfaceDoAfterAttempt(Entity<XenoNestSurfaceComponent> ent, ref DoAfterAttemptEvent<XenoNestDoAfterEvent> args)
     {
         if (args.DoAfter.Args.Target is not { } target ||
             TerminatingOrDeleted(target) ||
@@ -201,7 +209,7 @@ public sealed class XenoNestSystem : EntitySystem
 
     #region DragDrop
 
-    private void OnCanDropTarget(Entity<XenoNestSurfaceComponent> ent, ref CanDropTargetEvent args)
+    private void OnSurfaceCanDropTarget(Entity<XenoNestSurfaceComponent> ent, ref CanDropTargetEvent args)
     {
         if (args.Handled)
             return;
@@ -210,10 +218,21 @@ public sealed class XenoNestSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void OnDragDropTarget(Entity<XenoNestSurfaceComponent> ent, ref DragDropTargetEvent args)
+    private void OnSurfaceDragDropTarget(Entity<XenoNestSurfaceComponent> ent, ref DragDropTargetEvent args)
     {
         args.Handled = true;
         TryStartNesting(args.User, ent, args.Dragged);
+    }
+
+    private void OnSurfaceTerminating(Entity<XenoNestSurfaceComponent> ent, ref EntityTerminatingEvent args)
+    {
+        if (!TerminatingOrDeleted(ent.Comp.Weedable) &&
+            _xenoWeedable.TryComp(ent.Comp.Weedable, out var weedable) &&
+            weedable.Entity == ent)
+        {
+            weedable.Entity = null;
+            Dirty(ent.Comp.Weedable.Value, weedable);
+        }
     }
 
     #endregion
@@ -240,7 +259,7 @@ public sealed class XenoNestSystem : EntitySystem
 
     private void TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)
     {
-        if (GetNestDirection(surface, victim) is not { } direction ||
+        if (!HasComp<XenoComponent>(user) || GetNestDirection(surface, victim) is not { } direction ||
             !CanNestPopup(user, victim, surface, direction))
         {
             return;

@@ -192,7 +192,7 @@
       entries: [ ]
     #- id: CMMedicalHelmetOptic
     #  points: 15
-    #- id: CMWelding isor
+    #- id: CMWeldingVisor
     #  points: 5
     - name: Pamphlets
       entries: [ ]

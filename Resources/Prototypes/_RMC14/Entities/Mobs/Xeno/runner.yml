@@ -42,7 +42,7 @@
     - ActionXenoWatch
     - ActionXenoTailStab
     - ActionXenoHide
-    - ActionXenoPounce # TODO RMC14 call this pounce, not leap
+    - ActionXenoLeap
     - ActionXenoBoneChips
     - ActionXenoZoom
     - ActionXenoDevolve

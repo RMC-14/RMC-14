@@ -1,0 +1,174 @@
+- type: entity
+  parent: BaseItem
+  id: RMCPowerCell
+  name: power cell
+  description: A rechargeable electrochemical power cell.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Power/cells.rsi
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: cell
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+  - type: Battery
+    maxCharge: 1000
+    startingCharge: 1000
+  - type: PowerCell
+  - type: Appearance
+  - type: PowerCellVisuals
+  - type: Riggable
+  - type: Tag
+    tags:
+      - PowerCell
+
+- type: entity
+  parent: RMCPowerCell
+  id: RMCPowerCellCrap
+  name: We-Ya rechargeable mini-battery
+  description: Cheap, throwaway batteries provided by the Weston-Yamada Corporation. The 'rechargeable' feature was added to be more marketable to independent colonists hell-bent on 'using it till it disintegrates', a common sentiment on the frontier.
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: mini-cell
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+  - type: Battery
+    maxCharge: 500
+    startingCharge: 500
+
+- type: entity
+  parent: RMCPowerCellCrap
+  id: RMCPowerCellCrapEmpty
+  suffix: Empty
+  components:
+  - type: Battery
+    startingCharge: 0
+
+- type: entity
+  parent: RMCPowerCell
+  id: RMCPowerCellAPC
+  name: heavy-duty power cell
+  components:
+  - type: Battery
+    maxCharge: 5000
+    startingCharge: 5000
+
+- type: entity
+  parent: RMCPowerCellAPC
+  id: RMCPowerCellAPCEmpty
+  suffix: Empty
+  components:
+  - type: Battery
+    startingCharge: 0
+
+- type: entity
+  parent: RMCPowerCell
+  id: RMCPowerCellHigh
+  name: high-capacity power cell
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: hcell
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+  - type: Battery
+    maxCharge: 10000
+    startingCharge: 10000
+
+- type: entity
+  parent: RMCPowerCellHigh
+  id: RMCPowerCellHighEmpty
+  suffix: Empty
+  components:
+  - type: Battery
+    startingCharge: 0
+
+- type: entity
+  parent: RMCPowerCell
+  id: RMCPowerCellSuper
+  name: super-capacity power cell
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: scell
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+  - type: Battery
+    maxCharge: 20000
+    startingCharge: 20000
+
+- type: entity
+  parent: RMCPowerCellSuper
+  id: RMCPowerCellSuperEmpty
+  suffix: Empty
+  components:
+  - type: Battery
+    startingCharge: 0
+
+- type: entity
+  parent: RMCPowerCell
+  id: RMCPowerCellHyper
+  name: hyper-capacity power cell
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: hpcell
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+  - type: Battery
+    maxCharge: 30000
+    startingCharge: 30000
+
+- type: entity
+  parent: RMCPowerCellHyper
+  id: RMCPowerCellHyperEmpty
+  suffix: Empty
+  components:
+  - type: Battery
+    startingCharge: 0
+
+- type: entity
+  parent: RMCPowerCell
+  id: RMCPowerCellInfinite
+  name: infinite-capacity power cell
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: icell
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+  - type: Battery
+    maxCharge: 30000
+    startingCharge: 30000
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 1000
+
+- type: entity
+  parent: RMCPowerCell
+  id: RMCPowerCellPotato
+  name: potato battery
+  description: A rechargeable starch-based power cell.
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: potato_cell
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+  - type: Battery
+    maxCharge: 300
+    startingCharge: 100

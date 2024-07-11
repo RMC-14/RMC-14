@@ -34,6 +34,7 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
+  - type: RMCDropshipBlocked
 
 - type: entity
   parent: CMGirder

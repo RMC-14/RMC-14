@@ -20,7 +20,10 @@
       "name": "bodybag_folded"
     },
     {
-      "name": "bodybag_label"
+      "name": "paper"
+    },
+    {
+      "name": "invoice"
     },
     {
       "name": "jungletarp_folded"

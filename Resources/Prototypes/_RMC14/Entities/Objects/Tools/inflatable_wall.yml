@@ -1,0 +1,77 @@
+- type: stack
+  id: RMCInflatableWall
+  name: inflatable wall
+  icon: { sprite: _RMC14/Objects/Misc/inflatable_wall.rsi, state: folded_wall }
+  spawn: RMCInflatableWallFolded1
+  maxCount: 10
+
+- type: entity
+  parent: BaseItem
+  id: RMCInflatableWallFolded
+  name: inflatable wall
+  description: A folded membrane which rapidly expands into a large cubical shape on activation.
+  suffix: Full
+  components:
+    - type: Stack
+      stackType: RMCInflatableWall
+      count: 10
+    - type: Sprite
+      sprite: _RMC14/Objects/Misc/inflatable_wall.rsi
+      state: folded_wall
+    - type: Item
+      sprite: _RMC14/Objects/Misc/inflatable_wall.rsi
+      size: Small
+    - type: SpawnAfterInteract
+      prototype: RMCInflatableWall
+      doAfter: 1
+      removeOnInteract: true
+    - type: Clickable
+
+- type: entity
+  parent: RMCInflatableWallFolded
+  id: RMCInflatableWallFolded1
+  suffix: Single
+  components:
+    - type: Sprite
+      state: folded_wall
+    - type: Stack
+      count: 1
+
+- type: stack
+  id: RMCInflatableDoor
+  name: inflatable door
+  icon: { sprite: _RMC14/Objects/Misc/inflatable_door.rsi, state: folded_door }
+  spawn: RMCInflatableDoorFolded1
+  maxCount: 4
+
+- type: entity
+  parent: BaseItem
+  id: RMCInflatableDoorFolded
+  name: inflatable door
+  description: A folded membrane which rapidly expands into a simple door on activation.
+  suffix: Full
+  components:
+    - type: Stack
+      stackType: RMCInflatableDoor
+      count: 4
+    - type: Sprite
+      sprite: _RMC14/Objects/Misc/inflatable_door.rsi
+      state: folded_door
+    - type: Item
+      sprite: _RMC14/Objects/Misc/inflatable_door.rsi
+      size: Small
+    - type: SpawnAfterInteract
+      prototype: RMCInflatableDoor
+      doAfter: 1
+      removeOnInteract: true
+    - type: Clickable
+
+- type: entity
+  parent: RMCInflatableDoorFolded
+  id: RMCInflatableDoorFolded1
+  suffix: Single
+  components:
+    - type: Sprite
+      state: folded_door
+    - type: Stack
+      count: 1

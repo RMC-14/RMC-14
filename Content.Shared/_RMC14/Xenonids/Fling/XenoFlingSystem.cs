@@ -2,11 +2,11 @@
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
-using Content.Shared.Throwing;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Stunnable;
+using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
-using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Fling;
@@ -14,12 +14,14 @@ namespace Content.Shared._RMC14.Xenonids.Fling;
 public sealed class XenoFlingSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     public override void Initialize()
     {
@@ -28,8 +30,7 @@ public sealed class XenoFlingSystem : EntitySystem
 
     private void OnXenoFlingAction(Entity<XenoFlingComponent> xeno, ref XenoFlingActionEvent args)
     {
-        // TODO RMC14 xenos of the same hive
-        if (args.Target == xeno.Owner || HasComp<XenoComponent>(args.Target))
+        if (!_xeno.CanAbilityAttackTarget(xeno, args.Target))
             return;
 
         if (args.Handled)
@@ -41,20 +42,12 @@ public sealed class XenoFlingSystem : EntitySystem
         if (attempt.Cancelled)
             return;
 
-        var targetId = args.Target;
-
-        if (TryComp(xeno, out XenoComponent? xenoComp) &&
-            TryComp(targetId, out XenoComponent? targetXeno) &&
-            xenoComp.Hive == targetXeno.Hive)
-        {
-            return;
-        }
-
         args.Handled = true;
 
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
+        var targetId = args.Target;
         var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage);
         if (damage?.GetTotal() > FixedPoint2.Zero)
         {

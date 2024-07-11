@@ -86,16 +86,16 @@
     state: base_m63
   objectType: Item
 
-# M4RA
+# M4SPR
 - type: construction
   parent: RMC
-  name: Magazine Box (M4RA Reg)
+  name: Magazine Box (M4SPR Reg)
   id: CMBoxMagazineRifleM4SPR
   graph: CMBoxMagazine
   startNode: start
   targetNode: CMBoxMagazineRifleM4SPREmpty
   category: construction-category-cm-box-magazine
-  description: A magazine box that can contain regular M4RA mags.
+  description: A magazine box that can contain regular M4SPR mags.
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_m4spr
@@ -103,13 +103,13 @@
 
 - type: construction
   parent: RMC
-  name: Magazine Box (M4RA AP)
+  name: Magazine Box (M4SPR AP)
   id: CMBoxMagazineRifleM4SPRAP
   graph: CMBoxMagazine
   startNode: start
   targetNode: CMBoxMagazineRifleM4SPRAPEmpty
   category: construction-category-cm-box-magazine
-  description: A magazine box that can contain armor piercing M4RA mags.
+  description: A magazine box that can contain armor piercing M4SPR mags.
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_m4spr
@@ -117,13 +117,13 @@
 
 - type: construction
   parent: RMC
-  name: Magazine Box (M4RA Ext)
+  name: Magazine Box (M4SPR Ext)
   id: CMBoxMagazineRifleM4SPRExt
   graph: CMBoxMagazine
   startNode: start
   targetNode: CMBoxMagazineRifleM4SPRExtEmpty
   category: construction-category-cm-box-magazine
-  description: A magazine box that can contain extended M4RA mags.
+  description: A magazine box that can contain extended M4SPR mags.
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_m4spr

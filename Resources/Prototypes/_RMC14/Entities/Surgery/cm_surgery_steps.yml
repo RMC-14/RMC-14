@@ -110,6 +110,8 @@
     sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
   - type: CMSurgeryOperatingTableCondition
+  - type: RMCSurgeryStepSpawnEffect
+    entity: RMCXenoEmbryo
 
 - type: entity
   parent: CMSurgeryStepBase

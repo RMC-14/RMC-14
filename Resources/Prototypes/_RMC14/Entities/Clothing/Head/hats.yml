@@ -76,6 +76,25 @@
   - type: Tag
     tags:
     - ClothMade
+  - type: Storage
+    maxItemSize: Tiny
+    grid:
+    - 0,0,3,1 # 2 slots
+    whitelist:
+      components:
+      - RMCLighter
+      tags:
+      - Cigarette
+      - Matchstick
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: [ ]
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: CMHeadCapMP

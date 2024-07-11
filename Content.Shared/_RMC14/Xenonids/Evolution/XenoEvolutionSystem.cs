@@ -1,8 +1,11 @@
 ﻿using System.Linq;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Actions;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Climbing.Components;
 using Content.Shared.Climbing.Systems;
+using Content.Shared.Damage;
+using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
 using Content.Shared.FixedPoint;
@@ -22,6 +25,7 @@ namespace Content.Shared._RMC14.Xenonids.Evolution;
 public sealed class XenoEvolutionSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _action = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly ClimbSystem _climb = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
@@ -75,6 +79,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (args.Handled)
             return;
 
+        if (!CanDevolvePopup(xeno))
+            return;
+
         args.Handled = true;
         _ui.OpenUi(xeno.Owner, XenoDevolveUIKey.Key, xeno);
     }
@@ -102,6 +109,13 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return;
         }
 
+        if (TryComp(xeno, out DamageableComponent? damageable) &&
+            damageable.TotalDamage > FixedPoint2.Zero)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-cant-evolve-damaged"), xeno, xeno, PopupType.MediumCaution);
+            return;
+        }
+
         var ev = new XenoEvolutionDoAfterEvent(args.Choice);
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.EvolutionDelay, ev, xeno);
 
@@ -113,14 +127,17 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     private void OnXenoDevolveBui(Entity<XenoDevolveComponent> xeno, ref XenoDevolveBuiMsg args)
     {
+        _ui.CloseUi(xeno.Owner, XenoEvolutionUIKey.Key, xeno);
+
+        if (!CanDevolvePopup(xeno))
+            return;
+
         if (_net.IsClient ||
             !_mind.TryGetMind(xeno, out var mindId, out _) ||
             !xeno.Comp.DevolvesTo.Contains(args.Choice))
         {
             return;
         }
-
-        _ui.CloseUi(xeno.Owner, XenoEvolutionUIKey.Key, xeno);
 
         var coordinates = _transform.GetMoverCoordinates(xeno.Owner);
         var newXeno = Spawn(args.Choice, coordinates);
@@ -142,6 +159,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         var ev = new XenoDevolvedEvent(xeno);
         RaiseLocalEvent(newXeno, ref ev);
+
+        _adminLog.Add(LogType.RMCDevolve, $"Xenonid {ToPrettyString(xeno)} devolved into {ToPrettyString(newXeno)}");
 
         Del(xeno.Owner);
 
@@ -181,6 +200,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         var ev = new NewXenoEvolvedEvent(xeno);
         RaiseLocalEvent(newXeno, ref ev);
+
+        _adminLog.Add(LogType.RMCEvolve, $"Xenonid {ToPrettyString(xeno)} evolved into {ToPrettyString(newXeno)}");
 
         Del(xeno.Owner);
 
@@ -317,6 +338,18 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
         return false;
+    }
+
+    private bool CanDevolvePopup(EntityUid xeno)
+    {
+        if (TryComp(xeno, out DamageableComponent? damageable) &&
+            damageable.TotalDamage > FixedPoint2.Zero)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-evolution-cant-devolve-damaged"), xeno, xeno, PopupType.MediumCaution);
+            return false;
+        }
+
+        return true;
     }
 
     // TODO RMC14 make this a property of the hive component

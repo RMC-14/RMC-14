@@ -1,6 +1,6 @@
 ﻿- type: entity
-  id: ActionXenoAcidNormal
   parent: ActionXenoBase
+  id: ActionXenoAcidNormal
   name: Corrosive Acid (100)  # TODO RMC14 proper plasma costs
   description: Melts down a structure over time.
   components:
@@ -13,10 +13,11 @@
       acidId: XenoAcidNormal
       plasmaCost: 100
       time: 150
+    checkCanInteract: false
 
 - type: entity
+  parent: ActionXenoAcidNormal
   id: ActionXenoAcidWeak
-  parent: ActionXenoBase
   name: Weak Corrosive Acid (75)  # TODO RMC14 proper plasma costs
   description: Melts down a structure over time.
   components:
@@ -29,10 +30,11 @@
       acidId: XenoAcidWeak
       plasmaCost: 75
       time: 375
+    checkCanInteract: false
 
 - type: entity
+  parent: ActionXenoAcidNormal
   id: ActionXenoAcidStrong
-  parent: ActionXenoBase
   name: Strong Corrosive Acid (125)  # TODO RMC14 proper plasma costs
   description: Melts down a structure over time.
   components:
@@ -45,6 +47,7 @@
       acidId: XenoAcidStrong
       plasmaCost: 125
       time: 60
+    checkCanInteract: false
 
 - type: entity
   id: ActionXenoRegurgitate
@@ -96,7 +99,7 @@
   parent: ActionXenoLeap
   id: ActionXenoPounce
   name: Pounce (20) # TODO RMC14 proper plasma costs
-  description: Jump towards a given location and knock down the first enemy hit if you are invisible.
+  description: Jump towards a given location and knock down the first enemy hit [color=red]if you are invisible.[/color]
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -257,6 +260,8 @@
     event: !type:XenoPunchActionEvent
     range: 1
     useDelay: 4.5
+    deselectOnMiss: false
+  - type: XenoOffensiveAction
 
 - type: entity
   id: ActionXenoFling
@@ -272,12 +277,14 @@
     event: !type:XenoFlingActionEvent
     range: 1
     useDelay: 7
+    deselectOnMiss: false
+  - type: XenoOffensiveAction
 
 - type: entity
   id: ActionXenoLunge
   parent: ActionXenoBase
   name: Lunge
-  description: Lunges the warrior towards the targeted marine and puts them into a choke hold (like grabbing them).
+  description: Lunges the warrior towards the targeted marine and grabs them.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -287,6 +294,8 @@
     event: !type:XenoLungeActionEvent
     range: 5
     useDelay: 10
+    deselectOnMiss: false
+  - type: XenoOffensiveAction
 
 - type: entity
   id: ActionXenoScreech

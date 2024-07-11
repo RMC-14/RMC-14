@@ -10,5 +10,5 @@ public sealed partial class GunUnskilledPenaltyComponent : Component
     public int Firearms = 1;
 
     [DataField, AutoNetworkedField]
-    public Angle AngleIncrease = Angle.FromDegrees(10);
+    public Angle AngleIncrease = Angle.FromDegrees(75);
 }

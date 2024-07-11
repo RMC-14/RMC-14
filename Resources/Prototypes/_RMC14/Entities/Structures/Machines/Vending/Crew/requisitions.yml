@@ -1,0 +1,521 @@
+# REQUISITIONS
+
+# ARMAMENTS VENDOR
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechCargoGuns
+  name: ColMarTech automated armaments vendor
+  description: An automated supply rack hooked up to a big storage of various firearms and explosives. Can be accessed by the Requisitions Officer and Cargo Techs.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessRequisitions" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/guns.rsi
+  - type: CMAutomatedVendor
+    sections:
+    - name: Primary firearms
+      entries:
+      - id: WeaponShotgunM42A2
+        amount: 30
+      - id: WeaponSMGM63
+        amount: 60
+      - id: WeaponRifleM54C
+        amount: 60
+      - id: WeaponRifleM4SPR
+        amount: 20
+    - name: Sidearms
+      entries:
+      - id: CMWeaponPistolM77
+        amount: 50
+      #- id: CMWeaponRevolverM44
+      #  amount: 50
+      - id: CMWeaponPistolM1984
+        amount: 50
+      #- id: CMWeaponFlareM82F
+      #  amount: 20
+    - name: Restricted Sidearms
+      entries:
+      - id: CMWeaponPistolMK80
+        amount: 4
+      #- id: SU-6 Smart Pistol
+      #  amount: 3
+      #- id: MOU-53 Shotgun
+      #  amount: 2
+      #- id: XM88 Heavy Rifle
+      #  amount: 3
+      #- id: M41AE2 Heavy Pulse Rifle
+      #  amount: 3
+      #- id: M41A Pulse Rifle MK1
+      #  amount: 3
+      #- id: M56D Heavy Machine Gun
+      #  amount: 2
+      #- id: M2C Heavy Machine Gun
+      #  amount: 2
+      #- id: M240 Incinerator Unit
+      #  amount: 2
+      #- id: M79 Grenade Launcher
+      #  amount: 3
+      #- id: XM51 Breaching Scattergun
+      #  amount: 3
+    - name: Explosives
+      entries:
+      #- id: M15 Fragmentation Grenade
+      #  amount: 2
+      #- id: M20 Claymore Anti-Personnel Mine
+      #  amount: 4
+      - id: CMGrenadeHighExplosive
+        amount: 25
+      #- id: M40 HIDP Incendiary Grenade
+      #  amount: 4
+      #- id: M40 HPDP White Phosphorus Smoke Grenade
+      #  amount: 4
+      #- id: M40 HSDP Smoke Grenade
+      #  amount: 5
+      #- id: M74 AGM-Frag Airburst Grenade
+      #  amount: 4
+      #- id: M74 AGM-Incendiary Airburst Grenade
+      #  amount: 4
+      #- id: M74 AGM-Smoke Airburst Grenade
+      #  amount: 4
+      #- id: M74 AGM-Star Shell
+      #  amount: 2
+      #- id: M74 AGM-Hornet Shell
+      #  amount: 4
+      #- id: M40 HIRR Baton Slug
+      #  amount: 8
+      #- id: M40 MFHS Metal Foam Grenade
+      #  amount: 6
+      #- id: Plastic Explosives
+      #  amount: 3
+      - id: RMCExplosiveBreachingCharge
+        amount: 2
+    - name: Webbings
+      entries:
+      - id: CMWebbingBrown
+        amount: 2
+      - id: CMWebbingBlack
+        amount: 2
+      - id: CMWebbing
+        amount: 5
+      #- id: Drop Pouch
+      #   amount: 2
+      #- id: Shoulder Holster
+      #  amount: 2
+      #- id: Knife Webbing
+      #  amount: 1
+    - name: Backpacks
+      entries:
+      - id: CMBackpackMarine
+        amount: 15
+      #- id: Shotgun Scabbard
+      #  amount: 10
+      #- id: Pyrotechnician G4-1 Fueltank
+      #  amount: 2
+      - id: CMBackpackWelder
+        amount: 2
+      #- id: Mortar Shell Backpack
+      #  amount: 1
+      - id: RMCSatchelWelder
+        amount: 5
+      #- id: IMP Ammo Rack
+      #   amount: 2
+      #- id: Radio Telephone Pack
+      #  amount: 2
+      #- id: Parachute
+      #  amount: 20
+    - name: Belts
+      entries:
+      #- id: G8-A General Utility Pouch
+      #   amount: 2
+      - id: CMBeltMarine
+        amount: 15
+      #- id: M276 General Pistol Holster Rig
+      #  amount: 10
+      - id: CMBeltKnifeFilled
+        name: M276 Knife Rig (Full)
+        amount: 5
+      #- id: M276 M39 Holster Rig
+      #  amount: 5
+      #- id: M276 M40 Grenade Rig
+      #  amount: 2
+      #- id: M276 M44 Holster Rig
+      #   amount: 5
+      #- id: M276 M82F Holster Rig
+      #  amount: 2
+      #- id: M276 Shotgun Shell Loading Rig
+      #  amount: 10
+      #- id: M276 Mortar Operator Belt
+      #  amount: 2
+    - name: Pouches
+      entries:
+      - id: CMPouchAutoinjector
+        amount: 1
+      #- id: CMPouchMedkit
+      #  amount: 2
+      - id: CMPouchFirstAidInjectors
+        amount: 5
+      - id: CMPouchFirstResponder
+        name: First Responder Pouch (Empty)
+        amount: 2
+      - id: CMPouchSyringe
+        amount: 2
+      - id: CMPouchToolsFill
+        name: Tools Pouch (Full)
+        amount: 2
+      - id: CMPouchConstruction
+        amount: 2
+      - id: CMPouchElectronics
+        amount: 2
+      - id: CMPouchExplosive
+        amount: 2
+      - id: CMPouchFlareFilled
+        amount: 5
+      - id: CMPouchDocument
+        amount: 2
+      #- id: CMPouchSling
+      #  amount: 2
+      - id: CMPouchMacheteFilled
+        amount: 1
+      - id: CMPouchBayonet
+        name: Bayonet Sheath (Full)
+        amount: 2
+      - id: CMPouchGeneralMedium
+        amount: 2
+      - id: CMPouchMagazine
+        amount: 5
+      - id: CMPouchShotgun
+        amount: 5
+      - id: CMPouchPistol
+        amount: 5
+      - id: CMPouchMagazinePistolLarge
+        amount: 5
+      #- id: Fuel Tank Strap Pouch
+      #  amount: 4
+      - id: CMPouchGeneralLarge
+        amount: 1
+      - id: CMPouchMagazineLarge
+        amount: 1
+      #- id: CMPouchShotgunLarge
+      #  amount: 1
+    - name: Miscellaneous
+      entries:
+      - id: RMCFlashlight # Combat Flashlight
+        amount: 5
+      - id: CMEntrenchingTool
+        amount: 4
+      - id: CMMaskGas
+        amount: 10
+      #- id: M89-S Signal Flare Pack
+      #   amount: 2
+      - id: CMPackFlare
+        amount: 10
+      #- id: Machete Scabbard (Full)
+      #  amount: 6
+      #- id: MB-6 Folding Barricades (x3)
+      #   amount: 3
+      #- id: Motion Detector
+      #  amount: 4
+      #- id: Data Detector
+      #  amount: 4
+      #- id: Binoculars
+      #  amount: 2
+      #- id: Rangefinder
+      #   amount: 1
+      #- id: Laser Designator
+      #  amount: 1
+      #- id: Welding Goggles
+      #  amount: 3
+      - id: CMFireExtinguisherPortable
+        amount: 3
+      - id: RMCPowerCellHigh
+        amount: 1
+      #- id: Fulton Device Stack
+      #  amount: 1
+      #- id: Sentry Gun Network Laptop
+      #   amount: 4
+      #- id: JTAC Pamphlet
+      #  amount: 1
+      #- id: Engineering Pamphlet
+      #  amount: 1
+      #- id: Powerloader Certification
+      #  amount: 1
+      #- id: Spare PDT/L Battle Buddy Kit
+      #  amount: 4
+      #- id: W-Y brand rechargeable mini-battery 3
+      #  amount: 10
+
+#AMMUNITION VENDOR
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechCargoAmmo
+  name: ColMarTech automated munition vendor
+  description: An automated supply rack hooked up to a big storage of various ammunition types. Can be accessed by the Requisitions Officer and Cargo Techs.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessRequisitions" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/ammo.rsi
+  - type: CMAutomatedVendor
+    sections:
+    - name: Regular ammunition
+      entries:
+      - id: CMBoxShotgunBuckshot
+        amount: 40
+      - id: CMBoxShotgunFlechette
+        amount: 40
+      - id: CMBoxShotgunSlugs
+        amount: 40
+      - id: CMMagazineRifleM4SPR
+        amount: 45
+      - id: CMMagazineRifleM54C
+        amount: 100
+      - id: CMMagazineSMGM63
+        amount: 100
+      #- id: M44 Speed Loader (.44)
+      #  amount: 80
+      - id: CMMagazinePistolM1984
+        amount: 102
+    - name: Armor-piercing ammunition
+      entries:
+      - id: CMMagazinePistolM77AP
+        amount: 50
+      - id: CMMagazineRifleM4SPRAP
+        amount: 16
+      - id: CMMagazineSMGM63AP
+        amount: 12
+      - id: CMMagazineRifleM54CAP
+        amount: 10
+      #- id: M4A3 AP Magazine (9mm)
+      #  amount: 2
+    - name: Extended ammunition
+      entries:
+      - id: CMMagazineSMGM63Ext
+        amount: 10
+      - id: CMMagazineRifleM54CExt
+        amount: 8
+    - name: Special ammunition
+      entries: [ ]
+      #- id: M56 DV9 Battery
+      #  amount: 4
+      #- id: M56 Smartgun Drum
+      #  amount: 4
+      #- id: M44 Heavy Speed Loader (.44)
+      #  amount: 10
+      #- id: M44 Marksman Speed Loader (.44)
+      #  amount: 6
+      #- id: M4A3 HP Magazine (9mm)
+      #  amount: 2
+      #- id: M41AE2 Holo Target Rounds (10x24mm)
+      #  amount: 2
+    - name: Restricted firearm ammunition
+      entries:
+      - id: CMMagazinePistolMK80
+        amount: 11
+      #- id: SU-6 Smartpistol Magazine (.45)
+      #  amount: 13
+      #- id: M240 Incinerator Tank
+      #  amount: 3
+      #- id: M41AE2 Box Magazine (10x24mm)
+      #  amount: 3
+      #- id: M41A MK1 Magazine (10x24mm)
+      #  amount: 5
+      #- id: M41A MK1 AP Magazine (10x24mm)
+      #  amount: 2
+      #- id: M56D Drum Magazine
+      #  amount: 2
+      #- id: M2C Box Magazine
+      #  amount: 2
+      #- id: XM51 Magazine (16g)
+      #  amount: 3
+    - name: Shotgun shell boxes # I don't think we have those yet
+      entries: [ ]
+      #- id: Shotgun Shell Box (Buckshot x 100)
+      #  amount: 4
+      #- id: Shotgun Shell Box (Flechette x 100)
+      #  amount: 4
+      #- id: Shotgun Shell Box (Slugs x 100)
+      #  amount: 4
+      #- id: Shotgun Shell Box (16g) (Breaching x 120)
+      #  amount: 1
+
+ #ATTACHMENTS VENDOR
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechCargoAttachments
+  name: Aegis Armaments attachments vendor
+  description: An automated supply rack hooked up to a big storage of weapons attachments. Can be accessed by the Requisitions Officer and Cargo Techs.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessRequisitions" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/attachments.rsi
+  - type: CMAutomatedVendor
+    sections:
+    - name: Barrel
+      entries:
+      - id: RMCAttachmentExtendedBarrel
+        amount: 7
+      - id: RMCM5Bayonet
+        amount: 11
+      - id: RMCAttachmentRecoilCompensator
+        amount: 7
+      - id: RMCAttachmentSuppressor
+        amount: 7
+    - name: Rail
+      entries:
+      - id: RMCAttachmentB8SmartScope
+        amount: 4
+      #- id: RMCAttachmentMagneticHarness
+      #  amount: 9
+      - id: RMCAttachmentRailFlashlight
+        amount: 11
+      - id: RMCAttachmentS42xTelescopicMiniscope
+        amount: 5
+      #- id: RMCAttachmentS5RedDotSight # UNCOMMENT WHEN ACCURACY IS IMPLEMENTED
+      #  amount: 10
+      - id: RMCAttachmentS6ReflexSight
+        amount: 10
+      - id: RMCAttachmentS84xTelescopicScope
+        amount: 5
+    - name: Underbarrel
+      entries:
+      - id: RMCAttachmentAngledGrip
+        amount: 7
+      #- id: RMCAttachmentBipod
+      #  amount: 7
+      - id: RMCAttachmentBurstFireAssembly
+        amount: 5
+      - id: RMCAttachmentGyroscopicStabilizer
+        amount: 5
+      - id: RMCAttachmentLaserSight
+        amount: 10
+      #- id: RMCAttachmentMiniFlamethrower
+      #  amount: 5
+      #- id: RMCAttachmentXMVESG1FlamerNozzle
+      #  amount: 5
+      - id: RMCAttachmentU7UnderbarrelShotgun
+        amount: 5
+      #- id: RMCAttachmentUnderbarrelExtinguisher
+      #  amount: 5
+      - id: RMCAttachmentU1GrenadeLauncher
+        amount: 10
+      #- id: RMCAttachmentMK1GrenadeLauncher # UNCOMMENT WHEN THE MK1 IS ADDED
+      #  amount: 10
+      - id: RMCAttachmentVerticalGrip
+        amount: 10
+    - name: Stock
+      entries:
+      - id: RMCAttachmentM42A2WoodenStock
+        amount: 5
+      - id: RMCAttachmentM63ArmBrace
+        amount: 5
+      - id: RMCAttachmentM63StockCollapsible
+        amount: 5
+      - id: RMCAttachmentM63Stock
+        amount: 5
+      - id: RMCAttachmentM54CStockSolid
+        amount: 5
+      - id: RMCAttachmentM54CStockCollapsible
+        amount: 5
+      #- id: RMCAttachmentM44MagnumSharpshooterStock # UNCOMMENT WHEN THE M44 IS ADDED
+      #  amount: 5
+
+#UNIFORM VENDOR
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechCargoUniform
+  name: ColMarTech surplus uniform vendor
+  description: An automated supply rack hooked up to a big storage of standard marine uniforms. Can be accessed by the Requisitions Officer and Cargo Techs.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessRequisitions" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    sections:
+    - name: Uniform
+      entries:
+      - id: CMBackpackMarine
+        amount: 20
+      - id: CMBootsBlack
+        amount: 20
+      - id: CMBeltMarine
+        amount: 10
+      #- id: M276 Shotgun Shell Loading Rig
+      #  amount: 10
+      - id: CMSatchelMarine
+        amount: 20
+      - id: JumpsuitMarine
+        amount: 20
+    - name: Armor
+      entries:
+      - id: ArmorHelmetM10
+        amount: 20
+      - id: CMArmorHelmetM10Tech
+        amount: 20
+      - id: CMArmorHelmetM10Medic
+        amount: 20
+      #- id: M3 Pattern Carrier Marine Armor
+      #  amount: 20
+      #- id: M3 Pattern Padded Marine Armor
+      #  amount: 20
+      #- id: M3 Pattern Padless Marine Armor
+      #  amount: 20
+      #- id: M3 Pattern Ridged Marine Armor
+      #  amount: 20
+      #- id: M3 Pattern Skull Marine Armor
+      #  amount: 20
+      - id: CMArmorM3Heavy
+        amount: 10
+      - id: CMArmorM3Light
+        amount: 10
+    - name: Gloves
+      entries:
+      - id: CMHandsBrown
+        amount: 40
+      - id: CMHandsBlackMarine
+        amount: 40
+    - name: Radio
+      entries:
+      - id: CMHeadset
+        amount: 5
+      - id: CMEncryptionKeyAlpha
+        amount: 5
+      - id: CMEncryptionKeyBravo
+        amount: 5
+      - id: CMEncryptionKeyCharlie
+        amount: 5
+      - id: CMEncryptionKeyDelta
+        amount: 5
+      - id: CMEncryptionKeyEcho
+        amount: 5
+      - id: CMEncryptionKeyEngineer
+        amount: 5
+      - id: CMEncryptionKeyIntel
+        amount: 5
+      - id: CMEncryptionKeyJTAC
+        amount: 5
+      - id: CMEncryptionKeyMedical
+        amount: 5
+      #- id: Sentry Gun Network Encryption Key
+      #  amount: 8
+      - id: CMEncryptionKeyRequisition
+        amount: 5
+    - name: Masks
+      entries:
+      - id: CMMaskGas
+        amount: 20
+      - id: CMMaskCoif
+        amount: 10
+    - name: Miscellaneous
+      entries: [ ]
+      #- id: Bedroll
+      #  amount: 30

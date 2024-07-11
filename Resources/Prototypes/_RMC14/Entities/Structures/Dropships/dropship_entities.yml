@@ -1,0 +1,19 @@
+﻿- type: entity
+  parent: MarkerBase
+  id: RMCDropshipDoorBlocker
+  name: dropship door blocker
+  description: Blocks barricades from being pulled into the dropship.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      dropship:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 100
+        layer:
+        - DropshipImpassable

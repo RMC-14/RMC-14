@@ -20,6 +20,9 @@
   - type: Tag
     tags:
     - Pouch
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
 
 - type: entity
   parent: [CMPouch, BaseStorageItem]
@@ -420,7 +423,7 @@
       - CMBurnKit
       - Ointment
       - Brutepack
-      - Bloodpack
+      - CMBloodPack
       #      - TODO RMC14 splint
       #      - TODO RMC14 penlight
       - CMAutoInjector
@@ -449,7 +452,7 @@
       - CMBurnKit
       - Ointment
       - Brutepack
-      - Bloodpack
+      - CMBloodPack
       #      - TODO RMC14 splint
       - PillCanister
       - DiscreteHealthAnalyzer
@@ -492,7 +495,7 @@
       - CMBurnKit
       - Ointment
       - Brutepack
-      - Bloodpack
+      - CMBloodPack
       #      - TODO RMC14 splint
       - CMAutoInjector
       - CMFireExtinguisherPortable
@@ -592,11 +595,11 @@
       - CMBurnKit
       - Ointment
       - Brutepack
-      - Bloodpack
+      - CMBloodPack
       #      - TODO RMC14 splint
       - CMAutoInjector
       #      - TODO RMC14 syringe case
-      #      - TODO RMC14 surgical case
+      - CMSurgicalCase
       - CMFireExtinguisherPortable
       - CMRollerBed
       - CMSurgicalLine
@@ -607,6 +610,10 @@
       components:
       - Hypospray
   - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - CMSurgicalCase
 
 - type: entity
   parent: [CMPouchOpenClosed, CMPouchStorage]
@@ -825,3 +832,5 @@
   - type: Tag
     tags:
     - Pouch
+  - type: CMHolster
+  - type: CMItemSlots

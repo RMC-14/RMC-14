@@ -12,7 +12,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/gear.rsi
   - type: CMAutomatedVendor
-    job: CMSquadLeader
+    jobs:
+    - CMSquadLeader
     sections:
     - name: Squad Leader Kit
       takeAll: CMStandard
@@ -87,8 +88,8 @@
         points: 7
     #- id: CMPlasticexplosive
     #  points: 5
-    #- id: CMBreachingCharge
-    #  points: 7
+      - id: RMCExplosiveBreachingCharge
+        points: 7
       - id: CMSandbagEmpty25
         points: 10
     #- id: CMSignalFlarePack
@@ -206,7 +207,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
-    job: CMSquadLeader
+    jobs:
+    - CMSquadLeader
     sections:
     - name: Standard Equipment
       takeAll: CMStandard

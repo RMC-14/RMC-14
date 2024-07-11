@@ -1,8 +1,10 @@
 ﻿using System.Numerics;
 using Content.Shared.Actions;
+using Content.Shared.Camera;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Interaction;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
@@ -22,6 +24,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedContentEyeSystem _contentEye = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
@@ -38,6 +41,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
         SubscribeLocalEvent<ScopeComponent, ItemUnwieldedEvent>(OnUnwielded);
         SubscribeLocalEvent<ScopeComponent, GetItemActionsEvent>(OnGetActions);
         SubscribeLocalEvent<ScopeComponent, ToggleActionEvent>(OnToggleAction);
+        SubscribeLocalEvent<ScopeComponent, ActivateInWorldEvent>(OnActivateInWorld);
         SubscribeLocalEvent<ScopeComponent, GunShotEvent>(OnGunShot);
         SubscribeLocalEvent<ScopeComponent, ScopeDoAfterEvent>(OnScopeDoAfter);
 
@@ -95,6 +99,15 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
         args.Handled = true;
         ToggleScoping(ent, args.Performer);
+    }
+
+    private void OnActivateInWorld(Entity<ScopeComponent> ent, ref ActivateInWorldEvent args)
+    {
+        if (args.Handled || !args.Complex || !ent.Comp.UseInHand)
+            return;
+
+        args.Handled = true;
+        ToggleScoping(ent, args.User);
     }
 
     private void OnGunShot(Entity<ScopeComponent> ent, ref GunShotEvent args)
@@ -159,7 +172,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
             return false;
         }
 
-        if (!_hands.TryGetActiveItem(user, out var heldItem) || heldItem != ent)
+        if (!_hands.TryGetActiveItem(user, out var heldItem)/* || heldItem != ent*/)
         {
             var msgError = Loc.GetString("cm-action-popup-scoping-user-must-hold", ("scope", ent));
             _popup.PopupClient(msgError, user, user);
@@ -203,7 +216,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
         var ev = new ScopeDoAfterEvent(cardinalDir);
         var doAfter = new DoAfterArgs(EntityManager, user, scope.Comp.Delay, ev, scope, null, scope)
         {
-            BreakOnMove = true
+            BreakOnMove = !scope.Comp.AllowMovement
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
@@ -224,6 +237,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
         scoping = EnsureComp<ScopingComponent>(user);
         scoping.Scope = scope;
+        scoping.AllowMovement = scope.Comp.AllowMovement;
         Dirty(user, scoping);
 
         if (scope.Comp.Attachment && TryGetActiveEntity(scope, out var active))
@@ -241,6 +255,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
         _actionsSystem.SetToggled(scope.Comp.ScopingToggleActionEntity, true);
         _contentEye.SetZoom(user, Vector2.One * scope.Comp.Zoom, true);
+        UpdateOffset(user);
     }
 
     protected virtual bool Unscope(Entity<ScopeComponent> scope)
@@ -312,5 +327,12 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
     protected virtual void DeleteRelay(Entity<ScopeComponent> scope, EntityUid? user)
     {
+    }
+
+    private void UpdateOffset(EntityUid user)
+    {
+        var ev = new GetEyeOffsetEvent();
+        RaiseLocalEvent(user, ref ev);
+        _eye.SetOffset(user, ev.Offset);
     }
 }

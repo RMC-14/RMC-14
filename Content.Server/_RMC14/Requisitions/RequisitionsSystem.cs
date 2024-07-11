@@ -14,6 +14,7 @@ using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using static Content.Shared._RMC14.Requisitions.Components.RequisitionsElevatorMode;
 
@@ -32,7 +33,8 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
 
-    public const string PaperRequisitionInvoice = "RMCPaperRequisitionInvoice";
+    private static readonly EntProtoId AccountId = "RMCASRSAccount";
+    private const string PaperRequisitionInvoice = "RMCPaperRequisitionInvoice";
 
     private int _gain;
 
@@ -158,7 +160,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             return (uid, account);
         }
 
-        var newAccount = Spawn(null, MapCoordinates.Nullspace);
+        var newAccount = Spawn(AccountId, MapCoordinates.Nullspace);
         var newAccountComp = EnsureComp<RequisitionsAccountComponent>(newAccount);
 
         return (newAccount, newAccountComp);

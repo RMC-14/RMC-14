@@ -1,32 +1,46 @@
 ﻿using System.Numerics;
 using Content.Server._RMC14.Marines;
+using Content.Server.Doors.Systems;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Announce;
+using Content.Shared.Doors.Components;
 using Content.Shared.Interaction;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
+using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Dropship;
 
 public sealed class DropshipSystem : SharedDropshipSystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly DoorSystem _door = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly ShuttleSystem _shuttle = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
 
+    private EntityQuery<DockingComponent> _dockingQuery;
+    private EntityQuery<DoorComponent> _doorQuery;
+    private EntityQuery<DoorBoltComponent> _doorBoltQuery;
+
     public override void Initialize()
     {
         base.Initialize();
+
+        _dockingQuery = GetEntityQuery<DockingComponent>();
+        _doorQuery = GetEntityQuery<DoorComponent>();
+        _doorBoltQuery = GetEntityQuery<DoorBoltComponent>();
 
         SubscribeLocalEvent<DropshipNavigationComputerComponent, ActivateInWorldEvent>(OnActivateInWorld);
 
@@ -34,6 +48,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
         SubscribeLocalEvent<DropshipComponent, FTLStartedEvent>(OnRefreshUI);
         SubscribeLocalEvent<DropshipComponent, FTLCompletedEvent>(OnRefreshUI);
         SubscribeLocalEvent<DropshipComponent, FTLUpdatedEvent>(OnRefreshUI);
+
+        Subs.BuiEvents<DropshipNavigationComputerComponent>(DropshipNavigationUiKey.Key,
+            subs =>
+            {
+                subs.Event<DropshipLockdownMsg>(OnDropshipNavigationLockdownMsg);
+            });
     }
 
     private void OnActivateInWorld(Entity<DropshipNavigationComputerComponent> ent, ref ActivateInWorldEvent args)
@@ -64,6 +84,30 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private void OnRefreshUI<T>(Entity<DropshipComponent> ent, ref T args)
     {
         RefreshUI();
+    }
+
+    private void OnDropshipNavigationLockdownMsg(Entity<DropshipNavigationComputerComponent> ent, ref DropshipLockdownMsg args)
+    {
+        if (_transform.GetGrid(ent.Owner) is not { } grid ||
+            !TryComp(grid, out DropshipComponent? dropship) ||
+            dropship.Crashed)
+        {
+            return;
+        }
+
+        if (TryComp(grid, out FTLComponent? ftl) &&
+            ftl.State is FTLState.Travelling or FTLState.Arriving)
+        {
+            return;
+        }
+
+        var time = _timing.CurTime;
+        if (time < dropship.LastLocked + dropship.LockCooldown)
+            return;
+
+        dropship.Locked = !dropship.Locked;
+        dropship.LastLocked = time;
+        SetAllDocks(grid, dropship.Locked);
     }
 
     public override bool FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid? user, bool hijack = false)
@@ -191,6 +235,45 @@ public sealed class DropshipSystem : SharedDropshipSystem
         {
             RefreshUI((uid, comp));
         }
+    }
+
+    private void SetAllDocks(EntityUid dropship, bool locked)
+    {
+        var enumerator = Transform(dropship).ChildEnumerator;
+        while (enumerator.MoveNext(out var child))
+        {
+            if (!_dockingQuery.HasComp(child))
+                continue;
+
+            if (locked)
+                LockDoor(child);
+            else
+                UnlockDoor(child);
+        }
+    }
+
+    public void LockDoor(Entity<DoorBoltComponent?> door)
+    {
+        if (_doorQuery.TryComp(door, out var doorComp) &&
+            doorComp.State != DoorState.Closed)
+        {
+            var oldCheck = doorComp.PerformCollisionCheck;
+            doorComp.PerformCollisionCheck = false;
+
+            _door.StartClosing(door);
+            _door.OnPartialClose(door);
+
+            doorComp.PerformCollisionCheck = oldCheck;
+        }
+
+        if (_doorBoltQuery.Resolve(door, ref door.Comp, false))
+            _door.SetBoltsDown((door.Owner, door.Comp), true);
+    }
+
+    public void UnlockDoor(Entity<DoorBoltComponent?> door)
+    {
+        if (_doorBoltQuery.Resolve(door, ref door.Comp, false))
+            _door.SetBoltsDown((door.Owner, door.Comp), false);
     }
 
     public void RaiseUpdate(EntityUid shuttle)

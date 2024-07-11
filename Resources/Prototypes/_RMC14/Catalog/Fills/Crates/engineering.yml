@@ -84,9 +84,9 @@
         amount: 2
       - id: CMHandsInsulated
         amount: 2
-      - id: PowerCellMedium # TODO RMC14 use cm prototype
+      - id: RMCPowerCell
         amount: 2
-      - id: PowerCellHigh # TODO RMC14 use cm prototype
+      - id: RMCPowerCellHigh
         amount: 2
 
 - type: entity
@@ -161,7 +161,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: FlashlightLantern # TODO RMC14 use cm prototype
+      - id: RMCFlashlight
         amount: 8
 
 - type: entity
@@ -171,5 +171,5 @@
   components:
   - type: StorageFill
     contents:
-      - id: PowerCellHigh # TODO RMC14 use cm prototype
+      - id: RMCPowerCellHigh
         amount: 8

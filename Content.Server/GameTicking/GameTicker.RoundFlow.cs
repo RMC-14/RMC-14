@@ -457,6 +457,22 @@ namespace Content.Server.GameTicking
                     ("hours", Math.Truncate(duration.TotalHours)),
                     ("minutes", duration.Minutes),
                     ("seconds", duration.Seconds));
+
+                if (_distressSignal.SelectedPlanetMapName is { } planet &&
+                    _distressSignal.OperationName is { } operation)
+                {
+                    var mapName = _gameMapManager.GetSelectedMap()?.MapName;
+                    mapName ??= Loc.GetString("discord-round-notifications-unknown-map");
+                    content = Loc.GetString("rmc-discord-round-notifications-end",
+                        ("id", RoundId),
+                        ("operation", operation),
+                        ("planet", planet),
+                        ("ship", mapName),
+                        ("hours", Math.Truncate(duration.TotalHours)),
+                        ("minutes", duration.Minutes),
+                        ("seconds", duration.Seconds));
+                }
+
                 var payload = new WebhookPayload { Content = content };
 
                 await _discord.CreateMessage(_webhookIdentifier.Value, payload);
@@ -650,6 +666,16 @@ namespace Content.Server.GameTicking
 
                 var mapName = _gameMapManager.GetSelectedMap()?.MapName ?? Loc.GetString("discord-round-notifications-unknown-map");
                 var content = Loc.GetString("discord-round-notifications-started", ("id", RoundId), ("map", mapName));
+
+                if (_distressSignal.SelectedPlanetMapName is { } planet &&
+                    _distressSignal.OperationName is { } operation)
+                {
+                    content = Loc.GetString("rmc-discord-round-notifications-started",
+                        ("id", RoundId),
+                        ("operation", operation),
+                        ("planet", planet),
+                        ("ship", mapName));
+                }
 
                 var payload = new WebhookPayload { Content = content };
 

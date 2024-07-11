@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using Content.Server.Spreader;
+using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Atmos;
 using Content.Shared.Coordinates;
@@ -13,9 +14,16 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
     private readonly List<EntityUid> _anchored = new();
 
+    private EntityQuery<XenoNestSurfaceComponent> _xenoNestSurfaceQuery;
+    private EntityQuery<XenoWeedableComponent> _xenoWeedableQuery;
+
     public override void Initialize()
     {
         base.Initialize();
+
+        _xenoNestSurfaceQuery = GetEntityQuery<XenoNestSurfaceComponent>();
+        _xenoWeedableQuery = GetEntityQuery<XenoWeedableComponent>();
+
         SubscribeLocalEvent<XenoWeedsComponent, SpreadNeighborsEvent>(OnWeedsSpreadNeighbors);
     }
 
@@ -81,7 +89,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                 _mapSystem.GetAnchoredEntities((gridOwner, neighbor.Grid), adjacent.GridIndices, _anchored);
                 foreach (var anchored in _anchored)
                 {
-                    if (!TryComp(anchored, out XenoWeedableComponent? weedable) ||
+                    if (!_xenoWeedableQuery.TryComp(anchored, out var weedable) ||
                         weedable.Entity != null ||
                         !TryComp(anchored, out TransformComponent? weedableTransform) ||
                         !weedableTransform.Anchored)
@@ -90,6 +98,12 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                     }
 
                     weedable.Entity = SpawnAtPosition(weedable.Spawn, anchored.ToCoordinates());
+                    if (_xenoNestSurfaceQuery.TryComp(weedable.Entity, out var surface))
+                    {
+                        surface.Weedable = anchored;
+                        Dirty(weedable.Entity.Value, surface);
+                    }
+
                     sourceWeeds?.Spread.Add(weedable.Entity.Value);
                 }
             }

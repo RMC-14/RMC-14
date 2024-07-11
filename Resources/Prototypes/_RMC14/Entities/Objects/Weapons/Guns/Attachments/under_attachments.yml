@@ -1,26 +1,38 @@
 ﻿- type: entity
   abstract: true
-  parent: CMAttachmentBase
-  id: CMUnderAttachmentBase
+  parent: RMCAttachmentBase
+  id: RMCUnderAttachmentBase
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
   - type: Tag
     tags:
-    - CMAttachmentUnderbarrel
+    - RMCAttachmentUnderbarrel
 
 - type: entity
-  parent: CMUnderAttachmentBase
-  id: CMAttachmentAngledGrip
+  parent: RMCUnderAttachmentBase
+  id: RMCAttachmentAngledGrip
   name: angled grip
   description: "An angled foregrip that improves weapon ergonomics resulting in faster wielding time.
     However, it also increases weapon size."
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
     state: angledgrip
+  - type: AttachableVisuals
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentAngledGrip
+  - type: AttachableSizeMods
+    modifiers:
+    - size: 1
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: -0.4
 
 - type: entity
-  parent: CMUnderAttachmentBase
+  parent: RMCUnderAttachmentBase
   id: CMAttachmentBipod
   name: bipod
   description: "A simple set of telescopic poles to keep a weapon stabilized during firing.
@@ -30,35 +42,92 @@
     state: bipod
 
 - type: entity
-  parent: CMUnderAttachmentBase
-  id: CMAttachmentBurstFireAssembly
+  parent: RMCUnderAttachmentBase
+  id: RMCAttachmentBurstFireAssembly
   name: burst fire assembly
-  description: "A small angled piece of fine machinery that increases the burst count on some weapons, and grants the ability to others.
-    Increases weapon scatter."
+  description: A small angled piece of fine machinery that increases the burst count on some weapons.
   components:
   - type: Sprite
     state: rapidfire
+  - type: AttachableVisuals
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentBurstFireAssembly
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - shotsPerBurstFlat: 2
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: -0.15
+    - conditions:
+        unwieldedOnly: true
+      accuracyAddMult: -0.20
 
 - type: entity
-  parent: CMUnderAttachmentBase
-  id: CMAttachmentGyroscopicStabilizer
+  parent: RMCUnderAttachmentBase
+  id: RMCAttachmentGyroscopicStabilizer
   name: gyroscopic stabilizer
   description: A set of weights and balances to stabilize the weapon when fired with one hand. Slightly decreases firing speed.
   components:
   - type: Sprite
     state: gyro
+  - type: AttachableVisuals
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentGyroscopicStabilizer
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - fireDelayFlat: 0.25
+    - conditions:
+        wieldedOnly: true
+      scatterFlat: -2
+      burstScatterFlat: -4
+    - conditions:
+        unwieldedOnly: true
+      accuracyMovementPenaltyAddMult: -3
+      scatterFlat: -10
+    - conditions:
+        unwieldedOnly: true
+        whitelist:
+          tags:
+          - RMCWeaponShotgun
+      accuracyAddMult: 0.55
+    - conditions:
+        unwieldedOnly: true
+        blacklist:
+          tags:
+          - RMCWeaponShotgun
+      accuracyAddMult: 0.15
 
 - type: entity
-  parent: CMUnderAttachmentBase
-  id: CMAttachmentLaserSight
+  parent: RMCUnderAttachmentBase
+  id: RMCAttachmentLaserSight
   name: laser sight
   description: A laser sight that attaches to the underside of most weapons. Increases accuracy and decreases scatter, especially while one-handed.
   components:
   - type: Sprite
     state: lasersight
+  - type: AttachableVisuals
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentLaserSight
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.05
+      scatterFlat: -2
+    - conditions:
+        unwieldedOnly: true
+      accuracyMovementPenaltyAddMult: -1
+      accuracyAddMult: 0.05
+      scatterFlat: -4
 
 - type: entity
-  parent: CMUnderAttachmentBase
+  parent: RMCUnderAttachmentBase
   id: CMAttachmentMiniFlamethrower
   name: mini flamethrower
   description: A weapon-mounted refillable flamethrower attachment. It has a secondary setting for a more intense flame with far less propulsion ability and heavy fuel usage.
@@ -67,7 +136,7 @@
     state: flamethrower
 
 - type: entity
-  parent: CMUnderAttachmentBase
+  parent: RMCUnderAttachmentBase
   id: CMAttachmentXMVESG1FlamerNozzle
   name: XM-VESG-1 flamer nozzle
   description: A special nozzle designed to alter flamethrowers to be used in a more offense orientated manner. As the inside of the nozzle is coated in a special gel and resin substance that takes the fuel that passes through and hardens it. Upon exiting the barrel, a cluster of burning gel is projected instead of a stream of burning naphtha.
@@ -76,8 +145,8 @@
     state: flamer_nozzle
 
 - type: entity
-  parent: CMUnderAttachmentBase
-  id: CMAttachmentU7UnderbarrelShotgun
+  parent: RMCUnderAttachmentBase
+  id: RMCAttachmentU7UnderbarrelShotgun
   name: U7 underbarrel shotgun
   description: An AEGIS U7 tactical shotgun. Attaches to the underbarrel of most weapons. Only capable of loading up to five buckshot shells. Specialized for breaching into buildings.
   components:
@@ -85,11 +154,13 @@
     state: masterkey
   - type: Tag
     tags:
-    - CMAttachmentUnderbarrel
-    - CMAttachmentU7UnderbarrelShotgun
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentU7UnderbarrelShotgun
   - type: Gun
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_u7.ogg
+      params:
+        volume: -2
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
@@ -105,12 +176,15 @@
   - type: UniqueAction
   - type: PumpAction
   - type: ShootUseDelay
-    delay: 2
+    delay: 2.1
   - type: UseDelay
   - type: AttachableToggleable
     attachedOnly: true
     supercedeHolder: true
-    activateSound: /Audio/_RMC14/Attachable/gun_u7_activate.ogg
+    activateSound:
+      path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg
+      params:
+        volume: -2
     actionName: U7 underbarrel shotgun
     actionDesc: Switch to using the underbarrel shotgun.
     icon:
@@ -122,8 +196,8 @@
   - type: AttachableVisuals
 
 - type: entity
-  parent: CMUnderAttachmentBase
-  id: CMAttachmentUnderbarrelExtinguisher
+  parent: RMCUnderAttachmentBase
+  id: RMCAttachmentUnderbarrelExtinguisher
   name: HME-12 underbarrel extinguisher
   description: A Taiho-Technologies HME-12 underbarrel extinguisher. Attaches to the underbarrel of most weapons. Point at flame before applying pressure.
   components:
@@ -131,16 +205,291 @@
     state: extinguisher
 
 - type: entity
-  parent: CMUnderAttachmentBase
-  id: CMAttachmentVerticalGrip
-  name: vertical grip
-  description: A vertical foregrip that offers better accuracy, less recoil, and less scatter, especially during burst fire. \nHowever, it also increases weapon size.
+  parent: RMCUnderAttachmentBase
+  id: RMCAttachmentU1GrenadeLauncher
+  name: U1 grenade launcher
+  description: A weapon-mounted, reloadable grenade launcher.
   components:
   - type: Sprite
+    layers:
+    - state: grenade
+      map: [ "enum.BreechVisuals.Open" ]
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: AmmoCounter
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ugl.ogg
+    resetOnHandSelected: false
+  - type: BallisticAmmoProvider
+    cycleable: false
+    whitelist:
+      tags:
+      - RMCGrenadeM40
+    capacity: 3
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
+      params:
+        volume: -2
+  - type: OnShootTriggerAmmoTimer
+    delay: 1
+    beepInterval: 2
+    initialBeepDelay: 0
+    beepSound:
+      path: "/Audio/Effects/beep1.ogg"
+      params:
+        volume: 5
+  - type: AmmoFixedDistance
+    maxRange: 7
+  - type: ShootUseDelay
+    delay: 2.4
+  - type: UseDelay
+  - type: UniqueAction
+  - type: BreechLoaded
+    needOpenClose: true
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.BreechVisuals.Open:
+        enum.BreechVisuals.Open:
+          True: { state: grenade-open }
+          False: { state: grenade }
+  - type: AttachableToggleable
+    attachedOnly: true
+    supercedeHolder: true
+    actionName: Toggle U1 Grenade Launcher
+    actionDesc: Switch to using the underbarrel grenade launcher.
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: grenade
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: grenade-on
+  - type: AttachableVisuals
+    redrawOnAppearanceChange: true
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentU1GrenadeLauncher
+
+- type: entity
+  parent: RMCAttachmentU1GrenadeLauncher
+  id: RMCAttachmentMK1GrenadeLauncher
+  name: MK1 underslung grenade launcher
+  description: An older version of the classic underslung grenade launcher. Can store five grenades, but fires them slower.
+  components:
+  - type: Sprite
+    layers:
+      - state: grenade-mk1
+        map: [ "enum.BreechVisuals.Open" ]
+  - type: BallisticAmmoProvider
+    capacity: 5
+  - type: ShootUseDelay
+    delay: 3
+  - type: AmmoFixedDistance
+    maxRange: 10
+  - type: GenericVisualizer
+    visuals:
+      enum.BreechVisuals.Open:
+        enum.BreechVisuals.Open:
+          True: { state: grenade-mk1-open }
+          False: { state: grenade-mk1 }
+  - type: AttachableToggleable
+    actionName: Toggle MK1 Underslung Grenade Launcher
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: grenade-mk1
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: grenade-mk1-on
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentMK1GrenadeLauncher
+
+- type: entity
+  parent: RMCUnderAttachmentBase
+  id: RMCAttachmentVerticalGrip
+  name: vertical grip
+  description: "A vertical foregrip that offers better accuracy, less recoil, and less scatter, especially during burst fire.
+    However, it also increases weapon size."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
     state: verticalgrip
+  - type: AttachableVisuals
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentVerticalGrip
+  - type: AttachableSizeMods
+    modifiers:
+    - size: 1
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.15
+      recoilFlat: -1
+      scatterFlat: -2
+      burstScatterFlat: -4
+    - conditions:
+        unwieldedOnly: true
+      accuracyMovementPenaltyAddMult: 1
+      accuracyAddMult: -0.15
+      scatterFlat: 2
+
+- type: entity
+  parent: RMCUnderAttachmentBase
+  id: RMCAttachmentFlashlightGrip
+  name: underbarrel flashlight grip
+  description: Holy smokes RO man, they put a grip on a flashlight! Reduces recoil and scatter by a tiny amount. Works as a light source. # Boosts accuracy by a tiny amount.
+  components:
+  - type: ToggleableLightVisuals
+    spriteLayer: light
+  - type: PointLight
+    enabled: false
+    radius: 5
+    softness: 5
+    autoRot: true
+    netsync: false
+  - type: HandheldLight
+    addPrefix: false
+    blinkingBehaviourId: blinking
+    radiatingBehaviourId: radiating
+  - type: LightBehaviour
+    behaviours:
+    - !type:FadeBehaviour
+      id: radiating
+      interpolate: Linear
+      maxDuration: 2.0
+      startValue: 3.0
+      endValue: 2.0
+      isLooped: true
+      property: Radius
+      enabled: false
+      reverseWhenFinished: true
+    - !type:PulseBehaviour
+      id: blinking
+      interpolate: Nearest
+      maxDuration: 1.0
+      minValue: 0.1
+      maxValue: 2.0
+      isLooped: true
+      property: Radius
+      enabled: false
+  - type: Battery
+    maxCharge: 10
+    startingCharge: 10
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 3
+  - type: Sprite
+    layers:
+    - state: flashgrip
+    - state: flashgrip-on
+      shader: unshaded
+      visible: false
+      map: [ "light" ]
+  - type: Item
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+  - type: Appearance
+  - type: AttachableToggleable
+    attachedOnly: true
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: flashgrip
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: flashgrip-on
+    actionName: Activate Underbarrel Flashlight Grip
+    actionDesc: Can be toggled on and off. A better light source than standard M3 pattern armor lights.
+  - type: AttachableVisuals
+    showActive: true
+  - type: AttachableToggleableSimpleActivate
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentFlashlightGrip
+    - Flashlight
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.05
+      recoilFlat: -1
+      scatterFlat: -1
+
+- type: entity
+  parent: RMCAttachmentFlashlightGrip
+  id: RMCAttachmentLaserLightModule
+  name: MK80 laser-light module
+  description: A Laser-Light module for the MK80 Service Pistol which is currently undergoing limited field testing as part of the marines' next generation pistol program. All MK80 pistols come equipped with the module.
+  components:
+  - type: Sprite
+    layers:
+    - state: laserlight
+    - state: laserlight-on
+      shader: unshaded
+      visible: false
+      map: [ "light" ]
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentLaserLightModule
+    - Flashlight
+  - type: AttachableToggleable
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: laserlight
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: laserlight-on
+    actionName: Activate Laser-Light Module
+    actionDesc: Can be toggled on and off. A better light source than standard M3 pattern armor lights.
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - accuracyAddMult: 0.05
+    - conditions:
+        wieldedOnly: true
+      recoilFlat: -1
+      scatterFlat: -1
+    - conditions:
+        unwieldedOnly: true
+      accuracyMovementPenaltyAddMult: -1
+      scatterFlat: -2
 
 - type: Tag
-  id: CMAttachmentUnderbarrel
+  id: RMCAttachmentUnderbarrel
 
 - type: Tag
-  id: CMAttachmentU7UnderbarrelShotgun
+  id: RMCAttachmentAngledGrip
+
+- type: Tag
+  id: RMCAttachmentBurstFireAssembly
+
+- type: Tag
+  id: RMCAttachmentGyroscopicStabilizer
+
+- type: Tag
+  id: RMCAttachmentLaserSight
+
+- type: Tag
+  id: RMCAttachmentU7UnderbarrelShotgun
+
+- type: Tag
+  id: RMCAttachmentU1GrenadeLauncher
+
+- type: Tag
+  id: RMCAttachmentMK1GrenadeLauncher
+
+- type: Tag
+  id: RMCAttachmentVerticalGrip
+
+- type: Tag
+  id: RMCAttachmentFlashlightGrip
+
+- type: Tag
+  id: RMCAttachmentLaserLightModule

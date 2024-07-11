@@ -31,14 +31,12 @@
       size: Large
     - type: Speech
       speechVerb: Robotic
+    - type: ItemToggle
+      soundActivate:
+        path: /Audio/Items/Defib/defib_safety_on.ogg
+      soundDeactivate:
+        path: /Audio/Items/Defib/defib_safety_off.ogg
     - type: Defibrillator
-      zapSound: /Audio/_RMC14/Medical/defib_release.ogg
-      powerOnSound: /Audio/_RMC14/Medical/defib_SafetyOn.ogg
-      powerOffSound: /Audio/_RMC14/Medical/defib_safetyOff.ogg
-      chargeSound: /Audio/_RMC14/Medical/defib_charge.ogg
-      failureSound: /Audio/_RMC14/Medical/defib_failed.ogg
-      successSound: /Audio/_RMC14/Medical/defib_success.ogg
-      readySound: /Audio/_RMC14/Medical/defib_ready.ogg
       zapHeal:
         types:
           Asphyxiation: -40

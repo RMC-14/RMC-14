@@ -1,13 +1,13 @@
 ﻿using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Animation;
 using Content.Shared._RMC14.Xenonids.Plasma;
-using Content.Shared.DoAfter;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
+using Content.Shared.DoAfter;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
-using Content.Shared.Throwing;
 using Content.Shared.Stunnable;
+using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
@@ -29,6 +29,7 @@ public sealed class XenoChargeSystem : EntitySystem
     [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoAnimationsSystem _xenoAnimations = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -105,12 +106,8 @@ public sealed class XenoChargeSystem : EntitySystem
             _xenoAnimations.PlayLungeAnimationEvent(xeno, charge);
         }
 
-        if (TryComp(xeno, out XenoComponent? xenoComp) &&
-            TryComp(targetId, out XenoComponent? targetXeno) &&
-            xenoComp.Hive == targetXeno.Hive)
-        {
+        if (!_xeno.CanAbilityAttackTarget(xeno, targetId))
             return;
-        }
 
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);

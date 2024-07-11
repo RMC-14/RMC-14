@@ -53,7 +53,6 @@
 #    - ActionXenoRoyalJelly
 #    - ActionXenoMarkResin
     # Mature
-    - ActionXenoScreech
 #    - ActionXenoSpit
 #    - ActionXenoToggleSpitType
     tier: 4
@@ -79,7 +78,6 @@
     explosionArmor: 100
   - type: XenoWordQueen
   - type: XenoGut
-  - type: XenoScreech
   - type: MeleeWeapon
     damage:
       groups:
@@ -117,7 +115,7 @@
     footstepSoundCollection:
       collection: XenoFootstepLarge
       params:
-        volume: -12
+        volume: -8
 #  - type: RandomSound
 #    sound:
 #      collection: XenoQueenBreath # TODO RMC14
@@ -146,6 +144,10 @@
   - type: XenoAnnounceDeath
     message: cm-xeno-death-queen
     color: "#921992"
-  - type: XenoTimeHealth
+  - type: XenoMaturing
     critThreshold: 1000
     deadThreshold: 1100
+    addComponents:
+    - type: XenoScreech
+    addActions:
+    - ActionXenoScreech

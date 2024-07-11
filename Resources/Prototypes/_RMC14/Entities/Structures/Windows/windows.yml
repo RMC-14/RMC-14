@@ -1,6 +1,43 @@
 ﻿- type: entity
   abstract: true
   parent: CMBaseStructureCorrodible
+  id: RMCBaseWindowFrame
+  name: "window frame"
+  description: A big hole in the wall that used to sport a large window. Can be vaulted through.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    drawdepth: Walls
+  - type: PlacementReplacement
+    key: walls
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: StaticPrice
+    price: 75
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+        density: 1000
+  - type: Climbable
+
+- type: entity
+  abstract: true
+  parent: CMBaseStructureCorrodible
   id: CMBaseWindow # TODO RMC14 this needs to be 2 separate entities eventually
   placement:
     mode: SnapgridCenter
@@ -34,6 +71,7 @@
         layer:
         - WallLayer
         density: 1000
+  - type: RMCWallExplosionDeletable
 
 - type: entity
   parent: CMBaseWindow

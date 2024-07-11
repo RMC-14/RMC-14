@@ -71,15 +71,20 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             }
         }
 
-        if (vendor.Comp.Job is not { Id.Length: > 0 } job)
+        if (vendor.Comp.Jobs.Count == 0)
             return;
 
-        if (!_mind.TryGetMind(args.User, out var mindId, out _) ||
-            !_job.MindHasJobWithId(mindId, job.Id))
+        if (_mind.TryGetMind(args.User, out var mindId, out _))
         {
-            _popup.PopupClient(Loc.GetString("cm-vending-machine-access-denied"), vendor, args.User);
-            args.Cancel();
+            foreach (var job in vendor.Comp.Jobs)
+            {
+                if (_job.MindHasJobWithId(mindId, job.Id))
+                    return;
+            }
         }
+
+        _popup.PopupClient(Loc.GetString("cm-vending-machine-access-denied"), vendor, args.User);
+        args.Cancel();
     }
 
     protected virtual void OnVendBui(Entity<CMAutomatedVendorComponent> vendor, ref CMVendorVendBuiMsg args)
