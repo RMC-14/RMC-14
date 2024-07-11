@@ -48,7 +48,7 @@
     sprite: _RMC14/Structures/Walls/shiva_fab.rsi
     state: shiva_fab
   - type: IconSmooth
-    key: wall
+    key: walls
     base: shiva_fab
 
 - type: entity
@@ -64,7 +64,7 @@
     sprite: _RMC14/Structures/Walls/shiva_fab_r.rsi
     state: shiva_fab_r
   - type: IconSmooth
-    key: wall
+    key: walls
     base: shiva_fab_r
 
 - type: entity
@@ -80,7 +80,7 @@
     sprite: _RMC14/Structures/Walls/shiva_fab_oj.rsi
     state: shiva_fab_oj
   - type: IconSmooth
-    key: wall
+    key: walls
     base: shiva_fab_oj
 
 - type: entity
@@ -96,7 +96,7 @@
     sprite: _RMC14/Structures/Walls/shiva_fab_blu.rsi
     state: shiva_fab_blu
   - type: IconSmooth
-    key: wall
+    key: walls
     base: shiva_fab_blu
 
 - type: entity
@@ -112,7 +112,7 @@
     sprite: _RMC14/Structures/Walls/shiva_fab_pnk.rsi
     state: shiva_fab_pnk
   - type: IconSmooth
-    key: wall
+    key: walls
     base: shiva_fab_pnk
 
 - type: entity
@@ -128,7 +128,7 @@
     sprite: _RMC14/Structures/Walls/shiva_fab_wht.rsi
     state: shiva_fab_wht
   - type: IconSmooth
-    key: wall
+    key: walls
     base: shiva_fab_wht
 
 - type: entity
@@ -144,5 +144,5 @@
     sprite: _RMC14/Structures/Walls/shiva_fab_red.rsi
     state: shiva_fab_red
   - type: IconSmooth
-    key: wall
+    key: walls
     base: shiva_fab_red

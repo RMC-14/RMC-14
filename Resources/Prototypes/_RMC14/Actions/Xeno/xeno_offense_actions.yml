@@ -99,7 +99,7 @@
   parent: ActionXenoLeap
   id: ActionXenoPounce
   name: Pounce (20) # TODO RMC14 proper plasma costs
-  description: Jump towards a given location and knock down the first enemy hit if you are invisible.
+  description: Jump towards a given location and knock down the first enemy hit [color=red]if you are invisible.[/color]
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem

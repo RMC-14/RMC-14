@@ -8,19 +8,18 @@ using Content.Server.Popups;
 using Content.Server.PowerCell;
 using Content.Server.Traits.Assorted;
 using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Medical.Defibrillator;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
-using Content.Shared.Interaction.Events;
+using Content.Shared.Item.ItemToggle;
 using Content.Shared.Medical;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.PowerCell;
 using Content.Shared.Timing;
-using Content.Shared.Toggleable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -39,6 +38,7 @@ public sealed class DefibrillatorSystem : EntitySystem
     [Dependency] private readonly DoAfterSystem _doAfter = default!;
     [Dependency] private readonly ElectrocutionSystem _electrocution = default!;
     [Dependency] private readonly EuiManager _euiManager = default!;
+    [Dependency] private readonly ItemToggleSystem _toggle = default!;
     [Dependency] private readonly RottingSystem _rotting = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
@@ -48,32 +48,13 @@ public sealed class DefibrillatorSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly CMDefibrillatorSystem _cmDefibrillator = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
-        SubscribeLocalEvent<DefibrillatorComponent, UseInHandEvent>(OnUseInHand);
-        SubscribeLocalEvent<DefibrillatorComponent, PowerCellSlotEmptyEvent>(OnPowerCellSlotEmpty);
         SubscribeLocalEvent<DefibrillatorComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<DefibrillatorComponent, DefibrillatorZapDoAfterEvent>(OnDoAfter);
-    }
-
-    private void OnUseInHand(EntityUid uid, DefibrillatorComponent component, UseInHandEvent args)
-    {
-        if (args.Handled || !TryComp(uid, out UseDelayComponent? useDelay) || _useDelay.IsDelayed((uid, useDelay)))
-            return;
-
-        if (!TryToggle(uid, component, args.User))
-            return;
-
-        args.Handled = true;
-        _useDelay.TryResetDelay((uid, useDelay));
-    }
-
-    private void OnPowerCellSlotEmpty(EntityUid uid, DefibrillatorComponent component, ref PowerCellSlotEmptyEvent args)
-    {
-        if (!TerminatingOrDeleted(uid))
-            TryDisable(uid, component);
     }
 
     private void OnAfterInteract(EntityUid uid, DefibrillatorComponent component, AfterInteractEvent args)
@@ -85,8 +66,14 @@ public sealed class DefibrillatorSystem : EntitySystem
 
     private void OnDoAfter(EntityUid uid, DefibrillatorComponent component, DefibrillatorZapDoAfterEvent args)
     {
-        if (args.Handled || args.Cancelled)
+        if (args.Handled)
             return;
+
+        if (args.Cancelled)
+        {
+            _cmDefibrillator.StopChargingAudio((uid, component));
+            return;
+        }
 
         if (args.Target is not { } target)
             return;
@@ -98,54 +85,12 @@ public sealed class DefibrillatorSystem : EntitySystem
         Zap(uid, target, args.User, component);
     }
 
-    public bool TryToggle(EntityUid uid, DefibrillatorComponent? component = null, EntityUid? user = null)
-    {
-        if (!Resolve(uid, ref component))
-            return false;
-
-        return component.Enabled
-            ? TryDisable(uid, component)
-            : TryEnable(uid, component, user);
-    }
-
-    public bool TryEnable(EntityUid uid, DefibrillatorComponent? component = null, EntityUid? user = null)
-    {
-        if (!Resolve(uid, ref component))
-            return false;
-
-        if (component.Enabled)
-            return false;
-
-        if (!_powerCell.HasActivatableCharge(uid))
-            return false;
-
-        component.Enabled = true;
-        _appearance.SetData(uid, ToggleVisuals.Toggled, true);
-        _audio.PlayPvs(component.PowerOnSound, uid);
-        return true;
-    }
-
-    public bool TryDisable(EntityUid uid, DefibrillatorComponent? component = null)
-    {
-        if (!Resolve(uid, ref component))
-            return false;
-
-        if (!component.Enabled)
-            return false;
-
-        component.Enabled = false;
-        _appearance.SetData(uid, ToggleVisuals.Toggled, false);
-
-        _audio.PlayPvs(component.PowerOffSound, uid);
-        return true;
-    }
-
     public bool CanZap(EntityUid uid, EntityUid target, EntityUid? user = null, DefibrillatorComponent? component = null)
     {
         if (!Resolve(uid, ref component))
             return false;
 
-        if (!component.Enabled)
+        if (!_toggle.IsActivated(uid))
         {
             if (user != null)
                 _popup.PopupEntity(Loc.GetString("defibrillator-not-on"), uid, user.Value);
@@ -178,14 +123,25 @@ public sealed class DefibrillatorSystem : EntitySystem
         if (!CanZap(uid, target, user, component))
             return false;
 
-        _audio.PlayPvs(component.ChargeSound, uid);
+        _cmDefibrillator.StopChargingAudio((uid, component));
+        component.ChargeSoundEntity = _audio.PlayPvs(component.ChargeSound, uid)?.Entity;
+        if (component.ChargeSoundEntity is { } sound)
+        {
+            var audio = EnsureComp<RMCDefibrillatorAudioComponent>(sound);
+#pragma warning disable RA0002
+            audio.Defibrillator = uid;
+#pragma warning restore RA0002
+            Dirty(sound, audio);
+        }
+
         return _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, component.DoAfterDuration, new DefibrillatorZapDoAfterEvent(),
             uid, target, uid)
             {
                 BlockDuplicate = true,
                 BreakOnHandChange = true,
                 NeedHand = true,
-                BreakOnMove = !component.AllowDoAfterMovement
+                BreakOnMove = !component.AllowDoAfterMovement,
+                DuplicateCondition = DuplicateConditions.SameEvent,
             });
     }
 
@@ -270,7 +226,7 @@ public sealed class DefibrillatorSystem : EntitySystem
 
         // if we don't have enough power left for another shot, turn it off
         if (!_powerCell.HasActivatableCharge(uid))
-            TryDisable(uid, component);
+            _toggle.TryDeactivate(uid);
 
         // TODO clean up this clown show above
         var ev = new TargetDefibrillatedEvent(user, (uid, component));

@@ -334,3 +334,5 @@
   - type: Icon
     sprite: _RMC14/Structures/Walls/elevator.rsi
     state: wall_broke
+  - type: Occluder
+    enabled: false
