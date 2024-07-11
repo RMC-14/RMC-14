@@ -6,6 +6,7 @@
   - type: Infectable
   - type: Tackleable
   - type: Devourable
+  - type: XenoNestable
 
 - type: entity
   parent: [MobMonkey, RMCSmallHost]
