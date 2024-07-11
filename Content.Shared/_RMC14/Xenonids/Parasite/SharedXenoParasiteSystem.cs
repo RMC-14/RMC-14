@@ -398,14 +398,11 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             if (infected.BurstAt > time)
             {
                 // Embryo dies if unrevivable when dead
-                if (_mobState.IsDead(uid))
+                // Kill the embryo if we've rotted or are non-humanoid
+                if (_mobState.IsDead(uid) && (!HasComp<MarineComponent>(uid) || _rotting.IsRotten(uid)))
                 {
-                    // Kill the embryo if we've rotted or are non-humanoid
-                    if (!HasComp<MarineComponent>(uid) || _rotting.IsRotten(uid))
-                    {
-                        RemCompDeferred<VictimInfectedComponent>(uid);
-                        continue;
-                    }
+                    RemCompDeferred<VictimInfectedComponent>(uid);
+                    continue;
                 }
                 // TODO RMC14 make this less effective against late-stage infections, also make this support faster incubation
                 if (infected.IncubationMultiplier < 1)
