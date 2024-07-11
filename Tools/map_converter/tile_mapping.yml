@@ -1,0 +1,774 @@
+"/turf/open/floor/shiva/north":
+  name: CMFloorAsteroidStriped0
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/yellowcorners/west":
+  name: CMFloorAsteroidStriped1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/green/west":
+  name: CMFloorAsteroidStriped2
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/wred/southeast":
+  name: CMFloorBlack
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/greencorners/north":
+  name: CMFloorCargo
+  flags: 0
+  variant: 0
+
+"/turf/open/auto_turf/snow/layer1":
+  name: CMFloorCargoArrowDown
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/greencorners":
+  name: CMFloorCargoArrowLeft
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/dark2":
+  name: CMFloorCargoArrowRight
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/prison":
+  name: CMFloorCargoArrowUp
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/red/northwest":
+  name: CMFloorPlate
+  flags: 0
+  variant: 0
+
+"/turf/open/shuttle/can_surgery/black":
+  name: CMFloorSteel
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/purple/north":
+  name: CMFloorSteelAlpha0
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/floor3":
+  name: CMFloorSteelAlpha1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/interior/plastic":
+  name: CMFloorSteelAlpha2
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/snow_mat/east":
+  name: CMFloorSteelAlpha3
+  flags: 0
+  variant: 0
+
+"/turf/open/gm/river":
+  name: CMFloorSteelAlpha4
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/purple/east":
+  name: CMFloorSteelAlpha5
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/plating/icefloor/warnplate/southwest":
+  name: CMFloorSteelAlpha6
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/green/northwest":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/red/north":
+  name: RCMPlanetIceComposite
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/platebot":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/multi_tiles/west":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/yellowcorners/north":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/red/southwest":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/closed/wall/shiva/prefabricated/reinforced/hull":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/darkbrown2/east":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/auto_turf/snow/layer2":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/blue/east":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/auto_turf/snow/layer0":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/green/north":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/greencorners/east":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/corsat/squares":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/green/east":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/snow_mat/west":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/green/southeast":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/purplefull/east":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/yellow":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/yellow/north":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/chapel/east":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/plating/icefloor/warnplate/west":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/darkbrowncorners2":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/plating/icefloor/warnplate/southeast":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/yellow/northeast":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/closed/wall/shiva/ice":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/multi_tiles/southeast":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/closed/shuttle/elevator/research":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/closed/wall/shiva/prefabricated":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/closed/shuttle/ert":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/yellowcorners":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/radiator_tile":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/multi_tiles/east":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/wredcorners/north":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/wred/northwest":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/closed/wall/r_wall":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/closed/shuttle/elevator/button/arrivals":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/wredcorners/east":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/yellow/west":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/shuttle/dropship/can_surgery/medium_grey_single_wide_left_to_right":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/red/east":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/interior/plastic/alt":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/closed/wall/shiva/prefabricated/blue":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/plating/icefloor/warnplate/northeast":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/closed/shuttle/elevator/button/research":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/wred/southwest":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/blue/west":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/yellow/southwest":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/closed/shuttle/elevator":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/darkbrown2":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/auto_turf/ice/layer0":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/red":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/darkgreen2/northeast":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/gm/river/no_overlay":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/darkbrown2/northwest":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/plating/icefloor/warnplate/north":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/wood":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/wredcorners/west":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/plating/warnplate":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/multi_tiles/north":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/bcircuit":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/purplefull":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/snow_mat":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/radiator_tile2":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/chapel/west":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/closed/shuttle/elevator/arrivals":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/plating/warnplate/northwest":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/wredcorners":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/darkbrown2/north":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/darkbrown2/southwest":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/green":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/green/southwest":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/plating/plating_catwalk/shiva":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/yellow/southeast":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/red/northeast":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/red/west":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/closed/wall/shiva/prefabricated/white":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/greencorners/west":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/closed/wall/shiva/prefabricated/orange":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/shuttle/elevator":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/multi_tiles":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/red/southeast":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/chapel/north":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/delivery":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/closed/wall/shiva/prefabricated/pink":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/yellow/east":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/plating/icefloor/warnplate/northwest":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/strata/floor2":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/green/northeast":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/auto_turf/snow/layer3":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/auto_turf/snow/layer4":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/darkgreen2/northwest":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/wred/northeast":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/plating/icefloor/warnplate":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/plating/icefloor":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/ice/noweed":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/purple":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/wred":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/closed/wall/shiva/prefabricated/reinforced":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/bluefull":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/chapel":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/auto_turf/ice/layer1":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/darkgreen2/southeast":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/darkbrown2/west":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/wred/east":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/asphalt/cement":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/purplefull/west":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/closed/shuttle/elevator/gears":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/purple/west":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/yellow/northwest":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/purplefull/north":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/redfull":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/bluecorners/west":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/greenfull":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/wredfull":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/carpet":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/bluefull/west":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/yellowcorners/east":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/redfull/west":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/greenfull/west":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/shuttle/dropship/can_surgery/medium_grey_single_wide_up_to_down":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/darkbrown2/northeast":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/yellowfull":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/wred/north":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/prison/kitchen":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/closed/wall/shiva/prefabricated/red":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/auto_turf/ice/layer2":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/darkbrown2/southeast":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/bluecorners":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/yellowfull/west":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/strata/floor3/east":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/plating/icefloor/warnplate/east":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/shuttle/elevator/grating":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/plating":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/snow_mat/north":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/wred/west":
+  name: RCMPlanetIce1
+  flags: 0
+  variant: 0
