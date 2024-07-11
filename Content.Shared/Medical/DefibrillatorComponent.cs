@@ -86,6 +86,9 @@ public sealed partial class DefibrillatorComponent : Component
 
     [ViewVariables(VVAccess.ReadWrite), DataField("readySound")]
     public SoundSpecifier? ReadySound = new SoundPathSpecifier("/Audio/Items/Defib/defib_ready.ogg");
+
+    [DataField]
+    public EntityUid? ChargeSoundEntity;
 }
 
 [Serializable, NetSerializable]

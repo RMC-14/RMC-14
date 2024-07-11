@@ -8,20 +8,18 @@ using Content.Server.Popups;
 using Content.Server.PowerCell;
 using Content.Server.Traits.Assorted;
 using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Medical.Defibrillator;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
-using Content.Shared.Interaction.Events;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Medical;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.PowerCell;
 using Content.Shared.Timing;
-using Content.Shared.Toggleable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -50,6 +48,7 @@ public sealed class DefibrillatorSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly CMDefibrillatorSystem _cmDefibrillator = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -67,8 +66,14 @@ public sealed class DefibrillatorSystem : EntitySystem
 
     private void OnDoAfter(EntityUid uid, DefibrillatorComponent component, DefibrillatorZapDoAfterEvent args)
     {
-        if (args.Handled || args.Cancelled)
+        if (args.Handled)
             return;
+
+        if (args.Cancelled)
+        {
+            _cmDefibrillator.StopChargingAudio((uid, component));
+            return;
+        }
 
         if (args.Target is not { } target)
             return;
@@ -118,14 +123,25 @@ public sealed class DefibrillatorSystem : EntitySystem
         if (!CanZap(uid, target, user, component))
             return false;
 
-        _audio.PlayPvs(component.ChargeSound, uid);
+        _cmDefibrillator.StopChargingAudio((uid, component));
+        component.ChargeSoundEntity = _audio.PlayPvs(component.ChargeSound, uid)?.Entity;
+        if (component.ChargeSoundEntity is { } sound)
+        {
+            var audio = EnsureComp<RMCDefibrillatorAudioComponent>(sound);
+#pragma warning disable RA0002
+            audio.Defibrillator = uid;
+#pragma warning restore RA0002
+            Dirty(sound, audio);
+        }
+
         return _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, component.DoAfterDuration, new DefibrillatorZapDoAfterEvent(),
             uid, target, uid)
             {
                 BlockDuplicate = true,
                 BreakOnHandChange = true,
                 NeedHand = true,
-                BreakOnMove = !component.AllowDoAfterMovement
+                BreakOnMove = !component.AllowDoAfterMovement,
+                DuplicateCondition = DuplicateConditions.SameEvent,
             });
     }
 
