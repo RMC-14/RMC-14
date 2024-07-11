@@ -8,6 +8,7 @@ namespace Content.IntegrationTests.Tests.Internals;
 
 [TestFixture]
 [TestOf(typeof(InternalsSystem))]
+[Ignore(("RMC14 does not use internals"))]
 public sealed class AutoInternalsTests
 {
     [Test]
@@ -40,7 +41,6 @@ public sealed class AutoInternalsTests
     }
 
     [Test]
-    [Ignore(("RMC14 does not use internals"))]
     public async Task TestInternalsAutoActivateInSpaceForEntitySpawn()
     {
         await using var pair = await PoolManager.GetServerClient();
