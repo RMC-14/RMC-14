@@ -40,6 +40,7 @@ public sealed class AutoInternalsTests
     }
 
     [Test]
+    [Ignore(("RMC14 does not use internals"))]
     public async Task TestInternalsAutoActivateInSpaceForEntitySpawn()
     {
         await using var pair = await PoolManager.GetServerClient();
