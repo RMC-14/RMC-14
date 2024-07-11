@@ -1,20 +1,29 @@
 ﻿- type: entity
-  parent: MobMonkey
+  id: RMCSmallHost
+  name: abstract small host
+  abstract: true
+  components:
+  - type: Infectable
+  - type: Tackleable
+  - type: Devourable
+  - type: XenoNestable
+
+- type: entity
+  parent: [MobMonkey, RMCSmallHost]
   id: CMMobMonkey
   suffix: CM
   components:
   - type: GhostRole
     prob: 0
-  - type: Infectable
+
 
 - type: entity
-  parent: MobKobold
+  parent: [MobKobold, RMCSmallHost]
   id: CMMobKobold
   suffix: CM
   components:
   - type: GhostRole
     prob: 0
-  - type: Infectable
 
 - type: entity
   parent: MobMouse
