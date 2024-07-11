@@ -74,7 +74,6 @@ public sealed partial class ItemSizeChangeSystem : EntitySystem
             return;
 
         _itemSystem.SetSize(item, _sortedSizes[ev.Size], itemComponent);
-        Dirty(item);
     }
 
     private void InitItem(Entity<ItemSizeChangeComponent> item)
@@ -83,5 +82,6 @@ public sealed partial class ItemSizeChangeSystem : EntitySystem
             return;
 
         item.Comp.BaseSize = _sortedSizes.IndexOf(prototype);
+        Dirty(item);
     }
 }
