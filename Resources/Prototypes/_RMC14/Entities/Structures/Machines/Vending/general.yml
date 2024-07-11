@@ -1,14 +1,28 @@
 # GENERAL
 
 - type: entity
-  parent: CMVendor
+  parent: ColMarTechBase
   id: CMVendorWalkman
   name: Rec-Vend
   description: Contains We-Ya approved recreational items, like Walkmans and Cards.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/walkman.rsi
-  - type: VendingMachine
-    pack: CMVendorWalkman
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
+    layers:
+    - state: "off"
+    - state: "normal-unshaded"
+  - type: CMAutomatedVendor
+    sections:
+    - name: WalkMan
+      entries: []
+    - name: Cards
+      entries: []
+    #TODO RMC14 Walkman and music
+    - name: WalkMan
+      entries: Other
+      - id: CMPaper
+        amount: 15
+      - id: CMPen
+        amount: 10
+      - id: d20Dice
+        amount: 10
