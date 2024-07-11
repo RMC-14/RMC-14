@@ -1,0 +1,9 @@
+﻿- type: npcFaction
+  id: UNMC
+  hostile:
+  - RMCXeno
+
+- type: npcFaction
+  id: RMCXeno
+  hostile:
+  - UNMC

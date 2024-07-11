@@ -362,11 +362,11 @@
         amount: 1
       - id: CMWelder
         amount: 1
-#    - name: Flare and light
-#      entries:
+    - name: Flare and light
+      entries:
 #      #  amount: 1
-#      #- id: CMCombatFlashlight
-#      #  amount: 5
+      - id: RMCFlashlight # Combat Flashlight
+        amount: 5
 #      #- id: CMBoxFlashlights
 #      #  amount: 1
       - id: CMBoxPackFlare
@@ -424,8 +424,8 @@
       entries:
       - id: RMCAttachmentB8SmartScope
         amount: 2
-      - id: RMCAttachmentMagneticHarness
-        amount: 5
+      #- id: RMCAttachmentMagneticHarness
+      #  amount: 5
       - id: RMCAttachmentS42xTelescopicMiniscope
         amount: 2
 #      - id: RMCAttachmentS5RedDotSight # UNCOMMENT THIS WHEN ACCURACY IS IMPLEMENTED

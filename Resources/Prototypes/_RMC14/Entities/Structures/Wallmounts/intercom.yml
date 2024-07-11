@@ -7,8 +7,8 @@
   components:
   - type: WallMount
   - type: ApcPowerReceiver
-    powerLoad: 0 # TODO RMC14 power
-    needsPower: false
+    powerLoad: 100 # TODO RMC14 power
+    needsPower: true
   - type: Electrified
     enabled: false
     usesApcPower: true

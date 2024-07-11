@@ -1,0 +1,77 @@
+﻿- type: entity
+  parent: BaseStructure
+  id: RMCBaseTurret
+  name: turret
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Actions
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Sentries/normal_sentry.rsi
+    drawdepth: Mobs
+    layers:
+    - state: normal_uac_sentry_on
+  - type: InteractionPopup
+    interactDelay: 0.2
+    successChance: 0.8
+    interactSuccessString: petting-success-generic
+    interactFailureString: petting-failure-generic
+    interactSuccessSound:
+      path: /Audio/Effects/double_beep.ogg
+  - type: CombatMode
+    toggleMouseRotator: false
+  - type: Gun
+    fireRate: 3
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
+  # TODO: Power ammo provider?
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: CMCartridgeSentry10x28mm
+    capacity: 99999
+  - type: HTN
+    rootTask:
+      task: TurretCompound
+    blackboard:
+      RotateSpeed: !type:Single
+        3.141
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/Effects/double_beep.ogg
+      VisionRadius: !type:Single
+        9.0
+  - type: MouseRotator
+    angleTolerance: 5
+    rotationSpeed: 180
+    simple4DirMode: false
+  - type: NoRotateOnInteract
+  - type: NoRotateOnMove
+  - type: GunIFF
+
+- type: entity
+  parent: RMCBaseTurret
+  id: RMCTurretGaussSpaceborne
+  name: UA-577 spaceborne gauss turret
+  description: A fully-automated defence turret with mid-range targeting capabilities. Armed with a modified M32-S Autocannon and an internal belt feed.
+  components:
+  - type: NpcFactionMember
+    factions:
+    - UNMC
+  - type: TimedDespawn
+    lifetime: 1200
+  - type: MarineIFF
