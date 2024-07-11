@@ -2829,19 +2829,27 @@
   url: https://github.com/RMC-14/RMC-14/pull/2969
 - author: Siigiil, Cepha
   changes:
-  - message: Added all standard attachments, excluding the bipod, the underbarrel extinguisher, the underbarrel flamers and most attachments specific to weapons that are unimplemented.
+  - message: Added all standard attachments, excluding the bipod, the underbarrel
+      extinguisher, the underbarrel flamers and most attachments specific to weapons
+      that are unimplemented.
     type: Add
-  - message: Added the missing default keybinds for attachment activation. Your keybinds will be reset.
+  - message: Added the missing default keybinds for attachment activation. Your keybinds
+      will be reset.
     type: Add
-  - message: You can now open the attachment strip menu with a hotkey as well as the verb. No default keybinding.
+  - message: You can now open the attachment strip menu with a hotkey as well as the
+      verb. No default keybinding.
     type: Add
-  - message: Certain scopes now allow movement. These being the smartscope and the miniscope.
+  - message: Certain scopes now allow movement. These being the smartscope and the
+      miniscope.
     type: Tweak
   - message: Scopes now properly work with attachment hotkeys.
     type: Fix
-  - message: Implemented wield delay. You will need to wait a short while after picking up a weapon before you can wield it. Shooting is unaffected. Attachments can affect this.
+  - message: Implemented wield delay. You will need to wait a short while after picking
+      up a weapon before you can wield it. Shooting is unaffected. Attachments can
+      affect this.
     type: Add
-  - message: Added wield slowdown. Wielding certain weapons will slow you down. Attachments can affect this.
+  - message: Added wield slowdown. Wielding certain weapons will slow you down. Attachments
+      can affect this.
     type: Add
   - message: Added new sprites for the agrip and vgrip. Sprited by Cepha.
     type: Tweak
@@ -2850,5 +2858,30 @@
   id: 345
   time: '2024-07-09T07:39:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2788
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Patron figurines not being able to fit into helmets.
+    type: Fix
+  id: 346
+  time: '2024-07-11T11:29:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2977
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the defibrillator using the wrong audio, and its audio being able
+      to be spammed.
+    type: Fix
+  - message: Fixed the defibrillator being able to be used on more than one target
+      at the same time.
+    type: Fix
+  id: 347
+  time: '2024-07-11T09:23:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2978
+- author: Adrian16199
+  changes:
+  - message: Added a new tail for felinid species.
+    type: Add
+  id: 348
+  time: '2024-07-11T11:30:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2974
 Name: RMC14
 Order: -1
