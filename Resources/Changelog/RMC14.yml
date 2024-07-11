@@ -2820,5 +2820,12 @@
   id: 343
   time: '2024-07-11T02:56:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2964
+- author: ShadowCommander
+  changes:
+  - message: Wall lights now break in one hit by a xenonid.
+    type: Tweak
+  id: 344
+  time: '2024-07-11T05:52:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2969
 Name: RMC14
 Order: -1
