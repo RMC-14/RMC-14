@@ -1,15 +1,15 @@
 ﻿using System.Text.Json.Serialization;
 using Content.Shared._RMC14.Damage;
-using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Localizations;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Chemistry.Effects;
 
-public sealed partial class EqualHealthChange : ReagentEffect
+public sealed partial class EqualHealthChange : EntityEffect
 {
     [DataField(required: true)]
     [JsonPropertyName("damage")]
@@ -53,16 +53,17 @@ public sealed partial class EqualHealthChange : ReagentEffect
             ("healsordeals", healsordeals));
     }
 
-    public override void Effect(ReagentEffectArgs args)
+    public override void Effect(EntityEffectBaseArgs args)
     {
         var damage = new DamageSpecifier();
         var cmDamageable = args.EntityManager.System<CMDamageableSystem>();
+        var scale = (args as EntityEffectReagentArgs)?.Scale ?? 1;
         foreach (var (group, amount) in Damage)
         {
-            damage = cmDamageable.DistributeHealing(args.SolutionEntity, group, amount * args.Scale, damage);
+            damage = cmDamageable.DistributeHealing(args.TargetEntity, group, amount * scale, damage);
         }
 
         args.EntityManager.System<DamageableSystem>()
-            .TryChangeDamage(args.SolutionEntity, damage, IgnoreResistances, interruptsDoAfters: false);
+            .TryChangeDamage(args.TargetEntity, damage, IgnoreResistances, interruptsDoAfters: false);
     }
 }
