@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
@@ -35,6 +36,7 @@ public sealed class XenoNestSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
 
     private readonly List<Direction> _candidateNests = new();
 
@@ -73,6 +75,7 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoNestedComponent, DownAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, IsEquippingAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, IsUnequippingAttemptEvent>(OnNestedCancel);
+        SubscribeLocalEvent<XenoNestedComponent, GetInfectedIncubationMultiplierEvent>(OnInNestGetInfectedIncubationMultiplier);
     }
 
     private void OnXenoGetUsedEntity(Entity<XenoComponent> ent, ref GetUsedEntityEvent args)
@@ -120,6 +123,8 @@ public sealed class XenoNestSystem : EntitySystem
     {
         DetachNested(null, ent);
         _actionBlocker.UpdateCanMove(ent);
+
+        _parasite.RefreshIncubationMultipliers(ent.Owner);
 
         // TODO RMC14
         if (HasComp<KnockedDownComponent>(ent) || _mobState.IsIncapacitated(ent))
@@ -187,6 +192,7 @@ public sealed class XenoNestSystem : EntitySystem
         _transform.SetLocalRotation(victim, direction.ToAngle());
 
         _standing.Stand(victim, force: true);
+        _parasite.RefreshIncubationMultipliers(victim);
 
         // TODO RMC14 make a method to do this
         _popup.PopupClient(Loc.GetString("cm-xeno-nest-securing-self", ("target", victim)), args.User, args.User);
@@ -257,7 +263,13 @@ public sealed class XenoNestSystem : EntitySystem
         args.Cancel();
     }
 
-    private void TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)
+	private void OnInNestGetInfectedIncubationMultiplier(Entity<XenoNestedComponent> ent, ref GetInfectedIncubationMultiplierEvent args)
+    {
+        if (ent.Comp.Running)
+            args.Multiply(ent.Comp.IncubationMultiplier);
+	}
+
+	private void TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)
     {
         if (!HasComp<XenoComponent>(user) || GetNestDirection(surface, victim) is not { } direction ||
             !CanNestPopup(user, victim, surface, direction))

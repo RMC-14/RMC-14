@@ -344,6 +344,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         victimComp.Hive = CompOrNull<XenoComponent>(parasite)?.Hive ?? default;
         _stun.TryParalyze(victim, parasite.Comp.ParalyzeTime, true);
         _status.TryAddStatusEffect(victim, "Muted", parasite.Comp.ParalyzeTime, true, "Muted");
+        RefreshIncubationMultipliers(victim);
 
         var container = _container.EnsureContainer<ContainerSlot>(victim, victimComp.ContainerId);
         _container.Insert(parasite.Owner, container);
@@ -404,8 +405,8 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                     RemCompDeferred<VictimInfectedComponent>(uid);
                     continue;
                 }
-                // TODO RMC14 make this less effective against late-stage infections, also make this support faster incubation
-                if (infected.IncubationMultiplier < 1)
+                // Stasis slows this, while nesting makes it happen sooner
+                if (infected.IncubationMultiplier != 1)
                     infected.BurstAt += TimeSpan.FromSeconds(1 - infected.IncubationMultiplier) * frameTime;
 
                 // Stages
@@ -415,6 +416,8 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                 {
                     infected.CurrentStage = stage;
                     Dirty(uid, infected);
+                    // Refresh multipliers since some become more/less effective
+                    RefreshIncubationMultipliers(uid);
                 }
 
                 // Warn on the last to final stage of a burst
