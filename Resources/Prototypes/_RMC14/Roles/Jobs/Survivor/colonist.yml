@@ -1,9 +1,9 @@
 ﻿- type: job
   parent: CMJobBase
-  id: CMSurvivor
-  name: cm-job-name-survivor
-  description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivor
+  id: RMCColonist
+  name: rmc-job-name-colonist
+  description: rmc-job-description-colonist
+  playTimeTracker: RMCJobColonist
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMSquad
@@ -14,7 +14,7 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
     time: 18000 # 5 hours
-  startingGear: CMGearSurvivor
+  startingGear: RMCGearColonist
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-nobody
@@ -31,21 +31,23 @@
   hidden: true # TODO RMC14
 
 - type: startingGear
-  id: CMGearSurvivor
+  id: RMCGearColonist
   equipment:
     jumpsuit: CMJumpsuitColonist
     back: CMSatchel
-    shoes: CMBootsBrown
+    shoes: CMBootsBlack
     id: CMIDCardColonist
     ears: CMHeadsetColony
+    pocket1: RMCM5Bayonet
+    pocket2: RMCFlashlight
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: CMSpawnPointSurvivor
-  name: survivor spawn point
+  id: RMCSpawnPointColonist
+  name: colonist spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivor
+    job_id: RMCColonist
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
@@ -53,4 +55,4 @@
     - state: survivor
 
 - type: playTimeTracker
-  id: CMJobSurvivor
+  id: RMCJobColonist

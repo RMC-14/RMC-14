@@ -4,5 +4,5 @@
   description: cm-department-Civilians-description
   color: "#C38312"
   roles:
-  - CMSurvivor
+  - RMCColonist
   hidden: true # TODO RMC14
