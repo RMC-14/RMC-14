@@ -127,4 +127,7 @@ public sealed partial class VictimInfectedComponent : Component
 
     [DataField]
     public DamageSpecifier InfectionDamage = new() { DamageDict = new() { { "Blunt", 1 } } };
+
+    [DataField]
+    public EntProtoId BurstFailSpawn = "RMCXenoEmbryo";
 }

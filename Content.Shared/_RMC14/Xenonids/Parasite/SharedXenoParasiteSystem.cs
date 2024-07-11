@@ -1,7 +1,9 @@
 using Content.Shared._RMC14.Hands;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Pheromones;
+using Content.Shared.Atmos.Rotting;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
@@ -53,6 +55,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private readonly SharedRottingSystem _rotting = default!;
 
     public override void Initialize()
     {
@@ -394,6 +397,21 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
             if (infected.BurstAt > time)
             {
+                // Embryo burst if unrevivable when dead
+                if (_mobState.IsDead(uid))
+                {
+                    // Non-humanoids burst instantly, while humanoids burst when rotten
+                    if (!HasComp<MarineComponent>(uid) || _rotting.IsRotten(uid))
+                    {
+                        RemCompDeferred<VictimInfectedComponent>(uid);
+                        SpawnAtPosition(infected.BurstFailSpawn, xform.Coordinates);
+
+                        EnsureComp<VictimBurstComponent>(uid);
+
+                        _audio.PlayPvs(infected.BurstSound, uid);
+                        continue;
+                    }
+                }
                 // TODO RMC14 make this less effective against late-stage infections, also make this support faster incubation
                 if (infected.IncubationMultiplier < 1)
                     infected.BurstAt += TimeSpan.FromSeconds(1 - infected.IncubationMultiplier) * frameTime;
