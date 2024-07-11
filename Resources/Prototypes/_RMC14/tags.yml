@@ -5,6 +5,9 @@
   id: CMCartridgePistol9mm
 
 - type: Tag
+  id: CMCartridgePistol9mmAP
+
+- type: Tag
   id: CMCartridgeRevolver44
 
 - type: Tag
@@ -30,6 +33,9 @@
 
 - type: Tag
   id: CMSurgicalLine
+
+- type: Tag
+  id: CMSurgicalCase
 
 - type: Tag
   id: CMBurnKit

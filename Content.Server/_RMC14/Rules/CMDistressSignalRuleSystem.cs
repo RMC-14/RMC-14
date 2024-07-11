@@ -330,10 +330,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             // don't open shitcode inside
             spawnedDropships = true;
             var dropshipMap = _mapManager.CreateMap();
-            var dropshipPoints = EntityQueryEnumerator<DropshipDestinationComponent, MetaDataComponent, TransformComponent>();
+            var dropshipPoints = EntityQueryEnumerator<DropshipDestinationComponent, TransformComponent>();
             var ships = new[] { "/Maps/_RMC14/alamo.yml", "/Maps/_RMC14/normandy.yml" };
             var shipIndex = 0;
-            while (dropshipPoints.MoveNext(out var destinationId, out _, out var metaData, out var destTransform))
+            while (dropshipPoints.MoveNext(out var destinationId, out _, out var destTransform))
             {
                 if (_mapSystem.TryGetMap(destTransform.MapID, out var destinationMapId) &&
                     comp.XenoMap == destinationMapId)
@@ -369,6 +369,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     if (launched)
                         break;
                 }
+            }
+
+            var marineFactions = EntityQueryEnumerator<MarineIFFComponent>();
+            while (marineFactions.MoveNext(out var iffId, out _))
+            {
+                _gunIFF.SetUserFaction(iffId, comp.MarineFaction);
             }
         }
     }

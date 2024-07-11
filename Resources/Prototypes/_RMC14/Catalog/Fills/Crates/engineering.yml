@@ -161,7 +161,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: FlashlightLantern # TODO RMC14 use cm prototype
+      - id: RMCFlashlight
         amount: 8
 
 - type: entity

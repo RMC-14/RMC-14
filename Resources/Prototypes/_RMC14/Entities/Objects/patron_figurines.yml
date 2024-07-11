@@ -207,3 +207,25 @@
     state: atlas_bootes
   - type: PatronFigurine
     id: c16859d8-1d88-4f9b-a2ab-2fc980ab8111
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKameronCook
+  name: Kameron Cook figurine
+  description: "I Cooka Da Pizza."
+  components:
+  - type: Sprite
+    state: kameron_cook
+  - type: PatronFigurine
+    id: 9f1ccf6d-b7ad-4e4d-8b83-33edc40648bf
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSatoruSuzuki
+  name: Satoru Suzuki figurine
+  description: "Gods strongest Medic."
+  components:
+  - type: Sprite
+    state: satoru_suzuki
+  - type: PatronFigurine
+    id: c27c6991-1658-47b7-8e07-78806dda4f30

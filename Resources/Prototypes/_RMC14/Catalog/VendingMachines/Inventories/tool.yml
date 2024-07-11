@@ -1,7 +1,7 @@
 - type: vendingMachineInventory
   id: CMVendorTool
   startingInventory:
-    FlashlightSeclite: 4
+    RMCFlashlight: 4
     ClothingHeadHatHardhatBlue: 4
     CMHandsInsulated: 4
     ClothingBeltUtility: 4
