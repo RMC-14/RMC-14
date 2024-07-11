@@ -5,8 +5,6 @@ using Content.Server.Chat.Systems;
 using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Server.EntityEffects.EffectConditions;
 using Content.Server.EntityEffects.Effects;
-using Content.Server.Chemistry.ReagentEffectConditions;
-using Content.Server.Chemistry.ReagentEffects;
 using Content.Shared._RMC14.Medical.Stasis;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
