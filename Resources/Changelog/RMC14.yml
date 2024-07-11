@@ -2813,5 +2813,12 @@
   id: 342
   time: '2024-07-10T20:08:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2940
+- author: Whisper
+  changes:
+  - message: Fixed small hosts being unable to be dragged and tackled
+    type: Fix
+  id: 343
+  time: '2024-07-11T02:56:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2964
 Name: RMC14
 Order: -1
