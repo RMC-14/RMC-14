@@ -2890,5 +2890,13 @@
   id: 349
   time: '2024-07-11T11:39:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2981
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the runner's and lurker's leap cooldown being swapped. The runner's
+      is now correctly 3 seconds, and the lurker's is 6 seconds.
+    type: Fix
+  id: 350
+  time: '2024-07-11T11:41:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2976
 Name: RMC14
 Order: -1
