@@ -397,18 +397,13 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
             if (infected.BurstAt > time)
             {
-                // Embryo burst if unrevivable when dead
+                // Embryo dies if unrevivable when dead
                 if (_mobState.IsDead(uid))
                 {
-                    // Non-humanoids burst instantly, while humanoids burst when rotten
+                    // Kill the embryo if we've rotted or are non-humanoid
                     if (!HasComp<MarineComponent>(uid) || _rotting.IsRotten(uid))
                     {
                         RemCompDeferred<VictimInfectedComponent>(uid);
-                        SpawnAtPosition(infected.BurstFailSpawn, xform.Coordinates);
-
-                        EnsureComp<VictimBurstComponent>(uid);
-
-                        _audio.PlayPvs(infected.BurstSound, uid);
                         continue;
                     }
                 }
