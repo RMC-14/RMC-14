@@ -18,8 +18,8 @@
     - name: Cards
       entries: []
     #TODO RMC14 Walkman and music
-    - name: WalkMan
-      entries: Other
+    - name: Other
+      entries: 
       - id: CMPaper
         amount: 15
       - id: CMPen

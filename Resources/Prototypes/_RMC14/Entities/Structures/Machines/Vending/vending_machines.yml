@@ -224,14 +224,13 @@
     # Pepper spray 4
     CMStunbaton: 4
     RMCFlashlight: 4
-    CMBeltSecurityFilled: 4
+    CMBeltSecurity: 10
     CMFlash: 5
     FoodBoxDonut: 12
     # Evidence box 6
     CMArmorHelmetM10MP: 6
     CMHeadCapMP: 6
     CMJumpsuitMP: 2
-    CMBeltSecurity: 6
     CMHeadBeretRed: 6
     CMGlassesSecurity: 3
     CMHeadsetMPO: 6

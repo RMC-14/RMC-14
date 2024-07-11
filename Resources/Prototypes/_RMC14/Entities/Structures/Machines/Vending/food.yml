@@ -109,7 +109,7 @@
       - id: CMMarineFlask
         amount: 5
 
-- type: entit
+- type: entity
   parent: ColMarTechBase
   id: CMVendorChess
   name: Chess-o-mat
