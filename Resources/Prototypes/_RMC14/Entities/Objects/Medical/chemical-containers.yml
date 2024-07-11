@@ -432,7 +432,7 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: RMCWater
+            - ReagentId: Water
               Quantity: 200
 
 - type: entity
