@@ -1,20 +1,29 @@
 ﻿- type: entity
-  parent: MobMonkey
+  id: RMCSmallHost
+  name: abstract small host
+  abstract: true
+  components:
+  - type: Infectable
+  - type: Tackleable
+  - type: Devourable
+  - type: XenoNestable
+
+- type: entity
+  parent: [MobMonkey, RMCSmallHost]
   id: CMMobMonkey
   suffix: CM
   components:
   - type: GhostRole
     prob: 0
-  - type: Infectable
+
 
 - type: entity
-  parent: MobKobold
+  parent: [MobKobold, RMCSmallHost]
   id: CMMobKobold
   suffix: CM
   components:
   - type: GhostRole
     prob: 0
-  - type: Infectable
 
 - type: entity
   parent: MobMouse
@@ -55,26 +64,34 @@
 # Spawners
 
 - type: entity
-  parent: SpawnMobMonkey
+  parent: MarkerBase
   id: CMSpawnMobMonkey
-  suffix: CM
+  name: monkey spawner
+  suffix: RMC
   components:
-  - type: ConditionalSpawner
+  - type: Sprite
+    layers:
+    - state: green
+    - state: monkey
+      sprite: Mobs/Animals/monkey.rsi
+  - type: ProportionalSpawner
+    id: CMSpawnMobMonkey
     prototypes:
     - CMMobMonkey
 
 - type: entity
   parent: MarkerBase
   id: CMSpawnMobKobold
-  name: Kobold Spawner
-  suffix: CM
+  name: kobold spawner
+  suffix: RMC
   components:
   - type: Sprite
     layers:
     - state: green
     - state: kobold
       sprite: Mobs/Animals/kobold.rsi
-  - type: ConditionalSpawner
+  - type: ProportionalSpawner
+    id: CMSpawnMobMonkey
     prototypes:
     - CMMobKobold
 

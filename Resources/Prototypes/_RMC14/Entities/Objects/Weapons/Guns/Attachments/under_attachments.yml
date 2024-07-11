@@ -313,7 +313,8 @@
   parent: RMCUnderAttachmentBase
   id: RMCAttachmentVerticalGrip
   name: vertical grip
-  description: A vertical foregrip that offers better accuracy, less recoil, and less scatter, especially during burst fire. \nHowever, it also increases weapon size.
+  description: "A vertical foregrip that offers better accuracy, less recoil, and less scatter, especially during burst fire.
+    However, it also increases weapon size."
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi

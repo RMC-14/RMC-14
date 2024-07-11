@@ -1,5 +1,6 @@
 ﻿using Content.Server.Explosion.EntitySystems;
 using Content.Server.Popups;
+using Content.Server.Sticky.Events;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Voicelines;
 using Content.Shared.Humanoid;
@@ -14,12 +15,16 @@ public sealed class CMExplosionSystem : SharedCMExplosionSystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly HumanoidVoicelinesSystem _humanoidVoicelines = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly TriggerSystem _trigger = default!;
+
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<CMVocalizeTriggerComponent, ActiveTimerTriggerEvent>(OnVocalizeTriggered);
+
+        SubscribeLocalEvent<RMCExplosiveDeleteWallsComponent, EntityStuckEvent>(OnExplosiveDeleteWallsStuck);
     }
 
     private void OnVocalizeTriggered(Entity<CMVocalizeTriggerComponent> ent, ref ActiveTimerTriggerEvent args)
@@ -42,5 +47,10 @@ public sealed class CMExplosionSystem : SharedCMExplosionSystem
             return;
 
         _audio.PlayEntity(sound, filter, user, true);
+    }
+
+    private void OnExplosiveDeleteWallsStuck(Entity<RMCExplosiveDeleteWallsComponent> ent, ref EntityStuckEvent args)
+    {
+        _trigger.HandleTimerTrigger(ent, args.User, ent.Comp.Delay, ent.Comp.BeepInterval, null, null);
     }
 }

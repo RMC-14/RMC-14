@@ -43,8 +43,8 @@
         points: 7
     #- id: CMPlasticExplosive
     #  points: 3
-    #- id: CMBreachingCharge
-    #  points: 5
+      - id: RMCExplosiveBreachingCharge
+        points: 5
       - id: CMSandbagEmpty25
         points: 10
       - id: RMCPowerCellSuper

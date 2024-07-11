@@ -512,3 +512,6 @@ ArmatAttachments: CMVendorAttachments
 
 # 2024-07-1
 CMDispenserChem : RMCDispenserChem
+
+# 2024-07-10
+CMLamp: RMCLamp

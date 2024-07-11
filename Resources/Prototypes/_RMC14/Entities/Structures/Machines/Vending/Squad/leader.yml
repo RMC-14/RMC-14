@@ -88,8 +88,8 @@
         points: 7
     #- id: CMPlasticexplosive
     #  points: 5
-    #- id: CMBreachingCharge
-    #  points: 7
+      - id: RMCExplosiveBreachingCharge
+        points: 7
       - id: CMSandbagEmpty25
         points: 10
     #- id: CMSignalFlarePack
