@@ -344,6 +344,21 @@ namespace Content.Client.Lobby.UI
 
             #endregion SpawnPriority
 
+            #region SquadPriority
+
+            foreach ( var value in Enum.GetValues<SquadPriorityPreference>())
+            {
+                SquadPriorityButton.AddItem(Loc.GetString($"humanoid-profile-editor-preference-squad-priority-{value.ToString().ToLower()}"), (int) value);
+            }
+
+            SquadPriorityButton.OnItemSelected += args =>
+            {
+                SquadPriorityButton.SelectId(args.Id);
+                setSquadPriority((SquadPriorityPreference) args.Id);
+            };
+
+            #endregion SquadPriority
+
             #region Eyes
 
             EyeColorPicker.OnEyeColorPicked += newColor =>
@@ -762,6 +777,7 @@ namespace Content.Client.Lobby.UI
             UpdateGenderControls();
             UpdateSkinColor();
             UpdateSpawnPriorityControls();
+            UpdateSquadPriorityControls();
             UpdateAgeEdit();
             UpdateEyePickers();
             UpdateSaveButton();
@@ -1225,6 +1241,12 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
+        private void setSquadPriority(SquadPriorityPreference newSquadPriority)
+        {
+            Profile = Profile?.WithSquadPriorityPreference(newSquadPriority);
+            SetDirty();
+        }
+
         public bool IsDirty
         {
             get => _isDirty;
@@ -1415,6 +1437,16 @@ namespace Content.Client.Lobby.UI
             }
 
             SpawnPriorityButton.SelectId((int) Profile.SpawnPriority);
+        }
+
+        private void UpdateSquadPriorityControls()
+        {
+            if (Profile == null)
+            {
+                return;
+            }
+
+            SquadPriorityButton.SelectId((int) Profile.SquadPriority);
         }
 
         private void UpdateHairPickers()

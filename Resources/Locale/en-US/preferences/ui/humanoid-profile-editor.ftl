@@ -21,6 +21,7 @@ humanoid-profile-editor-export-button = Export
 humanoid-profile-editor-save-button = Save
 humanoid-profile-editor-reset-button = Reset
 humanoid-profile-editor-spawn-priority-label = Spawn priority:
+humanoid-profile-editor-squad-priority-label = Squad priority:
 humanoid-profile-editor-eyes-label = Eye color:
 humanoid-profile-editor-jobs-tab = Jobs
 humanoid-profile-editor-preference-unavailable-stay-in-lobby-button = Stay in lobby if preference unavailable.
@@ -36,6 +37,13 @@ humanoid-profile-editor-guidebook-button-tooltip = Click for more info
 humanoid-profile-editor-preference-spawn-priority-none = None
 humanoid-profile-editor-preference-spawn-priority-arrivals = Arrivals
 humanoid-profile-editor-preference-spawn-priority-cryosleep = Cryosleep
+
+# Squad priority
+humanoid-profile-editor-preference-squad-priority-none = None
+humanoid-profile-editor-preference-squad-priority-alpha = Alpha
+humanoid-profile-editor-preference-squad-priority-bravo = Bravo
+humanoid-profile-editor-preference-squad-priority-charlie = Charlie
+humanoid-profile-editor-preference-squad-priority-delta = Delta
 
 humanoid-profile-editor-jobs-amount-in-department-tooltip = Jobs in the {$departmentName} department
 humanoid-profile-editor-department-jobs-label = {$departmentName} jobs

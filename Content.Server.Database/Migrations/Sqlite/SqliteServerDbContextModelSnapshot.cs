@@ -803,6 +803,10 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("INTEGER")
                         .HasColumnName("spawn_priority");
 
+                    b.Property<int>("SpawnPriority")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("Squad_priority");
+
                     b.Property<string>("Species")
                         .IsRequired()
                         .HasColumnType("TEXT")
