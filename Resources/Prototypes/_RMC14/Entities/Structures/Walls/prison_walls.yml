@@ -12,7 +12,7 @@
     sprite: _RMC14/Structures/Walls/prison_wall.rsi
     state: metal
   - type: IconSmooth
-    key: wall
+    key: walls
     base: metal
 
 - type: entity
@@ -28,7 +28,7 @@
     sprite: _RMC14/Structures/Walls/prison_rwall.rsi
     state: rwall
   - type: IconSmooth
-    key: wall
+    key: walls
     base: rwall
 
 - type: entity
@@ -44,7 +44,7 @@
     sprite: _RMC14/Structures/Walls/prison_rwall.rsi
     state: hwall
   - type: IconSmooth
-    key: wall
+    key: walls
     base: rwall
 
 - type: entity
@@ -60,5 +60,5 @@
     sprite: _RMC14/Structures/Walls/bone_resin.rsi
     state: bone_resin
   - type: IconSmooth
-    key: wall
+    key: walls
     base: bone_resin
