@@ -24,6 +24,11 @@
     sprite: Objects/Specific/Medical/defib.rsi
   - type: Speech
     speechVerb: Robotic
+  - type: ItemToggle
+    soundActivate:
+      path: /Audio/_RMC14/Medical/defib_SafetyOn.ogg
+    soundDeactivate:
+      path: /Audio/_RMC14/Medical/defib_safetyOff.ogg
   - type: Defibrillator
     doAfterDuration: 6.25
     allowDoAfterMovement: false
@@ -35,6 +40,26 @@
     zapHeal:
       types:
         Asphyxiation: -200
+    zapSound:
+      path: /Audio/_RMC14/Medical/defib_release.ogg
+      params:
+        volume: -6
+    chargeSound:
+      path: /Audio/_RMC14/Medical/defib_charge.ogg
+      params:
+        volume: -8
+    failureSound:
+      path: /Audio/_RMC14/Medical/defib_failed.ogg
+      params:
+        volume: -6
+    successSound:
+      path: /Audio/_RMC14/Medical/defib_success.ogg
+      params:
+        volume: -6
+    readySound:
+      path: /Audio/_RMC14/Medical/defib_ready.ogg
+      params:
+        volume: -6
     zapDamage: 0
   - type: DoAfter
   - type: UseDelay

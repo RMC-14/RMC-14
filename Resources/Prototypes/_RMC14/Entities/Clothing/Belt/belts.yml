@@ -214,8 +214,8 @@
       - Syringe
       - CMSurgicalLine
       - CMSynthGraft
-      - Bloodpack
       - Brutepack
+      - CMBloodPack
       - Gauze
       - Ointment
       - CMOintment
@@ -255,6 +255,7 @@
       - Syringe
       - CMAutoInjector
       - Brutepack
+      - CMBloodPack
       - Gauze
       - Ointment
       - CMOintment
@@ -265,7 +266,6 @@
       components:
       - Defibrillator
       - Pill
-      - BloodPack
   - type: FixedItemSizeStorage
   - type: IgnoreContentsSize
     items:

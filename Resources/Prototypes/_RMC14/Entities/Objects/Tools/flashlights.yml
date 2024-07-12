@@ -1,0 +1,190 @@
+﻿- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCFlashlightBase
+  components:
+  - type: MeleeWeapon
+    wideAnimationRotation: 90
+    damage:
+      types:
+        Blunt: 0
+  - type: HandheldLight
+    addPrefix: false
+    blinkingBehaviourId: blinking
+    radiatingBehaviourId: radiating
+  - type: LightBehaviour
+    behaviours:
+      - !type:FadeBehaviour
+        id: radiating
+        maxDuration: 2.0
+        startValue: 3.0
+        endValue: 2.0
+        isLooped: true
+        reverseWhenFinished: true
+      - !type:PulseBehaviour
+        id: blinking
+        interpolate: Nearest
+        maxDuration: 1.0
+        minValue: 0.1
+        maxValue: 2.0
+        isLooped: true
+  - type: ToggleableLightVisuals
+    spriteLayer: light
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: ContainerContainer
+    containers:
+      cell_slot: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: RMCPowerCell
+  - type: PointLight
+    enabled: false
+    radius: 5
+    netsync: false
+  - type: Appearance
+  - type: StaticPrice
+    price: 40
+  - type: Tag
+    tags:
+    - Flashlight
+
+- type: entity
+  parent: RMCFlashlightBase
+  id: RMCFlashlight
+  name: flashlight
+  description: A hand-held emergency light.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/Light/flashlight.rsi
+    layers:
+      - state: flashlight
+      - state: flashlight-on
+        visible: false
+        map: [ "light" ]
+  - type: Item
+    size: Small
+
+- type: entity
+  parent: RMCFlashlightBase
+  id: RMCFlashlightPen
+  name: penlight
+  description: A pen-sized light, used by medical staff.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/Light/penlight.rsi
+    layers:
+      - state: penlight
+      - state: penlight-on
+        visible: false
+        map: [ "light" ]
+  - type: Item
+    size: Tiny
+
+- type: entity
+  parent: RMCFlashlightBase
+  id: RMCLamp
+  name: desk lamp
+  description: A desk lamp with an adjustable mount.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/Light/lamp.rsi
+    layers:
+      - state: lamp
+      - state: lamp-on
+        visible: false
+        map: [ "light" ]
+  - type: Item
+    size: Large
+
+- type: entity
+  parent: RMCLamp
+  id: RMCLampGreen
+  description: A classic green-shaded desk lamp.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/Light/green_lamp.rsi
+    layers:
+      - state: lampgreen
+      - state: lampgreen-on
+        visible: false
+        map: [ "light" ]
+
+- type: entity
+  parent: RMCLamp
+  id: RMCLampMenorah
+  name: Menorah
+  description: For celebrating Chanukah.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/Light/menorah.rsi
+    layers:
+      - state: menorah
+      - state: menorah-on
+        visible: false
+        map: [ "light" ]
+
+- type: entity
+  parent: RMCLamp
+  id: RMCLampCandelabra
+  name: candelabra
+  description: A fire hazard that can be used to thwack things with impunity.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/Light/candelabra.rsi
+    layers:
+      - state: candelabra
+      - state: candelabra-on
+        visible: false
+        map: [ "light" ]
+
+- type: entity
+  parent: RMCLamp
+  id: RMCLampTripod
+  name: tripod lamp
+  description: An emergency light tube mounted onto a tripod. It seemingly lasts forever.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/Light/tripod_lamp.rsi
+    layers:
+      - state: tripod_lamp
+      - state: tripod_lamp-on
+        visible: false
+        map: [ "light" ]
+  - type: PointLight
+    radius: 6
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: RMCPowerCellHigh
+
+- type: entity
+  parent: RMCLampTripod
+  id: RMCLampTripodGrey
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/Light/tripod_lamp_grey.rsi
+    layers:
+      - state: tripod_lamp_grey
+      - state: tripod_lamp_grey-on
+        visible: false
+        map: [ "light" ]
+
+- type: entity
+  parent: RMCFlashlightBase
+  id: RMCFlashlightLantern
+  name: lantern
+  description: A mining lantern.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/Light/lantern.rsi
+    layers:
+      - state: lantern
+      - state: lantern-on
+        visible: false
+        map: [ "light" ]
+  - type: PointLight
+    radius: 6
