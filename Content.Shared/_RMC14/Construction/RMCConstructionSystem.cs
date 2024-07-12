@@ -33,7 +33,6 @@ public sealed class RMCConstructionSystem : EntitySystem
 
         SubscribeLocalEvent<RMCDropshipBlockedComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<RMCDropshipBlockedComponent, AnchorAttemptEvent>(OnAnchorAttempt);
-        SubscribeLocalEvent<RMCDropshipBlockedComponent, UserAnchoredEvent>(OnUserAnchored);
     }
 
     private void OnConstructionAttempt(ref RMCConstructionAttemptEvent ev)
@@ -94,12 +93,6 @@ public sealed class RMCConstructionSystem : EntitySystem
             _popup.PopupClient(msg, ent, args.User);
             args.Cancel();
         }
-    }
-
-    private void OnUserAnchored(Entity<RMCDropshipBlockedComponent> ent, ref UserAnchoredEvent args)
-    {
-        if (TryComp(ent.Owner, out TransformComponent? xform))
-            _transform.Unanchor(ent.Owner, xform);
     }
 
     public bool CanConstruct(EntityUid? user)
