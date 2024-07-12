@@ -781,35 +781,49 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private Dictionary<string, int> GetSquadJobNumber(ProtoId<JobPrototype> job, CMDistressSignalRuleComponent rule)
     {
         var jobNumPerSquad = new Dictionary<string, int>();
-        var members = EntityQuery<SquadMemberComponent>();
+        // var members = EntityQuery<SquadMemberComponent>();
+        var members = EntityQueryEnumerator<SquadMemberComponent>();
 
         foreach (var squad in rule.SquadIds)
         {
             jobNumPerSquad[squad] = 0;
         }
 
-        foreach (var member in members)
+        while (members.MoveNext(out var uid, out var member))
         {
-            // _entityManager.TryGetComponent(member.Owner, out JobComponent? memberJob);
+            var squadName = "Squad" + member.Squad?.Name;
             _jobs.MindTryGetJob(_mind.GetMind(member.Owner), out _, out var prototype);
-            if (prototype! == job) {
-                jobNumPerSquad[member.Squad]++;
+            if (prototype! == job)
+            {
+                jobNumPerSquad[squadName]++;
             }
         }
+
+        // foreach (var member in members)
+        // {
+        //     // _entityManager.TryGetComponent(member.Owner, out JobComponent? memberJob);
+        //     _jobs.MindTryGetJob(_mind.GetMind(member.Owner), out _, out var prototype);
+        //     if (prototype! == job) {
+        //         // var squadName = "Squad" + ToPrettyString(member.Squad).ToString().split(" ")[0];
+
+        //         var squadName = member.Owner;
+        //         jobNumPerSquad[squadName]++;
+        //     }
+        // }
 
         return jobNumPerSquad;
     }
 
-    private (EntProtoId Id, EntityUid Ent) NextSquad(ProtoId<JobPrototype> job, CMDistressSignalRuleComponent rule, string squadPriority)
+    private (EntProtoId Id, EntityUid Ent) NextSquad(ProtoId<JobPrototype> job, CMDistressSignalRuleComponent rule, string sP)
     {
         // TODO RMC14 this biases people towards alpha as that's the first one, maybe not a problem once people can pick a preferred squad?
-        string sp = "squad" + squadPriority;
-        if (!rule.NextSquad.TryGetValue(job, out var next) ||
-            next >= rule.SquadIds.Count)
-        {
-            rule.NextSquad[job] = 0;
-            next = 0;
-        }
+        string squadPriority = "squad" + sP;
+        // if (!rule.NextSquad.TryGetValue(job, out var next) ||
+        //     next >= rule.SquadIds.Count)
+        // {
+        //     rule.NextSquad[job] = 0;
+        //     next = 0;
+        // }
 
         var jobNumPerSquad = new Dictionary<string, int>();
         jobNumPerSquad = GetSquadJobNumber(job, rule);
@@ -832,10 +846,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             }
             id = rule.SquadIds[lowest];
         }
-        // for each job the number in NextSquad represents which squad to place
-        // we need to change id to correct squad
-        // var id = rule.SquadIds[next++];
-        rule.NextSquad[job] = next;
 
         ref var squad = ref CollectionsMarshal.GetValueRefOrAddDefault(rule.Squads, id, out var exists);
         if (!exists)
