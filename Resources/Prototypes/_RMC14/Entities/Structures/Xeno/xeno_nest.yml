@@ -38,3 +38,5 @@
         acts: ["Destruction"]
   - type: XenoNest
   - type: XenoFriendly
+  - type: RMCNightVisionVisible
+    priority: 1
