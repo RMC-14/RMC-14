@@ -1,3 +1,4 @@
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.ActionBlocker;
@@ -130,8 +131,7 @@ public sealed class XenoNestSystem : EntitySystem
     {
         if (args.DoAfter.Args.Target is not { } target ||
             TerminatingOrDeleted(target) ||
-            GetNestDirection(ent, target) is not { } direction ||
-            !CanNestPopup(args.DoAfter.Args.User, target, ent, direction))
+            !CanNestPopup(args.DoAfter.Args.User, target, ent, out _))
         {
             args.Cancel();
         }
@@ -143,9 +143,7 @@ public sealed class XenoNestSystem : EntitySystem
             return;
 
         if (args.Target is not { } victim ||
-            GetNestDirection(ent, victim) is not { } direction ||
-            !CanNestPopup(args.User, victim, ent, direction) ||
-            ent.Comp.Nests.ContainsKey(direction))
+            !CanNestPopup(args.User, victim, ent, out var direction))
         {
             return;
         }
@@ -171,7 +169,7 @@ public sealed class XenoNestSystem : EntitySystem
         var nest = SpawnAttachedTo(ent.Comp.Nest, nestCoordinates);
         _transform.SetCoordinates(nest, nestCoordinates.Offset(offset));
 
-        ent.Comp.Nests[direction] = nest;
+        ent.Comp.Nests[direction.Value] = nest;
         Dirty(ent);
 
         var nestComp = EnsureComp<XenoNestComponent>(nest);
@@ -184,7 +182,7 @@ public sealed class XenoNestSystem : EntitySystem
         Dirty(victim, nestedComp);
 
         _transform.SetCoordinates(victim, nest.ToCoordinates());
-        _transform.SetLocalRotation(victim, direction.ToAngle());
+        _transform.SetLocalRotation(victim, direction.Value.ToAngle());
 
         _standing.Stand(victim, force: true);
 
@@ -259,8 +257,8 @@ public sealed class XenoNestSystem : EntitySystem
 
     private void TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)
     {
-        if (!HasComp<XenoComponent>(user) || GetNestDirection(surface, victim) is not { } direction ||
-            !CanNestPopup(user, victim, surface, direction))
+        if (!HasComp<XenoComponent>(user) ||
+            !CanNestPopup(user, victim, surface, out _))
         {
             return;
         }
@@ -329,12 +327,15 @@ public sealed class XenoNestSystem : EntitySystem
 
     private bool CanNestPopup(EntityUid user,
         EntityUid victim,
-        EntityUid surface,
-        Direction direction,
+        Entity<XenoNestSurfaceComponent> surface,
+        [NotNullWhen(true)] out Direction? direction,
         bool silent = false)
     {
-        var surfaceComp = Comp<XenoNestSurfaceComponent>(surface);
-        if (!CanBeNested(user, victim, (surface, surfaceComp), silent))
+        direction = GetNestDirection(surface, victim);
+        if (direction is null)
+            return false;
+
+        if (!CanBeNested(user, victim, (surface, surface.Comp), silent))
             return false;
 
         if (!_standing.IsDown(victim))
@@ -345,7 +346,7 @@ public sealed class XenoNestSystem : EntitySystem
             return false;
         }
 
-        if (surfaceComp.Nests.ContainsKey(direction))
+        if (surface.Comp.Nests.ContainsKey(direction.Value))
         {
             if (!silent)
                 _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed-cant-already-there"), surface, user);
