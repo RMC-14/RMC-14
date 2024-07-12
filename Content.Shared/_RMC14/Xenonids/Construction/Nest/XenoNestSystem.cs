@@ -76,6 +76,7 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoNestedComponent, IsEquippingAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, IsUnequippingAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, GetInfectedIncubationMultiplierEvent>(OnInNestGetInfectedIncubationMultiplier);
+        SubscribeLocalEvent<XenoNestedComponent, ComponentStartup>(OnNestedAdd);
     }
 
     private void OnXenoGetUsedEntity(Entity<XenoComponent> ent, ref GetUsedEntityEvent args)
@@ -119,7 +120,12 @@ public sealed class XenoNestSystem : EntitySystem
         TryStartNesting(args.User, (args.Target.Value, surface), args.Used);
     }
 
-    private void OnNestedRemove(Entity<XenoNestedComponent> ent, ref ComponentRemove args)
+	private void OnNestedAdd(Entity<XenoNestedComponent> ent, ref ComponentStartup args)
+	{
+		_parasite.RefreshIncubationMultipliers(ent.Owner);
+	}
+
+	private void OnNestedRemove(Entity<XenoNestedComponent> ent, ref ComponentRemove args)
     {
         DetachNested(null, ent);
         _actionBlocker.UpdateCanMove(ent);
@@ -192,7 +198,6 @@ public sealed class XenoNestSystem : EntitySystem
         _transform.SetLocalRotation(victim, direction.ToAngle());
 
         _standing.Stand(victim, force: true);
-        _parasite.RefreshIncubationMultipliers(victim);
 
         // TODO RMC14 make a method to do this
         _popup.PopupClient(Loc.GetString("cm-xeno-nest-securing-self", ("target", victim)), args.User, args.User);

@@ -18,6 +18,7 @@ using Content.Shared.Jittering;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.NPC.Components;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Rounding;
@@ -364,7 +365,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp, false))
             return;
 
-        var ev = new GetInfectedIncubationMultiplierEvent(1);
+        var ev = new GetInfectedIncubationMultiplierEvent(ent.Comp.CurrentStage, 1);
         RaiseLocalEvent(ent, ref ev);
 
         ent.Comp.IncubationMultiplier = ev.Multiplier;
@@ -399,8 +400,8 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             if (infected.BurstAt > time)
             {
                 // Embryo dies if unrevivable when dead
-                // Kill the embryo if we've rotted or are non-humanoid
-                if (_mobState.IsDead(uid) && (!HasComp<MarineComponent>(uid) || _rotting.IsRotten(uid)))
+                // Kill the embryo if we've rotted or are a simplemob
+                if (_mobState.IsDead(uid) && (HasComp<InfectStopOnDeathComponent>(uid) || _rotting.IsRotten(uid)))
                 {
                     RemCompDeferred<VictimInfectedComponent>(uid);
                     continue;

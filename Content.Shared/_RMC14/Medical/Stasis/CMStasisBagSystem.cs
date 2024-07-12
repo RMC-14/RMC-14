@@ -58,7 +58,7 @@ public sealed class CMStasisBagSystem : EntitySystem
         {
             // less effective in late stages
             var multiplier = ent.Comp.IncubationMultiplier;
-            if (TryComp<VictimInfectedComponent>(ent, out var infection) && infection.CurrentStage >= infection.FinalSymptomsStart)
+            if (args.stage >= ent.Comp.LessEffectiveStage)
                 multiplier += (multiplier / 3);
 
             args.Multiply(multiplier);

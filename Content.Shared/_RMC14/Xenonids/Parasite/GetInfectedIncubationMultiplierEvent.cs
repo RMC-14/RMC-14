@@ -1,7 +1,7 @@
 ﻿namespace Content.Shared._RMC14.Xenonids.Parasite;
 
 [ByRefEvent]
-public record struct GetInfectedIncubationMultiplierEvent(float Multiplier = 1)
+public record struct GetInfectedIncubationMultiplierEvent(int stage, float Multiplier = 1)
 {
     public void Add(float multiplier)
     {
