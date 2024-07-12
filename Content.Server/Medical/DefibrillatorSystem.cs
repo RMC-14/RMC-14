@@ -9,6 +9,7 @@ using Content.Server.PowerCell;
 using Content.Server.Traits.Assorted;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Medical.Defibrillator;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
@@ -112,6 +113,13 @@ public sealed class DefibrillatorSystem : EntitySystem
         if (!component.CanDefibCrit && _mobState.IsCritical(target, mobState))
             return false;
 
+        if (HasComp<XenoComponent>(target))
+        {
+            if (user != null)
+                _popup.PopupEntity(Loc.GetString("defibrillator-xeno"), uid, user.Value);
+            return false;
+        }
+
         return true;
     }
 
@@ -136,13 +144,13 @@ public sealed class DefibrillatorSystem : EntitySystem
 
         return _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, component.DoAfterDuration, new DefibrillatorZapDoAfterEvent(),
             uid, target, uid)
-            {
-                BlockDuplicate = true,
-                BreakOnHandChange = true,
-                NeedHand = true,
-                BreakOnMove = !component.AllowDoAfterMovement,
-                DuplicateCondition = DuplicateConditions.SameEvent,
-            });
+        {
+            BlockDuplicate = true,
+            BreakOnHandChange = true,
+            NeedHand = true,
+            BreakOnMove = !component.AllowDoAfterMovement,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+        });
     }
 
     public void Zap(EntityUid uid, EntityUid target, EntityUid user, DefibrillatorComponent? component = null, MobStateComponent? mob = null, MobThresholdsComponent? thresholds = null)
