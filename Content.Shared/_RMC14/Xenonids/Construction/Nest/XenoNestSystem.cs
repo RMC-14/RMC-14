@@ -36,8 +36,6 @@ public sealed class XenoNestSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
-    private readonly List<Direction> _candidateNests = new();
-
     private EntityQuery<XenoWeedableComponent> _xenoWeedable;
 
     public override void Initialize()
@@ -381,15 +379,13 @@ public sealed class XenoNestSystem : EntitySystem
             if (TryComp(nest, out XenoNestComponent? nestComp) &&
                 TryComp(nestComp.Surface, out XenoNestSurfaceComponent? surfaceComp))
             {
-                _candidateNests.Clear();
-                foreach (var (dir, _) in surfaceComp.Nests)
+                foreach (var (dir, nestUid) in surfaceComp.Nests)
                 {
-                    _candidateNests.Add(dir);
-                }
+                    if (nestUid != nest)
+                        continue;
 
-                foreach (var dir in _candidateNests)
-                {
                     surfaceComp.Nests.Remove(dir);
+                    break;
                 }
 
                 Dirty(nestComp.Surface.Value, surfaceComp);
