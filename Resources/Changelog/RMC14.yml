@@ -2898,5 +2898,13 @@
   id: 350
   time: '2024-07-11T11:41:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2976
+- author: Mattshark89
+  changes:
+  - message: The Queen's screech is no longer blocked by marines. Apparently, marines
+      are opaque.
+    type: Fix
+  id: 351
+  time: '2024-07-12T03:17:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3002
 Name: RMC14
 Order: -1
