@@ -29,8 +29,8 @@
   id: RMCPizzaDeliveryBoy
   components:
     - type: GhostRole
-      name: ghost-role-information-lost-cargo-technical-name
-      description: ghost-role-information-lost-cargo-technical-description
+      name: rmc-ghost-role-information-pizza-delivery-boy-name
+      description: rmc-ghost-role-information-pizza-delivery-boy-description
       rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: short
