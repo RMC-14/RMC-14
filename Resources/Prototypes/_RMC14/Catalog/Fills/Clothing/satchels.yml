@@ -1,0 +1,16 @@
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelPizza
+  suffix: Pizza, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMCrowbar
+    - id: FoodBoxPizzaFilled # TODO RMC14 add pizzaboxes
+      amount: 4
+    - id: DrinkDrGibbCan
+    - id: DrinkFourteenLokoCan
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - BoxCardboard

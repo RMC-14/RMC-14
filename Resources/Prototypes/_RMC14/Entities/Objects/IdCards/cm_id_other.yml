@@ -37,3 +37,9 @@
   components:
   - type: PresetIdCard
     job: CMMessTech
+
+- type: entity
+  parent: CMIDCardGold
+  id: RMCIDCardPizza
+  name: pizza guy badge
+  description: It reads 'Pizza-guy local union No. 217', 'We always deliver!'
