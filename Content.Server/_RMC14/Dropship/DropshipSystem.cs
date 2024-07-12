@@ -9,6 +9,7 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared.Doors.Components;
 using Content.Shared.Interaction;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;

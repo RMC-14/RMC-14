@@ -2625,7 +2625,7 @@
   url: https://github.com/RMC-14/RMC-14/pull/2922
 - author: Sphiral
   changes:
-  - message: Barricades now have a 0.7 use delay
+  - message: Barricades now have a 0.3 use delay
     type: Tweak
   id: 321
   time: '2024-07-09T04:09:43.0000000+00:00'
@@ -2827,5 +2827,84 @@
   id: 344
   time: '2024-07-11T05:52:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2969
+- author: Siigiil, Cepha
+  changes:
+  - message: Added all standard attachments, excluding the bipod, the underbarrel
+      extinguisher, the underbarrel flamers and most attachments specific to weapons
+      that are unimplemented.
+    type: Add
+  - message: Added the missing default keybinds for attachment activation. Your keybinds
+      will be reset.
+    type: Add
+  - message: You can now open the attachment strip menu with a hotkey as well as the
+      verb. No default keybinding.
+    type: Add
+  - message: Certain scopes now allow movement. These being the smartscope and the
+      miniscope.
+    type: Tweak
+  - message: Scopes now properly work with attachment hotkeys.
+    type: Fix
+  - message: Implemented wield delay. You will need to wait a short while after picking
+      up a weapon before you can wield it. Shooting is unaffected. Attachments can
+      affect this.
+    type: Add
+  - message: Added wield slowdown. Wielding certain weapons will slow you down. Attachments
+      can affect this.
+    type: Add
+  - message: Added new sprites for the agrip and vgrip. Sprited by Cepha.
+    type: Tweak
+  - message: Added new sprites for the M54C solid and folding stocks. Sprited by Sigil.
+    type: Tweak
+  id: 345
+  time: '2024-07-09T07:39:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2788
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Patron figurines not being able to fit into helmets.
+    type: Fix
+  id: 346
+  time: '2024-07-11T11:29:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2977
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the defibrillator using the wrong audio, and its audio being able
+      to be spammed.
+    type: Fix
+  - message: Fixed the defibrillator being able to be used on more than one target
+      at the same time.
+    type: Fix
+  id: 347
+  time: '2024-07-11T09:23:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2978
+- author: Adrian16199
+  changes:
+  - message: Added a new tail for felinid species.
+    type: Add
+  id: 348
+  time: '2024-07-11T11:30:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2974
+- author: Whisper
+  changes:
+  - message: Fixed meralyn recipe.
+    type: Fix
+  id: 349
+  time: '2024-07-11T11:39:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2981
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the runner's and lurker's leap cooldown being swapped. The runner's
+      is now correctly 3 seconds, and the lurker's is 6 seconds.
+    type: Fix
+  id: 350
+  time: '2024-07-11T11:41:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2976
+- author: Mattshark89
+  changes:
+  - message: The Queen's screech is no longer blocked by marines. Apparently, marines
+      are opaque.
+    type: Fix
+  id: 351
+  time: '2024-07-12T03:17:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3002
 Name: RMC14
 Order: -1
