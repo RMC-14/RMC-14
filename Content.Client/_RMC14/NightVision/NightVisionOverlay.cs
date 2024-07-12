@@ -19,6 +19,8 @@ public sealed class NightVisionOverlay : Overlay
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
+    private readonly List<NightVisionRenderEntry> _entries = new();
+
     public NightVisionOverlay()
     {
         IoCManager.InjectDependencies(this);
@@ -39,20 +41,20 @@ public sealed class NightVisionOverlay : Overlay
         var eye = args.Viewport.Eye;
         var eyeRot = eye?.Rotation ?? default;
 
-        var entries = new List<NightVisionRenderEntry>();
+        _entries.Clear();
         var entities = _entity.EntityQueryEnumerator<RMCNightVisionVisibleComponent, SpriteComponent, TransformComponent>();
         while (entities.MoveNext(out var uid, out var visible, out var sprite, out var xform))
         {
-            entries.Add(new NightVisionRenderEntry((uid, sprite, xform),
+            _entries.Add(new NightVisionRenderEntry((uid, sprite, xform),
                 eye?.Position.MapId,
                 eyeRot,
                 nightVision.SeeThroughContainers,
                 visible.Priority));
         }
 
-        entries.Sort(SortPriority);
+        _entries.Sort(SortPriority);
 
-        foreach (var entry in entries)
+        foreach (var entry in _entries)
         {
             Render(entry.Ent, entry.Map, handle, entry.EyeRot, entry.NightVisionSeeThroughContainers);
         }
