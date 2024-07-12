@@ -435,24 +435,6 @@
   metamorphicChangeColor: false
 
 - type: reagent
-  id: RMCWater
-  name: reagent-name-water
-  parent: BaseDrink
-  desc: reagent-desc-water
-  slippery: true
-  physicalDesc: reagent-physical-desc-translucent
-  flavor: water
-  color: "#0064C8"
-  recognizable: true
-  boilingPoint: 100.0
-  meltingPoint: 0.0
-  metabolisms:
-    Drink:
-      effects:
-      - !type:SatiateThirst
-        factor: 4
-
-- type: reagent
   id: RMCSulphuricAcid
   name: reagent-name-rmc-sulphuric-acid
   group: Toxins
