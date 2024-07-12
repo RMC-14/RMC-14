@@ -63,3 +63,4 @@
   - type: StepTrigger
     requiredTriggeredSpeed: 0
     intersectRatio: 0.5
+  - type: RMCNightVisionVisible
