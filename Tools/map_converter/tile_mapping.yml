@@ -1,774 +1,803 @@
-"/turf/open/floor/shiva/north":
-  name: CMFloorAsteroidStriped0
+"/turf/open/floor/shiva/north": # no north???
+  name: CMFloorSteelShiva
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/yellowcorners/west":
-  name: CMFloorAsteroidStriped1
+  name: CMFloorSteelShivaYellowCorners3
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/green/west":
-  name: CMFloorAsteroidStriped2
+  name: CMFloorSteelShivaGreen3
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/wred/southeast":
-  name: CMFloorBlack
+  name: CMFloorSteelShivaWhiteRed4
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/greencorners/north":
-  name: CMFloorCargo
+  name: CMFloorSteelShivaGreenCorners1
   flags: 0
   variant: 0
 
 "/turf/open/auto_turf/snow/layer1":
-  name: CMFloorCargoArrowDown
+  name: RCMPlanetSnow1
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/greencorners":
-  name: CMFloorCargoArrowLeft
+  name: CMFloorSteelShivaGreenCorners0
   flags: 0
   variant: 0
 
 "/turf/open/floor/dark2":
-  name: CMFloorCargoArrowRight
+  name: CMFloorSteelPlanetBlack
   flags: 0
   variant: 0
 
 "/turf/open/floor/prison":
-  name: CMFloorCargoArrowUp
+  name: CMFloorSteelPrison
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/red/northwest":
-  name: CMFloorPlate
+  name: CMFloorSteelShivaRed7
   flags: 0
   variant: 0
 
-"/turf/open/shuttle/can_surgery/black":
+"/turf/open/shuttle/can_surgery/black": # Tiles/shuttle/floor7.png or Walls/Structures/shuttle.rsi/floor7.png
   name: CMFloorSteel
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/purple/north":
-  name: CMFloorSteelAlpha0
+  name: CMFloorSteelShivaPurple1
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/floor3":
-  name: CMFloorSteelAlpha1
+  name: CMFloorSteelShivaPlate
   flags: 0
   variant: 0
 
-"/turf/open/floor/interior/plastic":
-  name: CMFloorSteelAlpha2
+"/turf/open/floor/interior/plastic": # not ported, so really should be RMCPlanetPlasticFloor0 whenever you grab that
+  name: CMPlanetPlasticFloor1
   flags: 0
   variant: 0
 
-"/turf/open/floor/shiva/snow_mat/east":
+"/turf/open/floor/shiva/snow_mat/east": # Tiles/shiva/snow_mat.png
   name: CMFloorSteelAlpha3
   flags: 0
   variant: 0
 
-"/turf/open/gm/river":
-  name: CMFloorSteelAlpha4
+"/turf/open/gm/river": # this is gonna be some sort of floor with shallow water entity on top
+  # name: CMFloorShallowWaterEntity
+  name: Space
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/purple/east":
-  name: CMFloorSteelAlpha5
+  name: CMFloorSteelShivaPurple2
   flags: 0
   variant: 0
 
-"/turf/open/floor/plating/icefloor/warnplate/southwest":
+"/turf/open/floor/plating/icefloor/warnplate/southwest": # Tiles/floors/warnplate.png
   name: CMFloorSteelAlpha6
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/green/northwest":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaGreen7
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/red/north":
-  name: RCMPlanetIceComposite
+  name: CMFloorSteelShivaRed1
   flags: 0
   variant: 0
 
-"/turf/open/floor/platebot":
+"/turf/open/floor/platebot": # Tiles/floors/platebot.png
   name: RCMPlanetIce1
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/multi_tiles/west":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaMultiTile3
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/yellowcorners/north":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaYellowCorners1
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/red/southwest":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaRed5
   flags: 0
   variant: 0
 
-"/turf/closed/wall/shiva/prefabricated/reinforced/hull":
-  name: RCMPlanetIce1
+"/turf/closed/wall/shiva/prefabricated/reinforced/hull": # wall
+  # name: RCMWallShivaInvincibleFab <- not found
+  name: Space
   flags: 0
   variant: 0
 
 "/turf/open/floor/darkbrown2/east":
-  name: RCMPlanetIce1
+  name: CMFloorSteelPlanetDarkBrown2
   flags: 0
   variant: 0
 
 "/turf/open/auto_turf/snow/layer2":
-  name: RCMPlanetIce1
+  name: RCMPlanetSnow2
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/blue/east":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaBlue2
   flags: 0
   variant: 0
 
-"/turf/open/auto_turf/snow/layer0":
-  name: RCMPlanetIce1
+"/turf/open/auto_turf/snow/layer0": # only snow_1-4 in Tiles/planet/snow2 ???
+  name: RCMPlanetSnow1
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/green/north":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaGreen1
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/greencorners/east":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaGreenCorners2
   flags: 0
   variant: 0
 
 "/turf/open/floor/corsat/squares":
-  name: RCMPlanetIce1
+  name: CMPlanetCorsatSquare
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/green/east":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaGreen2
   flags: 0
   variant: 0
 
-"/turf/open/floor/shiva/snow_mat/west":
+"/turf/open/floor/shiva/snow_mat/west": # Tiles/shiva/snow_mat.png
   name: RCMPlanetIce1
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/green/southeast":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaGreen4
   flags: 0
   variant: 0
 
-"/turf/open/floor/shiva/purplefull/east":
-  name: RCMPlanetIce1
+"/turf/open/floor/shiva/purplefull/east": # not ported fully, should be RMCFloorSteelShivaPurpleFull2 from Tiles/shiva/purplefull_2.png
+  name: CMFloorSteelShivaPurpleFull3
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/yellow":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaYellow0
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/yellow/north":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaYellow1
   flags: 0
   variant: 0
 
-"/turf/open/floor/chapel/east":
-  name: RCMPlanetIce1
+"/turf/open/floor/chapel/east": # rotations aren't gonna work with the automapper for this one cause its an entity with one state
+  # name: CarpetChapel
+  name: Space
   flags: 0
   variant: 0
 
-"/turf/open/floor/plating/icefloor/warnplate/west":
+"/turf/open/floor/plating/icefloor/warnplate/west": # Tiles/floors/warnplate.png
   name: RCMPlanetIce1
   flags: 0
   variant: 0
 
 "/turf/open/floor/darkbrowncorners2":
-  name: RCMPlanetIce1
+  name: CMFloorSteelPlanetDarkBrownCorners0
   flags: 0
   variant: 0
 
-"/turf/open/floor/plating/icefloor/warnplate/southeast":
+"/turf/open/floor/plating/icefloor/warnplate/southeast": # Tiles/floors/warnplate.png
   name: RCMPlanetIce1
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/yellow/northeast":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaYellow6
   flags: 0
   variant: 0
 
-"/turf/closed/wall/shiva/ice":
-  name: RCMPlanetIce1
+"/turf/closed/wall/shiva/ice": # wall
+  # name: RCMWallShivaIce <- not found
+  name: Space
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/multi_tiles/southeast":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaMultiTile4
   flags: 0
   variant: 0
 
-"/turf/closed/shuttle/elevator/research":
-  name: RCMPlanetIce1
+"/turf/closed/shuttle/elevator/research": # wall
+  # name: RMCWallElevator
+  name: Space
   flags: 0
   variant: 0
 
-"/turf/closed/wall/shiva/prefabricated":
-  name: RCMPlanetIce1
+"/turf/closed/wall/shiva/prefabricated": # wall
+  # name: RCMWallShivaFab
+  name: Space
   flags: 0
   variant: 0
 
-"/turf/closed/shuttle/ert":
+"/turf/closed/shuttle/ert": # haha, this is going to be by hand
   name: RCMPlanetIce1
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/yellowcorners":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaYellowCorners0
   flags: 0
   variant: 0
 
-"/turf/open/floor/shiva/radiator_tile":
+"/turf/open/floor/shiva/radiator_tile": # Tiles/shiva/radiator_tile.png
   name: RCMPlanetIce1
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/multi_tiles/east":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaMultiTile2
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/wredcorners/north":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaWhiteRedCorners1
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/wred/northwest":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaWhiteRed7
   flags: 0
   variant: 0
 
-"/turf/closed/wall/r_wall":
-  name: RCMPlanetIce1
+"/turf/closed/wall/r_wall": # biodome wall somewhere in Walls/corsat.dmi apparently
+  # name: RCMPlanetIce1
+  name: Space
   flags: 0
   variant: 0
 
-"/turf/closed/shuttle/elevator/button/arrivals":
-  name: RCMPlanetIce1
+"/turf/closed/shuttle/elevator/button/arrivals": # wall
+  # name: RMCWallElevator
+  name: Space
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/wredcorners/east":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaWhiteRedCorners2
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/yellow/west":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaYellow3
   flags: 0
   variant: 0
 
 "/turf/open/shuttle/dropship/can_surgery/medium_grey_single_wide_left_to_right":
-  name: RCMPlanetIce1
+  name: CMShuttleTileRasputin14
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/red/east":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaRed2
   flags: 0
   variant: 0
 
 "/turf/open/floor/interior/plastic/alt":
+  name: CMPlanetPlasticFloor1
+  flags: 0
+  variant: 0
+
+"/turf/closed/wall/shiva/prefabricated/blue": # wall
+  # name: RCMWallShivaReinforcedFabBlue
+  name: Space
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/plating/icefloor/warnplate/northeast": # Tiles/floors/warnplate.png
   name: RCMPlanetIce1
   flags: 0
   variant: 0
 
-"/turf/closed/wall/shiva/prefabricated/blue":
-  name: RCMPlanetIce1
-  flags: 0
-  variant: 0
-
-"/turf/open/floor/plating/icefloor/warnplate/northeast":
-  name: RCMPlanetIce1
-  flags: 0
-  variant: 0
-
-"/turf/closed/shuttle/elevator/button/research":
-  name: RCMPlanetIce1
+"/turf/closed/shuttle/elevator/button/research": # wall
+  # name: RMCWallElevator
+  name: Space
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/wred/southwest":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaWhiteRed5
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/blue/west":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaBlue3
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/yellow/southwest":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaYellow5
   flags: 0
   variant: 0
 
-"/turf/closed/shuttle/elevator":
-  name: RCMPlanetIce1
+"/turf/closed/shuttle/elevator": # wall
+  # name: RMCWallElevator
+  name: Space
   flags: 0
   variant: 0
 
 "/turf/open/floor/darkbrown2":
-  name: RCMPlanetIce1
+  # name: CMFloorSteelPlanetDarkBrown
+  name: Space
   flags: 0
   variant: 0
 
 "/turf/open/auto_turf/ice/layer0":
-  name: RCMPlanetIce1
+  name: RCMPlanetIce0
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/red":
-  name: RCMPlanetIce1
+  # name: CMFloorSteelShivaRed
+  name: Space
   flags: 0
   variant: 0
 
 "/turf/open/floor/darkgreen2/northeast":
-  name: RCMPlanetIce1
+  name: CMFloorSteelPlanetDarkGreen6
   flags: 0
   variant: 0
 
-"/turf/open/gm/river/no_overlay":
-  name: RCMPlanetIce1
+"/turf/open/gm/river/no_overlay": # no idea how this is different from the other river one
+  # name: CMFloorShallowWaterEntity
+  name: Space
   flags: 0
   variant: 0
 
 "/turf/open/floor/darkbrown2/northwest":
-  name: RCMPlanetIce1
+  name: CMFloorSteelPlanetDarkBrown7
   flags: 0
   variant: 0
 
-"/turf/open/floor/plating/icefloor/warnplate/north":
+"/turf/open/floor/plating/icefloor/warnplate/north": # Tiles/floors/warnplate.png
   name: RCMPlanetIce1
   flags: 0
   variant: 0
 
 "/turf/open/floor/wood":
-  name: RCMPlanetIce1
+  name: CMPlanetWood
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/wredcorners/west":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaWhiteRedCorners3
   flags: 0
   variant: 0
 
-"/turf/open/floor/plating/warnplate":
+"/turf/open/floor/plating/warnplate": # Tiles/floors/warnplate.png
   name: RCMPlanetIce1
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/multi_tiles/north":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaMultiTile1
   flags: 0
   variant: 0
 
 "/turf/open/floor/bcircuit":
+  name: FloorBlueCircuit
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/purplefull": # not ported fully, should be RMCFloorSteelShivaPurpleFull0 from Tiles/shiva/purplefull_0
+  name: CMFloorSteelShivaPurpleFull3
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/shiva/snow_mat": # Tiles/shiva/snow_mat.png
   name: RCMPlanetIce1
   flags: 0
   variant: 0
 
-"/turf/open/floor/shiva/purplefull":
+"/turf/open/floor/shiva/radiator_tile2": # Tiles/shiva/radiator_tile2.png
   name: RCMPlanetIce1
   flags: 0
   variant: 0
 
-"/turf/open/floor/shiva/snow_mat":
-  name: RCMPlanetIce1
+"/turf/open/floor/chapel/west": # entity, can't rotate with automapper
+  # name: CarpetChapel
+  name: Space
   flags: 0
   variant: 0
 
-"/turf/open/floor/shiva/radiator_tile2":
-  name: RCMPlanetIce1
+"/turf/closed/shuttle/elevator/arrivals": # wall
+  # name: RMCWallElevator
+  name: Space
   flags: 0
   variant: 0
 
-"/turf/open/floor/chapel/west":
-  name: RCMPlanetIce1
-  flags: 0
-  variant: 0
-
-"/turf/closed/shuttle/elevator/arrivals":
-  name: RCMPlanetIce1
-  flags: 0
-  variant: 0
-
-"/turf/open/floor/plating/warnplate/northwest":
+"/turf/open/floor/plating/warnplate/northwest": # Tiles/floors/warnplate.png
   name: RCMPlanetIce1
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/wredcorners":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaWhiteRedCorners0
   flags: 0
   variant: 0
 
 "/turf/open/floor/darkbrown2/north":
-  name: RCMPlanetIce1
+  name: CMFloorSteelPlanetDarkBrown1
   flags: 0
   variant: 0
 
 "/turf/open/floor/darkbrown2/southwest":
-  name: RCMPlanetIce1
+  name: CMFloorSteelPlanetDarkBrown5
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/green":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaGreen0
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/green/southwest":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaGreen5
   flags: 0
   variant: 0
 
-"/turf/open/floor/plating/plating_catwalk/shiva":
-  name: RCMPlanetIce1
+"/turf/open/floor/plating/plating_catwalk/shiva": # entity
+  # name: CMCatwalkShiva <- Not found
+  name: Space
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/yellow/southeast":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaYellow4
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/red/northeast":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaRed6
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/red/west":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaRed3
   flags: 0
   variant: 0
 
-"/turf/closed/wall/shiva/prefabricated/white":
-  name: RCMPlanetIce1
+"/turf/closed/wall/shiva/prefabricated/white": # wall
+  # name: RCMWallShivaReinforcedFabWhite
+  name: Space
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/greencorners/west":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaGreenCorners3
   flags: 0
   variant: 0
 
 "/turf/closed/wall/shiva/prefabricated/orange":
-  name: RCMPlanetIce1
+  # name: RCMWallShivaReinforcedFabOrange
+  name: Space
   flags: 0
   variant: 0
 
-"/turf/open/shuttle/elevator":
-  name: RCMPlanetIce1
+"/turf/open/shuttle/elevator": # wall
+  # name: RMCWallElevator
+  name: Space
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/multi_tiles":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaMultiTile
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/red/southeast":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaRed4
   flags: 0
   variant: 0
 
-"/turf/open/floor/chapel/north":
-  name: RCMPlanetIce1
+"/turf/open/floor/chapel/north": # entity, no rotation with automapper
+  # name: CarpetChapel
+  name: Space
   flags: 0
   variant: 0
 
 "/turf/open/floor/delivery":
-  name: RCMPlanetIce1
+  name: CMFloorSteelPlanetDelivery
   flags: 0
   variant: 0
 
 "/turf/closed/wall/shiva/prefabricated/pink":
-  name: RCMPlanetIce1
+  # name: RCMWallShivaReinforcedFabPink <- not found
+  name: Space
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/yellow/east":
+  name: CMFloorSteelShivaYellow2
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/plating/icefloor/warnplate/northwest": # Tiles/floors/warnplate.png
   name: RCMPlanetIce1
   flags: 0
   variant: 0
 
-"/turf/open/floor/plating/icefloor/warnplate/northwest":
-  name: RCMPlanetIce1
-  flags: 0
-  variant: 0
-
-"/turf/open/floor/strata/floor2":
+"/turf/open/floor/strata/floor2": # Tiles/shuttle/floor2.png or Structures/Walls/shuttle.rsi/floor2.png
   name: RCMPlanetIce1
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/green/northeast":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaGreen6
   flags: 0
   variant: 0
 
 "/turf/open/auto_turf/snow/layer3":
-  name: RCMPlanetIce1
+  name: RCMPlanetSnow3
   flags: 0
   variant: 0
 
 "/turf/open/auto_turf/snow/layer4":
-  name: RCMPlanetIce1
+  name: RCMPlanetSnow4
   flags: 0
   variant: 0
 
 "/turf/open/floor/darkgreen2/northwest":
-  name: RCMPlanetIce1
+  name: CMFloorSteelPlanetDarkGreen7
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/wred/northeast":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaWhiteRed6
   flags: 0
   variant: 0
 
-"/turf/open/floor/plating/icefloor/warnplate":
+"/turf/open/floor/plating/icefloor/warnplate": # Tiles/floors/warnplate.png
   name: RCMPlanetIce1
   flags: 0
   variant: 0
 
 "/turf/open/floor/plating/icefloor":
-  name: RCMPlanetIce1
+  name: CMFloorPlating
   flags: 0
   variant: 0
 
-"/turf/open/ice/noweed":
+"/turf/open/ice/noweed": # I think this ice wall is for frozen xeno gameplay we don't have yet or something
   name: RCMPlanetIce1
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/purple":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaPurple0
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/wred":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaWhiteRed0
   flags: 0
   variant: 0
 
 "/turf/closed/wall/shiva/prefabricated/reinforced":
-  name: RCMPlanetIce1
+  # name: RCMWallShivaReinforcedFab
+  name: Space
   flags: 0
   variant: 0
 
-"/turf/open/floor/shiva/bluefull":
-  name: RCMPlanetIce1
+"/turf/open/floor/shiva/bluefull": # not fully ported, should be RCMFloorSteelShivaBlueFull0 from Tiles/shiva/bluefull_0
+  name: CMFloorSteelShivaBlueFull3
   flags: 0
   variant: 0
 
-"/turf/open/floor/chapel":
-  name: RCMPlanetIce1
+"/turf/open/floor/chapel": # entity, no rotation with automapper
+  # name: CarpetChapel
+  name: Space
   flags: 0
   variant: 0
 
-"/turf/open/auto_turf/ice/layer1":
+"/turf/open/auto_turf/ice/layer1": # the actual real RCMPlanetIce1
   name: RCMPlanetIce1
   flags: 0
   variant: 0
 
 "/turf/open/floor/darkgreen2/southeast":
-  name: RCMPlanetIce1
+  name: CMFloorSteelPlanetDarkGreen4
   flags: 0
   variant: 0
 
 "/turf/open/floor/darkbrown2/west":
-  name: RCMPlanetIce1
+  name: CMFloorSteelPlanetDarkBrown3
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/wred/east":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaWhiteRed2
   flags: 0
   variant: 0
 
-"/turf/open/asphalt/cement":
+"/turf/open/asphalt/cement": # no idea
   name: RCMPlanetIce1
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/purplefull/west":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaPurpleFull3
   flags: 0
   variant: 0
 
 "/turf/closed/shuttle/elevator/gears":
-  name: RCMPlanetIce1
+  # name: RMCWallElevator
+  name: Space
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/purple/west":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaPurple3
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShiva
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/yellow/northwest":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaYellow7
   flags: 0
   variant: 0
 
-"/turf/open/floor/shiva/purplefull/north":
-  name: RCMPlanetIce1
+"/turf/open/floor/shiva/purplefull/north": # not fully ported yadadada
+  name: CMFloorSteelShivaPurpleFull3
   flags: 0
   variant: 0
 
-"/turf/open/floor/shiva/redfull":
-  name: RCMPlanetIce1
+"/turf/open/floor/shiva/redfull": # not fully ported jskldjasl
+  name: CMFloorSteelShivaRedFull3
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/bluecorners/west":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaBlueCorners3
   flags: 0
   variant: 0
 
-"/turf/open/floor/shiva/greenfull":
-  name: RCMPlanetIce1
+"/turf/open/floor/shiva/greenfull": # more fulls please
+  name: CMFloorSteelShivaGreenFull3
   flags: 0
   variant: 0
 
-"/turf/open/floor/shiva/wredfull":
-  name: RCMPlanetIce1
+"/turf/open/floor/shiva/wredfull": # ditto
+  name: CMFloorSteelShivaWhiteRedFull3
   flags: 0
   variant: 0
 
-"/turf/open/floor/carpet":
-  name: RCMPlanetIce1
+"/turf/open/floor/carpet": # entity
+  # name: CMCarpetPrison
+  name: Space
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/bluefull/west":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaBlueFull3
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/yellowcorners/east":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaYellowCorners2
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/redfull/west":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaRedFull3
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/greenfull/west":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaGreenFull3
   flags: 0
   variant: 0
 
 "/turf/open/shuttle/dropship/can_surgery/medium_grey_single_wide_up_to_down":
-  name: RCMPlanetIce1
+  name: CMShuttleTileRasputin15
   flags: 0
   variant: 0
 
 "/turf/open/floor/darkbrown2/northeast":
-  name: RCMPlanetIce1
+  # name: CmFloorSteelPlanetDarkBrown6
+  name: Space
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/yellowfull":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaYellowFull3
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/wred/north":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaWhiteRed1
   flags: 0
   variant: 0
 
 "/turf/open/floor/prison/kitchen":
-  name: RCMPlanetIce1
+  name: CMFloorSteelPrisonKitchen
   flags: 0
   variant: 0
 
 "/turf/closed/wall/shiva/prefabricated/red":
-  name: RCMPlanetIce1
+  # name: RCMWallShivaReinforcedFabRed
+  name: Space
   flags: 0
   variant: 0
 
 "/turf/open/auto_turf/ice/layer2":
-  name: RCMPlanetIce1
+  name: RCMPlanetIce2
   flags: 0
   variant: 0
 
 "/turf/open/floor/darkbrown2/southeast":
-  name: RCMPlanetIce1
+  name: CMFloorSteelPlanetDarkBrown4
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/bluecorners":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaWhiteRed1
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/yellowfull/west":
+  name: CMFloorSteelShivaYellowFull3
+  flags: 0
+  variant: 0
+
+"/turf/open/floor/strata/floor3/east": # in Tiles/shuttle/floor3.png or Structures/Walls/shuttle.rsi/floor3.png
   name: RCMPlanetIce1
   flags: 0
   variant: 0
 
-"/turf/open/floor/strata/floor3/east":
+"/turf/open/floor/plating/icefloor/warnplate/east": # Tiles/floors/warnplate.png
   name: RCMPlanetIce1
   flags: 0
   variant: 0
 
-"/turf/open/floor/plating/icefloor/warnplate/east":
-  name: RCMPlanetIce1
-  flags: 0
-  variant: 0
-
-"/turf/open/shuttle/elevator/grating":
-  name: RCMPlanetIce1
+"/turf/open/shuttle/elevator/grating": # entity
+  # name: CMCatwalk
+  name: Space
   flags: 0
   variant: 0
 
 "/turf/open/floor/plating":
-  name: RCMPlanetIce1
+  name: CMFloorPlating
   flags: 0
   variant: 0
 
-"/turf/open/floor/shiva/snow_mat/north":
+"/turf/open/floor/shiva/snow_mat/north": # Tiles/shiva/snow_mat.png
   name: RCMPlanetIce1
   flags: 0
   variant: 0
 
 "/turf/open/floor/shiva/wred/west":
-  name: RCMPlanetIce1
+  name: CMFloorSteelShivaWhiteRed3
   flags: 0
   variant: 0
