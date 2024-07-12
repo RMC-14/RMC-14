@@ -369,16 +369,16 @@ public sealed class XenoNestSystem : EntitySystem
         string? response = null;
         foreach (var dir in directions)
         {
-            if (nestCoords.Offset(dir.ToVec()).GetTileRef(EntityManager, _map) is { } tile &&
-                   !_turf.IsTileBlocked(tile, CollisionGroup.Impassable))
+            if (nestCoords.Offset(dir.ToVec()).GetTileRef(EntityManager, _map) is not { } tile ||
+                   _turf.IsTileBlocked(tile, CollisionGroup.Impassable))
             {
-                response = Loc.GetString("cm-xeno-nest-failed-cant-there");
+                response ??= Loc.GetString("cm-xeno-nest-failed-cant-there");
                 continue;
             }
 
             if (surface.Comp.Nests.ContainsKey(dir))
             {
-                response = Loc.GetString("cm-xeno-nest-failed-cant-already-there");
+                response ??= Loc.GetString("cm-xeno-nest-failed-cant-already-there");
                 continue;
             }
 
