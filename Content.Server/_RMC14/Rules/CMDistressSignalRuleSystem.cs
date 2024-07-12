@@ -791,9 +791,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         foreach (var member in members)
         {
             // _entityManager.TryGetComponent(member.Owner, out JobComponent? memberJob);
-            _jobs.MindTryGetJob(member.Owner, out _, out var prototype);
+            _jobs.MindTryGetJob(_mind.GetMind(member.Owner), out _, out var prototype);
             if (prototype! == job) {
-                jobNumPerSquad["SquadAlpha"]++;
+                jobNumPerSquad[member.Squad]++;
             }
         }
 
@@ -812,10 +812,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         }
 
         var jobNumPerSquad = new Dictionary<string, int>();
-        var maxPerSquad = 7;
         jobNumPerSquad = GetSquadJobNumber(job, rule);
         var id = rule.SquadIds[0];
-        if (jobNumPerSquad[squadPriority] < maxPerSquad)
+        if (jobNumPerSquad[squadPriority] < rule.MaxJobsPerSquad[job])
         {
             id = squadPriority;
         }
@@ -829,6 +828,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 {
                     lowest = i;
                 }
+                i++;
             }
             id = rule.SquadIds[lowest];
         }
