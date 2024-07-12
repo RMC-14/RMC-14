@@ -6,6 +6,7 @@ using Content.Server.Administration.Managers;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
+using Content.Shared.Roles;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Power.Components;
 using Content.Server.Preferences.Managers;
@@ -15,6 +16,7 @@ using Content.Server.Spawners.Components;
 using Content.Server.Spawners.EntitySystems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Shared.Roles.Jobs;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
@@ -63,6 +65,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ContainerSystem _containers = default!;
     [Dependency] private readonly DropshipSystem _dropship = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
@@ -83,6 +86,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
+    [Dependency] private readonly SharedJobSystem _jobs = default!;
+    [Dependency] private readonly SharedRoleSystem _roles = default!;
 
     private readonly CVarDef<float>[] _ftlcVars =
     [
@@ -391,7 +396,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         var query = QueryActiveRules();
         while (query.MoveNext(out _, out _, out var comp, out _))
         {
-            if (GetSpawner(comp, job) is not { } spawnerInfo)
+            if (GetSpawner(comp, job, ev.HumanoidCharacterProfile!.SquadPriority.ToString()) is not { } spawnerInfo)
                 return;
 
             var (spawner, squad) = spawnerInfo;
@@ -773,9 +778,32 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         return spawners;
     }
 
-    private (EntProtoId Id, EntityUid Ent) NextSquad(ProtoId<JobPrototype> job, CMDistressSignalRuleComponent rule)
+    private Dictionary<string, int> GetSquadJobNumber(ProtoId<JobPrototype> job, CMDistressSignalRuleComponent rule)
+    {
+        var jobNumPerSquad = new Dictionary<string, int>();
+        var members = EntityQuery<SquadMemberComponent>();
+
+        foreach (var squad in rule.SquadIds)
+        {
+            jobNumPerSquad[squad] = 0;
+        }
+
+        foreach (var member in members)
+        {
+            // _entityManager.TryGetComponent(member.Owner, out JobComponent? memberJob);
+            _jobs.MindTryGetJob(member.Owner, out _, out var prototype);
+            if (prototype! == job) {
+                jobNumPerSquad["SquadAlpha"]++;
+            }
+        }
+
+        return jobNumPerSquad;
+    }
+
+    private (EntProtoId Id, EntityUid Ent) NextSquad(ProtoId<JobPrototype> job, CMDistressSignalRuleComponent rule, string squadPriority)
     {
         // TODO RMC14 this biases people towards alpha as that's the first one, maybe not a problem once people can pick a preferred squad?
+        string sp = "squad" + squadPriority;
         if (!rule.NextSquad.TryGetValue(job, out var next) ||
             next >= rule.SquadIds.Count)
         {
@@ -783,7 +811,30 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             next = 0;
         }
 
-        var id = rule.SquadIds[next++];
+        var jobNumPerSquad = new Dictionary<string, int>();
+        var maxPerSquad = 7;
+        jobNumPerSquad = GetSquadJobNumber(job, rule);
+        var id = rule.SquadIds[0];
+        if (jobNumPerSquad[squadPriority] < maxPerSquad)
+        {
+            id = squadPriority;
+        }
+        else
+        {
+            var lowest = 0;
+            var i = 1;
+            while (i < rule.SquadIds.Count)
+            {
+                if (jobNumPerSquad[rule.SquadIds[i]] < jobNumPerSquad[rule.SquadIds[lowest]])
+                {
+                    lowest = i;
+                }
+            }
+            id = rule.SquadIds[lowest];
+        }
+        // for each job the number in NextSquad represents which squad to place
+        // we need to change id to correct squad
+        // var id = rule.SquadIds[next++];
         rule.NextSquad[job] = next;
 
         ref var squad = ref CollectionsMarshal.GetValueRefOrAddDefault(rule.Squads, id, out var exists);
@@ -793,14 +844,14 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         return (id, squad);
     }
 
-    private (EntityUid Spawner, EntityUid? Squad)? GetSpawner(CMDistressSignalRuleComponent rule, JobPrototype job)
+    private (EntityUid Spawner, EntityUid? Squad)? GetSpawner(CMDistressSignalRuleComponent rule, JobPrototype job, string squadPriority)
     {
         var allSpawners = GetSpawners();
         EntityUid? squad = null;
 
         if (job.HasSquad)
         {
-            var (squadId, squadEnt) = NextSquad(job, rule);
+            var (squadId, squadEnt) = NextSquad(job, rule, squadPriority);
             squad = squadEnt;
 
             if (allSpawners.Squad.TryGetValue(squadId, out var jobSpawners) &&
