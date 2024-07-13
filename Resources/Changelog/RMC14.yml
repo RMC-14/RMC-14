@@ -2898,5 +2898,203 @@
   id: 350
   time: '2024-07-11T11:41:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2976
+- author: Mattshark89
+  changes:
+  - message: The Queen's screech is no longer blocked by marines. Apparently, marines
+      are opaque.
+    type: Fix
+  id: 351
+  time: '2024-07-12T03:17:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3002
+- author: ShadowCommander
+  changes:
+  - message: Fixed nests sometimes getting placed in-between walls.
+    type: Fix
+  - message: Nest direction is now based on Xenonid position instead of host position.
+    type: Tweak
+  - message: Xenonids now attempt to place hosts on both wall surface directions when
+      positioned diagonally to the surface.
+    type: Tweak
+  id: 352
+  time: '2024-07-13T01:44:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3014
+- author: Sigil
+  changes:
+  - message: Attachments that modify the size of their holder now properly apply and
+      remove their modifiers.
+    type: Fix
+  id: 353
+  time: '2024-07-13T01:49:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2989
+- author: DrSmugleaf
+  changes:
+  - message: Added Rytil Pyain figurine.
+    type: Add
+  id: 354
+  time: '2024-07-13T01:50:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3006
+- author: DrSmugleaf
+  changes:
+  - message: Fixed warding pheromones giving far more crit health than intended. It
+      now gives (40 times the pheromone level) extra crit health, instead of multiplying
+      crit health by 4.4 when used by the Queen, or 2.5 when used by a hivelord.
+    type: Fix
+  id: 355
+  time: '2024-07-13T04:15:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3026
+- author: DrSmugleaf
+  changes:
+  - message: The turrets guarding landing zones at round-start will now automatically
+      target nearby resin structures and destroy them in a single shot.
+    type: Tweak
+  - message: The turrets guarding landing zones at round-start will now last 20 minutes
+      after a dropship lands, instead of 20 minutes from round start, keeping the
+      landing zones safer for longer.
+    type: Tweak
+  id: 356
+  time: '2024-07-13T06:16:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3032
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenonids not being able to corrode folding barricades for realsies
+      this time.
+    type: Fix
+  id: 357
+  time: '2024-07-13T06:26:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3034
+- author: DrSmugleaf
+  changes:
+  - message: Marines-per-xeno ratio autobalancing after each round now has different
+      values for each planet map.
+    type: Tweak
+  id: 358
+  time: '2024-07-13T06:26:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3033
+- author: DrSmugleaf
+  changes:
+  - message: The planet's name for the current round is now shown in the groundside
+      operations console and the command tablet.
+    type: Add
+  id: 359
+  time: '2024-07-13T07:04:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3035
+- author: DrSmugleaf
+  changes:
+  - message: Xenonids will now get visibly injured from damage.
+    type: Add
+  id: 360
+  time: '2024-07-13T07:36:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2965
+- author: MendaxxDev
+  changes:
+  - message: Added new lobby music
+    type: Add
+  id: 361
+  time: '2024-07-13T07:39:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3001
+- author: DrSmugleaf
+  changes:
+  - message: Fixed shutters not occluding vision when closed.
+    type: Fix
+  - message: Fixed shutters and podlocks showing a red damage visual effect when they
+      are invincible to damage.
+    type: Fix
+  id: 362
+  time: '2024-07-13T07:53:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3036
+- author: DrSmugleaf
+  changes:
+  - message: The game no longer forces at least one xeno to spawn as Queen. In the
+      event that there is none round-start, one of the larvas can evolve into it.
+    type: Tweak
+  - message: Fixed the Grenadier Specialist's M83 grenade launcher shooting grenades
+      half as far as it should have been.
+    type: Fix
+  id: 363
+  time: '2024-07-13T09:37:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3037
+- author: Kaga
+  changes:
+  - message: Wield delay now applies to shooting after wielding.
+    type: Fix
+  id: 364
+  time: '2024-07-13T09:39:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2973
+- author: Vermidia
+  changes:
+  - message: Larva dies if a host becomes unreviviable
+    type: Tweak
+  - message: Nesting speeds up incubation, and stasis bags are less good against late
+      stage infections
+    type: Add
+  id: 365
+  time: '2024-07-13T10:17:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2995
+- author: Kaga
+  changes:
+  - message: Added proper resin wall explosion damage modifiers. They should be much
+      easier to blow up, now.
+    type: Add
+  - message: Reduced HEDP and HEFA base explosion power to account for the resin-breaking
+      buff.
+    type: Tweak
+  id: 366
+  time: '2024-07-13T10:19:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2825
+- author: blueDev2
+  changes:
+  - message: Medical containers now have prefix icons
+    type: Add
+  id: 367
+  time: '2024-07-13T10:19:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2658
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the defender's fortified wounded state being a massive error sign.
+    type: Fix
+  id: 368
+  time: '2024-07-13T10:35:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3040
+- author: DrSmugleaf
+  changes:
+  - message: Savannah now has a second Staff Officer slot and a fourth Cargo Tech
+      slot, just like the Almayer.
+    type: Tweak
+  id: 369
+  time: '2024-07-13T10:43:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3041
+- author: DrSmugleaf
+  changes:
+  - message: Fixed there being no cooldown for replacing a dead Queen. There is now
+      a 5 minute cooldown.
+    type: Fix
+  - message: Fixed hivemind chat not being disabled for xenonids when there is no
+      live Queen. Local chat will still work.
+    type: Fix
+  - message: Xenonids now receive an announcement in chat when a new Queen evolves.
+    type: Tweak
+  - message: Xenonid parasites now only have a 25% chance of becoming a ghost role.
+    type: Tweak
+  id: 370
+  time: '2024-07-13T11:46:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3043
+- author: DrSmugleaf
+  changes:
+  - message: The current operation name is now displayed in the groundside operations
+      console and the command tablet.
+    type: Add
+  id: 371
+  time: '2024-07-13T11:47:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3044
+- author: DrSmugleaf
+  changes:
+  - message: Added 2 more large surgical cases to Savannah with all of the surgery
+      tools.
+    type: Tweak
+  - message: Renamed the large surgical case to make it stand out more.
+    type: Tweak
+  id: 372
+  time: '2024-07-13T11:57:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3045
 Name: RMC14
 Order: -1

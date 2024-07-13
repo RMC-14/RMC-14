@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using Content.Server._RMC14.Marines;
+using Content.Server._RMC14.Rules;
 using Content.Server.Doors.Systems;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
@@ -46,7 +47,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         SubscribeLocalEvent<DropshipComponent, FTLRequestEvent>(OnRefreshUI);
         SubscribeLocalEvent<DropshipComponent, FTLStartedEvent>(OnRefreshUI);
-        SubscribeLocalEvent<DropshipComponent, FTLCompletedEvent>(OnRefreshUI);
+        SubscribeLocalEvent<DropshipComponent, FTLCompletedEvent>(OnFTLCompleted);
         SubscribeLocalEvent<DropshipComponent, FTLUpdatedEvent>(OnRefreshUI);
 
         Subs.BuiEvents<DropshipNavigationComputerComponent>(DropshipNavigationUiKey.Key,
@@ -79,6 +80,17 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         _ui.OpenUi(ent.Owner, DropshipHijackerUiKey.Key, args.User);
         _ui.SetUiState(ent.Owner, DropshipHijackerUiKey.Key, new DropshipHijackerBuiState(destinations));
+    }
+
+    private void OnFTLCompleted(Entity<DropshipComponent> ent, ref FTLCompletedEvent args)
+    {
+        OnRefreshUI(ent, ref args);
+
+        if (HasComp<RMCPlanetComponent>(args.MapUid))
+        {
+            var ev = new DropshipLandedOnPlanetEvent();
+            RaiseLocalEvent(ref ev);
+        }
     }
 
     private void OnRefreshUI<T>(Entity<DropshipComponent> ent, ref T args)

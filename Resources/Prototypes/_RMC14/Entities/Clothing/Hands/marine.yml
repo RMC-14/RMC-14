@@ -1,0 +1,28 @@
+- type: entity
+  parent: ClothingHandsBase
+  id: CMHandsBlackMarine # TODO RMC14 armor
+  name: marine combat gloves
+  description: "Standard issue marine tactical gloves. It reads: 'knit by Marine Widows Association'."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/black.rsi
+  - type: Fiber
+    fiberMaterial: fibers-leather
+    fiberColor: fibers-black
+  - type: FingerprintMask
+
+- type: entity
+  parent: CMHandsBlackMarine
+  id: RMCHandsM3G4
+  name: M3-G4 grenadier gloves
+  description: A pair of plated, but nimble, gloves.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/grenadier.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/grenadier.rsi
+  - type: CMArmor
+    armor: 40
+    explosionArmor: 50
