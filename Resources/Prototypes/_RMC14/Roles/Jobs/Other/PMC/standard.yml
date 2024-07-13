@@ -42,17 +42,14 @@
 - type: startingGear
   id: RMCGearPMCStandard
   equipment:
-    head: RMCHeadCapBureau
-    # face cigar
-    # shoulder holster with revolver and two magazines
-    back: RMCSatchelSec
+    # head: RMCHeadCapBureau
+    # back: RMCSatchelSec
     hands: CMHandsBlackMarine
-    jumpsuit: RMCJumpsuitMarshal
-    outerClothing: RMCCoatBureauMarshal # add telebaton binoculars/range
-    # /obj/item/weapon/gun/shotgun/pump/dual_tube/cmb/m3717
-    belt: CMBeltSecurityMarshalFilled
+    jumpsuit: RMCJumpsuitVeteranPMC
+    # outerClothing: RMCCoatBureauMarshal # add telebaton binoculars/range
+    # belt: CMBeltSecurityMarshalFilled
     shoes: CMBootsBlackFilled
-    id: RMCIDCardMarshal
-    ears: CMHeadsetMPO
-    pocket1: CMPouchFirstAidERT
-    pocket2: CMPouchShotgun
+    # id: RMCIDCardMarshal
+    ears: RMCHeadsetDistressPMC
+    # pocket1: CMPouchFirstAidERT
+    # pocket2: CMPouchShotgun
