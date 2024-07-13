@@ -139,7 +139,7 @@
   noSpawn: true
   components:
     - type: Label
-      currentLabel: reagent-name-aluminum
+      currentLabel: reagent-name-rmc-aluminum
     - type: SolutionContainerManager
       solutions:
         beaker:
@@ -432,7 +432,7 @@
       solutions:
         beaker:
           reagents:
-            - ReagentId: RMCWater
+            - ReagentId: Water
               Quantity: 200
 
 - type: entity
@@ -443,7 +443,7 @@
   noSpawn: true
   components:
     - type: Label
-      currentLabel: reagent-name-sulphuric-acid
+      currentLabel: reagent-name-rmc-sulphuric-acid
     - type: SolutionContainerManager
       solutions:
         beaker:

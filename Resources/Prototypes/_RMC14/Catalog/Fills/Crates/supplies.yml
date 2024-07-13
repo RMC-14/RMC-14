@@ -1,4 +1,4 @@
-# SUPPLIES 
+# SUPPLIES
 # code/datums/supply_packs/misc.dm
 
 # /datum/supply_packs/internals
@@ -33,12 +33,12 @@
 - type: entity
   id: CMCrateSuppliesBoxes
   parent: CMCrateSupply
-  name: empty boxes (x10)
+  name: cardboard sheets (x50) #empty boxes (x10)
   components:
   - type: StorageFill
     contents:
-      - id: CMBoxCardboard
-        amount: 10
+      - id: RMCSheetCardboard #CMBoxCardboard
+        amount: 1 #10
 
 # /datum/supply_packs/janitor
 - type: entity

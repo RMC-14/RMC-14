@@ -33,7 +33,8 @@ public partial class SharedScopeSystem
 
     private void OnMoveInput(Entity<ScopingComponent> ent, ref MoveInputEvent args)
     {
-        UserStopScoping(ent);
+        if (!ent.Comp.AllowMovement)
+            UserStopScoping(ent);
     }
 
     private void OnPullStarted(Entity<ScopingComponent> ent, ref PullStartedMessage args)

@@ -1,20 +1,30 @@
 ﻿- type: entity
-  parent: MobMonkey
+  id: RMCSmallHost
+  name: abstract small host
+  abstract: true
+  components:
+  - type: Infectable
+  - type: Tackleable
+  - type: Devourable
+  - type: XenoNestable
+  - type: RMCNightVisionVisible
+
+- type: entity
+  parent: [MobMonkey, RMCSmallHost]
   id: CMMobMonkey
   suffix: CM
   components:
   - type: GhostRole
     prob: 0
-  - type: Infectable
+
 
 - type: entity
-  parent: MobKobold
+  parent: [MobKobold, RMCSmallHost]
   id: CMMobKobold
   suffix: CM
   components:
   - type: GhostRole
     prob: 0
-  - type: Infectable
 
 - type: entity
   parent: MobMouse
@@ -41,26 +51,56 @@
     prob: 0
 
 - type: entity
-  parent: SpawnMobMonkey
-  id: CMSpawnMobMonkey
-  suffix: CM
+  parent: MobCorgiPuppy
+  id: CMMobWiggles
+  name: Mister Wiggles
+  description: It's a corgi puppy. MISTER WIGGLES!! HE IS THE GREATEST!
   components:
-  - type: ConditionalSpawner
+  - type: WarpPoint
+    follow: true
+    location: Mister Wiggles
+
+- type: entity
+  parent: MobCatCalico
+  id: CMMobJones
+  name: Jones
+  description: A tough, old stray whose origin no one seems to know.
+  components:
+  - type: WarpPoint
+    follow: true
+    location: Jones
+
+# Spawners
+
+- type: entity
+  parent: MarkerBase
+  id: CMSpawnMobMonkey
+  name: monkey spawner
+  suffix: RMC
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: monkey
+      sprite: Mobs/Animals/monkey.rsi
+  - type: ProportionalSpawner
+    id: CMSpawnMobMonkey
     prototypes:
     - CMMobMonkey
 
 - type: entity
   parent: MarkerBase
   id: CMSpawnMobKobold
-  name: Kobold Spawner
-  suffix: CM
+  name: kobold spawner
+  suffix: RMC
   components:
   - type: Sprite
     layers:
     - state: green
     - state: kobold
       sprite: Mobs/Animals/kobold.rsi
-  - type: ConditionalSpawner
+  - type: ProportionalSpawner
+    id: CMSpawnMobMonkey
     prototypes:
     - CMMobKobold
 
@@ -74,3 +114,33 @@
     - CMMobMouse
     - CMMobMouse1
     - CMMobMouse2
+
+- type: entity
+  parent: MarkerBase
+  id: CMSpawnMobWiggles
+  name: Mr. Wiggles Spawner
+  suffix: CM
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: puppy
+      sprite: Mobs/Pets/corgi.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - CMMobWiggles
+
+- type: entity
+  parent: MarkerBase
+  id: CMSpawnMobJones
+  name: Jones Spawner
+  suffix: CM
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: cat2
+      sprite: Mobs/Pets/cat.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - CMMobJones

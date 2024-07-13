@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/6c8f3153bb8846baa74e413b3ed8d3355aebcea3/icons/turf/walls/window_frames.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "col_frame0"
+    },
+    {
+      "name": "col_frame1"
+    },
+    {
+      "name": "col_frame2"
+    },
+    {
+      "name": "col_frame3"
+    },
+    {
+      "name": "col_frame4"
+    },
+    {
+      "name": "col_frame5"
+    },
+    {
+      "name": "col_frame6"
+    },
+    {
+      "name": "col_frame8"
+    },
+    {
+      "name": "col_frame9"
+    },
+	{
+      "name": "col_frame10"
+    },
+	{
+      "name": "col_frame12"
+    }
+  ]
+}

@@ -121,3 +121,16 @@
     sprite: _RMC14/Structures/Furniture/Tables/almayer.rsi
   - type: Icon
     sprite: _RMC14/Structures/Furniture/Tables/almayer.rsi
+
+# Prison
+- type: entity
+  parent: CMTable
+  id: RMCTablePrison
+  name: table
+  description: A square metal surface resting on four legs. This one has side panels, making it useful as a desk, but impossible to flip.
+  suffix: Prison
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/prison.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Tables/prison.rsi

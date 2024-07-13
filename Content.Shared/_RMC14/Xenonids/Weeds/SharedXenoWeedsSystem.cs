@@ -63,17 +63,33 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     private void OnWeedsTerminating(Entity<XenoWeedsComponent> ent, ref EntityTerminatingEvent args)
     {
         if (!ent.Comp.IsSource)
+        {
+            if (_weedsQuery.TryComp(ent.Comp.Source, out var weeds))
+            {
+                weeds.Spread.Remove(ent);
+                Dirty(ent.Comp.Source.Value, weeds);
+            }
+
             return;
+        }
 
         foreach (var spread in ent.Comp.Spread)
         {
             if (TerminatingOrDeleted(spread))
                 continue;
 
+            if (_weedsQuery.TryComp(spread, out var weeds))
+            {
+                weeds.Source = null;
+                Dirty(spread, weeds);
+            }
+
             var timed = EnsureComp<TimedDespawnComponent>(spread);
             var offset = _random.Next(ent.Comp.MinRandomDelete, ent.Comp.MaxRandomDelete);
             timed.Lifetime = (float) offset.TotalSeconds;
         }
+
+        ent.Comp.Spread.Clear();
     }
 
     private void OnWeedsAnchorChanged(Entity<XenoWeedsComponent> weeds, ref AnchorStateChangedEvent args)

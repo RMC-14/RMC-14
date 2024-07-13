@@ -1,0 +1,35 @@
+- type: entity
+  parent: BaseWeaponBatterySmall
+  id: RMCWeaponTaser
+  name: disabler gun
+  description: An advanced stun device capable of firing balls of ionized electricity. Used for nonlethal takedowns.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Energy/taser.rsi
+    layers:
+    - state: taser
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-0
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Item
+    size: Normal
+  - type: Gun
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/taser.ogg
+  - type: Wieldable
+  - type: Battery
+    maxCharge: 10000
+    startingCharge: 10000
+  - type: ProjectileBatteryAmmoProvider
+    proto: RMCProjectileTaser
+    fireCost: 625
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: true
+  - type: Appearance
+  - type: Tag
+    tags:
+    - Taser
+    - Sidearm

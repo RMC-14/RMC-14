@@ -22,6 +22,11 @@
     maxAngle: -50
     angleIncrease: -5
     angleDecay: 10
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.92
+    baseSprint: 0.864
+  - type: WieldDelay
+    baseDelay: 0.2
   - type: RMCNameItemOnVend
     item: PrimaryGun
   - type: GunUnskilledPenalty
@@ -59,22 +64,40 @@
           - CMMagazineSMGM63Ext
   - type: AttachableHolder
     slots:
-      cm-aslot-stock:
+      rmc-aslot-barrel:
         whitelist:
           tags:
-          - CMAttachmentM63StockCollapsible
-      cm-aslot-barrel:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
         whitelist:
           tags:
-          - CMAttachmentExtendedBarrel
-          - CMAttachmentRecoilCompensator
-          - CMAttachmentSuppressor
-      cm-aslot-rail:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentM63StockCollapsible
         whitelist:
           tags:
-          - CMAttachmentFlashlight
+          - RMCAttachmentM63ArmBrace
+          - RMCAttachmentM63Stock
+          - RMCAttachmentM63StockCollapsible
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentVerticalGrip
   - type: AttachableHolderVisuals
     offsets:
-      cm-aslot-barrel: 0.44, 0.125
-      cm-aslot-stock: -0.58, 0.13
-      cm-aslot-rail: 0.0, 0.0
+      rmc-aslot-barrel: 0.715, 0.092
+      rmc-aslot-rail: 0.032, 0.155
+      rmc-aslot-stock: -0.81, 0.032
+      rmc-aslot-underbarrel: 0.25, -0.25

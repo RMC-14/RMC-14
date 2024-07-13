@@ -3,6 +3,8 @@
   parent: BaseStructure
   id: CMBaseDoor
   name: door
+  placement:
+    mode: SnapgridCenter
   components:
   - type: MeleeSound
     soundGroups:
@@ -133,8 +135,8 @@
     - Airlock
     # This tag is used to nagivate the Airlock construction graph. It's needed because the construction graph is shared between Airlock, AirlockGlass, and HighSecDoor
   - type: PryUnpowered
-  placement:
-    mode: SnapgridCenter
+  - type: RMCDropshipBlocked
+  - type: RMCWallExplosionDeletable
 
 - type: entity
   abstract: true

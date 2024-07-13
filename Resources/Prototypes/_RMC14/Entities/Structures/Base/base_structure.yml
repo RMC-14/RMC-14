@@ -32,6 +32,10 @@
       Brute:
         collection: XenoResinBreak
   - type: XenoConstruct
+  - type: RMCWallExplosionDeletable
+  - type: NpcFactionMember
+    factions:
+    - RMCXeno
 
 - type: entity
   id: CMCorrodible
@@ -75,6 +79,7 @@
   - type: XenoWeedable
     spawn: XenoWeedsWall
   - type: XenoConstructionSupport
+  - type: RMCDropshipBlocked
 
 - type: entity
   abstract: true
@@ -87,6 +92,8 @@
     damageModifierSet: StructuralMarine
   - type: Corrodible
     isCorrodible: true
+  - type: Clickable
+  - type: RMCWallExplosionDeletable
 
 - type: entity
   parent:

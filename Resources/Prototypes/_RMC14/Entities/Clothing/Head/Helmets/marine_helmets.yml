@@ -10,9 +10,9 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/standard.rsi
   - type: Storage #hopefully in the future someone smarter than me can add storage(?) for integrated things like netting, HUD, etc. but for now this is for hiding snacks
-    maxItemSize: Small
+    maxItemSize: Tiny
     grid:
-    - 0,0,2,1
+    - 0,0,3,1 # TODO RMC14 7, but 2 slots are reserved for garbs
     blacklist:
       tags:
       - Pouch
@@ -31,6 +31,33 @@
   - type: RMCNameItemOnVend
     item: Helmet
   - type: RMCBulkyArmor
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - RMCLighter
+      - RMCFlask
+      - CMScalpel
+      - Figurine
+      tags:
+#      - TODO RMC14 matchbox
+      - Cigarette
+#      - TODO RMC14 cards
+      - Slice
+#      - TODO RMC14 glasses (eyewear)
+#      - TODO RMC14 walkman and casettes
+#      - TODO RMC14 helmet garb
+      - Pen
+      - Crayon
+#      - TODO RMC14 handful of bullets
+      - Flashlight
+      - Brutepack
+      - CMOintment
+      - CMAutoInjector
+      - PillPacket
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: ArmorHelmetM10

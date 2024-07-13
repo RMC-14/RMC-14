@@ -89,6 +89,16 @@
         points: 3
     #- id: CMNightVisionOptic
     #  points: 30
+    - name: Engineering Supplies
+      entries:
+#      - id: Plastic Explosive
+#        points: 10
+      - id: RMCExplosiveBreachingCharge
+        points: 10
+#      - id: ES-11 Mobile Fuel Canister
+#        points: 10
+      - id: CMWelderSmall
+        points: 5
     - name: Utilities
       entries:
     #- id: CMMotionDetector
@@ -176,7 +186,8 @@
       - id: CMPouchMagazine
       - id: CMPouchShotgun
       - id: CMPouchPistol
-      #- id: CMToolsPouchFull
+      - id: CMPouchToolsFill
+        name: Tools pouch (Filled)
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:

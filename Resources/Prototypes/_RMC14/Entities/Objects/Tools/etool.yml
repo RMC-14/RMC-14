@@ -8,8 +8,6 @@
     tags:
     - Shovel
   - type: ItemToggle
-  - type: ItemToggleDisarmMalus
-    activatedDisarmMalus: 0.6
   - type: ItemToggleSize
     activatedSize: Large
   - type: Sprite

@@ -7,8 +7,6 @@
     snap:
     - Wall
   components:
-  - type: Transform
-    anchored: true
   - type: Physics
     bodyType: Static
   - type: Sprite
@@ -40,3 +38,5 @@
         acts: ["Destruction"]
   - type: XenoNest
   - type: XenoFriendly
+  - type: RMCNightVisionVisible
+    priority: 1

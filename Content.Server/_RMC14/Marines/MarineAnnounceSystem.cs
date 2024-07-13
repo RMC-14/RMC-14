@@ -1,4 +1,5 @@
-﻿using Content.Server.Administration.Logs;
+﻿using Content.Server._RMC14.Rules;
+using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.Mind;
 using Content.Server.Popups;
@@ -6,12 +7,14 @@ using Content.Server.Radio.EntitySystems;
 using Content.Server.Roles.Jobs;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
+using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
 using Content.Shared.Radio;
 using Robust.Server.Audio;
 using Robust.Shared.Audio;
+using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -23,6 +26,8 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     [Dependency] private readonly IAdminLogManager _adminLogs = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly JobSystem _job = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
@@ -30,15 +35,32 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
+    private int _characterLimit = 1000;
+
     public override void Initialize()
     {
         base.Initialize();
+
+        SubscribeLocalEvent<MarineCommunicationsComputerComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<MarineCommunicationsComputerComponent, BoundUIOpenedEvent>(OnBUIOpened);
 
         Subs.BuiEvents<MarineCommunicationsComputerComponent>(MarineCommunicationsComputerUI.Key,
             subs =>
             {
                 subs.Event<MarineCommunicationsComputerMsg>(OnMarineCommunicationsComputerMsg);
             });
+
+        Subs.CVar(_config, CCVars.ChatMaxMessageLength, limit => _characterLimit = limit, true);
+    }
+
+    private void OnMapInit(Entity<MarineCommunicationsComputerComponent> computer, ref MapInitEvent args)
+    {
+        UpdatePlanetMap(computer);
+    }
+
+    private void OnBUIOpened(Entity<MarineCommunicationsComputerComponent> computer, ref BoundUIOpenedEvent args)
+    {
+        UpdatePlanetMap(computer);
     }
 
     private void OnMarineCommunicationsComputerMsg(Entity<MarineCommunicationsComputerComponent> ent, ref MarineCommunicationsComputerMsg args)
@@ -53,10 +75,23 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
             return;
         }
 
-        Announce(args.Actor, args.Text, ent.Comp.Sound);
+        var text = args.Text;
+        if (text.Length > _characterLimit)
+            text = text[.._characterLimit].Trim();
+
+        Announce(args.Actor, text, ent.Comp.Sound);
 
         ent.Comp.LastAnnouncement = time;
         Dirty(ent);
+    }
+
+    private void UpdatePlanetMap(Entity<MarineCommunicationsComputerComponent> computer)
+    {
+        if (_distressSignal.SelectedPlanetMapName is not { } planet)
+            return;
+
+        var state = new MarineCommunicationsComputerBuiState(planet);
+        _ui.SetUiState(computer.Owner, MarineCommunicationsComputerUI.Key, state);
     }
 
     public void Announce(EntityUid sender, string message, SoundSpecifier sound)

@@ -35,20 +35,20 @@
     #  points: 2
       - id: CMEntrenchingTool
         points: 2
-    #- id: CMPowerCellHighCapacity
-    #  points: 3
+      - id: RMCPowerCellHigh
+        points: 3
       - id: CMSheetMetal10
         points: 5
       - id: CMSheetPlasteel10
         points: 7
     #- id: CMPlasticExplosive
     #  points: 3
-    #- id: CMBreachingCharge
-    #  points: 5
+      - id: RMCExplosiveBreachingCharge
+        points: 5
       - id: CMSandbagEmpty25
         points: 10
-    #- id: CMPowerCellSuperCapacity
-    #  points: 10
+      - id: RMCPowerCellSuper
+        points: 10
     #- id: CMES11MobileFuelCanister
     #  points: 4
     - name: Explosives
@@ -229,7 +229,8 @@
       - id: CMPouchShotgun
       - id: CMPouchGeneralMedium
       - id: CMPouchPistol
-      #- id: CMToolsPouchFull
+      - id: CMPouchToolsFill
+        name: Tools pouch (Filled)
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:

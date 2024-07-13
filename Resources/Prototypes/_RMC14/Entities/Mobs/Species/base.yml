@@ -166,3 +166,7 @@
       - CMActionGhost
   - type: Destructible
     thresholds: []
+  - type: NpcFactionMember
+    factions:
+    - UNMC
+  - type: RMCNightVisionVisible

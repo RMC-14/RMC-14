@@ -117,7 +117,7 @@
     footstepSoundCollection:
       collection: XenoFootstepLarge
       params:
-        volume: -12
+        volume: -8
 #  - type: RandomSound
 #    sound:
 #      collection: XenoQueenBreath # TODO RMC14

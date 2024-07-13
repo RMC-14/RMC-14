@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseItem, CMBaseWeaponGun]
+  parent: [BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder]
   abstract: true
   id: CMWeaponPistolBase
   components:
@@ -20,6 +20,8 @@
     - suitStorage
     - belt
   - type: Wieldable
+  - type: WieldDelay
+    baseDelay: 0.2
   - type: Gun
     fireRate: 8
     minAngle: 10
@@ -84,6 +86,31 @@
         whitelist:
           tags:
           - CMMagazinePistolM1984
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.71, 0.095
+      rmc-aslot-rail: -0.065, 0.125
+      rmc-aslot-underbarrel: 0.312, -0.25
 
 - type: entity
   parent: CMWeaponPistolBase
@@ -115,12 +142,39 @@
           - CMMagazinePistolM77AP
   - type: GunDamageModifier
     multiplier: 1.2
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.625, 0.125
+      rmc-aslot-rail: -0.03, 0.185
+      rmc-aslot-underbarrel: 0.31, -0.186
 
 - type: entity
   parent: CMWeaponPistolBase
   id: CMWeaponPistolMK80
   name: MK80 pistol
-  description: A massive, formidable semi-automatic handgun chambered in 9mm squash-head rounds. A common sight throughout both UA and 3WE space, often held by both We-Ya PMC units and corporate executives. This weapon is also undergoing limited field testing as part of the Marine's next generation pistol program. The slide is engraved with the We-Ya logo reminding you who's really in charge.
+  description: A massive, formidable semi-automatic handgun chambered in 9mm squash-head rounds. A common sight throughout both UA and 3WE space, often held by both We-Ya PMC units and corporate executives. This weapon is also undergoing limited field testing as part of the Marines' next generation pistol program. The slide is engraved with the We-Ya logo reminding you who's really in charge.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mk80.rsi
@@ -155,3 +209,29 @@
         whitelist:
           tags:
           - CMMagazinePistolMK80
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        locked: true
+        startingAttachable: RMCAttachmentLaserLightModule
+        whitelist:
+          tags:
+          - RMCAttachmentLaserLightModule
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.685, 0.125
+      rmc-aslot-rail: -0.125, 0.215
+      rmc-aslot-underbarrel: 0.284, -0.19

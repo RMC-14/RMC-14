@@ -1,17 +1,17 @@
 ﻿- type: entity
   abstract: true
-  parent: CMAttachmentBase
-  id: CMRailAttachmentBase
+  parent: RMCAttachmentBase
+  id: RMCRailAttachmentBase
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
   - type: Tag
     tags:
-    - CMAttachmentRail
+    - RMCAttachmentRail
 
 - type: entity
-  parent: CMRailAttachmentBase
-  id: CMAttachmentRailFlashlight
+  parent: RMCRailAttachmentBase
+  id: RMCAttachmentRailFlashlight
   name: rail flashlight
   description: A flashlight, for rails, on guns. Can be toggled on and off. A better light source than standard M3 pattern armor lights.
   components:
@@ -79,31 +79,261 @@
   - type: AttachableToggleableSimpleActivate
   - type: Tag
     tags:
-    - CMAttachmentRail
-    - CMAttachmentFlashlight
+    - RMCAttachmentRail
+    - RMCAttachmentRailFlashlight
     - Flashlight
 
 - type: entity
-  parent: CMRailAttachmentBase
-  id: CMAttachmentS42xTelescopicMiniScope
-  name: S4 2x telescopic mini-scope
-  description: An AEGIS S4 telescoping eye piece. Fixed at a modest 2x zoom. Press the 'use rail attachment' HUD icon or use the verb of the same name to zoom.
-  components:
-  - type: Sprite
-    state: miniscope
-
-- type: entity
-  parent: CMRailAttachmentBase
-  id: CMAttachmentMagneticHarness
+  parent: RMCRailAttachmentBase
+  id: RMCAttachmentMagneticHarness
   name: magnetic harness
   description: A magnetically attached harness kit that attaches to the rail mount of a weapon. When dropped, the weapon will sling to any set of Marine armor.
   components:
   - type: Sprite
     state: magnetic
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCAttachmentMagneticHarness
+  - type: AttachableAutoPickup
+  - type: AttachableVisuals
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - accuracyAddMult: -0.05
 
 - type: entity
-  parent: CMRailAttachmentBase
-  id: CMAttachmentB8SmartScope
+  parent: RMCRailAttachmentBase
+  id: RMCAttachmentS5RedDotSight
+  name: S5 red-dot sight
+  description: An all-weather collimator sight, designated as the AN/PVQ-64 Dot Sight. Equipped with a sunshade to increase clarity in bright conditions and resist weathering. Compact and efficient, a marvel of military design, until you realize that this is actually just an off-the-shelf design that got a military designation slapped on.
+  components:
+  - type: Sprite
+    state: reddot
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCAttachmentS5RedDotSight
+  - type: AttachableVisuals
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.2
+    - conditions:
+        unwieldedOnly: true
+      accuracyAddMult: 0.05
+      accuracyMovementPenaltyAddMult: 1
+
+- type: entity
+  parent: RMCRailAttachmentBase
+  id: RMCAttachmentS6ReflexSight
+  name: S6 reflex sight
+  description: An AEGIS S6 reflex sight. A zero-magnification alternative to iron sights with a more open optic window when compared to the S5 red-dot. Helps to reduce scatter during automated fire.
+  components:
+  - type: Sprite
+    state: reflex
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCAttachmentS6ReflexSight
+  - type: AttachableVisuals
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.15
+      scatterFlat: -2
+      burstScatterFlat: -1
+    - conditions:
+        unwieldedOnly: true
+      accuracyAddMult: 0.05
+      accuracyMovementPenaltyAddMult: 1
+
+- type: entity
+  abstract: true
+  parent: RMCRailAttachmentBase
+  id: RMCAttachmentScopeBase
+  components:
+  - type: AttachableToggleable
+    needHand: true
+    doInterrupt: true
+    attachedOnly: true
+    breakOnMove: true
+    breakOnRotate: true
+    wieldedOnly: true
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: sniperscope
+    actionName: Toggle Scope
+    actionDesc: Scope in. If you're seeing this, someone forgot to set the description properly.
+  - type: AttachableToggleableSimpleActivate
+  - type: Scope
+    requireWielding: true
+    attachment: true
+    useInHand: true
+    delay: 0
+
+- type: entity
+  parent: RMCAttachmentScopeBase
+  id: RMCAttachmentS84xTelescopicScope
+  name: S8 4x telescopic scope
+  description: An AEGIS S8 telescopic eye piece. Fixed at 4x zoom.
+  components:
+  - type: Sprite
+    state: sniperscope
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCAttachmentS84xTelescopicScope
+  - type: AttachableVisuals
+  - type: AttachableToggleable
+    actionName: Toggle S8 4x Telescopic Scope
+    actionDesc: An AEGIS S8 telescopic eye piece. Fixed at 4x zoom.
+  - type: AttachableToggleableSimpleActivate
+  - type: Scope
+    zoom: 1.6
+    offset: 14
+  - type: AttachableSpeedMods
+    modifiers:
+      - conditions:
+          wieldedOnly: true
+        walk: -0.23
+        sprint: -0.35
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.4
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - fireDelayFlat: 0.1
+    - conditions:
+        activeOnly: true
+      fireDelayFlat: 0.25
+      accuracyAddMult: 0.35
+      damageFalloffAddMult: -0.4
+    - conditions:
+        wieldedOnly: true
+        inactiveOnly: true
+      accuracyAddMult: -0.05
+    - conditions:
+        unwieldedOnly: true
+      accuracyMovementPenaltyAddMult: 2
+
+- type: entity
+  parent: RMCAttachmentS84xTelescopicScope
+  id: RMCAttachmentSlavicScope
+  name: 4x telescopic scope
+  description: Oppa! How did you get this off glorious Stalin weapon? Blyat, put back on and do job tovarish. Yankee is not shoot self no?
+  components:
+  - type: Sprite
+    state: slavicscope
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCAttachmentSlavicScope
+  - type: AttachableToggleable
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: slavicscope
+    actionName: Toggle 4x Telescopic Scope
+    actionDesc: A slavic scope. Fixed at 4x zoom.
+
+- type: entity
+  parent: RMCAttachmentScopeBase
+  id: RMCAttachmentS42xTelescopicMiniscope
+  name: S4 2x telescopic mini-scope
+  description: An AEGIS S4 telescoping eye piece. Fixed at a modest 2x zoom.
+  components:
+  - type: Sprite
+    state: miniscope
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCAttachmentS42xTelescopicMiniscope
+  - type: AttachableVisuals
+  - type: AttachableToggleable
+    breakOnMove: false
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: miniscope
+    actionName: Toggle S4 2x Telescopic Mini-Scope
+    actionDesc: An AEGIS S4 telescoping eye piece. Fixed at a modest 2x zoom.
+  - type: AttachableToggleableSimpleActivate
+  - type: Scope
+    offset: 13
+    allowMovement: true
+  - type: AttachableSpeedMods
+    modifiers:
+      - conditions:
+          activeOnly: true
+        walk: -0.31
+        sprint: -0.448
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.4
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        activeOnly: true
+      fireDelayFlat: 0.15
+      accuracyAddMult: 0.35
+      damageFalloffAddMult: -0.2
+    - conditions:
+        wieldedOnly: true
+        inactiveOnly: true
+      accuracyAddMult: -0.05
+    - conditions:
+        unwieldedOnly: true
+      accuracyMovementPenaltyAddMult: 2 #TODO: Add flare gun modifiers when it's implemented.
+
+- type: entity
+  parent: RMCAttachmentS42xTelescopicMiniscope
+  id: RMCAttachmentS42xAdvancedTelescopicMiniscope
+  name: WeYa S4 2x advanced telescopic mini-scope
+  description: An AEGIS S4 telescoping eye piece, custom-tuned by WeYa scientists to be as ergonomic as possible.
+  components:
+  - type: Sprite
+    state: miniscope-nsg23
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCAttachmentS42xAdvancedTelescopicMiniscope
+  - type: AttachableToggleable
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: miniscope-nsg23
+    actionName: Toggle WeYa S4 2x Advanced Telescopic Mini-Scope
+    actionDesc: An AEGIS S4 telescoping eye piece, custom-tuned by WeYa scientists to be as ergonomic as possible.
+  - type: Scope
+    offset: 14
+  - type: AttachableSpeedMods
+    modifiers: []
+
+- type: entity
+  parent: RMCAttachmentS42xTelescopicMiniscope
+  id: RMCAttachmentMiniscopeHunting
+  name: 2x hunting mini-scope
+  description: This civilian-grade scope is a common sight on hunting rifles due to its cheap price and great optics. Fixed at a modest 2x zoom.
+  components:
+  - type: Sprite
+    state: huntingscope
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCAttachmentMiniscopeHunting
+  - type: AttachableToggleable
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: huntingscope
+    actionName: Toggle 2x Hunting Mini-Scope
+    actionDesc: This civilian-grade scope is a common sight on hunting rifles due to its cheap price and great optics. Fixed at a modest 2x zoom.
+
+- type: entity
+  parent: RMCAttachmentS42xTelescopicMiniscope
+  id: RMCAttachmentB8SmartScope
   name: B8 smart-scope
   description: An experimental B8 Smart-Scope. Based on the technologies used in the Smart Gun by AEGIS, this sight has integrated IFF systems. It can only attach to the M4SPR Battle Rifle. # TODO RMC14 and M44 Combat Revolver.
   components:
@@ -111,57 +341,78 @@
     state: iffbarrel
   - type: Tag
     tags:
-    - CMAttachmentRail
-    - CMAttachmentB8SmartScope
+    - RMCAttachmentRail
+    - RMCAttachmentB8SmartScope
   - type: AttachableToggleable
-    actionId: CMActionToggleScope
-    attachedOnly: true
+    doAfter: 0.8
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
-      state: iffbarrel
+      state: huntingscope
     actionName: Toggle B8 Smart-Scope
     actionDesc: Lets you see further and shoot through your fellow marines without harming them.
-  - type: AttachableVisuals
-    offset: 0.29, -0.045
-  - type: Scope
-    zoom: 1
-    offset: 12
-    requireWielding: true
-    attachment: true
   - type: AttachableIFF
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - damageAddMult: -0.2
+    - conditions:
+        wieldedOnly: true
+        inactiveOnly: true
+      accuracyAddMult: -0.05
 
 - type: entity
-  parent: CMRailAttachmentBase
-  id: CMAttachmentS5RedDotSight
-  name: S5 red-dot sight
-  description: An all-weather collimator sight, designated as the AN/PVQ-64 Dot Sight. Equipped with a sunshade to increase clarity in bright conditions and resist weathering. Compact and efficient, a marvel of military design, until you realize that this is actually just an off-the-shelf design that got a military designation slapped on.
+  parent: RMCAttachmentScopeBase
+  id: RMCM96SIntegratedScope
+  name: M96S integrated scope
+  description: This isn't supposed to come off the gun. How did you get it?
   components:
   - type: Sprite
-    state: reddot
-
-- type: entity
-  parent: CMRailAttachmentBase
-  id: CMAttachmentS6ReflexSight
-  name: S6 reflex sight
-  description: An AEGIS S6 reflex sight. A zero-magnification alternative to iron sights with a more open optic window when compared to the S5 red-dot. Helps to reduce scatter during automated fire.
-  components:
-  - type: Sprite
-    state: reflex
-
-- type: entity
-  parent: CMRailAttachmentBase
-  id: CMAttachments84xTelescopicScope
-  name: S8 4x telescopic scope
-  description: An AEGIS S8 telescopic eye piece. Fixed at 4x zoom. Press the 'use rail attachment' HUD icon or use the verb of the same name to zoom.
-  components:
-  - type: Sprite
-    state: sniperscope
+    state: m96s-scope
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCM96SIntegratedScope
+  - type: AttachableToggleable
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: m96s-scope
+    actionName: Toggle M96S Integrated Scope
+    actionDesc: Lets you see further.
+  - type: Scope
+    zoom: 1.25 # TODO RMC14 2x and 4x zoom
+    delay: 1
 
 - type: Tag
-  id: CMAttachmentRail
+  id: RMCAttachmentRail
 
 - type: Tag
-  id: CMAttachmentFlashlight
+  id: RMCAttachmentRailFlashlight
 
 - type: Tag
-  id: CMAttachmentB8SmartScope
+  id: RMCAttachmentB8SmartScope
+
+- type: Tag
+  id: RMCAttachmentMagneticHarness
+
+- type: Tag
+  id: RMCAttachmentS5RedDotSight
+
+- type: Tag
+  id: RMCAttachmentS6ReflexSight
+
+- type: Tag
+  id: RMCAttachmentS84xTelescopicScope
+
+- type: Tag
+  id: RMCAttachmentSlavicScope
+
+- type: Tag
+  id: RMCAttachmentS42xTelescopicMiniscope
+
+- type: Tag
+  id: RMCAttachmentS42xAdvancedTelescopicMiniscope
+
+- type: Tag
+  id: RMCAttachmentMiniscopeHunting
+
+- type: Tag
+  id: RMCM96SIntegratedScope

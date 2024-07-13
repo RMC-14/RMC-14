@@ -304,3 +304,35 @@
   - type: IconSmooth
     key: walls
     base: jungle_veg
+
+# Elevator
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallElevator
+  name: elevator wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: full
+  - type: Tag
+    tags:
+    - Wall
+  - type: IconSmooth
+    key: walls
+    base: wall
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallElevatorBroken
+  name: elevator wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_broke
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_broke
+  - type: Occluder
+    enabled: false

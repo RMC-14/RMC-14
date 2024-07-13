@@ -41,7 +41,8 @@ public sealed class CPRSystem : EntitySystem
 
         // TODO RMC14 use skills
         // TODO RMC14 something more generic than "marine"
-        SubscribeLocalEvent<MarineComponent, InteractHandEvent>(OnMarineInteractHand);
+        SubscribeLocalEvent<MarineComponent, InteractHandEvent>(OnMarineInteractHand,
+            before: [typeof(InteractionPopupSystem)]);
         SubscribeLocalEvent<MarineComponent, CPRDoAfterEvent>(OnMarineDoAfter);
 
         SubscribeLocalEvent<ReceivingCPRComponent, ReceiveCPRAttemptEvent>(OnReceivingCPRAttempt);

@@ -16,6 +16,9 @@
   - type: CMArmor
     armor: 20
     explosionArmor: 15
+  - type: WieldSlowdownCompensation
+    walk: 0.08
+    sprint: 0.136
   - type: ToggleableLightVisuals
     spriteLayer: light
   - type: PointLight
@@ -69,6 +72,8 @@
       - Sidearm
       - Knife
       - Flashlight
+      - MRE
+      - Grenade
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -89,9 +94,13 @@
       - CMMagazineSmg
       - CMMagazineSniper
       - CMMagazinePistol
+      - MRE
   - type: RMCNameItemOnVend
     item: Armor
   - type: RMCBulkyArmor
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
 
 - type: entity
   parent: CMArmorM3Medium
@@ -120,6 +129,9 @@
   - type: CMArmor
     armor: 25
     explosionArmor: 35
+  - type: WieldSlowdownCompensation
+    walk: 0.12
+    sprint: 0.198
   - type: ClothingSpeedModifier
     walkModifier: 0.68
     sprintModifier: 0.68
@@ -150,7 +162,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo.rsi
 
 - type: entity
-  parent: CMArmorM2MP
+  parent: CMArmorM3Medium
   id: RMCArmorM3G4
   name: M3-G4 grenadier armor
   description: A custom set of M3 armor packed to the brim with padding, plating, and every form of ballistic protection under the sun. Used exclusively by Marine Grenadiers.
@@ -357,7 +369,7 @@
       - Gun
       - BallisticAmmoProvider
       - Stunbaton
-      - # TODO RMC14 motion detector, walkman
+#      - # TODO RMC14 motion detector, walkman
       tags:
       - Handcuffs
       - Grenade

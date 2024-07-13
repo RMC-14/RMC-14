@@ -83,6 +83,7 @@ public sealed class CMGunSystem : EntitySystem
         if (direction == Vector2.Zero)
             return;
 
+        var distance = ent.Comp.MaxRange != null ? Math.Min(ent.Comp.MaxRange.Value, direction.Length()) : direction.Length();
         var time = _timing.CurTime;
         var normalized = direction.Normalized();
         foreach (var projectile in args.FiredProjectiles)
@@ -96,7 +97,7 @@ public sealed class CMGunSystem : EntitySystem
             _physics.SetBodyStatus(projectile, physics, BodyStatus.InAir);
 
             var comp = EnsureComp<ProjectileFixedDistanceComponent>(projectile);
-            comp.FlyEndTime = time + TimeSpan.FromSeconds(direction.Length() / gun.ProjectileSpeedModified);
+            comp.FlyEndTime = time + TimeSpan.FromSeconds(distance / gun.ProjectileSpeedModified);
         }
     }
 
