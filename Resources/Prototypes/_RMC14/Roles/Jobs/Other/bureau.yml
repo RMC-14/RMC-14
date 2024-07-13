@@ -9,7 +9,7 @@
     - type: Sprite
       layers:
       - state: red
-      - sprite: _RMC14/Objects/Clothing/Head/Hats/mp_cap.rsi
+      - sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
         state: icon
     - type: ConditionalSpawner
       prototypes:
@@ -21,7 +21,7 @@
   suffix: Role
   components:
     - type: Sprite
-      sprite: _RMC14/Objects/Clothing/Head/Hats/mp_cap.rsi
+      sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
       state: icon
     - type: RandomHumanoidSpawner
       settings: RMCBureauMarshal

@@ -1,0 +1,58 @@
+# We-Ya PMC
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerPMCStandard
+  name: We-Ya PMC Standard spawner
+  suffix: Spawner
+  components:
+    - type: Sprite
+      layers:
+      - state: red
+      - sprite: _RMC14/Objects/Clothing/Head/Hats/mp_cap.rsi
+        state: icon
+    - type: ConditionalSpawner
+      prototypes:
+      - RMCRandomHumanoidPMCStandard
+
+- type: entity
+  id: RMCRandomHumanoidPMCStandard
+  name: bureau marshal ghost role
+  suffix: Role
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Head/Hats/mp_cap.rsi
+      state: icon
+    - type: RandomHumanoidSpawner
+      settings: RMCPMCStandard
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCPMCStandard
+  components:
+    - type: GhostRole
+      name: rmc-ghost-role-information-pmc-standard-name
+      description: rmc-ghost-role-information-pmc-standard-description
+      rules: ghost-role-information-nonantagonist-rules
+      raffle:
+        settings: short
+    - type: Loadout
+      prototypes: [ RMCGearPMCStandard ]
+
+- type: startingGear
+  id: RMCGearPMCStandard
+  equipment:
+    head: RMCHeadCapBureau
+    # face cigar
+    # shoulder holster with revolver and two magazines
+    back: RMCSatchelSec
+    hands: CMHandsBlackMarine
+    jumpsuit: RMCJumpsuitMarshal
+    outerClothing: RMCCoatBureauMarshal # add telebaton binoculars/range
+    # /obj/item/weapon/gun/shotgun/pump/dual_tube/cmb/m3717
+    belt: CMBeltSecurityMarshalFilled
+    shoes: CMBootsBlackFilled
+    id: RMCIDCardMarshal
+    ears: CMHeadsetMPO
+    pocket1: CMPouchFirstAidERT
+    pocket2: CMPouchShotgun
