@@ -32,7 +32,7 @@ public sealed class RMCXenoDamageVisualsSystem : VisualizerSystem<RMCXenoDamageV
 
         if (AppearanceSystem.TryGetData(uid, RMCDamageVisuals.Fortified, out bool fortified) && fortified)
         {
-            sprite.LayerSetState(layer, $"{component.Prefix}_fortified_{state}");
+            sprite.LayerSetState(layer, $"{component.Prefix}_fortify_{state}");
             return;
         }
 
