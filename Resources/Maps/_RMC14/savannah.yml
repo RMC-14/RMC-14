@@ -2255,7 +2255,7 @@ entities:
       pos: -50.5,-10.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -9341.913
+      secondsUntilStateChange: -9438.083
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -2557,7 +2557,7 @@ entities:
       pos: -22.5,7.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -2847.6333
+      secondsUntilStateChange: -2943.803
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -12373,6 +12373,16 @@ entities:
     components:
     - type: Transform
       pos: 49.5967,5.5882654
+      parent: 1
+  - uid: 1140
+    components:
+    - type: Transform
+      pos: 31.671455,8.100276
+      parent: 1
+  - uid: 1141
+    components:
+    - type: Transform
+      pos: 31.505177,7.20831
       parent: 1
 - proto: CMTable
   entities:
