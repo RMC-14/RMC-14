@@ -21,9 +21,6 @@
   - type: Appearance
   - type: RadiationBlocker
     resistance: 8
-  - type: Damageable
-    damageContainer: StructuralInorganic
-    damageModifierSet: StrongMetallic
   - type: ContainerFill
     containers:
       board: [ DoorElectronics ]
