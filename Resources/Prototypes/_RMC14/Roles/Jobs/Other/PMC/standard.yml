@@ -46,10 +46,10 @@
     # back: RMCSatchelSec
     hands: CMHandsBlackMarine
     jumpsuit: RMCJumpsuitVeteranPMC
-    # outerClothing: RMCCoatBureauMarshal # add telebaton binoculars/range
+    # outerClothing: RMCCoatBureauMarshal
     # belt: CMBeltSecurityMarshalFilled
     shoes: CMBootsBlackFilled
     # id: RMCIDCardMarshal
     ears: RMCHeadsetDistressPMC
-    # pocket1: CMPouchFirstAidERT
-    # pocket2: CMPouchShotgun
+    pocket1: CMPouchFirstAidFill
+    pocket2: CMWeaponPistolM77
