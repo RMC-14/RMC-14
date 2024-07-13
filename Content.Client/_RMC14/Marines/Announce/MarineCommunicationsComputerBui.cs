@@ -17,20 +17,26 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
 
         _window = new MarineCommunicationsComputerWindow();
         _window.Send.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsComputerMsg( Rope.Collapse(_window.Text.TextRope)));
-
-        if (State is MarineCommunicationsComputerBuiState s)
-            _window.PlanetName.Text = s.Planet;
+        NameUpdates();
 
         _window.OpenCentered();
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
     {
+        NameUpdates();
+    }
+
+    private void NameUpdates()
+    {
         if (_window == null)
             return;
 
         if (State is MarineCommunicationsComputerBuiState s)
+        {
             _window.PlanetName.Text = s.Planet;
+            _window.OperationName.Text = s.Operation;
+        }
     }
 
     protected override void Dispose(bool disposing)
