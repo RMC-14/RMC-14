@@ -46,7 +46,7 @@
 
 - type: entity
   parent: CMBaseSpeedLoader44
-  id: RCMBaseSpeedLoaderM44Marksman
+  id: RCMSpeedLoader44Marksman
   name: "M44 speed loader (.44 Marksman)"
   description: A revolver speed loader filled with Marksman ammo.
   components:

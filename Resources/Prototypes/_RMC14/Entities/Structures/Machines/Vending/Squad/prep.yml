@@ -303,7 +303,7 @@
       #  amount: 1
       #- id: CMSpeedLoaderM44Heavy
       #  amount: 2
-      - id: RCMSpeedLoaderM44Marksman
+      - id: RCMSpeedLoader44Marksman
         amount: 2
     - name: Restricted Firearm Ammunition
       entries:
