@@ -3086,5 +3086,15 @@
   id: 371
   time: '2024-07-13T11:47:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3044
+- author: DrSmugleaf
+  changes:
+  - message: Added 2 more large surgical cases to Savannah with all of the surgery
+      tools.
+    type: Tweak
+  - message: Renamed the large surgical case to make it stand out more.
+    type: Tweak
+  id: 372
+  time: '2024-07-13T11:57:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3045
 Name: RMC14
 Order: -1
