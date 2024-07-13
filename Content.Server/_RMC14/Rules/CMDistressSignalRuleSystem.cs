@@ -744,7 +744,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         SelectedPlanetMapName = SelectedPlanetMapName switch
         {
             "lv624" => "LV624",
-            "solaris" => "Solaris",
+            "solaris" => "Solaris Ridge",
             _ => SelectedPlanetMapName,
         };
 
