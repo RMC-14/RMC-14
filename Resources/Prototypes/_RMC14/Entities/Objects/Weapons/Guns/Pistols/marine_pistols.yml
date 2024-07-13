@@ -309,7 +309,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m44.rsi
   - type: RevolverAmmoProvider
-    proto: CMCartridgeRevolver44Marksman
+    proto: CMCartridgeRevolver44
     capacity: 7
     chambers: [ True, True, True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null, null, null ]
