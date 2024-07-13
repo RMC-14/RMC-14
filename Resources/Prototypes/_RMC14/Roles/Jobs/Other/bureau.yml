@@ -42,15 +42,15 @@
 - type: startingGear
   id: RMCGearBureauMarshal
   equipment:
-    # head:
+    head: RMCHeadCapBureau
     # face cigar
     # shoulder holster with revolver and two magazines
     back: RMCSatchelSec
     hands: CMHandsBlackMarine
     jumpsuit: RMCJumpsuitMarshal
-    # outerClothing: add telebaton binoculars/range
+    outerClothing: RMCCoatBureauMarshal # add telebaton binoculars/range
     # /obj/item/weapon/gun/shotgun/pump/dual_tube/cmb/m3717
-    belt: CMBeltSecurityFilled # use marshal belt
+    belt: CMBeltSecurityMarshalFilled
     shoes: CMBootsBlackFilled
     id: RMCIDCardMarshal
     ears: CMHeadsetMPO
@@ -102,15 +102,15 @@
   id: RMCGearBureauDeputy
   equipment:
   equipment:
-    # head:
+    head: RMCHeadCapBureau
     # face cigar
     # shoulder holster with revolver and two magazines
     back: RMCSatchelSec
     hands: CMHandsBlackMarine
     jumpsuit: RMCJumpsuitMarshal
-    # outerClothing: add telebaton binoculars/range
+    outerClothing: RMCCoatBureauMarshal # add telebaton binoculars/range
     # /obj/item/weapon/gun/shotgun/pump/dual_tube/cmb/m3717
-    belt: CMBeltSecurityFilled # use marshal belt
+    belt: CMBeltSecurityMarshalFilled
     shoes: CMBootsBlackFilled
     id: RMCIDCardDeputy
     ears: CMHeadsetMPO
