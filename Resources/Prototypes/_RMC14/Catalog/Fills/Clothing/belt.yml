@@ -36,20 +36,6 @@
     startingItem: CMM11Knife
 
 - type: entity
-  parent: CMBeltSecurity
-  id: CMBeltSecurityFilled
-  suffix: Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCWeaponTaser
-    - id: CMFlash
-    - id: CMStunbaton
-    - id: CMHandcuffs
-#    - id: Pepperspray # TODO RMC14
-    - id: ForensicScanner # TODO RMC14 cm clue scanner
-
-- type: entity
   parent: CMBeltMedical
   id: CMBeltMedicalFilled
   suffix: Filled
