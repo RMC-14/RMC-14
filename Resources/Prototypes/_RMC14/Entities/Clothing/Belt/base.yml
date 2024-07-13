@@ -1,0 +1,43 @@
+# Base
+- type: entity
+  abstract: true
+  parent: ClothingBeltBase
+  id: CMBeltBase
+  name: belt
+  description: Can hold various things.
+  components:
+  - type: Appearance
+  - type: Sprite
+    layers:
+    - state: icon
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+  - type: Item
+    size: Large
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+
+- type: entity
+  abstract: true
+  parent: CMBeltBase
+  id: CMBeltBaseStorage
+  components:
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,13,1
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+
