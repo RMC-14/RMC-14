@@ -33,6 +33,9 @@
         collection: XenoResinBreak
   - type: XenoConstruct
   - type: RMCWallExplosionDeletable
+  - type: NpcFactionMember
+    factions:
+    - RMCXeno
 
 - type: entity
   id: CMCorrodible

@@ -15,3 +15,4 @@
         Piercing: 30
   - type: CMArmorPiercing
     amount: 35
+  - type: DeleteXenoResinOnHit

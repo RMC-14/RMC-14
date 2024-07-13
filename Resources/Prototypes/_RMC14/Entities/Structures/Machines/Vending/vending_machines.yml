@@ -224,7 +224,7 @@
     # Pepper spray 4
     CMStunbaton: 4
     RMCFlashlight: 4
-    CMBeltSecurity: 10
+    CMBeltSecurityMP: 10
     CMFlash: 5
     FoodBoxDonut: 12
     # Evidence box 6
