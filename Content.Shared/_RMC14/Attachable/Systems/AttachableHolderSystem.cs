@@ -55,7 +55,7 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, EntInsertedIntoContainerMessage>(OnAttached);
         SubscribeLocalEvent<AttachableHolderComponent, MapInitEvent>(OnHolderMapInit,
             after: new[] { typeof(ContainerFillSystem) });
-        SubscribeLocalEvent<AttachableHolderComponent, GetVerbsEvent<InteractionVerb>>(OnAttachableHolderGetVerbs);
+        SubscribeLocalEvent<AttachableHolderComponent, GetVerbsEvent<EquipmentVerb>>(OnAttachableHolderGetVerbs);
         SubscribeLocalEvent<AttachableHolderComponent, GotEquippedHandEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GotUnequippedHandEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GunRefreshModifiersEvent>(RelayEvent,
@@ -233,10 +233,35 @@ public sealed class AttachableHolderSystem : EntitySystem
         StartDetach((holderUid, holderComponent), args.Slot, args.Actor);
     }
 
-    private void OnAttachableHolderGetVerbs(Entity<AttachableHolderComponent> holder,
-        ref GetVerbsEvent<InteractionVerb> args)
+    private void OnAttachableHolderGetVerbs(Entity<AttachableHolderComponent> holder, ref GetVerbsEvent<EquipmentVerb> args)
     {
         EnsureSlots(holder);
+        var userUid = args.User;
+
+        foreach (var slotId in holder.Comp.Slots.Keys)
+        {
+            if (_container.TryGetContainer(holder.Owner, slotId, out var container))
+            {
+                foreach (var contained in container.ContainedEntities)
+                {
+                    if (!HasComp<AttachableToggleableComponent>(contained))
+                        continue;
+
+                    var verb = new EquipmentVerb()
+                    {
+                        Text = Loc.GetString("rmc-attachable-verb-toggle", ("attachable", contained)),
+                        IconEntity = GetNetEntity(contained),
+                        Act = () =>
+                        {
+                            var ev = new AttachableToggleStartedEvent(holder.Owner, userUid, slotId);
+                            RaiseLocalEvent(contained, ref ev);
+                        }
+                    };
+
+                    args.Verbs.Add(verb);
+                }
+            }
+        }
     }
 
     private void OnAttachableHolderAttachToSlotMessage(EntityUid holderUid,
@@ -570,7 +595,7 @@ public sealed class AttachableHolderSystem : EntitySystem
         if (!TryComp<AttachableToggleableComponent>(attachableUid, out var toggleableComponent))
             return;
 
-        var ev = new AttachableToggleStartedEvent((active.Value, holderComponent), userUid, slotId);
+        var ev = new AttachableToggleStartedEvent(active.Value, userUid, slotId);
         RaiseLocalEvent(attachableUid, ref ev);
     }
 

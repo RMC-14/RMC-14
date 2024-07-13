@@ -287,7 +287,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
 #region Toggling
     private void OnAttachableToggleStarted(Entity<AttachableToggleableComponent> attachable, ref AttachableToggleStartedEvent args)
     {
-        if (!attachable.Comp.Active && attachable.Comp.WieldedOnly && (!TryComp(args.Holder.Owner, out WieldableComponent? wieldableComponent) || !wieldableComponent.Wielded))
+        if (!attachable.Comp.Active && attachable.Comp.WieldedOnly && (!TryComp(args.Holder, out WieldableComponent? wieldableComponent) || !wieldableComponent.Wielded))
         {
             _popupSystem.PopupClient(
                 Loc.GetString("rmc-attachable-activation-fail-not-wielded", ("holder", args.Holder), ("attachable", attachable)),
@@ -296,10 +296,15 @@ public sealed class AttachableToggleableSystem : EntitySystem
             return;
         }
 
+        if (!TryComp(args.Holder, out TransformComponent? transformComponent) || !transformComponent.ParentUid.Valid)
+            return;
+
+        var extraDoAfter = transformComponent.ParentUid == args.User ? 0f : 0.5f;
+
         _doAfterSystem.TryStartDoAfter(new DoAfterArgs(
             EntityManager,
             args.User,
-            attachable.Comp.DoAfter,
+            Math.Max(attachable.Comp.DoAfter + extraDoAfter, 0),
             new AttachableToggleDoAfterEvent(args.SlotId),
             attachable,
             target: attachable.Owner,
@@ -487,7 +492,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
             return;
         }
 
-        var ev = new AttachableToggleStartedEvent((holderUid.Value, holderComponent),
+        var ev = new AttachableToggleStartedEvent(holderUid.Value,
             args.Performer,
             slotId);
         RaiseLocalEvent(attachable.Owner, ref ev);
