@@ -3002,5 +3002,16 @@
   id: 362
   time: '2024-07-13T07:53:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3036
+- author: DrSmugleaf
+  changes:
+  - message: The game no longer forces at least one xeno to spawn as Queen. In the
+      event that there is none round-start, one of the larvas can evolve into it.
+    type: Tweak
+  - message: Fixed the Grenadier Specialist's M83 grenade launcher shooting grenades
+      half as far as it should have been.
+    type: Fix
+  id: 363
+  time: '2024-07-13T09:37:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3037
 Name: RMC14
 Order: -1
