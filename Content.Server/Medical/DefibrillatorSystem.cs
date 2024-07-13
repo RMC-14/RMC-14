@@ -50,6 +50,7 @@ public sealed class DefibrillatorSystem : EntitySystem
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly CMDefibrillatorSystem _cmDefibrillator = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -113,10 +114,11 @@ public sealed class DefibrillatorSystem : EntitySystem
         if (!component.CanDefibCrit && _mobState.IsCritical(target, mobState))
             return false;
 
-        if (HasComp<XenoComponent>(target))
+        if (HasComp<CMDefibrillatorBlockedComponent>(target))
         {
+            // var text = _entityManager.GetComponent<CMDefibrillatorBlockedComponent>(target).Popup;
             if (user != null)
-                _popup.PopupEntity(Loc.GetString("defibrillator-xeno"), uid, user.Value);
+                _popup.PopupEntity(_entityManager.GetComponent<CMDefibrillatorBlockedComponent>(target).Popup, uid, user.Value);
             return false;
         }
 
