@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
@@ -10,6 +11,7 @@ namespace Content.Shared._RMC14.Xenonids.Acid;
 public sealed class XenoAcidSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -20,6 +22,7 @@ public sealed class XenoAcidSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<XenoAcidComponent, XenoCorrosiveAcidEvent>(OnXenoCorrosiveAcid);
+        SubscribeLocalEvent<XenoAcidComponent, DoAfterAttemptEvent<XenoCorrosiveAcidDoAfterEvent>>(OnXenoCorrosiveAcidDoAfterAttempt);
         SubscribeLocalEvent<XenoAcidComponent, XenoCorrosiveAcidDoAfterEvent>(OnXenoCorrosiveAcidDoAfter);
     }
 
@@ -33,9 +36,20 @@ public sealed class XenoAcidSystem : EntitySystem
 
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.AcidDelay, new XenoCorrosiveAcidDoAfterEvent(args), xeno, args.Target)
         {
-            BreakOnMove = true
+            BreakOnMove = true,
+            RequireCanInteract = false,
+            AttemptFrequency = AttemptFrequency.StartAndEnd
         };
         _doAfter.TryStartDoAfter(doAfter);
+    }
+
+    private void OnXenoCorrosiveAcidDoAfterAttempt(Entity<XenoAcidComponent> ent, ref DoAfterAttemptEvent<XenoCorrosiveAcidDoAfterEvent> args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (_mobState.IsIncapacitated(ent))
+            args.Cancel();
     }
 
     private void OnXenoCorrosiveAcidDoAfter(Entity<XenoAcidComponent> xeno, ref XenoCorrosiveAcidDoAfterEvent args)
