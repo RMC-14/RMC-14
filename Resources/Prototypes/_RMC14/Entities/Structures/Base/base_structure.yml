@@ -113,3 +113,5 @@
     resistance: 5
   - type: PlacementReplacement
     key: walls
+  - type: ExplosionResistance
+    damageCoefficient: 12.5 # Walls take 15x explosive damage, resin walls reduce that by 15%
