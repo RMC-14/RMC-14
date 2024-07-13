@@ -3013,5 +3013,12 @@
   id: 363
   time: '2024-07-13T09:37:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3037
+- author: Kaga
+  changes:
+  - message: Wield delay now applies to shooting after wielding.
+    type: Fix
+  id: 364
+  time: '2024-07-13T09:39:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2973
 Name: RMC14
 Order: -1
