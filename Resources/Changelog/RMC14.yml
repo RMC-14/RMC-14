@@ -3055,5 +3055,13 @@
   id: 368
   time: '2024-07-13T10:35:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3040
+- author: DrSmugleaf
+  changes:
+  - message: Savannah now has a second Staff Officer slot and a fourth Cargo Tech
+      slot, just like the Almayer.
+    type: Tweak
+  id: 369
+  time: '2024-07-13T10:43:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3041
 Name: RMC14
 Order: -1
