@@ -3020,5 +3020,15 @@
   id: 364
   time: '2024-07-13T09:39:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2973
+- author: Vermidia
+  changes:
+  - message: Larva dies if a host becomes unreviviable
+    type: Tweak
+  - message: Nesting speeds up incubation, and stasis bags are less good against late
+      stage infections
+    type: Add
+  id: 365
+  time: '2024-07-13T10:17:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2995
 Name: RMC14
 Order: -1
