@@ -21,6 +21,9 @@
       "name": "dead"
     },
     {
+      "name": "spitter_dissection"
+    },
+    {
       "name": "spitter_walk_3",
       "directions": 4
     },
