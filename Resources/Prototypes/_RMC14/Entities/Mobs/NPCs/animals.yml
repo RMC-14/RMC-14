@@ -50,7 +50,7 @@
     prob: 0
 
 - type: entity
-  parent: MobCorgiPuppy
+  parent: [MobCorgiPuppy, RMCSmallHost]
   id: CMMobWiggles
   name: Mister Wiggles
   description: It's a corgi puppy. MISTER WIGGLES!! HE IS THE GREATEST!
@@ -60,7 +60,7 @@
     location: Mister Wiggles
 
 - type: entity
-  parent: MobCatCalico
+  parent: [MobCatCalico, RMCSmallHost]
   id: CMMobJones
   name: Jones
   description: A tough, old stray whose origin no one seems to know.
