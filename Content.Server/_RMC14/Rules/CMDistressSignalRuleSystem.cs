@@ -791,6 +791,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         while (members.MoveNext(out var uid, out var member))
         {
+
             var squadName = "Squad" + member.Squad?.Name;
             _jobs.MindTryGetJob(_mind.GetMind(member.Owner), out _, out var prototype);
             if (prototype! == job)
@@ -799,36 +800,18 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             }
         }
 
-        // foreach (var member in members)
-        // {
-        //     // _entityManager.TryGetComponent(member.Owner, out JobComponent? memberJob);
-        //     _jobs.MindTryGetJob(_mind.GetMind(member.Owner), out _, out var prototype);
-        //     if (prototype! == job) {
-        //         // var squadName = "Squad" + ToPrettyString(member.Squad).ToString().split(" ")[0];
-
-        //         var squadName = member.Owner;
-        //         jobNumPerSquad[squadName]++;
-        //     }
-        // }
-
         return jobNumPerSquad;
     }
 
     private (EntProtoId Id, EntityUid Ent) NextSquad(ProtoId<JobPrototype> job, CMDistressSignalRuleComponent rule, string sP)
     {
-        // TODO RMC14 this biases people towards alpha as that's the first one, maybe not a problem once people can pick a preferred squad?
-        string squadPriority = "squad" + sP;
-        // if (!rule.NextSquad.TryGetValue(job, out var next) ||
-        //     next >= rule.SquadIds.Count)
-        // {
-        //     rule.NextSquad[job] = 0;
-        //     next = 0;
-        // }
 
-        var jobNumPerSquad = new Dictionary<string, int>();
-        jobNumPerSquad = GetSquadJobNumber(job, rule);
+        string squadPriority = "Squad" + sP;
+
+        // var jobNumPerSquad = new Dictionary<string, int>();
+        var jobNumPerSquad = GetSquadJobNumber(job, rule);
         var id = rule.SquadIds[0];
-        if (jobNumPerSquad[squadPriority] < rule.MaxJobsPerSquad[job])
+        if (jobNumPerSquad[squadPriority] < rule.MaxJobsPerSquad[job] && sP != "None")
         {
             id = squadPriority;
         }
