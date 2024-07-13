@@ -1,4 +1,5 @@
-﻿using Content.Server.Administration.Logs;
+﻿using Content.Server._RMC14.Rules;
+using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.Mind;
 using Content.Server.Popups;
@@ -25,6 +26,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     [Dependency] private readonly IAdminLogManager _adminLogs = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly JobSystem _job = default!;
     [Dependency] private readonly MindSystem _mind = default!;
@@ -39,6 +41,9 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<MarineCommunicationsComputerComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<MarineCommunicationsComputerComponent, BoundUIOpenedEvent>(OnBUIOpened);
+
         Subs.BuiEvents<MarineCommunicationsComputerComponent>(MarineCommunicationsComputerUI.Key,
             subs =>
             {
@@ -46,6 +51,16 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
             });
 
         Subs.CVar(_config, CCVars.ChatMaxMessageLength, limit => _characterLimit = limit, true);
+    }
+
+    private void OnMapInit(Entity<MarineCommunicationsComputerComponent> computer, ref MapInitEvent args)
+    {
+        UpdatePlanetMap(computer);
+    }
+
+    private void OnBUIOpened(Entity<MarineCommunicationsComputerComponent> computer, ref BoundUIOpenedEvent args)
+    {
+        UpdatePlanetMap(computer);
     }
 
     private void OnMarineCommunicationsComputerMsg(Entity<MarineCommunicationsComputerComponent> ent, ref MarineCommunicationsComputerMsg args)
@@ -68,6 +83,15 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
 
         ent.Comp.LastAnnouncement = time;
         Dirty(ent);
+    }
+
+    private void UpdatePlanetMap(Entity<MarineCommunicationsComputerComponent> computer)
+    {
+        if (_distressSignal.SelectedPlanetMapName is not { } planet)
+            return;
+
+        var state = new MarineCommunicationsComputerBuiState(planet);
+        _ui.SetUiState(computer.Owner, MarineCommunicationsComputerUI.Key, state);
     }
 
     public void Announce(EntityUid sender, string message, SoundSpecifier sound)
