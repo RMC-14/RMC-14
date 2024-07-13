@@ -3030,5 +3030,23 @@
   id: 365
   time: '2024-07-13T10:17:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2995
+- author: Kaga
+  changes:
+  - message: Added proper resin wall explosion damage modifiers. They should be much
+      easier to blow up, now.
+    type: Add
+  - message: Reduced HEDP and HEFA base explosion power to account for the resin-breaking
+      buff.
+    type: Tweak
+  id: 366
+  time: '2024-07-13T10:19:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2825
+- author: blueDev2
+  changes:
+  - message: Medical containers now have prefix icons
+    type: Add
+  id: 367
+  time: '2024-07-13T10:19:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2658
 Name: RMC14
 Order: -1
