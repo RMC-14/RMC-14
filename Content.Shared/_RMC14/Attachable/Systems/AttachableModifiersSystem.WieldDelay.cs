@@ -9,7 +9,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
     private void InitializeWieldDelay()
     {
         SubscribeLocalEvent<AttachableWieldDelayModsComponent, AttachableAlteredEvent>(OnAttachableAltered);
-        SubscribeLocalEvent<AttachableWieldDelayModsComponent, GetWieldDelayEvent>(OnGetWieldDelay);
+        SubscribeLocalEvent<AttachableWieldDelayModsComponent, AttachableRelayedEvent<GetWieldDelayEvent>>(OnGetWieldDelay);
     }
 
     private void OnAttachableAltered(Entity<AttachableWieldDelayModsComponent> attachable, ref AttachableAlteredEvent args)
@@ -34,11 +34,11 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
         }
     }
 
-    private void OnGetWieldDelay(Entity<AttachableWieldDelayModsComponent> attachable, ref GetWieldDelayEvent args)
+    private void OnGetWieldDelay(Entity<AttachableWieldDelayModsComponent> attachable, ref AttachableRelayedEvent<GetWieldDelayEvent> args)
     {
         foreach(var modSet in attachable.Comp.Modifiers)
         {
-            ApplyModifierSet(attachable, modSet, ref args);
+            ApplyModifierSet(attachable, modSet, ref args.Args);
         }
     }
 

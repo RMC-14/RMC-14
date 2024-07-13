@@ -10,16 +10,16 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
 {
     private void InitializeRanged()
     {
-        SubscribeLocalEvent<AttachableWeaponRangedModsComponent, GunRefreshModifiersEvent>(OnRangedModsRefreshModifiers);
+        SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GunRefreshModifiersEvent>>(OnRangedModsRefreshModifiers);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableAlteredEvent>(OnRangedModsAltered);
-        SubscribeLocalEvent<AttachableWeaponRangedModsComponent, GetGunDamageModifierEvent>(OnRangedModsGetGunDamage);
+        SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetGunDamageModifierEvent>>(OnRangedModsGetGunDamage);
     }
 
-    private void OnRangedModsRefreshModifiers(Entity<AttachableWeaponRangedModsComponent> attachable, ref GunRefreshModifiersEvent args)
+    private void OnRangedModsRefreshModifiers(Entity<AttachableWeaponRangedModsComponent> attachable, ref AttachableRelayedEvent<GunRefreshModifiersEvent> args)
     {
         foreach(var modSet in attachable.Comp.Modifiers)
         {
-            ApplyModifierSet(attachable, modSet, ref args);
+            ApplyModifierSet(attachable, modSet, ref args.Args);
         }
     }
 
@@ -39,11 +39,11 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
         }
     }
 
-    private void OnRangedModsGetGunDamage(Entity<AttachableWeaponRangedModsComponent> attachable, ref GetGunDamageModifierEvent args)
+    private void OnRangedModsGetGunDamage(Entity<AttachableWeaponRangedModsComponent> attachable, ref AttachableRelayedEvent<GetGunDamageModifierEvent> args)
     {
         foreach(var modSet in attachable.Comp.Modifiers)
         {
-            ApplyModifierSet(attachable, modSet, ref args);
+            ApplyModifierSet(attachable, modSet, ref args.Args);
         }
     }
 

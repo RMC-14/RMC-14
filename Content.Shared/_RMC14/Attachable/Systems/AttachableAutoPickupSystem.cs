@@ -19,31 +19,29 @@ public sealed class AttachableAutoPickupSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<AttachableAutoPickupComponent, ContainerGettingRemovedAttemptEvent>(OnGettingRemovedAttempt);
-        SubscribeLocalEvent<AttachableAutoPickupComponent, EntGotRemovedFromContainerMessage>(OnGotRemovedFromContainer);
+        SubscribeLocalEvent<AttachableAutoPickupComponent, AttachableRelayedEvent<ContainerGettingRemovedAttemptEvent>>(OnGettingRemovedAttempt);
+        SubscribeLocalEvent<AttachableAutoPickupComponent, AttachableRelayedEvent<EntGotRemovedFromContainerMessage>>(OnGotRemovedFromContainer);
     }
 
-    private void OnGettingRemovedAttempt(Entity<AttachableAutoPickupComponent> attachable, ref ContainerGettingRemovedAttemptEvent args)
+    private void OnGettingRemovedAttempt(Entity<AttachableAutoPickupComponent> attachable, ref AttachableRelayedEvent<ContainerGettingRemovedAttemptEvent> args)
     {
         if (attachable.Comp.Removing ||
-            attachable.Owner == args.EntityUid ||
-            !_attachableHolderSystem.TryGetHolder(attachable.Owner, out var holderUid) ||
-            !TryComp(holderUid, out TransformComponent? holderTransformComponent) ||
+            !TryComp(args.Holder, out TransformComponent? holderTransformComponent) ||
             !holderTransformComponent.ParentUid.Valid ||
-            !_handsSystem.TryGetHand(holderTransformComponent.ParentUid, args.Container.ID, out _) ||
-            !_inventorySystem.CanEquip(holderTransformComponent.ParentUid, holderUid.Value, attachable.Comp.SlotId, out _) ||
+            !_handsSystem.TryGetHand(holderTransformComponent.ParentUid, args.Args.Container.ID, out _) ||
+            !_inventorySystem.CanEquip(holderTransformComponent.ParentUid, args.Holder, attachable.Comp.SlotId, out _) ||
             !_inventorySystem.TryGetSlotContainer(holderTransformComponent.ParentUid, attachable.Comp.SlotId, out var containerSlot, out _) ||
             containerSlot.Count > 0)
         {
             return;
         }
 
-        args.Cancel();
+        args.Args.Cancel();
         attachable.Comp.Removing = true;
-        _inventorySystem.TryEquip(holderTransformComponent.ParentUid, holderTransformComponent.ParentUid, holderUid.Value, attachable.Comp.SlotId, silent: true);
+        _inventorySystem.TryEquip(holderTransformComponent.ParentUid, holderTransformComponent.ParentUid, args.Holder, attachable.Comp.SlotId, silent: true);
     }
 
-    private void OnGotRemovedFromContainer(Entity<AttachableAutoPickupComponent> attachable, ref EntGotRemovedFromContainerMessage args)
+    private void OnGotRemovedFromContainer(Entity<AttachableAutoPickupComponent> attachable, ref AttachableRelayedEvent<EntGotRemovedFromContainerMessage> args)
     {
         attachable.Comp.Removing = false;
     }

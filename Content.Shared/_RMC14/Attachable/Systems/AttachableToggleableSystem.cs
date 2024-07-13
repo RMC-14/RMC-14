@@ -37,15 +37,16 @@ public sealed class AttachableToggleableSystem : EntitySystem
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleDoAfterEvent>(OnAttachableToggleDoAfter);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleStartedEvent>(OnAttachableToggleStarted);
         SubscribeLocalEvent<AttachableToggleableComponent, AttemptShootEvent>(OnAttemptShoot);
+        SubscribeLocalEvent<AttachableToggleableComponent, AttachableRelayedEvent<GunShotEvent>>(OnGunShot);
         SubscribeLocalEvent<AttachableToggleableComponent, GunShotEvent>(OnGunShot);
         SubscribeLocalEvent<AttachableToggleableComponent, ToggleActionEvent>(OnToggleAction,
             before: new[] { typeof(SharedHandheldLightSystem) });
         //SubscribeLocalEvent<AttachableToggleableComponent, UniqueActionEvent>(OnUniqueAction);
         SubscribeLocalEvent<AttachableToggleableComponent, GrantAttachableActionsEvent>(OnGrantAttachableActions);
         SubscribeLocalEvent<AttachableToggleableComponent, RemoveAttachableActionsEvent>(OnRemoveAttachableActions);
-        SubscribeLocalEvent<AttachableToggleableComponent, HandDeselectedEvent>(OnHandDeselected);
-        SubscribeLocalEvent<AttachableToggleableComponent, GotEquippedHandEvent>(OnGotEquippedHand);
-        SubscribeLocalEvent<AttachableToggleableComponent, GotUnequippedHandEvent>(OnGotUnequippedHand);
+        SubscribeLocalEvent<AttachableToggleableComponent, AttachableRelayedEvent<HandDeselectedEvent>>(OnHandDeselected);
+        SubscribeLocalEvent<AttachableToggleableComponent, AttachableRelayedEvent<GotEquippedHandEvent>>(OnGotEquippedHand);
+        SubscribeLocalEvent<AttachableToggleableComponent, AttachableRelayedEvent<GotUnequippedHandEvent>>(OnGotUnequippedHand);
 
         SubscribeLocalEvent<AttachableMovementLockedComponent, MoveInputEvent>(OnAttachableMovementLockedMoveInput);
 
@@ -160,14 +161,14 @@ public sealed class AttachableToggleableSystem : EntitySystem
     }
 #endregion
 
-    private void OnGotEquippedHand(Entity<AttachableToggleableComponent> attachable, ref GotEquippedHandEvent args)
+    private void OnGotEquippedHand(Entity<AttachableToggleableComponent> attachable, ref AttachableRelayedEvent<GotEquippedHandEvent> args)
     {
-        if (!attachable.Comp.Attached || args.Equipped == attachable.Owner)
+        if (!attachable.Comp.Attached)
             return;
 
-        args.Handled = true;
+        args.Args.Handled = true;
 
-        GrantAttachableActions(attachable, args.User);
+        GrantAttachableActions(attachable, args.Args.User);
     }
 
 #region Lockouts and interrupts
@@ -181,6 +182,11 @@ public sealed class AttachableToggleableSystem : EntitySystem
     {
         if (attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
             args.Cancelled = true;
+    }
+
+    private void OnGunShot(Entity<AttachableToggleableComponent> attachable, ref AttachableRelayedEvent<GunShotEvent> args)
+    {
+        CheckUserBreakOnRotate(args.Args.User);
     }
 
     private void OnGunShot(Entity<AttachableToggleableComponent> attachable, ref GunShotEvent args)
@@ -204,32 +210,32 @@ public sealed class AttachableToggleableSystem : EntitySystem
             args.Handled = true;
     }*/
 
-    private void OnHandDeselected(Entity<AttachableToggleableComponent> attachable, ref HandDeselectedEvent args)
+    private void OnHandDeselected(Entity<AttachableToggleableComponent> attachable, ref AttachableRelayedEvent<HandDeselectedEvent> args)
     {
         if (!attachable.Comp.Attached)
             return;
         
-        args.Handled = true;
+        args.Args.Handled = true;
         
         if (!attachable.Comp.NeedHand || !attachable.Comp.Active)
             return;
 
-        Toggle(attachable, args.User, attachable.Comp.DoInterrupt);
+        Toggle(attachable, args.Args.User, attachable.Comp.DoInterrupt);
     }
 
-    private void OnGotUnequippedHand(Entity<AttachableToggleableComponent> attachable, ref GotUnequippedHandEvent args)
+    private void OnGotUnequippedHand(Entity<AttachableToggleableComponent> attachable, ref AttachableRelayedEvent<GotUnequippedHandEvent> args)
     {
-        if (!attachable.Comp.Attached || args.Unequipped == attachable.Owner)
+        if (!attachable.Comp.Attached)
             return;
         
-        args.Handled = true;
+        args.Args.Handled = true;
         
-        RemoveAttachableActions(attachable, args.User);
+        RemoveAttachableActions(attachable, args.Args.User);
         
         if (!attachable.Comp.NeedHand || !attachable.Comp.Active)
             return;
 
-        Toggle(attachable, args.User, attachable.Comp.DoInterrupt);
+        Toggle(attachable, args.Args.User, attachable.Comp.DoInterrupt);
     }
     
     private void OnAttachableMovementLockedMoveInput(Entity<AttachableMovementLockedComponent> user, ref MoveInputEvent args)

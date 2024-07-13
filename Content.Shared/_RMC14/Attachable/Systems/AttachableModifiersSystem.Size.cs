@@ -11,7 +11,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
     private void InitializeSize()
     {
         SubscribeLocalEvent<AttachableSizeModsComponent, AttachableAlteredEvent>(OnAttachableAltered);
-        SubscribeLocalEvent<AttachableSizeModsComponent, GetItemSizeModifiersEvent>(OnGetItemSizeModifiers);
+        SubscribeLocalEvent<AttachableSizeModsComponent, AttachableRelayedEvent<GetItemSizeModifiersEvent>>(OnGetItemSizeModifiers);
     }
 
     private void OnAttachableAltered(Entity<AttachableSizeModsComponent> attachable, ref AttachableAlteredEvent args)
@@ -33,14 +33,14 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
         }
     }
 
-    private void OnGetItemSizeModifiers(Entity<AttachableSizeModsComponent> attachable, ref GetItemSizeModifiersEvent args)
+    private void OnGetItemSizeModifiers(Entity<AttachableSizeModsComponent> attachable, ref AttachableRelayedEvent<GetItemSizeModifiersEvent> args)
     {
         foreach(var modSet in attachable.Comp.Modifiers)
         {
             if (!CanApplyModifiers(attachable.Owner, modSet.Conditions))
                 return;
 
-            args.Size += modSet.Size;
+            args.Args.Size += modSet.Size;
         }
     }
 }

@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Attachable.Components;
+using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared.Weapons.Melee.Events;
 
 namespace Content.Shared._RMC14.Attachable.Systems;
@@ -7,14 +8,14 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
 {
     private void InitializeMelee()
     {
-        SubscribeLocalEvent<AttachableWeaponMeleeModsComponent, MeleeHitEvent>(OnMeleeModsHitEvent);
+        SubscribeLocalEvent<AttachableWeaponMeleeModsComponent, AttachableRelayedEvent<MeleeHitEvent>>(OnMeleeModsHitEvent);
     }
 
-    private void OnMeleeModsHitEvent(Entity<AttachableWeaponMeleeModsComponent> attachable, ref MeleeHitEvent args)
+    private void OnMeleeModsHitEvent(Entity<AttachableWeaponMeleeModsComponent> attachable, ref AttachableRelayedEvent<MeleeHitEvent> args)
     {
         foreach(var modSet in attachable.Comp.Modifiers)
         {
-            ApplyModifierSet(attachable, modSet, ref args);
+            ApplyModifierSet(attachable, modSet, ref args.Args);
         }
     }
 

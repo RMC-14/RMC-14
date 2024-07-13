@@ -11,7 +11,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
     private void InitializeSpeed()
     {
         SubscribeLocalEvent<AttachableSpeedModsComponent, AttachableAlteredEvent>(OnAttachableAltered);
-        SubscribeLocalEvent<AttachableSpeedModsComponent, GetWieldableSpeedModifiersEvent>(OnGetSpeedModifiers);
+        SubscribeLocalEvent<AttachableSpeedModsComponent, AttachableRelayedEvent<GetWieldableSpeedModifiersEvent>>(OnGetSpeedModifiers);
     }
 
     private void OnAttachableAltered(Entity<AttachableSpeedModsComponent> attachable, ref AttachableAlteredEvent args)
@@ -30,11 +30,11 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
         }
     }
 
-    private void OnGetSpeedModifiers(Entity<AttachableSpeedModsComponent> attachable, ref GetWieldableSpeedModifiersEvent args)
+    private void OnGetSpeedModifiers(Entity<AttachableSpeedModsComponent> attachable, ref AttachableRelayedEvent<GetWieldableSpeedModifiersEvent> args)
     {
         foreach(var modSet in attachable.Comp.Modifiers)
         {
-            ApplyModifierSet(attachable, modSet, ref args);
+            ApplyModifierSet(attachable, modSet, ref args.Args);
         }
     }
 

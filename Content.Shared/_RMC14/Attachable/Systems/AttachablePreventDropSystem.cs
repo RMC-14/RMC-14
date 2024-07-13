@@ -8,15 +8,15 @@ public sealed class AttachablePreventDropSystem : EntitySystem
 {
     public override void Initialize()
     {
-        SubscribeLocalEvent<AttachablePreventDropToggleableComponent, ContainerGettingInsertedAttemptEvent>(OnAttempt);
-        SubscribeLocalEvent<AttachablePreventDropToggleableComponent, ContainerGettingRemovedAttemptEvent>(OnAttempt);
+        SubscribeLocalEvent<AttachablePreventDropToggleableComponent, AttachableRelayedEvent<ContainerGettingInsertedAttemptEvent>>(OnAttempt);
+        SubscribeLocalEvent<AttachablePreventDropToggleableComponent, AttachableRelayedEvent<ContainerGettingRemovedAttemptEvent>>(OnAttempt);
     }
 
-    private void OnAttempt<T>(Entity<AttachablePreventDropToggleableComponent> attachable, ref T args) where T : CancellableEntityEventArgs
+    private void OnAttempt<T>(Entity<AttachablePreventDropToggleableComponent> attachable, ref AttachableRelayedEvent<T> args) where T : CancellableEntityEventArgs
     {
         if (!TryComp(attachable.Owner, out AttachableToggleableComponent? toggleableComponent) || !toggleableComponent.Attached || !toggleableComponent.Active)
             return;
 
-        args.Cancel();
+        args.Args.Cancel();
     }
 }

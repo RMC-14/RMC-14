@@ -657,16 +657,20 @@ public sealed class AttachableHolderSystem : EntitySystem
 
     public void RelayEvent<T>(Entity<AttachableHolderComponent> holder, ref T args) where T : notnull
     {
+        var ev = new AttachableRelayedEvent<T>(args, holder.Owner);
+
         foreach (var slot in holder.Comp.Slots.Keys)
         {
             if (_container.TryGetContainer(holder, slot, out var container))
             {
                 foreach (var contained in container.ContainedEntities)
                 {
-                    RaiseLocalEvent(contained, ref args);
+                    RaiseLocalEvent(contained, ev);
                 }
             }
         }
+
+        args = ev.Args;
     }
 
     private void AlterAllAttachables(Entity<AttachableHolderComponent> holder, AttachableAlteredType alteration)
