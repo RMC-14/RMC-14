@@ -298,7 +298,7 @@
       - id: CMMagazineRifleM54CExt
         amount: 8
     - name: Special ammunition
-      entries: [ ]
+      entries:
       #- id: M56 DV9 Battery
       #  amount: 4
       #- id: M56 Smartgun Drum
@@ -423,8 +423,8 @@
         amount: 5
       - id: RMCAttachmentM54CStockCollapsible
         amount: 5
-      - id: RMCAttachmentM44MagnumSharpshooterStock
-        amount: 5
+#      - id: RMCAttachmentM44MagnumSharpshooterStock # ISSUES!!!
+#        amount: 5
 
 #UNIFORM VENDOR
 

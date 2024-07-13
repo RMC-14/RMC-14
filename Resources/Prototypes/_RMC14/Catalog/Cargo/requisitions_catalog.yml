@@ -73,8 +73,8 @@
 #      - cost: 6000
 #        crate: CMCrateAttachmentAllStocks
 #      - cost: 3000
-        crate: CMCrateAttachmentRevolverStock
-      - cost: 3000
+#        crate: CMCrateAttachmentRevolverStock
+#      - cost: 3000
 #        crate: CMCrateAttachmentRifleStock
 #      - cost: 3000
 #        crate: CMCrateAttachmentShotgunStock
