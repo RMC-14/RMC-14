@@ -41,3 +41,15 @@
     - CMCartridgeRevolver44
   - type: CartridgeAmmo
     proto: CMBulletRevolver44
+
+- type: entity
+  id: CMCartridgeRevolver44Marksman
+  name: cartridge (.44 Marksman)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridgeRevolver44
+  - type: CartridgeAmmo
+    proto: CMBulletRevolver44Marksman
