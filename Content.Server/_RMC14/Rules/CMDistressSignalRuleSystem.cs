@@ -97,11 +97,18 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private readonly HashSet<string> _operationSuffixes = new();
 
     private string _planetMaps = default!;
-    private float _marinesPerXeno;
+    private float _defaultMarinesPerXeno;
     private bool _autoBalance;
     private float _autoBalanceStep;
     private float _autoBalanceMin;
     private float _autoBalanceMax;
+
+    [ViewVariables]
+    private readonly Dictionary<string, float> _marinesPerXeno = new()
+    {
+        ["/Maps/_RMC14/lv624.yml"] = 4.25f,
+        ["/Maps/_RMC14/solaris.yml"] = 5.5f,
+    };
 
     private readonly List<MapId> _almayerMaps = [];
 
@@ -136,7 +143,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         SubscribeLocalEvent<AlmayerComponent, MapInitEvent>(OnAlmayerMapInit);
 
         Subs.CVar(_config, CMCVars.RMCPlanetMaps, v => _planetMaps = v, true);
-        Subs.CVar(_config, CMCVars.CMMarinesPerXeno, v => _marinesPerXeno = v, true);
+        Subs.CVar(_config, CMCVars.CMMarinesPerXeno, v => _defaultMarinesPerXeno = v, true);
         Subs.CVar(_config, CMCVars.RMCAutoBalance, v => _autoBalance = v, true);
         Subs.CVar(_config, CMCVars.RMCAutoBalanceStep, v => _autoBalanceStep = v, true);
         Subs.CVar(_config, CMCVars.RMCAutoBalanceMax, v => _autoBalanceMax = v, true);
@@ -232,7 +239,15 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 return xenoEnt;
             }
 
-            var totalXenos = Math.Max(1, ev.PlayerPool.Count / _marinesPerXeno);
+            var marinesPerXeno = _defaultMarinesPerXeno;
+            if (SelectedPlanetMap != null &&
+                !_marinesPerXeno.TryGetValue(SelectedPlanetMap, out marinesPerXeno))
+            {
+                _marinesPerXeno[SelectedPlanetMap] = _defaultMarinesPerXeno;
+                marinesPerXeno = _defaultMarinesPerXeno;
+            }
+
+            var totalXenos = Math.Max(1, ev.PlayerPool.Count / marinesPerXeno);
             var xenoCandidates = new List<NetUserId>[Enum.GetValues<JobPriority>().Length];
             for (var i = 0; i < xenoCandidates.Length; i++)
             {
@@ -481,13 +496,24 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (adjust == 0)
                 continue;
 
-            var value = _marinesPerXeno + adjust * _autoBalanceStep;
+            var value = _defaultMarinesPerXeno;
+            if (SelectedPlanetMap != null &&
+                _marinesPerXeno.TryGetValue(SelectedPlanetMap, out var mapValue))
+            {
+                value = mapValue;
+            }
+
+            value += adjust * _autoBalanceStep;
             if (value > _autoBalanceMax)
                 value = _autoBalanceMax;
             else if (value < _autoBalanceMin)
                 value = _autoBalanceMin;
 
-            _config.SetCVar(CMCVars.CMMarinesPerXeno, value);
+            if (SelectedPlanetMap == null)
+                _config.SetCVar(CMCVars.CMMarinesPerXeno, value);
+            else
+                _marinesPerXeno[SelectedPlanetMap] = value;
+
             break;
         }
     }
