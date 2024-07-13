@@ -1,7 +1,10 @@
-﻿- type: entity
+﻿- type: Tag
+  id: CMCartridgeSmartGun10x30mm
+
+- type: entity
   parent: CMBaseCartridgeRifle
-  id: CMCartridgeSentry10x50mm
-  name: cartridge (10x50mm)
+  id: CMCartridgeSmartGun10x30mm
+  name: cartridge (10x30mm)
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
@@ -9,12 +12,15 @@
     - state: base
       map: ["enum.AmmoVisualLayers.Base"]
   - type: CartridgeAmmo
-    proto: CMBulletSentry10x50mm
+    proto: CMBulletSmartGun10x30mm
+  - type: Tag
+    tags:
+    - CMCartridgeSmartGun10x30mm
 
 - type: entity
   parent: BaseBullet
-  id: CMBulletSentry10x50mm
-  name: bullet (10x28mm)
+  id: CMBulletSmartGun10x30mm
+  name: bullet (10x30mm)
   noSpawn: true
   components:
   - type: Sprite
@@ -22,10 +28,9 @@
     layers:
     - state: bullet
       shader: unshaded
-  - type: Projectile
+  - type: Projectile # damage numbers are arbitrary
     damage:
       types:
-        Piercing: 30
+        Piercing: 30 # todo should toggle to 20
   - type: CMArmorPiercing
-    amount: 35
-
+    amount: 0  # todo should toggle to 40

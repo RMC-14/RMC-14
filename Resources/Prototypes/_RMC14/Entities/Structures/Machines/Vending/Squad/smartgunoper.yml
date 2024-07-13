@@ -19,10 +19,6 @@
       entries: [ ]
     #- id: CMEssentialSmartGunOperatorSet
     #  points: 0
-    - name: Smart Gun Ammunition
-      entries: [ ]
-    #- id: CMM56SmartGunDrum
-    #  points: 15
     - name: Gun Attachments
       entries: [ ]
     #- id: CMLaserSight

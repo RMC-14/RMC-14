@@ -1,0 +1,58 @@
+﻿- type: entity
+  parent: CMBaseWeaponRifle
+  id: RMCSmartGun
+  name: ML66A Smart Gun
+  description: The actual firearm in the Smart Gun System. Essentially a heavy, mobile machinegun.
+  components:
+  - type: GunRequiresWield
+  - type: Corrodible
+    isCorrodible: false
+  - type: GunIFF
+  - type: WieldDelay
+    baseDelay: 0.4
+  - type: WieldableSpeedModifiers # TODO RMC14 I used arbitrary numbers check this later
+    baseWalk: 0.75
+    baseSprint: 0.75
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/smart_gun.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/smart_gun.rsi
+  - type: Gun # todo rmc14 the accuracy is slightly arbitrary numbers currently
+    minAngle: 10
+    maxAngle: 20
+    angleIncrease: 1
+    angleDecay: 1
+    fireRate: 7
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/lmg.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+  - type: GunWieldBonus # can only be fired wielded
+    minAngle: -0
+    maxAngle: -0
+    angleIncrease: -0
+    angleDecay: 0
+  - type: ItemSlots # TODO This should use it's own ammo ###########################
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: CMMagazineSmartGun
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineSmartGun
+  - type: GunDamageModifier
+    multiplier: 1
+
+

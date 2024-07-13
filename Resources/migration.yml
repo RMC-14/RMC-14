@@ -298,7 +298,6 @@ SpawnPointMaintTech: CMSpawnPointMaintTech
 SpawnPointOrdnanceTech: CMSpawnPointOrdnanceTech
 SpawnPointRifleman: CMSpawnPointRifleman
 SpawnPointSeniorEnlistedAdvisor: CMSpawnPointSeniorEnlistedAdvisor
-# SpawnPointSmartGunner: CMSpawnPointSmartGunner
 SpawnPointSquadLeader: CMSpawnPointSquadLeader
 SpawnPointStaffOfficer: CMSpawnPointStaffOfficer
 SpawnPointWeaponsSpecialist: CMSpawnPointWeaponsSpecialist

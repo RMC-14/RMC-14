@@ -267,7 +267,7 @@
       - CMMagazineRifle
       - CMMagazineSmg
       - CMMagazineSniper
-#      - # TODO RMC14 smart gun magazine
+      - CMMagazineSmartGun
 #      - # TODO RMC14 shotgun handfuls
       - Flare
   - type: FixedItemSizeStorage
