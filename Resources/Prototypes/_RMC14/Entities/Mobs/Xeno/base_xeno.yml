@@ -216,6 +216,7 @@
   - type: NpcFactionMember
     factions:
     - RMCXeno
+  - type: RMCNightVisionVisible
 
 - type: entity
   abstract: true

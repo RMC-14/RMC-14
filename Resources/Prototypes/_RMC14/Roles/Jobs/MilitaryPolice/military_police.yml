@@ -37,7 +37,7 @@
     id: CMIDCardMilitaryPolice
     outerClothing: CMArmorM2MP
     ears: CMHeadsetMPO
-    belt: CMBeltSecurityFilled
+    belt: CMBeltSecurityMPFilled
     #    pocket1: TODO RMC14 tape recorder
     pocket2: CMPouchGeneralLarge
 

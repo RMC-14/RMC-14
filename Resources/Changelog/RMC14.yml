@@ -2906,5 +2906,41 @@
   id: 351
   time: '2024-07-12T03:17:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3002
+- author: ShadowCommander
+  changes:
+  - message: Fixed nests sometimes getting placed in-between walls.
+    type: Fix
+  - message: Nest direction is now based on Xenonid position instead of host position.
+    type: Tweak
+  - message: Xenonids now attempt to place hosts on both wall surface directions when
+      positioned diagonally to the surface.
+    type: Tweak
+  id: 352
+  time: '2024-07-13T01:44:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3014
+- author: Sigil
+  changes:
+  - message: Attachments that modify the size of their holder now properly apply and
+      remove their modifiers.
+    type: Fix
+  id: 353
+  time: '2024-07-13T01:49:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2989
+- author: DrSmugleaf
+  changes:
+  - message: Added Rytil Pyain figurine.
+    type: Add
+  id: 354
+  time: '2024-07-13T01:50:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3006
+- author: DrSmugleaf
+  changes:
+  - message: Fixed warding pheromones giving far more crit health than intended. It
+      now gives (40 times the pheromone level) extra crit health, instead of multiplying
+      crit health by 4.4 when used by the Queen, or 2.5 when used by a hivelord.
+    type: Fix
+  id: 355
+  time: '2024-07-13T04:15:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3026
 Name: RMC14
 Order: -1

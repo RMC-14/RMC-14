@@ -43,7 +43,7 @@
     id: CMIDCardMilitaryWarden
     outerClothing: CMArmorM3Warden
     ears: CMHeadsetCMP
-    belt: CMBeltSecurityFilled
+    belt: CMBeltSecurityMPFilled
     #    pocket1: TODO RMC14 tape recorder
     pocket2: CMPouchGeneralLarge
 
