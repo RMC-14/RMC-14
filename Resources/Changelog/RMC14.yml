@@ -2970,5 +2970,13 @@
   id: 358
   time: '2024-07-13T06:26:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3033
+- author: DrSmugleaf
+  changes:
+  - message: The planet's name for the current round is now shown in the groundside
+      operations console and the command tablet.
+    type: Add
+  id: 359
+  time: '2024-07-13T07:04:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3035
 Name: RMC14
 Order: -1
