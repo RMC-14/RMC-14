@@ -709,15 +709,17 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private bool SpawnXenoMap(Entity<CMDistressSignalRuleComponent> rule)
     {
-        // TODO RMC14 different planet-side maps
         var mapId = _mapManager.CreateMap();
+
         SelectedPlanetMap = _random.Pick(_planetMaps.Split(","));
         SelectedPlanetMapName = SelectedPlanetMap.Replace("/Maps/_RMC14/", "").Replace(".yml", "");
-        if (!_mapLoader.TryLoad(mapId, SelectedPlanetMap, out var grids) ||
-            grids.Count == 0)
-        {
+        if (!_mapLoader.TryLoad(mapId, SelectedPlanetMap, out var grids))
             return false;
-        }
+
+        EnsureComp<RMCPlanetComponent>(_mapManager.GetMapEntityId(mapId));
+
+        if (grids.Count == 0)
+            return false;
 
         if (grids.Count > 1)
             Log.Error("Multiple planet-side grids found");
