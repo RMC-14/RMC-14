@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
@@ -41,6 +42,7 @@ public sealed class XenoNestSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly IMapManager _map = default!;
+    [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
 
     private EntityQuery<XenoWeedableComponent> _xenoWeedable;
 
@@ -77,6 +79,8 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoNestedComponent, DownAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, IsEquippingAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, IsUnequippingAttemptEvent>(OnNestedCancel);
+        SubscribeLocalEvent<XenoNestedComponent, GetInfectedIncubationMultiplierEvent>(OnInNestGetInfectedIncubationMultiplier);
+        SubscribeLocalEvent<XenoNestedComponent, ComponentStartup>(OnNestedAdd);
     }
 
     private void OnXenoGetUsedEntity(Entity<XenoComponent> ent, ref GetUsedEntityEvent args)
@@ -120,10 +124,17 @@ public sealed class XenoNestSystem : EntitySystem
         TryStartNesting(args.User, (args.Target.Value, surface), args.Used);
     }
 
-    private void OnNestedRemove(Entity<XenoNestedComponent> ent, ref ComponentRemove args)
+	private void OnNestedAdd(Entity<XenoNestedComponent> ent, ref ComponentStartup args)
+	{
+		_parasite.RefreshIncubationMultipliers(ent.Owner);
+	}
+
+	private void OnNestedRemove(Entity<XenoNestedComponent> ent, ref ComponentRemove args)
     {
         DetachNested(null, ent);
         _actionBlocker.UpdateCanMove(ent);
+
+        _parasite.RefreshIncubationMultipliers(ent.Owner);
 
         // TODO RMC14
         if (HasComp<KnockedDownComponent>(ent) || _mobState.IsIncapacitated(ent))
@@ -258,7 +269,13 @@ public sealed class XenoNestSystem : EntitySystem
         args.Cancel();
     }
 
-    private void TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)
+	private void OnInNestGetInfectedIncubationMultiplier(Entity<XenoNestedComponent> ent, ref GetInfectedIncubationMultiplierEvent args)
+    {
+        if (ent.Comp.Running)
+            args.Multiply(ent.Comp.IncubationMultiplier);
+	}
+
+	private void TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)
     {
         if (!HasComp<XenoComponent>(user) ||
             !CanNestPopup(user, victim, surface, out _))

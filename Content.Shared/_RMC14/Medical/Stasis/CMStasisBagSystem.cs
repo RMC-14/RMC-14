@@ -55,7 +55,14 @@ public sealed class CMStasisBagSystem : EntitySystem
     private void OnInStasisGetInfectedIncubationMultiplier(Entity<CMInStasisComponent> ent, ref GetInfectedIncubationMultiplierEvent args)
     {
         if (ent.Comp.Running)
-            args.Multiply(ent.Comp.IncubationMultiplier);
+        {
+            // less effective in late stages
+            var multiplier = ent.Comp.IncubationMultiplier;
+            if (args.stage >= ent.Comp.LessEffectiveStage)
+                multiplier += (multiplier / 3);
+
+            args.Multiply(multiplier);
+        }
     }
 
     private void OnInStasisBleedAttempt(Entity<CMInStasisComponent> ent, ref CMBleedAttemptEvent args)
