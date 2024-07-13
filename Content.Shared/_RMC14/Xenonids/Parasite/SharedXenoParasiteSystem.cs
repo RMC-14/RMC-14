@@ -360,10 +360,22 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp, false))
             return;
 
-        var ev = new GetInfectedIncubationMultiplierEvent(1);
+        var ev = new GetInfectedIncubationMultiplierEvent();
         RaiseLocalEvent(ent, ref ev);
 
-        ent.Comp.IncubationMultiplier = ev.Multiplier;
+        var multiplier = 1f;
+
+        foreach (var add in ev.Additions)
+        {
+            multiplier += add;
+        }
+
+        foreach (var multi in ev.Multipliers)
+        {
+            multiplier *= multi;
+        }
+
+        ent.Comp.IncubationMultiplier = multiplier;
     }
 
     public override void Update(float frameTime)
