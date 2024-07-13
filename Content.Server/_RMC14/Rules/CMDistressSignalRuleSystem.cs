@@ -781,7 +781,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private Dictionary<string, int> GetSquadJobNumber(ProtoId<JobPrototype> job, CMDistressSignalRuleComponent rule)
     {
         var jobNumPerSquad = new Dictionary<string, int>();
-        // var members = EntityQuery<SquadMemberComponent>();
+
         var members = EntityQueryEnumerator<SquadMemberComponent>();
 
         foreach (var squad in rule.SquadIds)
@@ -791,8 +791,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         while (members.MoveNext(out var uid, out var member))
         {
-
-            var squadName = "Squad" + member.Squad?.Name;
+            // _entityManager.TryGetComponent(member.Squad, out SquadTeamComponent? name);
+            var name = member.Squad == null ? null : Name(member.Squad.Value);
+            var squadName = "Squad" + name;
             _jobs.MindTryGetJob(_mind.GetMind(member.Owner), out _, out var prototype);
             if (prototype! == job)
             {
