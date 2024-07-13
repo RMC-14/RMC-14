@@ -14,6 +14,7 @@ using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Prototypes;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
@@ -113,6 +114,28 @@ public sealed class XenoEvolutionSystem : EntitySystem
             damageable.TotalDamage > FixedPoint2.Zero)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-cant-evolve-damaged"), xeno, xeno, PopupType.MediumCaution);
+            return;
+        }
+
+        var time = _timing.CurTime;
+        if (_prototypes.TryIndex(args.Choice, out var choice) &&
+            choice.HasComponent<XenoEvolutionGranterComponent>(_compFactory) &&
+            TryComp(xeno, out XenoComponent? xenoComp) &&
+            TryComp(xenoComp.Hive, out HiveComponent? hive) &&
+            hive.LastQueenDeath is { } lastQueenDeath &&
+            time < lastQueenDeath + hive.NewQueenCooldown)
+        {
+            var left = lastQueenDeath + hive.NewQueenCooldown - time;
+            var msg = Loc.GetString("rmc-xeno-evolution-cant-evolve-recent-queen-death-minutes",
+                ("minutes", left.Minutes),
+                ("seconds", left.Seconds));
+            if (left.Minutes == 1)
+            {
+                msg = Loc.GetString("rmc-xeno-evolution-cant-evolve-recent-queen-death-seconds",
+                    ("seconds", left.Seconds));
+            }
+
+            _popup.PopupEntity(msg, xeno, xeno, PopupType.MediumCaution);
             return;
         }
 
