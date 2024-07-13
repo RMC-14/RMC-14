@@ -739,6 +739,15 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         SelectedPlanetMap = _random.Pick(_planetMaps.Split(","));
         SelectedPlanetMapName = SelectedPlanetMap.Replace("/Maps/_RMC14/", "").Replace(".yml", "");
+
+        // TODO RMC14 save these somewhere and avert the shitcode
+        SelectedPlanetMapName = SelectedPlanetMapName switch
+        {
+            "lv624" => "LV624",
+            "solaris" => "Solaris",
+            _ => SelectedPlanetMapName,
+        };
+
         if (!_mapLoader.TryLoad(mapId, SelectedPlanetMap, out var grids))
             return false;
 
