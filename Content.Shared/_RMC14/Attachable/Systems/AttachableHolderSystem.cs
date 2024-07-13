@@ -3,6 +3,7 @@ using System.Numerics;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared._RMC14.Input;
+using Content.Shared._RMC14.Item;
 using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Wieldable.Events;
@@ -72,6 +73,7 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, ContainerGettingInsertedAttemptEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, ContainerGettingRemovedAttemptEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, EntGotRemovedFromContainerMessage>(RelayEvent);
+        SubscribeLocalEvent<AttachableHolderComponent, GetItemSizeModifiersEvent>(RelayEvent);
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.RMCActivateAttachableBarrel,
