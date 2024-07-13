@@ -1,5 +1,6 @@
 # ENGINEERING
 
+# Tools
 - type: entity
   parent: CMVendor
   id: CMVendorTool
@@ -15,7 +16,24 @@
   - type: AccessReader
     access: [["CMAccessEngineering"], ["CMAccessColonyEngineering"]]
 
+- type: vendingMachineInventory
+  id: CMVendorTool
+  startingInventory:
+    RMCFlashlight: 4
+    ClothingHeadHatHardhatBlue: 4
+    CMHandsInsulated: 4
+    ClothingBeltUtility: 4
+    ClothingEyesGlassesMeson: 4
+    ClothingHeadHatWelding: 4
+    trayScanner: 4
+    CMCrowbar: 8
+    CMWelder: 8
+    CMScrewdriver: 8
+    CMWirecutter: 8
+    CMWrench: 8
 
+
+# Circuits
 - type: entity
   parent: CMVendorTool
   id: CMVendorCircuits
@@ -27,7 +45,21 @@
   - type: VendingMachine
     pack: CMVendorCircuits
 
+- type: vendingMachineInventory
+  id: CMVendorCircuits
+  startingInventory:
+    FireAlarmElectronics: 5
+    CMAPCElectronics: 6
+#    CMAutolatheMachineCircuitboard: 2 # TODO RMC14
+    TelecomServerCircuitboard: 1
+    CrewMonitoringComputerCircuitboard: 2
+    IDComputerCircuitboard: 2
+    StationRecordsComputerCircuitboard: 2
+#    CMPortableGeneratorPacmanMachineCircuitBoard: 5
+    CMSMESMachineCircuitboard: 2
 
+
+# Electronics
 - type: entity
   parent: CMVendorTool
   id: CMVendorElectronics
@@ -39,7 +71,18 @@
   - type: VendingMachine
     pack: CMVendorElectronics
 
+- type: vendingMachineInventory
+  id: CMVendorElectronics
+  startingInventory:
+    CableApcStack: 6
+    CMMultitool: 6
+    DoorElectronics: 8
+    CMAPCElectronics: 8
+    RMCPowerCellHigh: 6
+    RMCPowerCell: 14
 
+
+# Components
 - type: entity
   parent: CMVendorTool
   id: CMVendorComponent
@@ -51,7 +94,20 @@
   - type: VendingMachine
     pack: CMVendorComponent
 
+- type: vendingMachineInventory
+  id: CMVendorComponent
+  startingInventory:
+    Igniter: 8
+    TimerTrigger: 4
+    ProximitySensor: 4
+    RemoteSignaller: 4
+    Bucket: 6
+    CMStockPartMatterBin: 8
+    CMStockPartManipulatorMicro: 8
+    CMStockPartCapacitor: 8
 
+
+# Science
 - type: entity
   parent: CMVendor
   id: CMVendorScience
@@ -67,7 +123,18 @@
   - type: AccessReader
     access: [["CMAccessResearch"]]
 
+- type: vendingMachineInventory
+  id: CMVendorScience
+  startingInventory:
+    ClothingHeadHatHoodBioScientist: 2
+    ClothingOuterBioScientist: 2
+    CMJumpsuitResearch: 2
+    Igniter: 8
+    ProximitySensor: 4
+    RemoteSignaller: 4
 
+
+# Robotics
 - type: entity
   parent: CMVendorScience
   id: CMVendorRobotics
@@ -77,3 +144,17 @@
   - type: VendingMachine
     pack: CMVendorRobotics
 
+- type: vendingMachineInventory
+  id: CMVendorRobotics
+  startingInventory:
+    CableApcStack: 4
+    SawElectric: 2
+    CMCrowbar: 2
+    CMScalpel: 2
+    CMScrewdriver: 2
+    CMFlash: 4
+    RMCPowerCellHigh: 4
+    ProximitySensor: 4
+    RemoteSignaller: 4
+    CMHealthAnalyzer: 2
+    NitrousOxideTankFilled: 2

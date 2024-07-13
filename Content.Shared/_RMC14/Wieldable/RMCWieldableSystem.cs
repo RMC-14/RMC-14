@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Wieldable.Components;
 using Content.Shared._RMC14.Wieldable.Events;
 using Content.Shared.Hands;
@@ -8,8 +9,10 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Timing;
+using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
+using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Wieldable;
@@ -21,6 +24,8 @@ public sealed class RMCWieldableSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifierSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly UseDelaySystem _useDelaySystem = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     private const string wieldUseDelayID = "RMCWieldDelay";
 
@@ -39,6 +44,9 @@ public sealed class RMCWieldableSystem : EntitySystem
         SubscribeLocalEvent<WieldDelayComponent, GotEquippedHandEvent>(OnGotEquippedHand);
         SubscribeLocalEvent<WieldDelayComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<WieldDelayComponent, UseInHandEvent>(OnUseInHand);
+        SubscribeLocalEvent<WieldDelayComponent, ShotAttemptedEvent>(OnShotAttempt);
+        SubscribeLocalEvent<WieldDelayComponent, ItemWieldedEvent>(OnItemWieldedWithDelay);
+
 
         SubscribeLocalEvent<InventoryComponent, RefreshWieldSlowdownCompensationEvent>(_inventorySystem.RelayEvent);
     }
@@ -192,5 +200,38 @@ public sealed class RMCWieldableSystem : EntitySystem
 
         wieldable.Comp.ModifiedDelay = ev.Delay >= TimeSpan.Zero ? ev.Delay : TimeSpan.Zero;
     }
+
+    private void OnItemWieldedWithDelay(Entity<WieldDelayComponent> wieldable, ref ItemWieldedEvent args)
+    {
+        // TODO RMC14 +0.5s if Dazed
+        TimeSpan skillModifiedDelay = wieldable.Comp.ModifiedDelay;
+
+        if (_container.TryGetContainingContainer((wieldable, null), out var container) &&
+            TryComp(container.Owner, out SkillsComponent? skills))
+        {
+            skillModifiedDelay -= (TimeSpan.FromSeconds(0.2) * skills.Skills.Firearms);
+        }
+
+        _useDelaySystem.SetLength(wieldable.Owner, skillModifiedDelay, wieldUseDelayID);
+        _useDelaySystem.TryResetDelay(wieldable.Owner, id: wieldUseDelayID);
+    }
+
+    public void OnShotAttempt(Entity<WieldDelayComponent> wieldable, ref ShotAttemptedEvent args)
+    {
+        if (!TryComp(wieldable.Owner, out UseDelayComponent? useDelayComponent) ||
+            !_useDelaySystem.IsDelayed((wieldable.Owner, useDelayComponent), wieldUseDelayID) ||
+            !_useDelaySystem.TryGetDelayInfo((wieldable.Owner, useDelayComponent), out var info, wieldUseDelayID))
+        {
+            return;
+        }
+
+        args.Cancel();
+
+        var time = $"{(info.EndTime - _timing.CurTime).TotalSeconds:F1}";
+
+        //_popupSystem.PopupClient(Loc.GetString("rmc-shoot-use-delay", ("seconds", time), ("wieldable", wieldable.Owner)), args.User, args.User);
+        // Uncomment when there's a cooldown on popups from a source.
+    }
+
 #endregion
 }
