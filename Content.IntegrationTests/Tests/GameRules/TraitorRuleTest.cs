@@ -22,6 +22,7 @@ public sealed class TraitorRuleTest
     private const string TraitorAntagRoleName = "Traitor";
 
     [Test]
+    [Ignore("RMC14 doesn't use traitors")]
     public async Task TestTraitorObjectives()
     {
         await using var pair = await PoolManager.GetServerClient(new PoolSettings()
