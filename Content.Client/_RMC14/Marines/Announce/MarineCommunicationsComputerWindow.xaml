@@ -7,6 +7,10 @@
             <Label Text="Planet: " />
             <Label Name="PlanetName" Access="Public" />
         </BoxContainer>
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="Operation: " />
+            <Label Name="OperationName" Access="Public" />
+        </BoxContainer>
         <TextEdit Name="Text" Access="Public" HorizontalExpand="True" VerticalExpand="True" />
         <Button Name="Send" Access="Public" Text="Send" HorizontalExpand="True" />
     </BoxContainer>

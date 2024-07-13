@@ -15,7 +15,8 @@ public sealed class MarineCommunicationsComputerMsg(string text) : BoundUserInte
 }
 
 [Serializable, NetSerializable]
-public sealed class MarineCommunicationsComputerBuiState(string planet) : BoundUserInterfaceState
+public sealed class MarineCommunicationsComputerBuiState(string planet, string operation) : BoundUserInterfaceState
 {
     public readonly string Planet = planet;
+    public readonly string Operation = operation;
 }

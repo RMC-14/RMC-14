@@ -87,10 +87,10 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
 
     private void UpdatePlanetMap(Entity<MarineCommunicationsComputerComponent> computer)
     {
-        if (_distressSignal.SelectedPlanetMapName is not { } planet)
-            return;
+        var planet = _distressSignal.SelectedPlanetMapName ?? string.Empty;
+        var operation = _distressSignal.OperationName ?? string.Empty;
 
-        var state = new MarineCommunicationsComputerBuiState(planet);
+        var state = new MarineCommunicationsComputerBuiState(planet, operation);
         _ui.SetUiState(computer.Owner, MarineCommunicationsComputerUI.Key, state);
     }
 
