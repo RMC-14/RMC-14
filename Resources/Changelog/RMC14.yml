@@ -3048,5 +3048,12 @@
   id: 367
   time: '2024-07-13T10:19:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2658
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the defender's fortified wounded state being a massive error sign.
+    type: Fix
+  id: 368
+  time: '2024-07-13T10:35:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3040
 Name: RMC14
 Order: -1
