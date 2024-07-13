@@ -131,7 +131,8 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         }
 
         // TODO RMC14 crit grace period
-        var wardingThreshold = threshold.Value * (1 + 20 * warding.Comp.Multiplier);
+        // TODO RMC14 20
+        var wardingThreshold = threshold.Value * (1 + 40 * warding.Comp.Multiplier);
         if (damageable.TotalDamage >= wardingThreshold)
             return;
 
