@@ -3063,5 +3063,28 @@
   id: 369
   time: '2024-07-13T10:43:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3041
+- author: DrSmugleaf
+  changes:
+  - message: Fixed there being no cooldown for replacing a dead Queen. There is now
+      a 5 minute cooldown.
+    type: Fix
+  - message: Fixed hivemind chat not being disabled for xenonids when there is no
+      live Queen. Local chat will still work.
+    type: Fix
+  - message: Xenonids now receive an announcement in chat when a new Queen evolves.
+    type: Tweak
+  - message: Xenonid parasites now only have a 25% chance of becoming a ghost role.
+    type: Tweak
+  id: 370
+  time: '2024-07-13T11:46:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3043
+- author: DrSmugleaf
+  changes:
+  - message: The current operation name is now displayed in the groundside operations
+      console and the command tablet.
+    type: Add
+  id: 371
+  time: '2024-07-13T11:47:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3044
 Name: RMC14
 Order: -1
