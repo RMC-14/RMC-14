@@ -2954,5 +2954,21 @@
   id: 356
   time: '2024-07-13T06:16:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3032
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenonids not being able to corrode folding barricades for realsies
+      this time.
+    type: Fix
+  id: 357
+  time: '2024-07-13T06:26:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3034
+- author: DrSmugleaf
+  changes:
+  - message: Marines-per-xeno ratio autobalancing after each round now has different
+      values for each planet map.
+    type: Tweak
+  id: 358
+  time: '2024-07-13T06:26:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3033
 Name: RMC14
 Order: -1
