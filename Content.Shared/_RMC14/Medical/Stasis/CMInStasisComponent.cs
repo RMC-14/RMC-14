@@ -8,4 +8,7 @@ public sealed partial class CMInStasisComponent : Component
 {
     [DataField, AutoNetworkedField]
     public float IncubationMultiplier = 0.333f;
+
+    [DataField, AutoNetworkedField]
+    public int LessEffectiveStage = 4;
 }

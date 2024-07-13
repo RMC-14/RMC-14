@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
@@ -14,6 +15,7 @@ using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Prototypes;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
@@ -41,6 +43,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
 
     private readonly HashSet<EntityUid> _climbable = new();
     private readonly HashSet<EntityUid> _doors = new();
@@ -61,6 +64,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         SubscribeLocalEvent<XenoNewlyEvolvedComponent, PreventCollideEvent>(OnNewlyEvolvedPreventCollide);
 
+        SubscribeLocalEvent<XenoEvolutionGranterComponent, NewXenoEvolvedEvent>(OnGranterEvolved);
+
         Subs.BuiEvents<XenoEvolutionComponent>(XenoEvolutionUIKey.Key,
             subs =>
             {
@@ -72,6 +77,11 @@ public sealed class XenoEvolutionSystem : EntitySystem
             {
                 subs.Event<XenoDevolveBuiMsg>(OnXenoDevolveBui);
             });
+    }
+
+    private void OnGranterEvolved(Entity<XenoEvolutionGranterComponent> ent, ref NewXenoEvolvedEvent args)
+    {
+        _xenoAnnounce.AnnounceSameHive(ent.Owner, Loc.GetString("rmc-new-queen"));
     }
 
     private void OnXenoOpenDevolveAction(Entity<XenoDevolveComponent> xeno, ref XenoOpenDevolveActionEvent args)
@@ -113,6 +123,28 @@ public sealed class XenoEvolutionSystem : EntitySystem
             damageable.TotalDamage > FixedPoint2.Zero)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-cant-evolve-damaged"), xeno, xeno, PopupType.MediumCaution);
+            return;
+        }
+
+        var time = _timing.CurTime;
+        if (_prototypes.TryIndex(args.Choice, out var choice) &&
+            choice.HasComponent<XenoEvolutionGranterComponent>(_compFactory) &&
+            TryComp(xeno, out XenoComponent? xenoComp) &&
+            TryComp(xenoComp.Hive, out HiveComponent? hive) &&
+            hive.LastQueenDeath is { } lastQueenDeath &&
+            time < lastQueenDeath + hive.NewQueenCooldown)
+        {
+            var left = lastQueenDeath + hive.NewQueenCooldown - time;
+            var msg = Loc.GetString("rmc-xeno-evolution-cant-evolve-recent-queen-death-minutes",
+                ("minutes", left.Minutes),
+                ("seconds", left.Seconds));
+            if (left.Minutes == 1)
+            {
+                msg = Loc.GetString("rmc-xeno-evolution-cant-evolve-recent-queen-death-seconds",
+                    ("seconds", left.Seconds));
+            }
+
+            _popup.PopupEntity(msg, xeno, xeno, PopupType.MediumCaution);
             return;
         }
 

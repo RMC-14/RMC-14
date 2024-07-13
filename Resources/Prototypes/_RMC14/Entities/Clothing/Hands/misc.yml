@@ -1,0 +1,33 @@
+- type: entity
+  parent: CMHandsInsulated
+  id: CMHandsCaptain
+  name: captain's gloves
+  description: A pair of captain's gloves.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/captain.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/captain.rsi
+  - type: Fiber
+    fiberMaterial: fibers-durathread
+    fiberColor: fibers-brown
+
+- type: entity
+  parent: CMHandsBlackMarine
+  id: CMHandsLatex
+  name: latex gloves
+  description: A pair of latex gloves.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/latex.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/latex.rsi
+  - type: Fiber
+    fiberMaterial: fibers-latex
+    fiberColor: fibers-white
+  - type: Tag
+    tags:
+    - RMCGlovesLatex
+
+- type: Tag
+  id: RMCGlovesLatex

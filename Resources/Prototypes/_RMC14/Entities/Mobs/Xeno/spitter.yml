@@ -70,3 +70,5 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
+  - type: RMCXenoDamageVisuals
+    prefix: spitter

@@ -1,0 +1,55 @@
+- type: entity
+  parent: CMHandsBlackMarine
+  id: CMHandsInsulated
+  name: insulated gloves
+  description: These gloves will protect the wearer from electric shocks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/insulated.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/insulated.rsi
+  - type: Insulated
+  - type: GloveHeatResistance
+    heatResistance: 1400
+  - type: Fiber
+    fiberMaterial: fibers-insulative
+    fiberColor: fibers-brown
+
+- type: entity
+  parent: CMHandsBlackMarine
+  id: CMHandsBrown
+  name: brown gloves
+  description: A pair of brown gloves.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/brown.rsi
+  - type: Fiber
+    fiberColor: fibers-brown
+
+- type: entity
+  parent: CMHandsBlackMarine
+  id: CMHandsLightBrown
+  name: light brown gloves
+  description: A pair of light brown gloves.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/light_brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/light_brown.rsi
+  - type: Fiber
+    fiberColor: fibers-brown
+
+- type: entity
+  parent: CMHandsBlackMarine
+  id: CMHandsWhite
+  name: white gloves
+  description: A pair of white gloves.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/white.rsi
+  - type: Fiber
+    fiberColor: fibers-white
