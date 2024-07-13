@@ -2942,5 +2942,17 @@
   id: 355
   time: '2024-07-13T04:15:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3026
+- author: DrSmugleaf
+  changes:
+  - message: The turrets guarding landing zones at round-start will now automatically
+      target nearby resin structures and destroy them in a single shot.
+    type: Tweak
+  - message: The turrets guarding landing zones at round-start will now last 20 minutes
+      after a dropship lands, instead of 20 minutes from round start, keeping the
+      landing zones safer for longer.
+    type: Tweak
+  id: 356
+  time: '2024-07-13T06:16:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3032
 Name: RMC14
 Order: -1
