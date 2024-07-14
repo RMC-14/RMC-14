@@ -9,7 +9,6 @@ using Content.Server.PowerCell;
 using Content.Server.Traits.Assorted;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Medical.Defibrillator;
-using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
