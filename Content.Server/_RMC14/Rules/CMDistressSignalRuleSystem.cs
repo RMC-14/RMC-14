@@ -791,10 +791,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         while (members.MoveNext(out var uid, out var member))
         {
-            // _entityManager.TryGetComponent(member.Squad, out SquadTeamComponent? name);
             var name = member.Squad == null ? null : Name(member.Squad.Value);
             var squadName = "Squad" + name;
-            _jobs.MindTryGetJob(_mind.GetMind(member.Owner), out _, out var prototype);
+            _jobs.MindTryGetJob(_mind.GetMind(uid), out _, out var prototype);
             if (prototype! == job)
             {
                 jobNumPerSquad[squadName]++;
