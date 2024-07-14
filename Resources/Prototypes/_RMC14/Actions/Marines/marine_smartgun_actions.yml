@@ -1,0 +1,38 @@
+﻿- type: entity
+  abstract: true
+  parent: ActionMarineBase
+  id: ActionMarineToggleable
+  components:
+  - type: InstantAction
+    backgroundOn:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: template_active_big
+    itemIconStyle: NoItem
+
+- type: entity
+  parent: ActionMarineBase
+  id: RMCActionToggleAmmo
+  name: Toggle Ammo Type
+  description: Switch the ammo type fired by this gun.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
+      state: ammo_swap_normal
+    event: !type:GunToggleAmmoActionEvent
+    useDelay: 0.25
+    itemIconStyle: NoItem
+
+- type: entity
+  parent: ActionMarineBase
+  id: RMCActionToggleRecoil
+  name: Toggle Recoil Compensation
+  description: Removes all recoil when firing this gun.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
+      state: recoil_compensation
+    event: !type:GunToggleAmmoActionEvent
+    useDelay: 0.25
+    itemIconStyle: NoItem

@@ -28,9 +28,9 @@
     layers:
     - state: bullet
       shader: unshaded
-  - type: Projectile # damage numbers are arbitrary
+  - type: Projectile
     damage:
       types:
-        Piercing: 30 # todo should toggle to 20
+        Piercing: 30
   - type: CMArmorPiercing
-    amount: 0  # todo should toggle to 40
+    amount: 0

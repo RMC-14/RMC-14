@@ -345,6 +345,9 @@
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
+  - type: RMCMagneticArmor
+  - type: ClothingBlockBackpack
+  - type: SmartgunArmor
 
 # M2
 - type: entity
