@@ -18,6 +18,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.Projectiles;
 using Content.Shared.Prototypes;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -91,6 +92,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         SubscribeLocalEvent<XenoConstructionSupportComponent, ComponentRemove>(OnCheckAdjacentCollapse);
         SubscribeLocalEvent<XenoConstructionSupportComponent, EntityTerminatingEvent>(OnCheckAdjacentCollapse);
+
+        SubscribeLocalEvent<DeleteXenoResinOnHitComponent, ProjectileHitEvent>(OnDeleteXenoResinHit);
 
         Subs.BuiEvents<XenoConstructionComponent>(XenoChooseStructureUI.Key, subs =>
         {
@@ -484,6 +487,12 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                     QueueDel(uid);
             }
         }
+    }
+
+    private void OnDeleteXenoResinHit(Entity<DeleteXenoResinOnHitComponent> ent, ref ProjectileHitEvent args)
+    {
+        if (_net.IsServer && _xenoConstructQuery.HasComp(args.Target))
+            QueueDel(args.Target);
     }
 
     public FixedPoint2? GetStructurePlasmaCost(EntProtoId prototype)

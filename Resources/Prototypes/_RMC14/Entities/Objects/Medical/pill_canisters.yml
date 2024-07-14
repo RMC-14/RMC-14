@@ -48,6 +48,10 @@
     - PillCanister
   - type: StorageSkillRequired
     medical: 2
+  - type: IconLabel
+    textSize: 4
+    textColor: White
+    storedOffset: -25, -5
 
 - type: entity
   parent: CMPillCanister
@@ -66,6 +70,8 @@
     contents:
     - id: CMPillBicaridine
       amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-bicaridine-container-label-text
 
 - type: entity
   parent: CMPillCanister
@@ -84,6 +90,8 @@
     contents:
     - id: CMPillDexalin
       amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-dexalin-container-label-text
 
 - type: entity
   parent: CMPillCanister
@@ -102,6 +110,8 @@
     contents:
     - id: CMPillDylovene
       amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-dylovene-container-label-text
 
 - type: entity
   parent: CMPillCanister
@@ -120,6 +130,8 @@
     contents:
     - id: CMPillInaprovaline
       amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-inaprovaline-container-label-text
 
 - type: entity
   parent: CMPillCanister
@@ -138,6 +150,8 @@
     contents:
     - id: CMPillKelotane
       amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-kelotane-container-label-text
 
 - type: entity
   parent: CMPillCanister
@@ -156,5 +170,7 @@
     contents:
     - id: CMPillTricordrazine
       amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-tricordazine-container-label-text
 
 # TODO RMC14 peridaxon, tramadol

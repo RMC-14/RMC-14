@@ -73,3 +73,5 @@
       types:
         Blunt: 2.5
   - type: XenoHiveCoreRole
+#  - type: RMCXenoDamageVisuals # TODO RMC14
+#    prefix: drone

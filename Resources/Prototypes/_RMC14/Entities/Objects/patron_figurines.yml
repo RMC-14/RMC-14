@@ -7,6 +7,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/patron_figurines.rsi
     scale: 0.5, 0.5
+  - type: Figurine
 
 - type: entity
   parent: MarkerBase
@@ -229,3 +230,14 @@
     state: satoru_suzuki
   - type: PatronFigurine
     id: c27c6991-1658-47b7-8e07-78806dda4f30
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRytilPyain
+  name: Rytil Pyain figurine
+  description: "Rytil may lack a lot of empathy, but she does her best to maintain the law and not get pissed off by the idiots breaking it."
+  components:
+  - type: Sprite
+    state: rytil_pyain
+  - type: PatronFigurine
+    id: 3bbf7926-d0c6-4d41-853a-17415705f622

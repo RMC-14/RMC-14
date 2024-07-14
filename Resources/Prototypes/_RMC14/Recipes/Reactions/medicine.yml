@@ -47,7 +47,7 @@
   reactants:
     CMDexalin:
       amount: 1
-    RMCWater:
+    Water:
       amount: 1
     RMCOxygen:
       amount: 1
@@ -151,7 +151,7 @@
   reactants:
     RMCCarbon:
       amount: 1
-    RMCWater:
+    Water:
       amount: 1
     CMBicaridine:
       amount: 1

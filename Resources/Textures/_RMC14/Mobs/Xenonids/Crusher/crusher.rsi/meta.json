@@ -23,6 +23,49 @@
     },
     {
       "name": "dead"
+    },
+    {
+      "name": "crusher_walk_3",
+      "directions": 4
+    },
+    {
+      "name": "crusher_walk_2",
+      "directions": 4
+    },
+    {
+      "name": "crusher_walk_1",
+      "directions": 4
+    },
+    {
+      "name": "crusher_walk_0",
+      "directions": 4
+    },
+    {
+      "name": "crusher_rest_3"
+    },
+    {
+      "name": "crusher_rest_2"
+    },
+    {
+      "name": "crusher_rest_1"
+    },
+    {
+      "name": "crusher_rest_0"
+    },
+    {
+      "name": "crusher_downed_3"
+    },
+    {
+      "name": "crusher_downed_2"
+    },
+    {
+      "name": "crusher_downed_1"
+    },
+    {
+      "name": "crusher_downed_0"
+    },
+    {
+      "name": "crusher_dissection"
     }
   ]
 }

@@ -28,7 +28,7 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
-    - ActionXenoLeap # TODO RMC14 call this pounce, not leap
+    - ActionXenoPounce
     - ActionXenoTurnInvisible
     - ActionXenoCripplingStrike
     - ActionXenoDevolve
@@ -68,3 +68,5 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.7
     baseSprintSpeed: 5
+  - type: RMCXenoDamageVisuals
+    prefix: lurker

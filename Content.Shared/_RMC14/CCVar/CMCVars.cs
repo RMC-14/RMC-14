@@ -52,7 +52,7 @@ public sealed class CMCVars : CVars
         CVarDef.Create("cm.bleed_time_multiplier", 1f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> CMMarinesPerXeno =
-        CVarDef.Create("cm.marines_per_xeno", 3.5f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("cm.marines_per_xeno", 5.5f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<bool> RMCAutoBalance =
         CVarDef.Create("rmc.auto_balance", true, CVar.SERVER);
@@ -64,7 +64,7 @@ public sealed class CMCVars : CVars
         CVarDef.Create("rmc.auto_balance_min", 3f, CVar.SERVER);
 
     public static readonly CVarDef<float> RMCAutoBalanceMax =
-        CVarDef.Create("rmc.auto_balance_max", 4.5f, CVar.SERVER);
+        CVarDef.Create("rmc.auto_balance_max", 6f, CVar.SERVER);
 
     public static readonly CVarDef<int> RMCPatronLobbyMessageTimeSeconds =
         CVarDef.Create("rmc.patron_lobby_message_time_seconds", 30, CVar.REPLICATED | CVar.SERVER);
@@ -88,5 +88,5 @@ public sealed class CMCVars : CVars
     ///     Comma-separated list of maps to load as the planet in the distress signal gamemode.
     /// </summary>
     public static readonly CVarDef<string> RMCPlanetMaps =
-        CVarDef.Create("rmc.planet_maps", "/Maps/_RMC14/lv624.yml", CVar.SERVER | CVar.SERVERONLY);
+        CVarDef.Create("rmc.planet_maps", "/Maps/_RMC14/lv624.yml,/Maps/_RMC14/solaris.yml", CVar.SERVER | CVar.SERVERONLY);
 }

@@ -42,7 +42,7 @@
     - ActionXenoWatch
     - ActionXenoTailStab
     - ActionXenoHide
-    - ActionXenoPounce # TODO RMC14 call this pounce, not leap
+    - ActionXenoLeap
     - ActionXenoBoneChips
     - ActionXenoZoom
     - ActionXenoDevolve
@@ -81,3 +81,5 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 5.55
     baseSprintSpeed: 10
+  - type: RMCXenoDamageVisuals
+    prefix: runner

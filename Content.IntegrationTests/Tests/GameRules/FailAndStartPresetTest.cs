@@ -110,7 +110,7 @@ public sealed class FailAndStartPresetTest
         player = pair.Player!.AttachedEntity!.Value;
         Assert.That(entMan.EntityExists(player));
 
-        ticker.SetGamePreset((GamePresetPrototype?)null);
+        ticker.SetGamePreset((GamePresetPrototype?) null);
         server.CfgMan.SetCVar(CCVars.GridFill, false);
         server.CfgMan.SetCVar(CCVars.GameLobbyFallbackEnabled, false);
         server.CfgMan.SetCVar(CCVars.GameLobbyDefaultPreset, "CMDistressSignal");
