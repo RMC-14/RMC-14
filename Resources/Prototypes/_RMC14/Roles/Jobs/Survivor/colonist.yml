@@ -3,7 +3,7 @@
   id: RMCColonist
   name: rmc-job-name-colonist
   description: rmc-job-description-colonist
-  playTimeTracker: RMCJobColonist
+  playTimeTracker: CMJobSurvivor
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMSquad
@@ -55,4 +55,4 @@
     - state: survivor
 
 - type: playTimeTracker
-  id: RMCJobColonist
+  id: CMJobSurvivor
