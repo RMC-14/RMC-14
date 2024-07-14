@@ -1,5 +1,5 @@
 - type: entity
-  id: CMBaseSpeedLoader44
+  id: RCMBaseSpeedLoader44
   name: "M44 speed loader (.44)"
   parent: BaseItem
   abstract: true
@@ -8,13 +8,13 @@
     size: Small
   - type: Tag
     tags:
-    - CMMagazineRevolver
-    - CMSpeedLoaderM44
+    - RCMMagazineRevolver
+    - RCMSpeedLoaderM44
   - type: SpeedLoader
   - type: BallisticAmmoProvider
     whitelist:
       tags:
-        - CMCartridgeRevolver44
+        - RCMCartridgeRevolver44
     capacity: 7
   - type: Sprite
   - type: ContainerContainer
@@ -23,8 +23,8 @@
         ents: []
 
 - type: entity
-  parent: CMBaseSpeedLoader44
-  id: CMSpeedLoaderM44
+  parent: RCMBaseSpeedLoader44
+  id: RCMSpeedLoaderM44
   name: "M44 speed loader (.44)"
   description: A revolver speed loader.
   components:
@@ -40,12 +40,12 @@
     steps: 6
     zeroVisible: false
   - type: BallisticAmmoProvider
-    proto: CMCartridgeRevolver44
+    proto: RCMCartridgeRevolver44
     capacity: 7
   - type: Appearance
 
 - type: entity
-  parent: CMBaseSpeedLoader44
+  parent: RCMBaseSpeedLoader44
   id: RCMSpeedLoader44Marksman
   name: "M44 speed loader (.44 Marksman)"
   description: A revolver speed loader filled with Marksman ammo.
@@ -62,12 +62,12 @@
     steps: 6
     zeroVisible: false
   - type: BallisticAmmoProvider
-    proto: CMCartridgeRevolver44Marksman
+    proto: RCMCartridgeRevolver44Marksman
     capacity: 7
   - type: Appearance
 
 - type: Tag
-  id: CMMagazineRevolver
+  id: RCMMagazineRevolver
 
 - type: Tag
-  id: CMSpeedLoaderM44
+  id: RCMSpeedLoaderM44
