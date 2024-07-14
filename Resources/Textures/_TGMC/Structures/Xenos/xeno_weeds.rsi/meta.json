@@ -1,0 +1,307 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/ff659789647cc5b047e1c9a25693064d1facad2c/icons/mob/xenos/weeds.dmi, https://github.com/cmss13-devs/cmss13/blob/20db6e3fc344d59ed9502ee7626d9fea89674713/icons/mob/xenos/effects.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base"
+    },
+    {
+      "name": "weed0"
+    },
+    {
+      "name": "weed1"
+    },
+    {
+      "name": "weed2"
+    },
+    {
+      "name": "weed3"
+    },
+    {
+      "name": "weed4"
+    },
+    {
+      "name": "weed5"
+    },
+    {
+      "name": "weed6"
+    },
+    {
+      "name": "weed7"
+    },
+    {
+      "name": "weed8"
+    },
+    {
+      "name": "weed9"
+    },
+    {
+      "name": "weed10"
+    },
+    {
+      "name": "weed11"
+    },
+    {
+      "name": "weed12"
+    },
+    {
+      "name": "weed13"
+    },
+    {
+      "name": "weed14"
+    },
+    {
+      "name": "weed15"
+    },
+    {
+      "name": "weed_dir14"
+    },
+    {
+      "name": "weed_dir10"
+    },
+    {
+      "name": "weed_dir11"
+    },
+    {
+      "name": "weed_dir9"
+    },
+    {
+      "name": "weed_dir13"
+    },
+    {
+      "name": "weed_dir5"
+    },
+    {
+      "name": "weed_dir7"
+    },
+    {
+      "name": "weed_dir6"
+    },
+    {
+      "name": "weed_dir2"
+    },
+    {
+      "name": "weed_dir8"
+    },
+    {
+      "name": "weed_dir1"
+    },
+    {
+      "name": "weed_dir4"
+    },
+    {
+      "name": "weed_dir12"
+    },
+    {
+      "name": "weed_dir3"
+    },
+    {
+      "name": "weed_dir0"
+    },
+    {
+      "name": "weed_dir15"
+    },
+    {
+      "name": "weedwall"
+    },
+    {
+      "name": "weedwall0",
+      "directions": 4
+    },
+    {
+      "name": "weedwall1",
+      "directions": 4
+    },
+    {
+      "name": "weedwall2",
+      "directions": 4
+    },
+    {
+      "name": "weedwall3",
+      "directions": 4
+    },
+    {
+      "name": "weedwall4",
+      "directions": 4
+    },
+    {
+      "name": "weedwall5",
+      "directions": 4
+    },
+    {
+      "name": "weedwall6",
+      "directions": 4
+    },
+    {
+      "name": "weedwall7",
+      "directions": 4
+    },
+    {
+      "name": "weednode",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "weedframe0"
+    },
+    {
+      "name": "weedframe1"
+    },
+    {
+      "name": "weedframe2"
+    },
+    {
+      "name": "weedframe3"
+    },
+    {
+      "name": "weedframe4"
+    },
+    {
+      "name": "weedframe8"
+    },
+    {
+      "name": "weedframe12"
+    },
+    {
+      "name": "constructionnode",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "hive_weed0"
+    },
+    {
+      "name": "hive_weed1"
+    },
+    {
+      "name": "hive_weed2"
+    },
+    {
+      "name": "hive_weed3"
+    },
+    {
+      "name": "hive_weed4"
+    },
+    {
+      "name": "hive_weed5"
+    },
+    {
+      "name": "hive_weed6"
+    },
+    {
+      "name": "hive_weed7"
+    },
+    {
+      "name": "hive_weed8"
+    },
+    {
+      "name": "hive_weed9"
+    },
+    {
+      "name": "hive_weed10"
+    },
+    {
+      "name": "hive_weed11"
+    },
+    {
+      "name": "hive_weed12"
+    },
+    {
+      "name": "hive_weed13"
+    },
+    {
+      "name": "hive_weed14"
+    },
+    {
+      "name": "hive_weed15"
+    },
+    {
+      "name": "weedwindow0"
+    },
+    {
+      "name": "weedwindow1"
+    },
+    {
+      "name": "weedwindow2"
+    },
+    {
+      "name": "weedwindow3"
+    },
+    {
+      "name": "weedwindow4"
+    },
+    {
+      "name": "weedwindow8"
+    },
+    {
+      "name": "weedwindow12"
+    },
+    {
+      "name": "human_1",
+      "directions": 4
+    },
+    {
+      "name": "human_1_f",
+      "directions": 4
+    },
+    {
+      "name": "human_2",
+      "directions": 4
+    },
+    {
+      "name": "human_2_f",
+      "directions": 4
+    },
+    {
+      "name": "human_3",
+      "directions": 4
+    },
+    {
+      "name": "human_3_f",
+      "directions": 4
+    },
+    {
+      "name": "human_4",
+      "directions": 4
+    },
+    {
+      "name": "human_4_f",
+      "directions": 4
+    },
+    {
+      "name": "human_5",
+      "directions": 4
+    },
+    {
+      "name": "human_5_f",
+      "directions": 4
+    },
+    {
+      "name": "nest_overlay",
+      "directions": 4
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+- type: entity
+  parent: [ClothingBeltBase, ClothingSlotBase]
+  id: TGMCClothingBeltRapier
+  name: rapier scaddard
+  description: Rapier scaddard
+  components:
+  - type: Sprite
+    sprite: _TGMC/Objects/Clothing/Belt/rapier-belt.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _TGMC/Objects/Clothing/Belt/rapier-belt.rsi
+  - type: ItemSlots
+    slots:
+      item:
+        name: Sabre
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/_TGMC/Weapons/sheath.ogg
+        ejectSound: /Audio/_TGMC/Weapons/unsheath.ogg
+        whitelist:
+          tags:
+          - Rapier
+  - type: ItemMapper
+    mapLayers:
+      sheath-sabre:
+        whitelist:
+          tags:
+          - Rapier
+  - type: Appearance
+
+- type: entity
+  id: TGMCClothingBeltRapierFilled
+  parent: TGMCClothingBeltRapier
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - TGMCRapier

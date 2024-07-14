@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "https://github.com/discordia-space/CEV-Eris/pull/7309/files#diff-f23c227a9459128eab4ce2da4fb6ca9e38a13a89b24ef7f3cb4563f9b6ccffcf",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+        "name": "pig"
+    },
+    {
+        "name": "pig_lefthand"
+    }
+  ]
+}
