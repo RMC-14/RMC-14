@@ -8,6 +8,7 @@
   - type: Devourable
   - type: XenoNestable
   - type: RMCNightVisionVisible
+  - type: InfectStopOnDeath
 
 - type: entity
   parent: [MobMonkey, RMCSmallHost]

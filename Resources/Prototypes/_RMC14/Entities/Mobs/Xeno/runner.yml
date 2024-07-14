@@ -81,3 +81,5 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 5.55
     baseSprintSpeed: 10
+  - type: RMCXenoDamageVisuals
+    prefix: runner
