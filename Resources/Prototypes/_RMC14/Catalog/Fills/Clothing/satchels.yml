@@ -6,8 +6,6 @@
   - type: StorageFill
     contents:
     - id: CMCrowbar
-    - id: FoodBoxPizzaFilled # TODO RMC14 add pizzaboxes
-      amount: 4
     - id: DrinkDrGibbCan
     - id: DrinkFourteenLokoCan
   - type: IgnoreContentsSize
