@@ -79,7 +79,7 @@
     - Heat
     - Shock
   - type: CMDefibrillatorBlocked
-    popup: "Why would you want to bring this thing back!"
+    popup: defibrillator-xeno
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.2
     baseSprintSpeed: 4
