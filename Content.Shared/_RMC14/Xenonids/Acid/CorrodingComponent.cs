@@ -1,4 +1,4 @@
-using Robust.Shared.GameStates;
+﻿using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
@@ -12,4 +12,10 @@ public sealed partial class CorrodingComponent : Component
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan CorrodesAt;
+
+    [DataField, AutoNetworkedField]
+    public float Dps;
+
+    [DataField, AutoNetworkedField]
+    public float ExpendableLightDps;
 }

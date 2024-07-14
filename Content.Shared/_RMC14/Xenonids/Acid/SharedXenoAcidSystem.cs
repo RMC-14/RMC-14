@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.Xenonids.Plasma;
+﻿using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Systems;
@@ -74,6 +74,12 @@ public sealed class SharedXenoAcidSystem : EntitySystem
             Acid = acid,
             CorrodesAt = _timing.CurTime + args.Time
         });
+
+        // This event should only ever go to the server.
+        if (_net.IsServer)
+        {
+            RaiseLocalEvent(target, new ServerCorrodingEvent(args.ExpendableLightDps));
+        }
     }
 
     private bool CheckCorrodiblePopups(Entity<XenoAcidComponent> xeno, EntityUid target)
