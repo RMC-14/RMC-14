@@ -3103,5 +3103,13 @@
   id: 373
   time: '2024-07-14T00:00:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3050
+- author: DrSmugleaf
+  changes:
+  - message: Fixed equipment and gear racks being corrodible. They can no longer be
+      destroyed with corrosive acid.
+    type: Fix
+  id: 374
+  time: '2024-07-14T01:38:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3052
 Name: RMC14
 Order: -1
