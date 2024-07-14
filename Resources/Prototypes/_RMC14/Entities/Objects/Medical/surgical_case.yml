@@ -6,7 +6,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Storage/surgical_case.rsi
-    state: surgical_case
+    layers:
+    - state: surgical_case_small
+    - state: surgical_case_small_empty
+      map: [ "openLayer" ]
+      visible: false
   - type: Item
     size: Small
   - type: Storage
@@ -22,6 +26,13 @@
   - type: Tag
     tags:
       - CMSurgicalCase
+  - type: GenericVisualizer
+    visuals:
+      enum.SharedBagOpenVisuals.BagState:
+        openLayer:
+          Open: { visible: true }
+          Closed: { visible: false }
+  - type: Appearance
 
 - type: entity
   parent: CMSurgicalCase
@@ -40,6 +51,14 @@
   name: large surgical case
   suffix: Filled, All Tools
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/surgical_case.rsi
+    layers:
+    - state: surgical_case
+    - state: surgical_case_empty
+      map: [ "openLayer" ]
+      visible: false
+
   - type: Storage
     maxItemSize: Small
     grid:
