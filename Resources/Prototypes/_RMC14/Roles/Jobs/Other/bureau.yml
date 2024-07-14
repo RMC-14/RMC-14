@@ -45,8 +45,8 @@
     head: RMCHeadCapBureau
     # face cigar
     # shoulder holster with revolver and two magazines
-    back: RMCSatchelSec
-    hands: RMCHandsVeteran
+    back: CMSatchelSecurity
+    gloves: RMCHandsVeteran
     jumpsuit: RMCJumpsuitMarshal
     outerClothing: RMCCoatBureauMarshal # add telebaton binoculars/range
     # /obj/item/weapon/gun/shotgun/pump/dual_tube/cmb/m3717
@@ -68,7 +68,7 @@
     - type: Sprite
       layers:
       - state: red
-      - sprite: _RMC14/Objects/Clothing/Head/Hats/mp_cap.rsi
+      - sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
         state: icon
     - type: ConditionalSpawner
       prototypes:
@@ -80,14 +80,14 @@
   suffix: Role
   components:
     - type: Sprite
-      sprite: _RMC14/Objects/Clothing/Head/Hats/mp_cap.rsi
+      sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
       state: icon
     - type: RandomHumanoidSpawner
       settings: RMCBureauDeputy
 
 - type: randomHumanoidSettings
   parent: EventHumanoid
-  id: RMCBureauMarshal
+  id: RMCBureauDeputy
   components:
     - type: GhostRole
       name: rmc-ghost-role-information-bureau-deputy-name
@@ -101,12 +101,11 @@
 - type: startingGear
   id: RMCGearBureauDeputy
   equipment:
-  equipment:
     head: RMCHeadCapBureau
     # face cigar
     # shoulder holster with revolver and two magazines
-    back: RMCSatchelSec
-    hands: RMCHandsVeteran
+    back: CMSatchelSecurity
+    gloves: RMCHandsVeteran
     jumpsuit: RMCJumpsuitMarshal
     outerClothing: RMCCoatBureauMarshal # add telebaton binoculars/range
     # /obj/item/weapon/gun/shotgun/pump/dual_tube/cmb/m3717

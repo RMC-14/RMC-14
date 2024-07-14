@@ -9,7 +9,7 @@
     - type: Sprite
       layers:
       - state: red
-      - sprite: _RMC14/Objects/Clothing/Uniform/PMC/standard.rsi
+      - sprite: _RMC14/Objects/Clothing/Uniforms/PMC/standard.rsi
         state: icon
     - type: ConditionalSpawner
       prototypes:
@@ -21,7 +21,7 @@
   suffix: Role
   components:
     - type: Sprite
-      sprite: _RMC14/Objects/Clothing/Uniform/PMC/standard.rsi
+      sprite: _RMC14/Objects/Clothing/Uniforms/PMC/standard.rsi
       state: icon
     - type: RandomHumanoidSpawner
       settings: RMCPMCStandard
@@ -45,11 +45,11 @@
     # head: /obj/item/clothing/head/helmet/marine/veteran/pmc
     eyes: CMGlassesSecurity
     back: CMBackpack # /obj/item/storage/backpack/lightpack
-    hands: RMCHandsVeteranPMC
+    gloves: RMCHandsVeteranPMC
     jumpsuit: RMCJumpsuitVeteranPMC
     # outerClothing: /obj/item/clothing/suit/storage/marine/veteran/pmc/light
     shoes: CMBootsBlackFilled
     id: RMCIDCardPMC
     ears: RMCHeadsetDistressPMC
-    pocket1: CMPouchFirstAidFill
+    pocket1: CMPouchFirstAidSplintsGauzeOintment
     pocket2: CMWeaponPistolM77

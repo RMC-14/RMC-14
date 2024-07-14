@@ -9,19 +9,19 @@
     - type: Sprite
       layers:
       - state: red
-      - sprite: _RMC14/Objects/Clothing/Uniform/PMC/officer.rsi
+      - sprite: _RMC14/Objects/Clothing/Uniforms/PMC/officer.rsi
         state: icon
     - type: ConditionalSpawner
       prototypes:
       - RMCRandomHumanoidPMCLeader
 
 - type: entity
-  id: RMCRandomHumanoidPMCStandard
+  id: RMCRandomHumanoidPMCLeader
   name: We-Ya PMC Leader ghost role
   suffix: Role
   components:
     - type: Sprite
-      sprite: _RMC14/Objects/Clothing/Uniform/PMC/officer.rsi
+      sprite: _RMC14/Objects/Clothing/Uniforms/PMC/officer.rsi
       state: icon
     - type: RandomHumanoidSpawner
       settings: RMCPMCLeader
@@ -44,7 +44,7 @@
   equipment:
     # head: /obj/item/clothing/head/helmet/marine/veteran/pmc/leader
     back: CMBackpack # /obj/item/storage/backpack/lightpack
-    hands: RMCHandsVeteranPMC
+    gloves: RMCHandsVeteranPMC
     jumpsuit: RMCJumpsuitVeteranPMCLeader
     # outerClothing: /obj/item/clothing/suit/storage/marine/veteran/pmc/leader
     shoes: CMBootsBlackFilled
