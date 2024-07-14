@@ -37,6 +37,7 @@
 - type: entity
   parent: CMSurgicalCase
   id: CMSurgicalCaseFilledAllTools
+  name: large surgical case
   suffix: Filled, All Tools
   components:
   - type: Storage

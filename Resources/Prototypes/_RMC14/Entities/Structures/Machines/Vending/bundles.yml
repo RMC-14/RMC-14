@@ -125,7 +125,7 @@
   - type: CMVendorBundle
     bundle:
     - CMGlassesSecurity
-    - CMBeltSecurityFilled
+    - CMBeltSecurityMPFilled
     - CMArmorHelmetM10MP
     
 - type: entity

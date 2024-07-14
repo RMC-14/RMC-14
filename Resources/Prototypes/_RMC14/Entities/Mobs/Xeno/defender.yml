@@ -87,3 +87,5 @@
         density: 185
         layer:
         - BulletImpassable
+  - type: RMCXenoDamageVisuals
+    prefix: defender

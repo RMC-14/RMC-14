@@ -86,3 +86,6 @@
       whitelist:
         components:
         - XenoEgg
+  - type: RMCXenoDamageVisuals
+    prefix: drone
+
