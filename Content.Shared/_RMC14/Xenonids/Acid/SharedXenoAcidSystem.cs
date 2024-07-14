@@ -1,9 +1,13 @@
-﻿using Content.Shared._RMC14.Xenonids.Plasma;
+﻿using Content.Shared._RMC14.Entrenching;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
@@ -16,6 +20,8 @@ public sealed class SharedXenoAcidSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     public override void Initialize()
     {
@@ -69,11 +75,24 @@ public sealed class SharedXenoAcidSystem : EntitySystem
         args.Handled = true;
 
         var acid = SpawnAttachedTo(args.AcidId, target.ToCoordinates());
-        AddComp(target, new CorrodingComponent
+
+        if (TryComp<BarricadeComponent>(target, out var barricade))
         {
-            Acid = acid,
-            CorrodesAt = _timing.CurTime + args.Time
-        });
+            AddComp(target, new DamageableCorrodingComponent
+            {
+                Acid = acid,
+                Dps = args.Dps
+            });
+        }
+        else
+        {
+            AddComp(target, new TimedCorrodingComponent
+            {
+                Acid = acid,
+                CorrodesAt = _timing.CurTime + args.Time
+            });
+        }
+
 
         // This event should only ever go to the server.
         if (_net.IsServer)
@@ -91,7 +110,7 @@ public sealed class SharedXenoAcidSystem : EntitySystem
             return false;
         }
 
-        if (HasComp<CorrodingComponent>(target))
+        if (HasComp<TimedCorrodingComponent>(target))
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-acid-already-corroding", ("target", target)), xeno, xeno);
             return false;
@@ -105,16 +124,28 @@ public sealed class SharedXenoAcidSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var query = EntityQueryEnumerator<CorrodingComponent>();
         var time = _timing.CurTime;
 
-        while (query.MoveNext(out var uid, out var corroding))
+        var damageTickSeconds = 10;
+        var damageableCorrodingQuery = EntityQueryEnumerator<DamageableCorrodingComponent>();
+        while (damageableCorrodingQuery.MoveNext(out var uid, out var damageableCorrodingComponent))
         {
-            if (time < corroding.CorrodesAt)
+            if (time > damageableCorrodingComponent.LastDamagedAt.Add(TimeSpan.FromSeconds(damageTickSeconds)))
+            {
+                DamageSpecifier damage = new(_prototypeManager.Index<DamageTypePrototype>("Heat"), damageableCorrodingComponent.Dps * damageTickSeconds);
+                _damageable.TryChangeDamage(uid, damage, true);
+                damageableCorrodingComponent.LastDamagedAt = time;
+            }
+        }
+
+        var timedCorrodingQuery = EntityQueryEnumerator<TimedCorrodingComponent>();
+        while (timedCorrodingQuery.MoveNext(out var uid, out var timedCorrodingComponent))
+        {
+            if (time < timedCorrodingComponent.CorrodesAt)
                 continue;
 
             QueueDel(uid);
-            QueueDel(corroding.Acid);
+            QueueDel(timedCorrodingComponent.Acid);
         }
     }
 }
