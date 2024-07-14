@@ -3118,5 +3118,12 @@
   id: 375
   time: '2024-07-14T07:48:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3058
+- author: DrSmugleaf
+  changes:
+  - message: Fixed warding pheromones for real this time.
+    type: Fix
+  id: 376
+  time: '2024-07-14T07:50:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3059
 Name: RMC14
 Order: -1
