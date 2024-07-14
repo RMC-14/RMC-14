@@ -104,10 +104,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private float _autoBalanceMax;
 
     [ViewVariables]
-    private readonly Dictionary<string, float> _marinesPerXeno = new()
+    public readonly Dictionary<string, float> MarinesPerXeno = new()
     {
         ["/Maps/_RMC14/lv624.yml"] = 4.25f,
-        ["/Maps/_RMC14/solaris.yml"] = 5.5f,
+        ["/Maps/_RMC14/solaris.yml"] = 6f,
     };
 
     private readonly List<MapId> _almayerMaps = [];
@@ -241,9 +241,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             var marinesPerXeno = _defaultMarinesPerXeno;
             if (SelectedPlanetMap != null &&
-                !_marinesPerXeno.TryGetValue(SelectedPlanetMap, out marinesPerXeno))
+                !MarinesPerXeno.TryGetValue(SelectedPlanetMap, out marinesPerXeno))
             {
-                _marinesPerXeno[SelectedPlanetMap] = _defaultMarinesPerXeno;
+                MarinesPerXeno[SelectedPlanetMap] = _defaultMarinesPerXeno;
                 marinesPerXeno = _defaultMarinesPerXeno;
             }
 
@@ -487,7 +487,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             var value = _defaultMarinesPerXeno;
             if (SelectedPlanetMap != null &&
-                _marinesPerXeno.TryGetValue(SelectedPlanetMap, out var mapValue))
+                MarinesPerXeno.TryGetValue(SelectedPlanetMap, out var mapValue))
             {
                 value = mapValue;
             }
@@ -501,7 +501,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (SelectedPlanetMap == null)
                 _config.SetCVar(CMCVars.CMMarinesPerXeno, value);
             else
-                _marinesPerXeno[SelectedPlanetMap] = value;
+                MarinesPerXeno[SelectedPlanetMap] = value;
 
             break;
         }
