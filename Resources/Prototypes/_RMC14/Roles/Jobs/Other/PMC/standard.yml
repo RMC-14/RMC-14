@@ -9,7 +9,7 @@
     - type: Sprite
       layers:
       - state: red
-      - sprite: _RMC14/Objects/Clothing/Head/Hats/mp_cap.rsi
+      - sprite: _RMC14/Objects/Clothing/Uniform/PMC/standard.rsi
         state: icon
     - type: ConditionalSpawner
       prototypes:
@@ -17,11 +17,11 @@
 
 - type: entity
   id: RMCRandomHumanoidPMCStandard
-  name: bureau marshal ghost role
+  name: We-Ya PMC Standard ghost role
   suffix: Role
   components:
     - type: Sprite
-      sprite: _RMC14/Objects/Clothing/Head/Hats/mp_cap.rsi
+      sprite: _RMC14/Objects/Clothing/Uniform/PMC/standard.rsi
       state: icon
     - type: RandomHumanoidSpawner
       settings: RMCPMCStandard
@@ -42,15 +42,14 @@
 - type: startingGear
   id: RMCGearPMCStandard
   equipment:
-    # head: RMCHeadCapBureau
+    # head: /obj/item/clothing/head/helmet/marine/veteran/pmc
     eyes: CMGlassesSecurity
-    # back: RMCSatchelSec
+    back: CMBackpack # /obj/item/storage/backpack/lightpack
     hands: RMCHandsVeteranPMC
     jumpsuit: RMCJumpsuitVeteranPMC
-    # outerClothing: RMCCoatBureauMarshal
-    # belt: CMBeltSecurityMarshalFilled
+    # outerClothing: /obj/item/clothing/suit/storage/marine/veteran/pmc/light
     shoes: CMBootsBlackFilled
-    # id: RMCIDCardMarshal
+    id: RMCIDCardPMC
     ears: RMCHeadsetDistressPMC
     pocket1: CMPouchFirstAidFill
     pocket2: CMWeaponPistolM77
