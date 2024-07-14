@@ -43,8 +43,9 @@
   id: RMCGearPMCStandard
   equipment:
     # head: RMCHeadCapBureau
+    eyes: CMGlassesSecurity
     # back: RMCSatchelSec
-    hands: CMHandsBlackMarine
+    hands: RMCHandsVeteranPMC
     jumpsuit: RMCJumpsuitVeteranPMC
     # outerClothing: RMCCoatBureauMarshal
     # belt: CMBeltSecurityMarshalFilled

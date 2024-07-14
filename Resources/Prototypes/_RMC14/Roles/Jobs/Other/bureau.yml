@@ -46,7 +46,7 @@
     # face cigar
     # shoulder holster with revolver and two magazines
     back: RMCSatchelSec
-    hands: CMHandsBlackMarine
+    hands: RMCHandsVeteran
     jumpsuit: RMCJumpsuitMarshal
     outerClothing: RMCCoatBureauMarshal # add telebaton binoculars/range
     # /obj/item/weapon/gun/shotgun/pump/dual_tube/cmb/m3717
@@ -106,7 +106,7 @@
     # face cigar
     # shoulder holster with revolver and two magazines
     back: RMCSatchelSec
-    hands: CMHandsBlackMarine
+    hands: RMCHandsVeteran
     jumpsuit: RMCJumpsuitMarshal
     outerClothing: RMCCoatBureauMarshal # add telebaton binoculars/range
     # /obj/item/weapon/gun/shotgun/pump/dual_tube/cmb/m3717
