@@ -60,7 +60,7 @@
     location: Mister Wiggles
 
 - type: entity
-  parent: [MobCatCalico, RMCSmallHost]
+  parent: MobCatCalico
   id: CMMobJones
   name: Jones
   description: A tough, old stray whose origin no one seems to know.
