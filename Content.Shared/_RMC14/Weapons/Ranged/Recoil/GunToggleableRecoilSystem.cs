@@ -31,6 +31,7 @@ public sealed class GunToggleableRecoilSystem : EntitySystem
 
     private void OnToggleRecoil(Entity<GunToggleableRecoilComponent> ent, ref GunToggleRecoilActionEvent args)
     {
+        args.Handled = true;
         ent.Comp.Active = !ent.Comp.Active;
         ActiveChanged(ent, args.Performer);
     }
@@ -72,7 +73,7 @@ public sealed class GunToggleableRecoilSystem : EntitySystem
         _gunBattery.RefreshBatteryDrain(ent.Owner);
         _gun.RefreshModifiers(ent.Owner);
 
-        _audio.PlayPvs(ent.Comp.ToggleSound, ent.Owner);
+        _audio.PlayPredicted(ent.Comp.ToggleSound, ent.Owner, user);
 
         if (user == null)
             return;

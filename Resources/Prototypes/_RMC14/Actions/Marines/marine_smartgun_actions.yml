@@ -33,6 +33,20 @@
     icon:
       sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
       state: recoil_compensation
-    event: !type:GunToggleAmmoActionEvent
+    event: !type:GunToggleRecoilActionEvent
+    useDelay: 0.25
+    itemIconStyle: NoItem
+
+- type: entity
+  parent: ActionMarineBase
+  id: RMCActionToggleAutoFire
+  name: Toggle Auto Fire
+  description: Makes the gun automatically shoot a single shot towards a target every couple seconds.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
+      state: autofire
+    event: !type:GunToggleableAutoFireActionEvent
     useDelay: 0.25
     itemIconStyle: NoItem

@@ -93,3 +93,5 @@
     whitelist:
       components:
       - SmartgunArmor
+  - type: GunToggleableRecoil
+  - type: GunToggleableAutoFire

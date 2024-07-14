@@ -39,6 +39,8 @@ public sealed class GunToggleableAmmoSystem : EntitySystem
         if (ent.Comp.Settings.Count == 0)
             return;
 
+        args.Handled = true;
+
         ref var settingIndex = ref ent.Comp.Setting;
         settingIndex++;
         if (settingIndex >= ent.Comp.Settings.Count)
