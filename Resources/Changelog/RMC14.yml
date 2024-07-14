@@ -3133,5 +3133,12 @@
   id: 377
   time: '2024-07-14T23:32:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3069
+- author: lunarcomets
+  changes:
+  - message: lightbulbs now ALSO break in a single hit
+    type: Fix
+  id: 378
+  time: '2024-07-14T23:35:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3060
 Name: RMC14
 Order: -1
