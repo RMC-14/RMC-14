@@ -3125,5 +3125,13 @@
   id: 376
   time: '2024-07-14T07:50:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3059
+- author: diraven
+  changes:
+  - message: automatic xeno text chat replacements for "cat", "grenade", "ship", "bullet",
+      "ammo", "marine".
+    type: Add
+  id: 377
+  time: '2024-07-14T23:32:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3069
 Name: RMC14
 Order: -1
