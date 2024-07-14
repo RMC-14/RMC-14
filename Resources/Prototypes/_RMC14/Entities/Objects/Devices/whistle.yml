@@ -10,3 +10,19 @@
     slots:
       - mask
       - neck
+
+- type: entity
+  parent: Whistle
+  id: RCMTrenchWhistle
+  name: trench whistle
+  description: An old trench whistle, used for directing a charge. Still used by older officers.
+  components:
+  - type: Sprite
+    state: trench
+  - type: Clothing
+    equippedPrefix: trench
+  - type: EmitSoundOnUse
+    sound:
+      collection: TrenchWhistle
+  - type: Whistle
+    distance: 15 # Let your enemies hear the sound of death approaching

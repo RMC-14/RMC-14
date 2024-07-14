@@ -43,7 +43,7 @@
 
 - type: entity
   parent: BaseWhistle
-  id: TrenchWhistle
+  id: SyndicateWhistle
   name: trench whistle
   description: An antiquated whistle from a long time ago. Still used by brass today as a means of rallying troops.
   components:
