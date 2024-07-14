@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Systems;
@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
-public sealed class XenoAcidSystem : EntitySystem
+public sealed class SharedXenoAcidSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
