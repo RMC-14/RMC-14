@@ -109,6 +109,8 @@
     #  points: 5
       - id: CMFireExtinguisherPortable
         points: 5
+      - id: TrenchWhistle
+        points: 3
       - id: CMWhistle
         points: 5
     - name: Binoculars

@@ -43,9 +43,9 @@
 
 - type: entity
   parent: BaseWhistle
-  id: SyndicateWhistle
+  id: TrenchWhistle
   name: trench whistle
-  description: A whistle used by Syndicate commanders to draw attention. Avanti!
+  description: An antiquated whistle from a long time ago. Still used by brass today as a means of rallying troops.
   components:
   - type: Sprite
     state: trench
