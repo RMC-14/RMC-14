@@ -7,5 +7,5 @@ namespace Content.Shared._RMC14.Medical.Defibrillator;
 public sealed partial class CMDefibrillatorBlockedComponent : Component
 {
     [DataField]
-    public LocId Popup = string.Empty;
+    public LocId Popup = "defibrillator-unrevivable";
 }
