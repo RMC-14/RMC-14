@@ -109,7 +109,7 @@
     #  points: 5
       - id: CMFireExtinguisherPortable
         points: 5
-      - id: TrenchWhistle
+      - id: RCMTrenchWhistle
         points: 5
       - id: CMWhistle
         points: 5
