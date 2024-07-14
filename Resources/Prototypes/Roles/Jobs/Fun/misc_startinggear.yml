@@ -175,12 +175,12 @@
   id: MobAghostGear
   equipment:
     back: ClothingBackpackSatchelHolding
-    id: AdminPDA
+    id: CMIDCardHighCommand # RMC-14: Changed from AdminPDA
   storage:
     back:
-    - GasAnalyzer
-    - trayScanner
-    - AccessConfiguratorUniversal
+    # RMC-14: Replaced loadout
+    - CMHealthAnalyzer
+    - RMCAdminAccessConfigurator
 
 #Gladiator with spear
 - type: startingGear
