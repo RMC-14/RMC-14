@@ -113,14 +113,11 @@ public sealed class DefibrillatorSystem : EntitySystem
         if (!component.CanDefibCrit && _mobState.IsCritical(target, mobState))
             return false;
 
-        if (HasComp<CMDefibrillatorBlockedComponent>(target))
+        if (TryComp(target, out CMDefibrillatorBlockedComponent? block))
         {
-            if (TryComp(target, out CMDefibrillatorBlockedComponent? block))
-            {
-                if (user != null)
-                    _popup.PopupEntity(Loc.GetString(block.Popup), uid, user.Value);
-                return false;
-            }
+            if (user != null)
+                _popup.PopupEntity(Loc.GetString(block.Popup), uid, user.Value);
+            return false;
         }
 
         return true;
