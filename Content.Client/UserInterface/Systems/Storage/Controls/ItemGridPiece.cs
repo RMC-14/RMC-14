@@ -221,7 +221,8 @@ public sealed class ItemGridPiece : Control, IEntityControl
             }
         }
 
-        // RMC14 - Draw text for the icon label
+        // RMC14 - Draw text for the icon label (disabled until Giant Text bug is fixed)
+        /**
         if (_entityManager.TryGetComponent(Entity, out IconLabelComponent? iconLabel))
         {
             if (iconLabel.LabelTextLocId is null ||
@@ -247,6 +248,7 @@ public sealed class ItemGridPiece : Control, IEntityControl
                 sep = _font.DrawChar(handle, new System.Text.Rune(chr), iconLabelPosition, textSize, textColor);
             }
         }
+        **/
         // RMC14 - End Draw text for the icon label
     }
 

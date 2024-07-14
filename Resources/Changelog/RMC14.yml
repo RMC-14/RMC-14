@@ -3096,5 +3096,34 @@
   id: 372
   time: '2024-07-13T11:57:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3045
+- author: blueDev2
+  changes:
+  - message: Temporarily Remove Medical Items Inventory Icon Labels
+    type: Remove
+  id: 373
+  time: '2024-07-14T00:00:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3050
+- author: DrSmugleaf
+  changes:
+  - message: Fixed equipment and gear racks being corrodible. They can no longer be
+      destroyed with corrosive acid.
+    type: Fix
+  id: 374
+  time: '2024-07-14T01:38:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3052
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenos being able to pry open shutters. Corroding still works.
+    type: Fix
+  id: 375
+  time: '2024-07-14T07:48:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3058
+- author: DrSmugleaf
+  changes:
+  - message: Fixed warding pheromones for real this time.
+    type: Fix
+  id: 376
+  time: '2024-07-14T07:50:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3059
 Name: RMC14
 Order: -1

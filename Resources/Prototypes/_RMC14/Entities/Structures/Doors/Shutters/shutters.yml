@@ -52,6 +52,7 @@
       path: /Audio/_RMC14/Machines/blastdoor.ogg
     performCollisionCheck: false
     canCrush: false
+    canPry: false
   - type: Appearance
   - type: UserInterface
     interfaces:
