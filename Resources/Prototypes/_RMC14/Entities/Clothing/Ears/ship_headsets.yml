@@ -220,7 +220,7 @@
   description: Used by the CL to convince people to sign NDAs.
   components:
   - type: Sprite
-    state: wy_headset
+    state: we_ya_headset
   - type: ContainerFill
     containers:
       key_slots:
