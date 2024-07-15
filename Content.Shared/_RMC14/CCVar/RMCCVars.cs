@@ -4,7 +4,7 @@ using Robust.Shared.Configuration;
 namespace Content.Shared._RMC14.CCVar;
 
 [CVarDefs]
-public sealed class CMCVars : CVars
+public sealed class RMCCVars : CVars
 {
     public static readonly CVarDef<float> CMXenoDamageDealtMultiplier =
         CVarDef.Create("cm.xeno_damage_dealt_multiplier", 1f, CVar.REPLICATED | CVar.SERVER);
@@ -75,8 +75,11 @@ public sealed class CMCVars : CVars
     public static readonly CVarDef<string> RMCDiscordAccountLinkingMessageLink =
         CVarDef.Create("rmc.discord_account_linking_message_link", "", CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<int> RMCRequisitionsStartingBalance =
+        CVarDef.Create("rmc.requisitions_starting_balance", 25000, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<int> RMCRequisitionsBalanceGain =
-        CVarDef.Create("rmc.requisitions_balance_gain", 300, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.requisitions_balance_gain", 500, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<string> RMCDiscordToken =
         CVarDef.Create("rmc.discord_token", "", CVar.SERVER | CVar.SERVERONLY | CVar.CONFIDENTIAL);

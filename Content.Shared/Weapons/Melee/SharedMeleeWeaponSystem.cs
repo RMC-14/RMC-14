@@ -67,7 +67,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     {
         base.Initialize();
 
-        Configuration.OnValueChanged(CMCVars.CMMaxHeavyAttackTargets, v => MaxTargets = v, true);
+        Configuration.OnValueChanged(RMCCVars.CMMaxHeavyAttackTargets, v => MaxTargets = v, true);
 
         SubscribeLocalEvent<MeleeWeaponComponent, HandSelectedEvent>(OnMeleeSelected);
         SubscribeLocalEvent<MeleeWeaponComponent, ShotAttemptedEvent>(OnMeleeShotAttempted);

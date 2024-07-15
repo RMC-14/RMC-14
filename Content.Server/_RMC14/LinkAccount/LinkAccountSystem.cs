@@ -1,12 +1,8 @@
 ﻿using Content.Server._RMC14.Rules;
-using Content.Server.Chat.Managers;
-using Content.Server.Chat.Systems;
 using Content.Server.Database;
 using Content.Server.GameTicking;
-using Content.Server.RoundEnd;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.LinkAccount;
-using Content.Shared.GameTicking;
 using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
 
@@ -32,8 +28,8 @@ public sealed class LinkAccountSystem : EntitySystem
         SubscribeLocalEvent<GameRunLevelChangedEvent>(OnGameRunLevelChanged);
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndTextAppend, after: [typeof(CMDistressSignalRuleSystem)]);
 
-        Subs.CVar(_config, CMCVars.RMCPatronLobbyMessageTimeSeconds, v => _timeBetweenLobbyMessages = TimeSpan.FromSeconds(v), true);
-        Subs.CVar(_config, CMCVars.RMCPatronLobbyMessageInitialDelaySeconds, v => _lobbyMessageInitialDelay = TimeSpan.FromSeconds(v), true);
+        Subs.CVar(_config, RMCCVars.RMCPatronLobbyMessageTimeSeconds, v => _timeBetweenLobbyMessages = TimeSpan.FromSeconds(v), true);
+        Subs.CVar(_config, RMCCVars.RMCPatronLobbyMessageInitialDelaySeconds, v => _lobbyMessageInitialDelay = TimeSpan.FromSeconds(v), true);
 
         ReloadPatrons();
         GetRandomLobbyMessage();
