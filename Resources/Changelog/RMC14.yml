@@ -3170,5 +3170,12 @@
   id: 381
   time: '2024-07-15T06:19:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3077
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the smart gun operator role being hidden for some players.
+    type: Fix
+  id: 382
+  time: '2024-07-15T08:08:14.0000000+00:00'
+  url: null
 Name: RMC14
 Order: -1
