@@ -1,4 +1,5 @@
-﻿using Content.Shared.Interaction.Events;
+﻿using Content.Shared.Hands;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Throwing;
@@ -15,6 +16,8 @@ public sealed class RMCMagneticSystem : EntitySystem
     {
         SubscribeLocalEvent<RMCMagneticItemComponent, DroppedEvent>(OnMagneticItemDropped);
         SubscribeLocalEvent<RMCMagneticItemComponent, ThrownEvent>(OnMagneticItemThrown);
+        SubscribeLocalEvent<RMCMagneticItemComponent, DropAttemptEvent>(OnMagneticItemDropAttempt);
+
         SubscribeLocalEvent<RMCMagneticArmorComponent, InventoryRelayedEvent<RMCMagnetizeItemEvent>>(OnMagnetizeItem);
 
         SubscribeLocalEvent<InventoryComponent, RMCMagnetizeItemEvent>(_inventory.RelayEvent);
@@ -37,17 +40,31 @@ public sealed class RMCMagneticSystem : EntitySystem
             _thrownItem.StopThrow(ent, thrown);
     }
 
+    private void OnMagneticItemDropAttempt(Entity<RMCMagneticItemComponent> ent, ref DropAttemptEvent args)
+    {
+        if (!CanReturn(ent, args.Uid, out _))
+            return;
+
+        args.Cancel();
+    }
+
     private void OnMagnetizeItem(Entity<RMCMagneticArmorComponent> ent, ref InventoryRelayedEvent<RMCMagnetizeItemEvent> args)
     {
         args.Args.Magnetizer = ent;
     }
 
-    private bool TryReturn(Entity<RMCMagneticItemComponent> ent, EntityUid user)
+    private bool CanReturn(Entity<RMCMagneticItemComponent> ent, EntityUid user, out EntityUid magnetizer)
     {
         var ev = new RMCMagnetizeItemEvent(SlotFlags.OUTERCLOTHING);
         RaiseLocalEvent(user, ref ev);
 
-        if (ev.Magnetizer is not { } magnetizer)
+        magnetizer = ev.Magnetizer ?? default;
+        return magnetizer != default;
+    }
+
+    private bool TryReturn(Entity<RMCMagneticItemComponent> ent, EntityUid user)
+    {
+        if (!CanReturn(ent, user, out var magnetizer))
             return false;
 
         var returnComp = EnsureComp<RMCReturnToInventoryComponent>(ent);
