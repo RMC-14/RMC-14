@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Medical.Surgery.Steps;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Slowing;
 using Content.Shared.Alert;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Explosion;
@@ -43,6 +44,13 @@ public sealed class CMArmorSystem : EntitySystem
         SubscribeLocalEvent<CMArmorPiercingComponent, CMGetArmorPiercingEvent>(OnPiercingGetArmor);
 
         SubscribeLocalEvent<InventoryComponent, CMGetArmorEvent>(_inventory.RelayEvent);
+
+        SubscribeLocalEvent<ClothingBlockBackpackComponent, BeingEquippedAttemptEvent>(OnBlockBackpackEquippedAttempt);
+        SubscribeLocalEvent<ClothingBlockBackpackComponent, InventoryRelayedEvent<RMCEquipAttemptEvent>>(OnBlockBackpackEquipAttempt);
+
+        SubscribeLocalEvent<ClothingComponent, BeingEquippedAttemptEvent>(OnClothingEquippedAttempt);
+
+        SubscribeLocalEvent<InventoryComponent, RMCEquipAttemptEvent>(_inventory.RelayEvent);
     }
 
     private void OnMapInit(Entity<CMArmorComponent> armored, ref MapInitEvent args)
@@ -110,6 +118,45 @@ public sealed class CMArmorSystem : EntitySystem
         args.Piercing += piercing.Comp.Amount;
     }
 
+    private void OnBlockBackpackEquippedAttempt(Entity<ClothingBlockBackpackComponent> ent, ref BeingEquippedAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        var slots = _inventory.GetSlotEnumerator(args.EquipTarget, SlotFlags.BACK);
+        while (slots.MoveNext(out var slot))
+        {
+            if (slot.ContainedEntity == null)
+                continue;
+
+            args.Cancel();
+            args.Reason = "rmc-block-backpack-cant-other";
+            break;
+        }
+    }
+
+    private void OnBlockBackpackEquipAttempt(Entity<ClothingBlockBackpackComponent> ent, ref InventoryRelayedEvent<RMCEquipAttemptEvent> args)
+    {
+        ref readonly var ev = ref args.Args.Event;
+        if (ev.Cancelled)
+            return;
+
+        if ((ev.SlotFlags & SlotFlags.BACK) == 0)
+            return;
+
+        ev.Cancel();
+        ev.Reason = "rmc-block-backpack-cant-backpack";
+    }
+
+    private void OnClothingEquippedAttempt(Entity<ClothingComponent> ent, ref BeingEquippedAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        var ev = new RMCEquipAttemptEvent(args, SlotFlags.All);
+        RaiseLocalEvent(args.EquipTarget, ref ev);
+    }
+
     private void ModifyDamage(EntityUid ent, ref DamageModifyEvent args)
     {
         // TODO RMC14 the slot should depend on the part that is receiving the damage once part damage is in
@@ -169,5 +216,11 @@ public sealed class CMArmorSystem : EntitySystem
                 }
             }
         }
+    }
+
+    public void SetArmorPiercing(Entity<CMArmorPiercingComponent> ent, int amount)
+    {
+        ent.Comp.Amount = amount;
+        Dirty(ent);
     }
 }

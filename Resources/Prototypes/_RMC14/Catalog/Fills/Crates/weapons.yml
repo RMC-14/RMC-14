@@ -33,3 +33,13 @@
       amount: 2
     - id: CMMagazinePistolMK80
       amount: 4
+
+- type: entity
+  parent: CMCrateWeapons
+  id: RMCCrateSmartGunSet
+  name: ML66A Smart Gun System Package
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSmartGunOperatorEquipmentCase
+      amount: 1

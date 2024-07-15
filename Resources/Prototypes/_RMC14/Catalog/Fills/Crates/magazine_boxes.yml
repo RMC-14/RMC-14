@@ -120,3 +120,24 @@
   - type: StorageFill
     contents:
     - id: CMBoxMagazinePistolMK80
+
+# Smart Gun
+- type: entity
+  parent: CMCrateAmmo
+  id: RMCCrateBatterySmartGun
+  name: ML66A smart gun battery crate (4x)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPowerCellSmartgun
+      amount: 4
+
+- type: entity
+  parent: CMCrateAmmo
+  id: RMCCrateMagazineSmartGun
+  name: ML66A smart gun drum crate (2x)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSmartGun
+      amount: 2
