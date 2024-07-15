@@ -38,7 +38,7 @@ public sealed class AttachableIFFSystem : EntitySystem
 
     private void OnGunAttachableIFFAmmoShot(Entity<GunAttachableIFFComponent> ent, ref AmmoShotEvent args)
     {
-        _gunIFF.GiveAmmoIFF(ent, ref args);
+        _gunIFF.GiveAmmoIFF(ent, ref args, false);
     }
 
     private void UpdateGunIFF(EntityUid gun)
