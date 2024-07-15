@@ -95,7 +95,7 @@
     tags:
     - RMCAttachmentRail
     - RMCAttachmentMagneticHarness
-  - type: AttachableAutoPickup
+  - type: AttachableMagnetic
   - type: AttachableVisuals
   - type: AttachableWeaponRangedMods
     modifiers:
