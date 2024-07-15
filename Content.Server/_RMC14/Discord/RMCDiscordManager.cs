@@ -33,10 +33,10 @@ public sealed class RMCDiscordManager : IPostInjectInit
 
         try
         {
-            var token = _config.GetCVar(CMCVars.RMCDiscordToken);
+            var token = _config.GetCVar(RMCCVars.RMCDiscordToken);
             if (string.IsNullOrWhiteSpace(token))
             {
-                _sawmill.Info($"CVar {CMCVars.RMCDiscordToken.Name} has no value. Disabling Discord bot.");
+                _sawmill.Info($"CVar {RMCCVars.RMCDiscordToken.Name} has no value. Disabling Discord bot.");
                 return;
             }
 
@@ -82,10 +82,10 @@ public sealed class RMCDiscordManager : IPostInjectInit
         _client.MessageReceived += OnDiscordMessageReceived;
         _client.Ready += OnDiscordReady;
 
-        await _client.LoginAsync(TokenType.Bot, _config.GetCVar(CMCVars.RMCDiscordToken));
+        await _client.LoginAsync(TokenType.Bot, _config.GetCVar(RMCCVars.RMCDiscordToken));
         await _client.StartAsync();
 
-        _adminChannelId = _config.GetCVar(CMCVars.RMCDiscordAdminChatChannel);
+        _adminChannelId = _config.GetCVar(RMCCVars.RMCDiscordAdminChatChannel);
         if (_adminChannelId != 0)
             _adminChannel = (ITextChannel) await _client.GetChannelAsync(_adminChannelId);
 

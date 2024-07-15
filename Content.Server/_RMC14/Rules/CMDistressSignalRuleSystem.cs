@@ -142,12 +142,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         SubscribeLocalEvent<AlmayerComponent, MapInitEvent>(OnAlmayerMapInit);
 
-        Subs.CVar(_config, CMCVars.RMCPlanetMaps, v => _planetMaps = v, true);
-        Subs.CVar(_config, CMCVars.CMMarinesPerXeno, v => _defaultMarinesPerXeno = v, true);
-        Subs.CVar(_config, CMCVars.RMCAutoBalance, v => _autoBalance = v, true);
-        Subs.CVar(_config, CMCVars.RMCAutoBalanceStep, v => _autoBalanceStep = v, true);
-        Subs.CVar(_config, CMCVars.RMCAutoBalanceMax, v => _autoBalanceMax = v, true);
-        Subs.CVar(_config, CMCVars.RMCAutoBalanceMin, v => _autoBalanceMin = v, true);
+        Subs.CVar(_config, RMCCVars.RMCPlanetMaps, v => _planetMaps = v, true);
+        Subs.CVar(_config, RMCCVars.CMMarinesPerXeno, v => _defaultMarinesPerXeno = v, true);
+        Subs.CVar(_config, RMCCVars.RMCAutoBalance, v => _autoBalance = v, true);
+        Subs.CVar(_config, RMCCVars.RMCAutoBalanceStep, v => _autoBalanceStep = v, true);
+        Subs.CVar(_config, RMCCVars.RMCAutoBalanceMax, v => _autoBalanceMax = v, true);
+        Subs.CVar(_config, RMCCVars.RMCAutoBalanceMin, v => _autoBalanceMin = v, true);
 
         ReloadPrototypes();
     }
@@ -499,7 +499,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 value = _autoBalanceMin;
 
             if (SelectedPlanetMap == null)
-                _config.SetCVar(CMCVars.CMMarinesPerXeno, value);
+                _config.SetCVar(RMCCVars.CMMarinesPerXeno, value);
             else
                 _marinesPerXeno[SelectedPlanetMap] = value;
 

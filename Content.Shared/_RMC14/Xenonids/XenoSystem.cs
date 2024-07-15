@@ -84,9 +84,9 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, DamageModifyEvent>(OnXenoDamageModify);
         SubscribeLocalEvent<XenoComponent, RefreshMovementSpeedModifiersEvent>(OnXenoRefreshSpeed);
 
-        Subs.CVar(_config, CMCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
-        Subs.CVar(_config, CMCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
-        Subs.CVar(_config, CMCVars.CMXenoSpeedMultiplier, UpdateXenoSpeedMultiplier, true);
+        Subs.CVar(_config, RMCCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
+        Subs.CVar(_config, RMCCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
+        Subs.CVar(_config, RMCCVars.CMXenoSpeedMultiplier, UpdateXenoSpeedMultiplier, true);
 
         UpdatesAfter.Add(typeof(SharedXenoPheromonesSystem));
     }
