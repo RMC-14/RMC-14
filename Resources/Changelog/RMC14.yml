@@ -3154,5 +3154,12 @@
   id: 379
   time: '2024-07-15T05:44:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3073
+- author: Whisper, DrSmugleaf, Cepha
+  changes:
+  - message: Added the ML66A Smart Gun and Smart Gun Operator.
+    type: Add
+  id: 380
+  time: '2024-07-15T06:08:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3046
 Name: RMC14
 Order: -1
