@@ -1,15 +1,14 @@
 ﻿- type: Tag
-  id: CMMagazineSmartGun
+  id: RMCMagazineSmartGun
 
 - type: entity
   parent: CMMagazineRifleBase
-  id: CMMagazineSmartGun
+  id: RMCMagazineSmartGun
   name: "ML66A drum magazine (10x30mm)"
-  suffix: AP
   components:
   - type: Tag
     tags:
-    - CMMagazineSmartGun
+    - RMCMagazineSmartGun
   - type: BallisticAmmoProvider
     whitelist:
       tags:

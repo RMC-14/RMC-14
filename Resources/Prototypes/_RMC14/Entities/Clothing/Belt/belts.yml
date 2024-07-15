@@ -267,11 +267,14 @@
       - CMMagazineRifle
       - CMMagazineSmg
       - CMMagazineSniper
-      - CMMagazineSmartGun
+      - RMCMagazineSmartGun
 #      - # TODO RMC14 shotgun handfuls
       - Flare
   - type: FixedItemSizeStorage
-
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCMagazineSmartGun
 
 - type: entity
   parent: CMBeltMarine

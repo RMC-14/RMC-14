@@ -314,10 +314,10 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ghille.rsi
 
-# ML66A
+# Smart Gun
 - type: entity
   parent: CMArmorM3Medium
-  id: CMArmorML66ACombatHarness
+  id: CMArmorSmartGunCombatHarness
   name: ML66A combat harness
   description: A heavy protective vest designed to be worn with the ML66A Smart Gun System. It has specially designed straps and reinforcement to carry the Smartgun and accessories.
   components:

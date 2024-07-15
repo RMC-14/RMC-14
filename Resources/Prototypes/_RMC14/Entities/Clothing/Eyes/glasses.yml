@@ -39,7 +39,7 @@
 
 - type: entity
   parent: ClothingEyesBase
-  id: CMGlassesML66ASight
+  id: RMCGlassesSmartGunSight
   name: ML66A head mounted sight # TODO RMC14 meson tile vision see description below
   description: A headset and goggles system for the ML66A Smart Gun. # TODO RMC14 Has a low-res short-range imager, allowing for view of terrain.
   components:
@@ -53,6 +53,10 @@
   - type: NightVisionItem
     toggleable: false
   - type: FarSightItem
+  - type: ClothingRequireEquipped
+    whitelist:
+      components:
+      - SmartGun
   - type: Appearance
   - type: GenericVisualizer
     visuals:

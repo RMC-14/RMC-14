@@ -1,4 +1,3 @@
-
 namespace Content.Shared._RMC14.Item;
 
 [ByRefEvent]

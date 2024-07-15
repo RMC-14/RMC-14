@@ -110,3 +110,13 @@
     - id: CMGrenadeFrag
       amount: 6
     # TODO Original is 6 HEDP, 3 HIDP incen, 6 airburst frag, 3 airburst incen
+
+- type: entity
+  parent: CMBeltSmartGunOperator
+  id: CMBeltSmartGunOperatorFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSmartGun
+      amount: 2

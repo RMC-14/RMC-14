@@ -16,17 +16,15 @@
     - CMSmartGunOperator
     sections:
     - name: Smart Gun Set (Mandatory)
-      entries: [ ]
-    #- id: CMEssentialSmartGunOperatorSet
-    #  points: 0
+      takeAll: CMSmartGunSet
+      entries:
+      - id: CMSmartGunOperatorEquipmentCase
     - name: Gun Attachments
-      entries: [ ]
-    #- id: CMLaserSight
-    #  points: 0
-    #- id: CMRedDotSight
-    #  points: 0
-    #- id: CMReflexSight
-    #  points: 0
+      choices: { CMGunAttachments: 1 }
+      entries:
+      - id: RMCAttachmentLaserSight
+      - id: RMCAttachmentS5RedDotSight
+      - id: RMCAttachmentS6ReflexSight
     - name: Explosives
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
@@ -47,6 +45,14 @@
     #  points: 20
     #- id: CMM20MineBox4
     #  points: 20
+    - name: Sidearm Ammunitions
+      entries:
+      - id: CMMagazinePistolMK80
+        points: 5
+    - name: Restricted Firearms
+      entries:
+      - id: CMWeaponPistolMK80
+        points: 15
     - name: Clothing Items
       entries:
     #- id: CMScabbardMacheteFull
@@ -65,6 +71,8 @@
         points: 5
     #- id: CMFultonDeviceStack
     #  points: 5
+      - id: RMCPowerCellSmartgun
+        points: 15
     - name: Binoculars
       entries: [ ]
     #- id: CMBinoculars
@@ -88,16 +96,12 @@
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer
-        amount: 5
         points: 5
       - id: CMEncryptionKeyIntel
-        amount: 5
         points: 5
       - id: CMEncryptionKeyJTAC
-        amount: 5
         points: 5
       - id: CMEncryptionKeyRequisition
-        amount: 5
         points: 5
 
 - type: entity
@@ -118,10 +122,11 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
-      - id: CMVendorBundleRiflemanApparel # TODO any RMC14 smart gun operator specific items?
+      - id: CMVendorBundleRiflemanApparel
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
     - name: Belt
+      choices: { CMBelt: 1 }
       entries:
      #- id: CMM802SmartGunOperatorSidearmBelt
       - id: CMBeltSmartGunOperator
@@ -130,14 +135,18 @@
       entries:
       - id: CMPouchFlareFilled
         name: Flare pouch (Filled)
-      - id: CMPouchElectronics
+#      - id: CMPouchElectronics # TODO RMC14
       - id: CMPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
+        recommended: true
       - id: CMPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        recommended: true
       - id: CMPouchFirstAidPills
         name: first-aid pouch (pills)
+        recommended: true
       - id: CMPouchMagazinePistolLarge
+        recommended: true
       - id: CMPouchMagazine
       - id: CMPouchShotgun
       - id: CMPouchGeneralMedium
@@ -148,6 +157,7 @@
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBrown
+        recommended: true
       - id: CMWebbingBlack
     #- id: CMShoulderHolster
       - id: CMWebbing

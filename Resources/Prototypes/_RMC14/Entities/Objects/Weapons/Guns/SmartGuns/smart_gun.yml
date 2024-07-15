@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent: CMBaseWeaponRifle
   id: RMCSmartGun
-  name: ML66A Smart Gun
+  name: ML66A smart gun
   description: The actual firearm in the Smart Gun System. Essentially a heavy, mobile machinegun.
   components:
   - type: GunRequiresWield
@@ -51,13 +51,13 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: CMMagazineSmartGun
+        startingItem: RMCMagazineSmartGun
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         priority: 2
         whitelist:
           tags:
-          - CMMagazineSmartGun
+          - RMCMagazineSmartGun
       cell_slot:
         name: power-cell-slot-component-slot-name-default
         startingItem: RMCPowerCellSmartgun
@@ -92,6 +92,7 @@
   - type: GunRequireEquipped
     whitelist:
       components:
-      - SmartgunArmor
+      - SmartGunArmor
   - type: GunToggleableRecoil
   - type: GunToggleableAutoFire
+  - type: SmartGun

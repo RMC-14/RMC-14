@@ -18,5 +18,5 @@ public sealed partial class FarSightItemComponent : Component
     public bool Enabled;
 
     [DataField, AutoNetworkedField]
-    public Vector2 Zoom = new(1.1f, 1.1f);
+    public Vector2 Zoom = new(1.13f, 1.13f);
 }

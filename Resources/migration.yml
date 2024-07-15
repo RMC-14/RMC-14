@@ -522,4 +522,4 @@ CMDispenserChem : RMCDispenserChem
 CMLamp: RMCLamp
 
 # 2024-07-14
-CMArmorM56CombatHarness: CMArmorML66ACombatHarness
+CMArmorM56CombatHarness: CMArmorSmartGunCombatHarness

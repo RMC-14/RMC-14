@@ -299,9 +299,9 @@
         amount: 8
     - name: Special ammunition
       entries:
-      #- id: M56 DV9 Battery
-      #  amount: 4
-      - id: CMMagazineSmartGun
+      - id: RMCPowerCellSmartgun
+        amount: 4
+      - id: RMCMagazineSmartGun
         amount: 4
       #- id: M44 Heavy Speed Loader (.44)
       #  amount: 10
