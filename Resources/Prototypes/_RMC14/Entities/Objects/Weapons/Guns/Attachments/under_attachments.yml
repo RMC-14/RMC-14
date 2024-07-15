@@ -259,6 +259,7 @@
   - type: AttachableToggleable
     attachedOnly: true
     supercedeHolder: true
+    wieldedUseOnly: true
     actionName: Toggle U1 Grenade Launcher
     actionDesc: Switch to using the underbarrel grenade launcher.
     icon:

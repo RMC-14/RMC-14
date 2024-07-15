@@ -40,10 +40,16 @@ public sealed partial class AttachableToggleableComponent : Component
     public bool BreakOnRotate = false;
 
     /// <summary>
-    /// If set to true, the attachment can only be activated when the holder is wielded.
+    /// If set to true, the attachment can only be toggled when the holder is wielded.
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool WieldedOnly = false;
+
+    /// <summary>
+    /// If set to true, the attachment can only be used when the holder is wielded.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool WieldedUseOnly = false;
 
     [DataField, AutoNetworkedField]
     public float DoAfter;

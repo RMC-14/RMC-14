@@ -142,6 +142,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
             case AttachableAlteredType.Detached:
                 preventShootComponent.Message = "";
+                preventShootComponent.PreventShoot = false;
                 break;
 
             case AttachableAlteredType.Activated:
@@ -181,7 +182,27 @@ public sealed class AttachableToggleableSystem : EntitySystem
     private void OnAttemptShoot(Entity<AttachableToggleableComponent> attachable, ref AttemptShootEvent args)
     {
         if (attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
+        {
             args.Cancelled = true;
+            return;
+        }
+
+        if (attachable.Comp.WieldedUseOnly &&
+            (!_attachableHolderSystem.TryGetHolder(attachable.Owner, out EntityUid? holderUid) ||
+            !TryComp(holderUid, out WieldableComponent? wieldableComponent) ||
+            !wieldableComponent.Wielded))
+        {
+            args.Cancelled = true;
+
+            if (holderUid == null)
+                return;
+
+            _popupSystem.PopupClient(
+                Loc.GetString("rmc-attachable-shoot-fail-not-wielded", ("holder", holderUid), ("attachable", attachable)),
+                args.User,
+                args.User);
+            return;
+        }
     }
 
     private void OnGunShot(Entity<AttachableToggleableComponent> attachable, ref AttachableRelayedEvent<GunShotEvent> args)
