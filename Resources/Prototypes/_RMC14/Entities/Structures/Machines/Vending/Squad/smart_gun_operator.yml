@@ -22,7 +22,7 @@
     - name: Gun Attachments
       choices: { CMGunAttachments: 1 }
       entries:
-      - id: RMCAttachmentLaserSight
+#      - id: RMCAttachmentLaserSight # TODO RMC14 when other pistols are available here
       - id: RMCAttachmentS5RedDotSight
       - id: RMCAttachmentS6ReflexSight
     - name: Explosives
@@ -128,8 +128,8 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-     #- id: CMM802SmartGunOperatorSidearmBelt
-      - id: CMBeltSmartGunOperator
+     #- id: CMM802SmartGunOperatorSidearmBeltFilled
+      - id: CMBeltSmartGunOperatorFilled
     - name: Pouches
       choices: { CMPouch: 2 }
       entries:

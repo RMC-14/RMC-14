@@ -331,16 +331,20 @@
     - 0,0,3,1 # 2 slots
     whitelist:
       components:
-      - GasTank
-      - BallisticAmmoProvider
       # Mines
       # Bayonet
       # Belts
       # Motion detectors
       # Walkman
       tags:
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
       - Flashlight
       - Knife
+      - MRE
+      - Grenade
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
