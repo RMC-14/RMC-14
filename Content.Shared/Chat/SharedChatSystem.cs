@@ -157,6 +157,16 @@ public abstract class SharedChatSystem : EntitySystem
             var ev = new GetDefaultRadioChannelEvent();
             RaiseLocalEvent(source, ev);
 
+            if (ev.Channel == HivemindChannel &&
+                !_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
+            {
+                if (!quiet)
+                    _popup.PopupEntity(Loc.GetString("rmc-no-queen-hivemind-chat"), source, source, PopupType.LargeCaution);
+
+                output = SanitizeMessageCapital(input[1..].TrimStart());
+                return false;
+            }
+
             if (ev.Channel != null)
                 _prototypeManager.TryIndex(ev.Channel, out channel);
             return true;
