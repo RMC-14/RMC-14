@@ -20,7 +20,7 @@
   name: colonist ID card
   components:
   - type: PresetIdCard
-    job: RMCColonist
+    job: CMSurvivor
 
 - type: entity
   parent: CMIDCardGold

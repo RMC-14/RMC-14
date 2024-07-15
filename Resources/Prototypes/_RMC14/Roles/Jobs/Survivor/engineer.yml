@@ -1,5 +1,5 @@
 ﻿- type: startingGear
-  id: RMCGearColonistEngineer
+  id: RMCGearSurvivorEngineer
   equipment:
     head: ClothingHeadHatBeretEngineering
     gloves: CMHandsInsulated
@@ -13,11 +13,11 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointColonistEngineer
-  name: colonist engineer spawn point
+  id: RMCSpawnPointSurvivorEngineer
+  name: survivor engineer spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCColonist
+    job_id: CMSurvivor
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi

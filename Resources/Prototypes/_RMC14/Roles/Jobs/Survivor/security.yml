@@ -1,5 +1,5 @@
 ﻿- type: startingGear
-  id: RMCGearColonistSecurity
+  id: RMCGearSurvivorSecurity
   equipment:
     head: CMHeadBeretRed
     jumpsuit: CMJumpsuitColonist # /obj/item/clothing/under/rank/security
@@ -12,11 +12,11 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointColonistSecurity
-  name: colonist spawn point
+  id: RMCSpawnPointSurvivorSecurity
+  name: survivor security spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCColonist
+    job_id: CMSurvivor
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi

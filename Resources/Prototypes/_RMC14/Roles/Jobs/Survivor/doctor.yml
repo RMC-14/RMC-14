@@ -1,5 +1,5 @@
 ﻿- type: startingGear
-  id: RMCGearColonistDoctor
+  id: RMCGearSurvivorDoctor
   equipment:
     head: CMHeadCapSurgBlue
     mask: CMMaskSterile
@@ -14,11 +14,11 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointColonistDoctor
-  name: colonist doctor spawn point
+  id: RMCSpawnPointSurvivorDoctor
+  name: survivor doctor spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCColonist
+    job_id: CMSurvivor
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
