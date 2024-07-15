@@ -4,7 +4,6 @@
   mapPath: /Maps/saltern.yml
   minPlayers: 0
   maxPlayers: 35
-  fallback: true
   stations:
     Saltern:
       stationProto: StandardNanotrasenStation

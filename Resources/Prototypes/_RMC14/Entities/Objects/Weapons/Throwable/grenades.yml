@@ -29,9 +29,9 @@
     sprite: _RMC14/Objects/Weapons/Grenades/m40hedp.rsi
   - type: ExplodeOnTrigger
   - type: Explosive
-    maxIntensity: 40
-    intensitySlope: 10
-    totalIntensity: 400
+    maxIntensity: 20 # max 100 brute, 100 burn
+    intensitySlope: 6
+    totalIntensity: 200
     canCreateVacuum: false
   - type: Tag
     tags:
@@ -75,8 +75,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m40hefa.rsi
   - type: Explosive
-    maxIntensity: 13.3
-    intensitySlope: 4.5
+    maxIntensity: 8 # max 40 brute 40 burn
+    intensitySlope: 4
     totalIntensity: 110
     deleteAfterExplosion: false
   - type: ClusterGrenade

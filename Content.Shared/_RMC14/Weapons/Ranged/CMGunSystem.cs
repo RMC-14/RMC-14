@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
+using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Timing;
@@ -15,7 +16,6 @@ using Content.Shared.Wieldable.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
@@ -26,6 +26,7 @@ public sealed class CMGunSystem : EntitySystem
     [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
@@ -64,6 +65,10 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<GunSkilledRecoilComponent, ItemWieldedEvent>(TryRefreshGunModifiers);
         SubscribeLocalEvent<GunSkilledRecoilComponent, ItemUnwieldedEvent>(TryRefreshGunModifiers);
         SubscribeLocalEvent<GunSkilledRecoilComponent, GunRefreshModifiersEvent>(OnRecoilSkilledRefreshModifiers);
+
+        SubscribeLocalEvent<GunRequiresSkillsComponent, AttemptShootEvent>(OnRequiresSkillsAttemptShoot);
+
+        SubscribeLocalEvent<GunRequireEquippedComponent, AttemptShootEvent>(OnRequireEquippedAttemptShoot);
     }
 
     private void OnAmmoFixedDistanceShot(Entity<AmmoFixedDistanceComponent> ent, ref AmmoShotEvent args)
@@ -125,7 +130,9 @@ public sealed class CMGunSystem : EntitySystem
             return;
 
         args.Cancelled = true;
-        _popup.PopupClient(Loc.GetString("cm-gun-unskilled", ("gun", ent.Owner)), args.User, args.User);
+
+        var popup = Loc.GetString("cm-gun-unskilled", ("gun", ent.Owner));
+        _popup.PopupClient(popup, args.User, args.User, PopupType.SmallCaution);
     }
 
     private void OnGunUnskilledPenaltyRefresh(Entity<GunUnskilledPenaltyComponent> ent, ref GunRefreshModifiersEvent args)
@@ -168,6 +175,31 @@ public sealed class CMGunSystem : EntitySystem
             return;
 
         args.CameraRecoilScalar = 0;
+    }
+
+    private void OnRequiresSkillsAttemptShoot(Entity<GunRequiresSkillsComponent> ent, ref AttemptShootEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (_skills.HasSkills(args.User, ent.Comp.Skills))
+            return;
+
+        args.Cancelled = true;
+
+        var popup = Loc.GetString("cm-gun-unskilled", ("gun", ent.Owner));
+        _popup.PopupClient(popup, args.User, args.User, PopupType.SmallCaution);
+    }
+
+    private void OnRequireEquippedAttemptShoot(Entity<GunRequireEquippedComponent> ent, ref AttemptShootEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (HasRequiredEquippedPopup((ent, ent), args.User))
+            return;
+
+        args.Cancelled = true;
     }
 
     private void StopProjectile(Entity<ProjectileFixedDistanceComponent> projectile)
@@ -224,6 +256,22 @@ public sealed class CMGunSystem : EntitySystem
         RaiseLocalEvent(gun, ref ev);
 
         gun.Comp.ModifiedMultiplier = ev.Multiplier;
+    }
+
+    public bool HasRequiredEquippedPopup(Entity<GunRequireEquippedComponent?> gun, EntityUid user)
+    {
+        if (!Resolve(gun, ref gun.Comp, false))
+            return true;
+
+        var slots = _inventory.GetSlotEnumerator(user, SlotFlags.OUTERCLOTHING);
+        while (slots.MoveNext(out var slot))
+        {
+            if (_whitelist.IsValid(gun.Comp.Whitelist, slot.ContainedEntity))
+                return true;
+        }
+
+        _popup.PopupClient(Loc.GetString("rmc-shoot-harness-required"), user, user, PopupType.MediumCaution);
+        return false;
     }
 
     public override void Update(float frameTime)

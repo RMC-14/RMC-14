@@ -61,3 +61,5 @@
   - type: Tackle
     threshold: 4
     stun: 8
+  - type: RMCXenoDamageVisuals
+    prefix: sentinel
