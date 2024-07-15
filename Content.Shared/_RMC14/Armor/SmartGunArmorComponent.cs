@@ -4,4 +4,4 @@ namespace Content.Shared._RMC14.Armor;
 
 [RegisterComponent, NetworkedComponent]
 [Access(typeof(CMArmorSystem))]
-public sealed partial class SmartgunArmorComponent : Component;
+public sealed partial class SmartGunArmorComponent : Component;
