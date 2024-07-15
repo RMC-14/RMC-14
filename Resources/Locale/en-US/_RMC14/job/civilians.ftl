@@ -3,8 +3,8 @@ cm-job-name-correspondent = Correspondent
 cm-job-description-correspondent = You report on anything and everything that you deem fit to put within the pages of the news.
 CMJobCorrespondent = Correspondent
 
-rmc-job-name-colonist = Survivor
-rmc-job-description-colonist = You are a survivor of the attack on a corporate facility. You worked or lived in the colony/station, and managed to avoid the alien attacks... until now.
+cm-job-name-survivor = Survivor
+cm-job-description-survivor = You are a survivor of the attack on a corporate facility. You worked or lived in the colony/station, and managed to avoid the alien attacks... until now.
 CMJobSurvivor = Survivor
 
 cm-job-name-liaison = Corporate Liaison
