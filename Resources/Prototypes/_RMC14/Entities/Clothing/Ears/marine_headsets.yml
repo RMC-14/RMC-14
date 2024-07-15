@@ -1,5 +1,5 @@
 - type: entity
-  parent: RMCHeadsetAlmayer
+  parent: RMCHeadsetShip
   id: RMCHeadsetMarine
 
 # Alpha
