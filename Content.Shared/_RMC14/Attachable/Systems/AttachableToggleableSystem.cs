@@ -181,6 +181,9 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
     private void OnAttemptShoot(Entity<AttachableToggleableComponent> attachable, ref AttemptShootEvent args)
     {
+        if (args.Cancelled)
+            return;
+
         if (attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
         {
             args.Cancelled = true;
