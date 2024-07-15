@@ -27,6 +27,7 @@ public sealed class GunToggleableRecoilSystem : EntitySystem
     private void OnGetItemActions(Entity<GunToggleableRecoilComponent> ent, ref GetItemActionsEvent args)
     {
         args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId);
+        Dirty(ent);
     }
 
     private void OnToggleRecoil(Entity<GunToggleableRecoilComponent> ent, ref GunToggleRecoilActionEvent args)
@@ -64,12 +65,7 @@ public sealed class GunToggleableRecoilSystem : EntitySystem
     {
         Dirty(ent);
 
-        if (_actions.TryGetActionData(ent.Comp.Action, out var action))
-        {
-            action.Toggled = ent.Comp.Active;
-            Dirty(ent.Comp.Action.Value, action);
-        }
-
+        _actions.SetToggled(ent.Comp.Action, ent.Comp.Active);
         _gunBattery.RefreshBatteryDrain(ent.Owner);
         _gun.RefreshModifiers(ent.Owner);
 

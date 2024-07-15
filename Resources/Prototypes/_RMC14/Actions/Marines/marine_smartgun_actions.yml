@@ -6,7 +6,7 @@
   - type: InstantAction
     backgroundOn:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: template_active_big
+      state: template_on_big
     itemIconStyle: NoItem
 
 - type: entity
@@ -24,7 +24,7 @@
     itemIconStyle: NoItem
 
 - type: entity
-  parent: ActionMarineBase
+  parent: ActionMarineToggleable
   id: RMCActionToggleRecoil
   name: Toggle Recoil Compensation
   description: Removes all recoil when firing this gun.
@@ -38,7 +38,7 @@
     itemIconStyle: NoItem
 
 - type: entity
-  parent: ActionMarineBase
+  parent: ActionMarineToggleable
   id: RMCActionToggleAutoFire
   name: Toggle Auto Fire
   description: Makes the gun automatically shoot a single shot towards a target every couple seconds.

@@ -47,6 +47,7 @@ public sealed class GunToggleableAutoFireSystem : EntitySystem
     private void OnGetItemActions(Entity<GunToggleableAutoFireComponent> ent, ref GetItemActionsEvent args)
     {
         args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId);
+        Dirty(ent);
     }
 
     private void OnAutoFireAction(Entity<GunToggleableAutoFireComponent> ent, ref GunToggleableAutoFireActionEvent args)
@@ -82,11 +83,7 @@ public sealed class GunToggleableAutoFireSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp, false))
             return;
 
-        if (_actions.TryGetActionData(ent.Comp.Action, out var action))
-        {
-            action.Toggled = active;
-            Dirty(ent.Comp.Action.Value, action);
-        }
+        _actions.SetToggled(ent.Comp.Action, active);
     }
 
     public override void Update(float frameTime)

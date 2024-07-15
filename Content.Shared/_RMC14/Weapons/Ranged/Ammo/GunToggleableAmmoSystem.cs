@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.Popups;
@@ -27,39 +28,19 @@ public sealed class GunToggleableAmmoSystem : EntitySystem
         SubscribeLocalEvent<GunToggleableAmmoComponent, GetItemActionsEvent>(OnGetItemActions);
         SubscribeLocalEvent<GunToggleableAmmoComponent, GunToggleAmmoActionEvent>(OnToggleAmmoAction);
         SubscribeLocalEvent<GunToggleableAmmoComponent, AmmoShotEvent>(OnAmmoShot);
+        SubscribeLocalEvent<GunToggleableAmmoComponent, UniqueActionEvent>(OnUniqueAction);
     }
 
     private void OnGetItemActions(Entity<GunToggleableAmmoComponent> ent, ref GetItemActionsEvent args)
     {
         args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId);
+        Dirty(ent);
     }
 
     private void OnToggleAmmoAction(Entity<GunToggleableAmmoComponent> ent, ref GunToggleAmmoActionEvent args)
     {
-        if (ent.Comp.Settings.Count == 0)
-            return;
-
-        args.Handled = true;
-
-        ref var settingIndex = ref ent.Comp.Setting;
-        settingIndex++;
-        if (settingIndex >= ent.Comp.Settings.Count)
-            settingIndex = 0;
-
-        var user = args.Performer;
-        var setting = ent.Comp.Settings[settingIndex];
-        var popup = Loc.GetString("rmc-toggleable-ammo-firing", ("ammo", Loc.GetString(setting.Name)));
-        _popup.PopupClient(popup, user, user, PopupType.Large);
-
-        _audio.PlayPredicted(ent.Comp.ToggleSound, ent, user);
-
-        if (_actions.TryGetActionData(ent.Comp.Action, out var action))
-        {
-            action.Icon = setting.Icon;
-            Dirty(ent.Comp.Action.Value, action);
-        }
-
-        Dirty(ent);
+        if (ToggleAmmo(ent, args.Performer))
+            args.Handled = true;
     }
 
     private void OnAmmoShot(Entity<GunToggleableAmmoComponent> ent, ref AmmoShotEvent args)
@@ -80,5 +61,41 @@ public sealed class GunToggleableAmmoSystem : EntitySystem
             if (_armorPiercingQuery.TryComp(projectile, out var armorPiercing))
                 _cmArmor.SetArmorPiercing((projectile, armorPiercing), setting.ArmorPiercing);
         }
+    }
+
+    private void OnUniqueAction(Entity<GunToggleableAmmoComponent> ent, ref UniqueActionEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (ToggleAmmo(ent, args.UserUid))
+            args.Handled = true;
+    }
+
+    private bool ToggleAmmo(Entity<GunToggleableAmmoComponent> ent, EntityUid user)
+    {
+        if (ent.Comp.Settings.Count == 0)
+            return false;
+
+        ref var settingIndex = ref ent.Comp.Setting;
+        settingIndex++;
+        if (settingIndex >= ent.Comp.Settings.Count)
+            settingIndex = 0;
+
+        var setting = ent.Comp.Settings[settingIndex];
+        var popup = Loc.GetString("rmc-toggleable-ammo-firing", ("ammo", Loc.GetString(setting.Name)));
+        _popup.PopupClient(popup, user, user, PopupType.Large);
+
+        _audio.PlayPredicted(ent.Comp.ToggleSound, ent, user);
+
+        if (_actions.TryGetActionData(ent.Comp.Action, out var action))
+        {
+            action.Icon = setting.Icon;
+            Dirty(ent.Comp.Action.Value, action);
+            _actions.UpdateAction(ent.Comp.Action, action);
+        }
+
+        Dirty(ent);
+        return true;
     }
 }
