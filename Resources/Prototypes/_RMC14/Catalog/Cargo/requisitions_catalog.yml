@@ -36,6 +36,10 @@
         crate: CMCrateBoxMagazinePistolM77AP
       - cost: 4000
         crate: CMCrateBoxMagazinePistolMK80
+      - cost: 4000
+        crate: RMCCrateBatterySmartGun
+      - cost: 3000
+        crate: RMCCrateMagazineSmartGun
     - name: Attachments
       entries:
       - cost: 3000
@@ -184,6 +188,8 @@
 #      entries: []
     - name: Weapons
       entries:
+      - cost: 10000
+        crate: RMCCrateSmartGunSet
       - cost: 4000
         crate: CMCrateM54C
 #      - cost: 4000

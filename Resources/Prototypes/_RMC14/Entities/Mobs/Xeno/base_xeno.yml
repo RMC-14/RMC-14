@@ -1,4 +1,4 @@
-﻿# Xeno AI
+# Xeno AI
 - type: htnCompound
   id: CMXenoCompound
   branches:
@@ -78,6 +78,8 @@
     - Piercing
     - Heat
     - Shock
+  - type: CMDefibrillatorBlocked
+    popup: defibrillator-xeno
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.2
     baseSprintSpeed: 4

@@ -104,10 +104,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private float _autoBalanceMax;
 
     [ViewVariables]
-    private readonly Dictionary<string, float> _marinesPerXeno = new()
+    public readonly Dictionary<string, float> MarinesPerXeno = new()
     {
-        ["/Maps/_RMC14/lv624.yml"] = 4.25f,
-        ["/Maps/_RMC14/solaris.yml"] = 5.5f,
+        ["/Maps/_RMC14/lv624.yml"] = 3.75f,
+        ["/Maps/_RMC14/solaris.yml"] = 4.75f,
     };
 
     private readonly List<MapId> _almayerMaps = [];
@@ -142,12 +142,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         SubscribeLocalEvent<AlmayerComponent, MapInitEvent>(OnAlmayerMapInit);
 
-        Subs.CVar(_config, CMCVars.RMCPlanetMaps, v => _planetMaps = v, true);
-        Subs.CVar(_config, CMCVars.CMMarinesPerXeno, v => _defaultMarinesPerXeno = v, true);
-        Subs.CVar(_config, CMCVars.RMCAutoBalance, v => _autoBalance = v, true);
-        Subs.CVar(_config, CMCVars.RMCAutoBalanceStep, v => _autoBalanceStep = v, true);
-        Subs.CVar(_config, CMCVars.RMCAutoBalanceMax, v => _autoBalanceMax = v, true);
-        Subs.CVar(_config, CMCVars.RMCAutoBalanceMin, v => _autoBalanceMin = v, true);
+        Subs.CVar(_config, RMCCVars.RMCPlanetMaps, v => _planetMaps = v, true);
+        Subs.CVar(_config, RMCCVars.CMMarinesPerXeno, v => _defaultMarinesPerXeno = v, true);
+        Subs.CVar(_config, RMCCVars.RMCAutoBalance, v => _autoBalance = v, true);
+        Subs.CVar(_config, RMCCVars.RMCAutoBalanceStep, v => _autoBalanceStep = v, true);
+        Subs.CVar(_config, RMCCVars.RMCAutoBalanceMax, v => _autoBalanceMax = v, true);
+        Subs.CVar(_config, RMCCVars.RMCAutoBalanceMin, v => _autoBalanceMin = v, true);
 
         ReloadPrototypes();
     }
@@ -241,9 +241,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             var marinesPerXeno = _defaultMarinesPerXeno;
             if (SelectedPlanetMap != null &&
-                !_marinesPerXeno.TryGetValue(SelectedPlanetMap, out marinesPerXeno))
+                !MarinesPerXeno.TryGetValue(SelectedPlanetMap, out marinesPerXeno))
             {
-                _marinesPerXeno[SelectedPlanetMap] = _defaultMarinesPerXeno;
+                MarinesPerXeno[SelectedPlanetMap] = _defaultMarinesPerXeno;
                 marinesPerXeno = _defaultMarinesPerXeno;
             }
 
@@ -487,7 +487,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             var value = _defaultMarinesPerXeno;
             if (SelectedPlanetMap != null &&
-                _marinesPerXeno.TryGetValue(SelectedPlanetMap, out var mapValue))
+                MarinesPerXeno.TryGetValue(SelectedPlanetMap, out var mapValue))
             {
                 value = mapValue;
             }
@@ -499,9 +499,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 value = _autoBalanceMin;
 
             if (SelectedPlanetMap == null)
-                _config.SetCVar(CMCVars.CMMarinesPerXeno, value);
+                _config.SetCVar(RMCCVars.CMMarinesPerXeno, value);
             else
-                _marinesPerXeno[SelectedPlanetMap] = value;
+                MarinesPerXeno[SelectedPlanetMap] = value;
 
             break;
         }

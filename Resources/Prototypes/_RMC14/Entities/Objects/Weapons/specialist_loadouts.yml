@@ -11,7 +11,7 @@
     - state: closed
       map: [ base ]
     - state: sniper
-      map: [ sniper ]
+      map: [ label ]
   - type: Icon
     sprite: _RMC14/Objects/loadout_kits.rsi
     state: closed
@@ -22,7 +22,7 @@
         base:
           True: { state: open }
           False: { state: closed }
-        sniper:
+        label:
           True: { visible: false }
           False: { visible: true }
   - type: Item
@@ -65,7 +65,7 @@
     - state: closed
       map: [ base ]
     - state: grenadier
-      map: [ grenadier ]
+      map: [ label ]
   - type: Icon
     sprite: _RMC14/Objects/loadout_kits.rsi
     state: closed
@@ -76,7 +76,7 @@
         base:
           True: { state: open }
           False: { state: closed }
-        grenadier:
+        label:
           True: { visible: false }
           False: { visible: true }
   - type: Item

@@ -25,7 +25,7 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/m42_scoutsight.rsi
     layers:
     - state: icon
-      map: [ "nightVisionItemLayer" ]
+      map: [ "icon" ]
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/m42_scoutsight.rsi
   - type: NightVisionItem
@@ -33,7 +33,35 @@
   - type: GenericVisualizer
     visuals:
       enum.NightVisionItemVisuals.Active:
-        nightVisionItemLayer:
+        icon:
+          True: { state: icon_on }
+          False: { state: icon }
+
+- type: entity
+  parent: ClothingEyesBase
+  id: RMCGlassesSmartGunSight
+  name: ML66A head mounted sight # TODO RMC14 meson tile vision see description below
+  description: A headset and goggles system for the ML66A Smart Gun. # TODO RMC14 Has a low-res short-range imager, allowing for view of terrain.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ml66a_sight.rsi
+    layers:
+    - state: icon
+      map: [ "icon" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ml66a_sight.rsi
+  - type: NightVisionItem
+    toggleable: false
+  - type: FarSightItem
+  - type: ClothingRequireEquipped
+    whitelist:
+      components:
+      - SmartGun
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.FarSightItemVisuals.Active:
+        icon:
           True: { state: icon_on }
           False: { state: icon }
 
@@ -47,5 +75,3 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
-
-    

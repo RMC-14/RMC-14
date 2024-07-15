@@ -1,0 +1,19 @@
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerRandomTools
+  name: random tools spawner
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - sprite: _RMC14/Objects/Tools/crowbar.rsi
+          state: icon
+    - type: RandomSpawner
+      prototypes:
+        - CMScrewdriver
+        - CMWirecutter
+        - CMWelder
+        - CMCrowbar
+        - CMWrench
+        - RMCFlashlight
+      offset: 0
