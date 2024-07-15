@@ -7,9 +7,11 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Physics;
+using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Wieldable;
+using Content.Shared.Wieldable.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Collision.Shapes;
@@ -27,11 +29,14 @@ public sealed class GunToggleableAutoFireSystem : EntitySystem
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly CMGunSystem _rmcGun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private readonly HashSet<Entity<XenoComponent>> _targets = new();
-    private readonly PolygonShape _shape = new();
+    public readonly PolygonShape Shape = new();
+    public bool Debug;
 
     public override void Initialize()
     {
@@ -54,7 +59,26 @@ public sealed class GunToggleableAutoFireSystem : EntitySystem
     {
         args.Handled = true;
 
-        if (EnsureComp<ActiveGunAutoFireComponent>(ent, out var comp))
+        var user = args.Performer;
+        if (!_rmcGun.HasRequiredEquippedPopup(ent.Owner, user))
+            return;
+
+        if (!_hands.IsHolding(user, ent))
+        {
+            var msg = Loc.GetString("rmc-toggleable-autofire-requires-wielding", ("gun", ent));
+            _popup.PopupClient(msg, user, user, PopupType.MediumCaution);
+            return;
+        }
+
+        if (TryComp(ent, out WieldableComponent? wieldable) &&
+            !wieldable.Wielded)
+        {
+            var msg = Loc.GetString("rmc-toggleable-autofire-requires-wielding", ("gun", ent));
+            _popup.PopupClient(msg, user, user, PopupType.MediumCaution);
+            return;
+        }
+
+        if (EnsureComp<ActiveGunAutoFireComponent>(ent, out _))
         {
             RemCompDeferred<ActiveGunAutoFireComponent>(ent);
             AutoUpdated((ent, ent), false);
@@ -88,12 +112,12 @@ public sealed class GunToggleableAutoFireSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        if (_net.IsClient)
+        if (!Debug && _net.IsClient)
             return;
 
         var time = _timing.CurTime;
-        var query = EntityQueryEnumerator<ActiveGunAutoFireComponent, GunComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var active, out var gun, out var xform))
+        var query = EntityQueryEnumerator<ActiveGunAutoFireComponent, GunToggleableAutoFireComponent, GunComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var active, out var auto, out var gun, out var xform))
         {
             if (time < active.NextFire)
                 continue;
@@ -107,12 +131,14 @@ public sealed class GunToggleableAutoFireSystem : EntitySystem
             }
 
             var (pos, rotation) = _transform.GetWorldPositionRotation(xform);
-            var box = new Box2Rotated(Box2.CenteredAround(pos + rotation.ToWorldVec() * active.Range / 2, active.Range), rotation, pos + rotation.ToWorldVec() * active.Range / 2);
+            rotation = rotation.GetCardinalDir().ToAngle();
+            pos = pos + rotation.ToWorldVec() * auto.Range.Y / 2;
+            var box = new Box2Rotated(Box2.CenteredAround(pos, auto.Range), rotation, pos);
             var shapeTransform = Robust.Shared.Physics.Transform.Empty;
 
-            _shape.Set(box);
+            Shape.Set(box);
             _targets.Clear();
-            _entityLookup.GetEntitiesIntersecting(xform.MapID, _shape, shapeTransform, _targets);
+            _entityLookup.GetEntitiesIntersecting(xform.MapID, Shape, shapeTransform, _targets, LookupFlags.Uncontained);
 
             foreach (var target in _targets)
             {
@@ -121,13 +147,15 @@ public sealed class GunToggleableAutoFireSystem : EntitySystem
 
                 if (!_interaction.InRangeUnobstructed(container.Owner,
                         target.Owner,
-                        10,
+                        auto.MaxRange,
                         CollisionGroup.Impassable | CollisionGroup.BulletImpassable))
                 {
                     continue;
                 }
 
-                _gun.AttemptShoot(container.Owner, uid, gun, target.Owner.ToCoordinates());
+                if (_net.IsServer)
+                    _gun.AttemptShoot(container.Owner, uid, gun, target.Owner.ToCoordinates());
+
                 active.NextFire = time + active.Cooldown;
                 break;
             }

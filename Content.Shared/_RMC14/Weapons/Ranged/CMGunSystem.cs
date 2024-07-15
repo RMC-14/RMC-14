@@ -196,17 +196,10 @@ public sealed class CMGunSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        var slots = _inventory.GetSlotEnumerator(args.User, SlotFlags.OUTERCLOTHING);
-        while (slots.MoveNext(out var slot))
-        {
-            if (_whitelist.IsValid(ent.Comp.Whitelist, slot.ContainedEntity))
-                return;
-        }
+        if (HasRequiredEquippedPopup((ent, ent), args.User))
+            return;
 
         args.Cancelled = true;
-
-        var user = args.User;
-        _popup.PopupClient(Loc.GetString("rmc-shoot-harness-required"), user, user, PopupType.MediumCaution);
     }
 
     private void StopProjectile(Entity<ProjectileFixedDistanceComponent> projectile)
@@ -263,6 +256,22 @@ public sealed class CMGunSystem : EntitySystem
         RaiseLocalEvent(gun, ref ev);
 
         gun.Comp.ModifiedMultiplier = ev.Multiplier;
+    }
+
+    public bool HasRequiredEquippedPopup(Entity<GunRequireEquippedComponent?> gun, EntityUid user)
+    {
+        if (!Resolve(gun, ref gun.Comp, false))
+            return true;
+
+        var slots = _inventory.GetSlotEnumerator(user, SlotFlags.OUTERCLOTHING);
+        while (slots.MoveNext(out var slot))
+        {
+            if (_whitelist.IsValid(gun.Comp.Whitelist, slot.ContainedEntity))
+                return true;
+        }
+
+        _popup.PopupClient(Loc.GetString("rmc-shoot-harness-required"), user, user, PopupType.MediumCaution);
+        return false;
     }
 
     public override void Update(float frameTime)

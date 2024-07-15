@@ -8,7 +8,10 @@ namespace Content.Shared._RMC14.Weapons.Ranged.Auto;
 public sealed partial class GunToggleableAutoFireComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public Box2 Range = new(0, 0, 7, 15);
+    public Vector2i Range = new(20, 10);
+
+    [DataField, AutoNetworkedField]
+    public float MaxRange = 10f;
 
     [DataField, AutoNetworkedField]
     public float BatteryDrain = 5;
