@@ -57,6 +57,9 @@ public sealed class GunToggleableRecoilSystem : EntitySystem
 
     private void OnGunUnpowered(Entity<GunToggleableRecoilComponent> ent, ref GunUnpoweredEvent args)
     {
+        if (!ent.Comp.Active)
+            return;
+
         ent.Comp.Active = false;
         ActiveChanged(ent, null);
     }
