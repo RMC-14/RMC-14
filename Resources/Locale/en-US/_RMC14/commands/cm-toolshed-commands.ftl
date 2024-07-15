@@ -31,3 +31,5 @@ command-description-xenomature = Instantly matures a xeno. Applicable to the Que
 
 command-description-marinesperxeno-get = Gets the initial ratio of marines per xeno on a specific map.
 command-description-marinesperxeno-set = Sets the initial ratio of marines per xeno on a specific map.
+
+command-description-withxenotier = Filters entities or entity prototypes to those of a specific xenonid tier.
