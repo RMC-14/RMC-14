@@ -251,7 +251,7 @@
   parent: CMBeltMarine
   id: CMBeltSmartGunOperator
   name: M280 pattern smart gun operator drum belt
-  description: Despite the fact that 1. drum magazines are incredibly non-ergonomical, and 2. require incredibly precise machining in order to fit universally (spoiler, they don't, adding further to the myth of 'Smart Gun Personalities'), the Marines decided to issue a modified marine belt (more formally known by the designation M280) with hooks and dust covers (overly complex for the average jarhead) for the M56B system's drum munitions. When the carry catch on the drum isn't getting stuck in the oiled up velcro, the rig actually does do a decent job at holding a plentiful amount of drums. But at the end of the day, compared to standard rigs... it sucks, but isn't that what being a Marine is all about?
+  description: Despite the fact that 1. drum magazines are incredibly non-ergonomical, and 2. require incredibly precise machining in order to fit universally (spoiler, they don't, adding further to the myth of 'Smart Gun Personalities'), the Marines decided to issue a modified marine belt (more formally known by the designation M280) with hooks and dust covers (overly complex for the average jarhead) for the ML66A system's drum munitions. When the carry catch on the drum isn't getting stuck in the oiled up velcro, the rig actually does do a decent job at holding a plentiful amount of drums. But at the end of the day, compared to standard rigs... it sucks, but isn't that what being a Marine is all about?
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator.rsi
@@ -267,11 +267,14 @@
       - CMMagazineRifle
       - CMMagazineSmg
       - CMMagazineSniper
-#      - # TODO RMC14 smart gun magazine
+      - RMCMagazineSmartGun
 #      - # TODO RMC14 shotgun handfuls
       - Flare
   - type: FixedItemSizeStorage
-
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCMagazineSmartGun
 
 - type: entity
   parent: CMBeltMarine

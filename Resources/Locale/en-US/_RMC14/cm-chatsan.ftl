@@ -46,6 +46,12 @@ cm-chatsan-replacement-human = tall host
 cm-chatsan-word-humans = humans
 cm-chatsan-replacement-humans = tall hosts
 
+cm-chatsan-word-marine = marine
+cm-chatsan-replacement-marine = tall host
+
+cm-chatsan-word-marines = marines
+cm-chatsan-replacement-marines = tall hosts
+
 cm-chatsan-word-lizard = lizard
 cm-chatsan-replacement-lizard = scaled host
 
@@ -102,6 +108,12 @@ cm-chatsan-replacement-dropship = metal bird
 
 cm-chatsan-word-dropships = dropships
 cm-chatsan-replacement-dropships = metal birds
+
+cm-chatsan-word-ship = ship
+cm-chatsan-replacement-ship = metal bird
+
+cm-chatsan-word-ships = ships
+cm-chatsan-replacement-ships = metal birds
 
 cm-chatsan-word-alamo = alamo
 cm-chatsan-replacement-alamo = metal bird
@@ -199,8 +211,26 @@ cm-chatsan-replacement-felinid = feline host
 cm-chatsan-word-felinids = felinids
 cm-chatsan-replacement-felinids = feline hosts
 
-cm-chatsan-word-cat = feline host
-cm-chatsan-word-cats = feline hosts
+cm-chatsan-word-cat = cat
+cm-chatsan-replacement-cat = feline host
+
+cm-chatsan-word-cats = cats
+cm-chatsan-replacement-cats = feline hosts
+
+cm-chatsan-word-grenade = grenade
+cm-chatsan-replacement-grenade = boomstick
+
+cm-chatsan-word-grenades = grenades
+cm-chatsan-replacement-grenades = boomsticks
+
+cm-chatsan-word-bullet = bullet
+cm-chatsan-replacement-bullet = spit
+
+cm-chatsan-word-bullets = bullets
+cm-chatsan-replacement-bullets = spits
+
+cm-chatsan-word-ammo = ammo
+cm-chatsan-replacement-ammo = spits
 
 # TODO RMC14 rouny > runner but only if no rouny was spawned in the round
 

@@ -3125,5 +3125,50 @@
   id: 376
   time: '2024-07-14T07:50:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3059
+- author: diraven
+  changes:
+  - message: automatic xeno text chat replacements for "cat", "grenade", "ship", "bullet",
+      "ammo", "marine".
+    type: Add
+  id: 377
+  time: '2024-07-14T23:32:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3069
+- author: lunarcomets
+  changes:
+  - message: lightbulbs now ALSO break in a single hit
+    type: Fix
+  id: 378
+  time: '2024-07-14T23:35:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3060
+- author: DrSmugleaf
+  changes:
+  - message: Fixed others priming grenades showing the popup as "You" priming it.
+    type: Fix
+  - message: Some CVars have been renamed. Check your settings for "Play Humanoid
+      Voicelines" as they have been reset.
+    type: Tweak
+  - message: Requisitions now starts with 10000 more dollars as a base.
+    type: Tweak
+  - message: Requisitions now gains 800 dollars per minute, up from 600.
+    type: Tweak
+  id: 379
+  time: '2024-07-15T05:44:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3073
+- author: Whisper, DrSmugleaf, Cepha
+  changes:
+  - message: Added the ML66A Smart Gun and Smart Gun Operator.
+    type: Add
+  id: 380
+  time: '2024-07-15T06:08:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3046
+- author: DrSmugleaf
+  changes:
+  - message: Fixed hivemind chat not always being disabled without a Queen.
+      Every minute I have to spend down chasing a bug that no bug abuser reports is
+      a minute you guys spend without extra content being added to the game.
+    type: Fix
+  id: 381
+  time: '2024-07-15T06:19:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3077
 Name: RMC14
 Order: -1

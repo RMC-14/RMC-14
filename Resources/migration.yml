@@ -298,7 +298,6 @@ SpawnPointMaintTech: CMSpawnPointMaintTech
 SpawnPointOrdnanceTech: CMSpawnPointOrdnanceTech
 SpawnPointRifleman: CMSpawnPointRifleman
 SpawnPointSeniorEnlistedAdvisor: CMSpawnPointSeniorEnlistedAdvisor
-# SpawnPointSmartGunner: CMSpawnPointSmartGunner
 SpawnPointSquadLeader: CMSpawnPointSquadLeader
 SpawnPointStaffOfficer: CMSpawnPointStaffOfficer
 SpawnPointWeaponsSpecialist: CMSpawnPointWeaponsSpecialist
@@ -524,3 +523,6 @@ CMLamp: RMCLamp
 
 # 2024-07-11
 CMSpawnPointSurvivor: RMCSpawnPointColonist
+
+# 2024-07-14
+CMArmorM56CombatHarness: CMArmorSmartGunCombatHarness

@@ -55,7 +55,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
 
     private void OnNightVisionItemGetActions(Entity<NightVisionItemComponent> ent, ref GetItemActionsEvent args)
     {
-        if (args.InHands)
+        if (args.InHands || !ent.Comp.Toggleable)
             return;
 
         args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId);
@@ -127,7 +127,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
 
     private void ToggleNightVisionItem(Entity<NightVisionItemComponent> item, EntityUid user)
     {
-        if (item.Comp.User == user)
+        if (item.Comp.User == user && item.Comp.Toggleable)
         {
             DisableNightVisionItem(item, item.Comp.User);
             return;
