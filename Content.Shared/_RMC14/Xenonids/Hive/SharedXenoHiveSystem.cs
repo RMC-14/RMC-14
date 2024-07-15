@@ -1,7 +1,10 @@
 ﻿using Content.Shared._RMC14.NightVision;
+using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared.Mobs;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Xenonids.Hive;
@@ -13,10 +16,26 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedNightVisionSystem _nightVision = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<HiveComponent, MapInitEvent>(OnMapInit);
+
+        SubscribeLocalEvent<XenoEvolutionGranterComponent, MobStateChangedEvent>(OnGranterMobStateChanged);
+    }
+
+    private void OnGranterMobStateChanged(Entity<XenoEvolutionGranterComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState != MobState.Dead)
+            return;
+
+        if (TryComp(ent, out XenoComponent? xeno) &&
+            TryComp(xeno.Hive, out HiveComponent? hive))
+        {
+            hive.LastQueenDeath = _timing.CurTime;
+            Dirty(xeno.Hive.Value, hive);
+        }
     }
 
     private void OnMapInit(Entity<HiveComponent> ent, ref MapInitEvent args)

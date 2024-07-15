@@ -169,3 +169,4 @@
   - type: NpcFactionMember
     factions:
     - UNMC
+  - type: RMCNightVisionVisible

@@ -1,7 +1,9 @@
 using Content.Shared._RMC14.Hands;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Pheromones;
+using Content.Shared.Atmos.Rotting;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
@@ -16,6 +18,7 @@ using Content.Shared.Jittering;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.NPC.Components;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Rounding;
@@ -53,6 +56,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private readonly SharedRottingSystem _rotting = default!;
 
     public override void Initialize()
     {
@@ -341,6 +345,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         victimComp.Hive = CompOrNull<XenoComponent>(parasite)?.Hive ?? default;
         _stun.TryParalyze(victim, parasite.Comp.ParalyzeTime, true);
         _status.TryAddStatusEffect(victim, "Muted", parasite.Comp.ParalyzeTime, true, "Muted");
+        RefreshIncubationMultipliers(victim);
 
         var container = _container.EnsureContainer<ContainerSlot>(victim, victimComp.ContainerId);
         _container.Insert(parasite.Owner, container);
@@ -360,10 +365,22 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp, false))
             return;
 
-        var ev = new GetInfectedIncubationMultiplierEvent(1);
+        var ev = new GetInfectedIncubationMultiplierEvent(ent.Comp.CurrentStage);
         RaiseLocalEvent(ent, ref ev);
 
-        ent.Comp.IncubationMultiplier = ev.Multiplier;
+        var multiplier = 1f;
+
+        foreach (var add in ev.Additions)
+        {
+            multiplier += add;
+        }
+
+        foreach (var multi in ev.Multipliers)
+        {
+            multiplier *= multi;
+        }
+
+        ent.Comp.IncubationMultiplier = multiplier;
     }
 
     public override void Update(float frameTime)
@@ -394,8 +411,15 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
             if (infected.BurstAt > time)
             {
-                // TODO RMC14 make this less effective against late-stage infections, also make this support faster incubation
-                if (infected.IncubationMultiplier < 1)
+                // Embryo dies if unrevivable when dead
+                // Kill the embryo if we've rotted or are a simplemob
+                if (_mobState.IsDead(uid) && (HasComp<InfectStopOnDeathComponent>(uid) || _rotting.IsRotten(uid)))
+                {
+                    RemCompDeferred<VictimInfectedComponent>(uid);
+                    continue;
+                }
+                // Stasis slows this, while nesting makes it happen sooner
+                if (infected.IncubationMultiplier != 1)
                     infected.BurstAt += TimeSpan.FromSeconds(1 - infected.IncubationMultiplier) * frameTime;
 
                 // Stages
@@ -405,6 +429,8 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                 {
                     infected.CurrentStage = stage;
                     Dirty(uid, infected);
+                    // Refresh multipliers since some become more/less effective
+                    RefreshIncubationMultipliers(uid);
                 }
 
                 // Warn on the last to final stage of a burst

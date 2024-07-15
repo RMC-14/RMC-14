@@ -9,6 +9,4 @@ public sealed partial class AttachableSizeModsComponent : Component
 {
     [DataField, AutoNetworkedField]
     public List<AttachableSizeModifierSet> Modifiers = new();
-
-    public int ResetIncrement = 0;
 }
