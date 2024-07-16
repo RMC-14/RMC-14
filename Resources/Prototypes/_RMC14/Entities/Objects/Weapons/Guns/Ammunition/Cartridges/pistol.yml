@@ -33,14 +33,13 @@
 - type: entity
   id: RCMCartridgeRevolver44
   name: cartridge (.44)
-  parent: CMCartridgePistolBase
+  parent: RCMCartridgePistolBase
   components:
   - type: Tag
     tags:
     - Cartridge
     - RCMCartridgeRevolver44
   - type: CartridgeAmmo
-    deleteOnSpawn: true
     proto: RCMBulletRevolver44
 
 - type: entity
@@ -53,5 +52,4 @@
     - Cartridge
     - RCMCartridgeRevolver44
   - type: CartridgeAmmo
-    deleteOnSpawn: true
     proto: RCMBulletRevolver44Marksman
