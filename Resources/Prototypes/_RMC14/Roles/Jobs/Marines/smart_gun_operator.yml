@@ -23,7 +23,6 @@
       smartGun: 1
     - type: CMVendorUser
       points: 45
-  hidden: true # TODO RMC14
 
 - type: startingGear
   id: CMGearSmartGunOperator

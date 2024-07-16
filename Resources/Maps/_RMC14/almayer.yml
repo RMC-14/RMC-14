@@ -1,3 +1,6 @@
+# This file is a duplicate of the Savannah. The actual Almayer map file is currently considered private content by RMC14, along with the map file for LV624.
+# This file is to serve as a solution for a test fail that would result from the lack of its existence otherwise.
+# If you wish for this file, or LV624, to be public you may recreate them yourself and PR it to the repo.
 meta:
   format: 6
   postmapinit: false
@@ -11911,7 +11914,7 @@ entities:
     - type: Transform
       pos: -57.480286,0.44829154
       parent: 1
-- proto: CMSurgicalCaseFilledAllTools
+- proto: RMCSurgicalTray
   entities:
   - uid: 737
     components:

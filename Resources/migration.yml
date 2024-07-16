@@ -523,3 +523,6 @@ CMLamp: RMCLamp
 
 # 2024-07-14
 CMArmorM56CombatHarness: CMArmorSmartGunCombatHarness
+
+# 2024-07-15
+CMSurgicalCaseFilledAllTools: RMCSurgicalTray

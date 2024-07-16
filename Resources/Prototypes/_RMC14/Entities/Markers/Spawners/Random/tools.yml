@@ -5,9 +5,8 @@
   components:
     - type: Sprite
       layers:
-        - state: red
-        - sprite: _RMC14/Objects/Tools/crowbar.rsi
-          state: icon
+        - sprite: _RMC14/Markers/landmarks.rsi
+          state: random_tool
     - type: RandomSpawner
       prototypes:
         - CMScrewdriver
