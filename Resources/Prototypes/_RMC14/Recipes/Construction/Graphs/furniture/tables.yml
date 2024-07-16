@@ -13,7 +13,6 @@
             icon:
               sprite: _RMC14/Objects/Materials/table_parts.rsi
               state: tan
-            amount: 1
             doAfter: 1
         - to: Reinforced
           steps:
@@ -22,7 +21,6 @@
             icon:
               sprite: _RMC14/Objects/Materials/table_parts.rsi
               state: reinforced
-            amount: 1
             doAfter: 1
         - to: Wood
           steps:
@@ -31,7 +29,6 @@
             icon:
               sprite: _RMC14/Objects/Materials/table_parts.rsi
               state: wood
-            amount: 1
             doAfter: 1
         - to: PoorWood
           steps:
@@ -40,7 +37,6 @@
             icon:
               sprite: _RMC14/Objects/Materials/table_parts.rsi
               state: poor_wood
-            amount: 1
             doAfter: 1
         - to: FancyWood
           steps:
@@ -49,7 +45,6 @@
             icon:
               sprite: _RMC14/Objects/Materials/table_parts.rsi
               state: fancy_wood
-            amount: 1
             doAfter: 1
         - to: Gambling
           steps:
@@ -58,7 +53,6 @@
             icon:
               sprite: _RMC14/Objects/Materials/table_parts.rsi
               state: gamble
-            amount: 1
             doAfter: 1
         - to: Almayer
           steps:
@@ -67,7 +61,6 @@
             icon:
               sprite: _RMC14/Objects/Materials/table_parts.rsi
               state: almayer
-            amount: 1
             doAfter: 1
 
     - node: Tan
