@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Actions;
 using Content.Shared.Examine;
 using Content.Shared.Hands;
@@ -97,6 +98,9 @@ public abstract partial class SharedGunSystem
         DebugTools.Assert((component.AvailableModes & component.SelectedMode) == component.SelectedMode);
         var nextMode = GetNextMode(component);
         SelectFire(uid, component, nextMode, user);
+
+        var ev = new RMCFireModeChangedEvent();
+        RaiseLocalEvent(uid, ref ev);
     }
 
     // TODO: Actions need doing for guns anyway.
