@@ -1,6 +1,6 @@
 - type: entity
   parent: CMSurgicalCase
-  id: CMSurgicalTray
+  id: RMCSurgicalTray
   name: surgical tray
   suffix: Filled, All Tools
   components:
