@@ -235,3 +235,50 @@
       rmc-aslot-barrel: 0.685, 0.125
       rmc-aslot-rail: -0.125, 0.215
       rmc-aslot-underbarrel: 0.284, -0.19
+
+- type: entity
+  parent: CMWeaponPistolBase
+  id: RMCWeaponPistolSU6
+  name: SU-6 smart pistol
+  description: The SU-6 Smartpistol is an IFF-based sidearm currently undergoing field testing in the UNMC. Uses modified .45 ACP IFF bullets. Capable of firing in bursts.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/su6.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/su6.rsi
+  - type: GunIFF
+  - type: Gun
+    minAngle: 0
+    maxAngle: 5
+    angleIncrease: 1
+    angleDecay: 5
+    fireRate: 2.5
+    selectedMode: SemiAuto
+    shotsPerBurst: 2
+    availableModes:
+    - SemiAuto
+    - Burst
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/su6_shoot.ogg
+  - type: GunWieldBonus
+    minAngle: 0
+    maxAngle: 0
+    angleIncrease: 0
+    angleDecay: 0
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCSmartPistol
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        #insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg #TODO RMC14 pistol sounds
+        #ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolSU6
