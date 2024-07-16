@@ -94,7 +94,7 @@
       entries:
       - id: CMWeaponPistolMK80
         points: 15
-      - id: CMSU6SmartPistol
+      - id: RMCSmartPistolCase
         points: 15
     #- id: CMM79GrenadeLauncher
     #  points: 30

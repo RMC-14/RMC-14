@@ -129,7 +129,8 @@
       entries:
       - id: CMWeaponPistolMK80
         points: 8
-    #    CMSU6SmartPistol: 12P
+      - id: RMCSmartPistolCase
+        points: 12
     - name: Clothing Items
       entries:
     #    CMScabbardMacheteFull: 6P

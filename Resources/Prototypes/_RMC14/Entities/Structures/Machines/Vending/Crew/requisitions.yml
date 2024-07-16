@@ -315,8 +315,8 @@
       entries:
       - id: CMMagazinePistolMK80
         amount: 11
-      #- id: SU-6 Smartpistol Magazine (.45)
-      #  amount: 13
+      - id: RMCMagazinePistolSU6
+        amount: 13
       #- id: M240 Incinerator Tank
       #  amount: 3
       #- id: M41AE2 Box Magazine (10x24mm)

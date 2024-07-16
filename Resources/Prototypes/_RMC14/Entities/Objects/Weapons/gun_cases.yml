@@ -35,7 +35,7 @@
 - type: entity
   parent: RMCBaseGunCase
   id: RMCSmartPistolCase
-  name: SU-6 pistol case
+  name: SU-6 smart pistol case
   description: "A gun case containing the SU-6 smart pistol. Comes with a full belt holster."
   components:
   - type: Storage
