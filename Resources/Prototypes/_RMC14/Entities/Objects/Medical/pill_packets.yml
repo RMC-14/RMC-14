@@ -22,9 +22,8 @@
     tags:
     - PillPacket
   - type: IconLabel
-    textSize: 4
     textColor: White
-    storedOffset: -25, -5
+    storedOffset: 2, 12
 
 - type: Tag
   id: PillPacket

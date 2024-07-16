@@ -224,6 +224,7 @@ public sealed class ItemGridPiece : Control, IEntityControl
         // RMC14 - Draw text for the icon label
         if (_entityManager.TryGetComponent(Entity, out IconLabelComponent? iconLabel))
         {
+            var scale = 2 * UIScale;
             if (iconLabel.LabelTextLocId is null ||
                 !Loc.TryGetString(iconLabel.LabelTextLocId, out string? msg))
             {
@@ -235,8 +236,8 @@ public sealed class ItemGridPiece : Control, IEntityControl
 
 
             var charArray = msg.ToCharArray();
-            var iconLabelPosition = new Vector2((boundingGrid.Width + 1) * size.X * 2 + iconLabel.StoredOffset.X * 2,
-    (boundingGrid.Height + 1) * size.Y * 2 + iconLabel.StoredOffset.Y * 2);
+            var iconLabelPosition = new Vector2(iconPosition.X + scale * iconLabel.StoredOffset.X 
+                , iconPosition.Y + scale * iconLabel.StoredOffset.Y);
 
             var textSize = iconLabel.TextSize;
 
@@ -244,7 +245,7 @@ public sealed class ItemGridPiece : Control, IEntityControl
             foreach (var chr in charArray)
             {
                 iconLabelPosition.X += sep;
-                sep = _font.DrawChar(handle, new System.Text.Rune(chr), iconLabelPosition, textSize, textColor);
+                sep = _font.DrawChar(handle, new System.Text.Rune(chr), iconLabelPosition, textSize * scale, textColor);
             }
         }
         // RMC14 - End Draw text for the icon label
