@@ -298,9 +298,9 @@
       - id: CMMagazineRifleM54CExt
         amount: 1
     - name: Special Ammunition
-      entries: [ ]
-      #- id: CMDrumSmartGunM56
-      #  amount: 1
+      entries:
+      - id: RMCMagazineSmartGun
+        amount: 1
       #- id: CMSpeedLoaderM44Heavy
       #  amount: 2
       #- id: CMSpeedLoaderM44Marksman

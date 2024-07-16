@@ -24,6 +24,7 @@
                     <controls:RoadmapVersionHeader Text="Current version" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Carrier" Text="Carry parasites around, allowing the Hive to impregnate new hosts on the move. Use pheromones to assist fellow Aliens" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Burrower" Text="Lay the foundations for resin traps in strategic locations or the Hive's flanks. Flank your way around the map with the tunnel ability and dig tunnels to allow for quick transportation of fellow Aliens from the hive to the frontlines" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Smart Gun Operator" Text="Stay behind marines and fire past friendlies and into the enemy!" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Almayer" Text="Ship map for the marines" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="LV-624" Text="Planet map" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Weapon attachments" Text="Each weapon will be able to be customized with different attachments, changing the weapon's stats" />
@@ -50,7 +51,6 @@
                 </BoxContainer>
                 <BoxContainer Name="SecondVersion" Access="Public" Orientation="Vertical"  HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Upcoming" />
-                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Smart Gun Operator" Text="Stay behind marines and fire past friendlies and into the enemy!" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Fireteam Leader" Text="More equipment in the fireteam leader's equipment and gear racks" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Squad Leader" Text="More equipment in the squad leader's equipment and gear racks" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Blood types" />

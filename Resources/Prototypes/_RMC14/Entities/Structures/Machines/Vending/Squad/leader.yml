@@ -58,6 +58,8 @@
       entries:
       - id: CMWhistle
         points: 3
+      - id: RCMTrenchWhistle
+        points: 3
       - id: CMFireExtinguisherPortable
         points: 3
     #- id: CMMotionDetector
