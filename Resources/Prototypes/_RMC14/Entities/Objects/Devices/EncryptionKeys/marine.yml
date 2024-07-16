@@ -32,7 +32,6 @@
   components:
   - type: EncryptionKey
     channels:
-    - MarineCommon
     - MarineBravo
     defaultChannel: MarineBravo
   - type: Sprite
