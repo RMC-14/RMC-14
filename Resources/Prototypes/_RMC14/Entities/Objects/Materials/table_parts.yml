@@ -16,6 +16,12 @@
   components:
   - type: Sprite
     state: tan
+  - type: Tag
+    tags:
+      - RMCTablePartTan
+
+- type: Tag
+  id: RMCTablePartTan
 
 - type: entity
   parent: RMCTablePartBase
@@ -25,6 +31,12 @@
   components:
   - type: Sprite
     state: reinforced
+  - type: Tag
+    tags:
+      - RMCTablePartReinforced
+
+- type: Tag
+  id: RMCTablePartReinforced
 
 - type: entity
   parent: RMCTablePartBase
@@ -34,6 +46,12 @@
   components:
   - type: Sprite
     state: wood
+  - type: Tag
+    tags:
+      - RMCTablePartWood
+
+- type: Tag
+  id: RMCTablePartWoo
 
 - type: entity
   parent: RMCTablePartWood
@@ -43,6 +61,12 @@
   components:
   - type: Sprite
     state: poor_wood
+  - type: Tag
+    tags:
+      - RMCTablePartWoodPoor
+
+- type: Tag
+  id: RMCTablePartWoodPoor
 
 - type: entity
   parent: RMCTablePartWood
@@ -52,6 +76,26 @@
   components:
   - type: Sprite
     state: fancy_wood
+  - type: Tag
+    tags:
+      - RMCTablePartWoodFancy
+
+- type: Tag
+  id: RMCTablePartWoodFancy
+
+- type: entity
+  parent: RMCTablePartBase
+  id: RMCTablePartGambling
+  name: gambling table parts
+  components:
+  - type: Sprite
+    state: gamble
+  - type: Tag
+    tags:
+      - RMCTablePartGambling
+
+- type: Tag
+  id: RMCTablePartGambling
 
 - type: entity
   parent: RMCTablePartBase
@@ -60,3 +104,9 @@
   components:
   - type: Sprite
     state: almayer
+  - type: Tag
+    tags:
+      - RMCTablePartAlmayer
+
+- type: Tag
+  id: RMCTablePartAlmayer

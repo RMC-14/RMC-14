@@ -27,7 +27,7 @@
         acts: [ "Destruction" ]
   - type: Construction
     graph: RMCTable
-    node: tan
+    node: Tan
 
 # Reinforced
 - type: entity
@@ -42,7 +42,7 @@
     sprite: _RMC14/Structures/Furniture/Tables/reinforced.rsi
   - type: Construction
     graph: RMCTable
-    node: reinforced
+    node: Reinforced
 
 # Reinforced Requisition
 - type: entity
@@ -80,7 +80,7 @@
     sprite: _RMC14/Structures/Furniture/Tables/wood.rsi
   - type: Construction
     graph: RMCTable
-    node: wood
+    node: Wood
 
 # Wooden Poor
 - type: entity
@@ -95,7 +95,7 @@
     sprite: _RMC14/Structures/Furniture/Tables/poor_wood.rsi
   - type: Construction
     graph: RMCTable
-    node: poorWood
+    node: PoorWood
 
 # Wooden Fancy
 - type: entity
@@ -110,7 +110,7 @@
     sprite: _RMC14/Structures/Furniture/Tables/fancy_wood.rsi
   - type: Construction
     graph: RMCTable
-    node: fancyWood
+    node: FancyWood
 
 # Wooden Gambling
 - type: entity
@@ -125,7 +125,7 @@
     sprite: _RMC14/Structures/Furniture/Tables/gambling.rsi
   - type: Construction
     graph: RMCTable
-    node: gambling
+    node: Gambling
 
 # Almayer
 - type: entity
@@ -141,7 +141,7 @@
     sprite: _RMC14/Structures/Furniture/Tables/almayer.rsi
   - type: Construction
     graph: RMCTable
-    node: almayer
+    node: Almayer
 
 # Prison
 - type: entity

@@ -99,11 +99,11 @@
   description: A square metal surface resting on four legs. Useful to put stuff on.
   graph: RMCTable
   startNode: start
-  targetNode: tan
+  targetNode: Tan
   category: construction-category-cm-furniture
   icon:
     sprite: _RMC14/Structures/Furniture/Tables/standard.rsi
-    state: icon
+    state: full
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -117,11 +117,11 @@
   description: A square metal surface resting on four legs. This one has side panels, making it useful as a desk.
   graph: RMCTable
   startNode: start
-  targetNode: reinforced
+  targetNode: Reinforced
   category: construction-category-cm-furniture
   icon:
     sprite: _RMC14/Structures/Furniture/Tables/reinforced.rsi
-    state: icon
+    state: full
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -135,11 +135,11 @@
   description: A square wood surface resting on four legs. Useful to put stuff on.
   graph: RMCTable
   startNode: start
-  targetNode: wood
+  targetNode: Wood
   category: construction-category-cm-furniture
   icon:
     sprite: _RMC14/Structures/Furniture/Tables/wood.rsi
-    state: icon
+    state: full
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -153,11 +153,11 @@
   description: A semi-poorly constructed wood surface resting on four legs. Useful to put stuff on.
   graph: RMCTable
   startNode: start
-  targetNode: poorWood
+  targetNode: PoorWood
   category: construction-category-cm-furniture
   icon:
     sprite: _RMC14/Structures/Furniture/Tables/poor_wood.rsi
-    state: icon
+    state: full
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -171,11 +171,11 @@
   description: A nicely crafted mahogany wood surface resting on four legs. Useful to put stuff on.
   graph: RMCTable
   startNode: start
-  targetNode: fancyWood
+  targetNode: FancyWood
   category: construction-category-cm-furniture
   icon:
     sprite: _RMC14/Structures/Furniture/Tables/fancy_wood.rsi
-    state: icon
+    state: full
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -189,11 +189,11 @@
   description: A curved wood and carpet surface resting on four legs. Used for gambling games.
   graph: RMCTable
   startNode: start
-  targetNode: gambling
+  targetNode: Gambling
   category: construction-category-cm-furniture
   icon:
     sprite: _RMC14/Structures/Furniture/Tables/gambling.rsi
-    state: icon
+    state: full
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -207,11 +207,11 @@
   description: A square metal surface resting on four legs. Useful to put stuff on. Can be flipped in emergencies to act as cover.
   graph: RMCTable
   startNode: start
-  targetNode: almayer
+  targetNode: Almayer
   category: construction-category-cm-furniture
   icon:
     sprite: _RMC14/Structures/Furniture/Tables/almayer.rsi
-    state: icon
+    state: full
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
