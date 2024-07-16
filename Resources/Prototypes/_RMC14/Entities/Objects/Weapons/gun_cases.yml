@@ -49,5 +49,5 @@
       - RMCSmartPistolHolster
   - type: StorageFill
     contents:
-    - id: CMArmorM45
-    - id: CMArmorHelmetM45
+    - id: RMCWeaponPistolSU6
+    - id: RMCBeltSmartPistolFilled
