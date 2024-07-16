@@ -459,3 +459,38 @@
   - type: Sprite
     state: binary_key
 
+# Bureau
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyBureau
+  name: bureau encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommon
+    - MarineCommand
+    - MarineMedical
+    - MarineIntel
+    - Colony
+    defaultChannel: Colony
+  - type: Sprite
+    state: cap_key
+
+# Liaison
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyCL
+  name: Corporate Liaison radio encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommand
+    - MarineEngineer
+    - MarineMedical
+    - MarineRequisition
+    - MarineJTAC
+    - MarineIntel
+    - WEYA
+    defaultChannel: Colony
+  - type: Sprite
+    state: cap_key

@@ -1,0 +1,38 @@
+- type: entity
+  parent: CMSurgicalCase
+  id: RMCSurgicalTray
+  name: surgical tray
+  suffix: Filled, All Tools
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/surgical_tray.rsi
+    layers:
+    - state: surgical_tray
+    - state: surgical_tray_empty
+      map: [ "openLayer" ]
+      visible: false
+
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1 # 3 slots
+    whitelist:
+      components:
+      - CMScalpel
+      - CMHemostat
+      - CMRetractor
+      - CMBoneGel
+      - CMSurgicalDrill
+      - CMBoneSaw
+      - CMCautery
+      - CMBoneSetter
+  - type: StorageFill
+    contents:
+    - id: CMScalpel
+    - id: CMHemostat
+    - id: CMRetractor
+    - id: CMBoneGel
+    - id: CMSurgicalDrill
+    - id: CMCircularSaw
+    - id: CMCautery
+    - id: CMBonesetter

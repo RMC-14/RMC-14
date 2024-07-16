@@ -81,9 +81,8 @@
   components:
   - type: Sprite
     layers:
-    - state: green
-    - state: monkey
-      sprite: Mobs/Animals/monkey.rsi
+    - state: monkey_spawn
+      sprite: _RMC14/Markers/landmarks.rsi
   - type: ProportionalSpawner
     id: CMSpawnMobMonkey
     prototypes:

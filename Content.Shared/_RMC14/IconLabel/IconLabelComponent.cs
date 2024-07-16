@@ -12,7 +12,7 @@ public sealed partial class IconLabelComponent : Component
     public LocId? LabelTextLocId;
 
     [DataField, AutoNetworkedField]
-    public int TextSize = 8;
+    public int TextSize = 1;
 
     [DataField, AutoNetworkedField]
     public String TextColor = "Black";
