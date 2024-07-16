@@ -44,10 +44,30 @@
     - 0,0,3,1
     whitelist:
       tags:
-      - Sidearm
-      - RMCCartridgePistol45ACP
+      - RMCSmartPistol
       - RMCSmartPistolHolster
   - type: StorageFill
     contents:
     - id: RMCWeaponPistolSU6
     - id: RMCBeltSmartPistolFilled
+
+- type: entity
+  parent: RMCBaseGunCase
+  id: RMCSmartPistolCaseCargo
+  name: SU-6 smart pistol case
+  suffix: Requsitions
+  description: "A gun case containing the SU-6 smart pistol. Comes with two magazines."
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,3,1
+    whitelist:
+      tags:
+      - RMCSmartPistol
+      - RMCMagazinePistolSU6
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolSU6
+    - id: RMCMagazinePistolSU6
+      amount: 2

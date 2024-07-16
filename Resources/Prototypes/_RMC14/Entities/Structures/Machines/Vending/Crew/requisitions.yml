@@ -39,8 +39,8 @@
       entries:
       - id: CMWeaponPistolMK80
         amount: 4
-      #- id: SU-6 Smart Pistol
-      #  amount: 3
+      - id: RMCWeaponPistolSU6
+        amount: 3
       #- id: MOU-53 Shotgun
       #  amount: 2
       #- id: XM88 Heavy Rifle
