@@ -39,7 +39,7 @@
       entries:
       - id: CMWeaponPistolMK80
         amount: 4
-      - id: RMCWeaponPistolSU6
+      - id: RMCSmartPistolCase
         amount: 3
       #- id: MOU-53 Shotgun
       #  amount: 2
