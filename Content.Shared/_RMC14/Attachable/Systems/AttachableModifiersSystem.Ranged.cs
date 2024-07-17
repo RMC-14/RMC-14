@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared._RMC14.Weapons.Ranged;
+using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Whitelist;
 
@@ -13,13 +14,27 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GunRefreshModifiersEvent>>(OnRangedModsRefreshModifiers);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableAlteredEvent>(OnRangedModsAltered);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetGunDamageModifierEvent>>(OnRangedModsGetGunDamage);
+        SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetFireModeValuesEvent>>(OnRangedModsGetFireModeValues);
     }
 
     private void OnRangedModsRefreshModifiers(Entity<AttachableWeaponRangedModsComponent> attachable, ref AttachableRelayedEvent<GunRefreshModifiersEvent> args)
     {
         foreach(var modSet in attachable.Comp.Modifiers)
         {
-            ApplyModifierSet(attachable, modSet, ref args.Args);
+            if (!CanApplyModifiers(attachable.Owner, modSet.Conditions))
+                continue;
+
+            args.Args.ShotsPerBurst += modSet.ShotsPerBurstFlat;
+            args.Args.CameraRecoilScalar = Math.Max(args.Args.CameraRecoilScalar + modSet.RecoilFlat, 0);
+            args.Args.MinAngle = Angle.FromDegrees(Math.Max(args.Args.MinAngle.Degrees + modSet.ScatterFlat, 0.0));
+            args.Args.MaxAngle = Angle.FromDegrees(Math.Max(args.Args.MaxAngle.Degrees + modSet.ScatterFlat, args.Args.MinAngle));
+            args.Args.ProjectileSpeed += modSet.ProjectileSpeedFlat;
+
+            // Fire delay doesn't work quite like SS14 fire rate, so we're having to do maths:
+            // Fire rate is shots per second. Fire delay is the interval between shots. They are inversely proportionate to each other.
+            // First we divide 1 second by the fire rate to get our current fire delay, then we add the delay modifier, then we divide 1 by the result again to get the modified fire rate.
+            var fireDelayMod = args.Args.Gun.Comp.SelectedMode == SelectiveFire.Burst ? modSet.FireDelayFlat / 2f : modSet.FireDelayFlat;
+            args.Args.FireRate = 1f / (1f / args.Args.FireRate + fireDelayMod);
         }
     }
 
@@ -35,6 +50,8 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
 
             default:
                 _cmGunSystem.RefreshGunDamageMultiplier(args.Holder);
+                _rmcSelectiveFireSystem.RefreshModifiableFireModeValues(args.Holder);
+                //_gunSystem.RefreshModifiers(args.Holder);
                 break;
         }
     }
@@ -43,38 +60,21 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
     {
         foreach(var modSet in attachable.Comp.Modifiers)
         {
-            ApplyModifierSet(attachable, modSet, ref args.Args);
+            if (!CanApplyModifiers(attachable.Owner, modSet.Conditions))
+                continue;
+
+            args.Args.Multiplier += modSet.DamageAddMult;
         }
     }
 
-    private void ApplyModifierSet(
-        Entity<AttachableWeaponRangedModsComponent> attachable,
-        AttachableWeaponRangedModifierSet modSet,
-        ref GunRefreshModifiersEvent args)
+    private void OnRangedModsGetFireModeValues(Entity<AttachableWeaponRangedModsComponent> attachable, ref AttachableRelayedEvent<GetFireModeValuesEvent> args)
     {
-        if (!CanApplyModifiers(attachable.Owner, modSet.Conditions))
-            return;
+        foreach(var modSet in attachable.Comp.Modifiers)
+        {
+            if (!CanApplyModifiers(attachable.Owner, modSet.Conditions))
+                continue;
 
-        args.ShotsPerBurst += modSet.ShotsPerBurstFlat;
-        args.CameraRecoilScalar = Math.Max(args.CameraRecoilScalar + modSet.RecoilFlat, 0);
-        args.MinAngle = Angle.FromDegrees(Math.Max(args.MinAngle.Degrees + modSet.ScatterFlat, 0.0));
-        args.MaxAngle = Angle.FromDegrees(Math.Max(args.MaxAngle.Degrees + modSet.ScatterFlat, args.MinAngle));
-        args.ProjectileSpeed += modSet.ProjectileSpeedFlat;
-
-        // Fire delay doesn't work quite like SS14 fire rate, so we're having to do maths:
-        // Fire rate is shots per second. Fire delay is the interval between shots. They are inversely proportionate to each other.
-        // First we divide 1 second by the fire rate to get our current fire delay, then we add the delay modifier, then we divide 1 by the result again to get the modified fire rate.
-        args.FireRate = 1.0f / (1.0f / args.FireRate + modSet.FireDelayFlat);
-    }
-
-    private void ApplyModifierSet(
-        Entity<AttachableWeaponRangedModsComponent> attachable,
-        AttachableWeaponRangedModifierSet modSet,
-        ref GetGunDamageModifierEvent args)
-    {
-        if (!CanApplyModifiers(attachable.Owner, modSet.Conditions))
-            return;
-
-        args.Multiplier += modSet.DamageAddMult;
+            args.Args.BurstScatterMult += modSet.BurstScatterAddMult;
+        }
     }
 }

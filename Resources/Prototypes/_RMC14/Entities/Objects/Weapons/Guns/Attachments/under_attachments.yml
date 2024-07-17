@@ -83,7 +83,7 @@
     - conditions:
         wieldedOnly: true
       scatterFlat: -2
-      burstScatterFlat: -4
+      burstScatterAddMult: -2
     - conditions:
         unwieldedOnly: true
       accuracyMovementPenaltyAddMult: -3
@@ -339,7 +339,7 @@
       accuracyAddMult: 0.15
       recoilFlat: -1
       scatterFlat: -2
-      burstScatterFlat: -4
+      burstScatterAddMult: -2
     - conditions:
         unwieldedOnly: true
       accuracyMovementPenaltyAddMult: 1

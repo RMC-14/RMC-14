@@ -44,10 +44,7 @@ public sealed class AttachableHolderSystem : EntitySystem
     {
         SubscribeLocalEvent<AttachableHolderComponent, AttachableAttachDoAfterEvent>(OnAttachDoAfter);
         SubscribeLocalEvent<AttachableHolderComponent, AttachableDetachDoAfterEvent>(OnDetachDoAfter);
-        SubscribeLocalEvent<AttachableHolderComponent, AttachableHolderAttachablesAlteredEvent>(
-            OnAttachableHolderAttachablesAltered);
-        SubscribeLocalEvent<AttachableHolderComponent, AttachableHolderAttachToSlotMessage>(
-            OnAttachableHolderAttachToSlotMessage);
+        SubscribeLocalEvent<AttachableHolderComponent, AttachableHolderAttachToSlotMessage>(OnAttachableHolderAttachToSlotMessage);
         SubscribeLocalEvent<AttachableHolderComponent, AttachableHolderDetachMessage>(OnAttachableHolderDetachMessage);
         SubscribeLocalEvent<AttachableHolderComponent, AttemptShootEvent>(OnAttachableHolderAttemptShoot);
         SubscribeLocalEvent<AttachableHolderComponent, GunShotEvent>(RelayEvent);
@@ -74,6 +71,7 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, ContainerGettingRemovedAttemptEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, EntGotRemovedFromContainerMessage>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GetItemSizeModifiersEvent>(RelayEvent);
+        SubscribeLocalEvent<AttachableHolderComponent, GetFireModeValuesEvent>(RelayEvent);
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.RMCActivateAttachableBarrel,
@@ -207,23 +205,14 @@ public sealed class AttachableHolderSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void OnAttachableHolderAttachablesAltered(Entity<AttachableHolderComponent> holder,
-        ref AttachableHolderAttachablesAlteredEvent args)
-    {
-        if (TryComp<GunComponent>(holder.Owner, out var gunComponent))
-            _gun.RefreshModifiers((holder.Owner, gunComponent));
-    }
-
     private void OnHolderWielded(Entity<AttachableHolderComponent> holder, ref ItemWieldedEvent args)
     {
         AlterAllAttachables(holder, AttachableAlteredType.Wielded);
-        _gun.RefreshModifiers(holder.Owner);
     }
 
     private void OnHolderUnwielded(Entity<AttachableHolderComponent> holder, ref ItemUnwieldedEvent args)
     {
         AlterAllAttachables(holder, AttachableAlteredType.Unwielded);
-        _gun.RefreshModifiers(holder.Owner);
     }
 
     private void OnAttachableHolderDetachMessage(EntityUid holderUid,

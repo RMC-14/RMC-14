@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Wieldable;
+using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Whitelist;
 using Content.Shared.Wieldable.Components;
 
@@ -9,8 +10,10 @@ namespace Content.Shared._RMC14.Attachable.Systems;
 public sealed partial class AttachableModifiersSystem : EntitySystem
 {
     [Dependency] private readonly AttachableHolderSystem _attachableHolderSystem = default!;
+    [Dependency] private readonly SharedGunSystem _gunSystem = default!;
     [Dependency] private readonly CMGunSystem _cmGunSystem = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly RMCSelectiveFireSystem _rmcSelectiveFireSystem = default!;
     [Dependency] private readonly RMCWieldableSystem _wieldableSystem = default!;
 
     public override void Initialize()

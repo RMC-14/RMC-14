@@ -9,7 +9,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared.Weapons.Ranged.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(SharedGunSystem), typeof(CMGunSystem))]
+[Access(typeof(SharedGunSystem), typeof(RMCSelectiveFireSystem))]
 public sealed partial class GunComponent : Component
 {
     #region Sound

@@ -158,6 +158,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(CMKeyFunctions.RMCActivateAttachableStock);
             AddButton(CMKeyFunctions.RMCActivateAttachableUnderbarrel);
             AddButton(CMKeyFunctions.RMCFieldStripHeldItem);
+            AddButton(CMKeyFunctions.RMCCycleFireMode);
             AddButton(CMKeyFunctions.CMUniqueAction);
             AddButton(CMKeyFunctions.CMHolsterPrimary);
             AddButton(CMKeyFunctions.CMHolsterSecondary);

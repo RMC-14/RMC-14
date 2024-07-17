@@ -36,7 +36,7 @@ public record struct AttachableWeaponRangedModifierSet(
     FixedPoint2 AccuracyAddMult, // Not implemented yet. Added to have all the values already on our attachments, so whoever implements this doesn't need to dig through CM13. Remove this comment once implemented.
     FixedPoint2 AccuracyMovementPenaltyAddMult, // As above.
     FixedPoint2 DamageFalloffAddMult, // As above.
-    double BurstScatterFlat, // As above. Conversion to RMC: CM_SCATTER * 2
+    double BurstScatterAddMult, // This affects scatter during burst and full-auto fire. Conversion to RMC: burst_scatter_mod
     int ShotsPerBurstFlat, // Modifies the maximum number of shots in a burst.
     FixedPoint2 DamageAddMult, // Additive multiplier to damage.
     float RecoilFlat, // How much the camera shakes when you shoot.

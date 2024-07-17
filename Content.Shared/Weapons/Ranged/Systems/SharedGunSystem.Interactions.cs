@@ -83,6 +83,10 @@ public abstract partial class SharedGunSystem
 
         Audio.PlayPredicted(component.SoundMode, uid, user);
         Popup(Loc.GetString("gun-selected-mode", ("mode", GetLocSelector(fire))), uid, user);
+
+        var ev = new RMCFireModeChangedEvent();
+        RaiseLocalEvent(uid, ref ev);
+
         Dirty(uid, component);
     }
 
@@ -98,9 +102,6 @@ public abstract partial class SharedGunSystem
         DebugTools.Assert((component.AvailableModes & component.SelectedMode) == component.SelectedMode);
         var nextMode = GetNextMode(component);
         SelectFire(uid, component, nextMode, user);
-
-        var ev = new RMCFireModeChangedEvent();
-        RaiseLocalEvent(uid, ref ev);
     }
 
     // TODO: Actions need doing for guns anyway.
