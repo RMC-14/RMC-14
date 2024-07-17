@@ -1,3 +1,13 @@
+- files: ["gun_88m4_reload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e21e9e5b88b44c7402c2f984f16cc36116b07b0/sound/weapons/gun_88m4_reload.ogg"
+
+- files: ["gun_88m4_unload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e21e9e5b88b44c7402c2f984f16cc36116b07b0/sound/weapons/gun_88m4_unload.ogg"
+
 - files: ["gun_mar40_reload.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
