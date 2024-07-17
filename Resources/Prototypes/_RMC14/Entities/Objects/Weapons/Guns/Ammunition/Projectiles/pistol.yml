@@ -19,6 +19,18 @@
   - type: CMArmorPiercing
     amount: 10
 
+- type: entity # todo rmc14 this is missing a lot of effects, shrapnel, debilitate etc
+  parent: CMBulletBase
+  id: RCMBulletPistol9mmSquashHead
+  name: bullet (9mm Squash-Head)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 45
+  - type: CMArmorPiercing
+    amount: 30
+
 - type: entity
   parent: CMBulletBase
   id: CMBulletPistolM77AP
