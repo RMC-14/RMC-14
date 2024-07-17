@@ -1,0 +1,10 @@
+﻿- type: entity
+  parent: JumpsuitMarine
+  id: TGMCJumpsuitMarineUndersuit
+  name: marine undersuit
+  description: Standard-issue Marine combat technician fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
+  components:
+  - type: Sprite
+    sprite: _TGMC/Objects/Clothing/Uniforms/Marine/marine_undersuit.rsi
+  - type: Clothing
+    sprite: _TGMC/Objects/Clothing/Uniforms/Marine/marine_undersuit.rsi

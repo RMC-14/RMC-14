@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/mob/xenonids/lurker.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/4567beb5926f547c6c0bb40e7a8aa05cf42c5505/icons/mob/xenos/lurker.dmi",
   "size": {
     "x": 48,
     "y": 48
@@ -9,10 +9,6 @@
   "states": [
     {
       "name": "alive",
-      "directions": 4
-    },
-    {
-      "name": "running",
       "directions": 4
     },
     {

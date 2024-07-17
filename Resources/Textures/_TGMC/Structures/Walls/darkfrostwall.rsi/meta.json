@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "https://github.com/Cosmic-Overlord/RU-TerraGov-Marine-Corps",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "full"
+    },
+    {
+      "name": "darkfrostwall0",
+      "directions": 4
+    },
+    {
+      "name": "darkfrostwall1",
+      "directions": 4
+    },
+    {
+      "name": "darkfrostwall2",
+      "directions": 4
+    },
+    {
+      "name": "darkfrostwall3",
+      "directions": 4
+    },
+    {
+      "name": "darkfrostwall4",
+      "directions": 4
+    },
+    {
+      "name": "darkfrostwall5",
+      "directions": 4
+    },
+    {
+      "name": "darkfrostwall6",
+      "directions": 4
+    },
+    {
+      "name": "darkfrostwall7",
+      "directions": 4
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingNeckBase
+  id: TGMCClothingNeckOfficerCloak
+  name: officer cloak
+  description: Officer cloak.
+  components:
+  - type: Sprite
+    sprite: _TGMC/Objects/Clothing/Neck/Cloaks/officer_cloak.rsi
+  - type: StealTarget
+    stealGroup: HeadCloak

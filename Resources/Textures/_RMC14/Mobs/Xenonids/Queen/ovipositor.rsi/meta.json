@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/dbebd43ba8a4af592a7c59920fa00ede7b06067c/icons/mob/xenonids/ovipositor.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/e9ea97c1887d8b144e3e66d959a428c79f58c196/icons/mob/xenos/ovipositor.dmi",
   "size": {
     "x": 96,
     "y": 96
@@ -20,14 +20,6 @@
           0.1,
           0.1,
           0.1,
-          0.1,
-          0.1,
-          0.2,
-          0.1,
-          0.1,
-          0.2,
-          0.1,
-          0.2,
           0.1
         ]
       ]
@@ -68,22 +60,57 @@
       ]
     },
     {
+      "name": "noiovi",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "attached",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
       "name": "explosion",
       "delays": [
         [
           0.1,
-          0.2,
-          0.3,
-          0.05,
-          0.04,
-          0.060000002,
-          0.060000002,
-          0.060000002,
-          0.060000002,
-          0.07,
-          0.07,
-          0.08,
-          0.089999996,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
           0.1,
           0.1,
           0.1
@@ -104,7 +131,8 @@
       "delays": [
         [
           0.1,
-          0.2,
+          0.1,
+          0.1,
           0.1,
           0.1
         ]

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9eae4bfbf06bf2007f7ffeb5ac77028fe712ff1a/icons/mob/xenonids/larva.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9eae4bfbf06bf2007f7ffeb5ac77028fe712ff1a/icons/mob/xenos/larva.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -12,10 +12,19 @@
       "directions": 4
     },
     {
-      "name": "sleeping"
+      "name": "cuff"
     },
     {
-      "name": "crit"
+      "name": "stunned"
+    },
+    {
+      "name": "sleeping",
+      "delays": [
+        [
+          1,
+          1
+        ]
+      ]
     },
     {
       "name": "dead"

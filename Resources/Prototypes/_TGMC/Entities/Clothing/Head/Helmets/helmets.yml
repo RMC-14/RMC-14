@@ -1,0 +1,52 @@
+# m10
+- type: entity
+  parent: ClothingHeadBase
+  id: TGMCArmorHelmetScout
+  name: scout helmet
+  description: A standard scout Helmet.
+  components:
+  - type: Sprite
+    sprite: _TGMC/Objects/Clothing/Head/Helmets/scout.rsi
+  - type: Clothing
+    sprite: _TGMC/Objects/Clothing/Head/Helmets/scout.rsi
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,2,1
+    blacklist:
+      tags:
+      - Pouch
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: [ ]
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: CMArmor
+    armor: 20
+    explosionArmor: 10
+
+- type: entity
+  parent: TGMCArmorHelmetScout
+  id: TGMCArmorHelmetGrenadier
+  name: grenadier helmet
+  description: A standard grenadier Helmet.
+  components:
+  - type: Sprite
+    sprite: _TGMC/Objects/Clothing/Head/Helmets/grenadier.rsi
+  - type: Clothing
+    sprite: _TGMC/Objects/Clothing/Head/Helmets/grenadier.rsi
+    
+- type: entity
+  parent: TGMCArmorHelmetScout
+  id: TGMCArmorHelmetDemolitionist
+  name: demolitionist helmet
+  description: A standard demolitionist Helmet.
+  components:
+  - type: Sprite
+    sprite: _TGMC/Objects/Clothing/Head/Helmets/demolitionist.rsi
+  - type: Clothing
+    sprite: _TGMC/Objects/Clothing/Head/Helmets/demolitionist.rsi
+

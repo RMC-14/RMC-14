@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/bb00705387c77af87cf86b948e6b34441c60300c/icons/mob/xenonids/defender.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/ca543a30f1bbf3e4a5cc4f70caa120e333ad5e82/icons/mob/xenos/defender.dmi",
   "size": {
     "x": 64,
     "y": 64
@@ -28,9 +28,9 @@
       "name": "crest",
       "directions": 4
     },
-    {
-      "name": "thrown",
-      "directions": 4
-    }
+      {
+          "name": "thrown",
+          "directions": 4
+      }
   ]
 }

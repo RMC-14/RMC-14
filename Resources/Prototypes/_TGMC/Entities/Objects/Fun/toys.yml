@@ -1,0 +1,57 @@
+- type: entity
+  parent: BasePlushie
+  id: TGMCRubberPip
+  name: rubber pig
+  description: Dimentius drive the pigs.
+  components:
+  - type: Sprite
+    sprite: _TGMC/Objects/Fun/Toys/pig.rsi
+    state: pig
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/_TGMC/Items/Toys/khryu.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/_TGMC/Items/Toys/khryu.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/_TGMC/Items/Toys/khryu.ogg
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/_TGMC/Items/Toys/khryu.ogg
+  - type: Slippery
+    paralyzeTime: 0
+    slipSound:
+      path: /Audio/_TGMC/Items/Toys/khryu.ogg
+      params:
+        variation: 0.125
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/_TGMC/Items/Toys/khryu.ogg
+      params:
+        variation: 0.125
+  - type: StepTrigger
+    intersectRatio: 0.2
+    requiredTriggeredSpeed: 2
+  - type: TriggerOnStepTrigger
+  - type: Appearance
+  - type: CollisionWake
+    enabled: false
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      slips:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.2,0.2,0.2"
+        hard: false
+        layer:
+        - SlipLayer
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.2,0.2,0.2"
+        density: 30
+        mask:
+        - ItemMask

@@ -1,0 +1,49 @@
+- type: entity
+  parent: CMBaseWall
+  id: TGMCRedWall
+  name: red wall
+  description: Red wall.
+  components:
+  - type: Sprite
+    sprite: _TGMC/Structures/Walls/red_wall.rsi
+  - type: Icon
+    sprite: _TGMC/Structures/Walls/red_wall.rsi
+  - type: Tag
+    tags:
+    - Wall
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 9000
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: IconSmooth
+    key: walls
+    base: red_wall
+
+- type: entity
+  parent: CMBaseWall
+  id: TGMCDarkfrostWall
+  name: dark wall
+  description: Dark wall.
+  components:
+  - type: Sprite
+    sprite: _TGMC/Structures/Walls/darkfrostwall.rsi
+  - type: Icon
+    sprite: _TGMC/Structures/Walls/darkfrostwall.rsi
+  - type: Tag
+    tags:
+    - Wall
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 9000
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: IconSmooth
+    key: walls
+    base: darkfrostwall

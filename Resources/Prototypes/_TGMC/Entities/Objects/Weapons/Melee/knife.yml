@@ -1,0 +1,45 @@
+- type: entity
+  name: rapier
+  parent: BaseItem
+  id: TGMCRapier
+  description: This rapier was forged by old man Mephistopheles.
+  components:
+  - type: Sharp
+  - type: Sprite
+    sprite: _TGMC/Objects/Weapons/Melee/rapier.rsi
+    state: icon
+  - type: MeleeWeapon
+    attackRate: 1.6
+    damage:
+      types:
+        Slash: 10
+        Piercing: 30
+    soundHit:
+        path: /Audio/_TGMC/Weapons/rapier.ogg
+  - type: Reflect
+    enabled: true
+    reflectProb: .4
+    spread: 90
+  - type: SolutionContainerManager
+    solutions:
+      melee:
+        maxVol: 15
+  - type: MeleeChemicalInjector
+    solution: melee
+  - type: RefillableSolution
+    solution: melee
+  - type: InjectableSolution
+    solution: melee
+  - type: SolutionInjectOnEmbed
+    solution: ammo
+    transferAmount: 5
+    blockSlots: NONE
+  - type: SolutionTransfer
+    maxTransferAmount: 5
+  - type: Item
+    size: Normal
+    sprite: _TGMC/Objects/Weapons/Melee/rapier.rsi
+  - type: Tag
+    tags:
+    - Rapier
+  - type: DisarmMalus
