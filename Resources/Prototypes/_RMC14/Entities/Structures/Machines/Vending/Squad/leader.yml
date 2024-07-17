@@ -56,7 +56,7 @@
         points: 15
     - name: Utilities
       entries:
-      - id: CMWhistle
+      - id: RMCWhistle
         points: 3
       - id: RCMTrenchWhistle
         points: 3

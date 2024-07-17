@@ -167,6 +167,8 @@
         points: 5
     #- id: CMFultonDeviceStack
     #- id: CMMotionDetector
+      - id: RMCWhistle
+        points: 5
     - name: Helmet Optics
       entries: [ ]
     #- id: CMMedicalHelmetOptic

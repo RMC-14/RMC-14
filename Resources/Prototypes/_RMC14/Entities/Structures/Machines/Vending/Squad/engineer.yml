@@ -129,7 +129,7 @@
         points: 3
     #- id: CMMotionDetector
     #  points: 8
-      - id: CMWhistle
+      - id: RMCWhistle
         points: 3
     - name: Binoculars
       entries: [ ]
