@@ -21,9 +21,6 @@
         base:
           True: { state: open }
           False: { state: closed }
-        sniper:
-          True: { visible: false }
-          False: { visible: true }
   - type: Item
     size: Huge
   - type: Storage
