@@ -130,6 +130,8 @@
     availableModes:
     - SemiAuto
     - Burst
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_88m4_v7.ogg
   - type: ItemSlots
     slots:
       gun_magazine:
