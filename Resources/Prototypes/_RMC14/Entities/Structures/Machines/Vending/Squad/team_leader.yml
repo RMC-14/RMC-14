@@ -109,8 +109,6 @@
     #  points: 5
       - id: CMFireExtinguisherPortable
         points: 5
-      - id: RCMTrenchWhistle
-        points: 5
       - id: RMCWhistle
         points: 5
     - name: Binoculars
