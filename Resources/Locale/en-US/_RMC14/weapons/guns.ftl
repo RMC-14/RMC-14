@@ -14,3 +14,7 @@ rmc-shoot-harness-required = Harness required
 rmc-wear-smart-gun-required = You must have your smart gun equipped to wear these.
 
 rmc-revolver-spin = You spin the cylinder.
+
+rmc-examine-text-scatter-max = Current maximum scatter is [color={$color}]{TOSTRING($scatter, "F1")}[/color] degrees.
+rmc-examine-text-scatter-min = Current minimum scatter is [color={$color}]{TOSTRING($scatter, "F1")}[/color] degrees.
+rmc-examine-text-shots-to-max-scatter = It takes [color={$color}]{$shots}[/color] shots to reach maximum scatter.

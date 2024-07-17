@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.Attachable.Systems;
 using Content.Shared._RMC14.Input;
+using Content.Shared.Examine;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -14,10 +15,13 @@ public sealed class RMCSelectiveFireSystem : EntitySystem
 {
     [Dependency] private readonly SharedGunSystem _gunSystem = default!;
 
+    private const string scatterExamineColour = "yellow";
+
     public override void Initialize()
     {
         SubscribeAllEvent<RequestStopShootEvent>(OnStopShootRequest);
 
+        SubscribeLocalEvent<RMCSelectiveFireComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<RMCSelectiveFireComponent, ItemWieldedEvent>(SelectiveFireRefreshWield,
             after: new[] { typeof(AttachableHolderSystem) });
         SubscribeLocalEvent<RMCSelectiveFireComponent, ItemUnwieldedEvent>(SelectiveFireRefreshWield,
@@ -54,6 +58,25 @@ public sealed class RMCSelectiveFireSystem : EntitySystem
 
         gunComponent.CurrentAngle = gunComponent.MinAngleModified;
         Dirty(gunUid, gunComponent);
+    }
+
+    private void OnExamine(Entity<RMCSelectiveFireComponent> gun, ref ExaminedEvent args)
+    {
+        if (!args.IsInDetailsRange || !TryComp(gun.Owner, out GunComponent? gunComponent))
+            return;
+
+        using (args.PushGroup(nameof(RMCSelectiveFireComponent)))
+        {
+            args.PushMarkup(Loc.GetString("rmc-examine-text-scatter-max", ("color", scatterExamineColour), ("scatter", gunComponent.MaxAngleModified.Degrees)));
+            args.PushMarkup(Loc.GetString("rmc-examine-text-scatter-min", ("color", scatterExamineColour), ("scatter", gunComponent.MinAngleModified.Degrees)));
+
+            if (ContainsMods(gun, gunComponent.SelectedMode))
+            {
+                var mods = gun.Comp.Modifiers[gunComponent.SelectedMode];
+                if (mods.ShotsToMaxScatter != null)
+                    args.PushMarkup(Loc.GetString("rmc-examine-text-shots-to-max-scatter", ("color", scatterExamineColour), ("shots", mods.ShotsToMaxScatter)));
+            }
+        }
     }
 
     private void OnSelectiveFireMapInit(Entity<RMCSelectiveFireComponent> gun, ref MapInitEvent args)
