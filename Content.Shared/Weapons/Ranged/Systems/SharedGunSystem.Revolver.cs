@@ -1,9 +1,7 @@
-using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared.Interaction;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
-using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
@@ -11,6 +9,8 @@ using Robust.Shared.Utility;
 using System;
 using System.Linq;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Wieldable;
+using Content.Shared.Wieldable.Components;
 using JetBrains.Annotations;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
@@ -28,17 +28,21 @@ public partial class SharedGunSystem
         SubscribeLocalEvent<RevolverAmmoProviderComponent, GetVerbsEvent<AlternativeVerb>>(OnRevolverVerbs);
         SubscribeLocalEvent<RevolverAmmoProviderComponent, InteractUsingEvent>(OnRevolverInteractUsing);
         SubscribeLocalEvent<RevolverAmmoProviderComponent, GetAmmoCountEvent>(OnRevolverGetAmmoCount);
-        SubscribeLocalEvent<RevolverAmmoProviderComponent, UniqueActionEvent>(OnRevolverUniqueAction);
+        SubscribeLocalEvent<RevolverAmmoProviderComponent, UseInHandEvent>(OnRevolverUse);
     }
 
-    private void OnRevolverUniqueAction(Entity<RevolverAmmoProviderComponent> gun, ref UniqueActionEvent args)
+    private void OnRevolverUse(EntityUid uid, RevolverAmmoProviderComponent component, UseInHandEvent args)
     {
-        if (!_useDelay.TryResetDelay(gun)) // cannot wield after cycling. Can cycle after wielding tho? Can shoot regardless.
+        if (!_useDelay.TryResetDelay(uid) ||
+        HasComp<WieldableComponent>(uid) ||
+        args.Handled)
             return;
 
-        Cycle(gun.Comp);
-        UpdateAmmoCount(gun, prediction: false);
-        Dirty(gun, gun.Comp);
+        args.Handled = true;
+
+        Cycle(component);
+        UpdateAmmoCount(uid, prediction: false);
+        Dirty(uid, component);
     }
 
     private void OnRevolverGetAmmoCount(EntityUid uid, RevolverAmmoProviderComponent component, ref GetAmmoCountEvent args)
@@ -395,8 +399,10 @@ public partial class SharedGunSystem
                 args.Ammo.Add((spawned, EnsureComp<AmmoComponent>(spawned)));
 
                 if (cartridge.DeleteOnSpawn)
+                {
                     component.AmmoSlots[index] = null;
                     component.Chambers[index] = null;
+                }
             }
             else
             {
