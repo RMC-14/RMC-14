@@ -287,12 +287,12 @@
 
 - type: entity
   parent: CMWeaponPistolBase
-  id: CMWeaponPistolDeagle
+  id: RCMWeaponPistolDeagle
   name: Desert Eagle
   description: A bulky 50 caliber pistol with a serious kick, probably taken from some museum somewhere. This one is engraved, 'Peace through superior firepower.'
   components:
   - type: Gun
-    fireRate: 1.66
+    fireRate: 1.50
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_de50.ogg
   - type: Sprite
@@ -308,7 +308,7 @@
         priority: 2
         whitelist:
           tags:
-          - RCMMagazinePistol50
+          - RMCMagazinePistol50
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:

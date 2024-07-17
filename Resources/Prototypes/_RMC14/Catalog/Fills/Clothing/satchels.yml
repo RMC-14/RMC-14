@@ -12,3 +12,14 @@
     items:
       tags:
       - BoxCardboard
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelCODeagle
+  suffix: Deagle, Filled
+  components:
+  - type: StorageFill # When the CO has a special bag, replace this...
+    contents:
+    - id: RCMWeaponPistolDeagle
+    - id: RMCMagazinePistol50
+      amount: 3 # For a total of 21 shots, that's it!

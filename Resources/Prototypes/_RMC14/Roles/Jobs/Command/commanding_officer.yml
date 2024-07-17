@@ -60,7 +60,7 @@
   id: CMGearCommandingOfficer
   equipment:
     jumpsuit: CMJumpsuitCO
-    back: CMSatchel
+    back: RMCSatchelCODeagle
     shoes: CMShoesLaceupCommander
     head: CMHeadBeretCO
     outerClothing: CMCoatOfficer
