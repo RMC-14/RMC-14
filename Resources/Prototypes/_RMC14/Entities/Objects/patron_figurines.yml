@@ -241,3 +241,13 @@
     state: rytil_pyain
   - type: PatronFigurine
     id: 3bbf7926-d0c6-4d41-853a-17415705f622
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronBillTitan
+  name: Bill Titan figurine
+  components:
+  - type: Sprite
+    state: bill_titan
+  - type: PatronFigurine
+    id: bfb6269f-1ab3-4058-b35e-59a6d96949d5
