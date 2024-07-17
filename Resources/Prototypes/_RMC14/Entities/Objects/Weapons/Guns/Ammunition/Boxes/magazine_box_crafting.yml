@@ -292,6 +292,13 @@
         amount: 1
         doAfter: 1
 
+    # SU-6
+    - to: RMCBoxMagazinePistolSU6Empty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 1
+
 
   # Why the fuck do you even need these nodes???
 
