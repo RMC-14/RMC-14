@@ -287,9 +287,9 @@
 
 - type: entity
   parent: CMWeaponPistolBase
-  id: CMWeaponPistolM1984
-  name: M1984 service pistol
-  description: An M1984 Service Pistol, once the standard issue sidearm of the Marines but has recently been replaced with the M77 combat pistol. Fires 9mm pistol rounds.
+  id: CMWeaponPistolDeagle
+  name: Desert Eagle
+  description: A bulky 50 caliber pistol with a serious kick, probably taken from some museum somewhere. This one is engraved, 'Peace through superior firepower.'
   components:
   - type: Gun
     fireRate: 1.66
