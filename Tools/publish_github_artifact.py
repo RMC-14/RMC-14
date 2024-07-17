@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-import requests
 import os
+import requests
 import subprocess
 
 GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
@@ -14,8 +14,8 @@ VERSION = os.environ['GITHUB_SHA']
 # CONFIGURATION PARAMETERS
 # Forks should change these to publish to their own infrastructure.
 #
-ROBUST_CDN_URL = "https://wizards.cdn.spacestation14.com/"
-FORK_ID = "wizards"
+ROBUST_CDN_URL = "https://cdn.rouny-ss14.com/"
+FORK_ID = "rmc14"
 
 def main():
     print("Fetching artifact URL from API...")
