@@ -308,7 +308,7 @@
         priority: 2
         whitelist:
           tags:
-          - CMMagazinePistol50
+          - RCMMagazinePistol50
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
