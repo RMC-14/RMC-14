@@ -20,6 +20,9 @@
   id: RMCCartridgePistol45ACP
 
 - type: Tag
+  id: RMCCartridgePistol50
+
+- type: Tag
   id: CMMortarShell
 
 - type: Tag

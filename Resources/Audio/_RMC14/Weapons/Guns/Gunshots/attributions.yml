@@ -1,3 +1,8 @@
+- files: ["gun_de50.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/2ec47dfe9e186f5a29f0f280206c09c54f059be5/sound/weapons/gun_DE50.ogg"
+
 - files: ["gun_m1984_1.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"

@@ -66,3 +66,15 @@
         Piercing: 30
   - type: CMArmorPiercing
     amount: 20
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistol50
+  name: bullet (.50AE)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 98 # Extremely limited ammo to balance this.
+  - type: CMArmorPiercing
+    amount: 50

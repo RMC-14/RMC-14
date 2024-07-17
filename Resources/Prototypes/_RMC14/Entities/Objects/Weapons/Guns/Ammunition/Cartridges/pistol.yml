@@ -65,3 +65,15 @@
     - RMCCartridgePistol45ACP
   - type: CartridgeAmmo
     proto: RMCBulletPistol45ACP
+
+- type: entity
+  id: RMCCartridgePistol50
+  name: cartridge (.50AE)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistol50
+  - type: CartridgeAmmo
+    proto: RMCBulletPistol50
