@@ -19,6 +19,18 @@
     proto: CMBulletPistol9mm
 
 - type: entity
+  id: RCMCartridgePistol9mmSquashHead
+  name: cartridge (9mm Squash-Head)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+      - Cartridge
+      - RCMCartridgePistol9mmSquashHead
+  - type: CartridgeAmmo
+    proto: RCMBulletPistol9mmSquashHead
+
+- type: entity
   id: CMCartridgePistolM77AP
   name: cartridge (9mm AP)
   parent: CMCartridgePistolBase

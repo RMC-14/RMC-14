@@ -8,6 +8,9 @@
   id: CMCartridgePistol9mmAP
 
 - type: Tag
+  id: RCMCartridgePistol9mmSquashHead
+
+- type: Tag
   id: CMCartridgeRevolver44
 
 - type: Tag

@@ -277,7 +277,7 @@ public sealed class XenoSystem : EntitySystem
             return;
         }
 
-        _damageable.TryChangeDamage(xeno, heal);
+        _damageable.TryChangeDamage(xeno, heal, true);
     }
 
     // TODO RMC14 generalize this for survivors, synthetics, enemy hives, etc

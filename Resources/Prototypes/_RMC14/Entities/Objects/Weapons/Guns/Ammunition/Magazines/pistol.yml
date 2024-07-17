@@ -63,7 +63,7 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: CMMagazinePistolMK80
-  name: MK80 magazine (9mm)
+  name: MK80 magazine (9mm Squash-Head)
   components:
   - type: Tag
     tags:
@@ -74,7 +74,8 @@
     whitelist:
       tags:
       - CMCartridgePistol9mm
-    proto: CMCartridgePistol9mm
+      - RCMCartridgePistol9mmSquashHead #MK80 is specially chambered to take these rounds, regular pistols cannot.
+    proto: RCMCartridgePistol9mmSquashHead
     capacity: 18
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mk80.rsi
