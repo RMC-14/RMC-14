@@ -255,12 +255,12 @@
     maxAngle: 5
     angleIncrease: 1
     angleDecay: 5
-    fireRate: 2.5
+    fireRate: 5
     selectedMode: SemiAuto
     shotsPerBurst: 2
     availableModes:
     - SemiAuto
-    - Burst
+#    - Burst # TODO RMC14 different fire rate: 4.62
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/su6_shoot.ogg
   - type: GunWieldBonus

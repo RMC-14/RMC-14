@@ -317,9 +317,9 @@
   description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the SU-6 smartpistol.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator_pistol.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/smart_pistol.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator_pistol.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/smart_pistol.rsi
   - type: Storage
     maxItemSize: Normal
     grid:
