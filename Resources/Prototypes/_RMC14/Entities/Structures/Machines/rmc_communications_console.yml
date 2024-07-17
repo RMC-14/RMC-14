@@ -22,3 +22,28 @@
   - type: ApcPowerReceiver
     powerLoad: 0
     needsPower: false # TODO RMC14
+
+- type: entity
+  parent: BaseComputer
+  id: RMCOverwatchConsole
+  name: overwatch console
+  description: State of the art machinery for giving orders to a squad.
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    sprite: _RMC14/Structures/Machines/rmc_groundside_communications_console.rsi
+    state: on
+    layers: [ ]
+  - type: ActivatableUI
+    key: enum.OverwatchConsoleUI.Key
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [ [ "CMAccessCommand" ] ]
+  - type: UserInterface
+    interfaces:
+      enum.OverwatchConsoleUI.Key:
+        type: OverwatchConsoleBui
+  - type: OverwatchConsole
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # TODO RMC14

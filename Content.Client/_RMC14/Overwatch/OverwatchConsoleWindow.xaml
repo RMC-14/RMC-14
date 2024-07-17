@@ -1,0 +1,31 @@
+﻿<controls:OverwatchConsoleWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Overwatch"
+    Title="Overwatch Console"
+    MinSize="650 500">
+    <TabContainer Name="Tabs" Access="Public">
+        <BoxContainer Name="SquadMonitor" Access="Public" Orientation="Horizontal"
+                      HorizontalExpand="True" VerticalExpand="True">
+            <BoxContainer Name="Names" Access="Public" Orientation="Vertical"
+                          HorizontalExpand="True">
+                <Label Text="Name" />
+            </BoxContainer>
+            <BoxContainer Name="Roles" Access="Public" Orientation="Vertical"
+                          HorizontalExpand="True">
+                <Label Text="Role" />
+            </BoxContainer>
+            <BoxContainer Name="States" Access="Public" Orientation="Vertical"
+                          HorizontalExpand="True">
+                <Label Text="State" />
+            </BoxContainer>
+            <BoxContainer Name="Locations" Access="Public" Orientation="Vertical"
+                          HorizontalExpand="True" Visible="False">
+                <Label Text="Location" />
+            </BoxContainer>
+            <BoxContainer Name="Distance" Access="Public" Orientation="Vertical"
+                          HorizontalExpand="True" Visible="False">
+                <Label Text="SL Dist." />
+            </BoxContainer>
+        </BoxContainer>
+    </TabContainer>
+</controls:OverwatchConsoleWindow>

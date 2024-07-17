@@ -133,6 +133,7 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m11.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m11.rsi
+  - type: OverwatchCamera
 
 # M12
 - type: entity
