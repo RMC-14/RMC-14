@@ -41,7 +41,7 @@
       - cost: 3000
         crate: RMCCrateMagazineSmartGun
       - cost: 4000
-        crate: RMCCrateMagazineSmartPistol
+        crate: RMCCrateBoxMagazineSmartPistol
     - name: Attachments
       entries:
       - cost: 3000
