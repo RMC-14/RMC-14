@@ -63,8 +63,8 @@
       entries:
       - id: CMWeaponPistolMK80 # TODO RMC14 case with 2 mags
         points: 5 # TODO RMC14 10
-    #- id: CMSU6SmartPistol
-    #  points: 15
+      - id: RMCSmartPistolCase
+        points: 12
     #- id: CMM79GrenadeLauncher
     #  points: 30
     - name: Armors

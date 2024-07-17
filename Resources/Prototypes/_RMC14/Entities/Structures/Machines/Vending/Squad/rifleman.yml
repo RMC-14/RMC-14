@@ -94,8 +94,8 @@
       entries:
       - id: CMWeaponPistolMK80
         points: 15
-    #- id: CMSU6SmartPistol
-    #  points: 15
+      - id: RMCSmartPistolCase
+        points: 15
     #- id: CMM79GrenadeLauncher
     #  points: 30
     - name: Explosives

@@ -54,3 +54,15 @@
         Piercing: 55
   - type: CMArmorPiercing
     amount: 5
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistol45ACP
+  name: bullet (.45 ACP)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+  - type: CMArmorPiercing
+    amount: 20

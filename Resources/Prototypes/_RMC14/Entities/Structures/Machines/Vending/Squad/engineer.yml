@@ -95,8 +95,8 @@
       entries:
       - id: CMWeaponPistolMK80
         points: 8
-    #- id: CMSU6SmartPistol
-    #  points: 12
+      - id: RMCSmartPistolCase
+        points: 12
     #- id: CMM240IncineratorUnit
     #  points: 12
     #- id: CMM79GrenadeLauncher

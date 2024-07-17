@@ -53,3 +53,15 @@
     - CMCartridgeRevolver44
   - type: CartridgeAmmo
     proto: CMBulletRevolver44
+
+- type: entity
+  id: RMCCartridgePistol45ACP
+  name: cartridge (.45 ACP)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistol45ACP
+  - type: CartridgeAmmo
+    proto: RMCBulletPistol45ACP

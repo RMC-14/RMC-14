@@ -85,6 +85,30 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
 
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolSU6
+  name: SU-6 magazine (.45 ACP)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolSU6
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistol45ACP
+    proto: RMCCartridgePistol45ACP
+    capacity: 15
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/su6.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
 - type: Tag
   id: CMMagazinePistol
 
@@ -96,3 +120,6 @@
 
 - type: Tag
   id: CMMagazinePistolMK80
+
+- type: Tag
+  id: RMCMagazinePistolSU6
