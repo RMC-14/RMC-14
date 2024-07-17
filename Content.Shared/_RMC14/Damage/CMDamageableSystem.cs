@@ -45,6 +45,7 @@ public sealed class CMDamageableSystem : EntitySystem
     private void OnDamageMobStateMapInit(Entity<DamageMobStateComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.DamageAt = _timing.CurTime + ent.Comp.Cooldown;
+        Dirty(ent);
     }
 
     private void OnMaxBeforeDamageChanged(Entity<MaxDamageComponent> ent, ref BeforeDamageChangedEvent args)

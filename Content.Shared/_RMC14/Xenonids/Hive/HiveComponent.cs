@@ -12,7 +12,7 @@ public sealed partial class HiveComponent : Component
     public Dictionary<int, FixedPoint2> TierLimits = new()
     {
         [2] = 0.5,
-        [3] = 0.2
+        [3] = 0.2,
     };
 
     [DataField, AutoNetworkedField]
@@ -29,4 +29,10 @@ public sealed partial class HiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool SeeThroughContainers;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan? LastQueenDeath;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan NewQueenCooldown = TimeSpan.FromMinutes(5);
 }

@@ -1,0 +1,67 @@
+# CMO
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitCMO
+  name: chief medical officer's jumpsuit
+  description: It's a jumpsuit worn by those with the experience to be Chief Medical Officer. It provides minor biological protection.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/cmo.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/cmo.rsi
+
+# Research
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitResearch
+  name: reseacher clothes
+  description: A simple set of civilian clothes worn by researchers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/research.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/research.rsi
+
+
+# Scrubs
+- type: entity
+  parent: JumpsuitMarine
+  id: CMScrubsBlue
+  name: medical scrubs
+  description: They're made of a special fiber that provides minor protection against biohazards. These are in blue
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/blue.rsi
+
+- type: entity
+  parent: CMScrubsBlue
+  id: CMScrubsGreen
+  description: It's made of a special fiber that provides minor protection against biohazards. This one is in dark green.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/green.rsi
+
+- type: entity
+  parent: CMScrubsBlue
+  id: CMScrubsPurple
+  description: 
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/purple.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/purple.rsi
+
+- type: entity
+  parent: CMScrubsBlue
+  id: CMScrubsNurse
+  name: nurse scrubs
+  description: Standard-issue nurse scrubs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/nurse.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/nurse.rsi

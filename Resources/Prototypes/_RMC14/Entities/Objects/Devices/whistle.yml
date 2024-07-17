@@ -1,6 +1,6 @@
 ﻿- type: entity
   parent: Whistle
-  id: CMWhistle
+  id: RMCWhistle
   name: whistle
   description: A metal pea-whistle. Can be blown while held, or worn in the mouth
   components:
@@ -10,3 +10,10 @@
     slots:
       - mask
       - neck
+  - type: EmitSoundOnUse
+    sound:
+      collection: TrenchWhistle
+  - type: UseDelay
+    delay: 10
+  - type: Whistle
+    distance: 15 # Let your enemies hear the sound of death approaching

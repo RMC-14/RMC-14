@@ -36,20 +36,6 @@
     startingItem: CMM11Knife
 
 - type: entity
-  parent: CMBeltSecurity
-  id: CMBeltSecurityFilled
-  suffix: Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCWeaponTaser
-    - id: CMFlash
-    - id: CMStunbaton
-    - id: CMHandcuffs
-#    - id: Pepperspray # TODO RMC14
-    - id: ForensicScanner # TODO RMC14 cm clue scanner
-
-- type: entity
   parent: CMBeltMedical
   id: CMBeltMedicalFilled
   suffix: Filled
@@ -124,3 +110,23 @@
     - id: CMGrenadeFrag
       amount: 6
     # TODO Original is 6 HEDP, 3 HIDP incen, 6 airburst frag, 3 airburst incen
+
+- type: entity
+  parent: CMBeltSmartGunOperator
+  id: CMBeltSmartGunOperatorFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSmartGun
+      amount: 2
+
+- type: entity
+  parent: RMCBeltSmartPistol
+  id: RMCBeltSmartPistolFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolSU6
+      amount: 6

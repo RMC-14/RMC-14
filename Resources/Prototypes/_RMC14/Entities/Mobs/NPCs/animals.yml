@@ -7,6 +7,8 @@
   - type: Tackleable
   - type: Devourable
   - type: XenoNestable
+  - type: RMCNightVisionVisible
+  - type: InfectStopOnDeath
 
 - type: entity
   parent: [MobMonkey, RMCSmallHost]
@@ -52,14 +54,22 @@
 - type: entity
   parent: MobCorgiPuppy
   id: CMMobWiggles
-  name: Mr. Wiggles
-  description: It's a corgi puppy.
+  name: Mister Wiggles
+  description: It's a corgi puppy. MISTER WIGGLES!! HE IS THE GREATEST!
+  components:
+  - type: WarpPoint
+    follow: true
+    location: Mister Wiggles
 
 - type: entity
   parent: MobCatCalico
   id: CMMobJones
   name: Jones
   description: A tough, old stray whose origin no one seems to know.
+  components:
+  - type: WarpPoint
+    follow: true
+    location: Jones
 
 # Spawners
 
@@ -71,9 +81,8 @@
   components:
   - type: Sprite
     layers:
-    - state: green
-    - state: monkey
-      sprite: Mobs/Animals/monkey.rsi
+    - state: monkey_spawn
+      sprite: _RMC14/Markers/landmarks.rsi
   - type: ProportionalSpawner
     id: CMSpawnMobMonkey
     prototypes:

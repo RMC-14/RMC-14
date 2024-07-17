@@ -141,9 +141,9 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2.rsi
   - type: Gun
-    selectedMode: SemiAuto
+    selectedMode: FullAuto
     availableModes:
-    - SemiAuto # TODO RMC14 burst with greatly increased angle unless mounted
+    - FullAuto # TODO RMC14 burst with greatly increased angle unless mounted
     soundGunshot:
       collection: CMM54CShoot
   - type: WieldableSpeedModifiers
