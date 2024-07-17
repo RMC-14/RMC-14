@@ -3280,5 +3280,12 @@
   id: 395
   time: '2024-07-17T05:27:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3103
+- author: DrSmugleaf
+  changes:
+  - message: Added Jimmy 'Punished Pit' Johnson figurine.
+    type: Add
+  id: 396
+  time: '2024-07-17T07:24:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3104
 Name: RMC14
 Order: -1
