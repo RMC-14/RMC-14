@@ -28,7 +28,7 @@
     back: CMSatchel
     shoes: CMShoesLaceup
     id: CMIDCardLiaison
-    ears: CMHeadsetLeader
+    ears: RMCHeadsetLiaison
 
 - type: entity
   parent: CMSpawnPointJobBase

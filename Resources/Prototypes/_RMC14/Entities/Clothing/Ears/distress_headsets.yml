@@ -1,3 +1,15 @@
+# Other
+- type: entity
+  parent: CMHeadset
+  id: CMHeadsetColony
+  name: colony headset
+  description: A standard headset used by colonists.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
+
 # For Bureau Marshals
 - type: entity
   parent: CMHeadset
@@ -33,4 +45,4 @@
     containers:
       key_slots:
       - CMEncryptionKeyCommon
-      - RMCEncryptionKeyCL
+      - RMCEncryptionKeyLiaison
