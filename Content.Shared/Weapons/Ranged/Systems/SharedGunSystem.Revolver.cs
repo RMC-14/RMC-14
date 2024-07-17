@@ -34,7 +34,6 @@ public partial class SharedGunSystem
     private void OnRevolverUse(EntityUid uid, RevolverAmmoProviderComponent component, UseInHandEvent args)
     {
         if (!_useDelay.TryResetDelay(uid) ||
-        HasComp<WieldableComponent>(uid) ||
         args.Handled)
             return;
 
