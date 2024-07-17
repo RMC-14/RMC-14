@@ -598,7 +598,7 @@
   components:
   - type: Construction
     graph: CMBoxMagazine
-    node: RMCBoxMagazinePistolSU6
+    node: RMCBoxMagazinePistolSU6Empty
   - type: Sprite
     layers:
     - state: base_su6
