@@ -180,7 +180,7 @@
     #  points: 15
     #- id: CMDataDetector
     #  points: 15
-      - id: CMWhistle
+      - id: RMCWhistle
         points: 5
     - name: Binoculars
       entries: [ ]
