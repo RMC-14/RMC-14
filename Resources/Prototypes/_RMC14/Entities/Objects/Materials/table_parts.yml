@@ -53,7 +53,7 @@
       - RMCTablePartWood
 
 - type: Tag
-  id: RMCTablePartWoo
+  id: RMCTablePartWood
 
 - type: entity
   parent: RMCTablePartWood
