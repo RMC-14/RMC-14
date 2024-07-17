@@ -3,6 +3,16 @@
   copyright: "Taken from cmss13, converted to .ogg"
   source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/weapons/grenade_insert.wav"
 
+- files: ["gun_mk80_reload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/a3b7bc4f4388bf291ccfeceac7d471961c224b45/sound/weapons/gun_vp78_reload.ogg"
+
+- files: ["gun_mk80_unload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/a3b7bc4f4388bf291ccfeceac7d471961c224b45/sound/weapons/gun_vp78_unload.ogg"
+
 - files: ["m42a2.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
@@ -17,4 +27,3 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/a3b7bc4f4388bf291ccfeceac7d471961c224b45/sound/weapons/handling/m79_unload.ogg"
-

@@ -47,7 +47,7 @@
     head: CMHeadCap
     outerClothing: CMCoatOfficer
     id: CMIDCardExecutiveOfficer
-    ears: CMHeadsetLeader
+    ears: CMHeadsetSeniorCommand
 
 - type: entity
   parent: CMSpawnPointJobBase
