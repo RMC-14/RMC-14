@@ -1,5 +1,7 @@
 ﻿- type: entity
   id: StandardUNMCWarship
+  mapName: Warship
+  mapPath: /Maps/_TGMC/warship.yml
   parent:
   - BaseStation
   - BaseStationNews
@@ -13,6 +15,6 @@
   - BaseStationSiliconLawCrewsimov
   - BaseStationAllEventsEligible
   - BaseStationNanotrasen
-  noSpawn: true
+  noSpawn: false
   components:
   - type: Transform
