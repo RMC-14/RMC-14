@@ -54,8 +54,6 @@
       - CMMagazinePistol
       - CMMagazineRifle
       - CMMagazineSniper
-      - MRE
-      - PillPacket
   - type: Webbing
     components:
     - type: Storage
@@ -70,8 +68,6 @@
         - CMMagazinePistol
         - CMMagazineRifle
         - CMMagazineSniper
-        - MRE
-        - PillPacket
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false

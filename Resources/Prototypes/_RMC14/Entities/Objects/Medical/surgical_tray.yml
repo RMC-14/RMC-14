@@ -11,7 +11,8 @@
     - state: surgical_tray_empty
       map: [ "openLayer" ]
       visible: false
-
+  - type: Item
+    size: Large
   - type: Storage
     maxItemSize: Small
     grid:
