@@ -74,6 +74,10 @@
   - type: GunDamageModifier
     multiplier: 1.1
   - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
     recoilWielded: 1
     recoilUnwielded: 4
     baseAngleIncrease: 0

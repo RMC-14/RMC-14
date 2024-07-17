@@ -82,7 +82,7 @@ public sealed class RMCSelectiveFireSystem : EntitySystem
     private void OnSelectiveFireMapInit(Entity<RMCSelectiveFireComponent> gun, ref MapInitEvent args)
     {
         gun.Comp.BurstScatterMultModified = gun.Comp.BurstScatterMult;
-        RefreshFireModeGunValues(gun);
+        RefreshFireModes((gun.Owner, gun.Comp));
     }
 
     private void OnSelectiveFireModeChanged(Entity<RMCSelectiveFireComponent> gun, ref RMCFireModeChangedEvent args)
@@ -135,15 +135,26 @@ public sealed class RMCSelectiveFireSystem : EntitySystem
         gunComponent.CurrentAngle = gunComponent.MinAngleModified;
     }
 
+    public void RefreshFireModes(Entity<RMCSelectiveFireComponent?> gun)
+    {
+        if (gun.Comp == null && !TryComp(gun.Owner, out gun.Comp) || !TryComp(gun.Owner, out GunComponent? gunComponent))
+            return;
+
+        var initialMode = gunComponent.SelectedMode;
+
+        var ev = new GetFireModesEvent(gun.Comp.BaseFireModes);
+        RaiseLocalEvent(gun.Owner, ref ev);
+
+        SetFireModes((gun.Owner, gunComponent), ev.Modes);
+
+        if (initialMode != gunComponent.SelectedMode)
+            RefreshFireModeGunValues((gun.Owner, gun.Comp));
+    }
+
     public void RefreshModifiableFireModeValues(Entity<RMCSelectiveFireComponent?> gun)
     {
-        if (gun.Comp == null)
-        {
-            if (!TryComp(gun.Owner, out RMCSelectiveFireComponent? selectiveFireComponent))
-                return;
-
-            gun.Comp = selectiveFireComponent;
-        }
+        if (gun.Comp == null && !TryComp(gun.Owner, out gun.Comp))
+            return;
 
         var ev = new GetFireModeValuesEvent(gun.Comp.BurstScatterMult);
         RaiseLocalEvent(gun.Owner, ref ev);
@@ -151,6 +162,27 @@ public sealed class RMCSelectiveFireSystem : EntitySystem
         gun.Comp.BurstScatterMultModified = ev.BurstScatterMult;
 
         RefreshWieldableFireModeValues((gun.Owner, gun.Comp));
+    }
+
+    public void AddFireMode(Entity<GunComponent?> gun, SelectiveFire newMode)
+    {
+        if (gun.Comp == null && !TryComp(gun.Owner, out gun.Comp))
+            return;
+
+        gun.Comp.AvailableModes |= newMode;
+        Dirty(gun);
+    }
+
+    public void SetFireModes(Entity<GunComponent?> gun, SelectiveFire modes)
+    {
+        if (gun.Comp == null && !TryComp(gun.Owner, out gun.Comp) || modes == SelectiveFire.Invalid)
+            return;
+
+        while ((gun.Comp.SelectedMode & modes) != gun.Comp.SelectedMode)
+            _gunSystem.CycleFire(gun.Owner, gun.Comp);
+
+        gun.Comp.AvailableModes = modes;
+        Dirty(gun);
     }
 
     private void RefreshBurstScatter(Entity<RMCSelectiveFireComponent> gun)

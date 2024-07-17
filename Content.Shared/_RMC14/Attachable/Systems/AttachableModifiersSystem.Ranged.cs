@@ -13,6 +13,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
     {
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableAlteredEvent>(OnRangedModsAltered);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableGetExamineDataEvent>(OnRangedModsGetExamineData);
+        SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetFireModesEvent>>(OnRangedGetFireModes);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetFireModeValuesEvent>>(OnRangedModsGetFireModeValues);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetGunDamageModifierEvent>>(OnRangedModsGetGunDamage);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GunRefreshModifiersEvent>>(OnRangedModsRefreshModifiers);
@@ -78,8 +79,14 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
 
             default:
                 _cmGunSystem.RefreshGunDamageMultiplier(args.Holder);
+
+                if (attachable.Comp.FireModeMods != null)
+                {
+                    _rmcSelectiveFireSystem.RefreshFireModes(args.Holder);
+                    break;
+                }
+
                 _rmcSelectiveFireSystem.RefreshModifiableFireModeValues(args.Holder);
-                //_gunSystem.RefreshModifiers(args.Holder);
                 break;
         }
     }
@@ -102,6 +109,20 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
             // First we divide 1 second by the fire rate to get our current fire delay, then we add the delay modifier, then we divide 1 by the result again to get the modified fire rate.
             var fireDelayMod = args.Args.Gun.Comp.SelectedMode == SelectiveFire.Burst ? modSet.FireDelayFlat / 2f : modSet.FireDelayFlat;
             args.Args.FireRate = 1f / (1f / args.Args.FireRate + fireDelayMod);
+        }
+    }
+
+    private void OnRangedGetFireModes(Entity<AttachableWeaponRangedModsComponent> attachable, ref AttachableRelayedEvent<GetFireModesEvent> args)
+    {
+        if (attachable.Comp.FireModeMods == null)
+            return;
+
+        foreach (var modSet in attachable.Comp.FireModeMods)
+        {
+            if (!CanApplyModifiers(attachable.Owner, modSet.Conditions))
+                continue;
+
+            args.Args.Modes |= modSet.ExtraFireModes;
         }
     }
 

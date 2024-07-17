@@ -55,6 +55,8 @@
     - RMCAttachmentUnderbarrel
     - RMCAttachmentBurstFireAssembly
   - type: AttachableWeaponRangedMods
+    fireModeMods:
+    - extraFireModes: Burst
     modifiers:
     - shotsPerBurstFlat: 2
     - conditions:

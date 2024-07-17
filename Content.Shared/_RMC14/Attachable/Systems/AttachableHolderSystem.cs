@@ -72,6 +72,7 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, EntGotRemovedFromContainerMessage>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GetItemSizeModifiersEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GetFireModeValuesEvent>(RelayEvent);
+        SubscribeLocalEvent<AttachableHolderComponent, GetFireModesEvent>(RelayEvent);
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.RMCActivateAttachableBarrel,

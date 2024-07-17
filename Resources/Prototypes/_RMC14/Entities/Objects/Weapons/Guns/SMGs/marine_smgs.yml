@@ -13,6 +13,10 @@
     - Burst
     - FullAuto
   - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
     recoilWielded: 1
     recoilUnwielded: 1
     baseAngleIncrease: 0

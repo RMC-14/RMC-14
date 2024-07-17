@@ -9,6 +9,9 @@ namespace Content.Shared._RMC14.Weapons.Ranged;
 public sealed partial class RMCSelectiveFireComponent : Component
 {
     [DataField, AutoNetworkedField]
+    public SelectiveFire BaseFireModes = SelectiveFire.SemiAuto;
+
+    [DataField, AutoNetworkedField]
     public float RecoilWielded = 1f;
 
     [DataField, AutoNetworkedField]
