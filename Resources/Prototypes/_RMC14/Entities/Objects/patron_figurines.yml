@@ -251,3 +251,14 @@
     state: bill_titan
   - type: PatronFigurine
     id: bfb6269f-1ab3-4058-b35e-59a6d96949d5
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJimmyPunishedPitJohnson
+  name: Jimmy 'Punished Pit' Johnson figurine
+  description: "\"ah been smokin in medbay\""
+  components:
+  - type: Sprite
+    state: jimmy_punished_pit_johnson
+  - type: PatronFigurine
+    id: 3b7b5dd7-eda9-4b4e-ad72-7f88a738671c
