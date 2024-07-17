@@ -3257,5 +3257,12 @@
   id: 392
   time: '2024-07-16T04:26:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3070
+- author: DrSmugleaf
+  changes:
+  - message: Added Bill Titan figurine.
+    type: Add
+  id: 393
+  time: '2024-07-17T02:55:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3100
 Name: RMC14
 Order: -1
