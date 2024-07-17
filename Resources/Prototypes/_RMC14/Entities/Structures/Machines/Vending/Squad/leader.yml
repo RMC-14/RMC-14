@@ -56,9 +56,7 @@
         points: 15
     - name: Utilities
       entries:
-      - id: CMWhistle
-        points: 3
-      - id: RCMTrenchWhistle
+      - id: RMCWhistle
         points: 3
       - id: CMFireExtinguisherPortable
         points: 3
@@ -178,8 +176,8 @@
     #  points: 18
       - id: CMWeaponPistolMK80
         points: 8
-    #- id: CMSU6SmartPistol
-    #  points: 12
+      - id: RMCSmartPistolCase
+        points: 12
     #- id: CMM79GrenadeLauncher
     #  points: 18
     - name: Radio Keys

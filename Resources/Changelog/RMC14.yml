@@ -3264,5 +3264,35 @@
   id: 393
   time: '2024-07-17T02:55:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3100
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the whistle having the wrong sound and cooldown.
+    type: Fix
+  - message: Fixed weapon specialists not being able to buy a whistle.
+    type: Fix
+  id: 394
+  time: '2024-07-17T05:27:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3102
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenonid stuns making a smart gun operator drop their gun.
+    type: Fix
+  id: 395
+  time: '2024-07-17T05:27:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3103
+- author: DrSmugleaf
+  changes:
+  - message: Added Jimmy 'Punished Pit' Johnson figurine.
+    type: Add
+  id: 396
+  time: '2024-07-17T07:24:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3104
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added the SU-6 smart pistol and gun case
+    type: Add
+  id: 397
+  time: '2024-07-17T07:48:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3098
 Name: RMC14
 Order: -1

@@ -8,10 +8,7 @@
   },
   "states": [
     {
-      "name": "smartpistol"
-    },
-    {
-      "name": "smartpistol_e"
+      "name": "base"
     },
     {
       "name": "inhand-left",

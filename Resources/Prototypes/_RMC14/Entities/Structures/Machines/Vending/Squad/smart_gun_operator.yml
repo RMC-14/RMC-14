@@ -65,7 +65,7 @@
       entries:
       - id: CMFireExtinguisherPortable
         points: 5
-      - id: CMWhistle
+      - id: RMCWhistle
         points: 5
       - id: CMRollerBedSpawnFolded
         points: 5

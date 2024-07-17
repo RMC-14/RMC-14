@@ -1,0 +1,19 @@
+﻿- type: entity
+  parent: AdminObserver
+  id: RMCAdminObserver
+  noSpawn: true
+  components:
+  - type: Loadout
+    prototypes: [ RMCMobAghostGear ]
+
+- type: startingGear
+  parent: MobAghostGear
+  id: RMCMobAghostGear
+  equipment:
+    back: ClothingBackpackSatchelHolding
+    id: CMIDCardHighCommand # RMC-14: Changed from AdminPDA
+  storage:
+    back:
+    # RMC-14: Replaced loadout
+    - CMHealthAnalyzer
+    - RMCAdminAccessConfigurator
