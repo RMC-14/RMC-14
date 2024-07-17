@@ -33,3 +33,15 @@
   id: CMFloorSteelShivaMultiTile4
   sprite: /Textures/_RMC14/Tiles/shiva/multi_tiles_4.png
 
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorShivaRadiator
+  name: raditator
+  sprite: /Textures/_RMC14/Tiles/shiva/radiator_tile.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorShivaFoam
+  name: metal foam
+  sprite: /Textures/_RMC14/Tiles/shiva/metalfoam.png
+  

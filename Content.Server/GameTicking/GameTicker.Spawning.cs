@@ -33,7 +33,7 @@ namespace Content.Server.GameTicking
         public const string ObserverPrototypeName = "MobObserver";
 
         [ValidatePrototypeId<EntityPrototype>]
-        public const string AdminObserverPrototypeName = "AdminObserver";
+        public const string AdminObserverPrototypeName = "RMCAdminObserver";
 
         /// <summary>
         /// How many players have joined the round through normal methods.

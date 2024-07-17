@@ -120,7 +120,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
         if (TryComp(xeno, out DamageableComponent? damageable) &&
-            damageable.TotalDamage > FixedPoint2.Zero)
+            damageable.TotalDamage > 1)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-cant-evolve-damaged"), xeno, xeno, PopupType.MediumCaution);
             return;
@@ -375,7 +375,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private bool CanDevolvePopup(EntityUid xeno)
     {
         if (TryComp(xeno, out DamageableComponent? damageable) &&
-            damageable.TotalDamage > FixedPoint2.Zero)
+            damageable.TotalDamage > 1)
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-evolution-cant-devolve-damaged"), xeno, xeno, PopupType.MediumCaution);
             return false;

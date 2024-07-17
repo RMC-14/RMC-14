@@ -14,7 +14,7 @@
 - type: entity
   parent: BaseBullet
   id: CMBulletSentry10x50mm
-  name: bullet (10x28mm)
+  name: bullet (10x50mm)
   noSpawn: true
   components:
   - type: Sprite
@@ -28,4 +28,5 @@
         Piercing: 30
   - type: CMArmorPiercing
     amount: 35
+  - type: DeleteXenoResinOnHit
 

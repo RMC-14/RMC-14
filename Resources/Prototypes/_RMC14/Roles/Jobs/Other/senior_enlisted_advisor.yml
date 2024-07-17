@@ -60,7 +60,7 @@
     shoes: CMBootsBrownFilled
     head: CMHeadCapDrill
     id: CMIDCardSeniorEnlistedAdvisor
-    ears: CMHeadsetLeader
+    ears: RMCHeadsetSEA
 
 - type: entity
   parent: CMSpawnPointJobBase

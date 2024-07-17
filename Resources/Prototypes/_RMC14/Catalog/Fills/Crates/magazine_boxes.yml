@@ -141,3 +141,13 @@
     contents:
     - id: RMCMagazineSmartGun
       amount: 2
+
+# Smart Pistol
+- type: entity
+  parent: CMCrateAmmo
+  id: RMCCrateBoxMagazineSmartPistol
+  name: Magazine box (SU-6, 16x mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolSU6

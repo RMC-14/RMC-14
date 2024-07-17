@@ -3163,9 +3163,9 @@
   url: https://github.com/RMC-14/RMC-14/pull/3046
 - author: DrSmugleaf
   changes:
-  - message: Fixed hivemind chat not always being disabled without a Queen.
-      Every minute I have to spend down chasing a bug that no bug abuser reports is
-      a minute you guys spend without extra content being added to the game.
+  - message: Fixed hivemind chat not always being disabled without a Queen. Every
+      minute I have to spend down chasing a bug that no bug abuser reports is a minute
+      you guys spend without extra content being added to the game.
     type: Fix
   id: 381
   time: '2024-07-15T06:19:25.0000000+00:00'
@@ -3177,5 +3177,122 @@
   id: 382
   time: '2024-07-15T08:08:14.0000000+00:00'
   url: null
+- author: CaasGit
+  changes:
+  - message: Slightly upgrade sprites for the surgical case along with open states
+      for them.
+    type: Tweak
+  id: 383
+  time: '2024-07-16T03:53:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3068
+- author: musicmanvr
+  changes:
+  - message: The MK80 has been upgraded with new ammo and new sounds.
+    type: Tweak
+  id: 384
+  time: '2024-07-17T01:19:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3097
+- author: DrSmugleaf
+  changes:
+  - message: Fixed spaceborne gauss turrets not destroying resin structures in one
+      shot.
+    type: Fix
+  - message: Fixed spaceborne gauss turrets hitting marines if they were in the way.
+    type: Fix
+  id: 385
+  time: '2024-07-15T12:03:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3082
+- author: blueDev2
+  changes:
+  - message: Re-added medical label icons
+    type: Add
+  id: 386
+  time: '2024-07-16T06:24:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3088
+- author: Kadeo64
+  changes:
+  - message: ROUNY IS FINALLY HERE!!
+    type: Add
+  id: 387
+  time: '2024-07-16T06:31:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2857
+- author: Tunguso4ka
+  changes:
+  - message: Corporate Liaison now have access to WeYa radio channel.
+    type: Add
+  - message: Fireteam Leaders now have access to JTAC channel.
+    type: Add
+  - message: ASO now don't have access to Squad channels.
+    type: Fix
+  id: 388
+  time: '2024-07-17T00:39:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3080
+- author: musicmanvr
+  changes:
+  - message: An old shipment of trench whistles has arrived for SLs and FTLs.
+    type: Add
+  id: 389
+  time: '2024-07-16T05:35:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3063
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenonids sometimes being unable to evolve at full health.
+    type: Fix
+  id: 390
+  time: '2024-07-15T12:04:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3079
+- author: DrSmugleaf
+  changes:
+  - message: Fixed operating tables being corrodible.
+    type: Fix
+  id: 391
+  time: '2024-07-16T04:33:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3090
+- author: Derrek-Larson
+  changes:
+  - message: Medical access, Requisition access to Secure Surgery Crate
+    type: Add
+  - message: Corporate access, Requisition access to WeYa Secure Crate
+    type: Add
+  id: 392
+  time: '2024-07-16T04:26:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3070
+- author: DrSmugleaf
+  changes:
+  - message: Added Bill Titan figurine.
+    type: Add
+  id: 393
+  time: '2024-07-17T02:55:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3100
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the whistle having the wrong sound and cooldown.
+    type: Fix
+  - message: Fixed weapon specialists not being able to buy a whistle.
+    type: Fix
+  id: 394
+  time: '2024-07-17T05:27:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3102
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenonid stuns making a smart gun operator drop their gun.
+    type: Fix
+  id: 395
+  time: '2024-07-17T05:27:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3103
+- author: DrSmugleaf
+  changes:
+  - message: Added Jimmy 'Punished Pit' Johnson figurine.
+    type: Add
+  id: 396
+  time: '2024-07-17T07:24:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3104
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added the SU-6 smart pistol and gun case
+    type: Add
+  id: 397
+  time: '2024-07-17T07:48:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3098
 Name: RMC14
 Order: -1

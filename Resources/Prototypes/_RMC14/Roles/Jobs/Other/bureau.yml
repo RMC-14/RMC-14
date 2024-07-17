@@ -1,0 +1,117 @@
+# Marshal
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerBureauMarshal
+  name: bureau marshal spawner
+  suffix: Spawner
+  components:
+    - type: Sprite
+      layers:
+      - state: red
+      - sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
+        state: icon
+    - type: ConditionalSpawner
+      prototypes:
+      - RMCRandomHumanoidBureauMarshal
+
+- type: entity
+  id: RMCRandomHumanoidBureauMarshal
+  name: bureau marshal ghost role
+  suffix: Role
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
+      state: icon
+    - type: RandomHumanoidSpawner
+      settings: RMCBureauMarshal
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCBureauMarshal
+  components:
+    - type: GhostRole
+      name: rmc-ghost-role-information-bureau-marshal-name
+      description: rmc-ghost-role-information-bureau-marshal-description
+      rules: ghost-role-information-nonantagonist-rules
+      raffle:
+        settings: short
+    - type: Loadout
+      prototypes: [ RMCGearBureauMarshal ]
+
+- type: startingGear
+  id: RMCGearBureauMarshal
+  equipment:
+    head: RMCHeadCapBureau
+    # face cigar
+    # shoulder holster with revolver and two magazines
+    back: CMSatchelSecurity
+    gloves: RMCHandsVeteran
+    jumpsuit: RMCJumpsuitMarshal
+    outerClothing: RMCCoatBureauMarshal # add telebaton binoculars/range
+    # /obj/item/weapon/gun/shotgun/pump/dual_tube/cmb/m3717
+    belt: CMBeltSecurityMarshalFilled
+    shoes: CMBootsBlackFilled
+    id: RMCIDCardMarshal
+    ears: CMHeadsetMPO
+    pocket1: CMPouchFirstAidERT
+    pocket2: CMPouchShotgun
+
+# Deputy
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerBureauDeputy
+  name: bureau deputy spawner
+  suffix: Spawner
+  components:
+    - type: Sprite
+      layers:
+      - state: red
+      - sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
+        state: icon
+    - type: ConditionalSpawner
+      prototypes:
+      - RMCRandomHumanoidBureauDeputy
+
+- type: entity
+  id: RMCRandomHumanoidBureauDeputy
+  name: bureau deputy ghost role
+  suffix: Role
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
+      state: icon
+    - type: RandomHumanoidSpawner
+      settings: RMCBureauDeputy
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCBureauDeputy
+  components:
+    - type: GhostRole
+      name: rmc-ghost-role-information-bureau-deputy-name
+      description: rmc-ghost-role-information-bureau-marshal-description
+      rules: ghost-role-information-nonantagonist-rules
+      raffle:
+        settings: short
+    - type: Loadout
+      prototypes: [ RMCGearBureauDeputy ]
+
+- type: startingGear
+  id: RMCGearBureauDeputy
+  equipment:
+    head: RMCHeadCapBureau
+    # face cigar
+    # shoulder holster with revolver and two magazines
+    back: CMSatchelSecurity
+    gloves: RMCHandsVeteran
+    jumpsuit: RMCJumpsuitMarshal
+    outerClothing: RMCCoatBureauMarshal # add telebaton binoculars/range
+    # /obj/item/weapon/gun/shotgun/pump/dual_tube/cmb/m3717
+    belt: CMBeltSecurityMarshalFilled
+    shoes: CMBootsBlackFilled
+    id: RMCIDCardDeputy
+    ears: CMHeadsetMPO
+    pocket1: CMPouchFirstAidERT
+    pocket2: CMPouchShotgun

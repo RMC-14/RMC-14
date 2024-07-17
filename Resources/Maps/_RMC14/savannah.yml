@@ -12852,7 +12852,7 @@ entities:
     - type: Transform
       pos: -57.480286,0.44829154
       parent: 1
-- proto: CMSurgicalCaseFilledAllTools
+- proto: RMCSurgicalTray
   entities:
   - uid: 737
     components:
