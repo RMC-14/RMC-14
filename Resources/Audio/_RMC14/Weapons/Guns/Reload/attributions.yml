@@ -33,6 +33,16 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/7aec3d478a3bd4f5eb0a1bd42addad54ff00ce43/sound/weapons/handling/gun_sg_unload.ogg"
 
+- files: ["gun_su6_reload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/5db92c87812e21fa7f9343758e96f49ef1e01c3f/sound/weapons/handling/gun_su6_reload.ogg"
+
+- files: ["gun_su6_unload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/5db92c87812e21fa7f9343758e96f49ef1e01c3f/sound/weapons/handling/gun_su6_unload.ogg"
+
 - files: ["hpr_reload.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
