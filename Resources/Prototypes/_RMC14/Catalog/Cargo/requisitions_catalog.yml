@@ -40,6 +40,8 @@
         crate: RMCCrateBatterySmartGun
       - cost: 3000
         crate: RMCCrateMagazineSmartGun
+      - cost: 4000
+        crate: RMCCrateBoxMagazineSmartPistol
     - name: Attachments
       entries:
       - cost: 3000
@@ -196,6 +198,8 @@
 #        crate: CMCrateM54CE2
       - cost: 3000
         crate: CMCrateMK80
+      - cost: 3000
+        crate: CMCrateSU6
     - name: Weapons Specialist Ammo
       entries:
       - cost: 4000

@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._RMC14.Inventory;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory.VirtualItem;
@@ -129,6 +130,8 @@ public abstract partial class SharedHandsSystem
         if (targetDropLocation == null || isInContainer)
         {
             TransformSystem.DropNextTo((entity, itemXform), (uid, userXform));
+            var ev = new RMCDroppedEvent(uid);
+            RaiseLocalEvent(entity, ref ev, true);
             return true;
         }
 

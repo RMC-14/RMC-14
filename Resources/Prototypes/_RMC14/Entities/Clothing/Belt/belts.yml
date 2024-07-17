@@ -309,3 +309,26 @@
       tags:
       - Grenade
   - type: FixedItemSizeStorage
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltSmartPistol
+  name: M276 pattern SU-6 smart pistol holster rig
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the SU-6 smartpistol.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/smart_pistol.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/smart_pistol.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,13,1 # 7 slots
+    whitelist:
+      tags:
+      - RMCSmartPistol
+      - RMCMagazinePistolSU6
+  - type: FixedItemSizeStorage
+  - type: Tag
+    tags:
+    - RMCSmartPistolHolster

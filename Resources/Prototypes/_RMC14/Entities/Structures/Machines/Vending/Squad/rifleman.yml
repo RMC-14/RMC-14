@@ -94,8 +94,8 @@
       entries:
       - id: CMWeaponPistolMK80
         points: 15
-    #- id: CMSU6SmartPistol
-    #  points: 15
+      - id: RMCSmartPistolCase
+        points: 15
     #- id: CMM79GrenadeLauncher
     #  points: 30
     - name: Explosives
@@ -180,7 +180,7 @@
     #  points: 15
     #- id: CMDataDetector
     #  points: 15
-      - id: CMWhistle
+      - id: RMCWhistle
         points: 5
     - name: Binoculars
       entries: [ ]

@@ -43,3 +43,13 @@
     contents:
     - id: CMSmartGunOperatorEquipmentCase
       amount: 1
+
+- type: entity
+  id: CMCrateSU6
+  parent: CMCrateWeapons
+  name: SU-6 Smart Pistol Crate (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSmartPistolCase
+      amount: 2

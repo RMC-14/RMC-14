@@ -309,8 +309,8 @@
       entries:
       - id: CMMagazinePistolMK80
         amount: 5
-      #- id: CMMagazineSmartpistolSU6
-      #  amount: 5
+      - id: RMCMagazinePistolSU6
+        amount: 5
       #- id: CMIncineratorTankM240
       #  amount: 3
       #- id: CMMagazineDrumM56D

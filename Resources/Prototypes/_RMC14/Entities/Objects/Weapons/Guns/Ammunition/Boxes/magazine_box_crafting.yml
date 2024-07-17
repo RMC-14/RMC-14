@@ -182,10 +182,25 @@
   startNode: start
   targetNode: CMBoxMagazinePistolMK80Empty
   category: construction-category-cm-box-magazine
-  description: A magazine box that can contain regular VP 78 mags.
+  description: A magazine box that can contain regular MK80 mags.
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_mk80
+  objectType: Item
+
+# SU-6 Smart pistol
+- type: construction
+  parent: RMC
+  name: Magazine Box (SU-6 Reg)
+  id: RMCBoxMagazinePistolSU6
+  graph: CMBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazinePistolSU6Empty
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain regular MK80 mags.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_su6
   objectType: Item
 
   # Construct graphs
@@ -277,6 +292,13 @@
         amount: 1
         doAfter: 1
 
+    # SU-6
+    - to: RMCBoxMagazinePistolSU6Empty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 1
+
 
   # Why the fuck do you even need these nodes???
 
@@ -317,3 +339,7 @@
   # MK80
   - node: CMBoxMagazinePistolMK80Empty
     entity: CMBoxMagazinePistolMK80Empty
+
+  # SU-6
+  - node: RMCBoxMagazinePistolSU6Empty
+    entity: RMCBoxMagazinePistolSU6Empty

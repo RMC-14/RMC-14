@@ -1,0 +1,16 @@
+# Bureau
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyBureau
+  name: bureau encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommon
+    - MarineCommand
+    - MarineMedical
+    - MarineIntel
+    - Colony
+    defaultChannel: Colony
+  - type: Sprite
+    state: cap_key
