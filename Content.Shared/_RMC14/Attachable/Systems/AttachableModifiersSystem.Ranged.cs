@@ -11,10 +11,77 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
 {
     private void InitializeRanged()
     {
-        SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GunRefreshModifiersEvent>>(OnRangedModsRefreshModifiers);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableAlteredEvent>(OnRangedModsAltered);
-        SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetGunDamageModifierEvent>>(OnRangedModsGetGunDamage);
+        SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableGetExamineDataEvent>(OnRangedModsGetExamineData);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetFireModeValuesEvent>>(OnRangedModsGetFireModeValues);
+        SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetGunDamageModifierEvent>>(OnRangedModsGetGunDamage);
+        SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GunRefreshModifiersEvent>>(OnRangedModsRefreshModifiers);
+    }
+
+    private void OnRangedModsGetExamineData(Entity<AttachableWeaponRangedModsComponent> attachable, ref AttachableGetExamineDataEvent args)
+    {
+        foreach (var modSet in attachable.Comp.Modifiers)
+        {
+            var key = GetExamineKey(modSet.Conditions);
+
+            if (!args.Data.ContainsKey(key))
+                args.Data[key] = new (modSet.Conditions, GetEffectStrings(modSet));
+            else
+                args.Data[key].effectStrings.AddRange(GetEffectStrings(modSet));
+        }
+    }
+
+    private List<string> GetEffectStrings(AttachableWeaponRangedModifierSet modSet)
+    {
+        var result = new List<string>();
+
+        if (modSet.ScatterFlat != 0)
+            result.Add(Loc.GetString("rmc-attachable-examine-ranged-scatter",
+                ("colour", modifierExamineColour), ("sign", modSet.ScatterFlat > 0 ? '+' : ""), ("scatter", modSet.ScatterFlat)));
+
+        if (modSet.BurstScatterAddMult != 0)
+            result.Add(Loc.GetString("rmc-attachable-examine-ranged-burst-scatter",
+                ("colour", modifierExamineColour), ("sign", modSet.BurstScatterAddMult > 0 ? '+' : ""), ("burstScatterMult", modSet.BurstScatterAddMult)));
+
+        if (modSet.ShotsPerBurstFlat != 0)
+            result.Add(Loc.GetString("rmc-attachable-examine-ranged-shots-per-burst",
+                ("colour", modifierExamineColour), ("sign", modSet.ShotsPerBurstFlat > 0 ? '+' : ""), ("shots", modSet.ShotsPerBurstFlat)));
+
+        if (modSet.FireDelayFlat != 0)
+            result.Add(Loc.GetString("rmc-attachable-examine-ranged-fire-delay",
+                ("colour", modifierExamineColour), ("sign", modSet.FireDelayFlat > 0 ? '+' : ""), ("fireDelay", modSet.FireDelayFlat)));
+
+        if (modSet.RecoilFlat != 0)
+            result.Add(Loc.GetString("rmc-attachable-examine-ranged-recoil",
+                ("colour", modifierExamineColour), ("sign", modSet.RecoilFlat > 0 ? '+' : ""), ("recoil", modSet.RecoilFlat)));
+
+        if (modSet.DamageAddMult != 0)
+            result.Add(Loc.GetString("rmc-attachable-examine-ranged-damage",
+                ("colour", modifierExamineColour), ("sign", modSet.DamageAddMult > 0 ? '+' : ""), ("damage", modSet.DamageAddMult)));
+
+        if (modSet.ProjectileSpeedFlat != 0)
+            result.Add(Loc.GetString("rmc-attachable-examine-ranged-projectile-speed",
+                ("colour", modifierExamineColour), ("sign", modSet.ProjectileSpeedFlat > 0 ? '+' : ""), ("projectileSpeed", modSet.ProjectileSpeedFlat)));
+
+        return result;
+    }
+
+    private void OnRangedModsAltered(Entity<AttachableWeaponRangedModsComponent> attachable, ref AttachableAlteredEvent args)
+    {
+        switch(args.Alteration)
+        {
+            case AttachableAlteredType.AppearanceChanged:
+                break;
+
+            case AttachableAlteredType.DetachedDeactivated:
+                break;
+
+            default:
+                _cmGunSystem.RefreshGunDamageMultiplier(args.Holder);
+                _rmcSelectiveFireSystem.RefreshModifiableFireModeValues(args.Holder);
+                //_gunSystem.RefreshModifiers(args.Holder);
+                break;
+        }
     }
 
     private void OnRangedModsRefreshModifiers(Entity<AttachableWeaponRangedModsComponent> attachable, ref AttachableRelayedEvent<GunRefreshModifiersEvent> args)
@@ -35,24 +102,6 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
             // First we divide 1 second by the fire rate to get our current fire delay, then we add the delay modifier, then we divide 1 by the result again to get the modified fire rate.
             var fireDelayMod = args.Args.Gun.Comp.SelectedMode == SelectiveFire.Burst ? modSet.FireDelayFlat / 2f : modSet.FireDelayFlat;
             args.Args.FireRate = 1f / (1f / args.Args.FireRate + fireDelayMod);
-        }
-    }
-
-    private void OnRangedModsAltered(Entity<AttachableWeaponRangedModsComponent> attachable, ref AttachableAlteredEvent args)
-    {
-        switch(args.Alteration)
-        {
-            case AttachableAlteredType.AppearanceChanged:
-                break;
-
-            case AttachableAlteredType.DetachedDeactivated:
-                break;
-
-            default:
-                _cmGunSystem.RefreshGunDamageMultiplier(args.Holder);
-                _rmcSelectiveFireSystem.RefreshModifiableFireModeValues(args.Holder);
-                //_gunSystem.RefreshModifiers(args.Holder);
-                break;
         }
     }
 

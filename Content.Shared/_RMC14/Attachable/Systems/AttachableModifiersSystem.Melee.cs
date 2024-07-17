@@ -8,7 +8,37 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
 {
     private void InitializeMelee()
     {
+        SubscribeLocalEvent<AttachableWeaponMeleeModsComponent, AttachableGetExamineDataEvent>(OnMeleeModsGetExamineData);
         SubscribeLocalEvent<AttachableWeaponMeleeModsComponent, AttachableRelayedEvent<MeleeHitEvent>>(OnMeleeModsHitEvent);
+    }
+
+    private void OnMeleeModsGetExamineData(Entity<AttachableWeaponMeleeModsComponent> attachable, ref AttachableGetExamineDataEvent args)
+    {
+        foreach (var modSet in attachable.Comp.Modifiers)
+        {
+            var key = GetExamineKey(modSet.Conditions);
+
+            if (!args.Data.ContainsKey(key))
+                args.Data[key] = new (modSet.Conditions, GetEffectStrings(modSet));
+            else
+                args.Data[key].effectStrings.AddRange(GetEffectStrings(modSet));
+        }
+    }
+
+    private List<string> GetEffectStrings(AttachableWeaponMeleeModifierSet modSet)
+    {
+        var result = new List<string>();
+
+
+        if (modSet.BonusDamage != null)
+        {
+            var bonusDamage = modSet.BonusDamage.GetTotal();
+            if (bonusDamage != 0)
+                result.Add(Loc.GetString("rmc-attachable-examine-melee-damage",
+                    ("colour", modifierExamineColour), ("sign", bonusDamage > 0 ? '+' : ""), ("damage", bonusDamage)));
+        }
+
+        return result;
     }
 
     private void OnMeleeModsHitEvent(Entity<AttachableWeaponMeleeModsComponent> attachable, ref AttachableRelayedEvent<MeleeHitEvent> args)

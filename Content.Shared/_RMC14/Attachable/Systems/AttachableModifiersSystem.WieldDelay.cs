@@ -8,8 +8,33 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
 {
     private void InitializeWieldDelay()
     {
+        SubscribeLocalEvent<AttachableWieldDelayModsComponent, AttachableGetExamineDataEvent>(OnWieldDelayModsGetExamineData);
         SubscribeLocalEvent<AttachableWieldDelayModsComponent, AttachableAlteredEvent>(OnAttachableAltered);
         SubscribeLocalEvent<AttachableWieldDelayModsComponent, AttachableRelayedEvent<GetWieldDelayEvent>>(OnGetWieldDelay);
+    }
+
+    private void OnWieldDelayModsGetExamineData(Entity<AttachableWieldDelayModsComponent> attachable, ref AttachableGetExamineDataEvent args)
+    {
+        foreach (var modSet in attachable.Comp.Modifiers)
+        {
+            var key = GetExamineKey(modSet.Conditions);
+
+            if (!args.Data.ContainsKey(key))
+                args.Data[key] = new (modSet.Conditions, GetEffectStrings(modSet));
+            else
+                args.Data[key].effectStrings.AddRange(GetEffectStrings(modSet));
+        }
+    }
+
+    private List<string> GetEffectStrings(AttachableWieldDelayModifierSet modSet)
+    {
+        var result = new List<string>();
+
+        if (modSet.Delay != TimeSpan.Zero)
+            result.Add(Loc.GetString("rmc-attachable-examine-wield-delay",
+                ("colour", modifierExamineColour), ("sign", modSet.Delay.TotalSeconds > 0 ? '+' : ""), ("delay", modSet.Delay.TotalSeconds)));
+
+        return result;
     }
 
     private void OnAttachableAltered(Entity<AttachableWieldDelayModsComponent> attachable, ref AttachableAlteredEvent args)

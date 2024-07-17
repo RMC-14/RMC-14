@@ -67,14 +67,14 @@ public sealed class RMCSelectiveFireSystem : EntitySystem
 
         using (args.PushGroup(nameof(RMCSelectiveFireComponent)))
         {
-            args.PushMarkup(Loc.GetString("rmc-examine-text-scatter-max", ("color", scatterExamineColour), ("scatter", gunComponent.MaxAngleModified.Degrees)));
-            args.PushMarkup(Loc.GetString("rmc-examine-text-scatter-min", ("color", scatterExamineColour), ("scatter", gunComponent.MinAngleModified.Degrees)));
+            args.PushMarkup(Loc.GetString("rmc-examine-text-scatter-max", ("colour", scatterExamineColour), ("scatter", gunComponent.MaxAngleModified.Degrees)));
+            args.PushMarkup(Loc.GetString("rmc-examine-text-scatter-min", ("colour", scatterExamineColour), ("scatter", gunComponent.MinAngleModified.Degrees)));
 
             if (ContainsMods(gun, gunComponent.SelectedMode))
             {
                 var mods = gun.Comp.Modifiers[gunComponent.SelectedMode];
                 if (mods.ShotsToMaxScatter != null)
-                    args.PushMarkup(Loc.GetString("rmc-examine-text-shots-to-max-scatter", ("color", scatterExamineColour), ("shots", mods.ShotsToMaxScatter)));
+                    args.PushMarkup(Loc.GetString("rmc-examine-text-shots-to-max-scatter", ("colour", scatterExamineColour), ("shots", mods.ShotsToMaxScatter)));
             }
         }
     }
