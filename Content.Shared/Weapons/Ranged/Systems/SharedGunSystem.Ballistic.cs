@@ -78,7 +78,7 @@ public abstract partial class SharedGunSystem
 
     /// <summary>
     /// Interact with a BallisticAmmoProvider using something else in hand, usually to load it with loose cartridges or other ammo.
-    /// Includes both magazines and some guns that take ammo directly, like shotguns and launchers. 
+    /// Includes both magazines and some guns that take ammo directly, like shotguns and launchers.
     /// Uses InsertDelay instead of FillDelay, which defaults to 0. InsertDelay > 0 makes loading a DoAfter channel, even with Ammo components.
     /// If transferring from another BallisticAmmoProvider, OnBallisticAfterInteract takes precedence and uses FillDelay instead.
     /// </summary>
@@ -92,8 +92,6 @@ public abstract partial class SharedGunSystem
 
         if (GetBallisticShots(component) >= component.Capacity)
             return;
-
-        // Not already handled, inserted item on whitelist, and BAP isn't full.
 
         TimeSpan insertDelayConverted;
 
@@ -129,15 +127,12 @@ public abstract partial class SharedGunSystem
             !TryComp<BallisticAmmoProviderComponent>(args.Target, out var targetComponent) ||
             targetComponent.Whitelist == null)
         {
-            /// If already handled, cannot transfer, isn't the first time, has no target, target and source are the same item
-            /// target is deleted, target of the event doesn't actually have the BallisticAmmoProvider component even though this was called
-            /// or the target doesn't have a whitelist on its BAP component, cancel. This is only for shifting ammo between BAPs.
             return;
         }
 
-        args.Handled = true; /// Tell the AfterInteractEvent it's being processed.
+        args.Handled = true;
 
-        TimeSpan fillDelayConverted = TimeSpan.FromSeconds(component.FillDelay); // Convert FillDelay from double to TimeSpan
+        TimeSpan fillDelayConverted = TimeSpan.FromSeconds(component.FillDelay);
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, fillDelayConverted, new AmmoFillDoAfterEvent(), used: uid, target: args.Target, eventTarget: uid)
         {
@@ -184,7 +179,7 @@ public abstract partial class SharedGunSystem
                 args.User);
             return;
         }
-        // Simulates using a single ammo entity on the other BAP, loading it in. This might be useful for assisted reload with InteractUsingEvent on rockets.
+        // Simulates using a single ammo entity on the other BAP, loading it in.
         void SimulateInsertAmmo(EntityUid ammo, EntityUid ammoProvider, EntityCoordinates coordinates)
         {
             var evInsert = new InteractUsingEvent(args.User, ammo, ammoProvider, coordinates);
@@ -235,7 +230,7 @@ public abstract partial class SharedGunSystem
 
     private void OnBallisticDelayedAmmoInsertDoAfter(EntityUid uid, BallisticAmmoProviderComponent component, DelayedAmmoInsertDoAfterEvent args)
     {
-        // Make sure it wasn't cancelled and nothing's missing.
+        // Check the DoAfter wasn't cancelled and nothing's missing.
         if (Deleted(args.Target) ||
             !TryComp<BallisticAmmoProviderComponent>(args.Target, out var target) ||
             target.Whitelist == null ||
@@ -258,8 +253,8 @@ public abstract partial class SharedGunSystem
                 args.User);
             return;
         }
-        // Insert round as normal.
-        if(args.Used is not null)
+
+        if (args.Used is not null)
         {
             ManualLoad(uid, component, args.Used.Value, args.User);
             args.Handled = true;
@@ -270,7 +265,7 @@ public abstract partial class SharedGunSystem
 
     private void ManualLoad(EntityUid uid, BallisticAmmoProviderComponent component, EntityUid used, EntityUid user)
     {
-        // Refused function moved here.
+        // Reused function moved here.
         component.Entities.Add(used);
         Containers.Insert(used, component.Container);
         // Not predicted so
@@ -282,7 +277,7 @@ public abstract partial class SharedGunSystem
 
     private void OnBallisticDelayedCycleDoAfter(EntityUid uid, BallisticAmmoProviderComponent component, DelayedCycleDoAfterEvent args)
     {
-        // Make sure DoAfter wasn't interrupted and the target ballistic ammo provider still exists.
+        // Check the DoAfter wasn't interrupted and the target BAP still exists.
         if (Deleted(uid) ||
             args.Cancelled)
         {
@@ -303,7 +298,7 @@ public abstract partial class SharedGunSystem
                 args.User);
             return;
         }
-        // Cycle as normal.
+
         ManualCycle(uid, component, TransformSystem.GetMapCoordinates(uid), args.User);
 
         args.Handled = true;
