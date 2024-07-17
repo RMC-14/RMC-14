@@ -323,7 +323,7 @@
   - type: Storage
     maxItemSize: Normal
     grid:
-    - 0,0,11,1 # 6 slots
+    - 0,0,13,1 # 7 slots
     whitelist:
       tags:
       - RMCSmartPistol
