@@ -268,6 +268,50 @@
     CMHeadsetAlpha: 6
     # Crew Monitor
 
+# RMC14 Command Supplies Vendor
+- type: entity
+  parent: ColMarTechBase
+  id: CMVendorCommandSupplies
+  name: ColMarTech Command Gear Rack
+  description: Contains various command equipment, clothing, and gear.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi # RMC14 TODO: Custom Sprite, generic equipment is fine but not ideal.
+  - type: CMAutomatedVendor
+    sections:
+    - name: Encryption Keys
+      entries: 
+      - id: CMEncryptionKeyCommand
+        amount: 4 # Fairly arbitrary number. Balance as needed. 
+      - id: CMEncryptionKeyMilitaryPolice
+        amount: 2 # Kept low, the need to replace MPs should be infrequent.
+      - id: CMEncryptionKeyIntel
+        amount: 4 # To give to SLs or FTLs.
+    - name: Command and Control #Rename?
+      entries: 
+      - id: RMCTabletCO
+        amount: 2
+    - name: Clothing
+      entries: 
+      - id: CMGlassesSecurity
+        amount: 4
+      - id: CMHandsBlackMarine
+        amount: 4
+      - id: CMHandsLightBrown
+        amount: 4
+      - id: CMHandsBlackMarine
+        amount: 4
+      - id: CMHeadCapMP
+        amount: 2
+      - id: CMHeadBeretTan
+        amount: 2
+      - id: CMCoatOfficer
+        amount: 2
+      - id: CMCoatLong
+        amount: 2
+  - type: AccessReader
+    access: [["CMAccessCommand"]]
+
 
 # Nutriments
 - type: entity
