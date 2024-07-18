@@ -32,14 +32,23 @@ attachable-popup-deactivate-unlock = You unlock {THE($attachable)}.
 attachable-popup-switch-to-generic = You switch to using {THE($attachable)}.
 attachable-popup-switch-from-generic = You stop using {THE($attachable)}.
 
-rmc-attachable-examine-condition-always = Always:
+rmc-attachable-examinable-verb-text = Attachable Modifiers
+rmc-attachable-examinable-verb-message = Examine the modifiers applied by this attachable.
+
+rmc-attachable-examine-condition-always = [bold]Always:[/bold]
 rmc-attachable-examine-condition-when = When
 rmc-attachable-examine-condition-wielded = the holder is [bold]wielded[/bold]
-rmc-attachable-examine-condition-unwielded = the holder is [bold]unwielded[/bold]
+rmc-attachable-examine-condition-unwielded = the holder is [bold]not wielded[/bold]
 rmc-attachable-examine-condition-active = {THE($attachable)} is [bold]active[/bold]
 rmc-attachable-examine-condition-inactive = {THE($attachable)} is [bold]inactive[/bold]
-rmc-attachable-examine-condition-whitelist = the holder has [bold]{$tagNumber}[/bold] of the following tags: [bold]{$tags}[/bold]
-rmc-attachable-examine-condition-blacklist = the holder lacks [bold]{$tagNumber}[/bold] of the following tags: [bold]{$tags}[/bold]
+
+rmc-attachable-examine-condition-whitelist-comps = the holder [bold]has {$compNumber}[/bold] of the following components: [bold]{$comps}[/bold]
+rmc-attachable-examine-condition-whitelist-sizes = the holder [bold]is[/bold] one of the following sizes: [bold]{$sizes}[/bold]
+rmc-attachable-examine-condition-whitelist-tags = the holder [bold]has {$tagNumber}[/bold] of the following tags: [bold]{$tags}[/bold]
+
+rmc-attachable-examine-condition-blacklist-comps = the holder [bold]lacks {$compNumber}[/bold] of the following components: [bold]{$comps}[/bold]
+rmc-attachable-examine-condition-blacklist-sizes = the holder [bold]is not[/bold] one of the following sizes: [bold]{$sizes}[/bold]
+rmc-attachable-examine-condition-blacklist-tags = the holder [bold]lacks {$tagNumber}[/bold] of the following tags: [bold]{$tags}[/bold]
 
 rmc-attachable-examine-ranged-scatter = [color={$colour}]{$sign}{$scatter}[/color] degrees of scatter.
 rmc-attachable-examine-ranged-burst-scatter = [color={$colour}]{$sign}{$burstScatterMult}[/color] burst scatter multiplier.
