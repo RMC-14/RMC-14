@@ -98,9 +98,9 @@
         crate: CMCrateClothingOfficerOutfit
     - name: Engineering
       entries:
-      - cost: 2000
+      - cost: 1500
         crate: CMCrateEmptySandbags
-      - cost: 3000
+      - cost: 2500
         crate: CMCrateSandbagsConstructionKit
       - cost: 2000
         crate: CMCrateMetalSheets
