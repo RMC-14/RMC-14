@@ -86,6 +86,7 @@ public sealed class CommandHandler(DiscordSocketClient client, CommandService co
                     player.Patron.TierId = tier.Id;
                     await db.SaveChangesAsync();
                     await Logger.Info($"Updated patron {user.Username}:{linked.DiscordId}:{linked.Player.LastSeenUserName} with tier {tier.Name}");
+                    break;
                 }
             }
         }
