@@ -40,8 +40,6 @@
   abstract: true
   parent: CMBoxMagazineBase
   id: CMBoxMagazineAPBase
-  name: generic magazine box (? x ?)"
-  description: A box of magazines.
   components:
   - type: GenericVisualizer
     visuals:
@@ -64,8 +62,6 @@
   abstract: true
   parent: CMBoxMagazineBase
   id: CMBoxMagazineHVBase
-  name: generic magazine box (? x ?)"
-  description: A box of magazines.
   components:
   - type: GenericVisualizer
     visuals:
@@ -579,7 +575,7 @@
 
 - type: entity
   parent: CMBoxMagazinePistolMK80Empty
-  id:  CMBoxMagazinePistolMK80
+  id: CMBoxMagazinePistolMK80
   name: magazine box (MK80 x 16)
   components:
   - type: CMItemSlots
