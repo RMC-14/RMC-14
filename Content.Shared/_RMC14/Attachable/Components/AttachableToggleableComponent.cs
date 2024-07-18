@@ -52,6 +52,9 @@ public sealed partial class AttachableToggleableComponent : Component
     public bool WieldedUseOnly = false;
 
     [DataField, AutoNetworkedField]
+    public TimeSpan UseDelay = TimeSpan.FromSeconds(0f);
+
+    [DataField, AutoNetworkedField]
     public float DoAfter;
 
     [DataField, AutoNetworkedField]

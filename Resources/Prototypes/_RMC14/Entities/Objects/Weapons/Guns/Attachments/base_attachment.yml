@@ -1,8 +1,0 @@
-﻿- type: entity
-  parent: BaseItem
-  abstract: true
-  id: RMCAttachmentBase
-  components:
-  - type: Item
-    size: Small
-  - type: Attachable

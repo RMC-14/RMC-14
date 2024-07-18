@@ -1,6 +1,6 @@
 ﻿- type: entity
   abstract: true
-  parent: RMCAttachmentBase
+  parent: RMCAttachableBase
   id: RMCUnderAttachmentBase
   components:
   - type: Sprite
@@ -32,7 +32,7 @@
     - delay: -0.4
 
 - type: entity
-  parent: RMCUnderAttachmentBase
+  parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
   id: RMCAttachmentBipod
   name: bipod
   description: "A simple set of telescopic poles to keep a weapon stabilized during firing.
@@ -53,6 +53,7 @@
     doAfter: 1.5
     deactivateDoAfter: 0
     instantToggle: Brace
+    useDelay: 0.5
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: bipod
@@ -229,7 +230,7 @@
     state: flamer_nozzle
 
 - type: entity
-  parent: RMCUnderAttachmentBase
+  parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
   id: RMCAttachmentU7UnderbarrelShotgun
   name: U7 underbarrel shotgun
   description: An AEGIS U7 tactical shotgun. Attaches to the underbarrel of most weapons. Only capable of loading up to five buckshot shells. Specialized for breaching into buildings.
@@ -293,7 +294,7 @@
     state: extinguisher
 
 - type: entity
-  parent: RMCUnderAttachmentBase
+  parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
   id: RMCAttachmentU1GrenadeLauncher
   name: U1 grenade launcher
   description: A weapon-mounted, reloadable grenade launcher.
@@ -431,7 +432,7 @@
       scatterFlat: 2
 
 - type: entity
-  parent: RMCUnderAttachmentBase
+  parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
   id: RMCAttachmentFlashlightGrip
   name: underbarrel flashlight grip
   description: Holy smokes RO man, they put a grip on a flashlight! Reduces recoil and scatter by a tiny amount. Works as a light source. # Boosts accuracy by a tiny amount.
@@ -487,6 +488,7 @@
   - type: Appearance
   - type: AttachableToggleable
     attachedOnly: true
+    useDelay: 1.0
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: flashgrip

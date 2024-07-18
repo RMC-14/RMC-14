@@ -11,6 +11,7 @@ using Content.Shared.Light;
 using Content.Shared.Movement.Events;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.Timing;
 using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Wieldable.Components;
@@ -25,13 +26,16 @@ public sealed class AttachableToggleableSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainerSystem = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookupSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaDataSystem = default!;
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly AttachableHolderSystem _attachableHolderSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookupSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private readonly UseDelaySystem _useDelaySystem = default!;
+
+    private const string attachableToggleUseDelayID = "RMCAttachableToggle";
 
     private const int bracingInvalidCollisionGroup = (int)CollisionGroup.ThrownItem;
     private const int bracingRequiredCollisionGroup = (int)(CollisionGroup.MidImpassable | CollisionGroup.LowImpassable);
@@ -317,6 +321,12 @@ public sealed class AttachableToggleableSystem : EntitySystem
 #region Toggling
     private void OnAttachableToggleStarted(Entity<AttachableToggleableComponent> attachable, ref AttachableToggleStartedEvent args)
     {
+        if (TryComp(attachable.Owner, out UseDelayComponent? useDelayComponent) &&
+            _useDelaySystem.IsDelayed((attachable.Owner, useDelayComponent), attachableToggleUseDelayID))
+        {
+            return;
+        }
+
         if (!attachable.Comp.Active && attachable.Comp.WieldedOnly && (!TryComp(args.Holder, out WieldableComponent? wieldableComponent) || !wieldableComponent.Wielded))
         {
             _popupSystem.PopupClient(
@@ -475,6 +485,10 @@ public sealed class AttachableToggleableSystem : EntitySystem
         var holderEv = new AttachableHolderAttachablesAlteredEvent(attachable.Owner, slotId, mode);
         RaiseLocalEvent(holder.Owner, ref holderEv);
 
+        _useDelaySystem.SetLength(attachable.Owner, attachable.Comp.UseDelay, attachableToggleUseDelayID);
+        _useDelaySystem.TryResetDelay(attachable.Owner, id: attachableToggleUseDelayID);
+        _actionsSystem.StartUseDelay(attachable.Comp.Action);
+
         if (!attachable.Comp.Active)
         {
             if (attachable.Comp.SupercedeHolder && holder.Comp.SupercedingAttachable == attachable.Owner)
@@ -571,6 +585,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
             action.Icon = ent.Comp.Icon;
             action.IconOn = ent.Comp.IconActive;
             action.Enabled = ent.Comp.Attached;
+            action.UseDelay = ent.Comp.UseDelay;
             Dirty(actionId, action);
         }
 

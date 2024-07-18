@@ -1,6 +1,6 @@
 ﻿- type: entity
   abstract: true
-  parent: RMCAttachmentBase
+  parent: RMCAttachableBase
   id: RMCStockAttachmentBase
   components:
   - type: Sprite
@@ -22,7 +22,7 @@
 
 - type: entity
   abstract: true
-  parent: RMCStockAttachmentBase
+  parent: [ RMCStockAttachmentBase, RMCAttachableToggleableBase ]
   id: RMCStockAttachmentCollapsibleBase
   components:
   - type: AttachableVisuals
