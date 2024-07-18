@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared._RMC14.Weapons.Common;
@@ -8,11 +9,14 @@ using Content.Shared.Hands;
 using Content.Shared.Interaction;
 using Content.Shared.Light;
 using Content.Shared.Movement.Events;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Map;
+using Robust.Shared.Physics;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Attachable.Systems;
@@ -26,7 +30,11 @@ public sealed class AttachableToggleableSystem : EntitySystem
     [Dependency] private readonly AttachableHolderSystem _attachableHolderSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookupSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+
+    private const int bracingInvalidCollisionGroup = (int)CollisionGroup.ThrownItem;
+    private const int bracingRequiredCollisionGroup = (int)(CollisionGroup.MidImpassable | CollisionGroup.LowImpassable);
 
     public override void Initialize()
     {
@@ -254,14 +262,12 @@ public sealed class AttachableToggleableSystem : EntitySystem
         
         args.Args.Handled = true;
         
-        RemoveAttachableActions(attachable, args.Args.User);
+        if (attachable.Comp.NeedHand && attachable.Comp.Active)
+            Toggle(attachable, args.Args.User, attachable.Comp.DoInterrupt);
         
-        if (!attachable.Comp.NeedHand || !attachable.Comp.Active)
-            return;
-
-        Toggle(attachable, args.Args.User, attachable.Comp.DoInterrupt);
+        RemoveAttachableActions(attachable, args.Args.User);
     }
-    
+
     private void OnAttachableMovementLockedMoveInput(Entity<AttachableMovementLockedComponent> user, ref MoveInputEvent args)
     {
         foreach (EntityUid attachableUid in user.Comp.AttachableList)
@@ -320,15 +326,10 @@ public sealed class AttachableToggleableSystem : EntitySystem
             return;
         }
 
-        if (!TryComp(args.Holder, out TransformComponent? transformComponent) || !transformComponent.ParentUid.Valid)
-            return;
-
-        var extraDoAfter = transformComponent.ParentUid == args.User ? 0f : 0.5f;
-
         _doAfterSystem.TryStartDoAfter(new DoAfterArgs(
             EntityManager,
             args.User,
-            Math.Max(attachable.Comp.DoAfter + extraDoAfter, 0),
+            GetToggleDoAfter(attachable, args.Holder, args.User),
             new AttachableToggleDoAfterEvent(args.SlotId),
             attachable,
             target: attachable.Owner,
@@ -339,6 +340,97 @@ public sealed class AttachableToggleableSystem : EntitySystem
         });
 
         Dirty(attachable);
+    }
+
+    private TimeSpan GetToggleDoAfter(Entity<AttachableToggleableComponent> attachable, EntityUid holderUid, EntityUid userUid)
+    {
+        if (!TryComp(holderUid, out TransformComponent? transformComponent) || !transformComponent.ParentUid.Valid)
+            return TimeSpan.FromSeconds(0f);
+
+        var extraDoAfter = transformComponent.ParentUid == userUid ? 0f : 0.5f;
+
+        switch (attachable.Comp.InstantToggle)
+        {
+            case AttachableInstantToggleConditions.Brace:
+                if (attachable.Comp.Active || transformComponent.ParentUid != userUid || !TryComp(userUid, out TransformComponent? userTransform))
+                    break;
+
+                TimeSpan? doAfter;
+
+                var coords = userTransform.Coordinates;
+
+                Func<EntityCoordinates, EntityCoordinates, bool> comparer = (EntityCoordinates userCoords, EntityCoordinates entCoords) => { return false; };
+                var coordsShift = new Vector2(0f, 0f);
+
+                Func<HashSet<EntityUid>, TimeSpan?> GetBracingSurface = (HashSet<EntityUid> ents) =>
+                {
+                    foreach (var entity in ents)
+                    {
+                        if (!TryComp(entity, out FixturesComponent? fixturesComponent))
+                            continue;
+
+                        foreach (var fixture in fixturesComponent.Fixtures.Values)
+                        {
+                            if ((fixture.CollisionLayer & bracingInvalidCollisionGroup) != 0 || (fixture.CollisionLayer & bracingRequiredCollisionGroup) == 0)
+                                continue;
+
+                            if (!comparer(coords, Transform(entity).Coordinates))
+                                continue;
+
+                            return TimeSpan.FromSeconds(0f);
+                        }
+                    }
+
+                    return null;
+                };
+
+                switch (userTransform.LocalRotation.GetCardinalDir())
+                {
+                    case Direction.South:
+                        comparer = (EntityCoordinates userCoords, EntityCoordinates entCoords) => { return entCoords.Y < userCoords.Y; };
+                        coordsShift = new Vector2(0f, -1f);
+                        break;
+
+                    case Direction.North:
+                        comparer = (EntityCoordinates userCoords, EntityCoordinates entCoords) => { return entCoords.Y > userCoords.Y; };
+                        coordsShift = new Vector2(0f, 1f);
+                        break;
+
+                    case Direction.East:
+                        comparer = (EntityCoordinates userCoords, EntityCoordinates entCoords) => { return entCoords.X > userCoords.X; };
+                        coordsShift = new Vector2(1f, 0f);
+                        break;
+
+                    case Direction.West:
+                        comparer = (EntityCoordinates userCoords, EntityCoordinates entCoords) => { return entCoords.X < userCoords.X; };
+                        coordsShift = new Vector2(-1f, 0f);
+                        break;
+
+                    default:
+                        break;
+                }
+
+                var output = GetBracingSurface(_entityLookupSystem.GetEntitiesInRange(coords, 0.5f, LookupFlags.Dynamic | LookupFlags.Static));
+                if (output != null)
+                    return output.Value;
+
+                coords = new EntityCoordinates(coords.EntityId, coords.Position + coordsShift);
+                output = GetBracingSurface(_entityLookupSystem.GetEntitiesInRange(coords, 0.5f, LookupFlags.Dynamic | LookupFlags.Static));
+                if (output != null)
+                    return output.Value;
+
+                break;
+
+            default:
+                break;
+        }
+
+        return TimeSpan.FromSeconds(Math.Max(
+            (attachable.Comp.DeactivateDoAfter != null && attachable.Comp.Active
+                ? attachable.Comp.DeactivateDoAfter.Value
+                : attachable.Comp.DoAfter
+            ) + extraDoAfter,
+            0));
     }
 
     private void OnAttachableToggleDoAfter(Entity<AttachableToggleableComponent> attachable,

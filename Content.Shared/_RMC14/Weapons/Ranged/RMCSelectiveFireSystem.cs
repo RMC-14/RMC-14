@@ -82,7 +82,7 @@ public sealed class RMCSelectiveFireSystem : EntitySystem
     private void OnSelectiveFireMapInit(Entity<RMCSelectiveFireComponent> gun, ref MapInitEvent args)
     {
         gun.Comp.BurstScatterMultModified = gun.Comp.BurstScatterMult;
-        RefreshFireModes((gun.Owner, gun.Comp));
+        RefreshFireModes((gun.Owner, gun.Comp), true);
     }
 
     private void OnSelectiveFireModeChanged(Entity<RMCSelectiveFireComponent> gun, ref RMCFireModeChangedEvent args)
@@ -135,7 +135,7 @@ public sealed class RMCSelectiveFireSystem : EntitySystem
         gunComponent.CurrentAngle = gunComponent.MinAngleModified;
     }
 
-    public void RefreshFireModes(Entity<RMCSelectiveFireComponent?> gun)
+    public void RefreshFireModes(Entity<RMCSelectiveFireComponent?> gun, bool forceValueRefresh = false)
     {
         if (gun.Comp == null && !TryComp(gun.Owner, out gun.Comp) || !TryComp(gun.Owner, out GunComponent? gunComponent))
             return;
@@ -145,9 +145,9 @@ public sealed class RMCSelectiveFireSystem : EntitySystem
         var ev = new GetFireModesEvent(gun.Comp.BaseFireModes);
         RaiseLocalEvent(gun.Owner, ref ev);
 
-        SetFireModes((gun.Owner, gunComponent), ev.Modes);
+        SetFireModes((gun.Owner, gunComponent), ev.Modes, !(forceValueRefresh || initialMode != gunComponent.SelectedMode));
 
-        if (initialMode != gunComponent.SelectedMode)
+        if (forceValueRefresh || initialMode != gunComponent.SelectedMode)
             RefreshFireModeGunValues((gun.Owner, gun.Comp));
     }
 
@@ -173,7 +173,7 @@ public sealed class RMCSelectiveFireSystem : EntitySystem
         Dirty(gun);
     }
 
-    public void SetFireModes(Entity<GunComponent?> gun, SelectiveFire modes)
+    public void SetFireModes(Entity<GunComponent?> gun, SelectiveFire modes, bool dirty = true)
     {
         if (gun.Comp == null && !TryComp(gun.Owner, out gun.Comp) || modes == SelectiveFire.Invalid)
             return;
@@ -182,6 +182,10 @@ public sealed class RMCSelectiveFireSystem : EntitySystem
             _gunSystem.CycleFire(gun.Owner, gun.Comp);
 
         gun.Comp.AvailableModes = modes;
+
+        if (!dirty)
+            return;
+
         Dirty(gun);
     }
 

@@ -38,7 +38,7 @@
   - type: UseDelay
   - type: Tag
     tags:
-      - RMCWeaponShotgun
+    - RMCWeaponShotgun
   - type: RMCNameItemOnVend
     item: PrimaryGun
   - type: AttachableHolder

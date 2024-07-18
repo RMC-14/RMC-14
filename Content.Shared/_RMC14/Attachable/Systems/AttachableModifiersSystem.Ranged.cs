@@ -82,7 +82,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
 
                 if (attachable.Comp.FireModeMods != null)
                 {
-                    _rmcSelectiveFireSystem.RefreshFireModes(args.Holder);
+                    _rmcSelectiveFireSystem.RefreshFireModes(args.Holder, true);
                     break;
                 }
 

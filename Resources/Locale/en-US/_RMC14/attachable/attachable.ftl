@@ -25,7 +25,7 @@ rmc-attachable-examine-condition-blacklist = the holder lacks [bold]{$tagNumber}
 rmc-attachable-examine-ranged-scatter = [color={$colour}]{$sign}{$scatter}[/color] degrees of scatter.
 rmc-attachable-examine-ranged-burst-scatter = [color={$colour}]{$sign}{$burstScatterMult}[/color] burst scatter multiplier.
 rmc-attachable-examine-ranged-shots-per-burst = [color={$colour}]{$sign}{$shots}[/color] burst shots.
-rmc-attachable-examine-ranged-fire-delay = [color={$colour}]{$sign}{$fireDelay}[/color] seconds of fire delay.
+rmc-attachable-examine-ranged-fire-delay = [color={$colour}]{$sign}{TOSTRING($fireDelay, "F2")}[/color] seconds of fire delay.
 rmc-attachable-examine-ranged-recoil = [color={$colour}]{$sign}{$recoil}[/color] recoil.
 rmc-attachable-examine-ranged-damage = [color={$colour}]{$sign}{$damage}[/color] ranged damage multiplier.
 rmc-attachable-examine-ranged-projectile-speed = [color={$colour}]{$sign}{$projectileSpeed}[/color] projectile speed.

@@ -55,10 +55,16 @@ public sealed partial class AttachableToggleableComponent : Component
     public float DoAfter;
 
     [DataField, AutoNetworkedField]
+    public float? DeactivateDoAfter;
+
+    [DataField, AutoNetworkedField]
     public bool DoAfterNeedHand = true;
 
     [DataField, AutoNetworkedField]
     public bool DoAfterBreakOnMove = true;
+
+    [DataField, AutoNetworkedField]
+    public AttachableInstantToggleConditions InstantToggle = AttachableInstantToggleConditions.None;
 
     /// <summary>
     /// If set to true, this attachment will block some of the holder's functionality when active and perform it instead.
@@ -99,4 +105,10 @@ public sealed partial class AttachableToggleableComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Attached = false;
+}
+
+public enum AttachableInstantToggleConditions : byte
+{
+    None = 0,
+    Brace = 1 << 0
 }

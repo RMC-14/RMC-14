@@ -20,6 +20,9 @@
     size: Large
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s.rsi
+  - type: Tag
+    tags:
+    - CMM96SSniperRifle
   - type: Gun
     minAngle: 50
     maxAngle: 50
@@ -65,3 +68,13 @@
         whitelist:
           tags:
           - RMCM96SIntegratedScope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBipod
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-underbarrel: 0.25, -0.343
+
+- type: Tag
+  id: CMM96SSniperRifle

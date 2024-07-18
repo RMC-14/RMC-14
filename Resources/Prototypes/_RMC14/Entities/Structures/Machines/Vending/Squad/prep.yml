@@ -442,8 +442,8 @@
       entries:
       - id: RMCAttachmentAngledGrip
         amount: 3
-#      - id: CMAttachmentBipod
-#        amount: 3
+      - id: RMCAttachmentBipod
+        amount: 3
       - id: RMCAttachmentBurstFireAssembly
         amount: 2
       - id: RMCAttachmentGyroscopicStabilizer

@@ -670,6 +670,20 @@ public sealed class AttachableHolderSystem : EntitySystem
         return true;
     }
 
+    public bool TryGetUser(EntityUid attachable, [NotNullWhen(true)] out EntityUid? userUid)
+    {
+        userUid = null;
+
+        if (!TryGetHolder(attachable, out var holderUid))
+            return false;
+
+        if (!TryComp(holderUid, out TransformComponent? transformComponent) || !transformComponent.ParentUid.Valid)
+            return false;
+
+        userUid = transformComponent.ParentUid;
+        return true;
+    }
+
     public void RelayEvent<T>(Entity<AttachableHolderComponent> holder, ref T args) where T : notnull
     {
         var ev = new AttachableRelayedEvent<T>(args, holder.Owner);
