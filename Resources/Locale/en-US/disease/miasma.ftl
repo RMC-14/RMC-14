@@ -16,6 +16,6 @@ rotting-rotting = [color=orange]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($ta
 rotting-bloated = [color=orange]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} unrevivable.[/color]
 rotting-extremely-bloated = [color=orange]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} unrevivable.[/color]
 
-rotting-rotting-nonmob = [color=orange]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)}They are unrevivable.[/color]
+rotting-rotting-nonmob = [color=orange]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} unrevivable.[/color]
 rotting-bloated-nonmob = [color=orange]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} unrevivable.[/color]
 rotting-extremely-bloated-nonmob = [color=orange]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} unrevivable.[/color]
