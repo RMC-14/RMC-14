@@ -1,0 +1,190 @@
+- type: entity
+  name: small floodlight
+  id: RMCSmallFloodlight
+  parent: BaseStructure
+  description: A small bit of light in the darkness.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Objects/Misc/Lights/floodlight.rsi
+    layers:
+      - state: small
+      - state: smallfloodon
+        shader: unshaded
+        visible: false
+        map: [ "light" ]
+        drawdepth: Mobs
+  - type: InteractionOutline
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 50
+        mask:
+        - MachineMask
+        layer:
+        - WallLayer
+  - type: PointLight
+    enabled: false
+    radius: 5
+    energy: 5
+    offset: "0, 0"
+    color: "#FFFFFF"
+    mask: /Textures/_RMC14/Effects/LightMasks/quad_cone.png
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+  - type: ContainerContainer
+    containers:
+      cell_slot: !type:ContainerSlot
+  - type: ToggleableLightVisuals
+  - type: Appearance
+  - type: Anchorable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FloodlightBroken:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  name: tall floodlight
+  id: RMCTallFloodlight
+  parent: BaseStructure
+  description: A pillar of light in the darkness.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Objects/Misc/Lights/floodlightbig.rsi
+    layers:
+      - state: bigflood
+      - state: bigfloodon
+        shader: unshaded
+        visible: false
+        map: [ "light" ]
+    offset: "0.0,0.5"
+    drawdepth: Mobs
+  - type: InteractionOutline
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 155
+        mask:
+        - MachineMask
+        layer:
+        - WallLayer
+  - type: PointLight
+    enabled: false
+    radius: 15
+    energy: 5
+    offset: "0, 0.5"
+    color: "#FFFFFF"
+    mask: /Textures/_RMC14/Effects/LightMasks/quad_cone.png
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+  - type: ContainerContainer
+    containers:
+      cell_slot: !type:ContainerSlot
+  - type: ToggleableLightVisuals
+  - type: Appearance
+  - type: Anchorable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FloodlightBroken:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  name: tall broken floodlight
+  id: RMCTallFloodlightBroken
+  parent: BaseStructure
+  description: No longer a pillar of light in the darkness, you can salvage it for parts.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Objects/Misc/Lights/floodlightbig.rsi
+    state: broken
+    offset: "0.0,0.5"
+    drawdepth: Mobs
+  - type: Anchorable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 40
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 2
+            max: 2
+          CMSheetGlass1:
+            min: 2
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 155
+        mask:
+        - MachineMask
+        layer:
+        - WallLayer
