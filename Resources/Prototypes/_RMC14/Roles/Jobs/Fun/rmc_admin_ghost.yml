@@ -3,6 +3,7 @@
   id: RMCAdminObserver
   noSpawn: true
   components:
+  - type: Marine
   - type: Loadout
     prototypes: [ RMCMobAghostGear ]
 
@@ -11,9 +12,32 @@
   id: RMCMobAghostGear
   equipment:
     back: ClothingBackpackSatchelHolding
-    id: CMIDCardHighCommand # RMC-14: Changed from AdminPDA
+    id: RMCAdminPDA
   storage:
     back:
-    # RMC-14: Replaced loadout
     - CMHealthAnalyzer
     - RMCAdminAccessConfigurator
+    - DoorRemoteAll
+    - AdminHypo
+    - MeleeDebug200
+    - ToolDebug
+
+- type: entity
+  parent: AdminPDA
+  id: RMCAdminPDA
+  name: Admin PDA
+  suffix: Admin
+  description: If you are not an admin please return this PDA to the nearest admin.
+  components:
+  - type: Pda
+    id: CMIDCardHighCommand
+  - type: HealthAnalyzer
+    scanDelay: 0
+  - type: CartridgeLoader
+    uiKey: enum.PdaUiKey.Key
+    notificationsEnabled: false
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NewsReaderCartridge
+    - LogProbeCartridge
