@@ -1,7 +1,7 @@
 ﻿- type: entity
   id: StandardUNMCWarship
-  mapName: Warship
-  mapPath: /Maps/_TGMC/warship.yml
+  mapName: Normandy
+  mapPath: /Maps/_RMC14/normandy.yml
   parent:
   - BaseStation
   - BaseStationNews
@@ -17,4 +17,6 @@
   - BaseStationNanotrasen
   noSpawn: false
   components:
+  - type: StationNameSetup
+    mapNameTemplate: 'Normandy'
   - type: Transform

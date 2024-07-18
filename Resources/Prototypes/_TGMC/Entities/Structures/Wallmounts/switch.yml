@@ -1,0 +1,41 @@
+- type: entity
+  id: SignalButtonLZ1
+  parent: SignalButton
+  name: exterior button LZ:1
+  suffix: Autolink, LZ1
+  components:
+    - type: AutoLinkTransmitter
+      channel: LZ1
+    - type: WirelessNetworkConnection
+      range: 2000
+
+- type: entity
+  id: BlastDoorExteriorLZ1
+  parent: BlastDoor
+  suffix: Autolink, LZ1
+  components:
+    - type: AutoLinkReceiver
+      channel: LZ1
+    - type: Sprite
+      sprite: _RMC14/Structures/Doors/Shutters/Almayer/poddoor.rsi
+
+- type: entity
+  id: SignalButtonLZ2
+  parent: SignalButton
+  name: exterior button LZ:2
+  suffix: Autolink, LZ2
+  components:
+    - type: AutoLinkTransmitter
+      channel: LZ2
+    - type: WirelessNetworkConnection
+      range: 2000
+
+- type: entity
+  id: BlastDoorExteriorLZ2
+  parent: BlastDoor
+  suffix: Autolink, LZ2
+  components:
+    - type: AutoLinkReceiver
+      channel: LZ2
+    - type: Sprite
+      sprite: _RMC14/Structures/Doors/Shutters/Almayer/poddoor.rsi
