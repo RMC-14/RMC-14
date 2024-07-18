@@ -66,7 +66,7 @@ public sealed partial class RMCSelectiveFireComponent : Component
     /// Conversion from 13 guns: 1 / (fire_delay / 10)
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float BaseFireRate = 1.43f;
+    public float BaseFireRate = 1.429f;
 
     /// <summary>
     /// This is the multiplier applied to the additional scatter added by a SelectiveFireModifierSet with UseBurstScatterMult set to true.

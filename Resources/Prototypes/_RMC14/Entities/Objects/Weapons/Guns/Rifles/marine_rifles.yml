@@ -3,6 +3,34 @@
   parent: [ BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder ]
   id: CMBaseWeaponRifle
   components:
+  - type: Gun
+    shotsPerBurst: 3
+    selectedMode: Burst
+    availableModes:
+    - SemiAuto
+    - Burst
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    recoilWielded: 1
+    recoilUnwielded: 4
+    scatterWielded: 10
+    scatterUnwielded: 20
+    baseFireRate: 1.429
+    burstScatterMult: 4
+    modifiers:
+      Burst:
+        fireDelay: 0.1665
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+      FullAuto:
+        maxScatterModifier: 13
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
   - type: Wieldable
   - type: WieldableSpeedModifiers
     baseWalk: 0.8
@@ -59,6 +87,16 @@
     - FullAuto
     soundGunshot:
       collection: CMM54CShoot
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilUnwielded: 4
+    scatterWielded: 6
+    scatterUnwielded: 20
+    baseFireRate: 4
+    burstScatterMult: 1
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -73,29 +111,6 @@
           - CMMagazineRifleM54CExt
   - type: GunDamageModifier
     multiplier: 1.1
-  - type: RMCSelectiveFire
-    baseFireModes:
-    - SemiAuto
-    - Burst
-    - FullAuto
-    recoilWielded: 1
-    recoilUnwielded: 4
-    scatterWielded: 6
-    scatterUnwielded: 20
-    baseFireRate: 4
-    burstScatterMult: 1
-    modifiers:
-      Burst:
-        fireDelay: 0.1665
-        maxScatterModifier: 10
-        useBurstScatterMult: true
-        unwieldedScatterMultiplier: 2
-        shotsToMaxScatter: 6
-      FullAuto:
-        maxScatterModifier: 13
-        useBurstScatterMult: true
-        unwieldedScatterMultiplier: 2
-        shotsToMaxScatter: 4
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -141,7 +156,7 @@
 
 - type: entity
   name: M54CE2 heavy assault rifle
-  parent: WeaponRifleM54C
+  parent: CMBaseWeaponRifle
   id: WeaponRifleM54CE2
   description: A large squad support weapon capable of laying down sustained suppressing fire from a mounted position. While unstable and less accurate, it can be lugged and shot with two hands.
   components:
@@ -158,20 +173,17 @@
     tags:
     - RMCGunBipodFullAuto
   - type: Gun
-    selectedMode: Burst
     shotsPerBurst: 5
+    selectedMode: Burst
     availableModes:
     - SemiAuto
     - Burst
     soundGunshot:
       collection: CMM54CShoot
-  - type: GunDamageModifier
-    multiplier: 1.0
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
     - Burst
-    recoilWielded: 1
     recoilUnwielded: 5
     scatterWielded: 10
     scatterUnwielded: 20
@@ -252,23 +264,23 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr.rsi
   - type: Gun
-    minAngle: 20
-    maxAngle: 70
-    angleIncrease: 25
-    angleDecay: 45
-    fireRate: 3.2
+    shotsPerBurst: 0
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m4spr.ogg
-  - type: GunWieldBonus
-    minAngle: -20
-    maxAngle: -50
-    angleIncrease: -22
-    angleDecay: 10
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilUnwielded: 2
+    scatterWielded: 6
+    baseFireRate: 2.86
   - type: WieldDelay
     baseDelay: 0.2
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.92
+    baseSprint: 0.86
   - type: ItemSlots
     slots:
       gun_magazine:

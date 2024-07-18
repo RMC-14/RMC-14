@@ -280,6 +280,7 @@
     delay: 2.1
   - type: UseDelay
   - type: AttachableToggleable
+    userOnly: true
     attachedOnly: true
     supercedeHolder: true
     activatePopupText: attachable-popup-switch-to-generic
@@ -360,6 +361,7 @@
           True: { state: grenade-open }
           False: { state: grenade }
   - type: AttachableToggleable
+    userOnly: true
     attachedOnly: true
     supercedeHolder: true
     wieldedUseOnly: true
