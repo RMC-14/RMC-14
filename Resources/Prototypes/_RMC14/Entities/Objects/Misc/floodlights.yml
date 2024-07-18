@@ -8,13 +8,73 @@
     noRot: true
     sprite: _RMC14/Objects/Misc/Lights/floodlight.rsi
     layers:
-      - state: small
+      - state: smallflood
       - state: smallfloodon
-        shader: unshaded
         visible: false
         map: [ "light" ]
-        drawdepth: Mobs
   - type: InteractionOutline
+  - type: Anchorable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: HandheldLight
+    addPrefix: false
+    blinkingBehaviourId: blinking
+    radiatingBehaviourId: radiating
+  - type: LightBehaviour
+    behaviours:
+      - !type:FadeBehaviour
+        id: radiating
+        maxDuration: 2.0
+        startValue: 3.0
+        endValue: 2.0
+        isLooped: true
+        reverseWhenFinished: true
+      - !type:PulseBehaviour
+        id: blinking
+        interpolate: Nearest
+        maxDuration: 1.0
+        minValue: 0.1
+        maxValue: 2.0
+        isLooped: true
+  - type: ToggleableLightVisuals
+    spriteLayer: light
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: ContainerContainer
+    containers:
+      cell_slot: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+  - type: PointLight
+    enabled: false
+    radius: 5
+    netsync: false
+    energy: 5
+    offset: "0, 0"
+    color: "#ECFFFF"
+    mask: /Textures/_RMC14/Effects/LightMasks/quad_cone.png
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 1
+            max: 1
+          CMSheetGlass1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
   - type: Physics
   - type: Fixtures
     fixtures:
@@ -27,48 +87,11 @@
         - MachineMask
         layer:
         - WallLayer
-  - type: PointLight
-    enabled: false
-    radius: 5
-    energy: 5
-    offset: "0, 0"
-    color: "#FFFFFF"
-    mask: /Textures/_RMC14/Effects/LightMasks/quad_cone.png
-  - type: PowerCellSlot
-    cellSlotId: cell_slot
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-  - type: ContainerContainer
-    containers:
-      cell_slot: !type:ContainerSlot
-  - type: ToggleableLightVisuals
   - type: Appearance
-  - type: Anchorable
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Metallic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 25
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          FloodlightBroken:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
 
 - type: entity
-  name: tall floodlight
-  id: RMCTallFloodlight
+  name: big floodlight
+  id: RMCBigFloodlight
   parent: BaseStructure
   description: A pillar of light in the darkness.
   components:
@@ -78,12 +101,70 @@
     layers:
       - state: bigflood
       - state: bigfloodon
-        shader: unshaded
         visible: false
         map: [ "light" ]
     offset: "0.0,0.5"
     drawdepth: Mobs
   - type: InteractionOutline
+  - type: Anchorable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: HandheldLight
+    addPrefix: false
+    blinkingBehaviourId: blinking
+    radiatingBehaviourId: radiating
+  - type: LightBehaviour
+    behaviours:
+      - !type:FadeBehaviour
+        id: radiating
+        maxDuration: 2.0
+        startValue: 3.0
+        endValue: 2.0
+        isLooped: true
+        reverseWhenFinished: true
+      - !type:PulseBehaviour
+        id: blinking
+        interpolate: Nearest
+        maxDuration: 1.0
+        minValue: 0.1
+        maxValue: 2.0
+        isLooped: true
+  - type: ToggleableLightVisuals
+    spriteLayer: light
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: ContainerContainer
+    containers:
+      cell_slot: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+  - type: PointLight
+    enabled: false
+    radius: 10
+    netsync: false
+    energy: 7
+    offset: "0,0.5"
+    color: "#ECFFFF"
+    mask: /Textures/_RMC14/Effects/LightMasks/quad_cone.png
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          RMCTallFloodlightBroken:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
   - type: Physics
   - type: Fixtures
     fixtures:
@@ -91,49 +172,12 @@
         shape:
           !type:PhysShapeAabb
           bounds: "-0.4,-0.4,0.4,0.4"
-        density: 155
+        density: 50
         mask:
         - MachineMask
         layer:
         - WallLayer
-  - type: PointLight
-    enabled: false
-    radius: 15
-    energy: 5
-    offset: "0, 0.5"
-    color: "#FFFFFF"
-    mask: /Textures/_RMC14/Effects/LightMasks/quad_cone.png
-  - type: PowerCellSlot
-    cellSlotId: cell_slot
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-  - type: ContainerContainer
-    containers:
-      cell_slot: !type:ContainerSlot
-  - type: ToggleableLightVisuals
   - type: Appearance
-  - type: Anchorable
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Metallic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          FloodlightBroken:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
 
 - type: entity
   name: tall broken floodlight
@@ -147,6 +191,7 @@
     state: broken
     offset: "0.0,0.5"
     drawdepth: Mobs
+  - type: InteractionOutline
   - type: Anchorable
   - type: Damageable
     damageContainer: Inorganic
@@ -155,13 +200,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 40
-      behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 20
+        damage: 100
       behaviors:
       - !type:PlaySoundBehavior
         sound:
