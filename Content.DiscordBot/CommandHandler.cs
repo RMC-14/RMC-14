@@ -252,6 +252,7 @@ public sealed class CommandHandler(DiscordSocketClient client, CommandService co
                             linked.Player.Patron ??= db.RMCPatrons.Add(new RMCPatron { PlayerId = linked.PlayerId }).Entity;
                             linked.Player.Patron.TierId = tier.Id;
                             await Logger.Info($"Updated patron {user.Username}:{linked.DiscordId}:{linked.Player.LastSeenUserName} with tier {tier.Name}");
+                            break;
                         }
                     }
 
