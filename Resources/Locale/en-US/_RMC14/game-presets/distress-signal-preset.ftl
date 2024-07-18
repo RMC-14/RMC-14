@@ -1,4 +1,4 @@
-﻿rmc-distress-signal-title = Distress Signal
+rmc-distress-signal-title = Distress Signal
 rmc-distress-signal-description = Respond to a distress signal sent by a nearby planet.
 
 cm-distress-signal-majormarinevictory = [color=green]All of the xenos were wiped out![/color]

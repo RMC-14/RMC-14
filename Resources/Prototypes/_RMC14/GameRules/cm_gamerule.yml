@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: CMDistressSignal
   parent: BaseGameRule
   noSpawn: true
@@ -6,3 +6,12 @@
   - type: GameRule
     minPlayers: 1
   - type: CMDistressSignalRule
+
+- type: entity
+  id: CMExtended
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+  - type: GameRule
+    minPlayers: 1
+  - type: CMExtendedRule
