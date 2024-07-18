@@ -51,6 +51,18 @@ public sealed partial class AttachableToggleableComponent : Component
     [DataField, AutoNetworkedField]
     public bool WieldedUseOnly = false;
 
+    /// <summary>
+    /// If set to true, the attachment can only be activated when someone is holding it.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool HeldOnlyActivate = false;
+
+    /// <summary>
+    /// Only the person holding or wearing the holder can activate this attachment.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool UserOnly = false;
+
     [DataField, AutoNetworkedField]
     public TimeSpan UseDelay = TimeSpan.FromSeconds(0f);
 

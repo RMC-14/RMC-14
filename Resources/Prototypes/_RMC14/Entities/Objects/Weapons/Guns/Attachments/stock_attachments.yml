@@ -416,6 +416,9 @@
     - RMCAttachmentM63ArmBrace
   - type: AttachableToggleable
     doAfter: 2.5
+    heldOnlyActivate: true
+    activatePopupText: attachable-popup-activate-lock
+    deactivatePopupText: attachable-popup-deactivate-unlock
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
       state: smg-brace

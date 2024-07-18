@@ -9,6 +9,9 @@ rmc-aslot-stock = Stock
 rmc-aslot-underbarrel = Underbarrel
 
 rmc-attachable-activation-fail-not-wielded = {CAPITALIZE(THE($holder))} must be wielded to activate {THE($attachable)}!
+rmc-attachable-activation-fail-not-held = {CAPITALIZE(THE($holder))} must be held to activate {THE($attachable)}!
+rmc-attachable-activation-fail-not-owned = {CAPITALIZE(THE($holder))} must be held or equipped by you to activate {THE($attachable)}!
+
 rmc-attachable-shoot-fail-not-wielded = {CAPITALIZE(THE($holder))} must be wielded to shoot {THE($attachable)}!
 
 rmc-attachable-verb-toggle = Toggle {THE($attachable)}
@@ -22,6 +25,9 @@ attachable-popup-deactivate-retract = You retract {THE($attachable)}.
 
 attachable-popup-activate-unfold = You unfold {THE($attachable)}.
 attachable-popup-deactivate-collapse = You collapse {THE($attachable)}.
+
+attachable-popup-activate-lock = You lock {THE($attachable)}.
+attachable-popup-deactivate-unlock = You unlock {THE($attachable)}.
 
 attachable-popup-switch-to-generic = You switch to using {THE($attachable)}.
 attachable-popup-switch-from-generic = You stop using {THE($attachable)}.

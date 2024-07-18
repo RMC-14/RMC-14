@@ -157,6 +157,8 @@
   components:
   - type: AttachableToggleable
     needHand: true
+    heldOnlyActivate: true
+    userOnly: true
     doInterrupt: true
     attachedOnly: true
     breakOnMove: true

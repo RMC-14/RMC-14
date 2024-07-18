@@ -6,6 +6,7 @@ using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Light;
 using Content.Shared.Movement.Events;
@@ -32,6 +33,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
     [Dependency] private readonly AttachableHolderSystem _attachableHolderSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly UseDelaySystem _useDelaySystem = default!;
 
@@ -321,20 +323,8 @@ public sealed class AttachableToggleableSystem : EntitySystem
 #region Toggling
     private void OnAttachableToggleStarted(Entity<AttachableToggleableComponent> attachable, ref AttachableToggleStartedEvent args)
     {
-        if (TryComp(attachable.Owner, out UseDelayComponent? useDelayComponent) &&
-            _useDelaySystem.IsDelayed((attachable.Owner, useDelayComponent), attachableToggleUseDelayID))
-        {
+        if (!CanStartToggleDoAfter(attachable, ref args))
             return;
-        }
-
-        if (!attachable.Comp.Active && attachable.Comp.WieldedOnly && (!TryComp(args.Holder, out WieldableComponent? wieldableComponent) || !wieldableComponent.Wielded))
-        {
-            _popupSystem.PopupClient(
-                Loc.GetString("rmc-attachable-activation-fail-not-wielded", ("holder", args.Holder), ("attachable", attachable)),
-                args.User,
-                args.User);
-            return;
-        }
 
         var popupText = Loc.GetString(attachable.Comp.Active ? attachable.Comp.DeactivatePopupText : attachable.Comp.ActivatePopupText, ("attachable", attachable.Owner));
 
@@ -352,6 +342,49 @@ public sealed class AttachableToggleableSystem : EntitySystem
         });
 
         Dirty(attachable);
+    }
+
+    private bool CanStartToggleDoAfter(Entity<AttachableToggleableComponent> attachable, ref AttachableToggleStartedEvent args, bool silent = false)
+    {
+        if (TryComp(attachable.Owner, out UseDelayComponent? useDelayComponent) &&
+            _useDelaySystem.IsDelayed((attachable.Owner, useDelayComponent), attachableToggleUseDelayID))
+        {
+            return false;
+        }
+
+        _attachableHolderSystem.TryGetUser(attachable.Owner, out var userUid);
+
+        if (attachable.Comp.HeldOnlyActivate && !attachable.Comp.Active && (userUid == null || !_handsSystem.IsHolding(userUid.Value, args.Holder, out _)))
+        {
+            if (!silent)
+                _popupSystem.PopupClient(
+                    Loc.GetString("rmc-attachable-activation-fail-not-held", ("holder", args.Holder), ("attachable", attachable)),
+                    args.User,
+                    args.User);
+            return false;
+        }
+
+        if (attachable.Comp.UserOnly && userUid != args.User)
+        {
+            if (!silent)
+                _popupSystem.PopupClient(
+                    Loc.GetString("rmc-attachable-activation-fail-not-owned", ("holder", args.Holder), ("attachable", attachable)),
+                    args.User,
+                    args.User);
+            return false;
+        }
+
+        if (!attachable.Comp.Active && attachable.Comp.WieldedOnly && (!TryComp(args.Holder, out WieldableComponent? wieldableComponent) || !wieldableComponent.Wielded))
+        {
+            if (!silent)
+                _popupSystem.PopupClient(
+                    Loc.GetString("rmc-attachable-activation-fail-not-wielded", ("holder", args.Holder), ("attachable", attachable)),
+                    args.User,
+                    args.User);
+            return false;
+        }
+
+        return true;
     }
 
     private TimeSpan GetToggleDoAfter(Entity<AttachableToggleableComponent> attachable, EntityUid holderUid, EntityUid userUid, ref string popupText)
