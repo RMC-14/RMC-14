@@ -327,3 +327,7 @@
       rmc-aslot-barrel: 1.18, 0.0
       rmc-aslot-rail: 0.225, 0.125
       rmc-aslot-underbarrel: 0.62, -0.31
+
+
+- type: Tag
+  id: WeaponRifleM54CE2

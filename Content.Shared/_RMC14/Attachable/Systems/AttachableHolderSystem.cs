@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Item;
 using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Wieldable.Events;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Containers;
 using Content.Shared.DoAfter;
@@ -283,6 +284,9 @@ public sealed class AttachableHolderSystem : EntitySystem
         EntityUid userUid,
         string slotId = "")
     {
+        if (HasComp<XenoComponent>(userUid))
+            return;
+
         var validSlots = GetValidSlots(holder, attachableUid);
 
         if (validSlots.Count == 0)
@@ -390,6 +394,9 @@ public sealed class AttachableHolderSystem : EntitySystem
 
     public void StartDetach(Entity<AttachableHolderComponent> holder, EntityUid attachableUid, EntityUid userUid)
     {
+        if (HasComp<XenoComponent>(userUid))
+            return;
+
         var delay = Comp<AttachableComponent>(attachableUid).AttachDoAfter;
         var args = new DoAfterArgs(
             EntityManager,

@@ -319,8 +319,8 @@
         amount: 13
       #- id: M240 Incinerator Tank
       #  amount: 3
-      #- id: M41AE2 Box Magazine (10x24mm)
-      #  amount: 3
+      - id: CMMagazineRifleM54CE2
+        amount: 3
       #- id: M41A MK1 Magazine (10x24mm)
       #  amount: 5
       #- id: M41A MK1 AP Magazine (10x24mm)
