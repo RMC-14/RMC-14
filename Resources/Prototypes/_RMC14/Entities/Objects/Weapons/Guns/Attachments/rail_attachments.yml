@@ -163,6 +163,7 @@
     breakOnRotate: true
     wieldedOnly: true
     useDelay: 0.5
+    showTogglePopup: false
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: sniperscope

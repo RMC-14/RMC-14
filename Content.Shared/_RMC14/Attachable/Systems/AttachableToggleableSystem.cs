@@ -336,11 +336,13 @@ public sealed class AttachableToggleableSystem : EntitySystem
             return;
         }
 
+        var popupText = Loc.GetString(attachable.Comp.Active ? attachable.Comp.DeactivatePopupText : attachable.Comp.ActivatePopupText, ("attachable", attachable.Owner));
+
         _doAfterSystem.TryStartDoAfter(new DoAfterArgs(
             EntityManager,
             args.User,
-            GetToggleDoAfter(attachable, args.Holder, args.User),
-            new AttachableToggleDoAfterEvent(args.SlotId),
+            GetToggleDoAfter(attachable, args.Holder, args.User, ref popupText),
+            new AttachableToggleDoAfterEvent(args.SlotId, popupText),
             attachable,
             target: attachable.Owner,
             used: args.Holder)
@@ -352,7 +354,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
         Dirty(attachable);
     }
 
-    private TimeSpan GetToggleDoAfter(Entity<AttachableToggleableComponent> attachable, EntityUid holderUid, EntityUid userUid)
+    private TimeSpan GetToggleDoAfter(Entity<AttachableToggleableComponent> attachable, EntityUid holderUid, EntityUid userUid, ref string popupText)
     {
         if (!TryComp(holderUid, out TransformComponent? transformComponent) || !transformComponent.ParentUid.Valid)
             return TimeSpan.FromSeconds(0f);
@@ -372,7 +374,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
                 Func<EntityCoordinates, EntityCoordinates, bool> comparer = (EntityCoordinates userCoords, EntityCoordinates entCoords) => { return false; };
                 var coordsShift = new Vector2(0f, 0f);
 
-                Func<HashSet<EntityUid>, TimeSpan?> GetBracingSurface = (HashSet<EntityUid> ents) =>
+                Func<HashSet<EntityUid>, EntityUid?> GetBracingSurface = (HashSet<EntityUid> ents) =>
                 {
                     foreach (var entity in ents)
                     {
@@ -387,7 +389,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
                             if (!comparer(coords, Transform(entity).Coordinates))
                                 continue;
 
-                            return TimeSpan.FromSeconds(0f);
+                            return entity;
                         }
                     }
 
@@ -420,15 +422,22 @@ public sealed class AttachableToggleableSystem : EntitySystem
                         break;
                 }
 
-                var output = GetBracingSurface(_entityLookupSystem.GetEntitiesInRange(coords, 0.5f, LookupFlags.Dynamic | LookupFlags.Static));
-                if (output != null)
-                    return output.Value;
+                var surface = GetBracingSurface(_entityLookupSystem.GetEntitiesInRange(coords, 0.5f, LookupFlags.Dynamic | LookupFlags.Static));
+                if (surface != null)
+                {
+                    popupText = Loc.GetString("attachable-popup-activate-deploy-on-generic", ("attachable", attachable.Owner), ("surface", surface));
+                    return TimeSpan.FromSeconds(0f);
+                }
 
                 coords = new EntityCoordinates(coords.EntityId, coords.Position + coordsShift);
-                output = GetBracingSurface(_entityLookupSystem.GetEntitiesInRange(coords, 0.5f, LookupFlags.Dynamic | LookupFlags.Static));
-                if (output != null)
-                    return output.Value;
+                surface = GetBracingSurface(_entityLookupSystem.GetEntitiesInRange(coords, 0.5f, LookupFlags.Dynamic | LookupFlags.Static));
+                if (surface != null)
+                {
+                    popupText = Loc.GetString("attachable-popup-activate-deploy-on-generic", ("attachable", attachable.Owner), ("surface", surface));
+                    return TimeSpan.FromSeconds(0f);
+                }
 
+                popupText = Loc.GetString("attachable-popup-activate-deploy-on-ground", ("attachable", attachable.Owner));
                 break;
 
             default:
@@ -458,11 +467,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
         if (!TryComp(args.Used, out AttachableHolderComponent? holderComponent))
             return;
 
-        FinishToggle(attachable, (used, holderComponent), args.SlotId, args.User);
-        _audioSystem.PlayPredicted(
-            attachable.Comp.Active ? attachable.Comp.ActivateSound : attachable.Comp.DeactivateSound,
-            attachable,
-            args.User);
+        FinishToggle(attachable, (used, holderComponent), args.SlotId, args.User, args.PopupText);
         args.Handled = true;
         Dirty(attachable);
     }
@@ -472,6 +477,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
         Entity<AttachableHolderComponent> holder,
         string slotId,
         EntityUid? userUid,
+        string popupText,
         bool interrupted = false)
     {
         attachable.Comp.Active = !attachable.Comp.Active;
@@ -488,6 +494,14 @@ public sealed class AttachableToggleableSystem : EntitySystem
         _useDelaySystem.SetLength(attachable.Owner, attachable.Comp.UseDelay, attachableToggleUseDelayID);
         _useDelaySystem.TryResetDelay(attachable.Owner, id: attachableToggleUseDelayID);
         _actionsSystem.StartUseDelay(attachable.Comp.Action);
+
+        if (attachable.Comp.ShowTogglePopup && userUid != null)
+            _popupSystem.PopupClient(popupText, userUid.Value, userUid.Value);
+
+        _audioSystem.PlayPredicted(
+            attachable.Comp.Active ? attachable.Comp.ActivateSound : attachable.Comp.DeactivateSound,
+            attachable,
+            userUid);
 
         if (!attachable.Comp.Active)
         {
@@ -542,7 +556,13 @@ public sealed class AttachableToggleableSystem : EntitySystem
             return;
         }
         
-        FinishToggle(attachable, (holderUid.Value, holderComponent), slotId, user, interrupted);
+        FinishToggle(
+            attachable,
+            (holderUid.Value, holderComponent),
+            slotId,
+            user,
+            Loc.GetString(attachable.Comp.Active ? attachable.Comp.DeactivatePopupText : attachable.Comp.ActivatePopupText, ("attachable", attachable.Owner)),
+            interrupted);
         Dirty(attachable);
     }
 #endregion

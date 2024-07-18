@@ -54,6 +54,16 @@
     deactivateDoAfter: 0
     instantToggle: Brace
     useDelay: 0.5
+    activatePopupText: attachable-popup-activate-deploy-on-ground
+    deactivatePopupText: attachable-popup-deactivate-retract
+    activateSound:
+      path: /Audio/_RMC14/Attachable/bipod_toggle.ogg
+      params:
+        volume: -3
+    deactivateSound:
+      path: /Audio/_RMC14/Attachable/bipod_toggle.ogg
+      params:
+        volume: -3
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: bipod
@@ -270,6 +280,8 @@
   - type: AttachableToggleable
     attachedOnly: true
     supercedeHolder: true
+    activatePopupText: attachable-popup-switch-to-generic
+    deactivatePopupText: attachable-popup-switch-from-generic
     activateSound:
       path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg
       params:
@@ -349,6 +361,8 @@
     attachedOnly: true
     supercedeHolder: true
     wieldedUseOnly: true
+    activatePopupText: attachable-popup-switch-to-generic
+    deactivatePopupText: attachable-popup-switch-from-generic
     actionName: Toggle U1 Grenade Launcher
     actionDesc: Switch to using the underbarrel grenade launcher.
     icon:

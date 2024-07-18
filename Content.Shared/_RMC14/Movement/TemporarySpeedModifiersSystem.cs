@@ -1,4 +1,5 @@
 using Content.Shared.Movement.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Movement;
@@ -6,6 +7,7 @@ namespace Content.Shared._RMC14.Movement;
 public sealed class TemporarySpeedModifiersSystem : EntitySystem
 {
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedSystem = default!;
+    [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
@@ -58,13 +60,14 @@ public sealed class TemporarySpeedModifiersSystem : EntitySystem
 
     public void ModifySpeed(EntityUid entUid, List<TemporarySpeedModifierSet> modifiers)
     {
+        if (_netManager.IsClient)
+            return;
+
         var comp = EnsureComp<TemporarySpeedModifiersComponent>(entUid);
 
         foreach (var modifier in modifiers)
         {
             comp.Modifiers.Add((_timing.CurTime + modifier.Duration, modifier.Walk, modifier.Sprint));
         }
-
-        Dirty(entUid, comp);
     }
 }

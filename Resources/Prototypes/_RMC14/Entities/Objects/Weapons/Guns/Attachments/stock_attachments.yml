@@ -31,6 +31,8 @@
     tags:
     - RMCAttachmentStock
   - type: AttachableToggleable
+    activatePopupText: attachable-popup-activate-unfold
+    deactivatePopupText: attachable-popup-deactivate-collapse
     actionDesc: Extend the stock.
   - type: AttachableWieldDelayMods
     modifiers: []

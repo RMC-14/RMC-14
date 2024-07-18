@@ -13,6 +13,19 @@ rmc-attachable-shoot-fail-not-wielded = {CAPITALIZE(THE($holder))} must be wield
 
 rmc-attachable-verb-toggle = Toggle {THE($attachable)}
 
+attachable-popup-activate-generic = You activate {THE($attachable)}.
+attachable-popup-deactivate-generic = You deactivate {THE($attachable)}.
+
+attachable-popup-activate-deploy-on-generic = You deploy {THE($attachable)} on {THE($surface)}.
+attachable-popup-activate-deploy-on-ground = You deploy {THE($attachable)} on the ground.
+attachable-popup-deactivate-retract = You retract {THE($attachable)}.
+
+attachable-popup-activate-unfold = You unfold {THE($attachable)}.
+attachable-popup-deactivate-collapse = You collapse {THE($attachable)}.
+
+attachable-popup-switch-to-generic = You switch to using {THE($attachable)}.
+attachable-popup-switch-from-generic = You stop using {THE($attachable)}.
+
 rmc-attachable-examine-condition-always = Always:
 rmc-attachable-examine-condition-when = When
 rmc-attachable-examine-condition-wielded = the holder is [bold]wielded[/bold]

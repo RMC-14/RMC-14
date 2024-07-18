@@ -89,6 +89,15 @@ public sealed partial class AttachableToggleableComponent : Component
     public SoundSpecifier? DeactivateSound = new SoundPathSpecifier("/Audio/_RMC14/Attachable/attachment_deactivate.ogg");
 
     [DataField, AutoNetworkedField]
+    public bool ShowTogglePopup = true;
+
+    [DataField, AutoNetworkedField]
+    public LocId ActivatePopupText = new LocId("attachable-popup-activate-generic");
+
+    [DataField, AutoNetworkedField]
+    public LocId DeactivatePopupText = new LocId("attachable-popup-deactivate-generic");
+
+    [DataField, AutoNetworkedField]
     public EntityUid? Action;
 
     [DataField, AutoNetworkedField]
