@@ -13,6 +13,8 @@
       visible: false
   - type: Item
     size: Large
+  - type: Tag # to not inherit case tags
+    tags: []
   - type: Storage
     maxItemSize: Small
     grid:
