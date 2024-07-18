@@ -98,6 +98,9 @@
         type: InstrumentBoundUserInterface
       enum.HealthAnalyzerUiKey.Key:
         type: HealthAnalyzerBoundUserInterface
+      # RMC-14: Add RMC health scanner UI key. (I'm just copying upstream okay... I know this is out of place. :( )
+      enum.HealthScannerUIKey.Key:
+        type: HealthScannerBoundUserInterface
   - type: Tag
     tags:
     - DoorBumpOpener
