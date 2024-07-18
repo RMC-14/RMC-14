@@ -80,8 +80,6 @@
     - FullAuto
     recoilWielded: 1
     recoilUnwielded: 4
-    baseAngleIncrease: 0
-    baseAngleDecay: 0
     scatterWielded: 6
     scatterUnwielded: 20
     baseFireRate: 4
@@ -175,8 +173,6 @@
     - Burst
     recoilWielded: 1
     recoilUnwielded: 5
-    baseAngleIncrease: 0
-    baseAngleDecay: 0
     scatterWielded: 10
     scatterUnwielded: 20
     baseFireRate: 5

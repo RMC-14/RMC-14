@@ -19,8 +19,6 @@
     - FullAuto
     recoilWielded: 1
     recoilUnwielded: 1
-    baseAngleIncrease: 0
-    baseAngleDecay: 0
     scatterWielded: 14
     scatterUnwielded: 14
     baseFireRate: 6.66
