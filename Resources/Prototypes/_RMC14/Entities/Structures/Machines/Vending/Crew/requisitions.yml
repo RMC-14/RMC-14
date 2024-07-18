@@ -269,28 +269,34 @@
         amount: 40
       - id: CMBoxShotgunSlugs
         amount: 40
-      - id: CMBoxMagazineRifleM4SPR
-        amount: 3
-      - id: CMBoxMagazineRifleM54C
-        amount: 8
-      - id: CMBoxMagazineSMGM63
-        amount: 8
+      - id: CMMagazineRifleM4SPR
+        amount: 45
+      - id: CMMagazineRifleM54C
+        amount: 100
+      - id: CMMagazineSMGM63
+        amount: 100
       #- id: M44 Speed Loader (.44)
       #  amount: 80
-      - id: CMBoxMagazinePistolM1984
-        amount: 6
+      - id: CMMagazinePistolM1984
+        amount: 102
     - name: Armor-piercing ammunition
       entries:
-      - id: CMBoxMagazinePistolM77AP
-        amount: 3
-      - id: CMBoxMagazineRifleM4SPRAP
-      - id: CMBoxMagazineSMGM63AP
-      - id: CMBoxMagazineRifleM54CAP
-      #- id: M4A3 AP Magazine (9mm) (a box of this with 2 magazines)
+      - id: CMMagazinePistolM77AP
+        amount: 50
+      - id: CMMagazineRifleM4SPRAP
+        amount: 16
+      - id: CMMagazineSMGM63AP
+        amount: 12
+      - id: CMMagazineRifleM54CAP
+        amount: 10
+      #- id: M4A3 AP Magazine (9mm)
+      #  amount: 2
     - name: Extended ammunition
       entries:
-      - id: CMBoxMagazineSMGM63Ext
-      - id: CMBoxMagazineRifleM54CExt
+      - id: CMMagazineSMGM63Ext
+        amount: 10
+      - id: CMMagazineRifleM54CExt
+        amount: 8
     - name: Special ammunition
       entries:
       - id: RMCPowerCellSmartgun
@@ -307,8 +313,10 @@
       #  amount: 2
     - name: Restricted firearm ammunition
       entries:
-      - id: CMBoxMagazinePistolMK80
-      - id: RMCBoxMagazinePistolSU6
+      - id: CMMagazinePistolMK80
+        amount: 11
+      - id: RMCMagazinePistolSU6
+        amount: 13
       #- id: M240 Incinerator Tank
       #  amount: 3
       #- id: M41AE2 Box Magazine (10x24mm)
