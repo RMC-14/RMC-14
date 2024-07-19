@@ -12,3 +12,5 @@ rmc-shoot-use-delay = You need to wait {$seconds} seconds before shooting {THE($
 
 rmc-shoot-harness-required = Harness required
 rmc-wear-smart-gun-required = You must have your smart gun equipped to wear these.
+
+rmc-revolver-spin = You spin the cylinder.
