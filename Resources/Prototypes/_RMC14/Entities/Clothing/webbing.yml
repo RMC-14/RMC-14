@@ -55,6 +55,9 @@
       - CMMagazineRifle
       - CMMagazineSniper
       - MRE
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
   - type: Webbing
     components:
     - type: Storage
@@ -70,6 +73,9 @@
         - CMMagazineRifle
         - CMMagazineSniper
         - MRE
+        - PillPacket
+        - PillCanister
+        - CMSurgicalCase
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
@@ -87,6 +93,13 @@
     maxItemSize: Small
     grid:
     - 0,0,9,1 # 5 slots
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - MRE
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
   - type: Webbing
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Webbing/webbing_black.rsi
@@ -96,13 +109,20 @@
       maxItemSize: Small
       grid:
       - 0,0,9,1 # 5 slots
+    - type: IgnoreContentsSize
+      items:
+        tags:
+        - MRE
+        - PillPacket
+        - PillCanister
+        - CMSurgicalCase
     - type: FixedItemSizeStorage
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
 
 - type: entity
-  parent: CMWebbingBase
+  parent: CMWebbingBlack
   id: CMWebbingBrown
   name: brown webbing vest
   description: Worn brownish synthcotton vest with lots of pockets to unload your hands.
@@ -110,10 +130,6 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_brown.rsi
     state: webbing
-  - type: Storage
-    maxItemSize: Small
-    grid:
-    - 0,0,9,1 # 5 slots
   - type: Webbing
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Webbing/webbing_brown.rsi
@@ -123,6 +139,13 @@
       maxItemSize: Small
       grid:
       - 0,0,9,1 # 5 slots
+    - type: IgnoreContentsSize
+      items:
+        tags:
+        - MRE
+        - PillPacket
+        - PillCanister
+        - CMSurgicalCase
     - type: FixedItemSizeStorage
     - type: ExplosionResistance
       damageCoefficient: 0
