@@ -295,7 +295,8 @@ public sealed class XenoNestSystem : EntitySystem
 
     private void TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)
     {
-        if (!HasComp<XenoComponent>(user) || !CanNestPopup(user, victim, surface, out _))
+        if (!HasComp<XenoComponent>(user) ||
+            !CanNestPopup(user, victim, surface, out _))
             return;
 
         var ev = new XenoNestDoAfterEvent();
