@@ -175,11 +175,11 @@
         amount: 8
 
 - type: entity
-  id: CMCrateFloodlight
+  id: RMCCrateFloodlight
   parent: CMCrateConstruction
   name: floodlight crate (x4)
   components:
   - type: StorageFill
     contents:
-      - id: RMCSmallFloodlights
+      - id: RMCSmallFloodlight
         amount: 4

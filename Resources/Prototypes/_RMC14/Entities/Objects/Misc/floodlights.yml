@@ -1,7 +1,7 @@
 - type: entity
   name: small floodlight
   id: RMCSmallFloodlight
-  parent: BaseStructure
+  parent: BaseStructureDynamic
   description: A small bit of light in the darkness.
   components:
   - type: Sprite
@@ -13,7 +13,6 @@
         visible: false
         map: [ "light" ]
   - type: InteractionOutline
-  - type: Anchorable
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic
@@ -44,7 +43,6 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: Physics
   - type: Fixtures
     fixtures:
       fix1:
@@ -63,6 +61,8 @@
   id: RMCTallFloodlight
   parent: BaseStructure
   description: A pillar of light in the darkness.
+  placement:
+    mode: SnapgridCenter
   components:
   - type: Sprite
     noRot: true
@@ -80,7 +80,6 @@
     graph: RMCFloodlightBroken
     node: completed
   - type: InteractionOutline
-  - type: Anchorable
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic
@@ -135,6 +134,8 @@
   - type: InteractionOutline
   - type: Anchorable
   - type: Physics
+  - type: Corrodible # Repairable, not destructible.
+    isCorrodible: false
   - type: Fixtures
     fixtures:
       fix1:
@@ -154,6 +155,8 @@
   id: RMCLZFloodlight
   parent: BaseStructure
   description: An indestructible bit of light in the darkness. Never seems to run out of power.
+  placement:
+    mode: SnapgridCenter
   components:
   - type: Sprite
     noRot: true
@@ -175,4 +178,6 @@
         density: 50
         mask:
         - HighImpassable
+  - type: Corrodible
+    isCorrodible: false
   - type: Appearance

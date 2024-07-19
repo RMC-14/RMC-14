@@ -123,7 +123,7 @@
       - cost: 2000
         crate: CMCrateReplacementLights
       - cost: 2500
-        crate: RCMCrateFloodlights
+        crate: RMCCrateFloodlights
       - cost: 3000
         crate: CMCratePacmanParts
       - cost: 4000
