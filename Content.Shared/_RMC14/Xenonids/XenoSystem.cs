@@ -18,6 +18,7 @@ using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Lathe;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
@@ -73,6 +74,7 @@ public sealed class XenoSystem : EntitySystem
         _xenoRecoveryQuery = GetEntityQuery<XenoRecoveryPheromonesComponent>();
 
         SubscribeLocalEvent<XenoComponent, MapInitEvent>(OnXenoMapInit);
+        SubscribeLocalEvent<XenoComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<XenoComponent, GetAccessTagsEvent>(OnXenoGetAdditionalAccess);
         SubscribeLocalEvent<XenoComponent, NewXenoEvolvedEvent>(OnNewXenoEvolved);
         SubscribeLocalEvent<XenoComponent, XenoDevolvedEvent>(OnXenoDevolved);
@@ -107,6 +109,15 @@ public sealed class XenoSystem : EntitySystem
 
         if (!MathHelper.CloseTo(_xenoSpeedMultiplier, 1))
             _movementSpeed.RefreshMovementSpeedModifiers(xeno);
+    }
+
+    private void OnMobStateChanged(Entity<XenoComponent> ent, ref MobStateChangedEvent args)
+    {
+        var oldHive = ent.Comp.Hive;
+        if (oldHive != null && TryComp(oldHive, out HiveComponent? oldHiveComp))
+            oldHiveComp.Members.Remove(ent);
+
+        RaiseLocalEvent(ent, new XenoMobStateChangedEvent(args));
     }
 
     private void OnXenoGetAdditionalAccess(Entity<XenoComponent> xeno, ref GetAccessTagsEvent args)
@@ -208,6 +219,13 @@ public sealed class XenoSystem : EntitySystem
         if (!Resolve(xeno, ref xeno.Comp))
             return;
 
+        var oldHive = xeno.Comp.Hive;
+        if (oldHive != null && TryComp(oldHive, out HiveComponent? oldHiveComp))
+        {
+            oldHiveComp.Members.Remove(xeno);
+            RaiseLocalEvent(xeno, new XenoRemovedFromHiveEvent(oldHive.Value));
+        }
+
         if (hive == null)
         {
             xeno.Comp.Hive = null;
@@ -220,6 +238,8 @@ public sealed class XenoSystem : EntitySystem
             return;
 
         xeno.Comp.Hive = hive;
+        hiveEnt.Comp.Members.Add(xeno);
+        RaiseLocalEvent(xeno, new XenoAddedToHiveEvent(hiveEnt));
         Dirty(xeno, xeno.Comp);
 
         _nightVision.SetSeeThroughContainers(xeno.Owner, hiveEnt.Comp.SeeThroughContainers);
@@ -359,3 +379,7 @@ public sealed class XenoSystem : EntitySystem
         }
     }
 }
+
+public record struct XenoAddedToHiveEvent(EntityUid Hive);
+
+public record struct XenoRemovedFromHiveEvent(EntityUid Hive);

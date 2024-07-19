@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.NightVision;
+using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.FixedPoint;
@@ -36,8 +37,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         if (args.NewMobState != MobState.Dead)
             return;
 
-        if (TryComp(ent, out XenoComponent? xeno) &&
-            TryComp(xeno.Hive, out HiveComponent? hive))
+        if (TryComp(ent, out XenoComponent? xeno) && TryComp(xeno.Hive, out HiveComponent? hive))
         {
             hive.LastQueenDeath = _timing.CurTime;
             Dirty(xeno.Hive.Value, hive);
@@ -141,5 +141,15 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             return false;
 
         return hive.Comp.TierLimits.TryGetValue(tier, out value);
+    }
+
+    public bool TryGetTrackers(Entity<HiveComponent?> ent, [NotNullWhen(true)] out List<EntityUid>? trackers)
+    {
+        trackers = null;
+        if (!Resolve(ent, ref ent.Comp))
+            return false;
+
+        trackers = ent.Comp.Trackers;
+        return true;
     }
 }

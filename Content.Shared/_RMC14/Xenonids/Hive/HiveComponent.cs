@@ -39,4 +39,10 @@ public sealed partial class HiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool GotOvipositorPopup;
+
+    [DataField, AutoNetworkedField]
+    public List<EntityUid> Members = [];
+
+    [DataField, AutoNetworkedField]
+    public List<EntityUid> Trackers = [];
 }

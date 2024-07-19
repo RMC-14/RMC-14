@@ -1,0 +1,19 @@
+- type: alert
+  id: QueenTrackerOff
+  category: QueenTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/xeno_tracker.rsi
+    state: trackoff
+  name: Xenonid Tracker
+  description: Tracks the Queen or other xenonid.
+  onClick: !type:SelectTrackerAlertTarget  { }
+
+- type: alert
+  id: QueenTrackerOn
+  category: QueenTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/xeno_tracker.rsi
+    state: trackon
+  name: Xenonid Tracker
+  description: Tracks the Queen or other xenonid.
+  onClick: !type:SelectTrackerAlertTarget  { }

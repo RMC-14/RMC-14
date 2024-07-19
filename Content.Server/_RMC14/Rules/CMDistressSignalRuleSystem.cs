@@ -147,7 +147,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         SubscribeLocalEvent<MarineComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<MarineComponent, ComponentRemove>(OnCompRemove);
 
-        SubscribeLocalEvent<XenoComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<XenoComponent, XenoMobStateChangedEvent>(OnXenoMobStateChanged);
         SubscribeLocalEvent<XenoComponent, ComponentRemove>(OnCompRemove);
 
         SubscribeLocalEvent<XenoEvolutionGranterComponent, MapInitEvent>(OnMapInit);
@@ -521,6 +521,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             break;
         }
+    }
+
+    private void OnXenoMobStateChanged(Entity<XenoComponent> ent, ref XenoMobStateChangedEvent args)
+    {
+        if (args.MobStateEvent.NewMobState == MobState.Dead)
+            CheckRoundShouldEnd();
     }
 
     private void OnMobStateChanged<T>(Entity<T> ent, ref MobStateChangedEvent args) where T : IComponent?

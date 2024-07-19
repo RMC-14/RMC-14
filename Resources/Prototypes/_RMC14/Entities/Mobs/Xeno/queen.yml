@@ -156,3 +156,5 @@
     - ActionXenoScreech
   - type: RMCXenoDamageVisuals
     prefix: queen
+  - type: RMCTrackerAlertTarget
+    priority: 1
