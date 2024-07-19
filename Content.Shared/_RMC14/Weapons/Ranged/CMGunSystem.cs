@@ -1,8 +1,10 @@
 ﻿using System.Numerics;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
@@ -13,10 +15,12 @@ using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Whitelist;
 using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
@@ -34,6 +38,8 @@ public sealed class CMGunSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ProjectileComponent> _projectileQuery;
@@ -69,6 +75,8 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<GunRequiresSkillsComponent, AttemptShootEvent>(OnRequiresSkillsAttemptShoot);
 
         SubscribeLocalEvent<GunRequireEquippedComponent, AttemptShootEvent>(OnRequireEquippedAttemptShoot);
+
+        SubscribeLocalEvent<RevolverAmmoProviderComponent, UniqueActionEvent>(OnRevolverUniqueAction);
     }
 
     private void OnAmmoFixedDistanceShot(Entity<AmmoFixedDistanceComponent> ent, ref AmmoShotEvent args)
@@ -285,5 +293,22 @@ public sealed class CMGunSystem : EntitySystem
 
             RemCompDeferred<ProjectileFixedDistanceComponent>(uid);
         }
+    }
+    
+    // RMC revolver cylinder spin default unique action
+    private void OnRevolverUniqueAction(Entity<RevolverAmmoProviderComponent> gun, ref UniqueActionEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        int randomCount = _random.Next(1, gun.Comp.Capacity + 1);
+
+        gun.Comp.CurrentIndex = (gun.Comp.CurrentIndex + randomCount) % gun.Comp.Capacity;
+
+        _audio.PlayPredicted(gun.Comp.SoundSpin, gun.Owner, args.UserUid);
+        var popup = Loc.GetString("rmc-revolver-spin", ("gun", args.UserUid));
+        _popup.PopupClient(popup, args.UserUid, args.UserUid, PopupType.SmallCaution);
+
+        Dirty(gun);
     }
 }
