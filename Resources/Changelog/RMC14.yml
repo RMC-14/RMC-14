@@ -3317,5 +3317,13 @@
   id: 400
   time: '2024-07-19T04:10:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3132
+- author: Vermidia
+  changes:
+  - message: Webbings of both kinds can now properly store MREs, pill packets, pill
+      canisters, and surgical kits.
+    type: Fix
+  id: 401
+  time: '2024-07-19T04:12:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3115
 Name: RMC14
 Order: -1
