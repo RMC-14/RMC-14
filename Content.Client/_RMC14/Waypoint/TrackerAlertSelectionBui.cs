@@ -18,6 +18,12 @@ public sealed class TrackerAlertSelectionBui(EntityUid owner, Enum uiKey) : Boun
         EnsureWindow();
     }
 
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+            _window?.Dispose();
+    }
+
     protected override void UpdateState(BoundUserInterfaceState state)
     {
         if (state is not TrackerAlertBuiState s)
