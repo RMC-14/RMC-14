@@ -224,11 +224,11 @@ public sealed class XenoEvolutionSystem : EntitySystem
         _mind.TransferTo(mindId, newXeno);
         _mind.UnVisit(mindId);
 
-		foreach (var held in _hands.EnumerateHeld(xeno))
-			_hands.TryDrop(xeno, held);
+        foreach (var held in _hands.EnumerateHeld(xeno))
+            _hands.TryDrop(xeno, held);
 
-		// TODO RMC14 this is a hack because climbing on a newly created entity does not work properly for the client
-		var comp = EnsureComp<XenoNewlyEvolvedComponent>(newXeno);
+        // TODO RMC14 this is a hack because climbing on a newly created entity does not work properly for the client
+        var comp = EnsureComp<XenoNewlyEvolvedComponent>(newXeno);
 
         _doors.Clear();
         _entityLookup.GetEntitiesIntersecting(xeno, _doors);
