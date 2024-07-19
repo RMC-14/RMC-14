@@ -3303,5 +3303,12 @@
   id: 398
   time: '2024-07-18T11:18:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3078
+- author: Vermidia
+  changes:
+  - message: Dead parasites can no longer be used to infect hosts
+    type: Fix
+  id: 399
+  time: '2024-07-19T03:39:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3133
 Name: RMC14
 Order: -1
