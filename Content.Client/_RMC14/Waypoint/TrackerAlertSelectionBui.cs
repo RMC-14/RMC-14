@@ -53,6 +53,7 @@ public sealed class TrackerAlertSelectionBui(EntityUid owner, Enum uiKey) : Boun
             return;
 
         button.AddChild(new ChooseTrackerAlertEntry(data.Name, data.Id));
+        button.AddStyleClass(ListContainer.StyleClassListContainerButton);
     }
 
     private void OnTrackerListItemPressed(BaseButton.ButtonEventArgs args, ListData d)
