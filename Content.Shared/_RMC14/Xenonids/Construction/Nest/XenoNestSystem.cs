@@ -1,6 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.ActionBlocker;
@@ -234,6 +233,8 @@ public sealed class XenoNestSystem : EntitySystem
             return;
         args.Handled = true;
         var target = ent.Owner;
+        if (_net.IsClient)
+            return;
         DetachNested(null, target);
     }
 
@@ -339,14 +340,29 @@ public sealed class XenoNestSystem : EntitySystem
         if (!CanBeUnNested(user, target) || !CanUnNestPopup(user, target))
             return;
 
+        foreach (var session in Filter.PvsExcept(user).Recipients)
+        {
+            if (session.AttachedEntity is not { } recipient)
+                continue;
+            if (recipient == target)
+            {
+                _popup.PopupEntity(Loc.GetString("cm-xeno-nest-unsecuring-target", ("user", user)), user, recipient, PopupType.MediumCaution);
+            }
+            else
+            {
+                _popup.PopupEntity(Loc.GetString("cm-xeno-nest-unsecuring-observer", ("user", user), ("target", target)), user, recipient);
+            }
+        }
+
         if (_mobState.IsDead(target) || _mobState.IsCritical(target))
         {
-            _popup.PopupClient("Target will be Unnested", user, user);
-        } else
-        {
-            _popup.PopupClient("Target is still alive! Freeing them may be risky", user, user);
+            _popup.PopupClient(Loc.GetString("cm-xeno-nest-unsecuring-inactive-self", ("target", target)), user, user);
         }
-        var ev = new XenoUnNestDoAfterEvent(); // do i need a new one? we'll find out.
+        else
+        {
+            _popup.PopupClient(Loc.GetString("cm-xeno-nest-unsecuring-active-self", ("target", target)), user, user);
+        }
+        var ev = new XenoUnNestDoAfterEvent();
         var doafterTime = TimeSpan.FromSeconds(8);
         var doAfter = new DoAfterArgs(EntityManager, user, doafterTime, ev, target)
         {
@@ -468,7 +484,7 @@ public sealed class XenoNestSystem : EntitySystem
 
     private bool CanUnNestPopup(EntityUid user, EntityUid target) //likely unnecessary, no edge cases to cover to warrant separate func
     {
-        if (!HasComp<MarineComponent>(target))
+        if (!HasComp<XenoNestableComponent>(target))
             return false;
 
         var userCoords = _transform.GetMoverCoordinates(user);
