@@ -338,6 +338,7 @@ public sealed class XenoNestSystem : EntitySystem
     {
         if (!CanBeUnNested(user, target) || !CanUnNestPopup(user, target))
             return;
+
         if (_mobState.IsDead(target) || _mobState.IsCritical(target))
         {
             _popup.PopupClient("Target will be Unnested", user, user);
