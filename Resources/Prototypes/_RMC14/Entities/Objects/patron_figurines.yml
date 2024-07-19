@@ -262,3 +262,25 @@
     state: jimmy_punished_pit_johnson
   - type: PatronFigurine
     id: 3b7b5dd7-eda9-4b4e-ad72-7f88a738671c
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSimonStarseeker
+  name: Simon Starseeker figurine
+  description: "Silent But Deadly."
+  components:
+  - type: Sprite
+    state: simon_starseeker
+  - type: PatronFigurine
+    id: d12db9f7-7ba2-4224-bbfa-356cc6e0e27c
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLenaMilize
+  name: Lena Milize figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: lena_milize
+  - type: PatronFigurine
+    id: fb3904d8-03b6-480a-b7e4-2bfa8b016167
