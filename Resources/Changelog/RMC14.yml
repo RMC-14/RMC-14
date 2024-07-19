@@ -3325,5 +3325,12 @@
   id: 401
   time: '2024-07-19T04:12:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3115
+- author: Whisper
+  changes:
+  - message: Added Simon Starseeker and Lena Milize figurines.
+    type: Add
+  id: 402
+  time: '2024-07-19T13:04:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3128
 Name: RMC14
 Order: -1
