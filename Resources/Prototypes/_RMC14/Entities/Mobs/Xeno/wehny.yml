@@ -75,8 +75,8 @@
       groups:
         Brute: 50
   - type: Tackle
-    threshold: 4
-    stun: 15
+    threshold: 5
+    stun: 8
   - type: MovementSpeedModifier
     baseWalkSpeed: 5.55
     baseSprintSpeed: 20
