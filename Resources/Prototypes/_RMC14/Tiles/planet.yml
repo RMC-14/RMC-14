@@ -543,6 +543,22 @@
 
 - type: tile
   parent: CMPlanetBase
+  id: RCMPlanetSnow1Dirt
+  name: snow
+  sprite: /Textures/_RMC14/Tiles/planet/snow2/snow_1_dirt.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
   id: RCMPlanetSnow2
   name: snow
   sprite: /Textures/_RMC14/Tiles/planet/snow2/snow_2.png
