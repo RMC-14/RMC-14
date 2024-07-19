@@ -54,7 +54,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
         SubscribeLocalEvent<AttachableToggleablePreventShootComponent, AttachableAlteredEvent>(OnAttachableAltered,
             after: new[] { typeof(AttachableModifiersSystem) });
-        
+
         SubscribeLocalEvent<AttachableGunPreventShootComponent, AttemptShootEvent>(OnAttemptShoot);
     }
 
@@ -155,7 +155,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
                 preventShootComponent.PreventShoot = false;
                 break;
         }
-        
+
         Dirty(args.Holder, preventShootComponent);
     }
 #endregion
@@ -208,9 +208,9 @@ public sealed class AttachableToggleableSystem : EntitySystem
     {
         if (!attachable.Comp.Attached)
             return;
-        
+
         args.Handled = true;
-        
+
         if (!attachable.Comp.NeedHand || !attachable.Comp.Active)
             return;
 
@@ -221,17 +221,17 @@ public sealed class AttachableToggleableSystem : EntitySystem
     {
         if (!attachable.Comp.Attached || args.Unequipped == attachable.Owner)
             return;
-        
+
         args.Handled = true;
-        
+
         RemoveAttachableActions(attachable, args.User);
-        
+
         if (!attachable.Comp.NeedHand || !attachable.Comp.Active)
             return;
 
         Toggle(attachable, args.User, attachable.Comp.DoInterrupt);
     }
-    
+
     private void OnAttachableMovementLockedMoveInput(Entity<AttachableMovementLockedComponent> user, ref MoveInputEvent args)
     {
         foreach (EntityUid attachableUid in user.Comp.AttachableList)
@@ -242,7 +242,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
             {
                 continue;
             }
-            
+
             Toggle((attachableUid, toggleableComponent), user.Owner, toggleableComponent.DoInterrupt);
         }
 
@@ -293,7 +293,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
         _doAfterSystem.TryStartDoAfter(new DoAfterArgs(
             EntityManager,
             args.User,
-            attachable.Comp.DoAfter,
+            (attachable.Comp.Active) ? attachable.Comp.DeactivateDelay : attachable.Comp.ActivateDelay,
             new AttachableToggleDoAfterEvent(args.SlotId),
             attachable,
             target: attachable.Owner,
@@ -354,7 +354,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
                 _attachableHolderSystem.SetSupercedingAttachable(holder, null);
             return;
         }
-        
+
         if (attachable.Comp.BreakOnMove && userUid != null)
         {
             var movementLockedComponent = EnsureComp<AttachableMovementLockedComponent>(userUid.Value);
@@ -400,7 +400,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
         {
             return;
         }
-        
+
         FinishToggle(attachable, (holderUid.Value, holderComponent), slotId, user, interrupted);
         Dirty(attachable);
     }
@@ -411,7 +411,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
     {
         GrantAttachableActions(ent, args.User);
     }
-    
+
     private void GrantAttachableActions(Entity<AttachableToggleableComponent> ent, EntityUid user, bool doSecondTry = true)
     {
         // This is to prevent ActionContainerSystem from shitting itself if the attachment has actions other than its attachment toggle.
@@ -454,15 +454,15 @@ public sealed class AttachableToggleableSystem : EntitySystem
     {
         RemoveAttachableActions(ent, args.User);
     }
-    
+
     private void RemoveAttachableActions(Entity<AttachableToggleableComponent> ent, EntityUid user)
     {
         if (ent.Comp.Action is not { } action)
             return;
-        
+
         if (!TryComp(action, out InstantActionComponent? actionComponent) || actionComponent.AttachedEntity != user)
             return;
-        
+
         _actionsSystem.RemoveProvidedAction(user, ent, action);
     }
 

@@ -344,7 +344,8 @@
     - RMCAttachmentRail
     - RMCAttachmentB8SmartScope
   - type: AttachableToggleable
-    doAfter: 0.8
+    activateDelay: 0.8
+    deactivateDelay: 0.0
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: huntingscope

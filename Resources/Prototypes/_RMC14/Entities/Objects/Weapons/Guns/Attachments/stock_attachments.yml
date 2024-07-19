@@ -188,7 +188,8 @@
     - RMCAttachmentStock
     - RMCAttachmentM54CStockCollapsible
   - type: AttachableToggleable
-    doAfter: 0.5
+    activateDelay: 0.5
+    deactivateDelay: 0.5
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
       state: m54c-col
@@ -256,7 +257,8 @@
   - type: AttachableVisuals
     suffix: ""
   - type: AttachableToggleable
-    doAfter: 0.5
+    activateDelay: 0.5
+    deactivateDelay: 0.5
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
       state: m16-folding
@@ -413,7 +415,8 @@
     - RMCAttachmentStock
     - RMCAttachmentM63ArmBrace
   - type: AttachableToggleable
-    doAfter: 2.5
+    activateDelay: 2.5
+    deactivateDelay: 2.5
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
       state: smg-brace
@@ -462,7 +465,8 @@
   - type: AttachableToggleablePreventShoot
     message: You need to extend the stock first!
   - type: AttachableToggleable
-    doAfter: 1.5
+    activateDelay: 1.5
+    deactivateDelay: 1.5
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
       state: 44stock

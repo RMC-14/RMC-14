@@ -46,7 +46,10 @@ public sealed partial class AttachableToggleableComponent : Component
     public bool WieldedOnly = false;
 
     [DataField, AutoNetworkedField]
-    public float DoAfter;
+    public float ActivateDelay;
+
+    [DataField, AutoNetworkedField]
+    public float DeactivateDelay;
 
     [DataField, AutoNetworkedField]
     public bool DoAfterNeedHand = true;
