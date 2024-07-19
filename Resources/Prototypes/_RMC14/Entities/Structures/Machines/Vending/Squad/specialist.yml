@@ -6,6 +6,7 @@
   name: ColMarTech squad weapons specialist gear rack
   description: An automated gear rack for Squad Weapons Specialists.
   components:
+  - type: RMCVendorSpecialist
   - type: AccessReader
     access:
     - [ "CMAccessSpecPrep" ]
@@ -17,7 +18,8 @@
     pointsType: Specialist
     sections:
     - name: Weapons Specialist Sets
-      choices: { SquadLeaderKit: 1 }
+      choices: { SquadSpecKit: 1 }
+      sharedSpecLimit: 2 # 2 as requested until Scout and Pyro are added
       entries:
       - id: RMCDemoSpecEquipmentCase
       - id: RMCGrenadeSpecEquipmentCase
