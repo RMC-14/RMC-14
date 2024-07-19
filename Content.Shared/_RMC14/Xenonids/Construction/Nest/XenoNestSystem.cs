@@ -297,7 +297,9 @@ public sealed class XenoNestSystem : EntitySystem
     {
         if (!HasComp<XenoComponent>(user) ||
             !CanNestPopup(user, victim, surface, out _))
+        {
             return;
+        }
 
         var ev = new XenoNestDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, surface.Comp.DoAfter, ev, surface, victim)
