@@ -42,7 +42,7 @@
   - type: XenoPunch
     damage:
       types:
-        Blunt: 25
+        Blunt: 20
   - type: XenoFling
   - type: XenoLunge
   - type: XenoPlasma
@@ -60,7 +60,7 @@
   - type: MeleeWeapon
     damage:
       groups:
-        Brute: 35
+        Brute: 20
   - type: Tackle
     threshold: 4
     stun: 5
