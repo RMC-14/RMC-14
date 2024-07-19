@@ -19,7 +19,7 @@
     damageModifierSet: Metallic
   - type: PointLight
     enabled: true
-    radius: 5
+    radius: 6
     netsync: false
     energy: 5
     offset: "0, 0"
@@ -29,7 +29,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 150
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -98,7 +98,6 @@
         !type:DamageTrigger
         damage: 300
       behaviors:
-      - !type:EmptyAllContainersBehaviour
       - !type:PlaySoundBehavior
         sound:
           collection: MetalGlassBreak

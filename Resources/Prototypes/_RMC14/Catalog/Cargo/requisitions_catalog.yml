@@ -122,6 +122,8 @@
 #        crate: CMCrateInflatableBarriers
       - cost: 2000
         crate: CMCrateReplacementLights
+      - cost: 2500
+        crate: RCMCrateFloodlights
       - cost: 3000
         crate: CMCratePacmanParts
       - cost: 4000
