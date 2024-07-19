@@ -73,7 +73,6 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoNestedComponent, PullAttemptEvent>(OnNestedPullAttempt);
         SubscribeLocalEvent<XenoNestedComponent, InteractionAttemptEvent>(OnNestedInteractionAttempt);
         SubscribeLocalEvent<XenoNestedComponent, UpdateCanMoveEvent>(OnNestedCancel);
-        SubscribeLocalEvent<XenoNestableComponent, UpdateCanMoveEvent>(OnUnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, UseAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, ThrowAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, PickupAttemptEvent>(OnNestedCancel);
@@ -288,11 +287,6 @@ public sealed class XenoNestSystem : EntitySystem
         args.Cancel();
     }
 
-    private void OnUnNestedCancel<T>(Entity<XenoNestableComponent> ent, ref T args) where T: CancellableEntityEventArgs // do i need a .cancelled or is this right?
-    {
-        args.Cancel();
-    }
-
     private void OnInNestGetInfectedIncubationMultiplier(Entity<XenoNestedComponent> ent, ref GetInfectedIncubationMultiplierEvent args)
     {
         if (ent.Comp.Running)
@@ -301,11 +295,8 @@ public sealed class XenoNestSystem : EntitySystem
 
     private void TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)
     {
-        if (!HasComp<XenoComponent>(user) ||
-            !CanNestPopup(user, victim, surface, out _))
-        {
+        if (!HasComp<XenoComponent>(user))
             return;
-        }
 
         var ev = new XenoNestDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, surface.Comp.DoAfter, ev, surface, victim)
@@ -337,7 +328,7 @@ public sealed class XenoNestSystem : EntitySystem
 
     private void TryStartUnNesting(EntityUid user, EntityUid target)
     {
-        if (!CanBeUnNested(user, target) || !CanUnNestPopup(user, target))
+        if (!CanBeUnNested(user, target))
             return;
 
         foreach (var session in Filter.PvsExcept(user).Recipients)
@@ -370,7 +361,6 @@ public sealed class XenoNestSystem : EntitySystem
             AttemptFrequency = AttemptFrequency.EveryTick
         };
         _doAfter.TryStartDoAfter(doAfter);
-
     }
 
     private bool CanBeNested(EntityUid user,
@@ -477,25 +467,6 @@ public sealed class XenoNestSystem : EntitySystem
                 _popup.PopupClient(response, surface, user);
 
             return false;
-        }
-
-        return true;
-    }
-
-    private bool CanUnNestPopup(EntityUid user, EntityUid target) //likely unnecessary, no edge cases to cover to warrant separate func
-    {
-        if (!HasComp<XenoNestableComponent>(target))
-            return false;
-
-        var userCoords = _transform.GetMoverCoordinates(user);
-        var targetCoords = _transform.GetMoverCoordinates(target);
-        if (!targetCoords.TryDelta(EntityManager, _transform, userCoords, out var delta))
-            return false;
-        string? response = null;
-        if (userCoords.Offset(delta.GetDir().ToVec()).GetTileRef(EntityManager, _map) is not { } tile ||
-       _turf.IsTileBlocked(tile, CollisionGroup.Impassable))
-        {
-            response ??= Loc.GetString("cm-xeno-nest-failed-cant-there"); // make new localizable string for can't reach/unnest
         }
 
         return true;
