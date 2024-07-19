@@ -13,6 +13,7 @@
         visible: false
         map: [ "light" ]
   - type: InteractionOutline
+  - type: Repairable
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic
@@ -103,6 +104,9 @@
       - !type:ChangeConstructionNodeBehavior
         node: start
   - type: Physics
+  - type: Repairable
+  - type: Corrodible # Repairable, not destructible.
+    isCorrodible: false
   - type: Fixtures
     fixtures:
       fix1:
@@ -120,7 +124,7 @@
   name: tall broken floodlight
   id: RMCFloodlightBroken
   parent: BaseStructure
-  description: No longer a pillar of light in the darkness, must be repaired to give off light again.
+  description: A pasted on note says 'To fix, unscrew the panel, crowbar out the damaged assembly, weld it fixed, add 2 cable, then close the panel.'
   components:
   - type: Sprite
     noRot: true
