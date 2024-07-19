@@ -1,5 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.ActionBlocker;
@@ -55,7 +56,9 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, GetUsedEntityEvent>(OnXenoGetUsedEntity);
 
         SubscribeLocalEvent<XenoNestSurfaceComponent, InteractHandEvent>(OnSurfaceInteractHand);
+        SubscribeLocalEvent<XenoNestableComponent, ActivateInWorldEvent>(OnNestedActivateInWorld);
         SubscribeLocalEvent<XenoNestSurfaceComponent, DoAfterAttemptEvent<XenoNestDoAfterEvent>>(OnSurfaceDoAfterAttempt);
+        SubscribeLocalEvent<XenoNestedComponent, XenoUnNestDoAfterEvent>(OnUnNestNestableDoAfter);
         SubscribeLocalEvent<XenoNestSurfaceComponent, XenoNestDoAfterEvent>(OnNestSurfaceDoAfter);
         SubscribeLocalEvent<XenoNestSurfaceComponent, CanDropTargetEvent>(OnSurfaceCanDropTarget);
         SubscribeLocalEvent<XenoNestSurfaceComponent, DragDropTargetEvent>(OnSurfaceDragDropTarget);
@@ -71,6 +74,7 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoNestedComponent, PullAttemptEvent>(OnNestedPullAttempt);
         SubscribeLocalEvent<XenoNestedComponent, InteractionAttemptEvent>(OnNestedInteractionAttempt);
         SubscribeLocalEvent<XenoNestedComponent, UpdateCanMoveEvent>(OnNestedCancel);
+        SubscribeLocalEvent<XenoNestableComponent, UpdateCanMoveEvent>(OnUnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, UseAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, ThrowAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, PickupAttemptEvent>(OnNestedCancel);
@@ -103,6 +107,11 @@ public sealed class XenoNestSystem : EntitySystem
 
         args.Handled = true;
         TryStartNesting(args.User, ent, pulling);
+    }
+
+    private void OnNestedActivateInWorld(Entity<XenoNestableComponent> target, ref ActivateInWorldEvent args)
+    {
+        TryStartUnNesting(args.User, target.Owner);
     }
 
     private void OnNestRemove(Entity<XenoNestComponent> ent, ref ComponentRemove args)
@@ -219,6 +228,15 @@ public sealed class XenoNestSystem : EntitySystem
         }
     }
 
+    private void OnUnNestNestableDoAfter(Entity<XenoNestedComponent> ent, ref XenoUnNestDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled)
+            return;
+        args.Handled = true;
+        var target = ent.Owner;
+        DetachNested(null, target);
+    }
+
     #region DragDrop
 
     private void OnSurfaceCanDropTarget(Entity<XenoNestSurfaceComponent> ent, ref CanDropTargetEvent args)
@@ -269,13 +287,18 @@ public sealed class XenoNestSystem : EntitySystem
         args.Cancel();
     }
 
-	private void OnInNestGetInfectedIncubationMultiplier(Entity<XenoNestedComponent> ent, ref GetInfectedIncubationMultiplierEvent args)
+    private void OnUnNestedCancel<T>(Entity<XenoNestableComponent> ent, ref T args) where T: CancellableEntityEventArgs // do i need a .cancelled or is this right?
+    {
+        args.Cancel();
+    }
+
+    private void OnInNestGetInfectedIncubationMultiplier(Entity<XenoNestedComponent> ent, ref GetInfectedIncubationMultiplierEvent args)
     {
         if (ent.Comp.Running)
             args.Multiply(ent.Comp.IncubationMultiplier);
 	}
 
-	private void TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)
+    private void TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)
     {
         if (!HasComp<XenoComponent>(user) ||
             !CanNestPopup(user, victim, surface, out _))
@@ -311,6 +334,28 @@ public sealed class XenoNestSystem : EntitySystem
         }
     }
 
+    private void TryStartUnNesting(EntityUid user, EntityUid target)
+    {
+        if (!CanBeUnNested(user, target) || !CanUnNestPopup(user, target))
+            return;
+        if (_mobState.IsDead(target) || _mobState.IsCritical(target))
+        {
+            _popup.PopupClient("Target will be Unnested", user, user);
+        } else
+        {
+            _popup.PopupClient("Target is still alive! Freeing them may be risky", user, user);
+        }
+        var ev = new XenoUnNestDoAfterEvent(); // do i need a new one? we'll find out.
+        var doafterTime = TimeSpan.FromSeconds(8);
+        var doAfter = new DoAfterArgs(EntityManager, user, doafterTime, ev, target)
+        {
+            BreakOnMove = true,
+            AttemptFrequency = AttemptFrequency.EveryTick
+        };
+        _doAfter.TryStartDoAfter(doAfter);
+
+    }
+
     private bool CanBeNested(EntityUid user,
         EntityUid victim,
         Entity<XenoNestSurfaceComponent?> surface,
@@ -333,6 +378,13 @@ public sealed class XenoNestSystem : EntitySystem
         }
 
         return true;
+    }
+
+    private bool CanBeUnNested(EntityUid user, EntityUid target) // potentially add surface to allow targeting surface for action , Entity<XenoNestSurfaceComponent?> surface
+    {
+        if (HasComp<XenoNestedComponent>(target) && HasComp<XenoComponent>(user))
+            return true;
+        return false;
     }
 
     private bool CanNestPopup(EntityUid user,
@@ -408,6 +460,25 @@ public sealed class XenoNestSystem : EntitySystem
                 _popup.PopupClient(response, surface, user);
 
             return false;
+        }
+
+        return true;
+    }
+
+    private bool CanUnNestPopup(EntityUid user, EntityUid target) //likely unnecessary, no edge cases to cover to warrant separate func
+    {
+        if (!HasComp<MarineComponent>(target))
+            return false;
+
+        var userCoords = _transform.GetMoverCoordinates(user);
+        var targetCoords = _transform.GetMoverCoordinates(target);
+        if (!targetCoords.TryDelta(EntityManager, _transform, userCoords, out var delta))
+            return false;
+        string? response = null;
+        if (userCoords.Offset(delta.GetDir().ToVec()).GetTileRef(EntityManager, _map) is not { } tile ||
+       _turf.IsTileBlocked(tile, CollisionGroup.Impassable))
+        {
+            response ??= Loc.GetString("cm-xeno-nest-failed-cant-there"); // make new localizable string for can't reach/unnest
         }
 
         return true;
