@@ -8,8 +8,8 @@
     noRot: true
     sprite: _RMC14/Objects/Misc/Lights/floodlight.rsi
     layers:
+      - state: smallfloodon # Temporary until power works.
       - state: smallflood
-      - state: smallfloodon
         visible: false
         map: [ "light" ]
   - type: InteractionOutline
@@ -17,39 +17,8 @@
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic
-  - type: HandheldLight
-    addPrefix: false
-    blinkingBehaviourId: blinking
-    radiatingBehaviourId: radiating
-  - type: LightBehaviour
-    behaviours:
-      - !type:FadeBehaviour
-        id: radiating
-        maxDuration: 2.0
-        startValue: 3.0
-        endValue: 2.0
-        isLooped: true
-        reverseWhenFinished: true
-      - !type:PulseBehaviour
-        id: blinking
-        interpolate: Nearest
-        maxDuration: 1.0
-        minValue: 0.1
-        maxValue: 2.0
-        isLooped: true
-  - type: ToggleableLightVisuals
-    spriteLayer: light
-  - type: PowerCellSlot
-    cellSlotId: cell_slot
-  - type: ContainerContainer
-    containers:
-      cell_slot: !type:ContainerSlot
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
   - type: PointLight
-    enabled: false
+    enabled: true
     radius: 5
     netsync: false
     energy: 5
@@ -90,8 +59,8 @@
   - type: Appearance
 
 - type: entity
-  name: big floodlight
-  id: RMCBigFloodlight
+  name: tall floodlight
+  id: RMCTallFloodlight
   parent: BaseStructure
   description: A pillar of light in the darkness.
   components:
@@ -99,50 +68,24 @@
     noRot: true
     sprite: _RMC14/Objects/Misc/Lights/floodlightbig.rsi
     layers:
+      - state: bigfloodon # Temporary until power works.
       - state: bigflood
-      - state: bigfloodon
         visible: false
         map: [ "light" ]
     offset: "0.0,0.5"
     drawdepth: Mobs
+  - type: Transform
+    anchored: true
+  - type: Construction
+    graph: RMCFloodlightBroken
+    node: completed
   - type: InteractionOutline
   - type: Anchorable
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic
-  - type: HandheldLight
-    addPrefix: false
-    blinkingBehaviourId: blinking
-    radiatingBehaviourId: radiating
-  - type: LightBehaviour
-    behaviours:
-      - !type:FadeBehaviour
-        id: radiating
-        maxDuration: 2.0
-        startValue: 3.0
-        endValue: 2.0
-        isLooped: true
-        reverseWhenFinished: true
-      - !type:PulseBehaviour
-        id: blinking
-        interpolate: Nearest
-        maxDuration: 1.0
-        minValue: 0.1
-        maxValue: 2.0
-        isLooped: true
-  - type: ToggleableLightVisuals
-    spriteLayer: light
-  - type: PowerCellSlot
-    cellSlotId: cell_slot
-  - type: ContainerContainer
-    containers:
-      cell_slot: !type:ContainerSlot
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
   - type: PointLight
-    enabled: false
+    enabled: true
     radius: 10
     netsync: false
     energy: 7
@@ -155,16 +98,12 @@
         !type:DamageTrigger
         damage: 300
       behaviors:
+      - !type:EmptyAllContainersBehaviour
       - !type:PlaySoundBehavior
         sound:
           collection: MetalGlassBreak
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          RMCTallFloodlightBroken:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
+      - !type:ChangeConstructionNodeBehavior
+        node: start
   - type: Physics
   - type: Fixtures
     fixtures:
@@ -181,9 +120,9 @@
 
 - type: entity
   name: tall broken floodlight
-  id: RMCTallFloodlightBroken
+  id: RMCFloodlightBroken
   parent: BaseStructure
-  description: No longer a pillar of light in the darkness, you can salvage it for parts.
+  description: No longer a pillar of light in the darkness, must be repaired to give off light again.
   components:
   - type: Sprite
     noRot: true
@@ -191,30 +130,11 @@
     state: broken
     offset: "0.0,0.5"
     drawdepth: Mobs
+  - type: Construction
+    graph: RMCFloodlightBroken
+    node: start
   - type: InteractionOutline
   - type: Anchorable
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Metallic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalGlassBreak
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          CMSheetMetal1:
-            min: 2
-            max: 2
-          CMSheetGlass1:
-            min: 2
-            max: 2
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: Physics
   - type: Fixtures
     fixtures:
@@ -227,3 +147,33 @@
         - MachineMask
         layer:
         - WallLayer
+
+# LZ Floodlights
+
+- type: entity
+  name: LZ floodlight
+  id: RMCLZFloodlight
+  parent: BaseStructure
+  description: An indestructible bit of light in the darkness. Never seems to run out of power.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Objects/Misc/Lights/floodlight.rsi
+    state: magical
+  - type: InteractionOutline
+  - type: PointLight
+    enabled: true
+    radius: 5
+    energy: 3
+    netsync: false
+    color: "#ECFFFF"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 50
+        mask:
+        - HighImpassable
+  - type: Appearance
