@@ -7,6 +7,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Waypoint;
 
@@ -18,6 +19,7 @@ public sealed class TrackerAlertSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -92,6 +94,10 @@ public sealed class TrackerAlertSystem : EntitySystem
         var query = EntityQueryEnumerator<TrackerAlertComponent, XenoComponent>();
         while (query.MoveNext(out var uid, out var tracker, out var xeno))
         {
+            if (_timing.CurTime < tracker.NextUpdateTime)
+                continue;
+            tracker.NextUpdateTime = _timing.CurTime + tracker.UpdateRate;
+
             UpdateDirection((uid, tracker, xeno));
         }
     }
@@ -101,12 +107,20 @@ public sealed class TrackerAlertSystem : EntitySystem
         if (!Resolve(ent.Owner, ref ent.Comp1, ref ent.Comp2))
             return;
 
+        var alertId = ent.Comp1.AlertPrototype;
+
+        if (!_alerts.TryGet(alertId, out var alertPrototype))
+        {
+            Log.Error($"Invalid alert type {alertId}");
+            return;
+        }
+
         // Has a queen
         if (ent.Comp2.Hive == null ||
             !_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1,
                 entity => TryComp(entity, out XenoComponent? queenXeno) && queenXeno.Hive == ent.Comp2.Hive))
         {
-            _alerts.ClearAlertCategory(ent, ent.Comp1.DirectionAlertCategory);
+            _alerts.ShowAlert(ent, alertId, 0);
             return;
         }
 
@@ -115,9 +129,10 @@ public sealed class TrackerAlertSystem : EntitySystem
         if (ent.Comp1.WorldDirection == ent.Comp1.LastDirection && !force)
             return;
 
-        if (ent.Comp1.DirectionAlerts.TryGetValue(ent.Comp1.WorldDirection, out var alertId))
+        if (alertPrototype.SupportsSeverity &&
+            ent.Comp1.AlertSeverity.TryGetValue(ent.Comp1.WorldDirection, out var severity))
         {
-            _alerts.ShowAlert(ent, alertId);
+            _alerts.ShowAlert(ent, alertId, severity);
         }
         else
         {
@@ -137,7 +152,7 @@ public sealed class TrackerAlertSystem : EntitySystem
         var pos = _transform.GetWorldPosition(ent);
         var targetPos = _transform.GetWorldPosition(ent.Comp.TrackedEntity.Value);
 
-        var vec = pos - targetPos;
+        var vec = targetPos - pos;
         return vec.ToWorldAngle().GetDir();
     }
 

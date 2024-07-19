@@ -11,37 +11,17 @@
       "name": "trackoff"
     },
     {
-      "name": "trackon",
-      "directions": 8,
+      "name": "trackondirect",
       "delays": [
         [
-          0.5,
-          0.5
-        ],
-        [
-          0.5,
-          0.5
-        ],
-        [
-          0.5,
-          0.5
-        ],
-        [
-          0.5,
-          0.5
-        ],
-        [
-          0.5,
-          0.5
-        ],
-        [
-          0.5,
-          0.5
-        ],
-        [
-          0.5,
-          0.5
-        ],
+          0.6,
+          0.6
+        ]
+      ]
+    },
+    {
+      "name": "trackon-northwest",
+      "delays": [
         [
           0.5,
           0.5
@@ -49,11 +29,65 @@
       ]
     },
     {
-      "name": "trackondirect",
+      "name": "trackon-south",
       "delays": [
         [
-          0.6,
-          0.6
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "trackon-southeast",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "trackon-southwest",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "trackon-west",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "trackon-east",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "trackon-north",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "trackon-northeast",
+      "delays": [
+        [
+          0.5,
+          0.5
         ]
       ]
     }
