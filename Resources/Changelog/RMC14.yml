@@ -3310,5 +3310,12 @@
   id: 399
   time: '2024-07-19T03:39:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3133
+- author: 0xRainy
+  changes:
+  - message: Resin doors are no longer powered
+    type: Fix
+  id: 400
+  time: '2024-07-19T04:10:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3132
 Name: RMC14
 Order: -1
