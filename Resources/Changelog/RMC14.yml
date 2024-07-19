@@ -3303,5 +3303,27 @@
   id: 398
   time: '2024-07-18T11:18:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3078
+- author: Vermidia
+  changes:
+  - message: Dead parasites can no longer be used to infect hosts
+    type: Fix
+  id: 399
+  time: '2024-07-19T03:39:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3133
+- author: 0xRainy
+  changes:
+  - message: Resin doors are no longer powered
+    type: Fix
+  id: 400
+  time: '2024-07-19T04:10:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3132
+- author: Vermidia
+  changes:
+  - message: Webbings of both kinds can now properly store MREs, pill packets, pill
+      canisters, and surgical kits.
+    type: Fix
+  id: 401
+  time: '2024-07-19T04:12:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3115
 Name: RMC14
 Order: -1
