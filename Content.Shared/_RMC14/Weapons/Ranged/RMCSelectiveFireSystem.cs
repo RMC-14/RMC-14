@@ -202,7 +202,7 @@ public sealed class RMCSelectiveFireSystem : EntitySystem
 
     public void SetFireModes(Entity<GunComponent?> gun, SelectiveFire modes, bool dirty = true)
     {
-        if (gun.Comp == null && !TryComp(gun.Owner, out gun.Comp) || modes == SelectiveFire.Invalid)
+        if (gun.Comp == null && !TryComp(gun.Owner, out gun.Comp) || (modes & allFireModes) != SelectiveFire.Invalid)
             return;
 
         gun.Comp.AvailableModes = allFireModes;

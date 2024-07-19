@@ -88,7 +88,7 @@ public sealed partial class RMCSelectiveFireComponent : Component
     [DataField, AutoNetworkedField]
     public Dictionary<SelectiveFire, SelectiveFireModifierSet> Modifiers = new()
     {
-        { SelectiveFire.Burst, new SelectiveFireModifierSet(-0.1f, 10.0, true, 2.0, 6) },
+        { SelectiveFire.Burst, new SelectiveFireModifierSet(0.1f, 10.0, true, 2.0, 6) },
         { SelectiveFire.FullAuto, new SelectiveFireModifierSet(0f, 26.0, true, 2.0, 4) }
     };
 }

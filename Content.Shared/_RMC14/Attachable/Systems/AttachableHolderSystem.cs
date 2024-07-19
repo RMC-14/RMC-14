@@ -235,12 +235,18 @@ public sealed class AttachableHolderSystem : EntitySystem
             {
                 foreach (var contained in container.ContainedEntities)
                 {
-                    if (!HasComp<AttachableToggleableComponent>(contained))
+                    if (!TryComp(contained, out AttachableToggleableComponent? toggleableComponent))
                         continue;
+
+                    if (toggleableComponent.UserOnly &&
+                        (!TryComp(holder.Owner, out TransformComponent? transformComponent) || !transformComponent.ParentUid.Valid || transformComponent.ParentUid != userUid))
+                    {
+                        continue;
+                    }
 
                     var verb = new EquipmentVerb()
                     {
-                        Text = Loc.GetString("rmc-attachable-verb-toggle", ("attachable", contained)),
+                        Text = toggleableComponent.ActionName,
                         IconEntity = GetNetEntity(contained),
                         Act = () =>
                         {

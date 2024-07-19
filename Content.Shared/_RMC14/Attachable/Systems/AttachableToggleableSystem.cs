@@ -437,22 +437,22 @@ public sealed class AttachableToggleableSystem : EntitySystem
                 {
                     case Direction.South:
                         comparer = (EntityCoordinates userCoords, EntityCoordinates entCoords) => { return entCoords.Y < userCoords.Y; };
-                        coordsShift = new Vector2(0f, -1f);
+                        coordsShift = new Vector2(0f, -0.7f);
                         break;
 
                     case Direction.North:
                         comparer = (EntityCoordinates userCoords, EntityCoordinates entCoords) => { return entCoords.Y > userCoords.Y; };
-                        coordsShift = new Vector2(0f, 1f);
+                        coordsShift = new Vector2(0f, 0.7f);
                         break;
 
                     case Direction.East:
                         comparer = (EntityCoordinates userCoords, EntityCoordinates entCoords) => { return entCoords.X > userCoords.X; };
-                        coordsShift = new Vector2(1f, 0f);
+                        coordsShift = new Vector2(0.7f, 0f);
                         break;
 
                     case Direction.West:
                         comparer = (EntityCoordinates userCoords, EntityCoordinates entCoords) => { return entCoords.X < userCoords.X; };
-                        coordsShift = new Vector2(-1f, 0f);
+                        coordsShift = new Vector2(-0.7f, 0f);
                         break;
 
                     default:

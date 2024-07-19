@@ -258,6 +258,8 @@
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_u7.ogg
       params:
         volume: -2
+  - type: RMCSelectiveFire
+    baseFireRate: 0.476
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
@@ -276,8 +278,6 @@
 #      Breaching: 10.8
   - type: UniqueAction
   - type: PumpAction
-  - type: ShootUseDelay
-    delay: 2.1
   - type: UseDelay
   - type: AttachableToggleable
     userOnly: true
@@ -289,7 +289,7 @@
       path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg
       params:
         volume: -2
-    actionName: U7 underbarrel shotgun
+    actionName: Switch to the U7 underbarrel shotgun
     actionDesc: Switch to using the underbarrel shotgun.
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
@@ -327,6 +327,8 @@
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ugl.ogg
     resetOnHandSelected: false
+  - type: RMCSelectiveFire
+    baseFireRate: 0.417
   - type: BallisticAmmoProvider
     cycleable: false
     whitelist:
@@ -347,8 +349,6 @@
         volume: 5
   - type: ShootAtFixedPoint
     maxFixedRange: 7
-  - type: ShootUseDelay
-    delay: 2.4
   - type: UseDelay
   - type: UniqueAction
   - type: BreechLoaded
@@ -367,7 +367,7 @@
     wieldedUseOnly: true
     activatePopupText: attachable-popup-switch-to-generic
     deactivatePopupText: attachable-popup-switch-from-generic
-    actionName: Toggle U1 Grenade Launcher
+    actionName: Switch to the U1 Grenade Launcher
     actionDesc: Switch to using the underbarrel grenade launcher.
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
@@ -394,10 +394,10 @@
         map: [ "enum.BreechVisuals.Open" ]
   - type: BallisticAmmoProvider
     capacity: 5
-  - type: ShootUseDelay
-    delay: 3
   - type: ShootAtFixedPoint
     maxFixedRange: 10
+  - type: RMCSelectiveFire
+    baseFireRate: 0.334
   - type: GenericVisualizer
     visuals:
       enum.BreechVisuals.Open:
@@ -405,7 +405,7 @@
           True: { state: grenade-mk1-open }
           False: { state: grenade-mk1 }
   - type: AttachableToggleable
-    actionName: Toggle MK1 Underslung Grenade Launcher
+    actionName: Switch to the MK1 Underslung Grenade Launcher
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: grenade-mk1

@@ -60,6 +60,26 @@
     item: Sidearm
   - type: GunUnskilledPenalty
     angleIncrease: 5
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentLaserSight
 
 - type: entity
   parent: CMWeaponPistolBase
@@ -332,3 +352,8 @@
         whitelist:
           tags:
           - RMCMagazinePistolSU6
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.65, 0.09375
+      rmc-aslot-rail: -0.15625, 0.15625
+      rmc-aslot-underbarrel: 0.25, -0.3125
