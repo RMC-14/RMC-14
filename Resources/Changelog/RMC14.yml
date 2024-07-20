@@ -3412,5 +3412,12 @@
   id: 412
   time: '2024-07-20T09:03:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3167
+- author: Kaga
+  changes:
+  - message: Made smartgun and shotgun projectiles face the target.
+    type: Fix
+  id: 413
+  time: '2024-07-20T09:46:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3169
 Name: RMC14
 Order: -1
