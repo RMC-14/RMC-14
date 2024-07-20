@@ -221,6 +221,7 @@
     factions:
     - RMCXeno
   - type: RMCNightVisionVisible
+  - type: CrashLandable
 
 - type: entity
   abstract: true

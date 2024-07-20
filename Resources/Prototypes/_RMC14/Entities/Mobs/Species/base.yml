@@ -170,3 +170,4 @@
     factions:
     - UNMC
   - type: RMCNightVisionVisible
+  - type: CrashLandable
