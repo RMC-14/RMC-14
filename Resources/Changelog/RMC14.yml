@@ -3376,5 +3376,21 @@
   id: 408
   time: '2024-07-20T05:42:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3159
+- author: DrSmugleaf
+  changes:
+  - message: Added RMC Admin UI.
+    type: Add
+  - message: Added marine:randomizewithjob command.
+    type: Add
+  id: 409
+  time: '2024-07-20T06:15:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3163
+- author: DrSmugleaf
+  changes:
+  - message: Added Orion Blackburn, Lilly 'Pipsqueak' Harding, Bites-The-Dust figurines.
+    type: Add
+  id: 410
+  time: '2024-07-20T06:16:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3161
 Name: RMC14
 Order: -1
