@@ -26,6 +26,7 @@ command-description-skills-set = Sets the level of a specific skill for a marine
 command-description-squad-get = Gets the squad ID of a marine.
 command-description-squad-getname = Gets the squad name of a marine.
 command-description-squad-set = Sets the squad of a marine or group of marines.
+command-description-squad-with = Filters a group of marines by their squad.
 
 command-description-xenomature = Instantly matures a xeno. Applicable to the Queen, at which point she gets more health and abilities.
 

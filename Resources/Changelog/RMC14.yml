@@ -3310,5 +3310,71 @@
   id: 399
   time: '2024-07-19T03:39:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3133
+- author: 0xRainy
+  changes:
+  - message: Resin doors are no longer powered
+    type: Fix
+  id: 400
+  time: '2024-07-19T04:10:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3132
+- author: Vermidia
+  changes:
+  - message: Webbings of both kinds can now properly store MREs, pill packets, pill
+      canisters, and surgical kits.
+    type: Fix
+  id: 401
+  time: '2024-07-19T04:12:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3115
+- author: Whisper
+  changes:
+  - message: Added Simon Starseeker and Lena Milize figurines.
+    type: Add
+  id: 402
+  time: '2024-07-19T13:04:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3128
+- author: musicmanvr
+  changes:
+  - message: Made the standard issue flare less abrasive on the eyes.
+    type: Tweak
+  id: 403
+  time: '2024-07-20T01:31:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3152
+- author: DrSmugleaf
+  changes:
+  - message: Added squad:with Toolshed filter command.
+    type: Add
+  id: 404
+  time: '2024-07-20T02:50:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3147
+- author: musicmanvr
+  changes:
+  - message: Added bedrolls and campfires for camping in the field.
+    type: Add
+  id: 405
+  time: '2024-07-20T03:19:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3156
+- author: musicmanvr
+  changes:
+  - message: Reload sounds of most weapons have been changed, and new xeno attack
+      sounds have been added.
+    type: Tweak
+  id: 406
+  time: '2024-07-20T03:35:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3106
+- author: Whisper
+  changes:
+  - message: 'Rules: Xenonids are now allowed to sneak onto the shuttle at any point
+      in the round, at their own risk.'
+    type: Tweak
+  id: 407
+  time: '2024-07-20T03:41:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3158
+- author: DrSmugleaf
+  changes:
+  - message: Fixed being forced to refer to "Solaris admin" as "Solaris high command"
+    type: Fix
+  id: 408
+  time: '2024-07-20T05:42:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3159
 Name: RMC14
 Order: -1

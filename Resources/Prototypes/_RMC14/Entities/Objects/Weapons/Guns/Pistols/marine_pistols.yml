@@ -80,8 +80,8 @@
     slots:
       gun_magazine:
         name: Magazine
-        #insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg #TODO RMC14 pistol sounds
-        #ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
         priority: 2
         whitelist:
           tags:
@@ -130,12 +130,14 @@
     availableModes:
     - SemiAuto
     - Burst
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_88m4_v7.ogg
   - type: ItemSlots
     slots:
       gun_magazine:
         name: Magazine
-        #insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg #TODO RMC14 pistol sounds
-        #ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
         priority: 2
         whitelist:
           tags:
@@ -249,6 +251,8 @@
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/su6.rsi
   - type: GunIFF
@@ -278,8 +282,8 @@
     slots:
       gun_magazine:
         name: Magazine
-        #insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg #TODO RMC14 pistol sounds
-        #ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_su6_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_su6_unload.ogg
         priority: 2
         whitelist:
           tags:
