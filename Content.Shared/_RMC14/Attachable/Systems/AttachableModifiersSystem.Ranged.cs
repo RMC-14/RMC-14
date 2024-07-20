@@ -98,7 +98,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
             if (!CanApplyModifiers(attachable.Owner, modSet.Conditions))
                 continue;
 
-            args.Args.ShotsPerBurst += modSet.ShotsPerBurstFlat;
+            args.Args.ShotsPerBurst = Math.Max(args.Args.ShotsPerBurst + modSet.ShotsPerBurstFlat, 1);
             args.Args.CameraRecoilScalar = Math.Max(args.Args.CameraRecoilScalar + modSet.RecoilFlat, 0);
             args.Args.MinAngle = Angle.FromDegrees(Math.Max(args.Args.MinAngle.Degrees + modSet.ScatterFlat, 0.0));
             args.Args.MaxAngle = Angle.FromDegrees(Math.Max(args.Args.MaxAngle.Degrees + modSet.ScatterFlat, args.Args.MinAngle));
