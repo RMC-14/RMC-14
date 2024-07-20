@@ -4,6 +4,7 @@ using Content.Server.Chat.Systems;
 using Content.Shared._RMC14.Medical.IV;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage;
@@ -80,7 +81,10 @@ public sealed class IVDripSystem : SharedIVDripSystem
                 if (attachedStream is { } bloodSolutionEnt &&
                     bloodSolutionEnt.Comp.Solution.Volume < bloodSolutionEnt.Comp.Solution.MaxVolume)
                 {
+                    // Don't transfer non-blood reagants
+                    Solution excludedSolution = packSol.SplitSolutionWithout(packSol.MaxVolume, packComponent.TransferableReagants);
                     _solutionContainer.TryTransferSolution(bloodSolutionEnt, packSol, ivComp.TransferAmount);
+                    _solutionContainer.TryAddSolution(packSolEnt.Value, excludedSolution);
                     Dirty(packSolEnt.Value);
                 }
             }
