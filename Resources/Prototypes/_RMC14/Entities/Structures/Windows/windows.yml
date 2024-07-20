@@ -7,6 +7,10 @@
     snap:
     - Wall
   components:
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: GlassSmack
   - type: Transform
     anchored: true
   - type: Sprite
@@ -14,8 +18,8 @@
   - type: PlacementReplacement
     key: walls
   - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Metallic
+    damageContainer: StructuralInorganic
+    damageModifierSet: Glass
   - type: Airtight
   - type: RadiationBlocker
     resistance: 2

@@ -16,12 +16,11 @@
   - type: PlacementReplacement
     key: walls
   - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Metallic
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
   - type: StaticPrice
     price: 75
   - type: Physics
-    bodyType: Static
   - type: Fixtures
     fixtures:
       fix1:
