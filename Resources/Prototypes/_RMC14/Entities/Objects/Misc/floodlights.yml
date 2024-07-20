@@ -1,7 +1,7 @@
 - type: entity
-  name: small floodlight
-  id: RMCSmallFloodlight
   parent: BaseStructureDynamic
+  id: RMCSmallFloodlight
+  name: small floodlight
   description: A small bit of light in the darkness.
   components:
   - type: Sprite
@@ -58,9 +58,9 @@
   - type: Appearance
 
 - type: entity
-  name: tall floodlight
-  id: RMCTallFloodlight
   parent: BaseStructure
+  id: RMCTallFloodlight
+  name: tall floodlight
   description: A pillar of light in the darkness.
   placement:
     mode: SnapgridCenter
@@ -121,9 +121,9 @@
   - type: Appearance
 
 - type: entity
-  name: tall broken floodlight
-  id: RMCFloodlightBroken
   parent: BaseStructure
+  id: RMCFloodlightBroken
+  name: tall broken floodlight
   description: A pasted on note says 'To fix, unscrew the panel, crowbar out the damaged assembly, weld it fixed, add 2 cable, then close the panel.'
   components:
   - type: Sprite
@@ -155,9 +155,9 @@
 # LZ Floodlights
 
 - type: entity
-  name: LZ floodlight
-  id: RMCLZFloodlight
   parent: BaseStructure
+  id: RMCLZFloodlight
+  name: LZ floodlight
   description: An indestructible bit of light in the darkness. Never seems to run out of power.
   placement:
     mode: SnapgridCenter
