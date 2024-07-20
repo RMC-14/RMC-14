@@ -18,3 +18,19 @@
     - NotekeeperCartridge
     - NewsReaderCartridge
     - LogProbeCartridge
+  # Component is a copy of the component for BasePDA in Resources/Prototypes/Entities/Objects/Devices/pda.yml
+  - type: UserInterface
+    interfaces:
+      enum.PdaUiKey.Key:
+        type: PdaBoundUserInterface
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+      enum.RingerUiKey.Key:
+        type: RingerBoundUserInterface
+      enum.InstrumentUiKey.Key:
+        type: InstrumentBoundUserInterface
+      enum.HealthAnalyzerUiKey.Key:
+        type: HealthAnalyzerBoundUserInterface
+      # RMC addition: RMC health scanner.
+      enum.HealthScannerUIKey.Key:
+        type: HealthScannerBoundUserInterface
