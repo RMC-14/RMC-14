@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent: CMBaseCartridgeRifle
-  id: CMCartridgeSentry10x28mm
-  name: cartridge (10x28mm)
+  id: CMCartridgeSentry10x50mm
+  name: cartridge (10x50mm)
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
@@ -9,4 +9,24 @@
     - state: base
       map: ["enum.AmmoVisualLayers.Base"]
   - type: CartridgeAmmo
-    proto: CMBulletSentry10x28mm
+    proto: CMBulletSentry10x50mm
+
+- type: entity
+  parent: BaseBullet
+  id: CMBulletSentry10x50mm
+  name: bullet (10x50mm)
+  noSpawn: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    layers:
+    - state: bullet
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+  - type: CMArmorPiercing
+    amount: 35
+  - type: DeleteXenoResinOnHit
+

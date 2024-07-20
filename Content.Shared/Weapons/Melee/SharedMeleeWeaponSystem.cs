@@ -67,7 +67,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     {
         base.Initialize();
 
-        Configuration.OnValueChanged(CMCVars.CMMaxHeavyAttackTargets, v => MaxTargets = v, true);
+        Configuration.OnValueChanged(RMCCVars.CMMaxHeavyAttackTargets, v => MaxTargets = v, true);
 
         SubscribeLocalEvent<MeleeWeaponComponent, HandSelectedEvent>(OnMeleeSelected);
         SubscribeLocalEvent<MeleeWeaponComponent, ShotAttemptedEvent>(OnMeleeShotAttempted);
@@ -389,7 +389,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         Dirty(weaponUid, weapon);
 
         // Do this AFTER attack so it doesn't spam every tick
-        var ev = new AttemptMeleeEvent();
+        var ev = new AttemptMeleeEvent(user);
         RaiseLocalEvent(weaponUid, ref ev);
 
         if (ev.Cancelled)

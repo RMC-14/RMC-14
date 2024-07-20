@@ -316,6 +316,25 @@
   conditions:
     - !type:TileNotBlocked
 
+- type: construction
+  parent: RMC
+  name: campfire
+  id: RMCCampfire
+  graph: RMCCampfire
+  startNode: start
+  targetNode: Campfire
+  category: construction-category-cm-structures
+  description: A nice and cozy campfire for getting all your friends together.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: False
+  canBuildInImpassable: false
+  icon:
+    sprite: _RMC14/Structures/campfire.rsi
+    state: campfire
+  conditions:
+    - !type:TileNotBlocked
+
 # Other
 - type: construction
   parent: RMC

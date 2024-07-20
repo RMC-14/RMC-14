@@ -37,8 +37,8 @@
   components:
   - type: XenoSpawnPoint
   - type: Sprite
-    sprite: Markers/jobs.rsi
-    state: green
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: xeno_spawn
 
 - type: entity
   parent: MarkerBase
@@ -48,5 +48,5 @@
   components:
   - type: XenoLeaderSpawnPoint
   - type: Sprite
-    sprite: Markers/jobs.rsi
-    state: green
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: queen_spawn

@@ -14,8 +14,8 @@ public sealed partial class NightVisionItemComponent : Component
     public EntityUid? Action;
 
     [DataField, AutoNetworkedField]
-    public bool Activated;
+    public EntityUid? User;
 
     [DataField, AutoNetworkedField]
-    public EntityUid? User;
+    public bool Toggleable = true;
 }

@@ -1,5 +1,6 @@
 ﻿- type: entity
   parent: BaseStructure
+  abstract: true
   id: RMCBaseTurret
   name: turret
   components:
@@ -43,11 +44,11 @@
   # TODO: Power ammo provider?
   - type: BallisticAmmoProvider
     cycleable: false
-    proto: CMCartridgeSentry10x28mm
+    proto: CMCartridgeSentry10x50mm
     capacity: 99999
   - type: HTN
     rootTask:
-      task: TurretCompound
+      task: RMCTurretCompound
     blackboard:
       RotateSpeed: !type:Single
         3.141
@@ -62,6 +63,7 @@
   - type: NoRotateOnInteract
   - type: NoRotateOnMove
   - type: GunIFF
+    intrinsic: true
 
 - type: entity
   parent: RMCBaseTurret
@@ -72,6 +74,55 @@
   - type: NpcFactionMember
     factions:
     - UNMC
-  - type: TimedDespawn
-    lifetime: 1200
+  - type: TimedDespawnOnLanding
   - type: MarineIFF
+
+- type: htnCompound
+  id: RMCTurretCompound
+  branches:
+  - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:UtilityOperator
+        proto: RMCNearbyGunTargets
+
+    - !type:HTNPrimitiveTask
+      preconditions:
+      - !type:KeyExistsPrecondition
+        key: Target
+      - !type:TargetInRangePrecondition
+        targetKey: Target
+        # TODO: Non-scuffed
+        rangeKey: RangedRange
+      - !type:TargetInLOSPrecondition
+        targetKey: Target
+        rangeKey: RangedRange
+      operator: !type:GunOperator
+        targetKey: Target
+        requireLOS: true
+      services:
+      - !type:UtilityService
+        id: RangedService
+        proto: RMCNearbyGunTargets
+        key: Target
+
+  - tasks:
+    - !type:HTNCompoundTask
+      task: IdleSpinCompound
+
+- type: utilityQuery
+  id: RMCNearbyGunTargets
+  query:
+  - !type:NearbyHostilesQuery
+  considerations:
+  - !type:TargetIsNotDeadCon
+    curve: !type:BoolCurve
+  - !type:TargetDistanceCon
+    curve: !type:PresetCurve
+      preset: TargetDistance
+  - !type:TargetHealthCon
+    curve: !type:PresetCurve
+      preset: TargetHealth
+  - !type:TargetAccessibleCon
+    curve: !type:BoolCurve
+  - !type:TargetInLOSOrCurrentCon
+    curve: !type:BoolCurve
