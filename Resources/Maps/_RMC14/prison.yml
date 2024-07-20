@@ -5528,7 +5528,6 @@ entities:
           - 0
         chunkSize: 4
     - type: GasTileOverlay
-    - type: LoadedMap
     - type: RadiationGridResistance
 - proto: CableTerminal
   entities:
@@ -32310,6 +32309,18 @@ entities:
     - type: Transform
       pos: 64.5,-52.5
       parent: 1
+- proto: RMCBaseTurret
+  entities:
+  - uid: 271
+    components:
+    - type: Transform
+      pos: 36.5,-54.5
+      parent: 1
+  - uid: 272
+    components:
+    - type: Transform
+      pos: 31.5,-54.5
+      parent: 1
 - proto: RMCBedAlt
   entities:
   - uid: 16039
@@ -53293,6 +53304,78 @@ entities:
     components:
     - type: Transform
       pos: 92.5,-0.5
+      parent: 1
+- proto: RMCTurretGaussSpaceborne
+  entities:
+  - uid: 223
+    components:
+    - type: Transform
+      pos: 103.5,9.5
+      parent: 1
+  - uid: 224
+    components:
+    - type: Transform
+      pos: 117.5,9.5
+      parent: 1
+  - uid: 225
+    components:
+    - type: Transform
+      pos: 42.5,-73.5
+      parent: 1
+  - uid: 226
+    components:
+    - type: Transform
+      pos: 28.5,-73.5
+      parent: 1
+  - uid: 227
+    components:
+    - type: Transform
+      pos: 117.5,21.5
+      parent: 1
+  - uid: 228
+    components:
+    - type: Transform
+      pos: 103.5,-2.5
+      parent: 1
+  - uid: 229
+    components:
+    - type: Transform
+      pos: 117.5,-2.5
+      parent: 1
+  - uid: 230
+    components:
+    - type: Transform
+      pos: 103.5,21.5
+      parent: 1
+  - uid: 267
+    components:
+    - type: Transform
+      pos: 42.5,-85.5
+      parent: 1
+  - uid: 268
+    components:
+    - type: Transform
+      pos: 28.5,-85.5
+      parent: 1
+  - uid: 269
+    components:
+    - type: Transform
+      pos: 28.5,-61.5
+      parent: 1
+  - uid: 270
+    components:
+    - type: Transform
+      pos: 42.5,-61.5
+      parent: 1
+  - uid: 273
+    components:
+    - type: Transform
+      pos: 90.5,0.5
+      parent: 1
+  - uid: 274
+    components:
+    - type: Transform
+      pos: 90.5,8.5
       parent: 1
 - proto: RMCWallBoneResin
   entities:
