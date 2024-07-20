@@ -35,7 +35,7 @@ public sealed class CMExplosionSystem : SharedCMExplosionSystem
         var popup = Loc.GetString(ent.Comp.UserPopup, ("used", ent.Owner));
         _popup.PopupEntity(popup, user, user, PopupType.LargeCaution);
 
-        popup = Loc.GetString(ent.Comp.UserPopup, ("user", user), ("used", ent.Owner));
+        popup = Loc.GetString(ent.Comp.OthersPopup, ("user", user), ("used", ent.Owner));
         _popup.PopupEntity(popup, user, Filter.PvsExcept(user), true, ent.Comp.PopupType);
 
         var gender = CompOrNull<HumanoidAppearanceComponent>(user)?.Sex ?? Sex.Unsexed;

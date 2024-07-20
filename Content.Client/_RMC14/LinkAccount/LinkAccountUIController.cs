@@ -80,7 +80,7 @@ public sealed class LinkAccountUIController : UIController, IOnSystemChanged<Lin
                 _disableUntil = _timing.RealTime.Add(TimeSpan.FromSeconds(3));
             };
 
-            var messageLink = _config.GetCVar(CMCVars.RMCDiscordAccountLinkingMessageLink);
+            var messageLink = _config.GetCVar(RMCCVars.RMCDiscordAccountLinkingMessageLink);
             if (string.IsNullOrEmpty(messageLink))
             {
                 _window.LinkButton.Visible = false;

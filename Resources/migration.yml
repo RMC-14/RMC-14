@@ -298,7 +298,6 @@ SpawnPointMaintTech: CMSpawnPointMaintTech
 SpawnPointOrdnanceTech: CMSpawnPointOrdnanceTech
 SpawnPointRifleman: CMSpawnPointRifleman
 SpawnPointSeniorEnlistedAdvisor: CMSpawnPointSeniorEnlistedAdvisor
-# SpawnPointSmartGunner: CMSpawnPointSmartGunner
 SpawnPointSquadLeader: CMSpawnPointSquadLeader
 SpawnPointStaffOfficer: CMSpawnPointStaffOfficer
 SpawnPointWeaponsSpecialist: CMSpawnPointWeaponsSpecialist
@@ -521,3 +520,13 @@ CMDispenserChem : RMCDispenserChem
 
 # 2024-07-10
 CMLamp: RMCLamp
+
+# 2024-07-14
+CMArmorM56CombatHarness: CMArmorSmartGunCombatHarness
+
+# 2024-07-15
+CMSurgicalCaseFilledAllTools: RMCSurgicalTray
+
+# 2024-07-16
+CMWhistle: RMCWhistle
+RCMTrenchWhistle: RMCWhistle

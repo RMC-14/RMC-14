@@ -169,3 +169,6 @@
   - type: NpcFactionMember
     factions:
     - UNMC
+  - type: RMCNightVisionVisible
+  - type: StunShakeable
+  - type: StunShakeableUser

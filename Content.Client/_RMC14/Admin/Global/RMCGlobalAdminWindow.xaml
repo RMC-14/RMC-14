@@ -1,0 +1,29 @@
+﻿<controls:RMCGlobalAdminWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Admin.Global"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    MinSize="600 500"
+    Title="RMC Admin UI">
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+        <TabContainer Name="Tabs" HorizontalExpand="True" VerticalExpand="True">
+            <ScrollContainer Name="CVarsTab" Access="Public" HScrollEnabled="False" VScrollEnabled="True">
+                <BoxContainer Name="CVars" Access="Public" Orientation="Vertical"
+                              HorizontalExpand="True" VerticalExpand="True" />
+            </ScrollContainer>
+            <BoxContainer Name="MarinesTab" Access="Public" Orientation="Vertical">
+                <BoxContainer Orientation="Vertical">
+                    <Label Text="Squads" />
+                    <cc:HSeparator Color="#4972A1" />
+                    <BoxContainer Name="Squads" Access="Public" Orientation="Vertical" />
+                    <cc:HSeparator Color="#4972A1" />
+                    <Label Name="MarinesLabel" Access="Public" />
+                </BoxContainer>
+            </BoxContainer>
+            <BoxContainer Name="XenosTab" Access="Public" Orientation="Vertical">
+                <BoxContainer Name="XenoTiers" Access="Public" Orientation="Vertical" />
+                <Label Name="XenosLabel" Access="Public" />
+            </BoxContainer>
+        </TabContainer>
+        <Button Name="RefreshButton" Access="Public" Text="Refresh" HorizontalExpand="True" />
+    </BoxContainer>
+</controls:RMCGlobalAdminWindow>
