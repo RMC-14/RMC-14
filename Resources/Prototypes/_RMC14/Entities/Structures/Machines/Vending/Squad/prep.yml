@@ -64,8 +64,10 @@
         amount: 10
       - id: RMCAttachmentRailFlashlight
         amount: 25
+        recommended: true
       - id: RMCAttachmentFlashlightGrip
         amount: 10
+        recommended: true
       - id: RMCAttachmentU1GrenadeLauncher
         amount: 25
     - name: Utilities
