@@ -14,11 +14,19 @@ public readonly record struct Squad(EntProtoId Id, bool Exists, int Members);
 public readonly record struct Xeno(EntProtoId Proto);
 
 [Serializable, NetSerializable]
-public sealed class RMCAdminEuiState(List<Hive> hives, List<Squad> squads, List<Xeno> xenos) : EuiStateBase
+public sealed class RMCAdminEuiState(
+    List<Hive> hives,
+    List<Squad> squads,
+    List<Xeno> xenos,
+    int marines,
+    Dictionary<string, float> marinesPerXeno
+) : EuiStateBase
 {
     public readonly List<Hive> Hives = hives;
     public readonly List<Squad> Squads = squads;
     public readonly List<Xeno> Xenos = xenos;
+    public readonly int Marines = marines;
+    public readonly Dictionary<string, float> MarinesPerXeno = marinesPerXeno;
 }
 
 [Serializable, NetSerializable]

@@ -95,7 +95,7 @@ public sealed class SquadSystem : EntitySystem
         return true;
     }
 
-    public int GetSquadMembers(Entity<SquadTeamComponent> team)
+    public int GetSquadMembersAlive(Entity<SquadTeamComponent> team)
     {
         var count = 0;
         var members = EntityQueryEnumerator<SquadMemberComponent>();

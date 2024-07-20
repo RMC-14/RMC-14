@@ -30,6 +30,43 @@ public sealed class RMCGlobalAdminEui : BaseEui
         TabContainer.SetTabTitle(_window.MarinesTab, "Marines");
         TabContainer.SetTabTitle(_window.XenosTab, "Xenos");
 
+        _window.RefreshButton.OnPressed += OnRefresh;
+        _window.OpenCentered();
+    }
+
+    public override void HandleState(EuiStateBase state)
+    {
+        if (state is not RMCAdminEuiState s)
+            return;
+
+        _window.CVars.DisposeAllChildren();
+        _window.Squads.DisposeAllChildren();
+        _window.XenoTiers.DisposeAllChildren();
+
+        var marinesPerXeno = new BoxContainer
+        {
+            Orientation = LayoutOrientation.Vertical,
+            Children =
+            {
+                new Label { Text = "Marines per xeno " },
+            },
+        };
+
+        _window.CVars.AddChild(marinesPerXeno);
+
+        foreach (var (map, ratio) in s.MarinesPerXeno)
+        {
+            marinesPerXeno.AddChild(new BoxContainer
+            {
+                Orientation = LayoutOrientation.Vertical,
+                Children =
+                {
+                    new Label { Text = map },
+                    new Label { Text = $"{ratio:F2}" },
+                },
+            });
+        }
+
         foreach (var cVar in _config.GetRegisteredCVars())
         {
             if (!cVar.StartsWith("rmc.") || cVar.Contains("play_voicelines_"))
@@ -40,28 +77,16 @@ public sealed class RMCGlobalAdminEui : BaseEui
                 Orientation = LayoutOrientation.Vertical,
                 Children =
                 {
-                    new Label { Text = cVar, MinWidth = 50 },
-                    new Label { Text = _config.GetCVar(cVar).ToString() },
                     new HSeparator
                     {
                         Color = Color.FromHex("#4972A1"),
                         Margin = new Thickness(0, 10),
                     },
+                    new Label { Text = cVar, MinWidth = 50 },
+                    new Label { Text = _config.GetCVar(cVar).ToString() },
                 },
             });
         }
-
-        _window.RefreshButton.OnPressed += OnRefresh;
-        _window.OpenCentered();
-    }
-
-    public override void HandleState(EuiStateBase state)
-    {
-        if (state is not RMCAdminEuiState s)
-            return;
-
-        _window.Squads.DisposeAllChildren();
-        _window.XenosTab.DisposeAllChildren();
 
         foreach (var squad in s.Squads)
         {
@@ -94,6 +119,8 @@ public sealed class RMCGlobalAdminEui : BaseEui
             _window.Squads.AddChild(squadRow);
         }
 
+        _window.MarinesLabel.Text = $"Total marines alive: {s.Marines}";
+
         var xenoTiers = new Dictionary<int, int>();
         foreach (var entity in _prototypes.EnumeratePrototypes<EntityPrototype>())
         {
@@ -114,13 +141,15 @@ public sealed class RMCGlobalAdminEui : BaseEui
 
         foreach (var (tier, amount) in xenoTiers.OrderBy(x => x.Key))
         {
-            _window.XenosTab.AddChild(new Label { Text = $"Tier {tier}: {amount} xenos" });
-            _window.XenosTab.AddChild(new HSeparator
+            _window.XenoTiers.AddChild(new Label { Text = $"Tier {tier}: {amount} xenos" });
+            _window.XenoTiers.AddChild(new HSeparator
             {
                 Color = Color.FromHex("#4972A1"),
                 Margin = new Thickness(0, 10),
             });
         }
+
+        _window.XenosLabel.Text = $"Total xenonids alive: {s.Xenos.Count}";
     }
 
     private void OnRefresh(ButtonEventArgs args)

@@ -1,4 +1,5 @@
-﻿using Content.Server._RMC14.Rules;
+﻿using System.Linq;
+using Content.Server._RMC14.Rules;
 using Content.Server.Administration;
 using Content.Server.Administration.Managers;
 using Content.Server.EUI;
@@ -11,6 +12,7 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Administration;
 using Content.Shared.Eui;
 using Content.Shared.Mobs.Systems;
+using Robust.Shared.Player;
 using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Admin;
@@ -72,7 +74,7 @@ public sealed class RMCAdminEui : BaseEui
             if (squadSys.TryGetSquad(squadProto, out var squad))
             {
                 exists = true;
-                members = squadSys.GetSquadMembers(squad);
+                members = squadSys.GetSquadMembersAlive(squad);
             }
 
             squads.Add(new Squad(squadProto, exists, members));
@@ -92,7 +94,19 @@ public sealed class RMCAdminEui : BaseEui
             xenos.Add(new Xeno(proto));
         }
 
-        return new RMCAdminEuiState(hives, squads, xenos);
+        var marines = 0;
+        var marinesQuery = entities.EntityQueryEnumerator<MarineComponent, ActorComponent>();
+        while (marinesQuery.MoveNext(out var uid, out _, out _))
+        {
+            if (mobState.IsDead(uid))
+                continue;
+
+            marines++;
+        }
+
+        var marinesPerXeno = entities.System<CMDistressSignalRuleSystem>().MarinesPerXeno.ToDictionary();
+
+        return new RMCAdminEuiState(hives, squads, xenos, marines, marinesPerXeno);
     }
 
     public override EuiStateBase GetNewState()
