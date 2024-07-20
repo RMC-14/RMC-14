@@ -19,8 +19,8 @@
 - type: entity
   parent: CMBaseWindow
   id: CMWindowShiva
-  name: window
-  description: A glass window inside a wall frame.
+  name: poly-kevlon framed window
+  description: A semi-transparent (not entirely opaque) pane of material set into a poly-kevlon frame. Very smashable.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Windows/shiva_window.rsi
