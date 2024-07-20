@@ -3361,5 +3361,13 @@
   id: 406
   time: '2024-07-20T03:35:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3106
+- author: Whisper
+  changes:
+  - message: 'Rules: Xenonids are now allowed to sneak onto the shuttle at any point
+      in the round, at their own risk.'
+    type: Tweak
+  id: 407
+  time: '2024-07-20T03:41:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3158
 Name: RMC14
 Order: -1
