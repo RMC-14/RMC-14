@@ -86,6 +86,7 @@
   id: RMCWindowKutjevoReinforced
   name: reinforced window
   description: A glass window. Cross bars are visible. Might take a few good hits to shatter it.
+  components:
   - type: Sprite
     sprite: _RMC14/Structures/Windows/kutjevo_rwindow.rsi
     state: kutjevo_rwindow0

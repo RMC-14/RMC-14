@@ -38,7 +38,7 @@
       completed:
       - !type:SnapToGrid
         southRotation: true
-        - !type:SpawnPrototype
+      - !type:SpawnPrototype
         prototype: CMSheetGlassReinforced1
         amount: 2
       conditions:

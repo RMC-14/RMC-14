@@ -86,6 +86,7 @@
   id: CMWindowSolarisReinforced
   name: reinforced window
   description: A glass window. The inside is reinforced with a few tempered matrix rods along the base. It looks rather strong. Might take a few good hits to shatter it.
+  components:
   - type: Sprite
     sprite: _RMC14/Structures/Windows/solaris_rwindow.rsi
     state: solaris_rwindow0

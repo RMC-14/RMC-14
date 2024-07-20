@@ -227,8 +227,10 @@
   description: A glass window with a special rod matrix inside a wall frame. It looks rather strong. Might take a few good hits to shatter it.
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Windows/colony_rwindow.rsi
     state: col_rwindow0
   - type: Icon
+    sprite: _RMC14/Structures/Windows/colony_rwindow.rsi
     state: col_rwindow0
   - type: IconSmooth
     key: walls
