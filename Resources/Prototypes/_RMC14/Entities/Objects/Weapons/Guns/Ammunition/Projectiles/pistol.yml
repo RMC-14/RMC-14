@@ -57,7 +57,7 @@
 
 - type: entity
   parent: CMBulletBase
-  id: CMBulletRevolver44Marksman
+  id: RMCBulletRevolver44Marksman
   name: bullet (.44 Marksman)
   components:
   - type: Projectile

@@ -32,7 +32,7 @@
       - Flare
 #      - # TODO RMC14 shotgun shell handfuls
       - CMMagazinePistol
-      - RCMMagazineRevolver
+      - RMCMagazineRevolver
       - CMMagazineRifle
       - CMMagazineSmg
       - CMMagazineSniper
@@ -112,7 +112,7 @@
       - Flashlight
       - Sidearm
       - CMMagazinePistol
-      - RCMMagazineRevolver
+      - RMCMagazineRevolver
       - PowerCell
 #      - # TODO RMC14 handful of shotgun shells
 #      - # TODO nailgun, circuit board

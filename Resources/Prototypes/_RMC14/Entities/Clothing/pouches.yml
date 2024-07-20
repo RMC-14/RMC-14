@@ -302,7 +302,7 @@
     whitelist:
       tags:
       - CMMagazinePistol
-      - RCMMagazineRevolver
+      - RMCMagazineRevolver
       - CMMagazineRifle
       - CMMagazineSmg
       - CMMagazineSniper
@@ -335,7 +335,7 @@
     whitelist:
       tags:
       - CMMagazinePistol
-      - RCMMagazineRevolver
+      - RMCMagazineRevolver
 
 - type: entity
   parent: CMPouchMagazinePistol
