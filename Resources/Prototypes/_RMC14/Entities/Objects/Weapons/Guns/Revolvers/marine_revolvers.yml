@@ -1,7 +1,7 @@
 - type: entity
   parent: [BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder]
   abstract: true
-  id: RCMWeaponRevolverBase
+  id: RMCWeaponRevolverBase
   components:
   - type: AmmoCounter
   - type: Sprite
@@ -38,10 +38,10 @@
   - type: RevolverAmmoProvider
     whitelist:
       tags:
-        - RCMMagazineRevolver
-        - RCMSpeedLoaderM44
-        - RCMCartridgeRevolver44
-    proto: RCMCartridgeRevolver44
+        - RMCMagazineRevolver
+        - RMCSpeedLoaderM44
+        - RMCCartridgeRevolver44
+    proto: RMCCartridgeRevolver44
     capacity: 6
     chambers: [ True, True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null, null ]
@@ -56,8 +56,8 @@
     angleIncrease: 5
 
 - type: entity
-  parent: RCMWeaponRevolverBase
-  id: RCMWeaponRevolverM44
+  parent: RMCWeaponRevolverBase
+  id: RMCWeaponRevolverM44
   name: M44 combat revolver
   description: A bulky revolver, occasionally carried by assault troops and officers in the Marine Corps, as well as civilian law enforcement. Fires .44 Magnum rounds.
   components:
@@ -68,7 +68,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m44.rsi
   - type: RevolverAmmoProvider
-    proto: RCMCartridgeRevolver44
+    proto: RMCCartridgeRevolver44
     capacity: 7
     chambers: [ True, True, True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null, null, null ]

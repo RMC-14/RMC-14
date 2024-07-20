@@ -29,7 +29,7 @@
       entries:
       - id: CMWeaponPistolM77
         amount: 50
-      - id: RCMWeaponRevolverM44
+      - id: RMCWeaponRevolverM44
         amount: 50
       - id: CMWeaponPistolM1984
         amount: 50
@@ -275,7 +275,7 @@
         amount: 100
       - id: CMMagazineSMGM63
         amount: 100
-      - id: RCMBaseSpeedLoader44
+      - id: RMCBaseSpeedLoader44
         amount: 80
       - id: CMMagazinePistolM1984
         amount: 102
@@ -305,7 +305,7 @@
       #  amount: 4
       #- id: M44 Heavy Speed Loader (.44)
       #  amount: 10
-      - id: RCMSpeedLoader44Marksman
+      - id: RMCSpeedLoader44Marksman
         amount: 6
       #- id: M4A3 HP Magazine (9mm)
       #  amount: 2
