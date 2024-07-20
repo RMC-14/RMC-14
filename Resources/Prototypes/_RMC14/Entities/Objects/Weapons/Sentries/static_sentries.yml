@@ -1,5 +1,6 @@
 ﻿- type: entity
   parent: BaseStructure
+  abstract: true
   id: RMCBaseTurret
   name: turret
   components:
