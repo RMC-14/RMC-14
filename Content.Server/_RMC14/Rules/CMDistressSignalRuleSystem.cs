@@ -665,7 +665,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (xenosAlive && !marinesAlive)
             {
                 distress.Result = DistressSignalRuleResult.MajorXenoVictory;
-                _roundEnd.EndRound();
+                EndRound(distress);
                 continue;
             }
 
@@ -675,13 +675,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (distress.Hijack)
                 {
                     distress.Result = DistressSignalRuleResult.MinorXenoVictory;
-                    _roundEnd.EndRound();
+                    EndRound(distress);
                     continue;
                 }
                 else
                 {
                     distress.Result = DistressSignalRuleResult.MajorMarineVictory;
-                    _roundEnd.EndRound();
+                    EndRound(distress);
                     continue;
                 }
             }
@@ -689,7 +689,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (!xenosAlive && !marinesAlive)
             {
                 distress.Result = DistressSignalRuleResult.AllDied;
-                _roundEnd.EndRound();
+                EndRound(distress);
                 continue;
             }
 
@@ -711,12 +711,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (_xenoEvolution.HasLiving<XenoComponent>(4))
                 {
                     distress.Result = DistressSignalRuleResult.MinorMarineVictory;
-                    _roundEnd.EndRound();
+                    EndRound(distress);
                 }
                 else
                 {
                     distress.Result = DistressSignalRuleResult.MajorMarineVictory;
-                    _roundEnd.EndRound();
+                    EndRound(distress);
                 }
             }
         }
@@ -922,14 +922,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             }
 
             if (!anyDropships)
-            {
-                foreach (var (cvar, value) in component.OriginalCVarValues)
-                {
-                    _config.SetCVar(cvar, value);
-                }
-
-                component.ResetCVars = true;
-            }
+                ResetCVars(component);
         }
 
         if (Timing.CurTime >= component.NextCheck)
@@ -949,12 +942,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (_xenoEvolution.HasLiving<XenoComponent>(4))
             {
                 component.Result = DistressSignalRuleResult.MinorMarineVictory;
-                _roundEnd.EndRound();
+                EndRound(component);
             }
             else
             {
                 component.Result = DistressSignalRuleResult.MajorMarineVictory;
-                _roundEnd.EndRound();
+                EndRound(component);
             }
         }
     }
@@ -1025,6 +1018,22 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             name += $"-{_random.Pick(_operationSuffixes)}";
 
         return name.Trim();
+    }
+
+    private void ResetCVars(CMDistressSignalRuleComponent comp)
+    {
+        foreach (var (cvar, value) in comp.OriginalCVarValues)
+        {
+            _config.SetCVar(cvar, value);
+        }
+
+        comp.ResetCVars = true;
+    }
+
+    private void EndRound(CMDistressSignalRuleComponent comp)
+    {
+        ResetCVars(comp);
+        _roundEnd.EndRound();
     }
 }
 
