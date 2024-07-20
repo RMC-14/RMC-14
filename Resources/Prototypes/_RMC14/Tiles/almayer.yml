@@ -3,7 +3,7 @@
   id: CMTileBase
   baseTurf: Plating
   isSubfloor: false
-  canCrowbar: true
+  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepFloor
   itemDrop: CMTileItemSteel
@@ -21,6 +21,18 @@
   name: tiles-cm-default-no-weeds
   sprite: /Textures/_RMC14/Tiles/almayer/default.png
   weedsSpreadable: false
+  baseTurf: ""
+  deconstructTools: [ ]
+
+- type: tile
+  parent: CMFloorSteelNoWeeds
+  id: RMCFloorUnderplatingNoWeeds
+  name: tiles-rmc-underplating-no-weeds
+  sprite: /Textures/_RMC14/Tiles/shiva/plating.png
+  weedsSpreadable: false
+  baseTurf: ""
+  deconstructTools: [ ]
+  isSubfloor: true
 
 - type: tile
   parent: CMTileBase

@@ -64,8 +64,10 @@
         amount: 10
       - id: RMCAttachmentRailFlashlight
         amount: 25
+        recommended: true
       - id: RMCAttachmentFlashlightGrip
         amount: 10
+        recommended: true
       - id: RMCAttachmentU1GrenadeLauncher
         amount: 25
     - name: Utilities
@@ -237,7 +239,7 @@
 #      - id: Rebreather
 #        amount: 10
     - name: Miscellaneous
-      entries: [ ]
+      entries:
 #      - id: Ballistic goggles
 #        amount: 10
 #      - id: M1A1 Ballistic goggles
@@ -260,8 +262,8 @@
 #        amount: 15
 #      - id: Marine Shoulder Patch
 #        amount: 15
-#      - id: Bedroll
-#        amount: 20
+      - id: BedrollFolded
+        amount: 20
     - name: Optics
       entries: [ ]
 #      - id: Advanced Medical Optic (CORPSMAN ONLY)

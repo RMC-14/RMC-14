@@ -80,5 +80,7 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 5.55
     baseSprintSpeed: 20
+  - type: TimedDespawn 
+    lifetime: 120 #perfect for admins to spawn in on round-end, or, for the more daring admemes, to give xenos a chance to regroup from an insane marine stomp
 #  - type: RMCXenoDamageVisuals # TODO RMC14
 #    prefix: runner
