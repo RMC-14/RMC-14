@@ -22,23 +22,38 @@
     {
       "name": "col_rframe4"
     },
-	{
+    {
       "name": "col_rframe5"
     },
-	{
+    {
       "name": "col_rframe6"
+    },
+    {
+      "name": "col_rframe7"
     },
     {
       "name": "col_rframe8"
     },
-	{
+    {
       "name": "col_rframe9"
     },
-	{
+    {
       "name": "col_rframe10"
+    },
+    {
+      "name": "col_rframe11"
     },
 	{
       "name": "col_rframe12"
+    },
+    {
+      "name": "col_rframe13"
+    },
+    {
+      "name": "col_rframe14"
+    },
+    {
+      "name": "col_rframe15"
     }
   ]
 }
