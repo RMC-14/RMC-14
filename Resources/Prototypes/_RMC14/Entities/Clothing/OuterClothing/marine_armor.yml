@@ -74,6 +74,18 @@
       - Flashlight
       - MRE
       - Grenade
+      - CMAutoInjector
+      - Cigarette
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - Syringe
+      - Hypospray
+      - CMOintment
+      - Brutepack
+      - CMBurnKit
+      - CMTraumaKit
+      - Bottle
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -95,6 +107,9 @@
       - CMMagazineSniper
       - CMMagazinePistol
       - MRE
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
   - type: RMCNameItemOnVend
     item: Armor
   - type: RMCBulkyArmor
@@ -341,10 +356,23 @@
       - CMMagazineSmg
       - CMMagazineSniper
       - CMMagazinePistol
-      - Flashlight
+      - Sidearm
       - Knife
+      - Flashlight
       - MRE
       - Grenade
+      - CMAutoInjector
+      - Cigarette
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - Syringe
+      - Hypospray
+      - CMOintment
+      - Brutepack
+      - CMBurnKit
+      - CMTraumaKit
+      - Bottle
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
@@ -378,4 +406,24 @@
 #      - # TODO RMC14 motion detector, walkman
       tags:
       - Handcuffs
+      - CMMagazineRifle # same as marine armor
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - Sidearm
+      - Knife
+      - Flashlight
       - Grenade
+      - MRE
+      - CMAutoInjector
+      - Cigarette
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - Syringe
+      - Hypospray
+      - CMOintment
+      - Brutepack
+      - CMBurnKit
+      - CMTraumaKit
+      - Bottle
