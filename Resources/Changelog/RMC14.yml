@@ -3392,5 +3392,15 @@
   id: 410
   time: '2024-07-20T06:16:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3161
+- author: DrSmugleaf
+  changes:
+  - message: Fixed being able to attach magazine boxes to yourself by clicking some
+      inventory items.
+    type: Fix
+  - message: Fixed magazine boxes getting placed and stuck inside walls.
+    type: Fix
+  id: 411
+  time: '2024-07-20T07:24:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3165
 Name: RMC14
 Order: -1
