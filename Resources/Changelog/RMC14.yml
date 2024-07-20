@@ -3432,5 +3432,12 @@
   id: 414
   time: '2024-07-20T10:25:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3166
+- author: Vermidia
+  changes:
+  - message: All armors can hold more types of items, mostly different medical items
+    type: Add
+  id: 415
+  time: '2024-07-20T10:26:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3168
 Name: RMC14
 Order: -1
