@@ -3346,5 +3346,12 @@
   id: 404
   time: '2024-07-20T02:50:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3147
+- author: musicmanvr
+  changes:
+  - message: Added bedrolls and campfires for camping in the field.
+    type: Add
+  id: 405
+  time: '2024-07-20T03:19:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3156
 Name: RMC14
 Order: -1
