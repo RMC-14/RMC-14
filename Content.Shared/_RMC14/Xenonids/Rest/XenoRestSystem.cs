@@ -57,10 +57,10 @@ public sealed class XenoRestSystem : EntitySystem
 
     private void OnXenoRestAction(Entity<XenoComponent> xeno, ref XenoRestActionEvent args)
     {
-        var ev = new XenoRestAttemptEvent();
-        RaiseLocalEvent(xeno, ref ev);
+        var attempt = new XenoRestAttemptEvent();
+        RaiseLocalEvent(xeno, ref attempt);
 
-        if (ev.Cancelled)
+        if (attempt.Cancelled)
             return;
 
         args.Handled = true;
@@ -79,6 +79,9 @@ public sealed class XenoRestSystem : EntitySystem
         }
 
         _actionBlocker.UpdateCanMove(xeno);
+
+        var ev = new XenoRestEvent(HasComp<XenoRestingComponent>(xeno));
+        RaiseLocalEvent(xeno, ref ev);
     }
 
     private void OnXenoRestingMeleeHit(Entity<XenoRestingComponent> xeno, ref AttackAttemptEvent args)

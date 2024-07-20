@@ -168,5 +168,8 @@ public sealed class XenoFortifySystem : EntitySystem
         }
 
         Dirty(xeno);
+
+        var ev = new XenoFortifiedEvent(xeno.Comp.Fortified);
+        RaiseLocalEvent(xeno, ref ev);
     }
 }

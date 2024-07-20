@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Weapons.Ranged.Events;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Attachable.Systems;
 
@@ -9,6 +10,7 @@ public sealed class AttachableIFFSystem : EntitySystem
 {
     [Dependency] private readonly AttachableHolderSystem _holder = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -38,7 +40,7 @@ public sealed class AttachableIFFSystem : EntitySystem
 
     private void OnGunAttachableIFFAmmoShot(Entity<GunAttachableIFFComponent> ent, ref AmmoShotEvent args)
     {
-        _gunIFF.GiveAmmoIFF(ent, ref args);
+        _gunIFF.GiveAmmoIFF(ent, ref args, false);
     }
 
     private void UpdateGunIFF(EntityUid gun)
@@ -48,6 +50,9 @@ public sealed class AttachableIFFSystem : EntitySystem
 
         var ev = new AttachableGrantIFFEvent();
         _holder.RelayEvent((gun, holder), ref ev);
+
+        if (_timing.ApplyingState)
+            return;
 
         if (ev.Grants)
             EnsureComp<GunAttachableIFFComponent>(gun);

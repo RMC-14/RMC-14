@@ -2,6 +2,10 @@
 
 namespace Content.Shared._RMC14.Weapons.Ranged.IFF;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(GunIFFSystem))]
-public sealed partial class GunIFFComponent : Component;
+public sealed partial class GunIFFComponent : Component
+{
+    [DataField, AutoNetworkedField]
+    public bool Intrinsic;
+}

@@ -1,0 +1,22 @@
+﻿- type: entity
+  parent: AdminObserver
+  id: RMCAdminObserver
+  noSpawn: true
+  components:
+  - type: Loadout
+    prototypes: [ RMCMobAghostGear ]
+
+- type: startingGear
+  parent: MobAghostGear
+  id: RMCMobAghostGear
+  equipment:
+    back: ClothingBackpackSatchelHolding
+    id: RMCAdminPDA
+  storage:
+    back:
+    - RMCAdminAccessConfigurator
+    - HandheldHealthAnalyzerUnpowered
+    - DoorRemoteAll
+    - AdminHypo
+    - MeleeDebug200
+    - ToolDebug

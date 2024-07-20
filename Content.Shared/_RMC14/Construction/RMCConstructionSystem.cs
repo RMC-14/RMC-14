@@ -95,11 +95,15 @@ public sealed class RMCConstructionSystem : EntitySystem
             args.Cancel();
         }
     }
-
     private void OnUserAnchored(Entity<RMCDropshipBlockedComponent> ent, ref UserAnchoredEvent args)
     {
-        if (TryComp(ent.Owner, out TransformComponent? xform))
-            _transform.Unanchor(ent.Owner, xform);
+        if (!TryComp(ent.Owner, out TransformComponent? xform) ||
+            !HasComp<DropshipComponent>(xform.GridUid))
+        {
+            return;
+        }
+
+        _transform.Unanchor(ent.Owner, xform);
     }
 
     public bool CanConstruct(EntityUid? user)

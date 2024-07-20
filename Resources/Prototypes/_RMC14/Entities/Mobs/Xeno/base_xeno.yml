@@ -1,4 +1,4 @@
-﻿# Xeno AI
+# Xeno AI
 - type: htnCompound
   id: CMXenoCompound
   branches:
@@ -78,6 +78,8 @@
     - Piercing
     - Heat
     - Shock
+  - type: CMDefibrillatorBlocked
+    popup: defibrillator-xeno
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.2
     baseSprintSpeed: 4
@@ -118,6 +120,8 @@
     layers:
     - map: [ "enum.XenoVisualLayers.Base" ]
       state: alive
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
   - type: Physics
     bodyType: KinematicController
   - type: Fixtures
@@ -211,9 +215,12 @@
   - type: XenoAnnounceDeath # TODO RMC14 announce location of death (area)
     message: cm-xeno-death
     color: "#459A62"
+  - type: ExplosionResistance
+    damageCoefficient: 2
   - type: NpcFactionMember
     factions:
     - RMCXeno
+  - type: RMCNightVisionVisible
 
 - type: entity
   abstract: true
@@ -246,7 +253,7 @@
     altDisarm: true
     angle: 60
     soundHit:
-      collection: AlienClaw
+      collection: RCMXenoClaw
     animation: WeaponArcBite
     damage:
       groups:

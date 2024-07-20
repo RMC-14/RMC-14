@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Client._RMC14.Storage;
 using Content.Client.Items.Systems;
 using Content.Shared.Item;
 using Content.Shared.Storage;
@@ -212,6 +213,8 @@ public sealed class ItemGridPiece : Control, IEntityControl
                 handle.DrawTextureRect(markedTexture, new UIBox2(markedPos, markedPos + size));
             }
         }
+
+        _entityManager.System<RMCIconLabelsSystem>().DrawStorage(Entity, UIScale, iconPosition, handle);
     }
 
     protected override bool HasPoint(Vector2 point)

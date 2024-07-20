@@ -29,7 +29,7 @@
       - LauncherCompatibleGrenade
     capacity: 6
     soundInsert:
-      path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
     proto: CMGrenadeHighExplosive
     mayTransfer: True
   - type: OnShootTriggerAmmoTimer

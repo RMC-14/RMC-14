@@ -1,9 +1,0 @@
-- type: vendingMachineInventory
-  id: CMVendorNutri
-  startingInventory:
-    EZNutrientChemistryBottle: 35
-    Left4ZedChemistryBottle: 25
-    RobustHarvestChemistryBottle: 15
-    PestSpray: 20
-    Syringe: 5
-    PlantBag: 5

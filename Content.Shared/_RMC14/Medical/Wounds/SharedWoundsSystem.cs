@@ -53,8 +53,8 @@ public abstract class SharedWoundsSystem : EntitySystem
         SubscribeLocalEvent<WoundTreaterComponent, AfterInteractEvent>(OnWoundTreaterAfterInteract);
         SubscribeLocalEvent<WoundTreaterComponent, TreatWoundDoAfterEvent>(OnWoundTreaterDoAfter);
 
-        Subs.CVar(_config, CMCVars.CMBloodlossMultiplier, v => _bloodlossMultiplier = v, true);
-        Subs.CVar(_config, CMCVars.CMBleedTimeMultiplier, v => _bleedTimeMultiplier = v, true);
+        Subs.CVar(_config, RMCCVars.CMBloodlossMultiplier, v => _bloodlossMultiplier = v, true);
+        Subs.CVar(_config, RMCCVars.CMBleedTimeMultiplier, v => _bleedTimeMultiplier = v, true);
     }
 
     private void OnWoundableDamaged(Entity<WoundableComponent> ent, ref DamageChangedEvent args)

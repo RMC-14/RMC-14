@@ -5,9 +5,9 @@
   components:
   - type: StorageFill
     contents:
-      # - id: CMSurgicalTray # TODO RMC14
+      - id: RMCSurgicalTray
       - id: CMMaskGasMedical
-      - id: CMScrubsColorGreen
+      - id: CMScrubsGreen
       - id: CMBoxSterileMask
       - id: CMBoxLatexGloves
       - id: CMAnestheticTankFilled
