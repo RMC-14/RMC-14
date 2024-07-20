@@ -3369,5 +3369,12 @@
   id: 407
   time: '2024-07-20T03:41:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3158
+- author: DrSmugleaf
+  changes:
+  - message: Fixed being forced to refer to "Solaris admin" as "Solaris high command"
+    type: Fix
+  id: 408
+  time: '2024-07-20T05:42:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3159
 Name: RMC14
 Order: -1
