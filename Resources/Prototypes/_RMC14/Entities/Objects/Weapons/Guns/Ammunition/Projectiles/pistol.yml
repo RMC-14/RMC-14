@@ -63,7 +63,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 55
+        Piercing: 72
   - type: CMArmorPiercing
     amount: 35
 
