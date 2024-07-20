@@ -12,7 +12,6 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Administration;
 using Content.Shared.Eui;
 using Content.Shared.Mobs.Systems;
-using Robust.Shared.Player;
 using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Admin;
@@ -95,8 +94,8 @@ public sealed class RMCAdminEui : BaseEui
         }
 
         var marines = 0;
-        var marinesQuery = entities.EntityQueryEnumerator<MarineComponent, ActorComponent>();
-        while (marinesQuery.MoveNext(out var uid, out _, out _))
+        var marinesQuery = entities.EntityQueryEnumerator<MarineComponent>();
+        while (marinesQuery.MoveNext(out var uid, out _))
         {
             if (mobState.IsDead(uid))
                 continue;
