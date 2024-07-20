@@ -46,13 +46,14 @@ public abstract class SharedBarbedSystem : EntitySystem
         if (!component.IsBarbed && HasComp<BarbedWireComponent>(args.Used))
         {
             var ev = new BarbedDoAfterEvent();
-            var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.WireTime, ev, uid, uid, used: args.Used)
+            var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.WireTime, ev, uid, used: args.Used)
             {
                 BreakOnMove = true,
                 BreakOnDamage = true,
                 NeedHand = true,
                 AttemptFrequency = AttemptFrequency.EveryTick,
                 CancelDuplicate = false,
+                DuplicateCondition = DuplicateConditions.None
             };
             if (_doAfterSystem.TryStartDoAfter(doAfterEventArgs))
             {
