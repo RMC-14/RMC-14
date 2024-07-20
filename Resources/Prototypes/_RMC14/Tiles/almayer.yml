@@ -3,7 +3,7 @@
   id: CMTileBase
   baseTurf: Plating
   isSubfloor: false
-  canCrowbar: true
+  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepFloor
   itemDrop: CMTileItemSteel
@@ -22,7 +22,7 @@
   sprite: /Textures/_RMC14/Tiles/almayer/default.png
   weedsSpreadable: false
   baseTurf: ""
-  canCrowbar: false
+  deconstructTools: [ ]
 
 - type: tile
   parent: CMFloorSteelNoWeeds
@@ -31,7 +31,7 @@
   sprite: /Textures/_RMC14/Tiles/shiva/plating.png
   weedsSpreadable: false
   baseTurf: ""
-  canCrowbar: false
+  deconstructTools: [ ]
   isSubfloor: true
 
 - type: tile
