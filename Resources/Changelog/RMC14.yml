@@ -3446,5 +3446,13 @@
   id: 416
   time: '2024-07-20T10:45:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2949
+- author: musicmanvr
+  changes:
+  - message: Directional windows no longer mess up layering when you press against
+      them.
+    type: Fix
+  id: 417
+  time: '2024-07-20T10:57:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3117
 Name: RMC14
 Order: -1
