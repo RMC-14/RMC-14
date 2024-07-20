@@ -25,6 +25,16 @@
   canCrowbar: false
 
 - type: tile
+  parent: CMFloorSteelNoWeeds
+  id: RMCFloorUnderplatingNoWeeds
+  name: tiles-rmc-underplating-no-weeds
+  sprite: /Textures/_RMC14/Tiles/shiva/plating.png
+  weedsSpreadable: false
+  baseTurf: ""
+  canCrowbar: false
+  isSubfloor: true
+
+- type: tile
   parent: CMTileBase
   id: CMFloorPlate
   name: tiles-cm-plate
