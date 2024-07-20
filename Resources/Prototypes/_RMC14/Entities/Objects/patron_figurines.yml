@@ -278,7 +278,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronLenaMilize
   name: Lena Milize figurine
-  description: ""
+  description: "Nanotrasen's Trademark Bartender: Handler-One."
   components:
   - type: Sprite
     state: lena_milize
