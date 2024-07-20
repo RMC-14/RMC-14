@@ -3454,5 +3454,17 @@
   id: 417
   time: '2024-07-20T10:57:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3117
+- author: DrSmugleaf
+  changes:
+  - message: Fixed explosions making elevator tiles weedable.
+    type: Fix
+  - message: Fixed underplating using the wrong sprite.
+    type: Fix
+  - message: Changed the popup that shows when trying to plant weeds on an invalid
+      tile.
+    type: Tweak
+  id: 418
+  time: '2024-07-20T12:10:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3164
 Name: RMC14
 Order: -1
