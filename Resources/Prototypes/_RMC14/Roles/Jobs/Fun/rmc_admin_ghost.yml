@@ -3,6 +3,7 @@
   id: RMCAdminObserver
   noSpawn: true
   components:
+  - type: Marine
   - type: Loadout
     prototypes: [ RMCMobAghostGear ]
 
@@ -11,8 +12,11 @@
   id: RMCMobAghostGear
   equipment:
     back: ClothingBackpackSatchelHolding
-    id: RMCAdminPDA # RMC-14: Changed from AdminPDA
+    id: RMCAdminPDA
   storage:
     back:
-    # RMC-14: Replaced loadout
     - RMCAdminAccessConfigurator
+    - DoorRemoteAll
+    - AdminHypo
+    - MeleeDebug200
+    - ToolDebug
