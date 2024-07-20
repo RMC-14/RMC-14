@@ -1,10 +1,8 @@
-﻿using System.Linq;
-using Content.Shared._RMC14.Xenonids;
+﻿using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Alert;
 using Content.Shared.Mobs;
-using Content.Shared.Popups;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
@@ -17,8 +15,6 @@ public sealed class TrackerAlertSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
@@ -120,7 +116,7 @@ public sealed class TrackerAlertSystem : EntitySystem
             !_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1,
                 entity => TryComp(entity, out XenoComponent? queenXeno) && queenXeno.Hive == ent.Comp2.Hive))
         {
-            _alerts.ShowAlert(ent, alertId, 0);
+            _alerts.ShowAlert(ent, alertId, 0, showCooldown: false);
             return;
         }
 
@@ -132,7 +128,7 @@ public sealed class TrackerAlertSystem : EntitySystem
         if (alertPrototype.SupportsSeverity &&
             ent.Comp1.AlertSeverity.TryGetValue(ent.Comp1.WorldDirection, out var severity))
         {
-            _alerts.ShowAlert(ent, alertId, severity);
+            _alerts.ShowAlert(ent, alertId, severity, showCooldown: false);
         }
         else
         {
@@ -158,21 +154,18 @@ public sealed class TrackerAlertSystem : EntitySystem
 
     public void OpenSelectUI(EntityUid player)
     {
-        if (!TryComp(player, out XenoComponent? xeno) || !TryComp(xeno.Hive, out HiveComponent? hive))
-            return;
+        var ev = new GetTrackerAlertEntriesEvent();
+        RaiseLocalEvent(player, ref ev);
 
-        if (!_hive.TryGetTrackers((xeno.Hive.Value, hive), out var trackers))
-        {
-            _popup.PopupPredicted("No trackers to open", player, player);
-            return;
-        }
-
-        var entries = trackers.Select(uid =>
-                new TrackerAlertEntry(GetNetEntity(uid), Name(uid), MetaData(uid).EntityPrototype?.ID))
-            .ToList();
         _ui.OpenUi(player, TrackerAlertUIKey.Key, player);
-        _ui.SetUiState(player, TrackerAlertUIKey.Key, new TrackerAlertBuiState(entries));
+        _ui.SetUiState(player, TrackerAlertUIKey.Key, new TrackerAlertBuiState(ev.Entries));
     }
+}
+
+[ByRefEvent]
+public record struct GetTrackerAlertEntriesEvent()
+{
+    public readonly List<TrackerAlertEntry> Entries = [];
 }
 
 [RegisterComponent]

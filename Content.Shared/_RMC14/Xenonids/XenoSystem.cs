@@ -1,9 +1,11 @@
-﻿using Content.Shared._RMC14.CCVar;
+﻿using System.Linq;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Vendors;
+using Content.Shared._RMC14.Waypoint;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -23,6 +25,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.Standing;
 using Content.Shared.UserInterface;
@@ -46,6 +49,8 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private EntityQuery<AffectableByWeedsComponent> _affectableQuery;
     private EntityQuery<DamageableComponent> _damageableQuery;
@@ -85,6 +90,7 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, GetMeleeDamageEvent>(OnXenoGetMeleeDamage);
         SubscribeLocalEvent<XenoComponent, DamageModifyEvent>(OnXenoDamageModify);
         SubscribeLocalEvent<XenoComponent, RefreshMovementSpeedModifiersEvent>(OnXenoRefreshSpeed);
+        SubscribeLocalEvent<XenoComponent, GetTrackerAlertEntriesEvent>(OnGetTrackerAlertEntries);
 
         Subs.CVar(_config, RMCCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
@@ -207,6 +213,21 @@ public sealed class XenoSystem : EntitySystem
         {
             _movementSpeed.RefreshMovementSpeedModifiers(uid, comp);
         }
+    }
+
+    private void OnGetTrackerAlertEntries(Entity<XenoComponent> ent, ref GetTrackerAlertEntriesEvent args)
+    {
+        if (!TryComp(ent.Comp.Hive, out HiveComponent? hive))
+            return;
+
+        if (!_hive.TryGetTrackers((ent.Comp.Hive.Value, hive), out var trackers))
+        {
+            _popup.PopupPredicted("No trackers to open", ent, ent);
+            return;
+        }
+
+        args.Entries.AddRange(trackers.Select(uid =>
+            new TrackerAlertEntry(GetNetEntity(uid), Name(uid), MetaData(uid).EntityPrototype?.ID)));
     }
 
     public void MakeXeno(Entity<XenoComponent?> xeno)
