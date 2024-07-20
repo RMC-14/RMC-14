@@ -17,5 +17,9 @@
             <cc:CommandButton Command="adminlogs" Text="{Loc admin-player-actions-window-admin-logs}"/>
             <cc:CommandButton Command="faxui" Text="{Loc admin-player-actions-window-admin-fax}"/>
         </GridContainer>
+        <cc:HSeparator Color="#4972A1" Margin="0 10" />
+        <GridContainer Columns="3">
+            <cc:CommandButton Command="rmcadminui" Text="{Loc rmc-ui-admin }" />
+        </GridContainer>
     </BoxContainer>
 </Control>

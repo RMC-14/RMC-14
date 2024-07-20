@@ -516,6 +516,6 @@
       - id: CMMaskCoif
         amount: 10
     - name: Miscellaneous
-      entries: [ ]
-      #- id: Bedroll
-      #  amount: 30
+      entries:
+      - id: BedrollFolded
+        amount: 30

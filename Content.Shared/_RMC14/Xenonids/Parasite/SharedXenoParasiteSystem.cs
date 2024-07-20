@@ -303,6 +303,13 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             return false;
         }
 
+        if(_mobState.IsDead(parasite))
+        {
+            if(popup)
+				_popup.PopupClient(Loc.GetString("rmc-xeno-failed-parasite-dead"), victim, user, PopupType.MediumCaution);
+
+            return false;
+		}
         return true;
     }
 

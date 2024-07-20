@@ -6,7 +6,6 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Eui;
 using Content.Shared.Humanoid.Prototypes;
 using JetBrains.Annotations;
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 using static Robust.Client.UserInterface.Controls.ItemList;
@@ -154,27 +153,23 @@ public sealed class RMCAdminEui : BaseEui
 
             squadRow.AddToSquadButton.OnPressed += _ => SendMessage(new RMCAdminAddToSquadMsg(squad.Id));
 
-            var button = squadRow.CreateButton;
-            if (squad.Exists)
-            {
-                squadRow.Members.Text = Loc.GetString("rmc-ui-members", ("members", squad.Members));
-                button.Disabled = true;
-            }
-            else
-            {
-                button.OnPressed += _ => SendMessage(new RMCAdminCreateSquadMsg(squad.Id));
-            }
-
+            var squadName = string.Empty;
+            var color = Color.White;
             if (_prototypes.TryIndex(squad.Id, out var squadPrototype))
             {
-                button.Text = squadPrototype.Name;
+                squadName = squadPrototype.Name;
 
-                if (squad.Exists &&
-                    squadPrototype.TryGetComponent(out SquadTeamComponent? squadComp, _compFactory))
-                {
-                    button.ModulateSelfOverride = squadComp.Color;
-                }
+                if (squadPrototype.TryGetComponent(out SquadTeamComponent? squadComp, _compFactory))
+                    color = squadComp.Color;
             }
+
+            squadRow.CreateSquadButton(
+                squad.Exists,
+                () => SendMessage(new RMCAdminCreateSquadMsg(squad.Id)),
+                squad.Members,
+                squadName,
+                color
+            );
 
             _adminWindow.SquadsTab.Squads.AddChild(squadRow);
         }
