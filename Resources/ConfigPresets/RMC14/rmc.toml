@@ -86,3 +86,12 @@ enabled = true
 # This is the address and port the status server binds to.
 # The port is by default set based on net.port so it will follow what you set there.
 bind = "*:1212"
+
+[metrics]
+host = "*"
+port = 44880
+enabled = true
+
+[loki]
+address = "http://10.8.0.1:3100"
+enabled = true

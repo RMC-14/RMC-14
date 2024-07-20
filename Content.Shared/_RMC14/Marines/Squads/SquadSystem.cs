@@ -1,9 +1,9 @@
 ﻿using System.Collections.Immutable;
-using Content.Shared._RMC14.Admin;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Inventory;
 using Content.Shared.Mind;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Prototypes;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
@@ -18,6 +18,7 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
     public ImmutableArray<EntityPrototype> SquadPrototypes { get; private set; }
@@ -94,13 +95,13 @@ public sealed class SquadSystem : EntitySystem
         return true;
     }
 
-    public int GetSquadMembers(Entity<SquadTeamComponent> team)
+    public int GetSquadMembersAlive(Entity<SquadTeamComponent> team)
     {
         var count = 0;
         var members = EntityQueryEnumerator<SquadMemberComponent>();
-        while (members.MoveNext(out var member))
+        while (members.MoveNext(out var uid, out var member))
         {
-            if (member.Squad == team)
+            if (member.Squad == team && !_mobState.IsDead(uid))
                 count++;
         }
 

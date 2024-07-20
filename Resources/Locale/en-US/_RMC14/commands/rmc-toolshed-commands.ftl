@@ -17,6 +17,7 @@ command-description-figurine-openslots = Opens up infinite slots for all jobs on
 command-description-hive-alldefault = Sets the hive of a xeno or group of xenos.
 
 command-description-marine-randomize = Deletes and then spawns a marine or group of marines in the same place with a randomized name, species and appearance.
+command-description-marine-randomizewithjob = Deletes and then spawns a marine or group of marines in the same place with a set job and a randomized name, species and appearance.
 
 command-description-removeinvalidweeds = Removes any weeds that should not have normally spread to where they are from the map.
 
@@ -26,6 +27,7 @@ command-description-skills-set = Sets the level of a specific skill for a marine
 command-description-squad-get = Gets the squad ID of a marine.
 command-description-squad-getname = Gets the squad name of a marine.
 command-description-squad-set = Sets the squad of a marine or group of marines.
+command-description-squad-with = Filters a group of marines by their squad.
 
 command-description-xenomature = Instantly matures a xeno. Applicable to the Queen, at which point she gets more health and abilities.
 

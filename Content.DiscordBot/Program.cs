@@ -7,9 +7,8 @@ using Discord.Interactions;
 using Discord.WebSocket;
 using Microsoft.EntityFrameworkCore;
 
-var client = new DiscordSocketClient();
-
-client.Log += msg => Console.Out.WriteLineAsync($"[{msg.Severity}] {msg.Message}");
+var client = new DiscordSocketClient(new DiscordSocketConfig { GatewayIntents = GatewayIntents.All });
+client.Log += Logger.Log;
 
 string? token = null;
 string? connectionString = null;
@@ -44,6 +43,9 @@ var db = new PostgresServerDbContext(builder.Options);
 
 var interaction = new InteractionService(client);
 var handler = new CommandHandler(client, new CommandService(), interaction, db);
+
+AppDomain.CurrentDomain.ProcessExit += (_, _) => Interlocked.Decrement(ref handler.Running);
+
 await handler.InstallCommandsAsync();
 
 // Block this task until the program is closed.
