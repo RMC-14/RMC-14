@@ -21,6 +21,8 @@
   name: tiles-cm-default-no-weeds
   sprite: /Textures/_RMC14/Tiles/almayer/default.png
   weedsSpreadable: false
+  baseTurf: ""
+  canCrowbar: false
 
 - type: tile
   parent: CMTileBase
