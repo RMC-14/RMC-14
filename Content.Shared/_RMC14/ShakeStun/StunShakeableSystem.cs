@@ -1,4 +1,5 @@
-﻿using Content.Shared.Interaction;
+﻿using Content.Shared._RMC14.Tackle;
+using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Player;
@@ -28,7 +29,8 @@ public sealed class StunShakeableSystem : EntitySystem
 
         var target = args.Target;
         if (!_statusEffects.HasStatusEffect(target, Stun) &&
-            !_statusEffects.HasStatusEffect(target, KnockedDown))
+            !_statusEffects.HasStatusEffect(target, KnockedDown) &&
+            !HasComp<TackledRecentlyComponent>(target))
         {
             return;
         }
@@ -44,6 +46,7 @@ public sealed class StunShakeableSystem : EntitySystem
 
         _statusEffects.TryRemoveStatusEffect(target, "Stun");
         _statusEffects.TryRemoveStatusEffect(target, "KnockedDown");
+        RemCompDeferred<TackledRecentlyComponent>(target);
 
         var userPopup = Loc.GetString("rmc-shake-awake-user", ("target", target));
         _popup.PopupClient(userPopup, target, user);
