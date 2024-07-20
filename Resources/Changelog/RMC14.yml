@@ -3419,5 +3419,18 @@
   id: 413
   time: '2024-07-20T09:46:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3169
+- author: DrSmugleaf
+  changes:
+  - message: Fixed flashes not requiring police skill. They now require a police skill
+      of 1 (ASO, XO, SO, CE, CMO, QM, CO, CMP, MP, Warden and SEA).
+    type: Fix
+  - message: Fixed stun batons stunning for a shorter time and taking more hits than
+      intended. They now stun marines for 12 seconds in a single hit.
+    type: Fix
+  - message: Stun baton usage now requires a police skill of 1.
+    type: Tweak
+  id: 414
+  time: '2024-07-20T10:25:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3166
 Name: RMC14
 Order: -1
