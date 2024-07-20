@@ -19,7 +19,7 @@ public sealed class MarineCommand : ToolshedCommand
         var randomized = GetSys<RMCAdminSystem>().RandomizeMarine(ent);
         Del(ent);
         EnsureComp<MarineComponent>(randomized);
-        return ent;
+        return randomized;
     }
 
     [CommandImplementation("randomize")]

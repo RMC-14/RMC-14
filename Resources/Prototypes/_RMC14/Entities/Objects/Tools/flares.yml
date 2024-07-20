@@ -38,7 +38,7 @@
   - type: Appearance
   - type: PointLight
     enabled: false
-    color: "#FF5E5E"
+    color: "#FA644B"
     radius: 1
     energy: 5.0
     netsync: false

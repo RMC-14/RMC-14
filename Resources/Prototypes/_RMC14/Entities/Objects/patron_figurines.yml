@@ -265,6 +265,28 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSimonStarseeker
+  name: Simon Starseeker figurine
+  description: "Silent But Deadly."
+  components:
+  - type: Sprite
+    state: simon_starseeker
+  - type: PatronFigurine
+    id: d12db9f7-7ba2-4224-bbfa-356cc6e0e27c
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLenaMilize
+  name: Lena Milize figurine
+  description: "Nanotrasen's Trademark Bartender: Handler-One."
+  components:
+  - type: Sprite
+    state: lena_milize
+  - type: PatronFigurine
+    id: fb3904d8-03b6-480a-b7e4-2bfa8b016167
+
+- type: entity
+  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronOrionBlackburn
   name: Orion Blackburn figurine
   description: "Alright, recruits, we're doing 50 laps... around the nearest vending machine because I forgot my lunch."
