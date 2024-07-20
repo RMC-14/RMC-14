@@ -3,7 +3,6 @@
   id: RMCAdminObserver
   noSpawn: true
   components:
-  - type: Marine
   - type: Loadout
     prototypes: [ RMCMobAghostGear ]
 
@@ -16,6 +15,7 @@
   storage:
     back:
     - RMCAdminAccessConfigurator
+    - HealthAnalyzer
     - DoorRemoteAll
     - AdminHypo
     - MeleeDebug200
