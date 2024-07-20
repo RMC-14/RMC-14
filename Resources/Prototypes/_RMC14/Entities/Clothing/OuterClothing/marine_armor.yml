@@ -87,6 +87,7 @@
       - CMTraumaKit
       - Bottle
       - Pill
+      - Powercell
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -353,7 +354,7 @@
       # Motion detectors
       # Walkman
       tags:
-      - CMMagazineRifle
+      - CMMagazineRifle # same as marine armor
       - CMMagazineSmg
       - CMMagazineSniper
       - CMMagazinePistol
@@ -375,6 +376,7 @@
       - CMTraumaKit
       - Bottle
       - Pill
+      - Powercell
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
@@ -430,3 +432,4 @@
       - CMTraumaKit
       - Bottle
       - Pill
+      - Powercell
