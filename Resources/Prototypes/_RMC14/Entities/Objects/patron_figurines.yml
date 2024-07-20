@@ -262,3 +262,25 @@
     state: jimmy_punished_pit_johnson
   - type: PatronFigurine
     id: 3b7b5dd7-eda9-4b4e-ad72-7f88a738671c
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronOrionBlackburn
+  name: Orion Blackburn figurine
+  description: "Alright, recruits, we're doing 50 laps... around the nearest vending machine because I forgot my lunch."
+  components:
+  - type: Sprite
+    state: orion_blackburn
+  - type: PatronFigurine
+    id: 96ea54e9-a7cd-46f4-a4bd-c3b8e404c486
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLillyPipsqueakHarding
+  name: Lilly 'Pipsqueak' Harding figurine
+  description: "She may be a pipsqueak, but she is mighty!!!"
+  components:
+  - type: Sprite
+    state: lilly_pipsqueak_harding
+  - type: PatronFigurine
+    id: 041eae56-3378-44f9-bca1-2832f90d88af
