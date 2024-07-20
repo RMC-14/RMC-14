@@ -3353,5 +3353,13 @@
   id: 405
   time: '2024-07-20T03:19:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3156
+- author: musicmanvr
+  changes:
+  - message: Reload sounds of most weapons have been changed, and new xeno attack
+      sounds have been added.
+    type: Tweak
+  id: 406
+  time: '2024-07-20T03:35:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3106
 Name: RMC14
 Order: -1
