@@ -12,14 +12,6 @@
     key: walls
     base: prison_frame
     mode: CardinalFlags
-  - type: Destructible
-    thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 600
-        behaviors:
-          - !type:DoActsBehavior
-            acts: ["Destruction"]
   - type: Construction
     graph: RMCWindowPrison
     node: windowFramePrison
@@ -66,6 +58,7 @@
                 max: 1
           - !type:ChangeConstructionNodeBehavior
             node: windowFramePrison
+  - type: RMCWallExplosionDeletable
   - type: Construction
     graph: RMCWindowPrison
     node: windowPrison
@@ -133,6 +126,7 @@
                 max: 1
           - !type:ChangeConstructionNodeBehavior
             node: windowFramePrison
+  - type: RMCWallExplosionDeletable
   - type: Construction
     graph: RMCWindowPrison
     node: windowPrisonReinforced
