@@ -11,3 +11,5 @@ rmc-ui-tier = Tier {$tier}
 rmc-ui-create-squad = Create Squad
 rmc-ui-members = Members: {$members}
 rmc-ui-add-to-squad = Add to Squad
+
+rmc-ui-admin = RMC Admin UI

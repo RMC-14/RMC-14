@@ -11,11 +11,14 @@ public readonly record struct Hive(NetEntity Id, string Name);
 public readonly record struct Squad(EntProtoId Id, bool Exists, int Members);
 
 [Serializable, NetSerializable]
-public sealed class RMCAdminEuiState(NetEntity target, List<Hive> hives, List<Squad> squads) : EuiStateBase
+public readonly record struct Xeno(EntProtoId Proto);
+
+[Serializable, NetSerializable]
+public sealed class RMCAdminEuiState(List<Hive> hives, List<Squad> squads, List<Xeno> xenos) : EuiStateBase
 {
-    public readonly NetEntity Target = target;
     public readonly List<Hive> Hives = hives;
     public readonly List<Squad> Squads = squads;
+    public readonly List<Xeno> Xenos = xenos;
 }
 
 [Serializable, NetSerializable]
@@ -53,3 +56,6 @@ public sealed class RMCAdminAddToSquadMsg(EntProtoId squadId) : EuiMessageBase
 {
     public readonly EntProtoId SquadId = squadId;
 }
+
+[Serializable, NetSerializable]
+public sealed class RMCAdminRefresh : EuiMessageBase;
