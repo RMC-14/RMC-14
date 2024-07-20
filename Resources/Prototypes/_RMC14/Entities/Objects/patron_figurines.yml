@@ -287,6 +287,16 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronBites-The-Dust
+  name: Bites-The-Dust figurine
+  components:
+  - type: Sprite
+    state: bites-the-dust
+  - type: PatronFigurine
+    id: e3cac29b-bd9b-4e54-80a1-25aa4a4fa246
+
+- type: entity
+  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronOrionBlackburn
   name: Orion Blackburn figurine
   description: "Alright, recruits, we're doing 50 laps... around the nearest vending machine because I forgot my lunch."
