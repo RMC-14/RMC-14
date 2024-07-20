@@ -6,7 +6,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Storage/surgical_case.rsi
-    state: surgical_case
+    layers:
+    - state: surgical_case
+    - state: surgical_case_empty
+      map: [ "openLayer" ]
+      visible: false
   - type: Item
     size: Small
   - type: Storage
@@ -22,6 +26,13 @@
   - type: Tag
     tags:
       - CMSurgicalCase
+  - type: GenericVisualizer
+    visuals:
+      enum.SharedBagOpenVisuals.BagState:
+        openLayer:
+          Open: { visible: true }
+          Closed: { visible: false }
+  - type: Appearance
 
 - type: entity
   parent: CMSurgicalCase
@@ -33,34 +44,3 @@
     - id: CMScalpel
     - id: CMHemostat
     - id: CMRetractor
-
-- type: entity
-  parent: CMSurgicalCase
-  id: CMSurgicalCaseFilledAllTools
-  name: large surgical case
-  suffix: Filled, All Tools
-  components:
-  - type: Storage
-    maxItemSize: Small
-    grid:
-    - 0,0,5,1 # 3 slots
-    whitelist:
-      components:
-      - CMScalpel
-      - CMHemostat
-      - CMRetractor
-      - CMBoneGel
-      - CMSurgicalDrill
-      - CMBoneSaw
-      - CMCautery
-      - CMBoneSetter
-  - type: StorageFill
-    contents:
-    - id: CMScalpel
-    - id: CMHemostat
-    - id: CMRetractor
-    - id: CMBoneGel
-    - id: CMSurgicalDrill
-    - id: CMCircularSaw
-    - id: CMCautery
-    - id: CMBonesetter

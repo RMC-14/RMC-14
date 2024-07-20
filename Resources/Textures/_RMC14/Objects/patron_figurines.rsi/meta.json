@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Characters created by their respective owners. Figurine sprites made by DrSmugleaf.",
+  "copyright": "Characters created by their respective owners. Each item worn has its respective license and copyright. Final figurine sprites made by DrSmugleaf.",
   "size": {
     "x": 32,
     "y": 34
@@ -66,6 +66,18 @@
     },
     {
       "name": "rytil_pyain"
+    },
+    {
+      "name": "bill_titan"
+    },
+    {
+      "name": "jimmy_punished_pit_johnson"
+    },
+    {
+      "name": "simon_starseeker"
+    },
+    {
+      "name": "lena_milize"
     }
   ]
 }

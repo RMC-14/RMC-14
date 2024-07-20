@@ -39,8 +39,8 @@
       entries:
       - id: CMWeaponPistolMK80
         amount: 4
-      #- id: SU-6 Smart Pistol
-      #  amount: 3
+      - id: RMCSmartPistolCase
+        amount: 3
       #- id: MOU-53 Shotgun
       #  amount: 2
       #- id: XM88 Heavy Rifle
@@ -303,6 +303,10 @@
       #  amount: 4
       #- id: M56 Smartgun Drum
       #  amount: 4
+      - id: RMCPowerCellSmartgun
+        amount: 4
+      - id: RMCMagazineSmartGun
+        amount: 4
       #- id: M44 Heavy Speed Loader (.44)
       #  amount: 10
       - id: RMCSpeedLoader44Marksman
@@ -315,8 +319,8 @@
       entries:
       - id: CMMagazinePistolMK80
         amount: 11
-      #- id: SU-6 Smartpistol Magazine (.45)
-      #  amount: 13
+      - id: RMCMagazinePistolSU6
+        amount: 13
       #- id: M240 Incinerator Tank
       #  amount: 3
       #- id: M41AE2 Box Magazine (10x24mm)

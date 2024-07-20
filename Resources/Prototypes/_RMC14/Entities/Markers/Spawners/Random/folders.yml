@@ -1,0 +1,18 @@
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerRandomFolder
+  name: random folder spawner
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - sprite: _RMC14/Objects/Misc/paper.rsi
+          state: folder
+    - type: RandomSpawner
+      prototypes:
+        - CMFolderBlue
+        - CMFolderRed
+        - CMFolderYellow
+        - CMFolderWhite
+        - CMFolderBlack
+      offset: 0

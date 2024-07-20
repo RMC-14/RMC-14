@@ -49,9 +49,8 @@
   - type: StorageSkillRequired
     medical: 2
   - type: IconLabel
-    textSize: 4
     textColor: White
-    storedOffset: -25, -5
+    storedOffset: 3, 12
 
 - type: entity
   parent: CMPillCanister

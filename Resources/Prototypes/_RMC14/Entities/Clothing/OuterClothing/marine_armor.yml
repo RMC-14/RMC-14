@@ -314,37 +314,43 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ghille.rsi
 
-# m56
+# Smart Gun
 - type: entity
   parent: CMArmorM3Medium
-  id: CMArmorM56CombatHarness
-  name: M56 combat harness
-  description: A heavy protective vest designed to be worn with the M56 Smart Gun System. \nIt has specially designed straps and reinforcement to carry the Smartgun and accessories.
+  id: CMArmorSmartGunCombatHarness
+  name: ML66A combat harness
+  description: A heavy protective vest designed to be worn with the ML66A Smart Gun System. It has specially designed straps and reinforcement to carry the Smartgun and accessories.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m56.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ml66a.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m56.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ml66a.rsi
   - type: Storage
     maxItemSize: Small
     grid:
     - 0,0,3,1 # 2 slots
     whitelist:
       components:
-      - GasTank
-      - BallisticAmmoProvider
       # Mines
       # Bayonet
-      # Smart Gun
       # Belts
       # Motion detectors
       # Walkman
       tags:
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
       - Flashlight
       - Knife
+      - MRE
+      - Grenade
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
+  - type: RMCMagneticArmor
+  - type: ClothingBlockBackpack
+  - type: SmartGunArmor
 
 # M2
 - type: entity

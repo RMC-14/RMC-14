@@ -43,7 +43,7 @@
   # TODO: Power ammo provider?
   - type: BallisticAmmoProvider
     cycleable: false
-    proto: CMCartridgeSentry10x28mm
+    proto: CMCartridgeSentry10x50mm
     capacity: 99999
   - type: HTN
     rootTask:
@@ -62,6 +62,7 @@
   - type: NoRotateOnInteract
   - type: NoRotateOnMove
   - type: GunIFF
+    intrinsic: true
 
 - type: entity
   parent: RMCBaseTurret

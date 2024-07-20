@@ -65,7 +65,7 @@ public sealed class GunIFFSystem : EntitySystem
 
     private void OnGunIFFAmmoShot(Entity<GunIFFComponent> ent, ref AmmoShotEvent args)
     {
-        GiveAmmoIFF(ent, ref args);
+        GiveAmmoIFF(ent, ref args, ent.Comp.Intrinsic);
     }
 
     private void OnProjectileIFFPreventCollide(Entity<ProjectileIFFComponent> ent, ref PreventCollideEvent args)
@@ -97,16 +97,29 @@ public sealed class GunIFFSystem : EntitySystem
         Dirty(user);
     }
 
-    public void GiveAmmoIFF(EntityUid gun, ref AmmoShotEvent args)
+    public void GiveAmmoIFF(EntityUid gun, ref AmmoShotEvent args, bool intrinsic)
     {
-        if (!_container.TryGetContainingContainer((gun, null), out var container) ||
-            !_userIFFQuery.HasComp(container.Owner))
+        EntityUid owner;
+        if (intrinsic)
+        {
+            owner = gun;
+        }
+        else if (_container.TryGetContainingContainer((gun, null), out var container))
+        {
+            owner = container.Owner;
+        }
+        else
+        {
+            return;
+        }
+
+        if (!_userIFFQuery.HasComp(owner))
         {
             return;
         }
 
         var ev = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
-        RaiseLocalEvent(container.Owner, ref ev);
+        RaiseLocalEvent(owner, ref ev);
 
         if (ev.Faction is not { } id)
             return;

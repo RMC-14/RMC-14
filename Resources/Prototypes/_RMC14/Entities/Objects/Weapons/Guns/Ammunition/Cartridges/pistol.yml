@@ -19,6 +19,18 @@
     proto: CMBulletPistol9mm
 
 - type: entity
+  id: RCMCartridgePistol9mmSquashHead
+  name: cartridge (9mm Squash-Head)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+      - Cartridge
+      - RCMCartridgePistol9mmSquashHead
+  - type: CartridgeAmmo
+    proto: RCMBulletPistol9mmSquashHead
+
+- type: entity
   id: CMCartridgePistolM77AP
   name: cartridge (9mm AP)
   parent: CMCartridgePistolBase
@@ -43,8 +55,20 @@
     proto: CMBulletRevolver44
 
 - type: entity
-  id: RMCCartridgeRevolver44Marksman
-  name: cartridge (.44 Marksman)
+  id: RMCCartridgePistol45ACP
+  name: cartridge (.45 ACP)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistol45ACP
+  - type: CartridgeAmmo
+    proto: RMCBulletPistol45ACP
+
+- type: entity
+  id: RMCCartridgeRevolver44a
+  name: cartridge (.44)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
@@ -52,4 +76,4 @@
     - Cartridge
     - RMCCartridgeRevolver44
   - type: CartridgeAmmo
-    proto: CMBulletRevolver44Marksman
+    proto: RMCBulletRevolver44Marksman

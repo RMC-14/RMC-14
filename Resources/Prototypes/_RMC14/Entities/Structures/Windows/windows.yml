@@ -152,25 +152,3 @@
     key: walls
     base: col_rwindow
     mode: CardinalFlags
-
-
-# Shiva
-
-- type: entity
-  parent: CMBaseWindow
-  id: CMWindowShiva
-  name: window
-  description: A glass window inside a wall frame.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Windows/shiva_window.rsi
-    state: shiva_window0
-  - type: Icon
-    sprite: _RMC14/Structures/Windows/shiva_window.rsi
-    state: shiva_window
-  - type: IconSmooth
-    key: walls
-    base: shiva_window
-    mode: CardinalFlags
-  # 40 hp
-  # Temporary corner sprites taken from colony reinforced window, since no corner windows used on shiva.

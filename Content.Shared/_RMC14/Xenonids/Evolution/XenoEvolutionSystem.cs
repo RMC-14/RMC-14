@@ -11,6 +11,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.GameTicking;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -44,8 +45,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
+	[Dependency] private readonly SharedHandsSystem _hands = default!;
 
-    private readonly HashSet<EntityUid> _climbable = new();
+	private readonly HashSet<EntityUid> _climbable = new();
     private readonly HashSet<EntityUid> _doors = new();
     private readonly HashSet<EntityUid> _intersecting = new();
 
@@ -120,7 +122,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
         if (TryComp(xeno, out DamageableComponent? damageable) &&
-            damageable.TotalDamage > FixedPoint2.Zero)
+            damageable.TotalDamage > 1)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-cant-evolve-damaged"), xeno, xeno, PopupType.MediumCaution);
             return;
@@ -178,6 +180,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
         _mind.TransferTo(mindId, newXeno);
         _mind.UnVisit(mindId);
 
+        foreach (var held in _hands.EnumerateHeld(xeno))
+            _hands.TryDrop(xeno, held);
+
         // TODO RMC14 this is a hack because climbing on a newly created entity does not work properly for the client
         var comp = EnsureComp<XenoNewlyEvolvedComponent>(newXeno);
 
@@ -218,6 +223,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         _mind.TransferTo(mindId, newXeno);
         _mind.UnVisit(mindId);
+
+        foreach (var held in _hands.EnumerateHeld(xeno))
+            _hands.TryDrop(xeno, held);
 
         // TODO RMC14 this is a hack because climbing on a newly created entity does not work properly for the client
         var comp = EnsureComp<XenoNewlyEvolvedComponent>(newXeno);
@@ -375,7 +383,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private bool CanDevolvePopup(EntityUid xeno)
     {
         if (TryComp(xeno, out DamageableComponent? damageable) &&
-            damageable.TotalDamage > FixedPoint2.Zero)
+            damageable.TotalDamage > 1)
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-evolution-cant-devolve-damaged"), xeno, xeno, PopupType.MediumCaution);
             return false;
