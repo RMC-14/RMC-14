@@ -87,7 +87,7 @@
       - CMTraumaKit
       - Bottle
       - Pill
-      - Powercell
+      - PowerCell
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -376,7 +376,7 @@
       - CMTraumaKit
       - Bottle
       - Pill
-      - Powercell
+      - PowerCell
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
@@ -432,4 +432,4 @@
       - CMTraumaKit
       - Bottle
       - Pill
-      - Powercell
+      - PowerCell
