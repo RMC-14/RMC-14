@@ -17,3 +17,13 @@
     contents:
     - id: CMPacketGrenadeFragFilled
       amount: 2
+
+- type: entity
+  parent: CMCrateExplosives
+  id: RMCCrateBreachingCharges
+  name: breaching charges crate (x4)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCExplosiveBreachingCharge
+      amount: 4
