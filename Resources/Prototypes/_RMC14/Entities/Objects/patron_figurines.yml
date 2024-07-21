@@ -317,3 +317,14 @@
     state: lilly_pipsqueak_harding
   - type: PatronFigurine
     id: 041eae56-3378-44f9-bca1-2832f90d88af
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKateFleming
+  name: Kate Fleming figurine
+  description: "\"OORAH!!\""
+  components:
+  - type: Sprite
+    state: kate_fleming
+  - type: PatronFigurine
+    id: 355c1f67-83a4-4252-b288-b218a4f84fd5
