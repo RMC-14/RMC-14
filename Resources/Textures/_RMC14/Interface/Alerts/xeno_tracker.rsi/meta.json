@@ -11,11 +11,11 @@
       "name": "trackoff"
     },
     {
-      "name": "trackondirect",
+      "name": "trackon-center",
       "delays": [
         [
-          0.6,
-          0.6
+          0.5,
+          0.5
         ]
       ]
     },
