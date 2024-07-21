@@ -49,6 +49,8 @@
         enum.HyperSleepChamberLayers.Base:
           True: { state: closed }
           False: { state: open }
+  - type: Corrodible
+    isCorrodible: false
 
 - type: entity
   parent: CMHyperSleepChamber
