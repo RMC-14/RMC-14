@@ -51,6 +51,7 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
 
     private EntityQuery<AffectableByWeedsComponent> _affectableQuery;
     private EntityQuery<DamageableComponent> _damageableQuery;
@@ -91,12 +92,24 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, DamageModifyEvent>(OnXenoDamageModify);
         SubscribeLocalEvent<XenoComponent, RefreshMovementSpeedModifiersEvent>(OnXenoRefreshSpeed);
         SubscribeLocalEvent<XenoComponent, GetTrackerAlertEntriesEvent>(OnGetTrackerAlertEntries);
+        SubscribeLocalEvent<XenoComponent, TrackerAlertVisibleAttemptEvent>(OnTrackerAlertVisibleAttempt);
 
         Subs.CVar(_config, RMCCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoSpeedMultiplier, UpdateXenoSpeedMultiplier, true);
 
         UpdatesAfter.Add(typeof(SharedXenoPheromonesSystem));
+    }
+
+    private void OnTrackerAlertVisibleAttempt(Entity<XenoComponent> ent, ref TrackerAlertVisibleAttemptEvent args)
+    {
+        // Has a queen
+        if (ent.Comp.Hive != null &&
+            _xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1,
+                entity => TryComp(entity, out XenoComponent? queenXeno) && queenXeno.Hive == ent.Comp.Hive))
+            return;
+
+        args.Cancelled = true;
     }
 
     private void OnXenoMapInit(Entity<XenoComponent> xeno, ref MapInitEvent args)

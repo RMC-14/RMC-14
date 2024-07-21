@@ -13,7 +13,6 @@ public sealed class TrackerAlertSystem : EntitySystem
 {
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -111,10 +110,15 @@ public sealed class TrackerAlertSystem : EntitySystem
             return;
         }
 
-        // Has a queen
-        if (ent.Comp2.Hive == null ||
-            !_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1,
-                entity => TryComp(entity, out XenoComponent? queenXeno) && queenXeno.Hive == ent.Comp2.Hive))
+        if (ent.Comp1.TrackedEntity == null)
+        {
+            _alerts.ShowAlert(ent, alertId, 0, showCooldown: false);
+            return;
+        }
+
+        var ev = new TrackerAlertVisibleAttemptEvent();
+        RaiseLocalEvent(ent, ref ev);
+        if (ev.Cancelled)
         {
             _alerts.ShowAlert(ent, alertId, 0, showCooldown: false);
             return;
@@ -160,6 +164,13 @@ public sealed class TrackerAlertSystem : EntitySystem
         _ui.OpenUi(player, TrackerAlertUIKey.Key, player);
         _ui.SetUiState(player, TrackerAlertUIKey.Key, new TrackerAlertBuiState(ev.Entries));
     }
+
+}
+
+[ByRefEvent]
+internal record struct TrackerAlertVisibleAttemptEvent
+{
+    public bool Cancelled;
 }
 
 [ByRefEvent]
