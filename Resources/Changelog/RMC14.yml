@@ -3466,5 +3466,13 @@
   id: 418
   time: '2024-07-20T12:10:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3164
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Requisitions not being able to buy more breaching charges. They
+      can now order a crate of 4 breaching charges for $4000.
+    type: Fix
+  id: 419
+  time: '2024-07-21T06:38:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3180
 Name: RMC14
 Order: -1
