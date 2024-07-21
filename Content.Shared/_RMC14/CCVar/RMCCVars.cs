@@ -98,4 +98,7 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCDropshipInitialDelayMinutes =
         CVarDef.Create("rmc.dropship_initial_delay_minutes", 15f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCAutoPrimaryLandingZoneMinutes =
+        CVarDef.Create("rmc.auto_primary_landing_zone_minutes", 25f, CVar.REPLICATED | CVar.SERVER);
 }

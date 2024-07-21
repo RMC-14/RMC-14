@@ -2,9 +2,11 @@
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Rules;
 using Content.Server.Doors.Systems;
+using Content.Server.GameTicking;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Announce;
@@ -16,6 +18,7 @@ using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
+using Robust.Shared.Configuration;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -26,7 +29,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DoorSystem _door = default!;
+    [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly ShuttleSystem _shuttle = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -37,6 +42,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private EntityQuery<DockingComponent> _dockingQuery;
     private EntityQuery<DoorComponent> _doorQuery;
     private EntityQuery<DoorBoltComponent> _doorBoltQuery;
+
+    private TimeSpan _autoPrimaryLZDelay;
 
     public override void Initialize()
     {
@@ -58,6 +65,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
             {
                 subs.Event<DropshipLockdownMsg>(OnDropshipNavigationLockdownMsg);
             });
+
+        Subs.CVar(_config, RMCCVars.RMCAutoPrimaryLandingZoneMinutes, v => _autoPrimaryLZDelay = TimeSpan.FromMinutes(v), true);
     }
 
     private void OnActivateInWorld(Entity<DropshipNavigationComputerComponent> ent, ref ActivateInWorldEvent args)
@@ -305,5 +314,22 @@ public sealed class DropshipSystem : SharedDropshipSystem
     {
         var ev = new FTLUpdatedEvent();
         RaiseLocalEvent(shuttle, ref ev);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        if (Count<PrimaryLandingZoneComponent>() > 0)
+            return;
+
+        if (_gameTicker.RoundDuration() < _autoPrimaryLZDelay)
+            return;
+
+        foreach (var primaryLZCandidate in GetPrimaryLZCandidates())
+        {
+            if (TryDesignatePrimaryLZ(default, primaryLZCandidate))
+                break;
+        }
     }
 }
