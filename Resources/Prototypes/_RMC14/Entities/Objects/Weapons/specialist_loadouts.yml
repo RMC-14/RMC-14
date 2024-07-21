@@ -41,8 +41,7 @@
     - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SIncendiary
     - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
     - id: CMBackpackSniper
-    - id: CMWeaponPistolMK80
-    - id: CMMagazinePistolMK80
+    - id: RMCMK80Case
     - id: CMM96SSniperRifle
 #    - id: CMFacepaintSniper
 #    - id: CMSpotter
@@ -94,9 +93,7 @@
     - id: RMCHandsM3G4
     - id: RMCArmorM3G4
     - id: RMCArmorHelmetM3G4 # hugger protection
-    - id: CMWeaponPistolMK80
-    - id: CMMagazinePistolMK80
-    - id: CMMagazinePistolMK80
+    - id: RMCMK80Case
 #    - id: CMBinoculars
   - type: CMChangeUserOnVend
     addComponents:
