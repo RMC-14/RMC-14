@@ -8,6 +8,8 @@ using Content.Server.Shuttles.Systems;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Announce;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
 using Content.Shared.Doors.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Shuttles.Components;
@@ -22,6 +24,7 @@ namespace Content.Server._RMC14.Dropship;
 
 public sealed class DropshipSystem : SharedDropshipSystem
 {
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly DoorSystem _door = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
@@ -189,6 +192,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
             _audio.PlayGlobal(dropship.MarineHijackSound, marines, true);
         }
 
+        _adminLog.Add(LogType.RMCDropshipLaunch,
+            $"{ToPrettyString(user):player} {(hijack ? "hijacked" : "launched")} {ToPrettyString(shuttle):dropship} to {ToPrettyString(destination):destination}");
+
         return true;
     }
 
@@ -240,7 +246,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         return HasComp<FTLComponent>(dropship);
     }
 
-    private void RefreshUI()
+    protected override void RefreshUI()
     {
         var computers = EntityQueryEnumerator<DropshipNavigationComputerComponent>();
         while (computers.MoveNext(out var uid, out var comp))
