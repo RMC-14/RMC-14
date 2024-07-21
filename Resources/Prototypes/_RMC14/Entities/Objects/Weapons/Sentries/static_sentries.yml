@@ -36,7 +36,7 @@
   - type: CombatMode
     toggleMouseRotator: false
   - type: Gun
-    fireRate: 3
+    fireRate: 6
     selectedMode: FullAuto
     availableModes:
     - FullAuto
