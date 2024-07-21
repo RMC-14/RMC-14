@@ -46,7 +46,7 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
                 _window.LandingZonesContainer.AddChild(button);
             }
 
-            _window.LandingZonesSeparator.Visible = s.LandingZones.Count > 0;
+            _window.LandingZonesSection.Visible = s.LandingZones.Count > 0;
         }
     }
 
