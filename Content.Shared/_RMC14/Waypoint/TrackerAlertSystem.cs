@@ -16,6 +16,20 @@ public sealed class TrackerAlertSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
+    private static readonly Dictionary<TrackerDirection, short> AlertSeverity = new()
+    {
+        {TrackerDirection.Invalid, 0},
+        {TrackerDirection.Center, 1},
+        {TrackerDirection.South, 2},
+        {TrackerDirection.SouthEast, 3},
+        {TrackerDirection.East, 4},
+        {TrackerDirection.NorthEast, 5},
+        {TrackerDirection.North, 6},
+        {TrackerDirection.NorthWest, 7},
+        {TrackerDirection.West, 8},
+        {TrackerDirection.SouthWest, 9},
+    };
+
     private static readonly Dictionary<Direction, TrackerDirection> TrackerDirections = new()
     {
         {Direction.Invalid, TrackerDirection.Invalid},
@@ -164,7 +178,7 @@ public sealed class TrackerAlertSystem : EntitySystem
             return;
 
         if (alertPrototype.SupportsSeverity &&
-            ent.Comp1.AlertSeverity.TryGetValue(ent.Comp1.WorldDirection, out var severity))
+            AlertSeverity.TryGetValue(ent.Comp1.WorldDirection, out var severity))
         {
             _alerts.ShowAlert(ent, alertId, severity, showCooldown: false);
         }

@@ -19,21 +19,6 @@ public sealed partial class TrackerAlertComponent : Component
     [DataField]
     public ProtoId<AlertPrototype> AlertPrototype;
 
-    [DataField, AutoNetworkedField]
-    public Dictionary<TrackerDirection, short> AlertSeverity = new()
-    {
-        {TrackerDirection.Invalid, 0},
-        {TrackerDirection.Center, 1},
-        {TrackerDirection.South, 2},
-        {TrackerDirection.SouthEast, 3},
-        {TrackerDirection.East, 4},
-        {TrackerDirection.NorthEast, 5},
-        {TrackerDirection.North, 6},
-        {TrackerDirection.NorthWest, 7},
-        {TrackerDirection.West, 8},
-        {TrackerDirection.SouthWest, 9},
-    };
-
     [DataField]
     public ProtoId<AlertCategoryPrototype> DirectionAlertCategory = "Tracker";
 
