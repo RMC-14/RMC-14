@@ -210,30 +210,37 @@ public sealed class DropshipSystem : SharedDropshipSystem
             !ftl.Running ||
             ftl.State == FTLState.Available)
         {
-            var destinations = new List<(NetEntity Id, string Name, bool Occupied)>();
+            var destinations = new List<Destination>();
             var query = EntityQueryEnumerator<DropshipDestinationComponent>();
             while (query.MoveNext(out var uid, out var comp))
             {
-                destinations.Add((GetNetEntity(uid), Name(uid), comp.Ship != null));
+                var destination = new Destination(
+                    GetNetEntity(uid),
+                    Name(uid),
+                    comp.Ship != null,
+                    HasComp<PrimaryLandingZoneComponent>(uid)
+                );
+                destinations.Add(destination);
             }
 
-            _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, new DropshipNavigationDestinationsBuiState(destinations));
+            var state = new DropshipNavigationDestinationsBuiState(destinations);
+            _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, state);
             return;
         }
 
-        var destination = string.Empty;
+        var destinationName = string.Empty;
         if (TryComp(grid, out DropshipComponent? dropship) &&
             dropship.Destination is { } destinationUid)
         {
-            destination = Name(destinationUid);
+            destinationName = Name(destinationUid);
         }
         else
         {
             Log.Error($"Found in-travel dropship {ToPrettyString(grid)} with invalid destination");
         }
 
-        var state = new DropshipNavigationTravellingBuiState(ftl.State, ftl.StateTime, destination);
-        _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, state);
+        var travelState = new DropshipNavigationTravellingBuiState(ftl.State, ftl.StateTime, destinationName);
+        _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, travelState);
     }
 
     protected override bool IsShuttle(EntityUid dropship)
