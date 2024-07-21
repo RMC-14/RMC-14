@@ -1,0 +1,13 @@
+- type: alert
+  id: XenoQueenTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackondirect
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackoff
+  name: Hivemind Sense
+  description: Sensing hive queen position.
+  minSeverity: 0
+  maxSeverity: 2

@@ -1,0 +1,167 @@
+- type: alert
+  id: MarineCOTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackondirect_co
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon_co
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackoff
+  name: Headset Tracker
+  description: Tracking Commanding Officer position.
+  minSeverity: 0
+  maxSeverity: 2
+
+- type: alert
+  id: MarineXOTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackondirect_xo
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon_xo
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackoff
+  name: Headset Tracker
+  description: Tracking Executive Officer position.
+  minSeverity: 0
+  maxSeverity: 2
+
+- type: alert
+  id: MarineCMPTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackondirect_cmp
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon_cmp
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackoff
+  name: Headset Tracker
+  description: Tracking Chief Military Police position.
+  minSeverity: 0
+  maxSeverity: 2
+
+- type: alert
+  id: MarineAlphaSLTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackondirect_asl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon_asl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackoff
+  name: Headset Tracker
+  description: Tracking Alpha Squad Leader position.
+  minSeverity: 0
+  maxSeverity: 2
+
+- type: alert
+  id: MarineBravoSLTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackondirect_bsl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon_bsl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackoff
+  name: Headset Tracker
+  description: Tracking Bravo Squad Leader position.
+  minSeverity: 0
+  maxSeverity: 2
+
+- type: alert
+  id: MarineCharlieSLTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackondirect_csl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon_csl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackoff
+  name: Headset Tracker
+  description: Tracking Charlie Squad Leader position.
+  minSeverity: 0
+  maxSeverity: 2
+
+- type: alert
+  id: MarineDeltaSLTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackondirect_dsl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon_dsl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackoff
+  name: Headset Tracker
+  description: Tracking Delta Squad Leader position.
+  minSeverity: 0
+  maxSeverity: 2
+
+- type: alert
+  id: MarineEchoSLTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackondirect_esl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon_esl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackoff
+  name: Headset Tracker
+  description: Tracking Echo Squad Leader position.
+  minSeverity: 0
+  maxSeverity: 2
+
+- type: alert
+  id: MarineFoxtrotSLTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackondirect_fsl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon_fsl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackoff
+  name: Headset Tracker
+  description: Tracking Foxtrot Squad Leader position.
+  minSeverity: 0
+  maxSeverity: 2
+
+- type: alert
+  id: MarineTLTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackondirect_tl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon_tl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackoff
+  name: Headset Tracker
+  description: Tracking Team Leader position.
+  minSeverity: 0
+  maxSeverity: 2
+
+- type: alert
+  id: MarineCLTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackondirect_cl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon_cl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackoff
+  name: Headset Tracker
+  description: Tracking Corporate Liason position.
+  minSeverity: 0
+  maxSeverity: 2
+
+- type: alert
+  id: MarineLZTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackondirect_lz
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon_lz
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackoff
+  name: Headset Tracker
+  description: Tracking Designated Landing Zone position.
+  minSeverity: 0
+  maxSeverity: 2
