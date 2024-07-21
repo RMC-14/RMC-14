@@ -47,8 +47,8 @@ public sealed class TrackerAlertSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<TrackerAlertComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<RMCTrackerAlertTargetComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<RMCTrackerAlertTargetComponent, ComponentStartup>(OnComponentStartup);
+        SubscribeLocalEvent<RMCTrackerAlertTargetComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<RMCTrackerAlertTargetComponent, XenoAddedToHiveEvent>(OnXenoAddedToHive);
         SubscribeLocalEvent<RMCTrackerAlertTargetComponent, XenoRemovedFromHiveEvent>(OnXenoRemovedFromHive);
 
@@ -59,30 +59,12 @@ public sealed class TrackerAlertSystem : EntitySystem
         });
     }
 
-    private void OnTrackerAlertBui(EntityUid uid, TrackerAlertComponent component, TrackerAlertBuiMsg args)
+    private void OnMapInit(Entity<TrackerAlertComponent> ent, ref MapInitEvent args)
     {
-        _ui.CloseUi(uid, TrackerAlertUIKey.Key, args.Actor);
-
-        if (!TryGetEntity(args.Target, out var target))
+        if (!TryComp(ent, out XenoComponent? xeno))
             return;
 
-        component.TrackedEntity = target;
-    }
-
-    private void OnXenoRemovedFromHive(Entity<RMCTrackerAlertTargetComponent> ent, ref XenoRemovedFromHiveEvent args)
-    {
-        if (!TryComp(args.Hive, out HiveComponent? hive))
-            return;
-
-        hive.Trackers.Remove(ent);
-    }
-
-    private void OnXenoAddedToHive(Entity<RMCTrackerAlertTargetComponent> ent, ref XenoAddedToHiveEvent args)
-    {
-        if (!TryComp(args.Hive, out HiveComponent? hive))
-            return;
-
-        hive.Trackers.Add(ent);
+        UpdateDirection((ent, ent.Comp, xeno));
     }
 
     private void OnComponentStartup(Entity<RMCTrackerAlertTargetComponent> ent, ref ComponentStartup args)
@@ -101,12 +83,30 @@ public sealed class TrackerAlertSystem : EntitySystem
         hive.Trackers.Remove(ent);
     }
 
-    private void OnMapInit(Entity<TrackerAlertComponent> ent, ref MapInitEvent args)
+    private void OnTrackerAlertBui(EntityUid uid, TrackerAlertComponent component, TrackerAlertBuiMsg args)
     {
-        if (!TryComp(ent, out XenoComponent? xeno))
+        _ui.CloseUi(uid, TrackerAlertUIKey.Key, args.Actor);
+
+        if (!TryGetEntity(args.Target, out var target))
             return;
 
-        UpdateDirection((ent, ent.Comp, xeno));
+        component.TrackedEntity = target;
+    }
+
+    private void OnXenoAddedToHive(Entity<RMCTrackerAlertTargetComponent> ent, ref XenoAddedToHiveEvent args)
+    {
+        if (!TryComp(args.Hive, out HiveComponent? hive))
+            return;
+
+        hive.Trackers.Add(ent);
+    }
+
+    private void OnXenoRemovedFromHive(Entity<RMCTrackerAlertTargetComponent> ent, ref XenoRemovedFromHiveEvent args)
+    {
+        if (!TryComp(args.Hive, out HiveComponent? hive))
+            return;
+
+        hive.Trackers.Remove(ent);
     }
 
     public override void Update(float frameTime)
