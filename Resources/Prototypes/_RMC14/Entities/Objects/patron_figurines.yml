@@ -284,3 +284,36 @@
     state: lena_milize
   - type: PatronFigurine
     id: fb3904d8-03b6-480a-b7e4-2bfa8b016167
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronBites-The-Dust
+  name: Bites-The-Dust figurine
+  description: A small, detailed miniature of a skilled corpsman.
+  components:
+  - type: Sprite
+    state: bites-the-dust
+  - type: PatronFigurine
+    id: e3cac29b-bd9b-4e54-80a1-25aa4a4fa246
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronOrionBlackburn
+  name: Orion Blackburn figurine
+  description: "Alright, recruits, we're doing 50 laps... around the nearest vending machine because I forgot my lunch."
+  components:
+  - type: Sprite
+    state: orion_blackburn
+  - type: PatronFigurine
+    id: 96ea54e9-a7cd-46f4-a4bd-c3b8e404c486
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLillyPipsqueakHarding
+  name: Lilly 'Pipsqueak' Harding figurine
+  description: "She may be a pipsqueak, but she is mighty!!!"
+  components:
+  - type: Sprite
+    state: lilly_pipsqueak_harding
+  - type: PatronFigurine
+    id: 041eae56-3378-44f9-bca1-2832f90d88af

@@ -1,5 +1,6 @@
 tiles-cm-default = metal tile
 tiles-cm-default-no-weeds = metal tile (no weeds)
+tiles-rmc-underplating-no-weeds = plating (no weeds)
 tiles-cm-plate = metal plate tile
 tiles-cm-office = office tile
 tiles-cm-sterile = metal sterile tile

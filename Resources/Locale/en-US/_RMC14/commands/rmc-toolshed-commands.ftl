@@ -17,6 +17,7 @@ command-description-figurine-openslots = Opens up infinite slots for all jobs on
 command-description-hive-alldefault = Sets the hive of a xeno or group of xenos.
 
 command-description-marine-randomize = Deletes and then spawns a marine or group of marines in the same place with a randomized name, species and appearance.
+command-description-marine-randomizewithjob = Deletes and then spawns a marine or group of marines in the same place with a set job and a randomized name, species and appearance.
 
 command-description-removeinvalidweeds = Removes any weeds that should not have normally spread to where they are from the map.
 

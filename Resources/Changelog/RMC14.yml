@@ -3376,5 +3376,118 @@
   id: 408
   time: '2024-07-20T05:42:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3159
+- author: DrSmugleaf
+  changes:
+  - message: Added RMC Admin UI.
+    type: Add
+  - message: Added marine:randomizewithjob command.
+    type: Add
+  id: 409
+  time: '2024-07-20T06:15:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3163
+- author: DrSmugleaf
+  changes:
+  - message: Added Orion Blackburn, Lilly 'Pipsqueak' Harding, Bites-The-Dust figurines.
+    type: Add
+  id: 410
+  time: '2024-07-20T06:16:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3161
+- author: DrSmugleaf
+  changes:
+  - message: Fixed being able to attach magazine boxes to yourself by clicking some
+      inventory items.
+    type: Fix
+  - message: Fixed magazine boxes getting placed and stuck inside walls.
+    type: Fix
+  id: 411
+  time: '2024-07-20T07:24:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3165
+- author: DrSmugleaf
+  changes:
+  - message: Fixed marines not being able to shake stunned marines awake. Any marine
+      can now click on another marine with an empty hand to remove stuns on them.
+      This includes xenonid tackles, Warrior lunge, Queen screech, and any other kind
+      of stun. Cooldown of 1 second between shakes.
+    type: Fix
+  id: 412
+  time: '2024-07-20T09:03:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3167
+- author: Kaga
+  changes:
+  - message: Made smartgun and shotgun projectiles face the target.
+    type: Fix
+  id: 413
+  time: '2024-07-20T09:46:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3169
+- author: DrSmugleaf
+  changes:
+  - message: Fixed flashes not requiring police skill. They now require a police skill
+      of 1 (ASO, XO, SO, CE, CMO, QM, CO, CMP, MP, Warden and SEA).
+    type: Fix
+  - message: Fixed stun batons stunning for a shorter time and taking more hits than
+      intended. They now stun marines for 12 seconds in a single hit.
+    type: Fix
+  - message: Stun baton usage now requires a police skill of 1.
+    type: Tweak
+  id: 414
+  time: '2024-07-20T10:25:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3166
+- author: Vermidia
+  changes:
+  - message: All armors can hold more types of items, mostly different medical items
+    type: Add
+  id: 415
+  time: '2024-07-20T10:26:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3168
+- author: Cu1r
+  changes:
+  - message: Ported Fiorina Science Annex
+    type: Add
+  id: 416
+  time: '2024-07-20T10:45:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2949
+- author: musicmanvr
+  changes:
+  - message: Directional windows no longer mess up layering when you press against
+      them.
+    type: Fix
+  id: 417
+  time: '2024-07-20T10:57:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3117
+- author: DrSmugleaf
+  changes:
+  - message: Fixed explosions making elevator tiles weedable.
+    type: Fix
+  - message: Fixed underplating using the wrong sprite.
+    type: Fix
+  - message: Changed the popup that shows when trying to plant weeds on an invalid
+      tile.
+    type: Tweak
+  id: 418
+  time: '2024-07-20T12:10:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3164
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Requisitions not being able to buy more breaching charges. They
+      can now order a crate of 4 breaching charges for $4000.
+    type: Fix
+  id: 419
+  time: '2024-07-21T06:38:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3180
+- author: DrSmugleaf
+  changes:
+  - message: The turrets guarding landing zones round-start now shoot twice as fast
+      and pierce all armor, with a DPS of 120 (up from 90)
+    type: Tweak
+  id: 420
+  time: '2024-07-21T06:44:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3178
+- author: DrSmugleaf
+  changes:
+  - message: The ASRS console is no longer corrodible.
+    type: Tweak
+  id: 421
+  time: '2024-07-21T06:44:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3181
 Name: RMC14
 Order: -1

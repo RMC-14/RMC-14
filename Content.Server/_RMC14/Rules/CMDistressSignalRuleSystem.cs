@@ -106,8 +106,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [ViewVariables]
     public readonly Dictionary<string, float> MarinesPerXeno = new()
     {
-        ["/Maps/_RMC14/lv624.yml"] = 3.75f,
-        ["/Maps/_RMC14/solaris.yml"] = 4.75f,
+        ["/Maps/_RMC14/lv624.yml"] = 4.25f,
+        ["/Maps/_RMC14/solaris.yml"] = 5.5f,
+        ["/Maps/_RMC14/prison.yml"] = 4.5f,
     };
 
     private readonly List<MapId> _almayerMaps = [];
@@ -732,8 +733,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         // TODO RMC14 save these somewhere and avert the shitcode
         SelectedPlanetMapName = SelectedPlanetMapName switch
         {
-            "lv624" => "LV624",
+            "lv624" => "LV-624",
             "solaris" => "Solaris Ridge",
+            "prison" => "Fiorina Science Annex",
             _ => SelectedPlanetMapName,
         };
 

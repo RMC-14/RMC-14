@@ -8,3 +8,12 @@
     sprite: _RMC14/Objects/Weapons/Melee/stun_baton.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Melee/stun_baton.rsi
+  - type: StaminaDamageOnHit
+    damage: 100
+  - type: MeleeRequiresSkill
+    skills:
+      police: 1
+  - type: StunOnHit
+    whitelist:
+      components:
+      - Marine
