@@ -1,4 +1,4 @@
-﻿namespace Content.Server._RMC14.Rules;
+﻿namespace Content.Server._RMC14.Rules.CrashLand;
 
 [RegisterComponent]
 [Access(typeof(CMDistressSignalRuleSystem))]

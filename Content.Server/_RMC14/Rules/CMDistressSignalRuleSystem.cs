@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.Marines;
+using Content.Server._RMC14.Rules.CrashLand;
 using Content.Server.Administration.Components;
 using Content.Server.Administration.Managers;
 using Content.Server.Atmos.EntitySystems;
@@ -55,6 +56,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -126,6 +128,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private readonly List<MapId> _almayerMaps = [];
 
+    private EntityQuery<CrashLandableComponent> _crashLandableQuery;
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
 
     public string? SelectedPlanetMap { get; private set; }
@@ -136,6 +139,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     {
         base.Initialize();
 
+        _crashLandableQuery = GetEntityQuery<CrashLandableComponent>();
         _xenoNestedQuery = GetEntityQuery<XenoNestedComponent>();
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
@@ -158,6 +162,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         SubscribeLocalEvent<CrashLandableComponent, EntParentChangedMessage>(OnCrashLandableParentChanged);
 
+        SubscribeLocalEvent<CrashLandOnTouchComponent, StartCollideEvent>(OnCrashLandOnTouchStartCollide);
+
         Subs.CVar(_config, RMCCVars.RMCFTLCrashLand, v => _crashLandEnabled = v, true);
         Subs.CVar(_config, RMCCVars.RMCPlanetMaps, v => _planetMaps = v, true);
         Subs.CVar(_config, RMCCVars.CMMarinesPerXeno, v => _defaultMarinesPerXeno = v, true);
@@ -167,80 +173,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         Subs.CVar(_config, RMCCVars.RMCAutoBalanceMin, v => _autoBalanceMin = v, true);
 
         ReloadPrototypes();
-    }
-
-    private void OnCrashLandableParentChanged(Entity<CrashLandableComponent> crashLandable, ref EntParentChangedMessage args)
-    {
-        if (!_crashLandEnabled)
-            return;
-
-        if (!HasComp<FTLMapComponent>(args.Transform.ParentUid))
-            return;
-
-        var distressQuery = EntityQueryEnumerator<CMDistressSignalRuleComponent>();
-        while (distressQuery.MoveNext(out var comp))
-        {
-            var grid = comp.XenoMap;
-            if (!TryComp<MapGridComponent>(grid, out var gridComp))
-                return;
-
-            var xform = Transform(grid);
-            var targetCoords = xform.Coordinates;
-
-            for (var i = 0; i < 250; i++)
-            {
-                // TODO RMC14 every single method used in content and engine for "random spot" is broken with planet maps. Splendid!
-                var randomX = _random.Next(-200, 200);
-                var randomY = _random.Next(-200, 200);
-                var tile = new Vector2i(randomX, randomY);
-                if (!_mapSystem.TryGetTileRef(grid, gridComp, tile, out var tileDef) ||
-                    tileDef.GetContentTileDefinition().ID == ContentTileDefinition.SpaceID)
-                    continue;
-
-                // no air-blocked areas.
-                if (_atmosphere.IsTileSpace(grid, xform.MapUid, tile) ||
-                    _atmosphere.IsTileAirBlocked(grid, tile, mapGridComp: gridComp))
-                {
-                    continue;
-                }
-
-                // don't spawn inside of solid objects
-                var physQuery = GetEntityQuery<PhysicsComponent>();
-                var valid = true;
-
-                var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid, gridComp, tile);
-                while (anchored.MoveNext(out var ent))
-                {
-                    if (!physQuery.TryGetComponent(ent, out var body))
-                        continue;
-                    if (body.BodyType != BodyType.Static ||
-                        !body.Hard ||
-                        (body.CollisionLayer & (int) CollisionGroup.Impassable) == 0)
-                        continue;
-
-                    valid = false;
-                    break;
-                }
-
-                if (!valid)
-                    continue;
-
-                targetCoords = _mapSystem.GridTileToLocal(grid, gridComp, tile);
-                break;
-            }
-
-            var damage = new DamageSpecifier
-            {
-                DamageDict =
-                {
-                    [CrashLandDamageType] = CrashLandDamageAmount,
-                },
-            };
-
-            _damageable.TryChangeDamage(crashLandable, damage, true);
-            _transform.SetMapCoordinates(crashLandable, _transform.ToMapCoordinates(targetCoords));
-            break;
-        }
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
@@ -617,6 +549,90 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private void OnAlmayerMapInit(Entity<AlmayerComponent> almayer, ref MapInitEvent args)
     {
         GridInfinitePower(almayer);
+    }
+
+    private void OnCrashLandableParentChanged(Entity<CrashLandableComponent> crashLandable, ref EntParentChangedMessage args)
+    {
+        if (!_crashLandEnabled || !HasComp<FTLMapComponent>(args.Transform.ParentUid))
+            return;
+
+        TryCrashLand(crashLandable);
+    }
+
+    private void OnCrashLandOnTouchStartCollide(Entity<CrashLandOnTouchComponent> ent, ref StartCollideEvent args)
+    {
+        if (!_crashLandEnabled || !_crashLandableQuery.TryComp(args.OtherEntity, out var crashLandable))
+            return;
+
+        TryCrashLand((args.OtherEntity, crashLandable));
+    }
+
+    private void TryCrashLand(Entity<CrashLandableComponent> crashLandable)
+    {
+        var distressQuery = EntityQueryEnumerator<CMDistressSignalRuleComponent>();
+        while (distressQuery.MoveNext(out var comp))
+        {
+            var grid = comp.XenoMap;
+            if (!TryComp<MapGridComponent>(grid, out var gridComp))
+                return;
+
+            var xform = Transform(grid);
+            var targetCoords = xform.Coordinates;
+
+            for (var i = 0; i < 250; i++)
+            {
+                // TODO RMC14 every single method used in content and engine for "random spot" is broken with planet maps. Splendid!
+                var randomX = _random.Next(-200, 200);
+                var randomY = _random.Next(-200, 200);
+                var tile = new Vector2i(randomX, randomY);
+                if (!_mapSystem.TryGetTileRef(grid, gridComp, tile, out var tileDef) ||
+                    tileDef.GetContentTileDefinition().ID == ContentTileDefinition.SpaceID)
+                    continue;
+
+                // no air-blocked areas.
+                if (_atmosphere.IsTileSpace(grid, xform.MapUid, tile) ||
+                    _atmosphere.IsTileAirBlocked(grid, tile, mapGridComp: gridComp))
+                {
+                    continue;
+                }
+
+                // don't spawn inside of solid objects
+                var physQuery = GetEntityQuery<PhysicsComponent>();
+                var valid = true;
+
+                var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid, gridComp, tile);
+                while (anchored.MoveNext(out var ent))
+                {
+                    if (!physQuery.TryGetComponent(ent, out var body))
+                        continue;
+                    if (body.BodyType != BodyType.Static ||
+                        !body.Hard ||
+                        (body.CollisionLayer & (int) CollisionGroup.Impassable) == 0)
+                        continue;
+
+                    valid = false;
+                    break;
+                }
+
+                if (!valid)
+                    continue;
+
+                targetCoords = _mapSystem.GridTileToLocal(grid, gridComp, tile);
+                break;
+            }
+
+            var damage = new DamageSpecifier
+            {
+                DamageDict =
+                {
+                    [CrashLandDamageType] = CrashLandDamageAmount,
+                },
+            };
+
+            _damageable.TryChangeDamage(crashLandable, damage, true);
+            _transform.SetMapCoordinates(crashLandable, _transform.ToMapCoordinates(targetCoords));
+            break;
+        }
     }
 
     private void ReloadPrototypes()
