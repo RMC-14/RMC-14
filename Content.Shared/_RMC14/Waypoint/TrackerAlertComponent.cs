@@ -11,12 +11,13 @@ public sealed partial class TrackerAlertComponent : Component
     [DataField]
     public EntityUid? TrackedEntity;
 
-    [DataField]
+    [ViewVariables]
     public TrackerDirection WorldDirection;
 
+    [ViewVariables]
     public TrackerDirection LastDirection;
 
-    [DataField]
+    [DataField(required: true)]
     public ProtoId<AlertPrototype> AlertPrototype;
 
     [DataField]
