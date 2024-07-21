@@ -62,7 +62,7 @@
   description: A bulky revolver, occasionally carried by assault troops and officers in the Marine Corps, as well as civilian law enforcement. Fires .44 Magnum rounds.
   components:
   - type: Gun
-    fireRate: 2.5
+    fireRate: 2
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m44.rsi
   - type: Clothing
