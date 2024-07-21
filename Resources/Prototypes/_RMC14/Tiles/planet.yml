@@ -607,6 +607,38 @@
 
 - type: tile
   parent: CMPlanetBase
+  id: RMCPlanetStrataMud
+  name: mud
+  sprite: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_mud.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetStrataMudAlt
+  name: mud
+  sprite: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_mud_alt.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
   id: RCMPlanetTallGrass
   name: tall grass
   sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass.png
