@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
@@ -8,6 +9,7 @@ using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
+using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 
@@ -18,6 +20,7 @@ public abstract class SharedDropshipSystem : EntitySystem
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
+    [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -265,7 +268,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         return true;
     }
 
-    public bool TryDesignatePrimaryLZ(EntityUid actor, EntityUid lz)
+    public bool TryDesignatePrimaryLZ(EntityUid actor, EntityUid lz, SoundSpecifier sound)
     {
         if (!HasComp<DropshipDestinationComponent>(lz))
         {
@@ -292,10 +295,12 @@ public abstract class SharedDropshipSystem : EntitySystem
             return false;
         }
 
+        _adminLog.Add(LogType.RMCPrimaryLZ, $"{ToPrettyString(actor):player} designated {ToPrettyString(lz):lz} as primary landing zone");
+
         EnsureComp<PrimaryLandingZoneComponent>(lz);
         RefreshUI();
+        _marineAnnounce.AnnounceARES(actor, $"Command Order Issued:\n\n{Name(lz)} has been designated as the primary landing zone.", sound);
 
-        _adminLog.Add(LogType.RMCPrimaryLZ, $"{ToPrettyString(actor):player} designated {ToPrettyString(lz):lz} as primary landing zone");
         return true;
     }
 

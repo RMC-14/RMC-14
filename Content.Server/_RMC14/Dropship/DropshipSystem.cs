@@ -8,6 +8,7 @@ using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared.Administration.Logs;
@@ -43,7 +44,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private EntityQuery<DoorComponent> _doorQuery;
     private EntityQuery<DoorBoltComponent> _doorBoltQuery;
 
-    private TimeSpan _autoPrimaryLZDelay;
+    private TimeSpan _lzPrimaryAutoDelay;
 
     public override void Initialize()
     {
@@ -66,7 +67,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 subs.Event<DropshipLockdownMsg>(OnDropshipNavigationLockdownMsg);
             });
 
-        Subs.CVar(_config, RMCCVars.RMCAutoPrimaryLandingZoneMinutes, v => _autoPrimaryLZDelay = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCLandingZonePrimaryAutoMinutes, v => _lzPrimaryAutoDelay = TimeSpan.FromMinutes(v), true);
     }
 
     private void OnActivateInWorld(Entity<DropshipNavigationComputerComponent> ent, ref ActivateInWorldEvent args)
@@ -323,12 +324,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
         if (Count<PrimaryLandingZoneComponent>() > 0)
             return;
 
-        if (_gameTicker.RoundDuration() < _autoPrimaryLZDelay)
+        if (_gameTicker.RoundDuration() < _lzPrimaryAutoDelay)
             return;
 
         foreach (var primaryLZCandidate in GetPrimaryLZCandidates())
         {
-            if (TryDesignatePrimaryLZ(default, primaryLZCandidate))
+            if (TryDesignatePrimaryLZ(default, primaryLZCandidate, new MarineCommunicationsComputerComponent().Sound))
                 break;
         }
     }

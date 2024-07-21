@@ -98,10 +98,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
             return;
         }
 
-        if (!_dropship.TryDesignatePrimaryLZ(user, lz.Value))
-            return;
-
-        AnnounceARES(user, $"Command Order Issued:\n\n{Name(lz.Value)} has been designated as the primary landing zone.", computer.Comp.Sound);
+        _dropship.TryDesignatePrimaryLZ(user, lz.Value, computer.Comp.Sound);
     }
 
     private void UpdatePlanetMap(Entity<MarineCommunicationsComputerComponent> computer)
