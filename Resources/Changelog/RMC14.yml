@@ -3474,5 +3474,20 @@
   id: 419
   time: '2024-07-21T06:38:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3180
+- author: DrSmugleaf
+  changes:
+  - message: The turrets guarding landing zones round-start now shoot twice as fast
+      and pierce all armor, with a DPS of 120 (up from 90)
+    type: Tweak
+  id: 420
+  time: '2024-07-21T06:44:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3178
+- author: DrSmugleaf
+  changes:
+  - message: The ASRS console is no longer corrodible.
+    type: Tweak
+  id: 421
+  time: '2024-07-21T06:44:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3181
 Name: RMC14
 Order: -1
