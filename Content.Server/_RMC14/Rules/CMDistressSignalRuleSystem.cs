@@ -96,6 +96,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private static readonly ProtoId<DamageTypePrototype> CrashLandDamageType = "Blunt";
     private const int CrashLandDamageAmount = 10000;
 
+    private bool _crashLandEnabled;
+
     private readonly CVarDef<float>[] _ftlcVars =
     [
         CCVars.FTLStartupTime,
@@ -156,6 +158,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         SubscribeLocalEvent<CrashLandableComponent, EntParentChangedMessage>(OnCrashLandableParentChanged);
 
+        Subs.CVar(_config, RMCCVars.RMCFTLCrashLand, v => _crashLandEnabled = v, true);
         Subs.CVar(_config, RMCCVars.RMCPlanetMaps, v => _planetMaps = v, true);
         Subs.CVar(_config, RMCCVars.CMMarinesPerXeno, v => _defaultMarinesPerXeno = v, true);
         Subs.CVar(_config, RMCCVars.RMCAutoBalance, v => _autoBalance = v, true);
@@ -168,6 +171,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private void OnCrashLandableParentChanged(Entity<CrashLandableComponent> crashLandable, ref EntParentChangedMessage args)
     {
+        if (!_crashLandEnabled)
+            return;
+
         if (!HasComp<FTLMapComponent>(args.Transform.ParentUid))
             return;
 
