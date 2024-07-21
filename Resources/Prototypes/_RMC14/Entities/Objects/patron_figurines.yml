@@ -328,3 +328,14 @@
     state: kate_fleming
   - type: PatronFigurine
     id: 355c1f67-83a4-4252-b288-b218a4f84fd5
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKaylieRowleyininski
+  name: Kaylie Rowleyininski figurine
+  description: "Smells of freshly baked bread."
+  components:
+  - type: Sprite
+    state: kaylie_rowleyininski
+  - type: PatronFigurine
+    id: 12ea8c65-341d-4876-bc19-846a1488eb69
