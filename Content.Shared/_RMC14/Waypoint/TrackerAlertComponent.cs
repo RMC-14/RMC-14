@@ -12,25 +12,26 @@ public sealed partial class TrackerAlertComponent : Component
     public EntityUid? TrackedEntity;
 
     [DataField]
-    public Direction WorldDirection;
+    public TrackerDirection WorldDirection;
 
-    public Direction LastDirection;
+    public TrackerDirection LastDirection;
 
     [DataField]
     public ProtoId<AlertPrototype> AlertPrototype;
 
     [DataField, AutoNetworkedField]
-    public Dictionary<Direction, short> AlertSeverity = new()
+    public Dictionary<TrackerDirection, short> AlertSeverity = new()
     {
-        { Direction.Invalid, 1 },
-        { Direction.South, 2 },
-        { Direction.SouthEast, 3 },
-        { Direction.East, 4 },
-        { Direction.NorthEast, 5 },
-        { Direction.North, 6 },
-        { Direction.NorthWest, 7 },
-        { Direction.West, 8 },
-        { Direction.SouthWest, 9 },
+        {TrackerDirection.Invalid, 0},
+        {TrackerDirection.Center, 1},
+        {TrackerDirection.South, 2},
+        {TrackerDirection.SouthEast, 3},
+        {TrackerDirection.East, 4},
+        {TrackerDirection.NorthEast, 5},
+        {TrackerDirection.North, 6},
+        {TrackerDirection.NorthWest, 7},
+        {TrackerDirection.West, 8},
+        {TrackerDirection.SouthWest, 9},
     };
 
     [DataField]
@@ -47,4 +48,18 @@ public sealed partial class TrackerAlertComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public TimeSpan UpdateRate = TimeSpan.FromSeconds(1);
+}
+
+public enum TrackerDirection
+{
+    Invalid = -1,
+    Center = 0,
+    South = 1,
+    SouthEast = 2,
+    East = 3,
+    NorthEast = 4,
+    North = 5,
+    NorthWest = 6,
+    West = 7,
+    SouthWest = 8,
 }

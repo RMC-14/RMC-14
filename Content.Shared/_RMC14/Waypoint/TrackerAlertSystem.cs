@@ -16,6 +16,19 @@ public sealed class TrackerAlertSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
+    private static readonly Dictionary<Direction, TrackerDirection> TrackerDirections = new()
+    {
+        {Direction.Invalid, TrackerDirection.Invalid},
+        {Direction.South, TrackerDirection.South},
+        {Direction.SouthEast, TrackerDirection.SouthEast},
+        {Direction.East, TrackerDirection.East},
+        {Direction.NorthEast, TrackerDirection.NorthEast},
+        {Direction.North, TrackerDirection.North},
+        {Direction.NorthWest, TrackerDirection.NorthWest},
+        {Direction.West, TrackerDirection.West},
+        {Direction.SouthWest, TrackerDirection.SouthWest},
+    };
+
     public override void Initialize()
     {
         base.Initialize();
@@ -103,6 +116,27 @@ public sealed class TrackerAlertSystem : EntitySystem
             return;
 
         var alertId = ent.Comp1.AlertPrototype;
+        // queen_locator dm
+        // If hud doesn't exist exit
+        // Get type of tracker
+            // Queen
+            // Hive
+            // Leader
+            // Tunnel
+        // else no tracker
+            // Is tracking queen
+            // reset tracker to empty
+            // If not is tracking queen
+                // Track queen
+            // return
+        // Point to interiors of vehicles
+        // If zlevel doesn't match OR distance < 1 tile (adjacent) OR src == tracking
+            // trackon-center
+        // Else
+            // If the self fake zlevel == target fake zlevel (e.g. almayer upper level vs lower level)
+                // Directional tracker icon
+            // else
+                // trackon-center
 
         if (!_alerts.TryGet(alertId, out var alertPrototype))
         {
@@ -144,16 +178,18 @@ public sealed class TrackerAlertSystem : EntitySystem
         Dirty(ent, ent.Comp1);
     }
 
-    private Direction GetTrackerDirection(Entity<TrackerAlertComponent> ent)
+    private TrackerDirection GetTrackerDirection(Entity<TrackerAlertComponent> ent)
     {
         if (ent.Comp.TrackedEntity is null)
-            return Direction.Invalid;
+            return TrackerDirection.Invalid;
 
         var pos = _transform.GetWorldPosition(ent);
         var targetPos = _transform.GetWorldPosition(ent.Comp.TrackedEntity.Value);
 
         var vec = targetPos - pos;
-        return vec.ToWorldAngle().GetDir();
+        return vec.Length() < 1
+            ? TrackerDirection.Center
+            : TrackerDirections[vec.ToWorldAngle().GetDir()];
     }
 
     public void OpenSelectUI(EntityUid player)
