@@ -46,20 +46,20 @@ public sealed class TrackerAlertSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<TrackerAlertComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<RMCTrackerAlertComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<RMCTrackerAlertTargetComponent, ComponentStartup>(OnComponentStartup);
         SubscribeLocalEvent<RMCTrackerAlertTargetComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<RMCTrackerAlertTargetComponent, XenoAddedToHiveEvent>(OnXenoAddedToHive);
         SubscribeLocalEvent<RMCTrackerAlertTargetComponent, XenoRemovedFromHiveEvent>(OnXenoRemovedFromHive);
 
-        Subs.BuiEvents<TrackerAlertComponent>(TrackerAlertUIKey.Key,
+        Subs.BuiEvents<RMCTrackerAlertComponent>(TrackerAlertUIKey.Key,
             subs =>
         {
             subs.Event<TrackerAlertBuiMsg>(OnTrackerAlertBui);
         });
     }
 
-    private void OnMapInit(Entity<TrackerAlertComponent> ent, ref MapInitEvent args)
+    private void OnMapInit(Entity<RMCTrackerAlertComponent> ent, ref MapInitEvent args)
     {
         if (!TryComp(ent, out XenoComponent? xeno))
             return;
@@ -83,7 +83,7 @@ public sealed class TrackerAlertSystem : EntitySystem
         hive.Trackers.Remove(ent);
     }
 
-    private void OnTrackerAlertBui(EntityUid uid, TrackerAlertComponent component, TrackerAlertBuiMsg args)
+    private void OnTrackerAlertBui(EntityUid uid, RMCTrackerAlertComponent component, TrackerAlertBuiMsg args)
     {
         _ui.CloseUi(uid, TrackerAlertUIKey.Key, args.Actor);
 
@@ -113,7 +113,7 @@ public sealed class TrackerAlertSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var query = EntityQueryEnumerator<TrackerAlertComponent, XenoComponent>();
+        var query = EntityQueryEnumerator<RMCTrackerAlertComponent, XenoComponent>();
         while (query.MoveNext(out var uid, out var tracker, out var xeno))
         {
             if (_timing.CurTime < tracker.NextUpdateTime)
@@ -124,7 +124,7 @@ public sealed class TrackerAlertSystem : EntitySystem
         }
     }
 
-    private void UpdateDirection(Entity<TrackerAlertComponent?, XenoComponent?> ent, bool force = false)
+    private void UpdateDirection(Entity<RMCTrackerAlertComponent?, XenoComponent?> ent, bool force = false)
     {
         if (!Resolve(ent.Owner, ref ent.Comp1, ref ent.Comp2))
             return;
@@ -192,7 +192,7 @@ public sealed class TrackerAlertSystem : EntitySystem
         Dirty(ent, ent.Comp1);
     }
 
-    private TrackerDirection GetTrackerDirection(Entity<TrackerAlertComponent> ent)
+    private TrackerDirection GetTrackerDirection(Entity<RMCTrackerAlertComponent> ent)
     {
         if (ent.Comp.TrackedEntity is null)
             return TrackerDirection.Invalid;

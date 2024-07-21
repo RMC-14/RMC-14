@@ -6,7 +6,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._RMC14.Waypoint;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-public sealed partial class TrackerAlertComponent : Component
+public sealed partial class RMCTrackerAlertComponent : Component
 {
     [DataField]
     public EntityUid? TrackedEntity;

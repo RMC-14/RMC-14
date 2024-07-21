@@ -228,7 +228,7 @@
     - enum.VendingMachineUiKey.Key
     - enum.PaperUiKey.Key
   - type: ActiveInputMover
-  - type: TrackerAlert
+  - type: RMCTrackerAlert
     directionAlertCategory: QueenTracker
     alertPrototype: QueenTracker
 
