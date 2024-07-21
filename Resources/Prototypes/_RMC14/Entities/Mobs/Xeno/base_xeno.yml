@@ -229,8 +229,7 @@
     - enum.PaperUiKey.Key
   - type: ActiveInputMover
   - type: RMCTrackerAlert
-    directionAlertCategory: QueenTracker
-    alertPrototype: QueenTracker
+    alertPrototype: HiveTracker
 
 - type: entity
   abstract: true

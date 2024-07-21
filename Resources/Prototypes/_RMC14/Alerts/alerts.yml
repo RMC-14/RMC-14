@@ -1,6 +1,6 @@
 - type: alert
-  id: QueenTracker
-  category: QueenTracker
+  id: HiveTracker
+  category: Tracker
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
     state: trackoff
