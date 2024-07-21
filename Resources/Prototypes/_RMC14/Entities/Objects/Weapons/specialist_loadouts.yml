@@ -41,7 +41,9 @@
     - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SIncendiary
     - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
     - id: CMBackpackSniper
-    - id: RMCMK80Case
+    - id: CMWeaponPistolMK80
+    - id: CMMagazinePistolMK80
+    - id: CMMagazinePistolMK80
     - id: CMM96SSniperRifle
 #    - id: CMFacepaintSniper
 #    - id: CMSpotter
