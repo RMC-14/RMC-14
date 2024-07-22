@@ -34,6 +34,8 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
     private readonly TimeSpan _pheromonePlasmaUseDelay = TimeSpan.FromSeconds(1);
 
+    private const string HelpButtonText = "rmc-xeno-pheromones-help";
+
     private readonly HashSet<EntityUid>[] _oldReceivers = Enum.GetValues<XenoPheromones>()
         .Select(_ => new HashSet<EntityUid>())
         .ToArray();

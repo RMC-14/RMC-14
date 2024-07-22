@@ -1,6 +1,7 @@
 using Content.Client.UserInterface.Controls;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Pheromones;
+using Content.Client.Chat.Managers;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface.Controls;
@@ -9,12 +10,14 @@ using Robust.Client.Input;
 using Robust.Client.UserInterface;
 using Robust.Shared.Utility;
 using System.Numerics;
+using Content.Shared.Chat;
 
 namespace Content.Client._RMC14.Xenonids.Pheromones;
 
 [UsedImplicitly]
 public sealed class XenoPheromonesBui : BoundUserInterface
 {
+    [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly IEntityManager _entities = default!;
     [Dependency] private readonly IClyde _displayManager = default!;
     [Dependency] private readonly IInputManager _inputManager = default!;
@@ -23,6 +26,8 @@ public sealed class XenoPheromonesBui : BoundUserInterface
 
     [ViewVariables]
     private XenoPheromonesMenu? _xenoPheromonesMenu;
+
+    private const string HelpButtonTexture = "radial_help";
 
     public XenoPheromonesBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -42,6 +47,25 @@ public sealed class XenoPheromonesBui : BoundUserInterface
 
         if (EntMan.HasComponent<XenoComponent>(Owner))
         {
+            var helpTexture = new TextureRect
+            {
+                VerticalAlignment = Control.VAlignment.Center,
+                HorizontalAlignment = Control.HAlignment.Center,
+                Texture = _sprite.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/radial.rsi"), HelpButtonTexture)),
+                TextureScale = new Vector2(2f, 2f),
+            };
+
+            var helpButton = new RadialMenuTextureButton()
+            {
+                StyleClasses = { "RadialMenuButton" },
+                SetSize = new Vector2(64, 64),
+            };
+
+            helpButton.OnButtonDown += _ => SendPredictedMessage(new XenoPheromonesHelpButtonBuiMsg());
+
+            helpButton.AddChild(helpTexture);
+            parent.AddChild(helpButton);
+
             foreach (var pheromones in Enum.GetValues<XenoPheromones>())
             {
                 var name = pheromones.ToString().ToLowerInvariant();
