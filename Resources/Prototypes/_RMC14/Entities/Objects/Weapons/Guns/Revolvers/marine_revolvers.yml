@@ -77,22 +77,21 @@
       rmc-aslot-barrel:
         whitelist:
           tags:
+          # -RMCAttachmentBayonet | Not in the game yet, but will be attachable.
           - RMCAttachmentRecoilCompensator
           - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
       rmc-aslot-rail:
         whitelist:
           tags:
+          - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentS42xTelescopicMiniscope
-          - RMCAttachmentS84xTelescopicScope
           - RMCAttachmentB8SmartScope
       rmc-aslot-underbarrel:
         whitelist:
           tags:
-          #- CMAttachmentBipod || When this works it'll be funny as fuck.
-          - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentLaserSight
   - type: AttachableHolderVisuals
     offsets:
