@@ -3581,5 +3581,12 @@
   id: 431
   time: '2024-07-22T10:41:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2933
+- author: DrSmugleaf
+  changes:
+  - message: Added Spray Acid ability for the Spitter.
+    type: Add
+  id: 432
+  time: '2024-07-22T10:48:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3157
 Name: RMC14
 Order: -1
