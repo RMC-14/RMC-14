@@ -28,11 +28,9 @@
   name: MK80 Hand Cannon Crate (x2)
   components:
   - type: StorageFill
-    contents: # TODO RMC14 two cases with 1 pìstol 2 mags each
-    - id: CMWeaponPistolMK80
+    contents:
+    - id: RMCMK80Case
       amount: 2
-    - id: CMMagazinePistolMK80
-      amount: 4
 
 - type: entity
   parent: CMCrateWeapons

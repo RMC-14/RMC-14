@@ -96,6 +96,9 @@ public sealed class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCDrawStorageIconLabels =
         CVarDef.Create("rmc.draw_storage_icon_labels", true, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<bool> RMCFTLCrashLand =
+        CVarDef.Create("rmc.ftl_crash_land", true, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<float> RMCDropshipInitialDelayMinutes =
         CVarDef.Create("rmc.dropship_initial_delay_minutes", 15f, CVar.REPLICATED | CVar.SERVER);
 
