@@ -689,7 +689,6 @@ entities:
           version: 6
     - type: Fixtures
       fixtures: {}
-    - type: OccluderTree
     - type: SpreaderGrid
     - type: GridPathfinding
     - type: Gravity
@@ -15696,6 +15695,11 @@ entities:
     components:
     - type: Transform
       pos: 186.5,57.5
+      parent: 1
+  - uid: 13778
+    components:
+    - type: Transform
+      pos: 200.5,105.5
       parent: 1
   - uid: 14740
     components:
@@ -81102,6 +81106,86 @@ entities:
     - type: Transform
       pos: 192.5,152.5
       parent: 1
+- proto: RMCTurretGaussSpaceborne
+  entities:
+  - uid: 2
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 30.5,39.5
+      parent: 1
+  - uid: 14746
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 16.5,39.5
+      parent: 1
+  - uid: 14747
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 31.5,22.5
+      parent: 1
+  - uid: 14748
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 15.5,22.5
+      parent: 1
+  - uid: 14749
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 31.5,11.5
+      parent: 1
+  - uid: 14750
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 28.5,128.5
+      parent: 1
+  - uid: 14751
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 16.5,128.5
+      parent: 1
+  - uid: 14752
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 16.5,148.5
+      parent: 1
+  - uid: 14753
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 28.5,148.5
+      parent: 1
+  - uid: 14754
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 27.5,110.5
+      parent: 1
+  - uid: 14755
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 40.5,129.5
+      parent: 1
+  - uid: 14756
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 40.5,143.5
+      parent: 1
+  - uid: 14757
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 39.5,116.5
+      parent: 1
 - proto: RMCWallElevator
   entities:
   - uid: 1741
@@ -81588,13 +81672,6 @@ entities:
     components:
     - type: Transform
       pos: 161.5,132.5
-      parent: 1
-- proto: SpawnMobMonkey
-  entities:
-  - uid: 13778
-    components:
-    - type: Transform
-      pos: 200.5,105.5
       parent: 1
 - proto: SpiderWeb
   entities:
