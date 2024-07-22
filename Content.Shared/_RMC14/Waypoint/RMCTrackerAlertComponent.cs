@@ -8,19 +8,19 @@ namespace Content.Shared._RMC14.Waypoint;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class RMCTrackerAlertComponent : Component
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? TrackedEntity;
 
-    [ViewVariables]
+    [ViewVariables, AutoNetworkedField]
     public TrackerDirection WorldDirection;
 
     [ViewVariables]
     public TrackerDirection LastDirection;
 
-    [DataField(required: true)]
+    [DataField(required: true), AutoNetworkedField]
     public ProtoId<AlertPrototype> AlertPrototype;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public ProtoId<AlertCategoryPrototype> DirectionAlertCategory = "Tracker";
 
     /// <summary>
