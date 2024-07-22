@@ -66,34 +66,38 @@ public sealed class XenoPheromonesBui : BoundUserInterface
             helpButton.AddChild(helpTexture);
             parent.AddChild(helpButton);
 
-            foreach (var pheromones in Enum.GetValues<XenoPheromones>())
-            {
-                var name = pheromones.ToString().ToLowerInvariant();
-
-                var texture = new TextureRect
-                {
-                    VerticalAlignment = Control.VAlignment.Center,
-                    HorizontalAlignment = Control.HAlignment.Center,
-                    Texture = _sprite.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_pheromones.rsi"), name)),
-                    TextureScale = new Vector2(2f, 2f),
-                };
-
-                var button = new RadialMenuTextureButton()
-                {
-                    StyleClasses = { "RadialMenuButton" },
-                    SetSize = new Vector2(64, 64),
-                    ToolTip = name,
-                };
-
-                button.OnButtonDown += _ => SendPredictedMessage(new XenoPheromonesChosenBuiMsg(pheromones));
-
-                button.AddChild(texture);
-                parent.AddChild(button);
-            }
+            AddPheromonesButton(XenoPheromones.Frenzy, parent);
+            AddPheromonesButton(XenoPheromones.Warding, parent);
+            AddPheromonesButton(XenoPheromones.Recovery, parent);
         }
 
         var vpSize = _displayManager.ScreenSize;
         _xenoPheromonesMenu.OpenCenteredAt(_inputManager.MouseScreenPosition.Position / vpSize);
+    }
+
+    private void AddPheromonesButton(XenoPheromones pheromone, RadialContainer parent)
+    {
+        var name = pheromone.ToString().ToLowerInvariant();
+
+        var texture = new TextureRect
+        {
+            VerticalAlignment = Control.VAlignment.Center,
+            HorizontalAlignment = Control.HAlignment.Center,
+            Texture = _sprite.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_pheromones.rsi"), name)),
+            TextureScale = new Vector2(2f, 2f),
+        };
+
+        var button = new RadialMenuTextureButton()
+        {
+            StyleClasses = { "RadialMenuButton" },
+            SetSize = new Vector2(64, 64),
+            ToolTip = name,
+        };
+
+        button.OnButtonDown += _ => SendPredictedMessage(new XenoPheromonesChosenBuiMsg(pheromone));
+
+        button.AddChild(texture);
+        parent.AddChild(button);
     }
 
     protected override void Dispose(bool disposing)
