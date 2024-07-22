@@ -227,7 +227,7 @@
   parent: RMCFoodSnackBase
   id: RMCFoodSnackKeplarFlamehotCrisps
   name: Keplar Flamehot crisps
-  description: They're disturbingly good! Now with 0% trans fat and added genuine sea salts.
+  description: They're disturbingly good! Due to an exceptionally well-timed ad campaign with the release of Kepler Flamehot in 2165, the Kepler brand was able to overtake other confectionary Weyland products by quarter three of that year. Contains 0% trans fat.
   components:
   - type: FlavorProfile
     flavors:
@@ -235,7 +235,7 @@
       - spicy
       - salty
   - type: Sprite
-    state: kepler_chips
+    state: kepler_flame
   - type: SolutionContainerManager
     solutions:
       food:
@@ -243,7 +243,7 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 4
-        - ReagentId: TableSalt # Holy shit these are salty.
+        - ReagentId: TableSalt
           Quantity: 4
         - ReagentId: Hotsauce
           Quantity: 8
@@ -501,9 +501,8 @@
 - type: entity
   noSpawn: true
   parent: RMCFoodPacketTrash
+  id: RMCFoodPacketKeplerCrispsFlamehotTrash
   name: empty flamehot crisps
-  id: RMCFoodPacketKeplerFlamehotTrash
-  name: empty crisps
   components:
   - type: Sprite
     state: kepler_chips_flame_trash
@@ -550,9 +549,8 @@
 - type: entity
   noSpawn: true
   parent: RMCFoodPacketTrash
-  id: RMCFoodPacketMEATBarTrash
+  id: RMCFoodPacketEATBarTrash
   name: MEAT bar wrapper
-  description: A musty plastic film that once held a hotdog. Packaged by We-Ya.
   components:
   - type: Sprite
     state: eat
