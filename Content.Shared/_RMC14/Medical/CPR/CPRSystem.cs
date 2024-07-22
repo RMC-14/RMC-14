@@ -157,10 +157,7 @@ public sealed class CPRSystem : EntitySystem
     private void OnMaskCPRAttempt(Entity<MaskComponent> ent, ref InventoryRelayedEvent<ReceiveCPRAttemptEvent> args)
     {
         if (!ent.Comp.IsToggled)
-        {
-            _popups.PopupClient(Loc.GetString("cm-crp-take-off-mask", ("target", args.Args.Target)), ent, args.Args.Performer);
             args.Args.Cancelled = true;
-        }
     }
 
     private bool CanCPRPopup(EntityUid performer, EntityUid target, bool start, out FixedPoint2 damage)
@@ -180,7 +177,10 @@ public sealed class CPRSystem : EntitySystem
         RaiseLocalEvent(target, ref receiveAttempt);
 
         if (receiveAttempt.Cancelled)
+        {
+            _popups.PopupClient(Loc.GetString("cm-crp-take-off-mask", ("target", target)), target, performer);
             return false;
+        }
 
         if (!_hands.TryGetEmptyHand(performer, out _))
             return false;

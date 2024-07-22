@@ -118,15 +118,15 @@ public sealed class DefibrillatorSystem : EntitySystem
         if (TryComp(target, out CMDefibrillatorBlockedComponent? block))
         {
             if (user != null)
-                _popup.PopupEntity(Loc.GetString(block.Popup, ("target", uid)), uid, user.Value);
+                _popup.PopupEntity(Loc.GetString(block.Popup, ("target", target)), uid, user.Value);
             return false;
         }
 
-        if (_inventory.TryGetSlotEntity(target, "outerclothing", out var armor)
+        if (_inventory.TryGetSlotEntity(target, "outerClothing", out var armor)
             && TryComp(armor, out CMDefibrillatorBlockedComponent? comp))
         {
             if (user != null)
-                _popup.PopupEntity(Loc.GetString(comp.Popup, ("target", uid)), uid, user.Value);
+                _popup.PopupEntity(Loc.GetString(comp.Popup, ("target", target)), uid, user.Value);
             return false;
         }
 
