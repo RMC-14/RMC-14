@@ -239,6 +239,10 @@
       rmc-aslot-barrel: 0.685, 0.125
       rmc-aslot-rail: -0.125, 0.215
       rmc-aslot-underbarrel: 0.284, -0.19
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCMK80
 
 - type: entity
   parent: CMWeaponPistolBase
