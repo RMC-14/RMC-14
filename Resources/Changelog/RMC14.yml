@@ -3535,5 +3535,19 @@
   id: 426
   time: '2024-07-22T10:18:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3201
+- author: DrSmugleaf
+  changes:
+  - message: Added designating primary landing zone. This will make an ARES announcement
+      and make the other landing zone unable to be hijacked by the Queen. If no landing
+      zone is made primary after 25 minutes, one will automatically be chosen.
+    type: Add
+  - message: Fixed there being no initial 15 minute cooldown for calling down a ship
+      for a hijack.
+    type: Fix
+  - message: Fixed being able to call two dropships down to the same spot for hijack.
+    type: Fix
+  id: 427
+  time: '2024-07-22T10:20:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3177
 Name: RMC14
 Order: -1
