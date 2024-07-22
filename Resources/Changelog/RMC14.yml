@@ -3549,5 +3549,22 @@
   id: 427
   time: '2024-07-22T10:20:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3177
+- author: Dutch-VanDerLinde
+  changes:
+  - message: The xeno pheromones menu is now a radial menu rather than a window
+    type: Tweak
+  id: 428
+  time: '2024-07-22T10:34:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3191
+- author: Whisper
+  changes:
+  - message: Fences and catwalks are no longer buildable. Fences are still able to
+      be deconstructed.
+    type: Fix
+  - message: catwalks are no longer able to be deconstructed.
+    type: Fix
+  id: 429
+  time: '2024-07-22T10:35:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3200
 Name: RMC14
 Order: -1
