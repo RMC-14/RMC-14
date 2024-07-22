@@ -158,7 +158,7 @@ public sealed class CPRSystem : EntitySystem
     {
         if (!ent.Comp.IsToggled)
         {
-            _popups.PopupClient(Loc.GetString("cm-crp-take-off-mask"), ("target", ent), args.Args.Performer);
+            _popups.PopupClient(Loc.GetString("cm-crp-take-off-mask", ("target", args.Args.Target)), ent, args.Args.Performer);
             args.Args.Cancelled = true;
         }
     }
