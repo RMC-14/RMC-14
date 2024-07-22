@@ -53,6 +53,8 @@
       entries:
       - id: CMMagazinePistolMK80
         points: 5
+      - id: RMCMagazinePistolSU6
+        points: 5
     #- id: CMM44HeavySpeedLoader
     #  points: 10
     #- id: CMM1984HPMagazine
