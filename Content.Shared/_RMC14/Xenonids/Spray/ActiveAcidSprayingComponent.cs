@@ -12,7 +12,7 @@ public sealed partial class ActiveAcidSprayingComponent : Component
     public EntProtoId Acid;
 
     [DataField, AutoNetworkedField]
-    public List<(MapCoordinates Coordinates, TimeSpan At)> Spawn = new();
+    public List<(MapCoordinates Coordinates, TimeSpan At, Direction Direction)> Spawn = new();
 
     [DataField, AutoNetworkedField]
     public EntityUid? Chain;
