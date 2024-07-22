@@ -173,13 +173,3 @@
     contents:
       - id: RMCPowerCellHigh
         amount: 8
-
-- type: entity
-  id: RMCCrateFloodlights
-  parent: CMCrateConstruction
-  name: floodlight crate (x4)
-  components:
-  - type: StorageFill
-    contents:
-      - id: RMCSmallFloodlight
-        amount: 4
