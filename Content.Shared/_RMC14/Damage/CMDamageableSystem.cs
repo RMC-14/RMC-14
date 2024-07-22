@@ -60,7 +60,6 @@ public sealed class CMDamageableSystem : EntitySystem
 
     private void OnMultiplierFlagsDamageModify(Entity<DamageMultiplierFlagsComponent> ent, ref DamageModifyEvent args)
     {
-        Logger.Log(LogLevel.Debug, $"Damage: {args.Damage.GetTotal()}");
         if (!_damageableQuery.TryComp(ent, out var damageable) || !TryComp(args.Tool, out DamageMultipliersComponent? multComponent))
             return;
 
