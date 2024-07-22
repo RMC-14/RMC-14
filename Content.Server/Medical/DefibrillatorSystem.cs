@@ -116,7 +116,15 @@ public sealed class DefibrillatorSystem : EntitySystem
         if (TryComp(target, out CMDefibrillatorBlockedComponent? block))
         {
             if (user != null)
-                _popup.PopupEntity(Loc.GetString(block.Popup), uid, user.Value);
+                _popup.PopupEntity(Loc.GetString(block.Popup), ("target", uid), user.Value);
+            return false;
+        }
+
+        if (_inventory.TryGetSlotEntity(target, "outerclothing", out var armor)
+            && TryComp(target, out CMDefibrillatorBlockedComponent? block))
+        {
+            if (user != null)
+                _popup.PopupEntity(Loc.GetString(block.Popup), ("target", uid), user.Value);
             return false;
         }
 
@@ -144,13 +152,13 @@ public sealed class DefibrillatorSystem : EntitySystem
 
         return _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, component.DoAfterDuration, new DefibrillatorZapDoAfterEvent(),
             uid, target, uid)
-            {
-                BlockDuplicate = true,
-                BreakOnHandChange = true,
-                NeedHand = true,
-                BreakOnMove = !component.AllowDoAfterMovement,
-                DuplicateCondition = DuplicateConditions.SameEvent,
-            });
+        {
+            BlockDuplicate = true,
+            BreakOnHandChange = true,
+            NeedHand = true,
+            BreakOnMove = !component.AllowDoAfterMovement,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+        });
     }
 
     public void Zap(EntityUid uid, EntityUid target, EntityUid user, DefibrillatorComponent? component = null, MobStateComponent? mob = null, MobThresholdsComponent? thresholds = null)

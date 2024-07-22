@@ -187,3 +187,18 @@
     maxCharge: 10000
     startingCharge: 10000
   - type: SmartGunBattery
+
+- type: entity
+  id: RMCPowerCellSlot
+  abstract: true
+  components:
+    - type: ContainerContainer
+      containers:
+        cell_slot: !type:ContainerSlot { }
+    - type: PowerCellSlot
+      cellSlotId: cell_slot
+    - type: ItemSlots
+      slots:
+        cell_slot:
+          name: power-cell-slot-component-slot-name-default
+          startingItem: RMCPowerCell
