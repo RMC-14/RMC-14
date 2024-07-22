@@ -1,0 +1,100 @@
+- type: entity
+  parent: [BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder]
+  abstract: true
+  id: RMCWeaponRevolverBase
+  components:
+  - type: AmmoCounter
+  - type: Sprite
+    state: icon
+  - type: Item
+    size: Normal
+  - type: Tag
+    tags:
+    - Sidearm
+  - type: Clothing
+    slots:
+    - suitStorage
+    - belt
+  - type: Wieldable
+  - type: Gun
+    fireRate: 1.5
+    minAngle: 10
+    maxAngle: 20
+    angleIncrease: 5
+    angleDecay: 10
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_44mag.ogg
+  - type: GunWieldBonus
+    minAngle: -10
+    maxAngle: -10
+    angleIncrease: -4
+    angleDecay: 0
+  - type: ContainerContainer
+    containers:
+      revolver-ammo: !type:Container
+  - type: RevolverAmmoProvider
+    whitelist:
+      tags:
+        - RMCMagazineRevolver
+        - RMCSpeedLoaderM44
+        - RMCCartridgeRevolver44
+    proto: RMCCartridgeRevolver44
+    capacity: 6
+    chambers: [ True, True, True, True, True, True ]
+    ammoSlots: [ null, null, null, null, null, null ]
+    soundEject:
+      path: /Audio/Weapons/Guns/MagOut/revolver_magout.ogg
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/revolver_magin.ogg
+  - type: Appearance
+  - type: RMCNameItemOnVend
+    item: Sidearm
+  - type: GunUnskilledPenalty
+    angleIncrease: 5
+
+- type: entity
+  parent: RMCWeaponRevolverBase
+  id: RMCWeaponRevolverM44
+  name: M44 combat revolver
+  description: A bulky revolver, occasionally carried by assault troops and officers in the Marine Corps, as well as civilian law enforcement. Fires .44 Magnum rounds.
+  components:
+  - type: Gun
+    fireRate: 2
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m44.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m44.rsi
+  - type: RevolverAmmoProvider
+    proto: RMCCartridgeRevolver44
+    capacity: 7
+    chambers: [ True, True, True, True, True, True, True ]
+    ammoSlots: [ null, null, null, null, null, null, null ]
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          # -RMCAttachmentBayonet | Not in the game yet, but will be attachable.
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS42xTelescopicMiniscope
+          - RMCAttachmentB8SmartScope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.715, 0.125
+      rmc-aslot-rail: 0, 0.185
+      rmc-aslot-underbarrel: 0.375, -0.155
