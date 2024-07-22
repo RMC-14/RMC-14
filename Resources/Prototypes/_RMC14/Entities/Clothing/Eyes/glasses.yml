@@ -75,7 +75,6 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
-<<<<<<< HEAD
 
 - type: entity
   parent: ClothingEyesBase
@@ -87,8 +86,6 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/rpglasses.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/rpglasses.rsi
-  - type: ShowMindShieldIcons
-  - type: ShowCriminalRecordIcons
   - type: FlashImmunity
 
 - type: entity
@@ -101,8 +98,6 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles.rsi
-  - type: ShowMindShieldIcons
-  - type: ShowCriminalRecordIcons
   - type: FlashImmunity
     
 - type: entity
@@ -115,8 +110,6 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
-  - type: ShowMindShieldIcons
-  - type: ShowCriminalRecordIcons
   - type: FlashImmunity
 
 - type: entity
@@ -129,9 +122,4 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Prescription_ballistic_goggles.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Prescription_ballistic_goggles.rsi
-  - type: ShowMindShieldIcons
-  - type: ShowCriminalRecordIcons
   - type: FlashImmunity
-    
-=======
->>>>>>> 42ffbac7673ae4626c4135ba3925e2a0bea3438a
