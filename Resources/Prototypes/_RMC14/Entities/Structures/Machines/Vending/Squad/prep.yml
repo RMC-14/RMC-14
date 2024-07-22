@@ -42,8 +42,8 @@
       entries:
       - id: CMWeaponPistolM77
         amount: 25
-      #- id: CMWeaponRevolverM44
-      #  amount: 25
+      - id: RMCWeaponRevolverM44
+        amount: 25
       - id: CMWeaponPistolM1984
         amount: 25
       #- id: WeaponFlareM82F
@@ -52,8 +52,8 @@
       entries:
       - id: CMMagazinePistolM77AP
         amount: 25
-#      - id: CMSpeedLoaderM44
-#        amount: 20
+      - id: RMCSpeedLoaderM44
+        amount: 20
       - id: CMMagazinePistolM1984
         amount: 25
     - name: Attachments
@@ -301,12 +301,14 @@
         amount: 1
     - name: Special Ammunition
       entries:
+      #- id: CMDrumSmartGunM56
+      #  amount: 1
       - id: RMCMagazineSmartGun
         amount: 1
       #- id: CMSpeedLoaderM44Heavy
       #  amount: 2
-      #- id: CMSpeedLoaderM44Marksman
-      #  amount: 2
+      - id: RMCSpeedLoader44Marksman
+        amount: 2
     - name: Restricted Firearm Ammunition
       entries:
       - id: CMMagazinePistolMK80

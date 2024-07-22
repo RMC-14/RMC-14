@@ -83,6 +83,10 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: vendingMachineInventory
   id: CMVendomat

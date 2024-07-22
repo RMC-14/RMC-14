@@ -44,15 +44,14 @@ public abstract class SharedOnCollideSystem : EntitySystem
         ent.Comp.Damaged.Add(other);
         Dirty(ent);
 
-        Entity<CollideChainComponent?>? chain = ent.Comp.Chain;
-        if (chain == null || AddToChain(chain.Value, other))
-        {
-            _damageable.TryChangeDamage(other, ent.Comp.Damage);
-        }
-        else
+        if (ent.Comp.Chain == null || AddToChain(ent.Comp.Chain.Value, other))
         {
             _damageable.TryChangeDamage(other, ent.Comp.ChainDamage);
             DoNewCollide(ent, other);
+        }
+        else
+        {
+            _damageable.TryChangeDamage(other, ent.Comp.Damage);
         }
     }
 

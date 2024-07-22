@@ -3583,7 +3583,8 @@
   url: https://github.com/RMC-14/RMC-14/pull/2933
 - author: DrSmugleaf
   changes:
-  - message: Added Spray Acid ability for the Spitter.
+  - message: Added Spray Acid ability for the Spitter. This replaces the placeholder scattered spit ability
+      that Spitters temporarily had.
     type: Add
   id: 432
   time: '2024-07-22T10:48:43.0000000+00:00'
@@ -3605,5 +3606,19 @@
   id: 434
   time: '2024-07-22T11:00:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3155
+- author: musicmanvr
+  changes:
+  - message: Ported the M44 combat revolver, find it in your nearest vendor!
+    type: Add
+  id: 435
+  time: '2024-07-22T12:12:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3025
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenonids being able to open UIs that they shouldn't be able to.
+    type: Fix
+  id: 436
+  time: '2024-07-22T12:12:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3204
 Name: RMC14
 Order: -1

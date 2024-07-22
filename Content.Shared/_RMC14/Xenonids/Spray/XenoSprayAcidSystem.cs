@@ -9,6 +9,7 @@ using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Doors.Components;
 using Content.Shared.Tag;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -20,6 +21,7 @@ namespace Content.Shared._RMC14.Xenonids.Spray;
 public sealed class XenoSprayAcidSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
@@ -56,6 +58,7 @@ public sealed class XenoSprayAcidSystem : EntitySystem
     private void OnSprayAcidAction(Entity<XenoSprayAcidComponent> xeno, ref XenoSprayAcidActionEvent args)
     {
         args.Handled = true;
+        _audio.PlayPredicted(xeno.Comp.Sound, xeno, xeno);
 
         if (_net.IsClient)
             return;
