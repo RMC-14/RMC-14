@@ -61,10 +61,7 @@ public sealed class TrackerAlertSystem : EntitySystem
 
     private void OnMapInit(Entity<RMCTrackerAlertComponent> ent, ref MapInitEvent args)
     {
-        if (!TryComp(ent, out XenoComponent? xeno))
-            return;
-
-        UpdateDirection((ent, ent.Comp, xeno));
+        UpdateDirection((ent, ent.Comp));
     }
 
     private void OnComponentStartup(Entity<RMCTrackerAlertTargetComponent> ent, ref ComponentStartup args)
@@ -113,23 +110,23 @@ public sealed class TrackerAlertSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var query = EntityQueryEnumerator<RMCTrackerAlertComponent, XenoComponent>();
-        while (query.MoveNext(out var uid, out var tracker, out var xeno))
+        var query = EntityQueryEnumerator<RMCTrackerAlertComponent>();
+        while (query.MoveNext(out var uid, out var tracker))
         {
             if (_timing.CurTime < tracker.NextUpdateTime)
                 continue;
             tracker.NextUpdateTime = _timing.CurTime + tracker.UpdateRate;
 
-            UpdateDirection((uid, tracker, xeno));
+            UpdateDirection((uid, tracker));
         }
     }
 
-    private void UpdateDirection(Entity<RMCTrackerAlertComponent?, XenoComponent?> ent, bool force = false)
+    private void UpdateDirection(Entity<RMCTrackerAlertComponent?> ent, bool force = false)
     {
-        if (!Resolve(ent.Owner, ref ent.Comp1, ref ent.Comp2))
+        if (!Resolve(ent.Owner, ref ent.Comp))
             return;
 
-        var alertId = ent.Comp1.AlertPrototype;
+        var alertId = ent.Comp.AlertPrototype;
         // queen_locator dm
         // If hud doesn't exist exit
         // Get type of tracker
@@ -158,7 +155,7 @@ public sealed class TrackerAlertSystem : EntitySystem
             return;
         }
 
-        if (ent.Comp1.TrackedEntity == null)
+        if (ent.Comp.TrackedEntity == null)
         {
             _alerts.ShowAlert(ent, alertId, 0, showCooldown: false);
             return;
@@ -172,24 +169,24 @@ public sealed class TrackerAlertSystem : EntitySystem
             return;
         }
 
-        ent.Comp1.WorldDirection = GetTrackerDirection((ent, ent.Comp1));
+        ent.Comp.WorldDirection = GetTrackerDirection((ent, ent.Comp));
 
-        if (ent.Comp1.WorldDirection == ent.Comp1.LastDirection && !force)
+        if (ent.Comp.WorldDirection == ent.Comp.LastDirection && !force)
             return;
 
         if (alertPrototype.SupportsSeverity &&
-            AlertSeverity.TryGetValue(ent.Comp1.WorldDirection, out var severity))
+            AlertSeverity.TryGetValue(ent.Comp.WorldDirection, out var severity))
         {
             _alerts.ShowAlert(ent, alertId, severity, showCooldown: false);
         }
         else
         {
-            _alerts.ClearAlertCategory(ent, ent.Comp1.DirectionAlertCategory);
+            _alerts.ClearAlertCategory(ent, ent.Comp.DirectionAlertCategory);
         }
 
-        ent.Comp1.LastDirection = ent.Comp1.WorldDirection;
+        ent.Comp.LastDirection = ent.Comp.WorldDirection;
 
-        Dirty(ent, ent.Comp1);
+        Dirty(ent, ent.Comp);
     }
 
     private TrackerDirection GetTrackerDirection(Entity<RMCTrackerAlertComponent> ent)
