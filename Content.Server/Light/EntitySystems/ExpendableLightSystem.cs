@@ -13,6 +13,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
+using Robust.Shared.Spawners;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Light.EntitySystems
@@ -137,6 +138,7 @@ namespace Content.Server.Light.EntitySystems
                     _appearance.SetData(ent, ExpendableLightVisuals.Behavior, string.Empty, appearance);
                     var ignite = new IgnitionEvent(false);
                     RaiseLocalEvent(ent, ref ignite);
+                    EnsureComp<TimedDespawnComponent>(ent);
                     break;
             }
         }
