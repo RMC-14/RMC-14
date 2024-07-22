@@ -5,7 +5,6 @@ using Content.Shared.GameTicking;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared._RMC14.Xenonids;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -83,12 +82,6 @@ public abstract class SharedCryostorageSystem : EntitySystem
         var (_, comp) = ent;
         if (args.Container.ID != comp.ContainerId)
             return;
-
-        if (HasComp<XenoComponent>(args.EntityUid))
-        {
-            args.Cancel();
-            return;
-        }
 
         if (_mobState.IsIncapacitated(args.EntityUid))
         {
