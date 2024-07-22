@@ -31,8 +31,7 @@
     - ActionXenoAcidNormal
     - ActionXenoSpit
     - ActionXenoChargeSpit
-    - ActionXenoScatteredSpit # TODO RMC14 replace this with spray acid
-    #    - ActionXenoSprayAcid
+    - ActionXenoSprayAcid
     - ActionXenoDevolve
     tier: 2
     hudOffset: 0,0.16
@@ -57,6 +56,10 @@
       groups:
         Burn: 25 # TODO RMC14 damage over time
   - type: XenoScatteredSpit
+  - type: XenoSprayAcid
+    barricadeDamage:
+      types:
+        Heat: 5
   - type: CMArmor
     armor: 15
     explosionArmor: 20

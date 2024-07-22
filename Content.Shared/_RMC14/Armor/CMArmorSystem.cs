@@ -21,8 +21,8 @@ public sealed class CMArmorSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
-    [ValidatePrototypeId<DamageGroupPrototype>]
-    private const string DamageGroup = "Brute";
+    private static readonly ProtoId<DamageGroupPrototype> ArmorGroup = "Brute";
+    private static readonly ProtoId<DamageGroupPrototype> BioGroup = "Burn";
 
     public override void Initialize()
     {
@@ -73,11 +73,13 @@ public sealed class CMArmorSystem : EntitySystem
     private void OnGetArmor(Entity<CMArmorComponent> armored, ref CMGetArmorEvent args)
     {
         args.Armor += armored.Comp.Armor;
+        args.Bio += armored.Comp.Bio;
     }
 
     private void OnGetArmorRelayed(Entity<CMArmorComponent> armored, ref InventoryRelayedEvent<CMGetArmorEvent> args)
     {
         args.Args.Armor += armored.Comp.Armor;
+        args.Args.Bio += armored.Comp.Bio;
     }
 
     private void OnGetExplosionResistance(Entity<CMArmorComponent> armored, ref GetExplosionResistanceEvent args)
@@ -168,6 +170,7 @@ public sealed class CMArmorSystem : EntitySystem
             var piercingEv = new CMGetArmorPiercingEvent();
             RaiseLocalEvent(args.Tool.Value, ref piercingEv);
             ev.Armor -= piercingEv.Piercing;
+            ev.Bio -= piercingEv.Piercing;
         }
 
         if (args.Origin is { } origin)
@@ -185,34 +188,40 @@ public sealed class CMArmorSystem : EntitySystem
             }
         }
 
-        var armor = Math.Max(ev.Armor, 0);
+        args.Damage = new DamageSpecifier(args.Damage);
+        Resist(args.Damage, ev.Armor, ArmorGroup);
+        Resist(args.Damage, ev.Bio, BioGroup);
+    }
+
+    private void Resist(DamageSpecifier damage, int armor, ProtoId<DamageGroupPrototype> group)
+    {
+        armor = Math.Max(armor, 0);
         if (armor <= 0)
             return;
 
-        args.Damage = new DamageSpecifier(args.Damage);
         var resist = Math.Pow(1.1, armor / 5.0);
-        var types = _prototypes.Index<DamageGroupPrototype>(DamageGroup).DamageTypes;
+        var types = _prototypes.Index(group).DamageTypes;
 
         foreach (var type in types)
         {
-            if (args.Damage.DamageDict.TryGetValue(type, out var amount) &&
+            if (damage.DamageDict.TryGetValue(type, out var amount) &&
                 amount > FixedPoint2.Zero)
             {
-                args.Damage.DamageDict[type] = amount / resist;
+                damage.DamageDict[type] = amount / resist;
             }
         }
 
-        var newDamage = args.Damage.GetTotal();
+        var newDamage = damage.GetTotal();
         if (newDamage != FixedPoint2.Zero && newDamage < armor * 2)
         {
             var damageWithArmor = FixedPoint2.Max(0, newDamage * 4 - armor);
 
             foreach (var type in types)
             {
-                if (args.Damage.DamageDict.TryGetValue(type, out var amount) &&
+                if (damage.DamageDict.TryGetValue(type, out var amount) &&
                     amount > FixedPoint2.Zero)
                 {
-                    args.Damage.DamageDict[type] = amount * damageWithArmor / (newDamage * 4);
+                    damage.DamageDict[type] = amount * damageWithArmor / (newDamage * 4);
                 }
             }
         }

@@ -29,15 +29,15 @@
       entries:
       - id: CMWeaponPistolM77
         amount: 50
-      #- id: CMWeaponRevolverM44
-      #  amount: 50
+      - id: RMCWeaponRevolverM44
+        amount: 50
       - id: CMWeaponPistolM1984
         amount: 50
       #- id: CMWeaponFlareM82F
       #  amount: 20
     - name: Restricted Sidearms
       entries:
-      - id: CMWeaponPistolMK80
+      - id: RMCMK80Case
         amount: 4
       - id: RMCSmartPistolCase
         amount: 3
@@ -275,8 +275,8 @@
         amount: 100
       - id: CMMagazineSMGM63
         amount: 100
-      #- id: M44 Speed Loader (.44)
-      #  amount: 80
+      - id: RMCBaseSpeedLoader44
+        amount: 80
       - id: CMMagazinePistolM1984
         amount: 102
     - name: Armor-piercing ammunition
@@ -305,8 +305,8 @@
         amount: 4
       #- id: M44 Heavy Speed Loader (.44)
       #  amount: 10
-      #- id: M44 Marksman Speed Loader (.44)
-      #  amount: 6
+      - id: RMCSpeedLoader44Marksman
+        amount: 6
       #- id: M4A3 HP Magazine (9mm)
       #  amount: 2
       #- id: M41AE2 Holo Target Rounds (10x24mm)
@@ -423,8 +423,8 @@
         amount: 5
       - id: RMCAttachmentM54CStockCollapsible
         amount: 5
-      #- id: RMCAttachmentM44MagnumSharpshooterStock # UNCOMMENT WHEN THE M44 IS ADDED
-      #  amount: 5
+#      - id: RMCAttachmentM44MagnumSharpshooterStock # ISSUES!!!
+#        amount: 5
 
 #UNIFORM VENDOR
 

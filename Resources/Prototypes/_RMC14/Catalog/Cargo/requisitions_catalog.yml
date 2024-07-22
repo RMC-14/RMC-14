@@ -136,6 +136,8 @@
         crate: CMCrateGrenadesHighExplosive
       - cost: 3000
         crate: CMCrateGrenadesFrag
+      - cost: 4000
+        crate: RMCCrateBreachingCharges
     - name: Food
       entries:
       - cost: 1000

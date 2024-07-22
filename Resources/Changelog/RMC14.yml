@@ -3466,5 +3466,159 @@
   id: 418
   time: '2024-07-20T12:10:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3164
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Requisitions not being able to buy more breaching charges. They
+      can now order a crate of 4 breaching charges for $4000.
+    type: Fix
+  id: 419
+  time: '2024-07-21T06:38:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3180
+- author: DrSmugleaf
+  changes:
+  - message: The turrets guarding landing zones round-start now shoot twice as fast
+      and pierce all armor, with a DPS of 120 (up from 90)
+    type: Tweak
+  id: 420
+  time: '2024-07-21T06:44:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3178
+- author: DrSmugleaf
+  changes:
+  - message: The ASRS console is no longer corrodible.
+    type: Tweak
+  id: 421
+  time: '2024-07-21T06:44:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3181
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added MK80 hand cannon pistol case
+    type: Add
+  id: 422
+  time: '2024-07-22T05:03:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3182
+- author: DrSmugleaf
+  changes:
+  - message: Fixed lathes making upstream buckets instead of RMC-14 buckets, which
+      also had an unintentionally higher capacity.
+    type: Fix
+  id: 423
+  time: '2024-07-22T05:05:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3195
+- author: DrSmugleaf
+  changes:
+  - message: Added crash landing back to the planet when outside the dropship or in
+      space far away from the warship. Ending up outside the dropship during FTL will
+      now crash land you to a random spot on the planet and instantly kill you.
+    type: Add
+  - message: Fixed xenos being able to hug the outsides of the dropship to hitch a
+      ride.
+    type: Fix
+  - message: Fixed the command tablet in Savannah not being accessible to anyone but
+      the CO. It is now located in the CIC.
+    type: Fix
+  - message: Fixed Savannah having two groundside operation consoles.
+    type: Fix
+  id: 424
+  time: '2024-07-22T10:19:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3170
+- author: DrSmugleaf
+  changes:
+  - message: The Dropship landing gibbing you now has half a tile less range.
+    type: Tweak
+  id: 425
+  time: '2024-07-22T10:19:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3172
+- author: Whisper
+  changes:
+  - message: Pretzels are no longer made of meatballs.
+    type: Fix
+  id: 426
+  time: '2024-07-22T10:18:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3201
+- author: DrSmugleaf
+  changes:
+  - message: Added designating primary landing zone. This will make an ARES announcement
+      and make the other landing zone unable to be hijacked by the Queen. If no landing
+      zone is made primary after 25 minutes, one will automatically be chosen.
+    type: Add
+  - message: Fixed there being no initial 15 minute cooldown for calling down a ship
+      for a hijack.
+    type: Fix
+  - message: Fixed being able to call two dropships down to the same spot for hijack.
+    type: Fix
+  id: 427
+  time: '2024-07-22T10:20:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3177
+- author: Dutch-VanDerLinde
+  changes:
+  - message: The xeno pheromones menu is now a radial menu rather than a window
+    type: Tweak
+  id: 428
+  time: '2024-07-22T10:34:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3191
+- author: Whisper
+  changes:
+  - message: Fences and catwalks are no longer buildable. Fences are still able to
+      be deconstructed.
+    type: Fix
+  - message: catwalks are no longer able to be deconstructed.
+    type: Fix
+  id: 429
+  time: '2024-07-22T10:35:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3200
+- author: Vermidia
+  changes:
+  - message: You can now inject and draw from blood bags, but they will only inject
+      blood in them
+    type: Add
+  id: 430
+  time: '2024-07-22T10:41:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3175
+- author: ShadowCommander
+  changes:
+  - message: Holster keybinds now equip to equipped holsters before inventory slots.
+    type: Tweak
+  id: 431
+  time: '2024-07-22T10:41:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2933
+- author: DrSmugleaf
+  changes:
+  - message: Added Spray Acid ability for the Spitter. This replaces the placeholder scattered spit ability
+      that Spitters temporarily had.
+    type: Add
+  id: 432
+  time: '2024-07-22T10:48:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3157
+- author: musicmanvr
+  changes:
+  - message: Added floodlights to help be a light in the darkness.
+    type: Add
+  id: 433
+  time: '2024-07-22T10:59:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3151
+- author: blueDev2
+  changes:
+  - message: Multiple people wiring the same barricade no longer wastes barbed wire.
+    type: Fix
+  - message: Attempting to wire another cade while already wiring does not cancel
+      the original wiring.
+    type: Tweak
+  id: 434
+  time: '2024-07-22T11:00:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3155
+- author: musicmanvr
+  changes:
+  - message: Ported the M44 combat revolver, find it in your nearest vendor!
+    type: Add
+  id: 435
+  time: '2024-07-22T12:12:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3025
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenonids being able to open UIs that they shouldn't be able to.
+    type: Fix
+  id: 436
+  time: '2024-07-22T12:12:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3204
 Name: RMC14
 Order: -1

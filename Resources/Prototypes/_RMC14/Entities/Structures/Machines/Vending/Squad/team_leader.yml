@@ -61,8 +61,8 @@
     #  points: 5
     - name: Restricted Firearms
       entries:
-      - id: CMWeaponPistolMK80 # TODO RMC14 case with 2 mags
-        points: 5 # TODO RMC14 10
+      - id: RMCMK80Case
+        points: 10
       - id: RMCSmartPistolCase
         points: 12
     #- id: CMM79GrenadeLauncher

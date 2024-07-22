@@ -1,0 +1,187 @@
+- type: entity
+  parent: BaseStructureDynamic
+  id: RMCSmallFloodlight
+  name: small floodlight
+  description: A small bit of light in the darkness.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Objects/Misc/Lights/floodlight.rsi
+    layers:
+      - state: smallfloodon # Temporary until power works.
+      - state: smallflood
+        visible: false
+        map: [ "light" ]
+  - type: InteractionOutline
+  - type: Repairable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: PointLight
+    enabled: true
+    radius: 6
+    netsync: false
+    energy: 5
+    offset: "0, 0"
+    color: "#ECFFFF"
+    mask: /Textures/_RMC14/Effects/LightMasks/quad_cone.png
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 1
+            max: 1
+          CMSheetGlass1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 50
+        mask:
+        - MachineMask
+        layer:
+        - WallLayer
+  - type: Appearance
+
+- type: entity
+  parent: BaseStructure
+  id: RMCTallFloodlight
+  name: tall floodlight
+  description: A pillar of light in the darkness.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Objects/Misc/Lights/floodlightbig.rsi
+    layers:
+      - state: bigfloodon # Temporary until power works.
+      - state: bigflood
+        visible: false
+        map: [ "light" ]
+    offset: "0.0,0.5"
+    drawdepth: Mobs
+  - type: Transform
+    anchored: true
+  - type: Construction
+    graph: RMCFloodlightBroken
+    node: completed
+  - type: InteractionOutline
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: PointLight
+    enabled: true
+    radius: 10
+    netsync: false
+    energy: 7
+    offset: "0,0.5"
+    color: "#ECFFFF"
+    mask: /Textures/_RMC14/Effects/LightMasks/quad_cone.png
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+  - type: Physics
+  - type: Repairable
+  - type: Corrodible # Repairable, not destructible.
+    isCorrodible: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 50
+        mask:
+        - MachineMask
+        layer:
+        - WallLayer
+  - type: Appearance
+
+- type: entity
+  parent: BaseStructure
+  id: RMCFloodlightBroken
+  name: tall broken floodlight
+  description: A pasted on note says 'To fix, unscrew the panel, crowbar out the damaged assembly, weld it fixed, add 2 cable, then close the panel.'
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Objects/Misc/Lights/floodlightbig.rsi
+    state: broken
+    offset: "0.0,0.5"
+    drawdepth: Mobs
+  - type: Construction
+    graph: RMCFloodlightBroken
+    node: start
+  - type: InteractionOutline
+  - type: Anchorable
+  - type: Physics
+  - type: Corrodible # Repairable, not destructible.
+    isCorrodible: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 155
+        mask:
+        - MachineMask
+        layer:
+        - WallLayer
+
+# LZ Floodlights
+
+- type: entity
+  parent: BaseStructure
+  id: RMCLZFloodlight
+  name: LZ floodlight
+  description: An indestructible bit of light in the darkness. Never seems to run out of power.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Objects/Misc/Lights/floodlight.rsi
+    state: magical
+  - type: InteractionOutline
+  - type: PointLight
+    enabled: true
+    radius: 5
+    energy: 3
+    netsync: false
+    color: "#ECFFFF"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 50
+        mask:
+        - HighImpassable
+  - type: Corrodible
+    isCorrodible: false
+  - type: Appearance
