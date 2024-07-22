@@ -65,3 +65,8 @@
   id: RMCSmartPistol
 
 - type: Tag
+ id: RMCSmartPistolHolster
+
+- type: Tag
+ id: RMCSmartPistolHolster
+   
