@@ -156,8 +156,8 @@ public sealed class CPRSystem : EntitySystem
 
     private void OnMaskCPRAttempt(Entity<MaskComponent> ent, ref InventoryRelayedEvent<ReceiveCPRAttemptEvent> args)
     {
-        var target = args.Args.Target
-        var performer = args.Args.Performer
+        var target = args.Args.Target;
+        var performer = args.Args.Performer;
 
         if (!ent.Comp.IsToggled)
         {
