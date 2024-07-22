@@ -199,6 +199,24 @@
       - Xeno
       - XenoEgg
       - Infectable
+  - type: XenoInteractBlacklist
+    blacklist:
+      components:
+      - HyperSleepChamber
+      - HandheldLight
+      - DisposalUnit
+      - CMAutomatedVendor
+      - VendingMachine
+      - ActivatableUIRequiresPower
+      - RequisitionsComputer
+      - PowerCellSlot
+      - Bin
+      - GasMixer
+      - GasFilter
+      - GasPressurePump
+      - GasVolumePump
+      - GasOutletInjector
+      - GasValve
   - type: BlockPullingDead
   - type: XenoFriendly
   - type: Undisposable

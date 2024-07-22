@@ -1,9 +1,8 @@
-﻿using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared._RMC14.NightVision;
-using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -17,7 +16,6 @@ using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction.Events;
-using Content.Shared.Lathe;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
@@ -26,6 +24,7 @@ using Content.Shared.Radio;
 using Content.Shared.Standing;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Whitelist;
 using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
 
@@ -45,6 +44,7 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     private EntityQuery<AffectableByWeedsComponent> _affectableQuery;
     private EntityQuery<DamageableComponent> _damageableQuery;
@@ -79,10 +79,12 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, HealthScannerAttemptTargetEvent>(OnXenoHealthScannerAttemptTarget);
         SubscribeLocalEvent<XenoComponent, GetDefaultRadioChannelEvent>(OnXenoGetDefaultRadioChannel);
         SubscribeLocalEvent<XenoComponent, AttackAttemptEvent>(OnXenoAttackAttempt);
-        SubscribeLocalEvent<XenoComponent, UserOpenActivatableUIAttemptEvent>(OnXenoOpenActivatableUIAttempt);
         SubscribeLocalEvent<XenoComponent, GetMeleeDamageEvent>(OnXenoGetMeleeDamage);
         SubscribeLocalEvent<XenoComponent, DamageModifyEvent>(OnXenoDamageModify);
         SubscribeLocalEvent<XenoComponent, RefreshMovementSpeedModifiersEvent>(OnXenoRefreshSpeed);
+
+        SubscribeLocalEvent<XenoInteractBlacklistComponent, UserOpenActivatableUIAttemptEvent>(OnXenoOpenActivatableUIAttemptBlacklist);
+        SubscribeLocalEvent<XenoInteractBlacklistComponent, InteractionAttemptEvent>(OnXenoInteractAttemptBlacklist);
 
         Subs.CVar(_config, RMCCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
@@ -151,13 +153,25 @@ public sealed class XenoSystem : EntitySystem
         }
     }
 
-    private void OnXenoOpenActivatableUIAttempt(Entity<XenoComponent> ent, ref UserOpenActivatableUIAttemptEvent args)
+    private void OnXenoInteractAttemptBlacklist(Entity<XenoInteractBlacklistComponent> xeno, ref InteractionAttemptEvent args)
     {
         if (args.Cancelled)
             return;
 
-        if (HasComp<LatheComponent>(args.Target) ||
-            HasComp<CMAutomatedVendorComponent>(args.Target))
+        if (args.Target is not { } target)
+            return;
+        if (_whitelist.IsBlacklistPassOrNull(xeno.Comp.Blacklist, target))
+        {
+            args.Cancelled = true;
+        }
+    }
+
+    private void OnXenoOpenActivatableUIAttemptBlacklist(Entity<XenoInteractBlacklistComponent> xeno, ref UserOpenActivatableUIAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (_whitelist.IsBlacklistPassOrNull(xeno.Comp.Blacklist, args.Target))
         {
             args.Cancel();
         }
