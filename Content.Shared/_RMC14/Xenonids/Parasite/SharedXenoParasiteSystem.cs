@@ -520,10 +520,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             if (infected.TransferMindOnBurst)
             {
                 if (!_net.IsClient && _mind.TryGetMind(uid, out var mindId, out _))
-                {
-                    _mind.WipeMind(mindId);
                     _mind.TransferTo(mindId, spawned);
-                }
             }
 
             _xeno.SetHive(spawned, infected.Hive);
