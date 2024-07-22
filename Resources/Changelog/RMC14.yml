@@ -3583,8 +3583,8 @@
   url: https://github.com/RMC-14/RMC-14/pull/2933
 - author: DrSmugleaf
   changes:
-  - message: Added Spray Acid ability for the Spitter. This replaces the placeholder scattered spit ability
-      that Spitters temporarily had.
+  - message: Added Spray Acid ability for the Spitter. This replaces the placeholder
+      scattered spit ability that Spitters temporarily had.
     type: Add
   id: 432
   time: '2024-07-22T10:48:43.0000000+00:00'
@@ -3620,5 +3620,12 @@
   id: 436
   time: '2024-07-22T12:12:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3204
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added SU-6 magazines to squad vendors
+    type: Add
+  id: 437
+  time: '2024-07-22T23:10:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3208
 Name: RMC14
 Order: -1
