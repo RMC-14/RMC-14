@@ -77,7 +77,7 @@
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,8,1
+    - 0,0,7,1
     whitelist:
       tags:
       - WeaponRifleM54CE2
