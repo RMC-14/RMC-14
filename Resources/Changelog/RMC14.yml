@@ -3583,7 +3583,8 @@
   url: https://github.com/RMC-14/RMC-14/pull/2933
 - author: DrSmugleaf
   changes:
-  - message: Added Spray Acid ability for the Spitter.
+  - message: Added Spray Acid ability for the Spitter. This replaces the placeholder scattered spit ability
+      that Spitters temporarily had.
     type: Add
   id: 432
   time: '2024-07-22T10:48:43.0000000+00:00'
