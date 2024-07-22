@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": null,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "barcardine-o"
+    },
+    {
+      "name": "hunk-o"
+    },
+    {
+      "name": "chunk-o"
+    },
+    {
+      "name": "boonie-o"
+    },
+    {
+      "name": "open-burrito"
+    },
+    {
+      "name": "open-hotdog"
+    },
+    {
+      "name": "hburger"
+    },
+    {
+      "name": "genero_chips"
+    },
+    {
+      "name": "chips_pepper"
+    },
+    {
+      "name": "chips_red"
+    },
+    {
+      "name": "hotdog_trash"
+    },
+    {
+      "name": "burger_trash"
+    },
+    {
+      "name": "MREtray_empty"
+    },
+    {
+      "name": "chips_red_trash"
+    },
+    {
+      "name": "chips_pepper_trash"
+    },
+    {
+      "name": "genero_chips_trash"
+    },
+    {
+      "name": "hunk_trash"
+    },
+    {
+      "name": "barcardine_trash"
+    },
+    {
+      "name": "boonie_trash"
+    },
+    {
+      "name": "chunk_trash"
+    },
+    {
+      "name": "mealpackempty"
+    },
+    {
+      "name": "burrito_trash"
+    }
+  ]
+}

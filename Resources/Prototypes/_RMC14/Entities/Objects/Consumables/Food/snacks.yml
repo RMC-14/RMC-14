@@ -1,0 +1,349 @@
+- type: entity
+  parent: CMFoodBase
+  id: RMCFoodSnackBase
+  abstract: true
+  components:
+  - type: Food
+  - type: Tag
+    tags:
+      - FoodSnack
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25 # Room for extra condiments
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+  - type: Item
+    sprite: _RMC/Objects/Consumable/Food/packaged.rsi
+    heldPrefix: packet
+    size: Tiny
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackBarcaridine
+  name: Barcaridine bar
+  description: A classic bar of chocolate that smells like the medical bay. 'Chocolate helps the pain go away.'
+  components:
+  - type: FlavorProfile
+    flavors:
+      - chocolate
+      - medicine
+  - type: Sprite
+    state: barcardine-o
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentID: CocoaPowder
+          Quantity: 3
+        - ReagentID: CMBicaridine
+          Quantity: 2 # Given that the overdose rate is a lot higher, I doubt this will cause issues, you'd need to eat more than 15 bars.
+  - type: Item
+  - type: Food
+    trash: barcardine_trash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackBoonie
+  name: Boonie bars
+  description: Two delicious bars of minty chocolate. 'Sometimes things are just... out of reach.'
+  components:
+  - type: FlavorProfile
+    flavors:
+      - chocolate
+      - minty
+  - type: Sprite
+    state: boonie-o
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+        - ReagentID: CocoaPowder
+          Quantity: 4
+  - type: Item
+  - type: Food
+    trash: boonie_trash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackChunk
+  name: CHUNK bar
+  description: A bar of the CHUNK brand chocolate. The densest chocolate permitted to exist according to federal law. We are legally required to ask you not to use this blunt object for anything other than nutrition.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - chocolate
+  - type: Sprite
+    state: chunk-o
+        maxVol: 20 # It's going to take a bit to eat this goddamn thing.
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 7
+        - ReagentID: CocoaPowder
+          Quantity: 10
+  - type: MeleeWeapon # True horror comes from improvisation.
+    damage:
+      types:
+        Blunt: 15
+    soundHit:
+      collection: MetalThud
+  - type: Item
+    size: Small
+  - type: Food
+    trash: chunk_trash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackHUNK
+  name: the HUNK
+  description: A 'crate' of chocolate according to the marketing. The HUNK, an earlier version of the CHUNK bar, was discontinued after several class action lawsuits related to broken teeth.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - chocolate
+      - metallic
+  - type: Sprite
+    state: hunk-o
+        maxVol: 40 # Remember what I said before? It's worse now.
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+        - ReagentID: Iron # IT CONTAINS 30 UNITS OF WHAT???
+          Quantity: 30
+        - ReagentID: CocoaPowder
+          Quantity: 5
+  - type: MeleeWeapon # You could legitimately use this as a strong melee weapon. That horrifies me.
+    damage:
+      types:
+        Blunt: 35
+    soundHit:
+      collection: MetalThud
+  - type: Item
+    size: Large
+  - type: Food
+    trash: hunk_trash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackGeneroChips
+  name: Genero chips
+  description: Premium high-quality chips, now with 0% trans fat. 'Perfectly Generic, as all things should be.'
+  components:
+  - type: FlavorProfile
+    flavors:
+      - potatoes
+      - salty
+  - type: Sprite
+    state: genero_chips
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+        - ReagentID: TableSalt
+          Quantity: 1
+  - type: Item
+  - type: Food
+    trash: genero_chips_trash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackChipsPepper
+  name: pepper chips
+  description: Premium high-quality chips, now with 0% trans fat. Now with added black pepper!
+  components:
+  - type: FlavorProfile
+    flavors:
+      - potatoes
+      - peppery
+  - type: Sprite
+    state: chips_pepper
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+        - ReagentID: Blackpepper
+          Quantity: 1
+  - type: Item
+  - type: Food
+    trash: chips_pepper_trash
+
+# Packaged Hot Foods
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackCheeseburger
+  name: packaged cheeseburger
+  description: A soggy microwavable cheeseburger. There's no time given for how long to cook it. Packaged by We-Ya.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - meaty
+      - cheesy
+      - bun
+  - type: Sprite
+    state: hburger
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+        - ReagentID: Protein
+          Quantity: 5
+        - ReagentID: TableSalt
+          Quantity: 2
+  - type: Item
+  - type: Food
+    trash: burger_trash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackBurrito
+  name: packaged burrito
+  description: A hard microwavable burrito. There's no time given on how long to cook it. Packaged by We-Ya.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - meaty
+      - bread
+  - type: Sprite
+    state: open-burrito
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+        - ReagentID: Protein
+          Quantity: 5
+  - type: Item
+  - type: Food
+    trash: burrito_trash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackHotdog
+  name: packaged hotdog
+  description: A singular, squishy, room temperature hot dog. There's no time given for how long to cook it, so you assume its probably good to go. Packaged by We-Ya.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - meaty
+      - bun
+      - salty
+  - type: Sprite
+    state: open-hotdog
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 3
+        - ReagentID: Protein
+          Quantity: 2
+        - ReagentID: TableSalt
+          Quantity: 2
+  - type: Item
+  - type: Food
+    trash: hotdog_trash
+
+# Trash
+
+- type: entity
+  noSpawn: true
+  parent: BaseItem
+  id: RMCFoodPacketTrash
+  description: This place is crawling with trash.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
+    heldPrefix: packet
+    size: Tiny
+  - type: Tag
+    tags:
+    - Trash
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
+  - type: SpaceGarbage
+
+- type: entity
+  noSpawn: true
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketBarcaridineTrash
+  name: barcaridine wrapper
+  description: An empty wrapper from a barcardine bar. You notice the inside has several medical labels. You're not sure if you care or not about that.
+  components:
+  - type: Sprite
+    state: barcardine_trash
+
+- type: entity
+  noSpawn: true
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketBoonieTrash
+  name: boonie bar wrapper
+  components:
+  - type: Sprite
+    state: boonie_trash
+
+- type: entity
+  noSpawn: true
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketCHUNKTrash
+  name: chunk bar box
+  description: An empty box from a chunk bar. Significantly less heavy.
+  components:
+  - type: Sprite
+    state: chunk_trash
+
+- type: entity
+  noSpawn: true
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketHUNKTrash
+  name: hunk bar crate
+  description: An empty crate from a hunk bar. Tremendously less heavy.
+  components:
+  - type: Sprite
+    state: hunk_trash
+
+- type: entity
+  noSpawn: true
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketGeneroChipsTrash
+  name: empty chips
+  components:
+  - type: Sprite
+    state: genero_chips_trash
+
+- type: entity
+  noSpawn: true
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketCheeseburgerTrash
+  name: burger wrapper
+  description: A greasy plastic film that once held a Cheeseburger. Packaged by We-Ya.
+  components:
+  - type: Sprite
+    state: burger_trash
+
+- type: entity
+  noSpawn: true
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketBurritoTrash
+  name: burrito wrapper
+  description: A foul-smelling plastic film that once held a microwave burrito. Packaged by We-Ya.
+  components:
+  - type: Sprite
+    state: burrito_trash
+
+- type: entity
+  noSpawn: true
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketHotdogTrash
+  name: hotdog wrapper
+  description: A musty plastic film that once held a hotdog. Packaged by We-Ya.
+  components:
+  - type: Sprite
+    state: hotdog_trash

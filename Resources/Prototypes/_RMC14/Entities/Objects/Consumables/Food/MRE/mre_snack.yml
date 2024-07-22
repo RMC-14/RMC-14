@@ -80,7 +80,7 @@
   parent: CMMREFoodSnack
   id: CMMREFoodBiscuit
   name: biscuit
-  description: The contents of a Marine Standard issue MRE. This one is biscuit.
+  description: The contents of a Marine Standard issue MRE. This one is a biscuit.
   components:
   - type: Sprite
     state: biscuit
