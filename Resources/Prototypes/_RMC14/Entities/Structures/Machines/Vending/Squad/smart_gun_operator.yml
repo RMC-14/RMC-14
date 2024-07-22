@@ -49,6 +49,8 @@
       entries:
       - id: CMMagazinePistolMK80
         points: 5
+      - id: RMCMagazinePistolSU6
+        points: 10
     - name: Restricted Firearms
       entries:
       - id: RMCMK80Case
