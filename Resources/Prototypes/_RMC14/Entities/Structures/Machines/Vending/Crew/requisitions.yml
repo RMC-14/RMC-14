@@ -423,8 +423,8 @@
         amount: 5
       - id: RMCAttachmentM54CStockCollapsible
         amount: 5
-#      - id: RMCAttachmentM44MagnumSharpshooterStock # ISSUES!!!
-#        amount: 5
+      - id: RMCAttachmentM44MagnumSharpshooterStock
+        amount: 5
 
 #UNIFORM VENDOR
 
