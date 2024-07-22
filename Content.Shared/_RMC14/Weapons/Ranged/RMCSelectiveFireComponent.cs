@@ -98,7 +98,7 @@ public record struct SelectiveFireModifierSet(
     /// <summary>
     /// Additional fire delay applied to the weapon when this mode is active.
     /// A weapon's fire delay is the delay in seconds between each shot. It's inversely proportionate to the weapon's rate of fire.
-    /// Conversion from rate of fire: 1 / FireDelay
+    /// Conversion from rate of fire: 1 / FireRate
     /// Conversion from 13 guns for burst fire: burst_delay / 10 * 0.666. Due to how burst delay is handled in 13, we need the 0.666.
     /// </summary>
     float FireDelay,
