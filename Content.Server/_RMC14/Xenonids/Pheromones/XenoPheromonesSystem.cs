@@ -1,25 +1,6 @@
 ﻿using System.Linq;
 using Content.Server.Chat.Managers;
-using Content.Server.Mind;
-using Content.Shared.Mind;
-using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Pheromones;
-using Content.Shared._RMC14.Xenonids.Plasma;
-using Content.Shared.Actions;
-using Content.Shared.Coordinates;
-using Content.Shared.Damage;
-using Content.Shared.FixedPoint;
-using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs.Systems;
-using Content.Shared.Movement.Systems;
-using Content.Shared.Popups;
-using Content.Shared.Weapons.Melee.Events;
-using Robust.Shared.Collections;
-using Robust.Shared.Network;
-using Robust.Shared.Threading;
-using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Xenonids.Pheromones;
@@ -27,7 +8,6 @@ namespace Content.Server._RMC14.Xenonids.Pheromones;
 public sealed class XenoPheromonesSystem : SharedXenoPheromonesSystem
 {
     [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly ActorSystem _actors = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
