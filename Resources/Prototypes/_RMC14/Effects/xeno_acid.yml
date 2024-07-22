@@ -27,3 +27,40 @@
   - type: Sprite
     layers:
     - state: acid_strong
+
+- type: entity
+  id: XenoAcidSprayWeak
+  name: weak splatter
+  description: It burns! It burns, but not as much!
+  components:
+  - type: Transform
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        mask:
+        - FullTileLayer
+        layer:
+        - FullTileLayer
+  - type: Sprite
+    sprite: _RMC14/Effects/xeno_acid.rsi
+    drawdepth: Effects
+    layers:
+    - state: acid2-weak
+  - type: TimedDespawn
+    lifetime: 0.6
+  - type: DamageOnCollide
+    damage:
+      groups:
+        Burn: 30
+    chainDamage:
+      groups:
+        Burn: 10
+    whitelist:
+      components:
+      - Marine

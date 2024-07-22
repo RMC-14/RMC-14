@@ -204,6 +204,21 @@
     useDelay: 12
 
 - type: entity
+  parent: ActionXenoBase
+  id: ActionXenoSprayAcid
+  name: Spray Acid (40)
+  description: Sprays acid along the ground in a line, covering tiles with it. # TODO RMC14 barricades, extinguish, charge spit, resisted by bio armor
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: spray_acid
+    event: !type:XenoSprayAcidActionEvent
+    useDelay: 8
+    range: 6
+
+- type: entity
   id: ActionXenoParalyzingSlash
   parent: ActionXenoBase
   name: Paralyzing Slash (50) # TODO RMC14 proper plasma costs
