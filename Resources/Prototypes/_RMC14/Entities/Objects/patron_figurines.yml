@@ -73,7 +73,7 @@
   description: If I die before you continue, You shall have heard my final dying roar.
   components:
   - type: Sprite
-    state: tempestas_frostbite_glacies
+    state: Tempestas_Frostbite_Glacies
   - type: PatronFigurine
     id: 88404592-511d-4792-aa00-88743a918284
 
