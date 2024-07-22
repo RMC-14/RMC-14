@@ -299,10 +299,6 @@
         amount: 8
     - name: Special ammunition
       entries:
-      #- id: M56 DV9 Battery
-      #  amount: 4
-      #- id: M56 Smartgun Drum
-      #  amount: 4
       - id: RMCPowerCellSmartgun
         amount: 4
       - id: RMCMagazineSmartGun
