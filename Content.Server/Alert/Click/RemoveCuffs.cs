@@ -11,7 +11,7 @@ namespace Content.Server.Alert.Click
     [DataDefinition]
     public sealed partial class RemoveCuffs : IAlertClick
     {
-        public void AlertClicked(EntityUid player)
+        public void AlertClicked(EntityUid player, AlertPrototype alert)
         {
             var entityManager = IoCManager.Resolve<IEntityManager>();
             var cuffableSys = entityManager.System<CuffableSystem>();

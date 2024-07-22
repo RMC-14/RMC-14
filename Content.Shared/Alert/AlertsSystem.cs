@@ -328,7 +328,7 @@ public abstract class AlertsSystem : EntitySystem
             return;
         }
 
-        alert.OnClick?.AlertClicked(player.Value);
+        alert.OnClick?.AlertClicked(player.Value, alert);
     }
 
     private void OnPlayerAttached(EntityUid uid, AlertsComponent component, PlayerAttachedEvent args)

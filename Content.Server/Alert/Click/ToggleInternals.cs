@@ -11,7 +11,7 @@ namespace Content.Server.Alert.Click;
 [DataDefinition]
 public sealed partial class ToggleInternals : IAlertClick
 {
-    public void AlertClicked(EntityUid player)
+    public void AlertClicked(EntityUid player, AlertPrototype alert)
     {
         var internalsSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<InternalsSystem>();
         internalsSystem.ToggleInternals(player, player, false);

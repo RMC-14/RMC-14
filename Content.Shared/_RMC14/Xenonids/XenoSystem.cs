@@ -227,7 +227,6 @@ public sealed class XenoSystem : EntitySystem
             _movementSpeed.RefreshMovementSpeedModifiers(uid, comp);
         }
     }
-
     private void OnGetTrackerAlertEntries(Entity<XenoComponent> ent, ref GetTrackerAlertEntriesEvent args)
     {
         if (!TryComp(ent.Comp.Hive, out HiveComponent? hive))
@@ -239,8 +238,10 @@ public sealed class XenoSystem : EntitySystem
             return;
         }
 
+        var alertPrototype = args.AlertPrototype;
+
         args.Entries.AddRange(trackers.Select(uid =>
-            new TrackerAlertEntry(GetNetEntity(uid), Name(uid), MetaData(uid).EntityPrototype?.ID)));
+            new TrackerAlertEntry(GetNetEntity(uid), Name(uid), MetaData(uid).EntityPrototype?.ID, alertPrototype)));
     }
 
     public void MakeXeno(Entity<XenoComponent?> xeno)

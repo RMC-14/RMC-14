@@ -7,10 +7,10 @@ namespace Content.Shared._RMC14.Waypoint;
 [DataDefinition]
 public sealed partial class SelectTrackerAlertTarget : IAlertClick
 {
-    public void AlertClicked(EntityUid player)
+    public void AlertClicked(EntityUid player, AlertPrototype alert)
     {
         var entityManager = IoCManager.Resolve<IEntityManager>();
         var trackerSystem = entityManager.System<TrackerAlertSystem>();
-        trackerSystem.OpenSelectUI(player);
+        trackerSystem.OpenSelectUI(player, alert);
     }
 }

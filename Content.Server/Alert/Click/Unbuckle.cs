@@ -11,7 +11,7 @@ namespace Content.Server.Alert.Click
     [DataDefinition]
     public sealed partial class Unbuckle : IAlertClick
     {
-        public void AlertClicked(EntityUid player)
+        public void AlertClicked(EntityUid player, AlertPrototype alert)
         {
             IoCManager.Resolve<IEntityManager>().System<SharedBuckleSystem>().TryUnbuckle(player, player);
         }

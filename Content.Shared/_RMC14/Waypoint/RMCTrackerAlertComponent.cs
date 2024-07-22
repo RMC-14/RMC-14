@@ -1,6 +1,7 @@
 ﻿using Content.Shared.Alert;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Waypoint;
@@ -9,30 +10,37 @@ namespace Content.Shared._RMC14.Waypoint;
 public sealed partial class RMCTrackerAlertComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public EntityUid? TrackedEntity;
+    public Dictionary<ProtoId<AlertPrototype>, RMCTrackerAlert> Alerts = [];
+}
 
-    [ViewVariables, AutoNetworkedField]
+[DataDefinition, Serializable, NetSerializable]
+public sealed partial class RMCTrackerAlert
+{
+    [DataField]
+    public NetEntity? TrackedEntity;
+
+    [ViewVariables]
     public TrackerDirection WorldDirection;
 
     [ViewVariables]
     public TrackerDirection LastDirection;
 
-    [DataField(required: true), AutoNetworkedField]
+    [DataField(required: true)]
     public ProtoId<AlertPrototype> AlertPrototype;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public ProtoId<AlertCategoryPrototype> DirectionAlertCategory = "Tracker";
 
     /// <summary>
     /// The time when the tracker alert will update next.
     /// </summary>
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan NextUpdateTime;
 
     /// <summary>
     /// The time between each update.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan UpdateRate = TimeSpan.FromSeconds(1);
 }
 

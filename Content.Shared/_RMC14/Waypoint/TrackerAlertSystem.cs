@@ -61,7 +61,10 @@ public sealed class TrackerAlertSystem : EntitySystem
 
     private void OnMapInit(Entity<RMCTrackerAlertComponent> ent, ref MapInitEvent args)
     {
-        UpdateDirection((ent, ent.Comp));
+        foreach (var (_, trackerAlert) in ent.Comp.Alerts)
+        {
+            UpdateDirection(ent, trackerAlert);
+        }
     }
 
     private void OnComponentStartup(Entity<RMCTrackerAlertTargetComponent> ent, ref ComponentStartup args)
@@ -84,10 +87,11 @@ public sealed class TrackerAlertSystem : EntitySystem
     {
         _ui.CloseUi(uid, TrackerAlertUIKey.Key, args.Actor);
 
-        if (!TryGetEntity(args.Target, out var target))
+        if (!component.Alerts.TryGetValue(args.AlertPrototype, out var trackerAlert))
             return;
 
-        component.TrackedEntity = target;
+        // TODO input validation
+        trackerAlert.TrackedEntity = args.Target;
     }
 
     private void OnXenoAddedToHive(Entity<RMCTrackerAlertTargetComponent> ent, ref XenoAddedToHiveEvent args)
@@ -113,20 +117,20 @@ public sealed class TrackerAlertSystem : EntitySystem
         var query = EntityQueryEnumerator<RMCTrackerAlertComponent>();
         while (query.MoveNext(out var uid, out var tracker))
         {
-            if (_timing.CurTime < tracker.NextUpdateTime)
-                continue;
-            tracker.NextUpdateTime = _timing.CurTime + tracker.UpdateRate;
+            foreach (var (_, trackerAlert) in tracker.Alerts)
+            {
+                if (_timing.CurTime < trackerAlert.NextUpdateTime)
+                    continue;
+                trackerAlert.NextUpdateTime = _timing.CurTime + trackerAlert.UpdateRate;
 
-            UpdateDirection((uid, tracker));
+                UpdateDirection((uid, tracker), trackerAlert);
+            }
         }
     }
 
-    private void UpdateDirection(Entity<RMCTrackerAlertComponent?> ent, bool force = false)
+    private void UpdateDirection(Entity<RMCTrackerAlertComponent> ent, RMCTrackerAlert alert,  bool force = false)
     {
-        if (!Resolve(ent.Owner, ref ent.Comp))
-            return;
-
-        var alertId = ent.Comp.AlertPrototype;
+        var alertId = alert.AlertPrototype;
         // queen_locator dm
         // If hud doesn't exist exit
         // Get type of tracker
@@ -155,7 +159,7 @@ public sealed class TrackerAlertSystem : EntitySystem
             return;
         }
 
-        if (ent.Comp.TrackedEntity == null)
+        if (alert.TrackedEntity == null)
         {
             _alerts.ShowAlert(ent, alertId, 0, showCooldown: false);
             return;
@@ -169,33 +173,33 @@ public sealed class TrackerAlertSystem : EntitySystem
             return;
         }
 
-        ent.Comp.WorldDirection = GetTrackerDirection((ent, ent.Comp));
+        alert.WorldDirection = GetTrackerDirection(ent, alert);
 
-        if (ent.Comp.WorldDirection == ent.Comp.LastDirection && !force)
+        if (alert.WorldDirection == alert.LastDirection && !force)
             return;
 
         if (alertPrototype.SupportsSeverity &&
-            AlertSeverity.TryGetValue(ent.Comp.WorldDirection, out var severity))
+            AlertSeverity.TryGetValue(alert.WorldDirection, out var severity))
         {
             _alerts.ShowAlert(ent, alertId, severity, showCooldown: false);
         }
         else
         {
-            _alerts.ClearAlertCategory(ent, ent.Comp.DirectionAlertCategory);
+            _alerts.ClearAlertCategory(ent, alert.DirectionAlertCategory);
         }
 
-        ent.Comp.LastDirection = ent.Comp.WorldDirection;
+        alert.LastDirection = alert.WorldDirection;
 
-        Dirty(ent, ent.Comp);
+        Dirty(ent);
     }
 
-    private TrackerDirection GetTrackerDirection(Entity<RMCTrackerAlertComponent> ent)
+    private TrackerDirection GetTrackerDirection(EntityUid ent, RMCTrackerAlert alert)
     {
-        if (ent.Comp.TrackedEntity is null)
+        if (alert.TrackedEntity is null)
             return TrackerDirection.Invalid;
 
         var pos = _transform.GetWorldPosition(ent);
-        var targetPos = _transform.GetWorldPosition(ent.Comp.TrackedEntity.Value);
+        var targetPos = _transform.GetWorldPosition(GetEntity(alert.TrackedEntity.Value));
 
         var vec = targetPos - pos;
         return vec.Length() < 1
@@ -203,15 +207,14 @@ public sealed class TrackerAlertSystem : EntitySystem
             : TrackerDirections[vec.ToWorldAngle().GetDir()];
     }
 
-    public void OpenSelectUI(EntityUid player)
+    public void OpenSelectUI(EntityUid player, AlertPrototype alert)
     {
-        var ev = new GetTrackerAlertEntriesEvent();
+        var ev = new GetTrackerAlertEntriesEvent(alert);
         RaiseLocalEvent(player, ref ev);
 
         _ui.OpenUi(player, TrackerAlertUIKey.Key, player);
         _ui.SetUiState(player, TrackerAlertUIKey.Key, new TrackerAlertBuiState(ev.Entries));
     }
-
 }
 
 [ByRefEvent]
@@ -221,9 +224,10 @@ internal record struct TrackerAlertVisibleAttemptEvent
 }
 
 [ByRefEvent]
-public record struct GetTrackerAlertEntriesEvent()
+public record struct GetTrackerAlertEntriesEvent(ProtoId<AlertPrototype> AlertPrototype)
 {
     public readonly List<TrackerAlertEntry> Entries = [];
+    public ProtoId<AlertPrototype> AlertPrototype = AlertPrototype;
 }
 
 [RegisterComponent]
@@ -240,7 +244,7 @@ public enum TrackerAlertUIKey : byte
 }
 
 [Serializable, NetSerializable]
-public readonly record struct TrackerAlertEntry(NetEntity Entity, string Name, EntProtoId? Id);
+public readonly record struct TrackerAlertEntry(NetEntity Entity, string Name, EntProtoId? Id, ProtoId<AlertPrototype> AlertPrototype);
 
 [Serializable, NetSerializable]
 public sealed class TrackerAlertBuiState(List<TrackerAlertEntry> entries) : BoundUserInterfaceState
@@ -249,7 +253,9 @@ public sealed class TrackerAlertBuiState(List<TrackerAlertEntry> entries) : Boun
 }
 
 [Serializable, NetSerializable]
-public sealed class TrackerAlertBuiMsg(NetEntity target) : BoundUserInterfaceMessage
+public sealed class TrackerAlertBuiMsg(NetEntity target, ProtoId<AlertPrototype> alertPrototype) : BoundUserInterfaceMessage
 {
+    public readonly ProtoId<AlertPrototype> AlertPrototype = alertPrototype;
+
     public readonly NetEntity Target = target;
 }

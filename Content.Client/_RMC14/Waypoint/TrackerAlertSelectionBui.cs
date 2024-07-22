@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Content.Client.UserInterface.Controls;
 using Content.Shared._RMC14.Waypoint;
+using Content.Shared.Alert;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
@@ -30,7 +31,8 @@ public sealed class TrackerAlertSelectionBui(EntityUid owner, Enum uiKey) : Boun
             return;
 
         _window = EnsureWindow();
-        _window.TrackerList.PopulateList(s.Entries.Select((e) => new TrackerAlertListData(e.Entity, e.Name, e.Id))
+        _window.TrackerList.PopulateList(s.Entries
+            .Select(e => new TrackerAlertListData(e.Entity, e.Name, e.Id, e.AlertPrototype))
             .ToList());
     }
 
@@ -61,8 +63,12 @@ public sealed class TrackerAlertSelectionBui(EntityUid owner, Enum uiKey) : Boun
         if (d is not TrackerAlertListData data)
             return;
 
-        SendPredictedMessage(new TrackerAlertBuiMsg(data.EntityUid));
+        SendPredictedMessage(new TrackerAlertBuiMsg(data.EntityUid, data.AlertProto));
     }
 }
 
-public sealed record TrackerAlertListData(NetEntity EntityUid, string Name, EntProtoId? Id) : ListData;
+public sealed record TrackerAlertListData(
+    NetEntity EntityUid,
+    string Name,
+    EntProtoId? Id,
+    ProtoId<AlertPrototype> AlertProto) : ListData;

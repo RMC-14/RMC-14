@@ -9,7 +9,7 @@ namespace Content.Server.Alert.Click
     [DataDefinition]
     public sealed partial class BreakVow : IAlertClick
     {
-        public void AlertClicked(EntityUid player)
+        public void AlertClicked(EntityUid player, AlertPrototype alert)
         {
             var entManager = IoCManager.Resolve<IEntityManager>();
 
