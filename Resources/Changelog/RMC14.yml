@@ -3566,5 +3566,20 @@
   id: 429
   time: '2024-07-22T10:35:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3200
+- author: Vermidia
+  changes:
+  - message: You can now inject and draw from blood bags, but they will only inject
+      blood in them
+    type: Add
+  id: 430
+  time: '2024-07-22T10:41:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3175
+- author: ShadowCommander
+  changes:
+  - message: Holster keybinds now equip to equipped holsters before inventory slots.
+    type: Tweak
+  id: 431
+  time: '2024-07-22T10:41:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2933
 Name: RMC14
 Order: -1
