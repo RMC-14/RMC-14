@@ -170,5 +170,6 @@
     factions:
     - UNMC
   - type: RMCNightVisionVisible
+  - type: CrashLandable
   - type: StunShakeable
   - type: StunShakeableUser

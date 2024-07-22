@@ -1,8 +1,10 @@
 ﻿using System.Runtime.InteropServices;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.Marines;
+using Content.Server._RMC14.Rules.CrashLand;
 using Content.Server.Administration.Components;
 using Content.Server.Administration.Managers;
+using Content.Server.Atmos.EntitySystems;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
@@ -29,13 +31,17 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Maps;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
+using Content.Shared.Physics;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Content.Shared.Shuttles.Components;
@@ -48,6 +54,9 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -58,10 +67,12 @@ namespace Content.Server._RMC14.Rules;
 public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignalRuleComponent>
 {
     [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
     [Dependency] private readonly IBanManager _bans = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ContainerSystem _containers = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly DropshipSystem _dropship = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
@@ -83,6 +94,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
+
+    private static readonly ProtoId<DamageTypePrototype> CrashLandDamageType = "Blunt";
+    private const int CrashLandDamageAmount = 10000;
+
+    private bool _crashLandEnabled;
 
     private readonly CVarDef<float>[] _ftlcVars =
     [
@@ -113,6 +129,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private readonly List<MapId> _almayerMaps = [];
 
+    private EntityQuery<CrashLandableComponent> _crashLandableQuery;
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
 
     public string? SelectedPlanetMap { get; private set; }
@@ -123,6 +140,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     {
         base.Initialize();
 
+        _crashLandableQuery = GetEntityQuery<CrashLandableComponent>();
         _xenoNestedQuery = GetEntityQuery<XenoNestedComponent>();
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
@@ -143,6 +161,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         SubscribeLocalEvent<AlmayerComponent, MapInitEvent>(OnAlmayerMapInit);
 
+        SubscribeLocalEvent<CrashLandableComponent, EntParentChangedMessage>(OnCrashLandableParentChanged);
+
+        SubscribeLocalEvent<CrashLandOnTouchComponent, StartCollideEvent>(OnCrashLandOnTouchStartCollide);
+
+        Subs.CVar(_config, RMCCVars.RMCFTLCrashLand, v => _crashLandEnabled = v, true);
         Subs.CVar(_config, RMCCVars.RMCPlanetMaps, v => _planetMaps = v, true);
         Subs.CVar(_config, RMCCVars.CMMarinesPerXeno, v => _defaultMarinesPerXeno = v, true);
         Subs.CVar(_config, RMCCVars.RMCAutoBalance, v => _autoBalance = v, true);
@@ -529,6 +552,90 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         GridInfinitePower(almayer);
     }
 
+    private void OnCrashLandableParentChanged(Entity<CrashLandableComponent> crashLandable, ref EntParentChangedMessage args)
+    {
+        if (!_crashLandEnabled || !HasComp<FTLMapComponent>(args.Transform.ParentUid))
+            return;
+
+        TryCrashLand(crashLandable);
+    }
+
+    private void OnCrashLandOnTouchStartCollide(Entity<CrashLandOnTouchComponent> ent, ref StartCollideEvent args)
+    {
+        if (!_crashLandEnabled || !_crashLandableQuery.TryComp(args.OtherEntity, out var crashLandable))
+            return;
+
+        TryCrashLand((args.OtherEntity, crashLandable));
+    }
+
+    private void TryCrashLand(Entity<CrashLandableComponent> crashLandable)
+    {
+        var distressQuery = EntityQueryEnumerator<CMDistressSignalRuleComponent>();
+        while (distressQuery.MoveNext(out var comp))
+        {
+            var grid = comp.XenoMap;
+            if (!TryComp<MapGridComponent>(grid, out var gridComp))
+                return;
+
+            var xform = Transform(grid);
+            var targetCoords = xform.Coordinates;
+
+            for (var i = 0; i < 250; i++)
+            {
+                // TODO RMC14 every single method used in content and engine for "random spot" is broken with planet maps. Splendid!
+                var randomX = _random.Next(-200, 200);
+                var randomY = _random.Next(-200, 200);
+                var tile = new Vector2i(randomX, randomY);
+                if (!_mapSystem.TryGetTileRef(grid, gridComp, tile, out var tileDef) ||
+                    tileDef.GetContentTileDefinition().ID == ContentTileDefinition.SpaceID)
+                    continue;
+
+                // no air-blocked areas.
+                if (_atmosphere.IsTileSpace(grid, xform.MapUid, tile) ||
+                    _atmosphere.IsTileAirBlocked(grid, tile, mapGridComp: gridComp))
+                {
+                    continue;
+                }
+
+                // don't spawn inside of solid objects
+                var physQuery = GetEntityQuery<PhysicsComponent>();
+                var valid = true;
+
+                var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid, gridComp, tile);
+                while (anchored.MoveNext(out var ent))
+                {
+                    if (!physQuery.TryGetComponent(ent, out var body))
+                        continue;
+                    if (body.BodyType != BodyType.Static ||
+                        !body.Hard ||
+                        (body.CollisionLayer & (int) CollisionGroup.Impassable) == 0)
+                        continue;
+
+                    valid = false;
+                    break;
+                }
+
+                if (!valid)
+                    continue;
+
+                targetCoords = _mapSystem.GridTileToLocal(grid, gridComp, tile);
+                break;
+            }
+
+            var damage = new DamageSpecifier
+            {
+                DamageDict =
+                {
+                    [CrashLandDamageType] = CrashLandDamageAmount,
+                },
+            };
+
+            _damageable.TryChangeDamage(crashLandable, damage, true);
+            _transform.SetMapCoordinates(crashLandable, _transform.ToMapCoordinates(targetCoords));
+            break;
+        }
+    }
+
     private void ReloadPrototypes()
     {
         _operationNames.Clear();
@@ -666,7 +773,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (xenosAlive && !marinesAlive)
             {
                 distress.Result = DistressSignalRuleResult.MajorXenoVictory;
-                _roundEnd.EndRound();
+                EndRound(distress);
                 continue;
             }
 
@@ -676,13 +783,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (distress.Hijack)
                 {
                     distress.Result = DistressSignalRuleResult.MinorXenoVictory;
-                    _roundEnd.EndRound();
+                    EndRound(distress);
                     continue;
                 }
                 else
                 {
                     distress.Result = DistressSignalRuleResult.MajorMarineVictory;
-                    _roundEnd.EndRound();
+                    EndRound(distress);
                     continue;
                 }
             }
@@ -690,7 +797,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (!xenosAlive && !marinesAlive)
             {
                 distress.Result = DistressSignalRuleResult.AllDied;
-                _roundEnd.EndRound();
+                EndRound(distress);
                 continue;
             }
 
@@ -712,12 +819,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (_xenoEvolution.HasLiving<XenoComponent>(4))
                 {
                     distress.Result = DistressSignalRuleResult.MinorMarineVictory;
-                    _roundEnd.EndRound();
+                    EndRound(distress);
                 }
                 else
                 {
                     distress.Result = DistressSignalRuleResult.MajorMarineVictory;
-                    _roundEnd.EndRound();
+                    EndRound(distress);
                 }
             }
         }
@@ -924,14 +1031,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             }
 
             if (!anyDropships)
-            {
-                foreach (var (cvar, value) in component.OriginalCVarValues)
-                {
-                    _config.SetCVar(cvar, value);
-                }
-
-                component.ResetCVars = true;
-            }
+                ResetCVars(component);
         }
 
         if (Timing.CurTime >= component.NextCheck)
@@ -951,12 +1051,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (_xenoEvolution.HasLiving<XenoComponent>(4))
             {
                 component.Result = DistressSignalRuleResult.MinorMarineVictory;
-                _roundEnd.EndRound();
+                EndRound(component);
             }
             else
             {
                 component.Result = DistressSignalRuleResult.MajorMarineVictory;
-                _roundEnd.EndRound();
+                EndRound(component);
             }
         }
     }
@@ -1027,6 +1127,22 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             name += $"-{_random.Pick(_operationSuffixes)}";
 
         return name.Trim();
+    }
+
+    private void ResetCVars(CMDistressSignalRuleComponent comp)
+    {
+        foreach (var (cvar, value) in comp.OriginalCVarValues)
+        {
+            _config.SetCVar(cvar, value);
+        }
+
+        comp.ResetCVars = true;
+    }
+
+    private void EndRound(CMDistressSignalRuleComponent comp)
+    {
+        ResetCVars(comp);
+        _roundEnd.EndRound();
     }
 }
 
