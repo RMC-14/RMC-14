@@ -43,6 +43,7 @@
     - id: CMBackpackSniper
     - id: CMWeaponPistolMK80
     - id: CMMagazinePistolMK80
+    - id: CMMagazinePistolMK80
     - id: CMM96SSniperRifle
 #    - id: CMFacepaintSniper
 #    - id: CMSpotter

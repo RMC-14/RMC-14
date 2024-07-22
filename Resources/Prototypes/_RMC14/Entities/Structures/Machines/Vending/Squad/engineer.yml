@@ -93,7 +93,7 @@
         points: 30
     - name: Restricted Firearms
       entries:
-      - id: CMWeaponPistolMK80
+      - id: RMCMK80Case
         points: 8
       - id: RMCSmartPistolCase
         points: 12

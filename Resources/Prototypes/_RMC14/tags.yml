@@ -66,6 +66,9 @@
 
 - type: Tag
   id: RMCSmartPistolHolster
+
+- type: Tag
+  id: RMCMK80
   
 - type: Tag
   id: RMCRocketAmmo84mm

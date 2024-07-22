@@ -3489,5 +3489,20 @@
   id: 421
   time: '2024-07-21T06:44:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3181
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added MK80 hand cannon pistol case
+    type: Add
+  id: 422
+  time: '2024-07-22T05:03:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3182
+- author: DrSmugleaf
+  changes:
+  - message: Fixed lathes making upstream buckets instead of RMC-14 buckets, which
+      also had an unintentionally higher capacity.
+    type: Fix
+  id: 423
+  time: '2024-07-22T05:05:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3195
 Name: RMC14
 Order: -1
