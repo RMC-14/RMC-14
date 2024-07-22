@@ -25,6 +25,8 @@ using Content.Shared.Rounding;
 using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
+using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
@@ -57,6 +59,8 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly SharedRottingSystem _rotting = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly ActorSystem _actor = default!;
 
     public override void Initialize()
     {
@@ -247,7 +251,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
     private void OnVictimBurstExamine(Entity<VictimBurstComponent> burst, ref ExaminedEvent args)
     {
-        using(args.PushGroup(nameof(VictimBurstComponent)))
+        using (args.PushGroup(nameof(VictimBurstComponent)))
             args.PushMarkup($"[color=red][bold]{Loc.GetString("rmc-xeno-infected-bursted", ("victim", burst))}[/bold][/color]");
     }
 
@@ -303,13 +307,13 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             return false;
         }
 
-        if(_mobState.IsDead(parasite))
+        if (_mobState.IsDead(parasite))
         {
-            if(popup)
-				_popup.PopupClient(Loc.GetString("rmc-xeno-failed-parasite-dead"), victim, user, PopupType.MediumCaution);
+            if (popup)
+                _popup.PopupClient(Loc.GetString("rmc-xeno-failed-parasite-dead"), victim, user, PopupType.MediumCaution);
 
             return false;
-		}
+        }
         return true;
     }
 
@@ -431,7 +435,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
                 // Stages
                 // Percentage of how far along we out to burst time times the number of stages, truncated. You can't go back a stage once you've reached one
-                int stage = Math.Max((int) ((infected.BurstDelay - (infected.BurstAt - time)) / infected.BurstDelay * infected.FinalStage), infected.CurrentStage);
+                int stage = Math.Max((int)((infected.BurstDelay - (infected.BurstAt - time)) / infected.BurstDelay * infected.FinalStage), infected.CurrentStage);
                 if (stage != infected.CurrentStage)
                 {
                     infected.CurrentStage = stage;
@@ -512,6 +516,15 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             var spawned = SpawnAtPosition(infected.BurstSpawn, xform.Coordinates);
             infected.CurrentStage = 6;
             Dirty(uid, infected);
+
+            if (infected.TransferMindOnBurst)
+            {
+                if (!_net.IsClient && _mind.TryGetMind(uid, out var mindId, out _))
+                {
+                    _mind.WipeMind(mindId);
+                    _mind.TransferTo(mindId, spawned);
+                }
+            }
 
             _xeno.SetHive(spawned, infected.Hive);
 
