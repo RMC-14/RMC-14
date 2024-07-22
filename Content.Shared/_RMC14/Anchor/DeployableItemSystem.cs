@@ -122,7 +122,7 @@ public sealed class DeployableItemSystem : EntitySystem
 
     private void OnAfterInteract(Entity<DeployableItemComponent> ent, ref AfterInteractEvent args)
     {
-        if (!args.CanReach)
+        if (!args.CanReach || args.Target != null)
             return;
 
         args.Handled = true;
@@ -137,7 +137,7 @@ public sealed class DeployableItemSystem : EntitySystem
 
     private void Deploy(Entity<DeployableItemComponent> ent, EntityUid user, EntityCoordinates location)
     {
-        location = location.SnapToGrid();
+        location = _transform.GetMoverCoordinates(location).SnapToGrid();
         var transform = Transform(ent);
         var transformEnt = new Entity<TransformComponent?>(ent, transform);
         if (_transform.GetGrid(transformEnt) == null)

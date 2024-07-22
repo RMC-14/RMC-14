@@ -3,6 +3,7 @@ using System.Linq;
 using Content.Shared._RMC14.Input;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
@@ -210,14 +211,6 @@ public abstract class SharedCMInventorySystem : EntitySystem
         return true;
     }
 
-    private bool InsertSlot(EntityUid user, Entity<CMItemSlotsComponent> holster, EntityUid item)
-    {
-        if (!SlotCanInteract(user, holster, out var itemSlots))
-            return false;
-
-        return _itemSlots.TryInsertEmpty((holster, itemSlots), item, user, true);
-    }
-
     private bool PickupSlot(EntityUid user, EntityUid holster)
     {
         if (!SlotCanInteract(user, holster, out var itemSlots))
@@ -246,27 +239,131 @@ public abstract class SharedCMInventorySystem : EntitySystem
     private void Holster(EntityUid user, EntityUid item)
     {
         // TODO RMC14 try uniform-attached weapon and ammo holsters first
+        var validSlots = new List<HolsterSlot>();
+
+        var priority = 0;
         foreach (var flag in _quickEquipOrder)
         {
             var slots = _inventory.GetSlotEnumerator(user, flag);
             while (slots.MoveNext(out var slot))
             {
-                if (HasComp<CMHolsterComponent>(slot.ContainedEntity) &&
-                    TryComp(slot.ContainedEntity, out CMItemSlotsComponent? holster) &&
-                    InsertSlot(user, (slot.ContainedEntity.Value, holster), item))
+                if (slot.ContainedEntity is not { } clothing)
                 {
-                    return;
+                    // If slot is empty and can equip
+                    if (_inventory.CanEquip(user, item, slot.ID, out _))
+                    {
+                        validSlots.Add(new HolsterSlot(priority, false, slot, user, null));
+                    }
+
+                    continue;
                 }
 
-                if (slot.ContainedEntity != null)
-                    continue;
-
-                if (_inventory.TryEquip(user, item, slot.ID, true))
-                    return;
+                // If the slot item has a CMHolsterComponent
+                // And has a ItemSlotsComponent
+                // And insert succeeds
+                // then return
+                if (HasComp<CMHolsterComponent>(clothing) &&
+                    HasComp<CMItemSlotsComponent>(clothing) &&
+                    SlotCanInteract(user, clothing, out var slotComp) &&
+                    TryGetAvailableSlot((clothing, slotComp),
+                        item,
+                        user,
+                        out var itemSlot,
+                        emptyOnly: true) &&
+                    itemSlot.ContainerSlot != null)
+                {
+                    validSlots.Add(new HolsterSlot(priority, true, null, (clothing, slotComp), ItemSlot: itemSlot));
+                }
             }
         }
 
+        validSlots.Sort();
+
+        foreach (var slot in validSlots)
+        {
+            // Try insert into holster
+            if (slot.ItemSlot != null &&
+                _itemSlots.TryInsert(slot.Ent, slot.ItemSlot, item, user, excludeUserAudio: true))
+                return;
+
+            // Try equip to inventory slot
+            if (slot.Slot != null &&
+                _inventory.TryEquip(user, item, slot.Slot.ID, true))
+                return;
+        }
+
         _popup.PopupClient(Loc.GetString("cm-inventory-unable-equip"), user, user, PopupType.SmallCaution);
+    }
+
+    private readonly record struct HolsterSlot(
+        int Priority,
+        bool IsHolster,
+        ContainerSlot? Slot,
+        Entity<ItemSlotsComponent?> Ent,
+        ItemSlot? ItemSlot) : IComparable<HolsterSlot>
+    {
+        public int CompareTo(HolsterSlot other)
+        {
+            // Sort holsters first
+            // Then sort by priority between each holster and non-holster
+
+            // If holster and holster
+            // Sort by priority higher first
+            if (IsHolster && other.IsHolster)
+                return Priority.CompareTo(other.Priority);
+
+            // If only first is holster, then sort it higher
+            if (IsHolster)
+                return -1;
+            return 1;
+        }
+    }
+
+    /// <summary>
+    /// Tries to get any slot that the <paramref name="item"/> can be inserted into.
+    /// </summary>
+    /// <param name="ent">Entity that <paramref name="item"/> is being inserted into.</param>
+    /// <param name="item">Entity being inserted into <paramref name="ent"/>.</param>
+    /// <param name="userEnt">Entity inserting <paramref name="item"/> into <paramref name="ent"/>.</param>
+    /// <param name="itemSlot">The ItemSlot on <paramref name="ent"/> to insert <paramref name="item"/> into.</param>
+    /// <param name="emptyOnly"> True only returns slots that are empty.
+    /// False returns any slot that is able to receive <paramref name="item"/>.</param>
+    /// <returns>True when a slot is found. Otherwise, false.</returns>
+    private bool TryGetAvailableSlot(Entity<ItemSlotsComponent?> ent,
+        EntityUid item,
+        Entity<HandsComponent?>? userEnt,
+        [NotNullWhen(true)] out ItemSlot? itemSlot,
+        bool emptyOnly = false)
+    {
+        // TODO Replace with ItemSlotsSystem version when upstream is merged
+        itemSlot = null;
+
+        if (userEnt is { } user && Resolve(user, ref user.Comp) && _hands.IsHolding(user, item))
+        {
+            if (!_hands.CanDrop(user, item, user.Comp))
+                return false;
+        }
+
+        if (!Resolve(ent, ref ent.Comp, false))
+            return false;
+
+        var slots = new List<ItemSlot>();
+        foreach (var slot in ent.Comp.Slots.Values)
+        {
+            if (emptyOnly && slot.ContainerSlot?.ContainedEntity != null)
+                continue;
+
+            if (_itemSlots.CanInsert(ent, item, userEnt, slot))
+                slots.Add(slot);
+        }
+
+        if (slots.Count == 0)
+            return false;
+
+        slots.Sort(ItemSlotsSystem.SortEmpty);
+
+        itemSlot = slots[0];
+        return true;
     }
 
     private void Unholster(EntityUid user, int startIndex, CMHolsterChoose choose)

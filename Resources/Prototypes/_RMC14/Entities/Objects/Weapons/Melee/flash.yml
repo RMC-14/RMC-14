@@ -4,26 +4,29 @@
   name: flash
   description: Used for blinding and being an asshole. Recharges one flash every 30 seconds. You must wait 1 second between uses for the capacitor to recharge.
   components:
-    - type: Sprite
-      sprite: _RMC14/Objects/Weapons/Melee/flash.rsi
-    - type: Item
-      size: Small
-      sprite: _RMC14/Objects/Weapons/Melee/flash.rsi
-    - type: LimitedCharges
-      maxCharges: 5
-      charges: 5
-    - type: AutoRecharge
-      rechargeDuration: 30
-    - type: UseDelay
-      delay: 0.5
-    - type: Appearance
-    - type: GenericVisualizer
-      visuals:
-        enum.FlashVisuals.Burnt:
-          enum.FlashVisuals.BaseLayer:
-            True: {state: burnt}
-            False: {state: flash}
-        enum.FlashVisuals.Flashing:
-          enum.FlashVisuals.LightLayer:
-            True: {visible: true}
-            False: {visible: false}
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/flash.rsi
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Weapons/Melee/flash.rsi
+  - type: LimitedCharges
+    maxCharges: 5
+    charges: 5
+  - type: AutoRecharge
+    rechargeDuration: 30
+  - type: UseDelay
+    delay: 0.5
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.FlashVisuals.Burnt:
+        enum.FlashVisuals.BaseLayer:
+          True: { state: burnt }
+          False: { state: flash }
+      enum.FlashVisuals.Flashing:
+        enum.FlashVisuals.LightLayer:
+          True: { visible: true }
+          False: { visible: false }
+  - type: MeleeRequiresSkill
+    skills:
+      police: 1

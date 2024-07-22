@@ -1,3 +1,8 @@
+- files: ["gun_88m4_v7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e21e9e5b88b44c7402c2f984f16cc36116b07b0/sound/weapons/gun_88m4_v7.ogg"
+
 - files: ["gun_m1984_1.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"

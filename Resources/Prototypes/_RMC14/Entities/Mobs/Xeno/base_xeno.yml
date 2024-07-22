@@ -221,6 +221,7 @@
     factions:
     - RMCXeno
   - type: RMCNightVisionVisible
+  - type: CrashLandable
 
 - type: entity
   abstract: true
@@ -253,7 +254,7 @@
     altDisarm: true
     angle: 60
     soundHit:
-      collection: AlienClaw
+      collection: RCMXenoClaw
     animation: WeaponArcBite
     damage:
       groups:

@@ -5,6 +5,7 @@ using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Roles.Jobs;
+using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared.CCVar;
@@ -18,6 +19,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Marines;
 
@@ -27,6 +29,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
+    [Dependency] private readonly SharedDropshipSystem _dropship = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly JobSystem _job = default!;
     [Dependency] private readonly MindSystem _mind = default!;
@@ -48,6 +51,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
             subs =>
             {
                 subs.Event<MarineCommunicationsComputerMsg>(OnMarineCommunicationsComputerMsg);
+                subs.Event<MarineCommunicationsDesignatePrimaryLZMsg>(OnMarineCommunicationsDesignatePrimaryLZMsg);
             });
 
         Subs.CVar(_config, CCVars.ChatMaxMessageLength, limit => _characterLimit = limit, true);
@@ -85,12 +89,32 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         Dirty(ent);
     }
 
+    private void OnMarineCommunicationsDesignatePrimaryLZMsg(Entity<MarineCommunicationsComputerComponent> computer, ref MarineCommunicationsDesignatePrimaryLZMsg args)
+    {
+        var user = args.Actor;
+        if (!TryGetEntity(args.LZ, out var lz))
+        {
+            Log.Warning($"{ToPrettyString(user)} tried to designate invalid entity {args.LZ} as primary LZ!");
+            return;
+        }
+
+        _dropship.TryDesignatePrimaryLZ(user, lz.Value, computer.Comp.Sound);
+    }
+
     private void UpdatePlanetMap(Entity<MarineCommunicationsComputerComponent> computer)
     {
         var planet = _distressSignal.SelectedPlanetMapName ?? string.Empty;
         var operation = _distressSignal.OperationName ?? string.Empty;
+        var landingZones = new List<LandingZone>();
 
-        var state = new MarineCommunicationsComputerBuiState(planet, operation);
+        foreach (var (id, metaData) in _dropship.GetPrimaryLZCandidates())
+        {
+            landingZones.Add(new LandingZone(GetNetEntity(id), metaData.EntityName));
+        }
+
+        landingZones.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
+
+        var state = new MarineCommunicationsComputerBuiState(planet, operation, landingZones);
         _ui.SetUiState(computer.Owner, MarineCommunicationsComputerUI.Key, state);
     }
 
@@ -126,5 +150,21 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
 
         _adminLogs.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(sender):source} marine announced radio message: {message}");
         _radio.SendRadioMessage(sender, message, channel, sender);
+    }
+
+    public override void AnnounceARES(EntityUid? source, string message, SoundSpecifier sound)
+    {
+        base.AnnounceARES(source, message, sound);
+
+        _adminLogs.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(source):player} ARES announced message: {message}");
+
+        var filter = Filter.Empty()
+            .AddWhereAttachedEntity(e => HasComp<MarineComponent>(e) || HasComp<GhostComponent>(e));
+        var headerText = "[color=white][font size=16][bold]ARES v3.2 Operation Staging Order[/bold][/font][/color]\n\n";
+        var wrapped = FormattedMessage.EscapeText(message);
+        message = $"{headerText}[color=red][font size=14][bold]{wrapped}[/bold][/font][/color]\n";
+        _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
+
+        _audio.PlayGlobal(sound, filter, true, AudioParams.Default.WithVolume(-2f));
     }
 }

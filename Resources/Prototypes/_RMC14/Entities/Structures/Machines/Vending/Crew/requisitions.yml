@@ -37,7 +37,7 @@
       #  amount: 20
     - name: Restricted Sidearms
       entries:
-      - id: CMWeaponPistolMK80
+      - id: RMCMK80Case
         amount: 4
       - id: RMCSmartPistolCase
         amount: 3
@@ -520,6 +520,6 @@
       - id: CMMaskCoif
         amount: 10
     - name: Miscellaneous
-      entries: [ ]
-      #- id: Bedroll
-      #  amount: 30
+      entries:
+      - id: BedrollFolded
+        amount: 30
