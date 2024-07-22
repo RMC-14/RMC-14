@@ -186,13 +186,13 @@
       choices: { CMGoggles: 1 }
       entries:
       - id: CMGlassesMarineRpg
-        name: Marine RPG glasses
+        points: 5
       - id: CMGogglesBallistic
-        name: Ballistic goggles
+        points: 5
       - id: CMGogglesM1A1Ballistic
-        name: M1A1 Ballistic goggles
+        points: 5
       - id: CMGogglesPrescriotionBallistic
-        name: Prescriotion ballistic goggles
+        points: 5
     - name: Binoculars
       entries: [ ]
     #- id: CMRangeFinder
