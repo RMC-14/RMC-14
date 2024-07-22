@@ -150,7 +150,7 @@
 - type: flavor
   id: Pretzels
   flavorType: Complex
-  description: like meatballs
+  description: like pretzels
 
 - type: flavor
   id: Peanuts
