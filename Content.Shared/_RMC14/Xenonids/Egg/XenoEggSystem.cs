@@ -257,7 +257,7 @@ public sealed class XenoEggSystem : EntitySystem
         }
         else if (egg.Comp.State != XenoEggState.Opened)
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-egg-return-fail"), args.User);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-egg-fail-return"), args.User);
             return;
         }
 
