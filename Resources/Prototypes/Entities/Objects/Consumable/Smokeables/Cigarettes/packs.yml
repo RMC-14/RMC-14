@@ -65,10 +65,6 @@
     - cig5
     - cig6
   - type: Appearance
-  - type: InteractedBlacklist
-    blacklist:
-      components:
-      - Xeno
 
 - type: entity
   id: CigPackMixedBase

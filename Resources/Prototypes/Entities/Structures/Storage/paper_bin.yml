@@ -37,10 +37,6 @@
   - type: ContainerContainer
     containers:
       bin-container: !type:Container
-  - type: InteractedBlacklist
-    blacklist:
-      components:
-      - Xeno
 
 - type: entity
   parent: PaperBin
