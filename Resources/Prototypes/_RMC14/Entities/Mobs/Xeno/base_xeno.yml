@@ -221,6 +221,11 @@
     factions:
     - RMCXeno
   - type: RMCNightVisionVisible
+  - type: CrashLandable
+  - type: UserBlacklistActivatableUI
+    keys:
+    - enum.VendingMachineUiKey.Key
+    - enum.PaperUiKey.Key
 
 - type: entity
   abstract: true

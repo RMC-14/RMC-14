@@ -91,15 +91,22 @@ public sealed class RMCDiscordManager : IPostInjectInit
 
         while (_running)
         {
-            if (Interlocked.CompareExchange(ref _ready, 1, 1) == 1)
+            try
             {
-                while (_chatMessages.TryDequeue(out var msg))
+                if (Interlocked.CompareExchange(ref _ready, 1, 1) == 1)
                 {
-                    await _adminChannel.SendMessageAsync(FormatDiscordMessage(msg));
+                    while (_chatMessages.TryDequeue(out var msg))
+                    {
+                        await _adminChannel.SendMessageAsync(FormatDiscordMessage(msg));
+                    }
                 }
-            }
 
-            await Task.Delay(1000);
+                await Task.Delay(1000);
+            }
+            catch (Exception e)
+            {
+                _sawmill.Error($"Error occurred sending message to Discord:\n{e}");
+            }
         }
     }
 

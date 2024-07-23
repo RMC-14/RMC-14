@@ -33,7 +33,4 @@ public sealed partial class DropshipComponent : Component
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
     public TimeSpan LastLocked;
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan RoundStartDelay = TimeSpan.FromMinutes(15);
 }
