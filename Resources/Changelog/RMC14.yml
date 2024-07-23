@@ -3659,5 +3659,13 @@
   id: 441
   time: '2024-07-23T22:05:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3220
+- author: Whisper
+  changes:
+  - message: Added Kate Fleming, Kaylie Rowleyininski, Amari 'Dropping Hot' Williams
+      figurines
+    type: Add
+  id: 442
+  time: '2024-07-23T22:07:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3176
 Name: RMC14
 Order: -1
