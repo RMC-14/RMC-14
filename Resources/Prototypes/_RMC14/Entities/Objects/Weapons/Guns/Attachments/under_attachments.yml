@@ -324,6 +324,7 @@
         ents: []
   - type: AmmoCounter
   - type: Gun
+    projectileSpeed: 20
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ugl.ogg
     resetOnHandSelected: false
