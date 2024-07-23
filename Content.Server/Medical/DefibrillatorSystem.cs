@@ -132,8 +132,6 @@ public sealed class DefibrillatorSystem : EntitySystem
                     _popup.PopupEntity(Loc.GetString(comp.Popup, ("target", target)), uid, user.Value);
                     return false;
                 }
-                else
-                    break;
             }
         }
 
