@@ -47,6 +47,7 @@ public sealed partial class TrackerAlertSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<RMCTrackerAlertComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<RMCTrackerAlertComponent, ComponentRemove>(OnComponentRemove);
 
         Subs.BuiEvents<RMCTrackerAlertComponent>(TrackerAlertUIKey.Key,
             subs =>
@@ -60,6 +61,14 @@ public sealed partial class TrackerAlertSystem : EntitySystem
         foreach (var (_, trackerAlert) in ent.Comp.Alerts)
         {
             UpdateDirection(ent, trackerAlert);
+        }
+    }
+
+    private void OnComponentRemove(Entity<RMCTrackerAlertComponent> ent, ref ComponentRemove args)
+    {
+        foreach (var (_, trackerAlert) in ent.Comp.Alerts)
+        {
+            _alerts.ClearAlertCategory(ent, trackerAlert.DirectionAlertCategory);
         }
     }
 
