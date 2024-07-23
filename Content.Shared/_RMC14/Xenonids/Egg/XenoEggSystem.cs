@@ -61,7 +61,7 @@ public sealed class XenoEggSystem : EntitySystem
 
         SubscribeLocalEvent<XenoEggComponent, AfterAutoHandleStateEvent>(OnXenoEggAfterState);
         SubscribeLocalEvent<XenoEggComponent, GettingPickedUpAttemptEvent>(OnXenoEggPickedUpAttempt);
-        SubscribeLocalEvent<XenoEggComponent, AfterInteractUsingEvent>(OnXenoEggInteractUsing, before: [typeof(SharedXenoParasiteSystem)]);
+        SubscribeLocalEvent<XenoEggComponent, InteractUsingEvent>(OnXenoEggInteractUsing);
         SubscribeLocalEvent<XenoEggComponent, AfterInteractEvent>(OnXenoEggAfterInteract);
         SubscribeLocalEvent<XenoEggComponent, ActivateInWorldEvent>(OnXenoEggActivateInWorld);
         SubscribeLocalEvent<XenoEggComponent, StepTriggerAttemptEvent>(OnXenoEggStepTriggerAttempt);
@@ -237,7 +237,7 @@ public sealed class XenoEggSystem : EntitySystem
             args.Handled = true;
     }
 
-    private void OnXenoEggInteractUsing(Entity<XenoEggComponent> egg, ref AfterInteractUsingEvent args)
+    private void OnXenoEggInteractUsing(Entity<XenoEggComponent> egg, ref InteractUsingEvent args)
     {
         args.Handled = true;
         // Doesn't check hive or if a xeno is doing it
@@ -256,7 +256,10 @@ public sealed class XenoEggSystem : EntitySystem
             return;
         }
         else if (egg.Comp.State != XenoEggState.Opened)
-            return;
+        {
+			_popup.PopupClient(Loc.GetString("rmc-xeno-egg-return-fail"), args.User);
+			return;
+        }
 
         _popup.PopupClient(Loc.GetString("rmc-xeno-egg-return-user"), args.User);
         _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-return", ("user", args.User), ("parasite", args.Used)), egg, Filter.PvsExcept(args.User), true);

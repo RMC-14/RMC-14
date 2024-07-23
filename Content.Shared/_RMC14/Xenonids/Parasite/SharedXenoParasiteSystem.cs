@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
+using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared.Atmos.Rotting;
@@ -117,7 +118,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
     private void OnParasiteAfterInteract(Entity<XenoParasiteComponent> ent, ref AfterInteractEvent args)
     {
-        if (!args.CanReach || args.Target == null)
+        if (!args.CanReach || args.Target == null || args.Handled)
             return;
 
         if (StartInfect(ent, args.Target.Value, args.User))
