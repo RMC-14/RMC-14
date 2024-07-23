@@ -8,6 +8,7 @@ using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Announce;
@@ -102,6 +103,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
         if (HasComp<RMCPlanetComponent>(args.MapUid))
         {
             var ev = new DropshipLandedOnPlanetEvent();
+            RaiseLocalEvent(ref ev);
+        }
+
+        if (HasComp<AlmayerComponent>(args.MapUid) && ent.Comp.Crashed)
+        {
+            var ev = new DropshipHijackLandedEvent();
             RaiseLocalEvent(ref ev);
         }
     }
