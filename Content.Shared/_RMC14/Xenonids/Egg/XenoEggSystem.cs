@@ -256,12 +256,6 @@ public sealed class XenoEggSystem : EntitySystem
 			return;
 		}
 
-		if (_mind.TryGetMind(args.Used, out _, out _))
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-awake-child", ("parasite", args.Used)), args.User, args.User, PopupType.SmallCaution);
-            return;
-        }
-
         if (egg.Comp.State == XenoEggState.Growing || egg.Comp.State == XenoEggState.Grown)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-has-child"), args.User, args.User, PopupType.SmallCaution);
@@ -273,7 +267,13 @@ public sealed class XenoEggSystem : EntitySystem
             return;
         }
 
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-return-user"), args.User, args.User);
+		if (_mind.TryGetMind(args.Used, out _, out _))
+		{
+			_popup.PopupEntity(Loc.GetString("rmc-xeno-egg-awake-child", ("parasite", args.Used)), args.User, args.User, PopupType.SmallCaution);
+			return;
+		}
+
+		_popup.PopupEntity(Loc.GetString("rmc-xeno-egg-return-user"), args.User, args.User);
         _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-return", ("user", args.User), ("parasite", args.Used)), egg, Filter.PvsExcept(args.User), true);
 
         SetEggState(egg, XenoEggState.Grown);
