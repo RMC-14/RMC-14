@@ -3644,5 +3644,12 @@
   id: 439
   time: '2024-07-23T01:00:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3216
+- author: Vermidia
+  changes:
+  - message: Fixed xenonids being able to pull eggs.
+    type: Fix
+  id: 440
+  time: '2024-07-23T21:52:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3240
 Name: RMC14
 Order: -1
