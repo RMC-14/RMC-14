@@ -8,15 +8,27 @@ namespace Content.Shared._RMC14.Xenonids.Construction;
 [Access(typeof(SharedXenoConstructionSystem))]
 public sealed partial class HiveConstructionNodeComponent : Component
 {
-    [DataField(required: true), AutoNetworkedField]
-    public FixedPoint2 InitialPlasmaCost;
+    /// <summary>
+    /// How much plasma it costs to place this template.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 InitialPlasmaCost = 400;
 
+    /// <summary>
+    /// How much plasma needs to be stored to complete the construction.
+    /// </summary>
     [DataField(required: true), AutoNetworkedField]
     public FixedPoint2 PlasmaCost;
 
+    /// <summary>
+    /// How much plasma has been stored so far.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public FixedPoint2 PlasmaStored;
 
+    /// <summary>
+    /// The entity to spawn once enough plasma is stored.
+    /// </summary>
     [DataField(required: true), AutoNetworkedField]
     public EntProtoId Spawn;
 
