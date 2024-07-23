@@ -32,7 +32,7 @@
         doAfter: 2
 
   - node: windowCorsatReinforced
-    entity: CMWindowWhiteCorsatReinforced
+    entity: RMCWindowCorsatReinforced
     edges:
     - to: windowFrameCorsatReinforced
       completed:
