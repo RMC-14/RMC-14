@@ -66,13 +66,12 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         ent.Comp.AnnouncementsLeft.Sort();
     }
 
-    public void CreateHive(string name)
+    public void CreateHive(string name, EntProtoId? proto)
     {
         if (_net.IsClient)
             return;
 
-        var ent = Spawn(null, MapCoordinates.Nullspace);
-        EnsureComp<HiveComponent>(ent);
+        var ent = Spawn(proto ?? "CMXenoHive", MapCoordinates.Nullspace);
         _metaData.SetEntityName(ent, name);
     }
 
@@ -99,5 +98,68 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 
             _nightVision.SetSeeThroughContainers(uid, see);
         }
+    }
+
+    /// <summary>
+    /// Reserve a construct id, preventing construction of the same type if the limit reaches 0.
+    /// </summary>
+    public bool ReserveConstruct(Entity<HiveComponent?>? ent, EntProtoId id)
+    {
+        if (ent is not {} hive || !Resolve(hive, ref hive.Comp))
+            return false;
+
+        var limits = hive.Comp.ConstructionLimits;
+        if (!limits.TryGetValue(id, out var limit))
+        {
+            Log.Error($"Tried to reserve a construct {id} that was not specified in the hive prototype!");
+            return false;
+        }
+
+        if (limit < 1)
+            return false;
+
+        limits[id] = limit - 1;
+        Dirty(hive, hive.Comp);
+        return true;
+    }
+
+    /// <summary>
+    /// Check if a new construct can be made without reserving one.
+    /// </summary>
+    public bool CanConstruct(Entity<HiveComponent?>? ent, EntProtoId id)
+    {
+        if (ent is not {} hive || !Resolve(hive, ref hive.Comp))
+            return false;
+
+        var limits = hive.Comp.ConstructionLimits;
+        if (!limits.TryGetValue(id, out var limit))
+        {
+            Log.Error($"Tried to check if a construct {id} can be made that was not specified in the hive prototype!");
+            return false;
+        }
+
+        return limit > 0;
+    }
+
+    /// <summary>
+    /// Adjust a construct's limit by some value.
+    /// </summary>
+    /// <remarks>
+    /// Intentionally allows going negative to prevent exploiting something and making infinite structures, where going 0 could allow it.
+    /// </remarks>
+    public void AdjustConstructLimit(Entity<HiveComponent?>? ent, EntProtoId id, int add)
+    {
+        if (ent is not {} hive || !Resolve(hive, ref hive.Comp))
+            return;
+
+        var limits = hive.Comp.ConstructionLimits;
+        if (!limits.TryGetValue(id, out var limit))
+        {
+            Log.Error($"Tried to adjust a construct {id}'s limit that was not specified in the hive prototype!");
+            return;
+        }
+
+        limits[id] = limit + add;
+        Dirty(hive, hive.Comp);
     }
 }
