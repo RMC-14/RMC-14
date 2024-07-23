@@ -125,13 +125,15 @@ public sealed class DefibrillatorSystem : EntitySystem
         var slots = _inventory.GetSlotEnumerator(user, SlotFlags.OUTERCLOTHING);
         while (slots.MoveNext(out var slot))
         {
-            if (TryComp(armor, out CMDefibrillatorBlockedComponent? comp))
+            if (TryComp(slot.ContainedEntity, out CMDefibrillatorBlockedComponent? comp))
             {
                 if (user != null)
                 {
                     _popup.PopupEntity(Loc.GetString(comp.Popup, ("target", target)), uid, user.Value);
                     return false;
                 }
+                else
+                    break;
             }
         }
 
