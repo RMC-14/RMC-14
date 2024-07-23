@@ -1,15 +1,11 @@
-﻿using Content.Shared._RMC14.Xenonids;
-using Content.Shared._RMC14.Xenonids.Evolution;
-using Content.Shared._RMC14.Xenonids.Hive;
-using Content.Shared.Alert;
-using Content.Shared.Mobs;
+﻿using Content.Shared.Alert;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Waypoint;
 
-public sealed partial class TrackerAlertSystem : EntitySystem
+public sealed class TrackerAlertSystem : EntitySystem
 {
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;

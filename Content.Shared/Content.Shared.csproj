@@ -26,9 +26,6 @@
   <ItemGroup>
     <Folder Include="Power\Components\" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="_RMC14\Waypoint\TrackerAlertSystem.Target.cs" />
-  </ItemGroup>
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
   <Import Project="..\RobustToolbox\MSBuild\Robust.CompNetworkGenerator.targets" />
 </Project>
