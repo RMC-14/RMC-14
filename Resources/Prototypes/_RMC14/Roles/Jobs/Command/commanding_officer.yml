@@ -19,7 +19,10 @@
     time: 36000 # 10 hours
   - !type:DepartmentTimeRequirement
     department: CMCommand
-    time: 18000 # 5 hours
+    time: 36000 # 10 hours
+  - !type:RoleTimeRequirement
+    role: CMJobExecutiveOfficer
+    time: 36000 #10 hrs
   weight: 10
   startingGear: CMGearCommandingOfficer
   icon: "CMJobIconCommandingOfficer"

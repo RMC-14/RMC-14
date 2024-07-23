@@ -37,29 +37,97 @@
       - id: CMWEYAFlask
         amount: 5
 
-# TODO RMC14 replace VendingMachine with CMAutomatedVendor
 - type: entity
-  parent: CMVendor
+  parent: ColMarTechBase
   id: CMVendorBooze
   name: Booze-O-Mat
   description: A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/boozeomat.rsi
-  - type: VendingMachine
-    pack: CMVendorBooze
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
+    layers:
+    - state: "off"
+    - state: "normal-unshaded"
+  - type: CMAutomatedVendor
+    sections:
+    - name: Alcohol
+      entries:
+      - id: DrinkAleBottleFull
+        amount: 6
+      - id: DrinkBeerBottleFull
+        amount: 6
+      - id: DrinkGrenadineBottleFull
+        amount: 5
+      - id: DrinkTequilaBottleFull
+        amount: 5
+      - id: DrinkRumBottleFull
+        amount: 5
+      - id: DrinkCognacBottleFull
+        amount: 5
+      - id: DrinkWhiskeyBottleFull
+        amount: 5
+      - id: DrinkWineBottleFull
+        amount: 5
+      - id: DrinkMelonLiquorBottleFull
+        amount: 2
+      - id: DrinkVermouthBottleFull
+        amount: 5
+      - id: DrinkGinBottleFull
+        amount: 5
+      - id: DrinkAbsintheBottleFull
+        amount: 2
+      - id: DrinkBlueCuracaoBottleFull
+        amount: 2
+      - id: DrinkVodkaBottleFull
+        amount: 5
+      - id: DrinkCoffeeLiqueurBottleFull
+        amount: 5
+    - name: Craft Beers
+      entries: []
+    - name: Non-Alcohol
+      entries:
+      - id: CMDrinkCanFruitBeer
+        amount: 8
+      - id: DrinkJuiceLimeCarton
+        amount: 4
+      - id: DrinkCreamCarton
+        amount: 4
+      - id: DrinkJuiceOrangeCarton
+        amount: 4
+      - id: CMDrinkCanSoda
+        amount: 15
+      - id: DrinkJuiceTomatoCarton
+        amount: 4
+      - id: CMDrinkCanTonic
+        amount: 8
+    - name: Containers
+      entries:
+      - id: CMMetalFlask
+        amount: 5
+      - id: DrinkGlass
+        amount: 30
+      - id: CMMarineFlask
+        amount: 5
 
 - type: entity
-  parent: CMVendor
+  parent: ColMarTechBase
   id: CMVendorChess
   name: Chess-o-mat
   description: In 2143 Red Star Drinks, a SPP-CA (Colony Administration) affiliated corporation ran a promotional sweepstakes for drinkers who had found special codes on the inside of the caps of a limited run of Red Star Vodka, shipping them a Chess-O-Mat with unlimited refills.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/chessomat.rsi
-  - type: VendingMachine
-    pack: CMVendorChess
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
+    layers:
+    - state: "off"
+    - state: "normal-unshaded"
+  - type: CMAutomatedVendor
+    sections:
+    - name: Chess
+      entries:
+      - id: ChessBoard
+        amount: 5
+    - name: White Pieces
+      entries: []
+    - name: Black Pieces
+      entries: []
+    # TODO RMC14 vodka chess pieces

@@ -65,3 +65,5 @@
     threshold: 4
     stun: 5
   - type: XenoLifesteal
+  - type: RMCXenoDamageVisuals
+    prefix: warrior
