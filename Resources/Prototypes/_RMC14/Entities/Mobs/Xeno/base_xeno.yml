@@ -209,6 +209,7 @@
       - VendingMachine
       - ActivatableUIRequiresPower
       - RequisitionsComputer
+      - IVDrip
       - PowerCellSlot
       - Bin
       - GasMixer
