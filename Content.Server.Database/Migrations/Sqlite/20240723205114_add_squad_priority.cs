@@ -24,5 +24,6 @@ namespace Content.Server.Database.Migrations.Sqlite
             migrationBuilder.DropColumn(
                 name: "squad_priority",
                 table: "profile");
+        }
     }
 }
