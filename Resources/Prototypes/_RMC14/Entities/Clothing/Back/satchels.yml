@@ -10,6 +10,10 @@
   - type: Storage
     grid:
     - 0,0,14,1 # 15
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMSatchel

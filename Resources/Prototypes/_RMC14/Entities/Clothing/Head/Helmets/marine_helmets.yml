@@ -58,6 +58,10 @@
       - CMAutoInjector
       - PillPacket
   - type: FixedItemSizeStorage
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: ArmorHelmetM10

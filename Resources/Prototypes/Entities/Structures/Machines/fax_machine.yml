@@ -67,6 +67,10 @@
     receiveFrequencyId: Fax
     transmitFrequencyId: Fax
   - type: RequireProjectileTarget
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 # Special
 - type: entity

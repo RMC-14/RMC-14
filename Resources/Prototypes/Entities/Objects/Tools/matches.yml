@@ -102,3 +102,7 @@
     tags:
     - Trash
   - type: SpaceGarbage
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

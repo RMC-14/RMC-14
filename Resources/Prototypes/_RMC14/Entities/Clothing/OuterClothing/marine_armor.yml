@@ -1,4 +1,4 @@
-﻿# m3
+# m3
 - type: entity
   parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing ]
   id: CMArmorM3Medium
@@ -119,6 +119,10 @@
   - type: ExplosionResistance
     damageCoefficient: 0
     worn: false
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMArmorM3Medium

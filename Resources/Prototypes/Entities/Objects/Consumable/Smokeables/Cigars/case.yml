@@ -61,6 +61,10 @@
     - cigar7
     - cigar8
   - type: Appearance
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   id: CigarGoldCase
@@ -72,3 +76,7 @@
     contents:
     - id: CigarGold
       amount: 8
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

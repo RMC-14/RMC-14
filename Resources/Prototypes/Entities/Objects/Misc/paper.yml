@@ -478,6 +478,10 @@
     damage:
       types:
         Blunt: 6
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   id: BoxFolderCentComClipboard

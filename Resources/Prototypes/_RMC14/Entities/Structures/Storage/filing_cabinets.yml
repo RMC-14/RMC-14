@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   id: CMFilingCabinetBase
   description: A large cabinet with drawers.
@@ -7,6 +7,10 @@
   - type: Sprite
     sprite: _RMC14/Structures/Storage/filing_cabinet.rsi
     noRot: true
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: [ CMFilingCabinetBase, filingCabinet ]
