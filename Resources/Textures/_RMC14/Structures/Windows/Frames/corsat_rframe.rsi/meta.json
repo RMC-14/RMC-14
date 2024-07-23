@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/6c8f3153bb8846baa74e413b3ed8d3355aebcea3/icons/turf/walls/windows_corsat.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "padded_rframe0"
+    },
+    {
+      "name": "padded_rframe1"
+    },
+    {
+      "name": "padded_rframe2"
+    },
+    {
+      "name": "padded_rframe3"
+    },
+    {
+      "name": "padded_rframe4"
+    },
+    {
+      "name": "padded_rframe5"
+    },
+    {
+      "name": "padded_rframe6"
+    },
+    {
+      "name": "padded_rframe7"
+    },
+    {
+      "name": "padded_rframe8"
+    },
+    {
+      "name": "padded_rframe9"
+    },
+    {
+      "name": "padded_rframe10"
+	},
+    {
+      "name": "padded_rframe11"
+	},
+    {
+      "name": "padded_rframe12"
+	},
+    {
+      "name": "padded_rframe13"
+	},
+    {
+      "name": "padded_rframe14"
+	},
+    {
+      "name": "padded_rframe15"
+	}
+  ]
+}

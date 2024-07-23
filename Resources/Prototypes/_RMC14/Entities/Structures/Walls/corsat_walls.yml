@@ -1,0 +1,47 @@
+- type: entity
+  parent: CMWallMetal
+  id: RMCWallCorsat
+  name: metal wall
+  description: A huge chunk of metal used to separate rooms.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/corsat_wall.rsi
+    state: dome
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/corsat_wall.rsi
+    state: dome
+  - type: IconSmooth
+    key: walls
+    base: dome
+
+- type: entity
+  parent: CMWallReinforced
+  id: RMCWallCorsatReinforced
+  name: reinforced metal wall
+  description: A huge chunk of ultra-reinforced metal used to separate rooms.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/corsat_rwall.rsi
+    state: r_dome
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/corsat_rwall.rsi
+    state: r_dome
+  - type: IconSmooth
+    key: walls
+    base: r_dome
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallCorsatHull
+  name: heavy reinforced wall
+  description: A huge chunk of ultra-reinforced metal used to separate rooms. Looks virtually indestructible.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/corsat_rwall.rsi
+    state: r_dome
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/corsat_rwall.rsi
+    state: h_dome
+  - type: IconSmooth
+    key: walls
+    base: r_dome
