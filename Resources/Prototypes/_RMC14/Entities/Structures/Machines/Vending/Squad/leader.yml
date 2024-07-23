@@ -54,13 +54,7 @@
     #  points: 5
       - id: CMBeltUtilityCombat
         points: 15
-    - name: Utilities
-      entries:
-      - id: RMCWhistle
-        points: 3
-      - id: CMFireExtinguisherPortable
-        points: 3
-        - name: Goggles
+    - name: Goggles
       choices: { CMGoggles: 1 }
       entries:
       - id: CMGlassesMarineRpg
@@ -71,6 +65,12 @@
         name: M1A1 Ballistic goggles
       - id: CMGogglesPrescriotionBallistic
         name: Prescriotion ballistic goggles
+    - name: Utilities
+      entries:
+      - id: RMCWhistle
+        points: 3
+      - id: CMFireExtinguisherPortable
+        points: 3
     #- id: CMMotionDetector
     #  points: 5
     #- id: CMFultonDeviceStack
@@ -175,6 +175,8 @@
       entries:
       - id: CMMagazinePistolMK80
         points: 3
+      - id: RMCMagazinePistolSU6
+        points: 6
     - name: Special Ammunition
       entries: [ ]
     #- id: CMM240IncineratorTankNapthal
