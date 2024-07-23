@@ -122,7 +122,7 @@ public sealed class DefibrillatorSystem : EntitySystem
             return false;
         }
 
-        var slots = _inventory.GetSlotEnumerator(user, SlotFlags.OUTERCLOTHING);
+        var slots = _inventory.GetSlotEnumerator(target, SlotFlags.OUTERCLOTHING);
         while (slots.MoveNext(out var slot))
         {
             if (TryComp(slot.ContainedEntity, out CMDefibrillatorBlockedComponent? comp))
