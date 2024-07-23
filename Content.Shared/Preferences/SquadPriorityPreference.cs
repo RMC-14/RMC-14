@@ -5,10 +5,10 @@ namespace Content.Shared.Preferences
     /// </summary>
     public enum SquadPriorityPreference
     {
-        None = 0,
-        Alpha = 1,
-        Bravo = 2,
-        Charlie = 3,
-        Delta = 4,
+        None = -1,
+        Alpha = 0,
+        Bravo = 1,
+        Charlie = 2,
+        Delta = 3,
     }
 }

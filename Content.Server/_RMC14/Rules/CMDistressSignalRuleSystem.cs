@@ -54,6 +54,8 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
+using Content.Server.Administration.Logs.Converters;
+using Content.Server.Shuttles.Components;
 
 namespace Content.Server._RMC14.Rules;
 
@@ -82,6 +84,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
     [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
+    [Dependency] private readonly StationJobsSystem _stationJob = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
@@ -396,7 +399,28 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         var query = QueryActiveRules();
         while (query.MoveNext(out _, out _, out var comp, out _))
         {
-            if (GetSpawner(comp, job, ev.HumanoidCharacterProfile!.SquadPriority.ToString()) is not { } spawnerInfo)
+            if (comp.MaxJobsPerSquad.Count == 0 && comp is CMDistressSignalRuleComponent)
+            {
+                var allJobs = _stationJob.GetRoundStartJobs(ev.Station!.Value);
+                var marineDepartment = _prototypes.Index<DepartmentPrototype>("CMSquad");
+                foreach (var jobName in marineDepartment.Roles)
+                {
+                    if (!allJobs.ContainsKey(jobName))
+                    {
+                        continue;
+                    }
+                    if (allJobs[jobName] != null)
+                    {
+                        comp.MaxJobsPerSquad[jobName] = allJobs[jobName]/4;
+                    }
+                    else
+                    {
+                        comp.MaxJobsPerSquad[jobName] = allJobs[jobName];
+                    }
+
+                }
+            }
+            if (GetSpawner(comp, job, (int) ev.HumanoidCharacterProfile!.SquadPriority) is not { } spawnerInfo)
                 return;
 
             var (spawner, squad) = spawnerInfo;
@@ -803,17 +827,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         return jobNumPerSquad;
     }
 
-    private (EntProtoId Id, EntityUid Ent) NextSquad(ProtoId<JobPrototype> job, CMDistressSignalRuleComponent rule, string sP)
+    private (EntProtoId Id, EntityUid Ent) NextSquad(ProtoId<JobPrototype> job, CMDistressSignalRuleComponent rule, int priority)
     {
-
-        string squadPriority = "Squad" + sP;
-
-        // var jobNumPerSquad = new Dictionary<string, int>();
         var jobNumPerSquad = GetSquadJobNumber(job, rule);
         var id = rule.SquadIds[0];
-        if (jobNumPerSquad[squadPriority] < rule.MaxJobsPerSquad[job] && sP != "None")
+        if (priority != -1 && (rule.MaxJobsPerSquad[job] == null || jobNumPerSquad[rule.SquadIds[priority]] < rule.MaxJobsPerSquad[job]))
         {
-            id = squadPriority;
+            id = rule.SquadIds[priority];
         }
         else
         {
@@ -837,7 +857,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         return (id, squad);
     }
 
-    private (EntityUid Spawner, EntityUid? Squad)? GetSpawner(CMDistressSignalRuleComponent rule, JobPrototype job, string squadPriority)
+    private (EntityUid Spawner, EntityUid? Squad)? GetSpawner(CMDistressSignalRuleComponent rule, JobPrototype job, int squadPriority)
     {
         var allSpawners = GetSpawners();
         EntityUid? squad = null;
