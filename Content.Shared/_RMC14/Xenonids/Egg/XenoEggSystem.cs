@@ -10,6 +10,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Item;
+using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -43,6 +44,7 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
 
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
 
@@ -239,35 +241,42 @@ public sealed class XenoEggSystem : EntitySystem
 
     private void OnXenoEggInteractUsing(Entity<XenoEggComponent> egg, ref InteractUsingEvent args)
     {
-        args.Handled = true;
         // Doesn't check hive or if a xeno is doing it
         if (!HasComp<XenoParasiteComponent>(args.Used))
             return;
 
-        if(_mobState.IsDead(args.Used))
+        args.Handled = true;
+
+		if (_net.IsClient)
+			return;
+
+		if (_mind.TryGetMind(args.Used, out _, out _))
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-egg-dead-child"), args.User);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-awake-child", ("parasite", args.Used)), args.User, args.User, PopupType.SmallCaution);
             return;
         }
 
         if (egg.Comp.State == XenoEggState.Growing || egg.Comp.State == XenoEggState.Grown)
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-egg-has-child"), args.User);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-has-child"), args.User, args.User, PopupType.SmallCaution);
             return;
         }
         else if (egg.Comp.State != XenoEggState.Opened)
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-egg-fail-return"), args.User);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-fail-return"), args.User, args.User, PopupType.SmallCaution);
             return;
         }
 
-        _popup.PopupClient(Loc.GetString("rmc-xeno-egg-return-user"), args.User);
+        if (_mobState.IsDead(args.Used))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-dead-child"), args.User, args.User, PopupType.SmallCaution);
+            return;
+        }
+
+        _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-return-user"), args.User, args.User);
         _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-return", ("user", args.User), ("parasite", args.Used)), egg, Filter.PvsExcept(args.User), true);
 
         SetEggState(egg, XenoEggState.Grown);
-
-        if (_net.IsClient)
-            return;
 
         QueueDel(args.Used);
 
