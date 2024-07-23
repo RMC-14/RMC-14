@@ -3651,5 +3651,13 @@
   id: 440
   time: '2024-07-23T21:52:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3240
+- author: DrSmugleaf
+  changes:
+  - message: 'Added two tracks by Bolgarich that play during hijack: Hiking in the
+      fog and tango with bloodshed.'
+    type: Add
+  id: 441
+  time: '2024-07-23T22:05:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3220
 Name: RMC14
 Order: -1
