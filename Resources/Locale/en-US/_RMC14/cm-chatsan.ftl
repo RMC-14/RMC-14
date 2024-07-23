@@ -4,9 +4,6 @@ cm-chatsan-replacement-deltard = delta
 cm-chatsan-word-deltards = deltards
 cm-chatsan-replacement-deltards = deltas
 
-cm-chatsan-word-admin-marine = admin
-cm-chatsan-replacement-admin-marine = high command
-
 cm-chatsan-word-admins-marine = admins
 cm-chatsan-replacement-admins-marine = high command
 
@@ -123,9 +120,6 @@ cm-chatsan-replacement-normandy = metal bird
 
 cm-chatsan-word-almayer = almayer
 cm-chatsan-replacement-almayer = metal hive
-
-cm-chatsan-word-admin-xeno = admin
-cm-chatsan-replacement-admin-xeno = grandmother
 
 cm-chatsan-word-admins-xeno = admins
 cm-chatsan-replacement-admins-xeno = grandmothers

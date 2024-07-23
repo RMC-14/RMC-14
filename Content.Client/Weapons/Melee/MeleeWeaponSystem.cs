@@ -228,7 +228,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
             return;
         }
 
-        var targetMap = coordinates.ToMap(EntityManager, TransformSystem);
+        var targetMap = TransformSystem.ToMapCoordinates(coordinates);
 
         if (targetMap.MapId != userXform.MapID)
             return;

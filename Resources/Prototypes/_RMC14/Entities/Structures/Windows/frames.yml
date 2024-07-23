@@ -1,0 +1,118 @@
+- type: entity
+  abstract: true
+  parent: CMBaseStructureCorrodible
+  id: RMCBaseWindowFrame
+  name: window frame
+  description: A big hole in the wall that used to sport a large window. Can be vaulted through.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    drawdepth: Walls
+  - type: PlacementReplacement
+    key: walls
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: StaticPrice
+    price: 75
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 1000
+        mask:
+        - MachineMask
+        layer:
+        - HalfWallLayer
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600
+        behaviors:
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Climbable
+  - type: RMCWallExplosionDeletable
+
+- type: entity
+  parent: RMCBaseWindowFrame
+  id: RMCWindowFrameAlmayer
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/almayer_frame.rsi
+    state: alm_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/almayer_frame.rsi
+    state: alm_frame0
+  - type: IconSmooth
+    key: walls
+    base: alm_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowAlmayer
+    node: windowFrameAlmayer
+
+- type: entity
+  parent: RMCBaseWindowFrame
+  id: RMCWindowFrameWhite
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/white_frame.rsi
+    state: white_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/white_frame.rsi
+    state: white_frame0
+  - type: IconSmooth
+    key: walls
+    base: white_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowWhite
+    node: windowFrameWhite
+
+- type: entity
+  parent: RMCBaseWindowFrame
+  id: RMCWindowFrameColony
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/colony_frame.rsi
+    state: col_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/colony_frame.rsi
+    state: col_frame0
+  - type: IconSmooth
+    key: walls
+    base: col_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowColony
+    node: windowFrameColony
+
+- type: entity
+  parent: RMCBaseWindowFrame
+  id: RMCWindowFrameColonyReinforced
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/colony_rframe.rsi
+    state: col_rframe0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/colony_rframe.rsi
+    state: col_rframe0
+  - type: IconSmooth
+    key: walls
+    base: col_rframe
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowColonyReinforced
+    node: windowFrameColonyReinforced

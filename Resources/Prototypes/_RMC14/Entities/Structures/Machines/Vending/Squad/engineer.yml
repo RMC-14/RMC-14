@@ -93,10 +93,10 @@
         points: 30
     - name: Restricted Firearms
       entries:
-      - id: CMWeaponPistolMK80
+      - id: RMCMK80Case
         points: 8
-    #- id: CMSU6SmartPistol
-    #  points: 12
+      - id: RMCSmartPistolCase
+        points: 12
     #- id: CMM240IncineratorUnit
     #  points: 12
     #- id: CMM79GrenadeLauncher
@@ -129,7 +129,7 @@
         points: 3
     #- id: CMMotionDetector
     #  points: 8
-      - id: CMWhistle
+      - id: RMCWhistle
         points: 3
     - name: Binoculars
       entries: [ ]

@@ -1,7 +1,7 @@
 ﻿- type: tile
   id: Plating
   name: tiles-plating
-  sprite: /Textures/Tiles/plating.png
+  sprite: /Textures/_RMC14/Tiles/shiva/plating.png
   baseTurf: Lattice
   isSubfloor: true
   footstepSounds:
