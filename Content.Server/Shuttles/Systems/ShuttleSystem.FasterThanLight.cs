@@ -868,7 +868,7 @@ public sealed partial class ShuttleSystem
             // Shift it slightly
             aabb = aabb.Translated(-grid.TileSizeHalfVector);
             // Create a small border around it.
-            aabb = aabb.Enlarged(0.2f);
+            aabb = aabb.Enlarged(-0.2f);
             aabbs.Add(aabb);
 
             // Handle clearing biome stuff as relevant.

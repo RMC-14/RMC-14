@@ -29,4 +29,10 @@
         maxVol: 30
   - type: UseDelay
     delay: 0.333
+  - type: Tag
+    tags:
+    - Hypospray
+
+- type: Tag
+  id: Hypospray
 

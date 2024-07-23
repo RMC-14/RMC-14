@@ -56,6 +56,10 @@ public sealed partial class BloodPackComponent : Component
 
     [DataField, AutoNetworkedField]
     public Skills SkillRequired = new() { Surgery = 1 };
+
+	// TODO RMC-14 blood types
+	[DataField, AutoNetworkedField]
+	public string[] TransferableReagents = ["Blood"];
 }
 
 [Serializable, NetSerializable]

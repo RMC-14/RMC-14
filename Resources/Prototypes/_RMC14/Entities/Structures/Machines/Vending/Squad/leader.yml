@@ -164,6 +164,8 @@
       entries:
       - id: CMMagazinePistolMK80
         points: 3
+      - id: RMCMagazinePistolSU6
+        points: 6
     - name: Special Ammunition
       entries: [ ]
     #- id: CMM240IncineratorTankNapthal
@@ -174,7 +176,7 @@
       entries:
     #- id: CMM240IncineratorUnit
     #  points: 18
-      - id: CMWeaponPistolMK80
+      - id: RMCMK80Case
         points: 8
       - id: RMCSmartPistolCase
         points: 12

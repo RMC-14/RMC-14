@@ -73,8 +73,8 @@
     slots:
       gun_magazine:
         name: Magazine
-        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
         priority: 2
         whitelist:
           tags:
@@ -158,8 +158,8 @@
     slots:
       gun_magazine:
         name: Magazine
-        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/hpr_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/hpr_unload.ogg
         priority: 2
         whitelist:
           tags:
@@ -234,8 +234,8 @@
     slots:
       gun_magazine:
         name: Magazine
-        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_unload.ogg
         priority: 2
         whitelist:
           tags:

@@ -47,3 +47,23 @@
     contents:
     - id: RMCWeaponPistolSU6
     - id: RMCBeltSmartPistolFilled
+
+- type: entity
+  parent: RMCBaseGunCase
+  id: RMCMK80Case
+  name: MK80 pistol case
+  description: "A gun case containing the MK80. Comes with two magazines."
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,3,1
+    whitelist:
+      tags:
+      - RMCMK80
+      - CMMagazinePistolMK80
+  - type: StorageFill
+    contents:
+    - id: CMWeaponPistolMK80
+    - id: CMMagazinePistolMK80
+      amount: 2
