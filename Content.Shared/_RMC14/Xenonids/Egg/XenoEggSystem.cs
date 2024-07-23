@@ -61,6 +61,7 @@ public sealed class XenoEggSystem : EntitySystem
 
         SubscribeLocalEvent<XenoEggComponent, AfterAutoHandleStateEvent>(OnXenoEggAfterState);
         SubscribeLocalEvent<XenoEggComponent, GettingPickedUpAttemptEvent>(OnXenoEggPickedUpAttempt);
+        SubscribeLocalEvent<XenoEggComponent, AfterInteractUsingEvent>(OnXenoEggInteractUsing, before: [typeof(SharedXenoParasiteSystem)]);
         SubscribeLocalEvent<XenoEggComponent, AfterInteractEvent>(OnXenoEggAfterInteract);
         SubscribeLocalEvent<XenoEggComponent, ActivateInWorldEvent>(OnXenoEggActivateInWorld);
         SubscribeLocalEvent<XenoEggComponent, StepTriggerAttemptEvent>(OnXenoEggStepTriggerAttempt);
@@ -229,11 +230,44 @@ public sealed class XenoEggSystem : EntitySystem
     private void OnXenoEggActivateInWorld(Entity<XenoEggComponent> egg, ref ActivateInWorldEvent args)
     {
         // TODO RMC14 multiple hive support
-        if (!HasComp<XenoComponent>(args.User) || !HasComp<HandsComponent>(args.User))
+        if (!HasComp<XenoParasiteComponent>(args.User) && (!HasComp<XenoComponent>(args.User) || !HasComp<HandsComponent>(args.User)))
             return;
 
         if (Open(egg, args.User, out _))
             args.Handled = true;
+    }
+
+    private void OnXenoEggInteractUsing(Entity<XenoEggComponent> egg, ref AfterInteractUsingEvent args)
+    {
+        args.Handled = true;
+        // Doesn't check hive or if a xeno is doing it
+        if (!HasComp<XenoParasiteComponent>(args.Used))
+            return;
+
+        if(_mobState.IsDead(args.Used))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-egg-dead-child"), args.User);
+            return;
+        }
+
+        if (egg.Comp.State == XenoEggState.Growing || egg.Comp.State == XenoEggState.Grown)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-egg-has-child"), args.User);
+            return;
+        }
+        else if (egg.Comp.State != XenoEggState.Opened)
+            return;
+
+        _popup.PopupClient(Loc.GetString("rmc-xeno-egg-return-user"), args.User);
+        _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-return", ("user", args.User), ("parasite", args.Used)), egg, Filter.PvsExcept(args.User), true);
+
+        SetEggState(egg, XenoEggState.Grown);
+
+        if (_net.IsClient)
+            return;
+
+        QueueDel(args.Used);
+
     }
 
     private void OnXenoEggStepTriggerAttempt(Entity<XenoEggComponent> egg, ref StepTriggerAttemptEvent args)
@@ -259,14 +293,41 @@ public sealed class XenoEggSystem : EntitySystem
         spawned = null;
         if (egg.Comp.State == XenoEggState.Opened)
         {
-            if (user != null)
-                _popup.PopupClient(Loc.GetString("cm-xeno-egg-clear"), egg, user.Value);
+            if (HasComp<XenoParasiteComponent>(user))
+            {
+                if (_mobState.IsDead(user.Value))
+                    return true;
 
-            if (_net.IsClient)
+                if (_timing.IsFirstTimePredicted)
+                    _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-return-self", ("parasite", user)), egg);
+
+                SetEggState(egg, XenoEggState.Grown);
+
+                if (_net.IsClient)
+                    return true;
+
+                QueueDel(user);
+
                 return true;
+            }
+            else
+            {
+                if (user != null)
+                    _popup.PopupClient(Loc.GetString("cm-xeno-egg-clear"), egg, user.Value);
 
-            QueueDel(egg);
+                if (_net.IsClient)
+                    return true;
 
+                QueueDel(egg);
+
+                return true;
+            }
+        }
+
+        if (HasComp<XenoParasiteComponent>(user))
+        {
+            if (egg.Comp.State == XenoEggState.Grown || egg.Comp.State == XenoEggState.Growing)
+                _popup.PopupClient(Loc.GetString("rmc-xeno-egg-has-child"), user.Value);
             return true;
         }
 
