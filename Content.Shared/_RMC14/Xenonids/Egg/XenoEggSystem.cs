@@ -247,8 +247,14 @@ public sealed class XenoEggSystem : EntitySystem
 
         args.Handled = true;
 
-		if (_net.IsClient)
+        if (_net.IsClient)
+            return;
+
+		if (_mobState.IsDead(args.Used))
+		{
+			_popup.PopupEntity(Loc.GetString("rmc-xeno-egg-dead-child"), args.User, args.User, PopupType.SmallCaution);
 			return;
+		}
 
 		if (_mind.TryGetMind(args.Used, out _, out _))
         {
@@ -264,12 +270,6 @@ public sealed class XenoEggSystem : EntitySystem
         else if (egg.Comp.State != XenoEggState.Opened)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-fail-return"), args.User, args.User, PopupType.SmallCaution);
-            return;
-        }
-
-        if (_mobState.IsDead(args.Used))
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-dead-child"), args.User, args.User, PopupType.SmallCaution);
             return;
         }
 
