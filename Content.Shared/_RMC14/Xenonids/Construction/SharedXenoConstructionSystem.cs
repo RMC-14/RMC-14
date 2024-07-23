@@ -638,7 +638,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (choice != null &&
             _prototype.TryIndex(choice, out var choiceProto) &&
             choiceProto.TryGetComponent(out HiveConstructionUniqueComponent? unique, _compFactory) &&
-            CompOrNull<HiveMemberComponent>(xeno)?.Hive is {} hive &&
+            CompOrNull<XenoComponent>(xeno)?.Hive is {} hive &&
             !_hive.CanConstruct(hive, unique.Id))
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-unique-exists", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);
