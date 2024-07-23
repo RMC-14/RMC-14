@@ -66,7 +66,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         ent.Comp.AnnouncementsLeft.Sort();
     }
 
-    public void CreateHive(string name, EntProtoId? proto)
+    public void CreateHive(string name, EntProtoId? proto = null)
     {
         if (_net.IsClient)
             return;
