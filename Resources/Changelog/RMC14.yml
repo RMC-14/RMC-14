@@ -3637,5 +3637,12 @@
   id: 438
   time: '2024-07-23T00:55:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3174
+- author: 0xRainy
+  changes:
+  - message: Xenos can no longer get in hypersleep chambers
+    type: Fix
+  id: 439
+  time: '2024-07-23T01:00:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3216
 Name: RMC14
 Order: -1
