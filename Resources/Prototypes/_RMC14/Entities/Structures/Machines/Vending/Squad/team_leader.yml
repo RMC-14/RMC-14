@@ -65,6 +65,8 @@
       entries:
       - id: RMCMK80Case
         points: 10
+      - id: RMCSmartPistolCase
+        points: 12
     #- id: CMM79GrenadeLauncher
     #  points: 30
     - name: Armors
