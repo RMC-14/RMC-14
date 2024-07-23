@@ -1,18 +1,28 @@
-﻿- type: entity
-  id: HiveCoreXeno
-  name: hive core # TODO RMC14 allow other structures to be built
-  description: A giant pulsating mound of mass. It looks very much alive.
-  components: # TODO RMC14 block ob, mortar and air strikes
+# Constructs
+
+- type: entity
+  abstract: true
+  id: BaseXenoConstruct
+  components:
+  # TODO: RCM14 start a cooldown for making a new construct if destroyed
   - type: Transform
-    anchored: true # TODO RMC14 cooldown if destroyed
-  - type: Sprite
-    sprite: _RMC14/Structures/Xenos/hive_core.rsi
-    state: core
+    anchored: true
+  - type: HiveMember
   - type: InteractionOutline
   - type: Clickable
   - type: Damageable
     damageContainer: StructuralXeno
     damageModifierSet: Resin
+
+- type: entity
+  parent: BaseXenoConstruct
+  id: HiveCoreXeno
+  name: hive core # TODO RMC14 allow other structures to be built
+  description: A giant pulsating mound of mass. It looks very much alive.
+  components: # TODO RMC14 block ob, mortar and air strikes
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/hive_core.rsi
+    state: core
   - type: Destructible
     thresholds:
     - trigger:
@@ -31,24 +41,55 @@
     prototype: CMXenoLesserDrone
   - type: HiveConstructionUnique
     id: HiveCoreXeno
+  - type: ModifyHiveLimits
+    constructions:
+      HiveClusterXeno: 8
+      # TODO other structures wyci
 
 - type: entity
-  id: HiveCoreXenoConstructionNode
-  name: hive core
+  parent: BaseXenoConstruct
+  id: HiveClusterXeno
+  name: hive cluster
+  description: A large clump of gooey mass. It rhythmically pulses, as if its pumping something into the weeds below...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/hive_cluster.rsi
+    state: cluster_idle
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  # TODO: repair with plasma over 4 seconds
+  # TODO: spawn hive weeds every 15 seconds?
+  - type: HiveCluster
+  - type: HiveConstructionUnique
+    id: HiveClusterXeno
+
+# Construction nodes
+
+- type: entity
+  abstract: true
+  parent: BaseXenoConstruct
+  id: BaseXenoConstructionNode
   description: A strange wriggling lump. Looks like a marker for something.
   suffix: Construction
   components:
-  - type: Transform
-    anchored: true
+  - type: Sprite
+    color: '#FFFFFFAA'
+  - type: HiveConstructionNode
+
+- type: entity
+  parent: BaseXenoConstructionNode
+  id: HiveCoreXenoConstructionNode
+  name: hive core
+  components:
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/hive_core.rsi
     state: core
-    color: '#FFFFFFAA'
-  - type: InteractionOutline
-  - type: Clickable
-  - type: Damageable
-    damageContainer: StructuralXeno
-    damageModifierSet: Resin
   - type: Destructible
     thresholds:
     - trigger:
@@ -58,8 +99,29 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: HiveConstructionNode
-    initialPlasmaCost: 400
     plasmaCost: 1000
     spawn: HiveCoreXeno
   - type: HiveConstructionUnique
     id: HiveCoreXeno
+
+- type: entity
+  parent: BaseXenoConstructionNode
+  id: HiveClusterXenoConstructionNode
+  name: hive cluster
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/hive_cluster.rsi
+    state: cluster
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: HiveConstructionNode
+    plasmaCost: 500
+    spawn: HiveClusterXeno
+  - type: HiveConstructionUnique
+    id: HiveClusterXeno

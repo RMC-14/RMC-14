@@ -9,7 +9,7 @@ cm-xeno-requires-more-plasma = {THE($construction)} requires {$plasma} more plas
 cm-xeno-construction-plasma-left = A {$construction} construction is designated here. It requires [color=cyan]{$plasma}[/color] more plasma.
 cm-xeno-cant-reach-there = You can't reach there!
 cm-xeno-cant-build-in-self = You can't build structures that close!
-cm-xeno-unique-exists = There's already a {$choice} built!
+cm-xeno-unique-exists = You can't build another {$choice}!
 
 # Evolve
 cm-xeno-available-evolutions = Available Evolutions
