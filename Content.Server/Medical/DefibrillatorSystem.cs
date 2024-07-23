@@ -128,10 +128,8 @@ public sealed class DefibrillatorSystem : EntitySystem
             if (TryComp(slot.ContainedEntity, out CMDefibrillatorBlockedComponent? comp))
             {
                 if (user != null)
-                {
                     _popup.PopupEntity(Loc.GetString(comp.Popup, ("target", target)), uid, user.Value);
-                    return false;
-                }
+                return false;
             }
         }
 
