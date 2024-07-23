@@ -3627,5 +3627,15 @@
   id: 437
   time: '2024-07-22T23:10:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3208
+- author: Cu1r
+  changes:
+  - message: Fixed windows not having any destructible functionality.
+    type: Fix
+  - message: Windows now leave vaultable frames when smashed and can be repaired or
+      deconstructed entirely.
+    type: Add
+  id: 438
+  time: '2024-07-23T00:55:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3174
 Name: RMC14
 Order: -1
