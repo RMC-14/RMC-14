@@ -42,7 +42,7 @@
   - type: HiveConstructionUnique
     id: HiveCoreXeno
   - type: ModifyHiveLimits
-    constructions:
+    construction:
       HiveClusterXeno: 8
       # TODO other structures wyci
 
@@ -54,7 +54,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/hive_cluster.rsi
-    state: cluster_idle
+    state: cluster
   - type: Destructible
     thresholds:
     - trigger:
