@@ -9,7 +9,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Waypoint;
 
-public sealed class TrackerAlertSystem : EntitySystem
+public sealed partial class TrackerAlertSystem : EntitySystem
 {
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -47,10 +47,6 @@ public sealed class TrackerAlertSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<RMCTrackerAlertComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<RMCTrackerAlertTargetComponent, ComponentStartup>(OnComponentStartup);
-        SubscribeLocalEvent<RMCTrackerAlertTargetComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<RMCTrackerAlertTargetComponent, XenoAddedToHiveEvent>(OnXenoAddedToHive);
-        SubscribeLocalEvent<RMCTrackerAlertTargetComponent, XenoRemovedFromHiveEvent>(OnXenoRemovedFromHive);
 
         Subs.BuiEvents<RMCTrackerAlertComponent>(TrackerAlertUIKey.Key,
             subs =>
@@ -65,49 +61,6 @@ public sealed class TrackerAlertSystem : EntitySystem
         {
             UpdateDirection(ent, trackerAlert);
         }
-    }
-
-    private void OnComponentStartup(Entity<RMCTrackerAlertTargetComponent> ent, ref ComponentStartup args)
-    {
-        if (!TryComp(ent, out XenoComponent? xeno) || !TryComp(xeno.Hive, out HiveComponent? hive))
-            return;
-
-        hive.Trackers.Add(ent);
-    }
-
-    private void OnMobStateChanged(Entity<RMCTrackerAlertTargetComponent> ent, ref MobStateChangedEvent args)
-    {
-        if (!TryComp(ent, out XenoComponent? xeno) || !TryComp(xeno.Hive, out HiveComponent? hive))
-            return;
-
-        hive.Trackers.Remove(ent);
-    }
-
-    private void OnTrackerAlertBui(EntityUid uid, RMCTrackerAlertComponent component, TrackerAlertBuiMsg args)
-    {
-        _ui.CloseUi(uid, TrackerAlertUIKey.Key, args.Actor);
-
-        if (!component.Alerts.TryGetValue(args.AlertPrototype, out var trackerAlert))
-            return;
-
-        // TODO input validation
-        trackerAlert.TrackedEntity = args.Target;
-    }
-
-    private void OnXenoAddedToHive(Entity<RMCTrackerAlertTargetComponent> ent, ref XenoAddedToHiveEvent args)
-    {
-        if (!TryComp(args.Hive, out HiveComponent? hive))
-            return;
-
-        hive.Trackers.Add(ent);
-    }
-
-    private void OnXenoRemovedFromHive(Entity<RMCTrackerAlertTargetComponent> ent, ref XenoRemovedFromHiveEvent args)
-    {
-        if (!TryComp(args.Hive, out HiveComponent? hive))
-            return;
-
-        hive.Trackers.Remove(ent);
     }
 
     public override void Update(float frameTime)
@@ -207,6 +160,17 @@ public sealed class TrackerAlertSystem : EntitySystem
             : TrackerDirections[vec.ToWorldAngle().GetDir()];
     }
 
+    private void OnTrackerAlertBui(EntityUid uid, RMCTrackerAlertComponent component, TrackerAlertBuiMsg args)
+    {
+        _ui.CloseUi(uid, TrackerAlertUIKey.Key, args.Actor);
+
+        if (!component.Alerts.TryGetValue(args.AlertPrototype, out var trackerAlert))
+            return;
+
+        // TODO input validation
+        trackerAlert.TrackedEntity = args.Target;
+    }
+
     public void OpenSelectUI(EntityUid player, AlertPrototype alert)
     {
         var ev = new GetTrackerAlertEntriesEvent(alert);
@@ -228,13 +192,6 @@ public record struct GetTrackerAlertEntriesEvent(ProtoId<AlertPrototype> AlertPr
 {
     public readonly List<TrackerAlertEntry> Entries = [];
     public ProtoId<AlertPrototype> AlertPrototype = AlertPrototype;
-}
-
-[RegisterComponent]
-public sealed partial class RMCTrackerAlertTargetComponent : Component
-{
-    [DataField]
-    public int Priority;
 }
 
 [Serializable, NetSerializable]

@@ -157,4 +157,5 @@
   - type: RMCXenoDamageVisuals
     prefix: queen
   - type: RMCTrackerAlertTarget
+    alertPrototype: HiveTracker
     priority: 1

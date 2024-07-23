@@ -32,6 +32,7 @@ using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Xenonids;
 
@@ -132,11 +133,45 @@ public sealed class XenoSystem : EntitySystem
 
     private void OnMobStateChanged(Entity<XenoComponent> ent, ref MobStateChangedEvent args)
     {
-        var oldHive = ent.Comp.Hive;
-        if (oldHive != null && TryComp(oldHive, out HiveComponent? oldHiveComp))
-            oldHiveComp.Members.Remove(ent);
-
         RaiseLocalEvent(ent, new XenoMobStateChangedEvent(args));
+
+        var hive = ent.Comp.Hive;
+        if (hive == null)
+            return;
+
+        switch (args.NewMobState)
+        {
+            case MobState.Dead:
+                RemoveTracker(ent.Owner, hive.Value);
+                break;
+            case MobState.Alive or MobState.Critical:
+                AddTracker(ent.Owner, hive.Value);
+                break;
+        }
+    }
+
+    private void RemoveTracker(Entity<RMCTrackerAlertTargetComponent?> xenoEnt, Entity<HiveComponent?> hiveEnt)
+    {
+        if (!Resolve(xenoEnt, ref xenoEnt.Comp) ||
+            !Resolve(hiveEnt, ref hiveEnt.Comp))
+            return;
+
+        var tracker = xenoEnt.Comp;
+
+        _hive.RemoveTracker(hiveEnt, tracker.AlertPrototype, xenoEnt);
+    }
+
+    private void AddTracker(Entity<RMCTrackerAlertTargetComponent?> xenoEnt, Entity<HiveComponent?> hiveEnt)
+    {
+        if (!Resolve(xenoEnt, ref xenoEnt.Comp) ||
+            !Resolve(hiveEnt, ref hiveEnt.Comp))
+            return;
+
+        var tracker = xenoEnt.Comp;
+        var hive = hiveEnt.Comp;
+
+        var trackers = hive.Trackers.GetOrNew(tracker.AlertPrototype);
+        trackers.Add(GetNetEntity(xenoEnt));
     }
 
     private void OnXenoGetAdditionalAccess(Entity<XenoComponent> xeno, ref GetAccessTagsEvent args)
@@ -232,7 +267,7 @@ public sealed class XenoSystem : EntitySystem
         if (!TryComp(ent.Comp.Hive, out HiveComponent? hive))
             return;
 
-        if (!_hive.TryGetTrackers((ent.Comp.Hive.Value, hive), out var trackers))
+        if (!_hive.TryGetTrackers((ent.Comp.Hive.Value, hive), args.AlertPrototype, out var trackers))
         {
             _popup.PopupPredicted("No trackers to open", ent, ent);
             return;
@@ -254,12 +289,9 @@ public sealed class XenoSystem : EntitySystem
         if (!Resolve(xeno, ref xeno.Comp))
             return;
 
-        var oldHive = xeno.Comp.Hive;
-        if (oldHive != null && TryComp(oldHive, out HiveComponent? oldHiveComp))
-        {
-            oldHiveComp.Members.Remove(xeno);
-            RaiseLocalEvent(xeno, new XenoRemovedFromHiveEvent(oldHive.Value));
-        }
+        var tracker = CompOrNull<RMCTrackerAlertTargetComponent>(xeno);
+        if (tracker != null && xeno.Comp.Hive != null)
+            RemoveTracker((xeno, tracker), xeno.Comp.Hive.Value);
 
         if (hive == null)
         {
@@ -273,8 +305,9 @@ public sealed class XenoSystem : EntitySystem
             return;
 
         xeno.Comp.Hive = hive;
-        hiveEnt.Comp.Members.Add(xeno);
-        RaiseLocalEvent(xeno, new XenoAddedToHiveEvent(hiveEnt));
+        if (tracker != null)
+            AddTracker((xeno, tracker), (hiveEnt, hive));
+
         Dirty(xeno, xeno.Comp);
 
         _nightVision.SetSeeThroughContainers(xeno.Owner, hiveEnt.Comp.SeeThroughContainers);
@@ -414,7 +447,3 @@ public sealed class XenoSystem : EntitySystem
         }
     }
 }
-
-public record struct XenoAddedToHiveEvent(EntityUid Hive);
-
-public record struct XenoRemovedFromHiveEvent(EntityUid Hive);

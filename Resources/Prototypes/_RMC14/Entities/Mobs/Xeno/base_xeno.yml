@@ -232,6 +232,8 @@
     alerts:
       HiveTracker:
         alertPrototype: HiveTracker
+      ResinMarkerTracker:
+        alertPrototype: ResinMarkerTracker
 
 - type: entity
   abstract: true

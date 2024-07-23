@@ -1,4 +1,5 @@
-﻿using Content.Shared.FixedPoint;
+﻿using Content.Shared.Alert;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -41,8 +42,5 @@ public sealed partial class HiveComponent : Component
     public bool GotOvipositorPopup;
 
     [DataField, AutoNetworkedField]
-    public List<EntityUid> Members = [];
-
-    [DataField, AutoNetworkedField]
-    public List<EntityUid> Trackers = [];
+    public Dictionary<ProtoId<AlertPrototype>, List<NetEntity>> Trackers = [];
 }
