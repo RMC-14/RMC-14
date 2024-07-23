@@ -296,15 +296,14 @@ public sealed class XenoEggSystem : EntitySystem
             if (HasComp<XenoParasiteComponent>(user))
             {
                 if (_mobState.IsDead(user.Value))
-                    return true;
-
-                if (_timing.IsFirstTimePredicted)
-                    _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-return-self", ("parasite", user)), egg);
+                    return true; 
 
                 SetEggState(egg, XenoEggState.Grown);
 
                 if (_net.IsClient)
                     return true;
+
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-return-self", ("parasite", user)), egg);
 
                 QueueDel(user);
 
