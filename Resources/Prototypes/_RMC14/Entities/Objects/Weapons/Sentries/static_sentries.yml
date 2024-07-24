@@ -1,5 +1,6 @@
 ﻿- type: entity
   parent: BaseStructure
+  abstract: true
   id: RMCBaseTurret
   name: turret
   components:
@@ -35,7 +36,7 @@
   - type: CombatMode
     toggleMouseRotator: false
   - type: Gun
-    fireRate: 3
+    fireRate: 6
     selectedMode: FullAuto
     availableModes:
     - FullAuto

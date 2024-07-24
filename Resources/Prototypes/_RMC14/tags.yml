@@ -8,10 +8,10 @@
   id: CMCartridgePistol9mmAP
 
 - type: Tag
-  id: RCMCartridgePistol9mmSquashHead
+  id: RMCCartridgeRevolver44
 
 - type: Tag
-  id: CMCartridgeRevolver44
+  id: RCMCartridgePistol9mmSquashHead
 
 - type: Tag
   id: CMCartridgeRifle10x24mm
@@ -66,3 +66,6 @@
 
 - type: Tag
   id: RMCSmartPistolHolster
+
+- type: Tag
+  id: RMCMK80

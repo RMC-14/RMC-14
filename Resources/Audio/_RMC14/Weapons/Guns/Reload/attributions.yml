@@ -1,3 +1,23 @@
+- files: ["gun_88m4_reload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e21e9e5b88b44c7402c2f984f16cc36116b07b0/sound/weapons/gun_88m4_reload.ogg"
+
+- files: ["gun_88m4_unload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e21e9e5b88b44c7402c2f984f16cc36116b07b0/sound/weapons/gun_88m4_unload.ogg"
+
+- files: ["gun_mar40_reload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/5db92c87812e21fa7f9343758e96f49ef1e01c3f/sound/weapons/handling/gun_mar40_reload.ogg"
+
+- files: ["gun_mar40_unload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/5db92c87812e21fa7f9343758e96f49ef1e01c3f/sound/weapons/handling/gun_mar40_unload.ogg"
+
 - files: ["grenade_insert.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13, converted to .ogg"
@@ -6,12 +26,62 @@
 - files: ["gun_mk80_reload.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
-  source: "https://github.com/cmss13-devs/cmss13/blob/a3b7bc4f4388bf291ccfeceac7d471961c224b45/sound/weapons/gun_vp78_reload.ogg"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e21e9e5b88b44c7402c2f984f16cc36116b07b0/sound/weapons/gun_vp78_reload.ogg"
 
 - files: ["gun_mk80_unload.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
-  source: "https://github.com/cmss13-devs/cmss13/blob/a3b7bc4f4388bf291ccfeceac7d471961c224b45/sound/weapons/gun_vp78_unload.ogg"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6e21e9e5b88b44c7402c2f984f16cc36116b07b0/sound/weapons/gun_vp78_unload.ogg"
+
+- files: ["gun_sg_reload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/7aec3d478a3bd4f5eb0a1bd42addad54ff00ce43/sound/weapons/handling/gun_sg_reload.ogg"
+
+- files: ["gun_sg_unload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/7aec3d478a3bd4f5eb0a1bd42addad54ff00ce43/sound/weapons/handling/gun_sg_unload.ogg"
+
+- files: ["gun_su6_reload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/5db92c87812e21fa7f9343758e96f49ef1e01c3f/sound/weapons/handling/gun_su6_reload.ogg"
+
+- files: ["gun_su6_unload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/5db92c87812e21fa7f9343758e96f49ef1e01c3f/sound/weapons/handling/gun_su6_unload.ogg"
+
+- files: ["hpr_reload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/7853d79df1827a2a4907fb3162b6319662dbc1ba/sound/weapons/handling/hpr_reload.ogg"
+
+- files: ["hpr_unload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/7853d79df1827a2a4907fb3162b6319662dbc1ba/sound/weapons/handling/hpr_unload.ogg"
+
+- files: ["l42_reload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/7853d79df1827a2a4907fb3162b6319662dbc1ba/sound/weapons/handling/l42_reload.ogg"
+
+- files: ["l42_unload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/7853d79df1827a2a4907fb3162b6319662dbc1ba/sound/weapons/handling/l42_unload.ogg"
+
+- files: ["m41_reload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/7853d79df1827a2a4907fb3162b6319662dbc1ba/sound/weapons/handling/m41_reload.ogg"
+
+- files: ["m41_unload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/7853d79df1827a2a4907fb3162b6319662dbc1ba/sound/weapons/handling/m41_unload.ogg"
 
 - files: ["m42a2.ogg"]
   license: "CC-BY-SA-3.0"
@@ -27,3 +97,13 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/a3b7bc4f4388bf291ccfeceac7d471961c224b45/sound/weapons/handling/m79_unload.ogg"
+
+- files: ["smg_reload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/7853d79df1827a2a4907fb3162b6319662dbc1ba/sound/weapons/handling/smg_reload.ogg"
+
+- files: ["smg_unload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/7853d79df1827a2a4907fb3162b6319662dbc1ba/sound/weapons/handling/smg_unload.ogg"

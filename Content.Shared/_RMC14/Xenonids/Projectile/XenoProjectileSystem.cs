@@ -1,5 +1,4 @@
 ﻿using Content.Shared._RMC14.Xenonids.Plasma;
-using Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
 using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -11,7 +10,6 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Spawners;
 
 namespace Content.Shared._RMC14.Xenonids.Projectile;
 
@@ -76,8 +74,7 @@ public sealed class XenoProjectileSystem : EntitySystem
         SoundSpecifier? sound,
         int shots,
         Angle deviation,
-        float speed,
-        bool checkCharging = false)
+        float speed)
     {
         var origin = _transform.GetMapCoordinates(xeno);
         var target = _transform.ToMapCoordinates(targetCoords);
@@ -96,11 +93,6 @@ public sealed class XenoProjectileSystem : EntitySystem
             return true;
 
         var originalDiff = target.Position - origin.Position;
-
-        var charging = CompOrNull<XenoActiveChargingSpitComponent>(xeno);
-        var extraDamage = checkCharging ? charging?.Damage : null;
-        var lifetime = checkCharging ? charging?.ProjectileLifetime : null;
-
         for (var i = 0; i < shots; i++)
         {
             var projTarget = target;
@@ -113,18 +105,6 @@ public sealed class XenoProjectileSystem : EntitySystem
             var diff = projTarget.Position - origin.Position;
             var xenoVelocity = _physics.GetMapLinearVelocity(xeno);
             var projectile = Spawn(projectileId, origin);
-            if (extraDamage != null && TryComp(projectile, out ProjectileComponent? projectileComp))
-            {
-                projectileComp.Damage += extraDamage;
-                Dirty(projectile, projectileComp);
-            }
-
-            if (lifetime != null)
-            {
-                var timedDespawn = EnsureComp<TimedDespawnComponent>(projectile);
-                timedDespawn.Lifetime = (float) lifetime.Value.TotalSeconds;
-            }
-
             diff *= speed / diff.Length();
 
             _gun.ShootProjectile(projectile, diff, xenoVelocity, xeno, xeno, speed);
