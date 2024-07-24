@@ -19,7 +19,7 @@
         - RadioSpeaker
         - Xeno
   - type: ActiveListener
-    range: 10
+    range: 3
   - type: UserInterface
     interfaces:
       enum.SurveillanceCameraSetupUiKey.Camera:
