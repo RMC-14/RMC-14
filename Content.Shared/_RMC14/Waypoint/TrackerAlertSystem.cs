@@ -62,10 +62,7 @@ public sealed class TrackerAlertSystem : EntitySystem
 
     private void OnComponentRemove(Entity<RMCTrackerAlertComponent> ent, ref ComponentRemove args)
     {
-        foreach (var (_, trackerAlert) in ent.Comp.Alerts)
-        {
-            _alerts.ClearAlertCategory(ent, trackerAlert.DirectionAlertCategory);
-        }
+        RemoveAlerts((ent, ent.Comp), ent.Comp.Alerts.Keys);
     }
 
     public override void Update(float frameTime)
@@ -183,6 +180,15 @@ public sealed class TrackerAlertSystem : EntitySystem
 
         _ui.OpenUi(player, TrackerAlertUIKey.Key, player);
         _ui.SetUiState(player, TrackerAlertUIKey.Key, new TrackerAlertBuiState(ev.Entries));
+    }
+
+    public void RemoveAlerts(Entity<RMCTrackerAlertComponent> ent, IEnumerable<ProtoId<AlertPrototype>> alertsToRemove)
+    {
+        foreach (var proto in alertsToRemove)
+        {
+            if (ent.Comp.Alerts.Remove(proto, out var alert))
+                _alerts.ClearAlertCategory(ent, alert.DirectionAlertCategory);
+        }
     }
 }
 

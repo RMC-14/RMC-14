@@ -1,17 +1,23 @@
 ﻿using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using Content.Shared._RMC14.Waypoint;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
+using Content.Shared.Alert;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Prototypes;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Marines.Squads;
 
@@ -24,6 +30,7 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public ImmutableArray<EntityPrototype> SquadPrototypes { get; private set; }
     public ImmutableArray<JobPrototype> SquadRolePrototypes { get; private set; }
@@ -51,6 +58,7 @@ public sealed class SquadSystem : EntitySystem
         SubscribeLocalEvent<SquadMemberComponent, GetMarineIconEvent>(OnSquadRoleGetIcon);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+        SubscribeLocalEvent<SquadMemberComponent, GetTrackerAlertEntriesEvent>(OnGetTrackerAlertEntries);
 
         RefreshSquadPrototypes();
     }
@@ -152,6 +160,74 @@ public sealed class SquadSystem : EntitySystem
         SquadRolePrototypes = jobBuilder.ToImmutable();
     }
 
+    #region TrackerAlert
+
+    private void OnGetTrackerAlertEntries(Entity<SquadMemberComponent> ent, ref GetTrackerAlertEntriesEvent args)
+    {
+        if (!TryComp(ent.Comp.Squad, out SquadTeamComponent? squad))
+            return;
+
+        if (!TryGetTrackers((ent.Comp.Squad.Value, squad), args.AlertPrototype, out var trackers))
+        {
+            _popup.PopupPredicted("No trackers to open", ent, ent);
+            return;
+        }
+
+        var alertPrototype = args.AlertPrototype;
+
+        args.Entries.AddRange(trackers.Select(uid =>
+            new TrackerAlertEntry(GetNetEntity(uid), Name(uid), MetaData(uid).EntityPrototype?.ID, alertPrototype)));
+    }
+
+    private bool TryGetTrackers(Entity<SquadTeamComponent?> ent,
+        ProtoId<AlertPrototype> alertProto,
+        [NotNullWhen(true)] out List<EntityUid>? trackers)
+    {
+        trackers = null;
+        if (!Resolve(ent, ref ent.Comp))
+            return false;
+
+        if (ent.Comp.Trackers.TryGetValue(alertProto, out var netTrackers))
+        {
+            trackers = GetEntityList(netTrackers);
+            return true;
+        }
+
+        return false;
+    }
+
+    private void AddTracker(Entity<RMCTrackerAlertTargetComponent?> ent, Entity<SquadTeamComponent?> hiveEnt)
+    {
+        if (!Resolve(ent, ref ent.Comp) ||
+            !Resolve(hiveEnt, ref hiveEnt.Comp))
+            return;
+
+        var tracker = ent.Comp;
+        var hive = hiveEnt.Comp;
+
+        var trackers = hive.Trackers.GetOrNew(tracker.AlertPrototype);
+        trackers.Add(GetNetEntity(ent));
+    }
+
+    private void RemoveTracker(Entity<RMCTrackerAlertTargetComponent?> ent, Entity<SquadTeamComponent?> squadEnt)
+    {
+        if (!Resolve(ent, ref ent.Comp) ||
+            !Resolve(squadEnt, ref squadEnt.Comp))
+            return;
+
+        var tracker = ent.Comp;
+        var hive = squadEnt.Comp;
+
+        if (hive.Trackers.TryGetValue(tracker.AlertPrototype, out var trackers))
+        {
+            trackers.Remove(GetNetEntity(ent));
+            if (trackers.Count == 0)
+                hive.Trackers.Remove(tracker.AlertPrototype);
+        }
+    }
+
+    #endregion
+
     public bool TryGetSquad(EntProtoId prototype, out Entity<SquadTeamComponent> squad)
     {
         var squadQuery = EntityQueryEnumerator<SquadTeamComponent, MetaDataComponent>();
@@ -209,9 +285,16 @@ public sealed class SquadSystem : EntitySystem
         if (!Resolve(team, ref team.Comp))
             return;
 
+        var tracker = CompOrNull<RMCTrackerAlertTargetComponent>(marine);
+
         var member = EnsureComp<SquadMemberComponent>(marine);
         if (_squadTeamQuery.TryComp(member.Squad, out var oldSquad))
+        {
             oldSquad.Members.Remove(marine);
+
+            if (tracker != null)
+                RemoveTracker((marine, tracker), (member.Squad.Value, oldSquad));
+        }
 
         member.Squad = team;
         member.Background = team.Comp.Background;
@@ -236,6 +319,9 @@ public sealed class SquadSystem : EntitySystem
         team.Comp.Members.Add(marine);
         var ev = new SquadMemberUpdatedEvent();
         RaiseLocalEvent(marine, ref ev);
+
+        if (tracker != null)
+            AddTracker((marine, tracker), team);
     }
 
     private void MarineSetTitle(EntityUid marine, string title)

@@ -38,6 +38,9 @@
     - type: MarineOrders
     - type: SquadArmorWearer
       leader: true
+    - type: RMCTrackerAlertTarget
+      alertPrototype: SquadTracker
+      priority: 1
 
 - type: startingGear
   id: CMGearSquadLeader

@@ -28,6 +28,8 @@
     - type: CMVendorUser
       points: 45
     - type: SquadArmorWearer
+    - type: RMCTrackerAlertTarget
+      alertPrototype: SquadTracker
 
 - type: startingGear
   id: CMGearFireteamLeader
