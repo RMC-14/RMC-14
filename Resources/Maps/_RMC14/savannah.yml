@@ -1863,13 +1863,6 @@ entities:
     - type: Transform
       pos: -18.193432,6.990715
       parent: 1
-- proto: ClothingMaskClown
-  entities:
-  - uid: 923
-    components:
-    - type: Transform
-      pos: 74.465805,-27.596886
-      parent: 1
 - proto: ClothingNeckAromanticPin
   entities:
   - uid: 904
@@ -1994,26 +1987,12 @@ entities:
     - type: Transform
       pos: -47.60836,-1.293808
       parent: 1
-- proto: ClothingShoesClown
-  entities:
-  - uid: 26
-    components:
-    - type: Transform
-      pos: 74.465805,-28.065636
-      parent: 1
 - proto: ClothingUniformJumpskirtJanimaid
   entities:
   - uid: 3576
     components:
     - type: Transform
       pos: -28.5,-17.5
-      parent: 1
-- proto: ClothingUniformJumpsuitClown
-  entities:
-  - uid: 924
-    components:
-    - type: Transform
-      pos: 74.465805,-28.003136
       parent: 1
 - proto: CMAirlock
   entities:
