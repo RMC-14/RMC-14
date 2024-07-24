@@ -3676,5 +3676,12 @@
   id: 443
   time: '2024-07-24T01:16:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3243
+- author: Tunguso4ka
+  changes:
+  - message: Added handheld Broadcasting Camera for Correspondents!
+    type: Add
+  id: 444
+  time: '2024-07-24T10:50:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3227
 Name: RMC14
 Order: -1
