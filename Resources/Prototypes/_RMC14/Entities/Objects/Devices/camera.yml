@@ -17,6 +17,7 @@
         - SurveillanceCamera
         - SurveillanceCameraMonitor
         - RadioSpeaker
+        - Xeno
   - type: ActiveListener
     range: 10
   - type: UserInterface
