@@ -40,4 +40,13 @@ public sealed partial class DamageOnCollideComponent : Component
 
     [DataField]
     public bool ReduceChainDamage;
+
+    [DataField]
+    public TimeSpan AcidComboDuration;
+
+    [DataField]
+    public DamageSpecifier? AcidComboDamage;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan AcidComboParalyze;
 }
