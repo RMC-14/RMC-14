@@ -23,7 +23,7 @@ public sealed partial class RMCTrackerAlert
     public TrackerDirection WorldDirection;
 
     [ViewVariables]
-    public TrackerDirection LastDirection;
+    public TrackerDirection? LastDirection;
 
     [DataField(required: true)]
     public ProtoId<AlertPrototype> AlertPrototype;
