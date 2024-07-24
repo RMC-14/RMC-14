@@ -3466,8 +3466,6 @@
   id: 418
   time: '2024-07-20T12:10:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3164
-<<<<<<< HEAD
-=======
 - author: DrSmugleaf
   changes:
   - message: Fixed Requisitions not being able to buy more breaching charges. They
@@ -3622,6 +3620,5 @@
   id: 436
   time: '2024-07-22T12:12:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3204
->>>>>>> 216d351f03f467a9286a8262d16d47dcec69ad03
 Name: RMC14
 Order: -1
