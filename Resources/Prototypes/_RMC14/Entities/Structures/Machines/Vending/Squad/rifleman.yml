@@ -185,13 +185,13 @@
     - name: Goggles
       choices: { CMGoggles: 1 }
       entries:
-      - id: CMGlassesMarineRpg
+      - id: RMCGlassesMarineRpg
         points: 5
-      - id: CMGogglesBallistic
+      - id: RMCogglesBallistic
         points: 5
-      - id: CMGogglesM1A1Ballistic
+      - id: RMCGogglesM1A1Ballistic
         points: 5
-      - id: CMGogglesPrescriptionBallistic
+      - id: RMCGogglesPrescriptionBallistic
         points: 5
     - name: Binoculars
       entries: [ ]
