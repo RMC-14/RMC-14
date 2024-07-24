@@ -80,6 +80,8 @@
     containers:
       board: !type:Container
         ents: []
+  - type: Corrodible
+    isCorrodible: false
 
 - type: entity
   id: CMCargoElevator

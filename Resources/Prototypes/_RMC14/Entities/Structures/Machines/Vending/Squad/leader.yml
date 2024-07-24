@@ -60,17 +60,6 @@
         points: 3
       - id: CMFireExtinguisherPortable
         points: 3
-        - name: Goggles
-      choices: { CMGoggles: 1 }
-      entries:
-      - id: CMGlassesMarineRpg
-        name: Marine RPG glasses
-      - id: CMGogglesBallistic
-        name: Ballistic goggles
-      - id: CMGogglesM1A1Ballistic
-        name: M1A1 Ballistic goggles
-      - id: CMGogglesPrescriotionBallistic
-        name: Prescriotion ballistic goggles
     #- id: CMMotionDetector
     #  points: 5
     #- id: CMFultonDeviceStack

@@ -182,17 +182,6 @@
     #  points: 15
       - id: RMCWhistle
         points: 5
-    - name: Goggles
-      choices: { CMGoggles: 1 }
-      entries:
-      - id: CMGlassesMarineRpg
-        name: Marine RPG glasses
-      - id: CMGogglesBallistic
-        name: Ballistic goggles
-      - id: CMGogglesM1A1Ballistic
-        name: M1A1 Ballistic goggles
-      - id: CMGogglesPrescriotionBallistic
-        name: Prescriotion ballistic goggles
     - name: Binoculars
       entries: [ ]
     #- id: CMRangeFinder
