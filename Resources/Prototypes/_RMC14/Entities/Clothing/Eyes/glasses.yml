@@ -86,7 +86,6 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/rpglasses.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/rpglasses.rsi
-  - type: FlashImmunity
 
 - type: entity
   parent: ClothingEyesBase
@@ -98,7 +97,6 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles.rsi
-  - type: FlashImmunity
     
 - type: entity
   parent: ClothingEyesBase
@@ -110,7 +108,6 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
-  - type: FlashImmunity
 
 - type: entity
   parent: ClothingEyesBase
@@ -122,4 +119,3 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Prescription_ballistic_goggles.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Prescription_ballistic_goggles.rsi
-  - type: FlashImmunity
