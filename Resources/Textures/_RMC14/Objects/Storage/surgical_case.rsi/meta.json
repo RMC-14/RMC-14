@@ -8,10 +8,13 @@
   },
   "states": [
     {
-      "name": "surgical_case"
+      "name": "surgical_case_base"
     },
     {
-      "name": "surgical_case_empty"
+      "name": "surgical_case_open"
+    },
+    {
+      "name": "surgical_case_closed"
     }
   ]
 }
