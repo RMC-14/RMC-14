@@ -141,15 +141,6 @@
 
 - type: entity
   parent: RMCCoatCorrespondent
-  id: RMCCoatCorrespondent
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/brown.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/brown.rsi
-
-- type: entity
-  parent: RMCCoatCorrespondent
   id: RMCCoatCorrespondentGreen
   components:
   - type: Sprite
