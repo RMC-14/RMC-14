@@ -122,8 +122,8 @@
         name: Ballistic goggles
       - id: CMGogglesM1A1Ballistic
         name: M1A1 Ballistic goggles
-      - id: CMGogglesPrescriotionBallistic
-        name: Prescriotion ballistic goggles
+      - id: CMGogglesPrescriptionBallistic
+        name: Prescription ballistic goggles
     - name: Binoculars
       entries: [ ]
     #- id: CMBinoculars
