@@ -29,11 +29,11 @@
     - ActionXenoWatch
     - ActionXenoTailStab
     - ActionXenoAcidStrong
-    #    - ActionXenoBombard
-    #    - ActionXenoToggleGasType
+    - ActionXenoBombard
+#    - ActionXenoToggleGasType
     - ActionXenoSprayAcid
-    #    - ActionXenoLongSight
-    #    - ActionXenoAcidShroud
+    - ActionXenoZoom
+    - ActionXenoAcidShroud
     - ActionXenoDevolve
     tier: 3
     hudOffset: 0,0.35
@@ -50,6 +50,13 @@
     armor: 20
     explosionArmor: 20
   - type: XenoDevour
+  - type: XenoZoom
+    zoom: 1, 1
+    offsetLength: 3
+    speed: 0.8
+    doAfter: 0.5
+  - type: XenoBombard
+  - type: XenoAcidShroud
   - type: MeleeWeapon
     damage:
       groups:

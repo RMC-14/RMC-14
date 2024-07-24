@@ -1,27 +1,38 @@
 ﻿using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Orders;
+using Content.Shared._RMC14.Xenonids.Construction.Nest;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared.Armor;
 using Content.Shared.Blocking;
+using Content.Shared.Chat.Prototypes;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Silicons.Borgs;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Damage;
 
-public sealed class CMDamageableSystem : EntitySystem
+public abstract class SharedRMCDamageableSystem : EntitySystem
 {
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly List<string> _types = [];
+    private readonly HashSet<Entity<MarineComponent>> _marines = new();
 
     private EntityQuery<DamageableComponent> _damageableQuery;
     private EntityQuery<MobStateComponent> _mobStateQuery;
@@ -141,11 +152,15 @@ public sealed class CMDamageableSystem : EntitySystem
         return equal ?? new DamageSpecifier();
     }
 
+    protected virtual void DoEmote(EntityUid ent, ProtoId<EmotePrototype> emote)
+    {
+    }
+
     public override void Update(float frameTime)
     {
         var time = _timing.CurTime;
-        var query = EntityQueryEnumerator<DamageMobStateComponent>();
-        while (query.MoveNext(out var uid, out var comp))
+        var damageMobStateQuery = EntityQueryEnumerator<DamageMobStateComponent>();
+        while (damageMobStateQuery.MoveNext(out var uid, out var comp))
         {
             if (time < comp.DamageAt)
                 continue;
@@ -168,6 +183,39 @@ public sealed class CMDamageableSystem : EntitySystem
                     _damageable.TryChangeDamage(uid, comp.NonDeadDamage, true, damageable: damageable);
                     _damageable.TryChangeDamage(uid, comp.CritDamage, true, damageable: damageable);
                     break;
+            }
+        }
+
+        if (_net.IsClient)
+            return;
+
+        var damageOverTimeQuery = EntityQueryEnumerator<DamageOverTimeComponent>();
+        while (damageOverTimeQuery.MoveNext(out var uid, out var damage))
+        {
+            if (time < damage.NextDamageAt)
+                continue;
+
+            damage.NextDamageAt = time + damage.DamageEvery;
+            Dirty(uid, damage);
+
+            _marines.Clear();
+            _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), 0.5f, _marines);
+            foreach (var marine in _marines)
+            {
+                if (!damage.AffectsDead && _mobState.IsDead(marine))
+                    continue;
+
+                if (!damage.AffectsInfectedNested &&
+                    HasComp<XenoNestedComponent>(marine) &&
+                    HasComp<VictimInfectedComponent>(marine))
+                {
+                    continue;
+                }
+
+                _damageable.TryChangeDamage(marine, damage.Damage);
+
+                if (damage.Emote is { } emote)
+                    DoEmote(uid, emote);
             }
         }
     }

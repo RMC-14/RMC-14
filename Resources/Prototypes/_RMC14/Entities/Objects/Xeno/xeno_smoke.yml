@@ -1,0 +1,30 @@
+﻿- type: entity
+  parent: Smoke
+  id: RMCSmokeAcid
+  name: acid gas
+  noSpawn: true
+  components:
+  - type: Occluder
+    enabled: false
+  - type: Sprite
+    sprite: _RMC14/Effects/smoke.rsi
+    state: smoke2
+    color: "#62821D"
+  - type: TimedDespawn
+    lifetime: 10
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: Smoke # TODO RMC14 apparently smoke code is fucking dogshit so replace this with something else that works in any way whatsoever
+    solution: null
+    spreadAmount: 12
+
+- type: entity
+  parent: RMCSmokeAcid
+  id: RMCSmokeAcidShroud
+  name: acid gas
+  noSpawn: true
+  components:
+  - type: Smoke
+    solution: null
+    spreadAmount: 1
