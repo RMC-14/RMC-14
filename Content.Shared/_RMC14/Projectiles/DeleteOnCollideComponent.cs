@@ -3,5 +3,5 @@
 namespace Content.Shared._RMC14.Projectiles;
 
 [RegisterComponent, NetworkedComponent]
-[Access(typeof(CMProjectileSystem))]
+[Access(typeof(RMCProjectileSystem))]
 public sealed partial class DeleteOnCollideComponent : Component;

@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/134b9b90f2d59c11f05e7e3faf06f0a971482809/icons/obj/items/food.dmi and https://github.com/cmss13-devs/cmss13/blob/95997cd3e1b745f93a49c1ce345a6b5f98a567e1/icons/obj/items/trash.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "barcardine-o"
+    },
+    {
+      "name": "hunk-o"
+    },
+    {
+      "name": "chunk-o"
+    },
+    {
+      "name": "boonie-o"
+    },
+    {
+      "name": "open-burrito"
+    },
+    {
+      "name": "open-hotdog"
+    },
+    {
+      "name": "hburger"
+    },
+    {
+      "name": "kepler_chips"
+    },
+    {
+      "name": "wy_pepper"
+    },
+    {
+      "name": "kepler_flame"
+    },
+    {
+      "name": "hotdog_trash"
+    },
+    {
+      "name": "burger_trash"
+    },
+    {
+      "name": "MREtray_empty"
+    },
+    {
+      "name": "kepler_chips_flame_trash"
+    },
+    {
+      "name": "wy_chips_pepper_trash"
+    },
+    {
+      "name": "kepler_chips_trash"
+    },
+    {
+      "name": "hunk_trash"
+    },
+    {
+      "name": "barcardine_trash"
+    },
+    {
+      "name": "boonie_trash"
+    },
+    {
+      "name": "chunk_trash"
+    },
+    {
+      "name": "mealpackempty"
+    },
+    {
+      "name": "burrito_trash"
+    },
+    {
+      "name": "barcardine"
+    },
+    {
+      "name": "hunk"
+    },
+    {
+      "name": "chunk"
+    },
+    {
+      "name": "boonie"
+    },
+    {
+      "name": "packaged-burrito"
+    },
+    {
+      "name": "packaged-hotdog"
+    },
+    {
+      "name": "burger"
+    },
+    {
+      "name": "eat"
+    },
+    {
+      "name": "eat_bar"
+    }
+  ]
+}

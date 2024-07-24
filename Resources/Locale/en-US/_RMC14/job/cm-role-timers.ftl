@@ -1,4 +1,4 @@
-﻿role-timer-human-roles = any human roles
+﻿role-timer-human-roles = any humanoid roles
 role-timer-medical-roles = any medical roles
 role-timer-engineering-roles = any engineering roles
 role-timer-dropship-roles = any dropship roles

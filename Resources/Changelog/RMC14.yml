@@ -3637,5 +3637,65 @@
   id: 438
   time: '2024-07-23T00:55:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3174
+- author: 0xRainy
+  changes:
+  - message: Xenos can no longer get in hypersleep chambers
+    type: Fix
+  id: 439
+  time: '2024-07-23T01:00:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3216
+- author: Vermidia
+  changes:
+  - message: Fixed xenonids being able to pull eggs.
+    type: Fix
+  id: 440
+  time: '2024-07-23T21:52:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3240
+- author: DrSmugleaf
+  changes:
+  - message: 'Added two tracks by Bolgarich that play during hijack: Hiking in the
+      fog and tango with bloodshed.'
+    type: Add
+  id: 441
+  time: '2024-07-23T22:05:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3220
+- author: Whisper
+  changes:
+  - message: Added Kate Fleming, Kaylie Rowleyininski, Amari 'Dropping Hot' Williams
+      figurines
+    type: Add
+  id: 442
+  time: '2024-07-23T22:07:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3176
+- author: DrSmugleaf
+  changes:
+  - message: Added the Spitter's missing charged spit + spray acid combo. Hitting
+      a marine with both in that order will make them take extra damage and be knocked
+      down. Remember to click the status on the right as a marine to resist the acid!
+    type: Add
+  id: 443
+  time: '2024-07-24T01:16:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3243
+- author: Tunguso4ka
+  changes:
+  - message: Added handheld Broadcasting Camera for Correspondents!
+    type: Add
+  id: 444
+  time: '2024-07-24T10:50:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3227
+- author: musicmanvr
+  changes:
+  - message: The Hot Foods machine now stocks familiar items.
+    type: Add
+  id: 445
+  time: '2024-07-24T11:01:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3206
+- author: gorillagaming
+  changes:
+  - message: The current planet is now displayed in the lobby
+    type: Add
+  id: 446
+  time: '2024-07-24T11:30:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3232
 Name: RMC14
 Order: -1

@@ -165,7 +165,7 @@
       Dead:
       - CMActionGhost
   - type: Destructible
-    thresholds: []
+    thresholds: [ ]
   - type: NpcFactionMember
     factions:
     - UNMC
@@ -173,3 +173,21 @@
   - type: CrashLandable
   - type: StunShakeable
   - type: StunShakeableUser
+  - type: GenericVisualizer
+    visuals:
+      enum.CreamPiedVisuals.Creamed:
+        clownedon:
+          True: { visible: true }
+          False: { visible: false }
+      enum.UserAcidedVisuals.Acided:
+        acided:
+          None:
+            visible: false
+          Normal:
+            sprite: _RMC14/Effects/xeno_spray_acid.rsi
+            state: human_acid
+            visible: true
+          Enhanced:
+            sprite: _RMC14/Effects/xeno_spray_acid.rsi
+            state: human_acid_enhanced
+            visible: true

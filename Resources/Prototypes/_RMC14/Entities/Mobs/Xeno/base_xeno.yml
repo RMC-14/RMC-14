@@ -197,7 +197,6 @@
     whitelist:
       components:
       - Xeno
-      - XenoEgg
       - Infectable
   - type: BlockPullingDead
   - type: XenoFriendly
