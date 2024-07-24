@@ -3667,5 +3667,14 @@
   id: 442
   time: '2024-07-23T22:07:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3176
+- author: DrSmugleaf
+  changes:
+  - message: Added the Spitter's missing charged spit + spray acid combo. Hitting
+      a marine with both in that order will make them take extra damage and be knocked
+      down. Remember to click the status on the right as a marine to resist the acid!
+    type: Add
+  id: 443
+  time: '2024-07-24T01:16:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3243
 Name: RMC14
 Order: -1
