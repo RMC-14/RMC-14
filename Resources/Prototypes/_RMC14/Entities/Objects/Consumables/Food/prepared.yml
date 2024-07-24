@@ -17,6 +17,8 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+  - type: Food
+    trash: RMCTray_empty
 
 - type: entity
   parent: CMMarinePreparedMealBase
@@ -71,3 +73,23 @@
   components:
   - type: Sprite
     state: tofu
+
+# Empty Tray
+
+- type: entity
+  noSpawn: true
+  parent: BaseItem
+  id: RMCTray_empty
+  name: empty tray
+  description: Finished with its tour of duty.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+    state: mretray_empty
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+    size: Small
+  - type: Tag
+    tags:
+    - Trash
+  - type: SpaceGarbage
