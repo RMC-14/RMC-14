@@ -15,8 +15,18 @@ public sealed class MarineCommunicationsComputerMsg(string text) : BoundUserInte
 }
 
 [Serializable, NetSerializable]
-public sealed class MarineCommunicationsComputerBuiState(string planet, string operation) : BoundUserInterfaceState
+public sealed class MarineCommunicationsDesignatePrimaryLZMsg(NetEntity lz) : BoundUserInterfaceMessage
+{
+    public readonly NetEntity LZ = lz;
+}
+
+[Serializable, NetSerializable]
+public sealed class MarineCommunicationsComputerBuiState(string planet, string operation, List<LandingZone> landingZones) : BoundUserInterfaceState
 {
     public readonly string Planet = planet;
     public readonly string Operation = operation;
+    public readonly List<LandingZone> LandingZones = landingZones;
 }
+
+[Serializable, NetSerializable]
+public readonly record struct LandingZone(NetEntity Id, string Name);

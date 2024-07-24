@@ -116,7 +116,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
 
     private void OnStepSpawnComplete(Entity<RMCSurgeryStepSpawnEffectComponent> ent, ref CMSurgeryStepEvent args)
     {
-        if(TryComp<TransformComponent>(args.Body, out var xform))
+        if (TryComp(args.Body, out TransformComponent? xform))
             SpawnAtPosition(ent.Comp.Entity, xform.Coordinates);
     }
 

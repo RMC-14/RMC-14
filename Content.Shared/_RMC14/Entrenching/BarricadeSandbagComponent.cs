@@ -4,7 +4,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Entrenching;
 
 [RegisterComponent, NetworkedComponent]
-[Access(typeof(BarricadeSandbagComponent))]
+[Access(typeof(BarricadeSystem))]
 public sealed partial class BarricadeSandbagComponent : Component
 {
     /// <summary>

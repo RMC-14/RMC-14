@@ -14,7 +14,7 @@ using static Content.Shared.Physics.CollisionGroup;
 
 namespace Content.Shared._RMC14.Entrenching;
 
-public sealed class EntrenchingToolSystem : EntitySystem
+public sealed class BarricadeSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -30,8 +30,12 @@ public sealed class EntrenchingToolSystem : EntitySystem
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
+    private EntityQuery<BarricadeComponent> _barricadeQuery;
+
     public override void Initialize()
     {
+        _barricadeQuery = GetEntityQuery<BarricadeComponent>();
+
         SubscribeLocalEvent<EntrenchingToolComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<EntrenchingToolComponent, EntrenchingToolDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<EntrenchingToolComponent, ItemToggledEvent>(OnItemToggled);
@@ -417,5 +421,30 @@ public sealed class EntrenchingToolSystem : EntitySystem
         }
 
         return true;
+    }
+
+    public bool HasBarricadeFacing(EntityCoordinates coordinates, Direction direction)
+    {
+        if (_transform.GetGrid(coordinates) is not { } gridId ||
+            !TryComp(gridId, out MapGridComponent? grid))
+        {
+            return false;
+        }
+
+        var indices = _mapSystem.TileIndicesFor(gridId, grid, coordinates);
+        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, indices);
+        while (anchored.MoveNext(out var uid))
+        {
+            if (_barricadeQuery.HasComp(uid))
+            {
+                var barricadeDir = _transform.GetWorldRotation(uid.Value).GetCardinalDir();
+                if (barricadeDir == direction)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

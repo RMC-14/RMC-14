@@ -2,18 +2,24 @@
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Rules;
 using Content.Server.Doors.Systems;
+using Content.Server.GameTicking;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Announce;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
 using Content.Shared.Doors.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
+using Robust.Shared.Configuration;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -22,8 +28,11 @@ namespace Content.Server._RMC14.Dropship;
 
 public sealed class DropshipSystem : SharedDropshipSystem
 {
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DoorSystem _door = default!;
+    [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly ShuttleSystem _shuttle = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -34,6 +43,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private EntityQuery<DockingComponent> _dockingQuery;
     private EntityQuery<DoorComponent> _doorQuery;
     private EntityQuery<DoorBoltComponent> _doorBoltQuery;
+
+    private TimeSpan _lzPrimaryAutoDelay;
 
     public override void Initialize()
     {
@@ -55,6 +66,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
             {
                 subs.Event<DropshipLockdownMsg>(OnDropshipNavigationLockdownMsg);
             });
+
+        Subs.CVar(_config, RMCCVars.RMCLandingZonePrimaryAutoMinutes, v => _lzPrimaryAutoDelay = TimeSpan.FromMinutes(v), true);
     }
 
     private void OnActivateInWorld(Entity<DropshipNavigationComputerComponent> ent, ref ActivateInWorldEvent args)
@@ -189,6 +202,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
             _audio.PlayGlobal(dropship.MarineHijackSound, marines, true);
         }
 
+        _adminLog.Add(LogType.RMCDropshipLaunch,
+            $"{ToPrettyString(user):player} {(hijack ? "hijacked" : "launched")} {ToPrettyString(shuttle):dropship} to {ToPrettyString(destination):destination}");
+
         return true;
     }
 
@@ -204,30 +220,37 @@ public sealed class DropshipSystem : SharedDropshipSystem
             !ftl.Running ||
             ftl.State == FTLState.Available)
         {
-            var destinations = new List<(NetEntity Id, string Name, bool Occupied)>();
+            var destinations = new List<Destination>();
             var query = EntityQueryEnumerator<DropshipDestinationComponent>();
             while (query.MoveNext(out var uid, out var comp))
             {
-                destinations.Add((GetNetEntity(uid), Name(uid), comp.Ship != null));
+                var destination = new Destination(
+                    GetNetEntity(uid),
+                    Name(uid),
+                    comp.Ship != null,
+                    HasComp<PrimaryLandingZoneComponent>(uid)
+                );
+                destinations.Add(destination);
             }
 
-            _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, new DropshipNavigationDestinationsBuiState(destinations));
+            var state = new DropshipNavigationDestinationsBuiState(destinations);
+            _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, state);
             return;
         }
 
-        var destination = string.Empty;
+        var destinationName = string.Empty;
         if (TryComp(grid, out DropshipComponent? dropship) &&
             dropship.Destination is { } destinationUid)
         {
-            destination = Name(destinationUid);
+            destinationName = Name(destinationUid);
         }
         else
         {
             Log.Error($"Found in-travel dropship {ToPrettyString(grid)} with invalid destination");
         }
 
-        var state = new DropshipNavigationTravellingBuiState(ftl.State, ftl.StateTime, destination);
-        _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, state);
+        var travelState = new DropshipNavigationTravellingBuiState(ftl.State, ftl.StateTime, destinationName);
+        _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, travelState);
     }
 
     protected override bool IsShuttle(EntityUid dropship)
@@ -240,7 +263,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         return HasComp<FTLComponent>(dropship);
     }
 
-    private void RefreshUI()
+    protected override void RefreshUI()
     {
         var computers = EntityQueryEnumerator<DropshipNavigationComputerComponent>();
         while (computers.MoveNext(out var uid, out var comp))
@@ -292,5 +315,22 @@ public sealed class DropshipSystem : SharedDropshipSystem
     {
         var ev = new FTLUpdatedEvent();
         RaiseLocalEvent(shuttle, ref ev);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        if (Count<PrimaryLandingZoneComponent>() > 0)
+            return;
+
+        if (_gameTicker.RoundDuration() < _lzPrimaryAutoDelay)
+            return;
+
+        foreach (var primaryLZCandidate in GetPrimaryLZCandidates())
+        {
+            if (TryDesignatePrimaryLZ(default, primaryLZCandidate, new MarineCommunicationsComputerComponent().Sound))
+                break;
+        }
     }
 }

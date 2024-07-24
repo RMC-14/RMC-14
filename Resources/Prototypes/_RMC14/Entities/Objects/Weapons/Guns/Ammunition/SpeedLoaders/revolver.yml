@@ -1,6 +1,30 @@
 - type: entity
+  id: RMCBaseSpeedLoader44
+  name: "M44 speed loader (.44)"
   parent: BaseItem
-  id: CMSpeedLoaderM44
+  abstract: true
+  components:
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - RMCMagazineRevolver
+    - RMCSpeedLoaderM44
+  - type: SpeedLoader
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+        - RMCCartridgeRevolver44
+    capacity: 7
+  - type: Sprite
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+
+- type: entity
+  parent: RMCBaseSpeedLoader44
+  id: RMCSpeedLoaderM44
   name: "M44 speed loader (.44)"
   description: A revolver speed loader.
   components:
@@ -9,33 +33,41 @@
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
-    - state: base-1
+    - state: base-5
       map: [ "enum.GunVisualLayers.Mag" ]
-  - type: Item
-    size: Small
-  - type: Tag
-    tags:
-    - CMMagazineRevolver
-    - CMSpeedLoaderM44
-  - type: SpeedLoader
-  - type: BallisticAmmoProvider
-    proto: CMCartridgeRevolver44
-    whitelist:
-      tags:
-      - CMCartridgeRevolver44
-    capacity: 7
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-        ents: []
   - type: MagazineVisuals
     magState: base
-    steps: 2
+    steps: 6
     zeroVisible: false
+  - type: BallisticAmmoProvider
+    proto: RMCCartridgeRevolver44
+    capacity: 7
+  - type: Appearance
+
+- type: entity
+  parent: RMCBaseSpeedLoader44
+  id: RMCSpeedLoader44Marksman
+  name: "M44 speed loader (.44 Marksman)"
+  description: A revolver speed loader filled with Marksman ammo.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/m44.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: marksman-5
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: MagazineVisuals
+    magState: marksman
+    steps: 6
+    zeroVisible: false
+  - type: BallisticAmmoProvider
+    proto: RMCCartridgeRevolver44Marksman
+    capacity: 7
   - type: Appearance
 
 - type: Tag
-  id: CMMagazineRevolver
+  id: RMCMagazineRevolver
 
 - type: Tag
-  id: CMSpeedLoaderM44
+  id: RMCSpeedLoaderM44

@@ -89,7 +89,11 @@
 
 - type: entity
   parent: ClothingEyesBase
+<<<<<<< HEAD
   id: RMCGogglesBallistic
+=======
+  id: RMCogglesBallistic
+>>>>>>> 216d351f03f467a9286a8262d16d47dcec69ad03
   name: Ballistic goggles
   description: This is a marine ballistic goggles. It is a small item. Standard issue USCM goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes.
   components:
@@ -118,4 +122,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Prescription_ballistic_goggles.rsi
   - type: Clothing
+<<<<<<< HEAD
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Prescription_ballistic_goggles.rsi
+=======
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Prescription_ballistic_goggles.rsi
+>>>>>>> 216d351f03f467a9286a8262d16d47dcec69ad03
