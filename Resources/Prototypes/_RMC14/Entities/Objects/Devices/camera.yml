@@ -11,8 +11,6 @@
     size: Huge
   - type: Wieldable
   - type: Eye
-  - type: WirelessNetworkConnection
-    range: 200
   - type: SurveillanceCameraMicrophone
     blacklist:
       components:
