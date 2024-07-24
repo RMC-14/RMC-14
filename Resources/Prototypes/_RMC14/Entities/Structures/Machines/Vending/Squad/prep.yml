@@ -152,7 +152,7 @@
 #        amount: 15
       - id: CMSatchelMarineTech
         amount: 15
-      - id: RMCSatchelWelder # Technician Welder Chestrig
+      - id: RMCSatchelWelderChestrig
         amount: 15
       - id: CMSatchelMedical
         amount: 15
