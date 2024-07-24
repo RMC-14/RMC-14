@@ -21,9 +21,6 @@
       collection: FootstepCatwalk
       params:
         volume: 8
-  - type: Construction
-    graph: CMCatwalk
-    node: Catwalk
   - type: Tag
     tags:
       - Catwalk

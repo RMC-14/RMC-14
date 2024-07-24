@@ -32,7 +32,7 @@
     #    - ActionXenoSpit
     #    - ActionXenoDash
     #    - ActionXenoAcidBall
-    #    - ActionXenoSprayAcid
+    - ActionXenoSprayAcid
     - ActionXenoDevolve
     tier: 3
     hudOffset: 0,0.16

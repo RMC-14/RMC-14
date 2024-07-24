@@ -1,15 +1,16 @@
 using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Popups;
-using Content.Shared.UserInterface;
+using Content.Shared._RMC14.UserInterface;
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Paper;
 using Content.Shared.Tag;
+using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
-using Robust.Shared.Player;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Player;
 using static Content.Shared.Paper.SharedPaperComponent;
 
 namespace Content.Server.Paper
@@ -24,6 +25,7 @@ namespace Content.Server.Paper
         [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
         [Dependency] private readonly MetaDataSystem _metaSystem = default!;
         [Dependency] private readonly SharedAudioSystem _audio = default!;
+        [Dependency] private readonly RMCUserInterfaceSystem _rmcUI = default!;
 
         public override void Initialize()
         {
@@ -98,6 +100,9 @@ namespace Content.Server.Paper
 
         private void OnInteractUsing(EntityUid uid, PaperComponent paperComp, InteractUsingEvent args)
         {
+            if (!_rmcUI.CanOpenUI(uid, args.User, PaperUiKey.Key))
+                return;
+
             // only allow editing if there are no stamps or when using a cyberpen
             var editable = paperComp.StampedBy.Count == 0 || _tagSystem.HasTag(args.Used, "WriteIgnoreStamps");
             if (_tagSystem.HasTag(args.Used, "Write") && editable)

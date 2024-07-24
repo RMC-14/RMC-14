@@ -136,6 +136,8 @@
 #        points: 10
       - id: CMMagazinePistolMK80
         points: 5
+      - id: RMCMagazinePistolSU6
+        points: 10
     - name: Armors
       entries:
       - id: CMArmorB12
