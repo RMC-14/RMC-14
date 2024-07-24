@@ -60,5 +60,10 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
+  - type: PointLight
+    enabled: true
+    radius: 1.8
+    softness: 1
+    autoRot: true
 #  - type: RMCXenoDamageVisuals # TODO RMC14
 #    prefix: boiler
