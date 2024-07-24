@@ -122,8 +122,4 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Prescription_ballistic_goggles.rsi
   - type: Clothing
-<<<<<<< HEAD
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Prescription_ballistic_goggles.rsi
-=======
-    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Prescription_ballistic_goggles.rsi
->>>>>>> 216d351f03f467a9286a8262d16d47dcec69ad03
