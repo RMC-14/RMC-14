@@ -52,9 +52,6 @@
 #    - CMXenoBoiler
   - type: XenoSpit
   - type: XenoChargeSpit
-    damage:
-      groups:
-        Burn: 25 # TODO RMC14 damage over time
   - type: XenoScatteredSpit
   - type: XenoSprayAcid
     barricadeDamage:

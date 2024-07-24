@@ -55,6 +55,12 @@
   - type: TimedDespawn
     lifetime: 0.6
   - type: DamageOnCollide
+    knockdown: 2
+    acidComboDuration: 40
+    acidComboDamage:
+      groups:
+        Burn: 3
+    acidComboParalyze: 2
     damage:
       groups:
         Burn: 30
