@@ -175,7 +175,7 @@
     - RMCGunBipodFullAuto
   - type: Gun
     shotsPerBurst: 5
-    selectedMode: Burst
+    selectedMode: SemiAuto
     availableModes:
     - SemiAuto
     - Burst

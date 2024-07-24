@@ -45,8 +45,8 @@
       #  amount: 2
       #- id: XM88 Heavy Rifle
       #  amount: 3
-      - id: RMCM54CE2Case
-        amount: 3
+      #- id: RMCM54CE2Case
+      #  amount: 3
       #- id: M41A Pulse Rifle MK1
       #  amount: 3
       #- id: M56D Heavy Machine Gun
