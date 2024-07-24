@@ -53,8 +53,6 @@
       entries:
       - id: CMMagazinePistolMK80
         points: 5
-      - id: RMCMagazinePistolSU6
-        points: 10
     #- id: CMM44HeavySpeedLoader
     #  points: 10
     #- id: CMM1984HPMagazine
@@ -113,17 +111,6 @@
         points: 5
       - id: RMCWhistle
         points: 5
-    - name: Goggles
-      choices: { CMGoggles: 1 }
-      entries:
-      - id: RMCGlassesMarineRpg
-        name: Marine RPG glasses
-      - id: RMCogglesBallistic
-        name: Ballistic goggles
-      - id: RMCGogglesM1A1Ballistic
-        name: M1A1 Ballistic goggles
-      - id: RMCGogglesPrescriptionBallistic
-        name: Prescription ballistic goggles
     - name: Binoculars
       entries: [ ]
     #- id: CMBinoculars
