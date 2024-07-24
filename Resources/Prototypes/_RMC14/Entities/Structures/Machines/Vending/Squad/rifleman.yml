@@ -191,7 +191,7 @@
         points: 5
       - id: CMGogglesM1A1Ballistic
         points: 5
-      - id: CMGogglesPrescriotionBallistic
+      - id: CMGogglesPrescriptionBallistic
         points: 5
     - name: Binoculars
       entries: [ ]
