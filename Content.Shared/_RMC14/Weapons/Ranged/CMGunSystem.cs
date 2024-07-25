@@ -55,7 +55,6 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<ShootAtFixedPointComponent, AmmoShotEvent>(OnShootAtFixedPointShot);
 
         SubscribeLocalEvent<ProjectileFixedDistanceComponent, PreventCollideEvent>(OnCollisionCheckArc);
-        SubscribeLocalEvent<ProjectileFixedDistanceComponent, ComponentRemove>(OnEventToStopProjectile);
         SubscribeLocalEvent<ProjectileFixedDistanceComponent, PhysicsSleepEvent>(OnEventToStopProjectile);
 
         SubscribeLocalEvent<GunShowUseDelayComponent, GunShotEvent>(OnShowUseDelayShot);
@@ -337,6 +336,7 @@ public sealed class CMGunSystem : EntitySystem
             if (time < comp.FlyEndTime)
                 continue;
 
+            StopProjectile((uid, comp));
             RemCompDeferred<ProjectileFixedDistanceComponent>(uid);
         }
     }

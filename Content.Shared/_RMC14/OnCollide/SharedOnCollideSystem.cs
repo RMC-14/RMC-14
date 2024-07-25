@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Xenonids.Projectile.Spit;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Stunnable;
 using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Events;
@@ -13,6 +14,7 @@ public abstract class SharedOnCollideSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly XenoSpitSystem _xenoSpit = default!;
 
@@ -46,10 +48,12 @@ public abstract class SharedOnCollideSystem : EntitySystem
         ent.Comp.Damaged.Add(other);
         Dirty(ent);
 
+        var didEmote = false;
         if (ent.Comp.Chain == null || AddToChain(ent.Comp.Chain.Value, other))
         {
             _damageable.TryChangeDamage(other, ent.Comp.Damage);
-            DoNewCollide(ent, other);
+            DoEmote(ent, other);
+            didEmote = true;
         }
         else
         {
@@ -57,9 +61,17 @@ public abstract class SharedOnCollideSystem : EntitySystem
         }
 
         _xenoSpit.SetAcidCombo(other, ent.Comp.AcidComboDuration, ent.Comp.AcidComboDamage, ent.Comp.AcidComboParalyze);
+
+        if (ent.Comp.Paralyze > TimeSpan.Zero)
+        {
+            _stun.TryParalyze(other, ent.Comp.Paralyze, true);
+
+            if (!didEmote)
+                DoEmote(ent, other);
+        }
     }
 
-    protected virtual void DoNewCollide(Entity<DamageOnCollideComponent> ent, EntityUid other)
+    protected virtual void DoEmote(Entity<DamageOnCollideComponent> ent, EntityUid other)
     {
     }
 

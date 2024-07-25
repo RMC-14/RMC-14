@@ -1,0 +1,17 @@
+- type: entity
+  parent: BaseItem
+  abstract: true
+  id: RMCAttachableBase
+  components:
+  - type: Item
+    size: Small
+  - type: Attachable
+
+- type: entity
+  parent: RMCAttachableBase
+  abstract: true
+  id: RMCAttachableToggleableBase
+  components:
+  - type: AttachableToggleable
+  - type: UseDelay
+    delay: 0

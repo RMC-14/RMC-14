@@ -15,6 +15,8 @@
       - cost: 3000
         crate: CMCrateBoxMagazineRifleM54CExt
       - cost: 2000
+        crate: RMCCrateMagazineRifleM54CE2
+      - cost: 2000
         crate: CMCrateBoxMagazineRifleM4SPR
       - cost: 4000
         crate: CMCrateBoxMagazineRifleM4SPRAP

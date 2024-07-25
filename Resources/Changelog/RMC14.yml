@@ -3780,5 +3780,104 @@
   id: 454
   time: '2024-07-25T09:20:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3259
+- author: Sigil
+  changes:
+  - message: Ranged weapons can now be used to attack in melee. Right-click to do
+      so. The base damage for most guns is 5, but attachments may modify it.
+    type: Add
+  - message: 'A new attachment has been added: the magnetic harness. If your weapon
+      is knocked out of your hands or you drop it, this attachment will make the gun
+      snap to your armour. It fits on the M54C, the M4SPR, the M77, the M83, the M42A2
+      and the M63.'
+    type: Add
+  - message: 'A new attachment has been added: the bipod. You can examine it ingame
+      to see the modifiers. It fits on the M54C, the M4SPR and the M96S.'
+    type: Add
+  - message: 'A new attachment has been added: the M44 magnum sharpshooter stock.
+      It fits on the M44 revolver. While inactive, the stock prevents the weapon from
+      being fired. When active, it strongly reduces wielded scatter.'
+    type: Add
+  - message: Attachments can now be toggled through the verb menu. Toggling attachments
+      on items you don't have equipped or held takes longer.
+    type: Add
+  - message: Cycling firemodes now has a keybinding. The default is control+spacebar.
+      This can be changed in the options menu.
+    type: Add
+  - message: The BFA now adds burst fire to weapons that don't have it, like it's
+      supposed to.
+    type: Add
+  - message: Examining attachments how lets you check their modifiers. Click the question
+      mark icon in the corner of the examine window to do so.
+    type: Add
+  - message: Guns can now have different stats depending on the selected firemode.
+      Most of the time, semi-auto will have lower scatter than the other modes, while
+      burst fire will fire slower overall, but have lower scatter than full-auto.
+    type: Add
+  - message: Implemented CM-style scatter calculation. It only increases when firing
+      on burst or full-auto. It's set to zero the moment you stop shooting. Full-auto
+      and burst fire generally have higher scatter and are more adversely affected
+      by the gun not being wielded.
+    type: Add
+  - message: The UGL can now only be fired if the gun it's attached to is wielded.
+    type: Tweak
+  - message: Added use delays for attachments. You can no longer spam toggle rail
+      and grip lights.
+    type: Tweak
+  - message: All implemented weapon stats adjusted to match their CM counterparts.
+    type: Tweak
+  - message: The smartpistol can now hold the barrel charger, the extended barrel,
+      the recoil compensator, the suppressor, the rail light, the reflex sight, the
+      red-dot sight, the burst fire assembly and the laser sight. Like it was supposed
+      to from the start.
+    type: Fix
+  - message: The UGL and the masterkey no longer uncock if you shoot the gun they're
+      attached to.
+    type: Fix
+  - message: The arm brace no longer causes an error when its user is handcuffed.
+    type: Fix
+  - message: The bayonet no longer deals 20 extra damage when used as a knife.
+    type: Fix
+  - message: Guns with size-changing attachments should no longer spontaneously shrink
+      down and fit in your pockets.
+    type: Fix
+  - message: Xenos are no longer capable of removing attachments from items.
+    type: Fix
+  - message: RDS removed from the SG equipment rack, as its only modifiers are for
+      an unimplemented mechanic and it's not supposed to be publicly available yet.
+    type: Fix
+  - message: The rail light now fits on the smartgun.
+    type: Fix
+  - message: The MK2 UGL can no longer shoot further than 7 tiles away. The UGL no
+      longer overshoots your cursor.
+    type: Fix
+  id: 455
+  time: '2024-07-25T10:16:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3197
+- author: DrSmugleaf
+  changes:
+  - message: Added the tier 3 Boiler xenonid, it has an ability to shoot a glob of
+      corrosive acid gas after a delay, a toxic tail stab, an an acid shroud ability
+      to escape danger. It also has the ability to see further in one direction and
+      glows in the dark so that marines can see it. The neurotoxin glob is not implemented
+      yet. The Boiler's spray acid always stuns.
+    type: Add
+  - message: Added toxic tail stab to the Spitter and Boiler, which injects the target
+      hit with 1 unit of molecular acid, dealing burn and toxin damage over time unless
+      treated. This will show up as an unknown reagent on the health analyzer.
+    type: Add
+  - message: The health analyzer will now tell you if someone is overdosing on a specific
+      chemical.
+    type: Add
+  - message: Fixed tail stab hitting more targets than intended. It now only hits
+      a maximum of 1 target, down from 3.
+    type: Fix
+  - message: Fixed tail stab having no popups missing a sound.
+    type: Fix
+  - message: Fixed bleeding also removing chemicals from your bloodstream. This will
+      later be added in the form of a dyalisis machine in medbay.
+    type: Fix
+  id: 456
+  time: '2024-07-25T11:08:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3258
 Name: RMC14
 Order: -1

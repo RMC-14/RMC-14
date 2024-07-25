@@ -23,7 +23,7 @@
       choices: { CMGunAttachments: 1 }
       entries:
 #      - id: RMCAttachmentLaserSight # TODO RMC14 when other pistols are available here
-      - id: RMCAttachmentS5RedDotSight
+#      - id: RMCAttachmentS5RedDotSight # Uncomment when accuracy is implemented.
       - id: RMCAttachmentS6ReflexSight
     - name: Explosives
       entries:
