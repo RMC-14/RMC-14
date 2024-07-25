@@ -52,8 +52,6 @@
       # /obj/item/storage/box/tapes 15
       - id: CMPaper
         amount: 30
-      - id: CMHandLabeler
-        amount: 3
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
