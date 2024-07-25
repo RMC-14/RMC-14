@@ -1,0 +1,148 @@
+﻿- type: constructionGraph
+  id: RMCTable
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:DeleteEntity {}
+      edges:
+        - to: Tan
+          steps:
+          - tag: RMCTablePartTan
+            name: tan table parts
+            icon:
+              sprite: _RMC14/Objects/Materials/table_parts.rsi
+              state: tan
+            doAfter: 1
+        - to: Reinforced
+          steps:
+          - tag: RMCTablePartReinforced
+            name: reinforced table parts
+            icon:
+              sprite: _RMC14/Objects/Materials/table_parts.rsi
+              state: reinforced
+            doAfter: 1
+        - to: Wood
+          steps:
+          - tag: RMCTablePartWood
+            name: wooden table parts
+            icon:
+              sprite: _RMC14/Objects/Materials/table_parts.rsi
+              state: wood
+            doAfter: 1
+        - to: PoorWood
+          steps:
+          - tag: RMCTablePartWoodPoor
+            name: poor wooden table parts
+            icon:
+              sprite: _RMC14/Objects/Materials/table_parts.rsi
+              state: poor_wood
+            doAfter: 1
+        - to: FancyWood
+          steps:
+          - tag: RMCTablePartWoodFancy
+            name: fancy wooden table parts
+            icon:
+              sprite: _RMC14/Objects/Materials/table_parts.rsi
+              state: fancy_wood
+            doAfter: 1
+        - to: Gambling
+          steps:
+          - tag: RMCTablePartGambling
+            name: gambling table parts
+            icon:
+              sprite: _RMC14/Objects/Materials/table_parts.rsi
+              state: gamble
+            doAfter: 1
+        - to: Almayer
+          steps:
+          - tag: RMCTablePartAlmayer
+            name: gray table parts
+            icon:
+              sprite: _RMC14/Objects/Materials/table_parts.rsi
+              state: almayer
+            doAfter: 1
+
+    - node: Tan
+      entity: CMTable
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: RMCTablePartTan
+              amount: 1
+          steps:
+            - tool: Anchoring
+              doAfter: 1
+
+    - node: Reinforced
+      entity: CMTableReinforced
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: RMCTablePartReinforced
+              amount: 1
+          steps:
+            - tool: Anchoring
+              doAfter: 1
+
+    - node: Wood
+      entity: CMTableWooden
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: RMCTablePartWood
+              amount: 1
+          steps:
+            - tool: Anchoring
+              doAfter: 1
+
+    - node: PoorWood
+      entity: CMTableWoodenPoor
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: RMCTablePartWoodPoor
+              amount: 1
+          steps:
+            - tool: Anchoring
+              doAfter: 1
+
+    - node: FancyWood
+      entity: CMTableWoodenFancy
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: RMCTablePartWoodFancy
+              amount: 1
+          steps:
+            - tool: Anchoring
+              doAfter: 1
+
+    - node: Gambling
+      entity: CMTableWoodenGambling
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: RMCTablePartGambling
+              amount: 1
+          steps:
+            - tool: Anchoring
+              doAfter: 1
+
+    - node: Almayer
+      entity: CMTableAlmayer
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: RMCTablePartAlmayer
+              amount: 1
+          steps:
+            - tool: Anchoring
+              doAfter: 1

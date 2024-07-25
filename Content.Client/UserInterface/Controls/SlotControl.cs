@@ -245,7 +245,7 @@ namespace Content.Client.UserInterface.Controls
             ButtonRect.Texture = texture;
             // RMC14 - Refresh icon label
             IconLabel.Text = "";
-            IconLabel.FontColorOverride = Color.Black;
+            IconLabel.FontColorOverride = Color.White;
             if (_entities.TryGetComponent(Entity, out IconLabelComponent? iconLabel))
             {
                 if (iconLabel.LabelTextLocId is not null && Loc.TryGetString(iconLabel.LabelTextLocId, out String? labelText))

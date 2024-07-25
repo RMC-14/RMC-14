@@ -23,13 +23,11 @@
       smartGun: 1
     - type: CMVendorUser
       points: 45
-  hidden: true # TODO RMC14
 
 - type: startingGear
   id: CMGearSmartGunOperator
   equipment:
     jumpsuit: JumpsuitMarine # TODO RMC14 all squad roles should spawn with no jumpsuit but still have clothes on
-    back: CMSatchelMarine
     id: CMDogtagSmartGunOperator
 
 - type: startingGear

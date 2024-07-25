@@ -1,0 +1,108 @@
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeySquadLeader
+  name: squad leader's encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommand
+    - MarineJTAC
+    defaultChannel: MarineCommand
+  - type: Sprite
+    state: sl_key
+
+# Alpha
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyAlpha
+  name: alpha encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineAlpha
+    defaultChannel: MarineAlpha
+  - type: Sprite
+    state: alpha_key
+
+# Bravo
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyBravo
+  name: bravo encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineBravo
+    defaultChannel: MarineBravo
+  - type: Sprite
+    state: bravo_key
+
+# Charlie
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyCharlie
+  name: charlie encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCharlie
+    defaultChannel: MarineCharlie
+  - type: Sprite
+    state: charlie_key
+
+# Delta
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyDelta
+  name: delta encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineDelta
+    defaultChannel: MarineDelta
+  - type: Sprite
+    state: delta_key
+
+# Echo
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyEcho
+  name: echo encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineEcho
+    defaultChannel: MarineEcho
+  - type: Sprite
+    state: echo_key
+
+# Foxtrot
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyFoxtrot
+  name: foxtrot encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineFoxtrot
+    defaultChannel: MarineFoxtrot
+  - type: Sprite
+    state: cryo_key
+
+# Marine Special Forces (ERT)
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeySOF
+  name: sof's encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommand
+    - MarineRequisition
+    - MarineMedical
+    - MarineEngineer
+    - MarineIntel
+    - MarineJTAC
+    defaultChannel: MarineCommand
+  - type: Sprite
+    state: binary_key

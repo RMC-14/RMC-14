@@ -33,10 +33,10 @@ public sealed class RMCDiscordManager : IPostInjectInit
 
         try
         {
-            var token = _config.GetCVar(CMCVars.RMCDiscordToken);
+            var token = _config.GetCVar(RMCCVars.RMCDiscordToken);
             if (string.IsNullOrWhiteSpace(token))
             {
-                _sawmill.Info($"CVar {CMCVars.RMCDiscordToken.Name} has no value. Disabling Discord bot.");
+                _sawmill.Info($"CVar {RMCCVars.RMCDiscordToken.Name} has no value. Disabling Discord bot.");
                 return;
             }
 
@@ -82,24 +82,31 @@ public sealed class RMCDiscordManager : IPostInjectInit
         _client.MessageReceived += OnDiscordMessageReceived;
         _client.Ready += OnDiscordReady;
 
-        await _client.LoginAsync(TokenType.Bot, _config.GetCVar(CMCVars.RMCDiscordToken));
+        await _client.LoginAsync(TokenType.Bot, _config.GetCVar(RMCCVars.RMCDiscordToken));
         await _client.StartAsync();
 
-        _adminChannelId = _config.GetCVar(CMCVars.RMCDiscordAdminChatChannel);
+        _adminChannelId = _config.GetCVar(RMCCVars.RMCDiscordAdminChatChannel);
         if (_adminChannelId != 0)
             _adminChannel = (ITextChannel) await _client.GetChannelAsync(_adminChannelId);
 
         while (_running)
         {
-            if (Interlocked.CompareExchange(ref _ready, 1, 1) == 1)
+            try
             {
-                while (_chatMessages.TryDequeue(out var msg))
+                if (Interlocked.CompareExchange(ref _ready, 1, 1) == 1)
                 {
-                    await _adminChannel.SendMessageAsync(FormatDiscordMessage(msg));
+                    while (_chatMessages.TryDequeue(out var msg))
+                    {
+                        await _adminChannel.SendMessageAsync(FormatDiscordMessage(msg));
+                    }
                 }
-            }
 
-            await Task.Delay(1000);
+                await Task.Delay(1000);
+            }
+            catch (Exception e)
+            {
+                _sawmill.Error($"Error occurred sending message to Discord:\n{e}");
+            }
         }
     }
 

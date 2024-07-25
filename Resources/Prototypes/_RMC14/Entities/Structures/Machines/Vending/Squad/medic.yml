@@ -119,6 +119,8 @@
       entries:
       - id: CMMagazinePistolMK80
         points: 3
+      - id: RMCMagazinePistolSU6
+        points: 6
     - name: Armors
       entries:
       - id: CMArmorB12
@@ -127,9 +129,10 @@
         points: 28
     - name: Restricted Firearms
       entries:
-      - id: CMWeaponPistolMK80
+      - id: RMCMK80Case
         points: 8
-    #    CMSU6SmartPistol: 12P
+      - id: RMCSmartPistolCase
+        points: 12
     - name: Clothing Items
       entries:
     #    CMScabbardMacheteFull: 6P
@@ -143,7 +146,7 @@
       - id: CMFireExtinguisherPortable
         points: 3
     #    CMMotionDetector: 8P
-      - id: CMWhistle
+      - id: RMCWhistle
         points: 3
     - name: Binoculars
       entries: [ ]
@@ -219,7 +222,7 @@
       #- id: CMM276M44HolsterRig
       #- id: CMM276M82FHolsterRig
       #- id: CMM276ShotgunShellLoadingRig
-      #- id: CMM276M40GrenadeRig
+      - id: RMCBeltGrenade
     - name: Pouches
       choices: { CMPouch: 2 }
       entries:

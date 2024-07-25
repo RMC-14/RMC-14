@@ -1,5 +1,6 @@
 ﻿- type: entity
   parent: BaseStructure
+  abstract: true
   id: RMCBaseTurret
   name: turret
   components:
@@ -35,7 +36,7 @@
   - type: CombatMode
     toggleMouseRotator: false
   - type: Gun
-    fireRate: 3
+    fireRate: 6
     selectedMode: FullAuto
     availableModes:
     - FullAuto
@@ -43,7 +44,7 @@
   # TODO: Power ammo provider?
   - type: BallisticAmmoProvider
     cycleable: false
-    proto: CMCartridgeSentry10x28mm
+    proto: CMCartridgeSentry10x50mm
     capacity: 99999
   - type: HTN
     rootTask:
@@ -62,6 +63,7 @@
   - type: NoRotateOnInteract
   - type: NoRotateOnMove
   - type: GunIFF
+    intrinsic: true
 
 - type: entity
   parent: RMCBaseTurret

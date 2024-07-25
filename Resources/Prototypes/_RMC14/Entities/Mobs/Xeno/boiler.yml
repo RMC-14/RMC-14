@@ -31,7 +31,7 @@
     - ActionXenoAcidStrong
     #    - ActionXenoBombard
     #    - ActionXenoToggleGasType
-    #    - ActionXenoSprayAcid
+    - ActionXenoSprayAcid
     #    - ActionXenoLongSight
     #    - ActionXenoAcidShroud
     - ActionXenoDevolve
@@ -57,6 +57,7 @@
   - type: Tackle
     threshold: 5
     stun: 7
+    chance: 0.25
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5

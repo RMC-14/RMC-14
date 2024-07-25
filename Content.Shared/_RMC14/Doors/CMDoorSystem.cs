@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Xenonids;
+﻿using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Access.Systems;
 using Content.Shared.Directions;
 using Content.Shared.Doors;
@@ -21,6 +22,7 @@ public sealed class CMDoorSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private EntityQuery<DoorComponent> _doorQuery;

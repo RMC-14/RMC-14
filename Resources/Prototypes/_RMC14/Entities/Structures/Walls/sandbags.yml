@@ -15,6 +15,7 @@
     sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
     layers:
     - state: sandbag
+    - map: [ "acided" ]
     drawdepth: WallTops
   - type: GenericVisualizer
     visuals:
@@ -22,6 +23,14 @@
         barbWired:
           UnWired: { state: sandbag_wire, visible: false }
           WiredClosed: { state: sandbag_wire, visible: true }
+      enum.SprayAcidedVisuals.Acided:
+        acided:
+          True:
+            sprite: _RMC14/Effects/xeno_spray_acid.rsi
+            state: acid
+            visible: true
+          False:
+            visible: false
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: CMSandbag
@@ -57,7 +66,9 @@
     size: Small
   - type: Sprite
     sprite: _RMC14/Objects/Misc/sandbags.rsi
-    state: sandbag_stack
+    layers:
+    - state: sandbag_stack
+    - map: [ "acided" ]
   - type: EmptySandbag
   - type: Stack
     stackType: CMSandbagEmpty
@@ -91,7 +102,9 @@
     size: Large
   - type: Sprite
     sprite: _RMC14/Objects/Misc/sandbags.rsi
-    state: sandbag_pile
+    layers:
+    - state: sandbag_pile
+    - map: [ "acided" ]
   - type: FullSandbag
   - type: Stack
     stackType: CMSandbagFull

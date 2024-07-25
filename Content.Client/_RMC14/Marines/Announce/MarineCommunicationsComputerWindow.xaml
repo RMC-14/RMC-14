@@ -14,6 +14,11 @@
             <Label Name="OperationName" Access="Public" />
         </BoxContainer>
         <cc:HSeparator Color="#4972A1" Margin="0 5" />
+        <BoxContainer Name="LandingZonesSection" Access="Public" Orientation="Vertical">
+            <Label Text="Designate Primary LZ" />
+            <BoxContainer Name="LandingZonesContainer" Access="Public" Orientation="Vertical" />
+            <cc:HSeparator Color="#4972A1" Margin="0 5" />
+        </BoxContainer>
         <TextEdit Name="Text" Access="Public" HorizontalExpand="True" VerticalExpand="True" />
         <Button Name="Send" Access="Public" Text="Send" HorizontalExpand="True" />
     </BoxContainer>

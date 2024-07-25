@@ -1,6 +1,6 @@
 ﻿- type: entity
   abstract: true
-  parent: RMCAttachmentBase
+  parent: RMCAttachableBase
   id: RMCStockAttachmentBase
   components:
   - type: Sprite
@@ -22,7 +22,7 @@
 
 - type: entity
   abstract: true
-  parent: RMCStockAttachmentBase
+  parent: [ RMCStockAttachmentBase, RMCAttachableToggleableBase ]
   id: RMCStockAttachmentCollapsibleBase
   components:
   - type: AttachableVisuals
@@ -31,6 +31,8 @@
     tags:
     - RMCAttachmentStock
   - type: AttachableToggleable
+    activatePopupText: attachable-popup-activate-unfold
+    deactivatePopupText: attachable-popup-deactivate-collapse
     actionDesc: Extend the stock.
   - type: AttachableWieldDelayMods
     modifiers: []
@@ -414,6 +416,9 @@
     - RMCAttachmentM63ArmBrace
   - type: AttachableToggleable
     doAfter: 2.5
+    heldOnlyActivate: true
+    activatePopupText: attachable-popup-activate-lock
+    deactivatePopupText: attachable-popup-deactivate-unlock
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
       state: smg-brace

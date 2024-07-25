@@ -33,3 +33,5 @@
     rotation: -90
   - type: CMOperatingTable
   - type: BuckleClimbable
+  - type: Corrodible
+    isCorrodible: false

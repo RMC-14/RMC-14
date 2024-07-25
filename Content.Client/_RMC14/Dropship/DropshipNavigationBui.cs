@@ -115,7 +115,11 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         foreach (var destination in destinations.Destinations)
         {
             var button = new DropshipButton();
-            button.Text = destination.Name;
+            var name = destination.Name;
+            if (destination.Primary)
+                name += $" (Primary)";
+
+            button.Text = name;
             button.Disabled = destination.Occupied;
             button.BorderColor = Color.Transparent;
             button.BorderThickness = new Thickness(0);
@@ -125,10 +129,10 @@ public sealed class DropshipNavigationBui : BoundUserInterface
                 SetCancelLaunchDisabled(false);
                 _selected = destination.Id;
                 ResetDestinationButtons();
-                button.Text = $"> {destination.Name}";
+                button.Text = $"> {name}";
             };
 
-            _destinations[button] = destination.Name;
+            _destinations[button] = name;
             _window.DestinationsContainer.AddChild(button);
         }
     }

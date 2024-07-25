@@ -3,14 +3,20 @@ using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Examine;
+using Content.Shared.Flash;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
+using Content.Shared.Throwing;
+using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Marines.Skills;
 
 public sealed class SkillsSystem : EntitySystem
 {
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -19,6 +25,9 @@ public sealed class SkillsSystem : EntitySystem
     {
         SubscribeLocalEvent<MedicallyUnskilledDoAfterComponent, AttemptHyposprayUseEvent>(OnAttemptHyposprayUse);
         SubscribeLocalEvent<RequiresSkillComponent, BeforeRangedInteractEvent>(OnRequiresSkillBeforeRangedInteract);
+        SubscribeLocalEvent<MeleeRequiresSkillComponent, AttemptMeleeEvent>(OnRequiresSkillAttemptMelee);
+        SubscribeLocalEvent<MeleeRequiresSkillComponent, ThrowItemAttemptEvent>(OnRequiresSkillThrowAttempt);
+        SubscribeLocalEvent<MeleeRequiresSkillComponent, UseInHandEvent>(OnRequiresSkillUseInHand, before: [typeof(SharedFlashSystem)]);
         SubscribeLocalEvent<ReagentExaminationRequiresSkillComponent, ExaminedEvent>(OnExamineReagentContainer);
         SubscribeLocalEvent<ExamineRequiresSkillComponent, ExaminedEvent>(OnExamineRequiresSkill);
     }
@@ -39,7 +48,42 @@ public sealed class SkillsSystem : EntitySystem
 
         if (!HasSkills(args.User, in ent.Comp.Skills))
         {
-            _popup.PopupClient($"You don't know how to use the {Name(args.Used)}...", args.User, PopupType.SmallCaution);
+            var msg = Loc.GetString("rmc-skills-cant-use", ("item", args.Used));
+            _popup.PopupClient(msg, args.User, PopupType.SmallCaution);
+            args.Handled = true;
+        }
+    }
+
+    private void OnRequiresSkillAttemptMelee(Entity<MeleeRequiresSkillComponent> ent, ref AttemptMeleeEvent args)
+    {
+        if (!HasSkills(args.User, in ent.Comp.Skills))
+        {
+            var msg = Loc.GetString("rmc-skills-cant-use", ("item", ent));
+            _popup.PopupClient(msg, args.User, args.User, PopupType.SmallCaution);
+            args.Cancelled = true;
+        }
+    }
+
+    private void OnRequiresSkillThrowAttempt(Entity<MeleeRequiresSkillComponent> ent, ref ThrowItemAttemptEvent args)
+    {
+        if (!HasSkills(args.User, in ent.Comp.Skills))
+        {
+            if (_net.IsServer)
+            {
+                var msg = Loc.GetString("rmc-skills-cant-use", ("item", ent));
+                _popup.PopupEntity(msg, args.User, args.User, PopupType.SmallCaution);
+            }
+
+            args.Cancelled = true;
+        }
+    }
+
+    private void OnRequiresSkillUseInHand(Entity<MeleeRequiresSkillComponent> ent, ref UseInHandEvent args)
+    {
+        if (!HasSkills(args.User, in ent.Comp.Skills))
+        {
+            var msg = Loc.GetString("rmc-skills-cant-use", ("item", ent));
+            _popup.PopupClient(msg, args.User, args.User, PopupType.SmallCaution);
             args.Handled = true;
         }
     }

@@ -589,3 +589,42 @@
       whitelist:
         tags:
         - CMMagazinePistolMK80
+
+# SU-6 Smart Pistol
+- type: entity
+  parent: CMBoxMagazineBase
+  id: RMCBoxMagazinePistolSU6Empty
+  name: magazine box (SU-6 x 16)
+  components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: RMCBoxMagazinePistolSU6Empty
+  - type: Sprite
+    layers:
+    - state: base_su6
+    - state: text_su6
+    - state: base_type_reg
+    - state: magaz_reg
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_su6_lid
+      map: [ "lid" ]
+    - state: lid_type_reg
+      map: [ "lid_stripe" ]
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolSU6
+
+- type: entity
+  parent: RMCBoxMagazinePistolSU6Empty
+  id: RMCBoxMagazinePistolSU6
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazinePistolSU6
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolSU6
