@@ -2,13 +2,16 @@
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
-[Serializable, NetSerializable]
-public sealed partial class ServerCorrodingEvent : EntityEventArgs
+/// <summary>
+/// Raised on an entity when a xeno corrodes it with acid.
+/// </summary>
+[ByRefEvent]
+public sealed partial class CorrodingEvent
 {
     [DataField]
     public float ExpendableLightDps = 2.5f;
 
-    public ServerCorrodingEvent(float expendableLightDps)
+    public CorrodingEvent(float expendableLightDps)
     {
         ExpendableLightDps = expendableLightDps;
     }

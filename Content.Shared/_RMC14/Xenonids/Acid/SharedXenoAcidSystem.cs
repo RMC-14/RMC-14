@@ -100,7 +100,8 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         // This event should only ever go to the server.
         if (_net.IsServer)
         {
-            RaiseLocalEvent(target, new ServerCorrodingEvent(args.ExpendableLightDps));
+            var ev = new CorrodingEvent(args.ExpendableLightDps);
+            RaiseLocalEvent(target, ref ev);
         }
     }
 

@@ -10,10 +10,10 @@ public sealed class XenoAcidSystem : SharedXenoAcidSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ExpendableLightComponent, ServerCorrodingEvent>(OnServerCorrodingEvent);
+        SubscribeLocalEvent<ExpendableLightComponent, CorrodingEvent>(OnCorrodingEvent);
     }
 
-    private void OnServerCorrodingEvent(Entity<ExpendableLightComponent> target, ref ServerCorrodingEvent args)
+    private void OnCorrodingEvent(Entity<ExpendableLightComponent> target, ref CorrodingEvent args)
     {
         // Rationale and formula: https://github.com/RMC-14/RMC-14/issues/2952#issuecomment-2227035752
         var expendable_light = target.Comp;
