@@ -20,8 +20,11 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
 
     private void ApplyModifierSet(Entity<AttachableWeaponMeleeModsComponent> attachable, AttachableWeaponMeleeModifierSet modSet, ref MeleeHitEvent args)
     {
-        if (!CanApplyModifiers(attachable.Owner, modSet.Conditions))
+        if (!_attachableHolderSystem.TryGetHolder(attachable, out _) ||
+            !CanApplyModifiers(attachable.Owner, modSet.Conditions))
+        {
             return;
+        }
 
         if (modSet.BonusDamage != null)
             args.BonusDamage += modSet.BonusDamage;
