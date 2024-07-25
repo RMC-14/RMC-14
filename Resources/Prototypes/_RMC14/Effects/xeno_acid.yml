@@ -55,6 +55,11 @@
   - type: TimedDespawn
     lifetime: 0.6
   - type: DamageOnCollide
+    acidComboDuration: 40
+    acidComboDamage:
+      groups:
+        Burn: 3
+    acidComboParalyze: 2
     damage:
       groups:
         Burn: 30
@@ -64,3 +69,18 @@
     whitelist:
       components:
       - Marine
+
+- type: entity
+  parent: XenoAcidSprayWeak
+  id: XenoAcidSprayStrong
+  name: strong splatter
+  description: It burns! It burns!
+  components:
+  - type: Sprite
+    layers:
+    - state: acid2-strong
+  - type: DamageOnCollide
+    paralyze: 2
+    damage:
+      groups:
+        Burn: 36

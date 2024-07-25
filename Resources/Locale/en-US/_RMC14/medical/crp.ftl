@@ -1,1 +1,1 @@
-cm-crp-take-off-mask = Take off their mask first!
+cm-crp-take-off-mask = Take off {POSS-ADJ($target)} mask first!

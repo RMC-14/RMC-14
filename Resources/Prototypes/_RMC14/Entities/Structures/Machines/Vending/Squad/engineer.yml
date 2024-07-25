@@ -196,7 +196,7 @@
       - id: CMSatchelMarineTech
       - id: CMBackpackWelder
       - id: RMCSatchelWelder
-    #- id: CMTechnicianWelderChestrig
+      - id: RMCSatchelWelderChestrig
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -209,7 +209,7 @@
     #- id: CMM276ShotgunShellLoadingRig
     #- id: CMM276MortarOperatorBelt
       - id: CMBeltUtilityFilled
-    #- id: CMM276M40GrenadeRig
+      - id: RMCBeltGrenade
     - name: Pouches
       choices: { CMPouch: 2 }
       entries:

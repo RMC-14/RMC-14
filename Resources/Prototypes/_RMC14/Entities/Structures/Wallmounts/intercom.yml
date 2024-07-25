@@ -49,6 +49,10 @@
     boardName: wires-board-name-intercom
     layoutId: Intercom
   - type: ActivatableUIRequiresPower
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
   - type: ActivatableUI
     key: enum.IntercomUiKey.Key
   - type: UserInterface

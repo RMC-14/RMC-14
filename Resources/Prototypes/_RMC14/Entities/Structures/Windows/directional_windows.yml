@@ -26,6 +26,8 @@
   - type: Icon
     sprite: _RMC14/Structures/Windows/directional.rsi
     state: window
+  - type: DamageMultiplierFlags
+    flags: Breaching
 
 - type: entity
   id: CMWindowReinforcedDirectional

@@ -1,6 +1,6 @@
 ﻿- type: entity
   abstract: true
-  parent: RMCAttachmentBase
+  parent: RMCAttachableBase
   id: RMCUnderAttachmentBase
   components:
   - type: Sprite
@@ -32,14 +32,109 @@
     - delay: -0.4
 
 - type: entity
-  parent: RMCUnderAttachmentBase
-  id: CMAttachmentBipod
+  parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
+  id: RMCAttachmentBipod
   name: bipod
   description: "A simple set of telescopic poles to keep a weapon stabilized during firing.
     Greatly increases accuracy and reduces recoil when properly placed, but also increases weapon size and slows firing speed."
   components:
   - type: Sprite
     state: bipod
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentBipod
+  - type: AttachableToggleable
+    needHand: true
+    heldOnlyActivate: true
+    userOnly: true
+    doInterrupt: true
+    attachedOnly: true
+    breakOnMove: true
+    breakOnRotate: true
+    doAfter: 1.5
+    deactivateDoAfter: 0
+    instantToggle: Brace
+    useDelay: 0.5
+    activatePopupText: attachable-popup-activate-deploy-on-ground
+    deactivatePopupText: attachable-popup-deactivate-retract
+    activateSound:
+      path: /Audio/_RMC14/Attachable/bipod_toggle.ogg
+      params:
+        volume: -3
+    deactivateSound:
+      path: /Audio/_RMC14/Attachable/bipod_toggle.ogg
+      params:
+        volume: -3
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: bipod
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: bipod-on
+    actionName: Deploy Bipod
+    actionDesc: Deploy the bipod and get into a firing position.
+  - type: AttachableVisuals
+    showActive: true
+  - type: AttachableTemporarySpeedMods
+    alteration: Interrupted
+    modifiers:
+    - duration: 1
+      walk: 0.5
+      sprint: 0.357
+    - duration: 2
+      walk: 0.66
+      sprint: 0.526
+  - type: AttachableSizeMods
+    modifiers:
+    - size: 2
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.4
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: -10
+  - type: AttachableWeaponRangedMods
+    fireModeMods:
+    - conditions:
+        activeOnly: true
+        whitelist:
+          tags:
+          - RMCGunBipodFullAuto
+      extraFireModes: FullAuto
+    modifiers:
+    - conditions:
+        inactiveOnly: true
+      fireDelayFlat: 0.1
+    - conditions:
+        wieldedOnly: true
+        inactiveOnly: true
+      accuracyAddMult: -0.25
+      scatterFlat: 4
+      recoilFlat: 1
+    - conditions:
+        wieldedOnly: true
+        activeOnly: true
+      accuracyAddMult: 0.25
+      scatterFlat: -2
+      recoilFlat: -2
+    - conditions:
+        activeOnly: true
+      burstScatterAddMult: -3
+    - conditions:
+        activeOnly: true
+        whitelist:
+          tags:
+          - CMM96SSniperRifle
+      fireDelayFlat: -0.5
+    - conditions:
+        activeOnly: true
+        blacklist:
+          tags:
+          - CMM96SSniperRifle
+      fireDelayFlat: -0.1
 
 - type: entity
   parent: RMCUnderAttachmentBase
@@ -55,6 +150,8 @@
     - RMCAttachmentUnderbarrel
     - RMCAttachmentBurstFireAssembly
   - type: AttachableWeaponRangedMods
+    fireModeMods:
+    - extraFireModes: Burst
     modifiers:
     - shotsPerBurstFlat: 2
     - conditions:
@@ -83,7 +180,7 @@
     - conditions:
         wieldedOnly: true
       scatterFlat: -2
-      burstScatterFlat: -4
+      burstScatterAddMult: -2
     - conditions:
         unwieldedOnly: true
       accuracyMovementPenaltyAddMult: -3
@@ -145,7 +242,7 @@
     state: flamer_nozzle
 
 - type: entity
-  parent: RMCUnderAttachmentBase
+  parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
   id: RMCAttachmentU7UnderbarrelShotgun
   name: U7 underbarrel shotgun
   description: An AEGIS U7 tactical shotgun. Attaches to the underbarrel of most weapons. Only capable of loading up to five buckshot shells. Specialized for breaching into buildings.
@@ -161,6 +258,8 @@
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_u7.ogg
       params:
         volume: -2
+  - type: RMCSelectiveFire
+    baseFireRate: 0.476
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
@@ -173,19 +272,24 @@
     proto: null
     soundInsert:
       path: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+#  - type: GunDamageMultipliers
+#    multipliers:
+#      Turf: 5
+#      Breaching: 10.8
   - type: UniqueAction
   - type: PumpAction
-  - type: ShootUseDelay
-    delay: 2.1
   - type: UseDelay
   - type: AttachableToggleable
+    userOnly: true
     attachedOnly: true
     supercedeHolder: true
+    activatePopupText: attachable-popup-switch-to-generic
+    deactivatePopupText: attachable-popup-switch-from-generic
     activateSound:
       path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg
       params:
         volume: -2
-    actionName: U7 underbarrel shotgun
+    actionName: Switch to the U7 underbarrel shotgun
     actionDesc: Switch to using the underbarrel shotgun.
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
@@ -205,7 +309,7 @@
     state: extinguisher
 
 - type: entity
-  parent: RMCUnderAttachmentBase
+  parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
   id: RMCAttachmentU1GrenadeLauncher
   name: U1 grenade launcher
   description: A weapon-mounted, reloadable grenade launcher.
@@ -220,9 +324,12 @@
         ents: []
   - type: AmmoCounter
   - type: Gun
+    projectileSpeed: 20
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ugl.ogg
     resetOnHandSelected: false
+  - type: RMCSelectiveFire
+    baseFireRate: 0.417
   - type: BallisticAmmoProvider
     cycleable: false
     whitelist:
@@ -241,10 +348,8 @@
       path: "/Audio/Effects/beep1.ogg"
       params:
         volume: 5
-  - type: AmmoFixedDistance
-    maxRange: 7
-  - type: ShootUseDelay
-    delay: 2.4
+  - type: ShootAtFixedPoint
+    maxFixedRange: 7
   - type: UseDelay
   - type: UniqueAction
   - type: BreechLoaded
@@ -257,9 +362,13 @@
           True: { state: grenade-open }
           False: { state: grenade }
   - type: AttachableToggleable
+    userOnly: true
     attachedOnly: true
     supercedeHolder: true
-    actionName: Toggle U1 Grenade Launcher
+    wieldedUseOnly: true
+    activatePopupText: attachable-popup-switch-to-generic
+    deactivatePopupText: attachable-popup-switch-from-generic
+    actionName: Switch to the U1 Grenade Launcher
     actionDesc: Switch to using the underbarrel grenade launcher.
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
@@ -286,10 +395,10 @@
         map: [ "enum.BreechVisuals.Open" ]
   - type: BallisticAmmoProvider
     capacity: 5
-  - type: ShootUseDelay
-    delay: 3
-  - type: AmmoFixedDistance
-    maxRange: 10
+  - type: ShootAtFixedPoint
+    maxFixedRange: 10
+  - type: RMCSelectiveFire
+    baseFireRate: 0.334
   - type: GenericVisualizer
     visuals:
       enum.BreechVisuals.Open:
@@ -297,7 +406,7 @@
           True: { state: grenade-mk1-open }
           False: { state: grenade-mk1 }
   - type: AttachableToggleable
-    actionName: Toggle MK1 Underslung Grenade Launcher
+    actionName: Switch to the MK1 Underslung Grenade Launcher
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: grenade-mk1
@@ -334,7 +443,7 @@
       accuracyAddMult: 0.15
       recoilFlat: -1
       scatterFlat: -2
-      burstScatterFlat: -4
+      burstScatterAddMult: -2
     - conditions:
         unwieldedOnly: true
       accuracyMovementPenaltyAddMult: 1
@@ -342,7 +451,7 @@
       scatterFlat: 2
 
 - type: entity
-  parent: RMCUnderAttachmentBase
+  parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
   id: RMCAttachmentFlashlightGrip
   name: underbarrel flashlight grip
   description: Holy smokes RO man, they put a grip on a flashlight! Reduces recoil and scatter by a tiny amount. Works as a light source. # Boosts accuracy by a tiny amount.
@@ -398,6 +507,7 @@
   - type: Appearance
   - type: AttachableToggleable
     attachedOnly: true
+    useDelay: 1.0
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: flashgrip
@@ -466,6 +576,12 @@
 
 - type: Tag
   id: RMCAttachmentAngledGrip
+
+- type: Tag
+  id: RMCAttachmentBipod
+
+- type: Tag
+  id: RMCGunBipodFullAuto
 
 - type: Tag
   id: RMCAttachmentBurstFireAssembly

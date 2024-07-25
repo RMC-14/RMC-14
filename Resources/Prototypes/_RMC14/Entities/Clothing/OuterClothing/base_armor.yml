@@ -1,0 +1,8 @@
+﻿# base
+- type: entity
+  parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing ]
+  id: RMCBaseArmor
+  abstract: true
+  components:
+  - type: CMDefibrillatorBlocked
+    popup: cm-defib-take-off-armor

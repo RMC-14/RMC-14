@@ -1,5 +1,4 @@
 using Content.Shared._RMC14.Hands;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Pheromones;
@@ -18,10 +17,8 @@ using Content.Shared.Jittering;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.NPC.Components;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
-using Content.Shared.Rounding;
 using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
@@ -117,7 +114,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
     private void OnParasiteAfterInteract(Entity<XenoParasiteComponent> ent, ref AfterInteractEvent args)
     {
-        if (!args.CanReach || args.Target == null)
+        if (!args.CanReach || args.Target == null || args.Handled)
             return;
 
         if (StartInfect(ent, args.Target.Value, args.User))

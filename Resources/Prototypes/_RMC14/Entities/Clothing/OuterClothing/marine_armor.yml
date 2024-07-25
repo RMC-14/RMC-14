@@ -1,6 +1,6 @@
-﻿# m3
+# m3
 - type: entity
-  parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing ]
+  parent: RMCBaseArmor
   id: CMArmorM3Medium
   name: M3 pattern marine armor
   description: A standard UNMC M3 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage.
@@ -119,6 +119,11 @@
   - type: ExplosionResistance
     damageCoefficient: 0
     worn: false
+  - type: RMCMagneticArmor
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMArmorM3Medium
@@ -202,9 +207,9 @@
 
 - type: entity
   parent: CMArmorM3Medium
-  id: CMArmorM3T
+  id: RMCArmorM3TDemo
   name: M3-T light armor
-  description: A custom set of M3 armor designed for users of long-ranged explosive weaponry.
+  description: A custom set of M3 armor designed for users of long-ranged explosive weaponry. Provides better protection against explosives than standard M3 armor, while remaining nimble.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/t.rsi
@@ -212,6 +217,9 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/t.rsi
   - type: CMArmor
     explosionArmor: 30
+  - type: ClothingSpeedModifier # light armor speed
+    walkModifier: .814
+    sprintModifier: .814
   - type: Corrodible
     isCorrodible: false
 
@@ -390,7 +398,6 @@
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
-  - type: RMCMagneticArmor
   - type: ClothingBlockBackpack
   - type: SmartGunArmor
 

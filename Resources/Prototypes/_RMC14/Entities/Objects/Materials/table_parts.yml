@@ -1,0 +1,114 @@
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCTablePartBase
+  name: table parts
+  description: A kit for a table, including a large, flat metal surface and four legs. Some assembly required.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Materials/table_parts.rsi
+  - type: Item
+    size: Normal
+
+
+- type: entity
+  parent: RMCTablePartBase
+  id: RMCTablePartTan
+  name: tan table parts
+  components:
+  - type: Sprite
+    state: tan
+  - type: Tag
+    tags:
+      - RMCTablePartTan
+
+- type: Tag
+  id: RMCTablePartTan
+
+- type: entity
+  parent: RMCTablePartBase
+  id: RMCTablePartReinforced
+  name: reinforced table parts
+  description: A kit for a table, including a large, flat metal surface and four legs. This kit has side panels. Some assembly required.
+  components:
+  - type: Sprite
+    state: reinforced
+  - type: Tag
+    tags:
+      - RMCTablePartReinforced
+
+- type: Tag
+  id: RMCTablePartReinforced
+
+- type: entity
+  parent: RMCTablePartBase
+  id: RMCTablePartWood
+  name: wooden table parts
+  description: A kit for a table, including a large, flat wooden surface and four legs. Some assembly required.
+  components:
+  - type: Sprite
+    state: wood
+  - type: Tag
+    tags:
+      - RMCTablePartWood
+
+- type: Tag
+  id: RMCTablePartWood
+
+- type: entity
+  parent: RMCTablePartWood
+  id: RMCTablePartWoodPoor
+  name: poor wooden table parts
+  description: A kit for a poorly crafted table, including a large, flat wooden surface and four legs. Some assembly required.
+  components:
+  - type: Sprite
+    state: poor_wood
+  - type: Tag
+    tags:
+      - RMCTablePartWoodPoor
+
+- type: Tag
+  id: RMCTablePartWoodPoor
+
+- type: entity
+  parent: RMCTablePartWood
+  id: RMCTablePartWoodFancy
+  name: fancy wooden table parts
+  description: A kit for a finely crafted mahogany table, including a large, flat wooden surface and four legs. Some assembly required.
+  components:
+  - type: Sprite
+    state: fancy_wood
+  - type: Tag
+    tags:
+      - RMCTablePartWoodFancy
+
+- type: Tag
+  id: RMCTablePartWoodFancy
+
+- type: entity
+  parent: RMCTablePartBase
+  id: RMCTablePartGambling
+  name: gambling table parts
+  components:
+  - type: Sprite
+    state: gamble
+  - type: Tag
+    tags:
+      - RMCTablePartGambling
+
+- type: Tag
+  id: RMCTablePartGambling
+
+- type: entity
+  parent: RMCTablePartBase
+  id: RMCTablePartAlmayer
+  name: gray table parts
+  components:
+  - type: Sprite
+    state: almayer
+  - type: Tag
+    tags:
+      - RMCTablePartAlmayer
+
+- type: Tag
+  id: RMCTablePartAlmayer

@@ -17,21 +17,19 @@
     - belt
   - type: Wieldable
   - type: Gun
-    fireRate: 1.5
-    minAngle: 10
-    maxAngle: 20
-    angleIncrease: 5
-    angleDecay: 10
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_44mag.ogg
-  - type: GunWieldBonus
-    minAngle: -10
-    maxAngle: -10
-    angleIncrease: -4
-    angleDecay: 0
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 1
+    recoilUnwielded: 3
+    scatterWielded: 6
+    scatterUnwielded: 14
+    baseFireRate: 1.429
   - type: ContainerContainer
     containers:
       revolver-ammo: !type:Container
@@ -61,8 +59,6 @@
   name: M44 combat revolver
   description: A bulky revolver, occasionally carried by assault troops and officers in the Marine Corps, as well as civilian law enforcement. Fires .44 Magnum rounds.
   components:
-  - type: Gun
-    fireRate: 2
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m44.rsi
   - type: Clothing
@@ -72,12 +68,14 @@
     capacity: 7
     chambers: [ True, True, True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null, null, null ]
+  - type: RMCSelectiveFire
+    baseFireRate: 2
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
         whitelist:
           tags:
-          # -RMCAttachmentBayonet | Not in the game yet, but will be attachable.
+          - RMCM5Bayonet
           - RMCAttachmentRecoilCompensator
           - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
@@ -87,8 +85,13 @@
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
           - RMCAttachmentS42xTelescopicMiniscope
           - RMCAttachmentB8SmartScope
+      rmc-aslot-stock:
+        whitelist:
+          tags:
+          - RMCAttachmentM44MagnumSharpshooterStock
       rmc-aslot-underbarrel:
         whitelist:
           tags:
@@ -97,4 +100,5 @@
     offsets:
       rmc-aslot-barrel: 0.715, 0.125
       rmc-aslot-rail: 0, 0.185
+      rmc-aslot-stock: -0.59375, 0.09375
       rmc-aslot-underbarrel: 0.375, -0.155

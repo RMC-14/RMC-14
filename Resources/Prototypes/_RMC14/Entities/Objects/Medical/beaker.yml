@@ -3,6 +3,10 @@
   id: CMBeakerBase
   abstract: true
   components:
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
   - type: Destructible
     thresholds:
     - trigger:

@@ -122,9 +122,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [ViewVariables]
     public readonly Dictionary<string, float> MarinesPerXeno = new()
     {
-        ["/Maps/_RMC14/lv624.yml"] = 4.25f,
-        ["/Maps/_RMC14/solaris.yml"] = 5.5f,
-        ["/Maps/_RMC14/prison.yml"] = 4.5f,
+        ["/Maps/_RMC14/lv624.yml"] = 5f,
+        ["/Maps/_RMC14/solaris.yml"] = 5f,
+        ["/Maps/_RMC14/prison.yml"] = 5f,
+        ["/Maps/_RMC14/shiva.yml"] = 5f,
     };
 
     private readonly List<MapId> _almayerMaps = [];
@@ -164,6 +165,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         SubscribeLocalEvent<CrashLandableComponent, EntParentChangedMessage>(OnCrashLandableParentChanged);
 
         SubscribeLocalEvent<CrashLandOnTouchComponent, StartCollideEvent>(OnCrashLandOnTouchStartCollide);
+
+        SubscribeLocalEvent<DropshipHijackLandedEvent>(OnDropshipHijackLanded);
 
         Subs.CVar(_config, RMCCVars.RMCFTLCrashLand, v => _crashLandEnabled = v, true);
         Subs.CVar(_config, RMCCVars.RMCPlanetMaps, v => _planetMaps = v, true);
@@ -568,6 +571,19 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         TryCrashLand((args.OtherEntity, crashLandable));
     }
 
+    private void OnDropshipHijackLanded(ref DropshipHijackLandedEvent ev)
+    {
+        var rules = QueryActiveRules();
+        while (rules.MoveNext(out _, out var rule, out _))
+        {
+            if (rule.HijackSongPlayed)
+                break;
+
+            rule.HijackSongPlayed = true;
+            _audio.PlayGlobal(rule.HijackSong, Filter.Broadcast(), true);
+        }
+    }
+
     private void TryCrashLand(Entity<CrashLandableComponent> crashLandable)
     {
         var distressQuery = EntityQueryEnumerator<CMDistressSignalRuleComponent>();
@@ -843,6 +859,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             "lv624" => "LV-624",
             "solaris" => "Solaris Ridge",
             "prison" => "Fiorina Science Annex",
+            "shiva" => "Shivas Snowball",
             _ => SelectedPlanetMapName,
         };
 

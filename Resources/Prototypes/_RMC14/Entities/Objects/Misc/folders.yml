@@ -35,6 +35,10 @@
       prob: 0.2
     - id: CMPaper
       prob: 0.2
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMFolderBase
