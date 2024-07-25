@@ -1,3 +1,4 @@
+# Base Vender
 - type: entity
   parent: VendingMachine
   id: CMVendor
@@ -82,7 +83,16 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
 
+- type: vendingMachineInventory
+  id: CMVendomat
+
+
+# Coffee
 - type: entity
   parent: CMVendor
   id: CMVendorCoffee
@@ -95,6 +105,15 @@
     pack: CMVendorCoffee
     ejectState: eject-unshaded
 
+- type: vendingMachineInventory
+  id: CMVendorCoffee
+  startingInventory:
+    DrinkHotCoffee: 25
+    DrinkTeacup: 25
+    DrinkHotCoco: 25
+
+
+# Snack
 - type: entity
   parent: CMVendor
   id: CMVendorSnack
@@ -106,6 +125,22 @@
   - type: VendingMachine
     pack: CMVendorSnack
 
+- type: vendingMachineInventory
+  id: CMVendorSnack
+  startingInventory: # TODO RMC14
+    RMCFoodSnackCheeseburgerPackaged: 12
+    RMCFoodSnackBurritoPackaged: 12
+    RMCFoodSnackHotdogPackaged: 12
+    RMCFoodSnackKeplarCrisps: 12
+    RMCFoodSnackKeplarFlamehotCrisps: 12
+    RMCFoodSnackChipsPepper: 12
+    RMCFoodSnackEATBar: 12
+    RMCFoodSnackBoonie: 6
+    RMCFoodSnackCHUNK: 6
+    RMCFoodSnackBarcaridine: 6
+
+
+# Cola
 - type: entity
   parent: CMVendor
   id: CMVendorCola
@@ -117,6 +152,34 @@
   - type: VendingMachine
     pack: CMVendorCola
 
+- type: vendingMachineInventory
+  id: CMVendorCola
+  startingInventory:
+    # BASIC
+    CMDrinkCanBobdaClassic: 10
+    CMDrinkCanBobdaCherry: 10
+    CMDrinkCanBobdaLime: 10
+    CMDrinkCanBobdaGrape: 10
+    CMDrinkCanBobdaBlue: 10
+    CMDrinkCanBobdaPeach: 10
+    CMDrinkCanBobdaCranberry: 10
+    CMDrinkCanBobdaVanilla: 10
+    CMDrinkCanBobdaPineapple: 10
+    # DIET
+    CMDrinkCanBobdaClassicDiet: 10
+    CMDrinkCanBobdaCherryDiet: 10
+    CMDrinkCanBobdaLimeDiet: 10
+    CMDrinkCanBobdaGrapeDiet: 10
+    CMDrinkCanBobdaBlueDiet: 10
+    CMDrinkCanBobdaPeachDiet: 10
+    CMDrinkCanBobdaCranberryDiet: 10
+    CMDrinkCanBobdaVanillaDiet: 10
+    CMDrinkCanBobdaPineappleDiet: 10
+    # NON BOBDA
+    CMDrinkCanCola: 10
+
+
+# Cigarettes
 - type: entity
   parent: CMVendor
   id: CMVendorCigs
@@ -128,6 +191,17 @@
   - type: VendingMachine
     pack: CMVendorCigs
 
+- type: vendingMachineInventory
+  id: CMVendorCigs
+  startingInventory:
+    CMCigPackBlack: 50 #TODO RMC14 lucky sloths
+    CMCigarCase: 20 #TODO RMC14 tarbacktube
+    CMMatchbox: 15
+    Lighter: 25
+    #TODO RMC14 Zippo 10
+
+
+# Security
 - type: entity
   parent: CMVendor
   id: CMVendorSec
@@ -144,6 +218,29 @@
   - type: AccessReader
     access: [["CMAccessBrig"]]
 
+- type: vendingMachineInventory
+  id: CMVendorSec
+  startingInventory: # TODO RMC14
+    CMHandcuffs: 8
+    Zipties: 10
+    GrenadeFlashBang: 4
+    RMCWeaponTaser: 4
+    # Pepper spray 4
+    CMStunbaton: 4
+    RMCFlashlight: 4
+    CMBeltSecurityMP: 10
+    CMFlash: 5
+    FoodBoxDonut: 12
+    # Evidence box 6
+    CMArmorHelmetM10MP: 6
+    CMHeadCapMP: 6
+    CMJumpsuitMP: 2
+    CMHeadBeretRed: 6
+    CMGlassesSecurity: 3
+    CMHeadsetMPO: 6
+
+
+# Senior Enlisted Advisor
 - type: entity
   parent: CMVendor
   id: CMVendorSEA
@@ -160,6 +257,23 @@
   - type: AccessReader
     access: [["CMAccessSEA"]]
 
+- type: vendingMachineInventory
+  id: CMVendorSEA
+  startingInventory: # TODO RMC14
+    #m63 rubber ammo 20
+    #pistol rubber ammo 20
+    #M77 rubber ammo 20
+    #rifle rubber ammo 20
+    #m4spr rubber ammo 20
+    #shotgun beanbag 20
+    CMFirstAidKitFilled: 2
+    CMBurnAidKitFilled: 2 #firstaid fire 2
+    #MedkitRadiationFilled: 1 #firstaid rad 1
+    CMHeadsetAlpha: 6
+    # Crew Monitor
+
+
+# Nutriments
 - type: entity
   parent: CMVendor
   id: CMVendorNutri
@@ -173,6 +287,18 @@
     denyState: deny-unshaded
     ejectState: eject-unshaded
 
+- type: vendingMachineInventory
+  id: CMVendorNutri
+  startingInventory:
+    EZNutrientChemistryBottle: 35
+    Left4ZedChemistryBottle: 25
+    RobustHarvestChemistryBottle: 15
+    PestSpray: 20
+    Syringe: 5
+    PlantBag: 5
+
+
+# Seeds
 - type: entity
   parent: CMVendor
   id: CMVendorSeeds
@@ -186,6 +312,41 @@
     denyState: deny-unshaded
     ejectState: eject-unshaded
 
+- type: vendingMachineInventory
+  id: CMVendorSeeds
+  startingInventory: # TODO RMC14
+    BananaSeeds: 3
+    BerrySeeds: 3
+    CarrotSeeds: 3
+    ChanterelleSeeds: 2
+    ChiliSeeds: 3
+    CornSeeds: 3
+    EggplantSeeds: 3
+    PotatoSeeds: 3
+    SoybeanSeeds: 3
+    #SunflowerSeeds: 2
+    TomatoSeeds: 3
+    WheatSeeds: 3
+    AppleSeeds: 3
+    PoppySeeds: 3
+    SugarcaneSeeds: 3
+    #PeanutSeeds: 3
+    #WhitebeetSeeds: 3
+    WatermelonSeeds: 3
+    LimeSeeds: 3
+    LemonSeeds: 3
+    OrangeSeeds: 3
+    # GrassSeeds: 3
+    CocoaSeeds: 3
+    # PlumpSeeds: 2
+    CabbageSeeds: 3
+    GrapeSeeds: 3
+    PumpkinSeeds: 3
+    # CherrySeed: 3
+    RiceSeeds: 3
+
+
+# Dinnerware
 - type: entity
   parent: CMVendor
   id: CMVendorDinnerware
@@ -197,6 +358,20 @@
   - type: VendingMachine
     pack: CMVendorDinnerware
 
+- type: vendingMachineInventory
+  id: CMVendorDinnerware
+  startingInventory:
+    # TODO RMC14 Tray: 8
+    Fork: 6
+    KitchenKnife: 3
+    DrinkGlass: 8
+    CMJumpsuitMessTech: 2
+    FoodShakerSalt: 4
+    FoodShakerPepper: 4
+    FoodCondimentBottleEnzyme: 1
+
+
+# BODA
 - type: entity
   parent: CMVendor
   id: CMVendorSodaSoviet
@@ -208,7 +383,13 @@
   - type: VendingMachine
     pack: CMVendorSodaSoviet
 
+- type: vendingMachineInventory
+  id: CMVendorSodaSoviet
+  startingInventory:
+    CMDrinkCanBoda: 30
 
+
+# Ingridients
 - type: entity
   parent: CMVendor
   id: CMVendorIngredients
@@ -219,3 +400,35 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/snack.rsi
   - type: VendingMachine
     pack: CMVendorIngredient
+
+- type: vendingMachineInventory
+  id: CMVendorIngredient
+  startingInventory:
+    FoodContainerEgg: 12
+    FoodMeatFish: 12
+    FoodMeat: 12
+    ReagentContainerCornmeal: 12
+    ReagentContainerRice: 12
+    ReagentContainerMayo: 12
+    ReagentContainerFlour: 12
+    ReagentContainerSugar: 12
+    ReagentContainerOliveoil: 12
+    FoodCondimentBottleEnzyme: 12
+    FoodShakerSalt: 12
+    FoodShakerPepper: 12
+    # TODO RMC14 Mint 12
+    FoodApple: 12
+    FoodBanana: 12
+    FoodMushroom: 12
+    # TODO RMC14 Cherry 12
+    FoodChiliPepper: 12
+    FoodCabbage: 12
+    FoodCarrot: 12
+    FoodCorn: 12
+    FoodEggplant: 12
+    FoodLemon: 12
+    FoodLime: 12
+    FoodOrange: 12
+    FoodPotato: 12
+    FoodTomato: 12
+    # TODO RMC14 Whitebeet 12

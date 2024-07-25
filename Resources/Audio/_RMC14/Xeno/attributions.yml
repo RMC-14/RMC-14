@@ -13,6 +13,31 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/ef6587e938058c360d4a685015a4f0ba3aa5473a/sound/weapons/alien_claw_block.ogg"
 
+- files: ["alien_claw_flesh1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/weapons/alien_claw_flesh1.ogg"
+
+- files: ["alien_claw_flesh2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/weapons/alien_claw_flesh2.ogg"
+
+- files: ["alien_claw_flesh3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/weapons/alien_claw_flesh3.ogg"
+
+- files: ["alien_claw_flesh4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/20829c1ee1c4718f6a3413555921b4f6c760d4bf/sound/weapons/alien_claw_flesh4.ogg"
+
+- files: ["alien_claw_flesh5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/20829c1ee1c4718f6a3413555921b4f6c760d4bf/sound/weapons/alien_claw_flesh5.ogg"
+
 - files: ["alien_death.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"

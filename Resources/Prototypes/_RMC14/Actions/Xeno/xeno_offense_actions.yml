@@ -99,7 +99,7 @@
   parent: ActionXenoLeap
   id: ActionXenoPounce
   name: Pounce (20) # TODO RMC14 proper plasma costs
-  description: Jump towards a given location and knock down the first enemy hit if you are invisible.
+  description: Jump towards a given location and knock down the first enemy hit [color=red]if you are invisible.[/color]
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -202,6 +202,21 @@
       state: charge_spit
     event: !type:XenoChargeSpitActionEvent # TODO RMC14 more armor, move faster
     useDelay: 12
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoSprayAcid
+  name: Spray Acid (40)
+  description: Sprays acid along the ground in a line, covering tiles with it. [color=red]Will deal extra damage to barricades and anyone recently hit by a charged spit![/color]
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: spray_acid
+    event: !type:XenoSprayAcidActionEvent
+    useDelay: 8
+    range: 6
 
 - type: entity
   id: ActionXenoParalyzingSlash

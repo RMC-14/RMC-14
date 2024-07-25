@@ -156,9 +156,12 @@ public sealed class CPRSystem : EntitySystem
 
     private void OnMaskCPRAttempt(Entity<MaskComponent> ent, ref InventoryRelayedEvent<ReceiveCPRAttemptEvent> args)
     {
+        var target = args.Args.Target;
+        var performer = args.Args.Performer;
+
         if (!ent.Comp.IsToggled)
         {
-            _popups.PopupClient(Loc.GetString("cm-crp-take-off-mask"), ent, args.Args.Performer);
+            _popups.PopupClient(Loc.GetString("cm-crp-take-off-mask", ("target", target)), target, performer);
             args.Args.Cancelled = true;
         }
     }
@@ -176,7 +179,7 @@ public sealed class CPRSystem : EntitySystem
         if (performAttempt.Cancelled)
             return false;
 
-        var receiveAttempt = new ReceiveCPRAttemptEvent(performer, start);
+        var receiveAttempt = new ReceiveCPRAttemptEvent(performer, target, start);
         RaiseLocalEvent(target, ref receiveAttempt);
 
         if (receiveAttempt.Cancelled)

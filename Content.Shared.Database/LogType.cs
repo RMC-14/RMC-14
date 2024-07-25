@@ -106,6 +106,11 @@ public enum LogType
     /// </remarks>
     RateLimited = 91,
 
+    /// <summary>
+    /// A player did an item-use interaction of an item they were holding onto another object.
+    /// </summary>
+    InteractUsing = 92,
+
     RMCMarineAnnounce = 10000,
     RMCXenoAnnounce = RMCMarineAnnounce + 1,
     RMCNamedItem = RMCMarineAnnounce + 2,
@@ -117,4 +122,6 @@ public enum LogType
     RMCXenoOrderConstruction = RMCMarineAnnounce + 8,
     RMCXenoOrderConstructionPlasma = RMCMarineAnnounce + 9,
     RMCXenoOrderConstructionComplete = RMCMarineAnnounce + 10,
+    RMCPrimaryLZ = RMCMarineAnnounce + 11,
+    RMCDropshipLaunch = RMCMarineAnnounce + 12
 }

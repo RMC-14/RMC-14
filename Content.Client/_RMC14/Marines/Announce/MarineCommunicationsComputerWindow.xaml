@@ -1,8 +1,24 @@
 ﻿<controls:MarineCommunicationsComputerWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Marines.Announce"
-    Title="Groundside Operations">
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    Title="Groundside Operations"
+    MinSize="400 350">
     <BoxContainer Orientation="Vertical" Margin="5">
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="Planet: " />
+            <Label Name="PlanetName" Access="Public" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="Operation: " />
+            <Label Name="OperationName" Access="Public" />
+        </BoxContainer>
+        <cc:HSeparator Color="#4972A1" Margin="0 5" />
+        <BoxContainer Name="LandingZonesSection" Access="Public" Orientation="Vertical">
+            <Label Text="Designate Primary LZ" />
+            <BoxContainer Name="LandingZonesContainer" Access="Public" Orientation="Vertical" />
+            <cc:HSeparator Color="#4972A1" Margin="0 5" />
+        </BoxContainer>
         <TextEdit Name="Text" Access="Public" HorizontalExpand="True" VerticalExpand="True" />
         <Button Name="Send" Access="Public" Text="Send" HorizontalExpand="True" />
     </BoxContainer>

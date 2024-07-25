@@ -1,20 +1,32 @@
 ﻿- type: entity
-  parent: MobMonkey
+  id: RMCSmallHost
+  name: abstract small host
+  abstract: true
+  components:
+  - type: Infectable
+  - type: Tackleable
+  - type: Devourable
+  - type: XenoNestable
+  - type: RMCNightVisionVisible
+  - type: InfectStopOnDeath
+  - type: CrashLandable
+
+- type: entity
+  parent: [MobMonkey, RMCSmallHost]
   id: CMMobMonkey
   suffix: CM
   components:
   - type: GhostRole
     prob: 0
-  - type: Infectable
+
 
 - type: entity
-  parent: MobKobold
+  parent: [MobKobold, RMCSmallHost]
   id: CMMobKobold
   suffix: CM
   components:
   - type: GhostRole
     prob: 0
-  - type: Infectable
 
 - type: entity
   parent: MobMouse
@@ -23,6 +35,7 @@
   components:
   - type: GhostRole
     prob: 0
+  - type: CrashLandable
 
 - type: entity
   parent: MobMouse1
@@ -43,14 +56,24 @@
 - type: entity
   parent: MobCorgiPuppy
   id: CMMobWiggles
-  name: Mr. Wiggles
-  description: It's a corgi puppy.
+  name: Mister Wiggles
+  description: It's a corgi puppy. MISTER WIGGLES!! HE IS THE GREATEST!
+  components:
+  - type: WarpPoint
+    follow: true
+    location: Mister Wiggles
+  - type: CrashLandable
 
 - type: entity
   parent: MobCatCalico
   id: CMMobJones
   name: Jones
   description: A tough, old stray whose origin no one seems to know.
+  components:
+  - type: WarpPoint
+    follow: true
+    location: Jones
+  - type: CrashLandable
 
 # Spawners
 
@@ -62,9 +85,8 @@
   components:
   - type: Sprite
     layers:
-    - state: green
-    - state: monkey
-      sprite: Mobs/Animals/monkey.rsi
+    - state: monkey_spawn
+      sprite: _RMC14/Markers/landmarks.rsi
   - type: ProportionalSpawner
     id: CMSpawnMobMonkey
     prototypes:

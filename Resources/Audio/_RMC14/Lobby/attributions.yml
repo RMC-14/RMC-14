@@ -2,3 +2,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Super Nova In The Catacombs by WigWoo1 on youtube. https://www.youtube.com/@WigWoo1"
   source: "https://www.youtube.com/watch?v=ly3-rhDTeOU&ab_channel=WigWoo1"
+
+- files: ["xenos!!.ogg"]
+  license: "CC-BY-SA-4.0"
+  copyright: "xenos!! by Mendax on archive.org"
+  source: "https://archive.org/details/xenos"

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
+using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -18,6 +19,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.Projectiles;
 using Content.Shared.Prototypes;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -40,6 +42,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
@@ -92,6 +95,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<XenoConstructionSupportComponent, ComponentRemove>(OnCheckAdjacentCollapse);
         SubscribeLocalEvent<XenoConstructionSupportComponent, EntityTerminatingEvent>(OnCheckAdjacentCollapse);
 
+        SubscribeLocalEvent<DeleteXenoResinOnHitComponent, ProjectileHitEvent>(OnDeleteXenoResinHit);
+
         Subs.BuiEvents<XenoConstructionComponent>(XenoChooseStructureUI.Key, subs =>
         {
             subs.Event<XenoChooseStructureBuiMsg>(OnXenoChooseStructureBui);
@@ -110,19 +115,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (!ent.Comp.DestroyWeeds)
             return;
 
-        var xform = Transform(ent);
-        if (xform.GridUid is not { } gridId ||
-            !TryComp(gridId, out MapGridComponent? grid))
-        {
-            return;
-        }
-
-        var coordinates = _transform.GetMapCoordinates((ent, xform));
-        var indices = _mapSystem.TileIndicesFor(gridId, grid, coordinates);
-        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, indices);
+        var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(ent);
         while (anchored.MoveNext(out var uid))
         {
-            if (TerminatingOrDeleted(uid.Value) || EntityManager.IsQueuedForDeletion(uid.Value))
+            if (TerminatingOrDeleted(uid) || EntityManager.IsQueuedForDeletion(uid))
                 continue;
 
             if (!_xenoWeedsQuery.HasComp(uid))
@@ -150,7 +146,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var tile = _mapSystem.CoordinatesToTile(gridUid, grid, coordinates);
         if (!_xenoWeeds.CanPlaceWeeds((gridUid, grid), tile))
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-weeds"), xeno.Owner, xeno.Owner);
+            _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-weeds"),
+                xeno.Owner,
+                xeno.Owner,
+                PopupType.SmallCaution);
             return;
         }
 
@@ -484,6 +483,12 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                     QueueDel(uid);
             }
         }
+    }
+
+    private void OnDeleteXenoResinHit(Entity<DeleteXenoResinOnHitComponent> ent, ref ProjectileHitEvent args)
+    {
+        if (_net.IsServer && _xenoConstructQuery.HasComp(args.Target))
+            QueueDel(args.Target);
     }
 
     public FixedPoint2? GetStructurePlasmaCost(EntProtoId prototype)

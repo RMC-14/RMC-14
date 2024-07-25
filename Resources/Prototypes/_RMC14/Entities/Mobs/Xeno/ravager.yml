@@ -54,6 +54,7 @@
   - type: Tackle
     threshold: 4
     stun: 9
+    chance: 0.35
   - type: Flammable
     damage:
       types:
@@ -79,3 +80,5 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
+#  - type: RMCXenoDamageVisuals # TODO RMC14
+#    prefix: ravager

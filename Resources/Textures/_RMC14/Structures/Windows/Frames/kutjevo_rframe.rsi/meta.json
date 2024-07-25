@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/turf/walls/kutjevo/kutjevo_windows.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "kutjevo_rframe0"
+    },
+    {
+      "name": "kutjevo_rframe1"
+    },
+    {
+      "name": "kutjevo_rframe2"
+    },
+    {
+      "name": "kutjevo_rframe3"
+    },
+    {
+      "name": "kutjevo_rframe4"
+    },
+    {
+      "name": "kutjevo_rframe5"
+    },
+    {
+      "name": "kutjevo_rframe6"
+    },
+    {
+      "name": "kutjevo_rframe7"
+    },
+    {
+      "name": "kutjevo_rframe8"
+    },
+    {
+      "name": "kutjevo_rframe9"
+    },
+    {
+      "name": "kutjevo_rframe10"
+    },
+    {
+      "name": "kutjevo_rframe11"
+    },
+    {
+      "name": "kutjevo_rframe12"
+    },
+    {
+      "name": "kutjevo_rframe13"
+    },
+    {
+      "name": "kutjevo_rframe14"
+    },
+    {
+      "name": "kutjevo_rframe15"
+    }
+  ]
+}

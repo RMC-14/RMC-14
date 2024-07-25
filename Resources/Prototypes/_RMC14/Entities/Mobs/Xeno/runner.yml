@@ -42,7 +42,7 @@
     - ActionXenoWatch
     - ActionXenoTailStab
     - ActionXenoHide
-    - ActionXenoPounce # TODO RMC14 call this pounce, not leap
+    - ActionXenoLeap
     - ActionXenoBoneChips
     - ActionXenoZoom
     - ActionXenoDevolve
@@ -78,6 +78,9 @@
   - type: Tackle
     threshold: 5
     stun: 8
+    chance: 0.40
   - type: MovementSpeedModifier
     baseWalkSpeed: 5.55
     baseSprintSpeed: 10
+  - type: RMCXenoDamageVisuals
+    prefix: runner

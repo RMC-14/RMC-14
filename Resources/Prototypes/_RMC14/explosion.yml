@@ -2,8 +2,8 @@
   id: RMC
   damagePerIntensity:
     types:
-      Blunt: 4.5
-      Heat: 4.5
+      Blunt: 5
+      Heat: 5
   tileBreakChance: [0, 0.5, 1]
   tileBreakIntensity: [0, 10, 30]
   tileBreakRerollReduction: 20

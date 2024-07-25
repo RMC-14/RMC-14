@@ -32,7 +32,7 @@
     #    - ActionXenoSpit
     #    - ActionXenoDash
     #    - ActionXenoAcidBall
-    #    - ActionXenoSprayAcid
+    - ActionXenoSprayAcid
     - ActionXenoDevolve
     tier: 3
     hudOffset: 0,0.16
@@ -57,6 +57,7 @@
   - type: Tackle
     threshold: 3
     stun: 5
+    chance: 0.45
   - type: Fixtures
     fixtures:
       fix1:
@@ -75,3 +76,5 @@
         density: 185
         layer:
         - BulletImpassable
+#  - type: RMCXenoDamageVisuals # TODO RMC14
+#    prefix: praetorian

@@ -42,8 +42,8 @@
       entries:
       - id: CMWeaponPistolM77
         amount: 25
-      #- id: CMWeaponRevolverM44
-      #  amount: 25
+      - id: RMCWeaponRevolverM44
+        amount: 25
       - id: CMWeaponPistolM1984
         amount: 25
       #- id: WeaponFlareM82F
@@ -52,8 +52,8 @@
       entries:
       - id: CMMagazinePistolM77AP
         amount: 25
-#      - id: CMSpeedLoaderM44
-#        amount: 20
+      - id: RMCSpeedLoaderM44
+        amount: 20
       - id: CMMagazinePistolM1984
         amount: 25
     - name: Attachments
@@ -64,8 +64,10 @@
         amount: 10
       - id: RMCAttachmentRailFlashlight
         amount: 25
+        recommended: true
       - id: RMCAttachmentFlashlightGrip
         amount: 10
+        recommended: true
       - id: RMCAttachmentU1GrenadeLauncher
         amount: 25
     - name: Utilities
@@ -148,9 +150,9 @@
         amount: 15
 #      - id: Marine Chestrig
 #        amount: 15
-      - id: CMBackpackMarineTech
-        amount: 15
       - id: CMSatchelMarineTech
+        amount: 15
+      - id: RMCSatchelWelderChestrig
         amount: 15
       - id: CMSatchelMedical
         amount: 15
@@ -168,8 +170,8 @@
       entries:
       - id: CMBeltMarine
         amount: 15
-#      - id: M276 Pattern M40 Grenade Rig
-#        amount: 10
+      - id: RMCBeltGrenade
+        amount: 10
 #      - id: M276 Pattern Shotgun Shell Loading Rig
 #        amount: 15
 #      - id: M276 Pattern General Pistol Holster Rig
@@ -237,7 +239,7 @@
 #      - id: Rebreather
 #        amount: 10
     - name: Miscellaneous
-      entries: [ ]
+      entries:
 #      - id: Ballistic goggles
 #        amount: 10
 #      - id: M1A1 Ballistic goggles
@@ -260,8 +262,8 @@
 #        amount: 15
 #      - id: Marine Shoulder Patch
 #        amount: 15
-#      - id: Bedroll
-#        amount: 20
+      - id: BedrollFolded
+        amount: 20
     - name: Optics
       entries: [ ]
 #      - id: Advanced Medical Optic (CORPSMAN ONLY)
@@ -298,19 +300,21 @@
       - id: CMMagazineRifleM54CExt
         amount: 1
     - name: Special Ammunition
-      entries: [ ]
+      entries:
       #- id: CMDrumSmartGunM56
       #  amount: 1
+      - id: RMCMagazineSmartGun
+        amount: 1
       #- id: CMSpeedLoaderM44Heavy
       #  amount: 2
-      #- id: CMSpeedLoaderM44Marksman
-      #  amount: 2
+      - id: RMCSpeedLoader44Marksman
+        amount: 2
     - name: Restricted Firearm Ammunition
       entries:
       - id: CMMagazinePistolMK80
         amount: 5
-      #- id: CMMagazineSmartpistolSU6
-      #  amount: 5
+      - id: RMCMagazinePistolSU6
+        amount: 5
       #- id: CMIncineratorTankM240
       #  amount: 3
       #- id: CMMagazineDrumM56D
@@ -362,11 +366,11 @@
         amount: 1
       - id: CMWelder
         amount: 1
-#    - name: Flare and light
-#      entries:
+    - name: Flare and light
+      entries:
 #      #  amount: 1
-#      #- id: CMCombatFlashlight
-#      #  amount: 5
+      - id: RMCFlashlight # Combat Flashlight
+        amount: 5
 #      #- id: CMBoxFlashlights
 #      #  amount: 1
       - id: CMBoxPackFlare
@@ -424,8 +428,8 @@
       entries:
       - id: RMCAttachmentB8SmartScope
         amount: 2
-      - id: RMCAttachmentMagneticHarness
-        amount: 5
+      #- id: RMCAttachmentMagneticHarness
+      #  amount: 5
       - id: RMCAttachmentS42xTelescopicMiniscope
         amount: 2
 #      - id: RMCAttachmentS5RedDotSight # UNCOMMENT THIS WHEN ACCURACY IS IMPLEMENTED

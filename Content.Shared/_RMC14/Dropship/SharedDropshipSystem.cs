@@ -1,18 +1,32 @@
-﻿using Content.Shared._RMC14.Xenonids;
+﻿using System.Linq;
+using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines.Announce;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
+using Robust.Shared.Audio;
+using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Dropship;
 
 public abstract class SharedDropshipSystem : EntitySystem
 {
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
+    [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+
+    private TimeSpan _dropshipInitialDelay;
 
     public override void Initialize()
     {
@@ -33,6 +47,8 @@ public abstract class SharedDropshipSystem : EntitySystem
             {
                 subs.Event<DropshipHijackerDestinationChosenBuiMsg>(OnHijackerDestinationChosenMsg);
             });
+
+        Subs.CVar(_config, RMCCVars.RMCDropshipInitialDelayMinutes, v => _dropshipInitialDelay = TimeSpan.FromMinutes(v), true);
     }
 
     private void OnMapInit(Entity<DropshipNavigationComputerComponent> ent, ref MapInitEvent args)
@@ -44,8 +60,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
     }
 
-    private void OnUIOpenAttempt(Entity<DropshipNavigationComputerComponent> ent,
-        ref ActivatableUIOpenAttemptEvent args)
+    private void OnUIOpenAttempt(Entity<DropshipNavigationComputerComponent> ent, ref ActivatableUIOpenAttemptEvent args)
     {
         if (args.Cancelled)
             return;
@@ -58,14 +73,8 @@ public abstract class SharedDropshipSystem : EntitySystem
             return;
         }
 
-        var roundDuration = _gameTicker.RoundDuration();
-        if (roundDuration < dropship?.RoundStartDelay)
-        {
-            var minutesLeft = Math.Max(1, (int) (dropship.RoundStartDelay - roundDuration).TotalMinutes);
-            var msg = Loc.GetString("rmc-dropship-pre-flight-fueling", ("minutes", minutesLeft));
-            _popup.PopupClient(msg, ent.Owner, args.User, PopupType.MediumCaution);
+        if (!TryDropshipLaunchPopup(ent, args.User, true))
             args.Cancel();
-        }
     }
 
     private void OnNavigationOpen(Entity<DropshipNavigationComputerComponent> ent, ref AfterActivatableUIOpenEvent args)
@@ -91,34 +100,49 @@ public abstract class SharedDropshipSystem : EntitySystem
             return;
         }
 
+        if (!TryDropshipLaunchPopup(ent, user, false))
+            return;
+
         var userTransform = Transform(user);
 
-        Entity<TransformComponent>? closestDestination = null;
+        Entity<DropshipDestinationComponent, TransformComponent>? closestDestination = null;
         var destinations = EntityQueryEnumerator<DropshipDestinationComponent, TransformComponent>();
-        while (destinations.MoveNext(out var uid, out _, out var xform))
+        while (destinations.MoveNext(out var uid, out var destination, out var xform))
         {
             if (xform.MapID != userTransform.MapID)
                 continue;
 
             if (closestDestination == null)
             {
-                closestDestination = (uid, xform);
+                closestDestination = (uid, destination, xform);
                 continue;
             }
 
             if (userTransform.Coordinates.TryDistance(EntityManager, xform.Coordinates, out var distance) &&
                 userTransform.Coordinates.TryDistance(EntityManager,
-                    closestDestination.Value.Comp.Coordinates,
+                    closestDestination.Value.Comp2.Coordinates,
                     out var oldDistance) &&
                 distance < oldDistance)
             {
-                closestDestination = (uid, xform);
+                closestDestination = (uid, destination, xform);
             }
         }
 
         if (closestDestination == null)
         {
             _popup.PopupEntity("There are no dropship destinations near you!", user, user, PopupType.MediumCaution);
+            return;
+        }
+        else if (closestDestination.Value.Comp1.Ship != null)
+        {
+            _popup.PopupEntity("There's already a dropship coming here!", user, user, PopupType.MediumCaution);
+            return;
+        }
+
+        if (Count<PrimaryLandingZoneComponent>() > 0 &&
+            !HasComp<PrimaryLandingZoneComponent>(closestDestination))
+        {
+            _popup.PopupEntity("The shuttle isn't responding to prompts, it looks like this isn't the primary shuttle.", user, user, PopupType.MediumCaution);
             return;
         }
 
@@ -207,6 +231,10 @@ public abstract class SharedDropshipSystem : EntitySystem
         return false;
     }
 
+    protected virtual void RefreshUI()
+    {
+    }
+
     protected virtual void RefreshUI(Entity<DropshipNavigationComputerComponent> computer)
     {
     }
@@ -219,5 +247,75 @@ public abstract class SharedDropshipSystem : EntitySystem
     protected virtual bool IsInFTL(EntityUid dropship)
     {
         return false;
+    }
+
+    private bool TryDropshipLaunchPopup(EntityUid computer, EntityUid user, bool predicted)
+    {
+        var roundDuration = _gameTicker.RoundDuration();
+        if (roundDuration < _dropshipInitialDelay)
+        {
+            var minutesLeft = Math.Max(1, (int) (_dropshipInitialDelay- roundDuration).TotalMinutes);
+            var msg = Loc.GetString("rmc-dropship-pre-flight-fueling", ("minutes", minutesLeft));
+
+            if (predicted)
+                _popup.PopupClient(msg, computer, user, PopupType.MediumCaution);
+            else
+                _popup.PopupEntity(msg, computer, user, PopupType.MediumCaution);
+
+            return false;
+        }
+
+        return true;
+    }
+
+    public bool TryDesignatePrimaryLZ(EntityUid actor, EntityUid lz, SoundSpecifier sound)
+    {
+        if (!HasComp<DropshipDestinationComponent>(lz))
+        {
+            Log.Warning($"{ToPrettyString(actor)} tried to designate as primary LZ entity {ToPrettyString(lz)} with no {nameof(DropshipDestinationComponent)}!");
+            return false;
+        }
+
+        if (Count<PrimaryLandingZoneComponent>() > 0)
+        {
+            Log.Warning($"{ToPrettyString(actor)} tried to designate as primary LZ entity {ToPrettyString(lz)} when one already exists!");
+            return false;
+        }
+
+        if (HasComp<AlmayerComponent>(_transform.GetGrid(lz)) ||
+            HasComp<AlmayerComponent>(_transform.GetMap(lz)))
+        {
+            Log.Warning($"{ToPrettyString(actor)} tried to designate entity {ToPrettyString(lz)} on the warship as primary LZ!");
+            return false;
+        }
+
+        if (GetPrimaryLZCandidates().All(candidate => candidate.Owner != lz))
+        {
+            Log.Warning($"{ToPrettyString(actor)} tried to designate invalid primary LZ entity {ToPrettyString(lz)}!");
+            return false;
+        }
+
+        _adminLog.Add(LogType.RMCPrimaryLZ, $"{ToPrettyString(actor):player} designated {ToPrettyString(lz):lz} as primary landing zone");
+
+        EnsureComp<PrimaryLandingZoneComponent>(lz);
+        RefreshUI();
+        _marineAnnounce.AnnounceARES(actor, $"Command Order Issued:\n\n{Name(lz)} has been designated as the primary landing zone.", sound);
+
+        return true;
+    }
+
+    public IEnumerable<Entity<MetaDataComponent>> GetPrimaryLZCandidates()
+    {
+        if (Count<PrimaryLandingZoneComponent>() != 0)
+            yield break;
+
+        var landingZoneQuery = EntityQueryEnumerator<DropshipDestinationComponent, MetaDataComponent, TransformComponent>();
+        while (landingZoneQuery.MoveNext(out var uid, out _, out var metaData, out var xform))
+        {
+            if (HasComp<AlmayerComponent>(xform.ParentUid) || HasComp<AlmayerComponent>(xform.MapUid))
+                continue;
+
+            yield return (uid, metaData);
+        }
     }
 }

@@ -36,6 +36,12 @@
         crate: CMCrateBoxMagazinePistolM77AP
       - cost: 4000
         crate: CMCrateBoxMagazinePistolMK80
+      - cost: 4000
+        crate: RMCCrateBatterySmartGun
+      - cost: 3000
+        crate: RMCCrateMagazineSmartGun
+      - cost: 4000
+        crate: RMCCrateBoxMagazineSmartPistol
     - name: Attachments
       entries:
       - cost: 3000
@@ -130,6 +136,8 @@
         crate: CMCrateGrenadesHighExplosive
       - cost: 3000
         crate: CMCrateGrenadesFrag
+      - cost: 4000
+        crate: RMCCrateBreachingCharges
     - name: Food
       entries:
       - cost: 1000
@@ -184,12 +192,16 @@
 #      entries: []
     - name: Weapons
       entries:
+      - cost: 10000
+        crate: RMCCrateSmartGunSet
       - cost: 4000
         crate: CMCrateM54C
 #      - cost: 4000
 #        crate: CMCrateM54CE2
       - cost: 3000
         crate: CMCrateMK80
+      - cost: 3000
+        crate: CMCrateSU6
     - name: Weapons Specialist Ammo
       entries:
       - cost: 4000
@@ -200,3 +212,11 @@
         crate: CMCrateMagazineM96SFlak
       - cost: 3000
         crate: CMCrateMagazineM96SIncendiary
+      - cost: 4000
+        crate: RMCCrateM5DemoSpecMixed
+      - cost: 3000
+        crate: RMCCrateM5DemoSpecHighExplosive
+      - cost: 3000
+        crate: RMCCrateM5DemoSpecAntiArmor
+#      - cost: 3000
+#        crate: RMCCrateM5DemoSpecWhitePhosphorous
