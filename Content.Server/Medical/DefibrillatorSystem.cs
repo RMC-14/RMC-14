@@ -34,7 +34,7 @@ public sealed class DefibrillatorSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ChatSystem _chatManager = default!;
-    [Dependency] private readonly CMDamageableSystem _cmDamageable = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly DoAfterSystem _doAfter = default!;
     [Dependency] private readonly ElectrocutionSystem _electrocution = default!;
@@ -208,7 +208,7 @@ public sealed class DefibrillatorSystem : EntitySystem
                 {
                     foreach (var (group, amount) in component.CMZapDamage)
                     {
-                        heal = _cmDamageable.DistributeHealing(target, group, amount, heal);
+                        heal = _rmcDamageable.DistributeHealing(target, group, amount, heal);
                     }
                 }
 

@@ -1,3 +1,33 @@
+- files: ["acid_sizzle1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/20829c1ee1c4718f6a3413555921b4f6c760d4bf/sound/effects/acid_sizzle1.ogg"
+
+- files: ["acid_sizzle2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/20829c1ee1c4718f6a3413555921b4f6c760d4bf/sound/effects/acid_sizzle2.ogg"
+
+- files: ["acid_sizzle3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/20829c1ee1c4718f6a3413555921b4f6c760d4bf/sound/effects/acid_sizzle3.ogg"
+
+- files: ["acid_sizzle4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/20829c1ee1c4718f6a3413555921b4f6c760d4bf/sound/effects/acid_sizzle4.ogg"
+
+- files: ["alien_bite1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/weapons/alien_bite1.ogg"
+
+- files: ["alien_bite2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/weapons/alien_bite2.ogg"
+
 - files: ["alien_chestburst.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
@@ -187,6 +217,11 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/485afd96d16f4df22dbbb46f214df931d24a2eb8/sound/effects/alien_resin_move2.ogg"
+
+- files: ["blobattack.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/effects/blobattack.ogg"
 
 - files: ["xeno_evolveready.ogg"]
   license: "CC-BY-SA-3.0"
