@@ -3912,5 +3912,20 @@
   id: 460
   time: '2024-07-25T12:54:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3263
+- author: DrSmugleaf
+  changes:
+  - message: Fixed hyposprays not having a delay on use for medically unskilled marines.
+    type: Fix
+  id: 461
+  time: '2024-07-25T22:02:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3272
+- author: DrSmugleaf
+  changes:
+  - message: Fixed weapons specialist ammo erroneously saying that a limit was reached
+      when trying to buy them. This limit only applies to kits.
+    type: Fix
+  id: 462
+  time: '2024-07-25T22:01:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3271
 Name: RMC14
 Order: -1
