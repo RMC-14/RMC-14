@@ -17,5 +17,5 @@
     max: 300
     evolvesTo: [ ]
   - type: Tackle
-    threshold: 2
-    stun: 20 #lol
+    threshold: 5
+    stun: 8
