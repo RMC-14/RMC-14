@@ -21,7 +21,7 @@ public sealed partial class CMVendorSection
     
     // Only used by Spec Vendors to mark the kit section for RMCVendorSpecialistComponent logic.
     [DataField]
-    public int SharedSpecLimit;
+    public int? SharedSpecLimit = null;
 }
 
 [DataDefinition]
