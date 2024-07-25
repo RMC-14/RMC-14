@@ -3727,5 +3727,20 @@
   id: 450
   time: '2024-07-25T05:37:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3256
+- author: DrSmugleaf
+  changes:
+  - message: Fixed tackle stacks lasting for longer than intended. All tackle stacks
+      now expire after a fixed 4 seconds for all xenonid castes, after which they
+      all need to be reapplied. This specially affects castes with long stun times
+      and makes it harder for a single xenonid to keep many people down at the same
+      time.
+    type: Fix
+  - message: Fixed a graphical client bug where tackling would sometimes briefly knockdown
+      a marine then instantly expire, or make a marine be permanently horizontal until
+      tackled down again.
+    type: Fix
+  id: 451
+  time: '2024-07-25T05:56:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3257
 Name: RMC14
 Order: -1
