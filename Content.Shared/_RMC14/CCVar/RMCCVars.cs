@@ -107,4 +107,6 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCCorrosiveAcidTickDelaySeconds =
         CVarDef.Create("rmc.corrosive_acid_tick_delay_seconds", 10, CVar.REPLICATED | CVar.SERVER);
+    public static readonly CVarDef<string> RMCCorrosiveAcidDamageType =
+        CVarDef.Create("rmc.corrosive_acid_damage_type", "Heat", CVar.REPLICATED | CVar.SERVER);
 }

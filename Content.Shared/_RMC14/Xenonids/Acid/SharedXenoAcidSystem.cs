@@ -129,13 +129,14 @@ public sealed class SharedXenoAcidSystem : EntitySystem
 
         var time = _timing.CurTime;
         var damageTickSeconds = _config.GetCVar(RMCCVars.RMCCorrosiveAcidTickDelaySeconds);
+        var damageType = _config.GetCVar(RMCCVars.RMCCorrosiveAcidDamageType);
 
         var damageableCorrodingQuery = EntityQueryEnumerator<DamageableCorrodingComponent>();
         while (damageableCorrodingQuery.MoveNext(out var uid, out var damageableCorrodingComponent))
         {
             if (time > damageableCorrodingComponent.LastDamagedAt.Add(TimeSpan.FromSeconds(damageTickSeconds)))
             {
-                DamageSpecifier damage = new(_prototypeManager.Index<DamageTypePrototype>("Heat"), damageableCorrodingComponent.Dps * damageTickSeconds);
+                DamageSpecifier damage = new(_prototypeManager.Index<DamageTypePrototype>(damageType), damageableCorrodingComponent.Dps * damageTickSeconds);
                 _damageable.TryChangeDamage(uid, damage, true);
                 damageableCorrodingComponent.LastDamagedAt = time;
             }
