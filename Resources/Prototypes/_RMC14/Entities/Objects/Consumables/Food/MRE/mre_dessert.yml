@@ -22,7 +22,7 @@
   parent: CMMREDessertComponentBase
   id: CMMREComponentChocolateBrownie
   name: MRE component (chocolate brownie)
-  description: An MRE side component. Contains a sweet dessert, to be eaten after the main (or before, if you're rebellious). This one is chocolate brownie.
+  description: An MRE side component. Contains a sweet dessert, to be eaten after the main (or before, if you're rebellious). This one is a chocolate brownie.
   components:
   - type: SpawnItemsOnUse
     items:
@@ -32,7 +32,7 @@
   parent: CMMREDessertComponentBase
   id: CMMREComponentSugarCookie
   name: MRE component (sugar cookie)
-  description: An MRE side component. Contains a sweet dessert, to be eaten after the main (or before, if you're rebellious). This one is sugar cookie.
+  description: An MRE side component. Contains a sweet dessert, to be eaten after the main (or before, if you're rebellious). This one is a sugar cookie.
   components:
   - type: SpawnItemsOnUse
     items:
@@ -42,7 +42,7 @@
   parent: CMMREDessertComponentBase
   id: CMMREComponentCocoBar
   name: MRE component (coco bar)
-  description: An MRE side component. Contains a sweet dessert, to be eaten after the main (or before, if you're rebellious). This one is coco bar.
+  description: An MRE side component. Contains a sweet dessert, to be eaten after the main (or before, if you're rebellious). This one is a coco bar.
   components:
   - type: SpawnItemsOnUse
     items:
@@ -104,7 +104,7 @@
   parent: CMMREFoodDessert
   id: CMMREFoodChocolateBrownie
   name: chocolate brownie
-  description: The contents of a Marine Standard issue MRE. This one is chocolate brownie.
+  description: The contents of a Marine Standard issue MRE. This one is a chocolate brownie.
   components:
   - type: Sprite
     state: chocolate_brownie
@@ -116,7 +116,7 @@
   parent: CMMREFoodDessert
   id: CMMREFoodSugarCookie
   name: sugar cookie
-  description: The contents of a Marine Standard issue MRE. This one is sugar cookie.
+  description: The contents of a Marine Standard issue MRE. This one is a sugar cookie.
   components:
   - type: Sprite
     state: sugar_cookie
@@ -128,7 +128,7 @@
   parent: CMMREFoodDessert
   id: CMMREFoodCocoBar
   name: coco bar
-  description: The contents of a Marine Standard issue MRE. This one is coco bar.
+  description: The contents of a Marine Standard issue MRE. This one is a coco bar.
   components:
   - type: Sprite
     state: coco_bar

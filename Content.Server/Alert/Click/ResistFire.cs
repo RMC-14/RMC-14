@@ -1,5 +1,6 @@
 using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
+using Content.Shared._RMC14.Xenonids.Projectile.Spit;
 using Content.Shared.Alert;
 using JetBrains.Annotations;
 
@@ -20,6 +21,8 @@ namespace Content.Server.Alert.Click
             {
                 entManager.System<FlammableSystem>().Resist(player, flammable);
             }
+
+            entManager.System<XenoSpitSystem>().Resist(player);
         }
     }
 }

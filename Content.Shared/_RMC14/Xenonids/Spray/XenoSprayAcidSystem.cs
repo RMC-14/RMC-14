@@ -173,7 +173,7 @@ public sealed class XenoSprayAcidSystem : EntitySystem
                 continue;
 
             var comp = EnsureComp<SprayAcidedComponent>(uid);
-            comp.DamagePerSecond = acid.Comp.BarricadeDamage;
+            comp.Damage = acid.Comp.BarricadeDamage;
             comp.ExpireAt = time + acid.Comp.BarricadeDuration;
             Dirty(uid, comp);
         }
@@ -236,7 +236,7 @@ public sealed class XenoSprayAcidSystem : EntitySystem
                 continue;
 
             acided.NextDamageAt = time + acided.DamageEvery;
-            _damageable.TryChangeDamage(uid, acided.DamagePerSecond);
+            _damageable.TryChangeDamage(uid, acided.Damage);
         }
     }
 }

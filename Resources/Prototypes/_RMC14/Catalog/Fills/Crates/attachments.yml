@@ -117,7 +117,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentBipod
+      - id: RMCAttachmentBipod
         amount: 6
 
 - type: entity

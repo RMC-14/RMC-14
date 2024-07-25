@@ -7,7 +7,7 @@ public sealed class OnCollideSystem : SharedOnCollideSystem
 {
     [Dependency] private readonly ChatSystem _chat = default!;
 
-    protected override void DoNewCollide(Entity<DamageOnCollideComponent> ent, EntityUid other)
+    protected override void DoEmote(Entity<DamageOnCollideComponent> ent, EntityUid other)
     {
         if (ent.Comp.Emote is { } emote)
             _chat.TryEmoteWithChat(other, emote);

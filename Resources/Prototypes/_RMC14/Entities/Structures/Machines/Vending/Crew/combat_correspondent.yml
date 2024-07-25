@@ -1,0 +1,70 @@
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechCrewCombatCorrespondent
+  name: ColMarTech Combat Correspondent Equipment Rack
+  description: An automated rack hooked up to a colossal storage of Reporter standard-issue equipment.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessPress" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMCorrespondent
+    sections:
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: RMCVendorBundleCrewCombatCorrespondent
+      # Portable Press Fax Machine - /obj/item/device/fax_backpack
+      - id: RMCCameraBroadcasting
+      - id: CMSatchel
+    - name: Uniform
+      choices: { CMUniform: 1 }
+      entries:
+      - id: RMCJumpsuitCorrespondentBlack
+        name: black uniform
+      - id: RMCJumpsuitCorrespondentOrange
+        name: orange uniform
+      - id: RMCJumpsuitCorrespondentRed
+        name: red uniform
+    - name: Armor
+      choices: { CMArmor: 1 }
+      entries:
+      - id: CMArmorPress
+      - id: RMCCoatCorrespondentBlue
+        name: blue vest
+      # black vest
+      - id: RMCCoatCorrespondentBlack
+        name: black coat
+      - id: RMCCoatCorrespondentGreen
+        name: green coat
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMArmorHelmetPress
+    - name: Refills
+      entries:
+      # /obj/item/device/camera 10
+      # /obj/item/device/camera_film 5
+      # /obj/item/device/toner 5
+      # /obj/item/storage/box/tapes 15
+      - id: CMPaper
+        amount: 30
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleCrewCombatCorrespondent
+  name: essential reporter's set
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/paper.rsi
+    state: pen
+  - type: CMVendorBundle
+    bundle:
+    - RMCFlashlight
+    - CMPen
+    # binoculars
+    - CMClipboard # notepad
+    # taperecorder

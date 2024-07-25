@@ -1,6 +1,23 @@
-# TODO RMC14 sniper barrel
 - type: entity
+  abstract: true
   parent: CMBaseWeaponRifle
+  id: RMCBaseWeaponSniperRifle
+  components:
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.696
+    baseSprint: 0.559
+  - type: WieldDelay
+    baseDelay: 0.8
+
+- type: entity
+  parent: RMCBaseWeaponSniperRifle
   id: CMM96SSniperRifle
   name: M96S scoped rifle
   description: "A heavy sniper rifle manufactured by Aegis Armaments. It has a scope system and fires armor penetrating rounds out of a 15-round magazine.
@@ -20,21 +37,21 @@
     size: Large
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s.rsi
+  - type: Tag
+    tags:
+    - CMM96SSniperRifle
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 12
   - type: Gun
-    minAngle: 50
-    maxAngle: 50
-    fireRate: 0.5
-    selectedMode: SemiAuto
-    availableModes:
-    - SemiAuto
+    shotsPerBurst: 1
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_sniper.ogg
-  - type: GunWieldBonus
-    minAngle: -50
-    maxAngle: -50
-  - type: WieldableSpeedModifiers
-    baseWalk: 0.696
-    baseSprint: 0.559
+  - type: RMCSelectiveFire
+    recoilWielded: 1
+    scatterWielded: 6
+    baseFireRate: 0.667
   - type: WieldDelay
     baseDelay: 1.2
   - type: ItemSlots
@@ -65,3 +82,13 @@
         whitelist:
           tags:
           - RMCM96SIntegratedScope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBipod
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-underbarrel: 0.21875, -0.343
+
+- type: Tag
+  id: CMM96SSniperRifle

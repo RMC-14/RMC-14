@@ -150,9 +150,9 @@
         amount: 15
 #      - id: Marine Chestrig
 #        amount: 15
-      - id: CMBackpackMarineTech
-        amount: 15
       - id: CMSatchelMarineTech
+        amount: 15
+      - id: RMCSatchelWelderChestrig
         amount: 15
       - id: CMSatchelMedical
         amount: 15
@@ -170,8 +170,8 @@
       entries:
       - id: CMBeltMarine
         amount: 15
-#      - id: M276 Pattern M40 Grenade Rig
-#        amount: 10
+      - id: RMCBeltGrenade
+        amount: 10
 #      - id: M276 Pattern Shotgun Shell Loading Rig
 #        amount: 15
 #      - id: M276 Pattern General Pistol Holster Rig
@@ -428,8 +428,8 @@
       entries:
       - id: RMCAttachmentB8SmartScope
         amount: 2
-      #- id: RMCAttachmentMagneticHarness
-      #  amount: 5
+      - id: RMCAttachmentMagneticHarness
+        amount: 5
       - id: RMCAttachmentS42xTelescopicMiniscope
         amount: 2
 #      - id: RMCAttachmentS5RedDotSight # UNCOMMENT THIS WHEN ACCURACY IS IMPLEMENTED
@@ -442,8 +442,8 @@
       entries:
       - id: RMCAttachmentAngledGrip
         amount: 3
-#      - id: CMAttachmentBipod
-#        amount: 3
+      - id: RMCAttachmentBipod
+        amount: 3
       - id: RMCAttachmentBurstFireAssembly
         amount: 2
       - id: RMCAttachmentGyroscopicStabilizer
@@ -470,5 +470,5 @@
         amount: 2
       - id: RMCAttachmentM54CStockSolid
         amount: 2
-#      - id: RMCAttachmentM44MagnumSharpshooterStock
-#        amount: 2
+      - id: RMCAttachmentM44MagnumSharpshooterStock
+        amount: 2

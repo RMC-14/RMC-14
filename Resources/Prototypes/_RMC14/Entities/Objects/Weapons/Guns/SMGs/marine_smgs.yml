@@ -7,21 +7,22 @@
     size: Large
   - type: AmmoCounter
   - type: Gun
-    minAngle: 20
-    maxAngle: 75
-    angleIncrease: 25
-    angleDecay: 45
-    fireRate: 7
     selectedMode: FullAuto
     availableModes:
     - SemiAuto
     - Burst
     - FullAuto
-  - type: GunWieldBonus
-    minAngle: -20
-    maxAngle: -50
-    angleIncrease: -5
-    angleDecay: 10
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    modifiers:
+      FullAuto:
+        maxScatterModifier: 12
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
   - type: WieldableSpeedModifiers
     baseWalk: 0.92
     baseSprint: 0.864
@@ -48,8 +49,32 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63.rsi
   - type: Gun
+    shotsPerBurst: 3
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m63.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilWielded: 1
+    recoilUnwielded: 1
+    scatterWielded: 14
+    scatterUnwielded: 14
+    baseFireRate: 6.667
+    burstScatterMult: 4
+    modifiers:
+      Burst:
+        fireDelay: 0.0999
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+      FullAuto:
+        maxScatterModifier: 3
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
   - type: ItemSlots
     slots:
       gun_magazine:
