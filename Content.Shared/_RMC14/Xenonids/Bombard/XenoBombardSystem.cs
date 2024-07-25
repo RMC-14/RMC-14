@@ -37,7 +37,7 @@ public sealed class XenoBombardSystem : EntitySystem
         _audio.PlayPredicted(ent.Comp.PrepareSound, ent, ent);
 
         var ev = new XenoBombardDoAfterEvent { Coordinates = target };
-        var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent);
+        var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent) { BreakOnMove = true };
         _doAfter.TryStartDoAfter(doAfter);
     }
 

@@ -1,5 +1,6 @@
 ﻿using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -11,6 +12,15 @@ public sealed partial class DamageOverTimeComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
     public DamageSpecifier Damage = new();
+
+    [DataField, AutoNetworkedField]
+    public DamageSpecifier? ArmorPiercingDamage = new();
+
+    [DataField(required: true), AutoNetworkedField]
+    public DamageSpecifier BarricadeDamage = new();
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? BarricadeSound = new SoundCollectionSpecifier("XenoAcidSizzle");
 
     [DataField, AutoNetworkedField]
     public TimeSpan DamageEvery = TimeSpan.FromSeconds(1);
@@ -26,4 +36,7 @@ public sealed partial class DamageOverTimeComponent : Component
 
     [DataField, AutoNetworkedField]
     public ProtoId<EmotePrototype>? Emote = "Scream";
+
+    [DataField, AutoNetworkedField]
+    public string? Popup;
 }

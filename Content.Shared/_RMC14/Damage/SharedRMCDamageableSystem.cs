@@ -1,4 +1,6 @@
 ﻿using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Entrenching;
+using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
@@ -15,30 +17,39 @@ using Content.Shared.Inventory;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Silicons.Borgs;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Damage;
 
 public abstract class SharedRMCDamageableSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly List<string> _types = [];
     private readonly HashSet<Entity<MarineComponent>> _marines = new();
 
+    private EntityQuery<BarricadeComponent> _barricadeQuery;
     private EntityQuery<DamageableComponent> _damageableQuery;
     private EntityQuery<MobStateComponent> _mobStateQuery;
 
     public override void Initialize()
     {
+        _barricadeQuery = GetEntityQuery<BarricadeComponent>();
         _damageableQuery = GetEntityQuery<DamageableComponent>();
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
 
@@ -214,8 +225,28 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
 
                 _damageable.TryChangeDamage(marine, damage.Damage);
 
+                if (damage.ArmorPiercingDamage != null)
+                    _damageable.TryChangeDamage(marine, damage.ArmorPiercingDamage, true);
+
                 if (damage.Emote is { } emote)
                     DoEmote(uid, emote);
+
+                if (damage.Popup is { } popup)
+                    _popup.PopupEntity(popup, marine, marine);
+            }
+
+            var anchoredEnumerator = _rmcMap.GetAnchoredEntitiesEnumerator(uid);
+            while (anchoredEnumerator.MoveNext(out var anchored))
+            {
+                if (!_barricadeQuery.HasComp(anchored))
+                    continue;
+
+                _damageable.TryChangeDamage(anchored, damage.BarricadeDamage);
+
+                // EXTREMELY FAITHFUL REMAKE
+                // (i don't want to track this properly right now please god get me out of spitter/boiler code)
+                if (_random.Prob(0.75f))
+                    _audio.PlayPvs(damage.BarricadeSound, uid);
             }
         }
     }
