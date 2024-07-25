@@ -88,3 +88,132 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+
+
+# Tables
+
+- type: construction
+  parent: RMC
+  id: RMCTable
+  name: table
+  description: A square metal surface resting on four legs. Useful to put stuff on.
+  graph: RMCTable
+  startNode: start
+  targetNode: Tan
+  category: construction-category-cm-furniture
+  icon:
+    sprite: _RMC14/Structures/Furniture/Tables/standard.rsi
+    state: full
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
+  id: RMCTableReinforced
+  name: reinforced table
+  description: A square metal surface resting on four legs. This one has side panels, making it useful as a desk.
+  graph: RMCTable
+  startNode: start
+  targetNode: Reinforced
+  category: construction-category-cm-furniture
+  icon:
+    sprite: _RMC14/Structures/Furniture/Tables/reinforced.rsi
+    state: full
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
+  id: RMCTableWood
+  name: wooden table
+  description: A square wood surface resting on four legs. Useful to put stuff on.
+  graph: RMCTable
+  startNode: start
+  targetNode: Wood
+  category: construction-category-cm-furniture
+  icon:
+    sprite: _RMC14/Structures/Furniture/Tables/wood.rsi
+    state: full
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
+  id: RMCTableWoodPoor
+  name: poor wooden table
+  description: A semi-poorly constructed wood surface resting on four legs. Useful to put stuff on.
+  graph: RMCTable
+  startNode: start
+  targetNode: PoorWood
+  category: construction-category-cm-furniture
+  icon:
+    sprite: _RMC14/Structures/Furniture/Tables/poor_wood.rsi
+    state: full
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
+  id: RMCTableWoodFancy
+  name: fancy wooden table
+  description: A nicely crafted mahogany wood surface resting on four legs. Useful to put stuff on.
+  graph: RMCTable
+  startNode: start
+  targetNode: FancyWood
+  category: construction-category-cm-furniture
+  icon:
+    sprite: _RMC14/Structures/Furniture/Tables/fancy_wood.rsi
+    state: full
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
+  id: RMCTableGambling
+  name: gambling table
+  description: A curved wood and carpet surface resting on four legs. Used for gambling games.
+  graph: RMCTable
+  startNode: start
+  targetNode: Gambling
+  category: construction-category-cm-furniture
+  icon:
+    sprite: _RMC14/Structures/Furniture/Tables/gambling.rsi
+    state: full
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
+  id: RMCTableAlmayer
+  name: table
+  description: A square metal surface resting on four legs. Useful to put stuff on. Can be flipped in emergencies to act as cover.
+  graph: RMCTable
+  startNode: start
+  targetNode: Almayer
+  category: construction-category-cm-furniture
+  icon:
+    sprite: _RMC14/Structures/Furniture/Tables/almayer.rsi
+    state: full
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked

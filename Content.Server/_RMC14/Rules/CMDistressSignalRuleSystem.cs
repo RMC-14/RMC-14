@@ -165,6 +165,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         SubscribeLocalEvent<CrashLandOnTouchComponent, StartCollideEvent>(OnCrashLandOnTouchStartCollide);
 
+        SubscribeLocalEvent<DropshipHijackLandedEvent>(OnDropshipHijackLanded);
+
         Subs.CVar(_config, RMCCVars.RMCFTLCrashLand, v => _crashLandEnabled = v, true);
         Subs.CVar(_config, RMCCVars.RMCPlanetMaps, v => _planetMaps = v, true);
         Subs.CVar(_config, RMCCVars.CMMarinesPerXeno, v => _defaultMarinesPerXeno = v, true);
@@ -566,6 +568,19 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             return;
 
         TryCrashLand((args.OtherEntity, crashLandable));
+    }
+
+    private void OnDropshipHijackLanded(ref DropshipHijackLandedEvent ev)
+    {
+        var rules = QueryActiveRules();
+        while (rules.MoveNext(out _, out var rule, out _))
+        {
+            if (rule.HijackSongPlayed)
+                break;
+
+            rule.HijackSongPlayed = true;
+            _audio.PlayGlobal(rule.HijackSong, Filter.Broadcast(), true);
+        }
     }
 
     private void TryCrashLand(Entity<CrashLandableComponent> crashLandable)

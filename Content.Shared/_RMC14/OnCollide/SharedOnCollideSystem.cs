@@ -1,4 +1,5 @@
-﻿using Content.Shared.Damage;
+﻿using Content.Shared._RMC14.Xenonids.Projectile.Spit;
+using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Map;
@@ -13,6 +14,7 @@ public abstract class SharedOnCollideSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly XenoSpitSystem _xenoSpit = default!;
 
     private EntityQuery<CollideChainComponent> _collideChainQuery;
     private EntityQuery<DamageOnCollideComponent> _damageOnCollideQuery;
@@ -46,13 +48,15 @@ public abstract class SharedOnCollideSystem : EntitySystem
 
         if (ent.Comp.Chain == null || AddToChain(ent.Comp.Chain.Value, other))
         {
-            _damageable.TryChangeDamage(other, ent.Comp.ChainDamage);
+            _damageable.TryChangeDamage(other, ent.Comp.Damage);
             DoNewCollide(ent, other);
         }
         else
         {
-            _damageable.TryChangeDamage(other, ent.Comp.Damage);
+            _damageable.TryChangeDamage(other, ent.Comp.ChainDamage);
         }
+
+        _xenoSpit.SetAcidCombo(other, ent.Comp.AcidComboDuration, ent.Comp.AcidComboDamage, ent.Comp.AcidComboParalyze);
     }
 
     protected virtual void DoNewCollide(Entity<DamageOnCollideComponent> ent, EntityUid other)

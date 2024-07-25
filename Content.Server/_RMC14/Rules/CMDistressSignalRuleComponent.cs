@@ -69,6 +69,12 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan AbandonedDelay = TimeSpan.FromMinutes(5);
 
+    [DataField]
+    public SoundSpecifier HijackSong = new SoundCollectionSpecifier("RMCHijack", AudioParams.Default.WithVolume(-8));
+
+    [DataField]
+    public bool HijackSongPlayed;
+
     // TODO RMC14
     // [DataField]
     // public SoundSpecifier MajorMarineAudio = new SoundCollectionSpecifier("CMMarineMajor");

@@ -153,6 +153,15 @@
     solution: tank
   - type: DrawableSolution
     solution: tank
+    
+- type: entity
+  parent: RMCSatchelWelder
+  id: RMCSatchelWelderChestrig
+  name: technician welder chestrig
+  description: A specialized Chestrig worn by technicians and engineers. It carries one medium fuel tank for quick welder refueling and use.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/welder_chestrig.rsi
 
 - type: entity
   parent: CMSatchel

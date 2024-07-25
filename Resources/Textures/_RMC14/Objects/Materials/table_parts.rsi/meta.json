@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/6791699de749afc1c62bc65ec6f2326a00b3bb61/icons/obj/items/items.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "almayer"
+    },
+    {
+      "name": "tan"
+    },
+    {
+      "name": "wood"
+    },
+    {
+      "name": "fancy_wood"
+    },
+    {
+      "name": "poor_wood"
+    },
+    {
+      "name": "gamble"
+    },
+    {
+      "name": "reinforced"
+    }
+  ]
+}
