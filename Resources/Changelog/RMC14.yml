@@ -3879,5 +3879,21 @@
   id: 456
   time: '2024-07-25T11:08:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3258
+- author: 0xRainy
+  changes:
+  - message: Xenos can no longer interact with a LOT of items
+    type: Fix
+  id: 457
+  time: '2024-07-25T11:14:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3223
+- author: DrSmugleaf
+  changes:
+  - message: Added the missing requirement for the Queen to be in her ovipositor for
+      other xenonids to gain evolution points past round-start. After 5 minutes pass,
+      xenonids will not gain evolution points if the Queen is not ovipositing.
+    type: Fix
+  id: 458
+  time: '2024-07-25T11:14:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3260
 Name: RMC14
 Order: -1
