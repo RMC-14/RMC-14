@@ -26,6 +26,17 @@
     contents:
     - id: CMBoxMagazineRifleM54CExt
 
+# m54ce2
+- type: entity
+  parent: CMCrateAmmo
+  id: RMCCrateMagazineRifleM54CE2
+  name: M54CE2 HAR Magazines crate (HAR ammo box x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineRifleM54CE2
+    - id: CMMagazineRifleM54CE2
+
 # m4spr
 - type: entity
   parent: CMCrateAmmo

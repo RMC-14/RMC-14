@@ -15,7 +15,7 @@ public sealed class AttachableIFFSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<AttachableIFFComponent, AttachableAlteredEvent>(OnAttachableIFFAltered);
-        SubscribeLocalEvent<AttachableIFFComponent, AttachableGrantIFFEvent>(OnAttachableIFFGrant);
+        SubscribeLocalEvent<AttachableIFFComponent, AttachableRelayedEvent<AttachableGrantIFFEvent>>(OnAttachableIFFGrant);
 
         SubscribeLocalEvent<GunAttachableIFFComponent, AmmoShotEvent>(OnGunAttachableIFFAmmoShot);
     }
@@ -33,9 +33,9 @@ public sealed class AttachableIFFSystem : EntitySystem
         }
     }
 
-    private void OnAttachableIFFGrant(Entity<AttachableIFFComponent> ent, ref AttachableGrantIFFEvent args)
+    private void OnAttachableIFFGrant(Entity<AttachableIFFComponent> ent, ref AttachableRelayedEvent<AttachableGrantIFFEvent> args)
     {
-        args.Grants = true;
+        args.Args.Grants = true;
     }
 
     private void OnGunAttachableIFFAmmoShot(Entity<GunAttachableIFFComponent> ent, ref AmmoShotEvent args)

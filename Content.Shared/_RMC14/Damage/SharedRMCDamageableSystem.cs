@@ -19,6 +19,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Silicons.Borgs;
+using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -55,6 +56,15 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
 
         SubscribeLocalEvent<DamageMobStateComponent, MapInitEvent>(OnDamageMobStateMapInit);
 
+        SubscribeLocalEvent<DamageMultiplierFlagsComponent, DamageModifyEvent>(OnMultiplierFlagsDamageModify,
+            after:
+            [
+                typeof(SharedArmorSystem), typeof(BlockingSystem), typeof(InventorySystem), typeof(SharedBorgSystem),
+                typeof(SharedMarineOrdersSystem), typeof(CMArmorSystem), typeof(SharedXenoPheromonesSystem)
+            ]);
+
+        SubscribeLocalEvent<GunDamageMultipliersComponent, AmmoShotEvent>(OnGunDamageMultipliersAmmoShot);
+
         SubscribeLocalEvent<MaxDamageComponent, BeforeDamageChangedEvent>(OnMaxBeforeDamageChanged);
         SubscribeLocalEvent<MaxDamageComponent, DamageModifyEvent>(OnMaxDamageModify,
             after:
@@ -68,6 +78,30 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     {
         ent.Comp.DamageAt = _timing.CurTime + ent.Comp.Cooldown;
         Dirty(ent);
+    }
+
+    private void OnMultiplierFlagsDamageModify(Entity<DamageMultiplierFlagsComponent> ent, ref DamageModifyEvent args)
+    {
+        if (!_damageableQuery.TryComp(ent, out var damageable) || !TryComp(args.Tool, out DamageMultipliersComponent? multComponent))
+            return;
+
+        foreach (var flag in multComponent.Multipliers.Keys)
+        {
+            if ((ent.Comp.Flags & flag) == DamageMultiplierFlag.None)
+                continue;
+
+            args.Damage *= multComponent.Multipliers[flag];
+        }
+
+    }
+
+    private void OnGunDamageMultipliersAmmoShot(Entity<GunDamageMultipliersComponent> ent, ref AmmoShotEvent args)
+    {
+        foreach (var projectile in args.FiredProjectiles)
+        {
+            var comp = EnsureComp<DamageMultipliersComponent>(projectile);
+            comp.Multipliers = ent.Comp.Multipliers;
+        }
     }
 
     private void OnMaxBeforeDamageChanged(Entity<MaxDamageComponent> ent, ref BeforeDamageChangedEvent args)

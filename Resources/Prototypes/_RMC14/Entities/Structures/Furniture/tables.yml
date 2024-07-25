@@ -28,6 +28,8 @@
   - type: Construction
     graph: RMCTable
     node: Tan
+  - type: DamageMultiplierFlags
+    flags: Breaching
 
 # Reinforced
 - type: entity

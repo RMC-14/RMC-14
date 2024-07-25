@@ -51,7 +51,7 @@
       #    CMM276M82FHolsterRig #TODO: Make this
       #    CMM276ShotgunShellLoadingRig #TODO: Make this
       - id: CMBeltUtility
-    #    CMM276M40GrenadeRigEmpty #TODO: Make this
+      - id: RMCBeltGrenade
     - name: Pouches
       choices: { CMPouch: 2 }
       entries:
