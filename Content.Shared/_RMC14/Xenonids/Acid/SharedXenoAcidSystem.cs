@@ -14,7 +14,7 @@ using Content.Shared._RMC14.CCVar;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
-public sealed class SharedXenoAcidSystem : EntitySystem
+public abstract class SharedXenoAcidSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
