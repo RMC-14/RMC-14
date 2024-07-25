@@ -3771,5 +3771,14 @@
   id: 453
   time: '2024-07-25T08:20:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/2941
+- author: DrSmugleaf
+  changes:
+  - message: Fixed devoured knife damage and attack rate being higher than intended
+      and not piercing armor. The damage is now a fixed 15, down from 45, and the
+      attacks per second have been lowered from 1 to 0.55.
+    type: Fix
+  id: 454
+  time: '2024-07-25T09:20:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3259
 Name: RMC14
 Order: -1
