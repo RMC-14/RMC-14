@@ -21,7 +21,10 @@ public sealed partial class XenoTailStabComponent : Component
     public DamageSpecifier TailDamage = new();
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier TailHitSound = new SoundCollectionSpecifier("XenoTailSwipe");
+    public SoundSpecifier SoundHit = new SoundCollectionSpecifier("XenoBite", AudioParams.Default.WithVolume(-3));
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier SoundMiss = new SoundCollectionSpecifier("XenoTailSwipe");
 
     [DataField, AutoNetworkedField]
     public float ChargeTime = 1; // TODO RMC14 implement this

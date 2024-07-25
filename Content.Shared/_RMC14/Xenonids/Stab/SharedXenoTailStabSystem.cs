@@ -203,7 +203,8 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
 
         DoLunge((stab, stab, transform), localPos, "WeaponArcThrust");
 
-        _audio.PlayPredicted(stab.Comp.TailHitSound, stab, stab);
+        var sound = actualResults.Count > 0 ? stab.Comp.SoundHit : stab.Comp.SoundMiss;
+        _audio.PlayPredicted(sound, stab, stab);
 
         var attackEv = new MeleeAttackEvent(stab);
         RaiseLocalEvent(stab, ref attackEv);
