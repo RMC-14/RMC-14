@@ -3902,5 +3902,15 @@
   id: 459
   time: '2024-07-25T11:44:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3261
+- author: DrSmugleaf
+  changes:
+  - message: Dropship travel and cooldown times are the default from 13 again, 100
+      seconds to travel and 120 seconds to cool down. This gives marines more time
+      to prepare after a hijack announcement. Be ready to cycle dropships or wait
+      for dropship upgrades outside of that.
+    type: Tweak
+  id: 460
+  time: '2024-07-25T12:54:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3263
 Name: RMC14
 Order: -1
