@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: hydroponicsTray
   name: hydroponics tray
   id: CMHydroponicsTray
@@ -34,4 +34,8 @@
     - state: over_harvest3
       map: [ "harvest_alert" ]
       visible: false
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 

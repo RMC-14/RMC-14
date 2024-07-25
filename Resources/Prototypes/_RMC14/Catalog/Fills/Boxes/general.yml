@@ -17,6 +17,10 @@
   - type: Tag
     tags:
     - CMBoxStorage
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: Tag
   id: CMBoxStorage

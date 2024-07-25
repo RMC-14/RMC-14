@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   name: match box
   parent: Matchbox
   id: CMMatchbox
@@ -9,3 +9,7 @@
     whitelist:
       tags:
       - Matchstick
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

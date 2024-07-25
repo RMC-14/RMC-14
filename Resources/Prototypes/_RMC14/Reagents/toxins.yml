@@ -1,0 +1,22 @@
+﻿- type: reagent
+  parent: CMReagent
+  id: RMCMolecularAcid
+  name: reagent-name-rmcmolecularacid
+  desc: reagent-desc-rmcmolecularacid
+  physicalDesc: reagent-physical-desc-acidic
+  color: "#669900"
+  unknown: true
+  metabolisms:
+    Poison:
+      metabolismRate: 0.01 # TODO RMC14 this is allegedly 0.05 in 13?
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Burn: 0.26 # Toxic 1
+            Toxin: 0.50 # Corrosive 2
+      - !type:PopupMessage
+        type: Local
+        visualType: SmallCaution
+        messages: [ "rmc-body-stings" ]
+        probability: 0.2

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: BaseStorageItem
   id: RMCBaseGunCase
   abstract: true
@@ -28,6 +28,10 @@
     grid:
     - 0,0,27,1
   - type: FixedItemSizeStorage
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCBaseGunCase

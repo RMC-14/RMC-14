@@ -109,4 +109,12 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.corrosive_acid_tick_delay_seconds", 10, CVar.REPLICATED | CVar.SERVER);
     public static readonly CVarDef<string> RMCCorrosiveAcidDamageType =
         CVarDef.Create("rmc.corrosive_acid_damage_type", "Heat", CVar.REPLICATED | CVar.SERVER);
+    public static readonly CVarDef<int> RMCTailStabMaxTargets =
+        CVarDef.Create("rmc.tail_stab_max_targets", 1, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCEvolutionPointsRequireOvipositorMinutes =
+        CVarDef.Create("rmc.evolution_points_require_ovipositor_minutes", 5, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCEvolutionPointsAccumulateBeforeMinutes =
+        CVarDef.Create("rmc.evolution_points_accumulate_before_minutes", 15, CVar.REPLICATED | CVar.SERVER);
 }

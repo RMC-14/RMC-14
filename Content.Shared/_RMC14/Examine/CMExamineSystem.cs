@@ -4,11 +4,13 @@ using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.HealthExaminable;
 using Content.Shared.Verbs;
+using Content.Shared.Whitelist;
 
 namespace Content.Shared._RMC14.Examine;
 
 public sealed class CMExamineSystem : EntitySystem
 {
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly HealthExaminableSystem _healthExaminable = default!;
     [Dependency] private readonly IdExaminableSystem _idExaminable = default!;
 
@@ -45,5 +47,13 @@ public sealed class CMExamineSystem : EntitySystem
                 args.PushMessage(_healthExaminable.CreateMarkup(ent, ent.Comp, damageable));
             }
         }
+    }
+
+    public bool CanExamine(Entity<BlockExamineComponent?> block, EntityUid user)
+    {
+        if (!Resolve(block, ref block.Comp, false))
+            return true;
+
+        return !_entityWhitelist.IsWhitelistPass(block.Comp.Whitelist, user);
     }
 }
