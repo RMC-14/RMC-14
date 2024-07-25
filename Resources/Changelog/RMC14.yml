@@ -3705,5 +3705,12 @@
   id: 447
   time: '2024-07-25T04:45:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3234
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Defibrillating someone now requires their armor to be off.
+    type: Tweak
+  id: 448
+  time: '2024-07-25T04:47:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3211
 Name: RMC14
 Order: -1
