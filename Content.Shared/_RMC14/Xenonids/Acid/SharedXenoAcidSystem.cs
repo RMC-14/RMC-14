@@ -9,6 +9,8 @@ using Content.Shared.Popups;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Robust.Shared.Configuration;
+using Content.Shared._RMC14.CCVar;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
@@ -22,6 +24,7 @@ public sealed class SharedXenoAcidSystem : EntitySystem
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
 
     public override void Initialize()
     {
@@ -125,8 +128,8 @@ public sealed class SharedXenoAcidSystem : EntitySystem
             return;
 
         var time = _timing.CurTime;
+        var damageTickSeconds = _config.GetCVar(RMCCVars.RMCCorrosiveAcidTickDelaySeconds);
 
-        var damageTickSeconds = 10;
         var damageableCorrodingQuery = EntityQueryEnumerator<DamageableCorrodingComponent>();
         while (damageableCorrodingQuery.MoveNext(out var uid, out var damageableCorrodingComponent))
         {
