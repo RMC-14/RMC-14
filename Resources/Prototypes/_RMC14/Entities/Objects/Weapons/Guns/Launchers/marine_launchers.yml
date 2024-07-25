@@ -193,7 +193,7 @@
     # This is a temporary hack to guarantee it will always go off after stopping even if it doesn't collide with anything.
     # Works for almost all gameplay purposes at least right now because even max range rockets are less than 0.2s and it's fast enough not matter.
   - type: ShootAtFixedPoint
-    ShootArcProj: false
+    shootArcProj: false
   - type: WieldableSpeedModifiers
     baseWalk: 0.696
     baseSprint: 0.559
