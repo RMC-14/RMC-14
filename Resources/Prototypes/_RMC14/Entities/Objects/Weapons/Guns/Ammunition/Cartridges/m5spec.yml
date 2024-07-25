@@ -106,8 +106,8 @@
     impactEffect: BulletImpactEffect
     damage:
       types:
-        Brute: 160
-        Burn: 150
+        Blunt: 160
+        Heat: 150
         # 10 brute damage + 150 brute and 150 burn to simulate direct explosive damage.
         # Temporary mechanic to make it consistent with intended main target damage.
     maxFixedRange: 5 # 6 tiles
