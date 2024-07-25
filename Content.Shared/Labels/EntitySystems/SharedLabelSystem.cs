@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Examine;
 using Content.Shared.Examine;
 using Content.Shared.Labels.Components;
 using Content.Shared.NameModifier.EntitySystems;
@@ -8,6 +9,8 @@ namespace Content.Shared.Labels.EntitySystems;
 public abstract partial class SharedLabelSystem : EntitySystem
 {
     [Dependency] protected readonly NameModifierSystem NameMod = default!;
+    [Dependency] private readonly CMExamineSystem _rmcExamine = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -36,6 +39,9 @@ public abstract partial class SharedLabelSystem : EntitySystem
             return;
 
         if (label.CurrentLabel == null)
+            return;
+
+        if (!_rmcExamine.CanExamine(uid, args.Examiner))
             return;
 
         var message = new FormattedMessage();
