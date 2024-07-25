@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: BaseItem
   id: RMCFlashlightBase
@@ -50,6 +50,10 @@
   - type: Tag
     tags:
     - Flashlight
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCFlashlightBase

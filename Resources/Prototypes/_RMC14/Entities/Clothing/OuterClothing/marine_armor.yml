@@ -1,4 +1,4 @@
-﻿# m3
+# m3
 - type: entity
   parent: RMCBaseArmor
   id: CMArmorM3Medium
@@ -120,6 +120,10 @@
     damageCoefficient: 0
     worn: false
   - type: RMCMagneticArmor
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMArmorM3Medium

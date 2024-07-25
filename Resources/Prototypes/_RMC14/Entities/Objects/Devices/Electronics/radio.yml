@@ -23,3 +23,7 @@
   - type: Tag
     tags:
     - Radio
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

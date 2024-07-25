@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CigPackBlack
   id: CMCigPackBlack
   components:
@@ -6,3 +6,7 @@
     whitelist:
       tags:
       - Cigarette
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
