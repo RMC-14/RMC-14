@@ -153,6 +153,11 @@
   - type: MovementIgnoreGravity
   - type: SlowOnPull
     multiplier: 0.6
+    slowdowns:
+    - multiplier: 0.5
+      whitelist:
+        components:
+        - Xeno
   - type: MobThresholds
     thresholds:
       0: Alive

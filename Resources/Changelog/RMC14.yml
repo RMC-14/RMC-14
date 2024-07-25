@@ -3697,5 +3697,79 @@
   id: 446
   time: '2024-07-24T11:30:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3232
+- author: Vermidia
+  changes:
+  - message: Parasites can crawl back into open eggs, and drone castes can also put
+      them back in
+    type: Add
+  id: 447
+  time: '2024-07-25T04:45:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3234
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Defibrillating someone now requires their armor to be off.
+    type: Tweak
+  id: 448
+  time: '2024-07-25T04:47:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3211
+- author: Vermidia
+  changes:
+  - message: Smartgunner combat-sight giving permanent far sight
+    type: Fix
+  id: 449
+  time: '2024-07-25T05:37:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3253
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenos being 20% faster than intended at pulling marines. Marine
+      on marine pull speed remains unchanged.
+    type: Fix
+  id: 450
+  time: '2024-07-25T05:37:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3256
+- author: DrSmugleaf
+  changes:
+  - message: Fixed tackle stacks lasting for longer than intended. All tackle stacks
+      now expire after a fixed 4 seconds for all xenonid castes, after which they
+      all need to be reapplied. This specially affects castes with long stun times
+      and makes it harder for a single xenonid to keep many people down at the same
+      time.
+    type: Fix
+  - message: Fixed a graphical client bug where tackling would sometimes briefly knockdown
+      a marine then instantly expire, or make a marine be permanently horizontal until
+      tackled down again.
+    type: Fix
+  id: 451
+  time: '2024-07-25T05:56:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3257
+- author: noctyrnal
+  changes:
+  - message: Ported Shiva's Snowball
+    type: Add
+  id: 452
+  time: '2024-07-25T07:57:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3119
+- author: Kaga
+  changes:
+  - message: Added the M5 Anti-Tank Launcher, the Demolitionist Weapon Specialist,
+      and their associated gear.
+    type: Add
+  - message: Added Demolitionist ammo to the requisition console.
+    type: Add
+  - message: Added M276 pattern grenade belts to most vendors they're supposed to
+      be in. They're empty, but can hold a decent amount of grenades.
+    type: Add
+  - message: Made limited max range possible for some weapons, which can differ between
+      ammo types. Currently, this only applies to the M5-ATL.
+    type: Add
+  - message: Fixed some bullets appearing backwards.
+    type: Fix
+  - message: Weapons specialists are now limited to 2 kits of each type, meaning that
+      there can ever only be 2 snipers, 2 grenadiers or 2 demolitionists. 13's limit
+      of 1 per will be introduced once we have more specialist kits.
+    type: Tweak
+  id: 453
+  time: '2024-07-25T08:20:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2941
 Name: RMC14
 Order: -1
