@@ -126,12 +126,18 @@ public sealed class XenoEggSystem : EntitySystem
     {
         if (TryComp(attached, out TransformComponent? xform))
             _transform.AnchorEntity(attached, xform);
+
+        var ev = new XenoOvipositorChangedEvent();
+        RaiseLocalEvent(ref ev);
     }
 
     private void OnXenoAttachedRemove(Entity<XenoAttachedOvipositorComponent> attached, ref ComponentRemove args)
     {
         if (!TerminatingOrDeleted(attached) && TryComp(attached, out TransformComponent? xform))
             _transform.Unanchor(attached, xform);
+
+        var ev = new XenoOvipositorChangedEvent();
+        RaiseLocalEvent(ref ev);
     }
 
     private void OnXenoMobStateChanged(Entity<XenoAttachedOvipositorComponent> ent, ref MobStateChangedEvent args)
@@ -308,7 +314,7 @@ public sealed class XenoEggSystem : EntitySystem
             if (HasComp<XenoParasiteComponent>(user))
             {
                 if (_mobState.IsDead(user.Value))
-                    return true; 
+                    return true;
 
                 SetEggState(egg, XenoEggState.Grown);
 

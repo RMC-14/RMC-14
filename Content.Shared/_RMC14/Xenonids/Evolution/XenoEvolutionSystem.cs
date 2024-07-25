@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids.Announce;
+using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
@@ -18,8 +20,10 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Prototypes;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -31,6 +35,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly ClimbSystem _climb = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
@@ -45,7 +50,11 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _xenoHive = default!;
 	[Dependency] private readonly SharedHandsSystem _hands = default!;
+
+    private TimeSpan _evolutionPointsRequireOvipositorAfter;
+    private TimeSpan _evolutionAccumulatePointsBefore;
 
 	private readonly HashSet<EntityUid> _climbable = new();
     private readonly HashSet<EntityUid> _doors = new();
@@ -59,6 +68,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         SubscribeLocalEvent<XenoDevolveComponent, XenoOpenDevolveActionEvent>(OnXenoOpenDevolveAction);
 
+        SubscribeLocalEvent<XenoEvolutionComponent, MapInitEvent>(OnXenoEvolveMapInit);
         SubscribeLocalEvent<XenoEvolutionComponent, XenoOpenEvolutionsActionEvent>(OnXenoEvolveAction);
         SubscribeLocalEvent<XenoEvolutionComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
         SubscribeLocalEvent<XenoEvolutionComponent, NewXenoEvolvedEvent>(OnXenoEvolutionNewEvolved);
@@ -67,6 +77,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
         SubscribeLocalEvent<XenoNewlyEvolvedComponent, PreventCollideEvent>(OnNewlyEvolvedPreventCollide);
 
         SubscribeLocalEvent<XenoEvolutionGranterComponent, NewXenoEvolvedEvent>(OnGranterEvolved);
+
+        SubscribeLocalEvent<XenoOvipositorChangedEvent>(OnOvipositorChanged);
 
         Subs.BuiEvents<XenoEvolutionComponent>(XenoEvolutionUIKey.Key,
             subs =>
@@ -79,11 +91,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
             {
                 subs.Event<XenoDevolveBuiMsg>(OnXenoDevolveBui);
             });
-    }
 
-    private void OnGranterEvolved(Entity<XenoEvolutionGranterComponent> ent, ref NewXenoEvolvedEvent args)
-    {
-        _xenoAnnounce.AnnounceSameHive(ent.Owner, Loc.GetString("rmc-new-queen"));
+        Subs.CVar(_config, RMCCVars.RMCEvolutionPointsRequireOvipositorMinutes, v => _evolutionPointsRequireOvipositorAfter = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCEvolutionPointsAccumulateBeforeMinutes, v =>  _evolutionAccumulatePointsBefore = TimeSpan.FromMinutes(v), true);
     }
 
     private void OnXenoOpenDevolveAction(Entity<XenoDevolveComponent> xeno, ref XenoOpenDevolveActionEvent args)
@@ -98,6 +108,11 @@ public sealed class XenoEvolutionSystem : EntitySystem
         _ui.OpenUi(xeno.Owner, XenoDevolveUIKey.Key, xeno);
     }
 
+    private void OnXenoEvolveMapInit(Entity<XenoEvolutionComponent> ent, ref MapInitEvent args)
+    {
+        _action.AddAction(ent, ref ent.Comp.Action, ent.Comp.ActionId);
+    }
+
     private void OnXenoEvolveAction(Entity<XenoEvolutionComponent> xeno, ref XenoOpenEvolutionsActionEvent args)
     {
         if (args.Handled)
@@ -105,6 +120,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         args.Handled = true;
         _ui.OpenUi(xeno.Owner, XenoEvolutionUIKey.Key, xeno);
+
+        var state = new XenoEvolveBuiState(LackingOvipositor());
+        _ui.SetUiState(xeno.Owner, XenoEvolutionUIKey.Key, state);
     }
 
     private void OnXenoEvolveBui(Entity<XenoEvolutionComponent> xeno, ref XenoEvolveBuiMsg args)
@@ -274,6 +292,24 @@ public sealed class XenoEvolutionSystem : EntitySystem
             args.Cancelled = true;
     }
 
+    private void OnGranterEvolved(Entity<XenoEvolutionGranterComponent> ent, ref NewXenoEvolvedEvent args)
+    {
+        _xenoAnnounce.AnnounceSameHive(ent.Owner, Loc.GetString("rmc-new-queen"));
+    }
+
+    private void OnOvipositorChanged(ref XenoOvipositorChangedEvent ev)
+    {
+        if (_net.IsClient)
+            return;
+
+        var xenos = EntityQueryEnumerator<ActorComponent, XenoEvolutionComponent>();
+        var state = new XenoEvolveBuiState(LackingOvipositor());
+        while (xenos.MoveNext(out var uid, out _, out _))
+        {
+            _ui.SetUiState(uid, XenoEvolutionUIKey.Key, state);
+        }
+    }
+
     private bool CanEvolvePopup(Entity<XenoEvolutionComponent> xeno, EntProtoId newXeno, bool doPopup = true)
     {
         if (!xeno.Comp.EvolvesTo.Contains(newXeno) && !xeno.Comp.EvolvesToWithoutPoints.Contains(newXeno))
@@ -328,15 +364,15 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (newXenoComp != null &&
             !newXenoComp.BypassTierCount &&
             TryComp(xeno, out XenoComponent? oldXenoComp) &&
-            TryComp(oldXenoComp.Hive, out HiveComponent? hive) &&
-            hive.TierLimits.TryGetValue(newXenoComp.Tier, out var value))
+            oldXenoComp.Hive is { } oldHive &&
+            _xenoHive.TryGetTierLimit(oldHive, newXenoComp.Tier, out var limit))
         {
             var existing = 0;
             var total = 0;
             var current = EntityQueryEnumerator<XenoComponent>();
             while (current.MoveNext(out var existingComp))
             {
-                if (existingComp.Hive != oldXenoComp.Hive)
+                if (existingComp.Hive != oldHive)
                     continue;
 
                 total++;
@@ -347,7 +383,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 existing++;
             }
 
-            if (total != 0 && existing / (float) total >= value)
+            if (total != 0 && existing / (float) total >= limit)
             {
                 if (doPopup)
                 {
@@ -450,6 +486,21 @@ public sealed class XenoEvolutionSystem : EntitySystem
         Dirty(evolution);
     }
 
+    public bool NeedsOvipositor()
+    {
+        return _gameTicker.RoundDuration() > _evolutionPointsRequireOvipositorAfter;
+    }
+
+    public bool HasOvipositor()
+    {
+        return HasLiving<XenoEvolutionGranterComponent>(1, e => HasComp<XenoAttachedOvipositorComponent>(e));
+    }
+
+    public bool LackingOvipositor()
+    {
+        return NeedsOvipositor() && !HasOvipositor();
+    }
+
     public override void Update(float frameTime)
     {
         var newly = EntityQueryEnumerator<XenoNewlyEvolvedComponent>();
@@ -493,10 +544,33 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        // TODO RMC14 ovipositor attached only after 5 minutes
         var time = _timing.CurTime;
         var roundDuration = _gameTicker.RoundDuration();
-        var hasGranter = HasLiving<XenoEvolutionGranterComponent>(1);
+        var needsOvipositor = NeedsOvipositor();
+        var hasGranter = needsOvipositor
+            ? HasOvipositor()
+            : HasLiving<XenoEvolutionGranterComponent>(1);
+        if (needsOvipositor)
+        {
+            var granters = EntityQueryEnumerator<XenoEvolutionGranterComponent>();
+            while (granters.MoveNext(out var uid, out var granter))
+            {
+                if (granter.GotOvipositorPopup)
+                    continue;
+
+                granter.GotOvipositorPopup = true;
+                Dirty(uid, granter);
+
+                _popup.PopupEntity("It is time to settle down and let your children grow.",
+                    uid,
+                    uid,
+                    PopupType.LargeCaution
+                );
+
+                _xenoHive.AnnounceNeedsOvipositorToSameHive(uid);
+            }
+        }
+
         var evolution = EntityQueryEnumerator<XenoEvolutionComponent>();
         while (evolution.MoveNext(out var uid, out var comp))
         {
@@ -506,17 +580,19 @@ public sealed class XenoEvolutionSystem : EntitySystem
             comp.LastPointsAt = time;
             Dirty(uid, comp);
 
-            if (comp.Action == null && CanEvolveAny((uid, comp)))
+            if (!comp.GotPopup && CanEvolveAny((uid, comp)))
             {
-                _action.AddAction(uid, ref comp.Action, comp.ActionId);
+                comp.GotPopup = true;
+                Dirty(uid, comp);
+
                 _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-ready"), uid, uid, PopupType.Large);
                 _audio.PlayEntity(comp.EvolutionReadySound, uid, uid);
                 continue;
             }
 
-            if (comp.Points < comp.Max || roundDuration < comp.AccumulatePointsBefore)
+            if (comp.Points < comp.Max || roundDuration < _evolutionAccumulatePointsBefore)
             {
-                if (roundDuration > comp.EvolveWithoutOvipositorFor && comp.RequiresGranter && !hasGranter)
+                if (needsOvipositor && comp.RequiresGranter && !hasGranter)
                     continue;
 
                 SetPoints((uid, comp), comp.Points + comp.PointsPerSecond);

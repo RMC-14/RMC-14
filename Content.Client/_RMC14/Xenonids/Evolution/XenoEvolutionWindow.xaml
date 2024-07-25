@@ -4,6 +4,10 @@
     Title="{Loc cm-xeno-available-evolutions}"
     MinSize="300 300">
     <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
-        <BoxContainer Orientation="Vertical" Name="EvolutionsContainer" Access="Public" />
+        <BoxContainer Orientation="Vertical">
+            <Label Name="PointsLabel" Access="Public" Text="Evolution points:" />
+            <RichTextLabel Name="OvipositorNeededLabel" Access="Public" />
+            <BoxContainer Orientation="Vertical" Name="EvolutionsContainer" Access="Public" />
+        </BoxContainer>
     </ScrollContainer>
 </cc:XenoEvolutionWindow>
