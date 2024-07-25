@@ -12,7 +12,4 @@ public sealed partial class TimedCorrodingComponent : Component
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan CorrodesAt;
-
-    [DataField, AutoNetworkedField]
-    public float ExpendableLightDps;
 }
