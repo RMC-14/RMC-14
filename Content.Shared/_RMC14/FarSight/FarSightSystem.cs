@@ -41,18 +41,7 @@ public sealed class FarSightSystem : EntitySystem
         Dirty(ent);
 
         var user = args.Performer;
-        if (ent.Comp.Enabled)
-        {
-            _eye.SetMaxZoom(user, ent.Comp.Zoom);
-            _eye.SetZoom(user, ent.Comp.Zoom);
-        }
-        else
-        {
-            if (TryComp<EyeComponent>(user, out var eye))
-                _eye.SetMaxZoom(user, eye.Zoom);
-
-            _eye.ResetZoom(user);
-        }
+        SetZoom(ent.Comp.Enabled, user, ent.Comp);
 
         _actions.SetToggled(ent.Comp.Action, ent.Comp.Enabled);
         _appearance.SetData(ent, FarSightItemVisuals.Active, ent.Comp.Enabled);
@@ -65,18 +54,7 @@ public sealed class FarSightSystem : EntitySystem
         if (!_inventory.InSlotWithFlags((ent, null, null), ent.Comp.Slots))
             return;
 
-        if (ent.Comp.Enabled)
-        {
-            _eye.SetMaxZoom(user, ent.Comp.Zoom);
-            _eye.SetZoom(user, ent.Comp.Zoom);
-        }
-        else
-        {
-            if (TryComp<EyeComponent>(user, out var eye))
-                _eye.SetMaxZoom(user, eye.Zoom);
-
-            _eye.ResetZoom(user);
-        }
+        SetZoom(ent.Comp.Enabled, user, ent.Comp);
     }
 
     private void OnFarSightUnequipped(Entity<FarSightItemComponent> ent, ref GotUnequippedEvent args)
@@ -86,9 +64,22 @@ public sealed class FarSightSystem : EntitySystem
         if (_inventory.InSlotWithFlags((ent, null, null), ent.Comp.Slots))
             return;
 
-        if (TryComp<EyeComponent>(user, out var eye))
-            _eye.SetMaxZoom(user, eye.Zoom);
+        SetZoom(false, user, ent.Comp);
+    }
 
-        _eye.ResetZoom(user);
+    private void SetZoom(bool activated, EntityUid user, FarSightItemComponent comp)
+    {
+        if (activated)
+        {
+            _eye.SetMaxZoom(user, comp.Zoom);
+            _eye.SetZoom(user, comp.Zoom);
+        }
+        else
+        {
+            if (TryComp<EyeComponent>(user, out var eye))
+                _eye.SetMaxZoom(user, eye.Zoom);
+
+            _eye.ResetZoom(user);
+        }
     }
 }
