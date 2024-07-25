@@ -858,6 +858,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             "lv624" => "LV-624",
             "solaris" => "Solaris Ridge",
             "prison" => "Fiorina Science Annex",
+            "shiva" => "Shivas Snowball",
             _ => SelectedPlanetMapName,
         };
 
