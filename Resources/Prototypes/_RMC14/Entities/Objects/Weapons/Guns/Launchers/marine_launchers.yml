@@ -1,6 +1,63 @@
 - type: entity
+  abstract: true
+  parent: [ BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder ]
+  id: RMCBaseWeaponGrenadeLauncher
+  components:
+  - type: Item
+    size: Large
+  - type: Gun
+    projectileSpeed: 20
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
+    resetOnHandSelected: false
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 2
+  - type: ShootAtFixedPoint
+    shootArcProj: true
+  - type: OnShootTriggerAmmoTimer
+    delay: 1
+    beepInterval: 2
+    initialBeepDelay: 0
+    beepSound:
+      path: "/Audio/Effects/beep1.ogg"
+      params:
+        volume: 5
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - LauncherCompatibleGrenade
+    capacity: 1
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
+  - type: AmmoCounter
+  - type: Wieldable
+  - type: GunRequiresWield
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.696
+    baseSprint: 0.559
+  - type: WieldDelay
+    baseDelay: 0.8
+  - type: Clothing
+    slots:
+    - suitStorage
+  - type: StaticPrice
+    price: 500
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+
+
+- type: entity
   name: M83 grenade launcher
-  parent: [ BaseWeaponLauncher, CMBaseWeaponGun, RMCBaseAttachableHolder ]
+  parent: [ RMCBaseWeaponGrenadeLauncher ]
   id: WeaponLauncherM83
   description: A heavy, 6-shot grenade launcher used by the UNMC for area denial and big explosions.
   components:
@@ -11,58 +68,19 @@
       map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83.rsi
-    quickEquip: true
-    slots:
-    - Back
-    - suitStorage
-  - type: AmmoCounter
-  - type: Gun
-    fireRate: 0.23
-    selectedMode: SemiAuto
-    availableModes:
-    - SemiAuto
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
-    resetOnHandSelected: false
-  - type: BallisticAmmoProvider
-    whitelist:
-      tags:
-      - LauncherCompatibleGrenade
-    capacity: 6
-    soundInsert:
-      path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
-    proto: CMGrenadeHighExplosive
-    mayTransfer: True
-  - type: OnShootTriggerAmmoTimer
-    delay: 1
-    beepInterval: 2 # 2 beeps total (at 0 and 2)
-    initialBeepDelay: 0
-    beepSound:
-      path: "/Audio/Effects/beep1.ogg"
-      params:
-        volume: 5
+  - type: RMCSelectiveFire
+    baseFireRate: 0.3125
   - type: GunUserWhitelist
     whitelist:
       components:
       - GrenadeSpecWhitelist
+  - type: BallisticAmmoProvider
+    capacity: 6
+    proto: CMGrenadeHighExplosive
   - type: Corrodible
     isCorrodible: false
   - type: ExplosionResistance
     damageCoefficient: 0
-  - type: ShootAtFixedPoint
-    shootArcProj: true
-  - type: Wieldable
-  - type: GunRequiresWield
-  - type: WieldableSpeedModifiers
-    baseWalk: 0.696
-    baseSprint: 0.559
-  - type: WieldDelay
-    baseDelay: 0.8
-  - type: GunShowUseDelay
-  - type: UseDelay
-  - type: GunIFF
-  - type: RMCNameItemOnVend
-    item: PrimaryGun
   - type: AttachableHolder
     slots:
       rmc-aslot-rail:
@@ -75,7 +93,7 @@
 
 - type: entity
   name: M79 grenade launcher
-  parent: [ BaseWeaponLauncher, CMBaseWeaponGun, RMCBaseAttachableHolder ]
+  parent: [ RMCBaseWeaponGrenadeLauncher ]
   id: CMWeaponLauncherM79
   description: The M79 grenade launcher is a single-shot, shoulder-fired, break-action grenade launcher.
   components:
@@ -90,13 +108,10 @@
     - Back
     - suitStorage
   - type: Gun
-    fireRate: 1
-    selectedMode: SemiAuto
-    availableModes:
-      - SemiAuto
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/m79_shoot.ogg
-    resetOnHandSelected: false
+  - type: RMCSelectiveFire
+    baseFireRate: 0.833
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -104,25 +119,7 @@
     capacity: 1
     soundInsert:
       path: /Audio/_RMC14/Weapons/Guns/Reload/m79_reload.ogg
-  - type: OnShootTriggerAmmoTimer
-    delay: 1
-    beepInterval: 2
-    initialBeepDelay: 0
-    beepSound:
-      path: "/Audio/Effects/beep1.ogg"
-      params:
-        volume: 5
-  - type: ShootAtFixedPoint
-    shootArcProj: true
-  - type: Wieldable
-  - type: GunRequiresWield
-  - type: WieldableSpeedModifiers
-    baseWalk: 0.696
-    baseSprint: 0.559
-  - type: WieldDelay
-    baseDelay: 0.8
-  - type: RMCNameItemOnVend
-    item: PrimaryGun
+#    proto: CMGrenadeHighExplosive # This needs to start with an HIRR baton slug when those get implemented.
   - type: AttachableHolder
     slots:
       rmc-aslot-rail:

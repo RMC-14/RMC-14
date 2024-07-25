@@ -44,6 +44,8 @@
   - type: Clickable
   - type: Climbable
   - type: RMCWallExplosionDeletable
+  - type: DamageMultiplierFlags
+    flags: Breaching
 
 - type: entity
   parent: RMCBaseWindowFrame
