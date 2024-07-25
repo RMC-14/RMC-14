@@ -3935,5 +3935,14 @@
   id: 463
   time: '2024-07-25T22:09:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3273
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the Boiler's Bombard putting Spray Acid on cooldown, Bombard now
+      correctly only puts Acid Shroud on cooldown, and Acid Shroud puts both Bombard
+      and Spray acid on cooldown.
+    type: Fix
+  id: 464
+  time: '2024-07-25T22:40:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3274
 Name: RMC14
 Order: -1
