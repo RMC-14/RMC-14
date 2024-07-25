@@ -3749,5 +3749,27 @@
   id: 452
   time: '2024-07-25T07:57:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3119
+- author: Kaga
+  changes:
+  - message: Added the M5 Anti-Tank Launcher, the Demolitionist Weapon Specialist,
+      and their associated gear.
+    type: Add
+  - message: Added Demolitionist ammo to the requisition console.
+    type: Add
+  - message: Added M276 pattern grenade belts to most vendors they're supposed to
+      be in. They're empty, but can hold a decent amount of grenades.
+    type: Add
+  - message: Made limited max range possible for some weapons, which can differ between
+      ammo types. Currently, this only applies to the M5-ATL.
+    type: Add
+  - message: Fixed some bullets appearing backwards.
+    type: Fix
+  - message: Weapons specialists are now limited to 2 kits of each type, meaning that
+      there can ever only be 2 snipers, 2 grenadiers or 2 demolitionists. 13's limit
+      of 1 per will be introduced once we have more specialist kits.
+    type: Tweak
+  id: 453
+  time: '2024-07-25T08:20:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2941
 Name: RMC14
 Order: -1
