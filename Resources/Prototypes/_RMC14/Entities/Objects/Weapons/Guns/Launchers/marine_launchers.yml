@@ -50,7 +50,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0
   - type: ShootAtFixedPoint
-    ShootArcProj: true
+    shootArcProj: true
   - type: Wieldable
   - type: GunRequiresWield
   - type: WieldableSpeedModifiers
@@ -113,7 +113,7 @@
       params:
         volume: 5
   - type: ShootAtFixedPoint
-    ShootArcProj: true
+    shootArcProj: true
   - type: Wieldable
   - type: GunRequiresWield
   - type: WieldableSpeedModifiers
