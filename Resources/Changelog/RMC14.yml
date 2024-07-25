@@ -3712,5 +3712,20 @@
   id: 448
   time: '2024-07-25T04:47:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3211
+- author: Vermidia
+  changes:
+  - message: Smartgunner combat-sight giving permanent far sight
+    type: Fix
+  id: 449
+  time: '2024-07-25T05:37:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3253
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenos being 20% faster than intended at pulling marines. Marine
+      on marine pull speed remains unchanged.
+    type: Fix
+  id: 450
+  time: '2024-07-25T05:37:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3256
 Name: RMC14
 Order: -1
