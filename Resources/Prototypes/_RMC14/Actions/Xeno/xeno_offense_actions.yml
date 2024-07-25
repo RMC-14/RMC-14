@@ -415,7 +415,6 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: shift_spit_acid_glob
     event: !type:XenoBombardToggleActionEvent
-    range: 9
     useDelay: 1
 
 - type: entity
