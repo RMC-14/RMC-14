@@ -58,9 +58,8 @@
       types:
         Heat: 5
   - type: XenoTailStab
-    chargeTime: 1
     inject:
-      RMCMolecularAcid: 2
+      RMCMolecularAcid: 1 # TODO RMC14 2
   - type: CMArmor
     armor: 15
     explosionArmor: 20

@@ -58,9 +58,8 @@
   - type: XenoBombard
   - type: XenoAcidShroud
   - type: XenoTailStab
-    chargeTime: 1
     inject:
-      RMCMolecularAcid: 2
+      RMCMolecularAcid: 1 # TODO RMC14 2
   - type: MeleeWeapon
     damage:
       groups:

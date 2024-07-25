@@ -15,7 +15,7 @@ public sealed partial class XenoTailStabComponent : Component
     public EntProtoId TailAnimationId = "WeaponArcThrust";
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 TailRange = 3;
+    public FixedPoint2 TailRange = 2;
 
     [DataField]
     public DamageSpecifier TailDamage = new();
@@ -24,7 +24,7 @@ public sealed partial class XenoTailStabComponent : Component
     public SoundSpecifier TailHitSound = new SoundCollectionSpecifier("XenoTailSwipe");
 
     [DataField, AutoNetworkedField]
-    public float ChargeTime;
+    public float ChargeTime = 1; // TODO RMC14 implement this
 
     [DataField, AutoNetworkedField]
     public Dictionary<ProtoId<ReagentPrototype>, FixedPoint2>? Inject;
