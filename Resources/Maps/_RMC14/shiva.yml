@@ -10808,11 +10808,15 @@ entities:
     - type: Transform
       pos: 22.5,139.5
       parent: 1
+    - type: MetaData
+      name: "LZ2: Research Landing Zone"
   - uid: 5559
     components:
     - type: Transform
       pos: 23.5,32.5
       parent: 1
+    - type: MetaData
+      name: "LZ1 Landing Zone"
 - proto: CMFax
   entities:
   - uid: 7732
