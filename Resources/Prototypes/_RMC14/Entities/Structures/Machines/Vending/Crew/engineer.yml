@@ -67,7 +67,7 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
-      #- id: CMRebreather #TODO: Make this
+      #- id: CMRebreather #TODO RMC14: Make this
     - name: Accessories
       choices: { CMAccessory: 1 }
       entries:
