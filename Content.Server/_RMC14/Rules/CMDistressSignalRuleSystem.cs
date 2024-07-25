@@ -2,6 +2,7 @@
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Rules.CrashLand;
+using Content.Server._RMC14.Xenonids.Hive;
 using Content.Server.Administration.Components;
 using Content.Server.Administration.Managers;
 using Content.Server.Atmos.EntitySystems;
@@ -75,7 +76,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly DropshipSystem _dropship = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly XenoHiveSystem _hive = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly MarineSystem _marines = default!;
     [Dependency] private readonly MindSystem _mind = default!;
@@ -193,7 +194,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             OperationName = GetRandomOperationName();
 
-            comp.Hive = Spawn(comp.HiveId);
+            // TODO: come up with random name like operation name, in a function that can be reused for xenovxeno
+            comp.Hive = _hive.CreateHive("xenonid hive", comp.HiveId);
             if (!SpawnXenoMap((uid, comp)))
             {
                 Log.Error("Failed to load xeno map");

@@ -66,15 +66,6 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         ent.Comp.AnnouncementsLeft.Sort();
     }
 
-    public void CreateHive(string name, EntProtoId? proto = null)
-    {
-        if (_net.IsClient)
-            return;
-
-        var ent = Spawn(proto ?? "CMXenoHive", MapCoordinates.Nullspace);
-        _metaData.SetEntityName(ent, name);
-    }
-
     public void SetHive(Entity<HiveMemberComponent> member, EntityUid? hive)
     {
         if (member.Comp.Hive == hive)

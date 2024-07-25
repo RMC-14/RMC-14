@@ -2,6 +2,7 @@
 using Content.Server.GameTicking;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Popups;
+using Robust.Server.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -12,6 +13,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
     [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
 
     private readonly List<string> _announce = [];
 
@@ -56,5 +58,16 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
             var popup = $"The Hive can now support: {string.Join(", ", _announce)}";
             _xenoAnnounce.AnnounceSameHive(default, popup, hive.AnnounceSound, PopupType.Large);
         }
+    }
+
+    /// <summary>
+    /// Create a new hive which gets networked to everyone for prediction.
+    /// </summary>
+    public EntityUid CreateHive(string name, EntProtoId? proto = null)
+    {
+        var ent = Spawn(proto ?? "CMXenoHive", MapCoordinates.Nullspace);
+        _metaData.SetEntityName(ent, name);
+        _pvsOverride.AddGlobalOverride(ent);
+        return ent;
     }
 }
