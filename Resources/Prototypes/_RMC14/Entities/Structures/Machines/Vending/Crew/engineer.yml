@@ -32,6 +32,7 @@
     - name: Suit
       choices: { CMSuit: 1 }
       entries: []
+      # Black/blue/Orange/Yellow hazard vest
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
