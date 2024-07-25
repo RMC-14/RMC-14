@@ -13,6 +13,7 @@
     sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83.rsi
     quickEquip: true
     slots:
+    - Back
     - suitStorage
   - type: AmmoCounter
   - type: Gun
@@ -46,7 +47,10 @@
       - GrenadeSpecWhitelist
   - type: Corrodible
     isCorrodible: false
-  - type: AmmoFixedDistance
+  - type: ExplosionResistance
+    damageCoefficient: 0
+  - type: ShootAtFixedPoint
+    ShootArcProj: true
   - type: Wieldable
   - type: GunRequiresWield
   - type: WieldableSpeedModifiers
@@ -108,7 +112,8 @@
       path: "/Audio/Effects/beep1.ogg"
       params:
         volume: 5
-  - type: AmmoFixedDistance
+  - type: ShootAtFixedPoint
+    ShootArcProj: true
   - type: Wieldable
   - type: GunRequiresWield
   - type: WieldableSpeedModifiers
@@ -137,3 +142,60 @@
     offsets:
       rmc-aslot-rail: -0.065, 0.125
       rmc-aslot-stock: -0.56, 0.0
+
+- type: entity
+  name: M5-ATL
+  parent:  [BaseWeaponLauncher, CMBaseWeaponGun]
+  id: RMCWeaponLauncherM5ATL
+  description: "The M5 Anti-Tank Launcher is a powerful anti-armor infantry weapon, commonly fielded by the UNMC. Used to take out light-tanks and enemy structures, the M5-ATL is a dangerous weapon with a variety of combat uses, depending on the loaded ammunition, and is capable of firing both shells and rocket-propelled grenades.\n\nThis one is missing its smart optics completely, and seems to be damaged, greatly limiting its range..."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5spec.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5spec.rsi
+    quickEquip: true
+    slots:
+    - suitStorage
+  - type: Gun
+    fireRate: 0.83
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/m5_shoot.ogg
+    resetOnHandSelected: false
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+        - RMCRocketAmmo84mm
+    capacity: 1
+    cycleable: true
+    mayTransfer: false
+    insertDelay: 6.0
+    cycleDelay: 6.0
+    proto: RMCRocket84mm
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Cock/m5_ammo.ogg
+  - type: GunUserWhitelist
+    whitelist:
+      components:
+      - DemoSpecWhitelist
+  - type: Corrodible
+    isCorrodible: false
+  - type: ExplosionResistance
+    damageCoefficient: 0
+  - type: Wieldable
+  - type: GunRequiresWield
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+  - type: OnShootTriggerAmmoTimer
+    delay: 0.2 # TODO RMC14 Make some way for rockets to explode when they stop stop, for shooting at the ground closer than max range.
+    # This is a temporary hack to guarantee it will always go off after stopping even if it doesn't collide with anything.
+    # Works for almost all gameplay purposes at least right now because even max range rockets are less than 0.2s and it's fast enough not matter.
+  - type: ShootAtFixedPoint
+    ShootArcProj: false
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.696
+    baseSprint: 0.559
+  - type: WieldDelay
+    baseDelay: 1.2

@@ -241,8 +241,8 @@
       path: "/Audio/Effects/beep1.ogg"
       params:
         volume: 5
-  - type: AmmoFixedDistance
-    maxRange: 7
+  - type: ShootAtFixedPoint
+    maxFixedRange: 7
   - type: ShootUseDelay
     delay: 2.4
   - type: UseDelay
@@ -288,8 +288,8 @@
     capacity: 5
   - type: ShootUseDelay
     delay: 3
-  - type: AmmoFixedDistance
-    maxRange: 10
+  - type: ShootAtFixedPoint
+    maxFixedRange: 10
   - type: GenericVisualizer
     visuals:
       enum.BreechVisuals.Open:

@@ -202,9 +202,9 @@
 
 - type: entity
   parent: CMArmorM3Medium
-  id: CMArmorM3T
+  id: RMCArmorM3TDemo
   name: M3-T light armor
-  description: A custom set of M3 armor designed for users of long-ranged explosive weaponry.
+  description: A custom set of M3 armor designed for users of long-ranged explosive weaponry. Provides better protection against explosives than standard M3 armor, while remaining nimble.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/t.rsi
@@ -212,6 +212,9 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/t.rsi
   - type: CMArmor
     explosionArmor: 30
+  - type: ClothingSpeedModifier # light armor speed
+    walkModifier: .814
+    sprintModifier: .814
   - type: Corrodible
     isCorrodible: false
 

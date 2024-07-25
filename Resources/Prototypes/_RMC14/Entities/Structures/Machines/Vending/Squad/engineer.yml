@@ -209,7 +209,7 @@
     #- id: CMM276ShotgunShellLoadingRig
     #- id: CMM276MortarOperatorBelt
       - id: CMBeltUtilityFilled
-    #- id: CMM276M40GrenadeRig
+      - id: RMCBeltGrenade
     - name: Pouches
       choices: { CMPouch: 2 }
       entries:
