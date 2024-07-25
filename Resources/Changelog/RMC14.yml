@@ -3853,5 +3853,31 @@
   id: 455
   time: '2024-07-25T10:16:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3197
+- author: DrSmugleaf
+  changes:
+  - message: Added the tier 3 Boiler xenonid, it has an ability to shoot a glob of
+      corrosive acid gas after a delay, a toxic tail stab, an an acid shroud ability
+      to escape danger. It also has the ability to see further in one direction and
+      glows in the dark so that marines can see it. The neurotoxin glob is not implemented
+      yet. The Boiler's spray acid always stuns.
+    type: Add
+  - message: Added toxic tail stab to the Spitter and Boiler, which injects the target
+      hit with 1 unit of molecular acid, dealing burn and toxin damage over time unless
+      treated. This will show up as an unknown reagent on the health analyzer.
+    type: Add
+  - message: The health analyzer will now tell you if someone is overdosing on a specific
+      chemical.
+    type: Add
+  - message: Fixed tail stab hitting more targets than intended. It now only hits
+      a maximum of 1 target, down from 3.
+    type: Fix
+  - message: Fixed tail stab having no popups missing a sound.
+    type: Fix
+  - message: Fixed bleeding also removing chemicals from your bloodstream. This will
+      later be added in the form of a dyalisis machine in medbay.
+    type: Fix
+  id: 456
+  time: '2024-07-25T11:08:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3258
 Name: RMC14
 Order: -1
