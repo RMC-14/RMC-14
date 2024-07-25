@@ -8,8 +8,11 @@ namespace Content.Shared._RMC14.Actions;
 public sealed partial class ActionSharedCooldownComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
-    public EntProtoId Id;
+    public HashSet<EntProtoId> Ids;
 
-    [DataField(required: true), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public TimeSpan Cooldown;
+
+    [DataField, AutoNetworkedField]
+    public bool OnPerform = true;
 }

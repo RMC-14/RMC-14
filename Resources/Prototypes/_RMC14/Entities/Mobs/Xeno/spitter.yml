@@ -57,6 +57,10 @@
     barricadeDamage:
       types:
         Heat: 5
+  - type: XenoTailStab
+    chargeTime: 1
+    inject:
+      RMCMolecularAcid: 2
   - type: CMArmor
     armor: 15
     explosionArmor: 20

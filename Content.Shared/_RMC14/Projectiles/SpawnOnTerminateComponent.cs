@@ -1,4 +1,5 @@
-﻿using Robust.Shared.GameStates;
+﻿using Content.Shared.Popups;
+using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
@@ -13,4 +14,10 @@ public sealed partial class SpawnOnTerminateComponent : Component
 
     [DataField(required: true), AutoNetworkedField]
     public EntProtoId Spawn;
+
+    [DataField, AutoNetworkedField]
+    public LocId? Popup;
+
+    [DataField, AutoNetworkedField]
+    public PopupType? PopupType;
 }

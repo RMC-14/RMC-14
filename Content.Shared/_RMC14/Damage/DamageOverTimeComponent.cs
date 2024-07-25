@@ -35,7 +35,7 @@ public sealed partial class DamageOverTimeComponent : Component
     public bool AffectsInfectedNested;
 
     [DataField, AutoNetworkedField]
-    public ProtoId<EmotePrototype>? Emote = "Scream";
+    public ProtoId<EmotePrototype>? Emote = "Cough";
 
     [DataField, AutoNetworkedField]
     public string? Popup;

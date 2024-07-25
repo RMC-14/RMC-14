@@ -219,6 +219,18 @@
     range: 6
 
 - type: entity
+  parent: ActionXenoSprayAcid
+  id: ActionXenoSprayAcidBoiler
+  components:
+  - type: WorldTargetAction
+    useDelay: 10
+  - type: ActionSharedCooldown
+    ids:
+    - ActionXenoBombard
+    - ActionXenoAcidShroud
+    - ActionXenoSprayAcidBoiler
+
+- type: entity
   id: ActionXenoParalyzingSlash
   parent: ActionXenoBase
   name: Paralyzing Slash (50) # TODO RMC14 proper plasma costs
@@ -374,7 +386,7 @@
   parent: ActionXenoBase
   id: ActionXenoBombard
   name: Bombard (200)
-  description: Fire either an acidic glob or neurotoxic glob after a delay.
+  description: Fire either an acidic glob after a delay. # TODO RMC14 or neurotoxic glob
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -383,11 +395,13 @@
       state: bombard
     event: !type:XenoBombardActionEvent
     range: 9
-    useDelay: 20
     checkCanAccess: false
   - type: ActionSharedCooldown
-    id: ActionXenoBombard
+    ids:
+    - ActionXenoBombard
+    - ActionXenoAcidShroud
     cooldown: 20
+    onPerform: false
 
 - type: entity
   parent: ActionXenoBase
@@ -408,7 +422,7 @@
   parent: ActionXenoBase
   id: ActionXenoAcidShroud
   name: Acid Shroud
-  description: Create a small cloud of acid around you to cloak yourself. This will disable your other abilities for a short time to allow you to escape. Will also damage you as well.
+  description: Create a small cloud of acid around you to cloak yourself. This will disable your other abilities for a short time to allow you to escape.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -417,4 +431,10 @@
       state: acid_shroud
     event: !type:XenoAcidShroudActionEvent
     range: 9
-    useDelay: 1
+  - type: ActionSharedCooldown
+    ids:
+    - ActionXenoBombard
+    - ActionXenoAcidShroud
+    - ActionXenoSprayAcidBoiler
+    cooldown: 30
+    onPerform: false

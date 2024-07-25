@@ -109,49 +109,6 @@
       "name": "tier_3"
     },
     {
-      "name": "boiler_icons"
-    },
-    {
-      "name": "boiler_walk_3",
-      "directions": 4
-    },
-    {
-      "name": "boiler_walk_2",
-      "directions": 4
-    },
-    {
-      "name": "boiler_walk_1",
-      "directions": 4
-    },
-    {
-      "name": "boiler_walk_0",
-      "directions": 4
-    },
-    {
-      "name": "boiler_rest_3"
-    },
-    {
-      "name": "boiler_rest_2"
-    },
-    {
-      "name": "boiler_rest_1"
-    },
-    {
-      "name": "boiler_rest_0"
-    },
-    {
-      "name": "boiler_downed_3"
-    },
-    {
-      "name": "boiler_downed_2"
-    },
-    {
-      "name": "boiler_downed_1"
-    },
-    {
-      "name": "boiler_downed_0"
-    },
-    {
       "name": "praetorian_icons"
     },
     {

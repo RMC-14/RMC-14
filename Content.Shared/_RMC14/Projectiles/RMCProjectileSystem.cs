@@ -1,4 +1,5 @@
-﻿using Content.Shared.Projectiles;
+﻿using Content.Shared.Popups;
+using Content.Shared.Projectiles;
 using Content.Shared.Whitelist;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
@@ -8,6 +9,7 @@ namespace Content.Shared._RMC14.Projectiles;
 public sealed class RMCProjectileSystem : EntitySystem
 {
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
@@ -68,6 +70,9 @@ public sealed class RMCProjectileSystem : EntitySystem
         }
 
         SpawnAtPosition(ent.Comp.Spawn, coordinates);
+
+        if (ent.Comp.Popup is { } popup)
+            _popup.PopupCoordinates(Loc.GetString(popup), coordinates, ent.Comp.PopupType ?? PopupType.Small);
     }
 
     public void SetMaxRange(Entity<ProjectileMaxRangeComponent> ent, float max)

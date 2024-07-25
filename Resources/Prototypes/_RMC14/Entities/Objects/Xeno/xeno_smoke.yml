@@ -33,7 +33,7 @@
     id: RMCSmokeAcid
   - type: EvenSmoke
     spawn: RMCSmokeAcid
-    spreadAmount: 2
+    range: 2
   - type: DamageOverTime
     damage:
       groups:
@@ -50,9 +50,9 @@
   name: acid gas
   noSpawn: true
   components:
-  - type: Smoke
-    solution: null
-    spreadAmount: 1
+  - type: EvenSmoke
+    spawn: RMCSmokeAcidShroud
+    range: 1
 
 - type: edgeSpreader
   id: RMCSmokeAcid

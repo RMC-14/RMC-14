@@ -8,9 +8,6 @@ namespace Content.Shared._RMC14.Xenonids.AcidShroud;
 public sealed partial class XenoAcidShroudComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public int Range = 1;
-
-    [DataField, AutoNetworkedField]
     public TimeSpan DoAfter = TimeSpan.FromSeconds(0.75);
 
     [DataField, AutoNetworkedField]

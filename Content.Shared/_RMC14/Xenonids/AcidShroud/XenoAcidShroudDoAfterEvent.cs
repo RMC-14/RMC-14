@@ -4,4 +4,8 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Xenonids.AcidShroud;
 
 [Serializable, NetSerializable]
-public sealed partial class XenoAcidShroudDoAfterEvent : SimpleDoAfterEvent;
+public sealed partial class XenoAcidShroudDoAfterEvent : SimpleDoAfterEvent
+{
+    [DataField]
+    public NetEntity ActionId;
+}

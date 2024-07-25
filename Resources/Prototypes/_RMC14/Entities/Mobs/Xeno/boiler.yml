@@ -4,7 +4,7 @@
   - CMXenoTail
   - CMXenoFlammable
   id: CMXenoBoiler
-  name: Boiler
+  name: Boiler # TODO RMC14 3x fire damage from fires (not all burn damage!)
   description: A huge, grotesque xenonid covered in glowing, oozing acid slime.
   components:
   - type: GhostRole
@@ -31,7 +31,7 @@
     - ActionXenoAcidStrong
     - ActionXenoBombard
 #    - ActionXenoToggleGasType
-    - ActionXenoSprayAcid
+    - ActionXenoSprayAcidBoiler
     - ActionXenoZoom
     - ActionXenoAcidShroud
     - ActionXenoDevolve
@@ -57,6 +57,10 @@
     doAfter: 0.5
   - type: XenoBombard
   - type: XenoAcidShroud
+  - type: XenoTailStab
+    chargeTime: 1
+    inject:
+      RMCMolecularAcid: 2
   - type: MeleeWeapon
     damage:
       groups:
@@ -72,5 +76,7 @@
     radius: 1.8
     softness: 1
     autoRot: true
-#  - type: RMCXenoDamageVisuals # TODO RMC14
-#    prefix: boiler
+  - type: SlowOnPull
+    multiplier: 0.5
+  - type: RMCXenoDamageVisuals
+    prefix: boiler

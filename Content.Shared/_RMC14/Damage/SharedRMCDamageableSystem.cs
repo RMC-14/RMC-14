@@ -229,7 +229,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                     _damageable.TryChangeDamage(marine, damage.ArmorPiercingDamage, true);
 
                 if (damage.Emote is { } emote)
-                    DoEmote(uid, emote);
+                    DoEmote(marine, emote);
 
                 if (damage.Popup is { } popup)
                     _popup.PopupEntity(popup, marine, marine);

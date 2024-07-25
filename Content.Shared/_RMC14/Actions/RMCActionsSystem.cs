@@ -18,15 +18,27 @@ public sealed class RMCActionsSystem : EntitySystem
 
     private void OnSharedCooldownPerformed(Entity<ActionSharedCooldownComponent> ent, ref ActionPerformedEvent args)
     {
-        foreach (var (actionId, _) in _actions.GetActions(args.Performer))
+        if (ent.Comp.OnPerform)
+            ActivateSharedCooldown((ent, ent), args.Performer);
+    }
+
+    public void ActivateSharedCooldown(Entity<ActionSharedCooldownComponent?> action, EntityUid performer)
+    {
+        if (!Resolve(action, ref action.Comp, false))
+            return;
+
+        if (action.Comp.Cooldown == TimeSpan.Zero)
+            return;
+
+        foreach (var (actionId, _) in _actions.GetActions(performer))
         {
             if (!_actionSharedCooldownQuery.TryComp(actionId, out var shared) ||
-                shared.Id != ent.Comp.Id)
+                !shared.Ids.Overlaps(action.Comp.Ids))
             {
                 continue;
             }
 
-            _actions.SetIfBiggerCooldown(actionId, ent.Comp.Cooldown);
+            _actions.SetIfBiggerCooldown(actionId, action.Comp.Cooldown);
         }
     }
 }

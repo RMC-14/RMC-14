@@ -1,4 +1,5 @@
-﻿using Content.Shared.Damage;
+﻿using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -21,4 +22,10 @@ public sealed partial class XenoTailStabComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier TailHitSound = new SoundCollectionSpecifier("XenoTailSwipe");
+
+    [DataField, AutoNetworkedField]
+    public float ChargeTime;
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<ProtoId<ReagentPrototype>, FixedPoint2>? Inject;
 }

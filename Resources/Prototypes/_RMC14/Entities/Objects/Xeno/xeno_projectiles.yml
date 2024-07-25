@@ -163,6 +163,8 @@
     spreadAmount: 50
   - type: SpawnOnTerminate
     spawn: RMCSmokeAcid
+    popup: rmc-glob-land
+    popupType: LargeCaution
   - type: ProjectileMaxRange
     max: 10
 

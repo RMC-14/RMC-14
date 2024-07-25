@@ -25,7 +25,8 @@ public sealed class XenoZoomSystem : EntitySystem
     private void OnXenoZoomAction(Entity<XenoZoomComponent> xeno, ref XenoZoomActionEvent args)
     {
         var ev = new XenoZoomDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.DoAfter, ev, xeno);
+        var delay = xeno.Comp.Enabled ? TimeSpan.Zero : xeno.Comp.DoAfter;
+        var doAfter = new DoAfterArgs(EntityManager, xeno, delay, ev, xeno) { BreakOnMove = true };
         _doAfter.TryStartDoAfter(doAfter);
     }
 
