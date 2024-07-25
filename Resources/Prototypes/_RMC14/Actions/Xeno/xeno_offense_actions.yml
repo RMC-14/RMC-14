@@ -429,7 +429,6 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: acid_shroud
     event: !type:XenoAcidShroudActionEvent
-    range: 9
   - type: ActionSharedCooldown
     ids:
     - ActionXenoBombard
