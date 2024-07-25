@@ -58,6 +58,7 @@
         name: first-aid pouch (pill packets)
       - id: CMPouchConstruction
       #- id: CMElectronicsPouchFull
+      	#name: Electronics Pouch (Full)
       - id: CMPouchToolsFill
         name: Tools pouch (Filled)
       - id: CMPouchFlareFilled
