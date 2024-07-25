@@ -348,6 +348,19 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ghille.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ghille.rsi
+  - type: GhillieSuit
+  - type: ItemToggle
+  - type: ComponentToggler
+    parent: true
+    components:
+    - type: Stealth
+      minVisibility: 0.05
+      lastVisibility: 1
+    - type: StealthOnMove
+      passiveVisibilityRate: -0.2
+      movementVisibilityRate: 0.25
+  - type: ToggleClothing
+    action: ActionMarineGhilliePreparePosition
 
 # Smart Gun
 - type: entity
