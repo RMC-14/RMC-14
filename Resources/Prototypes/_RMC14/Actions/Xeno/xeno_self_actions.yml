@@ -75,8 +75,7 @@
     event: !type:XenoToggleCrestActionEvent
     useDelay: 2
   - type: ActionSharedCooldown
-    ids:
-    - ActionXenoToggleCrest
+    id: ActionXenoToggleCrest
     cooldown: 2
 
 - type: entity
@@ -93,8 +92,7 @@
     event: !type:XenoFortifyActionEvent
     useDelay: 5
   - type: ActionSharedCooldown
-    ids:
-    - ActionXenoToggleCrest
+    id: ActionXenoToggleCrest
     cooldown: 5
 
 - type: entity
