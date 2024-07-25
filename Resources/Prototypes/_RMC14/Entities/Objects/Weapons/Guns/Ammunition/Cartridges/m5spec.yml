@@ -106,12 +106,13 @@
     impactEffect: BulletImpactEffect
     damage:
       types:
-        Brute: 160
-        Burn: 150
+        Blunt: 160
+        Heat: 150
         # 10 brute damage + 150 brute and 150 burn to simulate direct explosive damage.
         # Temporary mechanic to make it consistent with intended main target damage.
-        # TODO RMC14 Explosive damagetype that gets reduced by ExplosionArmor in CMArmorSystem and converts to Brute and Burn.
     maxFixedRange: 5 # 6 tiles
+  - type: CMArmorPiercing
+    amount: 100 # Ignores all armor.
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/m5spec_projectiles.rsi
     layers:
