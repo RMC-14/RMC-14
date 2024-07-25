@@ -23,15 +23,23 @@
     - name: Uniform
       choices: { CMUniform: 1 }
       entries:
-      - id: CMJumpsuitCorrespondent
-      # todo Black, Orange and Red
+      - id: RMCJumpsuitCorrespondentBlack
+        name: black uniform
+      - id: RMCJumpsuitCorrespondentOrange
+        name: orange uniform
+      - id: RMCJumpsuitCorrespondentRed
+        name: red uniform
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
       - id: CMArmorPress
-      # blue and black vest
-      - id: CMCoatCorrespondent
-      # green coat
+      - id: RMCCoatCorrespondentBlue
+        name: blue vest
+      # black vest
+      - id: RMCCoatCorrespondentBlack
+        name: black coat
+      - id: RMCCoatCorrespondentGreen
+        name: green coat
     - name: Helmet
       choices: { CMHelmet: 1 }
       entries:
@@ -44,6 +52,8 @@
       # /obj/item/storage/box/tapes 15
       - id: CMPaper
         amount: 30
+      - id: CMHandLabeler
+        amount: 3
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
