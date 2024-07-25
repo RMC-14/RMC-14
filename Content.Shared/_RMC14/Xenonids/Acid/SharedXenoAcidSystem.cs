@@ -25,7 +25,8 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
-
+    private int _corrosiveAcidTickDelaySeconds;
+    private string _corrosiveAcidDamageType = "Heat";
     public override void Initialize()
     {
         base.Initialize();
@@ -33,6 +34,9 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         SubscribeLocalEvent<XenoAcidComponent, XenoCorrosiveAcidEvent>(OnXenoCorrosiveAcid);
         SubscribeLocalEvent<XenoAcidComponent, DoAfterAttemptEvent<XenoCorrosiveAcidDoAfterEvent>>(OnXenoCorrosiveAcidDoAfterAttempt);
         SubscribeLocalEvent<XenoAcidComponent, XenoCorrosiveAcidDoAfterEvent>(OnXenoCorrosiveAcidDoAfter);
+
+        Subs.CVar(_config, RMCCVars.RMCCorrosiveAcidTickDelaySeconds, obj => _corrosiveAcidTickDelaySeconds = obj, true);
+        Subs.CVar(_config, RMCCVars.RMCCorrosiveAcidDamageType, obj => _corrosiveAcidDamageType = obj, true);
     }
 
     private void OnXenoCorrosiveAcid(Entity<XenoAcidComponent> xeno, ref XenoCorrosiveAcidEvent args)
@@ -115,15 +119,13 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             return;
 
         var time = _timing.CurTime;
-        var damageTickSeconds = _config.GetCVar(RMCCVars.RMCCorrosiveAcidTickDelaySeconds);
-        var damageType = _config.GetCVar(RMCCVars.RMCCorrosiveAcidDamageType);
 
         var damageableCorrodingQuery = EntityQueryEnumerator<DamageableCorrodingComponent>();
         while (damageableCorrodingQuery.MoveNext(out var uid, out var damageableCorrodingComponent))
         {
-            if (time > damageableCorrodingComponent.LastDamagedAt.Add(TimeSpan.FromSeconds(damageTickSeconds)))
+            if (time > damageableCorrodingComponent.LastDamagedAt.Add(TimeSpan.FromSeconds(_corrosiveAcidTickDelaySeconds)))
             {
-                DamageSpecifier damage = new(_prototypeManager.Index<DamageTypePrototype>(damageType), damageableCorrodingComponent.Dps * damageTickSeconds);
+                DamageSpecifier damage = new(_prototypeManager.Index<DamageTypePrototype>(_corrosiveAcidDamageType), damageableCorrodingComponent.Dps * _corrosiveAcidTickDelaySeconds);
                 _damageable.TryChangeDamage(uid, damage, true);
                 damageableCorrodingComponent.LastDamagedAt = time;
             }
