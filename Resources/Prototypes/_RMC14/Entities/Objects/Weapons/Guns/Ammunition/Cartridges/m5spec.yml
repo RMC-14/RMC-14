@@ -106,7 +106,6 @@
     impactEffect: BulletImpactEffect
     damage:
       types:
-        CMArmorPiercing: 50
         Brute: 160
         Burn: 150
         # 10 brute damage + 150 brute and 150 burn to simulate direct explosive damage.
