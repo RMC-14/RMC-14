@@ -123,9 +123,6 @@
       state: toggle_long_range
     event: !type:XenoZoomActionEvent
     useDelay: 0.2
-  - type: ActionSharedCooldown
-    ids:
-    - ActionXenoAcidShroud
 
 - type: entity
   id: ActionXenoWordQueen
