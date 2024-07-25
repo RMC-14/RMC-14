@@ -275,7 +275,7 @@
         amount: 100
       - id: CMMagazineSMGM63
         amount: 100
-      - id: RMCBaseSpeedLoader44
+      - id: RMCSpeedLoaderM44
         amount: 80
       - id: CMMagazinePistolM1984
         amount: 102
