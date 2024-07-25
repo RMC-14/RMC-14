@@ -14,10 +14,14 @@ public sealed partial class XenoSecreteStructureDoAfterEvent : DoAfterEvent
     [DataField]
     public EntProtoId StructureId = "WallXenoResin";
 
-    public XenoSecreteStructureDoAfterEvent(NetCoordinates coordinates, EntProtoId structureId)
+    [DataField]
+    public NetEntity? Effect = null;
+
+    public XenoSecreteStructureDoAfterEvent(NetCoordinates coordinates, EntProtoId structureId, NetEntity? effect = null)
     {
         Coordinates = coordinates;
         StructureId = structureId;
+        Effect = effect;
     }
 
     public override DoAfterEvent Clone()
