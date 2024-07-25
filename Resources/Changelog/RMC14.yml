@@ -3697,5 +3697,13 @@
   id: 446
   time: '2024-07-24T11:30:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3232
+- author: Vermidia
+  changes:
+  - message: Parasites can crawl back into open eggs, and drone castes can also put
+      them back in
+    type: Add
+  id: 447
+  time: '2024-07-25T04:45:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3234
 Name: RMC14
 Order: -1
