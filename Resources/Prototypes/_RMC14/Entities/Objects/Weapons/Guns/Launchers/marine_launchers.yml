@@ -119,29 +119,7 @@
     capacity: 1
     soundInsert:
       path: /Audio/_RMC14/Weapons/Guns/Reload/m79_reload.ogg
-<<<<<<< HEAD
-  - type: OnShootTriggerAmmoTimer
-    delay: 1
-    beepInterval: 2
-    initialBeepDelay: 0
-    beepSound:
-      path: "/Audio/Effects/beep1.ogg"
-      params:
-        volume: 5
-  - type: ShootAtFixedPoint
-    shootArcProj: true
-  - type: Wieldable
-  - type: GunRequiresWield
-  - type: WieldableSpeedModifiers
-    baseWalk: 0.696
-    baseSprint: 0.559
-  - type: WieldDelay
-    baseDelay: 0.8
-  - type: RMCNameItemOnVend
-    item: PrimaryGun
-=======
 #    proto: CMGrenadeHighExplosive # This needs to start with an HIRR baton slug when those get implemented.
->>>>>>> e86d05f099 (Fixed UGL overshoot, fixed GL stats.)
   - type: AttachableHolder
     slots:
       rmc-aslot-rail:
