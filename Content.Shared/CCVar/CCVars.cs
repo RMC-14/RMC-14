@@ -1517,7 +1517,7 @@ namespace Content.Shared.CCVar
         /// How long a shuttle spends in FTL.
         /// </summary>
         public static readonly CVarDef<float> FTLTravelTime =
-            CVarDef.Create("shuttle.travel_time", 70f, CVar.SERVERONLY); // TODO RMC14 100
+            CVarDef.Create("shuttle.travel_time", 100f, CVar.SERVERONLY);
 
         /// <summary>
         /// How long the final stage of FTL before arrival should be.
@@ -1529,7 +1529,7 @@ namespace Content.Shared.CCVar
         /// How much time needs to pass before a shuttle can FTL again.
         /// </summary>
         public static readonly CVarDef<float> FTLCooldown =
-            CVarDef.Create("shuttle.cooldown", 90f, CVar.SERVERONLY); // TODO RMC14 120f
+            CVarDef.Create("shuttle.cooldown", 120f, CVar.SERVERONLY);
 
         /// <summary>
         /// The maximum <see cref="PhysicsComponent.Mass"/> a grid can have before it becomes unable to FTL.

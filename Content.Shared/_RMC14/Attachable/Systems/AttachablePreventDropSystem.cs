@@ -1,6 +1,6 @@
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
-using Robust.Shared.Containers;
+using Content.Shared.Interaction.Components;
 
 namespace Content.Shared._RMC14.Attachable.Systems;
 
@@ -8,15 +8,22 @@ public sealed class AttachablePreventDropSystem : EntitySystem
 {
     public override void Initialize()
     {
-        SubscribeLocalEvent<AttachablePreventDropToggleableComponent, ContainerGettingInsertedAttemptEvent>(OnAttempt);
-        SubscribeLocalEvent<AttachablePreventDropToggleableComponent, ContainerGettingRemovedAttemptEvent>(OnAttempt);
+        SubscribeLocalEvent<AttachablePreventDropToggleableComponent, AttachableAlteredEvent>(OnAttachableAltered);
     }
 
-    private void OnAttempt<T>(Entity<AttachablePreventDropToggleableComponent> attachable, ref T args) where T : CancellableEntityEventArgs
+    private void OnAttachableAltered(Entity<AttachablePreventDropToggleableComponent> attachable, ref AttachableAlteredEvent args)
     {
-        if (!TryComp(attachable.Owner, out AttachableToggleableComponent? toggleableComponent) || !toggleableComponent.Attached || !toggleableComponent.Active)
-            return;
+        switch (args.Alteration)
+        {
+            case AttachableAlteredType.Activated:
+                var comp = EnsureComp<UnremoveableComponent>(args.Holder);
+                comp.DeleteOnDrop = false;
+                Dirty(args.Holder, comp);
+                break;
 
-        args.Cancel();
+            case AttachableAlteredType.Deactivated:
+                RemCompDeferred<UnremoveableComponent>(args.Holder);
+                break;
+        }
     }
 }

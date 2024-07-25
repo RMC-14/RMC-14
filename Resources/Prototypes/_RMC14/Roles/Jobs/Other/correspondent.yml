@@ -25,8 +25,8 @@
 - type: startingGear
   id: CMGearCorrespondent
   equipment:
-    jumpsuit: CMJumpsuitCorrespondent
-    outerClothing: CMCoatCorrespondent
+    jumpsuit: RMCJumpsuitCorrespondent
+    outerClothing: RMCCoatCorrespondent
     shoes: CMShoesLaceup
     id: CMIDCardCorrespondent
     ears: CMHeadsetReporter

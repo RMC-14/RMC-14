@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: BaseStorageItem
   id: CMSurgicalCase
   name: surgical case
@@ -7,9 +7,12 @@
   - type: Sprite
     sprite: _RMC14/Objects/Storage/surgical_case.rsi
     layers:
-    - state: surgical_case
-    - state: surgical_case_empty
+    - state: surgical_case_base
+    - state: surgical_case_open
       map: [ "openLayer" ]
+      visible: false
+    - state: surgical_case_closed
+      map: [ "closedLayer" ]
       visible: false
   - type: Item
     size: Small
@@ -32,7 +35,14 @@
         openLayer:
           Open: { visible: true }
           Closed: { visible: false }
+        closedLayer:
+          Open: { visible: false }
+          Closed: { visible: true }
   - type: Appearance
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMSurgicalCase

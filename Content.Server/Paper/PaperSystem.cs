@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Popups;
+using Content.Shared._RMC14.Examine;
 using Content.Shared._RMC14.UserInterface;
 using Content.Shared.Database;
 using Content.Shared.Examine;
@@ -25,6 +26,7 @@ namespace Content.Server.Paper
         [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
         [Dependency] private readonly MetaDataSystem _metaSystem = default!;
         [Dependency] private readonly SharedAudioSystem _audio = default!;
+        [Dependency] private readonly CMExamineSystem _rmcExamine = default!;
         [Dependency] private readonly RMCUserInterfaceSystem _rmcUI = default!;
 
         public override void Initialize()
@@ -75,6 +77,9 @@ namespace Content.Server.Paper
         private void OnExamined(EntityUid uid, PaperComponent paperComp, ExaminedEvent args)
         {
             if (!args.IsInDetailsRange)
+                return;
+
+            if (!_rmcExamine.CanExamine(uid, args.Examiner))
                 return;
 
             using (args.PushGroup(nameof(PaperComponent)))

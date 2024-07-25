@@ -130,11 +130,38 @@
 # Correspondent
 - type: entity
   parent: ClothingOuterStorageBase
-  id: CMCoatCorrespondent
-  name: correspondent coat
-  description: Standard-issue correspondent coat.
+  id: RMCCoatCorrespondent
+  name: combat correspondent jacket
+  description: A jacket for the most fashionable war correspondents.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/correspondent.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/brown.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/correspondent.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/brown.rsi
+
+- type: entity
+  parent: RMCCoatCorrespondent
+  id: RMCCoatCorrespondentGreen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/green.rsi
+
+- type: entity
+  parent: RMCCoatCorrespondent
+  id: RMCCoatCorrespondentBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/black.rsi
+
+- type: entity
+  parent: RMCCoatCorrespondent
+  id: RMCCoatCorrespondentBlue
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/blue.rsi

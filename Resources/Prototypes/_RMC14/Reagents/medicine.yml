@@ -5,6 +5,7 @@
   name: reagent-name-cmdylovene
   desc: reagent-desc-cmdylovene
   color: "#3fc92a"
+  overdose: 30
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -47,6 +48,7 @@
   name: reagent-name-cmethylredoxrazine
   desc: reagent-desc-cmethylredoxrazine
   color: "#605048"
+  overdose: 30
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -77,6 +79,7 @@
   name: reagent-name-cmarithrazine
   desc: reagent-desc-cmarithrazine
   color: "#3c8529"
+  overdose: 7.5
   metabolisms:
     Medicine:
       metabolismRate: 0.03
@@ -137,6 +140,7 @@
   name: reagent-name-cmbicaridine
   desc: reagent-desc-cmbicaridine
   color: "#ed4847"
+  overdose: 30
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -195,6 +199,7 @@
   name: reagent-name-cmdermaline
   desc: reagent-desc-cmdermaline
   color: "#e2972e"
+  overdose: 15
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -226,6 +231,7 @@
   name: reagent-name-cmdexalin
   desc: reagent-desc-cmdexalin
   color: "#1f28a7"
+  overdose: 30
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -256,6 +262,7 @@
   name: reagent-name-cmdexalinplus
   desc: reagent-desc-cmdexalinplus
   color: "#5887D5"
+  overdose: 15
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -286,6 +293,7 @@
   name: reagent-name-cmepinephrine
   desc: reagent-desc-cmepinephrine
   color: "#6bd43c"
+  overdose: 10.5
   metabolisms:
     Medicine:
       metabolismRate: 0.2
@@ -328,6 +336,7 @@
   name: reagent-name-cminaprovaline
   desc: reagent-desc-cminaprovaline
   color: "#fe33cb"
+  overdose: 60
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -375,6 +384,7 @@
   name: reagent-name-cmkelotane
   desc: reagent-desc-cmkelotane
   color: "#f5e123"
+  overdose: 30
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -406,6 +416,7 @@
   name: reagent-name-cmleporazine
   desc: reagent-desc-cmleporazine
   color: "#a03919"
+  overdose: 30
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -445,6 +456,7 @@
   name: reagent-name-cmtricordrazine
   desc: reagent-desc-cmtricordrazine
   color: "#d87f2b"
+  overdose: 30
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -492,6 +504,7 @@
   name: reagent-name-cmmeralyne
   desc: reagent-desc-cmmeralyne
   color: "#b40000"
+  overdose: 15
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -524,6 +537,7 @@
   name: reagent-name-cmimidazoline
   desc: reagent-desc-cmimidazoline
   color: "#C8A5DC"
+  overdose: 30
   metabolisms:
     Medicine:
       metabolismRate: 0.1

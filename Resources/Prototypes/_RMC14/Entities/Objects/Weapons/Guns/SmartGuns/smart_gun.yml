@@ -10,9 +10,9 @@
   - type: GunIFF
   - type: WieldDelay
     baseDelay: 0.4
-  - type: WieldableSpeedModifiers # TODO RMC14 I used arbitrary numbers check this later
-    baseWalk: 0.63
-    baseSprint: 0.63
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.696
+    baseSprint: 0.559
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/smart_gun.rsi
     layers:
@@ -22,12 +22,11 @@
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/smart_gun.rsi
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 20
   - type: Gun
-    minAngle: 0
-    maxAngle: 10
-    angleIncrease: 1
-    angleDecay: 1
-    fireRate: 5
     selectedMode: FullAuto
     availableModes:
     - FullAuto
@@ -35,11 +34,19 @@
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
-  - type: GunWieldBonus # can only be fired wielded
-    minAngle: 0
-    maxAngle: 0
-    angleIncrease: 0
-    angleDecay: 0
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - FullAuto
+    recoilWielded: 3
+    scatterWielded: 10
+    baseFireRate: 5
+    burstScatterMult: 4
+    modifiers:
+      FullAuto:
+        maxScatterModifier: 4
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 80
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -96,3 +103,12 @@
   - type: GunToggleableRecoil
   - type: GunToggleableAutoFire
   - type: SmartGun
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: -0.1875, 0.125
