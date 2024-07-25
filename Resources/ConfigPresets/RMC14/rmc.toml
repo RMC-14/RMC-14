@@ -59,6 +59,7 @@ tickrate = 25
 port = 1212
 bindto = "::,0.0.0.0"
 max_connections = 1024
+sendbuffersize = 262142
 
 [physics]
 maxlinvelocity = 51
