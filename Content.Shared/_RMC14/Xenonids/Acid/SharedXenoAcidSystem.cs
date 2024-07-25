@@ -79,30 +79,16 @@ public abstract class SharedXenoAcidSystem : EntitySystem
 
         var acid = SpawnAttachedTo(args.AcidId, target.ToCoordinates());
 
-        if (TryComp<BarricadeComponent>(target, out var barricade))
-        {
-            AddComp(target, new DamageableCorrodingComponent
-            {
-                Acid = acid,
-                Dps = args.Dps
-            });
-        }
-        else
-        {
-            AddComp(target, new TimedCorrodingComponent
-            {
-                Acid = acid,
-                CorrodesAt = _timing.CurTime + args.Time
-            });
-        }
+        var ev = new CorrodingEvent(acid, args.Dps, args.ExpendableLightDps);
+        RaiseLocalEvent(target, ref ev);
+        if (ev.Cancelled)
+            return;
 
-
-        // This event should only ever go to the server.
-        if (_net.IsServer)
+        AddComp(target, new TimedCorrodingComponent
         {
-            var ev = new CorrodingEvent(args.ExpendableLightDps);
-            RaiseLocalEvent(target, ref ev);
-        }
+            Acid = acid,
+            CorrodesAt = _timing.CurTime + args.Time
+        });
     }
 
     private bool CheckCorrodiblePopups(Entity<XenoAcidComponent> xeno, EntityUid target)

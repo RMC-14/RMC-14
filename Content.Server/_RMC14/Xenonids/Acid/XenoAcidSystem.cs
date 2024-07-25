@@ -1,4 +1,5 @@
 ﻿using Content.Server.Light.Components;
+using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Xenonids.Acid;
 
 namespace Content.Server._RMC14.Xenonids.Acid;
@@ -10,10 +11,11 @@ public sealed class XenoAcidSystem : SharedXenoAcidSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ExpendableLightComponent, CorrodingEvent>(OnCorrodingEvent);
+        SubscribeLocalEvent<ExpendableLightComponent, CorrodingEvent>(OnExpendableLightCorrodingEvent);
+        SubscribeLocalEvent<BarricadeComponent, CorrodingEvent>(OnBarricadeCorrodingEvent);
     }
 
-    private void OnCorrodingEvent(Entity<ExpendableLightComponent> target, ref CorrodingEvent args)
+    private void OnExpendableLightCorrodingEvent(Entity<ExpendableLightComponent> target, ref CorrodingEvent args)
     {
         // Rationale and formula: https://github.com/RMC-14/RMC-14/issues/2952#issuecomment-2227035752
         var expendable_light = target.Comp;
@@ -22,6 +24,17 @@ public sealed class XenoAcidSystem : SharedXenoAcidSystem
         // In case expandable light is activated shortly after being corroded. Or in case we decide to not destroy corrosive lights on timers like the rest of items for whatever the reason.
         expendable_light.GlowDuration /= expendableLightDps;
         expendable_light.FadeOutDuration /= expendableLightDps;
+    }
+
+    private void OnBarricadeCorrodingEvent(Entity<BarricadeComponent> target, ref CorrodingEvent args)
+    {
+        AddComp(target, new DamageableCorrodingComponent
+        {
+            Acid = args.Acid,
+            Dps = args.Dps
+        });
+
+        args.Cancelled = true;
     }
 }
 
