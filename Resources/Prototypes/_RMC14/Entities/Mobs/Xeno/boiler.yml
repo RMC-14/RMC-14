@@ -60,6 +60,11 @@
   - type: XenoTailStab
     inject:
       RMCMolecularAcid: 1 # TODO RMC14 2
+  - type: XenoSprayAcid
+    acid: XenoAcidSprayStrong
+    barricadeDamage:
+      types:
+        Heat: 5
   - type: MeleeWeapon
     damage:
       groups:
