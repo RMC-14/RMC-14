@@ -28,6 +28,7 @@
     - name: Helmet
       choices: { CMHelmet: 1 }
       entries: []
+      # Beret, white/orange/blue hardhat, welding helmet
     - name: Suit
       choices: { CMSuit: 1 }
       entries: []
