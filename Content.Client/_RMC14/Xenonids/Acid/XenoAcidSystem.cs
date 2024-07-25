@@ -2,6 +2,5 @@
 
 namespace Content.Client._RMC14.Xenonids.Acid;
 
-public sealed class XenoAcidSystem : SharedXenoAcidSystem
-{ }
+public sealed class XenoAcidSystem : SharedXenoAcidSystem;
 
