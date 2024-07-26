@@ -3959,5 +3959,20 @@
   id: 466
   time: '2024-07-26T01:43:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3277
+- author: DrSmugleaf
+  changes:
+  - message: Fixed dropships taking 1 second to travel.
+    type: Fix
+  id: 467
+  time: '2024-07-26T02:18:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3283
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the pheromones radial appearing in kingdom com. It now appears
+      centered on your character.
+    type: Fix
+  id: 468
+  time: '2024-07-26T02:17:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3282
 Name: RMC14
 Order: -1
