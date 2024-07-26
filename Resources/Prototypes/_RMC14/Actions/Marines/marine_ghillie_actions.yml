@@ -1,14 +1,13 @@
 ﻿- type: entity
-  parent: ActionMarineBase
-  id: ActionMarineGhilliePreparePosition
+  parent: ActionMarineToggleable
+  id: RMCActionGhilliePreparePosition
   name: Prepare Position
   description: Use the ghillie suit and the nearby environment to become near invisible.
   components:
   - type: InstantAction
-    itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/marine_sniper_actions.rsi
       state: prepare_position
     useDelay: 5
-    priority: -9
-    event: !type:ToggleActionEvent
+    itemIconStyle: NoItem
+    event: !type:GhillieActionEvent

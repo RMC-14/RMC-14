@@ -27,6 +27,7 @@ public sealed class GunIFFSystem : EntitySystem
         SubscribeLocalEvent<ItemIFFComponent, InventoryRelayedEvent<GetIFFFactionEvent>>(OnItemIFFGetFaction);
         SubscribeLocalEvent<GunIFFComponent, AmmoShotEvent>(OnGunIFFAmmoShot);
         SubscribeLocalEvent<ProjectileIFFComponent, PreventCollideEvent>(OnProjectileIFFPreventCollide);
+        SubscribeLocalEvent<MarineIFFComponent, PreventCollideEvent>(OnMarineIFFPreventCollide);
     }
 
     private void OnUserIFFGetFaction(Entity<UserIFFComponent> ent, ref GetIFFFactionEvent args)
@@ -78,6 +79,14 @@ public sealed class GunIFFSystem : EntitySystem
 
         if (IsInFaction(args.OtherEntity, faction))
             args.Cancelled = true;
+    }
+
+    private void OnMarineIFFPreventCollide(Entity<MarineIFFComponent> ent, ref PreventCollideEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        args.Cancelled = true;
     }
 
     public bool IsInFaction(Entity<UserIFFComponent?> user, EntProtoId<IFFFactionComponent> faction)
