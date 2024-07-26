@@ -10,7 +10,7 @@ namespace Content.Shared._RMC14.Xenonids.Bombard;
 public sealed partial class XenoBombardComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public int Range = 10;
+    public int Range = 15;
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 PlasmaCost = 200;
