@@ -35,7 +35,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
                 hive.NextConstructAllowed = null;
                 Dirty(hiveId, hive);
                 var msg = Loc.GetString("rmc-construction-cooldown-ended");
-                _xenoAnnounce.AnnounceToHive(hiveId, hive.AnnounceSound, msg);
+                _xenoAnnounce.AnnounceToHive(default, hiveId, msg, hive.AnnounceSound);
             }
 
             for (var i = 0; i < hive.AnnouncementsLeft.Count; i++)
