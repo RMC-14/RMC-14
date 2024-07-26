@@ -340,7 +340,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
 
         var xform = Transform(target);
-        if (!__nodeQuery.TryComp(target, out var node) ||
+        if (!_nodeQuery.TryComp(target, out var node) ||
             !_plasmaQuery.TryComp(xeno, out var plasma))
         {
             return;
@@ -363,6 +363,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         _adminLogs.Add(LogType.RMCXenoOrderConstructionPlasma, $"Xeno {ToPrettyString(xeno):xeno} added {subtract} plasma to {ToPrettyString(target):target} at {xform.Coordinates}");
 
         node.PlasmaStored += subtract;
+        Dirty(target, node);
         plasmaLeft = node.PlasmaCost - node.PlasmaStored;
 
         if (node.PlasmaStored < node.PlasmaCost)
