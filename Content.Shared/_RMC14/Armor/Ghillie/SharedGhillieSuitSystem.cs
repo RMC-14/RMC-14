@@ -12,7 +12,7 @@ using Content.Shared.Weapons.Ranged.Events;
 namespace Content.Shared._RMC14.Armor.Ghillie;
 
 /// <summary>
-/// Handles (un)equipping and provides some API functions.
+/// Handles the ghillie suit's prepare position ability.
 /// </summary>
 public sealed class SharedGhillieSuitSystem : EntitySystem
 {
