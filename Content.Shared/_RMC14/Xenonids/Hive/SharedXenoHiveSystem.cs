@@ -139,7 +139,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             return false;
 
         limits[id] = limit - 1;
-        Dirty(hive, hive.Comp);
+        Dirty(hive);
         return true;
     }
 
@@ -174,7 +174,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         }
 
         limits[id] = limit + add;
-        Dirty(hive, hive.Comp);
+        Dirty(hive);
     }
 
     /// <summary>
@@ -194,6 +194,6 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     public void StartCoreDeathCooldown(Entity<HiveComponent> hive, TimeSpan cooldown)
     {
         hive.Comp.NextConstructAllowed = Timing.CurTime + cooldown;
-        Dirty(hive, hive.Comp);
+        Dirty(hive);
     }
 }

@@ -53,7 +53,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         .Where(d => d != Direction.Invalid)
         .ToImmutableArray();
 
-    private EntityQuery<HiveConstructionNodeComponent> nodeQuery;
+    private EntityQuery<HiveConstructionNodeComponent> _nodeQuery;
     private EntityQuery<XenoConstructionSupportComponent> _constructionSupportQuery;
     private EntityQuery<XenoConstructionRequiresSupportComponent> _constructionRequiresSupportQuery;
     private EntityQuery<XenoConstructComponent> _xenoConstructQuery;
@@ -63,7 +63,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     public override void Initialize()
     {
-        nodeQuery = GetEntityQuery<HiveConstructionNodeComponent>();
+        _nodeQuery = GetEntityQuery<HiveConstructionNodeComponent>();
         _constructionSupportQuery = GetEntityQuery<XenoConstructionSupportComponent>();
         _constructionRequiresSupportQuery = GetEntityQuery<XenoConstructionRequiresSupportComponent>();
         _xenoConstructQuery = GetEntityQuery<XenoConstructComponent>();
@@ -194,7 +194,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
 
         xeno.Comp.BuildChoice = args.StructureId;
-        Dirty(xeno, xeno.Comp);
+        Dirty(xeno);
 
         var ev = new XenoConstructionChosenEvent(args.StructureId);
         foreach (var (id, _) in _actions.GetActions(xeno))
@@ -263,7 +263,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
 
         xeno.Comp.OrderingConstructionAt = args.Target;
-        Dirty(xeno, xeno.Comp);
+        Dirty(xeno);
 
         args.Handled = true;
         _ui.TryOpenUi(xeno.Owner, XenoOrderConstructionUI.Key, xeno);
@@ -340,7 +340,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
 
         var xform = Transform(target);
-        if (!_nodeQuery.TryComp(target, out var node) ||
+        if (!__nodeQuery.TryComp(target, out var node) ||
             !_plasmaQuery.TryComp(xeno, out var plasma))
         {
             return;
@@ -398,7 +398,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             _prototype.HasIndex(args.Choice))
         {
             action.Icon = new SpriteSpecifier.EntityPrototype(args.Choice);
-            Dirty(xeno, xeno.Comp);
+            Dirty(xeno);
         }
     }
 
@@ -629,7 +629,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
             while (directionEnumerator.MoveNext(out var ent))
             {
-                if (nodeQuery.TryComp(ent, out var node) &&
+                if (_nodeQuery.TryComp(ent, out var node) &&
                     node.BlockOtherNodes)
                 {
                     _popup.PopupClient(Loc.GetString("cm-xeno-too-close-to-other-node", ("target", ent.Value)), xeno, xeno);
