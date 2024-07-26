@@ -64,7 +64,7 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
         if (!comp.Enabled)
         {
             var ev = new GhillieSuitDoAfterEvent();
-            var doAfterEventArgs = new DoAfterArgs(EntityManager, user, comp.CloakDelay, ev, ent)
+            var doAfterEventArgs = new DoAfterArgs(EntityManager, user, comp.CloakDelay, ev, ent.Owner)
             {
                 BreakOnMove = true,
                 BreakOnDamage = true,
