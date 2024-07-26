@@ -3951,5 +3951,13 @@
   id: 465
   time: '2024-07-25T22:55:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3276
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the Boiler's Bombard projectile colliding with xenonids of the
+      same hive. It can now be shot through friendly xenonids.
+    type: Fix
+  id: 466
+  time: '2024-07-26T01:43:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3277
 Name: RMC14
 Order: -1
