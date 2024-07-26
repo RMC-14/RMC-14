@@ -192,7 +192,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
 
         xeno.Comp.BuildChoice = args.StructureId;
-        Dirty(xeno);
+        Dirty(xeno, xeno.Comp);
 
         var ev = new XenoConstructionChosenEvent(args.StructureId);
         foreach (var (id, _) in _actions.GetActions(xeno))
@@ -261,7 +261,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
 
         xeno.Comp.OrderingConstructionAt = args.Target;
-        Dirty(xeno);
+        Dirty(xeno, xeno.Comp);
 
         args.Handled = true;
         _ui.TryOpenUi(xeno.Owner, XenoOrderConstructionUI.Key, xeno);
@@ -400,7 +400,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             _prototype.HasIndex(args.Choice))
         {
             action.Icon = new SpriteSpecifier.EntityPrototype(args.Choice);
-            Dirty(xeno);
+            Dirty(xeno, xeno.Comp);
         }
     }
 

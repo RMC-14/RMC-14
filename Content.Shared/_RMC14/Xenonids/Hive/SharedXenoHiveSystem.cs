@@ -14,7 +14,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedNightVisionSystem _nightVision = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] protected readonly IGameTiming Timing = default!;
 
     private EntityQuery<HiveComponent> _query;
     private EntityQuery<HiveMemberComponent> _memberQuery;
@@ -39,7 +39,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         if (TryComp(ent, out XenoComponent? xeno) &&
             _query.TryComp(xeno.Hive, out var hive))
         {
-            hive.LastQueenDeath = _timing.CurTime;
+            hive.LastQueenDeath = Timing.CurTime;
             Dirty(xeno.Hive.Value, hive);
         }
     }
@@ -104,7 +104,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             return;
 
         comp.Hive = hive;
-        Dirty(member);
+        Dirty(member, member.Comp);
     }
 
     public void SetSeeThroughContainers(Entity<HiveComponent?> hive, bool see)
@@ -139,7 +139,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             return false;
 
         limits[id] = limit - 1;
-        Dirty(hive);
+        Dirty(hive, hive.Comp);
         return true;
     }
 
@@ -174,7 +174,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         }
 
         limits[id] = limit + add;
-        Dirty(hive);
+        Dirty(hive, hive.Comp);
     }
 
     /// <summary>
@@ -185,7 +185,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         if (hive.Comp.NextConstructAllowed is not {} cooldown)
             return false;
 
-        return _timing.CurTime < cooldown;
+        return Timing.CurTime < cooldown;
     }
 
     /// <summary>
@@ -193,7 +193,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     /// </summary>
     public void StartCoreDeathCooldown(Entity<HiveComponent> hive, TimeSpan cooldown)
     {
-        hive.Comp.NextConstructAllowed = _timing.CurTime + cooldown;
-        Dirty(hive);
+        hive.Comp.NextConstructAllowed = Timing.CurTime + cooldown;
+        Dirty(hive, hive.Comp);
     }
 }
