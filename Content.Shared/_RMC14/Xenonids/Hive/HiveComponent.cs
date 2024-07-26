@@ -6,6 +6,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Xenonids.Hive;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(SharedXenoHiveSystem))]
 public sealed partial class HiveComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -35,4 +36,7 @@ public sealed partial class HiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan NewQueenCooldown = TimeSpan.FromMinutes(5);
+
+    [DataField, AutoNetworkedField]
+    public bool GotOvipositorPopup;
 }

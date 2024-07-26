@@ -45,7 +45,7 @@
       #  amount: 2
       #- id: XM88 Heavy Rifle
       #  amount: 3
-      #- id: M41AE2 Heavy Pulse Rifle
+      #- id: RMCM54CE2Case
       #  amount: 3
       #- id: M41A Pulse Rifle MK1
       #  amount: 3
@@ -275,7 +275,7 @@
         amount: 100
       - id: CMMagazineSMGM63
         amount: 100
-      - id: RMCBaseSpeedLoader44
+      - id: RMCSpeedLoaderM44
         amount: 80
       - id: CMMagazinePistolM1984
         amount: 102
@@ -319,8 +319,8 @@
         amount: 13
       #- id: M240 Incinerator Tank
       #  amount: 3
-      #- id: M41AE2 Box Magazine (10x24mm)
-      #  amount: 3
+#      - id: CMMagazineRifleM54CE2
+#        amount: 3
       #- id: M41A MK1 Magazine (10x24mm)
       #  amount: 5
       #- id: M41A MK1 AP Magazine (10x24mm)
@@ -371,8 +371,8 @@
       entries:
       - id: RMCAttachmentB8SmartScope
         amount: 4
-      #- id: RMCAttachmentMagneticHarness
-      #  amount: 9
+      - id: RMCAttachmentMagneticHarness
+        amount: 9
       - id: RMCAttachmentRailFlashlight
         amount: 11
       - id: RMCAttachmentS42xTelescopicMiniscope
@@ -423,8 +423,8 @@
         amount: 5
       - id: RMCAttachmentM54CStockCollapsible
         amount: 5
-#      - id: RMCAttachmentM44MagnumSharpshooterStock # ISSUES!!!
-#        amount: 5
+      - id: RMCAttachmentM44MagnumSharpshooterStock
+        amount: 5
 
 #UNIFORM VENDOR
 

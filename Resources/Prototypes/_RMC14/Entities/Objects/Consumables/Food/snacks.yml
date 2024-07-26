@@ -227,7 +227,7 @@
   parent: RMCFoodSnackBase
   id: RMCFoodSnackKeplarFlamehotCrisps
   name: Keplar Flamehot crisps
-  description: They're disturbingly good! Due to an exceptionally well-timed ad campaign with the release of Kepler Flamehot in 2165, the Kepler brand was able to overtake other confectionary Weyland products by quarter three of that year. Contains 0% trans fat.
+  description: They're disturbingly good! Due to an exceptionally well-timed ad campaign with the release of Kepler Flamehot in 2165, the Kepler brand was able to overtake other confectionary Weston products by quarter three of that year. Contains 0% trans fat.
   components:
   - type: FlavorProfile
     flavors:

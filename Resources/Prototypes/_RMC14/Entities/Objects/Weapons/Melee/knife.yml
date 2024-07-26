@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ BaseKnife, RMCAttachmentBase ]
+  parent: [ BaseKnife, RMCAttachableBase ]
   id: RMCM5Bayonet
   name: "M5 'Night Raider' bayonet"
   description: The standard-issue bayonet of the Marines. You can slide this knife into your boots. # TODO RMC14 , or attach it to the end of a rifle.
@@ -32,6 +32,9 @@
   - type: DisarmMalus
     malus: 0.225
   - type: UsableWhileDevoured
+    damage:
+      types:
+        Slash: 15
   - type: AttachableVisuals
     rsi: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
     prefix: bayonet

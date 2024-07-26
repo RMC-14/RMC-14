@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: BaseStorageItem
   id: CMSurgicalCase
   name: surgical case
@@ -39,6 +39,10 @@
           Open: { visible: false }
           Closed: { visible: true }
   - type: Appearance
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMSurgicalCase

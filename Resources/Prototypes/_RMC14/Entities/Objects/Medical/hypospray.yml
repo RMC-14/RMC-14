@@ -32,6 +32,9 @@
   - type: Tag
     tags:
     - Hypospray
+  - type: MedicallyUnskilledDoAfter
+    min: 2
+    doAfter: 3
 
 - type: Tag
   id: Hypospray

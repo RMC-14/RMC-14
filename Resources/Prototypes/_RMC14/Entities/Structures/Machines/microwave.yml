@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: KitchenMicrowave
   id: CMMicrowave
   components:
@@ -24,3 +24,7 @@
       visible: false
   - type: Machine
     board: CMCircuitboardMicrowave
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

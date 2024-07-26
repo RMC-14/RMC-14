@@ -30,7 +30,7 @@ public sealed class BreechLoadedSystem : EntitySystem
 
     private void OnAttemptShoot(Entity<BreechLoadedComponent> gun, ref AttemptShootEvent args)
     {
-        if (!gun.Comp.Open && (!gun.Comp.NeedOpenClose || gun.Comp.Ready))
+        if (args.Cancelled || !gun.Comp.Open && (!gun.Comp.NeedOpenClose || gun.Comp.Ready))
             return;
 
         args.Cancelled = true;
