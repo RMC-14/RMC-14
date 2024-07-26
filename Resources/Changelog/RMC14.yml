@@ -3974,5 +3974,13 @@
   id: 468
   time: '2024-07-26T02:17:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3282
+- author: DrSmugleaf
+  changes:
+  - message: Temporarily remove heavy assault rifle mags from vendors until the heavy
+      assault rifle is available, to not confuse people about where to get it.
+    type: Fix
+  id: 469
+  time: '2024-07-26T02:30:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3284
 Name: RMC14
 Order: -1
