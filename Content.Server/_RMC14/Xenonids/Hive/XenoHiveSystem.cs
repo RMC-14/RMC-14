@@ -35,7 +35,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
                 hive.NextConstructAllowed = null;
                 Dirty(hiveId, hive);
                 var msg = Loc.GetString("rmc-construction-cooldown-ended");
-                _xenoAnnounce.AnnounceSameHive(default, msg, hiveId);
+                _xenoAnnounce.AnnounceToHive(hiveId, msg, hive.AnnounceSound);
             }
 
             for (var i = 0; i < hive.AnnouncementsLeft.Count; i++)
@@ -66,7 +66,8 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
                 continue;
 
             var popup = $"The Hive can now support: {string.Join(", ", _announce)}";
-            _xenoAnnounce.AnnounceSameHive(default, popup, hive.AnnounceSound, PopupType.Large);
+            // below is commented out because it used to not do anything, now it works but isnt localized so i think its best to have a dedicated pr look at it
+            //_xenoAnnounce.AnnounceTohive(hiveId, popup, hive.AnnounceSound, PopupType.Large);
         }
     }
 
