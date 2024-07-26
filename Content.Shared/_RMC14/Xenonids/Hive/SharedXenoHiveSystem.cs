@@ -104,7 +104,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             return;
 
         comp.Hive = hive;
-        Dirty(member, member.Comp);
+        Dirty(member, comp);
     }
 
     public void SetSeeThroughContainers(Entity<HiveComponent?> hive, bool see)

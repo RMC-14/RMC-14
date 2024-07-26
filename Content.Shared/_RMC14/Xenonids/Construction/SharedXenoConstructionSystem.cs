@@ -53,20 +53,22 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         .Where(d => d != Direction.Invalid)
         .ToImmutableArray();
 
-    private EntityQuery<HiveConstructionNodeComponent> _hiveConstructionNodeQuery;
+    private EntityQuery<HiveConstructionNodeComponent> nodeQuery;
     private EntityQuery<XenoConstructionSupportComponent> _constructionSupportQuery;
     private EntityQuery<XenoConstructionRequiresSupportComponent> _constructionRequiresSupportQuery;
     private EntityQuery<XenoConstructComponent> _xenoConstructQuery;
     private EntityQuery<XenoEggComponent> _xenoEggQuery;
+    private EntityQuery<XenoPlasmaComponent> _plasmaQuery;
     private EntityQuery<XenoWeedsComponent> _xenoWeedsQuery;
 
     public override void Initialize()
     {
-        _hiveConstructionNodeQuery = GetEntityQuery<HiveConstructionNodeComponent>();
+        nodeQuery = GetEntityQuery<HiveConstructionNodeComponent>();
         _constructionSupportQuery = GetEntityQuery<XenoConstructionSupportComponent>();
         _constructionRequiresSupportQuery = GetEntityQuery<XenoConstructionRequiresSupportComponent>();
         _xenoConstructQuery = GetEntityQuery<XenoConstructComponent>();
         _xenoEggQuery = GetEntityQuery<XenoEggComponent>();
+        _plasmaQuery = GetEntityQuery<XenoPlasmaComponent>();
         _xenoWeedsQuery = GetEntityQuery<XenoWeedsComponent>();
 
         SubscribeLocalEvent<XenoConstructComponent, MapInitEvent>(OnConstructMapInit);
@@ -304,19 +306,15 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var target = GetCoordinates(args.Coordinates);
         if (!xeno.Comp.CanOrderConstruction.Contains(args.StructureId) ||
             !CanOrderConstructionPopup(xeno, target, args.StructureId) ||
-            !TryComp(xeno, out XenoPlasmaComponent? plasma))
+            !_plasmaQuery.TryComp(xeno, out var plasma) ||
+            !_prototype.TryIndex(args.StructureId, out var prototype) ||
+            !prototype.TryGetComponent(out HiveConstructionNodeComponent? node, _compFactory))
         {
             return;
         }
 
-        if (!_prototype.TryIndex(args.StructureId, out var prototype))
+        if (!_xenoPlasma.TryRemovePlasmaPopup((xeno, plasma), node.InitialPlasmaCost))
             return;
-
-        if (prototype.TryGetComponent(out HiveConstructionNodeComponent? node, _compFactory) &&
-            !_xenoPlasma.TryRemovePlasmaPopup((xeno, plasma), node.InitialPlasmaCost))
-        {
-            return;
-        }
 
         args.Handled = true;
 
@@ -341,14 +339,14 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (args.Cancelled || args.Handled || args.Target is not { } target)
             return;
 
-        if (!TryComp(target, out HiveConstructionNodeComponent? node) ||
-            !TryComp(target, out TransformComponent? transform) ||
-            !TryComp(xeno, out XenoPlasmaComponent? plasma))
+        var xform = Transform(target);
+        if (!_nodeQuery.TryComp(target, out var node) ||
+            !_plasmaQuery.TryComp(xeno, out var plasma))
         {
             return;
         }
 
-        if (!InRangePopup(args.User, transform.Coordinates, xeno.Comp.OrderConstructionRange.Float()))
+        if (!InRangePopup(args.User, xform.Coordinates, xeno.Comp.OrderConstructionRange.Float()))
             return;
 
         var plasmaLeft = node.PlasmaCost - node.PlasmaStored;
@@ -362,7 +360,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         args.Handled = true;
 
-        _adminLogs.Add(LogType.RMCXenoOrderConstructionPlasma, $"Xeno {ToPrettyString(xeno):xeno} added {subtract} plasma to {ToPrettyString(target):target} at {transform.Coordinates}");
+        _adminLogs.Add(LogType.RMCXenoOrderConstructionPlasma, $"Xeno {ToPrettyString(xeno):xeno} added {subtract} plasma to {ToPrettyString(target):target} at {xform.Coordinates}");
 
         node.PlasmaStored += subtract;
         plasmaLeft = node.PlasmaCost - node.PlasmaStored;
@@ -381,7 +379,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         // Don't need to check if the construction is limited here since it's checked when spawning the "ghost"
 
-        var spawn = Spawn(node.Spawn, transform.Coordinates);
+        var spawn = Spawn(node.Spawn, xform.Coordinates);
         if (_hive.GetHive(target) is {} hive)
         {
             _hive.SetHive(spawn, hive);
@@ -389,7 +387,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             RaiseLocalEvent(spawn, ref ev);
         }
 
-        _adminLogs.Add(LogType.RMCXenoOrderConstructionComplete, $"Xeno {ToPrettyString(xeno):xeno} completed construction of {ToPrettyString(target):xeno} which turned into {ToPrettyString(spawn):spawn} at {transform.Coordinates}");
+        _adminLogs.Add(LogType.RMCXenoOrderConstructionComplete, $"Xeno {ToPrettyString(xeno):xeno} completed construction of {ToPrettyString(target):xeno} which turned into {ToPrettyString(spawn):spawn} at {xform.Coordinates}");
 
         QueueDel(target);
     }
@@ -631,7 +629,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
             while (directionEnumerator.MoveNext(out var ent))
             {
-                if (_hiveConstructionNodeQuery.TryGetComponent(ent, out var node) &&
+                if (nodeQuery.TryComp(ent, out var node) &&
                     node.BlockOtherNodes)
                 {
                     _popup.PopupClient(Loc.GetString("cm-xeno-too-close-to-other-node", ("target", ent.Value)), xeno, xeno);
