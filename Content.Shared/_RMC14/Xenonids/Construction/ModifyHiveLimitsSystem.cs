@@ -17,24 +17,20 @@ public sealed class ModifyHiveLimitsSystem : EntitySystem
 
     private void OnBuilt(Entity<ModifyHiveLimitsComponent> ent, ref XenoConstructBuiltEvent args)
     {
-        var hiveComp = Comp<HiveComponent>(args.Hive);
-        var hive = (args.Hive, hiveComp);
         foreach (var (id, limit) in ent.Comp.Construction)
         {
-            _hive.AdjustConstructLimit(hive, id, limit);
+            _hive.AdjustConstructLimit(args.Hive, id, limit);
         }
     }
 
     private void OnShutdown(Entity<ModifyHiveLimitsComponent> ent, ref ComponentShutdown args)
     {
-        if (CompOrNull<HiveMemberComponent>(ent)?.Hive is not {} hiveId ||
-            TerminatingOrDeleted(hiveId) ||
-            !TryComp<HiveComponent>(hiveId, out var hiveComp))
+        if (_hive.GetHive(ent.Owner) is not {} hive)
             return;
 
         // subtracting instead of adding here
-        // if you manage to get a limit to 0 prior to this being removed
-        var hive = (hiveId, hiveComp);
+        // if you manage to get a limit to 0 prior to this being removed it goes negative
+        // to prevent possible infinite construction stacking, youd have to pay off your exploited one before making more
         foreach (var (id, limit) in ent.Comp.Construction)
         {
             _hive.AdjustConstructLimit(hive, id, -limit);

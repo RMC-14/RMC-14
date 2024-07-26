@@ -101,8 +101,6 @@
   - type: HiveConstructionNode
     plasmaCost: 1000
     spawn: HiveCoreXeno
-  - type: HiveConstructionUnique
-    id: HiveCoreXeno
 
 - type: entity
   parent: BaseXenoConstructionNode
@@ -123,5 +121,3 @@
   - type: HiveConstructionNode
     plasmaCost: 500
     spawn: HiveClusterXeno
-  - type: HiveConstructionUnique
-    id: HiveClusterXeno

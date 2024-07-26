@@ -28,6 +28,7 @@ public sealed partial class HiveConstructionNodeComponent : Component
 
     /// <summary>
     /// The entity to spawn once enough plasma is stored.
+    /// This is required to be present in the hive's <c>ConstructionLimits</c>.
     /// </summary>
     [DataField(required: true), AutoNetworkedField]
     public EntProtoId Spawn;

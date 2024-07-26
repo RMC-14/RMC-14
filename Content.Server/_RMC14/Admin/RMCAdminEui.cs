@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Content.Server._RMC14.Rules;
+using Content.Server._RMC14.Xenonids.Hive;
 using Content.Server.Administration;
 using Content.Server.Administration.Managers;
 using Content.Server.EUI;
@@ -22,7 +23,7 @@ public sealed class RMCAdminEui : BaseEui
     [Dependency] private readonly IEntityManager _entities = default!;
 
     private readonly RMCAdminSystem _rmcAdmin;
-    private readonly SharedXenoHiveSystem _hive;
+    private readonly XenoHiveSystem _hive;
     private readonly MindSystem _mind;
     private readonly SquadSystem _squad;
     private readonly SharedTransformSystem _transform;
@@ -35,7 +36,7 @@ public sealed class RMCAdminEui : BaseEui
         IoCManager.InjectDependencies(this);
 
         _rmcAdmin = _entities.System<RMCAdminSystem>();
-        _hive = _entities.System<SharedXenoHiveSystem>();
+        _hive = _entities.System<XenoHiveSystem>();
         _mind = _entities.System<MindSystem>();
         _squad = _entities.System<SquadSystem>();
         _transform = _entities.System<SharedTransformSystem>();

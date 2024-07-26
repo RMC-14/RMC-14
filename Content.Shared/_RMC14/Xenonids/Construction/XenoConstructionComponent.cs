@@ -12,6 +12,11 @@ public sealed partial class XenoConstructionComponent : Component
     [DataField, AutoNetworkedField]
     public FixedPoint2 BuildRange = 1.9;
 
+    /// <summary>
+    /// Hive construction node entities that can be built, similar to blueprints.
+    /// Plasma is added by xenos to finish their construction.
+    /// Nodes and fully made structures abide by the hive's construction limits.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public List<EntProtoId> CanBuild = new();
 

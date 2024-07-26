@@ -36,11 +36,12 @@ public sealed partial class HiveComponent : Component
     [DataField]
     public TimeSpan NewQueenCooldown = TimeSpan.FromMinutes(5);
 
+    /// <summary>
+    /// Set when the hive core is destroyed, this is when new constructs can be made.
+    /// Once it expires an announcement is made.
+    /// </summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan? LastConstruct;
-
-    [DataField]
-    public TimeSpan NewConstructCooldown = TimeSpan.FromMinutes(5);
+    public TimeSpan? NextConstructAllowed;
 
     /// <summary>
     /// How many of each hive construction can be built.

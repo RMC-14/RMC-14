@@ -10,6 +10,7 @@ cm-xeno-construction-plasma-left = A {$construction} construction is designated 
 cm-xeno-cant-reach-there = You can't reach there!
 cm-xeno-cant-build-in-self = You can't build structures that close!
 cm-xeno-unique-exists = You can't build another {$choice}!
+cm-xeno-construction-cooldown = The weeds are still recovering from the death of the hive core, wait until the weeds have recovered!
 
 # Evolve
 cm-xeno-available-evolutions = Available Evolutions
