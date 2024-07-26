@@ -19,7 +19,7 @@ namespace Content.Server.GameTicking
         /// How long before RoundStartTime do we load maps.
         /// </summary>
         [ViewVariables]
-        public TimeSpan RoundPreloadTime { get; } = TimeSpan.FromSeconds(140);
+        public TimeSpan RoundPreloadTime { get; } = TimeSpan.FromSeconds(15);
 
         [ViewVariables]
         private TimeSpan _pauseTime;
