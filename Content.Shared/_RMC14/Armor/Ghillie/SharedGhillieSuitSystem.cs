@@ -31,7 +31,6 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
         SubscribeLocalEvent<GhillieSuitComponent, GotUnequippedEvent>(OnUnequipped);
         SubscribeLocalEvent<GhillieSuitComponent, GhillieSuitDoAfterEvent>(OnDoAfter);
 
-        SubscribeLocalEvent<MarineComponent, ShotAttemptedEvent>(OnShotAttempted);
         SubscribeLocalEvent<MarineComponent, MoveEvent>(OnMove);
     }
 
@@ -141,24 +140,13 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
         return null;
     }
 
-    /// <summary>
-    /// Disable the abilities when the user fires a weapon
-    /// </summary>
-    private void OnShotAttempted(Entity<MarineComponent> ent, ref ShotAttemptedEvent args)
-    {
-        var user = ent.Owner;
-        var suit = FindSuit(user);
-
-        if (suit != null)
-            SetCloakEnabled(suit.Value, user, false);
-    }
-
     private void OnMove(Entity<MarineComponent> ent, ref MoveEvent args)
     {
         var user = ent.Owner;
         var suit = FindSuit(user);
+        var length = (args.NewPosition.Position - args.OldPosition.Position).Length();
 
-        if (suit != null)
+        if (suit != null && length > 0)
             SetCloakEnabled(suit.Value, user, false);
     }
 }
