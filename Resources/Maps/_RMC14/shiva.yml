@@ -10805,18 +10805,18 @@ entities:
   entities:
   - uid: 5558
     components:
+    - type: MetaData
+      name: 'LZ2: Research Landing Zone'
     - type: Transform
       pos: 22.5,139.5
       parent: 1
-    - type: MetaData
-      name: "LZ2: Research Landing Zone"
   - uid: 5559
     components:
+    - type: MetaData
+      name: LZ1 Landing Zone
     - type: Transform
       pos: 23.5,32.5
       parent: 1
-    - type: MetaData
-      name: "LZ1 Landing Zone"
 - proto: CMFax
   entities:
   - uid: 7732
@@ -79599,6 +79599,123 @@ entities:
       name: Lower Bay
     - type: Transform
       pos: 159.5,88.5
+      parent: 1
+- proto: RMCSpawnerFigurinePatron
+  entities:
+  - uid: 14758
+    components:
+    - type: Transform
+      pos: 51.5,17.5
+      parent: 1
+  - uid: 14759
+    components:
+    - type: Transform
+      pos: 51.5,24.5
+      parent: 1
+  - uid: 14760
+    components:
+    - type: Transform
+      pos: 45.5,46.5
+      parent: 1
+  - uid: 14761
+    components:
+    - type: Transform
+      pos: 32.5,73.5
+      parent: 1
+  - uid: 14762
+    components:
+    - type: Transform
+      pos: 9.5,138.5
+      parent: 1
+  - uid: 14763
+    components:
+    - type: Transform
+      pos: 59.5,144.5
+      parent: 1
+  - uid: 14764
+    components:
+    - type: Transform
+      pos: 107.5,141.5
+      parent: 1
+  - uid: 14765
+    components:
+    - type: Transform
+      pos: 140.5,139.5
+      parent: 1
+  - uid: 14766
+    components:
+    - type: Transform
+      pos: 155.5,142.5
+      parent: 1
+  - uid: 14767
+    components:
+    - type: Transform
+      pos: 172.5,135.5
+      parent: 1
+  - uid: 14768
+    components:
+    - type: Transform
+      pos: 189.5,142.5
+      parent: 1
+  - uid: 14769
+    components:
+    - type: Transform
+      pos: 194.5,87.5
+      parent: 1
+  - uid: 14770
+    components:
+    - type: Transform
+      pos: 152.5,85.5
+      parent: 1
+  - uid: 14771
+    components:
+    - type: Transform
+      pos: 195.5,42.5
+      parent: 1
+  - uid: 14772
+    components:
+    - type: Transform
+      pos: 210.5,19.5
+      parent: 1
+  - uid: 14773
+    components:
+    - type: Transform
+      pos: 126.5,11.5
+      parent: 1
+  - uid: 14774
+    components:
+    - type: Transform
+      pos: 61.5,92.5
+      parent: 1
+  - uid: 14775
+    components:
+    - type: Transform
+      pos: 70.5,127.5
+      parent: 1
+  - uid: 14776
+    components:
+    - type: Transform
+      pos: 91.5,100.5
+      parent: 1
+  - uid: 14777
+    components:
+    - type: Transform
+      pos: 103.5,96.5
+      parent: 1
+  - uid: 14778
+    components:
+    - type: Transform
+      pos: 107.5,70.5
+      parent: 1
+  - uid: 14779
+    components:
+    - type: Transform
+      pos: 129.5,53.5
+      parent: 1
+  - uid: 14780
+    components:
+    - type: Transform
+      pos: 158.5,70.5
       parent: 1
 - proto: RMCStairs
   entities:
