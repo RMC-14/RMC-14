@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Rules.CrashLand;
@@ -850,20 +850,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     {
         var mapId = _mapManager.CreateMap();
 
-        SelectedPlanetMap = _random.Pick(_planetMaps.Split(","));
-        SelectedPlanetMapName = SelectedPlanetMap.Replace("/Maps/_RMC14/", "").Replace(".yml", "");
-
-        // TODO RMC14 save these somewhere and avert the shitcode
-        SelectedPlanetMapName = SelectedPlanetMapName switch
-        {
-            "lv624" => "LV-624",
-            "solaris" => "Solaris Ridge",
-            "prison" => "Fiorina Science Annex",
-            "shiva" => "Shivas Snowball",
-            _ => SelectedPlanetMapName,
-        };
-
-        if (!_mapLoader.TryLoad(mapId, SelectedPlanetMap, out var grids))
+        //Just in case the planet was not selected before now
+        if (!_mapLoader.TryLoad(mapId, SelectRandomPlanet(), out var grids))
             return false;
 
         EnsureComp<RMCPlanetComponent>(_mapManager.GetMapEntityId(mapId));
@@ -1131,6 +1119,24 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         }
     }
 
+    public string SelectRandomPlanet()
+    {
+        if (SelectedPlanetMap != null)
+            return string.Empty;
+        SelectedPlanetMap = _random.Pick(_planetMaps.Split(","));
+        SelectedPlanetMapName = SelectedPlanetMap.Replace("/Maps/_RMC14/", "").Replace(".yml", "");
+
+        // TODO RMC14 save these somewhere and avert the shitcode
+        SelectedPlanetMapName = SelectedPlanetMapName switch
+        {
+            "lv624" => "LV-624",
+            "solaris" => "Solaris Ridge",
+            "prison" => "Fiorina Science Annex",
+            "shiva" => "Shivas Snowball",
+            _ => SelectedPlanetMapName,
+        };
+        return SelectedPlanetMap;
+    }
     private string GetRandomOperationName()
     {
         var name = string.Empty;
