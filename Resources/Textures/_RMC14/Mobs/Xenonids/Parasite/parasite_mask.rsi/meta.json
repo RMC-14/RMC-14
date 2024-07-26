@@ -1,22 +1,22 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/05eaa3484b1a35aa759300bcfc8f0119f009daae/icons/mob/humans/onmob/mask.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/05eaa3484b1a35aa759300bcfc8f0119f009daae/icons/mob/humans/onmob/mask.dmi, recolored by Dutch-VanDerLinde",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-      "name": "human",
+      "name": "equipped-MASK",
       "directions": 4
     },
     {
-      "name": "corgi",
+      "name": "equipped-MASK-dog",
       "directions": 4
     },
     {
-      "name": "corgi_puppy",
+      "name": "equipped-MASK-puppy",
       "directions": 4
     }
   ]

@@ -12,6 +12,7 @@ using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Ghost;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Jittering;
 using Content.Shared.Mobs;
@@ -197,8 +198,6 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
     {
         victim.Comp.FallOffAt = _timing.CurTime + victim.Comp.FallOffDelay;
         victim.Comp.BurstAt = _timing.CurTime + victim.Comp.BurstDelay;
-
-        _appearance.SetData(victim, victim.Comp.InfectedLayer, true);
     }
 
     private void OnVictimInfectedRemoved(Entity<VictimInfectedComponent> victim, ref ComponentRemove args)
@@ -351,14 +350,15 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         _status.TryAddStatusEffect(victim, "Muted", parasite.Comp.ParalyzeTime, true, "Muted");
         RefreshIncubationMultipliers(victim);
 
-        var container = _container.EnsureContainer<ContainerSlot>(victim, victimComp.ContainerId);
-        _container.Insert(parasite.Owner, container);
-
         _blindable.UpdateIsBlind(victim);
-        _appearance.SetData(parasite, victimComp.InfectedLayer, true);
+        _inventory.TryEquip(victim, parasite.Owner, "mask", true, true, true);
 
         // TODO RMC14 also do damage to the parasite
         EnsureComp<ParasiteSpentComponent>(parasite);
+
+        var unremovable = EnsureComp<UnremoveableComponent>(parasite);
+        unremovable.DeleteOnDrop = false;
+        Dirty(parasite);
 
         ParasiteLeapHit(parasite);
         return true;
@@ -399,9 +399,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             if (infected.FallOffAt < time && !infected.FellOff)
             {
                 infected.FellOff = true;
-                _appearance.SetData(uid, infected.InfectedLayer, false);
-                if (_container.TryGetContainer(uid, infected.ContainerId, out var container))
-                    _container.EmptyContainer(container);
+                _inventory.TryUnequip(uid, "mask", true, true, true);
             }
 
             if (infected.RecoverAt < time && !infected.Recovered)

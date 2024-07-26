@@ -67,3 +67,10 @@
       path: /Audio/_RMC14/Xeno/alien_parasite_dies.ogg
       params:
         volume: -12
+  - type: IdentityBlocker
+  - type: Clothing
+    slots: [mask]
+    sprite: _RMC14/Mobs/Xenonids/Parasite/parasite_mask.rsi
+  - type: HideLayerClothing
+    slots:
+    - Snout
