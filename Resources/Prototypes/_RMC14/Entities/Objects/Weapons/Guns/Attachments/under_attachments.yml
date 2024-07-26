@@ -350,7 +350,6 @@
         volume: 5
   - type: ShootAtFixedPoint
     maxFixedRange: 7
-  - type: UseDelay
   - type: UniqueAction
   - type: BreechLoaded
     needOpenClose: true
