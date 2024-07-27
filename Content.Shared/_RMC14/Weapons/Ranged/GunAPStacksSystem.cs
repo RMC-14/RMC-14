@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared._RMC14.Xenoids.Components;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
