@@ -398,7 +398,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: bombard
     event: !type:XenoBombardActionEvent
-    range: 9
+    range: 10
     checkCanAccess: false
   - type: ActionSharedCooldown
     id: ActionXenoBombard
