@@ -3996,5 +3996,12 @@
   id: 471
   time: '2024-07-27T06:15:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3333
+- author: Vermidia
+  changes:
+  - message: Fix bombard range being too small to take advantage of long-range sight
+    type: Fix
+  id: 472
+  time: '2024-07-27T06:21:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3321
 Name: RMC14
 Order: -1
