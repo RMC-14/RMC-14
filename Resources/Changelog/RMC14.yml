@@ -4017,5 +4017,15 @@
   id: 474
   time: '2024-07-27T08:16:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3346
+- author: ShadowCommander
+  changes:
+  - message: Xenonids are now able to see resin walls, doors, and membrane through
+      walls.
+    type: Add
+  - message: Xenonids are now able to see eggs through walls.
+    type: Add
+  id: 475
+  time: '2024-07-27T08:33:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3003
 Name: RMC14
 Order: -1
