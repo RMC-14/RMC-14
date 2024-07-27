@@ -45,3 +45,15 @@
   category: construction-category-cm-materials
   icon: { sprite: _RMC14/Objects/Materials/parts.rsi, state: rods_plasteel }
   objectType: Item
+
+- type: construction
+  parent: RMC
+  id: CMSteelConvert
+  name: military grade steel
+  graph: ConvertMetalGraph
+  startNode: start
+  targetNode: nodeCMSteel
+  category: construction-category-cm-materials
+  description: Hammer non-conformant metal sheets into military-grade steel sheets for usage in barricades and other military operations.
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/metal.rsi, state: steel }
+  objectType: Item

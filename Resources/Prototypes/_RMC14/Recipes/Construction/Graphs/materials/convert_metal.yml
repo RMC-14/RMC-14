@@ -1,0 +1,17 @@
+- type: constructionGraph
+  parent: RMC
+  id: ConvertMetalGraph
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: nodeCMSteel
+          completed:
+            - !type:SetStackCount
+              amount: 1
+          steps:
+            - material: Steel
+              amount: 1
+
+    - node: nodeCMSteel
+      entity: CMSteel
