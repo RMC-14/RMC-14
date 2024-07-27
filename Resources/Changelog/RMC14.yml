@@ -4027,5 +4027,14 @@
   id: 475
   time: '2024-07-27T08:33:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3003
+- author: BackeTako
+  changes:
+  - message: Fixed autolathe looking very bright.
+    type: Fix
+  - message: Fixed the snack vending machine looking very bright.
+    type: Fix
+  id: 476
+  time: '2024-07-27T11:52:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3356
 Name: RMC14
 Order: -1
