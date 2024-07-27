@@ -37,7 +37,7 @@
       completed:
       - !type:SnapToGrid
       steps:
-      - material: MetalRod
+      - material: CMRodMetal
         amount: 6
         doAfter: 6
 
