@@ -45,7 +45,6 @@ using Content.Shared.Physics;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Content.Shared.Shuttles.Components;
-using Microsoft.Extensions.Logging.Abstractions;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
