@@ -127,6 +127,8 @@
       - Catwalk
   - type: RequisitionsElevator
   - type: CargoSellBlacklist
+  - type: WarpPoint
+    name: the pit
 
 - type: entity
   parent: CMBaseStructureCorrodible
