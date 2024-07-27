@@ -31,6 +31,4 @@
     damage:
       types:
         Piercing: 80
-  - type: CMArmorPiercing
-    amount: 0
   - type: GunAPStacks
