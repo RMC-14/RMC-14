@@ -86,12 +86,9 @@ namespace Content.Server.GameTicking
         /// </remarks>
         private void LoadMaps()
         {
-            _distressSignal.SelectRandomPlanet();
-
             //If the map already exists still update the info text to show the new planet
             if (_mapManager.MapExists(DefaultMap))
             {
-                UpdateInfoText();
                 return;
             }
 

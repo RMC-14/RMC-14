@@ -45,6 +45,7 @@ using Content.Shared.Physics;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Content.Shared.Shuttles.Components;
+using Microsoft.Extensions.Logging.Abstractions;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -146,6 +147,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
+        SubscribeLocalEvent<LoadingMapsEvent>(OnMapLoading);
         SubscribeLocalEvent<RulePlayerSpawningEvent>(OnRulePlayerSpawning);
         SubscribeLocalEvent<PlayerSpawningEvent>(OnPlayerSpawning,
             before: [typeof(ArrivalsSystem), typeof(SpawnPointSystem)]);
@@ -183,6 +185,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     {
         if (ev.WasModified<EntityPrototype>())
             ReloadPrototypes();
+    }
+
+    private void OnMapLoading(LoadingMapsEvent ev)
+    {
+        SelectRandomPlanet();
+        //Just in case the info text is not updated previousely
+        GameTicker.UpdateInfoText();
     }
 
     private void OnRulePlayerSpawning(RulePlayerSpawningEvent ev)
@@ -492,8 +501,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
-        if (!_autoBalance)
+        if (!_autoBalance) {
+            //Just to make sure the planet gets reset
+            ResetSelectedPlanet();
             return;
+        }
 
         var rules = QueryAllRules();
         while (rules.MoveNext(out var comp, out _))
@@ -532,6 +544,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             break;
         }
+        ResetSelectedPlanet();
     }
 
     private void OnMobStateChanged<T>(Entity<T> ent, ref MobStateChangedEvent args) where T : IComponent?
@@ -1119,7 +1132,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         }
     }
 
-    public string SelectRandomPlanet()
+    private string SelectRandomPlanet()
     {
         if (SelectedPlanetMap != null)
             return string.Empty;
@@ -1136,6 +1149,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             _ => SelectedPlanetMapName,
         };
         return SelectedPlanetMap;
+    }
+
+    private void ResetSelectedPlanet()
+    {
+        SelectedPlanetMap = null;
+        SelectedPlanetMapName = null;
     }
     private string GetRandomOperationName()
     {
