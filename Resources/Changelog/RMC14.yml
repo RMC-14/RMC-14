@@ -4010,5 +4010,12 @@
   id: 473
   time: '2024-07-27T06:40:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3189
+- author: thymol-blue
+  changes:
+  - message: Biohazardous barricades are now constructible with six metal rods.
+    type: Fix
+  id: 474
+  time: '2024-07-27T08:16:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3346
 Name: RMC14
 Order: -1
