@@ -113,7 +113,7 @@
   parent: ClothingEyesBase
   id: RMCGogglesPrescriptionBallistic
   name: Prescription ballistic goggles
-  description: This is a prescription marine ballistic goggles. It is a small item. Standard issue USCM goggles. Mostly used to decorate one's helmet. Contains prescription lenses in case you weren't sure if they were lame or not.
+  description: Standard issue USCM goggles. Mostly used to decorate one's helmet. Contains prescription lenses in case you weren't sure if they were lame or not.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Prescription_ballistic_goggles.rsi
