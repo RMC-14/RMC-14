@@ -211,7 +211,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (_prototype.TryIndex(effectID, out var effectProto) && _net.IsServer)
             effect = Spawn(effectID, entityCoords);
 
-        var ev = new XenoSecreteStructureDoAfterEvent(coordinates, choice, EntityManager.GetNetEntity(effect));
+        var ev = new XenoSecreteStructureDoAfterEvent(coordinates, choice, GetNetEntity(effect));
         args.Handled = true;
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.BuildDelay, ev, xeno)
         {
