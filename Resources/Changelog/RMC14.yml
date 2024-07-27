@@ -4003,5 +4003,12 @@
   id: 472
   time: '2024-07-27T06:21:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3321
+- author: MisterVAdos
+  changes:
+  - message: Added marine goggles.
+    type: Add
+  id: 473
+  time: '2024-07-27T06:40:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3189
 Name: RMC14
 Order: -1
