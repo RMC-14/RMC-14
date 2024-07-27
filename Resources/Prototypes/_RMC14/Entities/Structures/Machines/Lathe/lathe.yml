@@ -10,9 +10,9 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/autolathe.rsi
     layers:
-    - state: autolathe_n
-      map: ["enum.LatheVisualLayers.IsRunning"]
     - state: autolathe
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: autolathe_u
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
     - state: autolathe_t
