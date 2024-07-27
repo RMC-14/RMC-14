@@ -11,7 +11,7 @@ public abstract class GunAPStacksSystem : EntitySystem
         SubscribeLocalEvent<GunAPStacksModifierComponent, AmmoShotEvent>(OnGunShot);
         SubscribeLocalEvent<GunAPStacksModifierComponent, ProjectileEmbedEvent>(ChangeStack);
     }
-    private void OnGunShot(Entity<GunAPStacksModifierComponent> ent)
+    private void OnGunShot(Entity<GunAPStacksModifierComponent> ent, ref AmmoShotEvent args)
     {
         //Apply AP to the bullet
         ent.Comp.AP = ent.Comp.Stacks * 10;
