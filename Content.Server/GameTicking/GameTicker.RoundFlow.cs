@@ -86,11 +86,8 @@ namespace Content.Server.GameTicking
         /// </remarks>
         private void LoadMaps()
         {
-            //If the map already exists still update the info text to show the new planet
             if (_mapManager.MapExists(DefaultMap))
-            {
                 return;
-            }
 
             AddGamePresetRules();
 
