@@ -113,4 +113,10 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCEvolutionPointsAccumulateBeforeMinutes =
         CVarDef.Create("rmc.evolution_points_accumulate_before_minutes", 15, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCAtmosTileEqualize =
+        CVarDef.Create("rmc.atmos_tile_equalize", false, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCGasTileOverlayUpdate =
+        CVarDef.Create("rmc.gas_tile_overlay_update", false, CVar.REPLICATED | CVar.SERVER);
 }

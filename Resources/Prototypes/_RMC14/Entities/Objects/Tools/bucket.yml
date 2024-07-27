@@ -12,7 +12,7 @@
       state: bucket-1
       visible: false
   - type: Item
-    size: Normal
+    size: Huge
   - type: SolutionContainerManager
     solutions:
       bucket:

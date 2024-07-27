@@ -119,4 +119,16 @@ public sealed class XenoProjectileSystem : EntitySystem
 
         return true;
     }
+
+    public void SetSameHive(Entity<XenoProjectileComponent?> projectile, Entity<XenoComponent?> xeno)
+    {
+        if (!Resolve(projectile, ref projectile.Comp, false) ||
+            !Resolve(xeno, ref xeno.Comp, false))
+        {
+            return;
+        }
+
+        projectile.Comp.Hive = xeno.Comp.Hive;
+        Dirty(projectile);
+    }
 }

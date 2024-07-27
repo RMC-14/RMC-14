@@ -129,6 +129,32 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             Dirty(actor, user);
         }
 
+        if (section.Choices is { } choices)
+        {
+            user = EnsureComp<CMVendorUserComponent>(actor);
+            if (!user.Choices.TryGetValue(choices.Id, out var playerChoices))
+            {
+                playerChoices = 0;
+                user.Choices[choices.Id] = playerChoices;
+                Dirty(actor, user);
+            }
+
+            if (playerChoices >= choices.Amount)
+            {
+                Log.Error($"{ToPrettyString(actor)} tried to buy too many choices.");
+                return;
+            }
+
+            user.Choices[choices.Id] = ++playerChoices;
+            Dirty(actor, user);
+        }
+
+        void ResetChoices()
+        {
+            if (section.Choices is { } choices && user != null)
+                user.Choices[choices.Id]--;
+        }
+
         if (section.SharedSpecLimit is { } globalLimit)
         {
             if (HasComp<RMCVendorSpecialistComponent>(vendor))
@@ -139,10 +165,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 // If the vendor's own value is at or above the capacity, immediately return.
                 if (thisSpecVendor.GlobalSharedVends.TryGetValue(args.Entry, out vendCount) && vendCount >= section.SharedSpecLimit)
                 {
+                    // FIXME
+                    ResetChoices();
                     _popup.PopupEntity(Loc.GetString("cm-vending-machine-specialist-max"), vendor, actor);
                     return;
                 }
-                
+
                 // Get every RMCVendorSpec
                 var specVendors = EntityQueryEnumerator<RMCVendorSpecialistComponent>();
                 // Used to verify newer vendors
@@ -176,34 +204,15 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
                 if (thisSpecVendor.GlobalSharedVends[args.Entry] >= section.SharedSpecLimit)
                 {
+                    ResetChoices();
                     _popup.PopupEntity(Loc.GetString("cm-vending-machine-specialist-max"), vendor.Owner, actor);
                     return;
                 }
                 else
-                    thisSpecVendor.GlobalSharedVends[args.Entry] += 1; 
+                    thisSpecVendor.GlobalSharedVends[args.Entry] += 1;
 
                 Dirty(thisSpecVendor);
             }
-        }
-
-        if (section.Choices is { } choices)
-        {
-            user = EnsureComp<CMVendorUserComponent>(actor);
-            if (!user.Choices.TryGetValue(choices.Id, out var playerChoices))
-            {
-                playerChoices = 0;
-                user.Choices[choices.Id] = playerChoices;
-                Dirty(actor, user);
-            }
-
-            if (playerChoices >= choices.Amount)
-            {
-                Log.Error($"{ToPrettyString(actor)} tried to buy too many choices.");
-                return;
-            }
-
-            user.Choices[choices.Id] = ++playerChoices;
-            Dirty(actor, user);
         }
 
         if (entry.Points != null)

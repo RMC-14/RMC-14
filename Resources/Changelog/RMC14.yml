@@ -3912,5 +3912,129 @@
   id: 460
   time: '2024-07-25T12:54:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3263
+- author: DrSmugleaf
+  changes:
+  - message: Fixed hyposprays not having a delay on use for medically unskilled marines.
+    type: Fix
+  id: 461
+  time: '2024-07-25T22:02:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3272
+- author: DrSmugleaf
+  changes:
+  - message: Fixed weapons specialist ammo erroneously saying that a limit was reached
+      when trying to buy them. This limit only applies to kits.
+    type: Fix
+  id: 462
+  time: '2024-07-25T22:01:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3271
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the Boiler's bombard ability not taking plasma to use. It now correctly
+      takes 200 plasma to use.
+    type: Fix
+  id: 463
+  time: '2024-07-25T22:09:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3273
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the Boiler's Bombard putting Spray Acid on cooldown, Bombard now
+      correctly only puts Acid Shroud on cooldown, and Acid Shroud puts both Bombard
+      and Spray acid on cooldown.
+    type: Fix
+  id: 464
+  time: '2024-07-25T22:40:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3274
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Requisitions not getting their free 80 m44 speed loaders round-start.
+    type: Fix
+  id: 465
+  time: '2024-07-25T22:55:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3276
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the Boiler's Bombard projectile colliding with xenonids of the
+      same hive. It can now be shot through friendly xenonids.
+    type: Fix
+  id: 466
+  time: '2024-07-26T01:43:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3277
+- author: DrSmugleaf
+  changes:
+  - message: Fixed dropships taking 1 second to travel.
+    type: Fix
+  id: 467
+  time: '2024-07-26T02:18:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3283
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the pheromones radial appearing in kingdom com. It now appears
+      centered on your character.
+    type: Fix
+  id: 468
+  time: '2024-07-26T02:17:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3282
+- author: DrSmugleaf
+  changes:
+  - message: Temporarily remove heavy assault rifle mags from vendors until the heavy
+      assault rifle is available, to not confuse people about where to get it.
+    type: Fix
+  id: 469
+  time: '2024-07-26T02:30:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3284
+- author: BackeTako
+  changes:
+  - message: Fixed doors looking bright when bolted.
+    type: Fix
+  id: 470
+  time: '2024-07-27T06:09:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3337
+- author: UnicornOnLSD
+  changes:
+  - message: Meatzels can be found in marine MREs
+    type: Add
+  id: 471
+  time: '2024-07-27T06:15:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3333
+- author: Vermidia
+  changes:
+  - message: Fix bombard range being too small to take advantage of long-range sight
+    type: Fix
+  id: 472
+  time: '2024-07-27T06:21:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3321
+- author: MisterVAdos
+  changes:
+  - message: Added marine goggles.
+    type: Add
+  id: 473
+  time: '2024-07-27T06:40:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3189
+- author: thymol-blue
+  changes:
+  - message: Biohazardous barricades are now constructible with six metal rods.
+    type: Fix
+  id: 474
+  time: '2024-07-27T08:16:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3346
+- author: ShadowCommander
+  changes:
+  - message: Xenonids are now able to see resin walls, doors, and membrane through
+      walls.
+    type: Add
+  - message: Xenonids are now able to see eggs through walls.
+    type: Add
+  id: 475
+  time: '2024-07-27T08:33:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3003
+- author: BackeTako
+  changes:
+  - message: Fixed autolathe looking very bright.
+    type: Fix
+  - message: Fixed the snack vending machine looking very bright.
+    type: Fix
+  id: 476
+  time: '2024-07-27T11:52:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3356
 Name: RMC14
 Order: -1

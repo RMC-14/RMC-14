@@ -240,14 +240,14 @@
 #        amount: 10
     - name: Miscellaneous
       entries:
-#      - id: Ballistic goggles
-#        amount: 10
-#      - id: M1A1 Ballistic goggles
-#        amount: 10
-#      - id: Prescription ballistic goggles
-#        amount: 10
-#      - id: Marine RPG glasses
-#        amount: 10
+      - id: RMCGogglesBallistic
+        amount: 10
+      - id: RMCGogglesM1A1Ballistic
+        amount: 10
+      - id: RMCGogglesPrescriptionBallistic
+        amount: 10
+      - id: RMCGlassesMarineRpg
+        amount: 10
 #      - id: M5 Integrated Gas Mask
 #        amount: 10
 #      - id: M10 Helmet Netting

@@ -226,7 +226,9 @@ public abstract class SharedDropshipSystem : EntitySystem
     public virtual bool FlyTo(Entity<DropshipNavigationComputerComponent> computer,
         EntityUid destination,
         EntityUid? user,
-        bool hijack = false)
+        bool hijack = false,
+        float? startupTime = null,
+        float? hyperspaceTime = null)
     {
         return false;
     }

@@ -142,7 +142,7 @@
 
 - type: entity
   name: M5-ATL
-  parent:  [BaseWeaponLauncher, CMBaseWeaponGun]
+  parent:  [BaseWeaponLauncher, CMBaseWeaponGun, RMCBaseAttachableHolder]
   id: RMCWeaponLauncherM5ATL
   description: "The M5 Anti-Tank Launcher is a powerful anti-armor infantry weapon, commonly fielded by the UNMC. Used to take out light-tanks and enemy structures, the M5-ATL is a dangerous weapon with a variety of combat uses, depending on the loaded ammunition, and is capable of firing both shells and rocket-propelled grenades.\n\nThis one is missing its smart optics completely, and seems to be damaged, greatly limiting its range..."
   components:
@@ -186,7 +186,7 @@
   - type: RMCNameItemOnVend
     item: PrimaryGun
   - type: OnShootTriggerAmmoTimer
-    delay: 0.2 # TODO RMC14 Make some way for rockets to explode when they stop stop, for shooting at the ground closer than max range.
+    delay: 0.2 # TODO RMC14 Make some way for rockets to explode when they stop, for shooting at the ground closer than max range.
     # This is a temporary hack to guarantee it will always go off after stopping even if it doesn't collide with anything.
     # Works for almost all gameplay purposes at least right now because even max range rockets are less than 0.2s and it's fast enough not matter.
   - type: ShootAtFixedPoint
@@ -196,3 +196,12 @@
     baseSprint: 0.559
   - type: WieldDelay
     baseDelay: 1.2
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentMagneticHarness
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: -0.12, 0.1
