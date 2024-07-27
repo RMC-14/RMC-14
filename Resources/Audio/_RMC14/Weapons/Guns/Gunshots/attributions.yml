@@ -89,8 +89,9 @@
   source: "https://github.com/cmss13-devs/cmss13/blob/97365cd3721e668f87a7b180f5bd47e8d976e451/sound/weapons/gun_su6.ogg"
 
 - files: ["gun_ml66a.ogg"]
-  license: "CC-BY-4.0" # Pixabay usage terms at https://pixabay.com/service/terms/
-  copyright: "Taken and modified from soundsnap/freesound"
+  license: "CC-BY-4.0"
+  copyright: "Taken and modified from soundsnap/freesound, Pixabay usage terms at https://pixabay.com/service/terms/
+"
   source: "https://pixabay.com/sound-effects/battle-rifle-42734/"
           "https://freesound.org/people/NoahBangs/sounds/607320/"
 
