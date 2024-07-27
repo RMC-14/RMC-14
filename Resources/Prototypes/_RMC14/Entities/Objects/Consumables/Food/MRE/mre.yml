@@ -57,6 +57,8 @@
       orGroup: snack
     - id: CMMREComponentMeatballs
       orGroup: snack
+    - id: RMCMREComponentMeatzels
+      orGroup: snack
     - id: CMMREComponentPretzels
       orGroup: snack
     - id: CMMREComponentPeanuts
