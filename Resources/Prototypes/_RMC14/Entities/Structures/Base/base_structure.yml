@@ -36,6 +36,9 @@
   - type: NpcFactionMember
     factions:
     - RMCXeno
+  - type: RMCNightVisionVisible
+    priority: -1
+    transparency: 0.2
 
 - type: entity
   id: CMCorrodible
@@ -94,6 +97,8 @@
     isCorrodible: true
   - type: Clickable
   - type: RMCWallExplosionDeletable
+  - type: DamageMultiplierFlags
+    flags: Turf
 
 - type: entity
   parent:
@@ -115,3 +120,5 @@
     key: walls
   - type: ExplosionResistance
     damageCoefficient: 12.5 # Walls take 15x explosive damage, resin walls reduce that by 15%
+  - type: DamageMultiplierFlags
+    flags: Turf

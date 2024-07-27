@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CigPackBase
   id: CMCigarettePackLuckySloths
   name: lucky sloths mini packet
@@ -44,3 +44,7 @@
     - cig4
   - type: MREItem
   - type: FixedItemSizeStorage
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

@@ -58,6 +58,10 @@
     items:
       tags:
       - PillCanister
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMFirstAidKit

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: BaseStorageItem
   id: RMCBaseGunCase
   abstract: true
@@ -28,6 +28,10 @@
     grid:
     - 0,0,27,1
   - type: FixedItemSizeStorage
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCBaseGunCase
@@ -47,3 +51,47 @@
     contents:
     - id: RMCWeaponPistolSU6
     - id: RMCBeltSmartPistolFilled
+
+- type: entity
+  parent: RMCBaseGunCase
+  id: RMCMK80Case
+  name: MK80 pistol case
+  description: "A gun case containing the MK80. Comes with two magazines."
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,3,1
+    whitelist:
+      tags:
+      - RMCMK80
+      - CMMagazinePistolMK80
+  - type: StorageFill
+    contents:
+    - id: CMWeaponPistolMK80
+    - id: CMMagazinePistolMK80
+      amount: 2
+
+- type: entity
+  parent: RMCBaseGunCase
+  id: RMCM54CE2Case
+  name: M54CE2 heavy assault rifle case
+  description: "A gun case containing the M54CE2 heavy assault rifle. You can get additional ammunition at requisitions."
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - WeaponRifleM54CE2
+      - CMMagazineRifleM54CE2
+      - RMCAttachmentRailFlashlight
+      - RMCAttachmentBipod
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleM54CE2
+    - id: CMMagazineRifleM54CE2
+    - id: CMMagazineRifleM54CE2 # Replace with a holotargeting mag once that ammo is implemented.
+    - id: RMCAttachmentRailFlashlight
+    - id: RMCAttachmentBipod

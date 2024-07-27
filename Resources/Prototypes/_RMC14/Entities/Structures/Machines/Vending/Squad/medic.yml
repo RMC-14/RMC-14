@@ -119,6 +119,8 @@
       entries:
       - id: CMMagazinePistolMK80
         points: 3
+      - id: RMCMagazinePistolSU6
+        points: 6
     - name: Armors
       entries:
       - id: CMArmorB12
@@ -127,7 +129,7 @@
         points: 28
     - name: Restricted Firearms
       entries:
-      - id: CMWeaponPistolMK80
+      - id: RMCMK80Case
         points: 8
       - id: RMCSmartPistolCase
         points: 12
@@ -220,7 +222,7 @@
       #- id: CMM276M44HolsterRig
       #- id: CMM276M82FHolsterRig
       #- id: CMM276ShotgunShellLoadingRig
-      #- id: CMM276M40GrenadeRig
+      - id: RMCBeltGrenade
     - name: Pouches
       choices: { CMPouch: 2 }
       entries:

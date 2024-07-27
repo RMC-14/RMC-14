@@ -2,7 +2,7 @@
   abstract: true
   id: CMPlanetBase
   isSubfloor: true
-  canCrowbar: false
+  deconstructTools: [ ]
   footstepSounds:
     collection: FootstepGrass
   heatCapacity: 10000

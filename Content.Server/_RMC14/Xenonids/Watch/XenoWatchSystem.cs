@@ -1,7 +1,10 @@
 ﻿using Content.Server.Chat.Systems;
+using Content.Server.Popups;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 using static Content.Server.Chat.Systems.ChatSystem;
@@ -12,9 +15,11 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
 {
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
+    [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
 
     private EntityQuery<ActorComponent> _actorQuery;
     private EntityQuery<XenoWatchedComponent> _xenoWatchedQuery;
@@ -91,6 +96,10 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
     protected override void OnXenoWatchAction(Entity<XenoComponent> ent, ref XenoWatchActionEvent args)
     {
         args.Handled = true;
+
+        if (!HasQueenPopup(ent))
+            return;
+
         _ui.OpenUi(ent.Owner, XenoWatchUIKey.Key, ent);
 
         var xenos = new List<Xeno>();
@@ -110,7 +119,7 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
             }
         }
 
-        xenos.Sort((a, b) => a.Name.CompareTo(b.Name));
+        xenos.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
 
         _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos));
     }
@@ -118,6 +127,9 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
     protected override void Watch(Entity<XenoComponent?, ActorComponent?, EyeComponent?> watcher, Entity<XenoComponent?> toWatch)
     {
         base.Watch(watcher, toWatch);
+
+        if (!HasQueenPopup(watcher))
+            return;
 
         if (watcher.Owner == toWatch.Owner)
             return;
@@ -168,5 +180,14 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
             watching.Watching = null;
             RemCompDeferred<XenoWatchingComponent>(toRemove);
         }
+    }
+
+    private bool HasQueenPopup(EntityUid xeno)
+    {
+        if (_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
+            return true;
+
+        _popup.PopupEntity(Loc.GetString("rmc-no-queen-hivemind-chat"), xeno, xeno, PopupType.MediumCaution);
+        return false;
     }
 }

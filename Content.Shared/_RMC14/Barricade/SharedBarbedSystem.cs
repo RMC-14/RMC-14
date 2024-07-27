@@ -30,7 +30,11 @@ public abstract class SharedBarbedSystem : EntitySystem
     {
         SubscribeLocalEvent<BarbedComponent, AttackedEvent>(OnAttacked);
         SubscribeLocalEvent<BarbedComponent, InteractUsingEvent>(OnInteractUsing);
+
+        SubscribeLocalEvent<BarbedComponent, DoAfterAttemptEvent<BarbedDoAfterEvent>>(OnDoAfterAttempt);
         SubscribeLocalEvent<BarbedComponent, BarbedDoAfterEvent>(OnDoAfter);
+
+
         SubscribeLocalEvent<BarbedComponent, CutBarbedDoAfterEvent>(WireCutterOnDoAfter);
         SubscribeLocalEvent<BarbedComponent, DoorStateChangedEvent>(OnDoorStateChanged);
         SubscribeLocalEvent<BarbedComponent, AttemptClimbEvent>(OnClimbAttempt);
@@ -41,14 +45,20 @@ public abstract class SharedBarbedSystem : EntitySystem
     {
         if (!component.IsBarbed && HasComp<BarbedWireComponent>(args.Used))
         {
-            var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.WireTime, new BarbedDoAfterEvent(), uid, used: args.Used)
+            var ev = new BarbedDoAfterEvent();
+            var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.WireTime, ev, uid, used: args.Used)
             {
                 BreakOnMove = true,
                 BreakOnDamage = true,
                 NeedHand = true,
+                AttemptFrequency = AttemptFrequency.EveryTick,
+                CancelDuplicate = false,
+                DuplicateCondition = DuplicateConditions.None
             };
-            _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-wiring"), uid, args.User);
-            _doAfterSystem.TryStartDoAfter(doAfterEventArgs);
+            if (_doAfterSystem.TryStartDoAfter(doAfterEventArgs))
+            {
+                _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-wiring"), uid, args.User);
+            }
             return;
         }
 
@@ -74,10 +84,25 @@ public abstract class SharedBarbedSystem : EntitySystem
         }
     }
 
+    private void OnDoAfterAttempt(Entity<BarbedComponent> barbed, ref DoAfterAttemptEvent<BarbedDoAfterEvent> args)
+    {
+        // If the targeted entity gets barbed during the doafter, end the doafter
+        if (barbed.Comp.IsBarbed)
+        {
+            args.Cancel();
+        }
+    }
+
     private void OnDoAfter(Entity<BarbedComponent> barbed, ref BarbedDoAfterEvent args)
     {
         if (args.Used == null || args.Cancelled || args.Handled)
             return;
+
+        // If the targeted entity gets barbed during the doafter, don't use up a barbed wire
+        if (barbed.Comp.IsBarbed)
+        {
+            return;
+        }
 
         args.Handled = true;
 

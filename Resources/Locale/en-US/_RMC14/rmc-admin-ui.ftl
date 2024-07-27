@@ -9,5 +9,7 @@ rmc-ui-create-hive-title = New hive name
 rmc-ui-humanoid = Humanoid
 rmc-ui-tier = Tier {$tier}
 rmc-ui-create-squad = Create Squad
-rmc-ui-members = Members: {$members}
+rmc-ui-members = Members: {$members} alive
 rmc-ui-add-to-squad = Add to Squad
+
+rmc-ui-admin = RMC Admin UI

@@ -13,7 +13,7 @@
 - type: entity
   id: CMCrateM54CE2
   parent: CMCrateWeapons
-  name: M54CE2 HPR crate (HPR x2, HPR ammo box x2)
+  name: M54CE2 HAR crate (HAR x2, HAR ammo box x2)
   components:
   - type: StorageFill
     contents:
@@ -28,8 +28,8 @@
   name: MK80 Hand Cannon Crate (x2)
   components:
   - type: StorageFill
-    contents: # TODO RMC14 two cases with 1 pìstol 2 mags each
-    - id: CMWeaponPistolMK80
+    contents:
+    - id: RMCMK80Case
       amount: 2
     - id: CMMagazinePistolMK80
       amount: 4

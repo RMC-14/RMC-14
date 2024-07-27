@@ -55,16 +55,16 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.marines_per_xeno", 5.5f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<bool> RMCAutoBalance =
-        CVarDef.Create("rmc.auto_balance", true, CVar.SERVER);
+        CVarDef.Create("rmc.auto_balance", true, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCAutoBalanceStep =
-        CVarDef.Create("rmc.auto_balance_step", 0.25f, CVar.SERVER);
+        CVarDef.Create("rmc.auto_balance_step", 0.25f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCAutoBalanceMin =
-        CVarDef.Create("rmc.auto_balance_min", 3f, CVar.SERVER);
+        CVarDef.Create("rmc.auto_balance_min", 3f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCAutoBalanceMax =
-        CVarDef.Create("rmc.auto_balance_max", 6f, CVar.SERVER);
+        CVarDef.Create("rmc.auto_balance_max", 6f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCPatronLobbyMessageTimeSeconds =
         CVarDef.Create("rmc.patron_lobby_message_time_seconds", 30, CVar.REPLICATED | CVar.SERVER);
@@ -76,7 +76,7 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.discord_account_linking_message_link", "", CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCRequisitionsStartingBalance =
-        CVarDef.Create("rmc.requisitions_starting_balance", 10000, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.requisitions_starting_balance", 30000, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCRequisitionsBalanceGain =
         CVarDef.Create("rmc.requisitions_balance_gain", 400, CVar.REPLICATED | CVar.SERVER);
@@ -91,8 +91,32 @@ public sealed class RMCCVars : CVars
     ///     Comma-separated list of maps to load as the planet in the distress signal gamemode.
     /// </summary>
     public static readonly CVarDef<string> RMCPlanetMaps =
-        CVarDef.Create("rmc.planet_maps", "/Maps/_RMC14/lv624.yml,/Maps/_RMC14/solaris.yml", CVar.SERVER | CVar.SERVERONLY);
+        CVarDef.Create("rmc.planet_maps", "/Maps/_RMC14/lv624.yml,/Maps/_RMC14/solaris.yml,/Maps/_RMC14/prison.yml,/Maps/_RMC14/shiva.yml", CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<bool> RMCDrawStorageIconLabels =
         CVarDef.Create("rmc.draw_storage_icon_labels", true, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCFTLCrashLand =
+        CVarDef.Create("rmc.ftl_crash_land", true, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCDropshipInitialDelayMinutes =
+        CVarDef.Create("rmc.dropship_initial_delay_minutes", 15f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCLandingZonePrimaryAutoMinutes =
+        CVarDef.Create("rmc.landing_zone_primary_auto_minutes", 25f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCTailStabMaxTargets =
+        CVarDef.Create("rmc.tail_stab_max_targets", 1, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCEvolutionPointsRequireOvipositorMinutes =
+        CVarDef.Create("rmc.evolution_points_require_ovipositor_minutes", 5, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCEvolutionPointsAccumulateBeforeMinutes =
+        CVarDef.Create("rmc.evolution_points_accumulate_before_minutes", 15, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCAtmosTileEqualize =
+        CVarDef.Create("rmc.atmos_tile_equalize", false, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCGasTileOverlayUpdate =
+        CVarDef.Create("rmc.gas_tile_overlay_update", false, CVar.REPLICATED | CVar.SERVER);
 }

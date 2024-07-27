@@ -1,0 +1,24 @@
+﻿- type: entity
+  parent: CMXenoRunner
+  id: RMCXenoRouny
+  name: Rouny
+  suffix: RMC14
+  description: thas a fuckin rouny.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Rouny/rouny.rsi
+  - type: XenoEvolution
+    max: 300
+    evolvesTo: [ ]
+
+- type: entity
+  parent: CMXenoRunner
+  id: RMCXenoWehny
+  name: Wehny
+  description: A cruel, cruel joke made by some sick individual.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Wehny/wehny.rsi
+  - type: XenoEvolution
+    max: 300
+    evolvesTo: [ ]

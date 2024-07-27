@@ -59,6 +59,7 @@ tickrate = 25
 port = 1212
 bindto = "::,0.0.0.0"
 max_connections = 1024
+sendbuffersize = 262142
 
 [physics]
 maxlinvelocity = 51
@@ -86,3 +87,12 @@ enabled = true
 # This is the address and port the status server binds to.
 # The port is by default set based on net.port so it will follow what you set there.
 bind = "*:1212"
+
+[metrics]
+host = "*"
+port = 44880
+enabled = true
+
+[loki]
+address = "http://10.8.0.1:3100"
+enabled = true

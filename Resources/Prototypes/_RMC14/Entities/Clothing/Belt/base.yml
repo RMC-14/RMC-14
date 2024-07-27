@@ -26,6 +26,10 @@
   - type: ExplosionResistance
     damageCoefficient: 0
     worn: false
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   abstract: true

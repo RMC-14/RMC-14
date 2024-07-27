@@ -149,6 +149,72 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             Dirty(actor, user);
         }
 
+        void ResetChoices()
+        {
+            if (section.Choices is { } choices && user != null)
+                user.Choices[choices.Id]--;
+        }
+
+        if (section.SharedSpecLimit is { } globalLimit)
+        {
+            if (HasComp<RMCVendorSpecialistComponent>(vendor))
+            {
+                var thisSpecVendor = Comp<RMCVendorSpecialistComponent>(vendor);
+                int vendCount = 0;
+
+                // If the vendor's own value is at or above the capacity, immediately return.
+                if (thisSpecVendor.GlobalSharedVends.TryGetValue(args.Entry, out vendCount) && vendCount >= section.SharedSpecLimit)
+                {
+                    // FIXME
+                    ResetChoices();
+                    _popup.PopupEntity(Loc.GetString("cm-vending-machine-specialist-max"), vendor, actor);
+                    return;
+                }
+
+                // Get every RMCVendorSpec
+                var specVendors = EntityQueryEnumerator<RMCVendorSpecialistComponent>();
+                // Used to verify newer vendors
+                int maxAmongVendors = 0;
+
+                if (thisSpecVendor.GlobalSharedVends.TryGetValue(args.Entry, out vendCount))
+                    // So it doesn't matter what order the vendors are checked in
+                    maxAmongVendors = vendCount;
+
+                // Goes through each RMCVendorSpec and gets the largest value for this kit type.
+                while (specVendors.MoveNext(out var vendorId, out _))
+                {
+                    var specVendorComponent = EnsureComp<RMCVendorSpecialistComponent>(vendorId);
+                    if (specVendorComponent.GlobalSharedVends.TryGetValue(args.Entry, out vendCount))
+                    {
+                        if (vendCount > maxAmongVendors)
+                        {
+                            maxAmongVendors = specVendorComponent.GlobalSharedVends[args.Entry];
+                        }
+                        else
+                        {
+                            specVendorComponent.GlobalSharedVends[args.Entry] = maxAmongVendors;
+                        }
+                    }
+                    else // Does not exist on the currently checked vendor
+                        specVendorComponent.GlobalSharedVends.Add(args.Entry, maxAmongVendors);
+                    Dirty(specVendorComponent);
+                }
+
+                thisSpecVendor.GlobalSharedVends[args.Entry] = maxAmongVendors;
+
+                if (thisSpecVendor.GlobalSharedVends[args.Entry] >= section.SharedSpecLimit)
+                {
+                    ResetChoices();
+                    _popup.PopupEntity(Loc.GetString("cm-vending-machine-specialist-max"), vendor.Owner, actor);
+                    return;
+                }
+                else
+                    thisSpecVendor.GlobalSharedVends[args.Entry] += 1;
+
+                Dirty(thisSpecVendor);
+            }
+        }
+
         if (entry.Points != null)
         {
             if (user == null)

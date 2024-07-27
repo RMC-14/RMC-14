@@ -1,0 +1,36 @@
+- type: entity
+  parent: CentcomPDA # Not AdminPDA, because then this would be both a health scanner and a base health analyzer, which is a little bit stupid.
+  id: RMCAdminPDA
+  name: Admin PDA
+  suffix: Admin
+  description: If you are not an admin please return this PDA to the nearest admin.
+  components:
+  - type: Pda
+    id: CMIDCardHighCommand
+  - type: HealthScanner
+    sound:
+      path: "/Audio/_RMC14/Medical/healthanalyzer.ogg"
+  - type: CartridgeLoader
+    uiKey: enum.PdaUiKey.Key
+    notificationsEnabled: false
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NewsReaderCartridge
+    - LogProbeCartridge
+  # Component is a copy of the component for BasePDA in Resources/Prototypes/Entities/Objects/Devices/pda.yml
+  - type: UserInterface
+    interfaces:
+      enum.PdaUiKey.Key:
+        type: PdaBoundUserInterface
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+      enum.RingerUiKey.Key:
+        type: RingerBoundUserInterface
+      enum.InstrumentUiKey.Key:
+        type: InstrumentBoundUserInterface
+      enum.HealthAnalyzerUiKey.Key:
+        type: HealthAnalyzerBoundUserInterface
+      # RMC addition: RMC health scanner.
+      enum.HealthScannerUIKey.Key:
+        type: HealthScannerBoundUserInterface

@@ -23,6 +23,10 @@
   - type: ExplosionResistance
     damageCoefficient: 0
     worn: false
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: [CMPouch, BaseStorageItem]
@@ -302,7 +306,7 @@
     whitelist:
       tags:
       - CMMagazinePistol
-      - CMMagazineRevolver
+      - RMCMagazineRevolver
       - CMMagazineRifle
       - CMMagazineSmg
       - CMMagazineSniper
@@ -335,7 +339,7 @@
     whitelist:
       tags:
       - CMMagazinePistol
-      - CMMagazineRevolver
+      - RMCMagazineRevolver
 
 - type: entity
   parent: CMPouchMagazinePistol

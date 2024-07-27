@@ -1,28 +1,41 @@
 ﻿- type: entity
-  parent: [BaseWeaponShotgun, CMBaseWeaponGun, RMCBaseAttachableHolder ]
-  name: M42A2 Pump Shotgun
-  id: WeaponShotgunM42A2
-  description: An Aegis Battlefield Armaments classic design, the M42A2 combines close-range firepower with long term reliability. Needs to be pumped.
+  abstract: true
+  parent: [ BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder ]
+  id: RMCBaseWeaponShotgun
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2.rsi
+    sprite: Objects/Weapons/Guns/Shotguns/db_shotgun.rsi
     slots:
     - Back
     - SuitStorage
   - type: Wieldable
+  - type: WieldDelay
+    baseDelay: 0.6
   - type: WieldableSpeedModifiers
     baseWalk: 0.842
     baseSprint: 0.748
-  - type: WieldDelay
-    baseDelay: 0.6
+  - type: AmmoCounter
   - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/empty.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 2
+    recoilUnwielded: 4
+    scatterWielded: 10
+    scatterUnwielded: 20
+    baseFireRate: 1.429
+    burstScatterMult: 5
   - type: BallisticAmmoProvider
     cycleable: false
     whitelist:
@@ -32,15 +45,41 @@
     proto: null
     soundInsert:
       path: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
-  - type: PumpAction
-  - type: ShootUseDelay
-    delay: 2
-  - type: UseDelay
-  - type: Tag
-    tags:
-      - RMCWeaponShotgun
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: StaticPrice
+    price: 500
   - type: RMCNameItemOnVend
     item: PrimaryGun
+  - type: Tag
+    tags:
+    - RMCWeaponShotgun
+
+- type: entity
+  parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
+  name: M42A2 Pump Shotgun
+  id: WeaponShotgunM42A2
+  description: An Aegis Battlefield Armaments classic design, the M42A2 combines close-range firepower with long term reliability. Needs to be pumped.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2.rsi
+  - type: Gun
+    shotsPerBurst: 1
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    recoilWielded: 2
+    recoilUnwielded: 4
+    scatterWielded: 10
+    scatterUnwielded: 10
+    baseFireRate: 0.5
+    burstScatterMult: 5
+  - type: PumpAction
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -73,10 +112,6 @@
       rmc-aslot-rail: -0.025, 0.125
       rmc-aslot-stock: -0.375, -0.029
       rmc-aslot-underbarrel: 0.25, -0.31
-
-#  - type: GunWieldBonus # TODO RMC14
-#    minAngle: -25
-#    maxAngle: -50
 
 - type: Tag
   id: RMCWeaponShotgun

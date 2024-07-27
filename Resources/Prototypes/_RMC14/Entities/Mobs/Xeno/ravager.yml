@@ -54,6 +54,7 @@
   - type: Tackle
     threshold: 4
     stun: 9
+    chance: 0.35
   - type: Flammable
     damage:
       types:

@@ -75,3 +75,47 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
+
+- type: entity
+  parent: ClothingEyesBase
+  id: RMCGlassesMarineRpg
+  name: Marine RPG glasses
+  description: The Corps may call them Regulation Prescription Glasses but you know them as Rut Prevention Glasses.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/rpglasses.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/rpglasses.rsi
+
+- type: entity
+  parent: ClothingEyesBase
+  id: RMCGogglesBallistic
+  name: Ballistic goggles
+  description: Standard issue USCM goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles.rsi
+    
+- type: entity
+  parent: ClothingEyesBase
+  id: RMCGogglesM1A1Ballistic
+  name: M1A1 Ballistic goggles
+  description: Newer issue USCM goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes. This version has larger lenses.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
+
+- type: entity
+  parent: ClothingEyesBase
+  id: RMCGogglesPrescriptionBallistic
+  name: Prescription ballistic goggles
+  description: Standard issue USCM goggles. Mostly used to decorate one's helmet. Contains prescription lenses in case you weren't sure if they were lame or not.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Prescription_ballistic_goggles.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Prescription_ballistic_goggles.rsi

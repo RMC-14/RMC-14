@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: DrinkBase
   id: CMCanteenBase
@@ -8,6 +8,10 @@
   - type: Item
     size: Small
   - type: Drink
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
   - type: SolutionContainerManager
     solutions:
       drink:

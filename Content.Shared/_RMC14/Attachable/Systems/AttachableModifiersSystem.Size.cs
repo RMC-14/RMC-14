@@ -10,8 +10,33 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
 
     private void InitializeSize()
     {
+        SubscribeLocalEvent<AttachableSizeModsComponent, AttachableGetExamineDataEvent>(OnSizeModsGetExamineData);
         SubscribeLocalEvent<AttachableSizeModsComponent, AttachableAlteredEvent>(OnAttachableAltered);
-        SubscribeLocalEvent<AttachableSizeModsComponent, GetItemSizeModifiersEvent>(OnGetItemSizeModifiers);
+        SubscribeLocalEvent<AttachableSizeModsComponent, AttachableRelayedEvent<GetItemSizeModifiersEvent>>(OnGetItemSizeModifiers);
+    }
+
+    private void OnSizeModsGetExamineData(Entity<AttachableSizeModsComponent> attachable, ref AttachableGetExamineDataEvent args)
+    {
+        foreach (var modSet in attachable.Comp.Modifiers)
+        {
+            var key = GetExamineKey(modSet.Conditions);
+
+            if (!args.Data.ContainsKey(key))
+                args.Data[key] = new (modSet.Conditions, GetEffectStrings(modSet));
+            else
+                args.Data[key].effectStrings.AddRange(GetEffectStrings(modSet));
+        }
+    }
+
+    private List<string> GetEffectStrings(AttachableSizeModifierSet modSet)
+    {
+        var result = new List<string>();
+
+        if (modSet.Size != 0)
+            result.Add(Loc.GetString("rmc-attachable-examine-size",
+                ("colour", modifierExamineColour), ("sign", modSet.Size > 0 ? '+' : ""), ("size", modSet.Size)));
+
+        return result;
     }
 
     private void OnAttachableAltered(Entity<AttachableSizeModsComponent> attachable, ref AttachableAlteredEvent args)
@@ -33,14 +58,14 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
         }
     }
 
-    private void OnGetItemSizeModifiers(Entity<AttachableSizeModsComponent> attachable, ref GetItemSizeModifiersEvent args)
+    private void OnGetItemSizeModifiers(Entity<AttachableSizeModsComponent> attachable, ref AttachableRelayedEvent<GetItemSizeModifiersEvent> args)
     {
         foreach(var modSet in attachable.Comp.Modifiers)
         {
             if (!CanApplyModifiers(attachable.Owner, modSet.Conditions))
                 return;
 
-            args.Size += modSet.Size;
+            args.Args.Size += modSet.Size;
         }
     }
 }
