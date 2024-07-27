@@ -8,11 +8,11 @@ namespace Content.Shared._RMC14.Weapons.Ranged;
 public sealed partial class GunAPStacksModifierComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public byte Stacks = 0;
+    public int Stacks = 0;
 
     [DataField, AutoNetworkedField]
-    public byte AP = 0;
+    public int AP = 0;
 
     [DataField, AutoNetworkedField]
-    public byte ModifiedStacks;
+    public int ModifiedStacks;
 }
