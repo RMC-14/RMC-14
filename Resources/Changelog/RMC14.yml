@@ -3989,5 +3989,12 @@
   id: 470
   time: '2024-07-27T06:09:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3337
+- author: UnicornOnLSD
+  changes:
+  - message: Meatzels can be found in marine MREs
+    type: Add
+  id: 471
+  time: '2024-07-27T06:15:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3333
 Name: RMC14
 Order: -1
