@@ -80,7 +80,7 @@
   parent: ClothingEyesBase
   id: RMCGlassesMarineRpg
   name: Marine RPG glasses
-  description: This is a Marine RPG glasses. It is a small item. The Corps may call them Regulation Prescription Glasses but you know them as Rut Prevention Glasses.
+  description: The Corps may call them Regulation Prescription Glasses but you know them as Rut Prevention Glasses.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/rpglasses.rsi
