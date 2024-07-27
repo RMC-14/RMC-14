@@ -4,7 +4,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(CMGunSystem))]
+[Access(typeof(GunAPStackSystem))]
 public sealed partial class GunAPStacksModifierComponent : Component
 {
     [DataField, AutoNetworkedField]
