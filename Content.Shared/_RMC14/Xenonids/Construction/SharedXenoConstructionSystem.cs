@@ -218,8 +218,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             BreakOnMove = true
         };
 
-        _audio.PlayPredicted(xeno.Comp.BuildSound, entityCoords, xeno);
-
         if (!_doAfter.TryStartDoAfter(doAfter))
         {
             if (effect != null && _net.IsServer)
@@ -257,6 +255,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             var structure = Spawn(args.StructureId, coordinates);
             _adminLogs.Add(LogType.RMCXenoConstruct, $"Xeno {ToPrettyString(xeno):xeno} constructed {ToPrettyString(structure):structure} at {coordinates}");
         }
+
+        _audio.PlayPredicted(xeno.Comp.BuildSound, coordinates, xeno);
     }
 
     private void OnXenoOrderConstructionAction(Entity<XenoConstructionComponent> xeno, ref XenoOrderConstructionActionEvent args)
