@@ -3982,5 +3982,12 @@
   id: 469
   time: '2024-07-26T02:30:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3284
+- author: BackeTako
+  changes:
+  - message: Fixed doors looking bright when bolted.
+    type: Fix
+  id: 470
+  time: '2024-07-27T06:09:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3337
 Name: RMC14
 Order: -1
