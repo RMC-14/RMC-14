@@ -14,4 +14,4 @@
               amount: 1
 
     - node: nodeCMSteel
-      entity: CMSteel
+      entity: CMSheetMetal1
