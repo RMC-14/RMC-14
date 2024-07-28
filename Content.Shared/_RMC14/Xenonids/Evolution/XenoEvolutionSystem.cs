@@ -3,6 +3,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Climbing.Components;
@@ -51,12 +52,12 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly SharedXenoHiveSystem _xenoHive = default!;
-	[Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
 
     private TimeSpan _evolutionPointsRequireOvipositorAfter;
     private TimeSpan _evolutionAccumulatePointsBefore;
 
-	private readonly HashSet<EntityUid> _climbable = new();
+    private readonly HashSet<EntityUid> _climbable = new();
     private readonly HashSet<EntityUid> _doors = new();
     private readonly HashSet<EntityUid> _intersecting = new();
 
@@ -370,9 +371,12 @@ public sealed class XenoEvolutionSystem : EntitySystem
             var existing = 0;
             var total = 0;
             var current = EntityQueryEnumerator<XenoComponent>();
-            while (current.MoveNext(out var existingComp))
+            while (current.MoveNext(out var uid, out var existingComp))
             {
                 if (existingComp.Hive != oldHive)
+                    continue;
+
+                if (HasComp<XenoParasiteComponent>(uid))
                     continue;
 
                 total++;
