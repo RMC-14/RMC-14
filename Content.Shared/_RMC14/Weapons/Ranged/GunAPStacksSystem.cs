@@ -29,7 +29,7 @@ public abstract class GunAPStacksSystem : EntitySystem
     //EntityUid? shooter, EntityUid weapon, EntityUid target
     {
         //If xenoid hit increase stack
-        if(HasComp<XenoComponent>(args.target))
+        if(HasComp<XenoComponent>(args.Embedded))
         {
             if(ent.Comp.Stacks < 5)//stacks cap at 50ap or 5 stacks
             {
