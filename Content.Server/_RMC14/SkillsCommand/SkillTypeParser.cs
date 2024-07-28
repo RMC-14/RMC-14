@@ -14,6 +14,8 @@ namespace Content.Server._RMC14.SkillsCommand;
 
 public sealed class SkillTypeParser : TypeParser<SkillType>
 {
+    [Dependency] private readonly IEntityManager _entities = default!;
+
     public override bool TryParse(ParserContext parserContext, [NotNullWhen(true)] out object? result, out IConError? error)
     {
         if (parserContext.GetWord(ParserContext.IsToken) is not { } skill)
@@ -23,8 +25,8 @@ public sealed class SkillTypeParser : TypeParser<SkillType>
             return false;
         }
 
-        var fields = typeof(Skills).GetProperties().Select(p => p.Name);
-        if (!fields.Contains(skill))
+        var skills = _entities.System<SkillsSystem>().Skills;
+        if (!skills.Contains(skill))
         {
             error = new NotAValidSkill(skill);
             result = null;
@@ -38,8 +40,8 @@ public sealed class SkillTypeParser : TypeParser<SkillType>
 
     public override ValueTask<(CompletionResult? result, IConError? error)> TryAutocomplete(ParserContext parserContext, string? argName)
     {
-        var fields = typeof(Skills).GetProperties().Select(p => p.Name);
-        return ValueTask.FromResult<(CompletionResult? result, IConError? error)>((CompletionResult.FromHintOptions(fields, "skill"), null));
+        var skills = _entities.System<SkillsSystem>().Skills.Select(s => s.Id);
+        return ValueTask.FromResult<(CompletionResult? result, IConError? error)>((CompletionResult.FromHintOptions(skills, "skill"), null));
     }
 }
 

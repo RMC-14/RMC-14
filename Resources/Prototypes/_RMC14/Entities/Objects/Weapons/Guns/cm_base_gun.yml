@@ -8,7 +8,7 @@
   - type: GunSkilledRecoil
     setRecoil: 0
     skills:
-      firearms: 1
+      RMCSkillFirearms: 1
   - type: UseDelay
     delay: 0
   - type: WieldDelay

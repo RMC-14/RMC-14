@@ -91,10 +91,10 @@
   - type: RMCMagneticItem
   - type: GunRequiresSkills
     skills:
-      smartGun: 1
+      RMCSkillSmartGun: 1
   - type: GunSkilledRecoil
     skills:
-      firearms: 100
+      RMCSkillFirearms: 100
   - type: GunDrainBatteryOnShoot
   - type: GunRequireEquipped
     whitelist:

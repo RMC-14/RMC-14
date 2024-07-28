@@ -18,14 +18,15 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      cqc: 1
-      construction: 1
-      endurance: 2
-      engineer: 1
-      firearms: 1
-      jtac: 1
-      meleeWeapons: 1
-      specialistWeapons: 1
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 1
+        RMCSkillFirearms: 1
+        RMCSkillJtac: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillSpecialistWeapons: 1
     - type: CMVendorUser
       points: 45
       extraPoints:

@@ -34,11 +34,13 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
     private NetEntity _lastTarget;
 
     private readonly ShowHolocardIconsSystem _holocardIcons;
+    private readonly SkillsSystem _skills;
     private readonly SharedWoundsSystem _wounds;
 
     public HealthScannerBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _holocardIcons = _entities.System<ShowHolocardIconsSystem>();
+        _skills = _entities.System<SkillsSystem>();
         _wounds = _entities.System<SharedWoundsSystem>();
     }
 
@@ -113,8 +115,7 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
         _window.ChangeHolocardButton.Text = Loc.GetString("ui-health-scanner-holocard-change");
         _window.ChangeHolocardButton.OnPressed += OpenChangeHolocardUI;
         if (_player.LocalEntity is { } viewer &&
-            _entities.TryGetComponent(viewer, out SkillsComponent? skills) &&
-            skills.Skills.Medical >= HolocardSystem.MinimumRequiredMedicalSkill)
+            _skills.HasSkill(viewer, HolocardSystem.SkillType, HolocardSystem.MinimumRequiredSkill))
         {
             _window.ChangeHolocardButton.Disabled = false;
             _window.ChangeHolocardButton.ToolTip = "";

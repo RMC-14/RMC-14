@@ -19,16 +19,17 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      construction: 2
-      cqc: 2
-      endurance: 2
-      engineer: 2
-      firearms: 1
-      fireman: 1
-      leadership: 1
-      medical: 1
-      overwatch: 1
-      police: 2
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 2
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 1
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 2
     - type: MarineOrders
 
 - type: startingGear

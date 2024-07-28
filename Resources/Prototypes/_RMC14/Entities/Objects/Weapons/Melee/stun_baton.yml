@@ -12,7 +12,7 @@
     damage: 100
   - type: MeleeRequiresSkill
     skills:
-      police: 1
+      RMCSkillPolice: 1
   - type: StunOnHit
     whitelist:
       components:

@@ -162,7 +162,7 @@ public sealed class CMStorageSystem : EntitySystem
 
     private bool TryCancel(EntityUid user, Entity<StorageSkillRequiredComponent> storage)
     {
-        if (!_skills.HasSkills(user, in storage.Comp.Skills))
+        if (!_skills.HasAllSkills(user, storage.Comp.Skills))
         {
             _popup.PopupClient(Loc.GetString("cm-storage-unskilled"), storage, user, PopupType.SmallCaution);
             return true;

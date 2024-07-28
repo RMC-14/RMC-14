@@ -1,4 +1,5 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Marines.Skills;
 
@@ -16,5 +17,5 @@ public sealed partial class ReagentExaminationRequiresSkillComponent : Component
     public LocId SkilledExamineNone;
 
     [DataField(required: true), AutoNetworkedField]
-    public Skills Skills;
+    public Dictionary<EntProtoId<SkillDefinitionComponent>, int> Skills = new();
 }

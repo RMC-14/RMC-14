@@ -18,15 +18,16 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      cqc: 1
-      engineer: 2
-      firearms: 1
-      intel: 2
-      jtac: 2
-      leadership: 2
-      meleeWeapons: 1
-      overwatch: 1
-      research: 1
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillIntel: 2
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillOverwatch: 1
+        RMCSkillResearch: 1
     - type: MarineOrders
   hidden: true # TODO RMC14
 

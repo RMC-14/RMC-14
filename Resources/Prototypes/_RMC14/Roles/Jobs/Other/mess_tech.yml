@@ -14,10 +14,11 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      construction: 1
-      domestics: 2
-      engineer: 1
-      firearms: 2
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillDomestics: 2
+        RMCSkillEngineer: 1
+        RMCSkillFirearms: 2
   hidden: true # TODO RMC14
 
 - type: startingGear

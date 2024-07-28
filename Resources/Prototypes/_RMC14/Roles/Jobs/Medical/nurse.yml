@@ -18,9 +18,10 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      firearms: 0
-      medical: 3
-      surgery: 1
+      skills:
+        RMCSkillFirearms: 0
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 1
     - type: RMCUserBulkyArmorIncapable
 
 - type: startingGear

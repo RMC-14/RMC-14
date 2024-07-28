@@ -123,7 +123,7 @@ public abstract partial class SharedCMSurgerySystem
 
     private void OnToolCanPerform(Entity<CMSurgeryStepComponent> ent, ref CMSurgeryCanPerformStepEvent args)
     {
-        if (!_skills.HasSkills(args.User, new Skills { Surgery = ent.Comp.Skill }))
+        if (!_skills.HasSkill(args.User, ent.Comp.SkillType, ent.Comp.Skill))
         {
             args.Invalid = StepInvalidReason.MissingSkills;
             return;

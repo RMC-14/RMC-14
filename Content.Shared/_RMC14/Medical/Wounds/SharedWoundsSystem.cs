@@ -226,7 +226,7 @@ public abstract class SharedWoundsSystem : EntitySystem
         }
 
         var targetName = Identity.Name(target, EntityManager, user);
-        var hasSkills = _skills.HasSkills(user, in treater.Comp.Skills);
+        var hasSkills = _skills.HasAllSkills(user, treater.Comp.Skills);
         if (!treater.Comp.CanUseUnskilled && !hasSkills)
         {
             if (doPopups)
