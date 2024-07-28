@@ -120,5 +120,5 @@
   - type: Sprite
     layers:
     - state: buckshot_e #FIXME
-    - state: buckshot   #FIXME
+    - state: 458box   #FIXME
       map: [ "enum.CMAmmoBoxLayers.Ammo" ]
