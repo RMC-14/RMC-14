@@ -245,6 +245,9 @@
       rmc-aslot-rail: 0.125, 0.185
       rmc-aslot-stock: -0.875, 0.0325
       rmc-aslot-underbarrel: 0.312, -0.343
+      
+- type: Tag
+  id: WeaponRifleM54CE2
 
 - type: entity
   parent: CMBaseWeaponRifle
@@ -388,6 +391,3 @@
       rmc-aslot-barrel: 1.18, 0.0
       rmc-aslot-rail: 0.225, 0.125
       rmc-aslot-underbarrel: 0.62, -0.31
-
-- type: Tag
-    id: WeaponRifleM54CE2
