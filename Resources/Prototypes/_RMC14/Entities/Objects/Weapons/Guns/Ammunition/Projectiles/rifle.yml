@@ -31,7 +31,7 @@
     damage:
       types:
         Piercing: 80
-  #- type: GunAPStacks FIXME
   - type:: CMArmorPiercing
     amount: 0
+  #- type: GunAPStacks FIXME
   #0 is default (no stacks)
