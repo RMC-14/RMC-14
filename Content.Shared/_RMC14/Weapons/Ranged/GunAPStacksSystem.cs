@@ -2,6 +2,7 @@
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Projectiles;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
