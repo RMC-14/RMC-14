@@ -402,7 +402,7 @@
   id: Saline
   reactants:
     Water:
-      amount: 40000
+      amount: 4000
     TableSalt:
       amount: 10000
   products:
