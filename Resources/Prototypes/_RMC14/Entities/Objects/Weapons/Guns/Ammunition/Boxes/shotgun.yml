@@ -114,11 +114,13 @@
   name: .458 SOCOM Rounds
   description: A box filled with handfuls of .458 SOCOM rounds, designed for use with the XM88 heavy rifle. 
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/SOCOM_box.rsi
   - type: BallisticAmmoProvider
     proto: CMMagazineRifleXM88
     capacity: 60
   - type: Sprite
     layers:
     - state: 458boxe
-    - state: 458box   #FIXME
+    - state: 458box 
       map: [ "enum.CMAmmoBoxLayers.Ammo" ]
