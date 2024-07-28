@@ -34,6 +34,7 @@
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1
   - type: XenoHide
+  - type: IgnoreForHivePop
   - type: Fixtures
     fixtures:
       fix1:

@@ -38,6 +38,7 @@
     countedInSlots: false
     unlockAt: 0
   - type: XenoAcid
+  - type: IgnoreForHivePop
   - type: XenoConstruction
     buildDelay: 4
     canBuild:

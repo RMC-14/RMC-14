@@ -376,7 +376,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 if (existingComp.Hive != oldHive)
                     continue;
 
-                if (HasComp<XenoParasiteComponent>(uid))
+                if (HasComp<IgnoreForHivePopComponent>(uid))
                     continue;
 
                 total++;
