@@ -1,5 +1,4 @@
 ﻿using System.Collections.Immutable;
-using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Content.Shared.Chemistry.Components.SolutionManager;
@@ -27,6 +26,9 @@ public sealed class SkillsSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
     public ImmutableArray<EntProtoId<SkillDefinitionComponent>> Skills { get; private set; }
+
+    public ImmutableDictionary<string, EntProtoId<SkillDefinitionComponent>> SkillNames { get; private set; } =
+        ImmutableDictionary<string, EntProtoId<SkillDefinitionComponent>>.Empty;
 
     private EntityQuery<SkillsComponent> _skillsQuery;
 
@@ -189,14 +191,27 @@ public sealed class SkillsSystem : EntitySystem
 
     private void ReloadPrototypes()
     {
-        var skills = ImmutableArray.CreateBuilder<EntProtoId<SkillDefinitionComponent>>();
+        var skillsArray = ImmutableArray.CreateBuilder<EntProtoId<SkillDefinitionComponent>>();
+        var skillsDict = ImmutableDictionary.CreateBuilder<string, EntProtoId<SkillDefinitionComponent>>();
         foreach (var prototype in _prototypes.EnumeratePrototypes<EntityPrototype>())
         {
-            if (prototype.HasComponent<SkillDefinitionComponent>())
-                skills.Add(prototype.ID);
+            if (!prototype.HasComponent<SkillDefinitionComponent>())
+                continue;
+
+            var id = prototype.ID;
+            skillsArray.Add(id);
+            if (!skillsDict.TryAdd(prototype.Name, id))
+            {
+                var old = skillsDict.GetValueOrDefault(prototype.Name).Id;
+                var msg = $"Duplicate skill name found: {prototype.Name}, old: {old}, new: {id}";
+
+                Log.Error(msg);
+                DebugTools.Assert(msg);
+            }
         }
 
-        Skills = skills.ToImmutable();
+        Skills = skillsArray.ToImmutable();
+        SkillNames = skillsDict.ToImmutable();
     }
 
     public TimeSpan GetDelay(EntityUid user, EntityUid tool)
@@ -215,6 +230,13 @@ public sealed class SkillsSystem : EntitySystem
 
     public int GetSkill(Entity<SkillsComponent?> ent, EntProtoId<SkillDefinitionComponent> skill)
     {
+        if (skill == default)
+        {
+            var msg = $"Empty skill {skill} passed to {nameof(GetSkill)}!";
+            Log.Error(msg);
+            DebugTools.Assert(msg);
+        }
+
         if (!_skillsQuery.Resolve(ent, ref ent.Comp, false))
             return 0;
 
@@ -370,7 +392,9 @@ public sealed class SkillsSystem : EntitySystem
     {
         if (skill == default)
         {
-            Log.Error($"Empty {skill} passed to {nameof(SetSkill)}!");
+            var msg = $"Empty skill {skill} passed to {nameof(SetSkill)}!";
+            Log.Error(msg);
+            DebugTools.Assert(msg);
             return;
         }
 
