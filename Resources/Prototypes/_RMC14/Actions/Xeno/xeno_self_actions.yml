@@ -168,7 +168,7 @@
   id: ActionXenoDefensiveShield
   parent: ActionXenoBase
   name: Defensive Shield (50)
-  description: Gain a temporary shield that blocks the next 200 damage (And immune to explosive damage) lasting 7 seconds. Any damage that impacts the shield is reduced by 10 before processing.
+  description: Gain a temporary shield that blocks the next 200 damage (And is immune to explosive damage) lasting 7 seconds. Any damage that impacts the shield is reduced by 10 before processing.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
