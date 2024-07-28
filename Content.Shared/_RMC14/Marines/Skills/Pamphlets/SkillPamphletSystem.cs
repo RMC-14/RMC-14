@@ -1,13 +1,13 @@
 ﻿using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.Whitelist;
-using Content.Shared._RMC14.Marines.Skills;
 using Robust.Shared.Network;
 
-namespace Content.Server._RMC14.Pamphlets;
+namespace Content.Shared._RMC14.Marines.Skills.Pamphlets;
 
 public sealed class SkillPamphletSystem : EntitySystem
 {
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
@@ -22,7 +22,7 @@ public sealed class SkillPamphletSystem : EntitySystem
         // Then see if they've reached the limit (or if it applies at all)
         if (!ent.Comp.BypassLimit && HasComp<UsedSkillPamphletComponent>(args.User))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-pamphlets-limit-reached"), ent, args.User);
+            _popup.PopupClient(Loc.GetString("rmc-pamphlets-limit-reached"), ent, args.User);
             return;
         }
 
@@ -31,7 +31,7 @@ public sealed class SkillPamphletSystem : EntitySystem
         {
             if (_whitelistSystem.IsWhitelistFail(whitelist.Restrictions, args.User))
             {
-                _popup.PopupEntity(Loc.GetString(whitelist.Popup), ent, args.User);
+                _popup.PopupClient(Loc.GetString(whitelist.Popup), ent, args.User);
                 return;
             }
         }
@@ -58,12 +58,14 @@ public sealed class SkillPamphletSystem : EntitySystem
 
         if (ent.Comp.GaveSkill)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-pamphlets-reading"), args.User, args.User);
+            _popup.PopupClient(Loc.GetString("rmc-pamphlets-reading"), args.User, args.User);
             EnsureComp<UsedSkillPamphletComponent>(args.User);
-            QueueDel(ent);
+            if(!_net.IsClient)
+                QueueDel(ent);
+
             return;
         }
 
-        _popup.PopupEntity(Loc.GetString("You know this already!"), ent, args.User);
+        _popup.PopupClient(Loc.GetString("You know this already!"), ent, args.User);
     }
 }

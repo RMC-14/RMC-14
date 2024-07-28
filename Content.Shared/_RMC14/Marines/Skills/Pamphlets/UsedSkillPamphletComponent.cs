@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Server._RMC14.Pamphlets;
+namespace Content.Shared._RMC14.Marines.Skills.Pamphlets;
 
 /// <summary>
 ///     Used to indicate that a marine has already used a skill pamphlet

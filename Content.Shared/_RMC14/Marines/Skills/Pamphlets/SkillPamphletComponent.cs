@@ -1,12 +1,11 @@
 using Content.Shared.Whitelist;
-using Content.Shared._RMC14.Marines.Skills;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Server._RMC14.Pamphlets;
+namespace Content.Shared._RMC14.Marines.Skills.Pamphlets;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class SkillPamphletComponent : Component
 {
     [DataField]
@@ -22,6 +21,7 @@ public sealed partial class SkillPamphletComponent : Component
     public List<PamphletWhitelist> Whitelists = new();
 
     [DataRecord]
+    [Serializable, NetSerializable]
     public readonly record struct PamphletWhitelist(string Popup, EntityWhitelist Restrictions);
 
     public bool GaveSkill;
