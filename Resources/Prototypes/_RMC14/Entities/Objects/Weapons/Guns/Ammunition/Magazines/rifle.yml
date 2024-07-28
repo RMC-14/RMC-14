@@ -37,9 +37,6 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Appearance
 
-- type: Tag
-  id: CMMagazineRifleM54CAP
-
 # m54c AP
 - type: entity
   parent: CMMagazineRifleM54C
