@@ -218,7 +218,7 @@
     proto: CMCartridgeRifle458
     capacity: 9
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/XM88.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/xm88.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
