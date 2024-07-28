@@ -160,8 +160,6 @@
   id: WeaponRifleM54CE2
   description: A large squad support weapon capable of laying down sustained suppressing fire from a mounted position. While unstable and less accurate, it can be lugged and shot with two hands.
   components:
-  - type: Tag
-    id: WeaponRifleM54CE2
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2.rsi
     layers:
@@ -390,3 +388,6 @@
       rmc-aslot-barrel: 1.18, 0.0
       rmc-aslot-rail: 0.225, 0.125
       rmc-aslot-underbarrel: 0.62, -0.31
+
+- type: Tag
+    id: WeaponRifleM54CE2
