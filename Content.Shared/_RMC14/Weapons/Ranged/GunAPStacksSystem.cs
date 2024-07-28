@@ -25,7 +25,8 @@ public abstract class GunAPStacksSystem : EntitySystem
         
         Dirty(ent);
     }
-    private void ChangeStack(Entity<GunAPStacksModifierComponent> ent, EntityUid? shooter, EntityUid weapon, EntityUid target)
+    private void ChangeStack(Entity<GunAPStacksModifierComponent> ent, ref ProjectileEmbedEvent args)
+    //EntityUid? shooter, EntityUid weapon, EntityUid target
     {
         //If xenoid hit increase stack
         if(HasComp<XenoComponent>(target))
