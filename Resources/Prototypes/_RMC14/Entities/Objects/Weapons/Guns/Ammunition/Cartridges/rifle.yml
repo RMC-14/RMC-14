@@ -47,4 +47,4 @@
     - Cartridge
     - CMCartridgeRifle458
   - type: CartridgeAmmo
-    proto: BulletRifle10x24mm
+    proto: BulletRifle458
