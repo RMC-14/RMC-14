@@ -47,7 +47,7 @@
     state: pamphlet_construction
   - type: SkillPamphlet
     addSkills: 
-      RMCSkillEngineering: 1
+      RMCSkillEngineer: 1
 
 # gives jtac skill
 - type: entity
@@ -60,7 +60,7 @@
     state: pamphlet_jtac
   - type: SkillPamphlet
     addSkills: 
-      RMCSkillJTAC: 1
+      RMCSkillJtac: 1
 
 # gives spotter skill / bypasses limit
 - type: entity
