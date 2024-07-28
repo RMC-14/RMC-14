@@ -404,7 +404,7 @@
     Water:
       amount: 4000
     TableSalt:
-      amount: 10000
+      amount: 1000
   products:
     Saline: 5
 
