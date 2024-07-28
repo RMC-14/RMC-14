@@ -24,7 +24,7 @@
 
 - type: entity
   parent: BulletRifle10x24mm
-  id: BulletRifle458SOCOM
+  id: BulletRifle458
   noSpawn: true
   components:
   - type: Projectile
