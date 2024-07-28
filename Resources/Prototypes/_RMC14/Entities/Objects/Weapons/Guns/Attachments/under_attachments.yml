@@ -36,7 +36,7 @@
   id: RMCAttachmentBipod
   name: bipod
   description: "A simple set of telescopic poles to keep a weapon stabilized during firing.
-    Greatly increases accuracy and reduces recoil when properly placed, but also increases weapon size and slows firing speed."
+    When properly placed, greatly increases accuracy, fire-rate and reduces recoil, but when not deployed also increases weapon size and slows fire-rate."
   components:
   - type: Sprite
     state: bipod
