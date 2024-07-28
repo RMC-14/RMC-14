@@ -8,6 +8,10 @@
   },
   "states": [
         {
+          "name": "equipped-MASK",
+          "directions": 4
+        },
+        {
             "name": "icon"
         },
         {
