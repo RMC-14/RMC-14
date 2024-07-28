@@ -204,7 +204,7 @@
     - CMMagazineRifleM4SPRExt
 
 #XM88 "Magazine" its handfuls
-  - type: entity
+- type: entity
   parent: CMMagazineRifleBase
   id: CMMagazineRifleXM88
   name: "Handful of .458 Rounds"
