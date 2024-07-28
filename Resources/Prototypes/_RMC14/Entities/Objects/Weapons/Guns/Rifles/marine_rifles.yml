@@ -396,5 +396,5 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.76, 0.0
-      rmc-aslot-rail: -0.08, 0.14
+      rmc-aslot-rail: -0.1, 0.13
       rmc-aslot-underbarrel: 0.24, -0.3
