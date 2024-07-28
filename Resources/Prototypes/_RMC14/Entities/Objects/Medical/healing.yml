@@ -37,7 +37,7 @@
     unskilledDamage: -5
     canUseUnskilled: true
     skills:
-      medical: 2
+      RMCSkillMedical: 2
     treatBeginSound:
       path: "/Audio/Items/Medical/ointment_begin.ogg"
     treatEndSound:
@@ -103,7 +103,7 @@
     consumable: true
     canUseUnskilled: true
     skills:
-      medical: 2
+      RMCSkillMedical: 2
     treatBeginSound:
       path: "/Audio/_RMC14/Medical/bandage.ogg"
     treatEndSound:
@@ -167,7 +167,7 @@
     damage: -10
     canUseUnskilled: false
     skills:
-      medical: 2
+      RMCSkillMedical: 2
     treatBeginSound:
       path: "/Audio/_RMC14/Medical/bandage.ogg"
     treatEndSound:
@@ -208,7 +208,7 @@
     damage: -10
     canUseUnskilled: false
     skills:
-      medical: 2
+      RMCSkillMedical: 2
     treatBeginSound:
       path: "/Audio/_RMC14/Medical/bandage.ogg"
     treatEndSound:
@@ -256,7 +256,7 @@
     unskilledDamage: -3
     canUseUnskilled: true
     skills:
-      medical: 2
+      RMCSkillMedical: 2
     treatBeginSound:
       path: "/Audio/_RMC14/Medical/bandage.ogg"
     treatEndSound:
@@ -322,7 +322,7 @@
     unskilledDamage: -3
     canUseUnskilled: true
     skills:
-      medical: 2
+      RMCSkillMedical: 2
     treatBeginSound:
       path: "/Audio/_RMC14/Medical/bandage.ogg"
     treatEndSound:

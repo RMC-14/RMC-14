@@ -19,11 +19,12 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      cqc: 2
-      endurance: 2
-      firearms: 1
-      fireman: 2
-      police: 2
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillPolice: 2
 
 - type: startingGear
   id: CMGearMilitaryPolice

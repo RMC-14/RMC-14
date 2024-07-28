@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
@@ -8,5 +9,5 @@ namespace Content.Shared._RMC14.Weapons.Ranged;
 public sealed partial class GunRequiresSkillsComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
-    public Skills Skills;
+    public Dictionary<EntProtoId<SkillDefinitionComponent>, int> Skills = new();
 }

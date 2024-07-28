@@ -70,7 +70,7 @@
     - Medical Doctor
   - type: RequiresSkill
     skills:
-      medical: 2
+      RMCSkillMedical: 2
 
 - type: entity
   id: CMDefibrillator

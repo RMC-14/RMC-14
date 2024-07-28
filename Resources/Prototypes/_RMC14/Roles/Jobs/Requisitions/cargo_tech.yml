@@ -14,9 +14,10 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      construction: 1
-      firearms: 1
-      powerLoader: 2
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillFirearms: 1
+        RMCSkillPowerLoader: 2
 
 - type: startingGear
   id: CMGearCargoTech

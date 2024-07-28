@@ -4,7 +4,6 @@ using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
-using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
@@ -42,7 +41,6 @@ public sealed class CMGunSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly FixtureSystem _fixtures = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ProjectileComponent> _projectileQuery;
@@ -117,7 +115,7 @@ public sealed class CMGunSystem : EntitySystem
         var time = _timing.CurTime;
         var normalized = direction.Normalized();
 
-        // Send each FiredProjectile with a PhysicsComponent off with the same Vector. Max 
+        // Send each FiredProjectile with a PhysicsComponent off with the same Vector. Max
         foreach (var projectile in args.FiredProjectiles)
         {
             if (!_physicsQuery.TryComp(projectile, out var physics))
@@ -190,8 +188,8 @@ public sealed class CMGunSystem : EntitySystem
 
     private void OnGunUnskilledPenaltyRefresh(Entity<GunUnskilledPenaltyComponent> ent, ref GunRefreshModifiersEvent args)
     {
-        if (TryGetUserSkills(ent, out var skills) &&
-            skills.Comp.Skills.Firearms >= ent.Comp.Firearms)
+        if (TryGetUserSkills(ent, out var user) &&
+            _skills.HasSkill((user, user), ent.Comp.Skill, ent.Comp.Firearms))
         {
             return;
         }
@@ -219,7 +217,7 @@ public sealed class CMGunSystem : EntitySystem
     private void OnRecoilSkilledRefreshModifiers(Entity<GunSkilledRecoilComponent> ent, ref GunRefreshModifiersEvent args)
     {
         if (!TryGetUserSkills(ent, out var user) ||
-            !_skills.HasSkills((user, user), in ent.Comp.Skills))
+            !_skills.HasAllSkills((user, user), ent.Comp.Skills))
         {
             return;
         }
@@ -235,7 +233,7 @@ public sealed class CMGunSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (_skills.HasSkills(args.User, ent.Comp.Skills))
+        if (_skills.HasAllSkills(args.User, ent.Comp.Skills))
             return;
 
         args.Cancelled = true;
@@ -340,7 +338,7 @@ public sealed class CMGunSystem : EntitySystem
             RemCompDeferred<ProjectileFixedDistanceComponent>(uid);
         }
     }
-    
+
     // RMC revolver cylinder spin default unique action
     private void OnRevolverUniqueAction(Entity<RevolverAmmoProviderComponent> gun, ref UniqueActionEvent args)
     {
