@@ -38,13 +38,13 @@
 
 - type: entity
   parent: CMCartridgeRifle10x24mm
-  id: CMCartridgeRifle458SOCOM
+  id: CMCartridgeRifle458
   name: cartridge (.458 SOCOM)
   description: A unique cartridge designed for use in the XM88 Heavy Rifle
   components:
   - type: Tag
     tags:
     - Cartridge
-    - CMCartridgeRifle458SOCOM
+    - CMCartridgeRifle458
   - type: CartridgeAmmo
-    proto: BulletRifle458SOCOM
+    proto: BulletRifle458
