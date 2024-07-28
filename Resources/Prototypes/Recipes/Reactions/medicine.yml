@@ -406,7 +406,7 @@
     TableSalt:
       amount: 1000
   products:
-    Saline: 5
+    Saline: 5000
 
 - type: reaction
   id: Lacerinol
