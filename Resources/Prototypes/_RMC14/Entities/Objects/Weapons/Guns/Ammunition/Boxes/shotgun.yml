@@ -119,5 +119,6 @@
     capacity: 60
   - type: Sprite
     layers:
+    - state: 458boxe
     - state: 458box   #FIXME
       map: [ "enum.CMAmmoBoxLayers.Ammo" ]
