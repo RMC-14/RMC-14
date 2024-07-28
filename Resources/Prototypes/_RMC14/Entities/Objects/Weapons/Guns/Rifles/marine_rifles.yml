@@ -339,12 +339,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88.rsi
-    layers:
-    - state: base
-      map: [ "enum.GunVisualLayers.Base" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
-      state: d_m4spr_barrel
-      offset: 0.65, 0
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88.rsi
   - type: Gun
@@ -353,7 +347,7 @@
     angleIncrease: 25
     angleDecay: 45
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_xm88.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_sniper.ogg
   - type: PumpAction
   - type: ShootUseDelay
     delay: 1
@@ -363,15 +357,16 @@
     maxAngle: -50
     angleIncrease: -22
     angleDecay: 10
-  - type: BallisticAmmoProvider
-    cycleable: false
-    whitelist:
-      tags:
-      - CMMagazineRifleXM88
-    capacity: 9
-    proto: null
-    soundInsert:
-      path: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleXM88
   - type: GunDamageModifier
     multiplier: 1
   - type: GunAPStacksModifier
