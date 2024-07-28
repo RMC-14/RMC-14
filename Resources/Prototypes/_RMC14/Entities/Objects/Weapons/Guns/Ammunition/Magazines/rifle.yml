@@ -214,8 +214,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridgeRifle10x24mm
-    proto: CMCartridgeRifle10x24mm
+      - CMCartridgeRifle458
+    proto: CMCartridgeRifle458
     capacity: 9
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/XM88.rsi
