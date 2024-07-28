@@ -36,9 +36,6 @@
   - type: CartridgeAmmo
     proto: BulletRifle10x24mmAP
 
-- type: Tag
-  id: CMCartridgeRifle458SOCOM
-
 - type: entity
   parent: CMCartridgeRifle10x24mm
   id: CMCartridgeRifle458SOCOM
@@ -51,4 +48,3 @@
     - CMCartridgeRifle458SOCOM
   - type: CartridgeAmmo
     proto: BulletRifle458SOCOM
-
