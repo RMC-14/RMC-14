@@ -375,15 +375,24 @@
   - type: GunAPStacksModifier
   - type: AttachableHolder
     slots:
-      cm-aslot-barrel:
+      rmc-aslot-barrel:
         whitelist:
           tags:
-          - CMAttachmentExtendedBarrel
-          - CMAttachmentSuppressor
-      cm-aslot-rail:
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
         whitelist:
           tags:
-          - CMAttachmentFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 1.18, 0.0
