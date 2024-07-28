@@ -30,7 +30,7 @@
     - ActionXenoTailStab
     - ActionXenoCharge
     - ActionXenoStomp
-    #    - ActionXenoDefensiveShield
+    - ActionXenoDefensiveShield
     - ActionXenoDevolve
     tier: 3
     hudOffset: 0,0.375
@@ -60,6 +60,8 @@
     damage:
       groups:
         Brute: 40
+  - type: CrusherShield
+  - type: XenoShield
   - type: Tackle
     threshold: 5
     stun: 5
