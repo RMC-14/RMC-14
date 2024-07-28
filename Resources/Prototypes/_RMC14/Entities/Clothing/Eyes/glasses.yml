@@ -39,6 +39,28 @@
 
 - type: entity
   parent: ClothingEyesBase
+  id: CMGlassesM4SPRBattleSight
+  name: M4SPR Battle Sight
+  description: A headset and night vision sighting system for the M4SPR Custom Battle Rifle. Allows highlighted imaging of surroundings.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/m42_scoutsight.rsi
+    layers:
+    - state: icon
+      map: [ "icon" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/m42_scoutsight.rsi
+  - type: NightVisionItem
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.NightVisionItemVisuals.Active:
+        icon:
+          True: { state: icon_on }
+          False: { state: icon }
+
+- type: entity
+  parent: ClothingEyesBase
   id: RMCGlassesSmartGunSight
   name: ML66A head mounted sight # TODO RMC14 meson tile vision see description below
   description: A headset and goggles system for the ML66A Smart Gun. # TODO RMC14 Has a low-res short-range imager, allowing for view of terrain.

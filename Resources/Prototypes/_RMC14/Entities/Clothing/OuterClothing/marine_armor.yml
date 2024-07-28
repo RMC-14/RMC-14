@@ -270,6 +270,11 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/scout.rsi
   - type: Corrodible
     isCorrodible: false
+  - type: ClothingSpeedModifier # light armor speed
+    walkModifier: .814
+    sprintModifier: .814
+  - type: CMArmor
+    armor: 25
 
 - type: entity
   parent: CMArmorM3Medium

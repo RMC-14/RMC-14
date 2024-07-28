@@ -328,6 +328,42 @@
       rmc-aslot-rail: 0.225, 0.125
       rmc-aslot-underbarrel: 0.62, -0.31
 
+- type: entity
+  parent: WeaponRifleM4SPR
+  name: M4SPR custom battle rifle
+  id: WeaponRifleM4SPRCustom
+  description: An improvement over the already great M4SPR. Able to take A19 rounds, as well as having better control and accuracy at the cost of being harder to use. Can take traditional M4SPR mags, at lower damage.
+  components:
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 1
+    recoilUnwielded: 4
+    scatterWielded: 1
+    scatterUnwielded: 8
+    baseFireRate: 1.70
+  - type: GunDamageModifier
+    multiplier: 1.2 # Lower to allow for normal M4SPR mags to have lower damage. A19 mags have been given significantly damage to compensate. 
+  - type: Gun
+    shotsPerBurst: 2
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m4spr.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM4SPR
+          - CMMagazineRifleM4SPRAP
+          - CMMagazineRifleM4SPRExt
+          - RMCMagazineRifleM4SPRA19
 
 - type: Tag
   id: WeaponRifleM54CE2
