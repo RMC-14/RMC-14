@@ -200,7 +200,7 @@
     - CMMagazineRifle
     - CMMagazineRifleM4SPRExt
 
-#XM88 "Magazine" its handfuls
+#XM88 "Magazine" its handfuls  - CMCartridgeRifle458
 - type: entity
   parent: CMMagazineRifleBase
   id: CMMagazineRifleXM88
@@ -214,8 +214,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridgeRifle458
-    proto: CMCartridgeRifle458
+      - CMCartridgeRifle10x24mm
+    proto: CMCartridgeRifle10x24mm
     capacity: 9
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/XM88.rsi
