@@ -120,6 +120,6 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/SOCOM_box.rsi
     layers:
-    - state: 458boxe
-    - state: 458box 
+    - state: Socom32e
+    - state: SOCOMFULL32subdiv 
       map: [ "enum.CMAmmoBoxLayers.Ammo" ]
