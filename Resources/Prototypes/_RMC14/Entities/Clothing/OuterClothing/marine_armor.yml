@@ -258,9 +258,12 @@
     grid:
     - 0,0,3,1 # 2 slots
 
+- type: Tag
+  id: RMCScoutArmor
+
 - type: entity
   parent: CMArmorM3Medium
-  id: CMArmorM3Scout
+  id: RMCArmorM3Scout
   name: M3-S light armor
   description: A custom set of M3 armor designed for Marine Scouts.
   components:
@@ -275,6 +278,9 @@
     sprintModifier: .814
   - type: CMArmor
     armor: 25
+  - type: Tag
+    tags:
+      - RMCScoutArmor
 
 - type: entity
   parent: CMArmorM3Medium

@@ -206,7 +206,7 @@
 # M4SPR A19 HV 
 - type: entity
   parent: CMMagazineRifleBase
-  id: CMMagazineRifleM4SPRA19
+  id: RMCMagazineRifleM4SPRA19
   name: "M4SPR A19 magazine (high-velocity)"
   description: "A magazine of high-velocity A19 rounds for use in the M4SPR battle rifle."
   components:

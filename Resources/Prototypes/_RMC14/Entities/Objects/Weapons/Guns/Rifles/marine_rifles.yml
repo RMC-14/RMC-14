@@ -334,6 +334,16 @@
   id: WeaponRifleM4SPRCustom
   description: An improvement over the already great M4SPR. Able to take A19 rounds, as well as having better control and accuracy at the cost of being harder to use. Can take traditional M4SPR mags, at lower damage.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+      state: c_m4spr_custom_barrel
+      offset: 0.65, 0
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -341,9 +351,14 @@
     recoilUnwielded: 4
     scatterWielded: 1
     scatterUnwielded: 8
-    baseFireRate: 1.70
+    baseFireRate: 1.8
   - type: GunDamageModifier
-    multiplier: 1.2 # Lower to allow for normal M4SPR mags to have lower damage. A19 mags have been given significantly damage to compensate. 
+    multiplier: 1.2 # Lower to allow for normal M4SPR mags to have lower damage. A19 mags have been given significantly higher damage to compensate. 
+  - type: WieldDelay
+    baseDelay: 0.2
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.94
+    baseSprint: 0.88
   - type: Gun
     shotsPerBurst: 2
     selectedMode: SemiAuto
@@ -351,6 +366,12 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m4spr.ogg
+  - type: GunUserWhitelist
+    whitelist:
+      components:
+      - ScoutWhitelist
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom.rsi
   - type: ItemSlots
     slots:
       gun_magazine:

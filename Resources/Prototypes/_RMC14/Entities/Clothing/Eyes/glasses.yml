@@ -39,7 +39,7 @@
 
 - type: entity
   parent: ClothingEyesBase
-  id: CMGlassesM4SPRBattleSight
+  id: RMCGlassesM4SPRBattleSight
   name: M4SPR Battle Sight
   description: A headset and night vision sighting system for the M4SPR Custom Battle Rifle. Allows highlighted imaging of surroundings.
   components:

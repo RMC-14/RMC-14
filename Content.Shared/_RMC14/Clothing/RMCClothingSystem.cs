@@ -38,6 +38,6 @@ public sealed class RMCClothingSystem : EntitySystem
         }
 
         args.Cancel();
-        args.Reason = "rmc-wear-smart-gun-required";
+        args.Reason = ent.Comp.DenyReason;
     }
 }

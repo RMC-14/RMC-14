@@ -49,6 +49,7 @@
     amount: 10
   - type: XenoProjectile
     deleteOnFriendlyXeno: true
+  - type: UncloakOnHit
 
 - type: entity
   parent: XenoSpitProjectile
