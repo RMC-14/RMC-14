@@ -33,5 +33,5 @@
         Piercing: 80
   - type: CMArmorPiercing
     amount: 0
-  #- type: GunAPStacks FIXME
+  - type: GunAPStacksModifier
   #0 is default (no stacks)
