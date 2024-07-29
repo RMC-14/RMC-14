@@ -150,7 +150,8 @@
         points: 3
     - name: Binoculars
       entries:
-      - RMCBinoculars: 5P
+      - id: RMCBinoculars
+        points: 5
     #    CMRangeFinder: 10P
     #    CMLaserDesignator: 15P
     - name: Helmet Optics
