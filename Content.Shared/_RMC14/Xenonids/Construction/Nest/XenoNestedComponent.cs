@@ -13,5 +13,5 @@ public sealed partial class XenoNestedComponent : Component
     public bool Detached;
 
     [DataField]
-	public float IncubationMultiplier = 1.5f;
+    public float IncubationMultiplier = 1.5f;
 }
