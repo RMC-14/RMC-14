@@ -253,7 +253,8 @@ public sealed class XenoDevourSystem : EntitySystem
         foreach (var ent in ents)
         {
             _stun.TryStun(ent, xeno.Comp.RegurgitationStun, true);
-            SpawnAttachedTo(xeno.Comp.RegurgitateEffect, ent.ToCoordinates());
+            if (_net.IsServer)
+                SpawnAttachedTo(xeno.Comp.RegurgitateEffect, ent.ToCoordinates());
         }
     }
 
