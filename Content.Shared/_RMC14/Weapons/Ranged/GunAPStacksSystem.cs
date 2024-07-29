@@ -3,11 +3,13 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Projectiles;
+using Content.Shared._RMC.Armor;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
 public abstract class GunAPStacksSystem : EntitySystem
 {
+    //[Dependency] private readonly CMArmorSystem _armor = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<GunAPStacksModifierComponent, AmmoShotEvent>(OnGunShot);
@@ -45,5 +47,6 @@ public abstract class GunAPStacksSystem : EntitySystem
             }
         }
         Dirty(ent);
+        //_armor.SetArmorPiercing(args.Weapon, (ent.Comp.Stacks * 10));
     }
 }
