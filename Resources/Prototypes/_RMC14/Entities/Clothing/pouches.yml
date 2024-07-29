@@ -813,6 +813,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/machete.rsi
     state: sheath
+  - type: Item
+    size: Large
   - type: Clothing
     quickEquip: false
     slots:
@@ -838,3 +840,7 @@
     - Pouch
   - type: CMHolster
   - type: CMItemSlots
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
