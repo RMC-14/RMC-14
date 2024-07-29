@@ -345,21 +345,24 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88.rsi
   - type: Gun
-    minAngle: 20
-    maxAngle: 70
-    angleIncrease: 25
-    angleDecay: 45
+    shotsPerBurst: 0
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_sniper.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilUnwielded: 5
+    scatterWielded: 3
+    baseFireRate: 1
+  - type: WieldDelay
+    baseDelay: 0.2
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.92
+    baseSprint: 0.86
   - type: PumpAction
-  - type: ShootUseDelay
-    delay: 1
-  - type: UseDelay
-  - type: GunWieldBonus
-    minAngle: -20
-    maxAngle: -50
-    angleIncrease: -22
-    angleDecay: 10
   - type: ItemSlots
     slots:
       gun_magazine:
