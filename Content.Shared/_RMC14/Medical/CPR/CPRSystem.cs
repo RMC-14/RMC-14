@@ -193,6 +193,8 @@ public sealed class CPRSystem : EntitySystem
 
     private bool StartCPR(EntityUid performer, EntityUid target)
     {
+        if (!_mobState.IsIncapacitated(target))
+            return false;
         if (!CanCPRPopup(performer, target, true, out _))
             return false;
 
