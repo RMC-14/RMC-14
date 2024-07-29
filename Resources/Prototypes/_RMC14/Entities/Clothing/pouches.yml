@@ -288,7 +288,8 @@
     whitelist:
       tags:
       - Sidearm
-      # todo rmc14 binoculars and CO tablet
+      - Binoculars
+      - CommandTablet
   - type: FixedItemSizeStorage
 
 - type: entity
