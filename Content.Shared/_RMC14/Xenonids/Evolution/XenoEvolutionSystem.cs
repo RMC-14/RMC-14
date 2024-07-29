@@ -370,12 +370,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
             var existing = 0;
             var total = 0;
             var current = EntityQueryEnumerator<XenoComponent>();
-            while (current.MoveNext(out var uid, out var existingComp))
+            while (current.MoveNext(out var existingComp))
             {
-                if (existingComp.Hive != oldHive)
-                    continue;
-
-                if (HasComp<IgnoreForHivePopComponent>(uid))
+                if (existingComp.Hive != oldHive || !existingComp.CountedInSlots)
                     continue;
 
                 total++;
