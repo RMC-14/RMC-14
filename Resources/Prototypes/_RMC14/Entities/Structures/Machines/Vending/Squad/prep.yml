@@ -393,8 +393,8 @@
         amount: 1
 #      - id: CMScabbardMacheteFull
 #        amount: 5
-      #- id: CMBinoculars
-      #  amount: 5
+      - id: RMCBinoculars
+        amount: 5
       #- id: CMFoldingBarricadesMB6x3
       #  amount: 2
       #- id: CMSparePDTLBattleBuddyKit
