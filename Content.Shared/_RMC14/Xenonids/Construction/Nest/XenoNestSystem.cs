@@ -124,12 +124,12 @@ public sealed class XenoNestSystem : EntitySystem
         TryStartNesting(args.User, (args.Target.Value, surface), args.Used);
     }
 
-	private void OnNestedAdd(Entity<XenoNestedComponent> ent, ref ComponentStartup args)
-	{
-		_parasite.RefreshIncubationMultipliers(ent.Owner);
-	}
+    private void OnNestedAdd(Entity<XenoNestedComponent> ent, ref ComponentStartup args)
+    {
+        _parasite.RefreshIncubationMultipliers(ent.Owner);
+    }
 
-	private void OnNestedRemove(Entity<XenoNestedComponent> ent, ref ComponentRemove args)
+    private void OnNestedRemove(Entity<XenoNestedComponent> ent, ref ComponentRemove args)
     {
         DetachNested(null, ent);
         _actionBlocker.UpdateCanMove(ent);
@@ -269,13 +269,13 @@ public sealed class XenoNestSystem : EntitySystem
         args.Cancel();
     }
 
-	private void OnInNestGetInfectedIncubationMultiplier(Entity<XenoNestedComponent> ent, ref GetInfectedIncubationMultiplierEvent args)
+    private void OnInNestGetInfectedIncubationMultiplier(Entity<XenoNestedComponent> ent, ref GetInfectedIncubationMultiplierEvent args)
     {
         if (ent.Comp.Running)
             args.Multiply(ent.Comp.IncubationMultiplier);
-	}
+    }
 
-	private void TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)
+    private void TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)
     {
         if (!HasComp<XenoComponent>(user) ||
             !CanNestPopup(user, victim, surface, out _))

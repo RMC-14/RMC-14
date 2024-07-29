@@ -244,7 +244,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
     private void OnVictimBurstExamine(Entity<VictimBurstComponent> burst, ref ExaminedEvent args)
     {
-        using(args.PushGroup(nameof(VictimBurstComponent)))
+        using (args.PushGroup(nameof(VictimBurstComponent)))
             args.PushMarkup($"[color=red][bold]{Loc.GetString("rmc-xeno-infected-bursted", ("victim", burst))}[/bold][/color]");
     }
 
@@ -300,13 +300,13 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             return false;
         }
 
-        if(_mobState.IsDead(parasite))
+        if (_mobState.IsDead(parasite))
         {
-            if(popup)
-				_popup.PopupClient(Loc.GetString("rmc-xeno-failed-parasite-dead"), victim, user, PopupType.MediumCaution);
+            if (popup)
+                _popup.PopupClient(Loc.GetString("rmc-xeno-failed-parasite-dead"), victim, user, PopupType.MediumCaution);
 
             return false;
-		}
+        }
         return true;
     }
 
