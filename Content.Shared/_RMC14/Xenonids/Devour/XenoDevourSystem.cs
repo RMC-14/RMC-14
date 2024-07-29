@@ -41,9 +41,9 @@ public sealed class XenoDevourSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-	[Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
 
-	private EntityQuery<DevouredComponent> _devouredQuery;
+    private EntityQuery<DevouredComponent> _devouredQuery;
     private EntityQuery<XenoDevourComponent> _xenoDevourQuery;
 
     public override void Initialize()
