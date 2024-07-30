@@ -111,7 +111,7 @@ public sealed partial class VictimInfectedComponent : Component
     public float MajorPainChance = 0.1f;
 
     [DataField]
-    public float InsanePainChance = 0.3f;
+    public float InsanePainChance = 0.2f;
 
     [DataField]
     public bool DidBurstWarning = false;
