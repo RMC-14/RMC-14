@@ -44,12 +44,6 @@ public sealed partial class VictimInfectedComponent : Component
     [DataField, AutoNetworkedField]
     public bool FellOff;
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan RecoverAt;
-
-    [DataField, AutoNetworkedField]
-    public bool Recovered;
-
     [DataField, AutoNetworkedField]
     public TimeSpan BurstDelay = TimeSpan.FromMinutes(8);
 
