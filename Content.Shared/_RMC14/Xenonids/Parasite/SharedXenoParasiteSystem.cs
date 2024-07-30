@@ -70,6 +70,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         SubscribeLocalEvent<ParasiteSpentComponent, MapInitEvent>(OnParasiteSpentMapInit);
         SubscribeLocalEvent<ParasiteSpentComponent, UpdateMobStateEvent>(OnParasiteSpentUpdateMobState,
             after: [typeof(MobThresholdSystem), typeof(SharedXenoPheromonesSystem)]);
+        SubscribeLocalEvent<ParasiteSpentComponent, ExaminedEvent>(OnExamined);
 
         SubscribeLocalEvent<VictimInfectedComponent, MapInitEvent>(OnVictimInfectedMapInit);
         SubscribeLocalEvent<VictimInfectedComponent, ComponentRemove>(OnVictimInfectedRemoved);
@@ -188,6 +189,11 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
     private void OnParasiteSpentUpdateMobState(Entity<ParasiteSpentComponent> spent, ref UpdateMobStateEvent args)
     {
         args.State = MobState.Dead;
+    }
+
+    private void OnExamined(Entity<ParasiteSpentComponent> spent, ref ExaminedEvent args)
+    {
+        args.PushText(Loc.GetString("rmc-xeno-parasite-dead", ("parasite", spent)));
     }
 
     private void OnVictimInfectedMapInit(Entity<VictimInfectedComponent> victim, ref MapInitEvent args)
