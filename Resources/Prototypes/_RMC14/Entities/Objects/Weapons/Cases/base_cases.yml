@@ -34,14 +34,13 @@
       - Xeno
 
 - type: entity
-  parent: BaseStorageItem
+  parent: RMCBaseGunCase
   id: RMCBaseEquipmentCase
   abstract: true
   name: base equipment case
   description: A loadout case.
   components:
   - type: Sprite
-    noRot: true
     sprite: _RMC14/Objects/loadout_kits.rsi
     layers:
     - state: closed
@@ -50,8 +49,6 @@
       map: [ label ]
   - type: Icon
     sprite: _RMC14/Objects/loadout_kits.rsi
-    state: closed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.StorageVisuals.Open:
@@ -61,8 +58,6 @@
         label:
           True: { visible: false }
           False: { visible: true }
-  - type: Item
-    size: Huge
   - type: Storage
     maxItemSize: Huge
     grid:
