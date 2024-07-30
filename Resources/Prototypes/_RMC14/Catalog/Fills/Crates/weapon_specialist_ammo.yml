@@ -52,7 +52,7 @@
     - id: RMCRocket84mm
       amount: 2
     - id: RMCRocket84mmAntiArmor
-      amount: 2
+      amount: 1
 
 - type: entity
   parent: CMCrateAmmo
