@@ -168,7 +168,7 @@
   parent: BaseStorageItem
   id: RMCScoutEquipmentCase
   name: scout equipment case
-  description: "A large case containing an M4RA battle rifle, M3-S light armor and helmet, M4RA battle sight, M68 thermal cloak, V3 reactive thermal tarp, improved scout laser designator, ammunition and additional pieces of equipment.\nNOTE: You cannot put items back inside this case."
+  description: "A large case containing an M4RA battle rifle, M3-S light armor and helmet, M4RA battle sight, M68 thermal cloak, V3 reactive thermal tarp, ammunition and additional pieces of equipment.\nNOTE: You cannot put items back inside this case."
   components:
   - type: Sprite
     noRot: true
@@ -215,6 +215,7 @@
     - id: CMMagazinePistolMK80
     - id: CMMagazinePistolMK80
     - id: WeaponRifleM4SPRCustom
+    - id: RMCThermalTarpFolded
 #    - id: RMCPlasticExplosives
 #      amount: 2
 #    - id: CMBinoculars

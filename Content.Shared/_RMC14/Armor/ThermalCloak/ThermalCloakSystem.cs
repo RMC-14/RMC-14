@@ -85,7 +85,6 @@ public sealed class ThermalCloakSystem : EntitySystem
             return;
 
         var comp = EnsureComp<MarineTurnInvisibleComponent>(args.Equipee);
-        comp.Opacity = ent.Comp.Opacity;
         comp.RestrictWeapons = ent.Comp.RestrictWeapons;
         comp.UncloakWeaponLock = ent.Comp.UncloakWeaponLock;
     }
