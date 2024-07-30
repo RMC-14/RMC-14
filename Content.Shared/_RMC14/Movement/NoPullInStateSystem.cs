@@ -15,6 +15,7 @@ public sealed class NoPullInStateSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<NoPullInStateComponent, PullAttemptEvent>(OnPullAttempt);
+        SubscribeLocalEvent<NoPullInStateComponent, MobStateChangedEvent>(OnStateChanged);
     }
 
     private void OnPullAttempt(Entity<NoPullInStateComponent> ent, ref PullAttemptEvent args)
