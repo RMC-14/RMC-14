@@ -10,6 +10,7 @@ namespace Content.Shared._RMC14.Stealth;
 public sealed class RMCPassiveStealthSystem : EntitySystem
 {
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private readonly FoldableSystem _foldable = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
@@ -18,8 +19,9 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<RMCPassiveStealthComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<RMCPassiveStealthComponent, FoldedEvent>(OnFolded);
-        SubscribeLocalEvent<RMCPassiveStealthComponent, ActivateInWorldEvent>(OnToggle);
+        SubscribeLocalEvent<RMCPassiveStealthComponent, FoldedEvent>(OnFolded, after:[typeof(SharedEntityStorageSystem)]);
+
+    SubscribeLocalEvent<RMCPassiveStealthComponent, ActivateInWorldEvent>(OnToggle);
     }
 
     private void OnInit(Entity<RMCPassiveStealthComponent> ent, ref ComponentInit args)
@@ -33,11 +35,15 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
 
     private void OnFolded(Entity<RMCPassiveStealthComponent> ent, ref FoldedEvent args)
     {
+        if (ent.Comp.Enabled == null)
+            return;
+
         if (!args.IsFolded)
         {
             _entityStorage.OpenStorage(ent.Owner);
             return;
         }
+        _entityStorage.OpenStorage(ent.Owner);
         ent.Comp.Enabled = false;
         RemCompDeferred<EntityActiveInvisibleComponent>(ent.Owner);
     }
@@ -46,6 +52,9 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
     {
         if (!ent.Comp.Toggleable)
             return;
+
+        if(ent.Comp.Enabled == null)
+            ent.Comp.Enabled = false;
 
         if (TryComp<FoldableComponent>(ent.Owner, out var fold) && fold.IsFolded)
             return;
@@ -58,7 +67,7 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
             return;
         }
 
-        if (ent.Comp.Enabled)
+        if (ent.Comp.Enabled.Value)
         {
             ent.Comp.Enabled = false;
             RemCompDeferred<EntityActiveInvisibleComponent>(ent.Owner);

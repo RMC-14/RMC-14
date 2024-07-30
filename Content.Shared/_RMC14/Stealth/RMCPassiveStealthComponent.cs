@@ -13,7 +13,7 @@ public sealed partial class RMCPassiveStealthComponent : Component
     public float MinOpacity = 0.2f;
 
     [DataField]
-    public bool Enabled;
+    public bool? Enabled = null;
 
     [DataField]
     public bool Toggleable;
