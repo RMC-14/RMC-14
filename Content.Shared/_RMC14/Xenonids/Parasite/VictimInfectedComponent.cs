@@ -90,9 +90,6 @@ public sealed partial class VictimInfectedComponent : Component
     public int FinalSymptomsStart = 4;
 
     [DataField]
-    public int BurstWarningStart = 4;
-
-    [DataField]
     public float ShakesChance = 0.08f;
 
     [DataField]

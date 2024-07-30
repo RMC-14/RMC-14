@@ -432,21 +432,23 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                 }
 
                 // Warn on the last to final stage of a burst
-                if (!infected.DidBurstWarning && stage == infected.BurstWarningStart)
+                if (!infected.DidBurstWarning && stage == infected.FinalStage - 1)
                 {
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon-self"), uid, uid, PopupType.MediumCaution);
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon", ("victim", uid)), uid, Filter.PvsExcept(uid), true, PopupType.MediumCaution);
                     _jitter.DoJitter(uid, infected.JitterTime * 6, false);
                     infected.DidBurstWarning = true;
 
-                    if (infected.SpawnedLarva == null)
-                    {
-                        var spawned = SpawnAtPosition(infected.BurstSpawn, xform.Coordinates);
-                        _xeno.SetHive(spawned, infected.Hive);
+                    continue;
+                }
 
-                        var larvaContainer = _container.EnsureContainer<ContainerSlot>(uid, infected.LarvaContainerId);
-                        _container.Insert(spawned, larvaContainer);
-                    }
+                if (infected.SpawnedLarva == null && stage == infected.FinalStage)
+                {
+                    var spawned = SpawnAtPosition(infected.BurstSpawn, xform.Coordinates);
+                    _xeno.SetHive(spawned, infected.Hive);
+
+                    var larvaContainer = _container.EnsureContainer<ContainerSlot>(uid, infected.LarvaContainerId);
+                    _container.Insert(spawned, larvaContainer);
 
                     continue;
                 }
