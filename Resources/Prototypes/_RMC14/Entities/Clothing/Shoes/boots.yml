@@ -148,8 +148,6 @@
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/cbrn.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/cbrn.rsi
-  - type: CMItemSlots
-    startingItem: RMCM5Bayonet
 
 
 # Royal Marines
