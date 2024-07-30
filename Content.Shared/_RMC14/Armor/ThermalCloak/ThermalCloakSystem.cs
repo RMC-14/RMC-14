@@ -1,12 +1,8 @@
-using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Marines.Invisibility;
-using Content.Shared._RMC14.OnCollide;
-using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Xenonids.Projectile;
-using Content.Shared._RMC14.Xenonids.Projectile.Spit;
+using Content.Shared._RMC14.NightVision;
 using Content.Shared.Actions;
-using Content.Shared.Damage.Prototypes;
 using Content.Shared.Whitelist;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
@@ -18,7 +14,6 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Explosion.Components.OnTrigger;
 using Robust.Shared.Timing;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Armor.ThermalCloak;
@@ -28,13 +23,13 @@ namespace Content.Shared._RMC14.Armor.ThermalCloak;
 /// </summary>
 public sealed class ThermalCloakSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Robust.Shared.IoC.Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Robust.Shared.IoC.Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Robust.Shared.IoC.Dependency] private readonly InventorySystem _inventory = default!;
+    [Robust.Shared.IoC.Dependency] private readonly IPrototypeManager _protoManager = default!;
+    [Robust.Shared.IoC.Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Robust.Shared.IoC.Dependency] private readonly IGameTiming _timing = default!;
+    [Robust.Shared.IoC.Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -119,6 +114,9 @@ public sealed class ThermalCloakSystem : EntitySystem
                 Dirty(ent.Comp.Action.Value, action);
             }
 
+            if (ent.Comp.HideNightVision)
+                RemCompDeferred<RMCNightVisionVisibleComponent>(user);
+
             turnInvisible.UncloakTime = _timing.CurTime; // Just in case
 
             var popupOthers = Loc.GetString("rmc-cloak-activate-others", ("user", user));
@@ -161,6 +159,9 @@ public sealed class ThermalCloakSystem : EntitySystem
                 var popupOthers = Loc.GetString("rmc-cloak-deactivate-others", ("user", user));
                 _popup.PopupPredicted(Loc.GetString("rmc-cloak-deactivate-self"), popupOthers, user, user, PopupType.Medium);
             }
+
+            if (ent.Comp.HideNightVision)
+               EnsureComp<RMCNightVisionVisibleComponent>(user);
 
             RemCompDeferred<MarineActiveInvisibleComponent>(user);
             _audio.PlayPvs(ent.Comp.UncloakSound, user);
