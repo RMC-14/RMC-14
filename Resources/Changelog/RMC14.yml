@@ -4062,5 +4062,12 @@
   id: 479
   time: '2024-07-30T08:01:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3403
+- author: DrSmugleaf
+  changes:
+  - message: Fixed climbing not ending until you step off weeds.
+    type: Fix
+  id: 480
+  time: '2024-07-30T08:03:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3404
 Name: RMC14
 Order: -1
