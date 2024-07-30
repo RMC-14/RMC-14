@@ -65,6 +65,6 @@
     bundle:
     - RMCFlashlight
     - CMPen
-    # binoculars
+    - RMCBinoculars
     - CMClipboard # notepad
     # taperecorder

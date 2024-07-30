@@ -132,9 +132,9 @@
       - id: RMCWhistle
         points: 3
     - name: Binoculars
-      entries: [ ]
-    #- id: CMBinoculars
-    #  points: 5
+      entries:
+      - id: RMCBinoculars
+        points: 5
     #- id: CMRangeFinder
     #  points: 10
     #- id: CMLaserDesignator

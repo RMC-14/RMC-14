@@ -1,0 +1,23 @@
+﻿- type: entity
+  parent: BaseItem
+  id: RMCBinoculars
+  name: binoculars
+  description: A military-issued pair of binoculars.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/binoculars.rsi
+    state: binoculars
+  - type: Scope
+    useInHand: true
+    allowMovement: true
+    delay: 0
+    zoom: 1.6 # same stats of 4x telescopic scope
+    offset: 14
+  - type: Tag
+    tags:
+    - Binoculars
+
+- type: Tag
+  id: Binoculars
