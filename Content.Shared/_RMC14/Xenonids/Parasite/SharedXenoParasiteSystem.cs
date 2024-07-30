@@ -436,7 +436,9 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                 {
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon-self"), uid, uid, PopupType.MediumCaution);
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon", ("victim", uid)), uid, Filter.PvsExcept(uid), true, PopupType.MediumCaution);
-                    _jitter.DoJitter(uid, infected.JitterTime * 6, false);
+                    _jitter.DoJitter(uid, infected.JitterTime * 8, false);
+                    _stun.TryParalyze(uid, infected.BaseKnockdownTime * 40, false);
+                    _damage.TryChangeDamage(uid, infected.InfectionDamage * 10, true, false);
                     infected.DidBurstWarning = true;
 
                     if (infected.SpawnedLarva == null)
@@ -527,6 +529,9 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
     {
         // Don't activate when unconscious
         if (_mobState.IsIncapacitated(victim))
+            return;
+        // Don't activate if the burst warning appeared
+        if (infected.DidBurstWarning)
             return;
         //TODO Minor limb damage and causes pain
         _stun.TryParalyze(victim, knockdownTime, false);
