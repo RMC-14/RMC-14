@@ -1,9 +1,9 @@
 ﻿using Content.Shared._RMC14.Stealth;
 using Robust.Client.GameObjects;
 
-namespace Content.Client._RMC14.Marines.Invisibility;
+namespace Content.Client._RMC14.Stealth;
 
-public sealed class MarineInvisibilityVisualsSystem : EntitySystem
+public sealed class EntityInvisibilityVisualsSystem : EntitySystem
 {
     public override void Update(float frameTime)
     {
