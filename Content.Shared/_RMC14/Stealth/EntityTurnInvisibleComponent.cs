@@ -1,9 +1,9 @@
 ﻿using Robust.Shared.GameStates;
 
-namespace Content.Shared._RMC14.Marines.Invisibility;
+namespace Content.Shared._RMC14.Stealth;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class MarineTurnInvisibleComponent : Component
+public sealed partial class EntityTurnInvisibleComponent : Component
 {
     public bool Enabled;
 

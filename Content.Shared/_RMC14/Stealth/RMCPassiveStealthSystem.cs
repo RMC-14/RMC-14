@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.Marines.Invisibility;
+using Content.Shared._RMC14.Stealth;
 using Content.Shared.Foldable;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
@@ -28,7 +28,7 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
             return;
 
         ent.Comp.Enabled = false;
-        EnsureComp<MarineTurnInvisibleComponent>(ent.Owner);
+        EnsureComp<EntityTurnInvisibleComponent>(ent.Owner);
     }
 
     private void OnFolded(Entity<RMCPassiveStealthComponent> ent, ref FoldedEvent args)
@@ -39,7 +39,7 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
             return;
         }
         ent.Comp.Enabled = false;
-        RemCompDeferred<MarineActiveInvisibleComponent>(ent.Owner);
+        RemCompDeferred<EntityActiveInvisibleComponent>(ent.Owner);
     }
 
     private void OnToggle(Entity<RMCPassiveStealthComponent> ent, ref ActivateInWorldEvent args)
@@ -61,12 +61,12 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
         if (ent.Comp.Enabled)
         {
             ent.Comp.Enabled = false;
-            RemCompDeferred<MarineActiveInvisibleComponent>(ent.Owner);
+            RemCompDeferred<EntityActiveInvisibleComponent>(ent.Owner);
             return;
         }
 
         ent.Comp.Enabled = true;
-        var invisibility = EnsureComp<MarineActiveInvisibleComponent>(ent.Owner);
+        var invisibility = EnsureComp<EntityActiveInvisibleComponent>(ent.Owner);
         invisibility.Opacity = ent.Comp.MinOpacity;
     }
 }

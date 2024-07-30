@@ -1,5 +1,5 @@
 using Content.Shared._RMC14.Chemistry;
-using Content.Shared._RMC14.Marines.Invisibility;
+using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared.Actions;
@@ -40,7 +40,7 @@ public sealed class ThermalCloakSystem : EntitySystem
         SubscribeLocalEvent<ThermalCloakComponent, GotEquippedEvent>(OnEquipped);
         SubscribeLocalEvent<ThermalCloakComponent, GotUnequippedEvent>(OnUnequipped);
 
-        SubscribeLocalEvent<MarineActiveInvisibleComponent, VaporHitEvent>(OnVaporHit);
+        SubscribeLocalEvent<EntityActiveInvisibleComponent, VaporHitEvent>(OnVaporHit);
 
         SubscribeLocalEvent<GunComponent, AttemptShootEvent>(OnAttemptShoot);
         SubscribeLocalEvent<ExplodeOnTriggerComponent, UseInHandEvent>(OnTimerUse);
@@ -80,7 +80,7 @@ public sealed class ThermalCloakSystem : EntitySystem
         if (!_inventory.InSlotWithFlags((ent, null, null), SlotFlags.BACK))
             return;
 
-        var comp = EnsureComp<MarineTurnInvisibleComponent>(args.Equipee);
+        var comp = EnsureComp<EntityTurnInvisibleComponent>(args.Equipee);
         comp.RestrictWeapons = ent.Comp.RestrictWeapons;
         comp.UncloakWeaponLock = ent.Comp.UncloakWeaponLock;
         Dirty(args.Equipee, comp);
@@ -92,17 +92,17 @@ public sealed class ThermalCloakSystem : EntitySystem
             return;
 
         SetInvisibility(ent, args.Equipee, false, false);
-        RemCompDeferred<MarineTurnInvisibleComponent>(args.Equipee);
+        RemCompDeferred<EntityTurnInvisibleComponent>(args.Equipee);
     }
 
     public void SetInvisibility(Entity<ThermalCloakComponent> ent, EntityUid user, bool enabling, bool forced)
     {
-        if (!TryComp<MarineTurnInvisibleComponent>(user, out var turnInvisible))
+        if (!TryComp<EntityTurnInvisibleComponent>(user, out var turnInvisible))
             return;
 
-        if (enabling && !HasComp<MarineActiveInvisibleComponent>(user))
+        if (enabling && !HasComp<EntityActiveInvisibleComponent>(user))
         {
-            var activeInvisibility = EnsureComp<MarineActiveInvisibleComponent>(user);
+            var activeInvisibility = EnsureComp<EntityActiveInvisibleComponent>(user);
             activeInvisibility.Opacity = ent.Comp.Opacity;
 
             ent.Comp.Enabled = true;
@@ -125,7 +125,7 @@ public sealed class ThermalCloakSystem : EntitySystem
             return;
         }
 
-        if (!enabling && TryComp<MarineActiveInvisibleComponent>(user, out var invisible))
+        if (!enabling && TryComp<EntityActiveInvisibleComponent>(user, out var invisible))
         {
             invisible.Opacity = 1;
             Dirty(user, invisible);
@@ -163,7 +163,7 @@ public sealed class ThermalCloakSystem : EntitySystem
             if (ent.Comp.HideNightVision)
                EnsureComp<RMCNightVisionVisibleComponent>(user);
 
-            RemCompDeferred<MarineActiveInvisibleComponent>(user);
+            RemCompDeferred<EntityActiveInvisibleComponent>(user);
             _audio.PlayPvs(ent.Comp.UncloakSound, user);
         }
     }
@@ -177,7 +177,7 @@ public sealed class ThermalCloakSystem : EntitySystem
 
     private void OnAttemptShoot(Entity<GunComponent> ent, ref AttemptShootEvent args)
     {
-        if (args.Cancelled || !TryComp<MarineTurnInvisibleComponent>(args.User, out var comp))
+        if (args.Cancelled || !TryComp<EntityTurnInvisibleComponent>(args.User, out var comp))
             return;
 
         if (comp.RestrictWeapons && comp.Enabled || comp.UncloakTime + comp.UncloakWeaponLock > _timing.CurTime)
@@ -191,7 +191,7 @@ public sealed class ThermalCloakSystem : EntitySystem
 
     private void OnTimerUse(Entity<ExplodeOnTriggerComponent> ent, ref UseInHandEvent args)
     {
-        if (args.Handled || !TryComp<MarineTurnInvisibleComponent>(args.User, out var comp))
+        if (args.Handled || !TryComp<EntityTurnInvisibleComponent>(args.User, out var comp))
             return;
 
         if (comp.RestrictWeapons && comp.Enabled || comp.UncloakTime + comp.UncloakWeaponLock > _timing.CurTime)
@@ -203,7 +203,7 @@ public sealed class ThermalCloakSystem : EntitySystem
         }
     }
 
-    private void OnVaporHit(Entity<MarineActiveInvisibleComponent> ent, ref VaporHitEvent args)
+    private void OnVaporHit(Entity<EntityActiveInvisibleComponent> ent, ref VaporHitEvent args)
     {
         var cloak = FindWornCloak(ent.Owner);
         if(cloak.HasValue)
