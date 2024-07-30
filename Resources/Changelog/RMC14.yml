@@ -4091,5 +4091,13 @@
   id: 483
   time: '2024-07-30T08:21:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3285
+- author: Vermidia
+  changes:
+  - message: Parasites & Lesser Drones no longer count for population when considering
+      the amount of t2 and t3s a hive can have.
+    type: Fix
+  id: 484
+  time: '2024-07-30T08:28:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3368
 Name: RMC14
 Order: -1
