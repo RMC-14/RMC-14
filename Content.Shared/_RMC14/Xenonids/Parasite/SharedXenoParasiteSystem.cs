@@ -508,6 +508,15 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                     if (_random.Prob((infected.ShakesChance * 2 / 3) * frameTime))
                         InfectionShakes(uid, infected, infected.BaseKnockdownTime, infected.JitterTime);
                 }
+                else if (stage >= infected.BurstWarningStart)
+                {
+                    if (_random.Prob(infected.InsanePainChance * frameTime))
+                    {
+                        var random = _random.Pick(new List<string> { "one", "two", "three", "four", "five" });
+                        var message = Loc.GetString("rmc-xeno-infection-insanepain-" + random);
+                        _popup.PopupEntity(message, uid, uid, PopupType.LargeCaution);
+                    }
+                }
                 continue;
             }
 
