@@ -1,4 +1,6 @@
-# these get spawned by patron figurine spawner due to Figurine component, doesn't need extra mapping
+# these dont get spawned by patron figurine spawner since no PatronFigurineComponent
+# map in "xeno figurine spawner" or spawn them midround :)
+
 - type: entity
   abstract: true
   parent: RMCBaseFigurinePatron
@@ -6,6 +8,21 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/xeno_figurines.rsi
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerFigurineXeno
+  name: xeno figurine spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _RMC14/Objects/xeno_figurines.rsi
+      state: drone
+  - type: RandomSpawner
+    prototypes:
+    - RMCFigurineXenoXippy
+    - RMCFigurineXenoWarrior616
 
 - type: entity
   parent: RMCBaseFigurineXeno
