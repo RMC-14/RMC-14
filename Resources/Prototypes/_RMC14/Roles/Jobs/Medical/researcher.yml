@@ -42,7 +42,7 @@
     jumpsuit: CMJumpsuitResearch
     back: CMSatchelMarine
     gloves: CMHandsLatex
-    shoes: CMShoesLaceup
+    shoes: RMCShoesLaceup
     id: CMIDCardResearcher
     ears: CMHeadsetResearcher
 

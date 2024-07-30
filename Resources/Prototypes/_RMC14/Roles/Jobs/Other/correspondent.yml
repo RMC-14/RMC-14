@@ -28,7 +28,7 @@
   equipment:
     jumpsuit: RMCJumpsuitCorrespondent
     outerClothing: RMCCoatCorrespondent
-    shoes: CMShoesLaceup
+    shoes: RMCShoesLaceup
     id: CMIDCardCorrespondent
     ears: CMHeadsetReporter
     #    belt: CMCamera TODO RMC14
