@@ -407,6 +407,18 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             if (_net.IsClient)
                 continue;
 
+            // 20 seconds before burst, spawn the larva
+            if (infected.BurstAt - TimeSpan.FromSeconds(20) < time && infected.SpawnedLarva == null)
+            {
+                var spawned = SpawnAtPosition(infected.BurstSpawn, xform.Coordinates);
+                _xeno.SetHive(spawned, infected.Hive);
+
+                var larvaContainer = _container.EnsureContainer<ContainerSlot>(uid, infected.LarvaContainerId);
+                _container.Insert(spawned, larvaContainer);
+
+                infected.SpawnedLarva = spawned;
+            }
+
             if (infected.BurstAt > time)
             {
                 // Embryo dies if unrevivable when dead
@@ -436,21 +448,10 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                 {
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon-self"), uid, uid, PopupType.MediumCaution);
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon", ("victim", uid)), uid, Filter.PvsExcept(uid), true, PopupType.MediumCaution);
-                    _jitter.DoJitter(uid, infected.JitterTime * 8, false);
-                    _stun.TryParalyze(uid, infected.BaseKnockdownTime * 40, false);
+                    _jitter.DoJitter(uid, infected.JitterTime * 9, false);
+                    _stun.TryParalyze(uid, infected.BaseKnockdownTime * 60, false);
                     _damage.TryChangeDamage(uid, infected.InfectionDamage * 10, true, false);
                     infected.DidBurstWarning = true;
-
-                    if (infected.SpawnedLarva == null)
-                    {
-                        var spawned = SpawnAtPosition(infected.BurstSpawn, xform.Coordinates);
-                        _xeno.SetHive(spawned, infected.Hive);
-
-                        var larvaContainer = _container.EnsureContainer<ContainerSlot>(uid, infected.LarvaContainerId);
-                        _container.Insert(spawned, larvaContainer);
-
-                        infected.SpawnedLarva = spawned;
-                    }
 
                     continue;
                 }
@@ -464,6 +465,10 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                         var random = _random.Pick(new List<string> { "one", "two", "three", "four", "five" });
                         var message = Loc.GetString("rmc-xeno-infection-insanepain-" + random);
                         _popup.PopupEntity(message, uid, uid, PopupType.LargeCaution);
+
+                        _jitter.DoJitter(uid, infected.JitterTime * 2, false);
+                        _stun.TryParalyze(uid, infected.BaseKnockdownTime * 10, false);
+                        _damage.TryChangeDamage(uid, infected.InfectionDamage, true, false);
                     }
                 }
                 else if (stage >= infected.FinalSymptomsStart)
