@@ -201,7 +201,7 @@ public sealed class CMGunSystem : EntitySystem
 
     private void OnFalloffProjectileHit(Entity<RMCProjectileDamageFalloffComponent> projectile, ref ProjectileHitEvent args)
     {
-        if (projectile.Comp.ShotFrom == null || projectile.Comp.Falloff == 0)
+        if (projectile.Comp.ShotFrom == null || projectile.Comp.Falloff == 0 || projectile.Comp.MinRemainingDamageMult < 0)
             return;
 
         var pastEffectiveRange = (_transform.GetMapCoordinates(args.Target).Position - projectile.Comp.ShotFrom.Value.Position).Length() - projectile.Comp.EffectiveRange;
@@ -209,10 +209,9 @@ public sealed class CMGunSystem : EntitySystem
         if (pastEffectiveRange <= 0)
             return;
 
-        var falloff = pastEffectiveRange * projectile.Comp.Falloff;
         var totalDamage = args.Damage.GetTotal();
 
-        args.Damage *= (totalDamage - falloff) / totalDamage;
+        args.Damage *= FixedPoint2.Clamp((totalDamage - pastEffectiveRange * projectile.Comp.Falloff) / totalDamage, projectile.Comp.MinRemainingDamageMult, 1);
     }
 
     private void OnExtraProjectilesShot(Entity<RMCExtraProjectilesDamageModsComponent> weapon, ref AmmoShotEvent args)

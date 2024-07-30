@@ -23,6 +23,12 @@ public sealed partial class RMCProjectileDamageFalloffComponent : Component
     public FixedPoint2 Falloff = 1;
 
     /// <summary>
+    /// This determines the minimum fraction of the projectile's original damage that must remain after falloff.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 MinRemainingDamageMult = 0.1f;
+
+    /// <summary>
     /// These are the coordinates from which the projectile was shot. Used to determine the distance travelled.
     /// </summary>
     [DataField, AutoNetworkedField]
