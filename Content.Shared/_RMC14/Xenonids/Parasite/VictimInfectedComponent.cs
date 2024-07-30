@@ -75,7 +75,7 @@ public sealed partial class VictimInfectedComponent : Component
     public EntityUid? Hive;
 
     [DataField]
-    public int FinalStage = 5;
+    public int FinalStage = 6;
 
     [DataField, AutoNetworkedField]
     public int CurrentStage = 0;
@@ -88,6 +88,9 @@ public sealed partial class VictimInfectedComponent : Component
 
     [DataField]
     public int FinalSymptomsStart = 4;
+
+    [DataField]
+    public int BurstWarningStart = 5;
 
     [DataField]
     public float ShakesChance = 0.08f;

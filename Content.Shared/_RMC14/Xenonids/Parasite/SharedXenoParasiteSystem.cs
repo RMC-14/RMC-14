@@ -432,34 +432,29 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                 }
 
                 // Warn on the last to final stage of a burst
-                if (!infected.DidBurstWarning && stage == infected.FinalStage - 1)
+                if (!infected.DidBurstWarning && stage == infected.BurstWarningStart)
                 {
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon-self"), uid, uid, PopupType.MediumCaution);
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon", ("victim", uid)), uid, Filter.PvsExcept(uid), true, PopupType.MediumCaution);
                     _jitter.DoJitter(uid, infected.JitterTime * 6, false);
                     infected.DidBurstWarning = true;
 
-                    continue;
-                }
+                    if (infected.SpawnedLarva == null)
+                    {
+                        var spawned = SpawnAtPosition(infected.BurstSpawn, xform.Coordinates);
+                        _xeno.SetHive(spawned, infected.Hive);
 
-                if (infected.SpawnedLarva == null && stage == infected.FinalStage)
-                {
-                    var spawned = SpawnAtPosition(infected.BurstSpawn, xform.Coordinates);
-                    _xeno.SetHive(spawned, infected.Hive);
+                        var larvaContainer = _container.EnsureContainer<ContainerSlot>(uid, infected.LarvaContainerId);
+                        _container.Insert(spawned, larvaContainer);
 
-                    var larvaContainer = _container.EnsureContainer<ContainerSlot>(uid, infected.LarvaContainerId);
-                    _container.Insert(spawned, larvaContainer);
-
-                    infected.SpawnedLarva = spawned;
-                    Dirty(uid, infected);
+                        infected.SpawnedLarva = spawned;
+                    }
 
                     continue;
                 }
 
                 // Symptoms only start after the IntialSymptomStart is passed (by default, 2)
                 // And continue until burst time is reached
-                // TODO after burst time is reached, the larva is made and stage set to 6, have wait time for someone to take the larva.
-                // During this stage the victim should be in intense pain, and auto-burst after some time
                 if (stage >= infected.FinalSymptomsStart)
                 {
                     if (_random.Prob(infected.MajorPainChance * frameTime))
@@ -519,7 +514,6 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             if (_container.TryGetContainer(uid, infected.LarvaContainerId, out var container))
                 _container.EmptyContainer(container);
 
-            infected.CurrentStage = 6;
             Dirty(uid, infected);
 
             EnsureComp<VictimBurstComponent>(uid);
