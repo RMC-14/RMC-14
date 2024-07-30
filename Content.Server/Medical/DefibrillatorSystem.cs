@@ -20,6 +20,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Timing;
+using Content.Shared.Inventory;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -33,7 +34,7 @@ public sealed class DefibrillatorSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ChatSystem _chatManager = default!;
-    [Dependency] private readonly CMDamageableSystem _cmDamageable = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly DoAfterSystem _doAfter = default!;
     [Dependency] private readonly ElectrocutionSystem _electrocution = default!;
@@ -50,6 +51,7 @@ public sealed class DefibrillatorSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly CMDefibrillatorSystem _cmDefibrillator = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -116,8 +118,19 @@ public sealed class DefibrillatorSystem : EntitySystem
         if (TryComp(target, out CMDefibrillatorBlockedComponent? block))
         {
             if (user != null)
-                _popup.PopupEntity(Loc.GetString(block.Popup), uid, user.Value);
+                _popup.PopupEntity(Loc.GetString(block.Popup, ("target", target)), uid, user.Value);
             return false;
+        }
+
+        var slots = _inventory.GetSlotEnumerator(target, SlotFlags.OUTERCLOTHING);
+        while (slots.MoveNext(out var slot))
+        {
+            if (TryComp(slot.ContainedEntity, out CMDefibrillatorBlockedComponent? comp))
+            {
+                if (user != null)
+                    _popup.PopupEntity(Loc.GetString(comp.Popup, ("target", target)), uid, user.Value);
+                return false;
+            }
         }
 
         return true;
@@ -195,7 +208,7 @@ public sealed class DefibrillatorSystem : EntitySystem
                 {
                     foreach (var (group, amount) in component.CMZapDamage)
                     {
-                        heal = _cmDamageable.DistributeHealing(target, group, amount, heal);
+                        heal = _rmcDamageable.DistributeHealing(target, group, amount, heal);
                     }
                 }
 

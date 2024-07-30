@@ -20,15 +20,16 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      construction: 2
-      firearms: 1
-      fireman: 1
-      intel: 1
-      jtac: 3
-      leadership: 2
-      overwatch: 1
-      police: 1
-      powerLoader: 2
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillIntel: 1
+        RMCSkillJtac: 3
+        RMCSkillLeadership: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 1
+        RMCSkillPowerLoader: 2
     - type: MarineOrders
 
 - type: startingGear

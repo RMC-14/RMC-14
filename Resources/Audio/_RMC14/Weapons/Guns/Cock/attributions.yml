@@ -2,3 +2,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/a3b7bc4f4388bf291ccfeceac7d471961c224b45/sound/weapons/handling/m79_break_open.ogg"
+
+- files: ["m5_ammo.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/b72dc18a26d2f4b5072d2b65145d6130036e0755/sound/machines/click.ogg"

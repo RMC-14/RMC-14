@@ -8,6 +8,7 @@ using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Announce;
@@ -104,6 +105,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
             var ev = new DropshipLandedOnPlanetEvent();
             RaiseLocalEvent(ref ev);
         }
+
+        if (HasComp<AlmayerComponent>(args.MapUid) && ent.Comp.Crashed)
+        {
+            var ev = new DropshipHijackLandedEvent();
+            RaiseLocalEvent(ref ev);
+        }
     }
 
     private void OnRefreshUI<T>(Entity<DropshipComponent> ent, ref T args)
@@ -135,9 +142,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
         SetAllDocks(grid, dropship.Locked);
     }
 
-    public override bool FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid? user, bool hijack = false)
+    public override bool FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid? user, bool hijack = false, float? startupTime = null, float? hyperspaceTime = null)
     {
-        base.FlyTo(computer, destination, user, hijack);
+        base.FlyTo(computer, destination, user, hijack, startupTime, hyperspaceTime);
 
         var shuttle = Transform(computer).GridUid;
         if (!TryComp(shuttle, out ShuttleComponent? shuttleComp))
@@ -187,7 +194,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
             destCoords = destCoords.Offset(-physics.LocalCenter);
 
         destCoords = destCoords.Offset(new Vector2(-0.5f, -0.5f));
-        _shuttle.FTLToCoordinates(shuttle.Value, shuttleComp, destCoords, rotation);
+        _shuttle.FTLToCoordinates(shuttle.Value, shuttleComp, destCoords, rotation, startupTime: startupTime, hyperspaceTime: hyperspaceTime);
 
         if (user != null && hijack)
         {

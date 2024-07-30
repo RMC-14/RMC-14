@@ -51,3 +51,5 @@
   - type: Climbable
   - type: StaticPrice
     price: 22
+  - type: DamageMultiplierFlags
+    flags: Breaching

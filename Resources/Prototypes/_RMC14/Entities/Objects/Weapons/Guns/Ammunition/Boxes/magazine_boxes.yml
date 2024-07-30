@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: BaseItem
   id: CMBoxMagazineBase
@@ -35,6 +35,10 @@
   - type: RMCUnfoldCardboard
     spawns:
     - id: RMCSheetCardboard1
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   abstract: true

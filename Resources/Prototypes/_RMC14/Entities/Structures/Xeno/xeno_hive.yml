@@ -63,8 +63,7 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  # TODO: repair with plasma over 4 seconds
-  # TODO: spawn hive weeds every 15 seconds?
+  # TODO: repair with plasma over 4 seconds, removes damage and respawns weeds after 15 seconds?
   - type: HiveCluster
   - type: HiveConstructionUnique
     id: HiveClusterXeno

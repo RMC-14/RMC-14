@@ -1,5 +1,7 @@
-﻿using Content.Shared.Ghost;
+﻿using Content.Shared._RMC14.IdentityManagement;
+using Content.Shared.Ghost;
 using Content.Shared.IdentityManagement.Components;
+using Content.Shared.Whitelist;
 
 namespace Content.Shared.IdentityManagement;
 
@@ -23,6 +25,15 @@ public static class Identity
             return meta.EntityName; // Identity component and such will not yet have initialized and may throw NREs
 
         var uidName = meta.EntityName;
+
+        var whitelistSystem = ent.System<EntityWhitelistSystem>();
+        if (viewer != null &&
+            ent.TryGetComponent(uid, out FixedIdentityComponent? fixedIdentity) &&
+            fixedIdentity.Name is { } name &&
+            whitelistSystem.IsWhitelistPass(fixedIdentity.Whitelist, viewer.Value))
+        {
+            return name;
+        }
 
         if (!ent.TryGetComponent<IdentityComponent>(uid, out var identity))
             return uidName;

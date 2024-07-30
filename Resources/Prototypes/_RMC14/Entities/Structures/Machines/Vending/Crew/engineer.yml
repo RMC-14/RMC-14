@@ -1,0 +1,94 @@
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechCrewMaintTech
+  name: ColMarTech Maintenance Technician Equipment Rack
+  description: An automated rack hooked up to a colossal storage of Maintenance Technician standard-issue equipment.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessEngineering" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMMaintTech
+    sections:
+    - name: Maintenance Set (Mandatory)
+      takeAll: CMMaintenanceSet
+      entries:
+      - id: CMVendorBundleCrewMaintenanceEssentials
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: CMHandsInsulated
+      - id: CMHeadsetEngineer
+      - id: CMMRE
+        name: MRE
+      # map
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries: []
+      # Beret, white/orange/blue hardhat, welding helmet
+    - name: Suit
+      choices: { CMSuit: 1 }
+      entries: []
+      # Black/blue/Orange/Yellow hazard vest
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: CMBackpackMarineTech
+      - id: CMSatchelMarineTech
+      - id: CMBackpackWelder
+      - id: RMCSatchelWelder
+      # Welder Chestrig
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      #- id:G8-A General Utility Pouch
+      - id: CMBeltUtilityFilled
+        name: M276 Toolbelt Rig (Full)
+    - name: Pouches
+      choices: { CMPouch: 2 }
+      entries:
+      - id: CMPouchGeneralMedium
+      - id: CMPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
+      - id: CMPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+      - id: CMPouchFirstAidPills
+        name: first-aid pouch (pill packets)
+      - id: CMPouchConstruction
+      #- id: CMElectronicsPouchFull
+      #name: Electronics Pouch (Full)
+      - id: CMPouchToolsFill
+        name: Tools pouch (Filled)
+      - id: CMPouchFlareFilled
+        name: Flare pouch (Filled)
+    - name: Mask
+      choices: { CMMask: 1 }
+      entries:
+      - id: CMMaskGas
+      - id: CMMaskCoif
+      #- id: CMRebreather #TODO RMC14: Make this
+    - name: Accessories
+      choices: { CMAccessory: 1 }
+      entries:
+      - id: CMWebbingBrown
+      - id: CMWebbingBlack
+      - id: CMWebbing
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: CMVendorBundleCrewMaintenanceEssentials
+  name: essential maintenance set
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Janitorial/light_replacer.rsi
+    state: lightreplacer0
+  - type: CMVendorBundle
+    bundle:
+    - CMLightReplacer
+    # demo scanner
+    # trash bag
+    # mechanical toolbox
+    - RMCFlashlight

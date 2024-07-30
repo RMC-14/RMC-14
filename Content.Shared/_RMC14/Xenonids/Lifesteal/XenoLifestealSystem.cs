@@ -14,7 +14,7 @@ namespace Content.Shared._RMC14.Xenonids.Lifesteal;
 
 public sealed class XenoLifestealSystem : EntitySystem
 {
-    [Dependency] private readonly CMDamageableSystem _cmDamageable = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -97,7 +97,7 @@ public sealed class XenoLifestealSystem : EntitySystem
         }
 
         var amount = -FixedPoint2.Clamp(total * lifesteal, xeno.Comp.MinHeal, xeno.Comp.MaxHeal);
-        var heal = _cmDamageable.DistributeTypes(xeno.Owner, amount);
+        var heal = _rmcDamageable.DistributeTypes(xeno.Owner, amount);
         _damageable.TryChangeDamage(xeno, heal, true);
 
         if (lifesteal >= xeno.Comp.MaxPercentage)

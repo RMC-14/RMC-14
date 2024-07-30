@@ -35,6 +35,10 @@
           HasContents: {visible: true}
           HasMob: {visible: true}
           HasSoul: {visible: true}
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: Crematorium
@@ -71,3 +75,7 @@
         enum.CrematoriumVisualLayers.LightContent:
           True: { visible: true }
           False: { visible: false }
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

@@ -20,6 +20,10 @@
     stateBaseClosed: base
     stateDoorOpen: open
     stateDoorClosed: closed
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMClosetBase

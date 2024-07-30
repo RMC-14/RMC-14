@@ -317,3 +317,37 @@
     state: lilly_pipsqueak_harding
   - type: PatronFigurine
     id: 041eae56-3378-44f9-bca1-2832f90d88af
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKateFleming
+  name: Kate Fleming figurine
+  description: "\"OORAH!!\""
+  components:
+  - type: Sprite
+    state: kate_fleming
+  - type: PatronFigurine
+    id: 355c1f67-83a4-4252-b288-b218a4f84fd5
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKaylieRowleyininski
+  name: Kaylie Rowleyininski figurine
+  description: "Smells of freshly baked bread."
+  components:
+  - type: Sprite
+    state: kaylie_rowleyininski
+  - type: PatronFigurine
+    id: 12ea8c65-341d-4876-bc19-846a1488eb69
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAmariDroppingHotWilliams
+  name: Amari 'Dropping Hot' Williams figurine
+  description: "\"FLYING LOW, DROPPING HOT, DRINKING LOTS! OORAH!\""
+  components:
+  - type: Sprite
+    state: amari_dropping_hot_williams
+  - type: PatronFigurine
+    id: b7fd4e27-04f8-4303-8a3c-03ca18b38ced
+

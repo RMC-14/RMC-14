@@ -14,6 +14,8 @@
         crate: CMCrateBoxMagazineRifleM54CAP
       - cost: 3000
         crate: CMCrateBoxMagazineRifleM54CExt
+#      - cost: 2000
+#        crate: RMCCrateMagazineRifleM54CE2
       - cost: 2000
         crate: CMCrateBoxMagazineRifleM4SPR
       - cost: 4000
@@ -212,3 +214,11 @@
         crate: CMCrateMagazineM96SFlak
       - cost: 3000
         crate: CMCrateMagazineM96SIncendiary
+      - cost: 4000
+        crate: RMCCrateM5DemoSpecMixed
+      - cost: 3000
+        crate: RMCCrateM5DemoSpecHighExplosive
+      - cost: 3000
+        crate: RMCCrateM5DemoSpecAntiArmor
+#      - cost: 3000
+#        crate: RMCCrateM5DemoSpecWhitePhosphorous

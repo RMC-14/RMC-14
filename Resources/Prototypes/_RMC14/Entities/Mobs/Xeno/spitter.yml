@@ -27,7 +27,7 @@
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
-    - ActionXenoTailStab
+    - ActionXenoTailStabCorrosive
     - ActionXenoAcidNormal
     - ActionXenoSpit
     - ActionXenoChargeSpit
@@ -47,19 +47,19 @@
     plasmaRegenOnWeeds: 4
   - type: XenoEvolution
     max: 540
-#    evolvesTo:
+    evolvesTo:
+    - CMXenoBoiler
 #    - CMXenoPraetorian
-#    - CMXenoBoiler
   - type: XenoSpit
   - type: XenoChargeSpit
-    damage:
-      groups:
-        Burn: 25 # TODO RMC14 damage over time
   - type: XenoScatteredSpit
   - type: XenoSprayAcid
     barricadeDamage:
       types:
         Heat: 5
+  - type: XenoTailStab
+    inject:
+      RMCMolecularAcid: 1 # TODO RMC14 2
   - type: CMArmor
     armor: 15
     explosionArmor: 20
@@ -70,6 +70,7 @@
   - type: Tackle
     threshold: 4
     stun: 9
+    chance: 0.45
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5

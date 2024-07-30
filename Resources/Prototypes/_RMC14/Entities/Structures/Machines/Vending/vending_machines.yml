@@ -128,16 +128,16 @@
 - type: vendingMachineInventory
   id: CMVendorSnack
   startingInventory: # TODO RMC14
-    FoodBurgerPlain: 12
-    #Burrito 12
-    #Hot Dog 12
-    FoodSnackRaisins: 12 #kepler crisps 12
-    FoodSnackCnDs: 12 #kepler crisps flameshot 12
-    FoodSnackPistachios: 12 #we-ya chips pepper 12
-    FoodSnackChocolate: 12 #eat bar 12
-    #booniebas 6
-    #chunk 6
-    #barcardine 6
+    RMCFoodSnackCheeseburgerPackaged: 12
+    RMCFoodSnackBurritoPackaged: 12
+    RMCFoodSnackHotdogPackaged: 12
+    RMCFoodSnackKeplarCrisps: 12
+    RMCFoodSnackKeplarFlamehotCrisps: 12
+    RMCFoodSnackChipsPepper: 12
+    RMCFoodSnackEATBar: 12
+    RMCFoodSnackBoonie: 6
+    RMCFoodSnackCHUNK: 6
+    RMCFoodSnackBarcaridine: 6
 
 
 # Cola

@@ -18,11 +18,12 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      constructiopn: 2
-      engineer: 2
-      firearms: 1
-      jtac: 1
-      vehicle: 1
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillJtac: 1
+        RMCSkillVehicles: 1
     - type: CMVendorUser
       points: 45
 

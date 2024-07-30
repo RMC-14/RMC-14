@@ -132,9 +132,9 @@
       - id: RMCWhistle
         points: 3
     - name: Binoculars
-      entries: [ ]
-    #- id: CMBinoculars
-    #  points: 5
+      entries:
+      - id: RMCBinoculars
+        points: 5
     #- id: CMRangeFinder
     #  points: 10
     #- id: CMLaserDesignator
@@ -196,7 +196,7 @@
       - id: CMSatchelMarineTech
       - id: CMBackpackWelder
       - id: RMCSatchelWelder
-    #- id: CMTechnicianWelderChestrig
+      - id: RMCSatchelWelderChestrig
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -209,7 +209,7 @@
     #- id: CMM276ShotgunShellLoadingRig
     #- id: CMM276MortarOperatorBelt
       - id: CMBeltUtilityFilled
-    #- id: CMM276M40GrenadeRig
+      - id: RMCBeltGrenade
     - name: Pouches
       choices: { CMPouch: 2 }
       entries:

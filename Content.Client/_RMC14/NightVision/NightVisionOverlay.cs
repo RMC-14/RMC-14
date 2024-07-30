@@ -49,14 +49,20 @@ public sealed class NightVisionOverlay : Overlay
                 eye?.Position.MapId,
                 eyeRot,
                 nightVision.SeeThroughContainers,
-                visible.Priority));
+                visible.Priority,
+                visible.Transparency));
         }
 
         _entries.Sort(SortPriority);
 
         foreach (var entry in _entries)
         {
-            Render(entry.Ent, entry.Map, handle, entry.EyeRot, entry.NightVisionSeeThroughContainers);
+            Render(entry.Ent,
+                entry.Map,
+                handle,
+                entry.EyeRot,
+                entry.NightVisionSeeThroughContainers,
+                entry.Transparency);
         }
 
         handle.SetTransform(Matrix3x2.Identity);
@@ -71,7 +77,8 @@ public sealed class NightVisionOverlay : Overlay
         MapId? map,
         DrawingHandleWorld handle,
         Angle eyeRot,
-        bool seeThroughContainers)
+        bool seeThroughContainers,
+        float? transparency)
     {
         var (uid, sprite, xform) = ent;
         if (xform.MapID != map)
@@ -84,7 +91,17 @@ public sealed class NightVisionOverlay : Overlay
         var position = _transform.GetWorldPosition(xform);
         var rotation = _transform.GetWorldRotation(xform);
 
+        var colorCache = sprite.Color;
+        if (transparency != null)
+        {
+            var color = sprite.Color * Color.White.WithAlpha(transparency.Value);
+            sprite.Color = color;
+        }
         sprite.Render(handle, eyeRot, rotation, position: position);
+        if (transparency != null)
+        {
+            sprite.Color = colorCache;
+        }
     }
 }
 
@@ -93,4 +110,5 @@ public record struct NightVisionRenderEntry(
     MapId? Map,
     Angle EyeRot,
     bool NightVisionSeeThroughContainers,
-    int Priority);
+    int Priority,
+    float? Transparency);

@@ -101,14 +101,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private bool _crashLandEnabled;
 
-    private readonly CVarDef<float>[] _ftlcVars =
-    [
-        CCVars.FTLStartupTime,
-        CCVars.FTLTravelTime,
-        CCVars.FTLArrivalTime,
-        CCVars.FTLCooldown,
-    ];
-
     private readonly HashSet<string> _operationNames = new();
     private readonly HashSet<string> _operationPrefixes = new();
     private readonly HashSet<string> _operationSuffixes = new();
@@ -123,9 +115,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [ViewVariables]
     public readonly Dictionary<string, float> MarinesPerXeno = new()
     {
-        ["/Maps/_RMC14/lv624.yml"] = 4.25f,
-        ["/Maps/_RMC14/solaris.yml"] = 5.5f,
-        ["/Maps/_RMC14/prison.yml"] = 4.5f,
+        ["/Maps/_RMC14/lv624.yml"] = 3.5f,
+        ["/Maps/_RMC14/solaris.yml"] = 3.5f,
+        ["/Maps/_RMC14/prison.yml"] = 3.5f,
+        ["/Maps/_RMC14/shiva.yml"] = 3.5f,
     };
 
     private readonly List<MapId> _almayerMaps = [];
@@ -165,6 +158,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         SubscribeLocalEvent<CrashLandableComponent, EntParentChangedMessage>(OnCrashLandableParentChanged);
 
         SubscribeLocalEvent<CrashLandOnTouchComponent, StartCollideEvent>(OnCrashLandOnTouchStartCollide);
+
+        SubscribeLocalEvent<DropshipHijackLandedEvent>(OnDropshipHijackLanded);
 
         Subs.CVar(_config, RMCCVars.RMCFTLCrashLand, v => _crashLandEnabled = v, true);
         Subs.CVar(_config, RMCCVars.RMCPlanetMaps, v => _planetMaps = v, true);
@@ -351,12 +346,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (spawnedDropships)
                 return;
 
-            foreach (var cvar in _ftlcVars)
-            {
-                comp.OriginalCVarValues[cvar] = _config.GetCVar(cvar);
-                _config.SetCVar(cvar, 1);
-            }
-
             // don't open shitcode inside
             spawnedDropships = true;
             var dropshipMap = _mapManager.CreateMap();
@@ -389,7 +378,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                         if (xform.GridUid != shipGrid)
                             continue;
 
-                        if (!_dropship.FlyTo((computerId, computer), destinationId, null))
+                        if (!_dropship.FlyTo((computerId, computer), destinationId, null, startupTime: 1f, hyperspaceTime: 1f))
                             continue;
 
                         launched = true;
@@ -568,6 +557,19 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             return;
 
         TryCrashLand((args.OtherEntity, crashLandable));
+    }
+
+    private void OnDropshipHijackLanded(ref DropshipHijackLandedEvent ev)
+    {
+        var rules = QueryActiveRules();
+        while (rules.MoveNext(out _, out var rule, out _))
+        {
+            if (rule.HijackSongPlayed)
+                break;
+
+            rule.HijackSongPlayed = true;
+            _audio.PlayGlobal(rule.HijackSong, Filter.Broadcast(), true);
+        }
     }
 
     private void TryCrashLand(Entity<CrashLandableComponent> crashLandable)
@@ -845,6 +847,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             "lv624" => "LV-624",
             "solaris" => "Solaris Ridge",
             "prison" => "Fiorina Science Annex",
+            "shiva" => "Shivas Snowball",
             _ => SelectedPlanetMapName,
         };
 
@@ -1023,19 +1026,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     {
         base.ActiveTick(uid, component, gameRule, frameTime);
 
-        if (!component.ResetCVars)
-        {
-            var anyDropships = false;
-            var dropships = EntityQueryEnumerator<DropshipComponent, FTLComponent>();
-            while (dropships.MoveNext(out _, out _))
-            {
-                anyDropships = true;
-            }
-
-            if (!anyDropships)
-                ResetCVars(component);
-        }
-
         if (Timing.CurTime >= component.NextCheck)
         {
             component.NextCheck = Timing.CurTime + component.CheckEvery;
@@ -1131,19 +1121,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         return name.Trim();
     }
 
-    private void ResetCVars(CMDistressSignalRuleComponent comp)
-    {
-        foreach (var (cvar, value) in comp.OriginalCVarValues)
-        {
-            _config.SetCVar(cvar, value);
-        }
-
-        comp.ResetCVars = true;
-    }
-
     private void EndRound(CMDistressSignalRuleComponent comp)
     {
-        ResetCVars(comp);
         _roundEnd.EndRound();
     }
 }
