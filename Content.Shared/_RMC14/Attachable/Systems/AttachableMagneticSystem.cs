@@ -6,6 +6,8 @@ namespace Content.Shared._RMC14.Attachable.Systems;
 
 public sealed class AttachableMagneticSystem : EntitySystem
 {
+    [Dependency] private readonly RMCMagneticSystem _magneticSystem = default!;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<AttachableMagneticComponent, AttachableAlteredEvent>(OnAttachableAltered);
@@ -16,7 +18,8 @@ public sealed class AttachableMagneticSystem : EntitySystem
         switch (args.Alteration)
         {
             case AttachableAlteredType.Attached:
-                EnsureComp<RMCMagneticItemComponent>(args.Holder);
+                var comp = EnsureComp<RMCMagneticItemComponent>(args.Holder);
+                _magneticSystem.SetMagnetizeToSlots((args.Holder, comp), attachable.Comp.MagnetizeToSlots);
                 break;
 
             case AttachableAlteredType.Detached:

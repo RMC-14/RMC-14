@@ -3,6 +3,8 @@
   parent: [ BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder ]
   id: RMCBaseWeaponShotgun
   components:
+  - type: Item
+    size: Large
   - type: Sprite
     layers:
     - state: base
