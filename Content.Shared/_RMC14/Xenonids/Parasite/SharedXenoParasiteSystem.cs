@@ -544,9 +544,6 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         // Don't activate when unconscious
         if (_mobState.IsIncapacitated(victim))
             return;
-        // Don't activate if the burst warning appeared
-        if (infected.DidBurstWarning)
-            return;
         //TODO Minor limb damage and causes pain
         _stun.TryParalyze(victim, knockdownTime, false);
         _status.TryAddStatusEffect(victim, "Muted", knockdownTime, true, "Muted");
