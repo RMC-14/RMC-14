@@ -34,6 +34,9 @@ public sealed partial class ThermalCloakComponent : Component
     [DataField, AutoNetworkedField]
     public bool HideNightVision = true;
 
+    [DataField, AutoNetworkedField]
+    public bool BlockFriendlyFire = true;
+
     /// <summary>
     /// Amount of time after uncloaking weapons remain locked
     /// </summary>

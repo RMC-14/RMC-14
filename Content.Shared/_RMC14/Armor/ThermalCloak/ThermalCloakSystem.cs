@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared._RMC14.NightVision;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Actions;
 using Content.Shared.Whitelist;
 using Content.Shared.Inventory;
@@ -117,6 +118,9 @@ public sealed class ThermalCloakSystem : EntitySystem
             if (ent.Comp.HideNightVision)
                 RemCompDeferred<RMCNightVisionVisibleComponent>(user);
 
+            if (ent.Comp.BlockFriendlyFire)
+                EnsureComp<EntityIFFComponent>(user);
+
             turnInvisible.UncloakTime = _timing.CurTime; // Just in case
 
             var popupOthers = Loc.GetString("rmc-cloak-activate-others", ("user", user));
@@ -162,6 +166,9 @@ public sealed class ThermalCloakSystem : EntitySystem
 
             if (ent.Comp.HideNightVision)
                EnsureComp<RMCNightVisionVisibleComponent>(user);
+
+            if (ent.Comp.BlockFriendlyFire)
+                RemCompDeferred<EntityIFFComponent>(user);
 
             RemCompDeferred<EntityActiveInvisibleComponent>(user);
             _audio.PlayPvs(ent.Comp.UncloakSound, user);
