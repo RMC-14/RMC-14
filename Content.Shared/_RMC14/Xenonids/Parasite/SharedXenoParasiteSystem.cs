@@ -351,7 +351,6 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         _status.TryAddStatusEffect(victim, "TemporaryBlindness", parasite.Comp.ParalyzeTime, true, "TemporaryBlindness");
         RefreshIncubationMultipliers(victim);
 
-        _blindable.UpdateIsBlind(victim);
         _inventory.TryEquip(victim, parasite.Owner, "mask", true, true, true);
 
         // TODO RMC14 also do damage to the parasite
