@@ -416,6 +416,9 @@
     armor: 25
     bio: 15
     explosionArmor: 20
+  - type: ClothingSpeedModifier
+    walkModifier: 0.814
+    sprintModifier: 0.814
   - type: Storage
     maxItemSize: Small
     grid:
