@@ -1,5 +1,5 @@
 ﻿using Robust.Shared.GameStates;
-using Content.Shared._RMC.Weapons.Ranged;
+using Content.Shared._RMC14.Weapons.Ranged;
 
 namespace Content.Shared._RMC14.Armor;
 
