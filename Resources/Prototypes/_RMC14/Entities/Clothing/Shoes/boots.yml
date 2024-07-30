@@ -3,7 +3,7 @@
   parent: ClothingShoesBase
   id: CMShoesLaceup
   name: laceup shoes
-  description: The height of fashion, and they're pre-polished!
+  description: Pre-polished fancy dress shoes. You can see your reflection in them.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Shoes/laceup.rsi
@@ -16,6 +16,7 @@
   name: commanding officer dress shoes
   description: Has special soles for better trampling those underneath.
 
+
 # Black Boots
 - type: entity
   parent: ClothingShoesMilitaryBase
@@ -24,7 +25,7 @@
   description: Standard issue combat boots for combat scenarios or combat situations. All combat, all the time.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Shoes/Marines/black.rsi
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/black.rsi
     layers:
     - state: icon
     - state: filled
@@ -69,9 +70,9 @@
   description: Standard issue combat boots for combat scenarios or combat situations. All combat, all the time. These are brown.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Shoes/Marines/brown.rsi
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/brown.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Shoes/Marines/brown.rsi
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/brown.rsi
 
 - type: entity
   parent: CMBootsBrown
@@ -89,14 +90,105 @@
   description: Don't go walkin' slow, the devil's on the loose.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Shoes/Marines/jungle.rsi
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/jungle.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Shoes/Marines/jungle.rsi
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/jungle.rsi
 
 - type: entity
   parent: CMBootsJungle
   id: CMBootsJungleFilled
   suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCM5Bayonet
+
+# Corporate
+- type: entity
+  parent: CMBootsBlack
+  id: RMCBootsCorporate
+  name: rugged boots
+  description: These synth-leather boots seem high quality when first worn, but quickly detoriate, especially in the environments the corporate security members these are issued to operate in. Still, better than nothing.
+  components:
+  - type: CMItemSlots
+    startingItem: RMCM5Bayonet
+
+
+# PMC 
+- type: entity
+  parent: CMBootsBlack
+  id: RMCBootsPMC
+  name: polished shoes
+  description: The height of fashion, but these look to be woven with protective fiber.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/jackboots.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/jackboots.rsi
+
+- type: entity
+  parent: RMCBootsPMC
+  id: RMCBootsPMCFilled
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCM5Bayonet
+
+# PMC Commando
+- type: entity
+  parent: RMCBootsPMC
+  id: RMCBootsPMCCommando
+  name: PMC commando boots
+  description: A pair of heavily armored, acid-resistant boots.
+
+- type: entity
+  parent: RMCBootsPMCCommando
+  id: RMCBootsPMCCommandoFilled
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCM5Bayonet
+
+# Van Bandolier
+- type: entity
+  parent: RMCBootsPMC
+  id: RMCBootsVanBandolier
+  name: hiking boots
+  description: Over stone, over ice, through sun and sand, mud and snow, into raging water and hungry bog, these will never let you down.
+  components:
+  - type: CMItemSlots
+    startingItem: RMCM5Bayonet
+
+# CBRN
+- type: entity
+  parent: RMCBootsPMCCommando
+  id: RMCBootsCBRN
+  name: M3 MOPP boots
+  description: M3 MOPP boots have been designed to protect the wearer from contact with any possible infection vectors or hazardous substances that may have contaminated the area of operations. This includes further enhancements in conjunction with the standard durability of M3 boots, reducing the probability of punctures or cuts as well as the effects of radiation.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/cbrn.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/cbrn.rsi
+  - type: CMItemSlots
+    startingItem: RMCM5Bayonet
+
+
+# Royal Marines
+- type: entity
+  parent: CMBootsBlack
+  id: RMCBootsRoyal
+  name: L10 pattern combat boots
+  description: Standard issue combat boots for combat scenarios or combat situations. Used by the threa sun empires royal marines commando units.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/rmc.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/rmc.rsi
+
+- type: entity
+  parent: RMCBootsRoyal
+  id: RMCBootsRoyalFilled
+  suffix: Filler
   components:
   - type: CMItemSlots
     startingItem: RMCM5Bayonet
