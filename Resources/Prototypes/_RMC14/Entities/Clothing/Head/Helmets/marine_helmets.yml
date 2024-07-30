@@ -62,6 +62,9 @@
     blacklist:
       components:
       - Xeno
+  - type: HideLayerClothing
+    slots:
+    - HeadTop
 
 - type: entity
   parent: ArmorHelmetM10

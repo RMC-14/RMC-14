@@ -7,6 +7,9 @@
   components:
   - type: HumanoidAppearance
     species: Moth
+    hideLayersOnEquip:
+    - Snout
+    - HeadTop
   - type: ZombieAccentOverride
     accent: zombieMoth
   - type: Speech
@@ -19,11 +22,6 @@
       Male: UnisexMoth
       Female: UnisexMoth
       Unsexed: UnisexMoth
-  - type: DamageVisuals
-    damageOverlayGroups:
-      Brute:
-        sprite: Mobs/Effects/brute_damage.rsi
-        color: "#808A51"
   - type: Sprite
     noRot: true
     drawdepth: Mobs

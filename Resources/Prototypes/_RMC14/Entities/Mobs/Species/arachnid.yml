@@ -7,11 +7,6 @@
   components:
   - type: HumanoidAppearance
     species: Arachnid
-  - type: DamageVisuals
-    damageOverlayGroups:
-      Brute:
-        sprite: Mobs/Effects/brute_damage.rsi
-        color: "#162581"
   - type: Speech
     speechVerb: Arachnid
     speechSounds: Arachnid
@@ -23,10 +18,6 @@
       Unsexed: UnisexArachnid
   - type: TypingIndicator
     proto: spider
-  - type: MeleeWeapon
-    animation: WeaponArcBite
-    soundHit:
-      collection: AlienClaw
   - type: Sprite # I'd prefer if these maps were better. Insert map pun here.
     layers:
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
