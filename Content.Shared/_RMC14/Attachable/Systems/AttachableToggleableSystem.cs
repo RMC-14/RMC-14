@@ -16,6 +16,7 @@ using Content.Shared.Popups;
 using Content.Shared.Timing;
 using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.Whitelist;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -29,6 +30,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainerSystem = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookupSystem = default!;
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelistSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaDataSystem = default!;
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly AttachableHolderSystem _attachableHolderSystem = default!;
@@ -48,6 +50,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
         SubscribeLocalEvent<AttachableToggleableComponent, ActivateInWorldEvent>(OnActivateInWorld);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableAlteredEvent>(OnAttachableAltered,
             after: new[] { typeof(AttachableModifiersSystem) });
+        SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleableInterruptEvent>(OnAttachableToggleableInterrupt);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleActionEvent>(OnAttachableToggleAction);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleDoAfterEvent>(OnAttachableToggleDoAfter);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleStartedEvent>(OnAttachableToggleStarted);
@@ -184,7 +187,8 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
         args.Args.Handled = true;
 
-        GrantAttachableActions(attachable, args.Args.User);
+        var addEv = new GrantAttachableActionsEvent(args.Args.User);
+        RaiseLocalEvent(attachable, ref addEv);
     }
 
 #region Lockouts and interrupts
@@ -262,6 +266,14 @@ public sealed class AttachableToggleableSystem : EntitySystem
         Toggle(attachable, args.Args.User, attachable.Comp.DoInterrupt);
     }
 
+    private void OnAttachableToggleableInterrupt(Entity<AttachableToggleableComponent> attachable, ref AttachableToggleableInterruptEvent args)
+    {
+        if (!attachable.Comp.Active)
+            return;
+
+        Toggle(attachable, args.User, attachable.Comp.DoInterrupt);
+    }
+
     private void OnGotUnequippedHand(Entity<AttachableToggleableComponent> attachable, ref AttachableRelayedEvent<GotUnequippedHandEvent> args)
     {
         if (!attachable.Comp.Attached)
@@ -271,8 +283,10 @@ public sealed class AttachableToggleableSystem : EntitySystem
         
         if (attachable.Comp.NeedHand && attachable.Comp.Active)
             Toggle(attachable, args.Args.User, attachable.Comp.DoInterrupt);
-        
-        RemoveAttachableActions(attachable, args.Args.User);
+
+
+        var removeEv = new RemoveAttachableActionsEvent(args.Args.User);
+        RaiseLocalEvent(attachable, ref removeEv);
     }
 
     private void OnAttachableMovementLockedMoveInput(Entity<AttachableMovementLockedComponent> user, ref MoveInputEvent args)
@@ -608,8 +622,9 @@ public sealed class AttachableToggleableSystem : EntitySystem
     private void OnGrantAttachableActions(Entity<AttachableToggleableComponent> ent, ref GrantAttachableActionsEvent args)
     {
         GrantAttachableActions(ent, args.User);
+        RelayAttachableActions(ent, args.User);
     }
-    
+
     private void GrantAttachableActions(Entity<AttachableToggleableComponent> ent, EntityUid user, bool doSecondTry = true)
     {
         // This is to prevent ActionContainerSystem from shitting itself if the attachment has actions other than its attachment toggle.
@@ -649,11 +664,26 @@ public sealed class AttachableToggleableSystem : EntitySystem
         Dirty(ent);
     }
 
+    private void RelayAttachableActions(Entity<AttachableToggleableComponent> attachable, EntityUid user)
+    {
+        if (attachable.Comp.ActionsToRelayWhitelist == null || !TryComp(attachable.Owner, out ActionsContainerComponent? actionsContainerComponent))
+            return;
+
+        foreach (var actionUid in actionsContainerComponent.Container.ContainedEntities)
+        {
+            if (!_entityWhitelistSystem.IsWhitelistPass(attachable.Comp.ActionsToRelayWhitelist, actionUid))
+                continue;
+
+            _actionsSystem.GrantContainedAction(user, (attachable.Owner, actionsContainerComponent), actionUid);
+        }
+    }
+
     private void OnRemoveAttachableActions(Entity<AttachableToggleableComponent> ent, ref RemoveAttachableActionsEvent args)
     {
         RemoveAttachableActions(ent, args.User);
+        RemoveRelayedActions(ent, args.User);
     }
-    
+
     private void RemoveAttachableActions(Entity<AttachableToggleableComponent> ent, EntityUid user)
     {
         if (ent.Comp.Action is not { } action)
@@ -663,6 +693,20 @@ public sealed class AttachableToggleableSystem : EntitySystem
             return;
         
         _actionsSystem.RemoveProvidedAction(user, ent, action);
+    }
+
+    private void RemoveRelayedActions(Entity<AttachableToggleableComponent> attachable, EntityUid user)
+    {
+        if (attachable.Comp.ActionsToRelayWhitelist == null || !TryComp(attachable.Owner, out ActionsContainerComponent? actionsContainerComponent))
+            return;
+
+        foreach (var actionUid in actionsContainerComponent.Container.ContainedEntities)
+        {
+            if (!_entityWhitelistSystem.IsWhitelistPass(attachable.Comp.ActionsToRelayWhitelist, actionUid))
+                continue;
+
+            _actionsSystem.RemoveProvidedAction(user, attachable.Owner, actionUid);
+        }
     }
 
     private void OnAttachableToggleAction(Entity<AttachableToggleableComponent> attachable,
