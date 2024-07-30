@@ -29,14 +29,13 @@
       stackType: CMSteel
       baseLayer: base
       layerStates:
-        - steel
-        - steel_2
-        - steel_3
-        - steel_4
+        - metal
+        - metal_2
+        - metal_3
+        - metal_4
     - type: Sprite
-      state: steel_4
       layers:
-        - state: steel_4
+        - state: metal_4
           map: ["base"]
 
 
@@ -46,7 +45,7 @@
   suffix: "10"
   components:
     - type: Sprite
-      state: steel2
+      state: metal_2
     - type: Stack
       stackType: CMSteel
       count: 10
@@ -57,7 +56,7 @@
   suffix: "30"
   components:
     - type: Sprite
-      state: steel2
+      state: metal_3
     - type: Stack
       stackType: CMSteel
       count: 30
@@ -68,7 +67,7 @@
   suffix: "50"
   components:
     - type: Sprite
-      state: steel2
+      state: metal_4
     - type: Stack
       stackType: CMSteel
       count: 50
@@ -79,7 +78,7 @@
   suffix: Single
   components:
     - type: Sprite
-      state: steel
+      state: metal
     - type: Stack
       stackType: CMSteel
       count: 1
@@ -108,7 +107,6 @@
         - plasteel_4
     - type: Sprite
       sprite: _RMC14/Objects/Materials/Sheets/plasteel.rsi
-      state: plasteel_4
       layers:
         - state: plasteel_4
           map: ["base"]
