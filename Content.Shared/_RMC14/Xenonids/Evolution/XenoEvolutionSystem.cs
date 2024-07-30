@@ -372,7 +372,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             var current = EntityQueryEnumerator<XenoComponent>();
             while (current.MoveNext(out var existingComp))
             {
-                if (existingComp.Hive != oldHive)
+                if (existingComp.Hive != oldHive || !existingComp.CountedInSlots)
                     continue;
 
                 total++;
