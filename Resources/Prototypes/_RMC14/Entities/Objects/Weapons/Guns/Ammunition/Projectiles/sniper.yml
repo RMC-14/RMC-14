@@ -13,6 +13,8 @@
     damage:
       types:
         Piercing: 70
+  - type: RMCProjectileDamageFalloff
+    falloff: 0
   - type: CMArmorPiercing
     amount: 50
 

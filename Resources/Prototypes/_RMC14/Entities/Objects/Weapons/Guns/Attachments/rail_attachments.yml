@@ -207,10 +207,10 @@
       doAfter: 0
   - type: AttachableSpeedMods
     modifiers:
-      - conditions:
-          wieldedOnly: true
-        walk: -0.23
-        sprint: -0.35
+    - conditions:
+        wieldedOnly: true
+      walk: -0.23
+      sprint: -0.35
   - type: AttachableWieldDelayMods
     modifiers:
     - delay: 0.4
@@ -406,6 +406,21 @@
         activeOnly: true
       walk: -0.31
       sprint: -0.448
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - fireDelayFlat: 0.1
+    - conditions:
+        activeOnly: true
+      fireDelayFlat: 0.25
+      accuracyAddMult: 0.35
+      damageFalloffAddMult: -0.4
+    - conditions:
+        wieldedOnly: true
+        inactiveOnly: true
+      accuracyAddMult: -0.05
+    - conditions:
+        unwieldedOnly: true
+      accuracyMovementPenaltyAddMult: 2
   - type: Scope
     zoomLevels:
     - name: 4x

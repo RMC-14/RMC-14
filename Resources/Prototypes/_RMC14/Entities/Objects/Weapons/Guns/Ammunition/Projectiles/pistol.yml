@@ -6,6 +6,7 @@
   - HideSpawnMenu
   components:
   - type: Projectile
+  - type: RMCProjectileDamageFalloff
 
 - type: entity
   parent: CMBulletBase
@@ -28,6 +29,9 @@
     damage:
       types:
         Piercing: 45
+  - type: RMCProjectileDamageFalloff
+    effectiveRange: 3
+    falloff: 5
   - type: CMArmorPiercing
     amount: 30
 
@@ -64,6 +68,8 @@
     damage:
       types:
         Piercing: 55
+  - type: RMCProjectileDamageFalloff
+    falloff: 0
   - type: CMArmorPiercing
     amount: 35
 
