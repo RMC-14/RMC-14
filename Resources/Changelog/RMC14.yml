@@ -4036,5 +4036,68 @@
   id: 476
   time: '2024-07-27T11:52:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3356
+- author: Tunguso4ka
+  changes:
+  - message: Ported all hair from cm-ss13!
+    type: Add
+  id: 477
+  time: '2024-07-29T23:26:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3385
+- author: Vermidia
+  changes:
+  - message: Added binoculars for 5 points in the various squad vendors, and 2 can
+      be found roundstart in requisitions.
+    type: Add
+  id: 478
+  time: '2024-07-30T00:59:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3375
+- author: Vermidia
+  changes:
+  - message: Shaking someone out of a stun now only removes 6 seconds from the stun
+      instead of instantly ending it per help.
+    type: Tweak
+  - message: When shaken out of the initial infected state, you lose the blindness
+      & muteness that came with it
+    type: Fix
+  id: 479
+  time: '2024-07-30T08:01:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3403
+- author: DrSmugleaf
+  changes:
+  - message: Fixed climbing not ending until you step off weeds.
+    type: Fix
+  id: 480
+  time: '2024-07-30T08:03:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3404
+- author: Vermidia
+  changes:
+  - message: The regurgitation action now stuns the regurgitated host for 2 seconds
+    type: Add
+  id: 481
+  time: '2024-07-30T08:08:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3377
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added animations for building resin structures
+    type: Add
+  id: 482
+  time: '2024-07-30T08:14:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3267
+- author: Sigil
+  changes:
+  - message: Shotguns now show their fire delay visual as before. The popup, however,
+      is gone due to technical reasons.
+    type: Fix
+  id: 483
+  time: '2024-07-30T08:21:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3285
+- author: Vermidia
+  changes:
+  - message: Parasites & Lesser Drones no longer count for population when considering
+      the amount of t2 and t3s a hive can have.
+    type: Fix
+  id: 484
+  time: '2024-07-30T08:28:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3368
 Name: RMC14
 Order: -1

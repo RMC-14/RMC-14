@@ -63,6 +63,7 @@
   - type: NoRotateOnInteract
   - type: NoRotateOnMove
   - type: GunIFF
+    enabled: true
     intrinsic: true
 
 - type: entity

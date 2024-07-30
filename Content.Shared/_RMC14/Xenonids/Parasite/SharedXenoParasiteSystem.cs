@@ -8,7 +8,6 @@ using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Examine;
-using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Ghost;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
@@ -36,7 +35,6 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly BlindableSystem _blindable = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly CMHandsSystem _cmHands = default!;
@@ -75,7 +73,6 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
         SubscribeLocalEvent<VictimInfectedComponent, MapInitEvent>(OnVictimInfectedMapInit);
         SubscribeLocalEvent<VictimInfectedComponent, ComponentRemove>(OnVictimInfectedRemoved);
-        SubscribeLocalEvent<VictimInfectedComponent, CanSeeAttemptEvent>(OnVictimInfectedCancel);
         SubscribeLocalEvent<VictimInfectedComponent, ExaminedEvent>(OnVictimInfectedExamined);
         SubscribeLocalEvent<VictimInfectedComponent, RejuvenateEvent>(OnVictimInfectedRejuvenate);
 
@@ -203,13 +200,17 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
     private void OnVictimInfectedRemoved(Entity<VictimInfectedComponent> victim, ref ComponentRemove args)
     {
-        _blindable.UpdateIsBlind(victim.Owner);
+        if (_status.HasStatusEffect(victim, "Muted", null) && _status.HasStatusEffect(victim, "TemporaryBlindness", null))
+        {
+            _status.TryRemoveStatusEffect(victim, "Muted");
+            _status.TryRemoveStatusEffect(victim, "TemporaryBlindness");
+        }
         _standing.Stand(victim);
     }
 
     private void OnVictimInfectedCancel<T>(Entity<VictimInfectedComponent> victim, ref T args) where T : CancellableEntityEventArgs
     {
-        if (victim.Comp.LifeStage <= ComponentLifeStage.Running && !victim.Comp.Recovered)
+        if (victim.Comp.LifeStage <= ComponentLifeStage.Running)
             args.Cancel();
     }
 
@@ -244,7 +245,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
     private void OnVictimBurstExamine(Entity<VictimBurstComponent> burst, ref ExaminedEvent args)
     {
-        using(args.PushGroup(nameof(VictimBurstComponent)))
+        using (args.PushGroup(nameof(VictimBurstComponent)))
             args.PushMarkup($"[color=red][bold]{Loc.GetString("rmc-xeno-infected-bursted", ("victim", burst))}[/bold][/color]");
     }
 
@@ -300,13 +301,13 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             return false;
         }
 
-        if(_mobState.IsDead(parasite))
+        if (_mobState.IsDead(parasite))
         {
-            if(popup)
-				_popup.PopupClient(Loc.GetString("rmc-xeno-failed-parasite-dead"), victim, user, PopupType.MediumCaution);
+            if (popup)
+                _popup.PopupClient(Loc.GetString("rmc-xeno-failed-parasite-dead"), victim, user, PopupType.MediumCaution);
 
             return false;
-		}
+        }
         return true;
     }
 
@@ -345,16 +346,15 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         var time = _timing.CurTime;
         var victimComp = EnsureComp<VictimInfectedComponent>(victim);
         victimComp.AttachedAt = time;
-        victimComp.RecoverAt = time + parasite.Comp.ParalyzeTime;
         victimComp.Hive = CompOrNull<XenoComponent>(parasite)?.Hive ?? default;
         _stun.TryParalyze(victim, parasite.Comp.ParalyzeTime, true);
         _status.TryAddStatusEffect(victim, "Muted", parasite.Comp.ParalyzeTime, true, "Muted");
+        _status.TryAddStatusEffect(victim, "TemporaryBlindness", parasite.Comp.ParalyzeTime, true, "TemporaryBlindness");
         RefreshIncubationMultipliers(victim);
 
         var container = _container.EnsureContainer<ContainerSlot>(victim, victimComp.ContainerId);
         _container.Insert(parasite.Owner, container);
 
-        _blindable.UpdateIsBlind(victim);
         _appearance.SetData(parasite, victimComp.InfectedLayer, true);
 
         // TODO RMC14 also do damage to the parasite
@@ -402,12 +402,6 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                 _appearance.SetData(uid, infected.InfectedLayer, false);
                 if (_container.TryGetContainer(uid, infected.ContainerId, out var container))
                     _container.EmptyContainer(container);
-            }
-
-            if (infected.RecoverAt < time && !infected.Recovered)
-            {
-                infected.Recovered = true;
-                _blindable.UpdateIsBlind(uid);
             }
 
             if (_net.IsClient)
@@ -525,6 +519,8 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             return;
         //TODO Minor limb damage and causes pain
         _stun.TryParalyze(victim, knockdownTime, false);
+        _status.TryAddStatusEffect(victim, "Muted", knockdownTime, true, "Muted");
+        _status.TryAddStatusEffect(victim, "TemporaryBlindness", knockdownTime, true, "TemporaryBlindness");
         _jitter.DoJitter(victim, jitterTime, false);
         _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes-self"), victim, victim, PopupType.MediumCaution);
         _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.MediumCaution);

@@ -227,3 +227,18 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/19c2300177ed8da4d25d111aa1a7f8d356552a21/sound/effects/xeno_evolveready.ogg"
+
+- files: ["alien_resin_build1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/485afd96d16f4df22dbbb46f214df931d24a2eb8/sound/effects/alien_resin_build1.ogg"
+
+- files: ["alien_resin_build2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/485afd96d16f4df22dbbb46f214df931d24a2eb8/sound/effects/alien_resin_build2.ogg"
+
+- files: ["alien_resin_build3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/485afd96d16f4df22dbbb46f214df931d24a2eb8/sound/effects/alien_resin_build3.ogg"

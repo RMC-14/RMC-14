@@ -16,7 +16,7 @@ public sealed class RMCMapSystem : EntitySystem
     public readonly ImmutableArray<Direction> CardinalDirections = ImmutableArray.Create(
         Direction.South,
         Direction.East,
-        Direction.South,
+        Direction.North,
         Direction.West
     );
 
