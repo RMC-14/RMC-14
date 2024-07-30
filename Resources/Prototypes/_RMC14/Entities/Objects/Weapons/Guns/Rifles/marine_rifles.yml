@@ -370,6 +370,11 @@
       - ScoutWhitelist
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom.rsi
+  - type: MeleeWeapon
+    attackRate: 1
+    damage:
+      types:
+        Slash: 31 # Yes this does this much damage in 13. 51 with a bayonet attached.
   - type: ItemSlots
     slots:
       gun_magazine:
