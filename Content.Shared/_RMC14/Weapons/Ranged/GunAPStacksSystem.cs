@@ -14,6 +14,7 @@ public abstract class GunAPStacksSystem : EntitySystem
     {
         SubscribeLocalEvent<GunAPStacksModifierComponent, AmmoShotEvent>(OnGunShot);
         SubscribeLocalEvent<GunAPStacksModifierComponent, ProjectileEmbedEvent>(ChangeStack);
+        SubscribeLocalEvent<CMArmorPiercingComponent, GetGunAPStacksModifierEvent>(GiveAmmoAP);
     }
     private void OnGunShot(Entity<GunAPStacksModifierComponent> ent, ref AmmoShotEvent args)
     {
@@ -23,6 +24,14 @@ public abstract class GunAPStacksSystem : EntitySystem
         {
             ent.Comp.AP = 50;
             
+        }
+        foreach(var bullet in args.FiredProjectiles)
+        {
+            if(HasComp<CMArmorPiercingComponent>(bullet))
+            {
+                var ev = new GetGunAPStacksModifierEvent(ent.Comp.AP);
+                RaiseLocalEvent(bullet, ref ev);
+            }
         }
         
         Dirty(ent);
@@ -48,5 +57,10 @@ public abstract class GunAPStacksSystem : EntitySystem
         }
         Dirty(ent);
         //_armor.SetArmorPiercing(args.Weapon, (ent.Comp.Stacks * 10));
+    }
+    private void GiveAmmoAP(Entity<CMArmorPiercingComponent> ent, ref GetGunAPStacksModifierEvent args)
+    {
+        ent.Comp.Amount = args.Stacks;
+        Dirty(ent);
     }
 }
