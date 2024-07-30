@@ -450,6 +450,9 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                     var larvaContainer = _container.EnsureContainer<ContainerSlot>(uid, infected.LarvaContainerId);
                     _container.Insert(spawned, larvaContainer);
 
+                    infected.SpawnedLarva = spawned;
+                    Dirty(uid, infected);
+
                     continue;
                 }
 
