@@ -4076,5 +4076,12 @@
   id: 481
   time: '2024-07-30T08:08:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3377
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added animations for building resin structures
+    type: Add
+  id: 482
+  time: '2024-07-30T08:14:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3267
 Name: RMC14
 Order: -1
