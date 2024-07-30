@@ -358,7 +358,6 @@ public sealed partial class ClimbSystem : VirtualController
 
         if (args.OurFixture.Contacts.Count > 1)
         {
-            var colliding = false;
             foreach (var contact in args.OurFixture.Contacts.Values)
             {
                 if (!contact.IsTouching)
@@ -366,23 +365,22 @@ public sealed partial class ClimbSystem : VirtualController
 
                 var otherEnt = contact.EntityA;
                 var otherFixture = contact.FixtureA;
+                var otherFixtureId = contact.FixtureAId;
                 if (uid == contact.EntityA)
                 {
                     otherEnt = contact.EntityB;
                     otherFixture = contact.FixtureB;
+                    otherFixtureId = contact.FixtureBId;
                 }
+
+                if (args.OtherEntity == otherEnt && args.OtherFixtureId == otherFixtureId)
+                    continue;
 
                 if (otherFixture is { Hard: true } &&
                     _climbableQuery.HasComp(otherEnt))
                 {
-                    colliding = true;
-                    break;
+                    return;
                 }
-            }
-
-            if (colliding)
-            {
-                return;
             }
         }
 
