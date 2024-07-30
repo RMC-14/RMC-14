@@ -69,3 +69,7 @@
     - 0,0,27,1
   - type: RemoveOnlyStorage
   - type: FixedItemSizeStorage
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
