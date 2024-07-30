@@ -4083,5 +4083,13 @@
   id: 482
   time: '2024-07-30T08:14:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3267
+- author: Sigil
+  changes:
+  - message: Shotguns now show their fire delay visual as before. The popup, however,
+      is gone due to technical reasons.
+    type: Fix
+  id: 483
+  time: '2024-07-30T08:21:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3285
 Name: RMC14
 Order: -1
