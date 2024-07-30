@@ -1,8 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Marines.Invisibility;
+using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Xenonids.Projectile;
-using Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
+using Content.Shared._RMC14.Xenonids.Projectile.Spit;
 using Content.Shared.Actions;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Whitelist;
@@ -48,7 +50,6 @@ public sealed class ThermalCloakSystem : EntitySystem
         SubscribeLocalEvent<GunComponent, AttemptShootEvent>(OnAttemptShoot);
         SubscribeLocalEvent<ExplodeOnTriggerComponent, UseInHandEvent>(OnTimerUse);
         SubscribeLocalEvent<UncloakOnHitComponent, ProjectileHitEvent>(OnAcidProjectile);
-        SubscribeLocalEvent<UncloakOnHitComponent, StartCollideEvent>(OnAcidSpray);
     }
 
     private void OnGetItemActions(Entity<ThermalCloakComponent> ent, ref GetItemActionsEvent args)
@@ -87,6 +88,7 @@ public sealed class ThermalCloakSystem : EntitySystem
         var comp = EnsureComp<MarineTurnInvisibleComponent>(args.Equipee);
         comp.RestrictWeapons = ent.Comp.RestrictWeapons;
         comp.UncloakWeaponLock = ent.Comp.UncloakWeaponLock;
+        Dirty(args.Equipee, comp);
     }
 
     private void OnUnequipped(Entity<ThermalCloakComponent> ent, ref GotUnequippedEvent args)
@@ -165,6 +167,13 @@ public sealed class ThermalCloakSystem : EntitySystem
         }
     }
 
+    public void TrySetInvisibility(EntityUid uid, ThermalCloakComponent? component = null)
+    {
+        var cloak = FindWornCloak(uid);
+        if(cloak.HasValue)
+            SetInvisibility(cloak.Value, uid, false, true);
+    }
+
     private void OnAttemptShoot(Entity<GunComponent> ent, ref AttemptShootEvent args)
     {
         if (args.Cancelled || !TryComp<MarineTurnInvisibleComponent>(args.User, out var comp))
@@ -195,31 +204,27 @@ public sealed class ThermalCloakSystem : EntitySystem
 
     private void OnVaporHit(Entity<MarineActiveInvisibleComponent> ent, ref VaporHitEvent args)
     {
-        var slots = _inventory.GetSlotEnumerator(ent.Owner, SlotFlags.BACK);
-        while (slots.MoveNext(out var slot))
-        {
-            if (TryComp<ThermalCloakComponent>(slot.ContainedEntity, out var comp))
-                SetInvisibility((slot.ContainedEntity.Value, comp), ent.Owner, false, true);
-        }
+        var cloak = FindWornCloak(ent.Owner);
+        if(cloak.HasValue)
+            SetInvisibility(cloak.Value, ent.Owner, false, true);
     }
 
     private void OnAcidProjectile(Entity<UncloakOnHitComponent> ent, ref ProjectileHitEvent args)
     {
-        var slots = _inventory.GetSlotEnumerator(args.Target, SlotFlags.BACK);
-        while (slots.MoveNext(out var slot))
-        {
-            if (TryComp<ThermalCloakComponent>(slot.ContainedEntity, out var comp))
-                SetInvisibility((slot.ContainedEntity.Value, comp), args.Target, false, true);
-        }
+        var cloak = FindWornCloak(ent.Owner);
+        if(cloak.HasValue)
+            SetInvisibility(cloak.Value, ent.Owner, false, true);
     }
 
-    private void OnAcidSpray(Entity<UncloakOnHitComponent> ent, ref StartCollideEvent args)
+    private Entity<ThermalCloakComponent>? FindWornCloak(EntityUid player)
     {
-        var slots = _inventory.GetSlotEnumerator(args.OtherEntity, SlotFlags.BACK);
+        var slots = _inventory.GetSlotEnumerator(player, SlotFlags.BACK);
         while (slots.MoveNext(out var slot))
         {
             if (TryComp<ThermalCloakComponent>(slot.ContainedEntity, out var comp))
-                SetInvisibility((slot.ContainedEntity.Value, comp), args.OtherEntity, false, true);
+                return (slot.ContainedEntity.Value, comp);
         }
+
+        return null;
     }
 }

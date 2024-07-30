@@ -1,6 +1,8 @@
-﻿namespace Content.Shared._RMC14.Marines.Invisibility;
+﻿using Robust.Shared.GameStates;
 
-[RegisterComponent, AutoGenerateComponentState]
+namespace Content.Shared._RMC14.Marines.Invisibility;
+
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class MarineTurnInvisibleComponent : Component
 {
     public bool Enabled;
