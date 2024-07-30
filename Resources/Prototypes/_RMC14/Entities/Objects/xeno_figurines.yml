@@ -1,0 +1,26 @@
+# these get spawned by patron figurine spawner due to Figurine component, doesn't need extra mapping
+- type: entity
+  abstract: true
+  parent: RMCBaseFigurinePatron
+  id: RMCBaseFigurineXeno
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/xeno_figurines.rsi
+
+- type: entity
+  parent: RMCBaseFigurineXeno
+  id: RMCFigurineXenoXippy
+  name: Xippy figurine
+  description: Always has a helpful xip for sisters in need.
+  components:
+  - type: Sprite
+    state: drone
+
+- type: entity
+  parent: RMCBaseFigurineXeno
+  id: RMCFigurineXenoWarrior616
+  name: Warrior (XX-616) figurine
+  description: The hive's greatest fighter, she slew over 30 hosts with her might alone.
+  components:
+  - type: Sprite
+    state: warrior
