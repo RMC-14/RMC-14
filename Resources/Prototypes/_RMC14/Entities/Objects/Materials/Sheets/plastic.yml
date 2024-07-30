@@ -47,3 +47,14 @@
   - type: Stack
     stackType: RMCPlastic
     count: 10
+
+- type: entity
+  parent: RMCSheetPlastic
+  id: RMCSheetPlastic1
+  suffix: Single
+  components:
+  - type: Sprite
+    state: plastic
+  - type: Stack
+    stackType: RMCPlastic
+    count: 1
