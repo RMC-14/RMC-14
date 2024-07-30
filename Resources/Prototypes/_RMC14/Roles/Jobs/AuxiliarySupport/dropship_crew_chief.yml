@@ -21,14 +21,15 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      engineer: 2
-      firearms: 1
-      jtac: 2
-      leadership: 1
-      medical: 2
-      pilot: 1
-      powerLoader: 2
-      surgery: 1
+      skills:
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 2
+        RMCSkillPilot: 1
+        RMCSkillPowerLoader: 2
+        RMCSkillSurgery: 1
     - type: MarineOrders
   hidden: false
 

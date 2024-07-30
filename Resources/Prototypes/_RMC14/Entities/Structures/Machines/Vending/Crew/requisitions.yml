@@ -219,8 +219,8 @@
       #  amount: 4
       #- id: Data Detector
       #  amount: 4
-      #- id: Binoculars
-      #  amount: 2
+      - id: RMCBinoculars
+        amount: 2
       #- id: Rangefinder
       #   amount: 1
       #- id: Laser Designator

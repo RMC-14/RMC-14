@@ -288,7 +288,8 @@
     whitelist:
       tags:
       - Sidearm
-      # todo rmc14 binoculars and CO tablet
+      - Binoculars
+      - CommandTablet
   - type: FixedItemSizeStorage
 
 - type: entity
@@ -335,7 +336,7 @@
     sprite: _RMC14/Objects/Clothing/Pouches/pistol_mag.rsi
   - type: Storage
     grid:
-    - 0,0,5,1 #3 slots
+    - 0,0,7,1 #4 slots
     whitelist:
       tags:
       - CMMagazinePistol
@@ -813,6 +814,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/machete.rsi
     state: sheath
+  - type: Item
+    size: Large
   - type: Clothing
     quickEquip: false
     slots:
@@ -838,3 +841,7 @@
     - Pouch
   - type: CMHolster
   - type: CMItemSlots
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

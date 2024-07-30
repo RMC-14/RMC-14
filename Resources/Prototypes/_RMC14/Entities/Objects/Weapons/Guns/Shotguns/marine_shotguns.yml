@@ -65,8 +65,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2.rsi
   - type: Gun
     shotsPerBurst: 1
+  - type: ShootUseDelay
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto

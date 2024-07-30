@@ -21,6 +21,8 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Prototypes;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -32,6 +34,7 @@ namespace Content.Shared._RMC14.Xenonids.Construction;
 
 public sealed class SharedXenoConstructionSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
@@ -60,6 +63,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private EntityQuery<XenoConstructComponent> _xenoConstructQuery;
     private EntityQuery<XenoEggComponent> _xenoEggQuery;
     private EntityQuery<XenoWeedsComponent> _xenoWeedsQuery;
+    private const string XenoStructuresAnimation = "RMCEffect";
 
     public override void Initialize()
     {
@@ -199,19 +203,33 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (attempt.Cancelled)
             return;
 
+        var effectID = XenoStructuresAnimation + choice;
+        var coordinates = GetNetCoordinates(args.Target);
+        var entityCoords = GetCoordinates(coordinates);
+        EntityUid? effect = null;
+
+        if (_prototype.TryIndex(effectID, out var effectProto) && _net.IsServer)
+            effect = Spawn(effectID, entityCoords);
+
+        var ev = new XenoSecreteStructureDoAfterEvent(coordinates, choice, GetNetEntity(effect));
         args.Handled = true;
-        var ev = new XenoSecreteStructureDoAfterEvent(GetNetCoordinates(args.Target), choice);
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.BuildDelay, ev, xeno)
         {
             BreakOnMove = true
         };
 
-        // TODO RMC14 building animation
-        _doAfter.TryStartDoAfter(doAfter);
+        if (!_doAfter.TryStartDoAfter(doAfter))
+        {
+            if (effect != null && _net.IsServer)
+                QueueDel(effect);
+        }
     }
 
     private void OnXenoSecreteStructureDoAfter(Entity<XenoConstructionComponent> xeno, ref XenoSecreteStructureDoAfterEvent args)
     {
+        if (args.Cancelled && _net.IsServer && args.Effect != null)
+            QueueDel(EntityManager.GetEntity(args.Effect));
+
         if (args.Handled || args.Cancelled)
             return;
 
@@ -237,6 +255,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             var structure = Spawn(args.StructureId, coordinates);
             _adminLogs.Add(LogType.RMCXenoConstruct, $"Xeno {ToPrettyString(xeno):xeno} constructed {ToPrettyString(structure):structure} at {coordinates}");
         }
+
+        _audio.PlayPredicted(xeno.Comp.BuildSound, coordinates, xeno);
     }
 
     private void OnXenoOrderConstructionAction(Entity<XenoConstructionComponent> xeno, ref XenoOrderConstructionActionEvent args)

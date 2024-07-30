@@ -18,9 +18,10 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      firearms: 1
-      jtac: 1
-      smartGun: 1
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillJtac: 1
+        RMCSkillSmartGun: 1
     - type: CMVendorUser
       points: 45
 

@@ -18,11 +18,12 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      firearms: 0
-      intel: 1
-      medical: 3
-      research: 1
-      surgery: 2
+      skills:
+        RMCSkillFirearms: 0
+        RMCSkillIntel: 1
+        RMCSkillMedical: 3
+        RMCSkillResearch: 1
+        RMCSkillSurgery: 2
     - type: RMCUserBulkyArmorIncapable
   hidden: true # TODO RMC14
 

@@ -24,9 +24,10 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      construction: 1
-      endurance: 2
-      firearms: 1
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
   hasIcon: false
   hidden: true # TODO RMC14
 

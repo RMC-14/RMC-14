@@ -149,8 +149,9 @@
       - id: RMCWhistle
         points: 3
     - name: Binoculars
-      entries: [ ]
-    #    CMBinoculars: 5P
+      entries:
+      - id: RMCBinoculars
+        points: 5
     #    CMRangeFinder: 10P
     #    CMLaserDesignator: 15P
     - name: Helmet Optics

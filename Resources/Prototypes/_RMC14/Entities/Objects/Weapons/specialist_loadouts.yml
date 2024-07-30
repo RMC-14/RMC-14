@@ -98,7 +98,7 @@
     - id: CMWeaponPistolMK80
     - id: CMMagazinePistolMK80
     - id: CMMagazinePistolMK80
-#    - id: CMBinoculars
+    - id: RMCBinoculars
   - type: CMChangeUserOnVend
     addComponents:
     - type: GrenadeSpecWhitelist
@@ -157,7 +157,7 @@
       amount: 2
 #    - id: RMCPlasticExplosives
 #      amount: 2
-#    - id: CMBinoculars
+    - id: RMCBinoculars
   - type: CMChangeUserOnVend
     addComponents:
     - type: DemoSpecWhitelist

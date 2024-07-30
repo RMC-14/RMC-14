@@ -3,12 +3,14 @@
   id: CMBaseWeaponGun
   components:
   - type: GunUnskilledPenalty
+  - type: GunIFF
+    enabled: false
   - type: Clothing
     quickEquip: false
   - type: GunSkilledRecoil
     setRecoil: 0
     skills:
-      firearms: 1
+      RMCSkillFirearms: 1
   - type: UseDelay
     delay: 0
   - type: WieldDelay
