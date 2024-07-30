@@ -313,6 +313,7 @@
       types:
         Blunt: 8
   - type: GunIFF
+    enabled: true
   - type: Gun
     shotsPerBurst: 3
     selectedMode: SemiAuto
