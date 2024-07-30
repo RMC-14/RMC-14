@@ -60,6 +60,8 @@ public sealed class CMGunSystem : EntitySystem
 
         SubscribeLocalEvent<RMCProjectileDamageFalloffComponent, ProjectileHitEvent>(OnFalloffProjectileHit);
 
+        SubscribeLocalEvent<RMCExtraProjectilesDamageModsComponent, AmmoShotEvent>(OnExtraProjectilesShot);
+
         SubscribeLocalEvent<ProjectileFixedDistanceComponent, PreventCollideEvent>(OnCollisionCheckArc);
         SubscribeLocalEvent<ProjectileFixedDistanceComponent, PhysicsSleepEvent>(OnEventToStopProjectile);
 
@@ -211,6 +213,17 @@ public sealed class CMGunSystem : EntitySystem
         var totalDamage = args.Damage.GetTotal();
 
         args.Damage *= (totalDamage - falloff) / totalDamage;
+    }
+
+    private void OnExtraProjectilesShot(Entity<RMCExtraProjectilesDamageModsComponent> weapon, ref AmmoShotEvent args)
+    {
+        for (int t = 1; t < args.FiredProjectiles.Count; ++t)
+        {
+            if (!TryComp(args.FiredProjectiles[t], out ProjectileComponent? projectileComponent))
+                continue;
+
+            projectileComponent.Damage *= weapon.Comp.DamageMultiplier;
+        }
     }
 
     private void OnShowUseDelayShot(Entity<GunShowUseDelayComponent> ent, ref GunShotEvent args)

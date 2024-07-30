@@ -260,6 +260,10 @@
         volume: -2
   - type: RMCSelectiveFire
     baseFireRate: 0.476
+  - type: GunDamageModifier
+    multiplier: 0.85
+  - type: RMCExtraProjectilesDamageMods
+    damageMultiplier: 0.36
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
@@ -272,10 +276,10 @@
     proto: null
     soundInsert:
       path: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
-#  - type: GunDamageMultipliers
-#    multipliers:
-#      Turf: 5
-#      Breaching: 10.8
+  - type: GunDamageMultipliers
+    multipliers:
+      Turf: 5
+      Breaching: 10.8
   - type: UniqueAction
   - type: PumpAction
   - type: UseDelay
@@ -283,6 +287,7 @@
     userOnly: true
     attachedOnly: true
     supercedeHolder: true
+    wieldedUseOnly: true
     activatePopupText: attachable-popup-switch-to-generic
     deactivatePopupText: attachable-popup-switch-from-generic
     activateSound:
