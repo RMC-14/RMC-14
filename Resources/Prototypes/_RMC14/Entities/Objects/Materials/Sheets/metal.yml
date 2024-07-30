@@ -1,4 +1,19 @@
 # Metal
+
+- type: material
+  id: CMSteel
+  stackEntity: CMSheetMetal
+  name: materials-metal
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/metal.rsi, state: metal }
+  price: 0.05
+
+- type: stack
+  id: CMSteel
+  name: metal
+  icon: { sprite: /Textures/_RMC14/Objects/Materials/Sheets/metal.rsi, state: metal }
+  spawn: CMSheetMetal
+  maxCount: 50
+
 - type: entity
   abstract: true
   parent: SheetMetalBase
@@ -37,7 +52,6 @@
       layers:
         - state: metal_4
           map: ["base"]
-
 
 - type: entity
   parent: CMSheetMetal
@@ -84,6 +98,21 @@
       count: 1
 
 # Plasteel
+
+- type: material
+  id: CMPlasteel
+  stackEntity: CMSheetPlasteel
+  name: materials-plasteel
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/plasteel.rsi, state: plasteel }
+  color: "#696969"
+  price: 0.28
+
+- type: stack
+  id: CMPlasteel
+  name: plasteel
+  icon: { sprite: /Textures/_RMC14/Objects/Materials/Sheets/plasteel.rsi, state: plasteel }
+  spawn: CMSheetPlasteel
+  maxCount: 40
 
 - type: entity
   parent: CMSheetMetalBase
