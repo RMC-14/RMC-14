@@ -4051,5 +4051,16 @@
   id: 478
   time: '2024-07-30T00:59:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3375
+- author: Vermidia
+  changes:
+  - message: Shaking someone out of a stun now only removes 6 seconds from the stun
+      instead of instantly ending it per help.
+    type: Tweak
+  - message: When shaken out of the initial infected state, you lose the blindness
+      & muteness that came with it
+    type: Fix
+  id: 479
+  time: '2024-07-30T08:01:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3403
 Name: RMC14
 Order: -1
