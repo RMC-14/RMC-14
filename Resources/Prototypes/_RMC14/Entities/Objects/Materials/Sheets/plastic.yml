@@ -2,7 +2,7 @@
 
 - type: material
   id: RMCPlastic
-  stackEntity: RMCheetPlastic
+  stackEntity: RMCSheetPlastic
   name: materials-plastic
   icon: { sprite: _RMC14/Objects/Materials/Sheets/plastic.rsi, state: plastic }
   price: 0.2
