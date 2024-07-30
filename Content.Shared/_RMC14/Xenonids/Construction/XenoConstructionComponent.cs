@@ -1,4 +1,5 @@
-﻿using Content.Shared.FixedPoint;
+﻿using Robust.Shared.Audio;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
@@ -35,4 +36,10 @@ public sealed partial class XenoConstructionComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan OrderConstructionAddPlasmaDelay = TimeSpan.FromSeconds(3);
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier BuildSound = new SoundCollectionSpecifier("RMCResinBuild")
+    {
+        Params = AudioParams.Default.WithVolume(-10f)
+    };
 }
