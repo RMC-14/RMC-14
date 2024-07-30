@@ -175,7 +175,7 @@ public sealed class ThermalCloakSystem : EntitySystem
         }
     }
 
-    public void TrySetInvisibility(EntityUid uid, ThermalCloakComponent? component = null)
+    public void TrySetInvisibility(EntityUid uid, bool enabling, bool forced, ThermalCloakComponent? component = null)
     {
         var cloak = FindWornCloak(uid);
         if(cloak.HasValue)
@@ -212,16 +212,12 @@ public sealed class ThermalCloakSystem : EntitySystem
 
     private void OnVaporHit(Entity<EntityActiveInvisibleComponent> ent, ref VaporHitEvent args)
     {
-        var cloak = FindWornCloak(ent.Owner);
-        if(cloak.HasValue)
-            SetInvisibility(cloak.Value, ent.Owner, false, true);
+        TrySetInvisibility(ent.Owner, false, true);
     }
 
     private void OnAcidProjectile(Entity<UncloakOnHitComponent> ent, ref ProjectileHitEvent args)
     {
-        var cloak = FindWornCloak(ent.Owner);
-        if(cloak.HasValue)
-            SetInvisibility(cloak.Value, ent.Owner, false, true);
+        TrySetInvisibility(args.Target, false, true);
     }
 
     private Entity<ThermalCloakComponent>? FindWornCloak(EntityUid player)

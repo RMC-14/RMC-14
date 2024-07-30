@@ -49,7 +49,7 @@ public abstract class SharedOnCollideSystem : EntitySystem
             return;
 
         if(HasComp<UncloakOnHitComponent>(ent.Owner))
-            _cloak.TrySetInvisibility(other);
+            _cloak.TrySetInvisibility(other, false, true);
 
         ent.Comp.Damaged.Add(other);
         Dirty(ent);
