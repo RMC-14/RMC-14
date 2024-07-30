@@ -156,3 +156,5 @@
     - ActionXenoScreech
   - type: RMCXenoDamageVisuals
     prefix: queen
+  - type: NoPullInState # prevent shitty tactic of having a xeno pull queen to a cade to screech with no warning
+    state: Alive
