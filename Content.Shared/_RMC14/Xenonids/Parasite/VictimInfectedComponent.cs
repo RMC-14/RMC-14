@@ -36,6 +36,12 @@ public sealed partial class VictimInfectedComponent : Component
     public Enum InfectedLayer = VictimInfectedLayer.Infected;
 
     [DataField, AutoNetworkedField]
+    public string LarvaContainerId = "rmc_larva_container";
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? SpawnedLarva;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan FallOffDelay = TimeSpan.FromSeconds(10);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
@@ -82,6 +88,9 @@ public sealed partial class VictimInfectedComponent : Component
 
     [DataField]
     public int FinalSymptomsStart = 4;
+
+    [DataField]
+    public int BurstWarningStart = 4;
 
     [DataField]
     public float ShakesChance = 0.08f;
