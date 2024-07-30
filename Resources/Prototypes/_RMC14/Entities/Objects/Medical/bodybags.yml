@@ -91,7 +91,7 @@
     state: scouttarp_closed
   - type: RMCPassiveStealth
     toggleable: true
-    opacity: 0.1
+    minOpacity: 0.1
     whitelist:
       components:
       - ScoutWhitelist
