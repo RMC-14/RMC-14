@@ -18,9 +18,9 @@
     allowedEmotes: ['Click', 'Chitter']
   - type: Vocal
     sounds:
-      Male: UnisexArachnid
-      Female: UnisexArachnid
-      Unsexed: UnisexArachnid
+      Male: RMCUnisexArachnid
+      Female: RMCUnisexArachnid
+      Unsexed: RMCUnisexArachnid
   - type: TypingIndicator
     proto: spider
   - type: MeleeWeapon

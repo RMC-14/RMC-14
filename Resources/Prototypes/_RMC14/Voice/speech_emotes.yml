@@ -110,3 +110,19 @@
     - purrs!
     - purring
     - purred
+
+- type: emote
+  id: Warcry
+  name: rmc-emote-name-warcry
+  category: Vocal
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  icon: _RMC14/Interface/Emotes/warcry.png
+  chatMessages: ["rmc-chat-emote-msg-warcry"]
+  chatTriggers:
+   - shouts an inspiring cry
+   - shouts an inspiring cry!

@@ -1,0 +1,1 @@
+rmc-chat-emote-msg-warcry = shouts an inspiring cry!
