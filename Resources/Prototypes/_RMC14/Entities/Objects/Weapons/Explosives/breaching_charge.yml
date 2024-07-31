@@ -13,8 +13,7 @@
   - type: Item
     size: Small
   - type: Tag
-    tags:
-    - RMCExplosiveBreachingCharge
+    id: RMCExplosiveBreachingCharge
   - type: Sticky
     stickDelay: 1
     canUnstick: false
