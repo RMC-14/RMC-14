@@ -65,6 +65,10 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
             result.Add(Loc.GetString("rmc-attachable-examine-ranged-projectile-speed",
                 ("colour", modifierExamineColour), ("sign", modSet.ProjectileSpeedFlat > 0 ? '+' : ""), ("projectileSpeed", modSet.ProjectileSpeedFlat)));
 
+        if (modSet.DamageFalloffAddMult != 0)
+            result.Add(Loc.GetString("rmc-attachable-examine-ranged-damage-falloff",
+                ("colour", modifierExamineColour), ("sign", modSet.DamageFalloffAddMult > 0 ? '+' : ""), ("falloff", modSet.DamageFalloffAddMult)));
+
         return result;
     }
 
