@@ -310,7 +310,7 @@
 
 # Flare Pouch
 - type: entity
-  parent: CMPouchFill
+  parent: RMCPouchFill
   id: CMPouchFlare
   name: flare pouch
   description: A pouch designed to hold flares. Refillable with an M94 flare pack.
