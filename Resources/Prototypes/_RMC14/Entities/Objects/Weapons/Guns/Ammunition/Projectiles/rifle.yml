@@ -8,8 +8,11 @@
       types:
         Piercing: 40
   - type: RMCProjectileDamageFalloff
-    effectiveRange: 7
-    falloff: 4
+    thresholds:
+    - range: 24
+      falloff: 9999
+    - range: 7
+      falloff: 4
   - type: CMArmorPiercing
     amount: 5
 
