@@ -54,8 +54,8 @@
     shoes: CMBootsBlackFilled
     id: RMCIDCardMarshal
     ears: CMHeadsetMPO
-    pocket1: CMPouchFirstAidERT
-    pocket2: CMPouchShotgun
+    pocket1: RMCPouchFirstAidERT
+    pocket2: RMCPouchShotgun
 
 # Deputy
 
@@ -113,5 +113,5 @@
     shoes: CMBootsBlackFilled
     id: RMCIDCardDeputy
     ears: CMHeadsetMPO
-    pocket1: CMPouchFirstAidERT
-    pocket2: CMPouchShotgun
+    pocket1: RMCPouchFirstAidERT
+    pocket2: RMCPouchShotgun

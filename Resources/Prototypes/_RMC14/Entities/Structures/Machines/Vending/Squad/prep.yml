@@ -191,42 +191,42 @@
 #        amount: 15
     - name: Pouches
       entries:
-      - id: CMPouchBayonet
+      - id: RMCPouchBayonet
         name: Bayonet Sheath (Full)
         amount: 15
-      - id: CMPouchFirstAidSplintsGauzeOintment
+      - id: RMCPouchFirstAidSplintsGauzeOintment
         name: First-Aid Pouch (Splints, Gauze, Ointment)
         amount: 15
-      - id: CMPouchFirstAidPills
+      - id: RMCPouchFirstAidPills
         name: First-Aid Pouch (Pill Packets)
         amount: 15
-      - id: CMPouchFlareFilled
+      - id: RMCPouchFlareFilled
         name: Flare Pouch (Full)
         amount: 15
-      - id: CMPouchDocumentSmall
+      - id: RMCPouchDocumentSmall
         amount: 15
-      - id: CMPouchMagazine
+      - id: RMCPouchMagazine
         amount: 15
-      - id: CMPouchShotgun
+      - id: RMCPouchShotgun
         amount: 15
-      - id: CMPouchGeneralMedium
+      - id: RMCPouchGeneralMedium
         amount: 15
-      - id: CMPouchMagazinePistol
+      - id: RMCPouchMagazinePistol
         amount: 15
-      - id: CMPouchPistol
+      - id: RMCPouchPistol
         amount: 15
     - name: Restricted Pouches
       entries:
-      - id: CMPouchConstruction
+      - id: RMCPouchConstruction
         amount: 1
-      - id: CMPouchExplosive
+      - id: RMCPouchExplosive
         amount: 1
-      - id: CMPouchFirstResponder
+      - id: RMCPouchFirstResponder
         name: First Responder Pouch (Empty)
         amount: 2
-      - id: CMPouchMagazinePistolLarge
+      - id: RMCPouchMagazinePistolLarge
         amount: 2
-      - id: CMPouchTools
+      - id: RMCPouchTools
         amount: 1
 #      - id: Sling Pouch
 #        amount: 1

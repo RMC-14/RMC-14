@@ -51,4 +51,4 @@
     id: RMCIDCardPMC
     ears: RMCHeadsetDistressPMC
     # pocket1: /obj/item/storage/pouch/magazine/large/pmc_rifle
-    pocket2: CMPouchFirstAidInjectors
+    pocket2: RMCPouchFirstAidInjectors
