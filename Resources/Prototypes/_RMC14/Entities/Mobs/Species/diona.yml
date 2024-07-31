@@ -10,6 +10,13 @@
   - type: Icon
     sprite: Mobs/Species/Diona/parts.rsi
     state: full
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#cd7314"
+      Burn:
+        sprite: Mobs/Effects/burn_damage.rsi
   - type: Speech
     speechVerb: Plant
   - type: Vocal

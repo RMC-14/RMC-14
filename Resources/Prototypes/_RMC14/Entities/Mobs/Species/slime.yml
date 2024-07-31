@@ -21,3 +21,10 @@
       Male: RMCMaleSlime
       Female: RMCFemaleSlime
       Unsexed: RMCMaleSlime
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#2cf274"
+      Burn:
+        sprite: Mobs/Effects/burn_damage.rsi
