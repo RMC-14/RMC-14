@@ -12,6 +12,9 @@
       map: ["base"]
   - type: Item
     size: Small
+  - type: Tag
+    tags:
+    - RMCExplosiveBreachingCharge
   - type: Sticky
     stickDelay: 1
     canUnstick: false
