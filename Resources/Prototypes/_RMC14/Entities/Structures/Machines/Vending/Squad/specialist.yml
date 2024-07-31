@@ -26,7 +26,7 @@
       #  points: 0
       #- id: PyroSet
       #  points: 0
-      - id: RMCScoutEquipmentCase
+      - id: RMCScoutSpecEquipmentCase
       - id: CMSniperEquipmentCase
     - name: Extra Scout Ammunition
       entries:
