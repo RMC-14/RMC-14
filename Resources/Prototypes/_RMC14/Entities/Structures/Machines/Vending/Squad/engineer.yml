@@ -190,6 +190,7 @@
       - id: CMArmorM3Heavy
         name: heavy armor
     - name: Backpack
+      choices: { CMBackpack: 1 }
       entries:
     #- id: CMScabbardMacheteFull
       - id: CMBackpackMarineTech
@@ -240,6 +241,7 @@
       - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
+      choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif

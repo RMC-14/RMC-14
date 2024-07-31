@@ -107,6 +107,7 @@
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
     - name: Backpack
+      choices: { CMBackpack: 1 }
       entries:
       - id: CMBackpackMarine
       - id: CMSatchelMarine
@@ -146,6 +147,7 @@
       - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
+      choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
