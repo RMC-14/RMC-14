@@ -165,7 +165,7 @@
   parent: RMCUnderAttachmentBase
   id: RMCAttachmentGyroscopicStabilizer
   name: gyroscopic stabilizer
-  description: A set of weights and balances to stabilize the weapon when fired with one hand. Slightly decreases firing speed.
+  description: A set of weights and balances to stabilize the weapon when fired with one hand. Decreases firing speed.
   components:
   - type: Sprite
     state: gyro
