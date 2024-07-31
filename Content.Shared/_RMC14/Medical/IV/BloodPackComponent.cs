@@ -59,7 +59,7 @@ public sealed partial class BloodPackComponent : Component
 
     // TODO RMC-14 blood types
     [DataField, AutoNetworkedField]
-    public string[] TransferableReagents = ["Blood"];
+    public string[] TransferableReagents = ["Blood", "RMCCopperBlood", "RMCSlimeBlood", "RMCSapBlood", "RMCInsectBlood"];
 }
 
 [Serializable, NetSerializable]

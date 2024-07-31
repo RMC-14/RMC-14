@@ -5,6 +5,8 @@
   id: CMMobDiona
   suffix: RMC14
   components:
+  - type: Bloodstream
+    bloodReagent: RMCSapBlood
   - type: HumanoidAppearance
     species: Diona
   - type: Icon

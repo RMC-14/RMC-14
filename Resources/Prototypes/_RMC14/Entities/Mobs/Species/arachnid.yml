@@ -5,6 +5,8 @@
   id: CMMobArachnid
   suffix: RMC14
   components:
+  - type: Bloodstream
+    bloodReagent: RMCCopperBlood
   - type: HumanoidAppearance
     species: Arachnid
   - type: DamageVisuals
