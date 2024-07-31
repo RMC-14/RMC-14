@@ -1,3 +1,6 @@
+- type: Tag
+    id: RMCExplosiveBreachingCharge
+
 ﻿- type: entity
   parent: BaseItem
   id: RMCExplosiveBreachingCharge
@@ -12,8 +15,6 @@
       map: ["base"]
   - type: Item
     size: Small
-  - type: Tag
-    id: RMCExplosiveBreachingCharge
   - type: Sticky
     stickDelay: 1
     canUnstick: false
