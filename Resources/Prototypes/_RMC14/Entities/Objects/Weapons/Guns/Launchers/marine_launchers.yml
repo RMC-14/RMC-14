@@ -172,7 +172,7 @@
     cycleDelay: 6.0
     proto: RMCRocket84mm
     soundInsert:
-      path: /Audio/_RMC14/Weapons/Guns/Cock/m5_ammo.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Reload/M5_load.ogg
   - type: GunUserWhitelist
     whitelist:
       components:
