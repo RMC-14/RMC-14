@@ -33,7 +33,7 @@
 
 # Sidearm pouch
 - type: entity
-  parent: CMPouch
+  parent: RMCPouch
   id: CMPouchPistol
   name: sidearm pouch
   description: You could carry a pistol in this; more importantly, you could draw it quickly. Useful for emergencies.
