@@ -29,7 +29,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCMK80Case
+    - id: RMCCasePistolMK80
       amount: 2
 
 - type: entity
@@ -49,5 +49,5 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCSmartPistolCase
+    - id: RMCCasePistolSmart
       amount: 2

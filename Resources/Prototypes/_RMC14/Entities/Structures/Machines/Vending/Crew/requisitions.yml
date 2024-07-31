@@ -37,15 +37,15 @@
       #  amount: 20
     - name: Restricted Sidearms
       entries:
-      - id: RMCMK80Case
+      - id: RMCCasePistolMK80
         amount: 4
-      - id: RMCSmartPistolCase
+      - id: RMCCasePistolSmart
         amount: 3
       #- id: MOU-53 Shotgun
       #  amount: 2
       #- id: XM88 Heavy Rifle
       #  amount: 3
-      #- id: RMCM54CE2Case
+      #- id: RMCCaseRfileM54CE2
       #  amount: 3
       #- id: M41A Pulse Rifle MK1
       #  amount: 3

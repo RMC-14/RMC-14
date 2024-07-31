@@ -1,6 +1,7 @@
+# pistols
 - type: entity
   parent: RMCBaseGunCase
-  id: RMCSmartPistolCase
+  id: RMCCasePistolSmart
   name: SU-6 smart pistol case
   description: A gun case containing the SU-6 smart pistol. Comes with a full belt holster.
   components:
@@ -19,7 +20,7 @@
 
 - type: entity
   parent: RMCBaseGunCase
-  id: RMCMK80Case
+  id: RMCCasePistolMK80
   name: MK80 pistol case
   description: A gun case containing the MK80. Comes with two magazines.
   components:
@@ -37,9 +38,12 @@
     - id: CMMagazinePistolMK80
       amount: 2
 
+      #m77
+
+# rifles
 - type: entity
   parent: RMCBaseGunCase
-  id: RMCM54CE2Case
+  id: RMCCaseRfileM54CE2
   name: M54CE2 heavy assault rifle case
   description: A gun case containing the M54CE2 heavy assault rifle. You can get additional ammunition at requisitions.
   components:
