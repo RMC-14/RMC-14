@@ -30,6 +30,7 @@
     thresholds:
     - range: 4
       falloff: 9999
+      ignoreModifiers: true
     - range: 0
       falloff: 1
 
@@ -51,6 +52,7 @@
     thresholds:
     - range: 8
       falloff: 9999
+      ignoreModifiers: true
     - range: 0
       falloff: 1
   - type: CMArmorPiercing
@@ -71,6 +73,7 @@
     thresholds:
     - range: 12
       falloff: 9999
+      ignoreModifiers: true
     - range: 0
       falloff: 1
   # todo rmc14 add burning
@@ -91,6 +94,7 @@
     thresholds:
     - range: 12
       falloff: 9999
+      ignoreModifiers: true
     - range: 0
       falloff: 1
   - type: StaminaDamageOnCollide
@@ -116,6 +120,7 @@
     thresholds:
     - range: 12
       falloff: 9999
+      ignoreModifiers: true
     - range: 0
       falloff: 1
 

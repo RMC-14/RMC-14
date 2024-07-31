@@ -11,6 +11,7 @@
     thresholds:
     - range: 22
       falloff: 9999
+      ignoreModifiers: true
     - range: 4
       falloff: 6
   - type: CMArmorPiercing
