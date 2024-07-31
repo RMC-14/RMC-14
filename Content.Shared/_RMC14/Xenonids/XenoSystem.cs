@@ -297,7 +297,7 @@ public sealed class XenoSystem : EntitySystem
         return xenoOne.Comp.Hive == xenoTwo.Comp.Hive;
     }
 
-    public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool hitStructures = false)
+    public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool hitNonMarines = false)
     {
         // TODO RMC14 xenos of the same hive
         if (xeno == target)
@@ -309,7 +309,7 @@ public sealed class XenoSystem : EntitySystem
         if (_xenoNestedQuery.HasComp(target))
             return false;
 
-        return HasComp<MarineComponent>(target) || hitStructures;
+        return HasComp<MarineComponent>(target) || hitNonMarines;
     }
 
     public override void Update(float frameTime)
