@@ -107,6 +107,7 @@
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
     - name: Backpack
+      choices: { CMBackpack: 1 }
       entries:
       - id: CMBackpackMarine
       - id: CMSatchelMarine
