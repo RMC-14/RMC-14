@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
 using Content.Shared.FixedPoint;
@@ -42,6 +43,7 @@ public sealed class CMGunSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly RMCProjectileSystem _rmcProjectileSystem = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ProjectileComponent> _projectileQuery;
@@ -57,8 +59,6 @@ public sealed class CMGunSystem : EntitySystem
 
         SubscribeLocalEvent<RMCWeaponDamageFalloffComponent, AmmoShotEvent>(OnWeaponDamageFalloffShot);
         SubscribeLocalEvent<RMCWeaponDamageFalloffComponent, GunRefreshModifiersEvent>(OnWeaponDamageFalloffRefreshModifiers);
-
-        SubscribeLocalEvent<RMCProjectileDamageFalloffComponent, ProjectileHitEvent>(OnFalloffProjectileHit);
 
         SubscribeLocalEvent<RMCExtraProjectilesDamageModsComponent, AmmoShotEvent>(OnExtraProjectilesShot);
 
@@ -175,10 +175,9 @@ public sealed class CMGunSystem : EntitySystem
 
     private void OnWeaponDamageFalloffRefreshModifiers(Entity<RMCWeaponDamageFalloffComponent> weapon, ref GunRefreshModifiersEvent args)
     {
-        var ev = new GetDamageFalloffEvent(weapon.Comp.EffectiveRange, weapon.Comp.FalloffMultiplier);
+        var ev = new GetDamageFalloffEvent(weapon.Comp.FalloffMultiplier);
         RaiseLocalEvent(weapon.Owner, ref ev);
 
-        weapon.Comp.ModifiedEffectiveRange = ev.EffectiveRange;
         weapon.Comp.ModifiedFalloffMultiplier = FixedPoint2.Max(ev.FalloffMultiplier, 0);
 
         Dirty(weapon);
@@ -186,32 +185,13 @@ public sealed class CMGunSystem : EntitySystem
 
     private void OnWeaponDamageFalloffShot(Entity<RMCWeaponDamageFalloffComponent> weapon, ref AmmoShotEvent args)
     {
-        var coords = _transform.GetMapCoordinates(weapon.Owner);
-
         foreach (var projectile in args.FiredProjectiles)
         {
             if (!TryComp(projectile, out RMCProjectileDamageFalloffComponent? falloffComponent))
-                return;
+                continue;
 
-            falloffComponent.EffectiveRange += weapon.Comp.ModifiedEffectiveRange;
-            falloffComponent.Falloff *= weapon.Comp.ModifiedFalloffMultiplier;
-            falloffComponent.ShotFrom = coords;
+            _rmcProjectileSystem.SetProjectileFalloffWeaponMult((projectile, falloffComponent), weapon.Comp.ModifiedFalloffMultiplier);
         }
-    }
-
-    private void OnFalloffProjectileHit(Entity<RMCProjectileDamageFalloffComponent> projectile, ref ProjectileHitEvent args)
-    {
-        if (projectile.Comp.ShotFrom == null || projectile.Comp.Falloff == 0 || projectile.Comp.MinRemainingDamageMult < 0)
-            return;
-
-        var pastEffectiveRange = (_transform.GetMapCoordinates(args.Target).Position - projectile.Comp.ShotFrom.Value.Position).Length() - projectile.Comp.EffectiveRange;
-
-        if (pastEffectiveRange <= 0)
-            return;
-
-        var totalDamage = args.Damage.GetTotal();
-
-        args.Damage *= FixedPoint2.Clamp((totalDamage - pastEffectiveRange * projectile.Comp.Falloff) / totalDamage, projectile.Comp.MinRemainingDamageMult, 1);
     }
 
     private void OnExtraProjectilesShot(Entity<RMCExtraProjectilesDamageModsComponent> weapon, ref AmmoShotEvent args)
