@@ -36,7 +36,7 @@
     ears: CMHeadsetEngineer
     belt: CMBeltUtilityFilled
 #    pocket1: CMDemolitionsScanner TODO RMC14
-    pocket2: CMPouchGeneralMedium
+    pocket2: RMCPouchGeneralMedium
 
 - type: entity
   parent: CMSpawnPointJobBase

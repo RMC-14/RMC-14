@@ -40,7 +40,7 @@
     ears: CMHeadsetMPO
     belt: CMBeltSecurityMPFilled
     #    pocket1: TODO RMC14 tape recorder
-    pocket2: CMPouchGeneralLarge
+    pocket2: RMCPouchGeneralLarge
 
 - type: entity
   parent: CMSpawnPointJobBase

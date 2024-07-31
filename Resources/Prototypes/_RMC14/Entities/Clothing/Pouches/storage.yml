@@ -1,7 +1,7 @@
 # Light General Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
-  id: CMPouchGeneral
+  id: RMCPouchGeneral
   name: light general pouch
   description: A general-purpose pouch used to carry a small item, or two tiny ones.
   components:
@@ -19,8 +19,8 @@
 
 # Medium General Pouch
 - type: entity
-  parent: CMPouchGeneral
-  id: CMPouchGeneralMedium
+  parent: RMCPouchGeneral
+  id: RMCPouchGeneralMedium
   name: medium general pouch
   description: A general-purpose pouch used to carry a variety of differently sized items.
   components:
@@ -33,8 +33,8 @@
 
 # Large General Pouch
 - type: entity
-  parent: CMPouchGeneral
-  id: CMPouchGeneralLarge
+  parent: RMCPouchGeneral
+  id: RMCPouchGeneralLarge
   name: large general pouch
   description: A general-purpose pouch used to carry more differently sized items.
   components:
@@ -51,7 +51,7 @@
 # Survival Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
-  id: CMPouchSurvival
+  id: RMCPouchSurvival
   name: survival pouch
   description: A pouch given to colonists in the event of an emergency.
   components:
@@ -74,8 +74,8 @@
   - type: FixedItemSizeStorage
 
 - type: entity
-  parent: CMPouchSurvival
-  id: CMPouchSurvivalFill
+  parent: RMCPouchSurvival
+  id: RMCPouchSurvivalFill
   suffix: Filled
   components:
   - type: StorageFill
@@ -94,8 +94,8 @@
 
 # Survival Synth Pouch
 - type: entity
-  parent: CMPouchSurvival
-  id: CMPouchSurvivalSynth
+  parent: RMCPouchSurvival
+  id: RMCPouchSurvivalSynth
   name: synth survival pouch
   description: An emergency pouch given to silicons in the event of an emergency.
   components:
@@ -114,8 +114,8 @@
       - Welder
 
 - type: entity
-  parent: CMPouchSurvivalSynth
-  id: CMPouchSurvivalSynthFill
+  parent: RMCPouchSurvivalSynth
+  id: RMCPouchSurvivalSynthFill
   suffix: Filled
   components:
   - type: StorageFill
@@ -131,7 +131,7 @@
 # Command Pouch
 - type: entity
   parent: [RMCPouchClosed, RMCPouchStorage]
-  id: CMPouchCommand
+  id: RMCPouchCommand
   name: command pouch
   description: A specialized, sturdy pouch issued to Commanding Officers. Can hold their sidearm, the command tablet and a set of binoculars.
   components:
@@ -151,7 +151,7 @@
 # Magazine Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
-  id: CMPouchMagazine
+  id: RMCPouchMagazine
   name: magazine pouch
   description: It can carry magazines.
   components:
@@ -174,8 +174,8 @@
 
 # Large Magazine Pouch
 - type: entity
-  parent: CMPouchMagazine
-  id: CMPouchMagazineLarge
+  parent: RMCPouchMagazine
+  id: RMCPouchMagazineLarge
   name: large magazine pouch
   description: It can carry many magazines.
   components:
@@ -188,8 +188,8 @@
 
 # Pistol Magazine Pouch
 - type: entity
-  parent: CMPouchMagazine
-  id: CMPouchMagazinePistol
+  parent: RMCPouchMagazine
+  id: RMCPouchMagazinePistol
   name: pistol magazine pouch
   description: It can carry pistol magazines and revolver speedloaders.
   components:
@@ -206,8 +206,8 @@
 
 # Large Pistol Magazine Pouch
 - type: entity
-  parent: CMPouchMagazinePistol
-  id: CMPouchMagazinePistolLarge
+  parent: RMCPouchMagazinePistol
+  id: RMCPouchMagazinePistolLarge
   name: large pistol magazine pouch
   description: It can carry many pistol magazines or revolver speedloaders.
   components:
@@ -221,7 +221,7 @@
 # Shotgun Shell Pouch
 - type: entity
   parent: [RMCPouchStorage]
-  id: CMPouchShotgun
+  id: RMCPouchShotgun
   name: shotgun shell pouch
   description: It can contain a single box of shotgun shells. # It can contain handfuls of shells, or bullets if you choose to for some reason. # TODO RMC14
   components:
@@ -243,8 +243,8 @@
 
 # Large Shotgun Shell Pouch
 #- type: entity
-#  parent: CMPouchShotgun
-#  id: CMPouchShotgunLarge
+#  parent: RMCPouchShotgun
+#  id: RMCPouchShotgunLarge
 #  name: large shotgun shell pouch
 #  description: It can contain more handfuls of shells, or bullets if you choose to for some reason.
 #  components:
@@ -258,7 +258,7 @@
 # Expolosives Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
-  id: CMPouchExplosive
+  id: RMCPouchExplosive
   name: explosive pouch
   description: It can carry grenades, plastic explosives, mine boxes, and other explosives.
   components:
@@ -277,7 +277,7 @@
 # Large Documents Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
-  id: CMPouchDocument
+  id: RMCPouchDocument
   name: large document pouch
   description: It can contain papers, folders, disks, technical manuals, and clipboards.
   components:
@@ -298,8 +298,8 @@
 
 # Small Documents Pouch
 - type: entity
-  parent: CMPouchDocument
-  id: CMPouchDocumentSmall
+  parent: RMCPouchDocument
+  id: RMCPouchDocumentSmall
   name: small document pouch
   description: A smaller version of the document pouch. It can contain papers, folders, disks, technical manuals, and clipboards.
   components:
@@ -311,7 +311,7 @@
 # Flare Pouch
 - type: entity
   parent: RMCPouchFill
-  id: CMPouchFlare
+  id: RMCPouchFlare
   name: flare pouch
   description: A pouch designed to hold flares. Refillable with an M94 flare pack.
   components:
@@ -334,8 +334,8 @@
         - Flare
 
 - type: entity
-  parent: CMPouchFlare
-  id: CMPouchFlareFilled
+  parent: RMCPouchFlare
+  id: RMCPouchFlareFilled
   suffix: Filled
   components:
   - type: CMItemSlots
@@ -345,7 +345,7 @@
 # Radio Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
-  id: CMPouchRadio
+  id: RMCPouchRadio
   name: radio pouch
   description: It can contain two handheld radios.
   components:
@@ -363,7 +363,7 @@
 # Electronics Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
-  id: CMPouchElectronics
+  id: RMCPouchElectronics
   name: electronics pouch
   description: It is designed to hold most electronics, power cells and circuit boards.
   components:
@@ -386,7 +386,7 @@
 # Construction Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
-  id: CMPouchConstruction
+  id: RMCPouchConstruction
   name: construction pouch
   description: It's designed to hold construction materials - glass/metal sheets, metal rods, barbed wire, cable coil, and empty sandbags. It also has two hooks for an entrenching tool and light replacer.
   components:
@@ -413,7 +413,7 @@
 # Tools Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
-  id: CMPouchTools
+  id: RMCPouchTools
   name: tools pouch
   description: It's designed to hold maintenance tools - screwdriver, wrench, cable coil, etc. It also has a hook for an entrenching tool or light replacer.
   components:
@@ -443,8 +443,8 @@
   - type: FixedItemSizeStorage
 
 - type: entity
-  parent: CMPouchTools
-  id: CMPouchToolsFill
+  parent: RMCPouchTools
+  id: RMCPouchToolsFill
   suffix: Filled
   components:
   - type: StorageFill
@@ -457,8 +457,8 @@
 
 # Tactical Tools Pouch
 - type: entity
-  parent: CMPouchTools
-  id: CMPouchToolsSoc
+  parent: RMCPouchTools
+  id: RMCPouchToolsSoc
   name: tactical tools pouch
   description: This particular toolkit full of sharp, heavy objects was designed for breaking into things rather than fixing them. Still does the latter pretty well, though.
   components:
@@ -469,8 +469,8 @@
     - 0,0,15,1 #8 slots
 
 - type: entity
-  parent: CMPouchToolsSoc
-  id: CMPouchToolsSocFill
+  parent: RMCPouchToolsSoc
+  id: RMCPouchToolsSocFill
   suffix: Filled
   components:
   - type: StorageFill
@@ -486,7 +486,7 @@
 # Sling Pouch
 - type: entity
   parent: [RMCPouchClosed, RMCPouchStorage]
-  id: CMPouchSling
+  id: RMCPouchSling
   name: sling strap # TODO RMC14 implement this
   description: Keeps a single item attached to a strap.
   components:
@@ -499,7 +499,7 @@
 # Cassetes Pouch
 #- type: entity
 #  parent: [RMCPouchStorage, RMCPouchOpenClosed]
-#  id: CMPouchCassette
+#  id: RMCPouchCassette
 #  name: cassette pouch
 #  description: A finely crafted pouch, made specifically to keep cassettes safe during wartime.
 #  components:

@@ -121,21 +121,21 @@
     #- id: CMM276M82FHolsterRig
     #- id: CMM276ShotgunShellLoadingRig
     - name: Pouches
-      choices: { CMPouch: 2 }
+      choices: { RMCPouch: 2 }
       entries:
-      - id: CMPouchFirstAidInjectors
+      - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
-      - id: CMPouchFirstAidSplintsGauzeOintment
+      - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
-      - id: CMPouchFirstAidPills
+      - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
-      - id: CMPouchFlareFilled
+      - id: RMCPouchFlareFilled
         name: Flare pouch (Filled)
-      - id: CMPouchMagazine
-      - id: CMPouchShotgun
-      - id: CMPouchMagazinePistolLarge
-      - id: CMPouchGeneralMedium
-      - id: CMPouchPistol
+      - id: RMCPouchMagazine
+      - id: RMCPouchShotgun
+      - id: RMCPouchMagazinePistolLarge
+      - id: RMCPouchGeneralMedium
+      - id: RMCPouchPistol
       #- id: CMSlingPouch
     - name: Accessories
       choices: { CMAccessories: 1 }
@@ -152,16 +152,16 @@
     - name: Clothing Items
       entries:
     #- id: CMScabbardMacheteFull
-      - id: CMPouchMacheteFilled
+      - id: RMCPouchMacheteFilled
         points: 15
     #- id: CMMarineRadioTelephonePack
     #- id: CMFuelTankStrapPouch
     #- id: CMWeldingGoggles
-      - id: CMPouchGeneralLarge
+      - id: RMCPouchGeneralLarge
         points: 10
       - id: CMBeltUtilityCombat
         points: 15
-      - id: CMPouchAutoinjectorFill
+      - id: RMCPouchAutoinjectorFill
         points: 15
     - name: Utilities
       entries:
