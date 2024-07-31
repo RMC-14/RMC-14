@@ -758,7 +758,7 @@
       - Multitool
       - Flashlight
       - RMCExplosiveBreachingCharge
-      - CMFireExtinguisher
+      - CMFireExtinguisherPortable
       components:
       - Welder
       - ComputerBoard
