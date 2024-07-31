@@ -57,6 +57,7 @@ rmc-attachable-examine-ranged-fire-delay = [color={$colour}]{$sign}{TOSTRING($fi
 rmc-attachable-examine-ranged-recoil = [color={$colour}]{$sign}{$recoil}[/color] recoil.
 rmc-attachable-examine-ranged-damage = [color={$colour}]{$sign}{$damage}[/color] ranged damage multiplier.
 rmc-attachable-examine-ranged-projectile-speed = [color={$colour}]{$sign}{$projectileSpeed}[/color] projectile speed.
+rmc-attachable-examine-ranged-damage-falloff = [color={$colour}]{$sign}{$falloff}[/color] falloff multiplier.
 
 rmc-attachable-examine-melee-damage = [color={$colour}]{$sign}{$damage}[/color] melee damage.
 
