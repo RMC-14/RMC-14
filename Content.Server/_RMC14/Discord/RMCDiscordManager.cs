@@ -131,7 +131,7 @@ public sealed class RMCDiscordManager : IPostInjectInit
 
     private async Task OnDiscordReady()
     {
-        Interlocked.Increment(ref _ready);
+        Interlocked.Exchange(ref _ready, 1);
     }
 
     public ConcurrentQueue<RMCDiscordMessage> GetDiscordAdminMessages()
