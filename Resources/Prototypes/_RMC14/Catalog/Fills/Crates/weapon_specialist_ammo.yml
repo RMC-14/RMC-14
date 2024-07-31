@@ -52,6 +52,7 @@
     - id: RMCRocket84mm
       amount: 2
     - id: RMCRocket84mmAntiArmor
+      amount: 1
 
 - type: entity
   parent: CMCrateAmmo
@@ -66,7 +67,7 @@
 - type: entity
   parent: CMCrateAmmo
   id: RMCCrateM5DemoSpecAntiArmor
-  name: M5-ATL Anti-Armor Crate (HE x3)
+  name: M5-ATL Anti-Armor Crate (AP x3)
   components:
   - type: StorageFill
     contents:

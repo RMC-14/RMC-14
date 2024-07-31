@@ -1,36 +1,9 @@
 ﻿- type: entity
-  parent: BaseStorageItem
+  parent: RMCBaseEquipmentCase
   id: CMSniperEquipmentCase
   name: sniper equipment case
   description: "A large case containing your very own long-range M96S sniper rifle, M45 ghillie armor and helmet, M42 scout sight, ammunition, spotter equipment, and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
   components:
-  - type: Sprite
-    noRot: true
-    sprite: _RMC14/Objects/loadout_kits.rsi
-    layers:
-    - state: closed
-      map: [ base ]
-    - state: sniper
-      map: [ label ]
-  - type: Icon
-    sprite: _RMC14/Objects/loadout_kits.rsi
-    state: closed
-  - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.StorageVisuals.Open:
-        base:
-          True: { state: open }
-          False: { state: closed }
-        label:
-          True: { visible: false }
-          False: { visible: true }
-  - type: Item
-    size: Huge
-  - type: Storage
-    maxItemSize: Huge
-    grid:
-    - 0,0,27,1
   - type: StorageFill
     contents:
     - id: CMArmorM45
@@ -50,38 +23,19 @@
   - type: CMChangeUserOnVend
     addComponents:
     - type: SniperWhitelist
-  - type: RemoveOnlyStorage
-  - type: FixedItemSizeStorage
 
 - type: entity
-  parent: BaseStorageItem
+  parent: RMCBaseEquipmentCase
   id: RMCGrenadeSpecEquipmentCase
   name: heavy grenadier equipment case
   description: "A large case containing a heavy-duty multi-shot M83 grenade launcher, M3-G4 grenadier armor and helmet, significant amount of various M40 grenades and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
   components:
   - type: Sprite
-    noRot: true
-    sprite: _RMC14/Objects/loadout_kits.rsi
     layers:
     - state: closed
       map: [ base ]
     - state: grenadier
       map: [ label ]
-  - type: Icon
-    sprite: _RMC14/Objects/loadout_kits.rsi
-    state: closed
-  - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.StorageVisuals.Open:
-        base:
-          True: { state: open }
-          False: { state: closed }
-        label:
-          True: { visible: false }
-          False: { visible: true }
-  - type: Item
-    size: Huge
   - type: Storage
     maxItemSize: Huge
     grid:
@@ -102,38 +56,19 @@
   - type: CMChangeUserOnVend
     addComponents:
     - type: GrenadeSpecWhitelist
-  - type: RemoveOnlyStorage
-  - type: FixedItemSizeStorage
 
 - type: entity
-  parent: BaseStorageItem
+  parent: RMCBaseEquipmentCase
   id: RMCDemoSpecEquipmentCase
   name: demolitionist equipment case
   description: "A large case containing a heavy-caliber M5 Anti-Tank Launcher, reinforced M3-T light armor, five 84mm rockets, and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
   components:
   - type: Sprite
-    noRot: true
-    sprite: _RMC14/Objects/loadout_kits.rsi
     layers:
     - state: closed
       map: [ base ]
     - state: demo
       map: [ demo ]
-  - type: Icon
-    sprite: _RMC14/Objects/loadout_kits.rsi
-    state: closed
-  - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.StorageVisuals.Open:
-        base:
-          True: { state: open }
-          False: { state: closed }
-        demo:
-          True: { visible: false }
-          False: { visible: true }
-  - type: Item
-    size: Huge
   - type: Storage
     maxItemSize: Huge
     grid:
@@ -161,42 +96,23 @@
   - type: CMChangeUserOnVend
     addComponents:
     - type: DemoSpecWhitelist
-  - type: RemoveOnlyStorage
-  - type: FixedItemSizeStorage
 
 - type: entity
-  parent: BaseStorageItem
-  id: RMCScoutEquipmentCase
+  parent: RMCBaseEquipmentCase
+  id: RMCScoutSpecEquipmentCase
   name: scout equipment case
   description: "A large case containing an M4RA battle rifle, M3-S light armor and helmet, M4RA battle sight, M68 thermal cloak, V3 reactive thermal tarp, ammunition and additional pieces of equipment.\nNOTE: You cannot put items back inside this case."
   components:
   - type: Sprite
-    noRot: true
-    sprite: _RMC14/Objects/loadout_kits.rsi
     layers:
     - state: closed
       map: [ base ]
     - state: scout
       map: [ label ]
-  - type: Icon
-    sprite: _RMC14/Objects/loadout_kits.rsi
-    state: closed
-  - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.StorageVisuals.Open:
-        base:
-          True: { state: open }
-          False: { state: closed }
-        label:
-          True: { visible: false }
-          False: { visible: true }
-  - type: Item
-    size: Huge
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,27,1
+    - 0,0,33,1 # 17 items total
   - type: StorageFill
     contents:
     - id: RMCArmorM3Scout
@@ -222,5 +138,3 @@
   - type: CMChangeUserOnVend
     addComponents:
     - type: ScoutWhitelist
-  - type: RemoveOnlyStorage
-  - type: FixedItemSizeStorage
