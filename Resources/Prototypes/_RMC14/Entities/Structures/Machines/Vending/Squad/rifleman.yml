@@ -84,8 +84,8 @@
       entries:
       - id: CMEntrenchingTool
         points: 5
-      - id: CMSandbagEmpty50
-        name: sandbags x50
+      - id: CMSandbagEmpty25
+        name: sandbags x25
         points: 20
 #      - id: ES-11 Mobile Fuel Canister
 #        points: 5
@@ -133,8 +133,8 @@
         points: 10
     - name: Sidearm Ammunition
       entries:
-#      - id: CMM44HeavySpeedLoader
-#        points: 10
+      - id: RMCSpeedLoader44Marksman
+        points: 10
       - id: CMMagazinePistolMK80
         points: 5
       - id: RMCMagazinePistolSU6
@@ -186,7 +186,9 @@
       - id: RMCWhistle
         points: 5
     - name: Binoculars
-      entries: [ ]
+      entries:
+      - id: RMCBinoculars
+        points: 5
     #- id: CMRangeFinder
     #  points: 10
     #- id: CMLaserDesignator
