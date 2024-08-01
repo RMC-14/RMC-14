@@ -30,9 +30,9 @@
       - id: CMArmorM2MP
       - id: CMHeadBeretRed
     - name: Handgun Case
-#     choices: { CMGunCase: 1 }
-      entries: []
-#     - id: M77 Gun case
+      choices: { CMGunCase: 1 }
+      entries:
+      - id: RMCGunCasePistolM77
 #     - id: Combat Revolver Gun case
 #     - id: M1984 Gun case
     - name: Backpack
@@ -102,9 +102,9 @@
       - id: CMArmorM3Warden
       - id: CMHeadCapWarden
     - name: Handgun Case
-#     choices: { CMGunCase: 1 }
-      entries: []
-#     - id: M77 Gun case
+      choices: { CMGunCase: 1 }
+      entries:
+      - id: RMCGunCasePistolM77
 #     - id: Combat Revolver Gun case
 #     - id: M1984 Gun case
     - name: Backpack
