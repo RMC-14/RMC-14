@@ -4197,5 +4197,13 @@
   id: 493
   time: '2024-08-01T05:43:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3419
+- author: Whisper
+  changes:
+  - message: Eating and drinking certain items should no longer make the chem mixing
+      sound.
+    type: Fix
+  id: 494
+  time: '2024-08-01T06:08:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3357
 Name: RMC14
 Order: -1
