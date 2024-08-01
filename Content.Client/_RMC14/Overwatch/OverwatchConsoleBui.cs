@@ -30,8 +30,6 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
 
     private readonly SquadSystem _squad;
 
-    private NetEntity? _activeSquad;
-
     private readonly Dictionary<NetEntity, OverwatchSquadView> _squadViews = new();
 
     public OverwatchConsoleBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
@@ -80,17 +78,14 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                 StyleClasses = { "OpenBoth" },
             };
 
-            squadButton.OnPressed += _ =>
-            {
-                _activeSquad = squad.Id;
-                UpdateView();
-            };
+            squadButton.OnPressed += _ => SendPredictedMessage(new OverwatchConsoleSelectSquadBuiMsg(squad.Id));
 
             var panel = CreatePanel();
             panel.AddChild(squadButton);
             _window.SquadsContainer.AddChild(panel);
         }
 
+        var activeSquad = GetActiveSquad();
         var margin = new Thickness(2);
         foreach (var squad in s.Squads)
         {
@@ -107,9 +102,12 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
             else
             {
                 monitor = new OverwatchSquadView();
-                monitor.Visible = squad.Id == _activeSquad;
+                monitor.Visible = squad.Id == activeSquad;
+                monitor.OperatorButton.OnPressed += _ => SendPredictedMessage(new OverwatchConsoleTakeOperatorBuiMsg());
+
                 _squadViews[squad.Id] = monitor;
                 _window.SquadViewContainer.AddChild(monitor);
+
                 monitor.SearchBar.OnTextChanged += args =>
                 {
                     static void MakeAllVisible(Control control)
@@ -161,12 +159,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
 
             monitor.OverwatchLabel.Text = $"{squad.Name} Overwatch | Dashboard";
 
-            monitor.OnStop += () =>
-            {
-                monitor.SearchBar.SetText(string.Empty, true);
-                _activeSquad = null;
-                UpdateView();
-            };
+            monitor.OnStop += () => SendPredictedMessage(new OverwatchConsoleStopOverwatchBuiMsg());
 
             var allAlive = 0;
             var roles = new Dictionary<ProtoId<JobPrototype>, (HashSet<OverwatchMarine> Deployed, HashSet<OverwatchMarine> Alive, HashSet<OverwatchMarine> All)>();
@@ -395,6 +388,8 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
             });
             monitor.RolesContainer.AddChild(totalPanel);
         }
+
+        UpdateView();
     }
 
     private void UpdateView()
@@ -402,7 +397,8 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
         if (_window == null)
             return;
 
-        if (_activeSquad == null)
+        var activeSquad = GetActiveSquad();
+        if (activeSquad == null)
         {
             _window.OverwatchViewContainer.Visible = true;
             _window.SquadViewContainer.Visible = false;
@@ -415,9 +411,13 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
             _window.Wrapper.VerticalAlignment = VAlignment.Stretch;
         }
 
+        var consoleOperator = GetOperator();
         foreach (var (id, squad) in _squadViews)
         {
-            squad.Visible = id == _activeSquad;
+            squad.Visible = id == activeSquad;
+            squad.OperatorButton.Text = consoleOperator == null
+                ? string.Empty
+                : $"Operator - {consoleOperator}";
         }
     }
 
@@ -437,6 +437,25 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
             panel.MinHeight = minHeight;
 
         return panel;
+    }
+
+    private NetEntity? GetActiveSquad()
+    {
+        return EntMan.TryGetComponent(Owner, out OverwatchConsoleComponent? overwatch)
+            ? overwatch.Squad
+            : null;
+    }
+
+    private string? GetOperator()
+    {
+        return EntMan.TryGetComponent(Owner, out OverwatchConsoleComponent? overwatch)
+            ? overwatch.Operator
+            : null;
+    }
+
+    public void Refresh()
+    {
+        UpdateView();
     }
 
     protected override void Dispose(bool disposing)

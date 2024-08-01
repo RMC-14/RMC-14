@@ -19,6 +19,18 @@ public sealed class OverwatchConsoleBuiState(List<OverwatchSquad> squads, Dictio
 }
 
 [Serializable, NetSerializable]
+public sealed class OverwatchConsoleSelectSquadBuiMsg(NetEntity squad) : BoundUserInterfaceMessage
+{
+    public readonly NetEntity Squad = squad;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleTakeOperatorBuiMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleStopOverwatchBuiMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
 public sealed class OverwatchConsoleWatchBuiMsg(NetEntity target) : BoundUserInterfaceMessage
 {
     public readonly NetEntity Target = target;

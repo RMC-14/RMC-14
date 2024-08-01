@@ -11,6 +11,7 @@
             <BoxContainer Orientation="Horizontal" Margin="5">
                 <Label Name="OverwatchLabel" Access="Public" Text="Overwatch" />
                 <Control HorizontalExpand="True" />
+                <Button Name="OperatorButton" Access="Public" StyleClasses="OpenBoth" />
                 <Button Name="StopOverwatchButton" Access="Public" Text="Stop Overwatch" StyleClasses="OpenBoth" />
             </BoxContainer>
         </PanelContainer>

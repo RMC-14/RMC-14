@@ -8,7 +8,6 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Overwatch;
@@ -19,7 +18,6 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
@@ -43,6 +41,9 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         Subs.BuiEvents<OverwatchConsoleComponent>(OverwatchConsoleUI.Key, subs =>
         {
+            subs.Event<OverwatchConsoleSelectSquadBuiMsg>(OnOverwatchSelectSquadBui);
+            subs.Event<OverwatchConsoleTakeOperatorBuiMsg>(OnOverwatchTakeOperatorBui);
+            subs.Event<OverwatchConsoleStopOverwatchBuiMsg>(OnOverwatchStopBui);
             subs.Event<OverwatchConsoleWatchBuiMsg>(OnOverwatchWatchBui);
         });
     }
@@ -72,6 +73,32 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         {
             _ui.SetUiState(uid, OverwatchConsoleUI.Key, state);
         }
+    }
+
+    private void OnOverwatchSelectSquadBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSelectSquadBuiMsg args)
+    {
+        if (!TryGetEntity(args.Squad, out var squad) || !HasComp<SquadTeamComponent>(squad))
+        {
+            Log.Warning($"{ToPrettyString(args.Actor)} tried to select invalid squad id {ToPrettyString(squad)}");
+            return;
+        }
+
+        ent.Comp.Squad = args.Squad;
+        ent.Comp.Operator = Identity.Name(args.Actor, EntityManager);
+        Dirty(ent);
+    }
+
+    private void OnOverwatchTakeOperatorBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleTakeOperatorBuiMsg args)
+    {
+        ent.Comp.Operator = Identity.Name(args.Actor, EntityManager);
+        Dirty(ent);
+    }
+
+    private void OnOverwatchStopBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleStopOverwatchBuiMsg args)
+    {
+        ent.Comp.Squad = null;
+        ent.Comp.Operator = null;
+        Dirty(ent);
     }
 
     private void OnOverwatchWatchBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleWatchBuiMsg args)
