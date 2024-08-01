@@ -27,6 +27,7 @@
         RMCSkillJtac: 3
     - type: CMVendorUser
       points: 45
+    - type: SquadArmorWearer
 
 - type: startingGear
   id: CMGearFireteamLeader
