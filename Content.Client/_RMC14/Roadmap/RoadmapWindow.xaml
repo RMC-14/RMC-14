@@ -22,12 +22,12 @@
             <BoxContainer Name="Columns" Access="Public" Orientation="Horizontal">
                 <BoxContainer Name="FirstVersion" Access="Public" Orientation="Vertical" HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Current version" />
-                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Carrier" Text="Carry parasites around, allowing the Hive to impregnate new hosts on the move. Use pheromones to assist fellow Aliens" />
-                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Burrower" Text="Lay the foundations for resin traps in strategic locations or the Hive's flanks. Flank your way around the map with the tunnel ability and dig tunnels to allow for quick transportation of fellow Aliens from the hive to the frontlines" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Smart Gun Operator" Text="Stay behind marines and fire past friendlies and into the enemy!" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Shivas Snowball" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Almayer" Text="Ship map for the marines" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="LV-624" Text="Planet map" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Weapon attachments" Text="Each weapon will be able to be customized with different attachments, changing the weapon's stats" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Demolitionist Kit" Text="SADAR!!!" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Sniper Kit" Text="Sniper loadout for the squad weapons specialist. On completion, its ghillie suit will let you become partially cloaked, and the rifle will have special actions" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Grenadier Kit" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Squad automated vendors" Text="Where the marine roles get their equipment at round start" />
@@ -37,7 +37,9 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno Queen" Text="Head caste of the xenonids" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Crusher" />
-                    <controls:RoadmapItem ItemState="Partial" HeaderText="Spitter" Text="Protect your fellow Aliens with a corrosive acid spit, allowing you to damage hosts from a distance and deny areas or lanes of fire to them. Use your strong acid to quickly destroy equipment" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Boiler" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Fiorina Science Annex" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Spitter" Text="Protect your fellow Aliens with a corrosive acid spit, allowing you to damage hosts from a distance and deny areas or lanes of fire to them. Use your strong acid to quickly destroy equipment" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="USS LCS-14 Savannah" Text="A new ship map for marines to spawn on. Contributed by Tunguso4ka" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Solaris Ridge" Text="A new planet-side map. Contributed by Tunguso4ka" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Larva removal surgery" Text="No longer a week away" />
@@ -51,6 +53,8 @@
                 </BoxContainer>
                 <BoxContainer Name="SecondVersion" Access="Public" Orientation="Vertical"  HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Upcoming" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Carrier" Text="Carry parasites around, allowing the Hive to impregnate new hosts on the move. Use pheromones to assist fellow Aliens" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Burrower" Text="Lay the foundations for resin traps in strategic locations or the Hive's flanks. Flank your way around the map with the tunnel ability and dig tunnels to allow for quick transportation of fellow Aliens from the hive to the frontlines" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Fireteam Leader" Text="More equipment in the fireteam leader's equipment and gear racks" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Squad Leader" Text="More equipment in the squad leader's equipment and gear racks" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Blood types" />

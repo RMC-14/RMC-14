@@ -44,6 +44,10 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Tools/wrench.rsi
+    storedRotation: 90
+    storedSprite:
+      sprite: _RMC14/Objects/Tools/wrench.rsi
+      state: icon
 
 - type: entity
   parent: Multitool
@@ -70,6 +74,9 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Tools/crowbar.rsi
+    storedSprite:
+      sprite: _RMC14/Objects/Tools/crowbar.rsi
+      state: icon
 
 - type: entity
   parent: CMCrowbar

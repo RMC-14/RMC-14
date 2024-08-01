@@ -13,7 +13,7 @@
 - type: entity
   id: CMCrateM54CE2
   parent: CMCrateWeapons
-  name: M54CE2 HPR crate (HPR x2, HPR ammo box x2)
+  name: M54CE2 HAR crate (HAR x2, HAR ammo box x2)
   components:
   - type: StorageFill
     contents:

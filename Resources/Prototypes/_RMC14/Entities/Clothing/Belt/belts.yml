@@ -32,7 +32,7 @@
       - Flare
 #      - # TODO RMC14 shotgun shell handfuls
       - CMMagazinePistol
-      - CMMagazineRevolver
+      - RMCMagazineRevolver
       - CMMagazineRifle
       - CMMagazineSmg
       - CMMagazineSniper
@@ -72,6 +72,8 @@
       - Multitool
       - Flashlight
       - PowerCell
+      - CMFireExtinguisherPortable
+      - RMCExplosiveBreachingCharge
 #      - # TODO nailgun, circuit board
       components:
       - Welder
@@ -112,8 +114,9 @@
       - Flashlight
       - Sidearm
       - CMMagazinePistol
-      - CMMagazineRevolver
+      - RMCMagazineRevolver
       - PowerCell
+      - CMFireExtinguisherPortable
 #      - # TODO RMC14 handful of shotgun shells
 #      - # TODO nailgun, circuit board
       components:
@@ -151,7 +154,7 @@
   parent: CMBeltBaseStorage
   id: CMBeltMedical
   name: M276 pattern medical storage rig
-  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is a less common configuration, designed to transport medical supplies and pistol ammunition.
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is a less common configuration, designed to transport bulkier medical supplies.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/medical.rsi
@@ -289,7 +292,7 @@
   - type: Storage
     maxItemSize: Normal
     grid:
-    - 0,0,11,2 # 12 slots
+    - 0,0,11,3 # 12 slots
     whitelist:
       tags:
       - Grenade

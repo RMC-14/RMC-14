@@ -1,6 +1,7 @@
 ﻿using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.UserInterface;
+using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -30,6 +31,10 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     }
 
     public virtual void AnnounceRadio(EntityUid sender, string message, ProtoId<RadioChannelPrototype> channel)
+    {
+    }
+
+    public virtual void AnnounceARES(EntityUid? source, string message, SoundSpecifier sound)
     {
     }
 }

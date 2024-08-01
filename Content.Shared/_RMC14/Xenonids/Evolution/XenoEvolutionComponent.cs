@@ -7,7 +7,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Xenonids.Evolution;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
 [Access(typeof(XenoEvolutionSystem))]
 public sealed partial class XenoEvolutionComponent : Component
 {
@@ -16,9 +16,6 @@ public sealed partial class XenoEvolutionComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool CanEvolveWithoutGranter;
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan EvolveWithoutOvipositorFor = TimeSpan.FromMinutes(5);
 
     [DataField, AutoNetworkedField]
     public List<EntProtoId> EvolvesTo = new();
@@ -51,5 +48,5 @@ public sealed partial class XenoEvolutionComponent : Component
     public SoundSpecifier EvolutionReadySound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/xeno_evolveready.ogg", AudioParams.Default.WithVolume(-6));
 
     [DataField, AutoNetworkedField]
-    public TimeSpan AccumulatePointsBefore = TimeSpan.FromMinutes(15);
+    public bool GotPopup;
 }

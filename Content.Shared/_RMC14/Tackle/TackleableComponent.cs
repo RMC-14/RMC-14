@@ -2,5 +2,9 @@
 
 namespace Content.Shared._RMC14.Tackle;
 
-[RegisterComponent, NetworkedComponent]
-public sealed partial class TackleableComponent : Component;
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+public sealed partial class TackleableComponent : Component
+{
+    [DataField, AutoNetworkedField]
+    public TimeSpan ExpireAfter = TimeSpan.FromSeconds(4);
+}

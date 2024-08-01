@@ -4,16 +4,6 @@
   start: start
   graph:
   - node: start
-    edges:
-    - to: fenceMetal
-      completed:
-      - !type:SnapToGrid
-        southRotation: true
-      steps:
-      - material: CMRodMetal
-        amount: 10
-        doAfter: 3
-
   - node: fenceMetal
     entity: CMFence
     edges:

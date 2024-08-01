@@ -1,6 +1,6 @@
 ﻿# m3
 - type: entity
-  parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing ]
+  parent: RMCBaseArmor
   id: CMArmorM3Medium
   name: M3 pattern marine armor
   description: A standard UNMC M3 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage.
@@ -15,6 +15,7 @@
     unequipDelay: 2
   - type: CMArmor
     armor: 20
+    bio: 20
     explosionArmor: 15
   - type: WieldSlowdownCompensation
     walk: 0.08
@@ -118,6 +119,19 @@
   - type: ExplosionResistance
     damageCoefficient: 0
     worn: false
+  - type: RMCMagneticArmor
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: SquadArmor
+    layer: Armor
+    rsi:
+      sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: std-armor
+    leaderRsi:
+      sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: sql-armor
 
 - type: entity
   parent: CMArmorM3Medium
@@ -131,6 +145,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/b12.rsi
   - type: CMArmor
     armor: 25
+    bio: 25
     explosionArmor: 20
 
 - type: entity
@@ -145,6 +160,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod.rsi
   - type: CMArmor
     armor: 25
+    bio: 25
     explosionArmor: 35
   - type: WieldSlowdownCompensation
     walk: 0.12
@@ -166,6 +182,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden.rsi
+  - type: CMArmor
+    bio: 15
 
 - type: entity
   parent: CMArmorM2MP
@@ -190,15 +208,16 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/g4.rsi
   - type: CMArmor
     armor: 25
+    bio: 15
     explosionArmor: 40
   - type: Corrodible
     isCorrodible: false
 
 - type: entity
   parent: CMArmorM3Medium
-  id: CMArmorM3T
+  id: RMCArmorM3TDemo
   name: M3-T light armor
-  description: A custom set of M3 armor designed for users of long-ranged explosive weaponry.
+  description: A custom set of M3 armor designed for users of long-ranged explosive weaponry. Provides better protection against explosives than standard M3 armor, while remaining nimble.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/t.rsi
@@ -206,6 +225,9 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/t.rsi
   - type: CMArmor
     explosionArmor: 30
+  - type: ClothingSpeedModifier # light armor speed
+    walkModifier: .814
+    sprintModifier: .814
   - type: Corrodible
     isCorrodible: false
 
@@ -221,6 +243,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light.rsi
   - type: CMArmor
     armor: 15
+    bio: 15
     explosionArmor: 20
   - type: ClothingSpeedModifier
     walkModifier: .814
@@ -268,6 +291,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl.rsi
   - type: CMArmor
     armor: 15
+    bio: 15
     explosionArmor: 10
   - type: Storage
     grid:
@@ -304,6 +328,8 @@
     maxItemSize: Small
     grid:
     - 0,0,7,1 # 4 slots
+  - type: CMArmor
+    bio: 25
 
 # m35
 - type: entity
@@ -380,7 +406,6 @@
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
-  - type: RMCMagneticArmor
   - type: ClothingBlockBackpack
   - type: SmartGunArmor
 
@@ -397,7 +422,11 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp.rsi
   - type: CMArmor
     armor: 25
+    bio: 15
     explosionArmor: 20
+  - type: ClothingSpeedModifier
+    walkModifier: 0.814
+    sprintModifier: 0.814
   - type: Storage
     maxItemSize: Small
     grid:

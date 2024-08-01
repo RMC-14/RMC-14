@@ -4,7 +4,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Entrenching;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
-[Access(typeof(EntrenchingToolSystem))]
+[Access(typeof(BarricadeSystem))]
 public sealed partial class EmptySandbagComponent : Component
 {
     [DataField, AutoNetworkedField]

@@ -71,6 +71,15 @@
         reagents:
         - ReagentId: Fiber
           Quantity: 1
+  - type: FixedIdentity
+    name: paper
+    whitelist:
+      components:
+      - Xeno
+  - type: BlockExamine
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   name: paper scrap

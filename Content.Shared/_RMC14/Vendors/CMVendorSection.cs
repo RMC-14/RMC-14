@@ -18,6 +18,10 @@ public sealed partial class CMVendorSection
 
     [DataField(required: true)]
     public List<CMVendorEntry> Entries = new();
+
+    // Only used by Spec Vendors to mark the kit section for RMCVendorSpecialistComponent logic.
+    [DataField]
+    public int? SharedSpecLimit;
 }
 
 [DataDefinition]

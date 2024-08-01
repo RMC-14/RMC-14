@@ -10,8 +10,37 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
 {
     private void InitializeSpeed()
     {
+        SubscribeLocalEvent<AttachableSpeedModsComponent, AttachableGetExamineDataEvent>(OnSpeedModsGetExamineData);
         SubscribeLocalEvent<AttachableSpeedModsComponent, AttachableAlteredEvent>(OnAttachableAltered);
-        SubscribeLocalEvent<AttachableSpeedModsComponent, GetWieldableSpeedModifiersEvent>(OnGetSpeedModifiers);
+        SubscribeLocalEvent<AttachableSpeedModsComponent, AttachableRelayedEvent<GetWieldableSpeedModifiersEvent>>(OnGetSpeedModifiers);
+    }
+
+    private void OnSpeedModsGetExamineData(Entity<AttachableSpeedModsComponent> attachable, ref AttachableGetExamineDataEvent args)
+    {
+        foreach (var modSet in attachable.Comp.Modifiers)
+        {
+            var key = GetExamineKey(modSet.Conditions);
+
+            if (!args.Data.ContainsKey(key))
+                args.Data[key] = new (modSet.Conditions, GetEffectStrings(modSet));
+            else
+                args.Data[key].effectStrings.AddRange(GetEffectStrings(modSet));
+        }
+    }
+
+    private List<string> GetEffectStrings(AttachableSpeedModifierSet modSet)
+    {
+        var result = new List<string>();
+
+        if (modSet.Walk != 0)
+            result.Add(Loc.GetString("rmc-attachable-examine-speed-walk",
+                ("colour", modifierExamineColour), ("sign", modSet.Walk > 0 ? '+' : ""), ("speed", modSet.Walk)));
+
+        if (modSet.Sprint != 0)
+            result.Add(Loc.GetString("rmc-attachable-examine-speed-sprint",
+                ("colour", modifierExamineColour), ("sign", modSet.Sprint > 0 ? '+' : ""), ("speed", modSet.Sprint)));
+
+        return result;
     }
 
     private void OnAttachableAltered(Entity<AttachableSpeedModsComponent> attachable, ref AttachableAlteredEvent args)
@@ -30,11 +59,11 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
         }
     }
 
-    private void OnGetSpeedModifiers(Entity<AttachableSpeedModsComponent> attachable, ref GetWieldableSpeedModifiersEvent args)
+    private void OnGetSpeedModifiers(Entity<AttachableSpeedModsComponent> attachable, ref AttachableRelayedEvent<GetWieldableSpeedModifiersEvent> args)
     {
         foreach(var modSet in attachable.Comp.Modifiers)
         {
-            ApplyModifierSet(attachable, modSet, ref args);
+            ApplyModifierSet(attachable, modSet, ref args.Args);
         }
     }
 

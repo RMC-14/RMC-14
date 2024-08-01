@@ -1,4 +1,4 @@
-﻿# TODO RMC14 different light/burn chances per matchbook
+# TODO RMC14 different light/burn chances per matchbook
 - type: entity
   parent: Matchbox
   id: CMMatchBook
@@ -56,6 +56,10 @@
     - mpacket6
   - type: MREItem
   - type: FixedItemSizeStorage
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMMatchBook

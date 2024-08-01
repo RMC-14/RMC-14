@@ -83,6 +83,8 @@
             True: { visible: True }
             False: { visible: False }
     - type: AnimationPlayer
+    - type: DamageMultiplierFlags
+      flags: Breaching
 
 - type: entity
   id: RMCGrilleBroken

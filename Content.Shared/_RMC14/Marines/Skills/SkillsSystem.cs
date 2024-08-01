@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Immutable;
+using System.Linq;
+using System.Runtime.InteropServices;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
@@ -7,10 +9,12 @@ using Content.Shared.Flash;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
+using Content.Shared.Prototypes;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Marines.Skills;
 
@@ -19,10 +23,21 @@ public sealed class SkillsSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+
+    public ImmutableArray<EntProtoId<SkillDefinitionComponent>> Skills { get; private set; }
+
+    public ImmutableDictionary<string, EntProtoId<SkillDefinitionComponent>> SkillNames { get; private set; } =
+        ImmutableDictionary<string, EntProtoId<SkillDefinitionComponent>>.Empty;
+
+    private EntityQuery<SkillsComponent> _skillsQuery;
 
     public override void Initialize()
     {
+        _skillsQuery = GetEntityQuery<SkillsComponent>();
+
+        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+
         SubscribeLocalEvent<MedicallyUnskilledDoAfterComponent, AttemptHyposprayUseEvent>(OnAttemptHyposprayUse);
         SubscribeLocalEvent<RequiresSkillComponent, BeforeRangedInteractEvent>(OnRequiresSkillBeforeRangedInteract);
         SubscribeLocalEvent<MeleeRequiresSkillComponent, AttemptMeleeEvent>(OnRequiresSkillAttemptMelee);
@@ -30,12 +45,19 @@ public sealed class SkillsSystem : EntitySystem
         SubscribeLocalEvent<MeleeRequiresSkillComponent, UseInHandEvent>(OnRequiresSkillUseInHand, before: [typeof(SharedFlashSystem)]);
         SubscribeLocalEvent<ReagentExaminationRequiresSkillComponent, ExaminedEvent>(OnExamineReagentContainer);
         SubscribeLocalEvent<ExamineRequiresSkillComponent, ExaminedEvent>(OnExamineRequiresSkill);
+
+        ReloadPrototypes();
+    }
+
+    private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
+    {
+        if (ev.WasModified<EntityPrototype>())
+            ReloadPrototypes();
     }
 
     private void OnAttemptHyposprayUse(Entity<MedicallyUnskilledDoAfterComponent> ent, ref AttemptHyposprayUseEvent args)
     {
-        if (!TryComp(args.User, out SkillsComponent? skills) ||
-            skills.Skills.Medical < ent.Comp.Min)
+        if (!HasSkill(args.User, ent.Comp.Skill, ent.Comp.Min))
         {
             args.MaxDoAfter(ent.Comp.DoAfter);
         }
@@ -46,7 +68,7 @@ public sealed class SkillsSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!HasSkills(args.User, in ent.Comp.Skills))
+        if (!HasAllSkills(args.User, ent.Comp.Skills))
         {
             var msg = Loc.GetString("rmc-skills-cant-use", ("item", args.Used));
             _popup.PopupClient(msg, args.User, PopupType.SmallCaution);
@@ -56,7 +78,7 @@ public sealed class SkillsSystem : EntitySystem
 
     private void OnRequiresSkillAttemptMelee(Entity<MeleeRequiresSkillComponent> ent, ref AttemptMeleeEvent args)
     {
-        if (!HasSkills(args.User, in ent.Comp.Skills))
+        if (!HasAllSkills(args.User, ent.Comp.Skills))
         {
             var msg = Loc.GetString("rmc-skills-cant-use", ("item", ent));
             _popup.PopupClient(msg, args.User, args.User, PopupType.SmallCaution);
@@ -66,7 +88,7 @@ public sealed class SkillsSystem : EntitySystem
 
     private void OnRequiresSkillThrowAttempt(Entity<MeleeRequiresSkillComponent> ent, ref ThrowItemAttemptEvent args)
     {
-        if (!HasSkills(args.User, in ent.Comp.Skills))
+        if (!HasAllSkills(args.User, ent.Comp.Skills))
         {
             if (_net.IsServer)
             {
@@ -80,7 +102,7 @@ public sealed class SkillsSystem : EntitySystem
 
     private void OnRequiresSkillUseInHand(Entity<MeleeRequiresSkillComponent> ent, ref UseInHandEvent args)
     {
-        if (!HasSkills(args.User, in ent.Comp.Skills))
+        if (!HasAllSkills(args.User, ent.Comp.Skills))
         {
             var msg = Loc.GetString("rmc-skills-cant-use", ("item", ent));
             _popup.PopupClient(msg, args.User, args.User, PopupType.SmallCaution);
@@ -90,7 +112,7 @@ public sealed class SkillsSystem : EntitySystem
 
     private void OnExamineReagentContainer(Entity<ReagentExaminationRequiresSkillComponent> ent, ref ExaminedEvent args)
     {
-        if (!HasSkills(args.Examiner, in ent.Comp.Skills))
+        if (!HasAllSkills(args.Examiner, ent.Comp.Skills))
         {
             if (ent.Comp.UnskilledExamine != null)
             {
@@ -133,7 +155,7 @@ public sealed class SkillsSystem : EntitySystem
         for (var i = 0; i < foundReagents.Count; i++)
         {
             var reagent = foundReagents[i];
-            var reagentLocalizedName = _prototypeManager.Index<ReagentPrototype>(reagent.Reagent.Prototype).LocalizedName;
+            var reagentLocalizedName = _prototypes.Index<ReagentPrototype>(reagent.Reagent.Prototype).LocalizedName;
             var reagentQuantity = reagent.Quantity;
             fullMessage += $"{reagentLocalizedName}({reagentQuantity}u)";
             if (i > reagentCount)
@@ -148,7 +170,7 @@ public sealed class SkillsSystem : EntitySystem
 
     private void OnExamineRequiresSkill(Entity<ExamineRequiresSkillComponent> ent, ref ExaminedEvent args)
     {
-        if (!HasSkills(args.Examiner, in ent.Comp.Skills))
+        if (!HasAllSkills(args.Examiner, ent.Comp.Skills))
         {
             if (ent.Comp.UnskilledExamine != null)
             {
@@ -167,6 +189,31 @@ public sealed class SkillsSystem : EntitySystem
         }
     }
 
+    private void ReloadPrototypes()
+    {
+        var skillsArray = ImmutableArray.CreateBuilder<EntProtoId<SkillDefinitionComponent>>();
+        var skillsDict = ImmutableDictionary.CreateBuilder<string, EntProtoId<SkillDefinitionComponent>>();
+        foreach (var prototype in _prototypes.EnumeratePrototypes<EntityPrototype>())
+        {
+            if (!prototype.HasComponent<SkillDefinitionComponent>())
+                continue;
+
+            var id = prototype.ID;
+            skillsArray.Add(id);
+            if (!skillsDict.TryAdd(prototype.Name, id))
+            {
+                var old = skillsDict.GetValueOrDefault(prototype.Name).Id;
+                var msg = $"Duplicate skill name found: {prototype.Name}, old: {old}, new: {id}";
+
+                Log.Error(msg);
+                DebugTools.Assert(msg);
+            }
+        }
+
+        Skills = skillsArray.ToImmutable();
+        SkillNames = skillsDict.ToImmutable();
+    }
+
     public TimeSpan GetDelay(EntityUid user, EntityUid tool)
     {
         if (!TryComp(tool, out MedicallyUnskilledDoAfterComponent? doAfter) ||
@@ -175,52 +222,224 @@ public sealed class SkillsSystem : EntitySystem
             return default;
         }
 
-        if (!TryComp(user, out SkillsComponent? skills) ||
-            skills.Skills.Medical < doAfter.Min)
-        {
+        if (!HasSkill(user, doAfter.Skill, doAfter.Min))
             return doAfter.DoAfter;
-        }
 
         return default;
     }
 
-    public bool HasSkills(Entity<SkillsComponent?> ent, in Skills required)
+    public int GetSkill(Entity<SkillsComponent?> ent, EntProtoId<SkillDefinitionComponent> skill)
+    {
+        if (skill == default)
+        {
+            var msg = $"Empty skill {skill} passed to {nameof(GetSkill)}!";
+            Log.Error(msg);
+            DebugTools.Assert(msg);
+        }
+
+        if (!_skillsQuery.Resolve(ent, ref ent.Comp, false))
+            return 0;
+
+        return ent.Comp.Skills.GetValueOrDefault(skill);
+    }
+
+    public bool HasAllSkills(Entity<SkillsComponent?> ent, Dictionary<EntProtoId<SkillDefinitionComponent>, int> required)
     {
         if (HasComp<BypassSkillChecksComponent>(ent))
             return true;
 
-        // TODO RMC14 turn these into prototypes
-        Resolve(ent, ref ent.Comp, false);
-        var skills = ent.Comp?.Skills ?? default;
-        return skills.Antagonist >= required.Antagonist &&
-               skills.Construction >= required.Construction &&
-               skills.Cqc >= required.Cqc &&
-               skills.Domestics >= required.Domestics &&
-               skills.Endurance >= required.Endurance &&
-               skills.Engineer >= required.Engineer &&
-               skills.Execution >= required.Execution &&
-               skills.Firearms >= required.Firearms &&
-               skills.Fireman >= required.Fireman &&
-               skills.Intel >= required.Intel &&
-               skills.Jtac >= required.Jtac &&
-               skills.Leadership >= required.Leadership &&
-               skills.Medical >= required.Medical &&
-               skills.MeleeWeapons >= required.MeleeWeapons &&
-               skills.Navigations >= required.Navigations &&
-               skills.Overwatch >= required.Overwatch &&
-               skills.Pilot >= required.Pilot &&
-               skills.Police >= required.Police &&
-               skills.PowerLoader >= required.PowerLoader &&
-               skills.Research >= required.Research &&
-               skills.SmartGun >= required.SmartGun &&
-               skills.SpecialistWeapons >= required.SpecialistWeapons &&
-               skills.Surgery >= required.Surgery &&
-               skills.Vehicles >= required.Vehicles;
+        _skillsQuery.Resolve(ent, ref ent.Comp, false);
+        foreach (var (requiredSkill, requiredLevel) in required)
+        {
+            if (requiredLevel <= 0)
+                continue;
+
+            if (ent.Comp == null)
+                return false;
+
+            if (!ent.Comp.Skills.TryGetValue(requiredSkill, out var level) ||
+                level < requiredLevel)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
-    public void SetSkills(Entity<SkillsComponent> ent, in Skills skills)
+    public bool HasAllSkills(Entity<SkillsComponent?> ent, List<Skill> allRequired)
     {
-        ent.Comp.Skills = skills;
+        if (HasComp<BypassSkillChecksComponent>(ent))
+            return true;
+
+        _skillsQuery.Resolve(ent, ref ent.Comp, false);
+
+        var span = CollectionsMarshal.AsSpan(allRequired);
+        foreach (ref var required in span)
+        {
+            if (required.Level <= 0)
+                continue;
+
+            if (ent.Comp == null)
+                return false;
+
+            if (!ent.Comp.Skills.TryGetValue(required.Type, out var level) ||
+                level < required.Level)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public bool HasAnySkills(Entity<SkillsComponent?> ent, Dictionary<EntProtoId<SkillDefinitionComponent>, int> anyRequired)
+    {
+        if (HasComp<BypassSkillChecksComponent>(ent))
+            return true;
+
+        _skillsQuery.Resolve(ent, ref ent.Comp, false);
+        foreach (var (requiredSkill, requiredLevel) in anyRequired)
+        {
+            if (requiredLevel <= 0)
+                continue;
+
+            if (ent.Comp != null &&
+                ent.Comp.Skills.TryGetValue(requiredSkill, out var level) &&
+                level >= requiredLevel)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public bool HasAnySkills(Entity<SkillsComponent?> ent, List<Skill> anyRequired)
+    {
+        if (HasComp<BypassSkillChecksComponent>(ent))
+            return true;
+
+        _skillsQuery.Resolve(ent, ref ent.Comp, false);
+
+        var span = CollectionsMarshal.AsSpan(anyRequired);
+        foreach (ref var required in span)
+        {
+            if (required.Level <= 0)
+                continue;
+
+            if (ent.Comp != null &&
+                ent.Comp.Skills.TryGetValue(required.Type, out var level) &&
+                level >= required.Level)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public bool HasSkill(Entity<SkillsComponent?> ent, EntProtoId<SkillDefinitionComponent> skill, int required)
+    {
+        if (HasComp<BypassSkillChecksComponent>(ent))
+            return true;
+
+        if (required <= 0)
+            return true;
+
+        return _skillsQuery.Resolve(ent, ref ent.Comp, false) &&
+               ent.Comp.Skills.TryGetValue(skill, out var level) &&
+               level >= required;
+    }
+
+    public void IncrementSkill(Entity<SkillsComponent?> ent, EntProtoId<SkillDefinitionComponent> skill, int by = 1)
+    {
+        ent.Comp ??= EnsureComp<SkillsComponent>(ent);
+        SetSkill(ent, skill, ent.Comp.Skills.GetValueOrDefault(skill) + by);
+    }
+
+    public void IncrementSkills(Entity<SkillsComponent?> ent, List<EntProtoId<SkillDefinitionComponent>> skills, int by = 1)
+    {
+        ent.Comp ??= EnsureComp<SkillsComponent>(ent);
+
+        var span = CollectionsMarshal.AsSpan(skills);
+        foreach (ref var skill in span)
+        {
+            SetSkill(ent, skill, ent.Comp.Skills.GetValueOrDefault(skill) + by);
+        }
+    }
+
+    public void IncrementSkills(Entity<SkillsComponent?> ent, HashSet<EntProtoId<SkillDefinitionComponent>> skills, int by = 1)
+    {
+        ent.Comp ??= EnsureComp<SkillsComponent>(ent);
+
+        foreach (var skill in skills)
+        {
+            SetSkill(ent, skill, ent.Comp.Skills.GetValueOrDefault(skill) + by);
+        }
+    }
+
+    public void RemoveAllSkills(Entity<SkillsComponent?> ent)
+    {
+        if (!_skillsQuery.Resolve(ent, ref ent.Comp, false))
+            return;
+
+        ent.Comp.Skills.Clear();
+        Dirty(ent);
+    }
+
+    public void SetSkill(Entity<SkillsComponent?> ent, EntProtoId<SkillDefinitionComponent> skill, int to)
+    {
+        if (skill == default)
+        {
+            var msg = $"Empty skill {skill} passed to {nameof(SetSkill)}!";
+            Log.Error(msg);
+            DebugTools.Assert(msg);
+            return;
+        }
+
+        DebugTools.Assert(_prototypes.TryIndex(skill, out var entProto) &&
+                     entProto.HasComponent<SkillDefinitionComponent>());
+
+        ent.Comp ??= EnsureComp<SkillsComponent>(ent);
+        ent.Comp.Skills[skill] = to;
+        Dirty(ent);
+    }
+
+    public void SetSkills(Entity<SkillsComponent?> ent, Dictionary<EntProtoId<SkillDefinitionComponent>, int> to)
+    {
+        ent.Comp ??= EnsureComp<SkillsComponent>(ent);
+
+        foreach (var (skill, level) in to)
+        {
+            ent.Comp.Skills[skill] = level;
+        }
+
+        Dirty(ent);
+    }
+
+    public void SetSkills(Entity<SkillsComponent?> ent, List<Skill> to)
+    {
+        ent.Comp ??= EnsureComp<SkillsComponent>(ent);
+
+        var span = CollectionsMarshal.AsSpan(to);
+        foreach (ref var skill in span)
+        {
+            ent.Comp.Skills[skill.Type] = skill.Level;
+        }
+
+        Dirty(ent);
+    }
+
+    public void SetSkills(Entity<SkillsComponent?> ent, HashSet<Skill> to)
+    {
+        ent.Comp ??= EnsureComp<SkillsComponent>(ent);
+
+        foreach (var skill in to)
+        {
+            ent.Comp.Skills[skill.Type] = skill.Level;
+        }
+
         Dirty(ent);
     }
 }

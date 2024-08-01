@@ -1,6 +1,6 @@
 ﻿- type: entity
   abstract: true
-  parent: RMCAttachmentBase
+  parent: RMCAttachableBase
   id: RMCRailAttachmentBase
   components:
   - type: Sprite
@@ -10,7 +10,7 @@
     - RMCAttachmentRail
 
 - type: entity
-  parent: RMCRailAttachmentBase
+  parent: [ RMCRailAttachmentBase, RMCAttachableToggleableBase ]
   id: RMCAttachmentRailFlashlight
   name: rail flashlight
   description: A flashlight, for rails, on guns. Can be toggled on and off. A better light source than standard M3 pattern armor lights.
@@ -66,13 +66,14 @@
   - type: Appearance
   - type: AttachableToggleable
     attachedOnly: true
+    useDelay: 1.0
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: flashlight
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: flashlight-on
-    actionName: Activate Rail Flashlight
+    actionName: Toggle Rail Flashlight
     actionDesc: Can be toggled on and off. A better light source than standard M3 pattern armor lights.
   - type: AttachableVisuals
     showActive: true
@@ -95,7 +96,7 @@
     tags:
     - RMCAttachmentRail
     - RMCAttachmentMagneticHarness
-  - type: AttachableAutoPickup
+  - type: AttachableMagnetic
   - type: AttachableVisuals
   - type: AttachableWeaponRangedMods
     modifiers:
@@ -143,7 +144,7 @@
         wieldedOnly: true
       accuracyAddMult: 0.15
       scatterFlat: -2
-      burstScatterFlat: -1
+      burstScatterAddMult: -1
     - conditions:
         unwieldedOnly: true
       accuracyAddMult: 0.05
@@ -151,20 +152,24 @@
 
 - type: entity
   abstract: true
-  parent: RMCRailAttachmentBase
+  parent: [ RMCRailAttachmentBase, RMCAttachableToggleableBase ]
   id: RMCAttachmentScopeBase
   components:
   - type: AttachableToggleable
     needHand: true
+    heldOnlyActivate: true
+    userOnly: true
     doInterrupt: true
     attachedOnly: true
     breakOnMove: true
     breakOnRotate: true
     wieldedOnly: true
+    useDelay: 0.5
+    showTogglePopup: false
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: sniperscope
-    actionName: Toggle Scope
+    actionName: Look through Scope
     actionDesc: Scope in. If you're seeing this, someone forgot to set the description properly.
   - type: AttachableToggleableSimpleActivate
   - type: Scope
@@ -187,7 +192,7 @@
     - RMCAttachmentS84xTelescopicScope
   - type: AttachableVisuals
   - type: AttachableToggleable
-    actionName: Toggle S8 4x Telescopic Scope
+    actionName: Look through the S8 4x Telescopic Scope
     actionDesc: An AEGIS S8 telescopic eye piece. Fixed at 4x zoom.
   - type: AttachableToggleableSimpleActivate
   - type: Scope
@@ -236,7 +241,7 @@
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: slavicscope
-    actionName: Toggle 4x Telescopic Scope
+    actionName: Look through the 4x Telescopic Scope
     actionDesc: A slavic scope. Fixed at 4x zoom.
 
 - type: entity
@@ -257,7 +262,7 @@
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: miniscope
-    actionName: Toggle S4 2x Telescopic Mini-Scope
+    actionName: Look through the S4 2x Telescopic Mini-Scope
     actionDesc: An AEGIS S4 telescoping eye piece. Fixed at a modest 2x zoom.
   - type: AttachableToggleableSimpleActivate
   - type: Scope
@@ -303,7 +308,7 @@
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: miniscope-nsg23
-    actionName: Toggle WeYa S4 2x Advanced Telescopic Mini-Scope
+    actionName: Look through WeYa S4 2x Advanced Telescopic Mini-Scope
     actionDesc: An AEGIS S4 telescoping eye piece, custom-tuned by WeYa scientists to be as ergonomic as possible.
   - type: Scope
     offset: 14
@@ -328,7 +333,7 @@
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: huntingscope
-    actionName: Toggle 2x Hunting Mini-Scope
+    actionName: Look through 2x Hunting Mini-Scope
     actionDesc: This civilian-grade scope is a common sight on hunting rifles due to its cheap price and great optics. Fixed at a modest 2x zoom.
 
 - type: entity
@@ -348,7 +353,7 @@
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: huntingscope
-    actionName: Toggle B8 Smart-Scope
+    actionName: Look through B8 Smart-Scope
     actionDesc: Lets you see further and shoot through your fellow marines without harming them.
   - type: AttachableIFF
   - type: AttachableWeaponRangedMods
@@ -375,7 +380,7 @@
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: m96s-scope
-    actionName: Toggle M96S Integrated Scope
+    actionName: Look through M96S Integrated Scope
     actionDesc: Lets you see further.
   - type: Scope
     zoom: 1.25 # TODO RMC14 2x and 4x zoom

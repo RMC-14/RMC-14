@@ -6,7 +6,13 @@ namespace Content.Shared._RMC14.Xenonids.Evolution;
 [Serializable, NetSerializable]
 public enum XenoEvolutionUIKey : byte
 {
-    Key
+    Key,
+}
+
+[Serializable, NetSerializable]
+public sealed class XenoEvolveBuiState(bool lackingOvipositor) : BoundUserInterfaceState
+{
+    public readonly bool LackingOvipositor = lackingOvipositor;
 }
 
 [Serializable, NetSerializable]

@@ -34,7 +34,7 @@ namespace Content.Shared._RMC14.Xenonids;
 public sealed class XenoSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly CMDamageableSystem _cmDamageable = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -269,7 +269,7 @@ public sealed class XenoSystem : EntitySystem
             return;
         }
 
-        var heal = _cmDamageable.DistributeTypes((xeno, xeno.Comp), -amount);
+        var heal = _rmcDamageable.DistributeTypes((xeno, xeno.Comp), -amount);
 
         if (heal.GetTotal() > FixedPoint2.Zero)
         {
@@ -297,19 +297,19 @@ public sealed class XenoSystem : EntitySystem
         return xenoOne.Comp.Hive == xenoTwo.Comp.Hive;
     }
 
-    public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target)
+    public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool hitNonMarines = false)
     {
         // TODO RMC14 xenos of the same hive
         if (xeno == target)
             return false;
 
-        if (_mobState.IsDead(target))
+        if (HasComp<MobStateComponent>(target) && _mobState.IsDead(target))
             return false;
 
         if (_xenoNestedQuery.HasComp(target))
             return false;
 
-        return HasComp<MarineComponent>(target);
+        return HasComp<MarineComponent>(target) || hitNonMarines;
     }
 
     public override void Update(float frameTime)

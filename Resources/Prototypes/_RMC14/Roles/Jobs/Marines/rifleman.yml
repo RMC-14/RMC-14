@@ -14,9 +14,11 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      firearms: 1
+      skills:
+        RMCSkillFirearms: 1
     - type: CMVendorUser
       points: 45
+    - type: SquadArmorWearer
   hasIcon: false
 
 - type: startingGear

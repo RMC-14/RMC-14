@@ -338,46 +338,6 @@
 # Other
 - type: construction
   parent: RMC
-  id: CMCatwalk
-  name: catwalk
-  graph: CMCatwalk
-  startNode: start
-  targetNode: Catwalk
-  category: construction-category-cm-structures
-  description: Just like a lattice. Except it looks better.
-  placementMode: SnapgridCenter
-  icon:
-    sprite: _RMC14/Structures/catwalk.rsi
-    state: catwalk
-  conditions:
-  - !type:TileNotBlocked
-    failIfSpace: false
-  - !type:TileType
-    targets:
-    - Lattice
-    - Plating
-
-- type: construction
-  parent: RMC
-  id: CMFence
-  name: fence
-  graph: CMFence
-  startNode: start
-  targetNode: fenceMetal
-  category: construction-category-cm-structures
-  description: A large metal mesh strewn between two poles.
-  icon:
-    sprite: _RMC14/Structures/fences.rsi
-    state: fence0
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canRotate: false
-  canBuildInImpassable: false
-  conditions:
-    - !type:TileNotBlocked
-
-- type: construction
-  parent: RMC
   id: RMCGrille
   name: grille
   graph: RMCGrille

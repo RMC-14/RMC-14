@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMBaseStructureCorrodible
   id: CMHyperSleepChamber
   name: hypersleep chamber
@@ -49,6 +49,10 @@
         enum.HyperSleepChamberLayers.Base:
           True: { state: closed }
           False: { state: open }
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMHyperSleepChamber
