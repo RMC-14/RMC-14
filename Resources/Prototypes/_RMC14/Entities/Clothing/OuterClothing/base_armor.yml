@@ -19,7 +19,7 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard.rsi
+    state: icon # default state used by most inheritors
   - type: Clothing
     equipDelay: 2
     unequipDelay: 2
