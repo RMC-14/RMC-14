@@ -204,4 +204,4 @@
           - RMCAttachmentMagneticHarness
   - type: AttachableHolderVisuals
     offsets: 
-    rmc-aslot-rail: -0.12, 0.1
+     rmc-aslot-rail: -0.12, 0.1
