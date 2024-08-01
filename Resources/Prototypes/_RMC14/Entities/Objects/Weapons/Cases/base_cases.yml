@@ -1,6 +1,6 @@
 - type: entity
   parent: BaseStorageItem
-  id: RMCBaseGunCase
+  id: RMCGunCaseBase
   abstract: true
   name: base gun case
   description: A gun case.
@@ -34,7 +34,7 @@
       - Xeno
 
 - type: entity
-  parent: RMCBaseGunCase
+  parent: RMCGunCaseBase
   id: RMCBaseEquipmentCase
   abstract: true
   name: base equipment case

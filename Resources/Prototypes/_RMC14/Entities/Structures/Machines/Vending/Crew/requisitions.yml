@@ -37,9 +37,9 @@
       #  amount: 20
     - name: Restricted Sidearms
       entries:
-      - id: RMCCasePistolMK80
+      - id: RMCGunCasePistolMK80
         amount: 4
-      - id: RMCCasePistolSmart
+      - id: RMCGunCasePistolSmart
         amount: 3
       #- id: MOU-53 Shotgun
       #  amount: 2
