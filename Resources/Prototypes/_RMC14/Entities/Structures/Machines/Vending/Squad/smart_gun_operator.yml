@@ -138,7 +138,7 @@
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchFlareFilled
-        name: Flare pouch (Filled)
+        name: Flare pouch (Full)
 #      - id: RMCPouchElectronics # TODO RMC14
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)

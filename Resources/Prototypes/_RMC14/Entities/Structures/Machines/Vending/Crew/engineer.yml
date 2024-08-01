@@ -63,7 +63,7 @@
       - id: RMCPouchToolsFill
         name: Tools pouch (Filled)
       - id: RMCPouchFlareFilled
-        name: Flare pouch (Filled)
+        name: Flare pouch (Full)
     - name: Mask
       choices: { CMMask: 1 }
       entries:

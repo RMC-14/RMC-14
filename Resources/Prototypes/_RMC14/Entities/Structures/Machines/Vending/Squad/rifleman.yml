@@ -66,7 +66,7 @@
         name: first-aid pouch (pills)
         recommended: true
       - id: RMCPouchFlareFilled
-        name: Flare pouch (Filled)
+        name: Flare pouch (Full)
         recommended: true
       #    CMSmallDocumentPouch #TODO: Make this
       - id: RMCPouchMagazine
@@ -85,6 +85,7 @@
       - id: CMEntrenchingTool
         points: 5
       - id: CMSandbagEmpty50
+        name: sandbags x50
         points: 20
 #      - id: ES-11 Mobile Fuel Canister
 #        points: 5
@@ -205,14 +206,10 @@
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer
-        amount: 5
         points: 5
       - id: CMEncryptionKeyIntel
-        amount: 5
         points: 5
       - id: CMEncryptionKeyJTAC
-        amount: 5
         points: 5
       - id: CMEncryptionKeyRequisition
-        amount: 5
         points: 5

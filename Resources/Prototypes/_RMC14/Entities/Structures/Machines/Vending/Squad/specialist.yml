@@ -111,6 +111,7 @@
       entries:
       - id: CMBackpackMarine
       - id: CMSatchelMarine
+        recommended: true
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -126,14 +127,19 @@
       entries:
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
+        recommended: true
       - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        recommended: true
       - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
+        recommended: true
       - id: RMCPouchFlareFilled
-        name: Flare pouch (Filled)
+        name: Flare pouch (Full)
       - id: RMCPouchMagazine
+        recommended: true
       - id: RMCPouchShotgun
+#        recommended: true
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchGeneralMedium
       - id: RMCPouchPistol
@@ -142,6 +148,7 @@
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBrown
+        recommended: true
       - id: CMWebbingBlack
       #- id: CMShoulderHolster
       - id: CMWebbing
@@ -151,6 +158,20 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+    - name: Restricted Firearms
+      entries:
+      - id: RMCMK80Case
+        points: 15
+      - id: RMCSmartPistolCase
+        points: 15
+    - name: Sidearm Ammunition
+      entries:
+      - id: RMCSpeedLoader44Marksman
+        points: 10
+      - id: CMMagazinePistolMK80
+        points: 5
+      - id: RMCMagazinePistolSU6
+        points: 10
     - name: Clothing Items
       entries:
     #- id: CMScabbardMacheteFull
@@ -175,25 +196,25 @@
     #- id: CMMotionDetector
       - id: RMCWhistle
         points: 5
+    - name: Binoculars
+      entries:
+      - id: RMCBinoculars
+        points: 5
     - name: Helmet Optics
       entries: [ ]
     #- id: CMMedicalHelmetOptic
     #- id: CMWeldingVisor
-    - name: Pàmphlets
+    - name: Pamphlets
       entries: [ ]
     #- id: CMPamphletJTAC
     #- id: CMPamphletEngineering
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer
-        amount: 5
         points: 5
       - id: CMEncryptionKeyIntel
-        amount: 5
         points: 5
       - id: CMEncryptionKeyJTAC
-        amount: 5
         points: 5
       - id: CMEncryptionKeyRequisition
-        amount: 5
         points: 5
