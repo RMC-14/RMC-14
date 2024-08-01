@@ -196,3 +196,4 @@
             sprite: _RMC14/Effects/xeno_spray_acid.rsi
             state: human_acid_enhanced
             visible: true
+  - type: ActiveInputMover
