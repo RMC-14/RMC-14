@@ -14366,27 +14366,6 @@ entities:
     - type: Transform
       pos: 204.5,150.5
       parent: 1
-- proto: CMPouchFirstAidSplintsGauzeOintment
-  entities:
-  - uid: 8070
-    components:
-    - type: Transform
-      pos: 109.5,98.5
-      parent: 1
-- proto: CMPouchFlare
-  entities:
-  - uid: 8072
-    components:
-    - type: Transform
-      pos: 108.5,95.5
-      parent: 1
-- proto: CMPouchPistol
-  entities:
-  - uid: 8071
-    components:
-    - type: Transform
-      pos: 107.5,95.5
-      parent: 1
 - proto: CMRack
   entities:
   - uid: 895
@@ -79154,6 +79133,27 @@ entities:
     - type: Transform
       pos: 160.5,88.5
       parent: 1
+- proto: RMCPouchFirstAidSplintsGauzeOintment
+  entities:
+  - uid: 8070
+    components:
+    - type: Transform
+      pos: 109.5,98.5
+      parent: 1
+- proto: RMCPouchFlare
+  entities:
+  - uid: 8072
+    components:
+    - type: Transform
+      pos: 108.5,95.5
+      parent: 1
+- proto: RMCPouchPistol
+  entities:
+  - uid: 8071
+    components:
+    - type: Transform
+      pos: 107.5,95.5
+      parent: 1
 - proto: RMCShutterAlmayer
   entities:
   - uid: 2135
@@ -81227,6 +81227,94 @@ entities:
     - type: Transform
       pos: 192.5,152.5
       parent: 1
+- proto: RMCToolboxElectrical
+  entities:
+  - uid: 6240
+    components:
+    - type: Transform
+      pos: 101.5,50.5
+      parent: 1
+  - uid: 8604
+    components:
+    - type: Transform
+      pos: 125.5,17.5
+      parent: 1
+  - uid: 13903
+    components:
+    - type: Transform
+      pos: 184.5,129.5
+      parent: 1
+  - uid: 14109
+    components:
+    - type: Transform
+      pos: 164.5,135.5
+      parent: 1
+- proto: RMCToolboxElectricalFilled
+  entities:
+  - uid: 863
+    components:
+    - type: Transform
+      pos: 43.47625,18.549507
+      parent: 1
+- proto: RMCToolboxEmergency
+  entities:
+  - uid: 1669
+    components:
+    - type: Transform
+      pos: 50.5,56.5
+      parent: 1
+  - uid: 5560
+    components:
+    - type: Transform
+      pos: 56.5,147.5
+      parent: 1
+  - uid: 8605
+    components:
+    - type: Transform
+      pos: 126.5,20.5
+      parent: 1
+  - uid: 9566
+    components:
+    - type: Transform
+      pos: 154.5,35.5
+      parent: 1
+  - uid: 10896
+    components:
+    - type: Transform
+      pos: 184.5,72.5
+      parent: 1
+  - uid: 14598
+    components:
+    - type: Transform
+      pos: 197.5,136.5
+      parent: 1
+- proto: RMCToolboxMechanical
+  entities:
+  - uid: 2259
+    components:
+    - type: Transform
+      pos: 72.5,46.5
+      parent: 1
+  - uid: 4782
+    components:
+    - type: Transform
+      pos: 3.5,123.5
+      parent: 1
+  - uid: 7186
+    components:
+    - type: Transform
+      pos: 106.5,141.5
+      parent: 1
+  - uid: 14110
+    components:
+    - type: Transform
+      pos: 166.5,135.5
+      parent: 1
+  - uid: 14711
+    components:
+    - type: Transform
+      pos: 208.5,147.5
+      parent: 1
 - proto: RMCTurretGaussSpaceborne
   entities:
   - uid: 2
@@ -81304,8 +81392,207 @@ entities:
   - uid: 14757
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 39.5,116.5
+      pos: 30.5,112.5
+      parent: 1
+  - uid: 14781
+    components:
+    - type: Transform
+      pos: 23.5,18.5
+      parent: 1
+  - uid: 14782
+    components:
+    - type: Transform
+      pos: 23.5,43.5
+      parent: 1
+  - uid: 14783
+    components:
+    - type: Transform
+      pos: 32.5,30.5
+      parent: 1
+  - uid: 14784
+    components:
+    - type: Transform
+      pos: 32.5,24.5
+      parent: 1
+  - uid: 14785
+    components:
+    - type: Transform
+      pos: 32.5,35.5
+      parent: 1
+  - uid: 14786
+    components:
+    - type: Transform
+      pos: 16.5,30.5
+      parent: 1
+  - uid: 14787
+    components:
+    - type: Transform
+      pos: 31.5,44.5
+      parent: 1
+  - uid: 14788
+    components:
+    - type: Transform
+      pos: 29.5,46.5
+      parent: 1
+  - uid: 14789
+    components:
+    - type: Transform
+      pos: 10.5,46.5
+      parent: 1
+  - uid: 14790
+    components:
+    - type: Transform
+      pos: 18.5,47.5
+      parent: 1
+  - uid: 14791
+    components:
+    - type: Transform
+      pos: 40.5,22.5
+      parent: 1
+  - uid: 14792
+    components:
+    - type: Transform
+      pos: 40.5,37.5
+      parent: 1
+  - uid: 14793
+    components:
+    - type: Transform
+      pos: 36.5,13.5
+      parent: 1
+  - uid: 14794
+    components:
+    - type: Transform
+      pos: 9.5,26.5
+      parent: 1
+  - uid: 14795
+    components:
+    - type: Transform
+      pos: 11.5,31.5
+      parent: 1
+  - uid: 14796
+    components:
+    - type: Transform
+      pos: 15.5,152.5
+      parent: 1
+  - uid: 14797
+    components:
+    - type: Transform
+      pos: 11.5,153.5
+      parent: 1
+  - uid: 14798
+    components:
+    - type: Transform
+      pos: 19.5,152.5
+      parent: 1
+  - uid: 14799
+    components:
+    - type: Transform
+      pos: 26.5,152.5
+      parent: 1
+  - uid: 14800
+    components:
+    - type: Transform
+      pos: 30.5,152.5
+      parent: 1
+  - uid: 14801
+    components:
+    - type: Transform
+      pos: 34.5,153.5
+      parent: 1
+  - uid: 14802
+    components:
+    - type: Transform
+      pos: 33.5,148.5
+      parent: 1
+  - uid: 14803
+    components:
+    - type: Transform
+      pos: 33.5,144.5
+      parent: 1
+  - uid: 14804
+    components:
+    - type: Transform
+      pos: 33.5,134.5
+      parent: 1
+  - uid: 14805
+    components:
+    - type: Transform
+      pos: 33.5,130.5
+      parent: 1
+  - uid: 14806
+    components:
+    - type: Transform
+      pos: 33.5,125.5
+      parent: 1
+  - uid: 14807
+    components:
+    - type: Transform
+      pos: 40.5,122.5
+      parent: 1
+  - uid: 14808
+    components:
+    - type: Transform
+      pos: 31.5,119.5
+      parent: 1
+  - uid: 14809
+    components:
+    - type: Transform
+      pos: 20.5,117.5
+      parent: 1
+  - uid: 14810
+    components:
+    - type: Transform
+      pos: 15.5,117.5
+      parent: 1
+  - uid: 14811
+    components:
+    - type: Transform
+      pos: 13.5,134.5
+      parent: 1
+  - uid: 14812
+    components:
+    - type: Transform
+      pos: 15.5,140.5
+      parent: 1
+  - uid: 14813
+    components:
+    - type: Transform
+      pos: 29.5,140.5
+      parent: 1
+  - uid: 14814
+    components:
+    - type: Transform
+      pos: 38.5,120.5
+      parent: 1
+  - uid: 14815
+    components:
+    - type: Transform
+      pos: 38.5,115.5
+      parent: 1
+  - uid: 14816
+    components:
+    - type: Transform
+      pos: 35.5,112.5
+      parent: 1
+  - uid: 14817
+    components:
+    - type: Transform
+      pos: 38.5,112.5
+      parent: 1
+  - uid: 14818
+    components:
+    - type: Transform
+      pos: 20.5,112.5
+      parent: 1
+  - uid: 14819
+    components:
+    - type: Transform
+      pos: 16.5,112.5
+      parent: 1
+  - uid: 14820
+    components:
+    - type: Transform
+      pos: 13.5,121.5
       parent: 1
 - proto: RMCWallElevator
   entities:
@@ -82279,94 +82566,6 @@ entities:
     components:
     - type: Transform
       pos: 214.5,75.5
-      parent: 1
-- proto: ToolboxElectrical
-  entities:
-  - uid: 6240
-    components:
-    - type: Transform
-      pos: 101.5,50.5
-      parent: 1
-  - uid: 8604
-    components:
-    - type: Transform
-      pos: 125.5,17.5
-      parent: 1
-  - uid: 13903
-    components:
-    - type: Transform
-      pos: 184.5,129.5
-      parent: 1
-  - uid: 14109
-    components:
-    - type: Transform
-      pos: 164.5,135.5
-      parent: 1
-- proto: ToolboxElectricalFilled
-  entities:
-  - uid: 863
-    components:
-    - type: Transform
-      pos: 43.47625,18.549507
-      parent: 1
-- proto: ToolboxEmergency
-  entities:
-  - uid: 1669
-    components:
-    - type: Transform
-      pos: 50.5,56.5
-      parent: 1
-  - uid: 5560
-    components:
-    - type: Transform
-      pos: 56.5,147.5
-      parent: 1
-  - uid: 8605
-    components:
-    - type: Transform
-      pos: 126.5,20.5
-      parent: 1
-  - uid: 9566
-    components:
-    - type: Transform
-      pos: 154.5,35.5
-      parent: 1
-  - uid: 10896
-    components:
-    - type: Transform
-      pos: 184.5,72.5
-      parent: 1
-  - uid: 14598
-    components:
-    - type: Transform
-      pos: 197.5,136.5
-      parent: 1
-- proto: ToolboxMechanical
-  entities:
-  - uid: 2259
-    components:
-    - type: Transform
-      pos: 72.5,46.5
-      parent: 1
-  - uid: 4782
-    components:
-    - type: Transform
-      pos: 3.5,123.5
-      parent: 1
-  - uid: 7186
-    components:
-    - type: Transform
-      pos: 106.5,141.5
-      parent: 1
-  - uid: 14110
-    components:
-    - type: Transform
-      pos: 166.5,135.5
-      parent: 1
-  - uid: 14711
-    components:
-    - type: Transform
-      pos: 208.5,147.5
       parent: 1
 - proto: TrashBananaPeel
   entities:
