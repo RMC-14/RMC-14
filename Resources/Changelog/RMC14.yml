@@ -4099,5 +4099,21 @@
   id: 484
   time: '2024-07-30T08:28:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3368
+- author: Vermidia
+  changes:
+  - message: Crushers can hit barricades with charge
+    type: Fix
+  id: 485
+  time: '2024-07-31T22:01:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3414
+- author: DrSmugleaf
+  changes:
+  - message: Added the overwatch console, giving Command roles a way to quickly get
+      information on all squads, their role composition, head count and the ability
+      to watch each marine through their helmet's camera.
+    type: Add
+  id: 486
+  time: '2024-08-01T03:16:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3101
 Name: RMC14
 Order: -1

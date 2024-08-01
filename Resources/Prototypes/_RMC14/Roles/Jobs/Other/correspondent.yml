@@ -32,7 +32,7 @@
     id: CMIDCardCorrespondent
     ears: CMHeadsetReporter
     #    belt: CMCamera TODO RMC14
-    pocket1: CMPouchGeneralLarge
+    pocket1: RMCPouchGeneralLarge
     pocket2: MicrophoneInstrument
 
 - type: entity

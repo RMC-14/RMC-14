@@ -14,6 +14,9 @@
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - SmartGunOperator
+  overwatchSortPriority: -2
+  overwatchShowName: true
+  overwatchRoleName: Smart Gun Operator
   special:
   - !type:AddComponentSpecial
     components:

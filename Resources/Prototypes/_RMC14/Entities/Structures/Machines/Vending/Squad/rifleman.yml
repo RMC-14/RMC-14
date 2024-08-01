@@ -53,27 +53,27 @@
       - id: CMBeltUtility
       - id: RMCBeltGrenade
     - name: Pouches
-      choices: { CMPouch: 2 }
+      choices: { RMCPouch: 2 }
       entries:
-      - id: CMPouchBayonetFill
-      - id: CMPouchFirstAidInjectors
+      - id: RMCPouchBayonetFill
+      - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
         recommended: true
-      - id: CMPouchFirstAidSplintsGauzeOintment
+      - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
         recommended: true
-      - id: CMPouchFirstAidPills
+      - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
         recommended: true
-      - id: CMPouchFlareFilled
+      - id: RMCPouchFlareFilled
         name: Flare pouch (Filled)
         recommended: true
       #    CMSmallDocumentPouch #TODO: Make this
-      - id: CMPouchMagazine
-      - id: CMPouchShotgun
-      - id: CMPouchGeneral
-      - id: CMPouchMagazinePistol
-      - id: CMPouchPistol
+      - id: RMCPouchMagazine
+      - id: RMCPouchShotgun
+      - id: RMCPouchGeneral
+      - id: RMCPouchMagazinePistol
+      - id: RMCPouchPistol
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -158,7 +158,7 @@
     #  points: 15
     #- id: CMScabbardMacheteFull
     #  points: 15
-      - id: CMPouchMacheteFilled
+      - id: RMCPouchMacheteFilled
         points: 15
     #- id: CMMarineRadioTelephonePack
     #  points: 15
@@ -168,7 +168,7 @@
     #  points: 5
     #- id: CMSlingPouch
     #  points: 15
-      - id: CMPouchGeneralLarge
+      - id: RMCPouchGeneralLarge
         points: 15
     - name: Utilities
       entries:

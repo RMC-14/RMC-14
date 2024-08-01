@@ -1,43 +1,8 @@
 - type: entity
-  parent: BaseStorageItem
-  id: RMCBaseGunCase
-  abstract: true
-  name: base gun case
-  description: "A gun case."
-  components:
-  - type: Sprite
-    noRot: true
-    sprite: _RMC14/Objects/Storage/guncase.rsi
-    layers:
-    - state: closed
-      map: [ base ]
-  - type: Icon
-    sprite: _RMC14/Objects/Storage/guncase.rsi
-    state: closed
-  - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.StorageVisuals.Open:
-        base:
-          True: { state: open }
-          False: { state: closed }
-  - type: Item
-    size: Huge
-  - type: Storage
-    maxItemSize: Huge
-    grid:
-    - 0,0,27,1
-  - type: FixedItemSizeStorage
-  - type: InteractedBlacklist
-    blacklist:
-      components:
-      - Xeno
-
-- type: entity
   parent: RMCBaseGunCase
   id: RMCSmartPistolCase
   name: SU-6 smart pistol case
-  description: "A gun case containing the SU-6 smart pistol. Comes with a full belt holster."
+  description: A gun case containing the SU-6 smart pistol. Comes with a full belt holster.
   components:
   - type: Storage
     maxItemSize: Huge
@@ -56,7 +21,7 @@
   parent: RMCBaseGunCase
   id: RMCMK80Case
   name: MK80 pistol case
-  description: "A gun case containing the MK80. Comes with two magazines."
+  description: A gun case containing the MK80. Comes with two magazines.
   components:
   - type: Storage
     maxItemSize: Huge
@@ -76,7 +41,7 @@
   parent: RMCBaseGunCase
   id: RMCM54CE2Case
   name: M54CE2 heavy assault rifle case
-  description: "A gun case containing the M54CE2 heavy assault rifle. You can get additional ammunition at requisitions."
+  description: A gun case containing the M54CE2 heavy assault rifle. You can get additional ammunition at requisitions.
   components:
   - type: Storage
     maxItemSize: Huge

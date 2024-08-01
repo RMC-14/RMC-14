@@ -107,7 +107,7 @@
       entries:
     #- id: CMScabbardMacheteFull
     #  points: 6
-      - id: CMPouchMacheteFilled
+      - id: RMCPouchMacheteFilled
         points: 8
     #- id: CMMarineRadioTelephonePack
     #  points: 15
@@ -115,7 +115,7 @@
     #  points: 4
     #- id: CMSlingPouch
     #  points: 6
-      - id: CMPouchGeneralLarge
+      - id: RMCPouchGeneralLarge
         points: 6
       - id: CMBeltUtilityCombat
         points: 15
@@ -190,6 +190,7 @@
       - id: CMArmorM3Heavy
         name: heavy armor
     - name: Backpack
+      choices: { CMBackpack: 1 }
       entries:
     #- id: CMScabbardMacheteFull
       - id: CMBackpackMarineTech
@@ -211,25 +212,25 @@
       - id: CMBeltUtilityFilled
       - id: RMCBeltGrenade
     - name: Pouches
-      choices: { CMPouch: 2 }
+      choices: { RMCPouch: 2 }
       entries:
-      - id: CMPouchConstruction
-      - id: CMPouchFirstAidInjectors
+      - id: RMCPouchConstruction
+      - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
-      - id: CMPouchFirstAidSplintsGauzeOintment
+      - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
-      - id: CMPouchFirstAidPills
+      - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
       #- id: CMElectronicsPouchFull
-      - id: CMPouchExplosive
-      - id: CMPouchFlareFilled
+      - id: RMCPouchExplosive
+      - id: RMCPouchFlareFilled
         name: Flare pouch (Filled)
-      - id: CMPouchMagazinePistolLarge
-      - id: CMPouchMagazine
-      - id: CMPouchShotgun
-      - id: CMPouchGeneralMedium
-      - id: CMPouchPistol
-      - id: CMPouchToolsFill
+      - id: RMCPouchMagazinePistolLarge
+      - id: RMCPouchMagazine
+      - id: RMCPouchShotgun
+      - id: RMCPouchGeneralMedium
+      - id: RMCPouchPistol
+      - id: RMCPouchToolsFill
         name: Tools pouch (Filled)
     - name: Accessories
       choices: { CMAccessories: 1 }
@@ -240,6 +241,7 @@
       - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
+      choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
