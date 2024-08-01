@@ -4244,5 +4244,12 @@
   id: 498
   time: '2024-08-01T09:57:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3442
+- author: DrSmugleaf
+  changes:
+  - message: Added twenty more spaceborne gauss turrets around every landing zone.
+    type: Tweak
+  id: 499
+  time: '2024-08-01T10:12:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3443
 Name: RMC14
 Order: -1
