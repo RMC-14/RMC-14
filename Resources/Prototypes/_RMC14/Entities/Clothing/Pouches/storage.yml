@@ -382,6 +382,16 @@
       - MachinePart
   - type: FixedItemSizeStorage
 
+- type: entity
+  parent: RMCPouchElectronics
+  id: RMCPouchElectronicsFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPowerCellHigh
+      amount: 3
+
 
 # Construction Pouch
 - type: entity
@@ -408,6 +418,17 @@
       - EmptySandbag
       - LightReplacer
   - type: FixedItemSizeStorage
+
+- type: entity
+  parent: RMCPouchConstruction
+  id: RMCPouchConstructionFillLowGrade
+  suffix: Low grade full
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetPlasteel30
+    - id: CMSheetMetal50
+    - id: BarbedWire15
 
 
 # Tools Pouch
