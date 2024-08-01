@@ -232,9 +232,7 @@
     useDelay: 10
   - type: ActionSharedCooldown
     ids:
-    - ActionXenoBombard
     - ActionXenoAcidShroud
-    - ActionXenoSprayAcidBoiler
 
 - type: entity
   id: ActionXenoParalyzingSlash
@@ -334,7 +332,7 @@
   id: ActionXenoScreech
   parent: ActionXenoBase
   name: Screech (250)
-  description: A wide area of effect stun, screeches upon activation.
+  description: A wide area of effect stun, screeches upon activation. [color=red]This is blocked by solid walls, smoke, and boiler gas, but not windows![/color]
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -400,11 +398,11 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: bombard
     event: !type:XenoBombardActionEvent
-    range: 9
+    range: 10
     checkCanAccess: false
   - type: ActionSharedCooldown
+    id: ActionXenoBombard
     ids:
-    - ActionXenoBombard
     - ActionXenoAcidShroud
     cooldown: 20
     onPerform: false
@@ -436,6 +434,7 @@
       state: acid_shroud
     event: !type:XenoAcidShroudActionEvent
   - type: ActionSharedCooldown
+    id: ActionXenoAcidShroud
     ids:
     - ActionXenoBombard
     - ActionXenoAcidShroud

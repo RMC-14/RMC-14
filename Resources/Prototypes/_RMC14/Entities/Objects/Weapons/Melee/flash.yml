@@ -29,4 +29,4 @@
           False: { visible: false }
   - type: MeleeRequiresSkill
     skills:
-      police: 1
+      RMCSkillPolice: 1

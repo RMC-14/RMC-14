@@ -1,12 +1,16 @@
 ﻿using System.Collections.Immutable;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
+using Content.Shared.Clothing;
+using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Mind;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Prototypes;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Marines.Squads;
@@ -22,13 +26,96 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
     public ImmutableArray<EntityPrototype> SquadPrototypes { get; private set; }
+    public ImmutableArray<JobPrototype> SquadRolePrototypes { get; private set; }
+
+    private readonly HashSet<EntityUid> _membersToUpdate = new();
+
+    private EntityQuery<SquadArmorWearerComponent> _squadArmorWearerQuery;
+    private EntityQuery<SquadMemberComponent> _squadMemberQuery;
+    private EntityQuery<SquadTeamComponent> _squadTeamQuery;
 
     public override void Initialize()
     {
+        _squadArmorWearerQuery = GetEntityQuery<SquadArmorWearerComponent>();
+        _squadMemberQuery = GetEntityQuery<SquadMemberComponent>();
+        _squadTeamQuery = GetEntityQuery<SquadTeamComponent>();
+
+        SubscribeLocalEvent<SquadArmorComponent, GetEquipmentVisualsEvent>(OnSquadArmorGetVisuals, after: [typeof(ClothingSystem)]);
+
+        SubscribeLocalEvent<SquadMemberComponent, MapInitEvent>(OnSquadMemberMapInit);
+        SubscribeLocalEvent<SquadMemberComponent, ComponentRemove>(OnSquadMemberRemove);
+        SubscribeLocalEvent<SquadMemberComponent, EntityTerminatingEvent>(OnSquadMemberTerminating);
+        SubscribeLocalEvent<SquadMemberComponent, MobStateChangedEvent>(OnSquadMemberMobStateChanged);
+        SubscribeLocalEvent<SquadMemberComponent, PlayerAttachedEvent>(OnSquadMemberPlayerAttached);
+        SubscribeLocalEvent<SquadMemberComponent, PlayerDetachedEvent>(OnSquadMemberPlayerDetached);
         SubscribeLocalEvent<SquadMemberComponent, GetMarineIconEvent>(OnSquadRoleGetIcon);
+
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         RefreshSquadPrototypes();
+    }
+
+    private void OnSquadArmorGetVisuals(Entity<SquadArmorComponent> ent, ref GetEquipmentVisualsEvent args)
+    {
+        if (!_squadMemberQuery.TryComp(args.Equipee, out var member) ||
+            !_squadArmorWearerQuery.TryComp(args.Equipee, out var wearer))
+        {
+            return;
+        }
+
+        var rsi = wearer.Leader ? ent.Comp.LeaderRsi : ent.Comp.Rsi;
+        args.Layers.Add(($"enum.{nameof(SquadArmorLayers)}.{ent.Comp.Layer}", new PrototypeLayerData
+        {
+            RsiPath = rsi.RsiPath.ToString(),
+            State = rsi.RsiState,
+            Color = member.BackgroundColor,
+            Visible = true,
+        }));
+    }
+
+
+    private void OnSquadMemberMapInit(Entity<SquadMemberComponent> ent, ref MapInitEvent args)
+    {
+        _membersToUpdate.Add(ent);
+    }
+
+    private void OnSquadMemberRemove(Entity<SquadMemberComponent> ent, ref ComponentRemove args)
+    {
+        if (_squadTeamQuery.TryComp(ent.Comp.Squad, out var team))
+            team.Members.Remove(ent);
+    }
+
+    private void OnSquadMemberTerminating(Entity<SquadMemberComponent> ent, ref EntityTerminatingEvent args)
+    {
+        if (_squadTeamQuery.TryComp(ent.Comp.Squad, out var team))
+            team.Members.Remove(ent);
+    }
+
+    private void OnSquadMemberMobStateChanged(Entity<SquadMemberComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (ent.Comp.Squad is not { } squad)
+            return;
+
+        var ev = new SquadMemberUpdatedEvent(squad);
+        RaiseLocalEvent(ent, ref ev);
+    }
+
+    private void OnSquadMemberPlayerAttached(Entity<SquadMemberComponent> ent, ref PlayerAttachedEvent args)
+    {
+        if (ent.Comp.Squad is not { } squad)
+            return;
+
+        var ev = new SquadMemberUpdatedEvent(squad);
+        RaiseLocalEvent(ent, ref ev);
+    }
+
+    private void OnSquadMemberPlayerDetached(Entity<SquadMemberComponent> ent, ref PlayerDetachedEvent args)
+    {
+        if (ent.Comp.Squad is not { } squad)
+            return;
+
+        var ev = new SquadMemberUpdatedEvent(squad);
+        RaiseLocalEvent(ent, ref ev);
     }
 
     private void OnSquadRoleGetIcon(Entity<SquadMemberComponent> member, ref GetMarineIconEvent args)
@@ -39,21 +126,30 @@ public sealed class SquadSystem : EntitySystem
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
     {
-        if (ev.WasModified<EntityPrototype>())
+        if (ev.WasModified<EntityPrototype>() || ev.WasModified<JobPrototype>())
             RefreshSquadPrototypes();
     }
 
     private void RefreshSquadPrototypes()
     {
-        var builder = ImmutableArray.CreateBuilder<EntityPrototype>();
+        var entBuilder = ImmutableArray.CreateBuilder<EntityPrototype>();
         foreach (var entity in _prototypes.EnumeratePrototypes<EntityPrototype>())
         {
             if (entity.HasComponent<SquadTeamComponent>())
-                builder.Add(entity);
+                entBuilder.Add(entity);
         }
 
-        builder.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.OrdinalIgnoreCase));
-        SquadPrototypes = builder.ToImmutable();
+        entBuilder.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.OrdinalIgnoreCase));
+        SquadPrototypes = entBuilder.ToImmutable();
+
+        var jobBuilder = ImmutableArray.CreateBuilder<JobPrototype>();
+        foreach (var job in _prototypes.EnumeratePrototypes<JobPrototype>())
+        {
+            if (job.HasSquad)
+                jobBuilder.Add(job);
+        }
+
+        SquadRolePrototypes = jobBuilder.ToImmutable();
     }
 
     public bool TryGetSquad(EntProtoId prototype, out Entity<SquadTeamComponent> squad)
@@ -114,6 +210,9 @@ public sealed class SquadSystem : EntitySystem
             return;
 
         var member = EnsureComp<SquadMemberComponent>(marine);
+        if (_squadTeamQuery.TryComp(member.Squad, out var oldSquad))
+            oldSquad.Members.Remove(marine);
+
         member.Squad = team;
         member.Background = team.Comp.Background;
         member.BackgroundColor = team.Comp.Color;
@@ -133,6 +232,10 @@ public sealed class SquadSystem : EntitySystem
         }
 
         Dirty(marine, grant);
+
+        team.Comp.Members.Add(marine);
+        var ev = new SquadMemberUpdatedEvent();
+        RaiseLocalEvent(marine, ref ev);
     }
 
     private void MarineSetTitle(EntityUid marine, string title)
@@ -141,6 +244,32 @@ public sealed class SquadSystem : EntitySystem
         {
             if (TryComp(item, out IdCardComponent? idCard))
                 _id.TryChangeJobTitle(item, title, idCard);
+        }
+    }
+
+    public void RefreshSquad(Entity<SquadTeamComponent?> squad)
+    {
+        if (!_squadTeamQuery.Resolve(squad, ref squad.Comp, false))
+            return;
+
+        var toRemove = new List<EntityUid>();
+        foreach (var member in squad.Comp.Members)
+        {
+            if (TerminatingOrDeleted(member) ||
+                !_squadMemberQuery.TryComp(member, out var memberComp) ||
+                memberComp.Squad != squad)
+            {
+                toRemove.Add(member);
+            }
+        }
+
+        squad.Comp.Members.ExceptWith(toRemove);
+        Dirty(squad);
+
+        foreach (var member in toRemove)
+        {
+            var ev = new SquadMemberUpdatedEvent(squad);
+            RaiseLocalEvent(member, ref ev);
         }
     }
 
@@ -174,5 +303,21 @@ public sealed class SquadSystem : EntitySystem
 
             RemCompDeferred<SquadGrantAccessComponent>(uid);
         }
+
+        foreach (var toUpdate in _membersToUpdate)
+        {
+            if (TerminatingOrDeleted(toUpdate))
+                continue;
+
+            if (!_squadMemberQuery.TryComp(toUpdate, out var member) ||
+                !_squadTeamQuery.TryComp(member.Squad, out var squad))
+            {
+                continue;
+            }
+
+            squad.Members.Add(toUpdate);
+        }
+
+        _membersToUpdate.Clear();
     }
 }

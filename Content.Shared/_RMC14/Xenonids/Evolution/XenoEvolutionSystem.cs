@@ -51,12 +51,12 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly SharedXenoHiveSystem _xenoHive = default!;
-	[Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
 
     private TimeSpan _evolutionPointsRequireOvipositorAfter;
     private TimeSpan _evolutionAccumulatePointsBefore;
 
-	private readonly HashSet<EntityUid> _climbable = new();
+    private readonly HashSet<EntityUid> _climbable = new();
     private readonly HashSet<EntityUid> _doors = new();
     private readonly HashSet<EntityUid> _intersecting = new();
 
@@ -93,7 +93,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             });
 
         Subs.CVar(_config, RMCCVars.RMCEvolutionPointsRequireOvipositorMinutes, v => _evolutionPointsRequireOvipositorAfter = TimeSpan.FromMinutes(v), true);
-        Subs.CVar(_config, RMCCVars.RMCEvolutionPointsAccumulateBeforeMinutes, v =>  _evolutionAccumulatePointsBefore = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCEvolutionPointsAccumulateBeforeMinutes, v => _evolutionAccumulatePointsBefore = TimeSpan.FromMinutes(v), true);
     }
 
     private void OnXenoOpenDevolveAction(Entity<XenoDevolveComponent> xeno, ref XenoOpenDevolveActionEvent args)
@@ -372,7 +372,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             var current = EntityQueryEnumerator<XenoComponent>();
             while (current.MoveNext(out var existingComp))
             {
-                if (existingComp.Hive != oldHive)
+                if (existingComp.Hive != oldHive || !existingComp.CountedInSlots)
                     continue;
 
                 total++;

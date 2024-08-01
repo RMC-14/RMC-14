@@ -31,6 +31,9 @@ namespace Content.Server.Atmos.EntitySystems
             TileAtmosphere tile,
             int cycleNum)
         {
+            if (!TileEqualize)
+                return;
+
             if (tile.Air == null || (tile.MonstermosInfo.LastCycle >= cycleNum))
                 return; // Already done.
 

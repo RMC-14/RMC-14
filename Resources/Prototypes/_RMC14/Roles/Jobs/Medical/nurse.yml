@@ -18,9 +18,10 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      firearms: 0
-      medical: 3
-      surgery: 1
+      skills:
+        RMCSkillFirearms: 0
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 1
     - type: RMCUserBulkyArmorIncapable
 
 - type: startingGear
@@ -38,7 +39,7 @@
     jumpsuit: CMScrubsNurse
     back: CMSatchelMarine
     gloves: CMHandsLatex
-    shoes: ClothingShoesColorWhite
+    shoes: RMCShoesWhite
     head: CMHeadCapSurgOrange
     id: CMIDCardNurse
     ears: CMHeadsetMedical

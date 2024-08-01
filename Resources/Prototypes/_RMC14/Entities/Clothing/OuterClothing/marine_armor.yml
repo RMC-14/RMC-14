@@ -1,4 +1,4 @@
-# m3
+﻿# m3
 - type: entity
   parent: RMCBaseArmor
   id: CMArmorM3Medium
@@ -124,6 +124,14 @@
     blacklist:
       components:
       - Xeno
+  - type: SquadArmor
+    layer: Armor
+    rsi:
+      sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: std-armor
+    leaderRsi:
+      sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: sql-armor
 
 - type: entity
   parent: CMArmorM3Medium
@@ -416,6 +424,9 @@
     armor: 25
     bio: 15
     explosionArmor: 20
+  - type: ClothingSpeedModifier
+    walkModifier: 0.814
+    sprintModifier: 0.814
   - type: Storage
     maxItemSize: Small
     grid:
