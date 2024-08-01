@@ -1,11 +1,15 @@
-﻿using Robust.Shared.GameStates;
+﻿using Content.Shared.Inventory;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Overwatch;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedOverwatchConsoleSystem))]
-public sealed partial class OverwatchCameraComponent : Component
+public sealed partial class OverwatchCameraComponent : Component, IClothingSlots
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
+    public SlotFlags Slots { get; set; } = SlotFlags.HEAD;
+
+    [DataField, AutoNetworkedField]
     public HashSet<EntityUid> Watching = new();
 }

@@ -26,4 +26,13 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
 
     [DataField]
     public readonly bool Hidden;
+
+    [DataField]
+    public readonly int? OverwatchSortPriority;
+
+    [DataField]
+    public readonly bool OverwatchShowName;
+
+    [DataField]
+    public readonly string? OverwatchRoleName;
 }

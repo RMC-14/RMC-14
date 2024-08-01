@@ -6,7 +6,6 @@ namespace Content.Client._RMC14.Overwatch;
 
 [GenerateTypedNameReferences]
 public sealed partial class OverwatchConsoleWindow : DefaultWindow
-
 {
     public OverwatchConsoleWindow()
     {

@@ -14,6 +14,9 @@
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - WeaponSpec
+  overwatchSortPriority: -3
+  overwatchShowName: true
+  overwatchRoleName: Specialist
   special:
   - !type:AddComponentSpecial
     components:
