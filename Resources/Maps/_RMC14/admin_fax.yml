@@ -30,7 +30,7 @@ entities:
   - uid: 2
     components:
     - type: MetaData
-      name: grid
+      name: Admin Fax
     - type: Transform
       pos: -0.5069444,-0.4687284
       parent: 1
@@ -77,6 +77,8 @@ entities:
       data:
         chunkSize: 4
     - type: GasTileOverlay
+    - type: BecomesStation
+      id: AdminFax
     - type: RadiationGridResistance
 - proto: Bonfire
   entities:
