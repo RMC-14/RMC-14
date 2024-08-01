@@ -48,22 +48,22 @@
       - id: CMBeltUtilityFilled
         name: M276 Toolbelt Rig (Full)
     - name: Pouches
-      choices: { CMPouch: 2 }
+      choices: { RMCPouch: 2 }
       entries:
-      - id: CMPouchGeneralMedium
-      - id: CMPouchFirstAidInjectors
+      - id: RMCPouchGeneralMedium
+      - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
-      - id: CMPouchFirstAidSplintsGauzeOintment
+      - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
-      - id: CMPouchFirstAidPills
+      - id: RMCPouchFirstAidPills
         name: first-aid pouch (pill packets)
-      - id: CMPouchConstruction
+      - id: RMCPouchConstruction
       #- id: CMElectronicsPouchFull
       #name: Electronics Pouch (Full)
-      - id: CMPouchToolsFill
+      - id: RMCPouchToolsFill
         name: Tools pouch (Filled)
-      - id: CMPouchFlareFilled
-        name: Flare pouch (Filled)
+      - id: RMCPouchFlareFilled
+        name: Flare pouch (Full)
     - name: Mask
       choices: { CMMask: 1 }
       entries:

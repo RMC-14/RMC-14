@@ -17,15 +17,14 @@
     sections:
     - name: Squad Leader Kit
       takeAll: CMStandard
-      entries: [ ]
-    #- id: CMEssentialSLKit
-    #  points: 0
-    - name: Squad Kit
-      entries: [ ]
-    #- id: CMM4SPRSniperKit
-    #  points: 0
-    #- id: CMM54CStandardKit
-    #  points: 0
+      entries:
+      - id: RMCVendorBundleCrewLeader
+    - name: Squad Kit (CHOOSE 1, for yourself or your squad)
+      choices: { RMCSquadKit: 1 }
+      entries:
+      - id: RMCKitRifleM4SPR
+      - id: RMCKitCM54C
+      - id: RMCKitEngineering
     #- id: CMM240PyrotechnicianSupportKit
     #  points: 0
     #- id: CMM2CHeavyMachineGun
@@ -38,8 +37,6 @@
     #  points: 0
     #- id: CMXM88HeavyRifle
     #  points: 0
-    #- id: CMBasicEngineeringSupplies
-    #  points: 0
     - name: Armors
       entries:
       - id: CMArmorM4
@@ -48,7 +45,7 @@
       entries:
     #- id: CMScabbardMacheteFull
     #  points: 4
-      - id: CMPouchMacheteFilled
+      - id: RMCPouchMacheteFilled
         points: 4
     #- id: CMMarineRadioTelephonePack
     #  points: 5
@@ -74,8 +71,10 @@
       entries: [ ]
     #- id: CMWeldingVisor
     #  points: 5
+    #  recommended: true
     #- id: CMMedicalHelmetOptic
     #  points: 4
+    #  recommended: true
     #- id: CMNightVisionOptic
     #  points: 20
     - name: Engineering Supplies
@@ -83,18 +82,26 @@
       - id: CMHandsInsulated
         points: 3
       - id: CMSheetMetal10
+        name: metal x10
         points: 5
+        recommended: true
       - id: CMSheetPlasteel10
+        name: plasteel x10
         points: 7
+        recommended: true
     #- id: CMPlasticexplosive
     #  points: 5
+    #  recommended: true
       - id: RMCExplosiveBreachingCharge
         points: 7
+        recommended: true
       - id: CMSandbagEmpty25
+        name: sandbags x25
         points: 10
+        recommended: true
     #- id: CMSignalFlarePack
     #  points: 7
-      - id: CMPouchToolsFill
+      - id: RMCPouchToolsFill
         points: 5
     #- id: CMWeldingGoggles
     #  points: 5
@@ -162,6 +169,8 @@
         points: 6
     - name: Sidearm Ammunition
       entries:
+      - id: RMCSpeedLoader44Marksman
+        points: 6
       - id: CMMagazinePistolMK80
         points: 3
       - id: RMCMagazinePistolSU6
@@ -185,16 +194,12 @@
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer
-        amount: 3
         points: 3
       - id: CMEncryptionKeyIntel
-        amount: 3
         points: 3
       - id: CMEncryptionKeyJTAC
-        amount: 3
         points: 3
       - id: CMEncryptionKeyRequisition
-        amount: 3
         points: 3
 
 - type: entity
@@ -225,11 +230,13 @@
       - id: CMBackpackMarine
 #      - id: CMScabbardMacheteFull
       - id: CMSatchelMarine
+        recommended: true
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
     #- id: CMG8AGeneralUtilityPouch
       - id: CMBeltMarine
+        recommended: true
     #- id: CMM276GeneralPistolHolsterRig
       - id: CMBeltMedicBag
       - id: CMBeltMedical
@@ -240,33 +247,104 @@
       - id: CMBeltUtilityFilled
       - id: RMCBeltGrenade
     - name: Pouches
-      choices: { CMPouch: 2 }
+      choices: { RMCPouch: 2 }
       entries:
-      - id: CMPouchAutoinjectorFill
-      - id: CMPouchFirstAidInjectors
+      - id: RMCPouchAutoinjectorFill
+        recommended: true
+      - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
-      - id: CMPouchFirstAidSplintsGauzeOintment
+      - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
-      - id: CMPouchFirstAidPills
+      - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
-      - id: CMPouchFlareFilled
-        name: Flare pouch (Filled)
+        recommended: true
+      - id: RMCPouchFlareFilled
+        name: Flare pouch (Full)
       #- id: CMFuelTankStrapPouch
-      - id: CMPouchGeneralLarge
+      - id: RMCPouchGeneralLarge
+        recommended: true
       #- id: CMSlingPouch
-      - id: CMPouchMagazineLarge
+      - id: RMCPouchMagazineLarge
       #- id: CMLargeShotgunShellPouch
-      - id: CMPouchMagazinePistolLarge
-      - id: CMPouchPistol
+      - id: RMCPouchMagazinePistolLarge
+      - id: RMCPouchPistol
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
-      - id: CMWebbingBrown
       - id: CMWebbingBlack
+      - id: CMWebbingBrown
+        recommended: true
       #- id: CMShoulderHolster
       - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
+      choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleCrewLeader
+  name: essential SL kit
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Explosives/satchel_charge.rsi # TODO RMC14 plastic explosives icon
+    state: icon
+  - type: CMVendorBundle
+    bundle:
+    - RMCExplosiveBreachingCharge # TODO RMC14 plastic explosives
+    - CMPackFlare # TODO RMC14 signal flares when we have any use for damn signals
+    - RMCBinoculars # TODO RMC14 laser designator when see above
+    - CMFireExtinguisher
+
+- type: entity
+  parent: RMCKitBase
+  id: RMCKitRifleM4SPR
+  name: M4SPR marksman kit
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,9,1
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleM4SPR
+    - id: RMCAttachmentS84xTelescopicScope
+    - id: RMCAttachmentSuppressor
+    - id: RMCAttachmentExtendedBarrel
+    - id: CMMagazineRifleM4SPRAP
+      amount: 2
+
+- type: entity
+  parent: RMCKitBase
+  id: RMCKitCM54C
+  name: M54C rifle kit
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,9,1
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleM54C
+    - id: RMCAttachmentAngledGrip
+    - id: RMCAttachmentSuppressor
+    - id: RMCAttachmentExtendedBarrel
+    - id: CMMagazineRifleM54CAP
+      amount: 2
+
+- type: entity
+  parent: RMCKitBase
+  id: RMCKitEngineering
+  name: engineering supply kit
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,9,1
+  - type: StorageFill
+    contents:
+    - id: RMCPouchConstructionFillLowGrade
+    - id: RMCPouchElectronicsFill
+#    - id: RMCGogglesWelding # TODO RMC14 welding goggles

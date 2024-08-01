@@ -63,7 +63,7 @@
     #  points: 6
     #- id: CMFuelTankStrapPouch
     #  points: 5
-      - id: CMPouchGeneralLarge
+      - id: RMCPouchGeneralLarge
         points: 6
     - name: Utilities
       entries:
@@ -135,27 +135,27 @@
      #- id: CMM802SmartGunOperatorSidearmBeltFilled
       - id: CMBeltSmartGunOperatorFilled
     - name: Pouches
-      choices: { CMPouch: 2 }
+      choices: { RMCPouch: 2 }
       entries:
-      - id: CMPouchFlareFilled
-        name: Flare pouch (Filled)
-#      - id: CMPouchElectronics # TODO RMC14
-      - id: CMPouchFirstAidInjectors
+      - id: RMCPouchFlareFilled
+        name: Flare pouch (Full)
+#      - id: RMCPouchElectronics # TODO RMC14
+      - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
         recommended: true
-      - id: CMPouchFirstAidSplintsGauzeOintment
+      - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
         recommended: true
-      - id: CMPouchFirstAidPills
+      - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
         recommended: true
-      - id: CMPouchMagazinePistolLarge
+      - id: RMCPouchMagazinePistolLarge
         recommended: true
-      - id: CMPouchMagazine
-      - id: CMPouchShotgun
-      - id: CMPouchGeneralMedium
-      - id: CMPouchPistol
-      - id: CMPouchMacheteFilled
+      - id: RMCPouchMagazine
+      - id: RMCPouchShotgun
+      - id: RMCPouchGeneralMedium
+      - id: RMCPouchPistol
+      - id: RMCPouchMacheteFilled
     #- id: CMSlingPouch
     - name: Accessories
       choices: { CMAccessories: 1 }
@@ -167,6 +167,7 @@
       - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
+      choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif

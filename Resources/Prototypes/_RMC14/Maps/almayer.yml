@@ -20,7 +20,7 @@
           #Command
           CMCommandingOfficer: [1, 1]
           CMExecutiveOfficer: [1, 1]
-          CMStaffOfficer: [2, 2]
+          CMStaffOfficer: [4, 4]
           CMSeniorEnlistedAdvisor: [2, 2]
 
           #Military Police

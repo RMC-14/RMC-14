@@ -42,7 +42,7 @@
     gloves: CMHandsInsulated
     id: CMIDCardQuartermaster
     ears: CMHeadsetQM
-    pocket1: CMPouchGeneralMedium
+    pocket1: RMCPouchGeneralMedium
     pocket2: CMFlash
 
 - type: entity

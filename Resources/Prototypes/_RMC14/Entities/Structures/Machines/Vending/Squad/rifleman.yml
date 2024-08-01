@@ -53,27 +53,27 @@
       - id: CMBeltUtility
       - id: RMCBeltGrenade
     - name: Pouches
-      choices: { CMPouch: 2 }
+      choices: { RMCPouch: 2 }
       entries:
-      - id: CMPouchBayonetFill
-      - id: CMPouchFirstAidInjectors
+      - id: RMCPouchBayonetFill
+      - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
         recommended: true
-      - id: CMPouchFirstAidSplintsGauzeOintment
+      - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
         recommended: true
-      - id: CMPouchFirstAidPills
+      - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
         recommended: true
-      - id: CMPouchFlareFilled
-        name: Flare pouch (Filled)
+      - id: RMCPouchFlareFilled
+        name: Flare pouch (Full)
         recommended: true
       #    CMSmallDocumentPouch #TODO: Make this
-      - id: CMPouchMagazine
-      - id: CMPouchShotgun
-      - id: CMPouchGeneral
-      - id: CMPouchMagazinePistol
-      - id: CMPouchPistol
+      - id: RMCPouchMagazine
+      - id: RMCPouchShotgun
+      - id: RMCPouchGeneral
+      - id: RMCPouchMagazinePistol
+      - id: RMCPouchPistol
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -84,7 +84,8 @@
       entries:
       - id: CMEntrenchingTool
         points: 5
-      - id: CMSandbagEmpty50
+      - id: CMSandbagEmpty25
+        name: sandbags x25
         points: 20
 #      - id: ES-11 Mobile Fuel Canister
 #        points: 5
@@ -132,8 +133,8 @@
         points: 10
     - name: Sidearm Ammunition
       entries:
-#      - id: CMM44HeavySpeedLoader
-#        points: 10
+      - id: RMCSpeedLoader44Marksman
+        points: 10
       - id: CMMagazinePistolMK80
         points: 5
       - id: RMCMagazinePistolSU6
@@ -158,7 +159,7 @@
     #  points: 15
     #- id: CMScabbardMacheteFull
     #  points: 15
-      - id: CMPouchMacheteFilled
+      - id: RMCPouchMacheteFilled
         points: 15
     #- id: CMMarineRadioTelephonePack
     #  points: 15
@@ -168,7 +169,7 @@
     #  points: 5
     #- id: CMSlingPouch
     #  points: 15
-      - id: CMPouchGeneralLarge
+      - id: RMCPouchGeneralLarge
         points: 15
     - name: Utilities
       entries:
@@ -185,7 +186,9 @@
       - id: RMCWhistle
         points: 5
     - name: Binoculars
-      entries: [ ]
+      entries:
+      - id: RMCBinoculars
+        points: 5
     #- id: CMRangeFinder
     #  points: 10
     #- id: CMLaserDesignator
@@ -205,14 +208,10 @@
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer
-        amount: 5
         points: 5
       - id: CMEncryptionKeyIntel
-        amount: 5
         points: 5
       - id: CMEncryptionKeyJTAC
-        amount: 5
         points: 5
       - id: CMEncryptionKeyRequisition
-        amount: 5
         points: 5

@@ -127,7 +127,7 @@
     - CMGlassesSecurity
     - CMBeltSecurityMPFilled
     - CMArmorHelmetM10MP
-    
+
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCrewMedicalEssentialsNurse
