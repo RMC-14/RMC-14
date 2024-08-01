@@ -82280,7 +82280,7 @@ entities:
     - type: Transform
       pos: 214.5,75.5
       parent: 1
-- proto: ToolboxElectrical
+- proto: RMCToolboxElectrical
   entities:
   - uid: 6240
     components:
@@ -82302,14 +82302,14 @@ entities:
     - type: Transform
       pos: 164.5,135.5
       parent: 1
-- proto: ToolboxElectricalFilled
+- proto: RMCToolboxElectricalFilled
   entities:
   - uid: 863
     components:
     - type: Transform
       pos: 43.47625,18.549507
       parent: 1
-- proto: ToolboxEmergency
+- proto: RMCToolboxEmergency
   entities:
   - uid: 1669
     components:
@@ -82341,7 +82341,7 @@ entities:
     - type: Transform
       pos: 197.5,136.5
       parent: 1
-- proto: ToolboxMechanical
+- proto: RMCToolboxMechanical
   entities:
   - uid: 2259
     components:
