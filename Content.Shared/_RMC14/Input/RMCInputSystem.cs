@@ -17,18 +17,11 @@ public sealed class RMCInputSystem : EntitySystem
     {
         _actorQuery = GetEntityQuery<ActorComponent>();
 
-        SubscribeLocalEvent<InputMoverComponent, MapInitEvent>(OnInputMapInit);
-
         SubscribeLocalEvent<ActiveInputMoverComponent, MapInitEvent>(OnActiveMapInit);
         SubscribeLocalEvent<ActiveInputMoverComponent, PlayerAttachedEvent>(OnActiveAttached);
         SubscribeLocalEvent<ActiveInputMoverComponent, PlayerDetachedEvent>(OnActiveDetached);
 
         Subs.CVar(_config, RMCCVars.RMCActiveInputMoverEnabled, v => _activeInputMoverEnabled = v, true);
-    }
-
-    private void OnInputMapInit(Entity<InputMoverComponent> ent, ref MapInitEvent args)
-    {
-        EnsureComp<ActiveInputMoverComponent>(ent);
     }
 
     private void OnActiveMapInit(Entity<ActiveInputMoverComponent> ent, ref MapInitEvent args)
