@@ -16,8 +16,6 @@
   - type: CMArmor
     armor: 30
     explosionArmor: 10
-  - type: Item
-    size: Huge
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8

@@ -4,6 +4,8 @@
   id: RMCBaseArmor
   abstract: true
   components:
+  - type: Item
+    size: Huge
   - type: CMDefibrillatorBlocked
     popup: cm-defib-take-off-armor
   - type: InteractedBlacklist
@@ -30,8 +32,6 @@
   - type: WieldSlowdownCompensation
     walk: 0.08
     sprint: 0.136
-  - type: Item
-    size: Huge
   - type: Storage
     maxItemSize: Small
     grid:
