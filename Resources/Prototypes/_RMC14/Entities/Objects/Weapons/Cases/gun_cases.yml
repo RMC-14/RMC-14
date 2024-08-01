@@ -1,4 +1,5 @@
 # pistols
+# SU6 smart pistol
 - type: entity
   parent: RMCGunCaseBase
   id: RMCGunCasePistolSmart
@@ -18,7 +19,7 @@
     - id: RMCWeaponPistolSU6
     - id: RMCBeltSmartPistolFilled
 
-#mk80
+# MK80
 - type: entity
   parent: RMCGunCaseBase
   id: RMCGunCasePistolMK80
@@ -39,7 +40,7 @@
     - id: CMMagazinePistolMK80
       amount: 2
 
-#m77
+# M77
 - type: entity
   parent: RMCGunCaseBase
   id: RMCGunCasePistolM77
@@ -60,6 +61,29 @@
     - id: RMCAttachmentRailFlashlight
     - id: CMWeaponPistolM77
     - id: CMMagazinePistolM77AP
+      amount: 6
+
+# M44 combat revolver
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolM44
+  name: M44 combat revolver case
+  description:
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,15,1
+    whitelist:
+      tags:
+      - RMCWeaponRevolverM44
+      - RMCSpeedLoader44Marksman
+      - RMCAttachmentRailFlashlight
+  - type: StorageFill
+    contents:
+    - id: RMCAttachmentRailFlashlight
+    - id: RMCWeaponRevolverM44
+    - id: RMCSpeedLoader44Marksman
       amount: 6
 
 # rifles
