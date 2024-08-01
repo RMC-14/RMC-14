@@ -142,9 +142,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
         SetAllDocks(grid, dropship.Locked);
     }
 
-    public override bool FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid? user, bool hijack = false)
+    public override bool FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid? user, bool hijack = false, float? startupTime = null, float? hyperspaceTime = null)
     {
-        base.FlyTo(computer, destination, user, hijack);
+        base.FlyTo(computer, destination, user, hijack, startupTime, hyperspaceTime);
 
         var shuttle = Transform(computer).GridUid;
         if (!TryComp(shuttle, out ShuttleComponent? shuttleComp))
@@ -194,7 +194,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
             destCoords = destCoords.Offset(-physics.LocalCenter);
 
         destCoords = destCoords.Offset(new Vector2(-0.5f, -0.5f));
-        _shuttle.FTLToCoordinates(shuttle.Value, shuttleComp, destCoords, rotation);
+        _shuttle.FTLToCoordinates(shuttle.Value, shuttleComp, destCoords, rotation, startupTime: startupTime, hyperspaceTime: hyperspaceTime);
 
         if (user != null && hijack)
         {

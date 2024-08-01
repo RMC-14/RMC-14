@@ -69,3 +69,18 @@
     whitelist:
       components:
       - Marine
+
+- type: entity
+  parent: XenoAcidSprayWeak
+  id: XenoAcidSprayStrong
+  name: strong splatter
+  description: It burns! It burns!
+  components:
+  - type: Sprite
+    layers:
+    - state: acid2-strong
+  - type: DamageOnCollide
+    paralyze: 2
+    damage:
+      groups:
+        Burn: 36

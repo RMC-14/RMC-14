@@ -63,6 +63,15 @@
     blacklist:
       components:
       - Xeno
+  - type: FixedIdentity
+    name: paper
+    whitelist:
+      components:
+      - Xeno
+  - type: BlockExamine
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   abstract: true

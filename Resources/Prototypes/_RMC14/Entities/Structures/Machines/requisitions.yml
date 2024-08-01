@@ -82,6 +82,10 @@
         ents: []
   - type: Corrodible
     isCorrodible: false
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   id: CMCargoElevator
@@ -123,6 +127,8 @@
       - Catwalk
   - type: RequisitionsElevator
   - type: CargoSellBlacklist
+  - type: WarpPoint
+    location: the pit
 
 - type: entity
   parent: CMBaseStructureCorrodible

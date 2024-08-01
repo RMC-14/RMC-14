@@ -3,6 +3,34 @@
   parent: [ BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder ]
   id: CMBaseWeaponRifle
   components:
+  - type: Gun
+    shotsPerBurst: 3
+    selectedMode: Burst
+    availableModes:
+    - SemiAuto
+    - Burst
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    recoilWielded: 1
+    recoilUnwielded: 4
+    scatterWielded: 10
+    scatterUnwielded: 20
+    baseFireRate: 1.429
+    burstScatterMult: 4
+    modifiers:
+      Burst:
+        fireDelay: 0.1665
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+      FullAuto:
+        maxScatterModifier: 13
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
   - type: Wieldable
   - type: WieldableSpeedModifiers
     baseWalk: 0.8
@@ -52,11 +80,6 @@
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
   - type: Gun
-    minAngle: 30
-    maxAngle: 60
-    angleIncrease: 10
-    angleDecay: 5
-    fireRate: 5
     selectedMode: FullAuto
     availableModes:
     - SemiAuto
@@ -64,11 +87,16 @@
     - FullAuto
     soundGunshot:
       collection: CMM54CShoot
-  - type: GunWieldBonus
-    minAngle: -25
-    maxAngle: -40
-    angleIncrease: -9
-    angleDecay: 5
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilUnwielded: 4
+    scatterWielded: 6
+    scatterUnwielded: 20
+    baseFireRate: 4
+    burstScatterMult: 1
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -112,6 +140,7 @@
         whitelist:
           tags:
           - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentLaserSight
@@ -127,7 +156,7 @@
 
 - type: entity
   name: M54CE2 heavy assault rifle
-  parent: WeaponRifleM54C
+  parent: CMBaseWeaponRifle
   id: WeaponRifleM54CE2
   description: A large squad support weapon capable of laying down sustained suppressing fire from a mounted position. While unstable and less accurate, it can be lugged and shot with two hands.
   components:
@@ -140,20 +169,42 @@
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2.rsi
+  - type: Tag
+    tags:
+    - WeaponRifleM54CE2
+    - RMCGunBipodFullAuto
   - type: Gun
-    selectedMode: FullAuto
+    shotsPerBurst: 5
+    selectedMode: SemiAuto
     availableModes:
-    - FullAuto # TODO RMC14 burst with greatly increased angle unless mounted
+    - SemiAuto
+    - Burst
     soundGunshot:
       collection: CMM54CShoot
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    recoilUnwielded: 5
+    scatterWielded: 10
+    scatterUnwielded: 20
+    baseFireRate: 5
+    burstScatterMult: 6
+    modifiers:
+      Burst:
+        fireDelay: 0.1332
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+      FullAuto:
+        maxScatterModifier: 14
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 30
   - type: WieldableSpeedModifiers
     baseWalk: 0.696
     baseSprint: 0.559
-  - type: GunWieldBonus
-    minAngle: -25
-    maxAngle: -45
-    angleIncrease: -9
-    angleDecay: 5
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -184,6 +235,7 @@
         whitelist:
           tags:
           - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
           - RMCAttachmentBurstFireAssembly
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentVerticalGrip
@@ -213,23 +265,23 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr.rsi
   - type: Gun
-    minAngle: 20
-    maxAngle: 70
-    angleIncrease: 25
-    angleDecay: 45
-    fireRate: 3.2
+    shotsPerBurst: 0
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m4spr.ogg
-  - type: GunWieldBonus
-    minAngle: -20
-    maxAngle: -50
-    angleIncrease: -22
-    angleDecay: 10
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilUnwielded: 2
+    scatterWielded: 6
+    baseFireRate: 2.86
   - type: WieldDelay
     baseDelay: 0.2
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.92
+    baseSprint: 0.86
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -266,6 +318,7 @@
         whitelist:
           tags:
           - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentLaserSight
           - RMCAttachmentVerticalGrip
@@ -274,3 +327,7 @@
       rmc-aslot-barrel: 1.18, 0.0
       rmc-aslot-rail: 0.225, 0.125
       rmc-aslot-underbarrel: 0.62, -0.31
+
+
+- type: Tag
+  id: WeaponRifleM54CE2

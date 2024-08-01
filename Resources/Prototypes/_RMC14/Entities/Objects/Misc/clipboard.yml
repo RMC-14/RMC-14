@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: BoxFolderClipboard
   id: CMClipboard
   name: clipboard
@@ -27,3 +27,7 @@
         whitelist:
           tags:
           - Write
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

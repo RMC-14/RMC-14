@@ -8,15 +8,15 @@
   },
   "states": [
     {
-      "name": "human",
+      "name": "equipped-MASK",
       "directions": 4
     },
     {
-      "name": "corgi",
+      "name": "equipped-MASK-dog",
       "directions": 4
     },
     {
-      "name": "corgi_puppy",
+      "name": "equipped-MASK-puppy",
       "directions": 4
     }
   ]

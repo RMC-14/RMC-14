@@ -140,3 +140,43 @@
         Slash: 10
   - type: XenoProjectile
     deleteOnFriendlyXeno: false
+
+- type: entity
+  parent: XenoBaseProjectile
+  id: XenoBombardAcidProjectile
+  name: glob of acid gas
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: acid_glob
+      shader: unshaded
+  - type: TimedDespawn
+    lifetime: 10
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: false
+  - type: SmokeOnTrigger
+    smokePrototype: RMCSmokeAcid
+    duration: 30
+    spreadAmount: 50
+  - type: SpawnOnTerminate
+    spawn: RMCSmokeAcid
+    popup: rmc-glob-land
+    popupType: LargeCaution
+  - type: ProjectileMaxRange
+    max: 10
+
+- type: entity
+  parent: XenoBombardAcidProjectile
+  id: XenoBombardNeurotoxinProjectile
+  name: glob of neurotoxin gas
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: neuro_glob
+      shader: unshaded

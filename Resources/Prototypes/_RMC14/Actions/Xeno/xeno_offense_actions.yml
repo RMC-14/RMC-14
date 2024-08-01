@@ -80,6 +80,12 @@
   - type: XenoTailStabAction
 
 - type: entity
+  parent: ActionXenoTailStab
+  id: ActionXenoTailStabCorrosive
+  name: Corrosive Tail Stab
+  description: Launches an attack towards a given direction. The cooldown is faster if you miss. [color=red]It also injects diluted molecular acid into the target, dealing damage over time.[/color]
+
+- type: entity
   id: ActionXenoLeap
   parent: ActionXenoBase
   name: Leap
@@ -217,6 +223,16 @@
     event: !type:XenoSprayAcidActionEvent
     useDelay: 8
     range: 6
+
+- type: entity
+  parent: ActionXenoSprayAcid
+  id: ActionXenoSprayAcidBoiler
+  components:
+  - type: WorldTargetAction
+    useDelay: 10
+  - type: ActionSharedCooldown
+    ids:
+    - ActionXenoAcidShroud
 
 - type: entity
   id: ActionXenoParalyzingSlash
@@ -369,3 +385,59 @@
     range: 9
     useDelay: 14
     checkCanAccess: false
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoBombard
+  name: Bombard (200)
+  description: Fire either an acidic glob after a delay. # TODO RMC14 or neurotoxic glob
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: bombard
+    event: !type:XenoBombardActionEvent
+    range: 10
+    checkCanAccess: false
+  - type: ActionSharedCooldown
+    id: ActionXenoBombard
+    ids:
+    - ActionXenoAcidShroud
+    cooldown: 20
+    onPerform: false
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoToggleGasType
+  name: Toggle Gas Type
+  description: Toggle between Acid or Neurotoxic gas types. Your acidic globs will deal continual damage to anything caught in its radius, while neurotoxin will cause targets to suffocate, be slowed down and blinded, alongside eventually knocking them unconscious to be kidnapped.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: shift_spit_acid_glob
+    event: !type:XenoBombardToggleActionEvent
+    useDelay: 1
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoAcidShroud
+  name: Acid Shroud
+  description: Create a small cloud of acid around you to cloak yourself. This will disable your other abilities for a short time to allow you to escape.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: acid_shroud
+    event: !type:XenoAcidShroudActionEvent
+  - type: ActionSharedCooldown
+    id: ActionXenoAcidShroud
+    ids:
+    - ActionXenoBombard
+    - ActionXenoAcidShroud
+    - ActionXenoSprayAcidBoiler
+    cooldown: 30
+    onPerform: false

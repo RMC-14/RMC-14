@@ -1,4 +1,4 @@
-﻿- type: Tag
+- type: Tag
   id: CMFireExtinguisherPortable
 
 - type: entity
@@ -27,6 +27,10 @@
         enum.ToggleVisuals.Layer:
           True: { state: fire_extinguisher } # TODO RMC14
           False: { state: fire_extinguisher }
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMFireExtinguisher

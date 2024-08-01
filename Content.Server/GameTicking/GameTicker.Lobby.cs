@@ -72,6 +72,8 @@ namespace Content.Server.GameTicking
                                     Loc.GetString("game-ticker-no-map-selected"));
             }
 
+            var planetName = _distressSignal.SelectedPlanetMapName ??
+                Loc.GetString("game-ticker-no-map-selected");
             var gmTitle = Loc.GetString(preset.ModeTitle);
             var desc = Loc.GetString(preset.Description);
             return Loc.GetString(
@@ -81,6 +83,7 @@ namespace Content.Server.GameTicking
                 ("roundId", RoundId),
                 ("playerCount", playerCount),
                 ("readyCount", readyCount),
+                ("planetName", planetName),
                 ("mapName", stationNames.ToString()),
                 ("gmTitle", gmTitle),
                 ("desc", desc));

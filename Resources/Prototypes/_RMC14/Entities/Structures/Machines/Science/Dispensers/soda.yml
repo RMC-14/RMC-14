@@ -15,6 +15,10 @@
     pack: CMDispenserSodaInventory
   - type: Machine
     board: CMCircuitboardDispenserSoda
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: reagentDispenserInventory
   id: CMDispenserSodaInventory

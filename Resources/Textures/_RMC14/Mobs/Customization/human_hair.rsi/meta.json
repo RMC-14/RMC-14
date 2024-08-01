@@ -1,0 +1,643 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/5ac4050eacf80ca5216402ded336f3efb2fb003e/icons/mob/humans/human_hair.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "hair_shorthair",
+      "directions": 4
+    },
+    {
+      "name": "hair_long_shoulder",
+      "directions": 4
+    },
+    {
+      "name": "hair_cuthair",
+      "directions": 4
+    },
+    {
+      "name": "hair_mohawk",
+      "directions": 4
+    },
+    {
+      "name": "hair_baldinghair",
+      "directions": 4
+    },
+    {
+      "name": "hair_flow",
+      "directions": 4
+    },
+    {
+      "name": "hair_bedhead",
+      "directions": 4
+    },
+    {
+      "name": "hair_dreads",
+      "directions": 4
+    },
+    {
+      "name": "hair_vlong",
+      "directions": 4
+    },
+    {
+      "name": "hair_jensen",
+      "directions": 4
+    },
+    {
+      "name": "hair_skinhead",
+      "directions": 4
+    },
+    {
+      "name": "hair_halfbang",
+      "directions": 4
+    },
+    {
+      "name": "hair_kusanagi",
+      "directions": 4
+    },
+    {
+      "name": "hair_ponytail",
+      "directions": 4
+    },
+    {
+      "name": "hair_ponytail2",
+      "directions": 4
+    },
+    {
+      "name": "hair_ponytail3",
+      "directions": 4
+    },
+    {
+      "name": "hair_halfbang_alt",
+      "directions": 4
+    },
+    {
+      "name": "hair_bedhead2",
+      "directions": 4
+    },
+    {
+      "name": "hair_longfringe",
+      "directions": 4
+    },
+    {
+      "name": "hair_flair",
+      "directions": 4
+    },
+    {
+      "name": "hair_curls",
+      "directions": 4
+    },
+    {
+      "name": "hair_himecut",
+      "directions": 4
+    },
+    {
+      "name": "hair_bedhead3",
+      "directions": 4
+    },
+    {
+      "name": "hair_vlongfringe",
+      "directions": 4
+    },
+    {
+      "name": "hair_longest",
+      "directions": 4
+    },
+    {
+      "name": "hair_spikey",
+      "directions": 4
+    },
+    {
+      "name": "hair_bigafro",
+      "directions": 4
+    },
+    {
+      "name": "hair_afro",
+      "directions": 4
+    },
+    {
+      "name": "hair_braid",
+      "directions": 4
+    },
+    {
+      "name": "hair_gelled",
+      "directions": 4
+    },
+    {
+      "name": "hair_sargeant",
+      "directions": 4
+    },
+    {
+      "name": "hair_kagami",
+      "directions": 4
+    },
+    {
+      "name": "hair_gentle",
+      "directions": 4
+    },
+    {
+      "name": "hair_hbraid",
+      "directions": 4
+    },
+    {
+      "name": "hair_stail",
+      "directions": 4
+    },
+    {
+      "name": "bald",
+      "directions": 4
+    },
+    {
+      "name": "hair_afro2",
+      "directions": 4
+    },
+    {
+      "name": "hair_beehive",
+      "directions": 4
+    },
+    {
+      "name": "hair_bobcurl",
+      "directions": 4
+    },
+    {
+      "name": "hair_bobcut",
+      "directions": 4
+    },
+    {
+      "name": "hair_bowlcut",
+      "directions": 4
+    },
+    {
+      "name": "hair_buzzcut",
+      "directions": 4
+    },
+    {
+      "name": "hair_buzzcut_tall",
+      "directions": 4
+    },
+    {
+      "name": "hair_combover",
+      "directions": 4
+    },
+    {
+      "name": "hair_crewcut",
+      "directions": 4
+    },
+    {
+      "name": "hair_devilock",
+      "directions": 4
+    },
+    {
+      "name": "hair_emo",
+      "directions": 4
+    },
+    {
+      "name": "hair_feather",
+      "directions": 4
+    },
+    {
+      "name": "hair_hitop",
+      "directions": 4
+    },
+    {
+      "name": "hair_odango",
+      "directions": 4
+    },
+    {
+      "name": "hair_ombre",
+      "directions": 4
+    },
+    {
+      "name": "hair_parted",
+      "directions": 4
+    },
+    {
+      "name": "hair_pompadour",
+      "directions": 4
+    },
+    {
+      "name": "hair_quiff",
+      "directions": 4
+    },
+    {
+      "name": "hair_updo",
+      "directions": 4
+    },
+    {
+      "name": "hair_longovereye",
+      "directions": 4
+    },
+    {
+      "name": "hair_shortovereye",
+      "directions": 4
+    },
+    {
+      "name": "hair_thefamilyman",
+      "directions": 4
+    },
+    {
+      "name": "hair_drillruru",
+      "directions": 4
+    },
+    {
+      "name": "hair_dandypompadour",
+      "directions": 4
+    },
+    {
+      "name": "hair_poofy",
+      "directions": 4
+    },
+    {
+      "name": "hair_toriyama",
+      "directions": 4
+    },
+    {
+      "name": "hair_toriyama2",
+      "directions": 4
+    },
+    {
+      "name": "hair_cia",
+      "directions": 4
+    },
+    {
+      "name": "hair_mulder",
+      "directions": 4
+    },
+    {
+      "name": "hair_scully",
+      "directions": 4
+    },
+    {
+      "name": "hair_nitori",
+      "directions": 4
+    },
+    {
+      "name": "hair_joestar",
+      "directions": 4
+    },
+    {
+      "name": "hair_ponytail4",
+      "directions": 4
+    },
+    {
+      "name": "hair_beehive2",
+      "directions": 4
+    },
+    {
+      "name": "hair_shortbraid",
+      "directions": 4
+    },
+    {
+      "name": "hair_reversemohawk",
+      "directions": 4
+    },
+    {
+      "name": "hair_father",
+      "directions": 4
+    },
+    {
+      "name": "hair_emolong",
+      "directions": 4
+    },
+    {
+      "name": "hair_fcornrows",
+      "directions": 4
+    },
+    {
+      "name": "hair_fcurly",
+      "directions": 4
+    },
+    {
+      "name": "hair_fpixieleft",
+      "directions": 4
+    },
+    {
+      "name": "hair_fpixieright",
+      "directions": 4
+    },
+    {
+      "name": "hair_fredding",
+      "directions": 4
+    },
+    {
+      "name": "hair_fbella",
+      "directions": 4
+    },
+    {
+      "name": "hair_fdietrich",
+      "directions": 4
+    },
+    {
+      "name": "hair_fvasquez",
+      "directions": 4
+    },
+    {
+      "name": "hair_fbun",
+      "directions": 4
+    },
+    {
+      "name": "hair_uflat",
+      "directions": 4
+    },
+    {
+      "name": "hair_ustubble",
+      "directions": 4
+    },
+    {
+      "name": "hair_ushaved",
+      "directions": 4
+    },
+    {
+      "name": "hair_mflattopfade",
+      "directions": 4
+    },
+    {
+      "name": "hair_mhighandtight",
+      "directions": 4
+    },
+    {
+      "name": "hair_miceman",
+      "directions": 4
+    },
+    {
+      "name": "hair_mjoker",
+      "directions": 4
+    },
+    {
+      "name": "hair_mmarinefade",
+      "directions": 4
+    },
+    {
+      "name": "hair_mmarinemohawk",
+      "directions": 4
+    },
+    {
+      "name": "hair_mmullet",
+      "directions": 4
+    },
+    {
+      "name": "hair_mshavedbalding",
+      "directions": 4
+    },
+    {
+      "name": "hair_mwardaddy",
+      "directions": 4
+    },
+    {
+      "name": "hair_mrasczak",
+      "directions": 4
+    },
+    {
+      "name": "hair_ponytail6",
+      "directions": 4
+    },
+    {
+      "name": "hair_shorthair3",
+      "directions": 4
+    },
+    {
+      "name": "hair_bun2",
+      "directions": 4
+    },
+    {
+      "name": "hair_shortbangs",
+      "directions": 4
+    },
+    {
+      "name": "hair_shavedbun",
+      "directions": 4
+    },
+    {
+      "name": "hair_halfshaved",
+      "directions": 4
+    },
+    {
+      "name": "hair_bun",
+      "directions": 4
+    },
+    {
+      "name": "hair_sleeze",
+      "directions": 4
+    },
+    {
+      "name": "hair_rows1",
+      "directions": 4
+    },
+    {
+      "name": "hair_rows2",
+      "directions": 4
+    },
+    {
+      "name": "hair_lowfade",
+      "directions": 4
+    },
+    {
+      "name": "hair_medfade",
+      "directions": 4
+    },
+    {
+      "name": "hair_highfade",
+      "directions": 4
+    },
+    {
+      "name": "hair_nofade",
+      "directions": 4
+    },
+    {
+      "name": "hair_coffeehouse",
+      "directions": 4
+    },
+    {
+      "name": "hair_shavedpart",
+      "directions": 4
+    },
+    {
+      "name": "hair_undercut",
+      "directions": 4
+    },
+    {
+      "name": "hair_sideundercut",
+      "directions": 4
+    },
+    {
+      "name": "hair_sidehangundercut",
+      "directions": 4
+    },
+    {
+      "name": "hair_reversesidehangundercut",
+      "directions": 4
+    },
+    {
+      "name": "hair_undercuttop",
+      "directions": 4
+    },
+    {
+      "name": "hair_hightight",
+      "directions": 4
+    },
+    {
+      "name": "hair_fringetail",
+      "directions": 4
+    },
+    {
+      "name": "hair_rowbun",
+      "directions": 4
+    },
+    {
+      "name": "hair_rowdualtail",
+      "directions": 4
+    },
+    {
+      "name": "hair_bowlcut2",
+      "directions": 4
+    },
+    {
+      "name": "hair_thinning",
+      "directions": 4
+    },
+    {
+      "name": "hair_thinningrear",
+      "directions": 4
+    },
+    {
+      "name": "hair_thinningfront",
+      "directions": 4
+    },
+    {
+      "name": "hair_averagejoe",
+      "directions": 4
+    },
+    {
+      "name": "hair_sideswept",
+      "directions": 4
+    },
+    {
+      "name": "hair_mohawkshaved",
+      "directions": 4
+    },
+    {
+      "name": "hair_mohawkshavednaomi",
+      "directions": 4
+    },
+    {
+      "name": "hair_mohawkshaved2",
+      "directions": 4
+    },
+    {
+      "name": "hair_gentle2",
+      "directions": 4
+    },
+    {
+      "name": "hair_fbun2",
+      "directions": 4
+    },
+    {
+      "name": "hair_combover2",
+      "directions": 4
+    },
+    {
+      "name": "hair_flair2",
+      "directions": 4
+    },
+    {
+      "name": "hair_scully2",
+      "directions": 4
+    },
+    {
+      "name": "hair_scully2alt",
+      "directions": 4
+    },
+    {
+      "name": "hair_cleancut",
+      "directions": 4
+    },
+    {
+      "name": "hair_ponytail7",
+      "directions": 4
+    },
+    {
+      "name": "hair_ponytail8",
+      "directions": 4
+    },
+    {
+      "name": "hair_ponytail_rough",
+      "directions": 4
+    },
+    {
+      "name": "hair_bun_manbun",
+      "directions": 4
+    },
+    {
+      "name": "hair_bun_topknot",
+      "directions": 4
+    },
+    {
+      "name": "hair_punk_chelsea",
+      "directions": 4
+    },
+    {
+      "name": "hair_punk_chelsea_smallhawk",
+      "directions": 4
+    },
+    {
+      "name": "hair_punk_chelsea_ponytail",
+      "directions": 4
+    },
+    {
+      "name": "hair_punk_chelseafringe",
+      "directions": 4
+    },
+    {
+      "name": "hair_punk_chelseafringe_smallhawk",
+      "directions": 4
+    },
+    {
+      "name": "hair_punk_chelseafringe_bighawk",
+      "directions": 4
+    },
+    {
+      "name": "hair_punk_chelseafringe_ponytail",
+      "directions": 4
+    },
+    {
+      "name": "hair_oxton",
+      "directions": 4
+    },
+    {
+      "name": "hair_croft",
+      "directions": 4
+    },
+    {
+      "name": "hair_row_braid",
+      "directions": 4
+    },
+    {
+      "name": "hair_aviator",
+      "directions": 4
+    },
+    {
+      "name": "hair_gantleponytail",
+      "directions": 4
+    },
+    {
+      "name": "hair_edgar",
+      "directions": 4
+    },
+    {
+      "name": "hair_emobun",
+      "directions": 4
+    },
+    {
+      "name": "hair_taper",
+      "directions": 4
+    },
+    {
+      "name": "hair_braid3",
+      "directions": 4
+    }
+  ]
+}

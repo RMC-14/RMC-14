@@ -1,4 +1,4 @@
-﻿- type: Tag
+- type: Tag
   id: CMRollerBed
 
 - type: entity
@@ -37,6 +37,10 @@
         unfoldedLayer:
           True: { visible: false }
           False: { visible: true }
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMRollerBed

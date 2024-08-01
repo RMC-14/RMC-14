@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: AmmoProviderShotgunShell
   id: CMBoxShotgunBase
@@ -16,6 +16,10 @@
   - type: Tag
     tags:
     - CMBoxShotgunShells
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: Tag
   id: CMBoxShotgunShells

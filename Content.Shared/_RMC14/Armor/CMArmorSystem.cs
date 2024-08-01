@@ -168,7 +168,7 @@ public sealed class CMArmorSystem : EntitySystem
         var armorPiercing = args.ArmorPiercing;
         if (args.Tool != null)
         {
-            var piercingEv = new CMGetArmorPiercingEvent();
+            var piercingEv = new CMGetArmorPiercingEvent(ent);
             RaiseLocalEvent(args.Tool.Value, ref piercingEv);
             armorPiercing += piercingEv.Piercing;
         }

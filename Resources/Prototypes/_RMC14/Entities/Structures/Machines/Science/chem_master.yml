@@ -16,3 +16,7 @@
     state: mixer_loaded
   - type: Machine
     board: CMCircuitboardChemMaster
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno

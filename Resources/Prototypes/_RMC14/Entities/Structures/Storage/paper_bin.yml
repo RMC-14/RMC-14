@@ -16,6 +16,10 @@
           tags:
           - Document
           - Write
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMPaperBin

@@ -150,9 +150,9 @@
         amount: 15
 #      - id: Marine Chestrig
 #        amount: 15
-      - id: CMBackpackMarineTech
-        amount: 15
       - id: CMSatchelMarineTech
+        amount: 15
+      - id: RMCSatchelWelderChestrig
         amount: 15
       - id: CMSatchelMedical
         amount: 15
@@ -170,8 +170,8 @@
       entries:
       - id: CMBeltMarine
         amount: 15
-#      - id: M276 Pattern M40 Grenade Rig
-#        amount: 10
+      - id: RMCBeltGrenade
+        amount: 10
 #      - id: M276 Pattern Shotgun Shell Loading Rig
 #        amount: 15
 #      - id: M276 Pattern General Pistol Holster Rig
@@ -191,42 +191,42 @@
 #        amount: 15
     - name: Pouches
       entries:
-      - id: CMPouchBayonet
+      - id: RMCPouchBayonet
         name: Bayonet Sheath (Full)
         amount: 15
-      - id: CMPouchFirstAidSplintsGauzeOintment
+      - id: RMCPouchFirstAidSplintsGauzeOintment
         name: First-Aid Pouch (Splints, Gauze, Ointment)
         amount: 15
-      - id: CMPouchFirstAidPills
+      - id: RMCPouchFirstAidPills
         name: First-Aid Pouch (Pill Packets)
         amount: 15
-      - id: CMPouchFlareFilled
+      - id: RMCPouchFlareFilled
         name: Flare Pouch (Full)
         amount: 15
-      - id: CMPouchDocumentSmall
+      - id: RMCPouchDocumentSmall
         amount: 15
-      - id: CMPouchMagazine
+      - id: RMCPouchMagazine
         amount: 15
-      - id: CMPouchShotgun
+      - id: RMCPouchShotgun
         amount: 15
-      - id: CMPouchGeneralMedium
+      - id: RMCPouchGeneralMedium
         amount: 15
-      - id: CMPouchMagazinePistol
+      - id: RMCPouchMagazinePistol
         amount: 15
-      - id: CMPouchPistol
+      - id: RMCPouchPistol
         amount: 15
     - name: Restricted Pouches
       entries:
-      - id: CMPouchConstruction
+      - id: RMCPouchConstruction
         amount: 1
-      - id: CMPouchExplosive
+      - id: RMCPouchExplosive
         amount: 1
-      - id: CMPouchFirstResponder
+      - id: RMCPouchFirstResponder
         name: First Responder Pouch (Empty)
         amount: 2
-      - id: CMPouchMagazinePistolLarge
+      - id: RMCPouchMagazinePistolLarge
         amount: 2
-      - id: CMPouchTools
+      - id: RMCPouchTools
         amount: 1
 #      - id: Sling Pouch
 #        amount: 1
@@ -240,14 +240,14 @@
 #        amount: 10
     - name: Miscellaneous
       entries:
-#      - id: Ballistic goggles
-#        amount: 10
-#      - id: M1A1 Ballistic goggles
-#        amount: 10
-#      - id: Prescription ballistic goggles
-#        amount: 10
-#      - id: Marine RPG glasses
-#        amount: 10
+      - id: RMCGogglesBallistic
+        amount: 10
+      - id: RMCGogglesM1A1Ballistic
+        amount: 10
+      - id: RMCGogglesPrescriptionBallistic
+        amount: 10
+      - id: RMCGlassesMarineRpg
+        amount: 10
 #      - id: M5 Integrated Gas Mask
 #        amount: 10
 #      - id: M10 Helmet Netting
@@ -288,7 +288,7 @@
     - name: Armor-Piercing Ammunition
       entries:
       - id: CMMagazineRifleM4SPRAP
-        amount: 3
+        amount: 4
       - id: CMMagazineSMGM63AP
         amount: 3
       - id: CMMagazineRifleM54CAP
@@ -296,13 +296,11 @@
     - name: Extended Ammunition
       entries:
       - id: CMMagazineSMGM63Ext
-        amount: 1
+        amount: 2
       - id: CMMagazineRifleM54CExt
-        amount: 1
+        amount: 2
     - name: Special Ammunition
       entries:
-      #- id: CMDrumSmartGunM56
-      #  amount: 1
       - id: RMCMagazineSmartGun
         amount: 1
       #- id: CMSpeedLoaderM44Heavy
@@ -312,9 +310,9 @@
     - name: Restricted Firearm Ammunition
       entries:
       - id: CMMagazinePistolMK80
-        amount: 5
+        amount: 6
       - id: RMCMagazinePistolSU6
-        amount: 5
+        amount: 6
       #- id: CMIncineratorTankM240
       #  amount: 3
       #- id: CMMagazineDrumM56D
@@ -393,8 +391,8 @@
         amount: 1
 #      - id: CMScabbardMacheteFull
 #        amount: 5
-      #- id: CMBinoculars
-      #  amount: 5
+      - id: RMCBinoculars
+        amount: 1
       #- id: CMFoldingBarricadesMB6x3
       #  amount: 2
       #- id: CMSparePDTLBattleBuddyKit
@@ -428,8 +426,8 @@
       entries:
       - id: RMCAttachmentB8SmartScope
         amount: 2
-      #- id: RMCAttachmentMagneticHarness
-      #  amount: 5
+      - id: RMCAttachmentMagneticHarness
+        amount: 5
       - id: RMCAttachmentS42xTelescopicMiniscope
         amount: 2
 #      - id: RMCAttachmentS5RedDotSight # UNCOMMENT THIS WHEN ACCURACY IS IMPLEMENTED
@@ -442,14 +440,14 @@
       entries:
       - id: RMCAttachmentAngledGrip
         amount: 3
-#      - id: CMAttachmentBipod
-#        amount: 3
+      - id: RMCAttachmentBipod
+        amount: 3
       - id: RMCAttachmentBurstFireAssembly
         amount: 2
       - id: RMCAttachmentGyroscopicStabilizer
         amount: 2
       - id: RMCAttachmentLaserSight
-        amount: 4
+        amount: 3
 #      - id: CMAttachmentMiniFlamethrower
 #        amount: 2
 #      - id: CMAttachmentXMVESG1FlamerNozzle
@@ -459,7 +457,7 @@
 #      - id: CMAttachmentUnderbarrelExtinguisher
 #        amount: 2
       - id: RMCAttachmentVerticalGrip
-        amount: 4
+        amount: 3
     - name: Stock
       entries:
       - id: RMCAttachmentM42A2WoodenStock
@@ -470,5 +468,5 @@
         amount: 2
       - id: RMCAttachmentM54CStockSolid
         amount: 2
-#      - id: RMCAttachmentM44MagnumSharpshooterStock
-#        amount: 2
+      - id: RMCAttachmentM44MagnumSharpshooterStock
+        amount: 2

@@ -39,6 +39,8 @@
             visible: true
           False:
             visible: false
+  - type: DamageMultiplierFlags
+    flags: Breaching
 
 # Metal Barricade Tree
 - type: entity

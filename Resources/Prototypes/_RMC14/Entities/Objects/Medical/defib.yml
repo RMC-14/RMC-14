@@ -70,11 +70,11 @@
     - Medical Doctor
   - type: RequiresSkill
     skills:
-      medical: 2
+      RMCSkillMedical: 2
 
 - type: entity
   id: CMDefibrillator
-  parent: [ CMBaseDefibrillator, PowerCellSlotMediumItem ]
+  parent: [CMBaseDefibrillator, RMCPowerCellSlot]
   suffix: RMC14
   components:
   - type: PowerCellDraw

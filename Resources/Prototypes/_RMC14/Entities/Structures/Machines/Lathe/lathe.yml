@@ -10,9 +10,9 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/autolathe.rsi
     layers:
-    - state: autolathe_n
-      map: ["enum.LatheVisualLayers.IsRunning"]
     - state: autolathe
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: autolathe_u
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
     - state: autolathe_t
@@ -57,8 +57,9 @@
 #    - Fire alarm electronics (62 metal, 62 glass)
 #    - Power control module (62 metal, 62 glass)
 #    - Matter cartridge (37500 metal, 18750 glass)
-#    - Table parts (9375 metal)
-#    - Reinforced table parts (18750 metal)
+    - RMCTablePartTan
+    - RMCTablePartAlmayer
+    - RMCTablePartReinforced
 #    - Rack parts (4687 metal)
     - CMScalpel
     - CMCircularSaw

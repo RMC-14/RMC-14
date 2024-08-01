@@ -22,6 +22,10 @@
         enum.FaxMachineVisuals.VisualState:
           Printing: { state: printing }
           Normal: {state: icon}
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMFax

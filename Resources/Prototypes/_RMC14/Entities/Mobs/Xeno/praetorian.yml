@@ -57,6 +57,7 @@
   - type: Tackle
     threshold: 3
     stun: 5
+    chance: 0.45
   - type: Fixtures
     fixtures:
       fix1:

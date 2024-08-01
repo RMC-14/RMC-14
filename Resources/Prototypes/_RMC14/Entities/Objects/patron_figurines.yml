@@ -351,3 +351,14 @@
   - type: PatronFigurine
     id: b7fd4e27-04f8-4303-8a3c-03ca18b38ced
 
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAlexGregory
+  name: Alex Gregory figurine
+  description: "A prominent Nanotrasen Captain. You think you might have seen him before."
+  components:
+  - type: Sprite
+    state: alex_gregory
+  - type: PatronFigurine
+    id: 34bc0234-d7bf-44cc-a2ef-fb8fd1abf1b5

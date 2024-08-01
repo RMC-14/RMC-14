@@ -1,6 +1,6 @@
 ﻿# riot
 - type: entity
-  parent: [ClothingOuterBaseMedium, AllowSuitStorageClothing]
+  parent: RMCBaseArmor
   id: CMArmorRiot
   name: M5 riot control armor
   description: A heavily modified suit of M2 MP Armor used to suppress riots from buckethead marines. Slows you down a lot.

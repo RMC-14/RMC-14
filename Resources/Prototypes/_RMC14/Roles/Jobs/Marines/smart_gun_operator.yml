@@ -14,13 +14,17 @@
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - SmartGunOperator
+  overwatchSortPriority: -2
+  overwatchShowName: true
+  overwatchRoleName: Smart Gun Operator
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      firearms: 1
-      jtac: 1
-      smartGun: 1
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillJtac: 1
+        RMCSkillSmartGun: 1
     - type: CMVendorUser
       points: 45
 

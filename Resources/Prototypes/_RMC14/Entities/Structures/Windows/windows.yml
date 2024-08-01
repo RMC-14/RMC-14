@@ -38,6 +38,8 @@
         layer:
         - WallLayer
         density: 1000
+  - type: DamageMultiplierFlags
+    flags: Breaching
 
 - type: entity
   parent: CMBaseWindow

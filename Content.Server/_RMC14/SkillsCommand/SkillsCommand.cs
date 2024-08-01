@@ -16,12 +16,8 @@ public sealed class SkillsCommand : ToolshedCommand
     [CommandImplementation("get")]
     public int Get([PipedArgument] EntityUid marine, [CommandArgument] SkillType skill)
     {
-        var skillComp = EntityManager.GetComponentOrNull<SkillsComponent>(marine);
-        if (skillComp == null)
-            return 0;
-
-        var skills = skillComp.Skills;
-        return (int) (typeof(Skills).GetProperty(skill.Value)?.GetValue(skills) ?? 0);
+        _skills ??= GetSys<SkillsSystem>();
+        return _skills.GetSkill(marine, skill.Value);
     }
 
     [CommandImplementation("set")]
@@ -35,12 +31,10 @@ public sealed class SkillsCommand : ToolshedCommand
             return marine;
 
         _skills ??= GetSys<SkillsSystem>();
-        var skillsComp = EnsureComp<SkillsComponent>(marine);
-        object skills = skillsComp.Skills;
-        var levelValue = level.Evaluate(ctx);
-        typeof(Skills).GetProperty(skill.Value)?.SetValue(skills, levelValue);
 
-        _skills.SetSkills((marine, skillsComp), (Skills) skills);
+        var levelValue = level.Evaluate(ctx);
+        _skills.SetSkill(marine, skill.Value, levelValue);
+
         return marine;
     }
 

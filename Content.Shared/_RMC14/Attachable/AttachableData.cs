@@ -1,5 +1,6 @@
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
+using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -36,13 +37,19 @@ public record struct AttachableWeaponRangedModifierSet(
     FixedPoint2 AccuracyAddMult, // Not implemented yet. Added to have all the values already on our attachments, so whoever implements this doesn't need to dig through CM13. Remove this comment once implemented.
     FixedPoint2 AccuracyMovementPenaltyAddMult, // As above.
     FixedPoint2 DamageFalloffAddMult, // As above.
-    double BurstScatterFlat, // As above. Conversion to RMC: CM_SCATTER * 2
+    double BurstScatterAddMult, // This affects scatter during burst and full-auto fire. Conversion to RMC: burst_scatter_mod
     int ShotsPerBurstFlat, // Modifies the maximum number of shots in a burst.
     FixedPoint2 DamageAddMult, // Additive multiplier to damage.
     float RecoilFlat, // How much the camera shakes when you shoot.
     double ScatterFlat, // Scatter in degrees. This is how far bullets go from where you aim. Conversion to RMC: CM_SCATTER * 2
     float FireDelayFlat, // The delay between each shot. Conversion to RMC: CM_FIRE_DELAY / 10
     float ProjectileSpeedFlat // How fast the projectiles move. Conversion to RMC: CM_PROJECTILE_SPEED * 10
+);
+
+[DataRecord, Serializable, NetSerializable]
+public record struct AttachableWeaponFireModesModifierSet(
+    AttachableModifierConditions? Conditions,
+    SelectiveFire ExtraFireModes
 );
 
 // SS13 has move delay instead of speed. Move delay isn't implemented here, and approximating it through maths like fire delay is scuffed because of how the events used to change speed work.

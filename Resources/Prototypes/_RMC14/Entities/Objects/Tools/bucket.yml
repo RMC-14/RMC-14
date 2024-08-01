@@ -12,7 +12,7 @@
       state: bucket-1
       visible: false
   - type: Item
-    size: Normal
+    size: Huge
   - type: SolutionContainerManager
     solutions:
       bucket:
@@ -61,6 +61,10 @@
   - type: PhysicalComposition
     materialComposition:
       Plastic: 50 # TODO RMC14 plastic
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMBucket

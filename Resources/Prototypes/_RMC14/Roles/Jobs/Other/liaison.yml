@@ -18,15 +18,16 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      firearms: 0
-      vehicles: 1
+      skills:
+        RMCSkillFirearms: 0
+        RMCSkillVehicles: 1
 
 - type: startingGear
   id: CMGearLiaison
   equipment:
     jumpsuit: CMJumpsuitLiaisonBlack
     back: CMSatchel
-    shoes: CMShoesLaceup
+    shoes: RMCShoesLaceup
     id: CMIDCardLiaison
     ears: RMCHeadsetLiaison
 

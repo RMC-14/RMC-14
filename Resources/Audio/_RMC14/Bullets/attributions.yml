@@ -7,3 +7,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/84432f5145e065e49a93f781cc7cf58d46f055a3/sound/bullets/energy_miss1.ogg"
+
+- files: ["shield_break_c1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/ffbfb98e07642857222dbe0792d029c0ceb2b38c/sound/bullets/shield_break_c1.ogg"
