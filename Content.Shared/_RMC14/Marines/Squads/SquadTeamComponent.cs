@@ -17,5 +17,8 @@ public sealed partial class SquadTeamComponent : Component
     public SpriteSpecifier Background;
 
     [DataField]
-    public ProtoId<AccessLevelPrototype>[] AccessLevels;
+    public ProtoId<AccessLevelPrototype>[] AccessLevels = Array.Empty<ProtoId<AccessLevelPrototype>>();
+
+    [DataField]
+    public HashSet<EntityUid> Members = new();
 }

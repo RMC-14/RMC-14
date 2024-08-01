@@ -586,3 +586,6 @@ CMPouchConstruction: RMCPouchConstruction
 CMPouchTools: RMCPouchTools
 CMPouchToolsFill: RMCPouchToolsFill
 CMPouchSling: RMCPouchSling
+
+# 2024-07-31
+CMGroundsideOperationsConsole: RMCGroundsideOperationsConsole
