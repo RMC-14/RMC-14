@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Systems;
@@ -29,7 +29,7 @@ public sealed class XenoAcidSystem : EntitySystem
     private void OnXenoCorrosiveAcid(Entity<XenoAcidComponent> xeno, ref XenoCorrosiveAcidEvent args)
     {
         if (xeno.Owner != args.Performer ||
-            !CheckCorrodiblePopups(xeno, args.Target))
+            !CheckCorrodiblePopups(xeno, args.Target, args.Strength))
         {
             return;
         }
@@ -57,7 +57,7 @@ public sealed class XenoAcidSystem : EntitySystem
         if (args.Handled || args.Cancelled || args.Target is not { } target)
             return;
 
-        if (!CheckCorrodiblePopups(xeno, target))
+        if (!CheckCorrodiblePopups(xeno, target, args.Strength))
             return;
 
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
@@ -67,16 +67,28 @@ public sealed class XenoAcidSystem : EntitySystem
             return;
 
         args.Handled = true;
-
+        
         var acid = SpawnAttachedTo(args.AcidId, target.ToCoordinates());
+        double timeMultiplier = 1;
+
+        if(TryComp<CorrodingComponent>(target, out CorrodingComponent? corroding))
+        {
+            QueueDel(corroding.Acid);
+            timeMultiplier = 1.0-((_timing.CurTime - corroding.StartedAt) / corroding.TimeToCorrode);
+            RemComp<CorrodingComponent>(target);
+        }
+
         AddComp(target, new CorrodingComponent
         {
             Acid = acid,
-            CorrodesAt = _timing.CurTime + args.Time
+            Strength = args.Strength,
+            TimeToCorrode = args.Time * timeMultiplier,
+            StartedAt = _timing.CurTime,
+            CorrodesAt = _timing.CurTime + args.Time * timeMultiplier
         });
     }
 
-    private bool CheckCorrodiblePopups(Entity<XenoAcidComponent> xeno, EntityUid target)
+    private bool CheckCorrodiblePopups(Entity<XenoAcidComponent> xeno, EntityUid target, AcidStrength newCorrodingStrength)
     {
         if (!TryComp(target, out CorrodibleComponent? corrodible) ||
             !corrodible.IsCorrodible)
@@ -85,7 +97,7 @@ public sealed class XenoAcidSystem : EntitySystem
             return false;
         }
 
-        if (HasComp<CorrodingComponent>(target))
+        if (TryComp(target, out CorrodingComponent? corroding) && corroding.Strength >= newCorrodingStrength)
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-acid-already-corroding", ("target", target)), xeno, xeno);
             return false;

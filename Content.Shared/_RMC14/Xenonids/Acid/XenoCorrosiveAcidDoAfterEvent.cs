@@ -1,4 +1,4 @@
-﻿using Content.Shared.DoAfter;
+using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -17,11 +17,15 @@ public sealed partial class XenoCorrosiveAcidDoAfterEvent : DoAfterEvent
     [DataField]
     public TimeSpan Time = TimeSpan.FromSeconds(150);
 
+    [DataField]
+    public AcidStrength Strength = AcidStrength.Normal;
+
     public XenoCorrosiveAcidDoAfterEvent(XenoCorrosiveAcidEvent ev)
     {
         AcidId = ev.AcidId;
         PlasmaCost = ev.PlasmaCost;
         Time = ev.Time;
+        Strength = ev.Strength;
     }
 
     public override DoAfterEvent Clone()
