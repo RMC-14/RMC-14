@@ -1,7 +1,7 @@
 - type: Tag
   id: RMCExplosiveBreachingCharge
 
-﻿- type: entity
+- type: entity
   parent: BaseItem
   id: RMCExplosiveBreachingCharge
   name: breaching charge # TODO RMC14 disable with multitool?
