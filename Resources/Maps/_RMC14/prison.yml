@@ -22361,25 +22361,6 @@ entities:
     - type: Transform
       pos: 24.5,-62.5
       parent: 1
-- proto: CMPouchGeneralLarge
-  entities:
-  - uid: 15003
-    components:
-    - type: Transform
-      pos: -121.489075,-38.469345
-      parent: 1
-  - uid: 15672
-    components:
-    - type: Transform
-      pos: -121.489075,-38.248104
-      parent: 1
-- proto: CMPouchTools
-  entities:
-  - uid: 15674
-    components:
-    - type: Transform
-      pos: 64.5,-5.5
-      parent: 1
 - proto: CMRack
   entities:
   - uid: 452
@@ -48433,6 +48414,25 @@ entities:
     missingComponents:
     - RMCWallExplosionDeletable
     - Corrodible
+- proto: RMCPouchGeneralLarge
+  entities:
+  - uid: 15003
+    components:
+    - type: Transform
+      pos: -121.489075,-38.469345
+      parent: 1
+  - uid: 15672
+    components:
+    - type: Transform
+      pos: -121.489075,-38.248104
+      parent: 1
+- proto: RMCPouchTools
+  entities:
+  - uid: 15674
+    components:
+    - type: Transform
+      pos: 64.5,-5.5
+      parent: 1
 - proto: RMCShutterAlmayer
   entities:
   - uid: 13289
@@ -53852,6 +53852,266 @@ entities:
     components:
     - type: Transform
       pos: 90.5,8.5
+      parent: 1
+  - uid: 4778
+    components:
+    - type: Transform
+      pos: 23.5,-68.5
+      parent: 1
+  - uid: 4779
+    components:
+    - type: Transform
+      pos: 23.5,-74.5
+      parent: 1
+  - uid: 4780
+    components:
+    - type: Transform
+      pos: 23.5,-79.5
+      parent: 1
+  - uid: 4781
+    components:
+    - type: Transform
+      pos: 16.5,-79.5
+      parent: 1
+  - uid: 13573
+    components:
+    - type: Transform
+      pos: 16.5,-68.5
+      parent: 1
+  - uid: 13574
+    components:
+    - type: Transform
+      pos: 15.5,-63.5
+      parent: 1
+  - uid: 13575
+    components:
+    - type: Transform
+      pos: 23.5,-58.5
+      parent: 1
+  - uid: 13576
+    components:
+    - type: Transform
+      pos: 23.5,-51.5
+      parent: 1
+  - uid: 13577
+    components:
+    - type: Transform
+      pos: 22.5,-51.5
+      parent: 1
+  - uid: 13578
+    components:
+    - type: Transform
+      pos: 24.5,-56.5
+      parent: 1
+  - uid: 13579
+    components:
+    - type: Transform
+      pos: 39.5,-52.5
+      parent: 1
+  - uid: 13580
+    components:
+    - type: Transform
+      pos: 40.5,-60.5
+      parent: 1
+  - uid: 13581
+    components:
+    - type: Transform
+      pos: 42.5,-59.5
+      parent: 1
+  - uid: 13582
+    components:
+    - type: Transform
+      pos: 42.5,-56.5
+      parent: 1
+  - uid: 13583
+    components:
+    - type: Transform
+      pos: 46.5,-53.5
+      parent: 1
+  - uid: 13584
+    components:
+    - type: Transform
+      pos: 47.5,-53.5
+      parent: 1
+  - uid: 13585
+    components:
+    - type: Transform
+      pos: 50.5,-62.5
+      parent: 1
+  - uid: 13595
+    components:
+    - type: Transform
+      pos: 11.5,-81.5
+      parent: 1
+  - uid: 13596
+    components:
+    - type: Transform
+      pos: 110.5,-2.5
+      parent: 1
+  - uid: 13597
+    components:
+    - type: Transform
+      pos: 110.5,22.5
+      parent: 1
+  - uid: 13598
+    components:
+    - type: Transform
+      pos: 88.5,14.5
+      parent: 1
+  - uid: 13599
+    components:
+    - type: Transform
+      pos: 117.5,-20.5
+      parent: 1
+  - uid: 13600
+    components:
+    - type: Transform
+      pos: 117.5,-15.5
+      parent: 1
+  - uid: 13601
+    components:
+    - type: Transform
+      pos: 101.5,-11.5
+      parent: 1
+  - uid: 13602
+    components:
+    - type: Transform
+      pos: 97.5,-14.5
+      parent: 1
+  - uid: 13603
+    components:
+    - type: Transform
+      pos: 97.5,-18.5
+      parent: 1
+  - uid: 13604
+    components:
+    - type: Transform
+      pos: 110.5,-8.5
+      parent: 1
+  - uid: 13605
+    components:
+    - type: Transform
+      pos: 105.5,-9.5
+      parent: 1
+  - uid: 13606
+    components:
+    - type: Transform
+      pos: 110.5,-5.5
+      parent: 1
+  - uid: 13607
+    components:
+    - type: Transform
+      pos: 110.5,-12.5
+      parent: 1
+  - uid: 13617
+    components:
+    - type: Transform
+      pos: 96.5,13.5
+      parent: 1
+  - uid: 13618
+    components:
+    - type: Transform
+      pos: 92.5,14.5
+      parent: 1
+  - uid: 13619
+    components:
+    - type: Transform
+      pos: 94.5,21.5
+      parent: 1
+  - uid: 13620
+    components:
+    - type: Transform
+      pos: 96.5,27.5
+      parent: 1
+  - uid: 13621
+    components:
+    - type: Transform
+      pos: 96.5,30.5
+      parent: 1
+  - uid: 13622
+    components:
+    - type: Transform
+      pos: 102.5,27.5
+      parent: 1
+  - uid: 13623
+    components:
+    - type: Transform
+      pos: 102.5,30.5
+      parent: 1
+  - uid: 13624
+    components:
+    - type: Transform
+      pos: 96.5,40.5
+      parent: 1
+  - uid: 13625
+    components:
+    - type: Transform
+      pos: 96.5,37.5
+      parent: 1
+  - uid: 13626
+    components:
+    - type: Transform
+      pos: 124.5,16.5
+      parent: 1
+  - uid: 13645
+    components:
+    - type: Transform
+      pos: 120.5,16.5
+      parent: 1
+  - uid: 13646
+    components:
+    - type: Transform
+      pos: 124.5,2.5
+      parent: 1
+  - uid: 13647
+    components:
+    - type: Transform
+      pos: 119.5,2.5
+      parent: 1
+  - uid: 13648
+    components:
+    - type: Transform
+      pos: 117.5,-5.5
+      parent: 1
+  - uid: 13649
+    components:
+    - type: Transform
+      pos: 117.5,-8.5
+      parent: 1
+  - uid: 13650
+    components:
+    - type: Transform
+      pos: 117.5,-11.5
+      parent: 1
+  - uid: 13651
+    components:
+    - type: Transform
+      pos: 89.5,13.5
+      parent: 1
+  - uid: 13652
+    components:
+    - type: Transform
+      pos: 86.5,-7.5
+      parent: 1
+  - uid: 13653
+    components:
+    - type: Transform
+      pos: 86.5,-3.5
+      parent: 1
+  - uid: 13654
+    components:
+    - type: Transform
+      pos: 81.5,-2.5
+      parent: 1
+  - uid: 13657
+    components:
+    - type: Transform
+      pos: 80.5,-3.5
+      parent: 1
+  - uid: 13658
+    components:
+    - type: Transform
+      pos: 100.5,-15.5
       parent: 1
 - proto: RMCWallBoneResin
   entities:

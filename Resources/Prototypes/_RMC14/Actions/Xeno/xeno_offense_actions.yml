@@ -332,7 +332,7 @@
   id: ActionXenoScreech
   parent: ActionXenoBase
   name: Screech (250)
-  description: A wide area of effect stun, screeches upon activation.
+  description: A wide area of effect stun, screeches upon activation. [color=red]This is blocked by solid walls, smoke, and boiler gas, but not windows![/color]
   components:
   - type: InstantAction
     itemIconStyle: NoItem
