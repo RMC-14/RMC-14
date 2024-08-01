@@ -72,6 +72,8 @@
       - Multitool
       - Flashlight
       - PowerCell
+      - CMFireExtinguisherPortable
+      - RMCExplosiveBreachingCharge
 #      - # TODO nailgun, circuit board
       components:
       - Welder
@@ -114,6 +116,7 @@
       - CMMagazinePistol
       - RMCMagazineRevolver
       - PowerCell
+      - CMFireExtinguisherPortable
 #      - # TODO RMC14 handful of shotgun shells
 #      - # TODO nailgun, circuit board
       components:

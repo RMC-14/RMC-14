@@ -40,7 +40,7 @@
     outerClothing: CMCoatLong
     back: CMSatchelMarine
     gloves: CMHandsLatex
-    shoes: ClothingShoesColorWhite
+    shoes: RMCShoesWhite
     head: CMHeadCapSurgBlue
     id: CMIDCardDoctor
     ears: CMHeadsetMedical

@@ -4099,5 +4099,111 @@
   id: 484
   time: '2024-07-30T08:28:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3368
+- author: Vermidia
+  changes:
+  - message: Crushers can hit barricades with charge
+    type: Fix
+  id: 485
+  time: '2024-07-31T22:01:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3414
+- author: DrSmugleaf
+  changes:
+  - message: Added the overwatch console, giving Command roles a way to quickly get
+      information on all squads, their role composition, head count and the ability
+      to watch each marine through their helmet's camera.
+    type: Add
+  id: 486
+  time: '2024-08-01T03:16:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3101
+- author: DrSmugleaf
+  changes:
+  - message: Added the M4SPR, M54C and Engineering kits to the Squad Leader's gear
+      rack.
+    type: Add
+  - message: Added the essential gear kit to the squad leader and fireteam leader
+      racks. These contain normal binoculars and flares until signal flares and laser
+      designators are implemented, and the leader kit contains a breaching charge
+      until plastic explosives are implemented.
+    type: Add
+  - message: Added binoculars to some squad vendors that were missing them.
+    type: Add
+  - message: Fixed the squad leader, fireteam leader, specialist, comtech, corpsmen
+      and riflemen not having an option to buy M44 marksman speed loaders, and some
+      not having the option to buy MK80 magazines and SU-6 magazines.
+    type: Fix
+  - message: Fixed the weapons specialist being unable to buy an MK80 case or an SU-6
+      case.
+    type: Fix
+  - message: Fixed the cost of the M4 armor being too high for the comtech and corpsman,
+      it now costs 14 for the comtech instead of 30, and 16 for the corpsman instead
+      of 28,
+    type: Fix
+  - message: Fixed the fireteam leader not being able to buy a grenade rig.
+    type: Fix
+  - message: Fixed some squad role vendors not having recommended options marked.
+    type: Fix
+  - message: Fixed some of the prep room vendors having lower special mag amounts
+      than intended. They now have one more M4SPR AP mag, one more M63 ext mag, 1
+      more M54C extended mag, 1 more MK80 mag, and 1 more SU-6 mag.
+    type: Fix
+  id: 487
+  time: '2024-08-01T05:08:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3434
+- author: DrSmugleaf
+  changes:
+  - message: Fixed an issue related to player movement that was causing lag specially
+      late-round at high player counts. Report any issues relating to not being able
+      to move when you should be able to in AHelp (F1) if they come up.
+    type: Fix
+  id: 488
+  time: '2024-08-01T05:08:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3435
+- author: Whisper
+  changes:
+  - message: Added Alex Gregory figurine
+    type: Add
+  id: 489
+  time: '2024-08-01T05:08:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3431
+- author: gorillagaming
+  changes:
+  - message: Players are now notified of the current planet when they spawn as well!
+    type: Add
+  id: 490
+  time: '2024-08-01T05:13:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3360
+- author: P-MCT
+  changes:
+  - message: Fixed portable fire extinguishers and breaching charges not fitting into
+      the normal toolbelt rig and tools pouch.
+    type: Fix
+  id: 491
+  time: '2024-08-01T05:27:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3423
+- author: Vermidia
+  changes:
+  - message: Crushers can now use their defensive shield ability that lasts 7 seconds,
+      which gives them a 200 hitpoint shield that takes 10 less damage from all sources,
+      and for a short while gives them explosion immunity.
+    type: Add
+  id: 492
+  time: '2024-08-01T05:42:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3365
+- author: Vermidia
+  changes:
+  - message: Parasites now get a different sprite and announcement if they die from
+      infecting a host.
+    type: Tweak
+  id: 493
+  time: '2024-08-01T05:43:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3419
+- author: Whisper
+  changes:
+  - message: Eating and drinking certain items should no longer make the chem mixing
+      sound.
+    type: Fix
+  id: 494
+  time: '2024-08-01T06:08:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3357
 Name: RMC14
 Order: -1
