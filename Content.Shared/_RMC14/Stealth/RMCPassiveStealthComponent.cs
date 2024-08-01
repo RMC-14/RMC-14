@@ -15,6 +15,15 @@ public sealed partial class RMCPassiveStealthComponent : Component
     [DataField]
     public bool? Enabled = null;
 
+    /// <summary>
+    ///     How long it will take to get to full invisibility
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan Delay = TimeSpan.Zero;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan ToggleTime;
+
     [DataField]
     public bool Toggleable;
 

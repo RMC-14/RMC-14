@@ -4,13 +4,14 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Whitelist;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Stealth;
 
 public sealed class RMCPassiveStealthSystem : EntitySystem
 {
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
-    [Dependency] private readonly FoldableSystem _foldable = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
@@ -43,7 +44,7 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
             _entityStorage.OpenStorage(ent.Owner);
             return;
         }
-        _entityStorage.OpenStorage(ent.Owner);
+        // _entityStorage.OpenStorage(ent.Owner);
         ent.Comp.Enabled = false;
         RemCompDeferred<EntityActiveInvisibleComponent>(ent.Owner);
     }
@@ -53,11 +54,11 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
         if (!ent.Comp.Toggleable)
             return;
 
-        if(ent.Comp.Enabled == null)
-            ent.Comp.Enabled = false;
-
         if (TryComp<FoldableComponent>(ent.Owner, out var fold) && fold.IsFolded)
             return;
+
+        if(ent.Comp.Enabled == null)
+            ent.Comp.Enabled = false;
 
         if (!_whitelist.IsValid(ent.Comp.Whitelist, args.User))
         {
@@ -70,12 +71,53 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
         if (ent.Comp.Enabled.Value)
         {
             ent.Comp.Enabled = false;
-            RemCompDeferred<EntityActiveInvisibleComponent>(ent.Owner);
+            ent.Comp.ToggleTime = _timing.CurTime;
             return;
         }
 
         ent.Comp.Enabled = true;
-        var invisibility = EnsureComp<EntityActiveInvisibleComponent>(ent.Owner);
-        invisibility.Opacity = ent.Comp.MinOpacity;
+        ent.Comp.ToggleTime = _timing.CurTime;
+    }
+
+    public override void Update(float frameTime)
+    {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
+        var stealth = EntityQueryEnumerator<RMCPassiveStealthComponent>();
+        while (stealth.MoveNext(out var uid, out var stealthComp))
+        {
+            if (!stealthComp.Enabled.HasValue)
+                continue;
+
+            var time = _timing.CurTime - stealthComp.ToggleTime;
+            if (stealthComp.Enabled.Value)
+            {
+                var invis = EnsureComp<EntityActiveInvisibleComponent>(uid);
+                if (time < stealthComp.Delay)
+                {
+                    invis.Opacity = (float) (1 - (time / stealthComp.Delay) * (1 - stealthComp.MinOpacity)); // Linear function from 1 to MinOpacity
+                    Dirty(uid, invis);
+                    continue;
+                }
+
+                invis.Opacity = stealthComp.MinOpacity;
+                Dirty(uid, invis);
+            }
+            else
+            {
+                if (!TryComp<EntityActiveInvisibleComponent>(uid, out var invis))
+                    continue;
+
+                if (time < stealthComp.Delay)
+                {
+                    invis.Opacity = (float) (stealthComp.MinOpacity + (time / stealthComp.Delay) * (1 - stealthComp.MinOpacity) ); // Linear function from MinOpacity to 1
+                    Dirty(uid, invis);
+                    continue;
+                }
+
+                RemCompDeferred<EntityActiveInvisibleComponent>(uid);
+            }
+        }
     }
 }

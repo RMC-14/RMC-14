@@ -24,13 +24,11 @@ namespace Content.Shared._RMC14.Armor.ThermalCloak;
 /// </summary>
 public sealed class ThermalCloakSystem : EntitySystem
 {
-    [Robust.Shared.IoC.Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Robust.Shared.IoC.Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Robust.Shared.IoC.Dependency] private readonly InventorySystem _inventory = default!;
-    [Robust.Shared.IoC.Dependency] private readonly IPrototypeManager _protoManager = default!;
-    [Robust.Shared.IoC.Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Robust.Shared.IoC.Dependency] private readonly IGameTiming _timing = default!;
-    [Robust.Shared.IoC.Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
