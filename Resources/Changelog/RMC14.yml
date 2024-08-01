@@ -4205,5 +4205,13 @@
   id: 494
   time: '2024-08-01T06:08:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3357
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the coif and sterile mask blocking eating pills and food, or being
+      given a pill to eat.
+    type: Fix
+  id: 495
+  time: '2024-08-01T08:05:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3439
 Name: RMC14
 Order: -1
