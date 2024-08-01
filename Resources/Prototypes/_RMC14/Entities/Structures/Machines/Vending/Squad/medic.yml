@@ -150,7 +150,7 @@
         points: 8
     #    CMMarineRadioTelephonePack: 15P
     #    CMFuelTankStrapPouch: 4P
-      - id: CMWeldingGoggles
+      - id: RMCWeldingGoggles
         points: 3
     - name: Utilities
       entries:

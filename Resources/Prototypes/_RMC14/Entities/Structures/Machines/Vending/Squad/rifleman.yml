@@ -165,7 +165,7 @@
     #  points: 15
     #- id: CMFuelTankStrapPouch
     #  points: 5
-      - id: CMWeldingGoggles
+      - id: RMCWeldingGoggles
         points: 5
     #- id: CMSlingPouch
     #  points: 15

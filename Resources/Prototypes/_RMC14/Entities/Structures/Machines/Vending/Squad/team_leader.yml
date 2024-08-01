@@ -83,7 +83,7 @@
         points: 15
     #- id: CMMarineRadioTelephonePack
     #  points: 5
-      - id: CMWeldingGoggles
+      - id: RMCWeldingGoggles
         points: 3
       - id: CMBeltUtilityCombat
         points: 15

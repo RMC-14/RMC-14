@@ -225,7 +225,7 @@
       #   amount: 1
       #- id: Laser Designator
       #  amount: 1
-      - id: CMWeldingGoggles
+      - id: RMCWeldingGoggles
         amount: 3
       - id: CMFireExtinguisherPortable
         amount: 3
