@@ -150,7 +150,8 @@
         points: 8
     #    CMMarineRadioTelephonePack: 15P
     #    CMFuelTankStrapPouch: 4P
-    #    CMWeldingGoggles: 3P
+      - id: CMWeldingGoggles
+        points: 3
     - name: Utilities
       entries:
       - id: CMFireExtinguisherPortable

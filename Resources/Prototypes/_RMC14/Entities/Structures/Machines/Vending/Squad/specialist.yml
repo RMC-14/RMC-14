@@ -179,7 +179,8 @@
         points: 15
     #- id: CMMarineRadioTelephonePack
     #- id: CMFuelTankStrapPouch
-    #- id: CMWeldingGoggles
+      - id: CMWeldingGoggles
+        points: 5
       - id: RMCPouchGeneralLarge
         points: 10
       - id: CMBeltUtilityCombat

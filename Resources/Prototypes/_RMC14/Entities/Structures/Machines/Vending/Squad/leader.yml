@@ -103,8 +103,8 @@
     #  points: 7
       - id: RMCPouchToolsFill
         points: 5
-    #- id: CMWeldingGoggles
-    #  points: 5
+      - id: CMWeldingGoggles
+        points: 5
     - name: Explosives
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
