@@ -4213,5 +4213,12 @@
   id: 495
   time: '2024-08-01T08:05:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3439
+- author: Whisper
+  changes:
+  - message: Added admin fax area. You can now fax High Command, Provost, and WE-YA.
+    type: Add
+  id: 496
+  time: '2024-08-01T09:29:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3203
 Name: RMC14
 Order: -1
