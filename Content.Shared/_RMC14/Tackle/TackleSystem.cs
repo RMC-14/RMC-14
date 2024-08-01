@@ -6,7 +6,9 @@ using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Tackle;
@@ -15,7 +17,9 @@ public sealed class TackleSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -31,15 +35,15 @@ public sealed class TackleSystem : EntitySystem
 
         args.Handled = true;
 
+        _colorFlash.RaiseEffect(Color.Aqua, new List<EntityUid> { target.Owner }, Filter.PvsExcept(args.User));
+
         var time = _timing.CurTime;
         var recently = EnsureComp<TackledRecentlyComponent>(target);
         recently.LastTackled = time;
-        recently.LastTackledDuration = tackle.Stun > recently.LastTackledDuration ? tackle.Stun : recently.LastTackledDuration;
+        recently.LastTackledDuration = target.Comp.ExpireAfter;
         recently.Current += tackle.Strength;
 
         Dirty(target, recently);
-
-        _colorFlash.RaiseEffect(Color.Aqua, new List<EntityUid> { target.Owner }, Filter.PvsExcept(args.User));
 
         if (recently.Current < tackle.Threshold)
         {
@@ -73,6 +77,9 @@ public sealed class TackleSystem : EntitySystem
                     _popup.PopupEntity(Loc.GetString("cm-tackle-success-observer", ("user", args.User), ("target", target.Owner)), args.User, recipient);
             }
         }
+
+        if (_net.IsClient)
+            return;
 
         if (TryComp(args.User, out CombatModeComponent? combatMode))
         {

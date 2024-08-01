@@ -54,6 +54,14 @@ cm-xeno-crippling-strike-expire = You have waited too long, your slash will no l
 cm-xeno-crippling-strike-hit = We significantly strengthen our attack, slowing the unknown!
 
 # Pheromones
+rmc-xeno-pheromones-help =
+    Pheromones provide a buff to all Xenos in range at the cost of some stored plasma every second, as follows:
+
+    Frenzy (Red) - Increased run speed, damage and chance to knock off headhunter masks.
+    
+    Warding (Green) - While in critical state, increased maximum negative health and slower off weed bleedout.
+
+    Recovery (Blue) - Increased plasma and health regeneration.
 cm-xeno-choose-pheromones = Choose Pheromones
 cm-pheromones-recovery = Recovery
 cm-pheromones-warding = Warding
@@ -104,3 +112,9 @@ cm-xeno-invisibility-expire = We feel our invisibility end!
 # Ovipositor
 cm-xeno-ovipositor-attach = We start attaching to the ovipositor.
 cm-xeno-ovipositor-detach = We start detaching from the ovipositor.
+
+# Defensive Shield
+rmc-xeno-defensive-shield-end = We feel our enhanced shield end!
+rmc-xeno-defensive-shield-resist-end = Our immunity to explosion damage ends!
+rmc-xeno-defensive-shield-activate = {$user} hunkers down and bolsters its defenses!
+rmc-xeno-defensive-shield-activate-self = We hunker down and bolster our defenses!

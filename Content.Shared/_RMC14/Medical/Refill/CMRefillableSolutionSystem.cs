@@ -1,9 +1,9 @@
-﻿using Content.Shared.Chemistry.EntitySystems;
+﻿using Content.Shared._RMC14.Map;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Whitelist;
-using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -11,8 +11,8 @@ namespace Content.Shared._RMC14.Medical.Refill;
 
 public sealed class CMRefillableSolutionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -87,14 +87,10 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
             comp.RechargeAt = time + comp.RechargeCooldown;
             Dirty(uid, comp);
 
-            if (!xform.Anchored ||
-                !TryComp(xform.GridUid, out MapGridComponent? grid))
-            {
+            if (!xform.Anchored)
                 continue;
-            }
 
-            var position = _map.LocalToTile(xform.GridUid.Value, grid, xform.Coordinates);
-            var anchored = _map.GetAnchoredEntitiesEnumerator(xform.GridUid.Value, grid, position);
+            var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(uid);
             var any = false;
             while (anchored.MoveNext(out var anchoredId))
             {

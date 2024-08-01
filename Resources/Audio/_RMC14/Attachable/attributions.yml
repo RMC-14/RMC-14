@@ -18,6 +18,11 @@
   copyright: "The CM-SS13 development team"
   source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/gun_underbarrel_deactivate.ogg"
 
+- files: ["bipod_toggle.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/85db7a46451b7a8718fbb864158746cabf6d2efb/sound/items/m56dauto_rotate.ogg"
+
 - files: ["gun_u7_activate.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "The CM-SS13 development team"

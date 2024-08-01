@@ -26,7 +26,7 @@ namespace Content.Shared._RMC14.Medical.Wounds;
 public abstract class SharedWoundsSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly CMDamageableSystem _cmDamageable = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -130,7 +130,7 @@ public abstract class SharedWoundsSystem : EntitySystem
 
         if (damage != FixedPoint2.Zero)
         {
-            var total = _cmDamageable.DistributeHealing((target, damageable), treater.Comp.Group, damage);
+            var total = _rmcDamageable.DistributeHealing((target, damageable), treater.Comp.Group, damage);
 
             _damageable.TryChangeDamage(target, total, true, damageable: damageable, origin: user, tool: args.Used);
         }
@@ -226,7 +226,7 @@ public abstract class SharedWoundsSystem : EntitySystem
         }
 
         var targetName = Identity.Name(target, EntityManager, user);
-        var hasSkills = _skills.HasSkills(user, in treater.Comp.Skills);
+        var hasSkills = _skills.HasAllSkills(user, treater.Comp.Skills);
         if (!treater.Comp.CanUseUnskilled && !hasSkills)
         {
             if (doPopups)

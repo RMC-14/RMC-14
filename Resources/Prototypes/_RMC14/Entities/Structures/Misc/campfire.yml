@@ -1,0 +1,15 @@
+- type: entity
+  id: RMCCampfire
+  parent: Bonfire
+  name: campfire
+  description: A useful tool to turn fellow marines into lifelong friends. Pull up a chair!
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Structures/campfire.rsi
+    layers:
+      - state: campfire
+      - state: burning
+  - type: Construction
+    graph: RMCCampfire
+    node: start

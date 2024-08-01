@@ -67,6 +67,10 @@
         name: power-cell-slot-component-slot-name-default
   - type: Charger
     slotId: cell_slot
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 # APC under construction
 - type: entity

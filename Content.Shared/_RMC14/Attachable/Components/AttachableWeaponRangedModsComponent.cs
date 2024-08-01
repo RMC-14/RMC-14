@@ -9,4 +9,7 @@ public sealed partial class AttachableWeaponRangedModsComponent : Component
 {
     [DataField, AutoNetworkedField]
     public List<AttachableWeaponRangedModifierSet> Modifiers = new();
+
+    [DataField, AutoNetworkedField]
+    public List<AttachableWeaponFireModesModifierSet>? FireModeMods;
 }

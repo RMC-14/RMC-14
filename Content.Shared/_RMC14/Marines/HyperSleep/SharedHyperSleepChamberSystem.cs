@@ -1,4 +1,5 @@
-﻿using Content.Shared.Movement.Events;
+using Content.Shared.Movement.Events;
+using Content.Shared._RMC14.Xenonids;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Timing;
@@ -16,6 +17,7 @@ public abstract class SharedHyperSleepChamberSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<HyperSleepChamberComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<HyperSleepChamberComponent, ContainerIsInsertingAttemptEvent>(OnInsertAttempt);
         SubscribeLocalEvent<HyperSleepChamberComponent, EntInsertedIntoContainerMessage>(OnInserted);
 
         SubscribeLocalEvent<InsideHyperSleepChamberComponent, MoveInputEvent>(OnMoveInput);
@@ -26,6 +28,15 @@ public abstract class SharedHyperSleepChamberSystem : EntitySystem
     private void OnMapInit(Entity<HyperSleepChamberComponent> ent, ref MapInitEvent args)
     {
         _containers.EnsureContainer<Container>(ent, ent.Comp.ContainerId);
+    }
+
+    private void OnInsertAttempt(Entity<HyperSleepChamberComponent> ent, ref ContainerIsInsertingAttemptEvent args)
+    {
+        if (HasComp<XenoComponent>(args.EntityUid))
+        {
+            args.Cancel();
+            return;
+        }
     }
 
     private void OnInserted(Entity<HyperSleepChamberComponent> ent, ref EntInsertedIntoContainerMessage args)

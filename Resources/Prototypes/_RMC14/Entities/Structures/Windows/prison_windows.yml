@@ -12,12 +12,15 @@
     key: walls
     base: prison_frame
     mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowPrison
+    node: windowFramePrison
 
 - type: entity
   parent: CMBaseWindow
   id: RMCWindowPrison
   name: window
-  description: A glass window with a special rod matrix inside a wall frame.
+  description: A glass window. It looks thin and flimsy. A few knocks with anything should shatter it.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Windows/prison_window.rsi
@@ -29,11 +32,43 @@
     key: walls
     base: prison_window
     mode: CardinalFlags
-  # TODO RMC14 40 hp
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 40
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFramePrison
+  - type: RMCWallExplosionDeletable
+  - type: Construction
+    graph: RMCWindowPrison
+    node: windowPrison
+
 
 - type: entity
   parent: RMCWindowPrison
   id: RMCWindowPrisonCell
+  name: cell window
+  description: A glass window with a special rod matrix inside a wall frame.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Windows/prison_cellwindow.rsi
@@ -45,7 +80,6 @@
     key: walls
     base: prison_cellwindow
     mode: CardinalFlags
-  # TODO RMC14 40 hp
 
 - type: entity
   parent: CMBaseWindow
@@ -63,11 +97,56 @@
     key: walls
     base: prison_rwindow
     mode: CardinalFlags
-  # TODO RMC14 100 hp
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFramePrison
+  - type: RMCWallExplosionDeletable
+  - type: Construction
+    graph: RMCWindowPrison
+    node: windowPrisonReinforced
 
 - type: entity
-  parent: RMCWindowPrisonReinforced
+  parent: CMBaseWindow
   id: RMCWindowPrisonHull
   name: hull window
   description: A glass window with a special rod matrix inside a wall frame. This one has an automatic shutter system to prevent any atmospheric breach.
-  # TODO RMC14 200 hp, but then it spawns indestructible shutters apparently idk
+  components:
+  - type: Corrodible
+    isCorrodible: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/prison_rwindow.rsi
+    state: prison_rwindow0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/prison_rwindow.rsi
+    state: prison_rwindow0
+  - type: IconSmooth
+    key: walls
+    base: prison_rwindow
+    mode: CardinalFlags
+    # TODO RMC14 200 hp, but then it spawns indestructible shutters apparently idk

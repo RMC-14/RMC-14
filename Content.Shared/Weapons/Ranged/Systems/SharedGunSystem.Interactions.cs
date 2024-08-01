@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Actions;
 using Content.Shared.Examine;
 using Content.Shared.Hands;
@@ -82,6 +83,10 @@ public abstract partial class SharedGunSystem
 
         Audio.PlayPredicted(component.SoundMode, uid, user);
         Popup(Loc.GetString("gun-selected-mode", ("mode", GetLocSelector(fire))), uid, user);
+
+        var ev = new RMCFireModeChangedEvent();
+        RaiseLocalEvent(uid, ref ev);
+
         Dirty(uid, component);
     }
 

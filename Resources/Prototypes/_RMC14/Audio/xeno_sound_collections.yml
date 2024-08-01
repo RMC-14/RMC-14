@@ -53,3 +53,17 @@
   - /Audio/_RMC14/Xeno/alien_resin_break1.ogg
   - /Audio/_RMC14/Xeno/alien_resin_break2.ogg
   - /Audio/_RMC14/Xeno/alien_resin_break3.ogg
+
+- type: soundCollection
+  id: XenoAcidSizzle
+  files:
+  - /Audio/_RMC14/Xeno/acid_sizzle1.ogg
+  - /Audio/_RMC14/Xeno/acid_sizzle2.ogg
+  - /Audio/_RMC14/Xeno/acid_sizzle3.ogg
+  - /Audio/_RMC14/Xeno/acid_sizzle4.ogg
+
+- type: soundCollection
+  id: XenoBite
+  files:
+  - /Audio/_RMC14/Xeno/alien_bite1.ogg
+  - /Audio/_RMC14/Xeno/alien_bite2.ogg

@@ -7,3 +7,6 @@ hostname = "[EN][MRP] Rouny's Marine Corps Alamo [US East]"
 
 [hub]
 tags = "lang:en,region:am_n_e,rp:med"
+
+[loki]
+name = "alamo"

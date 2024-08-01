@@ -29,15 +29,15 @@
       entries:
       - id: CMWeaponPistolM77
         amount: 50
-      #- id: CMWeaponRevolverM44
-      #  amount: 50
+      - id: RMCWeaponRevolverM44
+        amount: 50
       - id: CMWeaponPistolM1984
         amount: 50
       #- id: CMWeaponFlareM82F
       #  amount: 20
     - name: Restricted Sidearms
       entries:
-      - id: CMWeaponPistolMK80
+      - id: RMCMK80Case
         amount: 4
       - id: RMCSmartPistolCase
         amount: 3
@@ -45,7 +45,7 @@
       #  amount: 2
       #- id: XM88 Heavy Rifle
       #  amount: 3
-      #- id: M41AE2 Heavy Pulse Rifle
+      #- id: RMCM54CE2Case
       #  amount: 3
       #- id: M41A Pulse Rifle MK1
       #  amount: 3
@@ -150,54 +150,54 @@
       #  amount: 2
     - name: Pouches
       entries:
-      - id: CMPouchAutoinjector
+      - id: RMCPouchAutoinjector
         amount: 1
-      #- id: CMPouchMedkit
+      #- id: RMCPouchMedkit
       #  amount: 2
-      - id: CMPouchFirstAidInjectors
+      - id: RMCPouchFirstAidInjectors
         amount: 5
-      - id: CMPouchFirstResponder
+      - id: RMCPouchFirstResponder
         name: First Responder Pouch (Empty)
         amount: 2
-      - id: CMPouchSyringe
+      - id: RMCPouchSyringe
         amount: 2
-      - id: CMPouchToolsFill
+      - id: RMCPouchToolsFill
         name: Tools Pouch (Full)
         amount: 2
-      - id: CMPouchConstruction
+      - id: RMCPouchConstruction
         amount: 2
-      - id: CMPouchElectronics
+      - id: RMCPouchElectronics
         amount: 2
-      - id: CMPouchExplosive
+      - id: RMCPouchExplosive
         amount: 2
-      - id: CMPouchFlareFilled
+      - id: RMCPouchFlareFilled
         amount: 5
-      - id: CMPouchDocument
+      - id: RMCPouchDocument
         amount: 2
-      #- id: CMPouchSling
+      #- id: RMCPouchSling
       #  amount: 2
-      - id: CMPouchMacheteFilled
+      - id: RMCPouchMacheteFilled
         amount: 1
-      - id: CMPouchBayonet
+      - id: RMCPouchBayonet
         name: Bayonet Sheath (Full)
         amount: 2
-      - id: CMPouchGeneralMedium
+      - id: RMCPouchGeneralMedium
         amount: 2
-      - id: CMPouchMagazine
+      - id: RMCPouchMagazine
         amount: 5
-      - id: CMPouchShotgun
+      - id: RMCPouchShotgun
         amount: 5
-      - id: CMPouchPistol
+      - id: RMCPouchPistol
         amount: 5
-      - id: CMPouchMagazinePistolLarge
+      - id: RMCPouchMagazinePistolLarge
         amount: 5
       #- id: Fuel Tank Strap Pouch
       #  amount: 4
-      - id: CMPouchGeneralLarge
+      - id: RMCPouchGeneralLarge
         amount: 1
-      - id: CMPouchMagazineLarge
+      - id: RMCPouchMagazineLarge
         amount: 1
-      #- id: CMPouchShotgunLarge
+      #- id: RMCPouchShotgunLarge
       #  amount: 1
     - name: Miscellaneous
       entries:
@@ -219,8 +219,8 @@
       #  amount: 4
       #- id: Data Detector
       #  amount: 4
-      #- id: Binoculars
-      #  amount: 2
+      - id: RMCBinoculars
+        amount: 2
       #- id: Rangefinder
       #   amount: 1
       #- id: Laser Designator
@@ -275,8 +275,8 @@
         amount: 100
       - id: CMMagazineSMGM63
         amount: 100
-      #- id: M44 Speed Loader (.44)
-      #  amount: 80
+      - id: RMCSpeedLoaderM44
+        amount: 80
       - id: CMMagazinePistolM1984
         amount: 102
     - name: Armor-piercing ammunition
@@ -305,8 +305,8 @@
         amount: 4
       #- id: M44 Heavy Speed Loader (.44)
       #  amount: 10
-      #- id: M44 Marksman Speed Loader (.44)
-      #  amount: 6
+      - id: RMCSpeedLoader44Marksman
+        amount: 6
       #- id: M4A3 HP Magazine (9mm)
       #  amount: 2
       #- id: M41AE2 Holo Target Rounds (10x24mm)
@@ -319,8 +319,8 @@
         amount: 13
       #- id: M240 Incinerator Tank
       #  amount: 3
-      #- id: M41AE2 Box Magazine (10x24mm)
-      #  amount: 3
+#      - id: CMMagazineRifleM54CE2
+#        amount: 3
       #- id: M41A MK1 Magazine (10x24mm)
       #  amount: 5
       #- id: M41A MK1 AP Magazine (10x24mm)
@@ -371,8 +371,8 @@
       entries:
       - id: RMCAttachmentB8SmartScope
         amount: 4
-      #- id: RMCAttachmentMagneticHarness
-      #  amount: 9
+      - id: RMCAttachmentMagneticHarness
+        amount: 9
       - id: RMCAttachmentRailFlashlight
         amount: 11
       - id: RMCAttachmentS42xTelescopicMiniscope
@@ -423,8 +423,8 @@
         amount: 5
       - id: RMCAttachmentM54CStockCollapsible
         amount: 5
-      #- id: RMCAttachmentM44MagnumSharpshooterStock # UNCOMMENT WHEN THE M44 IS ADDED
-      #  amount: 5
+      - id: RMCAttachmentM44MagnumSharpshooterStock
+        amount: 5
 
 #UNIFORM VENDOR
 
@@ -516,6 +516,6 @@
       - id: CMMaskCoif
         amount: 10
     - name: Miscellaneous
-      entries: [ ]
-      #- id: Bedroll
-      #  amount: 30
+      entries:
+      - id: BedrollFolded
+        amount: 30

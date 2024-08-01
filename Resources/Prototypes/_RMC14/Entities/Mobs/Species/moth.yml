@@ -58,6 +58,7 @@
     - map: [ "shoes" ]
     - map: [ "ears" ]
     - map: [ "outerClothing" ]
+    - map: [ "enum.SquadArmorLayers.Armor" ]
     - map: [ "enum.WebbingVisualLayers.Base" ]
     - map: [ "eyes" ]
     - map: [ "belt" ]
@@ -71,9 +72,11 @@
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
     - map: [ "mask" ]
     - map: [ "head" ]
+    - map: [ "enum.SquadArmorLayers.Helmet" ]
     - map: [ "pocket1" ]
     - map: [ "pocket2" ]
     - map: [ "clownedon" ]
       sprite: "Effects/creampie.rsi"
       state: "creampie_moth"
       visible: false
+    - map: [ "acided" ]

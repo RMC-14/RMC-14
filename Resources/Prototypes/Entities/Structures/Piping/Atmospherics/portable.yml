@@ -178,6 +178,10 @@
                 max: 3
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: SpaceHeater

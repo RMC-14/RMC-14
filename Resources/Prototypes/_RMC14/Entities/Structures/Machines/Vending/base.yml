@@ -53,3 +53,7 @@
   - type: ActivatableUIRequiresAccess
   - type: WallMount
     arc: 360
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

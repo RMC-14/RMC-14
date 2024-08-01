@@ -35,6 +35,10 @@
         transferForensics: true
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMBottleEmpty

@@ -30,6 +30,10 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
   - type: DisassembleOnAltVerb
     prototype: RMCInflatableWallFolded1
     doAfter: 3

@@ -11,9 +11,12 @@
   id: RMCMobAghostGear
   equipment:
     back: ClothingBackpackSatchelHolding
-    id: CMIDCardHighCommand # RMC-14: Changed from AdminPDA
+    id: RMCAdminPDA
   storage:
     back:
-    # RMC-14: Replaced loadout
-    - CMHealthAnalyzer
     - RMCAdminAccessConfigurator
+    - HandheldHealthAnalyzerUnpowered
+    - DoorRemoteAll
+    - AdminHypo
+    - MeleeDebug200
+    - ToolDebug

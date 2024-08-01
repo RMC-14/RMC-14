@@ -1,7 +1,7 @@
 ﻿# Divide cm13 numbers by 37.5 to get an accurate conversion
 - type: latheRecipe
   id: CMBucket
-  result: Bucket # TODO RMC14
+  result: CMBucket
   completetime: 4
   materials:
     CMSteel: 67 # 2500
@@ -140,3 +140,24 @@
   completetime: 4
   materials:
     CMGlass: 167 # 6250
+
+- type: latheRecipe
+  id: RMCTablePartTan
+  result: RMCTablePartTan
+  completetime: 4
+  materials:
+    CMSteel: 200 # 7500
+
+- type: latheRecipe
+  id: RMCTablePartAlmayer
+  result: RMCTablePartAlmayer
+  completetime: 4
+  materials:
+    CMSteel: 200 # 7500
+
+- type: latheRecipe
+  id: RMCTablePartReinforced
+  result: RMCTablePartReinforced
+  completetime: 4
+  materials:
+    CMSteel: 400 # 15000

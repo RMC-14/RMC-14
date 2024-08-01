@@ -51,9 +51,21 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 55
+        Piercing: 72
   - type: CMArmorPiercing
     amount: 5
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletRevolver44Marksman
+  name: bullet (.44 Marksman)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 55
+  - type: CMArmorPiercing
+    amount: 35
 
 - type: entity
   parent: CMBulletBase

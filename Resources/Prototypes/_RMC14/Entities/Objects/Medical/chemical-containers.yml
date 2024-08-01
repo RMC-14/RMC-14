@@ -82,6 +82,10 @@
     - type: Tag
       tags:
       - ChemDispensable
+    - type: InteractedBlacklist
+      blacklist:
+        components:
+        - Xeno
 
 - type: entity
   parent: RMCJug

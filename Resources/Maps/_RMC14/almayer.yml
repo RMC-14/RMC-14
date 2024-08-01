@@ -147,6 +147,7 @@ entities:
     - type: MovedGrids
     - type: Broadphase
     - type: OccluderTree
+    - type: Almayer
     - type: MapGrid
       chunks:
         0,0:

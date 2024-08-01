@@ -3,5 +3,5 @@
 namespace Content.Shared._RMC14.Entrenching;
 
 [RegisterComponent, NetworkedComponent]
-[Access(typeof(BarricadeComponent))]
+[Access(typeof(BarricadeSystem))]
 public sealed partial class BarricadeComponent : Component;

@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Throwing;
 using Content.Shared.Body.Events;
 using Content.Shared.Emoting;
 using Content.Shared.Hands;
@@ -120,7 +121,13 @@ namespace Content.Shared.ActionBlocker
             var ev = new ThrowAttemptEvent(user, itemUid);
             RaiseLocalEvent(user, ev);
 
-            return !ev.Cancelled;
+            if (ev.Cancelled)
+                return false;
+
+            var itemEv = new ThrowItemAttemptEvent(user);
+            RaiseLocalEvent(itemUid, ref itemEv);
+
+            return !itemEv.Cancelled;
         }
 
         public bool CanSpeak(EntityUid uid)

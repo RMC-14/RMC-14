@@ -1,5 +1,4 @@
-﻿using Content.Shared.Damage;
-using Content.Shared.FixedPoint;
+﻿using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
@@ -14,9 +13,9 @@ public sealed partial class XenoChargeSpitComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan Duration = TimeSpan.FromSeconds(4);
 
-    [DataField]
-    public DamageSpecifier Damage = new();
+    [DataField, AutoNetworkedField]
+    public int Armor = 5;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan Lifetime = TimeSpan.FromSeconds(0.18);
+    public float Speed = 1.4f;
 }

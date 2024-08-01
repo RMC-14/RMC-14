@@ -13,3 +13,9 @@ public sealed class XenoPheromonesChosenBuiMsg(XenoPheromones pheromones) : Boun
 {
     public readonly XenoPheromones Pheromones = pheromones;
 }
+
+[Serializable, NetSerializable]
+public sealed class XenoPheromonesHelpButtonBuiMsg() : BoundUserInterfaceMessage
+{
+
+}

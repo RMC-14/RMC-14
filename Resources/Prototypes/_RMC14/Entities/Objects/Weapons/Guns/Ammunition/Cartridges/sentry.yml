@@ -25,8 +25,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 30
+        Piercing: 20
   - type: CMArmorPiercing
-    amount: 35
+    amount: 100
   - type: DeleteXenoResinOnHit
-

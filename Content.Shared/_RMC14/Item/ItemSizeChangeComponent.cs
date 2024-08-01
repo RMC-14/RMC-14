@@ -7,5 +7,5 @@ namespace Content.Shared._RMC14.Item;
 public sealed partial class ItemSizeChangeComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public int BaseSize;
+    public int? BaseSize;
 }

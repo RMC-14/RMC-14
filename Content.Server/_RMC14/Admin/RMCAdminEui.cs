@@ -4,7 +4,6 @@ using Content.Server.Administration;
 using Content.Server.Administration.Managers;
 using Content.Server.EUI;
 using Content.Server.Mind;
-using Content.Server.Station.Systems;
 using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Squads;
@@ -12,9 +11,7 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Administration;
 using Content.Shared.Eui;
-using Content.Shared.Preferences;
-using Content.Shared.Roles;
-using Robust.Shared.Prototypes;
+using Content.Shared.Mobs.Systems;
 using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Admin;
@@ -58,30 +55,62 @@ public sealed class RMCAdminEui : BaseEui
         _admin.OnPermsChanged -= OnAdminPermsChanged;
     }
 
-    public override EuiStateBase GetNewState()
+    public static EuiStateBase CreateState(IEntityManager entities)
     {
+        var squadSys = entities.System<SquadSystem>();
         var hives = new List<Hive>();
-        var hiveQuery = _entities.EntityQueryEnumerator<HiveComponent, MetaDataComponent>();
+        var hiveQuery = entities.EntityQueryEnumerator<HiveComponent, MetaDataComponent>();
         while (hiveQuery.MoveNext(out var uid, out _, out var metaData))
         {
-            hives.Add(new Hive(_entities.GetNetEntity(uid), metaData.EntityName));
+            hives.Add(new Hive(entities.GetNetEntity(uid), metaData.EntityName));
         }
 
         var squads = new List<Squad>();
-        foreach (var squadProto in _squad.SquadPrototypes)
+        foreach (var squadProto in squadSys.SquadPrototypes)
         {
             var exists = false;
             var members = 0;
-            if (_squad.TryGetSquad(squadProto, out var squad))
+            if (squadSys.TryGetSquad(squadProto, out var squad))
             {
                 exists = true;
-                members = _squad.GetSquadMembers(squad);
+                members = squadSys.GetSquadMembersAlive(squad);
             }
 
             squads.Add(new Squad(squadProto, exists, members));
         }
 
-        return new RMCAdminEuiState(_target, hives, squads);
+        var mobState = entities.System<MobStateSystem>();
+        var xenos = new List<Xeno>();
+        var xenoQuery = entities.EntityQueryEnumerator<XenoComponent, MetaDataComponent>();
+        while (xenoQuery.MoveNext(out var uid, out _, out var metaData))
+        {
+            if (metaData.EntityPrototype is not { } proto)
+                continue;
+
+            if (mobState.IsDead(uid))
+                continue;
+
+            xenos.Add(new Xeno(proto));
+        }
+
+        var marines = 0;
+        var marinesQuery = entities.EntityQueryEnumerator<MarineComponent>();
+        while (marinesQuery.MoveNext(out var uid, out _))
+        {
+            if (mobState.IsDead(uid))
+                continue;
+
+            marines++;
+        }
+
+        var marinesPerXeno = entities.System<CMDistressSignalRuleSystem>().MarinesPerXeno.ToDictionary();
+
+        return new RMCAdminEuiState(hives, squads, xenos, marines, marinesPerXeno);
+    }
+
+    public override EuiStateBase GetNewState()
+    {
+        return CreateState(_entities);
     }
 
     public override void HandleMessage(EuiMessageBase msg)
