@@ -50,6 +50,10 @@
   name: "M44 speed loader (.44 Marksman)"
   description: A revolver speed loader filled with Marksman ammo.
   components:
+  - type: Tag
+    tags:
+    - RMCMagazineRevolver
+    - RMCSpeedLoader44Marksman
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/m44.rsi
     layers:
@@ -71,3 +75,6 @@
 
 - type: Tag
   id: RMCSpeedLoaderM44
+
+- type: Tag
+  id: RMCSpeedLoader44Marksman

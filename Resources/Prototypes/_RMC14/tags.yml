@@ -74,4 +74,7 @@
   id: CMWeaponPistolM77
 
 - type: Tag
+  id: RMCWeaponRevolverM44
+
+- type: Tag
   id: RMCRocketAmmo84mm
