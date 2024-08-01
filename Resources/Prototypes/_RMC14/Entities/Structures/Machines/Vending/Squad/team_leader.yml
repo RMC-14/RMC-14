@@ -51,6 +51,8 @@
         points: 10
     - name: Sidearm Ammunition
       entries:
+      - id: RMCSpeedLoader44Marksman
+        points: 10
       - id: CMMagazinePistolMK80
         points: 5
       - id: RMCMagazinePistolSU6
@@ -66,7 +68,7 @@
       - id: RMCMK80Case
         points: 10
       - id: RMCSmartPistolCase
-        points: 12
+        points: 15
     #- id: CMM79GrenadeLauncher
     #  points: 30
     - name: Armors
@@ -77,7 +79,7 @@
       entries:
     #- id: CMScabbardMacheteFull
     #  points: 5
-      - id: CMPouchMacheteFilled
+      - id: RMCPouchMacheteFilled
         points: 15
     #- id: CMMarineRadioTelephonePack
     #  points: 5
@@ -85,7 +87,7 @@
     #  points: 3
       - id: CMBeltUtilityCombat
         points: 15
-      - id: CMPouchAutoinjectorFill
+      - id: RMCPouchAutoinjectorFill
         points: 15
       - id: CMHandsInsulated
         points: 3
@@ -156,49 +158,70 @@
       - id: CMArmorM4
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
-    #- id: CMEssentialFireteamLeaderUtilities
+      - id: RMCVendorBundleCrewFireteamLeader
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
     #- id: CMG8AGeneralUtilityPouch
       - id: CMBeltMarine
+        recommended: true
     #- id: CMM276GeneralPistolHolsterRig
     #- id: CMM276M63HolsterRig
     #- id: CMM276M44HolsterRig
     #- id: CMM276M82FHolsterRig
     #- id: CMM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
-    #- id: CMM276M40GrenadeRig
+        recommended: true
+      - id: RMCBeltGrenade
     - name: Pouches
-      choices: { CMPouch: 2 }
+      choices: { RMCPouch: 2 }
       entries:
-      - id: CMPouchFirstAidInjectors
+      - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
-      - id: CMPouchFirstAidSplintsGauzeOintment
+        recommended: true
+      - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
-      - id: CMPouchFirstAidPills
+        recommended: true
+      - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
-      - id: CMPouchFirstResponder
-      - id: CMPouchFlareFilled
-        name: Flare pouch (Filled)
+      - id: RMCPouchFirstResponder
+      - id: RMCPouchFlareFilled
+        name: Flare pouch (Full)
       #- id: CMFuelTankStrapPouch
-      - id: CMPouchGeneralLarge
+      - id: RMCPouchGeneralLarge
       #- id: CMSlingPouch
-      - id: CMPouchMagazinePistolLarge
-      - id: CMPouchMagazine
-      - id: CMPouchShotgun
-      - id: CMPouchPistol
-      - id: CMPouchToolsFill
+      - id: RMCPouchMagazinePistolLarge
+      - id: RMCPouchMagazine
+      - id: RMCPouchShotgun
+      - id: RMCPouchPistol
+      - id: RMCPouchToolsFill
+        recommended: true
         name: Tools pouch (Filled)
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
-      - id: CMWebbingBrown
       - id: CMWebbingBlack
+      - id: CMWebbingBrown
+        recommended: true
       #- id: CMShoulderHolster
       - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
+      choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleCrewFireteamLeader
+  name: essential fireteam leader utilities
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/binoculars.rsi # TODO RMC14 laser designator icon
+    state: binoculars
+  - type: CMVendorBundle
+    bundle:
+    - CMPackFlare # TODO RMC14 signal flares when we have any use for damn signals
+    - CMPackFlare # TODO RMC14 signal flares when we have any use for damn signals
+    - RMCBinoculars # TODO RMC14 laser designator when see above

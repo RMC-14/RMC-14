@@ -1,0 +1,98 @@
+﻿- type: entity
+  parent: RMCBaseEquipmentCase
+  id: CMSniperEquipmentCase
+  name: sniper equipment case
+  description: "A large case containing your very own long-range M96S sniper rifle, M45 ghillie armor and helmet, M42 scout sight, ammunition, spotter equipment, and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMArmorM45
+    - id: CMArmorHelmetM45
+    - id: CMGlassesM42ScoutSight
+    - id: CMMagazineSniperM96S
+    - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SIncendiary
+    - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SIncendiary
+    - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
+    - id: CMBackpackSniper
+    - id: CMWeaponPistolMK80
+    - id: CMMagazinePistolMK80
+    - id: CMMagazinePistolMK80
+    - id: CMM96SSniperRifle
+#    - id: CMFacepaintSniper
+#    - id: CMSpotter
+  - type: CMChangeUserOnVend
+    addComponents:
+    - type: SniperWhitelist
+
+- type: entity
+  parent: RMCBaseEquipmentCase
+  id: RMCGrenadeSpecEquipmentCase
+  name: heavy grenadier equipment case
+  description: "A large case containing a heavy-duty multi-shot M83 grenade launcher, M3-G4 grenadier armor and helmet, significant amount of various M40 grenades and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
+  components:
+  - type: Sprite
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: grenadier
+      map: [ label ]
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,21,1
+  - type: StorageFill
+    contents:
+    - id: WeaponLauncherM83 # check IFF
+    - id: RMCBeltGrenadeLargeFilled
+    - id: RMCSatchelGrenadeSpec # ID lock
+    - id: RMCSatchelGrenadeSpec
+    - id: RMCHandsM3G4
+    - id: RMCArmorM3G4
+    - id: RMCArmorHelmetM3G4 # hugger protection
+    - id: CMWeaponPistolMK80
+    - id: CMMagazinePistolMK80
+    - id: CMMagazinePistolMK80
+    - id: RMCBinoculars
+  - type: CMChangeUserOnVend
+    addComponents:
+    - type: GrenadeSpecWhitelist
+
+- type: entity
+  parent: RMCBaseEquipmentCase
+  id: RMCDemoSpecEquipmentCase
+  name: demolitionist equipment case
+  description: "A large case containing a heavy-caliber M5 Anti-Tank Launcher, reinforced M3-T light armor, five 84mm rockets, and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
+  components:
+  - type: Sprite
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: demo
+      map: [ demo ]
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,33,1 # 17 items total
+  - type: StorageFill
+    contents:
+    - id: RMCArmorM3TDemo
+    - id: RMCArmorHelmetM3TDemo # TODO RMC14 Give hearing protection component if ear damage is added
+      amount: 2 # For loader. Hearing protection should prevent backblast stun, damage, and deafness effects.
+    - id: RMCSatchelDemoSpec
+      amount: 2
+    - id: RMCWeaponLauncherM5ATL
+    - id: RMCRocket84mm
+      amount: 3 # +1 no WP
+    - id: RMCRocket84mmAntiArmor
+      amount: 2
+#    - id: RMCRocket84mmWhitePhosphorous
+#      amount: 1
+    - id: CMWeaponPistolMK80
+    - id: CMMagazinePistolMK80
+      amount: 2
+#    - id: RMCPlasticExplosives
+#      amount: 2
+    - id: RMCBinoculars
+  - type: CMChangeUserOnVend
+    addComponents:
+    - type: DemoSpecWhitelist

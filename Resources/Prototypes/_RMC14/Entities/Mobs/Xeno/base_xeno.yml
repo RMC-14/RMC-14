@@ -225,6 +225,7 @@
     keys:
     - enum.VendingMachineUiKey.Key
     - enum.PaperUiKey.Key
+  - type: ActiveInputMover
 
 - type: entity
   abstract: true

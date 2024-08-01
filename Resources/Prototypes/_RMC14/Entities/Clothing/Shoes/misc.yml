@@ -1,0 +1,19 @@
+- type: entity
+  parent: ClothingShoesBase
+  id: RMCShoesLaceup
+  name: laceup shoes
+  description: The height of fashion, and they're pre-polished!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/laceup.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/laceup.rsi
+
+- type: entity
+  parent: RMCShoesLaceup
+  id: RMCShoesLaceupBrown
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/laceup_brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/laceup_brown.rsi

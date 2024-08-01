@@ -150,54 +150,54 @@
       #  amount: 2
     - name: Pouches
       entries:
-      - id: CMPouchAutoinjector
+      - id: RMCPouchAutoinjector
         amount: 1
-      #- id: CMPouchMedkit
+      #- id: RMCPouchMedkit
       #  amount: 2
-      - id: CMPouchFirstAidInjectors
+      - id: RMCPouchFirstAidInjectors
         amount: 5
-      - id: CMPouchFirstResponder
+      - id: RMCPouchFirstResponder
         name: First Responder Pouch (Empty)
         amount: 2
-      - id: CMPouchSyringe
+      - id: RMCPouchSyringe
         amount: 2
-      - id: CMPouchToolsFill
+      - id: RMCPouchToolsFill
         name: Tools Pouch (Full)
         amount: 2
-      - id: CMPouchConstruction
+      - id: RMCPouchConstruction
         amount: 2
-      - id: CMPouchElectronics
+      - id: RMCPouchElectronics
         amount: 2
-      - id: CMPouchExplosive
+      - id: RMCPouchExplosive
         amount: 2
-      - id: CMPouchFlareFilled
+      - id: RMCPouchFlareFilled
         amount: 5
-      - id: CMPouchDocument
+      - id: RMCPouchDocument
         amount: 2
-      #- id: CMPouchSling
+      #- id: RMCPouchSling
       #  amount: 2
-      - id: CMPouchMacheteFilled
+      - id: RMCPouchMacheteFilled
         amount: 1
-      - id: CMPouchBayonet
+      - id: RMCPouchBayonet
         name: Bayonet Sheath (Full)
         amount: 2
-      - id: CMPouchGeneralMedium
+      - id: RMCPouchGeneralMedium
         amount: 2
-      - id: CMPouchMagazine
+      - id: RMCPouchMagazine
         amount: 5
-      - id: CMPouchShotgun
+      - id: RMCPouchShotgun
         amount: 5
-      - id: CMPouchPistol
+      - id: RMCPouchPistol
         amount: 5
-      - id: CMPouchMagazinePistolLarge
+      - id: RMCPouchMagazinePistolLarge
         amount: 5
       #- id: Fuel Tank Strap Pouch
       #  amount: 4
-      - id: CMPouchGeneralLarge
+      - id: RMCPouchGeneralLarge
         amount: 1
-      - id: CMPouchMagazineLarge
+      - id: RMCPouchMagazineLarge
         amount: 1
-      #- id: CMPouchShotgunLarge
+      #- id: RMCPouchShotgunLarge
       #  amount: 1
     - name: Miscellaneous
       entries:

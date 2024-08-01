@@ -15,12 +15,6 @@ namespace Content.Shared._RMC14.Xenonids.Parasite;
 public sealed partial class VictimInfectedComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public string ContainerId = "cm_parasite_container";
-
-    [DataField, AutoNetworkedField]
-    public SpriteSpecifier InfectedSprite = new Rsi(new ResPath("/Textures/_RMC14/Mobs/Xenonids/Parasite/parasite_mask.rsi"), "human");
-
-    [DataField, AutoNetworkedField]
     public SpriteSpecifier[] InfectedIcons =
     [
         new Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_hud.rsi"), "infected0"),
@@ -33,16 +27,13 @@ public sealed partial class VictimInfectedComponent : Component
     ];
 
     [DataField, AutoNetworkedField]
-    public Enum InfectedLayer = VictimInfectedLayer.Infected;
-
-    [DataField, AutoNetworkedField]
     public string LarvaContainerId = "rmc_larva_container";
 
     [DataField, AutoNetworkedField]
     public EntityUid? SpawnedLarva;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan FallOffDelay = TimeSpan.FromSeconds(10);
+    public TimeSpan FallOffDelay = TimeSpan.FromSeconds(35);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan FallOffAt;

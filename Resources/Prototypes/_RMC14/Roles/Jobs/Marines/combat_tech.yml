@@ -14,6 +14,8 @@
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - CombatTech
+  overwatchSortPriority: 0
+  overwatchRoleName: Combat Technicians
   special:
   - !type:AddComponentSpecial
     components:
@@ -26,6 +28,7 @@
         RMCSkillVehicles: 1
     - type: CMVendorUser
       points: 45
+    - type: SquadArmorWearer
 
 - type: startingGear
   id: CMGearCombatTech
