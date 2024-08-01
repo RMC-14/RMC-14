@@ -402,11 +402,11 @@
   id: Saline
   reactants:
     Water:
-      amount: 4
+      amount: 4000
     TableSalt:
-      amount: 1
+      amount: 1000
   products:
-    Saline: 5
+    Saline: 5000
 
 - type: reaction
   id: Lacerinol
@@ -561,7 +561,7 @@
   id: Opporozidone
   minTemp: 400 #Maybe if a method of reducing reagent temp exists one day, this could be -50
   reactants:
-    Cognizine: 
+    Cognizine:
       amount: 1
     Plasma:
       amount: 2
