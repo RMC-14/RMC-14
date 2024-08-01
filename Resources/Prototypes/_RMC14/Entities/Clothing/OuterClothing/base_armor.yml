@@ -101,9 +101,9 @@
   - type: Sprite
     layers:
     - state: icon
-    - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_lamp.rsi
+    - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
       state: lamp-off
-    - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_lamp.rsi
+    - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
       state: lamp-on
       visible: false
       map: [ "light" ]
@@ -111,13 +111,13 @@
     clothingVisuals:
       outerClothing:
       - state: equipped-OUTERCLOTHING
-      - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_lamp.rsi
+      - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
         state: lamp-off
   - type: ToggleableLightVisuals
     spriteLayer: light
     clothingVisuals:
       outerClothing:
-      - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_lamp.rsi
+      - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
         state: lamp-on
   - type: Appearance
   - type: PointLight
