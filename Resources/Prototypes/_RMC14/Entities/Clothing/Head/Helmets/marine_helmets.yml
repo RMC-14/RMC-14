@@ -63,6 +63,14 @@
       components:
       - Xeno
   - type: OverwatchCamera
+  - type: SquadArmor
+    layer: Helmet
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
+      state: std-helmet
+    leaderRsi:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
+      state: sql-helmet
 
 - type: entity
   parent: ArmorHelmetM10
