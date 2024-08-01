@@ -86,6 +86,29 @@
     - id: RMCSpeedLoader44Marksman
       amount: 6
 
+# M1984 service pistol
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolM1984
+  name: M1984 service pistol case
+  description:
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,15,1
+    whitelist:
+      tags:
+      - CMWeaponPistolM1984
+      - CMMagazinePistolM1984
+      - RMCAttachmentRailFlashlight
+  - type: StorageFill
+    contents:
+    - id: RMCAttachmentRailFlashlight
+    - id: CMWeaponPistolM1984
+    - id: CMMagazinePistolM1984
+      amount: 6
+
 # rifles
 - type: entity
   parent: RMCGunCaseBase

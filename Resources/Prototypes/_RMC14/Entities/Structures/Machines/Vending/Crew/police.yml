@@ -35,7 +35,7 @@
       entries:
       - id: RMCGunCasePistolM77
       - id: RMCGunCasePistolM44
-#     - id: M1984 Gun case
+      - id: RMCGunCasePistolM1984
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
@@ -108,7 +108,7 @@
       entries:
       - id: RMCGunCasePistolM77
       - id: RMCGunCasePistolM44
-#     - id: M1984 Gun case
+      - id: RMCGunCasePistolM1984
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
