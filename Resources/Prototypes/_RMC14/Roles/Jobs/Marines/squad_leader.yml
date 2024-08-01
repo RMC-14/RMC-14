@@ -36,6 +36,8 @@
     - type: CMVendorUser
       points: 45
     - type: MarineOrders
+    - type: SquadArmorWearer
+      leader: true
 
 - type: startingGear
   id: CMGearSquadLeader

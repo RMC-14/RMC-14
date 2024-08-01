@@ -34,6 +34,7 @@
       points: 45
       extraPoints:
         Specialist: 120
+    - type: SquadArmorWearer
 
 - type: startingGear
   id: CMGearWeaponsSpecialist

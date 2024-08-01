@@ -51,7 +51,7 @@
     outerClothing: RMCCoatBureauMarshal # add telebaton binoculars/range
     # /obj/item/weapon/gun/shotgun/pump/dual_tube/cmb/m3717
     belt: CMBeltSecurityMarshalFilled
-    shoes: CMBootsBlackFilled
+    shoes: RMCBootsPMCFilled
     id: RMCIDCardMarshal
     ears: CMHeadsetMPO
     pocket1: RMCPouchFirstAidERT
@@ -110,7 +110,7 @@
     outerClothing: RMCCoatBureauMarshal # add telebaton binoculars/range
     # /obj/item/weapon/gun/shotgun/pump/dual_tube/cmb/m3717
     belt: CMBeltSecurityMarshalFilled
-    shoes: CMBootsBlackFilled
+    shoes: RMCBootsPMCFilled
     id: RMCIDCardDeputy
     ears: CMHeadsetMPO
     pocket1: RMCPouchFirstAidERT
