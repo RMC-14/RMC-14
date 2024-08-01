@@ -454,6 +454,8 @@
       - PowerCell
       - Multitool
       - Flashlight
+      - RMCExplosiveBreachingCharge
+      - CMFireExtinguisherPortable
       components:
       - Welder
       - ComputerBoard
