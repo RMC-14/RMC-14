@@ -30,8 +30,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 80
+        Piercing: 104
   - type: CMArmorPiercing
-    amount: 0
-  - type: GunAPStacksModifier
-  #0 is default (no stacks)
+    amount: 10
+  - type: GunStacksProjectile

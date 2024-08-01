@@ -245,7 +245,7 @@
       rmc-aslot-rail: 0.125, 0.185
       rmc-aslot-stock: -0.875, 0.0325
       rmc-aslot-underbarrel: 0.312, -0.343
-      
+
 - type: Tag
   id: WeaponRifleM54CE2
 
@@ -345,7 +345,8 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88.rsi
   - type: Gun
-    shotsPerBurst: 0
+    fireRate: 0.769
+    shotsPerBurst: 1
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -356,7 +357,7 @@
     - SemiAuto
     recoilUnwielded: 5
     scatterWielded: 3
-    baseFireRate: 1
+    baseFireRate: 0.769
   - type: WieldDelay
     baseDelay: 0.2
   - type: WieldableSpeedModifiers
@@ -375,7 +376,7 @@
           - CMMagazineRifleXM88
   - type: GunDamageModifier
     multiplier: 1
-  - type: GunAPStacksModifier
+  - type: GunStacks
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
