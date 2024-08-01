@@ -19,7 +19,7 @@
       takeAll: CMStandard
       entries:
       - id: RMCVendorBundleCrewLeader
-    - name: Squad Kit
+    - name: Squad Kit (CHOOSE 1, for yourself or your squad)
       choices: { RMCSquadKit: 1 }
       entries:
       - id: RMCKitRifleM4SPR
@@ -293,6 +293,7 @@
     state: icon
   - type: CMVendorBundle
     bundle:
+    - RMCExplosiveBreachingCharge # TODO RMC14 plastic explosives
     - CMPackFlare # TODO RMC14 signal flares when we have any use for damn signals
     - RMCBinoculars # TODO RMC14 laser designator when see above
     - CMFireExtinguisher
