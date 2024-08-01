@@ -117,7 +117,7 @@ entities:
     - type: Transform
       pos: -0.10331398,-0.051238924
       parent: 2
-- proto: CMFaxCMB
+- proto: CMFaxProvost
   entities:
   - uid: 55
     components:
