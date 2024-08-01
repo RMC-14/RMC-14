@@ -1,0 +1,48 @@
+# Other
+- type: entity
+  parent: CMHeadset
+  id: CMHeadsetColony
+  name: colony headset
+  description: A standard headset used by colonists.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
+
+# For Bureau Marshals
+- type: entity
+  parent: CMHeadset
+  id: RMCHeadsetDistressBureau
+  name: bureau earpiece
+  description: A sleek headset used by The Colonial Marshal Bureau, crafted in Sol. Low profile and comfortable. No one is above the law.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyBureau
+
+# For WeYa civilians
+- type: entity
+  parent: CMHeadset
+  id: RMCHeadsetDistressWeYa
+  name: WeYa corporate headset
+  description: A headset commonly worn by WeYa corporate personnel.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyWEYA
+
+# For WeYa PMC
+- type: entity
+  parent: CMHeadset
+  id: RMCHeadsetDistressPMC
+  name: PMC headset
+  description: A special headset used by corporate personnel.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - RMCEncryptionKeyLiaison

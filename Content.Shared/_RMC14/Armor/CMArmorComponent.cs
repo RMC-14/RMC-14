@@ -10,6 +10,9 @@ public sealed partial class CMArmorComponent : Component
     [DataField, AutoNetworkedField]
     public int Armor;
 
+    [DataField, AutoNetworkedField]
+    public int Bio;
+
     // TODO RMC14 some rockets should penetrate armor
     // TODO RMC14 tank/sniper flak/shotgun incendiary burst is resisted by this but penetrated
     [DataField, AutoNetworkedField]

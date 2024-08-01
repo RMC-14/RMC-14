@@ -119,6 +119,8 @@
       entries:
       - id: CMMagazinePistolMK80
         points: 3
+      - id: RMCMagazinePistolSU6
+        points: 6
     - name: Armors
       entries:
       - id: CMArmorB12
@@ -127,13 +129,14 @@
         points: 28
     - name: Restricted Firearms
       entries:
-      - id: CMWeaponPistolMK80
+      - id: RMCMK80Case
         points: 8
-    #    CMSU6SmartPistol: 12P
+      - id: RMCSmartPistolCase
+        points: 12
     - name: Clothing Items
       entries:
     #    CMScabbardMacheteFull: 6P
-      - id: CMPouchMacheteFilled
+      - id: RMCPouchMacheteFilled
         points: 8
     #    CMMarineRadioTelephonePack: 15P
     #    CMFuelTankStrapPouch: 4P
@@ -143,11 +146,12 @@
       - id: CMFireExtinguisherPortable
         points: 3
     #    CMMotionDetector: 8P
-      - id: CMWhistle
+      - id: RMCWhistle
         points: 3
     - name: Binoculars
-      entries: [ ]
-    #    CMBinoculars: 5P
+      entries:
+      - id: RMCBinoculars
+        points: 5
     #    CMRangeFinder: 10P
     #    CMLaserDesignator: 15P
     - name: Helmet Optics
@@ -219,33 +223,33 @@
       #- id: CMM276M44HolsterRig
       #- id: CMM276M82FHolsterRig
       #- id: CMM276ShotgunShellLoadingRig
-      #- id: CMM276M40GrenadeRig
+      - id: RMCBeltGrenade
     - name: Pouches
-      choices: { CMPouch: 2 }
+      choices: { RMCPouch: 2 }
       entries:
-      - id: CMPouchAutoinjector
-      - id: CMPouchFirstAidInjectors
+      - id: RMCPouchAutoinjector
+      - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
-      - id: CMPouchFirstAidSplintsGauzeOintment
+      - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
-      - id: CMPouchFirstAidPills
+      - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
-      - id: CMPouchFirstResponder # TODO RMC14 test everything fits
-      - id: CMPouchFlareFilled
+      - id: RMCPouchFirstResponder # TODO RMC14 test everything fits
+      - id: RMCPouchFlareFilled
         name: Flare pouch (filled)
-      - id: CMPouchGeneralLarge
+      - id: RMCPouchGeneralLarge
       #- id: CMSlingPouch
-      - id: CMPouchMagazinePistolLarge
-      - id: CMPouchMagazine
-      - id: CMPouchShotgun
-      - id: CMPouchMedical
-      #- id: CMPouchMedkit
+      - id: RMCPouchMagazinePistolLarge
+      - id: RMCPouchMagazine
+      - id: RMCPouchShotgun
+      - id: RMCPouchMedical
+      #- id: RMCPouchMedkit
       #- id: CMPressurizedReagentCanisterPouchBicaridine
       #- id: CMPressurizedReagentCanisterPouchKelotane
       #- id: CMPressurizedReagentCanisterPouchRevivalMix
       #- id: CMPressurizedReagentCanisterPouchTricordrazine
       #- id: CMPressurizedReagentCanisterPouchEmpty
-      - id: CMPouchPistol
+      - id: RMCPouchPistol
       #- id: CMVialPouchFull
     - name: Accessories
       choices: { CMAccessories: 1 }

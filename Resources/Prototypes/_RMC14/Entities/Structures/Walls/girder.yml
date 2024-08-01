@@ -35,6 +35,8 @@
         sound:
           collection: MetalBreak
   - type: RMCDropshipBlocked
+  - type: DamageMultiplierFlags
+    flags: Breaching
 
 - type: entity
   parent: CMGirder

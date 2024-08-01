@@ -11,7 +11,10 @@
     - state: surgical_tray_empty
       map: [ "openLayer" ]
       visible: false
-
+  - type: Item
+    size: Large
+  - type: Tag # to not inherit case tags
+    tags: []
   - type: Storage
     maxItemSize: Small
     grid:

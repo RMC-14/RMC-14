@@ -1,15 +1,14 @@
+using System.Linq;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
+using JetBrains.Annotations;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
-using System;
-using System.Linq;
-using Content.Shared.Interaction.Events;
-using JetBrains.Annotations;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -31,8 +30,13 @@ public partial class SharedGunSystem
 
     private void OnRevolverUse(EntityUid uid, RevolverAmmoProviderComponent component, UseInHandEvent args)
     {
+        if (args.Handled)
+            return;
+
         if (!_useDelay.TryResetDelay(uid))
             return;
+
+        args.Handled = true;
 
         Cycle(component);
         UpdateAmmoCount(uid, prediction: false);
@@ -393,16 +397,20 @@ public partial class SharedGunSystem
                 args.Ammo.Add((spawned, EnsureComp<AmmoComponent>(spawned)));
 
                 if (cartridge.DeleteOnSpawn)
+                {
+                    component.AmmoSlots[index] = null;
                     component.Chambers[index] = null;
+                }
             }
             else
             {
+                component.AmmoSlots[index] = null;
                 component.Chambers[index] = null;
                 args.Ammo.Add((ent.Value, EnsureComp<AmmoComponent>(ent.Value)));
             }
 
             // Delete the cartridge entity on client
-            if (_netManager.IsClient)
+            if (_netManager.IsClient && IsClientSide(ent.Value))
             {
                 QueueDel(ent);
             }

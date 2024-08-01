@@ -29,4 +29,13 @@
         maxVol: 30
   - type: UseDelay
     delay: 0.333
+  - type: Tag
+    tags:
+    - Hypospray
+  - type: MedicallyUnskilledDoAfter
+    min: 2
+    doAfter: 3
+
+- type: Tag
+  id: Hypospray
 

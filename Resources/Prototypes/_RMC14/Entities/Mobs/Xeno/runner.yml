@@ -78,6 +78,7 @@
   - type: Tackle
     threshold: 5
     stun: 8
+    chance: 0.40
   - type: MovementSpeedModifier
     baseWalkSpeed: 5.55
     baseSprintSpeed: 10

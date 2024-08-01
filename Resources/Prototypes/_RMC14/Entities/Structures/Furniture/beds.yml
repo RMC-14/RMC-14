@@ -26,3 +26,86 @@
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/bed.rsi
     state: psychbed
+
+# Bedroll
+
+- type: entity
+  parent: [BaseItem, BaseFoldable]
+  id: Bedroll
+  name: bedroll
+  description: A foldable bedroll, just about the only thing of comfort in the field. You're generally supposed to unroll it before sleeping, but who needs rules?
+  components:
+  - type: Transform
+    noRot: true
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/bedroll.rsi
+    noRot: true
+    layers:
+    - state: bedroll
+      map: ["unfoldedLayer"]
+    - state: bedroll_folded
+      map: ["foldedLayer"]
+      visible: false
+    - state: bedroll_pillow
+      map: ["buckledLayer"]
+      visible: false
+  - type: InteractionOutline
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.05"
+        density: 190
+        mask:
+        - TableMask
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 50
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              path: /Audio/Effects/poster_broken.ogg
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+  - type: Pullable
+  - type: Strap
+    position: Down
+    rotation: -90
+    buckleOffset: "0,0"
+    unbuckleOffset: "0,0"
+  - type: Construction
+    graph: bed
+    node: bed
+  - type: PlaceableSurface
+    placeCentered: true
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.StrapVisuals.State:
+        buckledLayer:
+          True: {visible: true}
+          False: {visible: false}
+      enum.FoldedVisuals.State: # Copypasta from BaseFoldable b/c collections don't merge when overriding component prototypes.
+        foldedLayer:
+          True: {visible: true}
+          False: {visible: false}
+        unfoldedLayer:
+          True: {visible: false}
+          False: {visible: true}
+
+- type: entity
+  parent: Bedroll
+  id: BedrollFolded
+  suffix: folded
+  components:
+  - type: Foldable
+    folded: true
+  - type: Strap
+    enabled: false

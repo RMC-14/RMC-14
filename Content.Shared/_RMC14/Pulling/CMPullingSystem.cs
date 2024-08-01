@@ -1,4 +1,5 @@
 ﻿using Content.Shared.IdentityManagement;
+using Content.Shared.Interaction.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
@@ -97,11 +98,23 @@ public sealed class CMPullingSystem : EntitySystem
 
     private void OnPullingSlowedMovementSpeed(Entity<PullingSlowedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        if (TryComp(ent, out PullerComponent? puller) &&
-            TryComp(puller.Pulling, out SlowOnPullComponent? slow))
+        if (HasComp<BypassInteractionChecksComponent>(ent) ||
+            !TryComp(ent, out PullerComponent? puller) ||
+            !TryComp(puller.Pulling, out SlowOnPullComponent? slow))
         {
-            args.ModifySpeed(slow.Multiplier, slow.Multiplier);
+            return;
         }
+
+        foreach (var slowdown in slow.Slowdowns)
+        {
+            if (_whitelist.IsWhitelistPass(slowdown.Whitelist, ent))
+            {
+                args.ModifySpeed(slowdown.Multiplier, slowdown.Multiplier);
+                return;
+            }
+        }
+
+        args.ModifySpeed(slow.Multiplier, slow.Multiplier);
     }
 
     private void OnPullWhitelistPullAttempt(Entity<PullWhitelistComponent> ent, ref PullAttemptEvent args)

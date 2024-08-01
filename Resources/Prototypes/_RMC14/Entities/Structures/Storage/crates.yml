@@ -84,6 +84,10 @@
   - type: StaticPrice
     price: 50
   - type: RequireProjectileTarget
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: BaseStructureDynamic

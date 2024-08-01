@@ -1,0 +1,11 @@
+# Bureau Cap
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadCapBureau
+  name: bureau cap
+  description: A dark cap enscribed with the powerful letters of 'MARSHAL' representing justice, authority, and protection in the outer rim. The laws of the Earth stretch beyond the Sol.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi

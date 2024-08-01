@@ -1,0 +1,18 @@
+- type: constructionGraph
+  parent: RMC
+  id: RMCCampfire
+  start: start
+  graph:
+  - node: start
+    edges:
+      - to: Campfire
+        completed:
+        - !type:SnapToGrid
+          southRotation: true
+        steps:
+        - material: RMCWood
+          amount: 4
+          doAfter: 5
+
+  - node: Campfire
+    entity: RMCCampfire

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: BaseStorageItem
   id: CMPacketPills
@@ -22,9 +22,12 @@
     tags:
     - PillPacket
   - type: IconLabel
-    textSize: 4
     textColor: White
-    storedOffset: -25, -5
+    storedOffset: 2, 12
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: Tag
   id: PillPacket

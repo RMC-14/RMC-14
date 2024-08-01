@@ -9,6 +9,9 @@
     snap:
     - Disposal
   components:
+  - type: Anchorable
+    flags:
+    - Unanchorable
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/toilet.rsi
     layers:

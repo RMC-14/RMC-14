@@ -10,6 +10,10 @@
   - type: Storage
     grid:
     - 0,0,14,1 # 15
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMSatchel
@@ -153,3 +157,27 @@
     solution: tank
   - type: DrawableSolution
     solution: tank
+    
+- type: entity
+  parent: RMCSatchelWelder
+  id: RMCSatchelWelderChestrig
+  name: technician welder chestrig
+  description: A specialized Chestrig worn by technicians and engineers. It carries one medium fuel tank for quick welder refueling and use.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/welder_chestrig.rsi
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelDemoSpec
+  name: UNMC IMP M22 rocket bags
+  description: A specially-designed backpack that fits to the IMP mounting frame on standard UNMC infantry armor. It's made of two easily-accessible, waterproofed reinforced tubes and one smaller satchel slung at the bottom. The two silos are for rockets, but no one is stopping you from cramming other things in there.
+  components:
+  - type: ExplosionResistance
+    damageCoefficient: 0
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/rocketpack.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,20,1 # same as backpack, up to 7 normal size rockets

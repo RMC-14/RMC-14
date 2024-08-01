@@ -120,3 +120,13 @@
     contents:
     - id: RMCMagazineSmartGun
       amount: 2
+
+- type: entity
+  parent: RMCBeltSmartPistol
+  id: RMCBeltSmartPistolFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolSU6
+      amount: 6

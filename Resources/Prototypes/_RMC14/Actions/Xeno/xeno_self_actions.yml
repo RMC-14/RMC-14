@@ -75,7 +75,8 @@
     event: !type:XenoToggleCrestActionEvent
     useDelay: 2
   - type: ActionSharedCooldown
-    id: crest
+    id: ActionXenoToggleCrest
+    cooldown: 2
 
 - type: entity
   id: ActionXenoFortify
@@ -91,7 +92,8 @@
     event: !type:XenoFortifyActionEvent
     useDelay: 5
   - type: ActionSharedCooldown
-    id: crest
+    id: ActionXenoToggleCrest
+    cooldown: 5
 
 - type: entity
   id: ActionXenoResinWalker
@@ -139,7 +141,7 @@
   id: ActionXenoGrowOvipositor
   parent: ActionXenoBase
   name: Grow Ovipositor (700) # TODO RMC14 proper plasma costs
-  description: Become immobile and start laying eggs which will produce parasites. Has a 5 minute cooldown.
+  description: Become immobile and start laying eggs which will produce parasites. Has a 5 minute cooldown. [color=red]You must be in ovipositor mode for other xenonids to gain evolution points after round-start![/color]
   components:
   - type: InstantAction
     itemIconStyle: NoItem

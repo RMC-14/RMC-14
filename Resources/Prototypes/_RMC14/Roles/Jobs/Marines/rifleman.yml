@@ -14,7 +14,8 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      firearms: 1
+      skills:
+        RMCSkillFirearms: 1
     - type: CMVendorUser
       points: 45
   hasIcon: false

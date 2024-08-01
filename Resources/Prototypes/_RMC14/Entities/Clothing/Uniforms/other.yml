@@ -1,0 +1,60 @@
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitPizza
+  name: pizza delivery uniform
+  description: An ill-fitting, slightly stained uniform for a pizza delivery pilot. Smells of cheese.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/pizza.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/pizza.rsi
+
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitMarshal
+  name: marshal uniform
+  description: A pair of off-white slacks and a blue button-down shirt with a dark brown tie; the standard uniform of the Marshals.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/marshal.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/marshal.rsi
+
+# Correspondent
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitCorrespondent
+  name: correspodent uniform
+  description: Standard-issue correspodents's uniform.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Correspondent/white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Correspondent/white.rsi
+
+- type: entity
+  parent: RMCJumpsuitCorrespondent
+  id: RMCJumpsuitCorrespondentBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Correspondent/black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Correspondent/black.rsi
+
+- type: entity
+  parent: RMCJumpsuitCorrespondent
+  id: RMCJumpsuitCorrespondentOrange
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Correspondent/orange.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Correspondent/orange.rsi
+
+- type: entity
+  parent: RMCJumpsuitCorrespondent
+  id: RMCJumpsuitCorrespondentRed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Correspondent/red.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Correspondent/red.rsi

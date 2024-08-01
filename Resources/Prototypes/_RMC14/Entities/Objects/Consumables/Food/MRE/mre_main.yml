@@ -32,7 +32,7 @@
   parent: CMMREMainComponentBase
   id: CMMREComponentPizzaSquare
   name: MRE component (pizza square)
-  description: An MRE entree component. Contains the main course for nutrients. This one is pizza square.
+  description: An MRE entree component. Contains the main course for nutrients. This one is a pizza square.
   components:
   - type: SpawnItemsOnUse
     items:
@@ -52,7 +52,7 @@
   parent: CMMREMainComponentBase
   id: CMMREComponentChickenTender
   name: MRE component (chicken tender)
-  description: An MRE entree component. Contains the main course for nutrients. This one is chicken tender.
+  description: An MRE entree component. Contains the main course for nutrients. This one is a chicken tender.
   components:
   - type: SpawnItemsOnUse
     items:
@@ -104,7 +104,7 @@
   parent: CMMREFoodMain
   id: CMMREFoodPizzaSquare
   name: pizza square
-  description: The contents of a Marine Standard issue MRE. This one is pizza square.
+  description: The contents of a Marine Standard issue MRE. This one is a pizza square.
   components:
   - type: Sprite
     state: pizza_square
@@ -128,7 +128,7 @@
   parent: CMMREFoodMain
   id: CMMREFoodChickenTender
   name: chicken tender
-  description: The contents of a Marine Standard issue MRE. This one is chicken tender.
+  description: The contents of a Marine Standard issue MRE. This one is a chicken tender.
   components:
   - type: Sprite
     state: chicken_tender

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CigarCase
   id: CMCigarCase
   components:
@@ -8,3 +8,7 @@
     whitelist:
       tags:
       - Cigar
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

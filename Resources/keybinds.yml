@@ -586,6 +586,10 @@ binds:
   type: State
   key: Space
   mod1: Shift
+- function: RMCCycleFireMode
+  type: State
+  key: Space
+  mod1: Control
 - function: CMUniqueAction
   type: State
   key: Space

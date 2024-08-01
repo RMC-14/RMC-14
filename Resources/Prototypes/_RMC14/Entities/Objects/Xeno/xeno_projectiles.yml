@@ -44,9 +44,41 @@
     impactEffect: null
     damage:
       groups:
-        Burn: 18 # TODO RMC14 damage fall-off and higher at close range
+        Burn: 20 # TODO RMC14 damage fall-off and higher at close range
+  - type: CMArmorPiercing
+    amount: 10
   - type: XenoProjectile
     deleteOnFriendlyXeno: true
+
+- type: entity
+  parent: XenoSpitProjectile
+  id: XenoChargedSpitProjectile
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: neurotoxin
+      shader: unshaded
+  - type: Projectile
+    impactEffect: null
+    damage:
+      groups:
+        Burn: 30 # TODO RMC14 damage fall-off and higher at close range
+  - type: ModifyTargetOnHit
+    add:
+    - type: UserAcided
+      armorPiercing: 40
+      damage:
+        groups:
+          Burn: 1
+      duration: 20
+    whitelist:
+      components:
+      - Marine
+  - type: TimedDespawn
+    lifetime: 0.18
 
 - type: entity
   id: XenoSlowingSpitProjectile
@@ -108,3 +140,43 @@
         Slash: 10
   - type: XenoProjectile
     deleteOnFriendlyXeno: false
+
+- type: entity
+  parent: XenoBaseProjectile
+  id: XenoBombardAcidProjectile
+  name: glob of acid gas
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: acid_glob
+      shader: unshaded
+  - type: TimedDespawn
+    lifetime: 10
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: false
+  - type: SmokeOnTrigger
+    smokePrototype: RMCSmokeAcid
+    duration: 30
+    spreadAmount: 50
+  - type: SpawnOnTerminate
+    spawn: RMCSmokeAcid
+    popup: rmc-glob-land
+    popupType: LargeCaution
+  - type: ProjectileMaxRange
+    max: 10
+
+- type: entity
+  parent: XenoBombardAcidProjectile
+  id: XenoBombardNeurotoxinProjectile
+  name: glob of neurotoxin gas
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: neuro_glob
+      shader: unshaded

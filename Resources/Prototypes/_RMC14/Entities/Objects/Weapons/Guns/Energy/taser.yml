@@ -14,6 +14,7 @@
       shader: unshaded
   - type: Item
     size: Normal
+    shape: null # needed to disable the parent's weird shape
   - type: Gun
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser.ogg

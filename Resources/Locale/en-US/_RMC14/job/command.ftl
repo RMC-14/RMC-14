@@ -14,3 +14,6 @@ CMJobCommandingOfficer = Commanding Officer
 cm-job-name-executive-officer = Executive Officer
 cm-job-description-executive-officer = You are second in command aboard the ship, and are the next in the chain of command after the Commanding Officer.
 CMJobExecutiveOfficer = Executive Officer
+
+# Admin only right now.
+cm-job-name-high-command = High Command

@@ -1,9 +1,13 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.Armor;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
+using Content.Shared.Coordinates;
+using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Hands;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
@@ -14,7 +18,9 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Popups;
 using Content.Shared.Standing;
+using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
@@ -29,14 +35,22 @@ public sealed class XenoDevourSystem : EntitySystem
     [Dependency] private readonly ActionBlockerSystem _blocker = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
+
+    private EntityQuery<DevouredComponent> _devouredQuery;
+    private EntityQuery<XenoDevourComponent> _xenoDevourQuery;
 
     public override void Initialize()
     {
+        _devouredQuery = GetEntityQuery<DevouredComponent>();
+        _xenoDevourQuery = GetEntityQuery<XenoDevourComponent>();
+
         SubscribeLocalEvent<DevourableComponent, CanDropDraggedEvent>(OnDevourableCanDropDragged);
         SubscribeLocalEvent<DevourableComponent, DragDropDraggedEvent>(OnDevourableDragDropDragged);
         SubscribeLocalEvent<DevourableComponent, BeforeRangedInteractEvent>(OnDevourableBeforeRangedInteract);
@@ -61,6 +75,10 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<XenoDevourComponent, XenoRegurgitateActionEvent>(OnXenoRegurgitateAction);
         SubscribeLocalEvent<XenoDevourComponent, EntityTerminatingEvent>(OnXenoTerminating);
         SubscribeLocalEvent<XenoDevourComponent, MobStateChangedEvent>(OnXenoMobStateChanged);
+
+        SubscribeLocalEvent<UsableWhileDevouredComponent, GetMeleeDamageEvent>(OnUsableWhileDevouredGetMeleeDamage);
+        SubscribeLocalEvent<UsableWhileDevouredComponent, GetMeleeAttackRateEvent>(OnUsableWhileDevouredGetMeleeAttackRate);
+        SubscribeLocalEvent<UsableWhileDevouredComponent, CMGetArmorPiercingEvent>(OnUsableWhileDevouredGetArmorPiercing);
     }
 
     private void OnDevourableCanDropDragged(Entity<DevourableComponent> devourable, ref CanDropDraggedEvent args)
@@ -229,9 +247,15 @@ public sealed class XenoDevourSystem : EntitySystem
         }
 
         args.Handled = true;
-        _container.EmptyContainer(container);
+        var ents = _container.EmptyContainer(container);
         _popup.PopupClient(Loc.GetString("cm-xeno-devour-hurl-out"), xeno, xeno, PopupType.MediumCaution);
         _audio.PlayPredicted(xeno.Comp.RegurgitateSound, xeno, xeno);
+        foreach (var ent in ents)
+        {
+            _stun.TryStun(ent, xeno.Comp.RegurgitationStun, true);
+            if (_net.IsServer)
+                SpawnAttachedTo(xeno.Comp.RegurgitateEffect, ent.ToCoordinates());
+        }
     }
 
     private void OnXenoTerminating(Entity<XenoDevourComponent> xeno, ref EntityTerminatingEvent args)
@@ -248,6 +272,34 @@ public sealed class XenoDevourSystem : EntitySystem
             return;
 
         RegurgitateAll(xeno);
+    }
+
+    private void OnUsableWhileDevouredGetMeleeDamage(Entity<UsableWhileDevouredComponent> ent, ref GetMeleeDamageEvent args)
+    {
+        if (ent.Comp.Damage != null && IsHeldByDevoured(ent))
+            args.Damage = new DamageSpecifier(ent.Comp.Damage);
+    }
+
+    private void OnUsableWhileDevouredGetMeleeAttackRate(Entity<UsableWhileDevouredComponent> ent, ref GetMeleeAttackRateEvent args)
+    {
+        if (IsHeldByDevoured(ent))
+            args.Rate *= ent.Comp.AttackRateMultiplier;
+    }
+
+    private void OnUsableWhileDevouredGetArmorPiercing(Entity<UsableWhileDevouredComponent> ent, ref CMGetArmorPiercingEvent args)
+    {
+        if (IsHeldByDevoured(ent))
+            args.Piercing += 100;
+    }
+
+    private bool IsHeldByDevoured(EntityUid item)
+    {
+        return _container.TryGetContainingContainer((item, null), out var marine) &&
+               _devouredQuery.HasComp(marine.Owner) &&
+               _hands.IsHolding(marine.Owner, item) &&
+               _container.TryGetContainingContainer((marine.Owner, null), out var xeno) &&
+               _xenoDevourQuery.TryComp(xeno.Owner, out var devour) &&
+               xeno.ID == devour.DevourContainerId;
     }
 
     private bool CanDevour(EntityUid xeno, EntityUid victim, [NotNullWhen(true)] out XenoDevourComponent? devour, bool popup = false)

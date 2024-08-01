@@ -81,7 +81,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
             return;
         }
 
-        if (!_skills.HasSkills(user, new Skills { Surgery = 1 }))
+        if (!_skills.HasSkill(user, ent.Comp.SkillType, ent.Comp.Skill))
         {
             _popup.PopupEntity("You don't know how to perform surgery!", user, user);
             return;
@@ -116,7 +116,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
 
     private void OnStepSpawnComplete(Entity<RMCSurgeryStepSpawnEffectComponent> ent, ref CMSurgeryStepEvent args)
     {
-        if(TryComp<TransformComponent>(args.Body, out var xform))
+        if (TryComp(args.Body, out TransformComponent? xform))
             SpawnAtPosition(ent.Comp.Entity, xform.Coordinates);
     }
 

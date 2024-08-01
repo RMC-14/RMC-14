@@ -25,9 +25,9 @@
   parent: CMMemorial
   id: CMMemorialMaintainers
   name: slab of remembrance
-  description: A memorial to all Maintainer Team members that have retired from working on CM13. No mentor names are present.
+  description: A memorial to all Maintainer Team members that have retired from working on RMC-14. No mentor names are present.
 
 - type: entity
   parent: CMMemorialMaintainers
   id: CMMemorialAdmins
-  description: A memorial to all Admins and Moderators who have retired from CM13. No mentor names are present.
+  description: A memorial to all Admins and Moderators who have retired from RMC-14. No mentor names are present.

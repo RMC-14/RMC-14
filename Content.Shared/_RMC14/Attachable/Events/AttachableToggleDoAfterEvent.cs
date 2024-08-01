@@ -7,9 +7,11 @@ namespace Content.Shared._RMC14.Attachable.Events;
 public sealed partial class AttachableToggleDoAfterEvent : SimpleDoAfterEvent
 {
     public readonly string SlotId;
+    public readonly string PopupText;
 
-    public AttachableToggleDoAfterEvent(string slotId)
+    public AttachableToggleDoAfterEvent(string slotId, string popupText)
     {
         SlotId = slotId;
+        PopupText = popupText;
     }
 }

@@ -48,7 +48,7 @@
       entries:
     #- id: CMScabbardMacheteFull
     #  points: 4
-      - id: CMPouchMacheteFilled
+      - id: RMCPouchMacheteFilled
         points: 4
     #- id: CMMarineRadioTelephonePack
     #  points: 5
@@ -56,7 +56,7 @@
         points: 15
     - name: Utilities
       entries:
-      - id: CMWhistle
+      - id: RMCWhistle
         points: 3
       - id: CMFireExtinguisherPortable
         points: 3
@@ -94,7 +94,7 @@
         points: 10
     #- id: CMSignalFlarePack
     #  points: 7
-      - id: CMPouchToolsFill
+      - id: RMCPouchToolsFill
         points: 5
     #- id: CMWeldingGoggles
     #  points: 5
@@ -164,6 +164,8 @@
       entries:
       - id: CMMagazinePistolMK80
         points: 3
+      - id: RMCMagazinePistolSU6
+        points: 6
     - name: Special Ammunition
       entries: [ ]
     #- id: CMM240IncineratorTankNapthal
@@ -174,10 +176,10 @@
       entries:
     #- id: CMM240IncineratorUnit
     #  points: 18
-      - id: CMWeaponPistolMK80
+      - id: RMCMK80Case
         points: 8
-    #- id: CMSU6SmartPistol
-    #  points: 12
+      - id: RMCSmartPistolCase
+        points: 12
     #- id: CMM79GrenadeLauncher
     #  points: 18
     - name: Radio Keys
@@ -236,26 +238,26 @@
     #- id: CMM276M82FHolsterRig
     #- id: CMM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
-    #- id: CMM276M40GrenadeRig
+      - id: RMCBeltGrenade
     - name: Pouches
-      choices: { CMPouch: 2 }
+      choices: { RMCPouch: 2 }
       entries:
-      - id: CMPouchAutoinjectorFill
-      - id: CMPouchFirstAidInjectors
+      - id: RMCPouchAutoinjectorFill
+      - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
-      - id: CMPouchFirstAidSplintsGauzeOintment
+      - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
-      - id: CMPouchFirstAidPills
+      - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
-      - id: CMPouchFlareFilled
+      - id: RMCPouchFlareFilled
         name: Flare pouch (Filled)
       #- id: CMFuelTankStrapPouch
-      - id: CMPouchGeneralLarge
+      - id: RMCPouchGeneralLarge
       #- id: CMSlingPouch
-      - id: CMPouchMagazineLarge
+      - id: RMCPouchMagazineLarge
       #- id: CMLargeShotgunShellPouch
-      - id: CMPouchMagazinePistolLarge
-      - id: CMPouchPistol
+      - id: RMCPouchMagazinePistolLarge
+      - id: RMCPouchPistol
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
@@ -265,6 +267,7 @@
       - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
+      choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif

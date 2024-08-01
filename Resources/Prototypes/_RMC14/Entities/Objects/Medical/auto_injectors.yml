@@ -41,9 +41,8 @@
   - type: UseDelay
     delay: 0.333
   - type: IconLabel
-    textSize: 4
     textColor: White
-    storedOffset: -27, -7
+    storedOffset: 0, 12
 
 - type: entity
   parent: CMAutoInjector

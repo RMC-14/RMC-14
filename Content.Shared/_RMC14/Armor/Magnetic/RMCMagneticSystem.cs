@@ -1,4 +1,5 @@
-﻿using Content.Shared.Hands;
+﻿using Content.Shared._RMC14.Inventory;
+using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
@@ -15,6 +16,7 @@ public sealed class RMCMagneticSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCMagneticItemComponent, DroppedEvent>(OnMagneticItemDropped);
+        SubscribeLocalEvent<RMCMagneticItemComponent, RMCDroppedEvent>(OnMagneticItemRMCDropped);
         SubscribeLocalEvent<RMCMagneticItemComponent, ThrownEvent>(OnMagneticItemThrown);
         SubscribeLocalEvent<RMCMagneticItemComponent, DropAttemptEvent>(OnMagneticItemDropAttempt);
 
@@ -24,6 +26,11 @@ public sealed class RMCMagneticSystem : EntitySystem
     }
 
     private void OnMagneticItemDropped(Entity<RMCMagneticItemComponent> ent, ref DroppedEvent args)
+    {
+        TryReturn(ent, args.User);
+    }
+
+    private void OnMagneticItemRMCDropped(Entity<RMCMagneticItemComponent> ent, ref RMCDroppedEvent args)
     {
         TryReturn(ent, args.User);
     }

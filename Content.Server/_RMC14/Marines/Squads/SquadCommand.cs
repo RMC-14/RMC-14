@@ -50,6 +50,15 @@ public sealed class SquadCommand : ToolshedCommand
         return marines.Select(marine => Set(ctx, marine, squad));
     }
 
+    [CommandImplementation("with")]
+    public IEnumerable<EntityUid> With(
+        [CommandInvocationContext] IInvocationContext ctx,
+        [PipedArgument] IEnumerable<EntityUid> marines,
+        [CommandArgument] SquadType squad)
+    {
+        return marines.Where(marine => TryComp(marine, out SquadMemberComponent? member) && member.Squad == squad.Value);
+    }
+
     [CommandImplementation("refresh")]
     public EntityUid Refresh(
         [CommandInvocationContext] IInvocationContext ctx,

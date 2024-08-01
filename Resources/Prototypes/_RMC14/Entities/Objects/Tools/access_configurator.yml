@@ -1,0 +1,74 @@
+- type: entity
+  parent: AccessConfiguratorUniversal
+  id: RMCAdminAccessConfigurator
+  name: admin access configurator
+  suffix: RMC, Admin
+  description: If found, please return to your nearest High Command official.
+  components:
+  - type: AccessOverrider
+    accessLevels:
+    # Resources/Prototypes/_RMC14/Access/almayer_access.yml
+    - CMAccessRequisitions
+    - CMAccessKitchen
+    - CMAccessEngineering
+    - CMAccessMaint
+    - CMAccessOT
+    - CMAccessMedical
+    - CMAccessChemistry
+    - CMAccessResearch
+    - CMAccessPress
+    # Resources/Prototypes/_RMC14/Access/colony_access.yml
+    - CMAccessColonyPublic
+    - CMAccessColonyLogistics
+    - CMAccessColonyEngineering
+    - CMAccessColonyResearch
+    - CMAccessColonyBrig
+    - CMAccessColonyMedbay
+    - CMAccessColonyCommand
+    - CMAccessColonyChem
+    # Resources/Prototypes/_RMC14/Access/command_access.yml
+    - CMAccessCommand
+    - CMAccessCMP
+    - CMAccessQM
+    - CMAccessSEA
+    - CMAccessCO
+    - CMAccessCMO
+    - CMAccessCE
+    - CMAccessASO
+    - CMAccessCorp
+    - CMAccessHighCommand
+    # Resources/Prototypes/_RMC14/Access/dropship_access.yml
+    - CMAccessDropship
+    - CMAccessPilot
+    - CMAccessCrewman
+    # Resources/Prototypes/_RMC14/Access/marine_access.yml
+    - CMAccessAlpha
+    - CMAccessBravo
+    - CMAccessCharlie
+    - CMAccessDelta
+    - CMAccessMarinePrep
+    - CMAccessMedPrep
+    - CMAccessCombatTechPrep
+    - CMAccessSquadLeaderPrep
+    - CMAccessSpecPrep
+    - CMAccessSmartPrep
+    - CMAccessFTLPrep
+    - CMAccessMarineRifleman
+    # Resources/Prototypes/_RMC14/Access/mp_access.yml
+    - CMAccessBrig
+    - CMAccessArmory
+    # Resources/Prototypes/_RMC14/Access/xeno_access.yml
+    - CMAccessXeno
+    - CMAccessXenoQueen
+    privilegedIdSlot:
+      name: id-card-console-privileged-id
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: false
+      whitelist:
+        components:
+        - IdCard
+    denialSound:
+      path: /Audio/Machines/custom_deny.ogg
+    doAfter: 0.5

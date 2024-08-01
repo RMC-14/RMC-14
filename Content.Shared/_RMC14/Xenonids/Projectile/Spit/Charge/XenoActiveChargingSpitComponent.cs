@@ -1,5 +1,5 @@
-﻿using Content.Shared.Damage;
-using Robust.Shared.GameStates;
+﻿using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
@@ -11,9 +11,12 @@ public sealed partial class XenoActiveChargingSpitComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan ExpiresAt;
 
-    [DataField]
-    public DamageSpecifier Damage = new();
+    [DataField, AutoNetworkedField]
+    public int Armor = 5;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan ProjectileLifetime;
+    public float Speed = 1.4f;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId Projectile = "XenoChargedSpitProjectile";
 }

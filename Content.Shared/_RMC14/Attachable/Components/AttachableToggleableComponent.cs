@@ -40,19 +40,46 @@ public sealed partial class AttachableToggleableComponent : Component
     public bool BreakOnRotate = false;
 
     /// <summary>
-    /// If set to true, the attachment can only be activated when the holder is wielded.
+    /// If set to true, the attachment can only be toggled when the holder is wielded.
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool WieldedOnly = false;
 
+    /// <summary>
+    /// If set to true, the attachment can only be used when the holder is wielded.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool WieldedUseOnly = false;
+
+    /// <summary>
+    /// If set to true, the attachment can only be activated when someone is holding it.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool HeldOnlyActivate = false;
+
+    /// <summary>
+    /// Only the person holding or wearing the holder can activate this attachment.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool UserOnly = false;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan UseDelay = TimeSpan.FromSeconds(0f);
+
     [DataField, AutoNetworkedField]
     public float DoAfter;
+
+    [DataField, AutoNetworkedField]
+    public float? DeactivateDoAfter;
 
     [DataField, AutoNetworkedField]
     public bool DoAfterNeedHand = true;
 
     [DataField, AutoNetworkedField]
     public bool DoAfterBreakOnMove = true;
+
+    [DataField, AutoNetworkedField]
+    public AttachableInstantToggleConditions InstantToggle = AttachableInstantToggleConditions.None;
 
     /// <summary>
     /// If set to true, this attachment will block some of the holder's functionality when active and perform it instead.
@@ -74,6 +101,15 @@ public sealed partial class AttachableToggleableComponent : Component
     public SoundSpecifier? DeactivateSound = new SoundPathSpecifier("/Audio/_RMC14/Attachable/attachment_deactivate.ogg");
 
     [DataField, AutoNetworkedField]
+    public bool ShowTogglePopup = true;
+
+    [DataField, AutoNetworkedField]
+    public LocId ActivatePopupText = new LocId("attachable-popup-activate-generic");
+
+    [DataField, AutoNetworkedField]
+    public LocId DeactivatePopupText = new LocId("attachable-popup-deactivate-generic");
+
+    [DataField, AutoNetworkedField]
     public EntityUid? Action;
 
     [DataField, AutoNetworkedField]
@@ -93,4 +129,10 @@ public sealed partial class AttachableToggleableComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Attached = false;
+}
+
+public enum AttachableInstantToggleConditions : byte
+{
+    None = 0,
+    Brace = 1 << 0
 }

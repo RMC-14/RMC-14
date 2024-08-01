@@ -21,3 +21,29 @@
   components:
   - type: PresetIdCard
     job: CMExecutiveOfficer
+
+- type: entity
+  parent: IDCardStandard # Deliberately parenting off of upstream ID card cause it needs to work with admin access configurator.
+  id: CMIDCardHighCommand
+  name: high command ID card
+  suffix: Admin
+  description: A gold-plated holo-badge reserved for those exclusively above your rank.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/gold_id.rsi
+    state: gold
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/gold_id.rsi
+  - type: Item
+    heldPrefix: green
+  - type: Access
+    groups:
+    - ShipMasterAccess
+    - Colony
+    - Corp
+    tags:
+    - CMAccessHighCommand
+    - CMAccessXenoQueen
+    - CMAccessXeno

@@ -54,6 +54,14 @@ cm-xeno-crippling-strike-expire = You have waited too long, your slash will no l
 cm-xeno-crippling-strike-hit = We significantly strengthen our attack, slowing the unknown!
 
 # Pheromones
+rmc-xeno-pheromones-help =
+    Pheromones provide a buff to all Xenos in range at the cost of some stored plasma every second, as follows:
+
+    Frenzy (Red) - Increased run speed, damage and chance to knock off headhunter masks.
+    
+    Warding (Green) - While in critical state, increased maximum negative health and slower off weed bleedout.
+
+    Recovery (Blue) - Increased plasma and health regeneration.
 cm-xeno-choose-pheromones = Choose Pheromones
 cm-pheromones-recovery = Recovery
 cm-pheromones-warding = Warding

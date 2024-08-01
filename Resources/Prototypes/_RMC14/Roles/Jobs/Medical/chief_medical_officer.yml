@@ -20,16 +20,17 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      firearms: 0
-      fireman: 1
-      intel: 1
-      jtac: 3
-      leadership: 2
-      medical: 3
-      overwatch: 1
-      police: 1
-      research: 1
-      surgery: 2
+      skills:
+        RMCSkillFirearms: 0
+        RMCSkillFireman: 1
+        RMCSkillIntel: 1
+        RMCSkillJtac: 3
+        RMCSkillLeadership: 2
+        RMCSkillMedical: 3
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 1
+        RMCSkillResearch: 1
+        RMCSkillSurgery: 2
     - type: RMCUserBulkyArmorIncapable
     - type: MarineOrders
 
