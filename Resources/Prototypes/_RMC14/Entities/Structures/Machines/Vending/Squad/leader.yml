@@ -347,4 +347,4 @@
     contents:
     - id: RMCPouchConstructionFillLowGrade
     - id: RMCPouchElectronicsFill
-#    - id: RMCGogglesWelding # TODO RMC14 welding goggles
+    - id: CMWeldingGoggles # TODO RMC14 welding goggles
