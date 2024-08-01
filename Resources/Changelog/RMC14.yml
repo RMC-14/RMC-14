@@ -4172,5 +4172,13 @@
   id: 490
   time: '2024-08-01T05:13:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3360
+- author: P-MCT
+  changes:
+  - message: Fixed portable fire extinguishers and breaching charges not fitting into
+      the normal toolbelt rig and tools pouch.
+    type: Fix
+  id: 491
+  time: '2024-08-01T05:27:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3423
 Name: RMC14
 Order: -1
