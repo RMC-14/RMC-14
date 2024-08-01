@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using Content.Shared.Actions;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.ActionBlocker;
@@ -41,6 +42,7 @@ public sealed class XenoNestSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
 
@@ -56,9 +58,9 @@ public sealed class XenoNestSystem : EntitySystem
 
         SubscribeLocalEvent<XenoNestSurfaceComponent, InteractHandEvent>(OnSurfaceInteractHand);
         SubscribeLocalEvent<XenoNestableComponent, ActivateInWorldEvent>(OnNestedActivateInWorld);
-        SubscribeLocalEvent<XenoNestSurfaceComponent, DoAfterAttemptEvent<XenoNestDoAfterEvent>>(OnSurfaceDoAfterAttempt);
-        SubscribeLocalEvent<XenoNestedComponent, XenoUnNestDoAfterEvent>(OnUnNestNestableDoAfter);
-        SubscribeLocalEvent<XenoNestSurfaceComponent, XenoNestDoAfterEvent>(OnNestSurfaceDoAfter);
+        SubscribeLocalEvent<XenoNestSurfaceComponent, DoAfterAttemptEvent<XenoNestEvent>>(OnSurfaceDoAfterAttempt);
+        SubscribeLocalEvent<XenoNestedComponent, XenoUnNestEvent>(OnUnNestNestableEvent);
+        SubscribeLocalEvent<XenoNestSurfaceComponent, XenoNestEvent>(OnNestSurfaceDoAfter);
         SubscribeLocalEvent<XenoNestSurfaceComponent, CanDropTargetEvent>(OnSurfaceCanDropTarget);
         SubscribeLocalEvent<XenoNestSurfaceComponent, DragDropTargetEvent>(OnSurfaceDragDropTarget);
         SubscribeLocalEvent<XenoNestSurfaceComponent, EntityTerminatingEvent>(OnSurfaceTerminating);
@@ -148,7 +150,7 @@ public sealed class XenoNestSystem : EntitySystem
             _standing.Down(ent);
     }
 
-    private void OnSurfaceDoAfterAttempt(Entity<XenoNestSurfaceComponent> ent, ref DoAfterAttemptEvent<XenoNestDoAfterEvent> args)
+    private void OnSurfaceDoAfterAttempt(Entity<XenoNestSurfaceComponent> ent, ref DoAfterAttemptEvent<XenoNestEvent> args)
     {
         if (args.DoAfter.Args.Target is not { } target ||
             TerminatingOrDeleted(target) ||
@@ -158,7 +160,7 @@ public sealed class XenoNestSystem : EntitySystem
         }
     }
 
-    private void OnNestSurfaceDoAfter(Entity<XenoNestSurfaceComponent> ent, ref XenoNestDoAfterEvent args)
+    private void OnNestSurfaceDoAfter(Entity<XenoNestSurfaceComponent> ent, ref XenoNestEvent args)
     {
         if (args.Cancelled || args.Handled)
             return;
@@ -226,9 +228,9 @@ public sealed class XenoNestSystem : EntitySystem
         }
     }
 
-    private void OnUnNestNestableDoAfter(Entity<XenoNestedComponent> ent, ref XenoUnNestDoAfterEvent args)
+    private void OnUnNestNestableEvent(Entity<XenoNestedComponent> ent, ref XenoUnNestEvent args)
     {
-        if (args.Cancelled || args.Handled)
+        if (args.Handled)
             return;
         args.Handled = true;
         var target = ent.Owner;
@@ -301,7 +303,7 @@ public sealed class XenoNestSystem : EntitySystem
             return;
         }
 
-        var ev = new XenoNestDoAfterEvent();
+        var ev = new XenoNestEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, surface.Comp.DoAfter, ev, surface, victim)
         {
             BreakOnMove = true,
@@ -356,14 +358,10 @@ public sealed class XenoNestSystem : EntitySystem
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-nest-unsecuring-active-self", ("target", target)), user, user);
         }
-        var ev = new XenoUnNestDoAfterEvent();
-        var doafterTime = TimeSpan.FromSeconds(8);
-        var doAfter = new DoAfterArgs(EntityManager, user, doafterTime, ev, target)
-        {
-            BreakOnMove = true,
-            AttemptFrequency = AttemptFrequency.EveryTick
-        };
-        _doAfter.TryStartDoAfter(doAfter);
+        var ev = new XenoUnNestEvent();
+        _ui.TryOpenUi(user, XenoUnNestUI.Key, user);
+        //var doAfter = new DoAfterArgs(EntityManager, user, doafterTime, ev, target)
+        //_doAfter.TryStartDoAfter(doAfter);
     }
 
     private bool CanBeNested(EntityUid user,
