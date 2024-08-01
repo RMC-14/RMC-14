@@ -119,4 +119,7 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCGasTileOverlayUpdate =
         CVarDef.Create("rmc.gas_tile_overlay_update", false, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCActiveInputMoverEnabled =
+        CVarDef.Create("rmc.active_input_mover_enabled", true, CVar.REPLICATED | CVar.SERVER);
 }

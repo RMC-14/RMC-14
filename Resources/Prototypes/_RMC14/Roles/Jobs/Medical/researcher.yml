@@ -32,7 +32,7 @@
   equipment:
     jumpsuit: CMJumpsuitResearch
     back: CMSatchel
-    shoes: CMShoesLaceup
+    shoes: RMCShoesLaceup
     id: CMIDCardResearcher
     # TODO RMC14 random chemical synthesis note, syringe,
 
@@ -42,7 +42,7 @@
     jumpsuit: CMJumpsuitResearch
     back: CMSatchelMarine
     gloves: CMHandsLatex
-    shoes: CMShoesLaceup
+    shoes: RMCShoesLaceup
     id: CMIDCardResearcher
     ears: CMHeadsetResearcher
 

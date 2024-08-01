@@ -72,6 +72,8 @@
       - Multitool
       - Flashlight
       - PowerCell
+      - CMFireExtinguisherPortable
+      - RMCExplosiveBreachingCharge
 #      - # TODO nailgun, circuit board
       components:
       - Welder
@@ -114,6 +116,7 @@
       - CMMagazinePistol
       - RMCMagazineRevolver
       - PowerCell
+      - CMFireExtinguisherPortable
 #      - # TODO RMC14 handful of shotgun shells
 #      - # TODO nailgun, circuit board
       components:
@@ -289,7 +292,7 @@
   - type: Storage
     maxItemSize: Normal
     grid:
-    - 0,0,11,2 # 12 slots
+    - 0,0,11,3 # 12 slots
     whitelist:
       tags:
       - Grenade

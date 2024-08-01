@@ -3,6 +3,8 @@
   id: CMBaseWeaponGun
   components:
   - type: GunUnskilledPenalty
+  - type: GunIFF
+    enabled: false
   - type: Clothing
     quickEquip: false
   - type: GunSkilledRecoil

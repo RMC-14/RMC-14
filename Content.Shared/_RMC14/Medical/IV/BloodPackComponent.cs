@@ -57,9 +57,9 @@ public sealed partial class BloodPackComponent : Component
     [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId<SkillDefinitionComponent>, int> SkillRequired = new() { ["RMCSkillSurgery"] = 1 };
 
-	// TODO RMC-14 blood types
-	[DataField, AutoNetworkedField]
-	public string[] TransferableReagents = ["Blood"];
+    // TODO RMC-14 blood types
+    [DataField, AutoNetworkedField]
+    public string[] TransferableReagents = ["Blood"];
 }
 
 [Serializable, NetSerializable]
