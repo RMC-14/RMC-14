@@ -1,5 +1,5 @@
 - type: Tag
-    id: RMCExplosiveBreachingCharge
+  id: RMCExplosiveBreachingCharge
 
 ﻿- type: entity
   parent: BaseItem
