@@ -4180,5 +4180,22 @@
   id: 491
   time: '2024-08-01T05:27:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3423
+- author: Vermidia
+  changes:
+  - message: Crushers can now use their defensive shield ability that lasts 7 seconds,
+      which gives them a 200 hitpoint shield that takes 10 less damage from all sources,
+      and for a short while gives them explosion immunity.
+    type: Add
+  id: 492
+  time: '2024-08-01T05:42:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3365
+- author: Vermidia
+  changes:
+  - message: Parasites now get a different sprite and announcement if they die from
+      infecting a host.
+    type: Tweak
+  id: 493
+  time: '2024-08-01T05:43:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3419
 Name: RMC14
 Order: -1
