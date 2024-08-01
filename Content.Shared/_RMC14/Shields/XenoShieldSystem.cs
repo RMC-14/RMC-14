@@ -140,7 +140,7 @@ public sealed partial class XenoShieldSystem : EntitySystem
                 continue;
             }
 
-			Dirty(uid, shield);
-		}
+            Dirty(uid, shield);
+        }
     }
 }

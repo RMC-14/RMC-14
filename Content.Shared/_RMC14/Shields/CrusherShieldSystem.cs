@@ -17,6 +17,7 @@ public sealed partial class CrusherShieldSystem : EntitySystem
     [Dependency] private readonly XenoShieldSystem _shield = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -52,7 +53,6 @@ public sealed partial class CrusherShieldSystem : EntitySystem
 
     public void ApplyEffects(Entity<CrusherShieldComponent> ent)
     {
-
         if (!TryComp<CMArmorComponent>(ent, out var armor))
             return;
 
