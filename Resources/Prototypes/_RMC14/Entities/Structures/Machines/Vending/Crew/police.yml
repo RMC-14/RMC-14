@@ -46,17 +46,17 @@
 #     - id: CMM276M44HolsterRig
 #     - M276 G8-A General Utility Pouch
     - name: Pouches
-      choices: { CMPouch: 2 }
+      choices: { RMCPouch: 2 }
       entries:
-      - id: CMPouchGeneralMedium
-      - id: CMPouchFirstAidInjectors
+      - id: RMCPouchGeneralMedium
+      - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
-      - id: CMPouchFirstAidSplintsGauzeOintment
+      - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 add 'splints,'
-      - id: CMPouchFirstAidPills
+      - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
-      - id: CMPouchMagazinePistol
-      - id: CMPouchPistol
+      - id: RMCPouchMagazinePistol
+      - id: RMCPouchPistol
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -118,17 +118,17 @@
 #     - id: CMM276M44HolsterRig
 #     - M276 G8-A General Utility Pouch
     - name: Pouches
-      choices: { CMPouch: 2 }
+      choices: { RMCPouch: 2 }
       entries:
-      - id: CMPouchGeneralMedium
-      - id: CMPouchFirstAidInjectors
+      - id: RMCPouchGeneralMedium
+      - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
-      - id: CMPouchFirstAidSplintsGauzeOintment
+      - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 add 'splints,'
-      - id: CMPouchFirstAidPills
+      - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
-      - id: CMPouchMagazinePistol
-      - id: CMPouchPistol
+      - id: RMCPouchMagazinePistol
+      - id: RMCPouchPistol
     - name: Mask
       choices: { CMMask: 1 }
       entries:

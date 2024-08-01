@@ -5,11 +5,11 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMPouchGeneralLarge
+      - id: RMCPouchGeneralLarge
         amount: 2
-      - id: CMPouchMagazineLarge
+      - id: RMCPouchMagazineLarge
         amount: 2
-      - id: CMPouchMagazinePistolLarge
+      - id: RMCPouchMagazinePistolLarge
         amount: 2
 
 - type: entity
@@ -19,15 +19,15 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMPouchFirstAid
+      - id: RMCPouchFirstAid
         amount: 1
-      - id: CMPouchMedical
+      - id: RMCPouchMedical
         amount: 1
-      - id: CMPouchAutoinjector
+      - id: RMCPouchAutoinjector
         amount: 1
-      - id: CMPouchSyringe
+      - id: RMCPouchSyringe
         amount: 1
-      - id: CMPouchMedkit
+      - id: RMCPouchMedkit
         amount: 1
 
 - type: entity

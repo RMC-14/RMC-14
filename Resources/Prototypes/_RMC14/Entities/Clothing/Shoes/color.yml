@@ -1,0 +1,119 @@
+# Black
+- type: entity
+  parent: ClothingShoesBase
+  id: RMCShoesBlack
+  name: black shoes
+  description: A pair of black shoes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/black.rsi
+
+# Brown  
+- type: entity
+  parent: ClothingShoesBase
+  id: RMCShoesBrown
+  name: brown shoes
+  description: A pair of brown shoes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/brown.rsi
+
+# Blue 
+- type: entity
+  parent: ClothingShoesBase
+  id: RMCShoesBlue
+  name: blue shoes
+  description: A pair of blue shoes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/blue.rsi
+
+# Green 
+- type: entity
+  parent: ClothingShoesBase
+  id: RMCShoesGreen
+  name: green shoes
+  description: A pair of green shoes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/green.rsi
+
+# Yellow 
+- type: entity
+  parent: ClothingShoesBase
+  id: RMCShoesYellow
+  name: yellow shoes
+  description: A pair of yellow shoes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/yellow.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/yellow.rsi
+
+# Purple
+- type: entity
+  parent: ClothingShoesBase
+  id: RMCShoesPurple
+  name: purple shoes
+  description: A pair of purple shoes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/purple.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/purple.rsi
+
+# Red 
+- type: entity
+  parent: ClothingShoesBase
+  id: RMCShoesRed
+  name: red shoes
+  description: Stylish red shoes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/red.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/red.rsi
+
+# Orange  
+- type: entity
+  parent: ClothingShoesBase
+  id: RMCShoesOrange
+  name: orange shoes
+  description: A pair of orange shoes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/orange.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/orange.rsi
+
+# White
+- type: entity
+  parent: ClothingShoesBase
+  id: RMCShoesWhite
+  name: white shoes
+  description: A pair of white shoes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/white.rsi
+
+# Leather
+- type: entity
+  parent: ClothingShoesBase
+  id: RMCShoesLeather
+  name: leather shoes
+  description: A sturdy pair of leather shoes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/leather.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/leather.rsi

@@ -71,17 +71,17 @@
       - id: CMBackpackMedical
       - id: CMSatchelMedical
     - name: Pouches
-      choices: { CMPouch: 2 }
+      choices: { RMCPouch: 2 }
       entries:
-      - id: CMPouchAutoinjector
-      - id: CMPouchFirstAidInjectors
+      - id: RMCPouchAutoinjector
+      - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
-      - id: CMPouchFirstAidSplintsGauzeOintment
+      - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
-      - id: CMPouchFirstAidPills
+      - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
-      - id: CMPouchFirstResponder
-      - id: CMPouchMedical
+      - id: RMCPouchFirstResponder
+      - id: RMCPouchMedical
       #- id: CMMedicalKitPouch
       #- id: CMPressurizedReagentCanisterPouchBicaridine
       #- id: CMPressurizedReagentCanisterPouchKelotane
