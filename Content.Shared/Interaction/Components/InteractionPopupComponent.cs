@@ -1,3 +1,4 @@
+using Content.Shared.Whitelist; // RMC14
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 
@@ -82,4 +83,10 @@ public sealed partial class InteractionPopupComponent : Component
     /// </summary>
     [DataField]
     public bool OnActivate;
+
+    /// <summary>
+    /// RMC14: If the user matches this blacklist they cannot do the interaction.
+    /// </summary>
+    [DataField]
+    public EntityWhitelist? UserBlacklist;
 }
