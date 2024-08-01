@@ -127,7 +127,7 @@
   description: A pair of welding goggles. Provides protection from eye damage.
   components:
   - type: Sprite
-    sprite: Clothing/Eyes/Glasses/meson.rsi
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
   - type: Clothing
-    sprite: Clothing/Eyes/Glasses/meson.rsi
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
   - type: EyeProtection
