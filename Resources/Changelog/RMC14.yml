@@ -4165,5 +4165,12 @@
   id: 489
   time: '2024-08-01T05:08:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3431
+- author: gorillagaming
+  changes:
+  - message: Players are now notified of the current planet when they spawn as well!
+    type: Add
+  id: 490
+  time: '2024-08-01T05:13:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3360
 Name: RMC14
 Order: -1
