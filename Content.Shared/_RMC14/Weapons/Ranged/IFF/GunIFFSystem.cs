@@ -1,4 +1,5 @@
-﻿using Content.Shared.Hands.Components;
+﻿using Content.Shared._RMC14.Attachable.Systems;
+using Content.Shared.Hands.Components;
 using Content.Shared.Inventory;
 using Content.Shared.NPC.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -25,7 +26,7 @@ public sealed class GunIFFSystem : EntitySystem
         SubscribeLocalEvent<InventoryComponent, GetIFFFactionEvent>(OnInventoryIFFGetFaction);
         SubscribeLocalEvent<HandsComponent, GetIFFFactionEvent>(OnHandsIFFGetFaction);
         SubscribeLocalEvent<ItemIFFComponent, InventoryRelayedEvent<GetIFFFactionEvent>>(OnItemIFFGetFaction);
-        SubscribeLocalEvent<GunIFFComponent, AmmoShotEvent>(OnGunIFFAmmoShot);
+        SubscribeLocalEvent<GunIFFComponent, AmmoShotEvent>(OnGunIFFAmmoShot, before: [typeof(AttachableIFFSystem)]);
         SubscribeLocalEvent<ProjectileIFFComponent, PreventCollideEvent>(OnProjectileIFFPreventCollide);
     }
 
@@ -65,12 +66,12 @@ public sealed class GunIFFSystem : EntitySystem
 
     private void OnGunIFFAmmoShot(Entity<GunIFFComponent> ent, ref AmmoShotEvent args)
     {
-        GiveAmmoIFF(ent, ref args, ent.Comp.Intrinsic);
+        GiveAmmoIFF(ent, ref args, ent.Comp.Intrinsic, ent.Comp.Enabled);
     }
 
     private void OnProjectileIFFPreventCollide(Entity<ProjectileIFFComponent> ent, ref PreventCollideEvent args)
     {
-        if (args.Cancelled ||
+        if (args.Cancelled || !ent.Comp.Enabled ||
             ent.Comp.Faction is not { } faction)
         {
             return;
@@ -97,7 +98,7 @@ public sealed class GunIFFSystem : EntitySystem
         Dirty(user);
     }
 
-    public void GiveAmmoIFF(EntityUid gun, ref AmmoShotEvent args, bool intrinsic)
+    public void GiveAmmoIFF(EntityUid gun, ref AmmoShotEvent args, bool intrinsic, bool enabled)
     {
         EntityUid owner;
         if (intrinsic)
@@ -128,6 +129,7 @@ public sealed class GunIFFSystem : EntitySystem
         {
             var iff = EnsureComp<ProjectileIFFComponent>(projectile);
             iff.Faction = id;
+            iff.Enabled = enabled;
             Dirty(projectile, iff);
         }
     }

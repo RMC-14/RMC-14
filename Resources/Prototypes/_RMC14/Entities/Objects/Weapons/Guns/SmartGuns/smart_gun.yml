@@ -8,6 +8,7 @@
   - type: Corrodible
     isCorrodible: false
   - type: GunIFF
+    enabled: true
   - type: WieldDelay
     baseDelay: 0.4
   - type: WieldableSpeedModifiers

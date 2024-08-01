@@ -214,7 +214,7 @@
         crate: CMCrateMagazineM96SFlak
       - cost: 3000
         crate: CMCrateMagazineM96SIncendiary
-      - cost: 4000
+      - cost: 3000
         crate: RMCCrateM5DemoSpecMixed
       - cost: 3000
         crate: RMCCrateM5DemoSpecHighExplosive

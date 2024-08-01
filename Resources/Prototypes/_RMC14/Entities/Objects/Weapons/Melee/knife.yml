@@ -8,6 +8,7 @@
     slots:
     - mask
     - pocket
+    sprite: _RMC14/Objects/Weapons/Melee/m5_bayonet.rsi
   - type: Tag
     tags:
     - Knife
@@ -62,6 +63,7 @@
     slots:
     - mask
     - pocket
+    sprite: _RMC14/Objects/Weapons/Melee/m5_bayonet.rsi
   - type: MeleeWeapon
     damage:
       types:
