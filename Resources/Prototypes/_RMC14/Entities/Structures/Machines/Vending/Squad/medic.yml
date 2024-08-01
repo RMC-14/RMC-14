@@ -212,6 +212,7 @@
       entries:
       - id: CMBackpackMarineMedic
       - id: CMSatchelMarineMedic
+        recommended: true
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
