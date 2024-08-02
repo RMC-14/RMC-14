@@ -453,7 +453,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon-self"), uid, uid, PopupType.MediumCaution);
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon", ("victim", uid)), uid, Filter.PvsExcept(uid), true, PopupType.MediumCaution);
                     
-                    var knockdownTime = infected.BaseKnockdownTime * 60;
+                    var knockdownTime = infected.BaseKnockdownTime * 75;
                     _jitter.DoJitter(uid, knockdownTime, false);
                     _stun.TryParalyze(uid, knockdownTime, false);
                     _status.TryAddStatusEffect(uid, "TemporaryBlindness", knockdownTime, true, "TemporaryBlindness");
