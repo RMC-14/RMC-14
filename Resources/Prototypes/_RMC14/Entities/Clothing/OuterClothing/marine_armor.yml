@@ -124,13 +124,20 @@
     - 0,0,3,1 # 2 slots
 
 - type: entity
-  parent: CMArmorM3Light
+  parent: RMCBaseMarineArmor
   id: CMArmorPress
   name: press body armor
   description: Body armor used by war correspondents in battles and wars across the universe.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/press.rsi
+  - type: CMArmor
+    armor: 15
+    bio: 15
+    explosionArmor: 20
+  - type: ClothingSpeedModifier
+    walkModifier: .814
+    sprintModifier: .814
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
