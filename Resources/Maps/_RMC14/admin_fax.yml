@@ -264,7 +264,7 @@ entities:
     - type: Transform
       pos: -1.5,0.5
       parent: 2
-- proto: PaperBin20
+- proto: CMPaperBin20
   entities:
   - uid: 40
     components:
@@ -313,7 +313,7 @@ entities:
     - type: Transform
       pos: 2.6341426,0.994836
       parent: 2
-- proto: WallWood
+- proto: CMWallWood
   entities:
   - uid: 3
     components:
