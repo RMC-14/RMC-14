@@ -5,7 +5,7 @@
   components:
   - type: ConditionalSpawner
     prototypes:
-      - RMCHumanCorpse
+      - RMCHumanCorpsePrisoner
 
 - type: entity
   parent: RMCSpawnerCorpse

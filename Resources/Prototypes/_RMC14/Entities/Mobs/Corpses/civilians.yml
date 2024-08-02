@@ -1,0 +1,47 @@
+### REMOVE ME
+#- type: entity
+#  parent: RMCHumanCorpse
+#  id: RMCHumanCorpse
+#  components:
+#  - type: Loadout
+#    prototypes: []
+#
+#- type: startingGear
+#  id: RMCGearCorpse
+#  equipment:
+#    jumpsuit: 
+#    back: 
+#    shoes: 
+#    head: 
+#    eyes: 
+#    gloves: 
+#    outerClothing: 
+#    id: 
+#    ears: 
+#    belt: 
+#    pocket1: 
+#    pocket2:
+#  storage:
+#    back:
+#    - 
+### REMOVE ME
+
+# Prisoner
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpsePrisoner
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpsePrisoner ]
+
+- type: startingGear
+  id: RMCGearCorpsePrisoner
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorOrange # TODO RMC14 colored uniform
+    back: CMSatchel
+    shoes: RMCShoesOrange
+    id: CMIDCardColonist
+  storage:
+    back:
+    - RMCM5Bayonet
+    # Radio
