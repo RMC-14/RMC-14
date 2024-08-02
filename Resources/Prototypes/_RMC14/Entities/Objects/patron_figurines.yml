@@ -365,6 +365,17 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMadelynnBuzzLewis
+  name: Madelynn 'Buzz' Lewis figurine
+  description: "Best chef on the field."
+  components:
+  - type: Sprite
+    state: madelynn_buzz_lewis
+  - type: PatronFigurine
+    id: 70a4a27d-25d8-4172-8e8a-91fbf085ef37
+
+- type: entity
+  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronShawnFox
   name: Shawn Fox figurine
   description: "The figurine smells of ..news.."
