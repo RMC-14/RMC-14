@@ -1,0 +1,89 @@
+- type: entity
+  parent: RMCSpawnerCorpseBase
+  id: RMCSpawnerCorpsePrisoner
+  name: Corpse Spawner - Prisoner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+      - SalvageHumanCorpse
+
+- type: entity
+  parent: RMCSpawnerCorpseBase
+  id: RMCSpawnerCorpseChef
+  name: Corpse Spawner - Chef
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+      - SalvageHumanCorpse
+
+- type: entity
+  parent: RMCSpawnerCorpseBase
+  id: RMCSpawnerCorpseDoctor
+  name: Corpse Spawner - Doctor
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+      - SalvageHumanCorpse
+
+- type: entity
+  parent: RMCSpawnerCorpseBase
+  id: RMCSpawnerCorpseEngineer
+  name: Corpse Spawner - Engineer
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+      - SalvageHumanCorpse
+
+- type: entity
+  parent: RMCSpawnerCorpseBase
+  id: RMCSpawnerCorpseScientist
+  name: Corpse Spawner - Scientist
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+      - SalvageHumanCorpse
+
+- type: entity
+  parent: RMCSpawnerCorpseBase
+  id: RMCSpawnerCorpseMiner
+  name: Corpse Spawner - Shaft Miner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+      - SalvageHumanCorpse
+
+- type: entity
+  parent: RMCSpawnerCorpseBase
+  id: RMCSpawnerCorpseOfficer
+  name: Corpse Spawner - Security Officer
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+      - SalvageHumanCorpse
+
+- type: entity
+  parent: RMCSpawnerCorpseBase
+  id: RMCSpawnerCorpseDeputy
+  name: Corpse Spawner - Bureau Deputy
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+      - SalvageHumanCorpse
+
+- type: entity
+  parent: RMCSpawnerCorpseBase
+  id: RMCSpawnerCorpseLiaison
+  name: Corpse Spawner - Corporate Liaison
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+      - SalvageHumanCorpse
+
+- type: entity
+  parent: RMCSpawnerCorpseBase
+  id: RMCSpawnerCorpsePrisonGuard
+  name: Corpse Spawner - Prison Guard
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+      - SalvageHumanCorpse
