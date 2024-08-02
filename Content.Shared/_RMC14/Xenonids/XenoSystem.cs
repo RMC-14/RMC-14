@@ -299,11 +299,8 @@ public sealed class XenoSystem : EntitySystem
 
     public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool hitNonMarines = false)
     {
-
+        // TODO RMC14 xenos of the same hive
         if (xeno == target)
-            return false;
-        // TODO RMC14 use hive member instead
-        if (TryComp<XenoComponent>(xeno, out var comp1) && !TryComp<XenoComponent>(target, out var comp2) && comp1.Hive == comp2.Hive)
             return false;
 
         if (HasComp<MobStateComponent>(target) && _mobState.IsDead(target))
