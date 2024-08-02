@@ -452,10 +452,11 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                 {
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon-self"), uid, uid, PopupType.MediumCaution);
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon", ("victim", uid)), uid, Filter.PvsExcept(uid), true, PopupType.MediumCaution);
-                    _jitter.DoJitter(uid, infected.JitterTime * 9, false);
-                    _stun.TryParalyze(uid, infected.BaseKnockdownTime * 60, false);
-                    _status.TryAddStatusEffect(victim, "TemporaryBlindness", knockdownTime * 60, true, "TemporaryBlindness");
-                    _damage.TryChangeDamage(uid, infected.InfectionDamage * 10, true, false);
+                    
+                    var knockdownTime = infected.BaseKnockdownTime * 60;
+                    _jitter.DoJitter(uid, knockdownTime, false);
+                    _stun.TryParalyze(uid, knockdownTime, false);
+                    _status.TryAddStatusEffect(victim, "TemporaryBlindness", knockdownTime, true, "TemporaryBlindness");
                     infected.DidBurstWarning = true;
 
                     continue;
@@ -471,9 +472,10 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                         var message = Loc.GetString("rmc-xeno-infection-insanepain-" + random);
                         _popup.PopupEntity(message, uid, uid, PopupType.LargeCaution);
 
-                        _jitter.DoJitter(uid, infected.JitterTime * 2, false);
-                        _stun.TryParalyze(uid, infected.BaseKnockdownTime * 10, false);
-                        _status.TryAddStatusEffect(victim, "TemporaryBlindness", knockdownTime * 10, true, "TemporaryBlindness");
+                        var knockdownTime = infected.BaseKnockdownTime * 10;
+                        _jitter.DoJitter(uid, knockdownTime, false);
+                        _stun.TryParalyze(uid, knockdownTime, false);
+                        _status.TryAddStatusEffect(uid, "TemporaryBlindness", knockdownTime, true, "TemporaryBlindness");
                         _damage.TryChangeDamage(uid, infected.InfectionDamage, true, false);
                     }
                 }
