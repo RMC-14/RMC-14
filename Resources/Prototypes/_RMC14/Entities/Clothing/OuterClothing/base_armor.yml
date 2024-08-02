@@ -14,6 +14,9 @@
     blacklist:
       components:
       - Xeno
+  - type: Clothing
+    equipSound:
+      path: /Audio/_RMC14/Machines/armor_equip.ogg
 
 - type: entity
   parent: RMCBaseArmor
@@ -23,8 +26,6 @@
   - type: Clothing
     equipDelay: 2
     unequipDelay: 2
-    equipSound:
-      path: /Audio/_RMC14/Machines/armor_equip.ogg
   - type: Storage
     maxItemSize: Small
     grid:
