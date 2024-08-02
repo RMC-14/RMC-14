@@ -456,7 +456,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                     var knockdownTime = infected.BaseKnockdownTime * 60;
                     _jitter.DoJitter(uid, knockdownTime, false);
                     _stun.TryParalyze(uid, knockdownTime, false);
-                    _status.TryAddStatusEffect(victim, "TemporaryBlindness", knockdownTime, true, "TemporaryBlindness");
+                    _status.TryAddStatusEffect(uid, "TemporaryBlindness", knockdownTime, true, "TemporaryBlindness");
                     infected.DidBurstWarning = true;
 
                     continue;
