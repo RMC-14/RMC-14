@@ -4,6 +4,8 @@
   id: RMCBaseArmor
   abstract: true
   components:
+  - type: Sprite
+    state: icon # default state used by most inheritors
   - type: Item
     size: Huge
   - type: CMDefibrillatorBlocked
@@ -18,20 +20,11 @@
   id: RMCBaseMarineArmor
   abstract: true
   components:
-  - type: Sprite
-    state: icon # default state used by most inheritors
   - type: Clothing
     equipDelay: 2
     unequipDelay: 2
     equipSound:
       path: /Audio/_RMC14/Machines/armor_equip.ogg
-  - type: CMArmor
-    armor: 20
-    bio: 20
-    explosionArmor: 15
-  - type: WieldSlowdownCompensation
-    walk: 0.08
-    sprint: 0.136
   - type: Storage
     maxItemSize: Small
     grid:
@@ -70,10 +63,6 @@
     interfaces:
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
-  - type: ClothingSpeedModifier
-    walkModifier: 0.727
-    sprintModifier: 0.727
-  - type: CMHardArmor
   - type: FixedItemSizeStorage
   - type: IgnoreContentsSize
     items:
@@ -87,12 +76,13 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+  - type: WieldSlowdownCompensation
+    walk: 0.08
+    sprint: 0.136
   - type: RMCNameItemOnVend
     item: Armor
+  - type: CMHardArmor
   - type: RMCBulkyArmor
-  - type: ExplosionResistance
-    damageCoefficient: 0
-    worn: false
   - type: RMCMagneticArmor
   - type: SquadArmor
     layer: Armor
@@ -123,13 +113,13 @@
       - state: equipped-OUTERCLOTHING
       - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
         state: lamp-off
+  - type: Appearance
   - type: ToggleableLightVisuals
     spriteLayer: light
     clothingVisuals:
       outerClothing:
       - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
         state: lamp-on
-  - type: Appearance
   - type: PointLight
     enabled: false
     radius: 4

@@ -7,6 +7,16 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard.rsi
+  - type: CMArmor
+    armor: 20
+    bio: 20
+    explosionArmor: 15
+  - type: ClothingSpeedModifier
+    walkModifier: 0.727
+    sprintModifier: 0.727
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
 
 - type: entity
   parent: CMArmorM3Medium
