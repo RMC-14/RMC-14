@@ -11,6 +11,7 @@ server_name = "rouny"
 space_wind = false
 monstermos_rip_tiles = false
 grid_impulse = false
+max_process_time = 1
 
 [auth]
 mode = 1
@@ -55,16 +56,16 @@ level = 1
 enabled = false
 
 [net]
-tickrate = 25
+tickrate = 20
 port = 1212
 bindto = "::,0.0.0.0"
 max_connections = 1024
 sendbuffersize = 262142
 
 [physics]
-maxlinvelocity = 51
+maxlinvelocity = 45
 grid_splitting = false
-target_minimum_tickrate = 120
+target_minimum_tickrate = 100
 
 [replay]
 auto_record = true
