@@ -19,6 +19,12 @@
     },
     {
       "name": "closed"
+    },
+    {
+      "name": "unlocked"
+    },
+    {
+      "name": "locked"
     }
   ]
 }
