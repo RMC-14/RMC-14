@@ -10,7 +10,6 @@
     layers:
     - state: icon
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/riot.rsi
     equipDelay: 2
     unequipDelay: 2
   - type: CMArmor
@@ -30,9 +29,3 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/old_riot.rsi
-    layers:
-    - state: icon
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/old_riot.rsi
-    equipDelay: 2
-    unequipDelay: 2

@@ -94,6 +94,14 @@
     damageCoefficient: 0
     worn: false
   - type: RMCMagneticArmor
+  - type: SquadArmor
+    layer: Armor
+    rsi:
+      sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: std-armor
+    leaderRsi:
+      sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: sql-armor
 
 - type: entity
   parent: RMCBaseMarineArmor
