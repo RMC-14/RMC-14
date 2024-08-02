@@ -135,15 +135,15 @@
     armor: 15
     bio: 15
     explosionArmor: 20
-  - type: ExplosionResistance
-    damageCoefficient: 0
-    worn: false
   - type: ClothingSpeedModifier
     walkModifier: .814
     sprintModifier: .814
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
 
 - type: entity
   parent: CMArmorM3Medium
