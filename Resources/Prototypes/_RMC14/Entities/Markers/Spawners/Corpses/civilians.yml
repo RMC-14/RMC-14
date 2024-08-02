@@ -14,7 +14,7 @@
   components:
   - type: ConditionalSpawner
     prototypes:
-      - RMCHumanCorpse
+      - RMCHumanCorpseChef
 
 - type: entity
   parent: RMCSpawnerCorpse
@@ -23,7 +23,7 @@
   components:
   - type: ConditionalSpawner
     prototypes:
-      - RMCHumanCorpse
+      - RMCHumanCorpseDoctor
 
 - type: entity
   parent: RMCSpawnerCorpse
@@ -32,7 +32,7 @@
   components:
   - type: ConditionalSpawner
     prototypes:
-      - RMCHumanCorpse
+      - RMCHumanCorpseEngineer
 
 - type: entity
   parent: RMCSpawnerCorpse
@@ -41,7 +41,7 @@
   components:
   - type: ConditionalSpawner
     prototypes:
-      - RMCHumanCorpse
+      - RMCHumanCorpseScientist
 
 - type: entity
   parent: RMCSpawnerCorpse
@@ -50,16 +50,16 @@
   components:
   - type: ConditionalSpawner
     prototypes:
-      - RMCHumanCorpse
+      - RMCHumanCorpseMiner
 
 - type: entity
   parent: RMCSpawnerCorpse
-  id: RMCSpawnerCorpseOfficer
+  id: RMCSpawnerCorpseSecurity
   name: Corpse Spawner - Security Officer
   components:
   - type: ConditionalSpawner
     prototypes:
-      - RMCHumanCorpse
+      - RMCHumanCorpseSecurity
 
 - type: entity
   parent: RMCSpawnerCorpse

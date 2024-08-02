@@ -17,8 +17,8 @@
 #    eyes:
 #    gloves:
 #    outerClothing:
-#    id:
-#    ears:
+#    id: CMIDCardColonist
+#    ears: CMHeadsetColony
 #    belt:
 #    pocket1:
 #    pocket2:
@@ -102,19 +102,88 @@
 - type: startingGear
   id: RMCGearCorpseEngineer
   equipment:
-    jumpsuit:
-    back:
-    shoes:
-    head:
-    eyes:
-    gloves:
-    outerClothing:
-    id:
-    ears:
-    belt:
-    pocket1:
-    pocket2:
+    jumpsuit: ClothingUniformJumpsuitEngineering
+    back: CMSatchelEngineer
+    shoes: CMBootsBlackFilled
+#    head: hard hat
+#    eyes: welding
+    gloves: CMHandsInsulated
+#    outerClothing: hazard vest
+    id: CMIDCardColonist
+    ears: CMHeadsetColony
+    belt: CMBeltUtilityFilled
 #  storage:
 #    back:
 #    # radio
 
+# Scientist
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseScientist
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseScientist ]
+
+- type: startingGear
+  id: RMCGearCorpseScientist
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitVirology
+    back: CMSatchelMedical
+    shoes: CMBootsBlackFilled
+    gloves: CMHandsLatex
+    outerClothing: ClothingOuterCoatLab
+    id: CMIDCardColonist
+    ears: CMHeadsetColony
+#  storage:
+#    back:
+#    # radio
+#    # motion detector
+#    # good research notes
+
+# Miner
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseMiner
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseMiner ]
+
+- type: startingGear
+  id: RMCGearCorpseMiner
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
+    back: CMBackpackEngineer
+    shoes: CMBootsBlackFilled
+#    head: Hard Hat
+#    outerClothing: Hazard Vest
+    id:  CMIDCardColonist
+    ears: CMHeadsetColony
+    pocket1: RMCPouchToolsFill
+  storage:
+    back:
+    - RMCFlashlightLantern
+#    # radio
+
+# Security
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseSecurity
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseSecurity ]
+
+- type: startingGear
+  id: RMCGearCorpseSecurity
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSec
+    back: CMBackpackSecurity
+    shoes: RMCShoesJackboots
+    eyes: CMGlassesSecurity
+    gloves: CMHandsBlackMarine
+    id: CMIDCardColonist
+    ears: CMHeadsetColony
+    belt: CMBeltSecurityMPFilled
+  storage:
+    back:
+    - RMCM5Bayonet
+#    # radio
