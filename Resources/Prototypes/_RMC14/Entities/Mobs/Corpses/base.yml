@@ -4,7 +4,7 @@
   save: false
   name: unidentified corpse
   description: I think they're dead.
-  suffix: Dead
+  suffix: RMC14, Dead
   components:
   - type: RandomHumanoidAppearance
     randomizeName: false

@@ -1,4 +1,5 @@
 ### REMOVE ME
+##
 #- type: entity
 #  parent: RMCHumanCorpse
 #  id: RMCHumanCorpse
@@ -9,21 +10,21 @@
 #- type: startingGear
 #  id: RMCGearCorpse
 #  equipment:
-#    jumpsuit: 
-#    back: 
-#    shoes: 
-#    head: 
-#    eyes: 
-#    gloves: 
-#    outerClothing: 
-#    id: 
-#    ears: 
-#    belt: 
-#    pocket1: 
-#    pocket2:
-#  storage:
+#    jumpsuit:
 #    back:
-#    - 
+#    shoes:
+#    head:
+#    eyes:
+#    gloves:
+#    outerClothing:
+#    id:
+#    ears:
+#    belt:
+#    pocket1:
+#    pocket2:
+##  storage:
+##    back:
+##    # radio
 ### REMOVE ME
 
 # Prisoner
@@ -45,3 +46,75 @@
     back:
     - RMCM5Bayonet
     # Radio
+
+# Chef
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseChef
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseChef ]
+
+- type: startingGear
+  id: RMCGearCorpseChef
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChef
+    back: CMSatchel
+    shoes: RMCShoesBlack
+    head: ClothingHeadHatChef
+    outerClothing: ClothingUniformJumpsuitChef
+    id: CMIDCardColonist
+    ears: CMHeadsetColony
+#  storage:
+#    back:
+#    # radio
+
+# Doctor
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseDoctor
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseDoctor ]
+
+- type: startingGear
+  id: RMCGearCorpseDoctor
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMedicalDoctor
+    back: CMSatchelMedical
+    shoes: CMBootsBlackFilled
+    eyes: RMCGlassesMedicalHUDGlasses
+    gloves: CMHandsLatex
+    id: CMIDCardColonist
+    ears: CMHeadsetColony
+#  storage:
+#    back:
+#    # radio
+
+# Engineer
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseEngineer
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseEngineer ]
+
+- type: startingGear
+  id: RMCGearCorpseEngineer
+  equipment:
+    jumpsuit:
+    back:
+    shoes:
+    head:
+    eyes:
+    gloves:
+    outerClothing:
+    id:
+    ears:
+    belt:
+    pocket1:
+    pocket2:
+#  storage:
+#    back:
+#    # radio
+
