@@ -99,6 +99,8 @@
   id: RMCBaseMarineArmorLight
   abstract: true
   components:
+  - type: Item
+    heldPrefix: off
   - type: Sprite
     layers:
     - state: icon
@@ -109,11 +111,13 @@
       visible: false
       map: [ "light" ]
   - type: Clothing
+    equippedPrefix: off
     clothingVisuals:
       outerClothing:
       - state: equipped-OUTERCLOTHING
       - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
         state: lamp-off
+        drawdepth: Effects
   - type: Appearance
   - type: ToggleableLightVisuals
     spriteLayer: light
@@ -121,6 +125,7 @@
       outerClothing:
       - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
         state: lamp-on
+        drawdepth: Effects
   - type: PointLight
     enabled: false
     radius: 4
