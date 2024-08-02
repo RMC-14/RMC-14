@@ -97,7 +97,7 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles.rsi
-    
+
 - type: entity
   parent: ClothingEyesBase
   id: RMCGogglesM1A1Ballistic
@@ -130,4 +130,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
-  - type: EyeProtection
+  - type: RMCEyeProtectionItem
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCEyeProtectionItemVisuals.Active:
+        icon:
+          True: { state: icon_on }
+          False: { state: icon }
