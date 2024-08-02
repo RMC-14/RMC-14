@@ -4,10 +4,10 @@
   name: Corpse Spawner - Unknown
   suffix: RMC
   components:
-  - type: sprite
+  - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
     layers:
     - state: corpse_spawner
   - type: ConditionalSpawner
     prototypes:
-      - SalvageHumanCorpse
+      - RMCHumanCorpse
