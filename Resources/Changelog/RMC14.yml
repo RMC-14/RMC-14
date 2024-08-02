@@ -4251,5 +4251,12 @@
   id: 499
   time: '2024-08-01T10:12:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3443
+- author: crystalHex
+  changes:
+  - message: Speedloaders can now be stored in armor storage.
+    type: Fix
+  id: 500
+  time: '2024-08-01T21:06:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3453
 Name: RMC14
 Order: -1
