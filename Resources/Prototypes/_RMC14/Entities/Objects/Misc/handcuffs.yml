@@ -17,7 +17,7 @@
   id: RMCZipties
   name: zipties
   description: Tough single-use plastic zipties, ideal for restraining rowdy prisoners.
-  prefix: RMC
+  suffix: RMC
   components:
   - type: UseDelay
     delay: 4
