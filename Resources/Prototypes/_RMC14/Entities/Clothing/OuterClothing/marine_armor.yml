@@ -135,6 +135,9 @@
     armor: 15
     bio: 15
     explosionArmor: 20
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
   - type: ClothingSpeedModifier
     walkModifier: .814
     sprintModifier: .814
