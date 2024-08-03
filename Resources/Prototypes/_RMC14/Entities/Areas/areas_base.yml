@@ -7,6 +7,7 @@
 
 - type: entity
   abstract: true
+  parent: MarkerBase
   id: RMCAreaBase
   name: area
   suffix: area
