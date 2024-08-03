@@ -1,10 +1,4 @@
 ﻿Entries:
-- author: MaloTV
-  changes:
-  - message: Added Original CMSS13 Medical Decals
-    type: Add
-  id: 4
-  time: '2023-11-05T03:31:21.0000000+00:00'
 - author: gusxyz
   changes:
   - message: The M10 Marine Helmet is now real.
@@ -4261,5 +4255,19 @@
   id: 503
   time: '2024-08-03T12:28:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3468
+- author: DrSmugleaf
+  changes:
+  - message: Added filters to the Overwatch console for dead, hidden, shipside and
+      planetside marines.
+    type: Add
+  - message: Added being able to manually hide specific marines on the Overwatch console.
+      Pressing show hidden will show them again, and let you unhide them.
+    type: Add
+  - message: Fixed marines in cryo-storage being shown in the overwatch console marine
+      list.
+    type: Fix
+  id: 504
+  time: '2024-08-03T12:32:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3494
 Name: RMC14
 Order: -1
