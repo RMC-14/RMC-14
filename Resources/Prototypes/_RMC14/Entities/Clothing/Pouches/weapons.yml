@@ -1,0 +1,118 @@
+# m63ap pouch
+
+# Bayonet Pouch
+- type: entity
+  parent: [RMCPouchOpenClosed]
+  id: RMCPouchBayonet
+  name: bayonet sheath
+  description: Knife to meet you!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/bayonet.rsi
+  - type: ItemSlots
+  - type: CMHolster
+  - type: CMItemSlots
+    cooldown: 1
+    cooldownPopup: You need to wait before drawing another knife!
+    count: 5
+    slot:
+      name: Knife
+      whitelist:
+        tags:
+        - Knife
+        - ThrowingKnife
+
+- type: entity
+  parent: RMCPouchBayonet
+  id: RMCPouchBayonetFill
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMM11Knife
+
+
+# Sidearm pouch
+- type: entity
+  parent: RMCPouch
+  id: RMCPouchPistol
+  name: sidearm pouch
+  description: You could carry a pistol in this; more importantly, you could draw it quickly. Useful for emergencies.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/pistol.rsi
+    layers:
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m1984 # TODO RMC14 per-gun underlay
+      map: [ "enum.CMItemSlotsLayers.Filled" ]
+      visible: false
+    - state: icon
+  - type: ContainerContainer
+    containers:
+      pouch: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      pouch:
+        name: Pouch
+#        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg # TODO RMC14 sounds
+#        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        whitelist:
+          tags:
+          - Sidearm
+#          - FlareGun
+  - type: CMHolster
+  - type: CMItemSlots
+
+
+# Machete Pouch
+- type: entity
+  parent: [ Clothing, ClothingSlotBase ]
+  id: RMCPouchMachete
+  name: H6B pattern M2132 machete pouch
+  description: A large leather pouch used to carry a M2132 machete. It can be strapped to the pouch slot.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/machete.rsi
+    state: sheath
+  - type: Item
+    size: Large
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - pocket
+  - type: ItemSlots
+    slots:
+      item:
+        name: Machete
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        whitelist:
+          tags:
+          - Machete
+  - type: ItemMapper
+    mapLayers:
+      sheath-machete:
+        whitelist:
+          tags:
+          - Machete
+  - type: Appearance
+  - type: Tag
+    tags:
+    - Pouch
+  - type: CMHolster
+  - type: CMItemSlots
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: RMCPouchMachete
+  id: RMCPouchMacheteFilled
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - CMM2132Machete

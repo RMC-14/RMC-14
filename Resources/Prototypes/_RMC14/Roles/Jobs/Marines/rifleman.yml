@@ -18,6 +18,7 @@
         RMCSkillFirearms: 1
     - type: CMVendorUser
       points: 45
+    - type: SquadArmorWearer
   hasIcon: false
 
 - type: startingGear

@@ -14,6 +14,8 @@
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - FTL
+  overwatchSortPriority: -4
+  overwatchRoleName: Fire Team Leaders
   special:
   - !type:AddComponentSpecial
     components:
@@ -25,6 +27,7 @@
         RMCSkillJtac: 3
     - type: CMVendorUser
       points: 45
+    - type: SquadArmorWearer
 
 - type: startingGear
   id: CMGearFireteamLeader

@@ -6,3 +6,6 @@
   components:
   - type: CMDefibrillatorBlocked
     popup: cm-defib-take-off-armor
+  - type: Clothing
+    equipSound:
+      collection: RMCEquipArmor

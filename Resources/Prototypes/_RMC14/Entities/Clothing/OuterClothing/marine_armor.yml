@@ -1,4 +1,4 @@
-# m3
+﻿# m3
 - type: entity
   parent: RMCBaseArmor
   id: CMArmorM3Medium
@@ -70,6 +70,7 @@
       - CMMagazineSmg
       - CMMagazineSniper
       - CMMagazinePistol
+      - RMCMagazineRevolver
       - Sidearm
       - Knife
       - Flashlight
@@ -124,6 +125,14 @@
     blacklist:
       components:
       - Xeno
+  - type: SquadArmor
+    layer: Armor
+    rsi:
+      sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: std-armor
+    leaderRsi:
+      sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: sql-armor
 
 - type: entity
   parent: CMArmorM3Medium

@@ -33,7 +33,7 @@
     id: CMIDCardMessTech
     ears: CMHeadsetChef
 #    belt: TODO RMC14 M276 Pattern General Pistol Holster Rig Filled
-    pocket1: CMPouchGeneralMedium
+    pocket1: RMCPouchGeneralMedium
 
 - type: entity
   parent: CMSpawnPointJobBase

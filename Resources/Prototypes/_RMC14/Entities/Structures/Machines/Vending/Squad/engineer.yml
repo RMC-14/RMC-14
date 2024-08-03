@@ -38,15 +38,22 @@
       - id: RMCPowerCellHigh
         points: 3
       - id: CMSheetMetal10
+        name: metal x10
         points: 5
+        recommended: true
       - id: CMSheetPlasteel10
+        name: plasteel x10
         points: 7
+        recommended: true
     #- id: CMPlasticExplosive
     #  points: 3
       - id: RMCExplosiveBreachingCharge
         points: 5
+        recommended: true
       - id: CMSandbagEmpty25
+        name: sandbags x25
         points: 10
+        recommended: true
       - id: RMCPowerCellSuper
         points: 10
     #- id: CMES11MobileFuelCanister
@@ -85,12 +92,20 @@
         points: 6
       - id: CMMagazineRifleM54CExt
         points: 6
+    - name: Sidearm Ammunition
+      entries:
+      - id: RMCSpeedLoader44Marksman
+        points: 6
+      - id: CMMagazinePistolMK80
+        points: 3
+      - id: RMCMagazinePistolSU6
+        points: 6
     - name: Armors
       entries:
       - id: CMArmorB12
         points: 24
       - id: CMArmorM4
-        points: 30
+        points: 16
     - name: Restricted Firearms
       entries:
       - id: RMCMK80Case
@@ -107,7 +122,7 @@
       entries:
     #- id: CMScabbardMacheteFull
     #  points: 6
-      - id: CMPouchMacheteFilled
+      - id: RMCPouchMacheteFilled
         points: 8
     #- id: CMMarineRadioTelephonePack
     #  points: 15
@@ -115,7 +130,7 @@
     #  points: 4
     #- id: CMSlingPouch
     #  points: 6
-      - id: CMPouchGeneralLarge
+      - id: RMCPouchGeneralLarge
         points: 6
       - id: CMBeltUtilityCombat
         points: 15
@@ -150,13 +165,10 @@
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyIntel
-        amount: 3
         points: 3
       - id: CMEncryptionKeyJTAC
-        amount: 3
         points: 3
       - id: CMEncryptionKeyRequisition
-        amount: 3
         points: 3
 
 - type: entity
@@ -187,16 +199,21 @@
         name: light armor
       - id: CMArmorM3Medium
         name: medium armor
+        recommended: true
       - id: CMArmorM3Heavy
         name: heavy armor
     - name: Backpack
+      choices: { CMBackpack: 1 }
       entries:
     #- id: CMScabbardMacheteFull
       - id: CMBackpackMarineTech
       - id: CMSatchelMarineTech
       - id: CMBackpackWelder
+        recommended: true
       - id: RMCSatchelWelder
+        recommended: true
       - id: RMCSatchelWelderChestrig
+        recommended: true
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -209,37 +226,44 @@
     #- id: CMM276ShotgunShellLoadingRig
     #- id: CMM276MortarOperatorBelt
       - id: CMBeltUtilityFilled
+        recommended: true
       - id: RMCBeltGrenade
     - name: Pouches
-      choices: { CMPouch: 2 }
+      choices: { RMCPouch: 2 }
       entries:
-      - id: CMPouchConstruction
-      - id: CMPouchFirstAidInjectors
+      - id: RMCPouchConstruction
+        recommended: true
+      - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
-      - id: CMPouchFirstAidSplintsGauzeOintment
+        recommended: true
+      - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
-      - id: CMPouchFirstAidPills
+        recommended: true
+      - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
+        recommended: true
       #- id: CMElectronicsPouchFull
-      - id: CMPouchExplosive
-      - id: CMPouchFlareFilled
-        name: Flare pouch (Filled)
-      - id: CMPouchMagazinePistolLarge
-      - id: CMPouchMagazine
-      - id: CMPouchShotgun
-      - id: CMPouchGeneralMedium
-      - id: CMPouchPistol
-      - id: CMPouchToolsFill
+      - id: RMCPouchExplosive
+      - id: RMCPouchFlareFilled
+        name: Flare pouch (Full)
+      - id: RMCPouchMagazinePistolLarge
+      - id: RMCPouchMagazine
+      - id: RMCPouchShotgun
+      - id: RMCPouchGeneralMedium
+      - id: RMCPouchPistol
+      - id: RMCPouchToolsFill
         name: Tools pouch (Filled)
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
-      - id: CMWebbingBrown
       - id: CMWebbingBlack
+      - id: CMWebbingBrown
+        recommended: true
       #- id: CMShoulderHolster
       - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
+      choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif

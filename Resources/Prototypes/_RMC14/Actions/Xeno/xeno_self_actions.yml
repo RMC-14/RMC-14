@@ -163,3 +163,17 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: lurker_invisibility
     event: !type:XenoTurnInvisibleActionEvent
+
+- type: entity
+  id: ActionXenoDefensiveShield
+  parent: ActionXenoBase
+  name: Defensive Shield (50)
+  description: Gain a temporary shield that blocks the next 200 damage (And is immune to explosive damage) lasting 7 seconds. Any damage that impacts the shield is reduced by 10 before processing.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: empower
+    event: !type:XenoDefensiveShieldActionEvent
+    useDelay: 26
