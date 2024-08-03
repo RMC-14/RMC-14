@@ -12,14 +12,18 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.EyeProtection
 {
-    public sealed class RMCEyeProtectionSystem : EntitySystem
+    public abstract class RMCSharedEyeProtectionSystem : EntitySystem
     {
+        //[ValidatePrototypeId<StatusEffectPrototype>]
+        //public const string EyeProtectionStatusEffect = "RMCEyeProtectionOn";
+
         [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
         [Dependency] private readonly BlindableSystem _blindingSystem = default!;
         [Dependency] private readonly SharedActionsSystem _actions = default!;
         [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
         [Dependency] private readonly AlertsSystem _alerts = default!;
         [Dependency] private readonly IGameTiming _timing = default!;
+        [Dependency] private readonly IEntityManager _entManager = default!;
 
         public override void Initialize()
         {
@@ -29,12 +33,12 @@ namespace Content.Shared._RMC14.EyeProtection
 
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, GetEyeProtectionEvent>(OnGetProtection);
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, InventoryRelayedEvent<GetEyeProtectionEvent>>(OnGetRelayedProtection);
-/*
-            SubscribeLocalEvent<NightVisionComponent, ComponentStartup>(OnNightVisionStartup);
-            SubscribeLocalEvent<NightVisionComponent, MapInitEvent>(OnNightVisionMapInit);
-            SubscribeLocalEvent<NightVisionComponent, AfterAutoHandleStateEvent>(OnNightVisionAfterHandle);
-            SubscribeLocalEvent<NightVisionComponent, ComponentRemove>(OnNightVisionRemove);
-*/
+
+            SubscribeLocalEvent<RMCEyeProtectionComponent, ComponentStartup>(OnEyeProtectionStartup);
+            //SubscribeLocalEvent<RMCEyeProtectionComponent, MapInitEvent>(OnEyeProtectionMapInit);
+            SubscribeLocalEvent<RMCEyeProtectionComponent, AfterAutoHandleStateEvent>(OnEyeProtectionAfterHandle);
+            SubscribeLocalEvent<RMCEyeProtectionComponent, ComponentRemove>(OnEyeProtectionRemove);
+
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, GetItemActionsEvent>(OnEyeProtectionItemGetActions);
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, ToggleActionEvent>(OnEyeProtectionItemToggle);
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, GotEquippedEvent>(OnEyeProtectionItemGotEquipped);
@@ -42,6 +46,31 @@ namespace Content.Shared._RMC14.EyeProtection
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, ActionRemovedEvent>(OnEyeProtectionItemActionRemoved);
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, ComponentRemove>(OnEyeProtectionItemRemove);
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, EntityTerminatingEvent>(OnEyeProtectionItemTerminating);
+        }
+
+        private void OnEyeProtectionStartup(Entity<RMCEyeProtectionComponent> ent, ref ComponentStartup args)
+        {
+            EyeProtectionChanged(ent);
+        }
+
+        private void OnEyeProtectionAfterHandle(Entity<RMCEyeProtectionComponent> ent, ref AfterAutoHandleStateEvent args)
+        {
+            EyeProtectionChanged(ent);
+        }
+
+        /*
+        private void OnEyeProtectionMapInit(Entity<RMCEyeProtectionComponent> ent, ref MapInitEvent args)
+        {
+            UpdateAlert(ent);
+        }
+        */
+
+        private void OnEyeProtectionRemove(Entity<RMCEyeProtectionComponent> ent, ref ComponentRemove args)
+        {
+            if (ent.Comp.Alert is { } alert)
+                _alerts.ClearAlert(ent, alert);
+
+            EyeProtectionRemoved(ent);
         }
 
         private void OnGetRelayedProtection(EntityUid uid, RMCEyeProtectionItemComponent component,
@@ -102,11 +131,14 @@ namespace Content.Shared._RMC14.EyeProtection
 
         private void OnEyeProtectionItemGotEquipped(Entity<RMCEyeProtectionItemComponent> ent, ref GotEquippedEvent args)
         {
+            //_statusEffectsSystem.TryAddStatusEffect(item.Comp.User, EyeProtectionStatusEffect,
+                //    TimeSpan.FromSeconds(3600), false, EyeProtectionStatusEffect);
             ToggleEyeProtectionItem(ent, args.Equipee);
         }
 
         private void OnEyeProtectionItemGotUnequipped(Entity<RMCEyeProtectionItemComponent> ent, ref GotUnequippedEvent args)
         {
+            //_statusEffectsSystem.TryRemoveStatusEffect(args.Equipee, EyeProtectionStatusEffect);
             DisableEyeProtectionItem(ent, args.Equipee);
         }
 
@@ -125,6 +157,31 @@ namespace Content.Shared._RMC14.EyeProtection
             DisableEyeProtectionItem(ent, ent.Comp.User);
         }
 
+        public void Toggle(Entity<RMCEyeProtectionComponent?> ent)
+        {
+            if (!Resolve(ent, ref ent.Comp))
+                return;
+
+            ent.Comp.Enabled = !ent.Comp.Enabled;
+
+            Dirty(ent);
+            UpdateAlert((ent, ent.Comp));
+        }
+
+        private void UpdateAlert(Entity<RMCEyeProtectionComponent> ent)
+        {
+            /*
+            if (ent.Comp.Alert is { } alert)
+            {
+                var level = MathF.Max((int) NightVisionState.Off, (int) ent.Comp.State);
+                var max = _alerts.GetMaxSeverity(alert);
+                var severity = max - ContentHelpers.RoundToLevels(level, (int) NightVisionState.Full, max + 1);
+                _alerts.ShowAlert(ent, alert, (short) severity);
+            }
+*/
+            EyeProtectionChanged(ent);
+        }
+
         private void ToggleEyeProtectionItem(Entity<RMCEyeProtectionItemComponent> item, EntityUid user)
         {
             if (item.Comp.Toggled == true && item.Comp.Toggleable)
@@ -140,41 +197,58 @@ namespace Content.Shared._RMC14.EyeProtection
         {
             DisableEyeProtectionItem(item, item.Comp.User);
 
-            // item.Comp.User = user;
+            item.Comp.User = user;
             item.Comp.Toggled = true;
             Dirty(item);
 
             _appearance.SetData(item, RMCEyeProtectionItemVisuals.Active, true);
+            //_entManager.AddComponent<RMCEyeProtectionComponent>(user);
 
-            /*
+            //_statusEffectsSystem.TryAddStatusEffect(item.Comp.User, EyeProtectionStatusEffect,
+            //    TimeSpan.FromSeconds(3600), false, EyeProtectionStatusEffect);
+
+
             if (!_timing.ApplyingState)
             {
-                var nightVision = EnsureComp<NightVisionComponent>(user);
-                nightVision.State = NightVisionState.Full;
-                Dirty(user, nightVision);
+                var eyeProt = EnsureComp<RMCEyeProtectionComponent>(user);
+                eyeProt.Enabled = true;
+                Dirty(user, eyeProt);
             }
-            */
+
 
             _actions.SetToggled(item.Comp.Action, true);
+        }
+
+        protected virtual void EyeProtectionChanged(Entity<RMCEyeProtectionComponent> ent)
+        {
+        }
+
+        protected virtual void EyeProtectionRemoved(Entity<RMCEyeProtectionComponent> ent)
+        {
         }
 
         protected void DisableEyeProtectionItem(Entity<RMCEyeProtectionItemComponent> item, EntityUid? user)
         {
             _actions.SetToggled(item.Comp.Action, false);
 
-            // item.Comp.User = null;
+
             item.Comp.Toggled = false;
             Dirty(item);
 
             _appearance.SetData(item, RMCEyeProtectionItemVisuals.Active, false);
 
-            /*
-            if (TryComp(user, out NightVisionComponent? nightVision) &&
-                !nightVision.Innate)
+            //if (_entManager.HasComponent<RMCEyeProtectionComponent>(item.Comp.User))
+            //    _entManager.RemoveComponent<RMCEyeProtectionComponent>(item.Comp.User);
+
+            //_statusEffectsSystem.TryRemoveStatusEffect(user, EyeProtectionStatusEffect);
+
+            item.Comp.User = null;
+
+            if (TryComp(user, out RMCEyeProtectionComponent? eyeProt))
             {
-                RemCompDeferred<NightVisionComponent>(user.Value);
+                RemCompDeferred<RMCEyeProtectionComponent>(user.Value);
             }
-            */
+
         }
     }
 }

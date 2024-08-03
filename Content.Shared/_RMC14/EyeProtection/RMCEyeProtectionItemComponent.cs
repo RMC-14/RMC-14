@@ -4,9 +4,10 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.EyeProtection;
 
 /// <summary>
-/// For welding masks, sunglasses, etc.
+/// For eye protection (e.g. from welding)
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(RMCSharedEyeProtectionSystem))]
 public sealed partial class RMCEyeProtectionItemComponent : Component
 {
     /// <summary>
