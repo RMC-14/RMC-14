@@ -118,9 +118,19 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         _ui.SetUiState(computer.Owner, MarineCommunicationsComputerUI.Key, state);
     }
 
-    public void Announce(EntityUid sender, string message, SoundSpecifier sound)
+    /// <summary>
+    /// Dispatches an announcement to Marine side.
+    /// </summary>
+    /// <param name="message">The contents of the message.</param>
+    /// <param name="sound">GlobalSound for announcement.</param>
+    /// <param name="author">The author of the message, Command by default.</param>
+    public void Announce(
+        EntityUid sender,
+        string message,
+        SoundSpecifier sound,
+        string? author = null
+        )
     {
-        // TODO RMC14 localize this
         // TODO RMC14 rank
         var job = string.Empty;
         if (_mind.TryGetMind(sender, out var mindId, out _) &&
@@ -129,9 +139,9 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
             job = jobName;
         }
 
+        author ??= Loc.GetString("rmc-announcement-author"); // Get "Command" fluent string if author==null
         var name = Name(sender);
-        var wrappedMessage =
-            $"[font size=14][bold][color=white]Command Announcement[/color][/bold][/font]\n[font size=12][color=red]\n{message}\n\nSigned by,\n{job} {name}[/color][/font]";
+        var wrappedMessage = Loc.GetString("rmc-announcement-message", ("author", author), ("message", message), ("job", job), ("name", name));
 
         // TODO RMC14 receivers
         var filter = Filter.Empty()
