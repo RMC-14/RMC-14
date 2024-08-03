@@ -238,6 +238,10 @@
         amount: 10
 #      - id: Rebreather
 #        amount: 10
+    - name: Poncho
+      entries:
+      - id: RMCGreenPoncho
+        amount: 10
     - name: Miscellaneous
       entries:
       - id: RMCGogglesBallistic
