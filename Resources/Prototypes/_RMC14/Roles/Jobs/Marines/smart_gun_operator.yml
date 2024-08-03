@@ -32,7 +32,6 @@
 - type: startingGear
   id: CMGearSmartGunOperator
   equipment:
-    jumpsuit: JumpsuitMarine # TODO RMC14 all squad roles should spawn with no jumpsuit but still have clothes on
     id: CMDogtagSmartGunOperator
 
 - type: startingGear
