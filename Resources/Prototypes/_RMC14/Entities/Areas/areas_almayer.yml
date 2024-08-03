@@ -1433,6 +1433,7 @@
   name: Port Lifeboat Docking
   components:
   - type: Sprite
+    sprite: _RMC14/Areas/areas_almayer.rsi
     state: lifeboat
   - type: Area
     zLevel: 1
