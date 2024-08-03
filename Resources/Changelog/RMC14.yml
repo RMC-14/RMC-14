@@ -1,10 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added SL
-    type: Add
-  id: 2
-  time: '2023-08-13T16:10:55.0000000+00:00'
 - author: MaloTV
   changes:
   - message: Added Original CMSS13 Posters!
@@ -4259,5 +4253,12 @@
   id: 501
   time: '2024-08-02T04:33:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3471
+- author: Sigil
+  changes:
+  - message: The spec GL can no longer phase its grenades through doors.
+    type: Fix
+  id: 502
+  time: '2024-08-03T04:11:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3491
 Name: RMC14
 Order: -1
