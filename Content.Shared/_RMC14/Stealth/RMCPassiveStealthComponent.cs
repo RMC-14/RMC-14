@@ -12,7 +12,7 @@ public sealed partial class RMCPassiveStealthComponent : Component
     [DataField, AutoNetworkedField]
     public float MinOpacity = 0.2f;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool? Enabled = null;
 
     /// <summary>

@@ -4,6 +4,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Whitelist;
+using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Stealth;
@@ -11,6 +12,7 @@ namespace Content.Shared._RMC14.Stealth;
 public sealed class RMCPassiveStealthSystem : EntitySystem
 {
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
@@ -42,9 +44,9 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
         if (!args.IsFolded)
         {
             _entityStorage.OpenStorage(ent.Owner);
+            ent.Comp.Enabled = false;
             return;
         }
-        // _entityStorage.OpenStorage(ent.Owner);
         ent.Comp.Enabled = false;
         RemCompDeferred<EntityActiveInvisibleComponent>(ent.Owner);
     }
@@ -72,11 +74,14 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
         {
             ent.Comp.Enabled = false;
             ent.Comp.ToggleTime = _timing.CurTime;
-            return;
+            Dirty(ent.Owner, ent.Comp);
         }
-
-        ent.Comp.Enabled = true;
-        ent.Comp.ToggleTime = _timing.CurTime;
+        else
+        {
+            ent.Comp.Enabled = true;
+            ent.Comp.ToggleTime = _timing.CurTime;
+            Dirty(ent.Owner, ent.Comp);
+        }
     }
 
     public override void Update(float frameTime)
@@ -90,6 +95,9 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
             if (!stealthComp.Enabled.HasValue)
                 continue;
 
+            if(_net.IsClient)
+                continue;
+
             var time = _timing.CurTime - stealthComp.ToggleTime;
             if (stealthComp.Enabled.Value)
             {
@@ -97,12 +105,14 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
                 if (time < stealthComp.Delay)
                 {
                     invis.Opacity = (float) (1 - (time / stealthComp.Delay) * (1 - stealthComp.MinOpacity)); // Linear function from 1 to MinOpacity
-                    Dirty(uid, invis);
-                    continue;
+                }
+                else
+                {
+                    invis.Opacity = stealthComp.MinOpacity;
                 }
 
-                invis.Opacity = stealthComp.MinOpacity;
                 Dirty(uid, invis);
+
             }
             else
             {
