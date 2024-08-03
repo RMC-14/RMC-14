@@ -24,7 +24,7 @@ public sealed partial class GunStacksComponent : Component
     public TimeSpan LastHitAt;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan StacksExpire = TimeSpan.FromSeconds(2);
+    public TimeSpan StacksExpire = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]
     public int Hits;
