@@ -1,12 +1,6 @@
 ﻿Entries:
 - author: MaloTV
   changes:
-  - message: Added Original CMSS13 Posters!
-    type: Add
-  id: 3
-  time: '2023-11-05T04:34:28.0000000+00:00'
-- author: MaloTV
-  changes:
   - message: Added Original CMSS13 Medical Decals
     type: Add
   id: 4
@@ -4260,5 +4254,12 @@
   id: 502
   time: '2024-08-03T04:11:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3491
+- author: Vermidia
+  changes:
+  - message: Fixed charge hitting allied xenos.
+    type: Fix
+  id: 503
+  time: '2024-08-03T12:28:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3468
 Name: RMC14
 Order: -1
