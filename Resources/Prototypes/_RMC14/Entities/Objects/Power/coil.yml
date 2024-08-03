@@ -40,3 +40,27 @@
   - type: Tag
     tags:
     - CableCoil
+
+- type: entity
+  parent: RMCCableCoil
+  id: RMCCableCoil20
+  suffix: 20
+  components:
+  - type: Stack
+    count: 20
+
+- type: entity
+  parent: RMCCableCoil
+  id: RMCCableCoil10
+  suffix: 10
+  components:
+  - type: Stack
+    count: 10
+
+- type: entity
+  parent: RMCCableCoil
+  id: RMCCableCoil1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1
