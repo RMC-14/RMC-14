@@ -1,18 +1,6 @@
 ﻿Entries:
 - author: Tunguso4ka
   changes:
-  - message: Engineering department has been added to the game.
-    type: Add
-  id: 8
-  time: '2023-11-17T15:40:05.0000000+00:00'
-- author: gusxyz
-  changes:
-  - message: Ported some of the medical items from CMSS13.
-    type: Add
-  id: 9
-  time: '2024-01-09T12:46:58.0000000+00:00'
-- author: Tunguso4ka
-  changes:
   - message: Commanding and Executive officers has been added to the game.
     type: Add
   id: 10
@@ -4269,5 +4257,20 @@
   id: 507
   time: '2024-08-03T12:38:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3474
+- author: DrSmugleaf
+  changes:
+  - message: Fixed spaceborne gauss turrets not shooting at crit xenonids. They will
+      no longer be merciful.
+    type: Fix
+  id: 508
+  time: '2024-08-03T23:47:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3516
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenonid eggs being corrodible by xenonid acid.
+    type: Fix
+  id: 509
+  time: '2024-08-03T23:28:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3515
 Name: RMC14
 Order: -1
