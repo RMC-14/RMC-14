@@ -157,7 +157,10 @@ public sealed class CPRSystem : EntitySystem
         var performer = args.Args.Performer;
 
         if (_mobState.IsAlive(ent) || _rotting.IsRotten(ent))
+        {
             args.Args.Cancelled = true;
+            return;
+        }
 
         if (!ent.Comp.IsToggled)
         {
