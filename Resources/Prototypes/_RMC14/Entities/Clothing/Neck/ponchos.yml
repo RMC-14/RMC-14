@@ -1,5 +1,5 @@
 - type: entity
-  parent: Clothing
+  parent: ClothingNeckBase
   id: RMCGreenPoncho
   components:
   - type: Item
