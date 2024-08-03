@@ -85,6 +85,7 @@ public sealed class GunStacksSystem : EntitySystem
         if (_xenoQuery.HasComp(target) && !_mobState.IsDead(target))
         {
             gun.Hits++;
+            gun.LastHitAt = _timing.CurTime;
             if (args.Shooter is { } shooter)
             {
                 var msg = gun.Hits == 1 ? "Bullseye!" : $"Bullseye! {gun.Hits} hits in a row!";
