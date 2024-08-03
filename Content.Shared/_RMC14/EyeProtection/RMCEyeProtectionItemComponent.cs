@@ -7,7 +7,7 @@ namespace Content.Shared._RMC14.EyeProtection;
 /// For eye protection (e.g. from welding)
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-//[Access(typeof(RMCSharedEyeProtectionSystem))]
+[Access(typeof(RMCSharedEyeProtectionSystem))]
 public sealed partial class RMCEyeProtectionItemComponent : Component
 {
     /// <summary>

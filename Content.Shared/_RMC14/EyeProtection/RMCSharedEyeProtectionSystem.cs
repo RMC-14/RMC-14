@@ -1,13 +1,15 @@
 using Content.Shared.Actions;
 using Content.Shared.Alert;
-using Content.Shared.StatusEffect;
-using Content.Shared.Inventory;
-using Content.Shared.Inventory.Events;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
+using Content.Shared.Inventory;
+using Content.Shared.Inventory.Events;
+using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Rounding;
+using Content.Shared.StatusEffect;
 using Content.Shared.Toggleable;
 using Content.Shared.Tools.Components;
-using Content.Shared.Item.ItemToggle.Components;
+
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.EyeProtection
@@ -149,7 +151,12 @@ namespace Content.Shared._RMC14.EyeProtection
             if (!Resolve(ent, ref ent.Comp))
                 return;
 
-            ent.Comp.Enabled = !ent.Comp.Enabled;
+            ent.Comp.State = ent.Comp.State switch
+            {
+                EyeProtectionState.Off => EyeProtectionState.On,
+                EyeProtectionState.On => EyeProtectionState.Off,
+                _ => throw new ArgumentOutOfRangeException()
+            };
 
             Dirty(ent);
             UpdateAlert((ent, ent.Comp));
@@ -157,15 +164,14 @@ namespace Content.Shared._RMC14.EyeProtection
 
         private void UpdateAlert(Entity<RMCEyeProtectionComponent> ent)
         {
-            /*
             if (ent.Comp.Alert is { } alert)
             {
-                var level = MathF.Max((int) NightVisionState.Off, (int) ent.Comp.State);
+                var level = MathF.Max((int) EyeProtectionState.Off, (int) ent.Comp.State);
                 var max = _alerts.GetMaxSeverity(alert);
-                var severity = max - ContentHelpers.RoundToLevels(level, (int) NightVisionState.Full, max + 1);
+                var severity = max - ContentHelpers.RoundToLevels(level, (int) EyeProtectionState.On, max + 1);
                 _alerts.ShowAlert(ent, alert, (short) severity);
             }
-*/
+
             EyeProtectionChanged(ent);
         }
 
@@ -189,16 +195,11 @@ namespace Content.Shared._RMC14.EyeProtection
             Dirty(item);
 
             _appearance.SetData(item, RMCEyeProtectionItemVisuals.Active, true);
-            //_entManager.AddComponent<RMCEyeProtectionComponent>(user);
-
-            //_statusEffectsSystem.TryAddStatusEffect(item.Comp.User, EyeProtectionStatusEffect,
-            //    TimeSpan.FromSeconds(3600), false, EyeProtectionStatusEffect);
-
 
             if (!_timing.ApplyingState)
             {
                 var eyeProt = EnsureComp<RMCEyeProtectionComponent>(user);
-                eyeProt.Enabled = true;
+                eyeProt.State = EyeProtectionState.On;
                 Dirty(user, eyeProt);
             }
 
@@ -218,18 +219,11 @@ namespace Content.Shared._RMC14.EyeProtection
         {
             _actions.SetToggled(item.Comp.Action, false);
 
-
+            item.Comp.User = null;
             item.Comp.Toggled = false;
             Dirty(item);
 
             _appearance.SetData(item, RMCEyeProtectionItemVisuals.Active, false);
-
-            //if (_entManager.HasComponent<RMCEyeProtectionComponent>(item.Comp.User))
-            //    _entManager.RemoveComponent<RMCEyeProtectionComponent>(item.Comp.User);
-
-            //_statusEffectsSystem.TryRemoveStatusEffect(user, EyeProtectionStatusEffect);
-
-            item.Comp.User = null;
 
             if (TryComp(user, out RMCEyeProtectionComponent? eyeProt))
             {

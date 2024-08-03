@@ -3,62 +3,75 @@ using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
-using Vector3 = Robust.Shared.Maths.Vector3;
 
 namespace Content.Client._RMC14.EyeProtection;
 
-public sealed class EyeProtectionOverlay : Overlay
+public sealed class RMCEyeProtectionOverlay : Overlay
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
+    public override bool RequestScreenTexture => true;
+    public override OverlaySpace Space => OverlaySpace.WorldSpace;
     private readonly ShaderInstance _eyeProtShader;
 
-    public override OverlaySpace Space => OverlaySpace.WorldSpace;
+    private RMCEyeProtectionComponent _eyeProtComponent = default!;
 
-    public EyeProtectionOverlay()
+    public RMCEyeProtectionOverlay()
     {
         IoCManager.InjectDependencies(this);
 
-        _eyeProtShader = _prototypeManager.Index<ShaderPrototype>("GradientCircleMask").InstanceUnique();
+        _eyeProtShader = _prototypeManager.Index<ShaderPrototype>("CircleMask").InstanceUnique();
+    }
+
+    protected override bool BeforeDraw(in OverlayDrawArgs args)
+    {
+        if (!_entityManager.TryGetComponent(_playerManager.LocalSession?.AttachedEntity, out EyeComponent? eyeComp))
+            return false;
+
+        if (args.Viewport.Eye != eyeComp.Eye)
+            return false;
+
+        var playerEntity = _playerManager.LocalSession?.AttachedEntity;
+
+        if (playerEntity == null)
+            return false;
+
+        if (!_entityManager.TryGetComponent<RMCEyeProtectionComponent>(playerEntity, out var eyeProtComp))
+            return false;
+
+        _eyeProtComponent = eyeProtComp;
+
+        return (_eyeProtComponent.State == EyeProtectionState.On);
     }
 
     protected override void Draw(in OverlayDrawArgs args)
     {
+        if (ScreenTexture == null)
+            return;
+
+        var playerEntity = _playerManager.LocalSession?.AttachedEntity;
+
+        if (playerEntity == null)
+            return;
+
         if (!_entityManager.TryGetComponent(_playerManager.LocalEntity, out RMCEyeProtectionComponent? eyeProt) ||
-            !eyeProt.Enabled)
+            eyeProt.State == EyeProtectionState.Off)
         {
             return;
         }
 
-        var viewport = args.WorldAABB;
+        if (_entityManager.TryGetComponent<EyeComponent>(playerEntity, out var content))
+        {
+            _eyeProtShader?.SetParameter("Zoom", 0.20f * content.Zoom.X);
+        }
+
         var handle = args.WorldHandle;
-        var distance = args.ViewportBounds.Width;
+        var viewport = args.WorldBounds;
 
-        float level = 0.5f;
-
-        float outerMaxLevel = 2.0f * distance;
-        float outerMinLevel = 0.8f * distance;
-        float innerMaxLevel = 0.6f * distance;
-        float innerMinLevel = 0.2f * distance;
-
-        var outerRadius = outerMaxLevel - level * (outerMaxLevel - outerMinLevel);
-        var innerRadius = innerMaxLevel - level * (innerMaxLevel - innerMinLevel);
-
-        _eyeProtShader.SetParameter("time", 0f);
-        _eyeProtShader.SetParameter("color", new Vector3(0f, 0f, 0f));
-        _eyeProtShader.SetParameter("darknessAlphaOuter", 0.8f);
-
-        _eyeProtShader.SetParameter("outerCircleRadius", outerRadius);
-        _eyeProtShader.SetParameter("outerCircleMaxRadius", outerRadius + 0.2f * distance);
-        _eyeProtShader.SetParameter("innerCircleRadius", innerRadius);
-        _eyeProtShader.SetParameter("innerCircleMaxRadius", innerRadius + 0.02f * distance);
         handle.UseShader(_eyeProtShader);
         handle.DrawRect(viewport, Color.White);
-
         handle.UseShader(null);
     }
-
-
 }

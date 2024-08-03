@@ -7,58 +7,45 @@ namespace Content.Client._RMC14.EyeProtection;
 
 public sealed class RMCEyeProtectionSystem : RMCSharedEyeProtectionSystem
 {
-    [Dependency] private readonly IOverlayManager _overlay = default!;
+    [Dependency] private readonly IOverlayManager _overlayManager = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
+
+    private RMCEyeProtectionOverlay _overlay = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
+        SubscribeLocalEvent<RMCEyeProtectionComponent, ComponentInit>(OnEyeProtectionInit);
+        SubscribeLocalEvent<RMCEyeProtectionComponent, ComponentShutdown>(OnEyeProtectionShutdown);
+
         SubscribeLocalEvent<RMCEyeProtectionComponent, LocalPlayerAttachedEvent>(OnEyeProtectionAttached);
         SubscribeLocalEvent<RMCEyeProtectionComponent, LocalPlayerDetachedEvent>(OnEyeProtectionDetached);
+
+        _overlay = new();
     }
 
-    private void OnEyeProtectionAttached(Entity<RMCEyeProtectionComponent> ent, ref LocalPlayerAttachedEvent args)
+    private void OnEyeProtectionAttached(EntityUid uid, RMCEyeProtectionComponent component,  LocalPlayerAttachedEvent args)
     {
-        EyeProtectionChanged(ent);
+        _overlayManager.AddOverlay(_overlay);
     }
 
-    private void OnEyeProtectionDetached(Entity<RMCEyeProtectionComponent> ent, ref LocalPlayerDetachedEvent args)
+    private void OnEyeProtectionDetached(EntityUid uid, RMCEyeProtectionComponent component, LocalPlayerDetachedEvent args)
     {
-        Off();
+        _overlayManager.RemoveOverlay(_overlay);
     }
 
-    protected override void EyeProtectionChanged(Entity<RMCEyeProtectionComponent> ent)
+    private void OnEyeProtectionInit(EntityUid uid, RMCEyeProtectionComponent component, ComponentInit args)
     {
-        if (ent != _player.LocalEntity)
-            return;
+        if (_player.LocalEntity == uid)
+            _overlayManager.AddOverlay(_overlay);
+    }
 
-        if (ent.Comp.Enabled)
+    private void OnEyeProtectionShutdown(EntityUid uid, RMCEyeProtectionComponent component, ComponentShutdown args)
+    {
+        if (_player.LocalEntity == uid)
         {
-            On(ent);
+            _overlayManager.RemoveOverlay(_overlay);
         }
-        else
-        {
-            Off();
-        }
-    }
-
-    protected override void EyeProtectionRemoved(Entity<RMCEyeProtectionComponent> ent)
-    {
-        if (ent != _player.LocalEntity)
-            return;
-
-        Off();
-    }
-
-    private void Off()
-    {
-        _overlay.RemoveOverlay(new EyeProtectionOverlay());
-    }
-
-    private void On(Entity<RMCEyeProtectionComponent> ent)
-    {
-        if (ent.Comp.Overlay)
-            _overlay.AddOverlay(new EyeProtectionOverlay());
     }
 }
