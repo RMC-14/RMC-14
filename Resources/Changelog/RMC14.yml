@@ -1,10 +1,4 @@
 ﻿Entries:
-- author: gusxyz
-  changes:
-  - message: The M10 Marine Helmet is now real.
-    type: Add
-  id: 5
-  time: '2023-11-14T04:08:07.0000000+00:00'
 - author: Tunguso4ka
   changes:
   - message: Chief MP, Military Warden and Military Police and clothes for them has
@@ -4269,5 +4263,12 @@
   id: 504
   time: '2024-08-03T12:32:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3494
+- author: CaasGit
+  changes:
+  - message: Make folders work as expected.
+    type: Fix
+  id: 505
+  time: '2024-08-03T12:35:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3496
 Name: RMC14
 Order: -1
