@@ -1,0 +1,10 @@
+- type: entity
+  parent: Clothing
+  id: RMCGreenPoncho
+  components:
+  - type: Item
+    size: Small
+  - type: Clothing
+    slots: _RMC14/Objects/Clothing/Neck/Poncho/greenponcho.rsi
+  - type: Sprite
+    state: _RMC14/Objects/Clothing/Neck/Poncho/greenponcho.rsi
