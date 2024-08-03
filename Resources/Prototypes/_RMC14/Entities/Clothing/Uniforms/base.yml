@@ -5,6 +5,6 @@
   components:
   - type: Clothing
     equipSound:
-      path: /_RMC14/Audio/Handling/clothing_on.ogg
+      path: /Audio/_RMC14/Handling/clothing_on.ogg
     unequipSound:
       path: /Audio/_RMC14/Handling/clothing_off.ogg
