@@ -1,13 +1,7 @@
-﻿using System.Numerics;
-using System.Reflection.Metadata;
-using Content.Shared._RMC14.EyeProtection;
-using Content.Shared._RMC14.NightVision;
-using Content.Shared._RMC14.Xenonids;
-using Robust.Client.GameObjects;
+﻿using Content.Shared._RMC14.EyeProtection;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
-using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Vector3 = Robust.Shared.Maths.Vector3;
 
@@ -18,23 +12,15 @@ public sealed class EyeProtectionOverlay : Overlay
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-/*
-    private readonly ContainerSystem _container;
-    private readonly TransformSystem _transform;
-*/
+
     private readonly ShaderInstance _eyeProtShader;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
-    //private readonly List<NightVisionRenderEntry> _entries = new();
-
     public EyeProtectionOverlay()
     {
         IoCManager.InjectDependencies(this);
-/*
-        _container = _entity.System<ContainerSystem>();
-        _transform = _entity.System<TransformSystem>();
-*/
+
         _eyeProtShader = _prototypeManager.Index<ShaderPrototype>("GradientCircleMask").InstanceUnique();
     }
 
@@ -61,7 +47,7 @@ public sealed class EyeProtectionOverlay : Overlay
         var innerRadius = innerMaxLevel - level * (innerMaxLevel - innerMinLevel);
 
         _eyeProtShader.SetParameter("time", 0f);
-        _eyeProtShader.SetParameter("color", new Vector3(0f,0f,0f));
+        _eyeProtShader.SetParameter("color", new Vector3(0f, 0f, 0f));
         _eyeProtShader.SetParameter("darknessAlphaOuter", 0.8f);
 
         _eyeProtShader.SetParameter("outerCircleRadius", outerRadius);

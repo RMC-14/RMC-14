@@ -7,7 +7,6 @@ namespace Content.Client._RMC14.EyeProtection;
 
 public sealed class RMCEyeProtectionSystem : RMCSharedEyeProtectionSystem
 {
-    //[Dependency] private readonly ILightManager _light = default!;
     [Dependency] private readonly IOverlayManager _overlay = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
 
@@ -55,14 +54,11 @@ public sealed class RMCEyeProtectionSystem : RMCSharedEyeProtectionSystem
     private void Off()
     {
         _overlay.RemoveOverlay(new EyeProtectionOverlay());
-        //_light.DrawLighting = true;
     }
 
     private void On(Entity<RMCEyeProtectionComponent> ent)
     {
         if (ent.Comp.Overlay)
             _overlay.AddOverlay(new EyeProtectionOverlay());
-
-        //_light.DrawLighting = false;
     }
 }

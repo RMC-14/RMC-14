@@ -14,9 +14,6 @@ namespace Content.Shared._RMC14.EyeProtection
 {
     public abstract class RMCSharedEyeProtectionSystem : EntitySystem
     {
-        //[ValidatePrototypeId<StatusEffectPrototype>]
-        //public const string EyeProtectionStatusEffect = "RMCEyeProtectionOn";
-
         [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
         [Dependency] private readonly BlindableSystem _blindingSystem = default!;
         [Dependency] private readonly SharedActionsSystem _actions = default!;
@@ -28,14 +25,13 @@ namespace Content.Shared._RMC14.EyeProtection
         public override void Initialize()
         {
             base.Initialize();
-            SubscribeLocalEvent<RMCRequiresEyeProtectionComponent, ToolUseAttemptEvent>(OnUseAttempt);
-            SubscribeLocalEvent<RMCRequiresEyeProtectionComponent, ItemToggledEvent>(OnWelderToggled);
+            SubscribeLocalEvent<RequiresEyeProtectionComponent, ToolUseAttemptEvent>(OnUseAttempt);
+            SubscribeLocalEvent<RequiresEyeProtectionComponent, ItemToggledEvent>(OnWelderToggled);
 
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, GetEyeProtectionEvent>(OnGetProtection);
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, InventoryRelayedEvent<GetEyeProtectionEvent>>(OnGetRelayedProtection);
 
             SubscribeLocalEvent<RMCEyeProtectionComponent, ComponentStartup>(OnEyeProtectionStartup);
-            //SubscribeLocalEvent<RMCEyeProtectionComponent, MapInitEvent>(OnEyeProtectionMapInit);
             SubscribeLocalEvent<RMCEyeProtectionComponent, AfterAutoHandleStateEvent>(OnEyeProtectionAfterHandle);
             SubscribeLocalEvent<RMCEyeProtectionComponent, ComponentRemove>(OnEyeProtectionRemove);
 
@@ -58,13 +54,6 @@ namespace Content.Shared._RMC14.EyeProtection
             EyeProtectionChanged(ent);
         }
 
-        /*
-        private void OnEyeProtectionMapInit(Entity<RMCEyeProtectionComponent> ent, ref MapInitEvent args)
-        {
-            UpdateAlert(ent);
-        }
-        */
-
         private void OnEyeProtectionRemove(Entity<RMCEyeProtectionComponent> ent, ref ComponentRemove args)
         {
             if (ent.Comp.Alert is { } alert)
@@ -85,7 +74,7 @@ namespace Content.Shared._RMC14.EyeProtection
                 args.Protection += component.ProtectionTime;
         }
 
-        private void OnUseAttempt(EntityUid uid, RMCRequiresEyeProtectionComponent component, ToolUseAttemptEvent args)
+        private void OnUseAttempt(EntityUid uid, RequiresEyeProtectionComponent component, ToolUseAttemptEvent args)
         {
             if (!component.Toggled)
                 return;
@@ -107,7 +96,8 @@ namespace Content.Shared._RMC14.EyeProtection
             _statusEffectsSystem.TryAddStatusEffect(args.User, TemporaryBlindnessSystem.BlindingStatusEffect,
                 statusTimeSpan, false, TemporaryBlindnessSystem.BlindingStatusEffect);
         }
-        private void OnWelderToggled(EntityUid uid, RMCRequiresEyeProtectionComponent component, ItemToggledEvent args)
+
+        private void OnWelderToggled(EntityUid uid, RequiresEyeProtectionComponent component, ItemToggledEvent args)
         {
             component.Toggled = args.Activated;
         }
@@ -131,14 +121,11 @@ namespace Content.Shared._RMC14.EyeProtection
 
         private void OnEyeProtectionItemGotEquipped(Entity<RMCEyeProtectionItemComponent> ent, ref GotEquippedEvent args)
         {
-            //_statusEffectsSystem.TryAddStatusEffect(item.Comp.User, EyeProtectionStatusEffect,
-                //    TimeSpan.FromSeconds(3600), false, EyeProtectionStatusEffect);
             ToggleEyeProtectionItem(ent, args.Equipee);
         }
 
         private void OnEyeProtectionItemGotUnequipped(Entity<RMCEyeProtectionItemComponent> ent, ref GotUnequippedEvent args)
         {
-            //_statusEffectsSystem.TryRemoveStatusEffect(args.Equipee, EyeProtectionStatusEffect);
             DisableEyeProtectionItem(ent, args.Equipee);
         }
 

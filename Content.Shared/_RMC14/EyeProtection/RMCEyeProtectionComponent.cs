@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.EyeProtection;
 ///     Keeps track of whether eye protection is enabled or not.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
-[Access(typeof(RMCSharedEyeProtectionSystem))]
+//[Access(typeof(RMCSharedEyeProtectionSystem))]
 public sealed partial class RMCEyeProtectionComponent : Component
 {
     [DataField]
