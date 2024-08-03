@@ -1,17 +1,6 @@
 ﻿Entries:
 - author: Tunguso4ka
   changes:
-  - message: Chief MP, Military Warden and Military Police and clothes for them has
-      been added to the game.
-    type: Add
-  - message: Added black and brown marine gloves.
-    type: Add
-  - message: Added black, brown and jungle combat boots
-    type: Add
-  id: 6
-  time: '2023-11-16T12:02:17.0000000+00:00'
-- author: Tunguso4ka
-  changes:
   - message: Requisition department has been added to the game.
     type: Add
   id: 7
@@ -4270,5 +4259,14 @@
   id: 505
   time: '2024-08-03T12:35:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3496
+- author: Tunguso4ka
+  changes:
+  - message: Added pickup and drop sounds for tools!
+    type: Add
+  - message: Added equip and unequip sounds for clothing!
+    type: Add
+  id: 506
+  time: '2024-08-03T12:36:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3483
 Name: RMC14
 Order: -1
