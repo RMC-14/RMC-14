@@ -22,6 +22,7 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Spawners;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;

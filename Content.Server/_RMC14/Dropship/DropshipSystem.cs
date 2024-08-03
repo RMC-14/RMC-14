@@ -1,6 +1,5 @@
 ﻿using System.Numerics;
 using Content.Server._RMC14.Marines;
-using Content.Server._RMC14.Rules;
 using Content.Server.Doors.Systems;
 using Content.Server.GameTicking;
 using Content.Server.Shuttles.Components;
@@ -10,6 +9,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
+using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared.Administration.Logs;
