@@ -69,8 +69,8 @@
         points: 10
       - id: RMCSmartPistolCase
         points: 15
-    - id: CMWeaponLauncherM79
-      points: 30
+      - id: CMWeaponLauncherM79
+        points: 30
     - name: Armors
       entries:
       - id: CMArmorB12
