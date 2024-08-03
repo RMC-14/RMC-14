@@ -25,8 +25,8 @@ namespace Content.Shared._RMC14.EyeProtection
         public override void Initialize()
         {
             base.Initialize();
-            SubscribeLocalEvent<RequiresEyeProtectionComponent, ToolUseAttemptEvent>(OnUseAttempt);
-            SubscribeLocalEvent<RequiresEyeProtectionComponent, ItemToggledEvent>(OnWelderToggled);
+            SubscribeLocalEvent<RMCRequiresEyeProtectionComponent, ToolUseAttemptEvent>(OnUseAttempt);
+            SubscribeLocalEvent<RMCRequiresEyeProtectionComponent, ItemToggledEvent>(OnWelderToggled);
 
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, GetEyeProtectionEvent>(OnGetProtection);
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, InventoryRelayedEvent<GetEyeProtectionEvent>>(OnGetRelayedProtection);
@@ -74,7 +74,7 @@ namespace Content.Shared._RMC14.EyeProtection
                 args.Protection += component.ProtectionTime;
         }
 
-        private void OnUseAttempt(EntityUid uid, RequiresEyeProtectionComponent component, ToolUseAttemptEvent args)
+        private void OnUseAttempt(EntityUid uid, RMCRequiresEyeProtectionComponent component, ToolUseAttemptEvent args)
         {
             if (!component.Toggled)
                 return;
@@ -97,7 +97,7 @@ namespace Content.Shared._RMC14.EyeProtection
                 statusTimeSpan, false, TemporaryBlindnessSystem.BlindingStatusEffect);
         }
 
-        private void OnWelderToggled(EntityUid uid, RequiresEyeProtectionComponent component, ItemToggledEvent args)
+        private void OnWelderToggled(EntityUid uid, RMCRequiresEyeProtectionComponent component, ItemToggledEvent args)
         {
             component.Toggled = args.Activated;
         }
