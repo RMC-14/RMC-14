@@ -8,16 +8,16 @@
   },
   "states": [
     {
-      "name": "metal"
+      "name": "plastic"
     },
     {
-      "name": "metal_2"
+      "name": "plastic_2"
     },
     {
-      "name": "metal_3"
+      "name": "plastic_3"
     },
     {
-      "name": "metal_4"
+      "name": "plastic_4"
     }
   ]
 }
