@@ -11,10 +11,11 @@
   - type: Item
     sprite: _RMC14/Objects/Misc/paper.rsi
     size: Small
+    shape: null
   - type: Storage
     maxItemSize: Small
     grid:
-    - 0,0,4,1
+    - 0,0,4,3
     whitelist:
       tags:
       - Document
