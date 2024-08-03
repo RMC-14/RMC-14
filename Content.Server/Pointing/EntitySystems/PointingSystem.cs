@@ -40,7 +40,7 @@ namespace Content.Server.Pointing.EntitySystems
         [Dependency] private readonly IAdminLogManager _adminLogger = default!;
         [Dependency] private readonly ExamineSystemShared _examine = default!;
 
-        private static readonly TimeSpan PointDelay = TimeSpan.FromSeconds(2f);
+        private static readonly TimeSpan PointDelay = TimeSpan.FromSeconds(0.5f);
 
         /// <summary>
         ///     A dictionary of players to the last time that they
@@ -152,9 +152,7 @@ namespace Content.Server.Pointing.EntitySystems
 
             if (TryComp<PointingArrowComponent>(arrow, out var pointing))
             {
-                if (TryComp(player, out TransformComponent? xformPlayer))
-                    pointing.StartPosition = _transform.ToCoordinates((player, xformPlayer), _transform.ToMapCoordinates(xformPlayer.Coordinates)).Position;
-
+                pointing.StartPosition = _transform.ToCoordinates((arrow, Transform(arrow)), _transform.ToMapCoordinates(Transform(player).Coordinates)).Position;
                 pointing.EndTime = _gameTiming.CurTime + PointDuration;
 
                 Dirty(arrow, pointing);
