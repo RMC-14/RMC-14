@@ -189,8 +189,8 @@
         points: 8
       - id: RMCSmartPistolCase
         points: 12
-    #- id: CMM79GrenadeLauncher
-    #  points: 18
+      - id: CMWeaponLauncherM79
+        points: 18
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer
