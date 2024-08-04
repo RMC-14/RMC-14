@@ -123,11 +123,11 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         var damageableCorrodingQuery = EntityQueryEnumerator<DamageableCorrodingComponent>();
         while (damageableCorrodingQuery.MoveNext(out var uid, out var damageableCorrodingComponent))
         {
-            if (time > damageableCorrodingComponent.LastDamagedAt.Add(TimeSpan.FromSeconds(_corrosiveAcidTickDelaySeconds)))
+            if (time > damageableCorrodingComponent.NextDamageAt)
             {
                 DamageSpecifier damage = new(_prototypeManager.Index<DamageTypePrototype>(_corrosiveAcidDamageType), damageableCorrodingComponent.Dps * _corrosiveAcidTickDelaySeconds);
                 _damageable.TryChangeDamage(uid, damage, true);
-                damageableCorrodingComponent.LastDamagedAt = time;
+                damageableCorrodingComponent.NextDamageAt = time.Add(TimeSpan.FromSeconds(_corrosiveAcidTickDelaySeconds));
             }
         }
 

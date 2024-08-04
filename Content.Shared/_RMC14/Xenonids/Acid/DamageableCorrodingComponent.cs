@@ -14,6 +14,6 @@ public sealed partial class DamageableCorrodingComponent : Component
     public float Dps;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan LastDamagedAt;
+    public TimeSpan NextDamageAt;
 
 }
