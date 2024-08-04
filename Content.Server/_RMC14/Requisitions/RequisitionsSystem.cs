@@ -208,7 +208,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 
     private int GetElevatorCapacity(Entity<RequisitionsElevatorComponent> elevator)
     {
-        var side = (int) (elevator.Comp.Radius * 2 + 1);
+        var side = (int) MathF.Floor(elevator.Comp.Radius * 2 + 1);
         return side * side;
     }
 
