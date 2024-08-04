@@ -32,3 +32,5 @@
     networkSet: true
     setupAvailableNetworks:
       - SurveillanceCameraEntertainment
+  - type: Corrodible
+    isCorrodible: false

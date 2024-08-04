@@ -22,6 +22,7 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Spawners;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
@@ -29,7 +30,6 @@ using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
-using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -110,14 +110,15 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private float _autoBalanceStep;
     private float _autoBalanceMin;
     private float _autoBalanceMax;
+    private string _adminFaxAreaMap = string.Empty;
 
     [ViewVariables]
     public readonly Dictionary<string, float> MarinesPerXeno = new()
     {
-        ["/Maps/_RMC14/lv624.yml"] = 3.5f,
-        ["/Maps/_RMC14/solaris.yml"] = 3.5f,
-        ["/Maps/_RMC14/prison.yml"] = 3.5f,
-        ["/Maps/_RMC14/shiva.yml"] = 3.5f,
+        ["/Maps/_RMC14/lv624.yml"] = 4.75f,
+        ["/Maps/_RMC14/solaris.yml"] = 5.25f,
+        ["/Maps/_RMC14/prison.yml"] = 6.75f,
+        ["/Maps/_RMC14/shiva.yml"] = 6.50f,
     };
 
     private readonly List<MapId> _almayerMaps = [];
@@ -137,7 +138,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         _xenoNestedQuery = GetEntityQuery<XenoNestedComponent>();
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-
         SubscribeLocalEvent<RulePlayerSpawningEvent>(OnRulePlayerSpawning);
         SubscribeLocalEvent<PlayerSpawningEvent>(OnPlayerSpawning,
             before: [typeof(ArrivalsSystem), typeof(SpawnPointSystem)]);
@@ -167,6 +167,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         Subs.CVar(_config, RMCCVars.RMCAutoBalanceStep, v => _autoBalanceStep = v, true);
         Subs.CVar(_config, RMCCVars.RMCAutoBalanceMax, v => _autoBalanceMax = v, true);
         Subs.CVar(_config, RMCCVars.RMCAutoBalanceMin, v => _autoBalanceMin = v, true);
+        Subs.CVar(_config, RMCCVars.RMCAdminFaxAreaMap, v => _adminFaxAreaMap = v, true);
 
         ReloadPrototypes();
     }
@@ -194,6 +195,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 Log.Error("Failed to load xeno map");
                 continue;
             }
+
+            SpawnAdminFaxArea();
 
             var xenoSpawnPoints = new List<EntityUid>();
             var spawnQuery = AllEntityQuery<XenoSpawnPointComponent>();
@@ -1117,6 +1120,26 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             name += $"-{_random.Pick(_operationSuffixes)}";
 
         return name.Trim();
+    }
+
+    // TODO RMC14 this would be literally anywhere else if the code for loading maps wasn't dogshit and broken upstream
+    private void SpawnAdminFaxArea()
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(_adminFaxAreaMap))
+                return;
+
+            var mapId = _mapManager.CreateMap();
+            if (!_mapLoader.TryLoad(mapId, _adminFaxAreaMap, out _))
+                return;
+
+            _mapManager.SetMapPaused(mapId, false);
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error loading admin fax area:\n{e}");
+        }
     }
 
     private void EndRound(CMDistressSignalRuleComponent comp)

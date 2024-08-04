@@ -40,11 +40,11 @@
           CMShardGlass:
             min: 1
             max: 1
-#      - !type:SpawnEntitiesBehavior
-#        spawn:
-#          CableApcStack1: #TODO RMC14 APC cable
-#            min: 1
-#            max: 1
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          RMCCableCoil:
+            min: 1
+            max: 1
   - type: Construction
     graph: CMWindoor
     node: assembly
@@ -70,11 +70,11 @@
           CMShardGlass:
             min: 1
             max: 1
-#      - !type:SpawnEntitiesBehavior
-#        spawn:
-#          CableApcStack1: #TODO RMC14 APC cable
-#            min: 1
-#            max: 1
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          RMCCableCoil:
+            min: 1
+            max: 1
   - type: Construction
     graph: CMWindoor
     node: assemblySecure

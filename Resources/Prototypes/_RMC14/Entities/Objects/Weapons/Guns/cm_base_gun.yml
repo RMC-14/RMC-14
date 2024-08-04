@@ -20,3 +20,9 @@
     damage:
       types:
         Blunt: 5
+  - type: EmitSoundOnPickup
+    sound:
+      collection: RMCEquipGun
+  - type: EmitSoundOnLand
+    sound:
+      collection: RMCRustleGun

@@ -11,4 +11,16 @@ public sealed partial class OverwatchConsoleComponent : Component
 
     [DataField, AutoNetworkedField]
     public string? Operator;
+
+    [DataField, AutoNetworkedField]
+    public OverwatchLocation? Location;
+
+    [DataField, AutoNetworkedField]
+    public bool ShowDead = true;
+
+    [DataField, AutoNetworkedField]
+    public bool ShowHidden;
+
+    [DataField, AutoNetworkedField]
+    public HashSet<NetEntity> Hidden = new();
 }
