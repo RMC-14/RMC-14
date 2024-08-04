@@ -68,7 +68,7 @@
   components:
   - type: ConditionalSpawner
     prototypes:
-      - RMCHumanCorpse
+      - RMCHumanCorpseDeputy
 
 - type: entity
   parent: RMCSpawnerCorpse
@@ -77,7 +77,7 @@
   components:
   - type: ConditionalSpawner
     prototypes:
-      - RMCHumanCorpse
+      - RMCHumanCorpseLiaison
 
 - type: entity
   parent: RMCSpawnerCorpse
@@ -86,7 +86,7 @@
   components:
   - type: ConditionalSpawner
     prototypes:
-      - RMCHumanCorpse
+      - RMCHumanCorpsePrisonGuard
 
 - type: entity
   parent: RMCSpawnerCorpse
@@ -95,7 +95,7 @@
   components:
   - type: ConditionalSpawner
     prototypes:
-      - RMCHumanCorpse
+      - RMCHumanCorpseColonist
 
 - type: entity
   parent: RMCSpawnerCorpseColonist
@@ -105,4 +105,4 @@
   components:
   - type: ConditionalSpawner
     prototypes:
-      - RMCHumanCorpse
+      - RMCHumanCorpseColonistBurst

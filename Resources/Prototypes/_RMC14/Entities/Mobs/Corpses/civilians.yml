@@ -1,32 +1,3 @@
-### REMOVE ME
-##
-#- type: entity
-#  parent: RMCHumanCorpse
-#  id: RMCHumanCorpse
-#  components:
-#  - type: Loadout
-#    prototypes: []
-#
-#- type: startingGear
-#  id: RMCGearCorpse
-#  equipment:
-#    jumpsuit:
-#    back:
-#    shoes:
-#    head:
-#    eyes:
-#    gloves:
-#    outerClothing:
-#    id: CMIDCardColonist
-#    ears: CMHeadsetColony
-#    belt:
-#    pocket1:
-#    pocket2:
-##  storage:
-##    back:
-##    # radio
-### REMOVE ME
-
 # Prisoner
 - type: entity
   parent: RMCHumanCorpse
@@ -187,3 +158,89 @@
     back:
     - RMCM5Bayonet
 #    # radio
+
+# Marshal Bureau Deputy
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseDeputy
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseDeputy ]
+
+- type: startingGear
+  id: RMCGearCorpseDeputy
+  equipment:
+    jumpsuit: RMCJumpsuitMarshal
+    back: CMSatchelSecurity
+    shoes: CMBootsBlackFilled
+    head: RMCHeadCapBureau
+    eyes: CMGlassesSecurity
+    id: RMCIDCardDeputy
+    ears: CMHeadsetColony
+#    belt: /obj/item/storage/belt/gun/m4a3/heavy
+
+# Corporate Liaison
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseLiaison
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseLiaison ]
+
+- type: startingGear
+  id: RMCGearCorpseLiaison
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonField
+    back: CMSatchel
+    shoes: RMCShoesLaceup
+#    eyes: aviators
+    id: CMIDCardLiaison
+    ears: RMCHeadsetDistressWeYa
+#    belt: /obj/item/storage/belt/gun/m4a3/mod88
+#  storage:
+#    back:
+#    # radio
+
+# Prison Guard
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpsePrisonGuard
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpsePrisonGuard ]
+
+- type: startingGear
+  id: RMCGearCorpsePrisonGuard
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSec
+    back: CMSatchelSecurity
+    shoes: RMCShoesJackboots
+    gloves: CMHandsBlackMarine
+    id: CMIDCardColonist
+    ears: CMHeadsetColony
+#  storage:
+#    back:
+#    # radio
+
+# Colonist
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseColonist
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseColonist ]
+
+- type: startingGear
+  id: RMCGearCorpseColonist
+  equipment:
+    jumpsuit: CMJumpsuitColonist
+    back: CMSatchel
+    shoes: CMBootsBlack
+    id: CMIDCardColonist
+    ears: CMHeadsetColony
+
+- type: entity
+  parent: RMCHumanCorpseColonist
+  id: RMCHumanCorpseColonistBurst
+  components:
+  - type: VictimBurst
