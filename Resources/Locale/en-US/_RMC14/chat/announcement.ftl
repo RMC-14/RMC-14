@@ -1,4 +1,5 @@
 rmc-announcement-author = Command
+rmc-announcement-author-highcommand = UNMC High Command
 rmc-announcement-message = [font size=14][bold][color=white]{$author} Announcement[/color][/bold][/font][font size=12][color=red]
 
     {$message}
