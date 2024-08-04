@@ -1,12 +1,6 @@
 ﻿Entries:
 - author: Tunguso4ka
   changes:
-  - message: Auxiliary Support Department has been added to the game.
-    type: Add
-  id: 12
-  time: '2023-11-19T00:44:36.0000000+00:00'
-- author: Tunguso4ka
-  changes:
   - message: Combat Correspondent and Survivors has been added to the game.
     type: Add
   id: 13
@@ -4275,5 +4269,13 @@
   id: 511
   time: '2024-08-04T02:04:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3517
+- author: Sigil
+  changes:
+  - message: You can no longer use binoculars when not holding them in your active
+      hand.
+    type: Fix
+  id: 512
+  time: '2024-08-04T09:21:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3526
 Name: RMC14
 Order: -1
