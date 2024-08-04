@@ -64,6 +64,9 @@
         whitelist:
           tags:
           - CMMagazineSniperM96S
+  - type: RMCAmmoEject
+    ejectSound:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_unload.ogg
   - type: GunUserWhitelist
     whitelist:
       components:
