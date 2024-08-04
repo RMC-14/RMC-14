@@ -194,7 +194,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
     private void OnExamined(Entity<ParasiteSpentComponent> spent, ref ExaminedEvent args)
     {
-        args.PushText(Loc.GetString("rmc-xeno-parasite-dead", ("parasite", spent)));
+        args.PushMarkup($"[italic]{Loc.GetString("rmc-xeno-parasite-dead", ("parasite", spent))}[/italic]");
     }
 
     private void OnVictimInfectedMapInit(Entity<VictimInfectedComponent> victim, ref MapInitEvent args)

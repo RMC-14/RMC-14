@@ -45,6 +45,8 @@ public sealed class CMGunSystem : EntitySystem
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ProjectileComponent> _projectileQuery;
 
+    private int blockArcCollisionGroup = (int)(CollisionGroup.HighImpassable | CollisionGroup.Impassable);
+
     public override void Initialize()
     {
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
@@ -151,8 +153,7 @@ public sealed class CMGunSystem : EntitySystem
     private void OnCollisionCheckArc(Entity<ProjectileFixedDistanceComponent> ent, ref PreventCollideEvent args)
     {
         int otherLayers = (int)args.OtherFixture.CollisionLayer;
-        int impassableLayer = (int)CollisionGroup.Impassable;
-        if (((Comp<ProjectileFixedDistanceComponent>(ent).ArcProj) && !((args.OtherFixture.CollisionLayer & impassableLayer) == impassableLayer)))
+        if (Comp<ProjectileFixedDistanceComponent>(ent).ArcProj && (args.OtherFixture.CollisionLayer & blockArcCollisionGroup) == 0)
             args.Cancelled = true;
         return;
     }

@@ -1,75 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added the basic rifleman role!
-    type: Add
-  id: 1
-  time: '2023-08-12T15:18:11.0000000+00:00'
-- author: Whisper
-  changes:
-  - message: Added SL
-    type: Add
-  id: 2
-  time: '2023-08-13T16:10:55.0000000+00:00'
-- author: MaloTV
-  changes:
-  - message: Added Original CMSS13 Posters!
-    type: Add
-  id: 3
-  time: '2023-11-05T04:34:28.0000000+00:00'
-- author: MaloTV
-  changes:
-  - message: Added Original CMSS13 Medical Decals
-    type: Add
-  id: 4
-  time: '2023-11-05T03:31:21.0000000+00:00'
-- author: gusxyz
-  changes:
-  - message: The M10 Marine Helmet is now real.
-    type: Add
-  id: 5
-  time: '2023-11-14T04:08:07.0000000+00:00'
-- author: Tunguso4ka
-  changes:
-  - message: Chief MP, Military Warden and Military Police and clothes for them has
-      been added to the game.
-    type: Add
-  - message: Added black and brown marine gloves.
-    type: Add
-  - message: Added black, brown and jungle combat boots
-    type: Add
-  id: 6
-  time: '2023-11-16T12:02:17.0000000+00:00'
-- author: Tunguso4ka
-  changes:
-  - message: Requisition department has been added to the game.
-    type: Add
-  id: 7
-  time: '2023-11-17T08:03:34.0000000+00:00'
-- author: Tunguso4ka
-  changes:
-  - message: Engineering department has been added to the game.
-    type: Add
-  id: 8
-  time: '2023-11-17T15:40:05.0000000+00:00'
-- author: gusxyz
-  changes:
-  - message: Ported some of the medical items from CMSS13.
-    type: Add
-  id: 9
-  time: '2024-01-09T12:46:58.0000000+00:00'
-- author: Tunguso4ka
-  changes:
-  - message: Commanding and Executive officers has been added to the game.
-    type: Add
-  id: 10
-  time: '2023-11-18T01:27:33.0000000+00:00'
-- author: Tunguso4ka
-  changes:
-  - message: Medical department has been added to the game.
-    type: Add
-  id: 11
-  time: '2023-11-18T15:20:25.0000000+00:00'
 - author: Tunguso4ka
   changes:
   - message: Auxiliary Support Department has been added to the game.
@@ -4258,5 +4187,93 @@
   id: 500
   time: '2024-08-01T21:06:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3453
+- author: KalimbaMachine
+  changes:
+  - message: Reworked RMC Clipboard to show paper
+    type: Tweak
+  id: 501
+  time: '2024-08-02T04:33:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3471
+- author: Sigil
+  changes:
+  - message: The spec GL can no longer phase its grenades through doors.
+    type: Fix
+  id: 502
+  time: '2024-08-03T04:11:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3491
+- author: Vermidia
+  changes:
+  - message: Fixed charge hitting allied xenos.
+    type: Fix
+  id: 503
+  time: '2024-08-03T12:28:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3468
+- author: DrSmugleaf
+  changes:
+  - message: Added filters to the Overwatch console for dead, hidden, shipside and
+      planetside marines.
+    type: Add
+  - message: Added being able to manually hide specific marines on the Overwatch console.
+      Pressing show hidden will show them again, and let you unhide them.
+    type: Add
+  - message: Fixed marines in cryo-storage being shown in the overwatch console marine
+      list.
+    type: Fix
+  id: 504
+  time: '2024-08-03T12:32:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3494
+- author: CaasGit
+  changes:
+  - message: Make folders work as expected.
+    type: Fix
+  id: 505
+  time: '2024-08-03T12:35:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3496
+- author: Tunguso4ka
+  changes:
+  - message: Added pickup and drop sounds for tools!
+    type: Add
+  - message: Added equip and unequip sounds for clothing!
+    type: Add
+  id: 506
+  time: '2024-08-03T12:36:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3483
+- author: Tunguso4ka
+  changes:
+  - message: Booze-O-Mat is now access locked!
+    type: Fix
+  id: 507
+  time: '2024-08-03T12:38:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3474
+- author: DrSmugleaf
+  changes:
+  - message: Fixed spaceborne gauss turrets not shooting at crit xenonids. They will
+      no longer be merciful.
+    type: Fix
+  id: 508
+  time: '2024-08-03T23:47:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3516
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenonid eggs being corrodible by xenonid acid.
+    type: Fix
+  id: 509
+  time: '2024-08-03T23:28:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3515
+- author: DrSmugleaf
+  changes:
+  - message: The Toggle Internals verb no longer shows up in the context menu if no
+      breathing tool is equipped and internals are off.
+    type: Tweak
+  id: 510
+  time: '2024-08-04T02:04:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3518
+- author: DrSmugleaf
+  changes:
+  - message: Added vendor points and weapons spec skills to the admin actions ui.
+    type: Add
+  id: 511
+  time: '2024-08-04T02:04:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3517
 Name: RMC14
 Order: -1

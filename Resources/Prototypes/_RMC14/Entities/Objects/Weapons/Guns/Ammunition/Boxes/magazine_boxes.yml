@@ -195,7 +195,7 @@
         - CMMagazineRifleM54CExt
 
 - type: entity
-  parent: CMBoxMagazineBase
+  parent: CMBoxMagazineRifleM54CExtEmpty
   id: CMBoxMagazineRifleM54CExt
   suffix: Filled
   name: magazine box (Ext M54C x 8)

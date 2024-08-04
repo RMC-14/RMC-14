@@ -181,13 +181,6 @@ entities:
     - type: Transform
       pos: 2.5206347,2.682068
       parent: 2
-- proto: CMStampCMB
-  entities:
-  - uid: 53
-    components:
-    - type: Transform
-      pos: 2.3316104,0.9200046
-      parent: 2
 - proto: CMStampMarine
   entities:
   - uid: 54
@@ -264,7 +257,7 @@ entities:
     - type: Transform
       pos: -1.5,0.5
       parent: 2
-- proto: PaperBin20
+- proto: CMPaperBin20
   entities:
   - uid: 40
     components:
@@ -288,14 +281,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 2.5,2.5
       parent: 2
-- proto: RMCIDCardMarshal
-  entities:
-  - uid: 59
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 2.4484627,2.0893457
-      parent: 2
 - proto: RMCLampGreen
   entities:
   - uid: 48
@@ -313,7 +298,7 @@ entities:
     - type: Transform
       pos: 2.6341426,0.994836
       parent: 2
-- proto: WallWood
+- proto: CMWallWood
   entities:
   - uid: 3
     components:

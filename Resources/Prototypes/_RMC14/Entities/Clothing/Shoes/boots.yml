@@ -17,6 +17,8 @@
     slots:
       item:
         name: cm-knife
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
         whitelist:
           tags:
           - Knife
@@ -47,6 +49,8 @@
     slots:
       item:
         name: cm-knife
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
         whitelist:
           tags:
           - Knife

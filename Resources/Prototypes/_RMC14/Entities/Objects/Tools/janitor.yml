@@ -35,7 +35,7 @@
     delay: 1
   - type: PhysicalComposition
     materialComposition:
-      Plastic: 50 # TODO RMC14 port cmss13 Plastic
+      RMCPlastic: 50
   - type: Tag
     tags:
       - Mop
@@ -55,7 +55,7 @@
     size: Small
   - type: PhysicalComposition
     materialComposition:
-      Plastic: 50
+      RMCPlastic: 50
   - type: Tag
     tags:
       - WetFloorSign
@@ -74,7 +74,7 @@
     size: Small
   - type: PhysicalComposition
     materialComposition:
-      Plastic: 50
+      RMCPlastic: 50
 
 - type: entity
   parent: BaseItem
