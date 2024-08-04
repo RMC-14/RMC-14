@@ -534,7 +534,7 @@
         wieldedOnly: true
       accuracyAddMult: 0.05
       recoilFlat: -1
-      scatterFlat: -1
+      scatterFlat: -2
 
 - type: entity
   parent: RMCAttachmentFlashlightGrip
