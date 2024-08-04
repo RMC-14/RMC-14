@@ -74,7 +74,7 @@
 - type: vendingMachineInventory
   id: CMVendorElectronics
   startingInventory:
-    CableApcStack: 6
+    RMCCableCoil: 6
     CMMultitool: 6
     DoorElectronics: 8
     CMAPCElectronics: 8
@@ -147,7 +147,7 @@
 - type: vendingMachineInventory
   id: CMVendorRobotics
   startingInventory:
-    CableApcStack: 4
+    RMCCableCoil: 4
     SawElectric: 2
     CMCrowbar: 2
     CMScalpel: 2

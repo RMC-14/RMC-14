@@ -1,0 +1,66 @@
+- type: stack
+  id: RMCCable
+  name: cable coil
+  icon: { sprite: _RMC14/Objects/Power/coil.rsi, state: coil1 }
+  spawn: RMCCableCoil
+  maxCount: 30
+
+- type: entity
+  parent: BaseItem
+  id: RMCCableCoil
+  name: cable coil
+  description: A coil of power cable.
+  suffix: Full
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Power/coil.rsi
+    state: coil3
+    layers:
+    - map: ["base"]
+      state: coil3
+      color: "#FF0000"
+  - type: Item
+    size: Small
+  - type: Stack
+    stackType: RMCCable
+    baseLayer: base
+    layerStates:
+    - coil1
+    - coil2
+    - coil3
+  - type: Appearance
+#  - type: CablePlacer
+#    cablePrototypeID: CableHV
+#    blockingWireType: HighVoltage
+  - type: Clickable
+  - type: StaticPrice
+    price: 0
+  - type: StackPrice
+    price: 1
+  - type: Tag
+    tags:
+    - CableCoil
+
+- type: entity
+  parent: RMCCableCoil
+  id: RMCCableCoil20
+  suffix: 20
+  components:
+  - type: Stack
+    count: 20
+
+- type: entity
+  parent: RMCCableCoil
+  id: RMCCableCoil10
+  suffix: 10
+  components:
+  - type: Stack
+    count: 10
+
+- type: entity
+  parent: RMCCableCoil
+  id: RMCCableCoil1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1
