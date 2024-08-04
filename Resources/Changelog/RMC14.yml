@@ -1,17 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Combat Correspondent and Survivors has been added to the game.
-    type: Add
-  id: 13
-  time: '2023-11-19T14:48:03.0000000+00:00'
-- author: thymol-blue
-  changes:
-  - message: Added barricades, barricade upgrades, barricade doors, damaged sprites,
-      and turnstiles. Also added ways to make them!
-    type: Add
-  id: 14
-  time: '2023-11-28T03:55:33.0000000+00:00'
 - author: thymol-blue
   changes:
   - message: Added tips relevant to RMC14. Be sure to keep an eye out for them!
@@ -4277,5 +4264,19 @@
   id: 512
   time: '2024-08-04T09:21:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3526
+- author: Whisper
+  changes:
+  - message: Added Shawn Fox, Madelynn 'Buzz' Lewis figurines
+    type: Add
+  id: 513
+  time: '2024-08-04T11:19:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3470
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the Overwatch Console bugging out until a reconnect.
+    type: Fix
+  id: 514
+  time: '2024-08-04T11:19:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3529
 Name: RMC14
 Order: -1
