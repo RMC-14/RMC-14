@@ -1,18 +1,6 @@
 ﻿Entries:
 - author: Tunguso4ka
   changes:
-  - message: Commanding and Executive officers has been added to the game.
-    type: Add
-  id: 10
-  time: '2023-11-18T01:27:33.0000000+00:00'
-- author: Tunguso4ka
-  changes:
-  - message: Medical department has been added to the game.
-    type: Add
-  id: 11
-  time: '2023-11-18T15:20:25.0000000+00:00'
-- author: Tunguso4ka
-  changes:
   - message: Auxiliary Support Department has been added to the game.
     type: Add
   id: 12
@@ -4272,5 +4260,20 @@
   id: 509
   time: '2024-08-03T23:28:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3515
+- author: DrSmugleaf
+  changes:
+  - message: The Toggle Internals verb no longer shows up in the context menu if no
+      breathing tool is equipped and internals are off.
+    type: Tweak
+  id: 510
+  time: '2024-08-04T02:04:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3518
+- author: DrSmugleaf
+  changes:
+  - message: Added vendor points and weapons spec skills to the admin actions ui.
+    type: Add
+  id: 511
+  time: '2024-08-04T02:04:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3517
 Name: RMC14
 Order: -1
