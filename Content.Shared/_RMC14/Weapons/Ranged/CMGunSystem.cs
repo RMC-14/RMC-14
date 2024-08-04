@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -35,6 +36,7 @@ public sealed class CMGunSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly ItemSlotsSystem _slots = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -408,7 +410,9 @@ public sealed class CMGunSystem : EntitySystem
             ejectedAmmo = ammo.Value;
         }
 
-        if (_hands.TryPickup(args.User, ejectedAmmo, hand))
+        if (!HasComp<ItemSlotsComponent>(gun.Owner) || !_slots.TryEject(gun.Owner, gun.Comp.ContainerID, args.User, out _, excludeUserAudio: true))
             _audio.PlayPredicted(gun.Comp.EjectSound, gun.Owner, args.User);
+
+        _hands.TryPickup(args.User, ejectedAmmo, hand);
     }
 }

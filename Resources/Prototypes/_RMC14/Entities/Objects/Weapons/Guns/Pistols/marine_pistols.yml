@@ -45,13 +45,11 @@
         whitelist:
           tags:
           - MagazinePistol
-  - type: RMCAmmoEject
-    ejectSound:
-      path: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
+  - type: RMCAmmoEject
   - type: MagazineVisuals
     magState: mag
     steps: 1

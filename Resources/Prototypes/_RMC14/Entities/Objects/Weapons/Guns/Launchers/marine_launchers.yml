@@ -35,6 +35,8 @@
     containerID: ballistic-ammo
     ejectSound:
       path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
+      params:
+        volume: -2
   - type: BallisticAmmoProvider
     whitelist:
       tags:
