@@ -194,7 +194,7 @@ public abstract class SharedIVDripSystem : EntitySystem
             return;
         }
 
-        if (!_skills.HasSkills(user, in pack.Comp.SkillRequired))
+        if (!_skills.HasAllSkills(user, pack.Comp.SkillRequired))
         {
             _popup.PopupClient(Loc.GetString("cm-iv-attach-no-skill"), user, user);
             return;
@@ -284,7 +284,7 @@ public abstract class SharedIVDripSystem : EntitySystem
         if (!InRange(iv, to, iv.Comp.Range))
             return;
 
-        if (!_skills.HasSkills(user, in iv.Comp.SkillRequired))
+        if (!_skills.HasAllSkills(user, iv.Comp.SkillRequired))
         {
             _popup.PopupClient(Loc.GetString("cm-iv-attach-no-skill"), user, user);
             return;
@@ -301,7 +301,7 @@ public abstract class SharedIVDripSystem : EntitySystem
         if (iv.Comp.AttachedTo is not { } target)
             return;
 
-        if (user != null && !_skills.HasSkills(user.Value, in iv.Comp.SkillRequired))
+        if (user != null && !_skills.HasAllSkills(user.Value, iv.Comp.SkillRequired))
         {
             _popup.PopupClient(Loc.GetString("cm-iv-detach-no-skill"), user.Value, user.Value);
             return;
@@ -321,7 +321,7 @@ public abstract class SharedIVDripSystem : EntitySystem
         if (!InRange(pack, to, pack.Comp.Range))
             return;
 
-        if (!_skills.HasSkills(user, in pack.Comp.SkillRequired))
+        if (!_skills.HasAllSkills(user, pack.Comp.SkillRequired))
         {
             _popup.PopupClient(Loc.GetString("cm-iv-attach-no-skill"), user, user);
             return;
@@ -338,7 +338,7 @@ public abstract class SharedIVDripSystem : EntitySystem
         if (pack.Comp.AttachedTo is not { } target)
             return;
 
-        if (user != null && !_skills.HasSkills(user.Value, in pack.Comp.SkillRequired))
+        if (user != null && !_skills.HasAllSkills(user.Value, pack.Comp.SkillRequired))
         {
             _popup.PopupClient(Loc.GetString("cm-iv-detach-no-skill"), user.Value, user.Value);
             return;

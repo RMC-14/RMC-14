@@ -107,9 +107,11 @@
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
     - name: Backpack
+      choices: { CMBackpack: 1 }
       entries:
       - id: CMBackpackMarine
       - id: CMSatchelMarine
+        recommended: true
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -121,47 +123,68 @@
     #- id: CMM276M82FHolsterRig
     #- id: CMM276ShotgunShellLoadingRig
     - name: Pouches
-      choices: { CMPouch: 2 }
+      choices: { RMCPouch: 2 }
       entries:
-      - id: CMPouchFirstAidInjectors
+      - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
-      - id: CMPouchFirstAidSplintsGauzeOintment
+        recommended: true
+      - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
-      - id: CMPouchFirstAidPills
+        recommended: true
+      - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
-      - id: CMPouchFlareFilled
-        name: Flare pouch (Filled)
-      - id: CMPouchMagazine
-      - id: CMPouchShotgun
-      - id: CMPouchMagazinePistolLarge
-      - id: CMPouchGeneralMedium
-      - id: CMPouchPistol
+        recommended: true
+      - id: RMCPouchFlareFilled
+        name: Flare pouch (Full)
+      - id: RMCPouchMagazine
+        recommended: true
+      - id: RMCPouchShotgun
+#        recommended: true
+      - id: RMCPouchMagazinePistolLarge
+      - id: RMCPouchGeneralMedium
+      - id: RMCPouchPistol
       #- id: CMSlingPouch
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBrown
+        recommended: true
       - id: CMWebbingBlack
       #- id: CMShoulderHolster
       - id: CMWebbing
     #- id: CMDropPouch
     - name: Mask
+      choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+    - name: Restricted Firearms
+      entries:
+      - id: RMCMK80Case
+        points: 15
+      - id: RMCSmartPistolCase
+        points: 15
+    - name: Sidearm Ammunition
+      entries:
+      - id: RMCSpeedLoader44Marksman
+        points: 10
+      - id: CMMagazinePistolMK80
+        points: 5
+      - id: RMCMagazinePistolSU6
+        points: 10
     - name: Clothing Items
       entries:
     #- id: CMScabbardMacheteFull
-      - id: CMPouchMacheteFilled
+      - id: RMCPouchMacheteFilled
         points: 15
     #- id: CMMarineRadioTelephonePack
     #- id: CMFuelTankStrapPouch
     #- id: CMWeldingGoggles
-      - id: CMPouchGeneralLarge
+      - id: RMCPouchGeneralLarge
         points: 10
       - id: CMBeltUtilityCombat
         points: 15
-      - id: CMPouchAutoinjectorFill
+      - id: RMCPouchAutoinjectorFill
         points: 15
     - name: Utilities
       entries:
@@ -173,25 +196,25 @@
     #- id: CMMotionDetector
       - id: RMCWhistle
         points: 5
+    - name: Binoculars
+      entries:
+      - id: RMCBinoculars
+        points: 5
     - name: Helmet Optics
       entries: [ ]
     #- id: CMMedicalHelmetOptic
     #- id: CMWeldingVisor
-    - name: Pàmphlets
+    - name: Pamphlets
       entries: [ ]
     #- id: CMPamphletJTAC
     #- id: CMPamphletEngineering
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer
-        amount: 5
         points: 5
       - id: CMEncryptionKeyIntel
-        amount: 5
         points: 5
       - id: CMEncryptionKeyJTAC
-        amount: 5
         points: 5
       - id: CMEncryptionKeyRequisition
-        amount: 5
         points: 5

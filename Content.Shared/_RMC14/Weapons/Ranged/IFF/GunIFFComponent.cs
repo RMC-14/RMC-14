@@ -8,4 +8,7 @@ public sealed partial class GunIFFComponent : Component
 {
     [DataField, AutoNetworkedField]
     public bool Intrinsic;
+
+    [DataField, AutoNetworkedField]
+    public bool Enabled;
 }

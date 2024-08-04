@@ -5,16 +5,19 @@ using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Verbs;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Medical.HUD.Systems;
 
 public sealed class HolocardSystem : EntitySystem
 {
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
-    public const int MinimumRequiredMedicalSkill = 2;
+    public const int MinimumRequiredSkill = 2;
+    public static readonly EntProtoId<SkillDefinitionComponent> SkillType = "RMCSkillMedical";
 
     public override void Initialize()
     {
@@ -37,11 +40,8 @@ public sealed class HolocardSystem : EntitySystem
             return;
 
         // A player with insufficient medical skill cannot change holocards
-        if (!TryComp(viewer, out SkillsComponent? skills) ||
-            skills.Skills.Medical < MinimumRequiredMedicalSkill)
-        {
+        if (!_skills.HasSkill(viewer.Value, SkillType, MinimumRequiredSkill))
             return;
-        }
 
         ent.Comp.HolocardStatus = args.NewHolocardStatus;
         Dirty(ent);
@@ -53,11 +53,8 @@ public sealed class HolocardSystem : EntitySystem
             return;
 
         // A player with insufficient medical skill cannot change holocards
-        if (!TryComp(args.User, out SkillsComponent? skills) ||
-            skills.Skills.Medical < MinimumRequiredMedicalSkill)
-        {
+        if (!_skills.HasSkill(args.User, SkillType, MinimumRequiredSkill))
             return;
-        }
 
         var scanEvent = new HolocardScanEvent(false, SlotFlags.EYES);
         RaiseLocalEvent(args.User, ref scanEvent);

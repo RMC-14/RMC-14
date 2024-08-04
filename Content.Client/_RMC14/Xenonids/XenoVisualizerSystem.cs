@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Movement;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -91,6 +92,11 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
                     sprite.LayerSetState(layer, "crit");
                 break;
             case MobState.Dead:
+                if (HasComp<ParasiteSpentComponent>(entity))
+                {
+                    sprite.LayerSetState(layer, "impregnated");
+                    break;
+                }
                 if (rsi.TryGetState("dead", out _))
                     sprite.LayerSetState(layer, "dead");
                 break;

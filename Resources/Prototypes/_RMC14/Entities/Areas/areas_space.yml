@@ -1,0 +1,119 @@
+﻿- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaSpace
+  name: Space
+  components:
+  - type: Area
+    avoidBioscan: False
+    noTunnel: True
+    unweedable: False
+
+- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaEngine
+
+- type: entity
+  parent:
+  - RMCAreaBase
+  - RMCAreaProtectionMetal
+  id: RMCAreaAdmin
+  name: Admin room
+  components:
+  - type: Sprite
+    state: start
+
+- type: entity
+  parent: RMCAreaAdmin
+  id: RMCAreaAdminDroppod
+
+- type: entity
+  parent: RMCAreaAdminDroppod
+  id: RMCAreaAdminDroppodHolding
+  name: Admin Supply Drops Droppod
+
+- type: entity
+  parent: RMCAreaAdminDroppod
+  id: RMCAreaAdminDroppodLoading
+  name: Admin Supply Drops Loading
+
+- type: entity
+  parent: RMCAreaSpace
+  id: RMCAreaSpaceHighalt
+  name: High Altitude
+  components:
+  - type: Sprite
+    state: blue
+
+- type: entity
+  parent: RMCAreaMax
+  id: RMCAreaStart
+  name: start area
+  components:
+  - type: Sprite
+    state: start
+
+- type: entity
+  parent:
+  - RMCAreaBase
+  - RMCAreaProtectionMetal
+  id: RMCAreaCentcom
+  name: abandoned Centcom
+  components:
+  - type: Sprite
+    state: centcom
+
+- type: entity
+  parent: RMCAreaCentcom
+  id: RMCAreaCentcomControl
+  name: abandoned Centcom Control
+
+- type: entity
+  parent: RMCAreaCentcom
+  id: RMCAreaCentcomLiving
+  name: abandoned Centcom Living Quarters
+
+- type: entity
+  parent:
+  - RMCAreaBase
+  - RMCAreaProtectionMetal
+  id: RMCAreaTdome
+  name: abandoned Thunderdome
+  components:
+  - type: Sprite
+    state: thunder
+  - type: Area
+    avoidBioscan: False
+    noTunnel: True
+    unweedable: False
+
+- type: entity
+  parent: RMCAreaTdome
+  id: RMCAreaTdomeTdome1
+  name: abandoned Thunderdome (Team 1)
+  components:
+  - type: Sprite
+    state: green
+
+- type: entity
+  parent: RMCAreaTdome
+  id: RMCAreaTdomeTdome2
+  name: abandoned Thunderdome (Team 2)
+  components:
+  - type: Sprite
+    state: yellow
+
+- type: entity
+  parent: RMCAreaTdome
+  id: RMCAreaTdomeTdomeadmin
+  name: abandoned Thunderdome (Admin.)
+  components:
+  - type: Sprite
+    state: purple
+
+- type: entity
+  parent: RMCAreaTdome
+  id: RMCAreaTdomeTdomeobserve
+  name: abandoned Thunderdome (Observer.)
+  components:
+  - type: Sprite
+    state: purple

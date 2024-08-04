@@ -351,3 +351,36 @@
   - type: PatronFigurine
     id: b7fd4e27-04f8-4303-8a3c-03ca18b38ced
 
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAlexGregory
+  name: Alex Gregory figurine
+  description: "A prominent Nanotrasen Captain. You think you might have seen him before."
+  components:
+  - type: Sprite
+    state: alex_gregory
+  - type: PatronFigurine
+    id: 34bc0234-d7bf-44cc-a2ef-fb8fd1abf1b5
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMadelynnBuzzLewis
+  name: Madelynn 'Buzz' Lewis figurine
+  description: "Best chef on the field."
+  components:
+  - type: Sprite
+    state: madelynn_buzz_lewis
+  - type: PatronFigurine
+    id: 70a4a27d-25d8-4172-8e8a-91fbf085ef37
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronShawnFox
+  name: Shawn Fox figurine
+  description: "The figurine smells of ..news.."
+  components:
+  - type: Sprite
+    state: shawn_fox
+  - type: PatronFigurine
+    id: 92d1d8d3-8091-495f-9940-24fb973de3ed

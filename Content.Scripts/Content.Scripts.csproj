@@ -8,6 +8,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Content.Shared\Content.Shared.csproj" />
+      <ProjectReference Include="..\Content.Tools\Content.Tools.csproj" />
+      <ProjectReference Include="..\RobustToolbox\Robust.UnitTesting\Robust.UnitTesting.csproj" />
       <ProjectReference Include="..\RSI.NET\SpaceWizards.RsiLib\SpaceWizards.RsiLib.csproj" />
     </ItemGroup>
 

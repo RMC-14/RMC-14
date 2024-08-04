@@ -8,6 +8,7 @@
   - type: Corrodible
     isCorrodible: false
   - type: GunIFF
+    enabled: true
   - type: WieldDelay
     baseDelay: 0.4
   - type: WieldableSpeedModifiers
@@ -31,7 +32,7 @@
     availableModes:
     - FullAuto
     soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/lmg.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
   - type: RMCSelectiveFire
@@ -91,10 +92,10 @@
   - type: RMCMagneticItem
   - type: GunRequiresSkills
     skills:
-      smartGun: 1
+      RMCSkillSmartGun: 1
   - type: GunSkilledRecoil
     skills:
-      firearms: 100
+      RMCSkillFirearms: 100
   - type: GunDrainBatteryOnShoot
   - type: GunRequireEquipped
     whitelist:

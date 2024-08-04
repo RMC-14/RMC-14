@@ -63,6 +63,7 @@
   - type: NoRotateOnInteract
   - type: NoRotateOnMove
   - type: GunIFF
+    enabled: true
     intrinsic: true
 
 - type: entity
@@ -99,6 +100,7 @@
       operator: !type:GunOperator
         targetKey: Target
         requireLOS: true
+        targetState: Critical
       services:
       - !type:UtilityService
         id: RangedService
@@ -119,9 +121,6 @@
   - !type:TargetDistanceCon
     curve: !type:PresetCurve
       preset: TargetDistance
-  - !type:TargetHealthCon
-    curve: !type:PresetCurve
-      preset: TargetHealth
   - !type:TargetAccessibleCon
     curve: !type:BoolCurve
   - !type:TargetInLOSOrCurrentCon

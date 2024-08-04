@@ -147,10 +147,7 @@ public sealed class CPRSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (_mobState.IsAlive(ent))
-            args.Cancelled = true;
-
-        if (_mobState.IsDead(ent) && _rotting.IsRotten(ent))
+        if (_mobState.IsAlive(ent) || _rotting.IsRotten(ent))
             args.Cancelled = true;
     }
 
@@ -158,6 +155,12 @@ public sealed class CPRSystem : EntitySystem
     {
         var target = args.Args.Target;
         var performer = args.Args.Performer;
+
+        if (_mobState.IsAlive(ent) || _rotting.IsRotten(ent))
+        {
+            args.Args.Cancelled = true;
+            return;
+        }
 
         if (!ent.Comp.IsToggled)
         {

@@ -28,6 +28,9 @@
     - HighRiskItem
   - type: StealTarget
     stealGroup: Hypospray
+  - type: MedicallyUnskilledDoAfter
+    min: 2
+    doAfter: 3
 
 - type: entity
   name: gorlex hypospray
