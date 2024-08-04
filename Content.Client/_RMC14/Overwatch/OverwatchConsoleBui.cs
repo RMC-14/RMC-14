@@ -235,16 +235,32 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
 
                 var hideButton = new Button
                 {
-                    MaxWidth = 30,
+                    MaxWidth = 25,
+                    MaxHeight = 25,
+                    VerticalAlignment = VAlignment.Top,
                     StyleClasses = { "OpenBoth" },
+                    Text = "-",
+                    ModulateSelfOverride = Color.FromHex("#BB1F1D"),
+                    ToolTip = "Hide marine",
                 };
+
+                if (_overwatchConsole.IsHidden((Owner, console), marine.Marine))
+                {
+                    hideButton.Text = "+";
+                    hideButton.ModulateSelfOverride = Color.FromHex("#248E34");
+                    hideButton.ToolTip = "Show marine";
+                }
 
                 hideButton.OnPressed += _ =>
                 {
                     var hidden = !_overwatchConsole.IsHidden((Owner, console), marine.Marine);
                     SendPredictedMessage(new OverwatchConsoleHideBuiMsg(marine.Marine, hidden));
                 };
-                monitor.Buttons.AddChild(hideButton);
+
+                panel = CreatePanel(50);
+                hideButton.Margin = margin;
+                panel.AddChild(hideButton);
+                monitor.Buttons.AddChild(panel);
             }
 
             // TODO RMC14 change squad leader
@@ -438,42 +454,6 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
             squad.ShowHiddenButton.Text = console.ShowHidden
                 ? "Hide hidden"
                 : "Show hidden";
-
-            if (State is not OverwatchConsoleBuiState s)
-                return;
-
-            if (activeSquad != null &&
-                s.Marines.TryGetValue(activeSquad.Value, out var marines))
-            {
-                for (var i = 0; i < marines.Count; i++)
-                {
-                    if (squad.Buttons.GetChild(i) is not Button button)
-                        continue;
-
-                    var marine = marines[i].Marine;
-                    var hidden = _overwatchConsole.IsHidden((Owner, console), marine);
-                    if (hidden)
-                    {
-                        button.Text = "+";
-                        button.ModulateSelfOverride = Color.FromHex("#248E34");
-                        button.ToolTip = "Show marine";
-                    }
-                    else
-                    {
-                        button.Text = "-";
-                        button.ModulateSelfOverride = Color.FromHex("#BB1F1D");
-                        button.ToolTip = "Hide marine";
-                    }
-                }
-
-                squad.UpdateResults(
-                    console.Location,
-                    console.ShowDead,
-                    console.ShowHidden,
-                    marines,
-                    console
-                );
-            }
         }
     }
 
@@ -511,7 +491,8 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
 
     public void Refresh()
     {
-        UpdateView();
+        if (State is OverwatchConsoleBuiState s)
+            RefreshState(s);
     }
 
     protected override void Dispose(bool disposing)
