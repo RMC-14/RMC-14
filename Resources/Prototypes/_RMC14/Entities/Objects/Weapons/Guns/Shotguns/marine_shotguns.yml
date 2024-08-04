@@ -35,7 +35,7 @@
     recoilWielded: 2
     recoilUnwielded: 4
     scatterWielded: 10
-    scatterUnwielded: 20
+    scatterUnwielded: 10
     baseFireRate: 1.429
     burstScatterMult: 5
   - type: BallisticAmmoProvider
