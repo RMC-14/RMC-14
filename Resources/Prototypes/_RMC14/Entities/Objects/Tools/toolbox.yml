@@ -8,6 +8,9 @@
     grid:
     - 0,0,13,1
   - type: FixedItemSizeStorage
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/toolbox_pickup.ogg
 
 - type: entity
   parent: [RMCToolboxBase, ToolboxEmergency]

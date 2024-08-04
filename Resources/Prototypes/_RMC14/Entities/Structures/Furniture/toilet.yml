@@ -11,7 +11,7 @@
   components:
   - type: Anchorable
     flags:
-    - Unanchorable
+    - Anchorable
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/toilet.rsi
     layers:
@@ -20,6 +20,7 @@
   #    - map: [ "DoorVisualState.DoorOpen" ]
   - type: Rotatable
   - type: Transform
+    anchored: true
     noRot: false
   - type: Strap
     whitelist:
