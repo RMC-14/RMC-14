@@ -5,3 +5,4 @@ cm-cpr-self-perform = You perform CPR on {$target}. Repeat at least every {$seco
 cm-cpr-other-perform = {$performer} performs CPR on {$target}
 cm-cpr-self-perform-fail-received-too-recently = You fail to perform CPR on {$target}. Incorrect rhythm. Do it slower.
 cm-cpr-other-perform-fail = {$performer} fails to perform CPR on {$target}
+cm-cpr-take-off-mask = Take off {POSS-ADJ($target)} mask first!
