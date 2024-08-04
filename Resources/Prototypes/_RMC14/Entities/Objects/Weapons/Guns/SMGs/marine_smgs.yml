@@ -87,9 +87,6 @@
           - CMMagazineSMGM63
           - CMMagazineSMGM63AP
           - CMMagazineSMGM63Ext
-  - type: RMCAmmoEject
-    ejectSound:
-      path: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
