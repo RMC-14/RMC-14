@@ -271,7 +271,7 @@
     cycleable: false
     whitelist:
       tags:
-      - CMShellShotgun
+      - RMCShellShotgunBuckshot
     capacity: 5
     proto: null
     soundInsert:
