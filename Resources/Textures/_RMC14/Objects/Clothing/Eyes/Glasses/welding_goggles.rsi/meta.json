@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from CM-SS13 at commit https://github.com/cmss13-devs/cmss13/commit/8231967e90baa187c399368f4c56cbcdd52a1c4d",
+  "copyright": "Equipped sprites and icon from CM-SS13 at commit https://github.com/cmss13-devs/cmss13/commit/8231967e90baa187c399368f4c56cbcdd52a1c4d ; inhand sprites derived from https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/items_lefthand_0.dmi",
   "size": {
     "x": 32,
     "y": 32
