@@ -1,0 +1,362 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/turf/area_strata.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": ""
+    },
+    {
+      "name": "base_ico"
+    },
+    {
+      "name": "strata"
+    },
+    {
+      "name": "ag"
+    },
+    {
+      "name": "ag_i"
+    },
+    {
+      "name": "ag_e"
+    },
+    {
+      "name": "ug"
+    },
+    {
+      "name": "ug_i"
+    },
+    {
+      "name": "ug_e"
+    },
+    {
+      "name": "shed_x_ag"
+    },
+    {
+      "name": "shed_x_ug"
+    },
+    {
+      "name": "shed_1_ag"
+    },
+    {
+      "name": "shed_1_ug"
+    },
+    {
+      "name": "shed_2_ag"
+    },
+    {
+      "name": "shed_2_ug"
+    },
+    {
+      "name": "shed_3_ag"
+    },
+    {
+      "name": "shed_3_ug"
+    },
+    {
+      "name": "shed_4_ag"
+    },
+    {
+      "name": "shed_4_ug"
+    },
+    {
+      "name": "shed_5_ag"
+    },
+    {
+      "name": "shed_5_ug"
+    },
+    {
+      "name": "shed_6_ag"
+    },
+    {
+      "name": "shed_6_ug"
+    },
+    {
+      "name": "shed_7_ag"
+    },
+    {
+      "name": "shed_7_ug"
+    },
+    {
+      "name": "shed_8_ag"
+    },
+    {
+      "name": "shed_8_ug"
+    },
+    {
+      "name": "security_station"
+    },
+    {
+      "name": "landingzone_1"
+    },
+    {
+      "name": "landingzone_2"
+    },
+    {
+      "name": "disposal"
+    },
+    {
+      "name": "nearlz1"
+    },
+    {
+      "name": "nearlz2"
+    },
+    {
+      "name": "lzcaves"
+    },
+    {
+      "name": "marsh"
+    },
+    {
+      "name": "marshriver"
+    },
+    {
+      "name": "marshship"
+    },
+    {
+      "name": "marshcenter"
+    },
+    {
+      "name": "marshwater"
+    },
+    {
+      "name": "garage"
+    },
+    {
+      "name": "offices"
+    },
+    {
+      "name": "path"
+    },
+    {
+      "name": "research_station"
+    },
+    {
+      "name": "rstation_deck"
+    },
+    {
+      "name": "dorms_0"
+    },
+    {
+      "name": "dorms_1"
+    },
+    {
+      "name": "dorms_2"
+    },
+    {
+      "name": "dorms_3"
+    },
+    {
+      "name": "dorms_lobby"
+    },
+    {
+      "name": "dorms_canteen"
+    },
+    {
+      "name": "dorms_beno"
+    },
+    {
+      "name": "sewers"
+    },
+    {
+      "name": "sewers1"
+    },
+    {
+      "name": "sewers2"
+    },
+    {
+      "name": "sewers3"
+    },
+    {
+      "name": "sewers4"
+    },
+    {
+      "name": "rdecks"
+    },
+    {
+      "name": "rdecks_sec"
+    },
+    {
+      "name": "tcomms1"
+    },
+    {
+      "name": "tcomms2"
+    },
+    {
+      "name": "tcomms3"
+    },
+    {
+      "name": "tcomms4"
+    },
+    {
+      "name": "outpost_med"
+    },
+    {
+      "name": "outpost_med_hall"
+    },
+    {
+      "name": "outpost_med_recp"
+    },
+    {
+      "name": "outpost_med_or"
+    },
+    {
+      "name": "outpost_med_chem"
+    },
+    {
+      "name": "outpost_med_recovery"
+    },
+    {
+      "name": "outpost_med_closet"
+    },
+    {
+      "name": "outpost_med_stock"
+    },
+    {
+      "name": "outpost_engi_0"
+    },
+    {
+      "name": "outpost_engi_1"
+    },
+    {
+      "name": "outpost_engi_2"
+    },
+    {
+      "name": "outpost_engi_3"
+    },
+    {
+      "name": "outpost_engi_4"
+    },
+    {
+      "name": "outpost_admin_0"
+    },
+    {
+      "name": "outpost_admin_1"
+    },
+    {
+      "name": "outpost_admin_2"
+    },
+    {
+      "name": "outpost_admin_3"
+    },
+    {
+      "name": "outpost_admin_4"
+    },
+    {
+      "name": "outpost_gen_0"
+    },
+    {
+      "name": "outpost_gen_1"
+    },
+    {
+      "name": "outpost_gen_2"
+    },
+    {
+      "name": "outpost_gen_3"
+    },
+    {
+      "name": "outpost_gen_4"
+    },
+    {
+      "name": "outpost_maint"
+    },
+    {
+      "name": "outpost_canteen_0"
+    },
+    {
+      "name": "outpost_canteen_1"
+    },
+    {
+      "name": "outpost_canteen_2"
+    },
+    {
+      "name": "outpost_canteen_3"
+    },
+    {
+      "name": "outpost_canteen_4"
+    },
+    {
+      "name": "outpost_sec_0"
+    },
+    {
+      "name": "outpost_sec_1"
+    },
+    {
+      "name": "outpost_sec_2"
+    },
+    {
+      "name": "outpost_sec_3"
+    },
+    {
+      "name": "outpost_sec_4"
+    },
+    {
+      "name": "ug_jung_dorm"
+    },
+    {
+      "name": "ug_jung_0"
+    },
+    {
+      "name": "ug_jung_1"
+    },
+    {
+      "name": "ug_jung_2"
+    },
+    {
+      "name": "ug_jung_3"
+    },
+    {
+      "name": "ug_jung_4"
+    },
+    {
+      "name": "ug_jung_5"
+    },
+    {
+      "name": "ug_jung_6"
+    },
+    {
+      "name": "ug_jung_7"
+    },
+    {
+      "name": "ug_jung_8"
+    },
+    {
+      "name": "cabin"
+    },
+    {
+      "name": "cabin2"
+    },
+    {
+      "name": "cabin3"
+    },
+    {
+      "name": "ug_jung_mine_1"
+    },
+    {
+      "name": "ug_jung_mine_2"
+    },
+    {
+      "name": "ug_jung_mine_3"
+    },
+    {
+      "name": "ug_jung_mine_4"
+    },
+    {
+      "name": "ug_jung_mine_5"
+    },
+    {
+      "name": "hive_0"
+    },
+    {
+      "name": "hive_1"
+    },
+    {
+      "name": "weather_snow"
+    }
+  ]
+}
