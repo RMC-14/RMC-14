@@ -166,6 +166,9 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             ent.Comp.Hidden.Remove(args.Target);
 
         Dirty(ent);
+
+        var state = GetOverwatchBuiState();
+        _ui.SetUiState(ent.Owner, OverwatchConsoleUI.Key, state);
     }
 
     protected virtual void Watch(Entity<ActorComponent?, EyeComponent?> watcher, Entity<OverwatchCameraComponent?> toWatch)
