@@ -173,7 +173,7 @@ public sealed class RMCAdminEui : BaseEui
             _adminWindow.MarineTab.SpecialistSkills.AddChild(specButton);
         }
 
-        // if we don't do this the value jitters a lot, would be better to refresh on unfocus but i aint got time for that
+        // TODO RMC14 if we don't do this the value jitters a lot, would be better to refresh on unfocus but i aint got time for that
         if (_isFirstState)
         {
             _adminWindow.MarineTab.PointsSpinBox.OverrideValue(s.Points);
