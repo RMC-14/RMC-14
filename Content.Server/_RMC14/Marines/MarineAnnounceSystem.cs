@@ -39,6 +39,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     private int _characterLimit = 1000;
+    public SoundSpecifier DefaultAnnouncementSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/Marine/notice2.ogg");
 
     public override void Initialize()
     {
@@ -74,8 +75,8 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         var time = _timing.CurTime;
         if (_timing.CurTime < ent.Comp.LastAnnouncement + ent.Comp.Cooldown)
         {
-            // TODO RMC14 localize
-            _popup.PopupClient($"Please allow at least {(int) ent.Comp.Cooldown.TotalSeconds} seconds to pass between announcements", args.Actor);
+            var cooldownMessage = Loc.GetString("rmc-announcement-cooldown", ("seconds", (int) ent.Comp.Cooldown.TotalSeconds));
+            _popup.PopupClient(cooldownMessage, args.Actor);
             return;
         }
 
@@ -83,7 +84,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         if (text.Length > _characterLimit)
             text = text[.._characterLimit].Trim();
 
-        Announce(args.Actor, text, ent.Comp.Sound);
+        Announce(args.Actor, text);
 
         ent.Comp.LastAnnouncement = time;
         Dirty(ent);
@@ -98,7 +99,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
             return;
         }
 
-        _dropship.TryDesignatePrimaryLZ(user, lz.Value, computer.Comp.Sound);
+        _dropship.TryDesignatePrimaryLZ(user, lz.Value);
     }
 
     private void UpdatePlanetMap(Entity<MarineCommunicationsComputerComponent> computer)
@@ -121,13 +122,14 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     /// <summary>
     /// Dispatches an announcement to Marine side.
     /// </summary>
+    /// <param name="sender">EntityUid of sender, for job and name fields</param>
     /// <param name="message">The contents of the message.</param>
     /// <param name="sound">GlobalSound for announcement.</param>
     /// <param name="author">The author of the message, Command by default.</param>
     public void Announce(
         EntityUid sender,
         string message,
-        SoundSpecifier sound,
+        SoundSpecifier? sound = null,
         string? author = null
         )
     {
@@ -141,7 +143,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
 
         author ??= Loc.GetString("rmc-announcement-author"); // Get "Command" fluent string if author==null
         var name = Name(sender);
-        var wrappedMessage = Loc.GetString("rmc-announcement-message", ("author", author), ("message", message), ("job", job), ("name", name));
+        var wrappedMessage = Loc.GetString("rmc-announcement-message-signed", ("author", author), ("message", message), ("job", job), ("name", name));
 
         // TODO RMC14 receivers
         var filter = Filter.Empty()
@@ -149,8 +151,9 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
                 HasComp<MarineComponent>(e) ||
                 HasComp<GhostComponent>(e)
             );
+
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, wrappedMessage, default, false, true, null);
-        _audio.PlayGlobal(sound, filter, true, AudioParams.Default.WithVolume(-2f));
+        _audio.PlayGlobal(sound ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));
         _adminLogs.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(sender):source} marine announced message: {message}");
     }
 
@@ -162,7 +165,11 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         _radio.SendRadioMessage(sender, message, channel, sender);
     }
 
-    public override void AnnounceARES(EntityUid? source, string message, SoundSpecifier sound)
+    public override void AnnounceARES(
+        EntityUid? source,
+        string message,
+        SoundSpecifier? sound = null
+        )
     {
         base.AnnounceARES(source, message, sound);
 
@@ -170,11 +177,11 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
 
         var filter = Filter.Empty()
             .AddWhereAttachedEntity(e => HasComp<MarineComponent>(e) || HasComp<GhostComponent>(e));
-        var headerText = "[color=white][font size=16][bold]ARES v3.2 Operation Staging Order[/bold][/font][/color]\n\n";
-        var wrapped = FormattedMessage.EscapeText(message);
-        message = $"{headerText}[color=red][font size=14][bold]{wrapped}[/bold][/font][/color]\n";
+
+        message = Loc.GetString("rmc-announcement-ares-message", ("message", FormattedMessage.EscapeText(message)));
+
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
 
-        _audio.PlayGlobal(sound, filter, true, AudioParams.Default.WithVolume(-2f));
+        _audio.PlayGlobal(sound ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));
     }
 }
