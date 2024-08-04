@@ -51,6 +51,9 @@
     containers:
       ballistic-ammo: !type:Container
         ents: []
+  - type: RMCAmmoEject
+    containerID: ballistic-ammo
+    ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
   - type: StaticPrice
     price: 500
   - type: RMCNameItemOnVend

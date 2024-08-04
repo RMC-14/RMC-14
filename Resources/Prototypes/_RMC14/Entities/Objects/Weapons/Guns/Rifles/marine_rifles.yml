@@ -52,6 +52,7 @@
     price: 500
   - type: MagazineAmmoProvider
     autoEject: true
+  - type: RMCAmmoEject
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -109,6 +110,9 @@
           - CMMagazineRifleM54C
           - CMMagazineRifleM54CAP
           - CMMagazineRifleM54CExt
+  - type: RMCAmmoEject
+    ejectSound:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
   - type: GunDamageModifier
     multiplier: 1.1
   - type: AttachableHolder
@@ -215,6 +219,9 @@
         whitelist:
           tags:
           - CMMagazineRifleM54CE2
+  - type: RMCAmmoEject
+    ejectSound:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/hpr_unload.ogg
   - type: GunRequiresWield
   - type: AttachableHolder
     slots:
@@ -294,6 +301,9 @@
           - CMMagazineRifleM4SPR
           - CMMagazineRifleM4SPRAP
           - CMMagazineRifleM4SPRExt
+  - type: RMCAmmoEject
+    ejectSound:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/l42_unload.ogg
   - type: GunDamageModifier
     multiplier: 1.4
   - type: AttachableHolder

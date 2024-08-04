@@ -45,6 +45,9 @@
         whitelist:
           tags:
           - MagazinePistol
+  - type: RMCAmmoEject
+    ejectSound:
+      path: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
