@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: [ BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder ]
   id: RMCBaseWeaponShotgun
@@ -79,7 +79,7 @@
     recoilWielded: 2
     recoilUnwielded: 4
     scatterWielded: 10
-    scatterUnwielded: 10
+    scatterUnwielded: 20
     baseFireRate: 0.5
     burstScatterMult: 5
   - type: PumpAction
