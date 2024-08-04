@@ -37,4 +37,10 @@ public sealed partial class RMCEyeProtectionItemComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), DataField("toggled"), AutoNetworkedField]
     public bool Toggled = true;
+
+    /// <summary>
+    /// Equipped prefix for raised form
+    /// </summary>
+    [DataField]
+    public string? RaisedEquippedPrefix;
 }

@@ -21,6 +21,10 @@
       "directions": 4
     },
     {
+      "name": "up-equipped-EYES",
+      "directions": 4
+    },
+    {
       "name": "inhand-left",
       "directions": 4
     },

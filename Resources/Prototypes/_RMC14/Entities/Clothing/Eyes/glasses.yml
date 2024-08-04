@@ -131,6 +131,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
   - type: RMCEyeProtectionItem
+    raisedEquippedPrefix: up
   - type: GenericVisualizer
     visuals:
       enum.RMCEyeProtectionItemVisuals.Active:

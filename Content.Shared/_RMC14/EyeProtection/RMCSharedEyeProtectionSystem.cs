@@ -1,9 +1,12 @@
 using Content.Shared.Actions;
 using Content.Shared.Alert;
+using Content.Shared.Clothing.Components;
+using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Item;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Rounding;
 using Content.Shared.StatusEffect;
@@ -22,6 +25,7 @@ namespace Content.Shared._RMC14.EyeProtection
         [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
         [Dependency] private readonly AlertsSystem _alerts = default!;
         [Dependency] private readonly IGameTiming _timing = default!;
+        [Dependency] private readonly ClothingSystem _clothingSystem = default!;
         [Dependency] private readonly IEntityManager _entManager = default!;
 
         public override void Initialize()
@@ -123,7 +127,7 @@ namespace Content.Shared._RMC14.EyeProtection
 
         private void OnEyeProtectionItemGotEquipped(Entity<RMCEyeProtectionItemComponent> ent, ref GotEquippedEvent args)
         {
-            ToggleEyeProtectionItem(ent, args.Equipee);
+            EnableEyeProtectionItem(ent, args.Equipee);
         }
 
         private void OnEyeProtectionItemGotUnequipped(Entity<RMCEyeProtectionItemComponent> ent, ref GotUnequippedEvent args)
@@ -188,11 +192,20 @@ namespace Content.Shared._RMC14.EyeProtection
 
         private void EnableEyeProtectionItem(Entity<RMCEyeProtectionItemComponent> item, EntityUid user)
         {
+            if (!TryComp<ClothingComponent>(item.Owner, out var clothingComp) ||
+                !TryComp<ItemComponent>(item.Owner, out var itemComp))
+                return;
+
             DisableEyeProtectionItem(item, item.Comp.User);
 
             item.Comp.User = user;
             item.Comp.Toggled = true;
-            Dirty(item);
+
+            // Display correct sprite
+            if (item.Comp.RaisedEquippedPrefix != null)
+            {
+                _clothingSystem.SetEquippedPrefix(item.Owner, null, clothingComp);
+            }
 
             _appearance.SetData(item, RMCEyeProtectionItemVisuals.Active, true);
 
@@ -202,7 +215,6 @@ namespace Content.Shared._RMC14.EyeProtection
                 eyeProt.State = EyeProtectionState.On;
                 Dirty(user, eyeProt);
             }
-
 
             _actions.SetToggled(item.Comp.Action, true);
         }
@@ -217,10 +229,20 @@ namespace Content.Shared._RMC14.EyeProtection
 
         protected void DisableEyeProtectionItem(Entity<RMCEyeProtectionItemComponent> item, EntityUid? user)
         {
+            if (!TryComp<ClothingComponent>(item.Owner, out var clothingComp) ||
+                !TryComp<ItemComponent>(item.Owner, out var itemComp))
+                return;
+
             _actions.SetToggled(item.Comp.Action, false);
 
             item.Comp.User = null;
             item.Comp.Toggled = false;
+
+            // Display correct sprite
+            if (item.Comp.RaisedEquippedPrefix != null)
+            {
+                _clothingSystem.SetEquippedPrefix(item.Owner, item.Comp.RaisedEquippedPrefix, clothingComp);
+            }
             Dirty(item);
 
             _appearance.SetData(item, RMCEyeProtectionItemVisuals.Active, false);
