@@ -569,11 +569,11 @@
     - conditions:
         wieldedOnly: true
       recoilFlat: -1
-      scatterFlat: -1
+      scatterFlat: -2
     - conditions:
         unwieldedOnly: true
       accuracyMovementPenaltyAddMult: -1
-      scatterFlat: -2
+      scatterFlat: -4
 
 - type: Tag
   id: RMCAttachmentUnderbarrel
