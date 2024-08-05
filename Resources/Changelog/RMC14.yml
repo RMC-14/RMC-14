@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: nikthechampiongr
-  changes:
-  - message: Added the Move Order.
-    type: Add
-  - message: Added the Focus Order.
-    type: Add
-  - message: Added the Hold Order.
-    type: Add
-  id: 17
-  time: '2024-01-03T07:03:14.0000000+00:00'
 - author: irroZ, Whisper
   changes:
   - message: Added lobby art.
@@ -4285,5 +4275,13 @@
   id: 516
   time: '2024-08-05T03:08:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3540
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the M276 pattern combat toolbelt rig being able to hold more than
+      one pistol. It is now limited to one gun max.
+    type: Fix
+  id: 517
+  time: '2024-08-05T03:43:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3542
 Name: RMC14
 Order: -1
