@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
@@ -39,6 +40,8 @@ public sealed class RMCStorageSystem : EntitySystem
 
         SubscribeLocalEvent<StorageSkillRequiredComponent, StorageInteractAttemptEvent>(OnStorageSkillOpenAttempt);
         SubscribeLocalEvent<StorageSkillRequiredComponent, DumpableDoAfterEvent>(OnDumpableDoAfter, before: [typeof(DumpableSystem)]);
+
+        SubscribeLocalEvent<StorageCloseOnMoveComponent, GotEquippedEvent>(OnStorageEquip);
 
         Subs.BuiEvents<StorageCloseOnMoveComponent>(StorageUiKey.Key, sub =>
         {
@@ -159,11 +162,19 @@ public sealed class RMCStorageSystem : EntitySystem
         if (_timing.ApplyingState)
             return;
 
+        if (ent.Comp.SkipInHand && _hands.IsHolding(args.Actor, ent))
+            return;
+
         var user = args.Actor;
         var coordinates = GetNetCoordinates(_transform.GetMoverCoordinates(user));
         EnsureComp<StorageOpenComponent>(ent).OpenedAt[user] = coordinates;
     }
-
+    private void OnStorageEquip(Entity<StorageCloseOnMoveComponent> ent, ref GotEquippedEvent args)
+    {
+        _ui.CloseUi(ent.Owner, StorageUiKey.Key, args.Equipee);
+        if (TryComp<StorageOpenComponent>(ent, out var comp))
+            comp.OpenedAt.Remove(args.Equipee);
+    }
     private void OnCloseOnMoveUIClosed(Entity<StorageOpenComponent> ent, ref BoundUIClosedEvent args)
     {
         ent.Comp.OpenedAt.Remove(args.Actor);
@@ -245,11 +256,7 @@ public sealed class RMCStorageSystem : EntitySystem
                 var current = _transform.GetMoverCoordinates(user);
 
                 if (!_transform.InRange(origin, current, 0.1f))
-                {
-                    if (TryComp<StorageCloseOnMoveComponent>(uid, out var comp) && comp.SkipInHand && _hands.IsHolding(user, uid))
-                        continue;
                     _toRemove.Add(user);
-                }
             }
 
             foreach (var user in _toRemove)
