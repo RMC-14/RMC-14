@@ -10,3 +10,8 @@ cm-xeno-nest-failed = {$target} can't be put into a nest!
 cm-xeno-nest-failed-target-resisting = {$target} is resisting, ground them!
 cm-xeno-nest-failed-cant-there = You can't create a nest there!
 cm-xeno-nest-failed-cant-already-there = There is already someone nested there!
+
+cm-xeno-nest-unsecuring-active-self = You begin removing {$target} from the nest. This could be risky!
+cm-xeno-nest-unsecuring-inactive-self = You begin removing {$target} from the nest.
+cm-xeno-nest-unsecuring-target = {$user} begins removing you from the alien nest.
+cm-xeno-nest-unsecuring-observer = {$user} begins removing {$target} from the alien nest.
