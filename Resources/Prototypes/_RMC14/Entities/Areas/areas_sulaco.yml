@@ -1,0 +1,298 @@
+﻿- type: entity
+  parent:
+  - RMCAreaBase
+  - RMCAreaProtectionMetal
+  id: RMCAreaShuttle
+  suffix: Sulaco Area
+
+- type: entity
+  parent:
+  - RMCAreaShuttle
+  - RMCAreaReinforcedMetal
+  id: RMCAreaShuttleDrop1
+  components:
+  - type: Area
+    resinAllowed: false
+    avoidBioscan: False
+    noTunnel: True
+    unweedable: False
+
+- type: entity
+  parent: RMCAreaShuttleDrop1
+  id: RMCAreaShuttleDrop1Sulaco
+  name: Dropship Alamo
+  components:
+  - type: Sprite
+    state: shuttlered
+
+- type: entity
+  parent: RMCAreaShuttleDrop1
+  id: RMCAreaShuttleDrop1LV624
+  name: Dropship Alamo
+  components:
+  - type: Sprite
+    state: shuttle
+
+- type: entity
+  parent: RMCAreaShuttleDrop1
+  id: RMCAreaShuttleDrop1Prison
+  name: Dropship Alamo
+  components:
+  - type: Sprite
+    state: shuttle
+
+- type: entity
+  parent: RMCAreaShuttleDrop1
+  id: RMCAreaShuttleDrop1BigRed
+  name: Dropship Alamo
+  components:
+  - type: Sprite
+    state: shuttle
+
+- type: entity
+  parent: RMCAreaShuttleDrop1
+  id: RMCAreaShuttleDrop1IceColony
+  name: Dropship Alamo
+  components:
+  - type: Sprite
+    state: shuttle
+
+- type: entity
+  parent: RMCAreaShuttleDrop1
+  id: RMCAreaShuttleDrop1DesertDam
+  name: Dropship Alamo
+  components:
+  - type: Sprite
+    state: shuttle
+
+- type: entity
+  parent: RMCAreaShuttleDrop1
+  id: RMCAreaShuttleDrop1Transit
+  name: Dropship Alamo Transit
+  components:
+  - type: Sprite
+    state: shuttle2
+
+- type: entity
+  parent: RMCAreaShuttleDrop1
+  id: RMCAreaShuttleDrop1Lz1
+  name: Alamo Landing Zone
+  components:
+  - type: Sprite
+    state: away1
+
+- type: entity
+  parent:
+  - RMCAreaShuttle
+  - RMCAreaReinforcedMetal
+  id: RMCAreaShuttleDrop2
+  components:
+  - type: Area
+    resinAllowed: false
+    avoidBioscan: False
+    noTunnel: True
+    unweedable: False
+
+- type: entity
+  parent: RMCAreaShuttleDrop2
+  id: RMCAreaShuttleDrop2Sulaco
+  name: Dropship Normandy
+  components:
+  - type: Sprite
+    state: shuttle
+
+- type: entity
+  parent: RMCAreaShuttleDrop2
+  id: RMCAreaShuttleDrop2LV624
+  name: Dropship Normandy
+  components:
+  - type: Sprite
+    state: shuttle2
+
+- type: entity
+  parent: RMCAreaShuttleDrop2
+  id: RMCAreaShuttleDrop2Prison
+  name: Dropship Normandy
+  components:
+  - type: Sprite
+    state: shuttle2
+
+- type: entity
+  parent: RMCAreaShuttleDrop2
+  id: RMCAreaShuttleDrop2BigRed
+  name: Dropship Normandy
+  components:
+  - type: Sprite
+    state: shuttle2
+
+- type: entity
+  parent: RMCAreaShuttleDrop2
+  id: RMCAreaShuttleDrop2IceColony
+  name: Dropship Normandy
+  components:
+  - type: Sprite
+    state: shuttle2
+
+- type: entity
+  parent: RMCAreaShuttleDrop2
+  id: RMCAreaShuttleDrop2DesertDam
+  name: Dropship Normandy
+  components:
+  - type: Sprite
+    state: shuttle2
+
+- type: entity
+  parent: RMCAreaShuttleDrop2
+  id: RMCAreaShuttleDrop2Transit
+  name: Dropship Normandy Transit
+  components:
+  - type: Sprite
+    state: shuttlered
+
+- type: entity
+  parent: RMCAreaShuttleDrop2
+  id: RMCAreaShuttleDrop2Lz2
+  name: Normandy Landing Zone
+  components:
+  - type: Sprite
+    state: away2
+
+- type: entity
+  parent: RMCAreaShuttle
+  id: RMCAreaShuttleDistress
+
+- type: entity
+  parent: RMCAreaShuttleDistress
+  id: RMCAreaShuttleDistressStart
+  name: Distress Shuttle
+  components:
+  - type: Sprite
+    state: away1
+
+- type: entity
+  parent: RMCAreaShuttleDistress
+  id: RMCAreaShuttleDistressTransit
+  name: Distress Shuttle Transit
+  components:
+  - type: Sprite
+    state: away2
+
+- type: entity
+  parent: RMCAreaShuttleDistress
+  id: RMCAreaShuttleDistressStartPmc
+  name: Distress Shuttle PMC
+  components:
+  - type: Sprite
+    state: away1
+
+- type: entity
+  parent: RMCAreaShuttleDistress
+  id: RMCAreaShuttleDistressTransitPmc
+  name: Distress Shuttle PMC Transit
+  components:
+  - type: Sprite
+    state: away2
+
+- type: entity
+  parent: RMCAreaShuttleDistress
+  id: RMCAreaShuttleDistressStartUpp
+  name: Distress Shuttle UPP
+  components:
+  - type: Sprite
+    state: away1
+
+- type: entity
+  parent: RMCAreaShuttleDistress
+  id: RMCAreaShuttleDistressTransitUpp
+  name: Distress Shuttle UPP Transit
+  components:
+  - type: Sprite
+    state: away2
+
+- type: entity
+  parent: RMCAreaShuttleDistress
+  id: RMCAreaShuttleDistressStartBig
+  name: Distress Shuttle Big
+  components:
+  - type: Sprite
+    state: away1
+
+- type: entity
+  parent: RMCAreaShuttleDistress
+  id: RMCAreaShuttleDistressTransitBig
+  name: Distress Shuttle Big Transit
+  components:
+  - type: Sprite
+    state: away2
+
+- type: entity
+  parent: RMCAreaShuttleDistress
+  id: RMCAreaShuttleDistressArrive1
+  name: Distress Shuttle
+  components:
+  - type: Sprite
+    state: away3
+
+- type: entity
+  parent: RMCAreaShuttleDistress
+  id: RMCAreaShuttleDistressArrive2
+  name: Distress Shuttle
+  components:
+  - type: Sprite
+    state: away4
+
+- type: entity
+  parent: RMCAreaShuttleDistress
+  id: RMCAreaShuttleDistressArrive3
+  name: Distress Shuttle
+  components:
+  - type: Sprite
+    state: away
+
+- type: entity
+  parent: RMCAreaShuttleDistress
+  id: RMCAreaShuttleDistressArriveNHangar
+  name: Distress Shuttle
+  components:
+  - type: Sprite
+    state: away
+
+- type: entity
+  parent: RMCAreaShuttleDistress
+  id: RMCAreaShuttleDistressArriveSHangar
+  name: Distress Shuttle
+  components:
+  - type: Sprite
+    state: away3
+
+- type: entity
+  parent: RMCAreaShuttleDistress
+  id: RMCAreaShuttleDistressStartSmall
+  name: VIP Shuttle
+  components:
+  - type: Sprite
+    state: away3
+
+- type: entity
+  parent: RMCAreaShuttleDistress
+  id: RMCAreaShuttleDistressTransitSmall
+  name: VIP Shuttle Transit
+  components:
+  - type: Sprite
+    state: away2
+
+- type: entity
+  parent: RMCAreaShuttleDistress
+  id: RMCAreaShuttleDistressArriveNEngi
+  name: VIP Shuttle
+  components:
+  - type: Sprite
+    state: away
+
+- type: entity
+  parent: RMCAreaShuttleDistress
+  id: RMCAreaShuttleDistressArriveSEngi
+  name: VIP Shuttle
+  components:
+  - type: Sprite
+    state: away2

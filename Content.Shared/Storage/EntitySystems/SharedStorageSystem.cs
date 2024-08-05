@@ -58,7 +58,7 @@ public abstract class SharedStorageSystem : EntitySystem
     [Dependency] private   readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] protected readonly UseDelaySystem UseDelay = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] protected readonly CMStorageSystem CMStorage = default!;
+    [Dependency] protected readonly RMCStorageSystem RMCStorage = default!;
 
     private EntityQuery<ItemComponent> _itemQuery;
     private EntityQuery<StackComponent> _stackQuery;
@@ -304,7 +304,7 @@ public abstract class SharedStorageSystem : EntitySystem
     /// <param name="entity">The entity to open the UI for</param>
     public void OpenStorageUI(EntityUid uid, EntityUid entity, StorageComponent? storageComp = null, bool silent = true, bool doAfter = true)
     {
-        if (doAfter && CMStorage.OpenDoAfter(uid, entity, storageComp, silent))
+        if (doAfter && RMCStorage.OpenDoAfter(uid, entity, storageComp, silent))
             return;
 
         if (!Resolve(uid, ref storageComp, false))
@@ -909,7 +909,7 @@ public abstract class SharedStorageSystem : EntitySystem
 
         var maxSize = GetMaxItemSize((uid, storageComp));
         if (ItemSystem.GetSizePrototype(item.Size) > maxSize
-            && !CMStorage.IgnoreItemSize((uid, storageComp), insertEnt))
+            && !RMCStorage.IgnoreItemSize((uid, storageComp), insertEnt))
         {
             reason = "comp-storage-too-big";
             return false;
@@ -917,7 +917,7 @@ public abstract class SharedStorageSystem : EntitySystem
 
         if (TryComp<StorageComponent>(insertEnt, out var insertStorage)
             && GetMaxItemSize((insertEnt, insertStorage)) >= maxSize
-            && !CMStorage.IgnoreItemSize((uid, storageComp), insertEnt))
+            && !RMCStorage.IgnoreItemSize((uid, storageComp), insertEnt))
         {
             reason = "comp-storage-too-big";
             return false;
@@ -930,6 +930,12 @@ public abstract class SharedStorageSystem : EntitySystem
                 reason = "comp-storage-insufficient-capacity";
                 return false;
             }
+        }
+
+        if (!RMCStorage.CanInsertStorageLimit((uid, null, storageComp), insertEnt, out var popup))
+        {
+            reason = popup;
+            return false;
         }
 
         CheckingCanInsert = true;

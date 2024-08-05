@@ -27,8 +27,13 @@ public class AreaImporter
             if (string.IsNullOrWhiteSpace(line) || !line.StartsWith("#define"))
                 continue;
 
-            var parts = line.Replace("#define", "").Trim().Split(" ");
-            colors[parts[0]] = Color.FromHex(parts[1].Replace("\"", ""));
+            var parts = line.Replace("#define", "").Trim().Split(" ").Select(p => p.Replace("\"", "").Trim()).ToArray();
+            var name = parts[0];
+            var color = parts[1];
+            if (!color.StartsWith("#"))
+                continue;
+
+            colors[name] = Color.FromHex(color.Replace("\"", ""));
         }
 
         var areas = new List<Area>();
@@ -206,20 +211,31 @@ public class AreaImporter
         foreach (var area in areas)
         {
             var ent = new YamlMappingNode() { { "type", "entity" } };
+
+            var parentsSelf = false;
             if (area.Parents.Count > 1)
             {
                 var parents = new YamlSequenceNode();
                 foreach (var parent in area.Parents)
                 {
+                    if (parent == area.Id)
+                        parentsSelf = true;
+
                     parents.Add(parent);
                 }
 
                 ent.Add("parent", parents);
             }
             else if (area.Parents.Count == 1)
-                ent.Add("parent", area.Parents[0]);
+            {
+                var parent = area.Parents[0];
+                if (parent == area.Id)
+                    parentsSelf = true;
 
-            ent.Add("id", area.Id);
+                ent.Add("parent", parent);
+            }
+
+            ent.Add("id", $"{(parentsSelf ? $"{area.Id} // TODO RMC14 fix parenting self" : area.Id)}");
 
             if (area.Name is { } name)
                 ent.Add("name", name);
@@ -276,7 +292,7 @@ public class AreaImporter
         memStream.Position = 0;
 
         var text = new StreamReader(memStream);
-        Console.WriteLine(text.ReadToEnd());
+        Console.WriteLine(text.ReadToEnd().Replace("- type: entity", "\n- type: entity").Trim());
     }
 
     private string PathToId(string areaPath)
