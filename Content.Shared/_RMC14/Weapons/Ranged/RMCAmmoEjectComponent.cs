@@ -4,7 +4,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedPumpActionSystem))]
+[Access(typeof(CMGunSystem))]
 public sealed partial class RMCAmmoEjectComponent : Component
 {
     /// <summary>
