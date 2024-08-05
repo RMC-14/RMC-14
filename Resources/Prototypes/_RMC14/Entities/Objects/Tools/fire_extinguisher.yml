@@ -58,3 +58,6 @@
         enum.ToggleVisuals.Layer:
           True: { state: minife0 } # TODO RMC14
           False: { state: minife1 }
+  - type: Tag
+    tags:
+    - CMFireExtinguisherPortable

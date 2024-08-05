@@ -22,6 +22,7 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Spawners;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
@@ -114,10 +115,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [ViewVariables]
     public readonly Dictionary<string, float> MarinesPerXeno = new()
     {
-        ["/Maps/_RMC14/lv624.yml"] = 4.75f,
-        ["/Maps/_RMC14/solaris.yml"] = 5.25f,
-        ["/Maps/_RMC14/prison.yml"] = 6.75f,
-        ["/Maps/_RMC14/shiva.yml"] = 6.50f,
+        ["/Maps/_RMC14/lv624.yml"] = 5.75f,
+        ["/Maps/_RMC14/solaris.yml"] = 6.25f,
+        ["/Maps/_RMC14/prison.yml"] = 6.25f,
+        ["/Maps/_RMC14/shiva.yml"] = 5.75f,
     };
 
     private readonly List<MapId> _almayerMaps = [];

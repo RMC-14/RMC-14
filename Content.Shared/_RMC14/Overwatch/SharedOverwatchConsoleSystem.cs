@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Roles;
+using Content.Shared._RMC14.Rules;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
@@ -16,6 +17,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 {
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -25,6 +27,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     private EntityQuery<AlmayerComponent> _almayerQuery;
     private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<OriginalRoleComponent> _originalRoleQuery;
+    private EntityQuery<RMCPlanetComponent> _planetQuery;
 
     public override void Initialize()
     {
@@ -32,6 +35,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         _almayerQuery = GetEntityQuery<AlmayerComponent>();
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
         _originalRoleQuery = GetEntityQuery<OriginalRoleComponent>();
+        _planetQuery = GetEntityQuery<RMCPlanetComponent>();
 
         SubscribeLocalEvent<OverwatchConsoleComponent, BoundUIOpenedEvent>(OnBUIOpened);
 
@@ -44,7 +48,11 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             subs.Event<OverwatchConsoleSelectSquadBuiMsg>(OnOverwatchSelectSquadBui);
             subs.Event<OverwatchConsoleTakeOperatorBuiMsg>(OnOverwatchTakeOperatorBui);
             subs.Event<OverwatchConsoleStopOverwatchBuiMsg>(OnOverwatchStopBui);
+            subs.Event<OverwatchConsoleSetLocationBuiMsg>(OnOverwatchSetLocationBui);
+            subs.Event<OverwatchConsoleShowDeadBuiMsg>(OnOverwatchShowDeadBui);
+            subs.Event<OverwatchConsoleShowHiddenBuiMsg>(OnOverwatchShowHiddenBui);
             subs.Event<OverwatchConsoleWatchBuiMsg>(OnOverwatchWatchBui);
+            subs.Event<OverwatchConsoleHideBuiMsg>(OnOverwatchHideBui);
         });
     }
 
@@ -77,10 +85,13 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
     private void OnOverwatchSelectSquadBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSelectSquadBuiMsg args)
     {
-        if (!TryGetEntity(args.Squad, out var squad) || !HasComp<SquadTeamComponent>(squad))
+        if (_net.IsServer)
         {
-            Log.Warning($"{ToPrettyString(args.Actor)} tried to select invalid squad id {ToPrettyString(squad)}");
-            return;
+            if (!TryGetEntity(args.Squad, out var squad) || !HasComp<SquadTeamComponent>(squad))
+            {
+                Log.Warning($"{ToPrettyString(args.Actor)} tried to select invalid squad id {ToPrettyString(squad)}");
+                return;
+            }
         }
 
         ent.Comp.Squad = args.Squad;
@@ -101,12 +112,63 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         Dirty(ent);
     }
 
+    private void OnOverwatchSetLocationBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSetLocationBuiMsg args)
+    {
+        if (args.Location < OverwatchLocation.Min || args.Location > OverwatchLocation.Max)
+            return;
+
+        ent.Comp.Location = args.Location;
+        Dirty(ent);
+    }
+
+    private void OnOverwatchShowDeadBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleShowDeadBuiMsg args)
+    {
+        ent.Comp.ShowDead = args.Show;
+        Dirty(ent);
+    }
+
+    private void OnOverwatchShowHiddenBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleShowHiddenBuiMsg args)
+    {
+        ent.Comp.ShowHidden = args.Show;
+        Dirty(ent);
+    }
+
     private void OnOverwatchWatchBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleWatchBuiMsg args)
     {
         if (args.Target == default || !TryGetEntity(args.Target, out var target))
             return;
 
         Watch(args.Actor, target.Value);
+    }
+
+    private void OnOverwatchHideBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleHideBuiMsg args)
+    {
+        if (_net.IsClient)
+        {
+            if (args.Hide)
+                ent.Comp.Hidden.Add(args.Target);
+            else
+                ent.Comp.Hidden.Remove(args.Target);
+
+            Dirty(ent);
+            return;
+        }
+
+        if (args.Target == default || !TryGetEntity(args.Target, out var target))
+            return;
+
+        if (!HasComp<SquadMemberComponent>(target))
+            return;
+
+        if (args.Hide)
+            ent.Comp.Hidden.Add(args.Target);
+        else
+            ent.Comp.Hidden.Remove(args.Target);
+
+        Dirty(ent);
+
+        var state = GetOverwatchBuiState();
+        _ui.SetUiState(ent.Owner, OverwatchConsoleUI.Key, state);
     }
 
     protected virtual void Watch(Entity<ActorComponent?, EyeComponent?> watcher, Entity<OverwatchCameraComponent?> toWatch)
@@ -137,18 +199,41 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
                 if (TerminatingOrDeleted(member))
                     continue;
 
+                // to ignore cryo'd marines
+                var xform = Transform(member);
+                if (!_map.TryGetMap(xform.MapID, out var mapId) ||
+                    _map.IsPaused(mapId.Value))
+                {
+                    continue;
+                }
+
                 var name = Identity.Name(member, EntityManager);
 
                 _inventory.TryGetInventoryEntity<OverwatchCameraComponent>(member, out var camera);
                 var mobState = _mobStateQuery.CompOrNull(member)?.CurrentState ?? MobState.Alive;
                 var ssd = !_actor.HasComp(member);
                 var role = _originalRoleQuery.CompOrNull(member)?.Job;
-                var deployed = !_almayerQuery.HasComp(_transform.GetMap(member));
+                var deployed = !_almayerQuery.HasComp(_transform.GetMap((member, xform)));
+                var location = _planetQuery.HasComp(mapId) ? OverwatchLocation.Planet : OverwatchLocation.Ship;
 
-                members.Add(new OverwatchMarine(GetNetEntity(camera), name, mobState, ssd, role, deployed));
+                members.Add(new OverwatchMarine(
+                    GetNetEntity(member),
+                    GetNetEntity(camera),
+                    name,
+                    mobState,
+                    ssd,
+                    role,
+                    deployed,
+                    location
+                ));
             }
         }
 
         return new OverwatchConsoleBuiState(squads, marines);
+    }
+
+    public bool IsHidden(Entity<OverwatchConsoleComponent> console, NetEntity marine)
+    {
+        return console.Comp.Hidden.Contains(marine);
     }
 }

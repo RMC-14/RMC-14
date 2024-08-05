@@ -60,7 +60,7 @@
       - Bucket
   - type: PhysicalComposition
     materialComposition:
-      Plastic: 50 # TODO RMC14 plastic
+      RMCPlastic: 50
   - type: InteractedBlacklist
     blacklist:
       components:

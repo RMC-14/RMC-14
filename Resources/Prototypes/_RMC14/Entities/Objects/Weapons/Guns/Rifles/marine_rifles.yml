@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [ BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder ]
+  parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
   id: CMBaseWeaponRifle
   components:
   - type: Gun

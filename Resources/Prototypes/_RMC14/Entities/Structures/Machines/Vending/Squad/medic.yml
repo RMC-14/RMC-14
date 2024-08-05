@@ -217,8 +217,8 @@
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
-      - id: CMBackpackMedical
-      - id: CMSatchelMedical
+      - id: CMBackpackMarineMedic
+      - id: CMSatchelMarineMedic
         recommended: true
     - name: Belt
       choices: { CMBelt: 1 }
