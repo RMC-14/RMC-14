@@ -6,7 +6,6 @@
   - type: Item
     size: Small
   - type: Attachable
-  - type: ItemSizeChange
 
 - type: entity
   parent: RMCAttachableBase
