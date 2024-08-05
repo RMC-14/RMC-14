@@ -25,7 +25,6 @@
     openVerbText: rmc-bottle-remove-lid
     closeVerbText: rmc-bottle-put-lid
     sound: null
-    openOnActivate: true
   - type: GenericVisualizer
     visuals:
       enum.OpenableVisuals.Opened:
