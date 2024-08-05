@@ -1,4 +1,5 @@
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+﻿using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Content.Shared.Damage;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
@@ -11,6 +12,9 @@ public sealed partial class DamageableCorrodingComponent : Component
 
     [DataField]
     public float Dps;
+
+    [DataField]
+    public DamageSpecifier Damage;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan NextDamageAt;

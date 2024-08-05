@@ -1,5 +1,4 @@
-﻿using Content.Shared._RMC14.Entrenching;
-using Content.Shared._RMC14.Xenonids.Plasma;
+﻿using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -23,10 +22,10 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
-    private int _corrosiveAcidTickDelaySeconds;
-    private string _corrosiveAcidDamageType = "Heat";
+    protected int CorrosiveAcidTickDelaySeconds;
+    protected string CorrosiveAcidDamageTypeStr = "Heat";
     public override void Initialize()
     {
         base.Initialize();
@@ -35,8 +34,27 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         SubscribeLocalEvent<XenoAcidComponent, DoAfterAttemptEvent<XenoCorrosiveAcidDoAfterEvent>>(OnXenoCorrosiveAcidDoAfterAttempt);
         SubscribeLocalEvent<XenoAcidComponent, XenoCorrosiveAcidDoAfterEvent>(OnXenoCorrosiveAcidDoAfter);
 
-        Subs.CVar(_config, RMCCVars.RMCCorrosiveAcidTickDelaySeconds, obj => _corrosiveAcidTickDelaySeconds = obj, true);
-        Subs.CVar(_config, RMCCVars.RMCCorrosiveAcidDamageType, obj => _corrosiveAcidDamageType = obj, true);
+        Subs.CVar(_config, RMCCVars.RMCCorrosiveAcidTickDelaySeconds, obj =>
+        {
+            CorrosiveAcidTickDelaySeconds = obj;
+            OnXenoAcidSystemCVarsUpdated();
+        }, true);
+        Subs.CVar(_config, RMCCVars.RMCCorrosiveAcidDamageType, obj =>
+        {
+            CorrosiveAcidDamageTypeStr = obj;
+            OnXenoAcidSystemCVarsUpdated();
+        }, true);
+    }
+
+    private void OnXenoAcidSystemCVarsUpdated()
+    {
+        // If any of the relevant vars changed - we need to recalculate and update damage specifiers for all the corroding comps.
+        // There is still a bit of a problem here - if AcidTickDelaySeconds changes, it will affect next tick damage-wise immediately while the time of the next tick will not change. It's an edge case though, I'd not expect anybody changing that CVar repeatedly during the round often enough for it to matter. So I'm not going to bother with it.
+        var damageableCorrodingQuery = EntityQueryEnumerator<DamageableCorrodingComponent>();
+        while (damageableCorrodingQuery.MoveNext(out var uid, out var damageableCorrodingComponent))
+        {
+            damageableCorrodingComponent.Damage = new(PrototypeManager.Index<DamageTypePrototype>(CorrosiveAcidDamageTypeStr), damageableCorrodingComponent.Dps * CorrosiveAcidTickDelaySeconds);
+        }
     }
 
     private void OnXenoCorrosiveAcid(Entity<XenoAcidComponent> xeno, ref XenoCorrosiveAcidEvent args)
@@ -125,9 +143,8 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         {
             if (time > damageableCorrodingComponent.NextDamageAt)
             {
-                DamageSpecifier damage = new(_prototypeManager.Index<DamageTypePrototype>(_corrosiveAcidDamageType), damageableCorrodingComponent.Dps * _corrosiveAcidTickDelaySeconds);
-                _damageable.TryChangeDamage(uid, damage, true);
-                damageableCorrodingComponent.NextDamageAt = time.Add(TimeSpan.FromSeconds(_corrosiveAcidTickDelaySeconds));
+                _damageable.TryChangeDamage(uid, damageableCorrodingComponent.Damage, true);
+                damageableCorrodingComponent.NextDamageAt = time.Add(TimeSpan.FromSeconds(CorrosiveAcidTickDelaySeconds));
             }
         }
 
