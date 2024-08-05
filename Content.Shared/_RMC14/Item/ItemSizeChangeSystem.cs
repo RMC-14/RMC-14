@@ -52,9 +52,12 @@ public sealed partial class ItemSizeChangeSystem : EntitySystem
 
     public void RefreshItemSizeModifiers(Entity<ItemSizeChangeComponent?> item)
     {
-        item.Comp = EnsureComp<ItemSizeChangeComponent>(item.Owner);
+        if (item.Comp == null)
+            item.Comp = EnsureComp<ItemSizeChangeComponent>(item.Owner);
+        else if (!InitItem((item.Owner, item.Comp)))
+            return;
 
-        if (item.Comp == null || !InitItem((item.Owner, item.Comp)) || item.Comp.BaseSize == null)
+        if (item.Comp == null || item.Comp.BaseSize == null)
             return;
 
         var ev = new GetItemSizeModifiersEvent(item.Comp.BaseSize.Value);
@@ -73,11 +76,25 @@ public sealed partial class ItemSizeChangeSystem : EntitySystem
         if (!onlyNull && item.Comp.BaseSize != null)
             return true;
 
+        if (_sortedSizes.Count <= 0)
+        {
+            InitItemSizes();
+
+            if (_sortedSizes.Count <= 0)
+                return false;
+        }
+
         if (!TryComp(item.Owner, out ItemComponent? itemComponent) || !_prototypeManager.TryIndex(itemComponent.Size, out ItemSizePrototype? prototype))
             return false;
 
-        item.Comp.BaseSize = _sortedSizes.IndexOf(prototype);
+        var size = _sortedSizes.IndexOf(prototype);
+
+        if (size < 0)
+            return false;
+
+        item.Comp.BaseSize = size;
         Dirty(item);
+
         return true;
     }
 }
